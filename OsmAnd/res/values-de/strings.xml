@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="gps_network_not_enabled">Kein Standortdienst aktiviert. Aktivieren?</string>
 	<string name="disable_recording_once_app_killed">Eigenständige Streckenaufzeichnung unterbinden</string>
@@ -2207,22 +2207,22 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="lang_nb">Norwegische Buchsprache</string>
     <string name="lang_nn">Norwegisch (Neunorwegisch)</string>
     <string name="rendering_value_default13_name">Standard (13)</string>
-	<string name="rendering_value_defaultTranslucentCyan_name">Standard (lichtdurchlässiges Cyan)</string>
+	<string name="rendering_value_defaultTranslucentCyan_name">Standard (transparentes Cyan)</string>
     <string name="rendering_attr_currentTrackColor_name">GPX-Farbe</string>
     <string name="rendering_attr_currentTrackWidth_name">GPX-Breite</string>
     <string name="rendering_value_red_name">Rot</string>
-    <string name="rendering_value_translucent_red_name">Lichtdurchlässiges Rot</string>
-    <string name="rendering_value_translucent_orange_name">Lichtdurchlässiges Orange</string>
+    <string name="rendering_value_translucent_red_name">Transparentes Rot</string>
+    <string name="rendering_value_translucent_orange_name">Transparentes Orange</string>
     <string name="rendering_value_yellow_name">Gelb</string>
-    <string name="rendering_value_translucent_yellow_name">Lichtdurchlässiges Gelb</string>
+    <string name="rendering_value_translucent_yellow_name">Transparentes Gelb</string>
     <string name="rendering_value_lightgreen_name">Hellgrün</string>
     <string name="rendering_value_translucent_lightgreen_name">Transparentes Hellgrün</string>
     <string name="rendering_value_green_name">Grün</string>
-    <string name="rendering_value_translucent_green_name">Lichtdurchlässiges Grün</string>
+    <string name="rendering_value_translucent_green_name">Transparentes Grün</string>
     <string name="rendering_value_lightblue_name">Hellblau</string>
     <string name="rendering_value_translucent_lightblue_name">Transparentes Hellblau</string>
     <string name="rendering_value_blue_name">Blau</string>
-    <string name="rendering_value_translucent_blue_name">Lichtdurchlässiges Blau</string>
+    <string name="rendering_value_translucent_blue_name">Transparentes Blau</string>
     <string name="rendering_value_purple_name">Lila</string>
     <string name="rendering_value_translucent_purple_name">Transparentes Lila</string>
     <string name="restart_is_required">Zum Abschluss der Änderung ist ein manueller Neustart der Anwendung erforderlich.</string>
