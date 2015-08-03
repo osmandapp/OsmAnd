@@ -943,4 +943,8 @@
 	<string name="poi_access_delivery">Acesso para entrega</string>
 	<string name="poi_access_agricultural">Acesso agrícola</string>
 
+	<string name="poi_monitoring_station">Estação de medição ambiental</string>
+	<string name="poi_capital">Capital</string>
+	<string name="poi_fee_no">Sem taxa</string>
+
 	</resources>
