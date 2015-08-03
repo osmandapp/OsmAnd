@@ -940,7 +940,7 @@
 	<string name="poi_enforcement_toll">Vejafgiftskontrol</string>
 
 <string name="poi_country">Landlig</string>
-	<string name="poi_fee">Gebyr</string>
+	<string name="poi_fee_yes">Gebyr</string>
 
 	<string name="poi_abandoned_poi">Forladt objekt</string>
 	<string name="poi_route_hiking_iwn_poi">International vandrerute</string>
@@ -959,5 +959,9 @@
 	<string name="poi_access_customers">Adgang for kunde</string>
 	<string name="poi_access_delivery">Adgang for levering</string>
 	<string name="poi_access_agricultural">Adgang for landbrug</string>
+
+	<string name="poi_monitoring_station">Målestation</string>
+	<string name="poi_capital">Hovedstad</string>
+	<string name="poi_fee_no">Inget gebyr</string>
 
 	</resources>

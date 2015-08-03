@@ -1785,4 +1785,5 @@
 	<string name="error_message_pattern">Erro: {0}</string>
 <string name="no_updates_available">Não há atualizações disponíveis</string>
     <string name="we_really_care_about_your_opinion">Nos preocupamos muito com sua opinião e é importante para nós ouvi-lo.</string>
-	</resources>
+	<string name="rendering_value_boldOutline_name">Títulos com contornos</string>
+    </resources>

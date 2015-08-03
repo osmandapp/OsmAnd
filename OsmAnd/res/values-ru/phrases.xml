@@ -591,6 +591,7 @@
 	<string name="poi_military_naval_base">Военно-морская база</string>
 	<string name="poi_military_nuclear_explosion_site">Место ядерного взрыва</string>
 	<string name="poi_city">Город</string>
+	<string name="poi_capital">Столица</string>
 	<string name="poi_town">Город (небольшой)</string>
 	<string name="poi_village">Деревня</string>
 	<string name="poi_hamlet">Деревня (небольшая)</string>
@@ -750,4 +751,28 @@
 	<string name="poi_recreation_ground">Площадка для игр</string>
 	<string name="poi_dyke">Насыпь</string>
 	<string name="poi_payment_terminal">Платежный терминал</string>
+
+	<string name="poi_opening_hours">Часы работы</string>
+	<string name="poi_collection_times">Время выемки</string>
+	<string name="poi_description">Описание</string>
+	<string name="poi_phone">Телефон</string>
+	<string name="poi_website">Веб-сайт</string>
+	<string name="poi_service_times">Время обслуживания</string>
+	<string name="poi_abandoned">Заброшено</string>
+	<string name="poi_abandoned_poi">Заброшенный объект</string>
+	<string name="poi_disused">Не используется по назначению</string>
+
+	<string name="poi_operator">Оператор</string>
+	<string name="poi_brand">Торговая марка</string>
+	<string name="poi_fee_yes">Взимается оплата</string>
+	<string name="poi_fee_no">Оплата не взимается</string>
+
+	<string name="poi_access_private">Частный доступ</string>
+	<string name="poi_access_no">Нет доступа</string>
+	<string name="poi_access_destination">Доступ: пункт назначения</string>
+	<string name="poi_access_permissive">Доступ разрешен владельцем</string>
+	<string name="poi_access_customers">Доступ только для посетителей</string>
+	<string name="poi_access_delivery">Доступ только для доставки</string>
+	<string name="poi_access_agricultural">Доступ только для с/х техники</string>
+
 	</resources>

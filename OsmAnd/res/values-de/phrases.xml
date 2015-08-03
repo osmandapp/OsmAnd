@@ -95,7 +95,7 @@
 	<string name="poi_car_parts">Autoteilehändler</string>
 	<string name="poi_car_rental">Autovermietung</string>
 	<string name="poi_car_repair">Kfz-Werkstatt</string>
-	<string name="poi_car_sharing">Fahrgemeinschaft</string>
+	<string name="poi_car_sharing">Carsharing Station</string>
 	<string name="poi_car">Autohändler</string>
 	<string name="poi_car_wash">Autowaschanlage</string>
 	<string name="poi_caravan_site">Campingplatz</string>
@@ -746,7 +746,7 @@
 	<string name="poi_internet_access_terminal">Internetzugang: Terminal</string>
 	<string name="poi_internet_access_service">Internetzugang: Dienst</string>
 
-	<string name="poi_fee">Gebühr</string>
+	<string name="poi_fee_yes">Gebühr</string>
 
 	<string name="poi_brand">Marke</string>
 	<string name="poi_maxweight">Maximalgewicht</string>

@@ -2036,4 +2036,5 @@
 	<string name="successfully_uploaded_pattern">Sikeresen feltöltve: {0}/{1}</string>
 	<string name="try_again">Próbálja újra</string>
 	<string name="error_message_pattern">Hiba: {0}</string>
-</resources>
+<string name="rendering_value_boldOutline_name">Félkövér körvonal</string>
+    </resources>

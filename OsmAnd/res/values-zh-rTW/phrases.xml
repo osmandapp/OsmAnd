@@ -922,7 +922,7 @@
 	<string name="poi_enforcement_toll">執法：收費</string>
 
 <string name="poi_country">國家</string>
-	<string name="poi_fee">費用</string>
+	<string name="poi_fee_yes">費用</string>
 
 	<string name="poi_abandoned_poi">已遺棄的物件</string>
 	<string name="poi_route_hiking_iwn_poi">國際步行路線</string>
@@ -941,5 +941,9 @@
 	<string name="poi_access_customers">顧客通行</string>
 	<string name="poi_access_delivery">交貨通行</string>
 	<string name="poi_access_agricultural">農用通路</string>
+
+	<string name="poi_monitoring_station">監測站</string>
+	<string name="poi_capital">首都</string>
+	<string name="poi_fee_no">不收費</string>
 
 	</resources>
