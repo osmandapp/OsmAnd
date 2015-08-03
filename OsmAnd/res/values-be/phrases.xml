@@ -953,4 +953,8 @@
 	<string name="poi_access_agricultural">Сельгасп. доступ</string>
 
 	<string name="poi_access_destination">Транзіт забаронены</string>
+	<string name="poi_capital">Сталіца</string>
+	<string name="poi_fee_no">Бясплатна</string>
+
+	<string name="poi_monitoring_station">Станцыя назіраньня</string>
 	</resources>
