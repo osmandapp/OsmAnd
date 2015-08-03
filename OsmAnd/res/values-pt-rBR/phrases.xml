@@ -923,7 +923,7 @@
 	<string name="poi_enforcement_check">Fiscalização:verificação</string>
 	<string name="poi_cutline">Linha de corte</string>
 	<string name="poi_country">País</string>
-	<string name="poi_fee">Taxa</string>
+	<string name="poi_fee_yes">Taxa</string>
 
 	<string name="poi_abandoned_poi">Objeto abandonado</string>
 	<string name="poi_route_hiking_iwn_poi">Rota de caminhada internacional</string>

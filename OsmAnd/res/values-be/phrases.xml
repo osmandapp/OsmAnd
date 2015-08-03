@@ -915,7 +915,7 @@
 	<string name="poi_enforcement_check">Патрабаванне:кантроль</string>
 	<string name="poi_enforcement_access">Патрабаванне:доступ</string>
 	<string name="poi_enforcement_traffic_signals">Патрабаванне:святлафоры</string>
-	<string name="poi_fee">Аплата</string>
+	<string name="poi_fee_yes">Аплата</string>
 
 	<string name="poi_disused">Невыкарыстоўваемы</string>
 

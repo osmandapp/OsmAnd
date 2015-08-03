@@ -329,13 +329,13 @@
 	<string name="poi_conservation">Conservation land</string>
 
 	<string name="poi_canal">Canal</string>
-<!--	<string name="poi_building_poi">Building</string>-->
 	<string name="poi_pier">Pier</string>
 	<string name="poi_surveillance">Surveillance</string>
 	<string name="poi_observatory">Observatory</string>
 	<string name="poi_astronomical_observatory">Astronomical observatory</string>
 	<string name="poi_tower">Tower</string>
 	<string name="poi_mast">Mast</string>
+	<string name="poi_monitoring_station">Monitoring station</string>
 	<string name="poi_radar">Radar</string>
 	<string name="poi_crane">Crane</string>
 	<string name="poi_construction">Construction</string>
@@ -374,6 +374,7 @@
 	<string name="poi_customs">Customs</string>
 	<string name="poi_country">Country</string>
 	<string name="poi_city">City</string>
+	<string name="poi_capital">Capital</string>
 	<string name="poi_town">Town</string>
 	<string name="poi_village">Village</string>
 	<string name="poi_hamlet">Hamlet</string>
@@ -923,7 +924,8 @@
 
 	<string name="poi_operator">Operator</string>
 	<string name="poi_brand">Brand</string>
-	<string name="poi_fee">Fee</string>
+	<string name="poi_fee_yes">Fee is charged</string>
+	<string name="poi_fee_no">No fee</string>
 
 	<string name="poi_access_private">Private access</string>
 	<string name="poi_access_no">No access</string>

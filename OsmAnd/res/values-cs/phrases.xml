@@ -921,7 +921,7 @@
 	<string name="poi_enforcement_access">Vynucení:přístup</string>
 	<string name="poi_enforcement_toll">Vynucení:mýto</string>
 
-<string name="poi_fee">Poplatek</string>
+<string name="poi_fee_yes">Poplatek</string>
 
 	<string name="poi_country">Krajina</string>
 	<string name="poi_abandoned_poi">Opuštěný objekt</string>
