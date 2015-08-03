@@ -404,6 +404,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 						successfull = move(new File(info.getPathToData()), getFileToBackup(info));
 						if(successfull){
 							info.setBackupedData(true);
+							getMyApplication().getResourceManager().closeFile(info.getFileName());
 						}
 					}
 					total ++;
@@ -439,7 +440,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		
 		@Override
 		protected void onPreExecute() {
-		 getDownloadActivity().setProgressBarIndeterminateVisibility(true);
+			getDownloadActivity().setProgressBarIndeterminateVisibility(true);
 		}
 
 		@Override

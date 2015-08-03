@@ -5,9 +5,11 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -30,6 +32,32 @@ public class IncrementalChangesManager {
 	
 	public IncrementalChangesManager(ResourceManager resourceManager) {
 		this.resourceManager = resourceManager;
+	}
+	
+	public List<File> collectChangesFiles(File dir, String ext, List<File> files) {
+		if (dir.exists() && dir.canRead()) {
+			File[] lf = dir.listFiles();
+			if (lf == null || lf.length == 0) {
+				return files;
+			}
+			Set<String> existingFiles = new HashSet<String>();
+			for (File f : files) {
+				existingFiles.add(Algorithms.getFileNameWithoutExtension(f));
+			}
+			for (File f : lf) {
+				if (f.getName().endsWith(ext)) {
+					String index = Algorithms.getFileNameWithoutExtension(f);
+					if (index.length() >= 9 || index.charAt(index.length() - 9) != '_') {
+						String nm = index.substring(0, index.length() - 9);
+						if (existingFiles.contains(nm)) {
+							files.add(f);
+						}
+					}
+
+				}
+			}
+		}
+		return files;
 	}
 
 	public void indexMainMap(File f, long dateCreated) {
@@ -309,5 +337,5 @@ public class IncrementalChangesManager {
 		return iul;
 	}
 
-
+	
 }

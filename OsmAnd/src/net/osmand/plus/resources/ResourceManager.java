@@ -10,10 +10,12 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import net.osmand.AndroidUtils;
@@ -575,8 +577,8 @@ public class ResourceManager {
 	private List<File> collectFiles(File dir, String ext, List<File> files) {
 		if(dir.exists() && dir.canRead()) {
 			File[] lf = dir.listFiles();
-			if(lf == null) {
-				lf = new File[0];
+			if(lf == null || lf.length == 0) {
+				return files;
 			}
 			for (File f : lf) {
 				if (f.getName().endsWith(ext)) {
@@ -586,6 +588,8 @@ public class ResourceManager {
 		}
 		return files;
 	}
+	
+	
 	
 	private void renameRoadsFiles(ArrayList<File> files, File roadsPath) {
 		Iterator<File> it = files.iterator();
@@ -618,7 +622,7 @@ public class ResourceManager {
 		}
 		
 		if(context.getSettings().BETA_TESTING_LIVE_UPDATES.get()) {
-			collectFiles(context.getAppPath(IndexConstants.LIVE_INDEX_DIR), IndexConstants.BINARY_MAP_INDEX_EXT, files);
+			changesManager.collectChangesFiles(context.getAppPath(IndexConstants.LIVE_INDEX_DIR), IndexConstants.BINARY_MAP_INDEX_EXT, files);
 		}
 		
 		Collections.sort(files, Algorithms.getFileVersionComparator());
