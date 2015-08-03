@@ -371,6 +371,7 @@ public class OsmEditsFragment extends OsmAndListFragment {
 		
 		public OsmEditsAdapter(List<OsmPoint> points) {
 			super(getActivity(), net.osmand.plus.R.layout.note, points);
+			dataPoints = points;
 		}
 		
 		public void setNewList(List<OsmPoint> dp) {
