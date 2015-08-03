@@ -205,12 +205,11 @@ public class OsmAndFormatter {
 			} else if(Amenity.PHONE.equals(key)) {
 				d.append(ctx.getString(R.string.phone) + ": ");
 			} else if(Amenity.WEBSITE.equals(key)) {
-				
 				d.append(ctx.getString(R.string.website) + ": ");
 			} else {
 				AbstractPoiType pt = poiTypes.getAnyPoiAdditionalTypeByKey(e.getKey());
 				if (pt != null) {
-					if(pt instance PoiType && !((PoiType) pt).isText()) {
+					if(pt instanceof PoiType && !((PoiType) pt).isText()) {
 						vl = pt.getTranslation();
 					} else {
 						vl = pt.getTranslation() + ": " + amenity.unzipContent(e.getValue());
