@@ -2101,4 +2101,5 @@
 	<string name="successfully_uploaded_pattern">Overført {0}/{1}</string>
 	<string name="no_updates_available">Ingen opdateringer tilgængelige</string>
     <string name="we_really_care_about_your_opinion">Vi er meget interesseret i din mening, og det er vigtigt for os at høre fra dig.</string>
-	</resources>
+	<string name="rendering_value_boldOutline_name">Fed kontur</string>
+    </resources>
