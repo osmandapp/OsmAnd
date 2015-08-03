@@ -67,14 +67,15 @@ public class BinaryInspector {
 		if(args.length == 1 && "test".equals(args[0])) {
 			in.inspector(new String[]{
 //				"-vpoi",
-//				"-vmap", "-vmapobjects",  //	"-vmapcoordinates", 
+				"-vmap", "-vmapobjects",  //	"-vmapcoordinates", 
 //				"-vrouting",
 //				"-vaddress", "-vcities","-vstreetgroups", 
 //				"-vstreets", "-vbuildings", "-vintersections", 
 //				"-zoom=15",
 //				"-bbox=1.74,51.17,1.75,51.16",
 //				"-vstats",
-				"/Users/victorshcherb/osmand/temp/Czech-republic_jihovychod_europe_2.road.obf"
+				"/Users/victorshcherb/osmand/maps/Luxembourg_europe_2.road.obf"
+//				"/Users/victorshcherb/osmand/temp/Czech-republic_jihovychod_europe_2.road.obf"
 					});
 		} else {
 			in.inspector(args);

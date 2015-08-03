@@ -1741,7 +1741,7 @@ public class BinaryMapIndexReader {
 		List<MapRoot> roots = new ArrayList<MapRoot>();
 		
 		Map<String, Map<String, Integer> > encodingRules = new HashMap<String, Map<String, Integer> >();
-		TIntObjectMap<TagValuePair> decodingRules = new TIntObjectHashMap<TagValuePair>();
+		public TIntObjectMap<TagValuePair> decodingRules = new TIntObjectHashMap<TagValuePair>();
 		public int nameEncodingType = 0;
 		public int nameEnEncodingType = -1;
 		public int refEncodingType = -1;
