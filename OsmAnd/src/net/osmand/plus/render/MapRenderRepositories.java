@@ -143,14 +143,14 @@ public class MapRenderRepositories {
 		return prevBmpLocation;
 	}
 
-	public void closeConnection(String file) {
+	public synchronized void closeConnection(String file) {
 		LinkedHashMap<String, BinaryMapIndexReader> cpfiles = new LinkedHashMap<String, BinaryMapIndexReader>(files);
 		BinaryMapIndexReader bmir = cpfiles.remove(file);
 		files = cpfiles;
 		if (nativeFiles.contains(file)) {
 			NativeOsmandLibrary lib = NativeOsmandLibrary.getLoadedLibrary();
 			if (lib != null) {
-				lib.closeMapFile(file);
+				lib.closeMapFile(bmir != null ? bmir.getFile().getAbsolutePath() : file);
 				nativeFiles.remove(file);
 			}
 		}
