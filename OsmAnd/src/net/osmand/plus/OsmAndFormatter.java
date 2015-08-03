@@ -210,11 +210,15 @@ public class OsmAndFormatter {
 			} else {
 				AbstractPoiType pt = poiTypes.getAnyPoiAdditionalTypeByKey(e.getKey());
 				if (pt != null) {
-					vl = pt.getTranslation();
+					if(pt instance PoiType && !((PoiType) pt).isText()) {
+						vl = pt.getTranslation();
+					} else {
+						vl = pt.getTranslation() + ": " + amenity.unzipContent(e.getValue());
+					}
 				} else {
-					vl = Algorithms.capitalizeFirstLetterAndLowercase(e.getKey());
+					vl = Algorithms.capitalizeFirstLetterAndLowercase(e.getKey()) +
+					 ": " + amenity.unzipContent(e.getValue());
 				}
-				vl += ": " + amenity.unzipContent(e.getValue());
 			}
 			d.append(vl).append('\n');
 		}
