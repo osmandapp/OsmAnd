@@ -611,6 +611,8 @@ public class DownloadIndexesThread {
 							}
 						}
 					}
+				} else {
+					oldItemSize =  app.getAppPath(item.getTargetFileName()).length();
 				}
 				
 				
