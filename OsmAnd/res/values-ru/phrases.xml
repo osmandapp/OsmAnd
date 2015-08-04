@@ -757,6 +757,9 @@
 	<string name="poi_description">Описание</string>
 	<string name="poi_phone">Телефон</string>
 	<string name="poi_website">Веб-сайт</string>
+	<string name="poi_email">Email</string>
+	<string name="poi_fax">Факс</string>
+	<string name="poi_mobile">Сотовый телефон</string>
 	<string name="poi_service_times">Время обслуживания</string>
 	<string name="poi_abandoned">Заброшено</string>
 	<string name="poi_abandoned_poi">Заброшенный объект</string>
