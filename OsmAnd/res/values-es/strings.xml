@@ -2155,4 +2155,5 @@
 <string name="no_updates_available">Sin actualizaciones disponibles</string>
     <string name="we_really_care_about_your_opinion">Nos interesa mucho y es importante para nosotros oír su opinión.</string>
 	<string name="rendering_value_boldOutline_name">Borde remarcado</string>
+    <string name="traffic_warning_hazard">Advertencia de riesgo</string>
     </resources>
