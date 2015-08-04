@@ -950,4 +950,9 @@
 	<string name="poi_fax">傳真</string>
 	<string name="poi_facebook">臉書</string>
 	<string name="poi_mobile">行動電話</string>
-	</resources>
+	<string name="poi_animal_shelter_dog">流浪狗庇護所</string>
+	<string name="poi_animal_shelter_cat">流浪貓庇護所</string>
+	<string name="poi_animal_shelter_dog_cat">流浪狗和貓庇護所</string>
+	<string name="poi_animal_shelter_bird">野鳥庇護所</string>
+
+</resources>
