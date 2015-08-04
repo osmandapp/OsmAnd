@@ -1962,4 +1962,5 @@
 	<string name="error_message_pattern">Fel: {0}</string>
 <string name="no_updates_available">Inga uppdateringar tillgängliga</string>
     <string name="we_really_care_about_your_opinion">Vi bryr oss mycket om vad du tycker och det är viktigt för oss att höra din åsikt.</string>
-	</resources>
+	<string name="rendering_value_boldOutline_name">Fet kontur</string>
+    </resources>
