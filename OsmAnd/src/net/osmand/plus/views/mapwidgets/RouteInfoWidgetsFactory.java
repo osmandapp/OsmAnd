@@ -833,6 +833,8 @@ public class RouteInfoWidgetsFactory {
 						locimgId = R.drawable.warnings_speed_camera;
 					} else if(alarm.getType() == AlarmInfoType.BORDER_CONTROL) {
 						locimgId = R.drawable.warnings_border_control;
+					} else if(alarm.getType() == AlarmInfoType.HAZARD) {
+						locimgId = R.drawable.warnings_hazard;
 					} else if(alarm.getType() == AlarmInfoType.TOLL_BOOTH) {
 						//image done by drawing red ring
 					} else if(alarm.getType() == AlarmInfoType.TRAFFIC_CALMING) {

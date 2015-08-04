@@ -144,7 +144,7 @@ public class Algorithms {
 		}
 	}
 	
-	private static boolean isDigit(char charAt) {
+	public static boolean isDigit(char charAt) {
 		return charAt >= '0' && charAt <= '9';
 	}
 
