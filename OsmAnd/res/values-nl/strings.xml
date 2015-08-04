@@ -2247,4 +2247,5 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="rendering_value_boldOutline_name">Dik omlijnd</string>
     <string name="no_updates_available">Geen updates beschikbaar</string>
     <string name="download_live_updates">Automatische updates</string>
-	</resources>
+	<string name="lang_os">Ossetisch</string>
+    </resources>
