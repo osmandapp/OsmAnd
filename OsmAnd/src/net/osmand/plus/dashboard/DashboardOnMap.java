@@ -117,7 +117,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 		LIST_MENU,
 		DASHBOARD 
 	}
-	
 
 	public DashboardOnMap(MapActivity ma) {
 		this.mapActivity = ma;
@@ -125,7 +124,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 
 
 	public void createDashboardView() {
-		baseColor =  mapActivity.getResources().getColor(R.color.osmand_orange) & 0x00ffffff;
+		baseColor = mapActivity.getResources().getColor(R.color.osmand_orange) & 0x00ffffff;
 		waypointDialogHelper = new WaypointDialogHelper(mapActivity);
 		landscape = !AndroidUiHelper.isOrientationPortrait(mapActivity);
 		dashboardView = (FrameLayout) mapActivity.findViewById(R.id.dashboard);
@@ -583,10 +582,10 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 
 	private void scheduleDownloadButtonCheck() {
 		mapActivity.getMyApplication().runInUIThread(new Runnable() {
-			
+
 			@Override
 			public void run() {
-				if(isVisible()) {
+				if (isVisible()) {
 					updateDownloadBtn();
 				}
 			}
@@ -688,20 +687,23 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 
 
 
-	private <T extends Fragment> void showFragment(FragmentManager manager, FragmentTransaction fragmentTransaction,
-			String tag, Class<T> cl, boolean cond) {
+	private <T extends DashBaseFragment> void showFragment(final FragmentManager manager,
+														   final FragmentTransaction fragmentTransaction,
+														   final String tag,
+														   final Class<T> cl,
+														   final boolean condition) {
 		try {
 			Fragment frag = manager.findFragmentByTag(tag);
 			if (manager.findFragmentByTag(tag) == null ) {
-				if(cond) {
+				if(condition) {
 					T ni = cl.newInstance();
 					fragmentTransaction.add(R.id.content, ni, tag);
 				}
 			} else {
-				if(!cond) {
+				if(!condition) {
 					fragmentTransaction.remove(manager.findFragmentByTag(tag));
  				} else if(frag instanceof DashBaseFragment){
- 					if(((DashBaseFragment) frag).getView() != null) {
+ 					if(frag.getView() != null) {
  						((DashBaseFragment) frag).onOpenDash();
  					}
  				}
@@ -929,7 +931,21 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 		return null;
 	}
 
+	public void hideFragmentByTag(String tag) {
+		FragmentManager manager = mapActivity.getSupportFragmentManager();
+		FragmentTransaction transaction = manager.beginTransaction();
+		Fragment frag = manager.findFragmentByTag(tag);
+		transaction.hide(frag).commit();
+	}
 
-	
+	public void unblacklistFragmentClass(String tag) {
+		FragmentManager manager = mapActivity.getSupportFragmentManager();
+		FragmentTransaction transaction = manager.beginTransaction();
+		Fragment frag = manager.findFragmentByTag(tag);
+		transaction.show(frag).commit();
+	}
 
+	View getParentView() {
+		return dashboardView;
+	}
 }

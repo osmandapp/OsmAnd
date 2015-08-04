@@ -1,26 +1,5 @@
 package net.osmand.plus.dashboard;
 
-import gnu.trove.list.array.TIntArrayList;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
-
-import net.osmand.IndexConstants;
-import net.osmand.ValueHolder;
-import net.osmand.access.AccessibleToast;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.ProgressImplementation;
-import net.osmand.plus.R;
-import net.osmand.util.Algorithms;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -45,8 +24,28 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-/**
- */
+import net.osmand.IndexConstants;
+import net.osmand.ValueHolder;
+import net.osmand.access.AccessibleToast;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.ProgressImplementation;
+import net.osmand.plus.R;
+import net.osmand.util.Algorithms;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
+
+import gnu.trove.list.array.TIntArrayList;
+
 public class DashChooseAppDirFragment extends DashBaseFragment {
 
 	public static final String TAG = "DASH_CHOOSE_APP_DIR_FRAGMENT";
@@ -62,14 +61,12 @@ public class DashChooseAppDirFragment extends DashBaseFragment {
 	@Override
 	public void onOpenDash() {
 	}
-	
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		return fragment.initView(inflater, container);
+	public View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		return fragment.initView(inflater, container, savedInstanceState);
 	}
-	
-	
+
 	public static boolean isDashNeeded(OsmandSettings settings) {
 		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
 			return false;
@@ -156,7 +153,8 @@ public class DashChooseAppDirFragment extends DashBaseFragment {
 			copyMapsBtn.setVisibility(copyFiles ? View.VISIBLE : View.GONE);
 		}
 
-		public View initView(LayoutInflater inflater, ViewGroup container) {
+		public View initView(LayoutInflater inflater, ViewGroup container,
+							 @Nullable Bundle savedInstanceState) {
 			View view = inflater.inflate(R.layout.dash_storage_type_fragment, container, false);
 			settings = getMyApplication().getSettings();
 			locationPath = (TextView) view.findViewById(R.id.location_path);

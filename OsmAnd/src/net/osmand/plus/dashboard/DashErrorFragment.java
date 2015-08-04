@@ -1,13 +1,5 @@
 package net.osmand.plus.dashboard;
 
-import java.io.File;
-import java.text.MessageFormat;
-
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.Version;
-import net.osmand.plus.activities.OsmandActionBarActivity;
-import net.osmand.plus.helpers.FontCache;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -22,6 +14,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.Version;
+import net.osmand.plus.activities.OsmandActionBarActivity;
+import net.osmand.plus.helpers.FontCache;
+
+import java.io.File;
+import java.text.MessageFormat;
+
 /**
  * Created by Denis
  * on 02.12.14.
@@ -31,7 +32,7 @@ public class DashErrorFragment extends DashBaseFragment {
 	public static final String TAG = "DASH_ERROR_FRAGMENT";
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_error_fragment, container, false);
 		String msg = MessageFormat.format(getString(R.string.previous_run_crashed), OsmandApplication.EXCEPTION_PATH);
 		Typeface typeface = FontCache.getRobotoMedium(getActivity());

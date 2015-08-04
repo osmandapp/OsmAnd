@@ -37,7 +37,7 @@ public class DashRateUsFragment extends DashBaseFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = getActivity().getLayoutInflater().inflate(R.layout.dash_rate_us_fragment, container, false);
         TextView header = (TextView) view.findViewById(R.id.header);
         TextView subheader = (TextView) view.findViewById(R.id.subheader);
