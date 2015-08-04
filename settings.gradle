@@ -1,4 +1,4 @@
-include ':OsmAnd-java'
+include ':OsmAnd-java', ':design'
 include ':OsmAnd'
 include ':eclipse-compile:appcompat'
 include ':plugins:OsmAnd-AddressPlugin'
