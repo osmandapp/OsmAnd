@@ -1,22 +1,19 @@
 package net.osmand.plus;
 
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.StringTokenizer;
+import android.annotation.TargetApi;
+import android.content.Context;
+import android.content.res.Configuration;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.Build;
+import android.os.Environment;
 
 import net.osmand.IndexConstants;
 import net.osmand.StateChangedListener;
+import net.osmand.ValueHolder;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.map.ITileSource;
@@ -26,19 +23,27 @@ import net.osmand.plus.access.AccessibilityMode;
 import net.osmand.plus.access.RelativeDirectionStyle;
 import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.api.SettingsAPI.SettingsEditor;
+import net.osmand.plus.dashboard.DashRateUsFragment;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.render.RenderingRulesStorage;
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.res.Configuration;
-import android.hardware.Sensor;
-import android.hardware.SensorManager;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.os.Build;
-import android.os.Environment;
+
+import java.io.File;
+import java.io.IOException;
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
+import java.util.StringTokenizer;
 
 public class OsmandSettings {
 	
@@ -65,22 +70,28 @@ public class OsmandSettings {
 	}
 	
 	private abstract class PreferenceWithListener<T> implements OsmandPreference<T> {
-		private List<StateChangedListener<T>> l = null;
+		private List<WeakReference<StateChangedListener<T>>> l = null;
 		
 		@Override
 		public void addListener(StateChangedListener<T> listener) {
 			if(l == null) {
-				l = new LinkedList<StateChangedListener<T>>();
+				l = new LinkedList<WeakReference<StateChangedListener<T>>>();
 			}
-			if(!l.contains(listener)) {
-				l.add(listener);
+			if(!l.contains(new WeakReference<StateChangedListener<T>>(listener))) {
+				l.add(new WeakReference<StateChangedListener<T>>(listener));
 			}
 		}
 
 		public void fireEvent(T value){
 			if (l != null) {
-				for (StateChangedListener<T> t : l) {
-					t.stateChanged(value);
+				Iterator<WeakReference<StateChangedListener<T>>> it = l.iterator();
+				while(it.hasNext()) {
+					StateChangedListener<T> t = it.next().get();
+					if(t == null) {
+						it.remove();
+					} else {
+						t.stateChanged(value);
+					}
 				}
 			}
 		}
@@ -88,7 +99,13 @@ public class OsmandSettings {
 		@Override
 		public void removeListener(StateChangedListener<T> listener) {
 			if(l != null) {
-				l.remove(listener);
+				Iterator<WeakReference<StateChangedListener<T>>> it = l.iterator();
+				while(it.hasNext()) {
+					StateChangedListener<T> t = it.next().get();
+					if(t == listener) {
+						it.remove();
+					}
+				}
 			}
 		}
 	}
@@ -357,7 +374,11 @@ public class OsmandSettings {
 		
 		@Override
 		public void resetToDefault(){
-			set(getDefaultValue());
+			T o = defaultValue; 
+			if(defaultValues != null && defaultValues.containsKey(currentMode)){
+				o = defaultValues.get(currentMode);
+			}
+			set(o);
 		}
 
 		@Override
@@ -431,7 +452,7 @@ public class OsmandSettings {
 
 		@Override
 		protected boolean setValue(Object prefs, Integer val) {
-			return settingsAPI.edit( prefs).putInt(getId(), val).commit();
+			return settingsAPI.edit(prefs).putInt(getId(), val).commit();
 		}
 
 	}
@@ -621,8 +642,7 @@ public class OsmandSettings {
 		registeredPreferences.put(id, p);
 		return p;
 	}
-	
-	public final CommonPreference<Boolean> USE_DASHBOARD_INSTEAD_OF_DRAWER = new BooleanPreference("use_dashboard_instead_of_drawer", true).makeGlobal().cache();
+	public final CommonPreference<Boolean> USE_FAST_RECALCULATION = new BooleanPreference("use_fast_recalculation", true).makeGlobal().cache();
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<Boolean> USE_INTERNET_TO_DOWNLOAD_TILES = new BooleanPreference("use_internet_to_download_tiles", true).makeGlobal().cache();
@@ -656,6 +676,24 @@ public class OsmandSettings {
 				((CommonPreference<MetricsConstants>)METRIC_SYSTEM).set(val.defMetrics);
 			}
 			return super.setValue(prefs, val);
+		};
+		
+		protected DrivingRegion getDefaultValue() {
+			Locale df = Locale.getDefault();
+			if(df == null) {
+				return DrivingRegion.EUROPE_ASIA;
+			}
+			if(df.getCountry().equalsIgnoreCase(Locale.US.getCountry())) {
+				return DrivingRegion.US;
+			} else if(df.getCountry().equalsIgnoreCase(Locale.CANADA.getCountry())) {
+				return DrivingRegion.CANADA;
+			} else if(df.getCountry().equalsIgnoreCase(Locale.JAPAN.getCountry())) {
+				return DrivingRegion.JAPAN;
+			// potentially wrong in europe
+//			} else if(df.getCountry().equalsIgnoreCase(Locale.UK.getCountry())) {
+//				return DrivingRegion.UK_AND_OTHERS;
+			}
+			return DrivingRegion.EUROPE_ASIA;
 		};
 	}.makeGlobal().cache();
 	
@@ -728,9 +766,6 @@ public class OsmandSettings {
 	
 	
 
-	// this value string is synchronized with settings_pref.xml preference name
-	public final OsmandPreference<Boolean> SHOW_POI_OVER_MAP = new BooleanPreference("show_poi_over_map", false).makeGlobal();
-	
 	public final OsmandPreference<Boolean> SHOW_POI_LABEL = new BooleanPreference("show_poi_label", false).makeGlobal();
 	
 	// this value string is synchronized with settings_pref.xml preference name
@@ -817,6 +852,8 @@ public class OsmandSettings {
 		SAVE_TRACK_TO_GPX.setModeDefaultValue(ApplicationMode.BICYCLE, false);
 		SAVE_TRACK_TO_GPX.setModeDefaultValue(ApplicationMode.PEDESTRIAN, false);
 	}
+	
+	public final CommonPreference<Boolean> DISABLE_RECORDING_ONCE_APP_KILLED = new BooleanPreference("disable_recording_once_app_killed", false).makeGlobal();
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> FAST_ROUTE_MODE = new BooleanPreference("fast_route_mode", true).makeProfile();
@@ -906,7 +943,7 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> DEBUG_RENDERING_INFO = new BooleanPreference("debug_rendering", false).makeGlobal();
 	
 	// this value string is synchronized with settings_pref.xml preference name
-	public final OsmandPreference<Boolean> SHOW_FAVORITES = new BooleanPreference("show_favorites", false).makeGlobal();
+	public final OsmandPreference<Boolean> SHOW_FAVORITES = new BooleanPreference("show_favorites", false).makeGlobal().cache();
 	
 	public final CommonPreference<Boolean> SHOW_ZOOM_BUTTONS_NAVIGATION = new BooleanPreference("show_zoom_buttons_navigation", false).makeProfile().cache();
 	{
@@ -1133,114 +1170,91 @@ public class OsmandSettings {
 
 	public static final String EXTERNAL_STORAGE_DIR = "external_storage_dir"; //$NON-NLS-1$
 	
+	public static final String EXTERNAL_STORAGE_DIR_V19 = "external_storage_dir_V19"; //$NON-NLS-1$
+	public static final String EXTERNAL_STORAGE_DIR_TYPE_V19 = "external_storage_dir_type_V19"; //$NON-NLS-1$
+	public static final int EXTERNAL_STORAGE_TYPE_DEFAULT = 0; // Environment.getExternalStorageDirectory()
+	public static final int EXTERNAL_STORAGE_TYPE_EXTERNAL_FILE = 1; // ctx.getExternalFilesDirs(null)
+	public static final int EXTERNAL_STORAGE_TYPE_INTERNAL_FILE = 2; // ctx.getFilesDir()
+	public static final int EXTERNAL_STORAGE_TYPE_OBB = 3; // ctx.getObbDirs
+	public static final int EXTERNAL_STORAGE_TYPE_SPECIFIED = 4; 
+
+	
 	public File getExternalStorageDirectory() {
-		String defaultLocation = Environment.getExternalStorageDirectory().getAbsolutePath();
-		return new File(settingsAPI.getString(globalPreferences, EXTERNAL_STORAGE_DIR, 
-				defaultLocation));
+		return getExternalStorageDirectory(null);
 	}
 	
-	public Object getGlobalPreferences() {
-		return globalPreferences;
+	public File getExternalStorageDirectory(ValueHolder<Integer> type) {
+		if(Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
+			return getExternalStorageDirectoryPre19();
+		} else {
+			return getExternalStorageDirectoryV19(type);
+		}
 	}
 	
-	public static final int VERSION_DEFAULTLOCATION_CHANGED = 19;
+	@TargetApi(19)
+	public File getInternalAppPath() {
+		if(Build.VERSION.SDK_INT >= 21) {
+			File fl = getNoBackupPath();
+			if(fl != null) {
+				return fl;
+			}
+		}
+		return ctx.getFilesDir();
+	}
+	
+	@TargetApi(21)
+	private File getNoBackupPath() {
+		return ctx.getNoBackupFilesDir();
+	}
 
-	public String getDefaultExternalStorageLocation() {
-		String defaultLocation = Environment.getExternalStorageDirectory().getAbsolutePath();
-		return defaultLocation;
-	}
-	
-	private static List<String> getWritableSecondaryStorages() {
-	 	List<String> writableSecondaryStorage = new ArrayList<String>();
-		try {
-			String rawSecondaryStorage = System.getenv("SECONDARY_STORAGE");
-			if (rawSecondaryStorage != null && rawSecondaryStorage.trim().length() > 0) {
-				for (String secondaryPath : rawSecondaryStorage.split(":")) {
-					File testFile = new File(secondaryPath);
-					if (isWritable(testFile)) {
-						writableSecondaryStorage.add(secondaryPath);
+	@TargetApi(Build.VERSION_CODES.KITKAT)
+	public File getExternalStorageDirectoryV19(ValueHolder<Integer> tp) {
+		int type = settingsAPI.getInt(globalPreferences, EXTERNAL_STORAGE_DIR_TYPE_V19, -1);
+		File location = getDefaultLocationV19();
+		if (type == -1) {
+			if(isWritable(location)) {
+				if(tp != null) {
+					tp.value = settingsAPI.contains(globalPreferences, EXTERNAL_STORAGE_DIR_V19) ?
+							EXTERNAL_STORAGE_TYPE_SPECIFIED :
+							EXTERNAL_STORAGE_TYPE_DEFAULT;
+				}
+				return location;
+			}
+			File[] external = ctx.getExternalFilesDirs(null);
+			if(external != null && external.length > 0 && external[0] != null) {
+				location = external[0];
+				if(tp != null) {
+					tp.value = EXTERNAL_STORAGE_TYPE_EXTERNAL_FILE;
+				}
+			} else {
+				File[] obbDirs = ctx.getObbDirs();
+				if(obbDirs != null && obbDirs.length > 0 && obbDirs[0] != null) {
+					location = obbDirs[0];
+					if(tp != null) {
+						tp.value = EXTERNAL_STORAGE_TYPE_OBB;
+					}
+				} else {
+					location = getInternalAppPath();
+					if(tp != null) {
+						tp.value = EXTERNAL_STORAGE_TYPE_INTERNAL_FILE;
 					}
 				}
 			}
-		} catch (RuntimeException e) {
- 			e.printStackTrace();
- 		}
-		return writableSecondaryStorage;
-	}
-	
-	@SuppressLint("NewApi")
-	public String getMatchingExternalFilesDir(String dir) {
-		// only API 19 !!
-		try {
-			File[] externalFilesDirs = ctx.getExternalFilesDirs(null);
-			String rawSecondaryStorage = System.getenv("SECONDARY_STORAGE");
-			if (rawSecondaryStorage != null && rawSecondaryStorage.trim().length() > 0 && externalFilesDirs != null) {
-				for (String secondaryPath : rawSecondaryStorage.split(":")) {
-					if (dir.startsWith(secondaryPath)) {
-						for (File externFileDir : externalFilesDirs) {
-							if (externFileDir != null && externFileDir.getAbsolutePath().startsWith(secondaryPath)) {
-								return externFileDir.getAbsolutePath();
-							}
-						}
-					}
-				}
-			}
-			return null;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
 		}
+		return location;
 	}
 
-	@SuppressLint("NewApi")
-	public List<String> getWritableSecondaryStorageDirectorys() {
-		// only API 19 !!
-		// primary external storage directory
-		String primaryExternalStorageDirectory = getDefaultExternalStorageLocation();
-		// also creates directories, if they don't exist until now
-		File[] externalFilesDirs = ctx.getExternalFilesDirs(null);
-		List<String> writableSecondaryStorages = getWritableSecondaryStorages();
-		List<String> writableSecondaryStorageDirectory = new ArrayList<String>();
-		try {
-			boolean primaryExternalStorageFound = false;
-			if(externalFilesDirs != null) {
-				for (File externFileDir : externalFilesDirs) {
-					if (externFileDir != null) {
-						final String externalFilePath = externFileDir.getAbsolutePath();
-						if (externalFilePath.startsWith(primaryExternalStorageDirectory) && !primaryExternalStorageFound) {
-							// exclude primary external storage
-							// no special location is required
-							primaryExternalStorageFound = true;
-						} else {
-							// secondary storage
-							// check if special location is required
-							boolean specialPathRequired = true;
-							for (String writableSecondaryStorage : writableSecondaryStorages) {
-								if (externalFilePath.startsWith(writableSecondaryStorage)) {
-									// no special location required
-									writableSecondaryStorageDirectory.add(writableSecondaryStorage);
-									specialPathRequired = false;
-									break;
-								}
-							}
-							if (specialPathRequired == true) {
-								// special location required
-								writableSecondaryStorageDirectory.add(externalFilePath);
-							}
-						}
-					}
-				}	
-			}
-			
-		} catch (RuntimeException e) {
-			e.printStackTrace();
-		}
-		return writableSecondaryStorageDirectory;
+	public File getDefaultLocationV19() {
+		String location = settingsAPI.getString(globalPreferences, EXTERNAL_STORAGE_DIR_V19,
+				getExternalStorageDirectoryPre19().getAbsolutePath());
+		return new File(location);
 	}
 	
+
 	public static boolean isWritable(File dirToTest) {
 		boolean isWriteable = false;
 		try {
+			dirToTest.mkdirs();
 			File writeTestFile = File.createTempFile("osmand_", ".tmp", dirToTest);
 			isWriteable = writeTestFile.exists();
 			writeTestFile.delete();
@@ -1250,9 +1264,53 @@ public class OsmandSettings {
 		return isWriteable;
 	}
 	
-	public boolean setExternalStorageDirectory(String externalStorageDir) {
+	public boolean isExternalStorageDirectorySpecifiedV19() {
+		return settingsAPI.contains(globalPreferences, EXTERNAL_STORAGE_DIR_TYPE_V19);
+	}
+	
+	public int getExternalStorageDirectoryTypeV19() {
+		return settingsAPI.getInt(globalPreferences, EXTERNAL_STORAGE_DIR_TYPE_V19, -1);
+	}
+	
+	public File getExternalStorageDirectoryPre19() {
+		String defaultLocation = Environment.getExternalStorageDirectory().getAbsolutePath();
+		File rootFolder = new File(settingsAPI.getString(globalPreferences, EXTERNAL_STORAGE_DIR, 
+				defaultLocation));
+		return new File(rootFolder, IndexConstants.APP_DIR);
+	}
+
+	public File getDefaultInternalStorage() {
+		return new File(Environment.getExternalStorageDirectory(), IndexConstants.APP_DIR);
+	}
+	
+	public boolean setExternalStorageDirectoryV19(int type, String externalStorageDir) {
+		return settingsAPI.edit(globalPreferences).
+				putInt(EXTERNAL_STORAGE_DIR_TYPE_V19, type).
+				putString(EXTERNAL_STORAGE_DIR_V19, externalStorageDir).commit();
+	}
+	
+	public void setExternalStorageDirectory(int type, String directory) {
+		if(Build.VERSION.SDK_INT < 19) {
+			setExternalStorageDirectoryPre19(directory);
+		} else {
+			setExternalStorageDirectoryV19(type, directory);
+		}
+		
+	}
+	
+	public boolean isExternalStorageDirectorySpecifiedPre19() {
+		return settingsAPI.contains(globalPreferences, EXTERNAL_STORAGE_DIR);
+	}
+	
+	public boolean setExternalStorageDirectoryPre19(String externalStorageDir) {
 		return settingsAPI.edit(globalPreferences).putString(EXTERNAL_STORAGE_DIR, externalStorageDir).commit();
 	}
+	
+	
+	public Object getGlobalPreferences() {
+		return globalPreferences;
+	}
+	
 	
 	// This value is a key for saving last known location shown on the map
 	public static final String LAST_KNOWN_MAP_LAT = "last_known_map_lat"; //$NON-NLS-1$
@@ -1285,10 +1343,10 @@ public class OsmandSettings {
 		return new LatLon(lat, lon);
 	}
 	
-	public PointDescription getAndClearMapLabelToShow(){
+	public PointDescription getAndClearMapLabelToShow(LatLon l){
 		String label = settingsAPI.getString(globalPreferences,MAP_LABEL_TO_SHOW, null);
 		settingsAPI.edit(globalPreferences).remove(MAP_LABEL_TO_SHOW).commit();
-		return PointDescription.deserializeFromString(label);
+		return PointDescription.deserializeFromString(label, l);
 	}
 	
 	private Object objectToShow;
@@ -1377,12 +1435,12 @@ public class OsmandSettings {
 	
 	public PointDescription getStartPointDescription() {
 		return 
-				PointDescription.deserializeFromString(settingsAPI.getString(globalPreferences, START_POINT_DESCRIPTION, ""));
+				PointDescription.deserializeFromString(settingsAPI.getString(globalPreferences, START_POINT_DESCRIPTION, ""), getPointToStart());
 	}
 	
 	public PointDescription getPointNavigateDescription() {
 		return 
-				PointDescription.deserializeFromString(settingsAPI.getString(globalPreferences, POINT_NAVIGATE_DESCRIPTION, ""));
+				PointDescription.deserializeFromString(settingsAPI.getString(globalPreferences, POINT_NAVIGATE_DESCRIPTION, ""), getPointToNavigate());
 	}
 	
 	
@@ -1632,15 +1690,8 @@ public class OsmandSettings {
 		return settingsAPI.edit(globalPreferences).putString(LAST_SEARCHED_INTERSECTED_STREET, street).commit();
 	}
 
-	public static final String SELECTED_POI_FILTER_FOR_MAP = "selected_poi_filter_for_map"; //$NON-NLS-1$
 
-	public boolean setPoiFilterForMap(String filterId) {
-		return settingsAPI.edit(globalPreferences).putString(SELECTED_POI_FILTER_FOR_MAP, filterId).commit();
-	}
-	
-	public String getPoiFilterForMap(){
-		return settingsAPI.getString(globalPreferences,SELECTED_POI_FILTER_FOR_MAP, null);
-	}
+	public final OsmandPreference<String> SELECTED_POI_FILTER_FOR_MAP = new StringPreference("selected_poi_filter_for_map", null).makeGlobal().cache();
 
 	public static final String VOICE_PROVIDER_NOT_USE = "VOICE_PROVIDER_NOT_USE"; 
 	// this value string is synchronized with settings_pref.xml preference name
@@ -1785,7 +1836,7 @@ public class OsmandSettings {
 			new IntPreference("FAVORITES_TAB", 0).makeGlobal().cache();
 	
 	public final CommonPreference<Integer> OSMAND_THEME = 
-			new IntPreference("osmand_theme", OSMAND_DARK_THEME).makeGlobal().cache();
+			new IntPreference("osmand_theme", OSMAND_LIGHT_THEME).makeGlobal().cache();
 	
 	public boolean isLightActionBar(){
 		return true;
@@ -1807,7 +1858,18 @@ public class OsmandSettings {
 	
 
 	public final OsmandPreference<Integer> NUMBER_OF_FREE_DOWNLOADS = new IntPreference("free_downloads_v2", 0).makeGlobal();
-	
+
+	// For DashRateUsFragment
+	public final OsmandPreference<Long> LAST_DISPLAY_TIME =
+            new LongPreference("last_display_time", 0).makeGlobal().cache();
+	public final OsmandPreference<Integer> NUMBER_OF_APPLICATION_STARTS =
+			new IntPreference("number_of_application_starts", 0).makeGlobal().cache();
+	public final OsmandPreference<DashRateUsFragment.RateUsState> RATE_US_STATE =
+            new EnumIntPreference<>("rate_us_state",
+                    DashRateUsFragment.RateUsState.INITIAL_STATE, DashRateUsFragment.RateUsState.values())
+                    .makeGlobal()
+                    .cache();
+
 	public boolean checkFreeDownloadsNumberZero(){
 		if(!settingsAPI.contains(globalPreferences,NUMBER_OF_FREE_DOWNLOADS.getId())){
 			NUMBER_OF_FREE_DOWNLOADS.set(0);
@@ -1927,8 +1989,5 @@ public class OsmandSettings {
 		}
 
 	}
-
-	
-
 	
 }

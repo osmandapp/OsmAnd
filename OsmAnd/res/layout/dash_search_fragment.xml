@@ -4,22 +4,27 @@
     android:id="@+id/search"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/card_bg"
+    android:background="?attr/bg_card"
+    android:layout_marginTop="@dimen/dash_margin"
+    android:layout_marginBottom="@dimen/dash_margin"
+    android:layout_marginLeft="@dimen/dash_margin_h"
+    android:layout_marginRight="@dimen/dash_margin_h"
     android:orientation="vertical" >
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="@dimen/dashHeaderHeight" >
+        android:layout_height="@dimen/list_header_height" >
 
         <TextView
             android:id="@+id/search_for"
-            style="?attr/dashboardSubHeaderStyle"
+            style="@style/DashboardSubHeader"
             android:layout_width="wrap_content"
             android:text="@string/search_for" />
 
         <net.osmand.plus.widgets.ButtonEx
             android:id="@+id/recents"
-            style="?attr/dashboardGeneralButtonStyle"
+            android:layout_width="wrap_content"
+            style="@style/DashboardGeneralButton"
             android:text="@string/shared_string_history"
             osmand:textAllCapsCompat="true"
             osmand:typeface="@string/font_roboto_medium" />
@@ -35,30 +40,36 @@
         android:layout_height="@dimen/dashSearchBtnHeight"
         android:orientation="horizontal" >
 
-        <Button
+        <net.osmand.plus.widgets.ButtonEx
             android:id="@+id/poi"
-            style="?attr/dashboardSearchButtonStyle"
-            android:text="@string/poi" />
+            style="@style/DashboardSearchButton"
+            android:text="@string/poi"
+            osmand:textAllCapsCompat="false"
+            osmand:typeface="@string/font_roboto_medium" />
 
         <View
             android:layout_width="1dp"
             android:layout_height="match_parent"
             android:background="?attr/dashboard_divider" />
 
-        <Button
+        <net.osmand.plus.widgets.ButtonEx
             android:id="@+id/address"
-            style="?attr/dashboardSearchButtonStyle"
-            android:text="@string/address" />
+            style="@style/DashboardSearchButton"
+            android:text="@string/address"
+            osmand:textAllCapsCompat="false"
+            osmand:typeface="@string/font_roboto_medium" />
 
         <View
             android:layout_width="1dp"
             android:layout_height="match_parent"
             android:background="?attr/dashboard_divider" />
 
-        <Button
+        <net.osmand.plus.widgets.ButtonEx
             android:id="@+id/coord"
-            style="?attr/dashboardSearchButtonStyle"
-            android:text="@string/coordinates" />
+            style="@style/DashboardSearchButton"
+            android:text="@string/coordinates"
+            osmand:textAllCapsCompat="false"
+            osmand:typeface="@string/font_roboto_medium" />
     </LinearLayout>
 
 </LinearLayout>

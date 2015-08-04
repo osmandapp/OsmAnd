@@ -49,6 +49,7 @@ import android.util.DisplayMetrics;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnDoubleTapListener;
 import android.view.GestureDetector.OnGestureListener;
+import android.view.InputDevice;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -113,7 +114,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private float rotate; // accumulate
 
 	private int mapPosition;
-
+	
+	private int mapPositionX;
+	
 	private boolean showMapPosition = true;
 
 	private IMapLocationListener locationListener;
@@ -166,13 +169,13 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 	};
 
-	public OsmandMapTileView(Activity activity) {
+	public OsmandMapTileView(Activity activity, int w, int h) {
 		this.activity = activity;
-		init(activity);
+		init(activity, w, h);
 	}
 
 	// ///////////////////////////// INITIALIZING UI PART ///////////////////////////////////
-	public void init(Context ctx) {
+	public void init(Context ctx, int w, int h) {
 		application = (OsmandApplication) ctx.getApplicationContext();
 		settings = application.getSettings();
 		
@@ -217,7 +220,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		LatLon ll = settings.getLastKnownMapLocation();
 		currentViewport = new RotatedTileBox.RotatedTileBoxBuilder().
 				setLocation(ll.getLatitude(), ll.getLongitude()).setZoom(settings.getLastKnownMapZoom()).
-				setPixelDimensions(400, 700).build();
+				setPixelDimensions(w, h).build();
 		currentViewport.setDensity(dm.density);
 		currentViewport.setMapDensity(getSettingsMapDensity());
 	}
@@ -398,6 +401,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	public void setMapPosition(int type) {
 		this.mapPosition = type;
 	}
+	
+	public void setMapPositionX(int type) {
+		this.mapPositionX = type;
+	}
 
 	public OsmandSettings getSettings() {
 		return settings;
@@ -455,6 +462,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				canvas.restore();
 			} catch (IndexOutOfBoundsException e) {
 				// skip it
+				canvas.restore();
 			}
 		}
 		Bitmap t = bufferBitmap;
@@ -472,10 +480,13 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			return;
 		}
 		final float ratioy = mapPosition == OsmandSettings.BOTTOM_CONSTANT ? 0.85f : 0.5f;
+		final float ratiox = mapPositionX == 0 ? 0.5f : 0.75f;
 		final int cy = (int) (ratioy * view.getHeight());
+		final int cx = (int) (ratiox * view.getWidth());
 		if (currentViewport.getPixWidth() != view.getWidth() || currentViewport.getPixHeight() != view.getHeight() ||
-				currentViewport.getCenterPixelY() != cy) {
-			currentViewport.setPixelDimensions(view.getWidth(), view.getHeight(), 0.5f, ratioy);
+				currentViewport.getCenterPixelY() != cy || 
+				currentViewport.getCenterPixelX() != cx) {
+			currentViewport.setPixelDimensions(view.getWidth(), view.getHeight(), ratiox, ratioy);
 			refreshBufferImage(drawSettings);
 		}
 		if (view instanceof SurfaceView) {
@@ -717,6 +728,20 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		refreshMap();
 		// do not notify here listener
 
+	}
+
+	public boolean onGenericMotionEvent(MotionEvent event) {
+		if ((event.getSource() & InputDevice.SOURCE_CLASS_POINTER) != 0 &&
+				event.getAction() == MotionEvent.ACTION_SCROLL &&
+				event.getAxisValue(MotionEvent.AXIS_VSCROLL) != 0) {
+			final RotatedTileBox tb = getCurrentRotatedTileBox();
+			final double lat = tb.getLatFromPixel(event.getX(), event.getY());
+			final double lon = tb.getLonFromPixel(event.getX(), event.getY());
+			int zoomDir = event.getAxisValue(MotionEvent.AXIS_VSCROLL) < 0 ? -1 : 1;
+			getAnimatedDraggingThread().startMoving(lat, lon, getZoom() + zoomDir, true);
+			return true;
+		}
+		return false;
 	}
 
 	public boolean onTouchEvent(MotionEvent event) {

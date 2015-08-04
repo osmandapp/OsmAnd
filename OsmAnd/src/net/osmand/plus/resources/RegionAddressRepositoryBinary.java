@@ -25,6 +25,8 @@ import net.osmand.data.MapObject;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.Street;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -36,17 +38,22 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	private String region;
 	
 	
-	private final LinkedHashMap<Long, City> cities = new LinkedHashMap<Long, City>();
+	private LinkedHashMap<Long, City> cities = new LinkedHashMap<Long, City>();
 	private int ZOOM_QTREE = 10;
 	private QuadTree<City> citiesQtree = new QuadTree<City>(new QuadRect(0, 0, 1 << (ZOOM_QTREE + 1),
 			1 << (ZOOM_QTREE + 1)), 8, 0.55f);
 	private final Map<String, City> postCodes;
-	private boolean useEnglishNames = false;
 	private final Collator collator;
+	private String fileName;
+	private ResourceManager mgr;
+	private OsmandPreference<String> langSetting;
 	
-	public RegionAddressRepositoryBinary(BinaryMapIndexReader file, String name) {
+	public RegionAddressRepositoryBinary(ResourceManager mgr, BinaryMapIndexReader file, String name, String fileName) {
+		this.mgr = mgr;
+		langSetting = mgr.getContext().getSettings().MAP_PREFERRED_LOCALE;
 		this.file = file;
 		this.region = name;
+		this.fileName = fileName;
  	    this.collator = OsmAndCollator.primaryCollator();
 		this.postCodes = new TreeMap<String, City>(OsmAndCollator.primaryCollator());
 	}
@@ -63,8 +70,9 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 			try {
 				List<City> cs = file.getCities(region, BinaryMapIndexReader.buildAddressRequest(resultMatcher), 
 						BinaryMapAddressReaderAdapter.CITY_TOWN_TYPE);
+				LinkedHashMap<Long, City> ncities = new LinkedHashMap<Long, City>();
 				for (City c : cs) {
-					cities.put(c.getId(), c);
+					ncities.put(c.getId(), c);
 					LatLon loc = c.getLocation();
 					if(loc != null) {
 						int y31 = MapUtils.get31TileNumberY(loc.getLatitude());
@@ -73,6 +81,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 						citiesQtree.insert(c, new QuadRect((x31 >> dz) - 1, (y31 >> dz) - 1, (x31 >> dz) + 1, (y31 >> dz) + 1));
 					}
 				}
+				cities = ncities;
 			} catch (IOException e) {
 				log.error("Disk operation failed", e); //$NON-NLS-1$
 			}
@@ -118,20 +127,21 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	}
 	
 	@Override
-	public synchronized void addCityToPreloadedList(City city) {
+	public void addCityToPreloadedList(City city) {
 		if (!cities.containsKey(city.getId())) {
-			cities.put(city.getId(), city);
+			LinkedHashMap<Long, City> ncities = new LinkedHashMap<Long, City>(cities);
+			ncities.put(city.getId(), city);
+			cities = ncities;
 		}
 	}
 	
 	@Override
-	public synchronized List<City> getLoadedCities(){
+	public List<City> getLoadedCities(){
 		return new ArrayList<City>(cities.values());
 	}
 	
 	@Override
 	public synchronized void preloadStreets(City o, ResultMatcher<Street> resultMatcher) {
-		//TODO: Check NPE, looks like o can be null here, question is why
 		Collection<Street> streets = o.getStreets();
 		if(!streets.isEmpty()){
 			return;
@@ -148,7 +158,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 //			StringMatcherMode.CHECK_STARTS_FROM_SPACE_NOT_BEGINNING};
 	
 	@Override
-	public List<MapObject> searchMapObjectsByName(String name, ResultMatcher<MapObject> resultMatcher) {
+	public synchronized List<MapObject> searchMapObjectsByName(String name, ResultMatcher<MapObject> resultMatcher) {
 		SearchRequest<MapObject> req = BinaryMapIndexReader.buildAddressByNameRequest(resultMatcher, name);
 		try {
 			file.searchAddressDataByName(req);
@@ -160,7 +170,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 
 
 	@Override
-	public List<City> fillWithSuggestedCities(String name, final ResultMatcher<City> resultMatcher, boolean searchVillages, LatLon currentLocation) {
+	public synchronized List<City> fillWithSuggestedCities(String name, final ResultMatcher<City> resultMatcher, boolean searchVillages, LatLon currentLocation) {
 		List<City> citiesToFill = new ArrayList<City>();
 		if (cities.isEmpty()) {
 			preloadCities(resultMatcher);
@@ -174,12 +184,13 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 			return citiesToFill;
 		}
 		try {
+			String lang = getLang();
 			// essentially index is created that cities towns are first in cities map
 			if (/*name.length() >= 2 && Algorithms.containsDigit(name) && */searchVillages) {
 				// also try to identify postcodes
 				String uName = name.toUpperCase();
 				List<City> foundCities = file.getCities(region, BinaryMapIndexReader.buildAddressRequest(resultMatcher), 
-						new CollatorStringMatcher(uName, StringMatcherMode.CHECK_CONTAINS), false, 
+						new CollatorStringMatcher(uName, StringMatcherMode.CHECK_CONTAINS), lang, 
 						BinaryMapAddressReaderAdapter.POSTCODES_TYPE);
 				for (City code : foundCities) {
 					citiesToFill.add(code);
@@ -191,7 +202,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 			}
 			name = name.toLowerCase();
 			for (City c : cities.values()) {
-				String cName = c.getName(useEnglishNames); // lower case not needed, collator ensures that
+				String cName = c.getName(lang); // lower case not needed, collator ensures that
 				if (CollatorStringMatcher.cmatches(collator, cName, name, StringMatcherMode.CHECK_STARTS_FROM_SPACE)) {
 					if (resultMatcher.publish(c)) {
 						citiesToFill.add(c);
@@ -220,8 +231,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 					public boolean isCancelled() {
 						return resultMatcher.isCancelled();
 					}
-				}),
-						new CollatorStringMatcher(name,StringMatcherMode.CHECK_STARTS_FROM_SPACE), useEnglishNames, 
+				}), new CollatorStringMatcher(name,StringMatcherMode.CHECK_STARTS_FROM_SPACE), lang, 
 						BinaryMapAddressReaderAdapter.VILLAGES_TYPE);
 				
 				for (City c : foundCities) {
@@ -239,6 +249,11 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	}
 
 	@Override
+	public String getLang() {
+		return langSetting.get();
+	}
+
+	@Override
 	public List<Street> getStreetsIntersectStreets(Street st) {
 		preloadBuildings(st, null);
 		return st.getIntersectedStreets();
@@ -248,8 +263,9 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	@Override
 	public Building getBuildingByName(Street street, String name) {
 		preloadBuildings(street, null);
+		String lang = getLang();
 		for (Building b : street.getBuildings()) {
-			String bName = b.getName(useEnglishNames);
+			String bName = b.getName(lang);
 			if (bName.equals(name)) {
 				return b;
 			}
@@ -263,15 +279,15 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	}
 	
 	@Override
+	public String getFileName() {
+		return fileName;
+	}
+	
+	@Override
 	public String toString() {
 		return getName() + " repository";
 	}
 
-	@Override
-	public boolean useEnglishNames() {
-		return useEnglishNames;
-	}
-	
 	@Override
 	public City getCityById(final long id, String name) {
 		if (id == -1) {
@@ -320,25 +336,19 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 		name = name.toLowerCase();
 		preloadStreets(o, null);
 		Collection<Street> streets = o.getStreets() ;
+		String lang = getLang();
 		for (Street s : streets) {
-			String sName = useEnglishNames ? s.getEnName() : s.getName(); //lower case not needed, collator ensures that
-			if (collator.equals(sName,name)) {
+			String sName = s.getName(lang).toLowerCase();
+			if (collator.equals(sName, name)) {
 				return s;
 			}
 		}
 		return null;
 	}
 
-
-
-	@Override
-	public void setUseEnglishNames(boolean useEnglishNames) {
-		this.useEnglishNames = useEnglishNames;
-	}
-
 	@Override
 	public void clearCache() {
-		cities.clear();
+		cities = new LinkedHashMap<Long, City>();
 		citiesQtree.clear();
 		postCodes.clear();
 		

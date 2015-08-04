@@ -18,6 +18,7 @@ import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -257,7 +258,9 @@ public class DownloadFileHelper {
 		if(mb == 0) {
 			mb = 1;
 		}
-		String taskName = ctx.getString(R.string.shared_string_downloading) + " " + de.baseName /*+ " " + mb + " MB"*/;
+		String taskName = ctx.getString(R.string.shared_string_downloading) + " " + 
+		//+ de.baseName /*+ " " + mb + " MB"*/;
+		FileNameTranslationHelper.getFileName(ctx, ctx.getRegions(), de.baseName);
 		
 		progress.startTask(taskName, len / 1024);
 		if (!de.zipStream) {

@@ -38,7 +38,7 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 
 	@Override
 	protected Comparator<? super Street> createComparator() {
-		return new MapObjectComparator(getMyApplication().getSettings().usingEnglishNames()) {
+		return new MapObjectComparator(getMyApplication().getSettings().MAP_PREFERRED_LOCALE.get()) {
 			@Override
 			public int compare(MapObject o1, MapObject o2) {
 				if(searchWithCity >= 0 && city != null) {
@@ -176,7 +176,7 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 			if (namesFilter.isCancelled) {
 				break;
 			}
-			if (emptyQuery || CollatorStringMatcher.cmatches(collator, obj.getNameWithoutCityPart(region.useEnglishNames()), 
+			if (emptyQuery || CollatorStringMatcher.cmatches(collator, obj.getNameWithoutCityPart(settings.MAP_PREFERRED_LOCALE.get()), 
 					query, StringMatcherMode.CHECK_ONLY_STARTS_WITH)) {
 				Message msg = uiHandler.obtainMessage(MESSAGE_ADD_ENTITY, obj);
 				msg.sendToTarget();
@@ -187,7 +187,8 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 				if (namesFilter.isCancelled) {
 					break;
 				}
-				if (CollatorStringMatcher.cmatches(collator, obj.getNameWithoutCityPart(region.useEnglishNames()), query, StringMatcherMode.CHECK_STARTS_FROM_SPACE_NOT_BEGINNING)) {
+				if (CollatorStringMatcher.cmatches(collator, obj.getNameWithoutCityPart(settings.MAP_PREFERRED_LOCALE.get()), 
+						query, StringMatcherMode.CHECK_STARTS_FROM_SPACE_NOT_BEGINNING)) {
 					Message msg = uiHandler.obtainMessage(MESSAGE_ADD_ENTITY, obj);
 					msg.sendToTarget();
 				}
@@ -198,10 +199,10 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 	@Override
 	public String getText(Street obj) {
 		if(searchWithCity >= 0 || city == null) {
-			String nameWithCity = obj.getName(region.useEnglishNames()) + " - " + obj.getCity().getName(region.useEnglishNames());
+			String nameWithCity = getLangPreferredName(obj) + " - " + getLangPreferredName(obj.getCity());
 			return nameWithCity ;
 		}
-		return obj.getName(region.useEnglishNames());
+		return getLangPreferredName(obj);
 	}
 	
 	@Override
@@ -217,9 +218,10 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 	@Override
 	public void itemSelected(Street obj) {
 		if(!Algorithms.objectEquals(settings.getLastSearchedCity(), obj.getCity().getId())) {
-			settings.setLastSearchedCity(obj.getCity().getId(), obj.getCity().getName(region.useEnglishNames()), obj.getLocation());
+			settings.setLastSearchedCity(obj.getCity().getId(), getLangPreferredName(obj.getCity()), obj.getLocation());
+			region.addCityToPreloadedList(obj.getCity());
 		}
-		settings.setLastSearchedStreet(obj.getName(region.useEnglishNames()), obj.getLocation());
+		settings.setLastSearchedStreet(getLangPreferredName(obj), obj.getLocation());
 //		if(obj.getBuildings().size() == 0){
 //			quitActivity(null);
 //		} else {

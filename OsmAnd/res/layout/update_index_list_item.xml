@@ -25,7 +25,7 @@
 
 		<TextView
 			android:id="@+id/download_item"
-			style="@style/ListText.Small"
+			android:textSize="@dimen/default_list_text_size"
 			android:layout_width="wrap_content"
 			android:textColor="?android:textColorPrimary"
 			android:layout_height="match_parent"
@@ -39,7 +39,7 @@
 			<TextView
 				android:id="@+id/download_descr"
 				android:textColor="?android:textColorSecondary"
-				android:textSize="@dimen/download_descr_text_size"
+				android:textSize="@dimen/default_sub_text_size"
 				android:layout_width="0dp"
 				android:layout_height="wrap_content"
 				android:layout_weight="1"
@@ -48,11 +48,10 @@
 
 			<TextView
 				android:id="@+id/update_descr"
-				style="@style/ListText.Small"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:textColor="@color/color_distance"
-				android:textSize="@dimen/download_descr_text_size"
+				android:textSize="@dimen/default_sub_text_size"
 				tools:text="@string/lorem_ipsum"
 				android:maxLines="1"/>
 

@@ -33,4 +33,4 @@ out/
 Thumbs.db
 
 # Output files
-/build
+build

@@ -15,6 +15,7 @@ import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.myplaces.SelectedGPXFragment;
 import net.osmand.plus.myplaces.TrackPointFragment;
 import net.osmand.plus.myplaces.TrackRoutePointFragment;
 import net.osmand.plus.myplaces.TrackSegmentFragment;
@@ -72,7 +73,6 @@ public class TrackActivity extends TabActivity {
 
 		setViewPagerAdapter(mViewPager, new ArrayList<TabActivity.TabItem>());
 		mSlidingTabLayout.setViewPager(mViewPager);
-
 		new AsyncTask<Void, Void, GPXFile>() {
 
 			protected void onPreExecute() {
@@ -90,6 +90,12 @@ public class TrackActivity extends TabActivity {
 				setSupportProgressBarIndeterminateVisibility(false);
 
 				setGpx(result);
+				for(WeakReference<Fragment> f : fragList) {
+					Fragment frag = f.get();
+					if(frag instanceof SelectedGPXFragment) {
+						((SelectedGPXFragment) frag).setContent();
+					}
+				}
 				((OsmandFragmentPagerAdapter) mViewPager.getAdapter()).addTab(
 						getTabIndicator(R.string.track_segments, TrackSegmentFragment.class));
 				if (isHavingWayPoints()){
@@ -114,6 +120,9 @@ public class TrackActivity extends TabActivity {
 	}
 
 	public List<GpxSelectionHelper.GpxDisplayGroup> getResult() {
+		if(result == null) {
+			return new ArrayList<GpxSelectionHelper.GpxDisplayGroup>();
+		}
 		if (result.modifiedTime != modifiedTime) {
 			modifiedTime = result.modifiedTime;
 			GpxSelectionHelper selectedGpxHelper = ((OsmandApplication) getApplication()).getSelectedGpxHelper();
@@ -171,11 +180,11 @@ public class TrackActivity extends TabActivity {
 	}
 
 	boolean isHavingWayPoints(){
-		return getGpx().hasWptPt();
+		return getGpx() != null && getGpx().hasWptPt();
 	}
 
 	boolean isHavingRoutePoints(){
-		return getGpx().hasRtePt();
+		return getGpx() != null && getGpx().hasRtePt();
 	}
 
 	public GPXFile getGpx() {

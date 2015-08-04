@@ -9,7 +9,6 @@ import java.util.Map;
 public class PoiFilter extends AbstractPoiType {
 	
 	private PoiCategory pc; 
-	private boolean topVisible;
 	private List<PoiType> poiTypes = new ArrayList<PoiType>();
 	private Map<String, PoiType> map = new LinkedHashMap<String, PoiType>();
 
@@ -71,12 +70,4 @@ public class PoiFilter extends AbstractPoiType {
 		return poiTypes;
 	}
 	
-	public void setTopVisible(boolean topVisible) {
-		this.topVisible = topVisible;
-	}
-	
-	public boolean isTopVisible() {
-		return topVisible;
-	}
-
 }

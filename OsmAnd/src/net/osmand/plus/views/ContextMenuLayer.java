@@ -22,7 +22,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.PointF;
 import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.text.Html;
 import android.view.Gravity;
@@ -65,13 +64,9 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	private ImageView closeButton;
 	private OsmandMapTileView view;
 	private int BASE_TEXT_SIZE = 170;
-	private int SHADOW_OF_LEG = 5;
-	private int CLOSE_BTN = 8;
 	
 	private final MapActivity activity;
-	private Drawable boxLeg;
 	private float scaleCoefficient = 1;
-	private Rect textPadding;
 	private CallbackWithObject<LatLon> selectOnMap = null;
 	
 	public ContextMenuLayer(MapActivity activity){
@@ -101,12 +96,6 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		this.view = view;
 		scaleCoefficient  = view.getDensity();
 		BASE_TEXT_SIZE = (int) (BASE_TEXT_SIZE * scaleCoefficient);
-		SHADOW_OF_LEG = (int) (SHADOW_OF_LEG * scaleCoefficient);
-		CLOSE_BTN = (int) (CLOSE_BTN * scaleCoefficient);
-		
-		boxLeg = view.getResources().getDrawable(R.drawable.box_leg);
-		boxLeg.setBounds(0, 0, boxLeg.getMinimumWidth(), boxLeg.getMinimumHeight());
-		
 		textView = new TextView(view.getContext());
 		LayoutParams lp = new LayoutParams(BASE_TEXT_SIZE, LayoutParams.WRAP_CONTENT);
 		textView.setLayoutParams(lp);
@@ -119,9 +108,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		textView.setClickable(true);
 		
 		textView.setBackgroundDrawable(view.getResources().getDrawable(R.drawable.box_free));
-		textPadding = new Rect();
-		textView.getBackground().getPadding(textPadding);
-//		textView.setPadding(0, 0, CLOSE_BTN + 3, 0);
+		textView.setTextColor(Color.WHITE);
 		
 		closeButton = new ImageView(view.getContext());
 		lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
@@ -144,19 +131,14 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		if(latLon != null){
 			int x = (int) box.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
 			int y = (int) box.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
-			
-			int tx = x - boxLeg.getMinimumWidth() / 2;
-			int ty = y - boxLeg.getMinimumHeight() + SHADOW_OF_LEG;
-			canvas.translate(tx, ty);
-			boxLeg.draw(canvas);
-			canvas.translate(-tx, -ty);
-			
+			textView.setTextColor(nightMode != null && nightMode.isNightMode() ? Color.GRAY : Color.WHITE);
 			if (textView.getText().length() > 0) {
-				canvas.translate(x - textView.getWidth() / 2, ty - textView.getBottom() + textPadding.bottom - textPadding.top);
+				canvas.translate(x - textView.getWidth() / 2, y - textView.getHeight());
 				int c = textView.getLineCount();
 				
 				textView.draw(canvas);
-				canvas.translate(textView.getWidth() - closeButton.getWidth(), CLOSE_BTN / 2);
+				//textView.getHeight() - closeButton.getHeight()
+				canvas.translate(textView.getWidth() - closeButton.getWidth(), 0);
 				closeButton.draw(canvas);
 				if (c == 0) {
 					// special case relayout after on draw method
@@ -187,7 +169,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		int w = BASE_TEXT_SIZE;
 		int h = (int) ((textView.getPaint().getTextSize() * 1.3f) * textView.getLineCount());
 		
-		textView.layout(0, -padding.bottom, w, h + padding.top);
+		textView.layout(0, 0, w, h + padding.top + padding.bottom);
 		int minw = closeButton.getDrawable().getMinimumWidth();
 		int minh = closeButton.getDrawable().getMinimumHeight();
 		closeButton.layout(0, 0, minw, minh);
@@ -197,7 +179,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		latLon = loc;
 		if(latLon != null){
 			if(description == null){
-				description = PointDescription.LOCATION_POINT.getFullPlainName(activity, loc.getLatitude(), loc.getLongitude());
+				description = new PointDescription(loc.getLatitude(), loc.getLongitude()).getFullPlainName(activity);
 			}
 			textView.setText(Html.fromHtml(description.replace("\n", "<br/>")));
 		} else {
@@ -288,16 +270,15 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		if (latLon != null) {
 			Rect bs = textView.getBackground().getBounds();
 			Rect closes = closeButton.getDrawable().getBounds();
-			int x = (int) (px - tb.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude()));
-			int y = (int) (py - tb.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude()));
-			x += bs.width() / 2;
-			y += bs.height() + boxLeg.getMinimumHeight() - SHADOW_OF_LEG;
-			int localSize = CLOSE_BTN * 3 / 2;
-			int dclosex = x - bs.width() + closes.width();
-			int dclosey = y - closes.height() / 2;
-			if(closes.intersects(dclosex - localSize, dclosey - localSize, dclosex + localSize, dclosey + localSize)) {
+			int dx = (int) (px - tb.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude()));
+			int dy = (int) (py - tb.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude()));
+			int bx = dx + bs.width() / 2;
+			int by = dy + bs.height();
+			int dclosex = bx - bs.width() ;
+			int dclosey = by;
+			if (dclosex >= -closes.width() && dclosey >= 0 && dclosex <= 0 && dclosey <= closes.height()) {
 				return 2;
-			} else if (bs.contains(x, y)) {
+			} else if (bs.contains(bx, by)) {
 				return 1;
 			}
 		}
@@ -340,9 +321,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				}
 				if(name) {
 					PointDescription nm = e.getValue().getObjectName(e.getKey());
-					LatLon ll = e.getValue().getObjectLocation(e.getKey());
-					description.append(nm.getFullPlainName(activity, ll == null? 0 : ll.getLatitude(), ll == null? 0 
-							: ll.getLongitude()));
+					description.append(nm.getFullPlainName(activity));
 				} else {
 					description.append(e.getValue().getObjectDescription(e.getKey()));
 				}

@@ -17,11 +17,11 @@ import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.EditPOIFilterActivity;
+import net.osmand.plus.activities.OsmAndListFragment;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
 import net.osmand.plus.poi.NominatimPoiFilter;
 import net.osmand.plus.poi.PoiFiltersHelper;
-import net.osmand.plus.poi.PoiLegacyFilter;
+import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.resources.ResourceManager;
@@ -30,7 +30,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.ListFragment;
 import android.support.v7.widget.PopupMenu;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -49,7 +48,7 @@ import android.widget.Toast;
 
 
 
-public class SearchPoiFilterFragment extends ListFragment implements SearchActivityChild {
+public class SearchPoiFilterFragment extends OsmAndListFragment implements SearchActivityChild {
 
 	public static final String SEARCH_LAT = SearchActivity.SEARCH_LAT;
 	public static final String SEARCH_LON = SearchActivity.SEARCH_LON;
@@ -62,15 +61,19 @@ public class SearchPoiFilterFragment extends ListFragment implements SearchActiv
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.searchpoi, container, false);
-        
         v.findViewById(R.id.SearchFilterLayout).setVisibility(View.VISIBLE);
+        ((EditText)v.findViewById(R.id.edit)).setHint(R.string.search_poi_category_hint);
+        ((ImageView)v.findViewById(R.id.search_icon)).setImageDrawable(
+        		getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_search_dark));
+        
         setupSearchEditText((EditText) v.findViewById(R.id.edit));
-        setupOptions(v.findViewById(R.id.options));
+        setupOptions((ImageView) v.findViewById(R.id.options));
         v.findViewById(R.id.poiSplitbar).setVisibility(View.GONE);
         return v;
     }
 	
-	private void setupOptions(View options) {
+	private void setupOptions(ImageView options) {
+		options.setImageDrawable(getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_overflow_menu_white));
 		options.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -101,6 +104,7 @@ public class SearchPoiFilterFragment extends ListFragment implements SearchActiv
 		});
 	}
 	
+	
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
@@ -117,12 +121,11 @@ public class SearchPoiFilterFragment extends ListFragment implements SearchActiv
 
 	public List<Object> getFilters(String s) {
 		List<Object> filters = new ArrayList<Object>() ;
+		PoiFiltersHelper poiFilters = getApp().getPoiFilters();
 		if (Algorithms.isEmpty(s)) {
-			PoiFiltersHelper poiFilters = getApp().getPoiFilters();
 			filters.addAll(poiFilters.getTopDefinedPoiFilters());
 		} else {
-			PoiFiltersHelper poiFilters = getApp().getPoiFilters();
-			for(PoiLegacyFilter pf : poiFilters.getTopDefinedPoiFilters()) {
+			for(PoiUIFilter pf : poiFilters.getTopDefinedPoiFilters()) {
 				if(!pf.isStandardFilter() && pf.getName().toLowerCase().startsWith(s.toLowerCase())) {
 					filters.add(pf);
 				}
@@ -154,23 +157,18 @@ public class SearchPoiFilterFragment extends ListFragment implements SearchActiv
 			loc = ((SearchActivity) parent).getSearchPoint();
 			searchAround = ((SearchActivity) parent).isSearchAroundCurrentLocation();
 		}
-		if (loc == null && !searchAround) {
+		if (loc == null) {
 			loc = getApp().getSettings().getLastKnownMapLocation();
 		}
-		if(loc != null && !searchAround) {
+		if(loc != null) {
 			intentToLaunch.putExtra(SearchActivity.SEARCH_LAT, loc.getLatitude());
 			intentToLaunch.putExtra(SearchActivity.SEARCH_LON, loc.getLongitude());
 		}
+		if(searchAround) {
+			intentToLaunch.putExtra(SearchActivity.SEARCH_NEARBY, true);
+		}
 	}
 
-	private void showEditActivity(PoiLegacyFilter poi) {
-		Intent newIntent = new Intent(getActivity(), EditPOIFilterActivity.class);
-		// folder selected
-		newIntent.putExtra(EditPOIFilterActivity.AMENITY_FILTER, poi.getFilterId());
-		updateIntentToLaunch(newIntent);
-		startActivity(newIntent);
-	}
-	
 	@Override
 	public void onListItemClick(ListView listView, View v, int position, long id) {
 		final Object item = ((PoiFiltersAdapter) getListAdapter()).getItem(position);
@@ -179,9 +177,9 @@ public class SearchPoiFilterFragment extends ListFragment implements SearchActiv
 			AccessibleToast.makeText(getActivity(), R.string.data_to_search_poi_not_available, Toast.LENGTH_LONG);
 			return;
 		}
-		if (item instanceof PoiLegacyFilter) {
-			PoiLegacyFilter model = ((PoiLegacyFilter) item);
-			if (PoiLegacyFilter.BY_NAME_FILTER_ID.equals(model.getFilterId())
+		if (item instanceof PoiUIFilter) {
+			PoiUIFilter model = ((PoiUIFilter) item);
+			if (PoiUIFilter.BY_NAME_FILTER_ID.equals(model.getFilterId())
 					|| model instanceof NominatimPoiFilter) {
 				model.setFilterByName(searchEditText.getText().toString());
 			} else {
@@ -189,9 +187,14 @@ public class SearchPoiFilterFragment extends ListFragment implements SearchActiv
 			}
 			showFilterActivity(model.getFilterId());
 		} else {
-			PoiLegacyFilter custom = getApp().getPoiFilters().getFilterById(PoiLegacyFilter.STD_PREFIX + ((AbstractPoiType) item).getKeyName());
+			PoiUIFilter custom = getApp().getPoiFilters().getFilterById(PoiUIFilter.STD_PREFIX + ((AbstractPoiType) item).getKeyName());
 			if(custom != null) {
-				custom.setFilterByName(null);
+				if(item instanceof PoiType && ((PoiType) item).isAdditional()) {
+					// it is already set
+				} else {
+					custom.setFilterByName(null);
+				}
+				custom.clearFilter();
 				custom.updateTypesToAccept(((AbstractPoiType) item));
 				showFilterActivity(custom.getFilterId());
 			}
@@ -250,11 +253,11 @@ public class SearchPoiFilterFragment extends ListFragment implements SearchActiv
 			ImageView icon = (ImageView) row.findViewById(R.id.folder_icon);
 			Object item = getItem(position);
 			String name;
-			if (item instanceof PoiLegacyFilter) {
-				final PoiLegacyFilter model = (PoiLegacyFilter) item;
+			if (item instanceof PoiUIFilter) {
+				final PoiUIFilter model = (PoiUIFilter) item;
 				if (RenderingIcons.containsBigIcon(model.getSimplifiedId())) {
 					icon.setImageDrawable(RenderingIcons.getBigIcon(getActivity(), model.getSimplifiedId()));
-				} else if(PoiLegacyFilter.BY_NAME_FILTER_ID.equals(model.getFilterId()) || 
+				} else if(PoiUIFilter.BY_NAME_FILTER_ID.equals(model.getFilterId()) || 
 						model instanceof NominatimPoiFilter){
 					icon.setImageResource(R.drawable.mx_name_finder);
 				} else {
@@ -263,8 +266,8 @@ public class SearchPoiFilterFragment extends ListFragment implements SearchActiv
 				name = model.getName();
 			} else {
 				AbstractPoiType st = (AbstractPoiType) item;
-				if (RenderingIcons.containsBigIcon(st.getKeyName())) {
-					icon.setImageDrawable(RenderingIcons.getBigIcon(getActivity(), st.getKeyName()));
+				if (RenderingIcons.containsBigIcon(st.getIconKeyName())) {
+					icon.setImageDrawable(RenderingIcons.getBigIcon(getActivity(), st.getIconKeyName()));
 				} else if (st instanceof PoiType
 						&& RenderingIcons.containsBigIcon(((PoiType) st).getOsmTag() + "_"
 								+ ((PoiType) st).getOsmValue())) {
@@ -290,9 +293,9 @@ public class SearchPoiFilterFragment extends ListFragment implements SearchActiv
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
-				PoiLegacyFilter filter = getApp().getPoiFilters().getCustomPOIFilter();
+				PoiUIFilter filter = getApp().getPoiFilters().getCustomPOIFilter();
 				filter.clearFilter();
-				showEditActivity(filter);
+				showFilterActivity(filter.getFilterId());
 				return true;
 			}
 		});

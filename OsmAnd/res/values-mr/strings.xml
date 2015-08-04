@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="left_side_navigation">डाव्या बाजूने ड्रायव्हिंग</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="left_side_navigation">डाव्या बाजूने ड्रायव्हिंग</string>
   <string name="unknown_location">अजून स्थान माहित नाही</string>
   <string name="modify_transparency">पारदर्शकता बदला (० - पारदर्शक, २५५ - अपारदर्शक)</string>
   <string name="confirm_interrupt_download">फाइल डाउनलोड थांबवायचे का?</string>
@@ -11,7 +12,7 @@
   
   <string name="plugins_screen">प्लगिन्स</string>
   <string name="prefs_plugins">प्लगिन्स</string>
-  <string name="play_commands_of_currently_selected_voice">सध्या निवडलेल्या आवाजाची वाक्ये ऐकवा</string>
+  <string name="play_commands_of_currently_selected_voice">निवडलेल्या आवाजाची वाक्ये ऐकवा</string>
   <string name="test_voice_prompts">आवाज तपासा</string>
   <string name="send_files_to_osm">जिपीएक्स फाइल्स ओएसएम ला पाठवायच्या का?</string>
   <string name="gpx_description_txt">वर्णन</string>
@@ -28,7 +29,7 @@
   <string name="backToMenu">पुन्हा मेनूकडे</string>
   <string name="zoomOut">झूम कमी करा</string>
   <string name="zoomIn">झूम वाढवा</string>
-  <string name="zoomIs">झूम आहे</string>
+  <string name="zoomIs">झूम लेवल आहे</string>
   <string name="north">उत्तर</string>
   <string name="north_north_east">इशान्य-उत्तर</string>
   <string name="north_east">इशान्य</string>
@@ -47,11 +48,11 @@
   <string name="north_north_west">वायव्य-उत्तर</string>
   <string name="front">पुढचा</string>
   <string name="front_right">पुढील उजवा</string>
-  <string name="right">उजवा</string>
+  <string name="right">उजवीकडे</string>
   <string name="back_right">मागील उजवा</string>
-  <string name="back">मागचा</string>
+  <string name="back">मागे</string>
   <string name="back_left">मागील डावा</string>
-  <string name="left">डावा</string>
+  <string name="left">डावीकडे</string>
   <string name="front_left">पुढील डावा</string>
   <string name="oclock">वाजता</string>
   <string name="towards">कडे</string>
@@ -64,7 +65,7 @@
   <string name="i_am_here">मी इथे आहे</string>
   <string name="rendering_out_of_memory">निवडलेले क्षेत्र दाखवण्यासाठी पुरेशी प्रोसेस मेमरी नाही</string>
   <string name="local_openstreetmap_uploading">अपलोड करत आहे …</string>
-  <string name="local_openstreetmap_were_uploaded">{0} पीओआय/बग्स अपलोड झाले</string>
+  <string name="local_openstreetmap_were_uploaded">{0} पीओआय/नोट्स अपलोड झाले</string>
   
   <string name="local_openstreetmap_upload">बदल ओएसएम मधे अपलोड करा</string>
   <string name="local_openstreetmap_delete">बदल काढून टाका</string>
@@ -127,8 +128,8 @@
   <string name="favorite_default_category">इतर</string>
   <string name="favourites_edit_dialog_name">नाव</string>
   <string name="favourites_edit_dialog_category">वर्गीकरण</string>
-  <string name="vector_map_not_needed">नाही, धन्यवाद</string>
-  <string name="local_index_descr_title">ऑफलाइन डेटा मॅनेजर</string>
+  <string name="shared_string_no_thanks">नाही, धन्यवाद</string>
+  <string name="local_index_descr_title">नकाशाच्या फाइल्स मॅनेज करा</string>
   <string name="shared_string_download">डाउनलोड</string>
   <string name="local_index_poi_data">पिओआय डेटा</string>
   <string name="search_offline_clear_search">नविन शोध</string>
@@ -179,7 +180,7 @@
   <string name="phone">फोन</string>
   
   
-  <string name="voice">आवाज</string>
+  <string name="voice">ध्वनीमुद्रित आवाज</string>
   <string name="poi_context_menu_modify">पिओआय बदला</string>
   <string name="poi_context_menu_delete">पिओआय काढून टाका</string>
   <string name="rotate_map_compass_opt">कंपास प्रमाणे</string>
@@ -220,9 +221,9 @@
   <string name="transport_stops">थांबे</string>
   <string name="transport_finish_search">शोध संपवा</string>
   <string name="transport_stop_to_go_out">उतरण्याचा थांबा निवडा</string>
-  <string name="transport_route_distance">मार्गाचे अंतर</string>
+  <string name="transport_route_distance">प्रवासाचे अंतर</string>
   <string name="transport">परिवहन</string>
-  <string name="shared_string_ok">ठिक आहे</string>
+  <string name="shared_string_ok">ठीक</string>
   <string name="show_transport_over_map_description">सार्वजनिक परिवहन थांबे नकाशावर दाखवा</string>
   <string name="show_transport_over_map">परिवहन थांबे दाखवा</string>
   <string name="search_history_city">शहर: {0}</string>
@@ -237,7 +238,7 @@
   <string name="searching_address">पत्ता शोधत आहे…</string>
   <string name="search_offline_address">ऑफलाएन शोध</string>
   <string name="search_online_address">ऑनलाएन शोध</string>
-  <string name="route_general_information">एकुण अंतर %1$s,\n प्रवासाचा वेळ %2$d ता %3$d मि.</string>
+  <string name="route_general_information">एकुण अंतर %1$s,\nप्रवासाचा वेळ %2$d ता %3$d मि.</string>
   <string name="download_question">डाउनलोड {0} - {1} ?</string>
   <string name="address">पत्ता</string>
   <string name="shared_string_download_successful">डाउनलोड यशस्वी</string>
@@ -277,7 +278,7 @@
   <string name="ChooseCountry">देश निवडा</string>
   <string name="map_source">नकाशाचा स्त्रोत</string>
   <string name="use_internet">इंटरनेट वापरा</string>
-  <string name="show_location">स्थान दाखवा</string>
+  <string name="show_location">तुमचे स्थान दाखवा</string>
   
   
   <string name="use_internet_to_download_tile">नसलेल्या टाइल्स डाउनलोड करण्यासाठी इंटरनेटचा वापर करा</string>
@@ -323,7 +324,7 @@
   
   
   <string name="address_search_desc">पत्त्याचा शोध</string>
-  <string name="transport_search_desc">परिवहन शोध</string>
+  <string name="transport_search_desc">सार्वजनिक परिवहन शोध</string>
   <string name="favourites_search_desc">आवडत्या ठिकणांचा शोध</string>
   <string name="rendering_attr_hmRendered_name">नकाशा आधिक तपशिलवार दाखवा</string>
   
@@ -442,7 +443,7 @@
 	<string name="vector_data">ऑफलाएन वेक्टर नकाशे</string>
 	<string name="no_vector_map_loaded">वेक्टर नकाशे लोड झाले नाही</string>
 	
-	<string name="context_menu_item_search_transport">परिवहन शोधा</string>
+	<string name="context_menu_item_search_transport">सार्वजनिक परिवहन शोधा</string>
 	
 	<string name="filter_existing_indexes">डाउनलोड केलेले</string>
 	<string name="amenity_type_man_made">मानव निर्मित</string>
@@ -455,7 +456,57 @@
 	<string name="tip_map_switch">नकाशाचा स्त्रोत निवडा</string>
 	<string name="incomplete_locale">अपूर्ण</string>
 	<string name="preferred_locale">भाषा</string>
-	<string name="preferred_locale_descr">भाषा निवडा</string>
+	<string name="preferred_locale_descr">भाषा निवडा (बदलल्यावर ओएसएमएएनडी पुन्हा चालू करा)</string>
 	<string name="system_locale">सिस्टिम</string>
 	<string name="tip_favorites">आवडती ठिकाणे</string>
+	<string name="rendering_attr_hideHouseNumbers_name">घरक्रमांक लपवा</string>
+    <string name="shared_string_open">उघडा</string>
+    <string name="shared_string_places">ठिकाणे</string>
+	<string name="shared_string_search">शोध</string>
+	<string name="shared_string_show_description">तपशील दाखवा</string>
+	<string name="shared_string_message">संदेश</string>
+	<string name="welcome_select_region">वाहतुकीची चिह्ने व नियम नेमकेपणाने दाखविण्यासाठी कृपया आपले वाहनचालनाचे क्षेत्र निवडा:</string>
+	<string name="welcome_header">सुस्वागतम्</string>
+    <string name="confirmation_to_clear_history">आपणांस इतिहास पुसून टाकावयाचा आहे का?</string>
+    <string name="osmand_parking_hour">ता</string>
+	<string name="osmand_parking_minute">मि</string>
+	<string name="osmand_parking_time_left">उर्वरित</string>
+	<string name="shared_string_ellipsis">…</string>
+	<string name="shared_string_and">व</string>
+	<string name="shared_string_or">किंवा</string>
+	<string name="shared_string_history">इतिहास</string>
+	<string name="shared_string_select_on_map">नकाशावर निवडा</string>
+	<string name="shared_string_import">आयात</string>
+	<string name="shared_string_export">निर्यात</string>
+	<string name="shared_string_more">अधिक…</string>
+	<string name="shared_string_more_actions">अधिक क्रिया</string>
+	<string name="shared_string_action_template">क्रिया {0}</string>
+	<string name="shared_string_address">पत्ता</string>
+	<string name="shared_string_my_places">माझी ठिकाणे</string>
+	<string name="shared_string_audio">ध्वनि</string>
+	<string name="shared_string_video">चलच्चित्र</string>
+	<string name="shared_string_photo">छायाचित्र</string>
+	<string name="rendering_attr_currentTrackColor_name">जिपिएक्स रंग</string>
+    <string name="rendering_attr_currentTrackWidth_name">जिपिएक्स रुंदी</string>
+    <string name="rendering_value_red_name">लाल</string>
+    <string name="rendering_value_orange_name">नारंगी</string>
+    <string name="rendering_value_yellow_name">पिवळा</string>
+    <string name="rendering_value_lightgreen_name">पोपटी</string>
+    <string name="rendering_value_green_name">हिरवा</string>
+    <string name="rendering_value_lightblue_name">आकाशी</string>
+    <string name="rendering_value_blue_name">निळा</string>
+    <string name="rendering_value_purple_name">जांभळा</string>
+    <string name="dark_theme">गडद</string>
+    <string name="lang_bn">बंगाली</string>
+    <string name="lang_la">लॅटिन</string>
+    <string name="lang_ta">तामिळ</string>
+    <string name="lang_ml">मल्याळम</string>
+    <string name="lang_th">थाइ</string>
+    <string name="lang_te">तेलगु</string>
+    <string name="read_full_article">पूर्ण लेख वाचा (ऑनलाइन)</string>
+    <string name="download_wikipedia_item">विकिपेडिया</string>
+    <string name="local_indexes_cat_wiki">विकिपेडिया</string>
+    <string name="welmode_download_maps">नकाशे डाउनलोड करा</string>
+	<string name="current_route">सद्ध्याचा मार्ग</string>
+    <string name="shared_string_do_not_use">वापरू नका</string>
 	</resources>

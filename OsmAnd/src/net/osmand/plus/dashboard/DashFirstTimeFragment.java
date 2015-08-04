@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.download.DownloadActivity;
 
 /**
@@ -31,7 +30,7 @@ public class DashFirstTimeFragment extends DashBaseFragment {
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+	public View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_first_time, container, false);
 
 		view.findViewById(R.id.select_region).setOnClickListener(new View.OnClickListener() {
@@ -67,7 +66,8 @@ public class DashFirstTimeFragment extends DashBaseFragment {
 		view.findViewById(R.id.hide).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				((MapActivity)getActivity()).userClosedWelcomeCard();
+				getMyApplication().getAppInitializer().setFirstTime(false);
+				dashboard.refreshDashboardFragments();
 			}
 		});
 

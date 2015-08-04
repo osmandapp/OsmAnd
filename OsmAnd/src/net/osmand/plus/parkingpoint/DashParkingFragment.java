@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandPlugin;
@@ -19,7 +19,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.views.DirectionDrawable;
 
 import java.util.Calendar;
 
@@ -32,7 +31,7 @@ public class DashParkingFragment extends DashLocationFragment {
 	ParkingPositionPlugin plugin;
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_parking_fragment, container, false);
 		Typeface typeface = FontCache.getRobotoMedium(getActivity());
 		Button remove = (Button) view.findViewById(R.id.remove_tag);

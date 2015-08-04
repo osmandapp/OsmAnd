@@ -79,7 +79,7 @@ public class OsMoControlDevice implements OsMoReactor {
 			} else if(data.equals("STOP_TRACKING")) {
 				tracker.disableTracker();
 				if (app.getNavigationService() != null) {
-					app.getNavigationService().stopIfNeeded(app,NavigationService.USED_BY_LIVE);
+					app.getNavigationService().stopIfNeeded(app, NavigationService.USED_BY_LIVE);
 				}
 			} else if(data.equals("START_TRACKING")) {
 				tracker.enableTrackerCmd();

@@ -17,7 +17,10 @@ import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.util.MapUtils;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.hardware.GeomagneticField;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -31,6 +34,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 
 public class OsmAndLocationProvider implements SensorEventListener {
@@ -104,8 +108,6 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private OsmandPreference<Boolean> USE_MAGNETIC_FIELD_SENSOR_COMPASS;
 	private OsmandPreference<Boolean> USE_FILTER_FOR_COMPASS;
 	private static final long AGPS_TO_REDOWNLOAD  = 16 * 60 * 60 * 1000; // 16 hours
-	private boolean agpsDownloaded = false;
-
 
 
 	public class SimulationProvider {
@@ -223,12 +225,10 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	public void resumeAllUpdates() {
 		final LocationManager service = (LocationManager) app.getSystemService(Context.LOCATION_SERVICE);
 		if(app.getSettings().isInternetConnectionAvailable()) {
-			long time = System.currentTimeMillis();
-			if(time - app.getSettings().AGPS_DATA_LAST_TIME_DOWNLOADED.get() > AGPS_TO_REDOWNLOAD) {
-				agpsDownloaded = false;
-				redownloadAGPS();
-				if(agpsDownloaded == true) {
-					app.getSettings().AGPS_DATA_LAST_TIME_DOWNLOADED.set(time);
+			if(System.currentTimeMillis() - app.getSettings().AGPS_DATA_LAST_TIME_DOWNLOADED.get() > AGPS_TO_REDOWNLOAD) {
+				//force an updated check for internet connectivity here before destroying A-GPS-data
+				if(app.getSettings().isInternetConnectionAvailable(true)) {
+					redownloadAGPS();
 				}
 			}
 		}
@@ -241,6 +241,9 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		// try to always ask for network provide : it is faster way to find location
 		
 		List<String> providers = service.getProviders(true);
+		if(providers == null) {
+			return;
+		}
 		for (String provider : providers) {
 			if (provider == null || provider.equals(LocationManager.GPS_PROVIDER)) {
 				continue;
@@ -262,8 +265,9 @@ public class OsmAndLocationProvider implements SensorEventListener {
 			Bundle bundle = new Bundle();
 			service.sendExtraCommand("gps", "force_xtra_injection", bundle);
 			service.sendExtraCommand("gps", "force_time_injection", bundle);
-			agpsDownloaded = true;
+			app.getSettings().AGPS_DATA_LAST_TIME_DOWNLOADED.set(System.currentTimeMillis());
 		} catch (Exception e) {
+			app.getSettings().AGPS_DATA_LAST_TIME_DOWNLOADED.set(0L);
 			e.printStackTrace();
 		}		
 	}
@@ -871,6 +875,37 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		return true;
 	}
 
+
 	
+	public boolean checkGPSEnabled(final Context context) {
+		LocationManager lm = (LocationManager)app.getSystemService(Context.LOCATION_SERVICE);
+		boolean gpsenabled = false;
+		boolean networkenabled = false;
+
+		try {
+		    gpsenabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
+		} catch(Exception ex) {}
+
+		try {
+		    networkenabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+		} catch(Exception ex) {}
+
+		if(!gpsenabled && !networkenabled) {
+		    // notify user
+		    AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+		    dialog.setMessage(context.getResources().getString(R.string.gps_network_not_enabled));
+		    dialog.setPositiveButton(context.getResources().getString(R.string.shared_string_settings), new DialogInterface.OnClickListener() {
+		            @Override
+		            public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+		                Intent myIntent = new Intent( Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+		                context.startActivity(myIntent);
+		            }
+		        });
+		    dialog.setNegativeButton(context.getString(R.string.shared_string_cancel), null);
+		    dialog.show();      
+		    return false;
+		}
+		return true;
+	}
 
 }

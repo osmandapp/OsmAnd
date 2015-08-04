@@ -79,6 +79,7 @@ public class VoiceRouter {
 	public VoiceRouter(RoutingHelper router, final OsmandSettings settings) {
 		this.router = router;
         this.settings = settings;
+        this.mute = settings.VOICE_MUTE.get();
 
 		empty = new Struct("");
 		voiceMessageListeners = new ConcurrentHashMap<VoiceRouter.VoiceMessageListener, Integer>();
@@ -554,10 +555,11 @@ public class VoiceRouter {
 					getTermString(getSpeakablePointName(i.getDestinationName())) });
 			Term current = empty;
 			if (currentSegment != null) {
+				
 				RouteDataObject obj = currentSegment.getObject();
 				current = new Struct(new Term[] { getTermString(getSpeakablePointName(obj.getRef())),
-						getTermString(getSpeakablePointName(obj.getName())),
-						getTermString(getSpeakablePointName(obj.getDestinationName())) });
+						getTermString(getSpeakablePointName(obj.getName(settings.MAP_PREFERRED_LOCALE.get()))),
+						getTermString(getSpeakablePointName(obj.getDestinationName(settings.MAP_PREFERRED_LOCALE.get()))) });
 			}
 			Struct voice = new Struct("voice", next, current );
 			return voice;

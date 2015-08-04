@@ -82,7 +82,11 @@ public class OsMoTracker implements OsMoReactor {
 			Location loc = bufferOfLocations.poll();
 			lastSendLocation = loc;
 			locationsSent ++;
-			return "T|"+formatLocation(loc); 
+			if((System.currentTimeMillis() - loc.getTime()) > 2 * 60000 && loc.getTime() != 0) {
+				return "B|"+formatLocation(loc); 
+			} else {
+				return "T|"+formatLocation(loc); 
+			}
 		}
 		return null;
 	}
@@ -91,16 +95,16 @@ public class OsMoTracker implements OsMoReactor {
 		StringBuilder cmd = new StringBuilder();
 		cmd.append("L").append((float)loc.getLatitude()).append(":").append((float)loc.getLongitude());
 		if(loc.hasAccuracy()) {
-			cmd.append("H").append((float)loc.getAccuracy());
+			cmd.append("H").append((int)loc.getAccuracy());
 		}
 		if(loc.hasAltitude()) {
-			cmd.append("A").append((float)loc.getAltitude());
+			cmd.append("A").append((int)loc.getAltitude());
 		}
 		if(loc.hasSpeed()) {
-			cmd.append("S").append((float)loc.getSpeed());
+			cmd.append("S").append((float)((int)(loc.getSpeed()*100))/100f);
 		}
 		if(loc.hasBearing()) {
-			cmd.append("C").append((float)loc.getBearing());
+			cmd.append("C").append((int)loc.getBearing());
 		}
 		if((System.currentTimeMillis() - loc.getTime()) > 30000 && loc.getTime() != 0) {
 			cmd.append("T").append(loc.getTime());

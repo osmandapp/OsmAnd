@@ -1,12 +1,5 @@
 package net.osmand.plus.dashboard;
 
-import java.io.File;
-import java.text.MessageFormat;
-
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.Version;
-import net.osmand.plus.helpers.FontCache;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -14,13 +7,21 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.Version;
+import net.osmand.plus.activities.OsmandActionBarActivity;
+import net.osmand.plus.helpers.FontCache;
+
+import java.io.File;
+import java.text.MessageFormat;
 
 /**
  * Created by Denis
@@ -31,7 +32,7 @@ public class DashErrorFragment extends DashBaseFragment {
 	public static final String TAG = "DASH_ERROR_FRAGMENT";
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_error_fragment, container, false);
 		String msg = MessageFormat.format(getString(R.string.previous_run_crashed), OsmandApplication.EXCEPTION_PATH);
 		Typeface typeface = FontCache.getRobotoMedium(getActivity());
@@ -77,7 +78,7 @@ public class DashErrorFragment extends DashBaseFragment {
 		cancelBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				ActionBarActivity dashboardActivity = ((ActionBarActivity) getActivity());
+				OsmandActionBarActivity dashboardActivity = ((OsmandActionBarActivity) getActivity());
 				if (dashboardActivity != null) {
 					dashboardActivity.getSupportFragmentManager().beginTransaction().remove(DashErrorFragment.this)
 							.commit();

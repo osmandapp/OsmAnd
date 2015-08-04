@@ -4,7 +4,7 @@
 			  android:layout_width="match_parent"
 			  android:layout_height="wrap_content"
 			  android:background="?attr/expandable_list_item_background"
-			  android:minHeight="@dimen/dashListItemHeight"
+			  android:minHeight="@dimen/list_item_height"
 			  android:orientation="vertical">
 
 	<View
@@ -15,7 +15,7 @@
 
 	<LinearLayout
 		android:layout_width="match_parent"
-		android:minHeight="@dimen/dashListItemHeight"
+		android:minHeight="@dimen/list_item_height"
 		android:layout_height="wrap_content"
 		android:orientation="horizontal">
 
@@ -73,10 +73,10 @@
 
 		<ImageButton
 			android:id="@+id/show_on_map"
-			android:layout_width="@dimen/dashListItemHeight"
-			android:layout_height="@dimen/dashListItemHeight"
+			android:layout_width="@dimen/list_item_height"
+			android:layout_height="@dimen/list_item_height"
 			android:layout_gravity="center_vertical"
-			android:background="?attr/options_button_background"
+			android:background="?attr/dashboard_button"
 			tools:src="@drawable/ic_action_marker_dark"/>
 		<include android:layout_width="wrap_content"
 				 android:layout_height="wrap_content"

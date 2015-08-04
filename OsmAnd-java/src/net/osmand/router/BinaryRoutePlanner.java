@@ -4,6 +4,7 @@ import gnu.trove.map.hash.TLongObjectHashMap;
 
 import java.io.IOException;
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
@@ -65,12 +66,15 @@ public class BinaryRoutePlanner {
 	 * return list of segments
 	 */
 	@SuppressWarnings("unused")
-	FinalRouteSegment searchRouteInternal(final RoutingContext ctx, RouteSegmentPoint start, RouteSegmentPoint end) throws InterruptedException, IOException {
+	FinalRouteSegment searchRouteInternal(final RoutingContext ctx, RouteSegmentPoint start, RouteSegmentPoint end,
+			RouteSegment recalculationEnd ) throws InterruptedException, IOException {
 		// measure time
 		ctx.timeToLoad = 0;
 		ctx.visitedSegments = 0;
 		ctx.memoryOverhead  = 1000;
 		ctx.timeToCalculate = System.nanoTime();
+
+		
 		// Initializing priority queue to visit way segments 
 		Comparator<RouteSegment> nonHeuristicSegmentsComparator = new NonHeuristicSegmentsComparator();
 		PriorityQueue<RouteSegment> graphDirectSegments = new PriorityQueue<RouteSegment>(50, new SegmentsComparator(ctx));
@@ -80,8 +84,7 @@ public class BinaryRoutePlanner {
 		TLongObjectHashMap<RouteSegment> visitedDirectSegments = new TLongObjectHashMap<RouteSegment>();
 		TLongObjectHashMap<RouteSegment> visitedOppositeSegments = new TLongObjectHashMap<RouteSegment>();
 		
-		
-		initQueuesWithStartEnd(ctx, start, end, graphDirectSegments, graphReverseSegments);
+		initQueuesWithStartEnd(ctx, start, end, recalculationEnd, graphDirectSegments, graphReverseSegments);
 		
 		// Extract & analyze segment with min(f(x)) from queue while final segment is not found
 		boolean forwardSearch = true;
@@ -90,7 +93,7 @@ public class BinaryRoutePlanner {
 		
 		FinalRouteSegment finalSegment = null;
 		boolean onlyBackward = ctx.getPlanRoadDirection() < 0;
-		boolean onlyForward = ctx.getPlanRoadDirection() > 0;
+		boolean onlyForward = ctx.getPlanRoadDirection() > 0 ;
 		while (!graphSegments.isEmpty()) {
 			RouteSegment segment = graphSegments.poll();
 			// use accumulative approach
@@ -101,6 +104,8 @@ public class BinaryRoutePlanner {
 			if(TRACE_ROUTING){
 				printRoad(">", segment, !forwardSearch);
 			}
+//			if(segment.getParentRoute() != null)
+//			System.out.println(segment.getRoad().getId() + " - " + segment.getParentRoute().getRoad().getId());
 			if(segment instanceof FinalRouteSegment) {
 				if(RoutingContext.SHOW_GC_SIZE){
 					log.warn("Estimated overhead " + (ctx.memoryOverhead / (1<<20))+ " mb");
@@ -165,6 +170,9 @@ public class BinaryRoutePlanner {
 		printDebugMemoryInformation(ctx, graphDirectSegments, graphReverseSegments, visitedDirectSegments, visitedOppositeSegments);
 		return finalSegment;
 	}
+
+
+	
 
 
 	protected void checkIfGraphIsEmpty(final RoutingContext ctx, boolean allowDirection,
@@ -236,7 +244,7 @@ public class BinaryRoutePlanner {
 
 
 	private void initQueuesWithStartEnd(final RoutingContext ctx, RouteSegment start, RouteSegment end,
-			PriorityQueue<RouteSegment> graphDirectSegments, PriorityQueue<RouteSegment> graphReverseSegments) {
+			RouteSegment recalculationEnd, PriorityQueue<RouteSegment> graphDirectSegments, PriorityQueue<RouteSegment> graphReverseSegments) {
 		RouteSegment startPos = initRouteSegment(ctx, start, true);
 		RouteSegment startNeg = initRouteSegment(ctx, start, false);
 		RouteSegment endPos = initRouteSegment(ctx, end, true);
@@ -256,6 +264,10 @@ public class BinaryRoutePlanner {
 				}
 			}
 		}
+		if(recalculationEnd != null) {
+			ctx.targetX = recalculationEnd.getRoad().getPoint31XTile(recalculationEnd.getSegmentStart());
+			ctx.targetY = recalculationEnd.getRoad().getPoint31YTile(recalculationEnd.getSegmentStart());
+		}
 		float estimatedDistance = (float) estimatedDistance(ctx, ctx.targetX, ctx.targetY, ctx.startX, ctx.startY);
 		if(startPos != null) {
 			startPos.distanceToEnd = estimatedDistance;
@@ -265,13 +277,17 @@ public class BinaryRoutePlanner {
 			startNeg.distanceToEnd = estimatedDistance;
 			graphDirectSegments.add(startNeg);
 		}
-		if(endPos != null) {
-			endPos.distanceToEnd = estimatedDistance;
-			graphReverseSegments.add(endPos);
-		}
-		if(endNeg != null) {
-			endNeg.distanceToEnd = estimatedDistance;
-			graphReverseSegments.add(endNeg);
+		if(recalculationEnd != null) {
+			graphReverseSegments.add(recalculationEnd);
+		} else {
+			if (endPos != null) {
+				endPos.distanceToEnd = estimatedDistance;
+				graphReverseSegments.add(endPos);
+			}
+			if (endNeg != null) {
+				endNeg.distanceToEnd = estimatedDistance;
+				graphReverseSegments.add(endNeg);
+			}
 		}
 	}
 
@@ -312,8 +328,8 @@ public class BinaryRoutePlanner {
 			pr = "";
 		}
 		String p = "";
-		if(reverseWaySearch != null) {
-			p = (reverseWaySearch?"B" : "F");
+		if (reverseWaySearch != null) {
+			p = (reverseWaySearch ? "B" : "F");
 		}
 		println(p+prefix  +"" + segment.road + " dir="+segment.getDirectionAssigned()+" ind=" + segment.getSegmentStart() + 
 				" ds=" + ((float)segment.distanceFromStart) + " es="+((float)segment.distanceToEnd) + pr);

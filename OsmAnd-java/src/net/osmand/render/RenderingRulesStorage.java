@@ -25,6 +25,7 @@ import org.xmlpull.v1.XmlPullParserException;
 public class RenderingRulesStorage {
 
 	private final static Log log = PlatformUtil.getLog(RenderingRulesStorage.class);
+	static boolean STORE_ATTTRIBUTES = false;
 	
 	// keep sync !
 	// keep sync ! not change values
@@ -34,7 +35,7 @@ public class RenderingRulesStorage {
 	public final static int POLYGON_RULES = 3;
 	public final static int TEXT_RULES = 4;
 	public final static int ORDER_RULES = 5;
-	private final static int LENGTH_RULES = 6;
+	public final static int LENGTH_RULES = 6;
 	
 	private final static int SHIFT_TAG_VAL = 16;
 	
@@ -50,8 +51,8 @@ public class RenderingRulesStorage {
 	protected Map<String, RenderingRule> renderingAttributes = new LinkedHashMap<String, RenderingRule>();
 	protected Map<String, String> renderingConstants = new LinkedHashMap<String, String>();
 	
-	private String renderingName;
-	private String internalRenderingName;
+	protected String renderingName;
+	protected String internalRenderingName;
 	
 	
 	public static interface RenderingRulesStorageResolver {
@@ -233,7 +234,7 @@ public class RenderingRulesStorage {
 				boolean top = stack.size() == 0 || isTopCase();
 				parseAttributes(attrsMap);
 				RenderingRule renderingRule = new RenderingRule(attrsMap, isSwitch, RenderingRulesStorage.this);
-				if(top){
+				if(top || STORE_ATTTRIBUTES){
 					renderingRule.storeAttributes(attrsMap);
 				}
 				if (stack.size() > 0 && stack.peek() instanceof RenderingRule) {
@@ -245,6 +246,9 @@ public class RenderingRulesStorage {
 				attrsMap.clear();
 				parseAttributes(attrsMap);
 				RenderingRule renderingRule = new RenderingRule(attrsMap, false, RenderingRulesStorage.this);
+				if(STORE_ATTTRIBUTES) {
+					renderingRule.storeAttributes(attrsMap);
+				}
 				if (stack.size() > 0 && stack.peek() instanceof RenderingRule) {
 					((RenderingRule) stack.peek()).addIfChildren(renderingRule);
 				} else {
@@ -283,6 +287,7 @@ public class RenderingRulesStorage {
 					prop = RenderingRuleProperty.createInputIntProperty(attr);
 				}
 				prop.setDescription(parser.getAttributeValue("", "description"));
+				prop.setDefaultValueDescription(parser.getAttributeValue("", "defaultValueDescription"));
 				prop.setCategory(parser.getAttributeValue("", "category"));
 				prop.setName(parser.getAttributeValue("", "name"));
 				if(parser.getAttributeValue("", "possibleValues") != null){
@@ -390,6 +395,9 @@ public class RenderingRulesStorage {
 				vl = ns.remove("value");
 				// reset rendering rule attributes
 				renderingRule.init(ns);
+				if(STORE_ATTTRIBUTES) {
+					renderingRule.storeAttributes(ns);
+				}
 				
 				registerGlobalRule(renderingRule, state, tg, vl);
 				if (applyRules != null) {
@@ -460,6 +468,7 @@ public class RenderingRulesStorage {
 	
 	
 	public static void main(String[] args) throws XmlPullParserException, IOException {
+		STORE_ATTTRIBUTES = true;
 //		InputStream is = RenderingRulesStorage.class.getResourceAsStream("default.render.xml");
 		String file = "/Users/victorshcherb/osmand/repos/resources/rendering_styles/default.render.xml";
 		Map<String, String> renderingConstants = new LinkedHashMap<String, String>();
@@ -497,10 +506,17 @@ public class RenderingRulesStorage {
 		};
 		storage.parseRulesFromXmlInputStream(is, resolver);
 		
+//		storage = new RenderingRulesStorage("", null);
+//		new DefaultRenderingRulesStorage().createStyle(storage);
+		
+		
 		printAllRules(storage);
-		testSearch(storage);
+//		testSearch(storage);
+		
 	}
-
+	
+	
+	
 	protected static void testSearch(RenderingRulesStorage storage) {
 		//		long tm = System.nanoTime();
 		//		int count = 100000;
@@ -520,7 +536,7 @@ public class RenderingRulesStorage {
 //							searchRequest.setStringFilter(customProp, "");
 //						}
 //					}
-					searchRequest.setBooleanFilter(storage.PROPS.get("noPolygons"), true);
+//					searchRequest.setBooleanFilter(storage.PROPS.get("noPolygons"), true);
 					boolean res = searchRequest.search(LINE_RULES);
 					System.out.println("Result " + res);
 					printResult(searchRequest,  System.out);

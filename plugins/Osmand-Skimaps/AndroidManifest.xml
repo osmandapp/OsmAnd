@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="net.osmand.skimapsPlugin"
+    android:versionCode="6"
+    android:versionName="1.0" >
+
+    <uses-sdk android:minSdkVersion="9" android:targetSdkVersion="16" />
+    <uses-feature android:name="android.hardware.touchscreen" android:required="false"/>
+	<supports-screens  android:resizeable="true" android:smallScreens="true" android:normalScreens="true" android:largeScreens="true" 
+	    android:xlargeScreens="true" android:anyDensity="true" />
+    <application 
+        android:icon="@drawable/icon"
+        android:label="OsmAnd Ski Maps" >
+        <activity
+            android:name="net.osmand.skimaps.SkiMapsActivity"
+            android:label="@string/app_name" >
+            <!-- 
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+             -->
+        </activity>
+    </application>
+
+</manifest>

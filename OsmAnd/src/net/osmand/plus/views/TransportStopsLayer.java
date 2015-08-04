@@ -97,7 +97,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 	private String getStopDescription(TransportStop n, boolean useName) {
 		StringBuilder text = new StringBuilder(250);
 		text.append(view.getContext().getString(R.string.transport_Stop))
-				.append(" : ").append(n.getName(view.getSettings().usingEnglishNames())); //$NON-NLS-1$
+				.append(" : ").append(n.getName(view.getSettings().MAP_PREFERRED_LOCALE.get())); //$NON-NLS-1$
 		text.append("\n").append(view.getContext().getString(R.string.transport_Routes)).append(" : "); //$NON-NLS-1$ //$NON-NLS-2$
 		List<TransportIndexRepository> reps = view.getApplication().getResourceManager().searchTransportRepositories(
 				n.getLocation().getLatitude(), n.getLocation().getLongitude());
@@ -185,7 +185,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 	
 	private void showDescriptionDialog(TransportStop a) {
 		Builder bs = new AlertDialog.Builder(view.getContext());
-		bs.setTitle(a.getName(view.getSettings().usingEnglishNames()));
+		bs.setTitle(a.getName(view.getSettings().MAP_PREFERRED_LOCALE.get()));
 		bs.setMessage(getStopDescription(a, true));
 		bs.show();
 	}

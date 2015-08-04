@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+	<color name="osmand_orange">#ff8f00</color>
 	<color name="app_mode_icon_color">#33B4E4</color>
+	<color name="recording_color">#F44336</color>
 
 	<color name="dash_search_icon_light">#536DFE</color>
 	<color name="dash_search_icon_dark">#606E78</color>
@@ -14,22 +16,30 @@
 	<color name="dashboard_parking_light_color">#009688</color>
 	<color name="dashboard_parking_dark_color">#54778c</color>
 	<color name="dashboard_parking_dark_selected">#446072</color>
-
+	
+	<color name="plugin_details_install_header_bg_light">#dbdbdb</color>
+	<color name="plugin_details_install_header_bg_dark">#2d3438</color>
+	
 	<color name="list_divider_dark">#1f2326</color>
 	<color name="list_divider_light">@color/color_white</color>
-	<color name="list_background_dark">#292f33</color>
 	<color name="list_sub_menu_background_dark">#475259</color>
-	<color name="list_item_light">@color/color_white</color>
+	<!-- <color name="list_item_light">@color/color_white</color> 
+	<color name="list_item_background_dark">#333b40</color> -->
+	<color name="list_item_light">#00000000</color> 
+	<color name="list_item_dark">#00000000</color>
 	<color name="list_item_light_pressed">#8cd0d0d0</color>
-	<color name="list_item_background_dark">#333b40</color>
-	<color name="list_item_background_dark_pressed">#be39464d</color>
+	<color name="list_item_dark_pressed">#be39464d</color>
+	<color name="bg_color_light">#ffffff</color>
+	<color name="bg_color_dark">#333b40</color>
+	
 	
 	<color name="map_widget_icon_color">#ff8f00</color>
-	<color name="map_widget_stroke">#333333</color>
+	<color name="map_widget_stroke">#4C000000</color>
 	<color name="map_widget_light">#ffffff</color>
-	<color name="map_widget_dark">#bb3f3f3f</color>
-	<color name="map_widget_dark_pressed">#ddcccccc</color>
-	<color name="map_widget_light_trans">#40ffffff</color>
+	<color name="map_widget_dark">#a0000000</color>
+	<color name="map_widget_dark_stroke">#80ffffff</color>
+	<color name="map_widget_dark_pressed">#80aaaaaa</color>
+	<color name="map_widget_light_trans">#80ffffff</color>
 	<color name="map_widget_light_pressed">#e5e5e5</color>
 	<color name="map_widget_blue">#536dfe</color>
 	<color name="map_widget_blue_pressed">#485dd9</color>
@@ -54,7 +64,7 @@
 	<color name="dashboard_black">#212121</color>
 	<color name="dashboard_blue">#536DFE</color>
 	<color name="dashboard_subheader_text_dark">#b4c3cc</color>
-	<color name="dashboard_subheader_text_light">#212121</color>
+	<color name="dashboard_subheader_text_light">#727272</color>
 	<color name="dashboard_general_button_text_dark">#ff8f00</color>
 	<color name="dashboard_general_button_text_light">#536DFE</color>
 
@@ -99,6 +109,8 @@
 	<color name="color_unknown">#C8C8C8</color>
 	<!-- good state, localindex loaded, poi_open, osm_create, index_ok   -->
 	<color name="color_ok">#32CD32</color>
+	<!-- intermediate state - poi is going to be closed -->
+	<color name="color_intermediate">#FFDD00</color>
 	<!-- update good state, osm_modify, index_update -->
 	<color name="color_update">#0080FF</color>
 	
@@ -111,7 +123,6 @@
 
 	<color name="gpx_track">#B4B319FF</color>
 	<color name="gpx_track_fluorescent">#B400FFFF</color>
-	<!-- <color name="gpx_track_fluorescent">#B4FF00FF</color>  Magenta is alternate track color for cyan but less contrast in many situations:  -->
 
 	<color name="nav_track">#CCaa0088</color>
 	<color name="nav_track_fluorescent">#CC00ddff</color>
@@ -133,19 +144,11 @@
 
 	
 	<color name="shadow_color">#33888888</color>
+	
 	<color name="sherpafy_selection">#ff33b5e5</color>
 	<color name="sherpafy_add_text">#b9b9b9</color>
 
-	<color name="dark_drawer_bg_color">#303030</color>
+	<color name="spinner_list_background_light">#eeeeee</color>
+	<color name="spinner_list_background_dark">#303030</color>
 
-	<color name="card_bg_color_light">#ffffff</color>
-	<color name="card_bg_color_dark">#333b40</color>
-
-	<color name="get_button_text">#ffffff</color>
-
-	<color name="plugin_details_header_bg_light">#ffffff</color>
-
-
-	<color name="plugin_details_install_header_bg_light">#dbdbdb</color>
-	<color name="plugin_details_install_header_bg_dark">#2d3438</color>
 </resources>

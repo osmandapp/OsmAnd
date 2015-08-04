@@ -7,8 +7,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
 
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
@@ -46,7 +44,6 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Random;
 
 import btools.routingapp.BRouterServiceConnection;
@@ -63,7 +60,7 @@ public class AppInitializer implements IProgress {
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED"; //$NON-NLS-1$
 	private static final String EXCEPTION_FILE_SIZE = "EXCEPTION_FS"; //$NON-NLS-1$
 
-	public static final String LATEST_CHANGES_URL = "changes-1.9.html";
+	public static final String LATEST_CHANGES_URL = "changes-2.1.html";
 	public static final int APP_EXIT_CODE = 4;
 	public static final String APP_EXIT_KEY = "APP_EXIT_KEY";
 	private OsmandApplication app;
@@ -71,6 +68,7 @@ public class AppInitializer implements IProgress {
 	
 	private boolean initSettings = false;
 	private boolean firstTime;
+	private boolean activityChangesShowed = false;
 	private boolean appVersionChanged;
 	private long startTime;
 	private long startBgTime;
@@ -125,17 +123,24 @@ public class AppInitializer implements IProgress {
 	}
 	
 	public boolean isFirstTime(Activity activity) {
-		SharedPreferences pref = activity.getPreferences(Context.MODE_WORLD_WRITEABLE);
-		return !pref.contains(FIRST_TIME_APP_RUN);
+		initUiVars(activity);
+		return firstTime;
+	}
+	
+	public void setFirstTime(boolean firstTime) {
+		this.firstTime = firstTime;
 	}
 	
 	public boolean checkAppVersionChanged(Activity activity) {
 		initUiVars(activity);
-		if (!firstTime && appVersionChanged) {
+		boolean showRecentChangesDialog = !firstTime && appVersionChanged;
+//		showRecentChangesDialog = true;
+		if (showRecentChangesDialog && !activityChangesShowed) {
 			final Intent helpIntent = new Intent(activity, HelpActivity.class);
 			helpIntent.putExtra(HelpActivity.TITLE, Version.getAppVersion(app));
 			helpIntent.putExtra(HelpActivity.URL, LATEST_CHANGES_URL);
 			activity.startActivity(helpIntent);
+			activityChangesShowed = true;
 			return true;
 		}
 		return false;
@@ -182,7 +187,7 @@ public class AppInitializer implements IProgress {
 				}
 
 			});
-			builder.setNeutralButton(R.string.vector_map_not_needed, new DialogInterface.OnClickListener() {
+			builder.setNeutralButton(R.string.shared_string_no_thanks, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					ctx.getPreferences(Context.MODE_WORLD_WRITEABLE).edit().putBoolean(VECTOR_INDEXES_CHECK, false).commit();
@@ -194,44 +199,6 @@ public class AppInitializer implements IProgress {
 
 	}
 
-	public void startMapActivity(final Activity ctx) {
-		final Intent mapIndent = new Intent(ctx, ((OsmandApplication)ctx.getApplication()).getAppCustomization().getMapActivity());
-		ctx.startActivityForResult(mapIndent, 0);
-	}
-
-	// TODO
-	private void applicationInstalledFirstTime(final Activity ctx) {
-		final OsmandApplication app = (OsmandApplication)ctx.getApplication();
-		boolean netOsmandWasInstalled = false;
-		try {
-			ApplicationInfo applicationInfo = ctx.getPackageManager().getApplicationInfo("net.osmand", PackageManager.GET_META_DATA);
-			netOsmandWasInstalled = applicationInfo != null && !Version.isFreeVersion(app);
-		} catch (PackageManager.NameNotFoundException e) {
-			netOsmandWasInstalled = false;
-		}
-
-		if (netOsmandWasInstalled) {
-//			Builder builder = new AccessibleAlertBuilder(this);
-//			builder.setMessage(R.string.osmand_net_previously_installed);
-//			builder.setPositiveButton(R.string.shared_string_ok, null);
-//			builder.show();
-		} else {
-			AlertDialog.Builder builder = new AccessibleAlertBuilder(ctx);
-			builder.setMessage(R.string.first_time_msg);
-			builder.setPositiveButton(R.string.first_time_download, new DialogInterface.OnClickListener() {
-
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					ctx.startActivity(new Intent(ctx, app.getAppCustomization().getDownloadIndexActivity()));
-				}
-
-			});
-			builder.setNegativeButton(R.string.first_time_continue, null);
-			builder.show();
-		}
-	}
-	
-	
 	private void indexRegionsBoundaries(List<String> warnings) {
 		try {
 			File file = app.getAppPath("regions.ocbf");
@@ -250,13 +217,17 @@ public class AppInitializer implements IProgress {
 
 	
 	private void initPoiTypes() {
-		app.poiTypes.init();
+		if(app.getAppPath("poi_types.xml").exists()) {
+			app.poiTypes.init(app.getAppPath("poi_types.xml").getAbsolutePath());
+		} else {
+			app.poiTypes.init();
+		}
 		app.poiTypes.setPoiTranslator(new MapPoiTypes.PoiTranslator() {
 			
 			@Override
 			public String getTranslation(AbstractPoiType type) {
 				try {
-					Field f = R.string.class.getField("poi_" + type.getKeyName());
+					Field f = R.string.class.getField("poi_" + type.getIconKeyName());
 					if (f != null) {
 						Integer in = (Integer) f.get(null);
 						return app.getString(in);
@@ -277,7 +248,6 @@ public class AppInitializer implements IProgress {
 		if (!osmandSettings.FOLLOW_THE_ROUTE.get()) {
 			osmandSettings.APPLICATION_MODE.set(osmandSettings.DEFAULT_APPLICATION_MODE.get());
 		}
-		osmandSettings.USE_DASHBOARD_INSTEAD_OF_DRAWER.set(true);
 		startTime = System.currentTimeMillis();
 		try {
 			app.bRouterServiceConnection = startupInit(BRouterServiceConnection.connect(app), BRouterServiceConnection.class);
@@ -297,11 +267,9 @@ public class AppInitializer implements IProgress {
 		app.favorites = startupInit(new FavouritesDbHelper(app), FavouritesDbHelper.class);
 		app.waypointHelper = startupInit(new WaypointHelper(app), WaypointHelper.class);
 		app.regions = startupInit(new OsmandRegions(), OsmandRegions.class);
-		String lang = osmandSettings.PREFERRED_LOCALE.get();
-		String clang = "".equals(lang) ? new Locale(lang).getLanguage() : lang;
-		app.regions.setLocale(clang);
+		app.regions.setLocale(app.getLanguage());
 		app.poiFilters = startupInit(new PoiFiltersHelper(app), PoiFiltersHelper.class);
-		app.rendererRegistry = startupInit(new RendererRegistry(), RendererRegistry.class);
+		app.rendererRegistry = startupInit(new RendererRegistry(app), RendererRegistry.class);
 		app.targetPointsHelper = startupInit(new TargetPointsHelper(app), TargetPointsHelper.class);
 	}
 
@@ -379,10 +347,10 @@ public class AppInitializer implements IProgress {
 			notifyEvent(InitEvents.FAVORITES_INITIALIZED);
 			// init poi types before indexes and before POI
 			initPoiTypes();
-			
+			notifyEvent(InitEvents.POI_TYPES_INITIALIZED);
 			app.resourceManager.reloadIndexesOnStart(this, warnings);
 			
-			app.resourceManager.initRenderers(this);
+			app.getRendererRegistry().initRenderers(this);
 			notifyEvent(InitEvents.INIT_RENDERERS);
 			// native depends on renderers
 			initNativeCore();
@@ -478,6 +446,7 @@ public class AppInitializer implements IProgress {
 					LOG.info("Native library could not be loaded!");
 				}
 			}
+			app.getResourceManager().initMapBoundariesCacheNative();
 		}
 	}
 	

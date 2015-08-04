@@ -98,6 +98,9 @@ public class CachedOsmandIndexes {
 				cblock.setType(mr.type);
 				addr.addCities(cblock);
 			}
+			for(String s : index.getAttributeTagsTable()) {
+				addr.addAdditionalTags(s);
+			}
 			fileIndex.addAddressIndex(addr);
 		}
 		
@@ -234,6 +237,9 @@ public class CachedOsmandIndexes {
 				cblock.filePointer = (int) mr.getOffset();
 				cblock.type = mr.getType();
 				mi.cities.add(cblock);
+			}
+			for(String s : index.getAdditionalTagsList()) {
+				mi.attributeTagsTable.add(s);
 			}
 			reader.addressIndexes.add(mi);
 			reader.indexes.add(mi);

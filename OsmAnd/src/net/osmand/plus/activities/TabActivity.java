@@ -14,14 +14,16 @@ import android.support.v4.view.ViewPager;
 public class TabActivity extends ActionBarProgressActivity {
 
 	public TabItem getTabIndicator(int resId, Class<?> fragment){
-		return new TabItem(getString(resId), fragment);
+		return new TabItem(resId, getString(resId), fragment);
 	}
 
 	public static class TabItem {
 		public final CharSequence mTitle;
 		public final Class<?> fragment;
+		public final int resId;
 
-		public TabItem(CharSequence mTitle, Class<?> fragment) {
+		public TabItem(int resId, CharSequence mTitle, Class<?> fragment) {
+			this.resId = resId;
 			this.mTitle = mTitle;
 			this.fragment = fragment;
 		}

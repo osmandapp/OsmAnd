@@ -10,7 +10,8 @@ import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.dialogs.FavoriteDialogs;
-import net.osmand.plus.helpers.ScreenOrientationHelper;
+import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import android.app.Dialog;
 import android.content.Intent;
@@ -58,7 +59,7 @@ public class NavigatePointFragment extends Fragment implements SearchActivityChi
 	private OsmandApplication app;
 
 	public View onCreateView(android.view.LayoutInflater inflater, android.view.ViewGroup container, Bundle savedInstanceState) {
-		view = inflater.inflate(R.layout.navigate_point, container, false);
+		view = inflater.inflate(R.layout.search_point, container, false);
 		setHasOptionsMenu(true);
 
 		location = null;
@@ -109,7 +110,7 @@ public class NavigatePointFragment extends Fragment implements SearchActivityChi
 	@Override
 	public void onCreateOptionsMenu(Menu onCreate, MenuInflater inflater) {
 		OsmandApplication app = (OsmandApplication) getActivity().getApplication();
-		boolean portrait = ScreenOrientationHelper.isOrientationPortrait(getActivity());
+		boolean portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
 		boolean light = app.getSettings().isLightActionBar();
 		Menu menu = onCreate;
 		if(getActivity() instanceof SearchActivity) {
@@ -122,7 +123,7 @@ public class NavigatePointFragment extends Fragment implements SearchActivityChi
 		}
 		MenuItem menuItem = menu.add(0, NAVIGATE_TO, 0, R.string.context_menu_item_directions_to);
 		MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-		menuItem = menuItem.setIcon(app.getIconsCache().getActionBarIcon(R.drawable.ic_action_gdirections_dark, light));
+		menuItem = menuItem.setIcon(app.getIconsCache().getIcon(R.drawable.ic_action_gdirections_dark, light));
 		menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 
 			@Override
@@ -135,11 +136,11 @@ public class NavigatePointFragment extends Fragment implements SearchActivityChi
 		if (targets.getPointToNavigate() != null) {
 			menuItem = menu.add(0, ADD_WAYPOINT, 0, R.string.context_menu_item_intermediate_point);
 			MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-			menuItem = menuItem.setIcon(app.getIconsCache().getActionBarIcon(R.drawable.ic_action_flage_dark, light));
+			menuItem = menuItem.setIcon(app.getIconsCache().getIcon(R.drawable.ic_action_flage_dark, light));
 		} else {
 			menuItem = menu.add(0, ADD_WAYPOINT, 0, R.string.context_menu_item_destination_point);
 			MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-			menuItem = menuItem.setIcon(app.getIconsCache().getActionBarIcon(R.drawable.ic_action_flag_dark, light));
+			menuItem = menuItem.setIcon(app.getIconsCache().getIcon(R.drawable.ic_action_flag_dark, light));
 		}
 			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 				@Override
@@ -151,7 +152,7 @@ public class NavigatePointFragment extends Fragment implements SearchActivityChi
 		//}
 		menuItem = menu.add(0, SHOW_ON_MAP, 0, R.string.shared_string_show_on_map);
 		MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-		menuItem = menuItem.setIcon(app.getIconsCache().getActionBarIcon(R.drawable.ic_action_marker_dark, light));
+		menuItem = menuItem.setIcon(app.getIconsCache().getIcon(R.drawable.ic_action_marker_dark, light));
 
 		menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			@Override
@@ -163,7 +164,7 @@ public class NavigatePointFragment extends Fragment implements SearchActivityChi
 		
 		menuItem = menu.add(0, ADD_TO_FAVORITE, 0, R.string.shared_string_add_to_favorites);
 		MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-		menuItem = menuItem.setIcon(app.getIconsCache().getActionBarIcon(R.drawable.ic_action_fav_dark, light));
+		menuItem = menuItem.setIcon(app.getIconsCache().getIcon(R.drawable.ic_action_fav_dark, light));
 
 		menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			@Override
@@ -178,26 +179,19 @@ public class NavigatePointFragment extends Fragment implements SearchActivityChi
 	public void onResume() {
 		super.onResume();
 
-		//Hardy: onResume() code is needed so that search origin is properly reflected in tab contents when origin has been changed on one tab, then tab is changed to another one.
-		location = null;
 		OsmandApplication app = (OsmandApplication) getActivity().getApplication();
-		//Intent intent = getSherlockActivity().getIntent();
-		//if (intent != null) {
-		//	if (intent.hasExtra(SearchActivity.SEARCH_LAT) && intent.hasExtra(SearchActivity.SEARCH_LON)) {
-		//		double lat = intent.getDoubleExtra(SearchActivity.SEARCH_LAT, 0);
-		//		double lon = intent.getDoubleExtra(SearchActivity.SEARCH_LON, 0);
-		//		if (lat != 0 || lon != 0) {
-		//			location = new LatLon(lat, lon);
-		//		}
-		//	}
-		//}
-		if (location == null && getActivity() instanceof SearchActivity) {
-			location = ((SearchActivity) getActivity()).getSearchPoint();
+
+		LatLon loc = null;
+		if (getActivity() instanceof SearchActivity) {
+			loc = ((SearchActivity) getActivity()).getSearchPoint();
 		}
-		if (location == null) {
-			location = app.getSettings().getLastKnownMapLocation();
+		if (loc == null) {
+			loc = app.getSettings().getLastKnownMapLocation();
 		}
-		locationUpdate(location);
+		if(!Algorithms.objectEquals(loc, location)) {
+			location = loc;
+			locationUpdate(location);
+		}
 	}
 	
 	@Override
@@ -385,19 +379,20 @@ public class NavigatePointFragment extends Fragment implements SearchActivityChi
 			LatLon loc = parseLocation();
 			double lat = loc.getLatitude();
 			double lon = loc.getLongitude();
+			PointDescription pd = new PointDescription(lat, lon);
 			if(mode == ADD_TO_FAVORITE) {
 				Bundle b = new Bundle();
 				Dialog dlg = FavoriteDialogs.createAddFavouriteDialog(getActivity(), b);
 				dlg.show();
-				FavoriteDialogs.prepareAddFavouriteDialog(getActivity(), dlg, b, lat, lon, PointDescription.LOCATION_POINT);
+				FavoriteDialogs.prepareAddFavouriteDialog(getActivity(), dlg, b, lat, lon, pd);
 			} else if (mode == NAVIGATE_TO) {
-				DirectionsDialogs.directionsToDialogAndLaunchMap(getActivity(), lat, lon, PointDescription.LOCATION_POINT);
+				DirectionsDialogs.directionsToDialogAndLaunchMap(getActivity(), lat, lon, pd);
 			} else if (mode == ADD_WAYPOINT) {
-				DirectionsDialogs.addWaypointDialogAndLaunchMap(getActivity(), lat, lon, PointDescription.LOCATION_POINT);
+				DirectionsDialogs.addWaypointDialogAndLaunchMap(getActivity(), lat, lon, pd);
 			} else if (mode == SHOW_ON_MAP){
 				OsmandApplication app = (OsmandApplication) getActivity().getApplication();
 				app.getSettings().setMapLocationToShow(lat, lon, Math.max(12, app.getSettings().getLastKnownMapZoom()),
-						PointDescription.LOCATION_POINT);
+						pd);
 				MapActivity.launchMapActivityMoveToTop(getActivity());
 			}
 			

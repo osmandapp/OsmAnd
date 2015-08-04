@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="about_version">Верзија:</string>
     <string name="about_settings">Oko</string>
     <string name="about_settings_descr">Верзија инфо, лиценце, чланови пројекта</string>
@@ -275,7 +276,7 @@
 	<string name="favorite_default_category">Остало</string>
 	<string name="favourites_edit_dialog_name">Име</string>
 	<string name="favourites_edit_dialog_category">Врста</string>
-	<string name="vector_map_not_needed">Не, хвала</string>
+	<string name="shared_string_no_thanks">Не, хвала</string>
 	<string name="basemap_missing">Основна мапа света (која покрива цео свет на малом увеличању) недостаје. Молим, преузмите World_basemap_x.obf ради целокупности средине.</string>
 	<string name="local_index_installed">Издање</string>
 	<string name="local_index_no_items_to_do">Нема ставки за %1$s</string>
@@ -390,5 +391,7 @@
     
     <string name="shared_string_my_location">Мој положај</string>
     <string name="osm_editing_manage">Управљајте</string>
-    <string name="home_button">Матица</string>
+    <string name="home_button">Кућа</string>
+    <string name="rendering_attr_subwayMode_name">Линије метроа</string>
+    <string name="search_radius_proximity">У близини</string>
     </resources>

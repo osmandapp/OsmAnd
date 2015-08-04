@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources><string name="offline_edition">Modifications hors-ligne</string>
   <string name="offline_edition_descr">Toujours utiliser l\'édition hors-ligne</string>
-  <string name="tip_recent_changes_0_7_1_t">"Changements en 0.7.1 :
+  <string name="tip_recent_changes_0_7_1_t">"Changements en 0.7.1 :poi_filter_closest_poi
 \n\t- Modification hors-ligne des PI
 \n\t- Option de suivi en ligne - envoyer ses coordonnées à un service web de façon périodique (lire la configuration dans les articles HowTo)
 \n\t- Afficher l\'itinéraire en cours d\'enregistrement sur la carte
@@ -179,7 +179,7 @@
   <string name="favorite_friends_category">Amis</string>
   <string name="favorite_places_category">Lieux</string>
   <string name="favorite_default_category">Autres</string>
-  <string name="vector_map_not_needed">Pas nécessaire</string>
+  <string name="shared_string_no_thanks">Pas nécessaire</string>
   <string name="basemap_missing">La carte mondiale de base est absente (couvrant le monde entier à faible zoom). Pensez à télécharger World_basemap_x.obf pour avoir un environnement complet.</string>
   <string name="vector_data_missing">Il n\'y a pas de cartes (\'hors-ligne\') sur la carte SD. Pensez à en télécharger pour utiliser OsmAnd hors-ligne.</string>
  
@@ -358,7 +358,7 @@
   <string name="m">m</string>
   <string name="old_map_index_is_not_supported">Le format obsolète de la carte \'\'{0}\'\' n\'\'est pas supporté</string>
   <string name="poi_filter_car_aid">Pour conducteurs</string>
-  <string name="poi_filter_closest_poi">Points d\'Intérêt les plus proches</string>
+  <string name="poi_filter_closest_poi">Plus proches points d\'intérêt (PI)</string>
   <string name="poi_filter_custom_filter">Filtre personnalisé</string>
   <string name="poi_filter_food_shop">Alimentation</string>
   <string name="poi_filter_for_tourists">Pour voyageurs</string>
@@ -535,7 +535,7 @@
   <string name="transport_stops_to_pass">nombre d\'arrêts :</string>
   <string name="transport_route_distance">Distance de l\'itinéraire :</string>
   <string name="transport">Transport</string>
-  <string name="shared_string_ok">OK</string>
+  <string name="shared_string_ok">Ok</string>
   <string name="show_transport_over_map_description">Afficher les arrêts de transport publics sur la carte</string>
   <string name="show_transport_over_map">Afficher les arrêts de transports publics</string>
   <string name="hello">Application de navigation OsmAnd</string>
@@ -550,7 +550,7 @@
   <string name="search_history_street">Rue :\n{0}\n{1}</string>
   <string name="search_history_int_streets">Intersection :\n{0} x {1} à {2}</string>
   <string name="search_history_building">Bâtiment :\n{0} {1}\n{2}</string>
-  <string name="favorite">Favori </string>
+  <string name="favorite">Favori</string>
   <string name="shared_string_clear_all">Supprimer tout</string>
   <string name="shared_string_history">Historique</string>
   <string name="uploading_data">Envoi des données…</string>
@@ -707,7 +707,7 @@
   <string name="shared_string_yes">Oui</string>
   <string name="shared_string_cancel">Annuler</string>
   <string name="shared_string_apply">Appliquer</string>
-  <string name="shared_string_add">Enregistrer</string>
+  <string name="shared_string_add">Ajouter</string>
   <string name="shared_string_no">Non</string>
   <string name="add_favorite_dialog_top_text">Nom du favori</string>
   <string name="add_favorite_dialog_default_favourite_name">Favoris</string>
@@ -915,7 +915,7 @@
   <string name="osmand_parking_pm">PM</string>
   <string name="osmand_parking_am">AM</string>
   <string name="osmand_parking_position_name">Emplacement de stationnement</string>
-  <string name="osmand_parking_plugin_description">Ce greffon permet d\'enregistrer l\'emplacement de stationnement de votre véhicule et, le cas échéant, d\'indiquer la durée de stationnement restante.</string>
+  <string name="osmand_parking_plugin_description">Ce greffon permet d\'enregistrer l\'emplacement de stationnement de votre véhicule et, si besoin, de mesurer la durée de stationnement restante. Un rappel peut même être ajouté à votre calendrier.</string>
   <string name="osmand_parking_plugin_name">Emplacement de stationnement</string>
   <string name="context_menu_item_add_parking_point">Marquer comme emplacement de stationnement</string>
   <string name="context_menu_item_delete_parking_point">Supprimer un emplacement de stationnement</string>
@@ -1063,7 +1063,7 @@
 	<string name="intermediate_point">Étape %1$s</string>
     <string name="gps_not_available">Veuillez activer le GPS dans les paramètres</string>
     <string name="map_widget_show_destination_arrow">Direction de la destination</string>
-    <string name="enable_plugin_monitoring_services">Activez le greffon de suivi pour utiliser les services d\'enregistrement des traces</string>
+    <string name="enable_plugin_monitoring_services">Activez le greffon d\'enregistrement d\'itinéraire pour utiliser les services d\'enregistrement de position (journalisation GPX, suivi en ligne)</string>
     <string name="non_optimal_route_calculation">Calcule un itinéraire éventuellement non optimal pour les trajets longues distances</string>
     <string name="rendering_attr_roadColors_description">Sélectionnez un thème de couleurs pour les routes :</string>
 	<string name="rendering_attr_roadColors_name">Thème de couleurs pour les routes</string>
@@ -1082,7 +1082,7 @@
     <string name="download_roads_only_maps">Cartes routières uniquement</string>
     <string name="incomplete_locale">incomplet</string>
 	<string name="no_buildings_found">Aucun numéro de bâtiment trouvé.</string>
-    <string name="search_villages_and_postcodes">Rechercher les villages et les codes postaux</string>
+    <string name="search_villages_and_postcodes">Rechercher plus de villages et codes postaux</string>
 	<string name="route_descr_lat_lon">Lat %1$.3f lon %2$.3f</string>
     <string name="route_descr_current_location">Position actuelle</string>
     
@@ -1309,7 +1309,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="distance_measurement_finish_editing">Terminer la mesure</string>
     <string name="distance_measurement_save_gpx">Enregistrer en GPX sous...</string>
     <string name="distance_measurement_load_gpx">Ouvrir un fichier GPX...</string>
-    <string name="wait_current_task_finished">Veuillez attendre jusqu\'à ce que la tâche actuelle soit terminée</string>
+    <string name="wait_current_task_finished">Veuillez attendre que la tâche en cours soit terminée</string>
     <string name="plugin_distance_point_time">temps</string>
     <string name="plugin_distance_point_hdop">précision</string>
     <string name="plugin_distance_point_speed">vitesse</string>
@@ -1484,7 +1484,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="routing_attr_avoid_motorway_name">Éviter les autoroutes</string>
 	<string name="routing_attr_avoid_motorway_description">Éviter les autoroutes</string>
 	<string name="routing_attr_weight_name">Limite de poids</string>
-	<string name="routing_attr_weight_description">Spécifiez la limite de poids à respecter pour emprunter les routes</string>
+	<string name="routing_attr_weight_description">Spécifiez la limite de poids qui doit être respectée sur les routes empruntées</string>
     <string name="select_gpx">Sélectionner GPX…</string>
     <string name="route_descr_select_destination">Sélectionnez la destination</string>
     <string name="shared_string_select_on_map">Sélectionner sur la carte</string>
@@ -1566,9 +1566,9 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 <string name="share_route_subject">Itinéraire partagé grâce à OsmAnd</string>
 	<string name="osmo_settings_uuid">Identifiant unique de l\'appareil</string>
 	<string name="osmo_settings_descr">Configurer les paramètres de suivi et définir votre canal de suivi personnel</string>
-	<string name="osmo_plugin_description">"Ce greffon permet un suivi temps-réel grâce à OsMo, voir http://osmo.mobi.\n\nCe système offre la possibilité de suivre d\'autres appareils ou d\'être suivi. Vous pouvez ainsi créer des groupes anonymes, partager vos positions et communiquer ensemble. Il y a différents paramètres pour le suivi de la session courante ou pour un suivi permanent.\n\nLes groupes anonymes sont limités à quelques jours et leurs fonctionnalités restreintes, ainsi, pas de contrôle à distance et pas d\'administrateur de groupe. Des groupes avec toutes les fonctionnalités peuvent être créés via le site web et seuls les utilisateurs enregistrés y ont accès. "</string>
-	<string name="osmo_plugin_name">Suivi OsMo</string>
-	<string name="osmo_settings">Suivi OsMo</string>
+	<string name="osmo_plugin_description">"Ce greffon permet un suivi temps-réel grâce à OsMo, voir http://osmo.mobi.\n\nCe système offre la possibilité de suivre tous les appareils d\'un groupe en temps réel. Il existe différents paramètres pour le suivi de la session courante ou pour un suivi permanent.\n\nLes groupes anonymes sont limités à quelques jours et leurs fonctionnalités restreintes, ainsi, pas de contrôle à distance et pas d\'administrateur de groupe. Des groupes avec toutes les fonctionnalités peuvent être créés via le site web et seuls les utilisateurs enregistrés y ont accès. "</string>
+	<string name="osmo_plugin_name">OsMo (Suivi OSM)</string>
+	<string name="osmo_settings">OsMo</string>
 	
 	<string name="osmo_io_error">Problème de connexion OSMo : </string>
 	<string name="osmo_mode_on">Arrêter session OsMo</string>
@@ -1630,7 +1630,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="osmo_activity">Suivi OpenStreetMap</string>
     <string name="osmo_control">Accès rapide OsMo</string>
     
-	<string name="import_file_favourites">Enregistrer sous fichier GPX ou transformer en favoris ?</string>
+	<string name="import_file_favourites">Enregistrer les points comme fichier GPX ou les transformer en favoris ?</string>
 	
 	<string name="color_red">Rouge</string>
 	<string name="color_pink">Rose</string>
@@ -1708,7 +1708,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="none_selected_gpx">Aucun fichier GPX sélectionné. Pour sélectionner, presser longuement sur une trace disponible.</string>
     
     <string name="local_index_select_gpx_file">Sélectionnez pour afficher</string>
-    <string name="osmo_group_information_desc">" - Tous les groupes créés sont publics ! Si vous souhaitez l\'anonymat, connectez votre appareil directement via des identifiants Tracker.\n- Le groupe peut comprendre jusqu\'à 16 personnes.\n- En cas d\'inactivité ou d\'activité d\'une seule personne sur 2 semaines, le groupe sera supprimé.\n- Vous pouvez restreindre l\'accès au groupe, uniquement sur invitation, mais pour contrôler le groupe, vous devez utiliser la console administrateur.\n- Si vous voulez créer un groupe sous d\'autres conditions, veuillez contacter http://osmo.mobi"</string>
+    <string name="osmo_group_information_desc">" - Tous les groupes créés sont publics ! Si vous souhaitez conserver l\'anonymat, connectez votre appareil directement via des identifiants Tracker.\n- Les groupes sont limités à 8 personnes.\n- En cas d\'inactivité ou d\'activité d\'un seul membre sur 2 semaines, le groupe sera automatiquement supprimé.\n- Vous pouvez gérer l\'accès au groupe grâce aux invitations, mais pour contrôler le groupe vous devez utiliser la console administrateur.\n- Si vous souhaitez créer un groupe sous d\'autres conditions, veuillez contacter http://osmo.mobi"</string>
     <string name="osmo_group_information">Veuillez lire ceci avant de créer un groupe !</string>
     <string name="osmo_not_signed_in">L\'authentification OsMo a échoué</string>
     <string name="osmo_gpx_points_downloaded">Points OsMo %1$s téléchargés.</string>
@@ -1731,7 +1731,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="lang_he">hébreux</string>
     <string name="forward">Suivant</string>
     <string name="home">Accueil</string>
-    <string name="live_monitoring_m_descr">Envoyer la position courante à un service Web si l\'enregistrement GPX est activé.</string>
+    <string name="live_monitoring_m_descr">Envoyer les positions à un service Web lorsque l\'enregistrement GPX est activé.</string>
 	<string name="live_monitoring_m">Suivi en ligne (GPX requis)</string>
     <string name="live_monitoring_start">Démarrer le suivi en ligne</string>
 	<string name="live_monitoring_stop">Arrêter le suivi en ligne</string>
@@ -1765,8 +1765,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="rendering_attr_subwayMode_name">Itinéraires de métropolitain</string>
  	<string name="rendering_attr_alpineHiking_name">Difficulté des randonnées en montagne</string>
     <string name="rendering_attr_alpineHiking_description">Afficher les chemins selon l\'échelle SAC</string>
-    <string name="rendering_attr_osmcTraces_name">Surcouche de symboles de rando</string>
-    <string name="rendering_attr_osmcTraces_description">Afficher les chemins selon les traces OSMC</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Surcouche de symboles de rando</string>
+    <string name="rendering_attr_hikingRoutesOSMC_description">Afficher les chemins selon les traces OSMC</string>
     
 	<string name="rendering_attr_coloredBuildings_name">Bâtiments colorés par type</string>
     <string name="arrival_distance_factor_early">Tôt</string>
@@ -1790,7 +1790,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="way_alarms">Alertes de circulation</string>
     <string name="speak_favorites">Annoncer les favoris proches</string>
     <string name="speak_poi">Annoncer les points d\'intérêt proches</string>
-    <string name="flat_list_waypoints">Tous</string>
+    <string name="shared_string_all">Tous</string>
     <string name="index_tours">Tours</string>
     <string name="record_plugin_description">"Ce greffon permet d\'enregistrer vos itinéraires au format GPX : soit automatiquement soit grâce à un bouton supplémentaire affiché sur la carte.\n\nLes traces ainsi enregistrées peuvent être partagées avec vos amis ou utilisées pour contribuer à OSM. Les sportifs peuvent utiliser ces enregistrements pour leurs entraînements. Certaines analyses des traces peuvent être réalisées directement dans OmsAnd (comme la vitesse moyenne, la durée de l\'itinéraire ...). Enfin les fichiers GPX locaux peuvent être exportés pour être utilisés par d\'autres applications. "</string>
     <string name="record_plugin_name">Enregistrement d\'itinéraire</string>
@@ -1799,10 +1799,10 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="distance">Distance</string>
     <string name="rendering_attr_publicTransportMode_name">Itinéraires de bus, tramways, et navettes</string>
 	<string name="save_track_to_gpx_globally">Enregistrer l\'itinéraire dans un fichier GPX</string>
-	<string name="save_track_to_gpx_globally_descr">L\'enregistrement de la position dans un fichier GPX peut être activé ou désactivé grâce au gadget sur la carte.</string>
+	<string name="save_track_to_gpx_globally_descr">L\'enregistrement des positions dans un fichier GPX peut être activé ou désactivé depuis le gadget de la carte</string>
 	<string name="save_track_interval_globally">Intervalle d\'enregistrement</string>
 	<string name="confirm_every_run">Toujours demander</string>
-	<string name="save_global_track_interval_descr">Sélectionnez l\'intervalle d\'enregistrement des traces (activé via le gadget d\'enregistrement GPX sur l\'écran principal)</string>
+	<string name="save_global_track_interval_descr">Sélectionnez l\'intervalle d\'enregistrement des traces (activé via le gadget d\'enregistrement GPX depuis la carte)</string>
 	<string name="save_global_track_interval">Intervalle d\'enregistrement par défaut</string>
 	<string name="traffic_warning_speed_limit">Limite de vitesse</string>
     <string name="traffic_warning_border_control">Contrôle aux frontières</string>
@@ -1814,7 +1814,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="local_index_description">Cliquez sur n\'importe quel élément pour voir plus de détails, maintenez appuyé pour désactiver ou supprimer. Données actuellement sur l\'appareil (%1$s libre) :</string>
 	<string name="text_size">Taille du texte</string>
     <string name="fav_point_dublicate">Ce nom est déjà utilisé pour un favori.</string>
-    <string name="fav_point_dublicate_message">Nous avons modifié le nom de votre favori en %1$s pour éviter les doublons.</string>
+    <string name="fav_point_dublicate_message">Nous avons modifié le nom de votre favori en %1$s pour éviter un doublon.</string>
     <string name="text_size_descr">Sélectionnez la taille du texte sur la carte.</string>
     
     
@@ -1943,9 +1943,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="share_note">Partager la note</string>
 	
 	<string name="shared_string_export">Exporter</string>
-	<string name="plugin_ski_descr">Activer cette vue bascule vers le style \"Hiver et Ski\", affichant le relief en conditions hivernales ainsi que les pistes de ski.
-		\n\nCet affichage peut être annulé soit en le désactivant ici soit en modifiant le Style de carte sous \"Configurer la carte\".
-	</string>
+	<string name="plugin_ski_descr">"Activer cette vue bascule vers le style \"Hiver et Ski\", affichant le relief en conditions hivernales ainsi que les pistes de ski (ventilées par difficultés grâce à des codes couleurs) ou les remontées mécaniques.\n\nCet affichage peut être annulé soit en le désactivant ici soit en modifiant le Style de carte sous \"Configurer la carte\". "</string>
 	<string name="plugin_touringview_descr">"Activer cette vue bascule vers le style d\'affichage \"Grand tourisme\", affichant une carte très détaillée adaptée aux voyageurs et chauffeurs routiers.
 \n\nCet affichage, quelque soit le niveau de zoom, fournit le maximum de détails disponibles. Chaque type de route (routes, pistes, chemins ...) est distingué de manière explicite grâce à des codes couleurs, ce qui est particulièrement utile en cas de conduite de grands véhicules. Il existe aussi des options pour l\'affichage des pistes cyclables ou des chemins de randonnée.\n\nIl n\'est pas nécessaire de télécharger une carte supplémentaire, cet affichage s\'appuyant sur les cartes standards.
 \n\nCet affichage peut être annulé soit en le désactivant ici soit en modifiant le Style de carte sous \"Configurer la carte\". "</string>
@@ -2012,4 +2010,100 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="shared_string_show_description">Afficher la description</string>
 	<string name="shared_string_search">Rechercher</string>
 	<string name="shared_string_places">Lieux</string>
-	</resources>
+	<string name="rendering_attr_OSMMapperAssistant_name">Assistant pour la cartographie OSM</string>
+	<string name="shared_string_manage">Gérer</string>
+	<string name="shared_string_edit">Modifier</string>
+	<string name="shared_string_open">Ouvrir</string>
+    <string name="filter_poi_hint">Filtrer par nom</string>
+    <string name="search_poi_category_hint">Rechercher partout</string>
+    <string name="index_name_netherlands">Europe - Pays-Bas</string>
+	<string name="rendering_value__name">Par défaut</string>
+    <string name="rendering_value_highContrastRoads_name">Routes en contraste élevé</string>
+	<string name="specified_directiory_not_writeable">Impossible de créer les cartes dans le dossier spécifié</string>
+	<string name="copying_osmand_file_failed">Échec lors de la copie des fichiers</string>    
+    <string name="storage_directory_external">Stockage externe</string>
+    <string name="storage_directory_multiuser">Stockage multi-utilisateurs</string>
+    <string name="storage_directory_internal_app">Mémoire interne de l\'application</string>
+    <string name="storage_directory_manual">Défini manuellement</string>
+    <string name="storage_directory_default">Mémoire interne</string>
+    <string name="storage_directory">Stockage de la carte</string>
+    <string name="shared_string_copy">Copier</string>
+    <string name="application_dir_change_warning3">Souhaitez-vous aussi qu\'OsmAnd copie ses fichiers de données vers la nouvelle destination ?</string>
+    <string name="rendering_attr_hideHouseNumbers_name">Masquer les numéros dans les rues</string>
+    <string name="routing_attr_avoid_borders_name">Ne pas franchir les frontières</string>
+	<string name="routing_attr_avoid_borders_description">Éviter de franchir les frontières entre pays</string>
+	<string name="routing_attr_height_name">Limite de hauteur</string>
+	<string name="routing_attr_height_description">Précisez la hauteur du véhicule qui doit être respectée sur les routes empruntées</string>
+    <string name="use_fast_recalculation">Recalcule intelligent de l\'itinéraire</string>
+	<string name="use_fast_recalculation_desc">Recalculer uniquement le début de l\'itinéraire pour les longs trajets</string>
+<string name="osmo_share_my_location">Partager ma position</string>
+    <string name="shared_string_logoff">Se déconnecter</string>
+    <string name="rendering_value_disabled_name">Désactivé</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Balisage couleur du terrain</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Représentation selon la granularité du réseau</string>
+    <string name="osm_edit_context_menu_delete">Supprimer la modification OSM</string>    
+    <string name="shared_string_show_details">Afficher les détails</string>
+    <string name="read_full_article">Lire l\'article complet (en ligne)</string>
+    <string name="download_wikipedia_item">Wikipédia</string>
+    <string name="local_indexes_cat_wiki">Wikipédia</string>
+    <string name="download_wikipedia_maps">Wikipedia</string>
+    <string name="shared_string_import2osmand">Importer dans OsmAnd</string>
+    <string name="local_recordings_delete_all_confirm">Vous allez supprimer %1$d notes. Etes-vous sûrs ?</string>
+	<string name="gps_network_not_enabled">Le service de localisation est arrêté. Souhaitez-vous l’activer ?</string>
+    <string name="disable_recording_once_app_killed_descrp">Met en pause l\'enregistrement de la trace GPX lors de l\'arrêt d\'OsmAnd (via les applications récentes) et l\'indicateur disparaîtra de la barre de notification Android.</string>
+	<string name="disable_recording_once_app_killed">Interdire la journalisation autonome</string>
+    <string name="download_wikipedia_files">Souhaitez-vous télécharger les données Wikipédia (%1$s MB) ?</string>
+    <string name="lang_ms">Malaisien</string>
+    <string name="lang_ht">Haïtien</string>
+    <string name="lang_gl">Galicien</string>
+    <string name="lang_et">Estonien</string>
+    <string name="lang_es_ar">Espagnol argentin</string>
+    <string name="lang_pms">Piémontais</string>
+    <string name="lang_sh">Serbo-croate</string>
+    <string name="lang_br">Breton</string>
+    <string name="lang_sq">Albanais</string>
+    <string name="lang_is">Islandais</string>
+    <string name="lang_ga">Irlandais</string>
+    <string name="lang_la">Latin</string>
+    <string name="lang_ku">Kurde</string>
+    <string name="lang_lb">Luxembourgeois</string>
+    <string name="lang_eo">Esperanto</string>
+    <string name="light_theme">Clair</string>
+    <string name="dark_theme">Sombre</string>
+    <string name="lang_bn">Bengali</string>
+    <string name="lang_nv">Navajo</string>
+    <string name="lang_th">Thaïlandais</string>
+    <string name="lang_nn">Norvégien</string>
+    <string name="archive_wikipedia_data">Le format de vos données Wikipédia hors-ligne est obsolète. Voulez-vous archiver ces données ?</string>
+    <string name="lang_te">Télougou</string>
+    <string name="restart_is_required">Afin de prendre en compte toutes vos modifications, vous devez redémarrer l\'application.</string>
+    <string name="rendering_attr_currentTrackColor_name">Couleur GPX</string>
+    <string name="rendering_attr_currentTrackWidth_name">Largeur GPX</string>
+    <string name="rendering_value_red_name">Rouge</string>
+    <string name="rendering_value_translucent_red_name">Rouge translucide</string>
+    <string name="rendering_value_translucent_orange_name">Orange translucide</string>
+    <string name="rendering_value_yellow_name">Jaune</string>
+    <string name="rendering_value_translucent_yellow_name">Jaune translucide</string>
+    <string name="rendering_value_lightgreen_name">Vert clair</string>
+    <string name="rendering_value_translucent_lightgreen_name">Vert clair translucide</string>
+    <string name="rendering_value_green_name">Vert</string>
+    <string name="rendering_value_translucent_green_name">Vert translucide</string>
+    <string name="rendering_value_lightblue_name">Bleu clair</string>
+    <string name="rendering_value_translucent_lightblue_name">Bleu clair translucide</string>
+    <string name="rendering_value_blue_name">Bleu</string>
+    <string name="rendering_value_translucent_blue_name">Bleu translucide</string>
+    <string name="rendering_value_purple_name">Violet</string>
+    <string name="rendering_value_translucent_purple_name">Violet translucide</string>
+    <string name="lang_az">Azéri</string>
+    <string name="lang_bpy">Bishnupriya</string>
+    <string name="lang_ta">Tamoul</string>
+    <string name="lang_ml">Malayâlam</string>
+    <string name="lang_os">Ossète</string>
+    <string name="lang_nb">Norvégien, Bokmål</string>
+    <string name="lang_vo">Volapük</string>
+    <string name="lang_new">Néwari / Népal Bhasa</string>
+    <string name="lang_ceb">Cébouano</string>
+    <string name="lang_tl">Tagalog</string>
+    <string name="rendering_value_default13_name">Par défaut (13)</string>
+	<string name="rendering_value_defaultTranslucentCyan_name">Par défaut (cyan translucide)</string>
+    </resources>

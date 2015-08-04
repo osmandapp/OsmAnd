@@ -1,20 +1,5 @@
 package net.osmand.plus.dashboard;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
-import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper;
-import net.osmand.plus.TargetPointsHelper.TargetPoint;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
-import net.osmand.plus.dialogs.DirectionsDialogs;
-import net.osmand.plus.helpers.WaypointDialogHelper;
-import net.osmand.plus.helpers.WaypointHelper;
-import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
@@ -31,6 +16,22 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
+import net.osmand.plus.R;
+import net.osmand.plus.TargetPointsHelper;
+import net.osmand.plus.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
+import net.osmand.plus.dialogs.DirectionsDialogs;
+import net.osmand.plus.helpers.WaypointDialogHelper;
+import net.osmand.plus.helpers.WaypointHelper;
+import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 /**
  */
 public class DashWaypointsFragment extends DashLocationFragment {
@@ -39,7 +40,7 @@ public class DashWaypointsFragment extends DashLocationFragment {
 	private static boolean SHOW_ALL;
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+	public View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_common_fragment, container, false);
 		((TextView) view.findViewById(R.id.fav_text)).setText(getString(R.string.waypoints));
 		
@@ -188,7 +189,7 @@ public class DashWaypointsFragment extends DashLocationFragment {
 		Builder builder = new AlertDialog.Builder(view.getContext());
 		// Stop the navigation
 		builder.setTitle(getString(R.string.delete_target_point));
-		builder.setMessage(getString(R.string.clear_destination));
+		builder.setMessage(PointDescription.getSimpleName(point, getActivity()));
 		builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -265,6 +266,4 @@ public class DashWaypointsFragment extends DashLocationFragment {
 		});
 		optionsMenu.show();
 	}
-
-
 }

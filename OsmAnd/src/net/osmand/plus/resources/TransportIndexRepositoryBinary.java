@@ -101,7 +101,7 @@ public class TransportIndexRepositoryBinary implements TransportIndexRepository 
 			List<TransportRoute> routes = file.getTransportRouteDescriptions(stop);
 			if(routes != null){
 				for(TransportRoute route : routes){
-					res.add(f.format(new String[] { route.getRef() + "", route.getType() + "", route.getName() + "", route.getEnName() + "" })); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+					res.add(f.format(new String[] { route.getRef() + "", route.getType() + "", route.getName() + "", route.getEnName(true) + "" })); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 				}
 			}
 		} catch (IOException e) {

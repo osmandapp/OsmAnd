@@ -3,6 +3,7 @@ package net.osmand.plus.download;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -14,6 +15,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
@@ -23,10 +25,13 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.download.DownloadFileHelper.DownloadFileShowWarning;
+import net.osmand.plus.download.DownloadOsmandIndexesHelper.AssetIndexItem;
 import net.osmand.plus.helpers.DatabaseHelper;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.util.Algorithms;
+
 import org.apache.commons.logging.Log;
+
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
@@ -93,6 +98,11 @@ public class DownloadIndexesThread {
 		return indexFiles != null ? indexFiles.getIndexFiles() : null;
 	}
 
+	
+	public IndexFileList getIndexFiles() {
+		return indexFiles;
+	}
+	
 	public Map<String, String> getIndexFileNames(){
 		return indexFileNames;
 	}
@@ -125,7 +135,9 @@ public class DownloadIndexesThread {
 		return indexFiles != null && indexFiles.isDownloadedFromInternet();
 	}
 
-	public List<IndexItem> getItemsToUpdate() { return itemsToUpdate;}
+	public List<IndexItem> getItemsToUpdate() {
+		return itemsToUpdate;
+	}
 
 
 	public class DownloadIndexesAsyncTask extends BasicProgressAsyncTask<IndexItem, Object, String> implements DownloadFileShowWarning {
@@ -151,7 +163,7 @@ public class DownloadIndexesThread {
 				if (o instanceof DownloadEntry) {
 					if (uiActivity != null) {
 						uiActivity.downloadListUpdated();
-						uiActivity.updateDownloadButton(false);
+						uiActivity.updateDownloadButton();
 						DownloadEntry item = (DownloadEntry)o;
 						String name = item.item.getBasename();
 						long count = dbHelper.getCount(name, DatabaseHelper.DOWNLOAD_ENTRY) + 1;
@@ -166,7 +178,7 @@ public class DownloadIndexesThread {
 					entriesToDownload.remove(o);
 					if (uiActivity != null) {
 						uiActivity.downloadListUpdated();
-						uiActivity.updateDownloadButton(false);
+						uiActivity.updateDownloadButton();
 						IndexItem item = (IndexItem)o;
 
 						long count = dbHelper.getCount(item.getBasename(), DatabaseHelper.DOWNLOAD_ENTRY) + 1;
@@ -365,9 +377,6 @@ public class DownloadIndexesThread {
 			} else {
 				res = downloadFileHelper.downloadFile(de, this, filesToReindex, this, forceWifi);
 			}
-			if (res && de.attachedEntry != null) {
-				return downloadFile(de.attachedEntry, filesToReindex, forceWifi);
-			}
 			return res;
 		}
 
@@ -419,7 +428,7 @@ public class DownloadIndexesThread {
 							AccessibleToast.makeText(uiActivity, R.string.basemap_was_selected_to_download,
 									Toast.LENGTH_LONG).show();
 							if (uiActivity instanceof DownloadActivity){
-								uiActivity.findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
+								((DownloadActivity)uiActivity).updateDownloadButton();
 							}
 						}
 					}
@@ -578,12 +587,33 @@ public class DownloadIndexesThread {
 				!date.equals(indexfilesdate)) {
 			if ((item.getType() == DownloadActivityType.NORMAL_FILE && !item.extra) ||
 					item.getType() == DownloadActivityType.ROADS_FILE ||
+					item.getType() == DownloadActivityType.WIKIPEDIA_FILE ||
 					item.getType() == DownloadActivityType.SRTM_COUNTRY_FILE){
 				outdated = true;
 			} else {
 				long itemSize = item.getContentSize();
-				File file = new File(item.getType().getDownloadFolder(app, item), sfName);
-				long oldItemSize = file.length();
+				long oldItemSize = 0;
+				if(item.getType() == DownloadActivityType.VOICE_FILE) {
+					if(item instanceof AssetIndexItem) {
+						File file = new File(((AssetIndexItem) item).getDestFile());
+						oldItemSize = file.length();
+					} else {
+						File fl = new File(item.getType().getDownloadFolder(app, item), sfName +"/_config.p");
+						if (fl.exists()) {
+							oldItemSize = fl.length();
+							try {
+								InputStream is = ctx.getAssets().open("voice/" + sfName + "/config.p");
+								if (is != null) {
+									itemSize = is.available();
+									is.close();
+								}
+							} catch (IOException e) {
+							}
+						}
+					}
+				}
+				
+				
 				if (itemSize != oldItemSize){
 					outdated = true;
 				}

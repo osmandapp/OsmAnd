@@ -102,7 +102,7 @@ public class TargetPointsHelper {
 		List<LatLon> ips = settings.getIntermediatePoints();
 		List<String> desc = settings.getIntermediatePointDescriptions(ips.size());
 		for(int i = 0; i < ips.size(); i++) {
-			intermediatePoints.add(new TargetPoint(ips.get(i), PointDescription.deserializeFromString(desc.get(i)), i));
+			intermediatePoints.add(new TargetPoint(ips.get(i), PointDescription.deserializeFromString(desc.get(i), ips.get(i)), i));
 		}
 	}
 	
@@ -290,7 +290,7 @@ public class TargetPointsHelper {
 			return false;
 		}
 		Location current = routingHelper.getLastProjection();
-		double dist = 300000;
+		double dist = 400000;
 		List<TargetPoint> list = getIntermediatePointsWithTarget();
 		if(!list.isEmpty()) {
 			if(current != null && MapUtils.getDistance(list.get(0).point, current.getLatitude(), current.getLongitude()) > dist) {

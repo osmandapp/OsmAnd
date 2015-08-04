@@ -4,7 +4,7 @@
 
     The code in that repository is mainly covered by *GPLv3*, except some 3rd party libs and resources.
     ATTENTION: please be aware that some artwork has proprietary license.
-    EXCEPTION of GPLv3 :
+    EXCEPTION of GPLv3:
     * Publishing applications using the OsmAnd GPLv3 code to Google Play, Amazon Market or Apple Store should be done with written permission*
 
     Main AUTHORS (more detailed list in AUTHORS):
@@ -40,13 +40,13 @@
 
     * UI Design and UX work, such as layout, icons is covered by CC-BY-ND
         - https://github.com/osmandapp/Osmand/tree/master/OsmAnd/res and others
-        
+
     * Map icons are taken from sjjb and some are drawn and distributed under Public Domain (except icons8)
         - https://github.com/osmandapp/OsmAnd-resources/tree/master/icons/svg
 
-    * Integration with QT library in (https://github.com/osmandapp/Osmand-core/) - dynamic linking
-        - LGPL (https://qt-project.org/products/licensing)
-        
+    * Integration with Qt library in (https://github.com/osmandapp/Osmand-core/) - dynamic linking
+        - LGPL (http://www.qt.io/qt-licensing-terms/)
+
     * Map icons and their derived primitives are covered by proprietary license:
         - © icons8.com (https://github.com/osmandapp/OsmAnd-resources/tree/master/icons/svg/icons8)
 
@@ -96,7 +96,7 @@
         - sqlite-jdbc-3.7.6.3-20110609.081603-3.jar
         - h2-latest.jar
 
-    * Special tools for new rendering (GPLv3) 
+    * Special tools for new rendering (GPLv3)
         - https://github.com/osmandapp/OsmAnd-tools/tree/master/obf-inspector
         - https://github.com/osmandapp/OsmAnd-tools/tree/master/obf-verifier
         - https://github.com/osmandapp/OsmAnd-tools/tree/master/route-tester
@@ -107,5 +107,3 @@
     * Data files
         - Country boundaries - https://github.com/osmandapp/OsmAnd-misc/tree/master/osm-planet/geo-polygons © by Geofabrik - data free to use
         - Country boundaries - https://github.com/osmandapp/OsmAnd-misc/tree/master/osm-planet/gislab-polygons © by http://be.gis-lab.info - data free to use
-
-

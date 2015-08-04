@@ -8,7 +8,7 @@
 		android:id="@+id/current_track"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:background="?attr/card_bg"
+		android:background="?attr/bg_card"
 		android:orientation="vertical">
 
 		<include
@@ -17,48 +17,7 @@
 			android:layout_height="wrap_content"/>
 
 	</LinearLayout>
-
-	<LinearLayout android:id="@+id/on_map_layout"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:background="?attr/card_bg"
-		android:visibility="gone"
-		android:orientation="vertical">
-
-		<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:orientation="horizontal">
-
-			<TextView
-				android:layout_width="0dp"
-				android:layout_height="wrap_content"
-				android:layout_weight="1"
-				android:text="@string/shared_string_show_on_map"/>
-
-			<Button
-				android:id="@+id/turn_off_all"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				style="?attr/dashboardGeneralButtonStyle"
-				android:textColor="@color/color_distance"
-				android:text="@string/shared_string_deselect_all"/>
-
-		</LinearLayout>
-
-		<View
-			android:layout_width="match_parent"
-			android:layout_height="1dp"
-			android:background="?attr/dashboard_divider"/>
-
-
-		<ListView
-			android:id="@+id/gpx_on_map"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"/>
-	</LinearLayout>
-
-	<ExpandableListView
+ 	<ExpandableListView
 		android:id="@android:id/list"
 		android:layout_width="fill_parent"
 		android:layout_height="0dp"

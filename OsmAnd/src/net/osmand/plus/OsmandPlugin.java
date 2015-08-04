@@ -64,9 +64,10 @@ public abstract class OsmandPlugin {
 	
 	/**
 	 * Initialize plugin runs just after creation
-	 * @param activity TODO
 	 */
-	public abstract boolean init(OsmandApplication app, Activity activity);
+	public boolean init(OsmandApplication app, Activity activity) {
+		return true;
+	}
 	
 	public void setActive(boolean active) {
 		this.active = active;
@@ -163,6 +164,9 @@ public abstract class OsmandPlugin {
 			plugin.setActive(false);
 		}
 		app.getSettings().enablePlugin(plugin.getId(), enable);
+		if(activity instanceof MapActivity) {
+			plugin.updateLayers(((MapActivity) activity).getMapView(), (MapActivity) activity);
+		}
 		return true;
 	}
 	
@@ -209,7 +213,7 @@ public abstract class OsmandPlugin {
 	}
 	
 	public static void refreshLayers(OsmandMapTileView mapView, MapActivity activity) {
-		for (OsmandPlugin plugin : getEnabledPlugins()) {
+		for (OsmandPlugin plugin : getAvailablePlugins()) {
 			plugin.updateLayers(mapView, activity);
 		}
 	}
@@ -241,6 +245,16 @@ public abstract class OsmandPlugin {
 	@SuppressWarnings("unchecked")
 	public static <T extends OsmandPlugin> T getEnabledPlugin(Class<T> clz) {
 		for(OsmandPlugin lr : getEnabledPlugins()) {
+			if(clz.isInstance(lr)){
+				return (T) lr;
+			}
+		}
+		return null;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static <T extends OsmandPlugin> T getPlugin(Class<T> clz) {
+		for(OsmandPlugin lr : getAvailablePlugins()) {
 			if(clz.isInstance(lr)){
 				return (T) lr;
 			}

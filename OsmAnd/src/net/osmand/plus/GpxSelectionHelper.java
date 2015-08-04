@@ -27,6 +27,7 @@ public class GpxSelectionHelper {
 
 	private static final String CURRENT_TRACK = "currentTrack";
 	private static final String FILE = "file";
+	private static final String COLOR = "color";
 	private OsmandApplication app;
 	// save into settings
 //	public final CommonPreference<Boolean> SHOW_CURRENT_GPX_TRACK = 
@@ -307,6 +308,10 @@ public class GpxSelectionHelper {
 							p.startTask(getString(R.string.loading_smth, fl.getName()), -1);
 						}
 						GPXFile gpx = GPXUtilities.loadGPXFile(app, fl);
+						if(obj.has(COLOR)) {
+							int clr = Algorithms.parseColor(obj.getString(COLOR));
+							gpx.setColor(clr);
+						}
 						if(gpx.warning != null) {
 							save = true;
 						} else {
@@ -336,6 +341,9 @@ public class GpxSelectionHelper {
 						obj.put(CURRENT_TRACK, true);
 					} else if(!Algorithms.isEmpty(s.gpxFile.path)) {
 						obj.put(FILE, s.gpxFile.path);
+						if(s.gpxFile.getColor(0) != 0) {
+							obj.put(COLOR, Algorithms.colorToString(s.gpxFile.getColor(0)));
+						}
 					}
 				} catch (JSONException e) {
 					e.printStackTrace();
@@ -372,8 +380,8 @@ public class GpxSelectionHelper {
 		return sf;
 	}
 	
-	public SelectedGpxFile selectGpxFile(GPXFile gpx, boolean show, boolean showNavigationDialog) {
-		SelectedGpxFile sf = selectGpxFileImpl(gpx, show, showNavigationDialog);
+	public SelectedGpxFile selectGpxFile(GPXFile gpx, boolean show, boolean notShowNavigationDialog) {
+		SelectedGpxFile sf = selectGpxFileImpl(gpx, show, notShowNavigationDialog);
 		saveCurrentSelections();
 		return sf;
 	}
@@ -387,7 +395,7 @@ public class GpxSelectionHelper {
 		private int color;
 		private GPXTrackAnalysis trackAnalysis;
 		private long modifiedTime = -1;
-		private List<List<WptPt>> processedPointsToDisplay = new ArrayList<List<WptPt>>();
+		private List<TrkSegment> processedPointsToDisplay = new ArrayList<TrkSegment>();
 		private boolean routePoints;
 
 		private List<GpxDisplayGroup> displayGroups;
@@ -428,11 +436,11 @@ public class GpxSelectionHelper {
 			return routePoints;
 		}
 		
-		public List<List<WptPt>> getPointsToDisplay() {
+		public List<TrkSegment> getPointsToDisplay() {
 			return processedPointsToDisplay;
 		}
 		
-		public List<List<WptPt>> getModifiablePointsToDisplay() {
+		public List<TrkSegment> getModifiablePointsToDisplay() {
 			return processedPointsToDisplay;
 		}
 		

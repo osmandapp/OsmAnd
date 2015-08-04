@@ -137,16 +137,16 @@ public class ContextMenuAdapter {
 		}
 		int lstLight = iconListLight.get(pos);
 		if(lstLight != 0) {
-			return ctx.getIconsCache().getActionBarIcon(lstLight, light);
+			return ctx.getIconsCache().getIcon(lstLight, light);
 		}
 		return null;
 	}
 	
 	public int getBackgroundColor(Context ctx, boolean holoLight) {
 		if (holoLight) {
-			return ctx.getResources().getColor(R.color.color_white);
+			return ctx.getResources().getColor(R.color.bg_color_light);
 		} else {
-			return ctx.getResources().getColor(R.color.list_background_dark);
+			return ctx.getResources().getColor(R.color.bg_color_dark);
 		}
 	}
 	

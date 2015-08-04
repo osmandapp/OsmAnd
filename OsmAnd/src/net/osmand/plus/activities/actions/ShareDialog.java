@@ -96,7 +96,7 @@ public class ShareDialog {
 			if(type == ACTION) {
 				return content;
 			} else if(type == VIEW) {
-				return ctx.getString(R.string.show_details);
+				return ctx.getString(R.string.shared_string_show_details);
 			} else if(type == EMAIL) {
 				return "Email";
 			} else if(type == SMS) {

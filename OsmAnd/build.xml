@@ -78,7 +78,6 @@
 	<target name="copy_resources">
 		<copy todir="assets">
 			<fileset dir="../../resources/">
-				<include name="specialphrases/**" />
 				<include name="voice/**/*.p" />
 			</fileset>
 		</copy>
@@ -93,7 +92,7 @@
 			</fileset>
 		</copy>
 		<sync todir="assets/help/">
-			<fileset dir="../../help/">
+			<fileset dir="../../help/help">
 				<include name="*.html" />
 				<include name="images/**/*.png" />
 			</fileset>
@@ -197,7 +196,7 @@
 				<replaceregexp file="res/values/no_translate.xml" match='"app_name"&gt;(.*)&lt;' replace='"app_name"&gt;${app.name}&lt;' byline="true" />
 				<replaceregexp file="res/layout/search_address.xml" match='xmlns:custom="http://schemas.android.com/apk/res/(.*)"' 
 					replace='xmlns:custom="http://schemas.android.com/apk/res/${package.name}"' byline="true" />
-				<replaceregexp file="res/layout/navigate_point.xml" match='xmlns:custom="http://schemas.android.com/apk/res/(.*)"' 
+				<replaceregexp file="res/layout/search_point.xml" match='xmlns:custom="http://schemas.android.com/apk/res/(.*)"' 
 					replace='xmlns:custom="http://schemas.android.com/apk/res/${package.name}"' byline="true" />
 			</then>
 			</if>

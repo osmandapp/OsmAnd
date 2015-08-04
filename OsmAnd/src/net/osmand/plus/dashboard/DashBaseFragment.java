@@ -1,65 +1,127 @@
 package net.osmand.plus.dashboard;
 
-import net.osmand.plus.OsmAndAppCustomization;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.activities.MapActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.location.Location;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewCompat;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import net.osmand.plus.OsmAndAppCustomization;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.widgets.tools.SwipeDismissTouchListener;
 
 /**
  * Created by Denis on 24.11.2014.
  */
 public abstract class DashBaseFragment extends Fragment {
-
 	protected DashboardOnMap dashboard;
 
-	public OsmandApplication getMyApplication(){
-		if (getActivity() == null){
+	public interface DismissListener {
+		void onDismiss();
+	}
+
+	public OsmandApplication getMyApplication() {
+		if (getActivity() == null) {
 			return null;
 		}
 		return (OsmandApplication) getActivity().getApplication();
 	}
-	
+
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-		if(activity instanceof MapActivity) {
+		if (activity instanceof MapActivity) {
 			dashboard = ((MapActivity) activity).getDashboard();
 			dashboard.onAttach(this);
 		}
 	}
-	
-	public abstract void onOpenDash() ;
-	
+
+	@Nullable
+	@Override
+	final public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+								   @Nullable Bundle savedInstanceState) {
+		View childView = initView(inflater, container, savedInstanceState);
+		if (isDismissAllowed()) {
+			childView.setOnTouchListener(new SwipeDismissTouchListener(childView, null,
+					new SwipeDismissTouchListener.DismissCallbacks() {
+						@Override
+						public boolean canDismiss(Object token) {
+							return true;
+						}
+
+						@Override
+						public void onDismiss(View view, Object token, boolean isSwipeRight) {
+							if (isSwipeRight) {
+								getDismissCallback().onDismiss();
+							} else {
+								// TODO show settings card
+							}
+						}
+					}));
+			if (getDismissCallback() == null) {
+				defaultDismissListener = new DefaultDismissListener(getParentView(), dashboard, getTag(),
+						childView);
+			}
+		}
+		return childView;
+	}
+
+	public abstract View initView(LayoutInflater inflater, @Nullable ViewGroup container,
+								  @Nullable Bundle savedInstanceState);
+
+	public DismissListener getDismissCallback() {
+		return defaultDismissListener;
+	}
+
+	public boolean isDismissAllowed() {
+		return true;
+	}
+
+	@Override
+	public boolean getUserVisibleHint() {
+		return super.getUserVisibleHint();
+	}
+
+	public abstract void onOpenDash();
+
 	public void onCloseDash() {
 	}
-	
+
 	@Override
 	public final void onPause() {
 		// use on close 
 		super.onPause();
 		onCloseDash();
 	}
-	
+
+	public void closeDashboard() {
+		dashboard.hideDashboard(false);
+	}
+
 	@Override
 	public final void onResume() {
 		// use on open update
 		super.onResume();
-		if(dashboard != null && dashboard.isVisible() && getView() != null) {
+		if (dashboard != null && dashboard.isVisible() && getView() != null) {
 			onOpenDash();
 		}
 	}
-	
-	
+
+
 	public void onLocationCompassChanged(Location l, double compassValue) {
 	}
-	
+
 	@Override
 	public void onDetach() {
 		super.onDetach();
-		if(dashboard != null) {
+		if (dashboard != null) {
 			dashboard.onDetach(this);
 			dashboard = null;
 		}
@@ -74,4 +136,44 @@ public abstract class DashBaseFragment extends Fragment {
 		activity.startActivity(favorites);
 	}
 
+	protected View getParentView() {
+		return dashboard.getParentView();
+	}
+
+	private DismissListener defaultDismissListener;
+
+	private static class DefaultDismissListener implements DismissListener {
+		private View parentView;
+		private DashboardOnMap dashboardOnMap;
+		private String fragmentTag;
+		private View fragmentView;
+
+		public DefaultDismissListener(View parentView, DashboardOnMap dashboardOnMap,
+									  String fragmentTag, View fragmentView) {
+			this.parentView = parentView;
+			this.dashboardOnMap = dashboardOnMap;
+			this.fragmentTag = fragmentTag;
+			this.fragmentView = fragmentView;
+		}
+
+		@Override
+		public void onDismiss() {
+			dashboardOnMap.hideFragmentByTag(fragmentTag);
+			Snackbar.make(parentView, "Card was hidden", Snackbar.LENGTH_LONG)
+					.setAction("UNDO", new View.OnClickListener() {
+						@Override
+						public void onClick(View view) {
+							DefaultDismissListener.this.onUndo();
+						}
+					})
+					.show();
+
+		}
+
+		public void onUndo() {
+			dashboardOnMap.unblacklistFragmentClass(fragmentTag);
+			ViewCompat.setTranslationX(fragmentView, 0);
+			ViewCompat.setAlpha(fragmentView, 1);
+		}
+	}
 }

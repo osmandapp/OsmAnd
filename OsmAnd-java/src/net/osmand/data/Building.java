@@ -72,12 +72,12 @@ public class Building extends MapObject {
 	}
 	
 	@Override
-	public String getName(boolean en) {
-		String fname = super.getName(en);
-		if(interpolationInterval !=0){
-			return fname+"-"+name2 +" (+"+interpolationInterval+") ";
-		} else if(interpolationType != null) {
-			return fname+"-"+name2 +" ("+interpolationType.toString().toLowerCase()+") ";
+	public String getName(String lang) {
+		String fname = super.getName(lang);
+		if (interpolationInterval != 0) {
+			return fname + "-" + name2 + " (+" + interpolationInterval + ") ";
+		} else if (interpolationType != null) {
+			return fname + "-" + name2 + " (" + interpolationType.toString().toLowerCase() + ") ";
 		}
 		return name;
 	}	

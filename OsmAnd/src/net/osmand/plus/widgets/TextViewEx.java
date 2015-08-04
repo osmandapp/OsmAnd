@@ -1,14 +1,15 @@
 package net.osmand.plus.widgets;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Canvas;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.support.v7.internal.text.AllCapsTransformationMethod;
 import android.util.AttributeSet;
 import android.widget.TextView;
-
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.FontCache;
 
@@ -71,7 +72,7 @@ public class TextViewEx extends TextView {
 
 	public static void setAllCapsCompat(TextView target, boolean allCaps) {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-			target.setAllCaps(allCaps);
+			updateAllCapsNewAPI(target, allCaps);
 			return;
 		}
 
@@ -80,6 +81,11 @@ public class TextViewEx extends TextView {
 		} else {
 			target.setTransformationMethod(null);
 		}
+	}
+
+	@SuppressLint("NewApi")
+	private static void updateAllCapsNewAPI(TextView target, boolean allCaps) {
+		target.setAllCaps(allCaps);
 	}
 
 	public void setAllCapsCompat(boolean allCaps) {
@@ -99,4 +105,5 @@ public class TextViewEx extends TextView {
 		}
 		setAllCapsCompat(target, true);
 	}
+	
 }

@@ -16,6 +16,7 @@ import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
+import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentPoint;
 import net.osmand.util.MapUtils;
 
@@ -25,6 +26,7 @@ public class RoutePlannerFrontEnd {
 	
 	private boolean useOldVersion;
 	protected static final Log log = PlatformUtil.getLog(RoutePlannerFrontEnd.class);
+	public boolean useSmartRouteRecalculation = true; 
 
 	public RoutePlannerFrontEnd(boolean useOldVersion) {
 		this.useOldVersion = useOldVersion;
@@ -99,6 +101,10 @@ public class RoutePlannerFrontEnd {
 	public List<RouteSegmentResult> searchRoute(final RoutingContext ctx, LatLon start, LatLon end, List<LatLon> intermediates) throws IOException, InterruptedException {
 		return searchRoute(ctx, start, end, intermediates, null);
 	}
+	
+	public void setUseFastRecalculation(boolean use) {
+		useSmartRouteRecalculation = use;
+	}
 			
 	
 	public List<RouteSegmentResult> searchRoute(final RoutingContext ctx, LatLon start, LatLon end, List<LatLon> intermediates, 
@@ -127,10 +133,14 @@ public class RoutePlannerFrontEnd {
 			ctx.startY = MapUtils.get31TileNumberY(start.getLatitude());
 			ctx.targetX = MapUtils.get31TileNumberX(end.getLongitude());
 			ctx.targetY = MapUtils.get31TileNumberY(end.getLatitude());
+			RouteSegment recalculationEnd = getRecalculationEnd(ctx);
+			if(recalculationEnd != null) {
+				ctx.initTargetPoint(recalculationEnd);
+			}
 			if(routeDirection != null) {
 				ctx.precalculatedRouteDirection = routeDirection.adopt(ctx);
-			}
-			List<RouteSegmentResult> res = runNativeRouting(ctx);
+			} 
+			List<RouteSegmentResult> res = runNativeRouting(ctx, recalculationEnd);
 			if(res != null) {
 				new RouteResultPreparation().printResults(ctx, start, end, res);
 			}
@@ -283,23 +293,61 @@ public class RoutePlannerFrontEnd {
 	
 	private List<RouteSegmentResult> searchRouteInternalPrepare(final RoutingContext ctx, RouteSegmentPoint start, RouteSegmentPoint end, 
 			PrecalculatedRouteDirection routeDirection) throws IOException, InterruptedException {
-		ctx.initStartAndTargetPoints(start, end);
+		RouteSegment recalculationEnd = getRecalculationEnd(ctx);
+		if(recalculationEnd != null) {
+			ctx.initStartAndTargetPoints(start, recalculationEnd);
+		} else {
+			ctx.initStartAndTargetPoints(start, end);
+		}
 		if(routeDirection != null) {
 			ctx.precalculatedRouteDirection = routeDirection.adopt(ctx);
 		}
 		if (ctx.nativeLib != null) {
-			return runNativeRouting(ctx);
+			return runNativeRouting(ctx, recalculationEnd);
 		} else {
 			refreshProgressDistance(ctx);
 			// Split into 2 methods to let GC work in between
 			if(useOldVersion) {
 				new BinaryRoutePlannerOld().searchRouteInternal(ctx, start, end);
 			} else {
-				ctx.finalRouteSegment =  new BinaryRoutePlanner().searchRouteInternal(ctx, start, end);
+				ctx.finalRouteSegment = new BinaryRoutePlanner().searchRouteInternal(ctx, start, end, recalculationEnd);
 			}
 			// 4. Route is found : collect all segments and prepare result
 			return new RouteResultPreparation().prepareResult(ctx, ctx.finalRouteSegment);
 		}
+	}
+	
+	public RouteSegment getRecalculationEnd(final RoutingContext ctx) {
+		RouteSegment recalculationEnd = null;
+		boolean runRecalculation = ctx.previouslyCalculatedRoute != null && ctx.previouslyCalculatedRoute.size() > 0
+				&& ctx.config.recalculateDistance != 0;
+		if (runRecalculation) {
+			List<RouteSegmentResult> rlist = new ArrayList<RouteSegmentResult>();
+			float distanceThreshold = ctx.config.recalculateDistance;
+			float threshold = 0;
+			for (RouteSegmentResult rr : ctx.previouslyCalculatedRoute) {
+				threshold += rr.getDistance();
+				if (threshold > distanceThreshold) {
+					rlist.add(rr);
+				}
+			}
+			runRecalculation = rlist.size() > 0;
+			if (rlist.size() > 0) {
+				RouteSegment previous = null;
+				for (int i = 0; i <= rlist.size() - 1; i++) {
+					RouteSegmentResult rr = rlist.get(i);
+					RouteSegment segment = new RouteSegment(rr.getObject(), rr.getEndPointIndex());
+					if (previous != null) {
+						previous.setParentRoute(segment);
+						previous.setParentSegmentEnd(rr.getStartPointIndex());
+					} else {
+						recalculationEnd = segment;
+					}
+					previous = segment;
+				}
+			}
+		}
+		return recalculationEnd;
 	}
 
 
@@ -316,16 +364,26 @@ public class RoutePlannerFrontEnd {
 		
 	}
 
-	private List<RouteSegmentResult> runNativeRouting(final RoutingContext ctx) throws IOException {
+	private List<RouteSegmentResult> runNativeRouting(final RoutingContext ctx, RouteSegment recalculationEnd) throws IOException {
 		refreshProgressDistance(ctx);
 		RouteRegion[] regions = ctx.reverseMap.keySet().toArray(new BinaryMapRouteReaderAdapter.RouteRegion[ctx.reverseMap.size()]);
 		ctx.checkOldRoutingFiles(ctx.startX, ctx.startY);
 		ctx.checkOldRoutingFiles(ctx.targetX, ctx.targetY);
+		
 		long time = System.currentTimeMillis();
 		RouteSegmentResult[] res = ctx.nativeLib.runNativeRouting(ctx.startX, ctx.startY, ctx.targetX, ctx.targetY,
 				ctx.config, regions, ctx.calculationProgress, ctx.precalculatedRouteDirection, ctx.calculationMode == RouteCalculationMode.BASE);
 		log.info("Native routing took " + (System.currentTimeMillis() - time) / 1000f + " seconds");
 		ArrayList<RouteSegmentResult> result = new ArrayList<RouteSegmentResult>(Arrays.asList(res));
+		if(recalculationEnd != null) {
+			log.info("Native routing use precalculated route");
+			RouteSegment current = recalculationEnd;
+			while(current.getParentRoute() != null) {
+				RouteSegment pr = current.getParentRoute();
+				result.add(new RouteSegmentResult(pr.getRoad(), current.getParentSegmentEnd(), pr.getSegmentStart()));
+				current = pr;
+			}
+		}
 		ctx.routingTime = ctx.calculationProgress.routingCalculatedTime;
 		ctx.visitedSegments = ctx.calculationProgress.visitedSegments;
 		ctx.loadedTiles = ctx.calculationProgress.loadedTiles;
@@ -336,7 +394,9 @@ public class RoutePlannerFrontEnd {
 	private List<RouteSegmentResult> searchRoute(final RoutingContext ctx, List<RouteSegmentPoint> points, PrecalculatedRouteDirection routeDirection) 
 			throws IOException, InterruptedException {
 		if (points.size() <= 2) {
-			ctx.previouslyCalculatedRoute = null;
+			if(!useSmartRouteRecalculation) {
+				ctx.previouslyCalculatedRoute = null;
+			}
 			return searchRoute(ctx, points.get(0), points.get(1), routeDirection);
 		}
 
@@ -372,7 +432,9 @@ public class RoutePlannerFrontEnd {
 		for (int i = 0; i < points.size() - 1; i++) {
 			RoutingContext local = new RoutingContext(ctx);
 			if (i == 0) {
-				//local.previouslyCalculatedRoute = firstPartRecalculatedRoute;
+				if (useSmartRouteRecalculation) {
+					local.previouslyCalculatedRoute = firstPartRecalculatedRoute;
+				}
 			}
 			local.visitor = ctx.visitor;
 			local.calculationProgress = ctx.calculationProgress;

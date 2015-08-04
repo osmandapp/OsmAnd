@@ -267,7 +267,7 @@
 	<string name="favourites_edit_dialog_name">이름</string>
 	<string name="favourites_edit_dialog_category">카테고리</string>
 
-	<string name="vector_map_not_needed">필요없음</string>
+	<string name="shared_string_no_thanks">필요없음</string>
 	<string name="basemap_missing">기본 세계 지도가 없습니다.(작은 줌으로 전세계를 커버). 완전한 환경을 위해 World_basemap_x.obf 파일을 다운로드 하시기 바랍니다.</string>
 	<string name="vector_data_missing">탑재된 (\'오프라인\') 데이터가 SD 카드에 없습니다. 맵을 오프라인으로 사용하기 위해 다운로드 하시기 바랍니다.</string>
 	<string name="local_index_gpx_info_show">\n\n선택하려면 길게 클릭</string>
@@ -1185,7 +1185,7 @@
 	<string name="rendering_attr_roadColors_description">도로 색상을 선택합니다:</string>
 	<string name="rendering_attr_roadColors_name">도로 색상</string>
     <string name="map_widget_show_destination_arrow">도착지 방향 표시</string>
-    <string name="enable_plugin_monitoring_services">트랙로깅 서비스(GPX 기록, 온라인 트래킹)를 사용하여 트래킹 플러그인을 활성화</string>
+    <string name="enable_plugin_monitoring_services">위치 로깅 서비스(GPX 로깅, 온라인 트래킹)를 사용하여 트립 레코딩 플러그인을 활성화</string>
     <string name="non_optimal_route_calculation">장거리를 가능하게 하는 비-최적 경로 계산</string>
 	<string name="gps_not_available">설정에서 GPS를 활성화하십시오</string>
     <string name="map_widget_monitoring_services">로깅 서비스</string>
@@ -1363,7 +1363,7 @@
 	
 	
 	<string name="map_widget_parking">주차</string>
-	<string name="map_widget_monitoring">GPX 레코딩</string>
+	<string name="map_widget_monitoring">GPX 로깅</string>
 	<string name="map_widget_speed">속도</string>
 	<string name="map_widget_distance">도착지</string>
 	<string name="map_widget_altitude">고도</string>
@@ -1718,7 +1718,7 @@
     <string name="osmo_settings_descr">모니터링 설정을 구성하고 개인 모니터링 채널을 설정</string>
     <string name="osmo_plugin_description">"OsMosms 실시간 모니터링을 사용하도록 설정을 보여줍니다. http://osmo.mobi를 참조하세요. 다른 장치를 추적하고 추적 받을 수 있습니다. 익명 그룹을 만들고, 서로의 위치를 공유하고, 통신 할 수 있습니다. 세션 트래킹 또는 영구 트래킹을 위한 다양한 설정을 합니다. ↵\n↵\n원격 제어 및 그룹 관리자가 없는 일부 기능 때문에 익명 그룹을 제한합니다. 완전한 기능의 그룹은 웹 사이트에 생성되고 등록된 사용자만 OsMo에 액세스 할 수 있어야 합니다. "</string>
     <string name="osmo_plugin_name">OsMo 모니터링</string>
-    <string name="osmo_settings">OsMo 모니터링</string>
+    <string name="osmo_settings">오스모(OsMo)</string>
    	<string name="share_route_as_gpx">루트를 GPX 파일로 공유</string>
 	<string name="share_route_subject">OsmAnd를 통해 공유된 경로</string>
 	<string name="arrival_distance">도착 알림</string>
@@ -1786,7 +1786,7 @@
     <string name="osmo_enable_tracker">내 위치 전송하기</string>
     <string name="osmo_control">OsMo 빠른 접근</string>
     
-	<string name="import_file_favourites">GPX 파일로 저장? 또는 즐겨찾기로 가져오기?</string>
+	<string name="import_file_favourites">장소를 GPX 파일로 저장 할까요? 또는 즐겨찾기로 가져오기 할까요?</string>
 	
 	<string name="color_red">빨강</string>
 	<string name="color_pink">분홍</string>
@@ -1863,7 +1863,7 @@
     <string name="osmo_auth_error_short">인증 실패</string>
     <string name="osmo_auth_error">OsMo 인증 오류가 발생 했습니다: %1$s.\n임시로 서비스가 다운되었거나 또는 등록 만료가 되었습니다.\n신규 등록을 진행 하시겠습니까?</string>
     <string name="osmo_group_by_invite">메시지를 입력하세요</string>
-    <string name="osmo_group_information_desc">" -모든 그룹은 공용입니다! 익명으로 하려면 트래커 id 통해 직접 장치를 연결 합니다.\n -그룹는 16 명까지 등록 할 수 있습니다.\n -비활동적인 그룹이나 또는 2 주 동안 단 1 사람만  활동한 경우, 그룹는 삭제 됩니다.\n -컨트롤 그룹으로 그룹 입장을 제한할 수 있습니다. 관리 콘솔에 가는 것이 필요합니다.
+    <string name="osmo_group_information_desc">" -모든 그룹은 공용입니다! 익명으로 하려면 트래커 id를 통해 직접 장치를 연결 합니다.\n -개인 그룹는 8명까지 제한됩니다.\n -비활동적인 그룹이나 또는 2 주 동안 단 1 사람만  활동한 경우, 그룹는 삭제 됩니다.\n -컨트롤 그룹으로 그룹 입장을 제한할 수 있습니다. 관리 콘솔에 가는 것이 필요합니다.
 \n -그룹을 만들고 싶으면 http://osmo.mobi 에 접속하세요"</string>
     <string name="osmo_group_information">그룹을 만들기 전에 읽어 보시기 바랍니다!</string>
     <string name="osmo_not_signed_in">OsMo 로그인 실패</string>
@@ -1896,12 +1896,12 @@
     <string name="lang_he">히브리어</string>
     <string name="forward">앞으로</string>
     <string name="home">홈</string>
-    <string name="live_monitoring_m_descr">GPX 레코딩이 활성화 될때, 지정된 웹 서비스에 트래킹을 전송합니다.</string>
+    <string name="live_monitoring_m_descr">GPX 로깅이 활성화 될때, 지정된 웹 서비스에 트래킹을 전송합니다.</string>
 	<string name="live_monitoring_m">온라인 트래킹 (GPX 파일 필요)</string>
     <string name="live_monitoring_start">온라인 트래킹 시작</string>
 	<string name="live_monitoring_stop">온라인 트래킹 중지</string>
-	<string name="gpx_monitoring_start">GPX 레코딩 시작</string>
-	<string name="gpx_monitoring_stop">GPX 레코딩 중지</string>
+	<string name="gpx_monitoring_start">GPX 로깅 시작</string>
+	<string name="gpx_monitoring_stop">GPX 로깅 중지</string>
     <string name="gpx_start_new_segment">새로운 세그먼트 시작</string>
     <string name="lang_fa">페르시아어</string>
 	<string name="lang_al">알바니아어</string>
@@ -1915,8 +1915,8 @@
     <string name="pause_navigation">운행 일시중지</string>
 	<string name="rendering_attr_alpineHiking_name">고산 하이킹 규모 (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">SAC Scale에 따른 경로 렌더링</string>
-    <string name="rendering_attr_osmcTraces_name">하이킹 심볼 오버레이</string>
-    <string name="rendering_attr_osmcTraces_description">OSMC 흔적에 따라 경로 렌더링</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">하이킹 심볼 오버레이</string>
+    <string name="rendering_attr_hikingRoutesOSMC_description">OSMC 흔적에 따라 경로 렌더링</string>
     
 	<string name="rendering_attr_coloredBuildings_name">유형별 색상 코드 건물</string>
     <string name="osmo_invite">초대…</string>
@@ -1936,13 +1936,13 @@
     <string name="rendering_value_pedestrian_name">보행자</string>
     <string name="download_additional_maps">누락된 지도 %1$s (%2$d MB) 를 다운로드 할까요?</string>
     <string name="record_plugin_description">"이 플러그인은 지도 화면에서 GPX 기록 위젯을 터치하여 수동으로 경로를 기록하고 저장하기 위해 , 또는 GPX 파일에 운행 경로의 모든 것을 자동으로 기록하기 위해, 기능을 활성화합니다.
-\n↵\n↵\n기록된 트랙을 친구와 공유 할 수 있습니다 또는 OSM 지도에 업로드할 수 있습니다. 운동 선수들은 자신의 훈련을 monitior 하기 위해 기록된 트랙을 사용할 수 있습니다. 몇 가지 기본 트랙 분석은 랩 시간, 평균 속도처럼, OsmAnd에서 직접 수행 할 수 있으며, 트랙을 나중에 특별한 서드파티 분석 도구를 사용하여 분석 할 수 있습니다. "</string>
+\n↵\n↵\n기록된 트랙을 친구와 공유 할 수 있습니다 또는 OSM 지도에 업로드할 수 있습니다. 운동 선수들은 자신의 훈련을 모니터 하기 위해 기록된 트랙을 사용할 수 있습니다. 몇 가지 기본 트랙 분석은 랩 시간, 평균 속도처럼, OsmAnd에서 직접 수행 할 수 있으며, 트랙을 나중에 특별한 서드파티 분석 도구를 사용하여 분석 할 수 있습니다. "</string>
     <string name="record_plugin_name">여행 레코딩</string>
     <string name="int_hour">h</string>
     <string name="duration">경과시간</string>
     <string name="distance">거리</string>
     <string name="index_tours">여행</string>
-    <string name="flat_list_waypoints">모두</string>
+    <string name="shared_string_all">모두</string>
     <string name="waypoints">경유지</string>
     <string name="targets">도착지</string>
     <string name="way_alarms">교통 경고</string>
@@ -1950,10 +1950,10 @@
     <string name="speak_poi">주변의 POI 알리기</string>
     <string name="rendering_attr_publicTransportMode_name">버스, 무궤도전차, 셔틀 노선</string>
 	<string name="save_track_to_gpx_globally">현재 트랙을 GPX파일로 저장</string>
-	<string name="save_track_to_gpx_globally_descr">GPX 파일에 기록하는 일반적인 위치는 지도 화면에 GPX 기록 위젯을 사용하여 켜거나 끌 수 있습니다</string>
+	<string name="save_track_to_gpx_globally_descr">GPX 파일에 기록하는 일반적인 위치는 지도 화면에 GPX 로깅 위젯을 사용하여 켜거나 끌 수 있습니다</string>
 	<string name="save_track_interval_globally">로깅 간격</string>
 	<string name="confirm_every_run">항상 요청</string>
-	<string name="save_global_track_interval_descr">일반 트랙 레코딩에 대한 로깅 간격을 선택합니다 (지도에 GPX 레코딩 위젯을 통해 사용 가능)</string>
+	<string name="save_global_track_interval_descr">일반 트랙 레코딩에 대한 로깅 간격을 선택합니다 (지도에 GPX 로깅 위젯을 통해 사용 가능)</string>
 	<string name="save_global_track_interval">일반 로깅 간격</string>
 	<string name="traffic_warning_speed_limit">속도 제한</string>
     <string name="traffic_warning_border_control">국경 통제</string>
@@ -2009,7 +2009,7 @@
     <string name="rendering_category_hide">숨기기</string>
     <string name="wake_on_voice">화면 켜기</string>
     <string name="wake_on_voice_descr">교차로에 접근할 때 화면 켜기</string>
-    <string name="lock_screen_request_explanation">%1$의 절전 기능에 대한 화면을 해제 하려면 이 권한이 필요 합니다.</string>
+    <string name="lock_screen_request_explanation">%1$s 의 절전 기능에 대한 화면을 해제 하려면 이 권한이 필요 합니다.</string>
     
 	<string name="osmo_use_https">HTTPS 사용하기</string>
 	<string name="osmo_use_https_descr">서버에 보안 연결 이용</string>
@@ -2213,7 +2213,7 @@
 	<string name="osmo_grop_name_length_alert">그룹 이름이 적어도 3 문자 이상 이어야 합니다!</string>
 	<string name="agps_info">A-GPS 정보</string>
 	<string name="shared_string_message">메세지</string>
-	<string name="agps_data_last_downloaded">최근 다운로드한 A-GPS 데이터 : %1$ s</string>
+	<string name="agps_data_last_downloaded">최근 다운로드한 A-GPS 데이터 : %1$s</string>
     <string name="confirm_usage_speed_cameras">(독일, 프랑스, 이탈리아, 등) 많은 국가에서 속도 카메라 경고를 사용하는 것은 법률에 의해 허용 되지 않습니다. OsmAnd은 법률을 위반할 경우 어떤 책임도 지지 않습니다. 이 기능을 이해하는 경우에 [예] 를 클릭 하십시오.</string>
 	<string name="welmode_download_maps">지도 다운로드</string>
 	<string name="welcome_select_region">교통 표지판 및 규정을 제대로 반영 하기 위해 , 운전 지역을 선택 하십시오:</string>
@@ -2223,4 +2223,102 @@
     <string name="shared_string_do_not_use">사용 하지 마십시오</string>
 	<string name="shared_string_address">주소</string>
 	<string name="shared_string_show_description">설명 표시</string>
-	</resources>
+	<string name="shared_string_open">열기</string>
+    <string name="rendering_attr_OSMMapperAssistant_name">OSM 지도작성 도우미</string>
+	<string name="shared_string_manage">관리</string>
+	<string name="shared_string_edit">편집</string>
+	<string name="shared_string_places">장소</string>
+	<string name="shared_string_search">검색</string>
+	<string name="filter_poi_hint">이름으로 필터링</string>
+    <string name="search_poi_category_hint">모든 검색 유형</string>
+    <string name="index_name_netherlands">유럽-네덜란드</string>
+	<string name="rendering_value__name">기본값</string>
+    <string name="rendering_value_highContrastRoads_name">높은 콘트라스트 도로</string>
+	<string name="rendering_attr_hideHouseNumbers_name">집 주소 숨기기</string>
+    <string name="application_dir_change_warning3">OsmAnd가 새로운 도착지와 관련된 데이터 파일을 복사하시겠습니까?</string>
+    <string name="specified_directiory_not_writeable">지도는 지정된 디렉터리에 만들 수 없습니다</string>
+	<string name="copying_osmand_file_failed">파일 복사 실패</string>    
+    <string name="storage_directory_external">외장 스토리지</string>
+    <string name="storage_directory_multiuser">멀티유저 저장</string>
+    <string name="storage_directory_internal_app">내부 응용 프로그램 메모리</string>
+    <string name="storage_directory_manual">수동으로 지정</string>
+    <string name="storage_directory_default">내부 메모리</string>
+    <string name="storage_directory">지도 저장소</string>
+    <string name="shared_string_copy">복사</string>
+    <string name="rendering_value_disabled_name">사용 안 함</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">루트 범위에 따라 색상변경</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">OSMC에 따라 색상변경</string>
+    <string name="osmo_share_my_location">내 위치를 공유</string>
+    <string name="shared_string_logoff">로그 오프</string>
+    <string name="routing_attr_avoid_borders_name">국경 횡단 방지</string>
+	<string name="routing_attr_avoid_borders_description">타국의 국경 횡단 방지</string>
+	<string name="routing_attr_height_name">높이 제한</string>
+	<string name="routing_attr_height_description">도로에 통행가능한 차량중량을 지정</string>
+    <string name="use_fast_recalculation">스마트한 경로 재계산</string>
+	<string name="use_fast_recalculation_desc">긴 여행인 경우 경로 다시 계산</string>
+<string name="gps_network_not_enabled">위치 서비스는 사용할 수 없습니다. 위치 서비스를 켜시겠습니까?</string>
+    <string name="disable_recording_once_app_killed">단독 로깅 방지</string>
+    <string name="disable_recording_once_app_killed_descrp">앱이 죽을 때 GPX 로깅은 일시 중지 합니다. (OsmAnd 절전 모드 표시는 안드로이드 알림 표시줄에서 사라집니다.)</string>
+	<string name="shared_string_import2osmand">OsmAnd로 가져오기</string>
+    <string name="read_full_article">전체 기사 읽기 (온라인)</string>
+    <string name="download_wikipedia_item">위키백과</string>
+    <string name="local_indexes_cat_wiki">위키백과</string>
+    <string name="shared_string_show_details">세부 정보 보기</string>
+    <string name="osm_edit_context_menu_delete">OSM 편집을 삭제</string>
+    <string name="local_recordings_delete_all_confirm">%1$d 노트를 삭제 하려고 합니다. 확실한가요?</string>
+	<string name="light_theme">밝은</string>
+    <string name="dark_theme">어두운</string>
+    <string name="lang_pms">피에몬테 어</string>
+    <string name="lang_bn">벵골어</string>
+    <string name="lang_tl">타갈로그어</string>
+    <string name="lang_sh">세르보-크로아티아어</string>
+    <string name="lang_az">아제리어</string>
+    <string name="lang_br">브루타뉴어</string>
+    <string name="lang_sq">알바니아어</string>
+    <string name="lang_is">아이슬란드어</string>
+    <string name="lang_bpy">비슈프리야어</string>
+    <string name="lang_nv">나바호어</string>
+    <string name="lang_ga">아일랜드어</string>
+    <string name="lang_la">라틴어</string>
+    <string name="lang_ku">쿠르드어</string>
+    <string name="lang_ta">타밀어</string>
+    <string name="lang_ml">말라얄람어</string>
+    <string name="lang_lb">룩셈부르크어</string>
+    <string name="lang_os">오세티아어</string>
+    <string name="lang_eo">에스페란토어</string>
+    <string name="lang_es_ar">아르헨티나 스페인어</string>
+    <string name="lang_nb">노르웨이 보크몰어</string>
+    <string name="lang_vo">볼라퓌크어</string>
+    <string name="lang_th">타일랜드어</string>
+    <string name="lang_te">텔루구어</string>
+    <string name="lang_nn">노르웨이어(니노르스크)</string>
+    <string name="lang_new">Newar / 네팔 Bhasa</string>
+    <string name="lang_ms">말레이시아어</string>
+    <string name="lang_ht">아이티어</string>
+    <string name="lang_gl">갈리시아어</string>
+    <string name="lang_et">에스토니아어</string>
+    <string name="lang_ceb">세부아노어</string>
+    <string name="archive_wikipedia_data">당신은 오래된 호환되지 않는 위키백과 데이터를 가지고 있습니다. 그것을 보관 하시겠습니까?</string>
+    <string name="download_wikipedia_files">추가 위키백과 데이터 (%1$s MB)을 다운로드 하시겠습니까?</string>
+    <string name="download_wikipedia_maps">위키백과</string>
+    <string name="rendering_value_default13_name">기본 (13)</string>
+	<string name="rendering_value_defaultTranslucentCyan_name">기본 (반투명 녹청)</string>
+    <string name="rendering_attr_currentTrackColor_name">GPX 색상</string>
+    <string name="rendering_attr_currentTrackWidth_name">GPX 폭</string>
+    <string name="rendering_value_red_name">빨강</string>
+    <string name="rendering_value_translucent_red_name">반투명 빨강</string>
+    <string name="rendering_value_translucent_orange_name">반투명 오렌지</string>
+    <string name="rendering_value_yellow_name">노랑</string>
+    <string name="rendering_value_translucent_yellow_name">반투명 노랑</string>
+    <string name="rendering_value_lightgreen_name">가벼운 녹색</string>
+    <string name="rendering_value_translucent_lightgreen_name">반투명 가벼운 녹색</string>
+    <string name="rendering_value_green_name">녹색</string>
+    <string name="rendering_value_translucent_green_name">반투명 녹색</string>
+    <string name="rendering_value_lightblue_name">연한 파랑</string>
+    <string name="rendering_value_translucent_lightblue_name">반투명 밝은 파란색</string>
+    <string name="rendering_value_blue_name">파랑</string>
+    <string name="rendering_value_translucent_blue_name">반투명 블루</string>
+    <string name="rendering_value_purple_name">보라색</string>
+    <string name="rendering_value_translucent_purple_name">반투명 보라색</string>
+    <string name="restart_is_required">변화를 완전히 적용 하려면, 수동으로 응용 프로그램을 다시 시작해야 합니다.</string>
+    </resources>

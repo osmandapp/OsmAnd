@@ -83,6 +83,7 @@ import android.widget.Toast;
 
 public class AudioVideoNotesPlugin extends OsmandPlugin {
 
+	public static final int NOTES_TAB = R.string.notes;
 	public static final String ID = "osmand.audionotes";
 	public static final String THREEGP_EXTENSION = "3gp";
 	public static final String MPEG4_EXTENSION = "mp4";
@@ -133,6 +134,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	private MediaRecorder mediaRec;
 	private File lastTakingPhoto;
 
+	private final static char SPLIT_DESC = ' '; 
 	public static class Recording {
 		public Recording(File f) {
 			this.file = f;
@@ -174,18 +176,12 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		public File getFile() {
 			return file;
 		}
+		
 
 		public boolean setName(String name) {
-			File directory = file.getParentFile();			
+			File directory = file.getParentFile();
 			String fileName = getFileName();
-			final String hashAndExtension;
-			int hashInd = fileName.lastIndexOf('_');
-			if (hashInd == -1) {
-				hashAndExtension = "_" + fileName;
-			} else {
-				hashAndExtension = fileName.substring(hashInd, fileName.length());
-			}
-			File to = new File(directory, name+hashAndExtension);
+			File to = new File(directory, name + SPLIT_DESC + getOtherName(fileName));
 			if (file.renameTo(to)) {
 				file = to;
 				return true;
@@ -196,13 +192,35 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		public String getFileName() {
 			return file.getName();
 		}
+		
+		public String getDescriptionName(String fileName) {
+			int hashInd = fileName.lastIndexOf(SPLIT_DESC);
+			//backward compatibility
+			if( fileName.indexOf('.') - fileName.indexOf('_') > 12 && 
+					hashInd < fileName.indexOf('_')) {
+				hashInd = fileName.indexOf('_');
+			}
+			if(hashInd == -1) {
+				return null;
+			} else {
+				return fileName.substring(0, hashInd);
+			}
+		}
+		
+		public String getOtherName(String fileName) {
+			String descriptionName = getDescriptionName(fileName);
+			if(descriptionName != null) {
+				return fileName.substring(descriptionName.length() + 1); // SPLIT_DESC
+			} else {
+				return fileName;
+			}
+		}
 
 		public String getName(Context ctx) {
 			String fileName = file.getName();
-
-			int hashInd = fileName.lastIndexOf('_');
-			if (hashInd != -1) {
-				return fileName.substring(0, hashInd);
+			String desc = getDescriptionName(fileName);
+			if (desc != null) {
+				return desc;
 			} else if (this.isAudio()) {
 				return ctx.getResources().getString(R.string.shared_string_audio);
 			} else if (this.isVideo()) {
@@ -425,7 +443,9 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		}
 		audioNotesLayer = new AudioNotesLayer(activity, this);
 		activity.getMapView().addLayer(audioNotesLayer, 3.5f);
-		registerWidget(activity);
+		if(recordControl == null) {
+			registerWidget(activity);
+		}
 	}
 
 	private void registerMediaListener(AudioManager am) {
@@ -503,14 +523,30 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	@Override
 	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
-		if (SHOW_RECORDINGS.get()) {
-			if (audioNotesLayer == null) {
-				registerLayers(activity);
-			} else if (!mapView.getLayers().contains(audioNotesLayer)) {
-				mapView.addLayer(audioNotesLayer, 3.5f);
+		if (isActive()) {
+			if (SHOW_RECORDINGS.get()) {
+				if (audioNotesLayer == null) {
+					registerLayers(activity);
+				} else if (!mapView.getLayers().contains(audioNotesLayer)) {
+					mapView.addLayer(audioNotesLayer, 3.5f);
+				}
+			} else if (audioNotesLayer != null) {
+				mapView.removeLayer(audioNotesLayer);
 			}
-		} else if (audioNotesLayer != null) {
-			mapView.removeLayer(audioNotesLayer);
+			if(recordControl == null) {
+				registerWidget(activity);
+			}
+		} else {
+			if (audioNotesLayer != null) {
+				mapView.removeLayer(audioNotesLayer);
+				audioNotesLayer = null;
+			}
+			MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();
+			if(recordControl != null && mapInfoLayer != null) {
+				mapInfoLayer.removeSideWidget(recordControl);
+				recordControl = null;
+				mapInfoLayer.recreateControls();
+			}
 		}
 	}
 
@@ -520,7 +556,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			recordControl = new TextInfoWidget(activity);
 			recordControl.setImageDrawable(activity.getResources().getDrawable(R.drawable.monitoring_rec_inactive));
 			setRecordListener(recordControl, activity);
-			mapInfoLayer.registerSideWidget(recordControl, R.drawable.ic_action_micro_dark, R.drawable.widget_icon_av_inactive,
+			mapInfoLayer.registerSideWidget(recordControl, R.drawable.ic_action_micro_dark,
 					R.string.map_widget_av_notes, "audionotes", false, 22);
 			mapInfoLayer.recreateControls();
 		}
@@ -539,13 +575,17 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	private void updateWidgetIcon(final TextInfoWidget recordPlaceControl) {
-		recordPlaceControl.setImageDrawable(activity.getResources().getDrawable(R.drawable.widget_icon_av_inactive));
+		recordPlaceControl.setIcons(R.drawable.widget_icon_av_inactive_day,
+				R.drawable.widget_icon_av_inactive_night);
 		if (AV_DEFAULT_ACTION.get() == AV_DEFAULT_ACTION_VIDEO) {
-			recordPlaceControl.setImageDrawable(R.drawable.widget_icon_video);
+			recordPlaceControl.setIcons(R.drawable.widget_av_video_day,
+					R.drawable.widget_av_video_night);
 		} else if (AV_DEFAULT_ACTION.get() == AV_DEFAULT_ACTION_TAKEPICTURE) {
-			recordPlaceControl.setImageDrawable(R.drawable.widget_icon_photo);
+			recordPlaceControl.setIcons(R.drawable.widget_av_photo_day,
+					R.drawable.widget_av_photo_night);
 		} else if (AV_DEFAULT_ACTION.get() == AV_DEFAULT_ACTION_AUDIO) {
-			recordPlaceControl.setImageDrawable(R.drawable.widget_icon_audio);
+			recordPlaceControl.setIcons(R.drawable.widget_av_audio_day,
+					R.drawable.widget_av_audio_night);
 		}
 	}
 
@@ -601,7 +641,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		f.mkdirs();
 		File fl;
 		do {
-			fl = new File(f, basename + "-" + (k++) + "." + ext);
+			fl = new File(f, basename + "." + (k++) + "." + ext);
 		} while (fl.exists());
 		return fl;
 	}
@@ -973,9 +1013,9 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	@Override
 	public void addMyPlacesTab(FavoritesActivity favoritesActivity, List<TabItem> mTabs, Intent intent) {
 		if (getAllRecordings().size() > 0) {
-			mTabs.add(favoritesActivity.getTabIndicator(R.string.notes, NotesFragment.class));
+			mTabs.add(favoritesActivity.getTabIndicator(NOTES_TAB, NotesFragment.class));
 			if (intent != null && "AUDIO".equals(intent.getStringExtra("TAB"))) {
-				app.getSettings().FAVORITES_TAB.set(FavoritesActivity.NOTES_TAB);
+				app.getSettings().FAVORITES_TAB.set(NOTES_TAB);
 			}
 		}
 	}
@@ -986,17 +1026,14 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			return false;
 		}
 		Recording r = new Recording(f);
-		String encodeName = f.getName();
-		int i = encodeName.lastIndexOf('_');
+		String fileName = f.getName();
+		String otherName = r.getOtherName(fileName);
+		int i = otherName.indexOf('.');
 		if (i > 0) {
-			encodeName = encodeName.substring(i + 1);
-		}
-		i = encodeName.indexOf('.');
-		if (i > 0) {
-			encodeName = encodeName.substring(0, i);
+			otherName = otherName.substring(0, i);
 		}
 		r.file = f;
-		GeoParsedPoint geo = MapUtils.decodeShortLinkString(encodeName);
+		GeoParsedPoint geo = MapUtils.decodeShortLinkString(otherName);
 		r.lat = geo.getLatitude();
 		r.lon = geo.getLongitude();
 		Float heading = app.getLocationProvider().getHeading();

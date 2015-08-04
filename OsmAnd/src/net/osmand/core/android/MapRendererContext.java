@@ -199,6 +199,7 @@ public class MapRendererContext implements RendererRegistry.IRendererLoadedEvent
 	
 	private void recreateRasterAndSymbolsProvider() {
 		// Create new map primitiviser
+		// TODO Victor ask MapPrimitiviser, ObfMapObjectsProvider  
 		MapPrimitiviser mapPrimitiviser = new MapPrimitiviser(mapPresentationEnvironment);
 		ObfMapObjectsProvider obfMapObjectsProvider = new ObfMapObjectsProvider(obfsCollection);
 		// Create new map primitives provider

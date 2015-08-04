@@ -8,7 +8,7 @@
 	<string name="poi_beverages">Напоі</string>
 	<string name="poi_butcher">Ятка</string>
 	<string name="poi_deli">Дэлікатэсы</string>
-	<string name="poi_shop_farm">Фермерскія прадукты</string>
+	<string name="poi_farm">Фермерскія прадукты</string>
 	<string name="poi_greengrocer">Гародніна і садавіна</string>
 	<string name="poi_seafood">Морапрадукты</string>
 	<string name="poi_confectionery">Кандытарская</string>
@@ -39,7 +39,7 @@
 	<string name="poi_boutique">Буцік</string>
 	<string name="poi_chemist">Аптэка</string>
 	<string name="poi_clothes">Крама адзеньня</string>
-	<string name="poi_children_clothes">Дзіцячае адзеньне</string>
+	<string name="poi_child_clothes">Дзіцячае адзеньне</string>
 	<string name="poi_shoes">Крама абутку</string>
 	<string name="poi_computer">Кампутары</string>
 	<string name="poi_copyshop">Капіявальныя паслугі</string>
@@ -87,8 +87,8 @@
 	<string name="poi_window_blind">Жалюзі, аканіцы, маркізы</string>
 	<string name="poi_department_store">Універмаг</string>
 	<string name="poi_electronics">Электроніка</string>
-	<string name="poi_car_shop">Аўтасалон</string>
-	<string name="poi_car_parts_shop">Аўтазапчасткі</string>
+	<string name="poi_car">Аўтасалон</string>
+	<string name="poi_car_parts">Аўтазапчасткі</string>
 	<string name="poi_atv">Квадрацыклы</string>
 	<string name="poi_cosmetics">Касметыка, парфумерыя</string>
 	<string name="poi_marketplace">Рынак</string>
@@ -108,7 +108,7 @@
 	<string name="poi_emergency_access_point">Таблічка з кодам для службы выратаваньня</string>
 
 	<string name="poi_ford">Брод</string>
-	<string name="poi_mountain_pass">Перавал</string>
+	<string name="poi_mountain_pass_yes">Перавал</string>
 	<string name="poi_gate">Вароты</string>
 	<string name="poi_city_wall">Гарадзкая сьцяна</string>
 	<string name="poi_lift_gate">Шлагбаўм</string>
@@ -141,18 +141,17 @@
 	<string name="poi_public_transport_platform_trolleybus">Прыпынак тралейбусу</string>
 	<string name="poi_bus_stop">Аўтобусны прыпынак</string>
 	<string name="poi_public_transport_platform_tram">Прыпынак трамваю</string>
-	<string name="poi_shop_tea">Чайная крама</string>
+	<string name="poi_tea">Чайная крама</string>
 	<string name="poi_tram_stop">Трамвайны прыпынак</string>
 	<string name="poi_public_transport_station">Станцыя грамадзкага транспарту</string>
 	<string name="poi_bus_station">Аўтобусная станцыя</string>
 	<string name="poi_railway_station">Чыгуначная станцыя</string>
 	<string name="poi_railway_platform">Чыгуначная плятформа</string>
-	<string name="poi_railway_halt">Чыгуначная плятформа (састар.)</string>
 	<string name="poi_railway_subway_entrance">Уваход у мэтро</string>
 	<string name="poi_subway_station">Станцыя мэтро</string>
 	<string name="poi_taxi">Стаянка таксі</string>
 
-	<string name="poi_airport">Аэрапорт</string>
+	<string name="poi_aerodrome">Аэрапорт</string>
 	<string name="poi_helipad">Шрубалётная пляцоўка</string>
 	<string name="poi_runway">Узлётная паласа</string>
 	<string name="poi_aeroway_terminal">Тэрмінал аэрапорту</string>
@@ -193,7 +192,7 @@
 	<string name="poi_waterway_turning_point">Паваротная кропка на вадзе</string>
 	<string name="poi_weir">Невялікая плаціна</string>
 	<string name="poi_dam">Дамба</string>
-	<string name="poi_water_mill">Вадзяны млын</string>
+	<string name="poi_watermill">Вадзяны млын</string>
 
 	<string name="poi_power_substation">Падстанцыя</string>
 	<string name="poi_power_transformer">Трансфарматар</string>
@@ -203,7 +202,7 @@
 	<string name="poi_post_office">Пошта</string>
 	<string name="poi_post_box">Паштовая скрыня</string>
 	<string name="poi_telephone">Тэлефон</string>
-	<string name="poi_communication_tower">Вышка сувязі</string>
+	<string name="poi_communication_tower">Вежа сувязі</string>
 	<string name="poi_telephone_exchange">АТС</string>
 
 	<string name="poi_recycling">Перапрацоўка адыходаў</string>
@@ -286,7 +285,7 @@
 	<string name="poi_lawyer">Юрыдычныя паслугі</string>
 	<string name="poi_office_telecommunication">Тэлекамунікацыйная кампанія</string>
 	<string name="poi_ngo">Грамадзкая арганізацыя</string>
-	<string name="poi_town_hall">Адміністрацыя населенага пункта</string>
+	<string name="poi_townhall">Адміністрацыя населенага пункта</string>
 	<string name="poi_employment_agency">Біржа працы</string>
 	<string name="poi_research">Дасьледчы цэнтар</string>
 	<string name="poi_it">Інфармацыйныя тэхналёгіі</string>
@@ -368,7 +367,7 @@
 	<string name="poi_archaeological_site">Раскопы</string>
 	<string name="poi_battlefield">Поле бітвы</string>
 	<string name="poi_boundary_stone">Межавы камень</string>
-	<string name="poi_cannon">Гістарычныя гарматы</string>
+	<string name="poi_historic_cannon">Гістарычныя гарматы</string>
 	<string name="poi_castle">Замак</string>
 	<string name="poi_city_gate">Гарадзкая брама</string>
 	<string name="poi_fort">Фартыфікацыйныя збудаваньні</string>
@@ -391,7 +390,7 @@
 
 	<string name="poi_hotel">Гатэль</string>
 	<string name="poi_guest_house">Гасьцявы дом</string>
-	<string name="poi_hostel">Хостэл</string>
+	<string name="poi_hostel">Гостэл</string>
 	<string name="poi_motel">Матэль</string>
 	<string name="poi_alpine_hut">Горны прытулак</string>
 	<string name="poi_chalet">Шале</string>
@@ -668,10 +667,8 @@
 	<string name="poi_man_made">Антрапагеннае</string>
 	<string name="poi_apartment">Апартамэнты</string>
 
-	<string name="poi_child_clothes">Дзіцячае адзеньне</string>
 	<string name="poi_wine">Вінная крама</string>
 
-	<string name="poi_car_parts">Аўтазапчасткі</string>
 	<string name="poi_public_transport_stop_position">Месца прыпынку грамадзкага транспарту</string>
 	<string name="poi_halt">Чыгуначны прыпынак</string>
 	<string name="poi_internet_access_wlan">Доступ у Інтэрнэт: WLAN</string>
@@ -680,8 +677,6 @@
 	<string name="poi_internet_access_public">Доступ у Інтэрнэт: агульны</string>
 	<string name="poi_internet_access_service">Доступ у Інтэрнэт: паслугі</string>
 	
-	<string name="poi_farm">Фермэрская крама</string>
-	<string name="poi_car">Аўтакрама</string>
 	<string name="poi_lodging">Начлег</string>
 	<string name="poi_railway_buffer_stop">Чыгуначны тупіковы ўпор</string>
 	<string name="poi_club">Клюб</string>
@@ -716,16 +711,16 @@
 	<string name="poi_silo">Сілас</string>
 	<string name="poi_storage_tank">Бак (рэзэрвуар)</string>
 
-	<string name="piste_nordic">Лыжня</string>
-	<string name="piste_snow_park">Сноўпарк</string>
-	<string name="piste_playground">Вучэбны схіл</string>
-	<string name="piste_downhill">Гарналыжная траса</string>
-	<string name="piste_skitour">Скітур</string>
-	<string name="piste_ice_skate">Канькабежная траса</string>
+	<string name="poi_piste_nordic">Лыжня</string>
+	<string name="poi_piste_snow_park">Сноўпарк</string>
+	<string name="poi_piste_playground">Вучэбны схіл</string>
+	<string name="poi_piste_downhill">Гарналыжная траса</string>
+	<string name="poi_piste_skitour">Скітур</string>
+	<string name="poi_piste_ice_skate">Канькабежная траса</string>
 
-	<string name="piste_sled">Санкавы схіл</string>
-	<string name="piste_sleigh">Нартавая дарога</string>
-	<string name="piste_hike">Сьцежка</string>
+	<string name="poi_piste_sled">Санкавы схіл</string>
+	<string name="poi_piste_sleigh">Нартавая дарога</string>
+	<string name="poi_piste_hike">Сьцежка</string>
 	<string name="poi_canal">Канал</string>
 	<string name="poi_bench">Лаўка</string>
 	<string name="poi_water">Вада</string>
@@ -734,4 +729,198 @@
 
 	<string name="poi_valley">Даліна</string>
 	<string name="poi_wood">Лес</string>
+	<string name="poi_landuse">Землекарыстаньне</string>
+	<string name="poi_fuel_diesel">Дызэль</string>
+	<string name="poi_fuel_gtl_diesel">GTL-дызэль</string>
+	<string name="poi_fuel_hgv_diesel">HGV-дызэль</string>
+	<string name="poi_fuel_biodiesel">Біядызэль</string>
+	<string name="poi_fuel_lpg">Звадкаваны газ</string>
+	<string name="poi_fuel_octane_80">Актан 80</string>
+	<string name="poi_fuel_octane_91">Актан 91</string>
+	<string name="poi_fuel_octane_92">Актан 92</string>
+	<string name="poi_fuel_octane_95">Актан 95</string>
+	<string name="poi_fuel_octane_98">Актан 98</string>
+	<string name="poi_fuel_octane_100">Актан 100</string>
+	<string name="poi_fuel_cng">Сьціснуты прыродны газ</string>
+	<string name="poi_fuel_1_25">Паліва 1:25</string>
+	<string name="poi_fuel_1_50">Паліва 1:50</string>
+	<string name="poi_fuel_ethanol">Этаноль</string>
+	<string name="poi_fuel_methanol">Мэтаноль</string>
+	<string name="poi_fuel_svo">Алейнае паліва</string>
+	<string name="poi_fuel_e10">E10</string>
+	<string name="poi_fuel_e20">E20</string>
+	<string name="poi_fuel_e85">E85</string>
+	<string name="poi_fuel_biogas">E85</string>
+	<string name="poi_fuel_lh2">Вадкі вадарод</string>
+	<string name="poi_fuel_electricity">Электрычнасьць</string>
+	<string name="poi_farmyard">Падворак</string>
+	<string name="poi_meadow">Луг</string>
+
+	<string name="poi_recreation_ground">Пляцоўка для адпачынку</string>
+	<string name="poi_village_green">Лужок</string>
+
+	<string name="poi_industrial">Прамысловая зона</string>
+	<string name="poi_residential">Жылы раён</string>
+
+	<string name="poi_landuse_railway">Чыгуначная паласа</string>
+
+	<string name="poi_junction">Перакрыжаваньне</string>
+	<string name="poi_sailing">Парусны спорт</string>
+	<string name="poi_charity">Дабрачынная крама</string>
+	<string name="poi_photo">Фота</string>
+	<string name="poi_tomb">Магіла</string>
+	<string name="poi_wilderness_hut">Лясная хаціна</string>
+
+	<string name="poi_payment_terminal">Плацёжны тэрмінал</string>
+	<string name="poi_piste">Лыжная траса</string>
+	<string name="poi_observation_tower">Назіральная вежа</string>
+	<string name="poi_bell_tower">Званіца</string>
+	<string name="poi_ski_rental">Пракат лыж</string>
+
+	<string name="poi_ski_resort">Лыжны курорт</string>
+	<string name="poi_cabin">Хата</string>
+	<string name="poi_hunting_lodge">Паляўнічая хатка</string>
+
+	<string name="poi_picnic_table">Cтол для пікніка</string>
+	<string name="poi_hanami">Ханамі</string>
+	<string name="poi_wine_cellar">Вінны склеп</string>
+	<string name="poi_winery">Вінны завод</string>
+
+	<string name="poi_gallery">Галерэя мастацтваў</string>
+	<string name="poi_lean_to">Лабаз</string>
+	<string name="poi_general_tourist_attraction_yes">Турыстычная славутасьць</string>
+	<string name="poi_trail_riding_station">Станцыя для вершнікаў</string>
+
+	<string name="poi_wiki_place">Вікіпэдыя</string>
+	<string name="poi_wiki_lang_en">Англійская Вікіпэдыя</string>
+	<string name="poi_camera">Фота і оптыка</string>
+	<string name="poi_religious">Рэлігійны пляц</string>
+	<string name="poi_wiki_lang_ar">Арабская Вікі</string>
+	<string name="poi_wiki_lang_be">Беларуская Вікі</string>
+	<string name="poi_wiki_lang_bg">Баўгарская Вікі</string>
+	<string name="poi_wiki_lang_ca">Каталанская Вікі</string>
+	<string name="poi_wiki_lang_zh">Кітайская Вікі</string>
+
+<string name="poi_wiki_lang_cs">Чэская Вікі</string>
+	<string name="poi_wiki_lang_da">Дацкая Вікі</string>
+	<string name="poi_wiki_lang_de">Нямецкая Вікі</string>
+	<string name="poi_wiki_lang_el">Грэцкая Вікі</string>
+	<string name="poi_wiki_lang_et">Эстонская Вікі</string>
+	<string name="poi_wiki_lang_es">Гішпанская Вікі</string>
+	<string name="poi_wiki_lang_fi">Фінская Вікі</string>
+	<string name="poi_wiki_lang_fr">Французкая Вікі</string>
+	<string name="poi_wiki_lang_gl">Галіцкая Вікі</string>
+	<string name="poi_wiki_lang_he">Габрэйская Вікі</string>
+	<string name="poi_wiki_lang_hr">Харвацкая Вікі</string>
+	<string name="poi_wiki_lang_ht">Гаіцянская Вікі</string>
+	<string name="poi_wiki_lang_hu">Вугорская Вікі</string>
+	<string name="poi_wiki_lang_id">Інданэзійская Вікі</string>
+	<string name="poi_wiki_lang_it">Італійская Вікі</string>
+	<string name="poi_wiki_lang_ja">Японская Вікі</string>
+	<string name="poi_wiki_lang_ko">Карэйская Вікі</string>
+	<string name="poi_wiki_lang_lt">Літоўская Вікі</string>
+	<string name="poi_wiki_lang_lv">Латвійская Вікі</string>
+	<string name="poi_wiki_lang_ms">Малайская Вікі</string>
+	<string name="poi_wiki_lang_new">Нэварская Вікі</string>
+	<string name="poi_wiki_lang_nl">Галяндзкая Вікі</string>
+	<string name="poi_wiki_lang_nn">Нованарвежская Вікі</string>
+	<string name="poi_wiki_lang_no">Нарвежская Вікі</string>
+	<string name="poi_wiki_lang_pl">Польская Вікі</string>
+	<string name="poi_wiki_lang_pt">Партугальская Вікі</string>
+	<string name="poi_wiki_lang_ro">Румынская Вікі</string>
+	<string name="poi_wiki_lang_ru">Расейская Вікі</string>
+	<string name="poi_wiki_lang_sk">Славацкая Вікі</string>
+	<string name="poi_wiki_lang_sl">Славенская Вікі</string>
+	<string name="poi_wiki_lang_sr">Сербская Вікі</string>
+	<string name="poi_wiki_lang_sv">Швэдзкая Вікі</string>
+	<string name="poi_wiki_lang_th">Тайская Вікі</string>
+	<string name="poi_wiki_lang_tr">Турэцкая Вікі</string>
+	<string name="poi_wiki_lang_uk">Украінская Вікі</string>
+	<string name="poi_wiki_lang_vi">В\'етнамская Вікі</string>
+	<string name="poi_wiki_lang_sw">Суахільская Вікі</string>
+	<string name="poi_barrier_entrance">Уваход</string>
+	<string name="poi_entrance_main">Асноўны ўваход</string>
+	<string name="poi_entrance">Уваход</string>
+	<string name="poi_entrance_exit">Выхад</string>
+
+	<string name="poi_cheese">Сыр</string>
+	<string name="poi_chocolate">Шакаладніца</string>
+	<string name="poi_pasta">Макаронныя вырабы</string>
+	<string name="poi_candles">Сьвечы</string>
+	<string name="poi_garden_furniture">Садовая мэбля</string>
+	<string name="poi_music">Музыка</string>
+	<string name="poi_tyres">Шыны</string>
+	<string name="poi_watches">Гадзіньнікі</string>
+	<string name="poi_games">Гульні</string>
+	<string name="poi_video_games">Відэа гульні</string>
+	<string name="poi_pyrotechnics">Піратэхніка</string>
+	<string name="poi_weapons">Зброя</string>
+
+	<string name="poi_coffee">Крама кавы</string>
+	<string name="poi_pastry">Цукерня</string>
+	<string name="poi_leather">Галянтарэя</string>
+	<string name="poi_swimming_pool_shop">Тавары для басэйна</string>
+	<string name="poi_model">Мадэлістам</string>
+	<string name="poi_fashion">Крама моды</string>
+	<string name="poi_furnace">Крама абагравальнікаў</string>
+	<string name="poi_scuba_diving_shop">Крама для плаваньня з маскамі</string>
+	<string name="poi_trophy">Узнагароды, прызы</string>
+	<string name="poi_height_restrictor">Абмежавальнік вышыні</string>
+	<string name="poi_free_flying">Крама для парашутыстаў</string>
+	<string name="poi_bollard">Слупок</string>
+	<string name="poi_cycle_barrier">Бар’ер ад ровараў</string>
+	<string name="poi_motorcycle_barrier">Бар’ер ад матацыклаў</string>
+	<string name="poi_block">Блок</string>
+	<string name="poi_bus_trap">Праезд для аўтобусаў</string>
+	<string name="poi_cattle_grid">Сетка ад жывёл</string>
+	<string name="poi_full_height_turnstile">Турнікет ва ўвесь рост</string>
+	<string name="poi_bump_gate">Ударныя вароты</string>
+	<string name="poi_general_barrier">Бар’ер</string>
+	<string name="poi_stile">Прыступка</string>
+	<string name="poi_horse_stile">Праезд для вершнікаў</string>
+	<string name="poi_kissing_gate">Брамка</string>
+	<string name="poi_sally_port">Брама</string>
+	<string name="poi_wiki_lang_hi">Хіндзі Вікі</string>
+	<string name="poi_wiki_lang_te">Тэлугу Вікі</string>
+	<string name="poi_wiki_lang_vo">Валапюк Вікі</string>
+	<string name="poi_swing_gate">Паваротны шлагбаўм</string>
+	<string name="poi_turnstile">Турнікет</string>
+	<string name="poi_kent_carriage_gap">Праезд для фурманак</string>
+	<string name="poi_highway_crossing">Пешаходныя пераход</string>
+
+<string name="poi_wiki_lang_ceb">Себуанская Вікі</string>
+	<string name="poi_energy">Энэргетыка</string>
+	<string name="poi_breakwater">Хвалялом</string>
+	<string name="poi_groyne">Хвалярэз</string>
+
+	<string name="poi_tourism_attraction">Турыстычная славутасьць</string>
+	<string name="poi_tree">Дрэва</string>
+	<string name="poi_opening_hours">Гадзіны працы</string>
+	<string name="poi_description">Апісаньне</string>
+	<string name="poi_phone">Тэлефон</string>
+	<string name="poi_website">Вэб-сайт</string>
+	<string name="poi_operator">Апэратар</string>
+	<string name="poi_brand">Брэнд</string>
+
+	<string name="poi_power_cable_distribution_cabinet">Разьмеркавальная скрыня</string>
+	<string name="poi_basin">Штучны вадаём</string>
+	<string name="poi_crane">Кран</string>
+	<string name="poi_country">Краіна</string>
+	<string name="poi_cutline">Прасека</string>
+	<string name="poi_enforcement_toll">Кантроль:аплата</string>
+
+<string name="poi_enforcement_maxspeed">Патрабаванне:максімальная хуткасць</string>
+	<string name="poi_enforcement_maxheight">Патрабаванне:максімальная вышыня</string>
+	<string name="poi_enforcement_mindistance">Патрабаванне:мінімальная адлегласць</string>
+	<string name="poi_enforcement_check">Патрабаванне:кантроль</string>
+	<string name="poi_enforcement_access">Патрабаванне:доступ</string>
+	<string name="poi_enforcement_traffic_signals">Патрабаванне:святлафоры</string>
+	<string name="poi_fee">Аплата</string>
+
+	<string name="poi_disused">Невыкарыстоўваемы</string>
+
+	<string name="poi_abandoned">Закінуты</string>
+	<string name="poi_maxweight">Максімальная вага</string>
+	<string name="poi_maxheight">Максімальная вышыня</string>
+	<string name="poi_service_times">Гадзіны абслугоўвання</string>
 	</resources>

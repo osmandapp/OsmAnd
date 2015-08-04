@@ -35,13 +35,11 @@ import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.search.SearchActivity;
-import net.osmand.plus.activities.search.SearchAddressFragment;
 import net.osmand.plus.base.FailSafeFuntions;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.helpers.GpxImportHelper;
 import net.osmand.plus.helpers.WakeLockHelper;
-import net.osmand.plus.poi.PoiLegacyFilter;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RoutingHelper;
@@ -64,10 +62,13 @@ import android.content.Intent;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.NotificationCompat.Builder;
+import android.support.v7.app.NotificationCompat;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -119,22 +120,20 @@ public class MapActivity extends AccessibleActivity {
 	private Notification getNotification() {
 		Intent notificationIndent = new Intent(this, getMyApplication().getAppCustomization().getMapActivity());
 		notificationIndent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		Notification notification = new Notification(R.drawable.icon, "", //$NON-NLS-1$
-				System.currentTimeMillis());
-		notification.flags |= Notification.FLAG_AUTO_CANCEL;
-		notification.setLatestEventInfo(this, Version.getAppName(app), getString(R.string.go_back_to_osmand),
-				PendingIntent.getActivity(this, 0, notificationIndent, PendingIntent.FLAG_UPDATE_CURRENT));
-		return notification;
-	}
-
-	public boolean isFirstTime(){
-		return firstTime;
-	}
-
-	public void userClosedWelcomeCard(){
-		firstTime = false;
-		dashboardOnMap.refreshDashboardFragments();
-
+		PendingIntent pi = PendingIntent.getActivity(this, 0, notificationIndent, PendingIntent.FLAG_UPDATE_CURRENT);
+//		Notification notification = new Notification(R.drawable.bgs_icon_drive, "", //$NON-NLS-1$
+//				System.currentTimeMillis());
+//		notification.flags |= Notification.FLAG_AUTO_CANCEL;
+//		notification.setLatestEventInfo(this, Version.getAppName(app), getString(R.string.go_back_to_osmand),
+//				pi);
+		int smallIcon = app.getSettings().getApplicationMode().getSmallIconDark();
+		final Builder noti = new NotificationCompat.Builder(
+	            this).setContentTitle(Version.getAppName(app))
+	        .setContentText(getString(R.string.go_back_to_osmand))
+	        .setSmallIcon(smallIcon )
+//	        .setLargeIcon(Helpers.getBitmap(R.drawable.mirakel, getBaseContext()))
+	        .setContentIntent(pi).setOngoing(true);
+		return noti.build();
 	}
 
 	@Override
@@ -149,17 +148,17 @@ public class MapActivity extends AccessibleActivity {
 		// getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.main);
 
-		mapView = new OsmandMapTileView(this);
+		mapView = new OsmandMapTileView(this, getWindow().getDecorView().getWidth(),
+				getWindow().getDecorView().getHeight());
+		app.getAppInitializer().checkAppVersionChanged(this);
 		mapActions = new MapActivityActions(this);
 		mapLayers = new MapActivityLayers(this);
 		if (mapViewTrackingUtilities == null) {
 			mapViewTrackingUtilities = new MapViewTrackingUtilities(app);
 		}
-		firstTime = app.getAppInitializer().isFirstTime(this);
 		dashboardOnMap.createDashboardView();
 		checkAppInitialization();
 		parseLaunchIntentLocation();
-		getMyApplication().getLocationProvider().redownloadAGPS();
 		mapView.setTrackBallDelegate(new OsmandMapTileView.OnTrackBallListener() {
 			@Override
 			public boolean onTrackBallEvent(MotionEvent e) {
@@ -208,15 +207,9 @@ public class MapActivity extends AccessibleActivity {
 			System.err.println("OnCreate for MapActivity took " + (System.currentTimeMillis() - tm) + " ms");
 		}
 		mapView.refreshMap(true);
-		if(dashboardOnMap != null) {
-			dashboardOnMap.updateLocation(true, true, false);
-		}
 	}
 
 	private void checkAppInitialization() {
-		if (app.isApplicationInitializing() || DashboardOnMap.staticVisible) {
-			dashboardOnMap.setDashboardVisibility(true, DashboardOnMap.staticVisibleType);
-		}
 		if (app.isApplicationInitializing()) {
 			findViewById(R.id.init_progress).setVisibility(View.VISIBLE);
 			initListener = new AppInitializeListener() {
@@ -232,7 +225,8 @@ public class MapActivity extends AccessibleActivity {
 						openGlSetup = true;
 					}
 					if(event == InitEvents.MAPS_INITIALIZED) {
-						mapView.refreshMap(true);
+						// TODO investigate if this false cause any issues!
+						mapView.refreshMap(false);
 						if(dashboardOnMap != null) {
 							dashboardOnMap.updateLocation(true, true, false);
 						}
@@ -244,7 +238,7 @@ public class MapActivity extends AccessibleActivity {
 					if(!openGlSetup) {
 						setupOpenGLView(false);
 					}
-					mapView.refreshMap(true);
+					mapView.refreshMap(false);
 					if(dashboardOnMap != null) {
 						dashboardOnMap.updateLocation(true, true, false);
 					}
@@ -348,6 +342,12 @@ public class MapActivity extends AccessibleActivity {
 	protected void onResume() {
 		super.onResume();
 		long tm = System.currentTimeMillis();
+		if (app.isApplicationInitializing() || DashboardOnMap.staticVisible) {
+			if(!dashboardOnMap.isVisible()) {
+				dashboardOnMap.setDashboardVisibility(true, DashboardOnMap.staticVisibleType);
+			}
+		}
+		dashboardOnMap.updateLocation(true, true, false);
 
 		cancelNotification();
 		// fixing bug with action bar appearing on android 2.3.3
@@ -378,9 +378,6 @@ public class MapActivity extends AccessibleActivity {
 		settings.APPLICATION_MODE.addListener(applicationModeListener);
 		updateApplicationModeSettings();
 
-		String filterId = settings.getPoiFilterForMap();
-		PoiLegacyFilter poiFilter = app.getPoiFilters().getFilterById(filterId);
-		mapLayers.getPoiMapLayer().setFilter(poiFilter);
 
 		// if destination point was changed try to recalculate route
 		TargetPointsHelper targets = app.getTargetPointsHelper();
@@ -473,7 +470,7 @@ public class MapActivity extends AccessibleActivity {
 	public void readLocationToShow() {
 		LatLon cur = new LatLon(mapView.getLatitude(), mapView.getLongitude());
 		LatLon latLonToShow = settings.getAndClearMapLocationToShow();
-		PointDescription mapLabelToShow = settings.getAndClearMapLabelToShow();
+		PointDescription mapLabelToShow = settings.getAndClearMapLabelToShow(latLonToShow);
 		Object toShow = settings.getAndClearObjectToShow();
 		int status = settings.isRouteToPointNavigateAndClear();
 		if (status != 0) {
@@ -493,7 +490,7 @@ public class MapActivity extends AccessibleActivity {
 			if (mapLabelToShow != null) {
 				mapLayers.getContextMenuLayer().setSelectedObject(toShow);
 				mapLayers.getContextMenuLayer().setLocation(latLonToShow,
-						mapLabelToShow.getFullPlainName(this, latLonToShow.getLatitude(), latLonToShow.getLongitude()));
+						mapLabelToShow.getFullPlainName(this));
 			}
 			if (!latLonToShow.equals(cur)) {
 				mapView.getAnimatedDraggingThread().startMoving(latLonToShow.getLatitude(),
@@ -588,6 +585,9 @@ public class MapActivity extends AccessibleActivity {
 			LatLon loc = getMapLocation();
 			newIntent.putExtra(SearchActivity.SEARCH_LAT, loc.getLatitude());
 			newIntent.putExtra(SearchActivity.SEARCH_LON, loc.getLongitude());
+			if(mapViewTrackingUtilities.isMapLinkedToLocation()) {
+				newIntent.putExtra(SearchActivity.SEARCH_NEARBY, true);
+			}
 			startActivity(newIntent);
 			newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			return true;
@@ -810,6 +810,9 @@ public class MapActivity extends AccessibleActivity {
 	}
 
 	public void checkExternalStorage() {
+		if(Build.VERSION.SDK_INT >= 19) {
+			return;
+		}
 		String state = Environment.getExternalStorageState();
 		if (Environment.MEDIA_MOUNTED.equals(state)) {
 			// ok
@@ -849,8 +852,8 @@ public class MapActivity extends AccessibleActivity {
 		Intent intent = getIntent();
 		if (intent != null && intent.getData() != null) {
 			Uri data = intent.getData();
-			if ("http".equalsIgnoreCase(data.getScheme()) && "download.osmand.net".equals(data.getHost())
-					&& "/go".equals(data.getPath())) {
+			if ("http".equalsIgnoreCase(data.getScheme()) && data.getHost() != null && data.getHost().contains("osmand.net") &&
+					data.getPath() != null && data.getPath().startsWith("/go")) {
 				String lat = data.getQueryParameter("lat");
 				String lon = data.getQueryParameter("lon");
 				if (lat != null && lon != null) {

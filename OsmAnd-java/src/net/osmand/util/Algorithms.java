@@ -5,9 +5,15 @@ import java.io.Closeable;
 import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import net.osmand.PlatformUtil;
 
@@ -34,6 +40,36 @@ public class Algorithms {
 			}
 		}
 		return def;
+	}
+	
+	private static final char CHAR_TOSPLIT = 0x01;
+
+	public static Map<String, String> decodeMap(String s) {
+		if (isEmpty(s)) {
+			return Collections.emptyMap();
+		}
+		Map<String, String> names = new HashMap<String, String>();
+		String[] split = s.split(CHAR_TOSPLIT + "");
+		// last split is an empty string
+		for (int i = 1; i < split.length; i += 2) {
+			names.put(split[i - 1], split[i]);
+		}
+		return names;
+	}
+	
+	public static String encodeMap(Map<String, String> names) {
+		if (names != null) {
+			Iterator<Entry<String, String>> it = names.entrySet().iterator();
+			StringBuilder bld = new StringBuilder();
+			while (it.hasNext()) {
+				Entry<String, String> e = it.next();
+				bld.append(e.getKey()).append(CHAR_TOSPLIT)
+						.append(e.getValue().replace(CHAR_TOSPLIT, (char)(CHAR_TOSPLIT + 1)));
+				bld.append(CHAR_TOSPLIT);
+			}
+			return bld.toString();
+		}
+		return "";
 	}
 	
 	public static int findFirstNumberEndIndex(String value) {
@@ -125,6 +161,7 @@ public class Algorithms {
         	throw new IllegalArgumentException("Unknown color " + colorString); //$NON-NLS-1$
     	}
 	
+    	
 	public static int extractFirstIntegerNumber(String s) {
 		int i = 0;
 		for (int k = 0; k < s.length(); k++) {
@@ -135,6 +172,34 @@ public class Algorithms {
 			}
 		}
 		return i;
+	}
+	
+	public static int extractIntegerNumber(String s) {
+		int i = 0;
+		int k = 0;
+		for (k = 0; k < s.length(); k++) {
+			if (Character.isDigit(s.charAt(k))) {
+				break;
+			}
+		}
+		for (; k < s.length(); k++) {
+			if (Character.isDigit(s.charAt(k))) {
+				i = i * 10 + (s.charAt(k) - '0');
+			} else {
+				break;
+			}
+		}
+		return i;
+	}
+	
+	public static String extractIntegerPrefix(String s) {
+		int k = 0;
+		for (; k < s.length(); k++) {
+			if (Character.isDigit(s.charAt(k))) {
+				return s.substring(0, k);
+			}
+		}
+		return "";
 	}
 	
 	public static String extractIntegerSuffix(String s) {
@@ -148,6 +213,19 @@ public class Algorithms {
 	}
 	
 	
+	public static void fileCopy(File src, File dst) throws IOException {
+		FileOutputStream fout = new FileOutputStream(dst);
+		try {
+			FileInputStream fin = new FileInputStream(src);
+			try {
+				Algorithms.streamCopy(fin, fout);
+			} finally {
+				fin.close();
+			}
+		} finally {
+			fout.close();
+		}
+	}
 	public static void streamCopy(InputStream in, OutputStream out) throws IOException{
 		byte[] b = new byte[BUFFER_SIZE];
 		int read;
@@ -348,9 +426,16 @@ public class Algorithms {
 
 	public static String colorToString(int color) {
 		if ((0xFF000000 & color) == 0xFF000000) {
-			return "#" + Integer.toHexString(color & 0x00FFFFFF); //$NON-NLS-1$
+			return "#" + format(6, Integer.toHexString(color & 0x00FFFFFF)); //$NON-NLS-1$
 		} else {
-			return "#" + Integer.toHexString(color); //$NON-NLS-1$
+			return "#" + format(8, Integer.toHexString(color)); //$NON-NLS-1$
 		}
+	}
+
+	private static String format(int i, String hexString) {
+		while(hexString.length() < i) {
+			hexString = "0" + hexString;
+		}
+		return hexString;
 	}
 }

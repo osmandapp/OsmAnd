@@ -1,9 +1,6 @@
 package net.osmand.plus.activities;
 
 
-import java.io.File;
-
-import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -13,21 +10,14 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
-import android.text.method.LinkMovementMethod;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -80,8 +70,7 @@ public class SettingsActivity extends SettingsBaseActivity {
 				startActivity(new Intent(this, SettingsNavigationActivity.class));
 			} 
 		}
-		if ((Version.getBuildAppEdition(getMyApplication()).length() > 0
-				|| Version.isDeveloperVersion(getMyApplication())) &&
+		if ((Version.isDeveloperVersion(getMyApplication())) &&
 				OsmandPlugin.getEnabledPlugin(OsmandDevelopmentPlugin.class) != null){
 			version = new Preference(this);
 			version.setOnPreferenceClickListener(this);
@@ -145,7 +134,7 @@ public class SettingsActivity extends SettingsBaseActivity {
 		ll.setOrientation(LinearLayout.VERTICAL);
 		Toolbar tb = new Toolbar(this);
 		tb.setClickable(true);
-		Drawable back = ((OsmandApplication)getApplication()).getIconsCache().getActionBarIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+		Drawable back = ((OsmandApplication)getApplication()).getIconsCache().getIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
 		tb.setNavigationIcon(back);
 		tb.setTitle(R.string.about_settings);
 		tb.setBackgroundColor(getResources().getColor( getResIdFromAttribute(this, R.attr.pstsTabBackground)));

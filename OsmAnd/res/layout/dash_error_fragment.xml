@@ -4,7 +4,11 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:background="?attr/card_bg"
+	android:background="?attr/bg_card"
+	android:layout_marginTop="@dimen/dash_margin"
+    android:layout_marginBottom="@dimen/dash_margin"
+    android:layout_marginLeft="@dimen/dash_margin_h"
+    android:layout_marginRight="@dimen/dash_margin_h"
 	android:orientation="vertical">
 
 	<LinearLayout
@@ -42,13 +46,14 @@
 
 	<LinearLayout
 		android:layout_width="fill_parent"
-		android:layout_height="@dimen/dashHeaderHeight"
+		android:layout_height="@dimen/list_header_height"
 		android:orientation="horizontal">
 
 		<Button
 			android:id="@+id/error_btn"
-			style="?attr/dashboardGeneralButtonStyle"
+			style="@style/DashboardGeneralButton"
 			android:layout_width="0dp"
+			android:gravity="center"
 			android:layout_weight="1"
 			android:text="@string/send_report"/>
 
@@ -59,8 +64,9 @@
 
 		<Button
 			android:id="@+id/error_cancel"
-			style="?attr/dashboardGeneralButtonStyle"
+			style="@style/DashboardGeneralButton"
 			android:layout_width="0dp"
+			android:gravity="center"
 			android:layout_height="wrap_content"
 			android:layout_weight="1"
 			android:text="@string/shared_string_dismiss"/>

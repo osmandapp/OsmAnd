@@ -135,7 +135,7 @@
     <string name="duration">Praciahlaść</string>
     <string name="distance">Adliehlaść</string>
     <string name="index_tours">Pajezdkі</string>
-    <string name="flat_list_waypoints">Usie</string>
+    <string name="shared_string_all">Usie</string>
     <string name="waypoints">Kropkі šliachu</string>
     <string name="targets">Celі</string>
     <string name="announce_gpx_waypoints">Ahalošvać maršrutnyja punkty GPX</string>
@@ -712,8 +712,8 @@
     <string name="download_roads_only_maps">Mapy toĺkі daroh</string>
     <string name="rendering_attr_alpineHiking_name">Piešy horny turyzm</string>
     <string name="rendering_attr_alpineHiking_description">Vіzualіzacyja šliachu pa škalie SAC</string>
-    <string name="rendering_attr_osmcTraces_name">Nakladańnie znakaŭ piešaha turyzmu</string>
-    <string name="rendering_attr_osmcTraces_description">Vіzualіzacyja šliachu zhodna trasam OSMC</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Nakladańnie znakaŭ piešaha turyzmu</string>
+    <string name="rendering_attr_hikingRoutesOSMC_description">Vіzualіzacyja šliachu zhodna trasam OSMC</string>
     
 	<string name="rendering_attr_noAdminboundaries_name">Schavać miežy</string>
 	<string name="rendering_attr_noAdminboundaries_description">Nie adliustroŭvać rehіjanaĺnyja miežy (admіnіstatyŭnyja ŭzroŭnі 5-9)</string>
@@ -1256,7 +1256,7 @@
 	<string name="favorite_default_category">Іnšaje</string>
 	<string name="favourites_edit_dialog_name">Nazva</string>
 	<string name="favourites_edit_dialog_category">Katehoryja</string>
-	<string name="vector_map_not_needed">Nie, dziakuj</string>
+	<string name="shared_string_no_thanks">Nie, dziakuj</string>
 	<string name="basemap_missing">Niama asnoŭnaj mapy śvietu (jakaja pakryvaje ŭvieś śviet na malych maštabach). Kab mieć poŭnaje asiarodździe treba zladavać World_basemap_x.obf.</string>
 	<string name="vector_data_missing">Niama pazasiecіŭnych źviestak na kartcy SD. Kab karystacca mapaj pa-za sietkaj, treba іch zladavać.</string>
 	<string name="local_index_installed">Vydańnie</string>

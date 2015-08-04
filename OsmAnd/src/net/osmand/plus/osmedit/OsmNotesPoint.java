@@ -1,8 +1,6 @@
 package net.osmand.plus.osmedit;
 
-import java.io.Serializable;
-
-public class OsmNotesPoint extends OsmPoint implements Serializable {
+public class OsmNotesPoint extends OsmPoint {
 	private static final long serialVersionUID = 729654300829771468L;
 
 	private long id;

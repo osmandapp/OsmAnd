@@ -3,7 +3,11 @@
 			  xmlns:tools="http://schemas.android.com/tools"
 			  android:layout_width="match_parent"
 			  android:layout_height="match_parent"
-			  android:background="?attr/card_bg"
+			  android:background="?attr/bg_card"
+			  android:layout_marginTop="@dimen/dash_margin"
+    		  android:layout_marginBottom="@dimen/dash_margin"
+    		  android:layout_marginLeft="@dimen/dash_margin_h"
+    		  android:layout_marginRight="@dimen/dash_margin_h"
 			  android:orientation="vertical">
 
 	<LinearLayout
@@ -41,7 +45,7 @@
 					android:layout_height="wrap_content"
 					android:layout_weight="1"
 					android:textColor="@color/color_white"
-					android:textSize="@dimen/dash_parking_big_text_size"
+					android:textSize="@dimen/default_list_text_size"
 					tools:text="@string/app_version"/>
 
 				<TextView
@@ -49,7 +53,7 @@
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:textColor="@color/color_white"
-					android:textSize="@dimen/dash_parking_small_text_size"
+					android:textSize="@dimen/default_desc_text_size"
 					tools:text="@string/app_mode_aircraft"/>
 
 				<TextView
@@ -67,7 +71,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:textColor="@color/color_white"
-				android:textSize="@dimen/dash_parking_small_text_size"
+				android:textSize="@dimen/default_desc_text_size"
 				tools:text="@string/parking_place_limited"/>
 
 
@@ -77,7 +81,8 @@
 
 	<Button
 		android:id="@+id/remove_tag"
-		style="?attr/dashboardGeneralButtonStyle"
+		android:gravity="center"
+		style="@style/DashboardGeneralButton"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_marginRight="0dp"

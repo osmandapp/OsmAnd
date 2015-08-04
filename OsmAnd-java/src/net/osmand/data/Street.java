@@ -49,29 +49,7 @@ public class Street extends MapObject {
 		return buildings;
 	}
 	
-	@Override
-	public void setName(String name) {
-		if (name.equals(getName())) {
-			return;
-		}
-		if (city != null && city.getStreet(getName()) == this) {
-			city.unregisterStreet(getName());
-			super.setName(name);
-			Street s = city.registerStreet(this);
-		} else {
-			super.setName(name);
-		}
-	}
 	
-	public String getNameWithoutCityPart(boolean en) {
-		String nm = getName(en);
-		int t = nm.lastIndexOf('(');
-		if(t > 0) {
-			return nm.substring(0, t);
-		}
-		return nm;
-		
-	}
 	
 	public City getCity() {
 		return city;
@@ -94,9 +72,23 @@ public class Street extends MapObject {
 			}
 		});
 	}
-
+	
+	/// GENERATION
+	
+	
 	public void mergeWith(Street street) {
 		buildings.addAll(street.getBuildings());
+		copyNames(street);
 	}
+
+	public String getNameWithoutCityPart(String lang) {
+		String nm = getName(lang);
+		int t = nm.lastIndexOf('(');
+		if (t > 0) {
+			return nm.substring(0, t);
+		}
+		return nm;
+	}
+
 
 }

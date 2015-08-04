@@ -41,7 +41,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 public class OsmandRasterMapsPlugin extends OsmandPlugin {
-	private static final String ID = "osmand.rastermaps";
+	public static final String ID = "osmand.rastermaps";
 	private OsmandSettings settings;
 	private OsmandApplication app;
 	
@@ -50,12 +50,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	
 	public OsmandRasterMapsPlugin(OsmandApplication app) {
 		this.app = app;
-	}
-	
-	@Override
-	public boolean init(OsmandApplication app, Activity activity) {
 		settings = app.getSettings();
-		return true;
 	}
 	
 	@Override
@@ -110,8 +105,18 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			createLayers();
 		}
 		overlayLayer.setAlpha(settings.MAP_OVERLAY_TRANSPARENCY.get());
-		updateLayer(mapView, settings, overlayLayer, settings.MAP_OVERLAY, 0.7f, settings.MAP_OVERLAY == settingsToWarnAboutMap);
-		updateLayer(mapView, settings, underlayLayer, settings.MAP_UNDERLAY, -0.5f, settings.MAP_UNDERLAY == settingsToWarnAboutMap);
+		if(isActive()) {
+			updateLayer(mapView, settings, overlayLayer, settings.MAP_OVERLAY, 0.7f, settings.MAP_OVERLAY == settingsToWarnAboutMap);
+		} else {
+			mapView.removeLayer(overlayLayer);
+			overlayLayer.setMap(null);
+		}
+		if(isActive()) {
+			updateLayer(mapView, settings, underlayLayer, settings.MAP_UNDERLAY, -0.5f, settings.MAP_UNDERLAY == settingsToWarnAboutMap);
+		} else {
+			mapView.removeLayer(underlayLayer);
+			underlayLayer.setMap(null);
+		}
 		layers.updateMapSource(mapView, settingsToWarnAboutMap);
 	}
 	
@@ -214,11 +219,10 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 				return true;
 			}
 		};
-		adapter.item(R.string.layer_map).iconColor(R.drawable.ic_world_globe_dark)
-				.listen(listener).position(3).reg();
-		adapter.item(R.string.layer_overlay).selected(overlayLayer.getMap() != null ? 1 : 0).
+		
+		adapter.item(R.string.layer_overlay).selected(overlayLayer != null && overlayLayer.getMap() != null ? 1 : 0).
 				iconColor(R.drawable.ic_layer_top_dark).listen(listener).position(14).reg();
-		adapter.item(R.string.layer_underlay).selected(underlayLayer.getMap() != null ? 1 : 0) 
+		adapter.item(R.string.layer_underlay).selected(underlayLayer != null && underlayLayer.getMap() != null ? 1 : 0) 
 				.iconColor(R.drawable.ic_layer_bottom_dark).listen(listener).position(15).reg();
 	}
 	

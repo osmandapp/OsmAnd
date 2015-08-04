@@ -3,46 +3,44 @@ package net.osmand.plus.osmedit;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
-import android.support.v4.app.Fragment;
 
 import net.osmand.osm.edit.EntityInfo;
 import net.osmand.osm.edit.Node;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Denis
  * on 11.03.2015.
  */
-public class UploadOpenstreetmapPointAsyncTask extends AsyncTask<OsmPoint, OsmPoint, Integer> {
-
+public class UploadOpenstreetmapPointAsyncTask
+		extends AsyncTask<OsmPoint, OsmPoint, Map<OsmPoint, String>> {
 	private ProgressDialog progress;
-
 	private OpenstreetmapRemoteUtil remotepoi;
-
 	private OsmBugsRemoteUtil remotebug;
-
-	private OpenstreetmapsDbHelper dbpoi;
-	private OsmBugsDbHelper dbbug;
-
 	private int listSize = 0;
-
 	private boolean interruptUploading = false;
+	private OsmEditsUploadListener listener;
+	private OsmEditingPlugin plugin;
 
-	private Fragment ctx;
-
-	public UploadOpenstreetmapPointAsyncTask(ProgressDialog progress,Fragment ctx, OpenstreetmapRemoteUtil remotepoi, OsmBugsRemoteUtil remotebug,
+	public UploadOpenstreetmapPointAsyncTask(ProgressDialog progress,
+											 OsmEditsUploadListener listener,
+											 OsmEditingPlugin plugin,
+											 OpenstreetmapRemoteUtil remotepoi,
+											 OsmBugsRemoteUtil remotebug,
 											 int listSize) {
 		this.progress = progress;
+		this.plugin = plugin;
 		this.remotepoi = remotepoi;
 		this.remotebug = remotebug;
 		this.listSize = listSize;
-		this.ctx = ctx;
-		dbpoi = new OpenstreetmapsDbHelper(ctx.getActivity());
-		dbbug = new OsmBugsDbHelper(ctx.getActivity());
+		this.listener = listener;
 	}
 
 	@Override
-	protected Integer doInBackground(OsmPoint... points) {
-		int uploaded = 0;
+	protected Map<OsmPoint, String> doInBackground(OsmPoint... points) {
+		Map<OsmPoint, String> loadErrorsMap = new HashMap<>();
 
 		for (OsmPoint point : points) {
 			if (interruptUploading)
@@ -56,30 +54,29 @@ public class UploadOpenstreetmapPointAsyncTask extends AsyncTask<OsmPoint, OsmPo
 				}
 				Node n = remotepoi.commitNodeImpl(p.getAction(), p.getEntity(), entityInfo, p.getComment(), false);
 				if (n != null) {
-					dbpoi.deletePOI(p);
+					plugin.getDBPOI().deletePOI(p);
 					publishProgress(p);
-					uploaded++;
 				}
+				loadErrorsMap.put(point, n != null ? null : "Unknown problem");
 			} else if (point.getGroup() == OsmPoint.Group.BUG) {
 				OsmNotesPoint p = (OsmNotesPoint) point;
-				boolean success = false;
+				String errorMessage = null;
 				if (p.getAction() == OsmPoint.Action.CREATE) {
-					success = remotebug.createNewBug(p.getLatitude(), p.getLongitude(), p.getText(), p.getAuthor()) == null;
+					errorMessage = remotebug.createNewBug(p.getLatitude(), p.getLongitude(), p.getText(), p.getAuthor());
 				} else if (p.getAction() == OsmPoint.Action.MODIFY) {
-					success = remotebug.addingComment(p.getId(), p.getText(), p.getAuthor()) == null;
+					errorMessage = remotebug.addingComment(p.getId(), p.getText(), p.getAuthor());
 				} else if (p.getAction() == OsmPoint.Action.DELETE) {
-					success = remotebug.closingBug(p.getId(), p.getText(), p.getAuthor()) == null;
+					errorMessage = remotebug.closingBug(p.getId(), p.getText(), p.getAuthor());
 				}
-				if (success) {
-					dbbug.deleteAllBugModifications(p);
-					uploaded++;
+				if (errorMessage == null) {
+					plugin.getDBBug().deleteAllBugModifications(p);
 					publishProgress(p);
 				}
-
+				loadErrorsMap.put(point, errorMessage);
 			}
 		}
 
-		return uploaded;
+		return loadErrorsMap;
 	}
 
 	@Override
@@ -98,11 +95,9 @@ public class UploadOpenstreetmapPointAsyncTask extends AsyncTask<OsmPoint, OsmPo
 	}
 
 	@Override
-	protected void onPostExecute(Integer result) {
+	protected void onPostExecute(Map<OsmPoint, String> loadErrorsMap) {
 		progress.dismiss();
-		if (ctx instanceof OsmEditsUploadListener){
-			((OsmEditsUploadListener)ctx).uploadEnded(result);
-		}
+		listener.uploadEnded(loadErrorsMap);
 	}
 
 	public void setInterruptUploading(boolean b) {
@@ -111,10 +106,8 @@ public class UploadOpenstreetmapPointAsyncTask extends AsyncTask<OsmPoint, OsmPo
 
 	@Override
 	protected void onProgressUpdate(OsmPoint... points) {
-		for(OsmPoint p : points) {
-			if (ctx instanceof OsmEditsUploadListener){
-				((OsmEditsUploadListener)ctx).uploadUpdated(p);
-			}
+		for (OsmPoint p : points) {
+			listener.uploadUpdated(p);
 			progress.incrementProgressBy(1);
 		}
 	}

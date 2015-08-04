@@ -9,13 +9,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
-import android.preference.*;
-import android.view.MenuItem;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.TextView;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
@@ -30,11 +23,22 @@ import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnMultiChoiceClickListener;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
+import android.preference.EditTextPreference;
+import android.preference.ListPreference;
+import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
+import android.preference.PreferenceGroup;
+import android.preference.PreferenceScreen;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -75,6 +79,17 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 
 
 	public CheckBoxPreference createCheckBoxPreference(OsmandPreference<Boolean> b, int title, int summary) {
+		CheckBoxPreference p = new CheckBoxPreference(this);
+		p.setTitle(title);
+		p.setKey(b.getId());
+		p.setSummary(summary);
+		p.setOnPreferenceChangeListener(this);
+		screenPreferences.put(b.getId(), p);
+		booleanPreferences.put(b.getId(), b);
+		return p;
+	}
+	
+	public CheckBoxPreference createCheckBoxPreference(OsmandPreference<Boolean> b, String title, String summary) {
 		CheckBoxPreference p = new CheckBoxPreference(this);
 		p.setTitle(title);
 		p.setKey(b.getId());
@@ -156,6 +171,9 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 	
 	public static String getStringPropertyValue(Context ctx, String propertyValue) {		
 		try {
+			if(propertyValue == null) {
+				return "";
+			}
 			final String propertyValueReplaced = propertyValue.replaceAll("\\s+","_");
 			Field f = R.string.class.getField("rendering_value_" + propertyValueReplaced + "_name");
 			if (f != null) {
@@ -224,7 +242,6 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 		}
 	}
 	
-	@SuppressWarnings("unused")
 	private void registerDisablePreference(OsmandPreference p, String value, OsmandPreference<Boolean> disable) {
 		LinkedHashMap<String, Object> vals = (LinkedHashMap<String, Object>) listPrefValues.get(p.getId());
 		vals.put(value, disable);
@@ -286,7 +303,9 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 			k++;
 		}
 		ListPreference lp = createListPreference(b, intDescriptions, ints, title, summary);
-		registerDisablePreference(b, getString(R.string.confirm_every_run), disable);
+		if(disable != null) {
+			registerDisablePreference(b, getString(R.string.confirm_every_run), disable);
+		}
 		return lp;
 	}
 
@@ -322,11 +341,10 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 			for (ApplicationMode a : modes) {
 				s.add(a.toHumanString(getMyApplication()));
 			}
-
 			SpinnerAdapter spinnerAdapter = new SpinnerAdapter(this,
-					android.R.layout.simple_spinner_item, s);
-
-			spinnerAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+					R.layout.spinner_item, s);
+//			android.R.layout.simple_spinner_dropdown_item
+			spinnerAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
 			getSpinner().setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 				@Override
 				public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -339,7 +357,6 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 
 				}
 			});
-
 			getSpinner().setAdapter(spinnerAdapter);
 			getSpinner().setVisibility(View.VISIBLE);
 		}

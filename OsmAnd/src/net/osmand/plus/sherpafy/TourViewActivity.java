@@ -231,7 +231,7 @@ public class TourViewActivity extends OsmandActionBarActivity {
 								   final MenuItem.OnMenuItemClickListener listener) {
 		MenuItem menuItem = m.add(0, id, 0, titleRes);
 		if (r != 0) {
-			menuItem.setIcon(getMyApplication().getIconsCache().getActionBarIcon(r));
+			menuItem.setIcon(getMyApplication().getIconsCache().getIcon(r));
 		}
 		MenuItemCompat.setShowAsAction(menuItem, menuItemType);
 		menuItem.setOnMenuItemClickListener(listener);

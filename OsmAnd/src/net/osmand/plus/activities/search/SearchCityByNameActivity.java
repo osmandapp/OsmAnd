@@ -38,16 +38,6 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 		//This is really only a "clear input text field", hence do not reset settings here
 		//searchVillagesMode = -1;
 		//osmandSettings.setLastSearchedCity(-1L, "", null);
-
-		//Issue 2535: Try to reload indexes as workaround
-		//            This creates the issue immediately after tapping "Reset", but then going back to the searchAdressFragment screen resets the issue and everything works(!?)
-		//new AsyncTask<Void, Void, List<String>>() {
-		//	@Override
-		//	protected List<String> doInBackground(Void... params) {
-		//		return getMyApplication().getResourceManager().reloadIndexes(IProgress.EMPTY_PROGRESS);
-		//	}
-		//}.execute();
-
 		super.reset();
 	}
 
@@ -74,9 +64,8 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 	
 	@Override
 	protected Comparator<? super City> createComparator() {
-		final boolean en = getMyApplication().getSettings().usingEnglishNames();
 		final StringMatcherMode startsWith = CollatorStringMatcher.StringMatcherMode.CHECK_ONLY_STARTS_WITH;
-		return new CityComparator(startsWith, en);
+		return new CityComparator(startsWith, getMyApplication().getSettings().MAP_PREFERRED_LOCALE.get());
 	}
 
 	@Override
@@ -167,37 +156,36 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 	public String getText(City obj) {
 		LatLon l = obj.getLocation();
 		if (getCurrentFilter().length() > 2 ) {
-			String name = obj.getName(region.useEnglishNames());
-			if (obj.getType() != null) {
-				name += " [" + OsmAndFormatter.toPublicString(obj.getType(), getMyApplication()) + "]";
-			}
+			String name = obj.getName(region.getLang());
 			if(obj.getClosestCity() != null) {
-				name += " - " + obj.getClosestCity().getName(region.useEnglishNames()) ;
+				name += " - " + obj.getClosestCity().getName(region.getLang()) ;
 				LatLon loc = obj.getClosestCity().getLocation();
 				if(loc != null && l != null) {
 					name += " " + OsmAndFormatter.getFormattedDistance((int) MapUtils.getDistance(l, loc), getMyApplication()); 
 				}
 				return name;
+			} else {
+				if (obj.getType() != null) {
+					name += " - " + OsmAndFormatter.toPublicString(obj.getType(), getMyApplication());
+				}
 			}
 			return name;
 		} else {
-			return obj.getName(region.useEnglishNames());
+			return obj.getName(region.getLang());
 		}
 	}
 	
 	@Override
 	public String getShortText(City obj) {
-		return obj.getName(region.useEnglishNames());
+		return obj.getName(region.getLang());
 	}
 	
 	@Override
 	public void itemSelected(City obj) {
-		settings.setLastSearchedCity(obj.getId(), obj.getName(region.useEnglishNames()), obj.getLocation());
-		// Issue 2535: Disabling the next 3 lines fixes the issue of the Search City dialogue becoming non-functional after the first tapping on a found village (not city)
-		//             but then the issue is still present once a neighborhood street is selected on the Search Street screen
-		//if (region.getCityById(obj.getId(), obj.getName(region.useEnglishNames())) == null) {
-		//	region.addCityToPreloadedList((City) obj);
-		//}
+		settings.setLastSearchedCity(obj.getId(), obj.getName(region.getLang()), obj.getLocation());
+		if (region.getCityById(obj.getId(), obj.getName(region.getLang())) == null) {
+			region.addCityToPreloadedList((City) obj);
+		}
 		quitActivity(SearchStreetByNameActivity.class);
 	}
 
@@ -209,13 +197,13 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 	private final class CityComparator implements Comparator<City> {
 		private final StringMatcherMode startsWith;
 		private final net.osmand.Collator cs;
-		private final boolean en;
+		private final String lang ;
 
 		private CityComparator(StringMatcherMode startsWith, 
-				boolean en) {
+				String lang ) {
 			this.startsWith = startsWith;
 			this.cs = OsmAndCollator.primaryCollator();
-			this.en = en;
+			this.lang = lang;
 		}
 
 		@Override
@@ -226,8 +214,8 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 			if (compare != 0) {
 				return compare;
 			}
-			boolean st1 = CollatorStringMatcher.cmatches(cs, lhs.getName(en), part, startsWith);
-			boolean st2 = CollatorStringMatcher.cmatches(cs, rhs.getName(en), part, startsWith);
+			boolean st1 = CollatorStringMatcher.cmatches(cs, lhs.getName(lang), part, startsWith);
+			boolean st2 = CollatorStringMatcher.cmatches(cs, rhs.getName(lang), part, startsWith);
 		    if(st1 != st2) {
 		    	return st1 ? 1 : -1;
 		    }

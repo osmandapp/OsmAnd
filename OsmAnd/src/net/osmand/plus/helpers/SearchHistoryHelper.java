@@ -3,12 +3,12 @@ package net.osmand.plus.helpers;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -416,22 +416,22 @@ public class SearchHistoryHelper {
 							"SELECT " + HISTORY_COL_NAME + ", " + HISTORY_COL_LAT + "," + HISTORY_COL_LON +", " + 
 									HISTORY_COL_TIME + ", " + HISTORY_COL_FREQ_INTERVALS + ", " + HISTORY_COL_FREQ_VALUES +
 									" FROM " +	HISTORY_TABLE_NAME , null); //$NON-NLS-1$//$NON-NLS-2$
-					Map<String, HistoryEntry> st = new TreeMap<String, HistoryEntry>(); 
+					Map<PointDescription, HistoryEntry> st = new HashMap<PointDescription, HistoryEntry>(); 
 					if (query.moveToFirst()) {
 						boolean reinsert = false;
 						do {
 							String name = query.getString(0);
+							PointDescription p = PointDescription.deserializeFromString(name, new LatLon(query.getDouble(1), query.getDouble(2)));
 							HistoryEntry e = new HistoryEntry(query.getDouble(1), query.getDouble(2), 
-									PointDescription.deserializeFromString(name));
+									p);
 							long time = query.getLong(3);
 							e.setLastAccessTime(time);
 							e.setFrequency(query.getString(4), query.getString(5));
-							if(st.containsKey(name) || st.containsKey(e.getSerializedName()) 
-									|| !Algorithms.objectEquals(name, e.getSerializedName())) {
+							if(st.containsKey(p)) {
 								reinsert = true;
 							}
 							entries.add(e);
-							st.put(e.getSerializedName(), e);
+							st.put(p, e);
 						} while (query.moveToNext());
 						if(reinsert) {
 							System.err.println("Reinsert all values");

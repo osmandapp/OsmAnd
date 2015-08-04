@@ -1,30 +1,24 @@
 package net.osmand.plus.audionotes;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import net.osmand.data.PointDescription;
-import net.osmand.plus.OsmAndAppCustomization;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.dashboard.DashBaseFragment;
-import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.myplaces.FavoritesActivity;
-import android.app.Activity;
-import android.content.Intent;
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import net.osmand.data.PointDescription;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.dashboard.DashBaseFragment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Denis
@@ -37,14 +31,15 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 	AudioVideoNotesPlugin plugin;
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+	public View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		plugin = OsmandPlugin.getEnabledPlugin(AudioVideoNotesPlugin.class);
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_common_fragment, container, false);
 		((TextView) view.findViewById(R.id.fav_text)).setText(R.string.map_widget_av_notes);
 		(view.findViewById(R.id.show_all)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				startFavoritesActivity(FavoritesActivity.NOTES_TAB);
+				startFavoritesActivity(AudioVideoNotesPlugin.NOTES_TAB);
+				closeDashboard();
 			}
 		});
 		return view;
@@ -86,6 +81,8 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 			View view = inflater.inflate(R.layout.note, null, false);
 
 			getNoteView(recording, view, getMyApplication());
+			((ImageView) view.findViewById(R.id.play)).setImageDrawable(getMyApplication().getIconsCache()
+					.getContentIcon(R.drawable.ic_play_dark));
 			view.findViewById(R.id.play).setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {

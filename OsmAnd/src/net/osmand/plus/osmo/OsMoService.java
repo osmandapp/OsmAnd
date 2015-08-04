@@ -4,19 +4,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.math.BigInteger;
-import java.security.KeyFactory;
-import java.security.KeyPair;
-import java.security.KeyPairGenerator;
-import java.security.PublicKey;
-import java.security.interfaces.RSAPublicKey;
-import java.security.spec.RSAPublicKeySpec;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
-
-import javax.crypto.Cipher;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -36,6 +27,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Notification;
@@ -58,7 +50,6 @@ public class OsMoService implements OsMoReactor {
 	private static final String HTTPS_API_PREPARE = "https://api.osmo.mobi/prepare";
 	private static final String HTTP_AUTH = "http://api.osmo.mobi/auth";
 	private static final String HTTPS_AUTH = "https://api.osmo.mobi/auth";
-	private static final boolean USE_RSA_ENCRYPTION = true;
 	
 	public static final String REGENERATE_CMD = "TRACKER_REGENERATE_ID";
 	public static final String SIGN_IN_URL = "http://osmo.mobi/signin?key=";
@@ -244,8 +235,6 @@ public class OsMoService implements OsMoReactor {
 		public long motdTimestamp;
 		
 		public String motd = "";
-		public Cipher clientEncCypher;
-		public Cipher clientDecCypher;
 	}
 	
 	public SessionInfo getCurrentSessionInfo() {
@@ -287,33 +276,12 @@ public class OsMoService implements OsMoReactor {
 			deviceKey = registerOsmoDeviceKey();
 		}
 		HttpClient httpclient = new DefaultHttpClient();
-		KeyPair getMsgPair = null;
-		if (plugin.useHttps() && USE_RSA_ENCRYPTION) {
-			try {
-				KeyPairGenerator rsaGen = KeyPairGenerator.getInstance("RSA");
-				getMsgPair = rsaGen.generateKeyPair();
-			} catch (Exception e1) {
-				if (thread != null) {
-					thread.exc("Private key can't be generated", e1);
-				} else {
-					e1.printStackTrace();
-				}
-			}
-		}
 		HttpPost httppost = new HttpPost(plugin.useHttps()? HTTPS_API_PREPARE : HTTP_API_PREPARE);
 		try {
 			// Add your data
 			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
 			nameValuePairs.add(new BasicNameValuePair("app", Version.getFullVersion(app)));
 			nameValuePairs.add(new BasicNameValuePair("key", deviceKey));
-			if(getMsgPair != null && getMsgPair.getPublic() instanceof RSAPublicKey) {
-				nameValuePairs.add(new BasicNameValuePair("encAlgorithm", "RSA"));
-					BigInteger modulus = ((RSAPublicKey) getMsgPair.getPublic()).getModulus();
-					BigInteger pe = ((RSAPublicKey) getMsgPair.getPublic()).getPublicExponent();
-					nameValuePairs.add(new BasicNameValuePair("encClientPublicKey1", modulus.toString()));
-					nameValuePairs.add(new BasicNameValuePair("encClientPublicKey2", pe.toString()));
-			}
-			
 			if(app.getSettings().OSMO_USER_PWD.get() != null) {
 				nameValuePairs.add(new BasicNameValuePair("auth", app.getSettings().OSMO_USER_PWD.get()));
 			}
@@ -354,23 +322,6 @@ public class OsMoService implements OsMoReactor {
 			si.hostName = a.substring(0, i);
 			si.port = a.substring(i + 1);
 			si.token = obj.getString("token");
-			try {
-				if(getMsgPair != null && obj.has("encServerPublicKey1")) {
-					si.clientEncCypher = Cipher.getInstance("RSA");
-					PublicKey pk = KeyFactory.getInstance("RSA").generatePublic(new RSAPublicKeySpec(new BigInteger(obj.getString("encServerPublicKey1")),
-							new BigInteger(obj.getString("encServerPublicKey2"))));
-					si.clientEncCypher.init(Cipher.ENCRYPT_MODE, pk);
-					
-					si.clientDecCypher = Cipher.getInstance("RSA");
-					si.clientDecCypher.init(Cipher.DECRYPT_MODE, getMsgPair.getPrivate());
-				}
-			} catch (Exception e) {
-				if (thread != null) {
-					thread.exc("Error exchanging private keys", e);
-				} else {
-					e.printStackTrace();
-				}
-			}
 			return si;
 		} catch (ClientProtocolException e) {
 			throw new IOException(e);
@@ -382,7 +333,7 @@ public class OsMoService implements OsMoReactor {
 	}
 
 	private void runNotification(final String error) {
-		final OsMoGroupsActivity ga = plugin.getGroupsActivity();
+		final Activity ga = plugin.getGroupsActivity();
 		if(ga != null) {
 			app.runInUIThread(new Runnable() {
 				
@@ -410,7 +361,7 @@ public class OsMoService implements OsMoReactor {
 	}
 	
 
-	protected void showRegisterAgain(OsMoGroupsActivity ga, String msg) {
+	protected void showRegisterAgain(Activity ga, String msg) {
 		Builder bld = new AlertDialog.Builder(ga);
 		bld.setMessage(msg);
 		bld.setPositiveButton(R.string.shared_string_ok, new OnClickListener() {
@@ -424,11 +375,6 @@ public class OsMoService implements OsMoReactor {
 		
 	}
 
-	private void showDialogAskToReregister(String error) {
-//		Builder bld = new AlertDialog.Builder(this);
-//		bld.setMessage(app.getString(R.string.osmo_io_error) +  error);
-//		bld.show();
-	}
 
 	public void showErrorMessage(String string) {
 		app.showToastMessage(app.getString(R.string.osmo_io_error) +  string);		

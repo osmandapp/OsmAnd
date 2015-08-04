@@ -1,17 +1,15 @@
 package net.osmand.plus.activities;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.view.MenuCompat;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import android.graphics.Shader.TileMode;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
@@ -39,6 +37,15 @@ public abstract class OsmandExpandableListFragment extends Fragment
 		}
 		return v;
 	}
+	
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		getExpandableListView().setBackgroundColor(
+				getResources().getColor(
+						getMyApplication().getSettings().isLightContent() ? R.color.bg_color_light
+								: R.color.bg_color_dark));
+	}
 
 	public View createView(android.view.LayoutInflater inflater, android.view.ViewGroup container) {
 		setHasOptionsMenu(true);
@@ -53,6 +60,10 @@ public abstract class OsmandExpandableListFragment extends Fragment
 		
 	}
 	
+	public ExpandableListAdapter getAdapter() {
+		return adapter;
+	}
+	
 	public void fixBackgroundRepeat(View view) {
 		Drawable bg = view.getBackground();
 		if (bg != null) {
@@ -64,7 +75,9 @@ public abstract class OsmandExpandableListFragment extends Fragment
 		}
 	}
 
-	public ExpandableListView getExpandableListView() { return listView; }
+	public ExpandableListView getExpandableListView() {
+		return listView;
+	}
 
 	public void setListView(ExpandableListView listView) {
 		this.listView = listView;
@@ -113,9 +126,9 @@ public abstract class OsmandExpandableListFragment extends Fragment
 
 	}
 
-	public ActionBarActivity getActionBarActivity() {
-		if (getActivity() instanceof ActionBarActivity) {
-			return (ActionBarActivity) getActivity();
+	public OsmandActionBarActivity getActionBarActivity() {
+		if (getActivity() instanceof OsmandActionBarActivity) {
+			return (OsmandActionBarActivity) getActivity();
 		}
 		return null;
 	}

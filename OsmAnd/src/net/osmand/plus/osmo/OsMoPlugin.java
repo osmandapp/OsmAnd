@@ -1,6 +1,7 @@
 package net.osmand.plus.osmo;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,7 +17,6 @@ import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.Track;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
@@ -29,6 +29,7 @@ import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
 import net.osmand.plus.osmo.OsMoService.SessionInfo;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
 
@@ -38,7 +39,6 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -53,7 +53,7 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 	private TextInfoWidget osmoControl;
 	private OsMoPositionLayer olayer;
 	protected MapActivity mapActivity;
-	protected OsMoGroupsActivity groupsActivity;
+	protected Activity groupsActivity;
 	protected OsMoControlDevice deviceControl;
 	
 	private final static Log log = PlatformUtil.getLog(OsMoPlugin.class);
@@ -86,17 +86,18 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 	}
 	
 	
-	public OsMoGroupsActivity getGroupsActivity() {
+	public Activity getGroupsActivity() {
 		return groupsActivity;
 	}
 	
-	public void setGroupsActivity(OsMoGroupsActivity groupsActivity) {
+	public void setGroupsActivity(Activity groupsActivity) {
 		this.groupsActivity = groupsActivity;
 	}
 
 	@Override
 	public void disable(OsmandApplication app) {
 		super.disable(app);
+		tracker.disableTracker();
 		service.disconnect();
 	}
 
@@ -130,11 +131,12 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 						@Override
 						public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 							OsMoDevice o = (OsMoDevice) selectedObj;
-							double lat = o.getLastLocation() == null ? latitude : o.getLastLocation().getLatitude();
-							double lon = o.getLastLocation() == null ? longitude : o.getLastLocation().getLongitude();
+							Location loc = o.getLastLocation();
+							double lat = loc == null ? latitude : loc.getLatitude();
+							double lon = loc == null ? longitude : loc.getLongitude();
 							mapActivity.getMapView().setLatLon(lat, lon);
 							MapActivity.getSingleMapViewTrackingUtilities().setMapLinkedToLocation(false);
-							OsMoPositionLayer.setFollowTrackerId(o);
+							OsMoPositionLayer.setFollowTrackerId(o, loc);
 							return true;
 						}
 					}).position(0).reg();
@@ -167,19 +169,46 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 	}
 	
 	@Override
+	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
+		if(isActive()) {
+			if(olayer == null) {
+				registerLayers(activity);
+			} 
+			if(osmoControl == null) {
+				registerSideWidget(activity);
+			}
+		} else {
+			MapInfoLayer layer = activity.getMapLayers().getMapInfoLayer();
+			if (layer != null && osmoControl != null) {
+				layer.removeSideWidget(osmoControl);
+				osmoControl = null;
+				layer.recreateControls();
+			}
+			if(olayer != null) {
+				activity.getMapView().removeLayer(olayer);
+				olayer = null;
+			}
+		}
+	}
+	
+	@Override
 	public void registerLayers(MapActivity activity) {
-		super.registerLayers(activity);
-		MapInfoLayer layer = activity.getMapLayers().getMapInfoLayer();
-		osmoControl = createOsMoControl(activity);
-		layer.registerSideWidget(osmoControl,
-				R.drawable.ic_osmo_dark, R.drawable.mon_osmo_signal_inactive, R.string.osmo_control, "osmo_control", false, 18);
-		layer.recreateControls();
-		
+		registerSideWidget(activity);
 		if(olayer != null) {
 			activity.getMapView().removeLayer(olayer);
 		}
 		olayer = new OsMoPositionLayer(activity, this);
 		activity.getMapView().addLayer(olayer, 5.5f);
+	}
+
+	private void registerSideWidget(MapActivity activity) {
+		MapInfoLayer layer = activity.getMapLayers().getMapInfoLayer();
+		if (layer != null) {
+			osmoControl = createOsMoControl(activity);
+			layer.registerSideWidget(osmoControl, R.drawable.ic_osmo_dark, R.string.osmo_control, "osmo_control",
+					false, 18);
+			layer.recreateControls();
+		}
 	}
 	
 	@Override
@@ -200,16 +229,9 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 	 * creates (if it wasn't created previously) the control to be added on a MapInfoLayer that shows a monitoring state (recorded/stopped)
 	 */
 	private TextInfoWidget createOsMoControl(final MapActivity map) {
-		
-		final Drawable srcSmall = map.getResources().getDrawable(R.drawable.mon_osmo_conn_small);
-		final Drawable srcSignalSmall = map.getResources().getDrawable(R.drawable.mon_osmo_conn_signal_small);
-		final Drawable srcBig = map.getResources().getDrawable(R.drawable.mon_osmo_conn_big);
-		final Drawable srcSignalBig = map.getResources().getDrawable(R.drawable.mon_osmo_conn_signal_big);
-//		final Drawable srcinactive = map.getResources().getDrawable(R.drawable.mon_osmo_inactive);
-		final Drawable srcSignalinactive = map.getResources().getDrawable(R.drawable.mon_osmo_signal_inactive);
 		final TextInfoWidget osmoControl = new TextInfoWidget(map) {
 			long lastUpdateTime;
-			private Drawable blinkImg;
+			private int  blinkImg;
 			@Override
 			public boolean updateInfo(DrawSettings drawSettings) {
 				String txt = "OsMo";
@@ -238,12 +260,19 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 						}
 					}
 				}
-				Drawable small = srcSignalinactive; //tracker.isEnabledTracker() ? srcSignalinactive : srcinactive;
-				Drawable big = srcSignalinactive; // tracker.isEnabledTracker() ? srcSignalinactive : srcinactive;
+				boolean night  = drawSettings != null && drawSettings.isNightMode();
+				int srcSignalinactive =  !night ? R.drawable.widget_osmo_inactive_day : R.drawable.widget_osmo_inactive_night;
+				int small = srcSignalinactive; //tracker.isEnabledTracker() ? srcSignalinactive : srcinactive;
+				int big = srcSignalinactive; // tracker.isEnabledTracker() ? srcSignalinactive : srcinactive;
 				long last = service.getLastCommandTime();
 				if (service.isActive()) {
-					small = tracker.isEnabledTracker() ? srcSignalSmall : srcSmall;
-					big = tracker.isEnabledTracker() ? srcSignalBig : srcBig;
+					if(tracker.isEnabledTracker() ) {
+						small = night ? R.drawable.widget_osmo_connected_location_night : R.drawable.widget_osmo_connected_location_day;
+						big = night ? R.drawable.widget_osmo_connected_location_night : R.drawable.widget_osmo_connected_location_day;
+					} else {
+						small = night ? R.drawable.widget_osmo_connected_night : R.drawable.widget_osmo_connected_day;
+						big = night ? R.drawable.widget_osmo_connected_night : R.drawable.widget_osmo_connected_day;
+					}
 				}
 				setText(txt, subtxt);
 				if(blinkImg != small) {
@@ -257,13 +286,13 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 				return true;
 			}
 			
-			private void blink(Drawable bigger, final Drawable smaller ) {
+			private void blink(int bigger, final int smaller ) {
 				blinkImg = smaller;
 				setImageDrawable(bigger);
 				map.getMyApplication().runInUIThread(new Runnable() {
 					@Override
 					public void run() {
-						blinkImg = null;
+						blinkImg = 0;
 						setImageDrawable(smaller);
 					}
 				}, 500);
@@ -398,8 +427,10 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 						boolean visible = obj.has("visible");
 						boolean changed = false;
 						if(!f.exists() || (f.lastModified() != timestamp) ) {
-							boolean sizeEqual = f.exists() && obj.has("size") && obj.getLong("size") == f.length();
-							if(sizeEqual && !f.setLastModified(timestamp - 1)){
+							long len = !f.exists() ? -1 : f.length();
+							boolean sizeEqual = obj.has("size") && obj.getLong("size") == len;
+							boolean modifySupported = f.setLastModified(timestamp - 1);
+							if(sizeEqual && !modifySupported){
 								// false alarm
 							} else {
 								changed = true;
@@ -407,35 +438,21 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 								log.info("Download gpx " + url);
 								DownloadFileHelper df = new DownloadFileHelper(app);
 								InputStream is = df.getInputStreamToDownload(new URL(url), false);
-								FileOutputStream fout = new FileOutputStream(f);
-								byte[] buf = new byte[1024];
-								int k;
-								while ((k = is.read(buf)) >= 0) {
-									fout.write(buf, 0, k);
-								}
-								fout.close();
-								is.close();
-								if(!f.setLastModified(timestamp)) {
-									log.error("Timestamp updates are not supported");
+								int av = is.available();
+								if(av > 0 && !modifySupported && len == av) {
+									// ignore
+									is.close();
+								} else {
+									redownloadFile(f, timestamp, color, is);
+									publishProgress(app.getString(R.string.osmo_gpx_track_downloaded, obj.getString("name")));
 								}
 							}
-							if(color != 0) {
-								try {
-									GPXFile loaded = GPXUtilities.loadGPXFile(app, f);
-									if(loaded.tracks.size() > 0) {
-										for(Track t : loaded.tracks) {
-											t.setColor(color);
-										}
-										GPXUtilities.writeGpxFile(f, loaded, app);
-									}
-								} catch (RuntimeException e) {
-									e.printStackTrace();
-								}
-							}
-							publishProgress(app.getString(R.string.osmo_gpx_track_downloaded, obj.getString("name")));
 						}
 						if(visible && (changed || makeVisible)) {
 							GPXFile selectGPXFile = GPXUtilities.loadGPXFile(app, f);
+							if(color != 0) {
+								selectGPXFile.setColor(color);
+							}
 							app.getSelectedGpxHelper().setGpxFileToDisplay(selectGPXFile);
 						}
 					} catch (JSONException e) {
@@ -447,6 +464,21 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 					}
 				}
 				return errors;
+			}
+
+			private void redownloadFile(File f, long timestamp, int color, InputStream is)
+					throws FileNotFoundException, IOException {
+				FileOutputStream fout = new FileOutputStream(f);
+				byte[] buf = new byte[1024];
+				int k;
+				while ((k = is.read(buf)) >= 0) {
+					fout.write(buf, 0, k);
+				}
+				fout.close();
+				is.close();
+				if(!f.setLastModified(timestamp)) {
+					log.error("Timestamp updates are not supported");
+				}
 			}
 			
 			protected void onProgressUpdate(String... values) {
@@ -482,15 +514,15 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 	
 	@Override
 	public void onConnected() {
-		if (groupsActivity != null) {
-			groupsActivity.handleConnect();
+		if (groupsActivity instanceof OsMoGroupsActivity) {
+			((OsMoGroupsActivity) groupsActivity).handleConnect();
 		}
 	}
 	
 	@Override
 	public void onDisconnected(String msg) {
-		if (groupsActivity != null) {
-			groupsActivity.handleDisconnect(msg);
+		if (groupsActivity instanceof OsMoGroupsActivity) {
+			((OsMoGroupsActivity) groupsActivity).handleDisconnect(msg);
 		}
 	}
 

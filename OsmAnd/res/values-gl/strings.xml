@@ -53,7 +53,7 @@
     <string name="duration">Duración</string>
     <string name="distance">Distancia</string>
     <string name="index_tours">Visitas</string>
-    <string name="flat_list_waypoints">Todo</string>
+    <string name="shared_string_all">Todo</string>
     <string name="waypoints">Puntos de pasaxe</string>
     <string name="targets">Destinos</string>
     <string name="announce_gpx_waypoints">Anunciar os puntos de pasaxe do GPX</string>
@@ -623,8 +623,8 @@
     <string name="download_roads_only_maps">Mapas só de estradas</string>
     <string name="rendering_attr_alpineHiking_name">Escala de excursionismo alpino (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Mostrar as rutas seguindo a escala SAC</string>
-    <string name="rendering_attr_osmcTraces_name">Sobreposición de símbolos de sendeirismo</string>
-    <string name="rendering_attr_osmcTraces_description">Renderizar as pistas segundo os trazados de OSMC</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Sobreposición de símbolos de sendeirismo</string>
+    <string name="rendering_attr_hikingRoutesOSMC_description">Renderizar as pistas segundo os trazados de OSMC</string>
     
 	<string name="rendering_attr_noAdminboundaries_name">Agochar as fronteiras</string>
 	<string name="rendering_attr_noAdminboundaries_description">Suprimir Suppress display of regional boundaries (admin levels 5-9)</string>
@@ -1160,7 +1160,7 @@
 	<string name="favorite_default_category">Outros</string>
 	<string name="favourites_edit_dialog_name">Nome</string>
 	<string name="favourites_edit_dialog_category">Categoría</string>
-	<string name="vector_map_not_needed">Non, grazas</string>
+	<string name="shared_string_no_thanks">Non, grazas</string>
 	<string name="basemap_missing">Falta o mapa base mundial (que recobre todo o mundo en ampliacións pequenas). Considere a posibilidade de descargar World_basemap_x.obf para contar cun ambiente completo.</string>
 	<string name="vector_data_missing">Faltan datos de a bordo («sen conexión») no cartón SD. Considere a posibilidade de descargalos para poder empregar os mapas sen conexión.</string>
 	<string name="local_index_installed">Edición</string>

@@ -1,18 +1,13 @@
 package net.osmand.plus.download;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
+import java.io.File;
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
@@ -20,16 +15,34 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.LocalIndexInfo;
+import net.osmand.plus.activities.OsmAndListFragment;
+import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
+import net.osmand.plus.activities.OsmandExpandableListFragment;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
-
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.ListFragment;
+import android.support.v4.view.ViewPager;
+import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
+import android.widget.BaseExpandableListAdapter;
+import android.widget.Button;
+import android.widget.ExpandableListAdapter;
+import android.widget.ImageView;
+import android.widget.ListAdapter;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 
 /**
@@ -94,9 +107,12 @@ public class DownloadActivity extends BaseDownloadActivity {
 			ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
 			PagerSlidingTabStrip mSlidingTabLayout = (PagerSlidingTabStrip) findViewById(R.id.sliding_tabs);
 
-			mTabs.add(new TabActivity.TabItem(getString(R.string.download_tab_local), LocalIndexesFragment.class));
-			mTabs.add(new TabActivity.TabItem(getString(R.string.download_tab_downloads), DownloadIndexFragment.class));
-			mTabs.add(new TabActivity.TabItem(getString(R.string.download_tab_updates), UpdatesIndexFragment.class));
+			mTabs.add(new TabActivity.TabItem(R.string.download_tab_local, 
+					getString(R.string.download_tab_local), LocalIndexesFragment.class));
+			mTabs.add(new TabActivity.TabItem(R.string.download_tab_downloads, 
+					getString(R.string.download_tab_downloads), DownloadIndexFragment.class));
+			mTabs.add(new TabActivity.TabItem(R.string.download_tab_updates, 
+					getString(R.string.download_tab_updates), UpdatesIndexFragment.class));
 
 			viewPager.setAdapter(new TabActivity.OsmandFragmentPagerAdapter(getSupportFragmentManager(), mTabs));
 			mSlidingTabLayout.setViewPager(viewPager);
@@ -129,6 +145,33 @@ public class DownloadActivity extends BaseDownloadActivity {
 			}
 
 		});
+		findViewById(R.id.WikiButton).setOnClickListener(new View.OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				downloadWikiFiles();
+			}
+		});
+		
+		findViewById(R.id.CancelAll).setOnClickListener(new View.OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				getEntriesToDownload().clear();
+				updateDownloadButton();
+				for(WeakReference<Fragment> ref : fragList) {
+					Fragment f = ref.get();
+					if(f instanceof OsmAndListFragment) {
+						if(!f.isDetached() && ((OsmAndListFragment) f).getListAdapter() instanceof ArrayAdapter) {
+							((ArrayAdapter) ((OsmAndListFragment) f).getListAdapter()).notifyDataSetChanged();
+						}
+					} else if (!f.isDetached() && f instanceof OsmandExpandableListFragment && 
+							((OsmandExpandableListFragment) f).getAdapter() instanceof BaseExpandableListAdapter){
+						((BaseExpandableListAdapter) ((OsmandExpandableListFragment) f).getAdapter()).notifyDataSetChanged();
+					}
+				}
+			}
+		});
 
 		downloadTypes = createDownloadTypes();
 		final Intent intent = getIntent();
@@ -150,9 +193,8 @@ public class DownloadActivity extends BaseDownloadActivity {
 		changeType(downloadTypes.get(0));
 	}
 
-
-
-
+	
+	
 	public Map<String, String> getIndexActivatedFileNames() {
 		return downloadListIndexThread != null ? downloadListIndexThread.getIndexActivatedFileNames() : null;
 	}
@@ -230,7 +272,7 @@ public class DownloadActivity extends BaseDownloadActivity {
 					determinateProgressBar.setProgress(basicProgressAsyncTask.getProgressPercentage());
 				}
 			}
-			updateDownloadButton(false);
+			updateDownloadButton();
 
 		}
 	}
@@ -291,8 +333,68 @@ public class DownloadActivity extends BaseDownloadActivity {
 
 	}
 
+	protected void downloadWikiFiles() {
+		if (Version.isFreeVersion(getMyApplication())) {
+			dialogToInstallPaid();
+		} else {
+			Builder bld = new AlertDialog.Builder(this);
+			final List<IndexItem> wi = getWikipediaItems();
+			long size = 0;
+			for(IndexItem i : wi) {
+				size += i.getSize();
+			}
+			bld.setMessage(getString(R.string.download_wikipedia_files, (size >> 20)));
+			bld.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					for(IndexItem i : wi) {
+						addToDownload(i);
+					}
+					updateDownloadButton();
+					checkOldWikiFiles();
+				}
+			});
+			bld.setNegativeButton(R.string.shared_string_cancel, null);
+			if(wi.size() > 0) {
+				bld.show();
+			}
+		}
+	}
+	
+	protected void checkOldWikiFiles() {
+		Map<String, String> fileNames = getMyApplication().getResourceManager().getIndexFileNames();
+		final Set<String> wiki = new HashSet<String>();
+		for(String  s : fileNames.keySet()) {
+			if(s.contains("_wiki")) {
+				wiki.add(s);
+			}
+		}
+		if(wiki.size() > 0) {
+			Builder bld = new AlertDialog.Builder(this);
+			bld.setMessage(R.string.archive_wikipedia_data);
+			bld.setNegativeButton(R.string.shared_string_cancel, null);
+			bld.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					for(String w : wiki) {
+						File fl = getMyApplication().getAppPath(w);
+						File nf = new File(fl.getParentFile(), IndexConstants.BACKUP_INDEX_DIR + "/"+fl.getName());
+						boolean res = fl.renameTo(nf);
+						if(!res) {
+							System.err.println("Renaming from " + fl.getAbsolutePath() + " to " + nf.getAbsolutePath() + " failed");
+						}
+					}
+				}
+			});
+			bld.show();
+		}
+	}
+
+
 	@Override
-	public void updateDownloadButton(boolean scroll) {
+	public void updateDownloadButton() {
 //		View view = getView();
 //		if (view == null || getExpandableListView() == null){
 //			return;
@@ -300,7 +402,7 @@ public class DownloadActivity extends BaseDownloadActivity {
 //		int x = getExpandableListView().getScrollX();
 //		int y = getExpandableListView().getScrollY();
 		if (getEntriesToDownload().isEmpty()) {
-			findViewById(R.id.DownloadButton).setVisibility(View.GONE);
+			findViewById(R.id.DownloadLayout).setVisibility(View.GONE);
 		} else {
 			BasicProgressAsyncTask<?, ?, ?> task = DownloadActivity.downloadListIndexThread.getCurrentRunningTask();
 			boolean running = task instanceof DownloadIndexesThread.DownloadIndexesAsyncTask;
@@ -312,9 +414,8 @@ public class DownloadActivity extends BaseDownloadActivity {
 			} else {
 				text = getString(R.string.shared_string_downloading) + "  (" + downloads + ")"; //$NON-NLS-1$
 			}
-			findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
+			findViewById(R.id.DownloadLayout).setVisibility(View.VISIBLE);
 			if (Version.isFreeVersion(getMyApplication())) {
-				int countedDownloads = DownloadActivity.downloadListIndexThread.getDownloads();
 				int left = DownloadActivity.MAXIMUM_AVAILABLE_FREE_DOWNLOADS - settings.NUMBER_OF_FREE_DOWNLOADS.get() - downloads;
 				boolean excessLimit = left < 0;
 				if (left < 0)
@@ -324,10 +425,65 @@ public class DownloadActivity extends BaseDownloadActivity {
 				}
 			}
 			((Button) findViewById(R.id.DownloadButton)).setText(text);
+			List<IndexItem> wikipediaItems = getWikipediaItems();
+			findViewById(R.id.WikiButton).setVisibility(wikipediaItems.size() == 0 ? View.GONE : View.VISIBLE);
+		}
+		
+		for(WeakReference<Fragment> ref : fragList) {
+			Fragment f = ref.get();
+			if (!f.isDetached()) {
+				if (f instanceof OsmandExpandableListFragment) {
+					ExpandableListAdapter ad = ((OsmandExpandableListFragment) f).getExpandableListView()
+							.getExpandableListAdapter();
+					if (ad instanceof OsmandBaseExpandableListAdapter) {
+						((OsmandBaseExpandableListAdapter) ad).notifyDataSetChanged();
+					}
+				} else if(f instanceof ListFragment) {
+					ListAdapter la = ((ListFragment) f).getListAdapter();
+					if(la instanceof BaseAdapter) {
+						((BaseAdapter) la).notifyDataSetChanged();
+					}
+				}
+			}
 		}
 //		if (scroll) {
 //			getExpandableListView().scrollTo(x, y);
 //		}
+	}
+
+
+
+	private List<IndexItem> getWikipediaItems() {
+		Set<String> wikipediaItems = new HashSet<String>();
+		Map<String, String> indexed = getMyApplication().getResourceManager().getIndexFileNames();
+		for(IndexItem i : getEntriesToDownload().keySet()) {
+			if(i.getType() == DownloadActivityType.NORMAL_FILE) {
+				boolean fit = true;
+				fit = fit && i.getFileName().contains("obf");
+				fit = fit && !i.getFileName().contains("world");
+				String fname = i.getBasename();
+				if(fit && !indexed.containsKey(fname+".wiki.obf") ) {
+					wikipediaItems.add(fname);
+				}
+			}
+		}
+		for(IndexItem i : getEntriesToDownload().keySet()) {
+			if(i.getType() == DownloadActivityType.WIKIPEDIA_FILE) {
+				wikipediaItems.remove(i.getBasename());
+			}
+		}
+		List<IndexItem> res = new ArrayList<IndexItem>();
+		IndexFileList list = downloadListIndexThread.getIndexFiles();
+		if (list != null) {
+			List<IndexItem> indexFiles = list.getIndexFiles();
+			for(IndexItem i : indexFiles) {
+				if(i.getType() == DownloadActivityType.WIKIPEDIA_FILE && 
+						wikipediaItems.contains(i.getBasename())) {
+					res.add(i);
+				}
+			}
+		}
+		return res;
 	}
 	
 	
@@ -338,12 +494,16 @@ public class DownloadActivity extends BaseDownloadActivity {
 	public List<DownloadActivityType> createDownloadTypes() {
 		List<DownloadActivityType> items = new ArrayList<DownloadActivityType>();
 		items.add(DownloadActivityType.NORMAL_FILE);
+		if(!Version.isFreeVersion(getMyApplication())) {
+			items.add(DownloadActivityType.WIKIPEDIA_FILE);
+		}
 		items.add(DownloadActivityType.VOICE_FILE);
 		items.add(DownloadActivityType.ROADS_FILE);
 		if(OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null){
 			items.add(DownloadActivityType.HILLSHADE_FILE);
 			items.add(DownloadActivityType.SRTM_COUNTRY_FILE);
 		}
+		
 		getMyApplication().getAppCustomization().getDownloadTypes(items);
 		return items;
 	}
@@ -405,6 +565,11 @@ public class DownloadActivity extends BaseDownloadActivity {
 
 		}
 	}
+
+
+
+
+	
 
 
 }

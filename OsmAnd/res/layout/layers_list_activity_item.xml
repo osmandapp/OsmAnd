@@ -1,34 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/LinearLayout1"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants"
     android:orientation="horizontal"
-    android:layout_marginLeft="5dip"
-    android:layout_marginRight="5dip">
+    android:paddingLeft="@dimen/list_content_padding"
+    android:paddingRight="@dimen/list_content_padding" >
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/list_item_height"
+        android:scaleType="center"
+	    android:visibility="gone"
+        android:layout_marginRight="@dimen/list_content_padding"
+        android:gravity="center_vertical"
+        android:src="@drawable/ic_action_settings" />
 
     <TextView
         android:id="@+id/title"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dip"
-        android:layout_marginBottom="4dip"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
         android:gravity="center_vertical"
         android:text="@string/layer_poi"
-        android:textSize="18sp"
-        android:layout_weight="1" />
+        android:textSize="@dimen/default_list_text_size" />
 
-    <LinearLayout
+    <CheckBox
+        android:id="@+id/check_item"
         android:layout_width="wrap_content"
-        android:layout_height="fill_parent">
-
-
-        <CheckBox
-            android:id="@+id/check_item"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:focusable="false"
-            android:gravity="center_vertical" />
-    </LinearLayout>
+        android:layout_height="@dimen/list_item_height"
+        android:layout_gravity="center_vertical"
+        android:focusable="false"
+        android:gravity="center_vertical" />
 
 </LinearLayout>

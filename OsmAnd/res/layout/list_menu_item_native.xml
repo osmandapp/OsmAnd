@@ -25,7 +25,7 @@
         android:layout_marginBottom="11dip"
         android:gravity="center_vertical"
         android:text="@string/layer_poi"
-        style="@style/ListText"
+        android:textSize="@dimen/default_list_text_size_large"
         android:layout_weight="1" />
 
     <LinearLayout

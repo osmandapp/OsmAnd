@@ -31,7 +31,7 @@
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:maxLines="1"
-            android:textSize="19sp" />
+            android:textSize="@dimen/default_list_text_size_large" />
 
         <TextView
             android:id="@+id/Text"
@@ -40,7 +40,7 @@
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:maxLines="1"
-            android:textSize="14sp" />
+            android:textSize="@dimen/default_desc_text_size"/>
     </LinearLayout>
 
     <TextView
@@ -51,6 +51,6 @@
         android:layout_marginRight="7dp"
         android:layout_gravity="center_vertical"
         android:textColor="@color/sherpafy_add_text"
-        android:textSize="14sp" />
+        android:textSize="@dimen/default_desc_text_size"/>
 
 </LinearLayout>

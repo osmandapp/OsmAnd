@@ -11,7 +11,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.activities.actions.AppModeDialog;
-import net.osmand.plus.Version;
 //import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.util.SunriseSunset;
 import android.app.AlertDialog;
@@ -40,9 +39,16 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 				R.string.trace_rendering, R.string.trace_rendering_descr);
 		cat.addPreference(dbg);
 		
-		cat.addPreference(createCheckBoxPreference(settings.DISABLE_COMPLEX_ROUTING, R.string.disable_complex_routing, R.string.disable_complex_routing_descr));
+		cat.addPreference(createCheckBoxPreference(settings.DISABLE_COMPLEX_ROUTING,
+				R.string.disable_complex_routing, R.string.disable_complex_routing_descr));
+	
+		cat.addPreference(createCheckBoxPreference(settings.USE_FAST_RECALCULATION,
+				R.string.use_fast_recalculation, R.string.use_fast_recalculation_desc));
 		
-		cat.addPreference(createCheckBoxPreference(settings.USE_MAGNETIC_FIELD_SENSOR_COMPASS, R.string.use_magnetic_sensor, R.string.use_magnetic_sensor_descr));
+		
+		cat.addPreference(createCheckBoxPreference(settings.USE_MAGNETIC_FIELD_SENSOR_COMPASS,
+				R.string.use_magnetic_sensor,
+				R.string.use_magnetic_sensor_descr));
 
 		Preference pref = new Preference(this);
 		pref.setTitle(R.string.test_voice_prompts);
@@ -97,20 +103,30 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		//setEnabled(false) creates bad readability on some devices
 		//pref.setEnabled(false);
 		cat.addPreference(pref);
-		
-		long agpsLastDownloaded = settings.AGPS_DATA_LAST_TIME_DOWNLOADED.get();
-		pref = new Preference(this);
-		pref.setTitle(R.string.agps_info);
-		if (agpsLastDownloaded != 0L) {
+
+		final Preference agpspref = new Preference(this);
+		agpspref.setTitle(R.string.agps_info);
+		if (settings.AGPS_DATA_LAST_TIME_DOWNLOADED.get() != 0L) {
 			SimpleDateFormat prt = new SimpleDateFormat("yyyy-MM-dd  HH:mm");
-			pref.setSummary(getString(R.string.agps_data_last_downloaded, prt.format(agpsLastDownloaded)));
+			agpspref.setSummary(getString(R.string.agps_data_last_downloaded, prt.format(settings.AGPS_DATA_LAST_TIME_DOWNLOADED.get())));
 		} else {
-			pref.setSummary(getString(R.string.agps_data_last_downloaded, "--"));
+			agpspref.setSummary(getString(R.string.agps_data_last_downloaded, "--"));
 		}
-		pref.setSelectable(false);
+		agpspref.setSelectable(true);
 		//setEnabled(false) creates bad readability on some devices
 		//pref.setEnabled(false);
-		cat.addPreference(pref);
+		agpspref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+			@Override
+			public boolean onPreferenceClick(Preference preference) {
+				if(getMyApplication().getSettings().isInternetConnectionAvailable(true)) {
+					getMyApplication().getLocationProvider().redownloadAGPS();
+					SimpleDateFormat prt = new SimpleDateFormat("yyyy-MM-dd  HH:mm");
+					agpspref.setSummary(getString(R.string.agps_data_last_downloaded, prt.format(settings.AGPS_DATA_LAST_TIME_DOWNLOADED.get())));
+				}
+			return true;
+			}
+		});
+		cat.addPreference(agpspref);
 		
 		SunriseSunset sunriseSunset = getMyApplication().getDaynightHelper().getSunriseSunset();
 		pref = new Preference(this);

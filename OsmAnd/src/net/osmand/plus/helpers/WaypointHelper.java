@@ -27,7 +27,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.IntermediatePointsDialog;
 import net.osmand.plus.base.FavoriteImageDrawable;
-import net.osmand.plus.poi.PoiLegacyFilter;
+import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.routing.AlarmInfo;
 import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
@@ -178,14 +178,12 @@ public class WaypointHelper {
 				LocationPointWrapper lwp = lp.get(kIterator);
 				if (lp.get(kIterator).routeIndex < route.getCurrentRoute()) {
 					// skip
-				} else if (route.getDistanceToPoint(lwp.routeIndex) > LONG_ANNOUNCE_RADIUS / 2) {
-					break;
 				} else {
-					AlarmInfo inf = (AlarmInfo) lwp.point;
 					int d = route.getDistanceToPoint(lwp.routeIndex);
 					if (d > LONG_ANNOUNCE_RADIUS) {
 						break;
 					}
+					AlarmInfo inf = (AlarmInfo) lwp.point;
 					float speed = lastProjection != null && lastProjection.hasSpeed() ? lastProjection.getSpeed() : 0;
 					float time = speed > 0 ? d / speed : Integer.MAX_VALUE;
 					int vl = inf.updateDistanceAndGetPriority(time, d);
@@ -524,7 +522,7 @@ public class WaypointHelper {
 
 
 	protected void calculatePoi(RouteCalculationResult route, List<LocationPointWrapper> locationPoints) {
-		PoiLegacyFilter pf = getPoiFilter();
+		PoiUIFilter pf = getPoiFilter();
 		if (pf != null) {
 			final List<Location> locs = route.getImmutableAllLocations();
 			List<Amenity> amenities = pf.searchAmenitiesOnThePath(locs, poiSearchDeviationRadius);
@@ -591,8 +589,8 @@ public class WaypointHelper {
 
 
 	/// 
-	public PoiLegacyFilter getPoiFilter() {
-		return app.getPoiFilters().getFilterById(app.getSettings().getPoiFilterForMap());
+	public PoiUIFilter getPoiFilter() {
+		return app.getPoiFilters().getFilterById(app.getSettings().SELECTED_POI_FILTER_FOR_MAP.get());
 	}
 	public boolean showPOI() {
 		return app.getSettings().SHOW_NEARBY_POI.get();
@@ -666,9 +664,9 @@ public class WaypointHelper {
 				Amenity amenity = ((AmenityLocationPoint) point).a;
 				PoiType st = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
 				if (st != null) {
-					if (RenderingIcons.containsBigIcon(st.getKeyName())) {
+					if (RenderingIcons.containsBigIcon(st.getIconKeyName())) {
 						return uiCtx.getResources().getDrawable(
-								RenderingIcons.getBigIconResourceId(st.getKeyName()));
+								RenderingIcons.getBigIconResourceId(st.getIconKeyName()));
 					} else if (RenderingIcons.containsBigIcon(st.getOsmTag() + "_" + st.getOsmValue())) {
 						return uiCtx.getResources().getDrawable(
 								RenderingIcons.getBigIconResourceId(st.getOsmTag() + "_" + st.getOsmValue()));
@@ -680,7 +678,7 @@ public class WaypointHelper {
 					R.drawable.list_intermediate;
 				return uiCtx.getResources().getDrawable(i);
 			} else if(type == FAVORITES || type == WAYPOINTS) {
-				return FavoriteImageDrawable.getOrCreate(uiCtx, point.getColor());
+				return FavoriteImageDrawable.getOrCreate(uiCtx, point.getColor(), 0);
 			} else if(type == ALARMS) {
 				//assign alarm list icons manually for now
 				if(((AlarmInfo) point).getType().toString() == "SPEED_CAMERA") {
@@ -700,7 +698,7 @@ public class WaypointHelper {
 						return uiCtx.getResources().getDrawable(R.drawable.list_warnings_traffic_calming);
 					}
 				} else if(((AlarmInfo) point).getType().toString() == "TOLL_BOOTH") {
-					return uiCtx.getResources().getDrawable(R.drawable.mx_barrier_toll_booth);
+					return uiCtx.getResources().getDrawable(R.drawable.mx_toll_booth);
 				} else if(((AlarmInfo) point).getType().toString() == "STOP") {
 					return uiCtx.getResources().getDrawable(R.drawable.list_stop);
 				} else if(((AlarmInfo) point).getType().toString() == "PEDESTRIAN") {
@@ -774,7 +772,7 @@ public class WaypointHelper {
 		@Override
 		public PointDescription getPointDescription(Context ctx) {
 			return new PointDescription(PointDescription.POINT_TYPE_POI, 
-					OsmAndFormatter.getPoiStringWithoutType(a, app.getSettings().usingEnglishNames()));
+					OsmAndFormatter.getPoiStringWithoutType(a, app.getSettings().MAP_PREFERRED_LOCALE.get()));
 		}
 
 		@Override

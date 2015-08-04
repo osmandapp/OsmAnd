@@ -26,7 +26,7 @@ public class DashSearchFragment extends DashBaseFragment {
 	public static final String TAG = "DASH_SEARCH_FRAGMENT";
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+	public View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_search_fragment, container, false);
 		setupButtons(view);
 		Typeface typeface = FontCache.getRobotoMedium(getActivity());
@@ -56,6 +56,7 @@ public class DashSearchFragment extends DashBaseFragment {
 		btn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
+				closeDashboard();
 				searchActivity(activity, appCustomization, SearchActivity.POI_TAB_INDEX);
 			}
 		});
@@ -66,6 +67,7 @@ public class DashSearchFragment extends DashBaseFragment {
 		btn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
+				closeDashboard();
 				searchActivity(activity, appCustomization, SearchActivity.ADDRESS_TAB_INDEX);
 			}
 		});
@@ -76,6 +78,7 @@ public class DashSearchFragment extends DashBaseFragment {
 		btn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
+				closeDashboard();
 				searchActivity(activity, appCustomization, SearchActivity.LOCATION_TAB_INDEX);
 			}
 		});
@@ -85,6 +88,7 @@ public class DashSearchFragment extends DashBaseFragment {
 		(view.findViewById(R.id.recents)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
+				closeDashboard();
 				searchActivity(activity, appCustomization, SearchActivity.HISTORY_TAB_INDEX);
 			}
 		});

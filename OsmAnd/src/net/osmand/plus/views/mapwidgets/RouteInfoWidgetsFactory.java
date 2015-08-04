@@ -19,7 +19,7 @@ import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MapViewTrackingUtilities;
-import net.osmand.plus.helpers.ScreenOrientationHelper;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.routing.AlarmInfo;
 import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
@@ -41,7 +41,6 @@ import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.graphics.Typeface;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.drawable.Drawable;
@@ -49,8 +48,6 @@ import android.text.format.DateFormat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
 public class RouteInfoWidgetsFactory {
@@ -80,7 +77,6 @@ public class RouteInfoWidgetsFactory {
 						NextDirectionInfo r = routingHelper.getNextRouteDirectionInfo(calc1, true);
 						if (r != null && r.distanceTo > 0 && r.directionInfo != null) {
 							turnType = r.directionInfo.getTurnType();
-							setExitOut(turnType.getExitOut());
 							nextTurnDistance = r.distanceTo;
 							turnImminent = r.imminent;
 						}
@@ -196,8 +192,10 @@ public class RouteInfoWidgetsFactory {
 
 	public TextInfoWidget createTimeControl(final MapActivity map){
 		final RoutingHelper routingHelper = map.getRoutingHelper();
-		final int time = R.drawable.widget_time;
-		final int timeToGo = R.drawable.widget_time_to_distance;
+		final int time = R.drawable.widget_time_day;
+		final int timeN = R.drawable.widget_time_night;
+		final int timeToGo = R.drawable.widget_time_to_distance_day;
+		final int timeToGoN = R.drawable.widget_time_to_distance_night;
 		final OsmandApplication ctx = map.getMyApplication();
 		final OsmandPreference<Boolean> showArrival = ctx.getSettings().SHOW_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME;
 		final TextInfoWidget leftTimeControl = new TextInfoWidget(map) {
@@ -248,13 +246,15 @@ public class RouteInfoWidgetsFactory {
 			@Override
 			public void onClick(View v) {
 				showArrival.set(!showArrival.get());
-				leftTimeControl.setImageDrawable(showArrival.get()? time : timeToGo);
+				leftTimeControl.setIcons(showArrival.get() ? time : timeToGo,
+						showArrival.get() ? timeN : timeToGoN);
 				map.getMapView().refreshMap();
 			}
 			
 		});
 		leftTimeControl.setText(null, null);
-		leftTimeControl.setImageDrawable(showArrival.get()? time : timeToGo);
+		leftTimeControl.setIcons(showArrival.get() ? time : timeToGo,
+				showArrival.get() ? timeN : timeToGoN);
 		return leftTimeControl;
 	}
 	
@@ -280,7 +280,7 @@ public class RouteInfoWidgetsFactory {
 			};
 		};
 		plainTimeControl.setText(null, null);
-		plainTimeControl.setImageDrawable(R.drawable.widget_time_to_distance);
+		plainTimeControl.setIcons(R.drawable.widget_time_day, R.drawable.widget_time_night);
 		return plainTimeControl;
 	}
 	
@@ -323,7 +323,7 @@ public class RouteInfoWidgetsFactory {
 				return false;
 			}
 		};
-		speedControl.setImageDrawable(R.drawable.widget_max_speed);
+		speedControl.setIcons(R.drawable.widget_max_speed_day, R.drawable.widget_max_speed_night);
 		speedControl.setText(null, null);
 		return speedControl;
 	}
@@ -367,7 +367,7 @@ public class RouteInfoWidgetsFactory {
 				return false;
 			}
 		};
-		speedControl.setImageDrawable(R.drawable.widget_speed);
+		speedControl.setIcons(R.drawable.widget_speed_day, R.drawable.widget_speed_night);
 		speedControl.setText(null, null);
 		return speedControl;
 	}
@@ -378,10 +378,10 @@ public class RouteInfoWidgetsFactory {
 		private float[] calculations = new float[1];
 		private int cachedMeters;
 
-		public DistanceToPointInfoControl(MapActivity ma, int res) {
+		public DistanceToPointInfoControl(MapActivity ma, int res, int resNight) {
 			super(ma);
 			this.view = ma.getMapView();
-			setImageDrawable(res);
+			setIcons(res, resNight);
 			setText(null, null);
 			setOnClickListener(new View.OnClickListener() {
 
@@ -437,7 +437,8 @@ public class RouteInfoWidgetsFactory {
 	}
 	
 	public TextInfoWidget createDistanceControl(final MapActivity map) {
-		DistanceToPointInfoControl distanceControl = new DistanceToPointInfoControl(map,R.drawable.widget_target) {
+		DistanceToPointInfoControl distanceControl = new DistanceToPointInfoControl(map,R.drawable.widget_target_day,
+				R.drawable.widget_target_night) {
 			@Override
 			public LatLon getPointToNavigate() {
 				TargetPoint p = map.getPointToNavigate();
@@ -457,7 +458,8 @@ public class RouteInfoWidgetsFactory {
 	
 	public TextInfoWidget createIntermediateDistanceControl(final MapActivity map) {
 		final TargetPointsHelper targets = map.getMyApplication().getTargetPointsHelper();
-		DistanceToPointInfoControl distanceControl = new DistanceToPointInfoControl(map, R.drawable.widget_intermediate) {
+		DistanceToPointInfoControl distanceControl = new DistanceToPointInfoControl(map, R.drawable.widget_intermediate_day,
+				R.drawable.widget_intermediate_night) {
 
 			@Override
 			protected void click(OsmandMapTileView view) {
@@ -514,15 +516,18 @@ public class RouteInfoWidgetsFactory {
 		private OsmandSettings settings;
 		private ImageView lanesView;
 		private TextView lanesText;
+		private TextView lanesShadowText;
 		private OsmandApplication app;
 		private int dist;
 		private LanesDrawable lanesDrawable;
 		private View centerInfo;
 		private View progress;
+		private int shadowRadius;
 
 		public LanesControl(final MapActivity map, final OsmandMapTileView view) {
 			lanesView = (ImageView) map.findViewById(R.id.map_lanes);
 			lanesText = (TextView) map.findViewById(R.id.map_lanes_dist_text);
+			lanesShadowText = (TextView) map.findViewById(R.id.map_lanes_dist_text_shadow);
 			centerInfo = (View) map.findViewById(R.id.map_center_info);
 			progress = (View) map.findViewById(R.id.map_horizontal_progress);
 			lanesDrawable = new LanesDrawable(map, map.getMapView().getScaleCoefficient());
@@ -535,9 +540,8 @@ public class RouteInfoWidgetsFactory {
 		}
 		
 		public void updateTextSize(boolean isNight, int textColor, int textShadowColor, boolean textBold, int shadowRadius) {
-			lanesText.setTextColor(textColor);
-			lanesText.setTypeface(Typeface.DEFAULT, textBold ? Typeface.BOLD : Typeface.NORMAL);
-			lanesText.setShadowLayer(shadowRadius, 0, 0, textShadowColor);
+			this.shadowRadius = shadowRadius;
+			TextInfoWidget.updateTextColor(lanesText, lanesShadowText, textColor, textShadowColor, textBold, shadowRadius);
 		}
 		
 		public boolean updateInfo(DrawSettings drawSettings) {
@@ -597,13 +601,17 @@ public class RouteInfoWidgetsFactory {
 				if (distChanged(dist, this.dist)) {
 					this.dist = dist;
 					if(dist == 0) {
+						lanesShadowText.setText("");
 						lanesText.setText("");
 					} else {
+						lanesShadowText.setText(OsmAndFormatter.getFormattedDistance(dist, app));
 						lanesText.setText(OsmAndFormatter.getFormattedDistance(dist, app));
 					}
+					lanesShadowText.invalidate();
 					lanesText.invalidate();
 				}
 			}
+			updateVisibility(lanesShadowText, visible && shadowRadius > 0);
 			updateVisibility(lanesText, visible);
 			updateVisibility(lanesView, visible);
 			updateVisibility(centerInfo, visible || progress.getVisibility() == View.VISIBLE);
@@ -709,6 +717,7 @@ public class RouteInfoWidgetsFactory {
 		private View layout;
 		private ImageView icon;
 		private TextView text;
+		private TextView textShadow;
 		private MapActivity ma;
 		private String cacheRulerText;
 		private int maxWidth;
@@ -722,13 +731,13 @@ public class RouteInfoWidgetsFactory {
 			layout = ma.findViewById(R.id.map_ruler_layout);
 			icon = (ImageView) ma.findViewById(R.id.map_ruler_image);
 			text = (TextView) ma.findViewById(R.id.map_ruler_text);
+			textShadow = (TextView) ma.findViewById(R.id.map_ruler_text_shadow);
 			maxWidth = ma.getResources().getDimensionPixelSize(R.dimen.map_ruler_width);
-			orientationPortrait = ScreenOrientationHelper.isOrientationPortrait(ma);
+			orientationPortrait = AndroidUiHelper.isOrientationPortrait(ma);
 		}
 		
 		public void updateTextSize(boolean isNight, int textColor, int textShadowColor, int shadowRadius) {
-			text.setTextColor(textColor);
-			text.setShadowLayer(shadowRadius, 0, 0, textShadowColor);
+			TextInfoWidget.updateTextColor(text, textShadow, textColor, textShadowColor, false, shadowRadius);
 			icon.setBackgroundResource(isNight ? R.drawable.ruler_night : R.drawable.ruler);
 		}
 		
@@ -752,6 +761,7 @@ public class RouteInfoWidgetsFactory {
 
 				int cacheRulerDistPix = (int) (pixDensity * roundedDist);
 				cacheRulerText = OsmAndFormatter.getFormattedDistance((float) roundedDist, view.getApplication());
+				textShadow.setText(cacheRulerText);
 				text.setText(cacheRulerText);
 				ViewGroup.LayoutParams lp = layout.getLayoutParams();
 				lp.width = cacheRulerDistPix;

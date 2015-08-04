@@ -17,6 +17,6 @@
         android:gravity="left|bottom"
         android:inputType="textCapCharacters"
         android:textColor="#858585"
-        android:textSize="14sp" />
+        android:textSize="@dimen/default_desc_text_size" />
     <!-- android:maxLines="2" -->
 </LinearLayout>

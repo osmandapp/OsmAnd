@@ -21,6 +21,8 @@ public class RouteDataObject {
 	public int[] pointsY;
 	public long[] restrictions;
 	public int[][] pointTypes;
+	public String[][] pointNames;
+	public int[][] pointNameTypes;
 	public long id;
 	public TIntObjectHashMap<String> names;
 	public final static float NONE_MAX_SPEED = 40f;
@@ -47,6 +49,8 @@ public class RouteDataObject {
 		this.names = copy.names;
 		this.restrictions = copy.restrictions;
 		this.pointTypes = copy.pointTypes;
+		this.pointNames = copy.pointNames;
+		this.pointNameTypes = copy.pointNameTypes;
 		this.id = copy.id;
 	}
 
@@ -56,6 +60,27 @@ public class RouteDataObject {
 	
 	public String getName(){
 		if(names != null ) {
+			return names.get(region.nameTypeRule);
+		}
+		return null;
+	}
+	
+	
+	public String getName(String lang){
+		if(names != null ) {
+			if(Algorithms.isEmpty(lang)) {
+				return names.get(region.nameTypeRule);
+			}
+			int[] kt = names.keys();
+			for(int i = 0 ; i < kt.length; i++) {
+				int k = kt[i];
+				if(region.routeEncodingRules.size() > k) {
+					if(("name:"+lang).equals(region.routeEncodingRules.get(k).getTag())) {
+						return names.get(k);
+					}
+				}
+ 				
+			}
 			return names.get(region.nameTypeRule);
 		}
 		return null;
@@ -76,8 +101,21 @@ public class RouteDataObject {
 		return null;
 	}
 
-	public String getDestinationName(){
+	public String getDestinationName(String lang){
 		if(names != null) {
+			if(Algorithms.isEmpty(lang)) {
+				return names.get(region.destinationTypeRule);
+			}
+			int[] kt = names.keys();
+			for(int i = 0 ; i < kt.length; i++) {
+				int k = kt[i];
+				if(region.routeEncodingRules.size() > k) {
+					if(("destination:"+lang).equals(region.routeEncodingRules.get(k).getTag())) {
+						return names.get(k);
+					}
+				}
+ 				
+			}
 			return names.get(region.destinationTypeRule);
 		}
 		return null;
@@ -137,8 +175,23 @@ public class RouteDataObject {
 				pointTypes[i] = opointTypes[i - 1];
 			}
 		}
-
 	}
+	
+	public String[] getPointNames(int ind) {
+		if (pointNames == null || ind >= pointNames.length) {
+			return null;
+		}
+		return pointNames[ind];
+	}
+	
+	public int[] getPointNameTypes(int ind) {
+		if (pointNameTypes == null || ind >= pointNameTypes.length) {
+			return null;
+		}
+		return pointNameTypes[ind];
+	}
+	
+	
 
 	public int[] getPointTypes(int ind) {
 		if (pointTypes == null || ind >= pointTypes.length) {
@@ -187,15 +240,33 @@ public class RouteDataObject {
 	}
 	
 	public static float parseLength(String v, float def) {
-		// 14"10' not supported
+		float f = 0;
+		// 14'10" 14 - inches, 10 feet
 		int i = Algorithms.findFirstNumberEndIndex(v);
 		if (i > 0) {
-			float f = Float.parseFloat(v.substring(0, i));
-			if (v.contains("\"") || v.contains("ft")) {
+			f += Float.parseFloat(v.substring(0, i));
+			String pref = v.substring(i, v.length()).trim();
+			float add = 0;
+			for(int ik = 0; ik < pref.length(); ik++) {
+				if(Character.isDigit(pref.charAt(ik)) || pref.charAt(ik) == '.' || pref.charAt(ik) == '-') {
+					int first = Algorithms.findFirstNumberEndIndex(pref.substring(ik));
+					if(first != -1) {
+						add = parseLength(pref.substring(ik), 0);
+						pref = pref.substring(0, ik);
+					}
+					break;
+				}
+			}
+			if(pref.contains("km")) {
+				f *= 1000;  
+			}
+			if(pref.contains("\"")) {
+				f *= 0.0254; 
+			} else if (pref.contains("\'") || pref.contains("ft")) {
 				// foot to meters
 				f *= 0.3048;
 			}
-			return f;
+			return f + add;
 		}
 		return def;
 	}
@@ -363,6 +434,27 @@ public class RouteDataObject {
 
 	private double simplifyDistance(int x, int y, int px, int py) {
 		return Math.abs(px - x) * 0.011d + Math.abs(py - y) * 0.01863d;
+	}
+	
+	private static void assertTrueLength(String vl, float exp){
+		float dest = parseLength(vl, 0);
+		if(exp != dest) {
+			System.err.println("FAIL " + vl + " " + dest);
+		} else {
+			System.out.println("OK " + vl);
+		}
+	}
+	
+	public static void main(String[] args) {
+		assertTrueLength("10 km", 10000);
+		assertTrueLength("0.01 km", 10);
+		assertTrueLength("0.01 km 10 m", 20);
+		assertTrueLength("10 m", 10);
+		assertTrueLength("10m", 10);
+		assertTrueLength("3.4 m", 3.4f);
+		assertTrueLength("14'10\"", 4.5212f);
+		assertTrueLength("14.5'", 4.4196f);
+		assertTrueLength("15ft", 4.572f);
 	}
 	
 	

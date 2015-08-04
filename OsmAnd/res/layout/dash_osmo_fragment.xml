@@ -3,18 +3,22 @@
     xmlns:osmand="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/card_bg"
+    android:background="?attr/bg_card"
+    android:layout_marginTop="@dimen/dash_margin"
+    android:layout_marginBottom="@dimen/dash_margin"
+    android:layout_marginLeft="@dimen/dash_margin_h"
+    android:layout_marginRight="@dimen/dash_margin_h"
     android:orientation="vertical" >
 
     <LinearLayout
         android:id="@+id/header_layout"
         android:layout_width="fill_parent"
-        android:layout_height="@dimen/dashHeaderHeight"
+        android:layout_height="@dimen/list_header_height"
         android:orientation="horizontal">
 
         <net.osmand.plus.widgets.TextViewEx
             android:id="@+id/fav_text"
-            style="?attr/dashboardSubHeaderStyle"
+            style="@style/DashboardSubHeader"
             android:text="@string/osmo"
             osmand:typeface="@string/font_roboto_medium" />
 
@@ -22,8 +26,8 @@
 
         <net.osmand.plus.widgets.ButtonEx
             android:id="@+id/manage"
-            style="?attr/dashboardGeneralButtonStyle"
-            android:text="@string/dash_download_manage"
+            style="@style/DashboardGeneralButton"
+            android:text="@string/shared_string_manage"
             osmand:textAllCapsCompat="true"
             osmand:typeface="@string/font_roboto_medium" />
     </LinearLayout>
@@ -41,19 +45,20 @@
 
 		<LinearLayout
 			android:layout_width="fill_parent"
-			android:layout_height="@dimen/dashHeaderHeight"
+			android:layout_height="@dimen/list_header_height"
 			android:orientation="horizontal">
 
 			<TextView
-				style="?attr/dashboardSubHeaderStyle"
+				style="@style/DashboardSubHeader"
 				android:layout_weight="1"
 				android:text="@string/shared_string_my_location"/>
 
 			<ImageButton
 				android:id="@+id/share"
-				android:layout_width="@dimen/dashListItemHeight"
-				android:layout_height="@dimen/dashListItemHeight"
-				style="?attr/dashboardGeneralButtonStyle"/>
+				android:layout_width="@dimen/list_item_height"
+				android:layout_height="@dimen/list_item_height"
+				android:gravity="center"
+				style="@style/DashboardGeneralButton" />
 
 			<include layout="@layout/check_item_rel"/>
 		</LinearLayout>

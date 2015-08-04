@@ -33,11 +33,11 @@ public class Version {
 		return "http://osmand.net/apps?"; 
 	}
 	
-	public static boolean isAmazonEnabled(OsmandApplication ctx) {
+	private static boolean isAmazonEnabled(OsmandApplication ctx) {
 		return ctx.getString(R.string.versionFeatures).contains("+amazon");
 	}
 	
-	public static boolean isGooglePlayEnabled(OsmandApplication ctx) {
+	private static boolean isGooglePlayEnabled(OsmandApplication ctx) {
 		return ctx.getString(R.string.versionFeatures).contains("+play_market");
 	}
 	
@@ -96,8 +96,7 @@ public class Version {
 	}
 	
 	public static boolean isDeveloperVersion(OsmandApplication ctx){
-		return "osmand~".equalsIgnoreCase(getAppName(ctx)) ;
-		
+		return getAppName(ctx).contains("~");
 	}
 	
 	public static String getVersionForTracker(OsmandApplication ctx) {

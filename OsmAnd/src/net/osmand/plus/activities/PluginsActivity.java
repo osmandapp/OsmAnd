@@ -3,7 +3,6 @@ package net.osmand.plus.activities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.TypedArray;
@@ -15,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class PluginsActivity extends OsmandListActivity {
@@ -120,7 +120,8 @@ public class PluginsActivity extends OsmandListActivity {
 			pluginDescription.setText(plugin.getDescription());
 
 
-			View pluginOptions = view.findViewById(R.id.plugin_options);
+			ImageView pluginOptions = (ImageView) view.findViewById(R.id.plugin_options);
+			pluginOptions.setImageDrawable(getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_overflow_menu_white));
 			pluginOptions.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -151,7 +152,7 @@ public class PluginsActivity extends OsmandListActivity {
 					});
 		}
 
-		if (settingsActivity != null) {
+		if (settingsActivity != null && plugin.isActive()) {
 			MenuItem settingsItem = optionsMenu.getMenu().add(R.string.shared_string_settings);
 			settingsItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 				@Override
@@ -161,7 +162,6 @@ public class PluginsActivity extends OsmandListActivity {
 					return true;
 				}
 			});
-			settingsItem.setEnabled(plugin.isActive());
 		}
 
 		optionsMenu.show();

@@ -1,6 +1,7 @@
 package net.osmand.plus.views.mapwidgets;
 
 import net.osmand.Location;
+import net.osmand.ValueHolder;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.NavigationService;
@@ -18,7 +19,6 @@ import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
-import net.osmand.plus.monitoring.ValueHolder;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
@@ -30,7 +30,6 @@ import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.WindowManager;
@@ -70,7 +69,7 @@ public class MapInfoWidgetsFactory {
 			}
 		};
 		altitudeControl.setText(null, null);
-		altitudeControl.setImageDrawable(R.drawable.widget_altitude);
+		altitudeControl.setIcons(R.drawable.widget_altitude_day, R.drawable.widget_altitude_night);
 		return altitudeControl;
 	}
 	
@@ -93,7 +92,7 @@ public class MapInfoWidgetsFactory {
 				return false;
 			}
 		};
-		gpsInfoControl.setImageDrawable(R.drawable.widget_gps_info);
+		gpsInfoControl.setIcons(R.drawable.widget_gps_info_day, R.drawable.widget_gps_info_night);
 		gpsInfoControl.setText(null, null);
 		gpsInfoControl.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -168,16 +167,19 @@ public class MapInfoWidgetsFactory {
 		private final MapActivity map;
 		private View topBar;
 		private TextView addressText;
+		private TextView addressTextShadow;
 		private OsmAndLocationProvider locationProvider;
 		private WaypointHelper waypointHelper;
 		private OsmandSettings settings;
 		private View waypointInfoBar;
 		private LocationPointWrapper lastPoint;
 		private TurnDrawable turnDrawable;
+		private int shadowRad;
 
 		public TopTextView(OsmandApplication app, MapActivity map) {
 			topBar = map.findViewById(R.id.map_top_bar);
 			addressText = (TextView) map.findViewById(R.id.map_address_text);
+			addressTextShadow = (TextView) map.findViewById(R.id.map_address_text_shadow);
 			waypointInfoBar = map.findViewById(R.id.waypoint_info_bar);
 			this.routingHelper = app.getRoutingHelper();
 			locationProvider = app.getLocationProvider();
@@ -206,22 +208,21 @@ public class MapInfoWidgetsFactory {
 		}
 		
 		public void updateTextColor(boolean nightMode, int textColor, int textShadowColor, boolean bold, int rad) {
-			updateTextColor(addressText, textColor, textShadowColor, bold, rad);
-			updateTextColor((TextView) waypointInfoBar.findViewById(R.id.waypoint_text), textColor, textShadowColor,
-					bold, rad);
+			this.shadowRad = rad;
+			TextInfoWidget.updateTextColor(addressText, addressTextShadow, textColor, textShadowColor, bold, rad);
+			TextInfoWidget.updateTextColor((TextView) waypointInfoBar.findViewById(R.id.waypoint_text),
+					(TextView) waypointInfoBar.findViewById(R.id.waypoint_text_shadow),
+					textColor, textShadowColor, bold, rad / 2);
+			
 			ImageView all = (ImageView) waypointInfoBar.findViewById(R.id.waypoint_more);
 			ImageView remove = (ImageView) waypointInfoBar.findViewById(R.id.waypoint_close);
 			all.setImageDrawable(map.getMyApplication().getIconsCache()
-					.getActionBarIcon(R.drawable.ic_overflow_menu_white, !nightMode));
+					.getIcon(R.drawable.ic_overflow_menu_white, !nightMode));
 			remove.setImageDrawable(map.getMyApplication().getIconsCache()
-					.getActionBarIcon(R.drawable.ic_action_remove_dark, !nightMode));
+					.getIcon(R.drawable.ic_action_remove_dark, !nightMode));
 		}
 		
-		private void updateTextColor(TextView tv, int textColor, int textShadowColor, boolean textBold, int rad) {
-			tv.setTextColor(textColor);
-			tv.setShadowLayer(rad, 0, 0, textShadowColor);
-			tv.setTypeface(Typeface.DEFAULT, textBold ? Typeface.BOLD : Typeface.NORMAL);
-		}
+		
 
 		public boolean updateInfo(DrawSettings d) {
 			String text = null;
@@ -257,30 +258,38 @@ public class MapInfoWidgetsFactory {
 					settings.SHOW_STREET_NAME.get()) {
 				RouteDataObject rt = locationProvider.getLastKnownRouteSegment(); 
 				if(rt != null) {
-					text = RoutingHelper.formatStreetName(rt.getName(), rt.getRef(), rt.getDestinationName());
+					text = RoutingHelper.formatStreetName(rt.getName(settings.MAP_PREFERRED_LOCALE.get()), 
+							rt.getRef(), rt.getDestinationName(settings.MAP_PREFERRED_LOCALE.get()));
 				} 
 				if(text == null) {
 					text = "";
 				}
 			}
-			if(!showNextTurn && updateWaypoint()) {
+			if (!showNextTurn && updateWaypoint()) {
 				updateVisibility(true);
 				updateVisibility(addressText, false);
+				updateVisibility(addressTextShadow, false);
 			} else if(text == null) {
 				updateVisibility(false);
 			} else {
 				updateVisibility(true);
 				updateVisibility(waypointInfoBar, false);
 				updateVisibility(addressText, true);
+				updateVisibility(addressTextShadow,  shadowRad > 0);
 				boolean update = turnDrawable.setTurnType(type[0]);
+				
 				int h = addressText.getHeight() / 4 * 3;
 				if (h != turnDrawable.getBounds().bottom) {
 					turnDrawable.setBounds(0, 0, h, h);
 				}
 				if (update) {
 					if (type[0] != null) {
+						addressTextShadow.setCompoundDrawables(turnDrawable, null, null, null);
+						addressTextShadow.setCompoundDrawablePadding(4);
 						addressText.setCompoundDrawables(turnDrawable, null, null, null);
+						addressText.setCompoundDrawablePadding(4);
 					} else {
+						addressTextShadow.setCompoundDrawables(null, null, null, null);
 						addressText.setCompoundDrawables(null, null, null, null);
 					}
 				}
@@ -290,6 +299,7 @@ public class MapInfoWidgetsFactory {
 					} else {
 						topBar.setContentDescription(map.getResources().getString(R.string.map_widget_top_text));
 					}
+					addressTextShadow.setText(text);
 					addressText.setText(text);
 					return true;
 				}
@@ -307,6 +317,7 @@ public class MapInfoWidgetsFactory {
 				return false;
 			} else {
 				updateVisibility(addressText, false);
+				updateVisibility(addressTextShadow, false);
 				boolean updated = updateVisibility(waypointInfoBar, true);
 				// pass top bar to make it clickable
 				WaypointDialogHelper.updatePointInfoView(map.getMyApplication(), map, topBar, 

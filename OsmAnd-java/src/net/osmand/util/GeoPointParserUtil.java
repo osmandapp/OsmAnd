@@ -3,7 +3,6 @@ package net.osmand.util;
 import java.net.URI;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Locale;
@@ -89,7 +88,7 @@ public class GeoPointParserUtil {
 		actual = GeoPointParserUtil.parse(url);
 		assertUrlEquals(url, actual.getGeoUriString());
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon));
-
+		
 		// geo:34.99393,-106.61568?z=11
 		z = 11;
 		url = "geo:" + dlat + "," + dlon + "?z=" + z;
@@ -201,7 +200,7 @@ public class GeoPointParserUtil {
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(ilat, ilon, z));
 
-		// http://download.osmand.net/go?lat=34.99393&lon=-106.61568&z=11
+		// http://download.osmand.net/go?lat=c&lon=-106.61568&z=11
 		url = "http://download.osmand.net/go?lat=" + dlat + "&lon=" + dlon + "&z=" + z;
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
@@ -212,6 +211,12 @@ public class GeoPointParserUtil {
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(ilat, ilon, z));
+		
+		// http://maps.google.com/maps?q=N34.939,E-106
+		url = "http://maps.google.com/maps?q=N" + dlat + ",E" + Math.abs(dlon);
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		assertGeoPoint(actual, new GeoParsedPoint(dlat, -Math.abs(dlon)));
 
 		// http://www.osmand.net/go?lat=34.99393&lon=-106.61568&z=11
 		url = "http://www.osmand.net/go.html?lat=" + dlat + "&lon=" + dlon + "&z=" + z;
@@ -455,6 +460,14 @@ public class GeoPointParserUtil {
 		// http://www.google.com.tr/maps?q=34.99393,-106.61568
 		z = GeoParsedPoint.NO_ZOOM;
 		url = "http://www.google.com.tr/maps?q=" + dlat + "," + dlon;
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
+
+		// http://maps.google.com/maps?lci=com.google.latitudepublicupdates&ll=34.99393%2C-106.61568&q=34.99393%2C-106.61568
+                z = GeoParsedPoint.NO_ZOOM;
+		url = "http://maps.google.com/maps?lci=com.google.latitudepublicupdates&ll=" + dlat
+				+"%2C" + dlon + "&q=" + dlat + "%2C" + dlon + "((" + dlat + "%2C%20" + dlon + "))";
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
@@ -779,7 +792,8 @@ public class GeoPointParserUtil {
             uri = URI.create(uriString.replaceAll("\\s+", "+")
                              .replaceAll("%20", "+")
                              .replaceAll("%2C", ",")
-                             .replaceAll("\\|", ";"));
+                             .replaceAll("\\|", ";")
+                             .replaceAll("\\(\\(\\S+\\)\\)", ""));
         } catch (IllegalArgumentException e) {
             return null;
         }
@@ -811,7 +825,7 @@ public class GeoPointParserUtil {
             simpleDomains.add("www.openstreetmap.de");
 
 
-			final Pattern commaSeparatedPairPattern = Pattern.compile("(?:loc:)?([+-]?\\d+(?:\\.\\d+)?),([+-]?\\d+(?:\\.\\d+)?)");
+			final Pattern commaSeparatedPairPattern = Pattern.compile("(?:loc:)?([N|S]?[+-]?\\d+(?:\\.\\d+)?),([E|W]?[+-]?\\d+(?:\\.\\d+)?)");
 
             try {
                 if (host.equals("osm.org") || host.endsWith("openstreetmap.org")) {
@@ -1288,12 +1302,30 @@ public class GeoPointParserUtil {
 		}
 
 		public GeoParsedPoint(String latString, String lonString, String zoomString) throws NumberFormatException {
-			this(Double.valueOf(latString), Double.valueOf(lonString));
+			this(parseLat(latString), parseLon(lonString));
 			this.zoom = parseZoom(zoomString);
 		}
 
+		private static double parseLon(String lonString) {
+			if(lonString.startsWith("E")) {
+				return -Double.valueOf(lonString.substring(1));
+			} else if(lonString.startsWith("W")) {
+				return Double.valueOf(lonString.substring(1));
+			}  
+			return Double.valueOf(lonString);
+		}
+
+		private static double parseLat(String latString) {
+			if(latString.startsWith("S")) {
+				return -Double.valueOf(latString.substring(1));
+			} else if(latString.startsWith("N")) {
+				return Double.valueOf(latString.substring(1));
+			}  
+			return Double.valueOf(latString);
+		}
+
 		public GeoParsedPoint(String latString, String lonString) throws NumberFormatException {
-			this(Double.valueOf(latString), Double.valueOf(lonString));
+			this(parseLat(latString), parseLon(lonString));
 			this.zoom = NO_ZOOM;
 		}
 

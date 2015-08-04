@@ -29,7 +29,7 @@
         android:ellipsize="end"
         android:layout_weight="1"
         android:layout_marginRight="8dp"
-        android:textSize="20sp" />
+        android:textSize="@dimen/default_list_text_size_large" />
 
     <ImageButton
         android:id="@+id/sort"
@@ -49,7 +49,7 @@
 
     <ImageButton
         android:id="@+id/all"
-        android:contentDescription="@string/flat_list_waypoints"
+        android:contentDescription="@string/shared_string_all"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"

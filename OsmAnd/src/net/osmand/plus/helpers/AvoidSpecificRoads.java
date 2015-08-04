@@ -96,7 +96,8 @@ public class AvoidSpecificRoads {
 
 
 	protected String getText(RouteDataObject obj) {
-		return RoutingHelper.formatStreetName(obj.getName(), obj.getRef(), obj.getDestinationName());
+		return RoutingHelper.formatStreetName(obj.getName(app.getSettings().MAP_PREFERRED_LOCALE.get()), 
+				obj.getRef(), obj.getDestinationName(app.getSettings().MAP_PREFERRED_LOCALE.get()));
 	}
 
 	public void showDialog(final MapActivity mapActivity) {
@@ -109,7 +110,7 @@ public class AvoidSpecificRoads {
 			bld.setAdapter(listAdapter, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					RouteDataObject obj = getMissingRoads().get(which - 1);
+					RouteDataObject obj = getMissingRoads().get(which);
 					double lat = MapUtils.get31LatitudeY(obj.getPoint31YTile(0));
 					double lon = MapUtils.get31LongitudeX(obj.getPoint31XTile(0));
 					showOnMap(app, mapActivity, lat, lon, getText(obj), dialog);

@@ -13,7 +13,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
-import net.osmand.plus.poi.PoiLegacyFilter;
+import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.util.MapUtils;
 import android.app.Activity;
@@ -60,6 +60,7 @@ public class WaypointDialogHelper {
 		WaypointHelper wh = app.getWaypointHelper();
 		final LocationPoint point = ps.getPoint();
 		TextView text = (TextView) localView.findViewById(R.id.waypoint_text);
+		TextView textShadow = (TextView) localView.findViewById(R.id.waypoint_text_shadow);
 		localView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -86,7 +87,12 @@ public class WaypointDialogHelper {
 		} else {
 			textDist.setText("");
 		}
-		text.setText(PointDescription.getSimpleName(point, app));
+		String descr = PointDescription.getSimpleName(point, app);
+		if(textShadow != null) {
+			textShadow.setText(descr);
+		}
+		text.setText(descr);
+		
 //			((Spannable) text.getText()).setSpan(
 //					new ForegroundColorSpan(ctx.getResources().getColor(R.color.color_distance)), 0, distance.length() - 1,
 //					0);
@@ -213,7 +219,7 @@ public class WaypointDialogHelper {
 					running[0] = position;
 					thisAdapter.notifyDataSetInvalidated();
 					MapActivity map = (MapActivity) ctx;
-					final PoiLegacyFilter[] selected = new PoiLegacyFilter[1];
+					final PoiUIFilter[] selected = new PoiUIFilter[1];
 					AlertDialog dlg = map.getMapLayers().selectPOIFilterLayer(map.getMapView(), selected);
 					dlg.setOnDismissListener(new OnDismissListener() {
 						@Override
@@ -232,9 +238,9 @@ public class WaypointDialogHelper {
 	private void selectPoi(final int[] running, final ArrayAdapter<Object> listAdapter, final int type,
 						   final boolean enable, Activity ctx) {
 		if (ctx instanceof MapActivity &&
-				!PoiLegacyFilter.CUSTOM_FILTER_ID.equals(app.getSettings().getPoiFilterForMap())) {
+				!PoiUIFilter.CUSTOM_FILTER_ID.equals(app.getSettings().SELECTED_POI_FILTER_FOR_MAP.get())) {
 			MapActivity map = (MapActivity) ctx;
-			final PoiLegacyFilter[] selected = new PoiLegacyFilter[1];
+			final PoiUIFilter[] selected = new PoiUIFilter[1];
 			AlertDialog dlg = map.getMapLayers().selectPOIFilterLayer(map.getMapView(), selected);
 			dlg.setOnDismissListener(new OnDismissListener() {
 

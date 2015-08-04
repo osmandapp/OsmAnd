@@ -5,8 +5,12 @@
     android:orientation="horizontal"
     android:weightSum="1" >
 
+    <View android:layout_width="@dimen/map_route_planning_land_width"
+        android:layout_height="0dp"
+        android:id="@+id/map_route_land_left_margin"
+        android:layout_gravity="top|left"
+        android:visibility="gone" />
     <!-- LEFT widgets colon -->
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -44,20 +48,42 @@
             android:background="@drawable/btn_round"
             android:minHeight="@dimen/map_address_height" >
 
-            <TextView
-                android:id="@+id/map_address_text"
+            <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
                 android:layout_gravity="center"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:shadowColor="@color/color_myloc_distance"
-                android:shadowRadius="10"
-                android:text="Long Street Name"
-                android:textColor="@color/color_black"
-                android:textSize="@dimen/map_widget_text_size"
-                android:textStyle="bold" >
-            </TextView>
+                 >
+                
+                <TextView
+                    android:id="@+id/map_address_text_shadow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:text="Long Street Name"
+                    android:textColor="@color/color_black"
+                    android:textSize="@dimen/map_widget_text_size" >
+                </TextView>
+
+                <TextView
+                    android:id="@+id/map_address_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:text="Long Street Name"
+                    android:textColor="@color/color_black"
+                    android:textSize="@dimen/map_widget_text_size" >
+                </TextView>
+
+                
+            </FrameLayout>
 
             <LinearLayout
                 android:id="@+id/waypoint_info_bar"
@@ -82,19 +108,38 @@
                     android:layout_marginLeft="4dp"
                     android:maxLines="2"
                     android:textColor="@color/wpt_distance_color"
-                    android:textSize="15sp"
+                    android:textSize="@dimen/default_desc_text_size"
                     android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/waypoint_text"
+                <FrameLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="4dp"
-                    android:layout_weight="1"
-                    android:ellipsize="end"
-                    android:maxLines="2"
-                    android:textSize="18sp" />
+                    android:layout_weight="1" >
+
+                    
+                    <TextView
+                        android:id="@+id/waypoint_text_shadow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:text="Waypoint"
+                        android:textColor="@color/color_black"
+                        android:textSize="@dimen/map_button_text_size" />
+                    
+                    <TextView
+                        android:id="@+id/waypoint_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="2"
+                        android:text="Waypoint"
+                        android:textColor="@color/color_black"
+                        android:textSize="@dimen/map_button_text_size" />
+                    
+                </FrameLayout>
 
                 <ImageButton
                     android:id="@+id/waypoint_more"
@@ -112,11 +157,35 @@
             </LinearLayout>
         </FrameLayout>
 
+        <!-- CENTER -->
+
         <FrameLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" >
 
-            <!-- CENTER -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|left"
+                android:layout_marginLeft="@dimen/map_button_margin"
+                android:layout_marginTop="@dimen/map_button_margin"
+                android:orientation="horizontal" >
+
+                <ImageButton
+                    android:id="@+id/map_layers_button"
+                    android:layout_width="@dimen/map_small_button_size"
+                    android:layout_height="@dimen/map_small_button_size"
+                    android:background="@drawable/btn_inset_circle_trans"
+                    android:src="@drawable/ic_action_test_light" />
+
+                <ImageButton
+                    android:id="@+id/map_compass_button"
+                    android:layout_width="@dimen/map_small_button_size"
+                    android:layout_height="@dimen/map_small_button_size"
+                    android:layout_marginLeft="@dimen/map_small_button_margin"
+                    android:background="@drawable/btn_inset_circle_trans"
+                    android:src="@drawable/ic_action_test_light" />
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/map_center_info"
@@ -132,16 +201,34 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
-                <TextView
-                    android:id="@+id/map_lanes_dist_text"
+                <FrameLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:maxLines="1"
-                    android:text="1048 km"
-                    android:textColor="@color/color_black"
-                    android:textSize="@dimen/map_widget_text_size_small" />
+                    android:layout_weight="1" >
+
+                    <TextView
+                        android:id="@+id/map_lanes_dist_text_shadow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:maxLines="1"
+                        android:text="1048 km"
+                        android:textColor="@color/color_black"
+                        android:textSize="@dimen/map_widget_text_size_small" />
+                    
+                    <TextView
+                        android:id="@+id/map_lanes_dist_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:maxLines="1"
+                        android:text="1048 km"
+                        android:textColor="@color/color_black"
+                        android:textSize="@dimen/map_widget_text_size_small" />
+
+                    
+                </FrameLayout>
 
                 <ProgressBar
                     android:id="@+id/map_horizontal_progress"
@@ -153,29 +240,6 @@
                     android:max="100"
                     android:progress="60"
                     android:visibility="gone" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top|left"
-                android:layout_marginLeft="@dimen/map_button_margin"
-                android:layout_marginTop="@dimen/map_button_margin"
-                android:orientation="horizontal" >
-
-                <ImageButton
-                    android:id="@+id/map_layers_button"
-                    android:layout_width="@dimen/map_button_size"
-                    android:layout_height="@dimen/map_button_size"
-                    android:background="@drawable/btn_inset_circle"
-                    android:src="@drawable/ic_action_test_light" />
-
-                <ImageButton
-                    android:id="@+id/map_compass_button"
-                    android:layout_width="@dimen/map_button_size"
-                    android:layout_height="@dimen/map_button_size"
-                    android:background="@drawable/btn_inset_circle"
-                    android:src="@drawable/ic_action_test_light" />
             </LinearLayout>
         </FrameLayout>
     </LinearLayout>
@@ -207,10 +271,10 @@
 
             <ImageButton
                 android:id="@+id/map_collapse_button"
-                android:layout_width="@dimen/map_button_size"
-                android:layout_height="@dimen/map_button_size"
+                android:layout_width="@dimen/map_small_button_size"
+                android:layout_height="@dimen/map_small_button_size"
                 android:layout_gravity="top|center_horizontal"
-                android:background="@drawable/btn_inset_circle"
+                android:background="@drawable/btn_inset_circle_trans"
                 android:src="@drawable/ic_action_test_light" />
         </LinearLayout>
     </FrameLayout>

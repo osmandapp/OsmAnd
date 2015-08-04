@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:minHeight="@dimen/list_item_height"
     android:orientation="horizontal">
 
     <TextView
@@ -10,11 +11,13 @@
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:gravity="left"
-        android:textSize="20sp" />
+        android:layout_gravity="center_vertical"
+        android:textSize="@dimen/default_list_text_size"/>
 
     <TextView
         android:id="@+id/label"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp" />
+        android:layout_gravity="center_vertical"
+        android:textSize="@dimen/default_list_text_size" />
 </LinearLayout>

@@ -22,6 +22,6 @@
 			android:layout_gravity="center_vertical"
 			android:text="@string/loading_data"
 			android:layout_marginRight="5dp"
-			android:textSize="@dimen/dashProgressTextSize"/>
+			android:textSize="@dimen/default_desc_text_size"/>
 
 </LinearLayout>

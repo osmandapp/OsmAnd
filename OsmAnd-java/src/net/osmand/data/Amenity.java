@@ -1,11 +1,21 @@
 package net.osmand.data;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.zip.GZIPInputStream;
 
 import net.osmand.Location;
 import net.osmand.osm.PoiCategory;
+import net.osmand.util.Algorithms;
 
 
 public class Amenity extends MapObject  {
@@ -14,6 +24,7 @@ public class Amenity extends MapObject  {
 	public static final String PHONE = "phone";
 	public static final String DESCRIPTION = "description";
 	public static final String OPENING_HOURS = "opening_hours";
+	public static final String CONTENT = "content";
 	
 	private static final long serialVersionUID = 132083949926339552L;
 	private String subType;
@@ -57,7 +68,36 @@ public class Amenity extends MapObject  {
 		if(additionalInfo == null) {
 			return null;
 		}
-		return additionalInfo.get(key);
+		String str = additionalInfo.get(key);
+		str = unzipContent(str);
+		return str;
+	}
+
+	public String unzipContent(String str) {
+		if (str != null) {
+			if (str.startsWith(" gz ")) {
+				try {
+					int ind = 4;
+					byte[] bytes = new byte[str.length() - ind];
+					for (int i = ind; i < str.length(); i++) {
+						char ch = str.charAt(i);
+						bytes[i - ind] = (byte) ((int) ch - 128 - 32);
+
+					}
+					GZIPInputStream gzn = new GZIPInputStream(new ByteArrayInputStream(bytes));
+					BufferedReader br = new BufferedReader(new InputStreamReader(gzn, "UTF-8"));
+					StringBuilder bld = new StringBuilder();
+					String s;
+					while ((s = br.readLine()) != null) {
+						bld.append(s);
+					}
+					str = bld.toString();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return str;
 	}
 	
 	public Map<String, String> getAdditionalInfo() {
@@ -68,8 +108,15 @@ public class Amenity extends MapObject  {
 	}
 	
 	public void setAdditionalInfo(Map<String, String> additionalInfo) {
-		this.additionalInfo = additionalInfo;
-		openingHours = additionalInfo.get(OPENING_HOURS);
+		this.additionalInfo = null;
+		openingHours = null;
+		if(additionalInfo != null) {
+			Iterator<Entry<String, String>> it = additionalInfo.entrySet().iterator();
+			while(it.hasNext()) {
+				Entry<String, String> e = it.next();
+				setAdditionalInfo(e.getKey(), e.getValue());
+			}
+		}
 	}
 
 	public void setRoutePoint(AmenityRoutePoint routePoint) {
@@ -81,14 +128,16 @@ public class Amenity extends MapObject  {
 	}
 
 	public void setAdditionalInfo(String tag, String value) {
-		if(this.additionalInfo == null){
-			this.additionalInfo = new LinkedHashMap<String, String>();
-		}
 		if("name".equals(tag)) {
 			setName(value);
 		} else if("name:en".equals(tag)) {
 			setEnName(value);
+		} else if(tag.startsWith("name:")) {
+			setName(tag.substring("name:".length()), value);
 		} else {
+			if(this.additionalInfo == null){
+				this.additionalInfo = new LinkedHashMap<String, String>();
+			}
 			this.additionalInfo.put(tag, value);
 			if (OPENING_HOURS.equals(tag)) {
 				this.openingHours = value;
@@ -118,8 +167,77 @@ public class Amenity extends MapObject  {
 		setAdditionalInfo(PHONE, phone);
 	}
 	
-	public String getDescription() {
-		return getAdditionalInfo(DESCRIPTION);
+	public String getContentSelected(String tag, String lang, String defLang) {
+		if (lang != null) {
+			String translateName = getAdditionalInfo(tag + ":" + lang);
+			if (!Algorithms.isEmpty(translateName)) {
+				return lang;
+			}
+		}
+		String plainContent = getAdditionalInfo(tag);
+		if (!Algorithms.isEmpty(plainContent)) {
+			return defLang;
+		}
+		String enName = getAdditionalInfo(tag + ":en");
+		if (!Algorithms.isEmpty(enName)) {
+			return enName;
+		}
+		int maxLen = 0; 
+		String lng = defLang;
+		for (String nm : getAdditionalInfo().keySet()) {
+			if (nm.startsWith(tag+":")) {
+				String key = nm.substring(tag.length() + 1);
+				String cnt = getAdditionalInfo(tag+":"+key);
+				if(!Algorithms.isEmpty(cnt) && cnt.length() > maxLen) {
+					maxLen = cnt.length();
+					lng = key;
+				}
+			}
+		}
+		return lng;
+	}
+	
+	public List<String> getNames(String tag, String defTag) {
+		List<String> l = new ArrayList<String>();
+		for (String nm : getAdditionalInfo().keySet()) {
+			if (nm.startsWith(tag+":")) {
+				l.add(nm.substring(tag.length() +1));
+			} else if(nm.equals(tag)) {
+				l.add(defTag);
+			}
+		}
+		return l;
+	}
+	
+	public String getContentLang(String tag, String lang) {
+		if (lang != null) {
+			String translateName = getAdditionalInfo(tag + ":" + lang);
+			if (!Algorithms.isEmpty(translateName)) {
+				return translateName;
+			}
+		}
+		String plainName = getAdditionalInfo(tag);
+		if (!Algorithms.isEmpty(plainName)) {
+			return plainName;
+		}
+		String enName = getAdditionalInfo(tag + ":en");
+		if (!Algorithms.isEmpty(enName)) {
+			return enName;
+		}
+		for (String nm : getAdditionalInfo().keySet()) {
+			if (nm.startsWith(tag + ":")) {
+				return getAdditionalInfo(nm);
+			}
+		}
+		return null;
+	}
+	
+	public String getDescription(String lang) {
+		String info = getContentLang(DESCRIPTION, lang);
+		if(!Algorithms.isEmpty(info)) {
+			return info;
+		}
+		return getContentLang(CONTENT, lang);
 	}
 	
 	public void setDescription(String description) {

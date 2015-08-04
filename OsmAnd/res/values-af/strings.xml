@@ -325,7 +325,7 @@
   <string name="favorite_default_category">Ander</string>
   <string name="favourites_edit_dialog_name">Naam</string>
   <string name="favourites_edit_dialog_category">Kategorie</string>
-  <string name="vector_map_not_needed">Nee, dankie</string>
+  <string name="shared_string_no_thanks">Nee, dankie</string>
   <string name="basemap_missing">Basis wêreld kaart (wat die hele wêreld bevat op klein vergroting) ontbreek. Oorweeg dit asseblief om World_basemap_x.obf af te laai vir \'n volledige omgewing.</string>
   <string name="vector_data_missing">Aanboord (\'aflyn\') inligting ontbreek op SD-kaart. Oorweeg dit asseblief om dit af te laai om die kaarte aflyn te gebruik.</string>
   <string name="local_index_gpx_info_show">\n\nDruk en hou vir keuses</string>

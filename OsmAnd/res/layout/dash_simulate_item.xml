@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?attr/expandable_list_item_background"
-    android:minHeight="@dimen/dashListItemHeight"
+    android:minHeight="@dimen/list_item_height"
     android:orientation="vertical" >
 
     <View
@@ -39,7 +39,7 @@
         <TextView
             android:id="@+id/name"
             android:textColor="?android:textColorPrimary"
-            android:textSize="@dimen/dashFavNameTextSize"
+            android:textSize="@dimen/default_list_text_size"
             android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:layout_gravity="center_vertical"
@@ -50,10 +50,10 @@
 
         <ImageButton
             android:id="@+id/stop"
-            android:layout_width="@dimen/dashListItemHeight"
-            android:layout_height="@dimen/dashListItemHeight"
+            android:layout_width="@dimen/list_item_height"
+            android:layout_height="@dimen/list_item_height"
             android:layout_gravity="center_vertical"
-            android:background="?attr/options_button_background"
+            android:background="?attr/dashboard_button"
             android:src="@drawable/ic_action_rec_stop"
             tools:visibility="visible" />
     </LinearLayout>

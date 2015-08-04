@@ -11,7 +11,7 @@
         android:gravity="center"
         android:text=""
         android:textColor="@color/color_invalid"
-        android:textSize="16sp"
+        android:textSize="@dimen/default_desc_text_size"
         android:visibility="gone" />
 
     <LinearLayout
@@ -45,7 +45,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="3dp"
                     android:text="@string/route_from"
-                    android:textSize="18sp" />
+                    android:textSize="@dimen/default_list_text_size" />
 
                 <Spinner
                     android:id="@+id/FromSpinner"
@@ -53,7 +53,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:textSize="18sp" />
+                    android:textSize="@dimen/default_list_text_size"/>
             </LinearLayout>
 
             <TextView
@@ -62,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="3dp"
                 android:gravity="left"
-                android:textSize="18sp" />
+                android:textSize="@dimen/default_list_text_size"/>
 
 
             <LinearLayout
@@ -74,7 +74,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="3dp"
                     android:text="@string/route_to"
-                    android:textSize="18sp">
+                    android:textSize="@dimen/default_list_text_size">
 
                 </TextView>
 
@@ -84,7 +84,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:textSize="18sp" />
+                    android:textSize="@dimen/default_list_text_size" />
             </LinearLayout>
 
         </LinearLayout>

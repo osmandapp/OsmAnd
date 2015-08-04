@@ -144,12 +144,6 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		return true;
 	}
 
-
-	@Override
-	public boolean init(OsmandApplication app, Activity activity) {
-		return true;
-	}
-
 	@Override
 	public String getId() {
 		return ID;
@@ -178,11 +172,24 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 
 	@Override
 	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
-		if (parkingLayer == null) {
-			registerLayers(activity);
-		}
-		if (parkingPlaceControl == null) {
-			registerWidget(activity);
+		if (isActive()) {
+			if (parkingLayer == null) {
+				registerLayers(activity);
+			}
+			if (parkingPlaceControl == null) {
+				registerWidget(activity);
+			}
+		} else {
+			if (parkingLayer != null) {
+				activity.getMapView().removeLayer(parkingLayer);
+				parkingLayer = null;
+			}
+			MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();
+			if (mapInfoLayer != null && parkingPlaceControl != null) {
+				mapInfoLayer.removeSideWidget(parkingPlaceControl);
+				mapInfoLayer.recreateControls();
+				parkingPlaceControl = null;
+			}
 		}
 	}
 
@@ -191,7 +198,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		if (mapInfoLayer != null) {
 			parkingPlaceControl = createParkingPlaceInfoControl(activity);
 			mapInfoLayer.registerSideWidget(parkingPlaceControl,
-					R.drawable.ic_action_parking_dark, R.drawable.widget_parking, R.string.map_widget_parking, "parking", false, 8);
+					R.drawable.ic_action_parking_dark,  R.string.map_widget_parking, "parking", false, 8);
 			mapInfoLayer.recreateControls();
 		}
 	}
@@ -495,7 +502,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 			}
 		});
 		parkingPlaceControl.setText(null, null);
-		parkingPlaceControl.setImageDrawable(R.drawable.widget_parking);
+		parkingPlaceControl.setIcons(R.drawable.widget_parking_day, R.drawable.widget_parking_night);
 		return parkingPlaceControl;
 	}
 	

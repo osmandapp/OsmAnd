@@ -19,7 +19,6 @@ public class DownloadEntry {
 	public String assetName;
 	public DownloadActivityType type;
 	
-	public DownloadEntry attachedEntry;
 	public IndexItem item;
 
 	public DownloadEntry(IndexItem item) {

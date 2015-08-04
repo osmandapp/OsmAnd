@@ -1,7 +1,12 @@
 package net.osmand.util;
 
+import java.util.Collection;
+import java.util.List;
+
 import gnu.trove.list.TLongList;
 import net.osmand.data.LatLon;
+import net.osmand.osm.edit.Node;
+import net.osmand.osm.edit.OsmMapUtils;
 
 public class MapAlgorithms {
 	
@@ -285,4 +290,48 @@ public class MapAlgorithms {
   	     }
   	     return true;
   	}
+  	
+  	public static boolean containsPoint(Collection<Node> polyNodes, double latitude, double longitude){
+		return  countIntersections(polyNodes, latitude, longitude) % 2 == 1;
+	}
+	
+	/**
+	 * count the intersections when going from lat, lon to outside the ring
+	 * @param polyNodes2 
+	 */
+	private static int countIntersections(Collection<Node> polyNodes, double latitude, double longitude) {
+		int intersections = 0;
+		if (polyNodes.size() == 0)
+			return 0;
+		Node prev = null;
+		Node first = null;
+		Node last = null;
+		for(Node n  : polyNodes) {
+			if(prev == null) {
+				prev = n;
+				first = prev;
+				continue;
+			}
+			if(n == null) {
+				continue;
+			}
+			last = n;
+			if (OsmMapUtils.ray_intersect_lon(prev,
+					n, latitude, longitude) != -360.0d) {
+				intersections++;
+			}
+			prev = n;
+		}
+		if(first == null || last == null) {
+			return 0;
+		}
+		// special handling, also count first and last, might not be closed, but
+		// we want this!
+		if (OsmMapUtils.ray_intersect_lon(first,
+				last, latitude, longitude) != -360.0d) {
+			intersections++;
+		}
+		return intersections;
+	}
+	
 }

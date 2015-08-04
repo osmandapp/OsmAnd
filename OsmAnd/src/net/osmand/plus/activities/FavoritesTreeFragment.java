@@ -36,11 +36,11 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.GPXUtilities;
@@ -53,8 +53,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.dialogs.DirectionsDialogs;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.ColorDialogs;
-import net.osmand.plus.helpers.ScreenOrientationHelper;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.util.MapUtils;
 
@@ -183,39 +183,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			updateSelectionMode(actionMode);
 		} else {
 			final FavouritePoint point = (FavouritePoint) favouritesAdapter.getChild(groupPosition, childPosition);
-			final OsmandSettings settings = getMyApplication().getSettings();
-			LatLon location = new LatLon(point.getLatitude(), point.getLongitude());
-			final PopupMenu optionsMenu = new PopupMenu(getActivity(), v);
-			DirectionsDialogs.createDirectionActionsPopUpMenu(optionsMenu, location, point, 
-					new PointDescription(PointDescription.POINT_TYPE_FAVORITE, point.getName()), settings.getLastKnownMapZoom(),
-					getActivity(), true, false);
-
-			MenuItem item = optionsMenu.getMenu().add(R.string.favourites_context_menu_edit)
-					.setIcon(iconsCache.getContentIcon(R.drawable.ic_action_edit_dark));
-			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-				@Override
-				public boolean onMenuItemClick(MenuItem item) {
-					editPoint(getActivity(), point, new Runnable() {
-						public void run() {
-							favouritesAdapter.synchronizeGroups();		
-						}
-					});
-					return true;
-				}
-			});
-
-			item = optionsMenu.getMenu().add(R.string.favourites_context_menu_delete)
-					.setIcon(iconsCache.getContentIcon(R.drawable.ic_action_delete_dark));
-			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-				@Override
-				public boolean onMenuItemClick(MenuItem item) {
-					deletePoint(point);
-
-					return true;
-				}
-			});
-
-			optionsMenu.show();
+			showItemPopupOptionsMenu(point, v);
 		}
 		return true;
 	}
@@ -371,7 +339,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			}
 		});
 
-		if (ScreenOrientationHelper.isOrientationPortrait(getActivity())) {
+		if (AndroidUiHelper.isOrientationPortrait(getActivity())) {
 			menu = ((FavoritesActivity) getActivity()).getClearToolbar(true).getMenu();
 		} else {
 			((FavoritesActivity) getActivity()).getClearToolbar(false);
@@ -506,8 +474,8 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 	protected void openChangeGroupDialog(final FavoriteGroup group) {
 		Builder bld = new AlertDialog.Builder(getActivity());
 		View favEdit = getActivity().getLayoutInflater().inflate(R.layout.fav_group_edit, null);
-		final Spinner colorSpinner = (Spinner) favEdit.findViewById(R.id.ColorSpinner);
         final TIntArrayList list = new TIntArrayList();
+        final Spinner colorSpinner = (Spinner) favEdit.findViewById(R.id.ColorSpinner);
         final int intColor = group.color == 0? getResources().getColor(R.color.color_favorite) : group.color;
         ColorDialogs.setupColorSpinner(getActivity(), intColor, colorSpinner, list);
 		
@@ -764,6 +732,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			}
 			final View ch = row.findViewById(R.id.options);
 			if(!selectionMode) {
+				((ImageView) ch).setImageDrawable(getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_overflow_menu_white));
 				ch.setVisibility(View.VISIBLE);
 				ch.setOnClickListener(new View.OnClickListener() {
 					@Override
@@ -791,9 +760,20 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			TextView name = (TextView) row.findViewById(R.id.favourite_label);
 			TextView distanceText = (TextView) row.findViewById(R.id.distance);
 			ImageView icon = (ImageView) row.findViewById(R.id.favourite_icon);
+			ImageView options = (ImageView) row.findViewById(R.id.options);
+			options.setFocusable(false);
+			options.setImageDrawable(getMyApplication().getIconsCache()
+					.getContentIcon(R.drawable.ic_overflow_menu_white));
+			options.setVisibility(View.VISIBLE);
 			final FavouritePoint model = (FavouritePoint) getChild(groupPosition, childPosition);
 			row.setTag(model);
-			icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getActivity(), model.getColor()));
+			options.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					showItemPopupOptionsMenu(model, v);
+				}
+			});
+			icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getActivity(), model.getColor(), 0));
 			LatLon lastKnownMapLocation = getMyApplication().getSettings().getLastKnownMapLocation();
 			int dist = (int) (MapUtils.getDistance(model.getLatitude(), model.getLongitude(),
 					lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude()));
@@ -893,5 +873,42 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 				collapseTrees(5);
 			}
 		}
+	}
+
+	public void showItemPopupOptionsMenu(final FavouritePoint point, final View view) {
+		final OsmandSettings settings = getMyApplication().getSettings();
+		LatLon location = new LatLon(point.getLatitude(), point.getLongitude());
+		final PopupMenu optionsMenu = new PopupMenu(getActivity(), view);
+		DirectionsDialogs.createDirectionActionsPopUpMenu(optionsMenu, location, point,
+				new PointDescription(PointDescription.POINT_TYPE_FAVORITE, point.getName()),
+				settings.getLastKnownMapZoom(),
+				getActivity(), true, false);
+
+		MenuItem item = optionsMenu.getMenu().add(R.string.favourites_context_menu_edit)
+				.setIcon(getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_edit_dark));
+		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				editPoint(getActivity(), point, new Runnable() {
+					public void run() {
+						favouritesAdapter.synchronizeGroups();
+					}
+				});
+				return true;
+			}
+		});
+
+		item = optionsMenu.getMenu().add(R.string.favourites_context_menu_delete)
+				.setIcon(getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_delete_dark));
+		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				deletePoint(point);
+
+				return true;
+			}
+		});
+
+		optionsMenu.show();
 	}
 }

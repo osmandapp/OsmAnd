@@ -21,7 +21,7 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
+        android:textSize="@dimen/default_list_text_size"
         android:layout_weight="1"
         android:layout_gravity="center_vertical"
         android:layout_marginBottom="8dp"
@@ -32,7 +32,7 @@
     <CheckBox
         android:id="@+id/check_item"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/list_item_height"
         android:layout_marginLeft="11dp"
         android:focusable="false"
         android:layout_gravity="center_vertical" />

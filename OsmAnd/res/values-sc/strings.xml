@@ -136,8 +136,8 @@
 	<string name="shared_string_yes">Eja</string>
 	<string name="tip_map_styles_t">"OsmAnd suportada sa visualizatzione de sas mapas vettoriales in istiles diferentes pro s’adatare a sas esigentzias tuas:
 \n\nDiferentes dae sos istiles balansados preimpostados de sa mapa, los agatas suta \'Menu\' -&gt; \'Cunfigura sa mapa\' -&gt; \'Istile Mapa\' issèbera pro esempru
-\n\t* The \'Touring view\' istile: cuntènnidi sas informatziones prus minujas possìbile pro biagiare e pro visitare, incluidas sas ottimizatziones pro sos ghiadores professionales (contrastu prus distinghìbile pro sas istradas), optzione pro s’escursionismu Alpinu (iscala SAC), itineràrios tziclìsticos, sìmbolos pro s’escursionismu, etc.
-\n\t* \'Contrastu istradas artu\' ammustrat sas istradas cun una lughentesa de sos colores atzentuata meda pro sas situatziones de illuminadura mala.
+\n\t* S’istile \'Vista turìstica\': cuntènnidi sas informatziones prus minujas possìbile pro biagiare e pro visitare, incluidas sas ottimizatziones pro sos ghiadores professionales (contrastu prus distinghìbile pro sas istradas), optzione pro s’escursionismu Alpinu (iscala SAC), itineràrios tziclìsticos, sìmbolos pro s’escursionismu, etc.
+\n\t* \'Istradas a cuntrastu artu\' ammustrat sas istradas cun una lughentesa de sos colores atzentuata meda pro sas situatziones de illuminadura mala.
 \n\t* \'Ierru e isci\' crea una vista de su paesàgiu ierrale (cucuzau dae su nie), e visione globale de sas pistas de isci e de sos impiantos de artziada (in acrobada cun s’isgarrigamentu de sa mapa \'World ski\' ) "</string>
     <string name="about_version">Versione:</string>
     <string name="about_settings">Informatziones</string>
@@ -224,7 +224,7 @@
 	\n\t* Posibilidade de burrare sos documentos SRTM
 	\n\t* Suportu a sas notas de OSM 
     </string>
-    <string name="search_street_in_neighborhood_cities">Chirca sas istradas in sas citades prus a curtzu</string>
+    <string name="search_street_in_neighborhood_cities">Chirca sas istradas in sas tzitades prus a curtzu</string>
     <string name="intermediate_items_sort_return">Puntos mesanos cussertaos pro perfetzionare s’andala dae sa positzione atuale a sa destinatzione.</string>
     <string name="intermediate_items_sort_by_distance">Cusserta (ghenna a ghenna)</string>
     <string name="local_osm_changes_backup_successful">Creatzione documentu de muda OSM %1$s acabada</string>
@@ -278,11 +278,11 @@
     <string name="monitoring_settings_descr">Cunfigura comente registrare sos biàgios tuos</string>
     <string name="osmo_settings_uuid">ID ùnicu de su dispositivu</string>
     <string name="osmo_settings_descr">Cunfigura sas impostaduras de compidada de su dispositivu e imposta su canale de compidada pessonale</string>
-    <string name="osmo_plugin_description">"Custu plugin frunit sas funtzionalidades pro impreare sa compidada avantzada in dereta, bie http://osmo.mobi.
-\n\nSighi àteros dispositivos  e fàghedi sighire. Crea grupos anònimos, cumpartzi sa positzione a manera retzìproca e comùnica. Sunt disponìbiles meda impostaduras pro s’arrastamentu, pro sa sessione in cursu o permanentes.
-\n\nSos grupos anònimos sunt limidados pro su nùmeru de dies e calicuna de sas funtziones, es. non b’est su controllu remotu e nemmancu s’amministradore de su grupu. Grupos cun totu sas funtzionalidades podent èssere creados in su giassu e petzi sos impitadores registrados podent atzèdere. "</string>
-    <string name="osmo_plugin_name">Compidada OsMo</string>
-    <string name="osmo_settings">Compidada OsMo</string>
+    <string name="osmo_plugin_description">"Custu plugin frunit sas funtzionalidades pro impreare sa compidada avantzada in dereta OsMo, bie http://osmo.mobi.
+\n\nSighi totu sos dispositivos de unu grupu in ue e comùnica cun sos àteros. Sunt disponìbiles meda impostaduras pro s’arrastamentu, pro sa sessione in cursu o permanentes.
+\n\nSos grupos anònimos podent èssere creados pro su nùmeru pretzisu de dies e bi sunt lìmites pro calicuna de sas funtziones, es. non b’est su controllu remotu e nemmancu s’amministradore de su grupu. Grupos cun totu sas funtzionalidades podent èssere creados in su giassu e petzi sos impitadores registrados podent atzèdere. "</string>
+    <string name="osmo_plugin_name">OsMo (Compidada OSM)</string>
+    <string name="osmo_settings">OsMo</string>
    	
     
     <string name="osmand_background_plugin_description">Ammustrat sas impostaduras pro abilitare s’arrastamentu e su nàvigu in modalidade a reposu (ischermu istudadu) pro mèdiu de ischidaduras periòdicas de su GPS.</string>
@@ -370,7 +370,7 @@
 \n\t* Plugin pro sas notas àudio/vìdeo
 \n\t* Plugin pro sas lìnias de livellu
 \n\t* Curretziones de errores
-\n\t* Optzione \'Touring view\' de istile mapa, cun prus minujas, prus istiles pro sas istradas, prus cuntrastu, e optzione escursionismu alpinu (iscala SAC)
+\n\t* Optzione \'Vista turìstica\' de istile mapa, cun prus minujas, prus istiles pro sas istradas, prus cuntrastu, e optzione escursionismu alpinu (iscala SAC)
 \n\t* Curretzione EGM96 de s’iscostamentu de sas leghiduras de s’artària GPS "</string>
     <string name="recording_unavailable">non disponìbile</string>
     <string name="recording_context_menu_arecord">Registra una nota àudio</string>
@@ -417,7 +417,7 @@
     <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">Perunu edifìtziu agatau.</string>
     <string name="incremental_search_city">Chirca incrementale de sa tzitade</string>
-    <string name="search_villages_and_postcodes">Chirca biddas/còdighes postales</string>
+    <string name="search_villages_and_postcodes">Chirca àteras biddas/còdighes postales</string>
 	<string name="voice_stream_voice_call">Àudio mutidas bogales</string>
 	<string name="voice_stream_notification">Àudio notìficas</string>
 	<string name="voice_stream_music">Àudio media/mùsica</string>
@@ -443,7 +443,7 @@
 	<string name="rendering_attr_roadColors_description">Issèbera una cumbinatzione de colores pro sas istradas:</string>
 	<string name="rendering_attr_roadColors_name">Ischema de colores de sas istradas</string>
     <string name="map_widget_show_destination_arrow">Ammustra sa diretzione de sa destinatzione</string>
-    <string name="enable_plugin_monitoring_services">"Abìlita su plugin de arrastamentu pro impreare sos servitzios de registratzione de sa positzione (registratzione GPX,  arrastamentu in lìnia)"</string>
+    <string name="enable_plugin_monitoring_services">"Abìlita su plugin de registratzione biàgios pro impreare sos servitzios de registratzione de sa positzione (registratzione GPX,  arrastamentu in lìnia)"</string>
     <string name="non_optimal_route_calculation">Càlcula un’àndala, s’in casu mai fintzas non primorosa, pro sas distantzias longas</string>
 	<string name="gps_not_available">Ativa su GPS in sas impostaduras</string>
     <string name="tip_recent_changes_0_8_3_t">"Mudas in sa 0.8.3:
@@ -552,7 +552,7 @@
     <string name="osmo_auth_error_short">Autorizatzione fallida</string>
     <string name="osmo_auth_error">Errore de autorizatzione OsMo: %1$s.\nDiat podet èssere unu disservitziu temporaneu o sa registratzione tua est iscadia.\nBoles protzèdere cun una registratzione noa?</string>
     <string name="osmo_group_by_invite">Atzèdere pro mèdiu de invitu</string>
-    <string name="osmo_group_information_desc">" - Totu sos grupos creados sunt pùblicos! Si bolies abarrare anònimos connettìe sos dispositìvos a manera dereta pro mèdiu de sos id de arrastamentu.\n- A su grupu podent èssere registradas finas a 16 pessones.\n- In su casu de inatividade o de atividade de una pessone sola pro duas chidas, su grupu at a èssere burrau.\n- Est possìbile limidare s’atzèssu a su grupu, petzi prò mèdiu de invitu, pro nàrrere, pro amministrare su grupu depies andare a su pannellu di amministratzione.\n- Si tenies bisòngiu de creare unu grupu ad àteras cunditziones pro piaghere visitae http://osmo.mobi"</string>
+    <string name="osmo_group_information_desc">" - Totu sos grupos creados sunt pùblicos! Si bolies abarrare anònimos connettìe sos dispositìvos a manera dereta pro mèdiu de sos id de arrastamentu.\n- Sos grupos privados sunt limitados a 8 pessonas.\n- In su casu de inatividade o de atividade de una pessone sola pro duas chidas, su grupu at a èssere burrau.\n- Est possìbile limidare s’atzèssu a su grupu, petzi prò mèdiu de invitu, pro nàrrere, pro amministrare su grupu depies andare a su pannellu di amministratzione.\n- Si tenies bisòngiu de creare unu grupu ad àteras cunditziones pro piaghere visitae http://osmo.mobi"</string>
     <string name="osmo_group_information">Pro piaghere leghide in antis de creare unu grupu!</string>
     <string name="osmo_gpx_points_downloaded">Igarrigados puntos %1$s de OsMo.</string>
     <string name="osmo_start_service">Servìtziu OsMo</string>
@@ -723,11 +723,11 @@
 	<string name="update_poi_is_not_available_for_zoom">S’agiornamentu de sos PDI non est disponìbile pro livellos de zoom bassos</string>
 	<string name="tip_update_index_t">"Mapas agiorndas sunt fundamentales pro sa visione sena lìnia, pro sa chirca tramite PDI/indiritzu, e pro su nàvigu sena lìnia. OsmAnd frunidi unu gestore de sas mapas pro las isgarrigare e pro chircare pro agiornamentos.
 \n\nPro isgarrigare mapas bae in \'Impostaduras\' → \'Amministra documentos de sas mapas\' → \'Isgàrriga\'.
-\n\nA pustis chi sa lista globale de sas regiones at a èssere istada isgarrigada, carca in supra de unu ogetu pro isgarrigare o carrigare unu documentu. Pro piaghere nota s’isseberadore de tipu de documentu in sa parte arta de s\'ischermu pro ischertare su tipu de isgarrigamentu chi boles (mapas regulares, umbraduras de sos rilievos, etc.).
+\n\nA pustis chi sa lista globale de sas regiones at a èssere istada isgarrigada, carca in supra de unu ogetu pro isgarrigare o carrigare unu documentu. Pro piaghere abbaida s’isseberadore de tipu de documentu in sa parte arta de s\'ischermu pro ischertare su tipu de isgarrigamentu chi boles (mapas regulares, umbraduras de sos rilievos, etc.).
 \n\nPodes filtrare sa lista de sas regiones iscrivende carchi lètera, o  ischertande s’optzione \'Impostaduras\' → \'Filtra isgarrigadas \' pro bìere agiornamentos pro petzi sos datos chi tenes giai in su dispositivu.
 \n\n\t* Boghes in \'birde\' indicana documentos de datos identicos in su dispositivu e in su server
 \n\t* Boghes in \'blu\' indicana agioramentos disponìbiles in su server
-\n\t* Boghes in corsivu indicana datos deativados in su dispositivu "</string>
+\n\t* Boghes in corsivu indicana datos disativados in su dispositivu "</string>
 	<string name="map_widget_vector_attributes">Caraterìsticas de su disinnu</string>
 	<string name="screen_is_locked">Pro disarreare s’ischermu carca s’icona de su luchete</string>
 	<string name="map_widget_top_text">Nùmene de s’istrada</string>
@@ -790,8 +790,8 @@
 	<string name="osmand_parking_pm">PM</string>
 	<string name="osmand_parking_am">AM</string>
 	<string name="osmand_parking_position_name">Puntu de parchègiu</string>
-	<string name="osmand_parking_plugin_description">Su plugin positzione parchègiu ti permìtit de ammentare cando sa màchina tua est istada parchegiada, in ue e, si su parchègiu tenet unu tempus limitadu, cantu tempus tenes galu tue. Podes agatare su logu e su tempus de parchègiu in su widget de sa mapa.
-\n Si ti diat dèpere servire un\'avisu pro ti l’ammentaret, podet annànghere notìficas in su calendàriu .</string>
+	<string name="osmand_parking_plugin_description">Su plugin positzione parchègiu ti permìtit de ammentare cando est istada parchegiada sa màchina tua, e cantu tempus tenes galu (si su parchègiu tenet unu tempus limitadu).
+\nPodes agatare su logu e su tempus de parchègiu in su widget de sa mapa. Podes annànghere notìficas in su calendàriu pro ti l\'ammentare.</string>
 	<string name="osmand_parking_plugin_name">Plugin positzione parchègiu</string>
 	<string name="context_menu_item_add_parking_point">Marca comente positzione de parchègiu</string>
 	<string name="gpxup_public">Pùblicu</string>
@@ -851,7 +851,7 @@
 	<string name="accessibility_mode">Modalidade atzessìbile</string>
 	<string name="accessibility_mode_descr">Abìlita sas funtziones chi pertocant a s’atzessibilidade</string>
 	<string name="shared_string_on">Ativau</string>
-	<string name="shared_string_off">Deativau</string>
+	<string name="shared_string_off">Istudadu</string>
 	<string name="backToMenu">Torra a su Menù</string>
 	<string name="zoomIs">Su livellu de zoom est</string>
 	<string name="north">nord</string>
@@ -953,8 +953,8 @@
     <string name="pause_navigation">Pone in pasu su nàvigu</string>
     <string name="rendering_attr_alpineHiking_name">Iscala pro s’alpinismu (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Disinna sas camineras basande•ti in supra de s’iscala SAC</string>
-    <string name="rendering_attr_osmcTraces_name">Istratu sìmbulos escursionisticos</string>
-    <string name="rendering_attr_osmcTraces_description">Disinna sas camineras sighinde sas rastas OSMC</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Istratu sìmbulos escursionisticos</string>
+    <string name="rendering_attr_hikingRoutesOSMC_description">Disinna sas camineras sighinde sas rastas OSMC</string>
     
 	<string name="osmand_parking_delete_confirm">Boles remòvere sa positzione de sa màchina parchegiada?</string>
 	<string name="osmand_parking_delete">Burra su marcadore de parchègiu</string>
@@ -1002,7 +1002,7 @@
 \n\t - Su càlculu de sas àndala divènnidi prus sòlidu\n\t *Megioramentos impreabilidade e UI*
 \n\t - Megioramentos in medas àreas "</string>
 	<string name="osm_editing_plugin_description">Custu plugin permitit de cuntribuire ad OSM creande e modificande sos PDI de OSM, aberinde e cummentande errores de OSM e imbiande documentos GPX registrados. OSM est unu progetu pùblicu de mapadura fatu dae una comunidade globale. Pro àteras informatziones: http://openstreetmap.org. Sa partetzipatzione est apretziada, e sas cuntributziones podent èssere fatas deretamente dae OsmAnd insertande in intro de s\'aplicu sas credentziales de atzessu.</string>
-	<string name="play_commands_of_currently_selected_voice">Riprodui sos cumandos de sa boghe como seletzionada</string>
+	<string name="play_commands_of_currently_selected_voice">Riprodui sos cumandos de sa boghe ischertada</string>
 	<string name="test_voice_prompts">Proa sos cumandos vocales</string>    
 	<string name="switch_to_raster_map_to_see">Peruna mapa vetoriale est disponìbile pro custa positzione. Ne podes iscarrigare una in Impostaduras (Amministra sos documentos de sas mapas), o colare a sas mapas in lìnia (abìlita sas mapas in lìnia pro lu fàghere).</string>
 	<string name="tip_recent_changes_0_7_2_t">"Mudas in sa 0.7.2:
@@ -1049,7 +1049,7 @@
 \n\t- Individuatzione diretzione: \'Faghe borta ad U\' est indicadu e annuntziadu cando b’est movimentu in sa diretzione opposta o si est istada brincada una borta
 \n\t- Avisu vocale nou: \'Àndala torrada a calculare\'
 \n\t- Indicatzione visiva, tramite muda de su colore de sa fritza, de bortada imbeniente intre 100m
-\n\t- Como fintzas sos documentos deativados benint visualizzados in s’ischermada de icarrigamentu, in birde e blu iscuru
+\n\t- Como fintzas sos documentos disativados benint visualizzados in s’ischermada de icarrigamentu, in birde e blu iscuru
 \n\t- Àteras mudas "</string>
 	<string name="update_poi_does_not_change_indexes">Sa modìficas de sos PDI intre s’aplicu non tenent efetos in sas mapas iscarrigadas, sunt imbetzes sarbadas in unu documentu locale.</string>
 	<string name="local_openstreetmap_were_uploaded">{0} sos PDI/Notas sunt istados carrigados</string>
@@ -1156,18 +1156,18 @@
 	<string name="favorite_default_category">Àteru</string>
 	<string name="favourites_edit_dialog_name">Nùmene</string>
 	<string name="favourites_edit_dialog_category">Categoria</string>
-	<string name="vector_map_not_needed">No, gràtzias</string>
+	<string name="shared_string_no_thanks">No, gràtzias</string>
 	<string name="basemap_missing">Fartat sa mapa de base de su mundu (totu su mundu pro zoom bassos). Podes iscarrigare World_basemap_x.obf pro unu sistema cumpridu.</string>
 	<string name="vector_data_missing">Fartant sos datos (\'non in lìnia\') in s’ischeda SD. Ti cussigiamus de los iscarrigare pro poder impreare sas mapas sena lìnia.</string>
 	<string name="local_index_installed">Versione locale</string>
-	<string name="local_index_items_backuped">%1$d de %2$d ogetu/os deativados curretamente.</string>
+	<string name="local_index_items_backuped">%1$d de %2$d ogetu/os istudados curretamente.</string>
 	<string name="local_index_items_deleted">%1$d de %2$d ogetu/os burradu curretamente.</string>
 	<string name="local_index_items_restored">%1$d de %2$d ogetu/os ativadu/os curretamente.</string>
 	<string name="local_index_no_items_to_do">Perunu ogetu dae %1$s</string>
 	<string name="local_index_action_do">Istas pro %1$s %2$s ogetu/os. Sighire?</string>
 	<string name="local_index_descr_title">Amministra sos documentos de sas mapas</string>
-	<string name="local_index_mi_restore">Ativa</string>
-	<string name="local_index_mi_backup">Deativa</string>
+	<string name="local_index_mi_restore">Allue</string>
+	<string name="local_index_mi_backup">Istuda</string>
 	
 	
 	<string name="local_index_mi_reload">Torra a carrigare dae s’ischeda SD</string>
@@ -1175,7 +1175,7 @@
 	<string name="local_index_address_data">Datos indiritzos</string>
 	<string name="local_index_transport_data">Datos trasportos pùblicos</string>
 	<string name="local_index_map_data">Datos mapa</string>
-	<string name="local_indexes_cat_backup">Deativadu</string>
+	<string name="local_indexes_cat_backup">Istudadu</string>
 	<string name="local_indexes_cat_tts">Boghes (TTS)</string>
 	<string name="local_indexes_cat_voice">Boghe (registrada)</string>
 	
@@ -1343,7 +1343,7 @@
 	<string name="rotate_map_to_bearing_descr">Isseberare s’alliniamentu de sa mapa a s’ischermu</string>
 	<string name="rotate_map_to_bearing">Orientamentu de sa mapa</string>
 	<string name="fav_imported_sucessfully">Importatzione de sos prefèrridos cumprida</string>
-	<string name="import_file_favourites">Sarbare comente documentu GPX o importare in sos prefèrridos?</string>
+	<string name="import_file_favourites">Sarbare sos puntos comente documentu GPX o importare in sos prefèrridos?</string>
 	
 	<string name="fav_file_to_load_not_found">Su documentu GPX chi càbit sos prefèrridos no est istadu agatadu in {0}</string>
 	<string name="fav_saved_sucessfully">Prefèrridos sarbados in {0}</string>
@@ -1378,7 +1378,7 @@
 	<string name="show_poi_filter">Ammustra filtru</string>
 	<string name="search_poi_filter">Filtru</string>
 	<string name="menu_mute_off">S’àudio est disativadu</string>
-	<string name="menu_mute_on">Àudio deativadu</string>
+	<string name="menu_mute_on">Àudio istudadu</string>
 	<string name="download_additional_maps">Iscarrigare sas mapas fartantes %1$s (%2$d MB)?</string>
     <string name="shared_string_more">Àteru…</string>
     <string name="local_index_upload_gpx_description">Imbiu de sos documentos GPX a sa comunidade OSM. Los ant a impreare pro megiorare sas mapas.</string>
@@ -1672,7 +1672,7 @@
 	<string name="background_router_service_descr">Allughe su servìtziu a reposu de OsmAnd pro s’arrastamentu de sa positzione cando s’ischermu est istudadu</string>
 	<string name="off_router_service_no_gps_available">Su servìtziu de nàvigu a reposu de OsmAnd netzèssitat de su sistema de positzionamentu ativadu.</string>
 	<string name="tip_recent_changes_0_6_7_t">"Mudas in sa 0.6.7:
-\n\t- Gestore datos non in lìnia (iscàrriga, burra, ativa / deativa datos sena lìnia deretamente dae OsmAnd)
+\n\t- Gestore datos non in lìnia (iscàrriga, burra, allue / istuda datos sena lìnia deretamente dae OsmAnd)
 \n\t- Puntos prefèrridos e grupos (categoriza, burra, amministra sos prefèrridos)
 \n\t- GPX Explorer in s’aplicu (bie minujas de sas rastas, distantzia, lestresa, artària, etc.)
 \n\t- Nàvigu GPX (prus optziones, sighi su nàvigu a pustis de un errore (crash), suportu pro sas rutundas)
@@ -1714,7 +1714,7 @@
     <string name="way_alarms">Avisos de tràficu</string>
     <string name="speak_favorites">Annùntzia sos Prefèrridos a curtzu</string>
     <string name="speak_poi">Annùntzia PDI a curtzu</string>
-    <string name="flat_list_waypoints">Totus</string>
+    <string name="shared_string_all">Totus</string>
     <string name="index_tours">Itineràrios</string>
     <string name="record_plugin_description">"Custu plugin ativat sa funtzionalidade de registratzione de sas rastas tuas carcande su pursante in s’ischermu de sa mapa e ammustrat sas impostaduras pro sa registratzione de sos biàgios tuos in documentos GPX localmente o in lìnia impreande unu servìtziu web.
 \n\nSas rastas registradas podent èssere cumpartzida cun sos amigos tuos o èssere impreadas pro cuntribuire a OSM. Sos atletas podent impreare sas rastas pro compidare sos allenamentos issoro. Carchi anàlisi de base podet èssere fata deretamente in OsmAnd, comente tempus de giru, lestresa mèdia etc., e sas rastas podent, est craru, èssere analizadas fintzas prus a tardu cun ainas estèrnas de anàlisi. "</string>
@@ -1739,7 +1739,7 @@
 	<string name="local_index_description">Ischerta unu elementu esistente pro bìere prus minujas, carca e mantène carcau pro lu disativare o burrare. Datos como in su dispositivu (%1$s lìberos):</string>
 	<string name="text_size_descr">Issèbera sa mannària de su testu in sa mapa.</string>
     <string name="text_size">Mannària de su testu</string>
-    <string name="fav_point_dublicate_message">Amus cambiau su nùmene de su prefèrridu tuo a %1$s pro evitare nùmenes dòpios.</string>
+    <string name="fav_point_dublicate_message">Nùmene prefèrridu giai impreadu, cambiadu in %1$s pro non tènnere duplicados.</string>
     <string name="fav_point_dublicate">Nùmene dòpiu in sos prefèrridos</string>
     
     
@@ -1831,7 +1831,7 @@
 	<string name="proxy_port_descr">Cunfigura su nùmeru de sa ghenna proxy tua (es. 8118)</string>
 	<string name="proxy_pref_title">Proxy</string>
     <string name="proxy_pref_descr">Imposta una cunnessione a ìnternet tramite proxy</string>
-    <string name="rendering_attr_streetLighting_name">Illuminatzione pùbblica</string>
+    <string name="rendering_attr_streetLighting_name">Illuminatzione pùblica</string>
     <string name="version_settings_descr">Iscàrriga versiones de isvilupu</string>
     <string name="version_settings">Versiones</string>
     <string name="points">Puntos</string>
@@ -1873,7 +1873,7 @@
 		\n\nCusta vista podet èssere furriada disativande•la inoghe torra o cambiande s’\'Istile mapa\' in \'Cunfigura sa mapa\' comente boles tue.
 	</string>
 	<string name="plugin_ski_descr">"Custu plugin pro OsmAnd ti frunit sas minujas de sas pistas de iscì, de fundu, alpinas e de àtera casta, de sas funivias e de sas isciovias. Sas camineras e sas pistas sunt coloradas pro dificultade, e ammustradas in unu istile de mapa particulare, \'Ierru\', chi s\'assimigiat a unu paesaggiu coloradu dae sa neve de s\'ierru.
-\n\nAtivande custa vista s’istile mapa at a divènnere \'Ierru e iscì\', ammustrande totu sas caraterìsticas de s’iscenàriu in sas cunditziones de s’ierru. Custa vista podet èssere furriada disativande•la inoghe torra o cambiande s’\'Istile mapa\' in \'Cunfigura mapa\'. "</string>
+\n\nAtivande custa vista s’istile mapa at a divènnere \'Ierru e iscì\', ammustrande totu sas caraterìsticas de s’iscenàriu in sas cunditziones de s’ierru. Custa vista podet èssere furriada disativande·la inoghe torra o cambiande s’\'Istile mapa\' in \'Cunfigura mapa\'. "</string>
 	<string name="plugin_touringview_descr">"Ativande custa vista s’istile de sa mapa at a colare a \'Vista turìstica\', una vista fata a sa minuda pro turistas, biagiatores e autistas professionistas.
 \n\nCusta vista frunit, pro cada livellu de zoom, su màssimu de sas minujas de biàgiu disponìbiles in sos datos de sa mapa (in particulare minujas de de sas istradas e de sas àndalas e sinnos de orientamentu).
 \n\nRapresentat fintzas totu sas castas de istrada in manera crara tramite colores diferentes, agiudande meda, pro nàrrere, sos chi ghiant veìculos mannos meda.
@@ -1931,7 +1931,7 @@
 	<string name="welcome_header">Benènnidu</string>
     <string name="current_route">Àndala atuale</string>
     <string name="mark_to_delete">Marca pro burrare</string>
-	<string name="confirm_usage_speed_cameras">In medas istados (Germània, Frantza, Itàlia, e àteros) s’impreu de avisos pro sos autovelox no est permitidu dae sa lege. OsmAnd non si pigat responsabilidades s’in casu tue che l’as a violare. Pro piaghere carca eja petzi si podes impreare custa funtzionalidade.</string>
+	<string name="confirm_usage_speed_cameras">In medas istados (Germània, Frantza, Itàlia, e àteros) s’impreu de avisos pro sos autovelox no est permitidu dae sa lege. OsmAnd non s’at a pigare responsabilidades s’in casu tue che l’as a violare. Pro piaghere carca eja petzi si podes impreare custa funtzionalidade.</string>
 	<string name="agps_info">Informatziones A-GPS</string>
 	<string name="agps_data_last_downloaded">Ùrtimu agiornamentu datos A-GPS: %1$s</string>
     <string name="shared_string_message">Messàgiu</string>
@@ -1940,4 +1940,100 @@
 	<string name="shared_string_show_description">Ammustra descritzione</string>
 	<string name="shared_string_places">Logos</string>
 	<string name="shared_string_search">Chirca</string>
-	</resources>
+	<string name="shared_string_open">Abertu</string>
+    <string name="shared_string_manage">Amministra</string>
+	<string name="shared_string_edit">Modìfica</string>
+	<string name="rendering_attr_OSMMapperAssistant_name">Assistente mapadura OSM</string>
+	<string name="filter_poi_hint">Filtra pro nùmene</string>
+    <string name="index_name_netherlands">Europa - Olanda</string>
+	<string name="search_poi_category_hint">Iscrie pro chircare totu</string>
+    <string name="specified_directiory_not_writeable">Sas mapas non podent èssere creadas in sa cartella dislindada</string>
+	<string name="copying_osmand_file_failed">Còpia de sos documentos faddida</string>    
+    <string name="storage_directory_external">Memòria esterna</string>
+    <string name="storage_directory_manual">Dislindada manualmente</string>
+    <string name="storage_directory_default">Memòria interna</string>
+    <string name="shared_string_copy">Còpia</string>
+    <string name="application_dir_change_warning3">Boles chi OsmAnd copiet in sa destinatzione noa fintzas sos documentos de sos datos suos?</string>
+    <string name="storage_directory_internal_app">Memòria interna de s\'aplicu</string>
+    <string name="rendering_value__name">Predefinidu</string>
+    <string name="rendering_value_highContrastRoads_name">Istradas a cuntrastu artu</string>
+	<string name="storage_directory_multiuser">Memòria multi-impreadore</string>
+    <string name="storage_directory">Memòria de sas mapas</string>
+    <string name="rendering_attr_hideHouseNumbers_name">Cua sos nùmeros de sas domos</string>
+    <string name="routing_attr_height_name">Lìmite de artària</string>
+	<string name="routing_attr_height_description">Dislinda s’artària de su veìculu permitida pro sas istradas</string>
+    <string name="routing_attr_avoid_borders_description">Non rugrare sas fronteras intre sos istados</string>
+	<string name="use_fast_recalculation">Recàlculu intelligente de s’àndala</string>
+	<string name="use_fast_recalculation_desc">Torra a calculare petzi su cantu initziale de s’àndala pro biàgios longos</string>
+<string name="routing_attr_avoid_borders_name">Non rugres sas fronteras</string>
+	<string name="rendering_value_disabled_name">Disabilitadu</string>
+    <string name="osmo_share_my_location">Cumpartzi sa positzione</string>
+    <string name="shared_string_logoff">Essi</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Coloratzione a segunda de sa casta de àndala</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Coloratzione a segunda de OSMC</string>
+    <string name="osm_edit_context_menu_delete">Burra modìfica OSM</string>    
+    <string name="shared_string_import2osmand">Importa in OsmAnd</string>
+    <string name="read_full_article">Leghe s\'artìculu intreu (in lìnia)</string>
+    <string name="download_wikipedia_item">Wikipedia</string>
+    <string name="local_indexes_cat_wiki">Wikipedia</string>
+    <string name="shared_string_show_details">Ammustra minujas</string>
+    <string name="local_recordings_delete_all_confirm">Istas pro burrare %1$d notas. Seguru ses?</string>
+	<string name="download_wikipedia_maps">Wikipedia</string>
+    <string name="gps_network_not_enabled">Su servìtziu de localizatzione no est abilitadu. Lu boles allùere?</string>
+    <string name="disable_recording_once_app_killed">Èvita/istransi sa registratzione autònoma</string>
+    <string name="light_theme">Craru</string>
+    <string name="dark_theme">Iscuru</string>
+    <string name="lang_pms">Piemontesu</string>
+    <string name="lang_bn">Bengali</string>
+    <string name="lang_tl">Tagalog</string>
+    <string name="lang_sh">Serbo-Croatu</string>
+    <string name="lang_az">Azeri</string>
+    <string name="lang_br">Bretonu</string>
+    <string name="lang_sq">Albanesu</string>
+    <string name="lang_is">Islandesu</string>
+    <string name="lang_bpy">Bishnupriya</string>
+    <string name="lang_nv">Navajo</string>
+    <string name="lang_ga">Irlandesu</string>
+    <string name="lang_la">Latinu</string>
+    <string name="lang_ku">Kurdu</string>
+    <string name="lang_ta">Tamil</string>
+    <string name="lang_ml">Malayalam</string>
+    <string name="lang_lb">Lussemburghesu</string>
+    <string name="lang_os">Ossetiu</string>
+    <string name="lang_eo">Esperanto</string>
+    <string name="lang_es_ar">Ispagnolu argentinu</string>
+    <string name="lang_nb">Norvegesu Bokmål</string>
+    <string name="lang_vo">Volapuk</string>
+    <string name="lang_th">Thailandesu</string>
+    <string name="lang_te">Telugu</string>
+    <string name="lang_nn">Norvegesu (Nynorsk)</string>
+    <string name="lang_new">Newar / Nepal Bhasa</string>
+    <string name="lang_ms">Malesu</string>
+    <string name="lang_ht">Haitianu</string>
+    <string name="lang_gl">Galegu/Galizianu</string>
+    <string name="lang_et">Èstone</string>
+    <string name="lang_ceb">Cebuanu</string>
+    <string name="archive_wikipedia_data">Bi sunt datos Wikipedia bècios e non cumpatìbiles. Los boles archiviare?</string>
+    <string name="download_wikipedia_files">Boles iscarrigare àteros datos Wikipedia in prus (%1$s MB) ?</string>
+    <string name="disable_recording_once_app_killed_descrp">At a pònnere in pàusa sa registratzione GPX cando OsmAnd at a èssere istudadu (tràmite sas aplicatziones reghentes). (S\'indicatore de sa modalidade OsmAnd a reposu at a iscumpàrrere dae sa barra de notìfica de Android.)</string>
+    <string name="rendering_attr_currentTrackColor_name">Colore GPX</string>
+    <string name="rendering_attr_currentTrackWidth_name">Largària GPX</string>
+    <string name="rendering_value_red_name">Ruju</string>
+    <string name="rendering_value_translucent_orange_name">Arantzu translùcidu</string>
+    <string name="rendering_value_yellow_name">Grogu</string>
+    <string name="rendering_value_translucent_yellow_name">Grogu translùcidu</string>
+    <string name="rendering_value_lightgreen_name">Birde craru</string>
+    <string name="rendering_value_translucent_lightgreen_name">Birde craru translùcidu</string>
+    <string name="rendering_value_green_name">Birde</string>
+    <string name="rendering_value_translucent_green_name">Birde translùcidu</string>
+    <string name="rendering_value_lightblue_name">Biaitu craru</string>
+    <string name="rendering_value_translucent_lightblue_name">Biaitu craru translùcidu</string>
+    <string name="rendering_value_blue_name">Biaitu</string>
+    <string name="rendering_value_translucent_blue_name">Biaitu translùcidu</string>
+    <string name="rendering_value_purple_name">Pùrpura</string>
+    <string name="rendering_value_translucent_purple_name">Pùrpura translùcidu</string>
+    <string name="restart_is_required">Pro aplicare de su totu sas modìficas, depes torrare a allùere manualmente s\'aplicatzione.</string>
+    <string name="rendering_value_translucent_red_name">Ruju translùcidu</string>
+    <string name="rendering_value_default13_name">Predefinidu (13)</string>
+	<string name="rendering_value_defaultTranslucentCyan_name">Predefinidu (cianu translùcidu)</string>
+    </resources>

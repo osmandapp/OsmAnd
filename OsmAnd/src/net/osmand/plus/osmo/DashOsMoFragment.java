@@ -25,8 +25,13 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashLocationFragment;
+import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
+import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -49,7 +54,7 @@ public class DashOsMoFragment extends DashLocationFragment implements OsMoGroups
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		plugin = OsmandPlugin.getEnabledPlugin(OsMoPlugin.class);
 
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_osmo_fragment, container, false);
@@ -59,7 +64,9 @@ public class DashOsMoFragment extends DashLocationFragment implements OsMoGroups
 				launchOsMoGroupsActivity();
 			}
 		});
-
+		if(plugin != null) {
+			plugin.setGroupsActivity(getActivity());
+		}
 		setupHader(view);
 		return view;
 	}
@@ -69,8 +76,26 @@ public class DashOsMoFragment extends DashLocationFragment implements OsMoGroups
 		plugin = OsmandPlugin.getEnabledPlugin(OsMoPlugin.class);
 		if (plugin != null) {
 			plugin.getGroups().addUiListeners(this);
+			plugin.setGroupsActivity(getActivity());
 		}
 		setupOsMoView();
+		
+	}
+	
+	@Override
+	public void onDetach() {
+		super.onDetach();
+		if (plugin != null) {
+			plugin.setGroupsActivity(null);
+		}
+	}
+	
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		if (plugin != null) {
+			plugin.setGroupsActivity(null);
+		}
 	}
 
 	private void setupOsMoView() {
@@ -135,14 +160,14 @@ public class DashOsMoFragment extends DashLocationFragment implements OsMoGroups
 	private void updateStatus() {
 
 		View header = getView();
-		if (getView() == null) {
+		if (getView() == null ) {
 			return;
 		}
 
 		View cardContent = header.findViewById(R.id.card_content);
 		View enableOsmo = header.findViewById(R.id.header_layout).findViewById(R.id.check_item);
 		View manage = header.findViewById(R.id.manage);
-		if (plugin.getService().isEnabled()) {
+		if (plugin != null && plugin.getService().isEnabled() ) {
 			cardContent.setVisibility(View.VISIBLE);
 			enableOsmo.setVisibility(View.GONE);
 			manage.setVisibility(View.VISIBLE);
@@ -169,8 +194,6 @@ public class DashOsMoFragment extends DashLocationFragment implements OsMoGroups
 		ArrayList<OsMoGroupsStorage.OsMoGroup> groups = new ArrayList<>(grps.getGroups());
 
 		List<OsMoGroupsStorage.OsMoDevice> devices = getOsMoDevices(groups);
-
-
 		setupDeviceViews(contentList, devices);
 	}
 
@@ -200,13 +223,16 @@ public class DashOsMoFragment extends DashLocationFragment implements OsMoGroups
 		}
 
 		//remove all inactive devices
-		for (OsMoGroupsStorage.OsMoDevice device : devices) {
-			if (!device.isActive() && !device.isEnabled() && devices.size() > 2) {
-				devices.remove(device);
-			}
+		Iterator<OsMoDevice> it = devices.iterator();
+		while (it.hasNext()) {
 			if (devices.size() < 4) {
 				break;
 			}
+			OsMoGroupsStorage.OsMoDevice device = it.next();
+			if (!device.isActive() && !device.isEnabled() && devices.size() > 2) {
+				it.remove();
+			}
+			
 		}
 
 		sortDevices(devices);
@@ -221,7 +247,28 @@ public class DashOsMoFragment extends DashLocationFragment implements OsMoGroups
 	}
 
 	private void sortDevices(List<OsMoGroupsStorage.OsMoDevice> devices) {
-		//TODO implement sorting somehow
+		try {
+			Collections.sort(devices, new Comparator<OsMoDevice>() {
+
+				@Override
+				public int compare(OsMoDevice lhs, OsMoDevice rhs) {
+					Location ll = lhs.getLastLocation();
+					Location rl = rhs.getLastLocation();
+					double maxDist = 50000;
+					double ld = ll == null || lastUpdatedLocation == null ? maxDist :
+							MapUtils.getDistance(lastUpdatedLocation, ll.getLatitude(), ll.getLongitude());
+					double rd = ll == null || lastUpdatedLocation == null ? maxDist :
+						MapUtils.getDistance(lastUpdatedLocation, rl.getLatitude(), rl.getLongitude());
+					if(ld == rd) {
+						return lhs.getVisibleName().compareTo(rhs.getVisibleName());
+					}
+					return Double.compare(ld, rd);
+				}
+			});
+		} catch (RuntimeException e) {
+			// sorting could be unstable due to location change
+			e.printStackTrace();
+		}
 	}
 
 	private LinearLayout getClearContentList(View mainView) {
@@ -316,6 +363,7 @@ public class DashOsMoFragment extends DashLocationFragment implements OsMoGroups
 	private void launchOsMoGroupsActivity() {
 		Intent intent = new Intent(getActivity(), OsMoGroupsActivity.class);
 		getActivity().startActivity(intent);
+		closeDashboard();
 	}
 
 	@Override

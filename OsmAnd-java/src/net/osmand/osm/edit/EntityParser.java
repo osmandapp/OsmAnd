@@ -1,5 +1,6 @@
 package net.osmand.osm.edit;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -15,78 +16,140 @@ import net.osmand.data.TransportStop;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.PoiCategory;
+import net.osmand.osm.edit.Entity.EntityType;
 import net.osmand.osm.edit.OSMSettings.OSMTagKey;
 import net.osmand.util.Algorithms;
 
 public class EntityParser {
 	
-	public static void parseMapObject(MapObject mo, Entity e) {
+	public static void parseMapObject(MapObject mo, Entity e, Map<String, String> tags) {
 		mo.setId(e.getId());
 		if(mo instanceof Amenity) {
-			mo.setId((e.getId() << 1) + ((e instanceof Node) ? 0 : 1));
+			mo.setId((e.getId() << 1) + ((EntityType.valueOf(e) == EntityType.NODE) ? 0 : 1));
 		}
 		if (mo.getName().length() == 0) {
-			mo.setName(e.getTag(OSMTagKey.NAME));
+			mo.setName(tags.get(OSMTagKey.NAME.getValue()));
 		}
-		if (mo.getEnName().length() == 0) {
-			mo.setEnName(e.getTag(OSMTagKey.NAME_EN));
-			if (mo.getName().length() == 0) {
-				mo.setName(mo.getEnName());
+		if (mo.getEnName(false).length() == 0) {
+			mo.setEnName(tags.get(OSMTagKey.NAME_EN.getValue()));
+		}
+		for(String ts : tags.keySet()) {
+			if(ts.startsWith("name:") && !ts.equals(OSMTagKey.NAME_EN.getValue())) {
+				mo.setName(ts.substring(("name:").length()), tags.get(ts));
 			}
 		}
+		if (mo.getName().length() == 0) {
+			mo.setName(mo.getEnName(false));
+		}
 		if (mo.getLocation() == null) {
-			LatLon l = OsmMapUtils.getCenter(e);
+			LatLon l = null;
+			if (mo instanceof Building) {
+				l = findOnlyOneEntrance(e);
+			}
+			if (l == null) {
+				l = OsmMapUtils.getCenter(e);
+			}
 			if (l != null) {
 				mo.setLocation(l.getLatitude(), l.getLongitude());
 			}
 		}
 		if (mo.getName().length() == 0) {
-			setNameFromOperator(mo, e);
+			setNameFromOperator(mo, tags);
 		}
 		if (mo.getName().length() == 0) {
-			setNameFromRef(mo, e);
+			setNameFromRef(mo, tags);
 		}
 	}
 
-	private static void setNameFromRef(MapObject mo, Entity e) {
-		String ref = e.getTag(OSMTagKey.REF);
+	/**
+	 * Finds the LatLon of a main entrance point. Main entrance here is the only entrance with value 'main'. If there is
+	 * no main entrances, but there is only one entrance of any kind in given building, it is returned.
+	 *
+	 * @param e building entity
+	 * @return main entrance point location or {@code null} if no entrance found or more than one entrance
+	 */
+	private static LatLon findOnlyOneEntrance(Entity e) {
+		if (e instanceof Node) {
+			return e.getLatLon();
+		}
+		List<Node> nodes = null;
+		if (e instanceof Way) {
+			nodes = ((Way) e).getNodes();
+		} else if (e instanceof Relation) {
+			nodes = new ArrayList<Node>();
+			for (Entity member : ((Relation) e).getMembers(null)) {
+				if (member instanceof Way) {
+					nodes.addAll(((Way) member).getNodes());
+				}
+			}
+		}
+		if (nodes != null) {
+			int entrancesCount = 0;
+			Node mainEntrance = null;
+			Node lastEntrance = null;
+
+			for (Node node : nodes) {
+				String entrance = node.getTag(OSMTagKey.ENTRANCE.getValue());
+				if (entrance != null && !"no".equals(entrance)) {
+					if ("main".equals(entrance)) {
+						// main entrance should be only one
+						if (mainEntrance != null) {
+							return null;
+						}
+						mainEntrance = node;
+					}
+					entrancesCount++;
+					lastEntrance = node;
+				}
+			}
+			if (mainEntrance != null) {
+				return mainEntrance.getLatLon();
+			}
+			if (entrancesCount == 1) {
+				return lastEntrance.getLatLon();
+			}
+		}
+
+		return null;
+	}
+
+	private static void setNameFromRef(MapObject mo, Map<String, String> tags) {
+		String ref = tags.get(OSMTagKey.REF.getValue());
 		if(ref != null){
 			mo.setName(ref);
 		}
 	}
 
-	private static void setNameFromOperator(MapObject mo,Entity e) {
-		String op = e.getTag(OSMTagKey.OPERATOR);
+	private static void setNameFromOperator(MapObject mo, Map<String, String> tags) {
+		String op = tags.get(OSMTagKey.OPERATOR.getValue());
 		if (op == null)
 			return;
-		String ref = e.getTag(OSMTagKey.REF);
+		String ref = tags.get(OSMTagKey.REF.getValue());
 		if (ref != null)
 			op += " [" + ref + "]";
 		mo.setName(op);
 	}
 	
-	public static Amenity parseAmenity(Entity entity, PoiCategory type, String subtype, Map<String, String> tagValues,
+	public static Amenity parseAmenity(Entity entity, Map<String, String> tagValues, PoiCategory type, String subtype, 
 			MapRenderingTypes types) {
 		Amenity am = new Amenity();
-		parseMapObject(am, entity);
-		if(tagValues == null) {
-			tagValues = entity.getTags();
-		}
+		parseMapObject(am, entity, tagValues);
 		am.setType(type);
 		am.setSubType(subtype);
 		AmenityType at = AmenityType.findOrCreateTypeNoReg(type.getKeyName());
 		am.setAdditionalInfo(types.getAmenityAdditionalInfo(tagValues, at, subtype));
-		String wbs = getWebSiteURL(entity);
+		String wbs = getWebSiteURL(tagValues);
 		if(wbs != null) {
 			am.setAdditionalInfo("website", wbs);
 		}
 		return am;
 	}
+	
 
 	
 
-	private static String getWebSiteURL(Entity entity) {
-		String siteUrl = entity.getTag(OSMTagKey.WIKIPEDIA);
+	private static String getWebSiteURL(Map<String, String> tagValues) {
+		String siteUrl = tagValues.get(OSMTagKey.WIKIPEDIA.getValue());
 		if (siteUrl != null) {
 			if (!siteUrl.startsWith("http://")) { //$NON-NLS-1$
 				int i = siteUrl.indexOf(':');
@@ -97,11 +160,11 @@ public class EntityParser {
 				}
 			}
 		} else {
-			siteUrl = entity.getTag(OSMTagKey.WEBSITE);
+			siteUrl = tagValues.get(OSMTagKey.WEBSITE.getValue());
 			if (siteUrl == null) {
-				siteUrl = entity.getTag(OSMTagKey.URL);
+				siteUrl = tagValues.get(OSMTagKey.URL.getValue());
 				if (siteUrl == null) {
-					siteUrl = entity.getTag(OSMTagKey.CONTACT_WEBSITE);
+					siteUrl = tagValues.get(OSMTagKey.CONTACT_WEBSITE.getValue());
 				}
 			}
 			if (siteUrl != null && !siteUrl.startsWith("http://") && !siteUrl.startsWith("https://")) {
@@ -111,23 +174,46 @@ public class EntityParser {
 		return siteUrl;
 	}
 	
-	public static List<Amenity> parseAmenities(MapRenderingTypes renderingTypes,
-			MapPoiTypes poiTypes, Entity entity, List<Amenity> amenitiesList){
+	
+	public static List<Amenity> parseAmenities(MapPoiTypes poiTypes, Entity entity, Map<String, String> tags,List<Amenity> amenitiesList) {
 		amenitiesList.clear();
 		// it could be collection of amenities
 		boolean relation = entity instanceof Relation;
-		Collection<Map<String, String>> it = renderingTypes.splitTagsIntoDifferentObjects(entity.getTags());
-		for(Map<String, String> tags : it) {
-			if (!tags.isEmpty()) {
-				boolean purerelation = relation && !"multipolygon".equals(tags.get("type"));
-				boolean hasName = !Algorithms.isEmpty(tags.get("name"));
-				for (Map.Entry<String, String> e : tags.entrySet()) {
+		boolean purerelation = relation && !"multipolygon".equals(tags.get("type"));
+		
+		for (Map.Entry<String, String> e : tags.entrySet()) {
+			Amenity am = poiTypes.parseAmenity(e.getKey(), e.getValue(), purerelation, tags);
+			if (am != null) {
+				parseMapObject(am, entity, tags);
+				String wbs = getWebSiteURL(tags);
+				if(wbs != null) {
+					am.setAdditionalInfo("website", wbs);
+				}
+				if (checkAmenitiesToAdd(am, amenitiesList) && !"no".equals(am.getSubType())) {
+					amenitiesList.add(am);
+				}
+			}
+		}
+		return amenitiesList;
+	}
+	
+	public static List<Amenity> parseAmenities(MapRenderingTypes renderingTypes,
+			MapPoiTypes poiTypes, Entity entity, Map<String, String> tags, List<Amenity> amenitiesList){
+		amenitiesList.clear();
+		// it could be collection of amenities
+		boolean relation = entity instanceof Relation;
+		Collection<Map<String, String>> it = renderingTypes.splitTagsIntoDifferentObjects(tags);
+		for(Map<String, String> stags : it) {
+			if (!stags.isEmpty()) {
+				boolean purerelation = relation && !"multipolygon".equals(stags.get("type"));
+				boolean hasName = !Algorithms.isEmpty(stags.get("name"));
+				for (Map.Entry<String, String> e : stags.entrySet()) {
 					AmenityType type = purerelation ? renderingTypes.getAmenityTypeForRelation(e.getKey(), e.getValue(), hasName)
 							: renderingTypes.getAmenityType(e.getKey(), e.getValue(), hasName );
 					if (type != null) {
 						String subtype = renderingTypes.getAmenitySubtype(e.getKey(), e.getValue());
 						PoiCategory pc = poiTypes.getPoiCategoryByName(type.getCategoryName(), true);
-						Amenity a = parseAmenity(entity, pc, subtype, tags, renderingTypes);
+						Amenity a = parseAmenity(entity, stags, pc, subtype, renderingTypes);
 						if (checkAmenitiesToAdd(a, amenitiesList) && !"no".equals(subtype)) {
 							amenitiesList.add(a);
 						}
@@ -151,18 +237,18 @@ public class EntityParser {
 	
 	public static Building parseBuilding(Entity e){
 		Building b = new Building();
-		parseMapObject(b, e);
+		parseMapObject(b, e, e.getTags());
 		// try to extract postcode
-		String p = e.getTag(OSMTagKey.ADDR_POSTCODE);
+		String p = e.getTag(OSMTagKey.ADDR_POSTCODE.getValue());
 		if(p == null) {
-			p = e.getTag(OSMTagKey.POSTAL_CODE);
+			p = e.getTag(OSMTagKey.POSTAL_CODE.getValue());
 		}
 		b.setPostcode(p);
 		return b;
 	}
 	
 	public static City parseCity(Node el) {
-		return parseCity(el, CityType.valueFromString(el.getTag(OSMTagKey.PLACE)));
+		return parseCity(el, CityType.valueFromString(el.getTag(OSMTagKey.PLACE.getValue())));
 	}
 	
 	public static City parseCity(Entity el, CityType t) {
@@ -170,8 +256,8 @@ public class EntityParser {
 			return null;
 		}
 		City c = new City(t);
-		parseMapObject(c, el);
-		String isin = el.getTag(OSMTagKey.IS_IN);
+		parseMapObject(c, el, el.getTags());
+		String isin = el.getTag(OSMTagKey.IS_IN.getValue());
 		isin = isin != null ? isin.toLowerCase() : null;
 		c.setIsin(isin);
 		return c;
@@ -180,14 +266,14 @@ public class EntityParser {
 	
 	public static OsmTransportRoute parserRoute(Relation r, String ref){
 		OsmTransportRoute rt = new OsmTransportRoute();
-		parseMapObject(rt, r);
+		parseMapObject(rt, r, r.getTags());
 		rt.setRef(ref);
 		return rt;
 	}
 	
 	public static TransportStop parseTransportStop(Entity e){
 		TransportStop st = new TransportStop();
-		parseMapObject(st, e);
+		parseMapObject(st, e, e.getTags());
 		return st;
 	}
 

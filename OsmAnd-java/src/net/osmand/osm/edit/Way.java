@@ -178,7 +178,7 @@ public class Way extends Entity {
 		if(nodes == null){
 			return null;
 		}
-		return OsmMapUtils.getWeightCenterForNodes(nodes);
+		return OsmMapUtils.getWeightCenterForWay(this);
 	}
 
 

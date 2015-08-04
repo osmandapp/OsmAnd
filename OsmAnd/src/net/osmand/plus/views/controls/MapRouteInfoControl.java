@@ -1,49 +1,53 @@
 package net.osmand.plus.views.controls;
 
-import java.util.ArrayList;
-import java.util.List;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnDismissListener;
+import android.content.Intent;
+import android.graphics.PointF;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.TextView;
 
+import net.osmand.ValueHolder;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.FavoritesListFragment.FavouritesAdapter;
-import net.osmand.plus.activities.search.SearchActivity;
-import net.osmand.plus.activities.search.SearchAddressActivity;
-import net.osmand.plus.activities.search.SearchAddressFragment;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.ShowRouteInfoActivity;
+import net.osmand.plus.activities.actions.AppModeDialog;
+import net.osmand.plus.activities.search.SearchAddressActivity;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
+import net.osmand.plus.dialogs.FavoriteDialogs;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.IRouteInformationListener;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.plus.views.OsmandMapTileView;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.app.Dialog;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnDismissListener;
-import android.content.Intent;
-import android.graphics.PointF;
-import android.view.Gravity;
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ListView;
-import android.widget.Spinner;
-import android.widget.TextView;
+import net.osmand.plus.views.controls.MapRoutePreferencesControl.RoutePrepareDialog;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class MapRouteInfoControl implements IRouteInformationListener {
 	public static int directionInfo = -1;
@@ -52,17 +56,19 @@ public class MapRouteInfoControl implements IRouteInformationListener {
 	private final RoutingHelper routingHelper;
 	private OsmandMapTileView mapView;
 	private Dialog dialog;
-	private AlertDialog favoritesDialog;
 	private boolean selectFromMapTouch; 
 	private boolean selectFromMapForTarget;
 
 	private boolean showDialog = false;
 	private MapActivity mapActivity;
+	private MapControlsLayer mapControlsLayer;
+	public static final String TARGET_SELECT = "TARGET_SELECT";
 
 	public MapRouteInfoControl(ContextMenuLayer contextMenu,
-			MapActivity mapActivity) {
+			MapActivity mapActivity, MapControlsLayer mapControlsLayer) {
 		this.contextMenu = contextMenu;
 		this.mapActivity = mapActivity;
+		this.mapControlsLayer = mapControlsLayer;
 		routingHelper = mapActivity.getRoutingHelper();
 		mapView = mapActivity.getMapView();
 		routingHelper.addListener(this);
@@ -108,63 +114,115 @@ public class MapRouteInfoControl implements IRouteInformationListener {
 		}
 	}
 	
-	private Dialog createDialog() {
-		AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
-		View lmain = mapActivity.getLayoutInflater().inflate(R.layout.plan_route_info, null);
-		boolean addButtons = routingHelper.isRouteCalculated();
-		updateInfo(lmain);
-		if(addButtons) {
-			attachListeners(lmain);
-		} else {
-			lmain.findViewById(R.id.RouteInfoControls).setVisibility(View.GONE);
-			lmain.findViewById(R.id.SimulateRoute).setVisibility(View.GONE);
-			TextView textView = (TextView) lmain.findViewById(R.id.ValidateTextView);
-			TargetPointsHelper targets = getTargets();
-			if(targets.hasTooLongDistanceToNavigate()) {
-				textView.setText(R.string.route_is_too_long);
-				textView.setVisibility(View.VISIBLE);
-			} else{
-				textView.setVisibility(View.GONE);
-			}
+	public void updateDialog() {
+		if(dialog != null) {
+			updateInfo(dialog.findViewById(R.id.plan_route_info));
 		}
-		builder.setView(lmain);
-
-		Dialog dialog = builder.create();
-		dialog.setCanceledOnTouchOutside(true);
-		WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-		lp.copyFrom(dialog.getWindow().getAttributes());
-		lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
-		lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-		lp.gravity = Gravity.BOTTOM;
-		// TODO
-//		lp.y = (int) (infoButton.getBottom() - infoButton.getTop() + scaleCoefficient * 5 + getExtraVerticalMargin());
-		dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-		dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-		dialog.getWindow().setAttributes(lp);
-		return dialog;
 	}
 	
-	private void updateInfo(final View parentView) {
-		String via = generateViaDescription();
-		((TextView) parentView.findViewById(R.id.Targets)).setOnClickListener(new View.OnClickListener(){
+	private void updateInfo(final View main) {
+		updateWptBtn(main);
+		updateViaView(main);
+		updateFromSpinner(main);
+		updateToSpinner(main);
+		updateApplicationModes(main);
+		mapControlsLayer.updateRouteButtons(main, true);
+		boolean addButtons = routingHelper.isRouteCalculated();
+		if(addButtons) {
+			updateRouteButtons(main);
+		} else {
+			updateRouteCalcProgress(main);
+		}
+	}
+
+	private void updateRouteCalcProgress(final View main) {
+		TargetPointsHelper targets = getTargets();
+		if(targets.hasTooLongDistanceToNavigate()) {
+			main.findViewById(R.id.RouteInfoControls).setVisibility(View.VISIBLE);
+			TextView textView = (TextView) main.findViewById(R.id.InfoTextView);
+			ImageView iconView = (ImageView) main.findViewById(R.id.InfoIcon);
+			main.findViewById(R.id.Prev).setVisibility(View.GONE);
+			main.findViewById(R.id.Next).setVisibility(View.GONE);
+			textView.setText(R.string.route_is_too_long);
+			textView.setVisibility(View.VISIBLE);
+			iconView.setImageDrawable(mapActivity.getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_warning));
+		} else{
+			main.findViewById(R.id.RouteInfoControls).setVisibility(View.GONE);
+		}
+	}
+
+	private void updateWptBtn(final View parentView) {
+		ImageView wptBtn = (ImageView) parentView.findViewById(R.id.waypoints);
+		wptBtn.setImageDrawable(mapActivity.getMyApplication().getIconsCache()
+				.getContentIcon(R.drawable.ic_action_flag_dark));
+		wptBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if(getTargets().checkPointToNavigateShort()) {
+				if (getTargets().checkPointToNavigateShort()) {
 					hideDialog();
 					mapActivity.getMapActions().openIntermediatePointsDialog();
 				}
 			}
-			
+
 		});
-		final TargetPointsHelper targets = getTargets();
+	}
+
+	private void updateApplicationModes(final View parentView) {
+		final OsmandSettings settings = mapActivity.getMyApplication().getSettings();
+		ApplicationMode am = settings.APPLICATION_MODE.get();
+		final Set<ApplicationMode> selected = new HashSet<ApplicationMode>();
+		selected.add(am);
+		ViewGroup vg = (ViewGroup) parentView.findViewById(R.id.app_modes);
+		vg.removeAllViews();
+		AppModeDialog.prepareAppModeView(mapActivity, selected, false,
+				vg, true, new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						if (selected.size() > 0) {
+							ApplicationMode next = selected.iterator().next();
+							settings.APPLICATION_MODE.set(next);
+							mapActivity.getRoutingHelper().recalculateRouteDueToSettingsChange();
+						}
+					}
+		});
+	}
+
+	private void updateViaView(final View parentView) {
+		String via = generateViaDescription();
 		if(via.length() == 0){
-			((TextView) parentView.findViewById(R.id.ViaView)).setVisibility(View.GONE);
+			parentView.findViewById(R.id.ViaLayout).setVisibility(View.GONE);
 		} else {
-			((TextView) parentView.findViewById(R.id.ViaView)).setVisibility(View.VISIBLE);
+			parentView.findViewById(R.id.ViaLayout).setVisibility(View.VISIBLE);
 			((TextView) parentView.findViewById(R.id.ViaView)).setText(via);
 		}
-		final Spinner fromSpinner = setupFromSpinner(parentView);
+	}
+
+	private void updateToSpinner(final View parentView) {
 		final Spinner toSpinner = setupToSpinner(parentView);
+		toSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+				if(position == 1) {
+					selectFavorite(parentView, true);
+				} else if(position == 2) {
+					selectOnScreen(parentView, true);
+				} else if(position == 3) {
+					Intent intent = new Intent(mapActivity, SearchAddressActivity.class);
+					intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+					intent.putExtra(TARGET_SELECT, true);
+					mapActivity.startActivityForResult(intent, MapControlsLayer.REQUEST_ADDRESS_SELECT);
+				}				
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> parent) {
+			}
+		});
+	}
+
+	private void updateFromSpinner(final View parentView) {
+		final TargetPointsHelper targets = getTargets();
+		final Spinner fromSpinner = setupFromSpinner(parentView);
 		fromSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
 			@Override
@@ -180,7 +238,7 @@ public class MapRouteInfoControl implements IRouteInformationListener {
 				} else if(position == 3) {
 					Intent intent = new Intent(mapActivity, SearchAddressActivity.class);
 					intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-					intent.putExtra(SearchAddressFragment.SELECT_ADDRESS_POINT_INTENT_KEY, (String) null);
+					intent.putExtra(TARGET_SELECT, false);
 					mapActivity.startActivityForResult(intent, MapControlsLayer.REQUEST_ADDRESS_SELECT);
 				}				
 			}
@@ -189,26 +247,6 @@ public class MapRouteInfoControl implements IRouteInformationListener {
 			public void onNothingSelected(AdapterView<?> parent) {
 			}
 		});
-		toSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-			@Override
-			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-				if(position == 1) {
-					selectFavorite(parentView, true);
-				} else if(position == 2) {
-					selectOnScreen(parentView, true);
-				} else if(position == 3) {
-					Intent intent = new Intent(mapActivity, SearchAddressActivity.class);
-					intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-					intent.putExtra(SearchAddressFragment.SELECT_ADDRESS_POINT_INTENT_KEY, (String) null);
-					mapActivity.startActivityForResult(intent, MapControlsLayer.REQUEST_ADDRESS_SELECT);
-				}				
-			}
-
-			@Override
-			public void onNothingSelected(AdapterView<?> parent) {
-			}
-		});
-		
 	}
 
 	protected void selectOnScreen(View parentView, boolean target) {
@@ -229,12 +267,29 @@ public class MapRouteInfoControl implements IRouteInformationListener {
 	}
 
 	protected void selectFavorite(final View parentView, final boolean target) {
-		Builder bld = new AlertDialog.Builder(mapActivity);
-		ListView listView = new ListView(mapActivity);
-		final FavouritesAdapter favouritesAdapter = new FavouritesAdapter(mapActivity, mapActivity.getMyApplication().getFavorites().getFavouritePoints());
+		final FavouritesAdapter favouritesAdapter = new FavouritesAdapter(mapActivity, mapActivity.getMyApplication()
+				.getFavorites().getFavouritePoints(), false);
+		Dialog[] dlgHolder = new Dialog[1];
+		OnItemClickListener click = getOnClickListener(target, favouritesAdapter, dlgHolder);
+		OnDismissListener dismissListener = new DialogInterface.OnDismissListener() {
+
+			@Override
+			public void onDismiss(DialogInterface dialog) {
+				if (target) {
+					setupToSpinner(parentView);
+				} else {
+					setupFromSpinner(parentView);
+				}
+			}
+		};
 		favouritesAdapter.updateLocation(mapActivity.getMapLocation());
-		listView.setAdapter(favouritesAdapter);
-		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+		FavoriteDialogs.showFavoritesDialog(mapActivity, favouritesAdapter, click, dismissListener, dlgHolder, true);
+	}
+
+
+	private OnItemClickListener getOnClickListener(final boolean target, final FavouritesAdapter favouritesAdapter,
+			final Dialog[] dlg) {
+		return new AdapterView.OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -245,38 +300,107 @@ public class MapRouteInfoControl implements IRouteInformationListener {
 				} else {
 					getTargets().setStartPoint(point, true, fp.getPointDescription());
 				}
-				favoritesDialog.dismiss();
+				if(dlg != null && dlg.length > 0 && dlg[0] != null) {
+					dlg[0].dismiss();
+				}
 				//Next 2 lines ensure Dialog is shown in the right correct position after a selection been made
 				hideDialog();
 				showDialog();
 			}
-		});
-		bld.setView(listView);
-		favoritesDialog = bld.show();
-		favoritesDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-			
-			@Override
-			public void onDismiss(DialogInterface dialog) {
-				if(target){
-					setupToSpinner(parentView);
-				} else {
-					setupFromSpinner(parentView);
-				}
-			}
-		});
+		};
 	}
 
 	public static int getDirectionInfo() {
 		return directionInfo;
+	}
+	
+	public boolean isDialogVisible() {
+		return dialog != null && dialog.isShowing();
 	}
 
 	public static boolean isControlVisible() {
 		return controlVisible;
 	}
 	
-	private void attachListeners(final View mainView) {
+	private void updateRouteButtons(final View mainView) {
+		mainView.findViewById(R.id.RouteInfoControls).setVisibility(View.VISIBLE);
 		final OsmandApplication ctx = mapActivity.getMyApplication();
-		final Button simulateRoute = (Button) mainView.findViewById(R.id.SimulateRoute);
+		ImageView prev = (ImageView) mainView.findViewById(R.id.Prev);
+		prev.setImageDrawable(ctx.getIconsCache().getContentIcon(R.drawable.ic_prev));
+		if (directionInfo >= 0) {
+			prev.setVisibility(View.VISIBLE);
+			prev.setOnClickListener(new View.OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					if (directionInfo >= 0) {
+						directionInfo--;
+					}
+					if (routingHelper.getRouteDirections() != null && directionInfo >= 0) {
+						if (routingHelper.getRouteDirections().size() > directionInfo) {
+							RouteDirectionInfo info = routingHelper.getRouteDirections().get(directionInfo);
+							net.osmand.Location l = routingHelper.getLocationFromRouteDirection(info);
+							contextMenu.setLocation(new LatLon(l.getLatitude(), l.getLongitude()),
+									info.getDescriptionRoute(ctx));
+							mapView.getAnimatedDraggingThread().startMoving(l.getLatitude(), l.getLongitude(),
+									mapView.getZoom(), true);
+						}
+					}
+					mapView.refreshMap();
+					updateInfo(mainView);
+				}
+
+			});
+		} else {
+			prev.setVisibility(View.GONE);
+		}
+		ImageView next = (ImageView) mainView.findViewById(R.id.Next);
+		next.setVisibility(View.VISIBLE);
+		next.setImageDrawable(ctx.getIconsCache().getContentIcon(R.drawable.ic_next));
+		next.setOnClickListener(new View.OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				if(routingHelper.getRouteDirections() != null && directionInfo < routingHelper.getRouteDirections().size() - 1){
+					directionInfo++;
+					RouteDirectionInfo info = routingHelper.getRouteDirections().get(directionInfo);
+					net.osmand.Location l = routingHelper.getLocationFromRouteDirection(info);
+					contextMenu.setLocation(new LatLon(l.getLatitude(), l.getLongitude()), info.getDescriptionRoute(ctx));
+					mapView.getAnimatedDraggingThread().startMoving(l.getLatitude(), l.getLongitude(), mapView.getZoom(), true);
+				}
+				mapView.refreshMap();
+				updateInfo(mainView);
+			}
+			
+		});
+		View info = mainView.findViewById(R.id.Info);
+		info.setOnClickListener(new View.OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(mapView.getContext(), ShowRouteInfoActivity.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				mapView.getContext().startActivity(intent);
+			}
+		});
+		
+		TextView textView = (TextView) mainView.findViewById(R.id.InfoTextView);
+		ImageView iconView = (ImageView) mainView.findViewById(R.id.InfoIcon);
+		if(directionInfo >= 0) {
+			iconView.setVisibility(View.GONE);
+		} else {
+			iconView.setImageDrawable(ctx.getIconsCache().getContentIcon(R.drawable.ic_action_info_dark));
+			iconView.setVisibility(View.VISIBLE);
+		}
+		if (directionInfo >= 0 && routingHelper.getRouteDirections() != null
+				&& directionInfo < routingHelper.getRouteDirections().size()) {
+			RouteDirectionInfo ri = routingHelper.getRouteDirections().get(directionInfo);
+			textView.setText((directionInfo + 1) + ". " + ri.getDescriptionRoutePart() + " " + OsmAndFormatter.getFormattedDistance(ri.distance, ctx));
+		} else {
+			textView.setText(ctx.getRoutingHelper().getGeneralRouteInformation().replace(",", ",\n"));
+		}
+	}
+
+	private Button attachSimulateRoute(final View mainView, final OsmandApplication ctx) {
+		final Button simulateRoute = null;//(Button) mainView.findViewById(R.id.SimulateRoute);
 		final OsmAndLocationProvider loc = ctx.getLocationProvider();
 		if(mapActivity.getRoutingHelper().isFollowingMode()) {
 			simulateRoute.setVisibility(View.GONE);
@@ -289,7 +413,6 @@ public class MapRouteInfoControl implements IRouteInformationListener {
 			
 			@Override
 			public void onClick(View v) {
-				mainView.findViewById(R.id.RouteTargets).setVisibility(View.GONE);
 				mainView.findViewById(R.id.RouteInfoControls).setVisibility(View.GONE);
 				if(loc.getLocationSimulation().isRouteAnimating()) {
 					loc.getLocationSimulation().startStopRouteAnimation(mapActivity);
@@ -301,58 +424,17 @@ public class MapRouteInfoControl implements IRouteInformationListener {
 				
 			}
 		});
-		ImageButton prev = (ImageButton) mainView.findViewById(R.id.Prev);
-		prev.setOnClickListener(new View.OnClickListener(){
-
-			@Override
-			public void onClick(View v) {
-				if(routingHelper.getRouteDirections() != null && directionInfo > 0){
-					directionInfo--;
-					if(routingHelper.getRouteDirections().size() > directionInfo){
-						mainView.findViewById(R.id.RouteTargets).setVisibility(View.GONE);
-						simulateRoute.setVisibility(View.GONE);
-						RouteDirectionInfo info = routingHelper.getRouteDirections().get(directionInfo);
-						net.osmand.Location l = routingHelper.getLocationFromRouteDirection(info);
-						contextMenu.setLocation(new LatLon(l.getLatitude(), l.getLongitude()), info.getDescriptionRoute(ctx));
-						mapView.getAnimatedDraggingThread().startMoving(l.getLatitude(), l.getLongitude(), mapView.getZoom(), true);
-					}
-				}
-				mapView.refreshMap();
-			}
-			
-		});
-		ImageButton next = (ImageButton) mainView.findViewById(R.id.Next);
-		next.setOnClickListener(new View.OnClickListener(){
-			@Override
-			public void onClick(View v) {
-				if(routingHelper.getRouteDirections() != null && directionInfo < routingHelper.getRouteDirections().size() - 1){
-					mainView.findViewById(R.id.RouteTargets).setVisibility(View.GONE);
-					simulateRoute.setVisibility(View.GONE);
-					directionInfo++;
-					RouteDirectionInfo info = routingHelper.getRouteDirections().get(directionInfo);
-					net.osmand.Location l = routingHelper.getLocationFromRouteDirection(info);
-					contextMenu.setLocation(new LatLon(l.getLatitude(), l.getLongitude()), info.getDescriptionRoute(ctx));
-					mapView.getAnimatedDraggingThread().startMoving(l.getLatitude(), l.getLongitude(), mapView.getZoom(), true);
-				}
-				mapView.refreshMap();
-			}
-			
-		});
-		ImageButton info = (ImageButton) mainView.findViewById(R.id.Info);
-		info.setOnClickListener(new View.OnClickListener(){
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(mapView.getContext(), ShowRouteInfoActivity.class);
-				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				mapView.getContext().startActivity(intent);
-			}
-		});
+		return simulateRoute;
 	}
 
 
 	@Override
-	public void newRouteIsCalculated(boolean newRoute) {
+	public void newRouteIsCalculated(boolean newRoute, ValueHolder<Boolean> showToast) {
 		directionInfo = -1;
+		updateDialog();
+		if(isDialogVisible()) {
+			showToast.value = false;
+		}
 	}
 	
 	public String generateViaDescription() {
@@ -362,10 +444,13 @@ public class MapRouteInfoControl implements IRouteInformationListener {
 		if (points.size() == 0) {
 			return via;
 		}
-		for (int i = 0; i < points.size() ; i++) {
-			via += "\n - " + getRoutePointDescription(points.get(i).point, points.get(i).getOnlyName());
+		for (int i = 0; i < points.size(); i++) {
+			if (i > 0) {
+				via += "\n";
+			}
+			via += " " + getRoutePointDescription(points.get(i).point, points.get(i).getOnlyName());
 		}
-		return mapActivity.getString(R.string.route_via) + via;
+		return via;
 	}
 	
 	public String getRoutePointDescription(double lat, double lon) {
@@ -450,20 +535,27 @@ public class MapRouteInfoControl implements IRouteInformationListener {
 	
 	
 	public void showDialog() {
-		dialog = createDialog();
-		dialog.show();
-		dialog.setOnDismissListener(new OnDismissListener() {
+		final View ll = mapActivity.getLayoutInflater().inflate(R.layout.plan_route_info, null);
+		updateInfo(ll);
+		dialog = MapRoutePreferencesControl.showDialog(mapControlsLayer, mapActivity, ll, new OnDismissListener() {
+
 			@Override
-			public void onDismiss(DialogInterface dlg) {
+			public void onDismiss(DialogInterface d) {
 				dialog = null;
 			}
 		});
 	}
 	
 	public void hideDialog() {
+		Dialog dialog = this.dialog;
 		if (dialog != null) {
-			dialog.hide();
-			dialog = null;
+			if(dialog instanceof RoutePrepareDialog && 
+				((RoutePrepareDialog) dialog).getListener() != null) {
+				((RoutePrepareDialog) dialog).getListener().onDismiss(dialog);
+				((RoutePrepareDialog) dialog).cancelDismissListener();
+			}
+			dialog.dismiss();
+			this.dialog = null;
 		}
 	}
 

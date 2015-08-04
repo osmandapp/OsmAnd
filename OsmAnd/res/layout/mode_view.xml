@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="48dp"
+    android:layout_height="48dp" >
+
+    <ImageView
+        android:id="@+id/app_mode_icon"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:src="@drawable/ic_dashboard_dark"
+        android:background="?attr/dashboard_button"
+        android:scaleType="center" />
+
+    
+    <View
+        android:id="@+id/selection"
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp"
+        android:layout_marginBottom="1dp"
+        android:background="@color/osmand_orange"
+        android:focusable="false" />
+
+</FrameLayout>

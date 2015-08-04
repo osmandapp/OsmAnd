@@ -96,7 +96,7 @@ public abstract class BasicProgressAsyncTask<Params, Progress, Result> extends A
 		work = -1;
 		progress = 0;
 		if (taskName != null) {
-			message = ctx.getResources().getString(R.string.finished_task) + " : " + taskName; //$NON-NLS-1$
+			message = ctx.getResources().getString(R.string.finished_task) + ": " + taskName; //$NON-NLS-1$
 			updProgress(false);
 		}
 	}

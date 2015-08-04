@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:ellipsize="end"
-            android:textSize="20sp" />
+            android:textSize="@dimen/default_list_text_size" />
 
         <TextView
             android:id="@+id/points_count"
@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:minWidth="16dp"
-            android:textSize="20sp" />
+            android:textSize="@dimen/default_list_text_size" />
 
     </LinearLayout>
 

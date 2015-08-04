@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
-
-    <item>
-        <bitmap
-            android:gravity="center"
-            android:src="@drawable/map_bt_round_1_shadow" />
-    </item>
     <item>
         <inset
             android:insetBottom="@dimen/map_button_inset_shadow"
@@ -14,6 +8,7 @@
             android:insetTop="@dimen/map_button_inset_shadow" >
             <shape android:shape="oval" >
                 <solid android:color="@color/map_widget_dark" />
+                <stroke android:width="@dimen/map_button_stroke_dark" android:color="@color/map_widget_dark_stroke" />
             </shape>
         </inset>
     </item>

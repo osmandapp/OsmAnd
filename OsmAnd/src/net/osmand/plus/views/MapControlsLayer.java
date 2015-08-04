@@ -19,6 +19,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.search.SearchAddressFragment;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.controls.MapRouteInfoControl;
 import net.osmand.plus.views.controls.MapRoutePreferencesControl;
@@ -83,6 +84,10 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private View mapAppModeShadow;
 	private MapHudButton routePlanningBtn;
 	private long touchEvent;
+	private MapHudButton mapZoomOut;
+	private MapHudButton mapZoomIn;
+	private MapHudButton layersHud;
+	private MapHudButton mapDashControl;
 
 	public MapControlsLayer(MapActivity activity) {
 		this.mapActivity = activity;
@@ -173,8 +178,10 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	private void initTopControls() {
 		View configureMap = mapActivity.findViewById(R.id.map_layers_button);
-		controls.add(createHudButton((ImageView) configureMap, R.drawable.map_layer_dark).setIconColorId(0).setBg(
-				R.drawable.btn_inset_circle, R.drawable.btn_inset_circle_night));
+		layersHud = createHudButton((ImageView) configureMap, R.drawable.map_layer_dark)
+		.setIconsId(R.drawable.map_layer_dark, R.drawable.map_layer_night)
+		.setBg(R.drawable.btn_inset_circle_trans, R.drawable.btn_inset_circle_night);
+		controls.add(layersHud);
 		configureMap.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -184,8 +191,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 		});
 
 		View compass = mapActivity.findViewById(R.id.map_compass_button);
-		compassHud = createHudButton((ImageView) compass, R.drawable.map_compass).setIconColorId(0).setBg(
-				R.drawable.btn_inset_circle, R.drawable.btn_inset_circle_night);
+		compassHud = createHudButton((ImageView) compass, R.drawable.map_compass).setIconColorId(0).
+				setBg(R.drawable.btn_inset_circle_trans, R.drawable.btn_inset_circle_night);
 		compassHud.compass = true;
 		controls.add(compassHud);
 		compass.setOnClickListener(new View.OnClickListener() {
@@ -200,67 +207,161 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	private void initRouteControls() {
 		routePreparationLayout = mapActivity.findViewById(R.id.map_route_preparation_layout);
+		View dashRouteButton = mapActivity.findViewById(R.id.map_dashboard_route_button);
+		mapDashControl = createHudButton((ImageView) dashRouteButton, R.drawable.map_dashboard).setBg(
+				R.drawable.btn_flat, R.drawable.btn_flat_night);
+		controls.add(mapDashControl);
+
+		dashRouteButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.DASHBOARD);
+			}
+
+			
+		});
+		
 		View cancelRouteButton = mapActivity.findViewById(R.id.map_cancel_route_button);
-		controls.add(createHudButton((ImageView) cancelRouteButton, R.drawable.ic_action_remove_dark).setBg(
+		controls.add(createHudButton((ImageView) cancelRouteButton, R.drawable.map_action_cancel).setBg(
 				R.drawable.btn_flat, R.drawable.btn_flat_night));
 
 		cancelRouteButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				notifyClicked();
-				if (mapActivity.getRoutingHelper().isFollowingMode()) {
-					mapActivity.getMapActions().stopNavigationActionConfirm();
-				} else {
-					mapActivity.getMapActions().stopNavigationWithoutConfirm();
-				}
+				clickRouteCancel();
 			}
+
+			
 		});
 		mapRouteInfoControlDialog = new MapRouteInfoControl(mapActivity.getMapLayers().getContextMenuLayer(),
-				mapActivity);
+				mapActivity, this);
 
 		View waypointsButton = mapActivity.findViewById(R.id.map_waypoints_route_button);
-		controls.add(createHudButton((ImageView) waypointsButton, R.drawable.ic_action_flage_dark).setBg(
+		controls.add(createHudButton((ImageView) waypointsButton, R.drawable.map_action_waypoints).setBg(
 				R.drawable.btn_flat, R.drawable.btn_flat_night));
 		waypointsButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				notifyClicked();
-				mapRouteInfoControlDialog.showHideDialog();
+				clickRouteWaypoints();
 			}
+
+			
 		});
 
 		View optionsRouteButton = mapActivity.findViewById(R.id.map_options_route_button);
-		optionsRouteControl = createHudButton((ImageView) optionsRouteButton,
-				settings.getApplicationMode().getSmallIconDark()).setBg(R.drawable.btn_flat, R.drawable.btn_flat_night);
-		optionsRouteControlDialog = new MapRoutePreferencesControl(mapActivity);
+		optionsRouteControl = createHudButton((ImageView) optionsRouteButton, R.drawable.map_action_settings
+				).setBg(R.drawable.btn_flat, R.drawable.btn_flat_night);
+		optionsRouteControlDialog = new MapRoutePreferencesControl(mapActivity, this);
 		controls.add(optionsRouteControl);
 		optionsRouteButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				notifyClicked();
-				optionsRouteControlDialog.showAndHideDialog();
+				clickRouteParams();
 			}
 		});
 
 		TextView routeGoButton = (TextView) mapActivity.findViewById(R.id.map_go_route_button);
 		
 		routeGoControl = createHudButton(routeGoButton,
-				R.drawable.ic_action_start_navigation).setIconColorId(R.color.color_myloc_distance) .setBg(
+				R.drawable.map_start_navigation).setIconColorId(R.color.color_myloc_distance) .setBg(
 				R.drawable.btn_flat, R.drawable.btn_flat_night);
 		controls.add(routeGoControl);
-		routeGoButton.setText(mapActivity.getString(R.string.shared_string_go).toUpperCase());
+		routeGoButton.setText(mapActivity.getString(R.string.shared_string_go));
 		routeGoButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				notifyClicked();
-				RoutingHelper routingHelper = mapActivity.getMyApplication().getRoutingHelper();
-				if (!routingHelper.isFollowingMode() && !routingHelper.isRoutePlanningMode()) {
-					mapActivity.getMapActions().enterRoutePlanningMode(null, null, false);
-				} else {
-					startNavigation();
-				}
+				clickRouteGo();
 			}
 		});
+	}
+	
+	public void updateRouteButtons(View main, boolean routeInfo) {
+		ImageView dashButton = (ImageView) main.findViewById(R.id.map_dashboard_route_button);
+		dashButton.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.map_dashboard));
+		dashButton.setVisibility(AndroidUiHelper.isOrientationPortrait(mapActivity) ? 
+				View.GONE : View.VISIBLE);
+		dashButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mapRouteInfoControlDialog.hideDialog();
+				optionsRouteControlDialog.hideDialog();
+				mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.DASHBOARD);
+			}
+		});
+		ImageView cancelRouteButton = (ImageView) main.findViewById(R.id.map_cancel_route_button);
+		cancelRouteButton.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.map_action_cancel));
+		cancelRouteButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				clickRouteCancel();
+			}
+		});
+		
+		ImageView waypointsButton = (ImageView) main.findViewById(R.id.map_waypoints_route_button);
+		waypointsButton.setImageDrawable(routeInfo ? app.getIconsCache().getIcon(R.drawable.map_action_waypoints,
+				R.color.osmand_orange) : app.getIconsCache().getContentIcon(R.drawable.map_action_waypoints));
+		waypointsButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				clickRouteWaypoints();
+			}
+		});
+		
+		ImageView options = (ImageView) main.findViewById(R.id.map_options_route_button);
+		options.setImageDrawable(!routeInfo ? app.getIconsCache().getIcon(R.drawable.map_action_settings,
+				R.color.osmand_orange) : app.getIconsCache().getContentIcon(R.drawable.map_action_settings));
+		options.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				clickRouteParams();
+			}
+		});
+		
+		TextView routeGoButton = (TextView) main.findViewById(R.id.map_go_route_button);
+		routeGoButton.setCompoundDrawables(app.getIconsCache().getIcon(R.drawable.map_start_navigation, R.color.color_myloc_distance), null, null, null);
+		routeGoButton.setText(AndroidUiHelper.isOrientationPortrait(mapActivity) ?
+				mapActivity.getString(R.string.shared_string_go) : "");
+		routeGoButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				clickRouteGo();
+			}
+		});		
+	}
+	
+	protected void clickRouteParams() {
+		notifyClicked();
+		mapRouteInfoControlDialog.hideDialog();
+		optionsRouteControlDialog.showAndHideDialog();
+	}
+	
+	protected void clickRouteWaypoints() {
+		notifyClicked();
+		optionsRouteControlDialog.hideDialog();
+		mapRouteInfoControlDialog.showHideDialog();
+	}
+	
+	protected void clickRouteCancel() {
+		notifyClicked();
+		mapRouteInfoControlDialog.hideDialog();
+		optionsRouteControlDialog.hideDialog();
+		if (mapActivity.getRoutingHelper().isFollowingMode()) {
+			mapActivity.getMapActions().stopNavigationActionConfirm();
+		} else {
+			mapActivity.getMapActions().stopNavigationWithoutConfirm();
+		}
+	}
+	
+	protected void clickRouteGo() {
+		notifyClicked();
+		mapRouteInfoControlDialog.hideDialog();
+		optionsRouteControlDialog.hideDialog();
+		RoutingHelper routingHelper = mapActivity.getMyApplication().getRoutingHelper();
+		if (!routingHelper.isFollowingMode() && !routingHelper.isRoutePlanningMode()) {
+			mapActivity.getMapActions().enterRoutePlanningMode(null, null, false);
+		} else {
+			startNavigation();
+		}
 	}
 
 	public void showDialog() {
@@ -269,7 +370,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	private void initControls() {
 		View backToLocation = mapActivity.findViewById(R.id.map_my_location_button);
-		backToLocationControl = createHudButton((ImageView) backToLocation, R.drawable.ic_action_get_my_location)
+		backToLocationControl = createHudButton((ImageView) backToLocation, R.drawable.map_my_location)
 				.setBg(R.drawable.btn_circle_blue);
 		controls.add(backToLocationControl);
 
@@ -279,9 +380,12 @@ public class MapControlsLayer extends OsmandMapLayer {
 				mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
 			}
 		});
-
+		controls.add(createHudButton(mapActivity.findViewById(R.id.map_app_mode_shadow), 0).setBg(
+				R.drawable.btn_round_trans, R.drawable.btn_round_transparent));
 		View backToMenuButton = mapActivity.findViewById(R.id.map_menu_button);
-		menuControl = createHudButton((ImageView) backToMenuButton, R.drawable.ic_navigation_drawer).setBg(
+		
+		
+		menuControl = createHudButton((ImageView) backToMenuButton, R.drawable.map_dashboard).setBg(
 				R.drawable.btn_round, R.drawable.btn_round_night);
 		controls.add(menuControl);
 		backToMenuButton.setOnClickListener(new View.OnClickListener() {
@@ -291,12 +395,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				// double lon = activity.getMapView().getLongitude();
 				// MainMenuActivity.backToMainMenuDialog(activity, new LatLon(lat, lon));
 				notifyClicked();
-//				if (mapActivity.getMyApplication().getSettings().USE_DASHBOARD_INSTEAD_OF_DRAWER.get()) {
-					mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.DASHBOARD);
-//				} else {
-//					mapActivity.getMapActions().onDrawerBack();
-//					mapActivity.getMapActions().toggleDrawer();
-//				}
+				mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.DASHBOARD);
 			}
 		});
 		mapAppModeShadow = mapActivity.findViewById(R.id.map_app_mode_shadow);
@@ -311,7 +410,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		zoomText = (TextView) mapActivity.findViewById(R.id.map_app_mode_text);
 
 		View routePlanButton = mapActivity.findViewById(R.id.map_route_info_button);
-		routePlanningBtn = createHudButton((ImageView) routePlanButton, R.drawable.ic_action_gdirections_dark).setBg(
+		routePlanningBtn = createHudButton((ImageView) routePlanButton, R.drawable.map_directions).setBg(
 				R.drawable.btn_round, R.drawable.btn_round_night);
 		controls.add(routePlanningBtn);
 		routePlanButton.setOnClickListener(new View.OnClickListener() {
@@ -322,19 +421,38 @@ public class MapControlsLayer extends OsmandMapLayer {
 				if (!routingHelper.isFollowingMode() && !routingHelper.isRoutePlanningMode()) {
 					mapActivity.getMapActions().enterRoutePlanningMode(null, null, false);
 				} else {
-					mapActivity.getRoutingHelper().setRoutePlanningMode(true);
-					mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
-					mapActivity.refreshMap();
+					switchToRoutePlanningLayout();
 				}
 			}
-		});
 
+			
+		});
+	}
+	
+	
+	public void switchToRouteFollowingLayout() {
+		touchEvent = 0;
+		mapActivity.getMyApplication().getRoutingHelper().setRoutePlanningMode(false);
+		mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
+		mapActivity.refreshMap();
+	}
+	
+	public boolean switchToRoutePlanningLayout() {
+		if (!mapActivity.getRoutingHelper().isRoutePlanningMode() && mapActivity.getRoutingHelper().isFollowingMode()) {
+			mapActivity.getRoutingHelper().setRoutePlanningMode(true);
+			mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
+			mapActivity.refreshMap();
+			return true;
+		}
+		return false;
 	}
 
 	private void initZooms() {
 		final OsmandMapTileView view = mapActivity.getMapView();
 		View zoomInButton = mapActivity.findViewById(R.id.map_zoom_in_button);
-		controls.add(createHudButton((ImageView) zoomInButton, R.drawable.map_zoom_in).setIconColorId(0).setRoundTransparent());
+		mapZoomIn = createHudButton((ImageView) zoomInButton, R.drawable.map_zoom_in).
+		setIconsId(R.drawable.map_zoom_in, R.drawable.map_zoom_in_night).setRoundTransparent();
+		controls.add(mapZoomIn);
 		zoomInButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -350,7 +468,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 		final View.OnLongClickListener listener = MapControlsLayer.getOnClickMagnifierListener(view);
 		zoomInButton.setOnLongClickListener(listener);
 		View zoomOutButton = mapActivity.findViewById(R.id.map_zoom_out_button);
-		controls.add(createHudButton((ImageView) zoomOutButton, R.drawable.map_zoom_out).setIconColorId(0).setRoundTransparent());
+		mapZoomOut = createHudButton((ImageView) zoomOutButton, R.drawable.map_zoom_out).
+		setIconsId(R.drawable.map_zoom_out, R.drawable.map_zoom_out_night).setRoundTransparent();
+		controls.add(mapZoomOut);
 		zoomOutButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -366,12 +486,12 @@ public class MapControlsLayer extends OsmandMapLayer {
 		OsmandApplication app = mapActivity.getMyApplication();
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		if (routingHelper.isFollowingMode()) {
-			routingHelper.setRoutePlanningMode(false);
-			mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
+			switchToRouteFollowingLayout();
 		} else {
 			if (!app.getTargetPointsHelper().checkPointToNavigateShort()) {
 				mapRouteInfoControlDialog.showDialog();
 			} else {
+				touchEvent = 0;
 				mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
 				app.getSettings().FOLLOW_THE_ROUTE.set(true);
 				routingHelper.setFollowingMode(true);
@@ -382,6 +502,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 			}
 		}
 	}
+
+	
 
 	private void stopCounter() {
 		startCounter = 0;
@@ -428,6 +550,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings nightMode) {
 		updateControls(tileBox, nightMode);
 	}
+	
+	
 
 	private void updateControls(RotatedTileBox tileBox, DrawSettings nightMode) {
 		boolean isNight = nightMode != null && nightMode.isNightMode();
@@ -438,6 +562,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			// TODO
 			// updatextColor(textColor, shadw, rulerControl, zoomControls, mapMenuControls);
 		}
+		boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 		// default buttons
 		boolean routePlanningMode = false;
 		RoutingHelper rh = mapActivity.getRoutingHelper();
@@ -447,18 +572,22 @@ public class MapControlsLayer extends OsmandMapLayer {
 			routePlanningMode = true;
 		}
 		boolean routeFollowingMode = !routePlanningMode && rh.isFollowingMode();
-		boolean showRouteCalculationControls = routePlanningMode;
+		boolean dialogOpened = optionsRouteControlDialog.isDialogVisible() || mapRouteInfoControlDialog.isDialogVisible();
+		boolean showRouteCalculationControls = routePlanningMode ||
+				((System.currentTimeMillis() - touchEvent < TIMEOUT_TO_SHOW_BUTTONS) && routeFollowingMode);
+		boolean showMenuButton = (showRouteCalculationControls && portrait) || 
+				(!routeFollowingMode && !routePlanningMode);
+		updateMyLocation(rh, dialogOpened);
+//		routePlanningBtn.setIconResId(routeFollowingMode ?	R.drawable.ic_action_gabout_dark : R.drawable.map_directions	);
+//		routePlanningBtn.updateVisibility(showButtons && !routePlanningMode);
+		routePlanningBtn.setIconResId(R.drawable.map_directions	);
+		routePlanningBtn.updateVisibility(!routeFollowingMode && !routePlanningMode);
 
-//		boolean showDefaultButtons = !routePlanningMode
-//				&& (!routeFollowingMode || settings.SHOW_ZOOM_BUTTONS_NAVIGATION.get());
-		boolean showButtons = routePlanningMode || !routeFollowingMode || (System.currentTimeMillis() - touchEvent < TIMEOUT_TO_SHOW_BUTTONS);  
-		updateMyLocation(rh);
-		routePlanningBtn.setIconResId(routeFollowingMode ?	R.drawable.ic_action_gabout_dark : R.drawable.ic_action_gdirections_dark	);
-		routePlanningBtn.updateVisibility(showButtons && !routePlanningMode);
-
-		menuControl.setIconResId(settings.USE_DASHBOARD_INSTEAD_OF_DRAWER.get() ? R.drawable.ic_dashboard_dark
-				: R.drawable.ic_navigation_drawer);
-		menuControl.updateVisibility(showButtons);
+		menuControl.updateVisibility(showMenuButton && !dialogOpened);
+		mapZoomIn.updateVisibility(!dialogOpened);
+		mapZoomOut.updateVisibility(!dialogOpened);
+		compassHud.updateVisibility(!dialogOpened);
+		layersHud.updateVisibility(!dialogOpened);
 
 		if(routeFollowingMode || routePlanningMode) {
 			mapAppModeShadow.setVisibility(View.GONE);
@@ -468,7 +597,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				zoomText.setVisibility(View.GONE);
 				appModeIcon.setVisibility(View.VISIBLE);
 				appModeIcon.setImageDrawable(
-						app.getIconsCache().getActionBarIcon(
+						app.getIconsCache().getIcon(
 								settings.getApplicationMode().getSmallIconDark(), !isNight));
 			} else {
 				zoomText.setVisibility(View.VISIBLE);
@@ -476,22 +605,20 @@ public class MapControlsLayer extends OsmandMapLayer {
 				zoomText.setText(getZoomLevel(tileBox));
 			}
 		}
-		optionsRouteControl.setIconResId(settings.getApplicationMode().getSmallIconDark());
 		int vis = showRouteCalculationControls ? View.VISIBLE : View.GONE;
 		if (showRouteCalculationControls) {
 			((TextView) routeGoControl.iv).setTextColor(textColor);
-			final String text;
+			String text = portrait ? mapActivity.getString(R.string.shared_string_go) : "";
 			if (startCounter > 0) {
 				int get = (int) ((startCounter - System.currentTimeMillis()) / 1000l);
-				text = mapActivity.getString(R.string.shared_string_go) + " (" + get + ")";
-			} else {
-				text = mapActivity.getString(R.string.shared_string_go);
+				text += " (" + get + ")";
 			}
 			((TextView) routeGoControl.iv).setText(text);
 		}
 
 		if (routePreparationLayout.getVisibility() != vis) {
 			routePreparationLayout.setVisibility(vis);
+			mapDashControl.updateVisibility(showRouteCalculationControls && !portrait);
 			mapRouteInfoControlDialog.setVisible(showRouteCalculationControls);
 			if (showRouteCalculationControls) {
 				if (!mapActivity.getRoutingHelper().isFollowingMode()
@@ -526,7 +653,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		}
 	}
 
-	private void updateMyLocation(RoutingHelper rh) {
+	private void updateMyLocation(RoutingHelper rh, boolean dialogOpened) {
 		boolean enabled = mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation() != null;
 		boolean tracked = mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation();
 		
@@ -541,7 +668,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			backToLocationControl.setBg(R.drawable.btn_circle_blue);
 		}
 		boolean visible = !(tracked && rh.isFollowingMode());
-		backToLocationControl.updateVisibility(visible);
+		backToLocationControl.updateVisibility(visible && !dialogOpened);
 	}
 
 
@@ -621,17 +748,21 @@ public class MapControlsLayer extends OsmandMapLayer {
 		int bgDark;
 		int bgLight;
 		int resId;
-		int resLight = R.color.icon_color_light;
-		int resDark = 0;
+		int resLightId;
+		int resDarkId;
+		int resClrLight = R.color.icon_color_light;
+		int resClrDark = 0;
+		
 
 		boolean nightMode = false;
 		boolean f = true;
 		boolean compass;
 		
 		public MapHudButton setRoundTransparent() {
-			setBg(R.drawable.btn_circle_trans);
+			setBg(R.drawable.btn_circle_trans, R.drawable.btn_circle_night); 
 			return this;
 		}
+
 
 		public MapHudButton setBg(int dayBg, int nightBg) {
 			if(bgDark == nightBg && dayBg == bgLight) {
@@ -676,21 +807,31 @@ public class MapControlsLayer extends OsmandMapLayer {
 		}
 
 		public MapHudButton setIconColorId(int clr) {
-			if (resLight == clr && resDark == clr) {
+			if (resClrLight == clr && resClrDark == clr) {
 				return this;
 			}
-			resLight = clr;
-			resDark = clr;
+			resClrLight = clr;
+			resClrDark = clr;
+			f = true;
+			return this;
+		}
+		
+		public MapHudButton setIconsId(int icnLight, int icnDark) {
+			if (resLightId == icnLight && resDarkId == icnDark) {
+				return this;
+			}
+			resLightId = icnLight;
+			resDarkId = icnDark;
 			f = true;
 			return this;
 		}
 		
 		public MapHudButton setIconColorId(int clrLight, int clrDark) {
-			if (resLight == clrLight && resDark == clrDark) {
+			if (resClrLight == clrLight && resClrDark == clrDark) {
 				return this;
 			}
-			resLight = clrLight;
-			resDark = clrDark;
+			resClrLight = clrLight;
+			resClrDark = clrDark;
 			f = true;
 			return this;
 		}
@@ -700,21 +841,28 @@ public class MapControlsLayer extends OsmandMapLayer {
 				return;
 			}
 			f = false;
-			nightMode = night;
+			nightMode = night; 
 			if (bgDark != 0 && bgLight != 0) {
 				iv.setBackgroundDrawable(ctx.getResources().getDrawable(night ? bgDark : bgLight));
 			}
+			Drawable d = null;
+			if(resDarkId != 0 && nightMode) {
+				d = ctx.getIconsCache().getIcon(resDarkId);
+			} else if(resLightId != 0 && !nightMode) {
+				d = ctx.getIconsCache().getIcon(resLightId);
+			} else if(resId != 0){
+				d = ctx.getIconsCache().getIcon(resId,	nightMode ? resClrDark : resClrLight);	
+			}
+				
 			if (iv instanceof ImageView) {
 				if (compass) {
-					((ImageView) iv).setImageDrawable(new CompassDrawable(ctx.getIconsCache().getIcon(resId,
-							nightMode ? resDark : resLight)));
+					((ImageView) iv).setImageDrawable(new CompassDrawable(d));
 				} else {
-					((ImageView) iv).setImageDrawable(ctx.getIconsCache()
-							.getIcon(resId, nightMode ? resDark : resLight));
+					((ImageView) iv).setImageDrawable(d);
 				}
 			} else if (iv instanceof TextView) {
 				((TextView) iv).setCompoundDrawablesWithIntrinsicBounds(
-						ctx.getIconsCache().getIcon(resId, nightMode ? resDark : resLight), null, null, null);
+						d, null, null, null);
 			}
 		}
 
@@ -778,7 +926,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 					final boolean end = k == tlist.size();
 					if (i == -1) {
 						if ((end || p < tlist.get(k))) {
-							values.add(p + "%");
+							values.add(p + " %");
 							i = k;
 						} else if (p == tlist.get(k)) {
 							i = k;
@@ -786,7 +934,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 					}
 					if (k < tlist.size()) {
-						values.add(tlist.get(k) + "%");
+						values.add(tlist.get(k) + " %");
 					}
 				}
 				if (values.size() != tlist.size()) {
@@ -818,14 +966,17 @@ public class MapControlsLayer extends OsmandMapLayer {
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if(requestCode == REQUEST_ADDRESS_SELECT && resultCode == SearchAddressFragment.SELECT_ADDRESS_POINT_RESULT_OK){
 			String name = data.getStringExtra(SearchAddressFragment.SELECT_ADDRESS_POINT_INTENT_KEY);
+			boolean target = data.getBooleanExtra(MapRouteInfoControl.TARGET_SELECT, true);
 			LatLon latLon = new LatLon(
 					data.getDoubleExtra(SearchAddressFragment.SELECT_ADDRESS_POINT_LAT, 0), 
 					data.getDoubleExtra(SearchAddressFragment.SELECT_ADDRESS_POINT_LON, 0));
 			if(name != null){
-				mapRouteInfoControlDialog.selectAddress(name, latLon, false);
+				mapRouteInfoControlDialog.selectAddress(name, latLon, target);
 			} else {
-				mapRouteInfoControlDialog.selectAddress("", latLon, true);
+				mapRouteInfoControlDialog.selectAddress("", latLon, target);
 			}
 		}		
 	}
+
+	
 }

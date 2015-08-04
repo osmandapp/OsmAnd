@@ -1,5 +1,14 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
+	<string name="gps_network_not_enabled">Kein Standortdienst aktiviert. Aktivieren?</string>
+	<string name="disable_recording_once_app_killed">Eigenständige Streckenaufzeichnung unterbinden</string>
+	<string name="disable_recording_once_app_killed_descrp">Pausiert die GPX-Aufzeichnung wenn OsmAnd gestoppt wird (via zuletzt verwendete Apps). (Der Hintergrunddienst-Indikator in der Android-Benachrichtigungsleiste verschwindet dann.)</string>
+	<string name="shared_string_import2osmand">Nach OsmAnd importieren</string>
+	<string name="tips_and_tricks_descr">Häufig gestellte Fragen, neueste Änderungen und anderes</string>
+	<string name="delay_to_start_navigation">Routenführung beginnen nach…</string>
+	<string name="delay_to_start_navigation_descr">Wartezeit festlegen, um mit der Routenführung zu beginnen</string>
+	<string name="simulate_your_location">Simulieren der Position</string>
+	<string name="rendering_attr_OSMMapperAssistant_name">OSM-Mapper-Assistent</string>
 	<string name="traffic_warning_speed_limit">Geschwindigkeitsbegrenzung</string>
 	<string name="traffic_warning_border_control">Grenzkontrolle</string>
 	<string name="traffic_warning_payment">Mautstelle</string>
@@ -64,8 +73,8 @@
 	<string name="stop_navigation_service">Unterbrechen</string>
 	<string name="rendering_attr_alpineHiking_name">Alpine Tourenskala (SAC)</string>
 	<string name="rendering_attr_alpineHiking_description">Wege entsprechend der SAC-Wanderskala darstellen</string>
-	<string name="rendering_attr_osmcTraces_name">Wandersymbole anzeigen</string>
-	<string name="rendering_attr_osmcTraces_description">Wandersymbole anzeigen (OSMC)</string>
+	<string name="rendering_attr_hikingRoutesOSMC_name">Wandersymbole anzeigen</string>
+	<string name="rendering_attr_hikingRoutesOSMC_description">Wandersymbole anzeigen (OSMC)</string>
 	<string name="arrival_distance_factor_early">Früh</string>
 	<string name="arrival_distance_factor_normally">Normal</string>
 	<string name="arrival_distance_factor_late">Spät</string>
@@ -90,7 +99,7 @@
 	<string name="download_hillshade_item">Relief-Schattierung</string>
 	<string name="download_hillshade_maps">Relief-Overlays</string>
 	
-	<string name="rendering_attr_noAdminboundaries_name">Keine Grenzen anzeigen</string>
+	<string name="rendering_attr_noAdminboundaries_name">Grenzen ausblenden</string>
 	<string name="rendering_attr_noAdminboundaries_description">Unterdrückt die Anzeige regionaler Grenzverläufe</string>
 	<string name="tip_altitude_offset">Höhenanzeige (Offset)</string>
 	<string name="tip_altitude_offset_t">Die meisten GPS-Systeme zeigen die Höhenangaben im ellipsoid-basierten WGS84-System an, die Umrechnung auf lokal übliche Höhenangaben erfordert eine ortsabhängige Korrektur.
@@ -162,7 +171,7 @@
 	<string name="route_kl">Links halten, dann</string>
 	<string name="route_kr">Rechts halten, dann</string>
 	<string name="rendering_attr_noPolygons_description">Unterdrückt die Anzeige aller Flächenelemente in der Karte</string>
-	<string name="rendering_attr_noPolygons_name">Keine Flächen anzeigen</string>
+	<string name="rendering_attr_noPolygons_name">Flächen ausblenden</string>
 	<string name="rendering_attr_appMode_description">Optimierung der Kartendarstellung für</string>
 	<string name="rendering_attr_appMode_name">Darstellungsmodus</string>
 	<string name="rendering_attr_contourLines_description">Zeige ab Vergrößerung (benötigt Höhenlinien-Datei):</string>
@@ -176,20 +185,20 @@
 	<string name="online_map_settings_descr">Konfiguration von Kachel-Kartenquellen, sowie Over- &amp; Underlay Einstellungen</string>
 	
 	
-	<string name="osmand_rastermaps_plugin_description">Ermöglicht die Verwendung zahlreicher Online Kachel-Kartenquellen (auch als Over- oder Underlay). Online-Karten werden im Unterordner \'tiles\' zwischengespeichert. Karten-Kacheln können auch offline erstellt und in das Unterordner \'tiles\' kopiert werden.</string>
+	<string name="osmand_rastermaps_plugin_description">"Dieses Plugin ermöglicht die Verwendung zahlreicher Online Kachel-Kartenquellen, von vordefinierten Openstreetmap-Kacheln (wie Mapnik) über Satellitenbilder bis zu speziellen Overlays wie Wetterkarten, Klimakarten, geologischen Karten, Reliefkarten, et.\n\nAlle Karten können sowohl als Hauptkarte wie auch als Overlay oder Unterlage für OsmAnds reguläre Offline-Karten verwendet werden. Um unterleget Karten sichtbarer zu machen, können gewisse Elemente der OsmAnd Offline-Karten im Menü \'Karte konfigurieren\' ausgeblendet werden. verwendet werden).\n\nKarten-Kacheln können direkt online bezogen werden, und werden im OsmAnd Unterordner \'tiles\' zwischengespeichert. Sie können für die Offline-Verwendung auch von anderen Tools als sqlite-Datei vorbereitet und manuell in den OsmAnd \'tiles\' Unterordner kopiert werden. "</string>
 	<string name="osmand_background_plugin_description">Zeigt die Einstellungen für die Standort-Aufzeichnung oder die Navigation während das Gerät im Standby-Modus ist (periodisches Aufwecken des GPS-Empfängers).</string>
-	<string name="osmand_accessibility_description">Zeigt die Einstellungen für spezielle Eingabehilfen.</string>
+	<string name="osmand_accessibility_description">Diese Plugin macht die Funktionalitäten der System-Eingabehilfen direkt in OsmAnd verfügbar. Dadurch kann z.B. die Abspielgeschwindigkeit der Synthesizer-Stimme, die Bildschirmnavigation durch Steuerkreuz, Benutzung eines Trackballs zur Zoomsteuerung, Text-to-Speech Feedback (automatischen Ansage der Position) konfiguriert werden.</string>
 	
 	
 	
-	<string name="osmand_development_plugin_description">Zeigt die Einstellungen für Entwicklungs- und Fehlersuchhilfen wie simulierte Navigation oder die Messung der Render-Leistung.</string>
+	<string name="osmand_development_plugin_description">Dieses Plugin aktiviert Einstellungen für Entwickler und Fehlersuchhilfen, wie simulierte Navigation, die Messung der Bildschirm-Anzeige- (Render-) Leistung, oder das Testen der Sprachansagen. Diese Einstellungen sind für Entwickler gedacht und werden für die Verwendung von OsmAnd sonst nicht benötigt.</string>
 	<string name="plugins_screen">Plugins</string>
 	<string name="prefs_plugins_descr">Module aktivieren Experteneinstellungen und Zusatzdienste</string>
 	<string name="prefs_plugins">Plugins</string>
-	<string name="osm_editing_plugin_description">Ermöglicht das Erstellen und Bearbeiten von OSM-POI-Objekten und -Fehlermeldungen, sowie das Hochladen von GPX-Dateien (benötigt ein OSM-Benutzerkonto).</string>
+	<string name="osm_editing_plugin_description">Dieses Plugin ermöglicht das Erstellen und Bearbeiten von OSM-POI-Objekten und -Fehlermeldungen, sowie das Hochladen von GPX-Dateien (benötigt ein OSM-Benutzerkonto).\n\nOSM ist ein globales Kartografierunngsprojekt, Details siehe http://openstreetmap.org. Jeder ist eingeladen, aktiv mitzuarbeiten, Mitarbeit kann auch direkt via OsmAnd erfolgen, wenn man in den OsmAnd-Plugin-Einstellungen sein OSM Benutzerkonto hinterlegt.</string>
 	<string name="vector_maps_may_display_faster_on_some_devices">Vektorkarten werden eventuell schneller angezeigt. Funktioniert nur auf manchen Geräten.</string>
 	
-	<string name="play_commands_of_currently_selected_voice">Spiele Ansagen der aktuell ausgewählten Stimme ab</string>
+	<string name="play_commands_of_currently_selected_voice">Spiele Ansagen der ausgewählten Stimme ab</string>
 	<string name="debugging_and_development">OsmAnd Debugging</string>
 	<string name="native_rendering">Natives Rendern</string>
 	
@@ -205,7 +214,7 @@
 	<string name="info_button">Info</string>
 	<string name="back_to_location">Zurück zum Standort</string>
 	<string name="shared_string_help">Hilfe</string>
-	<string name="show_details">Zeige Details</string>
+	<string name="show_details">Positionsdetails anzeigen</string>
 	<string name="accessibility_extensions_descr">Barrierefreiheit-Erweiterungen für alte Android-Versionen</string>
 	<string name="accessibility_extensions">Barrierefreiheit-Erweiterungen</string>
 	<string name="accessibility_mode">Barrierefreiheit-Modus</string>
@@ -235,11 +244,11 @@
 	<string name="north_north_west">Nord-Nord-West</string>
 	<string name="front">Vorne</string>
 	<string name="front_right">Vorne rechts</string>
-	<string name="right">Rechts</string>
+	<string name="right">Auf der rechten Seite</string>
 	<string name="back_right">Hinten rechts</string>
 	<string name="back">Hinten</string>
 	<string name="back_left">Hinten links</string>
-	<string name="left">Links</string>
+	<string name="left">Auf der linken Seite</string>
 	<string name="front_left">Vorne links</string>
 	<string name="oclock">Uhr</string>
 	<string name="towards">nach</string>
@@ -268,18 +277,18 @@
 	<string name="offline_edition_descr">Immer Offline-Bearbeitung verwenden</string>
 	<string name="update_poi_does_not_change_indexes">Das Bearbeiten von POIs innerhalb von OsmAnd beeinflusst nicht die Offline-Karten, sondern wird in einer eigenen Datei gespeichert.</string>
 	<string name="local_openstreetmap_uploading">Hochladen…</string>
-	<string name="local_openstreetmap_were_uploaded">{0} POI/Bugs wurden hochgeladen</string>
+	<string name="local_openstreetmap_were_uploaded">{0} POI/Hinweise wurden hochgeladen</string>
 	<string name="local_openstreetmap_uploadall">Alle hochladen</string>
 	
 	
 	<string name="local_openstreetmap_upload">Änderung auf OSM hochladen</string>
 	<string name="local_openstreetmap_delete">Änderung löschen</string>
 	<string name="local_openstreetmap_descr_title">Asynchrone OSM Bearbeitung:</string>
-	<string name="local_openstreetmap_settings">Lokal notierte OSM Punkte/Bugs</string>
-	<string name="local_openstreetmap_settings_descr">Lokal vorgemerkte OSM Punkte/Bugs anzeigen und verwalten</string>
+	<string name="local_openstreetmap_settings">Lokal gespeicherte OSM POIs/Hinweise</string>
+	<string name="local_openstreetmap_settings_descr">In der lokalen Datenbank vermerkte OSM POIs/Hinweise anzeigen und verwalten</string>
 
 	<string name="live_monitoring_m">Online Verfolgung (benötigt GPX)</string>
-	<string name="live_monitoring_m_descr">Sende Verfolgungsdaten zu einem festgelegten Internet Dienst, wenn GPX-Aufzeichnung aktiviert ist.</string>
+	<string name="live_monitoring_m_descr">Sende Verfolgungsdaten zu einem festgelegten Internet-Dienst, wenn GPX-Aufzeichnung aktiviert ist.</string>
 	<string name="live_monitoring_url">Online-Tracking Web-Adresse</string>
 	<string name="live_monitoring_url_descr">Spezifikation der Online-Tracking Web-Adresse mit Datenübergabe: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
 	<string name="live_monitoring_interval">Online-Tracking Intervall</string>
@@ -325,11 +334,13 @@
 	<string name="settings_preset_descr">Karten- und Navigations-Einstellungen werden je Profil gespeichert. Hier Standardprofil vorauswählen.</string>
 
 	<string name="routing_settings">Navigation</string>
+	<string name="routing_settings_2">Navigationseinstellungen</string>
 	<string name="routing_settings_descr">Nutzerprofilspezifische Einstellungen (Autofahrer, Radfahrer, Fußgänger)</string>
 	<string name="global_settings">Globale Einstellungen</string>
 	<string name="index_settings">Karten-Management</string>
 	<string name="index_settings_descr">Laden und Verwalten von Landkarten</string>
 	<string name="general_settings">Allgemein</string>
+	<string name="general_settings_2">Allgemeine Einstellungen</string>
 	<string name="general_settings_descr">Konfiguration der Anzeige und anderer allgemeiner Einstellungen</string>
 	<string name="global_app_settings">Globale Einstellungen</string>
 	<string name="user_name">OSM-Benutzername</string>
@@ -369,7 +380,7 @@
 	<string name="init_native_library">Native Bibliothek wird initialisiert…</string>
 	<string name="choose_auto_follow_route">Kartenanzeige nachführen</string>
 	<string name="choose_auto_follow_route_descr">Wartezeit für Rückkehr zur Kartennachführung</string>
-	<string name="auto_follow_route_never">Nie (Auf blauen Pfeil tippen startet Navigation manuell)</string>
+	<string name="auto_follow_route_never">Nie (Auf \'Los\' tippen, um die Navigation manuell zu starten)</string>
 	<string name="auto_follow_route_navigation">Nachführung nur bei aktiver Navigation</string>
 	<string name="auto_follow_route_navigation_descr">Kartennachführung erfolgt nur während Navigation.</string>
 	<string name="auto_follow_location_enabled">Kartennachführung aktiv.</string>
@@ -378,9 +389,9 @@
 	<string name="pref_raster_map">Einstellungen Kartenquelle</string>
 	<string name="pref_vector_map">Einstellungen Vektorkarten</string>
 	<string name="delete_confirmation_msg">%1$s löschen?</string>
-	<string name="city_type_suburb">Vorstadt</string>
-	<string name="city_type_hamlet">Dorf</string>
-	<string name="city_type_village">Gemeinde</string>
+	<string name="city_type_suburb">Stadtteil</string>
+	<string name="city_type_hamlet">Weiler</string>
+	<string name="city_type_village">Dorf</string>
 	<string name="city_type_town">Stadt</string>
 	<string name="city_type_city">Großstadt</string>
 	
@@ -611,12 +622,12 @@
 	<string name="favorite_default_category">Andere</string>
 	<string name="favourites_edit_dialog_name">Name</string>
 	<string name="favourites_edit_dialog_category">Kategorie</string>
-	<string name="vector_map_not_needed">Nicht verwendet</string>
+	<string name="shared_string_no_thanks">Nicht verwendet</string>
 	<string name="basemap_missing">Die offline-Weltkarte für kleine Vergrößerungen ist noch nicht vorhanden. Bitte ggf. World_basemap_x.obf herunterladen.</string>
 	<string name="vector_data_missing">Keine Offline-Daten vorhanden (SD-Karte). Bitte ggf. herunterladen, damit Karten offline verwendet werden können.</string>
 	<string name="local_index_gpx_info_show">"\n\nLang klicken für Optionen"</string>
 
-	<string name="local_index_installed">Ausgabe</string>
+	<string name="local_index_installed">Lokale Version</string>
 	<string name="local_index_items_backuped">%1$d von %2$d Datei(en) erfolgreich deaktiviert.</string>
 	<string name="local_index_items_deleted">%1$d von %2$d Datei(en) erfolgreich gelöscht.</string>
 	<string name="local_index_items_restored">%1$d von %2$d Datei(en) erfolgreich aktiviert.</string>
@@ -784,7 +795,7 @@
 	<string name="use_osmand_routing_service_descr">OsmAnd Offline-Navigation für große Entfernungen verwenden (experimentell) anstatt automatisch CloudMade zu nehmen</string>
 	<string name="osmand_routing_experimental">OsmAnd Offline-Navigation ist noch experimentell und funktioniert nicht gut für Entfernungen über 20 km.\n\nAls Navigationsdienst wird temporär online CloudMade verwendet.</string>
 	<string name="specified_dir_doesnt_exist">Angegebener Ordner kann nicht gefunden werden.</string>
-	<string name="application_dir">Daten-Ordner</string>
+	<string name="application_dir">Datenspeicherungsordner</string>
 	
 	<string name="osmand_net_previously_installed">Eine Vorversion von OsmAnd ist installiert. Alle Offline-Daten werden weiter unterstützt. Favoriten müssen aber in der Vorversion exportiert und anschließend in die neue Version importiert werden.</string>
 	<string name="build_installed">Build {0} erfolgreich installiert ({1}).</string>
@@ -827,14 +838,14 @@
 	<string name="poi_context_menu_call">POI-Telefon anzeigen</string>
 	<string name="website">Internetseite</string>
 	<string name="phone">Telefon</string>
-	<string name="download_type_to_filter">Filtern nach Typ</string>
+	<string name="download_type_to_filter">Nach Typ filtern</string>
 	<string name="use_high_res_maps">Hochauflösende Anzeige</string>
 	<string name="use_high_res_maps_descr">Unterdückt Streckung (Unschärfe) von Kartenkacheln auf manchen Anzeigen</string>
 	<string name="unknown_location">Standort noch nicht ermittelt</string>
 	
 	<string name="context_menu_item_search_transport">Suche ÖPNV</string>
 	<string name="transport_searching_transport">ÖPNV-Ergebnisse (kein Ziel):</string>
-	<string name="transport_searching_route">ÖPNV-Ergebnisse (Ziel {0}):</string>
+	<string name="transport_searching_route">ÖPNV-Ergebnisse ({0} bis zum Ziel):</string>
 	
 	<string name="transport_search_again">ÖPNV-Suche zurücksetzen</string>
 	
@@ -872,7 +883,7 @@
 	<string name="layer_yandex_traffic">Yandex Verkehr</string>
 	<string name="layer_route">Route</string>
 	<string name="shared_string_favorites">Favoriten</string>
-	<string name="layer_osm_bugs">OSM-Fehlerbericht (online)</string>
+	<string name="layer_osm_bugs">OSM-Hinweise (online)</string>
 	<string name="layer_transport">ÖPNV-Haltestellen</string>
 	<string name="layer_poi">POI…</string>
 	<string name="layer_amenity_label">Punkt-Namen</string>
@@ -959,7 +970,7 @@
 	<string name="search_history_int_streets">Querstraße: {0} x {1} in {2}</string>
 	<string name="search_history_building">Hausnr.: {0}, {1}, {2}</string>
 	<string name="favorite">Favorit</string>
-	<string name="shared_string_clear_all">Alles löschen</string>
+	<string name="shared_string_clear_all">Alle löschen</string>
 	<string name="shared_string_history">Verlauf</string>
 	<string name="uploading_data">Daten hochladen…</string>
 	<string name="uploading">Hochladen…</string>
@@ -969,10 +980,10 @@
 	<string name="search_osm_nominatim">Online-Suche mit OSM Nominatim</string>
 	<string name="hint_search_online">Online-Suche: Hausnummer, Straße, Ort</string>
 	<string name="search_offline_address">Offline-Suche</string>
-	<string name="search_online_address">Internet verwenden</string>
+	<string name="search_online_address">Online-Suche</string>
 	<string name="max_level_download_tile">Max. Online-Zoom</string>
 	<string name="max_level_download_tile_descr">Maximale Vergrößerung bis zu der Online-Karten-Daten (Kacheln) aus dem Internet geladen werden</string>
-	<string name="route_general_information">Gesamtentfernung: %1$s\nReisezeit: %2$d h %3$d min</string>
+	<string name="route_general_information">Gesamtentfernung: %1$s, Reisezeit: %2$d h %3$d min</string>
 	<string name="router_service_descr">Online- oder Offline-Dienst zur Routenberechnung wählen</string>
 	<string name="router_service">Navigationsdienst</string>
 	<string name="sd_dir_not_accessible">Auf den Daten-Ordner auf der SD-Karte kann nicht zugegriffen werden!</string>
@@ -1197,7 +1208,7 @@
 	<string name="osmand_parking_pm">PM</string>
 	<string name="osmand_parking_am">AM</string>
 	<string name="osmand_parking_position_name">Park-Position</string>
-	<string name="osmand_parking_plugin_description">Dieses Modul (separater Download) speichert den Standort eines geparkten Fahrzeugs.</string>
+	<string name="osmand_parking_plugin_description">Dieses Plugin ermöglicht das Speichern des Standorts eines geparkten Fahrzeugs sowie die Anzeige der restlichen Parkzeit (falls das Parken zeitlich begrenzt ist).\n\nParkplatz und Restzeit werden sowohl auf dem OsmAnd Info-Bildschirm wie auch auf dem Kartenbildschirm dargestellt. Optional kann ein Kalendereintrag als Erinnerung erstellt werden.</string>
 	<string name="osmand_parking_plugin_name">Parkplatz-Standort</string>
 	<string name="context_menu_item_add_parking_point">Parkplatz-Standort festlegen</string>
 	<string name="context_menu_item_delete_parking_point">Parkplatz-Standort löschen</string>
@@ -1230,7 +1241,7 @@
 	
 	
 	<string name="map_widget_parking">Parken</string>
-	<string name="map_widget_monitoring">GPX-Aufnahme</string>
+	<string name="map_widget_monitoring">GPX-Aufzeichnung</string>
 	<string name="map_widget_speed">Geschwindigkeit</string>
 	<string name="map_widget_distance">Ziel</string>
 	<string name="map_widget_altitude">Höhe</string>
@@ -1299,7 +1310,7 @@
 	<string name="close_changeset">Änderungssatz schließen</string>
 	<string name="incomplete_locale">unfertig</string>
 	<string name="srtm_plugin_name">Höhenlinien</string>
-	<string name="srtm_plugin_description">Dieses extra herunterladbare Plugin ermöglicht das Laden von offline Höhenlinien und Relief-Schattierungen (\'Einstellungen -&gt; \'Karten-Management -&gt; \'Herunterladen -&gt; \'Kartentyp wählen). Diese Darstellung kann mit den regulären Offline-Karten von Osmand kombiniert werden.</string>
+	<string name="srtm_plugin_description">"Das Plugin beinhaltet Höhenlinien und Relief-Schattierungen, die als Ergänzung zu den Offline-Karten von OsmAnd angezeigt werden können. Diese Funktionalität ist vor allem für Sportler wie Wanderer, Radfahrer, Trekker und jeden interessant, der sich für die Relief-Struktur von Landschaften interessiert.\n\nDie globalen Daten (zwischen N 70° und S 70°) basieren auf Messungen von SRTM (Shuttle Radar Topography Mission) und ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), einem bildgebenden System des Satelliten Terra, dem Flaggschiff des NASA-Erd-Beobachtungsprogramms. ASTER ist der Erfolg der Zusammenarbeit zwischen der NASA, dem japanischen Ministerium für Wirtschaft, Handel und Industrie (METI) und dem japanischen Raumfahrtsprogramm (J-spacesystems). "</string>
 	<string name="srtm_paid_version_title">Höhenlinien-Plugin</string>
 	<string name="srtm_paid_version_msg">Bitte überlegen Sie, ob Sie durch den Kauf des Höhenlinien-Plugins im Play-Store die weitere Entwicklung unterstützen wollen.</string>
 	<string name="download_select_map_types">Andere Karten</string>
@@ -1353,10 +1364,10 @@
 	<string name="monitoring_control_start">GPX</string>
 	
 	<string name="map_widget_audionotes">Audio-Notiz</string>
-	<string name="audionotes_plugin_description">Audio/Video-Notiz unterwegs aufnehmen</string>
+	<string name="audionotes_plugin_description">Das Audio/Video-Notiz Plugin ermöglicht unterwegs die Aufnahme von ortsbezogenen Audio-/Fotografie-/Video-Notizen, entweder über eine Schaltfläche auf dem Kartenbildschirm, oder direkt im Kontext-Manu zu jeder Position auf der Karte.</string>
 	<string name="audionotes_plugin_name">Audio/Video-Notizen</string>
 	<string name="audionotes_location_not_defined">Ein Ort, der mit der Notiz verbunden wird, wurde nicht angegeben. Benutzen Sie \'Verwende Position…\', um der Notiz einen Ort zuzuweisen</string>
-	<string name="osmand_srtm_long_description_1000_chars">Das Plugin beinhaltet Höhenlinien, die in Offline-Karten von OsmAnd angezeigt werden können. Die globalen Daten (zwischen N 70° und S 70°) basieren auf Messungen von SRTM (Shuttle Radar Topography Mission) und ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), einem bildgebenden System des Satelliten Terra, dem Flaggschiff des NASA-Erd-Beobachtungsprogramms. ASTER ist der Erfolg der Zusammenarbeit zwischen der NASA, dem japanischen Ministerium für Wirtschaft, Handel und Industrie (METI) und dem japanischen Raumfahrtsprogramm (J-spacesystems).</string>
+	<string name="osmand_srtm_long_description_1000_chars">"Das Plugin beinhaltet Höhenlinien und Relief-Schattierungen, die als Ergänzung zu den Offline-Karten von OsmAnd angezeigt werden können. Diese Funktionalität ist vor allem für Sportler wie Wanderer, Radfahrer, Trekker und jeden interessant, der sich für die Relief-Struktur von Landschaften interessiert.\n\nDie globalen Daten (zwischen N 70° und S 70°) basieren auf Messungen von SRTM (Shuttle Radar Topography Mission) und ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), einem bildgebenden System des Satelliten Terra, dem Flaggschiff des NASA-Erd-Beobachtungsprogramms. ASTER ist der Erfolg der Zusammenarbeit zwischen der NASA, dem japanischen Ministerium für Wirtschaft, Handel und Industrie (METI) und dem japanischen Raumfahrtsprogramm (J-spacesystems). "</string>
 	<string name="stop_routing_confirm">Wollen Sie die Navigation wirklich beenden?</string>
 	<string name="clear_dest_confirm">Wollen Sie das Ziel (inkl. Zwischenziele) wirklich löschen?</string>
 	<string name="precise_routing_mode_descr">Auswählen um Routen fehlerfrei zu berechnen. Diese Funktion ist weiterhin auf kurze Entfernung begrenzt und langsam.</string>
@@ -1398,7 +1409,7 @@
 	<string name="use_magnetic_sensor">Magnetsensor verwenden</string>
 	<string name="local_indexes_cat_srtm">Höhenlinien-Daten</string>
 	<string name="wait_current_task_finished">Bitte warten Sie, der laufende Task wird beendet</string>
-	<string name="shared_string_downloading">Herunterladen…</string>
+	<string name="shared_string_downloading">Herunterladen</string>
 	<string name="local_osm_changes_backup_successful">OSM-Änderungsdatei erfolgreich erzeugt %1$s</string>
 	<string name="local_osm_changes_backup_failed">Fehler beim Zwischenspeichern der bearbeiteten OSM-Daten</string>
 	<string name="local_osm_changes_backup">Als OSM-Daten-Änderung zwischenspeichern</string>
@@ -1408,9 +1419,9 @@
 	<string name="plugin_distance_point_speed">Geschwindigkeit</string>
 	<string name="plugin_distance_point_ele">Höhe</string>
 	<string name="distance_measurement_clear_route">Alle Punkte löschen</string>
-	<string name="intermediate_items_sort_return">Anordnung der Zwischenziele auf der Route zum Ziel wurde optimiert.</string>
+	<string name="intermediate_items_sort_return">Die Anordnung der Zwischenziele auf der Route zum Ziel wurde optimiert.</string>
 	<string name="plugin_distance_point">Punkt</string>
-	<string name="osmand_distance_planning_plugin_description">Erstelle GPX-Routen (oder verwende/modifiziere bereits vorhandene GPX-Daten) um die Entfernung zwischen zwei Orten zu messen. Stationen daraus können gespeichert und für eine Routenplanung verwendet werden.</string>
+	<string name="osmand_distance_planning_plugin_description">Dieses Plugin ermöglicht das Planen und erstellen von Routen durch Auswahl von Pinkten auf der Karte, oder Verwendung/Modifizierung bereits vorhandener GPX-Dateien, sowie die Entfernungsmessung zwischen Punkten. Resultate können als GPX-Dateien gespeichert und für eine Navigation verwendet werden.</string>
 	<string name="osmand_distance_planning_plugin_name">Entfernungsmesser &amp; Routen-Planer</string>
 	<string name="shared_string_do_not_show_again">Nicht erneut anzeigen</string>
 	<string name="distance_measurement_save_gpx">Als GPX-Datei speichern</string>
@@ -1459,7 +1470,7 @@
 	<string name="driving_region_europe_asia">Europa und Asien</string>
 	<string name="driving_region_uk">GB, Indien, Australien u.a.</string>
 	<string name="announce_gpx_waypoints">GPX-Wegpunkte ansagen</string>
-	<string name="driving_region">Fahr-Gebiet</string>
+	<string name="driving_region">Fahrgebiet</string>
 	<string name="about_version">Version :</string>
 	<string name="about_settings">Über</string>
 	<string name="about_settings_descr">Versionsinfo, Lizenz, Projekt-Mitglieder</string>
@@ -1492,7 +1503,7 @@
 	<string name="tip_faq_t">Auf http://code.google.com/p/osmand/wiki/FAQ finden sich häufige Fragen und Antworten.</string>
 	<string name="tip_faq">Häufige Fragen (FAQ)</string>
 	<string name="local_osm_changes_delete_all_confirm">Es sollen %1$d Änderungen von OSM-Daten gelöscht werden. Fortfahren?</string>
-	<string name="shared_string_delete_all">Alles löschen</string>
+	<string name="shared_string_delete_all">Alle löschen</string>
 	<string name="amenity_type_seamark">Schifffahrtsobjekte</string>
 	<string name="app_modes_choose_descr">Wähle sichtbare Nutzerprofile der Anwendung</string>
 	<string name="app_modes_choose">Anwendungsprofile</string>
@@ -1526,8 +1537,8 @@
 	<string name="complex_route_calculation_failed">Schnelle Routenberechnung fehlgeschlagen (%s), Rückfall auf langsame Berechnung.</string>
 	<string name="disable_complex_routing_descr">Zwei-Phasen-Routing für Auto-Navigation deaktivieren</string>
 	<string name="disable_complex_routing">Komplexes Routing deaktivieren</string>
-	<string name="shared_string_select_on_map">Auf Karte auswählen…</string>
-	<string name="shared_string_favorite">Favorit…</string>
+	<string name="shared_string_select_on_map">Auf Karte auswählen</string>
+	<string name="shared_string_favorite">Favorit</string>
 	<string name="route_preferences">Routing-Einstellungen</string>
 	<string name="route_info">Routen-Informationen</string>
 	<string name="calculate_osmand_route_without_internet">OsmAnd-Route ohne Internetverbindung berechnen</string>
@@ -1553,14 +1564,10 @@
 	<string name="arrival_distance">Zielankündigung</string>
 	<string name="arrival_distance_descr">Wann soll die Ankunft am Ziel angekündigt werden?</string>
 	<string name="int_days">Tage</string>
-	
-	<string name="import_file_favourites">GPX-Datei speichern oder zu den Favoriten importieren?</string>
-	
-	
+	<string name="import_file_favourites">Punkte als GPX-Datei speichern oder zu den Favoriten importieren?</string>
 	<string name="shared_string_my_tracks">Alle Tracks</string>
 	<string name="shared_string_my_favorites">Meine Favoriten</string>
 	<string name="shared_string_my_places">Meine Orte</string>
-	
 	<string name="loading_smth">Lade %1$s …</string>
 	<string name="map_widget_plain_time">Aktuelle Zeit</string>
 	<string name="selected_gpx_info_show">\n\nZur Darstellung auf der Karte Antippen und Halten</string>
@@ -1581,7 +1588,7 @@
 	<string name="rendering_attr_hideText_name">Text ausblenden</string>
 	<string name="rendering_attr_hideWoodScrubs_name">Wälder und Gebüsch ausblenden</string>
 	<string name="rendering_attr_buildings15zoom_name">Gebäude ab Zoomstufe 15 anzeigen</string>
-	<string name="rendering_attr_moreDetailed_name">Mehr Details in Karte</string>
+	<string name="rendering_attr_moreDetailed_name">Mehr Details</string>
 	<string name="rendering_attr_lessDetailed_name">Weniger Details in Karte</string>
 	<string name="rendering_attr_hideAccess_name">Zugangsbeschrünkungen verbergen</string>
 	<string name="rendering_attr_showAccess_name">Zugangsbeschränkungen anzeigen</string>
@@ -1813,9 +1820,9 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 
 	<string name="osmo_settings_uuid">Geräte-ID</string>
 	<string name="osmo_settings_descr">Konfigurieren der Überwachungs-Einstellungen und des persönlichen Überwachungs-Kanals</string>
-	<string name="osmo_plugin_description">"Erweiterte OpenStreetMap-basierte Live-Überwachung, siehe http://osmo.mobi … Ermöglicht die Positionsdarstellung in von einzelnen Geräten in Echtzeit. Bei anonym erstellten Gruppen sind die Optionen etwas eingeschränkt: Lebensdauer der Gruppe nur für einige Tage, auch ist keine zentrale Steuerung der Gruppe möglich. Es gibt verschiedene Einstellungen für zeitlich begrenzte oder Dauer-Aufzeichnung. Voll funktionsfähige Gruppen müssen auf der genannten Internetseite erstellt werden, auf die Gruppe haben nur registrierte Nutzer Zugriff. "</string>
-	<string name="osmo_plugin_name">OsMo-Überwachung</string>
-	<string name="osmo_settings">OsMo-Überwachung</string>
+	<string name="osmo_plugin_description">"Dieses Plugin stellt den Funktionsumfang der sogenannten OsMo Live-Überwachung bereit, siehe http://osmo.mobi.\n\nEs ermöglicht die temporäre oder dauerhafte Positionsdarstellung und Kommunikation einer Gruppe teilnehmender Geräte in Echtzeit. Es gibt verschiedene Einstellungen für zeitlich begrenzte oder Dauer-Aufzeichnung.\n\nAnonym erstellte Gruppen können spontan eingerichtet werden, hier sind die Optionen etwas eingeschränkt: Lebensdauer der Gruppe nur für einige Tage, auch ist keine zentrale Steuerung der Gruppe möglich. Voll funktionsfähige Gruppen müssen auf der genannten Internetseite erstellt werden, auf die Gruppe haben nur registrierte Nutzer Zugriff. "</string>
+	<string name="osmo_plugin_name">OsMo (OSM Monitoring)</string>
+	<string name="osmo_settings">OsMo</string>
 	<string name="osmo_io_error">OsMo Verbindungsproblem: </string>
 	<string name="osmo_mode_on">OsMo-Sitzung beenden</string>
 	<string name="osmo_mode_off">OsMo-Sitzung starten</string>
@@ -1875,7 +1882,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="osmo_auth_error_short">Anmeldung fehlgeschlagen</string>
 	<string name="osmo_auth_error">Fehler bei der OsMo-Anmeldung: %1$s.\n Möglicherweise ist der Dienst nicht verfügbar oder Ihre Anmeldung ist abgelaufen.\n Fortsetzen mit einer neuen Registrierung?</string>
 	<string name="osmo_group_by_invite">Auf Einladung beitreten</string>
-	<string name="osmo_group_information_desc">" - Alle angelegten Gruppen sind öffentlich! Für eine anonyme Verbindung bitte direkt mittels Tracker-ID verbinden.\n - In einer Gruppe können sich bis zu 16 Mitglieder anmelden.\n - Bei Inaktivität oder nur einem einzigen Mitglied über 2 Wochen wird die Gruppe gelöscht.\n - Der Zugang zu einer Gruppe kann beschränkt werden: \"nur auf Einladung\". Zur Steuerung der Gruppe benötigt man Zugang zur Admin-Konsole.\n - Zum Erstellen einer Gruppe mit abweichenden Bedingungen bitte Kontakt aufnehmen unter http://osmo.mobi"</string>
+	<string name="osmo_group_information_desc">" - Alle angelegten Gruppen sind öffentlich! Für eine anonyme Verbindung bitte direkt mittels Tracker-ID verbinden.\n - In einer privaten Gruppe können sich bis zu 8 Mitglieder anmelden.\n - Bei Inaktivität oder nur einem einzigen Mitglied über 2 Wochen wird die Gruppe gelöscht.\n - Der Zugang zu einer Gruppe kann beschränkt werden: \"nur auf Einladung\". Zur Steuerung der Gruppe benötigt man Zugang zur Admin-Konsole.\n - Zum Erstellen einer Gruppe mit abweichenden Bedingungen bitte Kontakt aufnehmen unter http://osmo.mobi"</string>
 	<string name="osmo_group_information">Bitte vor dem Erstellen von Gruppen beachten!</string>
 	<string name="osmo_not_signed_in">OsMo-Anmeldung fehlgeschlagen</string>
 	<string name="osmo_gpx_points_downloaded">OsMo-Punkte %1$s heruntergeladen.</string>
@@ -1932,23 +1939,23 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="shared_string_more">Mehr…</string>
     <string name="osmo_specify_tracker_id">Bitte ID eingeben</string>
     <string name="home">Ausgangsposition</string>
-    <string name="rendering_attr_publicTransportMode_name">Bus-, Trolleybus-, Sammeltaxi-Linien</string>
+    <string name="rendering_attr_publicTransportMode_name">Bus-, Oberleitungsbus-, Sammeltaxi-Linien</string>
 	<string name="record_plugin_name">Streckenaufzeichnung</string>
     <string name="int_hour">h</string>
     <string name="duration">Dauer</string>
     <string name="distance">Distanz</string>
     <string name="index_tours">Touren</string>
-    <string name="flat_list_waypoints">Alle</string>
+    <string name="shared_string_all">Alle</string>
     <string name="waypoints">Wegpunkte</string>
     <string name="targets">Ziele</string>
     <string name="way_alarms">Verkehrswarnungen</string>
-    <string name="record_plugin_description">Speichern Sie Ihre Tracks mit einem Klick. Zeigt die Einstellung, wie Strecken aufgezeichnet werden – in lokale GPX-Dateien oder online via Web-Service.</string>
+    <string name="record_plugin_description">"Dieses Plugin aktiviert die Funktionalität, Tracks als lokale GPX-Datei (oder auch online via Web-Service) aufzunehmen und abzuspeichern, entweder durch Antippen der GPX-Aufnahme Schaltfläche auf dem Kartenbildschirm bei Bedarf, oder durch automatisches Speichern aller navigierten Routen.\n\nAufgenommene Tracks kann man z.B. mit Bekannten teilen, oder auch zum Upload für OSM-Bearbeitungen verwenden. Sportler können gespeicherte Tracks zur Dokumentation und Analyse Ihres Trainings verwenden. Einige Analysefunktionen sind direkt in OsmAnd enthalten, wie Rundenzeiten, Durchschnittsgeschwindigkeit, etc. Aufgezeichnete Tracks können natürlich auch später zur Analyse in anderen Tools weiterverwendet werden. "</string>
     <string name="route_descr_destination">Ziel</string>
     <string name="local_index_description">Ein Element antippen, um mehr Details zu erfahren oder antippen und halten zum Deaktivieren oder Löschen. Aktuell auf dem Gerät vorhandene Daten (%1$s frei):</string>
 	<string name="text_size_descr">Karten-Schriftgröße festlegen</string>
     <string name="text_size">Schriftgröße</string>
     <string name="fav_point_dublicate">Doppelung beim Favoriten-Namen</string>
-    <string name="fav_point_dublicate_message">Name des Favoriten bereits vergeben, er wurde auf %1$s geändert.</string>
+    <string name="fav_point_dublicate_message">Der angegebene Favoritenname wird bereits verwendet, und wird auf %1$s geändert.</string>
     <string name="fav_point_emoticons_message">Der Name des Favoriten wurde auf %1$s geändert, denn Zeichenketten mit Emoticons können nicht gespeichert werden.</string>
     <string name="print_route">Route drucken</string>
     <string name="speed_limit_exceed">Toleranz für Tempolimit</string>
@@ -1969,7 +1976,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="configure_map">Karte konfigurieren</string>
     <string name="search_radius_proximity">Im Umkreis von</string>
     <string name="tip_recent_changes_1_9_t">"Änderungen in 1.9: * Verbesserte Karten-Stile mit Darstellung der Straßenoberflächen, ÖPNV-Layer und Wander-Symbolen * POI-Suche entlang einer berechneten Route * pro Sitzung eine Straße als nicht passierbar kennzeichnen * Vereinfachung des Karten-Downloads und der Karten-Updates * Audio-visuelle Benachrichtigung bei Annäherung an ein Zwischenziel  * Ausdruck der Reiseroute und der Fahr-Anweisungen * Auswertung von Abbiegespuren * Unterstützung von Android Wear Geräten * viele Änderungen an der Programm-Oberfläche * Separater Zoom nur für die Beschriftungen auf der Karte * Besondere Benachrichtigung bei Abweichen von der vorgegebenen Route * Anmeldung beim Dienst OsMo * Verbesserungen bei der Kompatibilität zu OsMo-Versionen "</string>
-    <string name="rendering_category_others">Sonstiges</string>
+    <string name="rendering_category_others">Weitere Kartenmerkmale</string>
     <string name="rendering_attr_tramRoutes_name">Straßenbahnenlinien</string>
     <string name="wake_on_voice">Bildschirm aktivieren</string>
     <string name="wake_on_voice_descr">Bildschirm bei Navigationsanweisung aktivieren (falls aus)</string>
@@ -1984,18 +1991,18 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="rendering_category_hide">Ausblenden</string>
     <string name="lock_screen_request_explanation">%1$s benötigt diese Berechtigung, um den Bildschirm auszuschalten (Energiesparfunktion).</string>
     
-    <string name="home_button">Startbildschirm</string>
+    <string name="home_button">Startseite</string>
     <string name="osmo_use_https_descr">Sichere Server-Verbindung verwenden</string>
     <string name="osmo_use_https">HTTPS nutzen</string>
     <string name="map_update">Aktualisierungen für %1$s Karten verfügbar</string>
     <string name="search_for">Suchen nach</string>
     
-    <string name="shared_string_show_all">ALLES ZEIGEN</string>
+    <string name="shared_string_show_all">ALLE ZEIGEN</string>
     <string name="coordinates">Koordinaten</string>
     <string name="error_avoid_specific_road">Es konnte keine alternative Streckenführung gefunden werden</string>
     <string name="shared_string_dismiss">Ablehnen</string>
     <string name="everything_up_to_date">Alle Daten aktuell</string>
-    <string name="use_opengl_render">OpenGL-Renderung verwenden</string>
+    <string name="use_opengl_render">OpenGL-Rendering verwenden</string>
     <string name="use_opengl_render_descr">Hardware beschleunigtes OpenGL-Rendering verwenden (Funktioniert nicht auf allen Geräten)</string>
     <string name="no_internet_connection">Herunterladen nicht möglich. Bitte die Internet-Verbindung prüfen!</string>
     <string name="download_tab_downloads">Alle Downloads</string>
@@ -2010,10 +2017,12 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="dash_download_msg">%1$s heruntergeladene Karten</string>
     <string name="dash_download_new_one">Neue Karte herunterladen</string>
     <string name="dash_download_manage">Karten verwalten</string>
-    <string name="rendering_attr_roadStyle_name">Straßen-Darstellung</string>
+    <string name="rendering_attr_roadStyle_name">Straßendarstellung</string>
+    <string name="rendering_value__name">Standard</string>
     <string name="rendering_value_default_name">Standard</string>
     <string name="rendering_value_orange_name">Orange</string>
     <string name="rendering_value_germanRoadAtlas_name">Deutscher Straßenatlas</string>
+    <string name="rendering_value_highContrastRoads_name">Kontrastreiche Straßen</string>
     <string name="traffic_warning_railways">Bahnübergang</string>
     <string name="traffic_warning_pedestrian">Fußgängerübergang</string>
     <string name="show_railway_warnings">Eisenbahnübergänge anzeigen</string>
@@ -2037,7 +2046,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="shared_string_my_location">Mein Ort</string>
     <string name="osm_editing_manage">Verwalten</string>
     
-    <string name="navigation_over_track">Navigation über Strecke starten?</string>
+    <string name="navigation_over_track">Navigation der Strecke entlang starten?</string>
     <string name="avoid_roads_msg">Sie können die Route ändern, indem Sie die Straßen auswählen, die vermieden werden sollen</string>
     <string name="enable_proxy_title">HTTP-Proxy aktivieren</string>
     <string name="enable_proxy_descr">HTTP-Proxy für alle Netzwerkanfragen einrichten</string>
@@ -2060,7 +2069,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="plugin_nautical_name">See-Karten-Ansicht</string>
     <string name="world_ski_missing">Um Ski-Karten anzeigen zu können, muss die entsprechende Offline-Karte heruntergeladen werden</string>
     <string name="nautical_maps_missing">Um See-Karten anzeigen zu können, muss die entsprechende Offline-Karte heruntergeladen werden</string>
-    <string name="get_plugin">Erhalten</string>
+    <string name="get_plugin">Erwerben</string>
     <string name="rename_failed">Umbenennen fehlgeschlagen.</string>
 	<string name="shared_string_currently_recording_track">Derzeit aufnehmender Track</string>
 	<string name="back_to_map">Zurück zur Karte</string>
@@ -2068,14 +2077,11 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 		\n\nEine Karten-Datei, die weltweit alle Seezeichen enthält, ist als einzelne Karte mit dem Namen \'Seezeichen (weltweit)\' herunterladbar.
 		\n\nDiese Ansicht kann zurückgestellt werden indem sie hier wieder deaktiviert oder in dem der \'Kartendartellung\' unter \'Karte konfigurieren\' wie gewünscht geändert wird.
 	</string>
-	<string name="plugin_ski_descr">Das Aktivieren dieser Ansicht ändert die Kartendarstellung auf \'Winter- und Skikarte\', es werden dann alle winterlichen Landschaftselemente angezeigt.
-		\n\nDiese Ansicht kann zurückgestellt werden indem sie hier wieder deaktiviert oder in dem der \'Kartendartellung\' unter \'Karte konfigurieren\' wie gewünscht geändert wird.
-	</string>
-	<string name="plugin_touringview_descr">Das Aktivieren dieser Ansicht wechselt die Kartendarstellung auf den \'Touring view\', dies ist eine speziell detaillierte Dartellung für Reisende und Berufsfahrer.
-		\n\nDiese Darstellung zeigt für jedem jedem Maßstab möglichst alle in den Daten enthaltenen Details an (insbesondere alle Straßen, Wege, Pfade, und Orientierungspunkte). Ferner werden die unterschiedlichen Straßentypen auch farblich klar unterscheidbar dargestellt, was speziell für Fahrer großer Fahzeuge unabdingbar sein kann.
-		\n\nEin spezieller Kartendownload ist nicht notwendig, die Ansicht wird aus den Standardkarten generiert.
-		\n\nDiese Ansicht kann zurückgestellt werden indem Sie hier wieder deaktiviert oder indem der \'Kartendartellung\' unter \'Karte konfigurieren\' wie gewünscht geändert wird.
-	</string>
+	<string name="plugin_ski_descr">"Dieses Plugin aktiviert die spezielle Kartendarstellung \'Winter- und Skikarte\', enthalten sind global Skiabfahrten,  Langlaufrouten, alpine Skirouten, Skilifte und Bergbahnen. Landschaftselemente werden nach winterlichen Gesichtspunkten (Assimilierung einer Schneedecke) angezeigt.\n\nDiese spezielle Kartendarstellung kann zurückgestellt werden indem sie hier wieder deaktiviert oder indem die \'Kartendartellung\' unter \'Karte konfigurieren\' wie gewünscht geändert wird. "</string>
+	<string name="plugin_touringview_descr">"Das Aktivieren dieser Ansicht wechselt die Kartendarstellung auf den \'Touring view\', dies ist eine speziell detaillierte Dartellung für Reisende und Berufsfahrer.
+\n\nDiese Darstellung zeigt für jedem jedem Maßstab möglichst alle in den Daten enthaltenen Details an (insbesondere alle Straßen, Wege, Pfade, und Orientierungspunkte). Ferner werden die unterschiedlichen Straßentypen auch farblich klar unterscheidbar dargestellt, was speziell für Fahrer großer Fahzeuge unabdingbar sein kann.
+\n\nUnd es ermöglichte spezielle Touring-Optionen wie das Anzeigen von Radrouten oder Alpinen Bergrouten.\n\nEin spezieller Kartendownload ist nicht notwendig, die Ansicht wird aus den Standardkarten generiert.
+\n\nDiese Ansicht kann zurückgestellt werden indem Sie hier wieder deaktiviert oder indem der \'Kartendartellung\' unter \'Karte konfigurieren\' wie gewünscht geändert wird. "</string>
 	<string name="shared_string_audio">Audio</string>
 	
 	
@@ -2084,7 +2090,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="notes">Notizen</string>
 	<string name="online_map">Online-Karte</string>
 	<string name="roads_only">Nur Straßen</string>
-    <string name="rendering_attr_pisteRoutes_name">Pisten</string>
+    <string name="rendering_attr_pisteRoutes_name">Skipisten</string>
 	<string name="shared_string_export">Export</string>
 	<string name="watch">Ansehen</string>
 	
@@ -2093,4 +2099,140 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="shared_string_ellipsis">…</string>
 	<string name="shared_string_selected">Ausgewählt</string>
 	<string name="shared_string_selected_lowercase">ausgewählt</string>
-	</resources>
+	<string name="shared_string_open">Offen</string>
+
+	<string name="rendering_attr_hideHouseNumbers_name">Hausnummern verbergen</string>
+	<string name="application_dir_change_warning3">Soll OsmAnd auch die Datendateien an den neuen Ort kopieren?</string>
+	<string name="specified_directiory_not_writeable">Karten konnten im angegebenen Verzeichnis nicht erstellt werden</string>
+	<string name="copying_osmand_file_failed">Das Kopieren der Dateien ist fehlgeschlagen!</string>
+	<string name="storage_directory_external">Externer Speicher</string>
+	<string name="storage_directory_multiuser">Mehrbenutzer-Speicher</string>
+	<string name="storage_directory_internal_app">Interner Anwendungsspeicher</string>
+	<string name="storage_directory_manual">Manuell spezifiziert</string>
+	<string name="storage_directory_default">Interner Speicher</string>
+	<string name="storage_directory">Kartenspeicher</string>
+	<string name="shared_string_copy">Kopieren</string>
+	<string name="filter_poi_hint">Nach Name filtern</string>
+	<string name="agps_info">A-GPS Info</string>
+	<string name="shared_string_manage">Verwalten</string>
+	<string name="shared_string_edit">Bearbeiten</string>
+	<string name="shared_string_search">Suchen</string>
+	<string name="shared_string_show_description">Beschreibung anzeigen</string>
+	<string name="shared_string_message">Nachricht</string>
+	<string name="agps_data_last_downloaded">A-GPS-Daten zuletzt heruntergeladen: %1$s</string>
+	<string name="confirm_usage_speed_cameras">In vielen Ländern (Deutschland, Frankreich, Italien und andere) ist die Verwendung von Blitzerwarnern gesetzlich nicht erlaubt. OsmAnd übernimmt keine Verantwortung im Fall von Gesetzesübertretungen. Klicken Sie nur auf Ja, wenn Sie zur Verwendung dieser Funktion berechtigt sind.</string>
+	<string name="welmode_download_maps">Karten herunterladen</string>
+	<string name="welcome_header">Willkommen</string>
+	<string name="current_route">Aktuelle Route</string>
+	<string name="mark_to_delete">Zum Löschen markieren</string>
+	<string name="osmo_grop_name_length_alert">Der Gruppenname sollte mindestens 3 Zeichen lang sein!</string>
+	<string name="local_osm_changes_upload_all_confirm">%1$d Änderungen werden jetzt zu OSM hinaufgeladen. Sind Sie sicher?</string>
+	<string name="confirmation_to_clear_history">Soll der Verlauf gelöscht werden?</string>
+	<string name="osmand_parking_hour">h</string>
+	<string name="osmand_parking_minute">min</string>
+	<string name="osmand_parking_time_left">links</string>
+	<string name="osm_changes_added_to_local_edits">Die Änderungen an den OSM-Daten wurden dem lokalen Änderungssatz hinzugefügt</string>
+	<string name="shared_string_go">Los</string>
+	<string name="osmand_parking_overdue">überfällig</string>
+	<string name="osm_edits">OSM-Änderungen</string>
+	<string name="parking_place_limited">Parkzeit begrenzt auf</string>
+	<string name="your_edits">Deine Änderungen</string>
+	<string name="waypoint_visit_after">Besuch nach</string>
+	<string name="shared_string_deselect">Abwählen</string>
+	<string name="shared_string_do_not_use">Nicht benutzen</string>
+	<string name="shared_string_deselect_all">Alles abwählen</string>
+	<string name="shared_string_unexpected_error">Ein unerwarteter Fehler ist aufgetreten!</string>
+	<string name="shared_string_collapse">Einklappen</string>
+	<string name="shared_string_address">Adresse</string>
+	<string name="shared_string_video">Video</string>
+	<string name="shared_string_photo">Foto</string>
+	<string name="shared_string_places">Orte</string>
+	<string name="welcome_select_region">Um korrekte Straßenschilder und Beschränkungen zu erhalten, bitte eine Region auswählen:</string>
+	<string name="welcome_text">OsmAnd bietet globale offline Karten und globale offline Navigation!</string>
+	<string name="waypoint_visit_before">Besuch nach</string>
+	<string name="action_create">Aktion erstellen</string>
+	<string name="action_modify">Aktion ändern</string>
+	<string name="action_delete">Aktion löschen</string>
+	<string name="drawer">Flache Liste</string>
+	<string name="shared_string_action_template">Aktion {0}</string>
+	<string name="route_points">Routenpunkte</string>
+	<string name="track_segments">Spurensegmente</string>
+	<string name="track_points">Spurenpunkte</string>
+	<string name="plugin_touringview_name">Tourenkartenansicht</string>
+	<string name="index_name_netherlands">Europa - Niederlande</string>
+	<string name="shared_string_release">Veröffentlicht</string>
+	<string name="search_poi_category_hint">Suchbegriff</string>
+    <string name="short_location_on_map">Lat %1$s\n Lon %2$s</string>
+    <string name="shared_string_logoff">Abmelden</string>
+    <string name="osmo_share_my_location">Teile meine Position</string>
+    <string name="rendering_value_disabled_name">Deaktiviert</string>
+    <string name="routing_attr_avoid_borders_name">Überfahren von Grenzen vermeiden</string>
+	<string name="routing_attr_height_name">Höhenbeschränkung</string>
+	<string name="read_full_article">Vollständigen Artikel lesen (online)</string>
+    <string name="download_wikipedia_item">Wikipedia</string>
+    <string name="local_indexes_cat_wiki">Wikipedia</string>
+    <string name="shared_string_show_details">Details anzeigen</string>
+    <string name="routing_attr_avoid_borders_description">Überqueren einer Staatsgrenze vermeiden</string>
+	<string name="routing_attr_height_description">Höhe des Fahrzeugs für Streckenberechnung angeben</string>
+    <string name="download_wikipedia_maps">Wikipedia</string>
+    <string name="use_fast_recalculation">schnelle Routen-Neuberechnung</string>
+	<string name="use_fast_recalculation_desc">Bei längeren Routen nur den Anfangsteil neu berechnen</string>
+<string name="lang_es_ar">Spanisch (Argentinien)</string>
+    <string name="lang_th">Thailändisch</string>
+    <string name="lang_ms">Malaysisch</string>
+    <string name="lang_ht">Haitianisch</string>
+    <string name="lang_gl">Galizisch</string>
+    <string name="lang_et">Estisch</string>
+    <string name="archive_wikipedia_data">Es sind veraltete inkompatible Wikipedia-Daten vorhanden. Sollen diese gesichert werden?</string>
+    <string name="download_wikipedia_files">Sollen zusätzliche Wikipedia-Daten heruntergeladen werden (%1$s MB) ?</string>
+    <string name="osm_edit_context_menu_delete">OSM-Bearbeitung löschen</string>
+    <string name="light_theme">Hell</string>
+    <string name="dark_theme">Dunkel</string>
+    <string name="lang_pms">Piemontesisch</string>
+    <string name="lang_bn">Bengalisch</string>
+    <string name="lang_tl">Tagalog</string>
+    <string name="lang_sh">Serbokroatisch</string>
+    <string name="lang_az">Aserbaidschan</string>
+    <string name="lang_br">Bretonisch</string>
+    <string name="lang_sq">Albanisch</string>
+    <string name="lang_is">Isländisch</string>
+    <string name="lang_ga">Irisch</string>
+    <string name="lang_la">Lateinisch</string>
+    <string name="lang_ku">Kurdisch</string>
+    <string name="lang_ta">Tamil</string>
+    <string name="lang_ml">Malayalam</string>
+    <string name="lang_lb">Luxemburgisch</string>
+    <string name="lang_os">Ossetisch</string>
+    <string name="lang_eo">Esperanto</string>
+    <string name="lang_nb">Norwegische Buchsprache</string>
+    <string name="lang_nn">Norwegisch (Neunorwegisch)</string>
+    <string name="rendering_value_default13_name">Standard (13)</string>
+	<string name="rendering_value_defaultTranslucentCyan_name">Standard (transparentes Cyan)</string>
+    <string name="rendering_attr_currentTrackColor_name">GPX -Trackfarbe</string>
+    <string name="rendering_attr_currentTrackWidth_name">GPX-Trackbreite</string>
+    <string name="rendering_value_red_name">Rot</string>
+    <string name="rendering_value_translucent_red_name">Transparentes Rot</string>
+    <string name="rendering_value_translucent_orange_name">Transparentes Orange</string>
+    <string name="rendering_value_yellow_name">Gelb</string>
+    <string name="rendering_value_translucent_yellow_name">Transparentes Gelb</string>
+    <string name="rendering_value_lightgreen_name">Hellgrün</string>
+    <string name="rendering_value_translucent_lightgreen_name">Transparentes Hellgrün</string>
+    <string name="rendering_value_green_name">Grün</string>
+    <string name="rendering_value_translucent_green_name">Transparentes Grün</string>
+    <string name="rendering_value_lightblue_name">Hellblau</string>
+    <string name="rendering_value_translucent_lightblue_name">Transparentes Hellblau</string>
+    <string name="rendering_value_blue_name">Blau</string>
+    <string name="rendering_value_translucent_blue_name">Transparentes Blau</string>
+    <string name="rendering_value_purple_name">Lila</string>
+    <string name="rendering_value_translucent_purple_name">Transparentes Lila</string>
+    <string name="restart_is_required">Zum Abschluss der Änderung ist ein manueller Neustart der Anwendung erforderlich.</string>
+    <string name="lang_bpy">Bishnupriya</string>
+    <string name="lang_nv">Navajo</string>
+    <string name="lang_vo">Volapük</string>
+    <string name="lang_new">Newar</string>
+    <string name="lang_ceb">Cebuano</string>
+    <string name="local_recordings_delete_all_confirm">%1$d Notizen werden gelöscht. Fortfahren?</string>
+	<string name="lang_te">Telugu</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Routenfarbe gemäß Routenscope</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Routenfarbe gemäß OSMC</string>
+    </resources>

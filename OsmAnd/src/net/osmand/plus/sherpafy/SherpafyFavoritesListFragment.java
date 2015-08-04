@@ -2,11 +2,10 @@ package net.osmand.plus.sherpafy;
 
 import java.util.List;
 
-import android.support.v4.app.ListFragment;
-import android.view.MenuItem;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.OsmAndListFragment;
 import net.osmand.plus.sherpafy.TourInformation.StageFavorite;
 import net.osmand.plus.sherpafy.TourInformation.StageFavoriteGroup;
 import net.osmand.plus.sherpafy.TourInformation.StageInformation;
@@ -14,6 +13,7 @@ import net.osmand.util.MapUtils;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
@@ -25,7 +25,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 
-public class SherpafyFavoritesListFragment extends ListFragment {
+public class SherpafyFavoritesListFragment extends OsmAndListFragment {
 	
 	OsmandApplication app;
 	private SherpafyCustomization customization;
@@ -151,8 +151,5 @@ public class SherpafyFavoritesListFragment extends ListFragment {
 		}
 	}
 
-	private OsmandApplication getMyApplication() {
-		return (OsmandApplication) getActivity().getApplication();
-	}
 
 }

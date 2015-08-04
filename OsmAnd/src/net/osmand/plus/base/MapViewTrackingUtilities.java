@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.osmand.Location;
 import net.osmand.StateChangedListener;
+import net.osmand.ValueHolder;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.IMapLocationListener;
 import net.osmand.plus.OsmAndConstants;
@@ -304,7 +305,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	}
 
 	@Override
-	public void newRouteIsCalculated(boolean newRoute) {
+	public void newRouteIsCalculated(boolean newRoute, ValueHolder<Boolean> showToast) {
 		RoutingHelper rh = app.getRoutingHelper();
 		if(newRoute && rh.isRoutePlanningMode() && mapView != null) {
 			RotatedTileBox rt = mapView.getCurrentRotatedTileBox();

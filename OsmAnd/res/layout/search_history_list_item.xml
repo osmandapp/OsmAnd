@@ -42,7 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="?android:textColorPrimary"
-                android:textSize="@dimen/dashFavNameTextSize"
+                android:textSize="@dimen/default_list_text_size"
                 tools:text="@string/lorem_ipsum" />
 
             <LinearLayout
@@ -62,13 +62,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="2dp"
                     android:textColor="?android:textColorSecondary"
-                    android:textSize="@dimen/showAllButtonTextSize"
+                    android:textSize="@dimen/default_sub_text_size"
                     tools:text="100500 km" />
 
                 <ImageView
                     android:id="@+id/type_name_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
                     android:layout_gravity="center_vertical"
                     android:src="@drawable/ic_small_group" />
 
@@ -78,7 +79,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="2dp"
                     android:textColor="?android:textColorSecondary"
-                    android:textSize="@dimen/showAllButtonTextSize"
+                    android:textSize="@dimen/default_sub_text_size"
                     tools:text="100500 km" />
             </LinearLayout>
         </LinearLayout>
@@ -88,15 +89,15 @@
             android:layout_width="@dimen/list_item_height"
             android:layout_height="@dimen/list_item_height"
             android:layout_gravity="center_vertical"
-            android:background="?attr/options_button_background"
+            android:background="?attr/dashboard_button"
             android:focusable="false"
-            android:src="?attr/ic_action_overflow"
+            android:src="@drawable/ic_overflow_menu_white"
             android:visibility="gone" />
 
         <ImageButton
             android:id="@+id/navigate_to"
-            android:layout_width="@dimen/dashListItemHeight"
-            android:layout_height="@dimen/dashListItemHeight"
+            android:layout_width="@dimen/list_item_height"
+            android:layout_height="@dimen/list_item_height"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/dashFavIconMargin"
             android:background="?attr/dashboard_button"

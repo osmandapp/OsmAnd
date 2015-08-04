@@ -1,14 +1,17 @@
 package net.osmand.osm;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 
 public class PoiCategory extends PoiFilter {
 
 	private List<PoiFilter> poiFilters = new ArrayList<PoiFilter>();
+	private Set<PoiType> basemapPoi = null;
 	private int regId;
 	private String defaultTag;
 
@@ -54,5 +57,17 @@ public class PoiCategory extends PoiFilter {
 	}
 
 	
+	public void addBasemapPoi(PoiType pt) {
+		if(basemapPoi == null) {
+			basemapPoi = new HashSet<PoiType>();
+		}
+		basemapPoi.add(pt);
+	}
 
+	public boolean containsBasemapPoi(PoiType pt) {
+		if(basemapPoi == null) {
+			return false;
+		}
+		return basemapPoi.contains(pt);
+	}
 }

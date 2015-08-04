@@ -20,6 +20,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map.Entry;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -66,15 +67,14 @@ public class BinaryInspector {
 		if(args.length == 1 && "test".equals(args[0])) {
 			in.inspector(new String[]{
 //				"-vpoi",
-				"-vmap",// "-vmapobjects", 
+				"-vmap", "-vmapobjects", 
 //				"-vrouting",
 //				"-vaddress", "-vcities","-vstreetgroups", 
 //				"-vstreets", "-vbuildings", "-vintersections", 
-				"-zoom=16",
+				"-zoom=14",
 //				"-bbox=1.74,51.17,1.75,51.16",
-				"-vstats",
-				"/Users/victorshcherb/osmand/maps/Netherlands_europe_2.obf"
-//				"/Users/victorshcherb/osmand/maps/World_basemap_2.obf"
+//				"-vstats",
+				"/Users/victorshcherb/osmand/osm-gen/032.obf"
 					});
 		} else {
 			in.inspector(args);
@@ -564,6 +564,7 @@ public class BinaryInspector {
 			BinaryMapAddressReaderAdapter.VILLAGES_TYPE,
 			BinaryMapAddressReaderAdapter.POSTCODES_TYPE
 		};
+		String lang = "ru";
 		
 		for (int j = 0; j < cityType.length; j++) {
 			int type = cityType[j];
@@ -585,7 +586,7 @@ public class BinaryInspector {
 				int size = index.preloadStreets(c, null);
 				List<Street> streets = new ArrayList<Street>(c.getStreets());
 				print(MessageFormat.format("\t\t''{0}'' [{1,number,#}], {2,number,#} street(s) size {3,number,#} bytes",
-						new Object[]{c.getEnName(), c.getId(), streets.size(), size}));
+						new Object[]{c.getName(lang), c.getId(), streets.size(), size}));
 				if(!verbose.vstreets)
 		        {
 					println("");
@@ -603,20 +604,20 @@ public class BinaryInspector {
 					final List<Street> intersections = t.getIntersectedStreets();
 				
 					println(MessageFormat.format("\t\t\t''{0}'' [{1,number,#}], {2,number,#} building(s), {3,number,#} intersections(s)",
-							new Object[]{t.getEnName(), t.getId(), buildings.size(), intersections.size()}));
+							new Object[]{t.getName(lang), t.getId(), buildings.size(), intersections.size()}));
 					
 					if (buildings != null && !buildings.isEmpty() && verbose.vbuildings) {
 						println("\t\t\t\tBuildings:");
 						for (Building b : buildings) {
 							println(MessageFormat.format("\t\t\t\t{0} [{1,number,#}]",
-									new Object[]{b.getName(true), b.getId()}));
+									new Object[]{b.getName(lang), b.getId()}));
 						}
 					}
 					
 					if (intersections != null && !intersections.isEmpty() && verbose.vintersections) {
 						print("\t\t\t\tIntersects with:");
 						for (Street s : intersections) {
-							println("\t\t\t\t\t" + s.getEnName());
+							println("\t\t\t\t\t" + s.getName(lang));
 						}
 					}
 				}
@@ -1022,8 +1023,18 @@ public class BinaryInspector {
 				new ResultMatcher<Amenity>() {
 					@Override
 					public boolean publish(Amenity object) {
-						println(object.getType().getKeyName() + " : " + object.getSubType() + " " + object.getName() + " " + object.getLocation() + " id=" + (object.getId() >> 1) + " " +
-									object.getAdditionalInfo());
+						Iterator<Entry<String, String>> it = object.getAdditionalInfo().entrySet().iterator();
+						String s = "";
+						while(it.hasNext()) {
+							Entry<String, String> e = it.next();
+							if(e.getValue().startsWith(" gz ")) {
+								s += e.getKey() +"=...";
+							} else {
+								s += e.getKey() +"=" +e.getValue();
+							}
+						}
+						
+						println(object.getType().getKeyName() + " : " + object.getSubType() + " " + object.getName() + " " + object.getLocation() + " id=" + (object.getId() >> 1) + " " + s);
 						return false;
 					}
 					@Override
@@ -1047,7 +1058,7 @@ public class BinaryInspector {
 			PoiSubType st = p.subTypes.get(i);
 			println("\t\t\t" + st.name + " " + (st.text ? "text":(" encoded " + st.possibleValues.size())));
 		}
-		req.poiTypeFilter = null;//for test only
+//		req.poiTypeFilter = null;//for test only
 		index.searchPoi(p, req);
 		
 	}

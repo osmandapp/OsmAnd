@@ -229,7 +229,7 @@
 	<string name="favorite_default_category">他人</string>
 	<string name="favourites_edit_dialog_name">名称</string>
 	<string name="favourites_edit_dialog_category">类别</string>
-	<string name="vector_map_not_needed">谢谢，不用了</string>
+	<string name="shared_string_no_thanks">谢谢，不用了</string>
 	
 	<string name="trace_rendering">渲染调试信息</string>
 	<string name="voice_not_use">不要使用</string>

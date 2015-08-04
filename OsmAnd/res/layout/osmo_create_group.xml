@@ -30,7 +30,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:text="@string/osmo_grop_name_length_alert"
-			android:textColor="@color/fab_material_red_500"/>
+			android:textColor="@color/osmbug_closed"/>
 
 		<TextView
 			android:layout_width="wrap_content"
@@ -80,13 +80,13 @@
 				android:layout_gravity="center_vertical"
 				android:layout_weight="1"
 				android:text="@string/osmo_group_information"
-				android:textSize="18sp"/>
+				android:textSize="@dimen/default_list_text_size"/>
 
 			<ImageButton
 				android:id="@+id/info"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:background="?attr/options_button_background"
+				android:background="?attr/dashboard_button"
 				android:src="@drawable/ic_action_gabout_dark"/>
 		</LinearLayout>
 
@@ -95,7 +95,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:text="@string/osmo_group_information_desc"
-			android:textSize="16sp"
+			android:textSize="@dimen/default_desc_text_size"
 			android:visibility="gone"/>
 
 

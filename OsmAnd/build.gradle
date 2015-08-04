@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
 
-// Global Paramers accepted
+// Global Parameters accepted
 // APK_NUMBER_VERSION - version number of apk
 // APK_VERSION - build number like #9999Z, for dev builds appended to app_version like 2.0.0 in no_translate.xml)
 //               flavor                 Z : M=-master, D=-design, B=-Blackberry, MD=-main-default, MQA=-main-qt-arm, MQDA=-main-qt-default-arm, S=-sherpafy
@@ -8,8 +8,8 @@ apply plugin: 'com.android.application'
 // APP_EDITION - date stamp of builds
 // APP_FEATURES - features +play_market +gps_status -parking_plugin -blackberry -free_version -amazon
 
-// TODO
-// 1. Filter fonts
+
+// 1. To be done Filter fonts
 // <unzip src="OsmAndCore_android.aar" dest=".">
 //            <patternset>
 //                <include name="assets/**/map/fonts/OpenSans/*"/>
@@ -17,10 +17,6 @@ apply plugin: 'com.android.application'
 //            </patternset>
 //        </unzip>
 // Less important
-// 2. fix_apostrophe_issues (replace match="[^=]([^\\])'" replace="\1\\\\'") res/**/strings.xml
-// 3. sherpafy/free/paid
-// 4. Release signature
-// 5. TARGET_APP_NAME, APP_EDITION uses flavor
 
 android {
 	compileSdkVersion 21
@@ -35,9 +31,9 @@ android {
 		}
 
 		publishing {
-			storeFile file("osmand_key")
+			storeFile file("/var/lib/jenkins/osmand_key")
 			storePassword System.getenv("OSMAND_APK_PASSWORD")
-			keyAlias "androiddebugkey"
+			keyAlias "osmand"
 			keyPassword System.getenv("OSMAND_APK_PASSWORD")
 		}
 	}
@@ -145,9 +141,15 @@ android {
 
 	buildTypes {
 		debug {
+		    // proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
+		    // minifyEnabled true
+		    // proguardFiles 'proguard-project.txt'
 			signingConfig signingConfigs.development
 		}
 		release {
+		    // proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
+		    // minifyEnabled true
+		    //proguardFiles 'proguard-project.txt'
 			signingConfig signingConfigs.publishing
 		}
 	}
@@ -161,8 +163,11 @@ def replaceNoTranslate(line) {
 		return line.replaceAll(">[^<]*<", ">" + System.getenv("APP_EDITION") + "<")
 	}
 	if (line.contains("\"app_version\"") && System.getenv("APK_VERSION")) {
+		return line.replaceAll(">[^<]*<", ">" + System.getenv("APK_VERSION") + "<")
+	}
+	if (line.contains("\"app_version\"") && System.getenv("APK_VERSION_SUFFIX")) {
 		// appends build number to version number for dev builds
-		return line.replaceAll("</", System.getenv("APK_VERSION") + "</")
+		return line.replaceAll("</", System.getenv("APK_VERSION_SUFFIX") + "</")
 	}
 	if (line.contains("\"versionFeatures\"") && System.getenv("APP_FEATURES")) {
 		return line.replaceAll(">[^<]*<", ">" + System.getenv("APP_FEATURES") + "<")
@@ -171,10 +176,6 @@ def replaceNoTranslate(line) {
 }
 
 task updateNoTranslate(type: Copy) {
-	inputs.property 'appName', System.getenv().get("APP_NAME")
-	inputs.property 'appEdition', System.getenv().get("APP_EDITION")
-	inputs.property 'appFeatures', System.getenv().get("APP_FEATURES")
-	inputs.property 'apkVersion', System.getenv().get("APK_VERSION")
 	from('.') {
 		include 'no_translate.xml'
 		filter {
@@ -190,14 +191,8 @@ task collectVoiceAssets(type: Sync) {
 	include "**/*.p"
 }
 
-task collectSpecialPhrasesAssets(type: Sync) {
-	from "../../resources/specialphrases"
-	into "assets/specialphrases"
-	include "*.txt"
-}
-
 task collectHelpContentsAssets(type: Sync) {
-	from "../../help"
+	from "../../help/help"
 	into "assets/help"
 	include "*.html"
 	include "images/**/*.png"
@@ -243,7 +238,6 @@ task copyStyleIcons(type: Copy) {
 
 task collectExternalResources << {}
 collectExternalResources.dependsOn collectVoiceAssets,
-		collectSpecialPhrasesAssets,
 		collectHelpContentsAssets,
 		collectRoutingResources,
 		collectRenderingStylesResources,
@@ -251,11 +245,11 @@ collectExternalResources.dependsOn collectVoiceAssets,
 		collectMiscResources,
 		copyStyleIcons,
 		updateNoTranslate
-tasks.whenTaskAdded { task ->
-	if (task.name.startsWith("generate") && task.name.endsWith("Resources")) {
-		task.dependsOn collectExternalResources
-	}
-}
+// tasks.whenTaskAdded { task ->
+//	if (task.name.startsWith("generate") && task.name.endsWith("Resources")) {
+//		task.dependsOn collectExternalResources
+//	}
+// }
 
 // Legacy core build
 import org.apache.tools.ant.taskdefs.condition.Os
@@ -275,17 +269,23 @@ task cleanupDuplicatesInCore() {
 	// doesn't work for legacy debug builds
 	doLast {
 		file("libgnustl/armeabi").mkdirs()
-		println file("libs/armeabi/libgnustl_shared.so").renameTo(file("libgnustl/armeabi/libgnustl_shared.so"))
+		file("libs/armeabi/libgnustl_shared.so").renameTo(file("libgnustl/armeabi/libgnustl_shared.so"))
 		file("libgnustl/armeabi-v7a").mkdirs()
-		println file("libs/armeabi-v7a/libgnustl_shared.so").renameTo(file("libgnustl/armeabi-v7a/libgnustl_shared.so"))
+		file("libs/armeabi-v7a/libgnustl_shared.so").renameTo(file("libgnustl/armeabi-v7a/libgnustl_shared.so"))
 		file("libgnustl/mips").mkdirs()
-		println file("libs/mips/libgnustl_shared.so").renameTo(file("libgnustl/mips/libgnustl_shared.so"))
+		file("libs/mips/libgnustl_shared.so").renameTo(file("libgnustl/mips/libgnustl_shared.so"))
 		file("libgnustl/x86").mkdirs()
-		println file("libs/x86/libgnustl_shared.so").renameTo(file("libgnustl/x86/libgnustl_shared.so"))
+		file("libs/x86/libgnustl_shared.so").renameTo(file("libgnustl/x86/libgnustl_shared.so"))
 	}
 }
 tasks.withType(JavaCompile) {
-	compileTask -> compileTask.dependsOn << [buildOsmAndCore, cleanupDuplicatesInCore]
+	compileTask -> compileTask.dependsOn << [collectExternalResources, buildOsmAndCore, cleanupDuplicatesInCore]
+}
+
+clean.dependsOn 'cleanNoTranslate'
+
+task cleanNoTranslate() {
+    delete ('res/values/no_translate.xml')
 }
 
 repositories {
@@ -301,21 +301,22 @@ repositories {
 
 dependencies {
 	compile project(path: ":OsmAnd-java", configuration: "android")
+//    compile project(":eclipse-compile:appcompat")
 	compile fileTree(
 			dir: "libs",
 			include: ["*.jar"],
 			exclude: [
 					"QtAndroid-bundled.jar",
 					"QtAndroidAccessibility-bundled.jar",
-					"android-support*.jar",
 					"OsmAndCore_android.jar",
 					"OsmAndCore_wrapper.jar"])
-	compile "com.github.ksoichiro:android-observablescrollview:1.5.0"
-	compile "com.android.support:appcompat-v7:21.0.3"
-	compile "com.github.shell-software:fab:1.0.5"
+	// compile "com.github.ksoichiro:android-observablescrollview:1.5.0"
+	 compile "com.android.support:appcompat-v7:22.2.1"
+	// compile "com.github.shell-software:fab:1.0.5"
 	legacyCompile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@jar"
 	qtcoredebugCompile "net.osmand:OsmAndCore_androidNativeDebug:0.1-SNAPSHOT@aar"
 	qtcoredebugCompile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"
 	qtcoreCompile "net.osmand:OsmAndCore_androidNativeRelease:0.1-SNAPSHOT@aar"
 	qtcoreCompile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"
+	compile 'com.android.support:design:22.2.1'
 }

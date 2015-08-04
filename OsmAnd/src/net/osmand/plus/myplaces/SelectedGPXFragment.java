@@ -15,6 +15,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
@@ -24,9 +25,12 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.OsmAndListFragment;
 import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.dialogs.DirectionsDialogs;
+import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.util.Algorithms;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -37,7 +41,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.ListFragment;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.PopupMenu;
 import android.text.Html;
@@ -56,7 +59,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 
-public class SelectedGPXFragment extends ListFragment {
+public class SelectedGPXFragment extends OsmAndListFragment {
 	public static final String ARG_TO_EXPAND_TRACK_INFO = "ARG_TO_EXPAND_TRACK_INFO";
 	public static final String ARG_TO_FILTER_SHORT_TRACKS = "ARG_TO_FILTER_SHORT_TRACKS";
 	public static final String ARG_TO_HIDE_CONFIG_BTN = "ARG_TO_HIDE_CONFIG_BTN";
@@ -106,7 +109,7 @@ public class SelectedGPXFragment extends ListFragment {
 		super.onResume();
 		updateContent();
 		updateEnable = true;
-		if(getGpx().showCurrentTrack && filterType() == GpxDisplayItemType.TRACK_POINTS) {
+		if(getGpx() != null && getGpx().showCurrentTrack && filterType() == GpxDisplayItemType.TRACK_POINTS) {
 			startHandler();
 		}
 	}
@@ -121,8 +124,8 @@ public class SelectedGPXFragment extends ListFragment {
 
 
 	protected List<GpxDisplayGroup> filterGroups(GpxDisplayItemType type) {
-		List<GpxDisplayGroup> result = ((TrackActivity)getActivity()).getResult();
-		List<GpxDisplayGroup> groups = new ArrayList<GpxSelectionHelper.GpxDisplayGroup>(); 
+		List<GpxDisplayGroup> result = ((TrackActivity) getActivity()).getResult();
+		List<GpxDisplayGroup> groups = new ArrayList<GpxSelectionHelper.GpxDisplayGroup>();
 		for (GpxDisplayGroup group : result) {
 			boolean add = group.getType() == type || type == null;
 			if (isArgumentTrue(ARG_TO_FILTER_SHORT_TRACKS)) {
@@ -154,7 +157,11 @@ public class SelectedGPXFragment extends ListFragment {
 	protected void updateContent() {
 		adapter.clear();
 		List<GpxSelectionHelper.GpxDisplayGroup> groups = filterGroups(filterType());
-		adapter.addAll(flatten(groups));
+		adapter.setNotifyOnChange(false);
+		for(GpxDisplayItem i: flatten(groups)) {
+			adapter.add(i);
+		}
+		adapter.setNotifyOnChange(true);
 		adapter.notifyDataSetChanged();
 	}
 
@@ -223,18 +230,19 @@ public class SelectedGPXFragment extends ListFragment {
 		FavouritesDbHelper fdb = app.getFavorites();
 		for(GpxDisplayItem i : modifiableList) {
 			if (i.locationStart != null) {
-				FavouritePoint fp = new FavouritePoint(i.locationStart.lat, i.locationStart.lon, i.locationStart.name,
+				FavouritePoint fp = new FavouritePoint(i.locationStart.lat, i.locationStart.lon, i.name,
 						category);
-				fdb.addFavourite(fp);
+				fdb.addFavourite(fp, false);
 			}
 		}
+		fdb.saveCurrentPointsIntoFile();
 	}
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		menu.clear();
 		((TrackActivity) getActivity()).getClearToolbar(false);
-		if (getGpx().path != null && !getGpx().showCurrentTrack) {
+		if (getGpx() != null && getGpx().path != null && !getGpx().showCurrentTrack) {
 			MenuItem item = menu.add(R.string.shared_string_share).setIcon(R.drawable.ic_action_gshare_dark)
 					.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 						@Override
@@ -260,12 +268,18 @@ public class SelectedGPXFragment extends ListFragment {
 		final List<GpxDisplayGroup> groups = filterGroups(GpxDisplayItemType.TRACK_SEGMENT);
 
 		View view = getMyActivity().getLayoutInflater().inflate(R.layout.selected_track_edit, null);
+		
+		final TIntArrayList list = new TIntArrayList();
+        final Spinner colorSpinner = (Spinner) view.findViewById(R.id.ColorSpinner);
+        ColorDialogs.setupColorSpinner(getActivity(), getGpx().getColor(0), colorSpinner, list);
+		
 		final Spinner sp = (Spinner) view.findViewById(R.id.Spinner);
 		Builder bld = new AlertDialog.Builder(getMyActivity());
 		final List<Double> distanceSplit = new ArrayList<Double>();
 		final TIntArrayList timeSplit = new TIntArrayList();
 		if(groups.size() == 0) {
 			sp.setVisibility(View.GONE);
+			view.findViewById(R.id.GpxSpinnerRow).setVisibility(View.GONE);
 		} else {
 			sp.setVisibility(View.VISIBLE);
 
@@ -317,10 +331,23 @@ public class SelectedGPXFragment extends ListFragment {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(groups.get(0).getGpx(), vis.isChecked(), true);
+				SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(getGpx(), vis.isChecked(), false);
+				int clr = list.get(colorSpinner.getSelectedItemPosition());
+				if(clr != 0 ) {
+					sf.getModifiableGpxFile().setColor(clr);
+					sf.processPoints();
+				}
 				if (groups.size() > 0) {
 					updateSplit(groups, distanceSplit, timeSplit, sp.getSelectedItemPosition(), vis.isChecked() ? sf
 							: null);
+				}
+				if(vis.isChecked() && sf.getGpxFile() != null) {
+					WptPt wpt = sf.getGpxFile().findPointToShow();
+					if (wpt != null) {
+						app.getSettings().setMapLocationToShow(wpt.getLatitude(), wpt.getLongitude(), 15, null, false,
+								false); //$NON-NLS-1$
+						MapActivity.launchMapActivityMoveToTop(activity);
+					}
 				}
 			}
 		});
@@ -426,7 +453,7 @@ public class SelectedGPXFragment extends ListFragment {
 					if(groupColor == 0) {
 						groupColor = getMyActivity().getResources().getColor(R.color.gpx_track);
 					}
-					icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getMyActivity(),  groupColor));
+					icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getMyActivity(),  groupColor, 0));
 				}
 			}
 			row.setTag(child);
@@ -458,7 +485,7 @@ public class SelectedGPXFragment extends ListFragment {
 			OsmandSettings settings = app.getSettings();
 			final PopupMenu optionsMenu = new PopupMenu(getActivity(), v);
 			DirectionsDialogs.createDirectionActionsPopUpMenu(optionsMenu, location, child.locationStart, name, settings.getLastKnownMapZoom(),
-					getActivity(), true, false);
+					getActivity(), false, false);
 			optionsMenu.show();
 //		} else {
 //			child.expanded = !child.expanded;

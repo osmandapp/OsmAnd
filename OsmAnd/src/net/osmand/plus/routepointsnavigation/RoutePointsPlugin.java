@@ -31,7 +31,6 @@ import net.osmand.util.MapUtils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Paint;
 import android.os.AsyncTask;
 import android.text.format.DateFormat;
 import android.view.Gravity;
@@ -191,17 +190,12 @@ public class RoutePointsPlugin extends OsmandPlugin {
 		return app.getString(R.string.route_plugin_name);
 	}
 
-	@Override
-	public boolean init(OsmandApplication app, Activity activity) {
-		return true;
-	}
-
 	private void registerWidget(MapActivity activity) {
 		MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();
 		if (mapInfoLayer != null) {
 			routeStepsControl = createRouteStepsInfoControl(activity);
 			mapInfoLayer.registerSideWidget(routeStepsControl,
-					R.drawable.ic_action_signpost_dark, R.drawable.widget_signpost, R.string.map_widget_route_points, "route_steps", false, 8);
+					R.drawable.ic_action_signpost_dark,  R.string.map_widget_route_points, "route_steps", false, 8);
 			mapInfoLayer.recreateControls();
 		}
 	}

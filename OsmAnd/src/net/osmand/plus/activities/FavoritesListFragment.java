@@ -3,8 +3,20 @@
  */
 package net.osmand.plus.activities;
 
-import java.util.Comparator;
-import java.util.List;
+import android.app.Activity;
+import android.content.Intent;
+import android.support.v7.widget.PopupMenu;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -18,25 +30,11 @@ import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.util.MapUtils;
-import android.app.Activity;
-import android.content.Intent;
-import android.support.v4.app.ListFragment;
-import android.support.v7.widget.PopupMenu;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
 
-/**
- *
- */
-public class FavoritesListFragment extends ListFragment implements SearchActivityChild, OsmAndCompassListener {
+import java.util.Comparator;
+import java.util.List;
+
+public class FavoritesListFragment extends OsmAndListFragment implements SearchActivityChild, OsmAndCompassListener {
 
 	public static final String SELECT_FAVORITE_POINT_INTENT_KEY = "SELECT_FAVORITE_POINT_INTENT_KEY";
 	public static final int SELECT_FAVORITE_POINT_RESULT_OK = 1;
@@ -46,15 +44,27 @@ public class FavoritesListFragment extends ListFragment implements SearchActivit
 	private boolean selectFavoriteMode;
 	private OsmandSettings settings;
 	private boolean compassRegistered;
-	
+
 
 
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
+		Intent intent = activity.getIntent();
+		if (intent != null) {
+			selectFavoriteMode = intent.hasExtra(SELECT_FAVORITE_POINT_INTENT_KEY);
+			if (intent.hasExtra(SearchActivity.SEARCH_LAT) && intent.hasExtra(SearchActivity.SEARCH_LON)) {
+				double lat = intent.getDoubleExtra(SearchActivity.SEARCH_LAT, 0);
+				double lon = intent.getDoubleExtra(SearchActivity.SEARCH_LON, 0);
+				if (lat != 0 || lon != 0) {
+					favouritesAdapter.location = new LatLon(lat, lon);
+				}
+			}
+		}
 		settings = ((OsmandApplication) getApplication()).getSettings();
 		OsmandApplication app = (OsmandApplication) getApplication();
-		favouritesAdapter = new FavouritesAdapter(activity, app.getFavorites().getFavouritePoints());
+		favouritesAdapter = new FavouritesAdapter(activity, app.getFavorites().getFavouritePoints(),
+				!selectFavoriteMode);
 		setListAdapter(favouritesAdapter);
 		setHasOptionsMenu(true);
 	}
@@ -66,17 +76,6 @@ public class FavoritesListFragment extends ListFragment implements SearchActivit
 	@Override
 	public void onResume() {
 		super.onResume();
-		Intent intent = getActivity().getIntent();
-		if (intent != null) {
-			selectFavoriteMode = intent.hasExtra(SELECT_FAVORITE_POINT_INTENT_KEY);
-			if (intent.hasExtra(SearchActivity.SEARCH_LAT) && intent.hasExtra(SearchActivity.SEARCH_LON)) {
-				double lat = intent.getDoubleExtra(SearchActivity.SEARCH_LAT, 0);
-				double lon = intent.getDoubleExtra(SearchActivity.SEARCH_LON, 0);
-				if (lat != 0 || lon != 0) {
-					favouritesAdapter.location = new LatLon(lat, lon);
-				}
-			}
-		}
 
 		if (favouritesAdapter.location == null && getActivity() instanceof SearchActivity) {
 			favouritesAdapter.location = ((SearchActivity) getActivity()).getSearchPoint();
@@ -104,9 +103,9 @@ public class FavoritesListFragment extends ListFragment implements SearchActivit
 		if (favouritesAdapter != null) {
 			favouritesAdapter.updateLocation(l);
 		}
-		
+
 	}
-	
+
 	@Override
 	public void onPause() {
 		super.onPause();
@@ -133,11 +132,7 @@ public class FavoritesListFragment extends ListFragment implements SearchActivit
 
 		if (!isSelectFavoriteMode()) {
 			FavouritePoint point = favouritesAdapter.getItem(position);
-			LatLon location = new LatLon(point.getLatitude(), point.getLongitude());
-			final PopupMenu optionsMenu = new PopupMenu(getActivity(), v);
-			DirectionsDialogs.createDirectionActionsPopUpMenu(optionsMenu, location, point, point.getPointDescription(), settings.getLastKnownMapZoom(),
-					getActivity(), true, false);
-			optionsMenu.show();
+			showItemPopupOptionsMenu(point, getActivity(), v);
 		} else {
 			Intent intent = getActivity().getIntent();
 			intent.putExtra(SELECT_FAVORITE_POINT_INTENT_KEY, favouritesAdapter.getItem(position));
@@ -153,6 +148,15 @@ public class FavoritesListFragment extends ListFragment implements SearchActivit
 		private boolean searchAroundLocation;
 		private int screenOrientation;
 		private Float heading;
+		private boolean shoudShowMenuButton;
+
+		public FavouritesAdapter(Activity activity, List<FavouritePoint> list,
+								 boolean shoudShowMenuButton) {
+			super(activity, R.layout.favorites_list_item, list);
+			this.activity = activity;
+			this.app = ((OsmandApplication) activity.getApplication());
+			this.shoudShowMenuButton = shoudShowMenuButton;
+		}
 
 		public LatLon getLocation() {
 			return location;
@@ -179,12 +183,6 @@ public class FavoritesListFragment extends ListFragment implements SearchActivit
 			});
 		}
 
-		public FavouritesAdapter(Activity activity, List<FavouritePoint> list) {
-			super(activity, R.layout.favorites_list_item, list);
-			this.activity = activity;
-			this.app = ((OsmandApplication) activity.getApplication());
-		}
-
 		public String getName(FavouritePoint model) {
 			return model.getName();
 		}
@@ -193,7 +191,7 @@ public class FavoritesListFragment extends ListFragment implements SearchActivit
 		public View getView(int position, View convertView, ViewGroup parent) {
 			View row = convertView;
 			if (row == null) {
-				LayoutInflater inflater = activity.getLayoutInflater();
+				LayoutInflater inflater = activity.getLayoutInflater(); // favourite dank
 				row = inflater.inflate(R.layout.favorites_list_item, parent, false);
 			}
 
@@ -201,22 +199,37 @@ public class FavoritesListFragment extends ListFragment implements SearchActivit
 			TextView distanceText = (TextView) row.findViewById(R.id.distance);
 			ImageView icon = (ImageView) row.findViewById(R.id.favourite_icon);
 			ImageView direction = (ImageView) row.findViewById(R.id.direction);
+			ImageView giImage= (ImageView)row.findViewById(R.id.group_image);
 			direction.setVisibility(View.VISIBLE);
 			final FavouritePoint favorite = getItem(position);
+			if (shoudShowMenuButton) {
+				ImageButton options = (ImageButton) row.findViewById(R.id.options);
+				options.setFocusable(false);
+				options.setImageDrawable(((OsmandApplication) activity.getApplication())
+						.getIconsCache().getContentIcon(R.drawable.ic_overflow_menu_white));
+				options.setVisibility(View.VISIBLE);
+				options.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						showItemPopupOptionsMenu(favorite, activity, v);
+					}
+				});
+			}
 			if (!favorite.getCategory().isEmpty()) {
-				row.findViewById(R.id.group_image).setVisibility(View.VISIBLE);
+				giImage.setVisibility(View.VISIBLE);
+				giImage.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.ic_small_group));
 			} else {
-				row.findViewById(R.id.group_image).setVisibility(View.GONE);
+				giImage.setVisibility(View.GONE);
 			}
 			((TextView) row.findViewById(R.id.group_name)).setText(favorite.getCategory());
 
-			icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(activity, favorite.getColor()));
-			DashLocationFragment.updateLocationView(!searchAroundLocation, location, heading, direction, distanceText, 
+			icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(activity, favorite.getColor(), 0));
+			DashLocationFragment.updateLocationView(!searchAroundLocation, location, heading, direction, distanceText,
 					favorite.getLatitude(), favorite.getLongitude(), screenOrientation, app, activity);
-			
+
 			name.setText(getName(favorite));
 			final CheckBox ch = (CheckBox) row.findViewById(R.id.check_item);
-			row.findViewById(R.id.favourite_icon).setVisibility(View.VISIBLE);
+			icon.setVisibility(View.VISIBLE);
 			ch.setVisibility(View.GONE);
 			return row;
 		}
@@ -229,14 +242,24 @@ public class FavoritesListFragment extends ListFragment implements SearchActivit
 
 	@Override
 	public void updateCompassValue(float value) {
-		// 99 in next line used to one-time initalize arrows (with reference vs. fixed-north direction) on non-compass
+		// 99 in next line used to one-time initialize arrows (with reference vs. fixed-north direction) on non-compass
 		// devices
 		float lastHeading = favouritesAdapter.heading != null ? favouritesAdapter.heading : 99;
 		favouritesAdapter.heading = value;
-		if (favouritesAdapter.heading != null && Math.abs(MapUtils.degreesDiff(lastHeading, favouritesAdapter.heading)) > 5) {
+		if (Math.abs(MapUtils.degreesDiff(lastHeading, favouritesAdapter.heading)) > 5) {
 			favouritesAdapter.notifyDataSetChanged();
 		} else {
 			favouritesAdapter.heading = lastHeading;
 		}
+	}
+
+	public static void showItemPopupOptionsMenu(FavouritePoint point, Activity activity, View view) {
+		LatLon location = new LatLon(point.getLatitude(), point.getLongitude());
+		final PopupMenu optionsMenu = new PopupMenu(activity, view);
+		DirectionsDialogs.createDirectionActionsPopUpMenu(optionsMenu, location,
+				point, point.getPointDescription(),
+				((OsmandApplication) activity.getApplication()).getSettings().getLastKnownMapZoom(),
+				activity, true, false);
+		optionsMenu.show();
 	}
 }

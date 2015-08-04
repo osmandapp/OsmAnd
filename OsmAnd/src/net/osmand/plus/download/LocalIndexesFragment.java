@@ -36,7 +36,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
@@ -195,7 +194,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 				return performBasicOperation(resId, info);
 			}
 		};
-		if(info.getType() == LocalIndexType.MAP_DATA || info.getType() == LocalIndexType.SRTM_DATA){
+		if(info.getType() == LocalIndexType.MAP_DATA || info.getType() == LocalIndexType.SRTM_DATA || 
+				info.getType() == LocalIndexType.WIKI_DATA){
 			if(!info.isBackupedData()){
 				adapter.item(R.string.local_index_mi_backup).listen(listener).position( 1).reg();
 			}
@@ -229,7 +229,10 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 				}
 			});
 			confirm.setNegativeButton(R.string.shared_string_no, null);
-			confirm.setMessage(getString(R.string.delete_confirmation_msg, info.getFileName()));
+			String fn = FileNameTranslationHelper.getFileName(getActivity(),
+					getMyApplication().getResourceManager().getOsmandRegions(),
+					info.getFileName());
+			confirm.setMessage(getString(R.string.delete_confirmation_msg, fn));
 			confirm.show();
 		} else if (resId == R.string.local_index_mi_backup) {
 			new LocalIndexOperationTask(BACKUP_OPERATION).execute(info);
@@ -338,6 +341,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			File parent = new File(i.getPathToData()).getParentFile();
 			if(i.getType() == LocalIndexType.SRTM_DATA){
 				parent = getMyApplication().getAppPath(IndexConstants.SRTM_INDEX_DIR);
+			} else if(i.getType() == LocalIndexType.WIKI_DATA){
+				parent = getMyApplication().getAppPath(IndexConstants.WIKI_INDEX_DIR);
 			} else if(i.getType() == LocalIndexType.MAP_DATA){
 				parent = getMyApplication().getAppPath(IndexConstants.MAPS_PATH);
 			} else if(i.getType() == LocalIndexType.TILES_DATA){
@@ -454,7 +459,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			return true;
 		}
 		selectedItems.add(child);
-		listAdapter.notifyDataSetInvalidated();
+		listAdapter.notifyDataSetChanged();
 		return true;
 	}
 	
@@ -924,6 +929,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			}
 			TextView viewName = ((TextView) v.findViewById(R.id.local_index_name));
 			ImageButton options = (ImageButton) v.findViewById(R.id.options);
+			options.setImageDrawable(getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_overflow_menu_white));
 			options.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -1013,8 +1019,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			String mapName = FileNameTranslationHelper.getFileName(ctx,
 					((OsmandApplication) getDownloadActivity().getApplication()).getResourceManager().getOsmandRegions(),
 					child.getFileName());
-			if (mapDescr.length() > 0){
-				 return mapDescr + " - " + mapName;
+			if (mapDescr.length() > 0) {
+				return mapName + " - " + mapDescr;
 			} else {
 				return mapName;
 			}

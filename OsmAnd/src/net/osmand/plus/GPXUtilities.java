@@ -1,3 +1,4 @@
+
 package net.osmand.plus;
 
 import java.io.BufferedInputStream;
@@ -31,7 +32,6 @@ import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -306,9 +306,9 @@ public class GPXUtilities {
 			// 5. Max speed and Average speed, if any. Average speed is NOT overall (effective) speed, but only calculated for "moving" periods.
 			if(speedCount > 0) {
 				if(timeMoving > 0){
-					avgSpeed = (float) (totalDistanceMoving / timeMoving * 1000);
+					avgSpeed = (float)totalDistanceMoving / (float)timeMoving * 1000f;
 				} else {
-					avgSpeed = (float) (totalSpeedSum / speedCount);
+					avgSpeed = (float)totalSpeedSum / (float)speedCount;
 				}
 			} else {
 				avgSpeed = -1;
@@ -532,22 +532,28 @@ public class GPXUtilities {
 			return false;
 		}
 		
-		public List<List<WptPt>> processRoutePoints() {
-			List<List<WptPt>> tpoints = new ArrayList<List<WptPt>>();
+		public List<TrkSegment> processRoutePoints() {
+			List<TrkSegment> tpoints = new ArrayList<TrkSegment>();
 			if (routes.size() > 0) {
 				for (Route r : routes) {
-					tpoints.add(r.points);
+					TrkSegment sgmt = new TrkSegment();
+					tpoints.add(sgmt);
+					sgmt.points.addAll(r.points);
 				}
 			}
 			return tpoints;
 		}
 
-		public List<List<WptPt>> proccessPoints() {
-			List<List<WptPt>> tpoints = new ArrayList<List<WptPt>>();
+		public List<TrkSegment> proccessPoints() {
+			List<TrkSegment> tpoints = new ArrayList<TrkSegment>();
 			for (Track t : tracks) {
+				int trackColor = t.getColor(getColor(0));
 				for (TrkSegment ts : t.segments) {
 					if (ts.points.size() > 0) {
-						tpoints.add(ts.points);
+						TrkSegment sgmt = new TrkSegment();
+						tpoints.add(sgmt);
+						sgmt.points.addAll(ts.points);
+						sgmt.setColor(trackColor);
 					}
 				}
 			}
@@ -730,7 +736,7 @@ public class GPXUtilities {
 		writeNotNullText(serializer, "desc", p.desc);
 		if(p.link != null) {
 			serializer.startTag(null, "link");
-			serializer.attribute(null, "link", p.link);
+			serializer.attribute(null, "href", p.link);
 			serializer.endTag(null, "link");
 		}
 		writeNotNullText(serializer, "type", p.category);

@@ -9,14 +9,14 @@
 	<string name="poi_beverages">Drankwinkel</string>
 	<string name="poi_butcher">Vleesmarkt</string>
 	<string name="poi_deli">Delicatessenwinkel</string>
-	<string name="poi_shop_farm">Boerderijwinkel</string>
+	<string name="poi_farm">Boerderijwinkel</string>
 	<string name="poi_greengrocer">Groentewinkel</string>
 	<string name="poi_seafood">Viswinkel</string>
 	<string name="poi_confectionery">Banketbakkerij</string>
 	<string name="poi_military_nuclear_explosion_site">Kernexplosiesite</string>
 <string name="poi_ice_cream">IJssalon</string>
 	<string name="poi_supermarket">Supermarkt</string>
-	<string name="poi_shop_tea">Theewinkel</string>
+	<string name="poi_tea">Theewinkel</string>
 	<string name="poi_dairy">Zuivelwinkel</string>
 	<string name="poi_vending_machine">Verkoopautomaat</string>
 
@@ -33,7 +33,7 @@
 	<string name="poi_carpet">Tapijtwinkel</string>
 	<string name="poi_chemist">Drogisterij</string>
 	<string name="poi_clothes">Kledingwinkel</string>
-	<string name="poi_children_clothes">Kinderkledingwinkel</string>
+	<string name="poi_child_clothes">Kinderkledingwinkel</string>
 	<string name="poi_shoes">Schoenenwinkel</string>
 	<string name="poi_computer">Computerwinkel</string>
 	<string name="poi_copyshop">Kopieerzaak</string>
@@ -87,8 +87,8 @@
 	<string name="poi_window_blind">Rolluikenwinkel</string>
 	<string name="poi_department_store">Warenhuis</string>
 	<string name="poi_electronics">Elektronica-winkel</string>
-	<string name="poi_car_shop">Autohandelaar</string>
-	<string name="poi_car_parts_shop">Auto-onderdelenwinkel</string>
+	<string name="poi_car">Autohandelaar</string>
+	<string name="poi_car_parts">Auto-onderdelenwinkel</string>
 	<string name="poi_atv">Quad-winkel</string>
 	<string name="poi_cosmetics">Cosmeticazaak</string>
 	<string name="poi_marketplace">Marktplaats</string>
@@ -108,7 +108,7 @@
 	<string name="poi_emergency_access_point">Nood-toegangspunt</string>
 
 	<string name="poi_ford">Doorwaadbare plaats</string>
-	<string name="poi_mountain_pass">Bergpas</string>
+	<string name="poi_mountain_pass_yes">Bergpas</string>
 	<string name="poi_gate">Poort</string>
 	<string name="poi_city_wall">Stadsmuur</string>
 	<string name="poi_lift_gate">Liftpoort</string>
@@ -135,12 +135,11 @@
 	<string name="poi_bus_station">Busstation</string>
 	<string name="poi_railway_station">Treinstation</string>
 	<string name="poi_railway_platform">Perron</string>
-	<string name="poi_railway_halt">Treinhalte (verouderd)</string>
 	<string name="poi_railway_subway_entrance">Metro-ingang</string>
 	<string name="poi_subway_station">Metrostation</string>
 	<string name="poi_taxi">Taxistandplaats</string>
 
-	<string name="poi_airport">Luchthaven</string>
+	<string name="poi_aerodrome">Luchthaven</string>
 	<string name="poi_helipad">Helikopterplatform</string>
 	<string name="poi_runway">Landingsbaan</string>
 	<string name="poi_aeroway_terminal">Terminal</string>
@@ -210,7 +209,7 @@
 	<string name="poi_estate_agent">Vastgoedmakelaar</string>
 	<string name="poi_lawyer">Advocaat</string>
 	<string name="poi_ngo">NGO</string>
-	<string name="poi_town_hall">Stadhuis</string>
+	<string name="poi_townhall">Stadhuis</string>
 	<string name="poi_advertising_agency">Reclamebureau</string>
 	<string name="poi_educational_institution">Onderwijsinstelling</string>
 	<string name="poi_architect">Architectenkantoor</string>
@@ -223,7 +222,7 @@
 	<string name="poi_memorial">Gedenkteken</string>
 	<string name="poi_archaeological_site">Archeologische site</string>
 	<string name="poi_battlefield">Slagveld</string>
-	<string name="poi_cannon">Historisch kanon</string>
+	<string name="poi_historic_cannon">Historisch kanon</string>
 	<string name="poi_castle">Kasteel</string>
 	<string name="poi_city_gate">Stadspoort</string>
 	<string name="poi_fort">Fort</string>
@@ -434,7 +433,7 @@
 	<string name="poi_lock_gate">Schutsluis</string>
 	<string name="poi_waterway_turning_point">Zwaaikom</string>
 	<string name="poi_weir">Stuw</string>
-	<string name="poi_water_mill">Watermolen</string>
+	<string name="poi_watermill">Watermolen</string>
 
 	<string name="poi_power_substation">Onderstation</string>
 	<string name="poi_power_transformer">Transformator</string>
@@ -557,12 +556,8 @@
 	<string name="poi_osmwiki">Wikipedia</string>
 	<string name="poi_user_defined_other">door de gebruiker gedefinieerd</string>
 	
-	<string name="poi_farm">Boerderijwinkel</string>
 	<string name="poi_wine">Wijnhandel</string>
 
-	<string name="poi_child_clothes">Kinderkleding</string>
-	<string name="poi_car">Auto dealer</string>
-	<string name="poi_car_parts">Auto onderdelen</string>
 	<string name="poi_public_transport_stop_position">Halte openbaar vervoer</string>
 	<string name="poi_halt">Station</string>
 	<string name="poi_railway_buffer_stop">Spoor stootblok</string>
@@ -684,7 +679,7 @@
 	<string name="poi_military_barracks">Kazerne</string>
 	<string name="poi_military_danger_area">Gevaarlijke gebied</string>
 	<string name="poi_military_range">Militaire schietbaan</string>
-	<string name="poi_shop_food">Supermarkt</string>
+	<string name="poi_shop_food">Algemene voeding</string>
 	<string name="poi_road_obstacle">Weg obstakels</string>
 		<string name="poi_filling_station">Tankstation</string>
 		<string name="poi_public_transport">Openbaar vervoer</string>
@@ -692,4 +687,83 @@
 		<string name="poi_water_transport">Vervoer over water</string>
 		<string name="poi_bicycle_transport">Transportfiets</string>
 		<string name="poi_aerialway_transport">Vervoer door de lucht</string>
-	</resources>
+	<string name="poi_sightseeing">Toeristische attractie</string>
+		<string name="poi_accomodation">Overnachting</string>
+		<string name="poi_internet_access">Internet-toegang</string>
+	<string name="poi_club">Club</string>
+	<string name="poi_cafe_and_restaurant">Café en restaurant</string>
+	<string name="poi_craft">Ambacht</string>
+	<string name="poi_charity">Goede doelen-winkel</string>
+	<string name="poi_medical_supply">Medische artikelen</string>
+	<string name="poi_photo">Fotowinkel</string>
+	<string name="poi_fuel_diesel">Diesel</string>
+	<string name="poi_fuel_gtl_diesel">GTL-diesel</string>
+	<string name="poi_fuel_hgv_diesel">Vrachtauto-diesel</string>
+	<string name="poi_fuel_biodiesel">Biodiesel</string>
+	<string name="poi_fuel_lpg">LPG</string>
+	<string name="poi_fuel_octane_80">Octaan 80</string>
+	<string name="poi_fuel_octane_91">Octaan 91</string>
+	<string name="poi_fuel_octane_92">Octaan 92</string>
+	<string name="poi_fuel_octane_95">Octaan 95</string>
+	<string name="poi_fuel_octane_98">Octaan 98</string>
+	<string name="poi_fuel_octane_100">Octaan 100</string>
+	<string name="poi_fuel_cng">CNG</string>
+	<string name="poi_fuel_1_25">Mengsmering 1:25</string>
+	<string name="poi_fuel_1_50">Mengsmering 1:50</string>
+	<string name="poi_fuel_ethanol">Ethanol</string>
+	<string name="poi_fuel_methanol">Methanol</string>
+	<string name="poi_fuel_e10">E10</string>
+	<string name="poi_fuel_e20">E20</string>
+	<string name="poi_fuel_e85">E85</string>
+	<string name="poi_fuel_biogas">E85</string>
+	<string name="poi_fuel_lh2">Vloeibare waterstof</string>
+	<string name="poi_fuel_electricity">Elektriciteit</string>
+	<string name="poi_junction">Kruising</string>
+	<string name="poi_rest_area">Snelweg-parkeerplaats</string>
+
+	<string name="poi_observation_tower">Uitkijktoren</string>
+	<string name="poi_bell_tower">Kerktoren</string>
+	<string name="poi_industrial">Industriegebied</string>
+	<string name="poi_allotments">Volkstuinen</string>
+	<string name="poi_forest">Bosbouw</string>
+	<string name="poi_farmyard">Boerenerf</string>
+	<string name="poi_meadow">Weide</string>
+	<string name="poi_landuse_railway">Spoorweg-gebied</string>
+
+	<string name="poi_canal">Kanaal</string>
+	<string name="poi_gasometer">Gashouder</string>
+	<string name="poi_silo">Silo</string>
+	<string name="poi_storage_tank">Opslagtank</string>
+
+	<string name="poi_quarter">Wijk</string>
+	<string name="poi_residential">Woongebied</string>
+
+	<string name="poi_sailing">Zeilen</string>
+	<string name="poi_general_tourist_attraction_yes">Algemene attractie</string>
+	<string name="poi_wilderness_hut">Schuilhut</string>
+	<string name="poi_hunting_lodge">Jachthut</string>
+
+	<string name="poi_picnic_table">Picnictafel</string>
+	<string name="poi_tomb">Graf</string>
+	<string name="poi_hanami">Hanami</string>
+	<string name="poi_wine_cellar">Wijnkelder</string>
+	<string name="poi_piste_downhill">Alpijns skiën</string>
+	<string name="poi_piste_hike">Wandelen</string>
+	<string name="poi_piste_sleigh"/>
+	<string name="poi_piste_ice_skate">Schaatsen</string>
+	<string name="poi_ski_rental">Skiverhuur</string>
+
+	<string name="poi_gallery">Galerie</string>
+	<string name="poi_bench">Zitbank</string>
+	<string name="poi_recreation_ground">Recreatieterrein</string>
+	<string name="poi_smoking_area">Rokersruimte</string>
+	<string name="poi_valley">Vallei</string>
+	<string name="poi_water">Water</string>
+	<string name="poi_wood">Bos</string>
+	<string name="poi_communication">Communicatie</string>
+		<string name="poi_cabin">Hut</string>
+	<string name="poi_winery">Wijnhandel</string>
+
+	<string name="poi_piste_playground">Speeltuin</string>
+	<string name="poi_personal_transport">Persoonlijk vervoer</string>
+		</resources>

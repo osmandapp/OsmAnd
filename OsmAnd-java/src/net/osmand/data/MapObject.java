@@ -2,15 +2,26 @@ package net.osmand.data;
 
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
+import net.osmand.util.Algorithms;
+import net.sf.junidecode.Junidecode;
 
 
 public abstract class MapObject implements Comparable<MapObject>, Serializable {
 	protected String name = null;
 	protected String enName = null;
+	protected Map<String, String> names = null;
 	protected LatLon location = null;
 	protected int fileOffset = 0;
 	protected Long id = null;
@@ -26,14 +37,6 @@ public abstract class MapObject implements Comparable<MapObject>, Serializable {
 		return null;
 	}
 	
-	public String getName(boolean en){
-		if(en){
-			return getEnName();
-		} else {
-			return getName();
-		}
-	}
-	
 	public String getName() {
 		if (this.name != null) {
 			return this.name;
@@ -45,9 +48,105 @@ public abstract class MapObject implements Comparable<MapObject>, Serializable {
 		this.name = name;
 	}
 	
-	public String getEnName() {
-		if(this.enName != null){
+	public void setName(String lang, String name) {
+		if(names == null) {
+			names = new HashMap<String, String>();
+			
+		}
+		names.put(lang, name);
+	}
+	
+	public Map<String, String> getNamesMap(boolean includeEn) {
+		if (!includeEn || Algorithms.isEmpty(enName)) {
+			if (names == null) {
+				return Collections.emptyMap();
+			}
+			return names;
+		}
+		Map<String, String> mp = new HashMap<String, String>();
+		if(names != null) {
+			mp.putAll(names);
+		}
+		mp.put("en", enName);		
+		return mp;
+	}
+	
+	public List<String> getAllNames() {
+		List<String> l = new ArrayList<String>();
+		if(!Algorithms.isEmpty(enName)) {
+			l.add(enName);
+		}
+		if(names != null) {
+			l.addAll(names.values());
+		}
+		return l;
+	}
+	
+	public void copyNames(MapObject s) {
+		if(Algorithms.isEmpty(name)) {
+			name = s.name;
+		}
+		if(Algorithms.isEmpty(enName)) {
+			enName = s.enName;
+		}
+		copyNames(s.names);
+	}
+	
+	public void copyNames(Map<String, String> snames) {
+		if(snames != null && snames.containsKey("name:en")){
+			enName = snames.get("name:en");
+		}
+		if(snames != null && snames.containsKey("en")){
+			enName = snames.get("en");
+		}
+		if(snames != null){
+			Iterator<Entry<String, String>> it = snames.entrySet().iterator();
+			while(it.hasNext()) {
+				Entry<String, String> e = it.next();
+				String key = e.getKey();
+				if(key.startsWith("name:")) {
+					key = key.substring("name:".length());
+				}
+				if(names == null) {
+					names = new HashMap<String, String>();
+				}
+				if(Algorithms.isEmpty(names.get(key))) {
+					names.put(key, e.getValue());
+				}
+			}
+		}		
+	}
+	
+	public String getName(String lang) {
+		return getName(lang, false);
+	}
+	
+	public String getName(String lang, boolean transliterate) {
+		if (lang != null) {
+			if (lang.equals("en")) {
+				// ignore transliterate option here for backward compatibility
+				return getEnName(true);
+			} else {
+				// get name
+				if(names != null) {
+					String nm = names.get(lang);
+					if(!Algorithms.isEmpty(nm)) {
+						return nm;
+					}
+					if(transliterate) {
+						return Junidecode.unidecode(getName());
+					}
+				}
+			}
+		}
+		return getName();
+	}
+	
+	public String getEnName(boolean transliterate) {
+		if(!Algorithms.isEmpty(enName)){
 			return this.enName;
+		} else if(!Algorithms.isEmpty(getName()) && transliterate){
+			return Junidecode.unidecode(getName());
 		}
 		return ""; //$NON-NLS-1$
 	}
@@ -108,19 +207,15 @@ public abstract class MapObject implements Comparable<MapObject>, Serializable {
 	}
 	
 	public static class MapObjectComparator implements Comparator<MapObject>{
-		private final boolean en;
+		private final String l;
 		Collator collator = OsmAndCollator.primaryCollator();
-		public MapObjectComparator(boolean en){
-			this.en = en;
+		public MapObjectComparator(String lang){
+			this.l = lang;
 		}
 		
 		@Override
 		public int compare(MapObject o1, MapObject o2) {
-			if(en){
-				return collator.compare(o1.getEnName(), o2.getEnName());
-			} else {
-				return collator.compare(o1.getName(), o2.getName());
-			}
+			return collator.compare(o1.getName(l), o2.getName(l));
 		}
 	}	
 

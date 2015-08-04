@@ -15,11 +15,6 @@ public class AccessibilityPlugin extends OsmandPlugin {
 	}
 	
 	@Override
-	public boolean init(OsmandApplication app, Activity activity) {
-		return true;
-	}
-	
-	@Override
 	public String getId() {
 		return ID;
 	}

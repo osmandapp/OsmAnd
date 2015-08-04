@@ -141,8 +141,17 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 					if (has) {
 						return true;
 					}
-					q = db.query(false, POINT_NAME, new String[0], null, null, null, null, null, null);
+					q = db.query(false, POINT_NAME, new String[]{POINT_COL_LAT, POINT_COL_LON}, null, null, null, null, null, null);
 					has = q.moveToFirst();
+					while(has) {
+						if(q.getDouble(0) != 0 || q.getDouble(1) != 0) {
+							break;
+						}
+						if(!q.moveToNext()) {
+							has = false;
+							break;
+						}
+					}
 					q.close();
 					if (has) {
 						return true;
@@ -379,19 +388,19 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	}
 	
 	private void addTrackPoint(WptPt pt, boolean newSegment, long time) {
-		List<List<WptPt>> points = currentTrack.getModifiablePointsToDisplay();
+		List<TrkSegment> points = currentTrack.getModifiablePointsToDisplay();
 		Track track = currentTrack.getGpxFile().tracks.get(0);
 		assert track.segments.size() == points.size(); 
 		if (points.size() == 0 || newSegment) {
-			points.add(new ArrayList<WptPt>());
+			points.add(new TrkSegment());
 		}
 		if(track.segments.size() == 0 || newSegment) {
 			track.segments.add(new TrkSegment());
 		}
 		if (pt != null) {
 			int ind = points.size() - 1;
-			List<WptPt> last = points.get(ind);
-			last.add(pt);
+			TrkSegment last = points.get(ind);
+			last.points.add(pt);
 			TrkSegment lt = track.segments.get(track.segments.size() - 1);
 			lt.points.add(pt);
 		}
@@ -439,7 +448,8 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 			currentTrack.getModifiableGpxFile().tracks.add(new Track());
 		}
 		while(currentTrack.getPointsToDisplay().size() < currentTrack.getModifiableGpxFile().tracks.size()) {
-			currentTrack.getModifiablePointsToDisplay().add(new ArrayList<GPXUtilities.WptPt>());
+			TrkSegment trkSegment = new TrkSegment();
+			currentTrack.getModifiablePointsToDisplay().add(trkSegment);
 		}
 	}
 

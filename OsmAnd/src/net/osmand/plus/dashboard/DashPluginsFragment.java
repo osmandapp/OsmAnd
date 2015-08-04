@@ -1,14 +1,5 @@
 package net.osmand.plus.dashboard;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.PluginActivity;
-import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.net.Uri;
@@ -22,6 +13,16 @@ import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.PluginActivity;
+import net.osmand.plus.development.OsmandDevelopmentPlugin;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by Denis
@@ -37,6 +38,7 @@ public class DashPluginsFragment extends DashBaseFragment {
 		@Override
 		public void onClick(View view) {
 			startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL())));
+			closeDashboard();
 		}
 	};
 	}
@@ -48,12 +50,13 @@ public class DashPluginsFragment extends DashBaseFragment {
 				Intent intent = new Intent(getActivity(), PluginActivity.class);
 				intent.putExtra(PluginActivity.EXTRA_PLUGIN_ID, plugin.getId());
 				startActivity(intent);
+				closeDashboard();
 			}
 		};
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+	public View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.dash_common_fragment, container, false);
 		TextView header = ((TextView) view.findViewById(R.id.fav_text));
 		header.setText(R.string.prefs_plugins);
@@ -61,6 +64,7 @@ public class DashPluginsFragment extends DashBaseFragment {
 			@Override
 			public void onClick(View view) {
 				startActivity(new Intent(getActivity(), getMyApplication().getAppCustomization().getPluginsActivity()));
+				closeDashboard();
 			}
 		});
 		initPlugins();
@@ -94,7 +98,6 @@ public class DashPluginsFragment extends DashBaseFragment {
 	public void onOpenDash() {
 		View contentView = getView();
 		LayoutInflater inflater = getActivity().getLayoutInflater();
-		initPlugins();
 		LinearLayout pluginsContainer = (LinearLayout) contentView.findViewById(R.id.items);
 		pluginsContainer.removeAllViews();
 		for (OsmandPlugin p : plugins) {

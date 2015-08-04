@@ -4,7 +4,7 @@
 			  android:layout_width="match_parent"
 			  android:layout_height="wrap_content"
 			  android:background="?attr/expandable_list_item_background"
-			  android:minHeight="@dimen/dashListItemHeight"
+			  android:minHeight="@dimen/list_item_height"
 			  android:orientation="vertical">
 
 	<View
@@ -53,7 +53,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:textColor="?android:textColorPrimary"
-				android:textSize="@dimen/dashFavNameTextSize"
+				android:textSize="@dimen/default_list_text_size"
 				tools:text="@string/validate_gpx_upload_name_pwd"/>
 
 			<LinearLayout
@@ -77,7 +77,7 @@
 					android:layout_height="wrap_content"
 					android:layout_marginRight="@dimen/gpx_small_text_margin"
 					android:textColor="?android:textColorSecondary"
-					android:textSize="@dimen/download_descr_text_size"/>
+					android:textSize="@dimen/default_sub_text_size"/>
 
 				<ImageView
 					android:id="@+id/distance_icon"
@@ -93,7 +93,7 @@
 					android:layout_height="wrap_content"
 					android:layout_marginRight="@dimen/gpx_small_text_margin"
 					android:textColor="?android:textColorSecondary"
-					android:textSize="@dimen/download_descr_text_size"/>
+					android:textSize="@dimen/default_sub_text_size"/>
 
 				<ImageView
 					android:id="@+id/time_icon"
@@ -109,7 +109,7 @@
 					android:layout_height="wrap_content"
 					android:layout_marginRight="@dimen/gpx_small_text_margin"
 					android:textColor="?android:textColorSecondary"
-					android:textSize="@dimen/download_descr_text_size"/>
+					android:textSize="@dimen/default_sub_text_size"/>
 			</LinearLayout>
 
 			<LinearLayout
@@ -124,7 +124,7 @@
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:textColor="?android:textColorSecondary"
-					android:textSize="@dimen/download_descr_text_size"/>
+					android:textSize="@dimen/default_sub_text_size"/>
 
 			</LinearLayout>
 
@@ -134,28 +134,28 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:textColor="?android:textColorPrimary"
-				android:textSize="@dimen/download_descr_text_size"
+				android:textSize="@dimen/default_sub_text_size"
 				android:visibility="gone"/>
 		</LinearLayout>
 
 
 		<ImageButton
 			android:id="@+id/show_on_map"
-			android:layout_width="@dimen/dashListItemHeight"
-			android:layout_height="@dimen/dashListItemHeight"
+			android:layout_width="@dimen/list_item_height"
+			android:layout_height="@dimen/list_item_height"
 			android:layout_gravity="center_vertical"
 			android:layout_marginLeft="@dimen/favorites_icon_right_margin"
-			android:background="?attr/options_button_background"
+			android:background="?attr/dashboard_button"
 			android:src="@drawable/ic_action_gsave_dark"
 			android:visibility="gone"
 			tools:visibility="visible"/>
 		
 		<ImageButton
 			android:id="@+id/stop"
-			android:layout_width="@dimen/dashListItemHeight"
-			android:layout_height="@dimen/dashListItemHeight"
+			android:layout_width="@dimen/list_item_height"
+			android:layout_height="@dimen/list_item_height"
 			android:layout_gravity="center_vertical"
-			android:background="?attr/options_button_background"
+			android:background="?attr/dashboard_button"
 			android:src="@drawable/ic_action_rec_stop"
 			android:visibility="gone"
 			tools:visibility="visible"/>
@@ -164,9 +164,9 @@
 			android:id="@+id/options"
 			android:layout_width="@dimen/list_item_height"
 			android:layout_height="@dimen/list_item_height"
-			android:background="?attr/options_button_background"
+			android:background="?attr/dashboard_button"
 			android:focusable="false"
-			android:src="?attr/ic_action_overflow"
+			android:src="@drawable/ic_overflow_menu_white"
 			android:visibility="gone"/>
 
 		<include android:layout_width="wrap_content"

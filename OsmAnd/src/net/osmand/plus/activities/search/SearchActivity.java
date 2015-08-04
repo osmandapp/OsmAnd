@@ -51,6 +51,7 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 	private static final int REQUEST_FAVORITE_SELECT = 1;
 	private static final int REQUEST_ADDRESS_SELECT = 2;
 	
+	public static final String SEARCH_NEARBY = "net.osmand.search_nearby"; //$NON-NLS-1$
 	public static final String SEARCH_LAT = "net.osmand.search_lat"; //$NON-NLS-1$
 	public static final String SEARCH_LON = "net.osmand.search_lon"; //$NON-NLS-1$
 	public static final String SHOW_ONLY_ONE_TAB = "SHOW_ONLY_ONE_TAB"; //$NON-NLS-1$
@@ -81,11 +82,11 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 		long t = System.currentTimeMillis();
  		setContentView(R.layout.tab_content);
 		settings = ((OsmandApplication) getApplication()).getSettings();
-		Integer tab = settings.SEARCH_TAB.get();
+		
 		showOnlyOneTab = getIntent() != null && getIntent().getBooleanExtra(SHOW_ONLY_ONE_TAB, false);
 		getSupportActionBar().setTitle("");
 		getSupportActionBar().setElevation(0);
-
+		Integer tab = settings.SEARCH_TAB.get();
 		if (!showOnlyOneTab) {
 			ViewPager mViewPager = (ViewPager) findViewById(R.id.pager);
 			PagerSlidingTabStrip mSlidingTabLayout = (PagerSlidingTabStrip) findViewById(R.id.sliding_tabs);
@@ -187,7 +188,7 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 	}
 
 	private void setTopSpinner() {
-		spinnerAdapter = new ArrayAdapter<String>(getSupportActionBar().getThemedContext(), android.R.layout.simple_spinner_item,
+		spinnerAdapter = new ArrayAdapter<String>(getSupportActionBar().getThemedContext(), R.layout.spinner_item,
 				new ArrayList<String>(Arrays.asList(new String[]{
 						getString(R.string.search_position_undefined),
 						getString(R.string.search_position_current_location),
@@ -196,7 +197,7 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 						getString(R.string.search_position_address)
 					}))
 				);
-		spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spinnerAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         getSupportActionBar().setListNavigationCallbacks(spinnerAdapter, new OnNavigationListener() {
 			
 			@Override
@@ -303,6 +304,11 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 	@Override
 	protected void onResume() {
 		super.onResume();
+		if (!showOnlyOneTab) {
+			Integer tab = settings.SEARCH_TAB.get();
+			ViewPager mViewPager = (ViewPager) findViewById(R.id.pager);
+			mViewPager.setCurrentItem(Math.min(tab, HISTORY_TAB_INDEX));
+		}
 	}
 	
 	@Override

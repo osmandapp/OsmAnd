@@ -14,7 +14,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.TranslateAnimation;
@@ -26,6 +25,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.ImageView.ScaleType;
 import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -34,7 +34,6 @@ import com.github.ksoichiro.android.observablescrollview.ObservableListView;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
 import com.github.ksoichiro.android.observablescrollview.ScrollState;
-import com.software.shell.fab.ActionButton;
 
 import net.osmand.data.LatLon;
 import net.osmand.plus.ContextMenuAdapter;
@@ -51,7 +50,7 @@ import net.osmand.plus.development.DashSimulateFragment;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.helpers.ScreenOrientationHelper;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
 import net.osmand.plus.monitoring.DashTrackFragment;
@@ -76,7 +75,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 	public static DashboardType staticVisibleType = DashboardType.DASHBOARD;
 	
 	private MapActivity mapActivity;
-	private ActionButton actionButton;
+	private ImageView actionButton;
 	private FrameLayout dashboardView;
 	
 	private ArrayAdapter<?> listAdapter;
@@ -101,7 +100,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 	private int mFlexibleSpaceImageHeight;
 	private int mFlexibleBlurSpaceHeight;
 	private boolean portrait;
-	
+
+	int baseColor;
 	
 	private WaypointDialogHelper waypointDialogHelper;
 	private final int[] running = new int[] { -1 };
@@ -117,7 +117,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 		LIST_MENU,
 		DASHBOARD 
 	}
-	
 
 	public DashboardOnMap(MapActivity ma) {
 		this.mapActivity = ma;
@@ -125,8 +124,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 
 
 	public void createDashboardView() {
+		baseColor = mapActivity.getResources().getColor(R.color.osmand_orange) & 0x00ffffff;
 		waypointDialogHelper = new WaypointDialogHelper(mapActivity);
-		landscape = !ScreenOrientationHelper.isOrientationPortrait(mapActivity);
+		landscape = !AndroidUiHelper.isOrientationPortrait(mapActivity);
 		dashboardView = (FrameLayout) mapActivity.findViewById(R.id.dashboard);
 		View.OnClickListener listener = new View.OnClickListener() {
 			@Override
@@ -138,14 +138,14 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 		ObservableScrollView scrollView = ((ObservableScrollView) dashboardView.findViewById(R.id.main_scroll));
 		listView = (ListView) dashboardView.findViewById(R.id.dash_list_view);
 		gradientToolbar = mapActivity.getResources().getDrawable(R.drawable.gradient_toolbar).mutate();
-		if (ScreenOrientationHelper.isOrientationPortrait(mapActivity)) {
+		if (AndroidUiHelper.isOrientationPortrait(mapActivity)) {
 			this.portrait = true;
 			scrollView.setScrollViewCallbacks(this);
 			((ObservableListView) listView).setScrollViewCallbacks(this);
 			mFlexibleSpaceImageHeight = mapActivity.getResources().getDimensionPixelSize(
 					R.dimen.dashboard_map_top_padding);
 			mFlexibleBlurSpaceHeight = mapActivity.getResources().getDimensionPixelSize(
-					R.dimen.dashboard_map_top_blur);
+					R.dimen.dashboard_map_toolbar);
 			// Set padding view for ListView. This is the flexible space.
 			paddingView = new View(mapActivity);
 			AbsListView.LayoutParams lp = new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT,
@@ -208,12 +208,14 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 		flat.setVisibility(View.GONE);
 		ImageView settings = (ImageView) dashboardView.findViewById(R.id.toolbar_settings);
 		settings.setVisibility(View.GONE);
+		ImageView configureScreen = (ImageView) dashboardView.findViewById(R.id.toolbar_configure_screen);
+		configureScreen.setVisibility(View.GONE);
 		IconsCache iconsCache = mapActivity.getMyApplication().getIconsCache();
 		ImageView lst = (ImageView) dashboardView.findViewById(R.id.toolbar_list);
 		lst.setVisibility(View.GONE);
 		ImageView back = (ImageView) dashboardView.findViewById(R.id.toolbar_back);
 		back.setImageDrawable(
-				((OsmandApplication)getMyApplication()).getIconsCache().getActionBarIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha));
+				((OsmandApplication)getMyApplication()).getIconsCache().getIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha));
 		back.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -245,7 +247,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 			if (getMyApplication().getWaypointHelper().isRouteCalculated()) {
 				flat.setVisibility(View.VISIBLE);
 				final boolean flatNow = visibleType == DashboardType.WAYPOINTS_FLAT;
-				flat.setImageDrawable(iconsCache.getActionBarIcon(flatNow ? R.drawable.ic_tree_list_dark
+				flat.setImageDrawable(iconsCache.getIcon(flatNow ? R.drawable.ic_tree_list_dark
 						: R.drawable.ic_flat_list_dark));
 				flat.setOnClickListener(new View.OnClickListener() {
 
@@ -269,6 +271,16 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 			});
 		}
 		if (visibleType == DashboardType.DASHBOARD || visibleType == DashboardType.LIST_MENU) {
+            configureScreen.setVisibility(View.VISIBLE);
+            configureScreen.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                            setDashboardVisibility(true, DashboardType.CONFIGURE_SCREEN);
+                    }
+            });
+            
+                       
+
 			settings.setVisibility(View.VISIBLE);
 			settings.setOnClickListener(new View.OnClickListener() {
 
@@ -282,9 +294,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 			});
 			lst.setVisibility(View.VISIBLE);
 			if (visibleType == DashboardType.DASHBOARD) {
-				lst.setImageDrawable(iconsCache.getActionBarIcon(R.drawable.ic_navigation_drawer));
+				lst.setImageDrawable(iconsCache.getIcon(R.drawable.ic_navigation_drawer));
 			} else if (visibleType == DashboardType.LIST_MENU) {
-				lst.setImageDrawable(iconsCache.getActionBarIcon(R.drawable.ic_dashboard_dark));
+				lst.setImageDrawable(iconsCache.getIcon(R.drawable.ic_dashboard_dark));
 			}
 			lst.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -301,17 +313,22 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 
 
 	private void initActionButton() {
-		actionButton = new ActionButton(mapActivity);
-		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-		int marginRight = convertPixelsToDp(16, mapActivity);
-		params.setMargins(0, landscape ? 0 : convertPixelsToDp(164, mapActivity), marginRight, landscape ? marginRight : 0);
-
+		actionButton = new ImageView(mapActivity);
+		int btnSize = (int) mapActivity.getResources().getDimension(R.dimen.map_button_size);
+		int topPad = (int) mapActivity.getResources().getDimension(R.dimen.dashboard_map_top_padding);
+		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+				btnSize,btnSize
+				);
+		int marginRight = btnSize / 4;
+		params.setMargins(0, landscape ? 0 : topPad - 2 * btnSize, 
+				marginRight, landscape ? marginRight : 0);
 		params.gravity = landscape ? Gravity.BOTTOM | Gravity.RIGHT : Gravity.TOP | Gravity.RIGHT;
 		actionButton.setLayoutParams(params);
-		actionButton.setImageDrawable(mapActivity.getResources().getDrawable(R.drawable.ic_action_get_my_location));
-		actionButton.setButtonColor(mapActivity.getResources().getColor(R.color.map_widget_blue));
-		actionButton.setButtonColorPressed(mapActivity.getResources().getColor(R.color.map_widget_blue_pressed));
-		actionButton.hide();
+		actionButton.setScaleType(ScaleType.CENTER);
+		actionButton.setImageDrawable(mapActivity.getResources().getDrawable(R.drawable.map_my_location));
+		
+		actionButton.setBackgroundDrawable(mapActivity.getResources().getDrawable(R.drawable.btn_circle_blue));
+		hideActionButton();
 		actionButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -325,6 +342,11 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 		});
 	}
 	
+
+	private void hideActionButton() {
+		actionButton.setVisibility(View.GONE);		
+	}
+
 
 	public static int convertPixelsToDp(float dp, Context context){
 		DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
@@ -378,7 +400,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 	}
 
 	public void refreshDashboardFragments(){
-		addOrUpdateDashboardFragments(mapActivity.isFirstTime());
+		addOrUpdateDashboardFragments();
 	}
 
 	public void setDashboardVisibility(boolean visible, DashboardType type, DashboardType prevItem, boolean animation) {
@@ -399,21 +421,24 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 			mapActivity.getMapViewTrackingUtilities().setDashboard(this);
 			dashboardView.setVisibility(View.VISIBLE);
 			if(isActionButtonVisible()) {
-				actionButton.show();
+				actionButton.setVisibility(View.VISIBLE);
+			} else {
+				hideActionButton();
 			}
 			updateDownloadBtn();
 			View listViewLayout = dashboardView.findViewById(R.id.dash_list_view_layout);
 			ScrollView scrollView = (ScrollView) dashboardView.findViewById(R.id.main_scroll);
 			if(visibleType == DashboardType.DASHBOARD) {
-				addOrUpdateDashboardFragments(mapActivity.isFirstTime());
+				addOrUpdateDashboardFragments();
 				scrollView.setVisibility(View.VISIBLE);
+				scrollView.scrollTo(0, 0);
 				listViewLayout.setVisibility(View.GONE);
 				onScrollChanged(scrollView.getScrollY(), false, false);
 			} else {
 				scrollView.setVisibility(View.GONE);
 				listViewLayout.setVisibility(View.VISIBLE);
-				if(listView instanceof ObservableListView) {
-					onScrollChanged(((ObservableListView)listView).getScrollY(), false, false);
+				if (listView instanceof ObservableListView) {
+					onScrollChanged(((ObservableListView) listView).getScrollY(), false, false);
 				}
 				if(refresh) {
 					refreshContent(false);
@@ -433,7 +458,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 			mapActivity.getMapViewTrackingUtilities().setDashboard(null);
 			hide(dashboardView.findViewById(R.id.animateContent), animation);
 			mapActivity.findViewById(R.id.MapHudButtonsOverlay).setVisibility(View.VISIBLE);
-			actionButton.hide();
+			hideActionButton();
 			for (WeakReference<DashBaseFragment> df : fragList) {
 				if (df.get() != null) {
 					df.get().onCloseDash();
@@ -461,7 +486,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 
 		} else {
 			if (DashboardType.CONFIGURE_SCREEN == visibleType) {
-				cm = mapActivity.getMapLayers().getMapInfoLayer().getViewConfigureMenuAdapter();
+				cm = mapActivity.getMapLayers().getMapWidgetRegistry().getViewConfigureMenuAdapter(mapActivity);
 			} else if(DashboardType.CONFIGURE_MAP == visibleType) {
 				cm = new ConfigureMapMenu().createListAdapter(mapActivity);
 			} else if(DashboardType.LIST_MENU == visibleType) {
@@ -557,10 +582,10 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 
 	private void scheduleDownloadButtonCheck() {
 		mapActivity.getMyApplication().runInUIThread(new Runnable() {
-			
+
 			@Override
 			public void run() {
-				if(isVisible()) {
+				if (isVisible()) {
 					updateDownloadBtn();
 				}
 			}
@@ -577,6 +602,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 			mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
 			mapActivity.refreshMap();
 		}
+		hideDashboard(true);
 	}
 
 
@@ -625,15 +651,19 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 	}
 	
 
-	private void addOrUpdateDashboardFragments(boolean firstTime) {
-		
+	private void addOrUpdateDashboardFragments() {
+		boolean firstTime = getMyApplication().getAppInitializer().isFirstTime(mapActivity);
 //		boolean showCards = mapActivity.getMyApplication().getSettings().USE_DASHBOARD_INSTEAD_OF_DRAWER.get();
 		boolean showCards = !firstTime;
-		
+
 		FragmentManager manager = mapActivity.getSupportFragmentManager();
 		FragmentTransaction fragmentTransaction = manager.beginTransaction();
 
+		showFragment(manager, fragmentTransaction, DashRateUsFragment.TAG, DashRateUsFragment.class,
+				DashRateUsFragment.shouldShow(getMyApplication().getSettings()));
 		showFragment(manager, fragmentTransaction, DashFirstTimeFragment.TAG, DashFirstTimeFragment.class, firstTime);
+		showFragment(manager, fragmentTransaction, DashChooseAppDirFragment.TAG, DashChooseAppDirFragment.class, 
+				DashChooseAppDirFragment.isDashNeeded(getMyApplication().getSettings()));
 
 		showFragment(manager, fragmentTransaction, DashErrorFragment.TAG, DashErrorFragment.class,
 				mapActivity.getMyApplication().getAppInitializer().checkPreviousRunsForExceptions(mapActivity) && showCards);
@@ -657,20 +687,23 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 
 
 
-	private <T extends Fragment> void showFragment(FragmentManager manager, FragmentTransaction fragmentTransaction,
-			String tag, Class<T> cl, boolean cond) {
+	private <T extends DashBaseFragment> void showFragment(final FragmentManager manager,
+														   final FragmentTransaction fragmentTransaction,
+														   final String tag,
+														   final Class<T> cl,
+														   final boolean condition) {
 		try {
 			Fragment frag = manager.findFragmentByTag(tag);
 			if (manager.findFragmentByTag(tag) == null ) {
-				if(cond) {
+				if(condition) {
 					T ni = cl.newInstance();
 					fragmentTransaction.add(R.id.content, ni, tag);
 				}
 			} else {
-				if(!cond) {
+				if(!condition) {
 					fragmentTransaction.remove(manager.findFragmentByTag(tag));
  				} else if(frag instanceof DashBaseFragment){
- 					if(((DashBaseFragment) frag).getView() != null) {
+ 					if(frag.getView() != null) {
  						((DashBaseFragment) frag).onOpenDash();
  					}
  				}
@@ -766,7 +799,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 	public void onScrollChanged(int scrollY, boolean firstScroll, boolean dragging) {
 		// Translate list background
 		if (portrait) {
-			setTranslationY(listBackgroundView, Math.max(0, -scrollY + mFlexibleSpaceImageHeight));
+			if(listBackgroundView != null) {
+				setTranslationY(listBackgroundView, Math.max(0, -scrollY + mFlexibleSpaceImageHeight));
+			}
 		}
 		if (portrait) {
 			setTranslationY(toolbar, Math.min(0, -scrollY + mFlexibleSpaceImageHeight - mFlexibleBlurSpaceHeight));
@@ -776,7 +811,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 	}
 
 	private boolean isActionButtonVisible() {
-		return visibleType == DashboardType.DASHBOARD || visibleType == DashboardType.LIST_MENU;
+		return visibleType == DashboardType.DASHBOARD || visibleType == DashboardType.LIST_MENU || visibleType == DashboardType.CONFIGURE_SCREEN;
 	}
 	
 	private boolean isBackButtonVisible() {
@@ -787,13 +822,13 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 		
 		if (actionButton != null && portrait && isActionButtonVisible()) {
 			double scale = mapActivity.getResources().getDisplayMetrics().density;
-			int originalPosition = (int) (160 * scale);
-			int minTop = (int) (65 * scale);
+			int originalPosition = mFlexibleSpaceImageHeight - (int) (80 * scale);
+			int minTop = mFlexibleBlurSpaceHeight + (int) (5 * scale);
 			FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) actionButton.getLayoutParams();
 			if (minTop > originalPosition - scrollY) {
-				actionButton.hide();
+				hideActionButton();
 			} else {
-				actionButton.show();
+				actionButton.setVisibility(View.VISIBLE);
 				lp.topMargin = originalPosition - scrollY;
 				((FrameLayout) actionButton.getParent()).updateViewLayout(actionButton, lp);
 			}
@@ -807,7 +842,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 			float sh = mFlexibleSpaceImageHeight - mFlexibleBlurSpaceHeight;
 			float t = sh == 0 ? 1 : (1 - Math.max(0, -scrollY + sh) / sh);
 			t = Math.max(0, t);
-			int baseColor = 0xff8f00;
+
 			int alpha = (int) (t * 255);
 			// in order to have proper fast scroll down
 			int malpha = t == 1 ? alpha = 0 : alpha;
@@ -826,7 +861,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 	private void updateListAdapter(ArrayAdapter<?> listAdapter, OnItemClickListener listener) {
 		this.listAdapter = listAdapter;
 		this.listAdapterOnClickListener = listener;
-		if(this.listView != null) {
+		if (this.listView != null) {
 			listView.setAdapter(listAdapter);
 			if(!portrait) {
 				listView.setOnItemClickListener(this.listAdapterOnClickListener);
@@ -886,6 +921,31 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 	}
 
 
-	
+	public <T extends DashBaseFragment> T getFragmentByClass(Class<T> class1) {
+		for(WeakReference<DashBaseFragment> f: fragList) {
+			DashBaseFragment b = f.get();
+			if(b != null && !b.isDetached() && class1.isInstance(b)) {
+				return (T) b;
+			}
+		}
+		return null;
+	}
 
+	public void hideFragmentByTag(String tag) {
+		FragmentManager manager = mapActivity.getSupportFragmentManager();
+		FragmentTransaction transaction = manager.beginTransaction();
+		Fragment frag = manager.findFragmentByTag(tag);
+		transaction.hide(frag).commit();
+	}
+
+	public void unblacklistFragmentClass(String tag) {
+		FragmentManager manager = mapActivity.getSupportFragmentManager();
+		FragmentTransaction transaction = manager.beginTransaction();
+		Fragment frag = manager.findFragmentByTag(tag);
+		transaction.show(frag).commit();
+	}
+
+	View getParentView() {
+		return dashboardView;
+	}
 }

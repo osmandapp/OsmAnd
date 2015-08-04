@@ -1,6 +1,5 @@
 package net.osmand.util;
-/* Has to be commented out in order to run the main function and test the package? */
-
+/* Can be commented out in order to run the main function separately */
 
 
 import java.text.ParseException;
@@ -654,6 +653,9 @@ public class OpeningHoursParser {
 	 * @return null when parsing was unsuccessful
 	 */
 	public static OpeningHours parseOpenedHours(String format){
+		if(format == null) {
+			return null;
+		}
 		// split the OSM string in multiple rules
 		String[] rules = format.split(";"); //$NON-NLS-1$
 		// FIXME: What if the semicolon is inside a quoted string?
@@ -777,6 +779,9 @@ public class OpeningHoursParser {
 		testOpened("06.05.2013 10:00", hours, false);
 
 		// test day wrap as seen on OSM
+		// Incorrectly evaluated: https://wiki.openstreetmap.org/w/index.php?title=Key:opening_hours/specification#explain:additional_rule_separator
+		// <normal_rule_separator> does overwrite previous definitions.
+		// VICTOR: Do we have a test for incorrectly evaluated?
 		hours = parseOpenedHours("Tu-Th 07:00-2:00; Fr 17:00-4:00; Sa 18:00-05:00; Su,Mo off");
 		System.out.println(hours);
 		testOpened("05.05.2013 04:59", hours, true);
@@ -788,6 +793,27 @@ public class OpeningHoursParser {
 		testOpened("07.05.2013 23:59", hours, true);
 		testOpened("08.05.2013 00:00", hours, true);
 		testOpened("08.05.2013 02:00", hours, false);
+
+		// test day wrap as seen on OSM
+		hours = parseOpenedHours("Mo-Th 09:00-03:00; Fr-Sa 09:00-04:00; Su off");
+		testOpened("11.05.2015 08:59", hours, false);
+		testOpened("11.05.2015 09:01", hours, true);
+		testOpened("12.05.2015 02:59", hours, true);
+		testOpened("12.05.2015 03:00", hours, false);
+		testOpened("16.05.2015 03:59", hours, true); 
+		testOpened("16.05.2015 04:01", hours, false);
+		testOpened("17.05.2015 01:00", hours, true);
+		testOpened("17.05.2015 04:01", hours, false);
+
+		hours = parseOpenedHours("Tu-Th 07:00-2:00; Fr 17:00-4:00; Sa 18:00-05:00; Su,Mo off");
+		testOpened("11.05.2015 08:59", hours, false);
+		testOpened("11.05.2015 09:01", hours, false);
+		testOpened("12.05.2015 02:59", hours, false);
+		testOpened("12.05.2015 03:00", hours, false);
+		testOpened("16.05.2015 03:59", hours, true); 
+		testOpened("16.05.2015 04:01", hours, false);
+		testOpened("17.05.2015 01:00", hours, true);
+		testOpened("17.05.2015 05:01", hours, false);
 
 		// tests single month value
 		hours = parseOpenedHours("May: 07:00-19:00");

@@ -346,10 +346,10 @@ public class BinaryMapTransportReaderAdapter {
 		if(dataObject.getName().length() > 0){
 			dataObject.setName(stringTable.get(dataObject.getName().charAt(0)));
 		}
-		if(dataObject.getEnName().length() > 0){
-			dataObject.setEnName(stringTable.get(dataObject.getEnName().charAt(0)));
+		if(dataObject.getEnName(false).length() > 0){
+			dataObject.setEnName(stringTable.get(dataObject.getEnName(false).charAt(0)));
 		}
-		if(dataObject.getName().length() > 0 && dataObject.getEnName().length() == 0){
+		if(dataObject.getName().length() > 0 && dataObject.getName("en").length() == 0){
 			dataObject.setEnName(Junidecode.unidecode(dataObject.getName()));
 		}
 		
@@ -371,11 +371,8 @@ public class BinaryMapTransportReaderAdapter {
 		if (s.getName().length() > 0) {
 			s.setName(stringTable.get(s.getName().charAt(0)));
 		}
-		if (s.getEnName().length() > 0) {
-			s.setEnName(stringTable.get(s.getEnName().charAt(0)));
-		}
-		if (s.getEnName().length() == 0) {
-			s.setEnName(Junidecode.unidecode(s.getName()));
+		if (s.getEnName(false).length() > 0) {
+			s.setEnName(stringTable.get(s.getEnName(false).charAt(0)));
 		}
 	}
 
@@ -445,7 +442,7 @@ public class BinaryMapTransportReaderAdapter {
 			switch (tag) {
 			case 0:
 				dataObject.setReferencesToRoutes(req.cacheTypes.toArray());
-				if(dataObject.getEnName().length() == 0){
+				if(dataObject.getName("en").length() == 0){
 					dataObject.setEnName(Junidecode.unidecode(dataObject.getName()));
 				}
 				return dataObject;

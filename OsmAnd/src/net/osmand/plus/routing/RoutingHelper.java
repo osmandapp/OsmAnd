@@ -1,11 +1,15 @@
 package net.osmand.plus.routing;
 
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
+import net.osmand.ValueHolder;
 import net.osmand.data.LatLon;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.GPXUtilities.GPXFile;
@@ -32,14 +36,15 @@ public class RoutingHelper {
 	
 	public static interface IRouteInformationListener {
 		
-		public void newRouteIsCalculated(boolean newRoute);
+		public void newRouteIsCalculated(boolean newRoute, ValueHolder<Boolean> showToast);
 		
 		public void routeWasCancelled();
 	}
 	
 	private static final float POSITION_TOLERANCE = 60;
 	
-	private List<IRouteInformationListener> listeners = new ArrayList<IRouteInformationListener>();
+	
+	private List<WeakReference<IRouteInformationListener>> listeners = new LinkedList<WeakReference<IRouteInformationListener>>();
 
 	private OsmandApplication app;
 	
@@ -56,8 +61,11 @@ public class RoutingHelper {
 	private Location lastProjection;
 	private Location lastFixedLocation;
 	
+	private static final int RECALCULATE_THRESHOLD_COUNT_CAUSING_FULL_RECALCULATE = 3;
+	private static final int RECALCULATE_THRESHOLD_CAUSING_FULL_RECALCULATE_INTERVAL = 120000;
 	private Thread currentRunningJob;
 	private long lastTimeEvaluatedRoute = 0;
+	private long recalculateCountInInterval = 0;
 	private int evalWaitInterval = 0;
 	
 	private ApplicationMode mode;
@@ -150,8 +158,15 @@ public class RoutingHelper {
 		app.runInUIThread(new Runnable() {
 			@Override
 			public void run() {
-				for (IRouteInformationListener l : listeners) {
-					l.routeWasCancelled();
+				Iterator<WeakReference<IRouteInformationListener>> it = listeners.iterator();
+				while(it.hasNext()) {
+					WeakReference<IRouteInformationListener> ref = it.next();
+					IRouteInformationListener l = ref.get();
+					if(l == null) {
+						it.remove();
+					} else {
+						l.routeWasCancelled();	
+					}
 				}
 			}
 		});
@@ -213,11 +228,20 @@ public class RoutingHelper {
 	}
 	
 	public void addListener(IRouteInformationListener l){
-		listeners.add(l);
+		listeners.add(new WeakReference<RoutingHelper.IRouteInformationListener>(l));
 	}
 	
-	public boolean removeListener(IRouteInformationListener l){
-		return listeners.remove(l);
+	public boolean removeListener(IRouteInformationListener lt){
+		Iterator<WeakReference<IRouteInformationListener>> it = listeners.iterator();
+		while(it.hasNext()) {
+			WeakReference<IRouteInformationListener> ref = it.next();
+			IRouteInformationListener l = ref.get();
+			if(l == null || lt == l) {
+				it.remove();
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public void updateLocation(Location currentLocation) {
@@ -547,7 +571,7 @@ public class RoutingHelper {
 		return false;
 	}
 
-	private void setNewRoute(RouteCalculationResult prevRoute, RouteCalculationResult res, Location start){
+	private void setNewRoute(RouteCalculationResult prevRoute, final RouteCalculationResult res, Location start){
 		final boolean newRoute = !prevRoute.isCalculated();
 		if (isFollowingMode) {
 			if(lastFixedLocation != null) {
@@ -562,16 +586,13 @@ public class RoutingHelper {
 					// This check is valid for Online/GPX services (offline routing is aware of route direction)
 					wrongMovementDirection = checkWrongMovementDirection(start, routeNodes.get(newCurrentRoute + 1));
 					// set/reset evalWaitInterval only if new route is in forward direction
-					
-					if (!wrongMovementDirection) {
+					if (wrongMovementDirection) {
 						evalWaitInterval = 3000;
 					} else {
-						if(evalWaitInterval == 0){
-							evalWaitInterval = 3000;
-						}
-						evalWaitInterval = evalWaitInterval * 3 / 2;
+						evalWaitInterval = Math.max(3000, evalWaitInterval * 3 / 2);
 						evalWaitInterval = Math.min(evalWaitInterval, 120000);
 					}
+					
 				}
 			}
 
@@ -582,14 +603,34 @@ public class RoutingHelper {
 				voiceRouter.newRouteIsCalculated(newRoute);
 			}
 		}
+		
 		app.runInUIThread(new Runnable() {
 			@Override
 			public void run() {
-				for (IRouteInformationListener l : listeners) {
-					l.newRouteIsCalculated(newRoute);
+				ValueHolder<Boolean> showToast = new ValueHolder<Boolean>();
+				showToast.value = true;
+				Iterator<WeakReference<IRouteInformationListener>> it = listeners.iterator();
+				while(it.hasNext()) {
+					WeakReference<IRouteInformationListener> ref = it.next();
+					IRouteInformationListener l = ref.get();
+					if(l == null) {
+						it.remove();
+					} else {
+						l.newRouteIsCalculated(newRoute, showToast);	
+					}
+				}
+				if (showToast.value) {
+					String msg = app.getString(R.string.new_route_calculated_dist) + ": "
+							+ OsmAndFormatter.getFormattedDistance(res.getWholeDistance(), app);
+					if (OsmandPlugin.isDevelopment() && res.getRoutingTime() != 0f) {
+						msg += " (" + Algorithms.formatDuration((int) res.getRoutingTime()) + ")";
+					}
+					app.showToastMessage(msg);
 				}
 			}
 		});
+
+		
 		app.getWaypointHelper().setNewRoute(res);
 	}
 	
@@ -679,9 +720,9 @@ public class RoutingHelper {
 		}
 		RouteSegmentResult rs = getCurrentSegmentResult();
 		if(rs != null) {
-			String nm = rs.getObject().getName();
+			String nm = rs.getObject().getName(settings.MAP_PREFERRED_LOCALE.get());
 			String rf = rs.getObject().getRef();
-			String dn = rs.getObject().getDestinationName();
+			String dn = rs.getObject().getDestinationName(settings.MAP_PREFERRED_LOCALE.get());
 			return formatStreetName(nm, rf, dn);
 		}
 		return null;
@@ -776,12 +817,6 @@ public class RoutingHelper {
 			if(res.isCalculated()){
 				setNewRoute(prev, res, params.start);
 				
-				String msg = app.getString(R.string.new_route_calculated_dist) + ": " + 
-							OsmAndFormatter.getFormattedDistance(res.getWholeDistance(), app);
-				if (res.getRoutingTime() != 0f) {
-					msg += " (" + Algorithms.formatDuration((int) res.getRoutingTime()) + ")";
-				}
-				showMessage(msg);
 			} else if (onlineSourceWithoutInternet) {
 				showMessage(app.getString(R.string.error_calculating_route)
 						+ ":\n" + app.getString(R.string.internet_connection_required_for_online_route)); //$NON-NLS-1$
@@ -813,13 +848,20 @@ public class RoutingHelper {
 		// do not evaluate very often
 		if ((currentRunningJob == null && System.currentTimeMillis() - lastTimeEvaluatedRoute > evalWaitInterval)
 				|| paramsChanged || !onlyStartPointChanged) {
+			if(System.currentTimeMillis() - lastTimeEvaluatedRoute < RECALCULATE_THRESHOLD_CAUSING_FULL_RECALCULATE_INTERVAL) {
+				recalculateCountInInterval ++;
+			}
 			RouteCalculationParams params = new RouteCalculationParams();
 			params.start = start;
 			params.end = end;
 			params.intermediates = intermediates;
 			params.gpxRoute = gpxRoute == null ? null : gpxRoute.build(start, settings);
 			params.onlyStartPointChanged = onlyStartPointChanged;
-			params.previousToRecalculate = previousRoute;
+			if(recalculateCountInInterval < RECALCULATE_THRESHOLD_COUNT_CAUSING_FULL_RECALCULATE) {
+				params.previousToRecalculate = previousRoute;
+			} else {
+				recalculateCountInInterval = 0;
+			}
 			params.leftSide = settings.DRIVING_REGION.get().leftHandDriving;
 			params.fast = settings.FAST_ROUTE_MODE.getModeValue(mode);
 			params.type = settings.ROUTER_SERVICE.getModeValue(mode);
@@ -827,7 +869,7 @@ public class RoutingHelper {
 			params.ctx = app;
 			if (params.type == RouteService.OSMAND) {
 				params.calculationProgress = new RouteCalculationProgress();
-				updateProgress(params.calculationProgress);
+				updateProgress(params);
 			}
 			synchronized (this) {
 				final Thread prevRunningJob = currentRunningJob;
@@ -865,11 +907,12 @@ public class RoutingHelper {
 	}
 	
 	
-	private void updateProgress(final RouteCalculationProgress calculationProgress) {
-		if(progressRoute != null) {
+	private void updateProgress(final RouteCalculationParams params) {
+		if(progressRoute != null ) {
 			app.runInUIThread(new Runnable() {
 				@Override
 				public void run() {
+					RouteCalculationProgress calculationProgress = params.calculationProgress;
 					if (isRouteBeingCalculated()) {
 						float p = Math.max(calculationProgress.distanceFromBegin, calculationProgress.distanceFromEnd);
 						float all = calculationProgress.totalEstimatedDistance * 1.25f;
@@ -877,7 +920,13 @@ public class RoutingHelper {
 							int t = (int) Math.min(p * p / (all * all) * 100f, 99);
 							progressRoute.updateProgress(t);
 						}
-						updateProgress(calculationProgress);
+						Thread t = currentRunningJob;
+						if(t instanceof RouteRecalculationThread && ((RouteRecalculationThread) t).params != params) {
+							// different calculation started
+							return; 
+						} else {
+							updateProgress(params);
+						}
 					} else {
 						progressRoute.finish();
 					}

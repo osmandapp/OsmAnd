@@ -47,7 +47,7 @@ public class RoutingConfiguration {
 	public Double initialDirection;
 	
 	// 1.5 Recalculate distance help
-	public float recalculateDistance = 10000f;
+	public float recalculateDistance = 20000f;
 	
 
 	public static class Builder {

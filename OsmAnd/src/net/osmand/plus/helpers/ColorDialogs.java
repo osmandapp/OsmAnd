@@ -30,14 +30,14 @@ public class ColorDialogs {
 	};
 	
 	public static int[] pallette = new int[] {
-			0xffd00d0d,
-			0xffe044bb,
-			0xffff5020,
-			0xff8e2512,
-			0xffeeee10,
-			0xff10c0f0,
-			0xff1010a0,
-			0xff88e030
+			0xb4d00d0d,
+			0xb4e044bb,
+			0xb4ff5020,
+			0xb48e2512,
+			0xb4eeee10,
+			0xb410c0f0,
+			0xb41010a0,
+			0xb488e030
 	};
 
 	
@@ -95,10 +95,18 @@ public class ColorDialogs {
 	}
 	
 	public static String colorToString(int color) {
+		String c = "";
 		if ((0xFF000000 & color) == 0xFF000000) {
-			return "#" + Integer.toHexString(color & 0x00FFFFFF); //$NON-NLS-1$
+			c = Integer.toHexString(color & 0x00FFFFFF);
+			c = c.length() <= 6 ? "000000".substring(c.length()) + c : c; //$NON-NLS-1$
+		} else if ((0x00FFFFFF & color) == color) {
+			//issue: if alpha=00 this is wrong
+			c = Integer.toHexString(color);
+			c = c.length() <= 6 ? "000000".substring(c.length()) + c : c; //$NON-NLS-1$
 		} else {
-			return "#" + Integer.toHexString(color); //$NON-NLS-1$
+			c = Integer.toHexString(color);
+			c = c.length() <= 8 ? "00000000".substring(c.length()) + c : c; //$NON-NLS-1$
 		}
+		return "#" + c; //$NON-NLS-1$
 	}
 }

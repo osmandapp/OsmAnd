@@ -4,22 +4,26 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:background="?attr/card_bg"
+	android:background="?attr/bg_card"
+	android:layout_marginTop="@dimen/dash_margin"
+    android:layout_marginBottom="@dimen/dash_margin"
+    android:layout_marginLeft="@dimen/dash_margin_h"
+    android:layout_marginRight="@dimen/dash_margin_h"
 	android:orientation="vertical">
 
 	<LinearLayout
 		android:layout_width="match_parent"
-		android:layout_height="@dimen/dashHeaderHeight"
+		android:layout_height="@dimen/list_header_height"
 		android:layout_gravity="center_vertical">
 
 		<TextView
 			android:id="@+id/header"
-			style="?attr/dashboardSubHeaderStyle"
+			style="@style/DashboardSubHeader"
 			android:text="@string/map_update"/>
 
 		<Button
 			android:id="@+id/show_all"
-			style="?attr/dashboardGeneralButtonStyle"
+			style="@style/DashboardGeneralButton"
 			android:text="@string/shared_string_show_all"/>
 	</LinearLayout>
 

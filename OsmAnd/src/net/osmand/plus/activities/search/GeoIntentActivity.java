@@ -1,36 +1,5 @@
 package net.osmand.plus.activities.search;
 
-import android.widget.*;
-import gnu.trove.map.hash.TLongObjectHashMap;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-
-import net.osmand.ResultMatcher;
-import net.osmand.access.AccessibleToast;
-import net.osmand.data.Amenity;
-import net.osmand.data.City;
-import net.osmand.data.LatLon;
-import net.osmand.data.MapObject;
-import net.osmand.data.PointDescription;
-import net.osmand.data.Street;
-import net.osmand.plus.AppInitializer;
-import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.AppInitializer.AppInitializeListener;
-import net.osmand.plus.AppInitializer.InitEvents;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.OsmandListActivity;
-import net.osmand.plus.resources.RegionAddressRepository;
-import net.osmand.plus.resources.ResourceManager;
-import net.osmand.util.GeoPointParserUtil;
-import net.osmand.util.MapUtils;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
@@ -41,6 +10,40 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import net.osmand.ResultMatcher;
+import net.osmand.access.AccessibleToast;
+import net.osmand.data.Amenity;
+import net.osmand.data.City;
+import net.osmand.data.LatLon;
+import net.osmand.data.MapObject;
+import net.osmand.data.PointDescription;
+import net.osmand.data.Street;
+import net.osmand.plus.AppInitializer;
+import net.osmand.plus.AppInitializer.AppInitializeListener;
+import net.osmand.plus.AppInitializer.InitEvents;
+import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.OsmandListActivity;
+import net.osmand.plus.resources.RegionAddressRepository;
+import net.osmand.plus.resources.ResourceManager;
+import net.osmand.util.GeoPointParserUtil;
+import net.osmand.util.MapUtils;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+
+import gnu.trove.map.hash.TLongObjectHashMap;
 
 public class GeoIntentActivity extends OsmandListActivity {
 
@@ -168,7 +171,7 @@ public class GeoIntentActivity extends OsmandListActivity {
 			} else {
 				distanceLabel.setText(""); //$NON-NLS-1$
 			}
-			label.setText(getString(model).getFullPlainName(getApplication(), 0, 0));
+			label.setText(getString(model).getFullPlainName(getApplication()));
 			return row;
 		}
 	}
@@ -176,7 +179,7 @@ public class GeoIntentActivity extends OsmandListActivity {
 	private PointDescription getString(MapObject o) {
 		if (o instanceof Amenity) {
 			return new PointDescription(PointDescription.POINT_TYPE_POI,
-					OsmAndFormatter.getPoiStringWithoutType((Amenity) o, false));
+					OsmAndFormatter.getPoiStringWithoutType((Amenity) o, ((OsmandApplication) getApplication()).getSettings().MAP_PREFERRED_LOCALE.get()));
 		}
 		if (o instanceof Street) {
 			return new PointDescription(PointDescription.POINT_TYPE_ADDRESS, ((Street) o).getCity().getName() + " " + o.getName());
@@ -206,7 +209,7 @@ public class GeoIntentActivity extends OsmandListActivity {
 	 * geo:0,0?q=34.99,-106.61(Treasure)<br/>
 	 * geo:0,0?q=1600+Amphitheatre+Parkway%2C+CA<br/>
 	 * 
-	 * @param data
+	 * @param uri
 	 *            The intent uri
 	 * @return
 	 */

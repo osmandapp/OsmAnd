@@ -16,7 +16,7 @@
 
     <TextView
         android:id="@+id/filter_poi_label"
-        style="@style/ListText"
+        android:textSize="@dimen/default_list_text_size_large"
 		android:textColor="?android:textColorPrimary"
 		android:layout_gravity="center_vertical"
 		android:layout_width="fill_parent"

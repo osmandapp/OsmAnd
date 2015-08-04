@@ -24,7 +24,7 @@
 
 		<TextView
 			android:id="@+id/name"
-			style="@style/ListText.Small"
+			android:textSize="@dimen/default_list_text_size"
 			android:layout_width="wrap_content"
 			android:textColor="?android:textColorPrimary"
 			android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
 				android:layout_weight="1"
 				android:maxLines="1"
 				android:textColor="?android:textColorSecondary"
-				android:textSize="@dimen/download_descr_text_size"
+				android:textSize="@dimen/default_sub_text_size"
 				tools:text="@string/app_version"/>
 
 			<TextView
@@ -49,16 +49,16 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:textColor="@color/color_distance"
-				android:textSize="@dimen/download_descr_text_size"
+				android:textSize="@dimen/default_sub_text_size"
 				tools:text="@string/lorem_ipsum"
 				android:maxLines="1"/>
 
 			<TextView
 				android:id="@+id/uptodate_descr"
-				style="@style/ListText.Small"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:textSize="@dimen/download_descr_text_size"
+				android:textSize="@dimen/default_sub_text_size"
+				android:textColor="@color/color_ok"
 				tools:text="@string/lorem_ipsum"
 				android:visibility="gone"
 				android:maxLines="1"/>

@@ -6,11 +6,17 @@ import java.util.Map;
 public class PoiType extends AbstractPoiType {
 	
 	private PoiCategory category;
+	private AbstractPoiType parentType;
 	private PoiType referenceType;
 	private String osmTag;
 	private String osmTag2;
 	private String osmValue;
 	private String osmValue2;
+	
+	private boolean text;
+	private boolean nameOnly;
+	private boolean relation;
+	
 
 	public PoiType(MapPoiTypes poiTypes, PoiCategory category, String name) {
 		super(name, poiTypes);
@@ -78,6 +84,9 @@ public class PoiType extends AbstractPoiType {
 	}
 	
 	public Map<PoiCategory, LinkedHashSet<String>> putTypes(Map<PoiCategory, LinkedHashSet<String>> acceptedTypes) {
+		if (isAdditional()) {
+			return parentType.putTypes(acceptedTypes);
+		}
 		PoiType rt = getReferenceType();
 		PoiType poiType = rt != null ? rt : this;
 		if (!acceptedTypes.containsKey(poiType.category)) {
@@ -90,4 +99,41 @@ public class PoiType extends AbstractPoiType {
 		return acceptedTypes;
 	}
 
+    public void setAdditional(AbstractPoiType parentType) {
+        this.parentType = parentType;
+    }
+
+    public boolean isAdditional(){
+        return parentType != null;
+    }
+
+    public AbstractPoiType getParentType() {
+        return parentType;
+    }
+    
+    public boolean isText() {
+    	return text;
+    }
+    
+    public void setText(boolean text) {
+    	this.text = text;
+    }
+
+	public boolean isNameOnly() {
+		return nameOnly;
+	}
+
+	public void setNameOnly(boolean nameOnly) {
+		this.nameOnly = nameOnly;
+	}
+
+	public boolean isRelation() {
+		return relation;
+	}
+
+	public void setRelation(boolean relation) {
+		this.relation = relation;
+	}
+
+	
 }

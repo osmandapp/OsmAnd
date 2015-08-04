@@ -35,12 +35,13 @@ public class DashFavoritesFragment extends DashLocationFragment {
 	List<FavouritePoint> points = new ArrayList<FavouritePoint>();
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+	public View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_common_fragment, container, false);
 		(view.findViewById(R.id.show_all)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				startFavoritesActivity(FavoritesActivity.FAVORITES_TAB);
+				startFavoritesActivity(FavoritesActivity.FAV_TAB);
+				closeDashboard();
 			}
 		});
 		return view;
@@ -101,7 +102,7 @@ public class DashFavoritesFragment extends DashLocationFragment {
 			}
 
 			((ImageView) view.findViewById(R.id.favourite_icon)).setImageDrawable(FavoriteImageDrawable.getOrCreate(
-					getActivity(), point.getColor()));
+					getActivity(), point.getColor(), 0));
 			DashLocationView dv = new DashLocationView(direction, label, new LatLon(point.getLatitude(),
 					point.getLongitude()));
 			distances.add(dv);

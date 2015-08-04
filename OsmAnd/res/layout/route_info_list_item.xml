@@ -17,6 +17,7 @@
 			android:layout_height="wrap_content"
 			android:layout_gravity="center_vertical"
 			android:textColor="@color/color_distance"
+			android:textSize="@dimen/default_list_text_size"
 			tools:text="@string/app_version"/>
 
 		<TextView
@@ -25,6 +26,7 @@
 			android:layout_height="wrap_content"
 			android:layout_gravity="center_vertical"
 			android:textColor="@color/color_distance"
+			android:textSize="@dimen/default_list_text_size"
 			tools:text="@string/app_version"/>
 	</LinearLayout>
 
@@ -48,6 +50,7 @@
 			android:layout_height="wrap_content"
 			android:layout_gravity="center_vertical"
 			android:textColor="@color/color_distance"
+			android:textSize="@dimen/default_list_text_size"
 			tools:text="@string/app_version"/>
 
 		<TextView
@@ -55,7 +58,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_gravity="center_vertical"
-
+			android:textSize="@dimen/default_list_text_size"
 			android:textColor="@color/color_distance"
 			tools:text="@string/app_version"/>
 	</LinearLayout>
@@ -67,6 +70,7 @@
 		android:layout_marginRight="5dp"
 		android:layout_gravity="center_vertical"
 		android:layout_weight="1"
+		android:textSize="@dimen/default_list_text_size"
 		tools:text="@string/lorem_ipsum"
 		android:text=""/>
 
