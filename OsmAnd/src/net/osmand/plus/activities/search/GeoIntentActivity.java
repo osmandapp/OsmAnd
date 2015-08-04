@@ -49,6 +49,7 @@ public class GeoIntentActivity extends OsmandListActivity {
 
 	private ProgressDialog progressDlg;
 	private LatLon location;
+	protected static final boolean DO_NOT_SEARCH_ADDRESS = true;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -298,6 +299,10 @@ public class GeoIntentActivity extends OsmandListActivity {
 			MapObject geo = checkGeoPoint();
 			if (geo != null) {
 				return new ExecutionResult(Collections.singleton(geo));
+			}
+			// do not 
+			if(DO_NOT_SEARCH_ADDRESS) {
+				return ExecutionResult.EMPTY;
 			}
 
 			// now try to search the City, Street, Etc.. if Street is not found,
