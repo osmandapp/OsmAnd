@@ -964,4 +964,8 @@
 	<string name="poi_capital">Hovedstad</string>
 	<string name="poi_fee_no">Inget gebyr</string>
 
+	<string name="poi_email">E-mail</string>
+	<string name="poi_fax">Fax</string>
+	<string name="poi_facebook">Facebook</string>
+	<string name="poi_mobile">Mobiltelefon</string>
 	</resources>
