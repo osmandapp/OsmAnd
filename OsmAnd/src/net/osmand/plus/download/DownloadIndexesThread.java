@@ -284,7 +284,7 @@ public class DownloadIndexesThread {
 								if (entry.existingBackupFile != null) {
 									Algorithms.removeAllFiles(entry.existingBackupFile);
 								}
-								trackEvent(entry);
+//								trackEvent(entry);
 								publishProgress(entry);
 							}
 						}
@@ -341,16 +341,16 @@ public class DownloadIndexesThread {
 			return null;
 		}
 
-		private void trackEvent(DownloadEntry entry) {
-			String v = Version.getAppName(app);
-			if (Version.isProductionVersion(app)) {
-				v = Version.getFullVersion(app);
-			} else {
-				v += " test";
-			}
-			new DownloadTracker().trackEvent(app, v, Version.getAppName(app),
-					entry.baseName, 1, app.getString(R.string.ga_api_key));
-		}
+//		private void trackEvent(DownloadEntry entry) {
+//			String v = Version.getAppName(app);
+//			if (Version.isProductionVersion(app)) {
+//				v = Version.getFullVersion(app);
+//			} else {
+//				v += " test";
+//			}
+//			new DownloadTracker().trackEvent(app, v, Version.getAppName(app),
+//					entry.baseName, 1, app.getString(R.string.ga_api_key));
+//		}
 
 		@Override
 		public void showWarning(String warning) {
