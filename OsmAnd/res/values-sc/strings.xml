@@ -2050,4 +2050,6 @@
 	<string name="successfully_uploaded_pattern">Carrigamentu resessidu {0}/{1}</string>
 	<string name="try_again">Torra a proare</string>
 	<string name="error_message_pattern">Errore: {0}</string>
-</resources>
+<string name="rendering_value_boldOutline_name">Oru in grassetu</string>
+    <string name="traffic_warning_hazard">Perìgulu</string>
+    </resources>
