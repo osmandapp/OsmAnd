@@ -946,4 +946,8 @@
 	<string name="poi_capital">首都</string>
 	<string name="poi_fee_no">不收費</string>
 
+	<string name="poi_email">電子郵件</string>
+	<string name="poi_fax">傳真</string>
+	<string name="poi_facebook">臉書</string>
+	<string name="poi_mobile">行動電話</string>
 	</resources>

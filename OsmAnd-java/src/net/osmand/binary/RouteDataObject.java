@@ -248,7 +248,7 @@ public class RouteDataObject {
 			String pref = v.substring(i, v.length()).trim();
 			float add = 0;
 			for(int ik = 0; ik < pref.length(); ik++) {
-				if(Character.isDigit(pref.charAt(ik)) || pref.charAt(ik) == '.' || pref.charAt(ik) == '-') {
+				if(Algorithms.isDigit(pref.charAt(ik)) || pref.charAt(ik) == '.' || pref.charAt(ik) == '-') {
 					int first = Algorithms.findFirstNumberEndIndex(pref.substring(ik));
 					if(first != -1) {
 						add = parseLength(pref.substring(ik), 0);
