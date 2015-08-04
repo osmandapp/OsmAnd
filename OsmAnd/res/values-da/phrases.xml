@@ -968,9 +968,9 @@
 	<string name="poi_fax">Fax</string>
 	<string name="poi_facebook">Facebook</string>
 	<string name="poi_mobile">Mobiltelefon</string>
-	<string name="poi_animal_shelter_dog">Husly for hunde</string>
-	<string name="poi_animal_shelter_cat">Husly for katte</string>
-	<string name="poi_animal_shelter_dog_cat">Husly for hunde og katte</string>
-	<string name="poi_animal_shelter_bird">Husly for fugle</string>
+	<string name="poi_animal_shelter_dog">Hundenternat</string>
+	<string name="poi_animal_shelter_cat">Katteinternat</string>
+	<string name="poi_animal_shelter_dog_cat">Hunde- og katteinternat</string>
+	<string name="poi_animal_shelter_bird">Fugleinternat</string>
 
 </resources>
