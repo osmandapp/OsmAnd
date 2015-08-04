@@ -51,6 +51,13 @@ public class FavoritesListFragment extends OsmAndListFragment implements SearchA
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 		Intent intent = activity.getIntent();
+		settings = getApplication().getSettings();
+		OsmandApplication app = getApplication();
+		favouritesAdapter = new FavouritesAdapter(activity, app.getFavorites().getFavouritePoints(),
+				!selectFavoriteMode);
+		setListAdapter(favouritesAdapter);
+		setHasOptionsMenu(true);
+
 		if (intent != null) {
 			selectFavoriteMode = intent.hasExtra(SELECT_FAVORITE_POINT_INTENT_KEY);
 			if (intent.hasExtra(SearchActivity.SEARCH_LAT) && intent.hasExtra(SearchActivity.SEARCH_LON)) {
@@ -61,12 +68,6 @@ public class FavoritesListFragment extends OsmAndListFragment implements SearchA
 				}
 			}
 		}
-		settings = ((OsmandApplication) getApplication()).getSettings();
-		OsmandApplication app = (OsmandApplication) getApplication();
-		favouritesAdapter = new FavouritesAdapter(activity, app.getFavorites().getFavouritePoints(),
-				!selectFavoriteMode);
-		setListAdapter(favouritesAdapter);
-		setHasOptionsMenu(true);
 	}
 
 	private OsmandApplication getApplication() {
