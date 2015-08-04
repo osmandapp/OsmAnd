@@ -951,9 +951,9 @@
 	<string name="poi_fax">Fax</string>
 	<string name="poi_facebook">Facebook</string>
 	<string name="poi_mobile">Celular</string>
-	<string name="poi_animal_shelter_dog">Techo para perros</string>
-	<string name="poi_animal_shelter_cat">Techo para gatos</string>
-	<string name="poi_animal_shelter_dog_cat">Techo para perros y gatos</string>
-	<string name="poi_animal_shelter_bird">Techo para pájaros</string>
+	<string name="poi_animal_shelter_dog">Refugio para perros</string>
+	<string name="poi_animal_shelter_cat">Refugio para gatos</string>
+	<string name="poi_animal_shelter_dog_cat">Refugio para perros y gatos</string>
+	<string name="poi_animal_shelter_bird">Refugio para aves</string>
 
 </resources>
