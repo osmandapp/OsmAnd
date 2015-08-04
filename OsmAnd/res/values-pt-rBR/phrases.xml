@@ -947,4 +947,13 @@
 	<string name="poi_capital">Capital</string>
 	<string name="poi_fee_no">Sem taxa</string>
 
-	</resources>
+	<string name="poi_email">Email</string>
+	<string name="poi_fax">Fax</string>
+	<string name="poi_facebook">Facebook</string>
+	<string name="poi_mobile">Celular</string>
+	<string name="poi_animal_shelter_dog">Abrigo para cães</string>
+	<string name="poi_animal_shelter_cat">Abrigo para gatos</string>
+	<string name="poi_animal_shelter_dog_cat">Abrigo para cães e gatos</string>
+	<string name="poi_animal_shelter_bird">Abrigo para aves</string>
+
+</resources>
