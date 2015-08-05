@@ -2138,4 +2138,5 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 <string name="no_updates_available">Non ci sono aggiornamenti disponibili</string>
     <string name="we_really_care_about_your_opinion">Ci teniamo molto alla tua opinione, è molto importante avere un tuo rimando.</string>
 	<string name="rendering_value_boldOutline_name">Contorno in grassetto</string>
+    <string name="traffic_warning_hazard">Pericolo</string>
     </resources>
