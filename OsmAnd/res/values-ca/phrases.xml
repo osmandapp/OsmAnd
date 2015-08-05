@@ -952,4 +952,13 @@
 	<string name="poi_capital">Capital</string>
 	<string name="poi_fee_no">Sense cap cost</string>
 
-	</resources>
+	<string name="poi_email">e-mail</string>
+	<string name="poi_fax">Fax</string>
+	<string name="poi_facebook">Facebook</string>
+	<string name="poi_mobile">Mòbil</string>
+	<string name="poi_animal_shelter_dog">Refugi per gossos</string>
+	<string name="poi_animal_shelter_cat">Refugi per gats</string>
+	<string name="poi_animal_shelter_dog_cat">Refugi per gossos i gats</string>
+	<string name="poi_animal_shelter_bird">Refugi per ocells</string>
+
+</resources>
