@@ -4,6 +4,7 @@ import android.app.ListActivity;
 import android.app.ListFragment;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorListener;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
@@ -38,6 +39,7 @@ import android.widget.ListView;
  * android.view.ViewPropertyAnimator}.</p>
  */
 public class SwipeDismissTouchListener implements View.OnTouchListener {
+	private static final String TAG = "SwipeDismissTouchListener";
 	// Cached ViewConfiguration and system-wide constant values
 	private int mSlop;
 	private int mMinFlingVelocity;
@@ -100,6 +102,7 @@ public class SwipeDismissTouchListener implements View.OnTouchListener {
 
 	@Override
 	public boolean onTouch(View view, MotionEvent motionEvent) {
+		Log.v(TAG, "onTouch(" + "view=" + view + ", motionEvent=" + motionEvent + ")");
 		// offset because the view is translated during swipe
 		motionEvent.offsetLocation(mTranslationX, 0);
 
