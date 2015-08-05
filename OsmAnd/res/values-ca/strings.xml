@@ -2088,4 +2088,5 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
 <string name="no_updates_available">No hi ha actualitzacions disponibles</string>
     <string name="we_really_care_about_your_opinion">"Valorem molt la vostra opinió i és important per nosaltres  disposar dels vostres comentaris."</string>
 	<string name="rendering_value_boldOutline_name">Contorn destacat</string>
+    <string name="traffic_warning_hazard">Perill informat</string>
     </resources>
