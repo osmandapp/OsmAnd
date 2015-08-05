@@ -727,6 +727,7 @@
 	<string name="poi_dock">Dock</string>
 	<string name="poi_cutline">Cutline</string>
 	<string name="poi_toilets">Restroom</string>
+	<string name="poi_shower">Shower</string>
 	<string name="poi_sauna">Sauna</string>
 	<string name="poi_brothel">Brothel</string>
 	<string name="poi_smoking_area">Smoking area</string>
