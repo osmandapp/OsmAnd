@@ -973,7 +973,7 @@
 	<string name="poi_animal_shelter_dog_cat">Hunde- og katteinternat</string>
 	<string name="poi_animal_shelter_bird">Fugleinternat</string>
 
-<string name="poi_shower">Brusebad</string>
+<string name="poi_shower">Bruser</string>
 	<string name="poi_recycling_centre">Centrum</string>
 	<string name="poi_recycling_container">Container</string>
 	<string name="poi_recycling_glass">Glas</string>
@@ -1049,7 +1049,7 @@
 	<string name="poi_seasonal_yes">Sæsonbestemt</string>
 	<string name="poi_seasonal_no">Ikke sæsonbestemt</string>
 	<string name="poi_seasonal_dry_season">Tørre årstid</string>
-	<string name="poi_seasonal_wet_season">Våde sæson</string>
+	<string name="poi_seasonal_wet_season">Regnsæson</string>
 	<string name="poi_seasonal_spring">Forår</string>
 	<string name="poi_seasonal_summer">Sommer</string>
 	<string name="poi_seasonal_autumn">Efterår</string>
