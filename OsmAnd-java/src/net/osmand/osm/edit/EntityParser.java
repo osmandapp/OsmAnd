@@ -175,22 +175,25 @@ public class EntityParser {
 	}
 	
 	
-	public static List<Amenity> parseAmenities(MapPoiTypes poiTypes, Entity entity, Map<String, String> tags,List<Amenity> amenitiesList) {
+	public static List<Amenity> parseAmenities(MapPoiTypes poiTypes, Entity entity, Map<String, String> tags,
+			List<Amenity> amenitiesList) {
 		amenitiesList.clear();
 		// it could be collection of amenities
 		boolean relation = entity instanceof Relation;
 		boolean purerelation = relation && !"multipolygon".equals(tags.get("type"));
-		
-		for (Map.Entry<String, String> e : tags.entrySet()) {
-			Amenity am = poiTypes.parseAmenity(e.getKey(), e.getValue(), purerelation, tags);
-			if (am != null) {
-				parseMapObject(am, entity, tags);
-				String wbs = getWebSiteURL(tags);
-				if(wbs != null) {
-					am.setAdditionalInfo("website", wbs);
-				}
-				if (checkAmenitiesToAdd(am, amenitiesList) && !"no".equals(am.getSubType())) {
-					amenitiesList.add(am);
+		Collection<Map<String, String>> it = MapRenderingTypes.splitTagsIntoDifferentObjects(tags);
+		for (Map<String, String> ts : it) {
+			for (Map.Entry<String, String> e : ts.entrySet()) {
+				Amenity am = poiTypes.parseAmenity(e.getKey(), e.getValue(), purerelation, ts);
+				if (am != null) {
+					parseMapObject(am, entity, ts);
+					String wbs = getWebSiteURL(ts);
+					if (wbs != null) {
+						am.setAdditionalInfo("website", wbs);
+					}
+					if (checkAmenitiesToAdd(am, amenitiesList) && !"no".equals(am.getSubType())) {
+						amenitiesList.add(am);
+					}
 				}
 			}
 		}
