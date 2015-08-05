@@ -966,7 +966,7 @@
 	<string name="poi_recycling_scrap_metal">Sucata de metal</string>
 	<string name="poi_recycling_batteries">Pilhas</string>
 	<string name="poi_recycling_plastic_bottles">Garrafas de plástico</string>
-	<string name="poi_recycling_green_waste">Resíduos verdes</string>
+	<string name="poi_recycling_green_waste">Resíduo verde</string>
 	<string name="poi_recycling_waste">Resíduos (sacos pretos)</string>
 	<string name="poi_recycling_plastic_packaging">Embalagens de plástico</string>
 	<string name="poi_recycling_newspaper">Jornal</string>
@@ -981,7 +981,7 @@
 	<string name="poi_recycling_aluminium">Alumínio</string>
 	<string name="poi_recycling_organic">Orgânico</string>
 	<string name="poi_recycling_beverage_cartons">Caixas de bebidas</string>
-	<string name="poi_recycling_garden_waste">Resíduos de jardim</string>
+	<string name="poi_recycling_garden_waste">Resíduo de jardim</string>
 	<string name="poi_recycling_low_energy_bulbs">Lâmpadas de baixo consumo</string>
 	<string name="poi_recycling_fluorescent_tubes">Lâmpadas fluorescentes</string>
 	<string name="poi_recycling_metal">Metal</string>
@@ -990,7 +990,7 @@
 	<string name="poi_recycling_cooking_oil">Óleo de cozinha</string>
 	<string name="poi_recycling_engine_oil">Óleo do motor</string>
 	<string name="poi_recycling_plastic_bags">Sacos plásticos</string>
-	<string name="poi_recycling_hazardous_waste">Resíduos perigosos</string>
+	<string name="poi_recycling_hazardous_waste">Resíduo perigoso</string>
 	<string name="poi_recycling_mobile_phones">Telefones celulares</string>
 	<string name="poi_recycling_hydrargyrum">Mercúrio</string>
 	<string name="poi_recycling_computers">Computadores</string>
@@ -999,7 +999,7 @@
 	<string name="poi_recycling_tetrapak">Tetrapak</string>
 	<string name="poi_recycling_rubble">Entulho</string>
 	<string name="poi_recycling_cds">CDs</string>
-	<string name="poi_recycling_waste_oil">Resíduos de óleo</string>
+	<string name="poi_recycling_waste_oil">Resíduo de óleo</string>
 	<string name="poi_recycling_bottles">Garrafas</string>
 	<string name="poi_recycling_cork">Cortiça</string>
 	<string name="poi_recycling_printer_cartridges">Cartuchos de impressão</string>
