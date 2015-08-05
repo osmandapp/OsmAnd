@@ -967,4 +967,27 @@
 	<string name="poi_animal_shelter_bird">Прытулак для птушак</string>
 
 <string name="poi_shower">Душ</string>
+	<string name="poi_recycling_centre">Пункт прыёму</string>
+	<string name="poi_recycling_container">Кантэйнэр</string>
+	<string name="poi_recycling_glass">Шкло</string>
+	<string name="poi_recycling_paper">Папера</string>
+	<string name="poi_recycling_clothes">Вопратка</string>
+	<string name="poi_recycling_cans">Бляшанкі</string>
+	<string name="poi_recycling_glass_bottles">Шкляныя бутэлькі</string>
+	<string name="poi_recycling_plastic">Плястык</string>
+	<string name="poi_recycling_scrap_metal">Мэталалом</string>
+	<string name="poi_recycling_batteries">Батарэйкі</string>
+	<string name="poi_recycling_plastic_bottles">Плястыкавыя бутэлькі</string>
+	<string name="poi_recycling_green_waste">Расьліннае сьмецьце</string>
+	<string name="poi_recycling_waste">Сьмецьце (чорныя мяхі)</string>
+	<string name="poi_recycling_plastic_packaging">Плястыкавая тара</string>
+	<string name="poi_recycling_newspaper">Газэты</string>
+	<string name="poi_recycling_magazines">Часопісы</string>
+	<string name="poi_recycling_books">Кнігі</string>
+	<string name="poi_recycling_shoes">Абутак</string>
+	<string name="poi_seasonal_winter">Зіма</string>
+
+	<string name="poi_seasonal_autumn">Восень</string>
+	<string name="poi_seasonal_summer">Лета</string>
+	<string name="poi_seasonal_spring">Вясна</string>
 	</resources>

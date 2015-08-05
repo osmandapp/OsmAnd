@@ -724,7 +724,7 @@
 	<string name="poi_valley">山谷</string>
 	<string name="poi_water">水</string>
 	<string name="poi_wetland">濕地</string>
-	<string name="poi_wood">樹木</string>
+	<string name="poi_wood">木頭</string>
 	<string name="poi_nature_reserve">自然保護區</string>
 	<string name="poi_strait">海峽</string>
 	<string name="poi_island">島嶼</string>
@@ -956,4 +956,35 @@
 	<string name="poi_animal_shelter_bird">野鳥庇護所</string>
 
 <string name="poi_shower">淋浴</string>
+	<string name="poi_recycling_centre">中心</string>
+	<string name="poi_recycling_container">貨櫃</string>
+	<string name="poi_recycling_glass">玻璃</string>
+	<string name="poi_recycling_paper">紙</string>
+	<string name="poi_recycling_clothes">衣服</string>
+	<string name="poi_recycling_cans">罐頭</string>
+	<string name="poi_recycling_glass_bottles">玻璃瓶</string>
+	<string name="poi_recycling_plastic">塑膠</string>
+	<string name="poi_recycling_scrap_metal">廢金屬</string>
+	<string name="poi_recycling_batteries">電池</string>
+	<string name="poi_recycling_plastic_bottles">塑膠瓶</string>
+	<string name="poi_recycling_green_waste">綠色廢棄物</string>
+	<string name="poi_recycling_waste">垃圾 (黑色袋)</string>
+	<string name="poi_recycling_plastic_packaging">塑膠包裝</string>
+	<string name="poi_recycling_newspaper">報紙</string>
+	<string name="poi_recycling_cartons">紙箱</string>
+	<string name="poi_recycling_cardboard">紙板</string>
+	<string name="poi_recycling_magazines">雜誌</string>
+	<string name="poi_recycling_paper_packaging">紙包裝</string>
+	<string name="poi_recycling_small_appliances">小家電</string>
+	<string name="poi_recycling_wood">木頭</string>
+	<string name="poi_recycling_books">書籍</string>
+	<string name="poi_recycling_shoes">鞋子</string>
+	<string name="poi_recycling_aluminium">鋁</string>
+	<string name="poi_recycling_organic">有機的</string>
+	<string name="poi_recycling_beverage_cartons">飲料盒</string>
+	<string name="poi_recycling_garden_waste">園藝廢棄物</string>
+	<string name="poi_recycling_low_energy_bulbs">低能耗燈泡</string>
+	<string name="poi_recycling_fluorescent_tubes">日光燈管</string>
+	<string name="poi_recycling_metal">金屬</string>
+	<string name="poi_recycling_electrical_items">電器用品</string>
 	</resources>
