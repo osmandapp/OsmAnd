@@ -1055,4 +1055,8 @@
 	<string name="poi_seasonal_autumn">Efterår</string>
 	<string name="poi_seasonal_winter">Vinter</string>
 
+	<string name="poi_crossing_traffic_signals">Med trafiksignaler</string>
+	<string name="poi_crossing_uncontrolled">Ukontrolleret</string>
+	<string name="poi_crossing_unmarked">Umarkerede</string>
+
 	</resources>
