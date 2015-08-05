@@ -847,6 +847,9 @@
 	<string name="poi_seasonal_summer">Лето</string>
 	<string name="poi_seasonal_autumn">Осень</string>
 	<string name="poi_seasonal_winter">Зима</string>
+	<string name="poi_crossing_traffic_signals">Со светофором</string>
+	<string name="poi_crossing_uncontrolled">Нерегулируемый</string>
+	<string name="poi_crossing_unmarked">Неразмеченный</string>
 
 	<string name="poi_access_private">Частный доступ</string>
 	<string name="poi_access_no">Нет доступа</string>

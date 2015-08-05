@@ -1012,6 +1012,9 @@
 	<string name="poi_seasonal_summer">Summer</string>
 	<string name="poi_seasonal_autumn">Autumn</string>
 	<string name="poi_seasonal_winter">Winter</string>
+	<string name="poi_crossing_traffic_signals">With traffic signals</string>
+	<string name="poi_crossing_uncontrolled">Uncontrolled</string>
+	<string name="poi_crossing_unmarked">Unmarked</string>
 
 	<string name="poi_access_private">Private access</string>
 	<string name="poi_access_no">No access</string>
