@@ -1038,4 +1038,8 @@
 
 	<string name="poi_recycling_centre">Centro</string>
 	<string name="poi_recycling_hardcore">Material duro</string>
+	<string name="poi_crossing_traffic_signals">Com semáforos</string>
+	<string name="poi_crossing_uncontrolled">Sem controle</string>
+	<string name="poi_crossing_unmarked">Desmarcado</string>
+
 	</resources>
