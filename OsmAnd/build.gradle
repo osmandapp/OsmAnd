@@ -301,7 +301,7 @@ repositories {
 
 dependencies {
 	compile project(path: ":OsmAnd-java", configuration: "android")
-	compile project(":design")
+	compile project(":eclipse-compile:design")
 	compile fileTree(
 			dir: "libs",
 			include: ["*.jar"],
