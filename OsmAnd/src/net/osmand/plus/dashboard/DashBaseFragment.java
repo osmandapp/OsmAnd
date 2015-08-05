@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.widgets.InterceptorFrameLayout;
 import net.osmand.plus.widgets.tools.SwipeDismissTouchListener;
 
 /**
@@ -48,8 +49,15 @@ public abstract class DashBaseFragment extends Fragment {
 	final public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
 								   @Nullable Bundle savedInstanceState) {
 		View childView = initView(inflater, container, savedInstanceState);
+		ViewGroup.LayoutParams layoutParams =
+				new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+						ViewGroup.LayoutParams.WRAP_CONTENT);
+
+		InterceptorFrameLayout frameLayout = new InterceptorFrameLayout(getActivity());
+		frameLayout.setLayoutParams(layoutParams);
+		frameLayout.addView(childView);
 		if (isDismissAllowed()) {
-			childView.setOnTouchListener(new SwipeDismissTouchListener(childView, null,
+			SwipeDismissTouchListener listener = new SwipeDismissTouchListener(childView, null,
 					new SwipeDismissTouchListener.DismissCallbacks() {
 						@Override
 						public boolean canDismiss(Object token) {
@@ -64,13 +72,16 @@ public abstract class DashBaseFragment extends Fragment {
 								// TODO show settings card
 							}
 						}
-					}));
+					});
+			frameLayout.setOnTouchListener(listener);
+			frameLayout.setListener(listener);
 			if (getDismissCallback() == null) {
 				defaultDismissListener = new DefaultDismissListener(getParentView(), dashboard, getTag(),
 						childView);
 			}
 		}
-		return childView;
+
+		return frameLayout;
 	}
 
 	public abstract View initView(LayoutInflater inflater, @Nullable ViewGroup container,
