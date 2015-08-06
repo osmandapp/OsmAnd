@@ -2057,4 +2057,8 @@
 <string name="rendering_attr_currentTrackColor_name">GPX цвет</string>
     <string name="rendering_attr_currentTrackWidth_name">GPX толщина</string>
     <string name="no_updates_available">Нет доступных обновлений</string>
-    </resources>
+    <string name="failed_to_upload">Не удалось загрузить</string>
+	<string name="delete_change">Удалить изменения</string>
+	<string name="successfully_uploaded_pattern">Успешно загружены {0}/{1}</string>
+	<string name="error_message_pattern">Ошибка: {0}</string>
+</resources>
