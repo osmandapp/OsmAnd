@@ -1,1 +1,5 @@
-src/main/AndroidManifest.xml
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="android.support.design">
+    <uses-sdk android:minSdkVersion="7"/>
+    <application/>
+</manifest>
