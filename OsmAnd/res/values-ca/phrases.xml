@@ -972,7 +972,7 @@
 	<string name="poi_recycling_scrap_metal">Ferralla</string>
 	<string name="poi_recycling_batteries">Piles</string>
 	<string name="poi_recycling_plastic_bottles">Ampolles de plàstic</string>
-	<string name="poi_recycling_green_waste">Orgànic</string>
+	<string name="poi_recycling_green_waste">Biodegradables nitrogenats</string>
 	<string name="poi_recycling_plastic_packaging">Envasos de plàstic</string>
 	<string name="poi_recycling_newspaper">Diaris</string>
 	<string name="poi_recycling_cartons">Caixes de cartró</string>
