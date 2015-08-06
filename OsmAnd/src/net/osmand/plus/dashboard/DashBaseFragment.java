@@ -11,6 +11,7 @@ import android.support.v4.view.ViewCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;
@@ -49,13 +50,17 @@ public abstract class DashBaseFragment extends Fragment {
 	final public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
 								   @Nullable Bundle savedInstanceState) {
 		View childView = initView(inflater, container, savedInstanceState);
-		ViewGroup.LayoutParams layoutParams =
-				new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+		FrameLayout.LayoutParams layoutParams =
+				new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
 						ViewGroup.LayoutParams.WRAP_CONTENT);
-
 		InterceptorFrameLayout frameLayout = new InterceptorFrameLayout(getActivity());
 		frameLayout.setLayoutParams(layoutParams);
-		frameLayout.addView(childView);
+
+		FrameLayout.LayoutParams childLayoutParams =
+				new FrameLayout.LayoutParams(
+						(ViewGroup.MarginLayoutParams) childView.getLayoutParams());
+		frameLayout.addView(childView, childLayoutParams);
+
 		if (isDismissAllowed()) {
 			SwipeDismissTouchListener listener = new SwipeDismissTouchListener(childView, null,
 					new SwipeDismissTouchListener.DismissCallbacks() {
