@@ -71,6 +71,7 @@
     </style>
 
     <!-- Action Button Styles -->
+
     <style name="Base.Widget.AppCompat.ActionButton"
            parent="android:Widget.Material.ActionButton">
     </style>
@@ -172,6 +173,8 @@
     </style>
 
     <style name="Base.Widget.AppCompat.AutoCompleteTextView" parent="android:Widget.Material.AutoCompleteTextView" />
+
+    <style name="Base.Widget.AppCompat.EditText" parent="android:Widget.Material.EditText" />
 
     <style name="Base.Widget.AppCompat.RatingBar" parent="android:Widget.Material.RatingBar" />
 
