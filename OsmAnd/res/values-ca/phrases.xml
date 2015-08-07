@@ -1029,4 +1029,6 @@
 	<string name="poi_seasonal_winter">Hivern</string>
 
 	<string name="poi_recycling_waste">Rebuig (bosses de negres)</string>
+	<string name="poi_recycling_paper_packaging">Embalatge de paper</string>
+	<string name="poi_recycling_tetrapak">Tetra Pak</string>
 	</resources>
