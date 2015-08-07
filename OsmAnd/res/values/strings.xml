@@ -2226,4 +2226,5 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="successfully_uploaded_pattern">Successfully uploaded {0}/{1}</string>
 	<string name="try_again">Try again</string>
 	<string name="error_message_pattern">Error: {0}</string>
+	<string name="dahboard_options_dialog_title">Dashboard options</string>
 </resources>

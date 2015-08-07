@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 
 import java.util.Calendar;
 
@@ -50,60 +51,62 @@ public class DashRateUsFragment extends DashBaseFragment {
         return view;
     }
 
-    public static boolean shouldShow(OsmandSettings settings) {
-        if(!settings.LAST_DISPLAY_TIME.isSet()) {
-            settings.LAST_DISPLAY_TIME.set(System.currentTimeMillis());
-        }
-        DashRateUsFragment.settings = settings;
-        long lastDisplayTimeInMillis = settings.LAST_DISPLAY_TIME.get();
-        int numberOfApplicationRuns = settings.NUMBER_OF_APPLICATION_STARTS.get();
-        RateUsState state = settings.RATE_US_STATE.get();
+	public static boolean shouldShow(OsmandSettings settings) {
+		if(!settings.LAST_DISPLAY_TIME.isSet()) {
+			settings.LAST_DISPLAY_TIME.set(System.currentTimeMillis());
+		}
+		DashRateUsFragment.settings = settings;
+		long lastDisplayTimeInMillis = settings.LAST_DISPLAY_TIME.get();
+		int numberOfApplicationRuns = settings.NUMBER_OF_APPLICATION_STARTS.get();
+		RateUsState state = settings.RATE_US_STATE.get();
 
-        Calendar modifiedTime = Calendar.getInstance();
-        Calendar lastDisplayTime = Calendar.getInstance();
-        lastDisplayTime.setTimeInMillis(lastDisplayTimeInMillis);
+		Calendar modifiedTime = Calendar.getInstance();
+		Calendar lastDisplayTime = Calendar.getInstance();
+		lastDisplayTime.setTimeInMillis(lastDisplayTimeInMillis);
 
-        int bannerFreeRuns = 0;
+		int bannerFreeRuns = 0;
 
-        Log.v(TAG, "state=" + state + "; lastDisplayTimeInMillis=" + lastDisplayTimeInMillis
-                + "; numberOfApplicationRuns=" + numberOfApplicationRuns);
+		Log.v(TAG, "state=" + state + "; lastDisplayTimeInMillis=" + lastDisplayTimeInMillis
+				+ "; numberOfApplicationRuns=" + numberOfApplicationRuns);
 
-        switch (state) {
-            case LIKED:
-                return false;
-            case INITIAL_STATE:
-                break;
-            case IGNORED:
-                modifiedTime.add(Calendar.WEEK_OF_YEAR, -1);
-                bannerFreeRuns = 5;
-                break;
-            case DISLIKED_WITH_MESSAGE:
-                modifiedTime.add(Calendar.MONTH, -3);
-                bannerFreeRuns = 3;
-                break;
-            case DISLIKED_WITHOUT_MESSAGE:
-                modifiedTime.add(Calendar.MONTH, -2);
-                break;
-            default:
-                throw new IllegalStateException("Unexpected state:" + state);
-        }
+		boolean toReturn = false;
 
-        if (state != RateUsState.INITIAL_STATE) {
-            if (modifiedTime.after(lastDisplayTime) && numberOfApplicationRuns >= bannerFreeRuns) {
-                settings.RATE_US_STATE.set(RateUsState.INITIAL_STATE);
-                modifiedTime = Calendar.getInstance();
-            } else {
-                return false;
-            }
-        }
-        // Initial state now
-        modifiedTime.add(Calendar.HOUR, -72);
-        bannerFreeRuns = 3;
-        if (modifiedTime.after(lastDisplayTime) && numberOfApplicationRuns >= bannerFreeRuns) {
-            return true;
-        }
-        return false;
-    }
+		switch (state) {
+			case LIKED:
+				return false;
+			case INITIAL_STATE:
+				break;
+			case IGNORED:
+				modifiedTime.add(Calendar.WEEK_OF_YEAR, -1);
+				bannerFreeRuns = 5;
+				break;
+			case DISLIKED_WITH_MESSAGE:
+				modifiedTime.add(Calendar.MONTH, -3);
+				bannerFreeRuns = 3;
+				break;
+			case DISLIKED_WITHOUT_MESSAGE:
+				modifiedTime.add(Calendar.MONTH, -2);
+				break;
+			default:
+				throw new IllegalStateException("Unexpected state:" + state);
+		}
+
+		if (state != RateUsState.INITIAL_STATE) {
+			if (modifiedTime.after(lastDisplayTime) && numberOfApplicationRuns >= bannerFreeRuns) {
+				settings.RATE_US_STATE.set(RateUsState.INITIAL_STATE);
+				modifiedTime = Calendar.getInstance();
+			} else {
+				return false;
+			}
+		}
+		// Initial state now
+		modifiedTime.add(Calendar.HOUR, -72);
+		bannerFreeRuns = 3;
+		if (modifiedTime.after(lastDisplayTime) && numberOfApplicationRuns >= bannerFreeRuns) {
+			toReturn = true;
+		}
+		return toReturn;
+	}
 
     public class PositiveButtonListener implements View.OnClickListener {
         private TextView header;
@@ -210,5 +213,13 @@ public class DashRateUsFragment extends DashBaseFragment {
         LIKED,
         DISLIKED_WITH_MESSAGE,
         DISLIKED_WITHOUT_MESSAGE
+    }
+
+    public static class RateUsShouldShow extends DashboardOnMap.SettingsShouldShow {
+        @Override
+        public boolean shouldShow(OsmandSettings settings, MapActivity activity, String tag) {
+            return DashRateUsFragment.shouldShow(settings)
+					&& super.shouldShow(settings, activity, tag);
+        }
     }
 }

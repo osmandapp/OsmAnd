@@ -16,8 +16,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashBaseFragment;
 
-/**
- */
 public class DashSimulateFragment extends DashBaseFragment {
 
 	public static final String TAG = "DASH_SIMULATE_FRAGMENT";
@@ -61,5 +59,4 @@ public class DashSimulateFragment extends DashBaseFragment {
 
 		return view;
 	}
-
 }
