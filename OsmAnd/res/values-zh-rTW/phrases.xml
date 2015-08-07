@@ -1034,4 +1034,10 @@
 	<string name="poi_crossing_uncontrolled">無控制的</string>
 	<string name="poi_crossing_unmarked">無標志的</string>
 
+	<string name="poi_recycling_white_goods">白色家電</string>
+	<string name="poi_recycling_sheet_metal">金屬片</string>
+	<string name="poi_recycling_hardcore">碎石層</string>
+	<string name="poi_recycling_animal_waste">動物廢棄物</string>
+	<string name="poi_supervised_yes">有監管</string>
+	<string name="poi_supervised_no">沒有監管</string>
 	</resources>
