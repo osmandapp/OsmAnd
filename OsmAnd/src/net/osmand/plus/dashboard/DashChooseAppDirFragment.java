@@ -66,14 +66,6 @@ public class DashChooseAppDirFragment extends DashBaseFragment {
 	public View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		return fragment.initView(inflater, container, savedInstanceState);
 	}
-
-	public static boolean isDashNeeded(OsmandSettings settings) {
-		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
-			return false;
-		}
-		return !settings.isExternalStorageDirectorySpecifiedV19();
-	}
-	
 	
 	public static class ChooseAppDirFragment {
 		public static final int VERSION_DEFAULTLOCATION_CHANGED = 19;
@@ -119,8 +111,6 @@ public class DashChooseAppDirFragment extends DashBaseFragment {
 				locationPath.setText(R.string.storage_directory_external);
 			} else if (type == OsmandSettings.EXTERNAL_STORAGE_TYPE_OBB) {
 				locationPath.setText(R.string.storage_directory_multiuser);
-			} else if (type == OsmandSettings.EXTERNAL_STORAGE_TYPE_SPECIFIED) {
-				locationPath.setText(R.string.storage_directory_manual);
 			} else if (type == OsmandSettings.EXTERNAL_STORAGE_TYPE_SPECIFIED) {
 				locationPath.setText(R.string.storage_directory_manual);
 			}

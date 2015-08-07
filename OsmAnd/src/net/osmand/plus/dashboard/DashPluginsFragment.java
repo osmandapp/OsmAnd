@@ -35,12 +35,12 @@ public class DashPluginsFragment extends DashBaseFragment {
 
 	private View.OnClickListener getListener(final OsmandPlugin plugin) {
 		return new View.OnClickListener() {
-		@Override
-		public void onClick(View view) {
-			startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL())));
-			closeDashboard();
-		}
-	};
+			@Override
+			public void onClick(View view) {
+				startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL())));
+				closeDashboard();
+			}
+		};
 	}
 
 	private final View.OnClickListener pluginDetailsListener(final OsmandPlugin plugin) {
@@ -85,7 +85,7 @@ public class DashPluginsFragment extends DashBaseFragment {
 
 
 	private void addPluginsToLimit(Iterator<OsmandPlugin> it, int l) {
-		while(plugins.size() < l && it.hasNext()) {
+		while (plugins.size() < l && it.hasNext()) {
 			OsmandPlugin plugin = it.next();
 			if (plugin instanceof OsmandDevelopmentPlugin) {
 				continue;
@@ -104,7 +104,7 @@ public class DashPluginsFragment extends DashBaseFragment {
 			inflatePluginView(inflater, pluginsContainer, p);
 		}
 	}
-	
+
 	private void updatePluginState(View pluginView, OsmandPlugin plugin) {
 		CompoundButton enableDisableButton = (CompoundButton) pluginView.findViewById(R.id.plugin_enable_disable);
 		Button getButton = (Button) pluginView.findViewById(R.id.get_plugin);
@@ -124,7 +124,7 @@ public class DashPluginsFragment extends DashBaseFragment {
 			logoView.setBackgroundResource(R.drawable.bg_plugin_logo_enabled);
 		} else {
 			TypedArray attributes = getActivity().getTheme().obtainStyledAttributes(
-					new int[] { R.attr.bg_plugin_logo_disabled });
+					new int[]{R.attr.bg_plugin_logo_disabled});
 			logoView.setBackgroundDrawable(attributes.getDrawable(0));
 			attributes.recycle();
 		}

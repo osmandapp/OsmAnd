@@ -174,7 +174,9 @@ public abstract class DashBaseFragment extends Fragment {
 
 		@Override
 		public void onDismiss() {
-			dashboardOnMap.hideFragmentByTag(fragmentTag);
+			dashboardOnMap.blacklistFragmentByTag(fragmentTag);
+			ViewCompat.setTranslationX(fragmentView, 0);
+			ViewCompat.setAlpha(fragmentView, 1);
 			Snackbar.make(parentView, "Card was hidden", Snackbar.LENGTH_LONG)
 					.setAction("UNDO", new View.OnClickListener() {
 						@Override

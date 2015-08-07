@@ -14,19 +14,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.ShowRouteInfoActivity;
 import net.osmand.plus.routing.RoutingHelper;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  */
 public class DashNavigationFragment extends DashBaseFragment {
 	public static final String TAG = "DASH_NAVIGATION_FRAGMENT";
-	List<TargetPoint> points = new ArrayList<TargetPoint>();
 
 	@Override
 	public View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
