@@ -2262,11 +2262,11 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="we_really_care_about_your_opinion">We geven om uw mening en horen graag van u.</string>
 	<string name="rate_this_app">Beoordeel deze app</string>
 	<string name="user_hates_app_get_feedback">Vertel ons waarom.</string>
-	<string name="user_hates_app_get_feedback_long">Vertel ons wat u niet bevalt aan deze app.</string>
+	<string name="user_hates_app_get_feedback_long">Vertel ons wat u veranderd wilt hebben in deze app.</string>
 	<string name="failed_to_upload">Uploaden mislukt</string>
 	<string name="delete_change">Verwijder wijziging</string>
 	<string name="successfully_uploaded_pattern">Succesvol geupload {0}/{1}</string>
 	<string name="try_again">Probeer het opnieuw</string>
 	<string name="error_message_pattern">Fout: {0}</string>
-<string name="rate_this_app_long">Wilt u OsmAnd beoordelen op Google Play? Alvast hartelijk bedankt.</string>
+<string name="rate_this_app_long">Wilt u OsmAnd beoordelen op Google Play? Alvast heel erg bedankt.</string>
 	</resources>
