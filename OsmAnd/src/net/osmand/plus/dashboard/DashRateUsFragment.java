@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
+import android.support.v4.view.ViewCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,14 +26,13 @@ import java.util.Calendar;
  */
 public class DashRateUsFragment extends DashBaseFragment {
     public static final String TAG = "DASH_RATE_US_FRAGMENT";
-
     // TODO move to resources
     public static final String EMAIL = "support@osmand.net";
 
     // Imported in shouldShow method
     private static OsmandSettings settings;
     private FragmentState state = FragmentState.INITIAL_STATE;
-
+	private RateUsDismissListener mRateUsDismissListener;
     @Override
     public void onOpenDash() {
 
@@ -48,6 +49,7 @@ public class DashRateUsFragment extends DashBaseFragment {
                 new PositiveButtonListener(header, subheader, positiveButton, negativeButton));
         negativeButton.setOnClickListener(
                 new NegativeButtonListener(header, subheader, positiveButton, negativeButton));
+		mRateUsDismissListener = new RateUsDismissListener(getParentView(), dashboard, TAG, view, settings);
         return view;
     }
 
@@ -102,13 +104,15 @@ public class DashRateUsFragment extends DashBaseFragment {
 		// Initial state now
 		modifiedTime.add(Calendar.HOUR, -72);
 		bannerFreeRuns = 3;
-		if (modifiedTime.after(lastDisplayTime) && numberOfApplicationRuns >= bannerFreeRuns) {
-			toReturn = true;
-		}
-		return toReturn;
+		return modifiedTime.after(lastDisplayTime) && numberOfApplicationRuns >= bannerFreeRuns;
 	}
 
-    public class PositiveButtonListener implements View.OnClickListener {
+	@Override
+	public DismissListener getDismissCallback() {
+		return mRateUsDismissListener;
+	}
+
+	public class PositiveButtonListener implements View.OnClickListener {
         private TextView header;
         private TextView subheader;
         private Button positiveButton;
@@ -222,4 +226,52 @@ public class DashRateUsFragment extends DashBaseFragment {
 					&& super.shouldShow(settings, activity, tag);
         }
     }
+
+	private static class RateUsDismissListener implements DismissListener {
+		private View parentView;
+		private DashboardOnMap dashboardOnMap;
+		private String fragmentTag;
+		private View fragmentView;
+		private OsmandSettings settings;
+		private int exNumberOfRuns;
+		private long exLastDisplayTime;
+		public RateUsDismissListener(View parentView, DashboardOnMap dashboardOnMap,
+									 String fragmentTag, View fragmentView, OsmandSettings settings) {
+			this.parentView = parentView;
+			this.dashboardOnMap = dashboardOnMap;
+			this.fragmentTag = fragmentTag;
+			this.fragmentView = fragmentView;
+			this.settings = settings;
+		}
+
+		@Override
+		public void onDismiss() {
+			dashboardOnMap.hideFragmentByTag(fragmentTag);
+			ViewCompat.setTranslationX(fragmentView, 0);
+			ViewCompat.setAlpha(fragmentView, 1);
+			Snackbar.make(parentView, dashboardOnMap.getMyApplication().getResources()
+					.getString(R.string.shared_string_card_was_hidden), Snackbar.LENGTH_LONG)
+					.setAction(R.string.shared_string_undo, new View.OnClickListener() {
+						@Override
+						public void onClick(View view) {
+							RateUsDismissListener.this.onUndo(exNumberOfRuns, exLastDisplayTime);
+						}
+					})
+					.show();
+			settings.RATE_US_STATE.set(RateUsState.IGNORED);
+			exNumberOfRuns = settings.NUMBER_OF_APPLICATION_STARTS.get();
+			settings.NUMBER_OF_APPLICATION_STARTS.set(0);
+			exLastDisplayTime = settings.LAST_DISPLAY_TIME.get();
+			settings.LAST_DISPLAY_TIME.set(System.currentTimeMillis());
+		}
+
+		public void onUndo(int numberOfRuns, long lastDisplayTime) {
+			dashboardOnMap.unhideFragmentByTag(fragmentTag);
+			ViewCompat.setTranslationX(fragmentView, 0);
+			ViewCompat.setAlpha(fragmentView, 1);
+			settings.NUMBER_OF_APPLICATION_STARTS.set(numberOfRuns);
+			settings.LAST_DISPLAY_TIME.set(lastDisplayTime);
+
+		}
+	}
 }

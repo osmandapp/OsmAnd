@@ -20,15 +20,23 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashboardOnMap;
 
+import java.util.ArrayList;
+
 public class DashboardSettingsDialogFragment extends DialogFragment {
+	private static final String CHECKED_ITEMS = "checked_items";
 	private MapActivity mapActivity;
 	private DashFragmentData[] fragmentsData;
+	private DashFragmentAdapter adapter;
 
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 		mapActivity = (MapActivity) activity;
-		fragmentsData = mapActivity.getDashboard().getFragmentsData();
+		ArrayList<DashFragmentData> fragmentsList = new ArrayList<>();
+		for(DashFragmentData fragmentData : mapActivity.getDashboard().getFragmentsData()) {
+			if (!fragmentData.customDeletionLogic) fragmentsList.add(fragmentData);
+		}
+		fragmentsData = fragmentsList.toArray(new DashFragmentData[fragmentsList.size()]);
 	}
 
 	@NonNull
@@ -36,9 +44,13 @@ public class DashboardSettingsDialogFragment extends DialogFragment {
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		final OsmandSettings settings = mapActivity.getMyApplication().getSettings();
-		final DashFragmentAdapter adapter =
-				new DashFragmentAdapter(getActivity(), fragmentsData,
-						settings);
+		if (savedInstanceState != null && savedInstanceState.containsKey(CHECKED_ITEMS)) {
+			adapter = new DashFragmentAdapter(getActivity(), fragmentsData,
+					savedInstanceState.getBooleanArray(CHECKED_ITEMS));
+		} else {
+			adapter = new DashFragmentAdapter(getActivity(), fragmentsData,
+					settings);
+		}
 		builder.setTitle(R.string.dahboard_options_dialog_title)
 				.setAdapter(adapter, null)
 				.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
@@ -52,13 +64,24 @@ public class DashboardSettingsDialogFragment extends DialogFragment {
 						}
 						mapActivity.getDashboard().refreshDashboardFragments();
 					}
-				});
-		final AlertDialog dialog = builder.create();
-		return dialog;
+				})
+				.setNegativeButton(R.string.shared_string_cancel, null);
+		return builder.create();
+	}
+
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		outState.putBooleanArray(CHECKED_ITEMS, adapter.getCheckedItems());
+		super.onSaveInstanceState(outState);
 	}
 
 	private static class DashFragmentAdapter extends ArrayAdapter<DashFragmentData> {
 		private final boolean[] checkedItems;
+
+		public DashFragmentAdapter(Context context, DashFragmentData[] objects, boolean[] checkedItems) {
+			super(context, 0, objects);
+			this.checkedItems = checkedItems;
+		}
 
 		public DashFragmentAdapter(Context context, DashFragmentData[] objects, OsmandSettings settings) {
 			super(context, 0, objects);
@@ -83,16 +106,21 @@ public class DashboardSettingsDialogFragment extends DialogFragment {
 						new CompoundButton.OnCheckedChangeListener() {
 							@Override
 							public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-								Integer position = (Integer) compoundButton.getTag();
-								checkedItems[position] = b;
+								DashViewHolder localViewHolder = (DashViewHolder) compoundButton.getTag();
+								checkedItems[localViewHolder.position] = b;
+								localViewHolder.textView.setTextColor(
+										checkedItems[localViewHolder.position] ? 0xFF212121
+												: 0xFF8c8c8c);
 							}
 						});
 			} else {
 				viewHolder = (DashViewHolder) convertView.getTag();
 			}
-			viewHolder.compoundButton.setTag(position);
+			viewHolder.position = position;
+			viewHolder.compoundButton.setTag(viewHolder);
 			viewHolder.compoundButton.setChecked(checkedItems[position]);
 			viewHolder.textView.setText(dashFragmentData.title);
+			viewHolder.textView.setTextColor(checkedItems[position] ? 0xFF212121 : 0xFF8c8c8c);
 			convertView.setTag(viewHolder);
 			return convertView;
 		}
@@ -104,6 +132,7 @@ public class DashboardSettingsDialogFragment extends DialogFragment {
 		private class DashViewHolder {
 			TextView textView;
 			CompoundButton compoundButton;
+			int position;
 		}
 	}
 }

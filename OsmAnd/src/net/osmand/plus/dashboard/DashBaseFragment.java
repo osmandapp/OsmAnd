@@ -15,6 +15,7 @@ import android.widget.FrameLayout;
 
 import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.widgets.InterceptorFrameLayout;
 import net.osmand.plus.widgets.tools.SwipeDismissTouchListener;
@@ -73,8 +74,6 @@ public abstract class DashBaseFragment extends Fragment {
 						public void onDismiss(View view, Object token, boolean isSwipeRight) {
 							if (isSwipeRight) {
 								getDismissCallback().onDismiss();
-							} else {
-								// TODO show settings card
 							}
 						}
 					});
@@ -158,7 +157,7 @@ public abstract class DashBaseFragment extends Fragment {
 
 	private DismissListener defaultDismissListener;
 
-	private static class DefaultDismissListener implements DismissListener {
+	public static class DefaultDismissListener implements DismissListener {
 		private View parentView;
 		private DashboardOnMap dashboardOnMap;
 		private String fragmentTag;
@@ -177,15 +176,15 @@ public abstract class DashBaseFragment extends Fragment {
 			dashboardOnMap.blacklistFragmentByTag(fragmentTag);
 			ViewCompat.setTranslationX(fragmentView, 0);
 			ViewCompat.setAlpha(fragmentView, 1);
-			Snackbar.make(parentView, "Card was hidden", Snackbar.LENGTH_LONG)
-					.setAction("UNDO", new View.OnClickListener() {
+			Snackbar.make(parentView, dashboardOnMap.getMyApplication().getResources()
+					.getString(R.string.shared_string_card_was_hidden), Snackbar.LENGTH_LONG)
+					.setAction(R.string.shared_string_undo, new View.OnClickListener() {
 						@Override
 						public void onClick(View view) {
 							DefaultDismissListener.this.onUndo();
 						}
 					})
 					.show();
-
 		}
 
 		public void onUndo() {
