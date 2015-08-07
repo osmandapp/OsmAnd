@@ -9,6 +9,17 @@ public final class DashFragmentData {
 	public final Class<? extends DashBaseFragment> fragmentClass;
 	public final String title;
 	public final ShouldShowFunction shouldShowFunction;
+	public final boolean customDeletionLogic;
+
+	public DashFragmentData(String tag, Class<? extends DashBaseFragment> fragmentClass,
+							String title, ShouldShowFunction shouldShowFunction,
+							boolean customDeletionLogic) {
+		this.tag = tag;
+		this.fragmentClass = fragmentClass;
+		this.title = title;
+		this.shouldShowFunction = shouldShowFunction;
+		this.customDeletionLogic = customDeletionLogic;
+	}
 
 	public DashFragmentData(String tag, Class<? extends DashBaseFragment> fragmentClass,
 							String title, ShouldShowFunction shouldShowFunction) {
@@ -16,6 +27,7 @@ public final class DashFragmentData {
 		this.fragmentClass = fragmentClass;
 		this.title = title;
 		this.shouldShowFunction = shouldShowFunction;
+		customDeletionLogic = false;
 	}
 
 	public interface ShouldShowFunction {
