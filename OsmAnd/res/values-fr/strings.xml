@@ -2120,4 +2120,6 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="error_message_pattern">Erreur : {0}</string>
 <string name="no_updates_available">Aucune mise à jour disponible</string>
     <string name="we_really_care_about_your_opinion">Nous prêtons beaucoup d\'attention à vos avis, merci pour vos retours.</string>
-	</resources>
+	<string name="rendering_value_boldOutline_name">Bold gras</string>
+    <string name="traffic_warning_hazard">Danger</string>
+    </resources>
