@@ -65,7 +65,7 @@
   <string name="fast_route_mode">Caminho mais rápido</string>
   <string name="fast_route_mode_descr">Ative para calcular a rota mais rápida ou desative para calcular a rota mais curta </string>
   <string name="tiles_to_download_estimated_size">Zoom {0}: baixar {1} imagens ({2} MB )</string>
-  <string name="context_menu_item_download_map">Baixar mapa</string>
+  <string name="shared_string_download_map">Baixar mapa</string>
   <string name="select_max_zoom_preload_area">Zoom máximo para baixar</string>
   <string name="maps_could_not_be_downloaded">Não é possível fazer o download deste mapa</string>
   <string name="continuous_rendering">Processamento contínuo</string>

@@ -844,7 +844,7 @@
 	<string name="fast_route_mode">Hurtigste rute</string>
 	<string name="fast_route_mode_descr">Aktiver for at beregne den hurtigste rute. Deaktiver for at beregne korteste rute </string>
 	<string name="tiles_to_download_estimated_size">Ved zoom {0} hent {1} kortfliser ({2} MB)</string>
-	<string name="context_menu_item_download_map">Hent kort</string>
+	<string name="shared_string_download_map">Hent kort</string>
 	<string name="select_max_zoom_preload_area">Vælg maksimal zoom der skal indlæses på forhånd</string>
 	<string name="maps_could_not_be_downloaded">Kortet kunne ikke hentes</string>
 	<string name="continuous_rendering">Kontinuerlig kortoptegning</string>

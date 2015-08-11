@@ -287,7 +287,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com --><resources>
 	<string name="fast_route_mode">Nhanh nhất</string>
 	<string name="fast_route_mode_descr">Bật/tắt tính năng tìm đường đi nhanh nhất</string>
 	<string name="tiles_to_download_estimated_size">Tại mức zoom {0} tải về {1} tiles ({2} MB)</string>
-	<string name="context_menu_item_download_map">Tải bản đồ</string>
+	<string name="shared_string_download_map">Tải bản đồ</string>
 	<string name="select_max_zoom_preload_area">Lựa chọn Zoom lớn nhất để tải lại</string>
 	<string name="maps_could_not_be_downloaded">Bản đồ này không tải được</string>
 

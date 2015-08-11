@@ -520,7 +520,7 @@
   <string name="fast_route_mode">Найшвидший маршрут</string>
   <string name="fast_route_mode_descr">Надавати перевагу найшвидшому маршруту перед найкоротшим </string>
   <string name="tiles_to_download_estimated_size">На масштабі{0} завантажувати {1} тайли ({2} MB)</string>
-  <string name="context_menu_item_download_map">Завантажити мапу</string>
+  <string name="shared_string_download_map">Завантажити мапу</string>
   <string name="select_max_zoom_preload_area">Вибрати максимальний масштаб для завантаження</string>
   <string name="maps_could_not_be_downloaded">Дана мапа не може бути завантажена</string>
   <string name="continuous_rendering">Безперервний рендеринг</string>

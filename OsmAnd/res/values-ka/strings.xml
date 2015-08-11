@@ -453,7 +453,7 @@
   <string name="fast_route_mode">უსწრაფესი გზა</string>
   <string name="fast_route_mode_descr">"ჩართეთ უსწრაფესი გზის დასათვლელად ან გამორთეთ უმოკლესისათვის "</string>
   <string name="tiles_to_download_estimated_size">გადიდებისას {0} გადმოსაწერია {1} ნაწილი ({2} MB)</string>
-  <string name="context_menu_item_download_map">რუკის გადმოწერა</string>
+  <string name="shared_string_download_map">რუკის გადმოწერა</string>
   <string name="select_max_zoom_preload_area">აირჩიეთ მაქსიმალური გადიდება ჩასატვირთად</string>
   <string name="maps_could_not_be_downloaded">რუკის გადმოწერა შეუძლებელია</string>
   <string name="continuous_rendering">გაგრძელებადი რენდერი</string>

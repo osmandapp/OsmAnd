@@ -1,9 +1,18 @@
 package net.osmand.plus.rastermaps;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
+import android.os.AsyncTask;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import net.osmand.IndexConstants;
 import net.osmand.ResultMatcher;
@@ -26,19 +35,11 @@ import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.Algorithms;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.content.DialogInterface;
-import android.os.AsyncTask;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.Toast;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	public static final String ID = "osmand.rastermaps";
@@ -237,7 +238,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int resId, int pos, boolean isChecked) {
 					if (resId == R.string.context_menu_item_update_map) {
 						mapActivity.getMapActions().reloadTile(mapView.getZoom(), latitude, longitude);
-					} else if (resId == R.string.context_menu_item_download_map) {
+					} else if (resId == R.string.shared_string_download_map) {
 						DownloadTilesDialog dlg = new DownloadTilesDialog(mapActivity, (OsmandApplication) mapActivity.getApplication(), mapView);
 						dlg.openDialog();
 					}
@@ -246,7 +247,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			};
 			adapter.item(R.string.context_menu_item_update_map).iconColor(R.drawable.ic_action_refresh_dark)
 					.listen(listener).reg();
-			adapter.item(R.string.context_menu_item_download_map).iconColor(R.drawable.ic_action_import)
+			adapter.item(R.string.shared_string_download_map).iconColor(R.drawable.ic_action_import)
 					.listen(listener).reg();
 		}
 	}

@@ -301,7 +301,7 @@
   <string name="fast_route_mode">Najszybsza trasa</string>
   <string name="fast_route_mode_descr">"Wyznacza najszybszą trasę zamiast najkrótszej "</string>
   <string name="tiles_to_download_estimated_size">Na poziomie {0} pobrano {1} kafelków ({2} MB)</string>
-  <string name="context_menu_item_download_map">Pobierz mapę</string>
+  <string name="shared_string_download_map">Pobierz mapę</string>
   <string name="select_max_zoom_preload_area">Wybierz maksymalne przybliżenie do pobrania</string>
   <string name="maps_could_not_be_downloaded">Nie udało się pobrać tej mapy</string>
   <string name="continuous_rendering">Rysowanie ciągłe</string>

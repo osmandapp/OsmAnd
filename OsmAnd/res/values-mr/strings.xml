@@ -173,7 +173,7 @@
   <string name="shared_string_select_all">सर्व निवडा</string>
   <string name="fast_route_mode">वेगवान रस्ता</string>
   <string name="fast_route_mode_descr">निवडा सर्वात वेगवान रस्त्यासाठी किंवा निवड काढा सर्वात जवळच्या रस्त्यासाठी </string>
-  <string name="context_menu_item_download_map">नकाशा डाउनलोड करा</string>
+  <string name="shared_string_download_map">नकाशा डाउनलोड करा</string>
   <string name="poi_context_menu_website">पिओआय वेबसाइट दाखवा</string>
   <string name="poi_context_menu_call">पिओआय फोन दाखवा</string>
   <string name="website">वेबसाइट</string>

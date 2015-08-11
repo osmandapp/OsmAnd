@@ -234,7 +234,7 @@
 	<string name="shared_string_select_all">Valitse kaikki</string>
 	<string name="shared_string_refresh">Päivitä</string>
 	<string name="fast_route_mode">Nopein reitti</string>
-	<string name="context_menu_item_download_map">Lataa kartta</string>
+	<string name="shared_string_download_map">Lataa kartta</string>
 	
 	<string name="context_menu_item_search_transport">Etsi kulkuneuvoa</string>
 	

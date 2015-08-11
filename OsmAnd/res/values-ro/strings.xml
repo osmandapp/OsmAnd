@@ -738,7 +738,7 @@
 	<string name="fast_route_mode">Cea mai rapidă rută</string>
 	<string name="fast_route_mode_descr">Activați pentru a calcula ruta cea mai rapidă sau dezactivați pentru ruta cea mai scurtă </string>
 	<string name="tiles_to_download_estimated_size">La nivelul de zoom {0} se descarcă {1} porțiuni ({2} MB)</string>
-	<string name="context_menu_item_download_map">Descarcă harta</string>
+	<string name="shared_string_download_map">Descarcă harta</string>
 	<string name="select_max_zoom_preload_area">Selectați nivelul de zoom maxim pentru pre-încărcare</string>
 	<string name="maps_could_not_be_downloaded">Harta nu s-a putut descărca</string>
 	<string name="continuous_rendering">Randare continuă</string>
