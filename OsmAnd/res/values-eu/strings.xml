@@ -814,7 +814,7 @@
   <string name="fast_route_mode">Biderik azkarrena</string>
   <string name="fast_route_mode_descr">Gaitu biderik azkarrenarentzat edo ezgaitu biderik motzenarentzat</string>
   <string name="tiles_to_download_estimated_size">{0} zoomean deskargatu {1} tesela ({2} MB)</string>
-  <string name="context_menu_item_download_map">Mapa deskargatu</string>
+  <string name="shared_string_download_map">Mapa deskargatu</string>
   <string name="select_max_zoom_preload_area">Aukeratu aurrekargatzeko gehienezko zooma</string>
   <string name="maps_could_not_be_downloaded">Mapa ezin izan da deskargatu</string>
   <string name="continuous_rendering">Etengabeko errenderizazioa</string>

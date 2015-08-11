@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
-import android.support.v4.view.ViewCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,7 +47,7 @@ public class DashRateUsFragment extends DashBaseFragment {
                 new PositiveButtonListener(header, subheader, positiveButton, negativeButton));
         negativeButton.setOnClickListener(
                 new NegativeButtonListener(header, subheader, positiveButton, negativeButton));
-		mRateUsDismissListener = new RateUsDismissListener(getParentView(), dashboard, TAG, view, settings);
+		mRateUsDismissListener = new RateUsDismissListener(dashboard, settings);
         return view;
     }
 
@@ -228,50 +226,19 @@ public class DashRateUsFragment extends DashBaseFragment {
     }
 
 	private static class RateUsDismissListener implements DismissListener {
-		private View parentView;
 		private DashboardOnMap dashboardOnMap;
-		private String fragmentTag;
-		private View fragmentView;
 		private OsmandSettings settings;
-		private int exNumberOfRuns;
-		private long exLastDisplayTime;
-		public RateUsDismissListener(View parentView, DashboardOnMap dashboardOnMap,
-									 String fragmentTag, View fragmentView, OsmandSettings settings) {
-			this.parentView = parentView;
+		public RateUsDismissListener(DashboardOnMap dashboardOnMap, OsmandSettings settings) {
 			this.dashboardOnMap = dashboardOnMap;
-			this.fragmentTag = fragmentTag;
-			this.fragmentView = fragmentView;
 			this.settings = settings;
 		}
 
 		@Override
 		public void onDismiss() {
-			dashboardOnMap.hideFragmentByTag(fragmentTag);
-			ViewCompat.setTranslationX(fragmentView, 0);
-			ViewCompat.setAlpha(fragmentView, 1);
-			Snackbar.make(parentView, dashboardOnMap.getMyApplication().getResources()
-					.getString(R.string.shared_string_card_was_hidden), Snackbar.LENGTH_LONG)
-					.setAction(R.string.shared_string_undo, new View.OnClickListener() {
-						@Override
-						public void onClick(View view) {
-							RateUsDismissListener.this.onUndo(exNumberOfRuns, exLastDisplayTime);
-						}
-					})
-					.show();
 			settings.RATE_US_STATE.set(RateUsState.IGNORED);
-			exNumberOfRuns = settings.NUMBER_OF_APPLICATION_STARTS.get();
 			settings.NUMBER_OF_APPLICATION_STARTS.set(0);
-			exLastDisplayTime = settings.LAST_DISPLAY_TIME.get();
 			settings.LAST_DISPLAY_TIME.set(System.currentTimeMillis());
-		}
-
-		public void onUndo(int numberOfRuns, long lastDisplayTime) {
-			dashboardOnMap.unhideFragmentByTag(fragmentTag);
-			ViewCompat.setTranslationX(fragmentView, 0);
-			ViewCompat.setAlpha(fragmentView, 1);
-			settings.NUMBER_OF_APPLICATION_STARTS.set(numberOfRuns);
-			settings.LAST_DISPLAY_TIME.set(lastDisplayTime);
-
+			dashboardOnMap.refreshDashboardFragments();
 		}
 	}
 }

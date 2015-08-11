@@ -595,7 +595,7 @@
   <string name="fast_route_mode">Greičiausias maršrutas</string>
   <string name="fast_route_mode_descr">Įjunkite, kad būtų skaičiuojamas greičiausias maršrutas. Priešingu atveju bus skaičiuojamas trumpiausias maršrutas </string>
   <string name="tiles_to_download_estimated_size">Esant {0} dydžiui parsiųsti {1} žemėlapio lakštus ({2} MB)</string>
-  <string name="context_menu_item_download_map">Parsiųsti žemėlapį</string>
+  <string name="shared_string_download_map">Parsiųsti žemėlapį</string>
   <string name="select_max_zoom_preload_area">Pasirinkite didžiausią dydį, kurį parsiųsti</string>
   <string name="maps_could_not_be_downloaded">Šio žemėlapio parsiųsti nepavyko</string>
   <string name="continuous_rendering">Nenutrūkstamas vaizdavimas</string>

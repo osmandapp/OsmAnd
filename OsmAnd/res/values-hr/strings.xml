@@ -511,7 +511,7 @@
 	<string name="use_high_res_maps">Zaslon visoke razlučivosti</string>
 	<string name="phone">Telefon</string>
 	<string name="download_type_to_filter">upišite za filtriranje</string>
-	<string name="context_menu_item_download_map">Preuzmi kartu</string>
+	<string name="shared_string_download_map">Preuzmi kartu</string>
 	<string name="maps_could_not_be_downloaded">Ova karta se ne može preuzeti</string>
 	<string name="daynight">Dnevni/noćni način rada</string>
 	<string name="daynight_descr">Odaberite pravilo za izmjenu između dnevnog i noćnog načina rada</string>

@@ -1313,7 +1313,7 @@
 	<string name="shared_string_select_all">Ischerta totu</string>
 	<string name="fast_route_mode">Àndala prus lestra</string>
 	<string name="tiles_to_download_estimated_size">Pro su zoom {0} iscàrriga {1} tasseddos ({2} MB)</string>
-	<string name="context_menu_item_download_map">Iscàrriga mapa</string>
+	<string name="shared_string_download_map">Iscàrriga mapa</string>
 	<string name="maps_could_not_be_downloaded">No est istadu possìbile iscarrigare custa mapa</string>
 	<string name="show_point_options">Imprea sa positzione …</string>
 	<string name="renderer_load_sucess">Disinnu carrigadu</string>
