@@ -1028,7 +1028,7 @@
 	<string name="poi_recycling_styrofoam">Flamingo</string>
 	<string name="poi_recycling_drugs">Stoffer</string>
 	<string name="poi_recycling_compost">Kompost</string>
-	<string name="poi_recycling_hardcore">Hardcore</string>
+	<string name="poi_recycling_hardcore">Byggeaffald</string>
 	<string name="poi_recycling_christmas_trees">Juletræer</string>
 	<string name="poi_recycling_light_bulbs">Elpærer</string>
 	<string name="poi_recycling_chipboard">Spånplader</string>
@@ -1043,13 +1043,13 @@
 	<string name="poi_recycling_bicycles">Cykler</string>
 
 	<string name="poi_drinking_water_yes">Drikkevand</string>
-	<string name="poi_drinking_water_no">Ingen drikkevand</string>
+	<string name="poi_drinking_water_no">Ikke drikkevand</string>
 	<string name="poi_supervised_yes">Overvåget</string>
-	<string name="poi_supervised_no">Uden opsyn</string>
+	<string name="poi_supervised_no">Ikke overvåget</string>
 	<string name="poi_seasonal_yes">Sæsonbestemt</string>
 	<string name="poi_seasonal_no">Ikke sæsonbestemt</string>
 	<string name="poi_seasonal_dry_season">Tørre årstid</string>
-	<string name="poi_seasonal_wet_season">Regnsæson</string>
+	<string name="poi_seasonal_wet_season">Våde årstid</string>
 	<string name="poi_seasonal_spring">Forår</string>
 	<string name="poi_seasonal_summer">Sommer</string>
 	<string name="poi_seasonal_autumn">Efterår</string>
@@ -1057,6 +1057,6 @@
 
 	<string name="poi_crossing_traffic_signals">Med trafiksignaler</string>
 	<string name="poi_crossing_uncontrolled">Ukontrolleret</string>
-	<string name="poi_crossing_unmarked">Umarkerede</string>
+	<string name="poi_crossing_unmarked">Ikke markeret</string>
 
 	</resources>

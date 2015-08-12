@@ -972,10 +972,10 @@
 	<string name="poi_recycling_scrap_metal">Ferralla</string>
 	<string name="poi_recycling_batteries">Piles</string>
 	<string name="poi_recycling_plastic_bottles">Ampolles de plàstic</string>
-	<string name="poi_recycling_green_waste">Orgànic</string>
+	<string name="poi_recycling_green_waste">Biodegradables nitrogenats</string>
 	<string name="poi_recycling_plastic_packaging">Envasos de plàstic</string>
 	<string name="poi_recycling_newspaper">Diaris</string>
-	<string name="poi_recycling_cartons">Caixes de cartró</string>
+	<string name="poi_recycling_cartons">Cartró</string>
 	<string name="poi_recycling_magazines">Revistes</string>
 	<string name="poi_recycling_small_appliances">Petits electrodomèstics</string>
 	<string name="poi_recycling_wood">Fusta</string>
@@ -1028,4 +1028,7 @@
 	<string name="poi_seasonal_autumn">Tardor</string>
 	<string name="poi_seasonal_winter">Hivern</string>
 
+	<string name="poi_recycling_waste">Rebuig (bosses de negres)</string>
+	<string name="poi_recycling_paper_packaging">Embalatge de paper</string>
+	<string name="poi_recycling_tetrapak">Tetra Pak</string>
 	</resources>

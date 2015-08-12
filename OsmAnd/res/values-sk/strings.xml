@@ -2250,4 +2250,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="successfully_uploaded_pattern">Úspešne odoslané {0}/{1}</string>
 	<string name="try_again">Skúste znova</string>
 	<string name="error_message_pattern">Chyba: {0}</string>
-</resources>
+<string name="traffic_warning_hazard">Nebezpečenstvo</string>
+    <string name="rendering_value_boldOutline_name">Hrubý obrys</string>
+    </resources>
