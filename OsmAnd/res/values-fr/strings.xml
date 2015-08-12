@@ -998,7 +998,7 @@
 \nCoucher : %2$s</string>
 <string name="day_night_info">Information jour/nuit</string>
 <string name="filterpoi_activity">Créer un filtre des PI</string>
-<string name="map_widget_renderer">Style de carte</string>
+<string name="map_widget_renderer">Style de la carte</string>
 <string name="int_continuosly">En continu</string>
 <string name="tip_rotation_switching_t_v2">"Vous pouvez modifier l\'orientation de la carte par un appui court sur l\'icône de la boussole
 \n\tLes choix sont :
@@ -1451,7 +1451,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="app_mode_aircraft">Avion</string>
     <string name="app_modes_choose_descr">Choisir les profils d\'utilisation à afficher dans l\'application</string>
     <string name="app_modes_choose">Profils d\'application</string>
-	<string name="map_widget_map_rendering">Affichage de la carte</string>
+	<string name="map_widget_map_rendering">Rendu de la carte</string>
     <string name="amenity_type_seamark">Balise marine</string>
     
     
@@ -1749,7 +1749,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="rendering_attr_showAccess_name">Afficher les restrictions d\'accès</string>
     <string name="rendering_attr_showSurfaceGrade_name">Afficher la qualité des routes</string>
     <string name="rendering_attr_showSurfaces_name">Afficher la surface des routes</string>
-    <string name="rendering_attr_showCycleRoutes_name">Afficher les pistes cyclables</string>
+    <string name="rendering_attr_showCycleRoutes_name">Afficher les itinéraires cyclables</string>
     <string name="lang_fa">perse</string>
 	<string name="lang_al">albanais</string>
 	<string name="lang_ar">arabe</string>
@@ -1762,11 +1762,11 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="osmo_specify_tracker_id">Veuillez spécifier l\'identifiant</string>
     <string name="continue_navigation">Reprendre la navigation</string>
     <string name="pause_navigation">Interrompre la navigation</string>
-	<string name="rendering_attr_subwayMode_name">Itinéraires de métropolitain</string>
- 	<string name="rendering_attr_alpineHiking_name">Difficulté des randonnées en montagne</string>
-    <string name="rendering_attr_alpineHiking_description">Afficher les chemins selon l\'échelle SAC</string>
-    <string name="rendering_attr_hikingRoutesOSMC_name">Surcouche de symboles de rando</string>
-    <string name="rendering_attr_hikingRoutesOSMC_description">Afficher les chemins selon les traces OSMC</string>
+	<string name="rendering_attr_subwayMode_name">Lignes de métro</string>
+ 	<string name="rendering_attr_alpineHiking_name">Difficulté des chemins de randonnée (échelle CAS)</string>
+    <string name="rendering_attr_alpineHiking_description">Afficher la difficulté des chemins selon l\'échelle du CAS</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Afficher les itinéraires pédestres</string>
+    <string name="rendering_attr_hikingRoutesOSMC_description">Afficher les itinéraires pédestres</string>
     
 	<string name="rendering_attr_coloredBuildings_name">Bâtiments colorés par type</string>
     <string name="arrival_distance_factor_early">Tôt</string>
@@ -1797,7 +1797,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="int_hour">h</string>
     <string name="duration">Durée</string>
     <string name="distance">Distance</string>
-    <string name="rendering_attr_publicTransportMode_name">Itinéraires de bus, tramways, et navettes</string>
+    <string name="rendering_attr_publicTransportMode_name">Lignes de bus, tramways, et navettes</string>
 	<string name="save_track_to_gpx_globally">Enregistrer l\'itinéraire dans un fichier GPX</string>
 	<string name="save_track_to_gpx_globally_descr">L\'enregistrement des positions dans un fichier GPX peut être activé ou désactivé depuis le gadget de la carte</string>
 	<string name="save_track_interval_globally">Intervalle d\'enregistrement</string>
@@ -1828,8 +1828,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="anonymous_user">Utilisateur anonyme</string>
     <string name="logged_as">Connecté entant que %1$s</string>
 	<string name="rendering_category_details">Détails</string>
-    <string name="rendering_category_transport">Transport</string>
-    <string name="rendering_category_others">Autres éléments de la carte</string>
+    <string name="rendering_category_transport">Transports en commun</string>
+    <string name="rendering_category_others">Autres caractéristiques de la carte</string>
     <string name="map_widget_appearance_rem">Éléments restants</string>
     <string name="map_widget_top">Barre d\'état</string>
 	<string name="map_widget_right">Panneau de droite</string>
@@ -1837,14 +1837,14 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="shared_string_show">Afficher</string>
 	<string name="configure_map">Configurer la carte</string>
     <string name="search_radius_proximity">A proximité de</string>
-    <string name="rendering_category_routes">Routes</string>
+    <string name="rendering_category_routes">Itinéraires</string>
     <string name="tip_recent_changes_1_9_t">"Nouveautés de la version 1.9 : * Mise à jour des styles de cartes faisant état de la nature du revêtement routier, calques de transports public et de symboles de randonnées pédestres * Recherche de PI le long de l\'itinéraire * Marquage temporaire d\'une route non praticable * Amélioration du téléchargement et des mises à jour des cartes * Notification auditive et visuelle à l\'approche des points de passage * Impression de l\'itinéraire détaillé * Gestion des listes de bifurcation * Supporte Android Wear * Nombreuses modifications de l\'interface * Zoom séparé pour la taille du texte de la carte * Notification audible spéciale en cas de hors route * Fonction de connexion OsMo * Corrections des problèmes d\'incompatibilité de versions pour OsMo "</string>
     <string name="rendering_attr_busRoutes_name">Lignes de bus</string>
     <string name="rendering_attr_trolleybusRoutes_name">Lignes de tramway</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Itinéraires de chemin de fer</string>
     <string name="rendering_attr_tramRoutes_name">Voies de tramway</string>
     <string name="rendering_attr_shareTaxiRoutes_name">Voies partagées pour les taxi</string>
-    <string name="rendering_attr_tramTrainRoutes_name">Itinéraires de tramway et train</string>
+    <string name="rendering_attr_tramTrainRoutes_name">Lignes de tramway et train</string>
     
     <string name="impassable_road">Évitez les routes…</string>
     <string name="rendering_category_hide">Masquer</string>
@@ -1880,7 +1880,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="dash_download_msg">Vous avez téléchargé %1$s carte(s)</string>
     <string name="dash_download_new_one">Télécharger une nouvelle carte</string>
     <string name="dash_download_manage">Gérer</string>
-    <string name="rendering_attr_roadStyle_name">Style de route</string>
+    <string name="rendering_attr_roadStyle_name">Style des routes</string>
     <string name="rendering_value_default_name">Par défaut</string>
     <string name="rendering_value_orange_name">Orange</string>
     <string name="traffic_warning_railways">Passage à niveau</string>
@@ -1943,15 +1943,14 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="share_note">Partager la note</string>
 	
 	<string name="shared_string_export">Exporter</string>
-	<string name="plugin_ski_descr">"Activer cette vue bascule vers le style \"Hiver et Ski\", affichant le relief en conditions hivernales ainsi que les pistes de ski (ventilées par difficultés grâce à des codes couleurs) ou les remontées mécaniques.\n\nCet affichage peut être annulé soit en le désactivant ici soit en modifiant le Style de carte sous \"Configurer la carte\". "</string>
+	<string name="plugin_ski_descr">"Activer cette vue bascule vers le style \"Hiver et Ski\", affichant le relief en conditions hivernales, ainsi que les pistes de ski (dont la difficulté est représentée par un code couleurs) et les remontées mécaniques.\n\nCet affichage peut être annulé soit en le désactivant ici, soit en modifiant le Style de la carte dans \"Configurer la carte\". "</string>
 	<string name="plugin_touringview_descr">"Activer cette vue bascule vers le style d\'affichage \"Grand tourisme\", affichant une carte très détaillée adaptée aux voyageurs et chauffeurs routiers.
-\n\nCet affichage, quelque soit le niveau de zoom, fournit le maximum de détails disponibles. Chaque type de route (routes, pistes, chemins ...) est distingué de manière explicite grâce à des codes couleurs, ce qui est particulièrement utile en cas de conduite de grands véhicules. Il existe aussi des options pour l\'affichage des pistes cyclables ou des chemins de randonnée.\n\nIl n\'est pas nécessaire de télécharger une carte supplémentaire, cet affichage s\'appuyant sur les cartes standards.
-\n\nCet affichage peut être annulé soit en le désactivant ici soit en modifiant le Style de carte sous \"Configurer la carte\". "</string>
+\n\nCet affichage, quel que soit le niveau de zoom, fournit le maximum de détails disponibles. Chaque type de voie (routes, pistes, chemins ...) est distingué de manière explicite grâce à des codes couleurs, ce qui est particulièrement utile en cas de conduite de grands véhicules. Il existe aussi des options pour l\'affichage desitinéraires cyclables ou des chemins de randonnée.\n\nIl n\'est pas nécessaire de télécharger une carte supplémentaire, cet affichage s\'appuyant sur les cartes standards.
+\n\nCet affichage peut être annulé soit en le désactivant ici, soit en modifiant le Style de la carte dans \"Configurer la carte\". "</string>
 	<string name="plugin_touringview_name">Grand tourisme</string>
-	<string name="plugin_nautical_descr">Activer cette vue bascule vers le style \"Nautique\", affichant une carte avec le balisage pour la navigation.
-		\n\nUne carte marine mondiale est disponible en une seul téléchargement nommé \"Carte marine\".
-		\n\nCet affichage peut être annulé soit en le désactivant ici soit en modifiant le Style de carte sous \"Configurer la carte\".
-	</string>
+	<string name="plugin_nautical_descr">"Activer cette vue bascule vers le style \"Nautique\", affichant une carte avec le balisage pour la navigation.
+\n\nUne carte marine mondiale est disponible en un seul téléchargement nommé \"Carte marine\".
+\n\nCet affichage peut être annulé soit en le désactivant ici, soit en modifiant le Style de la carte dans \"Configurer la carte\". "</string>
 	<string name="location_on_map">Position :\n Lat. %1$s\n Lon. %2$s</string>
 	<string name="days_behind">jours passés</string>
 	<string name="rename_failed">Échec du renommage.</string>
@@ -2018,7 +2017,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="search_poi_category_hint">Rechercher partout</string>
     <string name="index_name_netherlands">Europe - Pays-Bas</string>
 	<string name="rendering_value__name">Par défaut</string>
-    <string name="rendering_value_highContrastRoads_name">Routes en contraste élevé</string>
+    <string name="rendering_value_highContrastRoads_name">Routes avec fort contraste</string>
 	<string name="specified_directiory_not_writeable">Impossible de créer les cartes dans le dossier spécifié</string>
 	<string name="copying_osmand_file_failed">Échec lors de la copie des fichiers</string>    
     <string name="storage_directory_external">Stockage externe</string>
@@ -2039,8 +2038,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 <string name="osmo_share_my_location">Partager ma position</string>
     <string name="shared_string_logoff">Se déconnecter</string>
     <string name="rendering_value_disabled_name">Désactivé</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">Balisage couleur du terrain</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Représentation selon la granularité du réseau</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Couleur de l\\\'itinéraire selon OSMC</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Couleur selon l\\\'étendue de l\'\\\'itinéraire</string>
     <string name="osm_edit_context_menu_delete">Supprimer la modification OSM</string>    
     <string name="shared_string_show_details">Afficher les détails</string>
     <string name="read_full_article">Lire l\'article complet (en ligne)</string>
@@ -2077,8 +2076,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="archive_wikipedia_data">Le format de vos données Wikipédia hors-ligne est obsolète. Voulez-vous archiver ces données ?</string>
     <string name="lang_te">Télougou</string>
     <string name="restart_is_required">Afin de prendre en compte toutes vos modifications, vous devez redémarrer l\'application.</string>
-    <string name="rendering_attr_currentTrackColor_name">Couleur GPX</string>
-    <string name="rendering_attr_currentTrackWidth_name">Largeur GPX</string>
+    <string name="rendering_attr_currentTrackColor_name">Couleur des traces GPX</string>
+    <string name="rendering_attr_currentTrackWidth_name">Largeur des traces GPX</string>
     <string name="rendering_value_red_name">Rouge</string>
     <string name="rendering_value_translucent_red_name">Rouge translucide</string>
     <string name="rendering_value_translucent_orange_name">Orange translucide</string>
@@ -2120,6 +2119,6 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="error_message_pattern">Erreur : {0}</string>
 <string name="no_updates_available">Aucune mise à jour disponible</string>
     <string name="we_really_care_about_your_opinion">Nous prêtons beaucoup d\'attention à vos avis, merci pour vos retours.</string>
-	<string name="rendering_value_boldOutline_name">Bold gras</string>
+	<string name="rendering_value_boldOutline_name">Contour épaissi</string>
     <string name="traffic_warning_hazard">Danger</string>
     </resources>
