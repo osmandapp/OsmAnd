@@ -2038,8 +2038,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 <string name="osmo_share_my_location">Partager ma position</string>
     <string name="shared_string_logoff">Se déconnecter</string>
     <string name="rendering_value_disabled_name">Désactivé</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">Couleur de l\\\'itinéraire selon OSMC</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Couleur selon l\\\'étendue de l\'\\\'itinéraire</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Couleur de l\'itinéraire selon OSMC</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Couleur selon l\'étendue de l\'itinéraire</string>
     <string name="osm_edit_context_menu_delete">Supprimer la modification OSM</string>    
     <string name="shared_string_show_details">Afficher les détails</string>
     <string name="read_full_article">Lire l\'article complet (en ligne)</string>
