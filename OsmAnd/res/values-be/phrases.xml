@@ -915,7 +915,7 @@
 	<string name="poi_enforcement_check">Патрабаванне:кантроль</string>
 	<string name="poi_enforcement_access">Патрабаванне:доступ</string>
 	<string name="poi_enforcement_traffic_signals">Патрабаванне:святлафоры</string>
-	<string name="poi_fee">Аплата</string>
+	<string name="poi_fee_yes">Аплата</string>
 
 	<string name="poi_disused">Невыкарыстоўваемы</string>
 
@@ -923,4 +923,71 @@
 	<string name="poi_maxweight">Максімальная вага</string>
 	<string name="poi_maxheight">Максімальная вышыня</string>
 	<string name="poi_service_times">Гадзіны абслугоўвання</string>
+	<string name="poi_abandoned_poi">Закінуты аб\'ект</string>
+	<string name="poi_icn_ref">Сетка вузлоў міжнародных веламаршрутаў</string>
+	<string name="poi_ncn_ref">Сетка вузлоў нацыянальных веламаршрутаў</string>
+	<string name="poi_rcn_ref">Сетка вузлоў рэгіянальных веламаршрутаў</string>
+	<string name="poi_lcn_ref">Сетка вузлоў лякальных веламаршрутаў</string>
+	<string name="poi_iwn_ref">Сетка вузлоў міжнародных пешых маршрутаў</string>
+	<string name="poi_nwn_ref">Сетка вузлоў нацыянальных пешых маршрутаў</string>
+	<string name="poi_rwn_ref">Сетка вузлоў рэгіянальных пешых маршрутаў</string>
+	<string name="poi_lwn_ref">Сетка вузлоў лякальных пешых маршрутаў</string>
+
+	<string name="poi_route_hiking_iwn_poi">Міжнародны пешы маршрут</string>
+	<string name="poi_route_hiking_nwn_poi">Нацыянальны пешы маршрут</string>
+	<string name="poi_route_hiking_rwn_poi">Рэгіянальны пешы маршрут</string>
+	<string name="poi_route_hiking_lwn_poi">Лякальны пешы маршрут</string>
+	<string name="poi_conservation">Абароненая вобласьць</string>
+
+	<string name="poi_node_networks">Вузлы пешаходнай ці рованай сеткі</string>
+		<string name="poi_hiking_routes">Пешыя маршруты</string>
+		<string name="poi_traffic_enforcement">Кантроль руху</string>
+	<string name="poi_collection_times">Гадзіны выманьня</string>
+	<string name="poi_route_hiking_ref_poi">Абазначэньне пешага маршруту</string>
+
+	<string name="poi_access_private">Прыватны доступ</string>
+	<string name="poi_access_no">Няма доступу</string>
+	<string name="poi_access_permissive">Доступ з дазволу</string>
+	<string name="poi_access_customers">Доступ спажыўцам</string>
+	<string name="poi_access_delivery">Доступ для дастаўкі</string>
+	<string name="poi_access_agricultural">Сельгасп. доступ</string>
+
+	<string name="poi_access_destination">Транзіт забаронены</string>
+	<string name="poi_capital">Сталіца</string>
+	<string name="poi_fee_no">Бясплатна</string>
+
+	<string name="poi_monitoring_station">Станцыя назіраньня</string>
+	<string name="poi_email">Эл. пошта</string>
+	<string name="poi_fax">Факс</string>
+	<string name="poi_facebook">Фэйсбук</string>
+	<string name="poi_mobile">Сотавы тэлефон</string>
+	<string name="poi_animal_shelter_dog">Прытулак для сабак</string>
+	<string name="poi_animal_shelter_cat">Прытулак для катоў</string>
+	<string name="poi_animal_shelter_dog_cat">Прытулак для сабак і катоў</string>
+	<string name="poi_animal_shelter_bird">Прытулак для птушак</string>
+
+<string name="poi_shower">Душ</string>
+	<string name="poi_recycling_centre">Пункт прыёму</string>
+	<string name="poi_recycling_container">Кантэйнэр</string>
+	<string name="poi_recycling_glass">Шкло</string>
+	<string name="poi_recycling_paper">Папера</string>
+	<string name="poi_recycling_clothes">Вопратка</string>
+	<string name="poi_recycling_cans">Бляшанкі</string>
+	<string name="poi_recycling_glass_bottles">Шкляныя бутэлькі</string>
+	<string name="poi_recycling_plastic">Плястык</string>
+	<string name="poi_recycling_scrap_metal">Мэталалом</string>
+	<string name="poi_recycling_batteries">Батарэйкі</string>
+	<string name="poi_recycling_plastic_bottles">Плястыкавыя бутэлькі</string>
+	<string name="poi_recycling_green_waste">Расьліннае сьмецьце</string>
+	<string name="poi_recycling_waste">Сьмецьце (чорныя мяхі)</string>
+	<string name="poi_recycling_plastic_packaging">Плястыкавая тара</string>
+	<string name="poi_recycling_newspaper">Газэты</string>
+	<string name="poi_recycling_magazines">Часопісы</string>
+	<string name="poi_recycling_books">Кнігі</string>
+	<string name="poi_recycling_shoes">Абутак</string>
+	<string name="poi_seasonal_winter">Зіма</string>
+
+	<string name="poi_seasonal_autumn">Восень</string>
+	<string name="poi_seasonal_summer">Лета</string>
+	<string name="poi_seasonal_spring">Вясна</string>
 	</resources>

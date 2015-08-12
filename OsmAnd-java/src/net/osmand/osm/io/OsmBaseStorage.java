@@ -1,5 +1,6 @@
 package net.osmand.osm.io;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -8,12 +9,14 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.zip.GZIPInputStream;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 import net.osmand.IProgress;
+import net.osmand.PlatformUtil;
 import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.EntityInfo;
 import net.osmand.osm.edit.Node;
@@ -25,9 +28,11 @@ import net.osmand.osm.edit.Entity.EntityType;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
 
 
-public class OsmBaseStorage extends DefaultHandler {
+public class OsmBaseStorage {
 
 	protected static final String ELEM_OSM = "osm"; //$NON-NLS-1$
 	protected static final String ELEM_OSMCHANGE = "osmChange"; //$NON-NLS-1$
@@ -78,8 +83,14 @@ public class OsmBaseStorage extends DefaultHandler {
 	
 	
 	
+	public static void main(String[] args) throws IOException, SAXException, XmlPullParserException {
+		GZIPInputStream is = new GZIPInputStream(
+				new FileInputStream("/Users/victorshcherb/osmand/temp/m.m001508233.osc.gz"));
+		new OsmBaseStorage().parseOSM(is, IProgress.EMPTY_PROGRESS);
+	}
+	
 	public synchronized void parseOSM(InputStream stream, IProgress progress, InputStream streamForProgress, 
-			boolean entityInfo) throws IOException, SAXException {
+			boolean entityInfo) throws IOException, XmlPullParserException {
 		this.inputStream = stream;
 		this.progress = progress;
 		parseEntityInfo = entityInfo;
@@ -87,15 +98,22 @@ public class OsmBaseStorage extends DefaultHandler {
 			streamForProgress = inputStream;
 		}
 		this.streamForProgress = streamForProgress;
-		SAXParser parser = initSaxParser();
 		parseStarted = false;
 		entities.clear();
 		this.entityInfo.clear();
 		if(progress != null){
 			progress.startWork(streamForProgress.available());
 		}
-		
-		parser.parse(stream, this);
+		XmlPullParser parser = PlatformUtil.newXMLPullParser();
+		parser.setInput(stream, "UTF-8");
+		int tok;
+		while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
+			if (tok == XmlPullParser.START_TAG) {
+				startElement(parser, parser.getName());
+			} else if (tok == XmlPullParser.END_TAG) {
+				endElement(parser, parser.getName());
+			}
+		}
 		if(progress != null){
 			progress.finishTask();
 		}
@@ -107,7 +125,7 @@ public class OsmBaseStorage extends DefaultHandler {
 	 * @throws IOException
 	 * @throws SAXException - could be
 	 */
-	public synchronized void parseOSM(InputStream stream, IProgress progress) throws IOException, SAXException {
+	public synchronized void parseOSM(InputStream stream, IProgress progress) throws IOException, XmlPullParserException {
 		parseOSM(stream, progress, null, true);
 		
 	}
@@ -120,29 +138,14 @@ public class OsmBaseStorage extends DefaultHandler {
 	}
 	
 	private boolean osmChange;
-	protected SAXParser saxParser;
-	public SAXParser initSaxParser(){
-		if(saxParser != null){
-			return saxParser;
-		}
-		SAXParserFactory factory = SAXParserFactory.newInstance();
-		try {
-			factory.setFeature("http://xml.org/sax/features/namespace-prefixes", false); //$NON-NLS-1$
-			return saxParser = factory.newSAXParser();
-		} catch (ParserConfigurationException e) {
-			throw new IllegalStateException(e);
-		} catch (SAXException e) {
-			throw new IllegalStateException(e);
-		}	
-	}
 	
 	public boolean isOsmChange() {
 		return osmChange;
 	}
 	
-	protected Long parseId(Attributes a, String name, long defId){
+	protected Long parseId(XmlPullParser parser, String name, long defId){
 		long id = defId; 
-		String value = a.getValue(name);
+		String value = parser.getAttributeValue("",name);
 		try {
 			id = Long.parseLong(value);
 		} catch (NumberFormatException e) {
@@ -150,9 +153,9 @@ public class OsmBaseStorage extends DefaultHandler {
 		return id;
 	}
 	
-	protected double parseDouble(Attributes a, String name, double defVal){
+	protected double parseDouble(XmlPullParser parser, String name, double defVal){
 		double ret = defVal; 
-		String value = a.getValue(name);
+		String value = parser.getAttributeValue("", name);
 		if(value == null) {
 			return defVal;
 		}
@@ -169,21 +172,20 @@ public class OsmBaseStorage extends DefaultHandler {
 		supportedVersions.add("0.5"); //$NON-NLS-1$
 	}
 	
-	protected void initRootElement(String uri, String localName, String name, Attributes attributes) throws OsmVersionNotSupported{
-		if((!ELEM_OSM.equals(name) && !ELEM_OSMCHANGE.equals(name)) || !supportedVersions.contains(attributes.getValue(ATTR_VERSION))){
+	protected void initRootElement(XmlPullParser parser, String name) throws OsmVersionNotSupported {
+		if ((!ELEM_OSM.equals(name) && !ELEM_OSMCHANGE.equals(name))
+				|| !supportedVersions.contains(parser.getAttributeValue("", ATTR_VERSION))) {
 			throw new OsmVersionNotSupported();
 		}
 		osmChange = ELEM_OSMCHANGE.equals(name);
-		parseStarted = true;	
+		parseStarted = true;
 	}
 	
 	protected static final int moduleProgress = 1 << 10;
 	
-	@Override
-	public void startElement(String uri, String localName, String name, Attributes attributes) throws SAXException {
-		name = saxParser.isNamespaceAware() ? localName : name;
+	public void startElement(XmlPullParser parser, String name)  {
 		if(!parseStarted){
-			initRootElement(uri, localName, name, attributes);
+			initRootElement(parser, name);
 		}
 		if (ELEM_MODIFY.equals(name) ) {
 			currentModify = Entity.MODIFY_MODIFIED;
@@ -202,12 +204,12 @@ public class OsmBaseStorage extends DefaultHandler {
 				}
 			}
 			if (ELEM_NODE.equals(name)) {
-				currentParsedEntity = new Node(parseDouble(attributes, ATTR_LAT, 0), parseDouble(attributes, ATTR_LON, 0),
-						parseId(attributes, ATTR_ID, -1));
+				currentParsedEntity = new Node(parseDouble(parser, ATTR_LAT, 0), parseDouble(parser, ATTR_LON, 0),
+						parseId(parser, ATTR_ID, -1));
 			} else if (ELEM_WAY.equals(name)) {
-				currentParsedEntity = new Way(parseId(attributes, ATTR_ID, -1));
+				currentParsedEntity = new Way(parseId(parser, ATTR_ID, -1));
 			} else if (ELEM_RELATION.equals(name)) {
-				currentParsedEntity = new Relation(parseId(attributes, ATTR_ID, -1));
+				currentParsedEntity = new Relation(parseId(parser, ATTR_ID, -1));
 			} else {
 				// this situation could be logged as unhandled
 			}
@@ -215,30 +217,34 @@ public class OsmBaseStorage extends DefaultHandler {
 				currentParsedEntity.setModify(currentModify);
 				if (parseEntityInfo) {
 					currentParsedEntityInfo = new EntityInfo();
-					currentParsedEntityInfo.setChangeset(attributes.getValue(ATTR_CHANGESET));
-					currentParsedEntityInfo.setTimestamp(attributes.getValue(ATTR_TIMESTAMP));
-					currentParsedEntityInfo.setUser(attributes.getValue(ATTR_USER));
-					currentParsedEntityInfo.setVersion(attributes.getValue(ATTR_VERSION));
-					currentParsedEntityInfo.setVisible(attributes.getValue(ATTR_VISIBLE));
-					currentParsedEntityInfo.setUid(attributes.getValue(ATTR_UID));
+					currentParsedEntityInfo.setChangeset(parser.getAttributeValue("",ATTR_CHANGESET));
+					currentParsedEntityInfo.setTimestamp(parser.getAttributeValue("",ATTR_TIMESTAMP));
+					currentParsedEntityInfo.setUser(parser.getAttributeValue("",ATTR_USER));
+					currentParsedEntityInfo.setVersion(parser.getAttributeValue("",ATTR_VERSION));
+					currentParsedEntityInfo.setVisible(parser.getAttributeValue("",ATTR_VISIBLE));
+					currentParsedEntityInfo.setUid(parser.getAttributeValue("",ATTR_UID));
 				}
 			}
 		} else {
 			if (ELEM_TAG.equals(name)) {
-				String key = attributes.getValue(ATTR_K);
+				String key = parser.getAttributeValue("",ATTR_K);
 				if(key != null){
-					currentParsedEntity.putTag(key, attributes.getValue(ATTR_V));
+					currentParsedEntity.putTag(key, parser.getAttributeValue("",ATTR_V));
 				}
 			} else if (ELEM_ND.equals(name)) {
-				Long id = parseId(attributes, ATTR_REF, -1);
+				Long id = parseId(parser, ATTR_REF, -1);
 				if(id != -1 && currentParsedEntity instanceof Way){
 					((Way)currentParsedEntity).addNode(id);
 				}
 			} else if (ELEM_MEMBER.equals(name)) {
-				Long id = parseId(attributes, ATTR_REF, -1);
-				if(id != -1 && currentParsedEntity instanceof Relation){
-					EntityType type = EntityType.valueOf(attributes.getValue(ATTR_TYPE).toUpperCase());
-					((Relation)currentParsedEntity).addMember(id, type, attributes.getValue(ATTR_ROLE));
+				try {
+					Long id = parseId(parser, ATTR_REF, -1);
+					if (id != -1 && currentParsedEntity instanceof Relation) {
+						EntityType type = EntityType.valueOf(parser.getAttributeValue("",ATTR_TYPE).toUpperCase());
+						((Relation) currentParsedEntity).addMember(id, type, parser.getAttributeValue("",ATTR_ROLE));
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
 
 			}  else {
@@ -247,9 +253,7 @@ public class OsmBaseStorage extends DefaultHandler {
 		}
 	}
 	
-	@Override
-	public void endElement(String uri, String localName, String name) throws SAXException {
-		name = saxParser.isNamespaceAware() ? localName : name;
+	public void endElement(XmlPullParser parser, String name) {
 		EntityType type = null;
 		if (ELEM_NODE.equals(name)){
 			type = EntityType.NODE; 
@@ -281,7 +285,6 @@ public class OsmBaseStorage extends DefaultHandler {
 				currentParsedEntity = null;
 			}
 		}
-		super.endElement(uri, localName, name);
     }
 
     public void registerEntity(Entity entity, EntityInfo info) {
@@ -323,7 +326,7 @@ public class OsmBaseStorage extends DefaultHandler {
 	/**
 	 * Thrown when version is not supported
 	 */
-	public static class OsmVersionNotSupported extends SAXException {
+	public static class OsmVersionNotSupported extends RuntimeException {
 		private static final long serialVersionUID = -127558215143984838L;
 
 	}

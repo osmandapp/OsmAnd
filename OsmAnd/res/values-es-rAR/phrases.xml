@@ -573,14 +573,14 @@
 	<string name="poi_club_charity">Club de caridad</string>
 
 	<string name="poi_piste">Pista</string>
-	<string name="poi_piste_downhill">Descenso</string>
-	<string name="poi_piste_nordic">Nórdico</string>
-	<string name="poi_piste_skitour">Esquí de travesía</string>
-	<string name="poi_piste_hike">Caminata</string>
-	<string name="poi_piste_sleigh">Trineo (animales)</string>
-	<string name="poi_piste_sled">Trineo</string>
+	<string name="poi_piste_downhill">Pista de descenso</string>
+	<string name="poi_piste_nordic">Pista nórdica</string>
+	<string name="poi_piste_skitour">Pista de esquí de travesía</string>
+	<string name="poi_piste_hike">Pista de senderismo</string>
+	<string name="poi_piste_sleigh">Pista de trineo (animales)</string>
+	<string name="poi_piste_sled">Pista de trineo</string>
 	<string name="poi_piste_snow_park">Parque de nieve</string>
-	<string name="poi_piste_playground">Parque infantil de esquí</string>
+	<string name="poi_piste_playground">Pista de esquí infantil</string>
 	<string name="poi_piste_ice_skate">Patín sobre hielo</string>
 	<string name="poi_ski_rental">Alquiler de esquí</string>
 
@@ -679,7 +679,7 @@
 	<string name="poi_hairdresser">Peluquería</string>
 	<string name="poi_massage">Salón de masajes</string>
 	<string name="poi_tattoo">Salón de tatuajes</string>
-	<string name="poi_dry_cleaning">Limpieza en seco</string>
+	<string name="poi_dry_cleaning">Tintorería</string>
 	<string name="poi_laundry">Lavandería</string>
 	<string name="poi_car_rental">Alquiler de autos</string>
 	<string name="poi_car_sharing">Coche compartido</string>
@@ -892,10 +892,10 @@
 
 	<string name="poi_tourism_attraction">Atracción turística</string>
 	<string name="poi_cutline">Cortafuegos forestal</string>
-	<string name="poi_icn_ref">Red internacional de ciclismo</string>
-	<string name="poi_ncn_ref">Red nacional de ciclismo</string>
-	<string name="poi_rcn_ref">Red regional de ciclismo</string>
-	<string name="poi_lcn_ref">Red local de ciclismo</string>
+	<string name="poi_icn_ref">Red de nodos ciclista internacional</string>
+	<string name="poi_ncn_ref">Red de nodos ciclista nacional</string>
+	<string name="poi_rcn_ref">Red de nodos ciclista regional</string>
+	<string name="poi_lcn_ref">Red de nodos ciclista local</string>
 
 	<string name="poi_iwn_ref">Red internacional de senderismo</string>
 	<string name="poi_nwn_ref">Red nacional de senderismo</string>
@@ -922,8 +922,38 @@
 	<string name="poi_enforcement_toll">Control de peaje</string>
 
 <string name="poi_country">País</string>
-	<string name="poi_fee">Costo</string>
+	<string name="poi_fee_yes">Costo</string>
 
-	<string name="poi_kent_carriage_gap">Bolardos para vehículos de tracción a sangre</string>
+	<string name="poi_kent_carriage_gap">Bolardos para carros a caballo</string>
 	<string name="poi_abandoned_poi">Objeto abandonado</string>
-	</resources>
+	<string name="poi_route_hiking_iwn_poi">Ruta internacional de senderismo</string>
+	<string name="poi_route_hiking_nwn_poi">Ruta nacional de senderismo</string>
+	<string name="poi_route_hiking_rwn_poi">Ruta regional de senderismo</string>
+	<string name="poi_route_hiking_lwn_poi">Ruta local de senderismo</string>
+	<string name="poi_route_hiking_ref_poi">Referencia de ruta de senderismo</string>
+
+	<string name="poi_node_networks">Red de nodos de senderismo/ciclismo</string>
+		<string name="poi_hiking_routes">Rutas de senderismo</string>
+		<string name="poi_traffic_enforcement">Control del tráfico</string>
+	<string name="poi_access_private">Acceso privado</string>
+	<string name="poi_access_no">Sin acceso</string>
+	<string name="poi_access_destination">Acceso a destino</string>
+	<string name="poi_access_permissive">Acceso permisivo</string>
+	<string name="poi_access_customers">Acceso de clientes</string>
+	<string name="poi_access_agricultural">Acceso agrícola</string>
+
+	<string name="poi_access_delivery">Acceso para entregas</string>
+	<string name="poi_monitoring_station">Estación de monitoreo</string>
+	<string name="poi_capital">Capital</string>
+	<string name="poi_fee_no">Sin costo</string>
+
+	<string name="poi_email">Email</string>
+	<string name="poi_fax">Fax</string>
+	<string name="poi_facebook">Facebook</string>
+	<string name="poi_mobile">Celular</string>
+	<string name="poi_animal_shelter_dog">Refugio para perros</string>
+	<string name="poi_animal_shelter_cat">Refugio para gatos</string>
+	<string name="poi_animal_shelter_dog_cat">Refugio para perros y gatos</string>
+	<string name="poi_animal_shelter_bird">Refugio para aves</string>
+
+</resources>

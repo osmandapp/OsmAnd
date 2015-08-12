@@ -76,7 +76,7 @@
 	<string name="poi_computer">Loja de informática</string>
 	<string name="poi_copyshop">Reprografia</string>
 	<string name="poi_curtain">Loja de cortinas</string>
-	<string name="poi_fabric">Loja de indumentárias</string>
+	<string name="poi_fabric">Tecidos</string>
 	<string name="poi_bedding">Loja de roupa de cama</string>
 	<string name="poi_dive">Equipamento de mergulho</string>
 	<string name="poi_doityourself">Artigos para casa</string>
@@ -119,7 +119,7 @@
 	<string name="poi_traffic_calming_table">Faixa elevada</string>
 	<string name="poi_picnic_site">Local de piquenique</string>
 	<string name="poi_hanami">Hanami</string>
-	<string name="poi_piste_sleigh">Trenó</string>
+	<string name="poi_piste_sleigh">Pista de trenó</string>
 	<string name="poi_trail_riding_station">Local de equitação</string>
 
 	<string name="poi_craft_plumber">Encanador</string>
@@ -581,13 +581,13 @@
 	<string name="poi_club_charity">Clube de caridade</string>
 
 	<string name="poi_piste">Pista</string>
-	<string name="poi_piste_downhill">Descida</string>
-	<string name="poi_piste_nordic">Nórdico</string>
-	<string name="poi_piste_skitour">Passeio de esqui</string>
-	<string name="poi_piste_hike">Caminhada</string>
-	<string name="poi_piste_sled">Trenó</string>
+	<string name="poi_piste_downhill">Pista de descida</string>
+	<string name="poi_piste_nordic">Pista nórdica</string>
+	<string name="poi_piste_skitour">Pista de passeio</string>
+	<string name="poi_piste_hike">Pista de caminhada</string>
+	<string name="poi_piste_sled">Pista de trenó (carrinho)</string>
 	<string name="poi_piste_snow_park">Parque de neve</string>
-	<string name="poi_piste_playground">Parque infantil de esqui</string>
+	<string name="poi_piste_playground">Pista de diversão</string>
 	<string name="poi_piste_ice_skate">Patim de gelo</string>
 	<string name="poi_ski_rental">Aluguel de esqui</string>
 
@@ -923,7 +923,123 @@
 	<string name="poi_enforcement_check">Fiscalização:verificação</string>
 	<string name="poi_cutline">Linha de corte</string>
 	<string name="poi_country">País</string>
-	<string name="poi_fee">Taxa</string>
+	<string name="poi_fee_yes">Taxa</string>
 
 	<string name="poi_abandoned_poi">Objeto abandonado</string>
+	<string name="poi_route_hiking_iwn_poi">Rota de caminhada internacional</string>
+	<string name="poi_route_hiking_nwn_poi">Rota de caminhada nacional</string>
+	<string name="poi_route_hiking_rwn_poi">Rota de caminhada regional</string>
+	<string name="poi_route_hiking_lwn_poi">Rota de caminhada local</string>
+	<string name="poi_route_hiking_ref_poi">Referência de rota de caminhada</string>
+
+	<string name="poi_traffic_enforcement">Fiscalização de trânsito</string>
+	<string name="poi_node_networks">Nós da rede de caminhada/ciclismo</string>
+		<string name="poi_hiking_routes">Rotas de caminhada</string>
+		<string name="poi_access_private">Acesso privado</string>
+	<string name="poi_access_no">Acesso proibido</string>
+	<string name="poi_access_destination">Acesso de destino</string>
+	<string name="poi_access_permissive">Acesso autorizado</string>
+	<string name="poi_access_customers">Acesso para clientes</string>
+	<string name="poi_access_delivery">Acesso para entrega</string>
+	<string name="poi_access_agricultural">Acesso agrícola</string>
+
+	<string name="poi_monitoring_station">Estação de medição ambiental</string>
+	<string name="poi_capital">Capital</string>
+	<string name="poi_fee_no">Sem taxa</string>
+
+	<string name="poi_email">Email</string>
+	<string name="poi_fax">Fax</string>
+	<string name="poi_facebook">Facebook</string>
+	<string name="poi_mobile">Celular</string>
+	<string name="poi_animal_shelter_dog">Abrigo para cães</string>
+	<string name="poi_animal_shelter_cat">Abrigo para gatos</string>
+	<string name="poi_animal_shelter_dog_cat">Abrigo para cães e gatos</string>
+	<string name="poi_animal_shelter_bird">Abrigo para aves</string>
+
+<string name="poi_recycling_container">Contêiner</string>
+	<string name="poi_recycling_glass">Vidro</string>
+	<string name="poi_recycling_paper">Papel</string>
+	<string name="poi_recycling_clothes">Roupas</string>
+	<string name="poi_recycling_cans">Latas</string>
+	<string name="poi_recycling_glass_bottles">Garrafas de vidro</string>
+	<string name="poi_recycling_plastic">Plástico</string>
+	<string name="poi_recycling_scrap_metal">Sucata de metal</string>
+	<string name="poi_recycling_batteries">Pilhas</string>
+	<string name="poi_recycling_plastic_bottles">Garrafas de plástico</string>
+	<string name="poi_recycling_green_waste">Resíduo verde</string>
+	<string name="poi_recycling_waste">Resíduos (sacos pretos)</string>
+	<string name="poi_recycling_plastic_packaging">Embalagens de plástico</string>
+	<string name="poi_recycling_newspaper">Jornal</string>
+	<string name="poi_recycling_cartons">Caixas</string>
+	<string name="poi_recycling_cardboard">Papelão</string>
+	<string name="poi_recycling_magazines">Revistas</string>
+	<string name="poi_recycling_paper_packaging">Embalagens de papel</string>
+	<string name="poi_recycling_small_appliances">Pequenos aparelhos</string>
+	<string name="poi_recycling_wood">Madeira</string>
+	<string name="poi_recycling_books">Livros</string>
+	<string name="poi_recycling_shoes">Calçados</string>
+	<string name="poi_recycling_aluminium">Alumínio</string>
+	<string name="poi_recycling_organic">Orgânico</string>
+	<string name="poi_recycling_beverage_cartons">Caixas de bebidas</string>
+	<string name="poi_recycling_garden_waste">Resíduo de jardim</string>
+	<string name="poi_recycling_low_energy_bulbs">Lâmpadas de baixo consumo</string>
+	<string name="poi_recycling_fluorescent_tubes">Lâmpadas fluorescentes</string>
+	<string name="poi_recycling_metal">Metal</string>
+	<string name="poi_recycling_electrical_items">Itens elétricos</string>
+	<string name="poi_recycling_white_goods">Linha branca</string>
+	<string name="poi_recycling_cooking_oil">Óleo de cozinha</string>
+	<string name="poi_recycling_engine_oil">Óleo do motor</string>
+	<string name="poi_recycling_plastic_bags">Sacos plásticos</string>
+	<string name="poi_recycling_hazardous_waste">Resíduo perigoso</string>
+	<string name="poi_recycling_mobile_phones">Telefones celulares</string>
+	<string name="poi_recycling_hydrargyrum">Mercúrio</string>
+	<string name="poi_recycling_computers">Computadores</string>
+	<string name="poi_recycling_tyres">Pneus</string>
+	<string name="poi_recycling_tv_monitor">TV, monitores</string>
+	<string name="poi_recycling_tetrapak">Tetrapak</string>
+	<string name="poi_recycling_rubble">Entulho</string>
+	<string name="poi_recycling_cds">CDs</string>
+	<string name="poi_recycling_waste_oil">Resíduo de óleo</string>
+	<string name="poi_recycling_bottles">Garrafas</string>
+	<string name="poi_recycling_cork">Cortiça</string>
+	<string name="poi_recycling_printer_cartridges">Cartuchos de impressão</string>
+	<string name="poi_recycling_sheet_metal">Chapa metálica</string>
+	<string name="poi_recycling_foil">Papel alumínio</string>
+	<string name="poi_recycling_paint">Tinta</string>
+	<string name="poi_recycling_styrofoam">Isopor</string>
+	<string name="poi_recycling_drugs">Drogas</string>
+	<string name="poi_recycling_compost">Adubo</string>
+	<string name="poi_recycling_christmas_trees">Árvores de Natal</string>
+	<string name="poi_recycling_light_bulbs">Lâmpadas incandescentes</string>
+	<string name="poi_recycling_chipboard">Compensado</string>
+	<string name="poi_recycling_polyester">Poliéster</string>
+	<string name="poi_recycling_plasterboard">Gesso cartonado</string>
+	<string name="poi_recycling_animal_waste">Resíduo animal</string>
+	<string name="poi_recycling_fridge_and_freezer">Frigorífico e congelador</string>
+	<string name="poi_recycling_furniture">Móveis</string>
+	<string name="poi_recycling_diapers">Fraldas</string>
+	<string name="poi_recycling_car_batteries">Baterias de carro</string>
+	<string name="poi_recycling_cars">Carros</string>
+	<string name="poi_recycling_bicycles">Bicicletas</string>
+
+	<string name="poi_shower">Chuveiro</string>
+	<string name="poi_drinking_water_yes">Água potável</string>
+	<string name="poi_drinking_water_no">Água impotável</string>
+	<string name="poi_supervised_yes">Supervisionado</string>
+	<string name="poi_supervised_no">Sem supervisão</string>
+	<string name="poi_seasonal_yes">Sazonal</string>
+	<string name="poi_seasonal_no">Contínuo</string>
+	<string name="poi_seasonal_dry_season">Estação seca</string>
+	<string name="poi_seasonal_wet_season">Estação chuvosa</string>
+	<string name="poi_seasonal_spring">Primavera</string>
+	<string name="poi_seasonal_summer">Verão</string>
+	<string name="poi_seasonal_autumn">Outono</string>
+	<string name="poi_seasonal_winter">Inverno</string>
+
+	<string name="poi_recycling_centre">Centro</string>
+	<string name="poi_recycling_hardcore">Material duro</string>
+	<string name="poi_crossing_traffic_signals">Com semáforos</string>
+	<string name="poi_crossing_uncontrolled">Sem controle</string>
+	<string name="poi_crossing_unmarked">Desmarcado</string>
+
 	</resources>

@@ -18,12 +18,9 @@ import net.osmand.plus.activities.MapActivity;
 
 import java.util.Calendar;
 
-/**
- * Created by Denis on
- * 26.03.2015.
- */
 public class DashRateUsFragment extends DashBaseFragment {
     public static final String TAG = "DASH_RATE_US_FRAGMENT";
+
     // TODO move to resources
     public static final String EMAIL = "support@osmand.net";
 
@@ -65,10 +62,7 @@ public class DashRateUsFragment extends DashBaseFragment {
 		lastDisplayTime.setTimeInMillis(lastDisplayTimeInMillis);
 
 		int bannerFreeRuns = 0;
-
-		Log.v(TAG, "state=" + state + "; lastDisplayTimeInMillis=" + lastDisplayTimeInMillis
-				+ "; numberOfApplicationRuns=" + numberOfApplicationRuns);
-
+        
 		boolean toReturn = false;
 
 		switch (state) {

@@ -24,6 +24,29 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import net.osmand.access.AccessibleToast;
+import net.osmand.data.PointDescription;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.ProgressImplementation;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.ActionBarProgressActivity;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.OsmAndListFragment;
+import net.osmand.plus.activities.OsmandActionBarActivity;
+import net.osmand.plus.dialogs.DirectionsDialogs;
+import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.myplaces.FavoritesActivity;
+
+import org.xmlpull.v1.XmlSerializer;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.PointDescription;
@@ -55,7 +78,7 @@ import java.util.List;
  */
 public class OsmEditsFragment extends OsmAndListFragment {
 	OsmEditingPlugin plugin;
-	private ArrayList<OsmPoint> dataPoints;
+	
 	private OsmEditsAdapter listAdapter;
 
 	private boolean selectionMode = false;
@@ -139,7 +162,8 @@ public class OsmEditsFragment extends OsmAndListFragment {
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
-				new BackupOpenstreetmapPointAsyncTask().execute(dataPoints.toArray(new OsmPoint[0]));
+				new BackupOpenstreetmapPointAsyncTask().execute(
+						listAdapter.dataPoints.toArray(new OsmPoint[0]));
 				return true;
 			}
 		});
@@ -319,22 +343,26 @@ public class OsmEditsFragment extends OsmAndListFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		dataPoints = new ArrayList<>();
+		ArrayList<OsmPoint> dataPoints = new ArrayList<>();
 		List<OpenstreetmapPoint> l1 = plugin.getDBPOI().getOpenstreetmapPoints();
 		List<OsmNotesPoint> l2 = plugin.getDBBug().getOsmbugsPoints();
 		dataPoints.addAll(l1);
 		dataPoints.addAll(l2);
-		listAdapter = new OsmEditsAdapter(dataPoints);
-		getListView().setAdapter(listAdapter);
-		getListView().setOnItemClickListener(new OnItemClickListener() {
+		if (listAdapter == null) {
+			listAdapter = new OsmEditsAdapter(dataPoints);
+			getListView().setAdapter(listAdapter);
+			getListView().setOnItemClickListener(new OnItemClickListener() {
 
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				OsmPoint it = listAdapter.getItem(position);
-				openPopUpMenu(view, it);
+				@Override
+				public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+					OsmPoint it = listAdapter.getItem(position);
+					openPopUpMenu(view, it);
 
-			}
-		});
+				}
+			});
+		} else {
+			listAdapter.setNewList(dataPoints);
+		}
 
 	}
 
@@ -362,9 +390,27 @@ public class OsmEditsFragment extends OsmAndListFragment {
 	}
 
 	protected class OsmEditsAdapter extends ArrayAdapter<OsmPoint> {
-
+		private List<OsmPoint> dataPoints;
+		
+		
 		public OsmEditsAdapter(List<OsmPoint> points) {
 			super(getActivity(), net.osmand.plus.R.layout.note, points);
+			dataPoints = points;
+		}
+		
+		public void setNewList(List<OsmPoint> dp) {
+			dataPoints = dp;
+			setNotifyOnChange(false);
+			clear();
+			for(OsmPoint pnt : dp) {
+				add(pnt);
+			}
+			setNotifyOnChange(true);
+			notifyDataSetChanged();
+		}
+
+		public List<OsmPoint> getDataPoints() {
+			return dataPoints;
 		}
 
 		public void delete(OsmPoint i) {

@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="gps_network_not_enabled">Kein Standortdienst aktiviert. Aktivieren?</string>
 	<string name="disable_recording_once_app_killed">Eigenständige Streckenaufzeichnung unterbinden</string>
@@ -73,7 +73,7 @@
 	<string name="stop_navigation_service">Unterbrechen</string>
 	<string name="rendering_attr_alpineHiking_name">Alpine Tourenskala (SAC)</string>
 	<string name="rendering_attr_alpineHiking_description">Wege entsprechend der SAC-Wanderskala darstellen</string>
-	<string name="rendering_attr_hikingRoutesOSMC_name">Wandersymbole anzeigen</string>
+	<string name="rendering_attr_hikingRoutesOSMC_name">Wandersymboleinblendung</string>
 	<string name="rendering_attr_hikingRoutesOSMC_description">Wandersymbole anzeigen (OSMC)</string>
 	<string name="arrival_distance_factor_early">Früh</string>
 	<string name="arrival_distance_factor_normally">Normal</string>
@@ -243,13 +243,13 @@
 	<string name="north_west">Nord-West</string>
 	<string name="north_north_west">Nord-Nord-West</string>
 	<string name="front">Vorne</string>
-	<string name="front_right">Vorne rechts</string>
+	<string name="front_right">rechts vorne</string>
 	<string name="right">Auf der rechten Seite</string>
-	<string name="back_right">Hinten rechts</string>
-	<string name="back">Hinten</string>
-	<string name="back_left">Hinten links</string>
+	<string name="back_right">rechts hinten</string>
+	<string name="back">hinten</string>
+	<string name="back_left">links hinten</string>
 	<string name="left">Auf der linken Seite</string>
-	<string name="front_left">Vorne links</string>
+	<string name="front_left">links vorne</string>
 	<string name="oclock">Uhr</string>
 	<string name="towards">nach</string>
 	<string name="accuracy">Genauigkeit</string>
@@ -931,7 +931,7 @@
 	<string name="route_head">Geradeaus</string>
 	<string name="first_time_continue">Weiter</string>
 	<string name="first_time_download">Offline-Daten herunterladen</string>
-	<string name="first_time_msg">Danke, dass Sie OsmAnd verwenden. Für viele Funktionen sind Offline-Karten erforderlich, die Sie in den Einstellungen unter \'Karten-Management\' herunterladen oder selbst erstellen können. Danach können Sie Landkarten ansehen, Adressen, POI und ÖPNV finden.</string>
+	<string name="first_time_msg">Danke, dass Sie OsmAnd verwenden. Für viele Funktionen sind Offline-Karten erforderlich, die Sie in den Einstellungen unter \'Karten-Management\' herunterladen oder selbst erstellen können. Danach können Sie Landkarten ansehen und Adressen, interessante Orte und Informationen zum ÖPNV finden.</string>
 	<string name="search_poi_location">Warte auf Signal…</string>
 	<string name="search_near_map">Suche in der Nähe</string>
 	<string name="search_nearby">Suche um Aufenthaltsort</string>
@@ -1316,7 +1316,7 @@
 	<string name="download_select_map_types">Andere Karten</string>
 	<string name="download_srtm_maps">Höhenlinien</string>
 	<string name="av_camera_pic_size">Bildgröße der Kamera</string>
-	<string name="av_camera_pic_size_descr">interne Größe der Kamerabilder bestimmen</string>
+	<string name="av_camera_pic_size_descr">Bildgröße der internen Kamera auswählen</string>
 	<string name="av_def_action_video">Video aufzeichnen</string>
 	<string name="av_def_action_audio">Audio aufnehmen</string>
 	<string name="av_widget_action_descr">Legt fest, welche Aktion das Widget standardmäßig ausführt</string>
@@ -2060,7 +2060,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="shared_string_disable">Deaktivieren</string>
     <string name="plugin_description_title">Beschreibung</string>
     
-    <string name="plugin_install_needs_network">Die Installation dieses Plugins benötigt eine Internet-Verbindung.</string>
+    <string name="plugin_install_needs_network">Die Installation dieses Plugins benötigt eine Internetverbindung.</string>
     <string name="edit_group">Gruppe bearbeiten</string>
     <string name="free">Frei %1$s </string>
     <string name="device_memory">Gerätespeicher</string>
@@ -2175,7 +2175,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="routing_attr_avoid_borders_description">Überqueren einer Staatsgrenze vermeiden</string>
 	<string name="routing_attr_height_description">Höhe des Fahrzeugs für Streckenberechnung angeben</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
-    <string name="use_fast_recalculation">schnelle Routen-Neuberechnung</string>
+    <string name="use_fast_recalculation">Schnelle Routen-Neuberechnung</string>
 	<string name="use_fast_recalculation_desc">Bei längeren Routen nur den Anfangsteil neu berechnen</string>
 <string name="lang_es_ar">Spanisch (Argentinien)</string>
     <string name="lang_th">Thailändisch</string>
@@ -2208,8 +2208,8 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="lang_nn">Norwegisch (Neunorwegisch)</string>
     <string name="rendering_value_default13_name">Standard (13)</string>
 	<string name="rendering_value_defaultTranslucentCyan_name">Standard (transparentes Cyan)</string>
-    <string name="rendering_attr_currentTrackColor_name">GPX -Trackfarbe</string>
-    <string name="rendering_attr_currentTrackWidth_name">GPX-Trackbreite</string>
+    <string name="rendering_attr_currentTrackColor_name">GPX-Farbe</string>
+    <string name="rendering_attr_currentTrackWidth_name">GPX-Breite</string>
     <string name="rendering_value_red_name">Rot</string>
     <string name="rendering_value_translucent_red_name">Transparentes Rot</string>
     <string name="rendering_value_translucent_orange_name">Transparentes Orange</string>
@@ -2233,6 +2233,12 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="lang_ceb">Cebuano</string>
     <string name="local_recordings_delete_all_confirm">%1$d Notizen werden gelöscht. Fortfahren?</string>
 	<string name="lang_te">Telugu</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Routenfarbe gemäß Routenscope</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Einfärbung gemäß Routenbereich</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Routenfarbe gemäß OSMC</string>
-    </resources>
+    <string name="do_you_like_osmand">Gefällt Ihnen OsmAnd?</string>
+	<string name="rate_this_app">Bewerten Sie diese App</string>
+	<string name="rate_this_app_long">Bitte bewerten Sie OsmAnd auf Google Play</string>
+	<string name="user_hates_app_get_feedback">Sagen Sie uns warum.</string>
+	<string name="user_hates_app_get_feedback_long">Bitte teilen Sie uns mit welche Änderungen Sie sich für diese App wünschen.</string>
+<string name="we_really_care">Wir kümmern uns wirklich</string>
+	</resources>

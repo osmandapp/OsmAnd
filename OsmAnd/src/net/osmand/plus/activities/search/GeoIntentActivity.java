@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,9 +47,9 @@ import gnu.trove.map.hash.TLongObjectHashMap;
 
 public class GeoIntentActivity extends OsmandListActivity {
 
-	private static final String TAG = "GeoIntentActivity";
 	private ProgressDialog progressDlg;
 	private LatLon location;
+	protected static final boolean DO_NOT_SEARCH_ADDRESS = true;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -116,10 +115,8 @@ public class GeoIntentActivity extends OsmandListActivity {
 				while (getMyApplication().isApplicationInitializing()) {
 					Thread.sleep(200);
 				}
-				Log.v(TAG, "intent.getData()" + intent.getData());
 				return extract(intent.getData()).execute();
 			} catch (Exception e) {
-				Log.e(TAG, "", e);
 				return null;
 			}
 		}
@@ -302,6 +299,10 @@ public class GeoIntentActivity extends OsmandListActivity {
 			MapObject geo = checkGeoPoint();
 			if (geo != null) {
 				return new ExecutionResult(Collections.singleton(geo));
+			}
+			// do not 
+			if(DO_NOT_SEARCH_ADDRESS) {
+				return ExecutionResult.EMPTY;
 			}
 
 			// now try to search the City, Street, Etc.. if Street is not found,

@@ -726,10 +726,10 @@
 <string name="auto_zoom_map_descr">Zoom automàtic del mapa en funció de la velocitat (mentre el mapa està sincronitzat amb la posició actual)</string>
 <string name="auto_zoom_map">Zoom automàtic del mapa</string>
 <string name="tip_recent_changes_0_8_3_t">"Canvis a la versió 0.8.3:
+\n\t* Fites
 \n\t* Millora en el guiatge de rutes
 \n\t* Opció per evitar autopistes
 \n\t* Permet mostrar Cycleway=track
-\n\t* Millora en l\'acabat de les IU (icones)
 \n\t* S\'han corregit alguns errors de programació "</string>
 <string name="snap_to_road_descr">Ajusta la posició a les carreteres durant la navegació</string>
 <string name="snap_to_road">Desplaça a la carretera</string>
@@ -2073,4 +2073,20 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="restart_is_required">Per aplicar totalment els canvis, cal que reinicieu manualment l\'aplicació.</string>
     <string name="rendering_value_default13_name">Per defecte (13)</string>
 	<string name="rendering_value_defaultTranslucentCyan_name">Per defecte (cian translúcid)</string>
+    <string name="do_you_like_osmand">Us agrada OsmAnd?</string>
+	<string name="we_really_care">Som molt receptius</string>
+	<string name="rate_this_app">Avalua aquesta aplicació</string>
+	<string name="rate_this_app_long">Us agrairíem que avaluéssiu OsmAnd en el Google Play</string>
+	<string name="user_hates_app_get_feedback">Digueu-nos el motiu.</string>
+	<string name="user_hates_app_get_feedback_long">Us agrairíem que ens diguéssiu que voldríeu canviar d\'aquesta aplicació.</string>
+<string name="download_live_updates">Actualitzacions al moment</string>
+	<string name="failed_to_upload">S\'ha produït un error en la pujada</string>
+	<string name="delete_change">Suprimeix les modificacions</string>
+	<string name="successfully_uploaded_pattern">S\'ha pujat amb èxit {0}/{1}</string>
+	<string name="try_again">Torneu a provar-ho</string>
+	<string name="error_message_pattern">Error: {0}</string>
+<string name="no_updates_available">No hi ha actualitzacions disponibles</string>
+    <string name="we_really_care_about_your_opinion">"Valorem molt la vostra opinió i és important per nosaltres  disposar dels vostres comentaris."</string>
+	<string name="rendering_value_boldOutline_name">Contorn destacat</string>
+    <string name="traffic_warning_hazard">Perill informat</string>
     </resources>

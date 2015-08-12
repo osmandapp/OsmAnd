@@ -1467,7 +1467,7 @@
 	<string name="auto_zoom_close">Para primer plano</string>
 	<string name="auto_zoom_far">Para mediano alcance</string>
 	<string name="auto_zoom_farthest">Para largo alcance</string>
-	<string name="animate_routing_route_not_calculated">Calcule la primera ruta</string>
+	<string name="animate_routing_route_not_calculated">Primero calcule la ruta</string>
     <string name="animate_routing_route">"Simular utilizando la ruta calculada "</string>
     <string name="animate_routing_gpx">Simula utilizando traza GPX</string>
     <string name="app_mode_hiking">Senderismo</string>
@@ -1595,8 +1595,8 @@
 	<string name="interrupt_music">Interrumpir música</string>
 	<string name="osmo_settings_uuid">Identificador único del dispositivo</string>
     <string name="osmo_settings_descr">Configura los ajustes de rastreo y configura el canal de rastreo personal</string>
-    <string name="osmo_plugin_description">"Este complemento proporciona la funcionalidad para la monitorización avanzada en directo llamada OsMo, ver http://osmo.mobi.
-\n\nPuede hacer un seguimiento de todos los dispositivos participando en un grupo en tiempo real, y comunicarse entre sí. Viene con varias opciones para el seguimiento por sesión o seguimiento permanente.
+    <string name="osmo_plugin_description">"Este complemento proporciona la función de monitorización avanzada en directo llamada OsMo, ver http://osmo.mobi.
+\n\nPuede rastrear todos los dispositivos participando en un grupo en tiempo real, y comunicarse entre sí. Viene con varias opciones para el seguimiento por sesión o permanente.
 \n\nLos grupos anónimos pueden crearse espontáneamente para un número de días específico y con características limitadas, por ejemplo, no hay control remoto ni administrador del grupo. Los grupos con funcionalidad completa, por otro lado, se deben crear en el sitio web y sólo los usuarios registrados tienen acceso a ellos. "</string>
     <string name="osmo_plugin_name">OsMo (Monitorización OSM)</string>
     <string name="osmo_settings">OsMo</string>
@@ -2119,7 +2119,7 @@
     <string name="lang_nb">Noruego (Bokmål)</string>
     <string name="lang_vo">Volapuk</string>
     <string name="lang_te">Telugú</string>
-    <string name="lang_new">Newar / Nepal Bhasa</string>
+    <string name="lang_new">Newarí / Nepal Bhasa</string>
     <string name="rendering_value_default13_name">Predeterminado (13)</string>
 	<string name="rendering_value_defaultTranslucentCyan_name">Predeterminado (cian translúcido)</string>
     <string name="rendering_attr_currentTrackColor_name">Color del GPX</string>
@@ -2140,4 +2140,20 @@
     <string name="rendering_value_purple_name">Púrpura</string>
     <string name="rendering_value_translucent_purple_name">Púrpura translúcido</string>
     <string name="restart_is_required">Para aplicar los cambios, es necesario reiniciar manualmente la aplicación.</string>
+    <string name="do_you_like_osmand">¿Le gusta OsmAnd?</string>
+	<string name="we_really_care">Realmente nos interesa</string>
+	<string name="rate_this_app">Califica ésta aplicación</string>
+	<string name="rate_this_app_long">Por favor, califique a OsmAnd en Google Play</string>
+	<string name="user_hates_app_get_feedback">Dinos por que.</string>
+	<string name="user_hates_app_get_feedback_long">Por favor, díganos que cambiaría en esta aplicación.</string>
+<string name="download_live_updates">Actualizaciones en vivo</string>
+	<string name="failed_to_upload">Subida fallida</string>
+	<string name="delete_change">Borrar cambio</string>
+	<string name="successfully_uploaded_pattern">Subido con éxito {0}/{1}</string>
+	<string name="try_again">Vuelve a intentarlo</string>
+	<string name="error_message_pattern">Error: {0}</string>
+<string name="no_updates_available">Sin actualizaciones disponibles</string>
+    <string name="we_really_care_about_your_opinion">Nos interesa mucho y es importante para nosotros oír su opinión.</string>
+	<string name="rendering_value_boldOutline_name">Borde remarcado</string>
+    <string name="traffic_warning_hazard">Advertencia de riesgo</string>
     </resources>

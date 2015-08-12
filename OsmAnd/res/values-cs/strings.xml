@@ -1990,4 +1990,8 @@ s často kladenými otázkami.</string>
     <string name="gps_network_not_enabled">Služba zjištění polohy není zapnuta. Chcete ji aktivovat?</string>
     <string name="disable_recording_once_app_killed">Zabránit samotnému logování</string>
     <string name="disable_recording_once_app_killed_descrp">Pozastaví záznam trasy pokud je aplikace ukončena (přes nedávné aplikace). (OsmAnd indikátor zmizí z upozorňovacího řádku Androidu.)</string>
+    <string name="download_live_updates">Živé aktualizace</string>
+	<string name="no_updates_available">Nejsou dostupné žádné aktualizace</string>
+    <string name="traffic_warning_hazard">Nebezpečí</string>
+    <string name="rendering_value_boldOutline_name">Tučný obrys</string>
     </resources>

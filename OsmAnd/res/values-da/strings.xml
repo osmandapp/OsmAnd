@@ -340,7 +340,7 @@
 	<string name="modify_transparency">Ændre gennemsigtighed (0 - gennemsigtig, 255 - ugennemsigtig)</string>
 	<string name="confirm_interrupt_download">Afbryd hentning af fil?</string>
 	<string name="first_time_msg">Til mange af funktionerne i programmet skal der bruges nogle regionale offline data som kan hentes via \'Indstillinger\' → \'Administrer kortfiler\'. Bagefter kan man se kort, søge adresser, finde interessepunkter (IP) og finde kolllektivtrafik.</string>    
-	<string name="basemap_was_selected_to_download">Basiskort er nødvendige for korrekt programfunktion og blev automatisk valgt.</string>
+	<string name="basemap_was_selected_to_download">Basiskort er nødvendig for korrekt programfunktion og blev automatisk valgt.</string>
 	<string name="select_index_file_to_download">Fandt intet. Hvis man ikke kan finde sin region kan man lave den selv (se http://osmand.net).</string>
 	<string name="local_indexes_cat_tile">Onlinekort og kortfliser</string>
 	<string name="local_indexes_cat_map">Offlinekort (vektor)</string>
@@ -2087,4 +2087,20 @@
     <string name="rendering_value_translucent_purple_name">Gennemsigtig lilla</string>
     <string name="rendering_value_default13_name">Standard (13)</string>
 	<string name="rendering_value_defaultTranslucentCyan_name">Standard (gennemsigtig cyan)</string>
+    <string name="do_you_like_osmand">Kan du lide OsmAnd?</string>
+	<string name="rate_this_app">Bedøm denne app</string>
+	<string name="rate_this_app_long">Vurder OsmAnd på Google Play</string>
+	<string name="user_hates_app_get_feedback">Fortæl os hvorfor.</string>
+	<string name="we_really_care">Dette er vigtigt for os</string>
+	<string name="user_hates_app_get_feedback_long">Fortæl os hvad du ønsker at ændre i denne app.</string>
+<string name="download_live_updates">Live-opdateringer</string>
+	<string name="delete_change">Slet ændring</string>
+	<string name="try_again">Prøv igen</string>
+	<string name="error_message_pattern">Fejl: {0}</string>
+<string name="failed_to_upload">Overførsel mislykkedes</string>
+	<string name="successfully_uploaded_pattern">Overført {0}/{1}</string>
+	<string name="no_updates_available">Ingen opdateringer tilgængelige</string>
+    <string name="we_really_care_about_your_opinion">Vi er meget interesseret i din mening, og det er vigtigt for os at høre fra dig.</string>
+	<string name="rendering_value_boldOutline_name">Fed kontur</string>
+    <string name="traffic_warning_hazard">Fare</string>
     </resources>

@@ -268,7 +268,7 @@
 	<string name="add_favorite_dialog_favourite_added_template">نقطه علاقمندی \'{0}\' اضافه شد.</string>
 	<string name="favourites_context_menu_edit">ویرایش علاقمندی</string>
 	<string name="favourites_context_menu_delete">حذف علاقمندی</string>
-	<string name="favourites_remove_dialog_msg">آیا نقطه مورد علاقه \'%s\' حذف شود؟</string>
+	<string name="favourites_remove_dialog_msg">آیا نقطه برگزیده \'%s\' حذف شود؟</string>
 	<string name="favourites_remove_dialog_success">علاقمندی {0} حذف شد.</string>
 	<string name="osb_add_dialog_title">شرح اشکال را وارد کنید</string>
 	<string name="osb_add_dialog_success">اشکال با موفقیت ایجاد شد</string>
@@ -336,8 +336,8 @@
 	<string name="shared_string_downloading">درحال دانلود</string>
 	
 	
-	<string name="fav_points_edited">نقطه مورد علاقه ویرایش شد</string>
-	<string name="fav_points_not_exist">هیچ نقطه مورد علاقه ای وجود ندارد</string>
+	<string name="fav_points_edited">نقطه برگزیده ویرایش شد</string>
+	<string name="fav_points_not_exist">هیچ نقطه برگزیده‌ای وجود ندارد</string>
 	<string name="update_existing">جایگزین کردن</string>
 	<string name="only_show">فقط نشان بده</string>
 	<string name="follow">دنبال کردن</string>
@@ -833,7 +833,7 @@
 	<string name="level_to_switch_vector_raster_descr">حداقل زوم برای استفاده از نقشه های بُرداری</string>
 	<string name="tip_location_sharing">به اشتراک گذاری مکان</string>
 	<string name="error_doing_search">در هنگام جستجوی آفلاین خطایی رخ داد</string>
-	<string name="tip_favorites">نقاط مورد علاقه</string>
+	<string name="tip_favorites">نقاط برگزیده</string>
 	<string name="system_locale">سیستم</string>
 	<string name="incomplete_locale">ناقص</string>
 	<string name="tip_map_switch">انتخاب منبع نقشه</string>
@@ -950,7 +950,7 @@
 	<string name="uploading">درحال آپلود…</string>
 	<string name="uploading_data">درحال آپلود داده‌ها…</string>
 	<string name="shared_string_clear_all">پاک کردن همه</string>
-	<string name="favorite">مورد علاقه</string>
+	<string name="favorite">برگزیده</string>
 	<string name="search_history_building">ساختمان:{0}, {1}, {2}</string>
 	<string name="search_history_street">خیابان: {0}, {1}</string>
 	<string name="search_history_int_streets">تفاطع: {0} x {1} به {2}</string>
@@ -1016,7 +1016,7 @@
 	<string name="thanks_yandex_traffic">با تشکر از Yandex برای فراهم آوردن اطلاعات ترافیک.</string>
 	<string name="layer_yandex_traffic">ترافیک Yandex</string>
 	<string name="layer_route">مسیر</string>
-	<string name="shared_string_favorites">نقاط مورد علاقه</string>
+	<string name="shared_string_favorites">نقاط برگزیده</string>
 	<string name="layer_osm_bugs">یادداشتهای OSM (آنلاین)</string>
 	
 	<string name="shared_string_refresh">بازسازی</string>
@@ -1645,7 +1645,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="select_gpx">انتخاب فایل GPX…</string>
     <string name="route_descr_select_destination">انتخاب مقصد</string>
     <string name="shared_string_select_on_map">انتخاب روی نقشه</string>
-    <string name="shared_string_favorite">علاقه‌مندی‌ها</string>
+    <string name="shared_string_favorite">برگزیده</string>
     <string name="route_preferences">تنظیمات مسیر</string>
     <string name="route_info">اطلاعات مسیر</string>
     <string name="use_displayed_track_for_navigation">آیا می‌خواهید از مسیر نمایش داده شده برای مسیریابی استفاده کنید؟</string>
@@ -1823,7 +1823,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
 	<string name="gpx_file_is_empty">GPX مسیر خالی است</string>
     
     <string name="shared_string_my_tracks">همه مسیرها</string>
-    <string name="shared_string_my_favorites">علاقه مندی های من</string>
+    <string name="shared_string_my_favorites">نقاط برگزیده من</string>
     <string name="shared_string_my_places">مکانهای من</string>
     
     <string name="osmo_user_joined">کاربر %1$s تاریخ عضویت %2$s</string>
@@ -1857,7 +1857,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="gpx_selection_points">%1$s \n نقاط</string>
     <string name="gpx_selection_track">%1$s \n مسیر %2$s</string>
     
-    <string name="save_as_favorites_points">ذخیره به عنوان گروه مورد علاقه ها</string>
+    <string name="save_as_favorites_points">ذخیره به عنوان گروه برگزیده‌ها</string>
     <string name="select_destination_and_intermediate_points">انتخاب ایستگاههای بین راه</string>
     <string name="layer_amenity_label">برچسب نقطه</string>
     
@@ -1965,7 +1965,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
 
 	
 	<string name="rename_failed">تغییر نام انجام نشد.</string>
-	<string name="days_behind">روزهای قبل</string>
+	<string name="days_behind">روز قبل</string>
 	<string name="shared_string_currently_recording_track">مسیر درحال ضبط</string>
 	<string name="back_to_map">برگشت به نقشه</string>
 	<string name="plugin_touringview_name">نمای نقشه درحال تور</string>
@@ -2047,7 +2047,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="anonymous_user">کاربر ناشناس</string>
     <string name="speed_limit_exceed">آستانه حداکثر سرعت</string>
 	<string name="print_route">چاپ مسیر</string>
-    <string name="fav_point_dublicate">نام نقطه مورد علاقه قبلاً وجود دارد</string>
+    <string name="fav_point_dublicate">نام نقطه برگزیده قبلاً وجود دارد</string>
     <string name="text_size_descr">تنطیم اندازه متن روی نقشه.</string>
     <string name="text_size">اندازه متن</string>
     <string name="traffic_warning_speed_limit">جداکثر سرعت</string>
@@ -2167,4 +2167,56 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
 	<string name="osmo_no_connection_msg">سرویس OsMo موجود نیست:\n- ارتباط را بررسی کنید؛\n- تنظیمات را بررسی کنید؛\n- توییتر ما را بررسی کنید: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user_hint">کاربر ناشناس قادر به:\n- ایجاد گروه نیست؛\n- همزمان سازی گروهها و دستگاهها با سرور نمیباشد؛\n- مدیریت گروهها و دستگاهها در دفتر خصوصی نمیباشد.</string>
     <string name="index_name_netherlands">اروپا - هلند</string>
-	</resources>
+	<string name="no_updates_available">به روزرسانی وجود ندارد</string>
+    <string name="download_live_updates">به‌روزرسانی پویا</string>
+	<string name="rendering_value_default13_name">پیش‌فرض</string>
+	<string name="rendering_value_defaultTranslucentCyan_name">پیش‌فرض (فیروزه ای شفاف)</string>
+    <string name="rendering_attr_currentTrackColor_name">رنگ GPX</string>
+    <string name="rendering_attr_currentTrackWidth_name">ضخامت GPX</string>
+    <string name="rendering_value_red_name">قرمز</string>
+    <string name="rendering_value_translucent_red_name">قرمز شفاف</string>
+    <string name="rendering_value_translucent_orange_name">نارنجی شفاف</string>
+    <string name="rendering_value_yellow_name">زرد</string>
+    <string name="rendering_value_translucent_yellow_name">زرد شفاف</string>
+    <string name="rendering_value_lightgreen_name">سبز روشن</string>
+    <string name="rendering_value_translucent_lightgreen_name">سبز روشن شفاف</string>
+    <string name="rendering_value_green_name">سبز</string>
+    <string name="rendering_value_translucent_green_name">سبز شفاف</string>
+    <string name="rendering_value_lightblue_name">آبی روشن</string>
+    <string name="rendering_value_translucent_lightblue_name">آبی روشن شفاف</string>
+    <string name="rendering_value_blue_name">آبی</string>
+    <string name="rendering_value_translucent_blue_name">آبی شفاف</string>
+    <string name="rendering_value_purple_name">بنقش</string>
+    <string name="rendering_value_translucent_purple_name">بنفش شفاف</string>
+    <string name="restart_is_required">جهت اعمال کامل تغییرات لازم است برنامه دوباره راه‌اندازی شود.</string>
+    <string name="light_theme">روشن</string>
+    <string name="dark_theme">تیره</string>
+    <string name="lang_bn">زرد بنگالی</string>
+    <string name="lang_sh">صرب و کرواسی</string>
+    <string name="lang_az">آذری</string>
+    <string name="lang_br">برتون</string>
+    <string name="lang_sq">آلبانیایی</string>
+    <string name="lang_is">ایسلندی</string>
+    <string name="lang_ga">ایرلندی</string>
+    <string name="lang_la">لاتین</string>
+    <string name="lang_ku">کردی</string>
+    <string name="lang_ta">تامیلی</string>
+    <string name="lang_lb">لوکزامبورگی</string>
+    <string name="lang_eo">اسپرانتو</string>
+    <string name="lang_es_ar">اسپانیایی آرژانتینی</string>
+    <string name="lang_th">تایلندی</string>
+    <string name="lang_nn">نروژی</string>
+    <string name="lang_ms">مالزیایی</string>
+    <string name="lang_ht">هائیتی</string>
+    <string name="lang_et">استونیایی</string>
+    <string name="archive_wikipedia_data">شما اطلاعات ویکیپدیای قدیمی را دانلود کرده‌اید. میخواهید بایگانی شوند؟</string>
+    <string name="download_wikipedia_files">مایل هستید اطلاعات تکمیلی ویکیپدیا دانلود شود (%1$s مگابایت)؟</string>
+    <string name="download_wikipedia_item">ویکیپدیا</string>
+    <string name="local_indexes_cat_wiki">ویکیپدیا</string>
+    <string name="shared_string_show_details">نمایش جزییات</string>
+    <string name="lang_tl">تاگالوگ</string>
+    <string name="rendering_value_disabled_name">غیرفعال</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">رنگ‌بندی براساس حوزه مسیر</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">رنگ‌بندی براساس OSMC</string>
+    <string name="osmo_share_my_location">به اشتراک گذاری مکان من</string>
+    </resources>

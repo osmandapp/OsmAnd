@@ -84,7 +84,7 @@ public class MapRenderingTypes {
 			init();
 		}
 	}
-	public Collection<Map<String, String>> splitTagsIntoDifferentObjects(final Map<String, String> tags) {
+	public static Collection<Map<String, String>> splitTagsIntoDifferentObjects(final Map<String, String> tags) {
 		// check open sea maps tags
 		boolean split = splitIsNeeded(tags);
 		if(!split) {
@@ -94,7 +94,7 @@ public class MapRenderingTypes {
 		}
 	}
 
-	protected boolean splitIsNeeded(final Map<String, String> tags) {
+	protected static boolean splitIsNeeded(final Map<String, String> tags) {
 		boolean seamark = false;
 		for(String s : tags.keySet()) {
 			if(s.startsWith("seamark:")) {
@@ -105,7 +105,7 @@ public class MapRenderingTypes {
 		return seamark;
 	}
 
-	private Collection<Map<String, String>> splitOpenSeaMapsTags(final Map<String, String> tags) {
+	private static Collection<Map<String, String>> splitOpenSeaMapsTags(final Map<String, String> tags) {
 		Map<String, Map<String, String>> groupByOpenSeamaps = new HashMap<String, Map<String, String>>();
 		Map<String, String> common = new HashMap<String, String>();
 		String ATTACHED_KEY = "seamark:attached";
@@ -148,7 +148,7 @@ public class MapRenderingTypes {
 	}	
 	
 	
-	private String openSeaType(String value) {
+	private static String openSeaType(String value) {
 		if(value.equals("light_major") || value.equals("light_minor")) {
 			return "light";
 		}

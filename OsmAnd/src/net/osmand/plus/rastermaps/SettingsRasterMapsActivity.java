@@ -44,17 +44,17 @@ public class SettingsRasterMapsActivity extends SettingsBaseActivity {
 		cat.addPreference(createCheckBoxPreference(settings.USE_INTERNET_TO_DOWNLOAD_TILES, 
 				R.string.use_internet, R.string.use_internet_to_download_tile));
 		
-		int startZoom = 1;
-		int endZoom = 18;
-		String[] entries = new String[endZoom - startZoom + 1];
-		Integer[] intValues = new Integer[endZoom - startZoom + 1];
-		for (int i = startZoom; i <= endZoom; i++) {
-			entries[i - startZoom] = i + ""; //$NON-NLS-1$
-			intValues[i - startZoom] = i ;
-		}
-		ListPreference lp = createListPreference(settings.LEVEL_TO_SWITCH_VECTOR_RASTER, 
-				entries, intValues, R.string.level_to_switch_vector_raster, R.string.level_to_switch_vector_raster_descr);
-		cat.addPreference(lp);
+//		int startZoom = 1;
+//		int endZoom = 18;
+//		String[] entries = new String[endZoom - startZoom + 1];
+//		Integer[] intValues = new Integer[endZoom - startZoom + 1];
+//		for (int i = startZoom; i <= endZoom; i++) {
+//			entries[i - startZoom] = i + ""; //$NON-NLS-1$
+//			intValues[i - startZoom] = i ;
+//		}
+//		ListPreference lp = createListPreference(settings.LEVEL_TO_SWITCH_VECTOR_RASTER, 
+//				entries, intValues, R.string.level_to_switch_vector_raster, R.string.level_to_switch_vector_raster_descr);
+//		cat.addPreference(lp);
 
 		// present on configure map
 //		addOverlayPrefs(grp, listener);

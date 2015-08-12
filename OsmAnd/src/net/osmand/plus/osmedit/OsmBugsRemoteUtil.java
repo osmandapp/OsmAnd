@@ -16,6 +16,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.URL;
 import java.net.URLEncoder;
 
 public class OsmBugsRemoteUtil implements OsmBugsUtil {
@@ -24,15 +25,12 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 
 	static String getNotesApi() {
 		final int deviceApiVersion = android.os.Build.VERSION.SDK_INT;
-
 		String RETURN_API;
-
 		if (deviceApiVersion >= android.os.Build.VERSION_CODES.GINGERBREAD) {
 			RETURN_API = "https://api.openstreetmap.org/api/0.6/notes";
 		} else {
 			RETURN_API = "http://api.openstreetmap.org/api/0.6/notes";
 		}
-
 		return RETURN_API;
 	}
 
@@ -102,22 +100,7 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 			log.info(msg); //$NON-NLS-1$
 			// populate return fields.
 
-			StringBuilder responseBody = new StringBuilder();
-			responseBody.setLength(0);
-			InputStream i = connection.getInputStream();
-			if (i != null) {
-				BufferedReader in = new BufferedReader(new InputStreamReader(i, "UTF-8"), 256); //$NON-NLS-1$
-				String s;
-				boolean f = true;
-				while ((s = in.readLine()) != null) {
-					if (!f) {
-						responseBody.append("\n"); //$NON-NLS-1$
-					} else {
-						f = false;
-					}
-					responseBody.append(s);
-				}
-			}
+			StringBuilder responseBody = Algorithms.readFromInputStream(connection.getInputStream());
 			log.info("Response : " + responseBody); //$NON-NLS-1$
 			connection.disconnect();
 			if (!ok) {

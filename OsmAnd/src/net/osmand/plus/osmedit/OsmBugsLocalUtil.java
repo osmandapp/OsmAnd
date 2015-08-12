@@ -12,9 +12,9 @@ public class OsmBugsLocalUtil implements OsmBugsUtil {
 	private final Context ctx;
 	private final OsmBugsDbHelper db;
 
-	public OsmBugsLocalUtil(Context uiContext) {
+	public OsmBugsLocalUtil(Context uiContext, OsmBugsDbHelper db) {
 		this.ctx = uiContext;
-		this.db = new OsmBugsDbHelper(ctx);
+		this.db = db;
 	}
 
 	@Override

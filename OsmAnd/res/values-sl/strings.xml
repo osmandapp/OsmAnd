@@ -1930,4 +1930,11 @@
     <string name="rendering_value_green_name">Zelena</string>
     <string name="rendering_value_default13_name">Privzeto (13)</string>
 	<string name="rendering_value_defaultTranslucentCyan_name">Privzeto (prosojna sinja)</string>
-    </resources>
+    <string name="do_you_like_osmand">Ali vam je program Osmand všeč?</string>
+	<string name="we_really_care">Ni nam vseeno!</string>
+	<string name="rate_this_app">Ocenite program</string>
+	<string name="rate_this_app_long">Ocenite program na Google Play</string>
+	<string name="user_hates_app_get_feedback">Povejte nam, zakaj.</string>
+	<string name="user_hates_app_get_feedback_long">Povejte nam, kaj želite spremeniti v programu.</string>
+<string name="download_live_updates">Sprotne posodobitve</string>
+	</resources>
