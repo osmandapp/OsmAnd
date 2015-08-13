@@ -1694,7 +1694,7 @@ POIの更新は利用できません</string>
 	<string name="keep_informing_descr">ナビゲーション指示を繰り返す間隔の設定</string>
     <string name="arrival_distance">目的地周辺でのアナウンスタイミング</string>
     <string name="arrival_distance_descr">どのタイミングで目的地周辺のアナウンスをするか設定</string>
-    <string name="osmo_plugin_description">"このプラグインはOsMoと呼ばれる高度なライブモニタリング機能を提供します、http://osmo.mobiを参照して下さい。\n\n参加しているグループ全てのデバイス経路をリアルタイムで追跡することが出来るので、互いにコミュニケーションを取ることができます。期間を限定した追跡、または永続的な追跡のためにさまざまなオプションが付属しています。\n\n匿名のグループは簡単に作成できますが、指定された数日間いくつかの機能が制限されており、その場合遠隔操作は出来ずグループ管理者は存在しません。完全な機能のグループはウェブサイト上で別に作成する必要があり、登録ユーザーのみがそれらにアクセスすることができます。 "</string>
+    <string name="osmo_plugin_description">"このプラグインはOsMoと呼ばれる高度なライブモニタリング機能を提供します、http://osmo.mobiを参照して下さい。\n\n参加しているグループ全てのデバイス経路をリアルタイムで追跡することが出来るので、互いにコミュニケーションを取ることができます。期間を限定した追跡、または恒久的な追跡のためにさまざまなオプションが付属しています。\n\n匿名のグループは簡単に作成できますが、指定された数日間いくつかの機能が制限されており、その場合遠隔操作は出来ずグループ管理者は存在しません。完全な機能のグループはウェブサイト上で別に作成する必要があり、登録ユーザーのみがそれらにアクセスすることができます。 "</string>
     <string name="osmo_plugin_name">OsMo(OSMモニタリング)</string>
    	<string name="always_center_position_on_map">位置を常に中央表示</string>
     <string name="voice_pref_title">音声</string>
