@@ -868,7 +868,7 @@ POIの更新は利用できません</string>
 	<string name="rendering_attr_roadColors_description">道路の配色を選択します:</string>
 	<string name="rendering_attr_roadColors_name">道路の配色</string>
     <string name="map_widget_show_destination_arrow">目的地の方向を表示</string>
-    <string name="enable_plugin_monitoring_services">位置記録サービスを(GPX記録、オンライン追跡)を使用するようにトラッキングプラグインを有効化</string>
+    <string name="enable_plugin_monitoring_services">位置記録サービスを(GPXログ、オンライン追跡)を使用する為に旅行記録プラグインを有効化</string>
     <string name="non_optimal_route_calculation">長距離向けに非最適化ルートで計算</string>
 	<string name="gps_not_available">設定でGPSを有効にしてください</string>
     <string name="map_widget_monitoring_services">ログ保存サービス</string>
@@ -934,7 +934,7 @@ POIの更新は利用できません</string>
 	
 	
 	<string name="map_widget_parking">駐車場</string>
-	<string name="map_widget_monitoring">GPXの記録</string>
+	<string name="map_widget_monitoring">GPXログ</string>
 	<string name="map_widget_speed">速度</string>
 	<string name="map_widget_distance">目的地</string>
 	<string name="map_widget_altitude">高度</string>
@@ -980,7 +980,7 @@ POIの更新は利用できません</string>
 	<string name="osmand_parking_pm">午後</string>
 	<string name="osmand_parking_am">午前</string>
 	<string name="osmand_parking_position_name">駐車位置</string>
-	<string name="osmand_parking_plugin_description">このプラグインは、あなたの車の駐車位置を簡単に記録出来るように開発されました。</string>
+	<string name="osmand_parking_plugin_description">この駐車位置プラグインは、駐車位置、料金、(時間制限がある場合)残り駐車時間のメモを取ることができます。\n場所と時間共にOsmAndのダッシュボードだけでなく、マップ画面上のウィジェットに表示されます。Androidのカレンダー機能にアラームを追加することも出来ます。</string>
 	<string name="osmand_parking_plugin_name">駐車位置</string>
 	<string name="context_menu_item_add_parking_point">駐車位置としてマーク</string>
 	<string name="context_menu_item_delete_parking_point">駐車マーカーを削除</string>
@@ -1030,7 +1030,7 @@ POIの更新は利用できません</string>
 	<string name="prefs_plugins_descr">プラグインの有効化で、より高度な設定や各プラグインの追加機能を利用可能</string>
 	<string name="prefs_plugins">プラグイン設定</string>
 	<string name="vector_maps_may_display_faster_on_some_devices">ベクター形式のマップはすばやく表示されます。一部のデバイスではうまく動作しない場合があります。</string>
-	<string name="play_commands_of_currently_selected_voice">選択した文字列を設定された言語の音声で再生</string>
+	<string name="play_commands_of_currently_selected_voice">文字列(コマンド)を選択した音声で再生</string>
 	<string name="debugging_and_development">OsmAnd開発者向けオプション</string>
 	<string name="native_rendering">ネイティブレンダリング</string>
 	<string name="test_voice_prompts">音声案内テスト用文字列</string>    
@@ -1535,12 +1535,12 @@ POIの更新は利用できません</string>
     <string name="lang_sw">スワヒリ語</string>
     <string name="lang_he">ヘブライ語</string>
     <string name="home">自宅</string>
-    <string name="live_monitoring_m_descr">GPX記録が有効になっている場合、指定したWebサービスへデータを送信。</string>
+    <string name="live_monitoring_m_descr">GPXログが有効になっている場合、指定したWebサービスへデータを送信。</string>
 	<string name="live_monitoring_m">オンライン追跡(GPXが必要)</string>
     <string name="live_monitoring_start">オンライントラッキング開始</string>
 	<string name="live_monitoring_stop">オンライントラッキング停止</string>
-	<string name="gpx_monitoring_start">GPX記録開始</string>
-	<string name="gpx_monitoring_stop">GPS記録停止</string>
+	<string name="gpx_monitoring_start">GPXログ開始</string>
+	<string name="gpx_monitoring_stop">GPSログ停止</string>
     <string name="rendering_attr_hideBuildings_name">建物を隠す</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">自動車以外の専用道路を隠す</string>
     <string name="rendering_attr_hideText_name">文字列を隠す</string>
@@ -1694,7 +1694,7 @@ POIの更新は利用できません</string>
 	<string name="keep_informing_descr">ナビゲーション指示を繰り返す間隔の設定</string>
     <string name="arrival_distance">目的地周辺でのアナウンスタイミング</string>
     <string name="arrival_distance_descr">どのタイミングで目的地周辺のアナウンスをするか設定</string>
-    <string name="osmo_plugin_description">"このプラグインはOsMoの高度なライブモニタリング機能を提供します、http://osmo.mobiを参照して下さい。\n\n他のデバイスとその経路を追跡することが出来ます。匿名のグループを即座に作成でき、互いの位置を共有し、伝え合うことが出来ます。期間を限定した追跡、または永続的な追跡のためにさまざまなオプションが付属しています。\n\n匿名のグループは数日間いくつかの機能が制限されており、その場合遠隔操作は出来ずグループ管理者は存在しません。完全な機能のグループはウェブサイト上で別に作成する必要があり、登録ユーザーのみがそれらにアクセスすることができます。 "</string>
+    <string name="osmo_plugin_description">"このプラグインはOsMoと呼ばれる高度なライブモニタリング機能を提供します、http://osmo.mobiを参照して下さい。\n\n参加しているグループ全てのデバイス経路をリアルタイムで追跡することが出来るので、互いにコミュニケーションを取ることができます。期間を限定した追跡、または永続的な追跡のためにさまざまなオプションが付属しています。\n\n匿名のグループは簡単に作成できますが、指定された数日間いくつかの機能が制限されており、その場合遠隔操作は出来ずグループ管理者は存在しません。完全な機能のグループはウェブサイト上で別に作成する必要があり、登録ユーザーのみがそれらにアクセスすることができます。 "</string>
     <string name="osmo_plugin_name">OsMo(OSMモニタリング)</string>
    	<string name="always_center_position_on_map">位置を常に中央表示</string>
     <string name="voice_pref_title">音声</string>
@@ -1782,7 +1782,7 @@ POIの更新は利用できません</string>
     <string name="keep_informing_never">手動のみ(矢印をタップ)</string>
     
 	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u>画像とマップの分類</string>
-	<string name="import_file_favourites">GPXファイルを保存またはお気に入りにインポートしますか？</string>
+	<string name="import_file_favourites">ポイントをGPXファイルとして保存、またはお気に入りにインポートしますか？</string>
 	
 	<string name="shared_string_share">共有</string>
 	<string name="share_fav_subject">OsmAndを介してお気に入りを共有</string>
@@ -1805,17 +1805,17 @@ POIの更新は利用できません</string>
     <string name="rendering_value_car_name">車</string>
     <string name="rendering_value_bicycle_name">自転車</string>
     <string name="rendering_value_pedestrian_name">歩行者</string>
-    <string name="record_plugin_description">"このプラグインはマップ画面のGPX記録ウィジェットをタッチして経路の記録と保存が出来る機能を有効化します、またログとして自動的にナビゲーションルートをGPXファイルに記録することもできます。\n\n記録された経路は、友人と共有することができ、またOSM発展のためにも使用されます。アスリートなら記録した経路をトレーニングモニターとして利用することが出来ます。ラップタイムや平均速度等いくつかの基本的な経路分析ならOsmAndから直接行うことができ、記録した経路を後で特別なサードパーティ製解析ツールで分析することも出来ます。 "</string>
+    <string name="record_plugin_description">"このプラグインはマップ画面のGPXログウィジェットをタッチして経路の記録と保存が出来る機能を有効化します、またログとして自動的にナビゲーションルートをGPXファイルに記録することもできます。\n\n記録された経路は、友人と共有することができ、またOSM発展のためにも使用されます。アスリートなら記録した経路をトレーニングモニターとして利用することが出来ます。ラップタイムや平均速度等いくつかの基本的な経路分析ならOsmAndから直接行うことができ、記録した経路を後で特別なサードパーティ製解析ツールで分析することも出来ます。 "</string>
     <string name="record_plugin_name">旅程の記録</string>
     <string name="int_hour">時間</string>
     <string name="duration">期限</string>
     <string name="distance">距離</string>
     <string name="rendering_attr_publicTransportMode_name">バス、トロリーバス、シャトルバスルート</string>
 	<string name="save_track_to_gpx_globally">GPXファイルに経路を記録</string>
-	<string name="save_track_to_gpx_globally_descr">GPXファイルへの一般の位置(General position)記録は、マップ画面上のGPX記録ウィジェットを使用してオンとオフを切り替えることができます</string>
+	<string name="save_track_to_gpx_globally_descr">GPXファイルへの一般の位置(General position)記録は、マップ画面上のGPXログウィジェットを使用してオンとオフを切り替えることができます</string>
 	<string name="save_track_interval_globally">記録間隔</string>
 	<string name="confirm_every_run">常に尋ねる</string>
-	<string name="save_global_track_interval_descr">標準的な経路の記録間隔を選択(マップ上のGPX記録ウィジェットで有効化)</string>
+	<string name="save_global_track_interval_descr">標準的な経路の記録間隔を選択(マップ上のGPXログウィジェットで有効化)</string>
 	<string name="save_global_track_interval">標準記録間隔</string>
 	<string name="traffic_warning_speed_limit">制限速度</string>
     <string name="traffic_warning_border_control">出入国管理</string>
@@ -1830,7 +1830,7 @@ POIの更新は利用できません</string>
 	<string name="fav_point_emoticons_message">お気に入り地点名は文字列に絵文字を含んでいるため、ファイルとして正常に保存するため %1$sという名前に変更されました。</string>
     <string name="print_route">経路印刷</string>
     <string name="fav_point_dublicate">お気に入り地点の重複</string>
-    <string name="fav_point_dublicate_message">名前の重複を避けるために、%1$s にお気に入り地点の名前を変更しました。</string>
+    <string name="fav_point_dublicate_message">指定されたお気に入りの名前は既に使われています。重複を避けるために、名前を%1$sに変更しました。</string>
     
     
     <string name="text_size_descr">マップ上の文字サイズを設定します。</string>
@@ -2075,27 +2075,44 @@ POIの更新は利用できません</string>
     <string name="lang_gl">ガリシア語</string>
     <string name="lang_et">エストニア語</string>
     <string name="lang_ceb">セブアノ語</string>
-    <string name="rendering_attr_currentTrackColor_name">現在のGPX経路の色</string>
-    <string name="rendering_attr_currentTrackWidth_name">現在のGPX経路の幅</string>
+    <string name="rendering_attr_currentTrackColor_name">GPX経路の色</string>
+    <string name="rendering_attr_currentTrackWidth_name">GPX経路の幅</string>
     <string name="rendering_value_red_name">レッド</string>
     <string name="rendering_value_translucent_red_name">レッド-半透明</string>
     <string name="rendering_value_translucent_orange_name">オレンジ-半透明</string>
     <string name="rendering_value_yellow_name">イエロー</string>
     <string name="rendering_value_translucent_yellow_name">イエロー-半透明</string>
     <string name="rendering_value_lightgreen_name">ライトグリーン</string>
-    <string name="rendering_value_translucent_lightgreen_name">ライトグリーン-半透明</string>
+    <string name="rendering_value_translucent_lightgreen_name">半透明ライトグリーン</string>
     <string name="rendering_value_green_name">グリーン</string>
     <string name="rendering_value_translucent_green_name">グリーン-半透明</string>
     <string name="rendering_value_lightblue_name">ライトブルー</string>
-    <string name="rendering_value_translucent_lightblue_name">ライトブルー-半透明</string>
+    <string name="rendering_value_translucent_lightblue_name">半透明ライトブルー</string>
     <string name="rendering_value_blue_name">ブルー</string>
     <string name="rendering_value_translucent_blue_name">ブルー-半透明</string>
     <string name="rendering_value_purple_name">パープル</string>
     <string name="rendering_value_translucent_purple_name">パープル-半透明</string>
-    <string name="restart_is_required">変更を有効にするにはアプリケーションの再起動が必要です。</string>
+    <string name="restart_is_required">変更を適用するには手動でアプリケーションを再起動する必要があります。</string>
     <string name="archive_wikipedia_data">互換性のない古いWikipediaデータがあります。アーカイブ化しますか？</string>
     <string name="download_wikipedia_files">Wikipediaの追加データ(%1$s MB)をダウンロードしますか？</string>
     <string name="gps_network_not_enabled">位置情報サービス(GPS)がオフになっています。オンにしますか？</string>
     <string name="disable_recording_once_app_killed">スタンドアロン動作時のログ記録を停止</string>
     <string name="disable_recording_once_app_killed_descrp">アプリは(タスクリストから)停止された場合、GPX記録を一時停止します。 (OsmAndスリープモード動作表示は、Androidの通知エリアに表示されなくなります。)</string>
+    <string name="rendering_value_default13_name">デフォルト (13)</string>
+	<string name="rendering_value_defaultTranslucentCyan_name">デフォルト (半透明シアン)</string>
+    <string name="shared_string_import2osmand">OsmAndにインポート</string>
+    <string name="read_full_article">記事全文を読む (オンライン)</string>
+    <string name="download_wikipedia_item">Wikipedia</string>
+    <string name="local_indexes_cat_wiki">Wikipedia</string>
+    <string name="shared_string_show_details">詳細を表示</string>
+    <string name="local_recordings_delete_all_confirm">%1$d個のメモを削除します。よろしいですか？</string>
+	<string name="download_wikipedia_maps">Wikipedia</string>
+    <string name="do_you_like_osmand">OsmAndを気に入っていただけましたか？</string>
+	<string name="we_really_care">わたしたち、気になります(仮翻訳)</string>
+	<string name="rate_this_app">アプリを評価</string>
+	<string name="rate_this_app_long">Google PlayでOsmAndの評価をお願いします</string>
+	<string name="user_hates_app_get_feedback">理由を教えてください。</string>
+	<string name="user_hates_app_get_feedback_long">このアプリの変更して欲しい箇所を教えて下さい。</string>
+<string name="rendering_value_walkingRoutesScopeOSMC_name">ルート範囲に応じてカラー変更</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">OSMCに応じてカラー変更</string>
     </resources>

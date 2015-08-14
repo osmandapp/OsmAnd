@@ -274,7 +274,6 @@ public class MapTileLayer extends BaseMapLayer {
 		
 	@Override
 	public void destroyLayer() {
-		// TODO clear map cache
 		setMapTileAdapter(null);
 	}
 
@@ -284,7 +283,6 @@ public class MapTileLayer extends BaseMapLayer {
 	
 	public void setVisible(boolean visible) {
 		this.visible = visible;
-		// TODO clear map cache
 	}
 	
 	public ITileSource getMap() {

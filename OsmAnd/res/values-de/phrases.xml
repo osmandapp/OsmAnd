@@ -95,7 +95,7 @@
 	<string name="poi_car_parts">Autoteilehändler</string>
 	<string name="poi_car_rental">Autovermietung</string>
 	<string name="poi_car_repair">Kfz-Werkstatt</string>
-	<string name="poi_car_sharing">Fahrgemeinschaft</string>
+	<string name="poi_car_sharing">Carsharing Station</string>
 	<string name="poi_car">Autohändler</string>
 	<string name="poi_car_wash">Autowaschanlage</string>
 	<string name="poi_caravan_site">Campingplatz</string>
@@ -536,7 +536,7 @@
 	<string name="poi_toboggan">Rodelschlitten</string>
 	<string name="poi_toilets">Toilette</string>
 	<string name="poi_toll_booth">Mautstelle</string>
-	<string name="poi_information">Fremdenverkehrsamt</string>
+	<string name="poi_information">Information für Touristen</string>
 	<string name="poi_town">Kleinstadt</string>
 	<string name="poi_townhall">Rathaus</string>
 	<string name="poi_toys">Spielwarenhandlung</string>
@@ -691,7 +691,7 @@
 	<string name="poi_landuse_railway">Bahngelände</string>
 
 	<string name="poi_silo">Silo</string>
-	<string name="poi_storage_tank">Speicher</string>
+	<string name="poi_storage_tank">Tanklager</string>
 
 	<string name="poi_residential">Wohngebiet</string>
 
@@ -704,9 +704,9 @@
 	<string name="poi_picnic_table">Picknicktisch</string>
 	<string name="poi_wine_cellar">Weinkeller</string>
 	<string name="poi_piste">Piste</string>
-	<string name="poi_piste_nordic">Nordisch</string>
-	<string name="poi_piste_skitour">Skitour</string>
-	<string name="poi_piste_playground">Spielplatz</string>
+	<string name="poi_piste_nordic">Loipe</string>
+	<string name="poi_piste_skitour">Tourenski-Strecke</string>
+	<string name="poi_piste_playground">Skiübungsgelände</string>
 	<string name="poi_ski_rental">Skiverleih</string>
 
 	<string name="poi_gallery">Kunstgalerie</string>
@@ -728,13 +728,13 @@
 	<string name="poi_tomb">Grab</string>
 	<string name="poi_winery">Weinkellerei</string>
 
-	<string name="poi_piste_hike">Wandern</string>
+	<string name="poi_piste_hike">Wanderstrecke</string>
 	<string name="poi_piste_ice_skate">Eislaufen</string>
 	<string name="poi_payment_terminal">Bezahl-Terminal</string>
 	<string name="poi_transport_construction">Transportkonstruktion</string>
 		<string name="poi_natural">Natürlich</string>
 	<string name="poi_camera">Kameras und Objektive</string>
-	<string name="poi_charity">Karitativer Gebrauchtwarenladen</string>
+	<string name="poi_charity">Sozialkaufhaus</string>
 	<string name="poi_cabin">Hütte</string>
 	<string name="poi_lean_to">Unterstand</string>
 	<string name="poi_wilderness_hut">Wildnishütte</string>
@@ -746,7 +746,7 @@
 	<string name="poi_internet_access_terminal">Internetzugang: Terminal</string>
 	<string name="poi_internet_access_service">Internetzugang: Dienst</string>
 
-	<string name="poi_fee">Gebühr</string>
+	<string name="poi_fee_yes">Gebühr</string>
 
 	<string name="poi_brand">Marke</string>
 	<string name="poi_maxweight">Maximalgewicht</string>
@@ -808,4 +808,100 @@
 	<string name="poi_wiki_lang_lv">Lettisches Wiki</string>
 	<string name="poi_wiki_lang_ms">Malaiisches Wiki</string>
 	<string name="poi_wiki_lang_new">Newarisches Wiki</string>
+	<string name="poi_node_networks">Wander-/Radroutenpunkte</string>
+		<string name="poi_hiking_routes">Wanderrouten</string>
+		<string name="poi_traffic_enforcement">Verkehrsüberwachung</string>
+	<string name="poi_cheese">Käsegeschäft</string>
+	<string name="poi_chocolate">Schokoladengeschäft</string>
+	<string name="poi_coffee">Kaffeeladen</string>
+	<string name="poi_pasta">Nudelgeschäft</string>
+	<string name="poi_pastry">Konditorei</string>
+	<string name="poi_candles">Kerzengeschäft</string>
+	<string name="poi_fashion">Modegeschäft</string>
+	<string name="poi_furnace">Heizungsgeschäft</string>
+	<string name="poi_garden_furniture">Gartenmöbelladen</string>
+	<string name="poi_leather">Ledergeschäft</string>
+	<string name="poi_music">Musikgeschäft</string>
+	<string name="poi_scuba_diving_shop">Tauchzubehörgeschäft</string>
+	<string name="poi_tyres">Reifengeschäft</string>
+	<string name="poi_watches">Uhrengeschäft</string>
+	<string name="poi_swimming_pool_shop">Poolzubehörgeschäft</string>
+	<string name="poi_games">Spiele</string>
+	<string name="poi_model">Modellbau</string>
+	<string name="poi_trophy">Trophäen und Preise</string>
+	<string name="poi_video_games">Videospiele</string>
+	<string name="poi_pyrotechnics">Feuerwerk</string>
+	<string name="poi_weapons">Waffengeschäft</string>
+
+	<string name="poi_breakwater">Wellenbrecher</string>
+	<string name="poi_groyne">Buhne</string>
+
+	<string name="poi_power_cable_distribution_cabinet">Verteilerkasten</string>
+	<string name="poi_basin">Wasserbecken</string>
+	<string name="poi_conservation">Schutzgebiet</string>
+
+	<string name="poi_crane">Kran</string>
+	<string name="poi_country">Land</string>
+	<string name="poi_tourism_attraction">Touristische Attraktion</string>
+	<string name="poi_lodging">Unterkunft</string>
+	<string name="poi_religious">Heilige Stätte</string>
+	<string name="poi_hanami">Kirschblütenschau</string>
+	<string name="poi_piste_downhill">Abfahrtspiste</string>
+	<string name="poi_piste_sleigh">Zugschlitten-Strecke</string>
+	<string name="poi_piste_sled">Schlittenbahn</string>
+	<string name="poi_piste_snow_park">Winter-Funpark</string>
+	<string name="poi_ski_resort">Skigebiet</string>
+	<string name="poi_village_green">Grünfläche</string>
+	<string name="poi_trail_riding_station">Versorgungsstation für Pferde</string>
+
+	<string name="poi_cutline">Waldschneise</string>
+	<string name="poi_wood">Wald</string>
+	<string name="poi_tree">Baum</string>
+	<string name="poi_cycle_barrier">Umlaufsperre</string>
+	<string name="poi_motorcycle_barrier">Motorradsperre</string>
+	<string name="poi_block">Block</string>
+	<string name="poi_bus_trap">Busschleuse</string>
+	<string name="poi_cattle_grid">Weiderost</string>
+	<string name="poi_full_height_turnstile">Personendrehkreuz</string>
+	<string name="poi_bump_gate">Schwingtor</string>
+	<string name="poi_general_barrier">Barriere</string>
+	<string name="poi_height_restrictor">Höhenbegrenzung</string>
+	<string name="poi_sally_port">Ausfalltor</string>
+	<string name="poi_turnstile">Drehkreuz</string>
+	<string name="poi_kent_carriage_gap">Kutschendurchlass</string>
+	<string name="poi_highway_crossing">Kreuzung</string>
+
+	<string name="poi_icn_ref">Internationales Fahrradknotenpunktnetzwerk</string>
+	<string name="poi_ncn_ref">Nationale Radroute</string>
+	<string name="poi_rcn_ref">Regionales Fahrradknotenpunktnetzwerk</string>
+	<string name="poi_lcn_ref">Lokales Fahrradknotenpunktnetzwerk</string>
+	<string name="poi_iwn_ref">Internationales Wanderknotenpunktnetzwerk</string>
+	<string name="poi_nwn_ref">Nationale Wanderroute</string>
+	<string name="poi_rwn_ref">Regionales Wanderknotenpunktnetzwerk</string>
+	<string name="poi_lwn_ref">Lokales Wanderknotenpunktnetzwerk</string>
+
+	<string name="poi_route_hiking_iwn_poi">Internationaler Wanderweg</string>
+	<string name="poi_route_hiking_nwn_poi">Nationaler Wanderweg</string>
+	<string name="poi_route_hiking_rwn_poi">Regionaler Wanderweg</string>
+	<string name="poi_route_hiking_lwn_poi">Örtlicher Wanderweg</string>
+	<string name="poi_route_hiking_ref_poi">Wanderweg Bezeichnung</string>
+
+	<string name="poi_collection_times">Leerungszeiten</string>
+	<string name="poi_service_times">Betriebszeiten</string>
+	<string name="poi_abandoned_poi">Verlassenes Objekt</string>
+	<string name="poi_enforcement_traffic_signals">Ampel-Blitzanlage</string>
+	<string name="poi_enforcement_maxspeed">Geschwindigkeitskontrolle</string>
+	<string name="poi_enforcement_maxheight">Höhenkontrolle</string>
+	<string name="poi_enforcement_mindistance">Abstandskontrolle</string>
+	<string name="poi_enforcement_check">Durchführung:Kontrolle</string>
+	<string name="poi_enforcement_access">Kontrolle Berechtigung</string>
+	<string name="poi_enforcement_toll">Mautkontrolle</string>
+
+<string name="poi_free_flying">Freeflying Zubehörgeschäft</string>
+	<string name="poi_bollard">Poller</string>
+	<string name="poi_energy">Energiespeicher</string>
+	<string name="poi_stile">Zaunübertritt</string>
+	<string name="poi_horse_stile">Zaunübertritt für Pferde</string>
+	<string name="poi_kissing_gate">Schwinggatter</string>
+	<string name="poi_swing_gate">Schwingtor</string>
 	</resources>

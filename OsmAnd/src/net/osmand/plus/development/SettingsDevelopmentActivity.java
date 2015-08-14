@@ -49,6 +49,9 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		cat.addPreference(createCheckBoxPreference(settings.USE_MAGNETIC_FIELD_SENSOR_COMPASS,
 				R.string.use_magnetic_sensor,
 				R.string.use_magnetic_sensor_descr));
+		
+		cat.addPreference(createCheckBoxPreference(settings.BETA_TESTING_LIVE_UPDATES,
+				"Live updates", "Beta testing for live updates"));
 
 		Preference pref = new Preference(this);
 		pref.setTitle(R.string.test_voice_prompts);

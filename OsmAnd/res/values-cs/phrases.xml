@@ -628,12 +628,12 @@
 	<string name="poi_club_tourism">Turistický klub</string>
 	<string name="poi_club_charity">Charitativní klub</string>
 
-	<string name="poi_piste_downhill">Sjezd</string>
-	<string name="poi_piste_hike">Pěší</string>
-	<string name="poi_piste_sleigh">Koňské saně</string>
-	<string name="poi_piste_sled">Sáně</string>
+	<string name="poi_piste_downhill">Sjezdová trať</string>
+	<string name="poi_piste_hike">Výletní lyžařská trasa</string>
+	<string name="poi_piste_sleigh">Trať pro tažené saně</string>
+	<string name="poi_piste_sled">Trať pro saně</string>
 	<string name="poi_piste_snow_park">Zábavní sněhový park</string>
-	<string name="poi_piste_playground">Dětské hřiště</string>
+	<string name="poi_piste_playground">Lyžařská škola</string>
 	<string name="poi_piste_ice_skate">Kluziště</string>
 
 	<string name="poi_arts_centre">Umělecké středisko</string>
@@ -784,7 +784,7 @@
 	<string name="poi_ski_resort">Lyžařské středisko</string>
 	<string name="poi_trail_riding_station">Jezdecká stanice</string>
 
-	<string name="poi_piste_nordic">Klasické lyžování</string>
+	<string name="poi_piste_nordic">Trať pro klasické lyžování</string>
 	<string name="poi_hunting_lodge">Lovecká chata</string>
 
 	<string name="poi_hanami">Hanami</string>
@@ -921,6 +921,77 @@
 	<string name="poi_enforcement_access">Vynucení:přístup</string>
 	<string name="poi_enforcement_toll">Vynucení:mýto</string>
 
-<string name="poi_fee">Poplatek</string>
+<string name="poi_fee_yes">Poplatek</string>
 
+	<string name="poi_country">Krajina</string>
+	<string name="poi_abandoned_poi">Opuštěný objekt</string>
+	<string name="poi_recycling_centre">Centrum</string>
+	<string name="poi_recycling_container">Kontejner</string>
+	<string name="poi_recycling_glass">Sklo</string>
+	<string name="poi_recycling_paper">Papír</string>
+	<string name="poi_recycling_clothes">Oblečení</string>
+	<string name="poi_recycling_cans">Plechovky</string>
+	<string name="poi_recycling_glass_bottles">Skleněné láhve</string>
+	<string name="poi_recycling_plastic">Plasty</string>
+	<string name="poi_recycling_scrap_metal">Železný šrot</string>
+	<string name="poi_recycling_batteries">Baterie</string>
+	<string name="poi_recycling_plastic_bottles">Plastové láhve</string>
+	<string name="poi_recycling_green_waste">Zelený odpad</string>
+	<string name="poi_recycling_waste">Odpad (černé pytle)</string>
+	<string name="poi_recycling_plastic_packaging">Plastové obaly</string>
+	<string name="poi_recycling_newspaper">Noviny</string>
+	<string name="poi_recycling_cartons">Kartony</string>
+	<string name="poi_recycling_cardboard">Lepenka</string>
+	<string name="poi_recycling_magazines">Časopisy</string>
+	<string name="poi_recycling_paper_packaging">Papírové obaly</string>
+	<string name="poi_recycling_small_appliances">Malé spotřebiče</string>
+	<string name="poi_recycling_wood">Dřevo</string>
+	<string name="poi_recycling_books">Knihy</string>
+	<string name="poi_recycling_shoes">Boty</string>
+	<string name="poi_recycling_aluminium">Hliník</string>
+	<string name="poi_recycling_organic">Přírodní</string>
+	<string name="poi_recycling_beverage_cartons">Nápojové kartony</string>
+	<string name="poi_recycling_garden_waste">Zahradní odpad</string>
+	<string name="poi_recycling_low_energy_bulbs">Nízkoenergetické žárovky</string>
+	<string name="poi_recycling_fluorescent_tubes">Zářivky</string>
+	<string name="poi_recycling_metal">Železo</string>
+	<string name="poi_recycling_electrical_items">Elektrospotřebiče</string>
+	<string name="poi_recycling_white_goods">Bílé zboží</string>
+	<string name="poi_recycling_cooking_oil">Fritovací olej</string>
+	<string name="poi_recycling_engine_oil">Motorový olej</string>
+	<string name="poi_recycling_plastic_bags">Plastové pytle</string>
+	<string name="poi_recycling_hazardous_waste">Nebezpečný odpad</string>
+	<string name="poi_recycling_mobile_phones">Mobilní telefony</string>
+	<string name="poi_recycling_hydrargyrum">Rtuť</string>
+	<string name="poi_recycling_computers">Počítače</string>
+	<string name="poi_recycling_tyres">Pneumatiky</string>
+	<string name="poi_recycling_tv_monitor">Televize, monitory</string>
+	<string name="poi_recycling_tetrapak">Obaly TetraPak</string>
+	<string name="poi_recycling_rubble">Suť</string>
+	<string name="poi_recycling_cds">CD média</string>
+	<string name="poi_recycling_waste_oil">Odpadní olej</string>
+	<string name="poi_recycling_bottles">Láhve</string>
+	<string name="poi_recycling_cork">Korek</string>
+	<string name="poi_recycling_printer_cartridges">Náplně do tiskáren</string>
+	<string name="poi_recycling_sheet_metal">Plech</string>
+	<string name="poi_recycling_foil">Fólie</string>
+	<string name="poi_recycling_paint">Barva</string>
+	<string name="poi_recycling_styrofoam">Polystyrén</string>
+	<string name="poi_recycling_drugs">Léky</string>
+	<string name="poi_recycling_compost">Kompost</string>
+	<string name="poi_recycling_christmas_trees">Vánoční stromky</string>
+	<string name="poi_recycling_light_bulbs">Žárovky</string>
+	<string name="poi_recycling_chipboard">Dřevotříska</string>
+	<string name="poi_recycling_polyester">Polyester</string>
+	<string name="poi_recycling_plasterboard">Sádrokarton</string>
+	<string name="poi_recycling_animal_waste">Zvířecí odpad</string>
+	<string name="poi_recycling_fridge_and_freezer">Lednice a mrazák</string>
+	<string name="poi_recycling_furniture">Nábytek</string>
+	<string name="poi_recycling_diapers">Pleny</string>
+	<string name="poi_recycling_car_batteries">Autobaterie</string>
+	<string name="poi_recycling_cars">Vozy</string>
+	<string name="poi_recycling_bicycles">Kola</string>
+
+	<string name="poi_monitoring_station">Monitorovací stanice</string>
+	<string name="poi_capital">Hlavní město</string>
 	</resources>

@@ -643,7 +643,7 @@
     <string name="tip_faq_t">Visita https://code.google.com/p/osmand/wiki/FAQ para ver las preguntas más frecuentes.</string>
     <string name="tip_faq">Preguntas más frecuentes</string>
     <string name="local_osm_changes_delete_all_confirm">Borrará %1$d cambio(s) OSM. ¿Estás seguro?</string>
-    <string name="animate_routing_route_not_calculated">Calcule la primera ruta</string>
+    <string name="animate_routing_route_not_calculated">Primero calcule la ruta</string>
     <string name="animate_routing_route">"Simular usando la ruta calculada "</string>
     <string name="animate_routing_gpx">Simular usando traza GPX</string>
 	<string name="route_is_too_long">El cálculo de ruta sin conexión de OsmAnd, podría tardar mucho tiempo (o a veces no funcionar) para tramos mayores de 200km. Tal vez quieras añadir puntos de ruta intermedios para un mejor rendimiento.</string>
@@ -2002,4 +2002,20 @@
     <string name="restart_is_required">Para aplicar los cambios, se necesita reiniciar la aplicación.</string>
     <string name="rendering_value_default13_name">Predefinido (13)</string>
 	<string name="rendering_value_defaultTranslucentCyan_name">Predefinido (cian translúcido)</string>
+    <string name="do_you_like_osmand">¿Le gusta OsmAnd?</string>
+	<string name="we_really_care">Realmente nos importa</string>
+	<string name="rate_this_app">Califica la aplicación</string>
+	<string name="rate_this_app_long">Por favor, califica a OsmAnd en Google Play</string>
+	<string name="user_hates_app_get_feedback">Dinos por que.</string>
+	<string name="user_hates_app_get_feedback_long">Por favor, díganos lo que cambiaría en esta aplicación.</string>
+<string name="download_live_updates">Actualizaciones en vivo</string>
+	<string name="failed_to_upload">Subida fallida</string>
+	<string name="delete_change">Borrar cambio</string>
+	<string name="successfully_uploaded_pattern">Subido correctamente {0}/{1}</string>
+	<string name="try_again">Pruebe de nuevo</string>
+	<string name="error_message_pattern">Error: {0}</string>
+<string name="no_updates_available">Sin actualizaciones disponibles</string>
+    <string name="we_really_care_about_your_opinion">Nos interesa mucho y es importante oír su opinión.</string>
+	<string name="rendering_value_boldOutline_name">Borde remarcado</string>
+    <string name="traffic_warning_hazard">Advertencia de riesgo</string>
     </resources>

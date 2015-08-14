@@ -2022,4 +2022,19 @@
     <string name="rendering_value_red_name">Piros</string>
     <string name="rendering_value_default13_name">Alapértelmezett (13)</string>
 	<string name="rendering_value_defaultTranslucentCyan_name">Alapértelmezett (átlátszó cián)</string>
+    <string name="do_you_like_osmand">Hogy tetszik az OsmAnd?</string>
+	<string name="we_really_care">Minket valóban érdekel</string>
+	<string name="rate_this_app">Értékelje az alkalmazást</string>
+	<string name="user_hates_app_get_feedback">Mondja el, hogy miért.</string>
+	<string name="user_hates_app_get_feedback_long">Mondja el nekünk, hogy mit változtatna az alkalmazáson.</string>
+<string name="rate_this_app_long">Adjon egy pontot az OsmAnd programnak a Google Play áruházban</string>
+	<string name="download_live_updates">Élő frissítések</string>
+	<string name="no_updates_available">Nem érhetők el frissítések</string>
+    <string name="we_really_care_about_your_opinion">Sokat adunk a véleményére és fontos nekünk, hogy visszahalljuk.</string>
+	<string name="failed_to_upload">Nem sikerült feltölteni</string>
+	<string name="delete_change">Változtatás törlése</string>
+	<string name="successfully_uploaded_pattern">Sikeresen feltöltve: {0}/{1}</string>
+	<string name="try_again">Próbálja újra</string>
+	<string name="error_message_pattern">Hiba: {0}</string>
+<string name="rendering_value_boldOutline_name">Félkövér körvonal</string>
     </resources>

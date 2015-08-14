@@ -66,15 +66,17 @@ public class BinaryInspector {
 		// test cases show info
 		if(args.length == 1 && "test".equals(args[0])) {
 			in.inspector(new String[]{
-//				"-vpoi",
-				"-vmap", "-vmapobjects", 
+				"-vpoi",
+//				"-vmap", "-vmapobjects",  //	"-vmapcoordinates", 
 //				"-vrouting",
 //				"-vaddress", "-vcities","-vstreetgroups", 
 //				"-vstreets", "-vbuildings", "-vintersections", 
-				"-zoom=14",
+//				"-zoom=15",
 //				"-bbox=1.74,51.17,1.75,51.16",
 //				"-vstats",
-				"/Users/victorshcherb/osmand/osm-gen/032.obf"
+				"/Users/victorshcherb/osmand/maps/Synthetic_test_rendering.obf"
+//				"/Users/victorshcherb/osmand/maps/Map.obf"
+//				"/Users/victorshcherb/osmand/temp/Czech-republic_jihovychod_europe_2.road.obf"
 					});
 		} else {
 			in.inspector(args);
@@ -118,6 +120,7 @@ public class BinaryInspector {
 		boolean vmap;
 		boolean vrouting;
 		boolean vmapObjects;
+		boolean vmapCoordinates;
 		boolean vstats;
 		boolean osm;
 		FileOutputStream osmOut = null;
@@ -177,6 +180,8 @@ public class BinaryInspector {
 					vrouting = true;
 				} else if(params[i].equals("-vmapobjects")){
 					vmapObjects = true;
+				} else if(params[i].equals("-vmapcoordinates")){
+					vmapCoordinates = true;
 				} else if(params[i].equals("-vpoi")){
 					vpoi = true;
 				} else if(params[i].startsWith("-osm")){
@@ -261,7 +266,7 @@ public class BinaryInspector {
 			printFileInformation(f);
 		}
 	}
-	public  static final void writeInt(CodedOutputStream ous, int v) throws IOException {
+	public static final void writeInt(CodedOutputStream ous, int v) throws IOException {
 		ous.writeRawByte((v >>> 24) & 0xFF);
 		ous.writeRawByte((v >>> 16) & 0xFF);
 		ous.writeRawByte((v >>>  8) & 0xFF);
@@ -287,7 +292,7 @@ public class BinaryInspector {
 				return null;
 			}
 			rafs[c] = new RandomAccessFile(f.getAbsolutePath(), "r");
-			indexes[c] = new BinaryMapIndexReader(rafs[c]);
+			indexes[c] = new BinaryMapIndexReader(rafs[c], f);
 			partsSet[c] = new LinkedHashSet<Float>();
 			if(version == -1){
 				version = indexes[c].getVersion();
@@ -400,7 +405,7 @@ public class BinaryInspector {
 	}
 
 
-	private  static void copyBinaryPart(CodedOutputStream ous, byte[] BUFFER, RandomAccessFile raf, long fp, int length)
+	public static void copyBinaryPart(CodedOutputStream ous, byte[] BUFFER, RandomAccessFile raf, long fp, int length)
 			throws IOException {
 		raf.seek(fp);
 		int toRead = length;
@@ -443,12 +448,13 @@ public class BinaryInspector {
 	
 	public void printFileInformation(File file) throws IOException {
 		RandomAccessFile r = new RandomAccessFile(file.getAbsolutePath(), "r");
-		printFileInformation(r, file.getName());
+		printFileInformation(r, file);
 	}
 
-	public  void printFileInformation(RandomAccessFile r, String filename) throws IOException {
+	public  void printFileInformation(RandomAccessFile r, File file ) throws IOException {
+		String filename = file.getName();
 		try {
-			BinaryMapIndexReader index = new BinaryMapIndexReader(r);
+			BinaryMapIndexReader index = new BinaryMapIndexReader(r, file);
 			int i = 1;
 			println("Binary index " + filename + " version = " + index.getVersion() +" edition = " + new Date(index.getDateCreated()));
 			for(BinaryIndexPart p : index.getIndexes()){
@@ -808,7 +814,7 @@ public class BinaryInspector {
 									throw new RuntimeException(e);
 								}
 							} else {
-								printMapDetails(obj, b);
+								printMapDetails(obj, b, vInfo.vmapCoordinates);
 								println(b.toString());
 							}
 						}
@@ -834,7 +840,7 @@ public class BinaryInspector {
 
 	
 
-	private static void printMapDetails(BinaryMapDataObject obj, StringBuilder b) {
+	private static void printMapDetails(BinaryMapDataObject obj, StringBuilder b, boolean vmapCoordinates) {
 		boolean multipolygon = obj.getPolygonInnerCoordinates() != null && obj.getPolygonInnerCoordinates().length > 0;
 		if(multipolygon ) {
 			b.append("Multipolygon");
@@ -893,11 +899,13 @@ public class BinaryInspector {
 		}
 
 		b.append(" id ").append((obj.getId() >> 1));
-		b.append(" lat/lon : ");
-		for(int i=0; i<obj.getPointsLength(); i++) {
-			float x = (float) MapUtils.get31LongitudeX(obj.getPoint31XTile(i));
-			float y = (float) MapUtils.get31LatitudeY(obj.getPoint31YTile(i));
-			b.append(y).append(" / ").append(x).append(" , ");
+		if (vmapCoordinates) {
+			b.append(" lat/lon : ");
+			for (int i = 0; i < obj.getPointsLength(); i++) {
+				float x = (float) MapUtils.get31LongitudeX(obj.getPoint31XTile(i));
+				float y = (float) MapUtils.get31LatitudeY(obj.getPoint31YTile(i));
+				b.append(y).append(" / ").append(x).append(" , ");
+			}
 		}
 	}
 
@@ -1069,7 +1077,7 @@ public class BinaryInspector {
 		}
 		println("Inspector is console utility for working with binary indexes of OsmAnd.");
 		println("It allows print info about file, extract parts and merge indexes.");
-		println("\nUsage for print info : inspector [-vaddress] [-vstreetgroups] [-vstreets] [-vbuildings] [-vintersections] [-vmap] [-vmapobjects] [-osm] [-vpoi] [-vrouting] [-vtransport] [-zoom=Zoom] [-bbox=LeftLon,TopLat,RightLon,BottomLan] [file]");
+		println("\nUsage for print info : inspector [-vaddress] [-vstreetgroups] [-vstreets] [-vbuildings] [-vintersections] [-vmap] [-vmapobjects] [-vmapcoordinates] [-osm] [-vpoi] [-vrouting] [-vtransport] [-zoom=Zoom] [-bbox=LeftLon,TopLat,RightLon,BottomLan] [file]");
 		println("  Prints information about [file] binary index of OsmAnd.");
 		println("  -v.. more verbouse output (like all cities and their streets or all map objects with tags/values and coordinates)");
 		println("\nUsage for combining indexes : inspector -c file_to_create (file_from_extract ((+|-)parts_to_extract)? )*");

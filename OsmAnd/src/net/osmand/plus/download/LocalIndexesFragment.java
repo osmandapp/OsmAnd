@@ -1,5 +1,38 @@
 package net.osmand.plus.download;
 
+import java.io.File;
+import java.text.Collator;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
+
+import net.osmand.IProgress;
+import net.osmand.IndexConstants;
+import net.osmand.access.AccessibleToast;
+import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.IconsCache;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.LocalIndexHelper;
+import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
+import net.osmand.plus.activities.LocalIndexInfo;
+import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
+import net.osmand.plus.activities.OsmandExpandableListFragment;
+import net.osmand.plus.dialogs.DirectionsDialogs;
+import net.osmand.plus.helpers.FileNameTranslationHelper;
+import net.osmand.plus.resources.IncrementalChangesManager;
+import net.osmand.plus.resources.IncrementalChangesManager.IncrementalUpdate;
+import net.osmand.plus.resources.IncrementalChangesManager.IncrementalUpdateList;
+import net.osmand.util.Algorithms;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -36,36 +69,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import net.osmand.IProgress;
-import net.osmand.IndexConstants;
-import net.osmand.access.AccessibleToast;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
-import net.osmand.plus.IconsCache;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.LocalIndexHelper;
-import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
-import net.osmand.plus.activities.LocalIndexInfo;
-import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
-import net.osmand.plus.activities.OsmandExpandableListFragment;
-import net.osmand.plus.dialogs.DirectionsDialogs;
-import net.osmand.plus.helpers.FileNameTranslationHelper;
-import net.osmand.util.Algorithms;
-
-import java.io.File;
-import java.text.Collator;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
 
 
 public class LocalIndexesFragment extends OsmandExpandableListFragment {
@@ -341,6 +344,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			File parent = new File(i.getPathToData()).getParentFile();
 			if(i.getType() == LocalIndexType.SRTM_DATA){
 				parent = getMyApplication().getAppPath(IndexConstants.SRTM_INDEX_DIR);
+			} else if(i.getFileName().endsWith(IndexConstants.BINARY_ROAD_MAP_INDEX_EXT)){
+				parent = getMyApplication().getAppPath(IndexConstants.ROADS_INDEX_DIR);
 			} else if(i.getType() == LocalIndexType.WIKI_DATA){
 				parent = getMyApplication().getAppPath(IndexConstants.WIKI_INDEX_DIR);
 			} else if(i.getType() == LocalIndexType.MAP_DATA){
@@ -399,6 +404,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 						successfull = move(new File(info.getPathToData()), getFileToBackup(info));
 						if(successfull){
 							info.setBackupedData(true);
+							getMyApplication().getResourceManager().closeFile(info.getFileName());
 						}
 					}
 					total ++;
@@ -434,7 +440,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		
 		@Override
 		protected void onPreExecute() {
-		 getDownloadActivity().setProgressBarIndeterminateVisibility(true);
+			getDownloadActivity().setProgressBarIndeterminateVisibility(true);
 		}
 
 		@Override
@@ -1109,16 +1115,9 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 
 
 		private String getMapDescription(String fileName){
-			int ls = fileName.lastIndexOf(".");
-			String name = fileName;
-			if (ls >= 0) {
-				name = fileName.substring(0, ls);
-			}
-
-			if (name.endsWith("-roads")) {
+			if (fileName.endsWith(IndexConstants.BINARY_ROAD_MAP_INDEX_EXT)) {
 				return ctx.getString(R.string.download_roads_only_item);
 			}
-
 			return "";
 		}
 	}
@@ -1160,9 +1159,61 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 				return true;
 			}
 		});
+		if(getMyApplication().getSettings().BETA_TESTING_LIVE_UPDATES.get()) {
+			item = optionsMenu.getMenu().add("Live updates")
+					.setIcon(iconsCache.getContentIcon(R.drawable.ic_action_refresh_dark));
+			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+				@Override
+				public boolean onMenuItemClick(MenuItem item) {
+					runLiveUpdate(info);
+					return true;
+				}
+			});
+		}
+		
 		optionsMenu.show();
+	}
+	
+	private void runLiveUpdate(final LocalIndexInfo info) {
+		final String fnExt = Algorithms.getFileNameWithoutExtension(new File(info.getFileName()));
+		new AsyncTask<Object, Object, IncrementalUpdateList>() {
+
+			protected void onPreExecute() {
+				getDownloadActivity().setSupportProgressBarIndeterminateVisibility(true);
+
+			};
+
+			@Override
+			protected IncrementalUpdateList doInBackground(Object... params) {
+				IncrementalChangesManager cm = getMyApplication().getResourceManager().getChangesManager();
+				return cm.getUpdatesByMonth(fnExt);
+			}
+
+			protected void onPostExecute(IncrementalUpdateList result) {
+				getDownloadActivity().setSupportProgressBarIndeterminateVisibility(false);
+				if (result.errorMessage != null) {
+					Toast.makeText(getDownloadActivity(), result.errorMessage, Toast.LENGTH_SHORT).show();
+				} else {
+					List<IncrementalUpdate> ll = result.getItemsForUpdate();
+					if(ll.isEmpty()) {
+						Toast.makeText(getDownloadActivity(), R.string.no_updates_available, Toast.LENGTH_SHORT).show();
+					} else {
+						for (IncrementalUpdate iu : ll) {
+							IndexItem ii = new IndexItem(iu.fileName, "Incremental update", iu.timestamp, iu.sizeText,
+									iu.contentSize, iu.containerSize, DownloadActivityType.LIVE_UPDATES_FILE);
+							getDownloadActivity().addToDownload(ii);
+							getDownloadActivity().updateDownloadButton();
+						}
+					}
+				}
+
+			};
+
+		}.execute(new Object[] { fnExt });
 	}
 
 
-	private DownloadActivity getDownloadActivity(){ return (DownloadActivity)getActivity();}
+	private DownloadActivity getDownloadActivity() {
+		return (DownloadActivity) getActivity();
+	}
 }

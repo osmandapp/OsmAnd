@@ -78,6 +78,8 @@ public class MapActivityLayers {
 	private MapControlsLayer mapControlsLayer;
 	private DownloadedRegionsLayer downloadedRegionsLayer;
 	private MapWidgetRegistry mapWidgetRegistry;
+
+	private StateChangedListener<Integer> transparencyListener;
 	
 	public MapActivityLayers(MapActivity activity) {
 		this.activity = activity;
@@ -150,14 +152,15 @@ public class MapActivityLayers {
 		mapControlsLayer = new MapControlsLayer(activity);
 		mapView.addLayer(mapControlsLayer, 11);
 		
-		app.getSettings().MAP_TRANSPARENCY.addListener(new StateChangedListener<Integer>() {
+		transparencyListener = new StateChangedListener<Integer>() {
 			@Override
 			public void stateChanged(Integer change) {
 				mapTileLayer.setAlpha(change);
 				mapVectorLayer.setAlpha(change);
 				mapView.refreshMap();
 			}
-		});
+		};
+		app.getSettings().MAP_TRANSPARENCY.addListener(transparencyListener);
 		
 		OsmandPlugin.createLayers(mapView, activity);
 		app.getAppCustomization().createLayers(mapView, activity);

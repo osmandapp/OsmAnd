@@ -77,7 +77,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	public OsmBugsLayer(MapActivity activity, OsmEditingPlugin plugin){
 		this.activity = activity;
 		this.plugin = plugin;
-		local = new OsmBugsLocalUtil(activity);
+		local = new OsmBugsLocalUtil(activity, plugin.getDBBug());
 		remote = new OsmBugsRemoteUtil(activity.getMyApplication());
 	}
 	

@@ -154,6 +154,7 @@ public class ApplicationMode {
 	private int arrivalDistance = 90;
 	private int bearingIcon = R.drawable.map_pedestrian_bearing;
 	private int locationIcon = R.drawable.map_pedestrian_location;
+	private static StateChangedListener<String> listener;
 
 	private ApplicationMode(int key, String stringKey) {
 		this.key = key;
@@ -162,14 +163,14 @@ public class ApplicationMode {
 	
 	public static List<ApplicationMode> values(OsmandSettings settings) {
 		if (cachedFilteredValues.isEmpty()) {
-			if (!listenerRegistered) {
-				settings.AVAILABLE_APP_MODES.addListener(new StateChangedListener<String>() {
+			if (listener == null) {
+				listener = new StateChangedListener<String>() {
 					@Override
 					public void stateChanged(String change) {
 						cachedFilteredValues = new ArrayList<ApplicationMode>();
 					}
-				});
-				listenerRegistered = true;
+				};
+				settings.AVAILABLE_APP_MODES.addListener(listener);
 			}
 			String available = settings.AVAILABLE_APP_MODES.get();
 			cachedFilteredValues = new ArrayList<ApplicationMode>();

@@ -14,12 +14,12 @@ import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 
 import net.osmand.IProgress;
 import net.osmand.NativeLibrary.NativeSearchResult;
@@ -39,7 +39,6 @@ import net.osmand.data.QuadPointDouble;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.MapTileDownloader;
-import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -75,7 +74,7 @@ public class MapRenderRepositories {
 	private final static int zoomOnlyForBasemaps = 11;
 	static int zoomForBaseRouteRendering  = 14;
 	private Handler handler;
-	private Map<String, BinaryMapIndexReader> files = new ConcurrentHashMap<String, BinaryMapIndexReader>();
+	private Map<String, BinaryMapIndexReader> files = new LinkedHashMap<String, BinaryMapIndexReader>();
 	private Set<String> nativeFiles = new HashSet<String>();
 	private OsmandRenderer renderer;
 	
@@ -127,11 +126,13 @@ public class MapRenderRepositories {
 	}
 
 	public void initializeNewResource(final IProgress progress, File file, BinaryMapIndexReader reader) {
-		if (files.containsKey(file.getAbsolutePath())) {
-			closeConnection(files.get(file.getAbsolutePath()), file.getAbsolutePath());
+		if (files.containsKey(file.getName())) {
+			closeConnection(file.getName());
 		
 		}
-		files.put(file.getAbsolutePath(), reader);
+		LinkedHashMap<String, BinaryMapIndexReader> cpfiles = new LinkedHashMap<String, BinaryMapIndexReader>(files);
+		cpfiles.put(file.getName(), reader);
+		files = cpfiles;
 	}
 
 	public RotatedTileBox getBitmapLocation() {
@@ -142,19 +143,24 @@ public class MapRenderRepositories {
 		return prevBmpLocation;
 	}
 
-	protected void closeConnection(BinaryMapIndexReader c, String file) {
-		files.remove(file);
-		if(nativeFiles.contains(file)){
+	public synchronized void closeConnection(String file) {
+		LinkedHashMap<String, BinaryMapIndexReader> cpfiles = new LinkedHashMap<String, BinaryMapIndexReader>(files);
+		BinaryMapIndexReader bmir = cpfiles.remove(file);
+		files = cpfiles;
+		if (nativeFiles.contains(file)) {
 			NativeOsmandLibrary lib = NativeOsmandLibrary.getLoadedLibrary();
-			if(lib != null) {
-				lib.closeMapFile(file);
+			if (lib != null) {
+				lib.closeMapFile(bmir != null ? bmir.getFile().getAbsolutePath() : file);
 				nativeFiles.remove(file);
+				clearCache();
 			}
 		}
-		try {
-			c.close();
-		} catch (IOException e) {
-			e.printStackTrace();
+		if (bmir != null) {
+			try {
+				bmir.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -174,7 +180,7 @@ public class MapRenderRepositories {
 		bmp = null;
 		bmpLocation = null;
 		for (String f : new ArrayList<String>(files.keySet())) {
-			closeConnection(files.get(f), f);
+			closeConnection(f);
 		}
 	}
 
@@ -290,7 +296,7 @@ public class MapRenderRepositories {
 				if (!nativeFiles.contains(mapName)) {
 					long time = System.currentTimeMillis();
 					nativeFiles.add(mapName);
-					if (!library.initMapFile(mapName)) {
+					if (!library.initMapFile(fr.getFile().getAbsolutePath())) {
 						continue;
 					}
 					log.debug("Native resource " + mapName + " initialized " + (System.currentTimeMillis() - time) + " ms"); //$NON-NLS-1$ //$NON-NLS-2$

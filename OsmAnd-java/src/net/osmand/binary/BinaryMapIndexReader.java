@@ -81,6 +81,7 @@ public class BinaryMapIndexReader {
 	public static boolean READ_STATS = false;
 	
 	private final RandomAccessFile raf;
+	protected final File file;
 	/*private*/ int version;
 	/*private */long dateCreated;
 	// keep them immutable inside
@@ -102,8 +103,9 @@ public class BinaryMapIndexReader {
 	private static String BASEMAP_NAME = "basemap";
 
 	
-	public BinaryMapIndexReader(final RandomAccessFile raf) throws IOException {
+	public BinaryMapIndexReader(final RandomAccessFile raf, File file) throws IOException {
 		this.raf = raf;
+		this.file = file;
 		codedIS = CodedInputStream.newInstance(raf);
 		codedIS.setSizeLimit(Integer.MAX_VALUE); // 2048 MB
 		transportAdapter = new BinaryMapTransportReaderAdapter(this);
@@ -113,8 +115,9 @@ public class BinaryMapIndexReader {
 		init();
 	}
 	
-	/*private */BinaryMapIndexReader(final RandomAccessFile raf, boolean init) throws IOException {
+	/*private */BinaryMapIndexReader(final RandomAccessFile raf, File file, boolean init) throws IOException {
 		this.raf = raf;
+		this.file = file;
 		codedIS = CodedInputStream.newInstance(raf);
 		codedIS.setSizeLimit(Integer.MAX_VALUE); // 2048 MB
 		transportAdapter = new BinaryMapTransportReaderAdapter(this);
@@ -128,6 +131,7 @@ public class BinaryMapIndexReader {
 	
 	public BinaryMapIndexReader(final RandomAccessFile raf, BinaryMapIndexReader referenceToSameFile) throws IOException {
 		this.raf = raf;
+		this.file = referenceToSameFile.file;
 		codedIS = CodedInputStream.newInstance(raf);
 		codedIS.setSizeLimit(Integer.MAX_VALUE); // 2048 MB
 		version = referenceToSameFile.version;
@@ -362,6 +366,10 @@ public class BinaryMapIndexReader {
 		return raf;
 	}
 	
+	public File getFile() {
+		return file;
+	}
+	
 	public int readByte() throws IOException{
 		byte b = codedIS.readRawByte();
 		if(b < 0){
@@ -535,40 +543,31 @@ public class BinaryMapIndexReader {
 		return names;
 	}
 	
-	public LatLon getRegionCenter(String name) {
-		AddressRegion rg = getRegionByName(name);
-		if (rg != null) {
-			return rg.calculatedCenter;
+	public LatLon getRegionCenter() {
+		for(AddressRegion r : addressIndexes) {
+			if(r.calculatedCenter != null)
+				return r.calculatedCenter;
 		}
 		return null;
 	}
 	
-	private AddressRegion getRegionByName(String name){
-		for(AddressRegion r : addressIndexes){
-			if(r.name.equals(name)){
-				return r;
-			}
-		}
-		return null;
+	public List<City> getCities(SearchRequest<City> resultMatcher,  
+			int cityType) throws IOException {
+		return getCities(resultMatcher, null, null, cityType);
 	}
+
 	
-	public List<City> getCities(String region, SearchRequest<City> resultMatcher,  
-			int cityType) throws IOException {
-		return getCities(region, resultMatcher, null, null, cityType);
-	}
-	public List<City> getCities(String region, SearchRequest<City> resultMatcher, StringMatcher matcher, String lang, 
-			int cityType) throws IOException {
+	public List<City> getCities(SearchRequest<City> resultMatcher, StringMatcher matcher, String lang, int cityType)
+			throws IOException {
 		List<City> cities = new ArrayList<City>();
-		AddressRegion r = getRegionByName(region);
-		if(r == null) {
-			return cities;
-		}
-		for(CitiesBlock block : r.cities) {
-			if(block.type == cityType) {
-				codedIS.seek(block.filePointer);
-				int old = codedIS.pushLimit(block.length);
-				addressAdapter.readCities(cities, resultMatcher, matcher, r.attributeTagsTable);
-				codedIS.popLimit(old);
+		for (AddressRegion r : addressIndexes) {
+			for (CitiesBlock block : r.cities) {
+				if (block.type == cityType) {
+					codedIS.seek(block.filePointer);
+					int old = codedIS.pushLimit(block.length);
+					addressAdapter.readCities(cities, resultMatcher, matcher, r.attributeTagsTable);
+					codedIS.popLimit(old);
+				}
 			}
 		}
 		return cities;
@@ -1742,7 +1741,7 @@ public class BinaryMapIndexReader {
 		List<MapRoot> roots = new ArrayList<MapRoot>();
 		
 		Map<String, Map<String, Integer> > encodingRules = new HashMap<String, Map<String, Integer> >();
-		TIntObjectMap<TagValuePair> decodingRules = new TIntObjectHashMap<TagValuePair>();
+		public TIntObjectMap<TagValuePair> decodingRules = new TIntObjectHashMap<TagValuePair>();
 		public int nameEncodingType = 0;
 		public int nameEnEncodingType = -1;
 		public int refEncodingType = -1;
@@ -1965,9 +1964,10 @@ public class BinaryMapIndexReader {
 	}
 	
 	public static void main(String[] args) throws IOException {
-		RandomAccessFile raf = new RandomAccessFile("/Users/victorshcherb/osmand/osm-gen/map.obf", "r");
+		File fl = new File("/Users/victorshcherb/osmand/osm-gen/map.obf");
+		RandomAccessFile raf = new RandomAccessFile(fl, "r");
 		
-		BinaryMapIndexReader reader = new BinaryMapIndexReader(raf);
+		BinaryMapIndexReader reader = new BinaryMapIndexReader(raf, fl);
 		println("VERSION " + reader.getVersion()); //$NON-NLS-1$
 		long time = System.currentTimeMillis();
 
@@ -2260,9 +2260,8 @@ public class BinaryMapIndexReader {
 	
 	private static void testAddressSearch(BinaryMapIndexReader reader) throws IOException {
 		// test address index search
-		String reg = reader.getRegionNames().get(0);
 		final Map<String, Integer> streetFreq = new HashMap<String, Integer>();
-		List<City> cs = reader.getCities(reg, null, BinaryMapAddressReaderAdapter.CITY_TOWN_TYPE);
+		List<City> cs = reader.getCities(null, BinaryMapAddressReaderAdapter.CITY_TOWN_TYPE);
 		for(City c : cs){
 			int buildings = 0;
 			reader.preloadStreets(c, null);
@@ -2275,7 +2274,7 @@ public class BinaryMapIndexReader {
 			println(c.getName() + " " + c.getLocation() + " " + c.getStreets().size() + " " + buildings + " " + c.getEnName(true) + " " + c.getName("ru"));
 		}
 //		int[] count = new int[1];
-		List<City> villages = reader.getCities(reg, buildAddressRequest((ResultMatcher<City>) null), BinaryMapAddressReaderAdapter.VILLAGES_TYPE);
+		List<City> villages = reader.getCities(buildAddressRequest((ResultMatcher<City>) null), BinaryMapAddressReaderAdapter.VILLAGES_TYPE);
 		for(City v : villages) {
 			reader.preloadStreets(v,  null);
 			for(Street s : v.getStreets()){

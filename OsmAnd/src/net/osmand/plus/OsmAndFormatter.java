@@ -6,6 +6,8 @@ import java.util.Map.Entry;
 
 import net.osmand.data.Amenity;
 import net.osmand.data.City.CityType;
+import net.osmand.osm.AbstractPoiType;
+import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
@@ -183,11 +185,12 @@ public class OsmAndFormatter {
 		return nm + " " + n; //$NON-NLS-1$
 	}
 
-	public static String getAmenityDescriptionContent(Context ctx, Amenity amenity, boolean shortDescription) {
+	public static String getAmenityDescriptionContent(OsmandApplication ctx, Amenity amenity, boolean shortDescription) {
 		StringBuilder d = new StringBuilder();
 		if(amenity.getType().isWiki()) {
 			return "";
 		}
+		MapPoiTypes poiTypes = ctx.getPoiTypes();
 		for(Entry<String, String>  e : amenity.getAdditionalInfo().entrySet()) {
 			String key = e.getKey();
 			String vl = e.getValue();
@@ -202,17 +205,19 @@ public class OsmAndFormatter {
 			} else if(Amenity.PHONE.equals(key)) {
 				d.append(ctx.getString(R.string.phone) + ": ");
 			} else if(Amenity.WEBSITE.equals(key)) {
-				
 				d.append(ctx.getString(R.string.website) + ": ");
 			} else {
-				PoiCategory pc = amenity.getType();
-				PoiType pt = pc.getPoiTypeByKeyName(e.getKey());
+				AbstractPoiType pt = poiTypes.getAnyPoiAdditionalTypeByKey(e.getKey());
 				if (pt != null) {
-					vl = pt.getTranslation();
+					if(pt instanceof PoiType && !((PoiType) pt).isText()) {
+						vl = pt.getTranslation();
+					} else {
+						vl = pt.getTranslation() + ": " + amenity.unzipContent(e.getValue());
+					}
 				} else {
-					vl = Algorithms.capitalizeFirstLetterAndLowercase(e.getKey());
+					vl = Algorithms.capitalizeFirstLetterAndLowercase(e.getKey()) +
+					 ": " + amenity.unzipContent(e.getValue());
 				}
-				vl += ": " + amenity.unzipContent(e.getValue());
 			}
 			d.append(vl).append('\n');
 		}

@@ -39,7 +39,10 @@ public class OsmBugsDbHelper extends SQLiteOpenHelper {
 
 	public List<OsmNotesPoint> getOsmbugsPoints() {
 		if (cache == null) {
-			return checkOsmbugsPoints();
+			SQLiteDatabase db = getReadableDatabase();
+			List<OsmNotesPoint> res = checkOsmbugsPoints(db);
+			db.close();
+			return res;
 		}
 		return cache;
 	}
@@ -52,8 +55,8 @@ public class OsmBugsDbHelper extends SQLiteOpenHelper {
 							+ OSMBUGS_COL_LON + "," + OSMBUGS_COL_ACTION + "," + OSMBUGS_COL_AUTHOR + ")" + " VALUES (?, ?, ?, ?, ?, ?)",
 							new Object[] { p.getId(), p.getText(), p.getLatitude(), p.getLongitude(), 
 							OsmPoint.stringAction.get(p.getAction()), p.getAuthor() }); //$NON-NLS-1$ //$NON-NLS-2$
+			checkOsmbugsPoints(db);
 			db.close();
-			checkOsmbugsPoints();
 			return true;
 		}
 		return false;
@@ -64,15 +67,14 @@ public class OsmBugsDbHelper extends SQLiteOpenHelper {
 		if (db != null) {
 			db.execSQL("DELETE FROM " + OSMBUGS_TABLE_NAME +
 					" WHERE " + OSMBUGS_COL_ID + " = ?", new Object[] { p.getId() }); //$NON-NLS-1$ //$NON-NLS-2$
+			checkOsmbugsPoints(db);
 			db.close();
-			checkOsmbugsPoints();
 			return true;
 		}
 		return false;
 	}
 
-	private List<OsmNotesPoint> checkOsmbugsPoints(){
-		SQLiteDatabase db = getReadableDatabase();
+	private List<OsmNotesPoint> checkOsmbugsPoints(SQLiteDatabase db){
 		List<OsmNotesPoint> cachedOsmbugsPoints = new ArrayList<OsmNotesPoint>();
 		if (db != null) {
 			Cursor query = db.rawQuery("SELECT " + OSMBUGS_COL_ID + ", " + OSMBUGS_COL_TEXT + ", " + OSMBUGS_COL_LAT + "," + OSMBUGS_COL_LON + "," + OSMBUGS_COL_ACTION + "," + OSMBUGS_COL_AUTHOR + " FROM " + //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ 
@@ -92,9 +94,8 @@ public class OsmBugsDbHelper extends SQLiteOpenHelper {
 				} while (query.moveToNext());
 			}
 			query.close();
-			db.close();
+			cache = cachedOsmbugsPoints;
 		}
-		cache = cachedOsmbugsPoints;
 		return cachedOsmbugsPoints;
 	}
 

@@ -158,8 +158,8 @@
 \n\nEssa visão pode ser revertida desativando aqui mesmo ou alterando o \'Estilo do mapa\' em \'Configurar mapa\' quando desejar. "</string>
 	<string name="plugin_nautical_name">Visão de mapa náutico</string>
 	<string name="plugin_nautical_descr">"Este complemento enriquece o mapa do OsmAnd para também produzir mapas náuticos para passeios de barco, vela e outros tipos de desportos aquáticos.
-\n\nUm complemento de mapa especial para OsmAnd fornecerá todas as marcas de navegação náutica e símbolos da cartográficos, para o interior, assim como para navegação próxima à costa. A descrição de cada marca de navegação fornece os detalhes necessários para identificá-los e o seu significado (categoria, forma, cor, sequência, referência, etc.).
-\n\nPara retornar a um dos estilos de mapa convencional do OsmAnd, simplesmente desative este complemento ou altere o \'Estilo de mapa\' em \'Configurar mapa\' quando desejado. "</string>
+\n\nUm complemento de mapa especial para OsmAnd fornecerá todas as marcas de navegação náutica e símbolos cartográficos, para o interior assim como para navegação próxima à costa. A descrição de cada marca de navegação fornece os detalhes necessários para identificá-las e o seu significado (categoria, forma, cor, sequência, referência, etc.).
+\n\nPara retornar a um estilo convencional de mapa do OsmAnd, simplesmente desative este complemento ou altere o \'Estilo de mapa\' em \'Configurar mapa\' quando desejado. "</string>
 	<string name="plugin_ski_name">Visão de mapa de esqui</string>
 	<string name="plugin_ski_descr">"Este complemento para o OsmAnd coloca ao seu alcance detalhes de pistas de descida de esqui, de travessia, rotas de esqui alpino, teleféricos e elevadores de esqui. Rotas e pistas são mostradas com codificação de cores por dificuldade e retratadas em um estilo especial de mapa \'Inverno\' que assimila uma paisagem de inverno cor de neve.
 \n\nAtivando esta mudança na visão do estilo de mapa de \'Inverno e esqui\', mostrando todas as características da paisagem em condições invernais. Essa visão pode ser revertida desativando aqui ou alterando o \'Estilo de mapa\' em \'Configurar mapa\' quando desejado. "</string>
@@ -193,7 +193,7 @@
     <string name="rendering_attr_streetLighting_name">Iluminação pública</string>
     <string name="proxy_pref_title">Proxy</string>
     <string name="track_points">Pontos de trajeto</string>
-	<string name="osmand_srtm_long_description_1000_chars">"Este complemento fornece uma linha de contorno sobreposta e uma camada de sombras das colinas (relevo) por cima dos mapas off-line do OsmAnd. Esta funcionalidade será muito apreciada por atletas, viajantes e alguém interessado na estrutura de relevo da paisagem.\n\nOs dados globais (entre as latitudes 70º norte e 70º sul) são baseados em medições do SRTM (Shuttle Radar Topography Mission) e ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), um instrumento de imagens da Terra, o principal satélite do Sistema de Observação da Terra da NASA. ASTER é um esforço conjunto da NASA, do Ministério Japonês da Economia, Comércio e Indústria (METI) e do Sistema Espacial Japonês (J-spacesystems). "</string>
+	<string name="osmand_srtm_long_description_1000_chars">"Este complemento fornece curva de nível e camada de sombra de colinas (relevo) por cima dos mapas off-line do OsmAnd. Esta funcionalidade será muito apreciada por atletas, viajantes e alguém interessado na estrutura de relevo da paisagem.\n\nOs dados globais (entre as latitudes 70º norte e 70º sul) são baseados em medições do SRTM (Shuttle Radar Topography Mission) e ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), um instrumento de imagens da Terra, o principal satélite do Sistema de Observação da Terra da NASA. ASTER é um esforço conjunto da NASA, do Ministério Japonês da Economia, Comércio e Indústria (METI) e do Sistema Espacial Japonês (J-spacesystems). "</string>
 	<string name="srtm_plugin_description">"Este complemento fornece uma linha de contorno sobreposta e uma camada de sombras das colinas (relevo) por cima dos mapas off-line do OsmAnd. Esta funcionalidade será muito apreciada por atletas, viajantes e alguém interessado na estrutura de relevo da paisagem.\n\nOs dados globais (entre as latitudes 70º norte e 70º sul) são baseados em medições do SRTM (Shuttle Radar Topography Mission) e ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), um instrumento de imagens da Terra, o principal satélite do Sistema de Observação da Terra da NASA. ASTER é um esforço conjunto da NASA, do Ministério Japonês da Economia, Comércio e Indústria (METI) e do Sistema Espacial Japonês (J-spacesystems). "</string>
 	<string name="osmand_parking_plugin_description">O complemento de posição de estacionamento memoriza facilmente onde seu carro está estacionado e quanto tempo resta (se o estacionamento for de tempo limitado).\nVocê pode encontrar o seu lugar e tempo de estacionamento no painel de instrumentos e no widget do mapa. Pode ser adicionado um evento no calendário, se você quiser um lembrete.</string>
 	<string name="osm_editing_plugin_description">Este complemento do OsmAnd pode ser usado para fazer contribuições ao OSM como criar ou modificar POI, abertura ou comentários de erros do OSM e contribuir com arquivos GPX gravados. OSM é um projeto de mapeamento mundial dirigido pela comunidade e de domínio público. Para mais detalhes, consulte http://openstreetmap.org. Participação ativa é apreciada e as contribuições podem ser feitas diretamente do OsmAnd, se você especificar suas credenciais pessoais de OSM no app.</string>
@@ -1771,4 +1771,20 @@
     <string name="rendering_value_translucent_purple_name">Roxo translúcido</string>
     <string name="rendering_value_default13_name">Predefinido (13)</string>
 	<string name="rendering_value_defaultTranslucentCyan_name">Predefinido (ciano translúcido)</string>
+    <string name="do_you_like_osmand">Você curte o OsmAnd?</string>
+	<string name="rate_this_app">Avalie este app</string>
+	<string name="rate_this_app_long">Por favor, avalie o OsmAnd no Google Play</string>
+	<string name="user_hates_app_get_feedback">Diga-nos porquê.</string>
+	<string name="user_hates_app_get_feedback_long">Por favor, nos diga o que quer mudar neste app.</string>
+<string name="we_really_care">Nós realmente nos importamos</string>
+	<string name="download_live_updates">Atualizações ao vivo</string>
+	<string name="failed_to_upload">Falha no envio</string>
+	<string name="delete_change">Apagar mudança</string>
+	<string name="successfully_uploaded_pattern">Enviado com sucesso {0}/{1}</string>
+	<string name="try_again">Tentar novamente</string>
+	<string name="error_message_pattern">Erro: {0}</string>
+<string name="no_updates_available">Não há atualizações disponíveis</string>
+    <string name="we_really_care_about_your_opinion">Nos preocupamos muito com sua opinião e é importante para nós ouvi-lo.</string>
+	<string name="rendering_value_boldOutline_name">Títulos com contornos</string>
+    <string name="traffic_warning_hazard">Perigo</string>
     </resources>

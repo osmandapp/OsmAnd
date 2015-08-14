@@ -27,11 +27,9 @@ public class NetworkUtils {
 
 	private static Proxy proxy = null;
 
-	public static String sendGetRequest(String urlText, String userNamePassword){
-		URL url;
+	public static String sendGetRequest(String urlText, String userNamePassword, StringBuilder responseBody){
 		try {
 			log.info("GET : " + urlText);
-			url = new URL(urlText);
 			HttpURLConnection conn = getHttpURLConnection(urlText);
 			conn.setDoInput(true);
 			conn.setDoOutput(false);
@@ -39,14 +37,13 @@ public class NetworkUtils {
 			if(userNamePassword != null) {
 				conn.setRequestProperty("Authorization", "Basic " + Base64.encode(userNamePassword)); //$NON-NLS-1$ //$NON-NLS-2$
 			}
-			
 	        conn.setRequestProperty("User-Agent", "OsmAnd"); //$NON-NLS-1$ //$NON-NLS-2$
 			log.info("Response code and message : " + conn.getResponseCode() + " " + conn.getResponseMessage());
 			if(conn.getResponseCode() != 200){
 				return conn.getResponseMessage();
 			}
 			InputStream is = conn.getInputStream();
-			StringBuilder responseBody = new StringBuilder();
+			responseBody.setLength(0);
 			if (is != null) {
 				BufferedReader in = new BufferedReader(new InputStreamReader(is, "UTF-8")); //$NON-NLS-1$
 				String s;
@@ -62,12 +59,7 @@ public class NetworkUtils {
 				}
 				is.close();
 			}
-			String response = responseBody.toString();
-			log.info("Response : " + response);
-			if(response.startsWith("OK")){
-				return null;
-			}
-			return response;
+			return null;
 		} catch (IOException e) {
 			log.error(e.getMessage(), e);
 			return e.getMessage();

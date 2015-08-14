@@ -134,7 +134,7 @@
 	<string name="shared_location">分享位置</string>
 	<string name="osmand_parking_event">由停車場取車</string>
 	<string name="osmand_parking_warning">警示</string>
-	<string name="osmand_parking_warning_text">取車通知先前已加到您的行事曆中。它會留在那裡直到您手動刪除它。</string>    
+	<string name="osmand_parking_warning_text">取車通知在先前已加到您的行事曆中。它會一直保留在那裡，直到您手動刪除它。</string>    
 	<string name="osmand_parking_time_limit_title">設定停車時限</string>
 	<string name="osmand_parking_delete_confirm">您要移除停車位置嗎？</string>
 	<string name="osmand_parking_delete">刪除停車位置標記</string>
@@ -470,7 +470,7 @@
 	<string name="tts_language_not_supported_title">該語言未支援</string>
 	<string name="tts_language_not_supported">選用的語言 Android TTS 引擎未支援，您要到 Play 商場找其它引擎嗎？否則使用之前設定的語言。</string>
 	<string name="tts_missing_language_data_title">資料遺失</string>
-	<string name="tts_missing_language_data">您選的語言未安裝，您要到 Play 商場安裝嗎？</string>
+	<string name="tts_missing_language_data">您選的語言未安裝，您要轉到 Play 商場安裝嗎？</string>
 	<string name="gpx_option_reverse_route">反轉 GPX 方向</string>
 	<string name="gpx_option_destination_point">使用目前的目的地</string>
 	<string name="gpx_option_from_start_point">沿著整條軌跡往前</string>
@@ -1127,9 +1127,9 @@
     <string name="files_limit">剩餘 %1$d 個檔</string>
     <string name="layer_recordings">記錄層</string>
 	<string name="intermediate_items_sort_return">在目前的位置到達目的地之間的路途上，沿途的航點已採取了最佳化排列。</string>
-    <string name="osmand_srtm_long_description_1000_chars">"這個外掛元件同時提供了等高線層和（地貌）山體陰影層，顯示在 OsmAnd 的離線地圖頂部。此功能會讓運動選手、徒步旅行者、背包客，和任何感興趣的人對起伏的地貌結構大加讚賞。\n\n全球圖資（在北緯 70 度至南緯 70 度之間）的量測基礎在於 SRTM (Shuttle Radar Topography Mission)和 ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer)，遙測儀器安裝在美國太空總署地球觀測系統的旗艦衛星 Terra 上，ASTER 是美國太空總署、日本經濟產業省(METI)、日本太空系統 (J-spacesystems)之間的通力合作產物。 "</string>
+    <string name="osmand_srtm_long_description_1000_chars">"這個外掛元件同時提供了等高線層和（地貌）山體陰影層，顯示在 OsmAnd 的離線地圖頂部。此功能會讓運動選手、徒步旅行者、背包客，和任何感興趣的人對起伏的地貌結構大加讚賞。\n\n全球圖資（在北緯 70 度至南緯 70 度之間）的量測基礎在於 SRTM (Shuttle Radar Topography Mission)和 ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer)，安裝在美國太空總署地球觀測系統的旗艦衛星 Terra 上的遙測儀器，ASTER 是美國太空總署、日本經濟產業省(METI)、日本太空系統 (J-spacesystems)之間的通力合作產物。 "</string>
     <string name="audionotes_location_not_defined">以位置去關聯的注解尚未下定義。\"使用位置 …\"，把注解分配給指定的位置</string>
-    <string name="srtm_plugin_description">"這個外掛元件同時提供了等高線層和（地貌）山體陰影層，顯示在 OsmAnd 的離線地圖頂部。此功能會讓運動選手、徒步旅行者、背包客，和任何感興趣的人對起伏的地貌結構大加讚賞。\n\n全球圖資（在 70 度以北和 70 度以南之間）的量測基礎在於 SRTM（Shuttle Radar Topography Mission）和 ASTER（Advanced Spaceborne Thermal Emission and Reflection Radiometer），遙測儀器裝載在美國太空總署的地球觀測系統人造衛星 Terra 上，ASTER 是美國太空總署、日本經濟產業省（METI）、日本太空系統（J-spacesystems）之間的通力合作的產物。 "</string>
+    <string name="srtm_plugin_description">"這個外掛元件同時提供了等高線層和（地貌）山體陰影層，顯示在 OsmAnd 的離線地圖頂部。此功能會讓運動選手、徒步旅行者、背包客，和任何感興趣的人對起伏的地貌結構大加讚賞。\n\n全球圖資（在 70 度以北和 70 度以南之間）的量測基礎在於 SRTM（Shuttle Radar Topography Mission）和 ASTER（Advanced Spaceborne Thermal Emission and Reflection Radiometer），安裝在美國太空總署地球觀測系統的旗艦衛星 Terra 上的遙測儀器，ASTER 是美國太空總署、日本經濟產業省（METI）、日本太空系統（J-spacesystems）之間的通力合作的產物。 "</string>
     <string name="tip_recent_changes_0_7_2_t">在0.7.2的變更：
 		\n\t- Native rendering for all devices
 		\n\t- Offline POI editing
@@ -1901,7 +1901,7 @@
 	<string name="shared_string_remember_my_choice">記住我的選擇</string>
 	<string name="shared_string_refresh">重整</string>
 	<string name="shared_string_download">下載</string>
-	<string name="shared_string_downloading">下載中</string>
+	<string name="shared_string_downloading">正在下載</string>
 	<string name="shared_string_download_successful">下載成功</string>
 	<string name="shared_string_unexpected_error">發生意外錯誤</string>
 	<string name="shared_string_action_template">行動 {0}</string>
@@ -2059,4 +2059,20 @@
     <string name="rendering_value_translucent_purple_name">半透明的紫色</string>
     <string name="rendering_value_default13_name">預設 (13)</string>
 	<string name="rendering_value_defaultTranslucentCyan_name">預設 (半透明青色)</string>
+    <string name="do_you_like_osmand">您喜歡 osmand 嗎？</string>
+	<string name="we_really_care">我們真的在意</string>
+	<string name="rate_this_app">評論這個 app</string>
+	<string name="rate_this_app_long">請在 Google Play 給 OsmAnd 分數</string>
+	<string name="user_hates_app_get_feedback">告訴我們為什麼。</string>
+	<string name="user_hates_app_get_feedback_long">請告訴我們這個應用程式您想要更改些什麼。</string>
+<string name="download_live_updates">即時更新</string>
+	<string name="failed_to_upload">上載失敗</string>
+	<string name="delete_change">刪除更改</string>
+	<string name="successfully_uploaded_pattern">已成功上載 {0} / {1}</string>
+	<string name="try_again">再試一次</string>
+	<string name="error_message_pattern">錯誤：{0}</string>
+<string name="no_updates_available">沒可用的更新</string>
+    <string name="we_really_care_about_your_opinion">我們很在乎您的意見，並且聽到您的反映對我們來說是很重要的。</string>
+	<string name="rendering_value_boldOutline_name">粗外框</string>
+    <string name="traffic_warning_hazard">危險</string>
     </resources>

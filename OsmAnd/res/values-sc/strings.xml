@@ -117,7 +117,7 @@
     <string name="tip_faq">Preguntas fitianas</string>
     <string name="local_osm_changes_delete_all_confirm">Istas pro burrare %1$d modìficas OSM. Seguru ses?</string>
     <string name="shared_string_delete_all">Burra totu</string>
-    <string name="animate_routing_route_not_calculated">Pro piaghere, càlcula s’andala in antis</string>
+    <string name="animate_routing_route_not_calculated">Pro piaghere càlcula s’andala in antis</string>
     <string name="animate_routing_route">Dispinta impreande un\'àndala calculada </string>
     <string name="animate_routing_gpx">Dispinta impreande una caminera GPX</string>
     <string name="shared_string_remember_my_choice">Ammenta s’issèberu meu</string>
@@ -2036,4 +2036,20 @@
     <string name="rendering_value_translucent_red_name">Ruju translùcidu</string>
     <string name="rendering_value_default13_name">Predefinidu (13)</string>
 	<string name="rendering_value_defaultTranslucentCyan_name">Predefinidu (cianu translùcidu)</string>
+    <string name="do_you_like_osmand">T\'agradat OsmAnd?</string>
+	<string name="we_really_care">Nos importat meda</string>
+	<string name="rate_this_app">Vota cust’aplicatzione</string>
+	<string name="rate_this_app_long">Pro piaghere dae unu votu a OsmAnd in Google Play</string>
+	<string name="user_hates_app_get_feedback">Narade·nos proite.</string>
+	<string name="user_hates_app_get_feedback_long">Pro piaghere, faghe·nos ischire ite dias bòlere cambiare in custa aplicatzione.</string>
+<string name="no_updates_available">Perunu agiornamentu disponìbile</string>
+    <string name="download_live_updates">Agiornamentos automàticos</string>
+	<string name="we_really_care_about_your_opinion">Nos importat meda de s\'opinione tua, est importante pro nois a ti intendere.</string>
+	<string name="failed_to_upload">Carrigamentu faddidu</string>
+	<string name="delete_change">Burra modìficas</string>
+	<string name="successfully_uploaded_pattern">Carrigamentu resessidu {0}/{1}</string>
+	<string name="try_again">Torra a proare</string>
+	<string name="error_message_pattern">Errore: {0}</string>
+<string name="rendering_value_boldOutline_name">Oru in grassetu</string>
+    <string name="traffic_warning_hazard">Perìgulu</string>
     </resources>

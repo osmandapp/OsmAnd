@@ -1930,4 +1930,20 @@
     <string name="rendering_value_green_name">Zelena</string>
     <string name="rendering_value_default13_name">Privzeto (13)</string>
 	<string name="rendering_value_defaultTranslucentCyan_name">Privzeto (prosojna sinja)</string>
-    </resources>
+    <string name="do_you_like_osmand">Ali vam je program Osmand všeč?</string>
+	<string name="we_really_care">Ni nam vseeno!</string>
+	<string name="rate_this_app">Ocenite program</string>
+	<string name="rate_this_app_long">Ocenite program na Google Play</string>
+	<string name="user_hates_app_get_feedback">Povejte nam, zakaj.</string>
+	<string name="user_hates_app_get_feedback_long">Povejte nam, kaj želite spremeniti v programu.</string>
+<string name="download_live_updates">Sprotne posodobitve</string>
+	<string name="traffic_warning_hazard">Nevarnost</string>
+    <string name="rendering_value_boldOutline_name">Poudarjen obris</string>
+    <string name="no_updates_available">Ni posodobitev</string>
+    <string name="we_really_care_about_your_opinion">Vaš odziv je zelo pomemben, zato si želimo slišati vsa vaša mnenja in pripombe.</string>
+	<string name="failed_to_upload">Pošiljanje je spodletelo</string>
+	<string name="delete_change">Izbriši spremembe</string>
+	<string name="successfully_uploaded_pattern">Uspešno poslano {0}/{1}</string>
+	<string name="try_again">Poskusi znova</string>
+	<string name="error_message_pattern">Napaka: {0}</string>
+</resources>

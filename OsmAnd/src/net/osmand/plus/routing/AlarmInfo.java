@@ -9,20 +9,23 @@ import net.osmand.plus.R;
 
 public class AlarmInfo implements LocationPoint {
 	public enum AlarmInfoType {
-		SPEED_CAMERA(1),
-		SPEED_LIMIT(2),
-		BORDER_CONTROL(3),
-		RAILWAY(4),
-		TRAFFIC_CALMING(5),
-		TOLL_BOOTH(6),
-		STOP(7),
-		PEDESTRIAN(8),
-		MAXIMUM(9);
+		SPEED_CAMERA(1, R.string.traffic_warning_speed_camera),
+		SPEED_LIMIT(2, R.string.traffic_warning_speed_limit),
+		BORDER_CONTROL(3, R.string.traffic_warning_border_control),
+		RAILWAY(4, R.string.traffic_warning_railways),
+		TRAFFIC_CALMING(5, R.string.traffic_warning_calming),
+		TOLL_BOOTH(6, R.string.traffic_warning_payment),
+		STOP(7, R.string.traffic_warning_stop),
+		PEDESTRIAN(8, R.string.traffic_warning_pedestrian),
+		HAZARD(9, R.string.traffic_warning_hazard),
+		MAXIMUM(10, R.string.traffic_warning);
 		
 		private int priority;
+		private int string;
 
-		private AlarmInfoType(int p) {
+		private AlarmInfoType(int p, int string) {
 			this.priority = p;
+			this.string = string;
 		}
 		
 		public int getPriority(){
@@ -31,25 +34,7 @@ public class AlarmInfo implements LocationPoint {
 		
 		
 		public String getVisualName(Context ctx) {
-			switch (priority) {
-				case 1:
-					return ctx.getString(R.string.traffic_warning_speed_camera);
-				case 2:
-					return ctx.getString(R.string.traffic_warning_speed_limit);
-				case 3:
-					return ctx.getString(R.string.traffic_warning_border_control);
-				case 4:
-					return ctx.getString(R.string.traffic_warning_railways);
-				case 5:
-					return ctx.getString(R.string.traffic_warning_calming);
-				case 6:
-					return ctx.getString(R.string.traffic_warning_payment);
-				case 7:
-					return ctx.getString(R.string.traffic_warning_stop);
-				case 8:
-					return ctx.getString(R.string.traffic_warning_pedestrian);
-			}
-			return ctx.getString(R.string.traffic_warning);
+			return ctx.getString(string);
 		}
 	}
 	
@@ -119,6 +104,8 @@ public class AlarmInfo implements LocationPoint {
 			}
 		} else if("traffic_calming".equals(ruleType.getTag())) {
 			alarmInfo = new AlarmInfo(AlarmInfoType.TRAFFIC_CALMING, locInd);
+		} else if("hazard".equals(ruleType.getTag())) {
+			alarmInfo = new AlarmInfo(AlarmInfoType.HAZARD, locInd);
 		} else if ("railway".equals(ruleType.getTag()) && "level_crossing".equals(ruleType.getValue())) {
 			alarmInfo = new AlarmInfo(AlarmInfoType.RAILWAY, locInd);
 		} else if ("crossing".equals(ruleType.getTag()) && "uncontrolled".equals(ruleType.getValue())){

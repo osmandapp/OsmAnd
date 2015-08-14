@@ -121,7 +121,11 @@ public class SearchPoiFilterFragment extends OsmAndListFragment implements Searc
 
 	public List<Object> getFilters(String s) {
 		List<Object> filters = new ArrayList<Object>() ;
-		PoiFiltersHelper poiFilters = getApp().getPoiFilters();
+		OsmandApplication app = getApp();
+		if(app == null) {
+			return filters;
+		}
+		PoiFiltersHelper poiFilters = app.getPoiFilters();
 		if (Algorithms.isEmpty(s)) {
 			filters.addAll(poiFilters.getTopDefinedPoiFilters());
 		} else {
@@ -131,7 +135,7 @@ public class SearchPoiFilterFragment extends OsmAndListFragment implements Searc
 				}
 			}
 			Map<String, AbstractPoiType> res = 
-					getApp().getPoiTypes().getAllTypesTranslatedNames(new CollatorStringMatcher(s, StringMatcherMode.CHECK_STARTS_FROM_SPACE));
+					app.getPoiTypes().getAllTypesTranslatedNames(new CollatorStringMatcher(s, StringMatcherMode.CHECK_STARTS_FROM_SPACE));
 			for(AbstractPoiType p : res.values()) {
 				filters.add(p);
 			}
@@ -145,6 +149,10 @@ public class SearchPoiFilterFragment extends OsmAndListFragment implements Searc
 	}
 	
 	public OsmandApplication getApp(){
+		FragmentActivity activity = getActivity();
+		if(activity == null) {
+			return null;
+		}
 		return (OsmandApplication) getActivity().getApplication();
 	}
 	

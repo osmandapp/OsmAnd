@@ -8,7 +8,6 @@ apply plugin: 'com.android.application'
 // APP_EDITION - date stamp of builds
 // APP_FEATURES - features +play_market +gps_status -parking_plugin -blackberry -free_version -amazon
 
-
 // 1. To be done Filter fonts
 // <unzip src="OsmAndCore_android.aar" dest=".">
 //            <patternset>
@@ -39,7 +38,7 @@ android {
 	}
 
 	defaultConfig {
-		minSdkVersion 9
+		minSdkVersion 14
 		targetSdkVersion 21
 
 		versionCode System.getenv("APK_NUMBER_VERSION") ? System.getenv("APK_NUMBER_VERSION").toInteger() : versionCode
@@ -209,13 +208,13 @@ task collectRoutingResources(type: Sync) {
 }
 
 task collectMiscResources(type: Copy) {
-	into "src/net/osmand/osm"
-	from("../../resources/obf_creation") {
-		include "rendering_types.xml"
-	}
-	from("../../resources/poi") {
-		include "poi_types.xml"
-	}
+    into "src/net/osmand/osm"
+    from("../../resources/obf_creation") {
+        include "rendering_types.xml"
+    }
+    from("../../resources/poi") {
+        include "poi_types.xml"
+    }
 }
 
 task collectRenderingStylesResources(type: Sync) {
@@ -303,6 +302,7 @@ dependencies {
 	compile project(path: ":OsmAnd-java", configuration: "android")
 	compile project(":eclipse-compile:design")
 	compile project(":cardview")
+	compile project(":recyclerview")
 	compile fileTree(
 			dir: "libs",
 			include: ["*.jar"],
