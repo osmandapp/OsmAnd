@@ -10,7 +10,7 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/OsmandLightTheme.DakrActionbar">
+        android:theme="@style/OsmandLightTheme.DarkActionbar">
 
         <!-- TODO change theme -->
         <android.support.v7.widget.Toolbar
@@ -19,52 +19,58 @@
             android:layout_height="@dimen/dashboard_map_toolbar"
             app:contentInsetLeft="72dp"
             app:contentInsetStart="72dp"
-            android:theme="@style/OsmandLightTheme.DakrActionbar"/>
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="72dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="16dp"
-            app:layout_scrollFlags="scroll">
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Name"
-                android:text="@string/lorem_ipsum"/>
-
-        </android.support.design.widget.TextInputLayout>
+            app:layout_scrollFlags="scroll"/>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="72dp"
-            android:layout_marginBottom="8dp"
             app:layout_scrollFlags="scroll">
 
             <android.support.design.widget.TextInputLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_marginLeft="72dp"
+                android:layout_marginRight="16dp"
                 android:layout_marginTop="16dp">
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/quickaction_arrow_down"
+                    android:hint="Name"
+                    android:text="@string/lorem_ipsum"/>
+
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="72dp"
+            app:layout_scrollFlags="scroll">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_weight="1">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/ic_action_arrow_drop_down"
                     android:hint="POI Type"
                     android:text="@string/lorem_ipsum"/>
 
             </android.support.design.widget.TextInputLayout>
 
             <ImageButton
+                android:id="@+id/onlineDocumentationButton"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_gravity="bottom"
                 android:background="@null"
-                android:src="@android:drawable/ic_menu_help"/>
+                android:src="@drawable/ic_action_help"/>
         </LinearLayout>
 
         <android.support.design.widget.TabLayout
@@ -72,7 +78,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/color_white"
-            app:tabIndicatorColor="@color/osmand_orange"/>
+            app:tabIndicatorColor="@color/osmand_orange"
+            app:tabSelectedTextColor="@color/osmand_orange"
+            app:tabTextColor="@android:color/darker_gray"/>
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.view.ViewPager
