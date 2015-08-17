@@ -149,7 +149,7 @@
 	<string name="osmand_parking_pm">PM</string>
 	<string name="osmand_parking_am">AM</string>
 	<string name="osmand_parking_position_name">停車地點</string>
-	<string name="osmand_parking_plugin_description">停車位置外掛元件讓您記住停車地點和還剩多少停車時間（如果有時間限制）。\n位置和時間這兩者均可在 OsmAnd 操控板，地圖螢幕上的小工具看見。警報可以增加到 Android 的日曆作為提醒。</string>
+	<string name="osmand_parking_plugin_description">停車位置外掛元件讓您記住停車地點和還剩多少停車時間（如果有時間限制）。\n在地圖螢幕上，位置和時間這兩者均可見於 OsmAnd 儀表板的小工具。警報可以增加到 Android 的日曆作為提醒。</string>
 	<string name="osmand_parking_plugin_name">停車地點</string>
 	<string name="context_menu_item_add_parking_point">標記為停車地點</string>
 	<string name="context_menu_item_delete_parking_point">刪除停車標記</string>
@@ -2075,4 +2075,10 @@
     <string name="we_really_care_about_your_opinion">我們很在乎您的意見，並且聽到您的反映對我們來說是很重要的。</string>
 	<string name="rendering_value_boldOutline_name">粗外框</string>
     <string name="traffic_warning_hazard">危險</string>
-    </resources>
+    <string name="dahboard_options_dialog_title">儀表板選項</string>
+	<string name="shared_string_card_was_hidden">卡為隱藏</string>
+	<string name="shared_string_undo">復原</string>
+	<string name="shared_string_skip">跳過</string>
+	<string name="app_name_osmand">OsmAnd</string>
+	<string name="offline_maps_and_navigation">離線地圖\n和導航</string>
+</resources>
