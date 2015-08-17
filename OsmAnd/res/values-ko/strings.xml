@@ -490,7 +490,7 @@
 	<string name="fast_route_mode">가장 빠른 경로</string>
 	<string name="fast_route_mode_descr">"가장 빠른 경로를 활성화하거나 or 가장 짧은 경로를 비활성화합니다 "</string>
 	<string name="tiles_to_download_estimated_size">줌에서 {0} 다운로드 {1} 타일 ({2} MB)</string>
-	<string name="context_menu_item_download_map">맵 다운로드</string>
+	<string name="shared_string_download_map">맵 다운로드</string>
 	<string name="select_max_zoom_preload_area">가시 영역을 미리 로드하기 위한 최대 줌 선택</string>
 	<string name="maps_could_not_be_downloaded">맵을 다운로드할 수 없습니다</string>
 	

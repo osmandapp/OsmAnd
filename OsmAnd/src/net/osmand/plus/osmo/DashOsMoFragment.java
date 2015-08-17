@@ -1,23 +1,5 @@
 package net.osmand.plus.osmo;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
-
-import net.osmand.Location;
-import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
-import net.osmand.plus.IconsCache;
-import net.osmand.plus.NavigationService;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.dashboard.DashLocationFragment;
-import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
-import net.osmand.util.MapUtils;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -32,6 +14,25 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import net.osmand.Location;
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
+import net.osmand.plus.IconsCache;
+import net.osmand.plus.NavigationService;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.dashboard.DashLocationFragment;
+import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
+import net.osmand.util.MapUtils;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by Denis
@@ -53,7 +54,7 @@ public class DashOsMoFragment extends DashLocationFragment implements OsMoGroups
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		plugin = OsmandPlugin.getEnabledPlugin(OsMoPlugin.class);
 
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_osmo_fragment, container, false);

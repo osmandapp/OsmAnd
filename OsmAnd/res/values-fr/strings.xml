@@ -399,7 +399,7 @@
   <string name="fast_route_mode">Itinéraire le plus rapide</string>
   <string name="fast_route_mode_descr">"Activer pour calculer l\'itinéraire le plus rapide et désactiver pour calculer l\'itinéraire le plus court "</string>
   <string name="tiles_to_download_estimated_size">Le zoom {0} télécharge {1} carreaux ({2} Mb )</string>
-  <string name="context_menu_item_download_map">Télécharger la carte</string>
+  <string name="shared_string_download_map">Télécharger la carte</string>
   <string name="select_max_zoom_preload_area">Sélectionnez le zoom maximum pour précharger la zone visible</string>
   <string name="maps_could_not_be_downloaded">Impossible de télécharger cette carte</string>
   <string name="continuous_rendering">Affichage continu</string>

@@ -1905,7 +1905,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="fast_route_mode">Fastest route</string>
 	<string name="fast_route_mode_descr">Enable to calculate fastest route or disable for shortest route </string>
 	<string name="tiles_to_download_estimated_size">At zoom {0} download {1} tiles ({2} MB)</string>
-	<string name="context_menu_item_download_map">Download map</string>
+	<string name="shared_string_download_map">Download map</string>
 	<string name="select_max_zoom_preload_area">Select maximum zoom to preload</string>
 	<string name="maps_could_not_be_downloaded">This map could not be downloaded</string>
 	<string name="continuous_rendering">Continuous rendering</string>
@@ -2230,4 +2230,10 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="successfully_uploaded_pattern">Successfully uploaded {0}/{1}</string>
 	<string name="try_again">Try again</string>
 	<string name="error_message_pattern">Error: {0}</string>
+	<string name="dahboard_options_dialog_title">Dashboard options</string>
+	<string name="shared_string_card_was_hidden">Card was hidden</string>
+	<string name="shared_string_undo">UNDO</string>
+	<string name="shared_string_skip">Skip</string>
+	<string name="app_name_osmand">OsmAnd</string>
+	<string name="offline_maps_and_navigation"><![CDATA[Offline Maps\n& Navigation]]></string>
 </resources>

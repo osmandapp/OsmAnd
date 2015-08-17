@@ -520,7 +520,7 @@
   <string name="fast_route_mode">Vinnigste roete</string>
   <string name="fast_route_mode_descr">"Skakel aan om vinnigste roete te bereken of skakel af vir kortste roete " </string>
   <string name="tiles_to_download_estimated_size">Teen vergroting {0} laai {1} teëls af ({2} MB)</string>
-  <string name="context_menu_item_download_map">laai kaart af</string>
+  <string name="shared_string_download_map">laai kaart af</string>
   <string name="select_max_zoom_preload_area">Kies maksimum vergroting om vooraf te laai</string>
   <string name="maps_could_not_be_downloaded">Hierdie kaart kan nie afgelaai word nie</string>
   <string name="continuous_rendering">deurlopende lewering</string>

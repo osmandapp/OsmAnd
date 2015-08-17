@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -215,6 +216,7 @@ public class GeoIntentActivity extends OsmandListActivity {
 	 * @return
 	 */
 	private MyService extract(final Uri uri) {
+		Log.v(this.getClass().toString(), "extract(" + "uri=" + uri + ")");
 		GeoPointParserUtil.GeoParsedPoint p = GeoPointParserUtil.parse(uri.toString());
 		if (p.isGeoPoint()) {
 			if (p.getLabel() != null) {

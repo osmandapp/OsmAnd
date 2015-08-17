@@ -406,7 +406,7 @@
   <string name="fast_route_mode">Ruta más rápida</string>
   <string name="fast_route_mode_descr">"Habilitar para calcular la ruta más rápida o deshabilitar para la ruta más corta "</string>
   <string name="tiles_to_download_estimated_size">En acercamiento {0} descarga {1} teselas ({2} MB)</string>
-  <string name="context_menu_item_download_map">Descargar mapa</string>
+  <string name="shared_string_download_map">Descargar mapa</string>
   <string name="select_max_zoom_preload_area">Seleccione el acercamiento máximo para precargar</string>
   <string name="maps_could_not_be_downloaded">Este mapa no se pudo descargar</string>
   <string name="continuous_rendering">Visualización continua</string>

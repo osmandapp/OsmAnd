@@ -402,7 +402,7 @@
 	<string name="fast_route_mode">Raskeste rute</string>
 	<string name="fast_route_mode_descr">Aktiver for å beregne raskeste rute eller deaktiver for korteste rute </string>
 	<string name="tiles_to_download_estimated_size">Ved zoom {0} last ned {1} fliser ({2} MB)</string>
-	<string name="context_menu_item_download_map">Last ned kart</string>
+	<string name="shared_string_download_map">Last ned kart</string>
 	<string name="renderers">Vektor-opptegning</string>
 	<string name="renderers_descr">Velg utseende på opptegningen</string>
 	<string name="website">Nettsted</string>

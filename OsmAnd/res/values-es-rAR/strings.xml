@@ -1613,7 +1613,7 @@
 	<string name="fast_route_mode">Ruta más rápida</string>
 	<string name="fast_route_mode_descr">"Active para calcular la ruta más rápida o desactive para la más corta "</string>
 	<string name="tiles_to_download_estimated_size">En la ampliación {0}, descarga {1} teselas ({2} MB)</string>
-	<string name="context_menu_item_download_map">Descargar mapa</string>
+	<string name="shared_string_download_map">Descargar mapa</string>
 	<string name="select_max_zoom_preload_area">Elige la ampliación máxima para precargar</string>
 	<string name="maps_could_not_be_downloaded">No se pudo descargar el mapa</string>
 	<string name="continuous_rendering">Visualización continua</string>

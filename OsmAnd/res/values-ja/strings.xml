@@ -218,7 +218,7 @@ MB)をダウンロードしますか?</string>
      <string name="fast_route_mode_descr">"有効化なら目的地までの最速ルートで計算、無効化なら最短ルートで計算 "</string>
      <string name="tiles_to_download_estimated_size">ズームレベル {0}で
 {1} 件のタイル({2} MB)をダウンロード</string>
-     <string name="context_menu_item_download_map">マップをダウンロード</string>
+     <string name="shared_string_download_map">マップをダウンロード</string>
      <string name="select_max_zoom_preload_area">プリロードする最大ズームを選択</string>
      <string name="maps_could_not_be_downloaded">このマップはダウンロードできませんでした</string>
 

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dashboard_background">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/openHoursTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:text="Open hours"
+            android:textColor="@color/color_black"/>
+
+        <TextView
+            android:id="@+id/contactInfoTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/openHoursTextView"
+            android:layout_marginLeft="16dp"
+            android:text="Contact info"
+            android:textColor="@color/color_black"/>
+
+        <ImageView
+            android:id="@+id/streetImageView"
+            style="@style/edit_poi_imageview_style"
+            android:layout_below="@id/contactInfoTextView"
+            tools:src="@drawable/ic_action_street_name"/>
+
+        <EditText
+            android:id="@+id/streetEditText"
+            style="@style/create_poi_text_field"
+            android:layout_below="@id/contactInfoTextView"
+            android:hint="Street"
+            android:inputType="text"/>
+
+        <ImageView
+            android:id="@+id/houseNumberImageView"
+            style="@style/edit_poi_imageview_style"
+            android:layout_below="@id/streetEditText"
+            tools:src="@drawable/ic_action_building_number"/>
+
+        <EditText
+            android:id="@+id/houseNumberEditText"
+            style="@style/create_poi_text_field"
+            android:layout_below="@id/streetEditText"
+            android:hint="35"
+            android:inputType="text"/>
+
+        <ImageView
+            android:id="@+id/phoneImageView"
+            style="@style/edit_poi_imageview_style"
+            android:layout_below="@id/houseNumberEditText"
+            tools:src="@drawable/ic_action_call_dark"/>
+
+        <EditText
+            android:id="@+id/phoneEditText"
+            style="@style/create_poi_text_field"
+            android:layout_below="@id/houseNumberEditText"
+            android:hint="Phone"
+            android:inputType="phone"/>
+
+        <ImageView
+            android:id="@+id/webSiteImageView"
+            style="@style/edit_poi_imageview_style"
+            android:layout_below="@id/phoneEditText"
+            tools:src="@drawable/ic_world_globe_dark"/>
+
+        <EditText
+            android:id="@+id/webSiteEditText"
+            style="@style/create_poi_text_field"
+            android:layout_below="@id/phoneEditText"
+            android:hint="Web site"
+            android:inputType="textUri"/>
+
+        <ImageView
+            android:id="@+id/descriptionImageView"
+            style="@style/edit_poi_imageview_style"
+            android:layout_below="@id/webSiteEditText"
+            tools:src="@drawable/ic_action_description"/>
+
+        <EditText
+            android:id="@+id/descriptionEditText"
+            style="@style/create_poi_text_field"
+            android:layout_width="match_parent"
+            android:layout_below="@id/webSiteEditText"
+            android:hint="Description"
+            android:inputType="textMultiLine"/>
+
+        <View
+            android:id="@+id/buttonDivider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/descriptionEditText"
+            android:background="@color/divider_color"/>
+
+        <Button
+            android:id="@+id/saveButton"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/buttonDivider"
+            tools:text="Save"
+            android:textColor="@color/dashboard_general_button_text_light"/>
+
+        <Button
+            android:id="@+id/cancelButton"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/buttonDivider"
+            android:layout_toLeftOf="@id/saveButton"
+            android:text="Cancel"
+            android:textColor="@color/dashboard_general_button_text_light"/>
+
+    </RelativeLayout>
+</android.support.v4.widget.NestedScrollView>

@@ -33,7 +33,7 @@ public class DashOsmEditsFragment extends DashBaseFragment {
 	OsmEditingPlugin plugin;
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		plugin = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class);
 
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_common_fragment, container, false);

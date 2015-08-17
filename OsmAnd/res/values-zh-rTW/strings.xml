@@ -628,7 +628,7 @@
 	<string name="fast_route_mode">最快路線</string>
 	<string name="fast_route_mode_descr">啟用為預估最快的路線而停用則為最短的路線 </string>
 	<string name="tiles_to_download_estimated_size">在縮放第{0}級別，下載{1}張地圖圖磚({2} MB)</string>
-	<string name="context_menu_item_download_map">下載地圖</string>
+	<string name="shared_string_download_map">下載地圖</string>
 	<string name="select_max_zoom_preload_area">選擇要預載的最大縮放級別</string>
 	<string name="maps_could_not_be_downloaded">此地圖無法下載</string>
 	<string name="continuous_rendering">連續繪製</string>

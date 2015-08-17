@@ -1,33 +1,6 @@
 package net.osmand.plus.activities;
 
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
-
-import net.osmand.IProgress;
-import net.osmand.IndexConstants;
-import net.osmand.access.AccessibleToast;
-import net.osmand.osm.io.NetworkUtils;
-import net.osmand.plus.ApplicationMode;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.OsmandSettings.DrivingRegion;
-import net.osmand.plus.OsmandSettings.MetricsConstants;
-import net.osmand.plus.R;
-import net.osmand.plus.Version;
-import net.osmand.plus.dashboard.DashChooseAppDirFragment;
-import net.osmand.plus.dashboard.DashChooseAppDirFragment.ChooseAppDirFragment;
-import net.osmand.plus.dashboard.DashChooseAppDirFragment.MoveFilesToDifferentDirectory;
-import net.osmand.plus.dialogs.ConfigureMapMenu;
-import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.download.DownloadActivityType;
-import net.osmand.plus.helpers.FileNameTranslationHelper;
-import net.osmand.plus.render.NativeOsmandLibrary;
-import net.osmand.plus.voice.CommandPlayer;
-import net.osmand.render.RenderingRulesStorage;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
@@ -51,6 +24,34 @@ import android.preference.PreferenceScreen;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import net.osmand.IProgress;
+import net.osmand.IndexConstants;
+import net.osmand.access.AccessibleToast;
+import net.osmand.osm.io.NetworkUtils;
+import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.DrivingRegion;
+import net.osmand.plus.OsmandSettings.MetricsConstants;
+import net.osmand.plus.R;
+import net.osmand.plus.Version;
+import net.osmand.plus.dashboard.DashChooseAppDirFragment;
+import net.osmand.plus.dashboard.DashChooseAppDirFragment.ChooseAppDirFragment;
+import net.osmand.plus.dashboard.DashChooseAppDirFragment.MoveFilesToDifferentDirectory;
+import net.osmand.plus.dialogs.ConfigureMapMenu;
+import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.download.DownloadActivityType;
+import net.osmand.plus.helpers.FileNameTranslationHelper;
+import net.osmand.plus.render.NativeOsmandLibrary;
+import net.osmand.plus.voice.CommandPlayer;
+import net.osmand.render.RenderingRulesStorage;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
 
 
 public class SettingsGeneralActivity extends SettingsBaseActivity {
@@ -339,7 +340,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 	private void showAppDirDialogV19() {
 		Builder bld = new AlertDialog.Builder(this);
 		ChooseAppDirFragment frg = new DashChooseAppDirFragment.ChooseAppDirFragment(this, (Dialog) null);
-		bld.setView(frg.initView(getLayoutInflater(), null));
+		bld.setView(frg.initView(getLayoutInflater(), null, null));
 		AlertDialog dlg = bld.show();
 		frg.setDialog(dlg);
 	}

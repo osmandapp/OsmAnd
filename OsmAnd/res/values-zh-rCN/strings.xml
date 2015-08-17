@@ -766,7 +766,7 @@
 	<string name="shared_string_select_all">全部选中</string>
 	<string name="fast_route_mode">最快路线</string>
 	<string name="fast_route_mode_descr">打开则规划最快路线，关闭则计算最短路线 </string>
-	<string name="context_menu_item_download_map">下载地图</string>
+	<string name="shared_string_download_map">下载地图</string>
 	<string name="maps_could_not_be_downloaded">此地图无法下载</string>
 	<string name="rendering_exception">渲染选中区域时发生错误</string>
 	<string name="show_point_options">使用位置 …</string>
