@@ -916,7 +916,7 @@
 	<string name="fast_route_mode">Найхутчэйшы шлях</string>
 	<string name="fast_route_mode_descr">Пазначыць каб разьлічваць найхутчэйшы шлях, ці зьняць пазнаку для найкарацейшага шляху </string>
 	<string name="tiles_to_download_estimated_size">На маштабе {0} сьцягнуць {1} фрагмэнтаў ({2} МБ)</string>
-	<string name="context_menu_item_download_map">Сьцягнуць мапу</string>
+	<string name="shared_string_download_map">Сьцягнуць мапу</string>
 	<string name="select_max_zoom_preload_area">Выберыце максімальнае павелічэньне для папярэдняй загрузкі</string>
 	<string name="maps_could_not_be_downloaded">Гэтую мапу нельга сьцягнуць</string>
 	<string name="continuous_rendering">Бесперапынная адмалёўка</string>

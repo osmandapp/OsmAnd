@@ -1,11 +1,5 @@
 package net.osmand.plus.development;
 
-import net.osmand.plus.OsmAndLocationProvider;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.dashboard.DashBaseFragment;
-import net.osmand.plus.helpers.FontCache;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -17,8 +11,11 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-/**
- */
+import net.osmand.plus.OsmAndLocationProvider;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.dashboard.DashBaseFragment;
+
 public class DashSimulateFragment extends DashBaseFragment {
 
 	public static final String TAG = "DASH_SIMULATE_FRAGMENT";
@@ -36,7 +33,7 @@ public class DashSimulateFragment extends DashBaseFragment {
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+	public View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_common_fragment, container, false);
 		TextView header = (TextView) view.findViewById(R.id.fav_text);
 		header.setText(R.string.simulate_your_location);
@@ -62,5 +59,4 @@ public class DashSimulateFragment extends DashBaseFragment {
 
 		return view;
 	}
-
 }

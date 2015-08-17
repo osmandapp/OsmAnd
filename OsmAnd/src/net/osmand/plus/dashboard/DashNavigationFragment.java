@@ -1,13 +1,5 @@
 package net.osmand.plus.dashboard;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper.TargetPoint;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.ShowRouteInfoActivity;
-import net.osmand.plus.routing.RoutingHelper;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -21,14 +13,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.ShowRouteInfoActivity;
+import net.osmand.plus.routing.RoutingHelper;
+
 /**
  */
 public class DashNavigationFragment extends DashBaseFragment {
 	public static final String TAG = "DASH_NAVIGATION_FRAGMENT";
-	List<TargetPoint> points = new ArrayList<TargetPoint>();
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+	public View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_common_fragment, container, false);
 		((TextView) view.findViewById(R.id.fav_text)).setText(R.string.current_route);
 		((TextView)view.findViewById(R.id.show_all)).setText(R.string.info_button);

@@ -657,7 +657,7 @@
 	<string name="shared_string_select_all">انتخاب همه</string>
 	<string name="fast_route_mode">سریعترین مسیر</string>
 	<string name="fast_route_mode_descr">فعال کنید تا مسیر سریعتر محاسبه شود یا غیرفعال کنید تا مسیر کوتاهتر محاسبه شود </string>
-	<string name="context_menu_item_download_map">دانلود نقشه</string>
+	<string name="shared_string_download_map">دانلود نقشه</string>
 	<string name="select_max_zoom_preload_area">انتخاب حداکثر میزان بزرگنمایی برای پیش فرض</string>
 	<string name="show_point_options">استفاده از مکان به عنوان…</string>
 	

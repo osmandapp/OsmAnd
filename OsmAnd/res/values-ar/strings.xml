@@ -1901,7 +1901,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="daynight_mode_night">ليل</string>
 	<string name="daynight_mode_auto">الشروق/الغروب</string>
 	<string name="daynight_mode_sensor">مستشعر الضوء</string>
-	<string name="context_menu_item_download_map">تحميل الخريطة</string>
+	<string name="shared_string_download_map">تحميل الخريطة</string>
 	<string name="select_max_zoom_preload_area">حدد أقصى تقريب للتحميل المسبق</string>
 	<string name="maps_could_not_be_downloaded">لم يمكن تحميل هذه الخريطة</string>
 	<string name="download_type_to_filter">اكتب للتصفية</string>

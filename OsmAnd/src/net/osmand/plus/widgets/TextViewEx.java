@@ -4,12 +4,12 @@ import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Canvas;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.support.v7.internal.text.AllCapsTransformationMethod;
 import android.util.AttributeSet;
 import android.widget.TextView;
+
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.FontCache;
 
@@ -66,8 +66,9 @@ public class TextViewEx extends TextView {
 
 		String typefaceName = resolvedAttributes.getString(R.styleable.TextViewEx_typeface);
 		Typeface typeface = FontCache.getFont(target.getContext(), typefaceName);
+		int style = target.getTypeface() == null ? 0 : target.getTypeface().getStyle();
 		if (typeface != null)
-			target.setTypeface(typeface);
+			target.setTypeface(typeface, style);
 	}
 
 	public static void setAllCapsCompat(TextView target, boolean allCaps) {

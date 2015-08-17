@@ -48,6 +48,30 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import net.osmand.access.AccessibleToast;
+import net.osmand.data.PointDescription;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.ProgressImplementation;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.ActionBarProgressActivity;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.OsmAndListFragment;
+import net.osmand.plus.activities.OsmandActionBarActivity;
+import net.osmand.plus.dialogs.DirectionsDialogs;
+import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.myplaces.FavoritesActivity;
+
+import org.xmlpull.v1.XmlSerializer;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 /**
  * Created by Denis
  * on 06.03.2015.

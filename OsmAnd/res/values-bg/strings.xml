@@ -1171,7 +1171,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="fast_route_mode">Най-бърз маршрут</string>
 	<string name="fast_route_mode_descr">Отметнете за изчисляване на най-бърз маршрут. Ако няма отметка се изчислява най-къс маршрут. </string>
 	<string name="tiles_to_download_estimated_size">При мащаб {0} свалете {1} плочки ({2} MB)</string>
-	<string name="context_menu_item_download_map">Сваляне на карта</string>
+	<string name="shared_string_download_map">Сваляне на карта</string>
 	<string name="select_max_zoom_preload_area">Изберете максималният мащаб</string>
 	<string name="maps_could_not_be_downloaded">Тази карта не може да бъде свалена</string>
 	<string name="continuous_rendering">Непрекъснато изчертаване</string>

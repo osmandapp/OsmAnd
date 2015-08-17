@@ -8,7 +8,6 @@ apply plugin: 'com.android.application'
 // APP_EDITION - date stamp of builds
 // APP_FEATURES - features +play_market +gps_status -parking_plugin -blackberry -free_version -amazon
 
-
 // 1. To be done Filter fonts
 // <unzip src="OsmAndCore_android.aar" dest=".">
 //            <patternset>
@@ -39,7 +38,7 @@ android {
 	}
 
 	defaultConfig {
-		minSdkVersion 9
+		minSdkVersion 14
 		targetSdkVersion 21
 
 		versionCode System.getenv("APK_NUMBER_VERSION") ? System.getenv("APK_NUMBER_VERSION").toInteger() : versionCode
@@ -209,13 +208,13 @@ task collectRoutingResources(type: Sync) {
 }
 
 task collectMiscResources(type: Copy) {
-	into "src/net/osmand/osm"
-	from("../../resources/obf_creation") {
-		include "rendering_types.xml"
-	}
-	from("../../resources/poi") {
-		include "poi_types.xml"
-	}
+    into "src/net/osmand/osm"
+    from("../../resources/obf_creation") {
+        include "rendering_types.xml"
+    }
+    from("../../resources/poi") {
+        include "poi_types.xml"
+    }
 }
 
 task collectRenderingStylesResources(type: Sync) {
@@ -301,7 +300,9 @@ repositories {
 
 dependencies {
 	compile project(path: ":OsmAnd-java", configuration: "android")
-    compile project(":eclipse-compile:appcompat")
+	compile project(":eclipse-compile:design")
+	compile project(":cardview")
+//	compile project(":recyclerview")
 	compile fileTree(
 			dir: "libs",
 			include: ["*.jar"],
@@ -311,11 +312,12 @@ dependencies {
 					"OsmAndCore_android.jar",
 					"OsmAndCore_wrapper.jar"])
 	// compile "com.github.ksoichiro:android-observablescrollview:1.5.0"
-	// compile "com.android.support:appcompat-v7:21.0.3"
+//	 compile "com.android.support:appcompat-v7:22.2.1"
 	// compile "com.github.shell-software:fab:1.0.5"
 	legacyCompile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@jar"
 	qtcoredebugCompile "net.osmand:OsmAndCore_androidNativeDebug:0.1-SNAPSHOT@aar"
 	qtcoredebugCompile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"
 	qtcoreCompile "net.osmand:OsmAndCore_androidNativeRelease:0.1-SNAPSHOT@aar"
 	qtcoreCompile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"
+//	compile 'com.android.support:design:22.2.1'
 }

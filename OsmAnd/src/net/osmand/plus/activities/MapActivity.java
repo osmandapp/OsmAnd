@@ -1,12 +1,30 @@
 package net.osmand.plus.activities;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import android.app.Dialog;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.media.AudioManager;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v4.app.NotificationCompat.Builder;
+import android.support.v7.app.NotificationCompat;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewStub;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import net.osmand.Location;
 import net.osmand.StateChangedListener;
@@ -26,6 +44,7 @@ import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.BusyIndicator;
+import net.osmand.plus.FirstUsageFragment;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -53,31 +72,14 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
-import android.app.Dialog;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
-import android.media.AudioManager;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Build;
-import android.os.Bundle;
-import android.os.Environment;
-import android.os.Handler;
-import android.os.Message;
-import android.support.v4.app.NotificationCompat.Builder;
-import android.support.v7.app.NotificationCompat;
-import android.view.KeyEvent;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewStub;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class MapActivity extends AccessibleActivity {
 
@@ -210,6 +212,12 @@ public class MapActivity extends AccessibleActivity {
 			System.err.println("OnCreate for MapActivity took " + (System.currentTimeMillis() - tm) + " ms");
 		}
 		mapView.refreshMap(true);
+
+		if(getMyApplication().getAppInitializer().isFirstTime(this)) {
+			getSupportFragmentManager().beginTransaction()
+					.add(R.id.fragmentContainer, new FirstUsageFragment(),
+							FirstUsageFragment.TAG).commit();
+		}
 	}
 
 	private void checkAppInitialization() {

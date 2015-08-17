@@ -3,6 +3,7 @@ package net.osmand.plus.osmedit;
 import android.content.Context;
 import android.util.Xml;
 import android.widget.Toast;
+
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;

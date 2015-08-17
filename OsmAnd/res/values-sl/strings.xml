@@ -825,7 +825,7 @@
 	<string name="shared_string_select_all">Izberi vse</string>
 	<string name="shared_string_refresh">Osveži</string>
 	<string name="tiles_to_download_estimated_size">Pri povečavi {0} prejmi {1} ploščic ({2} MB)</string>
-	<string name="context_menu_item_download_map">Prejem zemljevida</string>
+	<string name="shared_string_download_map">Prejem zemljevida</string>
 	<string name="select_max_zoom_preload_area">Izberite največjo povečavo za predhodno nalaganje</string>
 	<string name="maps_could_not_be_downloaded">Tega zemljevida ni mogoče prejeti</string>
 	<string name="continuous_rendering">Stalno izrisovanje</string>

@@ -194,9 +194,7 @@
     <style name="Widget.AppCompat.SearchView" parent="Base.Widget.AppCompat.SearchView" />
     <style name="Widget.AppCompat.SearchView.ActionBar" parent="Base.Widget.AppCompat.SearchView.ActionBar" />
 
-    <style name="Widget.AppCompat.EditText"
-           parent="Base.Widget.AppCompat.EditText">
-    </style>
+    <style name="Widget.AppCompat.EditText" parent="Base.Widget.AppCompat.EditText"/>
 
     <style name="Widget.AppCompat.CompoundButton.Switch" parent="Base.Widget.AppCompat.CompoundButton.Switch" />
 

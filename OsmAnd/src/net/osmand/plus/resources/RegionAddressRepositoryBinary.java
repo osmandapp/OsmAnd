@@ -158,6 +158,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	public synchronized List<MapObject> searchMapObjectsByName(String name, ResultMatcher<MapObject> resultMatcher) {
 		SearchRequest<MapObject> req = BinaryMapIndexReader.buildAddressByNameRequest(resultMatcher, name);
 		try {
+			log.debug("file=" + file + "; req=" + req);
 			file.searchAddressDataByName(req);
 		} catch (IOException e) {
 			log.error("Disk operation failed", e); //$NON-NLS-1$

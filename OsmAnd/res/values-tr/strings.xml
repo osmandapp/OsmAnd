@@ -393,7 +393,7 @@
 	<string name="shared_string_select_all">Hepsini seç</string>
 	<string name="shared_string_refresh">Yenile</string>
 	<string name="fast_route_mode">En hızlı rota</string>
-	<string name="context_menu_item_download_map">Haritayı indir</string>
+	<string name="shared_string_download_map">Haritayı indir</string>
 	<string name="maps_could_not_be_downloaded">Bu harita indirilemedi</string>
 	<string name="phone">Telefon</string>
 	<string name="use_high_res_maps">Yüksek çözünürlüklü ekran</string>

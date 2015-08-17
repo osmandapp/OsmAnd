@@ -1,10 +1,5 @@
 package net.osmand.plus.osmedit;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URLEncoder;
-
 import net.osmand.PlatformUtil;
 import net.osmand.osm.io.Base64;
 import net.osmand.osm.io.NetworkUtils;
@@ -15,6 +10,11 @@ import net.osmand.plus.Version;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
+
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URLEncoder;
 
 public class OsmBugsRemoteUtil implements OsmBugsUtil {
 
@@ -80,16 +80,16 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 			}
 			connection.setDoInput(true);
 			if (requestMethod.equals("PUT") || requestMethod.equals("POST") || requestMethod.equals("DELETE")) { //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-			// connection.setDoOutput(true);
-			//				connection.setRequestProperty("Content-type", "text/xml"); //$NON-NLS-1$ //$NON-NLS-2$
-			// OutputStream out = connection.getOutputStream();
-			// String requestBody = null;
-			// if (requestBody != null) {
-			//					BufferedWriter bwr = new BufferedWriter(new OutputStreamWriter(out, "UTF-8"), 1024); //$NON-NLS-1$
-			// bwr.write(requestBody);
-			// bwr.flush();
-			// }
-			// out.close();
+				// connection.setDoOutput(true);
+				//				connection.setRequestProperty("Content-type", "text/xml"); //$NON-NLS-1$ //$NON-NLS-2$
+				// OutputStream out = connection.getOutputStream();
+				// String requestBody = null;
+				// if (requestBody != null) {
+				//					BufferedWriter bwr = new BufferedWriter(new OutputStreamWriter(out, "UTF-8"), 1024); //$NON-NLS-1$
+				// bwr.write(requestBody);
+				// bwr.flush();
+				// }
+				// out.close();
 			}
 			connection.connect();
 			String msg = connection.getResponseMessage();

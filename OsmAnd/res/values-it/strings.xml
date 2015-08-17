@@ -381,7 +381,7 @@
   <string name="fast_route_mode">Percorso più veloce</string>
   <string name="fast_route_mode_descr">Abilita per calcolare il percorso più veloce o disabilita per il percorso più corto </string>
   <string name="tiles_to_download_estimated_size">Per lo zoom {0} scarica {1} tasselli ({2} MB)</string>
-  <string name="context_menu_item_download_map">Download mappa</string>
+  <string name="shared_string_download_map">Download mappa</string>
   <string name="select_max_zoom_preload_area">Seleziona lo zoom massimo da precaricare</string>
   <string name="maps_could_not_be_downloaded">Non è stato possibile scaricare questa mappa</string>
   <string name="continuous_rendering">Disegno continuo</string>

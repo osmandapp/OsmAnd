@@ -1,17 +1,5 @@
 package net.osmand.plus.dashboard;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
-import net.osmand.plus.R;
-import net.osmand.plus.base.BasicProgressAsyncTask;
-import net.osmand.plus.download.BaseDownloadActivity;
-import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.helpers.DatabaseHelper;
-import net.osmand.plus.helpers.FontCache;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
@@ -26,6 +14,19 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import net.osmand.plus.R;
+import net.osmand.plus.base.BasicProgressAsyncTask;
+import net.osmand.plus.download.BaseDownloadActivity;
+import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.helpers.DatabaseHelper;
+import net.osmand.plus.helpers.FontCache;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 /**
  * Created by Denis on 21.11.2014.
@@ -42,7 +43,7 @@ public class DashUpdatesFragment extends DashBaseFragment {
 	private ImageButton cancelButton;
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+	public View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_updates_fragment, container, false);
 		Typeface typeface = FontCache.getRobotoMedium(getActivity());
 		((TextView) view.findViewById(R.id.header)).setTypeface(typeface);

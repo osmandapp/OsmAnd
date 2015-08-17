@@ -459,7 +459,7 @@
   <string name="fast_route_mode">Nejrychlejší trasa</string>
   <string name="fast_route_mode_descr">Zapněte pro výpočet nejrychlejší trasy, vypněte, pokud chcete hledat tu nejkratší </string>
   <string name="tiles_to_download_estimated_size">Pro zvětšení {0} je třeba stáhnout {1} mapových dlaždic, celkem {2} MB</string>
-  <string name="context_menu_item_download_map">Stáhnout mapu</string>
+  <string name="shared_string_download_map">Stáhnout mapu</string>
   <string name="select_max_zoom_preload_area">Vyberte maximální zvětšení stahovaných map</string>
   <string name="maps_could_not_be_downloaded">Tuto mapu nelze stáhnout</string>
   <string name="continuous_rendering">Průběžné vykreslování</string>
