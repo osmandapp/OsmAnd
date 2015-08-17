@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="offline_navigation_not_available">OsmAnd-ით ნავიგაცია გათიშულ რეჟიმში დროებით მიუწვდომელია.</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="offline_navigation_not_available">OsmAnd-ით ნავიგაცია გათიშულ რეჟიმში დროებით მიუწვდომელია.</string>
   <string name="left_side_navigation">მარცხენა ხელით ტარება</string>
   <string name="left_side_navigation_descr">აირჩიეთ მარცხენა მხარეს საჭის გამომყენებელი ქვეყნებისათვის</string>
   
@@ -20,7 +21,7 @@
   <string name="online_map_settings_descr">მიმდინარე და დაქეშირებული ნაწილოვანი რუკების წყაროების გამართვა</string>
   
   
-  <string name="osmand_rastermaps_plugin_description">დამატება ამსუბუქებს სხვადასხვა მიმდინარე ან ქეშირებულ ნაწილოვან რუკებს. ისინი შეიძლება მომზადდეს როგორც გათიშული რუკები და შეინახოს OsmAnd-ის დასტაში.</string>
+  <string name="osmand_rastermaps_plugin_description">"დამატება ამსუბუქებს სხვადასხვა მიმდინარე ან ქეშირებულ ნაწილოვან რუკებს. ისინი შეიძლება მომზადდეს როგორც გათიშული რუკები და შეინახოს OsmAnd-ის დასტაში. "</string>
   <string name="osmand_background_plugin_description">დამატება გაძლევთ საშუალებს დევნის ან ნავიგაციის მოწყობილობის ძილის დროს პერიოდულად GPS ჩიპის გააქტიურების საშუალებით.</string>
   <string name="osmand_accessibility_description">დამატება მართავს სპეციალური წვდომის შესაძლებლობებს.</string>
   
@@ -29,7 +30,7 @@
   <string name="osmand_development_plugin_description">დამატება გაძლევთ საშუალებას განახორციელოთ შეცდომების კონტროლი და განვითარება მახასიათებლებისა როგორიცაა ანიმირებული ნავიგაცია.</string>
   <string name="plugins_screen">დამატებათა გამმართველი</string>
   
-  <string name="prefs_plugins_descr">დამატება გაძლევთ საშუალებას გამოიყენოთ აპლიკაციისათვის თანმოყოლილი ფუნქციები როგორიცაა ნაწილოვანი რუკები, თვალის დევნება, ძილის დროის ოპერაციები და სხვა.</string>
+  <string name="prefs_plugins_descr">დამატება გაძლევთ საშუალებას გამოიყენოთ აპლიკაციისათვის თანმოყოლილი ფუნქციები როგორიცაა ნაწილოვანი რუკები, თვალის დევნება, ძილის დროის ოპერაციები და სხვა</string>
   <string name="prefs_plugins">დამატების მმართველი</string>
   <string name="tip_recent_changes_0_8_0_t">"ცვლილებები 0.8.0-ში :
 \n\t- დამატების შესაძლებლობები\n\t- რუკის გათიშულ რეჟიმში გამოყენების ახალი ფორმატი\n\t- გამოსწორებულია ბევრი შეცდომა "</string>
@@ -186,7 +187,8 @@
   <string name="tip_day_night_mode">დღე/ღამის არჩევა</string>
   
   <string name="tip_osm_improve">OSM-ს მონაცემების გაუმჯობესება</string>
-  <string name="tip_osm_improve_t">\tOsmAnd იყენებს რუკებს, რომლებიც ეყრდნობა Openstreetmap.org (OSM)-ის მონაცემებს და ასევე ანახლებს მათ. თქვენ ადვილად შეგიძლიათ შექმნათ POI-ები და ატვირთოთ ისინი. ასევე შესაძლებელია OSM-ის ხოჭოების შესახებ შეტყობინებების შექმნა მხოლოდ რამოდენიმე წკაპით!\n\tამისათვის საჭიროა შეიყვანოთ OSM-ის მომხმარებლის სახელი და პაროლი. \'პარამეტრები\' -&gt; \'მთავარი პარამეტრები\' -&gt; \'OSM-ის გამართვა\'. \n\tახალი POI-ის შესაქმნელად აირჩიეთ ფუნქცია \'POI-ის შექმნა\' კონტექსტურ მენიუში. ინფორმაციის შეყვანის შემდეგ დააჭირეთ \'ახალი POI-ის შექმნა\'.\n\tრუკის შეცდომები შეგიძლიათ მომენტალურად შეატყობინოთ OSM-ს. ეს დაეხმარება მათ ამ შეცდომების ჩასწორებაში.\n\tOSM-ის ხოჭოს დასამატებლად აირჩიეთ \'OSM-ის ხოჭოს რეპორტის გახსნა\' კონტექსტური მენიუდან. მონაცემების შეყვანის შემდეგ დააჭირეთ დამატების ღილაკს.\n\tშენიშვნა: OSM POI-ის დასამატებლად და ხოჭოების რეპორტის გასახსნელად საჭიროა ინტერნეტ-შეერთება.</string>
+  <string name="tip_osm_improve_t">"OsmAnd იყენებს რუკებს, რომლებიც ეყრდნობა Openstreetmap.org (OSM)-ის მონაცემებს და ასევე ანახლებს მათ. თქვენ ადვილად შეგიძლიათ შექმნათ POI-ები და ატვირთოთ ისინი. ასევე შესაძლებელია OSM-ის ხოჭოების შესახებ შეტყობინებების შექმნა მხოლოდ რამოდენიმე წკაპით!\n\tამისათვის საჭიროა შეიყვანოთ OSM-ის მომხმარებლის სახელი და პაროლი. \'პარამეტრები\' -&gt; \'მთავარი პარამეტრები\' -&gt; \'OSM-ის გამართვა\'.
+\n\tახალი POI-ის შესაქმნელად აირჩიეთ ფუნქცია \'POI-ის შექმნა\' კონტექსტურ მენიუში. ინფორმაციის შეყვანის შემდეგ დააჭირეთ \'ახალი POI-ის შექმნა\'.\n\tრუკის შეცდომები შეგიძლიათ მომენტალურად შეატყობინოთ OSM-ს. ეს დაეხმარება მათ ამ შეცდომების ჩასწორებაში.\n\tOSM-ის ხოჭოს დასამატებლად აირჩიეთ \'OSM-ის ხოჭოს რეპორტის გახსნა\' კონტექსტური მენიუდან. მონაცემების შეყვანის შემდეგ დააჭირეთ დამატების ღილაკს.\n\tშენიშვნა: OSM POI-ის დასამატებლად და ხოჭოების რეპორტის გასახსნელად საჭიროა ინტერნეტ-შეერთება "</string>
   <string name="download_files_not_enough_space">არასაკმარისი ადგილი %1$s მბ-ის გადმოსაწერად (თავისუფალია: %2$s).</string>
   <string name="download_files_question_space">თავისუფალი ადგილი {2} მბ! გადმოვწერო {0} ფაილი ზომით ({1} მბ)?</string>
   
@@ -1037,7 +1039,7 @@
     <string name="map_widget_av_notes">ხმოვანი/ვიდეო შენიშვნები</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd-ის დამატება გათიშული კონტურული ხაზებისათვის</string>
     
-    <string name="osmand_srtm_long_description_1000_chars">ეს დამატება უზრუნველყოფს კონტურულ ხაზებს, რომლებიც შეიძლება ნაჩვენები იქნას OsmAnd-ის გათიშულ რუკებზე. გლობალური მონაცემები (70 გრადუს ჩრდილოეთსა და 70 გრადუს სამხრეთს შორის) ემყარება SRTM (Shuttle Radar Topography Mission) და ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer)-ის მონაცემებს, რომელიც წარმოადგენს ფოტოკამერას Terra-ზე, NASA-ს წამყვან თანამგზავრზე, რომელიც ემსახურება დედამიწის დათვალიერების სისტემას. ASTER წარმოადგენს ერთობლივ პროექტს NASA-ს, იაპონიის ეკონომიკის სამინისტროს, ვაჭრობისა და ინდუსტრიის (METI), და იაპონიის კოსმოსურ სისტემებს (J-spacesystems) შორის.</string>
+    <string name="osmand_srtm_long_description_1000_chars">"ეს დამატება უზრუნველყოფს კონტურულ ხაზებს, რომლებიც შეიძლება ნაჩვენები იქნას OsmAnd-ის გათიშულ რუკებზე. გლობალური მონაცემები (70 გრადუს ჩრდილოეთსა და 70 გრადუს სამხრეთს შორის) ემყარება SRTM (Shuttle Radar Topography Mission) და ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer)-ის მონაცემებს, რომელიც წარმოადგენს ფოტოკამერას Terra-ზე, NASA-ს წამყვან თანამგზავრზე, რომელიც ემსახურება დედამიწის დათვალიერების სისტემას. ASTER წარმოადგენს ერთობლივ პროექტს NASA-ს, იაპონიის ეკონომიკის სამინისტროს, ვაჭრობისა და ინდუსტრიის (METI), და იაპონიის კოსმოსურ სისტემებს (J-spacesystems) შორის. "</string>
     
     
     
@@ -1220,7 +1222,7 @@
     <string name="osmand_play_title_30_chars">OsmAnd რუკები &amp; ნავიგაცია</string>
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ რუკები &amp; ნავიგაცია</string>
 	<string name="support_new_features_descr">შემომწირეთ აპლიკაციაში ახალი მახასიათებლების სანახავად</string>
-	<string name="shared_string_downloading">ჩამოტვირთვა…</string>
+	<string name="shared_string_downloading">ჩამოტვირთვა</string>
 	<string name="osb_author_dialog_password">OSM პაროლი(არასავალდებულო)</string>
 	<string name="av_camera_focus">კამერის ფოკუსის ტიპი</string>
 	<string name="av_camera_focus_descr">აირჩიეთ შიდა კამერის ფოკუსის ტიპი</string>
@@ -1232,4 +1234,62 @@
 	<string name="av_camera_focus_continuous">კამერა განაგრძობს ფოკუსის დაჭერას</string>
 	<string name="av_photo_play_sound">ფოტოს გადაღებისას ხმის გამოცემა</string>
 	<string name="av_photo_play_sound_descr">აირჩიეთ ფოტოების გადაღებისას ხმის გამოსაცემად</string>
-</resources>
+<string name="traffic_warning_hazard">საშიშროება</string>
+    <string name="no_updates_available">განახლებები ნაპოვნი არაა</string>
+    <string name="download_live_updates">ცოცხალი განახლებები</string>
+	<string name="rendering_value_default13_name">ნაგულისხმევი (13)</string>
+	<string name="rendering_attr_currentTrackColor_name">GPX-ის ფერი</string>
+    <string name="rendering_attr_currentTrackWidth_name">GPX-ის სიგანე</string>
+    <string name="rendering_value_red_name">წითელი</string>
+    <string name="rendering_value_translucent_red_name">გამჭირვალე წითელი</string>
+    <string name="rendering_value_orange_name">ფორთოხლისფერი</string>
+    <string name="rendering_value_translucent_orange_name">გამჭირვალე ფორთოხლისფერი</string>
+    <string name="rendering_value_yellow_name">ყვითელი</string>
+    <string name="rendering_value_translucent_yellow_name">გამჭირვალე ყვითელი</string>
+    <string name="rendering_value_lightgreen_name">ღია მწვანე</string>
+    <string name="rendering_value_translucent_lightgreen_name">გამჭირვალე ღია მწვანე</string>
+    <string name="rendering_value_green_name">მწვანე</string>
+    <string name="rendering_value_translucent_green_name">გამჭირვალე მწვანე</string>
+    <string name="rendering_value_lightblue_name">ღია ლურჯი</string>
+    <string name="rendering_value_translucent_lightblue_name">გამჭირვალე ღია ლურჯი</string>
+    <string name="rendering_value_blue_name">ლურჯი</string>
+    <string name="rendering_value_translucent_blue_name">გამჭირვალე ლურჯი</string>
+    <string name="rendering_value_purple_name">მუქი წითელი</string>
+    <string name="rendering_value_translucent_purple_name">გამჭირვალე მუქლი წითელი</string>
+    <string name="restart_is_required">ცვლილებების ძალაში მთლიანად შესასვლელად საჭიროა ხელით გადატვირთოთ აპლიკაცია.</string>
+    <string name="light_theme">ღია</string>
+    <string name="dark_theme">მუქი</string>
+    <string name="lang_pms">პიემონტური</string>
+    <string name="lang_bn">ბენგალური</string>
+    <string name="lang_tl">ტაგალური</string>
+    <string name="lang_sh">სერბო-ხორვატიული</string>
+    <string name="lang_az">აზერბაიჯანული</string>
+    <string name="lang_br">ბრეტონული</string>
+    <string name="lang_sq">ალბანური</string>
+    <string name="lang_is">ისლანდიური</string>
+    <string name="lang_bpy">ბიშნუპრიული</string>
+    <string name="lang_nv">ნავაჯიური</string>
+    <string name="lang_ga">ირლანდიური</string>
+    <string name="lang_la">ლათინური</string>
+    <string name="lang_ku">ქურთული</string>
+    <string name="lang_ta">თამილური</string>
+    <string name="lang_ml">მალაიამური</string>
+    <string name="lang_lb">ლუქსემბურგული</string>
+    <string name="lang_os">ოსური</string>
+    <string name="lang_eo">ესპერანტო</string>
+    <string name="lang_es_ar">არგენტინული ესპანური</string>
+    <string name="lang_nb">ნორვეგიული ბოქმაალი</string>
+    <string name="lang_vo">ვოლაპუკური</string>
+    <string name="lang_th">ტაილანდური</string>
+    <string name="rendering_value_defaultTranslucentCyan_name">ნაგულისხმევი (გამჭირვალე მუქი წითელი)</string>
+    <string name="lang_te">ტელუგური</string>
+    <string name="lang_nn">ნორვეგიული (ნინორსკი)</string>
+    <string name="lang_new">ნევარული / ნეპალური ბასა</string>
+    <string name="lang_ms">მალაიზიური</string>
+    <string name="lang_ht">ჰაიტური</string>
+    <string name="lang_gl">გალიციური</string>
+    <string name="lang_et">ესტონური</string>
+    <string name="lang_ceb">ჩებუანური</string>
+    <string name="archive_wikipedia_data">თქვენ გაქვთ ძველი, შეუთავსებელი მონაცემები ვიკიპედიიდან. გნებავთ მათი დაარქივება?</string>
+    <string name="download_wikipedia_files">გნებავთ ვიკიპედიიდან დამატებითი მონაცემების ჩამოტვირთვა (%1$s მბ) ?</string>
+    </resources>
