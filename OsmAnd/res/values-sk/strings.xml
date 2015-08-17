@@ -2252,4 +2252,10 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="error_message_pattern">Chyba: {0}</string>
 <string name="traffic_warning_hazard">Nebezpečenstvo</string>
     <string name="rendering_value_boldOutline_name">Hrubý obrys</string>
-    </resources>
+    <string name="dahboard_options_dialog_title">Nastavenia úvodného panela</string>
+	<string name="shared_string_card_was_hidden">Karta bola skrytá</string>
+	<string name="shared_string_undo">KROK SPÄŤ</string>
+	<string name="shared_string_skip">Preskočiť</string>
+	<string name="app_name_osmand">OsmAnd</string>
+	<string name="offline_maps_and_navigation">Offline mapy\n&amp; Navigácia</string>
+</resources>
