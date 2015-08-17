@@ -1,4 +1,4 @@
-include ':OsmAnd-java', ':eclipse-compile:design', ':recyclerview', ":cardview"
+include ':OsmAnd-java', ':eclipse-compile:design', ':cardview'
 include ':OsmAnd'
 include ':eclipse-compile:appcompat'
 include ':plugins:OsmAnd-AddressPlugin'
