@@ -3,9 +3,9 @@ package net.osmand.plus.osmedit;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.text.Editable;
+import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
-import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,14 +17,10 @@ import android.widget.LinearLayout;
 import net.osmand.plus.R;
 import net.osmand.plus.osmedit.EditPoiFragment.Tag;
 
-import java.util.Iterator;
-
 public class AdvancedDataFragment extends Fragment {
 	private static final String TAG = "AdvancedDataFragment";
 
 	private TagAdapterLinearLayoutHack mAdapter;
-	private EditPoiFragment.EditPoiData.TagsChangedListener mTagsChangedListener;
-	private boolean mIsUserInput = true;
 
 	@Override
 	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -52,6 +48,8 @@ public class AdvancedDataFragment extends Fragment {
 		});
 		LinearLayout editTagsLineaLayout =
 				(LinearLayout) view.findViewById(R.id.editTagsList);
+		Log.v(TAG, "arguments=" + savedInstanceState + "; ll=" + editTagsLineaLayout);
+		Log.v(TAG, "not restored");
 		mAdapter = new TagAdapterLinearLayoutHack(editTagsLineaLayout, getData());
 //		setListViewHeightBasedOnChildren(editTagsLineaLayout);
 		Button addTagButton = (Button) view.findViewById(R.id.addTagButton);
@@ -78,29 +76,29 @@ public class AdvancedDataFragment extends Fragment {
 		super.onResume();
 		// TODO read more about lifecycle
 		mAdapter.updateViews();
-		mTagsChangedListener = new EditPoiFragment.EditPoiData.TagsChangedListener() {
+		getEditPoiFragment().addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 			@Override
-			public void onTagsChanged() {
-				mIsUserInput = false;
-				mAdapter.updateViews();
-				mIsUserInput = true;
+			public void onPageScrolled(int i, float v, int i1) {
 			}
-		};
-		getData().addListener(mTagsChangedListener);
-	}
 
-	@Override
-	public void onPause() {
-		super.onPause();
-		getData().deleteListener(mTagsChangedListener);
+			@Override
+			public void onPageSelected(int i) {
+				if (i == 1) mAdapter.updateViews();
+			}
+
+			@Override
+			public void onPageScrollStateChanged(int i) {
+			}
+		});
 	}
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
+		Log.v(TAG, "onSaveInstanceState(" + "outState=" + outState + ")");
 		super.onSaveInstanceState(outState);
 	}
 
-	public class TagAdapterLinearLayoutHack {
+	public static class TagAdapterLinearLayoutHack {
 		private final LinearLayout linearLayout;
 		private final EditPoiFragment.EditPoiData editPoiData;
 
@@ -113,79 +111,41 @@ public class AdvancedDataFragment extends Fragment {
 		public void addTag(Tag tag) {
 			View view = getView(tag);
 			editPoiData.tags.add(tag);
-			if (mIsUserInput)
-				editPoiData.notifyDatasetChanged(mTagsChangedListener);
 			EditText valueEditText = (EditText) view.findViewById(R.id.valueEditText);
+			Log.v(TAG, "valueEditText text=" + valueEditText.getText());
 			linearLayout.addView(view);
 		}
 
 		public void updateViews() {
 			linearLayout.removeAllViews();
-			Iterator<Tag> iterator = editPoiData.tags.iterator();
-			while (iterator.hasNext()) {
-				iterator.next();
-			}
+			Log.v(TAG, "editPoiData.tags=" + editPoiData.tags);
 			for (Tag tag : editPoiData.tags) {
+				Log.v(TAG, "tag=" + tag);
 				View view = getView(tag);
 				EditText valueEditText = (EditText) view.findViewById(R.id.valueEditText);
+				Log.v(TAG, "valueEditText text=" + valueEditText.getText());
 				linearLayout.addView(view);
 			}
 		}
 
 		private View getView(final Tag tag) {
+			Log.v(TAG, "getView(" + "tag=" + tag + ")");
 			final View convertView = LayoutInflater.from(linearLayout.getContext())
 					.inflate(R.layout.poi_tag_list_item, null, false);
-			final EditText tagEditText = (EditText) convertView.findViewById(R.id.tagEditText);
-			tagEditText.setText(tag.tag);
-			final EditText valueEditText = (EditText) convertView.findViewById(R.id.valueEditText);
+			EditText tagEditText = (EditText) convertView.findViewById(R.id.tagEditText);
+			EditText valueEditText = (EditText) convertView.findViewById(R.id.valueEditText);
 			ImageButton deleteItemImageButton =
 					(ImageButton) convertView.findViewById(R.id.deleteItemImageButton);
+			tagEditText.setText(tag.tag);
 			valueEditText.setText(tag.value);
 			deleteItemImageButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					linearLayout.removeView((View) v.getParent());
 					editPoiData.tags.remove(tag);
-					if (mIsUserInput)
-						editPoiData.notifyDatasetChanged(mTagsChangedListener);
 				}
 			});
-			tagEditText.addTextChangedListener(new TextWatcher() {
-				@Override
-				public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-				}
-
-				@Override
-				public void onTextChanged(CharSequence s, int start, int before, int count) {
-				}
-
-				@Override
-				public void afterTextChanged(Editable s) {
-					editPoiData.tags.remove(tag);
-					tag.tag = tagEditText.getText().toString();
-					editPoiData.tags.add(tag);
-					if (mIsUserInput)
-						editPoiData.notifyDatasetChanged(mTagsChangedListener);
-				}
-			});
-			valueEditText.addTextChangedListener(new TextWatcher() {
-				@Override
-				public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-				}
-
-				@Override
-				public void onTextChanged(CharSequence s, int start, int before, int count) {
-				}
-
-				@Override
-				public void afterTextChanged(Editable s) {
-					editPoiData.tags.remove(tag);
-					tag.value = valueEditText.getText().toString();
-					editPoiData.tags.add(tag);
-					if (mIsUserInput)
-						editPoiData.notifyDatasetChanged(mTagsChangedListener);
-				}
-			});
+			Log.v(TAG, "convertView=" + convertView);
 			return convertView;
 		}
 	}
