@@ -3,22 +3,34 @@ package net.osmand.plus.osmedit;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 
+import net.osmand.osm.edit.OSMSettings;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.osmedit.EditPoiFragment.Tag;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class NormalDataFragment extends Fragment {
+	private static final String TAG = "NormalDataFragment";
+	private EditText streetEditText;
+	private EditText houseNumberEditText;
+	private EditText phoneEditText;
+	private EditText webSiteEditText;
+	private EditText descriptionEditText;
+	private EditPoiFragment.EditPoiData.TagsChangedListener mTagsChangedListener;
+	private boolean mIsUserInput = true;
+
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -36,39 +48,79 @@ public class NormalDataFragment extends Fragment {
 		ImageView descriptionImageView = (ImageView) view.findViewById(R.id.descriptionImageView);
 		descriptionImageView.setImageDrawable(iconsCache.getContentIcon(R.drawable.ic_action_description));
 
-		// TODO replace with constants
-		final TextView streetEditText = (TextView) view.findViewById(R.id.streetEditText);
-		streetEditText.setOnFocusChangeListener(new MyOnFocusChangeListener(getData(), "addr:street"));
-		final TextView houseNumberEditText = (TextView) view.findViewById(R.id.houseNumberEditText);
-		houseNumberEditText.setOnFocusChangeListener(new MyOnFocusChangeListener(getData(), "addr:housenumber"));
-		final TextView phoneEditText = (TextView) view.findViewById(R.id.phoneEditText);
-		phoneEditText.setOnFocusChangeListener(new MyOnFocusChangeListener(getData(), "phone"));
-		final TextView webSiteEditText = (TextView) view.findViewById(R.id.webSiteEditText);
-		webSiteEditText.setOnFocusChangeListener(new MyOnFocusChangeListener(getData(), "website"));
-		final TextView descriptionEditText = (TextView) view.findViewById(R.id.descriptionEditText);
-		descriptionEditText.setOnFocusChangeListener(new MyOnFocusChangeListener(getData(), "description"));
-
-		Button saveButton = (Button) view.findViewById(R.id.saveButton);
-		int saveButtonTextId = //getData().isLocalEdit ? R.string.shared_string_save :
-				R.string.default_buttons_commit;
-		saveButton.setText(saveButtonTextId);
-		saveButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				getEditPoiFragment().send();
-			}
-		});
-		Button cancelButton = (Button) view.findViewById(R.id.cancelButton);
-		cancelButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-				Fragment editPoiFragment = getParentFragment();
-				fragmentManager.beginTransaction().remove(editPoiFragment).commit();
-				fragmentManager.popBackStack();
-			}
-		});
+		streetEditText = (EditText) view.findViewById(R.id.streetEditText);
+		streetEditText.addTextChangedListener(new MyOnFocusChangeListener(getData(),
+				OSMSettings.OSMTagKey.ADDR_STREET.getValue()));
+		houseNumberEditText = (EditText) view.findViewById(R.id.houseNumberEditText);
+		houseNumberEditText.addTextChangedListener(new MyOnFocusChangeListener(getData(),
+				OSMSettings.OSMTagKey.ADDR_HOUSE_NUMBER.getValue()));
+		phoneEditText = (EditText) view.findViewById(R.id.phoneEditText);
+		phoneEditText.addTextChangedListener(new MyOnFocusChangeListener(getData(),
+				OSMSettings.OSMTagKey.PHONE.getValue()));
+		webSiteEditText = (EditText) view.findViewById(R.id.webSiteEditText);
+		webSiteEditText.addTextChangedListener(new MyOnFocusChangeListener(getData(),
+				OSMSettings.OSMTagKey.WEBSITE.getValue()));
+		descriptionEditText = (EditText) view.findViewById(R.id.descriptionEditText);
+		descriptionEditText.addTextChangedListener(new MyOnFocusChangeListener(getData(),
+				OSMSettings.OSMTagKey.DESCRIPTION.getValue()));
 		return view;
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		mTagsChangedListener = new EditPoiFragment.EditPoiData.TagsChangedListener() {
+			@Override
+			public void onTagsChanged() {
+				TagMapProcessor tagMapProcessor = new TagMapProcessor();
+				tagMapProcessor.addFilter(OSMSettings.OSMTagKey.ADDR_STREET.getValue(),
+						streetEditText);
+				tagMapProcessor.addFilter(OSMSettings.OSMTagKey.ADDR_HOUSE_NUMBER.getValue(),
+						houseNumberEditText);
+				tagMapProcessor.addFilter(OSMSettings.OSMTagKey.PHONE.getValue(),
+						phoneEditText);
+				tagMapProcessor.addFilter(OSMSettings.OSMTagKey.WEBSITE.getValue(),
+						webSiteEditText);
+				tagMapProcessor.addFilter(OSMSettings.OSMTagKey.DESCRIPTION.getValue(),
+						descriptionEditText);
+
+				mIsUserInput = false;
+				for (Tag tag : getData().tags) {
+					tagMapProcessor.process(tag);
+				}
+				tagMapProcessor.clearEmptyFields();
+				mIsUserInput = true;
+			}
+		};
+		getData().addListener(mTagsChangedListener);
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		getData().deleteListener(mTagsChangedListener);
+	}
+
+	private static class TagMapProcessor {
+		private final Map<String, EditText> mFilters = new HashMap<>();
+
+		public void addFilter(String tag, EditText editText) {
+			mFilters.put(tag, editText);
+		}
+
+		public void process(Tag tag) {
+			if (mFilters.containsKey(tag.tag)) {
+				final EditText editText = mFilters.get(tag.tag);
+				editText.setText(tag.value);
+				mFilters.remove(tag.tag);
+			}
+		}
+
+		public void clearEmptyFields() {
+			for (String tag : mFilters.keySet()) {
+				mFilters.get(tag).setText(null);
+			}
+		}
 	}
 
 	private EditPoiFragment getEditPoiFragment() {
@@ -79,22 +131,34 @@ public class NormalDataFragment extends Fragment {
 		return getEditPoiFragment().getEditPoiData();
 	}
 
-	private static class MyOnFocusChangeListener implements View.OnFocusChangeListener {
-		private EditPoiFragment.EditPoiData data;
-		private String tagName;
+	private class MyOnFocusChangeListener implements TextWatcher {
+		private final EditPoiFragment.EditPoiData data;
+		private final String tagName;
 
-		public MyOnFocusChangeListener(EditPoiFragment.EditPoiData data, String tagName) {
+		public MyOnFocusChangeListener(EditPoiFragment.EditPoiData data,
+									   String tagName) {
 			this.data = data;
 			this.tagName = tagName;
 		}
 
 		@Override
-		public void onFocusChange(View v, boolean hasFocus) {
-			String string = ((EditText) v).getText().toString();
-			if (!TextUtils.isEmpty(string)) {
-				Tag tag = new Tag(tagName, string);
-				data.tags.remove(tag);
-				data.tags.add(tag);
+		public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+		}
+
+		@Override
+		public void onTextChanged(CharSequence s, int start, int before, int count) {
+		}
+
+		@Override
+		public void afterTextChanged(Editable s) {
+			if (mIsUserInput) {
+				String string = s.toString();
+				if (!TextUtils.isEmpty(string)) {
+					Tag tag = new Tag(tagName, string);
+					data.tags.remove(tag);
+					data.tags.add(tag);
+					data.notifyDatasetChanged(mTagsChangedListener);
+				}
 			}
 		}
 	}

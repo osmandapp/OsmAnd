@@ -45,6 +45,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.IntermediatePointsDialog;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.audionotes.DashAudioVideoNotesFragment;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.dashboard.tools.DashboardSettingsDialogFragment;
@@ -57,9 +58,13 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
 import net.osmand.plus.monitoring.DashTrackFragment;
+import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.osmedit.DashOsmEditsFragment;
+import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.osmo.DashOsMoFragment;
+import net.osmand.plus.osmo.OsMoPlugin;
 import net.osmand.plus.parkingpoint.DashParkingFragment;
+import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.DownloadedRegionsLayer;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -87,22 +92,32 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 	private static final DashFragmentData.ShouldShowFunction chooseAppDirShouldShow = new ChooseAppDirShouldShow();
 
 	private static final DashFragmentData[] fragmentsData = new DashFragmentData[]{
-			new DashFragmentData(DashRateUsFragment.TAG, DashRateUsFragment.class, "Rate us", rateUsShouldShow, true),
-			new DashFragmentData(DashFirstTimeFragment.TAG, DashFirstTimeFragment.class, "First time", firstTimeShouldShow, true),
-			new DashFragmentData(DashChooseAppDirFragment.TAG, DashChooseAppDirFragment.class, "Choose app dir", chooseAppDirShouldShow, true),
-			new DashFragmentData(DashErrorFragment.TAG, DashErrorFragment.class, "Error", errorShouldShow, true),
+			new DashFragmentData(DashRateUsFragment.TAG, DashRateUsFragment.class, "Rate us",
+					rateUsShouldShow, new CanNotHideFunction()),
+			new DashFragmentData(DashFirstTimeFragment.TAG, DashFirstTimeFragment.class, "First time",
+					firstTimeShouldShow, new CanNotHideFunction()),
+			new DashFragmentData(DashChooseAppDirFragment.TAG, DashChooseAppDirFragment.class, "Choose app dir",
+					chooseAppDirShouldShow, new CanNotHideFunction()),
+			new DashFragmentData(DashErrorFragment.TAG, DashErrorFragment.class, "Error",
+					errorShouldShow, new CanNotHideFunction()),
 			new DashFragmentData(DashNavigationFragment.TAG, DashNavigationFragment.class, "Navigation", defaultShouldShow),
-			new DashFragmentData(DashParkingFragment.TAG, DashParkingFragment.class, "Parking", defaultShouldShow),
+			new DashFragmentData(DashParkingFragment.TAG, DashParkingFragment.class, "Parking",
+					defaultShouldShow, new CanHideIfPluginEnabled(ParkingPositionPlugin.class)),
 			new DashFragmentData(DashWaypointsFragment.TAG, DashWaypointsFragment.class, "Waypoints", defaultShouldShow),
 			new DashFragmentData(DashSearchFragment.TAG, DashSearchFragment.class, "Search", defaultShouldShow),
 			new DashFragmentData(DashRecentsFragment.TAG, DashRecentsFragment.class, "Recent places", defaultShouldShow),
 			new DashFragmentData(DashFavoritesFragment.TAG, DashFavoritesFragment.class, "Favourites", defaultShouldShow),
-			new DashFragmentData(DashAudioVideoNotesFragment.TAG, DashAudioVideoNotesFragment.class, "Notes", defaultShouldShow),
-			new DashFragmentData(DashTrackFragment.TAG, DashTrackFragment.class, "Track", defaultShouldShow),
-			new DashFragmentData(DashOsMoFragment.TAG, DashOsMoFragment.class, "OsMo", defaultShouldShow),
-			new DashFragmentData(DashOsmEditsFragment.TAG, DashOsmEditsFragment.class, "OsmEdits", defaultShouldShow),
+			new DashFragmentData(DashAudioVideoNotesFragment.TAG, DashAudioVideoNotesFragment.class, "Notes",
+					defaultShouldShow, new CanHideIfPluginEnabled(AudioVideoNotesPlugin.class)),
+			new DashFragmentData(DashTrackFragment.TAG, DashTrackFragment.class, "Track",
+					defaultShouldShow, new CanHideIfPluginEnabled(OsmandMonitoringPlugin.class)),
+			new DashFragmentData(DashOsMoFragment.TAG, DashOsMoFragment.class, "OsMo",
+					defaultShouldShow, new CanHideIfPluginEnabled(OsMoPlugin.class)),
+			new DashFragmentData(DashOsmEditsFragment.TAG, DashOsmEditsFragment.class, "OsmEdits",
+					defaultShouldShow, new CanHideIfPluginEnabled(OsmEditingPlugin.class)),
 			new DashFragmentData(DashPluginsFragment.TAG, DashPluginsFragment.class, "Plugins", defaultShouldShow),
-			new DashFragmentData(DashSimulateFragment.TAG, DashSimulateFragment.class, "Simulate", simulateShouldShow),
+			new DashFragmentData(DashSimulateFragment.TAG, DashSimulateFragment.class, "Simulate",
+					simulateShouldShow, new CanHideIfPluginEnabled(OsmandDevelopmentPlugin.class)),
 	};
 
 	private MapActivity mapActivity;
@@ -984,6 +999,26 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 			}
 			return !settings.isExternalStorageDirectorySpecifiedV19()
 					&& super.shouldShow(settings, activity, tag);
+		}
+	}
+
+	private static class CanNotHideFunction implements DashFragmentData.CanHideFunction {
+		@Override
+		public boolean canHide() {
+			return false;
+		}
+	}
+
+	private static class CanHideIfPluginEnabled implements DashFragmentData.CanHideFunction {
+		private final Class<? extends  OsmandPlugin> pluginClass;
+
+		public CanHideIfPluginEnabled(Class<? extends OsmandPlugin> pluginClass) {
+			this.pluginClass = pluginClass;
+		}
+
+		@Override
+		public boolean canHide() {
+			return OsmandPlugin.getEnabledPlugin(pluginClass) != null;
 		}
 	}
 }

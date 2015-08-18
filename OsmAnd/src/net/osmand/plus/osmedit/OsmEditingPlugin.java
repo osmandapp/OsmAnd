@@ -69,7 +69,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 
 	private OsmBugsLayer osmBugsLayer;
 	private OsmEditsLayer osmEditsLayer;
-	private EditingPOIDialogProvider poiActions;
+//	private EditingPOIDialogProvider poiActions;
 
 	@Override
 	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
@@ -120,8 +120,8 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	@Override
 	public void mapActivityCreate(MapActivity activity) {
 		// Always create new actions !
-		poiActions = new EditingPOIDialogProvider(activity, this);
-		activity.addDialogProvider(getPoiActions(activity));
+//		poiActions = new EditingPOIDialogProvider(activity, this);
+//		activity.addDialogProvider(getPoiActions(activity));
 		activity.addDialogProvider(getBugsLayer(activity));
 	}
 
@@ -131,12 +131,12 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		return SettingsOsmEditingActivity.class;
 	}
 
-	public EditingPOIDialogProvider getPoiActions(MapActivity activity) {
-		if (poiActions == null) {
-			poiActions = new EditingPOIDialogProvider(activity, this);
-		}
-		return poiActions;
-	}
+//	public EditingPOIDialogProvider getPoiActions(MapActivity activity) {
+//		if (poiActions == null) {
+//			poiActions = new EditingPOIDialogProvider(activity, this);
+//		}
+//		return poiActions;
+//	}
 
 	@Override
 	public void registerMapContextMenuActions(final MapActivity mapActivity, final double latitude, final double longitude, ContextMenuAdapter adapter,
@@ -146,8 +146,11 @@ public class OsmEditingPlugin extends OsmandPlugin {
 			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int resId, int pos, boolean isChecked) {
 				if (resId == R.string.context_menu_item_create_poi) {
 					//getPoiActions(mapActivity).showCreateDialog(latitude, longitude);
+					EditPoiFragment editPoiFragment =
+							EditPoiFragment.createAddPoiInstance(latitude, longitude,
+									mapActivity.getMyApplication());
 					mapActivity.getSupportFragmentManager().beginTransaction()
-							.add(R.id.fragmentContainer, new EditPoiFragment(), EditPoiFragment.TAG)
+							.add(R.id.fragmentContainer, editPoiFragment, EditPoiFragment.TAG)
 							.addToBackStack(null)
 							.commit();
 				} else if (resId == R.string.context_menu_item_open_bug) {
@@ -156,9 +159,11 @@ public class OsmEditingPlugin extends OsmandPlugin {
 					}
 					osmBugsLayer.openBug(latitude, longitude);
 				} else if (resId == R.string.poi_context_menu_delete) {
-					getPoiActions(mapActivity).showDeleteDialog((Amenity) selectedObj);
+					// TODO implement delete
+//					getPoiActions(mapActivity).showDeleteDialog((Amenity) selectedObj);
 				} else if (resId == R.string.poi_context_menu_modify) {
-					getPoiActions(mapActivity).showEditDialog((Amenity) selectedObj);
+					// TODO implement edit
+//					getPoiActions(mapActivity).showEditDialog((Amenity) selectedObj);
 				}
 				return true;
 			}
