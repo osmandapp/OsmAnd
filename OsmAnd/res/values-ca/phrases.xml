@@ -1044,4 +1044,7 @@
 	<string name="poi_crossing_uncontrolled">Encreuament no controlat</string>
 	<string name="poi_crossing_unmarked">Encreuament no senyalitzat</string>
 
+	<string name="poi_recycling_cardboard">Cartró d\'embalar</string>
+	<string name="poi_recycling_beverage_cartons">Envasos de cartró de begudes</string>
+	<string name="poi_recycling_sheet_metal">Xapa</string>
 	</resources>
