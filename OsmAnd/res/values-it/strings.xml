@@ -2139,4 +2139,10 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="we_really_care_about_your_opinion">Ci teniamo molto alla tua opinione, è molto importante avere un tuo rimando.</string>
 	<string name="rendering_value_boldOutline_name">Contorno in grassetto</string>
     <string name="traffic_warning_hazard">Pericolo</string>
-    </resources>
+    <string name="dahboard_options_dialog_title">Opzioni pannello di controllo</string>
+	<string name="shared_string_card_was_hidden">La carta era nascosta</string>
+	<string name="shared_string_undo">Annulla azione</string>
+	<string name="shared_string_skip">Salta</string>
+	<string name="app_name_osmand">OsmAnd</string>
+	<string name="offline_maps_and_navigation">Mappe offline &amp; Navigazione</string>
+</resources>
