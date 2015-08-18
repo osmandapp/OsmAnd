@@ -1549,11 +1549,24 @@
     <string name="route_descr_destination">Odredište</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="close_changeset">Zatvori promjene</string>
-	<string name="lang_pms"/>
+	<string name="lang_pms">Pijemonte</string>
     <string name="storage_directory_default">Unutarnja memorija</string>
     <string name="confirm_usage_speed_cameras">U mnogim zemljama (Njemačka, Francuska, Italija, i druge) Korištenje upozorenja za nadolazeće uređaje za mjerenje brzine nije dopušteno zakonom. OsmAnd ne preuzima nikakvu odgovornost ako kršite zakon. Molimo kliknite da samo ako ste sigurni da želite koristiti ovu značajku.</string>
 	<string name="osmand_parking_overdue">zakasnio</string>
 	<string name="osmo_plugin_name">OsMo (OSM Monitoring)</string>
 	<string name="watch">Prikaži</string>
 	<string name="download_tab_local">Lokalno</string>
-	</resources>
+	<string name="traffic_warning_hazard">Opasnost</string>
+    <string name="no_updates_available">Nema dostupnih ažuriranja</string>
+    <string name="rendering_value_default13_name">Zadano (13)</string>
+	<string name="rendering_value_defaultTranslucentCyan_name">Zadana (svijetlo plava)</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Bojanje prema OSMC</string>
+    <string name="application_dir_change_warning3">Želite li da OsmAnd kopira svoje podatke na novo odredište?</string>
+    <string name="specified_directiory_not_writeable">Karte se ne mogu stvoriti u navedenoj mapi</string>
+    <string name="rendering_attr_OSMMapperAssistant_name">OSM asistent za mapiranje</string>
+	<string name="record_plugin_name">Bilježenje putovanja</string>
+	<string name="rendering_attr_roadStyle_name">Stil ceste</string>
+    <string name="points">Točke</string>
+	<string name="rendering_value_highContrastRoads_name">Visoki kontrast ceste</string>
+	<string name="routing_attr_no_new_routing_description">Nemojte koristiti pravila usmjeravanje uvedena u v1.9</string>
+    </resources>
