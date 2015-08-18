@@ -2058,4 +2058,10 @@
     <string name="we_really_care_about_your_opinion">Нас вельмі цікавіць ваша меркаваньне і нам важна пачуць вас.</string>
 	<string name="rendering_value_boldOutline_name">Тлусты абрыс</string>
     <string name="traffic_warning_hazard">Небясьпека</string>
-    </resources>
+    <string name="app_name_osmand">OsmAnd</string>
+	<string name="offline_maps_and_navigation">Аўтаномныя мапы\nі навігацыя</string>
+<string name="dahboard_options_dialog_title">Опцыі Панэлі кіраваньня</string>
+	<string name="shared_string_card_was_hidden">Картка схавана</string>
+	<string name="shared_string_undo">Вярнуць</string>
+	<string name="shared_string_skip">Прапусьціць</string>
+	</resources>
