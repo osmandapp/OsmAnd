@@ -6,14 +6,11 @@ import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.res.Resources;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.text.method.LinkMovementMethod;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -394,15 +391,15 @@ public class EditingPOIDialogProvider implements DialogProvider {
 		closeChange.setVisibility(isLocalEdit ? View.GONE : View.VISIBLE);
 
 
-		TextView linkToOsmDoc = (TextView) view.findViewById(R.id.LinkToOsmDoc);
-		linkToOsmDoc.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://wiki.openstreetmap.org/wiki/Map_Features")));
-			}
-		});
-		linkToOsmDoc.setMovementMethod(LinkMovementMethod.getInstance());
+//		TextView linkToOsmDoc = (TextView) view.findViewById(R.id.LinkToOsmDoc);
+//		linkToOsmDoc.setOnClickListener(new View.OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//				activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://wiki.openstreetmap.org/wiki/Map_Features")));
+//			}
+//		});
+//		linkToOsmDoc.setMovementMethod(LinkMovementMethod.getInstance());
 
 		final Amenity amenity = (Amenity) args.getSerializable(KEY_AMENITY);
 		final Node node = (Node) args.getSerializable(KEY_AMENITY_NODE);
