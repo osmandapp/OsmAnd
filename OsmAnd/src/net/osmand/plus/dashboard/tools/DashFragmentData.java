@@ -9,16 +9,16 @@ public final class DashFragmentData {
 	public final Class<? extends DashBaseFragment> fragmentClass;
 	public final String title;
 	public final ShouldShowFunction shouldShowFunction;
-	public final boolean customDeletionLogic;
+	public final CanHideFunction canHideFunction;
 
 	public DashFragmentData(String tag, Class<? extends DashBaseFragment> fragmentClass,
 							String title, ShouldShowFunction shouldShowFunction,
-							boolean customDeletionLogic) {
+							CanHideFunction canHideFunction) {
 		this.tag = tag;
 		this.fragmentClass = fragmentClass;
 		this.title = title;
 		this.shouldShowFunction = shouldShowFunction;
-		this.customDeletionLogic = customDeletionLogic;
+		this.canHideFunction = canHideFunction;
 	}
 
 	public DashFragmentData(String tag, Class<? extends DashBaseFragment> fragmentClass,
@@ -27,10 +27,14 @@ public final class DashFragmentData {
 		this.fragmentClass = fragmentClass;
 		this.title = title;
 		this.shouldShowFunction = shouldShowFunction;
-		customDeletionLogic = false;
+		this.canHideFunction = null;
 	}
 
 	public interface ShouldShowFunction {
 		boolean shouldShow(OsmandSettings settings, MapActivity activity, String tag);
+	}
+
+	public interface CanHideFunction {
+		boolean canHide();
 	}
 }

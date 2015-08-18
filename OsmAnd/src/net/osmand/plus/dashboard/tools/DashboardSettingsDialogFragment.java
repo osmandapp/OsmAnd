@@ -34,7 +34,8 @@ public class DashboardSettingsDialogFragment extends DialogFragment {
 		mapActivity = (MapActivity) activity;
 		ArrayList<DashFragmentData> fragmentsList = new ArrayList<>();
 		for(DashFragmentData fragmentData : mapActivity.getDashboard().getFragmentsData()) {
-			if (!fragmentData.customDeletionLogic) fragmentsList.add(fragmentData);
+			if (fragmentData.canHideFunction == null || fragmentData.canHideFunction.canHide())
+				fragmentsList.add(fragmentData);
 		}
 		fragmentsData = fragmentsList.toArray(new DashFragmentData[fragmentsList.size()]);
 	}

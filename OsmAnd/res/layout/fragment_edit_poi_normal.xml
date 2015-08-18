@@ -3,26 +3,16 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/dashboard_background">
+    android:layout_height="match_parent">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/openHoursTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:text="Open hours"
-            android:textColor="@color/color_black"/>
-
-        <TextView
             android:id="@+id/contactInfoTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/openHoursTextView"
             android:layout_marginLeft="16dp"
             android:text="Contact info"
             android:textColor="@color/color_black"/>
@@ -92,33 +82,13 @@
             android:layout_below="@id/webSiteEditText"
             android:hint="Description"
             android:inputType="textMultiLine"/>
-
-        <View
-            android:id="@+id/buttonDivider"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
+        <TextView
+            android:id="@+id/openHoursTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@id/descriptionEditText"
-            android:background="@color/divider_color"/>
-
-        <Button
-            android:id="@+id/saveButton"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@id/buttonDivider"
-            tools:text="Save"
-            android:textColor="@color/dashboard_general_button_text_light"/>
-
-        <Button
-            android:id="@+id/cancelButton"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/buttonDivider"
-            android:layout_toLeftOf="@id/saveButton"
-            android:text="Cancel"
-            android:textColor="@color/dashboard_general_button_text_light"/>
-
+            android:layout_marginLeft="16dp"
+            android:text="Open hours"
+            android:textColor="@color/color_black"/>
     </RelativeLayout>
 </android.support.v4.widget.NestedScrollView>
