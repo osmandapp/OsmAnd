@@ -67,14 +67,14 @@ public class BinaryInspector {
 		if(args.length == 1 && "test".equals(args[0])) {
 			in.inspector(new String[]{
 //				"-vpoi",
-				"-vmap", "-vmapobjects",  //	"-vmapcoordinates", 
+				"-vmap", "-vmapobjects", // "-vmapcoordinates", 
 //				"-vrouting",
 //				"-vaddress", "-vcities","-vstreetgroups", 
 //				"-vstreets", "-vbuildings", "-vintersections", 
 //				"-zoom=15",
 //				"-bbox=1.74,51.17,1.75,51.16",
 //				"-vstats",
-				"/Users/victorshcherb/osmand/temp/Germany_bayern_europe_15_08_04.obf"
+				"/Users/victorshcherb/osmand/temp/Germany_bremen_europe_15_08_00.obf"
 //				"/Users/victorshcherb/osmand/maps/Synthetic_test_rendering.obf"
 //				"/Users/victorshcherb/osmand/maps/Map.obf"
 //				"/Users/victorshcherb/osmand/temp/Czech-republic_jihovychod_europe_2.road.obf"
@@ -814,8 +814,8 @@ public class BinaryInspector {
 								} catch (IOException e) {
 									throw new RuntimeException(e);
 								}
-							} else if(obj.getId() == 363826871l) {
-//							} else {
+//							} else if(obj.getId() >> 1 == 205743436l) {
+							} else {
 								printMapDetails(obj, b, vInfo.vmapCoordinates);
 								println(b.toString());
 							}
