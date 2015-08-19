@@ -13,6 +13,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -74,9 +75,9 @@ public class EditPoiFragment extends Fragment {
 	private AutoCompleteTextView poiTypeEditText;
 	private Node node;
 	private Map<String, PoiType> allTranslatedSubTypes;
-	private String poiTypeTag;
-	private Amenity amenity;
+	public static final String POI_TYPE_TAG = "poi_type_tag";
 	private OpenstreetmapUtil openstreetmapUtil;
+	private TextInputLayout poiTypeTextInputLayout;
 
 	@Override
 	public void onAttach(Activity activity) {
@@ -102,8 +103,7 @@ public class EditPoiFragment extends Fragment {
 		allTranslatedSubTypes = ((OsmandApplication) activity.getApplication()).getPoiTypes()
 				.getAllTranslatedNames();
 		// TODO implement normal name
-		poiTypeTag = "amenity";
-		amenity = (Amenity) getArguments().getSerializable(KEY_AMENITY);
+		editPoiData.amenity = (Amenity) getArguments().getSerializable(KEY_AMENITY);
 //		editPoiData.tags = new LinkedHashSet<>();
 	}
 
@@ -167,7 +167,7 @@ public class EditPoiFragment extends Fragment {
 		poiTypeButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				DialogFragment fragment = PoiTypeDialogFragment.createInstance(amenity);
+				DialogFragment fragment = PoiTypeDialogFragment.createInstance(editPoiData.amenity);
 				fragment.show(getChildFragmentManager(), "PoiTypeDialogFragment");
 			}
 		});
@@ -192,6 +192,7 @@ public class EditPoiFragment extends Fragment {
 				}
 			}
 		});
+		poiTypeTextInputLayout = (TextInputLayout) view.findViewById(R.id.poiTypeTextInputLayout);
 		poiTypeEditText = (AutoCompleteTextView) view.findViewById(R.id.poiTypeEditText);
 		poiTypeEditText.addTextChangedListener(new TextWatcher() {
 			@Override
@@ -204,7 +205,7 @@ public class EditPoiFragment extends Fragment {
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				final Tag tag = new Tag(poiTypeTag, s.toString());
+				final Tag tag = new Tag(POI_TYPE_TAG, s.toString());
 				if (mIsUserInput) {
 					getEditPoiData().tags.remove(tag);
 					getEditPoiData().tags.add(tag);
@@ -215,8 +216,9 @@ public class EditPoiFragment extends Fragment {
 		poiTypeEditText.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if(poiTypeEditText.getText().length() == 0 && amenity.getType() != null){
-					DialogFragment dialogFragment = PoiSubTypeDialogFragment.createInstance(amenity);
+				if(poiTypeEditText.getText().length() == 0 && editPoiData.amenity.getType() != null){
+					DialogFragment dialogFragment =
+							PoiSubTypeDialogFragment.createInstance(editPoiData.amenity);
 					dialogFragment.show(getChildFragmentManager(), "PoiSubTypeDialogFragment");
 				}
 			}
@@ -232,8 +234,9 @@ public class EditPoiFragment extends Fragment {
 				// TODO implement saving
 				OsmPoint.Action action = node.getId() == -1 ? OsmPoint.Action.CREATE : OsmPoint.Action.MODIFY;
 				String description = "";
+				Log.v(TAG, "tags=" + editPoiData.tags);
 				for (Tag tag : editPoiData.tags) {
-					if (tag.tag.equals(poiTypeTag)) {
+					if (tag.tag.equals(POI_TYPE_TAG)) {
 						if (allTranslatedSubTypes.get(tag.value) != null) {
 							PoiType pt = allTranslatedSubTypes.get(tag.value);
 							node.putTag(pt.getOsmTag(), pt.getOsmValue());
@@ -241,10 +244,10 @@ public class EditPoiFragment extends Fragment {
 								node.putTag(pt.getOsmTag2(), pt.getOsmValue2());
 							}
 						} else {
-							node.putTag(amenity.getType().getDefaultTag(), tag.value);
+							node.putTag(editPoiData.amenity.getType().getDefaultTag(), tag.value);
 						}
-					} else if (tag.tag.equals(OSMSettings.OSMTagKey.DESCRIPTION.getValue())) {
-						description = tag.value;
+//					} else if (tag.tag.equals(OSMSettings.OSMTagKey.DESCRIPTION.getValue())) {
+//						description = tag.value;
 					} else {
 						if (tag.value.length() > 0) {
 							node.putTag(tag.tag, tag.value);
@@ -261,10 +264,12 @@ public class EditPoiFragment extends Fragment {
 							public void run() {
 								if (isLocalEdit) {
 									AccessibleToast.makeText(
-											getActivity(), R.string.osm_changes_added_to_local_edits,
+											getActivity(),
+											R.string.osm_changes_added_to_local_edits,
 											Toast.LENGTH_LONG).show();
 								} else {
-									final String message = node.getId() == -1 ? getResources().getString(R.string.poi_action_add)
+									final String message = node.getId() == -1 ?
+											getResources().getString(R.string.poi_action_add)
 											: getResources().getString(R.string.poi_action_change);
 
 									AccessibleToast.makeText(
@@ -298,35 +303,6 @@ public class EditPoiFragment extends Fragment {
 		});
 
 		return view;
-	}
-
-	@Override
-	public void onResume() {
-		super.onResume();
-		mTagsChangedListener = new EditPoiFragment.EditPoiData.TagsChangedListener() {
-			@Override
-			public void onTagsChanged() {
-				Log.v(TAG, "onTagsChanged(" + ")");
-				mIsUserInput = false;
-				String poiName = null;
-				String poiType = null;
-				for (Tag tag : editPoiData.tags) {
-					// TODO replace with constants
-					if (tag.tag.equals(OSMSettings.OSMTagKey.NAME.getValue())) poiName = tag.value;
-					if (tag.tag.equals(poiTypeTag)) poiType = tag.value;
-				}
-				poiNameEditText.setText(poiName);
-				poiTypeEditText.setText(poiType);
-				mIsUserInput = true;
-			}
-		};
-		editPoiData.addListener(mTagsChangedListener);
-	}
-
-	@Override
-	public void onPause() {
-		super.onPause();
-		editPoiData.deleteListener(mTagsChangedListener);
 	}
 
 	@Override
@@ -404,7 +380,10 @@ public class EditPoiFragment extends Fragment {
 	private void updateType(Amenity amenity) {
 		// TODO implement
 		Log.v(TAG, "updateType(" + "amenity=" + amenity + ")");
+		mIsUserInput = false;
 		poiTypeEditText.setText(amenity.getSubType());
+		mIsUserInput = true;
+		poiTypeTextInputLayout.setHint(amenity.getType().getTranslation());
 
 		final Map<String, PoiType> subCategories = new LinkedHashMap<>();
 		for (Map.Entry<String, PoiType> s : allTranslatedSubTypes.entrySet()) {
@@ -422,8 +401,8 @@ public class EditPoiFragment extends Fragment {
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 				Object item = parent.getAdapter().getItem(position);
 				if (subCategories.containsKey(item)) {
-					String kn = subCategories.get(item).getKeyName();
-					poiTypeEditText.setText(kn);
+					String keyName = subCategories.get(item).getKeyName();
+					poiTypeEditText.setText(keyName);
 				}
 			}
 
@@ -470,6 +449,7 @@ public class EditPoiFragment extends Fragment {
 	public static class EditPoiData {
 		private Set<TagsChangedListener> mListeners = new HashSet<>();
 		public LinkedHashSet<Tag> tags;
+		public Amenity amenity;
 
 		public void notifyDatasetChanged(TagsChangedListener listenerToSkip) {
 			Log.v(TAG, "notifyDatasetChanged(" + "listenerToSkip=" + listenerToSkip + ")" + mListeners);

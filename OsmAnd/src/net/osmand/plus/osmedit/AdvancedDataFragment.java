@@ -13,11 +13,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import net.osmand.osm.PoiType;
+import net.osmand.osm.edit.OSMSettings;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.osmedit.EditPoiFragment.Tag;
 
 import java.util.Iterator;
+import java.util.Map;
 
 public class AdvancedDataFragment extends Fragment {
 	private static final String TAG = "AdvancedDataFragment";
@@ -50,9 +55,14 @@ public class AdvancedDataFragment extends Fragment {
 				valueEditText.clearFocus();
 			}
 		});
+		TextView nameTextView = (TextView) view.findViewById(R.id.nameTextView);
+		TextView amenityTagTextView = (TextView) view.findViewById(R.id.amenityTagTextView);
+		TextView amenityTextView = (TextView) view.findViewById(R.id.amenityTextView);
 		LinearLayout editTagsLineaLayout =
 				(LinearLayout) view.findViewById(R.id.editTagsList);
-		mAdapter = new TagAdapterLinearLayoutHack(editTagsLineaLayout, getData());
+		mAdapter = new TagAdapterLinearLayoutHack(editTagsLineaLayout, getData(),
+				nameTextView, amenityTagTextView, amenityTextView,
+				((OsmandApplication) getActivity().getApplication()).getPoiTypes().getAllTranslatedNames());
 //		setListViewHeightBasedOnChildren(editTagsLineaLayout);
 		Button addTagButton = (Button) view.findViewById(R.id.addTagButton);
 		addTagButton.setOnClickListener(new View.OnClickListener() {
@@ -104,10 +114,23 @@ public class AdvancedDataFragment extends Fragment {
 		private final LinearLayout linearLayout;
 		private final EditPoiFragment.EditPoiData editPoiData;
 
+		private final TextView nameTextView;
+		private final TextView amenityTagTextView;
+		private final TextView amenityTextView;
+		private final Map<String, PoiType> allTranslatedSubTypes;
+
 		public TagAdapterLinearLayoutHack(LinearLayout linearLayout,
-										  EditPoiFragment.EditPoiData editPoiData) {
+										  EditPoiFragment.EditPoiData editPoiData,
+										  TextView nameTextView,
+										  TextView amenityTagTextView,
+										  TextView amenityTextView,
+										  Map<String, PoiType> allTranslatedSubTypes) {
 			this.linearLayout = linearLayout;
 			this.editPoiData = editPoiData;
+			this.nameTextView = nameTextView;
+			this.amenityTagTextView = amenityTagTextView;
+			this.amenityTextView = amenityTextView;
+			this.allTranslatedSubTypes = allTranslatedSubTypes;
 		}
 
 		public void addTag(Tag tag) {
@@ -122,13 +145,23 @@ public class AdvancedDataFragment extends Fragment {
 		public void updateViews() {
 			linearLayout.removeAllViews();
 			Iterator<Tag> iterator = editPoiData.tags.iterator();
-			while (iterator.hasNext()) {
-				iterator.next();
-			}
 			for (Tag tag : editPoiData.tags) {
-				View view = getView(tag);
-				EditText valueEditText = (EditText) view.findViewById(R.id.valueEditText);
-				linearLayout.addView(view);
+				if (tag.tag.equals(OSMSettings.OSMTagKey.NAME.getValue())) {
+					nameTextView.setText(tag.value);
+				} else if (tag.tag.equals(EditPoiFragment.POI_TYPE_TAG)) {
+					String subType = tag.value.trim().toLowerCase();
+					if (allTranslatedSubTypes.get(subType) != null) {
+						PoiType pt = allTranslatedSubTypes.get(subType);
+						amenityTagTextView.setText(pt.getOsmTag());
+						amenityTextView.setText(pt.getOsmValue());
+					} else {
+						amenityTagTextView.setText(editPoiData.amenity.getType().getDefaultTag());
+						amenityTextView.setText(subType);
+					}
+				} else {
+					View view = getView(tag);
+					linearLayout.addView(view);
+				}
 			}
 		}
 
