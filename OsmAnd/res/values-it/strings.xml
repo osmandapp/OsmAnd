@@ -2145,4 +2145,5 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="shared_string_skip">Salta</string>
 	<string name="app_name_osmand">OsmAnd</string>
 	<string name="offline_maps_and_navigation">Mappe offline &amp; Navigazione</string>
-</resources>
+<string name="lang_new">Newa / Bhasa del Nepal</string>
+    </resources>
