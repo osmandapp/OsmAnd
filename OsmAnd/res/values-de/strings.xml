@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="gps_network_not_enabled">Kein Standortdienst aktiviert. Aktivieren?</string>
 	<string name="disable_recording_once_app_killed">Eigenständige Streckenaufzeichnung unterbinden</string>
@@ -2241,4 +2241,15 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="user_hates_app_get_feedback">Sagen Sie uns warum.</string>
 	<string name="user_hates_app_get_feedback_long">Bitte teilen Sie uns mit welche Änderungen Sie sich für diese App wünschen.</string>
 <string name="we_really_care">Wir kümmern uns wirklich</string>
+	<string name="no_updates_available">Keine Updates verfügbar</string>
+    <string name="download_live_updates">Live-Updates</string>
+	<string name="we_really_care_about_your_opinion">Ihre Meinung ist uns sehr viel wert, Rückmeldungen sind uns wichtig.</string>
+	<string name="failed_to_upload">Hochladen ist fehlgeschlagen</string>
+	<string name="successfully_uploaded_pattern">Erfolgreich hochgeladen {0}/{1}</string>
+	<string name="try_again">Erneut versuchen</string>
+	<string name="error_message_pattern">Fehler: {0}</string>
+	<string name="dahboard_options_dialog_title">Dashboard-Optionen</string>
+	<string name="shared_string_undo">Rückgängig</string>
+	<string name="shared_string_skip">Überspringen</string>
+	<string name="app_name_osmand">OsmAnd</string>
 	</resources>
