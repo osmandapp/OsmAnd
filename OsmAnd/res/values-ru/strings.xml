@@ -2061,4 +2061,10 @@
 	<string name="delete_change">Удалить изменения</string>
 	<string name="successfully_uploaded_pattern">Успешно загружены {0}/{1}</string>
 	<string name="error_message_pattern">Ошибка: {0}</string>
-</resources>
+<string name="we_really_care_about_your_opinion">Нам очень интересно ваше мнение и важно получить отзыв.</string>
+	<string name="user_hates_app_get_feedback">Скажите нам почему.</string>
+	<string name="try_again">Попробуйте снова</string>
+	<string name="shared_string_undo">ОТМЕНИТЬ</string>
+	<string name="shared_string_skip">Пропустить</string>
+	<string name="app_name_osmand">OsmAnd</string>
+	</resources>
