@@ -1031,4 +1031,20 @@
 	<string name="poi_recycling_waste">Rebuig (bosses de negres)</string>
 	<string name="poi_recycling_paper_packaging">Embalatge de paper</string>
 	<string name="poi_recycling_tetrapak">Tetra Pak</string>
+	<string name="poi_recycling_hydrargyrum">Mercuri</string>
+	<string name="poi_recycling_foil">Paper d\'alumini</string>
+	<string name="poi_recycling_styrofoam">Poliestirè extrudit</string>
+	<string name="poi_recycling_hardcore">Runa</string>
+	<string name="poi_recycling_chipboard">Aglomerat</string>
+	<string name="poi_recycling_plasterboard">Plaques de guix</string>
+	<string name="poi_recycling_diapers">Bolquers</string>
+	<string name="poi_supervised_yes">Supervisat</string>
+	<string name="poi_supervised_no">No supervisat</string>
+	<string name="poi_crossing_traffic_signals">Encreuament senyalitzat</string>
+	<string name="poi_crossing_uncontrolled">Encreuament no controlat</string>
+	<string name="poi_crossing_unmarked">Encreuament no senyalitzat</string>
+
+	<string name="poi_recycling_cardboard">Cartró d\'embalar</string>
+	<string name="poi_recycling_beverage_cartons">Envasos de cartró de begudes</string>
+	<string name="poi_recycling_sheet_metal">Xapa metàl·lica</string>
 	</resources>

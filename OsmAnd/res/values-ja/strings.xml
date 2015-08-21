@@ -1115,7 +1115,7 @@ POIの更新は利用できません</string>
 	<string name="local_openstreetmap_delete">変更を削除する</string>
 	<string name="local_openstreetmap_descr_title">非同期OSMの編集:</string>
 	<string name="local_openstreetmap_settings">保存済みOSM POIとバグ</string>
-	<string name="animate_routing_route_not_calculated">まず、ルートを検索して下さい</string>
+	<string name="animate_routing_route_not_calculated">最初にルートを検索して下さい</string>
     <string name="animate_routing_route">"計算されたルートを使用してシミュレーション "</string>
     <string name="animate_routing_gpx">GPXファイルに保存された経路を使用してシミュレーション</string>
     <string name="shared_string_remember_my_choice">選択を記憶</string>
@@ -1694,7 +1694,7 @@ POIの更新は利用できません</string>
 	<string name="keep_informing_descr">ナビゲーション指示を繰り返す間隔の設定</string>
     <string name="arrival_distance">目的地周辺でのアナウンスタイミング</string>
     <string name="arrival_distance_descr">どのタイミングで目的地周辺のアナウンスをするか設定</string>
-    <string name="osmo_plugin_description">"このプラグインはOsMoと呼ばれる高度なライブモニタリング機能を提供します、http://osmo.mobiを参照して下さい。\n\n参加しているグループ全てのデバイス経路をリアルタイムで追跡することが出来るので、互いにコミュニケーションを取ることができます。期間を限定した追跡、または永続的な追跡のためにさまざまなオプションが付属しています。\n\n匿名のグループは簡単に作成できますが、指定された数日間いくつかの機能が制限されており、その場合遠隔操作は出来ずグループ管理者は存在しません。完全な機能のグループはウェブサイト上で別に作成する必要があり、登録ユーザーのみがそれらにアクセスすることができます。 "</string>
+    <string name="osmo_plugin_description">"このプラグインはOsMoと呼ばれる高度なライブモニタリング機能を提供します、http://osmo.mobiを参照して下さい。\n\n参加しているグループ全てのデバイス経路をリアルタイムで追跡することが出来るので、互いにコミュニケーションを取ることができます。期間を限定した追跡、または恒久的な追跡のためにさまざまなオプションが付属しています。\n\n匿名のグループは簡単に作成できますが、指定された数日間いくつかの機能が制限されており、その場合遠隔操作は出来ずグループ管理者は存在しません。完全な機能のグループはウェブサイト上で別に作成する必要があり、登録ユーザーのみがそれらにアクセスすることができます。 "</string>
     <string name="osmo_plugin_name">OsMo(OSMモニタリング)</string>
    	<string name="always_center_position_on_map">位置を常に中央表示</string>
     <string name="voice_pref_title">音声</string>
@@ -2115,4 +2115,14 @@ POIの更新は利用できません</string>
 	<string name="user_hates_app_get_feedback_long">このアプリの変更して欲しい箇所を教えて下さい。</string>
 <string name="rendering_value_walkingRoutesScopeOSMC_name">ルート範囲に応じてカラー変更</string>
     <string name="rendering_value_walkingRoutesOSMC_name">OSMCに応じてカラー変更</string>
-    </resources>
+    <string name="traffic_warning_hazard">通行注意</string>
+    <string name="rendering_value_boldOutline_name">太線</string>
+    <string name="no_updates_available">更新はありません</string>
+    <string name="download_live_updates">ライブ更新</string>
+	<string name="we_really_care_about_your_opinion">私達は常にユーザーを気に掛け、個々の意見を参考にすることを重要視しています。</string>
+	<string name="failed_to_upload">アップロードに失敗しました</string>
+	<string name="delete_change">変更を削除します</string>
+	<string name="successfully_uploaded_pattern">正常にアップロードされました {0}/{1}</string>
+	<string name="try_again">再試行</string>
+	<string name="error_message_pattern">エラー: {0}</string>
+</resources>

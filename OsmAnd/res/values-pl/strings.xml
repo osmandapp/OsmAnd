@@ -441,16 +441,16 @@
   <string name="show_transport_over_map_description">Pokaż na mapie przystanki transportu publicznego</string>
   <string name="show_transport_over_map">Pokaż przystanki</string>
   <string name="hello">Program do nawigacji satelitarnej OsmAnd</string>
-  <string name="update_poi_success">Dane POI zaktualizowane ({0} zostało załadowanych)</string>
-  <string name="update_poi_error_local">Błąd podczas uaktualniania lokalnej listy POI</string>
-  <string name="update_poi_error_loading">Błąd podczas pobierania danych z serwera</string>
-  <string name="update_poi_no_offline_poi_index">Brak danych offline o POI dla tego rejonu</string>
+  <string name="update_poi_success">Uaktualniono dane POI (wczytano {0})</string>
+  <string name="update_poi_error_local">Błąd uaktualniania lokalnej listy POI</string>
+  <string name="update_poi_error_loading">Błąd pobierania danych z serwera</string>
+  <string name="update_poi_no_offline_poi_index">Brak danych offline POI dla tego rejonu</string>
   <string name="update_poi_is_not_available_for_zoom">Uaktualnianie POI jest niedostępne dla małych poziomów przybliżenia</string>
   <string name="context_menu_item_update_poi">Uaktualnij POI</string>
   <string name="context_menu_item_update_map_confirm">Uaktualnić dane lokalne przez Internet?</string>
   <string name="search_history_city">Miasto: {0}</string>
   <string name="search_history_street">Ulica: {0}, {1}</string>
-  <string name="search_history_int_streets">Przecięcie: {0} x {1} in {2}</string>
+  <string name="search_history_int_streets">Przecięcie: {0} x {1} w {2}</string>
   <string name="search_history_building">Budynek: {0}, {1}, {2}</string>
   <string name="favorite">Ulubione</string>
   <string name="shared_string_clear_all">Wyczyść wszystko</string>
@@ -509,13 +509,13 @@
   <string name="error_calculating_route_occured">Wystąpił błąd podczas obliczania trasy</string>
   <string name="empty_route_calculated">Wyznaczono pustą trasę</string>
   <string name="new_route_calculated_dist">Obliczono nową trasę, dystans</string>
-  <string name="arrived_at_destination">Dotarłeś do celu</string>
-  <string name="invalid_locations">Pozycje są niepoprawne!</string>
+  <string name="arrived_at_destination">Osiągnięto cel</string>
+  <string name="invalid_locations">Koordynaty są nieprawidłowe!</string>
   <string name="go_back_to_osmand">Wróć do mapy OsmAnd</string>
   <string name="shared_string_close">Zamknij</string>
   <string name="loading_data">Wczytywanie danych…</string>
   <string name="reading_indexes">Wczytywanie danych lokalnych…</string>
-  <string name="previous_run_crashed">Program poprzednio uległ awarii. Log z informacjami jest w {0}. Wyślij zgłoszenie i załącz ten plik.</string>
+  <string name="previous_run_crashed">Program wcześniej uległ awarii. Dziennik z informacjami znajduje się w {0}. Proszę wysłać zgłoszenie błędu i załączyć plik dziennika.</string>
   <string name="saving_gpx_tracks">Zapisywanie śladów GPX na kartę SD…</string>
   <string name="finished_task">Zakończono</string>
   
@@ -528,7 +528,7 @@
   <string name="user_password">Hasło konta OSM</string>
   <string name="osm_settings_descr">Skonfiguruj ustawienia dotyczące potrzebne do wysyłania danych do Openstreetmap.org (OSM)</string>
   
-  <string name="data_settings_descr">Ustaw język, pobierz/przeładuj dane</string>
+  <string name="data_settings_descr">Ustaw język, pobierz/wczytaj ponownie dane</string>
   <string name="data_settings">Dane</string>
   
   <string name="osm_settings">Edycja OSM</string>
@@ -546,7 +546,7 @@
   <string name="save_track_to_gpx_descrp">Zapisuje ślady do katalogu śladów podczas nawigacji</string>
   <string name="save_track_to_gpx">Zapisywanie śladu do pliku GPX podczas nawigacji</string>
   <string name="update_tile">Uaktualnij mapę</string>
-  <string name="reload_tile">Przeładuj kafelki</string>
+  <string name="reload_tile">Wczytaj ponownie kafelki</string>
   <string name="user_name_descr">Wymagane do wysyłania danych na openstreetmap.org</string>
   <string name="user_name">Nazwa użytkownika OSM</string>
   <string name="mark_point">Cel</string>
@@ -1523,7 +1523,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="shared_string_or">lub</string>
 	<string name="shared_string_remember_my_choice">Zapamiętanie wyboru</string>
     
-    <string name="animate_routing_route_not_calculated">Proszę najpierw dokonać przeliczenia trasy</string>
+    <string name="animate_routing_route_not_calculated">Proszę najpierw przeliczyć trasę</string>
     <string name="animate_routing_route">Pokaż używając obliczonej trasy </string>
     <string name="animate_routing_gpx">Pokaż używając śladu GPX</string>
     
@@ -2189,7 +2189,13 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="do_you_like_osmand">Czy lubisz OsmAnd?</string>
 	<string name="we_really_care">Naprawdę nam zależy</string>
 	<string name="rate_this_app">Oceń tę aplikację</string>
-	<string name="rate_this_app_long">Określ jakość OsmAnd w witrynie Google Play</string>
+	<string name="rate_this_app_long">Oceń OsmAnd w sklepie Google Play</string>
 	<string name="user_hates_app_get_feedback">Powiedz nam, dlaczego.</string>
 	<string name="user_hates_app_get_feedback_long">Powiedz, co zmieniłbyś w aplikacji.</string>
+<string name="no_updates_available">Brak dostępnych aktualizacji</string>
+    <string name="failed_to_upload">Nie udało się wysłać</string>
+	<string name="delete_change">Usuń zmianę</string>
+	<string name="successfully_uploaded_pattern">Wysłano {0}/{1}</string>
+	<string name="try_again">Spróbuj ponownie</string>
+	<string name="error_message_pattern">Błąd: {0}</string>
 </resources>

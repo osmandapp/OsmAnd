@@ -2103,4 +2103,10 @@
     <string name="we_really_care_about_your_opinion">Vi er meget interesseret i din mening, og det er vigtigt for os at høre fra dig.</string>
 	<string name="rendering_value_boldOutline_name">Fed kontur</string>
     <string name="traffic_warning_hazard">Fare</string>
-    </resources>
+    <string name="dahboard_options_dialog_title">Betjeningspanel indstillinger</string>
+	<string name="shared_string_card_was_hidden">Kortet blev skjult</string>
+	<string name="shared_string_undo">FORTRYD</string>
+	<string name="shared_string_skip">Spring over</string>
+	<string name="app_name_osmand">OsmAnd</string>
+	<string name="offline_maps_and_navigation">Offline kort\n&amp; navigation</string>
+</resources>

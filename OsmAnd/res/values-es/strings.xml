@@ -2156,4 +2156,10 @@
     <string name="we_really_care_about_your_opinion">Nos interesa mucho y es importante para nosotros oír su opinión.</string>
 	<string name="rendering_value_boldOutline_name">Borde remarcado</string>
     <string name="traffic_warning_hazard">Advertencia de riesgo</string>
-    </resources>
+    <string name="dahboard_options_dialog_title">Opciones del panel</string>
+	<string name="shared_string_card_was_hidden">La tarjeta estaba oculta</string>
+	<string name="shared_string_undo">Deshacer</string>
+	<string name="shared_string_skip">Omitir</string>
+	<string name="app_name_osmand">OsmAnd</string>
+	<string name="offline_maps_and_navigation">Mapas y navegación fuera de línea</string>
+</resources>
