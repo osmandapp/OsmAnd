@@ -2236,4 +2236,5 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="shared_string_skip">Skip</string>
 	<string name="app_name_osmand">OsmAnd</string>
 	<string name="offline_maps_and_navigation"><![CDATA[Offline Maps\n& Navigation]]></string>
+	<string name="commit_poi">Commit POI</string>
 </resources>

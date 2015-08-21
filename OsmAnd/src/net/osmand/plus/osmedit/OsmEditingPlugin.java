@@ -139,7 +139,10 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void registerMapContextMenuActions(final MapActivity mapActivity, final double latitude, final double longitude, ContextMenuAdapter adapter,
+	public void registerMapContextMenuActions(final MapActivity mapActivity,
+											  final double latitude,
+											  final double longitude,
+											  ContextMenuAdapter adapter,
 											  final Object selectedObj) {
 		OnContextMenuClick listener = new OnContextMenuClick() {
 			@Override

@@ -1,13 +1,20 @@
 package net.osmand.plus.osmedit;
 
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Serializable;
-import java.net.URLConnection;
-import java.util.ArrayList;
-import java.util.List;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.PointF;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.util.Xml;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
@@ -33,20 +40,13 @@ import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.app.Dialog;
-import android.content.DialogInterface;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.PointF;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.util.Xml;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.Toast;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Serializable;
+import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.List;
 
 public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider, DialogProvider {
 
@@ -333,8 +333,8 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	}
 	
 	private void prepareOpenBugDialog(Dialog dlg, Bundle args) {
-		((EditText)dlg.findViewById(R.id.BugMessage)).setText(args.getString(KEY_MESSAGE));
-		((EditText)dlg.findViewById(R.id.AuthorName)).setText(args.getString(KEY_AUTHOR));
+		((EditText)dlg.findViewById(R.id.messageEditText)).setText(args.getString(KEY_MESSAGE));
+		((EditText)dlg.findViewById(R.id.userNameEditText)).setText(args.getString(KEY_AUTHOR));
 	}
 	
 	private Dialog createOpenBugDialog(final Bundle args) {
@@ -343,9 +343,9 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		builder.setTitle(R.string.osb_add_dialog_title);
 		builder.setView(openBug);
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
-		((EditText)openBug.findViewById(R.id.Password)).setText(((OsmandApplication) activity.getApplication()).getSettings().USER_PASSWORD.get());
-		((EditText)openBug.findViewById(R.id.AuthorName)).setText(getUserName());
-		AndroidUtils.softKeyboardDelayed((EditText)openBug.findViewById(R.id.BugMessage));
+		((EditText)openBug.findViewById(R.id.passwordEditText)).setText(((OsmandApplication) activity.getApplication()).getSettings().USER_PASSWORD.get());
+		((EditText)openBug.findViewById(R.id.userNameEditText)).setText(getUserName());
+		AndroidUtils.softKeyboardDelayed((EditText)openBug.findViewById(R.id.messageEditText));
 		builder.setPositiveButton(R.string.shared_string_add, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -426,9 +426,9 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		builder.setTitle(R.string.osb_comment_dialog_title);
 		final View view = activity.getLayoutInflater().inflate(R.layout.open_bug, null);
 		builder.setView(view);
-		((EditText)view.findViewById(R.id.AuthorName)).setText(getUserName());
-		((EditText)view.findViewById(R.id.Password)).setText(((OsmandApplication) activity.getApplication()).getSettings().USER_PASSWORD.get());
-		AndroidUtils.softKeyboardDelayed((EditText)view.findViewById(R.id.BugMessage));
+		((EditText)view.findViewById(R.id.userNameEditText)).setText(getUserName());
+		((EditText)view.findViewById(R.id.passwordEditText)).setText(((OsmandApplication) activity.getApplication()).getSettings().USER_PASSWORD.get());
+		AndroidUtils.softKeyboardDelayed((EditText)view.findViewById(R.id.messageEditText));
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
 		builder.setPositiveButton(R.string.osb_comment_dialog_add_button, new DialogInterface.OnClickListener() {
 			@Override
@@ -446,9 +446,9 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	}
 	
 	private String getTextAndUpdateUserPwd(final View view) {
-		String text = ((EditText)view.findViewById(R.id.BugMessage)).getText().toString();
-		String author = ((EditText)view.findViewById(R.id.AuthorName)).getText().toString();
-		String pwd = ((EditText)view.findViewById(R.id.Password)).getText().toString();
+		String text = ((EditText)view.findViewById(R.id.messageEditText)).getText().toString();
+		String author = ((EditText)view.findViewById(R.id.userNameEditText)).getText().toString();
+		String pwd = ((EditText)view.findViewById(R.id.passwordEditText)).getText().toString();
 		((OsmandApplication) OsmBugsLayer.this.activity.getApplication()).getSettings().USER_NAME.set(author);
 		((OsmandApplication) OsmBugsLayer.this.activity.getApplication()).getSettings().USER_PASSWORD.set(pwd);
 		return text;
@@ -583,7 +583,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	public void onPrepareDialog(int id, Dialog dialog) {
 		switch (id) {
 			case DIALOG_COMMENT_BUG:
-				((EditText)dialog.findViewById(R.id.BugMessage)).setText("");
+				((EditText)dialog.findViewById(R.id.messageEditText)).setText("");
 				break;
 		}
 	}
