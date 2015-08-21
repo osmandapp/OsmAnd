@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:osmand="http://schemas.android.com/apk/res-auto"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true">
 
     <ImageView
         android:layout_width="match_parent"
@@ -13,6 +15,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
         android:background="@color/color_transparent"
         android:focusable="true"
         android:focusableInTouchMode="true"
@@ -20,8 +23,7 @@
         android:paddingBottom="16dp"
         android:paddingLeft="40dp"
         android:paddingRight="40dp"
-        android:paddingTop="@dimen/first_usage_title_margin"
-        android:layout_gravity="center_horizontal">
+        android:paddingTop="@dimen/first_usage_title_margin">
 
         <net.osmand.plus.widgets.TextViewEx
             android:layout_width="wrap_content"
