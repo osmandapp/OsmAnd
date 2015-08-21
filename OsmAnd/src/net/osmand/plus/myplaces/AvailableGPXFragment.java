@@ -189,9 +189,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		final boolean isRecording = app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get();
 		ImageButton stop = ((ImageButton) v.findViewById(R.id.stop));
 		if (isRecording) {
-			stop.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.ic_action_rec_stop));
+			stop.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_rec_stop, R.color.recording_color));
 		} else {
-			stop.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_rec_start, R.color.recording_color));
+			stop.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.ic_action_rec_start));
 		}
 		stop.setOnClickListener(new View.OnClickListener() {
 			@Override
