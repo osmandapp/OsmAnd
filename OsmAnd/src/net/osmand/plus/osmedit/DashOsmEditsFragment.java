@@ -1,19 +1,24 @@
 package net.osmand.plus.osmedit;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.ProgressImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -90,7 +95,12 @@ public class DashOsmEditsFragment extends DashBaseFragment {
 			send.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					uploadItem(point);
+					if (point.getGroup() == OsmPoint.Group.POI) {
+						SendPoiDialogFragment.createInstance((OpenstreetmapPoint) point)
+								.show(getChildFragmentManager(), "SendPoiDialogFragment");
+					} else {
+						uploadItem(point);
+					}
 				}
 			});
 			view.findViewById(R.id.options).setVisibility(View.GONE);
@@ -186,6 +196,46 @@ public class DashOsmEditsFragment extends DashBaseFragment {
 			} else if (l2.size() > 1) {
 				dataPoints.add(l2.get(1));
 			}
+		}
+	}
+
+	public static class SendPoiDialogFragment extends DialogFragment {
+		public static final String OPENSTREETMAP_POINT = "openstreetmap_point";
+
+		@NonNull
+		@Override
+		public Dialog onCreateDialog(Bundle savedInstanceState) {
+			final OpenstreetmapPoint poi = (OpenstreetmapPoint) getArguments().getSerializable(OPENSTREETMAP_POINT);
+			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+			View view = getActivity().getLayoutInflater().inflate(R.layout.send_poi_dialog, null);
+			final EditText messageEditText = (EditText) view.findViewById(R.id.messageEditText);
+			final EditText userNameEditText = (EditText) view.findViewById(R.id.userNameEditText);
+			final EditText passwordEditText = (EditText) view.findViewById(R.id.passwordEditText);
+
+			final OsmandSettings settings = ((MapActivity) getActivity()).getMyApplication().getSettings();
+			userNameEditText.setText(settings.USER_NAME.get());
+			passwordEditText.setText(settings.USER_PASSWORD.get());
+			builder.setTitle(R.string.commit_poi)
+					.setView(view)
+					.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							settings.USER_NAME.set(userNameEditText.getText().toString());
+							settings.USER_PASSWORD.set(passwordEditText.getText().toString());
+							poi.setComment(messageEditText.getText().toString());
+							((DashOsmEditsFragment) getParentFragment()).showProgressDialog(poi);
+						}
+					})
+					.setNegativeButton(R.string.shared_string_cancel, null);
+			return builder.create();
+		}
+
+		public static SendPoiDialogFragment createInstance(OpenstreetmapPoint poi) {
+			SendPoiDialogFragment fragment = new SendPoiDialogFragment();
+			Bundle bundle = new Bundle();
+			bundle.putSerializable(OPENSTREETMAP_POINT, poi);
+			fragment.setArguments(bundle);
+			return fragment;
 		}
 	}
 }

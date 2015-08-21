@@ -1,5 +1,9 @@
 package net.osmand.data;
 
+import net.osmand.Location;
+import net.osmand.osm.PoiCategory;
+import net.osmand.util.Algorithms;
+
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -13,10 +17,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.zip.GZIPInputStream;
 
-import net.osmand.Location;
-import net.osmand.osm.PoiCategory;
-import net.osmand.util.Algorithms;
-
 
 public class Amenity extends MapObject  {
 
@@ -28,7 +28,7 @@ public class Amenity extends MapObject  {
 	
 	private static final long serialVersionUID = 132083949926339552L;
 	private String subType;
-	private PoiCategory type;
+	private transient PoiCategory type;
 	// duplicate for fast access
 	private String openingHours;
 	private Map<String, String> additionalInfo;

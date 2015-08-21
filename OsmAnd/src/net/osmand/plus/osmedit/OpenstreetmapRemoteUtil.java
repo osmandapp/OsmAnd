@@ -22,7 +22,6 @@ import net.osmand.plus.Version;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
-import org.xml.sax.SAXException;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlSerializer;
 
