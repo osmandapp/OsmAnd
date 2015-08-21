@@ -881,8 +881,8 @@
     <string name="street_name">Sokak</string>
 	<string name="hno">Bina numarası</string>
     <string name="website">İnternet sitesi</string>
-	<string name="monitoring_settings">Kayıt servisleri ve Uyku modu</string>
-    <string name="monitoring_settings_descr">Seyahatlerin nasıl kaydedileceğini ve uyku modunu yapılandırın</string>
+	<string name="monitoring_settings">Seyahat kaydetme</string>
+    <string name="monitoring_settings_descr">Seyahatlerinizi nasıl kaydedeceğinizi yapılandırın</string>
     
     <string name="contribution_activity">Yükleme versiyonu</string>
     <string name="choose_osmand_theme_descr">Uygulama teması seç</string>
@@ -972,7 +972,7 @@
 	<string name="m">m</string>
 	<string name="poi_filter_custom_filter">Özel süzgeç</string>
 	<string name="specified_dir_doesnt_exist">Belirtilen dizin bulunamıyor.</string>
-	<string name="application_dir">Depo dizini</string>
+	<string name="application_dir">Veri depolama dizini</string>
 	<string name="osmand_net_previously_installed">Önceki bir OsmAnd sürümü yüklü. Tüm çevrimdışı veri yeni uygulama tarafından desteklenecek. Fakat Favori noktalar eski uygulamada dışa aktarılıp, sonra yeni uygulamada içe aktarılmalıdır.</string>
 	<string name="build_installed">{0} yapımı başarıyla yüklendi ({1}).</string>
 	<string name="downloading_build">Yapı indiriliyor…</string>
@@ -1349,4 +1349,44 @@
     <string name="traffic_warning">Trafik uyarısı</string>
 	<string name="way_alarms">Trafik uyarıları</string>
 	<string name="confirm_every_run">Her zaman sor</string>
-	</resources>
+	<string name="shared_string_import2osmand">OsmAnd\'a Aktar</string>
+    <string name="read_full_article">Tüm metni oku (çevrimiçi)</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">OSMC\'ye göre renklendiriliyor</string>
+    <string name="local_recordings_delete_all_confirm">%1$d notu silmek üzeresiniz. Emin misiniz?</string>
+	<string name="local_osm_changes_upload_all_confirm">%1%d düzenlemeyi OSM\'ye yüklemek üzeresiniz? Emin misiniz?</string>
+    <string name="plugin_nautical_name">Deniz haritası görünümü</string>
+	<string name="plugin_ski_name">Kayak haritası görünümü</string>
+	<string name="text_size">Yazı boyutu</string>
+    <string name="text_size_descr">Haritadaki yazı boyutunu ayarla.</string>
+    <string name="speak_favorites">Yakındaki Favorileri bildir</string>
+	<string name="speak_poi">Yakındaki POI\'leri bildir</string>
+	<string name="duration">Süre</string>
+    <string name="distance">Mesafe</string>
+    <string name="rendering_value_car_name">Araba</string>
+    <string name="rendering_value_bicycle_name">Bisiklet</string>
+    <string name="rendering_value_pedestrian_name">Yaya</string>
+    <string name="osmo_invite">Davet et…</string>
+    <string name="pause_navigation">Navigasyonu Duraklat</string>
+ 	<string name="continue_navigation">Navigasyona Devam Et</string>
+    <string name="local_map_names">Yerel isimler</string>
+    <string name="home">Ev</string>
+    <string name="rendering_attr_hideBuildings_name">Binaları gizle</string>
+    <string name="rendering_attr_hideText_name">Yazıları gizle</string>
+    <string name="rendering_attr_moreDetailed_name">Daha fazla ayrıntı</string>
+    <string name="rendering_attr_lessDetailed_name">Daza az ayrıntı</string>
+    <string name="rendering_attr_showSurfaceGrade_name">Yol kalitesini göster</string>
+    <string name="sort_by_distance">Mesafeye göre sırala</string>
+    <string name="sort_by_name">İsme göre sırala</string>
+    <string name="gpx_info_average_speed">"Ortalama hız: %1$s "</string>
+	<string name="gpx_info_maximum_speed">"Maksimum hız: %1$s "</string>
+	<string name="gpx_info_avg_altitude">Ortalama yükseklik: %1$s</string>
+	<string name="color_red">kırmızı</string>
+	<string name="color_pink">pembe</string>
+	<string name="color_orange">turuncu</string>
+	<string name="color_brown">kahverengi</string>
+	<string name="color_yellow">sarı</string>
+	<string name="color_lightblue">açık mavi</string>
+	<string name="color_blue">mavi</string>
+	<string name="color_green">yeşil</string>
+
+    </resources>
