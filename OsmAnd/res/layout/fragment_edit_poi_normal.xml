@@ -92,19 +92,19 @@
             android:text="Open hours"
             android:textColor="@color/color_black"/>
 
-        <LinearLayout
-            android:id="@+id/openHoursContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:id="@+id/openHoursImageView"
+            style="@style/edit_poi_imageview_style"
             android:layout_below="@id/openHoursTextView"
-            android:orientation="vertical"/>
+            tools:src="@drawable/ic_action_time"/>
 
-        <Button
-            android:id="@+id/addOpeningHoursButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/openHoursContainer"
-            android:layout_marginLeft="72dp"
-            android:text="Add opening hours"/>
+        <EditText
+            android:id="@+id/openHoursEditText"
+            style="@style/create_poi_text_field"
+            android:layout_width="match_parent"
+            android:layout_below="@id/openHoursTextView"
+            android:hint="Mo-Su 08:00-20:00"
+            android:inputType="textMultiLine"/>
+
     </RelativeLayout>
 </android.support.v4.widget.NestedScrollView>

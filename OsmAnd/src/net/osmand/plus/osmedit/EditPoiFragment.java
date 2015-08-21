@@ -406,6 +406,40 @@ public class EditPoiFragment extends Fragment {
 		});
 	}
 
+	public static void showEditInstance(final Amenity amenity, OsmandSettings settings,
+								 final MapActivity mapActivity) {
+		final OpenstreetmapUtil openstreetmapUtilToLoad;
+		if (settings.OFFLINE_EDITION.get() || !settings.isInternetConnectionAvailable(true)) {
+			OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
+			openstreetmapUtilToLoad = new OpenstreetmapLocalUtil(plugin, mapActivity);
+		} else if(!settings.isInternetConnectionAvailable(true)) {
+			openstreetmapUtilToLoad = new OpenstreetmapRemoteUtil(mapActivity);
+		} else {
+			openstreetmapUtilToLoad = new OpenstreetmapRemoteUtil(mapActivity);
+		}
+		new AsyncTask<Void, Void, Node>() {
+
+			@Override
+			protected Node doInBackground(Void... params) {
+				return openstreetmapUtilToLoad.loadNode((Amenity) amenity);
+			}
+
+			protected void onPostExecute(Node n) {
+				if(n != null){
+					EditPoiFragment fragment =
+							EditPoiFragment.createInstance(n, (Amenity) amenity);
+					mapActivity.getSupportFragmentManager().beginTransaction()
+							.add(fragment, "EditPoiFragment").commit();
+				} else {
+					AccessibleToast.makeText(mapActivity,
+							mapActivity.getString(R.string.poi_error_poi_not_found),
+							Toast.LENGTH_SHORT).show();
+				}
+			};
+
+		}.execute(new Void[0]);
+	}
+
 	public static class MyAdapter extends FragmentPagerAdapter {
 		public MyAdapter(FragmentManager fm) {
 			super(fm);

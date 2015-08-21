@@ -139,7 +139,6 @@ public class AdvancedDataFragment extends Fragment {
 			editPoiData.tags.add(tag);
 			if (mIsUserInput)
 				editPoiData.notifyDatasetChanged(mTagsChangedListener);
-			EditText valueEditText = (EditText) view.findViewById(R.id.valueEditText);
 			linearLayout.addView(view);
 		}
 
