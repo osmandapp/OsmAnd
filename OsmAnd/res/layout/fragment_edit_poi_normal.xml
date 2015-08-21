@@ -82,6 +82,7 @@
             android:layout_below="@id/webSiteEditText"
             android:hint="Description"
             android:inputType="textMultiLine"/>
+
         <TextView
             android:id="@+id/openHoursTextView"
             android:layout_width="wrap_content"
@@ -90,5 +91,20 @@
             android:layout_marginLeft="16dp"
             android:text="Open hours"
             android:textColor="@color/color_black"/>
+
+        <LinearLayout
+            android:id="@+id/openHoursContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/openHoursTextView"
+            android:orientation="vertical"/>
+
+        <Button
+            android:id="@+id/addOpeningHoursButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/openHoursContainer"
+            android:layout_marginLeft="72dp"
+            android:text="Add opening hours"/>
     </RelativeLayout>
 </android.support.v4.widget.NestedScrollView>

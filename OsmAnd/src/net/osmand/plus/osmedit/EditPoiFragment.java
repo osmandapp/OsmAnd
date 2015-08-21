@@ -2,16 +2,12 @@ package net.osmand.plus.osmedit;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.DialogFragment;
@@ -37,8 +33,6 @@ import android.widget.Toast;
 
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
-import net.osmand.osm.MapPoiTypes;
-import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.EntityInfo;
 import net.osmand.osm.edit.Node;
@@ -48,16 +42,16 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.osmedit.data.EditPoiData;
+import net.osmand.plus.osmedit.data.Tag;
+import net.osmand.plus.osmedit.dialogs.PoiSubTypeDialogFragment;
+import net.osmand.plus.osmedit.dialogs.PoiTypeDialogFragment;
 import net.osmand.util.Algorithms;
 
-import java.io.Serializable;
 import java.text.MessageFormat;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class EditPoiFragment extends Fragment {
 	public static final String TAG = "EditPoiFragment";
@@ -377,7 +371,7 @@ public class EditPoiFragment extends Fragment {
 		}.execute();
 	}
 
-	private void updateType(Amenity amenity) {
+	public void updateType(Amenity amenity) {
 		// TODO implement
 		Log.v(TAG, "updateType(" + "amenity=" + amenity + ")");
 		mIsUserInput = false;
@@ -443,128 +437,6 @@ public class EditPoiFragment extends Fragment {
 					return "Advanced";
 			}
 			throw new IllegalArgumentException("Unexpected position");
-		}
-	}
-
-	public static class EditPoiData {
-		private Set<TagsChangedListener> mListeners = new HashSet<>();
-		public LinkedHashSet<Tag> tags;
-		public Amenity amenity;
-
-		public void notifyDatasetChanged(TagsChangedListener listenerToSkip) {
-			Log.v(TAG, "notifyDatasetChanged(" + "listenerToSkip=" + listenerToSkip + ")" + mListeners);
-			for (TagsChangedListener listener : mListeners) {
-				if (listener != listenerToSkip) listener.onTagsChanged();
-			}
-		}
-
-		public void addListener(TagsChangedListener listener) {
-			mListeners.add(listener);
-		}
-
-		public void deleteListener(TagsChangedListener listener) {
-			mListeners.remove(listener);
-		}
-
-		public interface TagsChangedListener {
-			void onTagsChanged();
-		}
-	}
-
-
-	public static class Tag implements Serializable {
-		public String tag;
-		public String value;
-
-		public Tag(String tag, String value) {
-			this.tag = tag;
-			this.value = value;
-		}
-
-		@Override
-		public boolean equals(Object o) {
-			if (this == o) return true;
-			if (o == null || getClass() != o.getClass()) return false;
-			Tag tag1 = (Tag) o;
-			return tag.equals(tag1.tag);
-		}
-
-		@Override
-		public int hashCode() {
-			return tag.hashCode();
-		}
-
-		@Override
-		public String toString() {
-			return "Tag{" +
-					"tag='" + tag + '\'' +
-					", value='" + value + '\'' +
-					'}';
-		}
-	}
-
-	public static class PoiTypeDialogFragment extends DialogFragment {
-		@NonNull
-		@Override
-		public Dialog onCreateDialog(Bundle savedInstanceState) {
-			MapPoiTypes poiTypes = ((OsmandApplication) getActivity().getApplication()).getPoiTypes();
-			final Amenity amenity = (Amenity) getArguments().getSerializable(KEY_AMENITY);
-			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-			final List<PoiCategory> categories = poiTypes.getCategories(false);
-			String[] vals = new String[categories.size()];
-			for (int i = 0; i < vals.length; i++) {
-				vals[i] = categories.get(i).getTranslation();
-			}
-			builder.setItems(vals, new Dialog.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					PoiCategory aType = categories.get(which);
-					if (aType != amenity.getType()) {
-						amenity.setType(aType);
-						amenity.setSubType(""); //$NON-NLS-1$
-						((EditPoiFragment) getParentFragment()).updateType(amenity);
-					}
-					dismiss();
-				}
-			});
-			return builder.create();
-		}
-
-		public static PoiTypeDialogFragment createInstance(Amenity amenity) {
-			PoiTypeDialogFragment poiTypeDialogFragment = new PoiTypeDialogFragment();
-			Bundle args = new Bundle();
-			args.putSerializable(KEY_AMENITY, amenity);
-			poiTypeDialogFragment.setArguments(args);
-			return poiTypeDialogFragment;
-		}
-	}
-
-	public static class PoiSubTypeDialogFragment extends DialogFragment {
-		@NonNull
-		@Override
-		public Dialog onCreateDialog(Bundle savedInstanceState) {
-			MapPoiTypes poiTypes = ((OsmandApplication) getActivity().getApplication()).getPoiTypes();
-			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-			final Amenity a = (Amenity) getArguments().getSerializable(KEY_AMENITY);
-			final Map<String, PoiType> allTranslatedNames = poiTypes.getAllTranslatedNames(a.getType(), true);
-			// (=^.^=)
-			final String[] subCats = allTranslatedNames.keySet().toArray(new String[0]);
-			builder.setItems(subCats, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					((EditPoiFragment) getParentFragment()).setSubCategory(subCats[which]);
-					dismiss();
-				}
-			});
-			return builder.create();
-		}
-
-		public static PoiSubTypeDialogFragment createInstance(Amenity amenity) {
-			PoiSubTypeDialogFragment fragment = new PoiSubTypeDialogFragment();
-			Bundle args = new Bundle();
-			args.putSerializable(KEY_AMENITY, amenity);
-			fragment.setArguments(args);
-			return fragment;
 		}
 	}
 }

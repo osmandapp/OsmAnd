@@ -19,7 +19,8 @@ import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.OSMSettings;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.osmedit.EditPoiFragment.Tag;
+import net.osmand.plus.osmedit.data.EditPoiData;
+import net.osmand.plus.osmedit.data.Tag;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -28,7 +29,7 @@ public class AdvancedDataFragment extends Fragment {
 	private static final String TAG = "AdvancedDataFragment";
 
 	private TagAdapterLinearLayoutHack mAdapter;
-	private EditPoiFragment.EditPoiData.TagsChangedListener mTagsChangedListener;
+	private EditPoiData.TagsChangedListener mTagsChangedListener;
 	private boolean mIsUserInput = true;
 
 	@Override
@@ -88,7 +89,7 @@ public class AdvancedDataFragment extends Fragment {
 		super.onResume();
 		// TODO read more about lifecycle
 		mAdapter.updateViews();
-		mTagsChangedListener = new EditPoiFragment.EditPoiData.TagsChangedListener() {
+		mTagsChangedListener = new EditPoiData.TagsChangedListener() {
 			@Override
 			public void onTagsChanged() {
 				mIsUserInput = false;
@@ -112,7 +113,7 @@ public class AdvancedDataFragment extends Fragment {
 
 	public class TagAdapterLinearLayoutHack {
 		private final LinearLayout linearLayout;
-		private final EditPoiFragment.EditPoiData editPoiData;
+		private final EditPoiData editPoiData;
 
 		private final TextView nameTextView;
 		private final TextView amenityTagTextView;
@@ -120,7 +121,7 @@ public class AdvancedDataFragment extends Fragment {
 		private final Map<String, PoiType> allTranslatedSubTypes;
 
 		public TagAdapterLinearLayoutHack(LinearLayout linearLayout,
-										  EditPoiFragment.EditPoiData editPoiData,
+										  EditPoiData editPoiData,
 										  TextView nameTextView,
 										  TextView amenityTagTextView,
 										  TextView amenityTextView,
@@ -227,7 +228,7 @@ public class AdvancedDataFragment extends Fragment {
 		return (EditPoiFragment) getParentFragment();
 	}
 
-	private EditPoiFragment.EditPoiData getData() {
+	private EditPoiData getData() {
 		return getEditPoiFragment().getEditPoiData();
 	}
 }

@@ -2,6 +2,7 @@ package net.osmand.util;
 /* Can be commented out in order to run the main function separately */
 
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -199,7 +200,7 @@ public class OpeningHoursParser {
 	 * This implementation only supports month, day of weeks and numeral times, or the value "off"
 	 *
 	 */
-	public static class BasicOpeningHourRule  implements OpeningHoursRule {
+	public static class BasicOpeningHourRule  implements OpeningHoursRule, Serializable {
 		/**
 		 * represents the list on which days it is open.
 		 * Day number 0 is MONDAY
