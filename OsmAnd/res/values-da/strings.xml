@@ -2109,4 +2109,5 @@
 	<string name="shared_string_skip">Spring over</string>
 	<string name="app_name_osmand">OsmAnd</string>
 	<string name="offline_maps_and_navigation">Offline kort\n&amp; navigation</string>
+<string name="commit_poi">Indsend IP</string>
 </resources>
