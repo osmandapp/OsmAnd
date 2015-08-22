@@ -23,7 +23,11 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import org.apache.commons.logging.Log;
+
 public class ContextMenuAdapter {
+
+//	Log log =
 
 	public interface OnContextMenuClick {
 		//boolean return type needed to desribe if drawer needed to be close or not
@@ -345,7 +349,12 @@ public class ContextMenuAdapter {
 			Drawable imageId = getImage(app, position, holoLight);
 			if (imageId != null) {
 				if (layoutId == R.layout.simple_list_menu_item) {
-					tv.setCompoundDrawablesWithIntrinsicBounds(imageId, null, null, null);
+					float density = activity.getResources().getDisplayMetrics().density;
+					int paddingInPixels = (int) (24 * density);
+					int drawableSizeInPixels = (int) (50 * density); // 32
+					imageId.setBounds(0, 0, drawableSizeInPixels, drawableSizeInPixels);
+					tv.setCompoundDrawables(imageId, null, null, null);
+					tv.setCompoundDrawablePadding(paddingInPixels);
 				} else {
 					((ImageView) convertView.findViewById(R.id.icon)).setImageDrawable(imageId);
 					convertView.findViewById(R.id.icon).setVisibility(View.VISIBLE);

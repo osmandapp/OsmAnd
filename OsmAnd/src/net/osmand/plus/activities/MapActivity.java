@@ -221,6 +221,7 @@ public class MapActivity extends AccessibleActivity {
 							FirstUsageFragment.TAG).commit();
 		}
 		ListView menuItemsListView = (ListView) findViewById(R.id.menuItems);
+		menuItemsListView.setDivider(null);
 		menuItemsListView.setAdapter(mapActions.createMainOptionsMenu().createSimpleListAdapter(this, true));
 	}
 
