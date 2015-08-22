@@ -289,91 +289,116 @@ public class ContextMenuAdapter {
 	public ArrayAdapter<?> createListAdapter(final Activity activity, final boolean holoLight) {
 		final int layoutId = defaultLayoutId;
 		final OsmandApplication app = ((OsmandApplication) activity.getApplication());
-		ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(activity, layoutId, R.id.title,
-				getItemNames()) {
-			@Override
-			public View getView(final int position, View convertView, ViewGroup parent) {
-				// User super class to create the View
-				View v = convertView;
-				Integer lid = getLayoutId(position);
-				if (lid == R.layout.mode_toggles){
-					final Set<ApplicationMode> selected = new LinkedHashSet<ApplicationMode>();
-					return AppModeDialog.prepareAppModeDrawerView(activity, visibleModes, selected, allModes, new View.OnClickListener() {
-						@Override
-						public void onClick(View view) {
-							if (selected.size() > 0) {
-								app.getSettings().APPLICATION_MODE.set(selected.iterator().next());
-								notifyDataSetChanged();
-							}
-							if (changeAppModeListener != null) {
-								changeAppModeListener.onClick(allModes.getResult());
-							}
-						}
-					});
-				}
-				if (v == null || (v.getTag() != lid)) {
-					v = activity.getLayoutInflater().inflate(lid, null);
-					v.setTag(lid);
-				}
-				TextView tv = (TextView) v.findViewById(R.id.title);
-				tv.setText(isCategory(position) ? getItemName(position).toUpperCase() : getItemName(position));
-
-				Drawable imageId = getImage(app, position, holoLight);
-				if (imageId != null) {
-					((ImageView) v.findViewById(R.id.icon)).setImageDrawable(imageId);
-					v.findViewById(R.id.icon).setVisibility(View.VISIBLE);
-				} else if (v.findViewById(R.id.icon) != null){
-					v.findViewById(R.id.icon).setVisibility(View.GONE);
-				}
-				
-				if(isCategory(position)) {
-					tv.setTypeface(Typeface.DEFAULT_BOLD);
-				} else {
-					tv.setTypeface(null);
-				}
-
-				if (v.findViewById(R.id.check_item) != null) {
-					final CompoundButton ch = (CompoundButton) v.findViewById(R.id.check_item);
-					if(selectedList.get(position) != -1) {
-						ch.setOnCheckedChangeListener(null);
-						ch.setVisibility(View.VISIBLE);
-						ch.setChecked(selectedList.get(position) > 0);
-						final ArrayAdapter<String> la = this;
-						final OnCheckedChangeListener listener = new OnCheckedChangeListener() {
-
-							@Override
-							public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-								OnContextMenuClick ca = getClickAdapter(position);
-								selectedList.set(position, isChecked ? 1 : 0);
-								if (ca != null) {
-									ca.onContextMenuClick(la, getElementId(position), position, isChecked);
-								}
-							}
-						};
-						ch.setOnCheckedChangeListener(listener);
-						ch.setVisibility(View.VISIBLE);
-					} else if (ch != null) {
-						ch.setVisibility(View.GONE);
-					}
-				}
-
-				if (v.findViewById(R.id.ProgressBar) != null){
-					ProgressBar bar = (ProgressBar) v.findViewById(R.id.ProgressBar);
-					if(loadingList.get(position) == 1){
-						bar.setVisibility(View.VISIBLE);
-					} else {
-						bar.setVisibility(View.INVISIBLE);
-					}
-				}
-
-				String itemDescr = getItemDescr(position);
-				if (v.findViewById(R.id.descr) != null){
-					((TextView)v.findViewById(R.id.descr)).setText(itemDescr);
-				}
-				return v;
-			}
-		};
+		ArrayAdapter<String> listAdapter = new ContextMenuArrayAdapter(activity, layoutId, R.id.title,
+				getItemNames(), app, holoLight);
 		return listAdapter;
 	}
 
+	public ArrayAdapter<?> createSimpleListAdapter(final Activity activity, final boolean holoLight) {
+		final int layoutId = R.layout.simple_list_menu_item;
+		final OsmandApplication app = ((OsmandApplication) activity.getApplication());
+		ArrayAdapter<String> listAdapter = new ContextMenuArrayAdapter(activity, layoutId, R.id.title,
+				getItemNames(), app, holoLight);
+		return listAdapter;
+	}
+
+	public class ContextMenuArrayAdapter extends ArrayAdapter<String> {
+		private Activity activity;
+		private OsmandApplication app;
+		private boolean holoLight;
+		private int layoutId;
+		public ContextMenuArrayAdapter(Activity context, int resource, int textViewResourceId,
+									   String[] objects, OsmandApplication app, boolean holoLight) {
+			super(context, resource, textViewResourceId, objects);
+			activity = context;
+			this.app = app;
+			this.holoLight = holoLight;
+			layoutId = resource;
+		}
+
+		@Override
+		public View getView(final int position, View convertView, ViewGroup parent) {
+			// User super class to create the View
+			Integer lid = getLayoutId(position);
+			if (lid == R.layout.mode_toggles){
+				final Set<ApplicationMode> selected = new LinkedHashSet<ApplicationMode>();
+				return AppModeDialog.prepareAppModeDrawerView(activity, visibleModes, selected, allModes, new View.OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						if (selected.size() > 0) {
+							app.getSettings().APPLICATION_MODE.set(selected.iterator().next());
+							notifyDataSetChanged();
+						}
+						if (changeAppModeListener != null) {
+							changeAppModeListener.onClick(allModes.getResult());
+						}
+					}
+				});
+			}
+			if (convertView == null || (convertView.getTag() != lid)) {
+				convertView = activity.getLayoutInflater().inflate(lid, null);
+				convertView.setTag(lid);
+			}
+			TextView tv = (TextView) convertView.findViewById(R.id.title);
+			tv.setText(isCategory(position) ? getItemName(position).toUpperCase() : getItemName(position));
+
+			Drawable imageId = getImage(app, position, holoLight);
+			if (imageId != null) {
+				if (layoutId == R.layout.simple_list_menu_item) {
+					tv.setCompoundDrawablesWithIntrinsicBounds(imageId, null, null, null);
+				} else {
+					((ImageView) convertView.findViewById(R.id.icon)).setImageDrawable(imageId);
+					convertView.findViewById(R.id.icon).setVisibility(View.VISIBLE);
+				}
+			} else if (convertView.findViewById(R.id.icon) != null){
+				convertView.findViewById(R.id.icon).setVisibility(View.GONE);
+			}
+
+			if(isCategory(position)) {
+				tv.setTypeface(Typeface.DEFAULT_BOLD);
+			} else {
+				tv.setTypeface(null);
+			}
+
+			if (convertView.findViewById(R.id.check_item) != null) {
+				final CompoundButton ch = (CompoundButton) convertView.findViewById(R.id.check_item);
+				if(selectedList.get(position) != -1) {
+					ch.setOnCheckedChangeListener(null);
+					ch.setVisibility(View.VISIBLE);
+					ch.setChecked(selectedList.get(position) > 0);
+					final ArrayAdapter<String> la = this;
+					final OnCheckedChangeListener listener = new OnCheckedChangeListener() {
+
+						@Override
+						public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+							OnContextMenuClick ca = getClickAdapter(position);
+							selectedList.set(position, isChecked ? 1 : 0);
+							if (ca != null) {
+								ca.onContextMenuClick(la, getElementId(position), position, isChecked);
+							}
+						}
+					};
+					ch.setOnCheckedChangeListener(listener);
+					ch.setVisibility(View.VISIBLE);
+				} else if (ch != null) {
+					ch.setVisibility(View.GONE);
+				}
+			}
+
+			if (convertView.findViewById(R.id.ProgressBar) != null){
+				ProgressBar bar = (ProgressBar) convertView.findViewById(R.id.ProgressBar);
+				if(loadingList.get(position) == 1){
+					bar.setVisibility(View.VISIBLE);
+				} else {
+					bar.setVisibility(View.INVISIBLE);
+				}
+			}
+
+			String itemDescr = getItemDescr(position);
+			if (convertView.findViewById(R.id.descr) != null){
+				((TextView)convertView.findViewById(R.id.descr)).setText(itemDescr);
+			}
+			return convertView;
+		}
+	}
 }

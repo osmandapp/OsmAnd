@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TextView
+    android:id="@+id/title"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:drawablePadding="24dp"
+    android:gravity="center_vertical"
+    android:padding="16dp"
+    android:text="@string/layer_poi"
+    android:textSize="@dimen/default_list_text_size_large"
+    tools:drawableLeft="@drawable/ic_action_search_dark"/>

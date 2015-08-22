@@ -22,6 +22,8 @@ import android.view.View;
 import android.view.ViewStub;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -218,6 +220,8 @@ public class MapActivity extends AccessibleActivity {
 					.add(R.id.fragmentContainer, new FirstUsageFragment(),
 							FirstUsageFragment.TAG).commit();
 		}
+		ListView menuItemsListView = (ListView) findViewById(R.id.menuItems);
+		menuItemsListView.setAdapter(mapActions.createMainOptionsMenu().createSimpleListAdapter(this, true));
 	}
 
 	private void checkAppInitialization() {
