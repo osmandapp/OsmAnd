@@ -2025,4 +2025,6 @@
 	<string name="app_name_osmand">OsmAnd</string>
 	<string name="offline_maps_and_navigation">Mapas y navegación sin conexión</string>
 <string name="commit_poi">Enviar PDI</string>
-</resources>
+<string name="routing_attr_avoid_shuttle_train_name">Evitar tren de enlace</string>
+	<string name="routing_attr_avoid_shuttle_train_description">Evite tomar trenes de enlace</string>
+    </resources>
