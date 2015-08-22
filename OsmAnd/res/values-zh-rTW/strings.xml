@@ -2004,9 +2004,9 @@
     <string name="local_recordings_delete_all_confirm">您要刪除 %1$d 的注解。您確定嗎？</string>
 	<string name="gps_network_not_enabled">未啟用位置服務。您想要開啟它嗎？</string>
     <string name="disable_recording_once_app_killed">預防單獨的日誌記錄</string>
-    <string name="disable_recording_once_app_killed_descrp">當應用程式被停止，將暫停 GPX 日誌記錄 (藉由新近的 apps)。(OsmAnd 睡眠模式指示，從通知列消失。)</string>
-	<string name="archive_wikipedia_data">您已下載有舊的且不相容的維基百科資料。您想要將其存檔嗎?</string>
-    <string name="download_wikipedia_files">您想要下載增加的維基百科資料嗎 (%1$s MB)？</string>
+    <string name="disable_recording_once_app_killed_descrp">當應用程式被停止，將暫停 GPX 日誌記錄 (藉由新的應用程式)。(OsmAnd 睡眠模式指示，從通知列消失。)</string>
+	<string name="archive_wikipedia_data">您已下載有，舊的且不相容的維基百科資料。您想要將其存檔嗎？</string>
+    <string name="download_wikipedia_files">您想要下載所增加的維基百科資料 (%1$s MB) 嗎？</string>
     <string name="lang_vo">沃拉普克語</string>
     <string name="lang_th">泰語</string>
     <string name="lang_te">泰盧固語</string>
@@ -2039,7 +2039,7 @@
     <string name="lang_lb">盧森堡語</string>
     <string name="lang_os">奧塞提亞語</string>
     <string name="lang_eo">世界語</string>
-    <string name="restart_is_required">為了徹底的把變更套用，必需手動重新啟動應用程式。</string>
+    <string name="restart_is_required">為了徹底套用所變更的，必需以手動重新啟動應用程式。</string>
     <string name="rendering_attr_currentTrackColor_name">GPX 的顏色</string>
     <string name="rendering_attr_currentTrackWidth_name">GPX 的寬度</string>
     <string name="rendering_value_red_name">紅色</string>
