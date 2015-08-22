@@ -1008,4 +1008,11 @@
 	<string name="poi_crossing_uncontrolled">Sans feux de circulation</string>
 	<string name="poi_crossing_unmarked">Sans marquage au sol, ni feux</string>
 
+	<string name="poi_mill_pond">Retenue d\'eau</string>
+	<string name="poi_recycling_scrap_metal">Ferraille</string>
+	<string name="poi_recycling_waste">Poubelle (sacs noirs)</string>
+	<string name="poi_recycling_cardboard">Carton</string>
+	<string name="poi_recycling_magazines">Magazines</string>
+	<string name="poi_recycling_small_appliances">Petits appareils électriques</string>
+	<string name="poi_recycling_foil">Papier aluminium</string>
 	</resources>
