@@ -2071,7 +2071,7 @@
     <string name="use_fast_recalculation">Recálculo inteligente de ruta</string>
 	<string name="use_fast_recalculation_desc">Recalcula sólo la parte inicial de la ruta para viajes largos</string>
 <string name="rendering_value_disabled_name">Desactivado</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Colorear según ámbito de la ruta</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Colorear según alcance de ruta</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Colorear según OSMC</string>
     <string name="osmo_share_my_location">Compartir mi ubicación</string>
     <string name="shared_string_logoff">Cerrar sesión</string>
@@ -2162,4 +2162,5 @@
 	<string name="shared_string_skip">Omitir</string>
 	<string name="app_name_osmand">OsmAnd</string>
 	<string name="offline_maps_and_navigation">Mapas y navegación fuera de línea</string>
+<string name="commit_poi">Enviar PDI</string>
 </resources>

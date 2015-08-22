@@ -2239,17 +2239,23 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="rate_this_app">Bewerten Sie diese App</string>
 	<string name="rate_this_app_long">Bitte bewerten Sie OsmAnd auf Google Play</string>
 	<string name="user_hates_app_get_feedback">Sagen Sie uns warum.</string>
-	<string name="user_hates_app_get_feedback_long">Bitte teilen Sie uns mit welche Änderungen Sie sich für diese App wünschen.</string>
+	<string name="user_hates_app_get_feedback_long">Bitte teilen Sie uns mit, was Sie an dieser App ändern würden.</string>
 <string name="we_really_care">Wir kümmern uns wirklich</string>
-	<string name="no_updates_available">Keine Updates verfügbar</string>
-    <string name="download_live_updates">Live-Updates</string>
+	<string name="no_updates_available">Keine Aktualisierungen verfügbar</string>
+    <string name="download_live_updates">Live-Aktualisierungen</string>
 	<string name="we_really_care_about_your_opinion">Ihre Meinung ist uns sehr viel wert, Rückmeldungen sind uns wichtig.</string>
 	<string name="failed_to_upload">Hochladen ist fehlgeschlagen</string>
 	<string name="successfully_uploaded_pattern">Erfolgreich hochgeladen {0}/{1}</string>
 	<string name="try_again">Erneut versuchen</string>
 	<string name="error_message_pattern">Fehler: {0}</string>
-	<string name="dahboard_options_dialog_title">Dashboard-Optionen</string>
-	<string name="shared_string_undo">Rückgängig</string>
+	<string name="dahboard_options_dialog_title">Übersichtsseitenoptionen</string>
+	<string name="shared_string_undo">Rückgängig machen</string>
 	<string name="shared_string_skip">Überspringen</string>
 	<string name="app_name_osmand">OsmAnd</string>
-	</resources>
+	<string name="traffic_warning_hazard">Gefährdung</string>
+    <string name="rendering_value_boldOutline_name">Hervorhebender Umriss</string>
+    <string name="delete_change">Änderung löschen</string>
+	<string name="shared_string_card_was_hidden">Karte war verdeckt</string>
+	<string name="offline_maps_and_navigation">Offline-Karten\n&amp; Navigation</string>
+	<string name="commit_poi">POI übermitteln</string>
+</resources>
