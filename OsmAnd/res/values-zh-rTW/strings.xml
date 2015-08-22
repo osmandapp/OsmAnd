@@ -2081,4 +2081,5 @@
 	<string name="shared_string_skip">跳過</string>
 	<string name="app_name_osmand">OsmAnd</string>
 	<string name="offline_maps_and_navigation">離線地圖\n和導航</string>
+<string name="commit_poi">提交興趣點</string>
 </resources>
