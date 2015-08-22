@@ -2095,4 +2095,5 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
 	<string name="shared_string_skip">Omet</string>
 	<string name="app_name_osmand">OsmAnd</string>
 	<string name="offline_maps_and_navigation">Mapes fora de línia\n&amp; Navegació</string>
+<string name="commit_poi">Publica PDI</string>
 </resources>
