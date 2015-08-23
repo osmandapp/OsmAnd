@@ -1795,4 +1795,5 @@
 	<string name="offline_maps_and_navigation">Mapas &amp; Navegação\nOffline</string>
 <string name="commit_poi">Enviar POI</string>
 <string name="routing_attr_avoid_shuttle_train_name">Evitar transporte de trem</string>
-	</resources>
+	<string name="routing_attr_avoid_shuttle_train_description">Evitar shuttle train</string>
+    </resources>
