@@ -1968,4 +1968,6 @@
 	<string name="shared_string_undo">ÅNGRA</string>
 	<string name="shared_string_skip">Hoppa över</string>
 	<string name="app_name_osmand">OsmAnd</string>
-	</resources>
+	<string name="routing_attr_avoid_shuttle_train_name">Undvik pendeltåg</string>
+	<string name="routing_attr_avoid_shuttle_train_description">Undvik pendeltåg</string>
+    </resources>
