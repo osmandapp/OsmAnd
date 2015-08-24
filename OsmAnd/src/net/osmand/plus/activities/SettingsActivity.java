@@ -36,7 +36,6 @@ public class SettingsActivity extends SettingsBaseActivity {
 	private Preference general;
 	private Preference routing;
 	private Preference about;
-	private Preference version;
 	private Preference help;
 
 
@@ -64,15 +63,7 @@ public class SettingsActivity extends SettingsBaseActivity {
 				startActivity(new Intent(this, SettingsNavigationActivity.class));
 			} 
 		}
-		if ((Version.isDeveloperVersion(getMyApplication())) &&
-				OsmandPlugin.getEnabledPlugin(OsmandDevelopmentPlugin.class) != null){
-			version = new Preference(this);
-			version.setOnPreferenceClickListener(this);
-			version.setSummary(R.string.version_settings_descr);
-			version.setTitle(R.string.version_settings);
-			version.setKey("version");
-			screen.addPreference(version);
-		}
+		
 		about = new Preference(this);
 		about.setOnPreferenceClickListener(this);
 		about.setSummary(R.string.about_settings_descr);
@@ -95,18 +86,15 @@ public class SettingsActivity extends SettingsBaseActivity {
 		if (preference == general) {
 			startActivity(new Intent(this, SettingsGeneralActivity.class));
 			return true;
-		} else if (preference == help) {
-			startActivity(new Intent(this, HelpActivity.class));
-			return true;
 		} else if (preference == routing) {
 			startActivity(new Intent(this, SettingsNavigationActivity.class));
+			return true;
+		} else if (preference == help) {
+			startActivity(new Intent(this, HelpActivity.class));
 			return true;
 		} else if (preference == about) {
 			showAboutDialog(getMyApplication());
 			return true;
-		} else if (preference == version){
-			final Intent mapIntent = new Intent(this, ContributionVersionActivity.class);
-			this.startActivityForResult(mapIntent, 0);
 		} else {
 			super.onPreferenceClick(preference);
 		}
