@@ -17,7 +17,6 @@ import android.os.Message;
 import android.support.v4.app.NotificationCompat.Builder;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.NotificationCompat;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -129,6 +128,8 @@ public class MapActivity extends AccessibleActivity {
 	private AppInitializeListener initListener;
 	private IMapDownloaderCallback downloaderCallback;
 	private DrawerLayout drawerLayout;
+
+	public static final String SHOULD_SHOW_DASHBOARD_ON_START = "should_show_dashboard_on_start";
 
 	private Notification getNotification() {
 		Intent notificationIndent = new Intent(this, getMyApplication().getAppCustomization().getMapActivity());
@@ -384,7 +385,10 @@ public class MapActivity extends AccessibleActivity {
 		long tm = System.currentTimeMillis();
 		if (app.isApplicationInitializing() || DashboardOnMap.staticVisible) {
 			if (!dashboardOnMap.isVisible()) {
-				dashboardOnMap.setDashboardVisibility(true, DashboardOnMap.staticVisibleType);
+				final OsmandSettings.CommonPreference<Boolean> shouldShowDashboardOnStart =
+						settings.registerBooleanPreference(MapActivity.SHOULD_SHOW_DASHBOARD_ON_START, true);
+				if (shouldShowDashboardOnStart.get())
+					dashboardOnMap.setDashboardVisibility(true, DashboardOnMap.staticVisibleType);
 			}
 		}
 		dashboardOnMap.updateLocation(true, true, false);

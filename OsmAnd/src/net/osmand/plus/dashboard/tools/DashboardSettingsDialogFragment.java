@@ -13,82 +13,113 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashboardOnMap;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class DashboardSettingsDialogFragment extends DialogFragment {
 	private static final String CHECKED_ITEMS = "checked_items";
 	private MapActivity mapActivity;
-	private DashFragmentData[] fragmentsData;
-	private DashFragmentAdapter adapter;
+	private ArrayList<DashFragmentData> mFragmentsData;
+	private DashFragmentAdapter mAdapter;
 
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 		mapActivity = (MapActivity) activity;
-		ArrayList<DashFragmentData> fragmentsList = new ArrayList<>();
+		mFragmentsData = new ArrayList<>();
 		for(DashFragmentData fragmentData : mapActivity.getDashboard().getFragmentsData()) {
-			if (!fragmentData.customDeletionLogic) fragmentsList.add(fragmentData);
+			if (!fragmentData.customDeletionLogic) mFragmentsData.add(fragmentData);
 		}
-		fragmentsData = fragmentsList.toArray(new DashFragmentData[fragmentsList.size()]);
+		mFragmentsData.addAll(OsmandPlugin.getPluginsCardsList());
+		Collections.sort(mFragmentsData);
 	}
 
 	@NonNull
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		final OsmandSettings settings = mapActivity.getMyApplication().getSettings();
+
+		View view = LayoutInflater.from(getActivity()).inflate(
+				R.layout.dashboard_settings_dialog_item, null, false);
+		final TextView textView = (TextView) view.findViewById(R.id.text);
+		textView.setText("Show on start");
+		final OsmandSettings.CommonPreference<Boolean> shouldShowDashboardOnStart =
+				settings.registerBooleanPreference(MapActivity.SHOULD_SHOW_DASHBOARD_ON_START, true);
+		final CompoundButton compoundButton = (CompoundButton) view.findViewById(R.id.check_item);
+		compoundButton.setChecked(shouldShowDashboardOnStart.get());
+		textView.setTextColor(shouldShowDashboardOnStart.get() ? 0xFF212121 : 0xFF8c8c8c);
+		compoundButton.setOnCheckedChangeListener(
+				new CompoundButton.OnCheckedChangeListener() {
+					@Override
+					public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+						textView.setTextColor(b ? 0xFF212121 : 0xFF8c8c8c);
+					}
+				});
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		if (savedInstanceState != null && savedInstanceState.containsKey(CHECKED_ITEMS)) {
-			adapter = new DashFragmentAdapter(getActivity(), fragmentsData,
+			mAdapter = new DashFragmentAdapter(getActivity(), mFragmentsData,
 					savedInstanceState.getBooleanArray(CHECKED_ITEMS));
 		} else {
-			adapter = new DashFragmentAdapter(getActivity(), fragmentsData,
+			mAdapter = new DashFragmentAdapter(getActivity(), mFragmentsData,
 					settings);
 		}
 		builder.setTitle(R.string.dahboard_options_dialog_title)
-				.setAdapter(adapter, null)
+				.setAdapter(mAdapter, null)
 				.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialogInterface, int type) {
-						boolean[] shouldShow = adapter.getCheckedItems();
+						boolean[] shouldShow = mAdapter.getCheckedItems();
 						for (int i = 0; i < shouldShow.length; i++) {
 							settings.registerBooleanPreference(
-									DashboardOnMap.SHOULD_SHOW + fragmentsData[i].tag, true)
+									DashboardOnMap.SHOULD_SHOW + mFragmentsData.get(i).tag, true)
 									.makeGlobal().set(shouldShow[i]);
 						}
 						mapActivity.getDashboard().refreshDashboardFragments();
+						shouldShowDashboardOnStart.set(compoundButton.isChecked());
+						// TODO save as preference
 					}
 				})
 				.setNegativeButton(R.string.shared_string_cancel, null);
-		return builder.create();
+		final AlertDialog dialog = builder.create();
+
+		ListView listView = dialog.getListView();
+		listView.addHeaderView(view);
+		return dialog;
 	}
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
-		outState.putBooleanArray(CHECKED_ITEMS, adapter.getCheckedItems());
+		outState.putBooleanArray(CHECKED_ITEMS, mAdapter.getCheckedItems());
 		super.onSaveInstanceState(outState);
 	}
 
 	private static class DashFragmentAdapter extends ArrayAdapter<DashFragmentData> {
 		private final boolean[] checkedItems;
 
-		public DashFragmentAdapter(Context context, DashFragmentData[] objects, boolean[] checkedItems) {
+		public DashFragmentAdapter(Context context, List<DashFragmentData> objects,
+								   boolean[] checkedItems) {
 			super(context, 0, objects);
 			this.checkedItems = checkedItems;
 		}
 
-		public DashFragmentAdapter(Context context, DashFragmentData[] objects, OsmandSettings settings) {
+		public DashFragmentAdapter(Context context, List<DashFragmentData> objects,
+								   OsmandSettings settings) {
 			super(context, 0, objects);
-			checkedItems = new boolean[objects.length];
-			for (int i = 0; i < objects.length; i++) {
+			checkedItems = new boolean[objects.size()];
+			for (int i = 0; i < objects.size(); i++) {
 				checkedItems[i] = settings.registerBooleanPreference(
-						DashboardOnMap.SHOULD_SHOW + objects[i].tag, true).makeGlobal().get();
+						DashboardOnMap.SHOULD_SHOW + objects.get(i).tag, true).makeGlobal().get();
 			}
 		}
 

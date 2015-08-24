@@ -2,6 +2,8 @@ package net.osmand.plus;
 
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -9,9 +11,9 @@ import net.osmand.IProgress;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityPlugin;
+import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.activities.TabActivity.TabItem;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
@@ -31,7 +33,6 @@ import org.apache.commons.logging.Log;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.preference.PreferenceScreen;
 import android.support.v4.app.Fragment;
 
 public abstract class OsmandPlugin {
@@ -88,9 +89,9 @@ public abstract class OsmandPlugin {
 	public String getInstallURL() {
 		return installURL;
 	}
-	
+
 	public void disable(OsmandApplication app) {};
-	
+
 	
 	public static void initPlugins(OsmandApplication app) {
 		OsmandSettings settings = app.getSettings();
@@ -165,7 +166,9 @@ public abstract class OsmandPlugin {
 		}
 		app.getSettings().enablePlugin(plugin.getId(), enable);
 		if(activity instanceof MapActivity) {
-			plugin.updateLayers(((MapActivity) activity).getMapView(), (MapActivity) activity);
+			final MapActivity mapActivity = (MapActivity) activity;
+			plugin.updateLayers(mapActivity.getMapView(), mapActivity);
+			mapActivity.getDashboard().refreshDashboardFragments();
 		}
 		return true;
 	}
@@ -194,6 +197,8 @@ public abstract class OsmandPlugin {
 	public void registerMapContextMenuActions(MapActivity mapActivity, double latitude, double longitude, ContextMenuAdapter adapter, Object selectedObj) {}
 	
 	public void registerOptionsMenuItems(MapActivity mapActivity, ContextMenuAdapter helper) {}
+
+	public DashFragmentData getCardFragment() {return null;}
 	
 	public void updateLocation(Location location) {}
 	
@@ -354,6 +359,14 @@ public abstract class OsmandPlugin {
 		}
 	}
 
+	public static Collection<DashFragmentData> getPluginsCardsList() {
+		HashSet<DashFragmentData> collection = new HashSet<>();
+		for (OsmandPlugin plugin : getEnabledPlugins()) {
+			final DashFragmentData fragmentData = plugin.getCardFragment();
+			if (fragmentData != null) collection.add(fragmentData);
+		}
+		return collection;
+	}
 
 	private static boolean isPackageInstalled(String packageInfo,
 			OsmandApplication app) {
