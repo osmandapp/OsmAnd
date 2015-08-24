@@ -543,7 +543,24 @@ public class MapActivityActions implements DialogProvider {
 		final OsmandMapTileView mapView = mapActivity.getMapView();
 		final OsmandApplication app = mapActivity.getMyApplication();
 		ContextMenuAdapter optionsMenuHelper = new ContextMenuAdapter(app);
-		
+
+		optionsMenuHelper.item(R.string.home).iconColor(R.drawable.map_dashboard)
+				.listen(new OnContextMenuClick() {
+					@Override
+					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+						mapActivity.closeDrawer();
+						mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.DASHBOARD);
+						return true;
+					}
+				}).reg();
+		optionsMenuHelper.item(R.string.target_points).iconColor(R.drawable.ic_action_flage_dark)
+				.listen(new OnContextMenuClick() {
+					@Override
+					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+						mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.WAYPOINTS);
+						return false;
+					}
+				}).reg();
 		optionsMenuHelper.item(R.string.get_directions).iconColor(R.drawable.ic_action_gdirections_dark)
 				.listen(new OnContextMenuClick() {
 					@Override
@@ -557,15 +574,7 @@ public class MapActivityActions implements DialogProvider {
 						return true;
 					}
 				}).reg();
-		optionsMenuHelper.item(R.string.target_points).iconColor(R.drawable.ic_action_flage_dark)
-				.listen(new OnContextMenuClick() {
-					@Override
-					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-						mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.WAYPOINTS);
-						return false;
-					}
-				}).reg();
-		// Default actions (Layers, Configure Map screen, Settings, Search, Favorites) 
+		// Default actions (Layers, Configure Map screen, Settings, Search, Favorites)
 		optionsMenuHelper.item(R.string.search_button)
 				.iconColor(R.drawable.ic_action_search_dark)
 				.listen(new OnContextMenuClick() {

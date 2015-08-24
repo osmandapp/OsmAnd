@@ -385,7 +385,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		View backToMenuButton = mapActivity.findViewById(R.id.map_menu_button);
 		
 		
-		menuControl = createHudButton((ImageView) backToMenuButton, R.drawable.map_dashboard).setBg(
+		menuControl = createHudButton((ImageView) backToMenuButton, R.drawable.ic_navigation_drawer).setBg(
 				R.drawable.btn_round, R.drawable.btn_round_night);
 		controls.add(menuControl);
 		backToMenuButton.setOnClickListener(new View.OnClickListener() {
@@ -395,7 +395,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 				// double lon = activity.getMapView().getLongitude();
 				// MainMenuActivity.backToMainMenuDialog(activity, new LatLon(lat, lon));
 				notifyClicked();
-				mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.DASHBOARD);
+				mapActivity.openDrawer();
+//				mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.DASHBOARD);
 			}
 		});
 		mapAppModeShadow = mapActivity.findViewById(R.id.map_app_mode_shadow);
