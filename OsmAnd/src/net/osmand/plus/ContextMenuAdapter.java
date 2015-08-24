@@ -351,7 +351,7 @@ public class ContextMenuAdapter {
 				if (layoutId == R.layout.simple_list_menu_item) {
 					float density = activity.getResources().getDisplayMetrics().density;
 					int paddingInPixels = (int) (24 * density);
-					int drawableSizeInPixels = (int) (32 * density); // 32
+					int drawableSizeInPixels = (int) (24 * density); // 32
 					imageId.setBounds(0, 0, drawableSizeInPixels, drawableSizeInPixels);
 					tv.setCompoundDrawables(imageId, null, null, null);
 					tv.setCompoundDrawablePadding(paddingInPixels);
