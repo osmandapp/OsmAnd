@@ -1052,4 +1052,13 @@
 	<string name="poi_crossing_unmarked">Неразьмечаны</string>
 
 	<string name="poi_recycling_waste_oil">Адпрацаваная алiва</string>
+	<string name="poi_perfumery">Парфумэрыя</string>
+
+	<string name="poi_twitter">Твітар</string>
+	<string name="poi_skype">Скайп</string>
+	<string name="poi_youtube">Ютуб</string>
+	<string name="poi_instagram">Інстаграм</string>
+	<string name="poi_vk">УКантакце</string>
+	<string name="poi_google_plus">Гугл+</string>
+	<string name="poi_mill_pond">Млынавая сажалка</string>
 	</resources>

@@ -2064,4 +2064,8 @@
 	<string name="shared_string_card_was_hidden">Картка схавана</string>
 	<string name="shared_string_undo">Вярнуць</string>
 	<string name="shared_string_skip">Прапусьціць</string>
-	</resources>
+	<string name="plugin_settings">Модулі</string>
+	<string name="commit_poi">Укласьці POI</string>
+<string name="routing_attr_avoid_shuttle_train_name">Пазьбягаць трансфер-цягнікоў</string>
+	<string name="routing_attr_avoid_shuttle_train_description">Пазьбягаць трансфер-цягнікоў</string>
+    </resources>

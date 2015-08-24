@@ -2027,4 +2027,5 @@
 <string name="commit_poi">Enviar PDI</string>
 <string name="routing_attr_avoid_shuttle_train_name">Evitar tren de enlace</string>
 	<string name="routing_attr_avoid_shuttle_train_description">Evite tomar trenes de enlace</string>
-    </resources>
+    <string name="plugin_settings">Complementos</string>
+	</resources>

@@ -1,10 +1,16 @@
 package net.osmand.plus.development;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.widget.ArrayAdapter;
 
+import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
+import net.osmand.plus.activities.ContributionVersionActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
@@ -41,6 +47,22 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	@Override
 	public void registerLayers(MapActivity activity) {
 		registerWidget(activity);
+	}
+
+	@Override
+	public void registerOptionsMenuItems(final MapActivity mapActivity, ContextMenuAdapter helper) {
+		if (Version.isDeveloperVersion(mapActivity.getMyApplication())) {
+			helper.item(R.string.version_settings).iconColor(R.drawable.ic_action_gabout_dark)
+					.listen(new OnContextMenuClick() {
+						@Override
+						public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+							final Intent mapIntent = new Intent(mapActivity, ContributionVersionActivity.class);
+							mapActivity.startActivityForResult(mapIntent, 0);
+							return true;
+						}
+					}).reg();
+		}
+
 	}
 
 	@Override

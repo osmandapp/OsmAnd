@@ -17,7 +17,6 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.ITileSource;
-import net.osmand.plus.AppInitializer;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
@@ -671,9 +670,29 @@ public class MapActivityActions implements DialogProvider {
 						return true;
 					}
 				}).reg();
+		optionsMenuHelper.item(R.string.shared_string_help).iconColor(R.drawable.ic_action_help)
+		.listen(new OnContextMenuClick() {
+			@Override
+			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+				mapActivity.startActivity(new Intent(mapActivity, HelpActivity.class));
+				// FIXME show ABOUT!
+//				showAboutDialog(getMyApplication());
+//				String version = Version.getFullVersion(app);
+//				String vt = this.getString(R.string.about_version) + "\t";
+//				String edition = "";
+//				if (!this.getString(R.string.app_edition).equals("")) {
+//					edition = this.getString(R.string.shared_string_release) + " : \t" + this.getString(R.string.app_edition);
+//				}
+//				tv.setText(vt + version + "\n" +
+//						edition + "\n\n" +
+//						this.getString(R.string.about_content));
+				return true;
+			}
+		}).reg();
 
 		//////////// Others
 		OsmandPlugin.registerOptionsMenu(mapActivity, optionsMenuHelper);
+		
 //		optionsMenuHelper.item(R.string.shared_string_exit).iconColor(R.drawable.ic_action_quit_dark )
 //					.listen(new OnContextMenuClick() {
 //			@Override

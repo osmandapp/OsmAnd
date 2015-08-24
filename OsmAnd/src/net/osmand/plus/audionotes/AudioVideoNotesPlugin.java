@@ -1059,7 +1059,6 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		if (am != null) {
 			unregisterMediaListener(am);
 		}
-		ifgetCardFragment().tagasdf
 	}
 
 	@Override

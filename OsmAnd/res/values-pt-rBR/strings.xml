@@ -1796,4 +1796,5 @@
 <string name="commit_poi">Enviar POI</string>
 <string name="routing_attr_avoid_shuttle_train_name">Evitar transporte de trem</string>
 	<string name="routing_attr_avoid_shuttle_train_description">Evitar shuttle train</string>
-    </resources>
+    <string name="plugin_settings">Complementos</string>
+	</resources>
