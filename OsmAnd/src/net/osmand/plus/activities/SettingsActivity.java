@@ -33,8 +33,6 @@ public class SettingsActivity extends SettingsBaseActivity {
     private static final String CONTRIBUTION_VERSION_FLAG = "CONTRIBUTION_VERSION_FLAG";
 	
 
-	private Preference plugins;
-	private Preference localIndexes;
 	private Preference general;
 	private Preference routing;
 	private Preference about;
@@ -48,10 +46,6 @@ public class SettingsActivity extends SettingsBaseActivity {
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.settings_pref);
 		PreferenceScreen screen = getPreferenceScreen();
-		localIndexes =(Preference) screen.findPreference("local_indexes");
-		localIndexes.setOnPreferenceClickListener(this);
-		plugins = (Preference) screen.findPreference("plugins");
-		plugins.setOnPreferenceClickListener(this);
 		general = (Preference) screen.findPreference("general_settings");
 		general.setOnPreferenceClickListener(this);
 		routing = (Preference) screen.findPreference("routing_settings");
@@ -98,10 +92,7 @@ public class SettingsActivity extends SettingsBaseActivity {
 
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
-		if (preference == localIndexes) {
-			startActivity(new Intent(this, getMyApplication().getAppCustomization().getDownloadIndexActivity()));
-			return true;
-		} else if (preference == general) {
+		if (preference == general) {
 			startActivity(new Intent(this, SettingsGeneralActivity.class));
 			return true;
 		} else if (preference == help) {
@@ -112,9 +103,6 @@ public class SettingsActivity extends SettingsBaseActivity {
 			return true;
 		} else if (preference == about) {
 			showAboutDialog(getMyApplication());
-			return true;
-		} else if (preference == plugins) {
-			startActivityForResult(new Intent(this, getMyApplication().getAppCustomization().getPluginsActivity()), PLUGINS_SELECTION_REQUEST);
 			return true;
 		} else if (preference == version){
 			final Intent mapIntent = new Intent(this, ContributionVersionActivity.class);
