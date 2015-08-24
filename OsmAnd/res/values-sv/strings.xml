@@ -1776,7 +1776,7 @@
 	<string name="shared_string_deselect">Avmarkera</string>
 	<string name="shared_string_deselect_all">Avmarkera alla</string>
 	<string name="shared_string_clear">Töm</string>
-	<string name="shared_string_clear_all">Töm alla</string>
+	<string name="shared_string_clear_all">Ta bort alla</string>
 	<string name="shared_string_save">Spara</string>
 	<string name="shared_string_save_as_gpx">Spara som GPX-spår</string>
 	<string name="shared_string_rename">Byt namn</string>
@@ -1968,4 +1968,6 @@
 	<string name="shared_string_undo">ÅNGRA</string>
 	<string name="shared_string_skip">Hoppa över</string>
 	<string name="app_name_osmand">OsmAnd</string>
-	</resources>
+	<string name="routing_attr_avoid_shuttle_train_name">Undvik pendeltåg</string>
+	<string name="routing_attr_avoid_shuttle_train_description">Undvik pendeltåg</string>
+    </resources>

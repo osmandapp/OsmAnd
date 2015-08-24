@@ -17,7 +17,6 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.ITileSource;
-import net.osmand.plus.AppInitializer;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
@@ -543,7 +542,24 @@ public class MapActivityActions implements DialogProvider {
 		final OsmandMapTileView mapView = mapActivity.getMapView();
 		final OsmandApplication app = mapActivity.getMyApplication();
 		ContextMenuAdapter optionsMenuHelper = new ContextMenuAdapter(app);
-		
+
+		optionsMenuHelper.item(R.string.home).iconColor(R.drawable.map_dashboard)
+				.listen(new OnContextMenuClick() {
+					@Override
+					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+						mapActivity.closeDrawer();
+						mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.DASHBOARD);
+						return true;
+					}
+				}).reg();
+		optionsMenuHelper.item(R.string.target_points).iconColor(R.drawable.ic_action_flage_dark)
+				.listen(new OnContextMenuClick() {
+					@Override
+					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+						mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.WAYPOINTS);
+						return false;
+					}
+				}).reg();
 		optionsMenuHelper.item(R.string.get_directions).iconColor(R.drawable.ic_action_gdirections_dark)
 				.listen(new OnContextMenuClick() {
 					@Override
@@ -557,15 +573,7 @@ public class MapActivityActions implements DialogProvider {
 						return true;
 					}
 				}).reg();
-		optionsMenuHelper.item(R.string.target_points).iconColor(R.drawable.ic_action_flage_dark)
-				.listen(new OnContextMenuClick() {
-					@Override
-					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-						mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.WAYPOINTS);
-						return false;
-					}
-				}).reg();
-		// Default actions (Layers, Configure Map screen, Settings, Search, Favorites) 
+		// Default actions (Layers, Configure Map screen, Settings, Search, Favorites)
 		optionsMenuHelper.item(R.string.search_button)
 				.iconColor(R.drawable.ic_action_search_dark)
 				.listen(new OnContextMenuClick() {
@@ -662,9 +670,29 @@ public class MapActivityActions implements DialogProvider {
 						return true;
 					}
 				}).reg();
+		optionsMenuHelper.item(R.string.shared_string_help).iconColor(R.drawable.ic_action_help)
+		.listen(new OnContextMenuClick() {
+			@Override
+			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+				mapActivity.startActivity(new Intent(mapActivity, HelpActivity.class));
+				// FIXME show ABOUT!
+//				showAboutDialog(getMyApplication());
+//				String version = Version.getFullVersion(app);
+//				String vt = this.getString(R.string.about_version) + "\t";
+//				String edition = "";
+//				if (!this.getString(R.string.app_edition).equals("")) {
+//					edition = this.getString(R.string.shared_string_release) + " : \t" + this.getString(R.string.app_edition);
+//				}
+//				tv.setText(vt + version + "\n" +
+//						edition + "\n\n" +
+//						this.getString(R.string.about_content));
+				return true;
+			}
+		}).reg();
 
 		//////////// Others
 		OsmandPlugin.registerOptionsMenu(mapActivity, optionsMenuHelper);
+		
 //		optionsMenuHelper.item(R.string.shared_string_exit).iconColor(R.drawable.ic_action_quit_dark )
 //					.listen(new OnContextMenuClick() {
 //			@Override

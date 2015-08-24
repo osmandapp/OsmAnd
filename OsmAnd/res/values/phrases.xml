@@ -165,6 +165,7 @@
 	<string name="poi_video_games">Video games</string>
 	<string name="poi_pyrotechnics">Pyrotechnics</string>
 	<string name="poi_weapons">Weapons store</string>
+	<string name="poi_perfumery">Perfume shop</string>
 
 	<string name="poi_police">Police</string>
 	<string name="poi_fire_station">Fire station</string>
@@ -293,6 +294,7 @@
 	<string name="poi_waterway_turning_point">Waterway turning point</string>
 	<string name="poi_weir">Weir</string>
 	<string name="poi_dam">Dam</string>
+	<string name="poi_mill_pond">Mill pond</string>
 	<string name="poi_watermill">Water mill</string>
 	<string name="poi_breakwater">Breakwater</string>
 	<string name="poi_groyne">Groyne</string>
@@ -988,6 +990,12 @@
 	<string name="poi_email">Email</string>
 	<string name="poi_fax">Fax</string>
 	<string name="poi_facebook">Facebook</string>
+	<string name="poi_twitter">Twitter</string>
+	<string name="poi_skype">Skype</string>
+	<string name="poi_youtube">Youtube</string>
+	<string name="poi_instagram">Instagram</string>
+	<string name="poi_vk">VKontakte</string>
+	<string name="poi_google_plus">Google+</string>
 	<string name="poi_mobile">Mobile</string>
 	<string name="poi_service_times">Service times</string>
 	<string name="poi_maxheight">Maximum height</string>

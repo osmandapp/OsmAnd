@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:background="@color/dashboard_background"
     android:orientation="vertical"
-    tools:context="net.osmand.plus.osmedit.EditPoiFragment">
+    tools:context="net.osmand.plus.osmedit.EditPoiFragment"
+    android:clickable="true">
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"

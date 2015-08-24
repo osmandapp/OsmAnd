@@ -1007,4 +1007,11 @@
 	<string name="poi_animal_shelter_dog_cat">Unterkunft für Hunde und Katzen</string>
 	<string name="poi_animal_shelter_bird">Unterkunft für Vögel</string>
 
-</resources>
+<string name="poi_mill_pond">Mühlenteich</string>
+	<string name="poi_twitter">Twitter</string>
+	<string name="poi_skype">Skype</string>
+	<string name="poi_youtube">Youtube</string>
+	<string name="poi_instagram">Instagram</string>
+	<string name="poi_vk">VKontakte</string>
+	<string name="poi_google_plus">Google+</string>
+	</resources>

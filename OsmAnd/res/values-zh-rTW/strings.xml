@@ -2082,4 +2082,6 @@
 	<string name="app_name_osmand">OsmAnd</string>
 	<string name="offline_maps_and_navigation">離線地圖\n和導航</string>
 <string name="commit_poi">提交興趣點</string>
-</resources>
+<string name="routing_attr_avoid_shuttle_train_name">往返避開鐵路</string>
+	<string name="routing_attr_avoid_shuttle_train_description">往返避開鐵路</string>
+    </resources>

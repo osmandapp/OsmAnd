@@ -1047,4 +1047,11 @@
 	<string name="poi_recycling_cardboard">Cartró d\'embalar</string>
 	<string name="poi_recycling_beverage_cartons">Envasos de cartró de begudes</string>
 	<string name="poi_recycling_sheet_metal">Xapa metàl·lica</string>
+	<string name="poi_mill_pond">Bassa del molí</string>
+	<string name="poi_twitter">Twitter</string>
+	<string name="poi_skype">Skype</string>
+	<string name="poi_youtube">Youtube</string>
+	<string name="poi_instagram">Instagram</string>
+	<string name="poi_vk">VKontakte</string>
+	<string name="poi_google_plus">Google+</string>
 	</resources>

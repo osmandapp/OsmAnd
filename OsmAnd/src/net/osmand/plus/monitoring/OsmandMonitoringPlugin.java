@@ -18,6 +18,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
+import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -461,5 +462,9 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		}
 		return ll;
 	}
-	
+
+	@Override
+	public DashFragmentData getCardFragment() {
+		return new DashFragmentData(DashTrackFragment.TAG, DashTrackFragment.class, getName(), 11);
+	}
 }

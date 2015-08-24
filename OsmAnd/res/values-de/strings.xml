@@ -2258,4 +2258,6 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="shared_string_card_was_hidden">Karte war verdeckt</string>
 	<string name="offline_maps_and_navigation">Offline-Karten\n&amp; Navigation</string>
 	<string name="commit_poi">POI übermitteln</string>
-</resources>
+<string name="routing_attr_avoid_shuttle_train_name">Pendelzug vermeiden</string>
+	<string name="routing_attr_avoid_shuttle_train_description">Pendelzug vermeiden</string>
+    </resources>

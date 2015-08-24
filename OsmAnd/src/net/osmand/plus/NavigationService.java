@@ -233,9 +233,9 @@ public class NavigationService extends Service implements LocationListener {
 				.setSmallIcon(R.drawable.bgs_icon)
 //			.setLargeIcon(Helpers.getBitmap(R.drawable.mirakel, getBaseContext()))
 				.setContentIntent(contentPendingIntent)
-				.setOngoing(true)
-				.addAction(R.drawable.ic_action_rec_stop, stop, stopPendingIntent)
-				.addAction(R.drawable.ic_action_save, pause, savePendingIntent);
+				.setOngoing(true);
+//				.addAction(R.drawable.ic_action_rec_stop, stop, stopPendingIntent)
+//				.addAction(R.drawable.ic_action_save, pause, savePendingIntent);
 		startForeground(NOTIFICATION_SERVICE_ID, notificationBuilder.build());
 	}
 

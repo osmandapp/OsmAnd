@@ -24,6 +24,7 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.download.DownloadFileHelper;
 import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
 import net.osmand.plus.osmo.OsMoService.SessionInfo;
@@ -530,4 +531,8 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 		return app.getSettings().OSMO_USE_HTTPS.get();
 	}
 
+	@Override
+	public DashFragmentData getCardFragment() {
+		return new DashFragmentData(DashOsMoFragment.TAG, DashOsMoFragment.class, getName(), 12);
+	}
 }

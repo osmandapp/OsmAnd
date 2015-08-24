@@ -2095,4 +2095,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
 	<string name="shared_string_skip">Omet</string>
 	<string name="app_name_osmand">OsmAnd</string>
 	<string name="offline_maps_and_navigation">Mapes fora de línia\n&amp; Navegació</string>
-</resources>
+<string name="commit_poi">Publica PDI</string>
+<string name="routing_attr_avoid_shuttle_train_name">Evita tren llançadora</string>
+	<string name="routing_attr_avoid_shuttle_train_description">Evita tren llançadora</string>
+    </resources>
