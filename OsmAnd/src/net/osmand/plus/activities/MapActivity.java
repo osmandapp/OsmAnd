@@ -15,14 +15,18 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.NotificationCompat.Builder;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.NotificationCompat;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewStub;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.LinearLayout;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -46,6 +50,7 @@ import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.BusyIndicator;
+import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.FirstUsageFragment;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
@@ -91,7 +96,9 @@ public class MapActivity extends AccessibleActivity {
 
 	private static MapViewTrackingUtilities mapViewTrackingUtilities;
 
-	/** Called when the activity is first created. */
+	/**
+	 * Called when the activity is first created.
+	 */
 	private OsmandMapTileView mapView;
 	private AtlasMapRendererView atlasMapRendererView;
 
@@ -121,6 +128,7 @@ public class MapActivity extends AccessibleActivity {
 	private DashboardOnMap dashboardOnMap = new DashboardOnMap(this);
 	private AppInitializeListener initListener;
 	private IMapDownloaderCallback downloaderCallback;
+	private DrawerLayout drawerLayout;
 
 	private Notification getNotification() {
 		Intent notificationIndent = new Intent(this, getMyApplication().getAppCustomization().getMapActivity());
@@ -133,11 +141,11 @@ public class MapActivity extends AccessibleActivity {
 //				pi);
 		int smallIcon = app.getSettings().getApplicationMode().getSmallIconDark();
 		final Builder noti = new NotificationCompat.Builder(
-	            this).setContentTitle(Version.getAppName(app))
-	        .setContentText(getString(R.string.go_back_to_osmand))
-	        .setSmallIcon(smallIcon )
+				this).setContentTitle(Version.getAppName(app))
+				.setContentText(getString(R.string.go_back_to_osmand))
+				.setSmallIcon(smallIcon)
 //	        .setLargeIcon(Helpers.getBitmap(R.drawable.mirakel, getBaseContext()))
-	        .setContentIntent(pi).setOngoing(true);
+				.setContentIntent(pi).setOngoing(true);
 		return noti.build();
 	}
 
@@ -210,19 +218,34 @@ public class MapActivity extends AccessibleActivity {
 		OsmandPlugin.onMapActivityCreate(this);
 		gpxImportHelper = new GpxImportHelper(this, getMyApplication(), getMapView());
 		wakeLockHelper = new WakeLockHelper(getMyApplication());
-		if(System.currentTimeMillis() - tm > 50) {
+		if (System.currentTimeMillis() - tm > 50) {
 			System.err.println("OnCreate for MapActivity took " + (System.currentTimeMillis() - tm) + " ms");
 		}
 		mapView.refreshMap(true);
 
-		if(getMyApplication().getAppInitializer().isFirstTime(this)) {
+		if (getMyApplication().getAppInitializer().isFirstTime(this)) {
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.fragmentContainer, new FirstUsageFragment(),
 							FirstUsageFragment.TAG).commit();
 		}
-		ListView menuItemsListView = (ListView) findViewById(R.id.menuItems);
+		final ListView menuItemsListView = (ListView) findViewById(R.id.menuItems);
 		menuItemsListView.setDivider(null);
-		menuItemsListView.setAdapter(mapActions.createMainOptionsMenu().createSimpleListAdapter(this, true));
+		final ContextMenuAdapter contextMenuAdapter = mapActions.createMainOptionsMenu();
+		final ArrayAdapter<?> simpleListAdapter = contextMenuAdapter.createSimpleListAdapter(this, true);
+		menuItemsListView.setAdapter(simpleListAdapter);
+		menuItemsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				ContextMenuAdapter.OnContextMenuClick click =
+						contextMenuAdapter.getClickAdapter(position);
+				if (click.onContextMenuClick(simpleListAdapter,
+						contextMenuAdapter.getElementId(position), position, false)) {
+					closeDrawer();
+				}
+			}
+		});
+
+		drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 	}
 
 	private void checkAppInitialization() {
@@ -230,20 +253,21 @@ public class MapActivity extends AccessibleActivity {
 			findViewById(R.id.init_progress).setVisibility(View.VISIBLE);
 			initListener = new AppInitializeListener() {
 				boolean openGlSetup = false;
+
 				@Override
 				public void onProgress(AppInitializer init, InitEvents event) {
 					String tn = init.getCurrentInitTaskName();
 					if (tn != null) {
 						((TextView) findViewById(R.id.ProgressMessage)).setText(tn);
 					}
-					if(event == InitEvents.NATIVE_INITIALIZED) {
+					if (event == InitEvents.NATIVE_INITIALIZED) {
 						setupOpenGLView(false);
 						openGlSetup = true;
 					}
-					if(event == InitEvents.MAPS_INITIALIZED) {
+					if (event == InitEvents.MAPS_INITIALIZED) {
 						// TODO investigate if this false cause any issues!
 						mapView.refreshMap(false);
-						if(dashboardOnMap != null) {
+						if (dashboardOnMap != null) {
 							dashboardOnMap.updateLocation(true, true, false);
 						}
 					}
@@ -251,11 +275,11 @@ public class MapActivity extends AccessibleActivity {
 
 				@Override
 				public void onFinish(AppInitializer init) {
-					if(!openGlSetup) {
+					if (!openGlSetup) {
 						setupOpenGLView(false);
 					}
 					mapView.refreshMap(false);
-					if(dashboardOnMap != null) {
+					if (dashboardOnMap != null) {
 						dashboardOnMap.updateLocation(true, true, false);
 					}
 					findViewById(R.id.init_progress).setVisibility(View.GONE);
@@ -348,7 +372,7 @@ public class MapActivity extends AccessibleActivity {
 
 	@Override
 	public void onBackPressed() {
-		if(dashboardOnMap.onBackPressed()) {
+		if (dashboardOnMap.onBackPressed()) {
 			return;
 		}
 		super.onBackPressed();
@@ -359,7 +383,7 @@ public class MapActivity extends AccessibleActivity {
 		super.onResume();
 		long tm = System.currentTimeMillis();
 		if (app.isApplicationInitializing() || DashboardOnMap.staticVisible) {
-			if(!dashboardOnMap.isVisible()) {
+			if (!dashboardOnMap.isVisible()) {
 				dashboardOnMap.setDashboardVisibility(true, DashboardOnMap.staticVisibleType);
 			}
 		}
@@ -400,7 +424,7 @@ public class MapActivity extends AccessibleActivity {
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		if (routingHelper.isFollowingMode()
 				&& (!Algorithms.objectEquals(targets.getPointToNavigate().point, routingHelper.getFinalLocation()) || !Algorithms
-						.objectEquals(targets.getIntermediatePointsLatLon(), routingHelper.getIntermediatePoints()))) {
+				.objectEquals(targets.getIntermediatePointsLatLon(), routingHelper.getIntermediatePoints()))) {
 			targets.updateRouteAndReferesh(true);
 		}
 		app.getLocationProvider().resumeAllUpdates();
@@ -452,7 +476,7 @@ public class MapActivity extends AccessibleActivity {
 			atlasMapRendererView.handleOnResume();
 		}
 		getMyApplication().getAppCustomization().resumeActivity(MapActivity.class, this);
-		if(System.currentTimeMillis() - tm > 50) {
+		if (System.currentTimeMillis() - tm > 50) {
 			System.err.println("OnCreate for MapActivity took " + (System.currentTimeMillis() - tm) + " ms");
 		}
 	}
@@ -495,12 +519,12 @@ public class MapActivity extends AccessibleActivity {
 			loc.setLatitude(mapView.getLatitude());
 			loc.setLongitude(mapView.getLongitude());
 			getMapActions().enterRoutePlanningMode(null, null, status == OsmandSettings.NAVIGATE_CURRENT_GPX);
-			if(dashboardOnMap.isVisible()) {
+			if (dashboardOnMap.isVisible()) {
 				dashboardOnMap.hideDashboard();
 			}
 		}
 		if (latLonToShow != null) {
-			if(dashboardOnMap.isVisible()) {
+			if (dashboardOnMap.isVisible()) {
 				dashboardOnMap.hideDashboard();
 			}
 			if (mapLabelToShow != null) {
@@ -567,7 +591,7 @@ public class MapActivity extends AccessibleActivity {
 			AccessibleToast.makeText(this, R.string.edit_tilesource_maxzoom, Toast.LENGTH_SHORT).show(); //$NON-NLS-1$
 			return;
 		}
-		if(newZoom < 1) {
+		if (newZoom < 1) {
 			AccessibleToast.makeText(this, R.string.edit_tilesource_minzoom, Toast.LENGTH_SHORT).show(); //$NON-NLS-1$
 			return;
 		}
@@ -601,7 +625,7 @@ public class MapActivity extends AccessibleActivity {
 			LatLon loc = getMapLocation();
 			newIntent.putExtra(SearchActivity.SEARCH_LAT, loc.getLatitude());
 			newIntent.putExtra(SearchActivity.SEARCH_LON, loc.getLongitude());
-			if(mapViewTrackingUtilities.isMapLinkedToLocation()) {
+			if (mapViewTrackingUtilities.isMapLinkedToLocation()) {
 				newIntent.putExtra(SearchActivity.SEARCH_NEARBY, true);
 			}
 			startActivity(newIntent);
@@ -644,7 +668,7 @@ public class MapActivity extends AccessibleActivity {
 		return super.onTrackballEvent(event);
 	}
 
-	
+
 	@Override
 	protected void onStart() {
 		super.onStart();
@@ -695,14 +719,14 @@ public class MapActivity extends AccessibleActivity {
 	}
 
 	public LatLon getMapLocation() {
-		if(mapView == null) {
+		if (mapView == null) {
 			return settings.getLastKnownMapLocation();
 		}
 		return new LatLon(mapView.getLatitude(), mapView.getLongitude());
 	}
-	
+
 	public float getMapRotate() {
-		if(mapView == null) {
+		if (mapView == null) {
 			return 0;
 		}
 		return mapView.getRotate();
@@ -763,7 +787,7 @@ public class MapActivity extends AccessibleActivity {
 	}
 
 	public void updateMapSettings() {
-		if(app.isApplicationInitializing()) {
+		if (app.isApplicationInitializing()) {
 			return;
 		}
 		// update vector renderer
@@ -786,9 +810,13 @@ public class MapActivity extends AccessibleActivity {
 				}
 				return null;
 			}
-			protected void onPostExecute(Void result) {};
+
+			protected void onPostExecute(Void result) {
+			}
+
+			;
 		}.execute((Void) null);
-		
+
 	}
 
 	@Override
@@ -826,7 +854,7 @@ public class MapActivity extends AccessibleActivity {
 	}
 
 	public void checkExternalStorage() {
-		if(Build.VERSION.SDK_INT >= 19) {
+		if (Build.VERSION.SDK_INT >= 19) {
 			return;
 		}
 		String state = Environment.getExternalStorageState();
@@ -916,7 +944,7 @@ public class MapActivity extends AccessibleActivity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		OsmandPlugin.onMapActivityResult(requestCode, resultCode, data);
 		MapControlsLayer mcl = mapView.getLayerByClass(MapControlsLayer.class);
-		if(mcl != null) {
+		if (mcl != null) {
 			mcl.onActivityResult(requestCode, resultCode, data);
 		}
 	}
@@ -931,5 +959,21 @@ public class MapActivity extends AccessibleActivity {
 
 	public DashboardOnMap getDashboard() {
 		return dashboardOnMap;
+	}
+
+	public void openDrawer() {
+		drawerLayout.openDrawer(Gravity.LEFT);
+	}
+
+	public void disableDrawer() {
+		drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+	}
+
+	public void enableDrawer() {
+		drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+	}
+
+	public void closeDrawer() {
+		drawerLayout.closeDrawer(Gravity.LEFT);
 	}
 }
