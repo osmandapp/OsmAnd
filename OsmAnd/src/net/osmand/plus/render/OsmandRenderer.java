@@ -333,7 +333,7 @@ public class OsmandRenderer {
 							visibleRect = calculateRect(rc, icon, visbleWidth, visbleHeight);
 							boundIntersections.queryInBox(new QuadRect(visibleRect.left, visibleRect.top, visibleRect.right, visibleRect.bottom), result);
 							for (RectF r : result) {
-								if (r.intersect(visibleRect)) {
+								if (r.intersects(visibleRect.left, visibleRect.top, visibleRect.right, visibleRect.bottom)) {
 									intersects = true;
 									break;
 								}
