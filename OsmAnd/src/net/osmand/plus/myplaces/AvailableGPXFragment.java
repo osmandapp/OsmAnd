@@ -191,7 +191,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		if (isRecording) {
 			stop.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.ic_action_rec_stop));
 		} else {
-			stop.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_rec_start, R.color.recording_color));
+			stop.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.ic_action_rec_start));
 		}
 		stop.setOnClickListener(new View.OnClickListener() {
 			@Override

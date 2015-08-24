@@ -174,7 +174,7 @@
 		<string name="poi_water_transport">Vanntransport</string>
 		<string name="poi_bicycle_transport">Sykkeltransport</string>
 		<string name="poi_aerialway_transport">Heistransport</string>
-	<string name="poi_piste_sleigh">Slede</string>
+	<string name="poi_piste_sleigh">Slede-løype</string>
 	<string name="poi_public_transport_platform_trolleybus">Trolleybussholdeplass</string>
 	<string name="poi_public_transport_platform_tram">Sporvognholdeplass</string>
 	<string name="poi_theatre">Teater</string>
@@ -195,4 +195,12 @@
 	<string name="poi_photo">Fotobutikk</string>
 	<string name="poi_craft_photographer">Fotograf</string>
 	<string name="poi_craft_photographic_laboratory">Fotolaboratorium</string>
+	<string name="poi_hiking_routes">Vandreruter</string>
+		<string name="poi_school">Skole</string>
+	<string name="poi_embassy">Ambassade</string>
+	<string name="poi_prison">Fengsel</string>
+	<string name="poi_customs">Toll</string>
+	<string name="poi_capital">Hovedstad</string>
+	<string name="poi_residential">Boligområde</string>
+
 	</resources>

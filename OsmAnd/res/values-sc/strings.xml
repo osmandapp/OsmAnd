@@ -2056,4 +2056,7 @@
 	<string name="shared_string_skip">Brinca</string>
 	<string name="app_name_osmand">OsmAnd</string>
 	<string name="offline_maps_and_navigation">Mapas non in lìnia\ne Nàvigu</string>
-</resources>
+<string name="shared_string_undo">Annudda atzione</string>
+	<string name="commit_poi">Imbia PDI</string>
+<string name="shared_string_card_was_hidden">S’ischeda fiat cuada</string>
+	</resources>

@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+	<string name="routing_attr_avoid_shuttle_train_name">Avoid shuttle train</string>
+	<string name="routing_attr_avoid_shuttle_train_description">Avoid shuttle train</string>
     <string name="traffic_warning_hazard">Hazard</string>
     <string name="rendering_value_boldOutline_name">Bold outline</string>
     <string name="no_updates_available">No updates available</string>
@@ -2236,4 +2238,5 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="shared_string_skip">Skip</string>
 	<string name="app_name_osmand">OsmAnd</string>
 	<string name="offline_maps_and_navigation"><![CDATA[Offline Maps\n& Navigation]]></string>
+	<string name="commit_poi">Commit POI</string>
 </resources>

@@ -1793,4 +1793,7 @@
 	<string name="shared_string_skip">Pular</string>
 	<string name="app_name_osmand">OsmAnd</string>
 	<string name="offline_maps_and_navigation">Mapas &amp; Navegação\nOffline</string>
-</resources>
+<string name="commit_poi">Enviar POI</string>
+<string name="routing_attr_avoid_shuttle_train_name">Evitar transporte de trem</string>
+	<string name="routing_attr_avoid_shuttle_train_description">Evitar shuttle train</string>
+    </resources>

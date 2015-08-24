@@ -2258,4 +2258,5 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="shared_string_skip">Preskočiť</string>
 	<string name="app_name_osmand">OsmAnd</string>
 	<string name="offline_maps_and_navigation">Offline mapy\n&amp; Navigácia</string>
+<string name="commit_poi">Odoslať POI</string>
 </resources>

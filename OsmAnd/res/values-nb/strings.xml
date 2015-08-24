@@ -1377,13 +1377,13 @@
     <string name="lang_et">Estisk</string>
     <string name="light_theme">Lyst</string>
     <string name="dark_theme">Mørkt</string>
-    <string name="rendering_attr_currentTrackColor_name">Gjeldende GPX-farge</string>
-    <string name="rendering_attr_currentTrackWidth_name">Gjeldende GPX-bredde</string>
+    <string name="rendering_attr_currentTrackColor_name">GPX-farge</string>
+    <string name="rendering_attr_currentTrackWidth_name">GPX-bredde</string>
     <string name="rendering_value_translucent_red_name">Gjennomskinnelig rød</string>
     <string name="rendering_value_yellow_name">Gul</string>
     <string name="rendering_value_translucent_yellow_name">Gjennomskinnelig gul</string>
     <string name="rendering_value_lightgreen_name">Lysegrønn</string>
-    <string name="rendering_value_translucent_lightgreen_name">Gjennomskinnelig lysegrøn</string>
+    <string name="rendering_value_translucent_lightgreen_name">Gjennomskinnelig lysegrønn</string>
     <string name="rendering_value_green_name">Grønn</string>
     <string name="rendering_value_translucent_green_name">Gjennomskinnelig grønn</string>
     <string name="rendering_value_lightblue_name">Lyseblå</string>
@@ -1392,10 +1392,24 @@
     <string name="rendering_value_translucent_blue_name">Gjennomskinnelig blå</string>
     <string name="rendering_value_purple_name">Lilla</string>
     <string name="rendering_value_translucent_purple_name">Gjennomskinnelig lilla</string>
-    <string name="restart_is_required">For å bruke endringene er omstart av programmet nødvendig.</string>
+    <string name="restart_is_required">For å fullt ut bruke endringene er en manuell omstart av programmet nødvendig.</string>
     <string name="plugin_touringview_name">Turkartvisning</string>
 	<string name="rendering_value__name">Standard</string>
     <string name="rendering_value_highContrastRoads_name">Veier med høy kontrast</string>
 	<string name="rendering_value_red_name">Rød</string>
     <string name="rendering_value_translucent_orange_name">Gjennomskinnelig orange</string>
-    </resources>
+    <string name="traffic_warning_hazard">Fare</string>
+    <string name="no_updates_available">Ingen oppdateringer tilgjengelig</string>
+    <string name="download_live_updates">Live-oppdateringer</string>
+	<string name="rendering_value_default13_name">Standard (13)</string>
+	<string name="rendering_value_defaultTranslucentCyan_name">Standard (gjennomskinnelig cyan)</string>
+    <string name="delete_change">Slett endring</string>
+	<string name="successfully_uploaded_pattern">Vellykket lastet opp {0}/{1}</string>
+	<string name="try_again">Prøv igjen</string>
+	<string name="error_message_pattern">Feil: {0}</string>
+	<string name="dahboard_options_dialog_title">Dashbord-alternativer</string>
+	<string name="shared_string_undo">Angre</string>
+	<string name="shared_string_skip">Hopp over</string>
+	<string name="app_name_osmand">OsmAnd</string>
+	<string name="offline_maps_and_navigation">Offline-kart\n&amp; navigering</string>
+</resources>

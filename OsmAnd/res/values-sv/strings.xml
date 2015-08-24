@@ -1776,7 +1776,7 @@
 	<string name="shared_string_deselect">Avmarkera</string>
 	<string name="shared_string_deselect_all">Avmarkera alla</string>
 	<string name="shared_string_clear">Töm</string>
-	<string name="shared_string_clear_all">Töm alla</string>
+	<string name="shared_string_clear_all">Ta bort alla</string>
 	<string name="shared_string_save">Spara</string>
 	<string name="shared_string_save_as_gpx">Spara som GPX-spår</string>
 	<string name="shared_string_rename">Byt namn</string>
