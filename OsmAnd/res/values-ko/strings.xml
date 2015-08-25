@@ -2321,4 +2321,29 @@
     <string name="rendering_value_purple_name">보라색</string>
     <string name="rendering_value_translucent_purple_name">반투명 보라색</string>
     <string name="restart_is_required">변화를 완전히 적용 하려면, 수동으로 응용 프로그램을 다시 시작해야 합니다.</string>
-    </resources>
+    <string name="plugin_settings">플러그인</string>
+	<string name="routing_attr_avoid_shuttle_train_name">셔틀 열차 피하기</string>
+	<string name="routing_attr_avoid_shuttle_train_description">셔틀 열차 피하기</string>
+    <string name="traffic_warning_hazard">위험</string>
+    <string name="rendering_value_boldOutline_name">큰 선</string>
+    <string name="no_updates_available">사용 가능한 업데이트 없음</string>
+    <string name="download_live_updates">라이브 업데이트</string>
+	<string name="do_you_like_osmand">OsmAnd를 좋아 합니까?</string>
+	<string name="we_really_care_about_your_opinion">의견에 대한 많은 관심 부탁드립니다 그리고 우리가 당신의 의견을 듣는 것이 중요합니다.</string>
+	<string name="rate_this_app">이 앱 평점매기기</string>
+	<string name="rate_this_app_long">구글 플레이에 OsmAnd을 평가해 주세요</string>
+	<string name="user_hates_app_get_feedback">우리에게 이유를 가르쳐 쥬세요.</string>
+	<string name="user_hates_app_get_feedback_long">우리가 이 응용 프로그램에서 무엇을 변경 해야 하는 지 알려 주세요.</string>
+	<string name="failed_to_upload">업로드 하지 못했습니다.</string>
+	<string name="delete_change">변경을 삭제합니다</string>
+	<string name="successfully_uploaded_pattern">성공적으로 업로드 {0}/{1}</string>
+	<string name="try_again">다시 시도하십시오.</string>
+	<string name="error_message_pattern">오류: {0}</string>
+	<string name="dahboard_options_dialog_title">대시보드 옵션</string>
+	<string name="shared_string_card_was_hidden">카드는 숨겨졌습니다</string>
+	<string name="shared_string_undo">실행 취소</string>
+	<string name="shared_string_skip">건너뛰기</string>
+	<string name="app_name_osmand">OsmAnd</string>
+	<string name="offline_maps_and_navigation">오프 라인 지도 및 내비게이션</string>
+	<string name="commit_poi">POI 커밋</string>
+</resources>
