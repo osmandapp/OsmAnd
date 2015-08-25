@@ -212,9 +212,10 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		this.view = view;
 
 		paintIcon = new Paint();
-		paintIcon.setStrokeWidth(1);
-		paintIcon.setStyle(Style.STROKE);
-		paintIcon.setColor(Color.BLUE);
+		//paintIcon.setStrokeWidth(1);
+		//paintIcon.setStyle(Style.STROKE);
+		//paintIcon.setColor(Color.BLUE);
+		paintIcon.setColorFilter(new PorterDuffColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN));
 		paintIconBackground = new Paint();
 		poiBackground = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_white_orange_poi_shield);
 		poiBackgroundSmall = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_white_orange_poi_shield_small);
@@ -273,7 +274,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 					int iconSize = poiBackground.getWidth() * 3 / 2;
 					List<Amenity> fullObjects = new ArrayList<>();
 					QuadRect bounds = new QuadRect(0, 0, tileBox.getPixWidth(), tileBox.getPixHeight());
-					//bounds.inset(-bounds.width()/4, -bounds.height()/4);
+					bounds.inset(-bounds.width()/4, -bounds.height()/4);
 					QuadTree<RectF> boundIntersections = new QuadTree<RectF>(bounds, 4, 0.6f);
 					List<RectF> result = new ArrayList<RectF>();
 
@@ -320,7 +321,6 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 						if (id != null) {
 							Bitmap bmp = RenderingIcons.getIcon(view.getContext(), id, false);
 							if (bmp != null) {
-								paintIcon.setColorFilter(new PorterDuffColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN));
 								canvas.drawBitmap(bmp, x - bmp.getWidth() / 2, y - bmp.getHeight() / 2, paintIcon);
 							}
 						}

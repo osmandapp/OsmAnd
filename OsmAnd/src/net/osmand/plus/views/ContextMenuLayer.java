@@ -33,7 +33,7 @@ import android.widget.TextView;
 public class ContextMenuLayer extends OsmandMapLayer {
 	
 	public interface IContextMenuProvider {
-	
+
 		public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o);
 		
 		public LatLon getObjectLocation(Object o);
@@ -226,16 +226,49 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			view.refreshMap();
 			return true;
 		}
-		LatLon latLon = selectObjectsForContextMenu(tileBox, point);
-		String description = getSelectedObjectDescription();
-		setLocation(latLon, description);
+
+		if (handleLongPress()) {
+			LatLon latLon = selectObjectsForContextMenu(tileBox, point);
+			if (latLon != null) {
+				String description = getSelectedObjectDescription();
+				setLocation(latLon, description);
+				view.refreshMap();
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		final double lat = tileBox.getLatFromPixel((int) point.x, (int) point.y);
+		final double lon = tileBox.getLonFromPixel((int) point.x, (int) point.y);
+		setLocation(new LatLon(lat, lon), null);
 		view.refreshMap();
 		return true;
 	}
 
+	public boolean handleSingleTap() {
+		boolean res = true;
+		for(OsmandMapLayer lt : view.getLayers()){
+			if (lt.isSingleTapResponder()) {
+				res = false;
+				break;
+			}
+		}
+		return res;
+	}
+
+	public boolean handleLongPress() {
+		boolean res = false;
+		for(OsmandMapLayer lt : view.getLayers()){
+			if (lt.shouldProcessLongPress()) {
+				res = true;
+				break;
+			}
+		}
+		return res;
+	}
+
 	public LatLon selectObjectsForContextMenu(RotatedTileBox tileBox, PointF point) {
-		final double lat = tileBox.getLatFromPixel((int) point.x, (int) point.y);
-		final double lon = tileBox.getLonFromPixel((int) point.x, (int) point.y);
 		clearSelectedObjects();
 		List<Object> s = new ArrayList<Object>();
 		LatLon latLon = null;
@@ -255,12 +288,9 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				}
 			}
 		}
-		if(latLon == null) {
-			latLon = new LatLon(lat, lon);
-		}
 		return latLon;
 	}
-	
+
 	@Override
 	public boolean drawInScreenPixels() {
 		return true;
@@ -355,6 +385,14 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				activity.getMapActions().contextMenuPoint(latLon.getLatitude(), latLon.getLongitude());
 			}
 			return true;
+		} else if (handleSingleTap()) {
+			LatLon latLon = selectObjectsForContextMenu(tileBox, point);
+			if (latLon != null) {
+				String description = getSelectedObjectDescription();
+				setLocation(latLon, description);
+				view.refreshMap();
+				return true;
+			}
 		}
 		return false;
 	}

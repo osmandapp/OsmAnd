@@ -30,6 +30,23 @@ public abstract class OsmandMapLayer {
 	
 	public void populateObjectContextMenu(Object o, ContextMenuAdapter adapter) {}
 
+	/**
+	 * return true when this layer should handle single tap instead of context layer
+	 * @return
+	 */
+	public boolean isSingleTapResponder() {
+		return false;
+	}
+
+	/**
+	 * return true when context layer should open context menu of the long pressed point
+	 * (instead of common behaviour when lat/lon text opens on long press)
+	 * @return
+	 */
+	public boolean shouldProcessLongPress() {
+		return false;
+	}
+
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
 		return false;
 	}
