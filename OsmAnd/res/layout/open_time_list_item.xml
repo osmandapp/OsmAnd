@@ -7,7 +7,8 @@
     android:gravity="center_vertical"
     android:orientation="horizontal">
 
-    <ImageButton
+    <ImageView
+        android:id="@+id/clockIconImageView"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="48dp"
         android:layout_height="48dp"
@@ -22,6 +23,7 @@
         android:layout_weight="1">
 
         <TextView
+            android:id="@+id/daysTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="Mo-We"/>
@@ -40,6 +42,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/openingTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="08:00"/>
@@ -62,6 +65,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/closingTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="20:00"/>
@@ -78,6 +82,6 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_gravity="bottom"
-        android:src="@drawable/ic_action_close_dark"/>
+        android:src="@drawable/ic_action_remove_dark"/>
 
 </LinearLayout>

@@ -9,21 +9,33 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import net.osmand.PlatformUtil;
 import net.osmand.osm.edit.OSMSettings;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.osmedit.data.EditPoiData;
 import net.osmand.plus.osmedit.data.Tag;
+import net.osmand.plus.osmedit.dialogs.OpeningHoursDaysDialogFragment;
+import net.osmand.util.OpeningHoursParser;
+import net.osmand.util.OpeningHoursParser.BasicOpeningHourRule;
+
+import org.apache.commons.logging.Log;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class NormalDataFragment extends Fragment {
 	private static final String TAG = "NormalDataFragment";
+	private static final Log LOG = PlatformUtil.getLog(NormalDataFragment.class);
+	private static final String OPENING_HOURS = "opening_hours";
 	private EditText streetEditText;
 	private EditText houseNumberEditText;
 	private EditText phoneEditText;
@@ -31,7 +43,7 @@ public class NormalDataFragment extends Fragment {
 	private EditText descriptionEditText;
 	private EditPoiData.TagsChangedListener mTagsChangedListener;
 	private boolean mIsUserInput = true;
-	private EditText openHoursEditText;
+	OpeningHoursAdapter mOpeningHoursAdapter;
 
 	@Nullable
 	@Override
@@ -49,8 +61,6 @@ public class NormalDataFragment extends Fragment {
 		webSiteImageView.setImageDrawable(iconsCache.getContentIcon(R.drawable.ic_world_globe_dark));
 		ImageView descriptionImageView = (ImageView) view.findViewById(R.id.descriptionImageView);
 		descriptionImageView.setImageDrawable(iconsCache.getContentIcon(R.drawable.ic_action_description));
-		ImageView openHoursImageView = (ImageView) view.findViewById(R.id.openHoursImageView);
-		openHoursImageView.setImageDrawable(iconsCache.getContentIcon(R.drawable.ic_action_time));
 
 		streetEditText = (EditText) view.findViewById(R.id.streetEditText);
 		streetEditText.addTextChangedListener(new MyOnFocusChangeListener(getData(),
@@ -67,10 +77,25 @@ public class NormalDataFragment extends Fragment {
 		descriptionEditText = (EditText) view.findViewById(R.id.descriptionEditText);
 		descriptionEditText.addTextChangedListener(new MyOnFocusChangeListener(getData(),
 				OSMSettings.OSMTagKey.DESCRIPTION.getValue()));
-		openHoursEditText = (EditText) view.findViewById(R.id.openHoursEditText);
-		openHoursEditText.addTextChangedListener(new MyOnFocusChangeListener(getData(),
-				OSMSettings.OSMTagKey.OPENING_HOURS.getValue()));
-
+		Button addOpeningHoursButton = (Button) view.findViewById(R.id.addOpeningHoursButton);
+		addOpeningHoursButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				BasicOpeningHourRule r = new BasicOpeningHourRule();
+				OpeningHoursDaysDialogFragment fragment = OpeningHoursDaysDialogFragment.createInstance(r, -1);
+				fragment.show(getChildFragmentManager(), "OpenTimeDialogFragment");
+			}
+		});
+		LinearLayout openHoursContainer = (LinearLayout) view.findViewById(R.id.openHoursContainer);
+		if (savedInstanceState != null && savedInstanceState.containsKey(OPENING_HOURS)) {
+			mOpeningHoursAdapter = new OpeningHoursAdapter(
+					(OpeningHoursParser.OpeningHours) savedInstanceState.getSerializable(OPENING_HOURS),
+					openHoursContainer, getData());
+			mOpeningHoursAdapter.updateViews();
+		} else {
+			mOpeningHoursAdapter = new OpeningHoursAdapter(new OpeningHoursParser.OpeningHours(),
+					openHoursContainer, getData());
+		}
 		return view;
 	}
 
@@ -91,8 +116,6 @@ public class NormalDataFragment extends Fragment {
 						webSiteEditText);
 				tagMapProcessor.addFilter(OSMSettings.OSMTagKey.DESCRIPTION.getValue(),
 						descriptionEditText);
-				tagMapProcessor.addFilter(OSMSettings.OSMTagKey.OPENING_HOURS.getValue(),
-						openHoursEditText);
 
 				mIsUserInput = false;
 				for (Tag tag : getData().tags) {
@@ -109,6 +132,18 @@ public class NormalDataFragment extends Fragment {
 	public void onPause() {
 		super.onPause();
 		getData().deleteListener(mTagsChangedListener);
+	}
+
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		outState.putSerializable(OPENING_HOURS, mOpeningHoursAdapter.openingHours);
+		super.onSaveInstanceState(outState);
+	}
+
+	public void addBasicOpeningHoursRule(BasicOpeningHourRule item) {
+
+		LOG.debug("item=" + item.toRuleString(false));
+		mOpeningHoursAdapter.addOpeningHoursRule(item);
 	}
 
 	private static class TagMapProcessor {
@@ -170,6 +205,83 @@ public class NormalDataFragment extends Fragment {
 					data.notifyDatasetChanged(mTagsChangedListener);
 				}
 			}
+		}
+	}
+
+	private static class OpeningHoursAdapter {
+		private final OpeningHoursParser.OpeningHours openingHours;
+		private final LinearLayout linearLayout;
+		private final EditPoiData data;
+
+		public OpeningHoursAdapter(OpeningHoursParser.OpeningHours openingHours,
+								   LinearLayout linearLayout, EditPoiData data) {
+			this.openingHours = openingHours;
+			this.linearLayout = linearLayout;
+			this.data = data;
+		}
+
+		public void addOpeningHoursRule(OpeningHoursParser.BasicOpeningHourRule rule) {
+			openingHours.addRule(rule);
+			updateViews();
+		}
+
+		public void updateViews() {
+			linearLayout.removeAllViews();
+			for (int i = 0; i < openingHours.getRules().size(); i++) {
+				linearLayout.addView(getView(i));
+			}
+			Tag openHours = new Tag(OSMSettings.OSMTagKey.OPENING_HOURS.getValue(),
+					openingHours.toString());
+			data.tags.remove(openHours);
+			data.tags.add(openHours);
+			data.notifyDatasetChanged(null);
+		}
+
+		private View getView(final int position) {
+			OpeningHoursParser.BasicOpeningHourRule rule =
+					(BasicOpeningHourRule) openingHours.getRules().get(position);
+
+			final View view = LayoutInflater.from(linearLayout.getContext())
+					.inflate(R.layout.open_time_list_item, null, false);
+			ImageView clockIconImageView = (ImageView) view.findViewById(R.id.clockIconImageView);
+
+			TextView daysTextView = (TextView) view.findViewById(R.id.daysTextView);
+			StringBuilder stringBuilder = new StringBuilder();
+			rule.appendDaysString(stringBuilder);
+			daysTextView.setText(stringBuilder.toString());
+
+			TextView openingTextView = (TextView) view.findViewById(R.id.openingTextView);
+			final int openingHour = rule.getStartTime() / 60;
+			int openingMinute = rule.getStartTime() - openingHour * 60;
+			openingTextView.setText(formatTime(openingHour, openingMinute));
+
+			TextView closingTextView = (TextView) view.findViewById(R.id.closingTextView);
+			int enHour = rule.getEndTime() / 60;
+			int enTime = rule.getEndTime() - enHour * 60;
+			closingTextView.setText(formatTime(enHour, enTime));
+
+			ImageButton deleteItemImageButton = (ImageButton) view.findViewById(R.id.deleteItemImageButton);
+			deleteItemImageButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					openingHours.getRules().remove(position);
+					updateViews();
+				}
+			});
+			return view;
+		}
+
+		private static String formatTime(int h, int t){
+			StringBuilder b = new StringBuilder();
+			if (h < 10) {
+				b.append("0"); //$NON-NLS-1$
+			}
+			b.append(h).append(":"); //$NON-NLS-1$
+			if (t < 10) {
+				b.append("0"); //$NON-NLS-1$
+			}
+			b.append(t);
+			return b.toString();
 		}
 	}
 }

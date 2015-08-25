@@ -39,7 +39,7 @@ public class OpeningHoursParser {
 	 * 
 	 * @author sander
 	 */
-	public static class OpeningHours {
+	public static class OpeningHours implements Serializable {
 		
 		/**
 		 * list of the different rules
@@ -158,7 +158,7 @@ public class OpeningHoursParser {
 	 *  - a collection of days/dates
 	 *  - a time range
 	 */
-	public static interface OpeningHoursRule {
+	public static interface OpeningHoursRule extends Serializable {
 		
 		/**
 		 * Check if, for this rule, the feature is opened for time "cal"
@@ -200,7 +200,7 @@ public class OpeningHoursParser {
 	 * This implementation only supports month, day of weeks and numeral times, or the value "off"
 	 *
 	 */
-	public static class BasicOpeningHourRule  implements OpeningHoursRule, Serializable {
+	public static class BasicOpeningHourRule  implements OpeningHoursRule {
 		/**
 		 * represents the list on which days it is open.
 		 * Day number 0 is MONDAY
@@ -396,28 +396,13 @@ public class OpeningHoursParser {
 			}
 			// Day
 			boolean open24_7 = true;
-			dash  = false;
-			first = true;
 			for (int i = 0; i < 7; i++) {
-				if (days[i]) {
-					if (i > 0 && days[i - 1] && i < 6 && days[i + 1]) {
-						if (!dash) {
-							dash = true;
-							b.append("-"); //$NON-NLS-1$
-						}
-						continue;
-					}
-					if (first) {
-						first = false;
-					} else if (!dash) {
-						b.append(", "); //$NON-NLS-1$
-					}
-					b.append(daysStr[i]);
-					dash = false;
-				} else {
+				if (!days[i]) {
 					open24_7 = false;
+					break;
 				}
 			}
+			appendDaysString(b);
 			// Time
 			if (startTimes == null || startTimes.length == 0){
 				b.append(" off ");
@@ -441,10 +426,33 @@ public class OpeningHoursParser {
 			}
 			return b.substring(0, b.length()-1);
 		}
-		
+
 		@Override
 		public String toString() {
 			return toRuleString(false);
+		}
+
+		public void appendDaysString(StringBuilder builder) {
+			boolean dash  = false;
+			boolean first = true;
+			for (int i = 0; i < 7; i++) {
+				if (days[i]) {
+					if (i > 0 && days[i - 1] && i < 6 && days[i + 1]) {
+						if (!dash) {
+							dash = true;
+							builder.append("-"); //$NON-NLS-1$
+						}
+						continue;
+					}
+					if (first) {
+						first = false;
+					} else if (!dash) {
+						builder.append(", "); //$NON-NLS-1$
+					}
+					builder.append(daysStr[i]);
+					dash = false;
+				}
+			}
 		}
 
 		/**

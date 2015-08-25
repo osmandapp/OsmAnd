@@ -19,7 +19,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +30,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
 import net.osmand.osm.PoiType;
@@ -48,6 +48,8 @@ import net.osmand.plus.osmedit.dialogs.PoiSubTypeDialogFragment;
 import net.osmand.plus.osmedit.dialogs.PoiTypeDialogFragment;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
+
 import java.text.MessageFormat;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -55,6 +57,7 @@ import java.util.Map;
 
 public class EditPoiFragment extends Fragment {
 	public static final String TAG = "EditPoiFragment";
+	private static final Log LOG = PlatformUtil.getLog(EditPoiFragment.class);
 
 	private static final String KEY_AMENITY_NODE = "amenity_node";
 	private static final String KEY_AMENITY = "amenity";
@@ -228,7 +231,6 @@ public class EditPoiFragment extends Fragment {
 				// TODO implement saving
 				OsmPoint.Action action = node.getId() == -1 ? OsmPoint.Action.CREATE : OsmPoint.Action.MODIFY;
 				String description = "";
-				Log.v(TAG, "tags=" + editPoiData.tags);
 				for (Tag tag : editPoiData.tags) {
 					if (tag.tag.equals(POI_TYPE_TAG)) {
 						if (allTranslatedSubTypes.get(tag.value) != null) {
@@ -372,8 +374,6 @@ public class EditPoiFragment extends Fragment {
 	}
 
 	public void updateType(Amenity amenity) {
-		// TODO implement
-		Log.v(TAG, "updateType(" + "amenity=" + amenity + ")");
 		mIsUserInput = false;
 		poiTypeEditText.setText(amenity.getSubType());
 		mIsUserInput = true;
