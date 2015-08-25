@@ -2115,4 +2115,5 @@
 	<string name="app_name_osmand">OsmAnd</string>
 	<string name="shared_string_undo">ATŠAUKTI</string>
 	<string name="shared_string_card_was_hidden">Kortelė paslėpta</string>
+	<string name="plugin_settings">Įskiepiai</string>
 	</resources>

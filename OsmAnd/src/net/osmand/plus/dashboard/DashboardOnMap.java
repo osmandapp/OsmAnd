@@ -1,8 +1,6 @@
 package net.osmand.plus.dashboard;
 
 import android.annotation.SuppressLint;
-import android.app.ActionBar;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -10,10 +8,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.TranslateAnimation;
@@ -46,21 +44,14 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.IntermediatePointsDialog;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.audionotes.DashAudioVideoNotesFragment;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.dashboard.tools.DashboardSettingsDialogFragment;
 import net.osmand.plus.dashboard.tools.TransactionBuilder;
-import net.osmand.plus.development.DashSimulateFragment;
-import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
-import net.osmand.plus.monitoring.DashTrackFragment;
-import net.osmand.plus.osmedit.DashOsmEditsFragment;
-import net.osmand.plus.osmo.DashOsMoFragment;
-import net.osmand.plus.parkingpoint.DashParkingFragment;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.DownloadedRegionsLayer;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -84,26 +75,29 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 	private static final DefaultShouldShow defaultShouldShow = new DefaultShouldShow();
 	private static final DefaultShouldShow errorShouldShow = new ErrorShouldShow();
 	private static final DashFragmentData.ShouldShowFunction firstTimeShouldShow = new FirstTimeShouldShow();
-	private static final DefaultShouldShow simulateShouldShow = new SimulateShouldShow();
 	private static final DashFragmentData.ShouldShowFunction chooseAppDirShouldShow = new ChooseAppDirShouldShow();
 
 	private static final DashFragmentData[] fragmentsData = new DashFragmentData[]{
-			new DashFragmentData(DashRateUsFragment.TAG, DashRateUsFragment.class, "Rate us", rateUsShouldShow, true),
-			new DashFragmentData(DashFirstTimeFragment.TAG, DashFirstTimeFragment.class, "First time", firstTimeShouldShow, true),
-			new DashFragmentData(DashChooseAppDirFragment.TAG, DashChooseAppDirFragment.class, "Choose app dir", chooseAppDirShouldShow, true),
-			new DashFragmentData(DashErrorFragment.TAG, DashErrorFragment.class, "Error", errorShouldShow, true),
-			new DashFragmentData(DashNavigationFragment.TAG, DashNavigationFragment.class, "Navigation", defaultShouldShow),
-			new DashFragmentData(DashParkingFragment.TAG, DashParkingFragment.class, "Parking", defaultShouldShow),
-			new DashFragmentData(DashWaypointsFragment.TAG, DashWaypointsFragment.class, "Waypoints", defaultShouldShow),
-			new DashFragmentData(DashSearchFragment.TAG, DashSearchFragment.class, "Search", defaultShouldShow),
-			new DashFragmentData(DashRecentsFragment.TAG, DashRecentsFragment.class, "Recent places", defaultShouldShow),
-			new DashFragmentData(DashFavoritesFragment.TAG, DashFavoritesFragment.class, "Favourites", defaultShouldShow),
-			new DashFragmentData(DashAudioVideoNotesFragment.TAG, DashAudioVideoNotesFragment.class, "Notes", defaultShouldShow),
-			new DashFragmentData(DashTrackFragment.TAG, DashTrackFragment.class, "Track", defaultShouldShow),
-			new DashFragmentData(DashOsMoFragment.TAG, DashOsMoFragment.class, "OsMo", defaultShouldShow),
-			new DashFragmentData(DashOsmEditsFragment.TAG, DashOsmEditsFragment.class, "OsmEdits", defaultShouldShow),
-			new DashFragmentData(DashPluginsFragment.TAG, DashPluginsFragment.class, "Plugins", defaultShouldShow),
-			new DashFragmentData(DashSimulateFragment.TAG, DashSimulateFragment.class, "Simulate", simulateShouldShow),
+			new DashFragmentData(DashRateUsFragment.TAG, DashRateUsFragment.class,
+					"Rate us", rateUsShouldShow, true, 0),
+			new DashFragmentData(DashFirstTimeFragment.TAG, DashFirstTimeFragment.class,
+					"First time", firstTimeShouldShow, true, 1),
+			new DashFragmentData(DashChooseAppDirFragment.TAG, DashChooseAppDirFragment.class,
+					"Choose app dir", chooseAppDirShouldShow, true, 2),
+			new DashFragmentData(DashErrorFragment.TAG, DashErrorFragment.class,
+					"Error", errorShouldShow, true, 3),
+			new DashFragmentData(DashNavigationFragment.TAG, DashNavigationFragment.class,
+					"Navigation", 4),
+			new DashFragmentData(DashWaypointsFragment.TAG, DashWaypointsFragment.class,
+					"Waypoints", 6),
+			new DashFragmentData(DashSearchFragment.TAG, DashSearchFragment.class,
+					"Search", 7),
+			new DashFragmentData(DashRecentsFragment.TAG, DashRecentsFragment.class,
+					"Recent places", 8),
+			new DashFragmentData(DashFavoritesFragment.TAG, DashFavoritesFragment.class,
+					"Favourites", 9),
+			new DashFragmentData(DashPluginsFragment.TAG, DashPluginsFragment.class,
+					"Plugins", 14)
 	};
 
 	private MapActivity mapActivity;
@@ -139,6 +133,10 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 	private final int[] running = new int[]{-1};
 	private List<LocationPointWrapper> deletedPoints = new ArrayList<LocationPointWrapper>();
 	private Drawable gradientToolbar;
+
+	public DashFragmentData[] getFragmentsData() {
+		return fragmentsData;
+	}
 
 	public enum DashboardType {
 		WAYPOINTS,
@@ -358,12 +356,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 		actionButton.setVisibility(View.GONE);
 	}
 
-
-	public static int convertPixelsToDp(float dp, Context context) {
-		DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
-		return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
-	}
-
 	public net.osmand.Location getMyLocation() {
 		return myLocation;
 	}
@@ -467,6 +459,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 			//fabButton.showFloatingActionButton();
 			open(dashboardView.findViewById(R.id.animateContent), animation);
 			updateLocation(true, true, false);
+//			addOrUpdateDashboardFragments();
 		} else {
 			mapActivity.getMapViewTrackingUtilities().setDashboard(null);
 			hide(dashboardView.findViewById(R.id.animateContent), animation);
@@ -477,7 +470,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 					df.get().onCloseDash();
 				}
 			}
-
 		}
 	}
 
@@ -669,7 +661,10 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 		OsmandSettings settings = getMyApplication().getSettings();
 		TransactionBuilder builder =
 				new TransactionBuilder(mapActivity.getSupportFragmentManager(), settings, mapActivity);
-		builder.addFragmentsData(fragmentsData).getFragmentTransaction().commit();
+		Log.v(TAG, "pluginsCards=" + OsmandPlugin.getPluginsCardsList());
+		builder.addFragmentsData(fragmentsData)
+				.addFragmentsData(OsmandPlugin.getPluginsCardsList())
+				.getFragmentTransaction().commit();
 	}
 
 	public boolean isVisible() {
@@ -687,7 +682,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 	}
 
 
-	public void updateLocation(final boolean centerChanged, final boolean locationChanged, final boolean compassChanged) {
+	public void updateLocation(final boolean centerChanged, final boolean locationChanged,
+							   final boolean compassChanged) {
 		if (inLocationUpdate) {
 			return;
 		}
@@ -919,10 +915,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 		return dashboardView;
 	}
 
-	public DashFragmentData[] getFragmentsData() {
-		return fragmentsData;
-	}
-
 	public static class SettingsShouldShow implements DashFragmentData.ShouldShowFunction {
 		@Override
 		public boolean shouldShow(OsmandSettings settings, MapActivity activity, String tag) {
@@ -951,14 +943,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 		public boolean shouldShow(OsmandSettings settings, MapActivity activity, String tag) {
 			return activity.getMyApplication().getAppInitializer().isFirstTime(activity)
 					&& super.shouldShow(settings, activity, tag);
-		}
-	}
-
-	private static class SimulateShouldShow extends DefaultShouldShow {
-		@Override
-		public boolean shouldShow(OsmandSettings settings, MapActivity activity, String tag) {
-			return super.shouldShow(settings, activity, tag)
-					&& OsmandPlugin.getEnabledPlugin(OsmandDevelopmentPlugin.class) != null;
 		}
 	}
 

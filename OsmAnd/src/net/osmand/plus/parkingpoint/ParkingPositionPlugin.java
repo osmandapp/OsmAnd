@@ -14,6 +14,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
@@ -558,5 +559,10 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 			timeLimitDesc.append(getFormattedTime(getParkingTime(),ctx));
 		}
 		return ctx.getString(R.string.osmand_parking_position_description, timeLimitDesc.toString());
+	}
+
+	@Override
+	public DashFragmentData getCardFragment() {
+		return new DashFragmentData(DashParkingFragment.TAG, DashParkingFragment.class, getName(), 5);
 	}
 }

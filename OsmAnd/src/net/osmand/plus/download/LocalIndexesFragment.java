@@ -106,7 +106,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		listAdapter = new LocalIndexesAdapter(getActivity());
 		listView.setAdapter(listAdapter);
 		expandAllGroups();
-		setListView(listView);
+			setListView(listView);
 		descriptionText = (TextView) view.findViewById(R.id.memory_size);
 		sizeProgress = (ProgressBar) view.findViewById(R.id.memory_progress);
 		updateDescriptionTextWithSize();

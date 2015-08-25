@@ -34,6 +34,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.TabActivity.TabItem;
+import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.views.MapInfoLayer;
@@ -1297,5 +1298,11 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	@Override
 	public int getAssetResourceName() {
 		return R.drawable.audio_video_notes;
+	}
+
+	@Override
+	public DashFragmentData getCardFragment() {
+		return new DashFragmentData(DashAudioVideoNotesFragment.TAG,
+				DashAudioVideoNotesFragment.class, getName(), 10);
 	}
 }

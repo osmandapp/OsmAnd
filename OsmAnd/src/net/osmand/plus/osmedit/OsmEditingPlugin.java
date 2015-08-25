@@ -27,6 +27,8 @@ import net.osmand.plus.activities.EnumAdapter;
 import net.osmand.plus.activities.EnumAdapter.IEnumWithResource;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity;
+import net.osmand.plus.dashboard.DashPluginsFragment;
+import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.myplaces.AvailableGPXFragment;
 import net.osmand.plus.myplaces.AvailableGPXFragment.GpxInfo;
 import net.osmand.plus.myplaces.FavoritesActivity;
@@ -343,5 +345,8 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		return (osmPoint.getGroup() == OsmPoint.Group.POI ? "POI " : "Bug ") + " id: " + osmPoint.getId();
 	}
 
-
+	@Override
+	public DashFragmentData getCardFragment() {
+		return new DashFragmentData(DashOsmEditsFragment.TAG, DashOsmEditsFragment.class, getName(), 13);
+	}
 }
