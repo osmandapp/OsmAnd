@@ -2334,10 +2334,10 @@
 	<string name="rate_this_app_long">구글 플레이에 OsmAnd을 평가해 주세요</string>
 	<string name="user_hates_app_get_feedback">우리에게 이유를 가르쳐 쥬세요.</string>
 	<string name="user_hates_app_get_feedback_long">우리가 이 응용 프로그램에서 무엇을 변경 해야 하는 지 알려 주세요.</string>
-	<string name="failed_to_upload">업로드 하지 못했습니다.</string>
+	<string name="failed_to_upload">업로드 하지 못했습니다</string>
 	<string name="delete_change">변경을 삭제합니다</string>
 	<string name="successfully_uploaded_pattern">성공적으로 업로드 {0}/{1}</string>
-	<string name="try_again">다시 시도하십시오.</string>
+	<string name="try_again">다시 시도하십시오</string>
 	<string name="error_message_pattern">오류: {0}</string>
 	<string name="dahboard_options_dialog_title">대시보드 옵션</string>
 	<string name="shared_string_card_was_hidden">카드는 숨겨졌습니다</string>
