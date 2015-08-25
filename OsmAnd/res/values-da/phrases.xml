@@ -1056,7 +1056,7 @@
 	<string name="poi_seasonal_winter">Vinter</string>
 
 	<string name="poi_crossing_traffic_signals">Med trafiksignaler</string>
-	<string name="poi_crossing_uncontrolled">Ukontrolleret</string>
+	<string name="poi_crossing_uncontrolled">Ikke kontrolleret</string>
 	<string name="poi_crossing_unmarked">Ikke markeret</string>
 
 	<string name="poi_mill_pond">Mølledam</string>
