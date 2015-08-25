@@ -28,22 +28,12 @@ public final class DashFragmentData implements Comparable<DashFragmentData> {
 
 	public DashFragmentData(String tag, Class<? extends DashBaseFragment> fragmentClass,
 							String title, ShouldShowFunction shouldShowFunction, int position) {
-		this.tag = tag;
-		this.fragmentClass = fragmentClass;
-		this.title = title;
-		this.shouldShowFunction = shouldShowFunction;
-		customDeletionLogic = false;
-		this.position = position;
+		this(tag, fragmentClass, title, shouldShowFunction, false, position);
 	}
 
 	public DashFragmentData(String tag, Class<? extends DashBaseFragment> fragmentClass,
 							String title, int position) {
-		this.tag = tag;
-		this.fragmentClass = fragmentClass;
-		this.title = title;
-		this.shouldShowFunction = new DashboardOnMap.DefaultShouldShow();
-		customDeletionLogic = false;
-		this.position = position;
+		this(tag, fragmentClass, title, new DashboardOnMap.DefaultShouldShow(), false, position);
 	}
 
 	@Override
@@ -54,6 +44,5 @@ public final class DashFragmentData implements Comparable<DashFragmentData> {
 	public interface ShouldShowFunction {
 		boolean shouldShow(OsmandSettings settings, MapActivity activity, String tag);
 	}
-
 
 }
