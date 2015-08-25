@@ -2084,4 +2084,5 @@
 <string name="commit_poi">提交興趣點</string>
 <string name="routing_attr_avoid_shuttle_train_name">往返避開鐵路</string>
 	<string name="routing_attr_avoid_shuttle_train_description">往返避開鐵路</string>
-    </resources>
+    <string name="plugin_settings">外掛元件</string>
+	</resources>
