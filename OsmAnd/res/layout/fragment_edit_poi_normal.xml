@@ -92,19 +92,24 @@
             android:text="Open hours"
             android:textColor="@color/color_black"/>
 
-        <ImageView
-            android:id="@+id/openHoursImageView"
-            style="@style/edit_poi_imageview_style"
-            android:layout_below="@id/openHoursTextView"
-            tools:src="@drawable/ic_action_time"/>
-
-        <EditText
-            android:id="@+id/openHoursEditText"
-            style="@style/create_poi_text_field"
+        <LinearLayout
+            android:id="@+id/openHoursContainer"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@id/openHoursTextView"
-            android:hint="Mo-Su 08:00-20:00"
-            android:inputType="textMultiLine"/>
+            android:orientation="vertical"/>
 
+        <Button
+            android:id="@+id/addOpeningHoursButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/openHoursContainer"
+            android:layout_marginLeft="72dp"
+            android:text="Add opening hours"/>
+
+        <!--XXX due to bug in NestedScroolView-->
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="500dp"/>
     </RelativeLayout>
 </android.support.v4.widget.NestedScrollView>

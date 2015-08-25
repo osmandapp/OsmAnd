@@ -1,5 +1,6 @@
 package net.osmand.plus.osmedit;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -19,6 +20,7 @@ import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.OSMSettings;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.osmedit.data.EditPoiData;
 import net.osmand.plus.osmedit.data.Tag;
 
@@ -31,6 +33,7 @@ public class AdvancedDataFragment extends Fragment {
 	private TagAdapterLinearLayoutHack mAdapter;
 	private EditPoiData.TagsChangedListener mTagsChangedListener;
 	private boolean mIsUserInput = true;
+	private Drawable deleteDrawable;
 
 	@Override
 	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -56,6 +59,9 @@ public class AdvancedDataFragment extends Fragment {
 				valueEditText.clearFocus();
 			}
 		});
+		deleteDrawable = ((MapActivity)getActivity()).getMyApplication().getIconsCache()
+				.getContentIcon(R.drawable.ic_action_remove_dark);
+		deleteItemImageButton.setImageDrawable(deleteDrawable);
 		TextView nameTextView = (TextView) view.findViewById(R.id.nameTextView);
 		TextView amenityTagTextView = (TextView) view.findViewById(R.id.amenityTagTextView);
 		TextView amenityTextView = (TextView) view.findViewById(R.id.amenityTextView);
@@ -174,6 +180,7 @@ public class AdvancedDataFragment extends Fragment {
 			ImageButton deleteItemImageButton =
 					(ImageButton) convertView.findViewById(R.id.deleteItemImageButton);
 			valueEditText.setText(tag.value);
+			deleteItemImageButton.setImageDrawable(deleteDrawable);
 			deleteItemImageButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
