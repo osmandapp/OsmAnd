@@ -54,7 +54,7 @@ public class FavoritesListFragment extends OsmAndListFragment implements SearchA
 		settings = getApplication().getSettings();
 		OsmandApplication app = getApplication();
 		favouritesAdapter = new FavouritesAdapter(activity, app.getFavorites().getFavouritePoints(),
-				!selectFavoriteMode);
+				false);
 		setListAdapter(favouritesAdapter);
 		setHasOptionsMenu(true);
 
