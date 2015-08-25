@@ -2149,5 +2149,5 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="plugin_settings">Componenti aggiuntivi</string>
 	<string name="routing_attr_avoid_shuttle_train_name">Evita i treni navetta</string>
 	<string name="routing_attr_avoid_shuttle_train_description">Evita i treni navetta</string>
-    <string name="commit_poi">Sottoponi PDI</string>
+    <string name="commit_poi">Contribuisci il/i PDI</string>
 </resources>
