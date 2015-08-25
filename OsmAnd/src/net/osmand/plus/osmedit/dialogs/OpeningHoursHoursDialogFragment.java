@@ -40,7 +40,11 @@ public class OpeningHoursHoursDialogFragment extends DialogFragment {
 			}
 		};
 		Calendar initialState = (Calendar) args.getSerializable(INITIAL_TIME);
-		if (initialState == null) initialState = Calendar.getInstance();
+		if (initialState == null) {
+			initialState = Calendar.getInstance();
+			initialState.set(Calendar.HOUR_OF_DAY, isStart? 8 : 20);
+			initialState.set(Calendar.MINUTE, 0);
+		}
 		TimePickerDialog timePickerDialog = new TimePickerDialog(getActivity(), callback,
 				initialState.get(Calendar.HOUR_OF_DAY),
 				initialState.get(Calendar.MINUTE),

@@ -106,5 +106,10 @@
             android:layout_below="@id/openHoursContainer"
             android:layout_marginLeft="72dp"
             android:text="Add opening hours"/>
+
+        <!--XXX due to bug in NestedScroolView-->
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="500dp"/>
     </RelativeLayout>
 </android.support.v4.widget.NestedScrollView>

@@ -84,5 +84,9 @@
             android:layout_height="wrap_content"
             android:text="Add tag"/>
 
+        <!--XXX due to bug in NestedScroolView-->
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="500dp"/>
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>
