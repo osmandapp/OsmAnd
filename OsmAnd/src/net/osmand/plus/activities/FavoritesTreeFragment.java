@@ -760,13 +760,15 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			TextView name = (TextView) row.findViewById(R.id.favourite_label);
 			TextView distanceText = (TextView) row.findViewById(R.id.distance);
 			ImageView icon = (ImageView) row.findViewById(R.id.favourite_icon);
+			
+			final FavouritePoint model = (FavouritePoint) getChild(groupPosition, childPosition);
+			row.setTag(model);
+			
 			ImageView options = (ImageView) row.findViewById(R.id.options);
 			options.setFocusable(false);
 			options.setImageDrawable(getMyApplication().getIconsCache()
 					.getContentIcon(R.drawable.ic_overflow_menu_white));
 			options.setVisibility(View.VISIBLE);
-			final FavouritePoint model = (FavouritePoint) getChild(groupPosition, childPosition);
-			row.setTag(model);
 			options.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
