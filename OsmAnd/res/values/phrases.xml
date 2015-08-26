@@ -1044,4 +1044,6 @@
 	<string name="poi_animal_shelter_dog_cat">Shelter for dogs and cats</string>
 	<string name="poi_animal_shelter_bird">Shelter for birds</string>
 
+	<string name="poi_building">Building</string>
+
 </resources>
