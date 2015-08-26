@@ -842,7 +842,7 @@
 	<string name="poi_stile">Escalera de paso</string>
 	<string name="poi_height_restrictor">Limitador de altura</string>
 	<string name="poi_horse_stile">Portilla equina</string>
-	<string name="poi_kissing_gate">Portilla giratoria</string>
+	<string name="poi_kissing_gate">Portilla en V</string>
 	<string name="poi_sally_port">Poterna</string>
 	<string name="poi_swing_gate">Barrera giratoria</string>
 	<string name="poi_turnstile">Molinete</string>
