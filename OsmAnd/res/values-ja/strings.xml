@@ -2127,4 +2127,5 @@ POIの更新は利用できません</string>
 	<string name="error_message_pattern">エラー: {0}</string>
 <string name="plugin_settings">プラグイン</string>
 	<string name="routing_attr_avoid_shuttle_train_name">カートレインを使用しない</string>
-	</resources>
+	<string name="routing_attr_avoid_shuttle_train_description">カートレインを使用しない</string>
+    </resources>
