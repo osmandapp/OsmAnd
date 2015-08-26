@@ -2157,7 +2157,7 @@
 	<string name="rendering_value_boldOutline_name">Borde remarcado</string>
     <string name="traffic_warning_hazard">Advertencia de riesgo</string>
     <string name="dahboard_options_dialog_title">Opciones del panel</string>
-	<string name="shared_string_card_was_hidden">La tarjeta estaba oculta</string>
+	<string name="shared_string_card_was_hidden">Se ocultó la tarjeta</string>
 	<string name="shared_string_undo">Deshacer</string>
 	<string name="shared_string_skip">Omitir</string>
 	<string name="app_name_osmand">OsmAnd</string>
