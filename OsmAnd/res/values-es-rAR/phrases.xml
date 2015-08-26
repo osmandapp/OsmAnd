@@ -922,7 +922,7 @@
 	<string name="poi_enforcement_toll">Control de peaje</string>
 
 <string name="poi_country">País</string>
-	<string name="poi_fee_yes">Costo</string>
+	<string name="poi_fee_yes">Tarifado</string>
 
 	<string name="poi_kent_carriage_gap">Bolardos para carros a caballo</string>
 	<string name="poi_abandoned_poi">Objeto abandonado</string>
@@ -945,7 +945,7 @@
 	<string name="poi_access_delivery">Acceso para entregas</string>
 	<string name="poi_monitoring_station">Estación de monitoreo</string>
 	<string name="poi_capital">Capital</string>
-	<string name="poi_fee_no">Sin costo</string>
+	<string name="poi_fee_no">Sin cargo</string>
 
 	<string name="poi_email">Email</string>
 	<string name="poi_fax">Fax</string>
