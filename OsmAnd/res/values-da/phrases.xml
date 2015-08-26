@@ -1068,4 +1068,6 @@
 	<string name="poi_google_plus">Google+</string>
 	<string name="poi_perfumery">Parfumeri</string>
 
-	</resources>
+	<string name="poi_building">Bygning</string>
+
+</resources>

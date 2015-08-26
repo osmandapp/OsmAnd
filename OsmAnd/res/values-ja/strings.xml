@@ -179,7 +179,7 @@ OsmAnd バージョンがインストールされています。全てのオフ�
      <string name="build_installed">ビルド {0} はインストール
 されました ({1})。</string>
      <string name="downloading_build">指定ビルドをダウンロード中…</string>
-     <string name="install_selected_build">本当にOsmAndをインストールしますか？ - {0} から {1} {2} MB</string>
+     <string name="install_selected_build">"- {0} ビルド {1} {2} MB\n上記のOsmAndをインストールしますか？ "</string>
      <string name="loading_builds_failed">OsmAndビルドのリスト参照に失敗</string>
      <string name="loading_builds">OsmAnd ビルドをロード中…</string>
      <string name="select_build_to_install">インストールするOsmAndのビルドをひとつ
@@ -482,7 +482,7 @@ POIの更新は利用できません</string>
  <string name="save_track_interval_descr">ナビゲーション中の経路の記録間隔を選択</string>
  <string name="save_track_interval">ナビゲーション中の経路記録間隔</string>
  
- <string name="save_track_to_gpx_descrp">ナビゲーション中の経路はtracksフォルダに保存されます</string>
+ <string name="save_track_to_gpx_descrp">ナビゲーション中の経路はtracksフォルダに保存される</string>
  <string name="save_track_to_gpx">ナビゲーション中に経路ログをGPXに記録</string>
  <string name="update_tile">マップを更新</string>
  <string name="reload_tile">タイルをリロード</string>
@@ -1812,7 +1812,7 @@ POIの更新は利用できません</string>
     <string name="distance">距離</string>
     <string name="rendering_attr_publicTransportMode_name">バス、トロリーバス、シャトルバスルート</string>
 	<string name="save_track_to_gpx_globally">GPXファイルに経路を記録</string>
-	<string name="save_track_to_gpx_globally_descr">GPXファイルへの一般の位置(General position)記録は、マップ画面上のGPXログウィジェットを使用してオンとオフを切り替えることができます</string>
+	<string name="save_track_to_gpx_globally_descr">GPXファイルへの一般の位置(General position)記録は、マップ画面上のGPXログウィジェットを使用してオンとオフを切り替えることが可能</string>
 	<string name="save_track_interval_globally">記録間隔</string>
 	<string name="confirm_every_run">常に尋ねる</string>
 	<string name="save_global_track_interval_descr">標準的な経路の記録間隔を選択(マップ上のGPXログウィジェットで有効化)</string>
@@ -2097,7 +2097,7 @@ POIの更新は利用できません</string>
     <string name="download_wikipedia_files">Wikipediaの追加データ(%1$s MB)をダウンロードしますか？</string>
     <string name="gps_network_not_enabled">位置情報サービス(GPS)がオフになっています。オンにしますか？</string>
     <string name="disable_recording_once_app_killed">スタンドアロン動作時のログ記録を停止</string>
-    <string name="disable_recording_once_app_killed_descrp">アプリは(タスクリストから)停止された場合、GPX記録を一時停止します。 (OsmAndスリープモード動作表示は、Androidの通知エリアに表示されなくなります。)</string>
+    <string name="disable_recording_once_app_killed_descrp">アプリは(タスクリストから)停止された場合、GPX記録を一時停止する。 (OsmAndスリープモード動作表示は、Androidの通知エリアに表示されなくなる。)</string>
     <string name="rendering_value_default13_name">デフォルト (13)</string>
 	<string name="rendering_value_defaultTranslucentCyan_name">デフォルト (半透明シアン)</string>
     <string name="shared_string_import2osmand">OsmAndにインポート</string>
@@ -2125,4 +2125,13 @@ POIの更新は利用できません</string>
 	<string name="successfully_uploaded_pattern">正常にアップロードされました {0}/{1}</string>
 	<string name="try_again">再試行</string>
 	<string name="error_message_pattern">エラー: {0}</string>
+<string name="plugin_settings">プラグイン</string>
+	<string name="routing_attr_avoid_shuttle_train_name">カートレインを使用しない</string>
+	<string name="routing_attr_avoid_shuttle_train_description">カートレインを使用しない</string>
+    <string name="dahboard_options_dialog_title">ダッシュボードオプション</string>
+	<string name="shared_string_undo">元に戻す</string>
+	<string name="shared_string_skip">スキップ</string>
+	<string name="app_name_osmand">OsmAnd</string>
+	<string name="offline_maps_and_navigation">Offline Maps\n&amp; Navigation</string>
+	<string name="commit_poi">POIを申請する</string>
 </resources>

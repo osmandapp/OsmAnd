@@ -770,7 +770,7 @@
 	<string name="search_history_city">縣市：{0}</string>
 	<string name="search_history_street">道路：{0}, {1}</string>
 	<string name="search_history_int_streets">交叉路口：{0} x {1} 在{2}</string>
-	<string name="search_history_building">建物：{0}, {1}, {2}</string>
+	<string name="search_history_building">建築物：{0}, {1}, {2}</string>
 	<string name="favorite">我的最愛</string>
 	<string name="uploading_data">上傳資料中…</string>
 	<string name="uploading">上傳中…</string>
@@ -809,7 +809,7 @@
 	<string name="auth_failed">授權失敗</string>
 	<string name="failed_op">失敗</string>
 	<string name="converting_names">本地/英文名稱轉換中…</string>
-	<string name="loading_streets_buildings">正在載入道路/建物…</string>
+	<string name="loading_streets_buildings">正在載入道路/建築物…</string>
 	<string name="loading_postcodes">正在載入郵遞區號…</string>
 	<string name="loading_streets">正在載入街道…</string>
 	<string name="loading_cities">正在載入縣市…</string>
@@ -855,7 +855,7 @@
 	<string name="use_english_names">在地圖上使用英文名稱</string>
 	<string name="app_settings">應用程式設定</string>
 	<string name="search_address">地址查詢</string>
-	<string name="choose_building">選取建物</string>
+	<string name="choose_building">選取建築物</string>
 	<string name="choose_street">選擇道路</string>
 	<string name="choose_city">選擇縣市</string>
 	<string name="ChooseCountry">選擇國家</string>
@@ -880,7 +880,7 @@
 	<string name="search_POI_level_btn">查尋更多</string>
 	<string name="incremental_search_city">漸進式城市查尋</string>
 	<string name="incremental_search_street">漸進式查尋街道</string>
-	<string name="incremental_search_building">漸進式查尋建物</string>
+	<string name="incremental_search_building">漸進式查尋建築物</string>
 	<string name="choose_available_region">由列表選取區域</string>
 	<string name="choose_intersected_street">選擇交叉路口</string>
 	<string name="Closest_Amenities">最近的設施</string>
@@ -902,8 +902,8 @@
 	<string name="search_address_region">地區</string>
 	<string name="search_address_city">縣市</string>
 	<string name="search_address_street">道路</string>
-	<string name="search_address_building">建物</string>
-	<string name="search_address_building_option">建物</string>
+	<string name="search_address_building">建築物</string>
+	<string name="search_address_building_option">建築物</string>
 	<string name="search_address_street_option">交叉路口</string>
 	<string name="search_tabs_location">位置</string>
 	
@@ -1100,7 +1100,7 @@
     <string name="route_descr_current_location">目前位置</string>
     
     
-    <string name="no_buildings_found">無建築物符合。</string>
+    <string name="no_buildings_found">未找到建築物。</string>
     <string name="search_villages_and_postcodes">查尋更多城鎮/郵遞區號</string>
 	<string name="rendering_attr_showRoadMaps_description">選擇何時顯示僅有道路的地圖：</string>
 	<string name="rendering_attr_showRoadMaps_name">僅有道路的地圖</string>

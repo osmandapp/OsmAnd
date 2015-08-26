@@ -562,7 +562,6 @@
 	<string name="poi_surfing">Surfing</string>
 	<string name="poi_swimming">Swimming</string>
 	<string name="poi_table_tennis">Table tennis</string>
-	<string name="poi_team_handball">Team handball</string>
 	<string name="poi_tennis">Tennis</string>
 	<string name="poi_toboggan">Toboggan</string>
 	<string name="poi_volleyball">Volleyball</string>
@@ -1044,5 +1043,7 @@
 	<string name="poi_animal_shelter_cat">Shelter for cats</string>
 	<string name="poi_animal_shelter_dog_cat">Shelter for dogs and cats</string>
 	<string name="poi_animal_shelter_bird">Shelter for birds</string>
+
+	<string name="poi_building">Building</string>
 
 </resources>

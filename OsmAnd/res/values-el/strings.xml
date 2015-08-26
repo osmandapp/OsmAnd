@@ -1825,4 +1825,7 @@
 	<string name="location_on_map">Τοποθεσία:\n Γ. Πλ %1$s\n Γ. Μηκ %2$s</string>
 	<string name="rendering_value__name">Προκαθορισμένο</string>
     <string name="print_route">Εκτύπωση διαδρομής</string>
-    </resources>
+    <string name="osmand_parking_overdue">εκπρόθεσμο</string>
+	<string name="simulate_your_location">Προσομοίωση της θέση σας</string>
+    <string name="rendering_value_highContrastRoads_name">Δρόμοι με υψηλή αντίθεση</string>
+	</resources>

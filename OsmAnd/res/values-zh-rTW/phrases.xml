@@ -1049,4 +1049,6 @@
 	<string name="poi_google_plus">Google+</string>
 	<string name="poi_perfumery">香水商店</string>
 
-	</resources>
+	<string name="poi_building">建築物</string>
+
+</resources>
