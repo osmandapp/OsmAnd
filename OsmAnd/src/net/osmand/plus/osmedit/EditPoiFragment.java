@@ -297,7 +297,7 @@ public class EditPoiFragment extends Fragment {
 				fragmentManager.popBackStack();
 			}
 		});
-
+		updateType(editPoiData.amenity);
 		return view;
 	}
 

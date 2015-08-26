@@ -295,7 +295,7 @@ public class NormalDataFragment extends Fragment {
 			}
 			if (mIsUserInput) {
 				Tag openHours = new Tag(OSMSettings.OSMTagKey.OPENING_HOURS.getValue(),
-						openingHours.toStringNoMoths());
+						openingHours.toStringNoMonths());
 				data.tags.remove(openHours);
 				data.tags.add(openHours);
 				data.notifyDatasetChanged(null);

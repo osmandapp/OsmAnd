@@ -147,7 +147,7 @@ public class OpeningHoursParser {
 			return s.substring(0, s.length()-2);
 		}
 
-		public String toStringNoMoths() {
+		public String toStringNoMonths() {
 			StringBuilder s = new StringBuilder();
 			if (rules.isEmpty()) {
 				return "";
