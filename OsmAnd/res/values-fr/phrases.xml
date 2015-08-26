@@ -1030,4 +1030,6 @@
 	<string name="poi_perfumery">Parfumerie</string>
 
 	<string name="poi_recycling_low_energy_bulbs">Ampoules basse consommation</string>
-	</resources>
+	<string name="poi_building">Bâtiment</string>
+
+</resources>
