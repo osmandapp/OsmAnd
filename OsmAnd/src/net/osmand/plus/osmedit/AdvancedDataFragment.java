@@ -16,6 +16,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import net.osmand.PlatformUtil;
 import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.OSMSettings;
 import net.osmand.plus.OsmandApplication;
@@ -24,11 +25,14 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.osmedit.data.EditPoiData;
 import net.osmand.plus.osmedit.data.Tag;
 
+import org.apache.commons.logging.Log;
+
 import java.util.Iterator;
 import java.util.Map;
 
 public class AdvancedDataFragment extends Fragment {
 	private static final String TAG = "AdvancedDataFragment";
+	private static final Log LOG = PlatformUtil.getLog(AdvancedDataFragment.class);
 
 	private TagAdapterLinearLayoutHack mAdapter;
 	private EditPoiData.TagsChangedListener mTagsChangedListener;
