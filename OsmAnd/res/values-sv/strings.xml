@@ -1970,4 +1970,6 @@
 	<string name="app_name_osmand">OsmAnd</string>
 	<string name="routing_attr_avoid_shuttle_train_name">Undvik pendeltåg</string>
 	<string name="routing_attr_avoid_shuttle_train_description">Undvik pendeltåg</string>
+    <string name="plugin_settings">Insticksprogram</string>
+	<string name="traffic_warning_hazard">Varning</string>
     </resources>
