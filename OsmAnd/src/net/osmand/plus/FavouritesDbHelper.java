@@ -477,13 +477,17 @@ public class FavouritesDbHelper {
 				String s2 = o2.getName();
 				int i1 = Algorithms.extractIntegerNumber(s1);
 				int i2 = Algorithms.extractIntegerNumber(s2);
-				if(i1 == i2) {
-					String ot1 = Algorithms.extractIntegerPrefix(s1);
-					String ot2 = Algorithms.extractIntegerPrefix(s2);
-					return collator.compare(ot1, ot2);	
+				String ot1 = Algorithms.extractIntegerPrefix(s1);
+				String ot2 = Algorithms.extractIntegerPrefix(s2);
+				int res = collator.compare(ot1, ot2);
+				if (res == 0) {
+					res = i1 - i2;
 				}
-				
-				return i1 - i2;
+				if (res == 0) {
+					res = collator.compare(s1, s2);
+				}
+				return res;
+
 			}
 		};
 		return favoritesComparator;
