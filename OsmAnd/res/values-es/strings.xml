@@ -2166,4 +2166,10 @@
 <string name="routing_attr_avoid_shuttle_train_name">Evitar tren de enlace</string>
 	<string name="routing_attr_avoid_shuttle_train_description">Evite tomar trenes de enlace</string>
     <string name="plugin_settings">Complementos</string>
-	</resources>
+	<string name="basic_tab_title">Básico</string>
+	<string name="extended_tab_title">Extendido</string>
+	<string name="building_number">Número de edificio</string>
+	<string name="next_proceed">Siguiente</string>
+	<string name="opening_at">Abren a las</string>
+	<string name="closing_at">Cierran a las</string>
+</resources>
