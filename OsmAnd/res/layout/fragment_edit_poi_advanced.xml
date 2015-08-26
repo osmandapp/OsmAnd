@@ -3,44 +3,50 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto">
+    android:theme="@style/OsmandLightTheme.NewAppTheme">
 
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <android.support.v7.widget.CardView
+
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/color_white"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginTop="16dp"
-            card_view:cardCornerRadius="2dp">
+            android:background="@drawable/bg_card_shadow">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center">
+
                     <TextView
                         android:layout_width="120dp"
                         android:layout_height="wrap_content"
-                        android:text="name"
-                        android:layout_margin="16dp"/>
+                        android:layout_margin="16dp"
+                        android:text="name"/>
+
                     <View
                         android:layout_width="1dp"
                         android:layout_height="match_parent"
                         android:background="@color/divider_color"/>
+
                     <TextView
                         android:id="@+id/nameTextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="16dp"/>
                 </LinearLayout>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -50,16 +56,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center">
+
                     <TextView
                         android:id="@+id/amenityTagTextView"
                         android:layout_width="120dp"
                         android:layout_height="wrap_content"
-                        android:text="amenity"
-                        android:layout_margin="16dp"/>
+                        android:layout_margin="16dp"
+                        android:text="amenity"/>
+
                     <View
                         android:layout_width="1dp"
                         android:layout_height="match_parent"
                         android:background="@color/divider_color"/>
+
                     <TextView
                         android:id="@+id/amenityTextView"
                         android:layout_width="match_parent"
@@ -67,7 +76,7 @@
                         android:layout_margin="16dp"/>
                 </LinearLayout>
             </LinearLayout>
-        </android.support.v7.widget.CardView>
+        </FrameLayout>
 
         <LinearLayout
             android:id="@+id/editTagsList"

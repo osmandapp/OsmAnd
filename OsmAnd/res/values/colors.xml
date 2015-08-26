@@ -154,4 +154,6 @@
 	<color name="inactive_iteme_orange">#ffc87f</color>
 	<color name="osmand_orange_dark">#e68200</color>
 	<color name="divider_color">#ccc</color>
+
+	<color name="color_dialog_buttons">#2f7af5</color>
 </resources>

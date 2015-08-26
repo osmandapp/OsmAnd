@@ -8,6 +8,15 @@
     android:orientation="vertical"
     tools:context="net.osmand.plus.osmedit.EditPoiFragment"
     android:clickable="true">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/dashboard_map_toolbar"
+        android:minHeight="@dimen/dashboard_map_toolbar"
+        app:contentInsetLeft="72dp"
+        app:contentInsetStart="72dp"
+        android:theme="@style/OsmandLightTheme.Toolbar"
+        android:background="@color/osmand_orange"/>
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -19,16 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:theme="@style/OsmandLightTheme.DarkActionbar">
-
             <!-- TODO change theme -->
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="fill_parent"
-                android:layout_height="@dimen/dashboard_map_toolbar"
-                app:contentInsetLeft="72dp"
-                app:contentInsetStart="72dp"
-                app:layout_scrollFlags="scroll"/>
-
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -38,8 +38,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="72dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginTop="16dp">
+                    android:layout_marginRight="16dp">
 
                     <EditText
                         android:id="@+id/poiNameEditText"
@@ -69,7 +68,6 @@
                     android:id="@+id/poiTypeTextInputLayout"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
                     android:layout_marginLeft="24dp"
                     android:layout_weight="1">
 
@@ -100,7 +98,8 @@
                 android:background="@color/color_white"
                 app:tabIndicatorColor="@color/osmand_orange"
                 app:tabSelectedTextColor="@color/osmand_orange"
-                app:tabTextColor="@android:color/darker_gray"/>
+                app:tabTextColor="@android:color/darker_gray"
+                app:layout_scrollFlags="scroll"/>
         </android.support.design.widget.AppBarLayout>
 
 

@@ -1,19 +1,23 @@
 package net.osmand.plus.osmedit.dialogs;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AlertDialog;
 import android.text.format.DateFormat;
 
+import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.util.OpeningHoursParser;
+
+import org.apache.commons.logging.Log;
 
 import java.util.Calendar;
 
 public class OpeningHoursDaysDialogFragment extends DialogFragment {
+	private static final Log LOG = PlatformUtil.getLog(OpeningHoursDaysDialogFragment.class);
 	public static final String POSITION_TO_ADD = "position_to_add";
 	public static final String ITEM = "item";
 
@@ -24,7 +28,8 @@ public class OpeningHoursDaysDialogFragment extends DialogFragment {
 				(OpeningHoursParser.BasicOpeningHourRule) getArguments().getSerializable(ITEM);
 		final int positionToAdd = getArguments().getInt(POSITION_TO_ADD);
 
-		AlertDialog.Builder b = new AlertDialog.Builder(getActivity());
+		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(),
+				R.style.OsmandLightDialogTheme);
 
 		boolean add = positionToAdd > -1;
 		Calendar inst = Calendar.getInstance();
@@ -34,11 +39,15 @@ public class OpeningHoursDaysDialogFragment extends DialogFragment {
 		for (int i = 0; i < 7; i++) {
 			int d = (first + i - 1) % 7 + 1;
 			inst.set(Calendar.DAY_OF_WEEK, d);
-			daysToShow[i] = DateFormat.format("EEEE", inst).toString(); //$NON-NLS-1$
+			CharSequence dayName = DateFormat.format("EEEE", inst);
+			String result = "" + Character.toUpperCase(dayName.charAt(0)) +
+					dayName.subSequence(1, dayName.length());
+			daysToShow[i] = result; //$NON-NLS-1$
 			final int pos = (d + 5) % 7;
 			dayToShow[i] = item.getDays()[pos];
 		}
-		b.setMultiChoiceItems(daysToShow, dayToShow, new DialogInterface.OnMultiChoiceClickListener() {
+		builder.setTitle("Working days");
+		builder.setMultiChoiceItems(daysToShow, dayToShow, new DialogInterface.OnMultiChoiceClickListener() {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which, boolean isChecked) {
@@ -47,8 +56,7 @@ public class OpeningHoursDaysDialogFragment extends DialogFragment {
 			}
 
 		});
-		b.setPositiveButton(add ? getActivity().getString(R.string.shared_string_add)
-						: getActivity().getString(R.string.shared_string_apply),
+		builder.setPositiveButton(getActivity().getString(R.string.next_proceed),
 				new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
@@ -71,13 +79,12 @@ public class OpeningHoursDaysDialogFragment extends DialogFragment {
 
 				});
 
-		b.setNegativeButton(getActivity().getString(R.string.shared_string_cancel), null);
-
-		return b.create();
+		builder.setNegativeButton(getActivity().getString(R.string.shared_string_cancel), null);
+		return builder.create();
 	}
 
 	public static OpeningHoursDaysDialogFragment createInstance(final OpeningHoursParser.BasicOpeningHourRule item,
-													final int positionToAdd) {
+																final int positionToAdd) {
 		OpeningHoursDaysDialogFragment daysDialogFragment = new OpeningHoursDaysDialogFragment();
 		Bundle bundle = new Bundle();
 		bundle.putSerializable(ITEM, item);

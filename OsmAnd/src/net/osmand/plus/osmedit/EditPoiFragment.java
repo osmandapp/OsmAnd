@@ -129,7 +129,9 @@ public class EditPoiFragment extends Fragment {
 		});
 
 		viewPager = (ViewPager) view.findViewById(R.id.viewpager);
-		MyAdapter pagerAdapter = new MyAdapter(getChildFragmentManager());
+		String basicTitle = getResources().getString(R.string.basic_tab_title);
+		String extendedTitle = getResources().getString(R.string.extended_tab_title);
+		MyAdapter pagerAdapter = new MyAdapter(getChildFragmentManager(), basicTitle, extendedTitle);
 		viewPager.setAdapter(pagerAdapter);
 
 		final TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
@@ -441,8 +443,12 @@ public class EditPoiFragment extends Fragment {
 	}
 
 	public static class MyAdapter extends FragmentPagerAdapter {
-		public MyAdapter(FragmentManager fm) {
+		private final String basicTitle;
+		private final String extendedTitle;
+		public MyAdapter(FragmentManager fm, String basicTitle, String extendedTitle) {
 			super(fm);
+			this.basicTitle = basicTitle;
+			this.extendedTitle = extendedTitle;
 		}
 
 		@Override
@@ -466,9 +472,9 @@ public class EditPoiFragment extends Fragment {
 			// TODO replace with string resources
 			switch (position) {
 				case 0:
-					return "Normal";
+					return basicTitle;
 				case 1:
-					return "Advanced";
+					return extendedTitle;
 			}
 			throw new IllegalArgumentException("Unexpected position");
 		}

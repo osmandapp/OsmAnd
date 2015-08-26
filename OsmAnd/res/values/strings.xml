@@ -2240,4 +2240,10 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="app_name_osmand">OsmAnd</string>
 	<string name="offline_maps_and_navigation"><![CDATA[Offline Maps\n& Navigation]]></string>
 	<string name="commit_poi">Commit POI</string>
+	<string name="basic_tab_title">Basic</string>
+	<string name="extended_tab_title">Extended</string>
+	<string name="building_number">Building Number</string>
+	<string name="next_proceed">Next</string>
+	<string name="opening_at">Opening at</string>
+	<string name="closing_at">Closing at</string>
 </resources>
