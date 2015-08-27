@@ -63,17 +63,9 @@ public class OpeningHoursDaysDialogFragment extends DialogFragment {
 						for (int i = 0; i < 7; i++) {
 							days[(first + 5 + i) % 7] = dayToShow[i];
 						}
-						OpeningHoursHoursDialogFragment.createInstance(item, null, true)
+
+						OpeningHoursHoursDialogFragment.createInstance(item, positionToAdd, true)
 								.show(getFragmentManager(), "TimePickerDialogFragment");
-						if (positionToAdd != -1) {
-
-//								time.insert(item, positionToAdd);
-//								selectedRule = positionToAdd;
-						} else {
-//								time.notifyDataSetChanged();
-						}
-//							updateTimePickers();
-
 					}
 
 				});
@@ -82,8 +74,9 @@ public class OpeningHoursDaysDialogFragment extends DialogFragment {
 		return builder.create();
 	}
 
-	public static OpeningHoursDaysDialogFragment createInstance(final OpeningHoursParser.BasicOpeningHourRule item,
-																final int positionToAdd) {
+	public static OpeningHoursDaysDialogFragment createInstance(
+			@NonNull final OpeningHoursParser.BasicOpeningHourRule item,
+			final int positionToAdd) {
 		LOG.debug("createInstance(" + "item=" + item + ", positionToAdd=" + positionToAdd + ")");
 		OpeningHoursDaysDialogFragment daysDialogFragment = new OpeningHoursDaysDialogFragment();
 		Bundle bundle = new Bundle();
