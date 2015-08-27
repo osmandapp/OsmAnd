@@ -1972,4 +1972,10 @@
 	<string name="routing_attr_avoid_shuttle_train_description">Undvik pendeltåg</string>
     <string name="plugin_settings">Insticksprogram</string>
 	<string name="traffic_warning_hazard">Varning</string>
-    </resources>
+    <string name="basic_tab_title">Grundläggande</string>
+	<string name="extended_tab_title">Utökad</string>
+	<string name="building_number">Husnummer</string>
+	<string name="next_proceed">Nästa</string>
+	<string name="opening_at">Öppnar</string>
+	<string name="closing_at">Stänger</string>
+</resources>

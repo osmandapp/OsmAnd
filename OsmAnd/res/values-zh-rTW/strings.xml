@@ -2088,7 +2088,7 @@
 	<string name="basic_tab_title">基本</string>
 	<string name="extended_tab_title">展開</string>
 	<string name="building_number">門牌號碼</string>
-	<string name="opening_at">營業時間</string>
+	<string name="opening_at">營業于</string>
 	<string name="closing_at">結束于</string>
 <string name="next_proceed">下頁</string>
 	</resources>
