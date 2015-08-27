@@ -720,7 +720,7 @@
   
   
   <string name="show_gps_coordinates_text">GPS koordináták megjelenítése a térképen</string>
-  <string name="use_internet_to_download_tile">Internet használata a hiányzó térképcsempék letöltésére</string>
+  <string name="use_internet_to_download_tile">Internet használata a hiányzó térképcsempék letöltéséhez</string>
   <string name="app_description">Navigációs alkalmazás</string>
   <string name="shared_string_exit">Kilépés</string>
   
@@ -729,7 +729,7 @@
   <string name="search_button">Keresés</string>
   <string name="search_activity">Keresés</string>
   <string name="searchpoi_activity">POI kiválasztás</string>
-  <string name="search_POI_level_btn">További találat</string>
+  <string name="search_POI_level_btn">További találatok</string>
   <string name="incremental_search_city">Település keresése lépésenként</string>
   <string name="incremental_search_street">Utca keresése</string>
   <string name="incremental_search_building">Épület keresése</string>
@@ -740,13 +740,13 @@
   <string name="app_mode_car">Autó</string>
   <string name="app_mode_bicycle">Kerékpár</string>
   <string name="app_mode_pedestrian">Gyalogos</string>
-  <string name="position_on_map_center">Közép</string>
+  <string name="position_on_map_center">Középen</string>
   <string name="position_on_map_bottom">Alul</string>
-  <string name="navigate_point_top_text">Földrajzi szélesség és hosszúság megadása a kiválasztott alakban (F - fok, P - perc, M - másodperc)</string>
+  <string name="navigate_point_top_text">Földrajzi szélesség és hosszúság megadása a kiválasztott formátumban (F - fok, P - perc, M - másodperc)</string>
   <string name="navigate_point_latitude">Szélesség</string>
   <string name="navigate_point_longitude">Hosszúság</string>
-  <string name="navigate_point_format_D">FFF.FFFFF</string>
-  <string name="navigate_point_format_DM">FFF PP.PPPPP</string>
+  <string name="navigate_point_format_D">FFF.FF</string>
+  <string name="navigate_point_format_DM">FFF PP.PP</string>
   <string name="navigate_point_format_DMS">FFF PP MM.MM</string>
   <string name="shared_string_show_on_map">Megjelenítés a térképen</string>
   
@@ -769,7 +769,7 @@
   <string name="shared_string_no">Nem</string>
   <string name="add_favorite_dialog_top_text">Kedvenc neve</string>
   <string name="add_favorite_dialog_default_favourite_name">Kedvenc</string>
-  <string name="add_favorite_dialog_favourite_added_template">Kedvenc pont: \'\'{0}\'\' sikeresen hozzáadva.</string>
+  <string name="add_favorite_dialog_favourite_added_template">\'\'{0}\'\' kedvenc pont sikeresen hozzáadva.</string>
   <string name="favourites_context_menu_edit">Kedvenc szerkesztése</string>
   <string name="favourites_context_menu_delete">Kedvenc törlése</string>
   <string name="favourites_remove_dialog_msg">Törlöd a(z) \'%s\' kedvenc pontot?</string>
@@ -788,20 +788,20 @@
   <string name="osb_close_dialog_title">Hiba lezárása</string>
   <string name="osb_close_dialog_close_button">Hiba lezárás</string>
   <string name="osb_close_dialog_success">Hiba sikeresen lezárva</string>
-  <string name="osb_close_dialog_error">Hiba történt a hiba lezárásakor</string>
+  <string name="osb_close_dialog_error">Hiba történt a hibajegy lezárásakor</string>
   <string name="poi_edit_title">POI szerkesztése</string>
   <string name="poi_create_title">POI létrehozása</string>
-  <string name="poi_error_poi_not_found">A csomópont nem található, vagy a szórakozás nem egy csomópont</string>
+  <string name="poi_error_poi_not_found">A pont nem található, vagy a POI nem egy önálló pont</string>
   <string name="poi_remove_confirm_template">{0} törlés (megjegyzés bevitele)?</string>
   <string name="poi_remove_title">POI törlése</string>
   <string name="shared_string_delete">Törlés</string>
   <string name="poi_remove_success">POI törlése sikeres</string>
-  <string name="poi_action_add">hozzáad</string>
-  <string name="poi_action_change">módosít</string>
+  <string name="poi_action_add">hozzáadás</string>
+  <string name="poi_action_change">módosítás</string>
   <string name="poi_action_succeded_template">{0} művelet sikeresen befejeződött.</string>
   <string name="poi_error_unexpected_template">{0} művelet közben nem várt hiba történt.</string>
   <string name="poi_error_io_error_template">{0} művelet közben input/output hiba történt.</string>
-  <string name="poi_error_info_not_loaded">A csomópontról nincs letöltve információ</string>
+  <string name="poi_error_info_not_loaded">Nincs letöltve információ a pontról</string>
   <string name="poi_dialog_name">Név</string>
   <string name="poi_dialog_opening_hours">Nyitva</string>
   <string name="poi_dialog_comment">Megjegyzés</string>
@@ -812,7 +812,7 @@
   <string name="filter_current_poiButton">Szűrő</string>
   
   <string name="edit_filter_save_as_menu_item">Mentés más néven</string>
-  <string name="edit_filter_delete_dialog_title">Kiválasztott szűrő törlése?</string>
+  <string name="edit_filter_delete_dialog_title">Törlöd a kiválasztott szűrőt?</string>
   <string name="edit_filter_delete_message">{0} szűrő törölve</string>
   <string name="edit_filter_create_message">{0} szűrő létrehozva</string>
   
