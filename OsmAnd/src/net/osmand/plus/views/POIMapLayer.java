@@ -232,6 +232,16 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		return rf;
 	}
 
+	private QuadRect calculateRect(float x, float y, float width, float height) {
+		QuadRect rf;
+		double left = x - width / 2.0d;
+		double top = y - height / 2.0d;
+		double right = left + width;
+		double bottom = top + height;
+		rf = new QuadRect(left, top, right, bottom);
+		return rf;
+	}
+
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		if(!Algorithms.objectEquals(this.settings.SELECTED_POI_FILTER_FOR_MAP.get(), 
@@ -252,16 +262,16 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 				data.queryNewData(tileBox);
 				objects = data.getResults();
 				if (objects != null) {
-					int iconSize = poiBackground.getWidth() * 3 / 2;
+					float iconSize = poiBackground.getWidth() * 3 / 2;
 					QuadRect bounds = new QuadRect(0, 0, tileBox.getPixWidth(), tileBox.getPixHeight());
 					bounds.inset(-bounds.width()/4, -bounds.height()/4);
 					QuadTree<QuadRect> boundIntersections = new QuadTree<>(bounds, 4, 0.6f);
 					List<QuadRect> result = new ArrayList<>();
 
 					for (Amenity o : objects) {
-						int x = (int) tileBox.getPixXFromLatLon(o.getLocation().getLatitude(), o.getLocation()
+						float x = tileBox.getPixXFromLatLon(o.getLocation().getLatitude(), o.getLocation()
 								.getLongitude());
-						int y = (int) tileBox.getPixYFromLatLon(o.getLocation().getLatitude(), o.getLocation()
+						float y = tileBox.getPixYFromLatLon(o.getLocation().getLatitude(), o.getLocation()
 								.getLongitude());
 						boolean intersects =false;
 						QuadRect visibleRect = calculateRect(x, y, iconSize, iconSize);
@@ -308,7 +318,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 				}
 			}
 		}
-		mapTextLayer.putData(this, objects);
+		//mapTextLayer.putData(this, objects);
 	}
 
 	@Override
