@@ -141,7 +141,7 @@ public class DashboardSettingsDialogFragment extends DialogFragment {
 		public View getView(final int position, View convertView, ViewGroup parent) {
 			DashFragmentData dashFragmentData = getItem(position);
 			DashViewHolder viewHolder;
-			boolean hasRows = getItemViewType(position) == 1;
+			boolean hasRows = false;//getItemViewType(position) == 1;
 			if (convertView == null) {
 				viewHolder = new DashViewHolder();
 				if (hasRows) {
