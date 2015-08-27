@@ -123,16 +123,6 @@
         <item name="android:textColorSecondary">@color/divider_color</item>
     </style>
 
-    <style name="OsmandLightDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <item name="colorAccent">@color/osmand_orange</item>
-        <item name="buttonBarButtonStyle">@style/DialogButtonLight</item>
-    </style>
-
-    <style name="DialogButtonLight" parent="Base.Widget.AppCompat.Button.Borderless">
-        <item name="android:textColor">@color/color_dialog_buttons</item>
-        <item name="android:textColorPrimary">@color/color_black</item>
-    </style>
-
     <style name="OsmandDarkTheme" parent="Theme.AppCompat">
         <item name="list_divider">@color/list_divider_light</item>
         <item name="expandable_category_color">?android:attr/colorBackground</item>

@@ -14,26 +14,35 @@ public final class DashFragmentData implements Comparable<DashFragmentData> {
 	public final ShouldShowFunction shouldShowFunction;
 	public final boolean customDeletionLogic;
 	public final int position;
+	public final String rowNumberTag;
 
 	public DashFragmentData(String tag, Class<? extends DashBaseFragment> fragmentClass,
 							String title, ShouldShowFunction shouldShowFunction,
-							boolean customDeletionLogic, int position) {
+							boolean customDeletionLogic, int position, String rowNumberTag) {
 		this.tag = tag;
 		this.fragmentClass = fragmentClass;
 		this.title = title;
 		this.shouldShowFunction = shouldShowFunction;
 		this.customDeletionLogic = customDeletionLogic;
 		this.position = position;
+		this.rowNumberTag = rowNumberTag;
+	}
+
+	public DashFragmentData(String tag, Class<? extends DashBaseFragment> fragmentClass,
+							String title, ShouldShowFunction shouldShowFunction,
+							boolean customDeletionLogic, int position) {
+		this(tag, fragmentClass, title, shouldShowFunction, customDeletionLogic, position, null);
 	}
 
 	public DashFragmentData(String tag, Class<? extends DashBaseFragment> fragmentClass,
 							String title, ShouldShowFunction shouldShowFunction, int position) {
-		this(tag, fragmentClass, title, shouldShowFunction, false, position);
+		this(tag, fragmentClass, title, shouldShowFunction, false, position, null);
 	}
 
 	public DashFragmentData(String tag, Class<? extends DashBaseFragment> fragmentClass,
 							String title, int position) {
-		this(tag, fragmentClass, title, new DashboardOnMap.DefaultShouldShow(), false, position);
+		this(tag, fragmentClass, title, new DashboardOnMap.DefaultShouldShow(), false, position,
+				null);
 	}
 
 	@Override

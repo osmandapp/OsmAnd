@@ -28,8 +28,7 @@ public class OpeningHoursDaysDialogFragment extends DialogFragment {
 				(OpeningHoursParser.BasicOpeningHourRule) getArguments().getSerializable(ITEM);
 		final int positionToAdd = getArguments().getInt(POSITION_TO_ADD);
 
-		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(),
-				R.style.OsmandLightDialogTheme);
+		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
 		boolean add = positionToAdd > -1;
 		Calendar inst = Calendar.getInstance();
@@ -85,6 +84,7 @@ public class OpeningHoursDaysDialogFragment extends DialogFragment {
 
 	public static OpeningHoursDaysDialogFragment createInstance(final OpeningHoursParser.BasicOpeningHourRule item,
 																final int positionToAdd) {
+		LOG.debug("createInstance(" + "item=" + item + ", positionToAdd=" + positionToAdd + ")");
 		OpeningHoursDaysDialogFragment daysDialogFragment = new OpeningHoursDaysDialogFragment();
 		Bundle bundle = new Bundle();
 		bundle.putSerializable(ITEM, item);
