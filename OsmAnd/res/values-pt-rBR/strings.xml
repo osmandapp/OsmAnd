@@ -1797,4 +1797,10 @@
 <string name="routing_attr_avoid_shuttle_train_name">Evitar transporte de trem</string>
 	<string name="routing_attr_avoid_shuttle_train_description">Evitar shuttle train</string>
     <string name="plugin_settings">Complementos</string>
-	</resources>
+	<string name="basic_tab_title">Básico</string>
+	<string name="extended_tab_title">Estendido</string>
+	<string name="building_number">Número de edifício</string>
+	<string name="next_proceed">Próximo</string>
+	<string name="opening_at">Abre às</string>
+	<string name="closing_at">Fecha em</string>
+</resources>
