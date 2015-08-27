@@ -2098,4 +2098,11 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
 <string name="commit_poi">Publica PDI</string>
 <string name="routing_attr_avoid_shuttle_train_name">Evita tren llançadora</string>
 	<string name="routing_attr_avoid_shuttle_train_description">Evita tren llançadora</string>
-    </resources>
+    <string name="plugin_settings">Connectors</string>
+	<string name="basic_tab_title">Bàsic</string>
+	<string name="extended_tab_title">Estès</string>
+	<string name="building_number">Nombre de finca</string>
+	<string name="next_proceed">Següent</string>
+	<string name="opening_at">Obert a les</string>
+	<string name="closing_at">Tanquen a les</string>
+</resources>
