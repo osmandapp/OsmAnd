@@ -188,10 +188,14 @@ public class AdvancedDataFragment extends Fragment {
 			deleteItemImageButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
+					LOG.debug("onClick(" + "v=" + v + ") tag=" + tag
+							+ "; editPoiData.tags" + editPoiData.tags);
 					linearLayout.removeView((View) v.getParent());
 					editPoiData.tags.remove(tag);
+					LOG.debug("editPoiData.tags" + editPoiData.tags + " mIsUserInput=" + mIsUserInput);
 					if (mIsUserInput)
-						editPoiData.notifyDatasetChanged(mTagsChangedListener);
+						editPoiData.notifyDatasetChanged(null);
+					LOG.debug("editPoiData.tags" + editPoiData.tags);
 				}
 			});
 			tagEditText.addTextChangedListener(new TextWatcher() {

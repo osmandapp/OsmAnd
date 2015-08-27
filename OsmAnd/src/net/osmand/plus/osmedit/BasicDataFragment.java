@@ -225,7 +225,8 @@ public class BasicDataFragment extends Fragment {
 
 		@Override
 		public void onUntriggered() {
-
+			adapter.replaceOpeningHours(new OpeningHoursParser.OpeningHours());
+			adapter.updateViews();
 		}
 	}
 
