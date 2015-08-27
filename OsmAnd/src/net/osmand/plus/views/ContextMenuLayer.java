@@ -33,7 +33,7 @@ import android.widget.TextView;
 public class ContextMenuLayer extends OsmandMapLayer {
 	
 	public interface IContextMenuProvider {
-	
+
 		public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o);
 		
 		public LatLon getObjectLocation(Object o);
@@ -41,8 +41,9 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		public String getObjectDescription(Object o);
 		
 		public PointDescription getObjectName(Object o);
-		
-		
+
+		public boolean disableSingleTap();
+		public boolean disableLongPressOnMap();
 	}
 	
 	public interface IContextMenuProviderSelection {
@@ -226,16 +227,53 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			view.refreshMap();
 			return true;
 		}
-		LatLon latLon = selectObjectsForContextMenu(tileBox, point);
-		String description = getSelectedObjectDescription();
-		setLocation(latLon, description);
+
+		if (disableLongPressOnMap()) {
+			LatLon latLon = selectObjectsForContextMenu(tileBox, point);
+			if (latLon != null) {
+				String description = getSelectedObjectDescription();
+				setLocation(latLon, description);
+				view.refreshMap();
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		final double lat = tileBox.getLatFromPixel((int) point.x, (int) point.y);
+		final double lon = tileBox.getLonFromPixel((int) point.x, (int) point.y);
+		setLocation(new LatLon(lat, lon), null);
 		view.refreshMap();
 		return true;
 	}
 
+	public boolean disableSingleTap() {
+		boolean res = false;
+		for(OsmandMapLayer lt : view.getLayers()){
+			if(lt instanceof ContextMenuLayer.IContextMenuProvider) {
+				if (((IContextMenuProvider) lt).disableSingleTap()) {
+					res = true;
+					break;
+				}
+			}
+		}
+		return res;
+	}
+
+	public boolean disableLongPressOnMap() {
+		boolean res = false;
+		for(OsmandMapLayer lt : view.getLayers()){
+			if(lt instanceof ContextMenuLayer.IContextMenuProvider) {
+				if (((IContextMenuProvider) lt).disableLongPressOnMap()) {
+					res = true;
+					break;
+				}
+			}
+		}
+		return res;
+	}
+
 	public LatLon selectObjectsForContextMenu(RotatedTileBox tileBox, PointF point) {
-		final double lat = tileBox.getLatFromPixel((int) point.x, (int) point.y);
-		final double lon = tileBox.getLonFromPixel((int) point.x, (int) point.y);
 		clearSelectedObjects();
 		List<Object> s = new ArrayList<Object>();
 		LatLon latLon = null;
@@ -250,17 +288,14 @@ public class ContextMenuLayer extends OsmandMapLayer {
 						((IContextMenuProviderSelection) l).setSelectedObject(o);
 					}
 					if(latLon == null) {
-						latLon = ((ContextMenuLayer.IContextMenuProvider) l).getObjectLocation(o);
+						latLon = l.getObjectLocation(o);
 					}
 				}
 			}
 		}
-		if(latLon == null) {
-			latLon = new LatLon(lat, lon);
-		}
 		return latLon;
 	}
-	
+
 	@Override
 	public boolean drawInScreenPixels() {
 		return true;
@@ -355,6 +390,14 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				activity.getMapActions().contextMenuPoint(latLon.getLatitude(), latLon.getLongitude());
 			}
 			return true;
+		} else if (!disableSingleTap()) {
+			LatLon latLon = selectObjectsForContextMenu(tileBox, point);
+			if (latLon != null) {
+				String description = getSelectedObjectDescription();
+				setLocation(latLon, description);
+				view.refreshMap();
+				return true;
+			}
 		}
 		return false;
 	}

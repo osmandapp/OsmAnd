@@ -190,21 +190,6 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 			}
 		}
 	}
-	
-	@Override
-	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
-		List<OsMoDevice> pos = new ArrayList<OsMoDevice>();
-		getOsmoFromPoint(tileBox, point, pos);
-		if (!pos.isEmpty()) {
-			StringBuilder res = new StringBuilder();
-			for (OsMoDevice d : pos) {
-				res.append(getObjectDescription(d)).append("\n");
-			}
-			AccessibleToast.makeText(view.getContext(), res.toString().trim(), Toast.LENGTH_LONG).show();
-			return true;
-		}
-		return false;
-	}
 
 	@Override
 	public void destroyLayer() {
@@ -212,6 +197,16 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 
 	@Override
 	public boolean drawInScreenPixels() {
+		return false;
+	}
+
+	@Override
+	public boolean disableSingleTap() {
+		return false;
+	}
+
+	@Override
+	public boolean disableLongPressOnMap() {
 		return false;
 	}
 

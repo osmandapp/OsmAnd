@@ -135,6 +135,16 @@ public class MapExplorer implements OnGestureListener, IContextMenuProvider {
     // IContextMenuProvider interface implementation.
 
     @Override
+    public boolean disableSingleTap() {
+        return false;
+    }
+
+    @Override
+    public boolean disableLongPressOnMap() {
+        return false;
+    }
+
+    @Override
     public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> objects) {
         int radius = (int)(VICINITY_RADIUS * tileBox.getDensity());
 	    final QuadPoint p = tileBox.getCenterPixelPoint();

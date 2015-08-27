@@ -291,7 +291,7 @@ public class MapActivityLayers {
 
 	private void addFilterToList(final ContextMenuAdapter adapter, final List<PoiUIFilter> list, PoiUIFilter f) {
 		list.add(f);
-		Item it = adapter.item(f.getName());
+		Item it = adapter.item(f.getName()).selected(0);
 		if (RenderingIcons.containsBigIcon(f.getSimplifiedId())) {
 			it.icon(RenderingIcons.getBigIconResourceId(f.getSimplifiedId()));
 		} else {

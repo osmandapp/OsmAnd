@@ -74,7 +74,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 	private GPXFile originalGPX;
 	private String distance = null;
 
-	private int distanceMeasurementMode = 0; 
+	private int distanceMeasurementMode = 0;
 
 	public DistanceCalculatorPlugin(OsmandApplication app) {
 		this.app = app;
@@ -491,7 +491,11 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 		
 		@Override
 		public boolean onLongPressEvent(PointF point, RotatedTileBox tileBox) {
-			if (distanceMeasurementMode == 1 && measurementPoints.size() > 0) {
+
+			List<Object> s = new ArrayList<>();
+			collectObjectsFromPoint(point, tileBox, s);
+
+			if (s.size() == 0 && distanceMeasurementMode == 1 && measurementPoints.size() > 0) {
 				LinkedList<WptPt> lt = measurementPoints.get(measurementPoints.size() - 1);
 				if (lt.size() > 0) {
 					lt.removeLast();
@@ -562,6 +566,16 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 		@Override
 		public boolean drawInScreenPixels() {
 			return false;
+		}
+
+		@Override
+		public boolean disableSingleTap() {
+			return distanceMeasurementMode == 1;
+		}
+
+		@Override
+		public boolean disableLongPressOnMap() {
+			return distanceMeasurementMode == 1;
 		}
 
 		@Override

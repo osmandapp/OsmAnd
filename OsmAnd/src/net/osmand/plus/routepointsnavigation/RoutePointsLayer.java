@@ -31,6 +31,16 @@ public class RoutePointsLayer  extends OsmandMapLayer implements ContextMenuLaye
 	}
 
 	@Override
+	public boolean disableSingleTap() {
+		return false;
+	}
+
+	@Override
+	public boolean disableLongPressOnMap() {
+		return false;
+	}
+
+	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o) {
 
 	}
