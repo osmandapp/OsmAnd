@@ -34,6 +34,8 @@ public class DashFavoritesFragment extends DashLocationFragment {
 	public static final String TAG = "DASH_FAVORITES_FRAGMENT";
 	List<FavouritePoint> points = new ArrayList<FavouritePoint>();
 
+	public static final String ROW_NUMBER_TAG = TAG + "_row_number";
+
 	@Override
 	public View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_common_fragment, container, false);
@@ -78,9 +80,11 @@ public class DashFavoritesFragment extends DashLocationFragment {
 		}
 		LinearLayout favorites = (LinearLayout) mainView.findViewById(R.id.items);
 		favorites.removeAllViews();
-		if (points.size() > 3) {
-			while (points.size() != 3) {
-				points.remove(3);
+		int numberOfRows =
+				getMyApplication().getSettings().registerIntPreference(ROW_NUMBER_TAG, 3).get();
+		if (points.size() > numberOfRows) {
+			while (points.size() != numberOfRows) {
+				points.remove(numberOfRows);
 			}
 		}
 		List<DashLocationView> distances = new ArrayList<DashLocationFragment.DashLocationView>();
@@ -134,6 +138,4 @@ public class DashFavoritesFragment extends DashLocationFragment {
 		}
 		this.distances = distances;
 	}
-
-
 }

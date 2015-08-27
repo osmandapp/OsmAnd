@@ -11,7 +11,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.TranslateAnimation;
@@ -95,7 +94,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 			new DashFragmentData(DashRecentsFragment.TAG, DashRecentsFragment.class,
 					"Recent places", 8),
 			new DashFragmentData(DashFavoritesFragment.TAG, DashFavoritesFragment.class,
-					"Favourites", 9),
+					"Favourites", defaultShouldShow, false, 9, DashFavoritesFragment.ROW_NUMBER_TAG),
 			new DashFragmentData(DashPluginsFragment.TAG, DashPluginsFragment.class,
 					"Plugins", 14)
 	};

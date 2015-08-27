@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -69,7 +70,8 @@ public class DashboardSettingsDialogFragment extends DialogFragment {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		if (savedInstanceState != null && savedInstanceState.containsKey(CHECKED_ITEMS)) {
 			mAdapter = new DashFragmentAdapter(getActivity(), mFragmentsData,
-					savedInstanceState.getBooleanArray(CHECKED_ITEMS));
+					savedInstanceState.getBooleanArray(CHECKED_ITEMS),
+					new int[mFragmentsData.size()]);
 		} else {
 			mAdapter = new DashFragmentAdapter(getActivity(), mFragmentsData,
 					settings);
@@ -87,7 +89,6 @@ public class DashboardSettingsDialogFragment extends DialogFragment {
 						}
 						mapActivity.getDashboard().refreshDashboardFragments();
 						shouldShowDashboardOnStart.set(compoundButton.isChecked());
-						// TODO save as preference
 					}
 				})
 				.setNegativeButton(R.string.shared_string_cancel, null);
@@ -106,16 +107,19 @@ public class DashboardSettingsDialogFragment extends DialogFragment {
 
 	private static class DashFragmentAdapter extends ArrayAdapter<DashFragmentData> {
 		private final boolean[] checkedItems;
+		private final int[] numbersOfRows;
 
 		public DashFragmentAdapter(Context context, List<DashFragmentData> objects,
-								   boolean[] checkedItems) {
+								   boolean[] checkedItems, int[] numbersOfRows) {
 			super(context, 0, objects);
 			this.checkedItems = checkedItems;
+			this.numbersOfRows = numbersOfRows;
 		}
 
 		public DashFragmentAdapter(Context context, List<DashFragmentData> objects,
 								   OsmandSettings settings) {
 			super(context, 0, objects);
+			numbersOfRows = new int[objects.size()];
 			checkedItems = new boolean[objects.size()];
 			for (int i = 0; i < objects.size(); i++) {
 				checkedItems[i] = settings.registerBooleanPreference(
@@ -124,13 +128,33 @@ public class DashboardSettingsDialogFragment extends DialogFragment {
 		}
 
 		@Override
+		public int getViewTypeCount() {
+			return 2;
+		}
+
+		@Override
+		public int getItemViewType(int position) {
+			return getItem(position).rowNumberTag == null ? 0 : 1;
+		}
+
+		@Override
 		public View getView(final int position, View convertView, ViewGroup parent) {
 			DashFragmentData dashFragmentData = getItem(position);
 			DashViewHolder viewHolder;
+			boolean hasRows = getItemViewType(position) == 1;
 			if (convertView == null) {
 				viewHolder = new DashViewHolder();
-				convertView = LayoutInflater.from(getContext()).inflate(
-						R.layout.dashboard_settings_dialog_item, parent, false);
+				if (hasRows) {
+					convertView = LayoutInflater.from(getContext()).inflate(
+							R.layout.dashboard_settings_dialog_item_1, parent, false);
+
+					viewHolder.numberOfRowsTextView = (TextView) convertView.findViewById(R.id.numberOfRowsTextView);
+					viewHolder.decrementButton = (Button) convertView.findViewById(R.id.decrementButton);
+					viewHolder.incrementButton = (Button) convertView.findViewById(R.id.incrementButton);
+				} else {
+					convertView = LayoutInflater.from(getContext()).inflate(
+							R.layout.dashboard_settings_dialog_item, parent, false);
+				}
 				viewHolder.textView = (TextView) convertView.findViewById(R.id.text);
 				viewHolder.compoundButton = (CompoundButton) convertView.findViewById(R.id.check_item);
 				viewHolder.compoundButton.setOnCheckedChangeListener(
@@ -164,6 +188,9 @@ public class DashboardSettingsDialogFragment extends DialogFragment {
 			TextView textView;
 			CompoundButton compoundButton;
 			int position;
+			TextView numberOfRowsTextView;
+			Button decrementButton;
+			Button incrementButton;
 		}
 	}
 }

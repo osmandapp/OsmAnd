@@ -33,9 +33,9 @@ import org.apache.commons.logging.Log;
 import java.util.HashMap;
 import java.util.Map;
 
-public class NormalDataFragment extends Fragment {
-	private static final String TAG = "NormalDataFragment";
-	private static final Log LOG = PlatformUtil.getLog(NormalDataFragment.class);
+public class BasicDataFragment extends Fragment {
+	private static final String TAG = "BasicDataFragment";
+	private static final Log LOG = PlatformUtil.getLog(BasicDataFragment.class);
 	private static final String OPENING_HOURS = "opening_hours";
 	private EditText streetEditText;
 	private EditText houseNumberEditText;
