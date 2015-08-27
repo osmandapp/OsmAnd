@@ -48,7 +48,6 @@ import android.graphics.Paint.Style;
 import android.graphics.PointF;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
-import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.v4.view.MenuItemCompat;
@@ -181,25 +180,6 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		}
 	}
 
-	@Override
-	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
-		List<Amenity> am = new ArrayList<Amenity>();
-		getAmenityFromPoint(tileBox, point, am);
-		if (!am.isEmpty()) {
-			StringBuilder res = new StringBuilder();
-			for (int i = 0; i < MAXIMUM_SHOW_AMENITIES && i < am.size(); i++) {
-				Amenity n = am.get(i);
-				if (i > 0) {
-					res.append("\n\n");
-				}
-				buildPoiInformation(res, n);
-			}
-			AccessibleToast.makeText(view.getContext(), res.toString(), Toast.LENGTH_SHORT).show();
-			return true;
-		}
-		return false;
-	}
-
 	private StringBuilder buildPoiInformation(StringBuilder res, Amenity n) {
 		String format = OsmAndFormatter.getPoiStringWithoutType(n,
 				view.getSettings().MAP_PREFERRED_LOCALE.get());
@@ -212,9 +192,10 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		this.view = view;
 
 		paintIcon = new Paint();
-		paintIcon.setStrokeWidth(1);
-		paintIcon.setStyle(Style.STROKE);
-		paintIcon.setColor(Color.BLUE);
+		//paintIcon.setStrokeWidth(1);
+		//paintIcon.setStyle(Style.STROKE);
+		//paintIcon.setColor(Color.BLUE);
+		paintIcon.setColorFilter(new PorterDuffColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN));
 		paintIconBackground = new Paint();
 		poiBackground = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_white_orange_poi_shield);
 		poiBackgroundSmall = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_white_orange_poi_shield_small);
@@ -241,13 +222,23 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		return (int) (r * tb.getDensity());
 	}
 
-	private RectF calculateRect(int x, int y, int width, int height) {
-		RectF rf;
-		float left = x - width / 2;
-		float top = y - height / 2;
-		float right = left + width;
-		float bottom = top + height;
-		rf = new RectF(left, top, right, bottom);
+	private QuadRect calculateRect(int x, int y, int width, int height) {
+		QuadRect rf;
+		double left = x - width / 2;
+		double top = y - height / 2;
+		double right = left + width;
+		double bottom = top + height;
+		rf = new QuadRect(left, top, right, bottom);
+		return rf;
+	}
+
+	private QuadRect calculateRect(float x, float y, float width, float height) {
+		QuadRect rf;
+		double left = x - width / 2.0d;
+		double top = y - height / 2.0d;
+		double right = left + width;
+		double bottom = top + height;
+		rf = new QuadRect(left, top, right, bottom);
 		return rf;
 	}
 
@@ -265,30 +256,30 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		}
 
 		List<Amenity> objects = Collections.emptyList();
+		List<Amenity> fullObjects = new ArrayList<>();
 		if (filter != null) {
 			if (tileBox.getZoom() >= startZoom) {
 				data.queryNewData(tileBox);
 				objects = data.getResults();
 				if (objects != null) {
-					int iconSize = poiBackground.getWidth() * 3 / 2;
-					List<Amenity> fullObjects = new ArrayList<>();
+					float iconSize = poiBackground.getWidth() * 3 / 2;
 					QuadRect bounds = new QuadRect(0, 0, tileBox.getPixWidth(), tileBox.getPixHeight());
-					//bounds.inset(-bounds.width()/4, -bounds.height()/4);
-					QuadTree<RectF> boundIntersections = new QuadTree<RectF>(bounds, 4, 0.6f);
-					List<RectF> result = new ArrayList<RectF>();
+					bounds.inset(-bounds.width()/4, -bounds.height()/4);
+					QuadTree<QuadRect> boundIntersections = new QuadTree<>(bounds, 4, 0.6f);
+					List<QuadRect> result = new ArrayList<>();
 
 					for (Amenity o : objects) {
-						int x = (int) tileBox.getPixXFromLatLon(o.getLocation().getLatitude(), o.getLocation()
+						float x = tileBox.getPixXFromLatLon(o.getLocation().getLatitude(), o.getLocation()
 								.getLongitude());
-						int y = (int) tileBox.getPixYFromLatLon(o.getLocation().getLatitude(), o.getLocation()
+						float y = tileBox.getPixYFromLatLon(o.getLocation().getLatitude(), o.getLocation()
 								.getLongitude());
 						boolean intersects =false;
-						RectF visibleRect = calculateRect(x, y, iconSize, iconSize);
+						QuadRect visibleRect = calculateRect(x, y, iconSize, iconSize);
 						//canvas.drawRect(visibleRect, paintIcon);
 
 						boundIntersections.queryInBox(new QuadRect(visibleRect.left, visibleRect.top, visibleRect.right, visibleRect.bottom), result);
-						for (RectF r : result) {
-							if (r.intersects(visibleRect.left, visibleRect.top, visibleRect.right, visibleRect.bottom)) {
+						for (QuadRect r : result) {
+							if (QuadRect.intersects(r, visibleRect)) {
 								intersects = true;
 								break;
 							}
@@ -320,7 +311,6 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 						if (id != null) {
 							Bitmap bmp = RenderingIcons.getIcon(view.getContext(), id, false);
 							if (bmp != null) {
-								paintIcon.setColorFilter(new PorterDuffColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN));
 								canvas.drawBitmap(bmp, x - bmp.getWidth() / 2, y - bmp.getHeight() / 2, paintIcon);
 							}
 						}
@@ -551,6 +541,16 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 					view.getSettings().MAP_PREFERRED_LOCALE.get())); 
 		}
 		return null;
+	}
+
+	@Override
+	public boolean disableSingleTap() {
+		return false;
+	}
+
+	@Override
+	public boolean disableLongPressOnMap() {
+		return false;
 	}
 
 	@Override

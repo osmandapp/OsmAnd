@@ -153,26 +153,6 @@ public class FavoritesLayer  extends OsmandMapLayer implements ContextMenuLayer.
 	}
 
 	@Override
-	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
-		List<LocationPoint> favs = new ArrayList<LocationPoint>();
-		getFavoriteFromPoint(tileBox, point, favs);
-		if(!favs.isEmpty() && (tileBox.getZoom() > 14 || favs.size() < 6)){
-			StringBuilder res = new StringBuilder();
-			int i = 0;
-			for(LocationPoint fav : favs) {
-				if (i++ > 0) {
-					res.append("\n");
-				}
-				res.append(PointDescription.getSimpleName(fav, view.getContext()));  //$NON-NLS-1$
-			}
-			AccessibleToast.makeText(view.getContext(), res.toString(), Toast.LENGTH_LONG).show();
-			return true;
-		}
-		return false;
-	}
-
-
-	@Override
 	public String getObjectDescription(Object o) {
 		Class<? extends LocationPoint> fcl = getFavoriteClass();
 		if(o!= null && fcl.isInstance(o)) {
@@ -189,6 +169,16 @@ public class FavoritesLayer  extends OsmandMapLayer implements ContextMenuLayer.
 			return ((LocationPoint) o).getPointDescription(view.getContext()); //$NON-NLS-1$
 		}
 		return null;
+	}
+
+	@Override
+	public boolean disableSingleTap() {
+		return false;
+	}
+
+	@Override
+	public boolean disableLongPressOnMap() {
+		return false;
 	}
 
 	@Override

@@ -98,24 +98,21 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 	}
 
 	@Override
-	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
-		List <LatLon> parkPos = new ArrayList<LatLon>();
-		getParkingFromPoint(tileBox, point, parkPos);
-		if(!parkPos.isEmpty()){
-			StringBuilder res = new StringBuilder();
-			res.append(view.getContext().getString(R.string.osmand_parking_position_description));
-			AccessibleToast.makeText(view.getContext(), getObjectDescription(getParkingPoint()), Toast.LENGTH_LONG).show();
-			return true;
-		}
-		return false;
-	}
-
-	@Override
 	public void destroyLayer() {
 	}
 
 	@Override
 	public boolean drawInScreenPixels() {
+		return false;
+	}
+
+	@Override
+	public boolean disableSingleTap() {
+		return false;
+	}
+
+	@Override
+	public boolean disableLongPressOnMap() {
 		return false;
 	}
 

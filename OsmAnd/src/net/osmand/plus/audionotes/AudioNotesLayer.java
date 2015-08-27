@@ -181,6 +181,16 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	@Override
+	public boolean disableSingleTap() {
+		return false;
+	}
+
+	@Override
+	public boolean disableLongPressOnMap() {
+		return false;
+	}
+
+	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> objects) {
 		getRecordingsFromPoint(point, tileBox, objects);
 	}
@@ -202,21 +212,6 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {
 		return Math.abs(objx - ex) <= radius && (ey - objy) <= radius / 2 && (objy - ey) <= 3 * radius ;
-	}
-	
-	@Override
-	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
-		ArrayList<Recording> o = new ArrayList<Recording>();
-		getRecordingsFromPoint(point, tileBox, o);
-		if(o.size() > 0){
-			StringBuilder b = new StringBuilder();
-			for(Recording r : o) {
-				b.append(getObjectDescription(r)).append('\n');
-			}
-			AccessibleToast.makeText(activity, b.toString().trim(), Toast.LENGTH_LONG).show();
-			return true;
-		}
-		return false;
 	}
 
 	@Override

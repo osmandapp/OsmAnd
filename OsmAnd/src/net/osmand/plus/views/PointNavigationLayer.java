@@ -143,16 +143,15 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 	}
 
 	@Override
-	public boolean onLongPressEvent(PointF point, RotatedTileBox tileBox) {
+	public boolean disableSingleTap() {
 		return false;
 	}
 
 	@Override
-	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
+	public boolean disableLongPressOnMap() {
 		return false;
 	}
 	
-
 	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o) {
 		TargetPointsHelper tg = map.getMyApplication().getTargetPointsHelper();

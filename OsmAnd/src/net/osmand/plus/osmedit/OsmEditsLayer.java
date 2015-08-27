@@ -141,6 +141,16 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 	}
 
 	@Override
+	public boolean disableSingleTap() {
+		return false;
+	}
+
+	@Override
+	public boolean disableLongPressOnMap() {
+		return false;
+	}
+
+	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o) {
 		getOsmEditsFromPoint(point, tileBox, o);
 	}

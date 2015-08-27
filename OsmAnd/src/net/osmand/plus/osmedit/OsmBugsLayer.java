@@ -198,25 +198,6 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		}
 	}
 
-	@Override
-	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
-		ArrayList<OpenStreetNote> list = new ArrayList<OpenStreetNote>();
-		getBugFromPoint(tileBox, point, list);
-		if(!list.isEmpty()){
-			StringBuilder res = new StringBuilder();
-			int i = 0;
-			for(OpenStreetNote o : list) {
-				if (i++ > 0) {
-					res.append("\n\n");
-				}
-				res.append(activity.getString(R.string.osb_bug_name)+ " : " + o.getCommentDescription()); //$NON-NLS-1$
-			}
-			AccessibleToast.makeText(activity, res.toString(), Toast.LENGTH_LONG).show();
-			return true;
-		}
-		return false;
-	}
-
 	public void clearCache() {
 		if(data != null) {
 			data.clearCache();
@@ -345,7 +326,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
 		((EditText)openBug.findViewById(R.id.passwordEditText)).setText(((OsmandApplication) activity.getApplication()).getSettings().USER_PASSWORD.get());
 		((EditText)openBug.findViewById(R.id.userNameEditText)).setText(getUserName());
-		AndroidUtils.softKeyboardDelayed((EditText)openBug.findViewById(R.id.messageEditText));
+		AndroidUtils.softKeyboardDelayed((EditText) openBug.findViewById(R.id.messageEditText));
 		builder.setPositiveButton(R.string.shared_string_add, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -552,6 +533,16 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 			return new PointDescription(PointDescription.POINT_TYPE_OSM_NOTE, ((OpenStreetNote)o).getCommentDescription()); 
 		}
 		return null;
+	}
+
+	@Override
+	public boolean disableSingleTap() {
+		return false;
+	}
+
+	@Override
+	public boolean disableLongPressOnMap() {
+		return false;
 	}
 
 	@Override

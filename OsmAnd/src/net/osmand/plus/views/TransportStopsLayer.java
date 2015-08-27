@@ -73,26 +73,6 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 	
 
 
-	
-	
-	@Override
-	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
-		ArrayList<TransportStop> stops = new ArrayList<TransportStop >(); 
-		getFromPoint(tileBox, point, stops);
-		if(!stops.isEmpty()){
-			StringBuilder res = new StringBuilder();
-			int i = 0;
-			for (TransportStop n : stops) {
-				if (i++ > 0) {
-					res.append("\n\n");
-				}
-				res.append(getStopDescription(n, true));
-			}
-			AccessibleToast.makeText(view.getContext(), res.toString(), Toast.LENGTH_LONG).show();
-			return true;
-		}
-		return false;
-	}
 
 	private String getStopDescription(TransportStop n, boolean useName) {
 		StringBuilder text = new StringBuilder(250);
@@ -197,6 +177,16 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 					((TransportStop)o).getName()); 
 		}
 		return null;
+	}
+
+	@Override
+	public boolean disableSingleTap() {
+		return false;
+	}
+
+	@Override
+	public boolean disableLongPressOnMap() {
+		return false;
 	}
 
 	@Override

@@ -426,26 +426,6 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	}
 
 	@Override
-	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
-		List<WptPt> gpxPoints = new ArrayList<WptPt>();
-		getWptFromPoint(tileBox, point, gpxPoints);
-		if(!gpxPoints.isEmpty() && (tileBox.getZoom() > 14 || gpxPoints.size() < 6)){
-			StringBuilder res = new StringBuilder();
-			int i = 0;
-			for(WptPt fav : gpxPoints) {
-				if (i++ > 0) {
-					res.append("\n\n");
-				}
-				res.append(view.getContext().getString(R.string.gpx_wpt) + " : " + fav.name);  //$NON-NLS-1$
-			}
-			AccessibleToast.makeText(view.getContext(), res.toString(), Toast.LENGTH_LONG).show();
-			return true;
-		}
-		return false;
-	}
-
-
-	@Override
 	public String getObjectDescription(Object o) {
 		if(o instanceof WptPt){
 			return view.getContext().getString(R.string.gpx_wpt) + " : " + ((WptPt)o).name; //$NON-NLS-1$
@@ -459,6 +439,16 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 			return new PointDescription(PointDescription.POINT_TYPE_WPT, ((WptPt)o).name); //$NON-NLS-1$
 		}
 		return null;
+	}
+
+	@Override
+	public boolean disableSingleTap() {
+		return false;
+	}
+
+	@Override
+	public boolean disableLongPressOnMap() {
+		return false;
 	}
 
 	@Override
