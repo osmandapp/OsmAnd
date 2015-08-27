@@ -19,8 +19,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="24dp"
-        android:orientation="vertical"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/daysTextView"
@@ -35,45 +35,52 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/timeContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:orientation="vertical">
+        android:gravity="center_vertical">
 
-        <TextView
-            android:id="@+id/openingTextView"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="08:00"/>
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/openingTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="08:00"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider_color"/>
+        </LinearLayout>
 
         <View
-            android:layout_width="match_parent"
+            android:layout_width="16dp"
             android:layout_height="1dp"
             android:background="@color/divider_color"/>
-    </LinearLayout>
 
-    <View
-        android:layout_width="16dp"
-        android:layout_height="1dp"
-        android:background="@color/divider_color"/>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/closingTextView"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="20:00"/>
+            android:layout_marginLeft="16dp"
+            android:orientation="vertical">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/divider_color"/>
+            <TextView
+                android:id="@+id/closingTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="20:00"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider_color"/>
+        </LinearLayout>
     </LinearLayout>
 
     <ImageButton

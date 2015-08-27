@@ -2,6 +2,10 @@ package net.osmand.util;
 /* Can be commented out in order to run the main function separately */
 
 
+import net.osmand.PlatformUtil;
+
+import org.apache.commons.logging.Log;
+
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -17,6 +21,7 @@ import java.util.Calendar;
  * if the OSM feature is open at a certain time. 
  */
 public class OpeningHoursParser {
+	private static final Log LOG = PlatformUtil.getLog(OpeningHoursParser.class);
 	private static final String[] daysStr = new String[] {"Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"}; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
 	
 	private static final String[] monthsStr = new String[] {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
@@ -612,7 +617,8 @@ public class OpeningHoursParser {
 		String timeSubstr = r.substring(k);
 		String[] times = timeSubstr.split(",");
 		boolean timesExist = true;
-		for (String time : times) {
+		for (int i = 0; i < times.length; i++) {
+			String time = times[i];
 			time = time.trim();
 			if(time.length() == 0){
 				continue;
@@ -627,6 +633,9 @@ public class OpeningHoursParser {
 			}
 			String[] stEnd = time.split("-"); //$NON-NLS-1$
 			if (stEnd.length != 2) {
+				if (i == times.length - 1 && basic.getStartTime() == 0 && basic.getEndTime() == 0) {
+					return false;
+				}
 				continue;
 			}
 			timesExist = true;
