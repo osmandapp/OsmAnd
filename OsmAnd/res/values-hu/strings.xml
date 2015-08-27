@@ -445,7 +445,7 @@
   <string name="daynight_mode_sensor">Fényérzékelő szenzor</string>
   <string name="daynight_descr">Éjjel/nappali mód váltás szabálya</string>
   <string name="daynight">Éjjel/nappali mód</string>
-  <string name="download_files_question">{0} fájl letöltés ({1} MB)?</string>
+  <string name="download_files_question">Letöltesz {0} fájlt ({1} MB)?</string>
   <string name="items_were_selected">{0} elem lett kijelölve</string>
   <string name="filter_existing_indexes">Letöltöttek</string>
   
@@ -453,7 +453,7 @@
   <string name="shared_string_refresh">Frissítés</string>
   <string name="fast_route_mode">Leggyorsabb útvonal</string>
   <string name="fast_route_mode_descr">Leggyorsabb útvonal kiszámításának engedélyezése, vagy tiltása a legrövidebb útért </string>
-  <string name="tiles_to_download_estimated_size">{0} nagyításnál {1} képkocka letöltése ({2} Mb )</string>
+  <string name="tiles_to_download_estimated_size">{0} nagyításnál {1} térképcsempe letöltése ({2} Mb )</string>
   <string name="shared_string_download_map">Térkép letöltése</string>
   <string name="select_max_zoom_preload_area">Maximális nagyítás kiválasztása a látható terület előtöltéséhez</string>
   <string name="maps_could_not_be_downloaded">Ezt a térképet nem lehet letölteni</string>
@@ -469,7 +469,7 @@
   <string name="poi_context_menu_call">POI telefonszám megtekintése</string>
   <string name="website">weboldal</string>
   <string name="phone">telefon</string>
-  <string name="download_type_to_filter">típus szűrése</string>
+  <string name="download_type_to_filter">szűrés</string>
   <string name="use_high_res_maps">Nagy felbontású kijelző</string>
   <string name="use_high_res_maps_descr">Jobb megjelenítési minőség nagy felbontású eszközön</string>
   <string name="unknown_location">A jelenlegi helyzet nem ismert</string>
@@ -621,7 +621,7 @@
   <string name="router_service">Útvonaltervező</string>
   <string name="sd_dir_not_accessible">Az adattárolási könyvtár nem elérhető az SD kártyán!</string>
   <string name="download_question">Letöltés {0} - {1} ?</string>
-  <string name="download_question_exist">&amp;gt;Már létezik indexadat {0} régióhoz ({1}). Szeretné frissíteni ({2})?</string>
+  <string name="download_question_exist">{0} régióhoz már le van töltve offline adat ({1}). Szeretnéd frissíteni ({2})?</string>
   <string name="address">Cím</string>
   <string name="shared_string_download_successful">Letöltés sikeres</string>
   
@@ -720,7 +720,7 @@
   
   
   <string name="show_gps_coordinates_text">GPS koordináták megjelenítése a térképen</string>
-  <string name="use_internet_to_download_tile">Internet használata a hiányzó térképszeletek letöltésére</string>
+  <string name="use_internet_to_download_tile">Internet használata a hiányzó térképcsempék letöltésére</string>
   <string name="app_description">Navigációs alkalmazás</string>
   <string name="shared_string_exit">Kilépés</string>
   
@@ -1078,7 +1078,7 @@
 \n\nAz OsmAnd már támogatja a magassági érték megjelenítését automatikusan EGM96 szerint. A használatához töltsd le a \'GPS magasságkorrekció\' fájlt (\'Beállítások\' → \'Térképkezelés\'). (Az eredeti fájl innen származik: http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC) "</string>
     <string name="rendering_attr_noAdminboundaries_name">Határvonalak elrejtése</string>
 	<string name="rendering_attr_noAdminboundaries_description">Nem jeleníti meg az adminisztratív határokat 5-9 szinten</string>
-	<string name="download_srtm_maps">Szintvonal térképek</string>
+	<string name="download_srtm_maps">Szintvonalak</string>
     <string name="srtm_plugin_name">Szintvonalak</string>
     <string name="index_srtm_ele">Szintvonalak</string>
     <string name="index_srtm_parts">darab</string>
@@ -1149,7 +1149,7 @@
     <string name="recording_context_menu_precord">Fénykép készítése</string>
     
     <string name="download_hillshade_item">Domborzatárnyékolás</string>
-    <string name="download_hillshade_maps">Domborzatárnyékolás térképek</string>
+    <string name="download_hillshade_maps">Domborzatárnyékolás</string>
     <string name="tip_recent_changes_1_1_2_t">"Változtatások az 1.1.2 verzióban:\n\t* Audio/videó bővítmény fejlesztések (fényképezés EXIF adatokkal)
 \n\t* Jobban használható, átalakított Szintvonal bővítmény\n\t* Domborzatárnyékolás csomagok a Szintvonal bővítményhez\n\t* Hibajavítások (útvonaltervezés optimalizáció) "
     </string>
@@ -1780,8 +1780,8 @@
 	
 	<string name="shared_string_show_all">Összes megjelenítése</string>
 	<string name="coordinates">Koordináták</string>
-	<string name="dash_download_msg_none">Szeretne kapcsolat nélküli térképeket letölteni?</string>
-    <string name="dash_download_msg">%1$s térképet töltött le</string>
+	<string name="dash_download_msg_none">Szeretnél kapcsolat nélküli térképeket letölteni?</string>
+    <string name="dash_download_msg">%1$s térképet töltöttél le</string>
     <string name="dash_download_new_one">Új térkép letöltése</string>
     <string name="dash_download_manage">Kezelés</string>
     <string name="map_locale">Térkép nyelve</string>
@@ -1979,7 +1979,7 @@
     <string name="lang_et">Észt</string>
     <string name="lang_ceb">Szebuano</string>
     <string name="archive_wikipedia_data">Régi, összeférhetetlen Wikipédia adatok lettek letöltve. Szeretné archiválni?</string>
-    <string name="download_wikipedia_files">Szeretne további Wikipédia adatokat letölteni (%1$s MB)?</string>
+    <string name="download_wikipedia_files">Szeretnél további Wikipédia adatokat letölteni (%1$s MB)?</string>
     <string name="lang_es_ar">Argentin spanyol</string>
     <string name="lang_nb">Norvég bokmål</string>
     <string name="light_theme">Világos</string>
@@ -2024,17 +2024,23 @@
 	<string name="rendering_value_defaultTranslucentCyan_name">Alapértelmezett (átlátszó cián)</string>
     <string name="do_you_like_osmand">Hogy tetszik az OsmAnd?</string>
 	<string name="we_really_care">Minket valóban érdekel</string>
-	<string name="rate_this_app">Értékelje az alkalmazást</string>
-	<string name="user_hates_app_get_feedback">Mondja el, hogy miért.</string>
-	<string name="user_hates_app_get_feedback_long">Mondja el nekünk, hogy mit változtatna az alkalmazáson.</string>
-<string name="rate_this_app_long">Adjon egy pontot az OsmAnd programnak a Google Play áruházban</string>
+	<string name="rate_this_app">Értékeld az alkalmazást</string>
+	<string name="user_hates_app_get_feedback">Mondd el, hogy miért.</string>
+	<string name="user_hates_app_get_feedback_long">Mondd el nekünk, hogy mit változtatnál az alkalmazáson.</string>
+<string name="rate_this_app_long">Pontozd az OsmAndot a Google Play áruházban</string>
 	<string name="download_live_updates">Élő frissítések</string>
 	<string name="no_updates_available">Nem érhetők el frissítések</string>
-    <string name="we_really_care_about_your_opinion">Sokat adunk a véleményére és fontos nekünk, hogy visszahalljuk.</string>
+    <string name="we_really_care_about_your_opinion">Sokat adunk a véleményedre és fontos nekünk, hogy visszahalljunk.</string>
 	<string name="failed_to_upload">Nem sikerült feltölteni</string>
 	<string name="delete_change">Változtatás törlése</string>
 	<string name="successfully_uploaded_pattern">Sikeresen feltöltve: {0}/{1}</string>
-	<string name="try_again">Próbálja újra</string>
+	<string name="try_again">Próbáld újra</string>
 	<string name="error_message_pattern">Hiba: {0}</string>
 <string name="rendering_value_boldOutline_name">Félkövér körvonal</string>
-    </resources>
+    <string name="plugin_settings">Bővítmények</string>
+	<string name="shared_string_skip">Kihagyás</string>
+	<string name="app_name_osmand">OsmAnd</string>
+	<string name="offline_maps_and_navigation">Offline térképek\nés navigáció</string>
+	<string name="next_proceed">Tovább</string>
+	<string name="dahboard_options_dialog_title">Kezdőlap beállításai</string>
+	</resources>
