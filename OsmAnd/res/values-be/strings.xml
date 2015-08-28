@@ -2068,4 +2068,10 @@
 	<string name="commit_poi">Укласьці POI</string>
 <string name="routing_attr_avoid_shuttle_train_name">Пазьбягаць трансфер-цягнікоў</string>
 	<string name="routing_attr_avoid_shuttle_train_description">Пазьбягаць трансфер-цягнікоў</string>
-    </resources>
+    <string name="basic_tab_title">Асноўнае</string>
+	<string name="building_number">Нумар будынка</string>
+	<string name="next_proceed">Далей</string>
+	<string name="opening_at">Адчыняецца ў</string>
+	<string name="closing_at">Зачыняецца ў</string>
+<string name="extended_tab_title">Пашыранае</string>
+	</resources>
