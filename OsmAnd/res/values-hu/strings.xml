@@ -541,7 +541,7 @@
   <string name="off_router_service_no_gps_available">Az Alvó mód szolgáltatásnak szüksége van bekapcsolt GPS-re.</string>
   <string name="hide_poi_filter">Szűrő elrejtése</string>
   <string name="show_poi_filter">Szűrő megjelenítése</string>
-  <string name="search_poi_filter">Szűrő</string>
+  <string name="search_poi_filter">Szűrés:</string>
   <string name="menu_mute_off">Hang bekapcsolva</string>
   <string name="menu_mute_on">Némítva</string>
   <string name="voice_provider_descr">Hangutasítás kiválasztása navigációhoz</string>
@@ -1903,7 +1903,7 @@
 	<string name="shared_string_release">Megjelent</string>
 	<string name="days_behind">napos</string>
 	<string name="welmode_download_maps">Térképek letöltése</string>
-	<string name="confirm_usage_speed_cameras">Néhány országban (Németország, Franciaország, Olaszország és még néhány) tilos a traffipax figyelmeztetés használata! Az OsmAnd nem vállal felelősséget a helyi szabályok megsértéséért. Kérem kattintson az Igen gombra, ha jogosult a funkció használatára.</string> 
+	<string name="confirm_usage_speed_cameras">Néhány országban (Németország, Franciaország, Olaszország és még néhány) tilos a traffipax figyelmeztetés használata! Az OsmAnd nem vállal felelősséget a helyi szabályok megsértéséért. Kérlek kattints az Igen gombra, ha jogosult vagy a funkció használatára.</string> 
 	<string name="welcome_select_region">A közlekedési táblák és szabályok helyes értelmezéséhez válassza ki a vezetési régióját:</string>
 	<string name="welcome_text">Az OsmAnd lehetővé teszi a térképek és a navigáció offline használatát az egész világon!</string>
 	<string name="current_route">Jelenlegi útvonal</string>
@@ -1944,7 +1944,7 @@
     <string name="rendering_value__name">Alapértelmezett</string>
     <string name="rendering_value_highContrastRoads_name">Nagy kontrasztú utak</string>
 	<string name="index_name_netherlands">Európa - Hollandia</string>
-	<string name="application_dir_change_warning3">Szeretné, hogy az OsmAnd az adatfájljait is az új helyre másolja?</string>
+	<string name="application_dir_change_warning3">Szeretnéd, hogy az OsmAnd az adatfájljaidat is az új helyre másolja?</string>
     <string name="rendering_attr_hideHouseNumbers_name">Házszámok elrejtése</string>
     <string name="routing_attr_avoid_borders_name">Határátlépések elkerülése</string>
 	<string name="routing_attr_avoid_borders_description">A határ átlépésének elkerülése egy másik országba</string>
@@ -1955,7 +1955,7 @@
 <string name="osmo_share_my_location">Helyzetem megosztása</string>
     <string name="shared_string_logoff">Naplózás ki</string>
     <string name="rendering_value_disabled_name">Letiltva</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Színezés az útvonal besorolása szerint</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Színezés az útvonal hálózati szerepe szerint</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Színezés a jelzés színe szerint</string>
     <string name="osm_edit_context_menu_delete">OSM szerkesztés törlése</string>    
     <string name="shared_string_show_details">Részletek megjelenítése</string>
@@ -1966,7 +1966,7 @@
     <string name="shared_string_import2osmand">Importálás az OsmAnd programba</string>
     <string name="local_recordings_delete_all_confirm">%1$d jegyzetet fog törölni. Biztos benne?</string>
 	<string name="disable_recording_once_app_killed">Önálló naplózás megakadályozása</string>
-    <string name="gps_network_not_enabled">A helymeghatározó szolgáltatás nincs engedélyezve. Be szeretné kapcsolni?</string>
+    <string name="gps_network_not_enabled">A helymeghatározó szolgáltatás nincs engedélyezve. Be szeretnéd kapcsolni?</string>
     <string name="disable_recording_once_app_killed_descrp">Szüneteltetni fogja a GPX-naplózást, ha az alkalmazást kilőtték (a legutóbbi alkalmazásokon keresztül). (Az OsmAnd alvó mód jelzője eltűnik az Android értesítési sávjáról.)</string>
 	<string name="lang_vo">Volapük</string>
     <string name="lang_th">Thai</string>
