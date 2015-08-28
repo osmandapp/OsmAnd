@@ -2130,7 +2130,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="confirmation_to_clear_history">Soll der Verlauf gelöscht werden?</string>
 	<string name="osmand_parking_hour">h</string>
 	<string name="osmand_parking_minute">min</string>
-	<string name="osmand_parking_time_left">links</string>
+	<string name="osmand_parking_time_left">bleibt</string>
 	<string name="osm_changes_added_to_local_edits">Die Änderungen an den OSM-Daten wurden dem lokalen Änderungssatz hinzugefügt</string>
 	<string name="shared_string_go">Los</string>
 	<string name="osmand_parking_overdue">überfällig</string>
