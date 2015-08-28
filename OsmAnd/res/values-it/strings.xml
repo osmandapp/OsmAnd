@@ -1700,7 +1700,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="local_map_names">Nomi locali</string>
     <string name="lang_sw">Swahili</string>
     <string name="forward">Avanti</string>
-    <string name="home">Casa</string>
+    <string name="home">Inizio</string>
     <string name="live_monitoring_m_descr">Invia i dati di tracciamento a uno specifico servizio web se la registrazione GPX è abilitata.</string>
 	<string name="live_monitoring_m">Tracciamento online (GPX richiesto)</string>
     <string name="live_monitoring_start">Avvia il tracciamento online</string>
@@ -2150,4 +2150,10 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="routing_attr_avoid_shuttle_train_name">Evita i treni navetta</string>
 	<string name="routing_attr_avoid_shuttle_train_description">Evita i treni navetta</string>
     <string name="commit_poi">Contribuisci il/i PDI</string>
+<string name="basic_tab_title">Semplice</string>
+	<string name="extended_tab_title">Esteso</string>
+	<string name="building_number">Numero civico</string>
+	<string name="next_proceed">Avanti</string>
+	<string name="opening_at">Apre alle</string>
+	<string name="closing_at">Chiude alle</string>
 </resources>
