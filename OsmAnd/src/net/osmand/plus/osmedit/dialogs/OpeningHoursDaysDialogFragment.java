@@ -10,6 +10,7 @@ import android.text.format.DateFormat;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
+import net.osmand.plus.osmedit.BasicDataFragment;
 import net.osmand.util.OpeningHoursParser;
 
 import org.apache.commons.logging.Log;
@@ -30,7 +31,7 @@ public class OpeningHoursDaysDialogFragment extends DialogFragment {
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-		boolean add = positionToAdd > -1;
+		final boolean createNew = positionToAdd == -1;
 		Calendar inst = Calendar.getInstance();
 		final int first = inst.getFirstDayOfWeek();
 		final boolean[] dayToShow = new boolean[7];
@@ -55,7 +56,8 @@ public class OpeningHoursDaysDialogFragment extends DialogFragment {
 			}
 
 		});
-		builder.setPositiveButton(getActivity().getString(R.string.next_proceed),
+		builder.setPositiveButton(createNew ? R.string.next_proceed
+						: R.string.shared_string_save,
 				new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
@@ -63,9 +65,13 @@ public class OpeningHoursDaysDialogFragment extends DialogFragment {
 						for (int i = 0; i < 7; i++) {
 							days[(first + 5 + i) % 7] = dayToShow[i];
 						}
-
-						OpeningHoursHoursDialogFragment.createInstance(item, positionToAdd, true)
-								.show(getFragmentManager(), "TimePickerDialogFragment");
+						if (createNew) {
+							OpeningHoursHoursDialogFragment.createInstance(item, positionToAdd, true)
+									.show(getFragmentManager(), "TimePickerDialogFragment");
+						} else {
+							((BasicDataFragment) getParentFragment())
+									.setBasicOpeningHoursRule(item, positionToAdd);
+						}
 					}
 
 				});
