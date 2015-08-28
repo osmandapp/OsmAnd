@@ -541,7 +541,7 @@
   <string name="off_router_service_no_gps_available">Az Alvó mód szolgáltatásnak szüksége van bekapcsolt GPS-re.</string>
   <string name="hide_poi_filter">Szűrő elrejtése</string>
   <string name="show_poi_filter">Szűrő megjelenítése</string>
-  <string name="search_poi_filter">Szűrő</string>
+  <string name="search_poi_filter">Szűrés:</string>
   <string name="menu_mute_off">Hang bekapcsolva</string>
   <string name="menu_mute_on">Némítva</string>
   <string name="voice_provider_descr">Hangutasítás kiválasztása navigációhoz</string>
@@ -618,7 +618,7 @@
   <string name="max_level_download_tile_descr">Maximum nagyítási szint kiválasztása térképcsempék letöltéshez</string>
   <string name="route_general_information">Teljes távolság %1$s, utazási idő %2$d óra %3$d perc.</string>
   <string name="router_service_descr">Online vagy offline útvonaltervező szolgáltatás kiválasztása</string>
-  <string name="router_service">Útvonaltervező</string>
+  <string name="router_service">Útvonaltervező szolgáltatás</string>
   <string name="sd_dir_not_accessible">Az adattárolási könyvtár nem elérhető az SD kártyán!</string>
   <string name="download_question">Letöltés {0} - {1} ?</string>
   <string name="download_question_exist">{0} régióhoz már le van töltve offline adat ({1}). Szeretnéd frissíteni ({2})?</string>
@@ -627,7 +627,7 @@
   
   
   
-  <string name="downloading_list_indexes">Elérhető térképadatok listájának letöltése…</string>
+  <string name="downloading_list_indexes">Elérhető régiók listájának letöltése…</string>
   <string name="list_index_files_was_not_loaded">Nincs letöltve a térképadatok listája az osmand.net-ről.</string>
   <string name="select_index_file_to_download">Nincs találat. Ha nem találod a régiódat, elkészítheted magadnak. (Lásd: http://osmand.net)</string>
   
@@ -637,7 +637,7 @@
   <string name="only_show">Útvonal megjelenítése</string>
   <string name="follow">Navigáció indítása</string>
   <string name="recalculate_route_to_your_location">Utazás módja:</string>
-  <string name="mark_final_location_first">Először válaszd ki a célpontot</string>
+  <string name="mark_final_location_first">Előbb válaszd ki a célpontot</string>
   <string name="get_directions">Navigáció</string>
   
   <string name="opening_hours">Nyitvatartás</string>
@@ -645,16 +645,16 @@
   <string name="closing_changeset">Módosításcsomag lezárása…</string>
   <string name="commiting_node">Pont felvitele…</string>
   <string name="loading_poi_obj">POI betöltése…</string>
-  <string name="auth_failed">Hibás bejelentkezés</string>
+  <string name="auth_failed">Azonosítás nem sikerült</string>
   <string name="failed_op">sikertelen</string>
   <string name="converting_names">Eredeti/angol nevek átváltása…</string>
-  <string name="loading_streets_buildings">Utcák/Épületek betöltése…</string>
+  <string name="loading_streets_buildings">Utcák és épületek betöltése…</string>
   <string name="loading_postcodes">Irányítószámok betöltése…</string>
   <string name="loading_streets">Utcák betöltése…</string>
   <string name="loading_cities">Települések betöltése…</string>
   
   <string name="poi">POI</string>
-  <string name="error_occurred_saving_gpx">Hiba történt a GPX-be való mentéskor</string>
+  <string name="error_occurred_saving_gpx">Hiba történt a GPX fájl mentéskor</string>
   <string name="error_calculating_route">Útvonaltervezési hiba</string>
   <string name="error_calculating_route_occured">Hiba történt az útvonaltervezés közben</string>
   <string name="empty_route_calculated">Üres útvonal lett tervezve</string>
@@ -665,7 +665,7 @@
   <string name="shared_string_close">Bezárás</string>
   <string name="loading_data">Adatok betöltése…</string>
   <string name="reading_indexes">Helyi adatok olvasása…</string>
-  <string name="previous_run_crashed">Az OsmAnd legutóbb összeomlott. Naplófájl: {0}. Kérlek jelentsd a hibát és csatolja hozzá a naplófájlt.</string>
+  <string name="previous_run_crashed">Az OsmAnd legutóbb összeomlott. Naplófájl: {0}. Kérlek jelentsd a hibát és csatold hozzá a naplófájlt.</string>
   <string name="saving_gpx_tracks">GPX útvonalak mentése SD kártyára…</string>
   <string name="finished_task">Befejezve</string>
   
@@ -690,7 +690,7 @@
   <string name="save_track_to_gpx_descrp">Az útvonalak navigáció közben kerülnek mentésre a tracks könyvtárba</string>
   <string name="save_track_to_gpx">Nyomvonal naplózása GPX fájlba navigáció közben</string>
   <string name="update_tile">Térkép frissítés</string>
-  <string name="reload_tile">Térképcsempe újraolvasása</string>
+  <string name="reload_tile">Térképcsempe aktualizálása</string>
   <string name="mark_point">Célpont</string>
   <string name="show_osm_bugs_descr">OpenStreetBugs megjelenítése a térképen</string>
   <string name="show_osm_bugs">OpenStreetBugs megjelenítése</string>
@@ -709,10 +709,10 @@
   
   <string name="show_view_angle">Látómező megjelenítése</string>
   <string name="map_view_3d_descr">A térkép 3D megjelenítésének engedélyezése</string>
-  <string name="map_view_3d">3D térkép</string>
+  <string name="map_view_3d">3D térképnézet</string>
   <string name="show_poi_over_map_description">POI megjelenítése a térképen (utoljára használt szűrő szerint)</string>
   <string name="show_poi_over_map">POI megjelenítése</string>
-  <string name="map_tile_source_descr">Térképcsempék forrásának kiválasztása</string>
+  <string name="map_tile_source_descr">Online vagy letárolt térképcsempék forrásának kiválasztása</string>
   <string name="map_tile_source">Térképcsempék forrása</string>
   <string name="map_source">Térkép forrása</string>
   <string name="use_internet">Internet használata</string>
@@ -763,7 +763,7 @@
   <string name="context_menu_item_open_bug">OSM Bug nyitása</string>
   <string name="context_menu_item_create_poi">POI készítés</string>
   <string name="shared_string_yes">Igen</string>
-  <string name="shared_string_cancel">Mégse</string>
+  <string name="shared_string_cancel">Mégsem</string>
   <string name="shared_string_apply">Alkalmaz</string>
   <string name="shared_string_add">Hozzáadás</string>
   <string name="shared_string_no">Nem</string>
@@ -831,9 +831,9 @@
   <string name="online_map_settings_descr">Internetes és tárolt raszteres térképek beállításai</string>
   
   
-  <string name="osmand_rastermaps_plugin_description">"Ezzel a bővítménnyel az online (úgynevezett csempés vagy raszteres) térképek több típusához is hozzáférhet az előre meghatározott Openstreetmap csempéktől kezdve (mint például a Mapnik) a műholdképekig és a speciális célú rétegekig, úgymint időjárási térképek, éghajlati térképek, földtani térképek, hegyárnyékolási rétegek, stb.\n\nEzen térképek bármelyike használható az OsmAnd térkép képernyőjén megjelenítendő fő (alap) térképként, vagy egy másik alaptérkép borításaként vagy alátétjeként (mint például az OsmAnd szokásos kapcsolat nélküli térképei). Bármely alátét térkép jobban láthatóbbá tételének érdekében az OsmAnd vektoros térképeinek bizonyos elemei igény szerint könnyedén elrejthetők a „Térkép beállítása” menün keresztül.\n\nA csempés térképek internetes forrásokon keresztül szerezhetők be, vagy előkészíthetők kapcsolat nélküli használathoz (és kézzel átmásolva az OsmAnd adatmappájába) egy olyan sqlite adatbázisként, amelyet különféle harmadik féltől származó térkép-előkészítő eszközök állíthatnak elő. "</string>
+  <string name="osmand_rastermaps_plugin_description">"Ezzel a bővítménnyel az online (úgynevezett csempés vagy raszteres) térképek több típusához is hozzáférhet az előre meghatározott Openstreetmap csempéktől kezdve (mint például a Mapnik) a műholdképekig és a speciális célú rétegekig, úgymint időjárási térképek, éghajlati térképek, földtani térképek, domborzatnyékolási rétegek, stb.\n\nEzen térképek bármelyike használható az OsmAnd térkép képernyőjén megjelenítendő fő (alap) térképként, vagy egy másik alaptérkép borításaként vagy alátétjeként (mint például az OsmAnd szokásos kapcsolat nélküli térképei). Bármely alátét térkép jobban láthatóbbá tételének érdekében az OsmAnd vektoros térképeinek bizonyos elemei igény szerint könnyedén elrejthetők a „Térkép beállítása” menün keresztül.\n\nA csempés térképek internetes forrásokon keresztül szerezhetők be, vagy előkészíthetők kapcsolat nélküli használathoz (és kézzel átmásolva az OsmAnd adatmappájába) egy olyan sqlite adatbázisként, amelyet különféle harmadik féltől származó térkép-előkészítő eszközök állíthatnak elő. "</string>
   <string name="osmand_background_plugin_description">Megjeleníti az útvonal követéséhez és a navigációhoz engedélyezett beállításokat alvó üzemmódban (kikapcsolt képernyővel) úgy, hogy bizonyos időközönként felébreszti a GPS eszközt.</string>
-  <string name="osmand_accessibility_description">Ez a bővítmény elérhetővé teszi az eszköz akadálymentesítési lehetőségeit közvetlenül az OsmAnd programban. Ez megkönnyíti például a TTS hangok beszédsebességének állítását, az irányító gombok képernyő navigációjának beállítását, egy görgető használatát a nagyítás vezérléséhez, vagy szövegfelolvasó visszajelzés használatát, mint például a pozíció automatikus bejelentésénél.</string>
+  <string name="osmand_accessibility_description">Ez a bővítmény elérhetővé teszi az eszköz akadálymentesítési lehetőségeit közvetlenül az OsmAnd programban. Ez megkönnyíti például a TTS hangok beszédsebességének állítását, az irányító gombok képernyő navigációjának beállítását, egy görgető használatát a nagyítás vezérléséhez, vagy szövegfelolvasó visszajelzés használatát, például a pozíció automatikus bejelentésénél.</string>
   
   
   
@@ -843,7 +843,7 @@
   <string name="prefs_plugins_descr">A bővítmények további funkciókkal és beállításokkal bővítik az alkalmazást</string>
   <string name="prefs_plugins">Bővítménykezelő</string>
   <string name="tip_recent_changes_0_8_0_t">"A 0.8.0 kiadás változásai:\n\t- *Beépülők*\n\t - Egyes funkciók csoportosítva engedélyezhetők és letilthatók a Bővítménykezelőben. Engedélyezhetsz online térképforrásokat, útvonalrögzítést, sok egyéb új és korábban is meglévő eszközt.\n\t- *Új offline térképadat formátum*\n\t - A térképrenderelés gyorsabb és pontosabb lett (a partvonalak hibája javításra került).\n\t - Az offline térképadatokat újra le kell töltened (a régi adatok nem támogatottak).\n\t- *Offline útvonaltervezés*\n\t - Az offline útvonaltervező sokkal gyorsabb lett\n\t- *Felhasználói élmény*\n\t - A felhasználói felület több helyen is csinosodott "</string>
-  <string name="osm_editing_plugin_description">Ezen bővítményen keresztül az OsmAnd használható OSM hozzájárulások beküldéséhez, mint például OSM POI objektumok létrehozása vagy módosítása, OSM hibák nyitása vagy hozzászólások írása, illetve a rögzített GPX fájlok közreadása. Az OSM egy közösség vezérelt, globális, közkincs térképező projekt. A részletekért nézze meg a http://openstreetmap.org oldalt. Értékelik az aktív részvételt, és a hozzájárulások közvetlenül az OsmAnd alkalmazásból is beküldhetők, ha az alkalmazásban megadja a személyes OSM hitelesítési adatait.</string>
+  <string name="osm_editing_plugin_description">Ezen bővítményen keresztül az OsmAnd használható OSM hozzájárulások beküldéséhez, mint például OSM POI objektumok létrehozása vagy módosítása, OSM hibák nyitása vagy hozzászólások írása, illetve a rögzített GPX fájlok közreadása. Az OSM egy közösségi, globális, közkincs térképező projekt. A részletekért nézd meg a http://openstreetmap.org oldalt. Értékelik az aktív részvételt, és a hozzájárulások közvetlenül az OsmAnd alkalmazásból is beküldhetők, ha az alkalmazásban megadod a személyes OSM hitelesítési adataid.</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Vektoros térképek gyorsabban rajzolódnak. Nem minden eszközön működik.</string>
   
   <string name="play_commands_of_currently_selected_voice">Hangutasítások kimondása a kiválasztott hanggal</string>
@@ -895,7 +895,7 @@
   <string name="osmand_parking_pm">du.</string>
   <string name="osmand_parking_am">de.</string>
   <string name="osmand_parking_position_name">Parkolási pont</string>
-  <string name="osmand_parking_plugin_description">A parkolási hely bővítmény könnyen megjegyezhetővé teszi, hogy mikor parkolt le az autójával, és mennyi parkolási idő van még hátra (ha a parkolás időben korlátozott).\nA parkolási hely és az idő is látható az OsmAnd vezérlőpultján, valamint a térkép képernyő felületi elemén. Értesítés adható hozzá az Android naptárhoz emlékeztetőként.</string>
+  <string name="osmand_parking_plugin_description">A parkolási hely bővítmény könnyen megjegyezhetővé teszi, hogy mikor parkoltál le az autóval, és mennyi parkolási idő van még hátra (ha a parkolás időben korlátozott).\nA parkolási hely és az idő is látható az OsmAnd vezérlőpultján, valamint a térkép képernyő felületi elemén. Értesítés adható hozzá az Android naptárhoz emlékeztetőként.</string>
   <string name="osmand_parking_plugin_name">Parkolási hely</string>
   <string name="context_menu_item_add_parking_point">Megjelölés parkolási helyként</string>
   <string name="context_menu_item_delete_parking_point">Parkolásjelölő törlése</string>
@@ -1091,7 +1091,7 @@
     <string name="map_widget_audionotes">Hangjegyzetek</string>
     <string name="audionotes_plugin_name">Hang- és videojegyzetek</string>
     
-    <string name="srtm_plugin_description">"Ez a bővítmény egy szintvonal borítást és egy (domborzati) árnyékolás réteget biztosít, amelyek az OsmAnd kapcsolat nélküli térképein jelennek meg. Ezt a funkcionalitást sokkal jobban fogják értékelni a sportolók, túrázók, nyomvonalrögzítők és mindenki más, akiket a táj domborzati szerkezete érdekel.\n\nA globális adatok (az északi 70° és déli 70° szélesség között) az SRTM (Shuttle Radar Topography Mission) és az ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer) mérésein alapulnak, amely a NASA Earsh Observing System zászlóshajójának, a Terra műholdnak a képalkotó berendezése. Az ASTER a NASA, a Japán Gazdasági, Kereskedelmi és Ipari Minisztérium (METI), valamint a Japán Űrügynökség (J-spacesystems) közös projektje. "</string>
+    <string name="srtm_plugin_description">"Ez a bővítmény egy szintvonal borítást és egy (domborzati) árnyékolás réteget biztosít, amelyek az OsmAnd kapcsolat nélküli térképein jelennek meg. Ezt a funkcionalitást nagyon fogják értékelni a sportolók, túrázók, nyomvonalrögzítők és mindenki, akiket a táj domborzati szerkezete érdekel.\n\nA globális adatok (az északi 70° és déli 70° szélesség között) az SRTM (Shuttle Radar Topography Mission) és az ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer) mérésein alapulnak, amely a NASA Earsh Observing System zászlóshajójának, a Terra műholdnak a képalkotó berendezése. Az ASTER a NASA, a Japán Gazdasági, Kereskedelmi és Ipari Minisztérium (METI), valamint a Japán Űrügynökség (J-spacesystems) közös projektje. "</string>
     
     
     <string name="recording_is_recorded">Hang/videofelvétel elindult. Leállításhoz nyomd meg az A/V vezérlő stop gombját.</string>
@@ -1128,7 +1128,7 @@
     <string name="recording_error">A felvétel közben hiba történt </string>
     <string name="recording_camera_not_available">A kamera nem elérhető</string>
     <string name="shared_string_control_stop">Leállítás</string>
-    <string name="osmand_srtm_long_description_1000_chars">"Ez a bővítmény egy szintvonal borítást és egy (domborzati) árnyékolás réteget biztosít, amelyek az OsmAnd kapcsolat nélküli térképein jelennek meg. Ezt a funkcionalitást sokkal jobban fogják értékelni a sportolók, túrázók, nyomvonalrögzítők és mindenki más, akiket a táj domborzati szerkezete érdekel.\n\nA globális adatok (az északi 70° és déli 70° szélesség között) az SRTM (Shuttle Radar Topography Mission) és az ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer) mérésein alapulnak, amely a NASA Earsh Observing System zászlóshajójának, a Terra műholdnak a képalkotó berendezése. Az ASTER a NASA, a Japán Gazdasági, Kereskedelmi és Ipari Minisztérium (METI), valamint a Japán Űrügynökség (J-spacesystems) közös projektje. "</string>
+    <string name="osmand_srtm_long_description_1000_chars">"Ez a bővítmény egy szintvonal borítást és egy (domborzati) árnyékolás réteget biztosít, amelyek az OsmAnd kapcsolat nélküli térképein jelennek meg. Ezt a funkcionalitást nagyon fogják értékelni a sportolók, túrázók, nyomvonalrögzítők és mindenki, akiket a táj domborzati szerkezete érdekel.\n\nA globális adatok (az északi 70° és déli 70° szélesség között) az SRTM (Shuttle Radar Topography Mission) és az ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer) mérésein alapulnak, amely a NASA Earsh Observing System zászlóshajójának, a Terra műholdnak a képalkotó berendezése. Az ASTER a NASA, a Japán Gazdasági, Kereskedelmi és Ipari Minisztérium (METI), valamint a Japán Űrügynökség (J-spacesystems) közös projektje. "</string>
     <string name="av_widget_action_descr">Válaszd ki a vezérlőgomb alapértelmezett működési módját</string>
     <string name="av_widget_action">Alapértelmezett mód</string>
     <string name="recording_description">Felvétel %1$s %3$s %2$s</string>
@@ -1225,7 +1225,7 @@
     <string name="plugin_distance_point">Pont</string>
     <string name="gpx_file_name">GPX fájlnév</string>
     <string name="gpx_saved_sucessfully">GPX fájl sikeresen elmentve ide: {0}</string>
-    <string name="osmand_distance_planning_plugin_description">Ez a bővítmény egy térkép képernyő felületi elemet biztosít, amely lehetővé teszi útvonalak létrehozását a térképen való koppintással, vagy meglévő GPX fájlok használatát vagy módosítását egy út megtervezéséhez és a pontok közötti távolság méréséhez. Az eredmény elmenthető GPX fájlként, amely később használható a vezetéshez.</string>
+    <string name="osmand_distance_planning_plugin_description">Ez a bővítmény lehetővé teszi útvonalak létrehozását a térképen való koppintással, vagy meglévő GPX fájlok használatát, módosítását egy út megtervezéséhez és a pontok közötti távolság méréséhez. Az eszközt a térkép képernyőn elhelyezett gombbal lehet indítani. Az eredmény elmenthető GPX fájlként, amely később használható a vezetéshez.</string>
     <string name="osmand_distance_planning_plugin_name">Távolságszámító és tervezőeszköz</string>
     <string name="use_distance_measurement_help">* Pont lerakásához koppints.\n * Nyomd meg hosszan a térképet az előző pont törléséhez.\n * Nyomd meg hosszan a pontot leírás csatolásához és megtekintéséhez.\n * További műveletekért kattints a vezérlőgombra.</string>
     <string name="shared_string_do_not_show_again">Ne jelenjen meg újra</string>
@@ -1543,7 +1543,7 @@
     
     <string name="gpx_file_is_empty">A gpx nyomvonal üres</string>
     
-    <string name="shared_string_my_tracks">Saját nyomvonalak</string>
+    <string name="shared_string_my_tracks">Nyomvonalaim</string>
     <string name="shared_string_my_favorites">Kedvenceim</string>
     <string name="shared_string_my_places">Saját helyek</string>
     
@@ -1848,7 +1848,7 @@
     <string name="world_ski_missing">A sítérképek megjelenítése érdekében a speciális kapcsolat nélküli térkép letöltése szükséges</string>
     <string name="nautical_maps_missing">A hajózási térképek megjelenítése érdekében a speciális kapcsolat nélküli térkép letöltése szükséges</string>
 	<string name="device_memory">Eszköz memóriája</string>
-    <string name="free">"Szabad %1$s "</string>
+    <string name="free">"%1$s szabad "</string>
 	<string name="roads_only">Csak utak</string>
     <string name="rendering_attr_pisteRoutes_name">Sípályák</string>
 	<string name="rendering_attr_pisteGrooming_name">Sípálya kezeltség</string>
@@ -1858,7 +1858,7 @@
 	<string name="shared_string_audio">Hang</string>
 	
 	
-	<string name="share_note">Jegyzet megosztása</string>
+	<string name="share_note">Megosztási megjegyzés</string>
 	
 	<string name="shared_string_export">Exportálás</string>
 	<string name="plugin_touringview_name">Túratérkép nézet</string>
@@ -1877,13 +1877,13 @@
 	<string name="action_modify">Módosítás művelet</string>
 	<string name="action_delete">Törlés művelet</string>
 	<string name="osm_edits">OSM szerkesztések</string>
-	<string name="osmand_parking_hour">ó</string><string name="osmand_parking_minute">perc</string><string name="osmand_parking_time_left">bal</string> <string name="confirmation_to_clear_history">Szeretné törölni az előzményeket?</string>
+	<string name="osmand_parking_hour">ó</string><string name="osmand_parking_minute">perc</string><string name="osmand_parking_time_left">maradt</string> <string name="confirmation_to_clear_history">Szeretnéd törölni az előzményeket?</string>
     <string name="delay_to_start_navigation_descr">A hátralévő várakozási idő megadása az útvonaltervezés képernyőn</string>
     <string name="delay_to_start_navigation">Turn-by-turn navigáció indítása ez után…</string>
     <string name="shared_string_go">Indítás</string>
 	
-	<string name="parking_place_limited">A parkolási idő korlátozott</string>
-	<string name="your_edits">Az Ön szerkesztései</string>
+	<string name="parking_place_limited">A parkolási idő vége</string>
+	<string name="your_edits">A szerkesztéseid</string>
     <string name="waypoint_visit_after">Megtekintés ez után:</string>
     <string name="simulate_your_location">Pozíció szimulálása</string>
     <string name="drawer">Lapos lista</string>
@@ -1903,17 +1903,17 @@
 	<string name="shared_string_release">Megjelent</string>
 	<string name="days_behind">napos</string>
 	<string name="welmode_download_maps">Térképek letöltése</string>
-	<string name="confirm_usage_speed_cameras">Néhány országban (Németország, Franciaország, Olaszország és még néhány) tilos a traffipax figyelmeztetés használata! Az OsmAnd nem vállal felelősséget a helyi szabályok megsértéséért. Kérem kattintson az Igen gombra, ha jogosult a funkció használatára.</string> 
-	<string name="welcome_select_region">A közlekedési táblák és szabályok helyes értelmezéséhez válassza ki a vezetési régióját:</string>
+	<string name="confirm_usage_speed_cameras">Néhány országban (Németország, Franciaország, Olaszország és még néhány) tilos a traffipax figyelmeztetés használata! Az OsmAnd nem vállal felelősséget a helyi szabályok megsértéséért. Kérlek kattints az Igen gombra, ha jogosult vagy a funkció használatára.</string> 
+	<string name="welcome_select_region">A közlekedési táblák és szabályok helyes értelmezéséhez válaszd ki a vezetési régiódat:</string>
 	<string name="welcome_text">Az OsmAnd lehetővé teszi a térképek és a navigáció offline használatát az egész világon!</string>
 	<string name="current_route">Jelenlegi útvonal</string>
     <string name="osmo_grop_name_length_alert">A csoportnévnek legalább 3 karakter hosszúnak kell lennie!</string>
-	<string name="local_osm_changes_upload_all_confirm">%1$d módosítást fog feltölteni OSM-re. Biztos benne?</string>
-    <string name="osmand_parking_overdue">lejár</string>
+	<string name="local_osm_changes_upload_all_confirm">%1$d módosítást fogsz feltölteni OSM-re. Biztos vagy benne?</string>
+    <string name="osmand_parking_overdue">késés</string>
 	<string name="waypoint_visit_before">Megtekintés ez előtt:</string>
     <string name="agps_info">A-GPS információk</string>
 	<string name="agps_data_last_downloaded">Legutóbb letöltött A-GPS adatok: %1$s</string>
-    <string name="welcome_header">Üdvözöljük</string>
+    <string name="welcome_header">Üdvözlünk</string>
     <string name="osm_changes_added_to_local_edits">Az OSM változások hozzáadva a helyi változáscsomaghoz</string>
    	<string name="mark_to_delete">Megjelölés törlésre</string>
 	<string name="shared_string_places">Helyek</string>
@@ -1926,10 +1926,9 @@
 	<string name="shared_string_open">Megnyitás</string>
     <string name="shared_string_manage">Kezelés</string>
 	<string name="shared_string_edit">Szerkesztés</string>
-	<string name="plugin_touringview_descr">"A nézet aktiválása megváltoztatja az OsmAnd térképstílusát „Túranézetre”, amely egy speciális nagy részletezettségű nézet az utazóknak és a hivatásos sofőröknek.
-\n\nEz a nézet bármely megadott térképnagyításon a térképadatokban elérhető utazási részletek legnagyobb mennyiségét biztosítja (főként utak, ösvények, csapások és tájolási jelek).\n\nÉrthetően ábrázolja az utak minden típusát is egyértelmű színkódolásokkal, amely akkor hasznos, ha például nagy járműveket vezet.\n\nTovábbá speciális túralehetőségeket is biztosít, úgymint kerékpárutak vagy az Alpok hegyi útjainak megjelenítése.\n\nNem szükséges speciális térképet letölteni, a nézet a szabványos térképeinkből kerül előállításra.\n\nEz a nézet visszaállítható, ha újra kikapcsolja az aktiválást itt, vagy a „Térképstílus” megváltoztatásával a „Térkép beállítása” alatt igény szerint. "</string>
-	<string name="plugin_nautical_descr">"Ez a bővítmény az OsmAnd térképet és a navigációs alkalmazást gazdagítja hajózási térképek készítésével csónakázáshoz, vitorlázáshoz és a vízi sportok egyéb típusaihoz.\n\nEgy speciális térkép-kiegészítő az OsmAnd alkalmazáshoz biztosítani fogja az összes hajózási navigációs jelzést és grafikon szimbólumot a szárazföldi, valamint a partközeli navigációhoz. Minden egyen navigációs jelzés leírása olyan részleteket biztosít, amely azok azonosításához és a jelentésükhöz szükségesek (kategória, alak, szín, sorozat, hivatkozás, stb.).\n\nAz OsmAnd hagyományos térképstílusainak egyikéhez való visszatéréshez egyszerűen kapcsolja ki ezen bővítmény aktiválást újra, vagy változtassa meg a „Térképstílust” a „Térkép beállítása” alatt igény szerint. "</string>
-	<string name="plugin_ski_descr">"Az OsmAnd ezen bővítménye a keze ügyébe helyezi a globális lesikló pályák, az országok közti sífutópályák, az alpesi síutak, kabinok és sífelvonók részleteit. Az utak és a pályák nehézség szerinti színkódokkal vannak megjelenítve, és egy speciális „Téli” térképstílussal vannak ábrázolva, amely beolvaszt egy hószínű téli tájat.\n\nA nézet aktiválása megváltoztatja a térképstílust „Tél és síelésre”, megjelenítve a táj minden elemét a téli körülmények szerint. Ez a nézet visszaállítható, ha újra kikapcsolja az aktiválást itt, vagy a „Térképstílus” megváltoztatásával a „Térkép beállítása” alatt igény szerint. "</string>
+	<string name="plugin_touringview_descr">"A nézet aktiválása megváltoztatja az OsmAnd térképstílusát „Túranézetre”, amely egy speciális nagy részletezettségű nézet az utazóknak és a hivatásos sofőröknek.\n\nEz a nézet bármely megadott térképnagyításon a térképadatokban elérhető utazási részletek legnagyobb mennyiségét biztosítja (főként utak, ösvények, csapások és tájolási jelek).\n\nÉrthetően ábrázolja az utak minden típusát is egyértelmű színkódolásokkal, amely annak hasznos, aki például nagy járműveket vezet.\n\nTovábbá speciális túralehetőségeket is biztosít, úgymint kerékpárutak vagy az Alpok hegyi útjainak megjelenítése.\n\nNem szükséges speciális térképet letölteni, a nézet a szabványos térképeinkből kerül előállításra.\n\nEz a nézet visszaállítható, ha újra kikapcsolja az aktiválást itt, vagy a „Térképstílus” megváltoztatásával a „Térkép beállítása” alatt igény szerint. "</string>
+	<string name="plugin_nautical_descr">"Ez a bővítmény az OsmAnd térképet és a navigációs alkalmazást gazdagítja hajózási térképek készítésével csónakázáshoz, vitorlázáshoz és a vízi sportok egyéb típusaihoz.\n\nEgy speciális térkép-kiegészítő az OsmAnd alkalmazáshoz biztosítani fogja az összes hajózási navigációs jelzést és szimbólumot a belvízi, valamint a partközeli navigációhoz. Minden egyes navigációs jelzés leírása olyan részleteket biztosít, amely azok azonosításához és a jelentésükhöz szükségesek (kategória, alak, szín, sorozat, hivatkozás, stb.).\n\nAz OsmAnd hagyományos térképstílusainak egyikéhez való visszatéréshez egyszerűen kapcsolja ki ezen bővítmény aktiválást újra, vagy változtassa meg a „Térképstílust” a „Térkép beállítása” alatt igény szerint. "</string>
+	<string name="plugin_ski_descr">"Az OsmAnd ezen bővítménye a kezedbe adja a globális lesikló pályák, a sífutópályák, az alpesi síutak, kabinok és sífelvonók minden részletét. Az utak és a pályák nehézség szerinti színkódokkal vannak megjelenítve, és egy speciális „Téli” térképstílussal vannak ábrázolva hószínű alapon.\n\nA nézet aktiválása megváltoztatja a térképstílust „Tél és síelésre”, megjelenítve a táj minden elemét a téli körülmények szerint. Ez a nézet visszaállítható, ha újra kikapcsolja az aktiválást itt, vagy a „Térképstílus” megváltoztatásával a „Térkép beállítása” alatt igény szerint. "</string>
 	<string name="filter_poi_hint">Szűrés név szerint</string>
     <string name="search_poi_category_hint">Gépelj az összes kereséséhez</string>
     <string name="specified_directiory_not_writeable">A térképeket nem sikerült létrehozni a megadott könyvtárban</string>
@@ -1944,7 +1943,7 @@
     <string name="rendering_value__name">Alapértelmezett</string>
     <string name="rendering_value_highContrastRoads_name">Nagy kontrasztú utak</string>
 	<string name="index_name_netherlands">Európa - Hollandia</string>
-	<string name="application_dir_change_warning3">Szeretné, hogy az OsmAnd az adatfájljait is az új helyre másolja?</string>
+	<string name="application_dir_change_warning3">Szeretnéd, hogy az OsmAnd az adatfájljaidat is az új helyre másolja?</string>
     <string name="rendering_attr_hideHouseNumbers_name">Házszámok elrejtése</string>
     <string name="routing_attr_avoid_borders_name">Határátlépések elkerülése</string>
 	<string name="routing_attr_avoid_borders_description">A határ átlépésének elkerülése egy másik országba</string>
@@ -1955,7 +1954,7 @@
 <string name="osmo_share_my_location">Helyzetem megosztása</string>
     <string name="shared_string_logoff">Naplózás ki</string>
     <string name="rendering_value_disabled_name">Letiltva</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Színezés az útvonal besorolása szerint</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Színezés az útvonal hálózati szerepe szerint</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Színezés a jelzés színe szerint</string>
     <string name="osm_edit_context_menu_delete">OSM szerkesztés törlése</string>    
     <string name="shared_string_show_details">Részletek megjelenítése</string>
@@ -1964,9 +1963,9 @@
     <string name="local_indexes_cat_wiki">Wikipédia</string>
     <string name="download_wikipedia_maps">Wikipédia</string>
     <string name="shared_string_import2osmand">Importálás az OsmAnd programba</string>
-    <string name="local_recordings_delete_all_confirm">%1$d jegyzetet fog törölni. Biztos benne?</string>
+    <string name="local_recordings_delete_all_confirm">%1$d jegyzetet fog törölni. Biztos vagy benne?</string>
 	<string name="disable_recording_once_app_killed">Önálló naplózás megakadályozása</string>
-    <string name="gps_network_not_enabled">A helymeghatározó szolgáltatás nincs engedélyezve. Be szeretné kapcsolni?</string>
+    <string name="gps_network_not_enabled">A helymeghatározó szolgáltatás nincs engedélyezve. Be szeretnéd kapcsolni?</string>
     <string name="disable_recording_once_app_killed_descrp">Szüneteltetni fogja a GPX-naplózást, ha az alkalmazást kilőtték (a legutóbbi alkalmazásokon keresztül). (Az OsmAnd alvó mód jelzője eltűnik az Android értesítési sávjáról.)</string>
 	<string name="lang_vo">Volapük</string>
     <string name="lang_th">Thai</string>
@@ -2043,4 +2042,5 @@
 	<string name="offline_maps_and_navigation">Offline térképek\nés navigáció</string>
 	<string name="next_proceed">Tovább</string>
 	<string name="dahboard_options_dialog_title">Kezdőlap beállításai</string>
-	</resources>
+	<string name="traffic_warning_hazard">Veszély</string>
+    </resources>

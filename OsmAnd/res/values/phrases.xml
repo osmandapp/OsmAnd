@@ -890,6 +890,7 @@
 	<string name="poi_military_barracks">Barracks</string>
 	<string name="poi_military_danger_area">Danger area</string>
 	<string name="poi_military_range">Military range</string>
+	<string name="poi_military_office">Military office</string>
 	<string name="poi_military_naval_base">Military naval base</string>
 	<string name="poi_military_nuclear_explosion_site">Nuclear explosion site</string>
 
