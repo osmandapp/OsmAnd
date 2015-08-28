@@ -65,6 +65,8 @@ public class BasicDataFragment extends Fragment {
 		webSiteImageView.setImageDrawable(iconsCache.getContentIcon(R.drawable.ic_world_globe_dark));
 		ImageView descriptionImageView = (ImageView) view.findViewById(R.id.descriptionImageView);
 		descriptionImageView.setImageDrawable(iconsCache.getContentIcon(R.drawable.ic_action_description));
+		ImageView openingHoursImageView = (ImageView) view.findViewById(R.id.openingHoursImageView);
+		openingHoursImageView.setImageDrawable(iconsCache.getContentIcon(R.drawable.ic_action_time));
 
 		streetEditText = (EditText) view.findViewById(R.id.streetEditText);
 		streetEditText.addTextChangedListener(new MyOnFocusChangeListener(getData(),
