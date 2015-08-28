@@ -111,7 +111,7 @@
             android:layout_below="@id/openHoursContainer"
             android:layout_marginLeft="72dp"
             android:text="Add opening hours"
-            android:textSize="12sp"
+            android:textSize="@dimen/default_sub_text_size"
             osmand:typeface="@string/font_roboto_medium"/>
 
         <!--XXX due to bug in NestedScroolView-->

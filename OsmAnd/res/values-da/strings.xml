@@ -2116,7 +2116,7 @@
 	<string name="extended_tab_title">Udvidet</string>
 	<string name="building_number">Bygningsnummer</string>
 	<string name="next_proceed">Næste</string>
-	<string name="opening_at">Åbning på</string>
-	<string name="closing_at">Lukning på</string>
+	<string name="opening_at">Åbner</string>
+	<string name="closing_at">Lukker</string>
 <string name="basic_tab_title">Basis</string>
 	</resources>
