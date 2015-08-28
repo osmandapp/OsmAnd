@@ -2062,4 +2062,10 @@
 	<string name="plugin_settings">Plugins (estensiones)</string>
 	<string name="routing_attr_avoid_shuttle_train_name">Istransi trenu ispola</string>
 	<string name="routing_attr_avoid_shuttle_train_description">Istransi trenu ispola</string>
-    </resources>
+    <string name="basic_tab_title">Bàsicu</string>
+	<string name="extended_tab_title">Estesu</string>
+	<string name="building_number">Nùmeru tzìvicu</string>
+	<string name="next_proceed">Imbeniente</string>
+	<string name="opening_at">Aberit a sas</string>
+	<string name="closing_at">Serrat a sas</string>
+</resources>
