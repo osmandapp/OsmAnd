@@ -10,6 +10,7 @@ import net.londatiga.android.ActionItem;
 import net.londatiga.android.QuickAction;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
+import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
@@ -58,8 +59,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.apache.commons.logging.Log;
+
 public class MapActivityActions implements DialogProvider {
-	
+	private static final Log LOG = PlatformUtil.getLog(MapActivityActions.class);
 	public static final String KEY_LONGITUDE = "longitude";
 	public static final String KEY_LATITUDE = "latitude";
 	public static final String KEY_NAME = "name";
@@ -283,7 +286,7 @@ public class MapActivityActions implements DialogProvider {
 				R.drawable.ic_action_fav_dark).reg();
 		
 		
-
+		LOG.debug("contextMenuPoint()");
 		OsmandPlugin.registerMapContextMenu(mapActivity, latitude, longitude, adapter, selectedObj);
 		getMyApplication().getAppCustomization().prepareLocationMenu(mapActivity, adapter);
 		

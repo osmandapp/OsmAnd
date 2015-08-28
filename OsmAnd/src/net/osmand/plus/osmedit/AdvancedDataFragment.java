@@ -49,23 +49,10 @@ public class AdvancedDataFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		final View view = inflater.inflate(R.layout.fragment_edit_poi_advanced, container, false);
-		final EditText tagEditText = (EditText) view.findViewById(R.id.tagEditText);
-		final EditText valueEditText = (EditText) view.findViewById(R.id.valueEditText);
 
-		ImageButton deleteItemImageButton =
-				(ImageButton) view.findViewById(R.id.deleteItemImageButton);
-		deleteItemImageButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				tagEditText.setText(null);
-				tagEditText.clearFocus();
-				valueEditText.setText(null);
-				valueEditText.clearFocus();
-			}
-		});
 		deleteDrawable = ((MapActivity)getActivity()).getMyApplication().getIconsCache()
-				.getPaintedContentIcon(R.drawable.ic_action_remove_dark, R.color.icon_color_light);
-		deleteItemImageButton.setImageDrawable(deleteDrawable);
+				.getPaintedContentIcon(R.drawable.ic_action_remove_dark,
+						getActivity().getResources().getColor(R.color.icon_color_light));
 		TextView nameTextView = (TextView) view.findViewById(R.id.nameTextView);
 		TextView amenityTagTextView = (TextView) view.findViewById(R.id.amenityTagTextView);
 		TextView amenityTextView = (TextView) view.findViewById(R.id.amenityTextView);
@@ -79,16 +66,7 @@ public class AdvancedDataFragment extends Fragment {
 		addTagButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				String tag = String.valueOf(tagEditText.getText());
-				String value = String.valueOf(valueEditText.getText());
-				if (!TextUtils.isEmpty(tag) && !TextUtils.isEmpty(value)) {
-					mAdapter.addTag(new Tag(tag, value));
-//					setListViewHeightBasedOnChildren(editTagsLineaLayout);
-					tagEditText.setText(null);
-					tagEditText.clearFocus();
-					valueEditText.setText(null);
-					valueEditText.clearFocus();
-				}
+					mAdapter.addTag(new Tag("", ""));
 			}
 		});
 		return view;
@@ -145,11 +123,10 @@ public class AdvancedDataFragment extends Fragment {
 		}
 
 		public void addTag(Tag tag) {
-			View view = getView(tag);
 			editPoiData.tags.add(tag);
 			if (mIsUserInput)
 				editPoiData.notifyDatasetChanged(mTagsChangedListener);
-			linearLayout.addView(view);
+			updateViews();
 		}
 
 		public void updateViews() {

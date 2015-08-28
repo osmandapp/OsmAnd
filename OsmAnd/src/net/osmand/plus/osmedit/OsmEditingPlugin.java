@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
 import net.osmand.plus.ContextMenuAdapter;
@@ -34,6 +35,8 @@ import net.osmand.plus.myplaces.AvailableGPXFragment.GpxInfo;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.Algorithms;
+
+import org.apache.commons.logging.Log;
 
 import java.util.List;
 
@@ -163,10 +166,12 @@ public class OsmEditingPlugin extends OsmandPlugin {
 						registerLayers(mapActivity);
 					}
 					osmBugsLayer.openBug(latitude, longitude);
-				} //else if (resId == R.string.poi_context_menu_delete) {
+				} else if (resId == R.string.poi_context_menu_delete) {
+					new EditPoiFragment.ShowDeleteDialogAsyncTask(mapActivity)
+							.execute((Amenity) selectedObj);
 					// TODO implement delete
 //					getPoiActions(mapActivity).showDeleteDialog((Amenity) selectedObj);
-//				} else if (resId == R.string.poi_context_menu_modify) {
+				}//} else if (resId == R.string.poi_context_menu_modify) {
 					// TODO implement edit
 //					getPoiActions(mapActivity).showEditDialog((Amenity) selectedObj);
 //				}
