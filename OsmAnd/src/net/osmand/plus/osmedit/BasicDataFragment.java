@@ -94,7 +94,8 @@ public class BasicDataFragment extends Fragment {
 		});
 		LinearLayout openHoursContainer = (LinearLayout) view.findViewById(R.id.openHoursContainer);
 		Drawable clockDrawable = iconsCache.getContentIcon(R.drawable.ic_action_time);
-		Drawable deleteDrawable = iconsCache.getContentIcon(R.drawable.ic_action_remove_dark);
+		Drawable deleteDrawable = iconsCache
+				.getPaintedContentIcon(R.drawable.ic_action_remove_dark, R.color.icon_color_light);
 		if (savedInstanceState != null && savedInstanceState.containsKey(OPENING_HOURS)) {
 			mOpeningHoursAdapter = new OpeningHoursAdapter(
 					(OpeningHoursParser.OpeningHours) savedInstanceState.getSerializable(OPENING_HOURS),

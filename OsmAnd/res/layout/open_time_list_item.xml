@@ -26,6 +26,7 @@
             android:id="@+id/daysTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="@dimen/default_list_text_size"
             tools:text="Mo-We"/>
 
         <View
@@ -51,6 +52,7 @@
                 android:id="@+id/openingTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="@dimen/default_list_text_size"
                 tools:text="08:00"/>
 
             <View
@@ -74,6 +76,7 @@
                 android:id="@+id/closingTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="@dimen/default_list_text_size"
                 tools:text="20:00"/>
 
             <View

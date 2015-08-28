@@ -660,7 +660,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		
 		if (!enabled) {
 			backToLocationControl.setBg(R.drawable.btn_circle, R.drawable.btn_circle_night);
-			backToLocationControl.setIconColorId(R.color.icon_color_light, 0);
+			backToLocationControl.setIconColorId(R.color.icon_color, 0);
 		} else if (tracked) {
 			backToLocationControl.setBg(R.drawable.btn_circle, R.drawable.btn_circle_night);
 			backToLocationControl.setIconColorId(R.color.color_myloc_distance);
@@ -751,7 +751,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		int resId;
 		int resLightId;
 		int resDarkId;
-		int resClrLight = R.color.icon_color_light;
+		int resClrLight = R.color.icon_color;
 		int resClrDark = 0;
 		
 
@@ -877,7 +877,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		Drawable[] icons = new Drawable[vls.size()];
 		int[] values = new int[vls.size()];
 		for (int k = 0; k < modes.length; k++) {
-			icons[k] = app.getIconsCache().getIcon(modes[k].getSmallIconDark(), R.color.icon_color_light);
+			icons[k] = app.getIconsCache().getIcon(modes[k].getSmallIconDark(), R.color.icon_color);
 			values[k] = modes[k].getStringResource();
 		}
 		for (int i = 0; i < modes.length; i++) {

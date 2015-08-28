@@ -64,7 +64,7 @@ public class AdvancedDataFragment extends Fragment {
 			}
 		});
 		deleteDrawable = ((MapActivity)getActivity()).getMyApplication().getIconsCache()
-				.getContentIcon(R.drawable.ic_action_remove_dark);
+				.getPaintedContentIcon(R.drawable.ic_action_remove_dark, R.color.icon_color_light);
 		deleteItemImageButton.setImageDrawable(deleteDrawable);
 		TextView nameTextView = (TextView) view.findViewById(R.id.nameTextView);
 		TextView amenityTagTextView = (TextView) view.findViewById(R.id.amenityTagTextView);
