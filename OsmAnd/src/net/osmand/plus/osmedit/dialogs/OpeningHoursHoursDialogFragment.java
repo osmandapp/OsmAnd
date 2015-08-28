@@ -28,6 +28,7 @@ public class OpeningHoursHoursDialogFragment extends DialogFragment {
 		Bundle args = getArguments();
 		final boolean isStart = args.getBoolean(IS_START);
 		final int positionToAdd = args.getInt(POSITION_TO_ADD);
+		final boolean createNew = positionToAdd == -1;
 		final OpeningHoursParser.BasicOpeningHourRule item = (OpeningHoursParser.BasicOpeningHourRule)
 				args.getSerializable(BASIC_OPENING_HOUR_RULE);
 		AlertDialog.Builder builder =
@@ -43,24 +44,30 @@ public class OpeningHoursHoursDialogFragment extends DialogFragment {
 		timePicker.setCurrentMinute(minute);
 
 		builder.setView(timePicker)
-				.setPositiveButton(R.string.next_proceed, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						int minute = timePicker.getCurrentMinute();
-						int hourOfDay = timePicker.getCurrentHour();
-						int time = minute + hourOfDay * 60;
-						if (isStart) {
-							item.setStartTime(time);
-							OpeningHoursHoursDialogFragment
-									.createInstance(item, positionToAdd, false)
-									.show(getFragmentManager(), "TimePickerDialogFragment");
-						} else {
-							item.setEndTime(time);
-							((BasicDataFragment) getParentFragment())
-									.setBasicOpeningHoursRule(item, positionToAdd);
-						}
-					}
-				})
+				.setPositiveButton(isStart && createNew ? R.string.next_proceed
+								: R.string.shared_string_save,
+						new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								int minute = timePicker.getCurrentMinute();
+								int hourOfDay = timePicker.getCurrentHour();
+								int time = minute + hourOfDay * 60;
+								if (isStart && createNew) {
+									item.setStartTime(time);
+									OpeningHoursHoursDialogFragment
+											.createInstance(item, positionToAdd, false)
+											.show(getFragmentManager(), "TimePickerDialogFragment");
+								} else {
+									if (isStart) {
+										item.setStartTime(time);
+									} else {
+										item.setEndTime(time);
+									}
+									((BasicDataFragment) getParentFragment())
+											.setBasicOpeningHoursRule(item, positionToAdd);
+								}
+							}
+						})
 				.setNegativeButton(R.string.shared_string_cancel, null);
 
 		int paddingInDp = 18;
