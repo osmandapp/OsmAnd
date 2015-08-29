@@ -1055,4 +1055,13 @@
 
 	<string name="poi_building">Edificio</string>
 
-</resources>
+<string name="poi_office_religion">Oficina religiosa</string>
+	<string name="poi_association">Oficina de asociación</string>
+	<string name="poi_financial">Oficina financiera</string>
+	<string name="poi_political_party">Oficina de partido político</string>
+	<string name="poi_notary">Escribano / notario</string>
+	<string name="poi_foundation">Oficina de fundación</string>
+	<string name="poi_tax_advisor">Asesor fiscal</string>
+
+	<string name="poi_military_office">Oficina militar</string>
+	</resources>
