@@ -147,7 +147,7 @@
 	<string name="poi_club_tourism">Tourismusverein</string>
 	<string name="poi_club_veterans">Veteranenklub</string>
 	<string name="poi_college">Hochschule</string>
-	<string name="poi_communication_tower">Kommunikationstumr</string>
+	<string name="poi_communication_tower">Kommunikationsturm</string>
 	<string name="poi_community_centre">Gemeindezentrum</string>
 	<string name="poi_company">Firma</string>
 	<string name="poi_compressed_air">Druckluft</string>
@@ -699,7 +699,7 @@
 	<string name="poi_sailing">Segeln</string>
 	<string name="poi_apartment">Apartment</string>
 	<string name="poi_internet_access_wlan">Internetzugang: WLAN</string>
-	<string name="poi_internet_access_wired">Internetzugang: Kabel</string>
+	<string name="poi_internet_access_wired">Internetzugang: Kabelgebunden</string>
 	<string name="poi_internet_access_public">Internetzugang: öffentlich</string>
 	<string name="poi_picnic_table">Picknicktisch</string>
 	<string name="poi_wine_cellar">Weinkeller</string>
@@ -1014,4 +1014,17 @@
 	<string name="poi_instagram">Instagram</string>
 	<string name="poi_vk">VKontakte</string>
 	<string name="poi_google_plus">Google+</string>
+	<string name="poi_perfumery">Parfümerie</string>
+
+	<string name="poi_association">Geschäftsstelle</string>
+	<string name="poi_political_party">Parteibüro</string>
+	<string name="poi_notary">Notar</string>
+	<string name="poi_foundation">Stiftungsbüro</string>
+	<string name="poi_tax_advisor">Steuerberatung</string>
+
+	<string name="poi_military_office">Militärverwaltung</string>
+	<string name="poi_building">Gebäude</string>
+
+<string name="poi_office_religion">Büro einer Glaubensgemeinschaft</string>
+	<string name="poi_financial">Finanzverwaltung</string>
 	</resources>
