@@ -498,6 +498,13 @@
 	<string name="poi_educational_institution">Educational institution</string>
 	<string name="poi_studio">Studio</string>
 	<string name="poi_bookmaker">Bookmaker</string>
+	<string name="poi_office_religion">Religious office</string>
+	<string name="poi_association">Association office</string>
+	<string name="poi_financial">Financial office</string>
+	<string name="poi_political_party">Political party office</string>
+	<string name="poi_notary">Notary</string>
+	<string name="poi_foundation">Foundation office</string>
+	<string name="poi_tax_advisor">Tax advisor office</string>
 
 	<string name="poi_stadium">Stadium</string>
 	<string name="poi_sports_centre">Sports center</string>
