@@ -1054,4 +1054,12 @@
 	<string name="poi_building">Número</string>
 
 <string name="poi_military_office">Área militar</string>
+	<string name="poi_office_religion">Área religiosa</string>
+	<string name="poi_association">Escritório de Associação</string>
+	<string name="poi_financial">Escritório financeiro</string>
+	<string name="poi_political_party">Escritório de partido político</string>
+	<string name="poi_notary">Tabelião</string>
+	<string name="poi_foundation">Escritório de fundação</string>
+	<string name="poi_tax_advisor">Escritório de conselheiro fiscal</string>
+
 	</resources>
