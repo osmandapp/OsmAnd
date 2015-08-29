@@ -1071,4 +1071,12 @@
 	<string name="poi_building">Bygning</string>
 
 <string name="poi_military_office">Militærkontor</string>
+	<string name="poi_notary">Notar</string>
+	<string name="poi_political_party">Partikontor</string>
+	<string name="poi_tax_advisor">Skatterådgiverkontor</string>
+
+	<string name="poi_office_religion">Religiøs kontor</string>
+	<string name="poi_association">Foreningskontor</string>
+	<string name="poi_financial">Finansielkontor</string>
+	<string name="poi_foundation">Fondskontor</string>
 	</resources>
