@@ -1052,4 +1052,12 @@
 	<string name="poi_building">建築物</string>
 
 <string name="poi_military_office">軍事辦公室</string>
+	<string name="poi_office_religion">宗教辦公室</string>
+	<string name="poi_association">社團辦公室</string>
+	<string name="poi_financial">金融辦公室</string>
+	<string name="poi_political_party">政黨辦公室</string>
+	<string name="poi_notary">公證人</string>
+	<string name="poi_foundation">基金會辦公室</string>
+	<string name="poi_tax_advisor">稅務顧問辦公室</string>
+
 	</resources>
