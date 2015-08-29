@@ -781,7 +781,7 @@
 	<string name="poi_notice">Senyal nàutica</string>
 	<string name="poi_pile">Torreta</string>
 	<string name="poi_radar_transponder">Radar transponedor</string>
-	<string name="poi_signal_station_traffic">Semàfor de tràfic nàutic</string>
+	<string name="poi_signal_station_traffic">Semàfor de trànsit nàutic</string>
 	<string name="poi_signal_station_warning">Semàfor d\'advertiment nàutic</string>
 	<string name="poi_small_craft_facility">Instal·lacions per naus petites</string>
 	<string name="poi_topmark">Boia amb format IALA</string>
@@ -857,7 +857,7 @@
 	<string name="poi_entrance_exit">Sortida</string>
 
 	<string name="poi_coffee">Coffee shop</string>
-	<string name="poi_pasta">Pasta shop</string>
+	<string name="poi_pasta">Botiga de pasta</string>
 	<string name="poi_fashion">Botiga de moda</string>
 	<string name="poi_free_flying">Botiga de vol lliure</string>
 	<string name="poi_garden_furniture">Mobles de jardí</string>
@@ -873,12 +873,12 @@
 	<string name="poi_weapons">Armeria</string>
 
 	<string name="poi_stile">Restricció de pas</string>
-	<string name="poi_horse_stile">Pas per cavalls</string>
+	<string name="poi_horse_stile">Pas per a cavalls</string>
 	<string name="poi_kissing_gate">porta laberíntica</string>
 	<string name="poi_sally_port">Porta llevadissa</string>
 	<string name="poi_swing_gate">Barrera griratòria</string>
 	<string name="poi_turnstile">Torn de pas</string>
-	<string name="poi_kent_carriage_gap">Pas exclusiu per carruatges</string>
+	<string name="poi_kent_carriage_gap">Pas exclusiu per a carruatges</string>
 	<string name="poi_breakwater">Escullera</string>
 	<string name="poi_groyne">Espigó</string>
 
@@ -916,12 +916,12 @@
 	<string name="poi_brand">Marca</string>
 
 	<string name="poi_enforcement_traffic_signals">Control de tràfic: obeir el semàfor</string>
-	<string name="poi_enforcement_maxspeed">Control de tràfic: velocitat màxima</string>
-	<string name="poi_enforcement_maxheight">Control de tràfic: alçada màxima</string>
-	<string name="poi_enforcement_mindistance">Control de tràfic: distància mínima</string>
-	<string name="poi_enforcement_check">Control de compliment</string>
-	<string name="poi_enforcement_access">Control de tràfic: accés</string>
-	<string name="poi_enforcement_toll">Control de tràfic: peatge</string>
+	<string name="poi_enforcement_maxspeed">Control de trànsit: velocitat màxima</string>
+	<string name="poi_enforcement_maxheight">Control de trànsit: alçada màxima</string>
+	<string name="poi_enforcement_mindistance">Control de trànsit: distància mínima</string>
+	<string name="poi_enforcement_check">Control de trànsit</string>
+	<string name="poi_enforcement_access">Control de trànsit: accés</string>
+	<string name="poi_enforcement_toll">Control de trànsit: peatge</string>
 
 <string name="poi_furnace">Botiga de calefactors</string>
 	<string name="poi_trophy">Trofeus i distincions</string>
@@ -933,7 +933,7 @@
 	<string name="poi_abandoned_poi">Objectes perduts</string>
 	<string name="poi_node_networks">Xarxa de nodes de senderisme/ciclisme</string>
 		<string name="poi_hiking_routes">Rutes de senderisme</string>
-		<string name="poi_traffic_enforcement">Control de tràfic</string>
+		<string name="poi_traffic_enforcement">Control de trànsit</string>
 	<string name="poi_route_hiking_iwn_poi">Ruta internacional de senderisme</string>
 	<string name="poi_route_hiking_nwn_poi">Ruta nacional de senderisme</string>
 	<string name="poi_route_hiking_rwn_poi">Ruta senderista regional</string>
@@ -945,21 +945,21 @@
 	<string name="poi_access_destination">Accés a la destinació</string>
 	<string name="poi_access_permissive">Accés tolerat</string>
 	<string name="poi_access_customers">Accés de clients</string>
-	<string name="poi_access_delivery">Accés per lliuraments</string>
-	<string name="poi_access_agricultural">Accés per activitats agrícoles</string>
+	<string name="poi_access_delivery">Accés per a lliuraments</string>
+	<string name="poi_access_agricultural">Accés per a activitats agrícoles</string>
 
 	<string name="poi_monitoring_station">Centre de control</string>
 	<string name="poi_capital">Capital</string>
 	<string name="poi_fee_no">Sense cap cost</string>
 
-	<string name="poi_email">e-mail</string>
+	<string name="poi_email">Correu electrònic</string>
 	<string name="poi_fax">Fax</string>
 	<string name="poi_facebook">Facebook</string>
 	<string name="poi_mobile">Mòbil</string>
-	<string name="poi_animal_shelter_dog">Refugi per gossos</string>
-	<string name="poi_animal_shelter_cat">Refugi per gats</string>
-	<string name="poi_animal_shelter_dog_cat">Refugi per gossos i gats</string>
-	<string name="poi_animal_shelter_bird">Refugi per ocells</string>
+	<string name="poi_animal_shelter_dog">Refugi per a gossos</string>
+	<string name="poi_animal_shelter_cat">Refugi per a gats</string>
+	<string name="poi_animal_shelter_dog_cat">Refugi per a gossos i gats</string>
+	<string name="poi_animal_shelter_bird">Refugi per a ocells</string>
 
 <string name="poi_recycling_centre">Deixalleria</string>
 	<string name="poi_recycling_container">Contenidor</string>
@@ -998,7 +998,7 @@
 	<string name="poi_recycling_tyres">Pneumàtics</string>
 	<string name="poi_recycling_tv_monitor">TV, monitors</string>
 	<string name="poi_recycling_rubble">Runes</string>
-	<string name="poi_recycling_cds">CDs</string>
+	<string name="poi_recycling_cds">CD</string>
 	<string name="poi_recycling_waste_oil">Oli residual</string>
 	<string name="poi_recycling_bottles">Ampolles</string>
 	<string name="poi_recycling_cork">Suro</string>
@@ -1028,9 +1028,9 @@
 	<string name="poi_seasonal_autumn">Tardor</string>
 	<string name="poi_seasonal_winter">Hivern</string>
 
-	<string name="poi_recycling_waste">Rebuig (bosses de negres)</string>
+	<string name="poi_recycling_waste">Rebuig (bosses negres)</string>
 	<string name="poi_recycling_paper_packaging">Embalatge de paper</string>
-	<string name="poi_recycling_tetrapak">Tetra Pak</string>
+	<string name="poi_recycling_tetrapak">Brics</string>
 	<string name="poi_recycling_hydrargyrum">Mercuri</string>
 	<string name="poi_recycling_foil">Paper d\'alumini</string>
 	<string name="poi_recycling_styrofoam">Poliestirè extrudit</string>
