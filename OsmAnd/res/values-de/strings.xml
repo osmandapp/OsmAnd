@@ -2260,4 +2260,8 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="commit_poi">POI übermitteln</string>
 <string name="routing_attr_avoid_shuttle_train_name">Pendelzug vermeiden</string>
 	<string name="routing_attr_avoid_shuttle_train_description">Pendelzug vermeiden</string>
-    </resources>
+    <string name="plugin_settings">Plugins</string>
+	<string name="building_number">Gebäude-Nummer</string>
+	<string name="opening_at">geöffnet ab</string>
+	<string name="closing_at">geschlossen ab</string>
+</resources>

@@ -1061,4 +1061,7 @@
 	<string name="poi_vk">УКантакце</string>
 	<string name="poi_google_plus">Гугл+</string>
 	<string name="poi_mill_pond">Млынавая сажалка</string>
+	<string name="poi_building">Будынак</string>
+
+<string name="poi_military_office">Ваенкамат</string>
 	</resources>

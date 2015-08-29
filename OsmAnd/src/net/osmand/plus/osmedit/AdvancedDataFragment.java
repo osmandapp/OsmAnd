@@ -1,15 +1,21 @@
 package net.osmand.plus.osmedit;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -29,6 +35,8 @@ import org.apache.commons.logging.Log;
 
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class AdvancedDataFragment extends Fragment {
 	private static final String TAG = "AdvancedDataFragment";
@@ -99,6 +107,14 @@ public class AdvancedDataFragment extends Fragment {
 		super.onSaveInstanceState(outState);
 	}
 
+	private EditPoiFragment getEditPoiFragment() {
+		return (EditPoiFragment) getParentFragment();
+	}
+
+	private EditPoiData getData() {
+		return getEditPoiFragment().getEditPoiData();
+	}
+
 	public class TagAdapterLinearLayoutHack {
 		private final LinearLayout linearLayout;
 		private final EditPoiData editPoiData;
@@ -131,7 +147,6 @@ public class AdvancedDataFragment extends Fragment {
 
 		public void updateViews() {
 			linearLayout.removeAllViews();
-			Iterator<Tag> iterator = editPoiData.tags.iterator();
 			for (Tag tag : editPoiData.tags) {
 				if (tag.tag.equals(OSMSettings.OSMTagKey.NAME.getValue())) {
 					nameTextView.setText(tag.value);
@@ -155,7 +170,8 @@ public class AdvancedDataFragment extends Fragment {
 		private View getView(final Tag tag) {
 			final View convertView = LayoutInflater.from(linearLayout.getContext())
 					.inflate(R.layout.poi_tag_list_item, null, false);
-			final EditText tagEditText = (EditText) convertView.findViewById(R.id.tagEditText);
+			final AutoCompleteTextView tagEditText =
+					(AutoCompleteTextView) convertView.findViewById(R.id.tagEditText);
 			tagEditText.setText(tag.tag);
 			final EditText valueEditText = (EditText) convertView.findViewById(R.id.valueEditText);
 			ImageButton deleteItemImageButton =
@@ -193,6 +209,35 @@ public class AdvancedDataFragment extends Fragment {
 						editPoiData.notifyDatasetChanged(mTagsChangedListener);
 				}
 			});
+			final Set<String> tagKeys = new TreeSet<String>();
+			for (OSMSettings.OSMTagKey t : OSMSettings.OSMTagKey.values()) {
+				if ((t != OSMSettings.OSMTagKey.NAME) && (t != OSMSettings.OSMTagKey.OPENING_HOURS) && (t != OSMSettings.OSMTagKey.PHONE)
+						&& (t != OSMSettings.OSMTagKey.WEBSITE)) {
+					tagKeys.add(t.getValue());
+				}
+			}
+
+			ArrayAdapter<Object> adapter = new ArrayAdapter<Object>(linearLayout.getContext(),
+					R.layout.list_textview, tagKeys.toArray());
+			tagEditText.setAdapter(adapter);
+			tagEditText.setThreshold(1);
+			tagEditText.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					// TODO: 8/29/15 Rewrite as dialog fragment
+					AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+					final String[] tags = tagKeys.toArray(new String[tagKeys.size()]);
+					builder.setItems(tags, new Dialog.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							tagEditText.setText(tags[which]);
+						}
+
+					});
+					builder.create();
+					builder.show();
+				}
+			});
 			valueEditText.addTextChangedListener(new TextWatcher() {
 				@Override
 				public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -213,13 +258,5 @@ public class AdvancedDataFragment extends Fragment {
 			});
 			return convertView;
 		}
-	}
-
-	private EditPoiFragment getEditPoiFragment() {
-		return (EditPoiFragment) getParentFragment();
-	}
-
-	private EditPoiData getData() {
-		return getEditPoiFragment().getEditPoiData();
 	}
 }
