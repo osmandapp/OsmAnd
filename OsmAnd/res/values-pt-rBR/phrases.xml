@@ -1062,4 +1062,16 @@
 	<string name="poi_foundation">Escritório de fundação</string>
 	<string name="poi_tax_advisor">Escritório de conselheiro fiscal</string>
 
+	<string name="poi_religion_voodoo">Voodoo</string>
+	<string name="poi_religion_multifaith">Multirreligiosa</string>
+	<string name="poi_religion_spiritualist">Espiritualista</string>
+	<string name="poi_religion_bahai">Bahai</string>
+	<string name="poi_religion_scientologist">Cientologista</string>
+	<string name="poi_religion_pagan">Pagão</string>
+	<string name="poi_religion_zoroastrian">Zoroastrismo</string>
+
+	<string name="poi_denomination_catholic">Católica</string>
+	<string name="poi_denomination_baptist">Batista</string>
+	<string name="poi_denomination_roman_catholic">Católica Romana</string>
+	<string name="poi_denomination_orthodox">Ortodoxo</string>
 	</resources>
