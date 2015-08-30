@@ -171,10 +171,10 @@ public class OsmEditingPlugin extends OsmandPlugin {
 							.execute((Amenity) selectedObj);
 					// TODO implement delete
 //					getPoiActions(mapActivity).showDeleteDialog((Amenity) selectedObj);
-				}//} else if (resId == R.string.poi_context_menu_modify) {
+				} else if (resId == R.string.poi_context_menu_modify) {
 					// TODO implement edit
 //					getPoiActions(mapActivity).showEditDialog((Amenity) selectedObj);
-//				}
+				}
 				return true;
 			}
 		};
