@@ -1054,4 +1054,24 @@
 	<string name="poi_building">Número</string>
 
 <string name="poi_military_office">Área militar</string>
+	<string name="poi_office_religion">Área religiosa</string>
+	<string name="poi_association">Escritório de Associação</string>
+	<string name="poi_financial">Escritório financeiro</string>
+	<string name="poi_political_party">Escritório de partido político</string>
+	<string name="poi_notary">Tabelião</string>
+	<string name="poi_foundation">Escritório de fundação</string>
+	<string name="poi_tax_advisor">Escritório de conselheiro fiscal</string>
+
+	<string name="poi_religion_voodoo">Voodoo</string>
+	<string name="poi_religion_multifaith">Multirreligiosa</string>
+	<string name="poi_religion_spiritualist">Espiritualista</string>
+	<string name="poi_religion_bahai">Bahai</string>
+	<string name="poi_religion_scientologist">Cientologista</string>
+	<string name="poi_religion_pagan">Pagão</string>
+	<string name="poi_religion_zoroastrian">Zoroastrismo</string>
+
+	<string name="poi_denomination_catholic">Católica</string>
+	<string name="poi_denomination_baptist">Batista</string>
+	<string name="poi_denomination_roman_catholic">Católica Romana</string>
+	<string name="poi_denomination_orthodox">Ortodoxo</string>
 	</resources>

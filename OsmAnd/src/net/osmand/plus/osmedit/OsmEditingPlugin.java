@@ -1,5 +1,29 @@
 package net.osmand.plus.osmedit;
 
+import java.util.List;
+
+import net.osmand.PlatformUtil;
+import net.osmand.access.AccessibleToast;
+import net.osmand.data.Amenity;
+import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.EnumAdapter;
+import net.osmand.plus.activities.EnumAdapter.IEnumWithResource;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.TabActivity;
+import net.osmand.plus.dashboard.tools.DashFragmentData;
+import net.osmand.plus.myplaces.AvailableGPXFragment;
+import net.osmand.plus.myplaces.AvailableGPXFragment.GpxInfo;
+import net.osmand.plus.myplaces.FavoritesActivity;
+import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.util.Algorithms;
+
+import org.apache.commons.logging.Log;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -15,38 +39,15 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import net.osmand.PlatformUtil;
-import net.osmand.access.AccessibleToast;
-import net.osmand.data.Amenity;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.EnumAdapter;
-import net.osmand.plus.activities.EnumAdapter.IEnumWithResource;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.TabActivity;
-import net.osmand.plus.dashboard.DashPluginsFragment;
-import net.osmand.plus.dashboard.tools.DashFragmentData;
-import net.osmand.plus.myplaces.AvailableGPXFragment;
-import net.osmand.plus.myplaces.AvailableGPXFragment.GpxInfo;
-import net.osmand.plus.myplaces.FavoritesActivity;
-import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.util.Algorithms;
-
-import org.apache.commons.logging.Log;
-
-import java.util.List;
-
 
 public class OsmEditingPlugin extends OsmandPlugin {
+	private static final Log LOG = PlatformUtil.getLog(OsmEditingPlugin.class);
 	private static final String ID = "osm.editing";
 	private OsmandSettings settings;
 	private OsmandApplication app;
 	OpenstreetmapsDbHelper dbpoi;
 	OsmBugsDbHelper dbbug;
+	private EditingPOIDialogProvider poiActions;
 
 	@Override
 	public String getId() {
@@ -136,12 +137,12 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		return SettingsOsmEditingActivity.class;
 	}
 
-//	public EditingPOIDialogProvider getPoiActions(MapActivity activity) {
-//		if (poiActions == null) {
-//			poiActions = new EditingPOIDialogProvider(activity, this);
-//		}
-//		return poiActions;
-//	}
+	public EditingPOIDialogProvider getPoiActions(MapActivity activity) {
+		if (poiActions == null) {
+			poiActions = new EditingPOIDialogProvider(activity, this);
+		}
+		return poiActions;
+	}
 
 	@Override
 	public void registerMapContextMenuActions(final MapActivity mapActivity,
@@ -152,6 +153,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		OnContextMenuClick listener = new OnContextMenuClick() {
 			@Override
 			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int resId, int pos, boolean isChecked) {
+				LOG.debug("onContextMenuClick()");
 				if (resId == R.string.context_menu_item_create_poi) {
 					//getPoiActions(mapActivity).showCreateDialog(latitude, longitude);
 					EditPoiFragment editPoiFragment =
@@ -167,13 +169,13 @@ public class OsmEditingPlugin extends OsmandPlugin {
 					}
 					osmBugsLayer.openBug(latitude, longitude);
 				} else if (resId == R.string.poi_context_menu_delete) {
-					new EditPoiFragment.ShowDeleteDialogAsyncTask(mapActivity)
-							.execute((Amenity) selectedObj);
+//					new EditPoiFragment.ShowDeleteDialogAsyncTask(mapActivity)
+//							.execute((Amenity) selectedObj);
 					// TODO implement delete
-//					getPoiActions(mapActivity).showDeleteDialog((Amenity) selectedObj);
+					getPoiActions(mapActivity).showDeleteDialog((Amenity) selectedObj);
 				} else if (resId == R.string.poi_context_menu_modify) {
 					// TODO implement edit
-//					getPoiActions(mapActivity).showEditDialog((Amenity) selectedObj);
+					getPoiActions(mapActivity).showEditDialog((Amenity) selectedObj);
 				}
 				return true;
 			}
