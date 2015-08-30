@@ -140,7 +140,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		public Recording(File f) {
 			this.file = f;
 		}
-
+		
 		private File file;
 
 		private double lat;
