@@ -1079,4 +1079,27 @@
 	<string name="poi_denomination_sunni">遜尼派</string>
 	<string name="poi_denomination_protestant">基督新教</string>
 	<string name="poi_denomination_methodist">衛理公會</string>
+	<string name="poi_denomination_anglican">英國國教</string>
+	<string name="poi_denomination_presbyterian">長老教會</string>
+	<string name="poi_denomination_evangelical">福音派</string>
+	<string name="poi_denomination_russian_orthodox">俄羅斯東正教</string>
+	<string name="poi_denomination_pentecostal">聖靈降臨派</string>
+	<string name="poi_denomination_mormon">摩門教</string>
+	<string name="poi_denomination_jehovahs_witness">耶和華見證人</string>
+	<string name="poi_denomination_greek_orthodox">希臘正教</string>
+	<string name="poi_denomination_reformed">改革宗教會</string>
+	<string name="poi_denomination_seventh_day_adventist">基督復臨安息日會</string>
+	<string name="poi_denomination_episcopal">聖公會</string>
+	<string name="poi_denomination_shia">什葉派</string>
+	<string name="poi_denomination_united">聯合教會</string>
+	<string name="poi_denomination_greek_catholic">希臘天主教</string>
+	<string name="poi_denomination_tibetan">西藏</string>
+	<string name="poi_denomination_united_reformed">英國聯合歸正教會</string>
+	<string name="poi_denomination_church_of_scotland">蘇格蘭長老會</string>
+	<string name="poi_denomination_salvation_army">救世軍</string>
+	<string name="poi_denomination_iglesia_ni_cristo">基督堂教會</string>
+	<string name="poi_denomination_uniting">聯合教會</string>
+	<string name="poi_denomination_mennonite">門諾會</string>
+	<string name="poi_denomination_quaker">貴格會</string>
+	<string name="poi_denomination_bulgarian_orthodox">保加利亞東正教</string>
 	</resources>
