@@ -234,8 +234,8 @@ public class NotesFragment extends OsmAndListFragment {
 	}
 	
 	private File generateGPXForRecordings(ArrayList<Recording> selected) {
-		File cacheDir = getActivity().getCacheDir();
-		File tmpFile = new File(cacheDir, "noteLocations.gpx");
+		File tmpFile = getMyApplication().getAppPath("cache/noteLocations.gpx");
+		tmpFile.getParentFile().mkdirs();
 		GPXFile file = new GPXFile();
 		for(Recording r : selected) {
 			if(r != shareLocationFile) {
