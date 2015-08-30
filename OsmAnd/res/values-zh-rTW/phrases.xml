@@ -1060,4 +1060,23 @@
 	<string name="poi_foundation">基金會辦公室</string>
 	<string name="poi_tax_advisor">稅務顧問辦公室</string>
 
+	<string name="poi_religion_voodoo">巫毒教</string>
+	<string name="poi_religion_unitarian_universalist">一神普救派</string>
+	<string name="poi_religion_multifaith">多元宗教</string>
+	<string name="poi_religion_jain">耆那教</string>
+	<string name="poi_religion_spiritualist">唯靈論教</string>
+	<string name="poi_religion_bahai">巴海大同教</string>
+	<string name="poi_religion_scientologist">山達基教</string>
+	<string name="poi_religion_pagan">異教</string>
+	<string name="poi_religion_tenrikyo">天理教</string>
+	<string name="poi_religion_zoroastrian">祆教</string>
+
+	<string name="poi_denomination_catholic">天主教</string>
+	<string name="poi_denomination_baptist">浸信會</string>
+	<string name="poi_denomination_roman_catholic">羅馬天主教</string>
+	<string name="poi_denomination_orthodox">東正教</string>
+	<string name="poi_denomination_lutheran">路德教派</string>
+	<string name="poi_denomination_sunni">遜尼派</string>
+	<string name="poi_denomination_protestant">基督新教</string>
+	<string name="poi_denomination_methodist">衛理公會</string>
 	</resources>
