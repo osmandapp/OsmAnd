@@ -99,6 +99,9 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 	@Override
 	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
 		if(isActive()) {
+			if(distanceCalculatorLayer == null) {
+				registerLayers(activity);
+			}
 			if(!mapView.isLayerVisible(distanceCalculatorLayer)) {
 				activity.getMapView().addLayer(distanceCalculatorLayer, 4.5f);
 			}
