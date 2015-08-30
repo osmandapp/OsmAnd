@@ -470,12 +470,12 @@ public class RenderingRulesStorage {
 	public static void main(String[] args) throws XmlPullParserException, IOException {
 		STORE_ATTTRIBUTES = true;
 //		InputStream is = RenderingRulesStorage.class.getResourceAsStream("default.render.xml");
-		String file = "/Users/victorshcherb/osmand/repos/resources/rendering_styles/default.render.xml";
-		Map<String, String> renderingConstants = new LinkedHashMap<String, String>();
-		InputStream is = new FileInputStream(file);
-		if(args != null && args.length > 0) {
-			is = new FileInputStream(args[0]);
+		String defaultFile = "/Users/victorshcherb/osmand/repos/resources/rendering_styles/default.render.xml";
+		if(args.length > 0) {
+			defaultFile = args[0];
 		}
+		Map<String, String> renderingConstants = new LinkedHashMap<String, String>();
+		InputStream is = new FileInputStream(defaultFile);
 		try {
 			XmlPullParser parser = PlatformUtil.newXMLPullParser();
 			parser.setInput(is, "UTF-8");
@@ -494,7 +494,6 @@ public class RenderingRulesStorage {
 		} finally {
 			is.close();
 		}
-		is = new FileInputStream(file);
 		RenderingRulesStorage storage = new RenderingRulesStorage("default", renderingConstants);
 		final RenderingRulesStorageResolver resolver = new RenderingRulesStorageResolver() {
 			@Override
@@ -504,6 +503,7 @@ public class RenderingRulesStorage {
 				return depends;
 			}
 		};
+		is = new FileInputStream(defaultFile);
 		storage.parseRulesFromXmlInputStream(is, resolver);
 		
 //		storage = new RenderingRulesStorage("", null);
