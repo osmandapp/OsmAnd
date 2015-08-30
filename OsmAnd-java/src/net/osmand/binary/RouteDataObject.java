@@ -204,11 +204,16 @@ public class RouteDataObject {
 		return types;
 	}
 	
-	public float getMaximumSpeed(){
+	public float getMaximumSpeed(boolean direction){
 		int sz = types.length;
         float maxSpeed = 0;
 		for (int i = 0; i < sz; i++) {
 			RouteTypeRule r = region.quickGetEncodingRule(types[i]);
+			if(r.isForward() != 0) {
+				if((r.isForward() > 1) != direction) {
+					continue;
+				}
+			}
             float mx = r.maxSpeed();
             if (mx > 0) {
                 maxSpeed = mx;

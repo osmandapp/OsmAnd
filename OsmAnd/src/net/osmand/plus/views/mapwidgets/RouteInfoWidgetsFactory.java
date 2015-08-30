@@ -34,6 +34,7 @@ import net.osmand.plus.views.controls.MapRouteInfoControl;
 import net.osmand.router.RouteResultPreparation;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -298,7 +299,14 @@ public class RouteInfoWidgetsFactory {
 				if ((rh == null || !rh.isFollowingMode()) && trackingUtilities.isMapLinkedToLocation()) {
 					RouteDataObject ro = locationProvider.getLastKnownRouteSegment();
 					if(ro != null) {
-						mx = ro.getMaximumSpeed();
+						boolean direction = true;
+						Location loc = locationProvider.getLastKnownLocation();
+						if(loc != null && loc.hasBearing()) {
+							double diff = MapUtils.alignAngleDifference(ro.directionRoute(0, true) -  
+									loc.getBearing() / (2 * Math.PI));
+							direction = Math.abs(diff) < Math.PI;
+						}
+						mx = ro.getMaximumSpeed(direction);
 					}
 				} else {
 					mx = rh.getCurrentMaxSpeed();

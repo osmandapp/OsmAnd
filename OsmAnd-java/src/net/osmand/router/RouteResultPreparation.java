@@ -310,7 +310,7 @@ public class RouteResultPreparation {
 				additional.append("rtime = \"").append(res.getRoutingTime()).append("\" ");
 				additional.append("name = \"").append(name).append("\" ");
 //				float ms = res.getSegmentSpeed();
-				float ms = res.getObject().getMaximumSpeed();
+				float ms = res.getObject().getMaximumSpeed(res.isForwardDirection());
 				if(ms > 0) {
 					additional.append("maxspeed = \"").append(ms * 3.6f).append("\" ").append(res.getObject().getHighway()).append(" ");
 				}
