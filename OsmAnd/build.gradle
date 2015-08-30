@@ -19,7 +19,7 @@ apply plugin: 'com.android.application'
 
 android {
 	compileSdkVersion 21
-	buildToolsVersion "24.3.4"
+	buildToolsVersion "23.0.0"
 
 	signingConfigs {
 		development {
