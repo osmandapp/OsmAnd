@@ -1061,4 +1061,13 @@
 	<string name="poi_tax_advisor">Asesor fiscal</string>
 
 	<string name="poi_military_office">Oficina militar</string>
+	<string name="poi_religion_voodoo">Vudú</string>
+	<string name="poi_religion_unitarian_universalist">Unitariano universalista</string>
+	<string name="poi_religion_multifaith">Multireligioso</string>
+	<string name="poi_religion_jain">Jainista</string>
+	<string name="poi_religion_spiritualist">Espiritualista</string>
+	<string name="poi_religion_bahai">Bahaísta</string>
+	<string name="poi_religion_scientologist">Cienciologísta</string>
+	<string name="poi_religion_pagan">Pagano</string>
+	<string name="poi_religion_tenrikyo">Tenrikyō</string>
 	</resources>
