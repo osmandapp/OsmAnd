@@ -1087,7 +1087,7 @@
 	<string name="poi_denomination_orthodox">Ortodoks</string>
 	<string name="poi_denomination_lutheran">Luthersk</string>
 	<string name="poi_denomination_sunni">Sunni</string>
-	<string name="poi_denomination_protestant">Protestantisk</string>
+	<string name="poi_denomination_protestant">Protestant</string>
 	<string name="poi_denomination_methodist">Methodist</string>
 	<string name="poi_denomination_anglican">Anglikansk</string>
 	<string name="poi_denomination_presbyterian">Presbyteriansk</string>
@@ -1095,14 +1095,14 @@
 	<string name="poi_denomination_russian_orthodox">Russisk-ortodoks</string>
 	<string name="poi_denomination_pentecostal">Pinsebevægelsen</string>
 	<string name="poi_denomination_mormon">Mormon</string>
-	<string name="poi_denomination_jehovahs_witness">Jehovahs vidner</string>
+	<string name="poi_denomination_jehovahs_witness">Jehovahs Vidner</string>
 	<string name="poi_denomination_reformed">Reformeret</string>
 	<string name="poi_denomination_episcopal">Episkopal</string>
 	<string name="poi_denomination_greek_catholic">Græsk-katolsk</string>
 	<string name="poi_denomination_tibetan">Tibetansk</string>
-	<string name="poi_denomination_salvation_army">Frelsens hær</string>
+	<string name="poi_denomination_salvation_army">Frelsens Hær</string>
 	<string name="poi_denomination_quaker">Kvæker</string>
-	<string name="poi_denomination_bulgarian_orthodox">Bulgarsk ortodoks</string>
+	<string name="poi_denomination_bulgarian_orthodox">Bulgarsk-ortodoks</string>
 	<string name="poi_denomination_adventist">Adventist</string>
 	<string name="poi_denomination_serbian_orthodox">Serbisk-ortodoks</string>
 	<string name="poi_denomination_spiritist">Spiritist</string>
@@ -1111,14 +1111,14 @@
 	<string name="poi_denomination_apostolic">Apostolsk</string>
 	<string name="poi_denomination_latter_day_saints">Sidste dages hellige</string>
 	<string name="poi_denomination_church_of_christ">Kristi kirke</string>
-	<string name="poi_denomination_georgian_orthodox">Georgisk ortodoks</string>
-	<string name="poi_denomination_romanian_orthodox">Rumænsk ortodoks</string>
-	<string name="poi_denomination_ethiopian_orthodox_tewahedo">Etiopisk ortodoks tewahedo</string>
-	<string name="poi_denomination_coptic_orthodox">Koptisk ortodoks</string>
+	<string name="poi_denomination_georgian_orthodox">Georgisk-ortodoks</string>
+	<string name="poi_denomination_romanian_orthodox">Rumænsk-ortodoks</string>
+	<string name="poi_denomination_ethiopian_orthodox_tewahedo">Etiopisk-ortodoks tewahedo</string>
+	<string name="poi_denomination_coptic_orthodox">Koptisk-ortodoks</string>
 	<string name="poi_denomination_mahayana">Mahayana</string>
 
 	<string name="poi_religion_unitarian_universalist">Unitarisk universalistisk</string>
-	<string name="poi_religion_multifaith">Multitro</string>
+	<string name="poi_religion_multifaith">Multireligiøse</string>
 	<string name="poi_religion_jain">Jainisme</string>
 	<string name="poi_religion_spiritualist">Spiritist</string>
 	<string name="poi_religion_bahai">Bahai</string>
@@ -1127,7 +1127,7 @@
 	<string name="poi_religion_zoroastrian">Zarathustrisme</string>
 
 	<string name="poi_denomination_greek_orthodox">Græsk-ortodoks</string>
-	<string name="poi_denomination_seventh_day_adventist">Syvende dags adventist</string>
+	<string name="poi_denomination_seventh_day_adventist">Syvende Dags Adventist</string>
 	<string name="poi_denomination_new_apostolic">Nyapostolsk</string>
 	<string name="poi_denomination_church_of_england">Den engelske kirke</string>
 	<string name="poi_denomination_shia">Shiisme</string>
@@ -1147,7 +1147,7 @@
 	<string name="poi_denomination_shaktism">Shaktism</string>
 	<string name="poi_denomination_shingon_shu">Shingon buddhisme</string>
 	<string name="poi_denomination_maronite">Maronit</string>
-	<string name="poi_denomination_reform">Reformerte</string>
+	<string name="poi_denomination_reform">Reformert</string>
 	<string name="poi_denomination_united">Forenede</string>
 	<string name="poi_denomination_uniting">Forenende</string>
 	<string name="poi_denomination_scientist">Videnskab</string>
