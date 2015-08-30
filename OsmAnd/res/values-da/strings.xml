@@ -2119,4 +2119,6 @@
 	<string name="opening_at">Åbner</string>
 	<string name="closing_at">Lukker</string>
 <string name="basic_tab_title">Basis</string>
-	</resources>
+	<string name="av_locations_descr">Gpx fil med note placeringer</string>
+    <string name="av_locations">Placeringer</string>
+    </resources>
