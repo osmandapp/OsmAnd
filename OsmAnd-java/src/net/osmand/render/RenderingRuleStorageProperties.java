@@ -19,6 +19,9 @@ public class RenderingRuleStorageProperties {
 	public static final String TEST = "test";
 	public static final String DISABLE = "disable";
 	
+	
+	public static final String TEXT_ITALIC = "textItalic";
+	public static final String TEXT_BOLD= "textBold";
 	public static final String TEXT_LENGTH = "textLength";
 	public static final String NAME_TAG = "nameTag";
 	public static final String NAME_TAG2 = "nameTag2";
@@ -59,7 +62,6 @@ public class RenderingRuleStorageProperties {
 	public static final String COLOR_0 = "color_0";
 	public static final String COLOR__1 = "color__1";
 	public static final String COLOR__2 = "color__2";
-	public static final String TEXT_BOLD = "textBold";
 	public static final String TEXT_ORDER = "textOrder";
 	public static final String ICON_ORDER = "iconOrder";
 	public static final String ICON_VISIBLE_SIZE = "iconVisibleSize";
@@ -134,6 +136,7 @@ public class RenderingRuleStorageProperties {
 	public RenderingRuleProperty R_COLOR__1;
 	public RenderingRuleProperty R_COLOR__2;
 	public RenderingRuleProperty R_TEXT_BOLD;
+	public RenderingRuleProperty R_TEXT_ITALIC;
 	public RenderingRuleProperty R_TEXT_ORDER;
 	public RenderingRuleProperty R_ICON_ORDER;
 	public RenderingRuleProperty R_TEXT_MIN_DISTANCE;
@@ -231,6 +234,7 @@ public class RenderingRuleStorageProperties {
 		R_TEXT_COLOR = registerRuleInternal(RenderingRuleProperty.createOutputColorProperty(TEXT_COLOR));
 
 		R_TEXT_BOLD = registerRuleInternal(RenderingRuleProperty.createOutputBooleanProperty(TEXT_BOLD));
+		R_TEXT_ITALIC = registerRuleInternal(RenderingRuleProperty.createOutputBooleanProperty(TEXT_ITALIC));
 		R_TEXT_ON_PATH = registerRuleInternal(RenderingRuleProperty.createOutputBooleanProperty(TEXT_ON_PATH));
 
 		// point
