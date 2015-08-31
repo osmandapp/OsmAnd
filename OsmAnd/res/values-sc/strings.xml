@@ -265,7 +265,7 @@
     <string name="cancel_navigation">Firma su nàvigu</string>
     <string name="clear_destination">Burra sa destinatzione</string>
     <string name="download_using_mobile_internet">Sa connessione WiFi non est ativa. Boles sighire a iscarrigare impreande sa connessione internet atuale?</string>
-    <string name="street_name">Istrada</string>
+    <string name="street_name">Nùmene istrada</string>
 	<string name="hno">Nùmeru tzivicu</string>
     <string name="website">Giassu web</string>
 	<string name="phone">Telèfonu</string>
@@ -2068,4 +2068,12 @@
 	<string name="next_proceed">Imbeniente</string>
 	<string name="opening_at">Aberit a sas</string>
 	<string name="closing_at">Serrat a sas</string>
-</resources>
+<string name="av_locations_descr">Documentu gpx cun notas locales</string>
+    <string name="av_locations">Localidades</string>
+    <string name="tag_poi_name">nùmene</string>
+	<string name="contact_info">Informatziones de cuntatu</string>
+	<string name="description">Descritzione</string>
+	<string name="add_opening_hours">Annanghe s’oràriu de abertura</string>
+	<string name="poi_dialog_poi_type">Casta de PDI</string>
+<string name="tag_poi_amenity">atraidura</string>
+	</resources>

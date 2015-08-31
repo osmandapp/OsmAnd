@@ -1204,7 +1204,7 @@
 \n\t* Filtre de Kalman pour la boussole\n\t* Support des montres Pebble "
     </string>
     
-	<string name="street_name">Rue</string>
+	<string name="street_name">Nom de la rue</string>
 	<string name="hno">Numéro de bâtiment</string>
     <string name="tip_recent_changes_1_3_t">"Changements en 1.3 :\n\t* Support des écrans larges comme les tablettes\n\t* Thème Holo\n\t* Options de stabilisation du compas\n\t* Le bouton en haut à gauche de l\'écran remplace le bouton Menu. "</string>
     <string name="monitoring_settings">Enregistrement de traces</string>
@@ -2134,4 +2134,5 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="next_proceed">Suivant</string>
 	<string name="opening_at">Ouverture à</string>
 	<string name="closing_at">Fermeture à</string>
-</resources>
+<string name="tag_poi_name">nom</string>
+	</resources>
