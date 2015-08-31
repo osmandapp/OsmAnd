@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="av_locations_descr">Gpx file with note locations</string>
+    <string name="av_locations">Locations</string>
     <string name="plugin_settings">Plugins</string>
 	<string name="routing_attr_avoid_shuttle_train_name">Avoid shuttle train</string>
 	<string name="routing_attr_avoid_shuttle_train_description">Avoid shuttle train</string>

@@ -2156,4 +2156,6 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="next_proceed">Avanti</string>
 	<string name="opening_at">Apre alle</string>
 	<string name="closing_at">Chiude alle</string>
-</resources>
+<string name="av_locations_descr">File gpx con note locali</string>
+    <string name="av_locations">Località</string>
+    </resources>

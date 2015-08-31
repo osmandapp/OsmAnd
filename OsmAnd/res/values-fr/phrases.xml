@@ -1032,4 +1032,6 @@
 	<string name="poi_recycling_low_energy_bulbs">Ampoules basse consommation</string>
 	<string name="poi_building">Bâtiment</string>
 
-</resources>
+<string name="poi_political_party">Bureau de parti politique</string>
+	<string name="poi_notary">Notaire</string>
+	</resources>

@@ -1,10 +1,15 @@
 package net.osmand.plus.audionotes;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import net.osmand.data.PointDescription;
+import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -17,12 +22,7 @@ import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.FavoritesActivity;
-import net.osmand.plus.osmedit.OpenstreetmapPoint;
-import net.osmand.plus.osmedit.OpenstreetmapRemoteUtil;
-import net.osmand.plus.osmedit.OsmBugsRemoteUtil;
-import net.osmand.plus.osmedit.OsmNotesPoint;
-import net.osmand.plus.osmedit.OsmPoint;
-import net.osmand.plus.osmedit.OsmEditsFragment.BackupOpenstreetmapPointAsyncTask;
+import net.osmand.util.Algorithms;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -32,8 +32,8 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.FileProvider;
 import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.PopupMenu;
 import android.view.LayoutInflater;
@@ -67,6 +67,7 @@ public class NotesFragment extends OsmAndListFragment {
 	private ActionMode actionMode;
 
 	private ArrayList<AudioVideoNotesPlugin.Recording> selected = new ArrayList<>();
+	Recording shareLocationFile = new Recording(new File("."));
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -218,21 +219,62 @@ public class NotesFragment extends OsmAndListFragment {
 		Intent intent = new Intent();
 		intent.setAction(Intent.ACTION_SEND_MULTIPLE);
 		intent.setType("image/*"); /* This example is sharing jpeg images. */
-
 		ArrayList<Uri> files = new ArrayList<Uri>();
-
 		for(Recording path : selected) {
-		    files.add(Uri.fromFile(path.getFile()));
+			if(path == shareLocationFile) {
+				File fl = generateGPXForRecordings(selected);
+				if(fl != null) {
+					files.add(FileProvider.getUriForFile(getActivity(), "net.osmand.fileprovider", fl));
+				}
+			} else {
+				File src = path.getFile();
+				File dst = new File(getActivity().getCacheDir(), "share/"+src.getName());
+				try {
+					Algorithms.fileCopy(src, dst);
+					files.add(FileProvider.getUriForFile(getActivity(), "net.osmand.fileprovider", dst));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 		intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, files);
+		intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 		startActivity(Intent.createChooser(intent, getString(R.string.share_note)));
 	}
 	
+	private File generateGPXForRecordings(ArrayList<Recording> selected) {
+//		File tmpFile = getMyApplication().getAppPath("cache/noteLocations.gpx");
+		File tmpFile = new File(getActivity().getCacheDir(), "share/noteLocations.gpx");
+		tmpFile.getParentFile().mkdirs();
+		GPXFile file = new GPXFile();
+		for(Recording r : selected) {
+			if(r != shareLocationFile) {
+				String desc = r.getDescriptionName(r.getFileName());
+				if(desc == null) {
+					desc = r.getFileName();
+				}
+				WptPt wpt = new WptPt();
+				wpt.lat = r.getLatitude();
+				wpt.lon = r.getLongitude();
+				wpt.name = desc;
+				wpt.link = r.getFileName();
+				wpt.time = r.getFile().lastModified();
+				wpt.category = r.getSearchHistoryType();
+				file.points.add(wpt);
+			}
+		}
+		GPXUtilities.writeGpxFile(tmpFile, file, getMyApplication());
+		return tmpFile;
+	}
+
 	private void enterDeleteMode(final int type) {
 		actionMode = getActionBarActivity().startSupportActionMode(new ActionMode.Callback() {
 
 			@Override
 			public boolean onCreateActionMode(final ActionMode mode, Menu menu) {
+				if(type == MODE_SHARE) {
+					listAdapter.insert(shareLocationFile, 0);
+				}
 				enableSelectionMode(true);
 				MenuItem item;
 				if(type == MODE_DELETE) {
@@ -271,6 +313,9 @@ public class NotesFragment extends OsmAndListFragment {
 
 			@Override
 			public void onDestroyActionMode(ActionMode mode) {
+				if(type == MODE_SHARE) {
+					listAdapter.remove(shareLocationFile);
+				}
 				enableSelectionMode(false);
 				listAdapter.notifyDataSetInvalidated();
 			}
@@ -307,10 +352,14 @@ public class NotesFragment extends OsmAndListFragment {
 			}
 
 			final AudioVideoNotesPlugin.Recording recording = getItem(position);
-			Drawable icon = DashAudioVideoNotesFragment.getNoteView(recording, row, getMyApplication());
-			icon.setColorFilter(getResources().getColor(R.color.color_distance), Mode.MULTIPLY);
-			((ImageView) row.findViewById(R.id.play)).setImageDrawable(getMyApplication().getIconsCache()
-					.getContentIcon(R.drawable.ic_play_dark));
+			if (recording == shareLocationFile) {
+				((TextView) row.findViewById(R.id.name)).setText(R.string.av_locations);
+				((TextView) row.findViewById(R.id.descr)).setText(R.string.av_locations_descr);
+			} else {
+				DashAudioVideoNotesFragment.getNoteView(recording, row, getMyApplication());
+			}
+//			((ImageView) row.findViewById(R.id.play)).setImageDrawable(getMyApplication().getIconsCache()
+//					.getContentIcon(R.drawable.ic_play_dark));
 			row.findViewById(R.id.play).setVisibility(View.GONE);
 			
 			

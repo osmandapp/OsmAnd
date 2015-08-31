@@ -1946,4 +1946,20 @@
 	<string name="successfully_uploaded_pattern">Uspešno poslano {0}/{1}</string>
 	<string name="try_again">Poskusi znova</string>
 	<string name="error_message_pattern">Napaka: {0}</string>
-</resources>
+<string name="plugin_settings">Vstavki</string>
+	<string name="dahboard_options_dialog_title">Možnosti nadzorne plošče</string>
+	<string name="shared_string_card_was_hidden">Kartica je bila skrita</string>
+	<string name="shared_string_undo">Razveljavi</string>
+	<string name="shared_string_skip">Preskoči</string>
+	<string name="app_name_osmand">OsmAnd</string>
+	<string name="commit_poi">Objavi točko POI</string>
+	<string name="basic_tab_title">Osnovno</string>
+	<string name="extended_tab_title">Razširjeno</string>
+	<string name="building_number">Številka zgradbe</string>
+	<string name="next_proceed">Naslenja</string>
+	<string name="opening_at">Odpiralni čas ob</string>
+	<string name="closing_at">Zapiralni čas ob</string>
+<string name="routing_attr_avoid_shuttle_train_name">Izogni se vožnji z vlakom</string>
+	<string name="routing_attr_avoid_shuttle_train_description">Izogni se vožnji z vlakom</string>
+    <string name="offline_maps_and_navigation">Zemljevidi za delo brez\npovezave in navigacijo</string>
+	</resources>

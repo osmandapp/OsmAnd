@@ -11,6 +11,10 @@
     -->
 
     <!-- Not translatable -->
+    <string name="last_release">
+        - New road indexes (including)
+        - 
+        </string>
     <string name="ga_api_key">UA-28342846-2</string>
     <string name="ga_dispatchPeriod">10</string>
     <string name="ga_debug">true</string>

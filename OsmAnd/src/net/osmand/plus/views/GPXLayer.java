@@ -302,7 +302,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		for (SelectedGpxFile g : selectedGPXFiles) {
 			List<TrkSegment> points = g.getPointsToDisplay();
 			boolean routePoints = g.isRoutePoints();
-			updatePaints(g.getColor(), g.isShowCurrentTrack(), routePoints, settings, tileBox);
+			updatePaints(g.getColor(), routePoints, g.isShowCurrentTrack(), settings, tileBox);
 			drawSegments(canvas, tileBox, points);
 		}
 	}

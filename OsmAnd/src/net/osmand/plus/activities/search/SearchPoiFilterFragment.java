@@ -285,6 +285,9 @@ public class SearchPoiFilterFragment extends OsmAndListFragment implements Searc
 					icon.setImageDrawable(null);
 				}
 				name = st.getTranslation();
+				if(st.isAdditional()) {
+					name += " (" + ((PoiType) st).getParentType().getTranslation() + ")"; 
+				}
 			}
 			label.setText(name);
 			return (row);

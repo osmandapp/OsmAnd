@@ -36,6 +36,10 @@ public class TextRenderer {
 	private Paint paintText;
 	private final Context context;
 	private Paint paintIcon;
+	private Typeface defaultTypeface;
+	private Typeface boldItalicTypeface;
+	private Typeface italicTypeface;
+	private Typeface boldTypeface;
 
 	static class TextDrawInfo {
 
@@ -56,6 +60,7 @@ public class TextRenderer {
 		int textShadow = 0;
 		int textWrap = 0;
 		boolean bold = false;
+		boolean italic = false;
 		String shieldRes = null;
 		String shieldResIcon = null;
 		int textOrder = 100;
@@ -78,6 +83,7 @@ public class TextRenderer {
 			}
 			textWrap = (int) rc.getComplexValue(render, render.ALL.R_TEXT_WRAP_WIDTH);
 			bold = render.getIntPropertyValue(render.ALL.R_TEXT_BOLD, 0) > 0;
+			italic = render.getIntPropertyValue(render.ALL.R_TEXT_ITALIC, 0) > 0;
 			minDistance = rc.getComplexValue(render, render.ALL.R_TEXT_MIN_DISTANCE);
 			if (render.isSpecified(render.ALL.R_TEXT_SHIELD)) {
 				shieldRes = render.getStringPropertyValue(render.ALL.R_TEXT_SHIELD);
@@ -96,11 +102,16 @@ public class TextRenderer {
 		paintText.setStrokeWidth(1);
 		paintText.setColor(Color.BLACK);
 		paintText.setTextAlign(Align.CENTER);
-		paintText.setTypeface(Typeface.create("Droid Serif", Typeface.NORMAL)); //$NON-NLS-1$
+		defaultTypeface = Typeface.create("Droid Serif", Typeface.NORMAL);
+		boldItalicTypeface = Typeface.create("Droid Serif", Typeface.BOLD_ITALIC);
+		italicTypeface = Typeface.create("Droid Serif", Typeface.ITALIC);
+		boldTypeface = Typeface.create("Droid Serif", Typeface.BOLD);
+		paintText.setTypeface(defaultTypeface); //$NON-NLS-1$
 		paintText.setAntiAlias(true);
 
 		paintIcon = new Paint();
 		paintIcon.setStyle(Style.STROKE);
+		
 	}
 
 	public Paint getPaintText() {
@@ -232,7 +243,17 @@ public class TextRenderer {
 				// sest text size before finding intersection (it is used there)
 				float textSize = text.textSize * rc.textScale ;
 				paintText.setTextSize(textSize);
+				if(text.bold && text.italic) {
+					paintText.setTypeface(boldItalicTypeface);
+				} else if(text.bold) {
+					paintText.setTypeface(boldTypeface);
+				} else if(text.italic) {
+					paintText.setTypeface(italicTypeface);
+				} else {
+					paintText.setTypeface(defaultTypeface);
+				}
 				paintText.setFakeBoldText(text.bold);
+				
 				paintText.setColor(text.textColor);
 				// align center y
 				text.centerY += (-paintText.ascent());

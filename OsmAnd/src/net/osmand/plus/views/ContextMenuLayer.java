@@ -43,6 +43,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		public PointDescription getObjectName(Object o);
 
 		public boolean disableSingleTap();
+		
 		public boolean disableLongPressOnMap();
 	}
 	
@@ -229,20 +230,17 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		}
 
 		if (disableLongPressOnMap()) {
-			LatLon latLon = selectObjectsForContextMenu(tileBox, point);
-			if (latLon != null) {
-				String description = getSelectedObjectDescription();
-				setLocation(latLon, description);
-				view.refreshMap();
-				return true;
-			} else {
-				return false;
-			}
+			return false;
 		}
-
-		final double lat = tileBox.getLatFromPixel((int) point.x, (int) point.y);
-		final double lon = tileBox.getLonFromPixel((int) point.x, (int) point.y);
-		setLocation(new LatLon(lat, lon), null);
+		LatLon latLon = selectObjectsForContextMenu(tileBox, point);
+		if (latLon != null) {
+			String description = getSelectedObjectDescription();
+			setLocation(latLon, description);
+		} else {
+			final double lat = tileBox.getLatFromPixel((int) point.x, (int) point.y);
+			final double lon = tileBox.getLonFromPixel((int) point.x, (int) point.y);
+			setLocation(new LatLon(lat, lon), null);
+		}
 		view.refreshMap();
 		return true;
 	}
@@ -262,8 +260,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	public boolean disableLongPressOnMap() {
 		boolean res = false;
-		for(OsmandMapLayer lt : view.getLayers()){
-			if(lt instanceof ContextMenuLayer.IContextMenuProvider) {
+		for (OsmandMapLayer lt : view.getLayers()) {
+			if (lt instanceof ContextMenuLayer.IContextMenuProvider) {
 				if (((IContextMenuProvider) lt).disableLongPressOnMap()) {
 					res = true;
 					break;
