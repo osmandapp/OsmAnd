@@ -61,8 +61,8 @@ public class EditPoiFragment extends Fragment {
 	public static final String TAG = "EditPoiFragment";
 	private static final Log LOG = PlatformUtil.getLog(EditPoiFragment.class);
 
-	private static final String KEY_AMENITY_NODE = "amenity_node";
-	private static final String KEY_AMENITY = "amenity";
+	private static final String KEY_AMENITY_NODE = "key_amenity_node";
+	private static final String KEY_AMENITY = "key_amenity";
 	private static final String TAGS_LIST = "tags_list";
 
 	private final EditPoiData editPoiData = new EditPoiData();
@@ -114,6 +114,34 @@ public class EditPoiFragment extends Fragment {
 			editPoiData.tags = (LinkedHashSet<Tag>) savedInstanceState.getSerializable(TAGS_LIST);
 		} else {
 			editPoiData.tags = new LinkedHashSet<>();
+			LOG.debug("node.tags=" + node.getTags());
+
+			tryAddTag(OSMSettings.OSMTagKey.ADDR_STREET.getValue(),
+					node.getTag(OSMSettings.OSMTagKey.ADDR_STREET));
+			tryAddTag(OSMSettings.OSMTagKey.ADDR_HOUSE_NUMBER.getValue(),
+					node.getTag(OSMSettings.OSMTagKey.ADDR_HOUSE_NUMBER));
+			tryAddTag(OSMSettings.OSMTagKey.PHONE.getValue(),
+					editPoiData.amenity.getPhone());
+			tryAddTag(OSMSettings.OSMTagKey.WEBSITE.getValue(),
+					editPoiData.amenity.getSite());
+			for (String tag : node.getTagKeySet()) {
+				tryAddTag(tag, node.getTag(tag));
+			}
+			String subType = editPoiData.amenity.getSubType();
+			String key;
+			String value;
+			if (allTranslatedSubTypes.get(subType) != null) {
+				PoiType pt = allTranslatedSubTypes.get(subType);
+				key = pt.getOsmTag();
+				value = pt.getOsmValue();
+			} else {
+				key = editPoiData.amenity.getType().getDefaultTag();
+				value = subType;
+			}
+			final Tag tag = new Tag(key, value);
+			editPoiData.tags.remove(tag);
+			tag.tag = POI_TYPE_TAG;
+			editPoiData.tags.add(tag);
 		}
 
 		View view = inflater.inflate(R.layout.fragment_edit_poi, container, false);
@@ -193,6 +221,7 @@ public class EditPoiFragment extends Fragment {
 				}
 			}
 		});
+		poiNameEditText.setText(node.getTag(OSMSettings.OSMTagKey.NAME));
 		poiTypeTextInputLayout = (TextInputLayout) view.findViewById(R.id.poiTypeTextInputLayout);
 		poiTypeEditText = (AutoCompleteTextView) view.findViewById(R.id.poiTypeEditText);
 		poiTypeEditText.addTextChangedListener(new TextWatcher() {
@@ -305,6 +334,12 @@ public class EditPoiFragment extends Fragment {
 		return view;
 	}
 
+	private void tryAddTag(String key, String value) {
+		if (!Algorithms.isEmpty(value)) {
+			editPoiData.tags.add(new Tag(key, value));
+		}
+	}
+
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		outState.putSerializable(TAGS_LIST, editPoiData.tags);
@@ -412,8 +447,9 @@ public class EditPoiFragment extends Fragment {
 		});
 	}
 
-	public static void showEditInstance(final Amenity amenity, OsmandSettings settings,
+	public static void showEditInstance(final Amenity amenity,
 										final MapActivity mapActivity) {
+		final OsmandSettings settings = mapActivity.getMyApplication().getSettings();
 		final OpenstreetmapUtil openstreetmapUtilToLoad;
 		if (settings.OFFLINE_EDITION.get() || !settings.isInternetConnectionAvailable(true)) {
 			OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
@@ -427,15 +463,16 @@ public class EditPoiFragment extends Fragment {
 
 			@Override
 			protected Node doInBackground(Void... params) {
-				return openstreetmapUtilToLoad.loadNode((Amenity) amenity);
+				return openstreetmapUtilToLoad.loadNode(amenity);
 			}
 
 			protected void onPostExecute(Node n) {
 				if (n != null) {
 					EditPoiFragment fragment =
-							EditPoiFragment.createInstance(n, (Amenity) amenity);
+							EditPoiFragment.createInstance(n, amenity);
 					mapActivity.getSupportFragmentManager().beginTransaction()
-							.add(fragment, "EditPoiFragment").commit();
+							.add(R.id.fragmentContainer, fragment, "EditPoiFragment")
+							.addToBackStack(null).commit();
 				} else {
 					AccessibleToast.makeText(mapActivity,
 							mapActivity.getString(R.string.poi_error_poi_not_found),

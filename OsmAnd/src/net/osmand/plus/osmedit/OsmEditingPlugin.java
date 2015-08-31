@@ -28,7 +28,6 @@ import net.osmand.plus.activities.EnumAdapter;
 import net.osmand.plus.activities.EnumAdapter.IEnumWithResource;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity;
-import net.osmand.plus.dashboard.DashPluginsFragment;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.myplaces.AvailableGPXFragment;
 import net.osmand.plus.myplaces.AvailableGPXFragment.GpxInfo;
@@ -171,13 +170,11 @@ public class OsmEditingPlugin extends OsmandPlugin {
 					osmBugsLayer.openBug(latitude, longitude);
 				} else if (resId == R.string.poi_context_menu_delete) {
 					LOG.debug("delete poi");
-//					new EditPoiFragment.ShowDeleteDialogAsyncTask(mapActivity)
-//							.execute((Amenity) selectedObj);
-					// TODO implement delete
-					getPoiActions(mapActivity).showDeleteDialog((Amenity) selectedObj);
+					new EditPoiFragment.ShowDeleteDialogAsyncTask(mapActivity)
+							.execute((Amenity) selectedObj);
 				} else if (resId == R.string.poi_context_menu_modify) {
-					// TODO implement edit
-					getPoiActions(mapActivity).showEditDialog((Amenity) selectedObj);
+					LOG.debug("edit poi");
+					EditPoiFragment.showEditInstance((Amenity) selectedObj, mapActivity);
 				}
 				return true;
 			}

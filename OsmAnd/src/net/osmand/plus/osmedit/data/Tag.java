@@ -21,7 +21,6 @@ public class Tag implements Serializable {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		Tag tag1 = (Tag) o;
-		LOG.debug("this=" + this + "; that=" + tag1);
 		return tag.equals(tag1.tag);
 	}
 

@@ -139,9 +139,9 @@ public class EditingPOIDialogProvider implements DialogProvider {
 				} else {
 					AccessibleToast.makeText(activity, activity.getString(R.string.poi_error_poi_not_found), Toast.LENGTH_SHORT).show();
 				}
-			};
+			}
 
-		}.execute(new Void[0]);
+		}.execute();
 	}
 
 	public void showCreateDialog(double latitude, double longitude){

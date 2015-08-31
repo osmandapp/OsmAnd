@@ -140,6 +140,7 @@ public class BasicDataFragment extends Fragment {
 				mIsUserInput = true;
 			}
 		};
+		mTagsChangedListener.onTagsChanged();
 		getData().addListener(mTagsChangedListener);
 	}
 
