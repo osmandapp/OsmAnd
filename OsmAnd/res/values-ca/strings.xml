@@ -2103,4 +2103,5 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
 	<string name="next_proceed">Següent</string>
 	<string name="opening_at">Obert a les</string>
 	<string name="closing_at">Tanquen a les</string>
-</resources>
+<string name="av_locations">Ubicacions</string>
+    </resources>
