@@ -2091,4 +2091,6 @@
 	<string name="opening_at">營業于</string>
 	<string name="closing_at">結束于</string>
 <string name="next_proceed">下頁</string>
-	</resources>
+	<string name="av_locations_descr">Gpx 檔案偕同地點注解</string>
+    <string name="av_locations">地點</string>
+    </resources>
