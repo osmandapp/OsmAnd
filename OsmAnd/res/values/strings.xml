@@ -899,7 +899,7 @@
     <string name="cancel_navigation">Stop navigation</string>
     <string name="clear_destination">Clear destination</string>
     <string name="download_using_mobile_internet">Wi-Fi is currently not connected. Do you want to use the current Internet connection for downloading?</string>
-    <string name="street_name">Street</string>
+    <string name="street_name">Street name</string>
 	<string name="hno">House number</string>
     <string name="website">Web site</string>
 	<string name="phone">Phone</string>
@@ -1081,7 +1081,7 @@
     <string name="context_menu_item_intermediate_point">Add as waypoint</string>
     <string name="map_widget_intermediate_distance">Waypoint</string>
     <string name="ending_point_too_far">Ending point too far from nearest road.</string>
-    <string name="btn_add_tag">Add Tag</string>
+    <string name="add_tag">Add Tag</string>
     <string name="btn_advanced_mode">Advanced Mode…</string>
     <string name="poi_filter_parking">Parking</string>
     <string name="poi_filter_emergency">Emergency</string>
@@ -2240,10 +2240,16 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="app_name_osmand">OsmAnd</string>
 	<string name="offline_maps_and_navigation"><![CDATA[Offline Maps\n& Navigation]]></string>
 	<string name="commit_poi">Commit POI</string>
-	<string name="basic_tab_title">Basic</string>
-	<string name="extended_tab_title">Extended</string>
+	<string name="tab_title_basic">Basic</string>
+	<string name="tab_title_advanced">Advanced</string>
 	<string name="building_number">Building Number</string>
 	<string name="next_proceed">Next</string>
 	<string name="opening_at">Opening at</string>
 	<string name="closing_at">Closing at</string>
+	<string name="tag_poi_name">name</string>
+	<string name="tag_poi_amenity">amenity</string>
+	<string name="contact_info">Contact info</string>
+	<string name="description">Description</string>
+	<string name="add_opening_hours">Add opening hours</string>
+	<string name="poi_dialog_poi_type">POI Type</string>
 </resources>

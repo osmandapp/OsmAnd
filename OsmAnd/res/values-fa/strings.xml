@@ -192,7 +192,7 @@
     <string name="index_srtm_parts">بخش ها</string>
     <string name="map_widget_show_destination_arrow">نشان دادن جهت مقصد</string>
     <string name="no_route">مسیری وجود ندارد</string>
-	<string name="btn_add_tag">اضافه کردن برچسب</string>
+	<string name="add_tag">اضافه کردن برچسب</string>
     <string name="btn_advanced_mode">حالت پیشرفته…</string>
     <string name="show_warnings_title">مشاهده هشدار…</string>
 	<string name="use_compass_navigation">استفاده از قطب نما</string>

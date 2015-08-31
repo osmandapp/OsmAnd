@@ -686,7 +686,7 @@
     <string name="context_menu_item_intermediate_point">Engadir un punto de pasaxe</string>
     <string name="map_widget_intermediate_distance">Punto de pasaxe</string>
     <string name="ending_point_too_far">O punto final está demasiado lonxe da estrada máis próxima.</string>
-    <string name="btn_add_tag">Engadir unha etiqueta</string>
+    <string name="add_tag">Engadir unha etiqueta</string>
     <string name="btn_advanced_mode">Modo avanzado…</string>
     <string name="poi_filter_parking">Aparcamento</string>
     <string name="poi_filter_emergency">Urxencia</string>

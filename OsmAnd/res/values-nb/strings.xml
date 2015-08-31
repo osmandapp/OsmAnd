@@ -20,7 +20,7 @@
     <string name="context_menu_item_intermediate_point">Legg til som rutepunkt</string>
     <string name="map_widget_intermediate_distance">Rutepunkt</string>
     <string name="ending_point_too_far">Sluttpunkt for langt fra nærmeste vei.</string>
-    <string name="btn_add_tag">Legg til merke</string>
+    <string name="add_tag">Legg til merke</string>
     <string name="btn_advanced_mode">Avansert modus…</string>
     <string name="poi_filter_parking">Parkering</string>
     <string name="poi_filter_emergency">Nødsituasjon</string>

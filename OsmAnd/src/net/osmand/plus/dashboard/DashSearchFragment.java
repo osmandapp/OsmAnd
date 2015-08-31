@@ -33,7 +33,6 @@ public class DashSearchFragment extends DashBaseFragment {
 		((TextView) view.findViewById(R.id.search_for)).setTypeface(typeface);
 		((Button) view.findViewById(R.id.recents)).setTypeface(typeface);
 
-
 		return view;
 	}
 

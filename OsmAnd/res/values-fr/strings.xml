@@ -1048,7 +1048,7 @@
     <string name="context_menu_item_intermediate_point">Ajouter comme étape</string>
     <string name="map_widget_intermediate_distance">Étape</string>
     <string name="ending_point_too_far">Point d\'arrivée trop éloigné de la route la plus proche.</string>
-    <string name="btn_add_tag">Ajouter un attribut</string>
+    <string name="add_tag">Ajouter un attribut</string>
     <string name="btn_advanced_mode">Mode avancé…</string>
     <string name="poi_filter_parking">Parking</string>
     <string name="poi_filter_emergency">Urgences</string>
@@ -2128,8 +2128,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="offline_maps_and_navigation">Cartes hors-ligne\n&amp; Navigation</string>
 	<string name="commit_poi">Enregistrer le PI</string>
 <string name="plugin_settings">Greffons</string>
-	<string name="basic_tab_title">Basique</string>
-	<string name="extended_tab_title">Étendue</string>
+	<string name="tab_title_basic">Basique</string>
+	<string name="tab_title_advanced">Étendue</string>
 	<string name="building_number">Numéro de bâtiment</string>
 	<string name="next_proceed">Suivant</string>
 	<string name="opening_at">Ouverture à</string>

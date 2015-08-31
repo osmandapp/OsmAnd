@@ -239,7 +239,7 @@
   <string name="context_menu_item_intermediate_point">Bide puntu bezala gehitu</string>
   <string name="map_widget_intermediate_distance">Bide puntua</string>
   <string name="ending_point_too_far">Bukaera puntua errepide gertuenetik urrutiegi dago.</string>
-  <string name="btn_add_tag">Etiketa gehitu</string>
+  <string name="add_tag">Etiketa gehitu</string>
   <string name="btn_advanced_mode">Modu Aurreratua…</string>
   <string name="poi_filter_parking">Aparkalekua</string>
   <string name="poi_filter_emergency">Larrialdiak</string>

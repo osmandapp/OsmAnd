@@ -1108,7 +1108,7 @@
     <string name="arrived_at_intermediate_point">Ви вже досягнули проміжної точки</string>
     <string name="context_menu_item_intermediate_point">Додати проміжну точку</string>
     <string name="ending_point_too_far">Початок маршруту занадто далеко від найближчої дороги.</string>
-    <string name="btn_add_tag">Додати мітку</string>
+    <string name="add_tag">Додати мітку</string>
     <string name="btn_advanced_mode">Розширений режим…</string>
     <string name="poi_filter_parking">Стоянки</string>
     <string name="poi_filter_public_transport">Громадський транспорт</string>

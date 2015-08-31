@@ -1062,7 +1062,7 @@
 <string name="context_menu_item_intermediate_point">Aggiungi come punto intermedio</string>
 <string name="map_widget_intermediate_distance">Punto intermedio</string>
 <string name="ending_point_too_far">Punto finale troppo distante dalla strada più vicina.</string>
-<string name="btn_add_tag">Aggiungi etichetta</string>
+<string name="add_tag">Aggiungi etichetta</string>
 <string name="btn_advanced_mode">Modalità avanzata…</string>
 <string name="poi_filter_parking">Parcheggio</string>
 <string name="poi_filter_emergency">Emergenza</string>
@@ -2150,8 +2150,8 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="routing_attr_avoid_shuttle_train_name">Evita i treni navetta</string>
 	<string name="routing_attr_avoid_shuttle_train_description">Evita i treni navetta</string>
     <string name="commit_poi">Contribuisci il/i PDI</string>
-<string name="basic_tab_title">Semplice</string>
-	<string name="extended_tab_title">Esteso</string>
+<string name="tab_title_basic">Semplice</string>
+	<string name="tab_title_advanced">Esteso</string>
 	<string name="building_number">Numero civico</string>
 	<string name="next_proceed">Avanti</string>
 	<string name="opening_at">Apre alle</string>

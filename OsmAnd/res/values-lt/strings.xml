@@ -1085,7 +1085,7 @@
     <string name="context_menu_item_intermediate_point">Pridėti tarpinį tikslą</string>
     <string name="map_widget_intermediate_distance">Tarpinis tikslas</string>
     <string name="ending_point_too_far">Pradžios taškas per toli nuo artimiausio kelio.</string>
-    <string name="btn_add_tag">Pridėti žymą</string>
+    <string name="add_tag">Pridėti žymą</string>
     <string name="btn_advanced_mode">Eksperto režimas…</string>
     <string name="poi_filter_parking">Parkingas</string>
     <string name="poi_filter_emergency">Nelaimės atveju</string>

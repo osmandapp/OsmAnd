@@ -1036,7 +1036,7 @@ Você pode ativar (on-line ou em cache) fontes azulejo mapa, configurações de 
     <string name="arrived_at_intermediate_point">Você chegou ao seu ponto de passagem</string>
     <string name="map_widget_intermediate_distance">Ponto de passagem</string>
     <string name="ending_point_too_far">Destino muito longe da estrada mais próxima.</string>
-    <string name="btn_add_tag">Adicionar tag</string>
+    <string name="add_tag">Adicionar tag</string>
     
 	
 	<string name="rendering_attr_showRoadMaps_description">Selecione quando exibir mapas somente de estradas:</string>

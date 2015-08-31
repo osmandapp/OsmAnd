@@ -980,7 +980,7 @@
     <string name="arrived_at_intermediate_point">თქვენ მიაღწიეთ თქვენს დანიშნულების წერტილს</string>
     <string name="context_menu_item_intermediate_point">გზის წერტილად დამატება</string>
     <string name="ending_point_too_far">საბოლოო წერტილი მეტისმეტად სორსაა უახლოესი გზიდან.</string>
-    <string name="btn_add_tag">ჭდის დამატება</string>
+    <string name="add_tag">ჭდის დამატება</string>
     <string name="btn_advanced_mode">ზუსტი რეჟიმი…</string>
     <string name="poi_filter_parking">პარკინგი</string>
     <string name="poi_filter_emergency">სასწრაფო</string>

@@ -839,7 +839,7 @@
 	\n\t* El mapa no perd la posició després d\'interrupcions
 	\n\t* Permet activar el mode en segon pla durant la navegació
     </string>
-    <string name="btn_add_tag">Afegeix una etiqueta</string>
+    <string name="add_tag">Afegeix una etiqueta</string>
     <string name="poi_filter_entertainment">Entreteniment</string>
     <string name="context_menu_item_first_intermediate_point">Defineix el primer punt objectiu</string>
     <string name="context_menu_item_last_intermediate_point">Defineix el darrer punt objectiu</string>
@@ -2099,8 +2099,8 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
 <string name="routing_attr_avoid_shuttle_train_name">Evita tren llançadora</string>
 	<string name="routing_attr_avoid_shuttle_train_description">Evita tren llançadora</string>
     <string name="plugin_settings">Connectors</string>
-	<string name="basic_tab_title">Bàsic</string>
-	<string name="extended_tab_title">Estès</string>
+	<string name="tab_title_basic">Bàsic</string>
+	<string name="tab_title_advanced">Estès</string>
 	<string name="building_number">Nombre de finca</string>
 	<string name="next_proceed">Següent</string>
 	<string name="opening_at">Obert a les</string>

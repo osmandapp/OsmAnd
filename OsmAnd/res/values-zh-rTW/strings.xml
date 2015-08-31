@@ -28,7 +28,7 @@
     <string name="context_menu_item_intermediate_point">增為航點</string>
     <string name="map_widget_intermediate_distance">航點</string>
     <string name="ending_point_too_far">結束標點離最近的道路太遠。</string>
-    <string name="btn_add_tag">增加旗標</string>
+    <string name="add_tag">增加旗標</string>
     <string name="btn_advanced_mode">進階模式…</string>
     <string name="poi_filter_parking">停車場</string>
     <string name="poi_filter_emergency">緊急救助</string>
@@ -2085,8 +2085,8 @@
 <string name="routing_attr_avoid_shuttle_train_name">往返避開鐵路</string>
 	<string name="routing_attr_avoid_shuttle_train_description">往返避開鐵路</string>
     <string name="plugin_settings">外掛元件</string>
-	<string name="basic_tab_title">基本</string>
-	<string name="extended_tab_title">展開</string>
+	<string name="tab_title_basic">基本</string>
+	<string name="tab_title_advanced">展開</string>
 	<string name="building_number">門牌號碼</string>
 	<string name="opening_at">營業于</string>
 	<string name="closing_at">結束于</string>

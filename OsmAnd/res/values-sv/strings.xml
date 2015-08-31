@@ -607,7 +607,7 @@
     <string name="context_menu_item_intermediate_point">Lägg till som waypoint</string>
     <string name="map_widget_intermediate_distance">Waypoint</string>
     <string name="ending_point_too_far">Slutpunkten för långt från närmaste väg.</string>
-    <string name="btn_add_tag">Lägg till tagg</string>
+    <string name="add_tag">Lägg till tagg</string>
     <string name="btn_advanced_mode">Avancerat läge…</string>
     <string name="poi_filter_parking">Parkering</string>
     <string name="poi_filter_emergency">Olycksfall</string>
@@ -1972,8 +1972,8 @@
 	<string name="routing_attr_avoid_shuttle_train_description">Undvik pendeltåg</string>
     <string name="plugin_settings">Insticksprogram</string>
 	<string name="traffic_warning_hazard">Varning</string>
-    <string name="basic_tab_title">Grundläggande</string>
-	<string name="extended_tab_title">Utökad</string>
+    <string name="tab_title_basic">Grundläggande</string>
+	<string name="tab_title_advanced">Utökad</string>
 	<string name="building_number">Husnummer</string>
 	<string name="next_proceed">Nästa</string>
 	<string name="opening_at">Öppnar</string>

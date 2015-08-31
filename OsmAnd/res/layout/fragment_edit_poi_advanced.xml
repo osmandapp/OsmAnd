@@ -15,9 +15,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="14dp"
+            android:layout_marginTop="14dp"
             android:background="?attr/bg_card"
             android:orientation="vertical">
 
@@ -31,9 +31,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
-                    android:text="name"
+                    android:text="@string/tag_poi_name"
                     android:textColor="@color/dashboard_black"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/default_desc_text_size"
                     osmand:typeface="@string/font_roboto_regular"/>
 
                 <View
@@ -48,7 +48,7 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
                     android:textColor="@color/dashboard_black"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/default_desc_text_size"
                     osmand:typeface="@string/font_roboto_medium"/>
             </LinearLayout>
 
@@ -68,9 +68,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
-                    android:text="amenity"
+                    android:text="@string/tag_poi_amenity"
                     android:textColor="@color/dashboard_black"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/default_desc_text_size"
                     osmand:typeface="@string/font_roboto_regular"/>
 
                 <View
@@ -85,7 +85,7 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
                     android:textColor="@color/dashboard_black"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/default_desc_text_size"
                     osmand:typeface="@string/font_roboto_medium"/>
             </LinearLayout>
         </LinearLayout>
@@ -101,9 +101,9 @@
             android:id="@+id/addTagButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
+            android:layout_marginLeft="12dp"
             android:layout_marginTop="16dp"
-            android:text="Add tag"
+            android:text="@string/add_tag"
             android:textSize="@dimen/default_sub_text_size"
             osmand:typeface="@string/font_roboto_medium"/>
 

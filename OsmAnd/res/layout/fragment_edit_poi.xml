@@ -44,7 +44,7 @@
                         android:id="@+id/poiNameEditText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Name"
+                        android:hint="@string/poi_dialog_name"
                         tools:text="@string/lorem_ipsum"/>
 
                 </android.support.design.widget.TextInputLayout>
@@ -76,7 +76,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawableRight="@drawable/ic_action_arrow_drop_down"
-                        android:hint="POI Type"
+                        android:hint="@string/poi_dialog_poi_type"
                         android:completionThreshold="1"
                         tools:text="@string/lorem_ipsum"/>
 
@@ -88,7 +88,7 @@
                     android:layout_height="48dp"
                     android:layout_gravity="bottom"
                     android:background="@null"
-                    android:src="@drawable/ic_action_help"/>
+                    tools:src="@drawable/ic_action_help"/>
             </LinearLayout>
 
             <android.support.design.widget.TabLayout
@@ -125,20 +125,18 @@
 
         <net.osmand.plus.widgets.ButtonEx
             android:id="@+id/cancelButton"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/DashboardGeneralButton"
             android:text="@string/shared_string_cancel"
+            android:gravity="center"
             android:textColor="@color/dashboard_general_button_text_light"
             app:textAllCapsCompat="true"/>
 
         <net.osmand.plus.widgets.ButtonEx
             android:id="@+id/saveButton"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/DashboardGeneralButton"
             android:textColor="@color/dashboard_general_button_text_light"
             tools:text="Save"
+            android:gravity="center"
             app:textAllCapsCompat="true"/>
     </LinearLayout>
 </LinearLayout>

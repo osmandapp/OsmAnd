@@ -95,7 +95,7 @@
     <string name="intermediate_point_too_far">Vmesna točka %1$s je predaleč od najbližje ceste.</string>
     <string name="map_widget_intermediate_distance">Vmesne točke</string>
     <string name="ending_point_too_far">Končna točka je predaleč od najbližje ceste.</string>
-    <string name="btn_add_tag">Dodaj oznako</string>
+    <string name="add_tag">Dodaj oznako</string>
     <string name="btn_advanced_mode">Napredni način …</string>
     <string name="poi_filter_parking">Parkirišča</string>
     <string name="poi_filter_public_transport">Javni potniški promet</string>

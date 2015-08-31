@@ -980,7 +980,7 @@
     <string name="context_menu_item_intermediate_point">Pievienot pieturu</string>
     <string name="map_widget_intermediate_distance">Pietura</string>
     <string name="ending_point_too_far">Noslēdzošais punkts ir pārāk tālu no tuvākā ceļa.</string>
-    <string name="btn_add_tag">Pievienot marķējumu</string>
+    <string name="add_tag">Pievienot marķējumu</string>
     <string name="btn_advanced_mode">Paplašinātais režīms…</string>
     <string name="poi_filter_parking">Parkošanās</string>
     <string name="poi_filter_emergency">Ātrā palīdzība</string>

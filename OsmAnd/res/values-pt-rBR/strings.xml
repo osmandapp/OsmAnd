@@ -932,7 +932,7 @@
     <string name="arrived_at_intermediate_point">Você chegou na sua parada</string>
     <string name="context_menu_item_intermediate_point">Adicionar como ponto de parada</string>
     <string name="ending_point_too_far">Destino muito longe da via mais próxima.</string>
-    <string name="btn_add_tag">Adicionar etiqueta</string>
+    <string name="add_tag">Adicionar etiqueta</string>
     <string name="btn_advanced_mode">Modo avançado…</string>
     <string name="poi_filter_parking">Estacionamento</string>
     <string name="poi_filter_emergency">Emergência</string>
@@ -1797,8 +1797,8 @@
 <string name="routing_attr_avoid_shuttle_train_name">Evitar transporte de trem</string>
 	<string name="routing_attr_avoid_shuttle_train_description">Evitar shuttle train</string>
     <string name="plugin_settings">Complementos</string>
-	<string name="basic_tab_title">Básico</string>
-	<string name="extended_tab_title">Estendido</string>
+	<string name="tab_title_basic">Básico</string>
+	<string name="tab_title_advanced">Estendido</string>
 	<string name="building_number">Número de edifício</string>
 	<string name="next_proceed">Próximo</string>
 	<string name="opening_at">Abre às</string>

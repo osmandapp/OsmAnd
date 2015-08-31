@@ -83,7 +83,7 @@ public class EditPoiFragment extends Fragment {
 		super.onAttach(activity);
 //		poiTypes = ((OsmandApplication) activity.getApplication()).getPoiTypes();
 //		allTranslatedSubTypes = poiTypes.getAllTranslatedNames();
-		OsmandSettings settings = ((OsmandApplication) activity.getApplication()).getSettings();
+		OsmandSettings settings = ((MapActivity) activity).getMyApplication().getSettings();
 //		editPoiData.isLocalEdit = true;
 		OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
 		if (settings.OFFLINE_EDITION.get() || !settings.isInternetConnectionAvailable(true)) {
@@ -159,8 +159,8 @@ public class EditPoiFragment extends Fragment {
 		});
 
 		viewPager = (ViewPager) view.findViewById(R.id.viewpager);
-		String basicTitle = getResources().getString(R.string.basic_tab_title);
-		String extendedTitle = getResources().getString(R.string.extended_tab_title);
+		String basicTitle = getResources().getString(R.string.tab_title_basic);
+		String extendedTitle = getResources().getString(R.string.tab_title_advanced);
 		MyAdapter pagerAdapter = new MyAdapter(getChildFragmentManager(), basicTitle, extendedTitle);
 		viewPager.setAdapter(pagerAdapter);
 
@@ -192,6 +192,10 @@ public class EditPoiFragment extends Fragment {
 						Uri.parse("https://wiki.openstreetmap.org/wiki/Map_Features")));
 			}
 		});
+		onlineDocumentationButton.setImageDrawable(
+				((MapActivity) getActivity()).getMyApplication().getIconsCache()
+						.getPaintedContentIcon(R.drawable.ic_action_help,
+								getResources().getColor(R.color.inactive_item_orange)));
 		ImageButton poiTypeButton = (ImageButton) view.findViewById(R.id.poiTypeButton);
 		poiTypeButton.setOnClickListener(new View.OnClickListener() {
 			@Override

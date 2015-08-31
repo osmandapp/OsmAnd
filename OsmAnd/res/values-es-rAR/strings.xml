@@ -903,7 +903,7 @@
     <string name="context_menu_item_intermediate_point">Añadir como punto de ruta</string>
     <string name="map_widget_intermediate_distance">Punto de ruta</string>
     <string name="ending_point_too_far">Punto final demasiado lejos del camino más cercano.</string>
-    <string name="btn_add_tag">Añadir Etiqueta</string>
+    <string name="add_tag">Añadir Etiqueta</string>
     <string name="btn_advanced_mode">Modo Avanzado…</string>
     <string name="poi_filter_parking">Estacionamiento</string>
     <string name="poi_filter_emergency">Emergencia</string>
@@ -2028,8 +2028,8 @@
 <string name="routing_attr_avoid_shuttle_train_name">Evitar trenes de enlace</string>
 	<string name="routing_attr_avoid_shuttle_train_description">Evite tomar trenes de enlace</string>
     <string name="plugin_settings">Complementos</string>
-	<string name="basic_tab_title">Básico</string>
-	<string name="extended_tab_title">Extendido</string>
+	<string name="tab_title_basic">Básico</string>
+	<string name="tab_title_advanced">Extendido</string>
 	<string name="building_number">Número de edificio</string>
 	<string name="next_proceed">Siguiente</string>
 	<string name="opening_at">Abren a las</string>

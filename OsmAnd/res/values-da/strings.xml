@@ -117,7 +117,7 @@
     <string name="arrived_at_intermediate_point">Ankommet til rutepunktet</string>
     <string name="context_menu_item_intermediate_point">Tilføj som rutepunkt</string>
     <string name="ending_point_too_far">Slutpunktet er for langt fra nærmeste vej.</string>
-    <string name="btn_add_tag">Tilføj mærke</string>
+    <string name="add_tag">Tilføj mærke</string>
     <string name="btn_advanced_mode">Avanceret tilstand…</string>
     <string name="poi_filter_parking">Parkering</string>
     <string name="poi_filter_emergency">Nødsituation</string>
@@ -2113,10 +2113,10 @@
 <string name="routing_attr_avoid_shuttle_train_name">Undgå shuttletog</string>
 	<string name="routing_attr_avoid_shuttle_train_description">Undgå shuttletog</string>
     <string name="plugin_settings">Udvidelser</string>
-	<string name="extended_tab_title">Udvidet</string>
+	<string name="tab_title_advanced">Udvidet</string>
 	<string name="building_number">Bygningsnummer</string>
 	<string name="next_proceed">Næste</string>
 	<string name="opening_at">Åbner</string>
 	<string name="closing_at">Lukker</string>
-<string name="basic_tab_title">Basis</string>
+<string name="tab_title_basic">Basis</string>
 	</resources>

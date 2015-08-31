@@ -1206,7 +1206,7 @@
     <string name="context_menu_item_intermediate_point">경유지로 추가</string>
     <string name="map_widget_intermediate_distance">경유지</string>
     <string name="ending_point_too_far">도로에서 너무 멀리 떨어진 마지막 포인트.</string>
-    <string name="btn_add_tag">태그 추가</string>
+    <string name="add_tag">태그 추가</string>
     <string name="btn_advanced_mode">고급 모드…</string>
     <string name="poi_filter_parking">주차</string>
     <string name="poi_filter_emergency">비상 사태</string>

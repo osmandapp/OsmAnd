@@ -278,7 +278,7 @@
     <string name="context_menu_item_intermediate_point">Добави  като междинна точка</string>
     <string name="map_widget_intermediate_distance">Междинна точка</string>
     <string name="ending_point_too_far">Крайната цел е твърде далеч от най-близкия път.</string>
-    <string name="btn_add_tag">Добави таг</string>
+    <string name="add_tag">Добави таг</string>
     <string name="btn_advanced_mode">Разширен режим…</string>
     <string name="poi_filter_parking">Паркинг</string>
     <string name="poi_filter_emergency">Спешна помощ</string>

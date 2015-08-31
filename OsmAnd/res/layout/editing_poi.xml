@@ -217,7 +217,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:minWidth="150dp"
-                android:text="@string/btn_add_tag"
+                android:text="@string/add_tag"
                 android:visibility="gone" />
 
             <Button

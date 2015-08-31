@@ -289,7 +289,7 @@
     <string name="context_menu_item_intermediate_point">Дадаць як кропку шляху</string>
     <string name="map_widget_intermediate_distance">Кропка шляху</string>
     <string name="ending_point_too_far">Канчатковая кропка занадта далёка ад бліжэйшай дарогі.</string>
-    <string name="btn_add_tag">Дадаць адзнаку</string>
+    <string name="add_tag">Дадаць адзнаку</string>
     <string name="btn_advanced_mode">Пашыраны рэжым…</string>
     <string name="poi_filter_parking">Паркоўка</string>
     <string name="poi_filter_emergency">Аварыйныя службы</string>
@@ -2068,10 +2068,10 @@
 	<string name="commit_poi">Укласьці POI</string>
 <string name="routing_attr_avoid_shuttle_train_name">Пазьбягаць трансфер-цягнікоў</string>
 	<string name="routing_attr_avoid_shuttle_train_description">Пазьбягаць трансфер-цягнікоў</string>
-    <string name="basic_tab_title">Асноўнае</string>
+    <string name="tab_title_basic">Асноўнае</string>
 	<string name="building_number">Нумар будынка</string>
 	<string name="next_proceed">Далей</string>
 	<string name="opening_at">Адчыняецца ў</string>
 	<string name="closing_at">Зачыняецца ў</string>
-<string name="extended_tab_title">Пашыранае</string>
+<string name="tab_title_advanced">Пашыранае</string>
 	</resources>
