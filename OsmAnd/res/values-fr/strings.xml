@@ -2135,4 +2135,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="opening_at">Ouverture à</string>
 	<string name="closing_at">Fermeture à</string>
 <string name="tag_poi_name">nom</string>
-	</resources>
+	<string name="description">Description</string>
+	<string name="add_opening_hours">Ajouter des heures d\'ouverture</string>
+	<string name="poi_dialog_poi_type">Type de PI</string>
+<string name="av_locations">Positions</string>
+    </resources>
