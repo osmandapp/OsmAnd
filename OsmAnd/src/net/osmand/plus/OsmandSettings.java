@@ -167,6 +167,7 @@ public class OsmandSettings {
 		return settingsAPI.getPreferenceObject(getSharedPreferencesName(mode));
 	}
 	
+	public ApplicationMode LAST_ROUTING_APPLICATION_MODE = null;
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<ApplicationMode> APPLICATION_MODE = new PreferenceWithListener<ApplicationMode>(){
