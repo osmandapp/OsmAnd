@@ -22,6 +22,7 @@ import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.FavoritesActivity;
+import net.osmand.util.Algorithms;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -31,6 +32,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.FileProvider;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.PopupMenu;
@@ -222,10 +224,17 @@ public class NotesFragment extends OsmAndListFragment {
 			if(path == shareLocationFile) {
 				File fl = generateGPXForRecordings(selected);
 				if(fl != null) {
-					files.add(Uri.fromFile(fl));
+					files.add(FileProvider.getUriForFile(getActivity(), "net.osmand.fileprovider", fl));
 				}
 			} else {
-				files.add(Uri.fromFile(path.getFile()));
+				File src = path.getFile();
+				File dst = new File(getActivity().getCacheDir(), "share/"+src.getName());
+				try {
+					Algorithms.fileCopy(src, dst);
+					files.add(FileProvider.getUriForFile(getActivity(), "net.osmand.fileprovider", dst));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 		intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, files);
@@ -234,7 +243,8 @@ public class NotesFragment extends OsmAndListFragment {
 	}
 	
 	private File generateGPXForRecordings(ArrayList<Recording> selected) {
-		File tmpFile = getMyApplication().getAppPath("cache/noteLocations.gpx");
+//		File tmpFile = getMyApplication().getAppPath("cache/noteLocations.gpx");
+		File tmpFile = new File(getActivity().getCacheDir(), "share/noteLocations.gpx");
 		tmpFile.getParentFile().mkdirs();
 		GPXFile file = new GPXFile();
 		for(Recording r : selected) {
