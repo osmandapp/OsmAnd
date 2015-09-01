@@ -1254,7 +1254,7 @@
 	<string name="tip_recent_changes_1_1_4_t">"Cambios en 1.1.4:\n\t* Rediseño de interfaz de usuario\n\t* Corrección de errores "
     </string>
     
-	<string name="street_name">Calle</string>
+	<string name="street_name">Nombre de calle</string>
 	<string name="hno">Número</string>
     <string name="tip_recent_changes_1_3_t">"Cambios en 1.3:
 \n\t* Reimplementado en tabletas y pantallas grandes\n\t* Tema Holo (personalizado)
@@ -2172,4 +2172,12 @@
 	<string name="next_proceed">Siguiente</string>
 	<string name="opening_at">Abren a las</string>
 	<string name="closing_at">Cierran a las</string>
+<string name="av_locations_descr">Archivo GPX con ubicaciones de nota</string>
+    <string name="av_locations">Ubicaciones</string>
+    <string name="tag_poi_name">nombre</string>
+	<string name="tag_poi_amenity">comodidad</string>
+	<string name="contact_info">Información de contacto</string>
+	<string name="description">Descripción</string>
+	<string name="add_opening_hours">Añadir horario de atención</string>
+	<string name="poi_dialog_poi_type">Tipo de PDI</string>
 </resources>

@@ -183,7 +183,7 @@
   <string name="local_index_no_items_to_do">Nessun oggetto da %1$s</string>
   <string name="local_index_action_do">Stai per %1$s %2$s oggetto/i. Continuare?</string>
   <string name="local_index_descr_title">Gestisci i file delle mappe</string>
-  <string name="local_index_mi_restore">Attiva</string>
+  <string name="local_index_mi_restore">Attivare</string>
   <string name="local_index_mi_backup">Disattiva</string>
   
   <string name="local_index_mi_reload">Ricarica dalla scheda SD</string>  
@@ -1242,7 +1242,7 @@
 		\n\t* Correzione di errori
     </string>
     
-	<string name="street_name">Strada</string>
+	<string name="street_name">Nome strada</string>
 	<string name="hno">Numero civico</string>
     <string name="tip_recent_changes_1_3_t">Cambiamenti nella versione 1.3:
         \n\t* Re-implementato il supporto ai tablet e agli schermi grandi
@@ -1585,7 +1585,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="osmo_track_interval">Intervallo di registrazione</string>
 	<string name="osmo_track_interval_descr">Scegli l\'intervallo di tempo per l\'invio della posizione</string>
     <string name="int_days">giorni</string>
-    <string name="osmo_connect_menu">Attiva</string>
+    <string name="osmo_connect_menu">Connetti</string>
     <string name="osmo_expire_group">Scade fra</string>
     <string name="osmo_group_description">Descrizione</string>
     <string name="osmo_group_policy">Regole</string>
@@ -2158,4 +2158,10 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="closing_at">Chiude alle</string>
 <string name="av_locations_descr">File gpx con note locali</string>
     <string name="av_locations">Località</string>
-    </resources>
+    <string name="tag_poi_name">Nome</string>
+	<string name="tag_poi_amenity">amenità</string>
+	<string name="contact_info">Informazioni di contatto</string>
+	<string name="description">Descrizione</string>
+	<string name="add_opening_hours">Aggiungi orari di apertura</string>
+	<string name="poi_dialog_poi_type">Tipo di PDI</string>
+</resources>

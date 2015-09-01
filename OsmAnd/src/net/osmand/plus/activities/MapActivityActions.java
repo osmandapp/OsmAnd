@@ -40,6 +40,7 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.BaseMapLayer;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.util.MapUtils;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -426,14 +427,29 @@ public class MapActivityActions implements DialogProvider {
 
 		ApplicationMode mode = settings.DEFAULT_APPLICATION_MODE.get();
 		ApplicationMode selected = settings.APPLICATION_MODE.get();
+		OsmandApplication app = mapActivity.getMyApplication();
+		TargetPointsHelper targets = app.getTargetPointsHelper();
 		if( selected != ApplicationMode.DEFAULT) {
 			mode = selected;
 		} else if (mode == ApplicationMode.DEFAULT) {
-			mode = ApplicationMode.CAR ;
+			mode = ApplicationMode.CAR;
+			if(settings.LAST_ROUTING_APPLICATION_MODE != null && 
+					settings.LAST_ROUTING_APPLICATION_MODE != ApplicationMode.DEFAULT) {
+				mode = settings.LAST_ROUTING_APPLICATION_MODE;
+			}
+			if(from != null && targets.getPointToNavigate() != null) {
+				double dist = MapUtils.getDistance(from, targets.getPointToNavigate().getLatitude(),
+						targets.getPointToNavigate().getLongitude());
+				if(dist >= 50000 && mode.isDerivedRoutingFrom(ApplicationMode.PEDESTRIAN)) {
+					mode = ApplicationMode.CAR ;			
+				} else if(dist >= 300000 && mode.isDerivedRoutingFrom(ApplicationMode.BICYCLE)) {
+					mode = ApplicationMode.CAR ;
+				} else if(dist < 2000 && mode.isDerivedRoutingFrom(ApplicationMode.CAR)) {
+					mode = ApplicationMode.PEDESTRIAN ;
+				}
+			}
 		}
 
-		OsmandApplication app = mapActivity.getMyApplication();
-		TargetPointsHelper targets = app.getTargetPointsHelper();
 		app.getSettings().APPLICATION_MODE.set(mode);
 		app.getRoutingHelper().setAppMode(mode);
 		app.initVoiceCommandPlayer(mapActivity);
@@ -732,6 +748,7 @@ public class MapActivityActions implements DialogProvider {
 		routingHelper.getVoiceRouter().interruptRouteCommands();
 		routingHelper.clearCurrentRoute(null, new ArrayList<LatLon>());
 		routingHelper.setRoutePlanningMode(false);
+		settings.LAST_ROUTING_APPLICATION_MODE = settings.APPLICATION_MODE.get();
 		settings.APPLICATION_MODE.set(settings.DEFAULT_APPLICATION_MODE.get());
 		mapActivity.updateApplicationModeSettings();
 	}

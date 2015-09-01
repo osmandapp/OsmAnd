@@ -496,6 +496,7 @@ public class RoutingHelper {
 				app.runInUIThread(new Runnable() {
 					@Override
 					public void run() {
+						settings.LAST_ROUTING_APPLICATION_MODE = settings.APPLICATION_MODE.get();
 						settings.APPLICATION_MODE.set(settings.DEFAULT_APPLICATION_MODE.get());
 					}
 				});

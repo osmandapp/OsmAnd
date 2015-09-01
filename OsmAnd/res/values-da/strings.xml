@@ -1202,7 +1202,7 @@
     <string name="Closest_Amenities">Nærmeste faciliteter</string>
     <string name="incremental_search_street">Søg efter gader trinvist</string>
     <string name="navigate_point_format_DMS">DDD MM SS.SS</string>
-    <string name="street_name">Gade</string>
+    <string name="street_name">Gadenavn</string>
     <string name="select_address_activity">Vælg adresse</string>
     <string name="favourites_list_activity">Vælg favorit</string>
     <string name="hno">Husnummer</string>
@@ -2115,4 +2115,11 @@
     <string name="basic_tab_title">Basis</string>
     <string name="av_locations_descr">GPX-fil med note placeringer</string>
     <string name="av_locations">Placeringer</string>
+<string name="tab_title_basic">Grundlæggende</string>
+	<string name="tag_poi_name">navn</string>
+	<string name="tag_poi_amenity">facilitet</string>
+	<string name="contact_info">Kontaktoplysninger</string>
+	<string name="description">Beskrivelse</string>
+	<string name="add_opening_hours">Tilføj åbningstider</string>
+	<string name="poi_dialog_poi_type">IP type</string>
 </resources>
