@@ -33,7 +33,7 @@
         android:id="@+id/toolbar_settings"
         android:layout_width="@dimen/list_item_height"
         android:layout_height="@dimen/list_item_height"
-        android:layout_gravity="left"
+        android:layout_gravity="right"
         android:background="@drawable/dashboard_button_light"
         android:scaleType="center"
         android:src="@drawable/ic_action_settings"/>

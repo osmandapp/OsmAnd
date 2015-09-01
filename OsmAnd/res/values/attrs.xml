@@ -32,6 +32,8 @@
 		<attr name="osmo_header_background" format="color"/>
 		<attr name="dashboard_subheader_text_color" format="color"/>
 		<attr name="dashboard_general_button_text_color" format="color"/>
+
+        <attr name="dialog_inactive_text_color" format="reference"/>
     </declare-styleable>
 
     <declare-styleable name="PagerSlidingTabStrip">

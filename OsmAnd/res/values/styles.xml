@@ -103,6 +103,8 @@
         <item name="android:actionModeCloseDrawable">@drawable/ic_action_mode_back</item>
         <item name="android:actionModeStyle">@style/WhiteActionMode</item>
         <item name="android:actionMenuTextColor">@color/color_white</item>
+
+        <item name="dialog_inactive_text_color">@color/icon_color_light</item>
     </style>
 
     <style name="OsmandLightTheme.DarkActionbar">
@@ -163,6 +165,8 @@
 
         <item name="android:actionModeBackground">@color/actionbar_dark_color</item>
         <item name="android:actionBarStyle">@style/Widget.Styled.ActionBarDark</item>
+
+        <item name="dialog_inactive_text_color">@color/dialog_inactive_text_color_dark</item>
     </style>
 
 

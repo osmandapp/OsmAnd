@@ -183,7 +183,7 @@
   <string name="local_index_no_items_to_do">Nessun oggetto da %1$s</string>
   <string name="local_index_action_do">Stai per %1$s %2$s oggetto/i. Continuare?</string>
   <string name="local_index_descr_title">Gestisci i file delle mappe</string>
-  <string name="local_index_mi_restore">Attiva</string>
+  <string name="local_index_mi_restore">Attivare</string>
   <string name="local_index_mi_backup">Disattiva</string>
   
   <string name="local_index_mi_reload">Ricarica dalla scheda SD</string>  
@@ -1585,7 +1585,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="osmo_track_interval">Intervallo di registrazione</string>
 	<string name="osmo_track_interval_descr">Scegli l\'intervallo di tempo per l\'invio della posizione</string>
     <string name="int_days">giorni</string>
-    <string name="osmo_connect_menu">Attiva</string>
+    <string name="osmo_connect_menu">Connetti</string>
     <string name="osmo_expire_group">Scade fra</string>
     <string name="osmo_group_description">Descrizione</string>
     <string name="osmo_group_policy">Regole</string>
