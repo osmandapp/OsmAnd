@@ -161,7 +161,7 @@
         <item name="android:textColorPrimary">@color/color_white</item>
         <item name="spinnerItemTextColor">@color/color_white</item>
         <item name="spinnerListBackground">@color/spinner_list_background_dark</item>
-        <item name="colorButtonNormal">@color/color_white</item>
+        <item name="colorButtonNormal">@color/bg_color_dark</item>
 
         <item name="android:actionModeBackground">@color/actionbar_dark_color</item>
         <item name="android:actionBarStyle">@style/Widget.Styled.ActionBarDark</item>
