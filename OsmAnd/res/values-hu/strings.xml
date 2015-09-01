@@ -1021,7 +1021,7 @@
     <string name="new_destination_point_dialog">Már be van állítva a célpontod.</string>
     <string name="target_point">Célpont %1$s</string>
     <string name="target_points">Célpontok</string>
-    <string name="intermediate_point_too_far">%1$s. köztes célpont közelében nincsen út.</string>
+    <string name="intermediate_point_too_far">%1$s. célpont közelében nincsen út.</string>
     <string name="arrived_at_intermediate_point">Megérkeztél a köztes célponthoz</string>
     <string name="context_menu_item_intermediate_point">Beállítás köztes célpontnak</string>
     <string name="map_widget_intermediate_distance">Köztes célpont</string>
@@ -1035,20 +1035,20 @@
     <string name="poi_filter_accomodation">Szállás</string>
     <string name="poi_filter_restaurants">Éttermek</string>
     <string name="poi_filter_sightseeing">Városnézés</string>
-    <string name="context_menu_item_last_intermediate_point">Utolsó cél beállítása</string>
-    <string name="context_menu_item_first_intermediate_point">Első cél beállítása</string>
+    <string name="context_menu_item_last_intermediate_point">Beállítás utolsó célpontnak</string>
+    <string name="context_menu_item_first_intermediate_point">Beállítás első célpontnak</string>
     <string name="map_widget_monitoring_services">Rögzítési szolgáltatások</string>
 	<string name="no_route">Nincs út</string>
 	<string name="delete_target_point">Célpont törlése</string>
 	<string name="intermediate_point">%1$s. útpont</string>
     <string name="gps_not_available">Kérlek engedélyezd a GPS-t a beállításokban</string>
     <string name="map_widget_show_destination_arrow">Célpont irányának megjelenítése</string>
-    <string name="enable_plugin_monitoring_services">A pozíciónaplózási szolgáltatások (GPX naplózás, online követés) használatához engedélyezze az Útvonalrögzítés bővítményt</string>
+    <string name="enable_plugin_monitoring_services">A pozíciónaplózási szolgáltatások (GPX naplózás, online követés) használatához engedélyed az Útvonalrögzítés bővítményt</string>
     <string name="non_optimal_route_calculation">Esetleg nem optimális útvonal számítása nagyobb távolságokra</string>
-    <string name="rendering_attr_roadColors_description">Válassz egy útszínsémát:</string>
-	<string name="rendering_attr_roadColors_name">Útszínséma</string>
+    <string name="rendering_attr_roadColors_description">Válassz egy útszín sémát:</string>
+	<string name="rendering_attr_roadColors_name">Útszín séma</string>
     <string name="close_changeset">Módosításcsomag lezárása</string>
-	<string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner nincs feltelepítve. Megkeresed a Market-ben?</string>
+	<string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner nincs feltelepítve. Megkeresed a Play Store-ban?</string>
 	<string name="background_service_is_enabled_question">Az OsmAnd alvó mód szolgáltatás még fut. Azt is meg szeretnéd szakítani?</string>
     <string name="tip_recent_changes_1_0_0_t">Az 1.0.0 kiadás változásai:
 \n\t* Pontosabb és sokkal gyorsabb útvonaltervezés, akár 250 km-re
@@ -1074,10 +1074,10 @@
     <string name="tip_altitude_offset">Magasság korrekció</string>
 	<string name="monitoring_control_start">GPX</string>
     <string name="tip_altitude_offset_t">"A legtöbb GPS vevő a tengerszint feletti magasságot a WGS84 referencia ellipszoid szerint határozza meg, ami a helyi rendszernek megfelelően pozíciófüggő korrekcióra szorul.
-\n\nA helyi rendszereket jobban megközelíti az EGM96 referencia.
+\n\nA helyi rendszereket jobban megközelíti az EGM96 (geoid) referencia.
 \n\nAz OsmAnd már támogatja a magassági érték megjelenítését automatikusan EGM96 szerint. A használatához töltsd le a \'GPS magasságkorrekció\' fájlt (\'Beállítások\' → \'Térképkezelés\'). (Az eredeti fájl innen származik: http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC) "</string>
     <string name="rendering_attr_noAdminboundaries_name">Határvonalak elrejtése</string>
-	<string name="rendering_attr_noAdminboundaries_description">Nem jeleníti meg az adminisztratív határokat 5-9 szinten</string>
+	<string name="rendering_attr_noAdminboundaries_description">Nem jeleníti meg a közigazgatási határokat 5-9 szinten</string>
 	<string name="download_srtm_maps">Szintvonalak</string>
     <string name="srtm_plugin_name">Szintvonalak</string>
     <string name="index_srtm_ele">Szintvonalak</string>
@@ -2022,7 +2022,7 @@
     <string name="rendering_value_red_name">Piros</string>
     <string name="rendering_value_default13_name">Alapértelmezett (13)</string>
 	<string name="rendering_value_defaultTranslucentCyan_name">Alapértelmezett (átlátszó cián)</string>
-    <string name="do_you_like_osmand">Hogy tetszik az OsmAnd?</string>
+    <string name="do_you_like_osmand">Tetszik az OsmAnd?</string>
 	<string name="we_really_care">Minket valóban érdekel</string>
 	<string name="rate_this_app">Értékeld az alkalmazást</string>
 	<string name="user_hates_app_get_feedback">Mondd el, hogy miért.</string>
