@@ -157,4 +157,5 @@
 	<color name="divider_color">#ccc</color>
 
 	<color name="color_dialog_buttons">#2f7af5</color>
+	<color name="dialog_inactive_text_color_dark">#78909c</color>
 </resources>
