@@ -47,8 +47,7 @@ import android.os.Message;
 import android.os.SystemClock;
 import android.util.DisplayMetrics;
 import android.view.GestureDetector;
-import android.view.GestureDetector.OnDoubleTapListener;
-import android.view.GestureDetector.OnGestureListener;
+import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.InputDevice;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -212,7 +211,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		animatedDraggingThread = new AnimateDraggingMapThread(this);
 		gestureDetector = new GestureDetector(ctx, new MapExplorer(this, new MapTileViewOnGestureListener()));
 		multiTouchSupport = new MultiTouchSupport(ctx, new MapTileViewMultiTouchZoomListener());
-		gestureDetector.setOnDoubleTapListener(new MapTileViewOnDoubleTapListener());
 
 		WindowManager mgr = (WindowManager) ctx.getSystemService(Context.WINDOW_SERVICE);
 		dm = new DisplayMetrics();
@@ -914,7 +912,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	}
 
-	private class MapTileViewOnGestureListener implements OnGestureListener {
+	private class MapTileViewOnGestureListener extends SimpleOnGestureListener {
 		@Override
 		public boolean onDown(MotionEvent e) {
 			return false;
@@ -961,7 +959,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 
 		@Override
-		public boolean onSingleTapUp(MotionEvent e) {
+		public boolean onSingleTapConfirmed(MotionEvent e) {
 			PointF point = new PointF(e.getX(), e.getY());
 			if (log.isDebugEnabled()) {
 				log.debug("On click event " + point.x + " " + point.y); //$NON-NLS-1$ //$NON-NLS-2$
@@ -979,10 +977,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			}
 			return false;
 		}
-	}
 
-
-	private class MapTileViewOnDoubleTapListener implements OnDoubleTapListener {
 		@Override
 		public boolean onDoubleTap(MotionEvent e) {
 			final RotatedTileBox tb = getCurrentRotatedTileBox();
@@ -990,16 +985,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			final double lon = tb.getLonFromPixel(e.getX(), e.getY());
 			getAnimatedDraggingThread().startMoving(lat, lon, getZoom() + 1, true);
 			return true;
-		}
-
-		@Override
-		public boolean onDoubleTapEvent(MotionEvent e) {
-			return false;
-		}
-
-		@Override
-		public boolean onSingleTapConfirmed(MotionEvent e) {
-			return false;
 		}
 	}
 
