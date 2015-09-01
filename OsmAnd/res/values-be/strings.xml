@@ -2074,4 +2074,9 @@
 	<string name="opening_at">Адчыняецца ў</string>
 	<string name="closing_at">Зачыняецца ў</string>
 <string name="tab_title_advanced">Пашыранае</string>
+	<string name="tag_poi_name">назва</string>
+	<string name="contact_info">Кантакты</string>
+	<string name="description">Апісаньне</string>
+	<string name="add_opening_hours">Дадаць гадзіны працы</string>
+	<string name="poi_dialog_poi_type">Тып POI</string>
 	</resources>
