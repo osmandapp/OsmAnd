@@ -130,10 +130,10 @@
   
   
   <string name="osmand_development_plugin_description">Плагин отображает параметры для разработки и отладки функций, таких как, проверка или моделирование маршрута, отображение производительности отрисовки, проверка голосовых подсказок. Эти настройки предназначены для разработчиков и не требуются для обычного пользователя.</string>
-  <string name="plugins_screen">Диспетчер плагинов</string>
+  <string name="plugins_screen">Плагины</string>
   
   <string name="prefs_plugins_descr">Плагины активируют дополнительные возможности приложения</string>
-  <string name="prefs_plugins">Диспетчер плагинов</string>
+  <string name="prefs_plugins">Плагины</string>
   <string name="tip_recent_changes_0_8_0_t">Изменения в 0.8.0:
 		\n\t- *Поддержка плагинов*
 		\n\t- Большая часть функциональности разделена на плагины и может быть включена/выключена в Менеджере плагинов.
@@ -316,7 +316,7 @@
   <string name="local_index_items_restored">%1$d из %2$d объектов успешно активированы.</string>
   <string name="local_index_no_items_to_do">Нет объектов, чтобы %1$s</string>
   <string name="local_index_action_do">Вы собираетесь %1$s %2$s объектов. Вы уверены?</string>
-  <string name="local_index_descr_title">Управление файлами карт</string>
+  <string name="local_index_descr_title">Загрузить карты</string>
   <string name="local_index_mi_restore">Активировать</string>
   <string name="local_index_mi_backup">Архивировать</string>
   
@@ -495,7 +495,7 @@
   
   <string name="general_settings_descr">Настройки экрана, локализации, единиц измерения и другие</string>
   <string name="general_settings">Общие</string>
-  <string name="index_settings">Управление файлами карт</string>
+  <string name="index_settings">Загрузить карты</string>
   <string name="osmand_service">Фоновый режим</string>
   <string name="osmand_service_descr">Запустить OsmAnd в фоновом режиме для записи трека и навигации</string>
   <string name="fast_route_mode">Скоростной маршрут</string>
