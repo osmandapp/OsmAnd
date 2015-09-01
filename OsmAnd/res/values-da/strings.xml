@@ -2122,5 +2122,5 @@
 	<string name="description">Beskrivelse</string>
 	<string name="add_opening_hours">Tilføj åbningstider</string>
 	<string name="poi_dialog_poi_type">IP type</string>
-<string name="number_of_rows_in_dash">Antal rækker på betjeningspanelet %1$s</string>
+<string name="number_of_rows_in_dash">Antal rækker %1$s</string>
 </resources>

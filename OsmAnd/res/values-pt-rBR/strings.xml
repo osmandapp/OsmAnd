@@ -727,7 +727,7 @@
     <string name="cancel_navigation">Parar navegação</string>
     <string name="clear_destination">Apagar destino</string>
     <string name="download_using_mobile_internet">Wi-Fi não está conectado no momento. Você quer usar a conexão de Internet atual para fazer a transferência?</string>
-    <string name="street_name">Rua</string>
+    <string name="street_name">Nome da rua</string>
 	<string name="hno">Número de porta</string>
     <string name="website">Website</string>
 	<string name="phone">Telefone</string>
@@ -1803,4 +1803,13 @@
 	<string name="next_proceed">Próximo</string>
 	<string name="opening_at">Abre às</string>
 	<string name="closing_at">Fecha em</string>
-</resources>
+<string name="av_locations_descr">Arquivo GPX com notas de posição</string>
+    <string name="av_locations">Posições</string>
+    <string name="tag_poi_name">nome</string>
+	<string name="contact_info">Informações de contato</string>
+	<string name="description">Descrição</string>
+	<string name="add_opening_hours">Adicionar o horário de funcionamento</string>
+	<string name="poi_dialog_poi_type">Tipo de POI</string>
+	<string name="number_of_rows_in_dash">Número de linhas no traço de %1$s</string>
+<string name="tag_poi_amenity">facilidade</string>
+	</resources>
