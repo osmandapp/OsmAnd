@@ -66,6 +66,6 @@
         android:layout_width="280dp"
         android:layout_height="match_parent"
         android:layout_gravity="left"
-        android:background="@color/dashboard_background"/>
+        android:background="?attr/bg_color"/>
 
 </android.support.v4.widget.DrawerLayout>

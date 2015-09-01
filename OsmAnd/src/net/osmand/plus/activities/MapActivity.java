@@ -232,7 +232,8 @@ public class MapActivity extends AccessibleActivity {
 		final ListView menuItemsListView = (ListView) findViewById(R.id.menuItems);
 		menuItemsListView.setDivider(null);
 		final ContextMenuAdapter contextMenuAdapter = mapActions.createMainOptionsMenu();
-		final ArrayAdapter<?> simpleListAdapter = contextMenuAdapter.createSimpleListAdapter(this, true);
+		final ArrayAdapter<?> simpleListAdapter = contextMenuAdapter.createSimpleListAdapter(this,
+				settings.OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME);
 		menuItemsListView.setAdapter(simpleListAdapter);
 		menuItemsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
