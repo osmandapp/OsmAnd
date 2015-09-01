@@ -1108,4 +1108,30 @@
 	<string name="poi_denomination_nondenominational">Sem denominação</string>
 	<string name="poi_denomination_adventist">Adventista</string>
 	<string name="poi_denomination_nazarene">Nazarena</string>
+	<string name="poi_denomination_united_methodist">Metodista unida</string>
+	<string name="poi_denomination_congregational">Congregacional</string>
+	<string name="poi_denomination_old_believers">Velhos crentes</string>
+	<string name="poi_denomination_serbian_orthodox">Ortodoxa sérvia</string>
+	<string name="poi_denomination_spiritist">Espírita</string>
+	<string name="poi_denomination_armenian_apostolic">Apostólica armênia</string>
+	<string name="poi_denomination_dutch_reformed">Reformada neerlandesa</string>
+	<string name="poi_denomination_apostolic">Apostólica</string>
+	<string name="poi_denomination_uniting">Unida</string>
+	<string name="poi_denomination_reform">Reformista</string>
+	<string name="poi_denomination_latter_day_saints">Santos dos últimos dias</string>
+	<string name="poi_denomination_church_of_christ">Igreja de cristo</string>
+	<string name="poi_denomination_united_church_of_christ">Igreja unida de cristo</string>
+	<string name="poi_denomination_georgian_orthodox">Ortodoxa georgiana</string>
+	<string name="poi_denomination_scientist">Científica</string>
+	<string name="poi_denomination_romanian_orthodox">Ortodoxa romena</string>
+	<string name="poi_denomination_ethiopian_orthodox_tewahedo">Ortodoxa etíope tewahido</string>
+	<string name="poi_denomination_unitarian">Unitarista</string>
+	<string name="poi_denomination_coptic_orthodox">Ortodoxa copta</string>
+	<string name="poi_denomination_wesleyan">Wesleyana</string>
+	<string name="poi_denomination_shaktism">Shaktismo</string>
+	<string name="poi_denomination_shingon_shu">Shingon shu</string>
+	<string name="poi_denomination_maronite">Maronita</string>
+	<string name="poi_denomination_mahayana">Mahayana</string>
+
+	<string name="poi_denomination_united">Unida</string>
 	</resources>
