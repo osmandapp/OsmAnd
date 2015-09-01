@@ -621,10 +621,10 @@ public class MapActivity extends AccessibleActivity {
 				uiHandler.sendMessageDelayed(msg, LONG_KEYPRESS_DELAY);
 			}
 			return true;
-		} else if (keyCode == KeyEvent.KEYCODE_MENU && event.getRepeatCount() == 0) {
-			openDrawer();
+		} else if (keyCode == KeyEvent.KEYCODE_MENU && event.getRepeatCount() == 1) {
+			toggleDrawer();
 			return true;
-		} else if (keyCode == KeyEvent.KEYCODE_SEARCH && event.getRepeatCount() == 0) {
+		} else if (keyCode == KeyEvent.KEYCODE_SEARCH && event.getRepeatCount() == 1) {
 			Intent newIntent = new Intent(MapActivity.this, getMyApplication().getAppCustomization()
 					.getSearchActivity());
 			// causes wrong position caching: newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
@@ -981,5 +981,13 @@ public class MapActivity extends AccessibleActivity {
 
 	public void closeDrawer() {
 		drawerLayout.closeDrawer(Gravity.LEFT);
+	}
+
+	public void toggleDrawer() {
+		if (drawerLayout.isDrawerOpen(Gravity.LEFT)) {
+			closeDrawer();
+		} else {
+			openDrawer();
+		}
 	}
 }
