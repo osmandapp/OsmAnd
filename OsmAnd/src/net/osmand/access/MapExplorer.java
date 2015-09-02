@@ -16,25 +16,27 @@ import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import android.graphics.PointF;
 import android.os.Build;
+import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
+import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 
 // Provide touch exploration mode for map view
 // when scrolling it by gestures is disabled.
 //
-public class MapExplorer implements OnGestureListener, IContextMenuProvider {
+public class MapExplorer extends SimpleOnGestureListener implements IContextMenuProvider {
 
     private static final float VICINITY_RADIUS = 15;
 
     private OsmandMapTileView mapView;
-    private OnGestureListener fallback;
+    private SimpleOnGestureListener fallback;
     private Map<Object, IContextMenuProvider> selectedObjects = null;
 
 
     // OnGestureListener specified as a second argument
     // will be used when scrolling map by gestures
     // is enabled.
-    public MapExplorer(OsmandMapTileView mapView, OnGestureListener fallback) {
+    public MapExplorer(OsmandMapTileView mapView, SimpleOnGestureListener fallback) {
         this.mapView = mapView;
         this.fallback = fallback;
     }
@@ -126,13 +128,17 @@ public class MapExplorer implements OnGestureListener, IContextMenuProvider {
             fallback.onShowPress(e);
     }
 
-    @Override
-    public boolean onSingleTapUp(MotionEvent e) {
-        return fallback.onSingleTapUp(e);
-    }
+	@Override
+	public boolean onSingleTapConfirmed(MotionEvent e) {
+		return fallback.onSingleTapConfirmed(e);
+	}
 
+	@Override
+	public boolean onDoubleTap(MotionEvent e) {
+		return fallback.onDoubleTap(e);
+	}
 
-    // IContextMenuProvider interface implementation.
+	// IContextMenuProvider interface implementation.
 
     @Override
     public boolean disableSingleTap() {
