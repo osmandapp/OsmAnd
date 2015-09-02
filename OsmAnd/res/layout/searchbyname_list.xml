@@ -3,12 +3,14 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:paddingBottom="3dp"
-    android:paddingTop="3dp">
+    android:paddingTop="7dp"
+    android:paddingBottom="7dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp">
 
     <TextView
         android:id="@+id/NameLabel"
-        android:textSize="@dimen/default_list_text_size_large"
+        android:textSize="@dimen/default_list_text_size"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" />
 </LinearLayout>

@@ -2171,11 +2171,11 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="rendering_value_red_name">Czerwony</string>
     <string name="rendering_value_translucent_orange_name">Półprzezroczysty pomarańczowy</string>
     <string name="rendering_value_yellow_name">Żółty</string>
-    <string name="rendering_value_translucent_yellow_name">Półprzezroczysty żółty</string>
+    <string name="rendering_value_translucent_yellow_name">Przezroczysty żółty</string>
     <string name="rendering_value_lightgreen_name">Jasnozielony</string>
     <string name="rendering_value_translucent_lightgreen_name">Przezroczysty jasnozielony</string>
     <string name="rendering_value_green_name">Zielony</string>
-    <string name="rendering_value_translucent_green_name">Półprzezroczysty zielony</string>
+    <string name="rendering_value_translucent_green_name">Przezroczysty zielony</string>
     <string name="rendering_value_lightblue_name">Jasnoniebieski</string>
     <string name="rendering_value_translucent_lightblue_name">Przezroczysty jasnoniebieski</string>
     <string name="rendering_value_blue_name">Niebieski</string>
@@ -2198,4 +2198,9 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="successfully_uploaded_pattern">Wysłano {0}/{1}</string>
 	<string name="try_again">Spróbuj ponownie</string>
 	<string name="error_message_pattern">Błąd: {0}</string>
-</resources>
+<string name="av_locations">Położenia</string>
+    <string name="plugin_settings">Wtyczki</string>
+	<string name="routing_attr_avoid_shuttle_train_name">Unikanie pociągów wahadłowych</string>
+	<string name="routing_attr_avoid_shuttle_train_description">Unikanie pociągów wahadłowych</string>
+    <string name="traffic_warning_hazard">Zagrożenie</string>
+    </resources>

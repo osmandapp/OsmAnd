@@ -1105,7 +1105,7 @@
     <string name="cancel_navigation">Avbryt navigeringen</string>
     <string name="clear_destination">Ta bort destinationen</string>
     <string name="download_using_mobile_internet">Wi-Fi är för tillfället inte anslutet. Vill du ladda ned med din nuvarande anslutning till Internet?</string>
-    <string name="street_name">Gata</string>
+    <string name="street_name">Gatunamn</string>
 	<string name="hno">Husnummer</string>
     
     <string name="monitoring_settings_descr">Konfigurera inspelning av dina resor</string>
@@ -1987,4 +1987,6 @@
 	<string name="dahboard_options_dialog_title">Alternativ för panelen</string>
 	<string name="commit_poi">Skicka in POI</string>
 	<string name="tag_poi_name">namn</string>
-	</resources>
+	<string name="tag_poi_amenity">service</string>
+	<string name="number_of_rows_in_dash">Antal rader i panel %1$s</string>
+</resources>
