@@ -2113,7 +2113,7 @@
     <string name="opening_at">Åbner</string>
     <string name="closing_at">Lukker</string>
     <string name="basic_tab_title">Basis</string>
-    <string name="av_locations_descr">GPX-fil med note placeringer</string>
+    <string name="av_locations_descr">GPX-fil med placeringsnoter</string>
     <string name="av_locations">Placeringer</string>
 <string name="tab_title_basic">Grundlæggende</string>
 	<string name="tag_poi_name">navn</string>
