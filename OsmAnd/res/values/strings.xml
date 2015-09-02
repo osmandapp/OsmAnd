@@ -2255,4 +2255,5 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="add_opening_hours">Add opening hours</string>
 	<string name="poi_dialog_poi_type">POI Type</string>
 	<string name="number_of_rows_in_dash">Number of rows in dash %1$s</string>
+	<string name="please_specify_poi_type">Please specify POI type.</string>
 </resources>

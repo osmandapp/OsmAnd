@@ -389,7 +389,7 @@ public class MapActivity extends AccessibleActivity {
 			if (!dashboardOnMap.isVisible()) {
 				final OsmandSettings.CommonPreference<Boolean> shouldShowDashboardOnStart =
 						settings.registerBooleanPreference(MapActivity.SHOULD_SHOW_DASHBOARD_ON_START, true);
-				if (shouldShowDashboardOnStart.get())
+				if (shouldShowDashboardOnStart.get() || dashboardOnMap.hasCriticalMessages())
 					dashboardOnMap.setDashboardVisibility(true, DashboardOnMap.staticVisibleType);
 			}
 		}
