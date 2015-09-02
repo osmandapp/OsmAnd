@@ -19,6 +19,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -196,7 +197,7 @@ public class EditPoiFragment extends Fragment {
 				((MapActivity) getActivity()).getMyApplication().getIconsCache()
 						.getPaintedContentIcon(R.drawable.ic_action_help,
 								getResources().getColor(R.color.inactive_item_orange)));
-		ImageButton poiTypeButton = (ImageButton) view.findViewById(R.id.poiTypeButton);
+		final ImageButton poiTypeButton = (ImageButton) view.findViewById(R.id.poiTypeButton);
 		poiTypeButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -265,7 +266,10 @@ public class EditPoiFragment extends Fragment {
 		saveButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// TODO implement saving
+				if (TextUtils.isEmpty(poiTypeEditText.getText())) {
+					poiTypeEditText.setError(getResources().getString(R.string.please_specify_poi_type));
+					return;
+				}
 				OsmPoint.Action action = node.getId() == -1 ? OsmPoint.Action.CREATE : OsmPoint.Action.MODIFY;
 				String description = "";
 				for (Tag tag : editPoiData.tags) {
