@@ -82,29 +82,21 @@ public class EditPoiFragment extends Fragment {
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-//		poiTypes = ((OsmandApplication) activity.getApplication()).getPoiTypes();
-//		allTranslatedSubTypes = poiTypes.getAllTranslatedNames();
-		OsmandSettings settings = ((MapActivity) activity).getMyApplication().getSettings();
-//		editPoiData.isLocalEdit = true;
+		OsmandSettings settings = getMyApplication().getSettings();
 		OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
 		if (settings.OFFLINE_EDITION.get() || !settings.isInternetConnectionAvailable(true)) {
 			mOpenstreetmapUtil = new OpenstreetmapLocalUtil(plugin, activity);
-//			openstreetmapUtilToLoad = mOpenstreetmapUtil;
 		} else if (!settings.isInternetConnectionAvailable(true)) {
 			mOpenstreetmapUtil = new OpenstreetmapLocalUtil(plugin, activity);
-//			openstreetmapUtilToLoad = new OpenstreetmapRemoteUtil(activity);
 		} else {
 			isLocalEdit = false;
 			mOpenstreetmapUtil = new OpenstreetmapRemoteUtil(activity);
-//			openstreetmapUtilToLoad = mOpenstreetmapUtil;
 		}
 
 		node = (Node) getArguments().getSerializable(KEY_AMENITY_NODE);
-		allTranslatedSubTypes = ((OsmandApplication) activity.getApplication()).getPoiTypes()
+		allTranslatedSubTypes = getMyApplication().getPoiTypes()
 				.getAllTranslatedNames();
-		// TODO implement normal name
 		editPoiData.amenity = (Amenity) getArguments().getSerializable(KEY_AMENITY);
-//		editPoiData.tags = new LinkedHashSet<>();
 	}
 
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
@@ -194,7 +186,7 @@ public class EditPoiFragment extends Fragment {
 			}
 		});
 		onlineDocumentationButton.setImageDrawable(
-				((MapActivity) getActivity()).getMyApplication().getIconsCache()
+				getMyApplication().getIconsCache()
 						.getPaintedContentIcon(R.drawable.ic_action_help,
 								getResources().getColor(R.color.inactive_item_orange)));
 		final ImageButton poiTypeButton = (ImageButton) view.findViewById(R.id.poiTypeButton);
@@ -455,20 +447,24 @@ public class EditPoiFragment extends Fragment {
 		});
 	}
 
+	private OsmandApplication getMyApplication() {
+		return (OsmandApplication) getActivity().getApplication();
+	}
+
 	public static void showEditInstance(final Amenity amenity,
-										final MapActivity mapActivity) {
-		final OsmandSettings settings = mapActivity.getMyApplication().getSettings();
+										final AppCompatActivity activity) {
+		final OsmandSettings settings = ((OsmandApplication) activity.getApplication())
+				.getSettings();
 		final OpenstreetmapUtil openstreetmapUtilToLoad;
 		if (settings.OFFLINE_EDITION.get() || !settings.isInternetConnectionAvailable(true)) {
 			OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
-			openstreetmapUtilToLoad = new OpenstreetmapLocalUtil(plugin, mapActivity);
+			openstreetmapUtilToLoad = new OpenstreetmapLocalUtil(plugin, activity);
 		} else if (!settings.isInternetConnectionAvailable(true)) {
-			openstreetmapUtilToLoad = new OpenstreetmapRemoteUtil(mapActivity);
+			openstreetmapUtilToLoad = new OpenstreetmapRemoteUtil(activity);
 		} else {
-			openstreetmapUtilToLoad = new OpenstreetmapRemoteUtil(mapActivity);
+			openstreetmapUtilToLoad = new OpenstreetmapRemoteUtil(activity);
 		}
 		new AsyncTask<Void, Void, Node>() {
-
 			@Override
 			protected Node doInBackground(Void... params) {
 				return openstreetmapUtilToLoad.loadNode(amenity);
@@ -478,18 +474,15 @@ public class EditPoiFragment extends Fragment {
 				if (n != null) {
 					EditPoiFragment fragment =
 							EditPoiFragment.createInstance(n, amenity);
-					mapActivity.getSupportFragmentManager().beginTransaction()
+					activity.getSupportFragmentManager().beginTransaction()
 							.add(R.id.fragmentContainer, fragment, "EditPoiFragment")
 							.addToBackStack(null).commit();
 				} else {
-					AccessibleToast.makeText(mapActivity,
-							mapActivity.getString(R.string.poi_error_poi_not_found),
+					AccessibleToast.makeText(activity,
+							activity.getString(R.string.poi_error_poi_not_found),
 							Toast.LENGTH_SHORT).show();
 				}
 			}
-
-			;
-
 		}.execute(new Void[0]);
 	}
 
@@ -536,6 +529,7 @@ public class EditPoiFragment extends Fragment {
 	public static class ShowDeleteDialogAsyncTask extends AsyncTask<Amenity, Void, Node> {
 		private final OpenstreetmapUtil openstreetmapUtil;
 		private final AppCompatActivity activity;
+
 		public ShowDeleteDialogAsyncTask(AppCompatActivity activity) {
 			this.activity = activity;
 			OsmandSettings settings = ((OsmandApplication) activity.getApplication()).getSettings();
@@ -551,15 +545,15 @@ public class EditPoiFragment extends Fragment {
 
 		protected Node doInBackground(Amenity[] params) {
 			return openstreetmapUtil.loadNode(params[0]);
-		};
-
-		protected void onPostExecute(Node n) {
-		if(n == null){
-			AccessibleToast.makeText(activity, activity.getResources().getString(R.string.poi_error_poi_not_found), Toast.LENGTH_LONG).show();
-			return;
 		}
-		DeletePoiDialogFragment.createInstance(n).show(activity.getSupportFragmentManager(),
-				"DeletePoiDialogFragment");
-	};
-}
+		
+		protected void onPostExecute(Node n) {
+			if (n == null) {
+				AccessibleToast.makeText(activity, activity.getResources().getString(R.string.poi_error_poi_not_found), Toast.LENGTH_LONG).show();
+				return;
+			}
+			DeletePoiDialogFragment.createInstance(n).show(activity.getSupportFragmentManager(),
+					"DeletePoiDialogFragment");
+		}
+	}
 }
