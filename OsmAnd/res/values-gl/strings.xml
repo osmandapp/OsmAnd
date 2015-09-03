@@ -48,7 +48,7 @@
 \n\nA maneira de introdución básica, hai algunhas suxestións e solucións accesíbeis en «Menú» → «Axuda» desde a pantalla do mapa. "</string>
     <string name="monitoring_settings">Gravación de viaxes</string>
     <string name="monitoring_settings_descr">Configure como gravar viaxes</string>
-    <string name="record_plugin_description">Garde pistas con só tocar un botón na pantalla do mapa. Mostrea configuración para gravar viaxes en ficheiros GPX locais ou na rede empregando un servizo web.</string>
+    <string name="record_plugin_description">"Este engadido activa a funcionalidade de gravar e gardar as pistas tocando o trebello de rexistro de GPX na pantalla do mapa ou tamén de rexistrar automaticamente todas as rutas de navegación nun ficheiro GPX.\n\nAs pistas gravadas pódense compartir ou empregar colaborando con OSM. Os atletas poden empregar pistas gravadas para estudar os seus adestramentos. Con OsmAnd é posíbel realizar directamente algunhas análises básicas, como tempos, velocidade media, etc. e as pistas tamén se poden analizar posteriormente con ferramentas de análise de terceiros. "</string>
     <string name="record_plugin_name">Gravación de viaxes</string>
     <string name="int_hour">h</string>
     <string name="duration">Duración</string>
