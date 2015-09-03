@@ -1893,7 +1893,8 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="save_track_to_gpx_globally">Rejestrowanie śladu do pliku GPX</string>
 	<string name="save_track_to_gpx_globally_descr">Rejestrowanie położenia do pliku GPX można włączyć lub wyłączyć używając widżetu rejestrowania GPX na ekranie mapy</string>
 	<string name="save_track_interval_globally">Częstość rejestrowania</string>
-	<string name="record_plugin_description">"Wtyczka ta aktywuje funkcje nagrywania i zapisywania śladów ręcznie dotykając widgetu rejestrowania GPX na ekranie mapy, lub także automatyczne logowanie wszystkich tras nawigacyjnych do pliku GPX. ↵\n↵\nNagrane ślady mogą być dzielone ze swoimi przyjaciółmi lub być wykorzystywane jako wkład do rozwoju OSM. Sportowcy mogą korzystać z nagranych ścieżek do monitorowania treningów. Podstawowa analiza śladów może być wykonywane bezpośrednio w OsmAnd, podobnie jak czasy okrążeń, średniej prędkości itp, a ślady mogą być oczywiście później analizowane w specjalnych narzędziach do analizy przygotowanych przez innych dostawców. "</string>
+	<string name="record_plugin_description">"Aktywuje funkcje nagrywania i zapisywania tras za pomocą widżetu rejestrowania śladów GPX na ekranie mapy lub automatyczne rejestruje przebiegi wszystkich tras do plików GPX.
+\n\nNagrane ślady można udostępnić znajomym lub wykorzystać na rzecz rowoju map Openstreetmap. Sportowcy mogą korzystać z nagranych śladów do monitorowania treningów. W tym celu OsmAnd udostępnia podstawowe informacje takie, jak czasy okrążeń, średnia prędkość itp. Ślady mogą być później analizowane w specjalnych narzędziach do analizy przygotowanych przez innych dostawców. "</string>
     <string name="confirm_every_run">Ponawianie pytania</string>
 	<string name="save_global_track_interval_descr">Wybierz tempo rejestrowania dla nagrywania ścieżki (włączonego poprzez widżet rejestrowania GPX na mapie)</string>
 	<string name="save_global_track_interval">Ogólna częstość rejestrowania</string>
@@ -2128,16 +2129,16 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="lang_ht">haitański</string>
     <string name="lang_gl">galicyjski</string>
     <string name="lang_et">estoński</string>
-    <string name="archive_wikipedia_data">Posiadasz pobrane stare niezgodne dane Wikipedia. Czy chcesz je zarchiwizować?</string>
-    <string name="download_wikipedia_files">Czy chcesz pobrać dodatkowe dane Wikipedii (%1$s MB)?</string>
-    <string name="gps_network_not_enabled">Usługa lokalizacji nie jest włączona. Czy chcesz go włączyć?</string>
-    <string name="disable_recording_once_app_killed_descrp">Wstrzymać rejestrowanie GPX, gdy aplikacja zostanie zabita (przez inne aplikacja). (Wskazanie trybu uśpienia OsmAnd zniknie z pasku powiadomień.)</string>
+    <string name="archive_wikipedia_data">W posiadaniu są stare niezgodne dane Wikipedia. Zarchiwizować je?</string>
+    <string name="download_wikipedia_files">Pobrać dodatkowe dane Wikipedii (%1$s MB)?</string>
+    <string name="gps_network_not_enabled">Usługa lokalizacji nie jest włączona. Włączyć ją?</string>
+    <string name="disable_recording_once_app_killed_descrp">Wstrzymuje rejestrowanie trasy po zakończeniu programu na liście ostatnich aplikacji. (Wskazanie trybu uśpienia OsmAnd zniknie z pasku powiadomień.)</string>
     <string name="shared_string_import2osmand">Import do OsmAnd</string>
     <string name="read_full_article">Czytaj cały artykuł (online)</string>
     <string name="download_wikipedia_item">Wikipedia</string>
     <string name="local_indexes_cat_wiki">Wikipedia</string>
     <string name="shared_string_show_details">Pokaż szczegóły</string>
-    <string name="local_recordings_delete_all_confirm">Zamierzasz usunąć %1$d notatki. Czy jesteś pewny?</string>
+    <string name="local_recordings_delete_all_confirm">Usunąć %1$d notatek?</string>
 	<string name="download_wikipedia_maps">Wikipedia</string>
     <string name="light_theme">Jasny</string>
     <string name="dark_theme">Ciemny</string>
@@ -2169,7 +2170,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="rendering_attr_currentTrackColor_name">Kolor GPX</string>
     <string name="rendering_attr_currentTrackWidth_name">Szerokość GPX</string>
     <string name="rendering_value_red_name">Czerwony</string>
-    <string name="rendering_value_translucent_orange_name">Półprzezroczysty pomarańczowy</string>
+    <string name="rendering_value_translucent_orange_name">Przezroczysty pomarańczowy</string>
     <string name="rendering_value_yellow_name">Żółty</string>
     <string name="rendering_value_translucent_yellow_name">Przezroczysty żółty</string>
     <string name="rendering_value_lightgreen_name">Jasnozielony</string>
@@ -2179,7 +2180,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="rendering_value_lightblue_name">Jasnoniebieski</string>
     <string name="rendering_value_translucent_lightblue_name">Przezroczysty jasnoniebieski</string>
     <string name="rendering_value_blue_name">Niebieski</string>
-    <string name="rendering_value_translucent_blue_name">Półprzezroczysty niebieski</string>
+    <string name="rendering_value_translucent_blue_name">Przezroczysty niebieski</string>
     <string name="rendering_value_purple_name">Fioletowy</string>
     <string name="rendering_value_translucent_purple_name">Półprzezroczysty fioletowy</string>
     <string name="restart_is_required">W celu zastosowania zmian, konieczne jest ponowne uruchomienie programu.</string>
