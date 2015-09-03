@@ -2079,4 +2079,9 @@
 	<string name="description">Апісаньне</string>
 	<string name="add_opening_hours">Дадаць гадзіны працы</string>
 	<string name="poi_dialog_poi_type">Тып POI</string>
+	<string name="please_specify_poi_type">Калі ласка, пазначце тып POI.</string>
+<string name="av_locations_descr">Gpx-файл з мецазнаходжаньнем заўваг</string>
+    <string name="av_locations">Месцазнаходжаньні</string>
+    <string name="number_of_rows_in_dash">Колькасьць радкоў на галоўным экране %1$s</string>
+	<string name="tag_poi_amenity">грамадзкі аб\'ект</string>
 	</resources>
