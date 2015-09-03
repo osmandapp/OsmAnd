@@ -1477,7 +1477,7 @@
 	<string name="gpx_info_distance">Avstånd: %1$s (%2$s punkter) </string>
 	<string name="gpx_info_start_time">Starttid: %1$tF,  %1$tT </string>
 	<string name="gpx_info_end_time">Sluttid: %1$tF,  %1$tT </string>
-	<string name="gpx_info_average_speed">Snittid: %1$s </string>
+	<string name="gpx_info_average_speed">"Genomsnittshastighet: %1$s "</string>
 	<string name="gpx_info_maximum_speed">Maxhastighet: %1$s </string>
 	<string name="gpx_info_avg_altitude">Snitthöjd: %1$s</string>
 	<string name="gpx_info_diff_altitude">Höjdskillnad: %1$s</string>
@@ -1989,4 +1989,5 @@
 	<string name="tag_poi_name">namn</string>
 	<string name="tag_poi_amenity">service</string>
 	<string name="number_of_rows_in_dash">Antal rader i panel %1$s</string>
+<string name="please_specify_poi_type">Ange typ av POI.</string>
 </resources>
