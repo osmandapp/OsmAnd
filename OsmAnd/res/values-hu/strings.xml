@@ -679,7 +679,7 @@
   
   <string name="data_settings">Adat</string>
   <string name="osm_settings">OSM szerkesztés</string>
-  <string name="auto_zoom_map_descr">Térkép automatikus nagyítása a sebesség függvényében</string>
+  <string name="auto_zoom_map_descr">Térkép automatikus nagyítása a sebesség függvényében (amikor a térkép követi a pozíciódat)</string>
   <string name="auto_zoom_map">Automatikus nagyítás</string>
   <string name="additional_settings">További beállítások</string>
   <string name="shared_string_settings">Beállítások</string>
@@ -904,15 +904,15 @@
   
   <string name="global_app_allocated_memory_descr">Lefoglalt memória %1$s MB (Android korlát %2$s MB, Dalvik %3$s MB).</string>
   <string name="global_app_allocated_memory">Lefoglalt memória</string>
-  <string name="native_app_allocated_memory_descr">Alkalmazás által lefoglalt összes natív memória %1$s MB (dalvik %2$s MB, egyéb %3$s MB). Proportional(?) memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</string>
+  <string name="native_app_allocated_memory_descr">Alkalmazás által lefoglalt összes natív memória %1$s MB (Dalvik %2$s MB, egyéb %3$s MB). Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</string>
   <string name="native_app_allocated_memory">Összes natív memória</string>
-  <string name="select_animate_speedup">Útvonalszimuláció gyorsulása</string>
+  <string name="select_animate_speedup">Útvonalszimuláció sebessége</string>
   <string name="osmand_parking_hours">Óra</string>
   <string name="osmand_parking_minutes">Perc</string>
   <string name="osmand_parking_position_description_add_time">Autó leparkolva:</string>
   <string name="use_compass_navigation_descr">Iránytű használata navigáláshoz, ha az irány nem érzékelhető</string>
   <string name="use_compass_navigation">Iránytű használata</string>
-  <string name="route_updated_loc_found">Amint megvan a pozíció, az útvonal újra lesz tervezve</string>
+  <string name="route_updated_loc_found">Az útvonaltervezés elindul, amint megvan a pozíció</string>
   <string name="continue_follow_previous_route_auto">Az előző navigáció még nem ért véget. Folytassuk? (%1$s másodperc)</string>
   
   
@@ -926,7 +926,7 @@
 \n\t* A térképbeállítások mostantól a térképképernyőről érhetők el
 \n\t* Képernyő lezárása gomb rögzítési beállításokkal
 \n\t* Javított arab és kannada írásjelek és jobbról balra író nyelvek "</string>
-  <string name="map_widget_top_text">Utca neve</string>
+  <string name="map_widget_top_text">Utcanév</string>
   <string name="map_widget_config">Képernyő beállítása</string>
   
   <string name="map_widget_back_to_loc">Hol vagyok?</string>
@@ -949,14 +949,14 @@
   <string name="bg_service_screen_lock">Képernyőzár be</string>
   <string name="bg_service_screen_lock_toast">Képernyő lezárva</string>
   <string name="bg_service_interval">GPS bekapcsolási időköz:</string>
-  <string name="screen_is_locked">Képernyőzár feloldása a lakat ikonnal</string>
+  <string name="screen_is_locked">Képernyőzár feloldásához nyomj a lakat ikonra</string>
   <string name="bg_service_screen_unlock">Képernyőzár ki</string>
   <string name="bg_service_sleep_mode_off">Alvó mód\n bekapcsolása</string>
   <string name="bg_service_sleep_mode_on">Alvó mód\n kikapcsolása</string>
 <string name="avoid_in_routing_title">Elkerülés…</string>
 <string name="avoid_in_routing_descr">Fizetős utak, kompok, földutak elkerülése</string>
 <string name="show_warnings_title">Riasztások megjelenítése…</string>
-<string name="show_warnings_descr">Sebességhatárok, traffipaxok és fekvőrendőrök jelzése</string>
+<string name="show_warnings_descr">Sebességhatárok, traffipaxok, fekvőrendőrök, sávinformációk jelzése</string>
 <string name="map_widget_fluorescent">Élénk színű utak</string>
 <string name="map_widget_show_ruler">Lépték</string>
 
@@ -979,7 +979,7 @@
 <string name="day_night_info">Nappal/éjjel információ</string>
 <string name="map_widget_day_night">Nappali/éjjeli térképmód</string>
 <string name="map_widget_vector_attributes">Megjelenítési jellemzők</string>
-<string name="map_widget_renderer">Térképmegjelenítési stílus</string>
+<string name="map_widget_renderer">Térkép megjelenítési stílus</string>
 <string name="tip_app_mode_t_v2">OsmAnd több különböző (személyre szabható) üzemmódot támogat különböző felhasználásokhoz.
 \n\nA módot útvonaltervezésnél, vagy a térkép bal alsó sarkában lévő ikonnal (autó, bicikli vagy gyalogos) tudod megváltoztatni.
 	</string>
