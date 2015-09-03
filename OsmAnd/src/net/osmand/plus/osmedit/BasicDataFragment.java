@@ -20,8 +20,8 @@ import android.widget.TextView;
 import net.osmand.PlatformUtil;
 import net.osmand.osm.edit.OSMSettings;
 import net.osmand.plus.IconsCache;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.osmedit.data.EditPoiData;
 import net.osmand.plus.osmedit.data.Tag;
 import net.osmand.plus.osmedit.dialogs.OpeningHoursDaysDialogFragment;
@@ -52,7 +52,7 @@ public class BasicDataFragment extends Fragment {
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		IconsCache iconsCache = ((MapActivity) getActivity()).getMyApplication().getIconsCache();
+		IconsCache iconsCache = ((OsmandApplication) getActivity().getApplication()).getIconsCache();
 		View view = inflater.inflate(R.layout.fragment_edit_poi_normal, container, false);
 
 		ImageView streetImageView = (ImageView) view.findViewById(R.id.streetImageView);

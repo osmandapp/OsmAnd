@@ -4,9 +4,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
@@ -27,13 +25,11 @@ import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.OSMSettings;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.osmedit.data.EditPoiData;
 import net.osmand.plus.osmedit.data.Tag;
 
 import org.apache.commons.logging.Log;
 
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
@@ -58,7 +54,7 @@ public class AdvancedDataFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		final View view = inflater.inflate(R.layout.fragment_edit_poi_advanced, container, false);
 
-		deleteDrawable = ((MapActivity)getActivity()).getMyApplication().getIconsCache()
+		deleteDrawable = ((OsmandApplication) getActivity().getApplication()).getIconsCache()
 				.getPaintedContentIcon(R.drawable.ic_action_remove_dark,
 						getActivity().getResources().getColor(R.color.icon_color_light));
 		TextView nameTextView = (TextView) view.findViewById(R.id.nameTextView);

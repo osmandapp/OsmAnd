@@ -2,12 +2,15 @@ package net.osmand.plus.osmedit;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.DialogFragment;
@@ -16,6 +19,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
@@ -44,6 +48,8 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.OnBackPressedListener;
+import net.osmand.plus.helpers.OnBackPressedProvider;
 import net.osmand.plus.osmedit.data.EditPoiData;
 import net.osmand.plus.osmedit.data.Tag;
 import net.osmand.plus.osmedit.dialogs.DeletePoiDialogFragment;
@@ -58,7 +64,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
 
-public class EditPoiFragment extends Fragment {
+public class EditPoiFragment extends DialogFragment implements OnBackPressedListener {
 	public static final String TAG = "EditPoiFragment";
 	private static final Log LOG = PlatformUtil.getLog(EditPoiFragment.class);
 
@@ -97,6 +103,15 @@ public class EditPoiFragment extends Fragment {
 		allTranslatedSubTypes = getMyApplication().getPoiTypes()
 				.getAllTranslatedNames();
 		editPoiData.amenity = (Amenity) getArguments().getSerializable(KEY_AMENITY);
+	}
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		boolean isLightTheme = ((OsmandApplication) getActivity().getApplication())
+				.getSettings().OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME;
+		int themeId = isLightTheme ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
+		setStyle(STYLE_NO_FRAME, themeId);
 	}
 
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
@@ -334,16 +349,34 @@ public class EditPoiFragment extends Fragment {
 		return view;
 	}
 
-	private void tryAddTag(String key, String value) {
-		if (!Algorithms.isEmpty(value)) {
-			editPoiData.tags.add(new Tag(key, value));
-		}
+	@Override
+	public void onResume() {
+		super.onResume();
+		// Do not forget to unregister
+		((OnBackPressedProvider) getActivity()).setmOnBackPressedListener(this);
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		((OnBackPressedProvider) getActivity()).setmOnBackPressedListener(null);
 	}
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		outState.putSerializable(TAGS_LIST, editPoiData.tags);
 		super.onSaveInstanceState(outState);
+	}
+
+	@Override
+	public void onBackPressed() {
+		new AreYouSureDialogFrgament().show(getChildFragmentManager(), "AreYouSureDialogFrgament");
+	}
+
+	private void tryAddTag(String key, String value) {
+		if (!Algorithms.isEmpty(value)) {
+			editPoiData.tags.add(new Tag(key, value));
+		}
 	}
 
 	public static EditPoiFragment createAddPoiInstance(double latitude, double longitude,
@@ -554,6 +587,24 @@ public class EditPoiFragment extends Fragment {
 			}
 			DeletePoiDialogFragment.createInstance(n).show(activity.getSupportFragmentManager(),
 					"DeletePoiDialogFragment");
+		}
+	}
+
+	public static class AreYouSureDialogFrgament extends DialogFragment {
+		@NonNull
+		@Override
+		public Dialog onCreateDialog(Bundle savedInstanceState) {
+			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+			builder.setTitle("Are you sure?")
+					.setMessage("Any unsaved changes will be lost. Continue?")
+					.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							((DialogFragment) getParentFragment()).dismiss();
+						}
+					})
+					.setNegativeButton(R.string.shared_string_cancel, null);
+			return super.onCreateDialog(savedInstanceState);
 		}
 	}
 }

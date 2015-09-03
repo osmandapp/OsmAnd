@@ -64,6 +64,8 @@ import net.osmand.plus.base.FailSafeFuntions;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.helpers.GpxImportHelper;
+import net.osmand.plus.helpers.OnBackPressedListener;
+import net.osmand.plus.helpers.OnBackPressedProvider;
 import net.osmand.plus.helpers.WakeLockHelper;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
@@ -87,7 +89,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class MapActivity extends AccessibleActivity {
+public class MapActivity extends AccessibleActivity implements OnBackPressedProvider {
 	private static final int SHOW_POSITION_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 1;
 	private static final int LONG_KEYPRESS_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 2;
 	private static final int LONG_KEYPRESS_DELAY = 500;
@@ -127,6 +129,8 @@ public class MapActivity extends AccessibleActivity {
 	private AppInitializeListener initListener;
 	private IMapDownloaderCallback downloaderCallback;
 	private DrawerLayout drawerLayout;
+
+	private OnBackPressedListener mOnBackPressedListener;
 
 	public static final String SHOULD_SHOW_DASHBOARD_ON_START = "should_show_dashboard_on_start";
 
@@ -374,6 +378,10 @@ public class MapActivity extends AccessibleActivity {
 
 	@Override
 	public void onBackPressed() {
+		if (mOnBackPressedListener != null) {
+			mOnBackPressedListener.onBackPressed();
+			return;
+		}
 		if (dashboardOnMap.onBackPressed()) {
 			return;
 		}
@@ -992,5 +1000,10 @@ public class MapActivity extends AccessibleActivity {
 		} else {
 			openDrawer();
 		}
+	}
+
+	@Override
+	public void setmOnBackPressedListener(OnBackPressedListener listener) {
+		mOnBackPressedListener = listener;
 	}
 }
