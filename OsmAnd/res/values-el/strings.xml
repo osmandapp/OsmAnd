@@ -1829,4 +1829,5 @@
 	<string name="simulate_your_location">Προσομοίωση της θέση σας</string>
     <string name="rendering_value_highContrastRoads_name">Δρόμοι με υψηλή αντίθεση</string>
 	<string name="plugin_settings">Πρόσθετα</string>
-	</resources>
+	<string name="av_locations">Τοποθεσίες</string>
+    </resources>
