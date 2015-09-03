@@ -113,9 +113,6 @@ public class NotesFragment extends OsmAndListFragment {
 		items = new ArrayList<>(plugin.getAllRecordings());
 		listAdapter = new NotesAdapter(items);
 		getListView().setAdapter(listAdapter);
-		if (!AndroidUiHelper.isOrientationPortrait(getActivity())) {
-			((ActionBarProgressActivity) getActivity()).getClearToolbar(false);
-		}
 	}
 
 	@Override

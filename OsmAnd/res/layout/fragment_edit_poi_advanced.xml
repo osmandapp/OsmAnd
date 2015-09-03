@@ -4,7 +4,7 @@
     xmlns:osmand="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:theme="@style/OsmandLightTheme.NewAppTheme">
+    android:theme="?attr/new_app_theme">
 
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"

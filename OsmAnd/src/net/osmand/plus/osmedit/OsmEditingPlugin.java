@@ -1,6 +1,19 @@
 package net.osmand.plus.osmedit;
 
-import java.util.List;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
@@ -24,20 +37,7 @@ import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
-import android.content.Intent;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.Toast;
+import java.util.List;
 
 
 public class OsmEditingPlugin extends OsmandPlugin {
@@ -158,10 +158,8 @@ public class OsmEditingPlugin extends OsmandPlugin {
 					EditPoiFragment editPoiFragment =
 							EditPoiFragment.createAddPoiInstance(latitude, longitude,
 									mapActivity.getMyApplication());
-					mapActivity.getSupportFragmentManager().beginTransaction()
-							.add(R.id.fragmentContainer, editPoiFragment, EditPoiFragment.TAG)
-							.addToBackStack(null)
-							.commit();
+					editPoiFragment.show(mapActivity.getSupportFragmentManager(),
+							EditPoiFragment.TAG);
 				} else if (resId == R.string.context_menu_item_open_bug) {
 					if (osmBugsLayer == null) {
 						registerLayers(mapActivity);

@@ -4,19 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dashboard_background"
+    android:background="?attr/bg_color"
+    android:clickable="true"
     android:orientation="vertical"
-    tools:context="net.osmand.plus.osmedit.EditPoiFragment"
-    android:clickable="true">
+    tools:context="net.osmand.plus.osmedit.EditPoiFragment">
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/dashboard_map_toolbar"
+        android:background="?attr/pstsTabBackground"
         android:minHeight="@dimen/dashboard_map_toolbar"
+        android:theme="?attr/toolbar_theme"
         app:contentInsetLeft="72dp"
-        app:contentInsetStart="72dp"
-        android:theme="@style/OsmandLightTheme.Toolbar"
-        android:background="@color/osmand_orange"/>
+        app:contentInsetStart="72dp"/>
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -27,7 +28,8 @@
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/OsmandLightTheme.DarkActionbar">
+            android:background="?attr/pstsTabBackground"
+            android:theme="?attr/appbar_layout_theme">
             <!-- TODO change theme -->
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -75,9 +77,9 @@
                         android:id="@+id/poiTypeEditText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:completionThreshold="1"
                         android:drawableRight="@drawable/ic_action_arrow_drop_down"
                         android:hint="@string/poi_dialog_poi_type"
-                        android:completionThreshold="1"
                         tools:text="@string/lorem_ipsum"/>
 
                 </android.support.design.widget.TextInputLayout>
@@ -95,11 +97,11 @@
                 android:id="@+id/tab_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/color_white"
-                app:tabIndicatorColor="@color/osmand_orange"
-                app:tabSelectedTextColor="@color/osmand_orange"
-                app:tabTextColor="@android:color/darker_gray"
-                app:layout_scrollFlags="scroll"/>
+                android:background="?attr/pstsTabBackground"
+                app:layout_scrollFlags="scroll"
+                app:tabIndicatorColor="?attr/pstsIndicatorColor"
+                app:tabSelectedTextColor="?attr/pstsIndicatorColor"
+                app:tabTextColor="@android:color/darker_gray"/>
         </android.support.design.widget.AppBarLayout>
 
 
@@ -126,17 +128,19 @@
         <net.osmand.plus.widgets.ButtonEx
             android:id="@+id/cancelButton"
             style="@style/DashboardGeneralButton"
-            android:text="@string/shared_string_cancel"
+            android:height="48dp"
             android:gravity="center"
+            android:text="@string/shared_string_cancel"
             android:textColor="@color/dashboard_general_button_text_light"
             app:textAllCapsCompat="true"/>
 
         <net.osmand.plus.widgets.ButtonEx
             android:id="@+id/saveButton"
             style="@style/DashboardGeneralButton"
-            android:textColor="@color/dashboard_general_button_text_light"
-            tools:text="Save"
+            android:height="48dp"
             android:gravity="center"
-            app:textAllCapsCompat="true"/>
+            android:textColor="@color/dashboard_general_button_text_light"
+            app:textAllCapsCompat="true"
+            tools:text="Save"/>
     </LinearLayout>
 </LinearLayout>
