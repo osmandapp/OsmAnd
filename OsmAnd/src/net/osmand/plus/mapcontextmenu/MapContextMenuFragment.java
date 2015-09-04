@@ -21,23 +21,18 @@ import net.osmand.plus.activities.MapActivity;
 
 import org.apache.commons.logging.Log;
 
+import java.util.Map;
+
 
 public class MapContextMenuFragment extends Fragment {
 
 	public static final String TAG = "MapContextMenuFragment";
 	private static final Log LOG = PlatformUtil.getLog(MapContextMenuFragment.class);
 
-	private MapContextMenu contextMenu;
-
 	private View view;
 	private View mainView;
 
 	private float mainViewHeight;
-
-	public MapContextMenuFragment() {
-		super();
-		contextMenu = MapContextMenu.getInstance();
-	}
 
 	@Override
 	public void onAttach(Activity activity) {
@@ -138,10 +133,10 @@ public class MapContextMenuFragment extends Fragment {
 		}
 
 		TextView line1 = (TextView) view.findViewById(R.id.context_menu_line1);
-		line1.setText(contextMenu.getAddressStr());
+		line1.setText(MapContextMenu.getInstance().getAddressStr());
 
 		TextView line2 = (TextView) view.findViewById(R.id.context_menu_line2);
-		line2.setText(contextMenu.getLocationStr());
+		line2.setText(MapContextMenu.getInstance().getLocationStr());
 
 		final ImageButton buttonNavigate = (ImageButton) view.findViewById(R.id.context_menu_route_button);
 		buttonNavigate.setOnClickListener(new View.OnClickListener() {
