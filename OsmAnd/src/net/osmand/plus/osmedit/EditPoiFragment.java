@@ -25,6 +25,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,8 +49,6 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.OnBackPressedListener;
-import net.osmand.plus.helpers.OnBackPressedProvider;
 import net.osmand.plus.osmedit.data.EditPoiData;
 import net.osmand.plus.osmedit.data.Tag;
 import net.osmand.plus.osmedit.dialogs.DeletePoiDialogFragment;
@@ -64,7 +63,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
 
-public class EditPoiFragment extends DialogFragment implements OnBackPressedListener {
+public class EditPoiFragment extends DialogFragment {
 	public static final String TAG = "EditPoiFragment";
 	private static final Log LOG = PlatformUtil.getLog(EditPoiFragment.class);
 
@@ -346,31 +345,35 @@ public class EditPoiFragment extends DialogFragment implements OnBackPressedList
 			}
 		});
 		updateType(editPoiData.amenity);
+		setCancelable(false);
 		return view;
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
-		// Do not forget to unregister
-		((OnBackPressedProvider) getActivity()).setmOnBackPressedListener(this);
-	}
-
-	@Override
-	public void onPause() {
-		super.onPause();
-		((OnBackPressedProvider) getActivity()).setmOnBackPressedListener(null);
+		getDialog().setOnKeyListener(new DialogInterface.OnKeyListener() {
+			@Override
+			public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+				if (keyCode == android.view.KeyEvent.KEYCODE_BACK) {
+					if (event.getAction() == KeyEvent.ACTION_DOWN) {
+						return true;
+					} else {
+						new AreYouSureDialogFrgament().show(getChildFragmentManager(),
+								"AreYouSureDialogFrgament");
+						return true;
+					}
+				} else {
+					return false;
+				}
+			}
+		});
 	}
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		outState.putSerializable(TAGS_LIST, editPoiData.tags);
 		super.onSaveInstanceState(outState);
-	}
-
-	@Override
-	public void onBackPressed() {
-		new AreYouSureDialogFrgament().show(getChildFragmentManager(), "AreYouSureDialogFrgament");
 	}
 
 	private void tryAddTag(String key, String value) {
@@ -579,7 +582,7 @@ public class EditPoiFragment extends DialogFragment implements OnBackPressedList
 		protected Node doInBackground(Amenity[] params) {
 			return openstreetmapUtil.loadNode(params[0]);
 		}
-		
+
 		protected void onPostExecute(Node n) {
 			if (n == null) {
 				AccessibleToast.makeText(activity, activity.getResources().getString(R.string.poi_error_poi_not_found), Toast.LENGTH_LONG).show();
@@ -604,7 +607,7 @@ public class EditPoiFragment extends DialogFragment implements OnBackPressedList
 						}
 					})
 					.setNegativeButton(R.string.shared_string_cancel, null);
-			return super.onCreateDialog(savedInstanceState);
+			return builder.create();
 		}
 	}
 }
