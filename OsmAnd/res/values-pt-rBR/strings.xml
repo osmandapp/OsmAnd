@@ -1812,4 +1812,5 @@
 	<string name="poi_dialog_poi_type">Tipo de POI</string>
 	<string name="number_of_rows_in_dash">Número de linhas no traço de %1$s</string>
 <string name="tag_poi_amenity">facilidade</string>
-	</resources>
+	<string name="please_specify_poi_type">Por favor, especifique tipo de POI.</string>
+</resources>
