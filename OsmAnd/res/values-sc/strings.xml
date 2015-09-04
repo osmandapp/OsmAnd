@@ -2076,4 +2076,6 @@
 	<string name="add_opening_hours">Annanghe s’oràriu de abertura</string>
 	<string name="poi_dialog_poi_type">Casta de PDI</string>
 <string name="tag_poi_amenity">atratzione</string>
+	<string name="please_specify_poi_type">Dislinda casta de PDI.</string>
+<string name="number_of_rows_in_dash">Nùmeru de rigas in su pannellu %1$s</string>
 	</resources>

@@ -968,7 +968,7 @@
   <string name="avoid_in_routing_title">Unikanie…</string>
   <string name="avoid_in_routing_descr">Wyznacza trasy unikając dróg płatnych, nieutwardzonych, promów</string>
   <string name="show_warnings_title">Wyświetlanie ostrzeżeń…</string>
-  <string name="show_warnings_descr">Pokazuj ostrzeżenia ruchu drogowego, ostrzeżenia o fotoradarach i informacje o pasach</string>
+  <string name="show_warnings_descr">Wyświetla ostrzeżenia ruchu drogowego, ostrzeżenia o fotoradarach i informacje o pasach</string>
   
   <string name="tip_rotation_switching_t_v2">Możesz zmieniać sposób obracania mapy przez klikanie na ikonie kompasu.
 		\n\nMasz do wyboru:
@@ -980,8 +980,8 @@
 <string name="osmand_long_description_1000_chars">" OsmAnd (OSM Automatyczne Nawigowanie Do celu) OsmAnd jest programem open source do nawigacji z dostępem do szerokiej gamy globalnych map OpenStreetMap (OSM). Wszystkie dane map (wektorowe lub kafelkowe) mogą być przechowywane na karcie pamięci telefonu w użycia offline. OsmAnd oferuje również nawigację w trybie offline i online zawierającą zapowiedzi głosowe. Niektóre z podstawowych funkcji: - Funkcjonowanie w trybie offline (przechowuje pobrane mapy wektorowych lub kafelkowe w pamięci urządzenia) - Dostępne kompaktowe mapy w trybie offlinie dla całego świata - Pobieranie map kraju lub regionu bezpośrednio z aplikacji - Możliwość nakładania kilku warstw map, takich jak GPX lub tras nawigacji, ciekawe miejsc, ulubionych, linii konturu, przystanków komunikacji miejskiej, dodatkowe mapy z konfigurowalną przejrzystością - Wyszukiwanie Offline adresów i miejsc (POI) - Wyznaczanie w trybie Offline tras na krótkich dystansach (eksperymentalne) - Tryby samochodowy, rowerowy i pieszy z: - opcjonalnym automatycznym przełączaniem widoku dzień/noc - opcjonalnie skalowanie map w zależności od prędkości - opcjonalne wyrównanie map według kompasu lub kierunku ruchu - opcjonalne wyświetlanie wskazywanie pasów, ograniczeń prędkości, głosy nagrane i głowy TTS w bezpłatnej wersji OsmAnd: - limitowana liczba pobrań mapy - Brak dostępu do Wikipedii dla POI w trybie offline jest aktywnie rozwijany i dalszy rozwój jest uzależniony od wkładu pieniężnego na finansowanie rozwoju i testowania nowych funkcjonalności. Proszę rozważyć zakup OsmAnd + lub finansowanie konkretnych nowych funkcji lub dokonania ogólnej darowizny na osmand.net. "</string>
 <string name="osmand_plus_short_description_80_chars">OsmAnd to aplikacja open source do nawigacji obsługująca mapy offline i online</string>
 <string name="avoid_motorway">Autostrad</string>
-<string name="snap_to_road_descr">Przyciągaj pozycję do drogi podczas nawigacji</string>
-<string name="snap_to_road">Przyciągaj do drogi</string>
+<string name="snap_to_road_descr">Przyciąga pozycję do dróg podczas nawigowania</string>
+<string name="snap_to_road">Przyciąganie do drogi</string>
 <string name="tip_recent_changes_0_8_3_t">"Zmiany w 0.8.3:
 \n\t* Poprawione route guidance
 \n\t* Opcja unikania autostrad
@@ -1203,7 +1203,7 @@
     </string>
     
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ Mapy i Nawigacja</string>
-	<string name="street_name">Ulica</string>
+	<string name="street_name">Nazwa ulicy</string>
 	<string name="hno">Numer domu</string>
     <string name="choose_osmand_theme">Styl</string>
     <string name="accessibility_options">Opcje ułatwień dostępu</string>
@@ -1296,12 +1296,12 @@
 	\n\t* Dużo zmian w interfejsie
 	\n\t* Poprawki w wyświetlaniu odległości, analizatorze GPX, obsłudze punktów pośrednich, widżecie planowania, wysyłania do OSM, obsłudze https
     </string>
-    <string name="osb_author_or_password_not_specified">Wprowadź nazwę użytkownika OSM i hasło w Ustawieniach</string>
+    <string name="osb_author_or_password_not_specified">Proszę wprowadzić nazwę użytkownika i hasło OSM w ustawieniach</string>
     <string name="clear_intermediate_points">Wyczyść punkty pośrednie</string>
     <string name="keep_intermediate_points">Zachowaj punkty pośrednie</string>
-    <string name="new_directions_point_dialog">Masz już ustawione punkty pośrednie.</string>
-    <string name="context_menu_item_directions_to">Trasa do tego miejsca</string>
-    <string name="context_menu_item_directions_from">Trasa z tego miejsca</string>
+    <string name="new_directions_point_dialog">Już ustalono punkty pośrednie.</string>
+    <string name="context_menu_item_directions_to">Nawiguj do</string>
+    <string name="context_menu_item_directions_from">Nawiguj z</string>
     <string name="route_descr_map_location">Mapa: </string>
     <string name="route_to">Do:</string>
     <string name="route_via">Przez:</string>
@@ -1312,8 +1312,8 @@
     <string name="speak_cameras">Fotoradary</string>
 	<string name="speak_traffic_warnings">Ostrzeżenia o ruchu</string>
 	<string name="osb_author_dialog_password">Hasło OSM (opcjonalne)</string>
-	<string name="speak_title">Zapowiadaj…</string>
-	<string name="speak_descr">Konfiguruj zapowiadanie nazw ulic, ostrzeżeń o ruchu (przymusowe przystanki, progi zwalniające), fotoradarów, ograniczeń prędkości</string>
+	<string name="speak_title">Zapowiadanie…</string>
+	<string name="speak_descr">Konfiguruje zapowiadanie nazw ulic, ostrzeżeń o ruchu (przymusowe przystanki, progi zwalniające), fotoradarów, ograniczeń prędkości</string>
 	<string name="speak_street_names">Nazwy ulic (TTS)</string>
     <string name="announce_gpx_waypoints">Punkty śladu GPX</string>
         
@@ -1563,14 +1563,14 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="routing_attr_short_way_description">Używaj najkrótszej drogi</string>
 	<string name="routing_attr_avoid_toll_name">Unikaj płatnych dróg</string>
 	<string name="routing_attr_avoid_toll_description">Unikaj płatnych dróg</string>
-	<string name="routing_attr_avoid_unpaved_name">Unikaj nieutwardzone drogi</string>
-	<string name="routing_attr_avoid_unpaved_description">Unikaj nieutwardzonych dróg</string>
-	<string name="routing_attr_avoid_ferries_name">Unikaj przepraw promowych</string>
-	<string name="routing_attr_avoid_ferries_description">Unikaj przepraw promowych</string>
-	<string name="routing_attr_avoid_motorway_name">Unikaj autostrad</string>
-	<string name="routing_attr_avoid_motorway_description">Unikaj autostrad</string>
+	<string name="routing_attr_avoid_unpaved_name">Unikanie nieutwardzonych dróg</string>
+	<string name="routing_attr_avoid_unpaved_description">Unikanie nieutwardzonych dróg</string>
+	<string name="routing_attr_avoid_ferries_name">Unikanie przepraw promowych</string>
+	<string name="routing_attr_avoid_ferries_description">Unikanie przepraw promowych</string>
+	<string name="routing_attr_avoid_motorway_name">Unikanie autostrad</string>
+	<string name="routing_attr_avoid_motorway_description">Unikanie autostrad</string>
 	<string name="routing_attr_weight_name">Limit wagi</string>
-	<string name="routing_attr_weight_description">Określ ograniczenie masy pojazdu dozwolone na drodze</string>
+	<string name="routing_attr_weight_description">Określa maksymalną, dozwoloną masę pojazdu</string>
     <string name="select_gpx">Wybierz GPX…</string>
     <string name="route_descr_select_destination">Wybierz cel podróży</string>
     <string name="shared_string_select_on_map">Wybierz na mapie</string>
@@ -1825,7 +1825,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="lang_sw">Suahili</string>
     <string name="lang_he">Hebrajski</string>
     <string name="forward">Naprzód</string>
-    <string name="home">Dom</string>
+    <string name="home">Ekran główny</string>
     <string name="live_monitoring_m_descr">Wysyła dane śledzenia do określonej usługi internetowej jeżeli rejestrowanie śladów jest włączone.</string>
 	<string name="live_monitoring_m">Śledzenie online (wymagane GPX)</string>
     <string name="live_monitoring_start">Rozpocznij śledzenie online</string>
@@ -1888,12 +1888,13 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="waypoints">Punkty trasy</string>
     <string name="targets">Kierunki</string>
     <string name="way_alarms">Ostrzeżenia ruchu drogowego</string>
-    <string name="speak_favorites">Ogłaszaj Ulubione</string>
-    <string name="speak_poi">Ogłaszaj punkty POI</string>
+    <string name="speak_favorites">Pobliskie ulubione</string>
+    <string name="speak_poi">Pobliskie punkty POI</string>
     <string name="save_track_to_gpx_globally">Rejestrowanie śladu do pliku GPX</string>
 	<string name="save_track_to_gpx_globally_descr">Rejestrowanie położenia do pliku GPX można włączyć lub wyłączyć używając widżetu rejestrowania GPX na ekranie mapy</string>
 	<string name="save_track_interval_globally">Częstość rejestrowania</string>
-	<string name="record_plugin_description">"Wtyczka ta aktywuje funkcje nagrywania i zapisywania śladów ręcznie dotykając widgetu rejestrowania GPX na ekranie mapy, lub także automatyczne logowanie wszystkich tras nawigacyjnych do pliku GPX. ↵\n↵\nNagrane ślady mogą być dzielone ze swoimi przyjaciółmi lub być wykorzystywane jako wkład do rozwoju OSM. Sportowcy mogą korzystać z nagranych ścieżek do monitorowania treningów. Podstawowa analiza śladów może być wykonywane bezpośrednio w OsmAnd, podobnie jak czasy okrążeń, średniej prędkości itp, a ślady mogą być oczywiście później analizowane w specjalnych narzędziach do analizy przygotowanych przez innych dostawców. "</string>
+	<string name="record_plugin_description">"Aktywuje funkcje nagrywania i zapisywania tras za pomocą widżetu rejestrowania śladów GPX na ekranie mapy lub automatyczne rejestruje przebiegi wszystkich tras do plików GPX.
+\n\nNagrane ślady można udostępnić znajomym lub wykorzystać na rzecz rowoju map Openstreetmap. Sportowcy mogą korzystać z nagranych śladów do monitorowania treningów. W tym celu OsmAnd udostępnia podstawowe informacje takie, jak czasy okrążeń, średnia prędkość itp. Ślady mogą być później analizowane w specjalnych narzędziach do analizy przygotowanych przez innych dostawców. "</string>
     <string name="confirm_every_run">Ponawianie pytania</string>
 	<string name="save_global_track_interval_descr">Wybierz tempo rejestrowania dla nagrywania ścieżki (włączonego poprzez widżet rejestrowania GPX na mapie)</string>
 	<string name="save_global_track_interval">Ogólna częstość rejestrowania</string>
@@ -1983,7 +1984,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="traffic_warning_railways">Przejazd kolejowy</string>
 	<string name="traffic_warning_pedestrian">Przejście dla pieszych</string>
 	<string name="show_railway_warnings">Pokazuj przejazdy kolejowe</string>
-	<string name="show_pedestrian_warnings">Pokazuj przejścia dla pieszych</string>
+	<string name="show_pedestrian_warnings">Przejścia dla pieszych</string>
     <string name="speak_pedestrian">Przejścia dla pieszych</string>
     
 	<string name="gps_status">Status GPS</string>
@@ -2047,7 +2048,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="track_segments">Segmenty</string>
 	<string name="track_points">Punkty trasy</string>
 	<string name="plugin_touringview_name">Widok mapy turystycznej</string>
-	<string name="plugin_touringview_descr">"Włączenie tego widoku zmienia styl mapy OsmAnd na \'turystyczny\', który jest specjalnym trybem wysokiej rozdzielczości dla turystów i kierowców zawodowych.\n\nTen widok dostarcza w danych mapy przy każdym poziomie przybliżenia maksymalną ilość dostępnych detali (w szczególności dróg, szlaków, ścieżek oraz znaków orientacyjnych).\n\nW sposób jasny i jednoznaczny szereguje typy dróg wg przypisanych kolorów, co jest przydatne, np. podczas prowadzenia dużych pojazdów.\n\nUdostępnia specjalne opcje turystyczne, jak np. trasy rowerowe lub alpejskie szlaki górskie.\n\nNie potrzeba pobierać specjalnej mapy, ten widok jest tworzony z map standardowych.\n\nMożna go wyłączyć używając obecnej tutaj opcji lub zmieniając styl mapy w menu konfiguracji mapy. "</string>
+	<string name="plugin_touringview_descr">"Zmienia styl mapy OsmAnd na „turystyczny”, który jest specjalnym trybem wysokiej rozdzielczości dla turystów i kierowców zawodowych.\n\nTen widok dostarcza w danych mapy przy każdym poziomie przybliżenia maksymalną ilość dostępnych detali (w szczególności dróg, szlaków, ścieżek oraz znaków orientacyjnych).\n\nW sposób jasny i jednoznaczny szereguje typy dróg wg przypisanych kolorów, co jest przydatne, np. podczas prowadzenia dużych pojazdów.\n\nUdostępnia specjalne opcje turystyczne, jak np. trasy rowerowe lub alpejskie szlaki górskie.\n\nNie potrzeba pobierać specjalnej mapy, ten widok jest tworzony z map standardowych.\n\nMożna go wyłączyć używając obecnej tutaj opcji lub zmieniając styl mapy w menu konfiguracji mapy. "</string>
 	<string name="watch">Oglądaj</string>
 	<string name="rendering_attr_pisteRoutes_name">Stoki narciarskie</string>
 	<string name="rendering_attr_pisteGrooming_name">Ratrakowanie</string>
@@ -2056,7 +2057,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="remove_the_tag">Usuń tag</string>
     <string name="version_settings">Kompilacja</string>
     <string name="points">Punkty</string>
-    <string name="navigation_over_track">Rozpocząć nawigację wzdłuż trasy?</string>
+    <string name="navigation_over_track">Rozpocząć nawigowanie wzdłuż trasy?</string>
 	<string name="save_track_to_gpx_globally_headline">Zapis śladu na żądanie</string>
 	<string name="enable_proxy_descr">Konfiguruje proxy HTTP dla wszystkich zapytań sieciowych</string>
 	<string name="proxy_host_descr">Ustala nazwę hosta proxy (np. 127.0.0.1)</string>
@@ -2080,7 +2081,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="osm_changes_added_to_local_edits">Zmiany OSM dodane do zestawu zmian lokalnych</string>
    	<string name="mark_to_delete">Zaznacz, aby usunąć</string>
 	<string name="osmo_grop_name_length_alert">Nazwa grupy powinna zawierać co najmniej 3 znaki!</string>
-	<string name="shared_string_go">Idź</string>
+	<string name="shared_string_go">Nawiguj</string>
 	<string name="shared_string_not_use">Nie używaj</string>
 	<string name="plugin_nautical_descr">"Umożliwia tworzenie map nawigacyjnych dla łodzi, żaglówek oraz innych sportów wodnych.\n\nSpecjalny dodatek do Osm And wstawia znaki nawigacyjne i oznaczenia map morskich dla nawigacji śródlądowej oraz przybrzeżnej. Opis każdego znaku dostarcza szczegółów potrzebnych do ich identyfikacji oraz ich przeznaczenia (kategoria, kształt, kolor, kolejność, odniesienie itd.).\n\nW razie potrzeby należy wyłączyć tę wtyczkę lub zmienić styl w opcjach \"Styl mapy\" w menu \"Konfiguracja mapy\", aby powrócić do jednego z typowych stylów map OsmAnd. "</string>
 	<string name="plugin_ski_descr">"Dodaje do OsmAnd szczegóły dotyczące stoków narciarskich, tras biegowych, tras skitour, kolejek linowych i wyciągów narciarskich na świecie. Trasy i szlaki są pokolorowane według trudności i przedstawione w specjalnym zimowym stylu mapy, imitującym krajobraz pokryty śniegiem.\n\nWłączenie tego widoku zmienia styl mapy na „Zima i narty”, ukazujący teren pokryty śniegiem. Widok można wyłączyć przez wyłączenie wtyczki lub zmianę stylu w menu „Styl mapy” w „Konfiguracji mapy”. "</string>
@@ -2113,7 +2114,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="routing_attr_avoid_borders_name">Unikanie przekraczania granicy</string>
 	<string name="routing_attr_avoid_borders_description">Unika przekraczania granicy z innym państwem</string>
 	<string name="routing_attr_height_name">Limit wysokości</string>
-	<string name="routing_attr_height_description">Określ wysokość pojazdu, jaka ma być dozwolone podczas nawigowania</string>
+	<string name="routing_attr_height_description">Określa maksymalną, dozwoloną wysokość pojazdu</string>
     <string name="use_fast_recalculation">Inteligentne przeliczanie trasy</string>
 	<string name="use_fast_recalculation_desc">Przelicz tylko początkową część trasy dla długich podróży</string>
 <string name="shared_string_logoff">Wyloguj się</string>
@@ -2128,16 +2129,16 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="lang_ht">haitański</string>
     <string name="lang_gl">galicyjski</string>
     <string name="lang_et">estoński</string>
-    <string name="archive_wikipedia_data">Posiadasz pobrane stare niezgodne dane Wikipedia. Czy chcesz je zarchiwizować?</string>
-    <string name="download_wikipedia_files">Czy chcesz pobrać dodatkowe dane Wikipedii (%1$s MB)?</string>
-    <string name="gps_network_not_enabled">Usługa lokalizacji nie jest włączona. Czy chcesz go włączyć?</string>
-    <string name="disable_recording_once_app_killed_descrp">Wstrzymać rejestrowanie GPX, gdy aplikacja zostanie zabita (przez inne aplikacja). (Wskazanie trybu uśpienia OsmAnd zniknie z pasku powiadomień.)</string>
+    <string name="archive_wikipedia_data">W posiadaniu są stare niezgodne dane Wikipedia. Zarchiwizować je?</string>
+    <string name="download_wikipedia_files">Pobrać dodatkowe dane Wikipedii (%1$s MB)?</string>
+    <string name="gps_network_not_enabled">Usługa lokalizacji nie jest włączona. Włączyć ją?</string>
+    <string name="disable_recording_once_app_killed_descrp">Wstrzymuje rejestrowanie trasy po zakończeniu programu na liście ostatnich aplikacji. (Wskazanie trybu uśpienia OsmAnd zniknie z pasku powiadomień.)</string>
     <string name="shared_string_import2osmand">Import do OsmAnd</string>
     <string name="read_full_article">Czytaj cały artykuł (online)</string>
     <string name="download_wikipedia_item">Wikipedia</string>
     <string name="local_indexes_cat_wiki">Wikipedia</string>
     <string name="shared_string_show_details">Pokaż szczegóły</string>
-    <string name="local_recordings_delete_all_confirm">Zamierzasz usunąć %1$d notatki. Czy jesteś pewny?</string>
+    <string name="local_recordings_delete_all_confirm">Usunąć %1$d notatek?</string>
 	<string name="download_wikipedia_maps">Wikipedia</string>
     <string name="light_theme">Jasny</string>
     <string name="dark_theme">Ciemny</string>
@@ -2169,24 +2170,24 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="rendering_attr_currentTrackColor_name">Kolor GPX</string>
     <string name="rendering_attr_currentTrackWidth_name">Szerokość GPX</string>
     <string name="rendering_value_red_name">Czerwony</string>
-    <string name="rendering_value_translucent_orange_name">Półprzezroczysty pomarańczowy</string>
+    <string name="rendering_value_translucent_orange_name">Przezroczysty pomarańczowy</string>
     <string name="rendering_value_yellow_name">Żółty</string>
-    <string name="rendering_value_translucent_yellow_name">Półprzezroczysty żółty</string>
+    <string name="rendering_value_translucent_yellow_name">Przezroczysty żółty</string>
     <string name="rendering_value_lightgreen_name">Jasnozielony</string>
     <string name="rendering_value_translucent_lightgreen_name">Przezroczysty jasnozielony</string>
     <string name="rendering_value_green_name">Zielony</string>
-    <string name="rendering_value_translucent_green_name">Półprzezroczysty zielony</string>
+    <string name="rendering_value_translucent_green_name">Przezroczysty zielony</string>
     <string name="rendering_value_lightblue_name">Jasnoniebieski</string>
     <string name="rendering_value_translucent_lightblue_name">Przezroczysty jasnoniebieski</string>
     <string name="rendering_value_blue_name">Niebieski</string>
-    <string name="rendering_value_translucent_blue_name">Półprzezroczysty niebieski</string>
+    <string name="rendering_value_translucent_blue_name">Przezroczysty niebieski</string>
     <string name="rendering_value_purple_name">Fioletowy</string>
     <string name="rendering_value_translucent_purple_name">Półprzezroczysty fioletowy</string>
     <string name="restart_is_required">W celu zastosowania zmian, konieczne jest ponowne uruchomienie programu.</string>
     <string name="rendering_value_translucent_red_name">Prześwitujący czerwony</string>
     <string name="rendering_value_default13_name">Domyślny (13)</string>
 	<string name="rendering_value_defaultTranslucentCyan_name">Domyślny (prześwitujący niebieski)</string>
-    <string name="do_you_like_osmand">Czy lubisz OsmAnd?</string>
+    <string name="do_you_like_osmand">Podoba Ci się OsmAnd?</string>
 	<string name="we_really_care">Naprawdę nam zależy</string>
 	<string name="rate_this_app">Oceń tę aplikację</string>
 	<string name="rate_this_app_long">Oceń OsmAnd w sklepie Google Play</string>
@@ -2198,4 +2199,18 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="successfully_uploaded_pattern">Wysłano {0}/{1}</string>
 	<string name="try_again">Spróbuj ponownie</string>
 	<string name="error_message_pattern">Błąd: {0}</string>
-</resources>
+<string name="av_locations">Położenia</string>
+    <string name="plugin_settings">Wtyczki</string>
+	<string name="routing_attr_avoid_shuttle_train_name">Unikanie pociągów wahadłowych</string>
+	<string name="routing_attr_avoid_shuttle_train_description">Unikanie pociągów wahadłowych</string>
+    <string name="traffic_warning_hazard">Zagrożenie</string>
+    <string name="we_really_care_about_your_opinion">Zależy nam na opinii na temat programu i jest dla nas ważne, aby ją poznać.</string>
+	<string name="dahboard_options_dialog_title">Opcje ekranu głównego</string>
+	<string name="shared_string_card_was_hidden">Ukryto kartę</string>
+	<string name="shared_string_undo">Cofnij</string>
+	<string name="shared_string_skip">Pomiń</string>
+	<string name="app_name_osmand">OsmAnd</string>
+	<string name="offline_maps_and_navigation">Mapy offline\ni nawigacja</string>
+	<string name="please_specify_poi_type">Proszę określić typ POI.</string>
+<string name="number_of_rows_in_dash">Ilość wierszy na ekranie głównym %1$s</string>
+	</resources>

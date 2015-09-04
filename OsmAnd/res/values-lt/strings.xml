@@ -2126,4 +2126,5 @@
 <string name="opening_at">Darbo pradžia</string>
 	<string name="closing_at">Darbo pabaiga</string>
 	<string name="contact_info">Kontaktinė informacija</string>
-	</resources>
+	<string name="please_specify_poi_type">Prašome nurodyti LV tipą.</string>
+</resources>

@@ -101,7 +101,10 @@ public class RenderingIcons {
 		return iconsBmp.get(s);
 	}
 	
-	
+	public static Integer getResId(String id) {
+		return id.startsWith("h_") ? shaderIcons.get(id.substring(2)) : smallIcons.get(id);
+	}
+
 	static {
 		initIcons();
 	}

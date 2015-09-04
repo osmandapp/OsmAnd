@@ -65,6 +65,7 @@ import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.helpers.GpxImportHelper;
 import net.osmand.plus.helpers.WakeLockHelper;
+import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RoutingHelper;
@@ -88,7 +89,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class MapActivity extends AccessibleActivity {
-
 	private static final int SHOW_POSITION_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 1;
 	private static final int LONG_KEYPRESS_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 2;
 	private static final int LONG_KEYPRESS_DELAY = 500;
@@ -249,7 +249,11 @@ public class MapActivity extends AccessibleActivity {
 		});
 
 		drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+		MapContextMenu.getInstance().setApp(app);
+		MapContextMenu.getInstance().setMapActivity(this);
 	}
+
 
 	private void checkAppInitialization() {
 		if (app.isApplicationInitializing()) {
@@ -376,6 +380,10 @@ public class MapActivity extends AccessibleActivity {
 	@Override
 	public void onBackPressed() {
 		if (dashboardOnMap.onBackPressed()) {
+			return;
+		}
+		if (drawerLayout.isDrawerOpen(Gravity.LEFT)) {
+			closeDrawer();
 			return;
 		}
 		super.onBackPressed();
@@ -607,54 +615,6 @@ public class MapActivity extends AccessibleActivity {
 		showAndHideMapPosition();
 	}
 
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER && app.accessibilityEnabled()) {
-			if (!uiHandler.hasMessages(LONG_KEYPRESS_MSG_ID)) {
-				Message msg = Message.obtain(uiHandler, new Runnable() {
-					@Override
-					public void run() {
-						app.getLocationProvider().emitNavigationHint();
-					}
-				});
-				msg.what = LONG_KEYPRESS_MSG_ID;
-				uiHandler.sendMessageDelayed(msg, LONG_KEYPRESS_DELAY);
-			}
-			return true;
-		} else if (keyCode == KeyEvent.KEYCODE_MENU && event.getRepeatCount() == 1) {
-			toggleDrawer();
-			return true;
-		} else if (keyCode == KeyEvent.KEYCODE_SEARCH && event.getRepeatCount() == 1) {
-			Intent newIntent = new Intent(MapActivity.this, getMyApplication().getAppCustomization()
-					.getSearchActivity());
-			// causes wrong position caching: newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-			LatLon loc = getMapLocation();
-			newIntent.putExtra(SearchActivity.SEARCH_LAT, loc.getLatitude());
-			newIntent.putExtra(SearchActivity.SEARCH_LON, loc.getLongitude());
-			if (mapViewTrackingUtilities.isMapLinkedToLocation()) {
-				newIntent.putExtra(SearchActivity.SEARCH_NEARBY, true);
-			}
-			startActivity(newIntent);
-			newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			return true;
-		} else if (!app.getRoutingHelper().isFollowingMode()
-				&& OsmandPlugin.getEnabledPlugin(AccessibilityPlugin.class) != null) {
-			// Find more appropriate plugin for it?
-			if (keyCode == KeyEvent.KEYCODE_VOLUME_UP && event.getRepeatCount() == 0) {
-				if (mapView.isZooming()) {
-					changeZoom(+2);
-				} else {
-					changeZoom(+1);
-				}
-				return true;
-			} else if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN && event.getRepeatCount() == 0) {
-				changeZoom(-1);
-				return true;
-			}
-		}
-		return super.onKeyDown(keyCode, event);
-	}
-
 	public void setMapLocation(double lat, double lon) {
 		mapView.setLatLon(lat, lon);
 		mapViewTrackingUtilities.locationChanged(lat, lon, this);
@@ -826,6 +786,51 @@ public class MapActivity extends AccessibleActivity {
 	}
 
 	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER && app.accessibilityEnabled()) {
+			if (!uiHandler.hasMessages(LONG_KEYPRESS_MSG_ID)) {
+				Message msg = Message.obtain(uiHandler, new Runnable() {
+					@Override
+					public void run() {
+						app.getLocationProvider().emitNavigationHint();
+					}
+				});
+				msg.what = LONG_KEYPRESS_MSG_ID;
+				uiHandler.sendMessageDelayed(msg, LONG_KEYPRESS_DELAY);
+			}
+			return true;
+		} else if (keyCode == KeyEvent.KEYCODE_SEARCH && event.getRepeatCount() == 0) {
+			Intent newIntent = new Intent(MapActivity.this, getMyApplication().getAppCustomization()
+					.getSearchActivity());
+			// causes wrong position caching: newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+			LatLon loc = getMapLocation();
+			newIntent.putExtra(SearchActivity.SEARCH_LAT, loc.getLatitude());
+			newIntent.putExtra(SearchActivity.SEARCH_LON, loc.getLongitude());
+			if (mapViewTrackingUtilities.isMapLinkedToLocation()) {
+				newIntent.putExtra(SearchActivity.SEARCH_NEARBY, true);
+			}
+			startActivity(newIntent);
+			newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			return true;
+		} else if (!app.getRoutingHelper().isFollowingMode()
+				&& OsmandPlugin.getEnabledPlugin(AccessibilityPlugin.class) != null) {
+			// Find more appropriate plugin for it?
+			if (keyCode == KeyEvent.KEYCODE_VOLUME_UP && event.getRepeatCount() == 0) {
+				if (mapView.isZooming()) {
+					changeZoom(+2);
+				} else {
+					changeZoom(+1);
+				}
+				return true;
+			} else if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN && event.getRepeatCount() == 0) {
+				changeZoom(-1);
+				return true;
+			}
+		}
+		return super.onKeyDown(keyCode, event);
+	}
+
+	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {
 			if (!app.accessibilityEnabled()) {
@@ -834,6 +839,9 @@ public class MapActivity extends AccessibleActivity {
 				uiHandler.removeMessages(LONG_KEYPRESS_MSG_ID);
 				mapActions.contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
 			}
+			return true;
+		} else if (keyCode == KeyEvent.KEYCODE_MENU && event.getRepeatCount() == 0) {
+			toggleDrawer();
 			return true;
 		} else if (settings.ZOOM_BY_TRACKBALL.get()) {
 			// Parrot device has only dpad left and right

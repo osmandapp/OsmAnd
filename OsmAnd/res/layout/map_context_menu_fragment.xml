@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/context_menu_layout"
+              xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:layout_gravity="bottom"
+              android:background="@android:color/transparent"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/context_menu_shadow_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/context_menu_main"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:background="@android:color/white"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/context_menu_top_view"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/context_menu_icon_layout"
+                android:orientation="horizontal"
+                android:layout_width="42dp"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/context_menu_icon_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginLeft="14dp"
+                    android:tint="@color/color_unknown"
+                    android:src="@drawable/ic_action_building_number"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/context_menu_line1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:text="@string/search_address_building"
+                    android:textSize="@dimen/default_list_text_size_large"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/context_menu_line2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:layout_marginTop="3dp"
+                    android:text="@string/other_location"
+                    android:textColor="@color/secondary_text_disabled_material_light"
+                    android:textSize="@dimen/default_list_text_size"/>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#c9c9c9"/>
+
+        <LinearLayout
+            android:id="@+id/context_menu_buttons"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_gravity="bottom"
+            android:background="@android:color/white">
+
+            <ImageButton
+                android:id="@+id/context_menu_route_button"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:src="@drawable/map_directions"
+                android:tint="?attr/dashboard_general_button_text_color"/>
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:background="#c9c9c9"/>
+
+            <ImageButton
+                android:id="@+id/context_menu_fav_button"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:src="@drawable/ic_action_fav_dark"
+                android:tint="?attr/dashboard_general_button_text_color"/>
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:background="#c9c9c9"/>
+
+            <ImageButton
+                android:id="@+id/context_menu_share_button"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:src="@drawable/abc_ic_menu_share_mtrl_alpha"
+                android:tint="?attr/dashboard_general_button_text_color"/>
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:background="#c9c9c9"/>
+
+            <ImageButton
+                android:id="@+id/context_menu_more_button"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:src="@drawable/ic_action_core_overflow_dark"
+                android:tint="?attr/dashboard_general_button_text_color"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

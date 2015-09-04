@@ -19,6 +19,7 @@ public class PointDescription {
 	private String type = "";
 	private String name = "";
 	private String typeName;
+
 	private double lat = 0;
 	private double lon = 0;
 
@@ -38,7 +39,19 @@ public class PointDescription {
 	
 
 	public static final PointDescription LOCATION_POINT = new PointDescription(POINT_TYPE_LOCATION, "");
-	
+
+	public String getType() {
+		return type;
+	}
+
+	public double getLat() {
+		return lat;
+	}
+
+	public double getLon() {
+		return lon;
+	}
+
 	public PointDescription(double lat, double lon) {
 		this(POINT_TYPE_LOCATION, "");
 		this.lat = lat;
@@ -123,6 +136,10 @@ public class PointDescription {
 			}
 			return name;
 		}
+	}
+
+	public String getLocationName(Context ctx, boolean shortText) {
+		return getLocationName(ctx, lat, lon, shortText);
 	}
 
 	private String getLocationName(Context ctx, double lat, double lon, boolean sh) {

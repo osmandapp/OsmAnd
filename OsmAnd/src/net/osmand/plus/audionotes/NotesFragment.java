@@ -110,12 +110,9 @@ public class NotesFragment extends OsmAndListFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		items = new ArrayList<Recording>(plugin.getAllRecordings());
+		items = new ArrayList<>(plugin.getAllRecordings());
 		listAdapter = new NotesAdapter(items);
 		getListView().setAdapter(listAdapter);
-		if (!AndroidUiHelper.isOrientationPortrait(getActivity())) {
-			((ActionBarProgressActivity) getActivity()).getClearToolbar(false);
-		}
 	}
 
 	@Override

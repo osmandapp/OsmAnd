@@ -231,7 +231,7 @@
   <string name="voice_stream_voice_call">Audio chiamate vocali</string>
   <string name="voice_stream_notification">Notifiche stream</string>
   <string name="voice_stream_music">Audio media/musica</string>
-  <string name="warning_tile_layer_not_downloadable">L\'applicazione non riesce a scaricare lo strato della mappa  %1$s, prova a reinstallarlo.</string>
+  <string name="warning_tile_layer_not_downloadable">L\'applicazione non riesce a scaricare il livello della mappa %1$s, prova a reinstallarlo.</string>
   <string name="overlay_transparency_descr">Modifica trasparenza sovrapposizione</string>
   <string name="overlay_transparency">Trasparenza sovrapposizione</string>
   <string name="map_transparency_descr">Modifica trasparenza della mappa di base</string>
@@ -492,7 +492,7 @@
   <string name="route_head">Avanti</string>
   <string name="first_time_continue">Dopo</string>
   <string name="first_time_download">Scarica le regioni</string>
-  <string name="first_time_msg">Grazie di utilizzare OsmAnd. Per molte delle caratteristiche dell\'applicazione, hai bisogno dei dati offline locali, che possono essere scaricati da \'Impostazioni\'→\'Gestisci i file mappe\'. Sarà poi possibile visualizzare mappe, cercare indirizzi, PDI, e trovare trasporti pubblici.</string>
+  <string name="first_time_msg">Grazie di utilizzare OsmAnd. Per molte delle caratteristiche dell\'applicazione, hai bisogno dei dati offline locali, che possono essere scaricati da \'Impostazioni\'→\'Gestisci i file mappe\'. Sarà poi possibile visualizzare mappe, cercare indirizzi, PDI, calcolare percorsi e trovare trasporti pubblici.</string>
   <string name="search_poi_location">Ricerca segnale GPS…</string>
   <string name="search_near_map">Ricerca vicino all\'attuale centro della mappa</string>
   <string name="search_nearby">Ricerca vicino</string>
@@ -1176,7 +1176,7 @@
     <string name="recording_unavailable">non disponibile</string>
     <string name="recording_context_menu_arecord">Prendi una nota audio</string>
     <string name="recording_context_menu_vrecord">Prendi una nota video</string>
-    <string name="layer_recordings">Strato registrazioni</string>
+    <string name="layer_recordings">Livello registrazioni</string>
     <string name="recording_can_not_be_played">La registrazione non può essere riprodotta</string>
     <string name="recording_context_menu_delete">Elimina la registrazione</string>
     <string name="recording_context_menu_play">Riproduci</string>
@@ -1232,7 +1232,7 @@
     <string name="item_unchecked">non segnato</string>
     <string name="access_arrival_time">Orario arrivo</string>
     <string name="map_widget_gps_info">Informazioni GPS</string>
-    <string name="layer_hillshade">Strato ombreggiatura rilievi</string>
+    <string name="layer_hillshade">Livello ombreggiatura rilievi</string>
     <string name="osmand_play_title_30_chars">OsmAnd Mappe &amp; Navigazione</string>
 	<string name="osmand_extended_description_4000_chars">" ↵ OsmAnd (OSM Automatico Navigazione Direzioni) è un\'applicazione di navigazione e visualizzazione mappe con accesso ai dati liberi, mondiali e di gran qualità di OpenStreetMap (OSM). Tutte le mappe possono essere memorizzate nella scheda di memoria del dispositivo per l\'utilizzo offline. Attraverso il GPS del dispositivo OsmAnd offre la navigazione, con eventualmente la guida vocale, per l\'auto, la bicicletta e a piedi. Tutte le funzionalità sono disponibili sia online che offline (non c\'è bisogno della connessione a internet).↵ ↵ Alcune delle principali caratteristiche:↵ ↵ Navigazione↵ - Funziona online (velocemente) oppure offline (nessun costo di roaming quando si è fuori rete)↵ - Guida vocale svolta per svolta(voci registrate e sintetizzate)↵ - Indicazione di corsia opzionale, indicazione del nome della strada, indicazione del tempo di arrivo stimato.↵ - Supporta punti intermedi dell\'itinerario↵ - Ricalcolo automatico del percorso se ci si va fuori rotta↵ - Ricerca dei luoghi per indirizzo, per tipo (es.: ristorante, hotel, stazione di rifornimento, museo) o tramite coordinate geografiche.↵ ↵ Visualizzazione della mappa↵ - Visualizza la vostra posizione e orientamento sulla mappa↵ - Opzionalmente allinea la mappa al compasso del dispositivo o alla direzione del movimento↵ - Salva i vostri luoghi più importanti come Favoriti↵ - Visualizza i PDI (punti d\'interesse) vicino a voi↵ - Può visualizzare specifiche mappe online a mattonelle↵ - Può Visualizzare la visualizzazione satellitare (da Bing)↵ - Può visualizzare diverse sovrapposizioni come tracce GPX rotte/navigazione e mappe addizionali con trasparenze personalizzabili↵ - Opzionalmente Visualizza i nomi dei luoghi in lingua Inglese, locale, o con la pronuncia fonetica↵ ↵ Uso dei dati OpenStreetMap e di Wikipedia:↵ - Informazioni di alta qualità dai migliori progetti collaborativi del mondo↵ - Mappe globali da OpenSteetMap, disponibili per nazione o regione↵ - PDI Wikipedia, grandi per visualizzazione (non disponibili nella versione gratuita)↵ - Download gratuiti illimitati, direttamente dall\'applicazione (limite di 16 download nella versione gratuita)↵ - Mappe sempre aggiornate (aggiornate almeno mensilmente)↵ - Mappe a vettori compatte↵ - Scelta fra mappe complete e solo strade (Esempio: tutto il Giappone è 700 MB oppure 200 MB per le sole strade)↵ - Supporto anche per le mappe a tasselli online o in cache↵ - Caratteristiche per la di sicurezza - Passaggio opzionale fra vista notte o giorno - Visualizzazione opzionale del limite di velocità con avviso se viene superato↵ - zoom opzionale correlato alla velocità↵ - Condividete la vostra posizione così i vostri amici possono trovarvi↵ ↵ - Funzionalità bici e a piedi↵ - Le mappe includono percorsi a piedi, per escursionismo e per bicicletta, ottimo per l\'attività all\'aria aperta↵ - Visualizzazione e rotte speciali per bicicletta e a piedi - Opzione fermate trasporto pubblico (autobus, treno, tram) inclusi i nomi delle vie↵ - Registrazione opzionale del viaggio in file GPX in locale, sul dispositivo, o attraverso un servizio online↵ - Visualizzazione opzionale dell\'altitudine e della velocità↵ - Visualizzazione delle curve di livello e dell\'ombreggiatura dei rilievi (attraverso plugin opzionali)↵ ↵ Contribuzione diretta a OpenStreetMap↵ - Segnala errori della mappa↵ - Carica le tracce GPX su OSM direttamente dall\'applicazione↵ - Aggiunge i PDI e li carica direttamente su OSM (oppure successivamente se offline)↵ - Registrazione opzionale del viaggio anche in modalità \"sullo sfondo\" (fintanto che il dispositivo è in modalità sleep)↵ ↵ OsmAnd è a sorgente aperto ed è attivamente sviluppato. Tutti possono contribuire all\'applicazione riportando errori, migliorando le traduzioni o programmando nuove caratteristiche. Il progetto è in un vitale stato di continuo sviluppo attraverso tutte queste forme di sviluppo e interazione degli utenti. Il progresso del progetto conta sui contributi finanziari costituire i fondi per lo sviluppo, la programmazione e il test di nuove funzionalità. Acquistando OsmAnd+ aiutate l\'applicazione ad essere ancora più fantastica! E\' anche possibile finanziare specifiche nuove funzionalità, o fare una donazione generica a osmand.net.↵ ↵ ↵ Qualità della mappa e copertura approssimativa: ↵ ↵ - Western Europe: ****↵ - Estern Europe: ***↵ - Russia: *** - North America: ***↵ - South America: **↵ - Asia: **↵ - Japan &amp; Korea: ***↵ - Middle East: **↵ - Africa: **↵ - Antartica: *↵ ↵ Lista delle regioni supportate (sostanzialmente tutto il mondo!):↵ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, Argentina, Armenia, Aruba, Australia, Austria, Azerbaijan, Bahamas, Bahrain, Bangladesh, Barbados, Belarus, Belgium, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnia and Herzegovina, Botswana, Brazil, British Virgin Islands, Brunei, Bulgaria, Burkina Faso, Burundi, Cambodia, Cameroon, Canada, Cape Verde, Central African Republic, Chad, Chile, China, Colombia, Comoros, Congo, Costa Rica, Ivory Coast, Croatia, Cuba, Curaçao, Cyprus, Czech Republic, Denmark, Djibouti, Dominica, Dominican Republic, Ecuador, Egypt, El Salvador, Equatorial Guinea, Eritrea, Estonia, Ethiopia, Fiji, Finland, France, French Guiana, French Polynesia, Gabon, Gambia, Georgia, Germany, Ghana, Gibraltar, Greece, Greenland, Grenada, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Vatican, Honduras, Hong Kong, Hungary, Iceland, India, Indonesia, Iran, Iraq, Ireland, Isle of Man, Israel, Italy, Jamaica, Japan, Jersey, Jordan, Kazakhstan, Kenya, Kiribati, North Korea and South Korea, Kuwait, Kyrgyzstan, Laos, Latvia, Lebanon, Lesotho, Liberia, Libya, Liechtenstein, Lithuania, Luxembourg, Macao, Macedonia, Madagascar, Malawi, Malaysia, Maldives, Mali, Malta, Martinique, Mauritania, Mauritius, Mayotte, Mexico, Micronesia, Moldova, Monaco, Mongolia, Montenegro, Montserrat, Morocco, Mozambique, Myanmar, Namibia, Nauru, Nepal, Netherlands, Netherlands Antilles, New Caledonia, New Zealand, Nicaragua, Niger, Nigeria, Norway, Oman, Pakistan, Palau, Palestinian Territory, Panama, Papua New Guinea, Paraguay, Peru, Philippines, Poland, Portugal, Puerto Rico, Qatar, Romania, Russia, Rwanda, Saint Barthelemy, Saint Helena, Saint Kitts and Nevis, Saint Lucia, Saint Martin, Saint Pierre and Miquelon, Saint Vincent and the Grenadines, Samoa, San Marino, Saudi Arabia, Senegal, Serbia, Seychelles, Sierra Leone, Singapore, Slovakia, Slovenia, Somalia, South Africa, South Georgia, South Sudan, Spain, Sri Lanka, Sudan, Suriname, Swaziland, Sweden, Switzerland, Syria, Taiwan, Tajikistan, Tanzania, Thailand, Timor-Leste, Togo, Tokelau, Tonga, Trinidad and Tobago, Tunisia, Turkey, Turkmenistan, Tuvalu, Uganda, Ukraine, United Arab Emirates, United Kingdom (UK), United States of America (USA), Uruguay, Uzbekistan, Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Zimbabwe.↵ → "</string>
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ Mappe &amp; Navigazione</string>
@@ -1729,7 +1729,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="pause_navigation">Metti in pausa la navigazione</string>
 	<string name="rendering_attr_alpineHiking_name">Scala escursionismo alpino (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Disegna i sentieri in base alla scala SAC</string>
-    <string name="rendering_attr_hikingRoutesOSMC_name">Strato simboli escursionistici</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Livello simboli escursionistici</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Disegna i percorsi in base alle tracce OSMC</string>
     
 	<string name="rendering_attr_coloredBuildings_name">Colora gli edifici per tipo</string>
@@ -2033,7 +2033,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="shared_string_manage">Gestisci</string>
 	<string name="shared_string_edit">Modifica</string>
 	<string name="filter_poi_hint">Filtra per nome</string>
-    <string name="search_poi_category_hint">Scrivi cercare fra tutti</string>
+    <string name="search_poi_category_hint">Digita per cercare fra tutti i PDI</string>
     <string name="index_name_netherlands">Europa - Paesi Bassi</string>
 	<string name="copying_osmand_file_failed">Copia dei file fallita</string>    
     <string name="storage_directory_external">Memoria esterna</string>
@@ -2077,8 +2077,8 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="lang_vo">Volapuk</string>
     <string name="lang_th">Thailandese</string>
     <string name="lang_te">Telugu</string>
-    <string name="lang_nn">Norwegian (Nynorsk)</string>
-    <string name="light_theme">Luce</string>
+    <string name="lang_nn">Norvegese (Nynorsk)</string>
+    <string name="light_theme">Chiaro</string>
     <string name="dark_theme">Scuro</string>
     <string name="lang_pms">Piemontese</string>
     <string name="lang_bn">Bengalese</string>
@@ -2128,7 +2128,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="rate_this_app">Valuta questa app</string>
 	<string name="user_hates_app_get_feedback">Dicci perché.</string>
 	<string name="rate_this_app_long">Per favore dai a OsmAnd la tua valutazione su Google Play</string>
-	<string name="user_hates_app_get_feedback_long">Per favore dicci cosa vorresti cambiare in quest\'app.</string>
+	<string name="user_hates_app_get_feedback_long">Dicci cosa cambieresti in questa app.</string>
 <string name="download_live_updates">Aggiornamenti automatici</string>
 	<string name="failed_to_upload">Caricamento fallito</string>
 	<string name="delete_change">Cancella le modifiche</string>
@@ -2165,4 +2165,5 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="add_opening_hours">Aggiungi orari di apertura</string>
 	<string name="poi_dialog_poi_type">Tipo di PDI</string>
 <string name="number_of_rows_in_dash">Numero di righe del cruscotto %1$s</string>
+<string name="please_specify_poi_type">Per favore specifica il tipo si PDI.</string>
 </resources>

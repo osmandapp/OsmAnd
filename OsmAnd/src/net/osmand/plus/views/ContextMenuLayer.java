@@ -1,26 +1,17 @@
 package net.osmand.plus.views;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.concurrent.ConcurrentHashMap;
-
-import net.osmand.CallbackWithObject;
-import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
-import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.PointF;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
 import android.os.Build;
 import android.text.Html;
@@ -29,6 +20,22 @@ import android.view.MotionEvent;
 import android.widget.FrameLayout.LayoutParams;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import net.osmand.CallbackWithObject;
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
+import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.mapcontextmenu.MapContextMenu;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class ContextMenuLayer extends OsmandMapLayer {
 	
@@ -70,7 +77,12 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	private final MapActivity activity;
 	private float scaleCoefficient = 1;
 	private CallbackWithObject<LatLon> selectOnMap = null;
-	
+
+	private Bitmap mapContextMarker;
+	private boolean showMapContextMarker;
+
+	private Paint mapMarkerPaintIcon;
+
 	public ContextMenuLayer(MapActivity activity){
 		this.activity = activity;
 		if(activity.getLastNonConfigurationInstanceByKey(KEY_LAT_LAN) != null) {
@@ -117,6 +129,13 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		closeButton.setLayoutParams(lp);
 		closeButton.setImageDrawable(view.getResources().getDrawable(R.drawable.headliner_close));
 		closeButton.setClickable(true);
+
+		showMapContextMarker = false;
+		mapMarkerPaintIcon = new Paint();
+		mapMarkerPaintIcon.setColorFilter(new PorterDuffColorFilter(activity.getResources().getColor(R.color.osmand_orange), PorterDuff.Mode.SRC_IN));
+		mapContextMarker = BitmapFactory.decodeResource(view.getResources(), R.drawable.ic_action_marker2);
+
+
 		if(latLon != null){
 			setLocation(latLon, description);
 		}
@@ -133,6 +152,10 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		if(latLon != null){
 			int x = (int) box.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
 			int y = (int) box.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
+
+			if (showMapContextMarker)
+				canvas.drawBitmap(mapContextMarker, x - mapContextMarker.getWidth() / 2, y - mapContextMarker.getHeight(), mapMarkerPaintIcon);
+
 			textView.setTextColor(nightMode != null && nightMode.isNightMode() ? Color.GRAY : Color.WHITE);
 			if (textView.getText().length() > 0) {
 				canvas.translate(x - textView.getWidth() / 2, y - textView.getHeight());
@@ -176,7 +199,21 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		int minh = closeButton.getDrawable().getMinimumHeight();
 		closeButton.layout(0, 0, minw, minh);
 	}
-	
+
+	public void showMapContextMenuMarker() {
+		if (!showMapContextMarker) {
+			showMapContextMarker = true;
+			view.refreshMap();
+		}
+	}
+
+	public void hideMapContextMenuMarker() {
+		if (showMapContextMarker) {
+			showMapContextMarker = false;
+			view.refreshMap();
+		}
+	}
+
 	public void setLocation(LatLon loc, String description){
 		latLon = loc;
 		if(latLon != null){
@@ -391,10 +428,15 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		} else if (!disableSingleTap()) {
 			LatLon latLon = selectObjectsForContextMenu(tileBox, point);
 			if (latLon != null) {
-				String description = getSelectedObjectDescription();
-				setLocation(latLon, description);
-				view.refreshMap();
-				return true;
+				if (selectedObjects.size() == 1) {
+					Object selectedObj = selectedObjects.keySet().iterator().next();
+					showMapContextMenu(selectedObj, latLon, null);
+				} else {
+					String description = getSelectedObjectDescription();
+					setLocation(latLon, description);
+					view.refreshMap();
+					return true;
+				}
 			}
 		}
 		return false;
@@ -420,7 +462,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 					for (OsmandMapLayer layer : view.getLayers()) {
 						layer.populateObjectContextMenu(selectedObj, menuAdapter);
 					}
-					activity.getMapActions().contextMenuPoint(l.getLatitude(), l.getLongitude(), menuAdapter, selectedObj);
+					showMapContextMenu(selectedObj, l, menuAdapter);
+					//activity.getMapActions().contextMenuPoint(l.getLatitude(), l.getLongitude(), menuAdapter, selectedObj);
 				}
 			});
 			builder.show();
@@ -429,10 +472,23 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			for (OsmandMapLayer layer : view.getLayers()) {
 				layer.populateObjectContextMenu(selectedObj, menuAdapter);
 			}
-			activity.getMapActions().contextMenuPoint(l.getLatitude(), l.getLongitude(), menuAdapter, selectedObj);
+
+			showMapContextMenu(selectedObj, l, menuAdapter);
+			//activity.getMapActions().contextMenuPoint(l.getLatitude(), l.getLongitude(), menuAdapter, selectedObj);
 		}
 	}
-	
+
+	private void showMapContextMenu(Object obj, LatLon latLon, final ContextMenuAdapter menuAdapter) {
+		PointDescription pointDescription = selectedObjects.get(obj).getObjectName(obj);
+		pointDescription.setLat(latLon.getLatitude());
+		pointDescription.setLon(latLon.getLongitude());
+		this.latLon = latLon;
+
+		showMapContextMenuMarker();
+		MapContextMenu.getInstance().show(pointDescription, obj, menuAdapter);
+	}
+
+
 	@Override
 	public boolean onTouchEvent(MotionEvent event, RotatedTileBox tileBox) {
 		if (latLon != null) {
