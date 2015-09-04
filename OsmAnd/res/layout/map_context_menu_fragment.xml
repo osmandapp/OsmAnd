@@ -99,13 +99,14 @@
             android:layout_gravity="bottom"
             android:background="@android:color/white">
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/context_menu_route_button"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:scaleType="center"
+                android:background="?attr/dashboard_button"
                 android:src="@drawable/map_directions"
                 android:tint="@color/actionbar_dark_color"/>
 
@@ -114,13 +115,14 @@
                 android:layout_height="match_parent"
                 android:background="#c9c9c9"/>
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/context_menu_fav_button"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:scaleType="center"
+                android:background="?attr/dashboard_button"
                 android:src="@drawable/ic_action_fav_dark"
                 android:tint="@color/actionbar_dark_color"/>
 
@@ -129,13 +131,14 @@
                 android:layout_height="match_parent"
                 android:background="#c9c9c9"/>
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/context_menu_share_button"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:scaleType="center"
+                android:background="?attr/dashboard_button"
                 android:src="@drawable/abc_ic_menu_share_mtrl_alpha"
                 android:tint="@color/actionbar_dark_color"/>
 
@@ -144,13 +147,14 @@
                 android:layout_height="match_parent"
                 android:background="#c9c9c9"/>
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/context_menu_more_button"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:scaleType="center"
+                android:background="?attr/dashboard_button"
                 android:src="@drawable/ic_action_core_overflow_dark"
                 android:tint="@color/actionbar_dark_color"/>
 
