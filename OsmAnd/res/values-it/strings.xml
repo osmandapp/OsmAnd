@@ -2033,7 +2033,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="shared_string_manage">Gestisci</string>
 	<string name="shared_string_edit">Modifica</string>
 	<string name="filter_poi_hint">Filtra per nome</string>
-    <string name="search_poi_category_hint">Scrivi cercare fra tutti</string>
+    <string name="search_poi_category_hint">Digita per cercare fra tutti i PDI</string>
     <string name="index_name_netherlands">Europa - Paesi Bassi</string>
 	<string name="copying_osmand_file_failed">Copia dei file fallita</string>    
     <string name="storage_directory_external">Memoria esterna</string>
@@ -2077,8 +2077,8 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="lang_vo">Volapuk</string>
     <string name="lang_th">Thailandese</string>
     <string name="lang_te">Telugu</string>
-    <string name="lang_nn">Norwegian (Nynorsk)</string>
-    <string name="light_theme">Luce</string>
+    <string name="lang_nn">Norvegese (Nynorsk)</string>
+    <string name="light_theme">Chiaro</string>
     <string name="dark_theme">Scuro</string>
     <string name="lang_pms">Piemontese</string>
     <string name="lang_bn">Bengalese</string>
