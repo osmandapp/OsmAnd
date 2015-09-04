@@ -122,21 +122,22 @@ public class VoiceRouter {
 	public void updateAppMode(){
 		// turn prompt starts either at distance, or if actual-lead-time(currentSpeed) < maximum-lead-time  
 		// lead time criterion only for TURN_IN and TURN
-		PREPARE_LONG_DISTANCE = 3500;             // [105 sec] - 120 km/h
-		PREPARE_LONG_DISTANCE_END = 3000;         // [ 90 sec] - 120 km/h
+			PREPARE_LONG_DISTANCE = 3500;             // [105 sec] - 120 km/h
+			// To test for Issue #1411: Do not Play for PREPARE_LONG_DISTANCE:
+			PREPARE_LONG_DISTANCE_END = 3000 + 1000;         // [ 90 sec] - 120 km/h
 		if(router.getAppMode().isDerivedRoutingFrom(ApplicationMode.PEDESTRIAN)){
 			// prepare_long_distance warning not needed for pedestrian
-				PREPARE_LONG_DISTANCE_END = PREPARE_LONG_DISTANCE + 100; // do not play
+				PREPARE_LONG_DISTANCE_END = PREPARE_LONG_DISTANCE + 100; // Do not play
 			// prepare distance is not needed for pedestrian
 				PREPARE_DISTANCE = 200;           // [100 sec]
-				PREPARE_DISTANCE_END = 150 + 100; // [ 75 sec] + do not play
+				PREPARE_DISTANCE_END = 150 + 100; // [ 75 sec] + Do not play
 			TURN_IN_DISTANCE = 50;            //   25 sec, (was 100m, 50 sec)
 			TURN_IN_DISTANCE_END = 30;        //   15 sec  (was  70m, 35 sec)
 			TURN_DISTANCE = 15;               //   7,5sec (was  25m, 12 sec). Check if this works with GPS accuracy!
 			TURN_DEFAULT_SPEED = DEFAULT_SPEED = 2f;  //   7,2 km/h
 		} else if(router.getAppMode().isDerivedRoutingFrom(ApplicationMode.BICYCLE)){
-			PREPARE_LONG_DISTANCE = 500;      // [100 sec]
-			PREPARE_LONG_DISTANCE_END = 300;  // [ 60 sec]
+				PREPARE_LONG_DISTANCE = 500;      // [100 sec]
+				PREPARE_LONG_DISTANCE_END = 300 + 1000;  // [ 60 sec] + Do not play
 			PREPARE_DISTANCE = 200;           // [ 40 sec] (was 500m, 100sec)
 			PREPARE_DISTANCE_END = 120;       // [ 24 sec] (was 350m,  70sec)
 			TURN_IN_DISTANCE = 80;            //   16 sec  (was 225m,  45sec)
@@ -154,8 +155,8 @@ public class VoiceRouter {
 		} else {
 			DEFAULT_SPEED = router.getAppMode().getDefaultSpeed();
 			TURN_DEFAULT_SPEED = DEFAULT_SPEED / 2;
-			PREPARE_LONG_DISTANCE = (int) (DEFAULT_SPEED * 305);
-			PREPARE_LONG_DISTANCE_END = (int) (DEFAULT_SPEED * 225);
+				PREPARE_LONG_DISTANCE = (int) (DEFAULT_SPEED * 305);
+				PREPARE_LONG_DISTANCE_END = (int) (DEFAULT_SPEED * 225) + 1000; // Test do not play
 			PREPARE_DISTANCE = (int) (DEFAULT_SPEED * 125);	
 			PREPARE_DISTANCE_END = (int) (DEFAULT_SPEED * 100);
 			TURN_IN_DISTANCE = (int) (DEFAULT_SPEED * 30);
