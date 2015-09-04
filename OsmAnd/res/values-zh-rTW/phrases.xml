@@ -1061,7 +1061,7 @@
 	<string name="poi_tax_advisor">稅務顧問辦公室</string>
 
 	<string name="poi_religion_voodoo">巫毒教</string>
-	<string name="poi_religion_unitarian_universalist">一神普救派</string>
+	<string name="poi_religion_unitarian_universalist">唯一神普教派</string>
 	<string name="poi_religion_multifaith">多元宗教</string>
 	<string name="poi_religion_jain">耆那教</string>
 	<string name="poi_religion_spiritualist">唯靈論教</string>
@@ -1087,7 +1087,7 @@
 	<string name="poi_denomination_mormon">摩門教</string>
 	<string name="poi_denomination_jehovahs_witness">耶和華見證人</string>
 	<string name="poi_denomination_greek_orthodox">希臘正教</string>
-	<string name="poi_denomination_reformed">改革宗教會</string>
+	<string name="poi_denomination_reformed">歸正教會</string>
 	<string name="poi_denomination_seventh_day_adventist">基督復臨安息日會</string>
 	<string name="poi_denomination_episcopal">聖公會</string>
 	<string name="poi_denomination_shia">什葉派</string>
@@ -1113,4 +1113,23 @@
 	<string name="poi_denomination_old_believers">舊教徒</string>
 	<string name="poi_denomination_serbian_orthodox">塞爾維亞東正教</string>
 	<string name="poi_denomination_spiritist">招魂者</string>
+	<string name="poi_denomination_armenian_apostolic">亞美尼亞使徒教會</string>
+	<string name="poi_denomination_dutch_reformed">荷蘭歸正教會</string>
+	<string name="poi_denomination_apostolic">使徒教會</string>
+	<string name="poi_denomination_reform">改革教會</string>
+	<string name="poi_denomination_latter_day_saints">末世聖徒</string>
+	<string name="poi_denomination_church_of_christ">基督教會</string>
+	<string name="poi_denomination_united_church_of_christ">聯合的基督教會</string>
+	<string name="poi_denomination_georgian_orthodox">喬治亞東正教</string>
+	<string name="poi_denomination_scientist">科學家</string>
+	<string name="poi_denomination_romanian_orthodox">羅馬尼亞東正教</string>
+	<string name="poi_denomination_ethiopian_orthodox_tewahedo">衣索比亞東正教</string>
+	<string name="poi_denomination_unitarian">唯一神論教派</string>
+	<string name="poi_denomination_coptic_orthodox">科普特東正教</string>
+	<string name="poi_denomination_wesleyan">衛斯理教派</string>
+	<string name="poi_denomination_shaktism">沙克達教</string>
+	<string name="poi_denomination_shingon_shu">真言宗</string>
+	<string name="poi_denomination_maronite">馬若恩教派</string>
+	<string name="poi_denomination_mahayana">大乘佛教</string>
+
 	</resources>
