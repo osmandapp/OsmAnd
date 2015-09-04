@@ -147,7 +147,7 @@ public class VoiceRouter {
 			PREPARE_DISTANCE = 1500;          // [125 sec]
 			PREPARE_DISTANCE_END = 1200;      // [100 sec]
 			TURN_IN_DISTANCE = 390;           //   30 sec
-			TURN_IN_DISTANCE_END = 182;       //   14 sec
+			TURN_IN_DISTANCE_END = 195;       //   15 sec
 			TURN_DISTANCE = 50;               //    7 sec
 			TURN_DEFAULT_SPEED = 7f;          //   25 km/h
 			DEFAULT_SPEED = 13;               //   48 km/h
@@ -393,10 +393,10 @@ public class VoiceRouter {
 	 */
 	protected void updateStatus(Location currentLocation, boolean repeat) {
 		// Directly after turn: goAhead (dist), unless:
-		// < PREPARE_LONG_DISTANCE (3000m): playPrepareTurn
-		// < PREPARE_DISTANCE (1500m): playPrepareTurn
-		// < TURN_IN_DISTANCE (300m or 25sec): playMakeTurnIn
-		// < TURN_DISTANCE (60m or 5sec): playMakeTurn
+		// < PREPARE_LONG_DISTANCE (e.g. 3500m): playPrepareTurn
+		// < PREPARE_DISTANCE (e.g. 1500m): playPrepareTurn
+		// < TURN_IN_DISTANCE (e.g. 390m or 30sec): playMakeTurnIn
+		// < TURN_DISTANCE (e.g. 50m or 7sec): playMakeTurn
 		float speed = DEFAULT_SPEED;
 		if (currentLocation != null && currentLocation.hasSpeed()) {
 			speed = Math.max(currentLocation.getSpeed(), speed);
