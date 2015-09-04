@@ -1102,4 +1102,15 @@
 	<string name="poi_denomination_mennonite">門諾會</string>
 	<string name="poi_denomination_quaker">貴格會</string>
 	<string name="poi_denomination_bulgarian_orthodox">保加利亞東正教</string>
+	<string name="poi_denomination_new_apostolic">新使徒教派</string>
+	<string name="poi_denomination_church_of_england">英國國教</string>
+	<string name="poi_denomination_assemblies_of_god">神召會</string>
+	<string name="poi_denomination_nondenominational">宗派</string>
+	<string name="poi_denomination_adventist">基督復臨安息日會</string>
+	<string name="poi_denomination_nazarene">基督教徒</string>
+	<string name="poi_denomination_united_methodist">聯合衛理公會</string>
+	<string name="poi_denomination_congregational">公理會</string>
+	<string name="poi_denomination_old_believers">舊教徒</string>
+	<string name="poi_denomination_serbian_orthodox">塞爾維亞東正教</string>
+	<string name="poi_denomination_spiritist">招魂者</string>
 	</resources>

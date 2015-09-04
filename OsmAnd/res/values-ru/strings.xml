@@ -1197,7 +1197,7 @@
     </string>
     <string name="layer_hillshade">Слой рельефа местности</string>
     
-	<string name="street_name">Улица</string>
+	<string name="street_name">Название улицы</string>
 	<string name="hno">Номер дома</string>
     <string name="download_using_mobile_internet">В настоящее время нет соединения по Wi-Fi. Хотите использовать текущее интернет-соединение для загрузки?</string>
     <string name="tip_recent_changes_1_3_t">Изменения в 1.3:
@@ -2067,4 +2067,7 @@
 	<string name="shared_string_undo">ОТМЕНИТЬ</string>
 	<string name="shared_string_skip">Пропустить</string>
 	<string name="app_name_osmand">OsmAnd</string>
+	<string name="plugin_settings">Плагины</string>
+	<string name="offline_maps_and_navigation">Офлайн карты\nи Навигация</string>
+	<string name="building_number">Номер дома</string>
 	</resources>

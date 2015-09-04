@@ -1130,4 +1130,7 @@
 	<string name="poi_denomination_united">Unido</string>
 	<string name="poi_denomination_quaker">cuáquero</string>
 	<string name="poi_denomination_shaktism">Shaktismo</string>
+	<string name="poi_denomination_uniting">Uniendo</string>
+	<string name="poi_denomination_wesleyan">Wesleyan</string>
+	<string name="poi_denomination_shingon_shu">Budismo shingon</string>
 	</resources>

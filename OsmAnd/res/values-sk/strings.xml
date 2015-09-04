@@ -1184,7 +1184,7 @@
 \n\t* Podpora hodiniek Pebble
     </string>
     
-	<string name="street_name">Ulica</string>
+	<string name="street_name">Názov ulice</string>
 	<string name="hno">Číslo domu</string>
     <string name="monitoring_settings">Zaznamenávanie výletu</string>
     <string name="monitoring_settings_descr">Konfigurovať ako sa majú zaznamenať vaše výlety</string>
@@ -2259,4 +2259,23 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="app_name_osmand">OsmAnd</string>
 	<string name="offline_maps_and_navigation">Offline mapy\n&amp; Navigácia</string>
 <string name="commit_poi">Odoslať POI</string>
+<string name="av_locations_descr">GPX súbor s pozíciami poznámok</string>
+    <string name="av_locations">Pozície</string>
+    <string name="plugin_settings">Zásuvné moduly</string>
+	<string name="routing_attr_avoid_shuttle_train_name">Nepoužiť autovlak</string>
+	<string name="routing_attr_avoid_shuttle_train_description">Nepoužiť autovlak</string>
+    <string name="tab_title_basic">Základné</string>
+	<string name="tab_title_advanced">Rozšírené</string>
+	<string name="building_number">Číslo domu</string>
+	<string name="next_proceed">Ďalší</string>
+	<string name="opening_at">Otvára o</string>
+	<string name="closing_at">Zatvára o</string>
+	<string name="tag_poi_name">názov</string>
+	<string name="tag_poi_amenity">občianska vybavenosť</string>
+	<string name="contact_info">Kontaktné údaje</string>
+	<string name="description">Popis</string>
+	<string name="add_opening_hours">Pridať otváracie hodiny</string>
+	<string name="poi_dialog_poi_type">Typ bodu záujmu</string>
+	<string name="number_of_rows_in_dash">Počet riadkov v pomlčke %1$s</string>
+	<string name="please_specify_poi_type">Prosím zadajte typ bodu záujmu.</string>
 </resources>

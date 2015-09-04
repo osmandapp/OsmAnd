@@ -1031,4 +1031,55 @@
 	<string name="poi_route_hiking_lwn_poi">Lokálna pešia trasa</string>
 	<string name="poi_route_hiking_ref_poi">Číslo pešej trasy</string>
 
+	<string name="poi_perfumery">Parfuméria</string>
+
+	<string name="poi_mill_pond">Mlynský rybník</string>
+	<string name="poi_office_religion">Cirkevná kancelária</string>
+	<string name="poi_association">Kancelária asociácie</string>
+	<string name="poi_financial">Finančná kancelária</string>
+	<string name="poi_political_party">Kancelária politickej strany</string>
+	<string name="poi_notary">Notár</string>
+	<string name="poi_foundation">Sídlo nadácie</string>
+	<string name="poi_tax_advisor">Daňový poradca</string>
+
+	<string name="poi_religion_voodoo">Voodoo</string>
+	<string name="poi_religion_multifaith">Multináboženské</string>
+	<string name="poi_religion_scientologist">Scientologický</string>
+	<string name="poi_religion_pagan">Pohanské</string>
+	<string name="poi_denomination_catholic">Katolícke</string>
+	<string name="poi_denomination_baptist">Baptistické</string>
+	<string name="poi_denomination_roman_catholic">Rímskokatolícke</string>
+	<string name="poi_denomination_orthodox">Ortodoxné</string>
+	<string name="poi_denomination_lutheran">Luteránske</string>
+	<string name="poi_denomination_sunni">Sunitské</string>
+	<string name="poi_denomination_protestant">Protestantské</string>
+	<string name="poi_denomination_methodist">Metodistické</string>
+	<string name="poi_denomination_anglican">Anglikánske</string>
+	<string name="poi_denomination_presbyterian">Presbyteriánske</string>
+	<string name="poi_denomination_evangelical">Evanjelické</string>
+	<string name="poi_denomination_russian_orthodox">Ruské ortodoxné</string>
+	<string name="poi_denomination_mormon">Mormónske</string>
+	<string name="poi_denomination_jehovahs_witness">Svedkovia Jehovovi</string>
+	<string name="poi_denomination_greek_orthodox">Grécke ortodoxné</string>
+	<string name="poi_denomination_reformed">Reformované</string>
+	<string name="poi_denomination_seventh_day_adventist">Adventisti siedmeho dňa</string>
+	<string name="poi_denomination_new_apostolic">Novoapoštolské</string>
+	<string name="poi_denomination_church_of_england">Anglická cirkev</string>
+	<string name="poi_denomination_episcopal">Episkopálne</string>
+	<string name="poi_denomination_greek_catholic">Grékokatolícke</string>
+	<string name="poi_denomination_tibetan">Tibetské</string>
+	<string name="poi_denomination_church_of_scotland">Škótska cirkev</string>
+	<string name="poi_denomination_nondenominational">Bez vyznania</string>
+	<string name="poi_denomination_adventist">Adventistické</string>
+	<string name="poi_denomination_apostolic">Apoštolské</string>
+	<string name="poi_denomination_church_of_christ">Kristova cirkev</string>
+	<string name="poi_building">Budova</string>
+
+<string name="poi_twitter">Twitter</string>
+	<string name="poi_skype">Skype</string>
+	<string name="poi_youtube">Youtube</string>
+	<string name="poi_instagram">Instagram</string>
+	<string name="poi_vk">VKontakte</string>
+	<string name="poi_google_plus">Google+</string>
+	<string name="poi_military_office">Vojenský úrad</string>
 	</resources>
