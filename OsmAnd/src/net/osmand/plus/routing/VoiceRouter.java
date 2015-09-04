@@ -166,29 +166,25 @@ public class VoiceRouter {
 		}
 	}
 	
-	public boolean isDistanceLess(float currentSpeed, double dist, double etalon){
+	public boolean isDistanceLess(float currentSpeed, double dist, double etalon, float defSpeed){
+		if(defSpeed <= 0) {
+			defSpeed = DEFAULT_SPEED;
+		}
 		if(currentSpeed <= 0) {
 			currentSpeed = DEFAULT_SPEED;
 		}
-		if(dist < etalon || ((dist / currentSpeed) < (etalon / DEFAULT_SPEED))){
-			return true;
-		}
-		return false;
-	}
-	
-	protected boolean isDistanceLess(float currentSpeed, double dist, double etalon, double defSpeed){
 		if(dist < etalon || ((dist / currentSpeed) < (etalon / defSpeed))){
 			return true;
 		}
 		return false;
 	}
-	
+
 	public int calculateImminent(float dist, Location loc){
 		float speed = DEFAULT_SPEED;
 		if(loc != null && loc.hasSpeed()) {
 			speed = loc.getSpeed();
 		}
-		if (isDistanceLess(speed, dist, TURN_IN_DISTANCE_END)) {
+		if (isDistanceLess(speed, dist, TURN_IN_DISTANCE_END, 0f)) {
 			return 0;
 		} else if ( dist <= PREPARE_DISTANCE) {
 			return 1;
@@ -439,11 +435,11 @@ public class VoiceRouter {
 
 		// say how much to go if there is next turn is a bit far
 		if (currentStatus == STATUS_UNKNOWN) {
-			if (!isDistanceLess(speed, dist, TURN_IN_DISTANCE * 1.3)) {
+			if (!isDistanceLess(speed, dist, TURN_IN_DISTANCE * 1.3, 0f)) {
 				playGoAheadDist = dist - 80;
 			}
 			// say long distance message only for long distances > 10 km
-			// if (dist >= PREPARE_LONG_DISTANCE && !isDistanceLess(speed, dist, PREPARE_LONG_DISTANCE)) {
+			// if (dist >= PREPARE_LONG_DISTANCE && !isDistanceLess(speed, dist, PREPARE_LONG_DISTANCE, 0f)) {
 			if (dist > PREPARE_LONG_DISTANCE + 300) {
 				nextStatusAfter(STATUS_UNKNOWN);
 			} else if (dist > PREPARE_DISTANCE + 300) {
@@ -466,9 +462,9 @@ public class VoiceRouter {
 				andSpeakArriveAtPoint(nextNextInfo);
 			}
 			nextStatusAfter(STATUS_TURN);
-		} else if ((repeat || statusNotPassed(STATUS_TURN_IN)) && isDistanceLess(speed, dist, TURN_IN_DISTANCE)) {
+		} else if ((repeat || statusNotPassed(STATUS_TURN_IN)) && isDistanceLess(speed, dist, TURN_IN_DISTANCE, 0f)) {
 			if (repeat || dist >= TURN_IN_DISTANCE_END) {
-				if ((isDistanceLess(speed, next.distance, TURN_DISTANCE) || next.distance < TURN_IN_DISTANCE_END) &&
+				if ((isDistanceLess(speed, next.distance, TURN_DISTANCE, 0f) || next.distance < TURN_IN_DISTANCE_END) &&
 						nextNextInfo != null) {
 					playMakeTurnIn(currentSegment, next, dist, nextNextInfo.directionInfo);
 				} else {
@@ -477,7 +473,7 @@ public class VoiceRouter {
 				playAndArriveAtDestination(repeat, nextInfo, currentSegment);
 			}
 			nextStatusAfter(STATUS_TURN_IN);
-			// } else if (statusNotPassed(STATUS_PREPARE) && isDistanceLess(speed, dist, PREPARE_DISTANCE)) {
+			// } else if (statusNotPassed(STATUS_PREPARE) && isDistanceLess(speed, dist, PREPARE_DISTANCE, 0f)) {
 		} else if ((repeat || statusNotPassed(STATUS_PREPARE)) && (dist <= PREPARE_DISTANCE)) {
 			if (repeat || dist >= PREPARE_DISTANCE_END) {
 				if (!repeat && (next.getTurnType().keepLeft() || next.getTurnType().keepRight())){
@@ -488,7 +484,7 @@ public class VoiceRouter {
 				}
 			}
 			nextStatusAfter(STATUS_PREPARE);
-			// } else if (statusNotPassed(STATUS_LONG_PREPARE) && isDistanceLess(speed, dist, PREPARE_LONG_DISTANCE)){
+			// } else if (statusNotPassed(STATUS_LONG_PREPARE) && isDistanceLess(speed, dist, PREPARE_LONG_DISTANCE, 0f)){
 		} else if ((repeat || statusNotPassed(STATUS_LONG_PREPARE)) && (dist <= PREPARE_LONG_DISTANCE)) {
 			if (repeat || dist >= PREPARE_LONG_DISTANCE_END) {
 				playPrepareTurn(currentSegment, next, dist);
