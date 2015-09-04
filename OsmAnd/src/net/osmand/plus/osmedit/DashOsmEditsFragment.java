@@ -1,9 +1,11 @@
 package net.osmand.plus.osmedit;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
@@ -11,12 +13,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import net.osmand.access.AccessibleToast;
 import net.osmand.data.PointDescription;
+import net.osmand.osm.edit.EntityInfo;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.ProgressImplementation;
@@ -24,6 +30,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashBaseFragment;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -205,13 +212,15 @@ public class DashOsmEditsFragment extends DashBaseFragment {
 		@NonNull
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
+
 			final OpenstreetmapPoint poi = (OpenstreetmapPoint) getArguments().getSerializable(OPENSTREETMAP_POINT);
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			View view = getActivity().getLayoutInflater().inflate(R.layout.send_poi_dialog, null);
 			final EditText messageEditText = (EditText) view.findViewById(R.id.messageEditText);
 			final EditText userNameEditText = (EditText) view.findViewById(R.id.userNameEditText);
 			final EditText passwordEditText = (EditText) view.findViewById(R.id.passwordEditText);
-
+			final CheckBox closeChangeSetCheckBox =
+					(CheckBox) view.findViewById(R.id.closeChangeSetCheckBox);
 			final OsmandSettings settings = ((MapActivity) getActivity()).getMyApplication().getSettings();
 			userNameEditText.setText(settings.USER_NAME.get());
 			passwordEditText.setText(settings.USER_PASSWORD.get());
@@ -220,10 +229,61 @@ public class DashOsmEditsFragment extends DashBaseFragment {
 					.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
+							final OpenstreetmapRemoteUtil openstreetmapRemoteUtil
+									= new OpenstreetmapRemoteUtil(getActivity());
 							settings.USER_NAME.set(userNameEditText.getText().toString());
 							settings.USER_PASSWORD.set(passwordEditText.getText().toString());
-							poi.setComment(messageEditText.getText().toString());
-							((DashOsmEditsFragment) getParentFragment()).showProgressDialog(poi);
+							final String message = messageEditText.getText().toString();
+							final boolean closeChangeSet = closeChangeSetCheckBox.isChecked();
+							final Activity activity = getActivity();
+							int actionTypeMessageId = -1;
+							switch (poi.getAction()) {
+								case CREATE: actionTypeMessageId = R.string.poi_action_add;
+									break;
+								case MODIFY: actionTypeMessageId = R.string.poi_action_change;
+									break;
+								case DELETE: actionTypeMessageId = R.string.poi_action_delete;
+									break;
+							}
+							final String resultMessage =
+									getResources().getString(actionTypeMessageId);
+							final String successTemplate = getResources().getString(
+									R.string.poi_action_succeded_template);
+
+							new AsyncTask<Void, Void, EntityInfo>() {
+
+								@Override
+								protected EntityInfo doInBackground(Void... params) {
+									return openstreetmapRemoteUtil.loadNode(poi.getEntity());
+								}
+
+								@Override
+								protected void onPostExecute(EntityInfo entityInfo) {
+									EditPoiFragment.commitNode(poi.getAction(), poi.getEntity(),
+											entityInfo,
+											message,
+											closeChangeSet,
+											new Runnable() {
+												@Override
+												public void run() {
+													AccessibleToast.makeText(
+															activity,
+															MessageFormat.format(
+																	successTemplate,
+																	resultMessage),
+															Toast.LENGTH_LONG).show();
+
+													if (activity instanceof MapActivity) {
+														((MapActivity) activity)
+																.getMapView().refreshMap(true);
+													}
+												}
+											},
+											activity, openstreetmapRemoteUtil);
+								}
+							}.execute();
+//							poi.setComment(messageEditText.getText().toString());
+//							((DashOsmEditsFragment) getParentFragment()).showProgressDialog(poi);
 						}
 					})
 					.setNegativeButton(R.string.shared_string_cancel, null);
