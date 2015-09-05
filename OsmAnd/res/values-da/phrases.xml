@@ -1075,7 +1075,7 @@
 	<string name="poi_political_party">Partikontor</string>
 	<string name="poi_tax_advisor">Skatterådgvliningskontor</string>
 
-	<string name="poi_office_religion">Religiøs kontor</string>
+	<string name="poi_office_religion">Kontor for trossamfund</string>
 	<string name="poi_association">Foreningskontor</string>
 	<string name="poi_financial">Finansiel kontor</string>
 	<string name="poi_foundation">Fondskontor</string>
@@ -1138,7 +1138,7 @@
 	<string name="poi_denomination_assemblies_of_god">Assemblies of god</string>
 	<string name="poi_denomination_nondenominational">Non-denominational</string>
 	<string name="poi_denomination_nazarene">Nazarene</string>
-	<string name="poi_denomination_united_methodist">United methodist</string>
+	<string name="poi_denomination_united_methodist">Forenede methodister</string>
 	<string name="poi_denomination_congregational">Kongregationalisme</string>
 	<string name="poi_denomination_old_believers">Gammeltroende</string>
 	<string name="poi_denomination_united_church_of_christ">United church of christ</string>
@@ -1148,7 +1148,7 @@
 	<string name="poi_denomination_shingon_shu">Shingon buddhisme</string>
 	<string name="poi_denomination_maronite">Maronit</string>
 	<string name="poi_denomination_reform">Reformert</string>
-	<string name="poi_denomination_united">Forenede</string>
-	<string name="poi_denomination_uniting">Forenende</string>
-	<string name="poi_denomination_scientist">Videnskab</string>
+	<string name="poi_denomination_united">United Church of Christ</string>
+	<string name="poi_denomination_uniting">Uniting kirken</string>
+	<string name="poi_denomination_scientist">Kristen Videnskab</string>
 	</resources>
