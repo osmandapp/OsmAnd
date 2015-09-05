@@ -417,7 +417,9 @@ public class VoiceRouter {
 			nextRouteDirection = next;
 			currentStatus = STATUS_UNKNOWN;
 			playedAndArriveAtTarget = false;
-			playGoAheadDist = -1;
+			if (playGoAheadDist != -1) {
+				playGoAheadDist = 0;
+			}
 		}
 
 		if (!repeat) {
@@ -436,20 +438,20 @@ public class VoiceRouter {
 		if (currentStatus == STATUS_UNKNOWN) {
 			// Tell goAhead distance after (1) route calculation if no other prompt is due, or (2) after a turn if next turn is more than PREPARE_LONG_DISTANCE away
 			//if (!isDistanceLess(speed, dist, TURN_IN_DISTANCE * 1.3, 0f)) {
-			if (((playGoAheadDist == -1) && (!isDistanceLess(speed, dist, TURN_IN_DISTANCE * 1.3, 0f))) || !isDistanceLess(speed, dist, PREPARE_LONG_DISTANCE + 300, 0f)) {
+			if ((playGoAheadDist == -1) || (dist > PREPARE_LONG_DISTANCE)) {
 				playGoAheadDist = dist - 80;
 			}
 			// Put voice router in appropriate status
-			if (dist > PREPARE_LONG_DISTANCE + 300) {
+			//if (dist > PREPARE_LONG_DISTANCE + 300) {
 				// say long distance message only for long distances > 3.5 km
-				nextStatusAfter(STATUS_UNKNOWN);
-			} else if (dist > PREPARE_DISTANCE + 300) {
+			//	nextStatusAfter(STATUS_UNKNOWN);
+			//} else if (dist > PREPARE_DISTANCE + 300) {
 				// say prepare message if it is far enough and don't say prepare long distance
-				nextStatusAfter(STATUS_LONG_PREPARE);
-			} else {
+			//	nextStatusAfter(STATUS_LONG_PREPARE);
+			//} else {
 				// don't say even prepare message
-				nextStatusAfter(STATUS_PREPARE);
-			}
+			//	nextStatusAfter(STATUS_PREPARE);
+			//}
 		}
 
 		NextDirectionInfo nextNextInfo = router.getNextRouteDirectionInfoAfter(nextInfo, new NextDirectionInfo(), !repeat);
@@ -493,7 +495,7 @@ public class VoiceRouter {
 		} else if (statusNotPassed(STATUS_UNKNOWN)) {
 			// strange how we get here but
 			nextStatusAfter(STATUS_UNKNOWN);
-		} else if (repeat || (statusNotPassed(STATUS_TURN_IN) && dist < playGoAheadDist)) {
+		} else if (repeat || (statusNotPassed(STATUS_PREPARE) && dist < playGoAheadDist)) {
 			playGoAheadDist = 0;
 			playGoAhead(dist, getSpeakableStreetName(currentSegment, next));
 		}
@@ -752,11 +754,15 @@ public class VoiceRouter {
 			} else {
 				notifyOnVoiceMessage();
 				play.newRouteCalculated(router.getLeftDistance(), router.getLeftTime()).play();
+				playGoAheadDist = -1;
 				currentStatus = STATUS_UNKNOWN;
 			}
 		} else if (player == null) {
 			pendingCommand = new VoiceCommandPending(!newRoute ? VoiceCommandPending.ROUTE_RECALCULATED
 					: VoiceCommandPending.ROUTE_CALCULATED, this);
+			if (newRoute) {
+				playGoAheadDist = -1;
+			}
 			currentStatus = STATUS_UNKNOWN;
 		}
 		nextRouteDirection = null;
