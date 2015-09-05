@@ -6,4 +6,15 @@
 	<string name="building_number">Hoone Number</string>
 	<string name="shared_string_skip">Jäta vahele</string>
 	<string name="poi_action_add">lisa</string>
+	<string name="shared_string_message">Sõnum</string>
+	<string name="agps_data_last_downloaded">A-GPS andmed viimati allalaetud: %1$s</string>
+    <string name="welmode_download_maps">Kaartide allalaadimine</string>
+	<string name="welcome_header">Tere tulemast</string>
+    <string name="mark_to_delete">Märgi kustutamiseks</string>
+	<string name="osmo_grop_name_length_alert">Grupi nimi peab olema vähemalt 3 märki!</string>
+	<string name="confirmation_to_clear_history">Kas sa soovid tühjendada ajalugu?</string>
+    <string name="osmand_parking_overdue">tähtaja ületanud</string>
+	<string name="action_create">Tegevuse loomine</string>
+	<string name="action_modify">Tegevuse muutmine</string>
+	<string name="action_delete">Tegevuse kustutamine</string>
 	</resources>
