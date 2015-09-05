@@ -183,7 +183,7 @@
     <string name="index_srtm_parts">bölümler</string>
     <string name="index_srtm_ele">Çevreleme çizgileri</string>
     <string name="srtm_plugin_description">Çevrimdışı çevreleme çizgileri indirmeyi ve tepe gölgelendirmeyi başlat (Ayarlar -&gt; Veri Yönetim -&gt; İndir -&gt; İstenilen harita türünü seç).</string>
-    <string name="srtm_plugin_name">Çevreleme çizgileri eklentisi</string>
+    <string name="srtm_plugin_name">Eşyükselti çizgileri</string>
     <string name="download_select_map_types">Diğer haritalar</string>
     <string name="download_roads_only_item">Sadece yollar</string>
     <string name="download_srtm_maps">Çevreleme çizgileri</string>
