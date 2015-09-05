@@ -184,9 +184,9 @@ public class VoiceRouter {
 		if(loc != null && loc.hasSpeed()) {
 			speed = loc.getSpeed();
 		}
-		if (isDistanceLess(speed, dist, TURN_IN_DISTANCE_END, 0f)) {
+		if (isDistanceLess(speed, dist, TURN_DISTANCE, 0f)) {
 			return 0;
-		} else if ( dist <= PREPARE_DISTANCE) {
+		} else if (dist <= PREPARE_DISTANCE) {
 			return 1;
 		} else if (dist <= PREPARE_LONG_DISTANCE) {
 			return 2;
