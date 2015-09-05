@@ -441,17 +441,17 @@ public class VoiceRouter {
 			if ((playGoAheadDist == -1) || (dist > PREPARE_LONG_DISTANCE)) {
 				playGoAheadDist = dist - 80;
 			}
-			// Put voice router in appropriate status
-			//if (dist > PREPARE_LONG_DISTANCE + 300) {
+			// Then adjust voice router status
+			if (dist > PREPARE_LONG_DISTANCE + 300) {
 				// say long distance message only for long distances > 3.5 km
-			//	nextStatusAfter(STATUS_UNKNOWN);
-			//} else if (dist > PREPARE_DISTANCE + 300) {
+				nextStatusAfter(STATUS_UNKNOWN);
+			} else if (dist > PREPARE_DISTANCE + 300) {
 				// say prepare message if it is far enough and don't say prepare long distance
-			//	nextStatusAfter(STATUS_LONG_PREPARE);
-			//} else {
+				nextStatusAfter(STATUS_LONG_PREPARE);
+			} else {
 				// don't say even prepare message
-			//	nextStatusAfter(STATUS_PREPARE);
-			//}
+				nextStatusAfter(STATUS_PREPARE);
+			}
 		}
 
 		NextDirectionInfo nextNextInfo = router.getNextRouteDirectionInfoAfter(nextInfo, new NextDirectionInfo(), !repeat);
