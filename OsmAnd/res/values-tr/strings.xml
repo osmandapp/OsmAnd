@@ -182,7 +182,7 @@
     <string name="audionotes_plugin_name">Ses/video notları</string>
     <string name="index_srtm_parts">bölümler</string>
     <string name="index_srtm_ele">Çevreleme çizgileri</string>
-    <string name="srtm_plugin_description">Çevrimdışı çevreleme çizgileri indirmeyi ve tepe gölgelendirmeyi başlat (Ayarlar -&gt; Veri Yönetim -&gt; İndir -&gt; İstenilen harita türünü seç).</string>
+    <string name="srtm_plugin_description">"Bu eklenti OsmAnd çevrimdışı haritalarda eşyükseltileri (kabartma olarak) ve gölgeli yamaçları gösterir. Bu özellik çoğunlukla sporcular, uzun yürüyüşcüler, yürüyüşçüler ve tabii ki bir manzaranın kabartma yapısıyla ilgilenen herkesin takdirinedir. "</string>
     <string name="srtm_plugin_name">Eşyükselti çizgileri</string>
     <string name="download_select_map_types">Diğer haritalar</string>
     <string name="download_roads_only_item">Sadece yollar</string>
@@ -1459,4 +1459,5 @@
 	<string name="record_plugin_description">"Bu eklenti harita ekranında zımbırtıya elle donunca GPX iz oluşturma ve saklama özelliğini etkinleştirir, ya da GPX izini navigasyon boyunca otomatik olarak saklayabilir.\n\nKaydedilen izler arkadaşlarınızla veya OSM katkıcılarıyla paylaşılabilir. Atletler çalışmalarını izlemek için iz kaydedebilir.  Basit iz analizi OsmAnd içinden yapılabilir, misal tur zamanı, ortalama hız vs., ve izler tabii ki daha sonra üçüncü parti araçlarla da analiz edilebilir. "</string>
 	<string name="osmo_plugin_name">OsMo (OSM İzleme)</string>
 	<string name="osmo_plugin_description">"Bu eklenti OsMo adlı gelişmiş canlı izlemeyi etkinleştirir, bkz  http://osmo.mobi.\n\nBir grup içindeki bütün aygıtları gerçek zamanlı olarak izleyebilir ve birbiriyle iletişim kurabilir. Oturum izleme veya daimi izleme için çeşitli seçenekleri vardır.\n\nAnonim gruplar belirli günlerde, ve belirli özelliklerde kendiliğinden oluşturulabilir, örn. uzaktan herhangi kontrol ve yönetici olmadan. Diğer yandan, tam özellikli gruplar websitesinde oluşturulabilir ve sadece kayıtlı kullanıcılar erişebilir. "</string>
+	<string name="plugin_touringview_name">Harita gezinti görünümü</string>
 	</resources>
