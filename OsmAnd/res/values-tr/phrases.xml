@@ -200,4 +200,74 @@
 	<string name="poi_car_wash">Oto yıkama</string>
 	<string name="poi_fuel">Benzin istasyonu</string>
 	<string name="poi_fuel_diesel">Dizel</string>
+	<string name="poi_fuel_gtl_diesel">GTL dizel</string>
+	<string name="poi_fuel_hgv_diesel">TIR dizel</string>
+	<string name="poi_fuel_biodiesel">Bio dizel</string>
+	<string name="poi_fuel_lpg">LPG</string>
+	<string name="poi_fuel_octane_80">80 Oktan</string>
+	<string name="poi_fuel_octane_91">91 Oktan</string>
+	<string name="poi_fuel_octane_92">92 Oktan</string>
+	<string name="poi_fuel_octane_95">95 Oktan</string>
+	<string name="poi_fuel_octane_98">98 Oktan</string>
+	<string name="poi_fuel_octane_100">100 Oktan</string>
+	<string name="poi_fuel_cng">CNG</string>
+	<string name="poi_fuel_1_25">1:25 yakıt</string>
+	<string name="poi_fuel_1_50">1:50 yakıt</string>
+	<string name="poi_fuel_ethanol"/>
+	<string name="poi_fuel_methanol">Metanol</string>
+	<string name="poi_fuel_svo">SVO</string>
+	<string name="poi_fuel_e10">E10</string>
+	<string name="poi_fuel_e20">E20</string>
+	<string name="poi_fuel_e85">E85</string>
+	<string name="poi_fuel_biogas">E85</string>
+	<string name="poi_fuel_lh2">Sıvı hidrojen</string>
+	<string name="poi_fuel_electricity">Elektrik</string>
+	<string name="poi_charging_station">Şarj istasyonu</string>
+	<string name="poi_vehicle_ramp">Araç rampa</string>
+	<string name="poi_compressed_air">Basınçlı hava</string>
+	<string name="poi_parking">Otopark</string>
+	<string name="poi_motorcycle_parking">Motosiklet Parkı</string>
+	<string name="poi_parking_entrance">Park girişi</string>
+	<string name="poi_garages">Garajlar</string>
+
+	<string name="poi_public_transport_platform">Toplu taşıma durağı</string>
+	<string name="poi_public_transport_platform_bus">Otobüs durağı</string>
+	<string name="poi_public_transport_platform_trolleybus">Troleybüs durağı</string>
+	<string name="poi_bus_stop">Otobüs durağı</string>
+	<string name="poi_public_transport_stop_position">Toplu taşıma durağı konumu</string>
+	<string name="poi_public_transport_platform_tram">Tramvay durağı</string>
+	<string name="poi_tram_stop">Tramvay durağı</string>
+	<string name="poi_public_transport_station">Toplu taşıma istasyonu</string>
+	<string name="poi_bus_station">Otobüs istasyonu</string>
+	<string name="poi_railway_station">Tren İstasyonu</string>
+	<string name="poi_railway_platform">Demiryolu Platformu</string>
+	<string name="poi_halt">Tren durağı</string>
+	<string name="poi_railway_subway_entrance">Metro giriş</string>
+	<string name="poi_subway_station">Metro İstasyonu</string>
+	<string name="poi_railway_buffer_stop">Demir yolu tampon durağı</string>
+	<string name="poi_taxi">Taksi durağı</string>
+
+	<string name="poi_aerodrome">Havaalanı</string>
+	<string name="poi_helipad">Helikopter pisti</string>
+	<string name="poi_runway">Pist</string>
+	<string name="poi_aeroway_terminal">Aeroway terminal</string>
+	<string name="poi_aeroway_gate">Aeroway kapısı</string>
+
+	<string name="poi_slipway">Kızak</string>
+	<string name="poi_ferry_terminal">Feribot terminali</string>
+	<string name="poi_lighthouse">Deniz feneri</string>
+
+	<string name="poi_bicycle_rental">Bisiklet Kiralama</string>
+	<string name="poi_bicycle_parking">Bisiklet park yeri</string>
+
+	<string name="poi_aerialway_station">Aerialway istasyonu</string>
+	<string name="poi_aerialway_cable_car">Teleferik</string>
+	<string name="poi_aerialway_gondola">Gondol</string>
+	<string name="poi_aerialway_chair_lift">Telesiyej</string>
+	<string name="poi_aerialway_t_bar">T-bar Asansör</string>
+	<string name="poi_aerialway_j_bar">J-Bar Asansör</string>
+	<string name="poi_aerialway_platter">Tabağı Asansör</string>
+	<string name="poi_aerialway_mixed_lift">Karışık Asansör</string>
+	<string name="poi_aerialway_drag_lift">Asansörü sürükleyin</string>
+	<string name="poi_aerialway_rope_tow">Halat çekme Asansör</string>
 	</resources>
