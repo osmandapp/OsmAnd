@@ -432,17 +432,17 @@ public class VoiceRouter {
 			}
 		}
 
-		// say how much to go if there is next turn is a bit far
+		// Tell goAhead distance after route calculation if no otherprompt is due, or after a turn if next turn is more than PREPARE_LONG_DISTANCE away
 		if (currentStatus == STATUS_UNKNOWN) {
 			if (!isDistanceLess(speed, dist, TURN_IN_DISTANCE * 1.3, 0f)) {
 				playGoAheadDist = dist - 80;
 			}
-			// say long distance message only for long distances > 10 km
-			// if (dist >= PREPARE_LONG_DISTANCE && !isDistanceLess(speed, dist, PREPARE_LONG_DISTANCE, 0f)) {
+			// Put voice router in appropriate status
 			if (dist > PREPARE_LONG_DISTANCE + 300) {
+				// say long distance message only for long distances > 3.5 km
 				nextStatusAfter(STATUS_UNKNOWN);
 			} else if (dist > PREPARE_DISTANCE + 300) {
-				// say prepare message if it is far enough and don't say preare long distance
+				// say prepare message if it is far enough and don't say prepare long distance
 				nextStatusAfter(STATUS_LONG_PREPARE);
 			} else {
 				// don't say even prepare message
