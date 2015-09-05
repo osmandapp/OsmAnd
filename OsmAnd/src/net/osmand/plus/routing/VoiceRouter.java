@@ -388,10 +388,10 @@ public class VoiceRouter {
 		return System.currentTimeMillis() > notBefore;
 	}
 
-    /**
-	 * Updates status of voice guidance 
-	 * @param currentLocation 
-	 */
+	/**
+	* Updates status of voice guidance
+	* @param currentLocation
+	*/
 	protected void updateStatus(Location currentLocation, boolean repeat) {
 		// Directly after turn: goAhead (dist), unless:
 		// < PREPARE_LONG_DISTANCE (e.g. 3500m): playPrepareTurn
@@ -404,14 +404,14 @@ public class VoiceRouter {
 		}
 
 		NextDirectionInfo nextInfo = router.getNextRouteDirectionInfo(new NextDirectionInfo(), true);
-        RouteSegmentResult currentSegment = router.getCurrentSegmentResult();
+		RouteSegmentResult currentSegment = router.getCurrentSegmentResult();
 		if (nextInfo.directionInfo == null) {
 			return;
 		}
 		int dist = nextInfo.distanceTo;
 		RouteDirectionInfo next = nextInfo.directionInfo;
 
-		// if routing is changed update status to unknown
+		// If routing is changed update status to unknown
 		if (next != nextRouteDirection) {
 			nextRouteDirection = next;
 			currentStatus = STATUS_UNKNOWN;
@@ -432,7 +432,7 @@ public class VoiceRouter {
 			}
 		}
 
-		// Tell goAhead distance after route calculation if no otherprompt is due, or after a turn if next turn is more than PREPARE_LONG_DISTANCE away
+		// TODO: Tell goAhead distance after route calculation if no other prompt is due, or after a turn if next turn is more than PREPARE_LONG_DISTANCE away
 		if (currentStatus == STATUS_UNKNOWN) {
 			if (!isDistanceLess(speed, dist, TURN_IN_DISTANCE * 1.3, 0f)) {
 				playGoAheadDist = dist - 80;
