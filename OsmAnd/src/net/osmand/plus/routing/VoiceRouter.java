@@ -474,7 +474,6 @@ public class VoiceRouter {
 				playAndArriveAtDestination(repeat, nextInfo, currentSegment);
 			}
 			nextStatusAfter(STATUS_TURN_IN);
-			// } else if (statusNotPassed(STATUS_PREPARE) && isDistanceLess(speed, dist, PREPARE_DISTANCE, 0f)) {
 		} else if ((repeat || statusNotPassed(STATUS_PREPARE)) && (dist <= PREPARE_DISTANCE)) {
 			if (repeat || dist >= PREPARE_DISTANCE_END) {
 				if (!repeat && (next.getTurnType().keepLeft() || next.getTurnType().keepRight())){
@@ -485,7 +484,6 @@ public class VoiceRouter {
 				}
 			}
 			nextStatusAfter(STATUS_PREPARE);
-			// } else if (statusNotPassed(STATUS_LONG_PREPARE) && isDistanceLess(speed, dist, PREPARE_LONG_DISTANCE, 0f)){
 		} else if ((repeat || statusNotPassed(STATUS_LONG_PREPARE)) && (dist <= PREPARE_LONG_DISTANCE)) {
 			if (repeat || dist >= PREPARE_LONG_DISTANCE_END) {
 				playPrepareTurn(currentSegment, next, dist);
