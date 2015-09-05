@@ -121,13 +121,14 @@ public class VoiceRouter {
 	
 	public void updateAppMode(){
 		// turn prompt starts either at distance, or if actual-lead-time(currentSpeed) < maximum-lead-time  
-		// lead time criterion only for TURN_IN and TURN
+		// additional lead time criterion only for TURN_IN and TURN
 			PREPARE_LONG_DISTANCE = 3500;             // [105 sec] - 120 km/h
 			// To test for Issue #1411: Do not Play for PREPARE_LONG_DISTANCE:
-			PREPARE_LONG_DISTANCE_END = 3000 + 1000;         // [ 90 sec] - 120 km/h
+			PREPARE_LONG_DISTANCE_END = 3000 + 1000;  // [ 90 sec] - 120 km/h
 		if(router.getAppMode().isDerivedRoutingFrom(ApplicationMode.PEDESTRIAN)){
-			// prepare_long_distance warning not needed for pedestrian
-				PREPARE_LONG_DISTANCE_END = PREPARE_LONG_DISTANCE + 100; // Do not play
+			// prepare_long_distance warning not needed for pedestrian, but for goAhead prompt
+				PREPARE_LONG_DISTANCE = 500;
+				PREPARE_LONG_DISTANCE_END = 300 + 300; // Do not play
 			// prepare distance is not needed for pedestrian
 				PREPARE_DISTANCE = 200;           // [100 sec]
 				PREPARE_DISTANCE_END = 150 + 100; // [ 75 sec] + Do not play
