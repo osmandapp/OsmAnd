@@ -416,7 +416,7 @@ public class VoiceRouter {
 			nextRouteDirection = next;
 			currentStatus = STATUS_UNKNOWN;
 			playedAndArriveAtTarget = false;
-			playGoAheadDist = 0;
+			playGoAheadDist = -1;
 		}
 
 		if (!repeat) {
@@ -432,9 +432,10 @@ public class VoiceRouter {
 			}
 		}
 
-		// TODO: Tell goAhead distance after route calculation if no other prompt is due, or after a turn if next turn is more than PREPARE_LONG_DISTANCE away
 		if (currentStatus == STATUS_UNKNOWN) {
-			if (!isDistanceLess(speed, dist, TURN_IN_DISTANCE * 1.3, 0f)) {
+			// Tell goAhead distance after (1) route calculation if no other prompt is due, or (2) after a turn if next turn is more than PREPARE_LONG_DISTANCE away
+			//if (!isDistanceLess(speed, dist, TURN_IN_DISTANCE * 1.3, 0f)) {
+			if (playGoAheadDist = -1 || !isDistanceLess(speed, dist, PREPARE_LONG_DISTANCE + 300, 0f)) {
 				playGoAheadDist = dist - 80;
 			}
 			// Put voice router in appropriate status
