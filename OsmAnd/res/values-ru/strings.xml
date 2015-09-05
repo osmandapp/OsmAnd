@@ -2070,4 +2070,5 @@
 	<string name="plugin_settings">Плагины</string>
 	<string name="offline_maps_and_navigation">Офлайн карты\nи Навигация</string>
 	<string name="building_number">Номер дома</string>
-	</resources>
+	<string name="rendering_attr_pisteGrooming_name">Тип лыжной трассы</string>
+    </resources>
