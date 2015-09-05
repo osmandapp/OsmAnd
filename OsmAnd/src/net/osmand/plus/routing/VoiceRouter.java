@@ -157,7 +157,7 @@ public class VoiceRouter {
 			DEFAULT_SPEED = router.getAppMode().getDefaultSpeed();
 			TURN_DEFAULT_SPEED = DEFAULT_SPEED / 2;
 				PREPARE_LONG_DISTANCE = (int) (DEFAULT_SPEED * 305);
-				PREPARE_LONG_DISTANCE_END = (int) (DEFAULT_SPEED * 225) + 1000; // Test do not play
+				PREPARE_LONG_DISTANCE_END = (int) (DEFAULT_SPEED * 225) * 2; // Test do not play
 			PREPARE_DISTANCE = (int) (DEFAULT_SPEED * 125);	
 			PREPARE_DISTANCE_END = (int) (DEFAULT_SPEED * 100);
 			TURN_IN_DISTANCE = (int) (DEFAULT_SPEED * 30);
