@@ -38,7 +38,7 @@ public class VoiceRouter {
 	private final RoutingHelper router;
 	private boolean mute = false;
 	private CommandPlayer player;
-    private final OsmandSettings settings;
+	private final OsmandSettings settings;
  
 	private int currentStatus = STATUS_UNKNOWN;
 	private boolean playedAndArriveAtTarget = false;
@@ -120,44 +120,47 @@ public class VoiceRouter {
 	
 	
 	public void updateAppMode(){
-		// turn prompt starts either at distance, or if actual-lead-time(currentSpeed) < maximum-lead-time  
-		// additional lead time criterion only for TURN_IN and TURN
-			PREPARE_LONG_DISTANCE = 3500;             // [105 sec] - 120 km/h
-			// To test for Issue #1411: Do not Play for PREPARE_LONG_DISTANCE:
-			PREPARE_LONG_DISTANCE_END = 3000 + 1000;  // [ 90 sec] - 120 km/h
-		if(router.getAppMode().isDerivedRoutingFrom(ApplicationMode.PEDESTRIAN)){
+		// turn prompt starts either at distance, or additionally (TURN_IN and TURN only) if actual-lead-time(currentSpeed) < maximum-lead-time(defined by default speed)
+		if(router.getAppMode().isDerivedRoutingFrom(ApplicationMode.CAR)) {
+			PREPARE_LONG_DISTANCE = 3500;             // [105 sec @ 120 km/h]
+			// Do not play prompts for PREPARE_LONG_DISTANCE, test for Issue #1411
+			PREPARE_LONG_DISTANCE_END = 3000 + 1000;  // [ 90 sec @ 120 km/h]
+			PREPARE_DISTANCE = 1500;                  // [125 sec]
+			PREPARE_DISTANCE_END = 1200;      	  // [100 sec]
+			TURN_IN_DISTANCE = 390;			  //   30 sec
+			TURN_IN_DISTANCE_END = 195;               //   15 sec
+			TURN_DISTANCE = 50;                       //    7 sec
+			TURN_DEFAULT_SPEED = 7f;                  //   25 km/h
+			DEFAULT_SPEED = 13;                       //   48 km/h
+		} else if(router.getAppMode().isDerivedRoutingFrom(ApplicationMode.BICYCLE)) {
+			PREPARE_LONG_DISTANCE = 500;              // [100 sec]
+			// Do not play:
+			PREPARE_LONG_DISTANCE_END = 300 + 1000;   // [ 60 sec]
+			PREPARE_DISTANCE = 200;                   // [ 40 sec]
+			PREPARE_DISTANCE_END = 120;               // [ 24 sec]
+			TURN_IN_DISTANCE = 80;                    //   16 sec
+			TURN_IN_DISTANCE_END = 60;                //   12 sec
+			TURN_DISTANCE = 30;                       //    6 sec. Check if this works with GPS accuracy!
+			TURN_DEFAULT_SPEED = DEFAULT_SPEED = 5;   //   18 km/h
+		} else if(router.getAppMode().isDerivedRoutingFrom(ApplicationMode.PEDESTRIAN)) {
 			// prepare_long_distance warning not needed for pedestrian, but for goAhead prompt
-				PREPARE_LONG_DISTANCE = 500;
-				PREPARE_LONG_DISTANCE_END = 300 + 300; // Do not play
+			PREPARE_LONG_DISTANCE = 500;
+			// Do not play:
+			PREPARE_LONG_DISTANCE_END = 300 + 300;
 			// prepare distance is not needed for pedestrian
-				PREPARE_DISTANCE = 200;           // [100 sec]
-				PREPARE_DISTANCE_END = 150 + 100; // [ 75 sec] + Do not play
-			TURN_IN_DISTANCE = 50;            //   25 sec, (was 100m, 50 sec)
-			TURN_IN_DISTANCE_END = 30;        //   15 sec  (was  70m, 35 sec)
-			TURN_DISTANCE = 15;               //   7,5sec (was  25m, 12 sec). Check if this works with GPS accuracy!
-			TURN_DEFAULT_SPEED = DEFAULT_SPEED = 2f;  //   7,2 km/h
-		} else if(router.getAppMode().isDerivedRoutingFrom(ApplicationMode.BICYCLE)){
-				PREPARE_LONG_DISTANCE = 500;      // [100 sec]
-				PREPARE_LONG_DISTANCE_END = 300 + 1000;  // [ 60 sec] + Do not play
-			PREPARE_DISTANCE = 200;           // [ 40 sec] (was 500m, 100sec)
-			PREPARE_DISTANCE_END = 120;       // [ 24 sec] (was 350m,  70sec)
-			TURN_IN_DISTANCE = 80;            //   16 sec  (was 225m,  45sec)
-			TURN_IN_DISTANCE_END = 60;        //   12 sec  (was  80m,  16sec)
-			TURN_DISTANCE = 30;               //    6 sec  (was  45m,   9sec). Check if this works with GPS accuracy!
-			TURN_DEFAULT_SPEED = DEFAULT_SPEED = 5;   //  18 km/h
-		} else if(router.getAppMode().isDerivedRoutingFrom(ApplicationMode.CAR)){
-			PREPARE_DISTANCE = 1500;          // [125 sec]
-			PREPARE_DISTANCE_END = 1200;      // [100 sec]
-			TURN_IN_DISTANCE = 390;           //   30 sec
-			TURN_IN_DISTANCE_END = 195;       //   15 sec
-			TURN_DISTANCE = 50;               //    7 sec
-			TURN_DEFAULT_SPEED = 7f;          //   25 km/h
-			DEFAULT_SPEED = 13;               //   48 km/h
+			PREPARE_DISTANCE = 200;                    // [100 sec]
+			// Do not play:
+			PREPARE_DISTANCE_END = 150 + 100;          // [ 75 sec]
+			TURN_IN_DISTANCE = 50;                     //   25 sec
+			TURN_IN_DISTANCE_END = 30;                 //   15 sec
+			TURN_DISTANCE = 15;                        //   7,5sec. Check if this works with GPS accuracy!
+			TURN_DEFAULT_SPEED = DEFAULT_SPEED = 2f;   //   7,2 km/h
 		} else {
 			DEFAULT_SPEED = router.getAppMode().getDefaultSpeed();
 			TURN_DEFAULT_SPEED = DEFAULT_SPEED / 2;
-				PREPARE_LONG_DISTANCE = (int) (DEFAULT_SPEED * 305);
-				PREPARE_LONG_DISTANCE_END = (int) (DEFAULT_SPEED * 225) + 1000; // Test do not play
+			PREPARE_LONG_DISTANCE = (int) (DEFAULT_SPEED * 305);
+			// Do not play:
+			PREPARE_LONG_DISTANCE_END = (int) (DEFAULT_SPEED * 225) * 2;
 			PREPARE_DISTANCE = (int) (DEFAULT_SPEED * 125);	
 			PREPARE_DISTANCE_END = (int) (DEFAULT_SPEED * 100);
 			TURN_IN_DISTANCE = (int) (DEFAULT_SPEED * 30);
@@ -184,9 +187,9 @@ public class VoiceRouter {
 		if(loc != null && loc.hasSpeed()) {
 			speed = loc.getSpeed();
 		}
-		if (isDistanceLess(speed, dist, TURN_IN_DISTANCE_END, 0f)) {
+		if (isDistanceLess(speed, dist, TURN_DISTANCE, 0f)) {
 			return 0;
-		} else if ( dist <= PREPARE_DISTANCE) {
+		} else if (dist <= PREPARE_DISTANCE) {
 			return 1;
 		} else if (dist <= PREPARE_LONG_DISTANCE) {
 			return 2;
@@ -417,7 +420,9 @@ public class VoiceRouter {
 			nextRouteDirection = next;
 			currentStatus = STATUS_UNKNOWN;
 			playedAndArriveAtTarget = false;
-			playGoAheadDist = -1;
+			if (playGoAheadDist != -1) {
+				playGoAheadDist = 0;
+			}
 		}
 
 		if (!repeat) {
@@ -435,20 +440,8 @@ public class VoiceRouter {
 
 		if (currentStatus == STATUS_UNKNOWN) {
 			// Tell goAhead distance after (1) route calculation if no other prompt is due, or (2) after a turn if next turn is more than PREPARE_LONG_DISTANCE away
-			//if (!isDistanceLess(speed, dist, TURN_IN_DISTANCE * 1.3, 0f)) {
-			if (((playGoAheadDist == -1) && (!isDistanceLess(speed, dist, TURN_IN_DISTANCE * 1.3, 0f))) || !isDistanceLess(speed, dist, PREPARE_LONG_DISTANCE + 300, 0f)) {
+			if ((playGoAheadDist == -1) || (dist > PREPARE_LONG_DISTANCE)) {
 				playGoAheadDist = dist - 80;
-			}
-			// Put voice router in appropriate status
-			if (dist > PREPARE_LONG_DISTANCE + 300) {
-				// say long distance message only for long distances > 3.5 km
-				nextStatusAfter(STATUS_UNKNOWN);
-			} else if (dist > PREPARE_DISTANCE + 300) {
-				// say prepare message if it is far enough and don't say prepare long distance
-				nextStatusAfter(STATUS_LONG_PREPARE);
-			} else {
-				// don't say even prepare message
-				nextStatusAfter(STATUS_PREPARE);
 			}
 		}
 
@@ -460,7 +453,9 @@ public class VoiceRouter {
 				playMakeTurn(currentSegment, next, null);
 			}
 			if(next.distance < TURN_IN_DISTANCE && isTargetPoint(nextNextInfo)) {
-				andSpeakArriveAtPoint(nextNextInfo);
+				if(!next.getTurnType().goAhead()) {  // avoids isolated "and arrive.." prompt
+					andSpeakArriveAtPoint(nextNextInfo);
+				}
 			}
 			nextStatusAfter(STATUS_TURN);
 		} else if ((repeat || statusNotPassed(STATUS_TURN_IN)) && isDistanceLess(speed, dist, TURN_IN_DISTANCE, 0f)) {
@@ -474,7 +469,6 @@ public class VoiceRouter {
 				playAndArriveAtDestination(repeat, nextInfo, currentSegment);
 			}
 			nextStatusAfter(STATUS_TURN_IN);
-			// } else if (statusNotPassed(STATUS_PREPARE) && isDistanceLess(speed, dist, PREPARE_DISTANCE, 0f)) {
 		} else if ((repeat || statusNotPassed(STATUS_PREPARE)) && (dist <= PREPARE_DISTANCE)) {
 			if (repeat || dist >= PREPARE_DISTANCE_END) {
 				if (!repeat && (next.getTurnType().keepLeft() || next.getTurnType().keepRight())){
@@ -485,7 +479,6 @@ public class VoiceRouter {
 				}
 			}
 			nextStatusAfter(STATUS_PREPARE);
-			// } else if (statusNotPassed(STATUS_LONG_PREPARE) && isDistanceLess(speed, dist, PREPARE_LONG_DISTANCE, 0f)){
 		} else if ((repeat || statusNotPassed(STATUS_LONG_PREPARE)) && (dist <= PREPARE_LONG_DISTANCE)) {
 			if (repeat || dist >= PREPARE_LONG_DISTANCE_END) {
 				playPrepareTurn(currentSegment, next, dist);
@@ -495,7 +488,7 @@ public class VoiceRouter {
 		} else if (statusNotPassed(STATUS_UNKNOWN)) {
 			// strange how we get here but
 			nextStatusAfter(STATUS_UNKNOWN);
-		} else if (repeat || (statusNotPassed(STATUS_TURN_IN) && dist < playGoAheadDist)) {
+		} else if (repeat || (statusNotPassed(STATUS_PREPARE) && dist < playGoAheadDist)) {
 			playGoAheadDist = 0;
 			playGoAhead(dist, getSpeakableStreetName(currentSegment, next));
 		}
@@ -754,11 +747,15 @@ public class VoiceRouter {
 			} else {
 				notifyOnVoiceMessage();
 				play.newRouteCalculated(router.getLeftDistance(), router.getLeftTime()).play();
+				playGoAheadDist = -1;
 				currentStatus = STATUS_UNKNOWN;
 			}
 		} else if (player == null) {
 			pendingCommand = new VoiceCommandPending(!newRoute ? VoiceCommandPending.ROUTE_RECALCULATED
 					: VoiceCommandPending.ROUTE_CALCULATED, this);
+			if (newRoute) {
+				playGoAheadDist = -1;
+			}
 			currentStatus = STATUS_UNKNOWN;
 		}
 		nextRouteDirection = null;
