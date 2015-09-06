@@ -512,11 +512,11 @@
     <string name="fav_point_dublicate">Nombre de punto favorito duplicado</string>
     <string name="fav_point_dublicate_message">El nombre del favorito elegido ya está en uso, se cambió a %1$s para evitar duplicación.</string>
     <string name="text_size_descr">Define el tamaño del texto en el mapa.</string>
-    <string name="tip_navigation_t">"Para recibir indicaciones hasta un lugar, o bien mantén pulsado sobre el mismo en el mapa, (luego pulsa sobre su descripción y selecciona \'Indicaciones a\'), o selecciona \'Indicaciones a\' luego de pulsar sobre una entrada en una lista de resultados de búsqueda o de favoritos.
+    <string name="tip_navigation_t">"Para recibir indicaciones hasta un lugar, o bien mantén pulsado sobre el mismo en el mapa, (luego pulsa sobre su descripción y selecciona \'Ir hasta\'), o selecciona \'Ir hasta\' luego de pulsar sobre una entrada en una lista de resultados de búsqueda o de favoritos.
 \n\nEl destino se marca en el mapa como una bandera y OsmAnd muestra la distancia y la dirección al mismo (triángulo naranja).
 \n\nPuede elegir \'Iniciar Navegación\', lo que implica que OsmAnd te guiará, te dará indicaciones vocales (si están activas), etc. O puede elegir \'Mostrar ruta\', y solamente mostrará la ruta, sin indicaciones ni reajustes según se mueva.
-\n\nPara mostrar una ruta al destino desde cualquier punto diferente de la posición actual, selecciónelo posteriormente en el mapa y pulsa \'Indicaciones desde\'.
-\n\nSi usa \'Indicaciones desde\' y luego \'Iniciar Navegación\', OsmAnd cambiará a su ubicación actual tan pronto como la conozca (por lo que se puede usar para iniciar la ruta antes de conocer la ubicación real). Por otro lado, \'Indicaciones desde\' y \'Mostrar ruta\' no realizará actualizaciones de la ruta mostrada. "</string>
+\n\nPara mostrar una ruta al destino desde cualquier punto diferente de la posición actual, selecciónelo posteriormente en el mapa y pulsa \'Ir desde\'.
+\n\nSi usa \'Ir desde\' y luego \'Iniciar Navegación\', OsmAnd cambiará a su ubicación actual tan pronto como la conozca (por lo que se puede usar para iniciar la ruta antes de conocer la ubicación real). Por otro lado, \'Ir desde\' y \'Mostrar ruta\' no realizará actualizaciones de la ruta mostrada. "</string>
 	<string name="tip_search_t">"Puede buscar lugares directamente en el mapa vía \'Usar ubicación\'→\'Buscar cerca de aquí\', o mediante la pantalla de búsqueda vía \'Menú\'→\'Buscar\'.
 \n\nLa pantalla de búsqueda proporciona plantillas para buscar:
 \n\t* por dirección
