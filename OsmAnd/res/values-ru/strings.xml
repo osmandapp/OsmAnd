@@ -2075,4 +2075,6 @@
 	<string name="dahboard_options_dialog_title">Настройки домашней страницы</string>
 	<string name="shared_string_card_was_hidden">Карточка была скрыта</string>
 	<string name="commit_poi">Зафиксировать POI</string>
+	<string name="tab_title_basic">Основные</string>
+	<string name="tab_title_advanced">Расширенные</string>
 	</resources>
