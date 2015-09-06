@@ -450,7 +450,9 @@ public class VoiceRouter {
 				playMakeTurn(currentSegment, next, null);
 			}
 			if(next.distance < TURN_IN_DISTANCE && isTargetPoint(nextNextInfo)) {
-				andSpeakArriveAtPoint(nextNextInfo);
+				if(!next.getTurnType().goAhead()) {  //avoids isolated "and arrice.."
+					andSpeakArriveAtPoint(nextNextInfo);
+				}
 			}
 			nextStatusAfter(STATUS_TURN);
 		} else if ((repeat || statusNotPassed(STATUS_TURN_IN)) && isDistanceLess(speed, dist, TURN_IN_DISTANCE, 0f)) {
