@@ -1151,4 +1151,28 @@
 	<string name="poi_denomination_united">United Church of Christ</string>
 	<string name="poi_denomination_uniting">Uniting kirken</string>
 	<string name="poi_denomination_scientist">Kristen Videnskab</string>
+	<string name="poi_landfill_waste_nuclear">Atomaffald</string>
+	<string name="poi_start_date">Startdato</string>
+	<string name="poi_wheelchair">Kørestol</string>
+
+	<string name="poi_content_silage">Ensilage (indhold)</string>
+	<string name="poi_content_water">Vand (indhold)</string>
+	<string name="poi_content_slurry">Gylle (indhold)</string>
+	<string name="poi_content_oil">Olie (indhold)</string>
+	<string name="poi_content_fuel">Brændstof (indhold)</string>
+	<string name="poi_content_manure">Gylle (indhold)</string>
+	<string name="poi_content_wine">Vin (indhold)</string>
+	<string name="poi_content_sewage">Spildevand (indhold)</string>
+	<string name="poi_content_gas">Gas (indhold)</string>
+	<string name="poi_content_biomass">Biomasse (indhold)</string>
+	<string name="poi_content_wastewater">Spildevand (indhold)</string>
+	<string name="poi_content_crop">Afgrøde (indhold)</string>
+	<string name="poi_content_fodder">Foder (indhold)</string>
+	<string name="poi_content_beer">Øl (indhold)</string>
+	<string name="poi_content_salt">Salt (indhold)</string>
+	<string name="poi_content_grain">Korn (indhold)</string>
+
+	<string name="poi_bunker_silo">Bunker silo</string>
+	<string name="poi_brownfield">Forladt industrigrunde</string>
+	<string name="poi_greenfield">Byggemodning</string>
 	</resources>
