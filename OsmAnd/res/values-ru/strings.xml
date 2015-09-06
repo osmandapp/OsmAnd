@@ -2071,4 +2071,8 @@
 	<string name="offline_maps_and_navigation">Офлайн карты\nи Навигация</string>
 	<string name="building_number">Номер дома</string>
 	<string name="rendering_attr_pisteGrooming_name">Тип лыжной трассы</string>
-    </resources>
+    <string name="download_live_updates">Автоматическое обновление</string>
+	<string name="dahboard_options_dialog_title">Настройки домашней страницы</string>
+	<string name="shared_string_card_was_hidden">Карточка была скрыта</string>
+	<string name="commit_poi">Зафиксировать POI</string>
+	</resources>
