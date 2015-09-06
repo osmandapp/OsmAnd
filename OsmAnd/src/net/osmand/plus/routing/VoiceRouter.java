@@ -38,7 +38,7 @@ public class VoiceRouter {
 	private final RoutingHelper router;
 	private boolean mute = false;
 	private CommandPlayer player;
-    private final OsmandSettings settings;
+	private final OsmandSettings settings;
  
 	private int currentStatus = STATUS_UNKNOWN;
 	private boolean playedAndArriveAtTarget = false;
@@ -453,7 +453,7 @@ public class VoiceRouter {
 				playMakeTurn(currentSegment, next, null);
 			}
 			if(next.distance < TURN_IN_DISTANCE && isTargetPoint(nextNextInfo)) {
-				if(!next.getTurnType().goAhead()) {  //avoids isolated "and arrice.."
+				if(!next.getTurnType().goAhead()) {  // avoids isolated "and arrive.." prompt
 					andSpeakArriveAtPoint(nextNextInfo);
 				}
 			}
