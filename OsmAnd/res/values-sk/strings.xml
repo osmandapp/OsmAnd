@@ -1082,7 +1082,7 @@
     
     
     <string name="map_widget_max_speed">Obmedzenie rýchlosti</string>
-    <string name="monitoring_control_start">spustiť</string>
+    <string name="monitoring_control_start">GPX</string>
     <string name="rendering_attr_noAdminboundaries_name">Skryť hranice</string>
 	<string name="rendering_attr_noAdminboundaries_description">Potlačiť zobrazenie regionálnej hranice (admin úrovne 5-9)</string>
 	<string name="tip_altitude_offset">Korekcia nadmorskej výšky</string>
@@ -2105,7 +2105,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="shared_string_my_location">Moja poloha</string>
 	<string name="shared_string_my_favorites">Moje obľúbené</string>
 	<string name="shared_string_my_tracks">Moje stopy</string>
-	<string name="shared_string_currently_recording_track">Stopa sa nahráva</string>
+	<string name="shared_string_currently_recording_track">Teraz nahrávaná stopa</string>
 	<string name="delay_to_start_navigation_descr">Zadajte dobu zotrvania na obrazovke plánovania trasy</string>
     <string name="delay_to_start_navigation">Spustiť navigačné pokyny po…</string>
     <string name="shared_string_go">Ísť</string>
