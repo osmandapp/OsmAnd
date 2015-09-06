@@ -1136,4 +1136,26 @@
 	<string name="poi_denomination_shaktism">Shaktismo</string>
 	<string name="poi_denomination_wesleyan">Wesleyan</string>
 	<string name="poi_denomination_shingon_shu">Budismo Shingon</string>
+	<string name="poi_landfill_waste_nuclear">Residuos nucleares</string>
+	<string name="poi_bunker_silo">Silo bunker</string>
+	<string name="poi_start_date">Fecha de inicio</string>
+	<string name="poi_wheelchair">Silla de rueda</string>
+
+	<string name="poi_content_silage">Ensilado (contenido)</string>
+	<string name="poi_content_water">Agua (contenido)</string>
+	<string name="poi_content_slurry">Mezcla (contenido)</string>
+	<string name="poi_content_oil">Aceite (contenido)</string>
+	<string name="poi_content_fuel">Combustible (contenido)</string>
+	<string name="poi_content_manure">Estiércol (contenido)</string>
+	<string name="poi_content_wine">Vino (contenido)</string>
+	<string name="poi_content_sewage">Aguas residuales (contenido)</string>
+	<string name="poi_content_gas">Gas (contenido)</string>
+	<string name="poi_content_biomass">Biomasa (contenido)</string>
+	<string name="poi_content_wastewater">Aguas residuales (contenido)</string>
+	<string name="poi_content_crop">Cultivo (contenido)</string>
+	<string name="poi_content_fodder">Forraje (contenido)</string>
+	<string name="poi_content_beer">Cerveza (contenido)</string>
+	<string name="poi_content_salt">Sal (contenido)</string>
+	<string name="poi_content_grain">Cereal (contenido)</string>
+
 	</resources>
