@@ -1460,4 +1460,5 @@
 	<string name="osmo_plugin_name">OsMo (OSM İzleme)</string>
 	<string name="osmo_plugin_description">"Bu eklenti OsMo adlı gelişmiş canlı izlemeyi etkinleştirir, bkz  http://osmo.mobi.\n\nBir grup içindeki bütün aygıtları gerçek zamanlı olarak izleyebilir ve birbiriyle iletişim kurabilir. Oturum izleme veya daimi izleme için çeşitli seçenekleri vardır.\n\nAnonim gruplar belirli günlerde, ve belirli özelliklerde kendiliğinden oluşturulabilir, örn. uzaktan herhangi kontrol ve yönetici olmadan. Diğer yandan, tam özellikli gruplar websitesinde oluşturulabilir ve sadece kayıtlı kullanıcılar erişebilir. "</string>
 	<string name="plugin_touringview_name">Harita gezinti görünümü</string>
-	</resources>
+	<string name="lang_new">Newar / Nepal Bhasa</string>
+    </resources>
