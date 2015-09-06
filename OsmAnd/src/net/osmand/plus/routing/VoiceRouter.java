@@ -120,44 +120,47 @@ public class VoiceRouter {
 	
 	
 	public void updateAppMode(){
-		// turn prompt starts either at distance, or if actual-lead-time(currentSpeed) < maximum-lead-time  
-		// additional lead time criterion only for TURN_IN and TURN
-			PREPARE_LONG_DISTANCE = 3500;             // [105 sec] - 120 km/h
-			// To test for Issue #1411: Do not Play for PREPARE_LONG_DISTANCE:
-			PREPARE_LONG_DISTANCE_END = 3000 + 1000;  // [ 90 sec] - 120 km/h
-		if(router.getAppMode().isDerivedRoutingFrom(ApplicationMode.PEDESTRIAN)){
+		// turn prompt starts either at distance, or additionally (TURN_IN and TURN only) if actual-lead-time(currentSpeed) < maximum-lead-time(defined by default speed)
+		if(router.getAppMode().isDerivedRoutingFrom(ApplicationMode.CAR)) {
+			PREPARE_LONG_DISTANCE = 3500;             // [105 sec @ 120 km/h]
+			// Do not play prompts for PREPARE_LONG_DISTANCE, test for Issue #1411
+			PREPARE_LONG_DISTANCE_END = 3000 + 1000;  // [ 90 sec @ 120 km/h]
+			PREPARE_DISTANCE = 1500;                  // [125 sec]
+			PREPARE_DISTANCE_END = 1200;      	  // [100 sec]
+			TURN_IN_DISTANCE = 390;			  //   30 sec
+			TURN_IN_DISTANCE_END = 195;               //   15 sec
+			TURN_DISTANCE = 50;                       //    7 sec
+			TURN_DEFAULT_SPEED = 7f;                  //   25 km/h
+			DEFAULT_SPEED = 13;                       //   48 km/h
+		} else if(router.getAppMode().isDerivedRoutingFrom(ApplicationMode.BICYCLE)) {
+			PREPARE_LONG_DISTANCE = 500;              // [100 sec]
+			// Do not play:
+			PREPARE_LONG_DISTANCE_END = 300 + 1000;   // [ 60 sec]
+			PREPARE_DISTANCE = 200;                   // [ 40 sec]
+			PREPARE_DISTANCE_END = 120;               // [ 24 sec]
+			TURN_IN_DISTANCE = 80;                    //   16 sec
+			TURN_IN_DISTANCE_END = 60;                //   12 sec
+			TURN_DISTANCE = 30;                       //    6 sec. Check if this works with GPS accuracy!
+			TURN_DEFAULT_SPEED = DEFAULT_SPEED = 5;   //   18 km/h
+		} else if(router.getAppMode().isDerivedRoutingFrom(ApplicationMode.PEDESTRIAN)) {
 			// prepare_long_distance warning not needed for pedestrian, but for goAhead prompt
-				PREPARE_LONG_DISTANCE = 500;
-				PREPARE_LONG_DISTANCE_END = 300 + 300; // Do not play
+			PREPARE_LONG_DISTANCE = 500;
+			// Do not play:
+			PREPARE_LONG_DISTANCE_END = 300 + 300;
 			// prepare distance is not needed for pedestrian
-				PREPARE_DISTANCE = 200;           // [100 sec]
-				PREPARE_DISTANCE_END = 150 + 100; // [ 75 sec] + Do not play
-			TURN_IN_DISTANCE = 50;            //   25 sec, (was 100m, 50 sec)
-			TURN_IN_DISTANCE_END = 30;        //   15 sec  (was  70m, 35 sec)
-			TURN_DISTANCE = 15;               //   7,5sec (was  25m, 12 sec). Check if this works with GPS accuracy!
-			TURN_DEFAULT_SPEED = DEFAULT_SPEED = 2f;  //   7,2 km/h
-		} else if(router.getAppMode().isDerivedRoutingFrom(ApplicationMode.BICYCLE)){
-				PREPARE_LONG_DISTANCE = 500;      // [100 sec]
-				PREPARE_LONG_DISTANCE_END = 300 + 1000;  // [ 60 sec] + Do not play
-			PREPARE_DISTANCE = 200;           // [ 40 sec] (was 500m, 100sec)
-			PREPARE_DISTANCE_END = 120;       // [ 24 sec] (was 350m,  70sec)
-			TURN_IN_DISTANCE = 80;            //   16 sec  (was 225m,  45sec)
-			TURN_IN_DISTANCE_END = 60;        //   12 sec  (was  80m,  16sec)
-			TURN_DISTANCE = 30;               //    6 sec  (was  45m,   9sec). Check if this works with GPS accuracy!
-			TURN_DEFAULT_SPEED = DEFAULT_SPEED = 5;   //  18 km/h
-		} else if(router.getAppMode().isDerivedRoutingFrom(ApplicationMode.CAR)){
-			PREPARE_DISTANCE = 1500;          // [125 sec]
-			PREPARE_DISTANCE_END = 1200;      // [100 sec]
-			TURN_IN_DISTANCE = 390;           //   30 sec
-			TURN_IN_DISTANCE_END = 195;       //   15 sec
-			TURN_DISTANCE = 50;               //    7 sec
-			TURN_DEFAULT_SPEED = 7f;          //   25 km/h
-			DEFAULT_SPEED = 13;               //   48 km/h
+			PREPARE_DISTANCE = 200;                    // [100 sec]
+			// Do not play:
+			PREPARE_DISTANCE_END = 150 + 100;          // [ 75 sec]
+			TURN_IN_DISTANCE = 50;                     //   25 sec
+			TURN_IN_DISTANCE_END = 30;                 //   15 sec
+			TURN_DISTANCE = 15;                        //   7,5sec. Check if this works with GPS accuracy!
+			TURN_DEFAULT_SPEED = DEFAULT_SPEED = 2f;   //   7,2 km/h
 		} else {
 			DEFAULT_SPEED = router.getAppMode().getDefaultSpeed();
 			TURN_DEFAULT_SPEED = DEFAULT_SPEED / 2;
-				PREPARE_LONG_DISTANCE = (int) (DEFAULT_SPEED * 305);
-				PREPARE_LONG_DISTANCE_END = (int) (DEFAULT_SPEED * 225) * 2; // Test do not play
+			PREPARE_LONG_DISTANCE = (int) (DEFAULT_SPEED * 305);
+			// Do not play:
+			PREPARE_LONG_DISTANCE_END = (int) (DEFAULT_SPEED * 225) * 2;
 			PREPARE_DISTANCE = (int) (DEFAULT_SPEED * 125);	
 			PREPARE_DISTANCE_END = (int) (DEFAULT_SPEED * 100);
 			TURN_IN_DISTANCE = (int) (DEFAULT_SPEED * 30);
