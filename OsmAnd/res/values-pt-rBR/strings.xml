@@ -526,7 +526,7 @@
    	<string name="always_center_position_on_map">Sempre centralizar a posição no mapa</string>
     <string name="voice_pref_title">Voz</string>
     <string name="misc_pref_title">Diversos</string>
-    <string name="localization_pref_title">Posição</string>
+    <string name="localization_pref_title">Localização</string>
     <string name="index_item_nation_addresses">endereços nacionais</string>
 	<string name="index_item_world_altitude_correction">Correção de altitude mundial</string>
 	<string name="index_item_world_seamarks">Marcas marítimas mundiais</string>
