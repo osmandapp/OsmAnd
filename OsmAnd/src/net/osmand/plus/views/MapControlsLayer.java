@@ -498,8 +498,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 				routingHelper.setFollowingMode(true);
 				routingHelper.setRoutePlanningMode(false);
 				mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
-				routingHelper.setCurrentLocation(app.getLocationProvider().getLastKnownLocation(), false);
 				app.getRoutingHelper().notifyIfRouteIsCalculated();
+				routingHelper.setCurrentLocation(app.getLocationProvider().getLastKnownLocation(), false);
 			}
 		}
 	}
