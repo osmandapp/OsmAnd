@@ -25,14 +25,13 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0"
-        android:background="@android:color/white"
+        android:background="?attr/bg_map_context_menu"
         android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/context_menu_top_view"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -43,12 +42,12 @@
 
                 <ImageView
                     android:id="@+id/context_menu_icon_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginStart="14dp"
-                    android:layout_marginLeft="14dp"
-                    android:tint="@color/color_unknown"
+                    android:scaleType="center"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginLeft="12dp"
                     android:src="@drawable/ic_action_building_number"/>
 
             </LinearLayout>
@@ -68,6 +67,7 @@
                     android:layout_marginRight="12dp"
                     android:text="@string/search_address_building"
                     android:textSize="@dimen/default_list_text_size_large"
+                    android:textColor="?android:textColorPrimary"
                     android:textStyle="bold"/>
 
                 <TextView
@@ -78,7 +78,7 @@
                     android:layout_marginRight="12dp"
                     android:layout_marginTop="3dp"
                     android:text="@string/other_location"
-                    android:textColor="@color/secondary_text_disabled_material_light"
+                    android:textColor="?android:textColorSecondary"
                     android:textSize="@dimen/default_list_text_size"/>
 
 
@@ -107,8 +107,7 @@
                 android:layout_weight="1"
                 android:scaleType="center"
                 android:background="?attr/dashboard_button"
-                android:src="@drawable/map_directions"
-                android:tint="@color/actionbar_dark_color"/>
+                android:src="@drawable/map_directions"/>
 
             <View
                 android:layout_width="1px"
@@ -123,8 +122,7 @@
                 android:layout_weight="1"
                 android:scaleType="center"
                 android:background="?attr/dashboard_button"
-                android:src="@drawable/ic_action_fav_dark"
-                android:tint="@color/actionbar_dark_color"/>
+                android:src="@drawable/ic_action_fav_dark"/>
 
             <View
                 android:layout_width="1px"
@@ -139,8 +137,7 @@
                 android:layout_weight="1"
                 android:scaleType="center"
                 android:background="?attr/dashboard_button"
-                android:src="@drawable/abc_ic_menu_share_mtrl_alpha"
-                android:tint="@color/actionbar_dark_color"/>
+                android:src="@drawable/abc_ic_menu_share_mtrl_alpha"/>
 
             <View
                 android:layout_width="1px"
@@ -155,8 +152,7 @@
                 android:layout_weight="1"
                 android:scaleType="center"
                 android:background="?attr/dashboard_button"
-                android:src="@drawable/ic_action_core_overflow_dark"
-                android:tint="@color/actionbar_dark_color"/>
+                android:src="@drawable/ic_action_core_overflow_dark"/>
 
         </LinearLayout>
     </LinearLayout>

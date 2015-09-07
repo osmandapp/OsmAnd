@@ -1132,4 +1132,21 @@
 	<string name="poi_denomination_maronite">馬若恩教派</string>
 	<string name="poi_denomination_mahayana">大乘佛教</string>
 
+	<string name="poi_landfill_waste_nuclear">核廢料</string>
+	<string name="poi_brownfield">棕地</string>
+	<string name="poi_greenfield">未開發地</string>
+	<string name="poi_bunker_silo">燃料貯塔</string>
+	<string name="poi_start_date">開始日期</string>
+	<string name="poi_wheelchair">輪椅</string>
+
+	<string name="poi_content_silage">青貯飼料 (庫容)</string>
+	<string name="poi_content_water">水 (庫容)</string>
+	<string name="poi_content_slurry">礦泥 (庫容)</string>
+	<string name="poi_content_oil">油 (庫容)</string>
+	<string name="poi_content_fuel">燃料 (庫容)</string>
+	<string name="poi_content_manure">肥料 (庫容)</string>
+	<string name="poi_content_wine">酒 (庫容)</string>
+	<string name="poi_content_sewage">污水 (庫容)</string>
+	<string name="poi_content_gas">瓦斯 (庫容)</string>
+	<string name="poi_content_biomass">生物質 (庫容)</string>
 	</resources>

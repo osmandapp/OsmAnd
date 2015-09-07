@@ -2077,4 +2077,15 @@
 	<string name="commit_poi">Зафиксировать POI</string>
 	<string name="tab_title_basic">Основные</string>
 	<string name="tab_title_advanced">Расширенные</string>
-	</resources>
+	<string name="next_proceed">Следующий</string>
+	<string name="opening_at">Открытие в</string>
+	<string name="closing_at">Закрытие в</string>
+	<string name="tag_poi_name">название</string>
+	<string name="contact_info">Контактная информация</string>
+	<string name="description">Описание</string>
+	<string name="add_opening_hours">Добавить часы работы</string>
+	<string name="poi_dialog_poi_type">Тип POI</string>
+	<string name="number_of_rows_in_dash">Количество строк на странице %1$s</string>
+	<string name="please_specify_poi_type">Пожалуйста, укажите тип POI.</string>
+<string name="rendering_value_boldOutline_name">Жирный контур</string>
+    </resources>
