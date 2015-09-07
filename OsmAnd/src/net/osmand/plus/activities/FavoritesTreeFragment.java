@@ -1,37 +1,5 @@
 package net.osmand.plus.activities;
 
-import gnu.trove.list.array.TIntArrayList;
-
-import java.io.File;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import net.osmand.access.AccessibleToast;
-import net.osmand.data.FavouritePoint;
-import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
-import net.osmand.plus.FavouritesDbHelper;
-import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
-import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.IconsCache;
-import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper;
-import net.osmand.plus.base.FavoriteImageDrawable;
-import net.osmand.plus.dialogs.DirectionsDialogs;
-import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.ColorDialogs;
-import net.osmand.plus.myplaces.FavoritesActivity;
-import net.osmand.util.MapUtils;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -68,6 +36,39 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import net.osmand.access.AccessibleToast;
+import net.osmand.data.FavouritePoint;
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
+import net.osmand.plus.FavouritesDbHelper;
+import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
+import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.IconsCache;
+import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.TargetPointsHelper;
+import net.osmand.plus.base.FavoriteImageDrawable;
+import net.osmand.plus.dialogs.DirectionsDialogs;
+import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.helpers.ColorDialogs;
+import net.osmand.plus.myplaces.FavoritesActivity;
+import net.osmand.util.MapUtils;
+
+import java.io.File;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import gnu.trove.list.array.TIntArrayList;
 
 
 public class FavoritesTreeFragment extends OsmandExpandableListFragment {
@@ -187,9 +188,9 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		return true;
 	}
 
-	public static boolean editPoint(Context ctx, final FavouritePoint point, final Runnable callback) {
+	public static boolean editPoint(final Context ctx, final FavouritePoint point, final Runnable callback) {
 		OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
-		Builder builder = new AlertDialog.Builder(ctx);
+		final Builder builder = new AlertDialog.Builder(ctx);
 		builder.setTitle(R.string.favourites_context_menu_edit);
 		final View v = LayoutInflater.from(ctx).inflate(R.layout.favorite_edit_dialog,
 				null, false);
@@ -212,13 +213,33 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		builder.setPositiveButton(R.string.shared_string_apply, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				boolean edited = helper.editFavouriteName(point, editText.getText().toString().trim(), cat.getText()
-						.toString(), editDescr.getText().toString());
-				if (edited && callback != null) {
-					callback.run();
-					
-				}
+				final String newName = editText.getText().toString().trim();
+				point.setName(newName);
+				point.setCategory(cat.getText().toString());
+				point.setDescription(editDescr.getText().toString());
+				AlertDialog.Builder builder1 = helper.checkDuplicates(point, helper, ctx);
 
+				if (builder1 != null) {
+					builder1.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							boolean edited = helper.editFavouriteName(point,
+									point.getName(), cat.getText().toString(),
+									editDescr.getText().toString());
+							if (edited && callback != null) {
+								callback.run();
+							}
+						}
+					});
+					builder1.create().show();
+				} else {
+					boolean edited = helper.editFavouriteName(point,
+							newName, cat.getText().toString(),
+							editDescr.getText().toString());
+					if (edited && callback != null) {
+						callback.run();
+					}
+				}
 			}
 		});
 		builder.create().show();
