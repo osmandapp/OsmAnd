@@ -419,7 +419,12 @@ public class EditPoiFragment extends DialogFragment {
 								  final Runnable successAction,
 								  final Activity activity,
 								  final OpenstreetmapUtil openstreetmapUtil) {
+		LOG.debug("commitNode(" + "action=" + action + ", n=" + n + ", info=" + info
+				+ ", comment=" + comment + ", closeChangeSet=" + closeChangeSet
+				+ ", successAction=" + successAction + ", activity=" + activity
+				+ ", openstreetmapUtil=" + openstreetmapUtil + ")");
 		if (info == null && OsmPoint.Action.CREATE != action) {
+
 			AccessibleToast.makeText(activity, activity.getResources().getString(R.string.poi_error_info_not_loaded), Toast.LENGTH_LONG).show();
 			return;
 		}

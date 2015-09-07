@@ -23,19 +23,22 @@ public class UploadOpenstreetmapPointAsyncTask
 	private boolean interruptUploading = false;
 	private OsmEditsUploadListener listener;
 	private OsmEditingPlugin plugin;
+	private final boolean closeChangeSet;
 
 	public UploadOpenstreetmapPointAsyncTask(ProgressDialog progress,
 											 OsmEditsUploadListener listener,
 											 OsmEditingPlugin plugin,
 											 OpenstreetmapRemoteUtil remotepoi,
 											 OsmBugsRemoteUtil remotebug,
-											 int listSize) {
+											 int listSize,
+											 boolean closeChangeSet) {
 		this.progress = progress;
 		this.plugin = plugin;
 		this.remotepoi = remotepoi;
 		this.remotebug = remotebug;
 		this.listSize = listSize;
 		this.listener = listener;
+		this.closeChangeSet = closeChangeSet;
 	}
 
 	@Override
@@ -52,7 +55,8 @@ public class UploadOpenstreetmapPointAsyncTask
 				if (OsmPoint.Action.CREATE != p.getAction()) {
 					entityInfo = remotepoi.loadNode(p.getEntity());
 				}
-				Node n = remotepoi.commitNodeImpl(p.getAction(), p.getEntity(), entityInfo, p.getComment(), false);
+				Node n = remotepoi.commitNodeImpl(p.getAction(), p.getEntity(), entityInfo,
+						p.getComment(), closeChangeSet);
 				if (n != null) {
 					plugin.getDBPOI().deletePOI(p);
 					publishProgress(p);

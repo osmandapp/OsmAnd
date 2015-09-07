@@ -13,5 +13,4 @@ public interface OpenstreetmapUtil {
 	public void closeChangeSet();
 	
 	public Node loadNode(Amenity n);
-	
 }
