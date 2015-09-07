@@ -2127,4 +2127,5 @@
 <string name="working_days">Arbejdsdage</string>
 	<string name="recent_places">Seneste steder</string>
 	<string name="favourites">Favoritter</string>
-</resources>
+<string name="poi_action_delete">slet</string>
+	</resources>
