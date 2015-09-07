@@ -1813,4 +1813,7 @@
 	<string name="number_of_rows_in_dash">Número de linhas no traço de %1$s</string>
 <string name="tag_poi_amenity">facilidade</string>
 	<string name="please_specify_poi_type">Por favor, especifique tipo de POI.</string>
+<string name="working_days">Dias úteis</string>
+	<string name="recent_places">Locais recentes</string>
+	<string name="favourites">Favoritos</string>
 </resources>
