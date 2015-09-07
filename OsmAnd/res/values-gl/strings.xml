@@ -442,7 +442,7 @@
     <string name="context_menu_item_directions_from">Indicacións desde</string>
     <string name="route_descr_map_location">"Mapa: "</string>
     <string name="route_descr_lat_lon">Lat %1$.3f, lon %2$.3f</string>
-    <string name="route_descr_current_location">Posición actaul</string>
+    <string name="route_descr_current_location">Posición actual</string>
     <string name="route_to">Para:</string>
     <string name="route_via">Pasando por:</string>
     <string name="route_from">Desde:</string>
@@ -606,7 +606,7 @@
     <string name="shared_string_control_start">Comezar</string>
     <string name="map_widget_av_notes">Notas de son/vídeo</string>
     <string name="osmand_srtm_short_description_80_chars">Engadido de OsmAnd para curvas de nivel sen conexión</string>
-    <string name="osmand_srtm_long_description_1000_chars">Este engadido fornece curvas de nivel que poden ser mostradas nos mapas sen conexión de OsmAnd. Os datos globais (entre os 70 graos norte e os 70 graos sul) están baseados nas medicións de SRTM (Misión Topográfica con Radar da Lanzadeira Espacial) e ASTER (Radiómetro Espacial Avanzado de Emisión Térmica e Reflexión) e instrumentos de imaxes a bordo do Terra, o satélite máis importante do Sistema de Observación Terrestre da NASA. ASTER é un esforzo cooperativo entre a NASA, o Ministerio de Economía do Xapón, Comercio e Industria (METI) e Sistemas Espaciais Xaponeses (J-spaceystems).</string>
+    <string name="osmand_srtm_long_description_1000_chars">"Este engadido fornece unha capa de sobreposición de curvas de nivel e unha capa de sombras de altitude (relevo) que poden ser mostradas nos mapas sen conexión de OsmAnd. Esta funcionalidade pode ser moi apreciada por atletas, camiñantes, sendeiristas e calqueira que teña interese pola estrutura de relevo da paisaxe.\n\nOs datos globais (entre os 70 graos norte e os 70 graos sul) están baseados nas medicións de SRTM (Misión Topográfica con Radar da Lanzadeira Espacial) e ASTER (Radiómetro Espacial Avanzado de Emisión Térmica e Reflexión) e instrumentos de imaxes a bordo do Terra, o satélite máis importante do Sistema de Observación Terrestre da NASA. ASTER é un esforzo cooperativo entre a NASA, o Ministerio de Economía do Xapón, Comercio e Industria (METI) e Sistemas Espaciais Xaponeses (J-spaceystems). "</string>
     <string name="map_widget_distancemeasurement">Medición de distancias</string>
     <string name="audionotes_location_not_defined">A situación que asociar coa nota aínda non foi definida. Con «Empregar a situación...» pódeselle asignar unha nota á situación indicada</string>
     
@@ -615,7 +615,7 @@
     <string name="audionotes_plugin_name">Notas de son/vídeo</string>
     <string name="index_srtm_parts">partes</string>
     <string name="index_srtm_ele">Curvas de nivel</string>
-    <string name="srtm_plugin_description">Facilita a descarga de curvas de nivel e sombreados sen conexión («Configuración» → «Xestionar os ficheiros de mapas» → «Descargar» → Seleccione o tipo de mapa que desexe).</string>
+    <string name="srtm_plugin_description">"Este engadido fornece unha capa de sobreposición de curvas de nivel e unha capa de sombras de altitude (relevo) que poden ser mostradas nos mapas sen conexión de OsmAnd. Esta funcionalidade pode ser moi apreciada por atletas, camiñantes, sendeiristas e calqueira que teña interese pola estrutura de relevo da paisaxe.\n\nOs datos globais (entre os 70 graos norte e os 70 graos sul) están baseados nas medicións de SRTM (Misión Topográfica con Radar da Lanzadeira Espacial) e ASTER (Radiómetro Espacial Avanzado de Emisión Térmica e Reflexión) e instrumentos de imaxes a bordo do Terra, o satélite máis importante do Sistema de Observación Terrestre da NASA. ASTER é un esforzo cooperativo entre a NASA, o Ministerio de Economía do Xapón, Comercio e Industria (METI) e Sistemas Espaciais Xaponeses (J-spaceystems). "</string>
     <string name="srtm_plugin_name">Curvas de nivel</string>
     <string name="download_select_map_types">Outros mapas</string>
     <string name="download_roads_only_item">Só as estradas</string>
@@ -1015,7 +1015,7 @@
 \n\t- Other small features "</string>    
 	<string name="free_version_message">Esta versión gratuíta do OsmAnd está limitada a %1$s descargas e non admite artigos da Wikipedia sen conexión.</string>
 	<string name="free_version_title">Versión libre</string>
-	<string name="poi_context_menu_showdescription">Mostrar a descrición dos puntos de interese (PDI)</string>
+	<string name="poi_context_menu_showdescription">Mostrar a descrición do punto de interese (PDI)</string>
 	<string name="index_name_north_america">Norteamérica</string>
 	<string name="index_name_us">Norteamérica - Estados Unidos</string>
 	<string name="index_name_central_america">América Central</string>
@@ -1968,4 +1968,34 @@
 	<string name="shared_string_action_template">Acción {0}</string>
 	<string name="shared_string_collapse">Contraer</string>
 	<string name="shared_string_address">Enderezo</string>
+	<string name="shared_string_logoff">Pechar a sesión</string>
+    <string name="rename_failed">Non foi posíbel cambiar o nome</string>
+	<string name="days_behind">días de atraso</string>
+	<string name="rendering_attr_pisteGrooming_name">Coidado de pistas</string>
+    <string name="nautical_maps_missing">Para poder mostrar mapas náuticos hai que descargar o mapa especial sen conexión</string>
+	<string name="edit_group">Editar o grupo</string>
+    <string name="parking_place">Lugar de aparcamento</string>
+    <string name="version_settings_descr">Descargar versións nocturnas</string>
+    <string name="version_settings">Construcións (versións)</string>
+    <string name="voices">Indicacións con voz</string>
+	<string name="poi_action_delete">eliminar</string>
+	<string name="use_fast_recalculation">Recálculo automático da ruta</string>
+	<string name="failed_to_upload">Non foi posíbel enviar</string>
+	<string name="opening_at">Abre ás</string>
+	<string name="closing_at">Pecha ás</string>
+	<string name="add_opening_hours">Engadir as horas de apertura</string>
+	<string name="working_days">Días laborábeis</string>
+	<string name="recent_places">Lugares recentes</string>
+	<string name="favourites">Favoritos</string>
+<string name="av_locations">Lugares</string>
+    <string name="rendering_value_boldOutline_name">Bordo groso</string>
+    <string name="lang_nv">Navaho</string>
+    <string name="disable_recording_once_app_killed_descrp">Detén o rexistro de GPX cando se mata o aplicativo (mediante apps recentes). A indicación do modo de durmir de OsmAnd desaparece da barra de notificacións de Android).</string>
+    <string name="agps_info">Información de A-GPS</string>
+	<string name="agps_data_last_downloaded">Datos de A-GPS descargados por última vez: %1$s</string>
+    <string name="delay_to_start_navigation_descr">Indicar o tempo de agarda durante o que ficar na pantalla de planificación de rutas</string>
+    <string name="delay_to_start_navigation">Iniciar a navegación paso a paso despois de…</string>
+    <string name="parking_place_limited">Tempo de aparcamento limitado a</string>
+	<string name="plugin_nautical_name">Vista de mapa náutico</string>
+	<string name="save_track_to_gpx_globally_headline">Rexistro de pistas baixo petición</string>
 	</resources>
