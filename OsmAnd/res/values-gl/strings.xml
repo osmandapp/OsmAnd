@@ -616,7 +616,7 @@
     <string name="index_srtm_parts">partes</string>
     <string name="index_srtm_ele">Curvas de nivel</string>
     <string name="srtm_plugin_description">Facilita a descarga de curvas de nivel e sombreados sen conexión («Configuración» → «Xestionar os ficheiros de mapas» → «Descargar» → Seleccione o tipo de mapa que desexe).</string>
-    <string name="srtm_plugin_name">Engadido de curvas de nivel</string>
+    <string name="srtm_plugin_name">Curvas de nivel</string>
     <string name="download_select_map_types">Outros mapas</string>
     <string name="download_roads_only_item">Só as estradas</string>
     <string name="download_srtm_maps">Curvas de nivel</string>
@@ -767,7 +767,7 @@
 	
 	
 	<string name="map_widget_parking">Aparcamento</string>
-	<string name="map_widget_monitoring">Gravación de GPX</string>
+	<string name="map_widget_monitoring">Rexistro de GPX</string>
 	<string name="map_widget_speed">Velocidade</string>
 	<string name="map_widget_distance">Destino</string>
 	<string name="map_widget_altitude">Altitude</string>
@@ -822,7 +822,7 @@
 	<string name="osmand_parking_am">AM</string>
 	<string name="osmand_parking_position_name">Punto de aparcamento</string>
 	<string name="osmand_parking_plugin_description">Este engadido permite almacenar a situación do coche aparcado.</string>
-	<string name="osmand_parking_plugin_name">Engadido de posición de aparcamento</string>
+	<string name="osmand_parking_plugin_name">Posición de aparcamento</string>
 	<string name="context_menu_item_add_parking_point">Marcar como posición de aparcamento</string>
 	<string name="context_menu_item_delete_parking_point">Eliminar un marcador de aparcamento</string>
 	<string name="gpxup_public">Público</string>
@@ -865,7 +865,7 @@
 	<string name="local_indexes_cat_tile">Mapas con conexión e en teselas</string>
 	<string name="local_indexes_cat_map">Mapas sen conexión (vectoriais)</string>
 	<string name="index_settings_descr">Descargar e xestionar ficheiros de mapas sen conexión almacenados no dispositivo</string>
-	<string name="map_online_plugin_is_not_installed">Activar o engadido de mapas con conexión para seleccionar diferentes fontes de mapas</string>
+	<string name="map_online_plugin_is_not_installed">Activar o engadido de mapas con conexión para seleccionar fontes de mapas diferentes</string>
 	<string name="map_online_data">Mapas con conexión e en teselas</string>
 	<string name="map_online_data_descr">Empregar mapas con conexión (descargar e gardar temporalmente as teselas no cartón SD)</string>
 	<string name="online_map_settings">Mapas con conexión</string>
@@ -950,7 +950,7 @@
 	<string name="right">á dereita</string>
 	<string name="back_right">atrás á dereita</string>
 	<string name="back">atrás</string>
-	<string name="back_left">Atrás á esquerda</string>
+	<string name="back_left">atrás á esquerda</string>
 	<string name="left">á esquerda</string>
 	<string name="front_left">adiante á esquerda</string>
 	<string name="oclock">en punto</string>
@@ -1492,7 +1492,7 @@
 	<string name="searching">A buscar…</string>
 	<string name="searching_address">A buscar o enderezo…</string>
 	<string name="search_osm_nominatim">Busca con conexión empregando OSM Nominatim</string>
-	<string name="hint_search_online">Número da casa, rúa, cidade</string>
+	<string name="hint_search_online">Busca na rede: Número da casa, rúa, cidade</string>
 	<string name="search_offline_address">Busca sen conexión</string>
 	<string name="search_online_address">Busca con conexión</string>
 	<string name="max_level_download_tile">Max. online zoom</string>
@@ -1956,4 +1956,16 @@
 	<string name="please_specify_poi_type">Indique o tipo de PDI.</string>
 <string name="shared_string_deselect">Anular a selección</string>
 	<string name="shared_string_deselect_all">Non seleccionar nada</string>
+	<string name="osm_edit_context_menu_delete">Eliminar edición de OSM</string>
+    <string name="rendering_attr_OSMMapperAssistant_name">Axudante de creación de mapas de OSM</string>
+	<string name="osm_changes_added_to_local_edits">Os cambios en OSM foron engadidos ao conxunto de cambios local</string>
+   	<string name="osmand_parking_overdue">vencido</string>
+	<string name="action_create">Creacción de acción</string>
+	<string name="action_modify">Modificación de acción</string>
+	<string name="action_delete">Eliminación de acción</string>
+	<string name="shared_string_export">Exportar</string>
+	<string name="shared_string_unexpected_error">Produciuse un erro inesperado</string>
+	<string name="shared_string_action_template">Acción {0}</string>
+	<string name="shared_string_collapse">Contraer</string>
+	<string name="shared_string_address">Enderezo</string>
 	</resources>
