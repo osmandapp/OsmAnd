@@ -28,7 +28,8 @@ import java.util.Map;
  * Created by Denis
  * on 20.01.2015.
  */
-public class DashOsmEditsFragment extends DashBaseFragment {
+public class DashOsmEditsFragment extends DashBaseFragment
+		implements SendPoiDialogFragment.ProgressDialogPoiUploader {
 	public static final String TAG = "DASH_OSM_EDITS_FRAGMENT";
 
 	OsmEditingPlugin plugin;
@@ -92,7 +93,7 @@ public class DashOsmEditsFragment extends DashBaseFragment {
 				@Override
 				public void onClick(View v) {
 					if (point.getGroup() == OsmPoint.Group.POI) {
-						SendPoiDialogFragment.createInstance((OpenstreetmapPoint) point)
+						SendPoiDialogFragment.createInstance(new OsmPoint[] {point})
 								.show(getChildFragmentManager(), "SendPoiDialogFragment");
 					} else {
 						uploadItem(point);
@@ -126,16 +127,16 @@ public class DashOsmEditsFragment extends DashBaseFragment {
 		b.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				showProgressDialog(point, false);
+				showProgressDialog(new OsmPoint[] {point}, false);
 			}
 		});
 		b.setNegativeButton(R.string.shared_string_cancel, null);
 		b.show();
 	}
 
-	private void showProgressDialog(OsmPoint point, boolean closeChangeSet) {
+	public void showProgressDialog(OsmPoint[] points, boolean closeChangeSet) {
 		OpenstreetmapRemoteUtil remotepoi = new OpenstreetmapRemoteUtil(getActivity());
-		OsmPoint[] toUpload = new OsmPoint[]{point};
+		OsmPoint[] toUpload = points;
 		OsmBugsRemoteUtil remotebug = new OsmBugsRemoteUtil(getMyApplication());
 		ProgressDialog dialog = ProgressImplementation.createProgressDialog(getActivity(),
 				getString(R.string.uploading), getString(R.string.local_openstreetmap_uploading),
