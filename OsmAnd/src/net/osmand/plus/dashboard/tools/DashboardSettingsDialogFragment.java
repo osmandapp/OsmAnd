@@ -229,7 +229,7 @@ public class DashboardSettingsDialogFragment extends DialogFragment {
 			viewHolder.position = position;
 			viewHolder.compoundButton.setTag(viewHolder);
 			viewHolder.compoundButton.setChecked(checkedItems[position]);
-			viewHolder.textView.setText(dashFragmentData.title);
+			viewHolder.textView.setText(dashFragmentData.titleStringId);
 			viewHolder.textView.setTextColor(checkedItems[position] ? textColorPrimary :
 					textColorSecondary);
 			convertView.setTag(viewHolder);

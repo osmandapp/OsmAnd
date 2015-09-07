@@ -92,11 +92,11 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 			new DashFragmentData(DashSearchFragment.TAG, DashSearchFragment.class,
 					R.string.shared_string_search, 7),
 			new DashFragmentData(DashRecentsFragment.TAG, DashRecentsFragment.class,
-					"Recent places", 8),
+					R.string.recent_places, 8),
 			new DashFragmentData(DashFavoritesFragment.TAG, DashFavoritesFragment.class,
-					"Favourites", defaultShouldShow, false, 9, DashFavoritesFragment.ROW_NUMBER_TAG),
+					R.string.favourites, defaultShouldShow, false, 9, DashFavoritesFragment.ROW_NUMBER_TAG),
 			new DashFragmentData(DashPluginsFragment.TAG, DashPluginsFragment.class,
-					"Plugins", 14)
+					R.string.plugin_settings, 14)
 	};
 
 	private MapActivity mapActivity;

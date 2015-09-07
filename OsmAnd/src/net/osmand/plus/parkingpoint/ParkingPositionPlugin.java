@@ -1,7 +1,20 @@
 package net.osmand.plus.parkingpoint;
 
 
-import java.util.Calendar;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.text.format.DateFormat;
+import android.text.format.Time;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.TimePicker;
 
 import net.osmand.data.LatLon;
 import net.osmand.plus.ApplicationMode;
@@ -20,20 +33,8 @@ import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.app.Dialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.text.format.DateFormat;
-import android.text.format.Time;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.ImageButton;
-import android.widget.TextView;
-import android.widget.TimePicker;
+
+import java.util.Calendar;
 
 /**
  * 
@@ -563,6 +564,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 
 	@Override
 	public DashFragmentData getCardFragment() {
-		return new DashFragmentData(DashParkingFragment.TAG, DashParkingFragment.class, getName(), 5);
+		return new DashFragmentData(DashParkingFragment.TAG, DashParkingFragment.class,
+				R.string.osmand_parking_plugin_name, 5);
 	}
 }

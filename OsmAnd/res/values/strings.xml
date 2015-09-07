@@ -2257,4 +2257,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="number_of_rows_in_dash">Number of rows in dash %1$s</string>
 	<string name="please_specify_poi_type">Please specify POI type.</string>
 	<string name="working_days">Working days</string>
+	<string name="recent_places">Recent places</string>
+	<string name="favourites">Favourites</string>
 </resources>

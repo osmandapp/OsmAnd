@@ -1,12 +1,10 @@
 package net.osmand.plus.osmo;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.util.Arrays;
+import android.app.Activity;
+import android.content.Intent;
+import android.os.AsyncTask;
+import android.view.View;
+import android.widget.ArrayAdapter;
 
 import net.osmand.IndexConstants;
 import net.osmand.Location;
@@ -38,11 +36,13 @@ import org.apache.commons.logging.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.os.AsyncTask;
-import android.view.View;
-import android.widget.ArrayAdapter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.util.Arrays;
 
 public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 
@@ -533,6 +533,7 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 
 	@Override
 	public DashFragmentData getCardFragment() {
-		return new DashFragmentData(DashOsMoFragment.TAG, DashOsMoFragment.class, getName(), 12);
+		return new DashFragmentData(DashOsMoFragment.TAG, DashOsMoFragment.class,
+				R.string.osmo_plugin_name, 12);
 	}
 }

@@ -1,11 +1,22 @@
 package net.osmand.plus.development;
 
-import java.io.File;
-import java.util.LinkedHashSet;
-import java.util.Set;
-
+import android.app.ActionBar;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
+import android.content.pm.ActivityInfo;
 import android.os.Build;
+import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
+import android.widget.ScrollView;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.OsmandApplication;
@@ -15,22 +26,13 @@ import net.osmand.plus.voice.AbstractPrologCommandPlayer;
 import net.osmand.plus.voice.CommandBuilder;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.util.Algorithms;
+
+import java.io.File;
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 import alice.tuprolog.Struct;
 import alice.tuprolog.Term;
-import android.app.ActionBar;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.content.DialogInterface;
-import android.content.pm.ActivityInfo;
-import android.os.Bundle;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
-import android.widget.ScrollView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 
 /**
@@ -170,7 +172,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		addButton(ll, "Route recalculated (23150m & 350sec)", builder(p).routeRecalculated(23150, 350));
 
 		addButton(ll, "In 1520m turn slightly left", builder(p).prepareTurn(AbstractPrologCommandPlayer.A_LEFT_SL, 1520, street(p, "")));
-		addButton(ll, "After 850m turn sharply left onto 'Hauptstra"+"\u00df"+"e', then bear right", builder(p).turn(AbstractPrologCommandPlayer.A_LEFT_SH, 850, street(p, "Hauptstraﬂe")).then().bearRight(street(p, "")));
+		addButton(ll, "After 850m turn sharply left onto 'Hauptstra"+"\u00df"+"e', then bear right", builder(p).turn(AbstractPrologCommandPlayer.A_LEFT_SH, 850, street(p, "Hauptstrasse")).then().bearRight(street(p, "")));
 		addButton(ll, "Turn left, then after 100m turn slightly right", builder(p).turn(AbstractPrologCommandPlayer.A_LEFT, street(p, "")).then().turn(AbstractPrologCommandPlayer.A_RIGHT_SL, 100, street(p, "")));
 		addButton(ll, "In 3100 turn right onto 'SR 80'", builder(p).prepareTurn(AbstractPrologCommandPlayer.A_RIGHT, 3100, street(p, "SR 80")));
 		addButton(ll, "After 370m turn slightly right onto 'F23' 'Main Street', then bear left", builder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_SL, 370, street(p, "Main Street", "F23")).then().bearLeft(street(p, "")));
