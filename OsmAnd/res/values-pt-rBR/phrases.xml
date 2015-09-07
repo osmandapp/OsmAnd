@@ -1140,4 +1140,18 @@
 	<string name="poi_start_date">Data de início</string>
 	<string name="poi_wheelchair">Cadeira de rodas</string>
 
+	<string name="poi_bunker_silo">Silo de abrigo</string>
+	<string name="poi_content_silage">Silagem (conteúdo)</string>
+	<string name="poi_content_water">Água (conteúdo)</string>
+	<string name="poi_content_slurry">Chorume (conteúdo)</string>
+	<string name="poi_content_oil">Óleo (conteúdo)</string>
+	<string name="poi_content_fuel">Combustível (conteúdo)</string>
+	<string name="poi_content_manure">Estrume (conteúdo)</string>
+	<string name="poi_content_wine">Vinho (conteúdo)</string>
+	<string name="poi_content_sewage">Esgoto (conteúdo)</string>
+	<string name="poi_content_gas">Gás (conteúdo)</string>
+	<string name="poi_content_biomass">Biomassa (conteúdo)</string>
+	<string name="poi_content_wastewater">Águas residuais (conteúdo)</string>
+	<string name="poi_content_crop">Colheita (conteúdo)</string>
+	<string name="poi_content_fodder">Forragens (conteúdo)</string>
 	</resources>
