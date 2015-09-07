@@ -2124,4 +2124,7 @@
 	<string name="poi_dialog_poi_type">IP type</string>
 <string name="number_of_rows_in_dash">Antal rækker %1$s</string>
 <string name="please_specify_poi_type">Angiv IP type.</string>
+<string name="working_days">Arbejdsdage</string>
+	<string name="recent_places">Seneste steder</string>
+	<string name="favourites">Favoritter</string>
 </resources>
