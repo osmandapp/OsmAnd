@@ -74,13 +74,18 @@ public class OpeningHoursHoursDialogFragment extends DialogFragment {
 		float density = getActivity().getResources().getDisplayMetrics().density;
 		int paddingInPx = (int) (paddingInDp * density);
 
+		final TypedValue textColorTypedValue = new TypedValue();
+		getActivity().getTheme().resolveAttribute(android.R.attr.textColorPrimary,
+				textColorTypedValue, true);
+		int textColor = textColorTypedValue.data;
+
 		TextView titleTextView = new TextView(getActivity());
 		titleTextView.setText(isStart ? getActivity().getString(R.string.opening_at)
 				: getActivity().getString(R.string.closing_at));
 		titleTextView.setPadding(paddingInPx, paddingInPx, paddingInPx, paddingInPx);
 		titleTextView.setGravity(Gravity.CENTER_VERTICAL);
 		titleTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
-		titleTextView.setTextColor(getActivity().getResources().getColor(R.color.color_black));
+		titleTextView.setTextColor(textColor);
 		Typeface typeface = titleTextView.getTypeface();
 		titleTextView.setTypeface(typeface, Typeface.BOLD);
 		builder.setCustomTitle(titleTextView);

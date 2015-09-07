@@ -46,7 +46,7 @@ public class OpeningHoursDaysDialogFragment extends DialogFragment {
 			final int pos = (d + 5) % 7;
 			dayToShow[i] = item.getDays()[pos];
 		}
-		builder.setTitle("Working days");
+		builder.setTitle(getResources().getString(R.string.working_days));
 		builder.setMultiChoiceItems(daysToShow, dayToShow, new DialogInterface.OnMultiChoiceClickListener() {
 
 			@Override
