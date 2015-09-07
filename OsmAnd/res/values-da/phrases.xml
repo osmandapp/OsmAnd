@@ -1165,14 +1165,14 @@
 	<string name="poi_content_sewage">Spildevand (indhold)</string>
 	<string name="poi_content_gas">Gas (indhold)</string>
 	<string name="poi_content_biomass">Biomasse (indhold)</string>
-	<string name="poi_content_wastewater">Spildevand (indhold)</string>
+	<string name="poi_content_wastewater">Afløbsvand (indhold)</string>
 	<string name="poi_content_crop">Afgrøde (indhold)</string>
 	<string name="poi_content_fodder">Foder (indhold)</string>
 	<string name="poi_content_beer">Øl (indhold)</string>
 	<string name="poi_content_salt">Salt (indhold)</string>
 	<string name="poi_content_grain">Korn (indhold)</string>
 
-	<string name="poi_bunker_silo">Bunker silo</string>
+	<string name="poi_bunker_silo">Plansilo</string>
 	<string name="poi_brownfield">Forladt industrigrund</string>
 	<string name="poi_greenfield">Byggemodning</string>
 	</resources>
