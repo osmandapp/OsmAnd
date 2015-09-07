@@ -1158,4 +1158,6 @@
 	<string name="poi_content_salt">Sal (contenido)</string>
 	<string name="poi_content_grain">Cereal (contenido)</string>
 
+	<string name="poi_brownfield">Terreno abandonado</string>
+	<string name="poi_greenfield">Suelo urbanizable</string>
 	</resources>
