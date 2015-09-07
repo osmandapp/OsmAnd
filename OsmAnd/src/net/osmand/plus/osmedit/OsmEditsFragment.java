@@ -501,7 +501,7 @@ public class OsmEditsFragment extends OsmAndListFragment {
 		OsmEditsUploadListener listener = new OsmEditsUploadListenerHelper(getActivity(),
 				getString(R.string.local_openstreetmap_were_uploaded));
 		UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask(
-				dialog, listener, plugin, remotepoi, remotebug, toUpload.length);
+				dialog, listener, plugin, remotepoi, remotebug, toUpload.length, false);
 		uploadTask.execute(toUpload);
 
 		dialog.show();
