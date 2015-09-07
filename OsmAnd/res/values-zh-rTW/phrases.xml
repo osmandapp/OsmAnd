@@ -1139,14 +1139,21 @@
 	<string name="poi_start_date">開始日期</string>
 	<string name="poi_wheelchair">輪椅</string>
 
-	<string name="poi_content_silage">青貯飼料 (庫容)</string>
-	<string name="poi_content_water">水 (庫容)</string>
-	<string name="poi_content_slurry">礦泥 (庫容)</string>
-	<string name="poi_content_oil">油 (庫容)</string>
-	<string name="poi_content_fuel">燃料 (庫容)</string>
-	<string name="poi_content_manure">肥料 (庫容)</string>
-	<string name="poi_content_wine">酒 (庫容)</string>
-	<string name="poi_content_sewage">污水 (庫容)</string>
-	<string name="poi_content_gas">瓦斯 (庫容)</string>
-	<string name="poi_content_biomass">生物質 (庫容)</string>
+	<string name="poi_content_silage">青貯飼料 (內容)</string>
+	<string name="poi_content_water">水 (內容)</string>
+	<string name="poi_content_slurry">礦泥 (內容)</string>
+	<string name="poi_content_oil">油 (內容)</string>
+	<string name="poi_content_fuel">燃料 (內容)</string>
+	<string name="poi_content_manure">肥料 (內容)</string>
+	<string name="poi_content_wine">酒 (內容)</string>
+	<string name="poi_content_sewage">污水 (內容)</string>
+	<string name="poi_content_gas">瓦斯 (內容)</string>
+	<string name="poi_content_biomass">生物質 (內容)</string>
+	<string name="poi_content_wastewater">污水 (內容)</string>
+	<string name="poi_content_crop">農作物 (內容)</string>
+	<string name="poi_content_fodder">飼料 (內容)</string>
+	<string name="poi_content_beer">啤酒 (內容)</string>
+	<string name="poi_content_salt">鹽 (內容)</string>
+	<string name="poi_content_grain">榖物 (內容)</string>
+
 	</resources>
