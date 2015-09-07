@@ -271,12 +271,20 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		}
 		LatLon latLon = selectObjectsForContextMenu(tileBox, point);
 		if (latLon != null) {
-			String description = getSelectedObjectDescription();
-			setLocation(latLon, description);
+			if (selectedObjects.size() == 1) {
+				setLocation(null, "");
+				Object selectedObj = selectedObjects.keySet().iterator().next();
+				showMapContextMenu(selectedObj, latLon);
+			} else {
+				String description = getSelectedObjectDescription();
+				setLocation(latLon, description);
+			}
 		} else {
+			setLocation(null, "");
 			final double lat = tileBox.getLatFromPixel((int) point.x, (int) point.y);
 			final double lon = tileBox.getLonFromPixel((int) point.x, (int) point.y);
-			setLocation(new LatLon(lat, lon), null);
+			showMapContextMenu(null, new LatLon(lat, lon));
+			//setLocation(new LatLon(lat, lon), null);
 		}
 		view.refreshMap();
 		return true;
@@ -337,7 +345,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 	
 	public int pressedInTextView(RotatedTileBox tb, float px, float py) {
-		if (latLon != null) {
+		if (latLon != null && textView.getText().length() > 0) {
 			Rect bs = textView.getBackground().getBounds();
 			Rect closes = closeButton.getDrawable().getBounds();
 			int dx = (int) (px - tb.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude()));
@@ -429,8 +437,9 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			LatLon latLon = selectObjectsForContextMenu(tileBox, point);
 			if (latLon != null) {
 				if (selectedObjects.size() == 1) {
+					setLocation(null, "");
 					Object selectedObj = selectedObjects.keySet().iterator().next();
-					showMapContextMenu(selectedObj, latLon, null);
+					showMapContextMenu(selectedObj, latLon);
 				} else {
 					String description = getSelectedObjectDescription();
 					setLocation(latLon, description);
@@ -459,33 +468,29 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					Object selectedObj = s.get(which);
-					for (OsmandMapLayer layer : view.getLayers()) {
-						layer.populateObjectContextMenu(selectedObj, menuAdapter);
-					}
-					showMapContextMenu(selectedObj, l, menuAdapter);
-					//activity.getMapActions().contextMenuPoint(l.getLatitude(), l.getLongitude(), menuAdapter, selectedObj);
+					showMapContextMenu(selectedObj, l);
 				}
 			});
 			builder.show();
 		} else {
 			Object selectedObj = selectedObjects.keySet().iterator().next();
-			for (OsmandMapLayer layer : view.getLayers()) {
-				layer.populateObjectContextMenu(selectedObj, menuAdapter);
-			}
-
-			showMapContextMenu(selectedObj, l, menuAdapter);
-			//activity.getMapActions().contextMenuPoint(l.getLatitude(), l.getLongitude(), menuAdapter, selectedObj);
+			showMapContextMenu(selectedObj, l);
 		}
 	}
 
-	private void showMapContextMenu(Object obj, LatLon latLon, final ContextMenuAdapter menuAdapter) {
-		PointDescription pointDescription = selectedObjects.get(obj).getObjectName(obj);
-		pointDescription.setLat(latLon.getLatitude());
-		pointDescription.setLon(latLon.getLongitude());
+	private void showMapContextMenu(Object obj, LatLon latLon) {
+		PointDescription pointDescription;
+		if (obj != null) {
+			pointDescription = selectedObjects.get(obj).getObjectName(obj);
+			pointDescription.setLat(latLon.getLatitude());
+			pointDescription.setLon(latLon.getLongitude());
+		} else {
+			pointDescription = new PointDescription(latLon.getLatitude(), latLon.getLongitude());
+		}
 		this.latLon = latLon;
 
 		showMapContextMenuMarker();
-		MapContextMenu.getInstance().show(pointDescription, obj, menuAdapter);
+		MapContextMenu.getInstance().show(pointDescription, obj);
 	}
 
 

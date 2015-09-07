@@ -106,7 +106,7 @@ public class MapActivityActions implements DialogProvider {
 		new ShareLocation(mapActivity).run();
 	}
 
-	public void showNavigationContextMenuPoint(final double latitude, final double longitude, Object selectedObj) {
+	public void showNavigationContextMenuPoint(final double latitude, final double longitude) {
 		final ContextMenuAdapter adapter = new ContextMenuAdapter(mapActivity);
 
 		if(!mapActivity.getRoutingHelper().isFollowingMode() && !mapActivity.getRoutingHelper().isRoutePlanningMode()) {
