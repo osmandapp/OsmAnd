@@ -2190,6 +2190,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="poi_remove_success">POI was successfully deleted</string>
 	<string name="poi_action_add">add</string>
 	<string name="poi_action_change">change</string>
+	<string name="poi_action_delete">delete</string>
 	<string name="poi_action_succeded_template">Action {0} completed successfully.</string>
 	<string name="poi_error_unexpected_template">Unexpected error occurred while performing action {0}.</string>
 	<string name="poi_error_io_error_template">I/O error occurred while performing action {0}.</string>
