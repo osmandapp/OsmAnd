@@ -488,7 +488,8 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 
 	private void enableSelectionMode(boolean selectionMode) {
 		this.selectionMode = selectionMode;
-		((FavoritesActivity)getActivity()).setToolbarVisibility(!selectionMode);
+		((FavoritesActivity)getActivity()).setToolbarVisibility(!selectionMode &&
+				AndroidUiHelper.isOrientationPortrait(getActivity()));
 	}
 
 	protected void openChangeGroupDialog(final FavoriteGroup group) {

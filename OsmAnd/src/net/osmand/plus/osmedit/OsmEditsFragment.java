@@ -287,7 +287,8 @@ public class OsmEditsFragment extends OsmAndListFragment
 	private void enableSelectionMode(boolean selectionMode) {
 		this.selectionMode = selectionMode;
 		getView().findViewById(R.id.select_all).setVisibility(selectionMode ? View.VISIBLE : View.GONE);
-		((FavoritesActivity) getActivity()).setToolbarVisibility(!selectionMode);
+		((FavoritesActivity) getActivity()).setToolbarVisibility(!selectionMode &&
+				AndroidUiHelper.isOrientationPortrait(getActivity()));
 	}
 
 	public OsmandActionBarActivity getActionBarActivity() {
