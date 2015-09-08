@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.osmand.PlatformUtil;
@@ -85,6 +84,8 @@ public class MapContextMenuFragment extends Fragment {
 
 		View topView = view.findViewById(R.id.context_menu_top_view);
 		mainView = view.findViewById(R.id.context_menu_main);
+		//LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dpToPx(400));
+		//mainView.setLayoutParams(lp);
 
 		topView.setOnTouchListener(new View.OnTouchListener() {
 
@@ -100,21 +101,16 @@ public class MapContextMenuFragment extends Fragment {
 
 					case MotionEvent.ACTION_MOVE:
 						float y = event.getY();
-						LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) mainView.getLayoutParams();
-						float top = lp.topMargin + (y - dy);
-						if (top < 0) {
-							lp.topMargin = (int) top;
-							mainView.setLayoutParams(lp);
-						}
+						mainView.setY(mainView.getY() + (y - dy));
 						break;
 
 					case MotionEvent.ACTION_UP:
 					case MotionEvent.ACTION_CANCEL:
 
 						float posY = view.getHeight() - mainViewHeight;
-						if (mainView.getY() != posY) {
+						if (mainView.getY() != posY)
 							mainView.animate().y(posY).setDuration(200).setInterpolator(new DecelerateInterpolator()).start();
-						}
+
 						break;
 
 				}

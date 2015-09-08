@@ -2,12 +2,12 @@
 <LinearLayout android:id="@+id/context_menu_layout"
               xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="fill_parent"
-              android:layout_height="wrap_content"
-              android:layout_gravity="bottom"
+              android:layout_height="fill_parent"
               android:background="@android:color/transparent"
               android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/context_menu_shadow_layout"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -24,12 +24,12 @@
         android:id="@+id/context_menu_main"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0"
         android:background="?attr/bg_map_context_menu"
         android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/context_menu_top_view"
+            android:baselineAligned="false"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
