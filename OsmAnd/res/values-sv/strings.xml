@@ -1988,6 +1988,10 @@
 	<string name="commit_poi">Skicka in POI</string>
 	<string name="tag_poi_name">namn</string>
 	<string name="tag_poi_amenity">service</string>
-	<string name="number_of_rows_in_dash">Antal rader i panel %1$s</string>
+	<string name="number_of_rows_in_dash">Antal rader i panelen: %1$s</string>
 <string name="please_specify_poi_type">Ange typ av POI.</string>
-</resources>
+<string name="favourites">Favoriter</string>
+<string name="working_days">Arbetsdagar</string>
+	<string name="recent_places">Nyliga platser</string>
+	<string name="poi_action_delete">ta bort</string>
+	</resources>

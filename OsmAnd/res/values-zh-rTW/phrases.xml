@@ -1132,4 +1132,28 @@
 	<string name="poi_denomination_maronite">馬若恩教派</string>
 	<string name="poi_denomination_mahayana">大乘佛教</string>
 
+	<string name="poi_landfill_waste_nuclear">核廢料</string>
+	<string name="poi_brownfield">棕地</string>
+	<string name="poi_greenfield">未開發地</string>
+	<string name="poi_bunker_silo">燃料貯塔</string>
+	<string name="poi_start_date">開始日期</string>
+	<string name="poi_wheelchair">輪椅</string>
+
+	<string name="poi_content_silage">青貯飼料 (內容)</string>
+	<string name="poi_content_water">水 (內容)</string>
+	<string name="poi_content_slurry">礦泥 (內容)</string>
+	<string name="poi_content_oil">油 (內容)</string>
+	<string name="poi_content_fuel">燃料 (內容)</string>
+	<string name="poi_content_manure">肥料 (內容)</string>
+	<string name="poi_content_wine">酒 (內容)</string>
+	<string name="poi_content_sewage">污水 (內容)</string>
+	<string name="poi_content_gas">瓦斯 (內容)</string>
+	<string name="poi_content_biomass">生物質 (內容)</string>
+	<string name="poi_content_wastewater">污水 (內容)</string>
+	<string name="poi_content_crop">農作物 (內容)</string>
+	<string name="poi_content_fodder">飼料 (內容)</string>
+	<string name="poi_content_beer">啤酒 (內容)</string>
+	<string name="poi_content_salt">鹽 (內容)</string>
+	<string name="poi_content_grain">榖物 (內容)</string>
+
 	</resources>

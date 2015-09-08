@@ -2213,4 +2213,6 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="offline_maps_and_navigation">Mapy offline\ni nawigacja</string>
 	<string name="please_specify_poi_type">Proszę określić typ POI.</string>
 <string name="number_of_rows_in_dash">Ilość wierszy na ekranie głównym %1$s</string>
+	<string name="description">Opis</string>
+	<string name="poi_dialog_poi_type">Rodzaj POI</string>
 	</resources>

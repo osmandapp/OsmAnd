@@ -127,8 +127,8 @@ public class VoiceRouter {
 			PREPARE_LONG_DISTANCE_END = 3000 + 1000;  // [ 90 sec @ 120 km/h]
 			PREPARE_DISTANCE = 1500;                  // [125 sec]
 			PREPARE_DISTANCE_END = 1200;      	  // [100 sec]
-			TURN_IN_DISTANCE = 390;			  //   30 sec
-			TURN_IN_DISTANCE_END = 195;               //   15 sec
+			TURN_IN_DISTANCE = 300;			  //   23 sec
+			TURN_IN_DISTANCE_END = 210;               //   16 sec
 			TURN_DISTANCE = 50;                       //    7 sec
 			TURN_DEFAULT_SPEED = 7f;                  //   25 km/h
 			DEFAULT_SPEED = 13;                       //   48 km/h
@@ -158,13 +158,13 @@ public class VoiceRouter {
 		} else {
 			DEFAULT_SPEED = router.getAppMode().getDefaultSpeed();
 			TURN_DEFAULT_SPEED = DEFAULT_SPEED / 2;
-			PREPARE_LONG_DISTANCE = (int) (DEFAULT_SPEED * 305);
+			PREPARE_LONG_DISTANCE = (int) (DEFAULT_SPEED * 270);
 			// Do not play:
-			PREPARE_LONG_DISTANCE_END = (int) (DEFAULT_SPEED * 225) * 2;
-			PREPARE_DISTANCE = (int) (DEFAULT_SPEED * 125);	
-			PREPARE_DISTANCE_END = (int) (DEFAULT_SPEED * 100);
-			TURN_IN_DISTANCE = (int) (DEFAULT_SPEED * 30);
-			TURN_IN_DISTANCE_END = (int) (DEFAULT_SPEED * 14);
+			PREPARE_LONG_DISTANCE_END = (int) (DEFAULT_SPEED * 230) * 2;
+			PREPARE_DISTANCE = (int) (DEFAULT_SPEED * 115);
+			PREPARE_DISTANCE_END = (int) (DEFAULT_SPEED * 92);
+			TURN_IN_DISTANCE = (int) (DEFAULT_SPEED * 23);
+			TURN_IN_DISTANCE_END = (int) (DEFAULT_SPEED * 16);
 			TURN_DISTANCE = (int) (DEFAULT_SPEED * 7);
 		}
 	}

@@ -10,18 +10,18 @@ import net.osmand.plus.dashboard.DashboardOnMap;
 public final class DashFragmentData implements Comparable<DashFragmentData> {
 	public final String tag;
 	public final Class<? extends DashBaseFragment> fragmentClass;
-	public final String title;
+	public final int titleStringId;
 	public final ShouldShowFunction shouldShowFunction;
 	public final boolean customDeletionLogic;
 	public final int position;
 	public final String rowNumberTag;
 
 	public DashFragmentData(String tag, Class<? extends DashBaseFragment> fragmentClass,
-							String title, ShouldShowFunction shouldShowFunction,
+							int titleStringId, ShouldShowFunction shouldShowFunction,
 							boolean customDeletionLogic, int position, String rowNumberTag) {
 		this.tag = tag;
 		this.fragmentClass = fragmentClass;
-		this.title = title;
+		this.titleStringId = titleStringId;
 		this.shouldShowFunction = shouldShowFunction;
 		this.customDeletionLogic = customDeletionLogic;
 		this.position = position;
@@ -29,19 +29,19 @@ public final class DashFragmentData implements Comparable<DashFragmentData> {
 	}
 
 	public DashFragmentData(String tag, Class<? extends DashBaseFragment> fragmentClass,
-							String title, ShouldShowFunction shouldShowFunction,
+							int titleStringId, ShouldShowFunction shouldShowFunction,
 							boolean customDeletionLogic, int position) {
-		this(tag, fragmentClass, title, shouldShowFunction, customDeletionLogic, position, null);
+		this(tag, fragmentClass, titleStringId, shouldShowFunction, customDeletionLogic, position, null);
 	}
 
 	public DashFragmentData(String tag, Class<? extends DashBaseFragment> fragmentClass,
-							String title, ShouldShowFunction shouldShowFunction, int position) {
-		this(tag, fragmentClass, title, shouldShowFunction, false, position, null);
+							int titleStringId, ShouldShowFunction shouldShowFunction, int position) {
+		this(tag, fragmentClass, titleStringId, shouldShowFunction, false, position, null);
 	}
 
 	public DashFragmentData(String tag, Class<? extends DashBaseFragment> fragmentClass,
-							String title, int position) {
-		this(tag, fragmentClass, title, new DashboardOnMap.DefaultShouldShow(), false, position,
+							int titleStringId, int position) {
+		this(tag, fragmentClass, titleStringId, new DashboardOnMap.DefaultShouldShow(), false, position,
 				null);
 	}
 

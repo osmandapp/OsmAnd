@@ -1134,4 +1134,28 @@
 	<string name="poi_denomination_mahayana">Mahayana</string>
 
 	<string name="poi_denomination_united">Unida</string>
+	<string name="poi_landfill_waste_nuclear">Resíduos nucleares</string>
+	<string name="poi_brownfield">Terreno abandonado</string>
+	<string name="poi_greenfield">Terreno virgem</string>
+	<string name="poi_start_date">Data de início</string>
+	<string name="poi_wheelchair">Cadeirante</string>
+
+	<string name="poi_bunker_silo">Silo de abrigo</string>
+	<string name="poi_content_silage">Silagem (conteúdo)</string>
+	<string name="poi_content_water">Água (conteúdo)</string>
+	<string name="poi_content_slurry">Chorume (conteúdo)</string>
+	<string name="poi_content_oil">Óleo (conteúdo)</string>
+	<string name="poi_content_fuel">Combustível (conteúdo)</string>
+	<string name="poi_content_manure">Estrume (conteúdo)</string>
+	<string name="poi_content_wine">Vinho (conteúdo)</string>
+	<string name="poi_content_sewage">Esgoto (conteúdo)</string>
+	<string name="poi_content_gas">Gás (conteúdo)</string>
+	<string name="poi_content_biomass">Biomassa (conteúdo)</string>
+	<string name="poi_content_wastewater">Águas residuais (conteúdo)</string>
+	<string name="poi_content_crop">Colheita (conteúdo)</string>
+	<string name="poi_content_fodder">Forragens (conteúdo)</string>
+	<string name="poi_content_beer">Cerveja (conteúdo)</string>
+	<string name="poi_content_salt">Sal (conteúdo)</string>
+	<string name="poi_content_grain">Grão (conteúdo)</string>
+
 	</resources>

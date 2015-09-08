@@ -78,25 +78,25 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 
 	private static final DashFragmentData[] fragmentsData = new DashFragmentData[]{
 			new DashFragmentData(DashRateUsFragment.TAG, DashRateUsFragment.class,
-					"Rate us", rateUsShouldShow, true, 0),
+					-1, rateUsShouldShow, true, 0),
 			new DashFragmentData(DashFirstTimeFragment.TAG, DashFirstTimeFragment.class,
-					"First time", firstTimeShouldShow, true, 1),
+					-1, firstTimeShouldShow, true, 1),
 			new DashFragmentData(DashChooseAppDirFragment.TAG, DashChooseAppDirFragment.class,
-					"Choose app dir", chooseAppDirShouldShow, true, 2),
+					-1, chooseAppDirShouldShow, true, 2),
 			new DashFragmentData(DashErrorFragment.TAG, DashErrorFragment.class,
-					"Error", errorShouldShow, true, 3),
+					-1, errorShouldShow, true, 3),
 			new DashFragmentData(DashNavigationFragment.TAG, DashNavigationFragment.class,
-					"Navigation", 4),
+					R.string.tip_navigation, 4),
 			new DashFragmentData(DashWaypointsFragment.TAG, DashWaypointsFragment.class,
-					"Waypoints", 6),
+					R.string.waypoints, 6),
 			new DashFragmentData(DashSearchFragment.TAG, DashSearchFragment.class,
-					"Search", 7),
+					R.string.shared_string_search, 7),
 			new DashFragmentData(DashRecentsFragment.TAG, DashRecentsFragment.class,
-					"Recent places", 8),
+					R.string.recent_places, 8),
 			new DashFragmentData(DashFavoritesFragment.TAG, DashFavoritesFragment.class,
-					"Favourites", defaultShouldShow, false, 9, DashFavoritesFragment.ROW_NUMBER_TAG),
+					R.string.favourites, defaultShouldShow, false, 9, DashFavoritesFragment.ROW_NUMBER_TAG),
 			new DashFragmentData(DashPluginsFragment.TAG, DashPluginsFragment.class,
-					"Plugins", 14)
+					R.string.plugin_settings, 14)
 	};
 
 	private MapActivity mapActivity;

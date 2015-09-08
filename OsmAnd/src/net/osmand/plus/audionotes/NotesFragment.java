@@ -26,6 +26,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import net.osmand.PlatformUtil;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
@@ -44,6 +45,8 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -54,6 +57,8 @@ import java.util.List;
  * Created by Denis on 18.02.2015.
  */
 public class NotesFragment extends OsmAndListFragment {
+	private static final Log LOG = PlatformUtil.getLog(NotesFragment.class);
+
 	AudioVideoNotesPlugin plugin;
 	List<AudioVideoNotesPlugin.Recording> items;
 	NotesAdapter listAdapter;
@@ -161,7 +166,8 @@ public class NotesFragment extends OsmAndListFragment {
 	private void enableSelectionMode(boolean selectionMode) {
 		this.selectionMode = selectionMode;
 		getView().findViewById(R.id.select_all).setVisibility(selectionMode? View.VISIBLE : View.GONE);
-		((FavoritesActivity)getActivity()).setToolbarVisibility(!selectionMode);
+		((FavoritesActivity)getActivity()).setToolbarVisibility(!selectionMode &&
+				AndroidUiHelper.isOrientationPortrait(getActivity()));
 	}
 	
 	private void updateSelectionTitle(ActionMode m){
@@ -271,6 +277,7 @@ public class NotesFragment extends OsmAndListFragment {
 
 			@Override
 			public boolean onCreateActionMode(final ActionMode mode, Menu menu) {
+				LOG.debug("onCreateActionMode");
 				if(type == MODE_SHARE) {
 					listAdapter.insert(shareLocationFile, 0);
 				}
@@ -302,16 +309,19 @@ public class NotesFragment extends OsmAndListFragment {
 
 			@Override
 			public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+				LOG.debug("onPrepareActionMode");
 				return false;
 			}
 
 			@Override
 			public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
+				LOG.debug("onActionItemClicked");
 				return false;
 			}
 
 			@Override
 			public void onDestroyActionMode(ActionMode mode) {
+				LOG.debug("onDestroyActionMode");
 				if(type == MODE_SHARE) {
 					listAdapter.remove(shareLocationFile);
 				}

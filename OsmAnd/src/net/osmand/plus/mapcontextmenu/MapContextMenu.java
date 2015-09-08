@@ -14,6 +14,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.util.Algorithms;
 
 public class MapContextMenu {
@@ -24,7 +25,6 @@ public class MapContextMenu {
 
 	private PointDescription pointDescription;
 	private Object object;
-	private ContextMenuAdapter menuAdapter;
 
 	private String foundStreetName;
 
@@ -59,14 +59,13 @@ public class MapContextMenu {
 
 	}
 
-	public void show(PointDescription pointDescription, Object object, ContextMenuAdapter menuAdapter) {
+	public void show(PointDescription pointDescription, Object object) {
 
 		if (isMenuVisible())
 			hide();
 
 		this.pointDescription = pointDescription;
 		this.object = object;
-		this.menuAdapter = menuAdapter;
 
 		acquireStretName();
 
@@ -92,34 +91,37 @@ public class MapContextMenu {
 	}
 
 	public int getLeftIconId() {
-		if (object instanceof Amenity) {
-			String id = null;
-			Amenity o = (Amenity)object;
-			PoiType st = o.getType().getPoiTypeByKeyName(o.getSubType());
-			if (st != null) {
-				if (RenderingIcons.containsSmallIcon(st.getIconKeyName())) {
-					id = st.getIconKeyName();
-				} else if (RenderingIcons.containsSmallIcon(st.getOsmTag() + "_" + st.getOsmValue())) {
-					id = st.getOsmTag() + "_" + st.getOsmValue();
+		if (object != null) {
+			if (object instanceof Amenity) {
+				String id = null;
+				Amenity o = (Amenity) object;
+				PoiType st = o.getType().getPoiTypeByKeyName(o.getSubType());
+				if (st != null) {
+					if (RenderingIcons.containsSmallIcon(st.getIconKeyName())) {
+						id = st.getIconKeyName();
+					} else if (RenderingIcons.containsSmallIcon(st.getOsmTag() + "_" + st.getOsmValue())) {
+						id = st.getOsmTag() + "_" + st.getOsmValue();
+					}
 				}
-			}
-			if (id != null) {
-				Integer resId = RenderingIcons.getResId(id);
-				if (resId != null) {
-					return resId;
+				if (id != null) {
+					Integer resId = RenderingIcons.getResId(id);
+					if (resId != null) {
+						return resId;
+					}
 				}
 			}
 		}
-
 		return 0;
 	}
 
 	public String getAddressStr() {
 		String res = null;
 
-		if (object instanceof Amenity) {
-			Amenity amenity = (Amenity) object;
-			res = OsmAndFormatter.getPoiStringWithoutType(amenity, settings.MAP_PREFERRED_LOCALE.get());
+		if (object != null) {
+			if (object instanceof Amenity) {
+				Amenity amenity = (Amenity) object;
+				res = OsmAndFormatter.getPoiStringWithoutType(amenity, settings.MAP_PREFERRED_LOCALE.get());
+			}
 		}
 
 		if (Algorithms.isEmpty(res)) {
@@ -132,7 +134,7 @@ public class MapContextMenu {
 				res = typeName;
 		}
 
-		return Algorithms.isEmpty(res) ? "???" : res;
+		return Algorithms.isEmpty(res) ? "Address is unknown yet" : res; // todo: text constant
 	}
 
 	public String getLocationStr() {
@@ -142,12 +144,23 @@ public class MapContextMenu {
 			return foundStreetName;
 	}
 
+	public BottomSectionBuilder getBottomSectionBuilder() {
+
+		if (object != null) {
+			if (object instanceof Amenity) {
+				return new InfoSectionBuilder(app, (Amenity)object);
+			}
+		}
+
+		return null;
+	}
+
 	public void buttonNavigatePressed() {
-		mapActivity.getMapActions().showNavigationContextMenuPoint(pointDescription.getLat(), pointDescription.getLon(), object);
+		mapActivity.getMapActions().showNavigationContextMenuPoint(pointDescription.getLat(), pointDescription.getLon());
 	}
 
 	public void buttonFavoritePressed() {
-		if (object instanceof FavouritePoint) {
+		if (object != null && object instanceof FavouritePoint) {
 			mapActivity.getMapActions().editFavoritePoint((FavouritePoint)object);
 		} else {
 			mapActivity.getMapActions().addFavouritePoint(pointDescription.getLat(), pointDescription.getLon());
@@ -159,6 +172,13 @@ public class MapContextMenu {
 	}
 
 	public void buttonMorePressed() {
+		final ContextMenuAdapter menuAdapter = new ContextMenuAdapter(mapActivity);
+		if (object != null) {
+			for (OsmandMapLayer layer : mapActivity.getMapView().getLayers()) {
+				layer.populateObjectContextMenu(object, menuAdapter);
+			}
+		}
+
 		mapActivity.getMapActions().contextMenuPoint(pointDescription.getLat(), pointDescription.getLon(), menuAdapter, object);
 	}
 }

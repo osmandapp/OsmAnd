@@ -1,51 +1,5 @@
 package net.osmand.plus.audionotes;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Method;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
-import net.osmand.AndroidUtils;
-import net.osmand.IProgress;
-import net.osmand.IndexConstants;
-import net.osmand.Location;
-import net.osmand.PlatformUtil;
-import net.osmand.access.AccessibleAlertBuilder;
-import net.osmand.access.AccessibleToast;
-import net.osmand.data.DataTileManager;
-import net.osmand.data.PointDescription;
-import net.osmand.plus.ApplicationMode;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.OsmandSettings.CommonPreference;
-import net.osmand.plus.OsmandSettings.OsmandPreference;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.SavingTrackHelper;
-import net.osmand.plus.activities.TabActivity.TabItem;
-import net.osmand.plus.dashboard.tools.DashFragmentData;
-import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
-import net.osmand.plus.myplaces.FavoritesActivity;
-import net.osmand.plus.views.MapInfoLayer;
-import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.mapwidgets.TextInfoWidget;
-import net.osmand.util.Algorithms;
-import net.osmand.util.GeoPointParserUtil.GeoParsedPoint;
-import net.osmand.util.MapUtils;
-
-import org.apache.commons.logging.Log;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.ComponentName;
@@ -80,6 +34,52 @@ import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import net.osmand.AndroidUtils;
+import net.osmand.IProgress;
+import net.osmand.IndexConstants;
+import net.osmand.Location;
+import net.osmand.PlatformUtil;
+import net.osmand.access.AccessibleAlertBuilder;
+import net.osmand.access.AccessibleToast;
+import net.osmand.data.DataTileManager;
+import net.osmand.data.PointDescription;
+import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.CommonPreference;
+import net.osmand.plus.OsmandSettings.OsmandPreference;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.SavingTrackHelper;
+import net.osmand.plus.activities.TabActivity.TabItem;
+import net.osmand.plus.dashboard.tools.DashFragmentData;
+import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.myplaces.FavoritesActivity;
+import net.osmand.plus.views.MapInfoLayer;
+import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.mapwidgets.TextInfoWidget;
+import net.osmand.util.Algorithms;
+import net.osmand.util.GeoPointParserUtil.GeoParsedPoint;
+import net.osmand.util.MapUtils;
+
+import org.apache.commons.logging.Log;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 
 public class AudioVideoNotesPlugin extends OsmandPlugin {
@@ -1303,6 +1303,6 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	@Override
 	public DashFragmentData getCardFragment() {
 		return new DashFragmentData(DashAudioVideoNotesFragment.TAG,
-				DashAudioVideoNotesFragment.class, getName(), 10);
+				DashAudioVideoNotesFragment.class, R.string.audionotes_plugin_name, 10);
 	}
 }

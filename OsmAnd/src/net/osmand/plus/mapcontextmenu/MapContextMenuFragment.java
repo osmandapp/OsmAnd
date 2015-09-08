@@ -10,14 +10,18 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.osmand.PlatformUtil;
+import net.osmand.plus.IconsCache;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.search.SearchActivity;
 
 import org.apache.commons.logging.Log;
 
@@ -122,6 +126,10 @@ public class MapContextMenuFragment extends Fragment {
 			}
 		});
 
+		// Left icon
+		IconsCache iconsCache = getMyApplication().getIconsCache();
+		boolean light = getMyApplication().getSettings().isLightContent();
+
 		int iconId = MapContextMenu.getInstance().getLeftIconId();
 
 		final View iconLayout = view.findViewById(R.id.context_menu_icon_layout);
@@ -129,16 +137,34 @@ public class MapContextMenuFragment extends Fragment {
 		if (iconId == 0) {
 			iconLayout.setVisibility(View.GONE);
 		} else {
-			iconView.setImageResource(iconId);
+			iconView.setImageDrawable(iconsCache.getIcon(iconId,
+					light ? R.color.icon_color : R.color.icon_color_light));
 		}
 
+		// Text line 1
 		TextView line1 = (TextView) view.findViewById(R.id.context_menu_line1);
 		line1.setText(MapContextMenu.getInstance().getAddressStr());
 
+		// Text line 2
 		TextView line2 = (TextView) view.findViewById(R.id.context_menu_line2);
 		line2.setText(MapContextMenu.getInstance().getLocationStr());
 
+		// Close button
+		final ImageView closeButtonView = (ImageView)view.findViewById(R.id.context_menu_close_btn_view);
+		closeButtonView.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_remove_dark,
+				light ? R.color.actionbar_dark_color : R.color.actionbar_light_color));
+		closeButtonView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				((MapActivity)getActivity()).getMapLayers().getContextMenuLayer().hideMapContextMenuMarker();
+				dismissMenu();
+			}
+		});
+
+		// Action buttons
 		final ImageButton buttonNavigate = (ImageButton) view.findViewById(R.id.context_menu_route_button);
+		buttonNavigate.setImageDrawable(iconsCache.getIcon(R.drawable.map_directions,
+				light ? R.color.actionbar_dark_color : R.color.actionbar_light_color));
 		buttonNavigate.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -147,6 +173,8 @@ public class MapContextMenuFragment extends Fragment {
 		});
 
 		final ImageButton buttonFavorite = (ImageButton) view.findViewById(R.id.context_menu_fav_button);
+		buttonFavorite.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_fav_dark,
+				light ? R.color.actionbar_dark_color : R.color.actionbar_light_color));
 		buttonFavorite.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -155,6 +183,8 @@ public class MapContextMenuFragment extends Fragment {
 		});
 
 		final ImageButton buttonShare = (ImageButton) view.findViewById(R.id.context_menu_share_button);
+		buttonShare.setImageDrawable(iconsCache.getIcon(R.drawable.abc_ic_menu_share_mtrl_alpha,
+				light ? R.color.actionbar_dark_color : R.color.actionbar_light_color));
 		buttonShare.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -163,12 +193,22 @@ public class MapContextMenuFragment extends Fragment {
 		});
 
 		final ImageButton buttonMore = (ImageButton) view.findViewById(R.id.context_menu_more_button);
+		buttonMore.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_core_overflow_dark,
+				light ? R.color.actionbar_dark_color : R.color.actionbar_light_color));
 		buttonMore.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				MapContextMenu.getInstance().buttonMorePressed();
 			}
 		});
+
+		// Bottom view
+		BottomSectionBuilder bottomSectionBuilder = MapContextMenu.getInstance().getBottomSectionBuilder();
+		if (bottomSectionBuilder != null) {
+			View bottomView = view.findViewById(R.id.context_menu_bottom_view);
+			bottomSectionBuilder.buildSection(bottomView);
+		}
+
 
 		/*
 		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
@@ -213,6 +253,13 @@ public class MapContextMenuFragment extends Fragment {
 
 	public void dismissMenu() {
 		getActivity().getSupportFragmentManager().popBackStack();
+	}
+
+	public OsmandApplication getMyApplication() {
+		if (getActivity() == null) {
+			return null;
+		}
+		return (OsmandApplication) getActivity().getApplication();
 	}
 
 	public static void showInstance(final MapActivity mapActivity) {

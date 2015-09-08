@@ -424,7 +424,8 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 	private void enableSelectionMode(boolean selectionMode) {
 		this.selectionMode = selectionMode;
 		if (AndroidUiHelper.isOrientationPortrait(getActivity())) {
-			((FavoritesActivity) getActivity()).setToolbarVisibility(!selectionMode);
+			((FavoritesActivity) getActivity()).setToolbarVisibility(!selectionMode &&
+					AndroidUiHelper.isOrientationPortrait(getActivity()));
 		}
 	}
 
