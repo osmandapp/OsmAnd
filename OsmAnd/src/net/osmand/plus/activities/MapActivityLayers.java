@@ -1,10 +1,11 @@
 package net.osmand.plus.activities;
 
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map.Entry;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.support.v7.app.AlertDialog;
+import android.widget.ListAdapter;
+import android.widget.Toast;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.ResultMatcher;
@@ -12,7 +13,6 @@ import net.osmand.StateChangedListener;
 import net.osmand.access.AccessibleToast;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
-import net.osmand.osm.PoiCategory;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.Item;
 import net.osmand.plus.GPXUtilities.GPXFile;
@@ -47,12 +47,11 @@ import net.osmand.plus.views.RouteLayer;
 import net.osmand.plus.views.TransportInfoLayer;
 import net.osmand.plus.views.TransportStopsLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.widget.ListAdapter;
-import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map.Entry;
 
 /**
  * Object is responsible to maintain layers using by map activity 
@@ -259,7 +258,7 @@ public class MapActivityLayers {
 			addFilterToList(adapter, list, f);
 		}
 		
-		Builder builder = new AlertDialog.Builder(activity);
+		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 		ListAdapter listAdapter = adapter.createListAdapter(activity, app.getSettings().isLightContent());
 		builder.setAdapter(listAdapter, new DialogInterface.OnClickListener(){
 			@Override
@@ -321,7 +320,7 @@ public class MapActivityLayers {
 		
 		final List<Entry<String, String>> entriesMapList = new ArrayList<Entry<String, String>>(entriesMap.entrySet());
 		
-		Builder builder = new AlertDialog.Builder(activity);
+		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 		
 		String selectedTileSourceKey = settings.MAP_TILE_SOURCES.get();		
 
