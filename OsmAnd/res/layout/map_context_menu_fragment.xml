@@ -177,7 +177,7 @@
             android:id="@+id/context_menu_bottom_view"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <View
                 android:layout_width="match_parent"

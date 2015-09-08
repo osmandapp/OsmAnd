@@ -10,7 +10,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -21,11 +20,8 @@ import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.search.SearchActivity;
 
 import org.apache.commons.logging.Log;
-
-import java.util.Map;
 
 
 public class MapContextMenuFragment extends Fragment {
@@ -206,6 +202,12 @@ public class MapContextMenuFragment extends Fragment {
 		BottomSectionBuilder bottomSectionBuilder = MapContextMenu.getInstance().getBottomSectionBuilder();
 		if (bottomSectionBuilder != null) {
 			View bottomView = view.findViewById(R.id.context_menu_bottom_view);
+			bottomView.setOnTouchListener(new View.OnTouchListener() {
+				@Override
+				public boolean onTouch(View v, MotionEvent event) {
+					return true;
+				}
+			});
 			bottomSectionBuilder.buildSection(bottomView);
 		}
 
