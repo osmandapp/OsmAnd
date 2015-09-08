@@ -1,14 +1,6 @@
 package net.osmand.plus.monitoring;
 
 
-import android.view.Window;
-import net.osmand.plus.NavigationService;
-import net.osmand.plus.OsmAndTaskManager.OsmAndTaskRunnable;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.SavingTrackHelper;
-import net.osmand.plus.activities.SettingsBaseActivity;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -21,6 +13,15 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
+import android.view.Window;
+
+import net.osmand.plus.NavigationService;
+import net.osmand.plus.OsmAndTaskManager.OsmAndTaskRunnable;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.SavingTrackHelper;
+import net.osmand.plus.activities.SettingsBaseActivity;
 
 
 public class SettingsMonitoringActivity extends SettingsBaseActivity {

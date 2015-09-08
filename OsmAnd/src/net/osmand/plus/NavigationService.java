@@ -38,7 +38,6 @@ public class NavigationService extends Service implements LocationListener {
 	// global id don't conflict with others
 	private final static int NOTIFICATION_SERVICE_ID = 5;
 	public final static String OSMAND_STOP_SERVICE_ACTION = "OSMAND_STOP_SERVICE_ACTION"; //$NON-NLS-1$
-	public final static String OSMAND_SAVE_SERVICE_ACTION = "OSMAND_SAVE_SERVICE_ACTION";
 	public static int USED_BY_NAVIGATION = 1;
 	public static int USED_BY_GPX = 2;
 	public static int USED_BY_LIVE = 4;
@@ -176,26 +175,23 @@ public class NavigationService extends Service implements LocationListener {
 				if (settings.SAVE_GLOBAL_TRACK_TO_GPX.get()) {
 					settings.SAVE_GLOBAL_TRACK_TO_GPX.set(false);
 				}
-				OsMoPlugin plugin = OsmandPlugin.getEnabledPlugin(OsMoPlugin.class);
-				if (plugin != null) {
-					if (plugin.getTracker().isEnabledTracker()) {
-						plugin.getTracker().disableTracker();
+				OsMoPlugin osmoPlugin = OsmandPlugin.getEnabledPlugin(OsMoPlugin.class);
+				if (osmoPlugin != null) {
+					if (osmoPlugin.getTracker().isEnabledTracker()) {
+						osmoPlugin.getTracker().disableTracker();
 					}
+				}
+				OsmandMonitoringPlugin monitoringPlugin =
+						OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class);
+				if (monitoringPlugin != null) {
+					monitoringPlugin.stopRecording();
 				}
 				NavigationService.this.stopSelf();
 			}
 
 		};
 		registerReceiver(broadcastReceiver, new IntentFilter(OSMAND_STOP_SERVICE_ACTION));
-		saveBroadcastReceiver = new BroadcastReceiver() {
-			@Override
-			public void onReceive(Context context, Intent intent) {
-				final OsmandMonitoringPlugin plugin = OsmandPlugin
-						.getEnabledPlugin(OsmandMonitoringPlugin.class);
-				plugin.saveCurrentTrack();
-			}
-		};
-		registerReceiver(saveBroadcastReceiver, new IntentFilter(OSMAND_SAVE_SERVICE_ACTION));
+
 
 		//Show currently active wake-up interval
 		int soi = settings.SERVICE_OFF_INTERVAL.get();
@@ -215,14 +211,6 @@ public class NavigationService extends Service implements LocationListener {
 //		notification.flags = Notification.FLAG_NO_CLEAR;
 //		startForeground(NOTIFICATION_SERVICE_ID, notification);
 
-		String stop = getResources().getString(R.string.shared_string_control_stop);
-		Intent stopIntent = new Intent(OSMAND_STOP_SERVICE_ACTION);
-		PendingIntent stopPendingIntent = PendingIntent.getBroadcast(this, 0, stopIntent,
-				PendingIntent.FLAG_UPDATE_CURRENT);
-		String pause = getResources().getString(R.string.shared_string_save);
-		Intent saveIntent = new Intent(OSMAND_SAVE_SERVICE_ACTION);
-		PendingIntent savePendingIntent = PendingIntent.getBroadcast(this, 0, saveIntent,
-				PendingIntent.FLAG_UPDATE_CURRENT);
 		Intent contentIntent = new Intent(this, MapActivity.class);
 		PendingIntent contentPendingIntent = PendingIntent.getActivity(this, 0, contentIntent,
 				PendingIntent.FLAG_UPDATE_CURRENT);
