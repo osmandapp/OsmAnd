@@ -4,14 +4,9 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.PointF;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
 import android.os.Build;
 import android.text.Html;
@@ -35,6 +30,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class ContextMenuLayer extends OsmandMapLayer {
@@ -68,6 +64,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	private LatLon latLon;
 	private String description;
 	private Map<Object, IContextMenuProvider> selectedObjects = new ConcurrentHashMap<Object, IContextMenuProvider>();
+	private Object selectedObj;
 	
 	private TextView textView;
 	private ImageView closeButton;
@@ -78,10 +75,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	private float scaleCoefficient = 1;
 	private CallbackWithObject<LatLon> selectOnMap = null;
 
-	private Bitmap mapContextMarker;
-	private boolean showMapContextMarker;
-
-	private Paint mapMarkerPaintIcon;
+	private boolean showContextMarker;
+	private ImageView contextMarker;
 
 	public ContextMenuLayer(MapActivity activity){
 		this.activity = activity;
@@ -130,11 +125,14 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		closeButton.setImageDrawable(view.getResources().getDrawable(R.drawable.headliner_close));
 		closeButton.setClickable(true);
 
-		showMapContextMarker = false;
-		mapMarkerPaintIcon = new Paint();
-		mapMarkerPaintIcon.setColorFilter(new PorterDuffColorFilter(activity.getResources().getColor(R.color.osmand_orange), PorterDuff.Mode.SRC_IN));
-		mapContextMarker = BitmapFactory.decodeResource(view.getResources(), R.drawable.ic_action_marker2);
-
+		showContextMarker = false;
+		contextMarker = new ImageView(view.getContext());
+		contextMarker.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+		contextMarker.setImageDrawable(view.getResources().getDrawable(R.drawable.map_pin_context_menu));
+		contextMarker.setClickable(true);
+		int minw = contextMarker.getDrawable().getMinimumWidth();
+		int minh = contextMarker.getDrawable().getMinimumHeight();
+		contextMarker.layout(0, 0, minw, minh);
 
 		if(latLon != null){
 			setLocation(latLon, description);
@@ -153,8 +151,10 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			int x = (int) box.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
 			int y = (int) box.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
 
-			if (showMapContextMarker)
-				canvas.drawBitmap(mapContextMarker, x - mapContextMarker.getWidth() / 2, y - mapContextMarker.getHeight(), mapMarkerPaintIcon);
+			if (showContextMarker) {
+				canvas.translate(x - contextMarker.getWidth() / 2, y - contextMarker.getHeight());
+				contextMarker.draw(canvas);
+			}
 
 			textView.setTextColor(nightMode != null && nightMode.isNightMode() ? Color.GRAY : Color.WHITE);
 			if (textView.getText().length() > 0) {
@@ -201,15 +201,15 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 
 	public void showMapContextMenuMarker() {
-		if (!showMapContextMarker) {
-			showMapContextMarker = true;
+		if (!showContextMarker) {
+			showContextMarker = true;
 			view.refreshMap();
 		}
 	}
 
 	public void hideMapContextMenuMarker() {
-		if (showMapContextMarker) {
-			showMapContextMarker = false;
+		if (showContextMarker) {
+			showContextMarker = false;
 			view.refreshMap();
 		}
 	}
@@ -273,11 +273,10 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		if (latLon != null) {
 			if (selectedObjects.size() == 1) {
 				setLocation(null, "");
-				Object selectedObj = selectedObjects.keySet().iterator().next();
+				selectedObj = selectedObjects.keySet().iterator().next();
 				showMapContextMenu(selectedObj, latLon);
-			} else {
-				String description = getSelectedObjectDescription();
-				setLocation(latLon, description);
+			} else if (selectedObjects.size() > 1) {
+				showContextMenuForSelectedObjects(latLon);
 			}
 		} else {
 			setLocation(null, "");
@@ -362,7 +361,19 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		}
 		return 0;
 	}
-	
+
+	public boolean pressedContextMarker(RotatedTileBox tb, float px, float py) {
+		if (latLon != null && showContextMarker) {
+			Rect bs = contextMarker.getDrawable().getBounds();
+			int dx = (int) (px - tb.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude()));
+			int dy = (int) (py - tb.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude()));
+			int bx = dx + bs.width() / 2;
+			int by = dy + bs.height();
+			return (bs.contains(bx, by));
+		}
+		return false;
+	}
+
 	public String getSelectedObjectName(){
 		return getSelectedObjectInfo(true);
 	}
@@ -412,6 +423,11 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	@Override
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
+		if (pressedContextMarker(tileBox, point.x, point.y)) {
+			showMapContextMenu(selectedObj, latLon);
+			return true;
+		}
+
 		boolean nativeMode = (Build.VERSION.SDK_INT >= 14) || view.getSettings().SCROLL_MAP_BY_GESTURES.get();
 		int val = pressedInTextView(tileBox, point.x, point.y);
 		if(selectOnMap != null) {
@@ -438,12 +454,10 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			if (latLon != null) {
 				if (selectedObjects.size() == 1) {
 					setLocation(null, "");
-					Object selectedObj = selectedObjects.keySet().iterator().next();
+					selectedObj = selectedObjects.keySet().iterator().next();
 					showMapContextMenu(selectedObj, latLon);
-				} else {
-					String description = getSelectedObjectDescription();
-					setLocation(latLon, description);
-					view.refreshMap();
+				} else if (selectedObjects.size() > 1) {
+					showContextMenuForSelectedObjects(latLon);
 					return true;
 				}
 			}
@@ -467,13 +481,13 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			builder.setItems(d, new OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					Object selectedObj = s.get(which);
+					selectedObj = s.get(which);
 					showMapContextMenu(selectedObj, l);
 				}
 			});
 			builder.show();
 		} else {
-			Object selectedObj = selectedObjects.keySet().iterator().next();
+			selectedObj = selectedObjects.keySet().iterator().next();
 			showMapContextMenu(selectedObj, l);
 		}
 	}
@@ -481,13 +495,15 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	private void showMapContextMenu(Object obj, LatLon latLon) {
 		PointDescription pointDescription;
 		if (obj != null) {
-			pointDescription = selectedObjects.get(obj).getObjectName(obj);
-			pointDescription.setLat(latLon.getLatitude());
-			pointDescription.setLon(latLon.getLongitude());
+			IContextMenuProvider typedObj = selectedObjects.get(obj);
+			pointDescription = typedObj.getObjectName(obj);
+			LatLon objLocation = typedObj.getObjectLocation(obj);
+			pointDescription.setLat(objLocation.getLatitude());
+			pointDescription.setLon(objLocation.getLongitude());
 		} else {
 			pointDescription = new PointDescription(latLon.getLatitude(), latLon.getLongitude());
 		}
-		this.latLon = latLon;
+		this.latLon = new LatLon(pointDescription.getLat(), pointDescription.getLon());
 
 		showMapContextMenuMarker();
 		MapContextMenu.getInstance().show(pointDescription, obj);

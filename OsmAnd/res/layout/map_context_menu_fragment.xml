@@ -53,8 +53,9 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="fill_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
                 android:orientation="vertical">
@@ -79,8 +80,25 @@
                     android:layout_marginTop="3dp"
                     android:text="@string/other_location"
                     android:textColor="?android:textColorSecondary"
-                    android:textSize="@dimen/default_list_text_size"/>
+                    android:textSize="@dimen/default_desc_text_size"/>
 
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/context_menu_close_btn_layout"
+                android:orientation="horizontal"
+                android:layout_width="32dp"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/context_menu_close_btn_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:layout_marginTop="12dp"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_action_remove_dark"/>
 
             </LinearLayout>
 
@@ -88,16 +106,15 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="#c9c9c9"/>
+            android:layout_height="1dp"
+            android:background="?attr/dashboard_divider"/>
 
         <LinearLayout
             android:id="@+id/context_menu_buttons"
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="64dp"
-            android:layout_gravity="bottom"
-            android:background="@android:color/white">
+            android:layout_gravity="bottom">
 
             <ImageButton
                 android:id="@+id/context_menu_route_button"
@@ -110,9 +127,9 @@
                 android:src="@drawable/map_directions"/>
 
             <View
-                android:layout_width="1px"
                 android:layout_height="match_parent"
-                android:background="#c9c9c9"/>
+                android:layout_width="1dp"
+                android:background="?attr/dashboard_divider"/>
 
             <ImageButton
                 android:id="@+id/context_menu_fav_button"
@@ -125,9 +142,9 @@
                 android:src="@drawable/ic_action_fav_dark"/>
 
             <View
-                android:layout_width="1px"
                 android:layout_height="match_parent"
-                android:background="#c9c9c9"/>
+                android:layout_width="1dp"
+                android:background="?attr/dashboard_divider"/>
 
             <ImageButton
                 android:id="@+id/context_menu_share_button"
@@ -140,9 +157,9 @@
                 android:src="@drawable/abc_ic_menu_share_mtrl_alpha"/>
 
             <View
-                android:layout_width="1px"
                 android:layout_height="match_parent"
-                android:background="#c9c9c9"/>
+                android:layout_width="1dp"
+                android:background="?attr/dashboard_divider"/>
 
             <ImageButton
                 android:id="@+id/context_menu_more_button"
@@ -155,6 +172,21 @@
                 android:src="@drawable/ic_action_core_overflow_dark"/>
 
         </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/context_menu_bottom_view"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?attr/dashboard_divider"/>
+
+
+        </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>
