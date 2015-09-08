@@ -3,9 +3,15 @@ package net.osmand.plus.monitoring;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.support.v4.app.NotificationCompat;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.WindowManager;
@@ -45,6 +51,8 @@ import gnu.trove.list.array.TIntArrayList;
 
 public class OsmandMonitoringPlugin extends OsmandPlugin {
 	private static final String ID = "osmand.monitoring";
+	private static final int notificationId = ID.hashCode();
+	public final static String OSMAND_SAVE_SERVICE_ACTION = "OSMAND_SAVE_SERVICE_ACTION";
 	private OsmandSettings settings;
 	private OsmandApplication app;
 	private TextInfoWidget monitoringControl;
@@ -329,6 +337,10 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	public void stopRecording(){
 		settings.SAVE_GLOBAL_TRACK_TO_GPX.set(false);
 		if (app.getNavigationService() != null) {
+			NotificationManager mNotificationManager =
+					(NotificationManager) app.getNavigationService()
+							.getSystemService(Context.NOTIFICATION_SERVICE);
+			mNotificationManager.cancel(notificationId);
 			app.getNavigationService().stopIfNeeded(app, NavigationService.USED_BY_GPX);
 		}
 	}
@@ -367,7 +379,39 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 						}
 					});
 		}
-		
+
+		String stop = map.getResources().getString(R.string.shared_string_control_stop);
+		Intent stopIntent = new Intent(NavigationService.OSMAND_STOP_SERVICE_ACTION);
+		PendingIntent stopPendingIntent = PendingIntent.getBroadcast(map, 0, stopIntent,
+				PendingIntent.FLAG_UPDATE_CURRENT);
+		String save = map.getResources().getString(R.string.shared_string_save);
+		Intent saveIntent = new Intent(OSMAND_SAVE_SERVICE_ACTION);
+		PendingIntent savePendingIntent = PendingIntent.getBroadcast(map, 0, saveIntent,
+				PendingIntent.FLAG_UPDATE_CURRENT);
+
+		BroadcastReceiver saveBroadcastReceiver = new BroadcastReceiver() {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				final OsmandMonitoringPlugin plugin = OsmandPlugin
+						.getEnabledPlugin(OsmandMonitoringPlugin.class);
+				if (plugin != null) {
+					plugin.saveCurrentTrack();
+				}
+			}
+		};
+		map.registerReceiver(saveBroadcastReceiver, new IntentFilter(OSMAND_SAVE_SERVICE_ACTION));
+
+		final NotificationCompat.Builder notificationBuilder =
+				new android.support.v7.app.NotificationCompat.Builder(map)
+						.setContentTitle(map.getResources().getString(R.string.map_widget_monitoring))
+				.setSmallIcon(R.drawable.ic_action_polygom_dark)
+//			.setLargeIcon(Helpers.getBitmap(R.drawable.mirakel, getBaseContext()))
+				.setOngoing(true)
+				.addAction(R.drawable.ic_action_rec_stop, stop, stopPendingIntent)
+				.addAction(R.drawable.ic_action_save, save, savePendingIntent);
+		NotificationManager mNotificationManager =
+				(NotificationManager) map.getSystemService(Context.NOTIFICATION_SERVICE);
+		mNotificationManager.notify(notificationId, notificationBuilder.build());
 	}
 
 	public static void showIntervalChooseDialog(final Context uiCtx, final String patternMsg,
