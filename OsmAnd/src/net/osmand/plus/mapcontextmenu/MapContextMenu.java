@@ -134,7 +134,7 @@ public class MapContextMenu {
 				res = typeName;
 		}
 
-		return Algorithms.isEmpty(res) ? "Address is unknown yet" : res;
+		return Algorithms.isEmpty(res) ? "Address is unknown yet" : res; // todo: text constant
 	}
 
 	public String getLocationStr() {
@@ -142,6 +142,17 @@ public class MapContextMenu {
 			return pointDescription.getLocationName(mapActivity, true).replaceAll("\n", "");
 		else
 			return foundStreetName;
+	}
+
+	public BottomSectionBuilder getBottomSectionBuilder() {
+
+		if (object != null) {
+			if (object instanceof Amenity) {
+				return new InfoSectionBuilder(app, (Amenity)object);
+			}
+		}
+
+		return null;
 	}
 
 	public void buttonNavigatePressed() {

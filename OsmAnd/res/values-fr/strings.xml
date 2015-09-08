@@ -2139,4 +2139,10 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="add_opening_hours">Ajouter des heures d\'ouverture</string>
 	<string name="poi_dialog_poi_type">Type de PI</string>
 <string name="av_locations">Positions</string>
-    </resources>
+    <string name="poi_action_delete">Supprimer</string>
+	<string name="contact_info">Contact</string>
+	<string name="please_specify_poi_type">Merci d\'indiquer un type de PI.</string>
+	<string name="working_days">Jours travaillés</string>
+	<string name="recent_places">Emplacements récents</string>
+	<string name="favourites">Favoris</string>
+</resources>
