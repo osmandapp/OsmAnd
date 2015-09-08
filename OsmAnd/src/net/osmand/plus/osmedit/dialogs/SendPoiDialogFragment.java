@@ -19,6 +19,7 @@ import net.osmand.plus.osmedit.OsmPoint;
 public class SendPoiDialogFragment extends DialogFragment {
 	public static final String TAG = "SendPoiDialogFragment";
 	public static final String OPENSTREETMAP_POINT = "openstreetmap_point";
+	private static String comment;
 
 	@NonNull
 	@Override
@@ -31,6 +32,7 @@ public class SendPoiDialogFragment extends DialogFragment {
 		final EditText passwordEditText = (EditText) view.findViewById(R.id.passwordEditText);
 		final CheckBox closeChangeSetCheckBox =
 				(CheckBox) view.findViewById(R.id.closeChangeSetCheckBox);
+		messageEditText.setText(comment);
 		final OsmandSettings settings = ((OsmandApplication) getActivity().getApplication())
 				.getSettings();
 		userNameEditText.setText(settings.USER_NAME.get());
@@ -44,12 +46,13 @@ public class SendPoiDialogFragment extends DialogFragment {
 				.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
+						comment = messageEditText.getText().toString();
 						settings.USER_NAME.set(userNameEditText.getText().toString());
 						settings.USER_PASSWORD.set(passwordEditText.getText().toString());
 						for (OsmPoint osmPoint : poi) {
 							if (osmPoint.getGroup() == OsmPoint.Group.POI) {
 								((OpenstreetmapPoint) osmPoint)
-										.setComment(messageEditText.getText().toString());
+										.setComment(comment);
 								break;
 							}
 						}
