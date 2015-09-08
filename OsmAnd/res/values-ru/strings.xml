@@ -2088,4 +2088,6 @@
 	<string name="number_of_rows_in_dash">Количество строк на странице %1$s</string>
 	<string name="please_specify_poi_type">Пожалуйста, укажите тип POI.</string>
 <string name="rendering_value_boldOutline_name">Жирный контур</string>
-    </resources>
+    <string name="working_days">Рабочие дни</string>
+	<string name="favourites">Избранное</string>
+</resources>
