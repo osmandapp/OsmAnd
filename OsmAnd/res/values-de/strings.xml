@@ -1938,7 +1938,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 <string name="download_additional_maps">Fehlende Karten herunterladen: %1$s (%2$d MB)?</string>
     <string name="shared_string_more">Mehr…</string>
     <string name="osmo_specify_tracker_id">Bitte ID eingeben</string>
-    <string name="home">Ausgangsposition</string>
+    <string name="home">Übersicht</string>
     <string name="rendering_attr_publicTransportMode_name">Bus-, Oberleitungsbus-, Sammeltaxi-Linien</string>
 	<string name="record_plugin_name">Streckenaufzeichnung</string>
     <string name="int_hour">h</string>
