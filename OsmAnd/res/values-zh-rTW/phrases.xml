@@ -1156,4 +1156,12 @@
 	<string name="poi_content_salt">鹽 (內容)</string>
 	<string name="poi_content_grain">榖物 (內容)</string>
 
+	<string name="poi_wholesale">批發商</string>
+
+	<string name="poi_trade_building_supplies">建材供應商</string>
+	<string name="poi_trade_plumbing">配管供應商</string>
+	<string name="poi_trade_wood">木材供應商</string>
+	<string name="poi_trade_agricultural_supplies">農藝供應商</string>
+	<string name="poi_trade_tile">磚瓦供應商</string>
+
 	</resources>
