@@ -1107,6 +1107,7 @@
 	<string name="poi_crossing_unmarked">Unmarked</string>
 	<string name="poi_start_date">Start date</string>
 	<string name="poi_wheelchair">Wheelchair</string>
+	<string name="poi_wholesale">Wholesale</string>
 
 	<string name="poi_access_private">Private access</string>
 	<string name="poi_access_no">No access</string>
@@ -1132,6 +1133,12 @@
 	<string name="poi_content_beer">Beer (content)</string>
 	<string name="poi_content_salt">Salt (content)</string>
 	<string name="poi_content_grain">Grain (content)</string>
+
+	<string name="poi_trade_building_supplies">Building supplies</string>
+	<string name="poi_trade_plumbing">Plumbing supplies</string>
+	<string name="poi_trade_wood">Wood supplies</string>
+	<string name="poi_trade_agricultural_supplies">Agricultural supplies</string>
+	<string name="poi_trade_tile">Tile supplies</string>
 
 	<string name="poi_enforcement_traffic_signals">Enforcement:traffic signals</string>
 	<string name="poi_enforcement_maxspeed">Enforcement:maxspeed</string>
