@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.animation.Animation;
@@ -32,6 +31,7 @@ import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
 import com.github.ksoichiro.android.observablescrollview.ScrollState;
 
+import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
@@ -64,7 +64,8 @@ import java.util.List;
 /**
  */
 public class DashboardOnMap implements ObservableScrollViewCallbacks {
-
+	private static final org.apache.commons.logging.Log LOG =
+			PlatformUtil.getLog(DashboardOnMap.class);
 	private static final String TAG = "DashboardOnMap";
 	public static boolean staticVisible = false;
 	public static DashboardType staticVisibleType = DashboardType.DASHBOARD;
@@ -72,7 +73,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 
 	private static final DashFragmentData.ShouldShowFunction rateUsShouldShow = new DashRateUsFragment.RateUsShouldShow();
 	private static final DefaultShouldShow defaultShouldShow = new DefaultShouldShow();
-	private static final DefaultShouldShow errorShouldShow = new ErrorShouldShow();
+	private static final DashFragmentData.ShouldShowFunction errorShouldShow = new ErrorShouldShow();
 	private static final DashFragmentData.ShouldShowFunction firstTimeShouldShow = new FirstTimeShouldShow();
 	private static final DashFragmentData.ShouldShowFunction chooseAppDirShouldShow = new ChooseAppDirShouldShow();
 
@@ -390,9 +391,11 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 	public void hideDashboard() {
 		setDashboardVisibility(false, visibleType);
 	}
+
 	public void hideDashboard(boolean animation) {
 		setDashboardVisibility(false, visibleType, animation);
 	}
+
 	public void setDashboardVisibility(boolean visible, DashboardType type) {
 		setDashboardVisibility(visible, type, this.visible ? visibleType : null, true);
 	}
@@ -656,11 +659,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 
 
 	private void addOrUpdateDashboardFragments() {
-		Log.v(TAG, "addOrUpdateDashboardFragments(" + ")");
 		OsmandSettings settings = getMyApplication().getSettings();
 		TransactionBuilder builder =
 				new TransactionBuilder(mapActivity.getSupportFragmentManager(), settings, mapActivity);
-		Log.v(TAG, "pluginsCards=" + OsmandPlugin.getPluginsCardsList());
 		builder.addFragmentsData(fragmentsData)
 				.addFragmentsData(OsmandPlugin.getPluginsCardsList())
 				.getFragmentTransaction().commit();
@@ -911,10 +912,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 	}
 
 	public boolean hasCriticalMessages() {
-
 		final OsmandSettings settings = getMyApplication().getSettings();
 		return rateUsShouldShow.shouldShow(settings, mapActivity, DashRateUsFragment.TAG)
-				|| errorShouldShow.shouldShow(settings, mapActivity, DashErrorFragment.TAG);
+				|| errorShouldShow.shouldShow(null, mapActivity, null);
 	}
 
 	View getParentView() {
@@ -928,6 +928,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 					.makeGlobal().get();
 		}
 	}
+
 	public static class DefaultShouldShow extends SettingsShouldShow {
 		@Override
 		public boolean shouldShow(OsmandSettings settings, MapActivity activity, String tag) {
@@ -936,11 +937,12 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 		}
 	}
 
-	private static class ErrorShouldShow extends DefaultShouldShow {
+	private static class ErrorShouldShow implements DashFragmentData.ShouldShowFunction {
+		// If settings null. No changes in setting will be made.
 		@Override
 		public boolean shouldShow(OsmandSettings settings, MapActivity activity, String tag) {
-			return super.shouldShow(settings, activity, tag) && activity.getMyApplication()
-					.getAppInitializer().checkPreviousRunsForExceptions(activity);
+			return activity.getMyApplication().getAppInitializer()
+					.checkPreviousRunsForExceptions(activity, settings != null);
 		}
 	}
 

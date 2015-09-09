@@ -146,13 +146,15 @@ public class AppInitializer implements IProgress {
 		return false;
 	}
 
-	public boolean checkPreviousRunsForExceptions(Activity activity) {
+	public boolean checkPreviousRunsForExceptions(Activity activity, boolean writeFileSize) {
 		initUiVars(activity);
 		long size = activity.getPreferences(Context.MODE_WORLD_READABLE).getLong(EXCEPTION_FILE_SIZE, 0);
 		final File file = app.getAppPath(OsmandApplication.EXCEPTION_PATH);
 		if (file.exists() && file.length() > 0) {
 			if (size != file.length() && !firstTime) {
-				activity.getPreferences(Context.MODE_WORLD_WRITEABLE).edit().putLong(EXCEPTION_FILE_SIZE, file.length()).commit();
+				if (writeFileSize) {
+					activity.getPreferences(Context.MODE_WORLD_WRITEABLE).edit().putLong(EXCEPTION_FILE_SIZE, file.length()).commit();
+				}
 				return true;
 			}
 		} else {
