@@ -1,11 +1,6 @@
 package net.osmand.util;
 /* Can be commented out in order to run the main function separately */
 
-
-import net.osmand.PlatformUtil;
-
-import org.apache.commons.logging.Log;
-
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -21,7 +16,6 @@ import java.util.Calendar;
  * if the OSM feature is open at a certain time. 
  */
 public class OpeningHoursParser {
-	private static final Log LOG = PlatformUtil.getLog(OpeningHoursParser.class);
 	private static final String[] daysStr = new String[] {"Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"}; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
 	
 	private static final String[] monthsStr = new String[] {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
@@ -114,15 +108,6 @@ public class OpeningHoursParser {
 			String ruleOpen = null;
 			String ruleClosed = null;
 			for (OpeningHoursRule r : rules){
-				if(r.containsDay(cal) && r.containsMonth(cal)){
-					if(r.isOpenedForTime(cal, false)) {
-						ruleOpen = r.toRuleString(true);
-					} else {
-						ruleClosed = r.toRuleString(true);
-					}
-				}
-			}
-			for (OpeningHoursRule r : rules){
 				if(r.containsPreviousDay(cal) && r.containsMonth(cal)){
 					if(r.isOpenedForTime(cal, true)) {
 						ruleOpen = r.toRuleString(true);
@@ -131,6 +116,16 @@ public class OpeningHoursParser {
 					}
 				}
 			}
+			for (OpeningHoursRule r : rules){
+				if(r.containsDay(cal) && r.containsMonth(cal)){
+					if(r.isOpenedForTime(cal, false)) {
+						ruleOpen = r.toRuleString(true);
+					} else {
+						ruleClosed = r.toRuleString(true);
+					}
+				}
+			}
+			
 			if(ruleOpen != null) {
 				return ruleOpen;
 			}
@@ -726,8 +721,8 @@ public class OpeningHoursParser {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(new SimpleDateFormat("dd.MM.yyyy HH:mm").parse(time));
 		boolean calculated = hours.isOpenedForTime(cal);
-		System.out.printf("  %sok: Expected %s: %b = %b\n",
-			((calculated != expected) ? "NOT " : ""), time, expected, calculated);
+		System.out.printf("  %sok: Expected %s: %b = %b (rule %s)\n",
+			((calculated != expected) ? "NOT " : ""), time, expected, calculated, hours.getCurrentRuleTime(cal));
         if(calculated != expected) {
             throw new IllegalArgumentException("BUG!!!");
         }
@@ -740,6 +735,12 @@ public class OpeningHoursParser {
 		System.out.println(hours);
 		testOpened("09.08.2012 11:00", hours, true);
 		testOpened("09.08.2012 16:00", hours, false);
+		
+		hours = parseOpenedHours("Mo-Fr 11:30-15:00,17:30-23:00; Sa-Su,PH 11:30-23:00");
+		System.out.println(hours);
+		testOpened("7.09.2015 14:54", hours, true);
+		testOpened("7.09.2015 15:05", hours, false);
+		
 
 		// two time and date ranges
 		hours = parseOpenedHours("Mo-We, Fr 08:30-14:40,15:00-19:00"); //$NON-NLS-1$
