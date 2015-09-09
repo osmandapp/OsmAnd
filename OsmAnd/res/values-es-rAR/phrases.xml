@@ -1157,4 +1157,12 @@
 	<string name="poi_content_slurry">Mezcla (contenido)</string>
 	<string name="poi_brownfield">Terreno abandonado</string>
 	<string name="poi_greenfield">Suelo urbanizable</string>
+	<string name="poi_wholesale">Venta mayorista</string>
+
+	<string name="poi_trade_building_supplies">Corralón</string>
+	<string name="poi_trade_plumbing">Suministros de plomería</string>
+	<string name="poi_trade_wood">Venta de madera</string>
+	<string name="poi_trade_agricultural_supplies">Suministros agrícolas</string>
+	<string name="poi_trade_tile">Venta de azulejos</string>
+
 	</resources>
