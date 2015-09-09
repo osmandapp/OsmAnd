@@ -10,10 +10,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.osmand.PlatformUtil;
@@ -21,11 +19,8 @@ import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.search.SearchActivity;
 
 import org.apache.commons.logging.Log;
-
-import java.util.Map;
 
 
 public class MapContextMenuFragment extends Fragment {
@@ -89,6 +84,8 @@ public class MapContextMenuFragment extends Fragment {
 
 		View topView = view.findViewById(R.id.context_menu_top_view);
 		mainView = view.findViewById(R.id.context_menu_main);
+		//LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dpToPx(400));
+		//mainView.setLayoutParams(lp);
 
 		topView.setOnTouchListener(new View.OnTouchListener() {
 
@@ -104,21 +101,16 @@ public class MapContextMenuFragment extends Fragment {
 
 					case MotionEvent.ACTION_MOVE:
 						float y = event.getY();
-						LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) mainView.getLayoutParams();
-						float top = lp.topMargin + (y - dy);
-						if (top < 0) {
-							lp.topMargin = (int) top;
-							mainView.setLayoutParams(lp);
-						}
+						mainView.setY(mainView.getY() + (y - dy));
 						break;
 
 					case MotionEvent.ACTION_UP:
 					case MotionEvent.ACTION_CANCEL:
 
 						float posY = view.getHeight() - mainViewHeight;
-						if (mainView.getY() != posY) {
+						if (mainView.getY() != posY)
 							mainView.animate().y(posY).setDuration(200).setInterpolator(new DecelerateInterpolator()).start();
-						}
+
 						break;
 
 				}
@@ -126,6 +118,7 @@ public class MapContextMenuFragment extends Fragment {
 			}
 		});
 
+		// Left icon
 		IconsCache iconsCache = getMyApplication().getIconsCache();
 		boolean light = getMyApplication().getSettings().isLightContent();
 
@@ -140,12 +133,27 @@ public class MapContextMenuFragment extends Fragment {
 					light ? R.color.icon_color : R.color.icon_color_light));
 		}
 
+		// Text line 1
 		TextView line1 = (TextView) view.findViewById(R.id.context_menu_line1);
 		line1.setText(MapContextMenu.getInstance().getAddressStr());
 
+		// Text line 2
 		TextView line2 = (TextView) view.findViewById(R.id.context_menu_line2);
 		line2.setText(MapContextMenu.getInstance().getLocationStr());
 
+		// Close button
+		final ImageView closeButtonView = (ImageView)view.findViewById(R.id.context_menu_close_btn_view);
+		closeButtonView.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_remove_dark,
+				light ? R.color.actionbar_dark_color : R.color.actionbar_light_color));
+		closeButtonView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				((MapActivity)getActivity()).getMapLayers().getContextMenuLayer().hideMapContextMenuMarker();
+				dismissMenu();
+			}
+		});
+
+		// Action buttons
 		final ImageButton buttonNavigate = (ImageButton) view.findViewById(R.id.context_menu_route_button);
 		buttonNavigate.setImageDrawable(iconsCache.getIcon(R.drawable.map_directions,
 				light ? R.color.actionbar_dark_color : R.color.actionbar_light_color));
@@ -185,6 +193,20 @@ public class MapContextMenuFragment extends Fragment {
 				MapContextMenu.getInstance().buttonMorePressed();
 			}
 		});
+
+		// Bottom view
+		BottomSectionBuilder bottomSectionBuilder = MapContextMenu.getInstance().getBottomSectionBuilder();
+		if (bottomSectionBuilder != null) {
+			View bottomView = view.findViewById(R.id.context_menu_bottom_view);
+			bottomView.setOnTouchListener(new View.OnTouchListener() {
+				@Override
+				public boolean onTouch(View v, MotionEvent event) {
+					return true;
+				}
+			});
+			bottomSectionBuilder.buildSection(bottomView);
+		}
+
 
 		/*
 		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
