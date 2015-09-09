@@ -249,7 +249,7 @@ public class MapContextMenuFragment extends Fragment {
 			iconLayout.setVisibility(View.GONE);
 		} else {
 			iconView.setImageDrawable(iconsCache.getIcon(iconId,
-					light ? R.color.icon_color : R.color.icon_color_light));
+					light ? R.color.osmand_orange : R.color.osmand_orange_dark));
 		}
 
 		// Text line 1
@@ -263,7 +263,7 @@ public class MapContextMenuFragment extends Fragment {
 		// Close button
 		final ImageView closeButtonView = (ImageView)view.findViewById(R.id.context_menu_close_btn_view);
 		closeButtonView.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_remove_dark,
-				light ? R.color.actionbar_dark_color : R.color.actionbar_light_color));
+				light ? R.color.icon_color_light : R.color.dash_search_icon_dark));
 		closeButtonView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -275,7 +275,7 @@ public class MapContextMenuFragment extends Fragment {
 		// Action buttons
 		final ImageButton buttonNavigate = (ImageButton) view.findViewById(R.id.context_menu_route_button);
 		buttonNavigate.setImageDrawable(iconsCache.getIcon(R.drawable.map_directions,
-				light ? R.color.actionbar_dark_color : R.color.actionbar_light_color));
+				light ? R.color.icon_color : R.color.dash_search_icon_dark));
 		buttonNavigate.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -285,7 +285,7 @@ public class MapContextMenuFragment extends Fragment {
 
 		final ImageButton buttonFavorite = (ImageButton) view.findViewById(R.id.context_menu_fav_button);
 		buttonFavorite.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_fav_dark,
-				light ? R.color.actionbar_dark_color : R.color.actionbar_light_color));
+				light ? R.color.icon_color : R.color.dash_search_icon_dark));
 		buttonFavorite.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -295,7 +295,7 @@ public class MapContextMenuFragment extends Fragment {
 
 		final ImageButton buttonShare = (ImageButton) view.findViewById(R.id.context_menu_share_button);
 		buttonShare.setImageDrawable(iconsCache.getIcon(R.drawable.abc_ic_menu_share_mtrl_alpha,
-				light ? R.color.actionbar_dark_color : R.color.actionbar_light_color));
+				light ? R.color.icon_color : R.color.dash_search_icon_dark));
 		buttonShare.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -305,7 +305,7 @@ public class MapContextMenuFragment extends Fragment {
 
 		final ImageButton buttonMore = (ImageButton) view.findViewById(R.id.context_menu_more_button);
 		buttonMore.setImageDrawable(iconsCache.getIcon(R.drawable.ic_overflow_menu_white,
-				light ? R.color.actionbar_dark_color : R.color.actionbar_light_color));
+				light ? R.color.icon_color : R.color.dash_search_icon_dark));
 		buttonMore.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

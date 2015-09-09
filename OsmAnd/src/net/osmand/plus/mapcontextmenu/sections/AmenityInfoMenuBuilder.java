@@ -1,7 +1,6 @@
 package net.osmand.plus.mapcontextmenu.sections;
 
 import android.content.res.Resources;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -16,6 +15,7 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.util.Algorithms;
 
 import java.util.Map;
 
@@ -31,7 +31,7 @@ public class AmenityInfoMenuBuilder extends MenuBuilder {
 	}
 
 	private void buildRow(View view, int iconId, String text) {
-		Resources.Theme theme = view.getContext().getTheme();
+		boolean light = app.getSettings().isLightContent();
 
 		LinearLayout ll = new LinearLayout(view.getContext());
 		ll.setOrientation(LinearLayout.HORIZONTAL);
@@ -64,16 +64,8 @@ public class AmenityInfoMenuBuilder extends MenuBuilder {
 		ll.addView(llText);
 
 		TextView textView  = new TextView(view.getContext());
-
-//		TypedValue typedValueTextSize = new TypedValue();
-//		theme.resolveAttribute(R.dimen.default_desc_text_size, typedValueTextSize, true);
-//		int textSize = typedValueTextSize.data;
-		textView.setTextSize(14);
-
-//		TypedValue typedValueTextColor = new TypedValue();
-//		theme.resolveAttribute(android.R.attr.textColorSecondary, typedValueTextColor, true);
-//		int textColor = typedValueTextColor.data;
-		//textView.setTextColor(textColor);
+		textView.setTextSize(18); // todo: create constant
+		textView.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_info_text_light : R.color.ctx_menu_info_text_dark));
 
 		textView.setText(text);
 		//textView.setText("sdf dsaf fsdasdfg adsf asdsfd asdf sdf adsfg asdf sdfa sdf dsf agsfdgd fgsfd sdf asdf adg adf sdf asdf dfgdfsg sdfg adsf asdf asdf sdf SDF ASDF ADSF ASDF ASDF DAF SDAF dfg dsfg dfg sdfg rg rth sfghs dfgs dfgsdfg adfg dfg sdfg dfs ");
@@ -91,10 +83,7 @@ public class AmenityInfoMenuBuilder extends MenuBuilder {
 		llHorLineParams.gravity = Gravity.BOTTOM;
 		horizontalLine.setLayoutParams(llHorLineParams);
 
-		TypedValue typedValueColor = new TypedValue();
-		theme.resolveAttribute(R.attr.dashboard_divider, typedValueColor, true);
-		int color = typedValueColor.data;
-		horizontalLine.setBackgroundColor(color);
+		horizontalLine.setBackgroundColor(app.getResources().getColor(light ? R.color.ctx_menu_info_divider_light : R.color.ctx_menu_info_divider_dark));
 
 		((LinearLayout)view).addView(horizontalLine);
 	}
@@ -135,11 +124,11 @@ public class AmenityInfoMenuBuilder extends MenuBuilder {
 					if(pt instanceof PoiType && !((PoiType) pt).isText()) {
 						vl = pt.getTranslation();
 					} else {
-						vl = /*pt.getTranslation() + ": " + */amenity.unzipContent(e.getValue());
+						vl = pt.getTranslation() + ": " + amenity.unzipContent(e.getValue());
 					}
 				} else {
-					vl = /*Algorithms.capitalizeFirstLetterAndLowercase(e.getKey()) +
-							": " + */amenity.unzipContent(e.getValue());
+					vl = Algorithms.capitalizeFirstLetterAndLowercase(e.getKey()) +
+							": " + amenity.unzipContent(e.getValue());
 				}
 			}
 

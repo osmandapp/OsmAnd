@@ -22,7 +22,7 @@ public class IconsCache {
 			d = app.getResources().getDrawable(resId).mutate();
 			d.clearColorFilter();
 			if (clrId != 0) {
-				d.setColorFilter(app.getResources().getColor(clrId), PorterDuff.Mode.MULTIPLY);
+				d.setColorFilter(app.getResources().getColor(clrId), PorterDuff.Mode.SRC_IN);
 			}
 			drawable.put(hash, d);
 		}
@@ -35,7 +35,7 @@ public class IconsCache {
 		if(d == null) {
 			d = app.getResources().getDrawable(resId).mutate();
 			d.clearColorFilter();
-			d.setColorFilter(color, PorterDuff.Mode.MULTIPLY);
+			d.setColorFilter(color, PorterDuff.Mode.SRC_IN);
 			drawable.put(hash, d);
 		}
 		return d;

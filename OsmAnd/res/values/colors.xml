@@ -58,6 +58,13 @@
 	<color name="icon_color">#727272</color>
 	<color name="icon_color_light">#ccc</color>
 
+	<color name="ctx_menu_info_view_bg_light">#eaeaea</color>
+	<color name="ctx_menu_info_view_bg_dark">#292f33</color>
+	<color name="ctx_menu_info_text_light">#212121</color>
+	<color name="ctx_menu_info_text_dark">#b4c3cc</color>
+	<color name="ctx_menu_info_divider_light">#d9d9d9</color>
+	<color name="ctx_menu_info_divider_dark">#333b40</color>
+
 	<color name="dashboard_gpx_on_map">#448AFF</color>
 	<color name="dashboard_background">#eaeaea</color>
 	<color name="dashboard_divider_light">#F0F0F0</color>

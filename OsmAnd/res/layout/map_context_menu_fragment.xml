@@ -37,11 +37,11 @@
                 <ImageView
                     android:id="@+id/context_menu_icon_view"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical"
+                    android:layout_height="wrap_content"
                     android:scaleType="center"
                     android:layout_marginStart="12dp"
                     android:layout_marginLeft="12dp"
+                    android:layout_marginTop="18dp"
                     android:src="@drawable/ic_action_building_number"/>
 
             </LinearLayout>
@@ -50,7 +50,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginBottom="16dp"
                 android:orientation="vertical">
 
@@ -71,7 +71,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="12dp"
                     android:layout_marginRight="12dp"
-                    android:layout_marginTop="3dp"
+                    android:layout_marginTop="4dp"
                     android:text="@string/other_location"
                     android:textColor="?android:textColorSecondary"
                     android:textSize="@dimen/default_desc_text_size"/>
@@ -170,7 +170,8 @@
             android:id="@+id/context_menu_bottom_view"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="?attr/ctx_menu_info_view_bg">
 
             <View
                 android:layout_width="match_parent"
@@ -186,7 +187,7 @@
         android:id="@+id/context_menu_bottom_border"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:background="?attr/bg_map_context_menu"
+        android:background="?attr/ctx_menu_info_view_bg"
         android:orientation="vertical">
 
     </LinearLayout>
