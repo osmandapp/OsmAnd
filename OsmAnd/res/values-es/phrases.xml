@@ -1160,4 +1160,12 @@
 
 	<string name="poi_brownfield">Terreno abandonado</string>
 	<string name="poi_greenfield">Suelo urbanizable</string>
+	<string name="poi_wholesale">Venta mayorista</string>
+
+	<string name="poi_trade_building_supplies">Materiales de construcción</string>
+	<string name="poi_trade_plumbing">Materiales de fontanería/plomería</string>
+	<string name="poi_trade_wood">Suministros de madera</string>
+	<string name="poi_trade_agricultural_supplies">Insumos agrícolas</string>
+	<string name="poi_trade_tile">Azulejos</string>
+
 	</resources>
