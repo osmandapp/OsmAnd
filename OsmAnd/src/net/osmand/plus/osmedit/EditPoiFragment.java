@@ -159,9 +159,7 @@ public class EditPoiFragment extends DialogFragment {
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-				fragmentManager.beginTransaction().remove(EditPoiFragment.this).commit();
-				fragmentManager.popBackStack();
+				dismiss();
 			}
 		});
 
@@ -325,11 +323,7 @@ public class EditPoiFragment extends DialogFragment {
 								if (getActivity() instanceof MapActivity) {
 									((MapActivity) getActivity()).getMapView().refreshMap(true);
 								}
-								FragmentManager fragmentManager =
-										getActivity().getSupportFragmentManager();
-								fragmentManager.beginTransaction().remove(EditPoiFragment.this)
-										.commit();
-								fragmentManager.popBackStack();
+								dismiss();
 							}
 						}, getActivity(), mOpenstreetmapUtil);
 
@@ -515,9 +509,7 @@ public class EditPoiFragment extends DialogFragment {
 				if (n != null) {
 					EditPoiFragment fragment =
 							EditPoiFragment.createInstance(n, amenity);
-					activity.getSupportFragmentManager().beginTransaction()
-							.add(R.id.fragmentContainer, fragment, "EditPoiFragment")
-							.addToBackStack(null).commit();
+					fragment.show(activity.getSupportFragmentManager(), TAG);
 				} else {
 					AccessibleToast.makeText(activity,
 							activity.getString(R.string.poi_error_poi_not_found),
