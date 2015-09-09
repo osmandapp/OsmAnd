@@ -548,6 +548,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				recordControl = null;
 				mapInfoLayer.recreateControls();
 			}
+			recordControl = null;
 		}
 	}
 
