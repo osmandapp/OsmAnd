@@ -7,23 +7,17 @@
               android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/context_menu_shadow_layout"
+        android:id="@+id/context_menu_shadow_view"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical">
-
-        <View
-            android:id="@+id/context_menu_shadow_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
-    </LinearLayout>
+        android:layout_weight="0"
+        android:orientation="vertical"/>
 
     <LinearLayout
         android:id="@+id/context_menu_main"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
         android:background="?attr/bg_map_context_menu"
         android:orientation="vertical">
 
@@ -113,8 +107,7 @@
             android:id="@+id/context_menu_buttons"
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:layout_gravity="bottom">
+            android:layout_height="54dp">
 
             <ImageButton
                 android:id="@+id/context_menu_route_button"
@@ -169,7 +162,7 @@
                 android:layout_weight="1"
                 android:scaleType="center"
                 android:background="?attr/dashboard_button"
-                android:src="@drawable/ic_action_core_overflow_dark"/>
+                android:src="@drawable/ic_overflow_menu_white"/>
 
         </LinearLayout>
 
@@ -186,6 +179,15 @@
 
 
         </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/context_menu_bottom_border"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:background="?attr/bg_map_context_menu"
+        android:orientation="vertical">
 
     </LinearLayout>
 
