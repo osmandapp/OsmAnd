@@ -3,6 +3,7 @@ dist/
 res/values/no_translate.xml
 assets/specialphrases/*
 assets/voice/*
+assets/fonts/*
 gen/
 local.properties
 raw/
