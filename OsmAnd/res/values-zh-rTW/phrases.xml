@@ -940,7 +940,7 @@
 	<string name="poi_access_permissive">容許通行</string>
 	<string name="poi_access_customers">顧客通行</string>
 	<string name="poi_access_delivery">交貨通行</string>
-	<string name="poi_access_agricultural">農用通路</string>
+	<string name="poi_access_agricultural">農產通路</string>
 
 	<string name="poi_monitoring_station">監測站</string>
 	<string name="poi_capital">首都</string>
