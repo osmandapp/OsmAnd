@@ -1175,4 +1175,12 @@
 	<string name="poi_bunker_silo">Plansilo</string>
 	<string name="poi_brownfield">Forladt industrigrund</string>
 	<string name="poi_greenfield">Byggemodning</string>
+	<string name="poi_wholesale">Engros</string>
+
+	<string name="poi_trade_building_supplies">Byggematerialer</string>
+	<string name="poi_trade_plumbing">VVS materialer</string>
+	<string name="poi_trade_wood">Talmaterialer</string>
+	<string name="poi_trade_agricultural_supplies">Landbrugsmaterialer</string>
+	<string name="poi_trade_tile">Flisematerialer</string>
+
 	</resources>
