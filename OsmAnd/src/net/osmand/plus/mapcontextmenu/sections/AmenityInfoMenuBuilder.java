@@ -1,6 +1,7 @@
-package net.osmand.plus.mapcontextmenu;
+package net.osmand.plus.mapcontextmenu.sections;
 
 import android.content.res.Resources;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -20,32 +21,34 @@ import java.util.Map;
 
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 
-public class InfoSectionBuilder extends BottomSectionBuilder {
+public class AmenityInfoMenuBuilder extends MenuBuilder {
 
 	private final Amenity amenity;
 
-	public InfoSectionBuilder(OsmandApplication app, final Amenity amenity) {
+	public AmenityInfoMenuBuilder(OsmandApplication app, final Amenity amenity) {
 		super(app);
 		this.amenity = amenity;
 	}
 
 	private void buildRow(View view, int iconId, String text) {
+		Resources.Theme theme = view.getContext().getTheme();
 
 		LinearLayout ll = new LinearLayout(view.getContext());
 		ll.setOrientation(LinearLayout.HORIZONTAL);
 		LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT) ;
-		llParams.setMargins(0, dpToPx(10f), 0, dpToPx(10f));
+		//llParams.setMargins(0, dpToPx(14f), 0, dpToPx(14f));
 		ll.setLayoutParams(llParams);
 
 		// Icon
 		LinearLayout llIcon = new LinearLayout(view.getContext());
 		llIcon.setOrientation(LinearLayout.HORIZONTAL);
-		llIcon.setLayoutParams(new LinearLayout.LayoutParams(dpToPx(42f), ViewGroup.LayoutParams.MATCH_PARENT));
+		llIcon.setLayoutParams(new LinearLayout.LayoutParams(dpToPx(72f), dpToPx(48f)));
+		llIcon.setGravity(Gravity.CENTER_VERTICAL);
 		ll.addView(llIcon);
 
 		ImageView icon = new ImageView(view.getContext());
 		LinearLayout.LayoutParams llIconParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT) ;
-		llIconParams.setMargins(dpToPx(12f), 0, 0, 0);
+		llIconParams.setMargins(dpToPx(16f), dpToPx(12f), dpToPx(32f), dpToPx(12f));
 		llIconParams.gravity = Gravity.CENTER_VERTICAL;
 		icon.setLayoutParams(llIconParams);
 		icon.setScaleType(ImageView.ScaleType.CENTER);
@@ -62,11 +65,23 @@ public class InfoSectionBuilder extends BottomSectionBuilder {
 
 		TextView textView  = new TextView(view.getContext());
 
-		LinearLayout.LayoutParams llTextViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-		llTextViewParams.setMargins(dpToPx(10f), 0, dpToPx(10f), 0);
-		llText.setLayoutParams(llTextViewParams);
+//		TypedValue typedValueTextSize = new TypedValue();
+//		theme.resolveAttribute(R.dimen.default_desc_text_size, typedValueTextSize, true);
+//		int textSize = typedValueTextSize.data;
+		textView.setTextSize(14);
+
+//		TypedValue typedValueTextColor = new TypedValue();
+//		theme.resolveAttribute(android.R.attr.textColorSecondary, typedValueTextColor, true);
+//		int textColor = typedValueTextColor.data;
+		//textView.setTextColor(textColor);
+
 		textView.setText(text);
 		//textView.setText("sdf dsaf fsdasdfg adsf asdsfd asdf sdf adsfg asdf sdfa sdf dsf agsfdgd fgsfd sdf asdf adg adf sdf asdf dfgdfsg sdfg adsf asdf asdf sdf SDF ASDF ADSF ASDF ASDF DAF SDAF dfg dsfg dfg sdfg rg rth sfghs dfgs dfgsdfg adfg dfg sdfg dfs ");
+
+		LinearLayout.LayoutParams llTextViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		llTextViewParams.setMargins(0, 0, dpToPx(10f), 0);
+		llTextViewParams.gravity = Gravity.CENTER_VERTICAL;
+		llText.setLayoutParams(llTextViewParams);
 		llText.addView(textView);
 
 		((LinearLayout)view).addView(ll);
@@ -75,10 +90,10 @@ public class InfoSectionBuilder extends BottomSectionBuilder {
 		LinearLayout.LayoutParams llHorLineParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dpToPx(1f));
 		llHorLineParams.gravity = Gravity.BOTTOM;
 		horizontalLine.setLayoutParams(llHorLineParams);
-		TypedValue typedValue = new TypedValue();
-		Resources.Theme theme = view.getContext().getTheme();
-		theme.resolveAttribute(R.attr.dashboard_divider, typedValue, true);
-		int color = typedValue.data;
+
+		TypedValue typedValueColor = new TypedValue();
+		theme.resolveAttribute(R.attr.dashboard_divider, typedValueColor, true);
+		int color = typedValueColor.data;
 		horizontalLine.setBackgroundColor(color);
 
 		((LinearLayout)view).addView(horizontalLine);
@@ -94,23 +109,27 @@ public class InfoSectionBuilder extends BottomSectionBuilder {
 	}
 
 	@Override
-	public void buildSection(View view) {
+	public void build(View view) {
 
 		MapPoiTypes poiTypes = app.getPoiTypes();
 		for(Map.Entry<String, String> e : amenity.getAdditionalInfo().entrySet()) {
-			int iconId = 0;
+			int iconId;
 			String key = e.getKey();
 			String vl = e.getValue();
 			if(key.startsWith("name:")) {
 				continue;
 			} else if(Amenity.OPENING_HOURS.equals(key)) {
-				iconId = R.drawable.mm_clock; // todo: change icon
+				iconId = R.drawable.ic_action_time;
 			} else if(Amenity.PHONE.equals(key)) {
-				iconId = R.drawable.mm_amenity_telephone; // todo: change icon
+				iconId = R.drawable.ic_action_call_dark;
 			} else if(Amenity.WEBSITE.equals(key)) {
-				iconId = R.drawable.mm_internet_access; // todo: change icon
+				iconId = R.drawable.ic_world_globe_dark;
 			} else {
-				iconId = R.drawable.ic_type_info; // todo: change icon
+				if (Amenity.DESCRIPTION.equals(key)) {
+					iconId = R.drawable.ic_action_note_dark;
+				} else {
+					iconId = R.drawable.ic_action_info_dark;
+				}
 				AbstractPoiType pt = poiTypes.getAnyPoiAdditionalTypeByKey(e.getKey());
 				if (pt != null) {
 					if(pt instanceof PoiType && !((PoiType) pt).isText()) {

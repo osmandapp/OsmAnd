@@ -12,6 +12,8 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.mapcontextmenu.sections.AmenityInfoMenuController;
+import net.osmand.plus.mapcontextmenu.sections.MenuController;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.OsmandMapLayer;
@@ -144,11 +146,11 @@ public class MapContextMenu {
 			return foundStreetName;
 	}
 
-	public BottomSectionBuilder getBottomSectionBuilder() {
+	public MenuController getMenuController() {
 
 		if (object != null) {
 			if (object instanceof Amenity) {
-				return new InfoSectionBuilder(app, (Amenity)object);
+				return new AmenityInfoMenuController(app, (Amenity)object);
 			}
 		}
 
