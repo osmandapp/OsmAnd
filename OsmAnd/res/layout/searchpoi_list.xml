@@ -76,6 +76,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/gpx_small_text_margin"
                 android:textColor="?android:textColorSecondary"
+                android:ellipsize="end"
                 android:textSize="@dimen/default_sub_text_size" />
         </LinearLayout>
     </LinearLayout>
