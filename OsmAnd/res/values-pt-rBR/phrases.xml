@@ -1158,4 +1158,12 @@
 	<string name="poi_content_salt">Sal (conteúdo)</string>
 	<string name="poi_content_grain">Grão (conteúdo)</string>
 
+	<string name="poi_wholesale">Atacado</string>
+
+	<string name="poi_trade_building_supplies">Materiais de construção</string>
+	<string name="poi_trade_plumbing">Material de canalização</string>
+	<string name="poi_trade_agricultural_supplies">Suprimentos agrícolas</string>
+	<string name="poi_trade_wood">Suprimentos de madeira</string>
+	<string name="poi_trade_tile">Suprimentos de telha</string>
+
 	</resources>
