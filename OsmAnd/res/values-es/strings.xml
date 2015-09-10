@@ -2186,4 +2186,5 @@
 	<string name="recent_places">Lugares recientes</string>
 	<string name="favourites">Favoritos</string>
 <string name="poi_action_delete">borrar</string>
-	</resources>
+	<string name="saved_at_time">Guardado exitosamente en: %1$s</string>
+</resources>
