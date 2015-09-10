@@ -1040,7 +1040,7 @@
 
 	<string name="poi_recycling_cardboard">Cartón</string>
 	<string name="poi_recycling_hardcore">Escombros</string>
-	<string name="poi_recycling_chipboard">Conglomerado</string>
+	<string name="poi_recycling_chipboard">Cartón prensado</string>
 	<string name="poi_mill_pond">Laguna de molino</string>
 	<string name="poi_twitter">Twitter</string>
 	<string name="poi_skype">Skype</string>
@@ -1128,7 +1128,7 @@
 	<string name="poi_denomination_united_reformed">Reformada unida</string>
 	<string name="poi_denomination_reformed">Reformado</string>
 	<string name="poi_denomination_united">Unido</string>
-	<string name="poi_denomination_quaker">cuáquero</string>
+	<string name="poi_denomination_quaker">Cuáquero</string>
 	<string name="poi_denomination_shaktism">Shaktismo</string>
 	<string name="poi_denomination_uniting">Uniendo</string>
 	<string name="poi_denomination_wesleyan">Wesleyan</string>
