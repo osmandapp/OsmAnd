@@ -1,8 +1,6 @@
 package net.osmand.plus.mapcontextmenu.sections;
 
 import android.content.res.Resources;
-import android.text.SpannableString;
-import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -26,7 +24,7 @@ import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 
 public class AmenityInfoMenuBuilder extends MenuBuilder {
 
-	private static float SHADOW_HEIGHT = 6f; // in dp
+	private static final float SHADOW_HEIGHT = 6f; // in dp
 
 	private final Amenity amenity;
 
@@ -53,7 +51,7 @@ public class AmenityInfoMenuBuilder extends MenuBuilder {
 
 		ImageView icon = new ImageView(view.getContext());
 		LinearLayout.LayoutParams llIconParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT) ;
-		llIconParams.setMargins(dpToPx(16f), firstRow ? dpToPx(12f) - dpToPx(SHADOW_HEIGHT) : dpToPx(12f), dpToPx(32f), dpToPx(12f));
+		llIconParams.setMargins(dpToPx(16f), firstRow ? dpToPx(12f) - dpToPx(SHADOW_HEIGHT / 2f) : dpToPx(12f), dpToPx(32f), dpToPx(12f));
 		llIconParams.gravity = Gravity.CENTER_VERTICAL;
 		icon.setLayoutParams(llIconParams);
 		icon.setScaleType(ImageView.ScaleType.CENTER);

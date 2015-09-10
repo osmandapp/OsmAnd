@@ -85,10 +85,19 @@ public class MapContextMenuFragment extends Fragment {
 		*/
 	}
 
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		getCtxMenu().saveMenuState(outState);
+	}
+
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
+
+		if (savedInstanceState != null)
+			getCtxMenu().restoreMenuState(savedInstanceState);
 
 		view = inflater.inflate(R.layout.map_context_menu_fragment, container, false);
 
@@ -425,7 +434,7 @@ public class MapContextMenuFragment extends Fragment {
 	}
 
 	private MapContextMenu getCtxMenu() {
-		return ((MapActivity)getActivity()).getContextMenu();
+		return getMapActivity().getContextMenu();
 	}
 
 	private MapActivity getMapActivity() {
