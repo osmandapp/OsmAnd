@@ -437,14 +437,14 @@
 	<string name="poi_chalet">Шале</string>
 
 	<string name="poi_place_of_worship">Место поклонения</string>
-	<string name="poi_religion_christian">Храм, церковь (часовня)</string>
-	<string name="poi_religion_jewish">Синагога</string>
-	<string name="poi_religion_muslim">Мечеть</string>
-	<string name="poi_religion_sikh">Место поклонения: сикхизм</string>
-	<string name="poi_religion_buddhist">Место поклонения: буддизм</string>
-	<string name="poi_religion_hindu">Место поклонения: индуизм</string>
-	<string name="poi_religion_shinto">Место поклонения: синтоизм</string>
-	<string name="poi_religion_taoist">Место поклонения: даосизм</string>
+	<string name="poi_religion_christian">Христианство</string>
+	<string name="poi_religion_jewish">Иудаизм</string>
+	<string name="poi_religion_muslim">Мусульманство</string>
+	<string name="poi_religion_sikh">Сикхизм</string>
+	<string name="poi_religion_buddhist">Буддизм</string>
+	<string name="poi_religion_hindu">Индуизм</string>
+	<string name="poi_religion_shinto">Синтоизм</string>
+	<string name="poi_religion_taoist">Даосизм</string>
 	<string name="poi_monastery">Монастырь</string>
 	<string name="poi_historic_monastery">Исторический монастырь</string>
 	<string name="poi_wayside_cross">Придорожный крест</string>
