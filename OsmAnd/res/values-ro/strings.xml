@@ -1677,4 +1677,11 @@
 	<string name="rendering_value_default13_name">Implicit(13)</string>
 	<string name="rendering_value_defaultTranslucentCyan_name">Implicit(cyan transparent)</string>
     <string name="rendering_attr_currentTrackColor_name">Culoare GPX</string>
-    </resources>
+    <string name="plugin_settings">Pluginuri</string>
+	<string name="routing_attr_avoid_shuttle_train_name">Evita transfer tren</string>
+	<string name="traffic_warning_hazard">Pericol</string>
+    <string name="routing_attr_avoid_shuttle_train_description">Evita transfer tren</string>
+    <string name="no_updates_available">Nu sunt disponibile update-uri.</string>
+    <string name="rendering_attr_currentTrackWidth_name">Lățime GPX</string>
+    <string name="download_live_updates">Update-uri în timp real</string>
+	</resources>
