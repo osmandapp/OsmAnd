@@ -56,7 +56,7 @@ public class AdvancedDataFragment extends Fragment {
 
 		deleteDrawable = ((OsmandApplication) getActivity().getApplication()).getIconsCache()
 				.getPaintedContentIcon(R.drawable.ic_action_remove_dark,
-						getActivity().getResources().getColor(R.color.icon_color_light));
+						getActivity().getResources().getColor(R.color.dash_search_icon_dark));
 		TextView nameTextView = (TextView) view.findViewById(R.id.nameTextView);
 		TextView amenityTagTextView = (TextView) view.findViewById(R.id.amenityTagTextView);
 		TextView amenityTextView = (TextView) view.findViewById(R.id.amenityTextView);

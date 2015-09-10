@@ -45,6 +45,8 @@ import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.List;
 
 import gnu.trove.list.array.TIntArrayList;
@@ -325,6 +327,11 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 					SavingTrackHelper helper = app.getSavingTrackHelper();
 					helper.saveDataToGpx(app.getAppCustomization().getTracksDir());
 					helper.close();
+					DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(app);
+					final String formattedTime =
+							timeFormat.format(new Date(helper.getLastTimeUpdated()));
+					showNotification(app, String.format(app.getString(R.string.saved_at_time),
+							formattedTime));
 				} finally {
 					isSaving = false;
 				}
@@ -345,7 +352,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		}
 	}
 
-	public void startGPXMonitoring(Activity map) {
+	public void startGPXMonitoring(final Activity map) {
 		final ValueHolder<Integer> vs = new ValueHolder<Integer>();
 		final ValueHolder<Boolean> choice = new ValueHolder<Boolean>();
 		vs.value = settings.SAVE_GLOBAL_TRACK_INTERVAL.get();
@@ -364,7 +371,11 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 					settings.SERVICE_OFF_INTERVAL.set(settings.SAVE_GLOBAL_TRACK_INTERVAL.get());
 				}
 
-				app.startNavigationService(NavigationService.USED_BY_GPX);		
+				app.startNavigationService(NavigationService.USED_BY_GPX);
+
+
+				showNotification(map, null);
+
 			}
 		};
 		if(choice.value) {
@@ -379,38 +390,32 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 						}
 					});
 		}
+	}
 
-		String stop = map.getResources().getString(R.string.shared_string_control_stop);
+	private static void showNotification(Context context, String contentText) {
+		String stop = context.getResources().getString(R.string.shared_string_control_stop);
 		Intent stopIntent = new Intent(NavigationService.OSMAND_STOP_SERVICE_ACTION);
-		PendingIntent stopPendingIntent = PendingIntent.getBroadcast(map, 0, stopIntent,
+		PendingIntent stopPendingIntent = PendingIntent.getBroadcast(context, 0, stopIntent,
 				PendingIntent.FLAG_UPDATE_CURRENT);
-		String save = map.getResources().getString(R.string.shared_string_save);
+		String save = context.getResources().getString(R.string.shared_string_save);
 		Intent saveIntent = new Intent(OSMAND_SAVE_SERVICE_ACTION);
-		PendingIntent savePendingIntent = PendingIntent.getBroadcast(map, 0, saveIntent,
+		PendingIntent savePendingIntent = PendingIntent.getBroadcast(context, 0, saveIntent,
 				PendingIntent.FLAG_UPDATE_CURRENT);
 
-		BroadcastReceiver saveBroadcastReceiver = new BroadcastReceiver() {
-			@Override
-			public void onReceive(Context context, Intent intent) {
-				final OsmandMonitoringPlugin plugin = OsmandPlugin
-						.getEnabledPlugin(OsmandMonitoringPlugin.class);
-				if (plugin != null) {
-					plugin.saveCurrentTrack();
-				}
-			}
-		};
-		map.registerReceiver(saveBroadcastReceiver, new IntentFilter(OSMAND_SAVE_SERVICE_ACTION));
+		BroadcastReceiver saveBroadcastReceiver = new SaveBroadcastReceiver();
+		context.registerReceiver(saveBroadcastReceiver, new IntentFilter(OSMAND_SAVE_SERVICE_ACTION));
 
 		final NotificationCompat.Builder notificationBuilder =
-				new android.support.v7.app.NotificationCompat.Builder(map)
-						.setContentTitle(map.getResources().getString(R.string.map_widget_monitoring))
-				.setSmallIcon(R.drawable.ic_action_polygom_dark)
+				new android.support.v7.app.NotificationCompat.Builder(context)
+						.setContentTitle(context.getResources().getString(R.string.map_widget_monitoring))
+						.setContentText(contentText)
+						.setSmallIcon(R.drawable.ic_action_polygom_dark)
 //			.setLargeIcon(Helpers.getBitmap(R.drawable.mirakel, getBaseContext()))
-				.setOngoing(true)
-				.addAction(R.drawable.ic_action_rec_stop, stop, stopPendingIntent)
-				.addAction(R.drawable.ic_action_save, save, savePendingIntent);
+						.setOngoing(true)
+						.addAction(R.drawable.ic_action_rec_stop, stop, stopPendingIntent)
+						.addAction(R.drawable.ic_action_save, save, savePendingIntent);
 		NotificationManager mNotificationManager =
-				(NotificationManager) map.getSystemService(Context.NOTIFICATION_SERVICE);
+				(NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 		mNotificationManager.notify(notificationId, notificationBuilder.build());
 	}
 
@@ -512,5 +517,16 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	public DashFragmentData getCardFragment() {
 		return new DashFragmentData(DashTrackFragment.TAG, DashTrackFragment.class,
 				R.string.record_plugin_name, 11);
+	}
+
+	private static class SaveBroadcastReceiver extends BroadcastReceiver {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			final OsmandMonitoringPlugin plugin = OsmandPlugin
+					.getEnabledPlugin(OsmandMonitoringPlugin.class);
+			if (plugin != null) {
+				plugin.saveCurrentTrack();
+			}
+		}
 	}
 }

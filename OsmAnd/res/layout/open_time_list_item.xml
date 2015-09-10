@@ -32,7 +32,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/divider_color"/>
+            android:background="?android:textColorSecondary"/>
     </LinearLayout>
 
     <LinearLayout
@@ -59,13 +59,13 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/divider_color"/>
+                android:background="?android:textColorSecondary"/>
         </LinearLayout>
 
         <View
             android:layout_width="16dp"
             android:layout_height="1dp"
-            android:background="@color/divider_color"/>
+            android:background="?android:textColorSecondary"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -84,7 +84,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/divider_color"/>
+                android:background="?android:textColorSecondary"/>
         </LinearLayout>
     </LinearLayout>
 

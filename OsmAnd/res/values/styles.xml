@@ -130,21 +130,17 @@
     </style>
 
     <style name="OsmandDarkTheme.DarkActionbar">
-        <item name="android:textColorPrimary">@color/color_white</item>
-        <item name="android:textColorSecondary">@color/inactive_item_orange</item>
-        <item name="android:textColorHint">@color/inactive_item_orange</item>
         <item name="colorAccent">@color/color_white</item>
-        <!--<item name="actionMenuTextColor">@color/color_white</item>-->
+        <item name="android:textColorSecondary">@color/dash_search_icon_dark</item>
     </style>
 
     <style name="OsmandDarkTheme.Toolbar">
-        <item name="android:textColorPrimary">@color/color_white</item>
-        <item name="android:textColorSecondary">@color/color_white</item>
+        <item name="android:textColorSecondary">@color/dash_search_icon_dark</item>
     </style>
 
     <style name="OsmandDarkTheme.NewAppTheme">
+        <item name="android:textColorSecondary">@color/dash_search_icon_dark</item>
         <item name="colorAccent">@color/osmand_orange</item>
-        <item name="android:textColorSecondary">@color/divider_color</item>
     </style>
 
     <style name="OsmandDarkTheme" parent="Theme.AppCompat">
@@ -184,7 +180,7 @@
         <item name="android:textColorPrimary">@color/color_white</item>
         <item name="spinnerItemTextColor">@color/color_white</item>
         <item name="spinnerListBackground">@color/spinner_list_background_dark</item>
-        <item name="colorButtonNormal">@color/bg_color_dark</item>
+        <item name="colorButtonNormal">@color/actionbar_dark_color</item>
 
         <item name="android:actionModeBackground">@color/actionbar_dark_color</item>
         <item name="android:actionBarStyle">@style/Widget.Styled.ActionBarDark</item>
