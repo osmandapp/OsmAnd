@@ -52,21 +52,29 @@ public class BasicDataFragment extends Fragment {
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		IconsCache iconsCache = ((OsmandApplication) getActivity().getApplication()).getIconsCache();
 		View view = inflater.inflate(R.layout.fragment_edit_poi_normal, container, false);
 
+		IconsCache iconsCache = getMyApplication().getIconsCache();
+		int iconColor = getResources().getColor(R.color.dash_search_icon_dark);
+
 		ImageView streetImageView = (ImageView) view.findViewById(R.id.streetImageView);
-		streetImageView.setImageDrawable(iconsCache.getContentIcon(R.drawable.ic_action_street_name));
+		streetImageView.setImageDrawable(
+				iconsCache.getPaintedContentIcon(R.drawable.ic_action_street_name, iconColor));
 		ImageView houseNumberImageView = (ImageView) view.findViewById(R.id.houseNumberImageView);
-		houseNumberImageView.setImageDrawable(iconsCache.getContentIcon(R.drawable.ic_action_building_number));
+		houseNumberImageView.setImageDrawable(
+				iconsCache.getPaintedContentIcon(R.drawable.ic_action_building_number, iconColor));
 		ImageView phoneImageView = (ImageView) view.findViewById(R.id.phoneImageView);
-		phoneImageView.setImageDrawable(iconsCache.getContentIcon(R.drawable.ic_action_call_dark));
+		phoneImageView.setImageDrawable(
+				iconsCache.getPaintedContentIcon(R.drawable.ic_action_call_dark, iconColor));
 		ImageView webSiteImageView = (ImageView) view.findViewById(R.id.webSiteImageView);
-		webSiteImageView.setImageDrawable(iconsCache.getContentIcon(R.drawable.ic_world_globe_dark));
+		webSiteImageView.setImageDrawable(
+				iconsCache.getPaintedContentIcon(R.drawable.ic_world_globe_dark, iconColor));
 		ImageView descriptionImageView = (ImageView) view.findViewById(R.id.descriptionImageView);
-		descriptionImageView.setImageDrawable(iconsCache.getContentIcon(R.drawable.ic_action_description));
+		descriptionImageView.setImageDrawable(
+				iconsCache.getPaintedContentIcon(R.drawable.ic_action_description, iconColor));
 		ImageView openingHoursImageView = (ImageView) view.findViewById(R.id.openingHoursImageView);
-		openingHoursImageView.setImageDrawable(iconsCache.getContentIcon(R.drawable.ic_action_time));
+		openingHoursImageView.setImageDrawable(
+				iconsCache.getPaintedContentIcon(R.drawable.ic_action_time, iconColor));
 
 		streetEditText = (EditText) view.findViewById(R.id.streetEditText);
 		streetEditText.addTextChangedListener(new MyOnFocusChangeListener(getData(),
@@ -96,10 +104,10 @@ public class BasicDataFragment extends Fragment {
 			}
 		});
 		LinearLayout openHoursContainer = (LinearLayout) view.findViewById(R.id.openHoursContainer);
-		Drawable clockDrawable = iconsCache.getContentIcon(R.drawable.ic_action_time);
+		Drawable clockDrawable = iconsCache
+				.getPaintedContentIcon(R.drawable.ic_action_time, iconColor);
 		Drawable deleteDrawable = iconsCache
-				.getPaintedContentIcon(R.drawable.ic_action_remove_dark,
-						getActivity().getResources().getColor(R.color.icon_color_light));
+				.getPaintedContentIcon(R.drawable.ic_action_remove_dark, iconColor);
 		if (savedInstanceState != null && savedInstanceState.containsKey(OPENING_HOURS)) {
 			mOpeningHoursAdapter = new OpeningHoursAdapter(
 					(OpeningHoursParser.OpeningHours) savedInstanceState.getSerializable(OPENING_HOURS),
@@ -110,6 +118,10 @@ public class BasicDataFragment extends Fragment {
 					openHoursContainer, getData(), clockDrawable, deleteDrawable);
 		}
 		return view;
+	}
+
+	private OsmandApplication getMyApplication() {
+		return (OsmandApplication) getActivity().getApplication();
 	}
 
 	@Override

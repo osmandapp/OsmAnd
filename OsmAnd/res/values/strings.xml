@@ -2260,4 +2260,5 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="working_days">Working days</string>
 	<string name="recent_places">Recent places</string>
 	<string name="favourites">Favourites</string>
+	<string name="saved_at_time">Successfully saved at: %1$s</string>
 </resources>

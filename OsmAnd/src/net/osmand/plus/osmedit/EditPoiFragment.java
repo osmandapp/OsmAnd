@@ -200,7 +200,7 @@ public class EditPoiFragment extends DialogFragment {
 		onlineDocumentationButton.setImageDrawable(
 				getMyApplication().getIconsCache()
 						.getPaintedContentIcon(R.drawable.ic_action_help,
-								getResources().getColor(R.color.inactive_item_orange)));
+								getResources().getColor(R.color.dash_search_icon_dark)));
 		final ImageButton poiTypeButton = (ImageButton) view.findViewById(R.id.poiTypeButton);
 		poiTypeButton.setOnClickListener(new View.OnClickListener() {
 			@Override
