@@ -2090,4 +2090,5 @@
 <string name="rendering_value_boldOutline_name">Жирный контур</string>
     <string name="working_days">Рабочие дни</string>
 	<string name="favourites">Избранное</string>
+<string name="saved_at_time">Успешно сохранён в: %1$s</string>
 </resources>
