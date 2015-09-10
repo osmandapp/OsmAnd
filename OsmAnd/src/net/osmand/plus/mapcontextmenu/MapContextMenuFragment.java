@@ -25,6 +25,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.sections.MenuController;
+import net.osmand.plus.views.OsmandMapTileView;
 
 import org.apache.commons.logging.Log;
 
@@ -45,6 +46,7 @@ public class MapContextMenuFragment extends Fragment {
 	MenuController menuController;
 
 	private int menuTopHeight;
+	private int menuTopShadowHeight;
 	private int menuButtonsHeight;
 	private int menuBottomViewHeight;
 	private int menuFullHeight;
@@ -97,6 +99,7 @@ public class MapContextMenuFragment extends Fragment {
 			public void onGlobalLayout() {
 
 				menuTopHeight = view.findViewById(R.id.context_menu_top_view).getHeight();
+				menuTopShadowHeight = view.findViewById(R.id.context_menu_top_shadow).getHeight();
 				menuButtonsHeight = view.findViewById(R.id.context_menu_buttons).getHeight();
 				menuBottomViewHeight = view.findViewById(R.id.context_menu_bottom_view).getHeight();
 				menuFullHeight = view.findViewById(R.id.context_menu_main).getHeight();
@@ -130,11 +133,9 @@ public class MapContextMenuFragment extends Fragment {
 			}
 		});
 
-		View topView = view.findViewById(R.id.context_menu_top_view);
 		mainView = view.findViewById(R.id.context_menu_main);
 
-		topView.setOnTouchListener(new View.OnTouchListener() {
-
+		View.OnTouchListener slideTouchListener = new View.OnTouchListener() {
 			private float dy;
 			private float dyMain;
 			private int destinationState;
@@ -144,11 +145,29 @@ public class MapContextMenuFragment extends Fragment {
 
 			private float velocityY;
 
+			private float startX;
+			private float startY;
+			private long lastTouchDown;
+			private final int CLICK_ACTION_THRESHHOLD = 200;
+
+			private boolean isClick(float endX, float endY) {
+				float differenceX = Math.abs(startX - endX);
+				float differenceY = Math.abs(startY - endY);
+				if (differenceX > 3 || differenceY > 3 || System.currentTimeMillis() - lastTouchDown > CLICK_ACTION_THRESHHOLD) {
+					return false;
+				}
+				return true;
+			}
+
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 
 				switch (event.getAction()) {
 					case MotionEvent.ACTION_DOWN:
+						startX = event.getX();
+						startY = event.getY();
+						lastTouchDown = System.currentTimeMillis();
+
 						dy = event.getY();
 						dyMain = mainView.getY();
 						velocity = VelocityTracker.obtain();
@@ -177,6 +196,8 @@ public class MapContextMenuFragment extends Fragment {
 
 					case MotionEvent.ACTION_UP:
 					case MotionEvent.ACTION_CANCEL:
+						float endX = event.getX();
+						float endY = event.getY();
 
 						slidingUp = Math.abs(velocityY) > 500 && (mainView.getY() - dyMain) < -50;
 						slidingDown = Math.abs(velocityY) > 500 && (mainView.getY() - dyMain) > 50;
@@ -203,7 +224,7 @@ public class MapContextMenuFragment extends Fragment {
 								posY = view.getHeight() - menuFullHeight;
 								break;
 							case MenuController.MenuState.FULL_SCREEN:
-								posY = 0;
+								posY = -menuTopShadowHeight;
 								break;
 							default:
 								break;
@@ -222,20 +243,24 @@ public class MapContextMenuFragment extends Fragment {
 							bottomBorder.animate().y(posY + menuFullHeight).setDuration(200).setInterpolator(new DecelerateInterpolator()).start();
 						}
 
-
-						/*
-						lp = shadowView.getLayoutParams();
-						lp.height = view.getHeight() - (int)posY;
-						shadowView.setLayoutParams(lp);
-						shadowView.requestLayout();
-						*/
+						// OnClick event
+						if (isClick(endX, endY)) {
+							OsmandMapTileView mapView = getMapActivity().getMapView();
+							mapView.getAnimatedDraggingThread().startMoving(getCtxMenu().getPointDescription().getLat(), getCtxMenu().getPointDescription().getLon(),
+									mapView.getZoom(), true);
+						}
 
 						break;
 
 				}
 				return true;
 			}
-		});
+		};
+
+		View topView = view.findViewById(R.id.context_menu_top_view);
+		topView.setOnTouchListener(slideTouchListener);
+		View topShadowView = view.findViewById(R.id.context_menu_top_shadow);
+		topShadowView.setOnTouchListener(slideTouchListener);
 
 		// Left icon
 		IconsCache iconsCache = getMyApplication().getIconsCache();
@@ -357,7 +382,7 @@ public class MapContextMenuFragment extends Fragment {
 				break;
 			case MenuController.MenuState.FULL_SCREEN:
 				shadowViewHeight = 0;
-				bottomBorderHeight = view.getHeight() - menuFullHeight;
+				bottomBorderHeight = view.getHeight() - menuFullHeight + menuTopShadowHeight;
 				break;
 			default:
 				break;
@@ -375,6 +400,8 @@ public class MapContextMenuFragment extends Fragment {
 		lp = mainView.getLayoutParams();
 		lp.height = menuFullHeight;
 		mainView.setLayoutParams(lp);
+
+		mainView.bringToFront();
 
 	}
 

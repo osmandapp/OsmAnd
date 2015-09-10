@@ -26,6 +26,8 @@ import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 
 public class AmenityInfoMenuBuilder extends MenuBuilder {
 
+	private static float SHADOW_HEIGHT = 6f; // in dp
+
 	private final Amenity amenity;
 
 	public AmenityInfoMenuBuilder(OsmandApplication app, final Amenity amenity) {
@@ -33,7 +35,7 @@ public class AmenityInfoMenuBuilder extends MenuBuilder {
 		this.amenity = amenity;
 	}
 
-	private void buildRow(View view, int iconId, String text) {
+	private void buildRow(View view, int iconId, String text, boolean firstRow) {
 		boolean light = app.getSettings().isLightContent();
 
 		LinearLayout ll = new LinearLayout(view.getContext());
@@ -45,13 +47,13 @@ public class AmenityInfoMenuBuilder extends MenuBuilder {
 		// Icon
 		LinearLayout llIcon = new LinearLayout(view.getContext());
 		llIcon.setOrientation(LinearLayout.HORIZONTAL);
-		llIcon.setLayoutParams(new LinearLayout.LayoutParams(dpToPx(72f), dpToPx(48f)));
+		llIcon.setLayoutParams(new LinearLayout.LayoutParams(dpToPx(72f), firstRow ? dpToPx(48f) - dpToPx(SHADOW_HEIGHT) : dpToPx(48f)));
 		llIcon.setGravity(Gravity.CENTER_VERTICAL);
 		ll.addView(llIcon);
 
 		ImageView icon = new ImageView(view.getContext());
 		LinearLayout.LayoutParams llIconParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT) ;
-		llIconParams.setMargins(dpToPx(16f), dpToPx(12f), dpToPx(32f), dpToPx(12f));
+		llIconParams.setMargins(dpToPx(16f), firstRow ? dpToPx(12f) - dpToPx(SHADOW_HEIGHT) : dpToPx(12f), dpToPx(32f), dpToPx(12f));
 		llIconParams.gravity = Gravity.CENTER_VERTICAL;
 		icon.setLayoutParams(llIconParams);
 		icon.setScaleType(ImageView.ScaleType.CENTER);
@@ -65,18 +67,22 @@ public class AmenityInfoMenuBuilder extends MenuBuilder {
 
 		TextView textView  = new TextView(view.getContext());
 		LinearLayout.LayoutParams llTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-		llTextParams.setMargins(0, dpToPx(8f), 0, dpToPx(8f));
+		llTextParams.setMargins(0, firstRow ? dpToPx(8f) - dpToPx(SHADOW_HEIGHT) : dpToPx(8f), 0, dpToPx(8f));
 		textView.setLayoutParams(llTextParams);
-		textView.setTextSize(18); // todo: create constant
+		textView.setTextSize(16); // todo: create constant
 		textView.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_info_text_light : R.color.ctx_menu_info_text_dark));
 
-		SpannableString spannable = new SpannableString(text);
-		Linkify.addLinks(spannable, Linkify.ALL);
-		textView.setClickable(true);
-		textView.setMovementMethod(LinkMovementMethod.getInstance());
+		//text = "http://ru.wikipedia.org/wiki/Храм Святого Розария (Владимир)";
+
+		//SpannableString spannable = new SpannableString(text);
+		//Linkify.addLinks(spannable, Linkify.ALL);
+		//textView.setClickable(true);
+		//textView.setMovementMethod(LinkMovementMethod.getInstance());
+		textView.setAutoLinkMask(Linkify.ALL);
+		//textView.setSingleLine();
 		textView.setLinksClickable(true);
 
-		textView.setText(spannable);
+		textView.setText(text);
 		//textView.setText("sdf dsaf fsdasdfg adsf asdsfd asdf sdf adsfg asdf sdfa sdf dsf agsfdgd fgsfd sdf asdf adg adf sdf asdf dfgdfsg sdfg adsf asdf asdf sdf SDF ASDF ADSF ASDF ASDF DAF SDAF dfg dsfg dfg sdfg rg rth sfghs dfgs dfgsdfg adfg dfg sdfg dfs ");
 
 		LinearLayout.LayoutParams llTextViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -108,6 +114,8 @@ public class AmenityInfoMenuBuilder extends MenuBuilder {
 
 	@Override
 	public void build(View view) {
+
+		boolean firstRow = true;
 
 		MapPoiTypes poiTypes = app.getPoiTypes();
 		for(Map.Entry<String, String> e : amenity.getAdditionalInfo().entrySet()) {
@@ -141,7 +149,8 @@ public class AmenityInfoMenuBuilder extends MenuBuilder {
 				}
 			}
 
-			buildRow(view, iconId, vl);
+			buildRow(view, iconId, vl, firstRow);
+			firstRow = false;
 		}
 	}
 }
