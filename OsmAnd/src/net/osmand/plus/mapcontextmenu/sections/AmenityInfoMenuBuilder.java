@@ -1,6 +1,9 @@
 package net.osmand.plus.mapcontextmenu.sections;
 
 import android.content.res.Resources;
+import android.text.SpannableString;
+import android.text.method.LinkMovementMethod;
+import android.text.util.Linkify;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -58,16 +61,22 @@ public class AmenityInfoMenuBuilder extends MenuBuilder {
 		// Text
 		LinearLayout llText = new LinearLayout(view.getContext());
 		llText.setOrientation(LinearLayout.VERTICAL);
-		LinearLayout.LayoutParams llTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-		llTextParams.setMargins(0, dpToPx(4f), 0, dpToPx(4f));
-		llText.setLayoutParams(llTextParams);
 		ll.addView(llText);
 
 		TextView textView  = new TextView(view.getContext());
+		LinearLayout.LayoutParams llTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		llTextParams.setMargins(0, dpToPx(8f), 0, dpToPx(8f));
+		textView.setLayoutParams(llTextParams);
 		textView.setTextSize(18); // todo: create constant
 		textView.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_info_text_light : R.color.ctx_menu_info_text_dark));
 
-		textView.setText(text);
+		SpannableString spannable = new SpannableString(text);
+		Linkify.addLinks(spannable, Linkify.ALL);
+		textView.setClickable(true);
+		textView.setMovementMethod(LinkMovementMethod.getInstance());
+		textView.setLinksClickable(true);
+
+		textView.setText(spannable);
 		//textView.setText("sdf dsaf fsdasdfg adsf asdsfd asdf sdf adsfg asdf sdfa sdf dsf agsfdgd fgsfd sdf asdf adg adf sdf asdf dfgdfsg sdfg adsf asdf asdf sdf SDF ASDF ADSF ASDF ASDF DAF SDAF dfg dsfg dfg sdfg rg rth sfghs dfgs dfgsdfg adfg dfg sdfg dfs ");
 
 		LinearLayout.LayoutParams llTextViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
