@@ -23,7 +23,6 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.mapcontextmenu.MapContextMenu;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -511,7 +510,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		this.latLon = new LatLon(pointDescription.getLat(), pointDescription.getLon());
 
 		showMapContextMenuMarker();
-		MapContextMenu.getInstance().show(pointDescription, selectedObj);
+		activity.getContextMenu().show(activity, pointDescription, selectedObj);
 	}
 
 
