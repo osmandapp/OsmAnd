@@ -1,5 +1,6 @@
 package net.osmand.data;
 
+import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.Locale;
@@ -15,13 +16,15 @@ import net.osmand.util.Algorithms;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
-public class PointDescription {
+public class PointDescription implements Serializable {
 	private String type = "";
 	private String name = "";
 	private String typeName;
 
 	private double lat = 0;
 	private double lon = 0;
+
+	private static final long serialVersionUID = 4078409090417168638L;
 
 	public static final String POINT_TYPE_FAVORITE = "favorite";
 	public static final String POINT_TYPE_WPT = "wpt";

@@ -1,5 +1,6 @@
 package net.osmand.plus.mapcontextmenu;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 import net.osmand.binary.RouteDataObject;
@@ -28,6 +29,9 @@ public class MapContextMenu {
 	private Object object;
 
 	private String foundStreetName;
+
+	private static final String KEY_CTX_MENU_OBJECT = "key_ctx_menu_object";
+	private static final String KEY_CTX_MENU_POINT_DESC = "key_ctx_menu_point_desc";
 
 	public boolean isMenuVisible(MapActivity mapActivity) {
 		return mapActivity.getSupportFragmentManager().findFragmentByTag("MapContextMenuFragment") != null;
@@ -167,5 +171,20 @@ public class MapContextMenu {
 		}
 
 		mapActivity.getMapActions().contextMenuPoint(pointDescription.getLat(), pointDescription.getLon(), menuAdapter, object);
+	}
+
+	public void saveMenuState(Bundle bundle) {
+		if (object != null) {
+			if (object instanceof Amenity)
+				bundle.putSerializable(KEY_CTX_MENU_OBJECT, (Amenity)object);
+		}
+		bundle.putSerializable(KEY_CTX_MENU_POINT_DESC, pointDescription);
+	}
+
+	public void restoreMenuState(Bundle bundle) {
+		object = bundle.getSerializable(KEY_CTX_MENU_OBJECT);
+		Object pDescObj = bundle.getSerializable(KEY_CTX_MENU_POINT_DESC);
+		if (pDescObj != null)
+			pointDescription = (PointDescription)pDescObj;
 	}
 }
