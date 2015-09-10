@@ -241,7 +241,7 @@ public class MapContextMenuFragment extends Fragment {
 		IconsCache iconsCache = getMyApplication().getIconsCache();
 		boolean light = getMyApplication().getSettings().isLightContent();
 
-		int iconId = MapContextMenu.getInstance().getLeftIconId();
+		int iconId = getCtxMenu().getLeftIconId();
 
 		final View iconLayout = view.findViewById(R.id.context_menu_icon_layout);
 		final ImageView iconView = (ImageView)view.findViewById(R.id.context_menu_icon_view);
@@ -254,11 +254,11 @@ public class MapContextMenuFragment extends Fragment {
 
 		// Text line 1
 		TextView line1 = (TextView) view.findViewById(R.id.context_menu_line1);
-		line1.setText(MapContextMenu.getInstance().getAddressStr());
+		line1.setText(getCtxMenu().getAddressStr());
 
 		// Text line 2
 		TextView line2 = (TextView) view.findViewById(R.id.context_menu_line2);
-		line2.setText(MapContextMenu.getInstance().getLocationStr());
+		line2.setText(getCtxMenu().getLocationStr(getMapActivity()));
 
 		// Close button
 		final ImageView closeButtonView = (ImageView)view.findViewById(R.id.context_menu_close_btn_view);
@@ -279,7 +279,7 @@ public class MapContextMenuFragment extends Fragment {
 		buttonNavigate.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				MapContextMenu.getInstance().buttonNavigatePressed();
+				getCtxMenu().buttonNavigatePressed(getMapActivity());
 			}
 		});
 
@@ -289,7 +289,7 @@ public class MapContextMenuFragment extends Fragment {
 		buttonFavorite.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				MapContextMenu.getInstance().buttonFavoritePressed();
+				getCtxMenu().buttonFavoritePressed(getMapActivity());
 			}
 		});
 
@@ -299,7 +299,7 @@ public class MapContextMenuFragment extends Fragment {
 		buttonShare.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				MapContextMenu.getInstance().buttonSharePressed();
+				getCtxMenu().buttonSharePressed(getMapActivity());
 			}
 		});
 
@@ -309,12 +309,12 @@ public class MapContextMenuFragment extends Fragment {
 		buttonMore.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				MapContextMenu.getInstance().buttonMorePressed();
+				getCtxMenu().buttonMorePressed(getMapActivity());
 			}
 		});
 
 		// Menu controller
-		menuController = MapContextMenu.getInstance().getMenuController();
+		menuController = getCtxMenu().getMenuController();
 		bottomView = view.findViewById(R.id.context_menu_bottom_view);
 		if (menuController != null) {
 			bottomView.setOnTouchListener(new View.OnTouchListener() {
@@ -397,14 +397,22 @@ public class MapContextMenuFragment extends Fragment {
 				.addToBackStack(null).commit();
 	}
 
+	private MapContextMenu getCtxMenu() {
+		return ((MapActivity)getActivity()).getContextMenu();
+	}
+
+	private MapActivity getMapActivity() {
+		return (MapActivity)getActivity();
+	}
+
 	// Utils
-	public int getScreenHeight() {
+	private int getScreenHeight() {
 		DisplayMetrics dm = new DisplayMetrics();
 		getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
 		return dm.heightPixels;
 	}
 
-	public int dpToPx(float dp) {
+	private int dpToPx(float dp) {
 		Resources r = getActivity().getResources();
 		return (int) TypedValue.applyDimension(
 				COMPLEX_UNIT_DIP,

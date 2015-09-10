@@ -62,8 +62,7 @@
                     android:layout_marginRight="12dp"
                     android:text="@string/search_address_building"
                     android:textSize="@dimen/default_list_text_size_large"
-                    android:textColor="?android:textColorPrimary"
-                    android:textStyle="bold"/>
+                    android:textColor="?android:textColorPrimary"/>
 
                 <TextView
                     android:id="@+id/context_menu_line2"
