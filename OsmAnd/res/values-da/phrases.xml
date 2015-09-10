@@ -355,14 +355,14 @@
         <string name="poi_chalet">Udlejningshytte</string>
 
         <string name="poi_place_of_worship">Sted for tilbedelse</string>
-        <string name="poi_religion_christian">Sted for tilbedelse: Kristen</string>
-        <string name="poi_religion_jewish">Sted for tilbedelse: Jødisk</string>
-        <string name="poi_religion_muslim">Sted for tilbedelse: Muslim</string>
-        <string name="poi_religion_sikh">Sted for tilbedelse: Sikh</string>
-        <string name="poi_religion_buddhist">Sted for tilbedelse: Buddhist</string>
-        <string name="poi_religion_hindu">Sted for tilbedelse: Hindu</string>
-        <string name="poi_religion_shinto">Sted for tilbedelse: Shinto</string>
-        <string name="poi_religion_taoist">Sted for tilbedelse: Taoistisk</string>
+        <string name="poi_religion_christian">Kristendom</string>
+        <string name="poi_religion_jewish">Jødedom</string>
+        <string name="poi_religion_muslim">Islam</string>
+        <string name="poi_religion_sikh">Sikhisme</string>
+        <string name="poi_religion_buddhist">Buddhisme</string>
+        <string name="poi_religion_hindu">Hinduisme</string>
+        <string name="poi_religion_shinto">Shinto</string>
+        <string name="poi_religion_taoist">Taoisme</string>
         <string name="poi_monastery">Kloster</string>
         <string name="poi_historic_monastery">Historisk kloster</string>
         <string name="poi_wayside_cross">Vejside kors</string>
@@ -1080,7 +1080,7 @@
 	<string name="poi_financial">Finansiel kontor</string>
 	<string name="poi_foundation">Fondskontor</string>
 	<string name="poi_religion_voodoo">Voodoo</string>
-	<string name="poi_religion_scientologist">Scientolog</string>
+	<string name="poi_religion_scientologist">Scientology</string>
 	<string name="poi_denomination_catholic">Katolsk</string>
 	<string name="poi_denomination_baptist">Baptist</string>
 	<string name="poi_denomination_roman_catholic">Romersk-katolsk</string>
@@ -1117,11 +1117,11 @@
 	<string name="poi_denomination_coptic_orthodox">Koptisk-ortodoks</string>
 	<string name="poi_denomination_mahayana">Mahayana</string>
 
-	<string name="poi_religion_unitarian_universalist">Unitarisk universalistisk</string>
+	<string name="poi_religion_unitarian_universalist">Unitarisk universalisme</string>
 	<string name="poi_religion_multifaith">Multireligiøs</string>
 	<string name="poi_religion_jain">Jainisme</string>
-	<string name="poi_religion_spiritualist">Spiritist</string>
-	<string name="poi_religion_bahai">Bahai</string>
+	<string name="poi_religion_spiritualist">Spiritisme</string>
+	<string name="poi_religion_bahai">Bahaism</string>
 	<string name="poi_religion_pagan">Hedenskab</string>
 	<string name="poi_religion_tenrikyo">Tenrikyo</string>
 	<string name="poi_religion_zoroastrian">Zarathustrisme</string>

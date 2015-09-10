@@ -2185,4 +2185,5 @@
 <string name="working_days">Días laborales</string>
 	<string name="recent_places">Lugares recientes</string>
 	<string name="favourites">Favoritos</string>
-</resources>
+<string name="poi_action_delete">borrar</string>
+	</resources>

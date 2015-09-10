@@ -862,7 +862,7 @@
 	<string name="poi_garden_furniture">Almacén de jardinería</string>
 	<string name="poi_leather">Marroquinería</string>
 	<string name="poi_tyres">Neumáticos</string>
-	<string name="poi_watches">Relojería (watches)</string>
+	<string name="poi_watches">Relojería</string>
 	<string name="poi_games">Juegos</string>
 	<string name="poi_model">Modelos a escala</string>
 	<string name="poi_trophy">Trofeos, premios</string>
@@ -1157,4 +1157,12 @@
 	<string name="poi_content_slurry">Mezcla (contenido)</string>
 	<string name="poi_brownfield">Terreno abandonado</string>
 	<string name="poi_greenfield">Suelo urbanizable</string>
+	<string name="poi_wholesale">Venta mayorista</string>
+
+	<string name="poi_trade_building_supplies">Materiales de construcción</string>
+	<string name="poi_trade_plumbing">Suministros de plomería</string>
+	<string name="poi_trade_wood">Venta de madera</string>
+	<string name="poi_trade_agricultural_supplies">Suministros agrícolas</string>
+	<string name="poi_trade_tile">Venta de azulejos</string>
+
 	</resources>

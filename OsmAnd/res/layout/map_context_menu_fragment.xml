@@ -7,23 +7,17 @@
               android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/context_menu_shadow_layout"
+        android:id="@+id/context_menu_shadow_view"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical">
-
-        <View
-            android:id="@+id/context_menu_shadow_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
-    </LinearLayout>
+        android:layout_weight="0"
+        android:orientation="vertical"/>
 
     <LinearLayout
         android:id="@+id/context_menu_main"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
         android:background="?attr/bg_map_context_menu"
         android:orientation="vertical">
 
@@ -43,11 +37,11 @@
                 <ImageView
                     android:id="@+id/context_menu_icon_view"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical"
+                    android:layout_height="wrap_content"
                     android:scaleType="center"
                     android:layout_marginStart="12dp"
                     android:layout_marginLeft="12dp"
+                    android:layout_marginTop="18dp"
                     android:src="@drawable/ic_action_building_number"/>
 
             </LinearLayout>
@@ -56,7 +50,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginBottom="16dp"
                 android:orientation="vertical">
 
@@ -68,8 +62,7 @@
                     android:layout_marginRight="12dp"
                     android:text="@string/search_address_building"
                     android:textSize="@dimen/default_list_text_size_large"
-                    android:textColor="?android:textColorPrimary"
-                    android:textStyle="bold"/>
+                    android:textColor="?android:textColorPrimary"/>
 
                 <TextView
                     android:id="@+id/context_menu_line2"
@@ -77,7 +70,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="12dp"
                     android:layout_marginRight="12dp"
-                    android:layout_marginTop="3dp"
+                    android:layout_marginTop="4dp"
                     android:text="@string/other_location"
                     android:textColor="?android:textColorSecondary"
                     android:textSize="@dimen/default_desc_text_size"/>
@@ -113,8 +106,7 @@
             android:id="@+id/context_menu_buttons"
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:layout_gravity="bottom">
+            android:layout_height="54dp">
 
             <ImageButton
                 android:id="@+id/context_menu_route_button"
@@ -169,7 +161,7 @@
                 android:layout_weight="1"
                 android:scaleType="center"
                 android:background="?attr/dashboard_button"
-                android:src="@drawable/ic_action_core_overflow_dark"/>
+                android:src="@drawable/ic_overflow_menu_white"/>
 
         </LinearLayout>
 
@@ -177,7 +169,8 @@
             android:id="@+id/context_menu_bottom_view"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="?attr/ctx_menu_info_view_bg">
 
             <View
                 android:layout_width="match_parent"
@@ -186,6 +179,15 @@
 
 
         </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/context_menu_bottom_border"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:background="?attr/ctx_menu_info_view_bg"
+        android:orientation="vertical">
 
     </LinearLayout>
 

@@ -143,7 +143,6 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	
 	
 	public boolean isShowViewAngle() {
-		
 		return showViewAngle;
 	}
 	

@@ -43,14 +43,11 @@
 	<asset source="voice/ru/config.p" destination="voice/ru/_config.p" mode="overwriteOnlyIfExists" />
 	
 	
-	<!-- TODO delete deprecated
-	<asset source="voice/fr-ov/config.p" destination="voice/fr/_config.p" mode="overwriteOnlyIfExists" />
-	<asset source="voice/he-ov/config.p" destination="voice/he/_config.p" mode="overwriteOnlyIfExists" />
-	<asset source="voice/it-Chiara-ov/config.p" destination="voice/it-Chiara/_config.p" mode="overwriteOnlyIfExists" />  
-	<asset source="voice/it-Roberto-ov/config.p" destination="voice/it-Roberto/_config.p" mode="overwriteOnlyIfExists" />
-	<asset source="voice/ru2-ov/config.p" destination="voice/ru2/_config.p" mode="overwriteOnlyIfExists" /> 
-	<asset source="voice/ru3-ov/config.p" destination="voice/ru3/_config.p" mode="overwriteOnlyIfExists" />
-	<asset source="voice/sk-Ruzena-ov/config.p" destination="voice/sk-Ruzena/_config.p" mode="overwriteOnlyIfExists" />
- 	-->
+	<asset source="fonts/OpenSans-Italic.ttf" destination="fonts/OpenSans-Italic.ttf" mode="alwaysOverwriteOrCopy" />
+	<asset source="fonts/OpenSans-Regular.ttf" destination="fonts/OpenSans-Regular.ttf" mode="alwaysOverwriteOrCopy" />
+	<asset source="fonts/OpenSans-Semibold.ttf" destination="fonts/OpenSans-Semibold.ttf" mode="alwaysOverwriteOrCopy" />
+	<asset source="fonts/OpenSans-SemiboldItalic.ttf" destination="fonts/OpenSans-SemiboldItalic.ttf" mode="alwaysOverwriteOrCopy" />
+	
+	
 	<asset source="sounds/camera_click.ogg" destination="sounds/camera_click.ogg" mode="copyOnlyIfDoesNotExist" />
 </assets>

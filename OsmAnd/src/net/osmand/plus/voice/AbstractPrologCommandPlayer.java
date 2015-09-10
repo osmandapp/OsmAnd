@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -11,6 +12,7 @@ import java.util.List;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.StateChangedListener;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -31,7 +33,7 @@ import alice.tuprolog.Term;
 import alice.tuprolog.Theory;
 import alice.tuprolog.Var;
 
-public abstract class AbstractPrologCommandPlayer implements CommandPlayer {
+public abstract class AbstractPrologCommandPlayer implements CommandPlayer, StateChangedListener<ApplicationMode> {
 
 	private static final Log log = PlatformUtil.getLog(AbstractPrologCommandPlayer.class);
 
@@ -55,6 +57,7 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer {
 	protected String language = "";
 	protected int streamType;
 	private int currentVersion;
+
 
 	protected AbstractPrologCommandPlayer(OsmandApplication ctx, String voiceProvider, String configFile, int[] sortedVoiceVersions)
 		throws CommandPlayerException 
@@ -91,6 +94,15 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer {
 					"alice.tuprolog.lib.ISOLibrary"/*, "alice.tuprolog.lib.IOLibrary"*/};
 	}
 
+	@Override
+	public void stateChanged(ApplicationMode change) {
+		prologSystem.getTheoryManager().retract(new Struct("appMode", new Var()));
+		prologSystem.getTheoryManager()
+				.assertA(
+						new Struct("appMode", new Struct(ctx.getSettings().APPLICATION_MODE.get().getStringKey()
+								.toLowerCase())), true, "", true);
+	}
+	
 	private void init(String voiceProvider, OsmandSettings settings, String configFile) throws CommandPlayerException {
 		prologSystem.clearTheory();
 		voiceDir = null;
@@ -123,7 +135,11 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer {
 				if(m.getParent() != null) {
 					m = m.getParent();
 				}
-				prologSystem.addTheory(new Theory("appMode('"+m.getStringKey().toLowerCase()+"')."));
+				settings.APPLICATION_MODE.addListener(this);
+				prologSystem.getTheoryManager()
+				.assertA(
+						new Struct("appMode", new Struct(ctx.getSettings().APPLICATION_MODE.get().getStringKey()
+								.toLowerCase())), true, "", true);
 				prologSystem.addTheory(new Theory("measure('"+mc.toTTSString()+"')."));
 				prologSystem.addTheory(new Theory(config));
 				config.close();
@@ -149,6 +165,7 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer {
 
 		}
 	}
+	
 
 	protected Term solveSimplePredicate(String predicate) {
 		Term val = null;

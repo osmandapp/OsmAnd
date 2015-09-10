@@ -508,14 +508,14 @@
 	<string name="poi_hunting_lodge">狩獵小屋</string>
 
 	<string name="poi_place_of_worship">宗教場所</string>
-	<string name="poi_religion_christian">宗教場所：基督教</string>
-	<string name="poi_religion_jewish">宗教場所：猶太教</string>
-	<string name="poi_religion_muslim">宗教場所：回教</string>
-	<string name="poi_religion_sikh">宗教場所：錫克教</string>
-	<string name="poi_religion_buddhist">宗教場所：佛教</string>
-	<string name="poi_religion_hindu">宗教場所：印度教</string>
-	<string name="poi_religion_shinto">宗教場所：日本神道教</string>
-	<string name="poi_religion_taoist">宗教場所：道教</string>
+	<string name="poi_religion_christian">基督教</string>
+	<string name="poi_religion_jewish">猶太教</string>
+	<string name="poi_religion_muslim">回教</string>
+	<string name="poi_religion_sikh">錫克教</string>
+	<string name="poi_religion_buddhist">佛教</string>
+	<string name="poi_religion_hindu">印度教</string>
+	<string name="poi_religion_shinto">神道教</string>
+	<string name="poi_religion_taoist">道教</string>
 
 	<string name="poi_internet_access_wlan">網際網路存取：無線網路</string>
 	<string name="poi_internet_access_terminal">網際網路存取：終端</string>
@@ -940,7 +940,7 @@
 	<string name="poi_access_permissive">容許通行</string>
 	<string name="poi_access_customers">顧客通行</string>
 	<string name="poi_access_delivery">交貨通行</string>
-	<string name="poi_access_agricultural">農用通路</string>
+	<string name="poi_access_agricultural">農產通路</string>
 
 	<string name="poi_monitoring_station">監測站</string>
 	<string name="poi_capital">首都</string>
@@ -1155,5 +1155,13 @@
 	<string name="poi_content_beer">啤酒 (內容)</string>
 	<string name="poi_content_salt">鹽 (內容)</string>
 	<string name="poi_content_grain">榖物 (內容)</string>
+
+	<string name="poi_wholesale">批發商</string>
+
+	<string name="poi_trade_building_supplies">建材供應商</string>
+	<string name="poi_trade_plumbing">配管供應商</string>
+	<string name="poi_trade_wood">木材供應商</string>
+	<string name="poi_trade_agricultural_supplies">農藝供應商</string>
+	<string name="poi_trade_tile">磚瓦供應商</string>
 
 	</resources>

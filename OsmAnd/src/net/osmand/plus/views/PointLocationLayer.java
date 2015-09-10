@@ -70,7 +70,7 @@ public class PointLocationLayer extends OsmandMapLayer {
 
 	
 	private RectF getHeadingRect(int locationX, int locationY){
-		int rad = (int) (view.getDensity() * 35);
+		int rad = (int) (view.getDensity() * 60);
 		return new RectF(locationX - rad, locationY - rad, locationX + rad, locationY + rad);
 	}
 	

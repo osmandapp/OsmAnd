@@ -81,6 +81,14 @@
 				<include name="voice/**/*.p" />
 			</fileset>
 		</copy>
+		<copy todir="assets/fonts">
+			<fileset dir="../../resources/fonts">
+				<include name="*.ttf" />
+			</fileset>
+			<fileset dir="../../resources/rendering_styles/fonts/OpenSans">
+				<include name="*.ttf" />
+			</fileset>
+		</copy>
 		<copy todir="res/">
 			<fileset dir="../../resources/rendering_styles/style-icons/"  >
 				<include name="**/*" />

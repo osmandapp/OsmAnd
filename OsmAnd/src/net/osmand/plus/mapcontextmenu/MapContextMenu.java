@@ -12,6 +12,8 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.mapcontextmenu.sections.AmenityInfoMenuController;
+import net.osmand.plus.mapcontextmenu.sections.MenuController;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.OsmandMapLayer;
@@ -19,7 +21,6 @@ import net.osmand.util.Algorithms;
 
 public class MapContextMenu {
 
-	private MapActivity mapActivity;
 	private OsmandApplication app;
 	private OsmandSettings settings;
 
@@ -28,7 +29,7 @@ public class MapContextMenu {
 
 	private String foundStreetName;
 
-	public boolean isMenuVisible() {
+	public boolean isMenuVisible(MapActivity mapActivity) {
 		return mapActivity.getSupportFragmentManager().findFragmentByTag("MapContextMenuFragment") != null;
 	}
 
@@ -40,29 +41,15 @@ public class MapContextMenu {
 		return object;
 	}
 
-	public void setMapActivity(MapActivity mapActivity) {
-		this.mapActivity = mapActivity;
-	}
-
-	public void setApp(OsmandApplication app) {
+	public MapContextMenu(OsmandApplication app) {
 		this.app = app;
 		settings = app.getSettings();
 	}
 
-	private static MapContextMenu ourInstance = new MapContextMenu();
+	public void show(MapActivity mapActivity, PointDescription pointDescription, Object object) {
 
-	public static MapContextMenu getInstance() {
-		return ourInstance;
-	}
-
-	private MapContextMenu() {
-
-	}
-
-	public void show(PointDescription pointDescription, Object object) {
-
-		if (isMenuVisible())
-			hide();
+		if (isMenuVisible(mapActivity))
+			hide(mapActivity);
 
 		this.pointDescription = pointDescription;
 		this.object = object;
@@ -73,7 +60,7 @@ public class MapContextMenu {
 
 	}
 
-	public void hide() {
+	public void hide(MapActivity mapActivity) {
 
 		Fragment fragment = mapActivity.getSupportFragmentManager().findFragmentByTag("MapContextMenuFragment");
 		if (fragment != null)
@@ -137,29 +124,29 @@ public class MapContextMenu {
 		return Algorithms.isEmpty(res) ? "Address is unknown yet" : res; // todo: text constant
 	}
 
-	public String getLocationStr() {
+	public String getLocationStr(MapActivity mapActivity) {
 		if (foundStreetName == null)
 			return pointDescription.getLocationName(mapActivity, true).replaceAll("\n", "");
 		else
 			return foundStreetName;
 	}
 
-	public BottomSectionBuilder getBottomSectionBuilder() {
+	public MenuController getMenuController() {
 
 		if (object != null) {
 			if (object instanceof Amenity) {
-				return new InfoSectionBuilder(app, (Amenity)object);
+				return new AmenityInfoMenuController(app, (Amenity)object);
 			}
 		}
 
 		return null;
 	}
 
-	public void buttonNavigatePressed() {
+	public void buttonNavigatePressed(MapActivity mapActivity) {
 		mapActivity.getMapActions().showNavigationContextMenuPoint(pointDescription.getLat(), pointDescription.getLon());
 	}
 
-	public void buttonFavoritePressed() {
+	public void buttonFavoritePressed(MapActivity mapActivity) {
 		if (object != null && object instanceof FavouritePoint) {
 			mapActivity.getMapActions().editFavoritePoint((FavouritePoint)object);
 		} else {
@@ -167,11 +154,11 @@ public class MapContextMenu {
 		}
 	}
 
-	public void buttonSharePressed() {
+	public void buttonSharePressed(MapActivity mapActivity) {
 		mapActivity.getMapActions().shareLocation(pointDescription.getLat(), pointDescription.getLon());
 	}
 
-	public void buttonMorePressed() {
+	public void buttonMorePressed(MapActivity mapActivity) {
 		final ContextMenuAdapter menuAdapter = new ContextMenuAdapter(mapActivity);
 		if (object != null) {
 			for (OsmandMapLayer layer : mapActivity.getMapView().getLayers()) {

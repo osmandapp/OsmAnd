@@ -442,11 +442,16 @@ public class AppInitializer implements IProgress {
 				osmandSettings.NATIVE_RENDERING_FAILED.set(true);
 				startTask(app.getString(R.string.init_native_library), -1);
 				RenderingRulesStorage storage = app.getRendererRegistry().getCurrentSelectedRenderer();
-				boolean initialized = NativeOsmandLibrary.getLibrary(storage, app) != null;
+				NativeOsmandLibrary lib = NativeOsmandLibrary.getLibrary(storage, app);
+				boolean initialized =  lib != null;
 				osmandSettings.NATIVE_RENDERING_FAILED.set(false);
 				if (!initialized) {
 					LOG.info("Native library could not be loaded!");
+				} else {
+					File ls = app.getAppPath("fonts");
+					lib.loadFontData(ls);
 				}
+				
 			}
 			app.getResourceManager().initMapBoundariesCacheNative();
 		}
