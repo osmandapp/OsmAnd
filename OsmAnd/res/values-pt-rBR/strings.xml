@@ -1817,4 +1817,5 @@
 	<string name="recent_places">Locais recentes</string>
 	<string name="favourites">Favoritos</string>
 <string name="poi_action_delete">apagar</string>
-	</resources>
+	<string name="saved_at_time">Salvo com sucesso em: %1$s</string>
+</resources>
