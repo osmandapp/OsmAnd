@@ -117,6 +117,10 @@ public class EditPoiFragment extends DialogFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
+		View view = inflater.inflate(R.layout.fragment_edit_poi, container, false);
+		final OsmandSettings settings = getMyApplication().getSettings();
+		boolean isLightTheme = settings.OSMAND_THEME.get() == settings.OSMAND_LIGHT_THEME;
+
 		if (savedInstanceState != null) {
 			editPoiData.tags = (LinkedHashSet<Tag>) savedInstanceState.getSerializable(TAGS_LIST);
 		} else {
@@ -150,8 +154,6 @@ public class EditPoiFragment extends DialogFragment {
 			tag.tag = POI_TYPE_TAG;
 			editPoiData.tags.add(tag);
 		}
-
-		View view = inflater.inflate(R.layout.fragment_edit_poi, container, false);
 
 		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
 		toolbar.setTitle(R.string.poi_create_title);
@@ -200,7 +202,9 @@ public class EditPoiFragment extends DialogFragment {
 		onlineDocumentationButton.setImageDrawable(
 				getMyApplication().getIconsCache()
 						.getPaintedContentIcon(R.drawable.ic_action_help,
-								getResources().getColor(R.color.dash_search_icon_dark)));
+								getResources().getColor(
+										isLightTheme ? R.color.dash_search_icon_dark
+												: R.color.inactive_item_orange)));
 		final ImageButton poiTypeButton = (ImageButton) view.findViewById(R.id.poiTypeButton);
 		poiTypeButton.setOnClickListener(new View.OnClickListener() {
 			@Override
