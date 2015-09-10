@@ -508,14 +508,14 @@
 	<string name="poi_hunting_lodge">狩獵小屋</string>
 
 	<string name="poi_place_of_worship">宗教場所</string>
-	<string name="poi_religion_christian">宗教場所：基督教</string>
-	<string name="poi_religion_jewish">宗教場所：猶太教</string>
-	<string name="poi_religion_muslim">宗教場所：回教</string>
-	<string name="poi_religion_sikh">宗教場所：錫克教</string>
-	<string name="poi_religion_buddhist">宗教場所：佛教</string>
-	<string name="poi_religion_hindu">宗教場所：印度教</string>
-	<string name="poi_religion_shinto">宗教場所：日本神道教</string>
-	<string name="poi_religion_taoist">宗教場所：道教</string>
+	<string name="poi_religion_christian">基督教</string>
+	<string name="poi_religion_jewish">猶太教</string>
+	<string name="poi_religion_muslim">回教</string>
+	<string name="poi_religion_sikh">錫克教</string>
+	<string name="poi_religion_buddhist">佛教</string>
+	<string name="poi_religion_hindu">印度教</string>
+	<string name="poi_religion_shinto">神道教</string>
+	<string name="poi_religion_taoist">道教</string>
 
 	<string name="poi_internet_access_wlan">網際網路存取：無線網路</string>
 	<string name="poi_internet_access_terminal">網際網路存取：終端</string>
