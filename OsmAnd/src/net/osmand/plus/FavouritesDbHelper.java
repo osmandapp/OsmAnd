@@ -520,7 +520,7 @@ public class FavouritesDbHelper {
 		return null;
 	}
 	
-	public void editFavouriteGroup(FavoriteGroup group, int color, boolean visible) {
+	public void editFavouriteGroup(FavoriteGroup group, String newName, int color, boolean visible) {
 		if(color != 0 && group.color != color) {
 			FavoriteGroup gr = flatGroups.get(group.name);
 			group.color = color;
@@ -534,6 +534,13 @@ public class FavouritesDbHelper {
 			for(FavouritePoint p : gr.points) {
 				p.setVisible(visible);
 			}	
+		}
+		if (!group.name.equals(newName)) {
+			FavoriteGroup gr = flatGroups.get(group.name);
+			group.name = newName;
+			for(FavouritePoint p : gr.points) {
+				p.setCategory(newName);
+			}
 		}
 		saveCurrentPointsIntoFile();
 	}
