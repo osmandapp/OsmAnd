@@ -20,9 +20,8 @@ import net.osmand.plus.osmedit.OpenstreetmapUtil;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.osmedit.OsmPoint;
 
-/**
- * Created by GaidamakUA on 8/28/15.
- */
+import java.text.MessageFormat;
+
 public class DeletePoiDialogFragment extends DialogFragment {
 	private static final String KEY_AMENITY_NODE = "amenity_node";
 
@@ -37,7 +36,7 @@ public class DeletePoiDialogFragment extends DialogFragment {
 
 		final Bundle args = getArguments();
 		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-		builder.setTitle(R.string.poi_remove_title);;
+		builder.setTitle(R.string.poi_remove_title);
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
 		builder.setPositiveButton(R.string.shared_string_delete, new DialogInterface.OnClickListener() {
 			@Override
@@ -48,7 +47,9 @@ public class DeletePoiDialogFragment extends DialogFragment {
 						new Runnable() {
 							@Override
 							public void run() {
-								AccessibleToast.makeText(activity, R.string.poi_remove_success,
+								AccessibleToast.makeText(activity, MessageFormat.format(
+										getString(R.string.poi_action_succeded_template),
+												getString(R.string.poi_action_delete)),
 										Toast.LENGTH_LONG).show();
 								if (activity instanceof MapActivity) {
 									((MapActivity) activity).getMapView().refreshMap(true);
