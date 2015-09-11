@@ -1168,4 +1168,36 @@
 	<string name="poi_trade_agricultural_supplies">Insumos agrícolas</string>
 	<string name="poi_trade_tile">Azulejos</string>
 
+	<string name="poi_population">Población</string>
+	<string name="poi_parking_underground">Subterráneo</string>
+	<string name="poi_parking_multi_storey">Varios pisos</string>
+
+	<string name="poi_bicycle_parking_stands">Soportes</string>
+	<string name="poi_leaf_type_broadleaved">Hoja ancha</string>
+	<string name="poi_leaf_type_needleleaved">Hoja acicular</string>
+	<string name="poi_leaf_type_mixed">Mixto</string>
+	<string name="poi_leaf_type_leafless">Sin hojas</string>
+
+	<string name="poi_trees_olive">Olivo</string>
+	<string name="poi_trees_apple">Manzano</string>
+	<string name="poi_trees_oil">Aceite de palma</string>
+	<string name="poi_trees_orange">Naranjo</string>
+	<string name="poi_trees_almond">Almendro</string>
+	<string name="poi_trees_banana">Banano / Plátano</string>
+	<string name="poi_trees_hazel">Avellano</string>
+	<string name="poi_trees_coconut">Cocotéro</string>
+	<string name="poi_trees_persimmon">Caqui</string>
+	<string name="poi_trees_cherry">Cerezo</string>
+	<string name="poi_trees_walnut">Nogal</string>
+	<string name="poi_trees_plum">Ciruelo</string>
+	<string name="poi_trees_peach">Melocotón</string>
+	<string name="poi_trees_tea">Té</string>
+	<string name="poi_trees_coca">Coca</string>
+	<string name="poi_trees_kiwi">Kiwi</string>
+	<string name="poi_trees_meadow_orchard">Prado con huertos</string>
+	<string name="poi_trees_mango">Mango</string>
+	<string name="poi_trees_date">Fecha</string>
+	<string name="poi_trees_coffea">Café</string>
+	<string name="poi_trees_pomegranate">Granada</string>
+
 	</resources>
