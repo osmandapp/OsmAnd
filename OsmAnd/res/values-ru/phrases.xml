@@ -802,6 +802,7 @@
 
 	<string name="poi_neighbourhood">Микрорайон</string>
 	<string name="poi_residential">Жилой район</string>
+	<string name="poi_religious">Религиозное землепользование</string>
 
 	<string name="poi_general_tourist_attraction_yes">Основная туристическая достопримечательность</string>
 	<string name="poi_attraction_amusement_ride">Парк атракционов</string>
@@ -942,6 +943,9 @@
 	<string name="poi_trees_date">Финики</string>
 	<string name="poi_trees_coffea">Кофe</string>
 	<string name="poi_trees_pomegranate">Гранат</string>
+
+	<string name="poi_height">Высота</string>
+	<string name="poi_ele">Высота над уровнем моря</string>
 
 	<string name="poi_building">Здание</string>
 	</resources>
