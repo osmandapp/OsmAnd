@@ -1186,4 +1186,29 @@
 	<string name="poi_trees_banana">Banano</string>
 	<string name="poi_trees_hazel">Avellanos</string>
 	<string name="poi_trees_coconut">Cocotero</string>
+	<string name="poi_nudism_yes">Nudismo permitido</string>
+	<string name="poi_nudism_no">Nudismo prohibido</string>
+	<string name="poi_nudism_obligatory">Nudismo obligatorio</string>
+	<string name="poi_nudism_customary">Nudismo habitual</string>
+	<string name="poi_nudism_permissive">Nudismo permisivo</string>
+
+	<string name="poi_bicycle_parking_rack">Bastidores</string>
+	<string name="poi_bicycle_parking_building">Edificio especial</string>
+	<string name="poi_bicycle_parking_shed">Caseta</string>
+	<string name="poi_bicycle_parking_bollard">Bolardos</string>
+	<string name="poi_trees_persimmon">Caqui</string>
+	<string name="poi_trees_cherry">Cerezo</string>
+	<string name="poi_trees_walnut">Nogal</string>
+	<string name="poi_trees_plum">Ciruelo</string>
+	<string name="poi_trees_peach">Duraznero</string>
+	<string name="poi_trees_tea">Té</string>
+	<string name="poi_trees_coca">Coca</string>
+	<string name="poi_trees_kiwi">Kiwi</string>
+	<string name="poi_trees_meadow_orchard">Huerto</string>
+	<string name="poi_trees_mango">Mango</string>
+	<string name="poi_trees_rubber">Caucho</string>
+	<string name="poi_trees_date">Fecha</string>
+	<string name="poi_trees_coffea">Café</string>
+	<string name="poi_trees_pomegranate">Granada</string>
+
 	</resources>
