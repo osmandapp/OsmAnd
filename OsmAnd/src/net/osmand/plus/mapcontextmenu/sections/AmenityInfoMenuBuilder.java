@@ -1,8 +1,6 @@
 package net.osmand.plus.mapcontextmenu.sections;
 
 import android.content.res.Resources;
-import android.text.SpannableString;
-import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -26,8 +24,6 @@ import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 
 public class AmenityInfoMenuBuilder extends MenuBuilder {
 
-	private static float SHADOW_HEIGHT = 6f; // in dp
-
 	private final Amenity amenity;
 
 	public AmenityInfoMenuBuilder(OsmandApplication app, final Amenity amenity) {
@@ -47,13 +43,13 @@ public class AmenityInfoMenuBuilder extends MenuBuilder {
 		// Icon
 		LinearLayout llIcon = new LinearLayout(view.getContext());
 		llIcon.setOrientation(LinearLayout.HORIZONTAL);
-		llIcon.setLayoutParams(new LinearLayout.LayoutParams(dpToPx(72f), firstRow ? dpToPx(48f) - dpToPx(SHADOW_HEIGHT) : dpToPx(48f)));
+		llIcon.setLayoutParams(new LinearLayout.LayoutParams(dpToPx(72f), firstRow ? dpToPx(48f) - dpToPx(SHADOW_HEIGHT_BOTTOM_DP) : dpToPx(48f)));
 		llIcon.setGravity(Gravity.CENTER_VERTICAL);
 		ll.addView(llIcon);
 
 		ImageView icon = new ImageView(view.getContext());
 		LinearLayout.LayoutParams llIconParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT) ;
-		llIconParams.setMargins(dpToPx(16f), firstRow ? dpToPx(12f) - dpToPx(SHADOW_HEIGHT) : dpToPx(12f), dpToPx(32f), dpToPx(12f));
+		llIconParams.setMargins(dpToPx(16f), firstRow ? dpToPx(12f) - dpToPx(SHADOW_HEIGHT_BOTTOM_DP / 2f) : dpToPx(12f), dpToPx(32f), dpToPx(12f));
 		llIconParams.gravity = Gravity.CENTER_VERTICAL;
 		icon.setLayoutParams(llIconParams);
 		icon.setScaleType(ImageView.ScaleType.CENTER);
@@ -67,7 +63,7 @@ public class AmenityInfoMenuBuilder extends MenuBuilder {
 
 		TextView textView  = new TextView(view.getContext());
 		LinearLayout.LayoutParams llTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-		llTextParams.setMargins(0, firstRow ? dpToPx(8f) - dpToPx(SHADOW_HEIGHT) : dpToPx(8f), 0, dpToPx(8f));
+		llTextParams.setMargins(0, firstRow ? dpToPx(8f) - dpToPx(SHADOW_HEIGHT_BOTTOM_DP) : dpToPx(8f), 0, dpToPx(8f));
 		textView.setLayoutParams(llTextParams);
 		textView.setTextSize(16); // todo: create constant
 		textView.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_info_text_light : R.color.ctx_menu_info_text_dark));

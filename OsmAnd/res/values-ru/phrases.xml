@@ -662,6 +662,7 @@
 	<string name="poi_town">Город (небольшой)</string>
 	<string name="poi_village">Деревня</string>
 	<string name="poi_hamlet">Деревня (небольшая)</string>
+	<string name="poi_suburb">Район</string>
 	<string name="poi_isolated_dwelling">Хутор</string>
 	<string name="poi_locality">Урочище</string>
 
@@ -850,6 +851,11 @@
 	<string name="poi_crossing_traffic_signals">Со светофором</string>
 	<string name="poi_crossing_uncontrolled">Нерегулируемый</string>
 	<string name="poi_crossing_unmarked">Неразмеченный</string>
+
+	<string name="poi_population">Население</string>
+	<string name="poi_start_date">Дата начала постройки</string>
+	<string name="poi_wheelchair">Доступно для инвалидных кресел</string>
+	<string name="poi_wholesale">Опт</string>
 
 	<string name="poi_access_private">Частный доступ</string>
 	<string name="poi_access_no">Нет доступа</string>
