@@ -1818,4 +1818,6 @@
 	<string name="favourites">Favoritos</string>
 <string name="poi_action_delete">apagar</string>
 	<string name="saved_at_time">Salvo com sucesso em: %1$s</string>
+<string name="poi_deleted_localy">POI será apagado quando você enviar suas alterações</string>
+	<string name="show_gpx">Mostrar GPX</string>
 </resources>
