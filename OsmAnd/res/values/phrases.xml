@@ -1140,6 +1140,8 @@
 	<string name="poi_trade_agricultural_supplies">Agricultural supplies</string>
 	<string name="poi_trade_tile">Tile supplies</string>
 
+	<string name="poi_population">Population</string>
+
 	<string name="poi_enforcement_traffic_signals">Enforcement:traffic signals</string>
 	<string name="poi_enforcement_maxspeed">Enforcement:maxspeed</string>
 	<string name="poi_enforcement_maxheight">Enforcement:maxheight</string>
