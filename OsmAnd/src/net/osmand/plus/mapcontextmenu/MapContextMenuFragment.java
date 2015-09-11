@@ -5,6 +5,8 @@ import android.app.Activity;
 import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.app.Fragment;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
@@ -30,6 +32,8 @@ import net.osmand.plus.views.OsmandMapTileView;
 import org.apache.commons.logging.Log;
 
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
+import static net.osmand.plus.mapcontextmenu.sections.MenuBuilder.SHADOW_HEIGHT_BOTTOM_DP;
+import static net.osmand.plus.mapcontextmenu.sections.MenuBuilder.SHADOW_HEIGHT_TOP_DP;
 
 
 public class MapContextMenuFragment extends Fragment {
@@ -144,7 +148,7 @@ public class MapContextMenuFragment extends Fragment {
 
 		mainView = view.findViewById(R.id.context_menu_main);
 
-		View.OnTouchListener slideTouchListener = new View.OnTouchListener() {
+		final View.OnTouchListener slideTouchListener = new View.OnTouchListener() {
 			private float dy;
 			private float dyMain;
 			private int destinationState;
@@ -162,7 +166,7 @@ public class MapContextMenuFragment extends Fragment {
 			private boolean isClick(float endX, float endY) {
 				float differenceX = Math.abs(startX - endX);
 				float differenceY = Math.abs(startY - endY);
-				if (differenceX > 3 || differenceY > 3 || System.currentTimeMillis() - lastTouchDown > CLICK_ACTION_THRESHHOLD) {
+				if (differenceX > 1 || differenceY > 1 || System.currentTimeMillis() - lastTouchDown > CLICK_ACTION_THRESHHOLD) {
 					return false;
 				}
 				return true;
@@ -227,13 +231,13 @@ public class MapContextMenuFragment extends Fragment {
 						float posY = 0;
 						switch (destinationState) {
 							case MenuController.MenuState.HEADER_ONLY:
-								posY = view.getHeight() - (menuFullHeight - menuBottomViewHeight);
+								posY = view.getHeight() - (menuFullHeight - menuBottomViewHeight - dpToPx(SHADOW_HEIGHT_BOTTOM_DP));
 								break;
 							case MenuController.MenuState.HALF_SCREEN:
 								posY = view.getHeight() - menuFullHeight;
 								break;
 							case MenuController.MenuState.FULL_SCREEN:
-								posY = -menuTopShadowHeight;
+								posY = -menuTopShadowHeight - dpToPx(SHADOW_HEIGHT_TOP_DP);
 								break;
 							default:
 								break;
@@ -270,6 +274,16 @@ public class MapContextMenuFragment extends Fragment {
 		topView.setOnTouchListener(slideTouchListener);
 		View topShadowView = view.findViewById(R.id.context_menu_top_shadow);
 		topShadowView.setOnTouchListener(slideTouchListener);
+		View topShadowAllView = view.findViewById(R.id.context_menu_top_shadow_all);
+		topShadowAllView.setOnTouchListener(new View.OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				if (event.getY() <= dpToPx(SHADOW_HEIGHT_TOP_DP) || event.getAction() != MotionEvent.ACTION_DOWN)
+					return slideTouchListener.onTouch(v, event);
+				else
+					return false;
+			}
+		});
 
 		// Left icon
 		IconsCache iconsCache = getMyApplication().getIconsCache();
@@ -375,7 +389,7 @@ public class MapContextMenuFragment extends Fragment {
 
 		switch (menuState) {
 			case MenuController.MenuState.HEADER_ONLY:
-				shadowViewHeight = view.getHeight() - (menuFullHeight - menuBottomViewHeight);
+				shadowViewHeight = view.getHeight() - (menuFullHeight - menuBottomViewHeight) + dpToPx(SHADOW_HEIGHT_BOTTOM_DP);
 				bottomBorderHeight = 0;
 				break;
 			case MenuController.MenuState.HALF_SCREEN:
@@ -391,7 +405,7 @@ public class MapContextMenuFragment extends Fragment {
 				break;
 			case MenuController.MenuState.FULL_SCREEN:
 				shadowViewHeight = 0;
-				bottomBorderHeight = view.getHeight() - menuFullHeight + menuTopShadowHeight;
+				bottomBorderHeight = view.getHeight() - menuFullHeight + menuTopShadowHeight + dpToPx(SHADOW_HEIGHT_TOP_DP);
 				break;
 			default:
 				break;
@@ -409,8 +423,6 @@ public class MapContextMenuFragment extends Fragment {
 		lp = mainView.getLayoutParams();
 		lp.height = menuFullHeight;
 		mainView.setLayoutParams(lp);
-
-		mainView.bringToFront();
 
 	}
 
