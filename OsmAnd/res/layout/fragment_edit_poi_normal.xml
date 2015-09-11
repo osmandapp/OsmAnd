@@ -4,7 +4,7 @@
     xmlns:osmand="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -126,8 +126,9 @@
 
         <!--XXX due to bug in NestedScrollView-->
         <Space
+            android:id="@+id/screenFiller"
             android:layout_width="match_parent"
-            android:layout_height="500dp"
-            tools:visibility="gone"/>
+            android:layout_height="match_parent"
+            tools:visibility="visible"/>
     </RelativeLayout>
 </android.support.v4.widget.NestedScrollView>

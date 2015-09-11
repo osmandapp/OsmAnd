@@ -2,6 +2,7 @@ package net.osmand.plus.osmedit;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +55,12 @@ public class AdvancedDataFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		final View view = inflater.inflate(R.layout.fragment_edit_poi_advanced, container, false);
+
+		Display display = getActivity().getWindowManager().getDefaultDisplay();
+		Point size = new Point();
+		display.getSize(size);
+		int height = size.y;
+		view.findViewById(R.id.screenFiller).setMinimumHeight(height);
 
 		deleteDrawable = ((OsmandApplication) getActivity().getApplication()).getIconsCache()
 				.getPaintedContentIcon(R.drawable.ic_action_remove_dark,
@@ -205,7 +213,7 @@ public class AdvancedDataFragment extends Fragment {
 						editPoiData.notifyDatasetChanged(mTagsChangedListener);
 				}
 			});
-			final Set<String> tagKeys = new TreeSet<String>();
+			final Set<String> tagKeys = new TreeSet<>();
 			for (OSMSettings.OSMTagKey t : OSMSettings.OSMTagKey.values()) {
 				if ((t != OSMSettings.OSMTagKey.NAME) && (t != OSMSettings.OSMTagKey.OPENING_HOURS) && (t != OSMSettings.OSMTagKey.PHONE)
 						&& (t != OSMSettings.OSMTagKey.WEBSITE)) {
@@ -213,7 +221,7 @@ public class AdvancedDataFragment extends Fragment {
 				}
 			}
 
-			ArrayAdapter<Object> adapter = new ArrayAdapter<Object>(linearLayout.getContext(),
+			ArrayAdapter<Object> adapter = new ArrayAdapter<>(linearLayout.getContext(),
 					R.layout.list_textview, tagKeys.toArray());
 			tagEditText.setAdapter(adapter);
 			tagEditText.setThreshold(1);
