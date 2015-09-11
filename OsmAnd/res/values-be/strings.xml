@@ -2088,4 +2088,5 @@
 	<string name="working_days">Працоўныя дні</string>
 	<string name="recent_places">Нядаўнія месцы</string>
 	<string name="favourites">Упадабанае</string>
+<string name="saved_at_time">Пасьпяхова захаваны ў: %1$s</string>
 </resources>
