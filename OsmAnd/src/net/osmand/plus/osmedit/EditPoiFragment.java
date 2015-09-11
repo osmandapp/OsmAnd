@@ -27,6 +27,7 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -117,7 +118,7 @@ public class EditPoiFragment extends DialogFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_edit_poi, container, false);
+		final View view = inflater.inflate(R.layout.fragment_edit_poi, container, false);
 		final OsmandSettings settings = getMyApplication().getSettings();
 		boolean isLightTheme = settings.OSMAND_THEME.get() == settings.OSMAND_LIGHT_THEME;
 
@@ -256,14 +257,25 @@ public class EditPoiFragment extends DialogFragment {
 				}
 			}
 		});
-		poiTypeEditText.setOnClickListener(new View.OnClickListener() {
+		poiTypeEditText.setOnTouchListener(new View.OnTouchListener() {
 			@Override
-			public void onClick(View v) {
-				if (poiTypeEditText.getText().length() == 0 && editPoiData.amenity.getType() != null) {
-					DialogFragment dialogFragment =
-							PoiSubTypeDialogFragment.createInstance(editPoiData.amenity);
-					dialogFragment.show(getChildFragmentManager(), "PoiSubTypeDialogFragment");
+			public boolean onTouch(final View v, MotionEvent event) {
+				final EditText editText = (EditText) v;
+				final int DRAWABLE_RIGHT = 2;
+				if (event.getAction() == MotionEvent.ACTION_UP) {
+					if (event.getX() >= (editText.getRight()
+							- editText.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width()
+							- editText.getPaddingRight())) {
+						if (editPoiData.amenity.getType() != null) {
+							DialogFragment dialogFragment =
+									PoiSubTypeDialogFragment.createInstance(editPoiData.amenity);
+							dialogFragment.show(getChildFragmentManager(), "PoiSubTypeDialogFragment");
+						}
+
+						return true;
+					}
 				}
+				return false;
 			}
 		});
 

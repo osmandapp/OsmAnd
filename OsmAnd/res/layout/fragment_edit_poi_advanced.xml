@@ -2,117 +2,122 @@
 <android.support.v4.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:theme="?attr/new_app_theme">
 
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
         <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="14dp"
-            android:layout_marginRight="14dp"
-            android:layout_marginTop="14dp"
-            android:background="?attr/bg_card"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="37dp"
-                android:gravity="center">
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="14dp"
+                android:layout_marginRight="14dp"
+                android:layout_marginTop="14dp"
+                android:background="?attr/bg_card"
+                android:orientation="vertical">
 
-                <net.osmand.plus.widgets.TextViewEx
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:text="@string/tag_poi_name"
-                    android:textColor="?android:attr/textColorPrimary"
-                    android:textSize="@dimen/default_desc_text_size"
-                    osmand:typeface="@string/font_roboto_regular"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="37dp"
+                    android:gravity="center">
+
+                    <net.osmand.plus.widgets.TextViewEx
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:text="@string/tag_poi_name"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:textSize="@dimen/default_desc_text_size"
+                        osmand:typeface="@string/font_roboto_regular"/>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="?attr/dashboard_divider"/>
+
+                    <net.osmand.plus.widgets.TextViewEx
+                        android:id="@+id/nameTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:textSize="@dimen/default_desc_text_size"
+                        osmand:typeface="@string/font_roboto_medium"
+                        tools:text="poi name"/>
+                </LinearLayout>
 
                 <View
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
                     android:background="?attr/dashboard_divider"/>
 
-                <net.osmand.plus.widgets.TextViewEx
-                    android:id="@+id/nameTextView"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:textColor="?android:attr/textColorPrimary"
-                    android:textSize="@dimen/default_desc_text_size"
-                    osmand:typeface="@string/font_roboto_medium"
-                    tools:text="poi name"/>
-            </LinearLayout>
+                    android:layout_height="37dp"
+                    android:gravity="center">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="?attr/dashboard_divider"/>
+                    <net.osmand.plus.widgets.TextViewEx
+                        android:id="@+id/amenityTagTextView"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:text="@string/tag_poi_amenity"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:textSize="@dimen/default_desc_text_size"
+                        osmand:typeface="@string/font_roboto_regular"/>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="?attr/dashboard_divider"/>
+
+                    <net.osmand.plus.widgets.TextViewEx
+                        android:id="@+id/amenityTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:textSize="@dimen/default_desc_text_size"
+                        osmand:typeface="@string/font_roboto_medium"
+                        tools:text="landmark"/>
+                </LinearLayout>
+            </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/editTagsList"
                 android:layout_width="match_parent"
-                android:layout_height="37dp"
-                android:gravity="center">
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:saveEnabled="false"/>
 
-                <net.osmand.plus.widgets.TextViewEx
-                    android:id="@+id/amenityTagTextView"
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:text="@string/tag_poi_amenity"
-                    android:textColor="?android:attr/textColorPrimary"
-                    android:textSize="@dimen/default_desc_text_size"
-                    osmand:typeface="@string/font_roboto_regular"/>
-
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:background="?attr/dashboard_divider"/>
-
-                <net.osmand.plus.widgets.TextViewEx
-                    android:id="@+id/amenityTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:textColor="?android:attr/textColorPrimary"
-                    android:textSize="@dimen/default_desc_text_size"
-                    osmand:typeface="@string/font_roboto_medium"
-                    tools:text="landmark"/>
-            </LinearLayout>
+            <net.osmand.plus.widgets.ButtonEx
+                android:id="@+id/addTagButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/add_tag"
+                android:textSize="@dimen/default_sub_text_size"
+                osmand:typeface="@string/font_roboto_medium"/>
         </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/editTagsList"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:saveEnabled="false"/>
-
-        <net.osmand.plus.widgets.ButtonEx
-            android:id="@+id/addTagButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="12dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/add_tag"
-            android:textSize="@dimen/default_sub_text_size"
-            osmand:typeface="@string/font_roboto_medium"/>
-
         <!--XXX due to bug in NestedScroolView-->
         <Space
+            android:id="@+id/screenFiller"
             android:layout_width="match_parent"
-            android:layout_height="500dp"/>
-    </LinearLayout>
+            android:layout_height="match_parent"/>
+    </FrameLayout>
 </android.support.v4.widget.NestedScrollView>
