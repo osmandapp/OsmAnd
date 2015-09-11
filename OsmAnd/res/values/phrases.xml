@@ -1134,6 +1134,12 @@
 	<string name="poi_content_salt">Salt (content)</string>
 	<string name="poi_content_grain">Grain (content)</string>
 
+	<string name="poi_nudism_yes">Nudism: allowed<string/>
+	<string name="poi_nudism_no">Nudism: prohibited<string/>
+	<string name="poi_nudism_obligatory">Nudism: obligatory<string/>
+	<string name="poi_nudism_customary">Nudism: customary<string/>
+	<string name="poi_nudism_permissive">Nudism: permissive<string/>
+
 	<string name="poi_trade_building_supplies">Building supplies</string>
 	<string name="poi_trade_plumbing">Plumbing supplies</string>
 	<string name="poi_trade_wood">Wood supplies</string>
