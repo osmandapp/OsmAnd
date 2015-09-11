@@ -1172,7 +1172,7 @@
 	<string name="poi_parking_multi_storey">Vários andares</string>
 
 	<string name="poi_bicycle_parking_stands">U-invertido</string>
-	<string name="poi_bicycle_parking_building">Edifício</string>
+	<string name="poi_bicycle_parking_building">Edifício especial</string>
 	<string name="poi_bicycle_parking_shed">Galpão</string>
 	<string name="poi_bicycle_parking_bollard">Poste de amarração</string>
 	<string name="poi_bicycle_parking_informal">Informal</string>
@@ -1188,4 +1188,25 @@
 	<string name="poi_trees_orange">Laranjeira</string>
 	<string name="poi_trees_almond">Amendoeira</string>
 	<string name="poi_trees_banana">Bananeira</string>
+	<string name="poi_trees_hazel">Aveleira</string>
+	<string name="poi_trees_coconut">Coqueiro</string>
+	<string name="poi_trees_persimmon">Caquizeiro</string>
+	<string name="poi_trees_cherry">Cerejeira</string>
+	<string name="poi_trees_walnut">Nogueira</string>
+	<string name="poi_trees_plum">Ameixeira</string>
+	<string name="poi_trees_peach">Pessegueiro</string>
+	<string name="poi_trees_kiwi">Kiwizeiro</string>
+	<string name="poi_trees_nectorine">Nectarineira</string>
+	<string name="poi_trees_mango">Mangueira</string>
+	<string name="poi_trees_rubber">Seringueira</string>
+	<string name="poi_trees_coffea">Cafeeiro</string>
+	<string name="poi_trees_pomegranate">Romãzeira</string>
+
+	<string name="poi_nudism_yes">Nudismo: autorizado</string>
+	<string name="poi_nudism_no">Nudismo: proibido</string>
+	<string name="poi_nudism_obligatory">Nudismo: obrigatório</string>
+	<string name="poi_nudism_customary">Nudismo: habitual</string>
+	<string name="poi_nudism_permissive">Nudismo: permissido</string>
+
+	<string name="poi_trees_date">Tamareira</string>
 	</resources>
