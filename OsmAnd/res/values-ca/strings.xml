@@ -2113,4 +2113,9 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
 	<string name="please_specify_poi_type">Especifiqueu el tipus de PDI</string>
 <string name="tag_poi_amenity">instal·lació comunitària</string>
 	<string name="number_of_rows_in_dash">Nombre de files al tauler %1$s</string>
-	</resources>
+	<string name="poi_action_delete">Suprimeix</string>
+	<string name="working_days">Dies laborables</string>
+	<string name="recent_places">Llocs recents</string>
+	<string name="favourites">Favorits</string>
+	<string name="saved_at_time">S\'ha desat correctament a: %1$s</string>
+</resources>

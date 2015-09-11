@@ -27,6 +27,7 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -117,6 +118,10 @@ public class EditPoiFragment extends DialogFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
+		final View view = inflater.inflate(R.layout.fragment_edit_poi, container, false);
+		final OsmandSettings settings = getMyApplication().getSettings();
+		boolean isLightTheme = settings.OSMAND_THEME.get() == settings.OSMAND_LIGHT_THEME;
+
 		if (savedInstanceState != null) {
 			editPoiData.tags = (LinkedHashSet<Tag>) savedInstanceState.getSerializable(TAGS_LIST);
 		} else {
@@ -151,17 +156,13 @@ public class EditPoiFragment extends DialogFragment {
 			editPoiData.tags.add(tag);
 		}
 
-		View view = inflater.inflate(R.layout.fragment_edit_poi, container, false);
-
 		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
 		toolbar.setTitle(R.string.poi_create_title);
 		toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-				fragmentManager.beginTransaction().remove(EditPoiFragment.this).commit();
-				fragmentManager.popBackStack();
+				dismiss();
 			}
 		});
 
@@ -202,7 +203,9 @@ public class EditPoiFragment extends DialogFragment {
 		onlineDocumentationButton.setImageDrawable(
 				getMyApplication().getIconsCache()
 						.getPaintedContentIcon(R.drawable.ic_action_help,
-								getResources().getColor(R.color.inactive_item_orange)));
+								getResources().getColor(
+										isLightTheme ? R.color.dash_search_icon_dark
+												: R.color.inactive_item_orange)));
 		final ImageButton poiTypeButton = (ImageButton) view.findViewById(R.id.poiTypeButton);
 		poiTypeButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -254,14 +257,25 @@ public class EditPoiFragment extends DialogFragment {
 				}
 			}
 		});
-		poiTypeEditText.setOnClickListener(new View.OnClickListener() {
+		poiTypeEditText.setOnTouchListener(new View.OnTouchListener() {
 			@Override
-			public void onClick(View v) {
-				if (poiTypeEditText.getText().length() == 0 && editPoiData.amenity.getType() != null) {
-					DialogFragment dialogFragment =
-							PoiSubTypeDialogFragment.createInstance(editPoiData.amenity);
-					dialogFragment.show(getChildFragmentManager(), "PoiSubTypeDialogFragment");
+			public boolean onTouch(final View v, MotionEvent event) {
+				final EditText editText = (EditText) v;
+				final int DRAWABLE_RIGHT = 2;
+				if (event.getAction() == MotionEvent.ACTION_UP) {
+					if (event.getX() >= (editText.getRight()
+							- editText.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width()
+							- editText.getPaddingRight())) {
+						if (editPoiData.amenity.getType() != null) {
+							DialogFragment dialogFragment =
+									PoiSubTypeDialogFragment.createInstance(editPoiData.amenity);
+							dialogFragment.show(getChildFragmentManager(), "PoiSubTypeDialogFragment");
+						}
+
+						return true;
+					}
 				}
+				return false;
 			}
 		});
 
@@ -325,11 +339,7 @@ public class EditPoiFragment extends DialogFragment {
 								if (getActivity() instanceof MapActivity) {
 									((MapActivity) getActivity()).getMapView().refreshMap(true);
 								}
-								FragmentManager fragmentManager =
-										getActivity().getSupportFragmentManager();
-								fragmentManager.beginTransaction().remove(EditPoiFragment.this)
-										.commit();
-								fragmentManager.popBackStack();
+								dismiss();
 							}
 						}, getActivity(), mOpenstreetmapUtil);
 
@@ -515,9 +525,7 @@ public class EditPoiFragment extends DialogFragment {
 				if (n != null) {
 					EditPoiFragment fragment =
 							EditPoiFragment.createInstance(n, amenity);
-					activity.getSupportFragmentManager().beginTransaction()
-							.add(R.id.fragmentContainer, fragment, "EditPoiFragment")
-							.addToBackStack(null).commit();
+					fragment.show(activity.getSupportFragmentManager(), TAG);
 				} else {
 					AccessibleToast.makeText(activity,
 							activity.getString(R.string.poi_error_poi_not_found),

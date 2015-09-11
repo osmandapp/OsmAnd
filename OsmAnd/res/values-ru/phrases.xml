@@ -437,14 +437,14 @@
 	<string name="poi_chalet">Шале</string>
 
 	<string name="poi_place_of_worship">Место поклонения</string>
-	<string name="poi_religion_christian">Храм, церковь (часовня)</string>
-	<string name="poi_religion_jewish">Синагога</string>
-	<string name="poi_religion_muslim">Мечеть</string>
-	<string name="poi_religion_sikh">Место поклонения: сикхизм</string>
-	<string name="poi_religion_buddhist">Место поклонения: буддизм</string>
-	<string name="poi_religion_hindu">Место поклонения: индуизм</string>
-	<string name="poi_religion_shinto">Место поклонения: синтоизм</string>
-	<string name="poi_religion_taoist">Место поклонения: даосизм</string>
+	<string name="poi_religion_christian">Христианство</string>
+	<string name="poi_religion_jewish">Иудаизм</string>
+	<string name="poi_religion_muslim">Мусульманство</string>
+	<string name="poi_religion_sikh">Сикхизм</string>
+	<string name="poi_religion_buddhist">Буддизм</string>
+	<string name="poi_religion_hindu">Индуизм</string>
+	<string name="poi_religion_shinto">Синтоизм</string>
+	<string name="poi_religion_taoist">Даосизм</string>
 	<string name="poi_monastery">Монастырь</string>
 	<string name="poi_historic_monastery">Исторический монастырь</string>
 	<string name="poi_wayside_cross">Придорожный крест</string>
@@ -662,6 +662,7 @@
 	<string name="poi_town">Город (небольшой)</string>
 	<string name="poi_village">Деревня</string>
 	<string name="poi_hamlet">Деревня (небольшая)</string>
+	<string name="poi_suburb">Район</string>
 	<string name="poi_isolated_dwelling">Хутор</string>
 	<string name="poi_locality">Урочище</string>
 
@@ -851,6 +852,21 @@
 	<string name="poi_crossing_uncontrolled">Нерегулируемый</string>
 	<string name="poi_crossing_unmarked">Неразмеченный</string>
 
+	<string name="poi_population">Население</string>
+	<string name="poi_start_date">Дата начала постройки</string>
+	<string name="poi_wheelchair">Доступно для инвалидных кресел</string>
+	<string name="poi_wholesale">Опт</string>
+	<string name="poi_parking_underground">Подземная</string>
+	<string name="poi_parking_multi_storey">Многоэтажная</string>
+
+	<string name="poi_bicycle_parking_stands">Стойка</string>
+	<string name="poi_bicycle_parking_wall_loops">Крепление только для переднего колеса</string>
+	<string name="poi_bicycle_parking_rack">Рама</string>
+	<string name="poi_bicycle_parking_building">Специальное здание</string>
+	<string name="poi_bicycle_parking_shed">Навес</string>
+	<string name="poi_bicycle_parking_bollard">Столбик с креплением</string>
+	<string name="poi_bicycle_parking_informal">Неофициальная</string>
+
 	<string name="poi_access_private">Частный доступ</string>
 	<string name="poi_access_no">Нет доступа</string>
 	<string name="poi_access_destination">Доступ: пункт назначения</string>
@@ -859,4 +875,71 @@
 	<string name="poi_access_delivery">Доступ только для доставки</string>
 	<string name="poi_access_agricultural">Доступ только для с/х техники</string>
 
+	<string name="poi_denomination_catholic">Католицизм</string>
+	<string name="poi_denomination_baptist">Баптизм</string>
+	<string name="poi_denomination_roman_catholic">Римский католицизм</string>
+	<string name="poi_denomination_orthodox">Православие</string>
+	<string name="poi_denomination_lutheran">Лютеранство</string>
+	<string name="poi_denomination_sunni">Суннизм</string>
+	<string name="poi_denomination_protestant">Протестантизм</string>
+	<string name="poi_denomination_methodist">Методизм</string>
+	<string name="poi_denomination_anglican">Англиканство</string>
+	<string name="poi_denomination_presbyterian">Пресвитерианство</string>
+	<string name="poi_denomination_evangelical">Евангелизм</string>
+	<string name="poi_denomination_russian_orthodox">Русское православие</string>
+	<string name="poi_denomination_pentecostal">Пятидесятничество</string>
+	<string name="poi_denomination_mormon">Мормонизм</string>
+	<string name="poi_denomination_jehovahs_witness">Свидетели Иеговы</string>
+	<string name="poi_denomination_greek_orthodox">Греческое православие</string>
+	<string name="poi_denomination_reformed">Кальвинизм</string>
+	<string name="poi_denomination_seventh_day_adventist">Адвентисты седьмого дня</string>
+	<string name="poi_denomination_new_apostolic">Новоапостольская церковь</string>
+	<string name="poi_denomination_church_of_england">Церковь Англии</string>
+	<string name="poi_denomination_episcopal">Епископальная церковь</string>
+	<string name="poi_denomination_shia">Шиизм</string>
+	<string name="poi_denomination_united">Объединённая церковь</string>
+	<string name="poi_denomination_greek_catholic">Греческий католицизм</string>
+	<string name="poi_denomination_tibetan">Тибетский буддизм</string>
+	<string name="poi_denomination_church_of_scotland">Церковь Шотландии</string>
+	<string name="poi_denomination_salvation_army">Армия спасения</string>
+	<string name="poi_denomination_iglesia_ni_cristo">Церковь Христа</string>
+	<string name="poi_denomination_mennonite">Меннонитство</string>
+	<string name="poi_denomination_quaker">Квакерство</string>
+	<string name="poi_denomination_bulgarian_orthodox">Болгарское православие</string>
+	<string name="poi_denomination_assemblies_of_god">Ассамблеи Бога</string>
+	<string name="poi_denomination_nondenominational">Без деноминации</string>
+	<string name="poi_denomination_adventist">Адвентисты</string>
+	<string name="poi_denomination_old_believers">Старообрядчество</string>
+	<string name="poi_denomination_serbian_orthodox">Сербское православие</string>
+	<string name="poi_denomination_spiritist">Спиритизм</string>
+	<string name="poi_denomination_armenian_apostolic">Армянская апостольская церковь</string>
+
+	<string name="poi_leaf_type_broadleaved">Широколиственная растительность</string>
+	<string name="poi_leaf_type_needleleaved">Хвойная растительность</string>
+	<string name="poi_leaf_type_mixed">Смешанного типа</string>
+	<string name="poi_leaf_type_leafless">Безлистная растительность</string>
+
+	<string name="poi_trees_olive">Оливка</string>
+	<string name="poi_trees_apple">Яблоко</string>
+	<string name="poi_trees_oil">Пальмовое масло</string>
+	<string name="poi_trees_orange">Апельсин</string>
+	<string name="poi_trees_almond">Миндаль</string>
+	<string name="poi_trees_banana">Банан</string>
+	<string name="poi_trees_hazel">Лесной орех</string>
+	<string name="poi_trees_coconut">Кокос</string>
+	<string name="poi_trees_persimmon">Хурма</string>
+	<string name="poi_trees_cherry">Вишня</string>
+	<string name="poi_trees_walnut">Грецкий орех</string>
+	<string name="poi_trees_plum">Слива</string>
+	<string name="poi_trees_peach">Персик</string>
+	<string name="poi_trees_tea">Чай</string>
+	<string name="poi_trees_coca">Кока</string>
+	<string name="poi_trees_kiwi">Киви</string>
+	<string name="poi_trees_meadow_orchard">Плодовый сад</string>
+	<string name="poi_trees_nectorine">Нектарин</string>
+	<string name="poi_trees_mango">Манго</string>
+	<string name="poi_trees_rubber">Каучук</string>
+	<string name="poi_trees_date">Финики</string>
+	<string name="poi_trees_coffea">Кофe</string>
+	<string name="poi_trees_pomegranate">Гранат</string>
 	</resources>

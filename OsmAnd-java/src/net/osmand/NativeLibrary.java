@@ -281,13 +281,13 @@ public class NativeLibrary {
         return lhs < rhs ? -1 : (lhs == rhs ? 0 : 1);
     }
     
-	public static void loadFontData(String dir) {
-		File dr = new File(dir);
-		if (dr.listFiles() == null) {
+	public void loadFontData(File dr) {
+		File[] lf = dr.listFiles();
+		if (lf == null) {
 			System.err.println("No fonts loaded from " + dr.getAbsolutePath());
 			return;
 		}
-		ArrayList<File> lst = new ArrayList<File>(Arrays.asList(dr.listFiles()));
+		ArrayList<File> lst = new ArrayList<File>(Arrays.asList(lf));
 		Collections.sort(lst, new Comparator<File>() {
 			
 

@@ -2048,4 +2048,7 @@
 	<string name="recent_places">Lugares recientes</string>
 	<string name="favourites">Favoritos</string>
 <string name="poi_action_delete">borrar</string>
-	</resources>
+	<string name="saved_at_time">Guardado exitosamente como: %1$s</string>
+<string name="poi_deleted_localy">El PDI se eliminará una vez subido los cambios</string>
+	<string name="show_gpx">Mostrar GPX</string>
+</resources>

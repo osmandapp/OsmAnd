@@ -2161,7 +2161,7 @@
 	<string name="shared_string_undo">Deshacer</string>
 	<string name="shared_string_skip">Omitir</string>
 	<string name="app_name_osmand">OsmAnd</string>
-	<string name="offline_maps_and_navigation">Mapas y navegación fuera de línea</string>
+	<string name="offline_maps_and_navigation">Mapas y navegación\nfuera de línea</string>
 <string name="commit_poi">Enviar PDI</string>
 <string name="routing_attr_avoid_shuttle_train_name">Evitar tren de enlace</string>
 	<string name="routing_attr_avoid_shuttle_train_description">Evite tomar trenes de enlace</string>
@@ -2185,4 +2185,8 @@
 <string name="working_days">Días laborales</string>
 	<string name="recent_places">Lugares recientes</string>
 	<string name="favourites">Favoritos</string>
+<string name="poi_action_delete">borrar</string>
+	<string name="saved_at_time">Guardado exitosamente en: %1$s</string>
+<string name="poi_deleted_localy">El PDI se eliminará una vez subido los cambios</string>
+	<string name="show_gpx">Mostrar GPX</string>
 </resources>

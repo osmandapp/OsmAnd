@@ -146,13 +146,15 @@ public class AppInitializer implements IProgress {
 		return false;
 	}
 
-	public boolean checkPreviousRunsForExceptions(Activity activity) {
+	public boolean checkPreviousRunsForExceptions(Activity activity, boolean writeFileSize) {
 		initUiVars(activity);
 		long size = activity.getPreferences(Context.MODE_WORLD_READABLE).getLong(EXCEPTION_FILE_SIZE, 0);
 		final File file = app.getAppPath(OsmandApplication.EXCEPTION_PATH);
 		if (file.exists() && file.length() > 0) {
 			if (size != file.length() && !firstTime) {
-				activity.getPreferences(Context.MODE_WORLD_WRITEABLE).edit().putLong(EXCEPTION_FILE_SIZE, file.length()).commit();
+				if (writeFileSize) {
+					activity.getPreferences(Context.MODE_WORLD_WRITEABLE).edit().putLong(EXCEPTION_FILE_SIZE, file.length()).commit();
+				}
 				return true;
 			}
 		} else {
@@ -440,11 +442,16 @@ public class AppInitializer implements IProgress {
 				osmandSettings.NATIVE_RENDERING_FAILED.set(true);
 				startTask(app.getString(R.string.init_native_library), -1);
 				RenderingRulesStorage storage = app.getRendererRegistry().getCurrentSelectedRenderer();
-				boolean initialized = NativeOsmandLibrary.getLibrary(storage, app) != null;
+				NativeOsmandLibrary lib = NativeOsmandLibrary.getLibrary(storage, app);
+				boolean initialized =  lib != null;
 				osmandSettings.NATIVE_RENDERING_FAILED.set(false);
 				if (!initialized) {
 					LOG.info("Native library could not be loaded!");
+				} else {
+					File ls = app.getAppPath("fonts");
+					lib.loadFontData(ls);
 				}
+				
 			}
 			app.getResourceManager().initMapBoundariesCacheNative();
 		}

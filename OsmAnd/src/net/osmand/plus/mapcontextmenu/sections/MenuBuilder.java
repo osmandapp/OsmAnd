@@ -1,4 +1,4 @@
-package net.osmand.plus.mapcontextmenu;
+package net.osmand.plus.mapcontextmenu.sections;
 
 import android.graphics.drawable.Drawable;
 import android.view.View;
@@ -7,15 +7,18 @@ import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 
-public abstract class BottomSectionBuilder {
+public abstract class MenuBuilder {
+
+	public static final float SHADOW_HEIGHT_TOP_DP = 16f;
+	public static final float SHADOW_HEIGHT_BOTTOM_DP = 6f;
 
 	protected OsmandApplication app;
 
-	public BottomSectionBuilder(OsmandApplication app) {
+	public MenuBuilder(OsmandApplication app) {
 		this.app = app;
 	}
 
-	public abstract void buildSection(View view);
+	public abstract void build(View view);
 
 	public Drawable getRowIcon(int iconId) {
 		IconsCache iconsCache = app.getIconsCache();

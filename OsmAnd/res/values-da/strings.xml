@@ -2128,4 +2128,7 @@
 	<string name="recent_places">Seneste steder</string>
 	<string name="favourites">Favoritter</string>
 <string name="poi_action_delete">slet</string>
-	</resources>
+	<string name="saved_at_time">Gemt korrekt: %1$s</string>
+<string name="poi_deleted_localy">IP vil blive slettet, når ændringer overføres</string>
+	<string name="show_gpx">Vis GPX</string>
+</resources>

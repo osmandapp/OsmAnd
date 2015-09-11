@@ -84,7 +84,7 @@ public class OsmAndLocationSimulation {
 									@Override
 									public boolean processResult(GPXUtilities.GPXFile[] result) {
 										GPXRouteParamsBuilder builder = new GPXRouteParamsBuilder(result[0], app.getSettings());
-										startAnimationThread(app.getRoutingHelper(), ma, builder.getPoints(), true,
+										startAnimationThread(app, builder.getPoints(), true,
 												speedup.getProgress() + 1);
 										return true;
 									}
@@ -94,7 +94,7 @@ public class OsmAndLocationSimulation {
 						if(currentRoute.isEmpty()) {
 							AccessibleToast.makeText(app, R.string.animate_routing_route_not_calculated, Toast.LENGTH_LONG).show();
 						} else {
-							startAnimationThread(app.getRoutingHelper(), ma, new ArrayList<Location>(currentRoute), false, 1);
+							startAnimationThread(app, new ArrayList<Location>(currentRoute), false, 1);
 						}
 					}
 
@@ -107,8 +107,7 @@ public class OsmAndLocationSimulation {
 		}
 	}
 
-	private void startAnimationThread(final RoutingHelper routingHelper,
-			final MapActivity ma, final List<Location> directions, final boolean useLocationTime, final float coeff) {
+	private void startAnimationThread(final OsmandApplication app, final List<Location> directions, final boolean useLocationTime, final float coeff) {
 		final float time = 1.5f;
 		routeAnimation = new Thread() {
 			@Override
@@ -148,7 +147,7 @@ public class OsmAndLocationSimulation {
 						current.setBearing(prev.bearingTo(current));
 					}
 					final Location toset = current;
-					ma.runOnUiThread(new Runnable() {
+					app.runInUIThread(new Runnable() {
 						@Override
 						public void run() {
 							provider.setLocationFromSimulation(toset);

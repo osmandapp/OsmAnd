@@ -74,6 +74,12 @@
                 android:id="@+id/time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:lines="1" 
+                android:singleLine="true"
+                android:scrollHorizontally="true"
+                
                 android:layout_marginRight="@dimen/gpx_small_text_margin"
                 android:textColor="?android:textColorSecondary"
                 android:textSize="@dimen/default_sub_text_size" />

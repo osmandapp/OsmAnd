@@ -2,18 +2,23 @@ package net.osmand.plus.mapcontextmenu;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.app.Fragment;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
+import android.view.VelocityTracker;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.animation.DecelerateInterpolator;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.osmand.PlatformUtil;
@@ -21,11 +26,14 @@ import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.search.SearchActivity;
+import net.osmand.plus.mapcontextmenu.sections.MenuController;
+import net.osmand.plus.views.OsmandMapTileView;
 
 import org.apache.commons.logging.Log;
 
-import java.util.Map;
+import static android.util.TypedValue.COMPLEX_UNIT_DIP;
+import static net.osmand.plus.mapcontextmenu.sections.MenuBuilder.SHADOW_HEIGHT_BOTTOM_DP;
+import static net.osmand.plus.mapcontextmenu.sections.MenuBuilder.SHADOW_HEIGHT_TOP_DP;
 
 
 public class MapContextMenuFragment extends Fragment {
@@ -35,8 +43,17 @@ public class MapContextMenuFragment extends Fragment {
 
 	private View view;
 	private View mainView;
+	private View bottomView;
+	private View shadowView;
+	private View bottomBorder;
 
-	private float mainViewHeight;
+	MenuController menuController;
+
+	private int menuTopHeight;
+	private int menuTopShadowHeight;
+	private int menuButtonsHeight;
+	private int menuBottomViewHeight;
+	private int menuFullHeight;
 
 	@Override
 	public void onAttach(Activity activity) {
@@ -72,14 +89,56 @@ public class MapContextMenuFragment extends Fragment {
 		*/
 	}
 
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		getCtxMenu().saveMenuState(outState);
+	}
+
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 
+		if (savedInstanceState != null)
+			getCtxMenu().restoreMenuState(savedInstanceState);
+
 		view = inflater.inflate(R.layout.map_context_menu_fragment, container, false);
 
-		View shadowView = view.findViewById(R.id.context_menu_shadow_view);
+		ViewTreeObserver vto = view.getViewTreeObserver();
+		vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+
+			@Override
+			public void onGlobalLayout() {
+
+				menuTopHeight = view.findViewById(R.id.context_menu_top_view).getHeight();
+				menuTopShadowHeight = view.findViewById(R.id.context_menu_top_shadow).getHeight();
+				menuButtonsHeight = view.findViewById(R.id.context_menu_buttons).getHeight();
+				menuBottomViewHeight = view.findViewById(R.id.context_menu_bottom_view).getHeight();
+				menuFullHeight = view.findViewById(R.id.context_menu_main).getHeight();
+
+				ViewTreeObserver obs = view.getViewTreeObserver();
+
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+					obs.removeOnGlobalLayoutListener(this);
+				} else {
+					obs.removeGlobalOnLayoutListener(this);
+				}
+
+				doLayoutMenu();
+			}
+
+		});
+
+		bottomBorder = view.findViewById(R.id.context_menu_bottom_border);
+		bottomBorder.setOnTouchListener(new View.OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				return true;
+			}
+		});
+
+		shadowView = view.findViewById(R.id.context_menu_shadow_view);
 		shadowView.setOnTouchListener(new View.OnTouchListener() {
 			public boolean onTouch(View view, MotionEvent event) {
 				dismissMenu();
@@ -87,42 +146,142 @@ public class MapContextMenuFragment extends Fragment {
 			}
 		});
 
-		View topView = view.findViewById(R.id.context_menu_top_view);
 		mainView = view.findViewById(R.id.context_menu_main);
 
-		topView.setOnTouchListener(new View.OnTouchListener() {
-
+		final View.OnTouchListener slideTouchListener = new View.OnTouchListener() {
 			private float dy;
+			private float dyMain;
+			private int destinationState;
+			private VelocityTracker velocity;
+			private boolean slidingUp;
+			private boolean slidingDown;
+
+			private float velocityY;
+
+			private float startX;
+			private float startY;
+			private long lastTouchDown;
+			private final int CLICK_ACTION_THRESHHOLD = 200;
+
+			private boolean isClick(float endX, float endY) {
+				float differenceX = Math.abs(startX - endX);
+				float differenceY = Math.abs(startY - endY);
+				if (differenceX > 1 || differenceY > 1 || System.currentTimeMillis() - lastTouchDown > CLICK_ACTION_THRESHHOLD) {
+					return false;
+				}
+				return true;
+			}
 
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
+
 				switch (event.getAction()) {
 					case MotionEvent.ACTION_DOWN:
+						startX = event.getX();
+						startY = event.getY();
+						lastTouchDown = System.currentTimeMillis();
+
 						dy = event.getY();
-						mainViewHeight = mainView.getHeight();
+						dyMain = mainView.getY();
+						velocity = VelocityTracker.obtain();
+						velocityY = 0;
+						velocity.addMovement(event);
 						break;
 
 					case MotionEvent.ACTION_MOVE:
 						float y = event.getY();
-						LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) mainView.getLayoutParams();
-						float top = lp.topMargin + (y - dy);
-						if (top < 0) {
-							lp.topMargin = (int) top;
-							mainView.setLayoutParams(lp);
-						}
+						float newY = mainView.getY() + (y - dy);
+						mainView.setY(newY);
+
+						ViewGroup.LayoutParams lp = bottomBorder.getLayoutParams();
+						lp.height = (int)(view.getHeight() - newY - menuFullHeight) + 10;
+						bottomBorder.setLayoutParams(lp);
+						bottomBorder.setY(newY + menuFullHeight);
+						bottomBorder.requestLayout();
+
+						velocity.addMovement(event);
+						velocity.computeCurrentVelocity(1000);
+						float vel = Math.abs(velocity.getYVelocity());
+						if (vel > velocityY)
+							velocityY = vel;
+
 						break;
 
 					case MotionEvent.ACTION_UP:
 					case MotionEvent.ACTION_CANCEL:
+						float endX = event.getX();
+						float endY = event.getY();
 
-						float posY = view.getHeight() - mainViewHeight;
+						slidingUp = Math.abs(velocityY) > 500 && (mainView.getY() - dyMain) < -50;
+						slidingDown = Math.abs(velocityY) > 500 && (mainView.getY() - dyMain) > 50;
+
+						velocity.recycle();
+
+						if (menuController != null) {
+							if (slidingUp) {
+								menuController.slideUp();
+							} else if (slidingDown) {
+								menuController.slideDown();
+							}
+							destinationState = menuController.getCurrentMenuState();
+						} else {
+							destinationState = MenuController.MenuState.HEADER_ONLY;
+						}
+
+						float posY = 0;
+						switch (destinationState) {
+							case MenuController.MenuState.HEADER_ONLY:
+								posY = view.getHeight() - (menuFullHeight - menuBottomViewHeight - dpToPx(SHADOW_HEIGHT_BOTTOM_DP));
+								break;
+							case MenuController.MenuState.HALF_SCREEN:
+								posY = view.getHeight() - menuFullHeight;
+								break;
+							case MenuController.MenuState.FULL_SCREEN:
+								posY = -menuTopShadowHeight - dpToPx(SHADOW_HEIGHT_TOP_DP);
+								break;
+							default:
+								break;
+						}
+
+						float minY = Math.min(posY, mainView.getY());
+						lp = bottomBorder.getLayoutParams();
+						lp.height = (int)(view.getHeight() - minY - menuFullHeight) + 10;
+						if (lp.height < 0)
+							lp.height = 0;
+						bottomBorder.setLayoutParams(lp);
+						bottomBorder.requestLayout();
+
 						if (mainView.getY() != posY) {
 							mainView.animate().y(posY).setDuration(200).setInterpolator(new DecelerateInterpolator()).start();
+							bottomBorder.animate().y(posY + menuFullHeight).setDuration(200).setInterpolator(new DecelerateInterpolator()).start();
 						}
+
+						// OnClick event
+						if (isClick(endX, endY)) {
+							OsmandMapTileView mapView = getMapActivity().getMapView();
+							mapView.getAnimatedDraggingThread().startMoving(getCtxMenu().getPointDescription().getLat(), getCtxMenu().getPointDescription().getLon(),
+									mapView.getZoom(), true);
+						}
+
 						break;
 
 				}
 				return true;
+			}
+		};
+
+		View topView = view.findViewById(R.id.context_menu_top_view);
+		topView.setOnTouchListener(slideTouchListener);
+		View topShadowView = view.findViewById(R.id.context_menu_top_shadow);
+		topShadowView.setOnTouchListener(slideTouchListener);
+		View topShadowAllView = view.findViewById(R.id.context_menu_top_shadow_all);
+		topShadowAllView.setOnTouchListener(new View.OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				if (event.getY() <= dpToPx(SHADOW_HEIGHT_TOP_DP) || event.getAction() != MotionEvent.ACTION_DOWN)
+					return slideTouchListener.onTouch(v, event);
+				else
+					return false;
 			}
 		});
 
@@ -130,7 +289,7 @@ public class MapContextMenuFragment extends Fragment {
 		IconsCache iconsCache = getMyApplication().getIconsCache();
 		boolean light = getMyApplication().getSettings().isLightContent();
 
-		int iconId = MapContextMenu.getInstance().getLeftIconId();
+		int iconId = getCtxMenu().getLeftIconId();
 
 		final View iconLayout = view.findViewById(R.id.context_menu_icon_layout);
 		final ImageView iconView = (ImageView)view.findViewById(R.id.context_menu_icon_view);
@@ -138,25 +297,25 @@ public class MapContextMenuFragment extends Fragment {
 			iconLayout.setVisibility(View.GONE);
 		} else {
 			iconView.setImageDrawable(iconsCache.getIcon(iconId,
-					light ? R.color.icon_color : R.color.icon_color_light));
+					light ? R.color.osmand_orange : R.color.osmand_orange_dark));
 		}
 
 		// Text line 1
 		TextView line1 = (TextView) view.findViewById(R.id.context_menu_line1);
-		line1.setText(MapContextMenu.getInstance().getAddressStr());
+		line1.setText(getCtxMenu().getAddressStr());
 
 		// Text line 2
 		TextView line2 = (TextView) view.findViewById(R.id.context_menu_line2);
-		line2.setText(MapContextMenu.getInstance().getLocationStr());
+		line2.setText(getCtxMenu().getLocationStr(getMapActivity()));
 
 		// Close button
 		final ImageView closeButtonView = (ImageView)view.findViewById(R.id.context_menu_close_btn_view);
 		closeButtonView.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_remove_dark,
-				light ? R.color.actionbar_dark_color : R.color.actionbar_light_color));
+				light ? R.color.icon_color_light : R.color.dash_search_icon_dark));
 		closeButtonView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				((MapActivity)getActivity()).getMapLayers().getContextMenuLayer().hideMapContextMenuMarker();
+				((MapActivity) getActivity()).getMapLayers().getContextMenuLayer().hideMapContextMenuMarker();
 				dismissMenu();
 			}
 		});
@@ -164,91 +323,107 @@ public class MapContextMenuFragment extends Fragment {
 		// Action buttons
 		final ImageButton buttonNavigate = (ImageButton) view.findViewById(R.id.context_menu_route_button);
 		buttonNavigate.setImageDrawable(iconsCache.getIcon(R.drawable.map_directions,
-				light ? R.color.actionbar_dark_color : R.color.actionbar_light_color));
+				light ? R.color.icon_color : R.color.dash_search_icon_dark));
 		buttonNavigate.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				MapContextMenu.getInstance().buttonNavigatePressed();
+				getCtxMenu().buttonNavigatePressed(getMapActivity());
 			}
 		});
 
 		final ImageButton buttonFavorite = (ImageButton) view.findViewById(R.id.context_menu_fav_button);
 		buttonFavorite.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_fav_dark,
-				light ? R.color.actionbar_dark_color : R.color.actionbar_light_color));
+				light ? R.color.icon_color : R.color.dash_search_icon_dark));
 		buttonFavorite.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				MapContextMenu.getInstance().buttonFavoritePressed();
+				getCtxMenu().buttonFavoritePressed(getMapActivity());
 			}
 		});
 
 		final ImageButton buttonShare = (ImageButton) view.findViewById(R.id.context_menu_share_button);
 		buttonShare.setImageDrawable(iconsCache.getIcon(R.drawable.abc_ic_menu_share_mtrl_alpha,
-				light ? R.color.actionbar_dark_color : R.color.actionbar_light_color));
+				light ? R.color.icon_color : R.color.dash_search_icon_dark));
 		buttonShare.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				MapContextMenu.getInstance().buttonSharePressed();
+				getCtxMenu().buttonSharePressed(getMapActivity());
 			}
 		});
 
 		final ImageButton buttonMore = (ImageButton) view.findViewById(R.id.context_menu_more_button);
-		buttonMore.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_core_overflow_dark,
-				light ? R.color.actionbar_dark_color : R.color.actionbar_light_color));
+		buttonMore.setImageDrawable(iconsCache.getIcon(R.drawable.ic_overflow_menu_white,
+				light ? R.color.icon_color : R.color.dash_search_icon_dark));
 		buttonMore.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				MapContextMenu.getInstance().buttonMorePressed();
+				getCtxMenu().buttonMorePressed(getMapActivity());
 			}
 		});
 
-		// Bottom view
-		BottomSectionBuilder bottomSectionBuilder = MapContextMenu.getInstance().getBottomSectionBuilder();
-		if (bottomSectionBuilder != null) {
-			View bottomView = view.findViewById(R.id.context_menu_bottom_view);
-			bottomSectionBuilder.buildSection(bottomView);
-		}
-
-
-		/*
-		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-		toolbar.setTitle(R.string.poi_create_title);
-		toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
-		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-				fragmentManager.beginTransaction().remove(MapContextMenuFragment.this).commit();
-				fragmentManager.popBackStack();
-			}
-		});
-
-		viewPager = (ViewPager) view.findViewById(R.id.viewpager);
-		String basicTitle = getResources().getString(R.string.tab_title_basic);
-		String extendedTitle = getResources().getString(R.string.tab_title_advanced);
-		MyAdapter pagerAdapter = new MyAdapter(getChildFragmentManager(), basicTitle, extendedTitle);
-		viewPager.setAdapter(pagerAdapter);
-
-		final TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
-		tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
-
-		// Hack due to bug in design support library v22.2.1
-		// https://code.google.com/p/android/issues/detail?id=180462
-		// TODO remove in new version
-		if (ViewCompat.isLaidOut(tabLayout)) {
-			tabLayout.setupWithViewPager(viewPager);
-		} else {
-			tabLayout.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+		// Menu controller
+		menuController = getCtxMenu().getMenuController();
+		bottomView = view.findViewById(R.id.context_menu_bottom_view);
+		if (menuController != null) {
+			bottomView.setOnTouchListener(new View.OnTouchListener() {
 				@Override
-				public void onLayoutChange(View v, int left, int top, int right, int bottom,
-										   int oldLeft, int oldTop, int oldRight, int oldBottom) {
-					tabLayout.setupWithViewPager(viewPager);
-					tabLayout.removeOnLayoutChangeListener(this);
+				public boolean onTouch(View v, MotionEvent event) {
+					return true;
 				}
 			});
+			menuController.build(bottomView);
 		}
-		*/
+
 		return view;
+	}
+
+	private void doLayoutMenu() {
+		int shadowViewHeight = 0;
+		int bottomBorderHeight = 0;
+
+		int menuState;
+		if (menuController != null)
+			menuState = menuController.getCurrentMenuState();
+		else
+			menuState = MenuController.MenuState.HEADER_ONLY;
+
+		switch (menuState) {
+			case MenuController.MenuState.HEADER_ONLY:
+				shadowViewHeight = view.getHeight() - (menuFullHeight - menuBottomViewHeight) + dpToPx(SHADOW_HEIGHT_BOTTOM_DP);
+				bottomBorderHeight = 0;
+				break;
+			case MenuController.MenuState.HALF_SCREEN:
+				int maxHeight = (int)(menuController.getHalfScreenMaxHeightKoef() * view.getHeight());
+				if (maxHeight > menuFullHeight) {
+					shadowViewHeight = view.getHeight() - menuFullHeight;
+					bottomBorderHeight = 0;
+				} else {
+					shadowViewHeight = view.getHeight() - maxHeight;
+					bottomBorderHeight = 0;
+					mainView.setY(shadowViewHeight);
+				}
+				break;
+			case MenuController.MenuState.FULL_SCREEN:
+				shadowViewHeight = 0;
+				bottomBorderHeight = view.getHeight() - menuFullHeight + menuTopShadowHeight + dpToPx(SHADOW_HEIGHT_TOP_DP);
+				break;
+			default:
+				break;
+		}
+
+		ViewGroup.LayoutParams lp = bottomBorder.getLayoutParams();
+		lp.height = bottomBorderHeight + 10;
+		bottomBorder.setLayoutParams(lp);
+		bottomBorder.setY(view.getHeight() - bottomBorderHeight);
+
+		lp = shadowView.getLayoutParams();
+		lp.height = shadowViewHeight;
+		shadowView.setLayoutParams(lp);
+
+		lp = mainView.getLayoutParams();
+		lp.height = menuFullHeight;
+		mainView.setLayoutParams(lp);
+
 	}
 
 	public void dismissMenu() {
@@ -268,6 +443,30 @@ public class MapContextMenuFragment extends Fragment {
 				.setCustomAnimations(R.anim.slide_in_bottom, R.anim.slide_out_bottom, R.anim.slide_in_bottom, R.anim.slide_out_bottom)
 				.add(R.id.fragmentContainer, fragment, "MapContextMenuFragment")
 				.addToBackStack(null).commit();
+	}
+
+	private MapContextMenu getCtxMenu() {
+		return getMapActivity().getContextMenu();
+	}
+
+	private MapActivity getMapActivity() {
+		return (MapActivity)getActivity();
+	}
+
+	// Utils
+	private int getScreenHeight() {
+		DisplayMetrics dm = new DisplayMetrics();
+		getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
+		return dm.heightPixels;
+	}
+
+	private int dpToPx(float dp) {
+		Resources r = getActivity().getResources();
+		return (int) TypedValue.applyDimension(
+				COMPLEX_UNIT_DIP,
+				dp,
+				r.getDisplayMetrics()
+		);
 	}
 }
 

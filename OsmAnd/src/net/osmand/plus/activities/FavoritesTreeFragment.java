@@ -493,31 +493,38 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 	}
 
 	protected void openChangeGroupDialog(final FavoriteGroup group) {
-		Builder bld = new AlertDialog.Builder(getActivity());
-		View favEdit = getActivity().getLayoutInflater().inflate(R.layout.fav_group_edit, null);
-        final TIntArrayList list = new TIntArrayList();
-        final Spinner colorSpinner = (Spinner) favEdit.findViewById(R.id.ColorSpinner);
-        final int intColor = group.color == 0? getResources().getColor(R.color.color_favorite) : group.color;
-        ColorDialogs.setupColorSpinner(getActivity(), intColor, colorSpinner, list);
-		
-		final CheckBox checkBox = (CheckBox) favEdit.findViewById(R.id.Visibility);
+		Builder builder = new AlertDialog.Builder(getActivity());
+		View view = getActivity().getLayoutInflater().inflate(R.layout.fav_group_edit, null);
+
+		final EditText nameEditText = (EditText) view.findViewById(R.id.nameEditText);
+		nameEditText.setText(group.name);
+
+		final CheckBox checkBox = (CheckBox) view.findViewById(R.id.Visibility);
 		checkBox.setChecked(group.visible);
-		bld.setTitle(R.string.edit_group);
-		bld.setView(favEdit);
-		bld.setNegativeButton(R.string.shared_string_cancel, null);
-		bld.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
-			
+
+		final Spinner colorSpinner = (Spinner) view.findViewById(R.id.ColorSpinner);
+		final TIntArrayList list = new TIntArrayList();
+		final int intColor = group.color == 0? getResources().getColor(R.color.color_favorite) : group.color;
+		ColorDialogs.setupColorSpinner(getActivity(), intColor, colorSpinner, list);
+
+		builder.setTitle(R.string.edit_group);
+		builder.setView(view);
+		builder.setNegativeButton(R.string.shared_string_cancel, null);
+		builder.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
+
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				int clr = list.get(colorSpinner.getSelectedItemPosition());
-				if(clr != intColor || group.visible != checkBox.isChecked()) {
-					getMyApplication().getFavorites().editFavouriteGroup(group, clr, checkBox.isChecked());
+				String name = nameEditText.getText().toString();
+				if (clr != intColor || group.visible != checkBox.isChecked()) {
+					getMyApplication().getFavorites().editFavouriteGroup(group, name, clr,
+							checkBox.isChecked());
 					favouritesAdapter.notifyDataSetInvalidated();
 				}
-				
+
 			}
 		});
-		bld.show();
+		builder.show();
 		
 	}
 
