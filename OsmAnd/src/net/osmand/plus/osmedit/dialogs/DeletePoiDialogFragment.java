@@ -20,8 +20,6 @@ import net.osmand.plus.osmedit.OpenstreetmapUtil;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.osmedit.OsmPoint;
 
-import java.text.MessageFormat;
-
 public class DeletePoiDialogFragment extends DialogFragment {
 	private static final String KEY_AMENITY_NODE = "amenity_node";
 
@@ -47,9 +45,8 @@ public class DeletePoiDialogFragment extends DialogFragment {
 						new Runnable() {
 							@Override
 							public void run() {
-								AccessibleToast.makeText(activity, MessageFormat.format(
-										getString(R.string.poi_action_succeded_template),
-												getString(R.string.poi_action_delete)),
+								AccessibleToast.makeText(activity,
+										getString(R.string.poi_deleted_localy),
 										Toast.LENGTH_LONG).show();
 								if (activity instanceof MapActivity) {
 									((MapActivity) activity).getMapView().refreshMap(true);
