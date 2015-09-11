@@ -1169,8 +1169,8 @@
 	<string name="poi_parking_underground">Subterráneo</string>
 	<string name="poi_parking_multi_storey">Varios pisos</string>
 
-	<string name="poi_bicycle_parking_stands">Soporte</string>
-	<string name="poi_bicycle_parking_wall_loops">Soporte de pared</string>
+	<string name="poi_bicycle_parking_stands">Anclajes</string>
+	<string name="poi_bicycle_parking_wall_loops">Anclajes de pared</string>
 	<string name="poi_bicycle_parking_informal">Informal</string>
 
 	<string name="poi_leaf_type_broadleaved">Hoja ancha</string>
@@ -1184,7 +1184,7 @@
 	<string name="poi_trees_orange">Naranjo</string>
 	<string name="poi_trees_almond">Almendro</string>
 	<string name="poi_trees_banana">Banano</string>
-	<string name="poi_trees_hazel">Avellanos</string>
+	<string name="poi_trees_hazel">Avellano</string>
 	<string name="poi_trees_coconut">Cocotero</string>
 	<string name="poi_nudism_yes">Nudismo permitido</string>
 	<string name="poi_nudism_no">Nudismo prohibido</string>
@@ -1192,10 +1192,10 @@
 	<string name="poi_nudism_customary">Nudismo habitual</string>
 	<string name="poi_nudism_permissive">Nudismo permisivo</string>
 
-	<string name="poi_bicycle_parking_rack">Bastidores</string>
+	<string name="poi_bicycle_parking_rack">Bastidor</string>
 	<string name="poi_bicycle_parking_building">Edificio especial</string>
 	<string name="poi_bicycle_parking_shed">Caseta</string>
-	<string name="poi_bicycle_parking_bollard">Bolardos</string>
+	<string name="poi_bicycle_parking_bollard">Bolardo</string>
 	<string name="poi_trees_persimmon">Caqui</string>
 	<string name="poi_trees_cherry">Cerezo</string>
 	<string name="poi_trees_walnut">Nogal</string>
