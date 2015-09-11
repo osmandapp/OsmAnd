@@ -1187,7 +1187,7 @@
 
 	<string name="poi_parking_multi_storey">Fleretages</string>
 
-	<string name="poi_bicycle_parking_stands">Står</string>
+	<string name="poi_bicycle_parking_stands">Stativ</string>
 	<string name="poi_bicycle_parking_wall_loops">Væg sløjfer</string>
 	<string name="poi_bicycle_parking_building">Bygning</string>
 	<string name="poi_bicycle_parking_shed">Skur</string>
@@ -1210,7 +1210,7 @@
 	<string name="poi_trees_persimmon">Ibenholt</string>
 	<string name="poi_trees_cherry">Kirsebær</string>
 	<string name="poi_trees_walnut">Valnød</string>
-	<string name="poi_trees_plum">Blomme</string>
+	<string name="poi_trees_plum">Blommetræ</string>
 	<string name="poi_trees_peach">Fersken</string>
 	<string name="poi_trees_tea">Te</string>
 	<string name="poi_trees_coca">Coca</string>
@@ -1219,10 +1219,10 @@
 	<string name="poi_trees_nectorine">Nektarin</string>
 	<string name="poi_trees_mango">Mango</string>
 	<string name="poi_trees_rubber">Gummitræ</string>
-	<string name="poi_trees_date">Dadel</string>
+	<string name="poi_trees_date">Daddelpalmeq</string>
 	<string name="poi_trees_coffea">Kaffe</string>
 	<string name="poi_trees_pomegranate">Granatæble</string>
 
-	<string name="poi_parking_underground">Kældet</string>
+	<string name="poi_parking_underground">Kælder</string>
 	<string name="poi_bicycle_parking_rack">Reol</string>
 	</resources>
