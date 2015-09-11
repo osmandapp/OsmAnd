@@ -661,18 +661,18 @@
 	<string name="poi_denomination_pentecostal">Pentecostal</string>
 	<string name="poi_denomination_mormon">Mormon</string>
 	<string name="poi_denomination_jehovahs_witness">Jehovahs witness</string>
-	<string name="poi_denomination_greek_orthodox">Greek_orthodox</string>
+	<string name="poi_denomination_greek_orthodox">Greek orthodox</string>
 	<string name="poi_denomination_reformed">Reformed</string>
-	<string name="poi_denomination_seventh_day_adventist">Seventh_day_adventist</string>
-	<string name="poi_denomination_new_apostolic">New_apostolic</string>
-	<string name="poi_denomination_church_of_england">Church_of_england</string>
+	<string name="poi_denomination_seventh_day_adventist">Seventh day adventist</string>
+	<string name="poi_denomination_new_apostolic">New apostolic</string>
+	<string name="poi_denomination_church_of_england">Church of england</string>
 	<string name="poi_denomination_episcopal">Episcopal</string>
 	<string name="poi_denomination_shia">Shia</string>
 	<string name="poi_denomination_united">United</string>
 	<string name="poi_denomination_greek_catholic">Greek catholic</string>
 	<string name="poi_denomination_tibetan">Tibetan</string>
 	<string name="poi_denomination_united_reformed">United reformed</string>
-	<string name="poi_denomination_church_of_scotland">Church of scotland</string>
+	<string name="poi_denomination_church_of_scotland">Church of Scotland</string>
 	<string name="poi_denomination_salvation_army">Salvation army</string>
 	<string name="poi_denomination_iglesia_ni_cristo">Iglesia ni cristo</string>
 	<string name="poi_denomination_uniting">Uniting</string>
@@ -1141,6 +1141,45 @@
 	<string name="poi_trade_tile">Tile supplies</string>
 
 	<string name="poi_population">Population</string>
+	<string name="poi_parking_underground">Underground</string>
+	<string name="poi_parking_multi_storey">Multi-storey</string>
+
+	<string name="poi_bicycle_parking_stands">Stands</string>
+	<string name="poi_bicycle_parking_wall_loops">Wall loops</string>
+	<string name="poi_bicycle_parking_rack">Rack</string>
+	<string name="poi_bicycle_parking_building">Building</string>
+	<string name="poi_bicycle_parking_shed">Shed</string>
+	<string name="poi_bicycle_parking_bollard">Bollard</string>
+	<string name="poi_bicycle_parking_informal">Informal</string>
+
+	<string name="poi_leaf_type_broadleaved">Broadleaved</string>
+	<string name="poi_leaf_type_needleleaved">Needleleaved</string>
+	<string name="poi_leaf_type_mixed">Mixed</string>
+	<string name="poi_leaf_type_leafless">Leafless</string>
+
+	<string name="poi_trees_olive">Olive</string>
+	<string name="poi_trees_apple">Apple</string>
+	<string name="poi_trees_oil">Palm oil</string>
+	<string name="poi_trees_orange">Orange</string>
+	<string name="poi_trees_almond">Almond</string>
+	<string name="poi_trees_banana">Banana</string>
+	<string name="poi_trees_hazel">Hazel</string>
+	<string name="poi_trees_coconut">Coconut</string>
+	<string name="poi_trees_persimmon">Persimmon</string>
+	<string name="poi_trees_cherry">Cherry</string>
+	<string name="poi_trees_walnut">Walnut</string>
+	<string name="poi_trees_plum">Plum</string>
+	<string name="poi_trees_peach">Peach</string>
+	<string name="poi_trees_tea">Tea</string>
+	<string name="poi_trees_coca">Coca</string>
+	<string name="poi_trees_kiwi">Kiwi</string>
+	<string name="poi_trees_meadow_orchard">Meadow orchard</string>
+	<string name="poi_trees_nectorine">Nectorine</string>
+	<string name="poi_trees_mango">Mango</string>
+	<string name="poi_trees_rubber">Rubber</string>
+	<string name="poi_trees_date">Date</string>
+	<string name="poi_trees_coffea">Coffee</string>
+	<string name="poi_trees_pomegranate">Pomegranate</string>
 
 	<string name="poi_enforcement_traffic_signals">Enforcement:traffic signals</string>
 	<string name="poi_enforcement_maxspeed">Enforcement:maxspeed</string>
