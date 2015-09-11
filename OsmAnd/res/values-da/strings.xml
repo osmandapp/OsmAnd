@@ -2128,5 +2128,5 @@
 	<string name="recent_places">Seneste steder</string>
 	<string name="favourites">Favoritter</string>
 <string name="poi_action_delete">slet</string>
-	<string name="saved_at_time">Gemt på: %1$s</string>
+	<string name="saved_at_time">Gemt korrekt: %1$s</string>
 </resources>
