@@ -2261,4 +2261,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="recent_places">Recent places</string>
 	<string name="favourites">Favourites</string>
 	<string name="saved_at_time">Successfully saved at: %1$s</string>
+	<string name="poi_deleted_localy">POI will be deleted once you upload your changes</string>
+	<string name="show_gpx">Show GPX</string>
 </resources>
