@@ -1169,4 +1169,21 @@
 	<string name="poi_parking_underground">Subterráneo</string>
 	<string name="poi_parking_multi_storey">Varios pisos</string>
 
+	<string name="poi_bicycle_parking_stands">Soporte</string>
+	<string name="poi_bicycle_parking_wall_loops">Soporte de pared</string>
+	<string name="poi_bicycle_parking_informal">Informal</string>
+
+	<string name="poi_leaf_type_broadleaved">Hoja ancha</string>
+	<string name="poi_leaf_type_needleleaved">Hoja acicular</string>
+	<string name="poi_leaf_type_mixed">Mixto</string>
+	<string name="poi_leaf_type_leafless">Sin hojas</string>
+
+	<string name="poi_trees_olive">Olivo</string>
+	<string name="poi_trees_apple">Manzano</string>
+	<string name="poi_trees_oil">Aceite de palma</string>
+	<string name="poi_trees_orange">Naranjo</string>
+	<string name="poi_trees_almond">Almendro</string>
+	<string name="poi_trees_banana">Banano</string>
+	<string name="poi_trees_hazel">Avellanos</string>
+	<string name="poi_trees_coconut">Cocotero</string>
 	</resources>
