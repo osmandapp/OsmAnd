@@ -11,7 +11,7 @@ public class AmenityInfoMenuController extends MenuController {
 
 	@Override
 	public int getInitialMenuState() {
-		return MenuState.HALF_SCREEN;
+		return MenuState.HEADER_ONLY;
 	}
 
 	@Override
