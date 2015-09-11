@@ -1208,4 +1208,6 @@
 
 	<string name="poi_bicycle_parking_wall_loops">Anclajes de pared</string>
 	<string name="poi_bicycle_parking_rack">Bastidores</string>
+	<string name="poi_bicycle_parking_building">Edificio especial</string>
+	<string name="poi_bicycle_parking_shed">Caseta</string>
 	</resources>
