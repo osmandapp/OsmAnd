@@ -63,7 +63,7 @@ public abstract class MenuController {
 	}
 
 	public float getHalfScreenMaxHeightKoef() {
-		return .6f;
+		return .7f;
 	}
 
 	public boolean shouldShowButtons() {

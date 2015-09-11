@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<FrameLayout
     android:id="@+id/context_menu_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
@@ -10,15 +10,14 @@
     <LinearLayout
         android:id="@+id/context_menu_shadow_view"
         android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0"
+        android:layout_height="fill_parent"
+        android:gravity="center"
         android:orientation="vertical"/>
 
     <LinearLayout
         android:id="@+id/context_menu_main"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
+        android:layout_height="fill_parent"
         android:orientation="vertical">
 
         <LinearLayout
@@ -182,24 +181,25 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/context_menu_bottom_view"
+        <ScrollView
+            android:id="@+id/context_menu_bottom_scroll"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:background="?attr/ctx_menu_info_view_bg"
-            android:orientation="vertical">
+            android:fillViewport="true">
 
-        </LinearLayout>
+            <LinearLayout
+                android:id="@+id/context_menu_bottom_view"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            </LinearLayout>
+
+        </ScrollView>
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/context_menu_bottom_border"
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:background="?attr/ctx_menu_info_view_bg"
-        android:orientation="vertical">
 
-    </LinearLayout>
 
-</LinearLayout>
+</FrameLayout>
