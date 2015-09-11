@@ -120,7 +120,7 @@ public class MapContextMenuFragment extends Fragment {
 				menuFullHeight = view.findViewById(R.id.context_menu_main).getHeight();
 
 				menuTitleHeight = menuTopShadowHeight + menuTopShadowAllHeight;
-				menuFullHeightMax = menuTitleHeight + menuBottomViewHeight + dpToPx(2f);
+				menuFullHeightMax = menuTitleHeight + (menuBottomViewHeight > 0 ? menuBottomViewHeight + dpToPx(2f) : -dpToPx(SHADOW_HEIGHT_BOTTOM_DP));
 
 				ViewTreeObserver obs = view.getViewTreeObserver();
 
@@ -223,7 +223,7 @@ public class MapContextMenuFragment extends Fragment {
 						velocity.recycle();
 
 						if (menuController != null) {
-							if (slidingUp) {
+							if (menuBottomViewHeight > 0 && slidingUp) {
 								menuController.slideUp();
 							} else if (slidingDown) {
 								menuController.slideDown();
