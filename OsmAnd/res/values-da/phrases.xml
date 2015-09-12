@@ -1231,4 +1231,6 @@
 	<string name="poi_nudism_customary">Naturisme: sædvanlig</string>
 	<string name="poi_nudism_permissive">Naturisme: liberalt</string>
 
+	<string name="poi_height">Højde</string>
+	<string name="poi_ele">Højde over havoverfladen</string>
 	</resources>
