@@ -1185,4 +1185,6 @@
 	<string name="poi_trees_olive">橄欖樹</string>
 	<string name="poi_trees_apple">蘋果樹</string>
 	<string name="poi_trees_oil">棕櫚油</string>
+	<string name="poi_height">高度</string>
+	<string name="poi_ele">海拔高度</string>
 	</resources>
