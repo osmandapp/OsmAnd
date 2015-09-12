@@ -2082,4 +2082,7 @@
 	<string name="working_days">Dies de traballu</string>
 	<string name="recent_places">Logos reghentes</string>
 	<string name="favourites">Prefèrridos</string>
-</resources>
+<string name="poi_deleted_localy">Su PDI at a èssere burradu a pustis de su carrigamentu de sas modìficas tuas</string>
+	<string name="show_gpx">Ammustra GPX</string>
+<string name="saved_at_time">Sarbada resèssida in: %1$s</string>
+	</resources>
