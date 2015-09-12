@@ -2106,4 +2106,6 @@
 	<string name="recent_places">最近的地點</string>
 	<string name="favourites">我的最愛</string>
 <string name="saved_at_time">已順利的儲存於：%1$s</string>
+<string name="poi_deleted_localy">一旦您上傳您的變更，興趣點會被刪除</string>
+	<string name="show_gpx">顯示 GPX</string>
 </resources>
