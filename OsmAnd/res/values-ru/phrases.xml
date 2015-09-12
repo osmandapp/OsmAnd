@@ -948,4 +948,5 @@
 	<string name="poi_ele">Высота над уровнем моря</string>
 
 	<string name="poi_building">Здание</string>
-	</resources>
+	<string name="poi_hiking_routes">Туристические маршруты</string>
+		</resources>
