@@ -1212,4 +1212,6 @@
 	<string name="poi_trees_tea">Erveira</string>
 	<string name="poi_trees_coca">Coca</string>
 	<string name="poi_trees_meadow_orchard">Prado com pomar</string>
+	<string name="poi_height">Altura</string>
+	<string name="poi_ele">Altura acima do nível do mar</string>
 	</resources>
