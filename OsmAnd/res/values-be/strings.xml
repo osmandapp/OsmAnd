@@ -2090,4 +2090,5 @@
 	<string name="favourites">Упадабанае</string>
 <string name="saved_at_time">Пасьпяхова захаваны ў: %1$s</string>
 <string name="show_gpx">Паказаць GPX</string>
-</resources>
+<string name="poi_deleted_localy">POI будуць выдаленыя, як толькі вы загрузіце вашы зьмены</string>
+	</resources>
