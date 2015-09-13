@@ -1185,7 +1185,7 @@
 
 	<string name="poi_population">Befolkning</string>
 
-	<string name="poi_parking_multi_storey">Fleretagesparkering</string>
+	<string name="poi_parking_multi_storey">P-hus</string>
 
 	<string name="poi_bicycle_parking_stands">Cykelsstativ</string>
 	<string name="poi_bicycle_parking_wall_loops">Væg sløjfer</string>
@@ -1234,15 +1234,15 @@
 	<string name="poi_height">Højde</string>
 	<string name="poi_ele">Højde over havoverfladen</string>
 	<string name="poi_cooling_tower">Køletårn</string>
-	<string name="poi_rural">Landdistrikter</string>
+	<string name="poi_rural">Landlig</string>
 
-	<string name="poi_seats">Pladser</string>
+	<string name="poi_seats">Sæder</string>
 	<string name="poi_backrest_yes">Ryglæn: Ja</string>
 	<string name="poi_backrest_no">Ryglæn: nej</string>
 
 	<string name="poi_intermittent">Intermitterende</string>
 
-	<string name="poi_deadlock">Dødvande</string>
+	<string name="poi_deadlock">Blindgyde</string>
 
 	<string name="poi_generator_source_coal">Energikilde: kul</string>
 	<string name="poi_generator_source_gas">Energikilde: gas</string>
