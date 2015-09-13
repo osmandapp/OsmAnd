@@ -1170,4 +1170,46 @@
 
 	<string name="poi_ele">Nadmorská výška</string>
 	<string name="poi_height">Výška</string>
-	</resources>
+	<string name="poi_aerialway_pylon">Stožiar lanovky</string>
+
+	<string name="poi_power_tower">Elektrický stožiar</string>
+	<string name="poi_power_pole">Elektrický stĺp</string>
+
+	<string name="poi_cooling_tower">Chladiaca veža</string>
+	<string name="poi_lighting_tower">Osvetľovacia veža</string>
+	<string name="poi_seats">Sedadlá</string>
+	<string name="poi_backrest_yes">Operadlo: áno</string>
+	<string name="poi_backrest_no">Operadlo: nie</string>
+
+	<string name="poi_intermittent">Občasné</string>
+
+	<string name="poi_generator_source_coal">Zdroj energie: uhlie</string>
+	<string name="poi_generator_source_gas">Zdroj energie: plyn</string>
+	<string name="poi_generator_source_nuclear">Zdroj energie: jadro</string>
+	<string name="poi_generator_source_solar">Zdroj energie: slnko</string>
+	<string name="poi_generator_source_hydro">Zdroj energie: voda</string>
+	<string name="poi_generator_source_wind">Zdroj energie: vietor</string>
+	<string name="poi_generator_source_geothermal">Zdroj energie: geotermálny</string>
+	<string name="poi_generator_source_oil">Zdroj energie: ropa</string>
+	<string name="poi_generator_source_diesel">Zdroj energie: nafta</string>
+
+	<string name="poi_car_wash_self_service">Samoobslužné</string>
+
+	<string name="poi_int_name">Medzinárodný názov</string>
+	<string name="poi_nat_name">Národný názov</string>
+	<string name="poi_reg_name">Regionálny názov</string>
+	<string name="poi_loc_name">Miestny názov</string>
+	<string name="poi_old_name">Starý názov</string>
+	<string name="poi_alt_name">Alternatívny názov</string>
+
+	<string name="poi_pump_manual">Ručná pumpa</string>
+	<string name="poi_pump_powered">Poháňaná pumpa</string>
+	<string name="poi_pump_no">Žiadna pumpa</string>
+
+	<string name="poi_water_characteristic_mineral">Vlastnosti vody: minerálna</string>
+	<string name="poi_water_characteristic_mud">Vlastnosti vody: blato</string>
+	<string name="poi_water_characteristic_sulfuric">Vlastnosti vody: sírnatá</string>
+
+	<string name="poi_water_point">Vodný bod</string>
+
+</resources>
