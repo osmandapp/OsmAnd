@@ -1253,4 +1253,5 @@
 	<string name="poi_pump_no">Sem bomba</string>
 
 	<string name="poi_water_characteristic_mineral">Característica d\'água: mineral</string>
+	<string name="poi_water_characteristic_mud">Característica d\'água: lama</string>
 	</resources>
