@@ -26,7 +26,7 @@ import org.apache.commons.logging.Log;
 public class RouteResultPreparation {
 
 	public static boolean PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST = false;
-	private static final float TURN_DEGREE_MIN = 45;
+	private static final float TURN_DEGREE_MIN = 35;
 	private Log log = PlatformUtil.getLog(RouteResultPreparation.class);
 	/**
 	 * Helper method to prepare final result 
