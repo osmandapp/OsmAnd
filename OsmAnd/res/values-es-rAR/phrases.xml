@@ -1214,4 +1214,32 @@
 	<string name="poi_trees_nectorine">Nectarina</string>
 	<string name="poi_height">Altura</string>
 	<string name="poi_ele">Elevación sobre el nivel del mar</string>
-	</resources>
+	<string name="poi_aerialway_pylon">Torre de teleférico</string>
+
+	<string name="poi_power_tower">Torre de alta tensión</string>
+	<string name="poi_power_pole">Poste de energía</string>
+
+	<string name="poi_cooling_tower">Torre de enfriamiento</string>
+	<string name="poi_lighting_tower">Torre de iluminación</string>
+	<string name="poi_urban">Urbano</string>
+	<string name="poi_rural">Rural</string>
+
+	<string name="poi_seats">Asientos</string>
+	<string name="poi_backrest_yes">Con respaldo</string>
+	<string name="poi_backrest_no">Sin respaldo</string>
+
+	<string name="poi_intermittent">Intermitente</string>
+
+	<string name="poi_deadlock">Punto muerto</string>
+
+	<string name="poi_generator_source_coal">Fuente de energía: carbón</string>
+	<string name="poi_generator_source_gas">Fuente de energía: gas</string>
+	<string name="poi_generator_source_nuclear">Fuente de energía: nuclear</string>
+	<string name="poi_generator_source_solar">Fuente de energía: solar</string>
+	<string name="poi_generator_source_hydro">Fuente de energía: hidroeléctrica</string>
+	<string name="poi_generator_source_wind">Fuente de energía: viento</string>
+	<string name="poi_generator_source_geothermal">Fuente de energía: geotérmica</string>
+	<string name="poi_generator_source_oil">Fuente de energía: petróleo</string>
+	<string name="poi_generator_source_diesel">Fuente de energía: diésel</string>
+
+</resources>
