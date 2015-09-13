@@ -1261,4 +1261,6 @@
 
 	<string name="poi_lighting_tower">Lysmast</string>
 	<string name="poi_urban">Bymæssig</string>
+	<string name="poi_car_wash_self_service">Selvbetjening</string>
+
 	</resources>
