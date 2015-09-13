@@ -2217,4 +2217,23 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="poi_dialog_poi_type">Rodzaj POI</string>
 	<string name="poi_action_delete">usuń</string>
 	<string name="building_number">Numer wersji</string>
-	</resources>
+	<string name="av_locations_descr">Plik gpx z notatkami o lokalizacjach</string>
+    <string name="rendering_value_boldOutline_name">Pogrubione kontury</string>
+    <string name="download_live_updates">Aktualizacje na żywo</string>
+	<string name="commit_poi">Wyślij POI</string>
+	<string name="tab_title_basic">Podstawowe</string>
+	<string name="tab_title_advanced">Zaawansowane</string>
+	<string name="next_proceed">Następny</string>
+	<string name="opening_at">Otwarte od</string>
+	<string name="closing_at">Zamknięte od</string>
+	<string name="tag_poi_name">Nazwa</string>
+	<string name="tag_poi_amenity">Udogodnienia</string>
+	<string name="contact_info">Informacje kontaktowe</string>
+	<string name="add_opening_hours">Dodaj godziny otwarcia</string>
+	<string name="working_days">Dni robocze</string>
+	<string name="recent_places">Ostatnie miejsca</string>
+	<string name="favourites">Ulubione</string>
+	<string name="saved_at_time">Zapisano o: %1$s</string>
+	<string name="poi_deleted_localy">POI zostanie usunięty gdy tylko wyślesz swoje zmiany</string>
+	<string name="show_gpx">Pokaż GPX</string>
+</resources>
