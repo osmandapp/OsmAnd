@@ -19,6 +19,28 @@
             android:orientation="vertical"
             custom:maxVisibleWidth="800dp">
 
+            <RadioGroup
+                android:id="@+id/RadioGroup"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_span="3"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/RadioBuilding"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/search_address_building_option" />
+
+                <RadioButton
+                    android:id="@+id/RadioIntersStreet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="@string/search_address_street_option" />
+            </RadioGroup>
+
             <TableLayout
                 android:id="@+id/TableLayout"
                 android:layout_width="fill_parent"
@@ -116,28 +138,6 @@
                         android:contentDescription="@string/shared_string_clear" />
                 </TableRow>
             </TableLayout>
-
-            <RadioGroup
-                android:id="@+id/RadioGroup"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_span="3"
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:id="@+id/RadioBuilding"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/search_address_building_option" />
-
-                <RadioButton
-                    android:id="@+id/RadioIntersStreet"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text="@string/search_address_street_option" />
-            </RadioGroup>
         </net.osmand.view.ExpandableLinearLayout>
     </LinearLayout>
 
