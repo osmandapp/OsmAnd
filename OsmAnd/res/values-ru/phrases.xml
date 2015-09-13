@@ -173,6 +173,7 @@
 	<string name="poi_aerialway_rope_tow">Движущийся канат</string>
 	<string name="poi_aerialway_goods">Грузовой подъёмник</string>
 	<string name="poi_aerialway_magic_carpet">Ленточный подъёмник</string>
+	<string name="poi_aerialway_pylon">Опора канатной дороги</string>
 
 	<string name="poi_tunnel">Туннель</string>
 	<string name="poi_bridge">Мост</string>
@@ -196,11 +197,15 @@
 	<string name="poi_power_transformer">Трансформатор</string>
 	<string name="poi_power_plant">Электростанция</string>
 	<string name="poi_power_generator">Генератор</string>
+	<string name="poi_power_tower">Опора линии электропередач</string>
+	<string name="poi_power_pole">Столб линии электропередач</string>
 
 	<string name="poi_post_office">Почта</string>
 	<string name="poi_post_box">Почтовый ящик</string>
 	<string name="poi_telephone">Телефон</string>
 	<string name="poi_communication_tower">Вышка связи</string>
+	<string name="poi_cooling_tower">Градирня</string>
+	<string name="poi_lighting_tower">Осветительная вышка</string>
 	<string name="poi_telephone_exchange">АТС</string>
 
 	<string name="poi_recycling">Переработка отходов</string>
@@ -946,7 +951,26 @@
 
 	<string name="poi_height">Высота</string>
 	<string name="poi_ele">Высота над уровнем моря</string>
+	<string name="poi_seats">Сиденья</string>
+	<string name="poi_backrest_yes">Со спинкой</string>
+	<string name="poi_backrest_no">Без спинки</string>
+
+	<string name="poi_urban">Городского типа</string>
+	<string name="poi_rural">Сельского типа</string>
+
+	<string name="poi_intermittent">Пересыхающий(ая)</string>
 
 	<string name="poi_building">Здание</string>
 	<string name="poi_hiking_routes">Туристические маршруты</string>
-		</resources>
+	<string name="poi_deadlock">Тупик</string>
+
+	<string name="poi_generator_source_coal">Источник энергии: уголь</string>
+	<string name="poi_generator_source_gas">Источник энергии: газ</string>
+	<string name="poi_generator_source_nuclear">Источник энергии: ядерное топливо</string>
+	<string name="poi_generator_source_solar">Источник энергии: солнце</string>
+	<string name="poi_generator_source_hydro">Источник энергии: вода</string>
+	<string name="poi_generator_source_wind">Источник энергии: ветер</string>
+	<string name="poi_generator_source_geothermal">Источник энергии: геотермальный</string>
+	<string name="poi_generator_source_oil">Источник энергии: мазут</string>
+	<string name="poi_generator_source_diesel">Источник энергии: дизельное топливо</string>
+</resources>

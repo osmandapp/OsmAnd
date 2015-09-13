@@ -274,6 +274,7 @@
 	<string name="poi_aerialway_rope_tow">Rope tow lift</string>
 	<string name="poi_aerialway_goods">Goods lift</string>
 	<string name="poi_aerialway_magic_carpet">Carpet lift</string>
+	<string name="poi_aerialway_pylon">Aerial lift pylon</string>
 
 	<string name="poi_tunnel">Tunnel</string>
 	<string name="poi_bridge">Bridge</string>
@@ -304,6 +305,8 @@
 	<string name="poi_power_cable_distribution_cabinet">Cable distribution cabinet</string>
 	<string name="poi_power_plant">Power plant</string>
 	<string name="poi_power_generator">Power generator</string>
+	<string name="poi_power_tower">Power tower</string>
+	<string name="poi_power_pole">Power pole</string>
 
 	<string name="poi_post_office">Post office</string>
 	<string name="poi_post_box">Post box</string>
@@ -311,6 +314,8 @@
 	<string name="poi_communication_tower">Communication tower</string>
 	<string name="poi_observation_tower">Observation tower</string>
 	<string name="poi_bell_tower">Bell tower</string>
+	<string name="poi_cooling_tower">Cooling tower</string>
+	<string name="poi_lighting_tower">Lighting tower</string>
 	<string name="poi_telephone_exchange">Telephone exchange</string>
 
 	<string name="poi_recycling">Recycling</string>
@@ -1189,6 +1194,9 @@
 	<string name="poi_trees_coffea">Coffee</string>
 	<string name="poi_trees_pomegranate">Pomegranate</string>
 
+	<string name="poi_urban">Urban</string>
+	<string name="poi_rural">Rural</string>
+
 	<string name="poi_enforcement_traffic_signals">Enforcement:traffic signals</string>
 	<string name="poi_enforcement_maxspeed">Enforcement:maxspeed</string>
 	<string name="poi_enforcement_maxheight">Enforcement:maxheight</string>
@@ -1202,6 +1210,23 @@
 	<string name="poi_animal_shelter_dog_cat">Shelter for dogs and cats</string>
 	<string name="poi_animal_shelter_bird">Shelter for birds</string>
 
+	<string name="poi_seats">Seats</string>
+	<string name="poi_backrest_yes">Backrest: yes</string>
+	<string name="poi_backrest_no">Backrest: no</string>
+
+	<string name="poi_intermittent">Intermittent</string>
+
 	<string name="poi_building">Building</string>
+	<string name="poi_deadlock">Deadlock</string>
+
+	<string name="poi_generator_source_coal">Energy source: coal</string>
+	<string name="poi_generator_source_gas">Energy source: gas</string>
+	<string name="poi_generator_source_nuclear">Energy source: nuclear</string>
+	<string name="poi_generator_source_solar">Energy source: solar</string>
+	<string name="poi_generator_source_hydro">Energy source: hydro</string>
+	<string name="poi_generator_source_wind">Energy source: wind</string>
+	<string name="poi_generator_source_geothermal">Energy source: geothermal</string>
+	<string name="poi_generator_source_oil">Energy source: oil</string>
+	<string name="poi_generator_source_diesel">Energy source: diesel</string>
 
 </resources>
