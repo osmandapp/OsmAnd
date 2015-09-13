@@ -26,7 +26,7 @@ import org.apache.commons.logging.Log;
 public class RouteResultPreparation {
 
 	public static boolean PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST = false;
-	private static final float TURN_DEGREE_MIN = 35;
+	private static final float TURN_DEGREE_MIN = 45;
 	private Log log = PlatformUtil.getLog(RouteResultPreparation.class);
 	/**
 	 * Helper method to prepare final result 
@@ -601,6 +601,7 @@ public class RouteResultPreparation {
 			}
 			if (mpi >= TURN_DEGREE_MIN) {
 				if (mpi < 45) {
+					// Slight turn detection here causes many false positives where drivers would expect a "normal" TL. Best use limit-angle=TURN_DEGREE_MIN, this reduces TSL to the turn-lanes cases.
 					t = TurnType.valueOf(TurnType.TSLL, leftSide);
 				} else if (mpi < 120) {
 					t = TurnType.valueOf(TurnType.TL, leftSide);
