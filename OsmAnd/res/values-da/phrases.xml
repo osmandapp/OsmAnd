@@ -1233,4 +1233,32 @@
 
 	<string name="poi_height">Højde</string>
 	<string name="poi_ele">Højde over havoverfladen</string>
+	<string name="poi_cooling_tower">Køletårn</string>
+	<string name="poi_rural">Landdistrikter</string>
+
+	<string name="poi_seats">Pladser</string>
+	<string name="poi_backrest_yes">Ryglæn: Ja</string>
+	<string name="poi_backrest_no">Ryglæn: nej</string>
+
+	<string name="poi_intermittent">Intermitterende</string>
+
+	<string name="poi_deadlock">Dødvande</string>
+
+	<string name="poi_generator_source_coal">Energikilde: kul</string>
+	<string name="poi_generator_source_gas">Energikilde: gas</string>
+	<string name="poi_generator_source_nuclear">Energikilde: nuklear</string>
+	<string name="poi_generator_source_solar">Energikilde: solar</string>
+	<string name="poi_generator_source_hydro">Energikilde: hydro</string>
+	<string name="poi_generator_source_wind">Energikilde: vind</string>
+	<string name="poi_generator_source_geothermal">Energikilde: geotermisk</string>
+	<string name="poi_generator_source_oil">Energikilde: olie</string>
+	<string name="poi_generator_source_diesel">Energikilde: diesel</string>
+
+<string name="poi_aerialway_pylon">Svævebane pylon</string>
+
+	<string name="poi_power_tower">Soltårn</string>
+	<string name="poi_power_pole">Elmast</string>
+
+	<string name="poi_lighting_tower">Lysmast</string>
+	<string name="poi_urban">Bymæssig</string>
 	</resources>
