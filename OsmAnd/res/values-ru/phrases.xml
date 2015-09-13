@@ -629,8 +629,8 @@
 	<string name="poi_beacon_safe_water">Бакен безопасности</string>
 	<string name="poi_beacon_special_purpose">Бакен специального назначения</string>
 	<string name="poi_berth">Причал</string>
-	<string name="poi_seamark_building">Здание</string>
-	<string name="poi_seamark_bridge">Мост</string>
+	<string name="poi_seamark_building">Здание (навигационный ориентир)</string>
+	<string name="poi_seamark_bridge">Мост (навигационный ориентир)</string>
 	<string name="poi_buoy_cardinal">Кардинальный буй</string>
 	<string name="poi_buoy_installation">Знак изолированной опасности</string>
 	<string name="poi_buoy_isolated_danger">Буй (изолированная опасность)</string>
@@ -645,7 +645,7 @@
 	<string name="poi_harbour_basin">Акватория гавани</string>
 	<string name="poi_seamark_harbour">Гавань</string>
 	<string name="poi_landmark">Ориентир</string>
-	<string name="poi_seamark_light">Маяк</string>
+	<string name="poi_seamark_light">Маяк (навигационный ориентир)</string>
 	<string name="poi_mooring">Причал</string>
 	<string name="poi_notice">Уведомление</string>
 	<string name="poi_radio_station">Радиостанция</string>
@@ -973,4 +973,24 @@
 	<string name="poi_generator_source_geothermal">Источник энергии: геотермальный</string>
 	<string name="poi_generator_source_oil">Источник энергии: мазут</string>
 	<string name="poi_generator_source_diesel">Источник энергии: дизельное топливо</string>
+
+	<string name="poi_car_wash_self_service">Самообслуживание</string>
+
+	<string name="poi_int_name">Интернациональное название</string>
+	<string name="poi_nat_name">Общенациональное название</string>
+	<string name="poi_reg_name">Региональное название</string>
+	<string name="poi_loc_name">Местное название</string>
+	<string name="poi_old_name">Историческое название</string>
+	<string name="poi_alt_name">Альтернативное название</string>
+
+	<string name="poi_pump_manual">Ручной насос</string>
+	<string name="poi_pump_powered">Автоматический насос</string>
+	<string name="poi_pump_no">Без насоса</string>
+
+	<string name="poi_water_characteristic_mineral">Характеристика воды: минеральная</string>
+	<string name="poi_water_characteristic_mud">Характеристика воды: грязь</string>
+	<string name="poi_water_characteristic_sulfuric">Характеристика воды: серная</string>
+
+	<string name="poi_water_point">Пункт водоснабжения</string>
+
 </resources>
