@@ -1242,4 +1242,13 @@
 	<string name="poi_generator_source_oil">Fuente de energía: petróleo</string>
 	<string name="poi_generator_source_diesel">Fuente de energía: diésel</string>
 
-</resources>
+<string name="poi_car_wash_self_service">Auto servicio</string>
+
+	<string name="poi_int_name">Nombre internacional</string>
+	<string name="poi_nat_name">Nombre nacional</string>
+	<string name="poi_reg_name">Nombre regional</string>
+	<string name="poi_loc_name">Nombre local</string>
+	<string name="poi_old_name">Antiguo nombre</string>
+	<string name="poi_alt_name">Nombre alternativo</string>
+
+	</resources>
