@@ -2118,4 +2118,6 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
 	<string name="recent_places">Llocs recents</string>
 	<string name="favourites">Favorits</string>
 	<string name="saved_at_time">S\'ha desat correctament a: %1$s</string>
+<string name="poi_deleted_localy">El PDI s\'eliminara un cop pugeu els vostres canvis</string>
+	<string name="show_gpx">Mostra GPX</string>
 </resources>
