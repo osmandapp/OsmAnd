@@ -1263,4 +1263,6 @@
 	<string name="poi_urban">Bymæssig</string>
 	<string name="poi_car_wash_self_service">Selvbetjening</string>
 
+	<string name="poi_int_name">International navn</string>
+	<string name="poi_nat_name">National navn</string>
 	</resources>
