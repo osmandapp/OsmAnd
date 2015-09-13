@@ -1251,4 +1251,14 @@
 	<string name="poi_old_name">Antiguo nombre</string>
 	<string name="poi_alt_name">Nombre alternativo</string>
 
-	</resources>
+	<string name="poi_pump_manual">Bomba manual</string>
+	<string name="poi_pump_powered">Bomba energética</string>
+	<string name="poi_pump_no">Sin bomba</string>
+
+	<string name="poi_water_characteristic_mineral">Característica de agua: mineralizada</string>
+	<string name="poi_water_characteristic_mud">Característica de agua: lodosa</string>
+	<string name="poi_water_characteristic_sulfuric">Característica de agua: sulfúrica</string>
+
+	<string name="poi_water_point">Toma de agua</string>
+
+</resources>
