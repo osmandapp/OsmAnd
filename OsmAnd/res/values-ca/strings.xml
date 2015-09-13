@@ -1050,7 +1050,7 @@
     
 	<string name="tip_altitude_offset">Correcció de l\'altitud</string>
 	<string name="map_widget_max_speed">Límit de velocitat</string>
-    <string name="monitoring_control_start">Inicia</string>
+    <string name="monitoring_control_start">GPX</string>
     <string name="route_descr_current_location">Posició actual</string>
     <string name="incremental_search_city">Cerca progressiva de municipis</string>
     <string name="safe_mode_description">Executeu l\'aplicació en mode segur (usant codi d\'Android, més lent que el codi nadiu).</string>
