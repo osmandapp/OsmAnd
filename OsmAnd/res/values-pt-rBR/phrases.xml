@@ -1253,5 +1253,14 @@
 	<string name="poi_pump_no">Sem bomba</string>
 
 	<string name="poi_water_characteristic_mineral">Característica d\'água: mineral</string>
-	<string name="poi_water_characteristic_mud">Característica d\'água: lama</string>
+	<string name="poi_water_characteristic_mud">Característica d\'água: barrenta</string>
+	<string name="poi_water_characteristic_sulfuric">Característica d\'água: sulfurosa</string>
+
+	<string name="poi_water_point">Ponto de água</string>
+
+<string name="poi_cooling_tower">Torre de resfriamento</string>
+	<string name="poi_bicycle_parking_wall_loops">Suporte de parede</string>
+	<string name="poi_bicycle_parking_rack">Prateleira</string>
+	<string name="poi_deadlock">Impasse</string>
+
 	</resources>
