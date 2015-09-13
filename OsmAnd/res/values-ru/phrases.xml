@@ -961,6 +961,7 @@
 	<string name="poi_intermittent">Пересыхающий(ая)</string>
 
 	<string name="poi_building">Здание</string>
+	<string name="poi_hiking_routes">Туристические маршруты</string>
 	<string name="poi_deadlock">Тупик</string>
 
 	<string name="poi_generator_source_coal">Источник энергии: уголь</string>
