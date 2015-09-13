@@ -2007,4 +2007,7 @@ s často kladenými otázkami.</string>
 	<string name="rate_this_app_long">Ohodnoťte prosím aplikaci OsmAnd na Google Play</string>
 	<string name="user_hates_app_get_feedback">Řekněte nám proč.</string>
 	<string name="user_hates_app_get_feedback_long">Sdělte nám prosím, co byste chtěli v této aplikaci změnit.</string>
+	<string name="shared_string_skip">Přeskočit</string>
+	<string name="app_name_osmand">OsmAnd</string>
+	<string name="plugin_settings">Moduly</string>
 	</resources>

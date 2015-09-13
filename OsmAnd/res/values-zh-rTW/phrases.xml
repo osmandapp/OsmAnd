@@ -508,14 +508,14 @@
 	<string name="poi_hunting_lodge">狩獵小屋</string>
 
 	<string name="poi_place_of_worship">宗教場所</string>
-	<string name="poi_religion_christian">宗教場所：基督教</string>
-	<string name="poi_religion_jewish">宗教場所：猶太教</string>
-	<string name="poi_religion_muslim">宗教場所：回教</string>
-	<string name="poi_religion_sikh">宗教場所：錫克教</string>
-	<string name="poi_religion_buddhist">宗教場所：佛教</string>
-	<string name="poi_religion_hindu">宗教場所：印度教</string>
-	<string name="poi_religion_shinto">宗教場所：日本神道教</string>
-	<string name="poi_religion_taoist">宗教場所：道教</string>
+	<string name="poi_religion_christian">基督教</string>
+	<string name="poi_religion_jewish">猶太教</string>
+	<string name="poi_religion_muslim">回教</string>
+	<string name="poi_religion_sikh">錫克教</string>
+	<string name="poi_religion_buddhist">佛教</string>
+	<string name="poi_religion_hindu">印度教</string>
+	<string name="poi_religion_shinto">神道教</string>
+	<string name="poi_religion_taoist">道教</string>
 
 	<string name="poi_internet_access_wlan">網際網路存取：無線網路</string>
 	<string name="poi_internet_access_terminal">網際網路存取：終端</string>
@@ -1163,5 +1163,55 @@
 	<string name="poi_trade_wood">木材供應商</string>
 	<string name="poi_trade_agricultural_supplies">農藝供應商</string>
 	<string name="poi_trade_tile">磚瓦供應商</string>
+
+	<string name="poi_population">人口數</string>
+
+	<string name="poi_parking_underground">地下</string>
+	<string name="poi_parking_multi_storey">多層</string>
+
+	<string name="poi_bicycle_parking_stands">立台</string>
+	<string name="poi_bicycle_parking_wall_loops">壁掛架</string>
+	<string name="poi_bicycle_parking_rack">擱物架</string>
+	<string name="poi_bicycle_parking_building">獨特建築物</string>
+	<string name="poi_bicycle_parking_shed">車棚</string>
+	<string name="poi_bicycle_parking_bollard">系船柱</string>
+	<string name="poi_bicycle_parking_informal">非正式的</string>
+
+	<string name="poi_leaf_type_broadleaved">闊葉樹</string>
+	<string name="poi_leaf_type_needleleaved">針葉樹</string>
+	<string name="poi_leaf_type_mixed">混合林</string>
+	<string name="poi_leaf_type_leafless">無葉植物</string>
+
+	<string name="poi_trees_olive">橄欖樹</string>
+	<string name="poi_trees_apple">蘋果樹</string>
+	<string name="poi_trees_oil">棕櫚油</string>
+	<string name="poi_height">高度</string>
+	<string name="poi_ele">海拔高度</string>
+	<string name="poi_nudism_yes">天體主義：允許</string>
+	<string name="poi_nudism_no">天體主義：禁止</string>
+	<string name="poi_nudism_obligatory">天體主義：強制</string>
+	<string name="poi_nudism_customary">天體主義：慣常</string>
+	<string name="poi_nudism_permissive">天體主義：容許</string>
+
+	<string name="poi_trees_orange">橙色</string>
+	<string name="poi_trees_almond">杏仁</string>
+	<string name="poi_trees_banana">香蕉</string>
+	<string name="poi_trees_hazel">榛樹</string>
+	<string name="poi_trees_coconut">椰子</string>
+	<string name="poi_trees_persimmon">柿子</string>
+	<string name="poi_trees_cherry">櫻桃</string>
+	<string name="poi_trees_walnut">核桃</string>
+	<string name="poi_trees_plum">李子</string>
+	<string name="poi_trees_peach">桃子</string>
+	<string name="poi_trees_tea">茶</string>
+	<string name="poi_trees_coca">古柯</string>
+	<string name="poi_trees_kiwi">獼猴桃</string>
+	<string name="poi_trees_meadow_orchard">草甸果樹園</string>
+	<string name="poi_trees_nectorine">油桃</string>
+	<string name="poi_trees_mango">芒果</string>
+	<string name="poi_trees_rubber">橡膠</string>
+	<string name="poi_trees_date">日期</string>
+	<string name="poi_trees_coffea">咖啡</string>
+	<string name="poi_trees_pomegranate">石榴</string>
 
 	</resources>

@@ -843,7 +843,7 @@
   <string name="poi_error_unexpected_template">Произошла неожиданная ошибка при выполнении действия {0}.</string>
   <string name="poi_error_io_error_template">Произошла ошибка ввода/вывода при выполнении действия {0}.</string>
   <string name="poi_error_info_not_loaded">Произошла ошибка при загрузке информации о POI</string>
-  <string name="poi_dialog_name">Имя</string>
+  <string name="poi_dialog_name">Название</string>
   <string name="poi_dialog_opening_hours">Время работы</string>
   <string name="poi_dialog_comment">Комментарий</string>
   <string name="poi_dialog_comment_default">Изменение POI</string>
@@ -2090,4 +2090,10 @@
 <string name="rendering_value_boldOutline_name">Жирный контур</string>
     <string name="working_days">Рабочие дни</string>
 	<string name="favourites">Избранное</string>
-</resources>
+<string name="saved_at_time">Успешно сохранён в: %1$s</string>
+<string name="poi_deleted_localy">POI будут удалены после того как вы загрузите ваши изменения</string>
+	<string name="show_gpx">Показать GPX</string>
+<string name="poi_action_delete">удалить</string>
+	<string name="tag_poi_amenity">инфраструктура</string>
+	<string name="recent_places">Недавние места</string>
+	</resources>

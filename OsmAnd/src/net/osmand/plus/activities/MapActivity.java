@@ -125,6 +125,7 @@ public class MapActivity extends AccessibleActivity {
 	private boolean intentLocation = false;
 
 	private DashboardOnMap dashboardOnMap = new DashboardOnMap(this);
+	private MapContextMenu contextMenuOnMap;
 	private AppInitializeListener initListener;
 	private IMapDownloaderCallback downloaderCallback;
 	private DrawerLayout drawerLayout;
@@ -156,6 +157,7 @@ public class MapActivity extends AccessibleActivity {
 		app = getMyApplication();
 		settings = app.getSettings();
 		app.applyTheme(this);
+		contextMenuOnMap = new MapContextMenu(app);
 		supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
 		// Full screen is not used here
@@ -249,9 +251,6 @@ public class MapActivity extends AccessibleActivity {
 		});
 
 		drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-
-		MapContextMenu.getInstance().setApp(app);
-		MapContextMenu.getInstance().setMapActivity(this);
 	}
 
 
@@ -973,6 +972,10 @@ public class MapActivity extends AccessibleActivity {
 
 	public DashboardOnMap getDashboard() {
 		return dashboardOnMap;
+	}
+
+	public MapContextMenu getContextMenu() {
+		return contextMenuOnMap;
 	}
 
 	public void openDrawer() {

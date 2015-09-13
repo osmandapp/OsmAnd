@@ -2170,4 +2170,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="working_days">Giorni lavorativi</string>
 	<string name="recent_places">Luoghi recenti</string>
 	<string name="favourites">Preferiti</string>
+<string name="saved_at_time">Salvato con successo in: %1$s</string>
+	<string name="poi_deleted_localy">I PDI verranno cancellati una volta caricate le modiche</string>
+	<string name="show_gpx">Visualizza GPX</string>
 </resources>

@@ -507,14 +507,14 @@
 	<string name="poi_hunting_lodge">Pabellón de caza</string>
 
 	<string name="poi_place_of_worship">Lugar de culto</string>
-	<string name="poi_religion_christian">Lugar de culto: cristiano</string>
-	<string name="poi_religion_jewish">Lugar de culto: judio</string>
-	<string name="poi_religion_muslim">Lugar de culto: musulmán</string>
-	<string name="poi_religion_sikh">Lugar de culto: sijista</string>
-	<string name="poi_religion_buddhist">Lugar de culto: budista</string>
-	<string name="poi_religion_hindu">Lugar de culto: hindú</string>
-	<string name="poi_religion_shinto">Lugar de culto: sintoísta</string>
-	<string name="poi_religion_taoist">Lugar de culto: taoísta</string>
+	<string name="poi_religion_christian">Cristianismo</string>
+	<string name="poi_religion_jewish">Judaísmo</string>
+	<string name="poi_religion_muslim">Islámismo</string>
+	<string name="poi_religion_sikh">Sijismo</string>
+	<string name="poi_religion_buddhist">Budismo</string>
+	<string name="poi_religion_hindu">Hinduismo</string>
+	<string name="poi_religion_shinto">Sintoísmo</string>
+	<string name="poi_religion_taoist">Taoísmo</string>
 
 	<string name="poi_internet_access_wlan">Internet inalámbrico</string>
 	<string name="poi_internet_access_terminal">PC con Internet</string>
@@ -862,7 +862,7 @@
 	<string name="poi_garden_furniture">Almacén de jardinería</string>
 	<string name="poi_leather">Marroquinería</string>
 	<string name="poi_tyres">Neumáticos</string>
-	<string name="poi_watches">Relojería (watches)</string>
+	<string name="poi_watches">Relojería</string>
 	<string name="poi_games">Juegos</string>
 	<string name="poi_model">Modelos a escala</string>
 	<string name="poi_trophy">Trofeos, premios</string>
@@ -1040,7 +1040,7 @@
 
 	<string name="poi_recycling_cardboard">Cartón</string>
 	<string name="poi_recycling_hardcore">Escombros</string>
-	<string name="poi_recycling_chipboard">Conglomerado</string>
+	<string name="poi_recycling_chipboard">Cartón prensado</string>
 	<string name="poi_mill_pond">Laguna de molino</string>
 	<string name="poi_twitter">Twitter</string>
 	<string name="poi_skype">Skype</string>
@@ -1062,15 +1062,15 @@
 
 	<string name="poi_military_office">Oficina militar</string>
 	<string name="poi_religion_voodoo">Vudú</string>
-	<string name="poi_religion_unitarian_universalist">Unitariano universalista</string>
+	<string name="poi_religion_unitarian_universalist">Unitarianismo universal</string>
 	<string name="poi_religion_multifaith">Multireligioso</string>
-	<string name="poi_religion_jain">Jainista</string>
-	<string name="poi_religion_spiritualist">Espiritualista</string>
-	<string name="poi_religion_bahai">Bahaísta</string>
-	<string name="poi_religion_scientologist">Cienciologísta</string>
-	<string name="poi_religion_pagan">Pagano</string>
+	<string name="poi_religion_jain">Jainismo</string>
+	<string name="poi_religion_spiritualist">Espiritualismo</string>
+	<string name="poi_religion_bahai">Bahaísmo</string>
+	<string name="poi_religion_scientologist">Cienciologísmo</string>
+	<string name="poi_religion_pagan">Paganismo</string>
 	<string name="poi_religion_tenrikyo">Tenrikyō</string>
-	<string name="poi_religion_zoroastrian">Zoroástrica</string>
+	<string name="poi_religion_zoroastrian">Zoroástrismo</string>
 
 	<string name="poi_denomination_catholic">Católica</string>
 	<string name="poi_denomination_baptist">Bautista</string>
@@ -1128,7 +1128,7 @@
 	<string name="poi_denomination_united_reformed">Reformada unida</string>
 	<string name="poi_denomination_reformed">Reformado</string>
 	<string name="poi_denomination_united">Unido</string>
-	<string name="poi_denomination_quaker">cuáquero</string>
+	<string name="poi_denomination_quaker">Cuáquero</string>
 	<string name="poi_denomination_shaktism">Shaktismo</string>
 	<string name="poi_denomination_uniting">Uniendo</string>
 	<string name="poi_denomination_wesleyan">Wesleyan</string>
@@ -1165,4 +1165,81 @@
 	<string name="poi_trade_agricultural_supplies">Suministros agrícolas</string>
 	<string name="poi_trade_tile">Venta de azulejos</string>
 
-	</resources>
+	<string name="poi_population">Población</string>
+	<string name="poi_parking_underground">Subterráneo</string>
+	<string name="poi_parking_multi_storey">Varios pisos</string>
+
+	<string name="poi_bicycle_parking_stands">Anclajes</string>
+	<string name="poi_bicycle_parking_wall_loops">Anclajes de pared</string>
+	<string name="poi_bicycle_parking_informal">Informal</string>
+
+	<string name="poi_leaf_type_broadleaved">Hoja ancha</string>
+	<string name="poi_leaf_type_needleleaved">Hoja acicular</string>
+	<string name="poi_leaf_type_mixed">Mixto</string>
+	<string name="poi_leaf_type_leafless">Sin hojas</string>
+
+	<string name="poi_trees_olive">Olivo</string>
+	<string name="poi_trees_apple">Manzano</string>
+	<string name="poi_trees_oil">Aceite de palma</string>
+	<string name="poi_trees_orange">Naranjo</string>
+	<string name="poi_trees_almond">Almendro</string>
+	<string name="poi_trees_banana">Banano</string>
+	<string name="poi_trees_hazel">Avellano</string>
+	<string name="poi_trees_coconut">Cocotero</string>
+	<string name="poi_nudism_yes">Nudismo permitido</string>
+	<string name="poi_nudism_no">Nudismo prohibido</string>
+	<string name="poi_nudism_obligatory">Nudismo obligatorio</string>
+	<string name="poi_nudism_customary">Nudismo habitual</string>
+	<string name="poi_nudism_permissive">Nudismo permisivo</string>
+
+	<string name="poi_bicycle_parking_rack">Bastidor</string>
+	<string name="poi_bicycle_parking_building">Edificio especial</string>
+	<string name="poi_bicycle_parking_shed">Caseta</string>
+	<string name="poi_bicycle_parking_bollard">Bolardo</string>
+	<string name="poi_trees_persimmon">Caqui</string>
+	<string name="poi_trees_cherry">Cerezo</string>
+	<string name="poi_trees_walnut">Nogal</string>
+	<string name="poi_trees_plum">Ciruelo</string>
+	<string name="poi_trees_peach">Duraznero</string>
+	<string name="poi_trees_tea">Té</string>
+	<string name="poi_trees_coca">Coca</string>
+	<string name="poi_trees_kiwi">Kiwi</string>
+	<string name="poi_trees_meadow_orchard">Huerto</string>
+	<string name="poi_trees_mango">Mango</string>
+	<string name="poi_trees_rubber">Caucho</string>
+	<string name="poi_trees_date">Fecha</string>
+	<string name="poi_trees_coffea">Café</string>
+	<string name="poi_trees_pomegranate">Granada</string>
+
+	<string name="poi_trees_nectorine">Nectarina</string>
+	<string name="poi_height">Altura</string>
+	<string name="poi_ele">Elevación sobre el nivel del mar</string>
+	<string name="poi_aerialway_pylon">Torre de teleférico</string>
+
+	<string name="poi_power_tower">Torre de alta tensión</string>
+	<string name="poi_power_pole">Poste de energía</string>
+
+	<string name="poi_cooling_tower">Torre de enfriamiento</string>
+	<string name="poi_lighting_tower">Torre de iluminación</string>
+	<string name="poi_urban">Urbano</string>
+	<string name="poi_rural">Rural</string>
+
+	<string name="poi_seats">Asientos</string>
+	<string name="poi_backrest_yes">Con respaldo</string>
+	<string name="poi_backrest_no">Sin respaldo</string>
+
+	<string name="poi_intermittent">Intermitente</string>
+
+	<string name="poi_deadlock">Punto muerto</string>
+
+	<string name="poi_generator_source_coal">Fuente de energía: carbón</string>
+	<string name="poi_generator_source_gas">Fuente de energía: gas</string>
+	<string name="poi_generator_source_nuclear">Fuente de energía: nuclear</string>
+	<string name="poi_generator_source_solar">Fuente de energía: solar</string>
+	<string name="poi_generator_source_hydro">Fuente de energía: hidroeléctrica</string>
+	<string name="poi_generator_source_wind">Fuente de energía: viento</string>
+	<string name="poi_generator_source_geothermal">Fuente de energía: geotérmica</string>
+	<string name="poi_generator_source_oil">Fuente de energía: petróleo</string>
+	<string name="poi_generator_source_diesel">Fuente de energía: diésel</string>
+
+</resources>

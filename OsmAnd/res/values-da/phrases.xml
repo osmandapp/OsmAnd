@@ -355,14 +355,14 @@
         <string name="poi_chalet">Udlejningshytte</string>
 
         <string name="poi_place_of_worship">Sted for tilbedelse</string>
-        <string name="poi_religion_christian">Sted for tilbedelse: Kristen</string>
-        <string name="poi_religion_jewish">Sted for tilbedelse: Jødisk</string>
-        <string name="poi_religion_muslim">Sted for tilbedelse: Muslim</string>
-        <string name="poi_religion_sikh">Sted for tilbedelse: Sikh</string>
-        <string name="poi_religion_buddhist">Sted for tilbedelse: Buddhist</string>
-        <string name="poi_religion_hindu">Sted for tilbedelse: Hindu</string>
-        <string name="poi_religion_shinto">Sted for tilbedelse: Shinto</string>
-        <string name="poi_religion_taoist">Sted for tilbedelse: Taoistisk</string>
+        <string name="poi_religion_christian">Kristendom</string>
+        <string name="poi_religion_jewish">Jødedom</string>
+        <string name="poi_religion_muslim">Islam</string>
+        <string name="poi_religion_sikh">Sikhisme</string>
+        <string name="poi_religion_buddhist">Buddhisme</string>
+        <string name="poi_religion_hindu">Hinduisme</string>
+        <string name="poi_religion_shinto">Shinto</string>
+        <string name="poi_religion_taoist">Taoisme</string>
         <string name="poi_monastery">Kloster</string>
         <string name="poi_historic_monastery">Historisk kloster</string>
         <string name="poi_wayside_cross">Vejside kors</string>
@@ -1080,7 +1080,7 @@
 	<string name="poi_financial">Finansiel kontor</string>
 	<string name="poi_foundation">Fondskontor</string>
 	<string name="poi_religion_voodoo">Voodoo</string>
-	<string name="poi_religion_scientologist">Scientolog</string>
+	<string name="poi_religion_scientologist">Scientology</string>
 	<string name="poi_denomination_catholic">Katolsk</string>
 	<string name="poi_denomination_baptist">Baptist</string>
 	<string name="poi_denomination_roman_catholic">Romersk-katolsk</string>
@@ -1117,11 +1117,11 @@
 	<string name="poi_denomination_coptic_orthodox">Koptisk-ortodoks</string>
 	<string name="poi_denomination_mahayana">Mahayana</string>
 
-	<string name="poi_religion_unitarian_universalist">Unitarisk universalistisk</string>
+	<string name="poi_religion_unitarian_universalist">Unitarisk universalisme</string>
 	<string name="poi_religion_multifaith">Multireligiøs</string>
 	<string name="poi_religion_jain">Jainisme</string>
-	<string name="poi_religion_spiritualist">Spiritist</string>
-	<string name="poi_religion_bahai">Bahai</string>
+	<string name="poi_religion_spiritualist">Spiritisme</string>
+	<string name="poi_religion_bahai">Bahaism</string>
 	<string name="poi_religion_pagan">Hedenskab</string>
 	<string name="poi_religion_tenrikyo">Tenrikyo</string>
 	<string name="poi_religion_zoroastrian">Zarathustrisme</string>
@@ -1129,10 +1129,10 @@
 	<string name="poi_denomination_greek_orthodox">Græsk-ortodoks</string>
 	<string name="poi_denomination_seventh_day_adventist">Syvende Dags Adventist</string>
 	<string name="poi_denomination_new_apostolic">Nyapostolsk</string>
-	<string name="poi_denomination_church_of_england">Den engelske kirke</string>
+	<string name="poi_denomination_church_of_england">Den Engelske kirke</string>
 	<string name="poi_denomination_shia">Shiisme</string>
 	<string name="poi_denomination_united_reformed">Forenede reformerte kirke</string>
-	<string name="poi_denomination_church_of_scotland">Den skotske kirke</string>
+	<string name="poi_denomination_church_of_scotland">Den Skotske kirke</string>
 	<string name="poi_denomination_iglesia_ni_cristo">Iglesia ni cristo</string>
 	<string name="poi_denomination_mennonite">Mennonit</string>
 	<string name="poi_denomination_assemblies_of_god">Assemblies of god</string>
@@ -1183,4 +1183,82 @@
 	<string name="poi_trade_agricultural_supplies">Landbrugsmaterialer</string>
 	<string name="poi_trade_tile">Flisematerialer</string>
 
+	<string name="poi_population">Befolkning</string>
+
+	<string name="poi_parking_multi_storey">P-hus</string>
+
+	<string name="poi_bicycle_parking_stands">Cykelsstativ</string>
+	<string name="poi_bicycle_parking_wall_loops">Væg sløjfer</string>
+	<string name="poi_bicycle_parking_building">Særlig bygning</string>
+	<string name="poi_bicycle_parking_shed">Cykelskur</string>
+	<string name="poi_bicycle_parking_bollard">Pullert</string>
+	<string name="poi_bicycle_parking_informal">Uformel</string>
+
+	<string name="poi_leaf_type_broadleaved">Bredbladet</string>
+	<string name="poi_leaf_type_needleleaved">Nålebladet</string>
+	<string name="poi_leaf_type_mixed">Blandet</string>
+	<string name="poi_leaf_type_leafless">Bladløs</string>
+
+	<string name="poi_trees_olive">Oliven</string>
+	<string name="poi_trees_apple">Æble</string>
+	<string name="poi_trees_oil">Palmeolie</string>
+	<string name="poi_trees_orange">Appelsin</string>
+	<string name="poi_trees_almond">Mandel</string>
+	<string name="poi_trees_banana">Banan</string>
+	<string name="poi_trees_hazel">Hassel</string>
+	<string name="poi_trees_coconut">Kokospalme</string>
+	<string name="poi_trees_persimmon">Ibenholt</string>
+	<string name="poi_trees_cherry">Kirsebær</string>
+	<string name="poi_trees_walnut">Valnød</string>
+	<string name="poi_trees_plum">Blommetræ</string>
+	<string name="poi_trees_peach">Fersken</string>
+	<string name="poi_trees_tea">Te</string>
+	<string name="poi_trees_coca">Cocabuske</string>
+	<string name="poi_trees_kiwi">Kiwi</string>
+	<string name="poi_trees_meadow_orchard">Eng med frugtplantage</string>
+	<string name="poi_trees_nectorine">Nektarin</string>
+	<string name="poi_trees_mango">Mango</string>
+	<string name="poi_trees_rubber">Gummitræ</string>
+	<string name="poi_trees_date">Daddelpalmeq</string>
+	<string name="poi_trees_coffea">Kaffetræ</string>
+	<string name="poi_trees_pomegranate">Granatæble</string>
+
+	<string name="poi_parking_underground">Párkeringskælder</string>
+	<string name="poi_bicycle_parking_rack">Reol</string>
+	<string name="poi_nudism_yes">Naturisme: tilladt</string>
+	<string name="poi_nudism_no">Naturisme: forbudt</string>
+	<string name="poi_nudism_obligatory">Naturisme: obligatorisk</string>
+	<string name="poi_nudism_customary">Naturisme: sædvane</string>
+	<string name="poi_nudism_permissive">Naturisme: liberalt</string>
+
+	<string name="poi_height">Højde</string>
+	<string name="poi_ele">Højde over havoverfladen</string>
+	<string name="poi_cooling_tower">Køletårn</string>
+	<string name="poi_rural">Landlig</string>
+
+	<string name="poi_seats">Sæder</string>
+	<string name="poi_backrest_yes">Ryglæn: Ja</string>
+	<string name="poi_backrest_no">Ryglæn: nej</string>
+
+	<string name="poi_intermittent">Intermitterende</string>
+
+	<string name="poi_deadlock">Blindgyde</string>
+
+	<string name="poi_generator_source_coal">Energikilde: kul</string>
+	<string name="poi_generator_source_gas">Energikilde: gas</string>
+	<string name="poi_generator_source_nuclear">Energikilde: nuklear</string>
+	<string name="poi_generator_source_solar">Energikilde: solar</string>
+	<string name="poi_generator_source_hydro">Energikilde: hydro</string>
+	<string name="poi_generator_source_wind">Energikilde: vind</string>
+	<string name="poi_generator_source_geothermal">Energikilde: geotermisk</string>
+	<string name="poi_generator_source_oil">Energikilde: olie</string>
+	<string name="poi_generator_source_diesel">Energikilde: diesel</string>
+
+<string name="poi_aerialway_pylon">Svævebane pylon</string>
+
+	<string name="poi_power_tower">Soltårn</string>
+	<string name="poi_power_pole">Elmast</string>
+
+	<string name="poi_lighting_tower">Lysmast</string>
+	<string name="poi_urban">Bymæssig</string>
 	</resources>

@@ -396,14 +396,14 @@
 	<string name="poi_chalet">Шале</string>
 
 	<string name="poi_place_of_worship">Месца пакланеньня</string>
-	<string name="poi_religion_christian">Храм, царква (капліца)</string>
-	<string name="poi_religion_jewish">Сынагога</string>
-	<string name="poi_religion_muslim">Мячэт</string>
-	<string name="poi_religion_sikh">Месца пакланеньня: сыкхізм</string>
-	<string name="poi_religion_buddhist">Месца пакланеньня: будызм</string>
-	<string name="poi_religion_hindu">Месца пакланеньня: індуізм</string>
-	<string name="poi_religion_shinto">Месца пакланеньня: сінтаізм</string>
-	<string name="poi_religion_taoist">Месца пакланеньня: даасізм</string>
+	<string name="poi_religion_christian">Хрысьціянства</string>
+	<string name="poi_religion_jewish">Юдаізм</string>
+	<string name="poi_religion_muslim">Іслам</string>
+	<string name="poi_religion_sikh">Сыкхізм</string>
+	<string name="poi_religion_buddhist">Будызм</string>
+	<string name="poi_religion_hindu">Індуізм</string>
+	<string name="poi_religion_shinto">Сінтаізм</string>
+	<string name="poi_religion_taoist">Даасізм</string>
 	<string name="poi_monastery">Кляштар</string>
 	<string name="poi_historic_monastery">Гістарычны кляштар</string>
 	<string name="poi_wayside_cross">Прыдарожны крыж</string>
@@ -1065,4 +1065,57 @@
 
 <string name="poi_military_office">Ваенкамат</string>
 	<string name="poi_notary">Натарыўс</string>
+	<string name="poi_landfill_waste_nuclear">Ядравыя адыходы</string>
+	<string name="poi_population">Насельніцтва</string>
+
+	<string name="poi_trees_pomegranate">Гранат</string>
+
+	<string name="poi_trees_coffea">Кава</string>
+	<string name="poi_trees_rubber">Каўчук</string>
+	<string name="poi_trees_mango">Манга</string>
+	<string name="poi_trees_nectorine">Нэктарын</string>
+	<string name="poi_religion_voodoo">Вуду</string>
+	<string name="poi_religion_pagan">Паганства</string>
+	<string name="poi_religion_zoroastrian">Зараастрызм</string>
+
+	<string name="poi_denomination_catholic">Каталіцызм</string>
+	<string name="poi_denomination_baptist">Баптызм</string>
+	<string name="poi_denomination_roman_catholic">Рымскі каталіцызм</string>
+	<string name="poi_denomination_orthodox">Праваслаўе</string>
+	<string name="poi_denomination_lutheran">Лютэранства</string>
+	<string name="poi_denomination_sunni">Сунізм</string>
+	<string name="poi_denomination_protestant">Пратэстантызм</string>
+	<string name="poi_denomination_methodist">Мэтадызм</string>
+	<string name="poi_denomination_anglican">Англіканства</string>
+	<string name="poi_denomination_russian_orthodox">Расейкае праваслаўе</string>
+	<string name="poi_denomination_greek_orthodox">Грэцкае праваслаўе</string>
+	<string name="poi_denomination_reformed">Кальвінізм</string>
+	<string name="poi_denomination_seventh_day_adventist">Адвентысты сёмага дня</string>
+	<string name="poi_denomination_new_apostolic">Новаапостальская царква</string>
+	<string name="poi_denomination_church_of_england">Царква Ангельшчыны</string>
+	<string name="poi_denomination_episcopal">Епіскапальная царква</string>
+	<string name="poi_denomination_united">Аб\'яднаная царква</string>
+	<string name="poi_denomination_greek_catholic">Грэка-каталіцызм</string>
+	<string name="poi_denomination_tibetan">Тыбецкі будызм</string>
+	<string name="poi_denomination_church_of_scotland">Царква Шатляндыі</string>
+	<string name="poi_denomination_salvation_army">Армія выратаваньня</string>
+	<string name="poi_denomination_iglesia_ni_cristo">Царква Хрыста</string>
+	<string name="poi_denomination_quaker">Квакерства</string>
+	<string name="poi_denomination_bulgarian_orthodox">Баўгарскае праваслаўе</string>
+	<string name="poi_denomination_nondenominational">Без дэнамінацыі</string>
+	<string name="poi_denomination_old_believers">Стараверства</string>
+	<string name="poi_denomination_serbian_orthodox">Сербскае праваслаўе</string>
+	<string name="poi_denomination_spiritist">Сьпірытызм</string>
+	<string name="poi_denomination_armenian_apostolic">Армянская апостальская царква</string>
+	<string name="poi_height">Вышыня</string>
+	<string name="poi_ele">Вышыня над узроўнем мора</string>
+	<string name="poi_start_date">Дата пачатку будаўніцтва</string>
+	<string name="poi_wheelchair">Даступна для інвалідных крэслаў</string>
+	<string name="poi_parking_underground">Падземная</string>
+	<string name="poi_parking_multi_storey">Шматпавярховая</string>
+
+	<string name="poi_trees_kiwi">Ківі</string>
+	<string name="poi_trees_coca">Кока</string>
+	<string name="poi_trees_tea">Гарбата</string>
+	<string name="poi_trees_peach">Персік</string>
 	</resources>

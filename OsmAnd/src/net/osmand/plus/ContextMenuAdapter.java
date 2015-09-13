@@ -346,7 +346,7 @@ public class ContextMenuAdapter {
 
 			if (layoutId == R.layout.simple_list_menu_item) {
 				int color = activity.getResources()
-						.getColor(holoLight ? R.color.icon_color : R.color.dash_search_icon_dark);
+						.getColor(holoLight ? R.color.icon_color : R.color.dashboard_subheader_text_dark);
 				Drawable imageId = app.getIconsCache().getPaintedContentIcon(
 						iconListLight.get(position), color);
 				float density = activity.getResources().getDisplayMetrics().density;

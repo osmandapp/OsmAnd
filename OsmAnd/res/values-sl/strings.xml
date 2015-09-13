@@ -1978,4 +1978,7 @@
 	<string name="please_specify_poi_type">Določiti je treba vrsto točke POI.</string>
 	<string name="working_days">Delovni dnevi</string>
 	<string name="recent_places">Nedavna mesta</string>
-	</resources>
+	<string name="saved_at_time">Uspešno shranjeno ob: %1$s</string>
+	<string name="poi_deleted_localy">Točka POI bo izbrisana po pošiljanju sprememb</string>
+	<string name="show_gpx">Pokaži GPX</string>
+</resources>

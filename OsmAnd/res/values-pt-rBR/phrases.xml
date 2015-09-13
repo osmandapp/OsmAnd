@@ -517,14 +517,14 @@
 	<string name="poi_hunting_lodge">Pavilhão de caça</string>
 
 	<string name="poi_place_of_worship">Lugar de prática religiosa</string>
-	<string name="poi_religion_christian">Lugar de culto: cristão</string>
-	<string name="poi_religion_jewish">Lugar de culto: judaico</string>
-	<string name="poi_religion_muslim">Lugar de culto: muçulmano</string>
-	<string name="poi_religion_sikh">Lugar de culto: siquista</string>
-	<string name="poi_religion_buddhist">Lugar de culto: budista</string>
-	<string name="poi_religion_hindu">Lugar de culto: hindu</string>
-	<string name="poi_religion_shinto">Lugar de culto: xintoísta</string>
-	<string name="poi_religion_taoist">Lugar de culto: taoísta</string>
+	<string name="poi_religion_christian">Cristianismo</string>
+	<string name="poi_religion_jewish">Judaísmo</string>
+	<string name="poi_religion_muslim">Islamismo</string>
+	<string name="poi_religion_sikh">Sikhismo</string>
+	<string name="poi_religion_buddhist">Budismo</string>
+	<string name="poi_religion_hindu">Hinduísmo</string>
+	<string name="poi_religion_shinto">Xintoísmo</string>
+	<string name="poi_religion_taoist">Taoísmo</string>
 
 	<string name="poi_internet_access_wlan">Acesso à Internet: wlan</string>
 	<string name="poi_internet_access_terminal">Acesso à Internet: terminal</string>
@@ -1064,18 +1064,18 @@
 
 	<string name="poi_religion_voodoo">Voodoo</string>
 	<string name="poi_religion_multifaith">Multirreligiosa</string>
-	<string name="poi_religion_spiritualist">Espiritualista</string>
-	<string name="poi_religion_bahai">Bahai</string>
-	<string name="poi_religion_scientologist">Cientologista</string>
-	<string name="poi_religion_pagan">Pagão</string>
+	<string name="poi_religion_spiritualist">Espiritualismo</string>
+	<string name="poi_religion_bahai">Bahaísmo</string>
+	<string name="poi_religion_scientologist">Cientologismo</string>
+	<string name="poi_religion_pagan">Paganismo</string>
 	<string name="poi_religion_zoroastrian">Zoroastrismo</string>
 
 	<string name="poi_denomination_catholic">Católica</string>
 	<string name="poi_denomination_baptist">Batista</string>
 	<string name="poi_denomination_roman_catholic">Católica romana</string>
 	<string name="poi_denomination_orthodox">Ortodoxo</string>
-	<string name="poi_religion_unitarian_universalist">Unitário-Universalista</string>
-	<string name="poi_religion_jain">Jainista</string>
+	<string name="poi_religion_unitarian_universalist">Unitário-Universalismo</string>
+	<string name="poi_religion_jain">Jainismo</string>
 	<string name="poi_religion_tenrikyo">Tenrikyo</string>
 	<string name="poi_denomination_lutheran">Luterana</string>
 	<string name="poi_denomination_sunni">Sunita</string>
@@ -1166,4 +1166,52 @@
 	<string name="poi_trade_wood">Suprimentos de madeira</string>
 	<string name="poi_trade_tile">Suprimentos de telha</string>
 
+	<string name="poi_population">População</string>
+
+	<string name="poi_parking_underground">Subterrâneo</string>
+	<string name="poi_parking_multi_storey">Vários andares</string>
+
+	<string name="poi_bicycle_parking_stands">U-invertido</string>
+	<string name="poi_bicycle_parking_building">Edifício especial</string>
+	<string name="poi_bicycle_parking_shed">Galpão</string>
+	<string name="poi_bicycle_parking_bollard">Poste de amarração</string>
+	<string name="poi_bicycle_parking_informal">Informal</string>
+
+	<string name="poi_leaf_type_broadleaved">Latifoliadas</string>
+	<string name="poi_leaf_type_mixed">Mista</string>
+	<string name="poi_leaf_type_needleleaved">Acicular</string>
+	<string name="poi_leaf_type_leafless">Desfolhada</string>
+
+	<string name="poi_trees_olive">Oliveira</string>
+	<string name="poi_trees_apple">Macieira</string>
+	<string name="poi_trees_oil">Palmeira oleaginosa</string>
+	<string name="poi_trees_orange">Laranjeira</string>
+	<string name="poi_trees_almond">Amendoeira</string>
+	<string name="poi_trees_banana">Bananeira</string>
+	<string name="poi_trees_hazel">Aveleira</string>
+	<string name="poi_trees_coconut">Coqueiro</string>
+	<string name="poi_trees_persimmon">Caquizeiro</string>
+	<string name="poi_trees_cherry">Cerejeira</string>
+	<string name="poi_trees_walnut">Nogueira</string>
+	<string name="poi_trees_plum">Ameixeira</string>
+	<string name="poi_trees_peach">Pessegueiro</string>
+	<string name="poi_trees_kiwi">Kiwizeiro</string>
+	<string name="poi_trees_nectorine">Nectarineira</string>
+	<string name="poi_trees_mango">Mangueira</string>
+	<string name="poi_trees_rubber">Seringueira</string>
+	<string name="poi_trees_coffea">Cafeeiro</string>
+	<string name="poi_trees_pomegranate">Romãzeira</string>
+
+	<string name="poi_nudism_yes">Nudismo: autorizado</string>
+	<string name="poi_nudism_no">Nudismo: proibido</string>
+	<string name="poi_nudism_obligatory">Nudismo: obrigatório</string>
+	<string name="poi_nudism_customary">Nudismo: habitual</string>
+	<string name="poi_nudism_permissive">Nudismo: permissido</string>
+
+	<string name="poi_trees_date">Tamareira</string>
+	<string name="poi_trees_tea">Erveira</string>
+	<string name="poi_trees_coca">Coca</string>
+	<string name="poi_trees_meadow_orchard">Prado com pomar</string>
+	<string name="poi_height">Altura</string>
+	<string name="poi_ele">Altura acima do nível do mar</string>
 	</resources>

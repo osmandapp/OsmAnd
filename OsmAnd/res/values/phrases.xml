@@ -274,6 +274,7 @@
 	<string name="poi_aerialway_rope_tow">Rope tow lift</string>
 	<string name="poi_aerialway_goods">Goods lift</string>
 	<string name="poi_aerialway_magic_carpet">Carpet lift</string>
+	<string name="poi_aerialway_pylon">Aerial lift pylon</string>
 
 	<string name="poi_tunnel">Tunnel</string>
 	<string name="poi_bridge">Bridge</string>
@@ -304,6 +305,8 @@
 	<string name="poi_power_cable_distribution_cabinet">Cable distribution cabinet</string>
 	<string name="poi_power_plant">Power plant</string>
 	<string name="poi_power_generator">Power generator</string>
+	<string name="poi_power_tower">Power tower</string>
+	<string name="poi_power_pole">Power pole</string>
 
 	<string name="poi_post_office">Post office</string>
 	<string name="poi_post_box">Post box</string>
@@ -311,6 +314,8 @@
 	<string name="poi_communication_tower">Communication tower</string>
 	<string name="poi_observation_tower">Observation tower</string>
 	<string name="poi_bell_tower">Bell tower</string>
+	<string name="poi_cooling_tower">Cooling tower</string>
+	<string name="poi_lighting_tower">Lighting tower</string>
 	<string name="poi_telephone_exchange">Telephone exchange</string>
 
 	<string name="poi_recycling">Recycling</string>
@@ -627,24 +632,24 @@
 	<string name="poi_hunting_lodge">Hunting lodge</string>
 
 	<string name="poi_place_of_worship">Place of worship</string>
-	<string name="poi_religion_christian">Place of worship: christian</string>
-	<string name="poi_religion_jewish">Place of worship: jewish</string>
-	<string name="poi_religion_muslim">Place of worship: muslim</string>
-	<string name="poi_religion_sikh">Place of worship: sikh</string>
-	<string name="poi_religion_buddhist">Place of worship: buddhist</string>
-	<string name="poi_religion_hindu">Place of worship: hindu</string>
-	<string name="poi_religion_shinto">Place of worship: shinto</string>
-	<string name="poi_religion_taoist">Place of worship: taoist</string>
+	<string name="poi_religion_christian">Сhristianity</string>
+	<string name="poi_religion_jewish">Judaism</string>
+	<string name="poi_religion_muslim">Islam</string>
+	<string name="poi_religion_sikh">Sikhism</string>
+	<string name="poi_religion_buddhist">Buddhism</string>
+	<string name="poi_religion_hindu">Hinduism</string>
+	<string name="poi_religion_shinto">Shinto</string>
+	<string name="poi_religion_taoist">Taoism</string>
 	<string name="poi_religion_voodoo">Voodoo</string>
-	<string name="poi_religion_unitarian_universalist">Unitarian universalist</string>
+	<string name="poi_religion_unitarian_universalist">Unitarian universalism</string>
 	<string name="poi_religion_multifaith">Multifaith</string>
-	<string name="poi_religion_jain">Jain</string>
-	<string name="poi_religion_spiritualist">Spiritualist</string>
-	<string name="poi_religion_bahai">Bahai</string>
-	<string name="poi_religion_scientologist">Scientologist</string>
-	<string name="poi_religion_pagan">Pagan</string>
+	<string name="poi_religion_jain">Jainism</string>
+	<string name="poi_religion_spiritualist">Spiritualism</string>
+	<string name="poi_religion_bahai">Bahaism</string>
+	<string name="poi_religion_scientologist">Scientologism</string>
+	<string name="poi_religion_pagan">Paganism</string>
 	<string name="poi_religion_tenrikyo">Tenrikyo</string>
-	<string name="poi_religion_zoroastrian">Zoroastrian</string>
+	<string name="poi_religion_zoroastrian">Zoroastrism</string>
 
 	<string name="poi_denomination_catholic">Catholic</string>
 	<string name="poi_denomination_baptist">Baptist</string>
@@ -661,18 +666,18 @@
 	<string name="poi_denomination_pentecostal">Pentecostal</string>
 	<string name="poi_denomination_mormon">Mormon</string>
 	<string name="poi_denomination_jehovahs_witness">Jehovahs witness</string>
-	<string name="poi_denomination_greek_orthodox">Greek_orthodox</string>
+	<string name="poi_denomination_greek_orthodox">Greek orthodox</string>
 	<string name="poi_denomination_reformed">Reformed</string>
-	<string name="poi_denomination_seventh_day_adventist">Seventh_day_adventist</string>
-	<string name="poi_denomination_new_apostolic">New_apostolic</string>
-	<string name="poi_denomination_church_of_england">Church_of_england</string>
+	<string name="poi_denomination_seventh_day_adventist">Seventh day adventist</string>
+	<string name="poi_denomination_new_apostolic">New apostolic</string>
+	<string name="poi_denomination_church_of_england">Church of england</string>
 	<string name="poi_denomination_episcopal">Episcopal</string>
 	<string name="poi_denomination_shia">Shia</string>
 	<string name="poi_denomination_united">United</string>
 	<string name="poi_denomination_greek_catholic">Greek catholic</string>
 	<string name="poi_denomination_tibetan">Tibetan</string>
 	<string name="poi_denomination_united_reformed">United reformed</string>
-	<string name="poi_denomination_church_of_scotland">Church of scotland</string>
+	<string name="poi_denomination_church_of_scotland">Church of Scotland</string>
 	<string name="poi_denomination_salvation_army">Salvation army</string>
 	<string name="poi_denomination_iglesia_ni_cristo">Iglesia ni cristo</string>
 	<string name="poi_denomination_uniting">Uniting</string>
@@ -1082,6 +1087,8 @@
 	<string name="poi_service_times">Service times</string>
 	<string name="poi_maxheight">Maximum height</string>
 	<string name="poi_maxweight">Maximum weight</string>
+	<string name="poi_height">Height</string>
+	<string name="poi_ele">Height above sea level</string>
 	<string name="poi_abandoned">Abandoned</string>
 	<string name="poi_abandoned_poi">Abandoned object</string>
 	<string name="poi_disused">Disused</string>
@@ -1134,11 +1141,61 @@
 	<string name="poi_content_salt">Salt (content)</string>
 	<string name="poi_content_grain">Grain (content)</string>
 
+	<string name="poi_nudism_yes">Nudism: allowed</string>
+	<string name="poi_nudism_no">Nudism: prohibited</string>
+	<string name="poi_nudism_obligatory">Nudism: obligatory</string>
+	<string name="poi_nudism_customary">Nudism: customary</string>
+	<string name="poi_nudism_permissive">Nudism: permissive</string>
+
 	<string name="poi_trade_building_supplies">Building supplies</string>
 	<string name="poi_trade_plumbing">Plumbing supplies</string>
 	<string name="poi_trade_wood">Wood supplies</string>
 	<string name="poi_trade_agricultural_supplies">Agricultural supplies</string>
 	<string name="poi_trade_tile">Tile supplies</string>
+
+	<string name="poi_population">Population</string>
+	<string name="poi_parking_underground">Underground</string>
+	<string name="poi_parking_multi_storey">Multi-storey</string>
+
+	<string name="poi_bicycle_parking_stands">Stands</string>
+	<string name="poi_bicycle_parking_wall_loops">Wall loops</string>
+	<string name="poi_bicycle_parking_rack">Rack</string>
+	<string name="poi_bicycle_parking_building">Special building</string>
+	<string name="poi_bicycle_parking_shed">Shed</string>
+	<string name="poi_bicycle_parking_bollard">Bollard</string>
+	<string name="poi_bicycle_parking_informal">Informal</string>
+
+	<string name="poi_leaf_type_broadleaved">Broadleaved</string>
+	<string name="poi_leaf_type_needleleaved">Needleleaved</string>
+	<string name="poi_leaf_type_mixed">Mixed</string>
+	<string name="poi_leaf_type_leafless">Leafless</string>
+
+	<string name="poi_trees_olive">Olive</string>
+	<string name="poi_trees_apple">Apple</string>
+	<string name="poi_trees_oil">Palm oil</string>
+	<string name="poi_trees_orange">Orange</string>
+	<string name="poi_trees_almond">Almond</string>
+	<string name="poi_trees_banana">Banana</string>
+	<string name="poi_trees_hazel">Hazel</string>
+	<string name="poi_trees_coconut">Coconut</string>
+	<string name="poi_trees_persimmon">Persimmon</string>
+	<string name="poi_trees_cherry">Cherry</string>
+	<string name="poi_trees_walnut">Walnut</string>
+	<string name="poi_trees_plum">Plum</string>
+	<string name="poi_trees_peach">Peach</string>
+	<string name="poi_trees_tea">Tea</string>
+	<string name="poi_trees_coca">Coca</string>
+	<string name="poi_trees_kiwi">Kiwi</string>
+	<string name="poi_trees_meadow_orchard">Meadow orchard</string>
+	<string name="poi_trees_nectorine">Nectorine</string>
+	<string name="poi_trees_mango">Mango</string>
+	<string name="poi_trees_rubber">Rubber</string>
+	<string name="poi_trees_date">Date</string>
+	<string name="poi_trees_coffea">Coffee</string>
+	<string name="poi_trees_pomegranate">Pomegranate</string>
+
+	<string name="poi_urban">Urban</string>
+	<string name="poi_rural">Rural</string>
 
 	<string name="poi_enforcement_traffic_signals">Enforcement:traffic signals</string>
 	<string name="poi_enforcement_maxspeed">Enforcement:maxspeed</string>
@@ -1153,6 +1210,23 @@
 	<string name="poi_animal_shelter_dog_cat">Shelter for dogs and cats</string>
 	<string name="poi_animal_shelter_bird">Shelter for birds</string>
 
+	<string name="poi_seats">Seats</string>
+	<string name="poi_backrest_yes">Backrest: yes</string>
+	<string name="poi_backrest_no">Backrest: no</string>
+
+	<string name="poi_intermittent">Intermittent</string>
+
 	<string name="poi_building">Building</string>
+	<string name="poi_deadlock">Deadlock</string>
+
+	<string name="poi_generator_source_coal">Energy source: coal</string>
+	<string name="poi_generator_source_gas">Energy source: gas</string>
+	<string name="poi_generator_source_nuclear">Energy source: nuclear</string>
+	<string name="poi_generator_source_solar">Energy source: solar</string>
+	<string name="poi_generator_source_hydro">Energy source: hydro</string>
+	<string name="poi_generator_source_wind">Energy source: wind</string>
+	<string name="poi_generator_source_geothermal">Energy source: geothermal</string>
+	<string name="poi_generator_source_oil">Energy source: oil</string>
+	<string name="poi_generator_source_diesel">Energy source: diesel</string>
 
 </resources>
