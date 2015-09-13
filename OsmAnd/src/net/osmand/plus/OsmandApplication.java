@@ -1,5 +1,38 @@
 package net.osmand.plus;
 
+import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintStream;
+import java.lang.Thread.UncaughtExceptionHandler;
+import java.util.Locale;
+
+import net.osmand.PlatformUtil;
+import net.osmand.access.AccessibilityPlugin;
+import net.osmand.access.AccessibleAlertBuilder;
+import net.osmand.access.AccessibleToast;
+import net.osmand.map.OsmandRegions;
+import net.osmand.osm.MapPoiTypes;
+import net.osmand.plus.AppInitializer.AppInitializeListener;
+import net.osmand.plus.access.AccessibilityMode;
+import net.osmand.plus.activities.DayNightHelper;
+import net.osmand.plus.activities.ExitActivity;
+import net.osmand.plus.activities.SavingTrackHelper;
+import net.osmand.plus.activities.SettingsActivity;
+import net.osmand.plus.api.SQLiteAPI;
+import net.osmand.plus.api.SQLiteAPIImpl;
+import net.osmand.plus.dashboard.DashRateUsFragment;
+import net.osmand.plus.helpers.AvoidSpecificRoads;
+import net.osmand.plus.helpers.WaypointHelper;
+import net.osmand.plus.monitoring.LiveMonitoringHelper;
+import net.osmand.plus.poi.PoiFiltersHelper;
+import net.osmand.plus.render.RendererRegistry;
+import net.osmand.plus.resources.ResourceManager;
+import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.voice.CommandPlayer;
+import net.osmand.router.RoutingConfiguration;
+import net.osmand.util.Algorithms;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
@@ -25,42 +58,6 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import net.osmand.PlatformUtil;
-import net.osmand.access.AccessibilityPlugin;
-import net.osmand.access.AccessibleAlertBuilder;
-import net.osmand.access.AccessibleToast;
-import net.osmand.map.OsmandRegions;
-import net.osmand.osm.MapPoiTypes;
-import net.osmand.plus.AppInitializer.AppInitializeListener;
-import net.osmand.plus.access.AccessibilityMode;
-import net.osmand.plus.activities.DayNightHelper;
-import net.osmand.plus.activities.ExitActivity;
-import net.osmand.plus.activities.SavingTrackHelper;
-import net.osmand.plus.activities.SettingsActivity;
-import net.osmand.plus.api.SQLiteAPI;
-import net.osmand.plus.api.SQLiteAPIImpl;
-import net.osmand.plus.dashboard.DashRateUsFragment;
-import net.osmand.plus.helpers.AvoidSpecificRoads;
-import net.osmand.plus.helpers.WaypointHelper;
-import net.osmand.plus.monitoring.LiveMonitoringHelper;
-import net.osmand.plus.poi.PoiFiltersHelper;
-import net.osmand.plus.render.RendererRegistry;
-import net.osmand.plus.resources.ResourceManager;
-import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.sherpafy.SherpafyCustomization;
-import net.osmand.plus.voice.CommandPlayer;
-import net.osmand.router.RoutingConfiguration;
-import net.osmand.util.Algorithms;
-
-import java.io.BufferedWriter;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.PrintStream;
-import java.lang.Thread.UncaughtExceptionHandler;
-import java.util.Locale;
-
 import btools.routingapp.BRouterServiceConnection;
 import btools.routingapp.IBRouterService;
 
@@ -123,11 +120,7 @@ public class OsmandApplication extends Application {
 		super.onCreate();
 		createInUiThread();
 		uiHandler = new Handler();
-		if(Version.isSherpafy(this)) {
-			appCustomization = new SherpafyCustomization();
-		} else {
-			appCustomization = new OsmAndAppCustomization();
-		}
+		appCustomization = new OsmAndAppCustomization();
 		appCustomization.setup(this);
 		osmandSettings = appCustomization.getOsmandSettings();
 		externalStorageDirectory = osmandSettings.getExternalStorageDirectory();
