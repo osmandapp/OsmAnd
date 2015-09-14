@@ -1214,4 +1214,53 @@
 	<string name="poi_trees_meadow_orchard">Prado com pomar</string>
 	<string name="poi_height">Altura</string>
 	<string name="poi_ele">Altura acima do nível do mar</string>
+	<string name="poi_aerialway_pylon">Torre de teleférico</string>
+
+	<string name="poi_power_tower">Torre de transmissão</string>
+	<string name="poi_power_pole">Poste de transmissão</string>
+
+	<string name="poi_lighting_tower">Torre de iluminação</string>
+	<string name="poi_urban">Urbano</string>
+	<string name="poi_rural">Rural</string>
+
+	<string name="poi_backrest_yes">Encosto: sim</string>
+	<string name="poi_backrest_no">Encosto: não</string>
+
+	<string name="poi_seats">Assentos</string>
+	<string name="poi_intermittent">Intermitente</string>
+
+	<string name="poi_generator_source_coal">Fonte de energia: carvão</string>
+	<string name="poi_generator_source_gas">Fonte de energia: gás</string>
+	<string name="poi_generator_source_nuclear">Fonte de energia: nuclear</string>
+	<string name="poi_generator_source_solar">Fonte de energia: solar</string>
+	<string name="poi_generator_source_hydro">Fonte de energia: hidráulica</string>
+	<string name="poi_generator_source_wind">Fonte de energia: vento</string>
+	<string name="poi_generator_source_geothermal">Fonte de energia: geotérmica</string>
+	<string name="poi_generator_source_oil">Fonte de energia: petróleo</string>
+	<string name="poi_generator_source_diesel">Fonte de energia: diesel</string>
+
+	<string name="poi_car_wash_self_service">Auto-serviço</string>
+
+	<string name="poi_int_name">Nome internacional</string>
+	<string name="poi_nat_name">Nome nacional</string>
+	<string name="poi_reg_name">Nome regional</string>
+	<string name="poi_loc_name">Nome local</string>
+	<string name="poi_old_name">Nome antigo</string>
+	<string name="poi_alt_name">Nome alternativo</string>
+
+	<string name="poi_pump_manual">Bomba manual</string>
+	<string name="poi_pump_powered">Bomba elétrica</string>
+	<string name="poi_pump_no">Sem bomba</string>
+
+	<string name="poi_water_characteristic_mineral">Característica d\'água: mineral</string>
+	<string name="poi_water_characteristic_mud">Característica d\'água: barrenta</string>
+	<string name="poi_water_characteristic_sulfuric">Característica d\'água: sulfurosa</string>
+
+	<string name="poi_water_point">Ponto de água</string>
+
+<string name="poi_cooling_tower">Torre de resfriamento</string>
+	<string name="poi_bicycle_parking_wall_loops">Suporte de parede</string>
+	<string name="poi_bicycle_parking_rack">Prateleira</string>
+	<string name="poi_deadlock">Impasse</string>
+
 	</resources>

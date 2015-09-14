@@ -1261,4 +1261,23 @@
 
 	<string name="poi_lighting_tower">Lysmast</string>
 	<string name="poi_urban">Bymæssig</string>
-	</resources>
+	<string name="poi_car_wash_self_service">Selvbetjening</string>
+
+	<string name="poi_int_name">International navn</string>
+	<string name="poi_nat_name">National navn</string>
+	<string name="poi_reg_name">Regional navn</string>
+	<string name="poi_loc_name">Lokalt navn</string>
+	<string name="poi_old_name">Gammelt navn</string>
+	<string name="poi_alt_name">Alternativt navn</string>
+
+	<string name="poi_pump_manual">Manuel pumpe</string>
+	<string name="poi_pump_powered">Drevet pumpe</string>
+	<string name="poi_pump_no">Ingen pumpe</string>
+
+	<string name="poi_water_characteristic_mineral">Vand karakteristisk: mineral</string>
+	<string name="poi_water_characteristic_mud">Vand karakteristisk: mudder</string>
+	<string name="poi_water_characteristic_sulfuric">Vand karakteristisk: svovlsyre</string>
+
+	<string name="poi_water_point">Vand punkt</string>
+
+</resources>

@@ -1050,7 +1050,7 @@
     
 	<string name="tip_altitude_offset">Correcció de l\'altitud</string>
 	<string name="map_widget_max_speed">Límit de velocitat</string>
-    <string name="monitoring_control_start">Inicia</string>
+    <string name="monitoring_control_start">GPX</string>
     <string name="route_descr_current_location">Posició actual</string>
     <string name="incremental_search_city">Cerca progressiva de municipis</string>
     <string name="safe_mode_description">Executeu l\'aplicació en mode segur (usant codi d\'Android, més lent que el codi nadiu).</string>
@@ -2118,4 +2118,6 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
 	<string name="recent_places">Llocs recents</string>
 	<string name="favourites">Favorits</string>
 	<string name="saved_at_time">S\'ha desat correctament a: %1$s</string>
+<string name="poi_deleted_localy">El PDI s\'eliminara un cop pugeu els vostres canvis</string>
+	<string name="show_gpx">Mostra GPX</string>
 </resources>
