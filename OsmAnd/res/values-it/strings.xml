@@ -1700,7 +1700,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="local_map_names">Nomi locali</string>
     <string name="lang_sw">Swahili</string>
     <string name="forward">Avanti</string>
-    <string name="home">Inizio</string>
+    <string name="home">Pannello di controllo</string>
     <string name="live_monitoring_m_descr">Invia i dati di tracciamento a uno specifico servizio web se la registrazione GPX è abilitata.</string>
 	<string name="live_monitoring_m">Tracciamento online (GPX richiesto)</string>
     <string name="live_monitoring_start">Avvia il tracciamento online</string>
@@ -2139,7 +2139,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="we_really_care_about_your_opinion">Ci teniamo molto alla tua opinione, è molto importante avere un tuo rimando.</string>
 	<string name="rendering_value_boldOutline_name">Contorno in grassetto</string>
     <string name="traffic_warning_hazard">Pericolo</string>
-    <string name="dahboard_options_dialog_title">Opzioni pannello di controllo</string>
+    <string name="dahboard_options_dialog_title">Configura il pannello di controllo</string>
 	<string name="shared_string_card_was_hidden">La carta era nascosta</string>
 	<string name="shared_string_undo">Annulla azione</string>
 	<string name="shared_string_skip">Salta</string>
