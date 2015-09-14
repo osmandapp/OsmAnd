@@ -59,7 +59,6 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 
 	private LatLon lastPoint;
 	private float distance = 0;
-	private boolean isRecording = false;
 	private SelectedGpxFile currentTrack;
 	private int points;
 	
@@ -334,7 +333,6 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		long locationTime = System.currentTimeMillis();
 		OsmandSettings settings = ctx.getSettings();
 		boolean record = false;
-		isRecording = false;
 		if(OsmAndLocationProvider.isPointAccurateForRouting(location) && 
 				OsmAndLocationProvider.isNotSimulatedLocation(location) ) {
 			if (OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null) {
@@ -346,19 +344,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 						&& locationTime - lastTimeUpdated > settings.SAVE_GLOBAL_TRACK_INTERVAL.get()) {
 					record = true;
 				}
-			} else if(ctx.getAppCustomization().saveGPXPoint(location) && locationTime - lastTimeUpdated > settings.SAVE_GLOBAL_TRACK_INTERVAL.get()) {
-				record = true;
 			}
-
-			//check if recording is active for widget status light
-			if (OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null) {
-				if (settings.SAVE_GLOBAL_TRACK_TO_GPX.get() || (settings.SAVE_TRACK_TO_GPX.get() && ctx.getRoutingHelper().isFollowingMode())) {
-					isRecording = true;
-				}
-			} else if (ctx.getAppCustomization().saveGPXPoint(location)) {
-				isRecording = true;
-			}
-
 		}
 		if (record) {
 			insertData(location.getLatitude(), location.getLongitude(), location.getAltitude(), location.getSpeed(),
@@ -454,7 +440,13 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	}
 
 	public boolean getIsRecording() {
-		return isRecording;
+		if (OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null) {
+			if (ctx.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get() ||
+					(ctx.getSettings().SAVE_TRACK_TO_GPX.get() && ctx.getRoutingHelper().isFollowingMode())) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public float getDistance() {
