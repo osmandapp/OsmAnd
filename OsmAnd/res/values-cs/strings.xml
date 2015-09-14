@@ -1640,7 +1640,7 @@ s často kladenými otázkami.</string>
     <string name="osmo_auth_error_short">Autorizace selhala</string>
     <string name="rendering_attr_showCycleRoutes_name">Zobrazit cyklostezky</string>
     <string name="forward">Vpřed</string>
-    <string name="home">Domů</string>
+    <string name="home">Domovská stránka</string>
     <string name="keep_navigation_service">Ponechat</string>
 	<string name="stop_navigation_service">Přerušit</string>
 	<string name="enable_sleep_mode">Zapnout režim spánku GPS</string>
@@ -2065,4 +2065,6 @@ s často kladenými otázkami.</string>
     <string name="lang_et">Estonsky</string>
     <string name="lang_ceb">Cebuansky</string>
     <string name="tag_poi_amenity">občanská vybavenost</string>
+	<string name="opening_at">Otevřeno od</string>
+	<string name="closing_at">Otevřeno do</string>
 	</resources>
