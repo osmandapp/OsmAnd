@@ -1252,7 +1252,7 @@
 	<string name="poi_alt_name">Nombre alternativo</string>
 
 	<string name="poi_pump_manual">Bomba manual</string>
-	<string name="poi_pump_powered">Bomba energética</string>
+	<string name="poi_pump_powered">Bomba automática</string>
 	<string name="poi_pump_no">Sin bomba</string>
 
 	<string name="poi_water_characteristic_mineral">Característica de agua: mineralizada</string>
