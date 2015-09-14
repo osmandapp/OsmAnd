@@ -2091,4 +2091,9 @@
     <string name="working_days">Рабочие дни</string>
 	<string name="favourites">Избранное</string>
 <string name="saved_at_time">Успешно сохранён в: %1$s</string>
-</resources>
+<string name="poi_deleted_localy">POI будут удалены после того как вы загрузите ваши изменения</string>
+	<string name="show_gpx">Показать GPX</string>
+<string name="poi_action_delete">удалить</string>
+	<string name="tag_poi_amenity">инфраструктура</string>
+	<string name="recent_places">Недавние места</string>
+	</resources>

@@ -507,7 +507,7 @@
 	<string name="poi_hunting_lodge">Pabellón de caza</string>
 
 	<string name="poi_place_of_worship">Lugar de culto</string>
-	<string name="poi_religion_christian">Cristiandad</string>
+	<string name="poi_religion_christian">Cristianismo</string>
 	<string name="poi_religion_jewish">Judaísmo</string>
 	<string name="poi_religion_muslim">Islámismo</string>
 	<string name="poi_religion_sikh">Sijismo</string>
@@ -1169,4 +1169,102 @@
 	<string name="poi_parking_underground">Subterráneo</string>
 	<string name="poi_parking_multi_storey">Varios pisos</string>
 
-	</resources>
+	<string name="poi_bicycle_parking_stands">Anclajes</string>
+	<string name="poi_bicycle_parking_wall_loops">Anclajes de pared</string>
+	<string name="poi_bicycle_parking_informal">Informal</string>
+
+	<string name="poi_leaf_type_broadleaved">Hoja ancha</string>
+	<string name="poi_leaf_type_needleleaved">Hoja acicular</string>
+	<string name="poi_leaf_type_mixed">Mixto</string>
+	<string name="poi_leaf_type_leafless">Sin hojas</string>
+
+	<string name="poi_trees_olive">Olivo</string>
+	<string name="poi_trees_apple">Manzano</string>
+	<string name="poi_trees_oil">Aceite de palma</string>
+	<string name="poi_trees_orange">Naranjo</string>
+	<string name="poi_trees_almond">Almendro</string>
+	<string name="poi_trees_banana">Banano</string>
+	<string name="poi_trees_hazel">Avellano</string>
+	<string name="poi_trees_coconut">Cocotero</string>
+	<string name="poi_nudism_yes">Nudismo permitido</string>
+	<string name="poi_nudism_no">Nudismo prohibido</string>
+	<string name="poi_nudism_obligatory">Nudismo obligatorio</string>
+	<string name="poi_nudism_customary">Nudismo habitual</string>
+	<string name="poi_nudism_permissive">Nudismo permisivo</string>
+
+	<string name="poi_bicycle_parking_rack">Bastidor</string>
+	<string name="poi_bicycle_parking_building">Edificio especial</string>
+	<string name="poi_bicycle_parking_shed">Caseta</string>
+	<string name="poi_bicycle_parking_bollard">Bolardo</string>
+	<string name="poi_trees_persimmon">Caqui</string>
+	<string name="poi_trees_cherry">Cerezo</string>
+	<string name="poi_trees_walnut">Nogal</string>
+	<string name="poi_trees_plum">Ciruelo</string>
+	<string name="poi_trees_peach">Duraznero</string>
+	<string name="poi_trees_tea">Té</string>
+	<string name="poi_trees_coca">Coca</string>
+	<string name="poi_trees_kiwi">Kiwi</string>
+	<string name="poi_trees_meadow_orchard">Huerto</string>
+	<string name="poi_trees_mango">Mango</string>
+	<string name="poi_trees_rubber">Caucho</string>
+	<string name="poi_trees_date">Fecha</string>
+	<string name="poi_trees_coffea">Café</string>
+	<string name="poi_trees_pomegranate">Granada</string>
+
+	<string name="poi_trees_nectorine">Nectarina</string>
+	<string name="poi_height">Altura</string>
+	<string name="poi_ele">Elevación sobre el nivel del mar</string>
+	<string name="poi_aerialway_pylon">Torre de teleférico</string>
+
+	<string name="poi_power_tower">Torre de alta tensión</string>
+	<string name="poi_power_pole">Poste de energía</string>
+
+	<string name="poi_cooling_tower">Torre de enfriamiento</string>
+	<string name="poi_lighting_tower">Torre de iluminación</string>
+	<string name="poi_urban">Urbano</string>
+	<string name="poi_rural">Rural</string>
+
+	<string name="poi_seats">Asientos</string>
+	<string name="poi_backrest_yes">Con respaldo</string>
+	<string name="poi_backrest_no">Sin respaldo</string>
+
+	<string name="poi_intermittent">Intermitente</string>
+
+	<string name="poi_deadlock">Punto muerto</string>
+
+	<string name="poi_generator_source_coal">Fuente de energía: carbón</string>
+	<string name="poi_generator_source_gas">Fuente de energía: gas</string>
+	<string name="poi_generator_source_nuclear">Fuente de energía: nuclear</string>
+	<string name="poi_generator_source_solar">Fuente de energía: solar</string>
+	<string name="poi_generator_source_hydro">Fuente de energía: hidroeléctrica</string>
+	<string name="poi_generator_source_wind">Fuente de energía: viento</string>
+	<string name="poi_generator_source_geothermal">Fuente de energía: geotérmica</string>
+	<string name="poi_generator_source_oil">Fuente de energía: petróleo</string>
+	<string name="poi_generator_source_diesel">Fuente de energía: diésel</string>
+
+<string name="poi_car_wash_self_service">Auto servicio</string>
+
+	<string name="poi_int_name">Nombre internacional</string>
+	<string name="poi_nat_name">Nombre nacional</string>
+	<string name="poi_reg_name">Nombre regional</string>
+	<string name="poi_loc_name">Nombre local</string>
+	<string name="poi_old_name">Antiguo nombre</string>
+	<string name="poi_alt_name">Nombre alternativo</string>
+
+	<string name="poi_pump_manual">Bomba manual</string>
+	<string name="poi_pump_powered">Bomba automática</string>
+	<string name="poi_pump_no">Sin bomba</string>
+
+	<string name="poi_water_characteristic_mineral">Característica de agua: mineralizada</string>
+	<string name="poi_water_characteristic_mud">Característica de agua: lodosa</string>
+	<string name="poi_water_characteristic_sulfuric">Característica de agua: sulfúrica</string>
+
+	<string name="poi_water_point">Toma de agua</string>
+
+<string name="poi_species">Especie</string>
+	<string name="poi_genus">Género</string>
+	<string name="poi_taxon">Taxón</string>
+
+	<string name="poi_cuisine">Cocina</string>
+
+</resources>

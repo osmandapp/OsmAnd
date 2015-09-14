@@ -384,7 +384,7 @@
     <string name="lang_sw">Suaíli</string>
     <string name="lang_he">Hebraico</string>
     <string name="forward">Avançar</string>
-    <string name="home">Início</string>
+    <string name="home">Painel de controle</string>
     <string name="live_monitoring_m_descr">Enviar o rastreamento para um serviço web especificado, se estiver ativado o registro de GPX.</string>
 	<string name="live_monitoring_m">Rastreamento on-line (requer GPX)</string>
     <string name="live_monitoring_start">Iniciar rastreamento on-line</string>
@@ -1787,7 +1787,7 @@
     <string name="we_really_care_about_your_opinion">Nos preocupamos muito com sua opinião e é importante para nós ouvi-lo.</string>
 	<string name="rendering_value_boldOutline_name">Títulos com contornos</string>
     <string name="traffic_warning_hazard">Perigo</string>
-    <string name="dahboard_options_dialog_title">Painel de opções</string>
+    <string name="dahboard_options_dialog_title">Configurar o painel de controle</string>
 	<string name="shared_string_card_was_hidden">Cartão estava escondido</string>
 	<string name="shared_string_undo">Desfazer</string>
 	<string name="shared_string_skip">Pular</string>
@@ -1818,4 +1818,6 @@
 	<string name="favourites">Favoritos</string>
 <string name="poi_action_delete">apagar</string>
 	<string name="saved_at_time">Salvo com sucesso em: %1$s</string>
+<string name="poi_deleted_localy">POI será apagado quando você enviar suas alterações</string>
+	<string name="show_gpx">Mostrar GPX</string>
 </resources>

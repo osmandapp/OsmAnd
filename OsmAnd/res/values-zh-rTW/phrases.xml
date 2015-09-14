@@ -1172,7 +1172,7 @@
 	<string name="poi_bicycle_parking_stands">立台</string>
 	<string name="poi_bicycle_parking_wall_loops">壁掛架</string>
 	<string name="poi_bicycle_parking_rack">擱物架</string>
-	<string name="poi_bicycle_parking_building">建築物</string>
+	<string name="poi_bicycle_parking_building">獨特建築物</string>
 	<string name="poi_bicycle_parking_shed">車棚</string>
 	<string name="poi_bicycle_parking_bollard">系船柱</string>
 	<string name="poi_bicycle_parking_informal">非正式的</string>
@@ -1185,4 +1185,40 @@
 	<string name="poi_trees_olive">橄欖樹</string>
 	<string name="poi_trees_apple">蘋果樹</string>
 	<string name="poi_trees_oil">棕櫚油</string>
+	<string name="poi_height">高度</string>
+	<string name="poi_ele">海拔高度</string>
+	<string name="poi_nudism_yes">天體主義：允許</string>
+	<string name="poi_nudism_no">天體主義：禁止</string>
+	<string name="poi_nudism_obligatory">天體主義：強制</string>
+	<string name="poi_nudism_customary">天體主義：慣常</string>
+	<string name="poi_nudism_permissive">天體主義：容許</string>
+
+	<string name="poi_trees_orange">橙色</string>
+	<string name="poi_trees_almond">杏仁</string>
+	<string name="poi_trees_banana">香蕉</string>
+	<string name="poi_trees_hazel">榛樹</string>
+	<string name="poi_trees_coconut">椰子</string>
+	<string name="poi_trees_persimmon">柿子</string>
+	<string name="poi_trees_cherry">櫻桃</string>
+	<string name="poi_trees_walnut">核桃</string>
+	<string name="poi_trees_plum">李子</string>
+	<string name="poi_trees_peach">桃子</string>
+	<string name="poi_trees_tea">茶</string>
+	<string name="poi_trees_coca">古柯</string>
+	<string name="poi_trees_kiwi">獼猴桃</string>
+	<string name="poi_trees_meadow_orchard">草甸果樹園</string>
+	<string name="poi_trees_nectorine">油桃</string>
+	<string name="poi_trees_mango">芒果</string>
+	<string name="poi_trees_rubber">橡膠</string>
+	<string name="poi_trees_date">日期</string>
+	<string name="poi_trees_coffea">咖啡</string>
+	<string name="poi_trees_pomegranate">石榴</string>
+
+	<string name="poi_aerialway_pylon">高架作業臺塔</string>
+
+	<string name="poi_power_tower">高壓輸電塔</string>
+	<string name="poi_power_pole">電線桿</string>
+
+	<string name="poi_cooling_tower">冷卻塔</string>
+	<string name="poi_lighting_tower">照明架塔</string>
 	</resources>

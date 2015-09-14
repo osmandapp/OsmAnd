@@ -1995,4 +1995,6 @@
 	<string name="recent_places">Nyliga platser</string>
 	<string name="poi_action_delete">ta bort</string>
 	<string name="saved_at_time">Sparades utan problem kl. %1$s</string>
+<string name="poi_deleted_localy">POI tas bort så snart du laddat upp dina ändringar</string>
+	<string name="show_gpx">Visa GPX</string>
 </resources>

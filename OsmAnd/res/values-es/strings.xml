@@ -1774,7 +1774,7 @@
     <string name="lang_sw">Swahili</string>
     <string name="lang_he">Hebreo</string>
     <string name="forward">Siguiente</string>
-    <string name="home">Inicio</string>
+    <string name="home">Panel de control</string>
     <string name="live_monitoring_m_descr">Envía los datos de seguimiento a un servicio web específico si el registro GPX está habilitada.</string>
 	<string name="live_monitoring_m">Seguimiento en línea (requiere GPX)</string>
     <string name="live_monitoring_start">Iniciar seguimiento en línea</string>
@@ -2156,7 +2156,7 @@
     <string name="we_really_care_about_your_opinion">Nos interesa mucho y es importante para nosotros oír su opinión.</string>
 	<string name="rendering_value_boldOutline_name">Borde remarcado</string>
     <string name="traffic_warning_hazard">Advertencia de riesgo</string>
-    <string name="dahboard_options_dialog_title">Opciones del panel</string>
+    <string name="dahboard_options_dialog_title">Configurar panel</string>
 	<string name="shared_string_card_was_hidden">Se ocultó la tarjeta</string>
 	<string name="shared_string_undo">Deshacer</string>
 	<string name="shared_string_skip">Omitir</string>
@@ -2175,7 +2175,7 @@
 <string name="av_locations_descr">Archivo GPX con ubicaciones de nota</string>
     <string name="av_locations">Ubicaciones</string>
     <string name="tag_poi_name">nombre</string>
-	<string name="tag_poi_amenity">comodidad</string>
+	<string name="tag_poi_amenity">servicio</string>
 	<string name="contact_info">Información de contacto</string>
 	<string name="description">Descripción</string>
 	<string name="add_opening_hours">Añadir horario de atención</string>

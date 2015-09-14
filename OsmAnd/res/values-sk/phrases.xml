@@ -354,14 +354,14 @@
 	<string name="poi_apartment">Apartmány</string>
 
 	<string name="poi_place_of_worship">Náboženské miesto</string>
-	<string name="poi_religion_christian">Náboženské miesto: kresťanské</string>
-	<string name="poi_religion_jewish">Náboženské miesto: židovské</string>
-	<string name="poi_religion_muslim">Náboženské miesto: moslimské</string>
-	<string name="poi_religion_sikh">Náboženské miesto: sikhovia</string>
-	<string name="poi_religion_buddhist">Náboženské miesto: budhistické</string>
-	<string name="poi_religion_hindu">Náboženské miesto: hinduistické</string>
-	<string name="poi_religion_shinto">Náboženské miesto: šintoistické</string>
-	<string name="poi_religion_taoist">Náboženské miesto: taoistické</string>
+	<string name="poi_religion_christian">Kresťanstvo</string>
+	<string name="poi_religion_jewish">Judaizmus</string>
+	<string name="poi_religion_muslim">Islam</string>
+	<string name="poi_religion_sikh">Sikhizmus</string>
+	<string name="poi_religion_buddhist">Budhizmus</string>
+	<string name="poi_religion_hindu">Hinduizmus</string>
+	<string name="poi_religion_shinto">Šintoizmus</string>
+	<string name="poi_religion_taoist">Taoizmus</string>
 
 	<string name="poi_internet_access_wlan">Internetové pripojenie: Wifi</string>
 	<string name="poi_internet_access_terminal">Internetové pripojenie: terminál</string>
@@ -1044,8 +1044,8 @@
 
 	<string name="poi_religion_voodoo">Voodoo</string>
 	<string name="poi_religion_multifaith">Multináboženské</string>
-	<string name="poi_religion_scientologist">Scientologický</string>
-	<string name="poi_religion_pagan">Pohanské</string>
+	<string name="poi_religion_scientologist">Scientológia</string>
+	<string name="poi_religion_pagan">Pohanstvo</string>
 	<string name="poi_denomination_catholic">Katolícke</string>
 	<string name="poi_denomination_baptist">Baptistické</string>
 	<string name="poi_denomination_roman_catholic">Rímskokatolícke</string>
@@ -1060,11 +1060,11 @@
 	<string name="poi_denomination_russian_orthodox">Ruské ortodoxné</string>
 	<string name="poi_denomination_mormon">Mormónske</string>
 	<string name="poi_denomination_jehovahs_witness">Svedkovia Jehovovi</string>
-	<string name="poi_denomination_greek_orthodox">Grécke ortodoxné</string>
+	<string name="poi_denomination_greek_orthodox">Pravoslávna cirkev</string>
 	<string name="poi_denomination_reformed">Reformované</string>
 	<string name="poi_denomination_seventh_day_adventist">Adventisti siedmeho dňa</string>
-	<string name="poi_denomination_new_apostolic">Novoapoštolské</string>
-	<string name="poi_denomination_church_of_england">Anglická cirkev</string>
+	<string name="poi_denomination_new_apostolic">Novoapoštolská cirkev</string>
+	<string name="poi_denomination_church_of_england">Anglikánska cirkev</string>
 	<string name="poi_denomination_episcopal">Episkopálne</string>
 	<string name="poi_denomination_greek_catholic">Grékokatolícke</string>
 	<string name="poi_denomination_tibetan">Tibetské</string>
@@ -1082,4 +1082,134 @@
 	<string name="poi_vk">VKontakte</string>
 	<string name="poi_google_plus">Google+</string>
 	<string name="poi_military_office">Vojenský úrad</string>
-	</resources>
+	<string name="poi_landfill_waste_nuclear">Jadrový odpad</string>
+	<string name="poi_brownfield">Zanedbaná plocha</string>
+	<string name="poi_greenfield">Stavebné pozemky \"na zelenej lúke\"</string>
+	<string name="poi_bunker_silo">Silážna jama</string>
+	<string name="poi_denomination_salvation_army">Armáda spásy</string>
+	<string name="poi_denomination_bulgarian_orthodox">Bulharská ortodoxná cirkev</string>
+	<string name="poi_denomination_nazarene">Nazaréni</string>
+	<string name="poi_denomination_serbian_orthodox">Srbská ortodoxná cirkev</string>
+	<string name="poi_denomination_latter_day_saints">Svätí posledných dní</string>
+	<string name="poi_denomination_georgian_orthodox">Gruzínska ortodoxná cirkev</string>
+	<string name="poi_denomination_romanian_orthodox">Rumunská ortodoxná cirkev</string>
+	<string name="poi_denomination_ethiopian_orthodox_tewahedo">Etiópska ortodoxná cirkev</string>
+	<string name="poi_denomination_coptic_orthodox">Koptská ortodoxná cirkev</string>
+	<string name="poi_start_date">Začiatočný dátum</string>
+	<string name="poi_wheelchair">Invalidný vozík</string>
+	<string name="poi_wholesale">Veľkoobchod</string>
+
+	<string name="poi_content_silage">Siláž (obsah)</string>
+	<string name="poi_content_water">Voda (obsah)</string>
+	<string name="poi_content_slurry">Minerálny olej (obsah)</string>
+	<string name="poi_content_oil">Ropa (obsah)</string>
+	<string name="poi_content_fuel">Palivo (obsah)</string>
+	<string name="poi_content_manure">Hnoj (obsah)</string>
+	<string name="poi_content_wine">Víno (obsah)</string>
+	<string name="poi_content_sewage">Kanalizácia (obsah)</string>
+	<string name="poi_content_gas">Plyn (obsah)</string>
+	<string name="poi_content_biomass">Biomasa (obsah)</string>
+	<string name="poi_content_wastewater">Odpadová voda (obsah)</string>
+	<string name="poi_content_crop">Plodiny (obsah)</string>
+	<string name="poi_content_fodder">Krmivo (obsah)</string>
+	<string name="poi_content_beer">Pivo (obsah)</string>
+	<string name="poi_content_salt">Soľ (obsah)</string>
+	<string name="poi_content_grain">Zrno (obsah)</string>
+
+	<string name="poi_nudism_yes">Nudizmus: povolený</string>
+	<string name="poi_nudism_no">Nudizmus: zakázaný</string>
+	<string name="poi_nudism_obligatory">Nudizmus: povinný</string>
+	<string name="poi_nudism_customary">Nudizmus: obvyklý</string>
+	<string name="poi_nudism_permissive">Nudizmus: dovolený</string>
+
+	<string name="poi_trade_building_supplies">Stavebný materiál</string>
+	<string name="poi_trade_plumbing">Inštalačný materiál</string>
+	<string name="poi_trade_wood">Drevo</string>
+	<string name="poi_trade_agricultural_supplies">Poľnohospodárske potreby</string>
+	<string name="poi_trade_tile">Kachličky</string>
+
+	<string name="poi_population">Počet obyvateľov</string>
+	<string name="poi_parking_underground">Podzemné</string>
+	<string name="poi_parking_multi_storey">Poschodové</string>
+
+	<string name="poi_bicycle_parking_stands">Stojany</string>
+	<string name="poi_bicycle_parking_wall_loops">Držiaky na kolesá</string>
+	<string name="poi_bicycle_parking_rack">Regál</string>
+	<string name="poi_bicycle_parking_building">Špecializovaná budova</string>
+	<string name="poi_bicycle_parking_shed">Prístrešok</string>
+	<string name="poi_bicycle_parking_bollard">Stĺpik</string>
+	<string name="poi_bicycle_parking_informal">Neoficiálne</string>
+
+	<string name="poi_leaf_type_broadleaved">Listnatý</string>
+	<string name="poi_leaf_type_needleleaved">Ihličnatý</string>
+	<string name="poi_leaf_type_mixed">Zmiešaný</string>
+	<string name="poi_leaf_type_leafless">Bezlistý</string>
+
+	<string name="poi_trees_olive">Olivy</string>
+	<string name="poi_trees_apple">Jablká</string>
+	<string name="poi_trees_oil">Palmový olej</string>
+	<string name="poi_trees_orange">Pomaranče</string>
+	<string name="poi_trees_almond">Mandle</string>
+	<string name="poi_trees_banana">Banány</string>
+	<string name="poi_trees_hazel">Lieskovce</string>
+	<string name="poi_trees_coconut">Kokosové orechy</string>
+	<string name="poi_trees_persimmon">Persimon (Kaki)</string>
+	<string name="poi_trees_cherry">Višne</string>
+	<string name="poi_trees_walnut">Vlašské orechy</string>
+	<string name="poi_trees_plum">Slivky</string>
+	<string name="poi_trees_peach">Broskyne</string>
+	<string name="poi_trees_tea">Čaj</string>
+	<string name="poi_trees_coca">Koka</string>
+	<string name="poi_trees_kiwi">Kiwi</string>
+	<string name="poi_trees_nectorine">Nektarinky</string>
+	<string name="poi_trees_mango">Mango</string>
+	<string name="poi_trees_rubber">Gumovníky</string>
+	<string name="poi_trees_date">Ďatle</string>
+	<string name="poi_trees_coffea">Káva</string>
+	<string name="poi_trees_pomegranate">Granátové jablká</string>
+
+	<string name="poi_ele">Nadmorská výška</string>
+	<string name="poi_height">Výška</string>
+	<string name="poi_aerialway_pylon">Stožiar lanovky</string>
+
+	<string name="poi_power_tower">Elektrický stožiar</string>
+	<string name="poi_power_pole">Elektrický stĺp</string>
+
+	<string name="poi_cooling_tower">Chladiaca veža</string>
+	<string name="poi_lighting_tower">Osvetľovacia veža</string>
+	<string name="poi_seats">Sedadlá</string>
+	<string name="poi_backrest_yes">Operadlo: áno</string>
+	<string name="poi_backrest_no">Operadlo: nie</string>
+
+	<string name="poi_intermittent">Občasné</string>
+
+	<string name="poi_generator_source_coal">Zdroj energie: uhlie</string>
+	<string name="poi_generator_source_gas">Zdroj energie: plyn</string>
+	<string name="poi_generator_source_nuclear">Zdroj energie: jadro</string>
+	<string name="poi_generator_source_solar">Zdroj energie: slnko</string>
+	<string name="poi_generator_source_hydro">Zdroj energie: voda</string>
+	<string name="poi_generator_source_wind">Zdroj energie: vietor</string>
+	<string name="poi_generator_source_geothermal">Zdroj energie: geotermálny</string>
+	<string name="poi_generator_source_oil">Zdroj energie: ropa</string>
+	<string name="poi_generator_source_diesel">Zdroj energie: nafta</string>
+
+	<string name="poi_car_wash_self_service">Samoobslužné</string>
+
+	<string name="poi_int_name">Medzinárodný názov</string>
+	<string name="poi_nat_name">Národný názov</string>
+	<string name="poi_reg_name">Regionálny názov</string>
+	<string name="poi_loc_name">Miestny názov</string>
+	<string name="poi_old_name">Starý názov</string>
+	<string name="poi_alt_name">Alternatívny názov</string>
+
+	<string name="poi_pump_manual">Ručná pumpa</string>
+	<string name="poi_pump_powered">Poháňaná pumpa</string>
+	<string name="poi_pump_no">Žiadna pumpa</string>
+
+	<string name="poi_water_characteristic_mineral">Vlastnosti vody: minerálna</string>
+	<string name="poi_water_characteristic_mud">Vlastnosti vody: blato</string>
+	<string name="poi_water_characteristic_sulfuric">Vlastnosti vody: sírnatá</string>
+
+	<string name="poi_water_point">Vodný bod</string>
+
+</resources>

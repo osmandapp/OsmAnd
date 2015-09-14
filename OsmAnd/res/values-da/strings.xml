@@ -1656,7 +1656,7 @@
     <string name="lang_sw">Swahili</string>
     <string name="lang_he">Hebræisk</string>
     <string name="forward">Frem</string>
-    <string name="home">Hjem</string>
+    <string name="home">Oversigt</string>
     <string name="live_monitoring_m_descr">Send sporing til en bestemt webtjeneste, hvis GPX logning er aktiveret.</string>
     <string name="live_monitoring_m">Online sporing (GPX nødvendig)</string>
     <string name="live_monitoring_start">Start online sporing</string>
@@ -2097,7 +2097,7 @@
     <string name="we_really_care_about_your_opinion">Vi er meget interesseret i din mening, og det er vigtigt for os at høre fra dig.</string>
     <string name="rendering_value_boldOutline_name">Fed kontur</string>
     <string name="traffic_warning_hazard">Fare</string>
-    <string name="dahboard_options_dialog_title">Betjeningspanel indstillinger</string>
+    <string name="dahboard_options_dialog_title">Konfigurer oversigt</string>
     <string name="shared_string_card_was_hidden">Kortet blev skjult</string>
     <string name="shared_string_undo">FORTRYD</string>
     <string name="shared_string_skip">Spring over</string>
@@ -2129,6 +2129,6 @@
 	<string name="favourites">Favoritter</string>
 <string name="poi_action_delete">slet</string>
 	<string name="saved_at_time">Gemt korrekt: %1$s</string>
-<string name="poi_deleted_localy">IP vil blive slettet, når ændringer overføres</string>
+<string name="poi_deleted_localy">Interessepunkt (IP) vil blive slettet, når ændringer overføres</string>
 	<string name="show_gpx">Vis GPX</string>
 </resources>

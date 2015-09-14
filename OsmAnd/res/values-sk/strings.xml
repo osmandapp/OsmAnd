@@ -2276,10 +2276,13 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="description">Popis</string>
 	<string name="add_opening_hours">Pridať otváracie hodiny</string>
 	<string name="poi_dialog_poi_type">Typ bodu záujmu</string>
-	<string name="number_of_rows_in_dash">Počet riadkov v pomlčke %1$s</string>
+	<string name="number_of_rows_in_dash">Počet riadkov v bloku %1$s</string>
 	<string name="please_specify_poi_type">Prosím zadajte typ bodu záujmu.</string>
 <string name="poi_action_delete">odstrániť</string>
 	<string name="working_days">Pracovné dni</string>
 	<string name="recent_places">História miest</string>
 	<string name="favourites">Obľúbené</string>
+<string name="saved_at_time">Úspešne uložené na: %1$s</string>
+	<string name="poi_deleted_localy">Bod POI bude vymazaný keď zmeny odošlete</string>
+	<string name="show_gpx">Zobraziť GPX</string>
 </resources>

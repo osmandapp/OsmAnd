@@ -502,14 +502,14 @@
 	<string name="poi_wilderness_hut">Cabana</string>
 
 	<string name="poi_place_of_worship">Temple</string>
-	<string name="poi_religion_christian">Temple: cristià</string>
-	<string name="poi_religion_jewish">Temple: sinagoga</string>
-	<string name="poi_religion_muslim">Temple: mesquita</string>
-	<string name="poi_religion_sikh">Temple: sikhisme</string>
-	<string name="poi_religion_buddhist">Temple budista</string>
-	<string name="poi_religion_hindu">Temple hindú</string>
-	<string name="poi_religion_shinto">Temple sintoista</string>
-	<string name="poi_religion_taoist">Temple taoista</string>
+	<string name="poi_religion_christian">Cristianisme</string>
+	<string name="poi_religion_jewish">Judaisme</string>
+	<string name="poi_religion_muslim">Islamisme</string>
+	<string name="poi_religion_sikh">Sikhisme</string>
+	<string name="poi_religion_buddhist">Budisme</string>
+	<string name="poi_religion_hindu">Hinduisme</string>
+	<string name="poi_religion_shinto">Xintoisme</string>
+	<string name="poi_religion_taoist">Taoisme</string>
 
 	<string name="poi_internet_access_wlan">Accés a Internet: wifi</string>
 	<string name="poi_internet_access_terminal">Accés a Internet: terminal</string>
@@ -1068,11 +1068,11 @@
 	<string name="poi_tax_advisor">Assessoria fiscal</string>
 
 	<string name="poi_religion_voodoo">Religió vudú</string>
-	<string name="poi_religion_unitarian_universalist">Religió unitarista universalista</string>
+	<string name="poi_religion_unitarian_universalist">Universalisme unitarista</string>
 	<string name="poi_religion_multifaith">Multi-religiós</string>
 	<string name="poi_religion_jain">Jainisme</string>
 	<string name="poi_religion_spiritualist">Espiritualisme</string>
-	<string name="poi_religion_bahai">Fe Bahai</string>
+	<string name="poi_religion_bahai">Bahaisme</string>
 	<string name="poi_religion_scientologist">Cienciologia</string>
 	<string name="poi_religion_pagan">Paganisme</string>
 	<string name="poi_religion_tenrikyo">Tenrikyo</string>
@@ -1095,7 +1095,7 @@
 	<string name="poi_denomination_jehovahs_witness">Testimonis de Jehovà</string>
 	<string name="poi_denomination_greek_orthodox">Ortodox grec</string>
 	<string name="poi_denomination_reformed">Calvinisme</string>
-	<string name="poi_denomination_seventh_day_adventist">Adventistes del setè dia</string>
+	<string name="poi_denomination_seventh_day_adventist">Adventisme del setè dia</string>
 	<string name="poi_denomination_new_apostolic">Nova apostòlica</string>
 	<string name="poi_denomination_church_of_england">Església d\'Anglaterra</string>
 	<string name="poi_denomination_episcopal">Episcopal</string>
@@ -1144,4 +1144,31 @@
 	<string name="poi_start_date">Data d\'inici</string>
 	<string name="poi_wheelchair">Cadira de rodes</string>
 
+	<string name="poi_generator_source_diesel">Font d\'energia: dièsel</string>
+
+<string name="poi_generator_source_nuclear">Font d\'energia: nuclear</string>
+	<string name="poi_generator_source_solar">Font d\'energia: solar</string>
+	<string name="poi_generator_source_hydro">Font d\'energia: hidràulica</string>
+	<string name="poi_generator_source_wind">Font d\'energia: eòlica</string>
+	<string name="poi_generator_source_geothermal">Font d\'energia: geotèrmica</string>
+	<string name="poi_generator_source_oil">Font d\'energia: petroli</string>
+	<string name="poi_seats">Seients</string>
+	<string name="poi_backrest_yes">Respatller: sí</string>
+	<string name="poi_backrest_no">Respatller: no</string>
+
+	<string name="poi_intermittent">Intermitent</string>
+
+	<string name="poi_deadlock">Atzucac</string>
+
+	<string name="poi_generator_source_coal">Font d\'energia: carbó</string>
+	<string name="poi_generator_source_gas">Font d\'energia: gas</string>
+	<string name="poi_power_tower">Torre d\'alta tensió</string>
+	<string name="poi_power_pole">Pal d\'electricitat</string>
+
+	<string name="poi_cooling_tower">Torre de refrigeració</string>
+	<string name="poi_height">Alçada</string>
+	<string name="poi_ele">Alçada sobre el nivell del mar</string>
+	<string name="poi_wholesale">Venda majorista</string>
+
+	<string name="poi_content_water">Aigua (contingut)</string>
 	</resources>

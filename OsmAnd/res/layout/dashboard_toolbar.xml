@@ -36,7 +36,7 @@
         android:layout_gravity="right"
         android:background="@drawable/dashboard_button_light"
         android:scaleType="center"
-        android:src="@drawable/ic_action_settings"/>
+        android:src="@drawable/ic_configure_screen_dark"/>
 
     <TextView
         android:id="@+id/toolbar_text"

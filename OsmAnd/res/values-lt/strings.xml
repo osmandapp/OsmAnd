@@ -2129,4 +2129,8 @@
 	<string name="please_specify_poi_type">Prašome nurodyti LV tipą.</string>
 <string name="poi_action_delete">trinti</string>
 	<string name="working_days">Darbo dienos</string>
+	<string name="saved_at_time">Sėkmingai išsaugota: %1$s</string>
+	<string name="poi_deleted_localy">LV bus ištrinti, kai jūs įkelsite pakeitimus</string>
+	<string name="show_gpx">Rodyti GPX</string>
+<string name="recent_places">Vėliausios vietos</string>
 	</resources>

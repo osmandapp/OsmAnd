@@ -1,12 +1,12 @@
 package net.osmand.plus.mapcontextmenu;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.support.v4.app.Fragment;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
@@ -45,15 +45,17 @@ public class MapContextMenuFragment extends Fragment {
 	private View mainView;
 	private View bottomView;
 	private View shadowView;
-	private View bottomBorder;
 
 	MenuController menuController;
 
 	private int menuTopHeight;
 	private int menuTopShadowHeight;
+	private int menuTopShadowAllHeight;
+	private int menuTitleHeight;
 	private int menuButtonsHeight;
 	private int menuBottomViewHeight;
 	private int menuFullHeight;
+	private int menuFullHeightMax;
 
 	@Override
 	public void onAttach(Activity activity) {
@@ -113,9 +115,12 @@ public class MapContextMenuFragment extends Fragment {
 
 				menuTopHeight = view.findViewById(R.id.context_menu_top_view).getHeight();
 				menuTopShadowHeight = view.findViewById(R.id.context_menu_top_shadow).getHeight();
+				menuTopShadowAllHeight = view.findViewById(R.id.context_menu_top_shadow_all).getHeight();
 				menuButtonsHeight = view.findViewById(R.id.context_menu_buttons).getHeight();
-				menuBottomViewHeight = view.findViewById(R.id.context_menu_bottom_view).getHeight();
 				menuFullHeight = view.findViewById(R.id.context_menu_main).getHeight();
+
+				menuTitleHeight = menuTopShadowHeight + menuTopShadowAllHeight;
+				menuFullHeightMax = menuTitleHeight + (menuBottomViewHeight > 0 ? menuBottomViewHeight + dpToPx(2f) : -dpToPx(SHADOW_HEIGHT_BOTTOM_DP));
 
 				ViewTreeObserver obs = view.getViewTreeObserver();
 
@@ -128,14 +133,6 @@ public class MapContextMenuFragment extends Fragment {
 				doLayoutMenu();
 			}
 
-		});
-
-		bottomBorder = view.findViewById(R.id.context_menu_bottom_border);
-		bottomBorder.setOnTouchListener(new View.OnTouchListener() {
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				return true;
-			}
 		});
 
 		shadowView = view.findViewById(R.id.context_menu_shadow_view);
@@ -151,12 +148,13 @@ public class MapContextMenuFragment extends Fragment {
 		final View.OnTouchListener slideTouchListener = new View.OnTouchListener() {
 			private float dy;
 			private float dyMain;
-			private int destinationState;
 			private VelocityTracker velocity;
 			private boolean slidingUp;
 			private boolean slidingDown;
 
+			private float velocityX;
 			private float velocityY;
+			private float maxVelocityY;
 
 			private float startX;
 			private float startY;
@@ -166,7 +164,11 @@ public class MapContextMenuFragment extends Fragment {
 			private boolean isClick(float endX, float endY) {
 				float differenceX = Math.abs(startX - endX);
 				float differenceY = Math.abs(startY - endY);
-				if (differenceX > 1 || differenceY > 1 || System.currentTimeMillis() - lastTouchDown > CLICK_ACTION_THRESHHOLD) {
+				if (differenceX > 1 ||
+						differenceY > 1 ||
+						Math.abs(velocityX) > 10 ||
+						Math.abs(velocityY) > 10 ||
+						System.currentTimeMillis() - lastTouchDown > CLICK_ACTION_THRESHHOLD) {
 					return false;
 				}
 				return true;
@@ -184,26 +186,29 @@ public class MapContextMenuFragment extends Fragment {
 						dy = event.getY();
 						dyMain = mainView.getY();
 						velocity = VelocityTracker.obtain();
+						velocityX = 0;
 						velocityY = 0;
+						maxVelocityY = 0;
 						velocity.addMovement(event);
 						break;
 
 					case MotionEvent.ACTION_MOVE:
 						float y = event.getY();
 						float newY = mainView.getY() + (y - dy);
-						mainView.setY(newY);
+						mainView.setY((int)newY);
 
-						ViewGroup.LayoutParams lp = bottomBorder.getLayoutParams();
-						lp.height = (int)(view.getHeight() - newY - menuFullHeight) + 10;
-						bottomBorder.setLayoutParams(lp);
-						bottomBorder.setY(newY + menuFullHeight);
-						bottomBorder.requestLayout();
+						menuFullHeight = view.getHeight() - (int) newY + 10;
+						ViewGroup.LayoutParams lp = mainView.getLayoutParams();
+						lp.height = Math.max(menuFullHeight, menuTitleHeight);
+						mainView.setLayoutParams(lp);
+						mainView.requestLayout();
 
 						velocity.addMovement(event);
 						velocity.computeCurrentVelocity(1000);
-						float vel = Math.abs(velocity.getYVelocity());
-						if (vel > velocityY)
-							velocityY = vel;
+						velocityX = Math.abs(velocity.getXVelocity());
+						velocityY = Math.abs(velocity.getYVelocity());
+						if (velocityY > maxVelocityY)
+							maxVelocityY = velocityY;
 
 						break;
 
@@ -212,48 +217,42 @@ public class MapContextMenuFragment extends Fragment {
 						float endX = event.getX();
 						float endY = event.getY();
 
-						slidingUp = Math.abs(velocityY) > 500 && (mainView.getY() - dyMain) < -50;
-						slidingDown = Math.abs(velocityY) > 500 && (mainView.getY() - dyMain) > 50;
+						slidingUp = Math.abs(maxVelocityY) > 500 && (mainView.getY() - dyMain) < -50;
+						slidingDown = Math.abs(maxVelocityY) > 500 && (mainView.getY() - dyMain) > 50;
 
 						velocity.recycle();
 
 						if (menuController != null) {
-							if (slidingUp) {
+							if (menuBottomViewHeight > 0 && slidingUp) {
 								menuController.slideUp();
 							} else if (slidingDown) {
 								menuController.slideDown();
 							}
-							destinationState = menuController.getCurrentMenuState();
-						} else {
-							destinationState = MenuController.MenuState.HEADER_ONLY;
 						}
 
-						float posY = 0;
-						switch (destinationState) {
-							case MenuController.MenuState.HEADER_ONLY:
-								posY = view.getHeight() - (menuFullHeight - menuBottomViewHeight - dpToPx(SHADOW_HEIGHT_BOTTOM_DP));
-								break;
-							case MenuController.MenuState.HALF_SCREEN:
-								posY = view.getHeight() - menuFullHeight;
-								break;
-							case MenuController.MenuState.FULL_SCREEN:
-								posY = -menuTopShadowHeight - dpToPx(SHADOW_HEIGHT_TOP_DP);
-								break;
-							default:
-								break;
-						}
-
-						float minY = Math.min(posY, mainView.getY());
-						lp = bottomBorder.getLayoutParams();
-						lp.height = (int)(view.getHeight() - minY - menuFullHeight) + 10;
-						if (lp.height < 0)
-							lp.height = 0;
-						bottomBorder.setLayoutParams(lp);
-						bottomBorder.requestLayout();
+						final int posY = getPosY();
 
 						if (mainView.getY() != posY) {
-							mainView.animate().y(posY).setDuration(200).setInterpolator(new DecelerateInterpolator()).start();
-							bottomBorder.animate().y(posY + menuFullHeight).setDuration(200).setInterpolator(new DecelerateInterpolator()).start();
+
+							if (posY < mainView.getY()) {
+								updateMainViewLayout(posY);
+							}
+
+							mainView.animate().y(posY)
+									.setDuration(200)
+									.setInterpolator(new DecelerateInterpolator())
+									.setListener(new AnimatorListenerAdapter() {
+										@Override
+										public void onAnimationCancel(Animator animation) {
+											updateMainViewLayout(posY);
+										}
+
+										@Override
+										public void onAnimationEnd(Animator animation) {
+											updateMainViewLayout(posY);
+										}
+									})
+									.start();
 						}
 
 						// OnClick event
@@ -323,7 +322,7 @@ public class MapContextMenuFragment extends Fragment {
 		// Action buttons
 		final ImageButton buttonNavigate = (ImageButton) view.findViewById(R.id.context_menu_route_button);
 		buttonNavigate.setImageDrawable(iconsCache.getIcon(R.drawable.map_directions,
-				light ? R.color.icon_color : R.color.dash_search_icon_dark));
+				light ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
 		buttonNavigate.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -333,7 +332,7 @@ public class MapContextMenuFragment extends Fragment {
 
 		final ImageButton buttonFavorite = (ImageButton) view.findViewById(R.id.context_menu_fav_button);
 		buttonFavorite.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_fav_dark,
-				light ? R.color.icon_color : R.color.dash_search_icon_dark));
+				light ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
 		buttonFavorite.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -343,7 +342,7 @@ public class MapContextMenuFragment extends Fragment {
 
 		final ImageButton buttonShare = (ImageButton) view.findViewById(R.id.context_menu_share_button);
 		buttonShare.setImageDrawable(iconsCache.getIcon(R.drawable.abc_ic_menu_share_mtrl_alpha,
-				light ? R.color.icon_color : R.color.dash_search_icon_dark));
+				light ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
 		buttonShare.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -353,7 +352,7 @@ public class MapContextMenuFragment extends Fragment {
 
 		final ImageButton buttonMore = (ImageButton) view.findViewById(R.id.context_menu_more_button);
 		buttonMore.setImageDrawable(iconsCache.getIcon(R.drawable.ic_overflow_menu_white,
-				light ? R.color.icon_color : R.color.dash_search_icon_dark));
+				light ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
 		buttonMore.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -374,56 +373,54 @@ public class MapContextMenuFragment extends Fragment {
 			menuController.build(bottomView);
 		}
 
+		bottomView.measure(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		menuBottomViewHeight = bottomView.getMeasuredHeight();
+
 		return view;
 	}
 
-	private void doLayoutMenu() {
-		int shadowViewHeight = 0;
-		int bottomBorderHeight = 0;
+	private int getPosY() {
+		int destinationState;
+		int minHalfY;
+		if (menuController != null) {
+			destinationState = menuController.getCurrentMenuState();
+			minHalfY = view.getHeight() - (int)(view.getHeight() * menuController.getHalfScreenMaxHeightKoef());
+		} else {
+			destinationState = MenuController.MenuState.HEADER_ONLY;
+			minHalfY = view.getHeight();
+		}
 
-		int menuState;
-		if (menuController != null)
-			menuState = menuController.getCurrentMenuState();
-		else
-			menuState = MenuController.MenuState.HEADER_ONLY;
-
-		switch (menuState) {
+		int posY = 0;
+		switch (destinationState) {
 			case MenuController.MenuState.HEADER_ONLY:
-				shadowViewHeight = view.getHeight() - (menuFullHeight - menuBottomViewHeight) + dpToPx(SHADOW_HEIGHT_BOTTOM_DP);
-				bottomBorderHeight = 0;
+				posY = view.getHeight() - (menuTitleHeight - dpToPx(SHADOW_HEIGHT_BOTTOM_DP));
 				break;
 			case MenuController.MenuState.HALF_SCREEN:
-				int maxHeight = (int)(menuController.getHalfScreenMaxHeightKoef() * view.getHeight());
-				if (maxHeight > menuFullHeight) {
-					shadowViewHeight = view.getHeight() - menuFullHeight;
-					bottomBorderHeight = 0;
-				} else {
-					shadowViewHeight = view.getHeight() - maxHeight;
-					bottomBorderHeight = 0;
-					mainView.setY(shadowViewHeight);
-				}
+				posY = view.getHeight() - menuFullHeightMax;
+				posY = Math.max(posY, minHalfY);
 				break;
 			case MenuController.MenuState.FULL_SCREEN:
-				shadowViewHeight = 0;
-				bottomBorderHeight = view.getHeight() - menuFullHeight + menuTopShadowHeight + dpToPx(SHADOW_HEIGHT_TOP_DP);
+				posY = -menuTopShadowHeight - dpToPx(SHADOW_HEIGHT_TOP_DP);
 				break;
 			default:
 				break;
 		}
+		return posY;
+	}
 
-		ViewGroup.LayoutParams lp = bottomBorder.getLayoutParams();
-		lp.height = bottomBorderHeight + 10;
-		bottomBorder.setLayoutParams(lp);
-		bottomBorder.setY(view.getHeight() - bottomBorderHeight);
-
-		lp = shadowView.getLayoutParams();
-		lp.height = shadowViewHeight;
-		shadowView.setLayoutParams(lp);
-
+	private void updateMainViewLayout(int posY) {
+		ViewGroup.LayoutParams lp;
+		menuFullHeight = view.getHeight() - posY;
 		lp = mainView.getLayoutParams();
-		lp.height = menuFullHeight;
+		lp.height = Math.max(menuFullHeight, menuTitleHeight);
 		mainView.setLayoutParams(lp);
+		mainView.requestLayout();
+	}
 
+	private void doLayoutMenu() {
+		final int posY = getPosY();
+		mainView.setY(posY);
+		updateMainViewLayout(posY);
 	}
 
 	public void dismissMenu() {

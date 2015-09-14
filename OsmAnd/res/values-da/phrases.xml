@@ -1173,8 +1173,8 @@
 	<string name="poi_content_grain">Korn (indhold)</string>
 
 	<string name="poi_bunker_silo">Plansilo</string>
-	<string name="poi_brownfield">Forladt industrigrund</string>
-	<string name="poi_greenfield">Byggemodning</string>
+	<string name="poi_brownfield">Nedlagt industrigrund</string>
+	<string name="poi_greenfield">Nye byggegrunde</string>
 	<string name="poi_wholesale">Engros</string>
 
 	<string name="poi_trade_building_supplies">Byggematerialer</string>
@@ -1185,13 +1185,13 @@
 
 	<string name="poi_population">Befolkning</string>
 
-	<string name="poi_parking_multi_storey">Fleretages</string>
+	<string name="poi_parking_multi_storey">P-hus</string>
 
-	<string name="poi_bicycle_parking_stands">Står</string>
-	<string name="poi_bicycle_parking_wall_loops">Væg sløjfer</string>
-	<string name="poi_bicycle_parking_building">Bygning</string>
-	<string name="poi_bicycle_parking_shed">Skur</string>
-	<string name="poi_bicycle_parking_bollard">Pullert</string>
+	<string name="poi_bicycle_parking_stands">Cykelsstativ</string>
+	<string name="poi_bicycle_parking_wall_loops">Vægmonteret cykelparkering</string>
+	<string name="poi_bicycle_parking_building">Cykelparkeringsboks</string>
+	<string name="poi_bicycle_parking_shed">Cykelskur</string>
+	<string name="poi_bicycle_parking_bollard">Cykellæn</string>
 	<string name="poi_bicycle_parking_informal">Uformel</string>
 
 	<string name="poi_leaf_type_broadleaved">Bredbladet</string>
@@ -1206,23 +1206,84 @@
 	<string name="poi_trees_almond">Mandel</string>
 	<string name="poi_trees_banana">Banan</string>
 	<string name="poi_trees_hazel">Hassel</string>
-	<string name="poi_trees_coconut">Kokosnød</string>
+	<string name="poi_trees_coconut">Kokospalme</string>
 	<string name="poi_trees_persimmon">Ibenholt</string>
 	<string name="poi_trees_cherry">Kirsebær</string>
 	<string name="poi_trees_walnut">Valnød</string>
-	<string name="poi_trees_plum">Blomme</string>
+	<string name="poi_trees_plum">Blommetræ</string>
 	<string name="poi_trees_peach">Fersken</string>
 	<string name="poi_trees_tea">Te</string>
-	<string name="poi_trees_coca">Coca</string>
+	<string name="poi_trees_coca">Cocabuske</string>
 	<string name="poi_trees_kiwi">Kiwi</string>
-	<string name="poi_trees_meadow_orchard">Frugtplantage</string>
+	<string name="poi_trees_meadow_orchard">Eng med frugtplantage</string>
 	<string name="poi_trees_nectorine">Nektarin</string>
 	<string name="poi_trees_mango">Mango</string>
 	<string name="poi_trees_rubber">Gummitræ</string>
-	<string name="poi_trees_date">Dadel</string>
-	<string name="poi_trees_coffea">Kaffe</string>
+	<string name="poi_trees_date">Daddelpalmeq</string>
+	<string name="poi_trees_coffea">Kaffetræ</string>
 	<string name="poi_trees_pomegranate">Granatæble</string>
 
-	<string name="poi_parking_underground">Kældet</string>
-	<string name="poi_bicycle_parking_rack">Reol</string>
-	</resources>
+	<string name="poi_parking_underground">Párkeringskælder</string>
+	<string name="poi_bicycle_parking_rack">Cykelsstativ</string>
+	<string name="poi_nudism_yes">Naturisme: tilladt</string>
+	<string name="poi_nudism_no">Naturisme: forbudt</string>
+	<string name="poi_nudism_obligatory">Naturisme: obligatorisk</string>
+	<string name="poi_nudism_customary">Naturisme: sædvane</string>
+	<string name="poi_nudism_permissive">Naturisme: liberalt</string>
+
+	<string name="poi_height">Højde</string>
+	<string name="poi_ele">Højde over havoverfladen</string>
+	<string name="poi_cooling_tower">Køletårn</string>
+	<string name="poi_rural">Landlig</string>
+
+	<string name="poi_seats">Sæder</string>
+	<string name="poi_backrest_yes">Ryglæn: Ja</string>
+	<string name="poi_backrest_no">Ryglæn: nej</string>
+
+	<string name="poi_intermittent">Intermitterende</string>
+
+	<string name="poi_deadlock">Blindgyde</string>
+
+	<string name="poi_generator_source_coal">Energikilde: kul</string>
+	<string name="poi_generator_source_gas">Energikilde: gas</string>
+	<string name="poi_generator_source_nuclear">Energikilde: nuklear</string>
+	<string name="poi_generator_source_solar">Energikilde: solar</string>
+	<string name="poi_generator_source_hydro">Energikilde: hydro</string>
+	<string name="poi_generator_source_wind">Energikilde: vind</string>
+	<string name="poi_generator_source_geothermal">Energikilde: geotermisk</string>
+	<string name="poi_generator_source_oil">Energikilde: olie</string>
+	<string name="poi_generator_source_diesel">Energikilde: diesel</string>
+
+<string name="poi_aerialway_pylon">Svævebanepylon</string>
+
+	<string name="poi_power_tower">Soltårn</string>
+	<string name="poi_power_pole">Elmast</string>
+
+	<string name="poi_lighting_tower">Lysmast</string>
+	<string name="poi_urban">Bymæssig</string>
+	<string name="poi_car_wash_self_service">Selvbetjening</string>
+
+	<string name="poi_int_name">International navn</string>
+	<string name="poi_nat_name">National navn</string>
+	<string name="poi_reg_name">Regional navn</string>
+	<string name="poi_loc_name">Lokalt navn</string>
+	<string name="poi_old_name">Gammelt navn</string>
+	<string name="poi_alt_name">Alternativt navn</string>
+
+	<string name="poi_pump_manual">Manuel pumpe</string>
+	<string name="poi_pump_powered">Drevet pumpe</string>
+	<string name="poi_pump_no">Ingen pumpe</string>
+
+	<string name="poi_water_characteristic_mineral">Vandkarakteristisk: mineralsk</string>
+	<string name="poi_water_characteristic_mud">Vandkarakteristisk: mudret</string>
+	<string name="poi_water_characteristic_sulfuric">Vandkarakteristisk: svovlet</string>
+
+	<string name="poi_water_point">Vandtilslutning</string>
+
+<string name="poi_species">Arter</string>
+	<string name="poi_genus">Slægt</string>
+	<string name="poi_taxon">Takson</string>
+
+	<string name="poi_cuisine">Køkken</string>
+
+</resources>

@@ -2089,4 +2089,6 @@
 	<string name="recent_places">Нядаўнія месцы</string>
 	<string name="favourites">Упадабанае</string>
 <string name="saved_at_time">Пасьпяхова захаваны ў: %1$s</string>
-</resources>
+<string name="show_gpx">Паказаць GPX</string>
+<string name="poi_deleted_localy">POI будуць выдаленыя, як толькі вы загрузіце вашы зьмены</string>
+	</resources>
