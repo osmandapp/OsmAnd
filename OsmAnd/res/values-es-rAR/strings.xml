@@ -553,7 +553,7 @@
 	<string name="map_preferred_locale_descr">Idioma preferido para las etiquetas en el mapa (si no está disponible, se cambiará a inglés o a nombres locales)</string>
     <string name="map_preferred_locale">Idioma preferido del mapa</string>
     <string name="forward">Siguiente</string>
-    <string name="home">Inicio</string>
+    <string name="home">Panel</string>
     <string name="live_monitoring_m_descr">Envíe los datos de rastreo a un servicio web específico, si la grabación GPX está activada.</string>
 	<string name="live_monitoring_m">Rastreo en línea (requiere GPX)</string>
     <string name="live_monitoring_start">Iniciar rastreo en línea</string>
@@ -2018,7 +2018,7 @@
     <string name="we_really_care_about_your_opinion">Nos interesa mucho y es importante oír su opinión.</string>
 	<string name="rendering_value_boldOutline_name">Borde remarcado</string>
     <string name="traffic_warning_hazard">Advertencia de riesgo</string>
-    <string name="dahboard_options_dialog_title">Opciones del panel</string>
+    <string name="dahboard_options_dialog_title">Configurar panel</string>
 	<string name="shared_string_card_was_hidden">La tarjeta se ocultó</string>
 	<string name="shared_string_undo">Deshacer</string>
 	<string name="shared_string_skip">Omitir</string>
