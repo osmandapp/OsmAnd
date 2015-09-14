@@ -1254,7 +1254,7 @@
 	<string name="poi_generator_source_oil">Energikilde: olie</string>
 	<string name="poi_generator_source_diesel">Energikilde: diesel</string>
 
-<string name="poi_aerialway_pylon">Svævebane pylon</string>
+<string name="poi_aerialway_pylon">Svævebanepylon</string>
 
 	<string name="poi_power_tower">Soltårn</string>
 	<string name="poi_power_pole">Elmast</string>
@@ -1274,10 +1274,10 @@
 	<string name="poi_pump_powered">Drevet pumpe</string>
 	<string name="poi_pump_no">Ingen pumpe</string>
 
-	<string name="poi_water_characteristic_mineral">Vand karakteristisk: mineral</string>
-	<string name="poi_water_characteristic_mud">Vand karakteristisk: mudder</string>
-	<string name="poi_water_characteristic_sulfuric">Vand karakteristisk: svovlsyre</string>
+	<string name="poi_water_characteristic_mineral">Vandkarakteristisk: mineralsk</string>
+	<string name="poi_water_characteristic_mud">Vandkarakteristisk: mudderet</string>
+	<string name="poi_water_characteristic_sulfuric">Vandkarakteristisk: svovlet</string>
 
-	<string name="poi_water_point">Vand punkt</string>
+	<string name="poi_water_point">Vandtilslutning</string>
 
 </resources>

@@ -479,7 +479,7 @@
     <string name="lang_sw">Swahili</string>
     <string name="lang_he">Hebrew</string>
     <string name="forward">Forward</string>
-    <string name="home">Home</string>
+    <string name="home">Dashboard</string>
     <string name="live_monitoring_m_descr">Send tracking data to a specified web service if GPX logging is enabled.</string>
 	<string name="live_monitoring_m">Online tracking (GPX required)</string>
     <string name="live_monitoring_start">Start online tracking</string>
@@ -2236,7 +2236,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="successfully_uploaded_pattern">Successfully uploaded {0}/{1}</string>
 	<string name="try_again">Try again</string>
 	<string name="error_message_pattern">Error: {0}</string>
-	<string name="dahboard_options_dialog_title">Dashboard options</string>
+	<string name="dahboard_options_dialog_title">Configure dashboard</string>
 	<string name="shared_string_card_was_hidden">Card was hidden</string>
 	<string name="shared_string_undo">UNDO</string>
 	<string name="shared_string_skip">Skip</string>

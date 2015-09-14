@@ -1656,7 +1656,7 @@
     <string name="lang_sw">Swahili</string>
     <string name="lang_he">Hebræisk</string>
     <string name="forward">Frem</string>
-    <string name="home">Hjem</string>
+    <string name="home">Betjeningspanel</string>
     <string name="live_monitoring_m_descr">Send sporing til en bestemt webtjeneste, hvis GPX logning er aktiveret.</string>
     <string name="live_monitoring_m">Online sporing (GPX nødvendig)</string>
     <string name="live_monitoring_start">Start online sporing</string>
