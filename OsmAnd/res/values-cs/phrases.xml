@@ -573,14 +573,14 @@
 	<string name="poi_wilderness_hut">Chata pro volné ubytování</string>
 
 	<string name="poi_place_of_worship">Náboženské místo</string>
-	<string name="poi_religion_christian">Náboženské místo: křesťanské</string>
-	<string name="poi_religion_jewish">Náboženské místo: židovské</string>
-	<string name="poi_religion_muslim">Náboženské místo: muslimské</string>
-	<string name="poi_religion_sikh">Náboženské místo: sikhistické</string>
-	<string name="poi_religion_buddhist">Náboženské místo: budhistické</string>
-	<string name="poi_religion_hindu">Náboženské místo: hinduistické</string>
-	<string name="poi_religion_shinto">Náboženské místo: šintoistické</string>
-	<string name="poi_religion_taoist">Náboženské místo: taoistické</string>
+	<string name="poi_religion_christian">Křesťanství</string>
+	<string name="poi_religion_jewish">Judaismus</string>
+	<string name="poi_religion_muslim">Islám</string>
+	<string name="poi_religion_sikh">Sikhismus</string>
+	<string name="poi_religion_buddhist">Buddhizmus</string>
+	<string name="poi_religion_hindu">Hinduismus</string>
+	<string name="poi_religion_shinto">Šintoismus</string>
+	<string name="poi_religion_taoist">Taoismus</string>
 
 	<string name="poi_internet_access_wlan">Internetové připojení: Wi-Fi</string>
 	<string name="poi_internet_access_terminal">Internetové připojení: terminál</string>
@@ -994,4 +994,36 @@
 
 	<string name="poi_monitoring_station">Monitorovací stanice</string>
 	<string name="poi_capital">Hlavní město</string>
+	<string name="poi_hiking_routes">Turistické trasy</string>
+		<string name="poi_perfumery">Parfumerie</string>
+
+	<string name="poi_mill_pond">Mlýnský rybník</string>
+	<string name="poi_cooling_tower">Chladicí věž</string>
+	<string name="poi_lighting_tower">Osvětlovací věž</string>
+	<string name="poi_landfill_waste_nuclear">Jaderný odpad</string>
+	<string name="poi_brownfield">Brownfield</string>
+	<string name="poi_greenfield">Greenfield</string>
+	<string name="poi_office_religion">Náboženský úřad</string>
+	<string name="poi_financial">Finanční úřad</string>
+	<string name="poi_political_party">Kancelář politické strany</string>
+	<string name="poi_notary">Notářství</string>
+	<string name="poi_foundation">Kancelář nadace</string>
+	<string name="poi_tax_advisor">Kancelář daňového poradce</string>
+
+	<string name="poi_religion_voodoo">Voodoo</string>
+	<string name="poi_religion_unitarian_universalist">Unitární univerzalismus</string>
+	<string name="poi_religion_multifaith">Mnohonáboženství</string>
+	<string name="poi_religion_jain">Džinismus</string>
+	<string name="poi_religion_spiritualist">Spiritismus</string>
+	<string name="poi_religion_bahai">Bahaismus</string>
+	<string name="poi_religion_scientologist">Scientologismus</string>
+	<string name="poi_religion_pagan">Pohanství</string>
+	<string name="poi_religion_tenrikyo">Tenrikjó</string>
+	<string name="poi_religion_zoroastrian">Zoroastrismus</string>
+
+	<string name="poi_denomination_catholic">Katolicismus</string>
+	<string name="poi_denomination_baptist">Bapticismus</string>
+	<string name="poi_denomination_roman_catholic">Římskokatolicismus</string>
+	<string name="poi_denomination_orthodox">Pravoslaví</string>
+	<string name="poi_denomination_lutheran">Luteránství</string>
 	</resources>
