@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="gps_network_not_enabled">Kein Standortdienst aktiviert. Aktivieren?</string>
 	<string name="disable_recording_once_app_killed">Eigenständige Streckenaufzeichnung unterbinden</string>
@@ -2248,7 +2248,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="successfully_uploaded_pattern">Erfolgreich hochgeladen {0}/{1}</string>
 	<string name="try_again">Erneut versuchen</string>
 	<string name="error_message_pattern">Fehler: {0}</string>
-	<string name="dahboard_options_dialog_title">Übersichtsseitenoptionen</string>
+	<string name="dahboard_options_dialog_title">Übersicht konfigurieren</string>
 	<string name="shared_string_undo">Rückgängig machen</string>
 	<string name="shared_string_skip">Überspringen</string>
 	<string name="app_name_osmand">OsmAnd</string>
