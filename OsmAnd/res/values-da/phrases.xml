@@ -1188,10 +1188,10 @@
 	<string name="poi_parking_multi_storey">P-hus</string>
 
 	<string name="poi_bicycle_parking_stands">Cykelsstativ</string>
-	<string name="poi_bicycle_parking_wall_loops">Væg sløjfer</string>
+	<string name="poi_bicycle_parking_wall_loops">Vægmonteret cykelparkering</string>
 	<string name="poi_bicycle_parking_building">Særlig bygning</string>
 	<string name="poi_bicycle_parking_shed">Cykelskur</string>
-	<string name="poi_bicycle_parking_bollard">Pullert</string>
+	<string name="poi_bicycle_parking_bollard">Cykellæn</string>
 	<string name="poi_bicycle_parking_informal">Uformel</string>
 
 	<string name="poi_leaf_type_broadleaved">Bredbladet</string>
@@ -1224,7 +1224,7 @@
 	<string name="poi_trees_pomegranate">Granatæble</string>
 
 	<string name="poi_parking_underground">Párkeringskælder</string>
-	<string name="poi_bicycle_parking_rack">Reol</string>
+	<string name="poi_bicycle_parking_rack">Cykelsstativ</string>
 	<string name="poi_nudism_yes">Naturisme: tilladt</string>
 	<string name="poi_nudism_no">Naturisme: forbudt</string>
 	<string name="poi_nudism_obligatory">Naturisme: obligatorisk</string>
@@ -1275,14 +1275,14 @@
 	<string name="poi_pump_no">Ingen pumpe</string>
 
 	<string name="poi_water_characteristic_mineral">Vandkarakteristisk: mineralsk</string>
-	<string name="poi_water_characteristic_mud">Vandkarakteristisk: mudderet</string>
+	<string name="poi_water_characteristic_mud">Vandkarakteristisk: mudret</string>
 	<string name="poi_water_characteristic_sulfuric">Vandkarakteristisk: svovlet</string>
 
 	<string name="poi_water_point">Vandtilslutning</string>
 
 <string name="poi_species">Arter</string>
-	<string name="poi_genus">Slægten</string>
-	<string name="poi_taxon">Taksionomiske gruppe</string>
+	<string name="poi_genus">Slægt</string>
+	<string name="poi_taxon">Takson</string>
 
 	<string name="poi_cuisine">Køkken</string>
 
