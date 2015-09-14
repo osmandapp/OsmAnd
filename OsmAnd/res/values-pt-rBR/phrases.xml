@@ -1269,4 +1269,27 @@
 
 	<string name="poi_cuisine">Cozinha</string>
 
+<string name="poi_information_guidepost">Poste com direções</string>
+	<string name="poi_information_board">Placa de informação</string>
+	<string name="poi_information_map">Mapa</string>
+	<string name="poi_information_office">Centro de informação</string>
+	<string name="poi_information_trail_blaze">Trilha desbravada</string>
+	<string name="poi_information_terminal">Terminal de informação</string>
+	<string name="poi_information_route_marker">Marcador de rota</string>
+	<string name="poi_information_hikingmap">Mapa de caminhadas</string>
+	<string name="poi_information_nature">Informações sobre natureza</string>
+	<string name="poi_information_wildlife">Informações sobre vida selvagem</string>
+	<string name="poi_information_history">Informações sobre história</string>
+	<string name="poi_information_sign">Placa</string>
+	<string name="poi_information_audioguide">Audioguia</string>
+	<string name="poi_information_bicyclemap">Mapa ciclístico</string>
+	<string name="poi_information_tactile_model">Modelo tátil</string>
+	<string name="poi_information_tactile_map">Mapa tátil</string>
+	<string name="poi_board_type_notice">Placa com aviso</string>
+	<string name="poi_board_type_plants">Informações sobre plantas</string>
+	<string name="poi_board_type_geology">Informações sobre geologia</string>
+	<string name="poi_board_type_public_transport">Informações sobre transporte público</string>
+	<string name="poi_board_type_technology">Informações sobre tecnologia</string>
+	<string name="poi_board_type_astronomy">Informações sobre astronomia</string>
+
 </resources>
