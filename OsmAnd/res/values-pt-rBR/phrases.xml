@@ -1263,4 +1263,10 @@
 	<string name="poi_bicycle_parking_rack">Prateleira</string>
 	<string name="poi_deadlock">Impasse</string>
 
-	</resources>
+	<string name="poi_species">Espécies</string>
+	<string name="poi_genus">Gênero</string>
+	<string name="poi_taxon">Táxon</string>
+
+	<string name="poi_cuisine">Cozinha</string>
+
+</resources>
