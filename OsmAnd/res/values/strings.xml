@@ -839,8 +839,8 @@
     <string name="clear_intermediate_points">Clear intermediate points</string>
     <string name="keep_intermediate_points">Keep intermediate points</string>
     <string name="new_directions_point_dialog">You already have intermediate points set.</string>
-    <string name="context_menu_item_directions_to">Directions To</string>
-    <string name="context_menu_item_directions_from">Directions From</string>
+    <string name="context_menu_item_directions_to">Directions to</string>
+    <string name="context_menu_item_directions_from">Directions from</string>
     <string name="route_descr_map_location">Map: </string>
     <string name="route_descr_lat_lon">Lat %1$.3f, lon %2$.3f</string>
     <string name="route_descr_current_location">Current position</string>

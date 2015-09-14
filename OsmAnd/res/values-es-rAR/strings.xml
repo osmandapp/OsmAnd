@@ -712,8 +712,8 @@
     <string name="clear_intermediate_points">Quitar puntos intermedios</string>
     <string name="keep_intermediate_points">Mantener puntos intermedios</string>
     <string name="new_directions_point_dialog">Ya definió puntos intermedios.</string>
-    <string name="context_menu_item_directions_to">Ir hasta</string>
-    <string name="context_menu_item_directions_from">Ir desde</string>
+    <string name="context_menu_item_directions_to">Llegar hasta aquí</string>
+    <string name="context_menu_item_directions_from">Ir desde aquí</string>
     <string name="route_descr_map_location">"Mapa: "</string>
     <string name="route_descr_lat_lon">Lat %1$.3f, Lon %2$.3f</string>
     <string name="route_descr_current_location">Posición actual</string>
@@ -2041,7 +2041,7 @@
 	<string name="tag_poi_amenity">servicio</string>
 	<string name="contact_info">Información de contacto</string>
 	<string name="description">Descripción</string>
-	<string name="add_opening_hours">Añadir horarios de atención</string>
+	<string name="add_opening_hours">Añadir horario de atención</string>
 	<string name="poi_dialog_poi_type">Tipo de PDI</string>
 <string name="number_of_rows_in_dash">Número de filas en el panel %1$s</string>
 	<string name="please_specify_poi_type">Especifica el tipo de PDI.</string>

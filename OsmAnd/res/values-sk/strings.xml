@@ -1807,7 +1807,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="lang_sw">Svahilsky (Kiswahili)</string>
     <string name="lang_he">Hebrejsky (עִבְרִית)</string>
     <string name="forward">Dopredu</string>
-    <string name="home">Domov</string>
+    <string name="home">Úvodný panel</string>
     <string name="live_monitoring_m_descr">Odosielať stopovacie údaje určenej webovej službe ak je zaznamenávanie GPX zapnuté.</string>
 	<string name="live_monitoring_m">Online stopovanie (potrebné GPX)</string>
     <string name="live_monitoring_start">Zapnúť online stopovanie</string>
@@ -2252,7 +2252,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="error_message_pattern">Chyba: {0}</string>
 <string name="traffic_warning_hazard">Nebezpečenstvo</string>
     <string name="rendering_value_boldOutline_name">Hrubý obrys</string>
-    <string name="dahboard_options_dialog_title">Nastavenia úvodného panela</string>
+    <string name="dahboard_options_dialog_title">Nastaviť úvodný panel</string>
 	<string name="shared_string_card_was_hidden">Karta bola skrytá</string>
 	<string name="shared_string_undo">KROK SPÄŤ</string>
 	<string name="shared_string_skip">Preskočiť</string>
