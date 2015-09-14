@@ -1173,8 +1173,8 @@
 	<string name="poi_content_grain">Korn (indhold)</string>
 
 	<string name="poi_bunker_silo">Plansilo</string>
-	<string name="poi_brownfield">Forladt industrigrund</string>
-	<string name="poi_greenfield">Byggemodning</string>
+	<string name="poi_brownfield">Nedlagt industrigrund</string>
+	<string name="poi_greenfield">Nye byggegrunde</string>
 	<string name="poi_wholesale">Engros</string>
 
 	<string name="poi_trade_building_supplies">Byggematerialer</string>
@@ -1189,7 +1189,7 @@
 
 	<string name="poi_bicycle_parking_stands">Cykelsstativ</string>
 	<string name="poi_bicycle_parking_wall_loops">Vægmonteret cykelparkering</string>
-	<string name="poi_bicycle_parking_building">Særlig bygning</string>
+	<string name="poi_bicycle_parking_building">Cykelparkeringsboks</string>
 	<string name="poi_bicycle_parking_shed">Cykelskur</string>
 	<string name="poi_bicycle_parking_bollard">Cykellæn</string>
 	<string name="poi_bicycle_parking_informal">Uformel</string>
