@@ -1294,7 +1294,7 @@
 	<string name="poi_information_route_marker">Rutemarkør</string>
 	<string name="poi_information_hikingmap">Vandrekort</string>
 	<string name="poi_information_nature">Information om natur</string>
-	<string name="poi_information_wildlife">Information om vildtliv</string>
+	<string name="poi_information_wildlife">Information om dyreliv</string>
 	<string name="poi_information_history">Information om historie</string>
 	<string name="poi_information_sign">Skilt</string>
 	<string name="poi_information_audioguide">Audioguide</string>
@@ -1325,7 +1325,7 @@
 	<string name="poi_smoking_isolated">Rygning er tilladt i et separat rum med effektiv adskillelse</string>
 	<string name="poi_smoking_dedicated">Dedikeret til rygere</string>
 
-	<string name="poi_toll_no">Betalingen af afgifter opkræves ikke</string>
+	<string name="poi_toll_no">Betaling af afgifter opkræves ikke</string>
 	<string name="poi_toll_yes">Betaling af afgifter opkræves</string>
 	<string name="poi_tactile_paving_yes">Med taktilbelægning</string>
 	<string name="poi_tactile_paving_no">Uden taktilbelægning</string>
