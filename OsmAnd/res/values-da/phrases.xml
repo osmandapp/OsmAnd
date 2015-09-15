@@ -1286,27 +1286,27 @@
 
 	<string name="poi_cuisine">Køkken</string>
 
-<string name="poi_information_guidepost">Guidepost</string>
+<string name="poi_information_guidepost">Vejsklt</string>
 	<string name="poi_information_board">Informationstavle</string>
 	<string name="poi_information_map">Kort</string>
 	<string name="poi_information_office">Informationskontor</string>
-	<string name="poi_information_terminal">Oplysnings terminal</string>
-	<string name="poi_information_route_marker">Rute markør</string>
+	<string name="poi_information_terminal">Informationsstander</string>
+	<string name="poi_information_route_marker">Rutemarkør</string>
 	<string name="poi_information_hikingmap">Vandreturskort</string>
-	<string name="poi_information_nature">Oplysninger om natur</string>
-	<string name="poi_information_wildlife">Oplysninger om vildt liv</string>
-	<string name="poi_information_history">Oplysninger om historie</string>
+	<string name="poi_information_nature">Information om natur</string>
+	<string name="poi_information_wildlife">Information om vildtliv</string>
+	<string name="poi_information_history">Information om historie</string>
 	<string name="poi_information_sign">Skilt</string>
 	<string name="poi_information_audioguide">Audioguide</string>
 	<string name="poi_information_bicyclemap">Cykelkort</string>
 	<string name="poi_information_tactile_model">Taktilmodel</string>
-	<string name="poi_information_tactile_map">Taktil kort</string>
+	<string name="poi_information_tactile_map">Taktilkort</string>
 	<string name="poi_board_type_plants">Information om planter</string>
-	<string name="poi_board_type_geology">Oplysninger om geologi</string>
-	<string name="poi_board_type_public_transport">Oplysninger om offentlig transport</string>
-	<string name="poi_board_type_technology">Oplysninger om teknologi</string>
-	<string name="poi_board_type_astronomy">Oplysninger om astronomi</string>
+	<string name="poi_board_type_geology">Information om geologi</string>
+	<string name="poi_board_type_public_transport">Information om offentlig transport</string>
+	<string name="poi_board_type_technology">Information om teknologi</string>
+	<string name="poi_board_type_astronomy">Information om astronomi</string>
 
-<string name="poi_information_trail_blaze">Rutemarkering</string>
+<string name="poi_information_trail_blaze">Ruteskilte</string>
 	<string name="poi_board_type_notice">Tavle med advarsel</string>
 	</resources>
