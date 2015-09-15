@@ -1242,4 +1242,29 @@
 	<string name="poi_board_type_astronomy">Informácie o astronómii</string>
 
 <string name="poi_information_audioguide">Audiosprievodca</string>
-	</resources>
+	<string name="poi_commercial">Komerčný pozemok</string>
+	<string name="poi_retail">Maloobchodný pozemok</string>
+
+	<string name="poi_fireplace_yes">Ohnisko</string>
+	<string name="poi_fireplace_no">Bez ohniska</string>
+
+	<string name="poi_covered_yes">S prístreškom</string>
+	<string name="poi_covered_no">Bez prístrešku</string>
+
+	<string name="poi_smoking_no">Zákaz fajčenia</string>
+	<string name="poi_smoking_outside">Fajčenie povolené len vonku</string>
+	<string name="poi_smoking_yes">Fajčenie povolené</string>
+	<string name="poi_smoking_separated">Fajčenie povolené v samostatnej neoddelenej miestnosti</string>
+	<string name="poi_smoking_isolated">Fajčenie povolené v samostatnej oddelenej miestnosti</string>
+	<string name="poi_smoking_dedicated">Vyhradené pre fajčiarov</string>
+
+	<string name="poi_toll_yes">Mýtny poplatok</string>
+	<string name="poi_toll_no">Mýtny poplatok sa nevyberá</string>
+	<string name="poi_toll_hgv_yes">Mýtny poplatok sa vyberá len pre nákladné vozidlá</string>
+	<string name="poi_tactile_paving_yes">Značenie pre slepých</string>
+	<string name="poi_tactile_paving_no">Bez značenia pre slepých</string>
+	<string name="poi_traffic_signals_sound_yes">Zvuková signalizácia</string>
+	<string name="poi_traffic_signals_sound_no">Bez zvukovej signalizácie</string>
+	<string name="poi_traffic_signals_sound_walk">Zvuková signalizácia len keď je prechod povolený</string>
+
+</resources>
