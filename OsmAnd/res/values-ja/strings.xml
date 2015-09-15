@@ -156,10 +156,8 @@
      <string name="poi_filter_fuel">燃料(Fuel)</string>
      <string name="poi_filter_namefinder">オンラインNameFinder</string>
      <string name="reading_cached_tiles">キャッシュ済タイル読み込み中…</string>
-     <string name="version_index_is_big_for_memory">索引
-\'\'{0}\'\' はメモリ内に格納できませんでした</string>
-     <string name="version_index_is_not_supported">索引 \'\'{0}\'\' のバージョンは
-サポートされていません</string>
+     <string name="version_index_is_big_for_memory">\'\'{0}\'\' の項目はメモリ内に格納できませんでした</string>
+     <string name="version_index_is_not_supported">\'\'{0}\'\' は、このバージョンではサポートされていません</string>
 
      <string name="use_osmand_routing_service">OsmAnd 経路案内 &gt;20km</string>
      <string name="use_osmand_routing_service_descr">長距離のオフライン経路案内に OsmAndを使用します(実験版)</string>
@@ -2145,7 +2143,7 @@ POIの更新は利用できません</string>
 	<string name="description">説明</string>
 	<string name="add_opening_hours">開店時間を追記</string>
 	<string name="poi_dialog_poi_type">POIの種類</string>
-	<string name="number_of_rows_in_dash">ダッシュボード内の表示行数 %1$s</string>
+	<string name="number_of_rows_in_dash">ダッシュボードでの表示数： %1$s</string>
 	<string name="please_specify_poi_type">POIの種類を指定してください。</string>
 	<string name="working_days">営業日</string>
 	<string name="recent_places">最近表示した場所</string>

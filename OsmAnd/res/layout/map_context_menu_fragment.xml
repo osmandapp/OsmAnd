@@ -2,27 +2,26 @@
 <FrameLayout
     android:id="@+id/context_menu_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@android:color/transparent"
-    android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent">
 
     <LinearLayout
         android:id="@+id/context_menu_shadow_view"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical"/>
 
     <LinearLayout
         android:id="@+id/context_menu_main"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/context_menu_top_shadow"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="20dp"
             android:orientation="horizontal">
 
@@ -30,14 +29,14 @@
 
         <LinearLayout
             android:id="@+id/context_menu_top_shadow_all"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/bg_map_context_menu"
             android:orientation="vertical">
 
             <LinearLayout
                 android:id="@+id/context_menu_top_view"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:baselineAligned="false"
                 android:orientation="horizontal">
@@ -124,7 +123,7 @@
 
                 <ImageButton
                     android:id="@+id/context_menu_route_button"
-                    android:layout_width="fill_parent"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
@@ -139,7 +138,7 @@
 
                 <ImageButton
                     android:id="@+id/context_menu_fav_button"
-                    android:layout_width="fill_parent"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
@@ -154,7 +153,7 @@
 
                 <ImageButton
                     android:id="@+id/context_menu_share_button"
-                    android:layout_width="fill_parent"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
@@ -169,7 +168,7 @@
 
                 <ImageButton
                     android:id="@+id/context_menu_more_button"
-                    android:layout_width="fill_parent"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
@@ -183,14 +182,14 @@
 
         <ScrollView
             android:id="@+id/context_menu_bottom_scroll"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:background="?attr/ctx_menu_info_view_bg"
             android:fillViewport="true">
 
             <LinearLayout
                 android:id="@+id/context_menu_bottom_view"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 

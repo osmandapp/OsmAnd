@@ -200,10 +200,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 
 	public void showMapContextMenuMarker() {
-		if (!showContextMarker) {
-			showContextMarker = true;
-			view.refreshMap();
-		}
+		showContextMarker = true;
+		view.refreshMap();
 	}
 
 	public void hideMapContextMenuMarker() {

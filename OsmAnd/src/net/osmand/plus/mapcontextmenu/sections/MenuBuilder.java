@@ -1,11 +1,15 @@
 package net.osmand.plus.mapcontextmenu.sections;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.render.RenderingIcons;
 
 public abstract class MenuBuilder {
 
@@ -27,4 +31,12 @@ public abstract class MenuBuilder {
 				light ? R.color.icon_color : R.color.icon_color_light);
 	}
 
+	public Drawable getRowIcon(Context ctx, String fileName) {
+		Bitmap iconBitmap = RenderingIcons.getIcon(ctx, fileName, false);
+		if (iconBitmap != null) {
+			return new BitmapDrawable(ctx.getResources(), iconBitmap);
+		} else {
+			return null;
+		}
+	}
 }
