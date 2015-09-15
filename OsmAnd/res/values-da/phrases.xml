@@ -1286,13 +1286,13 @@
 
 	<string name="poi_cuisine">Køkken</string>
 
-<string name="poi_information_guidepost">Vejsklt</string>
+<string name="poi_information_guidepost">Vejvisning</string>
 	<string name="poi_information_board">Informationstavle</string>
 	<string name="poi_information_map">Kort</string>
 	<string name="poi_information_office">Informationskontor</string>
 	<string name="poi_information_terminal">Informationsstander</string>
 	<string name="poi_information_route_marker">Rutemarkør</string>
-	<string name="poi_information_hikingmap">Vandreturskort</string>
+	<string name="poi_information_hikingmap">Vandrekort</string>
 	<string name="poi_information_nature">Information om natur</string>
 	<string name="poi_information_wildlife">Information om vildtliv</string>
 	<string name="poi_information_history">Information om historie</string>
@@ -1308,30 +1308,30 @@
 	<string name="poi_board_type_astronomy">Information om astronomi</string>
 
 <string name="poi_information_trail_blaze">Ruteskilte</string>
-	<string name="poi_board_type_notice">Tavle med advarsel</string>
-	<string name="poi_commercial">Kommerciel arealanvendelsen</string>
-	<string name="poi_retail">Detailsalg arealanvendelse</string>
+	<string name="poi_board_type_notice">Advarseltavle</string>
+	<string name="poi_commercial">Forretningsområde</string>
+	<string name="poi_retail">Detailhandelsområde</string>
 
-	<string name="poi_fireplace_yes">Pejs</string>
-	<string name="poi_fireplace_no">Ingen pejs</string>
+	<string name="poi_fireplace_yes">Ildsted</string>
+	<string name="poi_fireplace_no">Intet ildsted</string>
 
 	<string name="poi_covered_yes">Med læ</string>
 	<string name="poi_covered_no">Uden læ</string>
 
-	<string name="poi_smoking_no">Ingen rygning</string>
-	<string name="poi_smoking_outside">Rygning er kun tilladt uden for</string>
-	<string name="poi_smoking_yes">Rygning er tilladt</string>
+	<string name="poi_smoking_no">Rygning forbudt</string>
+	<string name="poi_smoking_outside">Rygning er kun tilladt udendørs</string>
+	<string name="poi_smoking_yes">Rygning tilladt</string>
 	<string name="poi_smoking_separated">Rygning er tilladt i et særskilt rum uden effektiv adskillelse</string>
 	<string name="poi_smoking_isolated">Rygning er tilladt i et separat rum med effektiv adskillelse</string>
 	<string name="poi_smoking_dedicated">Dedikeret til rygere</string>
 
-	<string name="poi_toll_no">Betalingen af afgifterne opkræves ikke</string>
-	<string name="poi_toll_yes">Betalingen af afgifterne opkræves for tunge lastvogne</string>
-	<string name="poi_tactile_paving_yes">Med taktil belægning</string>
-	<string name="poi_tactile_paving_no">Uden taktil belægning</string>
-	<string name="poi_traffic_signals_sound_yes">Med lyd</string>
-	<string name="poi_traffic_signals_sound_no">Uden lyd</string>
-	<string name="poi_traffic_signals_sound_walk">Med lyd når er gang tilladt</string>
+	<string name="poi_toll_no">Betalingen af afgifter opkræves ikke</string>
+	<string name="poi_toll_yes">Betalingen af afgifter opkræves for tunge lastvogne</string>
+	<string name="poi_tactile_paving_yes">Med taktilbelægning</string>
+	<string name="poi_tactile_paving_no">Uden taktilbelægning</string>
+	<string name="poi_traffic_signals_sound_yes">Med lydsignal</string>
+	<string name="poi_traffic_signals_sound_no">Uden lydsignal</string>
+	<string name="poi_traffic_signals_sound_walk">Med lydsignal når det er tilladt at gå</string>
 
 <string name="poi_ford_stepping_stones">Trædestensbro</string>
 	</resources>
