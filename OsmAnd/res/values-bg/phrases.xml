@@ -361,4 +361,16 @@
 	<string name="poi_motel">Мотел</string>
 	<string name="poi_alpine_hut">Хижа</string>
 	<string name="poi_apartment">Апартамент</string>
+	<string name="poi_recycling_polyester">Полиестер</string>
+	<string name="poi_industrial">Индустриална зона</string>
+	<string name="poi_pharmacy">Аптека</string>
+	<string name="poi_american_football">Американски футбол</string>
+	<string name="poi_australian_football">Австралийски футбол</string>
+	<string name="poi_horse_racing">Състезания с коне</string>
+	<string name="poi_internet_access_wlan">Интернет достъп: безжичен</string>
+	<string name="poi_internet_access_terminal">Интернет достъп: терминал</string>
+	<string name="poi_internet_access_wired">Интернет достъп: кабелен</string>
+	<string name="poi_internet_access_public">Интернет достъп: публичен</string>
+	<string name="poi_internet_access_service">Интернет достъп: услуга</string>
+
 	</resources>
