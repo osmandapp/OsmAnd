@@ -1221,4 +1221,31 @@
 
 	<string name="poi_cooling_tower">冷卻塔</string>
 	<string name="poi_lighting_tower">照明架塔</string>
+	<string name="poi_species">種類</string>
+	<string name="poi_genus">種屬</string>
+	<string name="poi_taxon">分類</string>
+
+	<string name="poi_urban">城市</string>
+	<string name="poi_rural">農村</string>
+
+	<string name="poi_seats">座位</string>
+	<string name="poi_backrest_yes">靠背：是的</string>
+	<string name="poi_backrest_no">靠背：沒有</string>
+
+	<string name="poi_intermittent">間歇性</string>
+
+	<string name="poi_deadlock">鎖住</string>
+
+	<string name="poi_generator_source_coal">能源：煤炭</string>
+	<string name="poi_generator_source_gas">能源：瓦斯</string>
+	<string name="poi_generator_source_nuclear">能源：核能</string>
+	<string name="poi_generator_source_solar">能源：太陽能</string>
+	<string name="poi_generator_source_hydro">能源：水力</string>
+	<string name="poi_generator_source_wind">能源：風力</string>
+	<string name="poi_generator_source_geothermal">能源：地熱</string>
+	<string name="poi_generator_source_oil">能源：石油</string>
+	<string name="poi_generator_source_diesel">能源：柴油</string>
+
+	<string name="poi_car_wash_self_service">自助服務</string>
+
 	</resources>
