@@ -62,6 +62,7 @@
 	<string name="poi_mobile_phone">Салон связи</string>
 	<string name="poi_motorcycle">Мотоциклы</string>
 	<string name="poi_musical_instrument">Музыкальные инструменты</string>
+	<string name="poi_music">Аудиозаписи</string>
 	<string name="poi_newsagent">Журнальный киоск</string>
 	<string name="poi_optician">Оптика</string>
 	<string name="poi_organic">Натуральные продукты</string>
@@ -106,6 +107,7 @@
 	<string name="poi_emergency_access_point">Табличка с кодом для службы спасения</string>
 
 	<string name="poi_ford">Брод</string>
+	<string name="poi_ford_stepping_stones">Рудиментарный мост из камней</string>
 	<string name="poi_mountain_pass_yes">Перевал</string>
 	<string name="poi_gate">Ворота</string>
 	<string name="poi_city_wall">Городская стена</string>
@@ -454,7 +456,7 @@
 	<string name="poi_historic_monastery">Исторический монастырь</string>
 	<string name="poi_wayside_cross">Придорожный крест</string>
 	<string name="poi_wayside_shrine">Придорожная святыня</string>
-	<string name="poi_information">Информационный стенд</string>
+	<string name="poi_information">Информация</string>
 	<string name="poi_clock">Часы</string>
 	<string name="poi_travel_agent">Турагенство</string>
 	<string name="poi_viewpoint">Место с хорошим видом</string>
@@ -778,6 +780,7 @@
 	<string name="poi_canal">Канал</string>
 	<string name="poi_water">Вода</string>
 	<string name="poi_wood">Лес</string>
+	<string name="poi_tree">Дерево</string>
 	<string name="poi_valley">Долина</string>
 	<string name="poi_bench">Скамейка</string>
 	<string name="poi_piste_ice_skate">Ледовый каток</string>
@@ -793,7 +796,7 @@
 	<string name="poi_road_obstacle">Дорожные препятствия</string>
 		<string name="poi_medical_supply">Медицинские изделия</string>
 	<string name="poi_public_transport_stop_position">Остановка общественного транспорта</string>
-	<string name="poi_railway_buffer_stop">Железнодорожная остановка буфер</string>
+	<string name="poi_railway_buffer_stop">Железнодорожный буфер</string>
 	<string name="poi_junction">Перекрёсток</string>
 	<string name="poi_observation_tower">Смотровая башня</string>
 	<string name="poi_bell_tower">Колокольня</string>
@@ -809,7 +812,7 @@
 	<string name="poi_residential">Жилой район</string>
 	<string name="poi_religious">Религиозное землепользование</string>
 
-	<string name="poi_general_tourist_attraction_yes">Основная туристическая достопримечательность</string>
+	<string name="poi_general_tourist_attraction_yes">Достопримечательность (тип неизвестен)</string>
 	<string name="poi_attraction_amusement_ride">Парк атракционов</string>
 	<string name="poi_wilderness_hut">Лесной домик</string>
 	<string name="poi_hunting_lodge">Охотничий домик</string>
@@ -1022,5 +1025,31 @@
 	<string name="poi_board_type_public_transport">Расписание общественного транспорта</string>
 	<string name="poi_board_type_technology">Информация о технологии</string>
 	<string name="poi_board_type_astronomy">Информация об астрономии</string>
+
+	<string name="poi_tourism_attraction">Достопримечательность</string>
+
+	<string name="poi_commercial">Коммерческое землепользование</string>
+	<string name="poi_retail">Розничная торговля (землепользование)</string>
+
+	<string name="poi_fireplace_yes">C местом для разведения огня</string>
+	<string name="poi_fireplace_no">Без места для разведения огня</string>
+	<string name="poi_covered_yes">С укрытием</string>
+	<string name="poi_covered_no">Без укрытия</string>
+
+	<string name="poi_smoking_no">Курение запрещено</string>
+	<string name="poi_smoking_outside">Курение разрешено только снаружи</string>
+	<string name="poi_smoking_yes">Курение разрешено</string>
+	<string name="poi_smoking_separated">Курение разрешено в отдельном помещении без эффективного отделения</string>
+	<string name="poi_smoking_isolated">Курение разрешено в отдельном помещении с эффективым отделением</string>
+	<string name="poi_smoking_dedicated">Специализированное заведение для курящих</string>
+
+	<string name="poi_toll_yes">Оплата за проезд взимается</string>
+	<string name="poi_toll_no">Оплата за проезд не взимается</string>
+	<string name="poi_toll_yes">Оплата за проезд взимается для грузовых автомобилей</string>
+	<string name="poi_tactile_paving_yes">С тактильным покрытием</string>
+	<string name="poi_tactile_paving_no">Без тактильного покрытия</string>
+	<string name="poi_traffic_signals_sound_yes">Со звуковым сигналом</string>
+	<string name="poi_traffic_signals_sound_no">Без звукового сигнала</string>
+	<string name="poi_traffic_signals_sound_walk">Со звуковым сигналом только когда переход разрешён</string>
 
 </resources>

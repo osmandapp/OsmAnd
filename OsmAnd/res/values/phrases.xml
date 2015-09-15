@@ -181,6 +181,7 @@
 	<string name="poi_emergency_access_point">Emergency access point</string>
 
 	<string name="poi_ford">Ford</string>
+	<string name="poi_ford_stepping_stones">Step-stone bridge</string>
 	<string name="poi_mountain_pass_yes">Mountain pass</string>
 	<string name="poi_gate">Gate</string>
 	<string name="poi_city_wall">City wall</string>
@@ -1275,5 +1276,30 @@
 	<string name="poi_board_type_public_transport">Information about public transport</string>
 	<string name="poi_board_type_technology">Information about technology</string>
 	<string name="poi_board_type_astronomy">Information about astronomy</string>
+
+	<string name="poi_commercial">Commercial landuse</string>
+	<string name="poi_retail">Retail landuse</string>
+
+	<string name="poi_fireplace_yes">Fireplace</string>
+	<string name="poi_fireplace_no">No fireplace</string>
+
+	<string name="poi_covered_yes">With shelter</string>
+	<string name="poi_covered_no">Without shelter</string>
+
+	<string name="poi_smoking_no">No smoking</string>
+	<string name="poi_smoking_outside">Smoking is allowed outside only</string>
+	<string name="poi_smoking_yes">Smoking is allowed</string>
+	<string name="poi_smoking_separated">Smoking is allowed in a separate room without effective separation</string>
+	<string name="poi_smoking_isolated">Smoking is allowed in a separate room with effective separation</string>
+	<string name="poi_smoking_dedicated">Dedicated to smokers</string>
+
+	<string name="poi_toll_yes">Payment of tolls is charged</string>
+	<string name="poi_toll_no">Payment of tolls is not charged</string>
+	<string name="poi_toll_yes">Payment of tolls is charged for HGV</string>
+	<string name="poi_tactile_paving_yes">With tactile paving</string>
+	<string name="poi_tactile_paving_no">Without tactile paving</string>
+	<string name="poi_traffic_signals_sound_yes">With sound</string>
+	<string name="poi_traffic_signals_sound_no">Without sound</string>
+	<string name="poi_traffic_signals_sound_walk">With sound only when walking is allowed</string>
 
 </resources>
