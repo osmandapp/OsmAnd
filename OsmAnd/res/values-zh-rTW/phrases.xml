@@ -1248,4 +1248,16 @@
 
 	<string name="poi_car_wash_self_service">自助服務</string>
 
+	<string name="poi_ford_stepping_stones">踏石橋</string>
+	<string name="poi_int_name">國際名稱</string>
+	<string name="poi_nat_name">國家名稱</string>
+	<string name="poi_reg_name">地區名稱</string>
+	<string name="poi_loc_name">在地名稱</string>
+	<string name="poi_old_name">舊名稱</string>
+	<string name="poi_alt_name">替代名稱</string>
+
+	<string name="poi_pump_manual">手動泵浦</string>
+	<string name="poi_pump_powered">動力泵浦</string>
+	<string name="poi_pump_no">無泵浦</string>
+
 	</resources>
