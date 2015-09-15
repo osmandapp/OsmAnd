@@ -1026,4 +1026,99 @@
 	<string name="poi_denomination_roman_catholic">Římskokatolicismus</string>
 	<string name="poi_denomination_orthodox">Pravoslaví</string>
 	<string name="poi_denomination_lutheran">Luteránství</string>
+	<string name="poi_board_type_astronomy">Informace o astronomii</string>
+
+<string name="poi_board_type_technology">Informace o technologii</string>
+	<string name="poi_board_type_public_transport">Informace o veřejné dopravě</string>
+	<string name="poi_board_type_geology">Informace o geologii</string>
+	<string name="poi_board_type_plants">Informace o rostlinách</string>
+	<string name="poi_board_type_notice">Deska s oznámením</string>
+	<string name="poi_information_tactile_map">Haptická mapa</string>
+	<string name="poi_information_tactile_model">Dotykový model</string>
+	<string name="poi_information_bicyclemap">Cyklistická mapa</string>
+	<string name="poi_information_audioguide">Audioprůvodce</string>
+	<string name="poi_information_history">Informace o historii</string>
+	<string name="poi_information_wildlife">Informace o divočině</string>
+	<string name="poi_information_nature">Informace o přírodě</string>
+	<string name="poi_information_hikingmap">Turistická mapa</string>
+	<string name="poi_information_terminal">Informační terminál</string>
+	<string name="poi_information_office">Informační kancelář</string>
+	<string name="poi_information_map">Mapa</string>
+	<string name="poi_information_board">Informační tabule</string>
+	<string name="poi_information_guidepost">Rozcestník</string>
+	<string name="poi_cuisine">Kuchyně</string>
+
+	<string name="poi_water_characteristic_sulfuric">Charakteristika vody: síranová</string>
+
+	<string name="poi_water_characteristic_mud">Charakteristika vody: bahnitá</string>
+	<string name="poi_water_characteristic_mineral">Charakteristika vody: minerální</string>
+	<string name="poi_pump_no">Bez čerpadla</string>
+
+	<string name="poi_pump_powered">Poháněné čerpadlo</string>
+	<string name="poi_pump_manual">Ruční pumpa</string>
+	<string name="poi_alt_name">Alternativní název</string>
+
+	<string name="poi_old_name">Starý název</string>
+	<string name="poi_loc_name">Místní název</string>
+	<string name="poi_reg_name">Regionální název</string>
+	<string name="poi_nat_name">Národní název</string>
+	<string name="poi_int_name">Mezinárodní název</string>
+	<string name="poi_generator_source_diesel">Zdroj energie: diesel</string>
+
+	<string name="poi_generator_source_oil">Zdroj energie: ropa</string>
+	<string name="poi_generator_source_geothermal">Zdroj energie: geotermální energie</string>
+	<string name="poi_generator_source_wind">Zdroj energie: vítr</string>
+	<string name="poi_generator_source_hydro">Zdroj energie: voda</string>
+	<string name="poi_generator_source_solar">Zdroj energie: sluneční</string>
+	<string name="poi_generator_source_nuclear">Zdroj energie: jaderná</string>
+	<string name="poi_generator_source_gas">Zdroj energie: plyn</string>
+	<string name="poi_generator_source_coal">Zdroj energie: uhlí</string>
+	<string name="poi_building">Budova</string>
+	<string name="poi_shower">Sprcha</string>
+	<string name="poi_military_office">Vojenský úřad</string>
+	<string name="poi_email">E-mail</string>
+	<string name="poi_fax">Fax</string>
+	<string name="poi_facebook">Facebook</string>
+	<string name="poi_twitter">Twitter</string>
+	<string name="poi_skype">Skype</string>
+	<string name="poi_youtube">YouTube</string>
+	<string name="poi_instagram">Instagram</string>
+	<string name="poi_vk">VKontakte</string>
+	<string name="poi_google_plus">Google+</string>
+	<string name="poi_mobile">Mobilní telefon</string>
+	<string name="poi_height">Výška</string>
+	<string name="poi_ele">Výška nad mořem</string>
+	<string name="poi_fee_no">Žádný poplatek</string>
+	<string name="poi_drinking_water_yes">Pitná voda</string>
+	<string name="poi_drinking_water_no">Nepitná voda</string>
+	<string name="poi_seasonal_yes">Sezónní</string>
+	<string name="poi_seasonal_no">Nesezónní</string>
+	<string name="poi_seasonal_dry_season">Období sucha</string>
+	<string name="poi_seasonal_wet_season">Období dešťů</string>
+	<string name="poi_seasonal_spring">Pramen</string>
+	<string name="poi_seasonal_summer">Léto</string>
+	<string name="poi_seasonal_autumn">Podzim</string>
+	<string name="poi_seasonal_winter">Zima</string>
+	<string name="poi_start_date">Datum zahájení</string>
+	<string name="poi_wheelchair">Invalidní vozík</string>
+	<string name="poi_wholesale">Velkoobchod</string>
+
+	<string name="poi_access_private">Soukromý přístup</string>
+	<string name="poi_access_no">Žádný přístup</string>
+	<string name="poi_nudism_yes">Nudismus: povoleno</string>
+	<string name="poi_nudism_no">Nudismus: zakázáno</string>
+	<string name="poi_nudism_obligatory">Nudismus: povinné</string>
+	<string name="poi_nudism_customary">Nudismus: obvyklé</string>
+	<string name="poi_nudism_permissive">Nudismus: volitelné</string>
+
+	<string name="poi_trade_plumbing">Instalatérské potřeby</string>
+	<string name="poi_trade_building_supplies">Stavebniny</string>
+	<string name="poi_trade_agricultural_supplies">Zemědělské potřeby</string>
+	<string name="poi_population">Obyvatelstvo</string>
+	<string name="poi_parking_underground">Podzemí</string>
+	<string name="poi_parking_multi_storey">Vícepodlažní</string>
+
+	<string name="poi_bicycle_parking_building">Speciální budova</string>
+	<string name="poi_bicycle_parking_shed">Přístřešek</string>
+	<string name="poi_bicycle_parking_bollard">Patník</string>
 	</resources>
