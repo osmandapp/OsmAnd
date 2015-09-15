@@ -1334,4 +1334,5 @@
 	<string name="poi_traffic_signals_sound_walk">Med lydsignal når det er tilladt at gå</string>
 
 <string name="poi_ford_stepping_stones">Trædestensbro</string>
+	<string name="poi_toll_hgv_yes">Betaling af afgifter opkræves for tunge lastvogne</string>
 	</resources>
