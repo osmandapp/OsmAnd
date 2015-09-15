@@ -1232,4 +1232,14 @@
 	<string name="poi_information_history">Informácie o histórii</string>
 	<string name="poi_information_sign">Značka</string>
 	<string name="poi_information_bicyclemap">Cyklomapa</string>
+	<string name="poi_information_tactile_model">Dotykový model</string>
+	<string name="poi_information_tactile_map">Dotyková mapa</string>
+	<string name="poi_board_type_notice">Tabuľa s oznamom</string>
+	<string name="poi_board_type_plants">Informácie o rastlinách</string>
+	<string name="poi_board_type_geology">Informácie o geológii</string>
+	<string name="poi_board_type_public_transport">Informácie o hromadnej doprave</string>
+	<string name="poi_board_type_technology">Informácie o technológii</string>
+	<string name="poi_board_type_astronomy">Informácie o astronómii</string>
+
+<string name="poi_information_audioguide">Audiosprievodca</string>
 	</resources>
