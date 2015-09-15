@@ -1295,7 +1295,7 @@
 
 	<string name="poi_toll_yes">Payment of tolls is charged</string>
 	<string name="poi_toll_no">Payment of tolls is not charged</string>
-	<string name="poi_toll_yes">Payment of tolls is charged for HGV</string>
+	<string name="poi_toll_hgv_yes">Payment of tolls is charged for HGV</string>
 	<string name="poi_tactile_paving_yes">With tactile paving</string>
 	<string name="poi_tactile_paving_no">Without tactile paving</string>
 	<string name="poi_traffic_signals_sound_yes">With sound</string>
