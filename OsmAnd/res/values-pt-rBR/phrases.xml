@@ -1292,4 +1292,29 @@
 	<string name="poi_board_type_technology">Informações sobre tecnologia</string>
 	<string name="poi_board_type_astronomy">Informações sobre astronomia</string>
 
-</resources>
+<string name="poi_commercial">Área de negócios</string>
+	<string name="poi_retail">Área de vendas</string>
+
+	<string name="poi_fireplace_yes">Lareira de exterior</string>
+	<string name="poi_fireplace_no">Sem lareira</string>
+
+	<string name="poi_covered_yes">Com abrigo</string>
+	<string name="poi_covered_no">Sem abrigo</string>
+
+	<string name="poi_smoking_no">Proibido fumar</string>
+	<string name="poi_smoking_outside">É permitido fumar apenas do lado de fora</string>
+	<string name="poi_smoking_yes">É permitido fumar</string>
+	<string name="poi_smoking_separated">É permitido fumar em um ambiente sem efetiva separação</string>
+	<string name="poi_smoking_isolated">É permitido fumar em um ambiente com efetiva separação</string>
+	<string name="poi_smoking_dedicated">Dedicado aos fumantes</string>
+
+	<string name="poi_toll_no">Não é cobrado pagamento de pedágio</string>
+	<string name="poi_toll_yes">Pagamento de pedágio cobrado para veículos pesados</string>
+	<string name="poi_tactile_paving_yes">Com piso tátil</string>
+	<string name="poi_tactile_paving_no">Sem piso tátil</string>
+	<string name="poi_traffic_signals_sound_yes">Com aviso sonoro</string>
+	<string name="poi_traffic_signals_sound_no">Sem aviso sonoro</string>
+	<string name="poi_traffic_signals_sound_walk">Com aviso sonoro somente quando andar é permitido</string>
+
+<string name="poi_ford_stepping_stones">Pedra de passagem em rio</string>
+	</resources>
