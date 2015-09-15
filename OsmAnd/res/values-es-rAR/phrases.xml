@@ -1288,7 +1288,7 @@
 	<string name="poi_board_type_technology">Información tecnológica</string>
 	<string name="poi_board_type_astronomy">Información astronómica</string>
 
-	<string name="poi_commercial">Área comercial</string>
+	<string name="poi_commercial">Área de oficinas</string>
 	<string name="poi_fireplace_yes">Chimenea</string>
 	<string name="poi_fireplace_no">Sin chimenea</string>
 
@@ -1310,8 +1310,9 @@
 	<string name="poi_traffic_signals_sound_no">Sin sonido</string>
 	<string name="poi_traffic_signals_sound_walk">Sonoro sólo cuando se permite caminar</string>
 
-<string name="poi_retail">Área comercial (retail)</string>
+<string name="poi_retail">Área comercial</string>
 
-	<string name="poi_ford_stepping_stones">Puente de paso de piedra</string>
+	<string name="poi_ford_stepping_stones">Puente de piedras</string>
 	<string name="poi_information_board">Tablero de información</string>
+	<string name="poi_toll_hgv_yes">Peaje tarifado para vehículos pesados</string>
 	</resources>
