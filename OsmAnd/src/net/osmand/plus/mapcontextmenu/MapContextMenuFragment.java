@@ -184,7 +184,7 @@ public class MapContextMenuFragment extends Fragment {
 						lastTouchDown = System.currentTimeMillis();
 
 						dy = event.getY();
-						dyMain = mainView.getY();
+						dyMain = getViewY();
 						velocity = VelocityTracker.obtain();
 						velocityX = 0;
 						velocityY = 0;
@@ -194,14 +194,16 @@ public class MapContextMenuFragment extends Fragment {
 
 					case MotionEvent.ACTION_MOVE:
 						float y = event.getY();
-						float newY = mainView.getY() + (y - dy);
-						mainView.setY((int)newY);
+						float newY = getViewY() + (y - dy);
+						setViewY((int) newY);
 
 						menuFullHeight = view.getHeight() - (int) newY + 10;
-						ViewGroup.LayoutParams lp = mainView.getLayoutParams();
-						lp.height = Math.max(menuFullHeight, menuTitleHeight);
-						mainView.setLayoutParams(lp);
-						mainView.requestLayout();
+						if (!oldAndroid()) {
+							ViewGroup.LayoutParams lp = mainView.getLayoutParams();
+							lp.height = Math.max(menuFullHeight, menuTitleHeight);
+							mainView.setLayoutParams(lp);
+							mainView.requestLayout();
+						}
 
 						velocity.addMovement(event);
 						velocity.computeCurrentVelocity(1000);
@@ -217,8 +219,10 @@ public class MapContextMenuFragment extends Fragment {
 						float endX = event.getX();
 						float endY = event.getY();
 
-						slidingUp = Math.abs(maxVelocityY) > 500 && (mainView.getY() - dyMain) < -50;
-						slidingDown = Math.abs(maxVelocityY) > 500 && (mainView.getY() - dyMain) > 50;
+						int currentY = getViewY();
+
+						slidingUp = Math.abs(maxVelocityY) > 500 && (currentY - dyMain) < -50;
+						slidingDown = Math.abs(maxVelocityY) > 500 && (currentY - dyMain) > 50;
 
 						velocity.recycle();
 
@@ -232,27 +236,32 @@ public class MapContextMenuFragment extends Fragment {
 
 						final int posY = getPosY();
 
-						if (mainView.getY() != posY) {
+						if (currentY != posY) {
 
-							if (posY < mainView.getY()) {
+							if (posY < getViewY()) {
 								updateMainViewLayout(posY);
 							}
 
-							mainView.animate().y(posY)
-									.setDuration(200)
-									.setInterpolator(new DecelerateInterpolator())
-									.setListener(new AnimatorListenerAdapter() {
-										@Override
-										public void onAnimationCancel(Animator animation) {
-											updateMainViewLayout(posY);
-										}
+							if (!oldAndroid()) {
+								mainView.animate().y(posY)
+										.setDuration(200)
+										.setInterpolator(new DecelerateInterpolator())
+										.setListener(new AnimatorListenerAdapter() {
+											@Override
+											public void onAnimationCancel(Animator animation) {
+												updateMainViewLayout(posY);
+											}
 
-										@Override
-										public void onAnimationEnd(Animator animation) {
-											updateMainViewLayout(posY);
-										}
-									})
-									.start();
+											@Override
+											public void onAnimationEnd(Animator animation) {
+												updateMainViewLayout(posY);
+											}
+										})
+										.start();
+							} else {
+								setViewY(posY);
+								updateMainViewLayout(posY);
+							}
 						}
 
 						// OnClick event
@@ -409,17 +418,38 @@ public class MapContextMenuFragment extends Fragment {
 	}
 
 	private void updateMainViewLayout(int posY) {
-		ViewGroup.LayoutParams lp;
 		menuFullHeight = view.getHeight() - posY;
-		lp = mainView.getLayoutParams();
-		lp.height = Math.max(menuFullHeight, menuTitleHeight);
-		mainView.setLayoutParams(lp);
-		mainView.requestLayout();
+		if (!oldAndroid()) {
+			ViewGroup.LayoutParams lp = mainView.getLayoutParams();
+			lp.height = Math.max(menuFullHeight, menuTitleHeight);
+			mainView.setLayoutParams(lp);
+			mainView.requestLayout();
+		}
+	}
+
+	private int getViewY() {
+		if (!oldAndroid()) {
+			return (int)mainView.getY();
+		} else {
+			return mainView.getPaddingTop();
+		}
+	}
+
+	private void setViewY(int y) {
+		if (!oldAndroid()) {
+			mainView.setY(y);
+		} else {
+			mainView.setPadding(0, y, 0, 0);
+		}
+	}
+
+	private boolean oldAndroid() {
+		return (Build.VERSION.SDK_INT < Build.VERSION_CODES.ICE_CREAM_SANDWICH);
 	}
 
 	private void doLayoutMenu() {
 		final int posY = getPosY();
-		mainView.setY(posY);
+		setViewY(posY);
 		updateMainViewLayout(posY);
 	}
 
