@@ -1267,4 +1267,51 @@
 
 	<string name="poi_cuisine">Cocina</string>
 
-</resources>
+<string name="poi_information_guidepost">Poste guía</string>
+	<string name="poi_information_map">Mapa</string>
+	<string name="poi_information_office">Oficina de información</string>
+	<string name="poi_information_terminal">Terminal de información</string>
+	<string name="poi_information_route_marker">Marcador de ruta</string>
+	<string name="poi_information_hikingmap">Mapa de senderismo</string>
+	<string name="poi_information_nature">Información sobre la naturaleza</string>
+	<string name="poi_information_wildlife">Información sobre la vida silvestre</string>
+	<string name="poi_information_history">Información histórica</string>
+	<string name="poi_information_sign">Señal</string>
+	<string name="poi_information_audioguide">Audio-guía</string>
+	<string name="poi_information_bicyclemap">Mapa ciclista</string>
+	<string name="poi_information_tactile_model">Modelo táctil</string>
+	<string name="poi_information_tactile_map">Mapa táctil</string>
+	<string name="poi_board_type_notice">Tablero con aviso</string>
+	<string name="poi_board_type_plants">Información sobre plantas</string>
+	<string name="poi_board_type_geology">Información geológica</string>
+	<string name="poi_board_type_public_transport">Información sobre el transporte público</string>
+	<string name="poi_board_type_technology">Información tecnológica</string>
+	<string name="poi_board_type_astronomy">Información astronómica</string>
+
+	<string name="poi_commercial">Área comercial</string>
+	<string name="poi_fireplace_yes">Chimenea</string>
+	<string name="poi_fireplace_no">Sin chimenea</string>
+
+	<string name="poi_covered_yes">Con refugio</string>
+	<string name="poi_covered_no">Sin refugio</string>
+
+	<string name="poi_smoking_no">No fumar</string>
+	<string name="poi_smoking_outside">Permitido fumar en el exterior</string>
+	<string name="poi_smoking_yes">Permitido fumar</string>
+	<string name="poi_smoking_separated">Permitido fumar en habitación separada y sin separación efectiva</string>
+	<string name="poi_smoking_isolated">Permitido fumar en habitación separada físicamente</string>
+	<string name="poi_smoking_dedicated">Solo fumadores</string>
+
+	<string name="poi_toll_no">Peaje sin tarifa</string>
+	<string name="poi_toll_yes">Peaje tarifado</string>
+	<string name="poi_tactile_paving_yes">Con pavimento táctil</string>
+	<string name="poi_tactile_paving_no">Sin pavimento táctil</string>
+	<string name="poi_traffic_signals_sound_yes">Sonoro</string>
+	<string name="poi_traffic_signals_sound_no">Sin sonido</string>
+	<string name="poi_traffic_signals_sound_walk">Sonoro sólo cuando se permite caminar</string>
+
+<string name="poi_retail">Área comercial (retail)</string>
+
+	<string name="poi_ford_stepping_stones">Puente de paso de piedra</string>
+	<string name="poi_information_board">Tablero de información</string>
+	</resources>
