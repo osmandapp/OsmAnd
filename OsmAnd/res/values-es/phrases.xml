@@ -1262,7 +1262,7 @@
 	<string name="poi_water_characteristic_mud">Característica del agua: lodosa</string>
 	<string name="poi_water_characteristic_sulfuric">Característica del agua: sulfúrica</string>
 
-	<string name="poi_water_point">Toma de agua</string>
+	<string name="poi_water_point">Punto de agua</string>
 
 <string name="poi_species">Especie</string>
 	<string name="poi_genus">Género</string>
@@ -1270,7 +1270,7 @@
 
 	<string name="poi_cuisine">Cocina</string>
 
-<string name="poi_ford_stepping_stones">Puente de piedra de paso</string>
+<string name="poi_ford_stepping_stones">Puente de piedras</string>
 	<string name="poi_information_board">Tablero de información</string>
 	<string name="poi_information_map">Mapa</string>
 	<string name="poi_information_office">Oficina de información</string>
@@ -1292,8 +1292,8 @@
 	<string name="poi_board_type_technology">Información tecnológica</string>
 	<string name="poi_board_type_astronomy">Información astronómica</string>
 
-	<string name="poi_commercial">Área comercial</string>
-	<string name="poi_retail">Área comercial (retail)</string>
+	<string name="poi_commercial">Área de oficinas</string>
+	<string name="poi_retail">Área comercial</string>
 
 	<string name="poi_fireplace_yes">Chimenea</string>
 	<string name="poi_fireplace_no">Sin chimenea</string>
@@ -1302,10 +1302,10 @@
 	<string name="poi_covered_no">Sin refugio</string>
 
 	<string name="poi_smoking_no">No fumar</string>
-	<string name="poi_smoking_outside">Sólo se permite fumar fuera</string>
+	<string name="poi_smoking_outside">Sólo se permite fumar afuera</string>
 	<string name="poi_smoking_yes">Permitido fumar</string>
-	<string name="poi_smoking_separated">Se permite fumar en una sala independiente sin la efectiva separación</string>
-	<string name="poi_smoking_isolated">Se permite fumar en una sala independiente con separación efectiva</string>
+	<string name="poi_smoking_separated">Permitido fumar en una sala independiente sin la efectiva separación</string>
+	<string name="poi_smoking_isolated">Permitido fumar en una sala independiente con separación efectiva</string>
 	<string name="poi_smoking_dedicated">Solo fumadores</string>
 
 	<string name="poi_toll_no">Peaje sin tarifa</string>
@@ -1316,4 +1316,6 @@
 	<string name="poi_traffic_signals_sound_no">Sin sonido</string>
 	<string name="poi_traffic_signals_sound_walk">Sonoro sólo cuando se permite caminar</string>
 
-</resources>
+<string name="poi_information_guidepost">Hito</string>
+	<string name="poi_toll_hgv_yes">Peaje tarifado para vehículos pesados</string>
+	</resources>
