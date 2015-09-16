@@ -2124,4 +2124,22 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="rate_this_app_long">Моля оценете OsmAnd в Google Play</string>
 	<string name="user_hates_app_get_feedback">Споделете защо.</string>
 	<string name="try_again">Нов опит</string>
+	<string name="no_updates_available">Няма налични актуализации</string>
+    <string name="restart_is_required">Приложението трябва да бъде рестартирано за да бъдат приложени всички промени.</string>
+    <string name="osmo_settings_debug">Дебъг информация</string>
+    <string name="voice_pref_title">Глас</string>
+    <string name="always_center_position_on_map">Винаги показвай позицията вцентъра</string>
+    <string name="lang_pt_br">португалски (Бразилия)</string>
+    <string name="lang_af">африканс</string>
+	<string name="lang_eu">баски</string>
+	<string name="lang_be">беларуски</string>
+	<string name="lang_bs">босненски</string>
+	<string name="lang_ca">каталански</string>
+	<string name="lang_hr">хърватски</string>
+	<string name="lang_da">датски</string>
+	<string name="lang_nl">нидерландски</string>
+	<string name="lang_fi">фински</string>
+	<string name="lang_ka">грузински</string>
+	<string name="lang_iw">иврит</string>
+	<string name="lang_hu">унгарски</string>
 	</resources>
