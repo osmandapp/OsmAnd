@@ -1335,4 +1335,6 @@
 
 <string name="poi_ford_stepping_stones">Trædestensbro</string>
 	<string name="poi_toll_hgv_yes">Betaling af afgifter opkræves for tunge lastvogne</string>
-	</resources>
+	<string name="poi_rescue_station">Redningsstation</string>
+
+</resources>
