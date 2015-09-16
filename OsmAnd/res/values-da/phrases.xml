@@ -1179,9 +1179,9 @@
 
 	<string name="poi_trade_building_supplies">Byggematerialer</string>
 	<string name="poi_trade_plumbing">VVS materialer</string>
-	<string name="poi_trade_wood">Træmaterialer</string>
-	<string name="poi_trade_agricultural_supplies">Landbrugsmaterialer</string>
-	<string name="poi_trade_tile">Flisematerialer</string>
+	<string name="poi_trade_wood">Tømmer</string>
+	<string name="poi_trade_agricultural_supplies">Grovvarer</string>
+	<string name="poi_trade_tile">Fliser</string>
 
 	<string name="poi_population">Befolkning</string>
 
@@ -1271,7 +1271,7 @@
 	<string name="poi_alt_name">Alternativt navn</string>
 
 	<string name="poi_pump_manual">Manuel pumpe</string>
-	<string name="poi_pump_powered">Automatisk pumpe</string>
+	<string name="poi_pump_powered">Motordrevet pumpe</string>
 	<string name="poi_pump_no">Ingen pumpe</string>
 
 	<string name="poi_water_characteristic_mineral">Vandkarakteristisk: mineralsk</string>
@@ -1291,7 +1291,7 @@
 	<string name="poi_information_map">Kort</string>
 	<string name="poi_information_office">Informationskontor</string>
 	<string name="poi_information_terminal">Informationsstander</string>
-	<string name="poi_information_route_marker">Rutemarkør</string>
+	<string name="poi_information_route_marker">Ruteskilte</string>
 	<string name="poi_information_hikingmap">Vandrekort</string>
 	<string name="poi_information_nature">Information om natur</string>
 	<string name="poi_information_wildlife">Information om dyreliv</string>
@@ -1307,7 +1307,7 @@
 	<string name="poi_board_type_technology">Information om teknologi</string>
 	<string name="poi_board_type_astronomy">Information om astronomi</string>
 
-<string name="poi_information_trail_blaze">Ruteskilte</string>
+<string name="poi_information_trail_blaze">Stiafmærkning</string>
 	<string name="poi_board_type_notice">Advarseltavle</string>
 	<string name="poi_commercial">Forretningsområde</string>
 	<string name="poi_retail">Detailhandelsområde</string>
