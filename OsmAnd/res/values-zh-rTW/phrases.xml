@@ -1260,4 +1260,21 @@
 	<string name="poi_pump_powered">動力泵浦</string>
 	<string name="poi_pump_no">無泵浦</string>
 
+	<string name="poi_water_characteristic_mineral">水特徵的：礦泉水</string>
+	<string name="poi_water_characteristic_mud">水特徵的：泥漿</string>
+	<string name="poi_water_characteristic_sulfuric">水特徵的：硫酸</string>
+
+	<string name="poi_water_point">供水點</string>
+
+	<string name="poi_cuisine">美食</string>
+
+	<string name="poi_information_guidepost">路標</string>
+	<string name="poi_information_board">資訊板</string>
+	<string name="poi_information_map">地圖</string>
+	<string name="poi_information_office">新聞處</string>
+	<string name="poi_information_trail_blaze">小徑</string>
+	<string name="poi_information_terminal">資訊終端機</string>
+	<string name="poi_information_route_marker">路線標識</string>
+	<string name="poi_information_hikingmap">徒步旅行地圖</string>
+	<string name="poi_information_nature">關於自然的資訊</string>
 	</resources>
