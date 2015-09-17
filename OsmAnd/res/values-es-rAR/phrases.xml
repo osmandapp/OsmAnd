@@ -1299,7 +1299,7 @@
 	<string name="poi_smoking_outside">Permitido fumar en el exterior</string>
 	<string name="poi_smoking_yes">Permitido fumar</string>
 	<string name="poi_smoking_separated">Permitido fumar en habitación separada y sin separación efectiva</string>
-	<string name="poi_smoking_isolated">Permitido fumar en habitación separada físicamente</string>
+	<string name="poi_smoking_isolated">Permitido fumar en una sala aislada físicamente</string>
 	<string name="poi_smoking_dedicated">Solo fumadores</string>
 
 	<string name="poi_toll_no">Peaje sin tarifa</string>
