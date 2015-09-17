@@ -2142,4 +2142,21 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="lang_ka">грузински</string>
 	<string name="lang_iw">иврит</string>
 	<string name="lang_hu">унгарски</string>
+	<string name="lang_ko">корейски</string>
+	<string name="lang_id">индонезийски</string>
+	<string name="lang_hi">хинди</string>
+	<string name="lang_lv">латвийски</string>
+	<string name="lang_lt">литовски</string>
+	<string name="lang_mr">маратхи</string>
+	<string name="lang_no">норвежки</string>
+	<string name="lang_fa">персийски</string>
+	<string name="lang_pl">полски</string>
+	<string name="lang_pt">португалски</string>
+	<string name="lang_sc">сардински</string>
+	<string name="lang_zh_CN">опростен китайски</string>
+	<string name="lang_sk">словашки</string>
+	<string name="lang_sl">словенски</string>
+	<string name="lang_sv">шведски</string>
+	<string name="lang_uk">украински</string>
+	<string name="lang_zh_TW">традиционен китайски</string>
 	</resources>
