@@ -5,11 +5,14 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.res.Resources;
+import android.graphics.PointF;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
+import android.view.GestureDetector;
+import android.view.GestureDetector.OnGestureListener;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
@@ -22,11 +25,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.osmand.PlatformUtil;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.sections.MenuController;
+import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 
 import org.apache.commons.logging.Log;
@@ -56,6 +61,41 @@ public class MapContextMenuFragment extends Fragment {
 	private int menuBottomViewHeight;
 	private int menuFullHeight;
 	private int menuFullHeightMax;
+
+	private class SingleTapConfirm implements OnGestureListener {
+
+		@Override
+		public boolean onDown(MotionEvent e) {
+			return false;
+		}
+
+		@Override
+		public void onShowPress(MotionEvent e) {
+
+		}
+
+		@Override
+		public boolean onSingleTapUp(MotionEvent e) {
+			return true;
+		}
+
+		@Override
+		public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+			return false;
+		}
+
+		@Override
+		public void onLongPress(MotionEvent e) {
+
+		}
+
+		@Override
+		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+			return false;
+		}
+
+
+	}
 
 	@Override
 	public void onAttach(Activity activity) {
@@ -136,9 +176,21 @@ public class MapContextMenuFragment extends Fragment {
 		});
 
 		shadowView = view.findViewById(R.id.context_menu_shadow_view);
+		final GestureDetector singleTapDetector = new GestureDetector(view.getContext(), new SingleTapConfirm());
 		shadowView.setOnTouchListener(new View.OnTouchListener() {
 			public boolean onTouch(View view, MotionEvent event) {
-				dismissMenu();
+
+				if (singleTapDetector.onTouchEvent(event)) {
+					MapActivity mapActivity = getMapActivity();
+					ContextMenuLayer contextMenuLayer = mapActivity.getMapLayers().getContextMenuLayer();
+
+					PointF point = new PointF(event.getX(), event.getY());
+					RotatedTileBox tileBox = mapActivity.getMapView().getCurrentRotatedTileBox();
+					if (!contextMenuLayer.pressedContextMarker(tileBox, point.x, point.y) &&
+							!contextMenuLayer.onSingleTap(point, tileBox)) {
+						dismissMenu();
+					}
+				}
 				return true;
 			}
 		});
