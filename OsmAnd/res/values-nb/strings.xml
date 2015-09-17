@@ -750,7 +750,7 @@
    	<string name="map_widget_top">Statuslinje</string>
 	<string name="map_preferred_locale_descr">Foretrukket språk for påskrifter på kartet (hvis det ikke er tilgjengelig skiftes til engelsk eller til lokale navn)</string>
     <string name="map_preferred_locale">Foretrukket språk på kart</string>
-    <string name="home">Hjem</string>
+    <string name="home">Dashbord</string>
     <string name="rendering_attr_showCycleRoutes_name">Vis sykkelruter</string>
     <string name="show_zoom_buttons_navigation_descr">Vis zoom-knapper under navigering</string>
     <string name="show_zoom_buttons_navigation">Vis zoom-knapper</string>
@@ -866,7 +866,7 @@
     <string name="available_downloads_left">Er tilgjengelig %1$d filer til nedlasting</string>
     <string name="install_paid">Fullversjon</string>
     <string name="clear_destination">Slett reisemål</string>
-    <string name="street_name">Gate</string>
+    <string name="street_name">Gatenavn</string>
 	<string name="choose_osmand_theme">Tema</string>
     <string name="clear_dest_confirm">Er du sikker på at du vil slette reisemålpunktet (og rutepunkter)?</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Fottursymbol-overlegg</string>
@@ -1407,7 +1407,7 @@
 	<string name="successfully_uploaded_pattern">Vellykket lastet opp {0}/{1}</string>
 	<string name="try_again">Prøv igjen</string>
 	<string name="error_message_pattern">Feil: {0}</string>
-	<string name="dahboard_options_dialog_title">Dashbord-alternativer</string>
+	<string name="dahboard_options_dialog_title">Still inn dashbord</string>
 	<string name="shared_string_undo">Angre</string>
 	<string name="shared_string_skip">Hopp over</string>
 	<string name="app_name_osmand">OsmAnd</string>
