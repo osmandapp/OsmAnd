@@ -828,4 +828,12 @@
 	<string name="poi_enforcement_access">Controllu: atzessu</string>
 	<string name="poi_enforcement_toll">Controllu: pedàgiu</string>
 
-</resources>
+<string name="poi_node_networks">Nodu tziclìsticu/ pro escursioniscmu</string>
+		<string name="poi_hiking_routes">Àndalas pro escursionismu</string>
+		<string name="poi_traffic_enforcement">Controllu de su tràficu</string>
+	<string name="poi_transport_construction">Fràigu de mèdios de trasportu</string>
+		<string name="poi_coffee">Tzilleri (cafè)</string>
+	<string name="poi_doors">Ghennas</string>
+	<string name="poi_scuba_diving_shop">Artìculos pro immersiones</string>
+	<string name="poi_energy">Cummèrtziu de energia</string>
+	</resources>
