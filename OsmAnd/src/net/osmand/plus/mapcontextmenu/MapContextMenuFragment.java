@@ -9,6 +9,7 @@ import android.graphics.PointF;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.GestureDetector;
@@ -360,13 +361,7 @@ public class MapContextMenuFragment extends Fragment {
 					light ? R.color.osmand_orange : R.color.osmand_orange_dark));
 		}
 
-		// Text line 1
-		TextView line1 = (TextView) view.findViewById(R.id.context_menu_line1);
-		line1.setText(getCtxMenu().getAddressStr());
-
-		// Text line 2
-		TextView line2 = (TextView) view.findViewById(R.id.context_menu_line2);
-		line2.setText(getCtxMenu().getLocationStr(getMapActivity()));
+		setAddressLocation();
 
 		// Close button
 		final ImageView closeButtonView = (ImageView)view.findViewById(R.id.context_menu_close_btn_view);
@@ -440,6 +435,16 @@ public class MapContextMenuFragment extends Fragment {
 		return view;
 	}
 
+	private void setAddressLocation() {
+		// Text line 1
+		TextView line1 = (TextView) view.findViewById(R.id.context_menu_line1);
+		line1.setText(getCtxMenu().getAddressStr());
+
+		// Text line 2
+		TextView line2 = (TextView) view.findViewById(R.id.context_menu_line2);
+		line2.setText(getCtxMenu().getLocationStr(getMapActivity()));
+	}
+
 	private int getPosY() {
 		int destinationState;
 		int minHalfY;
@@ -506,7 +511,14 @@ public class MapContextMenuFragment extends Fragment {
 	}
 
 	public void dismissMenu() {
-		getActivity().getSupportFragmentManager().popBackStack();
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			activity.getSupportFragmentManager().popBackStack();
+		}
+	}
+
+	public void refreshTitle() {
+		setAddressLocation();
 	}
 
 	public OsmandApplication getMyApplication() {
