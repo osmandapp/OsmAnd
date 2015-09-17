@@ -311,7 +311,7 @@
 	<string name="poi_prosecutor">Прокуратура</string>
 	<string name="poi_pension_fund">Пенсионый фонд</string>
 	<string name="poi_migration">Миграционная служба</string>
-	<string name="poi_tax_inspection">Налоговая</string>
+	<string name="poi_tax_inspection">Налоговая инспекция</string>
 	<string name="poi_office_administrative">Административное учреждение</string>
 	<string name="poi_customs">Таможенный пункт</string>
 
@@ -865,9 +865,10 @@
 	<string name="poi_start_date">Дата начала постройки</string>
 	<string name="poi_wheelchair">Доступно для инвалидных кресел</string>
 	<string name="poi_wholesale">Опт</string>
-	<string name="poi_parking_underground">Подземная</string>
-	<string name="poi_parking_multi_storey">Многоэтажная</string>
+	<string name="poi_parking_underground">Подземный(ая)</string>
+	<string name="poi_parking_multi_storey">Многоэтажный(ая)</string>
 
+	<string name="poi_bicycle_parking_anchors">Закреплённое кольцо</string>
 	<string name="poi_bicycle_parking_stands">Стойка</string>
 	<string name="poi_bicycle_parking_wall_loops">Крепление только для переднего колеса</string>
 	<string name="poi_bicycle_parking_rack">Рама</string>
