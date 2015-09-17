@@ -1315,4 +1315,7 @@
 	<string name="poi_ford_stepping_stones">Puente de piedras</string>
 	<string name="poi_information_board">Tablero de información</string>
 	<string name="poi_toll_hgv_yes">Peaje tarifado para vehículos pesados</string>
-	</resources>
+	<string name="poi_information_trail_blaze">Marcador del camino</string>
+	<string name="poi_rescue_station">Estación de rescate</string>
+
+</resources>
