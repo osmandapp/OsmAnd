@@ -1152,4 +1152,8 @@
 	<string name="poi_smoking_dedicated">Спэцыялізаваная ўстанова для тых, хто паліць</string>
 
 	<string name="poi_toll_yes">Аплата за праезд спаганяецца</string>
-	</resources>
+	<string name="poi_doors">Дзьверы</string>
+	<string name="poi_ford_stepping_stones">Рудыментарны мост з камянёў</string>
+	<string name="poi_services">Зона паслуг, прылеглая да шашы</string>
+
+</resources>
