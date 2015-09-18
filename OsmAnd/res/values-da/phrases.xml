@@ -1364,4 +1364,6 @@
 	<string name="poi_passing_place">Vigeplads</string>
 
 <string name="poi_leisure_common">Fælles rekreativt område</string>
-	</resources>
+	<string name="poi_level">Niveau</string>
+
+</resources>
