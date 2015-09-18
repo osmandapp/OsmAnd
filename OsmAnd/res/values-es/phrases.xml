@@ -1325,4 +1325,24 @@
 
 	<string name="poi_services">Zona de servicio</string>
 
+<string name="poi_paediatrics">Pediatría</string>
+
+	<string name="poi_mini_roundabout">Mini rotonda</string>
+	<string name="poi_railway_crossing">Cruce peatonal de ferrocarril</string>
+	<string name="poi_railway_level_crossing">Cruce de ferrocarril</string>
+	<string name="poi_bird_hide">Puesto de observación de aves</string>
+	<string name="poi_leisure_common">Zona de ocio común</string>
+	<string name="poi_garden">Jardín</string>
+
+	<string name="poi_grass">Hierba</string>
+	<string name="poi_grassland">Prado</string>
+	<string name="poi_scrub">Matorral</string>
+	<string name="poi_farmland">Tierras de cultivos</string>
+	<string name="poi_sand">Arena</string>
+
+	<string name="poi_dead_wood">Madera muerta</string>
+
+	<string name="poi_passing_place">Lugar de paso</string>
+	<string name="poi_level">Nivel</string>
+
 </resources>
