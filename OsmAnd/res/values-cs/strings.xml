@@ -2067,4 +2067,5 @@ s často kladenými otázkami.</string>
     <string name="tag_poi_amenity">občanská vybavenost</string>
 	<string name="opening_at">Otevřeno od</string>
 	<string name="closing_at">Otevřeno do</string>
-	</resources>
+	<string name="count_of_lines">Počet řádků</string>
+</resources>
