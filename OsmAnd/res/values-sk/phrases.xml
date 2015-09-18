@@ -1269,4 +1269,27 @@
 
 <string name="poi_rescue_station">Záchranná stanica</string>
 
+<string name="poi_doors">Dvere</string>
+	<string name="poi_services">Odpočívadlo so službami</string>
+	<string name="poi_mini_roundabout">Malý kruhový objazd</string>
+	<string name="poi_railway_crossing">Železničné priecestie pre peších</string>
+	<string name="poi_railway_level_crossing">Železničné priecestie</string>
+	<string name="poi_bird_hide">Pozorovateľňa vtákov</string>
+	<string name="poi_horse_riding">Jazdectvo</string>
+	<string name="poi_garden">Záhrada</string>
+
+	<string name="poi_heath">Vresovisko</string>
+	<string name="poi_grass">Zatrávnená plocha</string>
+	<string name="poi_grassland">Divoká tráva/step</string>
+	<string name="poi_scrub">Krovie</string>
+	<string name="poi_farmland">Poľnohospodárska pôda</string>
+	<string name="poi_logging">Ťažba dreva</string>
+	<string name="poi_sand">Piesok</string>
+
+	<string name="poi_windfall">Polom vetrom</string>
+	<string name="poi_dead_wood">Mŕtve drevo</string>
+
+	<string name="poi_passing_place">Vyhýbacie miesto</string>
+	<string name="poi_level">Poschodie</string>
+
 </resources>
