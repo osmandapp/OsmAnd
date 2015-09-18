@@ -1341,4 +1341,27 @@
 	<string name="poi_services">Serviceområde</string>
 
 <string name="poi_doors">Døre</string>
+	<string name="poi_paediatrics">Pædiatri</string>
+
+	<string name="poi_mini_roundabout">Mini rundkørsel</string>
+	<string name="poi_railway_crossing">Jernbane fodgængerovergang</string>
+	<string name="poi_railway_level_crossing">Jernbaneoverskæring</string>
+	<string name="poi_bird_hide">Fugleskjul</string>
+	<string name="poi_horse_riding">Ridning</string>
+	<string name="poi_garden">Have</string>
+
+	<string name="poi_heath">Hede</string>
+	<string name="poi_grass">Græs</string>
+	<string name="poi_grassland">Græsareal</string>
+	<string name="poi_scrub">Krat</string>
+	<string name="poi_farmland">Landbrugsjord</string>
+	<string name="poi_logging">Tømmerhugst</string>
+	<string name="poi_sand">Sand</string>
+
+	<string name="poi_windfall">Stormfald</string>
+	<string name="poi_dead_wood">Dødt træ</string>
+
+	<string name="poi_passing_place">Vigeplads</string>
+
+<string name="poi_leisure_common">Fælles rekreativt område</string>
 	</resources>
