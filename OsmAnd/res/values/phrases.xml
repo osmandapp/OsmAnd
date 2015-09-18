@@ -297,7 +297,6 @@
 	<string name="poi_waterway_turning_point">Waterway turning point</string>
 	<string name="poi_weir">Weir</string>
 	<string name="poi_dam">Dam</string>
-	<string name="poi_mill_pond">Mill pond</string>
 	<string name="poi_watermill">Water mill</string>
 	<string name="poi_breakwater">Breakwater</string>
 	<string name="poi_groyne">Groyne</string>
@@ -492,6 +491,7 @@
 	<string name="poi_healthcare_rehabilitation">Rehabilitation</string>
 	<string name="poi_speech_therapist">Speech therapist</string>
 	<string name="poi_healthcare_yes">Medical facility</string>
+	<string name="poi_paediatrics">Paediatrics</string>
 
 	<string name="poi_company">Company</string>
 	<string name="poi_insurance">Insurance</string>
@@ -1307,5 +1307,25 @@
 	<string name="poi_rescue_station">Rescue station</string>
 
 	<string name="poi_services">Service area</string>
+	<string name="poi_mini_roundabout">Mini roundabout</string>
+	<string name="poi_railway_crossing">Railway pedestrian crossing</string>
+	<string name="poi_railway_level_crossing">Level crossing</string>
+	<string name="poi_bird_hide">Bird hide</string>
+	<string name="poi_horse_riding">Horse riding</string>
+	<string name="poi_leisure_common">Common leisure area</string>
+	<string name="poi_garden">Garden</string>
+
+	<string name="poi_heath">Heath</string>
+	<string name="poi_grass">Grass</string>
+	<string name="poi_grassland">Grassland</string>
+	<string name="poi_scrub">Scrub</string>
+	<string name="poi_farmland">Farmland</string>
+	<string name="poi_logging">Logging</string>
+	<string name="poi_sand">Sand</string>
+
+	<string name="poi_windfall">Windfall</string>
+	<string name="poi_dead_wood">Dead wood</string>
+
+	<string name="poi_passing_place">Passing place</string>
 
 </resources>
