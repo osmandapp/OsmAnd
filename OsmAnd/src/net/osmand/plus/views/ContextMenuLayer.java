@@ -200,10 +200,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 
 	public void showMapContextMenuMarker() {
-		if (!showContextMarker) {
-			showContextMarker = true;
-			view.refreshMap();
-		}
+		showContextMarker = true;
+		view.refreshMap();
 	}
 
 	public void hideMapContextMenuMarker() {
@@ -459,6 +457,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 					selectedObj = selectedObjects.keySet().iterator().next();
 					contextObject = selectedObjects.get(selectedObj);
 					showMapContextMenu(latLon);
+					return true;
 				} else if (selectedObjects.size() > 1) {
 					showContextMenuForSelectedObjects(latLon);
 					return true;

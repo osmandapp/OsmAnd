@@ -95,6 +95,7 @@
 	<string name="poi_bedding">Bedding store</string>
 	<string name="poi_dive">Diving equipment</string>
 	<string name="poi_doityourself">Home improvement store</string>
+	<string name="poi_doors">Doors</string>
 	<string name="poi_erotic">Erotic shop</string>
 	<string name="poi_fashion">Fashion shop</string>
 	<string name="poi_fishing">Fishing tackle</string>
@@ -181,6 +182,7 @@
 	<string name="poi_emergency_access_point">Emergency access point</string>
 
 	<string name="poi_ford">Ford</string>
+	<string name="poi_ford_stepping_stones">Step-stone bridge</string>
 	<string name="poi_mountain_pass_yes">Mountain pass</string>
 	<string name="poi_gate">Gate</string>
 	<string name="poi_city_wall">City wall</string>
@@ -295,7 +297,6 @@
 	<string name="poi_waterway_turning_point">Waterway turning point</string>
 	<string name="poi_weir">Weir</string>
 	<string name="poi_dam">Dam</string>
-	<string name="poi_mill_pond">Mill pond</string>
 	<string name="poi_watermill">Water mill</string>
 	<string name="poi_breakwater">Breakwater</string>
 	<string name="poi_groyne">Groyne</string>
@@ -490,6 +491,7 @@
 	<string name="poi_healthcare_rehabilitation">Rehabilitation</string>
 	<string name="poi_speech_therapist">Speech therapist</string>
 	<string name="poi_healthcare_yes">Medical facility</string>
+	<string name="poi_paediatrics">Paediatrics</string>
 
 	<string name="poi_company">Company</string>
 	<string name="poi_insurance">Insurance</string>
@@ -1157,6 +1159,7 @@
 	<string name="poi_parking_underground">Underground</string>
 	<string name="poi_parking_multi_storey">Multi-storey</string>
 
+	<string name="poi_bicycle_parking_anchors">Anchors</string>
 	<string name="poi_bicycle_parking_stands">Stands</string>
 	<string name="poi_bicycle_parking_wall_loops">Wall loops</string>
 	<string name="poi_bicycle_parking_rack">Rack</string>
@@ -1252,5 +1255,78 @@
 	<string name="poi_water_point">Water point</string>
 
 	<string name="poi_cuisine">Cuisine</string>
+
+	<string name="poi_information_guidepost">Guidepost</string>
+	<string name="poi_information_board">Information board</string>
+	<string name="poi_information_map">Map</string>
+	<string name="poi_information_office">Information office</string>
+	<string name="poi_information_trail_blaze">Trail blaze</string>
+	<string name="poi_information_terminal">Information terminal</string>
+	<string name="poi_information_route_marker">Route marker</string>
+	<string name="poi_information_hikingmap">Hiking map</string>
+	<string name="poi_information_nature">Information about nature</string>
+	<string name="poi_information_wildlife">Information about wild life</string>
+	<string name="poi_information_history">Information about history</string>
+	<string name="poi_information_sign">Sign</string>
+	<string name="poi_information_audioguide">Audioguide</string>
+	<string name="poi_information_bicyclemap">Bicycle map</string>
+	<string name="poi_information_tactile_model">Tactile model</string>
+	<string name="poi_information_tactile_map">Tactile map</string>
+	<string name="poi_board_type_notice">Board with notice</string>
+	<string name="poi_board_type_plants">Information about plants</string>
+	<string name="poi_board_type_geology">Information about geology</string>
+	<string name="poi_board_type_public_transport">Information about public transport</string>
+	<string name="poi_board_type_technology">Information about technology</string>
+	<string name="poi_board_type_astronomy">Information about astronomy</string>
+
+	<string name="poi_commercial">Commercial landuse</string>
+	<string name="poi_retail">Retail landuse</string>
+
+	<string name="poi_fireplace_yes">Fireplace</string>
+	<string name="poi_fireplace_no">No fireplace</string>
+
+	<string name="poi_covered_yes">With shelter</string>
+	<string name="poi_covered_no">Without shelter</string>
+
+	<string name="poi_smoking_no">No smoking</string>
+	<string name="poi_smoking_outside">Smoking is allowed outside only</string>
+	<string name="poi_smoking_yes">Smoking is allowed</string>
+	<string name="poi_smoking_separated">Smoking is allowed in a separate room without effective separation</string>
+	<string name="poi_smoking_isolated">Smoking is allowed in a separate room with effective separation</string>
+	<string name="poi_smoking_dedicated">Dedicated to smokers</string>
+
+	<string name="poi_toll_yes">Payment of tolls is charged</string>
+	<string name="poi_toll_no">Payment of tolls is not charged</string>
+	<string name="poi_toll_hgv_yes">Payment of tolls is charged for HGV</string>
+	<string name="poi_tactile_paving_yes">With tactile paving</string>
+	<string name="poi_tactile_paving_no">Without tactile paving</string>
+	<string name="poi_traffic_signals_sound_yes">With sound</string>
+	<string name="poi_traffic_signals_sound_no">Without sound</string>
+	<string name="poi_traffic_signals_sound_walk">With sound only when walking is allowed</string>
+
+	<string name="poi_rescue_station">Rescue station</string>
+
+	<string name="poi_services">Service area</string>
+	<string name="poi_mini_roundabout">Mini roundabout</string>
+	<string name="poi_railway_crossing">Railway pedestrian crossing</string>
+	<string name="poi_railway_level_crossing">Level crossing</string>
+	<string name="poi_bird_hide">Bird hide</string>
+	<string name="poi_horse_riding">Horse riding</string>
+	<string name="poi_leisure_common">Common leisure area</string>
+	<string name="poi_garden">Garden</string>
+
+	<string name="poi_heath">Heath</string>
+	<string name="poi_grass">Grass</string>
+	<string name="poi_grassland">Grassland</string>
+	<string name="poi_scrub">Scrub</string>
+	<string name="poi_farmland">Farmland</string>
+	<string name="poi_logging">Logging</string>
+	<string name="poi_sand">Sand</string>
+
+	<string name="poi_windfall">Windfall</string>
+	<string name="poi_dead_wood">Dead wood</string>
+
+	<string name="poi_passing_place">Passing place</string>
+	<string name="poi_level">Level</string>
 
 </resources>

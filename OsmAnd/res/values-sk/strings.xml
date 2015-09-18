@@ -436,8 +436,8 @@
 \n\n\t* Zelená - indikuje, že súbor je aktuálny (na serveri rovnaký ako v zariadení)
 \n\t* Modrá - indikuje, že pre súbor existuje aktualizácia na serveri
 \n\t* Súbory šikmým písmom sú v zariadení deaktivované "</string>
-  <string name="level_to_switch_vector_raster_descr">Max. úroveň priblíženia použitá pri vektorovom vykresľovaní a nie rastrovom</string>
-  <string name="level_to_switch_vector_raster">Úroveň vektorového zoomu</string>
+  <string name="level_to_switch_vector_raster_descr">Min. úroveň priblíženia pre použitie vektorových máp</string>
+  <string name="level_to_switch_vector_raster">Min. úroveň vektorového zoomu</string>
   <string name="tip_day_night_mode">Denný/Nočný režim</string>
   
   <string name="tip_location_sharing">Zdieľanie umiestnenia</string>
@@ -548,8 +548,8 @@
   <string name="install_selected_build">Naozaj chcete nainštalovať OsmAnd - {0} z {1} {2} MB?</string>
   <string name="loading_builds_failed">Prijímanie zoznamu zostáv OsmAndu zlyhalo</string>
   <string name="loading_builds">Načítavajú sa zostavy OsmAndu…</string>
-  <string name="select_build_to_install">Vyberte jednu zo zostáv OsmAndu na nainštalovanie</string>
-  <string name="contribution_activity">Špeciálna aktivita pre kontribútorskú verziu</string>
+  <string name="select_build_to_install">Vyberte zostavu OsmAndu na nainštalovanie</string>
+  <string name="contribution_activity">Nainštalovať verziu</string>
   <string name="gps_status_app_not_found">Aplikácia pre stav GPS nie je nainštalovaná. Nájsť ju v Obchode?</string>
   <string name="voice_is_not_available_msg">"Hlasové navigovanie nie je dostupné, prosím choďte do Nastavenia → \'Všeobecné\' → \'Hlasové povely\'  a zvoľte alebo stiahnite balík hlasových povelov."</string>
   <string name="voice_is_not_available_title">Hlasové údaje nie sú určené</string>
@@ -729,7 +729,7 @@
   <string name="search_offline_address">Offline hľadanie</string>
   <string name="search_online_address">Online hľadanie</string>
   <string name="max_level_download_tile">Max. online úroveň priblíženia</string>
-  <string name="max_level_download_tile_descr">Výber maximálnej úrovne priblíženia na stiahnutie</string>
+  <string name="max_level_download_tile_descr">Výber maximálnej úrovne priblíženia na stiahnutie online dlaždíc</string>
   <string name="route_general_information">Celková vzdialenosť %1$s, čas cestovania %2$d h %3$d m.</string>
   <string name="router_service_descr">Výber online alebo offline navigačnej služby</string>
   <string name="router_service">Navigačná služba</string>
@@ -1029,7 +1029,7 @@
 <string name="map_widget_renderer">Štýl vykresľovania</string>
 <string name="osmand_short_description_80_chars">OsmAnd je open source navigácia s offline aj online mapami</string>
 <string name="osmand_plus_short_description_80_chars">OsmAnd je open source navigácia s offline aj online mapami</string>
-<string name="rendering_attr_contourLines_description">Výber minimálneho priblíženia na zobrazenie na mape, ak sú dostupné. Môže byť vyžadovaný oddelený SRTM súbor:</string>
+<string name="rendering_attr_contourLines_description">Zobraziť od úrovne priblíženia (vyžaduje dátový súbor vrstevníc):</string>
   <string name="osmand_long_description_1000_chars">" OsmAnd (OSM Automatizované navigačné pokyny) OsmAnd je open source navigačná aplikácia s prístupom k širokej škále globálnych dát OpenStreetMap (OSM). Všetky mapové podklady (vektorové alebo dlaždice máp) môžu byť uložené na karte pamäti telefónu pre offline použitie. OsmAnd tiež ponúka offline a online smerovacie funkcie, vrátane turn-by-turn hlasových pokynov. Niektoré z hlavných funkcií: - Kompletné funkcie v režime offline (uloženie stiahnutých vektorových alebo dlaždicových máp v úložisku zariadenia) - Kompaktné offline vektorové mapy pre celý svet - Stiahnutie máp pre krajinu alebo región priamo z aplikácie - Možné prekrytia niekoľkých mapových vrstiev ako GPX alebo navigačná trasa, body záujmu, obľúbené, vrstevnice, zastávky hromadnej dopravy, ďalšie mapy s prispôsobiteľnou priehľadnosťou - Offline vyhľadávanie adries a miest (POI) - Offline smerovania pre krátke vzdialenosti (experimentálne) - Režimy pre auto, bicykel, a peší režim s: - voliteľným/automatickým denným / nočným režimom - voliteľné približovanie mapy v závislosti na rýchlosti - voliteľné otáčanie mapy podľa kompasu alebo smeru pohybu - voliteľne navádzanie do jazdných pruhov, zobrazenie obmedzenia rýchlosti, nahrané a TTS hlasy Obmedzenia tejto voľnej verzie OsmAndu: - Počet stiahnutí máp je obmedzený - Žiadny prístup k POI offline Wikipédii OsmAnd je aktívne vyvíjaný a náš projekt a jeho ďalší pokrok závisí od finančných príspevkov na financovanie rozvoja a testovanie nových funkcii. Prosím, zvážte nákup OsmAnd+, alebo financovanie konkrétnych nových funkcií (bidforfix) alebo všeobecný dar. Viac na www.osmand.net. "</string>
 	<string name="osmand_plus_long_description_1000_chars">" OsmAnd+ (OSM Automatizované navigačné pokyny) OsmAnd+ je open source navigačná aplikácia s prístupom k širokej škále globálnych dát OpenStreetMap (OSM). Všetky mapové podklady (vektorové alebo dlaždice máp) môžu byť uložené na karte pamäti telefónu pre offline použitie. OsmAnd tiež ponúka offline a online smerovacie funkcie, vrátane turn-by-turn hlasových pokynov. OsmAnd+ je platená verzia aplikácie. Jej zakúpením podporíte projekt, vývoj nových funkcií a získate najnovšie aktualizácie. Niektoré z hlavných funkcií: - Kompletné funkcie v režime offline (uloženie stiahnutých vektorových alebo dlaždicových máp v úložisku zariadenia) - Kompaktné offline vektorové mapy pre celý svet - Neobmedzené sťahovanie máp pre krajinu alebo región priamo z aplikácie - Možné prekrytia niekoľkých mapových vrstiev ako GPX alebo navigačná trasa, body záujmu, obľúbené, vrstevnice, zastávky hromadnej dopravy, ďalšie mapy s prispôsobiteľnou priehľadnosťou - Offline vyhľadávanie adries a miest (POI) - Offline smerovanie pre krátke vzdialenosti (experimentálne) - Režimy pre auto, bicykel, a peší režim s: - voliteľným/automatickým denným / nočným režimom - voliteľné približovanie mapy v závislosti na rýchlosti - voliteľné otáčanie mapy podľa kompasu alebo smeru pohybu - voliteľne navádzanie do jazdných pruhov, zobrazenie obmedzenia rýchlosti, nahrané a TTS hlasy "</string>
 	<string name="tip_rotation_switching_t_v2">Môžete prepínať, či a ako sa zobrazenie mapy otáča tým, že opakovane kliknete na ikonu kompasu v obrazovke mapy.
@@ -1084,7 +1084,7 @@
     <string name="map_widget_max_speed">Obmedzenie rýchlosti</string>
     <string name="monitoring_control_start">GPX</string>
     <string name="rendering_attr_noAdminboundaries_name">Skryť hranice</string>
-	<string name="rendering_attr_noAdminboundaries_description">Potlačiť zobrazenie regionálnej hranice (admin úrovne 5-9)</string>
+	<string name="rendering_attr_noAdminboundaries_description">Potlačiť zobrazenie regionálnej hranice (administratívne úrovne 5 až 9)</string>
 	<string name="tip_altitude_offset">Korekcia nadmorskej výšky</string>
 	<string name="tip_altitude_offset_t">Väčšina GPS zariadení meria nadmorskú výšku podľa referenčného systému WGS84, z ktorého prepočet na lokálne používaný systém vyžaduje korekcie voči aktuálnej polohe.
 		\n\nNa lepšie aproximácie týchto miestnych systémov sa používa referenčný systém EGM96.
@@ -1807,7 +1807,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="lang_sw">Svahilsky (Kiswahili)</string>
     <string name="lang_he">Hebrejsky (עִבְרִית)</string>
     <string name="forward">Dopredu</string>
-    <string name="home">Domov</string>
+    <string name="home">Úvodný panel</string>
     <string name="live_monitoring_m_descr">Odosielať stopovacie údaje určenej webovej službe ak je zaznamenávanie GPX zapnuté.</string>
 	<string name="live_monitoring_m">Online stopovanie (potrebné GPX)</string>
     <string name="live_monitoring_start">Zapnúť online stopovanie</string>
@@ -2252,7 +2252,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="error_message_pattern">Chyba: {0}</string>
 <string name="traffic_warning_hazard">Nebezpečenstvo</string>
     <string name="rendering_value_boldOutline_name">Hrubý obrys</string>
-    <string name="dahboard_options_dialog_title">Nastavenia úvodného panela</string>
+    <string name="dahboard_options_dialog_title">Nastaviť úvodný panel</string>
 	<string name="shared_string_card_was_hidden">Karta bola skrytá</string>
 	<string name="shared_string_undo">KROK SPÄŤ</string>
 	<string name="shared_string_skip">Preskočiť</string>

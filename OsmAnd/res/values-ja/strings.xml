@@ -156,10 +156,8 @@
      <string name="poi_filter_fuel">燃料(Fuel)</string>
      <string name="poi_filter_namefinder">オンラインNameFinder</string>
      <string name="reading_cached_tiles">キャッシュ済タイル読み込み中…</string>
-     <string name="version_index_is_big_for_memory">索引
-\'\'{0}\'\' はメモリ内に格納できませんでした</string>
-     <string name="version_index_is_not_supported">索引 \'\'{0}\'\' のバージョンは
-サポートされていません</string>
+     <string name="version_index_is_big_for_memory">\'\'{0}\'\' の項目はメモリ内に格納できませんでした</string>
+     <string name="version_index_is_not_supported">\'\'{0}\'\' は、このバージョンではサポートされていません</string>
 
      <string name="use_osmand_routing_service">OsmAnd 経路案内 &gt;20km</string>
      <string name="use_osmand_routing_service_descr">長距離のオフライン経路案内に OsmAndを使用します(実験版)</string>
@@ -783,7 +781,7 @@ POIの更新は利用できません</string>
     <string name="clear_dest_confirm">本当に目的地(とその経由地点)を削除しますか？</string>
     <string name="precise_routing_mode_descr">グリッチ無しの正確なルート計算を有効化します。現段階では距離が限定されて尚且つ遅いです。</string>
     <string name="precise_routing_mode">正確なルーティング(アルファ)</string>
-    <string name="recording_context_menu_show">表示に関する設定</string>
+    <string name="recording_context_menu_show">表示</string>
     <string name="recording_photo_description">写真 %1$s %2$s</string>
     <string name="av_def_action_picture">写真を撮影</string>
     <string name="recording_context_menu_precord">写真を撮影</string>
@@ -1857,7 +1855,7 @@ POIの更新は利用できません</string>
     <string name="map_widget_top">ステータスバー</string>
 	<string name="map_widget_right">右パネル</string>
 	<string name="map_widget_left">左パネル</string>
-    <string name="shared_string_show">表示</string>
+    <string name="shared_string_show">表示に関する設定</string>
 	<string name="configure_map">マップ設定</string>
     <string name="search_radius_proximity">付近に</string>
     <string name="osmo_device_not_found">デバイスが見つかりません</string>
@@ -2145,7 +2143,7 @@ POIの更新は利用できません</string>
 	<string name="description">説明</string>
 	<string name="add_opening_hours">開店時間を追記</string>
 	<string name="poi_dialog_poi_type">POIの種類</string>
-	<string name="number_of_rows_in_dash">ダッシュボード内の表示行数 %1$s</string>
+	<string name="number_of_rows_in_dash">ダッシュボードでの表示数： %1$s</string>
 	<string name="please_specify_poi_type">POIの種類を指定してください。</string>
 	<string name="working_days">営業日</string>
 	<string name="recent_places">最近表示した場所</string>
@@ -2153,4 +2151,6 @@ POIの更新は利用できません</string>
 	<string name="saved_at_time">正常に保存されました: %1$s</string>
 	<string name="poi_deleted_localy">POIをアップロードすると変更前の情報は削除されます</string>
 	<string name="show_gpx">GPXを表示</string>
-</resources>
+<string name="tab_title_basic">基本</string>
+	<string name="tab_title_advanced">拡張</string>
+	</resources>

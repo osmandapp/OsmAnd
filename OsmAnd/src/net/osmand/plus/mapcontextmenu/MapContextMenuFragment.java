@@ -5,11 +5,15 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.res.Resources;
+import android.graphics.PointF;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
+import android.view.GestureDetector;
+import android.view.GestureDetector.OnGestureListener;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
@@ -22,11 +26,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.osmand.PlatformUtil;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.sections.MenuController;
+import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 
 import org.apache.commons.logging.Log;
@@ -56,6 +62,41 @@ public class MapContextMenuFragment extends Fragment {
 	private int menuBottomViewHeight;
 	private int menuFullHeight;
 	private int menuFullHeightMax;
+
+	private class SingleTapConfirm implements OnGestureListener {
+
+		@Override
+		public boolean onDown(MotionEvent e) {
+			return false;
+		}
+
+		@Override
+		public void onShowPress(MotionEvent e) {
+
+		}
+
+		@Override
+		public boolean onSingleTapUp(MotionEvent e) {
+			return true;
+		}
+
+		@Override
+		public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+			return false;
+		}
+
+		@Override
+		public void onLongPress(MotionEvent e) {
+
+		}
+
+		@Override
+		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+			return false;
+		}
+
+
+	}
 
 	@Override
 	public void onAttach(Activity activity) {
@@ -136,9 +177,21 @@ public class MapContextMenuFragment extends Fragment {
 		});
 
 		shadowView = view.findViewById(R.id.context_menu_shadow_view);
+		final GestureDetector singleTapDetector = new GestureDetector(view.getContext(), new SingleTapConfirm());
 		shadowView.setOnTouchListener(new View.OnTouchListener() {
 			public boolean onTouch(View view, MotionEvent event) {
-				dismissMenu();
+
+				if (singleTapDetector.onTouchEvent(event)) {
+					MapActivity mapActivity = getMapActivity();
+					ContextMenuLayer contextMenuLayer = mapActivity.getMapLayers().getContextMenuLayer();
+
+					PointF point = new PointF(event.getX(), event.getY());
+					RotatedTileBox tileBox = mapActivity.getMapView().getCurrentRotatedTileBox();
+					if (!contextMenuLayer.pressedContextMarker(tileBox, point.x, point.y) &&
+							!contextMenuLayer.onSingleTap(point, tileBox)) {
+						dismissMenu();
+					}
+				}
 				return true;
 			}
 		});
@@ -184,7 +237,7 @@ public class MapContextMenuFragment extends Fragment {
 						lastTouchDown = System.currentTimeMillis();
 
 						dy = event.getY();
-						dyMain = mainView.getY();
+						dyMain = getViewY();
 						velocity = VelocityTracker.obtain();
 						velocityX = 0;
 						velocityY = 0;
@@ -194,14 +247,16 @@ public class MapContextMenuFragment extends Fragment {
 
 					case MotionEvent.ACTION_MOVE:
 						float y = event.getY();
-						float newY = mainView.getY() + (y - dy);
-						mainView.setY((int)newY);
+						float newY = getViewY() + (y - dy);
+						setViewY((int) newY);
 
 						menuFullHeight = view.getHeight() - (int) newY + 10;
-						ViewGroup.LayoutParams lp = mainView.getLayoutParams();
-						lp.height = Math.max(menuFullHeight, menuTitleHeight);
-						mainView.setLayoutParams(lp);
-						mainView.requestLayout();
+						if (!oldAndroid()) {
+							ViewGroup.LayoutParams lp = mainView.getLayoutParams();
+							lp.height = Math.max(menuFullHeight, menuTitleHeight);
+							mainView.setLayoutParams(lp);
+							mainView.requestLayout();
+						}
 
 						velocity.addMovement(event);
 						velocity.computeCurrentVelocity(1000);
@@ -217,8 +272,10 @@ public class MapContextMenuFragment extends Fragment {
 						float endX = event.getX();
 						float endY = event.getY();
 
-						slidingUp = Math.abs(maxVelocityY) > 500 && (mainView.getY() - dyMain) < -50;
-						slidingDown = Math.abs(maxVelocityY) > 500 && (mainView.getY() - dyMain) > 50;
+						int currentY = getViewY();
+
+						slidingUp = Math.abs(maxVelocityY) > 500 && (currentY - dyMain) < -50;
+						slidingDown = Math.abs(maxVelocityY) > 500 && (currentY - dyMain) > 50;
 
 						velocity.recycle();
 
@@ -232,27 +289,32 @@ public class MapContextMenuFragment extends Fragment {
 
 						final int posY = getPosY();
 
-						if (mainView.getY() != posY) {
+						if (currentY != posY) {
 
-							if (posY < mainView.getY()) {
+							if (posY < getViewY()) {
 								updateMainViewLayout(posY);
 							}
 
-							mainView.animate().y(posY)
-									.setDuration(200)
-									.setInterpolator(new DecelerateInterpolator())
-									.setListener(new AnimatorListenerAdapter() {
-										@Override
-										public void onAnimationCancel(Animator animation) {
-											updateMainViewLayout(posY);
-										}
+							if (!oldAndroid()) {
+								mainView.animate().y(posY)
+										.setDuration(200)
+										.setInterpolator(new DecelerateInterpolator())
+										.setListener(new AnimatorListenerAdapter() {
+											@Override
+											public void onAnimationCancel(Animator animation) {
+												updateMainViewLayout(posY);
+											}
 
-										@Override
-										public void onAnimationEnd(Animator animation) {
-											updateMainViewLayout(posY);
-										}
-									})
-									.start();
+											@Override
+											public void onAnimationEnd(Animator animation) {
+												updateMainViewLayout(posY);
+											}
+										})
+										.start();
+							} else {
+								setViewY(posY);
+								updateMainViewLayout(posY);
+							}
 						}
 
 						// OnClick event
@@ -299,13 +361,7 @@ public class MapContextMenuFragment extends Fragment {
 					light ? R.color.osmand_orange : R.color.osmand_orange_dark));
 		}
 
-		// Text line 1
-		TextView line1 = (TextView) view.findViewById(R.id.context_menu_line1);
-		line1.setText(getCtxMenu().getAddressStr());
-
-		// Text line 2
-		TextView line2 = (TextView) view.findViewById(R.id.context_menu_line2);
-		line2.setText(getCtxMenu().getLocationStr(getMapActivity()));
+		setAddressLocation();
 
 		// Close button
 		final ImageView closeButtonView = (ImageView)view.findViewById(R.id.context_menu_close_btn_view);
@@ -379,6 +435,16 @@ public class MapContextMenuFragment extends Fragment {
 		return view;
 	}
 
+	private void setAddressLocation() {
+		// Text line 1
+		TextView line1 = (TextView) view.findViewById(R.id.context_menu_line1);
+		line1.setText(getCtxMenu().getAddressStr());
+
+		// Text line 2
+		TextView line2 = (TextView) view.findViewById(R.id.context_menu_line2);
+		line2.setText(getCtxMenu().getLocationStr(getMapActivity()));
+	}
+
 	private int getPosY() {
 		int destinationState;
 		int minHalfY;
@@ -409,22 +475,50 @@ public class MapContextMenuFragment extends Fragment {
 	}
 
 	private void updateMainViewLayout(int posY) {
-		ViewGroup.LayoutParams lp;
 		menuFullHeight = view.getHeight() - posY;
-		lp = mainView.getLayoutParams();
-		lp.height = Math.max(menuFullHeight, menuTitleHeight);
-		mainView.setLayoutParams(lp);
-		mainView.requestLayout();
+		if (!oldAndroid()) {
+			ViewGroup.LayoutParams lp = mainView.getLayoutParams();
+			lp.height = Math.max(menuFullHeight, menuTitleHeight);
+			mainView.setLayoutParams(lp);
+			mainView.requestLayout();
+		}
+	}
+
+	private int getViewY() {
+		if (!oldAndroid()) {
+			return (int)mainView.getY();
+		} else {
+			return mainView.getPaddingTop();
+		}
+	}
+
+	private void setViewY(int y) {
+		if (!oldAndroid()) {
+			mainView.setY(y);
+		} else {
+			mainView.setPadding(0, y, 0, 0);
+		}
+	}
+
+	private boolean oldAndroid() {
+		return (Build.VERSION.SDK_INT < Build.VERSION_CODES.ICE_CREAM_SANDWICH);
 	}
 
 	private void doLayoutMenu() {
 		final int posY = getPosY();
-		mainView.setY(posY);
+		setViewY(posY);
 		updateMainViewLayout(posY);
 	}
 
 	public void dismissMenu() {
-		getActivity().getSupportFragmentManager().popBackStack();
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			activity.getSupportFragmentManager().popBackStack();
+		}
+	}
+
+	public void refreshTitle() {
+		setAddressLocation();
 	}
 
 	public OsmandApplication getMyApplication() {

@@ -1707,7 +1707,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="live_monitoring_stop">Ferma il tracciamento online</string>
 	<string name="gpx_monitoring_start">Avvia la registrazione GPX</string>
 	<string name="gpx_monitoring_stop">Ferma la registrazione GPX</string>
-    <string name="gpx_start_new_segment">Avvia un nuovo segmento</string>
+    <string name="gpx_start_new_segment">Inizia un nuovo segmento</string>
     <string name="lang_fa">Persiano</string>
 	<string name="lang_he">Ebraico</string>
     <string name="keep_navigation_service">Mantieni</string>

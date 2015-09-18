@@ -1550,7 +1550,7 @@
     <string name="lang_sw">Svahili</string>
     <string name="lang_he">Hebrejščina</string>
     <string name="forward">Naprej</string>
-    <string name="home">Začetni zaslon</string>
+    <string name="home">Nadzorna plošča</string>
     <string name="live_monitoring_m_descr">Pošlji podatke sledenja na določeno spletno storitev, če je beleženje GPX omogočeno.</string>
 	<string name="live_monitoring_m">Sledenje v živo (zahteva GPX)</string>
     <string name="live_monitoring_start">Začni sledenje v živo</string>
@@ -1947,7 +1947,7 @@
 	<string name="try_again">Poskusi znova</string>
 	<string name="error_message_pattern">Napaka: {0}</string>
 <string name="plugin_settings">Vstavki</string>
-	<string name="dahboard_options_dialog_title">Možnosti nadzorne plošče</string>
+	<string name="dahboard_options_dialog_title">Nastavitev nadzorne plošče</string>
 	<string name="shared_string_card_was_hidden">Kartica je bila skrita</string>
 	<string name="shared_string_undo">Razveljavi</string>
 	<string name="shared_string_skip">Preskoči</string>

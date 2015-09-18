@@ -1259,8 +1259,8 @@
     <string name="clear_intermediate_points">Neteja els punts intermitjos</string>
     <string name="keep_intermediate_points">Conserva els punts intermitjos</string>
     <string name="new_directions_point_dialog">Ja teniu punts intermitjos.</string>
-    <string name="context_menu_item_directions_to">Direccions a</string>
-    <string name="context_menu_item_directions_from">Direccions des de</string>
+    <string name="context_menu_item_directions_to">Indicacions a</string>
+    <string name="context_menu_item_directions_from">Indicacions des de</string>
     <string name="route_descr_map_location">Mapa: </string>
     <string name="route_to">A:</string>
     <string name="route_via">Via:</string>
@@ -1702,7 +1702,7 @@
     <string name="lang_sw">Suahili</string>
     <string name="lang_he">Hebreu</string>
     <string name="forward">Endavant</string>
-    <string name="home">Punt inicial</string>
+    <string name="home">Tauler</string>
     <string name="live_monitoring_m_descr">Envia el registre de la traça a un servei web específic si s\'ha activat la gravació en un GPX.</string>
 	<string name="live_monitoring_m">Registre de traça en línia (cal GPX)</string>
     <string name="live_monitoring_start">Inicia un registre de traça en línia</string>
@@ -2087,7 +2087,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="we_really_care_about_your_opinion">Valorem molt la vostra opinió i ens és important disposar dels vostres comentaris.</string>
 	<string name="rendering_value_boldOutline_name">Contorn destacat</string>
     <string name="traffic_warning_hazard">Perill informat</string>
-    <string name="dahboard_options_dialog_title">Opcions del tauler</string>
+    <string name="dahboard_options_dialog_title">Configura el tauler</string>
 	<string name="shared_string_card_was_hidden">La tarja era amagada</string>
 	<string name="shared_string_undo">Desfés</string>
 	<string name="shared_string_skip">Omet</string>

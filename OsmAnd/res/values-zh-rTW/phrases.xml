@@ -1221,4 +1221,92 @@
 
 	<string name="poi_cooling_tower">冷卻塔</string>
 	<string name="poi_lighting_tower">照明架塔</string>
+	<string name="poi_species">種類</string>
+	<string name="poi_genus">種屬</string>
+	<string name="poi_taxon">分類</string>
+
+	<string name="poi_urban">城市</string>
+	<string name="poi_rural">農村</string>
+
+	<string name="poi_seats">座位</string>
+	<string name="poi_backrest_yes">靠背：是的</string>
+	<string name="poi_backrest_no">靠背：沒有</string>
+
+	<string name="poi_intermittent">間歇性</string>
+
+	<string name="poi_deadlock">鎖住</string>
+
+	<string name="poi_generator_source_coal">能源：煤炭</string>
+	<string name="poi_generator_source_gas">能源：瓦斯</string>
+	<string name="poi_generator_source_nuclear">能源：核能</string>
+	<string name="poi_generator_source_solar">能源：太陽能</string>
+	<string name="poi_generator_source_hydro">能源：水力</string>
+	<string name="poi_generator_source_wind">能源：風力</string>
+	<string name="poi_generator_source_geothermal">能源：地熱</string>
+	<string name="poi_generator_source_oil">能源：石油</string>
+	<string name="poi_generator_source_diesel">能源：柴油</string>
+
+	<string name="poi_car_wash_self_service">自助服務</string>
+
+	<string name="poi_ford_stepping_stones">踏石橋</string>
+	<string name="poi_int_name">國際名稱</string>
+	<string name="poi_nat_name">國家名稱</string>
+	<string name="poi_reg_name">地區名稱</string>
+	<string name="poi_loc_name">在地名稱</string>
+	<string name="poi_old_name">舊名稱</string>
+	<string name="poi_alt_name">替代名稱</string>
+
+	<string name="poi_pump_manual">手動泵浦</string>
+	<string name="poi_pump_powered">動力泵浦</string>
+	<string name="poi_pump_no">無泵浦</string>
+
+	<string name="poi_water_characteristic_mineral">水特徵的：礦泉水</string>
+	<string name="poi_water_characteristic_mud">水特徵的：泥漿</string>
+	<string name="poi_water_characteristic_sulfuric">水特徵的：硫酸</string>
+
+	<string name="poi_water_point">供水點</string>
+
+	<string name="poi_cuisine">美食</string>
+
+	<string name="poi_information_guidepost">路標</string>
+	<string name="poi_information_board">資訊板</string>
+	<string name="poi_information_map">地圖</string>
+	<string name="poi_information_office">新聞處</string>
+	<string name="poi_information_trail_blaze">小徑</string>
+	<string name="poi_information_terminal">資訊終端機</string>
+	<string name="poi_information_route_marker">路線標識</string>
+	<string name="poi_information_hikingmap">徒步旅行地圖</string>
+	<string name="poi_information_nature">關於自然的資訊</string>
+	<string name="poi_doors">門</string>
+	<string name="poi_bicycle_parking_anchors">錨泊點</string>
+	<string name="poi_information_wildlife">有關野生動物的資訊</string>
+	<string name="poi_information_history">關於歷史的資訊</string>
+	<string name="poi_information_sign">標誌</string>
+	<string name="poi_information_audioguide">導覽機</string>
+	<string name="poi_information_bicyclemap">自行車地圖</string>
+	<string name="poi_information_tactile_model">觸摸模式</string>
+	<string name="poi_information_tactile_map">觸摸地圖</string>
+	<string name="poi_board_type_notice">布告板</string>
+	<string name="poi_board_type_plants">關於植物的資訊</string>
+	<string name="poi_board_type_geology">關於地質資訊</string>
+	<string name="poi_board_type_public_transport">有關公共交通工具的資訊</string>
+	<string name="poi_board_type_technology">有關技術的資訊</string>
+	<string name="poi_board_type_astronomy">關於天文資訊</string>
+
+	<string name="poi_commercial">商業的土地利用</string>
+	<string name="poi_retail">零售的土地利用</string>
+
+	<string name="poi_fireplace_yes">壁爐</string>
+	<string name="poi_fireplace_no">沒有壁爐</string>
+
+	<string name="poi_covered_yes">有涼亭</string>
+	<string name="poi_covered_no">無涼亭</string>
+
+	<string name="poi_smoking_no">禁止吸煙</string>
+	<string name="poi_smoking_outside">只有外面允許吸煙</string>
+	<string name="poi_smoking_yes">允許吸煙</string>
+	<string name="poi_smoking_dedicated">吸煙者專用</string>
+
+	<string name="poi_tactile_paving_yes">有導盲磚</string>
+	<string name="poi_tactile_paving_no">無導盲磚</string>
 	</resources>

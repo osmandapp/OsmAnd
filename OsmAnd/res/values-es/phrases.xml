@@ -1262,12 +1262,67 @@
 	<string name="poi_water_characteristic_mud">Característica del agua: lodosa</string>
 	<string name="poi_water_characteristic_sulfuric">Característica del agua: sulfúrica</string>
 
-	<string name="poi_water_point">Toma de agua</string>
+	<string name="poi_water_point">Punto de agua</string>
 
 <string name="poi_species">Especie</string>
 	<string name="poi_genus">Género</string>
 	<string name="poi_taxon">Taxón</string>
 
 	<string name="poi_cuisine">Cocina</string>
+
+<string name="poi_ford_stepping_stones">Puente de piedras</string>
+	<string name="poi_information_board">Tablero de información</string>
+	<string name="poi_information_map">Mapa</string>
+	<string name="poi_information_office">Oficina de información</string>
+	<string name="poi_information_terminal">Terminal de información</string>
+	<string name="poi_information_route_marker">Marcador de ruta</string>
+	<string name="poi_information_hikingmap">Mapa de senderismo</string>
+	<string name="poi_information_nature">Información sobre la naturaleza</string>
+	<string name="poi_information_wildlife">Información sobre la vida salvaje</string>
+	<string name="poi_information_history">Información histórica</string>
+	<string name="poi_information_sign">Señal</string>
+	<string name="poi_information_audioguide">Audioguía</string>
+	<string name="poi_information_bicyclemap">Mapa ciclista</string>
+	<string name="poi_information_tactile_model">Modelo táctil</string>
+	<string name="poi_information_tactile_map">Mapa táctil</string>
+	<string name="poi_board_type_notice">Tablero con aviso</string>
+	<string name="poi_board_type_plants">Información sobre las plantas</string>
+	<string name="poi_board_type_geology">Información geológica</string>
+	<string name="poi_board_type_public_transport">Información sobre el transporte público</string>
+	<string name="poi_board_type_technology">Información tecnológica</string>
+	<string name="poi_board_type_astronomy">Información astronómica</string>
+
+	<string name="poi_commercial">Área de oficinas</string>
+	<string name="poi_retail">Área comercial</string>
+
+	<string name="poi_fireplace_yes">Chimenea</string>
+	<string name="poi_fireplace_no">Sin chimenea</string>
+
+	<string name="poi_covered_yes">Con refugio</string>
+	<string name="poi_covered_no">Sin refugio</string>
+
+	<string name="poi_smoking_no">No fumar</string>
+	<string name="poi_smoking_outside">Sólo se permite fumar afuera</string>
+	<string name="poi_smoking_yes">Permitido fumar</string>
+	<string name="poi_smoking_separated">Permitido fumar en una sala independiente sin la efectiva separación</string>
+	<string name="poi_smoking_isolated">Permitido fumar en una sala independiente con separación efectiva</string>
+	<string name="poi_smoking_dedicated">Solo fumadores</string>
+
+	<string name="poi_toll_no">Peaje sin tarifa</string>
+	<string name="poi_toll_yes">Peaje tarifado</string>
+	<string name="poi_tactile_paving_yes">Con pavimento táctil</string>
+	<string name="poi_tactile_paving_no">Sin pavimento táctil</string>
+	<string name="poi_traffic_signals_sound_yes">Sonoro</string>
+	<string name="poi_traffic_signals_sound_no">Sin sonido</string>
+	<string name="poi_traffic_signals_sound_walk">Sonoro sólo cuando se permite caminar</string>
+
+<string name="poi_information_guidepost">Poste indicador</string>
+	<string name="poi_toll_hgv_yes">Peaje tarifado para vehículos pesados</string>
+	<string name="poi_information_trail_blaze">Marca de camino</string>
+	<string name="poi_doors">Puertas</string>
+	<string name="poi_bicycle_parking_anchors">Anclas</string>
+	<string name="poi_rescue_station">Estación de Rescate</string>
+
+	<string name="poi_services">Zona de servicio</string>
 
 </resources>
