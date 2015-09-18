@@ -1318,4 +1318,28 @@
 	<string name="poi_information_trail_blaze">Marcador del camino</string>
 	<string name="poi_rescue_station">Estación de rescate</string>
 
+<string name="poi_doors">Puertas</string>
+	<string name="poi_paediatrics">Pediatría</string>
+
+	<string name="poi_bicycle_parking_anchors">Anclajes</string>
+	<string name="poi_services">Área de servicio</string>
+	<string name="poi_mini_roundabout">Mini rotonda</string>
+	<string name="poi_railway_crossing">Cruce peatonal ferroviario</string>
+	<string name="poi_railway_level_crossing">Cruce ferroviario</string>
+	<string name="poi_bird_hide">Puesto de observación</string>
+	<string name="poi_horse_riding">Equitación</string>
+	<string name="poi_garden">Jardín</string>
+
+	<string name="poi_grass">Césped</string>
+	<string name="poi_grassland">Pastizal</string>
+	<string name="poi_scrub">Maleza</string>
+	<string name="poi_farmland">Suelo de cultivo</string>
+	<string name="poi_logging">Inicio de sesión</string>
+	<string name="poi_sand">Arena</string>
+
+	<string name="poi_dead_wood">Bosque muerto</string>
+
+	<string name="poi_passing_place">Lugar de paso</string>
+	<string name="poi_level">Nivel</string>
+
 </resources>
