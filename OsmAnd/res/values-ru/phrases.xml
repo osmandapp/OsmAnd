@@ -1168,4 +1168,19 @@
 	<string name="poi_lean_to">Навес</string>
 	<string name="poi_level">Этаж</string>
 
-</resources>
+<string name="poi_fuel_octane_80">Бензин 80</string>
+	<string name="poi_fuel_octane_91">Бензин 91</string>
+	<string name="poi_fuel_octane_92">Бензин 92</string>
+	<string name="poi_fuel_octane_95">Бензин 95</string>
+	<string name="poi_fuel_octane_98">Бензин 98</string>
+	<string name="poi_fuel_octane_100">Бензин 100</string>
+	<string name="poi_fuel_lh2">Жидкий водород</string>
+	<string name="poi_fuel_electricity">Электроэнергия</string>
+	<string name="poi_landfill_waste_nuclear">Ядерные отходы</string>
+	<string name="poi_religion_spiritualist">Спиритуализм</string>
+	<string name="poi_religion_bahai">Бахаизм</string>
+	<string name="poi_religion_pagan">Язычество</string>
+	<string name="poi_religion_tenrikyo">Тэнрикё</string>
+	<string name="poi_religion_zoroastrian">Зороастризм</string>
+
+	</resources>
