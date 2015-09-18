@@ -1,10 +1,9 @@
 package net.osmand.plus.mapcontextmenu;
 
+import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
-import android.widget.Toast;
 
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.Amenity;
@@ -16,7 +15,6 @@ import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.sections.AmenityInfoMenuController;
 import net.osmand.plus.mapcontextmenu.sections.MenuController;
@@ -184,11 +182,11 @@ public class MapContextMenu {
 		}.execute(loc);
 	}
 
-	public MenuController getMenuController() {
+	public MenuController getMenuController(Activity activity) {
 
 		if (object != null) {
 			if (object instanceof Amenity) {
-				return new AmenityInfoMenuController(app, (Amenity)object);
+				return new AmenityInfoMenuController(app, activity, (Amenity)object);
 			}
 		}
 

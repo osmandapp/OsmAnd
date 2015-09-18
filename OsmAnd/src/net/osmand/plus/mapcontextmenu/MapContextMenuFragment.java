@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -147,6 +148,12 @@ public class MapContextMenuFragment extends Fragment {
 			getCtxMenu().restoreMenuState(savedInstanceState);
 
 		view = inflater.inflate(R.layout.map_context_menu_fragment, container, false);
+		mainView = view.findViewById(R.id.context_menu_main);
+
+		menuController = getCtxMenu().getMenuController(getActivity());
+		if (menuController != null && menuController.isLandscapeLayout()) {
+			mainView.setLayoutParams(new FrameLayout.LayoutParams(dpToPx(menuController.getLandscapeWidthDp()), ViewGroup.LayoutParams.MATCH_PARENT));
+		}
 
 		ViewTreeObserver vto = view.getViewTreeObserver();
 		vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -196,8 +203,6 @@ public class MapContextMenuFragment extends Fragment {
 			}
 		});
 
-		mainView = view.findViewById(R.id.context_menu_main);
-
 		final View.OnTouchListener slideTouchListener = new View.OnTouchListener() {
 			private float dy;
 			private float dyMain;
@@ -205,41 +210,28 @@ public class MapContextMenuFragment extends Fragment {
 			private boolean slidingUp;
 			private boolean slidingDown;
 
-			private float velocityX;
 			private float velocityY;
 			private float maxVelocityY;
-
-			private float startX;
-			private float startY;
-			private long lastTouchDown;
-			private final int CLICK_ACTION_THRESHHOLD = 200;
-
-			private boolean isClick(float endX, float endY) {
-				float differenceX = Math.abs(startX - endX);
-				float differenceY = Math.abs(startY - endY);
-				if (differenceX > 1 ||
-						differenceY > 1 ||
-						Math.abs(velocityX) > 10 ||
-						Math.abs(velocityY) > 10 ||
-						System.currentTimeMillis() - lastTouchDown > CLICK_ACTION_THRESHHOLD) {
-					return false;
-				}
-				return true;
-			}
 
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 
+				if (singleTapDetector.onTouchEvent(event)) {
+					OsmandMapTileView mapView = getMapActivity().getMapView();
+					mapView.getAnimatedDraggingThread().startMoving(getCtxMenu().getPointDescription().getLat(), getCtxMenu().getPointDescription().getLon(),
+							mapView.getZoom(), true);
+					return true;
+				}
+
+				if (menuController != null && menuController.isLandscapeLayout()) {
+					return true;
+				}
+
 				switch (event.getAction()) {
 					case MotionEvent.ACTION_DOWN:
-						startX = event.getX();
-						startY = event.getY();
-						lastTouchDown = System.currentTimeMillis();
-
 						dy = event.getY();
 						dyMain = getViewY();
 						velocity = VelocityTracker.obtain();
-						velocityX = 0;
 						velocityY = 0;
 						maxVelocityY = 0;
 						velocity.addMovement(event);
@@ -260,7 +252,6 @@ public class MapContextMenuFragment extends Fragment {
 
 						velocity.addMovement(event);
 						velocity.computeCurrentVelocity(1000);
-						velocityX = Math.abs(velocity.getXVelocity());
 						velocityY = Math.abs(velocity.getYVelocity());
 						if (velocityY > maxVelocityY)
 							maxVelocityY = velocityY;
@@ -269,9 +260,6 @@ public class MapContextMenuFragment extends Fragment {
 
 					case MotionEvent.ACTION_UP:
 					case MotionEvent.ACTION_CANCEL:
-						float endX = event.getX();
-						float endY = event.getY();
-
 						int currentY = getViewY();
 
 						slidingUp = Math.abs(maxVelocityY) > 500 && (currentY - dyMain) < -50;
@@ -316,14 +304,6 @@ public class MapContextMenuFragment extends Fragment {
 								updateMainViewLayout(posY);
 							}
 						}
-
-						// OnClick event
-						if (isClick(endX, endY)) {
-							OsmandMapTileView mapView = getMapActivity().getMapView();
-							mapView.getAnimatedDraggingThread().startMoving(getCtxMenu().getPointDescription().getLat(), getCtxMenu().getPointDescription().getLon(),
-									mapView.getZoom(), true);
-						}
-
 						break;
 
 				}
@@ -417,7 +397,6 @@ public class MapContextMenuFragment extends Fragment {
 		});
 
 		// Menu controller
-		menuController = getCtxMenu().getMenuController();
 		bottomView = view.findViewById(R.id.context_menu_bottom_view);
 		if (menuController != null) {
 			bottomView.setOnTouchListener(new View.OnTouchListener() {
@@ -529,9 +508,19 @@ public class MapContextMenuFragment extends Fragment {
 	}
 
 	public static void showInstance(final MapActivity mapActivity) {
+
+		int slideInAnim = R.anim.slide_in_bottom;
+		int slideOutAnim = R.anim.slide_out_bottom;
+
+		MenuController menuController = mapActivity.getContextMenu().getMenuController(mapActivity);
+		if (menuController != null) {
+			slideInAnim = menuController.getSlideInAnimation();
+			slideOutAnim = menuController.getSlideOutAnimation();
+		}
+
 		MapContextMenuFragment fragment = new MapContextMenuFragment();
 		mapActivity.getSupportFragmentManager().beginTransaction()
-				.setCustomAnimations(R.anim.slide_in_bottom, R.anim.slide_out_bottom, R.anim.slide_in_bottom, R.anim.slide_out_bottom)
+				.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
 				.add(R.id.fragmentContainer, fragment, "MapContextMenuFragment")
 				.addToBackStack(null).commit();
 	}
@@ -549,6 +538,12 @@ public class MapContextMenuFragment extends Fragment {
 		DisplayMetrics dm = new DisplayMetrics();
 		getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
 		return dm.heightPixels;
+	}
+
+	private int getScreenWidth() {
+		DisplayMetrics dm = new DisplayMetrics();
+		getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
+		return dm.widthPixels;
 	}
 
 	private int dpToPx(float dp) {
