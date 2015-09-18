@@ -1319,4 +1319,10 @@
 <string name="poi_information_guidepost">Poste indicador</string>
 	<string name="poi_toll_hgv_yes">Peaje tarifado para vehículos pesados</string>
 	<string name="poi_information_trail_blaze">Marca de camino</string>
-	</resources>
+	<string name="poi_doors">Puertas</string>
+	<string name="poi_bicycle_parking_anchors">Anclas</string>
+	<string name="poi_rescue_station">Estación de Rescate</string>
+
+	<string name="poi_services">Zona de servicio</string>
+
+</resources>

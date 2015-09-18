@@ -1277,4 +1277,36 @@
 	<string name="poi_information_route_marker">路線標識</string>
 	<string name="poi_information_hikingmap">徒步旅行地圖</string>
 	<string name="poi_information_nature">關於自然的資訊</string>
+	<string name="poi_doors">門</string>
+	<string name="poi_bicycle_parking_anchors">錨泊點</string>
+	<string name="poi_information_wildlife">有關野生動物的資訊</string>
+	<string name="poi_information_history">關於歷史的資訊</string>
+	<string name="poi_information_sign">標誌</string>
+	<string name="poi_information_audioguide">導覽機</string>
+	<string name="poi_information_bicyclemap">自行車地圖</string>
+	<string name="poi_information_tactile_model">觸摸模式</string>
+	<string name="poi_information_tactile_map">觸摸地圖</string>
+	<string name="poi_board_type_notice">布告板</string>
+	<string name="poi_board_type_plants">關於植物的資訊</string>
+	<string name="poi_board_type_geology">關於地質資訊</string>
+	<string name="poi_board_type_public_transport">有關公共交通工具的資訊</string>
+	<string name="poi_board_type_technology">有關技術的資訊</string>
+	<string name="poi_board_type_astronomy">關於天文資訊</string>
+
+	<string name="poi_commercial">商業的土地利用</string>
+	<string name="poi_retail">零售的土地利用</string>
+
+	<string name="poi_fireplace_yes">壁爐</string>
+	<string name="poi_fireplace_no">沒有壁爐</string>
+
+	<string name="poi_covered_yes">有涼亭</string>
+	<string name="poi_covered_no">無涼亭</string>
+
+	<string name="poi_smoking_no">禁止吸煙</string>
+	<string name="poi_smoking_outside">只有外面允許吸煙</string>
+	<string name="poi_smoking_yes">允許吸煙</string>
+	<string name="poi_smoking_dedicated">吸煙者專用</string>
+
+	<string name="poi_tactile_paving_yes">有導盲磚</string>
+	<string name="poi_tactile_paving_no">無導盲磚</string>
 	</resources>
