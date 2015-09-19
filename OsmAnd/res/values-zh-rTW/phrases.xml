@@ -1309,4 +1309,40 @@
 
 	<string name="poi_tactile_paving_yes">有導盲磚</string>
 	<string name="poi_tactile_paving_no">無導盲磚</string>
-	</resources>
+	<string name="poi_paediatrics">小兒科</string>
+
+	<string name="poi_smoking_separated">允許吸煙，在一個單獨的房間，沒有隔離</string>
+	<string name="poi_smoking_isolated">允許吸煙，在一個單獨的房間，有隔離</string>
+	<string name="poi_toll_yes">收取通行費用</string>
+	<string name="poi_toll_no">不收取通行費用</string>
+	<string name="poi_toll_hgv_yes">收取大貨車通行費用</string>
+	<string name="poi_traffic_signals_sound_yes">有聲音</string>
+	<string name="poi_traffic_signals_sound_no">沒有聲音</string>
+	<string name="poi_traffic_signals_sound_walk">有聲音時才允許走</string>
+
+	<string name="poi_rescue_station">救護站</string>
+
+	<string name="poi_services">服務區</string>
+	<string name="poi_mini_roundabout">迷你圓環</string>
+	<string name="poi_railway_crossing">鐵路行人道</string>
+	<string name="poi_railway_level_crossing">平交道</string>
+	<string name="poi_bird_hide">賞鳥屋</string>
+	<string name="poi_horse_riding">騎馬運動</string>
+	<string name="poi_leisure_common">公共休閒區</string>
+	<string name="poi_garden">花園</string>
+
+	<string name="poi_heath">荒野地</string>
+	<string name="poi_grass">草地</string>
+	<string name="poi_grassland">草原</string>
+	<string name="poi_scrub">灌木叢</string>
+	<string name="poi_farmland">農田</string>
+	<string name="poi_logging">日誌記錄</string>
+	<string name="poi_sand">沙子</string>
+
+	<string name="poi_windfall">吹落的果實</string>
+	<string name="poi_dead_wood">枯木</string>
+
+	<string name="poi_passing_place">避讓車處</string>
+	<string name="poi_level">等級</string>
+
+</resources>
