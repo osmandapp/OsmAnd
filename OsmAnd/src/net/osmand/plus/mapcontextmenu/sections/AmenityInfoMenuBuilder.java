@@ -73,16 +73,8 @@ public class AmenityInfoMenuBuilder extends MenuBuilder {
 		textView.setTextSize(16); // todo: create constant
 		textView.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_info_text_light : R.color.ctx_menu_info_text_dark));
 
-		//text = "http://ru.wikipedia.org/wiki/Храм Святого Розария (Владимир)";
-
-		//SpannableString spannable = new SpannableString(text);
-		//Linkify.addLinks(spannable, Linkify.ALL);
-		//textView.setClickable(true);
-		//textView.setMovementMethod(LinkMovementMethod.getInstance());
 		textView.setAutoLinkMask(Linkify.ALL);
-		//textView.setSingleLine();
 		textView.setLinksClickable(true);
-
 		textView.setText(text);
 		//textView.setText("sdf dsaf fsdasdfg adsf asdsfd asdf sdf adsfg asdf sdfa sdf dsf agsfdgd fgsfd sdf asdf adg adf sdf asdf dfgdfsg sdfg adsf asdf asdf sdf SDF ASDF ADSF ASDF ASDF DAF SDAF dfg dsfg dfg sdfg rg rth sfghs dfgs dfgsdfg adfg dfg sdfg dfs ");
 
@@ -132,6 +124,7 @@ public class AmenityInfoMenuBuilder extends MenuBuilder {
 				iconId = R.drawable.ic_action_call_dark;
 			} else if (Amenity.WEBSITE.equals(key)) {
 				iconId = R.drawable.ic_world_globe_dark;
+				vl = vl.replace(' ', '_');
 			} else {
 				if (Amenity.DESCRIPTION.equals(key)) {
 					iconId = R.drawable.ic_action_note_dark;
