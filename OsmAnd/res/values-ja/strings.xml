@@ -1531,7 +1531,7 @@ POIの更新は利用できません</string>
     <string name="lang_he">ヘブライ語</string>
     <string name="home">ダッシュボードメニュー</string>
     <string name="live_monitoring_m_descr">GPXログが有効になっている場合、指定したWebサービスへデータを送信します</string>
-	<string name="live_monitoring_m">オンライン追跡(GPXが必要)</string>
+	<string name="live_monitoring_m">オンライン追跡に関する設定(GPXが必要)</string>
     <string name="live_monitoring_start">オンライントラッキング開始</string>
 	<string name="live_monitoring_stop">オンライントラッキング停止</string>
 	<string name="gpx_monitoring_start">GPXログ開始</string>
@@ -1806,7 +1806,7 @@ POIの更新は利用できません</string>
     <string name="duration">期限</string>
     <string name="distance">距離</string>
     <string name="rendering_attr_publicTransportMode_name">バス、トロリーバス、シャトルバスルート</string>
-	<string name="save_track_to_gpx_globally">GPXファイルに経路を記録</string>
+	<string name="save_track_to_gpx_globally">GPXファイルへの経路記録に関する設定</string>
 	<string name="save_track_to_gpx_globally_descr">GPXファイルへの一般の位置(General position)記録は、マップ画面上のGPXログウィジェットを使用してオンとオフを切り替えることが可能です</string>
 	<string name="save_track_interval_globally">記録間隔</string>
 	<string name="confirm_every_run">常に尋ねる</string>
