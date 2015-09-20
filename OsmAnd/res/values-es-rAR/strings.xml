@@ -553,7 +553,7 @@
 	<string name="map_preferred_locale_descr">Idioma preferido para las etiquetas en el mapa (si no está disponible, se cambiará a inglés o a nombres locales)</string>
     <string name="map_preferred_locale">Idioma preferido del mapa</string>
     <string name="forward">Siguiente</string>
-    <string name="home">Inicio</string>
+    <string name="home">Panel</string>
     <string name="live_monitoring_m_descr">Envíe los datos de rastreo a un servicio web específico, si la grabación GPX está activada.</string>
 	<string name="live_monitoring_m">Rastreo en línea (requiere GPX)</string>
     <string name="live_monitoring_start">Iniciar rastreo en línea</string>
@@ -712,8 +712,8 @@
     <string name="clear_intermediate_points">Quitar puntos intermedios</string>
     <string name="keep_intermediate_points">Mantener puntos intermedios</string>
     <string name="new_directions_point_dialog">Ya definió puntos intermedios.</string>
-    <string name="context_menu_item_directions_to">Ir hasta</string>
-    <string name="context_menu_item_directions_from">Ir desde</string>
+    <string name="context_menu_item_directions_to">Llegar hasta aquí</string>
+    <string name="context_menu_item_directions_from">Ir desde aquí</string>
     <string name="route_descr_map_location">"Mapa: "</string>
     <string name="route_descr_lat_lon">Lat %1$.3f, Lon %2$.3f</string>
     <string name="route_descr_current_location">Posición actual</string>
@@ -2018,12 +2018,13 @@
     <string name="we_really_care_about_your_opinion">Nos interesa mucho y es importante oír su opinión.</string>
 	<string name="rendering_value_boldOutline_name">Borde remarcado</string>
     <string name="traffic_warning_hazard">Advertencia de riesgo</string>
-    <string name="dahboard_options_dialog_title">Opciones del panel</string>
+    <string name="dahboard_options_dialog_title">Configurar panel</string>
 	<string name="shared_string_card_was_hidden">La tarjeta se ocultó</string>
 	<string name="shared_string_undo">Deshacer</string>
 	<string name="shared_string_skip">Omitir</string>
 	<string name="app_name_osmand">OsmAnd</string>
-	<string name="offline_maps_and_navigation">Mapas y navegación sin conexión</string>
+	<string name="offline_maps_and_navigation">Mapas y navegación
+\nsin conexión</string>
 <string name="commit_poi">Enviar PDI</string>
 <string name="routing_attr_avoid_shuttle_train_name">Evitar trenes de enlace</string>
 	<string name="routing_attr_avoid_shuttle_train_description">Evite tomar trenes de enlace</string>
@@ -2037,10 +2038,10 @@
 <string name="av_locations_descr">Archivo GPX con ubicaciones de la nota</string>
     <string name="av_locations">Ubicaciones</string>
     <string name="tag_poi_name">nombre</string>
-	<string name="tag_poi_amenity">comodidad</string>
+	<string name="tag_poi_amenity">servicio</string>
 	<string name="contact_info">Información de contacto</string>
 	<string name="description">Descripción</string>
-	<string name="add_opening_hours">Añadir horarios de atención</string>
+	<string name="add_opening_hours">Añadir horario de atención</string>
 	<string name="poi_dialog_poi_type">Tipo de PDI</string>
 <string name="number_of_rows_in_dash">Número de filas en el panel %1$s</string>
 	<string name="please_specify_poi_type">Especifica el tipo de PDI.</string>
@@ -2051,4 +2052,5 @@
 	<string name="saved_at_time">Guardado exitosamente como: %1$s</string>
 <string name="poi_deleted_localy">El PDI se eliminará una vez subido los cambios</string>
 	<string name="show_gpx">Mostrar GPX</string>
+<string name="count_of_lines">Número de líneas</string>
 </resources>

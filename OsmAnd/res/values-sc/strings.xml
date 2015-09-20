@@ -529,7 +529,7 @@
     <string name="lang_sw">Swahili</string>
     <string name="lang_he">Ebràicu</string>
     <string name="forward">In antis</string>
-    <string name="home">Domo</string>
+    <string name="home">Pannellu de controllu</string>
     <string name="live_monitoring_m_descr">Imbia s’arrastamentu a unu servìtziu web dislindadu si sa registratzione GPX est abilitada.</string>
 	<string name="live_monitoring_m">Arrastamentu in lìnia (GPX rechestu)</string>
     <string name="live_monitoring_start">Inghitza s’arrastamentu in lìnia</string>
@@ -2052,7 +2052,7 @@
 	<string name="error_message_pattern">Errore: {0}</string>
 <string name="rendering_value_boldOutline_name">Oru in grassetu</string>
     <string name="traffic_warning_hazard">Perìgulu</string>
-    <string name="dahboard_options_dialog_title">Optziones de su pannellu</string>
+    <string name="dahboard_options_dialog_title">Cunfigura su pannellu</string>
 	<string name="shared_string_skip">Brinca</string>
 	<string name="app_name_osmand">OsmAnd</string>
 	<string name="offline_maps_and_navigation">Mapas non in lìnia\ne Nàvigu</string>

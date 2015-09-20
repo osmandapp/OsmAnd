@@ -215,8 +215,7 @@ public class AdvancedDataFragment extends Fragment {
 			});
 			final Set<String> tagKeys = new TreeSet<>();
 			for (OSMSettings.OSMTagKey t : OSMSettings.OSMTagKey.values()) {
-				if ((t != OSMSettings.OSMTagKey.NAME) && (t != OSMSettings.OSMTagKey.OPENING_HOURS) && (t != OSMSettings.OSMTagKey.PHONE)
-						&& (t != OSMSettings.OSMTagKey.WEBSITE)) {
+				if (t != OSMSettings.OSMTagKey.NAME) {
 					tagKeys.add(t.getValue());
 				}
 			}

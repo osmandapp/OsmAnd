@@ -1263,4 +1263,69 @@
 	<string name="poi_bicycle_parking_rack">Prateleira</string>
 	<string name="poi_deadlock">Impasse</string>
 
+	<string name="poi_species">Espécies</string>
+	<string name="poi_genus">Gênero</string>
+	<string name="poi_taxon">Táxon</string>
+
+	<string name="poi_cuisine">Cozinha</string>
+
+<string name="poi_information_guidepost">Poste com direções</string>
+	<string name="poi_information_board">Placa de informação</string>
+	<string name="poi_information_map">Mapa</string>
+	<string name="poi_information_office">Centro de informação</string>
+	<string name="poi_information_trail_blaze">Trilha desbravada</string>
+	<string name="poi_information_terminal">Terminal de informação</string>
+	<string name="poi_information_route_marker">Marcador de rota</string>
+	<string name="poi_information_hikingmap">Mapa de caminhadas</string>
+	<string name="poi_information_nature">Informações sobre natureza</string>
+	<string name="poi_information_wildlife">Informações sobre vida selvagem</string>
+	<string name="poi_information_history">Informações sobre história</string>
+	<string name="poi_information_sign">Placa</string>
+	<string name="poi_information_audioguide">Audioguia</string>
+	<string name="poi_information_bicyclemap">Mapa ciclístico</string>
+	<string name="poi_information_tactile_model">Modelo tátil</string>
+	<string name="poi_information_tactile_map">Mapa tátil</string>
+	<string name="poi_board_type_notice">Placa com aviso</string>
+	<string name="poi_board_type_plants">Informações sobre plantas</string>
+	<string name="poi_board_type_geology">Informações sobre geologia</string>
+	<string name="poi_board_type_public_transport">Informações sobre transporte público</string>
+	<string name="poi_board_type_technology">Informações sobre tecnologia</string>
+	<string name="poi_board_type_astronomy">Informações sobre astronomia</string>
+
+<string name="poi_commercial">Área de negócios</string>
+	<string name="poi_retail">Área de vendas</string>
+
+	<string name="poi_fireplace_yes">Lareira de exterior</string>
+	<string name="poi_fireplace_no">Sem lareira</string>
+
+	<string name="poi_covered_yes">Com abrigo</string>
+	<string name="poi_covered_no">Sem abrigo</string>
+
+	<string name="poi_smoking_no">Proibido fumar</string>
+	<string name="poi_smoking_outside">É permitido fumar apenas do lado de fora</string>
+	<string name="poi_smoking_yes">É permitido fumar</string>
+	<string name="poi_smoking_separated">É permitido fumar em um ambiente sem efetiva separação</string>
+	<string name="poi_smoking_isolated">É permitido fumar em um ambiente com efetiva separação</string>
+	<string name="poi_smoking_dedicated">Dedicado aos fumantes</string>
+
+	<string name="poi_toll_no">Não é cobrado pagamento de pedágio</string>
+	<string name="poi_toll_yes">Pagamento de pedágio é cobrado</string>
+	<string name="poi_tactile_paving_yes">Com piso tátil</string>
+	<string name="poi_tactile_paving_no">Sem piso tátil</string>
+	<string name="poi_traffic_signals_sound_yes">Com aviso sonoro</string>
+	<string name="poi_traffic_signals_sound_no">Sem aviso sonoro</string>
+	<string name="poi_traffic_signals_sound_walk">Com aviso sonoro somente quando andar é permitido</string>
+
+<string name="poi_ford_stepping_stones">Pedra de passagem em rio</string>
+	<string name="poi_toll_hgv_yes">Pagamento de pedágio cobrado para veículos pesados</string>
+	<string name="poi_rescue_station">Estação de resgate</string>
+
+<string name="poi_services">Área de serviço</string>
+
+<string name="poi_doors">Portas</string>
+	<string name="poi_paediatrics">Pediatria</string>
+
+	<string name="poi_mini_roundabout">Mini-rotatória</string>
+	<string name="poi_railway_crossing">Travessia de pedestres em ferrovia</string>
+	<string name="poi_railway_level_crossing">Passagem em nível</string>
 	</resources>

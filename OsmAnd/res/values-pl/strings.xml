@@ -204,7 +204,7 @@
   
   <string name="tip_initial_t">"OsmAnd jest programem do nawigacji posiadającym wiele funkcji.
 \n\nPodstawowe porady, wskazówki dotyczące użytkowania i zaawansowana pomoc są dostępne po wybraniu „Menu” → „Pomoc” z ekranu mapy. "</string>
-  <string name="shared_string_next">Następny</string>
+  <string name="shared_string_next">Dalej</string>
   <string name="shared_string_previous">Wstecz</string>
   <string name="unit_of_length_descr">Zmienia jednostki długości i prędkości</string>
   <string name="unit_of_length">Jednostki miar</string>
@@ -291,7 +291,7 @@
   <string name="filter_existing_indexes">Pobrane</string>
   
   <string name="shared_string_select_all">Zaznacz wszystko</string>
-  <string name="shared_string_refresh">Wczytaj ponownie</string>
+  <string name="shared_string_refresh">Odśwież</string>
   <string name="general_settings_descr">Konfiguruje wyświetlanie i ogólne ustawienia programu</string>
   <string name="general_settings">Główne</string>
   <string name="index_settings_descr">Pobiera i zarządza plikami map przechowywanymi na urządzeniu</string>
@@ -350,7 +350,7 @@
   <string name="fav_file_to_load_not_found">Nie odnaleziono pliku GPX zawierającego punkty ulubione w {0}</string>
   <string name="fav_saved_sucessfully">Zapisano ulubione do {0}</string>
   <string name="no_fav_to_save">Brak ulubionych punktów do zapisania</string>
-  <string name="shared_string_import">Import</string>
+  <string name="shared_string_import">Importuj</string>
   
   <string name="error_occurred_loading_gpx">Wystąpił błąd podczas wczytywania GPX</string>
   <string name="send_report">Wyślij zgłoszenie</string>
@@ -606,7 +606,7 @@
   <string name="navigate_point_format_D">DDD.DD</string>
   <string name="navigate_point_format_DM">DDD MM.MM</string>
   <string name="navigate_point_format_DMS">DDD MM SS.SS</string>
-  <string name="shared_string_show_on_map">Wyświetlanie na mapie</string>
+  <string name="shared_string_show_on_map">Wyświetl na mapie</string>
   
   <string name="search_address_top_text">Wybierz adres</string>
   <string name="search_address_region">Region</string>
@@ -1220,7 +1220,7 @@
     </string>
     <string name="select_address_activity">Wybierz adres</string>
     <string name="local_openstreetmap_act_title">Modyfikacje OSM</string>
-    <string name="shared_string_more_actions">Inne działania</string>
+    <string name="shared_string_more_actions">Więcej akcji</string>
     <string name="favourites_list_activity">Wybierz ulubione</string>
     <string name="download_using_mobile_internet">Urządzenie nie jest połączone przez Wi-Fi. Czy chcesz kontynuować pobieranie używając obecnego połączenia?</string>
     <string name="clear_destination">Usuń punkt docelowy</string>
@@ -1251,7 +1251,7 @@
 \n * Naciśnij i przytrzymaj mapę, aby usunąć poprzedni punkt.
 \n * Naciśnij i przytrzymaj punkt, aby przejrzeć i dołączyć opis.
 \n * Kliknij na widgecie obliczania odległości, aby zobaczyć więcej czynności.</string>
-    <string name="shared_string_do_not_show_again">Nie pokazuj więcej</string>
+    <string name="shared_string_do_not_show_again">Nie pokazuj ponownie</string>
     <string name="distance_measurement_start_editing">Rozpocznij edycję</string>
     <string name="distance_measurement_finish_editing">Zakończ edycję</string>
     <string name="distance_measurement_finish_subtrack">Rozpocznij nową podścieżkę</string>
@@ -1521,7 +1521,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="auto_zoom_farthest">Widok szeroki</string>
 	<string name="shared_string_and">i</string>
     <string name="shared_string_or">lub</string>
-	<string name="shared_string_remember_my_choice">Zapamiętanie wyboru</string>
+	<string name="shared_string_remember_my_choice">Zapamiętaj mój wybór</string>
     
     <string name="animate_routing_route_not_calculated">Proszę najpierw przeliczyć trasę</string>
     <string name="animate_routing_route">Pokaż używając obliczonej trasy </string>
@@ -1759,9 +1759,9 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="osmo_show_group_notifications_descr">Wyświetla powiadomienia, gdy użytkownik dołącza do grupy lub opuszcza grupę</string>
     <string name="gpx_file_is_empty">Plik GPX jest pusty</string>
     
-    <string name="shared_string_my_tracks">Trasy</string>
-    <string name="shared_string_my_favorites">Ulubione</string>
-    <string name="shared_string_my_places">Miejsca</string>
+    <string name="shared_string_my_tracks">Moje trasy</string>
+    <string name="shared_string_my_favorites">Moje ulubione</string>
+    <string name="shared_string_my_places">Moje miejsca</string>
     
     <string name="gpx_info_subtracks">"Ślady podrzędne: %1$s "</string>
 	<string name="gpx_info_waypoints">Punkty trasy: %1$s </string>
@@ -1825,7 +1825,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="lang_sw">Suahili</string>
     <string name="lang_he">Hebrajski</string>
     <string name="forward">Naprzód</string>
-    <string name="home">Ekran główny</string>
+    <string name="home">Kokpit</string>
     <string name="live_monitoring_m_descr">Wysyła dane śledzenia do określonej usługi internetowej jeżeli rejestrowanie śladów jest włączone.</string>
 	<string name="live_monitoring_m">Śledzenie online (wymagane GPX)</string>
     <string name="live_monitoring_start">Rozpocznij śledzenie online</string>
@@ -1929,7 +1929,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="map_widget_top">Pasek stanu</string>
 	<string name="map_widget_right">Prawy panel</string>
 	<string name="map_widget_left">Lewy panel</string>
-    <string name="shared_string_show">Wyświetlanie</string>
+    <string name="shared_string_show">Wyświetl</string>
 	<string name="configure_map">Skonfiguruj mapę</string>
     <string name="search_radius_proximity">W odległości</string>
     <string name="wake_on_voice">Włączanie ekranu</string>
@@ -1953,7 +1953,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="map_update">Dostępne aktualizacje dla %1$s map</string>
 	<string name="search_for">Wyszukiwanie</string>
 	
-	<string name="shared_string_show_all">WYŚWIETL WSZYSTKIE</string>
+	<string name="shared_string_show_all">Wyświetl wszystko</string>
 	<string name="coordinates">Współrzędne</string>
 	<string name="shared_string_dismiss">Odrzuć</string>
     <string name="everything_up_to_date">Wszystkie pliki aktualne</string>
@@ -1995,8 +1995,8 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="settings_privacy">Prywatność</string>
     <string name="shared_string_my_location">Moja lokalizacja</string>
     <string name="osm_editing_manage">Zarządzaj</string>
-    <string name="shared_string_disabled">Włącz</string>
-	<string name="shared_string_enabled">Wyłącz</string>
+    <string name="shared_string_disabled">Wyłączone</string>
+	<string name="shared_string_enabled">Włączone</string>
 <string name="plugin_nautical_name">Widok morski</string>
 	<string name="plugin_ski_name">Widok narciarski</string>
 	<string name="rename_failed">Nie udało się zmienić nazwy.</string>
@@ -2033,9 +2033,9 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="shared_string_ellipsis">…</string>
 	<string name="shared_string_enable">Włącz</string>
 	<string name="shared_string_disable">Wyłącz</string>
-	<string name="shared_string_selected">Wybrany</string>
+	<string name="shared_string_selected">Wybrane</string>
 	<string name="shared_string_deselect">Odznacz</string>
-	<string name="shared_string_deselect_all">Odznacz wszystkie</string>
+	<string name="shared_string_deselect_all">Odznacz wszystko</string>
 	<string name="shared_string_export">Eksportuj</string>
 	<string name="shared_string_unexpected_error">Wystąpił nieoczekiwany błąd</string>
 	<string name="shared_string_action_template">Działanie {0}</string>
@@ -2055,7 +2055,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="world_ski_missing">Aby wyświetlać mapy narciarskie, należy pobrać specjalną mapę offline</string>
     <string name="nautical_maps_missing">Aby wyświetlać mapy żeglugowe, należy pobrać specjalną mapę offline</string>
 	<string name="remove_the_tag">Usuń tag</string>
-    <string name="version_settings">Kompilacja</string>
+    <string name="version_settings">Kompilacje</string>
     <string name="points">Punkty</string>
     <string name="navigation_over_track">Rozpocząć nawigowanie wzdłuż trasy?</string>
 	<string name="save_track_to_gpx_globally_headline">Zapis śladu na żądanie</string>
@@ -2072,7 +2072,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="days_behind">dni za najnowszą wersją</string>
 	<string name="agps_info">Informacje A-GPS</string>
 	<string name="agps_data_last_downloaded">Ostatni pobrane dane A-GPS: %1$s</string>
-    <string name="confirm_usage_speed_cameras">W wielu krajach (Niemcy, Francja, Włochy i inne) prawo zabrania korzystania z ostrzeżeń o fotoradarach. Twórcy programu nie biorą odpowiedzialności za łamanie prawa przez użytkowników. Proszę wybrać „Tak”, tylko jeśli wolno używać tej funkcji.</string>
+    <string name="confirm_usage_speed_cameras">W wielu krajach (Niemcy, Francja, Włochy i inne) prawo zabrania korzystania z ostrzeżeń o fotoradarach. Twórcy aplikacji nie biorą odpowiedzialności za łamanie prawa przez użytkowników. Proszę wybrać „Tak”, tylko jeśli wolno używać tej funkcji.</string>
 	<string name="welmode_download_maps">Pobierz mapy</string>
 	<string name="welcome_select_region">Proszę wybrać region ruchu, aby właściwie przedstawiać znaki i inne reguły ruchu:</string>
 	<string name="welcome_text">OsmAnd pozwala używać map oraz nawigacji offline na całym świecie!</string>
@@ -2108,7 +2108,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="storage_directory_manual">Określony ręcznie</string>
     <string name="storage_directory_internal_app">Wewnętrzna pamięć programu</string>
     <string name="storage_directory">Przechowywanie map</string>
-    <string name="search_poi_category_hint">Proszę wprowadzić tekst, aby wyszukać dane</string>
+    <string name="search_poi_category_hint">Wprowadź tekst, aby wyszukać dane</string>
     <string name="rendering_attr_hideHouseNumbers_name">Ukrywanie numerów budynków</string>
     <string name="storage_directory_multiuser">Pamięć użytkownika</string>
     <string name="routing_attr_avoid_borders_name">Unikanie przekraczania granicy</string>
@@ -2129,7 +2129,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="lang_ht">haitański</string>
     <string name="lang_gl">galicyjski</string>
     <string name="lang_et">estoński</string>
-    <string name="archive_wikipedia_data">W posiadaniu są stare niezgodne dane Wikipedia. Zarchiwizować je?</string>
+    <string name="archive_wikipedia_data">Posiadasz stare niezgodne dane Wikipedii. Czy chcesz je zarchiwizować?</string>
     <string name="download_wikipedia_files">Pobrać dodatkowe dane Wikipedii (%1$s MB)?</string>
     <string name="gps_network_not_enabled">Usługa lokalizacji nie jest włączona. Włączyć ją?</string>
     <string name="disable_recording_once_app_killed_descrp">Wstrzymuje rejestrowanie trasy po zakończeniu programu na liście ostatnich aplikacji. (Wskazanie trybu uśpienia OsmAnd zniknie z pasku powiadomień.)</string>
@@ -2183,7 +2183,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="rendering_value_translucent_blue_name">Przezroczysty niebieski</string>
     <string name="rendering_value_purple_name">Fioletowy</string>
     <string name="rendering_value_translucent_purple_name">Półprzezroczysty fioletowy</string>
-    <string name="restart_is_required">W celu zastosowania zmian, konieczne jest ponowne uruchomienie programu.</string>
+    <string name="restart_is_required">W celu zastosowania zmian, konieczne jest ponowne uruchomienie aplikacji.</string>
     <string name="rendering_value_translucent_red_name">Prześwitujący czerwony</string>
     <string name="rendering_value_default13_name">Domyślny (13)</string>
 	<string name="rendering_value_defaultTranslucentCyan_name">Domyślny (prześwitujący niebieski)</string>
@@ -2205,7 +2205,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="routing_attr_avoid_shuttle_train_description">Unikanie pociągów wahadłowych</string>
     <string name="traffic_warning_hazard">Zagrożenie</string>
     <string name="we_really_care_about_your_opinion">Zależy nam na opinii na temat programu i jest dla nas ważne, aby ją poznać.</string>
-	<string name="dahboard_options_dialog_title">Opcje ekranu głównego</string>
+	<string name="dahboard_options_dialog_title">Opcje kokpitu</string>
 	<string name="shared_string_card_was_hidden">Ukryto kartę</string>
 	<string name="shared_string_undo">Cofnij</string>
 	<string name="shared_string_skip">Pomiń</string>

@@ -1,6 +1,10 @@
 package net.osmand.plus.mapcontextmenu.sections;
 
+import android.app.Activity;
 import android.view.View;
+
+import net.osmand.plus.R;
+import net.osmand.plus.helpers.AndroidUiHelper;
 
 public abstract class MenuController {
 
@@ -12,9 +16,13 @@ public abstract class MenuController {
 
 	private MenuBuilder builder;
 	private int currentMenuState;
+	private boolean portraitMode;
+	private boolean largeDevice;
 
-	public MenuController(MenuBuilder builder) {
+	public MenuController(MenuBuilder builder, Activity activity) {
 		this.builder = builder;
+		portraitMode = AndroidUiHelper.isOrientationPortrait(activity);
+		largeDevice = AndroidUiHelper.isXLargeDevice(activity);
 		this.currentMenuState = getInitialMenuState();
 	}
 
@@ -23,10 +31,50 @@ public abstract class MenuController {
 	}
 
 	public int getInitialMenuState() {
-		return MenuState.HEADER_ONLY;
+		if (isLandscapeLayout()) {
+			return MenuState.FULL_SCREEN;
+		} else {
+			return getInitialMenuStatePortrait();
+		}
+	}
+
+	public boolean isLandscapeLayout() {
+		return !portraitMode && !largeDevice;
+	}
+
+	public float getLandscapeWidthDp() {
+		return 350f;
 	}
 
 	public int getSupportedMenuStates() {
+		if (isLandscapeLayout()) {
+			return MenuState.FULL_SCREEN;
+		} else {
+			return getSupportedMenuStatesPortrait();
+		}
+	}
+
+	public int getSlideInAnimation() {
+		if (isLandscapeLayout()) {
+			return R.anim.slide_in_left;
+		} else {
+			return R.anim.slide_in_bottom;
+		}
+	}
+
+	public int getSlideOutAnimation() {
+		if (isLandscapeLayout()) {
+			return R.anim.slide_out_left;
+		} else {
+			return R.anim.slide_out_bottom;
+		}
+	}
+
+	protected int getInitialMenuStatePortrait() {
+		return MenuState.HEADER_ONLY;
+	}
+
+	protected int getSupportedMenuStatesPortrait() {
 		return MenuState.HEADER_ONLY | MenuState.HALF_SCREEN | MenuState.FULL_SCREEN;
 	}
 

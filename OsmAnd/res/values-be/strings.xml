@@ -64,7 +64,7 @@
     <string name="keep_intermediate_points">Захаваць прамежкавыя кропкі</string>
     <string name="new_directions_point_dialog">У вас ужо ёсьць набор прамежкавых кропак.</string>
     <string name="context_menu_item_directions_to">Маршрут да</string>
-    <string name="context_menu_item_directions_from">Маршрут ад</string>
+    <string name="context_menu_item_directions_from">Маршрут адсюль</string>
     <string name="route_descr_map_location">Мапа: </string>
     <string name="route_descr_lat_lon">%1$.3f шыр., %2$.3f даў.</string>
     <string name="route_descr_current_location">Бягучае становішча</string>
@@ -1628,7 +1628,7 @@
     <string name="map_preferred_locale">Пажаданая мова мапы</string>
     <string name="local_map_names">Мясцовыя назвы</string>
     <string name="forward">Наперад</string>
-    <string name="home">Дамоў</string>
+    <string name="home">Панэль кіраваньня</string>
     <string name="keep_navigation_service">Пакінуць</string>
 	<string name="gpx_monitoring_stop">Спыніць запіс GPX</string>
     <string name="live_monitoring_start">Пачаць адсочваньне праз Інтэрнэт</string>
@@ -2060,7 +2060,7 @@
     <string name="traffic_warning_hazard">Небясьпека</string>
     <string name="app_name_osmand">OsmAnd</string>
 	<string name="offline_maps_and_navigation">Аўтаномныя мапы\nі навігацыя</string>
-<string name="dahboard_options_dialog_title">Опцыі Панэлі кіраваньня</string>
+<string name="dahboard_options_dialog_title">Налады Панэлі кіраваньня</string>
 	<string name="shared_string_card_was_hidden">Картка схавана</string>
 	<string name="shared_string_undo">Вярнуць</string>
 	<string name="shared_string_skip">Прапусьціць</string>

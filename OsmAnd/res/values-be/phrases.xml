@@ -1118,4 +1118,42 @@
 	<string name="poi_trees_coca">Кока</string>
 	<string name="poi_trees_tea">Гарбата</string>
 	<string name="poi_trees_peach">Персік</string>
-	</resources>
+	<string name="poi_aerialway_pylon">Апора ліннай дарогі</string>
+
+	<string name="poi_power_tower">Апора лініі электраперадач</string>
+	<string name="poi_power_pole">Слуп лініі электраперадач</string>
+
+	<string name="poi_lighting_tower">Асвятляльная вежа</string>
+	<string name="poi_rescue_station">Выратавальная станцыя</string>
+
+<string name="poi_traffic_signals_sound_walk">З гукавым сігналам толькі калі пераход дазволены</string>
+
+	<string name="poi_traffic_signals_sound_no">Без гукавага сігналу</string>
+	<string name="poi_traffic_signals_sound_yes">З гукавым сігналам</string>
+	<string name="poi_tactile_paving_no">Без тактыльнага пакрыцьця</string>
+	<string name="poi_tactile_paving_yes">З тактыльным пакрыцьцём</string>
+	<string name="poi_toll_hgv_yes">Аплата за праезд спаганяецца з грузавых аўтамабіляў</string>
+	<string name="poi_toll_no">Аплата за праезд не спаганяецца</string>
+	<string name="poi_information_tactile_map">Тактыльныя мапа</string>
+	<string name="poi_board_type_notice">Дошка з аб\'явамі</string>
+	<string name="poi_board_type_plants">Інфармацыя пра расьліны</string>
+	<string name="poi_board_type_geology">Інфармацыя пра геалогію</string>
+	<string name="poi_board_type_public_transport">Расклад грамадзкага транспарту</string>
+	<string name="poi_board_type_technology">Інфармацыя аб тэхналёгіі</string>
+	<string name="poi_board_type_astronomy">Інфармацыя аб астраноміі</string>
+
+	<string name="poi_commercial">Камерцыйнае землекарыстаньне</string>
+	<string name="poi_retail">Раздробны гандаль (землекарыстаньне)</string>
+
+	<string name="poi_fireplace_yes">Зь месцам для раскладаньня вогнішча</string>
+	<string name="poi_smoking_no">Курэньне забаронена</string>
+	<string name="poi_smoking_outside">Курэньне дазволена толькі знадворку</string>
+	<string name="poi_smoking_yes">Курэньне дазволена</string>
+	<string name="poi_smoking_dedicated">Спэцыялізаваная ўстанова для тых, хто паліць</string>
+
+	<string name="poi_toll_yes">Аплата за праезд спаганяецца</string>
+	<string name="poi_doors">Дзьверы</string>
+	<string name="poi_ford_stepping_stones">Рудыментарны мост з камянёў</string>
+	<string name="poi_services">Зона паслуг, прылеглая да шашы</string>
+
+</resources>

@@ -1292,7 +1292,7 @@
     <string name="keep_intermediate_points">保留中間點</string>
     <string name="new_directions_point_dialog">您已經有中間點設定。</string>
     <string name="context_menu_item_directions_to">導引到</string>
-    <string name="context_menu_item_directions_from">從此導引</string>
+    <string name="context_menu_item_directions_from">導引由</string>
     <string name="route_descr_map_location">地圖： </string>
     <string name="route_to">到：</string>
     <string name="route_via">經過：</string>
@@ -1657,7 +1657,7 @@
     <string name="lang_sw">斯瓦希里</string>
     <string name="lang_he">希伯來</string>
     <string name="forward">往前</string>
-    <string name="home">首頁</string>
+    <string name="home">儀表板</string>
     <string name="live_monitoring_m">線上即時追蹤 (需要 GPX)</string>
     <string name="live_monitoring_start">開始線上即時追蹤</string>
 	<string name="live_monitoring_stop">停止線上即時追蹤</string>
@@ -2075,7 +2075,7 @@
     <string name="we_really_care_about_your_opinion">我們很在乎您的意見，並且聽到您的反映對我們來說是很重要的。</string>
 	<string name="rendering_value_boldOutline_name">粗外框</string>
     <string name="traffic_warning_hazard">危險</string>
-    <string name="dahboard_options_dialog_title">儀表板選項</string>
+    <string name="dahboard_options_dialog_title">組態儀表板</string>
 	<string name="shared_string_card_was_hidden">卡為隱藏</string>
 	<string name="shared_string_undo">復原</string>
 	<string name="shared_string_skip">跳過</string>
@@ -2108,4 +2108,5 @@
 <string name="saved_at_time">已順利的儲存於：%1$s</string>
 <string name="poi_deleted_localy">一旦您上傳您的變更，興趣點會被刪除</string>
 	<string name="show_gpx">顯示 GPX</string>
+<string name="count_of_lines">計算行數</string>
 </resources>

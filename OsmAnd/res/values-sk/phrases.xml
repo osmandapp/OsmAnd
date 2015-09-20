@@ -1212,4 +1212,90 @@
 
 	<string name="poi_water_point">Vodný bod</string>
 
-</resources>
+<string name="poi_cuisine">Kuchyňa</string>
+
+<string name="poi_urban">Mesto</string>
+	<string name="poi_rural">Vidiek</string>
+
+	<string name="poi_taxon">Taxón</string>
+
+	<string name="poi_species">Druh</string>
+	<string name="poi_genus">Rod</string>
+	<string name="poi_information_guidepost">Smerovník</string>
+	<string name="poi_information_board">Informačná tabuľa</string>
+	<string name="poi_information_map">Mapa</string>
+	<string name="poi_information_office">Informačná kancelária</string>
+	<string name="poi_information_terminal">Informačný terminál</string>
+	<string name="poi_information_hikingmap">Turistická mapa</string>
+	<string name="poi_information_nature">Informácie o prírode</string>
+	<string name="poi_information_wildlife">Informácie o živočíchoch</string>
+	<string name="poi_information_history">Informácie o histórii</string>
+	<string name="poi_information_sign">Značka</string>
+	<string name="poi_information_bicyclemap">Cyklomapa</string>
+	<string name="poi_information_tactile_model">Dotykový model</string>
+	<string name="poi_information_tactile_map">Dotyková mapa</string>
+	<string name="poi_board_type_notice">Tabuľa s oznamom</string>
+	<string name="poi_board_type_plants">Informácie o rastlinách</string>
+	<string name="poi_board_type_geology">Informácie o geológii</string>
+	<string name="poi_board_type_public_transport">Informácie o hromadnej doprave</string>
+	<string name="poi_board_type_technology">Informácie o technológii</string>
+	<string name="poi_board_type_astronomy">Informácie o astronómii</string>
+
+<string name="poi_information_audioguide">Audiosprievodca</string>
+	<string name="poi_commercial">Komerčný pozemok</string>
+	<string name="poi_retail">Maloobchodný pozemok</string>
+
+	<string name="poi_fireplace_yes">Ohnisko</string>
+	<string name="poi_fireplace_no">Bez ohniska</string>
+
+	<string name="poi_covered_yes">S prístreškom</string>
+	<string name="poi_covered_no">Bez prístrešku</string>
+
+	<string name="poi_smoking_no">Zákaz fajčenia</string>
+	<string name="poi_smoking_outside">Fajčenie povolené len vonku</string>
+	<string name="poi_smoking_yes">Fajčenie povolené</string>
+	<string name="poi_smoking_separated">Fajčenie povolené v samostatnej neoddelenej miestnosti</string>
+	<string name="poi_smoking_isolated">Fajčenie povolené v samostatnej oddelenej miestnosti</string>
+	<string name="poi_smoking_dedicated">Vyhradené pre fajčiarov</string>
+
+	<string name="poi_toll_yes">Mýtny poplatok</string>
+	<string name="poi_toll_no">Mýtny poplatok sa nevyberá</string>
+	<string name="poi_toll_hgv_yes">Mýtny poplatok sa vyberá len pre nákladné vozidlá</string>
+	<string name="poi_tactile_paving_yes">Značenie pre slepých</string>
+	<string name="poi_tactile_paving_no">Bez značenia pre slepých</string>
+	<string name="poi_traffic_signals_sound_yes">Zvuková signalizácia</string>
+	<string name="poi_traffic_signals_sound_no">Bez zvukovej signalizácie</string>
+	<string name="poi_traffic_signals_sound_walk">Zvuková signalizácia len keď je prechod povolený</string>
+
+<string name="poi_rescue_station">Záchranná stanica</string>
+
+<string name="poi_doors">Dvere</string>
+	<string name="poi_services">Odpočívadlo so službami</string>
+	<string name="poi_mini_roundabout">Malý kruhový objazd</string>
+	<string name="poi_railway_crossing">Železničné priecestie pre peších</string>
+	<string name="poi_railway_level_crossing">Železničné priecestie</string>
+	<string name="poi_bird_hide">Pozorovateľňa vtákov</string>
+	<string name="poi_horse_riding">Jazdectvo</string>
+	<string name="poi_garden">Záhrada</string>
+
+	<string name="poi_heath">Vresovisko</string>
+	<string name="poi_grass">Zatrávnená plocha</string>
+	<string name="poi_grassland">Divoká tráva/step</string>
+	<string name="poi_scrub">Krovie</string>
+	<string name="poi_farmland">Poľnohospodárska pôda</string>
+	<string name="poi_logging">Ťažba dreva</string>
+	<string name="poi_sand">Piesok</string>
+
+	<string name="poi_windfall">Polom vetrom</string>
+	<string name="poi_dead_wood">Mŕtve drevo</string>
+
+	<string name="poi_passing_place">Vyhýbacie miesto</string>
+	<string name="poi_level">Poschodie</string>
+
+<string name="poi_paediatrics">Detský lekár</string>
+
+	<string name="poi_religion_spiritualist">Spiritualizmus</string>
+	<string name="poi_religion_zoroastrian">Zoroastrizmus</string>
+
+	<string name="poi_bicycle_parking_anchors">Držiaky</string>
+	</resources>

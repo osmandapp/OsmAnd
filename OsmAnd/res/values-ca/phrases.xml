@@ -1171,4 +1171,10 @@
 	<string name="poi_wholesale">Venda majorista</string>
 
 	<string name="poi_content_water">Aigua (contingut)</string>
+	<string name="poi_doors">Portes</string>
+	<string name="poi_ford_stepping_stones">Pas sobre pedres</string>
+	<string name="poi_lighting_tower">Torre d\'il·luminació</string>
+	<string name="poi_greenfield">Zona de desenvolupament urbà</string>
+	<string name="poi_content_wine">Vi (contingut)</string>
+	<string name="poi_content_sewage">Aigües residuals (contingut)</string>
 	</resources>

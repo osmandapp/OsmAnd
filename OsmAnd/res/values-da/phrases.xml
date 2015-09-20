@@ -1173,25 +1173,25 @@
 	<string name="poi_content_grain">Korn (indhold)</string>
 
 	<string name="poi_bunker_silo">Plansilo</string>
-	<string name="poi_brownfield">Forladt industrigrund</string>
-	<string name="poi_greenfield">Byggemodning</string>
+	<string name="poi_brownfield">Nedlagt industrigrund</string>
+	<string name="poi_greenfield">Nye byggegrunde</string>
 	<string name="poi_wholesale">Engros</string>
 
 	<string name="poi_trade_building_supplies">Byggematerialer</string>
 	<string name="poi_trade_plumbing">VVS materialer</string>
-	<string name="poi_trade_wood">Træmaterialer</string>
-	<string name="poi_trade_agricultural_supplies">Landbrugsmaterialer</string>
-	<string name="poi_trade_tile">Flisematerialer</string>
+	<string name="poi_trade_wood">Tømmer</string>
+	<string name="poi_trade_agricultural_supplies">Grovvarer</string>
+	<string name="poi_trade_tile">Fliser</string>
 
 	<string name="poi_population">Befolkning</string>
 
 	<string name="poi_parking_multi_storey">P-hus</string>
 
 	<string name="poi_bicycle_parking_stands">Cykelsstativ</string>
-	<string name="poi_bicycle_parking_wall_loops">Væg sløjfer</string>
-	<string name="poi_bicycle_parking_building">Særlig bygning</string>
+	<string name="poi_bicycle_parking_wall_loops">Vægmonteret cykelparkering</string>
+	<string name="poi_bicycle_parking_building">Cykelparkeringsboks</string>
 	<string name="poi_bicycle_parking_shed">Cykelskur</string>
-	<string name="poi_bicycle_parking_bollard">Pullert</string>
+	<string name="poi_bicycle_parking_bollard">Cykellæn</string>
 	<string name="poi_bicycle_parking_informal">Uformel</string>
 
 	<string name="poi_leaf_type_broadleaved">Bredbladet</string>
@@ -1215,7 +1215,7 @@
 	<string name="poi_trees_tea">Te</string>
 	<string name="poi_trees_coca">Cocabuske</string>
 	<string name="poi_trees_kiwi">Kiwi</string>
-	<string name="poi_trees_meadow_orchard">Eng med frugtplantage</string>
+	<string name="poi_trees_meadow_orchard">"Eng  frugthave"</string>
 	<string name="poi_trees_nectorine">Nektarin</string>
 	<string name="poi_trees_mango">Mango</string>
 	<string name="poi_trees_rubber">Gummitræ</string>
@@ -1224,7 +1224,7 @@
 	<string name="poi_trees_pomegranate">Granatæble</string>
 
 	<string name="poi_parking_underground">Párkeringskælder</string>
-	<string name="poi_bicycle_parking_rack">Reol</string>
+	<string name="poi_bicycle_parking_rack">Cykelsstativ</string>
 	<string name="poi_nudism_yes">Naturisme: tilladt</string>
 	<string name="poi_nudism_no">Naturisme: forbudt</string>
 	<string name="poi_nudism_obligatory">Naturisme: obligatorisk</string>
@@ -1254,7 +1254,7 @@
 	<string name="poi_generator_source_oil">Energikilde: olie</string>
 	<string name="poi_generator_source_diesel">Energikilde: diesel</string>
 
-<string name="poi_aerialway_pylon">Svævebane pylon</string>
+<string name="poi_aerialway_pylon">Svævebanepylon</string>
 
 	<string name="poi_power_tower">Soltårn</string>
 	<string name="poi_power_pole">Elmast</string>
@@ -1271,13 +1271,99 @@
 	<string name="poi_alt_name">Alternativt navn</string>
 
 	<string name="poi_pump_manual">Manuel pumpe</string>
-	<string name="poi_pump_powered">Drevet pumpe</string>
+	<string name="poi_pump_powered">Motordrevet pumpe</string>
 	<string name="poi_pump_no">Ingen pumpe</string>
 
-	<string name="poi_water_characteristic_mineral">Vand karakteristisk: mineral</string>
-	<string name="poi_water_characteristic_mud">Vand karakteristisk: mudder</string>
-	<string name="poi_water_characteristic_sulfuric">Vand karakteristisk: svovlsyre</string>
+	<string name="poi_water_characteristic_mineral">Vandkarakteristisk: mineralsk</string>
+	<string name="poi_water_characteristic_mud">Vandkarakteristisk: mudret</string>
+	<string name="poi_water_characteristic_sulfuric">Vandkarakteristisk: svovlholdig</string>
 
-	<string name="poi_water_point">Vand punkt</string>
+	<string name="poi_water_point">Vandtilslutning</string>
+
+<string name="poi_species">Arter</string>
+	<string name="poi_genus">Slægt</string>
+	<string name="poi_taxon">Takson</string>
+
+	<string name="poi_cuisine">Køkken</string>
+
+<string name="poi_information_guidepost">Vejvisning</string>
+	<string name="poi_information_board">Informationstavle</string>
+	<string name="poi_information_map">Kort</string>
+	<string name="poi_information_office">Informationskontor</string>
+	<string name="poi_information_terminal">Informationsstander</string>
+	<string name="poi_information_route_marker">Ruteskilte</string>
+	<string name="poi_information_hikingmap">Vandrekort</string>
+	<string name="poi_information_nature">Information om natur</string>
+	<string name="poi_information_wildlife">Information om dyreliv</string>
+	<string name="poi_information_history">Information om historie</string>
+	<string name="poi_information_sign">Skilt</string>
+	<string name="poi_information_audioguide">Audioguide</string>
+	<string name="poi_information_bicyclemap">Cykelkort</string>
+	<string name="poi_information_tactile_model">Taktilmodel</string>
+	<string name="poi_information_tactile_map">Taktilkort</string>
+	<string name="poi_board_type_plants">Information om planter</string>
+	<string name="poi_board_type_geology">Information om geologi</string>
+	<string name="poi_board_type_public_transport">Information om offentlig transport</string>
+	<string name="poi_board_type_technology">Information om teknologi</string>
+	<string name="poi_board_type_astronomy">Information om astronomi</string>
+
+<string name="poi_information_trail_blaze">Stiafmærkning</string>
+	<string name="poi_board_type_notice">Advarseltavle</string>
+	<string name="poi_commercial">Forretningsområde</string>
+	<string name="poi_retail">Detailhandelsområde</string>
+
+	<string name="poi_fireplace_yes">Ildsted</string>
+	<string name="poi_fireplace_no">Intet ildsted</string>
+
+	<string name="poi_covered_yes">Med læ</string>
+	<string name="poi_covered_no">Uden læ</string>
+
+	<string name="poi_smoking_no">Rygning forbudt</string>
+	<string name="poi_smoking_outside">Rygning er kun tilladt udendørs</string>
+	<string name="poi_smoking_yes">Rygning tilladt</string>
+	<string name="poi_smoking_separated">Rygning er tilladt i et særskilt rum uden effektiv adskillelse</string>
+	<string name="poi_smoking_isolated">Rygning er tilladt i et separat rum med effektiv adskillelse</string>
+	<string name="poi_smoking_dedicated">Dedikeret til rygere</string>
+
+	<string name="poi_toll_no">Betaling af afgifter opkræves ikke</string>
+	<string name="poi_toll_yes">Betaling af afgifter opkræves</string>
+	<string name="poi_tactile_paving_yes">Med taktilbelægning</string>
+	<string name="poi_tactile_paving_no">Uden taktilbelægning</string>
+	<string name="poi_traffic_signals_sound_yes">Med lydsignal</string>
+	<string name="poi_traffic_signals_sound_no">Uden lydsignal</string>
+	<string name="poi_traffic_signals_sound_walk">Med lydsignal når det er tilladt at gå</string>
+
+<string name="poi_ford_stepping_stones">Trædestensbro</string>
+	<string name="poi_toll_hgv_yes">Betaling af afgifter opkræves for tunge lastvogne</string>
+	<string name="poi_rescue_station">Redningsstation</string>
+
+<string name="poi_bicycle_parking_anchors">Ankre</string>
+	<string name="poi_services">Serviceområde</string>
+
+<string name="poi_doors">Døre</string>
+	<string name="poi_paediatrics">Pædiatri</string>
+
+	<string name="poi_mini_roundabout">Mini-rundkørsel</string>
+	<string name="poi_railway_crossing">Jernbane fodgængerovergang</string>
+	<string name="poi_railway_level_crossing">Jernbaneoverskæring</string>
+	<string name="poi_bird_hide">Fugletårn</string>
+	<string name="poi_horse_riding">Ridning</string>
+	<string name="poi_garden">Have</string>
+
+	<string name="poi_heath">Hede</string>
+	<string name="poi_grass">Græs</string>
+	<string name="poi_grassland">Græsslette</string>
+	<string name="poi_scrub">Krat</string>
+	<string name="poi_farmland">Landbrugsjord</string>
+	<string name="poi_logging">Tømmerhugst</string>
+	<string name="poi_sand">Sand</string>
+
+	<string name="poi_windfall">Stormfald</string>
+	<string name="poi_dead_wood">Dødt træ</string>
+
+	<string name="poi_passing_place">Vigeplads</string>
+
+<string name="poi_leisure_common">Fælles rekreativt område</string>
+	<string name="poi_level">Niveau</string>
 
 </resources>

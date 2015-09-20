@@ -15,6 +15,14 @@
 	<string name="poi_tea">Чайный магазин</string>
 	<string name="poi_dairy">Молочный магазин</string>
 	<string name="poi_vending_machine">Торговый автомат</string>
+	<string name="poi_cheese">Сыр</string>
+	<string name="poi_chocolate">Шоколад</string>
+	<string name="poi_coffee">Кофейный магазин</string>
+	<string name="poi_pasta">Магазин пасты</string>
+	<string name="poi_pastry">Хлебобулочные и кондитерские изделия</string>
+
+	<string name="poi_camera">Фотокамеры и объективы</string>
+	<string name="poi_candles">Свечи и подсвечники</string>
 
 	<string name="poi_books">Книжный магазин</string>
 	<string name="poi_bicycle">Магазин велосипедов</string>
@@ -39,6 +47,7 @@
 	<string name="poi_bedding">Постельное бельё</string>
 	<string name="poi_dive">Снаряжение для дайвинга</string>
 	<string name="poi_doityourself">Инструменты и стройматериалы</string>
+	<string name="poi_doors">Двери</string>
 	<string name="poi_erotic">Секс-шоп</string>
 	<string name="poi_fishing">Рыболовный магазин</string>
 	<string name="poi_florist">Цветочный магазин</string>
@@ -62,6 +71,7 @@
 	<string name="poi_mobile_phone">Салон связи</string>
 	<string name="poi_motorcycle">Мотоциклы</string>
 	<string name="poi_musical_instrument">Музыкальные инструменты</string>
+	<string name="poi_music">Аудиозаписи</string>
 	<string name="poi_newsagent">Журнальный киоск</string>
 	<string name="poi_optician">Оптика</string>
 	<string name="poi_organic">Натуральные продукты</string>
@@ -91,6 +101,22 @@
 	<string name="poi_marketplace">Рынок</string>
 	<string name="poi_sewing">Шитьё и рукоделие</string>
 	<string name="poi_perfumery">Парфюмерия</string>
+	<string name="poi_energy">Элементы питания</string>
+	<string name="poi_fashion">Модная одежда</string>
+	<string name="poi_free_flying">Товары для свободного полёта</string>
+	<string name="poi_games">Магазин игр</string>
+	<string name="poi_garden_furniture">Садовая мебель, аксессуары</string>
+	<string name="poi_furnace">Системы отопления</string>
+	<string name="poi_leather">Изделия из кожи</string>
+	<string name="poi_pyrotechnics">Пиротехника</string>
+	<string name="poi_weapons">Оружие</string>
+	<string name="poi_model">Масштабные модели</string>
+	<string name="poi_trophy">Трофеи, награды</string>
+	<string name="poi_scuba_diving_shop">Товары для аквалангистов</string>
+	<string name="poi_swimming_pool_shop">Оборудование и аксессуары для плавательных бассейнов</string>
+	<string name="poi_tyres">Шины</string>
+	<string name="poi_video_games">Магазин видеоигр</string>
+	<string name="poi_watches">Магазин часов</string>
 
 	<string name="poi_police">Отделение полиции</string>
 	<string name="poi_fire_station">Пожарная часть</string>
@@ -106,6 +132,7 @@
 	<string name="poi_emergency_access_point">Табличка с кодом для службы спасения</string>
 
 	<string name="poi_ford">Брод</string>
+	<string name="poi_ford_stepping_stones">Рудиментарный мост из камней</string>
 	<string name="poi_mountain_pass_yes">Перевал</string>
 	<string name="poi_gate">Ворота</string>
 	<string name="poi_city_wall">Городская стена</string>
@@ -142,8 +169,8 @@
 	<string name="poi_tram_stop">Остановка трамвая</string>
 	<string name="poi_public_transport_station">Станция общественного транспорта</string>
 	<string name="poi_bus_station">Автобусная станция</string>
-	<string name="poi_railway_station">Ж/д станция</string>
-	<string name="poi_railway_platform">Ж/д платформа</string>
+	<string name="poi_railway_station">Железнодорожная станция</string>
+	<string name="poi_railway_platform">Железнодорожная платформа</string>
 	<string name="poi_railway_subway_entrance">Вход в метро</string>
 	<string name="poi_subway_station">Станция метро</string>
 	<string name="poi_taxi">Стоянка такси</string>
@@ -309,7 +336,7 @@
 	<string name="poi_prosecutor">Прокуратура</string>
 	<string name="poi_pension_fund">Пенсионый фонд</string>
 	<string name="poi_migration">Миграционная служба</string>
-	<string name="poi_tax_inspection">Налоговая</string>
+	<string name="poi_tax_inspection">Налоговая инспекция</string>
 	<string name="poi_office_administrative">Административное учреждение</string>
 	<string name="poi_customs">Таможенный пункт</string>
 
@@ -336,6 +363,7 @@
 	<string name="poi_healthcare_rehabilitation">Реабилитация</string>
 	<string name="poi_speech_therapist">Логопед</string>
 	<string name="poi_healthcare_yes">Медицинское учреждение</string>
+	<string name="poi_paediatrics">Педиатр</string>
 
 	<string name="poi_company">Фирма</string>
 	<string name="poi_insurance">Страховая компания</string>
@@ -353,6 +381,13 @@
 	<string name="poi_educational_institution">Образовательное учреждение (администрация)</string>
 	<string name="poi_studio">Студия звукозаписи, телестудия</string>
 	<string name="poi_bookmaker">Букмекерская контора</string>
+	<string name="poi_office_religion">Офис религиозной организации</string>
+	<string name="poi_association">Офис общества, ассоциации</string>
+	<string name="poi_financial">Финансовая контора</string>
+	<string name="poi_political_party">Офис политической партии</string>
+	<string name="poi_notary">Нотариус</string>
+	<string name="poi_foundation">Офис фонда (общественной организации)</string>
+	<string name="poi_tax_advisor">Специалист по подготовке налоговых деклараций</string>
 
 	<string name="poi_stadium">Стадион</string>
 	<string name="poi_sports_centre">Спортивный центр</string>
@@ -388,6 +423,7 @@
 	<string name="poi_handball">Гандбол</string>
 	<string name="poi_hockey">Хоккей</string>
 	<string name="poi_horse_racing">Лошадиные скачки</string>
+	<string name="poi_horse_riding">Езда на лошадях</string>
 	<string name="poi_ice_skating">Катание на коньках</string>
 	<string name="poi_ice_stock">Айсшток</string>
 	<string name="poi_korfbal">Корфбол</string>
@@ -454,7 +490,7 @@
 	<string name="poi_historic_monastery">Исторический монастырь</string>
 	<string name="poi_wayside_cross">Придорожный крест</string>
 	<string name="poi_wayside_shrine">Придорожная святыня</string>
-	<string name="poi_information">Информационный стенд</string>
+	<string name="poi_information">Информация</string>
 	<string name="poi_clock">Часы</string>
 	<string name="poi_travel_agent">Турагенство</string>
 	<string name="poi_viewpoint">Место с хорошим видом</string>
@@ -653,7 +689,9 @@
 	<string name="poi_signal_station_warning">Сигнал опасности</string>
 	<string name="poi_small_craft_facility">Лодочная станция</string>
 	<string name="poi_seamark_rock">Скала</string>
-	<string name="poi_seamark_wreck">Кораблекрушение</string>
+	<string name="poi_seamark_wreck">Кораблекрушение (навигационный ориентир)</string>
+	<string name="poi_seamark_light_major">Большой маяк (навигационный ориентир)</string>
+	<string name="poi_seamark_light_minor">Небольшой маяк (навигационный ориентир)</string>
 
 	<string name="poi_military_airfield">Военный аэродром</string>
 	<string name="poi_military_bunker">Военный бункер</string>
@@ -662,6 +700,8 @@
 	<string name="poi_military_range">Военное стрельбище</string>
 	<string name="poi_military_naval_base">Военно-морская база</string>
 	<string name="poi_military_nuclear_explosion_site">Место ядерного взрыва</string>
+	<string name="poi_military_office">Военкомат</string>
+	<string name="poi_country">Страна</string>
 	<string name="poi_city">Город</string>
 	<string name="poi_capital">Столица</string>
 	<string name="poi_town">Город (небольшой)</string>
@@ -772,12 +812,17 @@
 
 	<string name="poi_piste">Лыжная трасса</string>
 	<string name="poi_piste_skitour">Скитур</string>
-	<string name="poi_piste_sleigh"/>
-	<string name="poi_piste_playground">Игровая площадка</string>
+	<string name="poi_piste_hike">Лыжная трасса для походов</string>
+	<string name="poi_piste_nordic">Прогулочная или беговая лыжня</string>
+	<string name="poi_piste_sled">Трасса для саней</string>
+	<string name="poi_piste_sleigh">Трасса для санных повозок</string>
+	<string name="poi_piste_playground">Зимняя игровая площадка</string>
+	<string name="poi_ski_rental">Прокат лыж</string>
 	<string name="poi_smoking_area">Место для курения</string>
 	<string name="poi_canal">Канал</string>
 	<string name="poi_water">Вода</string>
 	<string name="poi_wood">Лес</string>
+	<string name="poi_tree">Дерево</string>
 	<string name="poi_valley">Долина</string>
 	<string name="poi_bench">Скамейка</string>
 	<string name="poi_piste_ice_skate">Ледовый каток</string>
@@ -793,15 +838,16 @@
 	<string name="poi_road_obstacle">Дорожные препятствия</string>
 		<string name="poi_medical_supply">Медицинские изделия</string>
 	<string name="poi_public_transport_stop_position">Остановка общественного транспорта</string>
-	<string name="poi_railway_buffer_stop">Железнодорожная остановка буфер</string>
-	<string name="poi_junction">Круговое движение</string>
+	<string name="poi_railway_buffer_stop">Железнодорожный буфер</string>
+	<string name="poi_junction">Перекрёсток</string>
 	<string name="poi_observation_tower">Смотровая башня</string>
 	<string name="poi_bell_tower">Колокольня</string>
 	<string name="poi_industrial">Промышленный район</string>
-	<string name="poi_allotments">Садоводство</string>
+	<string name="poi_allotments">Сады</string>
 	<string name="poi_farmyard">Сельскохозяйственный двор</string>
 	<string name="poi_meadow">Луг</string>
 	<string name="poi_landuse_railway">Территория железной дороги</string>
+	<string name="poi_basin">Искусственный водоём</string>
 
 	<string name="poi_storage_tank">Резервуар</string>
 
@@ -809,7 +855,7 @@
 	<string name="poi_residential">Жилой район</string>
 	<string name="poi_religious">Религиозное землепользование</string>
 
-	<string name="poi_general_tourist_attraction_yes">Основная туристическая достопримечательность</string>
+	<string name="poi_general_tourist_attraction_yes">Достопримечательность (тип неизвестен)</string>
 	<string name="poi_attraction_amusement_ride">Парк атракционов</string>
 	<string name="poi_wilderness_hut">Лесной домик</string>
 	<string name="poi_hunting_lodge">Охотничий домик</string>
@@ -862,9 +908,10 @@
 	<string name="poi_start_date">Дата начала постройки</string>
 	<string name="poi_wheelchair">Доступно для инвалидных кресел</string>
 	<string name="poi_wholesale">Опт</string>
-	<string name="poi_parking_underground">Подземная</string>
-	<string name="poi_parking_multi_storey">Многоэтажная</string>
+	<string name="poi_parking_underground">Подземный(ая)</string>
+	<string name="poi_parking_multi_storey">Многоэтажный(ая)</string>
 
+	<string name="poi_bicycle_parking_anchors">Закреплённое кольцо</string>
 	<string name="poi_bicycle_parking_stands">Стойка</string>
 	<string name="poi_bicycle_parking_wall_loops">Крепление только для переднего колеса</string>
 	<string name="poi_bicycle_parking_rack">Рама</string>
@@ -924,6 +971,9 @@
 	<string name="poi_leaf_type_needleleaved">Хвойная растительность</string>
 	<string name="poi_leaf_type_mixed">Смешанного типа</string>
 	<string name="poi_leaf_type_leafless">Безлистная растительность</string>
+	<string name="poi_species">Вид</string>
+	<string name="poi_genus">Род</string>
+	<string name="poi_taxon">Таксон</string>
 
 	<string name="poi_trees_olive">Оливка</string>
 	<string name="poi_trees_apple">Яблоко</string>
@@ -993,4 +1043,144 @@
 
 	<string name="poi_water_point">Пункт водоснабжения</string>
 
-</resources>
+	<string name="poi_cuisine">Кухня</string>
+
+	<string name="poi_monitoring_station">Станция наблюдения</string>
+
+	<string name="poi_information_guidepost">Указатель</string>
+	<string name="poi_information_board">Информационный щит</string>
+	<string name="poi_information_map">Карта</string>
+	<string name="poi_information_office">Информационный офис</string>
+	<string name="poi_information_trail_blaze">Метка пути</string>
+	<string name="poi_information_terminal">Информационный терминал</string>
+	<string name="poi_information_route_marker">Метка маршрута</string>
+	<string name="poi_information_hikingmap">Карта для пешего туризма</string>
+	<string name="poi_information_nature">Информация о природе</string>
+	<string name="poi_information_wildlife">Информация о дикой природе</string>
+	<string name="poi_information_history">Историческая информация</string>
+	<string name="poi_information_sign">Знак</string>
+	<string name="poi_information_audioguide">Аудиогид</string>
+	<string name="poi_information_bicyclemap">Карта для велосипедистов</string>
+	<string name="poi_information_tactile_model">Тактильная модель</string>
+	<string name="poi_information_tactile_map">Тактильная карта</string>
+	<string name="poi_board_type_notice">Доска с объявлениями</string>
+	<string name="poi_board_type_plants">Информация о растениях</string>
+	<string name="poi_board_type_geology">Информация о геологии</string>
+	<string name="poi_board_type_public_transport">Расписание общественного транспорта</string>
+	<string name="poi_board_type_technology">Информация о технологии</string>
+	<string name="poi_board_type_astronomy">Информация об астрономии</string>
+
+	<string name="poi_tourism_attraction">Достопримечательность</string>
+
+	<string name="poi_commercial">Коммерческое землепользование</string>
+	<string name="poi_retail">Розничная торговля (землепользование)</string>
+
+	<string name="poi_fireplace_yes">C местом для разведения огня</string>
+	<string name="poi_fireplace_no">Без места для разведения огня</string>
+	<string name="poi_covered_yes">С укрытием</string>
+	<string name="poi_covered_no">Без укрытия</string>
+
+	<string name="poi_smoking_no">Курение запрещено</string>
+	<string name="poi_smoking_outside">Курение разрешено только снаружи</string>
+	<string name="poi_smoking_yes">Курение разрешено</string>
+	<string name="poi_smoking_separated">Курение разрешено в отдельном помещении без эффективного отделения</string>
+	<string name="poi_smoking_isolated">Курение разрешено в отдельном помещении с эффективым отделением</string>
+	<string name="poi_smoking_dedicated">Специализированное заведение для курящих</string>
+
+	<string name="poi_toll_yes">Оплата за проезд взимается</string>
+	<string name="poi_toll_no">Оплата за проезд не взимается</string>
+	<string name="poi_toll_hgv_yes">Оплата за проезд взимается для грузовых автомобилей</string>
+	<string name="poi_tactile_paving_yes">С тактильным покрытием</string>
+	<string name="poi_tactile_paving_no">Без тактильного покрытия</string>
+	<string name="poi_traffic_signals_sound_yes">Со звуковым сигналом</string>
+	<string name="poi_traffic_signals_sound_no">Без звукового сигнала</string>
+	<string name="poi_traffic_signals_sound_walk">Со звуковым сигналом только когда переход разрешён</string>
+
+	<string name="poi_rescue_station">Спасательная станция</string>
+
+	<string name="poi_services">Зона услуг, прилегающая к шоссе</string>
+	<string name="poi_mini_roundabout">Мини круговое движение</string>
+	<string name="poi_railway_crossing">Железнодорожный переход</string>
+	<string name="poi_railway_level_crossing">Железнодорожный переезд</string>
+	<string name="poi_bird_hide">Укрытие для наблюдения за птицами</string>
+	<string name="poi_leisure_common">Общедоступная площадка для отдыха</string>
+	<string name="poi_garden">Сад</string>
+
+	<string name="poi_heath">Пустошь</string>
+	<string name="poi_grass">Газон</string>
+	<string name="poi_grassland">Луг</string>
+	<string name="poi_scrub">Заросли кустарника</string>
+	<string name="poi_farmland">Сельскохозяйственные угодья</string>
+	<string name="poi_logging">Вырубка</string>
+	<string name="poi_sand">Песок</string>
+	<string name="poi_village_green">Общественная территория в центре населённого пункта</string>
+	<string name="poi_brownfield">Земли под застройку (использованные ранее)</string>
+	<string name="poi_greenfield">Земли под застройку</string>
+	<string name="poi_bunker_silo">Сооружение для хранения силоса</string>
+	<string name="poi_power_cable_distribution_cabinet">Кабельный распределительный шкаф</string>
+	<string name="poi_conservation">Предохраняемая от застройки территория</string>
+	<string name="poi_crane">Кран</string>
+	<string name="poi_cutline">Просека</string>
+	<string name="poi_forest">Лес (обслуживаемый)</string>
+
+	<string name="poi_windfall">Ветровал</string>
+	<string name="poi_dead_wood">Сухостой</string>
+
+	<string name="poi_passing_place">Место разъезда</string>
+
+	<string name="poi_trail_riding_station">Место для ночлега наездников и лошадей</string>
+
+	<string name="poi_breakwater">Волнорез</string>
+	<string name="poi_groyne">Мол</string>
+
+	<string name="poi_animal_shelter_dog">Приют для собак</string>
+	<string name="poi_animal_shelter_cat">Приют для кошек</string>
+	<string name="poi_animal_shelter_dog_cat">Приют для кошек и собак</string>
+	<string name="poi_animal_shelter_bird">Приют для птиц</string>
+
+	<string name="poi_shower">Душ</string>
+
+	<string name="poi_traffic_enforcement">Контроль ПДД</string>
+
+	<string name="poi_enforcement_traffic_signals">Контроль проезда на красный сигнал светофора</string>
+	<string name="poi_enforcement_maxspeed">Контроль максимальной скорости</string>
+	<string name="poi_enforcement_maxheight">Контроль максимальной высоты</string>
+	<string name="poi_enforcement_mindistance">Контроль минимальной дистанции между автомобилями</string>
+	<string name="poi_enforcement_access">Контроль доступа</string>
+	<string name="poi_enforcement_toll">Контроль оплаты</string>
+
+	<string name="poi_icn_ref">Узел международной велосипедной сети</string>
+	<string name="poi_ncn_ref">Узел национальной велосипедной сети</string>
+	<string name="poi_rcn_ref">Узел региональной велосипедной сети</string>
+	<string name="poi_lcn_ref">Узел местной велосипедной сети</string>
+	<string name="poi_iwn_ref">Узел международной сети пешего туризма</string>
+	<string name="poi_nwn_ref">Узел национальной сети пешего туризма</string>
+	<string name="poi_rwn_ref">Узел региональной сети пешего туризма</string>
+	<string name="poi_lwn_ref">Узел местной сети пешего туризма</string>
+
+	<string name="poi_route_hiking_iwn_poi">Маршрут международной сети пешего туризма</string>
+	<string name="poi_route_hiking_nwn_poi">Маршрут национальной сети пешего туризма</string>
+	<string name="poi_route_hiking_rwn_poi">Маршрут региональной сети пешего туризма</string>
+	<string name="poi_route_hiking_lwn_poi">Маршрут местной сети пешего туризма</string>
+	<string name="poi_route_hiking_ref_poi">Обозначение маршрута пешего туризма</string>
+
+	<string name="poi_wine_cellar">Винный погреб</string>
+	<string name="poi_lean_to">Навес</string>
+	<string name="poi_level">Этаж</string>
+
+<string name="poi_fuel_octane_80">Бензин 80</string>
+	<string name="poi_fuel_octane_91">Бензин 91</string>
+	<string name="poi_fuel_octane_92">Бензин 92</string>
+	<string name="poi_fuel_octane_95">Бензин 95</string>
+	<string name="poi_fuel_octane_98">Бензин 98</string>
+	<string name="poi_fuel_octane_100">Бензин 100</string>
+	<string name="poi_fuel_lh2">Жидкий водород</string>
+	<string name="poi_fuel_electricity">Электроэнергия</string>
+	<string name="poi_landfill_waste_nuclear">Ядерные отходы</string>
+	<string name="poi_religion_spiritualist">Спиритуализм</string>
+	<string name="poi_religion_bahai">Бахаизм</string>
+	<string name="poi_religion_pagan">Язычество</string>
+	<string name="poi_religion_tenrikyo">Тэнрикё</string>
+	<string name="poi_religion_zoroastrian">Зороастризм</string>
+
+	</resources>

@@ -1,11 +1,14 @@
 package net.osmand.plus.mapcontextmenu;
 
+import android.app.Activity;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
+import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.ContextMenuAdapter;
@@ -57,28 +60,32 @@ public class MapContextMenu {
 
 		this.pointDescription = pointDescription;
 		this.object = object;
+		foundStreetName = null;
 
-		acquireStretName();
+		acquireStretName(mapActivity, new LatLon(pointDescription.getLat(), pointDescription.getLon()));
 
 		MapContextMenuFragment.showInstance(mapActivity);
 
 	}
 
 	public void hide(MapActivity mapActivity) {
-
-		Fragment fragment = mapActivity.getSupportFragmentManager().findFragmentByTag("MapContextMenuFragment");
+		MapContextMenuFragment fragment = findMenuFragment(mapActivity);
 		if (fragment != null)
-			((MapContextMenuFragment)fragment).dismissMenu();
+			fragment.dismissMenu();
 	}
 
-	private void acquireStretName() {
-		RouteDataObject rt = app.getLocationProvider().getLastKnownRouteSegment();
-		if(rt != null) {
-			foundStreetName = RoutingHelper.formatStreetName(rt.getName(settings.MAP_PREFERRED_LOCALE.get()),
-					rt.getRef(), rt.getDestinationName(settings.MAP_PREFERRED_LOCALE.get()));
-		} else {
-			foundStreetName = null;
-		}
+	public void refreshMenuTitle(MapActivity mapActivity) {
+		MapContextMenuFragment fragment = findMenuFragment(mapActivity);
+		if (fragment != null)
+			fragment.refreshTitle();
+	}
+
+	private MapContextMenuFragment findMenuFragment(MapActivity mapActivity) {
+		Fragment fragment = mapActivity.getSupportFragmentManager().findFragmentByTag("MapContextMenuFragment");
+		if (fragment != null)
+			return (MapContextMenuFragment)fragment;
+		else
+			return null;
 	}
 
 	public int getLeftIconId() {
@@ -135,11 +142,51 @@ public class MapContextMenu {
 			return foundStreetName;
 	}
 
-	public MenuController getMenuController() {
+	private void acquireStretName(final MapActivity activity, final LatLon loc) {
+		new AsyncTask<LatLon, Void, RouteDataObject>() {
+			Exception e = null;
+
+			@Override
+			protected RouteDataObject doInBackground(LatLon... params) {
+				try {
+					return app.getLocationProvider().findRoute(loc.getLatitude(), loc.getLongitude());
+				} catch (Exception e) {
+					this.e = e;
+					e.printStackTrace();
+					return null;
+				}
+			}
+
+			protected void onPostExecute(RouteDataObject result) {
+				if(e != null) {
+					//Toast.makeText(activity, R.string.error_avoid_specific_road, Toast.LENGTH_LONG).show();
+					foundStreetName = null;
+				} else if(result != null) {
+					foundStreetName = RoutingHelper.formatStreetName(result.getName(settings.MAP_PREFERRED_LOCALE.get()),
+							result.getRef(), result.getDestinationName(settings.MAP_PREFERRED_LOCALE.get()));
+					if (foundStreetName != null && foundStreetName.trim().length() == 0) {
+						foundStreetName = null;
+					}
+				} else {
+					foundStreetName = null;
+				}
+
+				if (foundStreetName != null) {
+					activity.runOnUiThread(new Runnable() {
+						public void run() {
+							refreshMenuTitle(activity);
+						}
+					});
+				}
+			};
+		}.execute(loc);
+	}
+
+	public MenuController getMenuController(Activity activity) {
 
 		if (object != null) {
 			if (object instanceof Amenity) {
-				return new AmenityInfoMenuController(app, (Amenity)object);
+				return new AmenityInfoMenuController(app, activity, (Amenity)object);
 			}
 		}
 

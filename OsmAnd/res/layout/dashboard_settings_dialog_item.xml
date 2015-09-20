@@ -6,22 +6,34 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/list_header_height"
     android:paddingLeft="@dimen/dialog_content_margin"
-    android:paddingRight="@dimen/dialog_content_margin"
     android:orientation="horizontal">
-
-    <net.osmand.plus.widgets.TextViewEx
-        android:id="@+id/text"
-        style="@style/DashboardSubHeader"
-        android:layout_marginLeft="0dp"
-        android:textColor="@color/dashboard_black"
-        android:textSize="@dimen/default_list_text_size"
-        osmand:typeface="@string/font_roboto_regular"
-        tools:text="@string/lorem_ipsum"/>
 
     <include
         layout="@layout/check_item_rel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"/>
+
+    <net.osmand.plus.widgets.TextViewEx
+        android:id="@+id/text"
+        style="@style/DashboardSubHeader"
+        android:layout_marginLeft="16dp"
+        android:textColor="@color/dashboard_black"
+        android:textSize="@dimen/default_list_text_size"
+        osmand:typeface="@string/font_roboto_regular"
+        tools:text="@string/lorem_ipsum"/>
+
+
+    <net.osmand.plus.widgets.ButtonEx
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center_vertical"
+        android:id="@+id/numberOfRowsTextView"
+        android:textColor="@color/dashboard_blue"
+        android:textSize="@dimen/default_list_text_size"
+        osmand:typeface="@string/font_roboto_regular"
+        android:gravity="center"
+        tools:text="5"
+        style="@style/DashboardGeneralButton"/>
 
 </LinearLayout>
