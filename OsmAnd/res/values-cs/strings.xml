@@ -930,7 +930,7 @@
   
   <string name="show_cameras">Zobrazovat dopravní radary</string>
   <string name="show_traffic_warnings">Zobrazovat rychlostní omezení</string>
-  <string name="avoid_toll_roads">Vyhnout se placeným silnicím</string>
+  <string name="avoid_toll_roads">Placené silnice</string>
   <string name="tip_recent_changes_0_8_2_t">"Změny ve verzi 0.8.2:
 \n\t* Vylepšená navigace
 \n\t* Dynamické mapové widgety\n\t* Tlačítko zámku se záznamem trasy
@@ -1370,13 +1370,13 @@ s často kladenými otázkami.</string>
 	<string name="routing_attr_prefer_motorway_description">Upřednostňovat dálnice</string>
 	<string name="routing_attr_short_way_name">Nejkratší cesta</string>
 	<string name="routing_attr_short_way_description">Použít nejkratší cestu</string>
-	<string name="routing_attr_avoid_toll_name">Vyhnout se placeným silnicím</string>
+	<string name="routing_attr_avoid_toll_name">Placené silnice</string>
 	<string name="routing_attr_avoid_toll_description">Vyhnout se placeným silnicím</string>
-	<string name="routing_attr_avoid_unpaved_name">Vyhnout se nezpevněným cestám</string>
+	<string name="routing_attr_avoid_unpaved_name">Nezpevněné cesty</string>
 	<string name="routing_attr_avoid_unpaved_description">Vyhnout se nezpevněným cestám</string>
-	<string name="routing_attr_avoid_ferries_name">Vyhnout se trajektům</string>
+	<string name="routing_attr_avoid_ferries_name">Trajekty</string>
 	<string name="routing_attr_avoid_ferries_description">Vyhnout se trajektům</string>
-	<string name="routing_attr_avoid_motorway_name">Vyhnout se dálnicím</string>
+	<string name="routing_attr_avoid_motorway_name">Dálnice</string>
 	<string name="routing_attr_avoid_motorway_description">Vyhnout se dálnicím</string>
 	<string name="routing_attr_weight_name">Hmotnostní limit</string>
 	<string name="routing_attr_weight_description">Zadejte hmotnost vozidla, která musí být povolená na cestách</string>
@@ -1643,9 +1643,9 @@ s často kladenými otázkami.</string>
     <string name="home">Domovská stránka</string>
     <string name="keep_navigation_service">Ponechat</string>
 	<string name="stop_navigation_service">Přerušit</string>
-	<string name="enable_sleep_mode">Zapnout režim spánku GPS</string>
+	<string name="enable_sleep_mode">Zapnout GPS v režimu na pozadí</string>
 	<string name="gps_wake_up_timer">Interval probouzení GPS</string>
-	<string name="sleep_mode_stop_dialog">Přerušit režim spánku GPS?</string>
+	<string name="sleep_mode_stop_dialog">Přerušit GPS běžící na pozadí?</string>
 	<string name="map_preferred_locale_descr">Preferovaný jazyk pro nápisy na mapě (pokud není dostupný budou použité anglické nebo lokální názvy)</string>
     <string name="map_preferred_locale">Preferovaný jazyk mapy</string>
     <string name="local_map_names">Lokální názvy</string>
@@ -1943,7 +1943,7 @@ s často kladenými otázkami.</string>
     <string name="storage_directory">Úložiště map</string>
     <string name="shared_string_copy">Kopírovat</string>
     <string name="rendering_attr_hideHouseNumbers_name">Skrýt popisná čísla domů</string>
-    <string name="routing_attr_avoid_borders_name">Nepřekračovat hranice</string>
+    <string name="routing_attr_avoid_borders_name">Překročení hranic</string>
 	<string name="routing_attr_avoid_borders_description">Nepřekračovat hranice do jiné země</string>
 	<string name="routing_attr_height_name">Výškové omezení</string>
 	<string name="routing_attr_height_description">Zadejte výšku vozidla, jaká má být povolena na cestách</string>
@@ -2012,7 +2012,7 @@ s často kladenými otázkami.</string>
 	<string name="plugin_settings">Moduly</string>
 	<string name="av_locations_descr">GPX soubor s poznámkou umístění</string>
     <string name="av_locations">Umístění</string>
-    <string name="routing_attr_avoid_shuttle_train_name">Nepoužít kyvadlový vlak</string>
+    <string name="routing_attr_avoid_shuttle_train_name">Kyvadlový vlak</string>
 	<string name="routing_attr_avoid_shuttle_train_description">Nepoužít kyvadlový vlak</string>
     <string name="lang_la">Latinsky</string>
     <string name="poi_action_delete">smazat</string>
