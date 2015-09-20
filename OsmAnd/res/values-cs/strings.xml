@@ -2068,4 +2068,5 @@ s často kladenými otázkami.</string>
 	<string name="opening_at">Otevřeno od</string>
 	<string name="closing_at">Otevřeno do</string>
 	<string name="count_of_lines">Počet řádků</string>
-</resources>
+<string name="show_on_start">Zobrazit po spuštění</string>
+	</resources>
