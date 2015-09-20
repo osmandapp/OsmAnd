@@ -296,7 +296,7 @@
   <string name="general_settings">Główne</string>
   <string name="index_settings_descr">Pobiera i zarządza plikami map przechowywanymi na urządzeniu</string>
   <string name="index_settings">Zarządzanie plikami map</string>
-  <string name="osmand_service">Tryb uśpienia</string>
+  <string name="osmand_service">Tryb działania w tle</string>
   <string name="osmand_service_descr">Działanie aplikacji, gdy ekran jest wygaszony</string>
   <string name="fast_route_mode">Najszybsza trasa</string>
   <string name="fast_route_mode_descr">"Wyznacza najszybszą trasę zamiast najkrótszej "</string>
@@ -380,12 +380,12 @@
   <string name="gps_provider">GPS</string>
   <string name="int_seconds">sekund</string>
   <string name="int_min">min.</string>
-  <string name="background_service_int_descr">Ustaw czas pomiędzy wybudzeniami używany przez usługę trybu uśpienia</string>
+  <string name="background_service_int_descr">Ustaw czas pomiędzy wybudzeniami używany przez usługę działania w tle</string>
   <string name="background_service_int">Częstość wybudzania GPS</string>
-  <string name="background_service_provider_descr">Wybierz dostawcę lokalizacji dla trybu w tle</string>
+  <string name="background_service_provider_descr">Wybierz dostawcę lokalizacji dla trybu działania w tle</string>
   <string name="background_service_provider">Sposób lokalizacji</string>
   <string name="background_router_service_descr">Uruchom usługę śledzącą Twoją pozycję w tle podczas kiedy ekran jest wyłączony</string>
-  <string name="background_router_service">Użyj usługi w tle</string>
+  <string name="background_router_service">Uruchom OsmAnd w tle</string>
   <string name="off_router_service_no_gps_available">Usługa nawigacji w tle wymaga wybrania dostawcy lokacji zanim zostanie włączona.</string>
   <string name="routing_settings_descr">Określa opcje nawigacji</string>
   <string name="routing_settings">Nawigacja</string>
@@ -690,7 +690,7 @@
   
   
   <string name="osmand_rastermaps_plugin_description">"Umożliwia korzystanie z wielu typów map online, od predefiniowanych kafelków OpenStreetMap (np. Mapnik) poprzez zdjęcia satelitarne, aż po specjalne mapy pogodowe, klimatyczne, geologiczne, cieniujące wzgórza.\n\nKażda z tych map może zostać użyta jako mapa główna lub jako warstwa dodatkowa nakładana na mapę bazową (np. mapy offline). W celu zwiększenia widoczności nakładki, niektóre elementy map wektorowych mogą zostać ukryte poprzez ustawienia w menu konfiguracji mapy.\n\nMapy kafelkowe można uzyskać bezpośrednio z zasobów online, jak i przygotować je wcześniej do użycia offline kopiując je ręcznie do katalogu danych OsmAnd. "</string>
-  <string name="osmand_background_plugin_description">Wyświetla ustawienia umożliwiające włączenie śledzenia i nawigacji w trybie uśpienia (wyłączony ekran) poprzez okresowe wybudzanie urządzenia GPS.</string>
+  <string name="osmand_background_plugin_description">Wyświetla ustawienia umożliwiające włączenie śledzenia i nawigacji w tle (wyłączony ekran) poprzez okresowe wybudzanie urządzenia GPS.</string>
   <string name="osmand_accessibility_description">Umożliwia korzystanie ze specjalnych ułatwień dostępu urządzenia bezpośrednio w OsmAnd. Wykorzystuje np. dostosowanie szybkości mowy głosów TTS, konfigurowanie poruszania się po ekranie za pomocą pada kierunkowego, użycie trackballa do zmiany powiększenia lub wsparcie TTS, jak choćby automatyczne podawanie pozycji.</string>
   
   
@@ -923,7 +923,7 @@
   
   <string name="show_cameras">Fotoradary</string>
   <string name="show_traffic_warnings">Ostrzeżenia</string>
-  <string name="avoid_toll_roads">Dróg płatnych</string>
+  <string name="avoid_toll_roads">Drogi płatne</string>
   <string name="tip_recent_changes_0_8_2_t">Zmiany w 0.8.2:
 \n\t* Poprawiona nawigacja
 \n\t* Dynamiczne widżety mapy
@@ -956,8 +956,8 @@
   <string name="bg_service_interval">Ustaw częstość wybudzania:</string>
   <string name="screen_is_locked">Aby odblokować, naciśnij ikonę kłódki</string>
   <string name="bg_service_screen_unlock">Odblokuj ekran</string>
-  <string name="bg_service_sleep_mode_off">Włącz\n tryb uśpienia</string>
-  <string name="bg_service_sleep_mode_on">Wyłącz\n tryb uśpienia</string>
+  <string name="bg_service_sleep_mode_off">Uruchom\n aplikację w tle</string>
+  <string name="bg_service_sleep_mode_on">Zatrzymaj\n działanie aplikacji w tle</string>
   <string name="filterpoi_activity">Stwórz filtr POI</string>
   <string name="day_night_info_description">Wschód: %1$s
 \nZachód: %2$s</string>
@@ -965,7 +965,7 @@
   <string name="layer_map_appearance">Skonfiguruj ekran</string>
   <string name="avoid_unpaved">Dróg nieutwardzonych</string>
   <string name="avoid_ferries">Promów</string>
-  <string name="avoid_in_routing_title">Unikanie…</string>
+  <string name="avoid_in_routing_title">Unikaj…</string>
   <string name="avoid_in_routing_descr">Wyznacza trasy unikając dróg płatnych, nieutwardzonych, promów</string>
   <string name="show_warnings_title">Wyświetlanie ostrzeżeń…</string>
   <string name="show_warnings_descr">Wyświetla ostrzeżenia ruchu drogowego, ostrzeżenia o fotoradarach i informacje o pasach</string>
@@ -1561,13 +1561,13 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="routing_attr_prefer_motorway_description">Preferowanie autostrad</string>
 	<string name="routing_attr_short_way_name">Najkrótsza droga</string>
 	<string name="routing_attr_short_way_description">Używaj najkrótszej drogi</string>
-	<string name="routing_attr_avoid_toll_name">Unikanie płatnych dróg</string>
+	<string name="routing_attr_avoid_toll_name">Płatne drogi</string>
 	<string name="routing_attr_avoid_toll_description">Unikaj płatnych dróg</string>
-	<string name="routing_attr_avoid_unpaved_name">Unikanie nieutwardzonych dróg</string>
+	<string name="routing_attr_avoid_unpaved_name">Nieutwardzone drogi</string>
 	<string name="routing_attr_avoid_unpaved_description">Unikanie nieutwardzonych dróg</string>
-	<string name="routing_attr_avoid_ferries_name">Unikanie przepraw promowych</string>
+	<string name="routing_attr_avoid_ferries_name">Przeprawy promowe</string>
 	<string name="routing_attr_avoid_ferries_description">Unikanie przepraw promowych</string>
-	<string name="routing_attr_avoid_motorway_name">Unikanie autostrad</string>
+	<string name="routing_attr_avoid_motorway_name">Autostrady</string>
 	<string name="routing_attr_avoid_motorway_description">Unikanie autostrad</string>
 	<string name="routing_attr_weight_name">Limit wagi</string>
 	<string name="routing_attr_weight_description">Określa maksymalną, dozwoloną masę pojazdu</string>
@@ -1816,9 +1816,9 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="osmo_auth_error">Wystąpił błąd uwierzytelnienia OsMo: %1$s.\n Może to być wina przerwy w działaniu usługi lub rejestracja użytkownika straciła ważność.\n Kontynuować z nową rejestracją?</string>
     <string name="keep_navigation_service">Utrzymuj</string>
 	<string name="stop_navigation_service">Wyłącz</string>
-	<string name="enable_sleep_mode">Włącz tryb uśpienia GPS</string>
+	<string name="enable_sleep_mode">Włącz tryb działania GPS w tle</string>
 	<string name="gps_wake_up_timer">Częstość wybudzania GPS</string>
-	<string name="sleep_mode_stop_dialog">Wyłączyć tryb uśpienia GPS?</string>
+	<string name="sleep_mode_stop_dialog">Wyłączyć tryb działania GPS w tle?</string>
 	<string name="map_preferred_locale_descr">Preferowany język dla etykiet na mapie (jeśli niedostępny, zostanie wybrany język angielski lub lokalna nazwa)</string>
     <string name="map_preferred_locale">Preferowany język map</string>
     <string name="local_map_names">Nazwy lokalne</string>
@@ -2111,7 +2111,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="search_poi_category_hint">Wprowadź tekst, aby wyszukać dane</string>
     <string name="rendering_attr_hideHouseNumbers_name">Ukrywanie numerów budynków</string>
     <string name="storage_directory_multiuser">Pamięć użytkownika</string>
-    <string name="routing_attr_avoid_borders_name">Unikanie przekraczania granicy</string>
+    <string name="routing_attr_avoid_borders_name">Przekraczanie granicy</string>
 	<string name="routing_attr_avoid_borders_description">Unika przekraczania granicy z innym państwem</string>
 	<string name="routing_attr_height_name">Limit wysokości</string>
 	<string name="routing_attr_height_description">Określa maksymalną, dozwoloną wysokość pojazdu</string>
@@ -2132,7 +2132,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="archive_wikipedia_data">Posiadasz stare niezgodne dane Wikipedii. Czy chcesz je zarchiwizować?</string>
     <string name="download_wikipedia_files">Pobrać dodatkowe dane Wikipedii (%1$s MB)?</string>
     <string name="gps_network_not_enabled">Usługa lokalizacji nie jest włączona. Włączyć ją?</string>
-    <string name="disable_recording_once_app_killed_descrp">Wstrzymuje rejestrowanie trasy po zakończeniu programu na liście ostatnich aplikacji. (Wskazanie trybu uśpienia OsmAnd zniknie z pasku powiadomień.)</string>
+    <string name="disable_recording_once_app_killed_descrp">Po zakończeniu pracy aplikacji wstrzymuje rejestrowanie trasy. (Ikona pracy w tle znika z paska powiadomień)</string>
     <string name="shared_string_import2osmand">Import do OsmAnd</string>
     <string name="read_full_article">Czytaj cały artykuł (online)</string>
     <string name="download_wikipedia_item">Wikipedia</string>
@@ -2201,7 +2201,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="error_message_pattern">Błąd: {0}</string>
 <string name="av_locations">Położenia</string>
     <string name="plugin_settings">Wtyczki</string>
-	<string name="routing_attr_avoid_shuttle_train_name">Unikanie pociągów wahadłowych</string>
+	<string name="routing_attr_avoid_shuttle_train_name">Pociągi wahadłowe</string>
 	<string name="routing_attr_avoid_shuttle_train_description">Unikanie pociągów wahadłowych</string>
     <string name="traffic_warning_hazard">Zagrożenie</string>
     <string name="we_really_care_about_your_opinion">Zależy nam na opinii na temat programu i jest dla nas ważne, aby ją poznać.</string>
@@ -2236,4 +2236,6 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="saved_at_time">Zapisano o: %1$s</string>
 	<string name="poi_deleted_localy">POI zostanie usunięty gdy tylko wyślesz swoje zmiany</string>
 	<string name="show_gpx">Pokaż GPX</string>
+<string name="show_on_start">Wyświetlaj przy starcie</string>
+	<string name="count_of_lines">Liczba linii</string>
 </resources>
