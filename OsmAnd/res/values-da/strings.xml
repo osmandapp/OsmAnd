@@ -2132,4 +2132,5 @@
 <string name="poi_deleted_localy">Interessepunkt (IP) vil blive slettet, når ændringer overføres</string>
 	<string name="show_gpx">Vis GPX</string>
 <string name="count_of_lines">Antal linjer</string>
-</resources>
+<string name="show_on_start">Vis ved start</string>
+	</resources>
