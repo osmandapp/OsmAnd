@@ -914,7 +914,7 @@
     <string name="int_seconds">sekunder</string>
     <string name="background_service_int_descr">Indstil vågn-op interval som anvendes ved kørsel i baggrunden</string>
     <string name="background_service_int">GPS vågn-op interval</string>
-    <string name="background_service_provider_descr">Vælg placeringsudbyder der bruges af tjenesten i baggrunden</string>
+    <string name="background_service_provider_descr">Vælg placeringsudbyder som bruges af baggrundstjenesten</string>
     <string name="background_service_provider">Placeringsudbyder</string>
     <string name="background_router_service_descr">Kør OsmAnd i baggrunden for at spore positionen, mens skærmen er slukket</string>
     <string name="background_router_service">Kør OsmAnd i baggrunden</string>
@@ -1666,9 +1666,9 @@
     <string name="map_preferred_locale_descr">Foretrukket sprog for etiketter på kortet (hvis sprog ikke findes skiftes til engelsk eller lokale navne)</string>
     <string name="map_preferred_locale">Foretrukket sprog på kort</string>
     <string name="stop_navigation_service">Afbryd</string>
-    <string name="enable_sleep_mode">Aktiver GPS i baggrunden</string>
+    <string name="enable_sleep_mode">Aktiver GPS baggrundstjenesten</string>
     <string name="gps_wake_up_timer">GPS vågn-op interval</string>
-    <string name="sleep_mode_stop_dialog">Afbryd GPS i baggrunden?</string>
+    <string name="sleep_mode_stop_dialog">Afbryd GPS baggrundstjenesten?</string>
     <string name="keep_navigation_service">Hold</string>
     <string name="lang_al">Albansk</string>
     <string name="lang_ar">Arabisk</string>
