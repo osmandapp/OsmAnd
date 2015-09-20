@@ -1561,7 +1561,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="routing_attr_prefer_motorway_description">Preferowanie autostrad</string>
 	<string name="routing_attr_short_way_name">Najkrótsza droga</string>
 	<string name="routing_attr_short_way_description">Używaj najkrótszej drogi</string>
-	<string name="routing_attr_avoid_toll_name">Płatne drogi</string>
+	<string name="routing_attr_avoid_toll_name">Drogi płatne</string>
 	<string name="routing_attr_avoid_toll_description">Unikaj płatnych dróg</string>
 	<string name="routing_attr_avoid_unpaved_name">Nieutwardzone drogi</string>
 	<string name="routing_attr_avoid_unpaved_description">Unikanie nieutwardzonych dróg</string>
