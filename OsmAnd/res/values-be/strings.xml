@@ -345,7 +345,7 @@
 	<string name="map_widget_transparent">Празрыстае афармленьне</string>
 	
 	
-	<string name="bg_service_sleep_mode_off">Уключыць\n фонавы рэжым</string>
+	<string name="bg_service_sleep_mode_off">Запусьціць у\n фонавым рэжыме</string>
 	<string name="bg_service_sleep_mode_on">Спынiць\n фонавы рэжым</string>
 	<string name="gps_wakeup_interval">Iнтэрвал абуджэньня GPS: %s</string>
 	<string name="int_continuosly">Безперапынны</string>
@@ -375,7 +375,7 @@
 	<string name="bg_service_interval">Задайце інтэрвал абуджэньня:</string>
 	<string name="show_cameras">Камэры хуткасьці</string>
 	<string name="show_traffic_warnings">Абмежаваньне руху</string>
-	<string name="avoid_toll_roads">Пазьбягаць платных дарог</string>
+	<string name="avoid_toll_roads">Платныя дарогі</string>
 	<string name="continue_follow_previous_route_auto">Папярэдняя навігацыя не была скончаная. Працягваць кіравацца ёю? (%1$s сэкундаў)</string>
 	<string name="route_updated_loc_found">Маршрут будзе разлічвацца як толькі вызначыцца становішча</string>
 	<string name="osmand_parking_hours">Гадзін</string>
@@ -632,7 +632,7 @@
 	<string name="user_password">Ваш пароль OSM</string>
 	<string name="user_password_descr">Патрэбна для прадстаўленьня ў openstreetmap.org</string>
 	<string name="osmand_service">Фонавы рэжым</string>
-	<string name="osmand_service_descr">Ужываць каб OsmAnd працавала падчас выключанага экрану</string>
+	<string name="osmand_service_descr">OsmAnd працуе ў фоне падчас выключанага экрану</string>
 	<string name="tip_rotation_switching">Арыентацыя мапы</string>
 	<string name="tip_rotation_switching_t_v2">"Націснуўшы на значок компаса на экране з мапай Вы можаце зьмяніць рэжым павароту мапы. ↵
 \n\nДаступныя варыянты: ↵
@@ -993,7 +993,7 @@
 	<string name="background_service_provider_descr">Абярыце крыніцу каардынат для выкарыстаньня фонавым сэрвісам</string>
 	<string name="background_service_provider">Крыніца каардынат</string>
 	<string name="background_router_service_descr">Запускае OsmAnd ў фонавым рэжыме для адсочваньня становішча пры выключаным экране</string>
-	<string name="background_router_service">Працаваць ў фонавым рэжыме</string>
+	<string name="background_router_service">Запусьціць OsmAnd у фоне</string>
 	<string name="off_router_service_no_gps_available">Фонаваму сэрвісу неабходная інфармацыя пра месцазнаходжаньне.</string>
 	<string name="hide_poi_filter">Схаваць фільтр</string>
 	<string name="show_poi_filter">Паказаць фільтр</string>
@@ -1313,13 +1313,13 @@
     <string name="routing_attr_prefer_motorway_name">Аддаваць перавагу аўтамагістралям</string>
 	<string name="routing_attr_short_way_name">Самы кароткі шлях</string>
 	<string name="routing_attr_short_way_description">Выкарыстоўваць кароткі шлях</string>
-	<string name="routing_attr_avoid_toll_name">Пазьбягаць платных дарог</string>
+	<string name="routing_attr_avoid_toll_name">Платныя дарогі</string>
 	<string name="routing_attr_avoid_toll_description">Пазьбягаць платных дарог</string>
-	<string name="routing_attr_avoid_unpaved_name">Пазбягаць грунтавыя дарогі</string>
+	<string name="routing_attr_avoid_unpaved_name">Грунтавыя дарогі</string>
 	<string name="routing_attr_avoid_unpaved_description">Пазбягаць грунтавыя дарогі</string>
-	<string name="routing_attr_avoid_ferries_name">Пазьбягаць пераправы</string>
+	<string name="routing_attr_avoid_ferries_name">Паромныя пераправы</string>
 	<string name="routing_attr_avoid_ferries_description">Пазбягаць пераправы</string>
-	<string name="routing_attr_avoid_motorway_name">Пазьбягаць аўтамагістралі</string>
+	<string name="routing_attr_avoid_motorway_name">Аўтамагістралі</string>
 	<string name="routing_attr_avoid_motorway_description">Пазьбягаць аўтамагістралі</string>
 	<string name="routing_attr_weight_name">Абмежаваньне вагі</string>
 	<string name="routing_attr_weight_description">Задайце вагу аўтамабіля для пракладаньня маршрутаў</string>
@@ -1966,7 +1966,7 @@
     <string name="storage_directory_multiuser">Агульнае сховішча</string>
     <string name="application_dir_change_warning3">Вы хочаце, каб OsmAnd таксама скапіяваў свае файлы дадзеных у новае месца прызначэньня?</string>
     <string name="rendering_attr_hideHouseNumbers_name">Схаваць нумары дамоў</string>
-    <string name="routing_attr_avoid_borders_name">Пазьбягаць перасячэньня мяжы</string>
+    <string name="routing_attr_avoid_borders_name">Перасячэньне мяжы</string>
 	<string name="routing_attr_avoid_borders_description">Пазьбягаць перасячэньня мяжы іншай краіны</string>
 	<string name="routing_attr_height_name">Абмежаваньне па вышыні</string>
 	<string name="routing_attr_height_description">Пазначце вышыню транспартнага сродку для разьліку маршруту</string>
@@ -2066,7 +2066,7 @@
 	<string name="shared_string_skip">Прапусьціць</string>
 	<string name="plugin_settings">Модулі</string>
 	<string name="commit_poi">Укласьці POI</string>
-<string name="routing_attr_avoid_shuttle_train_name">Пазьбягаць трансфер-цягнікоў</string>
+<string name="routing_attr_avoid_shuttle_train_name">Трансфер-цягнік</string>
 	<string name="routing_attr_avoid_shuttle_train_description">Пазьбягаць трансфер-цягнікоў</string>
     <string name="tab_title_basic">Асноўнае</string>
 	<string name="building_number">Нумар будынка</string>
@@ -2091,4 +2091,6 @@
 <string name="saved_at_time">Пасьпяхова захаваны ў: %1$s</string>
 <string name="show_gpx">Паказаць GPX</string>
 <string name="poi_deleted_localy">POI будуць выдаленыя, як толькі вы загрузіце вашы зьмены</string>
-	</resources>
+	<string name="show_on_start">Паказваць пры запуску</string>
+	<string name="count_of_lines">Колькасьць радкоў</string>
+</resources>
