@@ -68,7 +68,7 @@ public class DashboardSettingsDialogFragment extends DialogFragment
 		View view = LayoutInflater.from(getActivity()).inflate(
 				R.layout.show_dashboard_on_start_dialog_item, null, false);
 		final TextView textView = (TextView) view.findViewById(R.id.text);
-		textView.setText("Show on start");
+		textView.setText(R.string.show_on_start);
 		final OsmandSettings.CommonPreference<Boolean> shouldShowDashboardOnStart =
 				settings.registerBooleanPreference(MapActivity.SHOULD_SHOW_DASHBOARD_ON_START, true);
 		final CompoundButton compoundButton = (CompoundButton) view.findViewById(R.id.check_item);

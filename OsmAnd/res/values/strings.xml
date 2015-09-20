@@ -2237,6 +2237,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="try_again">Try again</string>
 	<string name="error_message_pattern">Error: {0}</string>
 	<string name="dahboard_options_dialog_title">Configure dashboard</string>
+	<string name="show_on_start">Show on start</string>
 	<string name="shared_string_card_was_hidden">Card was hidden</string>
 	<string name="shared_string_undo">UNDO</string>
 	<string name="shared_string_skip">Skip</string>
