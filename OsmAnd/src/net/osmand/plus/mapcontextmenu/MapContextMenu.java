@@ -62,7 +62,7 @@ public class MapContextMenu {
 		this.object = object;
 		foundStreetName = null;
 
-		acquireStretName(mapActivity, new LatLon(pointDescription.getLat(), pointDescription.getLon()));
+		acquireStreetName(mapActivity, new LatLon(pointDescription.getLat(), pointDescription.getLon()));
 
 		MapContextMenuFragment.showInstance(mapActivity);
 
@@ -142,7 +142,7 @@ public class MapContextMenu {
 			return foundStreetName;
 	}
 
-	private void acquireStretName(final MapActivity activity, final LatLon loc) {
+	private void acquireStreetName(final MapActivity activity, final LatLon loc) {
 		new AsyncTask<LatLon, Void, RouteDataObject>() {
 			Exception e = null;
 
