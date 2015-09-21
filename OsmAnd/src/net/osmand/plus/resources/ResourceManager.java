@@ -165,6 +165,7 @@ public class ResourceManager {
 	public void resetStoreDirectory() {
 		dirWithTiles = context.getAppPath(IndexConstants.TILES_INDEX_DIR);
 		dirWithTiles.mkdirs();
+		context.getAppPath(IndexConstants.GPX_INDEX_DIR).mkdirs();
 		// ".nomedia" indicates there are no pictures and no music to list in this dir for the Gallery app
 		try {
 			context.getAppPath(".nomedia").createNewFile(); //$NON-NLS-1$
