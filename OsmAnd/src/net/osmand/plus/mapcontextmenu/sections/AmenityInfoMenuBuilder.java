@@ -18,7 +18,9 @@ import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.util.Algorithms;
+import net.osmand.util.OpeningHoursParser;
 
+import java.util.Calendar;
 import java.util.Map;
 
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
@@ -33,11 +35,11 @@ public class AmenityInfoMenuBuilder extends MenuBuilder {
 		this.amenity = amenity;
 	}
 
-	private void buildRow(View view, int iconId, String text) {
-		buildRow(view, getRowIcon(iconId), text);
+	private void buildRow(View view, int iconId, String text, int textColor) {
+		buildRow(view, getRowIcon(iconId), text, textColor);
 	}
 
-	private void buildRow(View view, Drawable icon, String text) {
+	private void buildRow(View view, Drawable icon, String text, int textColor) {
 		boolean light = app.getSettings().isLightContent();
 
 		LinearLayout ll = new LinearLayout(view.getContext());
@@ -77,6 +79,9 @@ public class AmenityInfoMenuBuilder extends MenuBuilder {
 		textView.setAutoLinkMask(Linkify.ALL);
 		textView.setLinksClickable(true);
 		textView.setText(text);
+		if (textColor > 0) {
+			textView.setTextColor(view.getResources().getColor(textColor));
+		}
 		//textView.setText("sdf dsaf fsdasdfg adsf asdsfd asdf sdf adsfg asdf sdfa sdf dsf agsfdgd fgsfd sdf asdf adg adf sdf asdf dfgdfsg sdfg adsf asdf asdf sdf SDF ASDF ADSF ASDF ASDF DAF SDAF dfg dsfg dfg sdfg rg rth sfghs dfgs dfgsdfg adfg dfg sdfg dfs ");
 
 		LinearLayout.LayoutParams llTextViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -114,19 +119,33 @@ public class AmenityInfoMenuBuilder extends MenuBuilder {
 		firstRow = true;
 
 		for (PlainMenuItem item : plainMenuItems) {
-			buildRow(view, item.getIconId(), item.getText());
+			buildRow(view, item.getIconId(), item.getText(), 0);
 		}
 
 		MapPoiTypes poiTypes = app.getPoiTypes();
 		for (Map.Entry<String, String> e : amenity.getAdditionalInfo().entrySet()) {
 			int iconId = 0;
 			Drawable icon = null;
+			int textColor = 0;
 			String key = e.getKey();
 			String vl = e.getValue();
 			if (key.startsWith("name:")) {
 				continue;
 			} else if (Amenity.OPENING_HOURS.equals(key)) {
 				iconId = R.drawable.ic_action_time;
+
+				OpeningHoursParser.OpeningHours rs = OpeningHoursParser.parseOpenedHours(amenity.getOpeningHours());
+				if (rs != null) {
+					Calendar inst = Calendar.getInstance();
+					inst.setTimeInMillis(System.currentTimeMillis());
+					boolean opened = rs.isOpenedForTime(inst);
+					if (opened) {
+						textColor = R.color.color_ok;
+					} else {
+						textColor = R.color.color_invalid;
+					}
+				}
+
 			} else if (Amenity.PHONE.equals(key)) {
 				iconId = R.drawable.ic_action_call_dark;
 			} else if (Amenity.WEBSITE.equals(key)) {
@@ -156,9 +175,9 @@ public class AmenityInfoMenuBuilder extends MenuBuilder {
 			}
 
 			if (icon != null) {
-				buildRow(view, icon, vl);
+				buildRow(view, icon, vl, textColor);
 			} else {
-				buildRow(view, iconId, vl);
+				buildRow(view, iconId, vl, textColor);
 			}
 		}
 	}
