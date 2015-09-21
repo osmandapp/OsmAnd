@@ -202,7 +202,7 @@
     <string name="settings_privacy">Privacidade</string>
     <string name="points">Pontos</string>
 	<string name="navigation_over_track">Iniciar a navegação pelo trajeto?</string>
-	<string name="speak_pedestrian">Faixas de pedestre</string>
+	<string name="speak_pedestrian">Travessias de pedestre</string>
     <string name="rendering_attr_roadStyle_name">Estilo das vias</string>
     <string name="avoid_roads_msg">Você pode obter uma rota alternativa, selecionando quais vias evitar</string>
 	<string name="rendering_value__name">Predefinido</string>
@@ -304,7 +304,7 @@
 	<string name="tip_search">Pesquisando</string>
 	<string name="tip_search_t">"Você pode procurar lugares diretamente no mapa através de Usar posição\' → \'Pesquisar perto daqui\', ou mediante a tela de pesquisa através de \'Menu\' → \'Pesquisar\'.↵\n↵\nA tela de pesquisa fornece modelos para a busca↵\n→* pelo endereço ↵\n→* por coordenadas  ↵\n→* por POI (por categoria ou nome) ↵\n→* por seu histórico de pesquisa ↵\n→* ou por seus favoritos. ↵\n\nPara todos os pontos, se oferece um menu de contexto ou barra de ação com opções como \'Direções para\' ou \'Mostrar no mapa\', etc. "</string>
 	<string name="background_service_is_enabled_question">O serviço OsmAnd ainda está em execução em segundo plano. Você quer interrompê-lo, também?</string>
-	<string name="sleep_mode_stop_dialog">Interromper o modo de hibernação do GPS?</string>
+	<string name="sleep_mode_stop_dialog">Interromper o modo em segundo plano do GPS?</string>
 	<string name="stop_navigation_service">Interrupção</string>
 	<string name="confirm_every_run">Sempre perguntar</string>
 	<string name="save_global_track_interval_descr">Escolher o intervalo de registro para a gravação do trajeto geral (habilitado através do widget de registro de GPX no mapa)</string>
@@ -906,8 +906,8 @@
 	<string name="rendering_attr_showRoadMaps_description">Selecionar quando exibir somente vias no mapa:</string>
 	<string name="safe_mode">Modo seguro</string>
     <string name="native_library_not_running">O aplicativo está em modo seguro (desative nas configurações).</string>
-    <string name="tip_recent_changes_1_0_0_t">"Mudanças na v1.0.0:\n\t* Melhorado o cálculo de rota: mais rápido, mais preciso e até 250 km\n\t* Incluída opção de mapas apenas com vias\n\t* Mapa não perde posição após interrupções\n\t* Permitido modo de serviço oculto durante a navegação "</string>
-    <string name="tip_recent_changes_0_8_4_t">Mudanças na v0.8.4:\n\t*Algumas correções de erros\n\t*Mapa não perde a posição de bloqueio após interrupções\n\t*Possibilidade de ativar modo suspensão durante a navegação</string>
+    <string name="tip_recent_changes_1_0_0_t">"Mudanças na v1.0.0:\n\t* Melhorado o cálculo de rota: mais rápido, mais preciso e até 250 km\n\t* Incluída opção de mapas apenas com vias\n\t* Mapa não perde posição após interrupções\n\t* Permitido modo de serviço em segundo plano durante a navegação "</string>
+    <string name="tip_recent_changes_0_8_4_t">"Mudanças na v0.8.4:\n\t*Algumas correções de erros\n\t*Mapa não perde a posição de bloqueio após interrupções\n\t*Possibilidade de ativar modo em segundo plano durante a navegação "</string>
     <string name="close_changeset">Fechar conjunto de alterações</string>
 	<string name="rendering_attr_roadColors_description">Selecionar um esquema de cores das vias:</string>
 	<string name="rendering_attr_roadColors_name">Esquema de cores das vias</string>
@@ -1794,7 +1794,7 @@
 	<string name="app_name_osmand">OsmAnd</string>
 	<string name="offline_maps_and_navigation">Mapas &amp; Navegação\nOffline</string>
 <string name="commit_poi">Enviar POI</string>
-<string name="routing_attr_avoid_shuttle_train_name">Transporte de trem</string>
+<string name="routing_attr_avoid_shuttle_train_name">Evitar transporte de trem</string>
 	<string name="routing_attr_avoid_shuttle_train_description">Evitar shuttle train</string>
     <string name="plugin_settings">Complementos</string>
 	<string name="tab_title_basic">Básico</string>
@@ -1820,4 +1820,7 @@
 	<string name="saved_at_time">Salvo com sucesso em: %1$s</string>
 <string name="poi_deleted_localy">POI será apagado quando você enviar suas alterações</string>
 	<string name="show_gpx">Mostrar GPX</string>
+<string name="address_unknown">Endereço ainda não é conhecido</string>
+    <string name="show_on_start">Mostrar no início</string>
+	<string name="count_of_lines">Número de linhas</string>
 </resources>
