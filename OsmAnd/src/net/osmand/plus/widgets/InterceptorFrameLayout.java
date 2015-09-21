@@ -11,9 +11,6 @@ import android.widget.FrameLayout;
 
 import net.osmand.plus.widgets.tools.SwipeDismissTouchListener;
 
-/**
- * Created by GaidamakUA on 8/5/15.
- */
 public class InterceptorFrameLayout extends FrameLayout {
 	private int mTouchSlop;
 	private boolean mIsScrolling;
@@ -67,7 +64,7 @@ public class InterceptorFrameLayout extends FrameLayout {
 				}
 
 				final int xDiff = calculateDistanceX(ev);
-				if (xDiff > mTouchSlop) {
+				if (Math.abs(xDiff) > mTouchSlop) {
 					mIsScrolling = true;
 					return true;
 				}

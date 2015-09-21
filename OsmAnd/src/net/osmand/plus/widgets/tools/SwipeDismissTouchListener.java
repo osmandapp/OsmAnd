@@ -143,7 +143,7 @@ public class SwipeDismissTouchListener implements View.OnTouchListener {
 					dismiss = (velocityX < 0) == (deltaX < 0);
 					dismissRight = mVelocityTracker.getXVelocity() > 0;
 				}
-				if (dismiss && dismissRight) {
+				if (dismiss) {
 					// dismiss
 					final boolean finalDismissRight = dismissRight;
 					ViewCompat.animate(mView)
@@ -210,7 +210,7 @@ public class SwipeDismissTouchListener implements View.OnTouchListener {
 				mVelocityTracker.addMovement(motionEvent);
 				float deltaX = motionEvent.getRawX() - mDownX;
 				float deltaY = motionEvent.getRawY() - mDownY;
-				if (deltaX > mSlop && Math.abs(deltaY) < deltaX / 2) {
+				if (Math.abs(deltaX) > mSlop && Math.abs(deltaY) < Math.abs(deltaX) / 2) {
 					mSwiping = true;
 					mSwipingSlop = (deltaX > 0 ? mSlop : -mSlop);
 					mView.getParent().requestDisallowInterceptTouchEvent(true);
