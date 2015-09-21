@@ -1342,4 +1342,7 @@
 	<string name="poi_passing_place">Lugar de paso</string>
 	<string name="poi_level">Nivel</string>
 
-</resources>
+<string name="poi_leisure_common">Área de ocio común</string>
+	<string name="poi_heath">Brezal</string>
+	<string name="poi_windfall">Fruto caído</string>
+	</resources>
