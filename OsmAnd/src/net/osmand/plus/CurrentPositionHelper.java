@@ -43,7 +43,7 @@ public class CurrentPositionHelper {
 		ctx = new RoutePlannerFrontEnd(false).buildRoutingContext(cfg, null, app.getResourceManager().getRoutingMapFiles());
 	}
 	
-	public synchronized RouteDataObject runUpdateInThread(double lat, double lon, ResultMatcher<RouteDataObject> result) throws IOException {
+	public synchronized RouteDataObject runUpdateInThread(double lat, double lon, final ResultMatcher<RouteDataObject> result) throws IOException {
 		RoutePlannerFrontEnd rp = new RoutePlannerFrontEnd(false);
 		if (ctx == null || am != app.getSettings().getApplicationMode()) {
 			initCtx(app);
@@ -123,8 +123,8 @@ public class CurrentPositionHelper {
 		return d;
 	}
 	
-	public void getLastKnownRouteSegment(Location loc, ResultMatcher<RouteDataObject> result) {
-		scheduleRouteSegmentFind(loc);
+	public void getRouteSegment(Location loc, ResultMatcher<RouteDataObject> result) {
+		scheduleRouteSegmentFind(loc, result);
 	}
 	
 	public RouteDataObject getLastKnownRouteSegment(Location loc) {
@@ -134,12 +134,12 @@ public class CurrentPositionHelper {
 			return null;
 		}
 		if (r == null) {
-			scheduleRouteSegmentFind(loc);
+			scheduleRouteSegmentFind(loc, null);
 			return null;
 		}
 		double d = getOrthogonalDistance(r, loc);
 		if (d > 25) {
-			scheduleRouteSegmentFind(loc);
+			scheduleRouteSegmentFind(loc, null);
 		}
 		if (d < 70) {
 			return r;

@@ -219,10 +219,6 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		locationSimulation = new OsmAndLocationSimulation(app, this);
 	}
 	
-	public RouteDataObject findRoute(double lat , double lon) {
-		return currentPositionHelper.runUpdateInThreadCatch(lat, lon);
-	}
-
 	public void resumeAllUpdates() {
 		final LocationManager service = (LocationManager) app.getSystemService(Context.LOCATION_SERVICE);
 		if(app.getSettings().isInternetConnectionAvailable()) {
@@ -849,7 +845,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 	
 	public void getRouteSegment(net.osmand.Location loc, ResultMatcher<RouteDataObject> result) {
-		currentPositionHelper.getLastKnownRouteSegment(loc, result);
+		currentPositionHelper.getRouteSegment(loc, result);
 	}
 
 	public net.osmand.Location getLastKnownLocation() {
