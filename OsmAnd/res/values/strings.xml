@@ -305,7 +305,7 @@
     <string name="points">Points</string>
 	<string name="navigation_over_track">Start navigation along track?</string>
 	<string name="avoid_roads_msg">You can trigger an alternative route by selecting roads to avoid</string>
-	<string name="speak_pedestrian">Announce pedestrian crosswalks</string>
+	<string name="speak_pedestrian">Pedestrian crosswalks</string>
     <string name="rendering_attr_roadStyle_name">Road style</string>
     <string name="rendering_value__name">Default</string>
     <string name="rendering_value_default_name">Default</string>
@@ -401,8 +401,8 @@
     <string name="traffic_warning_calming">Traffic calming</string>
     <string name="traffic_warning_speed_camera">Speed camera</string>
     <string name="traffic_warning">Traffic warning</string>
-	<string name="speak_favorites">Announce nearby Favorites</string>
-	<string name="speak_poi">Announce nearby POI</string>
+	<string name="speak_favorites">Nearby Favorites</string>
+	<string name="speak_poi">Nearby POI</string>
 	<string name="way_alarms">Traffic warnings</string>
 	<string name="tip_navigation">Navigation</string>
 	<string name="tip_navigation_t">To get directions to a place, either directly long-click on it on the map, (then tap its description marker and select \'Directions to\'), or select \'Directions to\' after tapping any entry in a search results list or favorite list.
@@ -460,7 +460,7 @@
     <string name="shared_string_all">All</string>
     <string name="waypoints">Waypoints</string>
     <string name="targets">Destinations</string>
-    <string name="announce_gpx_waypoints">Announce GPX waypoints</string>
+    <string name="announce_gpx_waypoints">GPX waypoints</string>
     <string name="download_additional_maps">Download missing maps %1$s (%2$d MB)?</string>
     <string name="rendering_value_browse_map_name">Browse map</string>
     <string name="rendering_value_car_name">Car</string>
@@ -825,10 +825,10 @@
 	<string name="driving_region_uk">UK, India, Australia &amp; Others</string>
     <string name="speak_title">Announce…</string>
 	<string name="speak_descr">Configure to announce street names, traffic warnings (forced stops, speed bumps), speed camera warnings, speed limits</string>
-	<string name="speak_street_names">Announce street names (TTS)</string>
-    <string name="speak_speed_limit">Announce speed limit</string>
-    <string name="speak_cameras">Announce speed cameras</string>
-	<string name="speak_traffic_warnings">Announce traffic warnings</string>
+	<string name="speak_street_names">Street names (TTS)</string>
+    <string name="speak_speed_limit">Speed limit</string>
+    <string name="speak_cameras">Speed cameras</string>
+	<string name="speak_traffic_warnings">Traffic warnings</string>
     <string name="tip_recent_changes_1_5_t">Changes in 1.5:
 	\n\t* Voice warnings about speed limits and cameras
 	\n\t* More voice prompt capabilities (street names announced)
