@@ -4,7 +4,10 @@ import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.widget.Toast;
 
+import net.osmand.Location;
+import net.osmand.ResultMatcher;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
@@ -15,6 +18,7 @@ import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.sections.AmenityInfoMenuController;
 import net.osmand.plus.mapcontextmenu.sections.MenuController;
@@ -143,43 +147,39 @@ public class MapContextMenu {
 	}
 
 	private void acquireStreetName(final MapActivity activity, final LatLon loc) {
-		new AsyncTask<LatLon, Void, RouteDataObject>() {
-			Exception e = null;
+		Location ll = new Location("");
+		ll.setLatitude(loc.getLatitude());
+		ll.setLongitude(loc.getLongitude());
+		app.getLocationProvider().getRouteSegment(ll, new ResultMatcher<RouteDataObject>() {
 
 			@Override
-			protected RouteDataObject doInBackground(LatLon... params) {
-				try {
-					return app.getLocationProvider().findRoute(loc.getLatitude(), loc.getLongitude());
-				} catch (Exception e) {
-					this.e = e;
-					e.printStackTrace();
-					return null;
-				}
-			}
+			public boolean publish(RouteDataObject object) {
+				if(object != null) {
+						foundStreetName = RoutingHelper.formatStreetName(object.getName(settings.MAP_PREFERRED_LOCALE.get()),
+								object.getRef(), object.getDestinationName(settings.MAP_PREFERRED_LOCALE.get()));
+						if (foundStreetName != null && foundStreetName.trim().length() == 0) {
+							foundStreetName = null;
+						}
 
-			protected void onPostExecute(RouteDataObject result) {
-				if(e != null) {
-					//Toast.makeText(activity, R.string.error_avoid_specific_road, Toast.LENGTH_LONG).show();
-					foundStreetName = null;
-				} else if(result != null) {
-					foundStreetName = RoutingHelper.formatStreetName(result.getName(settings.MAP_PREFERRED_LOCALE.get()),
-							result.getRef(), result.getDestinationName(settings.MAP_PREFERRED_LOCALE.get()));
-					if (foundStreetName != null && foundStreetName.trim().length() == 0) {
-						foundStreetName = null;
+					if (foundStreetName != null) {
+						activity.runOnUiThread(new Runnable() {
+							public void run() {
+								refreshMenuTitle(activity);
+							}
+						});
 					}
 				} else {
 					foundStreetName = null;
 				}
+				return true;
+			}
 
-				if (foundStreetName != null) {
-					activity.runOnUiThread(new Runnable() {
-						public void run() {
-							refreshMenuTitle(activity);
-						}
-					});
-				}
-			};
-		}.execute(loc);
+			@Override
+			public boolean isCancelled() {
+				return false;
+			}
+
+		});
 	}
 
 	public MenuController getMenuController(Activity activity) {
