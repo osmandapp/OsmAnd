@@ -1,10 +1,8 @@
 package net.osmand.plus.mapcontextmenu;
 
 import android.app.Activity;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.widget.Toast;
 
 import net.osmand.Location;
 import net.osmand.ResultMatcher;
@@ -13,9 +11,9 @@ import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -35,7 +33,10 @@ public class MapContextMenu {
 	private PointDescription pointDescription;
 	private Object object;
 
-	private String foundStreetName;
+	private int leftIconId;
+	private String nameStr;
+	private String typeStr;
+	private String streetStr;
 
 	private static final String KEY_CTX_MENU_OBJECT = "key_ctx_menu_object";
 	private static final String KEY_CTX_MENU_POINT_DESC = "key_ctx_menu_point_desc";
@@ -64,8 +65,13 @@ public class MapContextMenu {
 
 		this.pointDescription = pointDescription;
 		this.object = object;
-		foundStreetName = null;
+		leftIconId = 0;
+		nameStr = null;
+		typeStr = null;
+		streetStr = null;
 
+		acquireLeftIconId();
+		acquireNameAndType();
 		acquireStreetName(mapActivity, new LatLon(pointDescription.getLat(), pointDescription.getLon()));
 
 		MapContextMenuFragment.showInstance(mapActivity);
@@ -93,6 +99,22 @@ public class MapContextMenu {
 	}
 
 	public int getLeftIconId() {
+		return leftIconId;
+	}
+
+	public String getTitleStr() {
+		return nameStr;
+	}
+
+	public String getLocationStr(MapActivity mapActivity) {
+		if (Algorithms.isEmpty(streetStr))
+			return pointDescription.getLocationName(mapActivity, true).replaceAll("\n", "");
+		else
+			return streetStr;
+	}
+
+	private void acquireLeftIconId() {
+		leftIconId = 0;
 		if (object != null) {
 			if (object instanceof Amenity) {
 				String id = null;
@@ -108,42 +130,45 @@ public class MapContextMenu {
 				if (id != null) {
 					Integer resId = RenderingIcons.getResId(id);
 					if (resId != null) {
-						return resId;
+						leftIconId = resId;
 					}
 				}
 			}
 		}
-		return 0;
 	}
 
-	public String getAddressStr() {
-		String res = null;
-
+	private void acquireNameAndType() {
 		if (object != null) {
 			if (object instanceof Amenity) {
 				Amenity amenity = (Amenity) object;
-				res = OsmAndFormatter.getPoiStringWithoutType(amenity, settings.MAP_PREFERRED_LOCALE.get());
+
+				PoiCategory pc = amenity.getType();
+				PoiType pt = pc.getPoiTypeByKeyName(amenity.getSubType());
+				typeStr = amenity.getSubType();
+				if (pt != null) {
+					typeStr = pt.getTranslation();
+				} else if(typeStr != null){
+					typeStr = Algorithms.capitalizeFirstLetterAndLowercase(typeStr.replace('_', ' '));
+				}
+				nameStr = amenity.getName(settings.MAP_PREFERRED_LOCALE.get());
 			}
 		}
 
-		if (Algorithms.isEmpty(res)) {
-			String typeName = pointDescription.getTypeName();
-			String name = pointDescription.getName();
-
-			if (!Algorithms.isEmpty(name))
-				res = name;
-			else if (!Algorithms.isEmpty(typeName))
-				res = typeName;
+		if (Algorithms.isEmpty(nameStr)) {
+			nameStr = pointDescription.getName();
+		}
+		if (Algorithms.isEmpty(typeStr)) {
+			typeStr = pointDescription.getTypeName();
 		}
 
-		return Algorithms.isEmpty(res) ? "Address is unknown yet" : res; // todo: text constant
-	}
-
-	public String getLocationStr(MapActivity mapActivity) {
-		if (foundStreetName == null)
-			return pointDescription.getLocationName(mapActivity, true).replaceAll("\n", "");
-		else
-			return foundStreetName;
+		if (Algorithms.isEmpty(nameStr)) {
+			if (!Algorithms.isEmpty(typeStr)) {
+				nameStr = typeStr;
+				typeStr = null;
+			} else {
+				nameStr = app.getResources().getString(R.string.address_unknown);
+			}
+		}
 	}
 
 	private void acquireStreetName(final MapActivity activity, final LatLon loc) {
@@ -154,14 +179,14 @@ public class MapContextMenu {
 
 			@Override
 			public boolean publish(RouteDataObject object) {
-				if(object != null) {
-						foundStreetName = RoutingHelper.formatStreetName(object.getName(settings.MAP_PREFERRED_LOCALE.get()),
-								object.getRef(), object.getDestinationName(settings.MAP_PREFERRED_LOCALE.get()));
-						if (foundStreetName != null && foundStreetName.trim().length() == 0) {
-							foundStreetName = null;
-						}
+				if (object != null) {
+					streetStr = RoutingHelper.formatStreetName(object.getName(settings.MAP_PREFERRED_LOCALE.get()),
+							object.getRef(), object.getDestinationName(settings.MAP_PREFERRED_LOCALE.get()));
+					if (streetStr != null && streetStr.trim().length() == 0) {
+						streetStr = null;
+					}
 
-					if (foundStreetName != null) {
+					if (streetStr != null) {
 						activity.runOnUiThread(new Runnable() {
 							public void run() {
 								refreshMenuTitle(activity);
@@ -169,7 +194,7 @@ public class MapContextMenu {
 						});
 					}
 				} else {
-					foundStreetName = null;
+					streetStr = null;
 				}
 				return true;
 			}
@@ -186,7 +211,12 @@ public class MapContextMenu {
 
 		if (object != null) {
 			if (object instanceof Amenity) {
-				return new AmenityInfoMenuController(app, activity, (Amenity)object);
+				MenuController menuController = new AmenityInfoMenuController(app, activity, (Amenity)object);
+				if (!Algorithms.isEmpty(typeStr)) {
+					menuController.addPlainMenuItem(R.drawable.ic_action_info_dark, typeStr);
+				}
+				menuController.addPlainMenuItem(R.drawable.map_my_location, pointDescription.getLocationName(activity, true).replaceAll("\n", ""));
+				return menuController;
 			}
 		}
 

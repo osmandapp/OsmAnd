@@ -25,6 +25,7 @@ import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 
 public class AmenityInfoMenuBuilder extends MenuBuilder {
 
+	boolean firstRow;
 	private final Amenity amenity;
 
 	public AmenityInfoMenuBuilder(OsmandApplication app, final Amenity amenity) {
@@ -32,11 +33,11 @@ public class AmenityInfoMenuBuilder extends MenuBuilder {
 		this.amenity = amenity;
 	}
 
-	private void buildRow(View view, int iconId, String text, boolean firstRow) {
-		buildRow(view, getRowIcon(iconId), text, firstRow);
+	private void buildRow(View view, int iconId, String text) {
+		buildRow(view, getRowIcon(iconId), text);
 	}
 
-	private void buildRow(View view, Drawable icon, String text, boolean firstRow) {
+	private void buildRow(View view, Drawable icon, String text) {
 		boolean light = app.getSettings().isLightContent();
 
 		LinearLayout ll = new LinearLayout(view.getContext());
@@ -94,6 +95,8 @@ public class AmenityInfoMenuBuilder extends MenuBuilder {
 		horizontalLine.setBackgroundColor(app.getResources().getColor(light ? R.color.ctx_menu_info_divider_light : R.color.ctx_menu_info_divider_dark));
 
 		((LinearLayout) view).addView(horizontalLine);
+
+		firstRow = false;
 	}
 
 	public int dpToPx(float dp) {
@@ -108,7 +111,11 @@ public class AmenityInfoMenuBuilder extends MenuBuilder {
 	@Override
 	public void build(View view) {
 
-		boolean firstRow = true;
+		firstRow = true;
+
+		for (PlainMenuItem item : plainMenuItems) {
+			buildRow(view, item.getIconId(), item.getText());
+		}
 
 		MapPoiTypes poiTypes = app.getPoiTypes();
 		for (Map.Entry<String, String> e : amenity.getAdditionalInfo().entrySet()) {
@@ -149,12 +156,10 @@ public class AmenityInfoMenuBuilder extends MenuBuilder {
 			}
 
 			if (icon != null) {
-				buildRow(view, icon, vl, firstRow);
+				buildRow(view, icon, vl);
 			} else {
-				buildRow(view, iconId, vl, firstRow);
+				buildRow(view, iconId, vl);
 			}
-
-			firstRow = false;
 		}
 	}
 }

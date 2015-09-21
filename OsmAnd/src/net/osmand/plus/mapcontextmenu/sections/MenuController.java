@@ -30,6 +30,10 @@ public abstract class MenuController {
 		builder.build(rootView);
 	}
 
+	public void addPlainMenuItem(int iconId, String text) {
+		builder.addPlainMenuItem(iconId, text);
+	}
+
 	public int getInitialMenuState() {
 		if (isLandscapeLayout()) {
 			return MenuState.FULL_SCREEN;
