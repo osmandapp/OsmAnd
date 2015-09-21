@@ -119,7 +119,7 @@
 	<string name="bg_service_interval">設定喚醒間隔：</string>
 	<string name="show_cameras">顯示測速照相</string>
 	<string name="show_traffic_warnings">顯示交通狀況警示</string>
-	<string name="avoid_toll_roads">付費道路</string>
+	<string name="avoid_toll_roads">避開收費道路</string>
 	<string name="continue_follow_previous_route_auto">先前的導航未完成。要按照它繼續嗎？ (%1$s 秒)</string>
 	<string name="route_updated_loc_found">一旦找到定位時，導航路線將重新規劃</string>
 	<string name="osmand_parking_hours">小時</string>
@@ -1299,14 +1299,14 @@
     <string name="route_from">從：</string>
     
 	
-    <string name="speak_speed_limit">通報速限</string>
-    <string name="speak_cameras">通報測速照相</string>
-	<string name="speak_traffic_warnings">通報交通流量警示</string>
+    <string name="speak_speed_limit">速度限制</string>
+    <string name="speak_cameras">測速照相</string>
+	<string name="speak_traffic_warnings">交通流量警示</string>
 	<string name="osb_author_dialog_password">OSM 密碼 (選項)</string>
-	<string name="announce_gpx_waypoints">通報 GPX 航點</string>
+	<string name="announce_gpx_waypoints">GPX 航點</string>
     <string name="speak_title">通報…</string>
 	<string name="speak_descr">組態通報街道名稱、交通流量警示（強制停止、減速丘）、測速照相警告、速限</string>
-	<string name="speak_street_names">通報街道名稱 (TTS)</string>
+	<string name="speak_street_names">街道名稱 (TTS)</string>
         
     
     <string name="driving_region_descr">選擇駕駛區域：美國、歐洲、英國、亞洲和其它</string>
@@ -1405,13 +1405,13 @@
 	<string name="routing_attr_prefer_motorway_description">高速公路優先</string>
 	<string name="routing_attr_short_way_name">最短路線</string>
 	<string name="routing_attr_short_way_description">使用最短路線</string>
-	<string name="routing_attr_avoid_toll_name">收費道路</string>
+	<string name="routing_attr_avoid_toll_name">避開收費道路</string>
 	<string name="routing_attr_avoid_toll_description">避開收費道路</string>
-	<string name="routing_attr_avoid_unpaved_name">未鋪設路面</string>
+	<string name="routing_attr_avoid_unpaved_name">避開未鋪設路面</string>
 	<string name="routing_attr_avoid_unpaved_description">避開未鋪路面</string>
-	<string name="routing_attr_avoid_ferries_name">渡輪</string>
+	<string name="routing_attr_avoid_ferries_name">避開渡輪</string>
 	<string name="routing_attr_avoid_ferries_description">避開渡輪</string>
-	<string name="routing_attr_avoid_motorway_name">高速公路</string>
+	<string name="routing_attr_avoid_motorway_name">避開高速公路</string>
 	<string name="routing_attr_avoid_motorway_description">避開高速公路</string>
 	<string name="routing_attr_weight_name">重量限制</string>
 	<string name="routing_attr_weight_description">指定許可在路線行駛的車輛重量</string>
@@ -1707,8 +1707,8 @@
     <string name="waypoints">航點</string>
     <string name="targets">目的地</string>
     <string name="way_alarms">交通狀況提醒</string>
-    <string name="speak_favorites">通報附近我的最愛</string>
-    <string name="speak_poi">通報附近 POI</string>
+    <string name="speak_favorites">附近我的最愛</string>
+    <string name="speak_poi">附近的興趣點</string>
     <string name="shared_string_all">全部</string>
     <string name="index_tours">旅遊</string>
     <string name="record_plugin_description">"這個外掛元件在地圖螢幕上，以手動點觸 GPX 記錄小工具，以啟動去錄製和儲存您軌跡的功能，或是自動記錄您所有的導航路線到 GPX 檔案。\n\n錄製的軌跡可以與您的朋友共享或用作為 OSM 的貢獻。運動選手可以使用錄製的軌跡，監看他們的訓練。一些基本的軌跡分析，可以直接在 OsmAnd 進行，如一圈的時間、平均速度等，而軌跡當然也可於事後在專門的第三方分析工具解析。 "</string>
@@ -1805,7 +1805,7 @@
 	<string name="traffic_warning_pedestrian">行人穿越道</string>
 	<string name="show_railway_warnings">顯示鐵路平交道</string>
 	<string name="show_pedestrian_warnings">顯示行人穿越道</string>
-    <string name="speak_pedestrian">通報行人穿越道</string>
+    <string name="speak_pedestrian">行人穿越道</string>
     
 	<string name="navigation_over_track">沿著軌跡開始導航嗎？</string>
 	<string name="avoid_roads_msg">您可以觸發一條替代線路，經由選擇道路去避免</string>
@@ -1983,7 +1983,7 @@
     <string name="storage_directory">地圖存儲</string>
     <string name="shared_string_copy">複製</string>
     <string name="rendering_attr_hideHouseNumbers_name">隱藏門牌號碼</string>
-    <string name="routing_attr_avoid_borders_name">越過邊境</string>
+    <string name="routing_attr_avoid_borders_name">避開越過邊境</string>
 	<string name="routing_attr_avoid_borders_description">防止越過邊界進入別國</string>
 	<string name="routing_attr_height_name">高度限制</string>
 	<string name="routing_attr_height_description">指定許可在路線行駛的車輛高度</string>
@@ -2082,7 +2082,7 @@
 	<string name="app_name_osmand">OsmAnd</string>
 	<string name="offline_maps_and_navigation">離線地圖\n和導航</string>
 <string name="commit_poi">提交興趣點</string>
-<string name="routing_attr_avoid_shuttle_train_name">往返不避鐵路</string>
+<string name="routing_attr_avoid_shuttle_train_name">往返避開鐵路</string>
 	<string name="routing_attr_avoid_shuttle_train_description">往返避開鐵路</string>
     <string name="plugin_settings">外掛元件</string>
 	<string name="tab_title_basic">基本</string>
@@ -2110,4 +2110,5 @@
 	<string name="show_gpx">顯示 GPX</string>
 <string name="count_of_lines">計算行數</string>
 <string name="show_on_start">在開始上顯示</string>
-	</resources>
+	<string name="address_unknown">還不知道地址</string>
+    </resources>

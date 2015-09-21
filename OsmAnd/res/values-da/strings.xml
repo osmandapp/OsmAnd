@@ -256,7 +256,7 @@
     <string name="bg_service_interval">Indstil opvågningsinterval:</string>
     <string name="show_cameras">Fartkameraer</string>
 
-    <string name="avoid_toll_roads">Betalingsveje</string>
+    <string name="avoid_toll_roads">Undgå betalingsveje</string>
     <string name="continue_follow_previous_route_auto">Forrige navigation var ufærdig. Fortsæt den? (%1$s sekunder)</string>
     <string name="route_updated_loc_found">Ruten beregnes, når position er fundet</string>
     <string name="osmand_parking_hours">Timer</string>
@@ -1400,13 +1400,13 @@
 \n Note 2: På den nye placering vil det ikke være muligt at dele filer mellem OsmAnd og OsmAnd+."</string>
     <string name="routing_attr_prefer_motorway_name">Foretræk motorveje</string>
     <string name="routing_attr_prefer_motorway_description">Foretræk motorveje</string>
-    <string name="routing_attr_avoid_toll_name">Betalingsveje</string>
+    <string name="routing_attr_avoid_toll_name">Undgå betalingsveje</string>
     <string name="routing_attr_avoid_toll_description">Undgå betalingsveje</string>
-    <string name="routing_attr_avoid_unpaved_name">Grusveje</string>
+    <string name="routing_attr_avoid_unpaved_name">Undgå grusveje</string>
     <string name="routing_attr_avoid_unpaved_description">Undgå grusveje</string>
-    <string name="routing_attr_avoid_ferries_name">Færger</string>
+    <string name="routing_attr_avoid_ferries_name">Undgå færger</string>
     <string name="routing_attr_avoid_ferries_description">Undgå færger</string>
-    <string name="routing_attr_avoid_motorway_name">Motorveje</string>
+    <string name="routing_attr_avoid_motorway_name">Undgå motorveje</string>
     <string name="routing_attr_avoid_motorway_description">Undgå motorveje</string>
     <string name="routing_attr_weight_name">Vægtgrænse</string>
     <string name="routing_attr_weight_description">Køretøjets vægt der tillades på ruter</string>
@@ -2005,7 +2005,7 @@
     <string name="rendering_attr_hideHouseNumbers_name">Skjul husnumre</string>
     <string name="routing_attr_avoid_borders_description">Undgå at krydse landegrænser</string>
     <string name="routing_attr_height_name">Højdegrænse</string>
-    <string name="routing_attr_avoid_borders_name">Grænseovergang</string>
+    <string name="routing_attr_avoid_borders_name">Undgå at krydse grænser</string>
     <string name="routing_attr_height_description">Køretøjets højde der tillades på ruter</string>
     <string name="use_fast_recalculation">Smart rutegenberegning</string>
     <string name="use_fast_recalculation_desc">Genberegn kun den indledende del af ruten for lange ture</string>
@@ -2102,7 +2102,7 @@
     <string name="app_name_osmand">OsmAnd</string>
     <string name="offline_maps_and_navigation">Offline kort\n&amp; navigation</string>
     <string name="commit_poi">Overfør IP</string>
-    <string name="routing_attr_avoid_shuttle_train_name">Shuttletog</string>
+    <string name="routing_attr_avoid_shuttle_train_name">Undgå shuttletog</string>
     <string name="routing_attr_avoid_shuttle_train_description">Undgå shuttletog</string>
     <string name="plugin_settings">Udvidelser</string>
     <string name="tab_title_advanced">Udvidet</string>
@@ -2131,4 +2131,5 @@
 	<string name="show_gpx">Vis GPX</string>
 <string name="count_of_lines">Antal linjer</string>
 <string name="show_on_start">Vis ved start</string>
-	</resources>
+	<string name="address_unknown">Adressen kendes endnu ikke</string>
+    </resources>
