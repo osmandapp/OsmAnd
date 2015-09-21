@@ -2096,4 +2096,5 @@
 	<string name="recent_places">Недавние места</string>
 	<string name="count_of_lines">Количество строк</string>
 <string name="show_on_start">Показывать при запуске</string>
-	</resources>
+	<string name="address_unknown">Адрес неизвестен</string>
+    </resources>
