@@ -1115,13 +1115,13 @@
 	<string name="debugging_and_development">OsmAnd-utvikling</string>
 	<string name="local_openstreetmap_uploading">Laster opp …</string>
 	<string name="osmand_service">Bakgrunnsmodus</string>
-	<string name="osmand_service_descr">Bruk til å kjøre OsmAnd mens skjermen er av</string>
+	<string name="osmand_service_descr">OsmAnd kjører i bakgrunnen mens skjermen er av</string>
 	<string name="overlay_transparency_descr">Endre overleggsgjennomsiktighet</string>
 	<string name="overlay_transparency">Overleggsgjennomsiktighet</string>
 	<string name="map_transparency_descr">Endre gjennomsiktighet for basiskart</string>
 	<string name="map_transparency">Gjennomsiktighet for basiskart</string>
 	<string name="send_location_sms_pattern">Posisjon: %1$s\n%2$s</string>
-	<string name="background_router_service">Kjør i hvilemodus</string>
+	<string name="background_router_service">Kjør OsmAnd i bakgrunnen</string>
 	<string name="menu_mute_off">Lyd er på</string>
 	<string name="menu_mute_on">Lyd er av</string>
 	<string name="route_tr">Ta til høyre og kjør</string>
@@ -1412,4 +1412,7 @@
 	<string name="shared_string_skip">Hopp over</string>
 	<string name="app_name_osmand">OsmAnd</string>
 	<string name="offline_maps_and_navigation">Offline-kart\n&amp; navigering</string>
-</resources>
+<string name="address_unknown">Adresse er ikke kjent ennå</string>
+    <string name="routing_attr_avoid_shuttle_train_name">Unngå pendeltog</string>
+	<string name="routing_attr_avoid_shuttle_train_description">Unngå pendeltog</string>
+    </resources>
