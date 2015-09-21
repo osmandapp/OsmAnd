@@ -78,7 +78,7 @@
   
   
   <string name="osmand_rastermaps_plugin_description">"Šio įskiepio pagalba galite pasiekti daugybę žemėlapių rūšių internete, pradedant Openstreetmap (Mapnik), baigiant palydovinėmis nuotraukomis ir specialios paskirties sluoksnių, tokių kaip orų, klimato, geologinių žemėlapiai, bei kalvų šešėliavimo sluoksnius.\n\nKiekvienas iš šių žemėlapių gali būti atvaizduotas OsmAnd ekrane kaip pagrindinis (bazinis) arba kaip papildomas antsluoksnis ar posluoksnis kitame baziniame žemėlapyje (pvz., OsmAnd offline žemėlapiuose). Tam, kad posluoksninie žemėlapis būtų aiškiai matomas, galima išjungti OsmAnd vektorinių žemėlapių tam tikrus elementus meniu \"Konfigūruoti žemėlapį\".\n\nTailinius žemėlapius galimi atsisiųsti iš interneto arba paruošti naudojimui neprisijungus (ir rankiniu būdu įkelti į OsmAnd duomenų katalogą) kaip SQLite duomenų bazė, kurią galima paruošti įvairiais trečių šalių įrankiais. "</string>
-  <string name="osmand_background_plugin_description">Rodyti nustatymus sekimui ir navigacijai miego režime (išjungus ekraną) periodiškai žadinant GPS įrenginį.</string>
+  <string name="osmand_background_plugin_description">Rodyti nustatymus sekimui ir navigacijai foniniame režime (išjungus ekraną) periodiškai žadinant GPS įrenginį.</string>
   <string name="osmand_accessibility_description">Šis įskiepis įgalina įrenginio specialiuosius nustatymus tiesiai OsmAnd. Tai, pavyzdžiui, palengvina TTS balso greičio reguliavimą, navigacijos ekrano kryptį, mąstelio reguliavimą.</string>
   
   
@@ -259,8 +259,8 @@
   <string name="user_name_descr">Reikalingas norint teikti duomenis į openstreetmap.org</string>
   <string name="user_password">Jūsų OSM slaptažodis</string>
   <string name="user_password_descr">Reikalingas norint teikti duomenis į openstreetmap.org</string>
-  <string name="osmand_service">Miego režimas</string>
-  <string name="osmand_service_descr">Reikalinga jei norite naudoti OsmAnd kai ekranas yra išjungtas</string>
+  <string name="osmand_service">Foninis režimas</string>
+  <string name="osmand_service_descr">Reikalinga, jei norite naudoti OsmAnd kai ekranas yra išjungtas</string>
   <string name="tip_rotation_switching">Žemėlapio orientacija</string>
   
   
@@ -1006,8 +1006,8 @@
   <string name="bg_service_interval">Nustatyti prabudimo intervalą:</string>
   <string name="screen_is_locked">Norėdami atrakinti ekraną, paspauskite užrakto piktogramą</string>
   <string name="bg_service_screen_unlock">Atrakinti ekraną</string>
-  <string name="bg_service_sleep_mode_off">Įjungti\n miego režimą</string>
-  <string name="bg_service_sleep_mode_on">Išjungti\n miego režimą</string>
+  <string name="bg_service_sleep_mode_off">Įjungti\n foninį režimą</string>
+  <string name="bg_service_sleep_mode_on">Išjungti\n foninį režimą</string>
 <string name="map_widget_show_ruler">Liniuotė</string>
 <string name="gps_wakeup_interval">GPS pabudimo intervalas: %s</string>
 <string name="int_continuosly">Tolydžiai</string>
@@ -1337,13 +1337,13 @@
 	<string name="driving_region_uk">JK, Indija, Australija ir kitos</string>
 	    
     
-    <string name="announce_gpx_waypoints">Pranešti apie GPX tarpinius taškus</string>
+    <string name="announce_gpx_waypoints">GPX tarpiniai taškai</string>
     <string name="speak_title">Pranešti…</string>
 	<string name="speak_descr">Nustatyti gatvių pavadinimų, eismo perspėjimų (priverstinius sustojimus, greičio ribotuvus), greičio radarus, greičio apribojimus</string>
-	<string name="speak_street_names">Prenešti gatvių pavadinimus (TTS)</string>
-    <string name="speak_speed_limit">Pranešti greičio apribojimus</string>
-    <string name="speak_cameras">Pranešti apie greičio radarus</string>
-	<string name="speak_traffic_warnings">Pranešti eismo perspėjimus</string>
+	<string name="speak_street_names">Gatvių pavadinimai (TTS)</string>
+    <string name="speak_speed_limit">Greičio apribojimai</string>
+    <string name="speak_cameras">Greičio radarai</string>
+	<string name="speak_traffic_warnings">Eismo perspėjimai</string>
     <string name="tip_recent_changes_1_5_t">Pakeitimai 1.5 versijoje:
 	\n\t* Pranešimai balsu apie greičio ribojimus ar radarus
 	\n\t* Daugiau pranešimų balsu (gatvių pavadinimai)
@@ -1734,7 +1734,7 @@
     <string name="lang_sw">Svahili</string>
     <string name="lang_he">Hebrajų</string>
     <string name="forward">Pirmyn</string>
-    <string name="home">Namo</string>
+    <string name="home">Duomenų skydelis</string>
     <string name="live_monitoring_m_descr">Siųsti stebėjimo duomenis į pasirinktą tarnybą, kai įjungtas GPX išsaugojimas.</string>
 	<string name="live_monitoring_m">Sekimas internete (reikalingas GPX)</string>
     <string name="live_monitoring_start">Pradėti sekimą internete</string>
@@ -2133,4 +2133,12 @@
 	<string name="poi_deleted_localy">LV bus ištrinti, kai jūs įkelsite pakeitimus</string>
 	<string name="show_gpx">Rodyti GPX</string>
 <string name="recent_places">Vėliausios vietos</string>
-	</resources>
+	<string name="address_unknown">Adresas vis dar nežinomas</string>
+    <string name="routing_attr_avoid_shuttle_train_name">Vengti greitųjų traukinių</string>
+	<string name="routing_attr_avoid_shuttle_train_description"/>
+    <string name="dahboard_options_dialog_title">Duomenų skydelio nustatymai</string>
+	<string name="show_on_start">Rodyti aktyvuojant</string>
+	<string name="offline_maps_and_navigation">Offline žemėlapiai\n&amp; navigacija</string>
+	<string name="commit_poi"/>
+	<string name="count_of_lines">Eilučių kiekis</string>
+</resources>
