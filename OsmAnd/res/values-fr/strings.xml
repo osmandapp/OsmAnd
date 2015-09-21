@@ -939,7 +939,7 @@
   
   <string name="show_cameras">Afficher les radars</string>
   <string name="show_traffic_warnings">Afficher les limitations de vitesse</string>
-  <string name="avoid_toll_roads">Routes à péage</string>
+  <string name="avoid_toll_roads">Éviter les routes à péage</string>
   <string name="tip_recent_changes_0_8_2_t">"Changements en 0.8.2 :
 \n\t* Navigation améliorée
 \n\t* Gadgets de carte dynamiques
@@ -1334,13 +1334,13 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="intermediate_items_sort_by_distance">Optimiser</string>
     <string name="please_select_address">Sélectionnez d\'abord une ville ou une rue</string>
     <string name="context_menu_item_destination_point">Définir comme destination</string>
-    <string name="speak_street_names">Annoncer les noms de rues (TTS)</string>
+    <string name="speak_street_names">Noms de rues (TTS)</string>
     <string name="about_version">Version :</string>
     <string name="edit_tilesource_name">Nom</string>
     <string name="driving_region_japan">Japon</string>
 	<string name="driving_region_us">États-Unis d\'Amérique</string>
 	<string name="driving_region_canada">Canada</string>
-	<string name="speak_speed_limit">Annoncer les limitations de vitesse</string>
+	<string name="speak_speed_limit">Limitation de vitesse</string>
     <string name="tip_map_styles">Styles de cartes</string>
 	<string name="about_settings">À propos</string>
     <string name="about_settings_descr">Note de version, licences, membres du projet</string>
@@ -1361,8 +1361,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	    
     
     <string name="speak_title">Annonces vocales…</string>
-	<string name="speak_cameras">Annoncer les radars</string>
-	<string name="speak_traffic_warnings">Annoncer les stops et les ralentisseurs</string>
+	<string name="speak_cameras">Radars</string>
+	<string name="speak_traffic_warnings">Alerte de traffic</string>
     <string name="osb_author_or_password_not_specified">Merci de spécifier votre nom d\'utilisateur et mot de passe OSM dans les paramètres</string>
     <string name="clear_intermediate_points">Supprimer les étapes intermédiaires</string>
     <string name="keep_intermediate_points">Conserver les étapes intermédiaires</string>
@@ -1371,7 +1371,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="edit_tilesource_elliptic_tile">Mercator elliptique</string>
     <string name="edit_tilesource_choose_existing">Choisir un fournisseur de tuiles existant…</string>
     <string name="maps_define_edit">Définir/Éditer…</string>
-	<string name="announce_gpx_waypoints">Annoncer les points de passage GPX</string>
+	<string name="announce_gpx_waypoints">Points de passage GPX</string>
     <string name="speak_descr">Annoncer les noms de rue, les avertissements (stops, ralentisseurs, radars), les limitations de vitesse</string>
 	<string name="new_directions_point_dialog">Vous avez déjà défini des étapes intermédiaires</string>
     <string name="context_menu_item_directions_to">Itinéraire vers</string>
@@ -1473,13 +1473,13 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="routing_attr_prefer_motorway_description">Privilégier les autoroutes</string>
 	<string name="routing_attr_short_way_name">Itinéraire le plus court</string>
 	<string name="routing_attr_short_way_description">Emprunter l\'itinéraire le plus court</string>
-	<string name="routing_attr_avoid_toll_name">Routes avec péage</string>
+	<string name="routing_attr_avoid_toll_name">Éviter les routes à péage</string>
 	<string name="routing_attr_avoid_toll_description">Éviter les péages</string>
-	<string name="routing_attr_avoid_unpaved_name">Voies non revêtues</string>
+	<string name="routing_attr_avoid_unpaved_name">Éviter les voies non revêtues</string>
 	<string name="routing_attr_avoid_unpaved_description">Éviter les voies non revêtues</string>
-	<string name="routing_attr_avoid_ferries_name">Bateaux ferries</string>
+	<string name="routing_attr_avoid_ferries_name">Éviter les ferries</string>
 	<string name="routing_attr_avoid_ferries_description">Éviter les ferries</string>
-	<string name="routing_attr_avoid_motorway_name">Autoroutes</string>
+	<string name="routing_attr_avoid_motorway_name">Éviter les autoroutes</string>
 	<string name="routing_attr_avoid_motorway_description">Éviter les autoroutes</string>
 	<string name="routing_attr_weight_name">Limite de poids</string>
 	<string name="routing_attr_weight_description">Spécifiez la limite de poids qui doit être respectée sur les routes empruntées</string>
@@ -1786,8 +1786,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="waypoints">Itinéraire</string>
     <string name="targets">Itinéraire</string>
     <string name="way_alarms">Alertes de circulation</string>
-    <string name="speak_favorites">Annoncer les favoris proches</string>
-    <string name="speak_poi">Annoncer les points d\'intérêt proches</string>
+    <string name="speak_favorites">Favoris proches</string>
+    <string name="speak_poi">Points d\'intérêt proches</string>
     <string name="shared_string_all">Tous</string>
     <string name="index_tours">Tours</string>
     <string name="record_plugin_description">"Ce greffon permet d\'enregistrer vos itinéraires au format GPX : soit automatiquement soit grâce à un bouton supplémentaire affiché sur la carte.\n\nLes traces ainsi enregistrées peuvent être partagées avec vos amis ou utilisées pour contribuer à OSM. Les sportifs peuvent utiliser ces enregistrements pour leurs entraînements. Certaines analyses des traces peuvent être réalisées directement dans OmsAnd (comme la vitesse moyenne, la durée de l\'itinéraire ...). Enfin les fichiers GPX locaux peuvent être exportés pour être utilisés par d\'autres applications. "</string>
@@ -1889,7 +1889,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="rendering_value_americanRoadAtlas_name">Atlas des routes américaines</string>
     <string name="routing_attr_no_new_routing_description">Ne pas utiliser les règles de routage ajoutées dans la version 1.9</string>
     <string name="routing_attr_no_new_routing_name">Ne pas utiliser le calcul d\'itinéraire de la version 1.9</string>
-    <string name="speak_pedestrian">Annoncer les passages piétons</string>
+    <string name="speak_pedestrian">Passages piétons</string>
     
 	<string name="avoid_roads_msg">Vous pouvez générer un itinéraire alternatif en sélectionnant les routes à éviter.</string>
     <string name="navigation_over_track">Démarrer la navigation sur cette trace ?</string>
@@ -2027,7 +2027,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="shared_string_copy">Copier</string>
     <string name="application_dir_change_warning3">Souhaitez-vous aussi qu\'OsmAnd copie ses fichiers de données vers la nouvelle destination ?</string>
     <string name="rendering_attr_hideHouseNumbers_name">Masquer les numéros dans les rues</string>
-    <string name="routing_attr_avoid_borders_name">Frontières</string>
+    <string name="routing_attr_avoid_borders_name">Ne pas franchir les frontières</string>
 	<string name="routing_attr_avoid_borders_description">Éviter de franchir les frontières entre pays</string>
 	<string name="routing_attr_height_name">Limite de hauteur</string>
 	<string name="routing_attr_height_description">Précisez la hauteur du véhicule qui doit être respectée sur les routes empruntées</string>
@@ -2146,4 +2146,13 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 <string name="show_on_start">Afficher au démarrage</string>
 	<string name="show_gpx">Afficher GPX</string>
 	<string name="count_of_lines">Nombre de lignes</string>
-</resources>
+<string name="address_unknown">Adresse inconnue</string>
+    <string name="number_of_rows_in_dash">Nombre de lignes %1$s</string>
+	<string name="saved_at_time">Enregistré avec succès à : %1$s</string>
+	<string name="poi_deleted_localy">Le Point d\'Intérêt sera supprimé par l\'envoi de vos modifications</string>
+	<string name="routing_attr_avoid_shuttle_train_description">Éviter les trains-navettes</string>
+    <string name="shared_string_card_was_hidden">La carte a été masquée</string>
+	<string name="routing_attr_avoid_shuttle_train_name">Éviter les trains-navettes</string>
+	<string name="av_locations_descr">Fichier GPS avec notes</string>
+    <string name="tag_poi_amenity">aménité</string>
+	</resources>
