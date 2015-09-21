@@ -806,7 +806,7 @@
 	<string name="poi_wiki_lang_he">Hebrejská wiki</string>
 	<string name="poi_wiki_lang_hi">Hindská wiki</string>
 	<string name="poi_wiki_lang_hr">Chorvatská wiki</string>
-	<string name="poi_wiki_lang_ht"/>
+	<string name="poi_wiki_lang_ht">Haitská wiki</string>
 	<string name="poi_wiki_lang_hu">Maďarská wiki</string>
 	<string name="poi_wiki_lang_id">Indonéská wiki</string>
 	<string name="poi_wiki_lang_it">Italská wiki</string>
@@ -1121,4 +1121,152 @@
 	<string name="poi_bicycle_parking_building">Speciální budova</string>
 	<string name="poi_bicycle_parking_shed">Přístřešek</string>
 	<string name="poi_bicycle_parking_bollard">Patník</string>
+	<string name="poi_level">Podlaží</string>
+
+<string name="poi_node_networks">Body turistických/cyklistických sítí</string>
+		<string name="poi_doors">Dveře</string>
+	<string name="poi_free_flying">Obchod se zbožím pro volné létání</string>
+	<string name="poi_power_tower">Stožár elektrického vedení</string>
+	<string name="poi_power_pole">Sloup elektrického vedení</string>
+
+	<string name="poi_bunker_silo">Silážní jáma</string>
+	<string name="poi_paediatrics">Dětské lékařství</string>
+
+	<string name="poi_association">Kancelář sdružení</string>
+	<string name="poi_wiki_lang_ceb">Cebuánská wiki</string>
+	<string name="poi_wiki_lang_gl">Galacijská wiki</string>
+	<string name="poi_wiki_lang_new">Névárská wiki</string>
+	<string name="poi_wiki_lang_nn">Norská nynorská wiki</string>
+	<string name="poi_wiki_lang_te">Telugská wiki</string>
+	<string name="poi_wiki_lang_vo">Volapükská wiki</string>
+	<string name="poi_route_hiking_iwn_poi">Mezinárodní pěší trasa</string>
+	<string name="poi_route_hiking_nwn_poi">Národní pěší trasa</string>
+	<string name="poi_route_hiking_rwn_poi">Regionální pěší trasa</string>
+	<string name="poi_route_hiking_lwn_poi">Lokální pěší trasa</string>
+	<string name="poi_collection_times">Čas vybírání pošty</string>
+	<string name="poi_supervised_yes">Střežené</string>
+	<string name="poi_supervised_no">Nestřežené</string>
+	<string name="poi_crossing_traffic_signals">Se semafory</string>
+	<string name="poi_crossing_uncontrolled">Neřízený</string>
+	<string name="poi_crossing_unmarked">Nevyznačený</string>
+	<string name="poi_access_destination">Přístup jen k cíli</string>
+	<string name="poi_access_permissive">Přistup povolen</string>
+	<string name="poi_access_customers">Přístup jen pro zákazníky</string>
+	<string name="poi_access_delivery">Přístup jen pro zásobování</string>
+	<string name="poi_access_agricultural">Přístup pro zemědělské účely</string>
+
+	<string name="poi_content_silage">Siláž (obsah)</string>
+	<string name="poi_content_water">Voda (obsah)</string>
+	<string name="poi_content_oil">Ropa (obsah)</string>
+	<string name="poi_content_fuel">Palivo (obsah)</string>
+	<string name="poi_content_manure">Hnůj (obsah)</string>
+	<string name="poi_content_wine">Víno (obsah)</string>
+	<string name="poi_content_sewage">Kanalizace (obsah)</string>
+	<string name="poi_content_gas">Plyn (obsah)</string>
+	<string name="poi_content_biomass">Biomasa (obsah)</string>
+	<string name="poi_content_wastewater">Odpadní vody (obsah)</string>
+	<string name="poi_content_crop">Plodiny (obsah)</string>
+	<string name="poi_content_fodder">Krmivo (obsah)</string>
+	<string name="poi_content_beer">Pivo (obsah)</string>
+	<string name="poi_content_salt">Sůl (obsah)</string>
+	<string name="poi_content_grain">Zrno (obsah)</string>
+
+	<string name="poi_trade_wood">Dřevo</string>
+	<string name="poi_trade_tile">Kachličky</string>
+
+	<string name="poi_bicycle_parking_stands">Stojany</string>
+	<string name="poi_bicycle_parking_wall_loops">Držáky na kola</string>
+	<string name="poi_bicycle_parking_rack">Regál</string>
+	<string name="poi_bicycle_parking_informal">Neoficiální</string>
+
+	<string name="poi_leaf_type_broadleaved">Listnatý</string>
+	<string name="poi_leaf_type_needleleaved">Jehličnatý</string>
+	<string name="poi_leaf_type_mixed">Smíšený</string>
+	<string name="poi_leaf_type_leafless">Bezlistý</string>
+	<string name="poi_species">Druh</string>
+	<string name="poi_genus">Rod</string>
+	<string name="poi_taxon">Taxon</string>
+
+	<string name="poi_trees_olive">Olivy</string>
+	<string name="poi_trees_apple">Jablka</string>
+	<string name="poi_trees_oil">Palmový olej</string>
+	<string name="poi_trees_orange">Pomeranče</string>
+	<string name="poi_trees_almond">Mandle</string>
+	<string name="poi_trees_banana">Banány</string>
+	<string name="poi_trees_hazel">Lískové ořechy</string>
+	<string name="poi_trees_coconut">Kokosy</string>
+	<string name="poi_trees_persimmon">Kaki</string>
+	<string name="poi_trees_cherry">Třešně</string>
+	<string name="poi_trees_walnut">Vlašské ořechy</string>
+	<string name="poi_trees_plum">Švestky</string>
+	<string name="poi_trees_peach">Broskve</string>
+	<string name="poi_trees_tea">Čaj</string>
+	<string name="poi_trees_coca">Koka</string>
+	<string name="poi_trees_kiwi">Kiwi</string>
+	<string name="poi_trees_nectorine">Nektarinky</string>
+	<string name="poi_trees_mango">Mango</string>
+	<string name="poi_trees_rubber">Gumovníky</string>
+	<string name="poi_trees_date">Datle</string>
+	<string name="poi_trees_coffea">Káva</string>
+	<string name="poi_trees_pomegranate">Granátová jablka</string>
+
+	<string name="poi_urban">Město</string>
+	<string name="poi_rural">Venkov</string>
+
+	<string name="poi_animal_shelter_dog">Útulek pro psy</string>
+	<string name="poi_animal_shelter_cat">Útulek pro kočky</string>
+	<string name="poi_animal_shelter_dog_cat">Útulek pro psy a kočky</string>
+	<string name="poi_animal_shelter_bird">Útočiště pro ptáky</string>
+
+	<string name="poi_seats">Sedačky</string>
+	<string name="poi_backrest_yes">Opěradlo: ano</string>
+	<string name="poi_backrest_no">Opěradlo: ne</string>
+
+	<string name="poi_intermittent">Občasné</string>
+
+	<string name="poi_car_wash_self_service">Samoobslužné</string>
+
+	<string name="poi_information_sign">Značka</string>
+	<string name="poi_commercial">Komerční pozemek</string>
+	<string name="poi_retail">Maloobchodní pozemek</string>
+
+	<string name="poi_covered_yes">S přístřeškem</string>
+	<string name="poi_covered_no">Bez přístřešku</string>
+
+	<string name="poi_smoking_no">Zákaz kouření</string>
+	<string name="poi_smoking_outside">Kouření je povoleno pouze venku</string>
+	<string name="poi_smoking_yes">Kouření je povoleno</string>
+	<string name="poi_smoking_separated">Kouření je povoleno v samostatné neoddělené místnosti</string>
+	<string name="poi_smoking_isolated">Kouření je povoleno v samostatné oddělené místnosti</string>
+	<string name="poi_smoking_dedicated">Výhradně pro kuřáky</string>
+
+	<string name="poi_toll_yes">Účtována platba mýtného</string>
+	<string name="poi_toll_no">Není účtována platba mýtného</string>
+	<string name="poi_toll_hgv_yes">Platba mýtného je účtována jen pro nákladní vozidla</string>
+	<string name="poi_tactile_paving_yes">Se značením pro nevidomé</string>
+	<string name="poi_tactile_paving_no">Bez značení pro nevidomé</string>
+	<string name="poi_traffic_signals_sound_yes">Se zvukovou signalizací</string>
+	<string name="poi_traffic_signals_sound_no">Bez zvukové signalizace</string>
+	<string name="poi_traffic_signals_sound_walk">"Se zvukovou signalizací  v případě, že je chůze povolena"</string>
+
+	<string name="poi_rescue_station">Záchranná stanice</string>
+
+	<string name="poi_services">Odpočívadlo se službami</string>
+	<string name="poi_mini_roundabout">Malý kruhový objezd</string>
+	<string name="poi_railway_crossing">Železniční přechod pro chodce</string>
+	<string name="poi_railway_level_crossing"/>
+	<string name="poi_horse_riding">Jízda na koni</string>
+	<string name="poi_garden">Zahrada</string>
+
+	<string name="poi_heath">Vřesoviště</string>
+	<string name="poi_grass">Tráva</string>
+	<string name="poi_grassland">Louky a pastviny</string>
+	<string name="poi_scrub">Křoviny</string>
+	<string name="poi_farmland">Zemědělská půda</string>
+	<string name="poi_logging">Těžba dřeva</string>
+	<string name="poi_sand">Písek</string>
+
+	<string name="poi_dead_wood">Mrtvé dřevo</string>
+
+	<string name="poi_passing_place">Výhybna</string>
 	</resources>

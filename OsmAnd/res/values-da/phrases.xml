@@ -1256,7 +1256,7 @@
 
 <string name="poi_aerialway_pylon">Svævebanepylon</string>
 
-	<string name="poi_power_tower">Soltårn</string>
+	<string name="poi_power_tower">Højspændingsmast</string>
 	<string name="poi_power_pole">Elmast</string>
 
 	<string name="poi_lighting_tower">Lysmast</string>
@@ -1343,7 +1343,7 @@
 <string name="poi_doors">Døre</string>
 	<string name="poi_paediatrics">Pædiatri</string>
 
-	<string name="poi_mini_roundabout">Mini rundkørsel</string>
+	<string name="poi_mini_roundabout">Mini-rundkørsel</string>
 	<string name="poi_railway_crossing">Jernbane fodgængerovergang</string>
 	<string name="poi_railway_level_crossing">Jernbaneoverskæring</string>
 	<string name="poi_bird_hide">Fugletårn</string>

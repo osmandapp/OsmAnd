@@ -1716,7 +1716,7 @@
     <string name="local_recordings_delete_all_confirm">Você vai apagar %1$d notas. Tem certeza?</string>
 	<string name="disable_recording_once_app_killed">Impedir o registro autônomo</string>
     <string name="gps_network_not_enabled">Serviço de posição está desativado. Você quer ativá-lo?</string>
-    <string name="disable_recording_once_app_killed_descrp">"Pausará o registro de GPX após o encerramento do app  (via apps recentes). (Ícone do OsmAnd desaparecerá da barra de notificação do Android.)"</string>
+    <string name="disable_recording_once_app_killed_descrp">"Pausará o registro de GPX após o encerramento do app  (via apps recentes). (Indicação de OsmAnd em segundo plano desaparecerá da barra de notificação do Android.)"</string>
 	<string name="archive_wikipedia_data">Você tem dados baixados da Wikipédia antigos e incompatíveis. Quer arquivá-los?</string>
     <string name="download_wikipedia_files">Você quer baixar dados adicionais da wikipédia (%1$s MB)?</string>
     <string name="lang_vo">Volapuque</string>
@@ -1794,7 +1794,7 @@
 	<string name="app_name_osmand">OsmAnd</string>
 	<string name="offline_maps_and_navigation">Mapas &amp; Navegação\nOffline</string>
 <string name="commit_poi">Enviar POI</string>
-<string name="routing_attr_avoid_shuttle_train_name">Evitar transporte de trem</string>
+<string name="routing_attr_avoid_shuttle_train_name">Transporte de trem</string>
 	<string name="routing_attr_avoid_shuttle_train_description">Evitar shuttle train</string>
     <string name="plugin_settings">Complementos</string>
 	<string name="tab_title_basic">Básico</string>

@@ -209,8 +209,8 @@ MB)をダウンロードしますか?</string>
      
  <string name="index_settings_descr">マップなどのデータを取得/更新します</string>
  <string name="index_settings">マップデータ等管理</string>
-     <string name="osmand_service">スリープモード</string>
-     <string name="osmand_service_descr">画面オフの間OsmAndを使うためのバックグラウンドサービスを実行します</string>
+     <string name="osmand_service">バックグラウンドモード</string>
+     <string name="osmand_service_descr">画面オフの間もOsmAndはバックグラウンドモードで動作します</string>
      <string name="fast_route_mode">最速ルート</string>
      <string name="fast_route_mode_descr">有効なら目的地までの最速ルートで計算し、無効なら最短ルートで計算します</string>
      <string name="tiles_to_download_estimated_size">ズームレベル {0}で
@@ -295,20 +295,20 @@ MB)をダウンロードしますか?</string>
      <string name="use_trackball">トラックボールを使用</string>
      <string name="background_service_wait_int_descr">位置修正用の待ち時間をセットします</string>
      <string name="background_service_wait_int">待ち時間</string>
-     <string name="service_stop_background_service">背景ナビゲーションサービスを打ち切る</string>
+     <string name="service_stop_background_service">バックグラウンドナビゲーションサービスを停止</string>
      <string name="where_am_i">現在地を表示</string>
      <string name="process_navigation_service">OsmAnd ナビゲーションサービス</string>
      <string name="network_provider">ネットワーク</string>
      <string name="gps_provider">GPS</string>
      <string name="int_seconds">秒</string>
      <string name="int_min">分</string>
-     <string name="background_service_int_descr">バックグラウンドサービスの位置決定間隔をセットします</string>
+     <string name="background_service_int_descr">バックグラウンドサービスからの起動間隔をセットします</string>
      <string name="background_service_int">GPS呼び出し間隔</string>
-     <string name="background_service_provider_descr">バックグラウンドサービス用の位置プロバイダを選びます</string>
+     <string name="background_service_provider_descr">バックグラウンドサービス用の位置取得機能(GPS等)を選択します</string>
      <string name="background_service_provider">位置プロバイダ</string>
      <string name="background_router_service_descr">バックグラウンドサービスを有効化して 長期間位置を追跡します</string>
-     <string name="background_router_service">バックグラウンドサービスを使用</string>
-     <string name="off_router_service_no_gps_available">スリープモードナビゲーション機能を有効にするには、位置取得機能(GPS等)をオンにする必要があります。</string>
+     <string name="background_router_service">OsmAndをバックグラウンドで実行</string>
+     <string name="off_router_service_no_gps_available">バックグラウンドナビゲーション機能を有効にするには、位置取得機能(GPS等)をオンにする必要があります。</string>
      <string name="routing_settings_descr">ルート計算方法、ナビゲーションに関する設定をします</string>
      <string name="routing_settings">ナビゲーション設定</string>
      <string name="hide_poi_filter">フィルタを非表示</string>
@@ -752,7 +752,7 @@ POIの更新は利用できません</string>
     <string name="monitoring_settings_descr">移動中の経路記録に関する設定をします</string>
     
     
-    <string name="osmand_background_plugin_description">スリープ(画面消灯)モード時のトラッキングとナビをGPSデバイスを定期的にウェイクアップすることで有効化するための設定を表示します。</string>
+    <string name="osmand_background_plugin_description">バックグラウンド(画面消灯)モード時のトラッキングとナビをGPSデバイスを定期的にウェイクアップすることで有効化するための設定を表示します。</string>
     <string name="choose_osmand_theme_descr">アプリケーションテーマ(画面のデザイン)を選択します</string>
     <string name="choose_osmand_theme">アプリケーションテーマ</string>
     <string name="accessibility_options">アクセシビリティオプション</string>
@@ -858,7 +858,7 @@ POIの更新は利用できません</string>
     <string name="safe_mode_description">セーフモード(ネイティブコードの代わりに遅いが互換性の高いAndroid用コード)でアプリケーションを実行します</string>
     <string name="safe_mode">セーフモード</string>
     <string name="native_library_not_running">アプリケーションは、セーフモードで実行されています(設定で無効にできます)。</string>
-    <string name="background_service_is_enabled_question">OsmAndのスリープモードになっています。停止しますか？</string>
+    <string name="background_service_is_enabled_question">OsmAnd機能の一部がバックグラウンドで動作しています。停止しますか？</string>
     <string name="zxing_barcode_scanner_not_found">ZXingバーコードスキャナアプリケーションがインストールされていません。マーケットで検索しますか？</string>
 	<string name="rendering_attr_roadColors_description">道路の配色を選択します:</string>
 	<string name="rendering_attr_roadColors_name">道路の配色</string>
@@ -914,8 +914,8 @@ POIの更新は利用できません</string>
 	<string name="map_widget_transparent">透明なスキン</string>
 	
 	
-	<string name="bg_service_sleep_mode_off">有効\n スリープモード</string>
-	<string name="bg_service_sleep_mode_on">停止\n スリープモード</string>
+	<string name="bg_service_sleep_mode_off">動作中\n バックグラウンドモード</string>
+	<string name="bg_service_sleep_mode_on">停止\n バックグラウンドモードの中断</string>
 	<string name="gps_wakeup_interval">GPS呼び出し間隔: %s</string>
 	<string name="int_continuosly">継続的に</string>
 	<string name="screen_is_locked">ロックを解除するには画面のロックアイコンをタップしてください</string>
@@ -944,7 +944,7 @@ POIの更新は利用できません</string>
 	<string name="bg_service_interval">呼び出し間隔の設定:</string>
 	<string name="show_cameras">スピード監視カメラ(オービス等)を通知</string>
 	<string name="show_traffic_warnings">交通警告を通知</string>
-	<string name="avoid_toll_roads">有料道路を使用しない</string>
+	<string name="avoid_toll_roads">有料道路</string>
 	<string name="continue_follow_previous_route_auto">前回のナビゲーションがまだ終わっていません。続行しますか？ (%1$s seconds)</string>
 	<string name="route_updated_loc_found">現在位置が見つかるとルートを検索します</string>
 	<string name="osmand_parking_hours">時間</string>
@@ -1347,17 +1347,15 @@ POIの更新は利用できません</string>
 \n\t* バグ修正
 \n\t* 「ツーリングビュー」のマップスタイルオプションからの複数マップの詳細、新しい道路のスタイル、コントラスト表示、アルパインハイキング用オプション(SACスケール)
 \n\t* GPS高度の測定値利用時のEGM96 geoidのオフセット補正 "</string>
-    <string name="tip_recent_changes_1_0_0_t">1.0.0での変更点:
-	\n\t* ルート設定の改善:最大250キロをより速く、より正確に
-	\n\t* 道路専用のマップを用意
-	\n\t* 中断後のロックした位置を見失わないように改善
-	\n\t* ナビゲーション中にスリープモードサービスを有効に
-    </string>
-    <string name="tip_recent_changes_0_8_4_t">0.8.4での変更点:
-	\n\t* いくつかのバグ修正
-	\n\t* 中断後の位置ロックを失うことの修正
-	\n\t* ナビゲーション中にスリープモードサービスを有効
-    </string>
+    <string name="tip_recent_changes_1_0_0_t">"1.0.0での変更点:
+\n\t* ルート設定の改善:最大250キロをより速く、より正確に
+\n\t* 道路専用のマップを用意
+\n\t* 中断後のロックした位置を見失わないように改善
+\n\t* ナビゲーション中にバックグラウンドサービスを有効に "</string>
+    <string name="tip_recent_changes_0_8_4_t">"0.8.4での変更点:
+\n\t* いくつかのバグ修正
+\n\t* 中断後の位置ロックを失うことの修正
+\n\t* ナビゲーション中にバックグラウンドサービスを有効 "</string>
     <string name="tip_recent_changes_0_8_3_t">"0.8.3での変更点:
 \n\t* 経由地点
 \n\t* 改良された経路案内
@@ -1481,13 +1479,13 @@ POIの更新は利用できません</string>
 	<string name="routing_attr_prefer_motorway_description">高速道路を優先する</string>
 	<string name="routing_attr_short_way_name">最も短い道</string>
 	<string name="routing_attr_short_way_description">最も短い道を使用する</string>
-	<string name="routing_attr_avoid_toll_name">有料道路を使用しない</string>
+	<string name="routing_attr_avoid_toll_name">有料道路</string>
 	<string name="routing_attr_avoid_toll_description">有料道路を使用しない</string>
-	<string name="routing_attr_avoid_unpaved_name">未舗装道路を使用しない</string>
+	<string name="routing_attr_avoid_unpaved_name">未舗装道路</string>
 	<string name="routing_attr_avoid_unpaved_description">未舗装道路を使用しない</string>
-	<string name="routing_attr_avoid_ferries_name">フェリーを使用しない</string>
+	<string name="routing_attr_avoid_ferries_name">フェリー</string>
 	<string name="routing_attr_avoid_ferries_description">フェリーを使用しない</string>
-	<string name="routing_attr_avoid_motorway_name">高速道路を使用しない</string>
+	<string name="routing_attr_avoid_motorway_name">高速道路</string>
 	<string name="routing_attr_avoid_motorway_description">高速道路を使用しない</string>
 	<string name="routing_attr_weight_name">重量制限</string>
 	<string name="routing_attr_weight_description">ルート上で通行可能な車両重量を指定します</string>
@@ -1521,9 +1519,9 @@ POIの更新は利用できません</string>
     <string name="calculate_osmand_route_without_internet">インターネットを使用せずにOsmAnd経路セグメントを計算する</string>
     <string name="forward">次へ</string>
     <string name="keep_navigation_service">続行</string>
-	<string name="enable_sleep_mode">GPSスリープモードを有効</string>
+	<string name="enable_sleep_mode">GPSバックグラウンドモードを有効</string>
 	<string name="gps_wake_up_timer">GPS呼び出し間隔</string>
-	<string name="sleep_mode_stop_dialog">GPSのスリープモードを停止しますか？</string>
+	<string name="sleep_mode_stop_dialog">GPSのバックグラウンドモードを停止しますか？</string>
 	<string name="map_preferred_locale_descr">マップ表示名称の優先言語を指定します(利用できない場合は、英語またはローカル名に切り替わります)</string>
     <string name="map_preferred_locale">地名等の優先言語</string>
     <string name="local_map_names">ローカル名(その国での呼称)</string>
@@ -1531,7 +1529,7 @@ POIの更新は利用できません</string>
     <string name="lang_he">ヘブライ語</string>
     <string name="home">ダッシュボードメニュー</string>
     <string name="live_monitoring_m_descr">GPXログが有効になっている場合、指定したWebサービスへデータを送信します</string>
-	<string name="live_monitoring_m">オンライン追跡(GPXが必要)</string>
+	<string name="live_monitoring_m">オンライン追跡に関する設定(GPXが必要)</string>
     <string name="live_monitoring_start">オンライントラッキング開始</string>
 	<string name="live_monitoring_stop">オンライントラッキング停止</string>
 	<string name="gpx_monitoring_start">GPXログ開始</string>
@@ -1806,7 +1804,7 @@ POIの更新は利用できません</string>
     <string name="duration">期限</string>
     <string name="distance">距離</string>
     <string name="rendering_attr_publicTransportMode_name">バス、トロリーバス、シャトルバスルート</string>
-	<string name="save_track_to_gpx_globally">GPXファイルに経路を記録</string>
+	<string name="save_track_to_gpx_globally">GPXファイルへの経路記録に関する設定</string>
 	<string name="save_track_to_gpx_globally_descr">GPXファイルへの一般の位置(General position)記録は、マップ画面上のGPXログウィジェットを使用してオンとオフを切り替えることが可能です</string>
 	<string name="save_track_interval_globally">記録間隔</string>
 	<string name="confirm_every_run">常に尋ねる</string>
@@ -2032,7 +2030,7 @@ POIの更新は利用できません</string>
     <string name="rendering_value_disabled_name">無効</string>
     <string name="osmo_share_my_location">現在地の共有</string>
     <string name="shared_string_logoff">ログオフ</string>
-    <string name="routing_attr_avoid_borders_name">国境検問所を通過しない</string>
+    <string name="routing_attr_avoid_borders_name">国境越え</string>
 	<string name="routing_attr_avoid_borders_description">国境越えを避ける</string>
 	<string name="routing_attr_height_name">高さ制限</string>
 	<string name="routing_attr_height_description">ルート上で通行可能な車両の高さを指定します</string>
@@ -2092,7 +2090,7 @@ POIの更新は利用できません</string>
     <string name="download_wikipedia_files">Wikipediaの追加データ(%1$s MB)をダウンロードしますか？</string>
     <string name="gps_network_not_enabled">位置情報サービス(GPS)がオフになっています。オンにしますか？</string>
     <string name="disable_recording_once_app_killed">スタンドアロン動作時のログ記録を停止</string>
-    <string name="disable_recording_once_app_killed_descrp">タスクリストからアプリが停止された場合、GPX記録を一時停止します(OsmAndスリープモード動作表示が、Androidの通知エリアに表示されなくなります)</string>
+    <string name="disable_recording_once_app_killed_descrp">タスクリストからアプリが停止された場合、GPX記録を一時停止します(OsmAndバックグラウンド動作表示が、Androidの通知エリアに表示されなくなります)</string>
     <string name="rendering_value_default13_name">デフォルト (13)</string>
 	<string name="rendering_value_defaultTranslucentCyan_name">デフォルト (半透明シアン)</string>
     <string name="shared_string_import2osmand">OsmAndにインポート</string>
@@ -2121,7 +2119,7 @@ POIの更新は利用できません</string>
 	<string name="try_again">再試行</string>
 	<string name="error_message_pattern">エラー: {0}</string>
 <string name="plugin_settings">プラグイン</string>
-	<string name="routing_attr_avoid_shuttle_train_name">カートレインを使用しない</string>
+	<string name="routing_attr_avoid_shuttle_train_name">カートレイン</string>
 	<string name="routing_attr_avoid_shuttle_train_description">カートレインを使用しない</string>
     <string name="dahboard_options_dialog_title">ダッシュボード設定</string>
 	<string name="shared_string_undo">元に戻す</string>
@@ -2153,4 +2151,6 @@ POIの更新は利用できません</string>
 	<string name="show_gpx">GPXを表示</string>
 <string name="tab_title_basic">基本</string>
 	<string name="tab_title_advanced">拡張</string>
-	</resources>
+	<string name="show_on_start">起動時に表示</string>
+	<string name="count_of_lines">行数のカウント</string>
+</resources>

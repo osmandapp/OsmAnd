@@ -71,8 +71,8 @@
   <string name="user_name_descr">Nécessaire pour les contributions openstreetmap.org</string>
   <string name="user_password">Votre mot de passe OSM</string>
   <string name="user_password_descr">Nécessaire pour les contributions openstreetmap.org</string>
-  <string name="osmand_service">Mode veille</string>
-  <string name="osmand_service_descr">Permet d\'utiliser OsmAnd pendant que l\'écran est désactivé</string>
+  <string name="osmand_service">Mode tâche de fond</string>
+  <string name="osmand_service_descr">OsmAnd s\'exécute en tâche de fond lorsque l\'écran est éteint</string>
   <string name="tip_rotation_switching">Orientation de la carte</string>
   
   <string name="switch_to_raster_map_to_see">Vous n\'avez pas actuellement de carte vectorielle pour cette position.\n\t\n\tVous pouvez en télécharger dans \'Paramètres\' → \'Données hors-ligne\', ou basculer sur les cartes en ligne via \'Paramètres\' → \'Sources de carte\' en activant le greffon des cartes en ligne.</string>
@@ -471,19 +471,19 @@
   <string name="use_trackball">Utiliser le pointeur</string>
   <string name="background_service_wait_int_descr">Configurer le délai d\'attente pour déterminer la position</string>
   <string name="background_service_wait_int">Délai d\'attente</string>
-  <string name="service_stop_background_service">Arrêter le service de navigation en arrière-plan</string>
+  <string name="service_stop_background_service">Arrêter le service de navigation en tâche de fond</string>
   <string name="where_am_i">Ma position</string>
   <string name="process_navigation_service">Service de navigation OsmAnd</string>
   <string name="network_provider">Réseau</string>
   <string name="gps_provider">GPS</string>
   <string name="int_seconds">secondes</string>
   <string name="int_min">min.</string>
-  <string name="background_service_int_descr">Choisir un intervalle d\'actualisation de votre position pour le service en arrière-plan</string>
+  <string name="background_service_int_descr">Choisir un intervalle d\'actualisation de votre position lors de l\'exécution en tâche de fond</string>
   <string name="background_service_int">Intervalle de réveil du GPS</string>
-  <string name="background_service_provider_descr">Choisir un fournisseur de géolocalisation pour le service arrière-plan</string>
+  <string name="background_service_provider_descr">Choisir une source de géolocalisation pour le service arrière-plan</string>
   <string name="background_service_provider">Fournisseur de géolocalisation</string>
   <string name="background_router_service_descr">Activer le service en arrière-plan pour suivre votre position en continu</string>
-  <string name="background_router_service">Fonctionne en mode veille</string>
+  <string name="background_router_service">Exécuter OsmAnd en tâche de fond</string>
   <string name="off_router_service_no_gps_available">Le service d\'arrière-plan requiert l\'activation de la géolocalisation.</string>
   <string name="hide_poi_filter">Masquer le filtre</string>
   <string name="show_poi_filter">Afficher le filtre</string>
@@ -774,7 +774,7 @@
   
   
   <string name="osmand_rastermaps_plugin_description">"Ce greffon permet d\'accéder à une grande gamme de cartes en ligne (aussi appelées tuiles ou cartes raster) qui vont de cartes OpenStreetMap (comme les tuiles Mapnik) jusqu\'aux images satellites en passant par des cartes spécialisées comme des cartes météo, des cartes de climat, des cartes géologiques, etc ...\n\nChacune de ces cartes est utilisable soit comme carte principale soit comme sur ou sous couche d\'une autre carte. Afin de gérer au mieux la superposition des cartes, vous pouvez masquer certains éléments des cartes vectorielles hors ligne depuis le menu \"Configurer la carte\".\n\nCes cartes tuiles peuvent être obtenues directement en ligne et peuvent également être préparées grâce à des outils tiers puis copiées dans le dossier de données d\'OsmAnd sous forme de base de données sqlite. "</string>
-  <string name="osmand_background_plugin_description">Afficher les préférences afin d\'activer le suivi et la navigation durant la mise en veille (réveille périodique du GPS).</string>
+  <string name="osmand_background_plugin_description">Affiche les préférences afin d\'activer le suivi et la navigation en tâche de fond (écran éteint) en réveillant périodiquement le GPS.</string>
   <string name="osmand_accessibility_description">Ce greffon donne accès directement dans OsmAnd aux options d\'accessibilité de votre appareil (réglage de la vitesse des voix TTS, utilisation du trackball pour zoomer ou annonce automatique de votre position).</string>
   
   
@@ -939,7 +939,7 @@
   
   <string name="show_cameras">Afficher les radars</string>
   <string name="show_traffic_warnings">Afficher les limitations de vitesse</string>
-  <string name="avoid_toll_roads">Éviter les péages</string>
+  <string name="avoid_toll_roads">Routes à péage</string>
   <string name="tip_recent_changes_0_8_2_t">"Changements en 0.8.2 :
 \n\t* Navigation améliorée
 \n\t* Gadgets de carte dynamiques
@@ -968,8 +968,8 @@
   <string name="map_widget_mini_route">Mini-carte de l\'itinéraire</string>
   <string name="bg_service_screen_lock">Verrouillage de l\'écran</string>
   <string name="bg_service_screen_unlock">Déverrouiller écran</string>
-  <string name="bg_service_sleep_mode_off">Activer\nmode veille</string>
-  <string name="bg_service_sleep_mode_on">Désactiver\nmode veille</string>
+  <string name="bg_service_sleep_mode_off">Exécuter\n l’application en tâche de fond</string>
+  <string name="bg_service_sleep_mode_on">Arrêter\n l\'exécution de l\'application en tâche de fond</string>
   <string name="bg_service_screen_lock_toast">L\'écran est verrouillé</string>
   <string name="bg_service_interval">Positionner l\'intervalle d\'activation :</string>
 
@@ -1033,8 +1033,7 @@
 \n\tVous pouvez changer de profil via le bouton dédié dans l\'angle inférieur gauche de la carte (icône voiture, vélo, ou piéton), ou lors de la création d\'un itinéraire.
 </string>
 <string name="avoid_motorway">Éviter les autoroutes</string>
-<string name="tip_recent_changes_0_8_4_t">Changements en 0.8.4 :\n\t* Quelques corrections de bugs\n\t* La carte ne perd plus la position après des interruptions\n\t* Activer le service d\'arrière-plan pendant la navigation
-    </string>
+<string name="tip_recent_changes_0_8_4_t">"Changements en 0.8.4 :\n\t* Quelques corrections de bugs\n\t* La carte ne perd plus la position après des interruptions\n\t* Service d\'arrière-plan pendant la navigation "</string>
     <string name="context_menu_item_last_intermediate_point">Ajouter comme dernière étape</string>
     <string name="context_menu_item_first_intermediate_point">Ajouter comme première étape</string>
     <string name="add_as_last_destination_point">Ajouter comme dernière étape</string>
@@ -1069,9 +1068,8 @@
 	<string name="rendering_attr_roadColors_name">Thème de couleurs pour les routes</string>
     <string name="zxing_barcode_scanner_not_found">L’application ZXing Barcode Scanner n\'est pas installée. Souhaitez-vous l\'installer depuis la boutique ?</string>
 	<string name="close_changeset">Clôturer les modifications</string>
-	<string name="background_service_is_enabled_question">Le service OsmAnd tourne toujours en tâche de fond. Voulez-vous également l\'arrêter ?</string>
-    <string name="tip_recent_changes_1_0_0_t">"Changements en 1.0 :\n\t* Amélioration de la navigation, plus rapide et plus précise (jusqu\'à 250 km)\n\t* Cartographie des routes\n\t* La carte ne perd plus la position courante après les interruptions\n\t* Active le service d\'arrière-plan pendant la navigation"
-    </string>
+	<string name="background_service_is_enabled_question">Le service OsmAnd s\'exécute toujours en tâche de fond. Voulez-vous également l\'arrêter ?</string>
+    <string name="tip_recent_changes_1_0_0_t">"Changements en 1.0.0 :\n\t* Amélioration de la navigation, plus rapide et plus précise (jusqu\'à 250 km)\n\t* Nouvelle cartographie : routes uniquement\n\t* La carte ne perd plus la position courante après les interruptions\n\t* Service d\'arrière-plan pendant la navigation "</string>
     <string name="safe_mode_description">Exécuter l\'application en mode sûr (utiliser le code Android plus lent plutôt que le code natif)</string>
     <string name="safe_mode">Mode sûr</string>
     <string name="native_library_not_running">L\'application s\'exécute en mode sûr (peut être désactivé dans Paramètres).</string>
@@ -1376,8 +1374,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="announce_gpx_waypoints">Annoncer les points de passage GPX</string>
     <string name="speak_descr">Annoncer les noms de rue, les avertissements (stops, ralentisseurs, radars), les limitations de vitesse</string>
 	<string name="new_directions_point_dialog">Vous avez déjà défini des étapes intermédiaires</string>
-    <string name="context_menu_item_directions_to">Aller vers ce point</string>
-    <string name="context_menu_item_directions_from">Partir de ce point</string>
+    <string name="context_menu_item_directions_to">Itinéraire vers</string>
+    <string name="context_menu_item_directions_from">Itinéraire depuis</string>
     <string name="route_descr_map_location">Carte : </string>
     <string name="map_widget_fps_info">Informations de débogage du rendu</string>
 	<string name="route_to">À :</string>
@@ -1475,13 +1473,13 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="routing_attr_prefer_motorway_description">Privilégier les autoroutes</string>
 	<string name="routing_attr_short_way_name">Itinéraire le plus court</string>
 	<string name="routing_attr_short_way_description">Emprunter l\'itinéraire le plus court</string>
-	<string name="routing_attr_avoid_toll_name">Éviter les péages</string>
+	<string name="routing_attr_avoid_toll_name">Routes avec péage</string>
 	<string name="routing_attr_avoid_toll_description">Éviter les péages</string>
-	<string name="routing_attr_avoid_unpaved_name">Éviter les voies non revêtues</string>
+	<string name="routing_attr_avoid_unpaved_name">Voies non revêtues</string>
 	<string name="routing_attr_avoid_unpaved_description">Éviter les voies non revêtues</string>
-	<string name="routing_attr_avoid_ferries_name">Éviter les ferries</string>
+	<string name="routing_attr_avoid_ferries_name">Bateaux ferries</string>
 	<string name="routing_attr_avoid_ferries_description">Éviter les ferries</string>
-	<string name="routing_attr_avoid_motorway_name">Éviter les autoroutes</string>
+	<string name="routing_attr_avoid_motorway_name">Autoroutes</string>
 	<string name="routing_attr_avoid_motorway_description">Éviter les autoroutes</string>
 	<string name="routing_attr_weight_name">Limite de poids</string>
 	<string name="routing_attr_weight_description">Spécifiez la limite de poids qui doit être respectée sur les routes empruntées</string>
@@ -1721,16 +1719,16 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="osmo_auth_error">Erreur d\\\'autorisation OsMo : %1$s.\n Le service est momentanément inutilisable ou votre inscription a expiré.\n Voulez-vous procéder à une nouvelle inscription ?</string>
     <string name="keep_navigation_service">Conserver</string>
 	<string name="stop_navigation_service">Interrompre</string>
-	<string name="enable_sleep_mode">Activer le mode veille du GPS</string>
+	<string name="enable_sleep_mode">Démarrer l’exécution de la tâche de fond GPS ?</string>
 	<string name="gps_wake_up_timer">Intervalle de réveil du GPS</string>
-	<string name="sleep_mode_stop_dialog">Interrompre le mode veille du GPS ?</string>
+	<string name="sleep_mode_stop_dialog">Arrêter l’exécution de la tâche de fond GPS ?</string>
 	<string name="map_preferred_locale_descr">Langue préférée pour les libellés sur la carte (en cas d\'indisponibilité affiche les noms anglais ou locaux)</string>
     <string name="map_preferred_locale">Langue préférée pour la carte</string>
     <string name="local_map_names">Noms locaux</string>
     <string name="lang_sw">swahili</string>
     <string name="lang_he">hébreux</string>
     <string name="forward">Suivant</string>
-    <string name="home">Accueil</string>
+    <string name="home">Tableau de bord</string>
     <string name="live_monitoring_m_descr">Envoyer les positions à un service Web lorsque l\'enregistrement GPX est activé.</string>
 	<string name="live_monitoring_m">Suivi en ligne (GPX requis)</string>
     <string name="live_monitoring_start">Démarrer le suivi en ligne</string>
@@ -2029,7 +2027,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="shared_string_copy">Copier</string>
     <string name="application_dir_change_warning3">Souhaitez-vous aussi qu\'OsmAnd copie ses fichiers de données vers la nouvelle destination ?</string>
     <string name="rendering_attr_hideHouseNumbers_name">Masquer les numéros dans les rues</string>
-    <string name="routing_attr_avoid_borders_name">Ne pas franchir les frontières</string>
+    <string name="routing_attr_avoid_borders_name">Frontières</string>
 	<string name="routing_attr_avoid_borders_description">Éviter de franchir les frontières entre pays</string>
 	<string name="routing_attr_height_name">Limite de hauteur</string>
 	<string name="routing_attr_height_description">Précisez la hauteur du véhicule qui doit être respectée sur les routes empruntées</string>
@@ -2049,7 +2047,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="shared_string_import2osmand">Importer dans OsmAnd</string>
     <string name="local_recordings_delete_all_confirm">Vous allez supprimer %1$d notes. Etes-vous sûrs ?</string>
 	<string name="gps_network_not_enabled">Le service de localisation est arrêté. Souhaitez-vous l’activer ?</string>
-    <string name="disable_recording_once_app_killed_descrp">Met en pause l\'enregistrement de la trace GPX lors de l\'arrêt d\'OsmAnd (via les applications récentes) et l\'indicateur disparaîtra de la barre de notification Android.</string>
+    <string name="disable_recording_once_app_killed_descrp">Met en pause l\'enregistrement de la trace GPX lors de l\'arrêt d\'OsmAnd (via les applications récentes) et supprime l\'icône OsmAnd de la barre de notification Android.</string>
 	<string name="disable_recording_once_app_killed">Interdire la journalisation autonome</string>
     <string name="download_wikipedia_files">Souhaitez-vous télécharger les données Wikipédia (%1$s MB) ?</string>
     <string name="lang_ms">Malaisien</string>
@@ -2121,7 +2119,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="we_really_care_about_your_opinion">Nous prêtons beaucoup d\'attention à vos avis, merci pour vos retours.</string>
 	<string name="rendering_value_boldOutline_name">Contour épaissi</string>
     <string name="traffic_warning_hazard">Danger</string>
-    <string name="dahboard_options_dialog_title">Options du tableau de bord</string>
+    <string name="dahboard_options_dialog_title">Paramétrer le tableau de bord</string>
 	<string name="shared_string_undo">Annuler</string>
 	<string name="shared_string_skip">Ignorer</string>
 	<string name="app_name_osmand">OsmAnd</string>
@@ -2145,4 +2143,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="working_days">Jours travaillés</string>
 	<string name="recent_places">Emplacements récents</string>
 	<string name="favourites">Favoris</string>
+<string name="show_on_start">Afficher au démarrage</string>
+	<string name="show_gpx">Afficher GPX</string>
+	<string name="count_of_lines">Nombre de lignes</string>
 </resources>

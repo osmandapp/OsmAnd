@@ -80,7 +80,7 @@
     <string name="safe_mode_description">Kør program i fejlsikret tilstand (for langsommere Android i stedet for oprindelige kode).</string>
     <string name="safe_mode">Fejlsikret tilstand</string>
     <string name="native_library_not_running">Programmet kører i fejlsikret tilstand (deaktiver i indstillinger).</string>
-    <string name="background_service_is_enabled_question">OsmAnd dvaletilstand tjeneste kører stadig. Skal den også afbrydes?</string>
+    <string name="background_service_is_enabled_question">OsmAnd kører stadig i baggrunden. Skal den også afbrydes?</string>
     <string name="tip_recent_changes_1_0_0_t">Ændringer i 1.0.0:
 	\n* Forbedret ruteplanlægning: hurtigere, mere præcis, op til 250 km
 	\n* Introducere kort kun med veje
@@ -198,10 +198,9 @@
     <string name="map_widget_transparent">Gennemsigtig layout</string>
 	
 	
-	<string name="bg_service_sleep_mode_off">Aktiver
-\ndvaletilstand</string>
+	<string name="bg_service_sleep_mode_off">Kør\ni baggrunden</string>
 	<string name="bg_service_sleep_mode_on">Stop
-\ndvaletilstand</string>
+\nkørsel i baggrunden</string>
     <string name="gps_wakeup_interval">GPS vågn-op interval: %s</string>
     <string name="int_continuosly">Vedvarende</string>
     <string name="screen_is_locked">Tryk på låseikonet for at låse skærmen op</string>
@@ -220,11 +219,10 @@
 	\n* Relief pakke til højdekurverudvidelse
 	\n* Fejlrettelser (næsten optimal ruteplanlægning)
     </string>
-    <string name="tip_recent_changes_0_8_4_t">Ændringer i 0.8.4:
-	\n* Nogle fejlrettelser
-	\n* Kort mister ikke positionslås efter afbrydelser
-	\n* Aktiver dvaletilstand tjeneste under navigation
-    </string>
+    <string name="tip_recent_changes_0_8_4_t">"Ændringer i 0.8.4:
+\n* Nogle fejlrettelser
+\n* Kort mister ikke positionslås efter afbrydelser
+\n* Aktiver baggrundstjeneste under navigation "</string>
     <string name="tip_recent_changes_0_8_3_t">Ændringer i 0.8.3:
 \n * Rutepunkter
 \n * Forbedret navigation
@@ -258,7 +256,7 @@
     <string name="bg_service_interval">Indstil opvågningsinterval:</string>
     <string name="show_cameras">Fartkameraer</string>
 
-    <string name="avoid_toll_roads">Undgå betalingsveje</string>
+    <string name="avoid_toll_roads">Betalingsveje</string>
     <string name="continue_follow_previous_route_auto">Forrige navigation var ufærdig. Fortsæt den? (%1$s sekunder)</string>
     <string name="route_updated_loc_found">Ruten beregnes, når position er fundet</string>
     <string name="osmand_parking_hours">Timer</string>
@@ -338,7 +336,7 @@
     <string name="unknown_location">Position endnu ikke kendt</string>
     <string name="modify_transparency">Ændre gennemsigtighed (0 - gennemsigtig, 255 - ugennemsigtig)</string>
     <string name="confirm_interrupt_download">Afbryd hentning af fil?</string>
-    <string name="first_time_msg">Til mange af funktionerne i programmet skal der bruges nogle regionale offline data som kan hentes via \'Indstillinger\' → \'Administrer kortfiler\'. Bagefter kan man se kort, søge adresser, finde interessepunkter (IP) og finde kolllektivtrafik.</string>
+    <string name="first_time_msg">Til mange af funktionerne i programmet skal der bruges nogle regionale offline data som kan hentes via \'Indstillinger\' → \'Administrer kortfiler\'. Bagefter kan man se kort, søge adresser, finde interessepunkter (IP) og kolllektivtrafik.</string>
     <string name="basemap_was_selected_to_download">Basiskort er nødvendig for korrekt programfunktion og blev automatisk valgt.</string>
     <string name="select_index_file_to_download">Fandt intet. Hvis man ikke kan finde sin region kan man lave den selv (se http://osmand.net).</string>
     <string name="local_indexes_cat_tile">Onlinekort og kortfliser</string>
@@ -352,7 +350,7 @@
     <string name="online_map_settings_descr">Konfigurer online- eller cachelagrede kilder til kortfliser</string>
 
 
-    <string name="osmand_background_plugin_description">Viser indstillinger til at aktivere sporing og navigation i dvale (slukket skærm) tilstand via periodisk at vække GPS-enheden.</string>
+    <string name="osmand_background_plugin_description">"Viser indstillinger til at aktivere sporing og navigation i baggrunden (slukket skærm)  via periodisk at vække GPS-enheden."</string>
     <string name="osmand_accessibility_description">"Udvidelsen gør  tilgængelighedsfunktioner tilgængelige direkte i OsmAnd. Det letter fx. justering af tale for TTS stemmerne, konfiguration af styrekryds (D-pad) skærmnavigation ved hjælp af en styrekugle til zoomknappen, eller ved hjælp af tekst-til-tale tilbagemeldinger, og som at meddele positionen automatisk."</string>
 	
 	
@@ -494,8 +492,8 @@
     <string name="user_name_descr">Nødvendige for ændringer i openstreetmap.org</string>
     <string name="user_password">OSM-kodeord</string>
     <string name="user_password_descr">Nødvendig for ændringer i openstreetmap.org</string>
-    <string name="osmand_service">Dvaletilstand</string>
-    <string name="osmand_service_descr">Bruges for at køre OsmAnd mens skærmen er slukket</string>
+    <string name="osmand_service">Kørsel i baggrunden</string>
+    <string name="osmand_service_descr">OsmAnd kører i baggrunden, mens skærmen er slukket</string>
     <string name="tip_rotation_switching">Kortretning</string>
 
     <string name="tip_day_night_mode">Dag/nat tilstand</string>
@@ -910,17 +908,17 @@
     <string name="use_trackball">Brug trackball</string>
     <string name="background_service_wait_int_descr">Indstil maksimal ventetid mellem hver positionssøgning i baggrunden</string>
     <string name="background_service_wait_int">Maks ventetid på låsning</string>
-    <string name="service_stop_background_service">Sluk for OsmAnd navigationstjeneste i dvaletilstand</string>
+    <string name="service_stop_background_service">Sluk for OsmAnd navigationstjeneste i baggrunden</string>
     <string name="where_am_i">Hvor er jeg?</string>
     <string name="network_provider">Netværk</string>
     <string name="int_seconds">sekunder</string>
-    <string name="background_service_int_descr">Indstil vågn-op interval som anvendes af dvaletilstand</string>
+    <string name="background_service_int_descr">Indstil vågn-op interval som anvendes ved kørsel i baggrunden</string>
     <string name="background_service_int">GPS vågn-op interval</string>
-    <string name="background_service_provider_descr">Vælg placeringsudbyder der bruges af dvaletilstand</string>
+    <string name="background_service_provider_descr">Vælg placeringsudbyder som bruges af baggrundstjenesten</string>
     <string name="background_service_provider">Placeringsudbyder</string>
     <string name="background_router_service_descr">Kør OsmAnd i baggrunden for at spore positionen, mens skærmen er slukket</string>
-    <string name="background_router_service">Kør i dvaletilstand</string>
-    <string name="off_router_service_no_gps_available">Dvaletilstand navigationstjenesten kræver en placeringsudbyder for kunne aktiveres.</string>
+    <string name="background_router_service">Kør OsmAnd i baggrunden</string>
+    <string name="off_router_service_no_gps_available">Baggrund navigationstjenesten kræver en placeringsudbyder for kunne aktiveres.</string>
     <string name="hide_poi_filter">Skjul filter</string>
     <string name="show_poi_filter">Vis filter</string>
     <string name="menu_mute_off">Lyd er slået til</string>
@@ -1402,13 +1400,13 @@
 \n Note 2: På den nye placering vil det ikke være muligt at dele filer mellem OsmAnd og OsmAnd+."</string>
     <string name="routing_attr_prefer_motorway_name">Foretræk motorveje</string>
     <string name="routing_attr_prefer_motorway_description">Foretræk motorveje</string>
-    <string name="routing_attr_avoid_toll_name">Undgå betalingsveje</string>
+    <string name="routing_attr_avoid_toll_name">Betalingsveje</string>
     <string name="routing_attr_avoid_toll_description">Undgå betalingsveje</string>
-    <string name="routing_attr_avoid_unpaved_name">Undgå grusveje</string>
+    <string name="routing_attr_avoid_unpaved_name">Grusveje</string>
     <string name="routing_attr_avoid_unpaved_description">Undgå grusveje</string>
-    <string name="routing_attr_avoid_ferries_name">Undgå færger</string>
+    <string name="routing_attr_avoid_ferries_name">Færger</string>
     <string name="routing_attr_avoid_ferries_description">Undgå færger</string>
-    <string name="routing_attr_avoid_motorway_name">Undgå motorveje</string>
+    <string name="routing_attr_avoid_motorway_name">Motorveje</string>
     <string name="routing_attr_avoid_motorway_description">Undgå motorveje</string>
     <string name="routing_attr_weight_name">Vægtgrænse</string>
     <string name="routing_attr_weight_description">Køretøjets vægt der tillades på ruter</string>
@@ -1668,9 +1666,9 @@
     <string name="map_preferred_locale_descr">Foretrukket sprog for etiketter på kortet (hvis sprog ikke findes skiftes til engelsk eller lokale navne)</string>
     <string name="map_preferred_locale">Foretrukket sprog på kort</string>
     <string name="stop_navigation_service">Afbryd</string>
-    <string name="enable_sleep_mode">Aktiver GPS dvaletilstand</string>
+    <string name="enable_sleep_mode">Aktiver GPS baggrundstjenesten</string>
     <string name="gps_wake_up_timer">GPS vågn-op interval</string>
-    <string name="sleep_mode_stop_dialog">Afbryd GPS dvaletilstand?</string>
+    <string name="sleep_mode_stop_dialog">Afbryd GPS baggrundstjenesten?</string>
     <string name="keep_navigation_service">Hold</string>
     <string name="lang_al">Albansk</string>
     <string name="lang_ar">Arabisk</string>
@@ -2007,7 +2005,7 @@
     <string name="rendering_attr_hideHouseNumbers_name">Skjul husnumre</string>
     <string name="routing_attr_avoid_borders_description">Undgå at krydse landegrænser</string>
     <string name="routing_attr_height_name">Højdegrænse</string>
-    <string name="routing_attr_avoid_borders_name">Undgå at krydse grænser</string>
+    <string name="routing_attr_avoid_borders_name">Grænseovergang</string>
     <string name="routing_attr_height_description">Køretøjets højde der tillades på ruter</string>
     <string name="use_fast_recalculation">Smart rutegenberegning</string>
     <string name="use_fast_recalculation_desc">Genberegn kun den indledende del af ruten for lange ture</string>
@@ -2025,7 +2023,7 @@
     <string name="shared_string_import2osmand">Importer til OsmAnd</string>
     <string name="local_recordings_delete_all_confirm">Slet %1$d noter. Bekræft?</string>
     <string name="disable_recording_once_app_killed">Forhindre uafhængig logning</string>
-    <string name="disable_recording_once_app_killed_descrp">Hvis markeret vil GPX logning blive pauset, når programmet afsluttes (via seneste programmer). OsmAnd dvaletilstandsmeddelse vil fosvinde fra notifikationslinien.</string>
+    <string name="disable_recording_once_app_killed_descrp">Hvis markeret vil GPX logning blive stoppet, når programmet afsluttes (via seneste programmer). OsmAnd baggrundsmeddelse fosvinder fra meddelelseslinjen.</string>
     <string name="gps_network_not_enabled">Placeringtjenesten er ikke aktiveret. Aktiver?</string>
     <string name="archive_wikipedia_data">"Der er hentet  gamle inkompatible Wikipedia data. Skal de arkiveres?"</string>
     <string name="download_wikipedia_files">Hent yderligere data fra Wikipedia (%1$s MB)?</string>
@@ -2104,7 +2102,7 @@
     <string name="app_name_osmand">OsmAnd</string>
     <string name="offline_maps_and_navigation">Offline kort\n&amp; navigation</string>
     <string name="commit_poi">Overfør IP</string>
-    <string name="routing_attr_avoid_shuttle_train_name">Undgå shuttletog</string>
+    <string name="routing_attr_avoid_shuttle_train_name">Shuttletog</string>
     <string name="routing_attr_avoid_shuttle_train_description">Undgå shuttletog</string>
     <string name="plugin_settings">Udvidelser</string>
     <string name="tab_title_advanced">Udvidet</string>
@@ -2131,5 +2129,6 @@
 	<string name="saved_at_time">Gemt korrekt: %1$s</string>
 <string name="poi_deleted_localy">Interessepunkt (IP) vil blive slettet, når ændringer overføres</string>
 	<string name="show_gpx">Vis GPX</string>
-<string name="count_of_lines">Optælling af linjer</string>
-</resources>
+<string name="count_of_lines">Antal linjer</string>
+<string name="show_on_start">Vis ved start</string>
+	</resources>

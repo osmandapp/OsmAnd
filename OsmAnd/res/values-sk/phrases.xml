@@ -1292,4 +1292,10 @@
 	<string name="poi_passing_place">Vyhýbacie miesto</string>
 	<string name="poi_level">Poschodie</string>
 
-</resources>
+<string name="poi_paediatrics">Detský lekár</string>
+
+	<string name="poi_religion_spiritualist">Spiritualizmus</string>
+	<string name="poi_religion_zoroastrian">Zoroastrizmus</string>
+
+	<string name="poi_bicycle_parking_anchors">Držiaky</string>
+	</resources>

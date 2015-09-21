@@ -566,8 +566,8 @@
   <string name="general_settings">Všeobecné nastavenia</string>
   <string name="index_settings_descr">Stiahnutie, zobrazenie podrobností a správa offline máp</string>
   <string name="index_settings">Spravovať mapové súbory</string>
-  <string name="osmand_service">Režim spánku</string>
-  <string name="osmand_service_descr">Použite pre beh OsmAndu počas vypnutej obrazovky</string>
+  <string name="osmand_service">Režim na pozadí</string>
+  <string name="osmand_service_descr">OsmAnd bude bežať v systéme aj počas vypnutej obrazovky</string>
   <string name="fast_route_mode">Najrýchlejšia trasa</string>
   <string name="fast_route_mode_descr">Zapnite na výpočet najrýchlejšej trasy alebo vypnite pre najkratšiu trasu </string>
   <string name="tiles_to_download_estimated_size">Pri priblížení {0} sa stiahne {1} dlaždíc ({2} Mb )</string>
@@ -640,20 +640,20 @@
   <string name="use_trackball">Použiť trackball</string>
   <string name="background_service_wait_int_descr">Nastaví max. čakaciu dobu pre každú ustálenú pozíciu na pozadí</string>
   <string name="background_service_wait_int">Max. doba čakania na fix</string>
-  <string name="service_stop_background_service">Vypnúť navigačnú službu na pozadí</string>
+  <string name="service_stop_background_service">Vypnúť navigačnú službu v pozadí</string>
   <string name="where_am_i">Kde som?</string>
   <string name="process_navigation_service">Navigačná služba OsmAnd</string>
   <string name="network_provider">Sieť</string>
   <string name="gps_provider">GPS</string>
   <string name="int_seconds">sekúnd</string>
   <string name="int_min">min.</string>
-  <string name="background_service_int_descr">Nastaví interval rozpoznávania pozície službou na pozadí</string>
+  <string name="background_service_int_descr">Nastaví interval rozpoznávania pozície službou v pozadí</string>
   <string name="background_service_int">Interval zisťovania pozície z GPS</string>
-  <string name="background_service_provider_descr">Výber poskytovateľa umiestnenia pre službu na pozadí</string>
+  <string name="background_service_provider_descr">Výber poskytovateľa umiestnenia pre službu v pozadí</string>
   <string name="background_service_provider">Poskytovateľ umiestnenia</string>
-  <string name="background_router_service_descr">Zapnutie služby na pozadí na sledovanie pozície v dlhých časových periódach</string>
-  <string name="background_router_service">Použiť službu na pozadí</string>
-  <string name="off_router_service_no_gps_available">Služba na pozadí pre navigovanie vyžaduje zapnutý zdroj umiestnenia.</string>
+  <string name="background_router_service_descr">Spustí OsmAnd v pozadí systému, aby mohol sledovať polohu keď je obrazovka vypnutá</string>
+  <string name="background_router_service">Spustiť OsmAnd v pozadí</string>
+  <string name="off_router_service_no_gps_available">Služba pre navigovanie v pozadí vyžaduje zapnutý zdroj umiestnenia.</string>
   <string name="routing_settings_descr">Určenie možností navigácie</string>
   <string name="routing_settings">Navigácia</string>
   <string name="hide_poi_filter">Skryť filter</string>
@@ -1065,7 +1065,7 @@
 	<string name="rendering_attr_showRoadMaps_description">Vyberte, kedy zobraziť mapy ciest:</string>
 	<string name="safe_mode">Bezpečný režim</string>
     <string name="safe_mode_description">Spustenie aplikácie v bezpečnom režime (namiesto natívneho kódu sa použije pomalší kód pre Android).</string>
-    <string name="background_service_is_enabled_question">Služba na pozadí je stále spustená. Chcete ju prerušiť?</string>
+    <string name="background_service_is_enabled_question">Služba v pozadí je stále spustená. Chcete ju prerušiť?</string>
     <string name="tip_recent_changes_1_0_0_t">Zmeny vo verzii 1.0.0 :\n\t* Vylepšená navigácia: rýchlejšia a precíznejšia, až do vzdialenosti 250 km\n\t* Zavedené mapy obsahujúce iba cestnú sieť\n\t* Umiestnenie na mape nie je po prerušeniach stratené\n\t* Zapnutie služby na pozadí počas navigácie
     </string>
     <string name="native_library_not_running">Aplikácia je spustená v bezpečnom režime (vypnete ho v nastaveniach).</string>
@@ -1553,7 +1553,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="routing_attr_prefer_motorway_description">Uprednostniť diaľnice</string>
 	<string name="routing_attr_short_way_name">Najkratšia cesta</string>
 	<string name="routing_attr_short_way_description">Použiť najkratšiu cestu</string>
-	<string name="routing_attr_avoid_toll_name">Vyhnúť sa spoplatneným cestám</string>
+	<string name="routing_attr_avoid_toll_name">Spoplatnené cesty</string>
 	<string name="routing_attr_avoid_toll_description">Vyhnúť sa spoplatneným cestám</string>
 	<string name="routing_attr_avoid_unpaved_name">Vyhnúť sa nespevneným cestám</string>
 	<string name="routing_attr_avoid_unpaved_description">Vyhnúť sa nespevneným cestám</string>
@@ -1798,9 +1798,9 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="osmo_group_information_desc">" - Všetky vytvorené skupiny sú verejné! Ak chcete byť anonymný, pripojte zariadenia priamo cez Tracker id.\n - Súkromné skupiny sú obmedzené na 8 ľudí.\n - Skupina bude zrušená v prípade nečinnosti alebo aktivity len jednej osoby počas 2 týždňov.\n - Môžete obmedziť vstup do skupiny len na pozvánky, ale pre ovládanie skupiny musíte použiť administračnú konzolu.\n - Ak potrebujete vytvoriť skupinu s inými podmienkami, kontaktujte http://osmo.mobi"</string>
     <string name="osmo_group_information">Prosím prečítajte si pred vytváraním skupiny!</string>
     <string name="stop_navigation_service">Prerušiť</string>
-	<string name="enable_sleep_mode">Zapnúť režim spánku GPS</string>
+	<string name="enable_sleep_mode">Zapnúť režim GPS v pozadí</string>
 	<string name="gps_wake_up_timer">Interval prebúdzania GPS</string>
-	<string name="sleep_mode_stop_dialog">Prerušiť spánok GPS?</string>
+	<string name="sleep_mode_stop_dialog">Prerušiť službu GPS v pozadí?</string>
 	<string name="map_preferred_locale_descr">Preferovaný jazyk pre nápisy na mape (ak nie je dostupný budú použité anglické alebo lokálne názvy)</string>
     <string name="map_preferred_locale">Preferovaný jazyk mapy</string>
     <string name="local_map_names">Lokálne názvy</string>
@@ -2181,7 +2181,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="local_recordings_delete_all_confirm">Chystáte sa vymazať %1$d poznámok. Ste si istí?</string>
 	<string name="gps_network_not_enabled">Služba zisťovania pozície nie je zapnutá. Chcete ju teraz zapnúť?</string>
     <string name="disable_recording_once_app_killed">Zakázať samostatné zaznamenávanie</string>
-    <string name="disable_recording_once_app_killed_descrp">Zastaví záznam GPX keď je aplikácia ukončená (cez nedávne aplikácie). (Ikona režimu spánku OsmAnd zmizne z notifikačnej oblasti Androidu.)</string>
+    <string name="disable_recording_once_app_killed_descrp">Zastaví záznam GPX keď je aplikácia ukončená (cez nedávne aplikácie). (Ikona režimu na pozadí zmizne z notifikačnej oblasti Androidu.)</string>
 	<string name="archive_wikipedia_data">Máte stiahnuté staré nekompatibilné dáta z Wikipedie. Chcete ich archivovať?</string>
     <string name="download_wikipedia_files">Chcete stiahnuť ďalšie dáta z Wikipedie (%1$s MB) ?</string>
     <string name="lang_es_ar">Argentínska Španielčina</string>
@@ -2262,7 +2262,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 <string name="av_locations_descr">GPX súbor s pozíciami poznámok</string>
     <string name="av_locations">Pozície</string>
     <string name="plugin_settings">Zásuvné moduly</string>
-	<string name="routing_attr_avoid_shuttle_train_name">Nepoužiť autovlak</string>
+	<string name="routing_attr_avoid_shuttle_train_name">Autovlak</string>
 	<string name="routing_attr_avoid_shuttle_train_description">Nepoužiť autovlak</string>
     <string name="tab_title_basic">Základné</string>
 	<string name="tab_title_advanced">Rozšírené</string>
@@ -2286,4 +2286,5 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="poi_deleted_localy">Bod POI bude vymazaný keď zmeny odošlete</string>
 	<string name="show_gpx">Zobraziť GPX</string>
 <string name="count_of_lines">Počet riadkov</string>
-</resources>
+<string name="show_on_start">Zobraziť po štarte</string>
+	</resources>

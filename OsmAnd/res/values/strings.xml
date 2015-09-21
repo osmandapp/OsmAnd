@@ -13,7 +13,7 @@
     <string name="av_locations_descr">Gpx file with note locations</string>
     <string name="av_locations">Locations</string>
     <string name="plugin_settings">Plugins</string>
-	<string name="routing_attr_avoid_shuttle_train_name">Avoid shuttle train</string>
+	<string name="routing_attr_avoid_shuttle_train_name">Shuttle train</string>
 	<string name="routing_attr_avoid_shuttle_train_description">Avoid shuttle train</string>
     <string name="traffic_warning_hazard">Hazard</string>
     <string name="rendering_value_boldOutline_name">Bold outline</string>
@@ -76,7 +76,7 @@
     <string name="download_wikipedia_files">Do you want to download additional Wikipedia data (%1$s MB) ?</string>
     <string name="gps_network_not_enabled">Location service is not enabled. Do you want to turn it on?</string>
     <string name="disable_recording_once_app_killed">Prevent standalone logging</string>
-    <string name="disable_recording_once_app_killed_descrp">Will pause GPX logging when the app is killed (via recent apps). (OsmAnd Sleep mode indication disappears from the Android notification bar.)</string>
+    <string name="disable_recording_once_app_killed_descrp">Will pause GPX logging when the app is killed (via recent apps). (OsmAnd background indication disappears from the Android notification bar.)</string>
     <string name="shared_string_import2osmand">Import to OsmAnd</string>
     <string name="read_full_article">Read full article (online)</string>
     <string name="download_wikipedia_item">Wikipedia</string>
@@ -421,14 +421,14 @@
 		\n\t* or via your predefined favorites.
 		\n\nFor all hits a context menu or action bar offers options like \'Directions to\' or \'Show on map\', etc.
 	</string>
-	<string name="background_service_is_enabled_question">OsmAnd sleep mode service is still running. Do you want to interrupt it, too?</string>
-	<string name="sleep_mode_stop_dialog">Interrupt GPS sleep mode?</string>
+	<string name="background_service_is_enabled_question">OsmAnd background service is still running. Do you want to interrupt it, too?</string>
+	<string name="sleep_mode_stop_dialog">Interrupt GPS background mode?</string>
 	<string name="stop_navigation_service">Interrupt</string>
 	<string name="confirm_every_run">Always ask</string>
 	<string name="save_global_track_interval_descr">Choose logging interval for the general track recording (enabled via the GPX logging widget on the map)</string>
 	<string name="save_global_track_interval">General logging interval</string>
 	<string name="background_service_int">GPS Wake-up interval</string>
-	<string name="enable_sleep_mode">Enable GPS sleep mode</string>
+	<string name="enable_sleep_mode">Enable GPS background mode</string>
 	<string name="save_track_to_gpx_globally">Log track to GPX file</string>
 	<string name="save_track_to_gpx_globally_headline">On demand track logging</string>
 	<string name="save_track_to_gpx_globally_descr">General position logging to a GPX file can be turned on or off using the GPX logging widget on the map screen</string>
@@ -716,15 +716,15 @@
 	<string name="routing_attr_prefer_motorway_description">Prefer motorways</string>
 	<string name="routing_attr_short_way_name">Shortest way</string>
 	<string name="routing_attr_short_way_description">Use shortest way</string>
-	<string name="routing_attr_avoid_toll_name">Avoid toll roads</string>
+	<string name="routing_attr_avoid_toll_name">Toll roads</string>
 	<string name="routing_attr_avoid_toll_description">Avoid toll roads</string>
-	<string name="routing_attr_avoid_unpaved_name">Avoid unpaved roads</string>
+	<string name="routing_attr_avoid_unpaved_name">Unpaved roads</string>
 	<string name="routing_attr_avoid_unpaved_description">Avoid unpaved roads</string>
-	<string name="routing_attr_avoid_ferries_name">Avoid ferries</string>
+	<string name="routing_attr_avoid_ferries_name">Ferries</string>
 	<string name="routing_attr_avoid_ferries_description">Avoid ferries</string>
-	<string name="routing_attr_avoid_motorway_name">Avoid motorways</string>
+	<string name="routing_attr_avoid_motorway_name">Motorways</string>
 	<string name="routing_attr_avoid_motorway_description">Avoid motorways</string>
-	<string name="routing_attr_avoid_borders_name">Avoid border crossing</string>
+	<string name="routing_attr_avoid_borders_name">Border crossing</string>
 	<string name="routing_attr_avoid_borders_description">Avoid crossing a border into another country</string>
 	<string name="routing_attr_weight_name">Weight limit</string>
 	<string name="routing_attr_weight_description">Specify vehicle weight to be permitted on routes</string>
@@ -912,7 +912,7 @@
         \n\t* Additional settings for stabilizing compass
         \n\t* Top left button on the map screen replaces Menu button
     </string>
-    <string name="osmand_background_plugin_description">Shows the settings to enable tracking and navigation in sleep (screen off) mode via periodically waking up the GPS device.</string>
+    <string name="osmand_background_plugin_description">Shows the settings to enable tracking and navigation in background (screen off) mode via periodically waking up the GPS device.</string>
     <string name="contribution_activity">Install version</string>
     <string name="choose_osmand_theme_descr">Choose application theme</string>
     <string name="choose_osmand_theme">App theme</string>
@@ -1044,12 +1044,12 @@
 	\n\t* Improved routing: faster, more precise, up to 250 km
 	\n\t* Introduce roads-only maps
 	\n\t* Map does not lose position lock after interruptions
-	\n\t* Enable sleep mode service during navigation
+	\n\t* Enable background service during navigation
     </string>
     <string name="tip_recent_changes_0_8_4_t">Changes in 0.8.4:
 	\n\t* Some bug fixes
 	\n\t* Map does not lose position lock after interruptions
-	\n\t* Enable sleep mode service during navigation
+	\n\t* Enable background service during navigation
     </string>
     <string name="close_changeset">Close changeset</string>
 	<string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner application not installed. Search in Market?</string>
@@ -1334,8 +1334,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="map_widget_show_ruler">Ruler</string>
 	<string name="map_widget_view_direction">Viewing direction</string>
 	<string name="map_widget_transparent">Transparent skin</string>
-	<string name="bg_service_sleep_mode_off">Enable\n sleep mode</string>
-	<string name="bg_service_sleep_mode_on">Stop\n sleep mode</string>
+	<string name="bg_service_sleep_mode_off">Run\n app in background</string>
+	<string name="bg_service_sleep_mode_on">Stop\n running in background</string>
 	<string name="gps_wakeup_interval">GPS wake-up interval: %s</string>
 	<string name="int_continuosly">Continuous</string>
 	<string name="screen_is_locked">To unlock screen press lock icon</string>
@@ -1361,7 +1361,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="bg_service_interval">Set wake-up interval:</string>
 	<string name="show_cameras">Show speed cameras</string>
 	<string name="show_traffic_warnings">Show traffic warnings</string>
-	<string name="avoid_toll_roads">Avoid toll roads</string>
+	<string name="avoid_toll_roads">Toll roads</string>
 	<string name="continue_follow_previous_route_auto">Previous navigation was unfinished. Continue following it? (%1$s seconds)</string>
 	<string name="route_updated_loc_found">Route will be calculated once position is found</string>
 	<string name="osmand_parking_hours">Hours</string>
@@ -1611,8 +1611,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="user_name_descr">Needed for openstreetmap.org submissions</string>
 	<string name="user_password">Your OSM password</string>
 	<string name="user_password_descr">Needed for openstreetmap.org submissions</string>
-	<string name="osmand_service">Sleep mode</string>
-	<string name="osmand_service_descr">Use to run OsmAnd while screen is off</string>
+	<string name="osmand_service">Background mode</string>
+	<string name="osmand_service_descr">OsmAnd runs in background while screen is off</string>
 	<string name="tip_rotation_switching">Map Orientation</string>
 	<string name="tip_rotation_switching_t_v2">You can toggle whether and how the map display is rotated by repeatedly clicking on the map screen\'s compass icon.
 		\n\nThe choices are:
@@ -1974,19 +1974,19 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="use_trackball">Use trackball</string>
 	<string name="background_service_wait_int_descr">Set maximum waiting time for each background position fix</string>
 	<string name="background_service_wait_int">Maximum wait for fix</string>
-	<string name="service_stop_background_service">Switch off OsmAnd sleep mode navigation service</string>
+	<string name="service_stop_background_service">Switch off OsmAnd background navigation service</string>
 	<string name="where_am_i">Where am I?</string>
 	<string name="process_navigation_service">OsmAnd navigation service</string>
 	<string name="network_provider">Network</string>
 	<string name="gps_provider">GPS</string>
 	<string name="int_seconds">seconds</string>
 	<string name="int_min">min.</string>
-	<string name="background_service_int_descr">Set wake-up interval used by sleep mode service</string>
-	<string name="background_service_provider_descr">Choose location provider used by sleep mode service</string>
+	<string name="background_service_int_descr">Set wake-up interval used by background service</string>
+	<string name="background_service_provider_descr">Choose location provider used by background service</string>
 	<string name="background_service_provider">Location provider</string>
 	<string name="background_router_service_descr">Runs OsmAnd in the background to track your position while screen is off</string>
-	<string name="background_router_service">Run in sleep mode</string>
-	<string name="off_router_service_no_gps_available">The sleep mode navigation service requires a location provider to be turned on.</string>
+	<string name="background_router_service">Run OsmAnd in background</string>
+	<string name="off_router_service_no_gps_available">The background navigation service requires a location provider to be turned on.</string>
 	<string name="hide_poi_filter">Hide filter</string>
 	<string name="show_poi_filter">Show filter</string>
 	<string name="search_poi_filter">Filter</string>
@@ -2238,6 +2238,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="try_again">Try again</string>
 	<string name="error_message_pattern">Error: {0}</string>
 	<string name="dahboard_options_dialog_title">Configure dashboard</string>
+	<string name="show_on_start">Show on start</string>
 	<string name="shared_string_card_was_hidden">Card was hidden</string>
 	<string name="shared_string_undo">UNDO</string>
 	<string name="shared_string_skip">Skip</string>

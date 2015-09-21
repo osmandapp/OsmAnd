@@ -68,13 +68,13 @@
 	<string name="routing_attr_prefer_motorway_description">Preferre sas autostradas</string>
 	<string name="routing_attr_short_way_name">Istrada prus curtza</string>
 	<string name="routing_attr_short_way_description">Imprea sa caminera prus curtza</string>
-	<string name="routing_attr_avoid_toll_name">Istransi sas istradas a pagamentu</string>
+	<string name="routing_attr_avoid_toll_name">Istradas a pagamentu</string>
 	<string name="routing_attr_avoid_toll_description">Istransi sas istradas a pagamentu</string>
-	<string name="routing_attr_avoid_unpaved_name">Istransi sas istradas non apamentadas</string>
+	<string name="routing_attr_avoid_unpaved_name">Istradas non apamentadas</string>
 	<string name="routing_attr_avoid_unpaved_description">Istransi sas istradas non apamentadas</string>
-	<string name="routing_attr_avoid_ferries_name">Istransi sos naviles</string>
+	<string name="routing_attr_avoid_ferries_name">Naviles</string>
 	<string name="routing_attr_avoid_ferries_description">Istransi sos naviles</string>
-	<string name="routing_attr_avoid_motorway_name">Istransi sas autostradas</string>
+	<string name="routing_attr_avoid_motorway_name">Autostradas</string>
 	<string name="routing_attr_avoid_motorway_description">Istransi sas autostradas</string>
 	<string name="routing_attr_weight_name">Lìmite de pesu</string>
 	<string name="routing_attr_weight_description">Dislinda su lìmite de pesu de su veìculu</string>
@@ -755,7 +755,7 @@
 	<string name="bg_service_interval">Imposta s’intervallu de ischidada:</string>
 	<string name="show_cameras">Ammustra autovelox</string>
 	<string name="show_traffic_warnings">Ammustra lìmites de lestresa</string>
-	<string name="avoid_toll_roads">Istansi sas istradas a pedàgiu</string>
+	<string name="avoid_toll_roads">Istradas a pedàgiu</string>
 	<string name="continue_follow_previous_route_auto">Su nàvigu pretzedente no est istadu cumpridu. Sighire cun cussu? (%1$s segundos)</string>
 	<string name="route_updated_loc_found">S’àndala at a èssere calculada a positzione achirida</string>
 	<string name="osmand_parking_hours">Oras</string>
@@ -1965,7 +1965,7 @@
     <string name="routing_attr_avoid_borders_description">Non rugrare sas fronteras intre sos istados</string>
 	<string name="use_fast_recalculation">Recàlculu intelligente de s’àndala</string>
 	<string name="use_fast_recalculation_desc">Torra a calculare petzi su cantu initziale de s’àndala pro biàgios longos</string>
-<string name="routing_attr_avoid_borders_name">Non rugres sas fronteras</string>
+<string name="routing_attr_avoid_borders_name">Fronteras</string>
 	<string name="rendering_value_disabled_name">Disabilitadu</string>
     <string name="osmo_share_my_location">Cumpartzi sa positzione</string>
     <string name="shared_string_logoff">Essi</string>
@@ -2060,7 +2060,7 @@
 	<string name="commit_poi">Imbia PDI</string>
 <string name="shared_string_card_was_hidden">S’ischeda fiat cuada</string>
 	<string name="plugin_settings">Plugins (estensiones)</string>
-	<string name="routing_attr_avoid_shuttle_train_name">Istransi trenu ispola</string>
+	<string name="routing_attr_avoid_shuttle_train_name">Trenu ispola</string>
 	<string name="routing_attr_avoid_shuttle_train_description">Istransi trenu ispola</string>
     <string name="tab_title_basic">Bàsicu</string>
 	<string name="tab_title_advanced">Estesu</string>
@@ -2085,4 +2085,5 @@
 <string name="poi_deleted_localy">Su PDI at a èssere burradu a pustis de su carrigamentu de sas modìficas tuas</string>
 	<string name="show_gpx">Ammustra GPX</string>
 <string name="saved_at_time">Sarbada resèssida in: %1$s</string>
+	<string name="show_on_start">Ammustra in su cumintzu</string>
 	</resources>

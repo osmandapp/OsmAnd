@@ -1155,7 +1155,7 @@
 
 	<string name="poi_bunker_silo">Silo bunker</string>
 	<string name="poi_content_slurry">Mezcla (contenido)</string>
-	<string name="poi_brownfield">Terreno abandonado</string>
+	<string name="poi_brownfield">Suelo abandonado urbanizable</string>
 	<string name="poi_greenfield">Suelo urbanizable</string>
 	<string name="poi_wholesale">Venta mayorista</string>
 
@@ -1326,7 +1326,7 @@
 	<string name="poi_mini_roundabout">Mini rotonda</string>
 	<string name="poi_railway_crossing">Cruce peatonal ferroviario</string>
 	<string name="poi_railway_level_crossing">Cruce ferroviario</string>
-	<string name="poi_bird_hide">Puesto de observación</string>
+	<string name="poi_bird_hide">Observatorio de aves</string>
 	<string name="poi_horse_riding">Equitación</string>
 	<string name="poi_garden">Jardín</string>
 
@@ -1342,4 +1342,7 @@
 	<string name="poi_passing_place">Lugar de paso</string>
 	<string name="poi_level">Nivel</string>
 
-</resources>
+<string name="poi_leisure_common">Área de ocio común</string>
+	<string name="poi_heath">Brezal</string>
+	<string name="poi_windfall">Fruto caído</string>
+	</resources>
