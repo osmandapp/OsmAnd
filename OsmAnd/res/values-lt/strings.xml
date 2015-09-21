@@ -1725,7 +1725,7 @@
     <string name="rendering_attr_showCycleRoutes_name">Rodyti dviračių maršrutus</string>
     <string name="keep_navigation_service">Išlaikyti</string>
 	<string name="stop_navigation_service">Nutraukti</string>
-	<string name="enable_sleep_mode">Įjungti GPS miego režimą</string>
+	<string name="enable_sleep_mode">Įjungti GPS foninį režimą</string>
 	<string name="gps_wake_up_timer">GPS prabudimo intervalas</string>
 	<string name="sleep_mode_stop_dialog">Nutraukti GPS foninį režimą?</string>
 	<string name="map_preferred_locale_descr">Pageidaujama kalba užrašams ant žemėlapio (jei jos nėra, užrašai bus rodomi anglų arba vietine kalba)</string>
