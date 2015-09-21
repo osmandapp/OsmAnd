@@ -120,7 +120,7 @@ public class EditPoiFragment extends DialogFragment {
 							 Bundle savedInstanceState) {
 		final View view = inflater.inflate(R.layout.fragment_edit_poi, container, false);
 		final OsmandSettings settings = getMyApplication().getSettings();
-		boolean isLightTheme = settings.OSMAND_THEME.get() == settings.OSMAND_LIGHT_THEME;
+		boolean isLightTheme = settings.OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME;
 
 		if (savedInstanceState != null) {
 			editPoiData.tags = (LinkedHashSet<Tag>) savedInstanceState.getSerializable(TAGS_LIST);
@@ -449,8 +449,7 @@ public class EditPoiFragment extends DialogFragment {
 
 			@Override
 			protected Node doInBackground(Void... params) {
-				Node node = openstreetmapUtil.commitNodeImpl(action, n, info, comment, closeChangeSet);
-				return node;
+				return openstreetmapUtil.commitNodeImpl(action, n, info, comment, closeChangeSet);
 			}
 
 			@Override
@@ -460,8 +459,6 @@ public class EditPoiFragment extends DialogFragment {
 					successAction.run();
 				}
 			}
-
-			;
 		}.execute();
 	}
 
@@ -532,7 +529,7 @@ public class EditPoiFragment extends DialogFragment {
 							Toast.LENGTH_SHORT).show();
 				}
 			}
-		}.execute(new Void[0]);
+		}.execute();
 	}
 
 	public static class MyAdapter extends FragmentPagerAdapter {
@@ -611,8 +608,8 @@ public class EditPoiFragment extends DialogFragment {
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-			builder.setTitle("Are you sure?")
-					.setMessage("Any unsaved changes will be lost. Continue?")
+			builder.setTitle(getResources().getString(R.string.are_you_sure))
+					.setMessage(getResources().getString(R.string.unsaved_changes_will_be_lost))
 					.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {

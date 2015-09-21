@@ -135,5 +135,19 @@ public class PoiType extends AbstractPoiType {
 		this.relation = relation;
 	}
 
-	
+	@Override
+	public String toString() {
+		return "PoiType{" +
+				"category=" + category +
+				", parentType=" + parentType +
+				", referenceType=" + referenceType +
+				", osmTag='" + osmTag + '\'' +
+				", osmTag2='" + osmTag2 + '\'' +
+				", osmValue='" + osmValue + '\'' +
+				", osmValue2='" + osmValue2 + '\'' +
+				", text=" + text +
+				", nameOnly=" + nameOnly +
+				", relation=" + relation +
+				'}';
+	}
 }

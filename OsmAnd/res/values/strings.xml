@@ -2266,4 +2266,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="poi_deleted_localy">POI will be deleted once you upload your changes</string>
 	<string name="show_gpx">Show GPX</string>
 	<string name="count_of_lines">Count of lines</string>
+	<string name="are_you_sure">Are you sure?</string>
+	<string name="unsaved_changes_will_be_lost">Any unsaved changes will be lost. Continue?</string>
 </resources>
