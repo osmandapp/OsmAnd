@@ -20,9 +20,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.widgets.InterceptorFrameLayout;
 import net.osmand.plus.widgets.tools.SwipeDismissTouchListener;
 
-/**
- * Created by Denis on 24.11.2014.
- */
 public abstract class DashBaseFragment extends Fragment {
 	protected DashboardOnMap dashboard;
 
@@ -72,9 +69,7 @@ public abstract class DashBaseFragment extends Fragment {
 
 						@Override
 						public void onDismiss(View view, Object token, boolean isSwipeRight) {
-							if (isSwipeRight) {
-								getDismissCallback().onDismiss();
-							}
+							getDismissCallback().onDismiss();
 						}
 					});
 			frameLayout.setOnTouchListener(listener);
