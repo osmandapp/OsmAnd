@@ -78,7 +78,7 @@
   
   
   <string name="osmand_rastermaps_plugin_description">"Šio įskiepio pagalba galite pasiekti daugybę žemėlapių rūšių internete, pradedant Openstreetmap (Mapnik), baigiant palydovinėmis nuotraukomis ir specialios paskirties sluoksnių, tokių kaip orų, klimato, geologinių žemėlapiai, bei kalvų šešėliavimo sluoksnius.\n\nKiekvienas iš šių žemėlapių gali būti atvaizduotas OsmAnd ekrane kaip pagrindinis (bazinis) arba kaip papildomas antsluoksnis ar posluoksnis kitame baziniame žemėlapyje (pvz., OsmAnd offline žemėlapiuose). Tam, kad posluoksninie žemėlapis būtų aiškiai matomas, galima išjungti OsmAnd vektorinių žemėlapių tam tikrus elementus meniu \"Konfigūruoti žemėlapį\".\n\nTailinius žemėlapius galimi atsisiųsti iš interneto arba paruošti naudojimui neprisijungus (ir rankiniu būdu įkelti į OsmAnd duomenų katalogą) kaip SQLite duomenų bazė, kurią galima paruošti įvairiais trečių šalių įrankiais. "</string>
-  <string name="osmand_background_plugin_description">Rodyti nustatymus sekimui ir navigacijai miego režime (išjungus ekraną) periodiškai žadinant GPS įrenginį.</string>
+  <string name="osmand_background_plugin_description">Rodyti nustatymus sekimui ir navigacijai foniniame režime (išjungus ekraną) periodiškai žadinant GPS įrenginį.</string>
   <string name="osmand_accessibility_description">Šis įskiepis įgalina įrenginio specialiuosius nustatymus tiesiai OsmAnd. Tai, pavyzdžiui, palengvina TTS balso greičio reguliavimą, navigacijos ekrano kryptį, mąstelio reguliavimą.</string>
   
   
@@ -259,8 +259,8 @@
   <string name="user_name_descr">Reikalingas norint teikti duomenis į openstreetmap.org</string>
   <string name="user_password">Jūsų OSM slaptažodis</string>
   <string name="user_password_descr">Reikalingas norint teikti duomenis į openstreetmap.org</string>
-  <string name="osmand_service">Miego režimas</string>
-  <string name="osmand_service_descr">Reikalinga jei norite naudoti OsmAnd kai ekranas yra išjungtas</string>
+  <string name="osmand_service">Foninis režimas</string>
+  <string name="osmand_service_descr">Reikalinga, jei norite naudoti OsmAnd kai ekranas yra išjungtas</string>
   <string name="tip_rotation_switching">Žemėlapio orientacija</string>
   
   
@@ -1006,8 +1006,8 @@
   <string name="bg_service_interval">Nustatyti prabudimo intervalą:</string>
   <string name="screen_is_locked">Norėdami atrakinti ekraną, paspauskite užrakto piktogramą</string>
   <string name="bg_service_screen_unlock">Atrakinti ekraną</string>
-  <string name="bg_service_sleep_mode_off">Įjungti\n miego režimą</string>
-  <string name="bg_service_sleep_mode_on">Išjungti\n miego režimą</string>
+  <string name="bg_service_sleep_mode_off">Įjungti\n foninį režimą</string>
+  <string name="bg_service_sleep_mode_on">Išjungti\n foninį režimą</string>
 <string name="map_widget_show_ruler">Liniuotė</string>
 <string name="gps_wakeup_interval">GPS pabudimo intervalas: %s</string>
 <string name="int_continuosly">Tolydžiai</string>
@@ -1109,7 +1109,7 @@
 	<string name="safe_mode_description">Vykdyti programą saugiu režimu (naudoti Android kodą vietoje aparatinio).</string>
     <string name="safe_mode">Saugus režimas</string>
     <string name="native_library_not_running">Programa veikia saugiu eržimu (išjunkite jį Nustatymuose).</string>
-    <string name="background_service_is_enabled_question">OsmAnd miego režimas vis dar veikia. Ar norite ir jį nutraukti?</string>
+    <string name="background_service_is_enabled_question">OsmAnd foninis režimas vis dar veikia. Ar norite ir jį nutraukti?</string>
     <string name="tip_recent_changes_1_0_0_t">Pakeitimai 1.0 versijoje :
 	\n\t* Patobulintas maršruto skaičiavimas dabar greitesnis ir tikslesnis (iki 250 km)
 	\n\t* Sukurti vien kelių žemėlapiai
@@ -1337,13 +1337,13 @@
 	<string name="driving_region_uk">JK, Indija, Australija ir kitos</string>
 	    
     
-    <string name="announce_gpx_waypoints">Pranešti apie GPX tarpinius taškus</string>
+    <string name="announce_gpx_waypoints">GPX tarpiniai taškai</string>
     <string name="speak_title">Pranešti…</string>
 	<string name="speak_descr">Nustatyti gatvių pavadinimų, eismo perspėjimų (priverstinius sustojimus, greičio ribotuvus), greičio radarus, greičio apribojimus</string>
-	<string name="speak_street_names">Prenešti gatvių pavadinimus (TTS)</string>
-    <string name="speak_speed_limit">Pranešti greičio apribojimus</string>
-    <string name="speak_cameras">Pranešti apie greičio radarus</string>
-	<string name="speak_traffic_warnings">Pranešti eismo perspėjimus</string>
+	<string name="speak_street_names">Gatvių pavadinimai (TTS)</string>
+    <string name="speak_speed_limit">Greičio apribojimai</string>
+    <string name="speak_cameras">Greičio radarai</string>
+	<string name="speak_traffic_warnings">Eismo perspėjimai</string>
     <string name="tip_recent_changes_1_5_t">Pakeitimai 1.5 versijoje:
 	\n\t* Pranešimai balsu apie greičio ribojimus ar radarus
 	\n\t* Daugiau pranešimų balsu (gatvių pavadinimai)
@@ -1725,16 +1725,16 @@
     <string name="rendering_attr_showCycleRoutes_name">Rodyti dviračių maršrutus</string>
     <string name="keep_navigation_service">Išlaikyti</string>
 	<string name="stop_navigation_service">Nutraukti</string>
-	<string name="enable_sleep_mode">Įjungti GPS miego režimą</string>
+	<string name="enable_sleep_mode">Įjungti GPS foninį režimą</string>
 	<string name="gps_wake_up_timer">GPS prabudimo intervalas</string>
-	<string name="sleep_mode_stop_dialog">Nutraukti GPS miego režimą?</string>
+	<string name="sleep_mode_stop_dialog">Nutraukti GPS foninį režimą?</string>
 	<string name="map_preferred_locale_descr">Pageidaujama kalba užrašams ant žemėlapio (jei jos nėra, užrašai bus rodomi anglų arba vietine kalba)</string>
     <string name="map_preferred_locale">Pageidaujama žemėlapio kalba</string>
     <string name="local_map_names">Vietiniai pavadinimai</string>
     <string name="lang_sw">Svahili</string>
     <string name="lang_he">Hebrajų</string>
     <string name="forward">Pirmyn</string>
-    <string name="home">Namo</string>
+    <string name="home">Duomenų skydelis</string>
     <string name="live_monitoring_m_descr">Siųsti stebėjimo duomenis į pasirinktą tarnybą, kai įjungtas GPX išsaugojimas.</string>
 	<string name="live_monitoring_m">Sekimas internete (reikalingas GPX)</string>
     <string name="live_monitoring_start">Pradėti sekimą internete</string>
@@ -1780,8 +1780,8 @@
     <string name="targets">Tikslai</string>
     <string name="waypoints">Tarpiniai taškai</string>
     <string name="way_alarms">Eismo perspėjimai</string>
-    <string name="speak_favorites">Paskelbti artimiausias įsimintas vietas</string>
-    <string name="speak_poi">Paskelbti artimiausias lankytinas vietas</string>
+    <string name="speak_favorites">Artimiausios įsimintos vietos</string>
+    <string name="speak_poi">Artimiausios lankytinos vietos</string>
     <string name="record_plugin_name">Įrašyti savo keliones</string>
     <string name="int_hour">val</string>
     <string name="duration">Trukmė</string>
@@ -1881,7 +1881,7 @@
 	
 	<string name="show_railway_warnings">Rodyti geležinkelių pervažas</string>
 	<string name="show_pedestrian_warnings">Rodyti pėsčiųjų perėjas</string>
-    <string name="speak_pedestrian">Pranešti apie perėjas</string>
+    <string name="speak_pedestrian">Pėsčiųjų perėjos</string>
     <string name="traffic_warning_pedestrian">Pėčiųjų perėja</string>
 	
 	<string name="parking_place">Parkavimo vieta</string>
@@ -2039,7 +2039,7 @@
     <string name="osm_edit_context_menu_delete">Ištrinti OSM taisymus</string>
     <string name="local_recordings_delete_all_confirm">Ketinate ištrinti %1$d pastabas. Ar tikrai to norite?</string>
 	<string name="download_wikipedia_maps">Vikipedija</string>
-    <string name="disable_recording_once_app_killed_descrp">Bus pristabdytas GPX įrašymas, jei programa bus išjungta (per Pastarosios programos). (OsmAnd Miego režimo piktograma dings iš Android pranešimų juostos.)</string>
+    <string name="disable_recording_once_app_killed_descrp">Bus pristabdytas GPX įrašymas, jei programa bus išjungta (per Pastarosios programos). (OsmAnd Miego foninio režimo piktograma dings iš Android pranešimų juostos.)</string>
 	<string name="download_wikipedia_files">Ar norite atsisiųsti papildomų Wikipedia duomenų (%1$s MB)?</string>
     <string name="archive_wikipedia_data">Jūsų turimi Wikipedia duomenys yra pasenę. Gal norite juos suarchyvuoti?</string>
     <string name="light_theme">Šviesi</string>
@@ -2101,7 +2101,7 @@
 	<string name="rate_this_app_long">Įvertinkite OsmAnd Google Play puslapyje</string>
 	<string name="user_hates_app_get_feedback">Pasakykite, kodėl.</string>
 	<string name="user_hates_app_get_feedback_long">Pasakykite, ką mes turėtume pakeisti programėlėje.</string>
-<string name="download_live_updates">Naujiniai</string>
+<string name="download_live_updates">Automatinis naujinimas</string>
 	<string name="no_updates_available">Nauijinių nėra</string>
     <string name="we_really_care_about_your_opinion">Mums labai svarbi jūsų nuomonė ir jūsų atsiliepimai.</string>
 	<string name="failed_to_upload">Nepavyko išsiųsti</string>
@@ -2133,4 +2133,12 @@
 	<string name="poi_deleted_localy">LV bus ištrinti, kai jūs įkelsite pakeitimus</string>
 	<string name="show_gpx">Rodyti GPX</string>
 <string name="recent_places">Vėliausios vietos</string>
-	</resources>
+	<string name="address_unknown">Adresas vis dar nežinomas</string>
+    <string name="routing_attr_avoid_shuttle_train_name">Vengti greitųjų traukinių</string>
+	<string name="routing_attr_avoid_shuttle_train_description"/>
+    <string name="dahboard_options_dialog_title">Duomenų skydelio nustatymai</string>
+	<string name="show_on_start">Rodyti aktyvuojant</string>
+	<string name="offline_maps_and_navigation">Offline žemėlapiai\n&amp; navigacija</string>
+	<string name="commit_poi"/>
+	<string name="count_of_lines">Eilučių kiekis</string>
+</resources>

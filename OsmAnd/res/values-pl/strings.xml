@@ -923,7 +923,7 @@
   
   <string name="show_cameras">Fotoradary</string>
   <string name="show_traffic_warnings">Ostrzeżenia</string>
-  <string name="avoid_toll_roads">Drogi płatne</string>
+  <string name="avoid_toll_roads">Unikaj dróg płatnych</string>
   <string name="tip_recent_changes_0_8_2_t">Zmiany w 0.8.2:
 \n\t* Poprawiona nawigacja
 \n\t* Dynamiczne widżety mapy
@@ -1561,13 +1561,13 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="routing_attr_prefer_motorway_description">Preferowanie autostrad</string>
 	<string name="routing_attr_short_way_name">Najkrótsza droga</string>
 	<string name="routing_attr_short_way_description">Używaj najkrótszej drogi</string>
-	<string name="routing_attr_avoid_toll_name">Drogi płatne</string>
+	<string name="routing_attr_avoid_toll_name">Unikaj dróg płatnych</string>
 	<string name="routing_attr_avoid_toll_description">Unikaj płatnych dróg</string>
-	<string name="routing_attr_avoid_unpaved_name">Nieutwardzone drogi</string>
+	<string name="routing_attr_avoid_unpaved_name">Unikaj nieutwardzonych dróg</string>
 	<string name="routing_attr_avoid_unpaved_description">Unikanie nieutwardzonych dróg</string>
-	<string name="routing_attr_avoid_ferries_name">Przeprawy promowe</string>
+	<string name="routing_attr_avoid_ferries_name">Unikaj przepraw promowych</string>
 	<string name="routing_attr_avoid_ferries_description">Unikanie przepraw promowych</string>
-	<string name="routing_attr_avoid_motorway_name">Autostrady</string>
+	<string name="routing_attr_avoid_motorway_name">Unikaj autostrad</string>
 	<string name="routing_attr_avoid_motorway_description">Unikanie autostrad</string>
 	<string name="routing_attr_weight_name">Limit wagi</string>
 	<string name="routing_attr_weight_description">Określa maksymalną, dozwoloną masę pojazdu</string>
@@ -1889,7 +1889,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="targets">Kierunki</string>
     <string name="way_alarms">Ostrzeżenia ruchu drogowego</string>
     <string name="speak_favorites">Pobliskie ulubione</string>
-    <string name="speak_poi">Pobliskie punkty POI</string>
+    <string name="speak_poi">Pobliskie POI</string>
     <string name="save_track_to_gpx_globally">Rejestrowanie śladu do pliku GPX</string>
 	<string name="save_track_to_gpx_globally_descr">Rejestrowanie położenia do pliku GPX można włączyć lub wyłączyć używając widżetu rejestrowania GPX na ekranie mapy</string>
 	<string name="save_track_interval_globally">Częstość rejestrowania</string>
@@ -1985,7 +1985,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="traffic_warning_pedestrian">Przejście dla pieszych</string>
 	<string name="show_railway_warnings">Pokazuj przejazdy kolejowe</string>
 	<string name="show_pedestrian_warnings">Przejścia dla pieszych</string>
-    <string name="speak_pedestrian">Przejścia dla pieszych</string>
+    <string name="speak_pedestrian">Unikaj przejść dla pieszych</string>
     
 	<string name="gps_status">Status GPS</string>
     <string name="version_settings_descr">Pobierz nocne kompilacje</string>
@@ -2111,7 +2111,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="search_poi_category_hint">Wprowadź tekst, aby wyszukać dane</string>
     <string name="rendering_attr_hideHouseNumbers_name">Ukrywanie numerów budynków</string>
     <string name="storage_directory_multiuser">Pamięć użytkownika</string>
-    <string name="routing_attr_avoid_borders_name">Przekraczanie granicy</string>
+    <string name="routing_attr_avoid_borders_name">Unikaj przekraczania granicy</string>
 	<string name="routing_attr_avoid_borders_description">Unika przekraczania granicy z innym państwem</string>
 	<string name="routing_attr_height_name">Limit wysokości</string>
 	<string name="routing_attr_height_description">Określa maksymalną, dozwoloną wysokość pojazdu</string>
@@ -2201,7 +2201,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="error_message_pattern">Błąd: {0}</string>
 <string name="av_locations">Położenia</string>
     <string name="plugin_settings">Wtyczki</string>
-	<string name="routing_attr_avoid_shuttle_train_name">Pociągi wahadłowe</string>
+	<string name="routing_attr_avoid_shuttle_train_name">Unikaj pociągów wahadłowych</string>
 	<string name="routing_attr_avoid_shuttle_train_description">Unikanie pociągów wahadłowych</string>
     <string name="traffic_warning_hazard">Zagrożenie</string>
     <string name="we_really_care_about_your_opinion">Zależy nam na opinii na temat programu i jest dla nas ważne, aby ją poznać.</string>
@@ -2238,4 +2238,5 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="show_gpx">Pokaż GPX</string>
 <string name="show_on_start">Wyświetlaj przy starcie</string>
 	<string name="count_of_lines">Liczba linii</string>
-</resources>
+<string name="address_unknown">Adres nie jest jeszcze znany</string>
+    </resources>

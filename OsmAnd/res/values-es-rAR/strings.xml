@@ -155,7 +155,7 @@
     <string name="settings_privacy">Privacidad</string>
     <string name="points">Puntos</string>
 	<string name="navigation_over_track">¿Iniciar la navegación a lo largo de la traza?</string>
-	<string name="speak_pedestrian">Anunciar cruces peatonales</string>
+	<string name="speak_pedestrian">Cruces peatonales</string>
     <string name="rendering_attr_roadStyle_name">Estilo vial</string>
     <string name="rendering_value_orange_name">Anaranjado</string>
     <string name="rendering_value_germanRoadAtlas_name">Atlas de caminos alemanes</string>
@@ -216,8 +216,8 @@
     <string name="traffic_warning_calming">Reductor de velocidad</string>
     <string name="traffic_warning_speed_camera">Radar de velocidad</string>
     <string name="traffic_warning">Aviso de tráfico</string>
-	<string name="speak_favorites">Anunciar favoritos cercanos</string>
-	<string name="speak_poi">Anunciar PDI cercanos</string>
+	<string name="speak_favorites">Favoritos cercanos</string>
+	<string name="speak_poi">PDI cercanos</string>
 	<string name="way_alarms">Avisos de tráfico</string>
 	<string name="tip_navigation">Navegación</string>
 	<string name="tip_search">Buscando</string>
@@ -239,7 +239,7 @@
     <string name="shared_string_all">Todos</string>
     <string name="waypoints">Puntos de ruta</string>
     <string name="targets">Destinos</string>
-    <string name="announce_gpx_waypoints">Anunciar puntos de ruta GPX</string>
+    <string name="announce_gpx_waypoints">Puntos de ruta GPX</string>
     <string name="download_additional_maps">¿Descargar los %1$s mapas que faltan (%2$d MB)?</string>
     <string name="rendering_value_bicycle_name">Bicicleta</string>
     <string name="rendering_value_pedestrian_name">Peatón</string>
@@ -436,11 +436,11 @@
 	<string name="routing_attr_prefer_motorway_description">Preferir autopistas en la navegación</string>
 	<string name="routing_attr_short_way_name">Camino más corto</string>
 	<string name="routing_attr_short_way_description">Use el camino corto</string>
-	<string name="routing_attr_avoid_toll_name">Peajes</string>
+	<string name="routing_attr_avoid_toll_name">Evitar peajes</string>
 	<string name="routing_attr_avoid_toll_description">Evite los caminos con peajes</string>
-	<string name="routing_attr_avoid_unpaved_name">Caminos sin pavimentar</string>
+	<string name="routing_attr_avoid_unpaved_name">Evitar caminos sin pavimentar</string>
 	<string name="routing_attr_avoid_unpaved_description">Evite los caminos sin pavimentar</string>
-	<string name="routing_attr_avoid_motorway_name">Autopistas</string>
+	<string name="routing_attr_avoid_motorway_name">Evitar autopistas</string>
 	<string name="routing_attr_avoid_motorway_description">Evite usar las autopistas</string>
 	<string name="routing_attr_weight_name">Límite de peso</string>
 	<string name="routing_attr_weight_description">Indica el peso del vehículo permitido en rutas</string>
@@ -605,7 +605,7 @@
 	<string name="calculate_osmand_route_without_internet">Calcular el segmento de la ruta OsmAnd sin Internet</string>
     <string name="gpx_option_calculate_first_last_segment">Calcular la ruta OsmAnd para el primer y último segmento de ruta</string>
     <string name="use_displayed_track_for_navigation">¿Desea usar la ruta mostrada para la navegación?</string>
-    <string name="routing_attr_avoid_ferries_name">Ferris / transbordadores</string>
+    <string name="routing_attr_avoid_ferries_name">Evitar ferris / transbordadores</string>
 	<string name="routing_attr_avoid_ferries_description">Evite usar transbordadores</string>
 	<string name="android_19_location_disabled">Desde la versión Android 4.4 (KitKat), no puede descargar ni actualizar los mapas en la carpeta de almacenamiento anterior (%s). ¿Quiere cambiar a la ubicación de almacenamiento permitida y copiar todos los archivos de OsmAnd allí?
 \n Nota 1: Sus archivos antiguos permanecerán intactos (pero pueden ser borrados manualmente).
@@ -698,10 +698,10 @@
 	<string name="driving_region_uk">Reino Unido, India, Australia y otros</string>
     <string name="speak_title">Anunciar…</string>
 	<string name="speak_descr">Configure el anuncio de nombres de calles, avisos de tráfico (paradas, badenes), de radares y límites de velocidad</string>
-	<string name="speak_street_names">Anunciar nombres de calles (TTS)</string>
-    <string name="speak_speed_limit">Anunciar límites de velocidad</string>
-    <string name="speak_cameras">Anunciar radares</string>
-	<string name="speak_traffic_warnings">Anunciar avisos de tráfico</string>
+	<string name="speak_street_names">Nombres de calles (TTS)</string>
+    <string name="speak_speed_limit">Límites de velocidad</string>
+    <string name="speak_cameras">Radares</string>
+	<string name="speak_traffic_warnings">Avisos de tráfico</string>
     <string name="tip_recent_changes_1_5_t">"Cambios en 1.5:
 \n\t* Avisos de voz sobre límites de velocidad y radares
 \n\t* Más posibilidades de avisos de voz (anuncio de nombres de calles)
@@ -1104,7 +1104,7 @@
 	<string name="bg_service_interval">Definir intervalo de activación:</string>
 	<string name="show_cameras">Mostrar radares</string>
 	<string name="show_traffic_warnings">Mostrar límites de velocidad</string>
-	<string name="avoid_toll_roads">Peajes</string>
+	<string name="avoid_toll_roads">Evitar peajes</string>
 	<string name="continue_follow_previous_route_auto">La navegación anterior no finalizó. ¿Continuar siguiéndola? (%1$s segundos)</string>
 	<string name="route_updated_loc_found">La ruta será calculada cuando se encuentre la ubicación</string>
 	<string name="osmand_parking_hours">Horas</string>
@@ -1926,7 +1926,7 @@
 	<string name="plugin_description_title">Descripción</string>
 	<string name="plugin_install_needs_network">Necesitas una conexión a Internet para instalar este complemento.</string>
 	<string name="get_plugin">Obtener</string>
-<string name="routing_attr_avoid_borders_name">Cruzar fronteras</string>
+<string name="routing_attr_avoid_borders_name">Evitar cruzar fronteras</string>
 	<string name="routing_attr_avoid_borders_description">Evite cruzar fronteras con otro país</string>
 	<string name="routing_attr_height_name">Límite de altura</string>
 	<string name="routing_attr_height_description">Indica la altura permitida del vehículo en rutas</string>
@@ -2026,7 +2026,7 @@
 	<string name="offline_maps_and_navigation">Mapas y navegación
 \nsin conexión</string>
 <string name="commit_poi">Enviar PDI</string>
-<string name="routing_attr_avoid_shuttle_train_name">Trenes de enlace</string>
+<string name="routing_attr_avoid_shuttle_train_name">Evitar tren de enlace</string>
 	<string name="routing_attr_avoid_shuttle_train_description">Evite tomar trenes de enlace</string>
     <string name="plugin_settings">Complementos</string>
 	<string name="tab_title_basic">Básico</string>
@@ -2054,4 +2054,5 @@
 	<string name="show_gpx">Mostrar GPX</string>
 <string name="count_of_lines">Número de líneas</string>
 <string name="show_on_start">Mostrar al inicio</string>
-	</resources>
+	<string name="address_unknown">Dirección desconocida</string>
+    </resources>

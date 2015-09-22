@@ -213,6 +213,8 @@ public class MapContextMenuFragment extends Fragment {
 			private float velocityY;
 			private float maxVelocityY;
 
+			private boolean hasMoved;
+
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 
@@ -220,6 +222,10 @@ public class MapContextMenuFragment extends Fragment {
 					OsmandMapTileView mapView = getMapActivity().getMapView();
 					mapView.getAnimatedDraggingThread().startMoving(getCtxMenu().getPointDescription().getLat(), getCtxMenu().getPointDescription().getLon(),
 							mapView.getZoom(), true);
+
+					if (hasMoved) {
+						applyPosY(getViewY());
+					}
 					return true;
 				}
 
@@ -229,6 +235,7 @@ public class MapContextMenuFragment extends Fragment {
 
 				switch (event.getAction()) {
 					case MotionEvent.ACTION_DOWN:
+						hasMoved = false;
 						dy = event.getY();
 						dyMain = getViewY();
 						velocity = VelocityTracker.obtain();
@@ -238,6 +245,7 @@ public class MapContextMenuFragment extends Fragment {
 						break;
 
 					case MotionEvent.ACTION_MOVE:
+						hasMoved = true;
 						float y = event.getY();
 						float newY = getViewY() + (y - dy);
 						setViewY((int) newY);
@@ -275,39 +283,42 @@ public class MapContextMenuFragment extends Fragment {
 							}
 						}
 
-						final int posY = getPosY();
+						applyPosY(currentY);
 
-						if (currentY != posY) {
-
-							if (posY < getViewY()) {
-								updateMainViewLayout(posY);
-							}
-
-							if (!oldAndroid()) {
-								mainView.animate().y(posY)
-										.setDuration(200)
-										.setInterpolator(new DecelerateInterpolator())
-										.setListener(new AnimatorListenerAdapter() {
-											@Override
-											public void onAnimationCancel(Animator animation) {
-												updateMainViewLayout(posY);
-											}
-
-											@Override
-											public void onAnimationEnd(Animator animation) {
-												updateMainViewLayout(posY);
-											}
-										})
-										.start();
-							} else {
-								setViewY(posY);
-								updateMainViewLayout(posY);
-							}
-						}
 						break;
 
 				}
 				return true;
+			}
+
+			private void applyPosY(int currentY) {
+				final int posY = getPosY();
+				if (currentY != posY) {
+					if (posY < currentY) {
+						updateMainViewLayout(posY);
+					}
+
+					if (!oldAndroid()) {
+						mainView.animate().y(posY)
+								.setDuration(200)
+								.setInterpolator(new DecelerateInterpolator())
+								.setListener(new AnimatorListenerAdapter() {
+									@Override
+									public void onAnimationCancel(Animator animation) {
+										updateMainViewLayout(posY);
+									}
+
+									@Override
+									public void onAnimationEnd(Animator animation) {
+										updateMainViewLayout(posY);
+									}
+								})
+								.start();
+					} else {
+						setViewY(posY);
+						updateMainViewLayout(posY);
+					}
+				}
 			}
 		};
 
@@ -417,7 +428,7 @@ public class MapContextMenuFragment extends Fragment {
 	private void setAddressLocation() {
 		// Text line 1
 		TextView line1 = (TextView) view.findViewById(R.id.context_menu_line1);
-		line1.setText(getCtxMenu().getAddressStr());
+		line1.setText(getCtxMenu().getTitleStr());
 
 		// Text line 2
 		TextView line2 = (TextView) view.findViewById(R.id.context_menu_line2);

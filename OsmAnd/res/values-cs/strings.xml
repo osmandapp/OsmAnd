@@ -543,7 +543,7 @@
   <string name="background_service_provider_descr">Vybrat poskytovatele polohy pro službu na pozadí</string>
   <string name="background_service_provider">Poskytovatel polohy</string>
   <string name="background_router_service_descr">Spustí OsmAnd na pozadí, aby bylo možno zaznamenávat pozici i při vypnuté obrazovce</string>
-  <string name="background_router_service">Sledování polohy</string>
+  <string name="background_router_service">Sledování polohy na pozadí</string>
   <string name="off_router_service_no_gps_available">Služba pro navigaci na pozadí vyžaduje zapnutý zdroj polohy.</string>
   <string name="hide_poi_filter">Skrýt filtr</string>
   <string name="show_poi_filter">Zobrazit filtr</string>
@@ -930,7 +930,7 @@
   
   <string name="show_cameras">Zobrazovat dopravní radary</string>
   <string name="show_traffic_warnings">Zobrazovat rychlostní omezení</string>
-  <string name="avoid_toll_roads">Placené silnice</string>
+  <string name="avoid_toll_roads">Vyhnout se placeným silnicím</string>
   <string name="tip_recent_changes_0_8_2_t">"Změny ve verzi 0.8.2:
 \n\t* Vylepšená navigace
 \n\t* Dynamické mapové widgety\n\t* Tlačítko zámku se záznamem trasy
@@ -1266,7 +1266,7 @@
     
 	
     <string name="speak_speed_limit">Rychlostní omezení</string>
-    <string name="speak_cameras">Radary</string>
+    <string name="speak_cameras">Rychlostní radary</string>
 	<string name="speak_traffic_warnings">Dopravní varování</string>
 	
 	<string name="osb_author_dialog_password">Heslo OSM (volitelné)</string>
@@ -1370,13 +1370,13 @@ s často kladenými otázkami.</string>
 	<string name="routing_attr_prefer_motorway_description">Upřednostňovat dálnice</string>
 	<string name="routing_attr_short_way_name">Nejkratší cesta</string>
 	<string name="routing_attr_short_way_description">Použít nejkratší cestu</string>
-	<string name="routing_attr_avoid_toll_name">Placené silnice</string>
+	<string name="routing_attr_avoid_toll_name">Vyhnout se placeným silnicím</string>
 	<string name="routing_attr_avoid_toll_description">Vyhnout se placeným silnicím</string>
-	<string name="routing_attr_avoid_unpaved_name">Nezpevněné cesty</string>
+	<string name="routing_attr_avoid_unpaved_name">Vyhnout se nezpevněným cestám</string>
 	<string name="routing_attr_avoid_unpaved_description">Vyhnout se nezpevněným cestám</string>
-	<string name="routing_attr_avoid_ferries_name">Trajekty</string>
+	<string name="routing_attr_avoid_ferries_name">Vyhnout se trajektům</string>
 	<string name="routing_attr_avoid_ferries_description">Vyhnout se trajektům</string>
-	<string name="routing_attr_avoid_motorway_name">Dálnice</string>
+	<string name="routing_attr_avoid_motorway_name">Vyhnout se dálnicím</string>
 	<string name="routing_attr_avoid_motorway_description">Vyhnout se dálnicím</string>
 	<string name="routing_attr_weight_name">Hmotnostní limit</string>
 	<string name="routing_attr_weight_description">Zadejte hmotnost vozidla, která musí být povolená na cestách</string>
@@ -1808,7 +1808,7 @@ s často kladenými otázkami.</string>
     <string name="rendering_value_americanRoadAtlas_name">Americký Atlas cest</string>
     <string name="routing_attr_no_new_routing_name">Nepoužívat routovací pravidla v1.9</string>
     <string name="routing_attr_no_new_routing_description">Nepoužívat pravidla výpočtu trasy zavedené ve verzi 1.9</string>
-    <string name="speak_pedestrian">Oznamovat přechody pro chodce</string>
+    <string name="speak_pedestrian">Přechody pro chodce</string>
     
 	<string name="gps_status">GPS stav</string>
     <string name="version_settings_descr">Stáhnout vývojové verze</string>
@@ -1943,7 +1943,7 @@ s často kladenými otázkami.</string>
     <string name="storage_directory">Úložiště map</string>
     <string name="shared_string_copy">Kopírovat</string>
     <string name="rendering_attr_hideHouseNumbers_name">Skrýt popisná čísla domů</string>
-    <string name="routing_attr_avoid_borders_name">Překročení hranic</string>
+    <string name="routing_attr_avoid_borders_name">Vyhnout se překročení hranic</string>
 	<string name="routing_attr_avoid_borders_description">Nepřekračovat hranice do jiné země</string>
 	<string name="routing_attr_height_name">Výškové omezení</string>
 	<string name="routing_attr_height_description">Zadejte výšku vozidla, jaká má být povolena na cestách</string>
@@ -2012,7 +2012,7 @@ s často kladenými otázkami.</string>
 	<string name="plugin_settings">Moduly</string>
 	<string name="av_locations_descr">GPX soubor s poznámkou umístění</string>
     <string name="av_locations">Umístění</string>
-    <string name="routing_attr_avoid_shuttle_train_name">Kyvadlový vlak</string>
+    <string name="routing_attr_avoid_shuttle_train_name">Vyhnout se kyvadlovému vlaku</string>
 	<string name="routing_attr_avoid_shuttle_train_description">Nepoužít kyvadlový vlak</string>
     <string name="lang_la">Latinsky</string>
     <string name="poi_action_delete">smazat</string>
@@ -2069,4 +2069,5 @@ s často kladenými otázkami.</string>
 	<string name="closing_at">Otevřeno do</string>
 	<string name="count_of_lines">Počet řádků</string>
 <string name="show_on_start">Zobrazit po spuštění</string>
-	</resources>
+	<string name="address_unknown">Adresa ještě není známa</string>
+    </resources>

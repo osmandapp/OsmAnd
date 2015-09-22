@@ -958,7 +958,7 @@
   
   <string name="show_cameras">Mostrar radares</string>
   <string name="show_traffic_warnings">Mostrar límites de velocidad</string>
-  <string name="avoid_toll_roads">Peajes de carreteras</string>
+  <string name="avoid_toll_roads">Evitar peajes de carreteras</string>
   <string name="tip_recent_changes_0_8_2_t">"Cambios en 0.8.2 :
 \n\t* Mejoras en navegación\n\t* Controles del mapas dinámicos\n\t* Ajustes del mapa movido a la pantalla del mapa\n\t* Botón de bloqueo del mapa con servicios de registro\n\t* Arreglado idiomas árabe, kannada e idiomas RTL "</string>
   <string name="map_widget_top_text">Nombre de calle</string>
@@ -1333,16 +1333,16 @@
     <string name="route_from">Desde:</string>
     
 	
-    <string name="speak_speed_limit">Anunciar límites de velocidad</string>
-    <string name="speak_cameras">Anunciar radares</string>
-	<string name="speak_traffic_warnings">Anuncia advertencias de tráfico</string>
+    <string name="speak_speed_limit">Límites de velocidad</string>
+    <string name="speak_cameras">Radares</string>
+	<string name="speak_traffic_warnings">Advertencias de tráfico</string>
 	<string name="osb_author_dialog_password">Contraseña OSM (opcional)</string>
 	    
     
-    <string name="announce_gpx_waypoints">Anunciar puntos de ruta GPX</string>
+    <string name="announce_gpx_waypoints">Puntos de ruta GPX</string>
     <string name="speak_title">Anunciar…</string>
 	<string name="speak_descr">Configura el anuncio de nombres de calles, advertencias de tráfico (paradas, badenes), advertencias de radares de velocidad, límites de velocidad</string>
-	<string name="speak_street_names">Anunciar nombres de calles (TTS)</string>
+	<string name="speak_street_names">Nombres de calles (TTS)</string>
     <string name="tip_recent_changes_1_5_t">"Cambios en 1.5:
 \n\t* Avisos de voz sobre límites de velocidad y radares
 \n\t* Más posibilidades de mensajes de voz (anuncio de nombres de calles)
@@ -1502,13 +1502,13 @@
 	<string name="routing_attr_prefer_motorway_description">Preferir autopistas</string>
 	<string name="routing_attr_short_way_name">Camino más corto</string>
 	<string name="routing_attr_short_way_description">Utiliza el camino más corto</string>
-	<string name="routing_attr_avoid_toll_name">Peajes de carreteras</string>
+	<string name="routing_attr_avoid_toll_name">Evitar peajes de carreteras</string>
 	<string name="routing_attr_avoid_toll_description">Evita las carreteras con peaje</string>
-	<string name="routing_attr_avoid_unpaved_name">Carreteras no pavimentadas</string>
+	<string name="routing_attr_avoid_unpaved_name">Evitar carreteras no pavimentadas</string>
 	<string name="routing_attr_avoid_unpaved_description">Evita las carreteras no pavimentadas</string>
-	<string name="routing_attr_avoid_ferries_name">Ferris / transbordadores</string>
+	<string name="routing_attr_avoid_ferries_name">Evitar ferris / transbordadores</string>
 	<string name="routing_attr_avoid_ferries_description">Evita utilizar ferries</string>
-	<string name="routing_attr_avoid_motorway_name">Autopistas</string>
+	<string name="routing_attr_avoid_motorway_name">Evitar autopistas</string>
 	<string name="routing_attr_avoid_motorway_description">Evita las autopistas</string>
 	<string name="routing_attr_weight_name">Límite de peso</string>
 	<string name="routing_attr_weight_description">Especifique el peso del vehículo permitido en rutas</string>
@@ -1819,8 +1819,8 @@
     <string name="waypoints">Puntos de ruta</string>
     <string name="targets">Destinos</string>
     <string name="way_alarms">Advertencias de tráfico</string>
-    <string name="speak_favorites">Anunciar favoritos cercanos</string>
-    <string name="speak_poi">Anunciar PDI cercano</string>
+    <string name="speak_favorites">Favoritos cercanos</string>
+    <string name="speak_poi">PDI cercano</string>
     <string name="shared_string_all">Todos</string>
     <string name="index_tours">Excursiones</string>
     <string name="int_hour">h</string>
@@ -1923,7 +1923,7 @@
     <string name="rendering_value_americanRoadAtlas_name">Atlas americano de carreteras</string>
     <string name="navigate_point_easting">Al este</string>
     <string name="navigate_point_northing">Al norte</string>
-    <string name="speak_pedestrian">Anunciar pasos de peatones</string>
+    <string name="speak_pedestrian">Pasos de peatones</string>
     
 	<string name="save_track_to_gpx_globally_headline">Registro de trazas bajo demanda</string>
 	<string name="navigation_over_track">¿Iniciar la navegación a lo largo de la traza?</string>
@@ -2064,7 +2064,7 @@
     <string name="shared_string_copy">Copiar</string>
     <string name="application_dir_change_warning3">¿Quiere que OsmAnd también copie los archivos de datos al nuevo destino?</string>
     <string name="rendering_attr_hideHouseNumbers_name">Ocultar números de casa</string>
-    <string name="routing_attr_avoid_borders_name">Cruce de fronteras</string>
+    <string name="routing_attr_avoid_borders_name">Evitar cruce de fronteras</string>
 	<string name="routing_attr_avoid_borders_description">Evita cruzar una frontera hacia otro país</string>
 	<string name="routing_attr_height_name">Límite de altura</string>
 	<string name="routing_attr_height_description">Especifique la altura del vehículo que se permite en las rutas</string>
@@ -2163,7 +2163,7 @@
 	<string name="app_name_osmand">OsmAnd</string>
 	<string name="offline_maps_and_navigation">Mapas y navegación\nfuera de línea</string>
 <string name="commit_poi">Enviar PDI</string>
-<string name="routing_attr_avoid_shuttle_train_name">Tren de enlace</string>
+<string name="routing_attr_avoid_shuttle_train_name">Evitar tren de enlace</string>
 	<string name="routing_attr_avoid_shuttle_train_description">Evite tomar trenes de enlace</string>
     <string name="plugin_settings">Complementos</string>
 	<string name="tab_title_basic">Básico</string>
@@ -2191,4 +2191,5 @@
 	<string name="show_gpx">Mostrar GPX</string>
 <string name="count_of_lines">Número de líneas</string>
 <string name="show_on_start">Mostrar al inicio</string>
-	</resources>
+	<string name="address_unknown">Dirección desconocida</string>
+    </resources>
