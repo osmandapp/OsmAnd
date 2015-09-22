@@ -886,4 +886,5 @@
 	<string name="local_index_mi_backup">Poista käytöstä</string>
 	<string name="dash_download_msg_none">Haluatko ladata offline-karttoja?</string>
     <string name="available_downloads_left">%1$d latausta jäljellä</string>
+    <string name="rendering_category_others">Muut kartan ominaisuudet</string>
     </resources>
