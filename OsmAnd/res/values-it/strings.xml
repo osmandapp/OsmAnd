@@ -61,7 +61,7 @@
   <string name="user_password">Password in OSM</string>
   <string name="user_password_descr">Necessaria per inviare contributi a openstreetmap.org</string>
   <string name="osmand_service">"Modalità  backgraund"</string>
-  <string name="osmand_service_descr">OsmAnd a schermo spento è eseguito in background</string>
+  <string name="osmand_service_descr">OsmAnd, a schermo spento, è eseguito in background</string>
   <string name="tip_rotation_switching">Orientamento della mappa</string>
   
   <string name="switch_to_raster_map_to_see">Nessuna mappa vettoriale è presente per questa posizione. Ne puoi scaricare una in Impostazioni (Gestisci i file mappe), o passa alle mappe online (abilita il plugin delle mappe online).</string>
@@ -970,8 +970,8 @@
   <string name="bg_service_interval">Imposta l\'intervallo di risveglio:</string>
   <string name="screen_is_locked">Per sbloccare lo schermo tocca l\'icona del lucchetto</string>
   <string name="bg_service_screen_unlock">Sblocca schermo</string>
-  <string name="bg_service_sleep_mode_off">Esegui l\'app in\n modalità quiescente</string>
-  <string name="bg_service_sleep_mode_on">Interrompi l\'esecuzione dell\'app in modalità quiescente</string>
+  <string name="bg_service_sleep_mode_off">Esegui\n l\'app in background</string>
+  <string name="bg_service_sleep_mode_on">Interrompi\n l\'esecuzione dell\'app in background</string>
 <string name="filterpoi_activity">Crea un filtro per i PDI</string>
 <string name="select_navigation_mode">Scelta del mezzo di trasporto</string>
 <string name="day_night_info_description">Alba: %1$s
@@ -1099,7 +1099,7 @@
 	<string name="safe_mode_description">Avvia l\'applicazione in modalità sicura (usando il più lento Android invece del codice nativo).</string>
     <string name="safe_mode">Modalità sicura</string>
     <string name="native_library_not_running">L\'applicazione è in esecuzione in modalità sicura (disabilitala nelle Impostazioni).</string>
-    <string name="background_service_is_enabled_question">Il servizio OsmAnd modalità quiescente è ancora in esecuzione. Si desidera arrestarlo?</string>
+    <string name="background_service_is_enabled_question">Il servizio OsmAnd è ancora in esecuzione in background. Si desidera arrestarlo?</string>
     <string name="tip_recent_changes_1_0_0_t">Cambiamenti nella versione 1.0.0:
 	\n\t* Migliorata la navigazione: più veloce e precisa, fino a 250 kilometri
 	\n\t* Aggiunte le mappe solo-strade
@@ -1714,7 +1714,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="stop_navigation_service">Interrompi</string>
 	<string name="enable_sleep_mode">Abilita la modalità GPS in background</string>
 	<string name="gps_wake_up_timer">Intervallo di risveglio del GPS</string>
-	<string name="sleep_mode_stop_dialog">Interrompere la modalità GPS quiescente?</string>
+	<string name="sleep_mode_stop_dialog">Interrompere la modalità GPS in background?</string>
 	<string name="lang_al">Albanese</string>
 	<string name="lang_ar">Arabo</string>
 	<string name="lang_sc">Sardo</string>
@@ -2064,7 +2064,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="download_wikipedia_files">Vuoi scaricare i dati aggiuntivi di Wikipedia (%1$s MB) ?</string>
     <string name="gps_network_not_enabled">Il servizio di localizzazione non è attivo. Vuoi avviarlo?</string>
     <string name="disable_recording_once_app_killed">Previeni il login remoto</string>
-    <string name="disable_recording_once_app_killed_descrp">Metterà in pausa la registrazione GPX quando l\'app viene chiusa (attraverso le app recenti). (L\'indicatore della modalità quiescente di OsmAnd sparisce dalla barra delle notifiche di Android.)</string>
+    <string name="disable_recording_once_app_killed_descrp">Metterà in pausa la registrazione GPX quando l\'app viene chiusa (attraverso le app recenti). (L\'indicatore della modalità background di OsmAnd sparisce dalla barra delle notifiche di Android.)</string>
     <string name="shared_string_import2osmand">Importa in OsmAnd</string>
     <string name="read_full_article">Leggi l\'articolo intero (online)</string>
     <string name="download_wikipedia_item">Wikipedia</string>
@@ -2119,7 +2119,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="rendering_value_purple_name">Porpora</string>
     <string name="rendering_value_translucent_purple_name">Porpora traslucido</string>
     <string name="restart_is_required">Per applicare le modifiche è necessario un riavvio manuale.</string>
-    <string name="rendering_value_default13_name">Default (13)</string>
+    <string name="rendering_value_default13_name">Predefinito (13)</string>
 	<string name="rendering_value_defaultTranslucentCyan_name">Default (Ciano traslucido)</string>
     <string name="rendering_value_red_name">Rosso</string>
     <string name="lang_ht">Haitiano</string>
@@ -2166,7 +2166,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="poi_dialog_poi_type">Tipo di PDI</string>
 <string name="number_of_rows_in_dash">Numero di righe del cruscotto %1$s</string>
 <string name="please_specify_poi_type">Per favore specifica il tipo si PDI.</string>
-<string name="poi_action_delete">Elimina</string>
+<string name="poi_action_delete">elimina</string>
 	<string name="working_days">Giorni lavorativi</string>
 	<string name="recent_places">Luoghi recenti</string>
 	<string name="favourites">Preferiti</string>
