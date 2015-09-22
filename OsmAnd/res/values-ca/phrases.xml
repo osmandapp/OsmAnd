@@ -502,14 +502,14 @@
 	<string name="poi_wilderness_hut">Cabana</string>
 
 	<string name="poi_place_of_worship">Temple</string>
-	<string name="poi_religion_christian">Temple: cristià</string>
-	<string name="poi_religion_jewish">Temple: sinagoga</string>
-	<string name="poi_religion_muslim">Temple: mesquita</string>
-	<string name="poi_religion_sikh">Temple: sikhisme</string>
-	<string name="poi_religion_buddhist">Temple budista</string>
-	<string name="poi_religion_hindu">Temple hindú</string>
-	<string name="poi_religion_shinto">Temple sintoista</string>
-	<string name="poi_religion_taoist">Temple taoista</string>
+	<string name="poi_religion_christian">Cristianisme</string>
+	<string name="poi_religion_jewish">Judaisme</string>
+	<string name="poi_religion_muslim">Islamisme</string>
+	<string name="poi_religion_sikh">Sikhisme</string>
+	<string name="poi_religion_buddhist">Budisme</string>
+	<string name="poi_religion_hindu">Hinduisme</string>
+	<string name="poi_religion_shinto">Xintoisme</string>
+	<string name="poi_religion_taoist">Taoisme</string>
 
 	<string name="poi_internet_access_wlan">Accés a Internet: wifi</string>
 	<string name="poi_internet_access_terminal">Accés a Internet: terminal</string>
@@ -781,7 +781,7 @@
 	<string name="poi_notice">Senyal nàutica</string>
 	<string name="poi_pile">Torreta</string>
 	<string name="poi_radar_transponder">Radar transponedor</string>
-	<string name="poi_signal_station_traffic">Semàfor de tràfic nàutic</string>
+	<string name="poi_signal_station_traffic">Semàfor de trànsit nàutic</string>
 	<string name="poi_signal_station_warning">Semàfor d\'advertiment nàutic</string>
 	<string name="poi_small_craft_facility">Instal·lacions per naus petites</string>
 	<string name="poi_topmark">Boia amb format IALA</string>
@@ -857,7 +857,7 @@
 	<string name="poi_entrance_exit">Sortida</string>
 
 	<string name="poi_coffee">Coffee shop</string>
-	<string name="poi_pasta">Pasta shop</string>
+	<string name="poi_pasta">Botiga de pasta</string>
 	<string name="poi_fashion">Botiga de moda</string>
 	<string name="poi_free_flying">Botiga de vol lliure</string>
 	<string name="poi_garden_furniture">Mobles de jardí</string>
@@ -873,12 +873,12 @@
 	<string name="poi_weapons">Armeria</string>
 
 	<string name="poi_stile">Restricció de pas</string>
-	<string name="poi_horse_stile">Pas per cavalls</string>
+	<string name="poi_horse_stile">Pas per a cavalls</string>
 	<string name="poi_kissing_gate">porta laberíntica</string>
 	<string name="poi_sally_port">Porta llevadissa</string>
 	<string name="poi_swing_gate">Barrera griratòria</string>
 	<string name="poi_turnstile">Torn de pas</string>
-	<string name="poi_kent_carriage_gap">Pas exclusiu per carruatges</string>
+	<string name="poi_kent_carriage_gap">Pas exclusiu per a carruatges</string>
 	<string name="poi_breakwater">Escullera</string>
 	<string name="poi_groyne">Espigó</string>
 
@@ -916,12 +916,12 @@
 	<string name="poi_brand">Marca</string>
 
 	<string name="poi_enforcement_traffic_signals">Control de tràfic: obeir el semàfor</string>
-	<string name="poi_enforcement_maxspeed">Control de tràfic: velocitat màxima</string>
-	<string name="poi_enforcement_maxheight">Control de tràfic: alçada màxima</string>
-	<string name="poi_enforcement_mindistance">Control de tràfic: distància mínima</string>
-	<string name="poi_enforcement_check">Control de tràfic</string>
-	<string name="poi_enforcement_access">Control de tràfic: accés</string>
-	<string name="poi_enforcement_toll">Control de tràfic: peatge</string>
+	<string name="poi_enforcement_maxspeed">Control de trànsit: velocitat màxima</string>
+	<string name="poi_enforcement_maxheight">Control de trànsit: alçada màxima</string>
+	<string name="poi_enforcement_mindistance">Control de trànsit: distància mínima</string>
+	<string name="poi_enforcement_check">Control de trànsit</string>
+	<string name="poi_enforcement_access">Control de trànsit: accés</string>
+	<string name="poi_enforcement_toll">Control de trànsit: peatge</string>
 
 <string name="poi_furnace">Botiga de calefactors</string>
 	<string name="poi_trophy">Trofeus i distincions</string>
@@ -933,7 +933,7 @@
 	<string name="poi_abandoned_poi">Objectes perduts</string>
 	<string name="poi_node_networks">Xarxa de nodes de senderisme/ciclisme</string>
 		<string name="poi_hiking_routes">Rutes de senderisme</string>
-		<string name="poi_traffic_enforcement">Control de tràfic</string>
+		<string name="poi_traffic_enforcement">Control de trànsit</string>
 	<string name="poi_route_hiking_iwn_poi">Ruta internacional de senderisme</string>
 	<string name="poi_route_hiking_nwn_poi">Ruta nacional de senderisme</string>
 	<string name="poi_route_hiking_rwn_poi">Ruta senderista regional</string>
@@ -945,21 +945,21 @@
 	<string name="poi_access_destination">Accés a la destinació</string>
 	<string name="poi_access_permissive">Accés tolerat</string>
 	<string name="poi_access_customers">Accés de clients</string>
-	<string name="poi_access_delivery">Accés per lliuraments</string>
-	<string name="poi_access_agricultural">Accés per activitats agrícoles</string>
+	<string name="poi_access_delivery">Accés per a lliuraments</string>
+	<string name="poi_access_agricultural">Accés per a activitats agrícoles</string>
 
 	<string name="poi_monitoring_station">Centre de control</string>
 	<string name="poi_capital">Capital</string>
 	<string name="poi_fee_no">Sense cap cost</string>
 
-	<string name="poi_email">e-mail</string>
+	<string name="poi_email">Correu electrònic</string>
 	<string name="poi_fax">Fax</string>
 	<string name="poi_facebook">Facebook</string>
 	<string name="poi_mobile">Mòbil</string>
-	<string name="poi_animal_shelter_dog">Refugi per gossos</string>
-	<string name="poi_animal_shelter_cat">Refugi per gats</string>
-	<string name="poi_animal_shelter_dog_cat">Refugi per gossos i gats</string>
-	<string name="poi_animal_shelter_bird">Refugi per ocells</string>
+	<string name="poi_animal_shelter_dog">Refugi per a gossos</string>
+	<string name="poi_animal_shelter_cat">Refugi per a gats</string>
+	<string name="poi_animal_shelter_dog_cat">Refugi per a gossos i gats</string>
+	<string name="poi_animal_shelter_bird">Refugi per a ocells</string>
 
 <string name="poi_recycling_centre">Deixalleria</string>
 	<string name="poi_recycling_container">Contenidor</string>
@@ -998,7 +998,7 @@
 	<string name="poi_recycling_tyres">Pneumàtics</string>
 	<string name="poi_recycling_tv_monitor">TV, monitors</string>
 	<string name="poi_recycling_rubble">Runes</string>
-	<string name="poi_recycling_cds">CDs</string>
+	<string name="poi_recycling_cds">CD</string>
 	<string name="poi_recycling_waste_oil">Oli residual</string>
 	<string name="poi_recycling_bottles">Ampolles</string>
 	<string name="poi_recycling_cork">Suro</string>
@@ -1028,9 +1028,9 @@
 	<string name="poi_seasonal_autumn">Tardor</string>
 	<string name="poi_seasonal_winter">Hivern</string>
 
-	<string name="poi_recycling_waste">Rebuig (bosses de negres)</string>
+	<string name="poi_recycling_waste">Rebuig (bosses negres)</string>
 	<string name="poi_recycling_paper_packaging">Embalatge de paper</string>
-	<string name="poi_recycling_tetrapak">Tetra Pak</string>
+	<string name="poi_recycling_tetrapak">Brics</string>
 	<string name="poi_recycling_hydrargyrum">Mercuri</string>
 	<string name="poi_recycling_foil">Paper d\'alumini</string>
 	<string name="poi_recycling_styrofoam">Poliestirè extrudit</string>
@@ -1047,4 +1047,134 @@
 	<string name="poi_recycling_cardboard">Cartró d\'embalar</string>
 	<string name="poi_recycling_beverage_cartons">Envasos de cartró de begudes</string>
 	<string name="poi_recycling_sheet_metal">Xapa metàl·lica</string>
+	<string name="poi_mill_pond">Bassa del molí</string>
+	<string name="poi_twitter">Twitter</string>
+	<string name="poi_skype">Skype</string>
+	<string name="poi_youtube">Youtube</string>
+	<string name="poi_instagram">Instagram</string>
+	<string name="poi_vk">VKontakte</string>
+	<string name="poi_google_plus">Google+</string>
+	<string name="poi_perfumery">Perfumeria</string>
+
+	<string name="poi_building">Edifici</string>
+
+<string name="poi_military_office">Administració militar</string>
+	<string name="poi_office_religion">Administració religiosa</string>
+	<string name="poi_association">Administració d\'associació</string>
+	<string name="poi_financial">Administració financera</string>
+	<string name="poi_political_party">Administració de partit polític</string>
+	<string name="poi_notary">Notari</string>
+	<string name="poi_foundation">Administració de fundació</string>
+	<string name="poi_tax_advisor">Assessoria fiscal</string>
+
+	<string name="poi_religion_voodoo">Religió vudú</string>
+	<string name="poi_religion_unitarian_universalist">Universalisme unitarista</string>
+	<string name="poi_religion_multifaith">Multi-religiós</string>
+	<string name="poi_religion_jain">Jainisme</string>
+	<string name="poi_religion_spiritualist">Espiritualisme</string>
+	<string name="poi_religion_bahai">Bahaisme</string>
+	<string name="poi_religion_scientologist">Cienciologia</string>
+	<string name="poi_religion_pagan">Paganisme</string>
+	<string name="poi_religion_tenrikyo">Tenrikyo</string>
+	<string name="poi_religion_zoroastrian">Zoroastrisme</string>
+
+	<string name="poi_denomination_catholic">Religió catòlica</string>
+	<string name="poi_denomination_baptist">Església Baptista</string>
+	<string name="poi_denomination_roman_catholic">Catòlica Romana</string>
+	<string name="poi_denomination_orthodox">Ortodoxa</string>
+	<string name="poi_denomination_lutheran">Luterana</string>
+	<string name="poi_denomination_sunni">Sunnita</string>
+	<string name="poi_denomination_protestant">Protestant</string>
+	<string name="poi_denomination_methodist">Metodista</string>
+	<string name="poi_denomination_anglican">Anglicana</string>
+	<string name="poi_denomination_presbyterian">Presbiteriana</string>
+	<string name="poi_denomination_evangelical">Evangèlica</string>
+	<string name="poi_denomination_russian_orthodox">Ortodoxa Russa</string>
+	<string name="poi_denomination_pentecostal">Pentecostal</string>
+	<string name="poi_denomination_mormon">Mormó</string>
+	<string name="poi_denomination_jehovahs_witness">Testimonis de Jehovà</string>
+	<string name="poi_denomination_greek_orthodox">Ortodox grec</string>
+	<string name="poi_denomination_reformed">Calvinisme</string>
+	<string name="poi_denomination_seventh_day_adventist">Adventisme del setè dia</string>
+	<string name="poi_denomination_new_apostolic">Nova apostòlica</string>
+	<string name="poi_denomination_church_of_england">Església d\'Anglaterra</string>
+	<string name="poi_denomination_episcopal">Episcopal</string>
+	<string name="poi_denomination_shia">Xiisme</string>
+	<string name="poi_denomination_united">Església unida</string>
+	<string name="poi_denomination_greek_catholic">Catòlic grec</string>
+	<string name="poi_denomination_tibetan">Tibetà</string>
+	<string name="poi_denomination_united_reformed">Església unida reformada</string>
+	<string name="poi_denomination_church_of_scotland">Església d\'Escòcia</string>
+	<string name="poi_denomination_salvation_army">Exèrcit de salvació</string>
+	<string name="poi_denomination_iglesia_ni_cristo">Església de crist</string>
+	<string name="poi_denomination_uniting">Església unificada</string>
+	<string name="poi_denomination_mennonite">Mennonisme</string>
+	<string name="poi_denomination_quaker">Quàquer</string>
+	<string name="poi_denomination_bulgarian_orthodox">Ortodox búlgar</string>
+	<string name="poi_denomination_assemblies_of_god">Assemblees de Déu</string>
+	<string name="poi_denomination_nondenominational">Sense denominació</string>
+	<string name="poi_denomination_adventist">Adventista</string>
+	<string name="poi_denomination_nazarene">Natzarens</string>
+	<string name="poi_denomination_united_methodist">Metodista Unida</string>
+	<string name="poi_denomination_congregational">Congregacional</string>
+	<string name="poi_denomination_old_believers">Antics creients</string>
+	<string name="poi_denomination_serbian_orthodox">Ortodoxa sèrbia</string>
+	<string name="poi_denomination_spiritist">Espiritista</string>
+	<string name="poi_denomination_armenian_apostolic">Apostòlica d\'Armènia</string>
+	<string name="poi_denomination_dutch_reformed">Holandesa reformada</string>
+	<string name="poi_denomination_apostolic">Apostòlica</string>
+	<string name="poi_denomination_reform">Reformada</string>
+	<string name="poi_denomination_latter_day_saints">Moviment dels Sants dels Últims Dies</string>
+	<string name="poi_denomination_church_of_christ">Església de Crist</string>
+	<string name="poi_denomination_united_church_of_christ">Església unida de Crist</string>
+	<string name="poi_denomination_georgian_orthodox">Ortodoxa georgiana</string>
+	<string name="poi_denomination_scientist">Materialista</string>
+	<string name="poi_denomination_romanian_orthodox">Ortodoxa Romanesa</string>
+	<string name="poi_denomination_ethiopian_orthodox_tewahedo">Església Ortodoxa Etíop</string>
+	<string name="poi_denomination_unitarian">Unitarista</string>
+	<string name="poi_denomination_coptic_orthodox">Copte ortodox</string>
+	<string name="poi_denomination_wesleyan">Wesleià</string>
+	<string name="poi_denomination_shaktism">Xactisme</string>
+	<string name="poi_denomination_shingon_shu">Shingon (budisme)</string>
+	<string name="poi_denomination_maronite">Maronita</string>
+	<string name="poi_denomination_mahayana">Budisme mahayana</string>
+
+	<string name="poi_landfill_waste_nuclear">Residus radioactius</string>
+	<string name="poi_brownfield">Camp per rehabilitar</string>
+	<string name="poi_start_date">Data d\'inici</string>
+	<string name="poi_wheelchair">Cadira de rodes</string>
+
+	<string name="poi_generator_source_diesel">Font d\'energia: dièsel</string>
+
+<string name="poi_generator_source_nuclear">Font d\'energia: nuclear</string>
+	<string name="poi_generator_source_solar">Font d\'energia: solar</string>
+	<string name="poi_generator_source_hydro">Font d\'energia: hidràulica</string>
+	<string name="poi_generator_source_wind">Font d\'energia: eòlica</string>
+	<string name="poi_generator_source_geothermal">Font d\'energia: geotèrmica</string>
+	<string name="poi_generator_source_oil">Font d\'energia: petroli</string>
+	<string name="poi_seats">Seients</string>
+	<string name="poi_backrest_yes">Respatller: sí</string>
+	<string name="poi_backrest_no">Respatller: no</string>
+
+	<string name="poi_intermittent">Intermitent</string>
+
+	<string name="poi_deadlock">Atzucac</string>
+
+	<string name="poi_generator_source_coal">Font d\'energia: carbó</string>
+	<string name="poi_generator_source_gas">Font d\'energia: gas</string>
+	<string name="poi_power_tower">Torre d\'alta tensió</string>
+	<string name="poi_power_pole">Pal d\'electricitat</string>
+
+	<string name="poi_cooling_tower">Torre de refrigeració</string>
+	<string name="poi_height">Alçada</string>
+	<string name="poi_ele">Alçada sobre el nivell del mar</string>
+	<string name="poi_wholesale">Venda majorista</string>
+
+	<string name="poi_content_water">Aigua (contingut)</string>
+	<string name="poi_doors">Portes</string>
+	<string name="poi_ford_stepping_stones">Pas sobre pedres</string>
+	<string name="poi_lighting_tower">Torre d\'il·luminació</string>
+	<string name="poi_greenfield">Zona de desenvolupament urbà</string>
+	<string name="poi_content_wine">Vi (contingut)</string>
+	<string name="poi_content_sewage">Aigües residuals (contingut)</string>
 	</resources>

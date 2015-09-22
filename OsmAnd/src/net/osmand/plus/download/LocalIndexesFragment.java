@@ -106,7 +106,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		listAdapter = new LocalIndexesAdapter(getActivity());
 		listView.setAdapter(listAdapter);
 		expandAllGroups();
-		setListView(listView);
+			setListView(listView);
 		descriptionText = (TextView) view.findViewById(R.id.memory_size);
 		sizeProgress = (ProgressBar) view.findViewById(R.id.memory_progress);
 		updateDescriptionTextWithSize();
@@ -135,7 +135,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		backup = getActivity().getResources().getDrawable(R.drawable.ic_type_archive);
 		backup.mutate();
 		if (light) {
-			backup.setColorFilter(getResources().getColor(R.color.icon_color_light), PorterDuff.Mode.MULTIPLY);
+			backup.setColorFilter(getResources().getColor(R.color.icon_color), PorterDuff.Mode.MULTIPLY);
 		}
 		sdcard = getActivity().getResources().getDrawable(R.drawable.ic_sdcard);
 		sdcard.mutate();

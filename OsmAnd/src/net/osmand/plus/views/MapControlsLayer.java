@@ -385,7 +385,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		View backToMenuButton = mapActivity.findViewById(R.id.map_menu_button);
 		
 		
-		menuControl = createHudButton((ImageView) backToMenuButton, R.drawable.map_dashboard).setBg(
+		menuControl = createHudButton((ImageView) backToMenuButton, R.drawable.ic_navigation_drawer).setBg(
 				R.drawable.btn_round, R.drawable.btn_round_night);
 		controls.add(menuControl);
 		backToMenuButton.setOnClickListener(new View.OnClickListener() {
@@ -395,7 +395,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 				// double lon = activity.getMapView().getLongitude();
 				// MainMenuActivity.backToMainMenuDialog(activity, new LatLon(lat, lon));
 				notifyClicked();
-				mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.DASHBOARD);
+				mapActivity.openDrawer();
+//				mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.DASHBOARD);
 			}
 		});
 		mapAppModeShadow = mapActivity.findViewById(R.id.map_app_mode_shadow);
@@ -497,8 +498,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 				routingHelper.setFollowingMode(true);
 				routingHelper.setRoutePlanningMode(false);
 				mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
-				routingHelper.setCurrentLocation(app.getLocationProvider().getLastKnownLocation(), false);
 				app.getRoutingHelper().notifyIfRouteIsCalculated();
+				routingHelper.setCurrentLocation(app.getLocationProvider().getLastKnownLocation(), false);
 			}
 		}
 	}
@@ -659,7 +660,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		
 		if (!enabled) {
 			backToLocationControl.setBg(R.drawable.btn_circle, R.drawable.btn_circle_night);
-			backToLocationControl.setIconColorId(R.color.icon_color_light, 0);
+			backToLocationControl.setIconColorId(R.color.icon_color, 0);
 		} else if (tracked) {
 			backToLocationControl.setBg(R.drawable.btn_circle, R.drawable.btn_circle_night);
 			backToLocationControl.setIconColorId(R.color.color_myloc_distance);
@@ -750,7 +751,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		int resId;
 		int resLightId;
 		int resDarkId;
-		int resClrLight = R.color.icon_color_light;
+		int resClrLight = R.color.icon_color;
 		int resClrDark = 0;
 		
 
@@ -876,7 +877,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		Drawable[] icons = new Drawable[vls.size()];
 		int[] values = new int[vls.size()];
 		for (int k = 0; k < modes.length; k++) {
-			icons[k] = app.getIconsCache().getIcon(modes[k].getSmallIconDark(), R.color.icon_color_light);
+			icons[k] = app.getIconsCache().getIcon(modes[k].getSmallIconDark(), R.color.icon_color);
 			values[k] = modes[k].getStringResource();
 		}
 		for (int i = 0; i < modes.length; i++) {
@@ -919,7 +920,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				final OsmandSettings.OsmandPreference<Float> mapDensity = view.getSettings().MAP_DENSITY;
 				final AlertDialog.Builder bld = new AlertDialog.Builder(view.getContext());
 				int p = (int) (mapDensity.get() * 100);
-				final TIntArrayList tlist = new TIntArrayList(new int[] { 33, 50, 75, 100, 150, 200, 300, 400 });
+				final TIntArrayList tlist = new TIntArrayList(new int[] { 20, 25, 33, 50, 75, 100, 150, 200, 300, 400 });
 				final List<String> values = new ArrayList<String>();
 				int i = -1;
 				for (int k = 0; k <= tlist.size(); k++) {

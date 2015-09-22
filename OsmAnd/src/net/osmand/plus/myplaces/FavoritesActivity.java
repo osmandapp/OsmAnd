@@ -3,20 +3,6 @@
  */
 package net.osmand.plus.myplaces;
 
-import java.io.File;
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.List;
-
-import net.osmand.plus.OsmAndLocationProvider;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.FavoritesTreeFragment;
-import net.osmand.plus.activities.TabActivity;
-import net.osmand.plus.osmedit.OsmEditingPlugin;
-import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -28,6 +14,20 @@ import android.text.SpannableStringBuilder;
 import android.text.style.ImageSpan;
 import android.view.MenuItem;
 import android.widget.ImageView;
+
+import net.osmand.plus.OsmAndLocationProvider;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.FavoritesTreeFragment;
+import net.osmand.plus.activities.TabActivity;
+import net.osmand.plus.views.controls.PagerSlidingTabStrip;
+
+import java.io.File;
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -118,12 +118,6 @@ public class FavoritesActivity extends TabActivity {
 	private OsmAndLocationProvider getLocationProvider() {
 		return getMyApplication().getLocationProvider();
 	}
-
-	@Override
-	protected void onPause() {
-		super.onPause();
-	}
-
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {

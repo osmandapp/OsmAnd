@@ -732,7 +732,7 @@
   <string name="app_mode_default">Atvērt karti</string>
   <string name="app_mode_car">Auto</string>
   <string name="app_mode_bicycle">Velosipēds</string>
-  <string name="app_mode_pedestrian">Kājāmgājējs</string>
+  <string name="app_mode_pedestrian">Gājējs</string>
   <string name="position_on_map_center">Centrs</string>
   <string name="position_on_map_bottom">Apakša</string>
   <string name="navigate_point_top_text">Ievadiet platumu &amp; garumu formātā (G - grādi , M - minūtes , S - sekundes)</string>
@@ -980,7 +980,7 @@
     <string name="context_menu_item_intermediate_point">Pievienot pieturu</string>
     <string name="map_widget_intermediate_distance">Pietura</string>
     <string name="ending_point_too_far">Noslēdzošais punkts ir pārāk tālu no tuvākā ceļa.</string>
-    <string name="btn_add_tag">Pievienot marķējumu</string>
+    <string name="add_tag">Pievienot marķējumu</string>
     <string name="btn_advanced_mode">Paplašinātais režīms…</string>
     <string name="poi_filter_parking">Parkošanās</string>
     <string name="poi_filter_emergency">Ātrā palīdzība</string>
@@ -1448,9 +1448,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="complex_route_calculation_failed">Maršruta ātrā aprēķināšana neizdevās (%s), notiks lēnā aprēķināšana.</string>
     <string name="disable_complex_routing_descr">Izslēgt kompleksu (divfāžu) maršrutēsanu</string>
     <string name="disable_complex_routing">Izslēgt kompleksu maršrutēšanu</string>
-    <string name="tip_app_mode_t_v2">OsmAnd atbalsta vairākus pielāgojamus profilus dažādiem mērķiem.
-		\n\nJūs varat mainīt profilus gan ar speciālas ikonas palīdzību, kas atrodas uz kartes kreisā augšējā stūrī (mašīna, velosipēds vai kājāmgājējs), gan veidojot jaunu maršrutu (\'transporta režīms\').
-	</string>
+    <string name="tip_app_mode_t_v2">"OsmAnd atbalsta vairākus pielāgojamus profilus dažādiem mērķiem.
+\n\nJūs varat mainīt profilus gan ar speciālas ikonas palīdzību, kas atrodas uz kartes kreisā augšējā stūrī (mašīna, velosipēds vai gājējs), gan veidojot jaunu maršrutu (\'transporta režīms\'). "</string>
 	<string name="android_19_location_disabled">Pēc KitKat jauninājuma vecā karšu krātuve (%s) vairs nav pieejama. Vai vēlaties to nomainīt uz pieejamu vietu un pārkopēt visus failus?
 …………\n Piezīme: vecie faili netiks aiztikti.
 …………\n Piezīme: nebūs iespējams koplietot failus starp OsmAnd un OsmAnd+. </string>
@@ -1786,7 +1785,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="rendering_value_browse_map_name">Atvērt karti</string>  
     <string name="rendering_value_car_name">Auto</string>
     <string name="rendering_value_bicycle_name">Velosipēds</string>
-    <string name="rendering_value_pedestrian_name">Kājāmgājējs</string>
+    <string name="rendering_value_pedestrian_name">Gājējs</string>
     <string name="rendering_attr_coloredBuildings_name">Būves krāsas pēc tipa</string>
     <string name="osmo_invite">Ielūgt…</string>
     <string name="osmo_leave_confirmation_msg">Vai gribat atstāt grupu %1$s?</string>
@@ -2080,4 +2079,14 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="shared_string_address">Adreses</string>
 	<string name="rendering_value__name">Noklusētais</string>
     <string name="rendering_value_highContrastRoads_name">Kontrastaināki ceļi</string>
-	</resources>
+	<string name="plugin_settings">Spraudņi</string>
+	<string name="rendering_attr_currentTrackColor_name">GPX krāsa</string>
+    <string name="rendering_value_red_name">Sarkans</string>
+    <string name="rendering_value_yellow_name">Dzeltens</string>
+    <string name="rendering_value_lightgreen_name">Gaiši zaļš</string>
+    <string name="rendering_value_translucent_lightgreen_name"/>
+    <string name="rendering_value_green_name">Zaļš</string>
+    <string name="rendering_value_lightblue_name">Gaiši zils</string>
+    <string name="rendering_value_blue_name">Zils</string>
+    <string name="restart_is_required">Lai izmaiņas stātos spēkā, nepieciešams pārstartēt aplikāciju.</string>
+    </resources>

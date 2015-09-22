@@ -188,9 +188,9 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		return true;
 	}
 
-	public static boolean editPoint(Context ctx, final FavouritePoint point, final Runnable callback) {
+	public static boolean editPoint(final Context ctx, final FavouritePoint point, final Runnable callback) {
 		OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
-		Builder builder = new AlertDialog.Builder(ctx);
+		final Builder builder = new AlertDialog.Builder(ctx);
 		builder.setTitle(R.string.favourites_context_menu_edit);
 		final View v = LayoutInflater.from(ctx).inflate(R.layout.favorite_edit_dialog,
 				null, false);
@@ -213,13 +213,33 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		builder.setPositiveButton(R.string.shared_string_apply, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				boolean edited = helper.editFavouriteName(point, editText.getText().toString().trim(), cat.getText()
-						.toString(), editDescr.getText().toString());
-				if (edited && callback != null) {
-					callback.run();
-					
-				}
+				final String newName = editText.getText().toString().trim();
+				point.setName(newName);
+				point.setCategory(cat.getText().toString());
+				point.setDescription(editDescr.getText().toString());
+				AlertDialog.Builder builder1 = helper.checkDuplicates(point, helper, ctx);
 
+				if (builder1 != null) {
+					builder1.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							boolean edited = helper.editFavouriteName(point,
+									point.getName(), cat.getText().toString(),
+									editDescr.getText().toString());
+							if (edited && callback != null) {
+								callback.run();
+							}
+						}
+					});
+					builder1.create().show();
+				} else {
+					boolean edited = helper.editFavouriteName(point,
+							newName, cat.getText().toString(),
+							editDescr.getText().toString());
+					if (edited && callback != null) {
+						callback.run();
+					}
+				}
 			}
 		});
 		builder.create().show();
@@ -468,35 +488,43 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 
 	private void enableSelectionMode(boolean selectionMode) {
 		this.selectionMode = selectionMode;
-		((FavoritesActivity)getActivity()).setToolbarVisibility(!selectionMode);
+		((FavoritesActivity)getActivity()).setToolbarVisibility(!selectionMode &&
+				AndroidUiHelper.isOrientationPortrait(getActivity()));
 	}
 
 	protected void openChangeGroupDialog(final FavoriteGroup group) {
-		Builder bld = new AlertDialog.Builder(getActivity());
-		View favEdit = getActivity().getLayoutInflater().inflate(R.layout.fav_group_edit, null);
-        final TIntArrayList list = new TIntArrayList();
-        final Spinner colorSpinner = (Spinner) favEdit.findViewById(R.id.ColorSpinner);
-        final int intColor = group.color == 0? getResources().getColor(R.color.color_favorite) : group.color;
-        ColorDialogs.setupColorSpinner(getActivity(), intColor, colorSpinner, list);
-		
-		final CheckBox checkBox = (CheckBox) favEdit.findViewById(R.id.Visibility);
+		Builder builder = new AlertDialog.Builder(getActivity());
+		View view = getActivity().getLayoutInflater().inflate(R.layout.fav_group_edit, null);
+
+		final EditText nameEditText = (EditText) view.findViewById(R.id.nameEditText);
+		nameEditText.setText(group.name);
+
+		final CheckBox checkBox = (CheckBox) view.findViewById(R.id.Visibility);
 		checkBox.setChecked(group.visible);
-		bld.setTitle(R.string.edit_group);
-		bld.setView(favEdit);
-		bld.setNegativeButton(R.string.shared_string_cancel, null);
-		bld.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
-			
+
+		final Spinner colorSpinner = (Spinner) view.findViewById(R.id.ColorSpinner);
+		final TIntArrayList list = new TIntArrayList();
+		final int intColor = group.color == 0? getResources().getColor(R.color.color_favorite) : group.color;
+		ColorDialogs.setupColorSpinner(getActivity(), intColor, colorSpinner, list);
+
+		builder.setTitle(R.string.edit_group);
+		builder.setView(view);
+		builder.setNegativeButton(R.string.shared_string_cancel, null);
+		builder.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
+
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				int clr = list.get(colorSpinner.getSelectedItemPosition());
-				if(clr != intColor || group.visible != checkBox.isChecked()) {
-					getMyApplication().getFavorites().editFavouriteGroup(group, clr, checkBox.isChecked());
+				String name = nameEditText.getText().toString();
+				if (clr != intColor || group.visible != checkBox.isChecked()) {
+					getMyApplication().getFavorites().editFavouriteGroup(group, name, clr,
+							checkBox.isChecked());
 					favouritesAdapter.notifyDataSetInvalidated();
 				}
-				
+
 			}
 		});
-		bld.show();
+		builder.show();
 		
 	}
 
@@ -605,6 +633,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 
 	class FavouritesAdapter extends OsmandBaseExpandableListAdapter implements Filterable {
 
+		private static final boolean showOptionsButton = false;
 		Map<FavoriteGroup, List<FavouritePoint>> favoriteGroups = new LinkedHashMap<FavoriteGroup, List<FavouritePoint>>();
 		List<FavoriteGroup> groups = new ArrayList<FavoriteGroup>();
 		Filter myFilter;
@@ -760,19 +789,23 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			TextView name = (TextView) row.findViewById(R.id.favourite_label);
 			TextView distanceText = (TextView) row.findViewById(R.id.distance);
 			ImageView icon = (ImageView) row.findViewById(R.id.favourite_icon);
-			ImageView options = (ImageView) row.findViewById(R.id.options);
-			options.setFocusable(false);
-			options.setImageDrawable(getMyApplication().getIconsCache()
-					.getContentIcon(R.drawable.ic_overflow_menu_white));
-			options.setVisibility(View.VISIBLE);
+			
 			final FavouritePoint model = (FavouritePoint) getChild(groupPosition, childPosition);
 			row.setTag(model);
-			options.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					showItemPopupOptionsMenu(model, v);
-				}
-			});
+			
+			if (showOptionsButton) {
+				ImageView options = (ImageView) row.findViewById(R.id.options);
+				options.setFocusable(false);
+				options.setImageDrawable(getMyApplication().getIconsCache().getContentIcon(
+						R.drawable.ic_overflow_menu_white));
+				options.setVisibility(View.VISIBLE);
+				options.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						showItemPopupOptionsMenu(model, v);
+					}
+				});
+			}
 			icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getActivity(), model.getColor(), 0));
 			LatLon lastKnownMapLocation = getMyApplication().getSettings().getLastKnownMapLocation();
 			int dist = (int) (MapUtils.getDistance(model.getLatitude(), model.getLongitude(),

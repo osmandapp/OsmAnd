@@ -5,8 +5,8 @@
   <string name="recording_context_menu_precord">Zachytiť fotografiu</string>
   <string name="enable_plugin_monitoring_services">Na použitie služieb pre záznam pozície zapnite modul Zaznamenávanie výletov (záznam GPX, stopovanie naživo)</string>
   <string name="non_optimal_route_calculation">Vypočítať pravdepodobne neoptimálnu cestu s dlhšou vzdialenosťou</string>
-  <string name="tip_recent_changes_0_8_4_t">Zmeny vo verzii 0.8.4 :
-    </string>
+  <string name="tip_recent_changes_0_8_4_t">"Zmeny vo verzii 0.8.4:\n\t* Opravy chýb\n\t* Mapa nestratí pozíciu pri prerušeniach
+\n\t* Zapnutie služby v pozadí pri navigácii "</string>
   <string name="tip_recent_changes_0_8_3_t">Zmeny vo verzii 0.8.3 :
   \n\t* Prechodné body
   \n\t* Vylepšené hlasové povely pri navigácii
@@ -39,7 +39,7 @@
   <string name="poi_filter_food_shop">Potraviny</string>
   <string name="poi_filter_for_tourists">Pre turistov</string>
   <string name="poi_filter_fuel">Palivo</string>
-  <string name="btn_add_tag">Pridať značku</string>
+  <string name="add_tag">Pridať značku</string>
   <string name="btn_advanced_mode">Pokročilý režim…</string>
   <string name="snap_to_road_descr">Prichytenie pozície k cestám počas navigácie</string>
   <string name="snap_to_road">Prichytiť k ceste</string>
@@ -63,8 +63,8 @@
   <string name="int_continuosly">Priebežne</string>
   
   
-  <string name="bg_service_sleep_mode_off">Zapnúť\n režim spánku</string>
-  <string name="bg_service_sleep_mode_on">Vypnúť\n režim spánku</string>  
+  <string name="bg_service_sleep_mode_off">Spustiť\n aplikáciu v pozadí</string>
+  <string name="bg_service_sleep_mode_on">Vypnúť\n beh v pozadí</string>  
   <string name="map_widget_top_text">Názov ulice</string>
   <string name="map_widget_config">Konfigurácia</string>
   
@@ -96,7 +96,7 @@
   
   
   <string name="osmand_rastermaps_plugin_description">"S týmto modulom môžete použiť rozličné online (tiež nazývané dlaždicové alebo rastrové) mapy, od preddefinovaných OSM dlaždíc (ako Mapnik) po satelitné snímky a špeciálne vrstvy ako mapy počasia, klimatické, geologické, tieňované svahy a pod.\n\nVšetky tieto mapy môžu byť použité ako hlavná (základná) mapa na obrazovke OsmAnd alebo ako prekrývacia / podkladová mapa k inej základnej mape (napr. bežné offline mapy z OsmAnd). Pre lepšie zviditeľnenie podkladových máp je možné vypnúť niektoré objekty z vektorových máp OsmAnd, cez menu \"Nastaviť mapu\".\n\nDlaždicové mapy môžete získať priamo zo zdrojov na Internete, alebo ich môžete pripraviť na použitie offline (skopírovať ručne do dátového priečinka OsmAnd) ako sqlite databázu, ktorú vedia vytvoriť viaceré programy na prípravu máp. "</string>
-  <string name="osmand_background_plugin_description">Zobrazí nastavenia na povolenie stopovania a navigácie v režime spánku (vypnutá obrazovka) pravidelným prebúdzaním GPS zariadenia.</string>
+  <string name="osmand_background_plugin_description">Zobrazí nastavenia na povolenie stopovania a navigácie v pozadí systému (vypnutá obrazovka) pravidelným prebúdzaním GPS zariadenia.</string>
   <string name="osmand_accessibility_description">Tento modul zobrazí funkcie uľahčenia prístupu priamo v OsmAnd. Napr. je možné zmeniť rýchlosť TTS hlasu, použiť trackball na približovanie, alebo automaticky oznamovať polohu hlasom.</string>
   
   
@@ -436,8 +436,8 @@
 \n\n\t* Zelená - indikuje, že súbor je aktuálny (na serveri rovnaký ako v zariadení)
 \n\t* Modrá - indikuje, že pre súbor existuje aktualizácia na serveri
 \n\t* Súbory šikmým písmom sú v zariadení deaktivované "</string>
-  <string name="level_to_switch_vector_raster_descr">Max. úroveň priblíženia použitá pri vektorovom vykresľovaní a nie rastrovom</string>
-  <string name="level_to_switch_vector_raster">Úroveň vektorového zoomu</string>
+  <string name="level_to_switch_vector_raster_descr">Min. úroveň priblíženia pre použitie vektorových máp</string>
+  <string name="level_to_switch_vector_raster">Min. úroveň vektorového zoomu</string>
   <string name="tip_day_night_mode">Denný/Nočný režim</string>
   
   <string name="tip_location_sharing">Zdieľanie umiestnenia</string>
@@ -548,8 +548,8 @@
   <string name="install_selected_build">Naozaj chcete nainštalovať OsmAnd - {0} z {1} {2} MB?</string>
   <string name="loading_builds_failed">Prijímanie zoznamu zostáv OsmAndu zlyhalo</string>
   <string name="loading_builds">Načítavajú sa zostavy OsmAndu…</string>
-  <string name="select_build_to_install">Vyberte jednu zo zostáv OsmAndu na nainštalovanie</string>
-  <string name="contribution_activity">Špeciálna aktivita pre kontribútorskú verziu</string>
+  <string name="select_build_to_install">Vyberte zostavu OsmAndu na nainštalovanie</string>
+  <string name="contribution_activity">Nainštalovať verziu</string>
   <string name="gps_status_app_not_found">Aplikácia pre stav GPS nie je nainštalovaná. Nájsť ju v Obchode?</string>
   <string name="voice_is_not_available_msg">"Hlasové navigovanie nie je dostupné, prosím choďte do Nastavenia → \'Všeobecné\' → \'Hlasové povely\'  a zvoľte alebo stiahnite balík hlasových povelov."</string>
   <string name="voice_is_not_available_title">Hlasové údaje nie sú určené</string>
@@ -566,8 +566,8 @@
   <string name="general_settings">Všeobecné nastavenia</string>
   <string name="index_settings_descr">Stiahnutie, zobrazenie podrobností a správa offline máp</string>
   <string name="index_settings">Spravovať mapové súbory</string>
-  <string name="osmand_service">Režim spánku</string>
-  <string name="osmand_service_descr">Použite pre beh OsmAndu počas vypnutej obrazovky</string>
+  <string name="osmand_service">Režim na pozadí</string>
+  <string name="osmand_service_descr">OsmAnd bude bežať v systéme aj počas vypnutej obrazovky</string>
   <string name="fast_route_mode">Najrýchlejšia trasa</string>
   <string name="fast_route_mode_descr">Zapnite na výpočet najrýchlejšej trasy alebo vypnite pre najkratšiu trasu </string>
   <string name="tiles_to_download_estimated_size">Pri priblížení {0} sa stiahne {1} dlaždíc ({2} Mb )</string>
@@ -640,20 +640,20 @@
   <string name="use_trackball">Použiť trackball</string>
   <string name="background_service_wait_int_descr">Nastaví max. čakaciu dobu pre každú ustálenú pozíciu na pozadí</string>
   <string name="background_service_wait_int">Max. doba čakania na fix</string>
-  <string name="service_stop_background_service">Vypnúť navigačnú službu na pozadí</string>
+  <string name="service_stop_background_service">Vypnúť navigačnú službu v pozadí</string>
   <string name="where_am_i">Kde som?</string>
   <string name="process_navigation_service">Navigačná služba OsmAnd</string>
   <string name="network_provider">Sieť</string>
   <string name="gps_provider">GPS</string>
   <string name="int_seconds">sekúnd</string>
   <string name="int_min">min.</string>
-  <string name="background_service_int_descr">Nastaví interval rozpoznávania pozície službou na pozadí</string>
+  <string name="background_service_int_descr">Nastaví interval rozpoznávania pozície službou v pozadí</string>
   <string name="background_service_int">Interval zisťovania pozície z GPS</string>
-  <string name="background_service_provider_descr">Výber poskytovateľa umiestnenia pre službu na pozadí</string>
+  <string name="background_service_provider_descr">Výber poskytovateľa umiestnenia pre službu v pozadí</string>
   <string name="background_service_provider">Poskytovateľ umiestnenia</string>
-  <string name="background_router_service_descr">Zapnutie služby na pozadí na sledovanie pozície v dlhých časových periódach</string>
-  <string name="background_router_service">Použiť službu na pozadí</string>
-  <string name="off_router_service_no_gps_available">Služba na pozadí pre navigovanie vyžaduje zapnutý zdroj umiestnenia.</string>
+  <string name="background_router_service_descr">Spustí OsmAnd v pozadí systému, aby mohol sledovať polohu keď je obrazovka vypnutá</string>
+  <string name="background_router_service">Spustiť OsmAnd v pozadí</string>
+  <string name="off_router_service_no_gps_available">Služba pre navigovanie v pozadí vyžaduje zapnutý zdroj umiestnenia.</string>
   <string name="routing_settings_descr">Určenie možností navigácie</string>
   <string name="routing_settings">Navigácia</string>
   <string name="hide_poi_filter">Skryť filter</string>
@@ -729,7 +729,7 @@
   <string name="search_offline_address">Offline hľadanie</string>
   <string name="search_online_address">Online hľadanie</string>
   <string name="max_level_download_tile">Max. online úroveň priblíženia</string>
-  <string name="max_level_download_tile_descr">Výber maximálnej úrovne priblíženia na stiahnutie</string>
+  <string name="max_level_download_tile_descr">Výber maximálnej úrovne priblíženia na stiahnutie online dlaždíc</string>
   <string name="route_general_information">Celková vzdialenosť %1$s, čas cestovania %2$d h %3$d m.</string>
   <string name="router_service_descr">Výber online alebo offline navigačnej služby</string>
   <string name="router_service">Navigačná služba</string>
@@ -903,8 +903,8 @@
   <string name="poi_remove_confirm_template">Vymazať {0} (zadajte komentár) ?</string>
   <string name="poi_remove_title">Vymazať POI</string>
   <string name="poi_remove_success">POI bol úspešne vymazaný</string>
-  <string name="poi_action_add">Pridať</string>
-  <string name="poi_action_change">Zmeniť</string>
+  <string name="poi_action_add">pridať</string>
+  <string name="poi_action_change">zmeniť</string>
   <string name="poi_action_succeded_template">Akcia: {0} úspešne ukončená.</string>
   <string name="poi_error_unexpected_template">Vyskytla sa neočakávaná chyba počas vykonávania akcie: {0}.</string>
   <string name="poi_error_io_error_template">Vyskytla sa vstupno/výstupná chyba počas vykonávania akcie: {0}.</string>
@@ -1009,7 +1009,7 @@
   
   <string name="show_cameras">Radary</string>
   <string name="show_traffic_warnings">Rýchlostné obmedzenia</string>
-  <string name="avoid_toll_roads">Spoplatneným cestám</string>
+  <string name="avoid_toll_roads">Vyhnúť sa spoplatneným cestám</string>
   <string name="tip_recent_changes_0_8_2_t">"Zmeny vo verzii 0.8.2:
 \n\t* Vylepšená navigácia
 \n\t* Dynamické mapové widgety
@@ -1029,7 +1029,7 @@
 <string name="map_widget_renderer">Štýl vykresľovania</string>
 <string name="osmand_short_description_80_chars">OsmAnd je open source navigácia s offline aj online mapami</string>
 <string name="osmand_plus_short_description_80_chars">OsmAnd je open source navigácia s offline aj online mapami</string>
-<string name="rendering_attr_contourLines_description">Výber minimálneho priblíženia na zobrazenie na mape, ak sú dostupné. Môže byť vyžadovaný oddelený SRTM súbor:</string>
+<string name="rendering_attr_contourLines_description">Zobraziť od úrovne priblíženia (vyžaduje dátový súbor vrstevníc):</string>
   <string name="osmand_long_description_1000_chars">" OsmAnd (OSM Automatizované navigačné pokyny) OsmAnd je open source navigačná aplikácia s prístupom k širokej škále globálnych dát OpenStreetMap (OSM). Všetky mapové podklady (vektorové alebo dlaždice máp) môžu byť uložené na karte pamäti telefónu pre offline použitie. OsmAnd tiež ponúka offline a online smerovacie funkcie, vrátane turn-by-turn hlasových pokynov. Niektoré z hlavných funkcií: - Kompletné funkcie v režime offline (uloženie stiahnutých vektorových alebo dlaždicových máp v úložisku zariadenia) - Kompaktné offline vektorové mapy pre celý svet - Stiahnutie máp pre krajinu alebo región priamo z aplikácie - Možné prekrytia niekoľkých mapových vrstiev ako GPX alebo navigačná trasa, body záujmu, obľúbené, vrstevnice, zastávky hromadnej dopravy, ďalšie mapy s prispôsobiteľnou priehľadnosťou - Offline vyhľadávanie adries a miest (POI) - Offline smerovania pre krátke vzdialenosti (experimentálne) - Režimy pre auto, bicykel, a peší režim s: - voliteľným/automatickým denným / nočným režimom - voliteľné približovanie mapy v závislosti na rýchlosti - voliteľné otáčanie mapy podľa kompasu alebo smeru pohybu - voliteľne navádzanie do jazdných pruhov, zobrazenie obmedzenia rýchlosti, nahrané a TTS hlasy Obmedzenia tejto voľnej verzie OsmAndu: - Počet stiahnutí máp je obmedzený - Žiadny prístup k POI offline Wikipédii OsmAnd je aktívne vyvíjaný a náš projekt a jeho ďalší pokrok závisí od finančných príspevkov na financovanie rozvoja a testovanie nových funkcii. Prosím, zvážte nákup OsmAnd+, alebo financovanie konkrétnych nových funkcií (bidforfix) alebo všeobecný dar. Viac na www.osmand.net. "</string>
 	<string name="osmand_plus_long_description_1000_chars">" OsmAnd+ (OSM Automatizované navigačné pokyny) OsmAnd+ je open source navigačná aplikácia s prístupom k širokej škále globálnych dát OpenStreetMap (OSM). Všetky mapové podklady (vektorové alebo dlaždice máp) môžu byť uložené na karte pamäti telefónu pre offline použitie. OsmAnd tiež ponúka offline a online smerovacie funkcie, vrátane turn-by-turn hlasových pokynov. OsmAnd+ je platená verzia aplikácie. Jej zakúpením podporíte projekt, vývoj nových funkcií a získate najnovšie aktualizácie. Niektoré z hlavných funkcií: - Kompletné funkcie v režime offline (uloženie stiahnutých vektorových alebo dlaždicových máp v úložisku zariadenia) - Kompaktné offline vektorové mapy pre celý svet - Neobmedzené sťahovanie máp pre krajinu alebo región priamo z aplikácie - Možné prekrytia niekoľkých mapových vrstiev ako GPX alebo navigačná trasa, body záujmu, obľúbené, vrstevnice, zastávky hromadnej dopravy, ďalšie mapy s prispôsobiteľnou priehľadnosťou - Offline vyhľadávanie adries a miest (POI) - Offline smerovanie pre krátke vzdialenosti (experimentálne) - Režimy pre auto, bicykel, a peší režim s: - voliteľným/automatickým denným / nočným režimom - voliteľné približovanie mapy v závislosti na rýchlosti - voliteľné otáčanie mapy podľa kompasu alebo smeru pohybu - voliteľne navádzanie do jazdných pruhov, zobrazenie obmedzenia rýchlosti, nahrané a TTS hlasy "</string>
 	<string name="tip_rotation_switching_t_v2">Môžete prepínať, či a ako sa zobrazenie mapy otáča tým, že opakovane kliknete na ikonu kompasu v obrazovke mapy.
@@ -1065,9 +1065,8 @@
 	<string name="rendering_attr_showRoadMaps_description">Vyberte, kedy zobraziť mapy ciest:</string>
 	<string name="safe_mode">Bezpečný režim</string>
     <string name="safe_mode_description">Spustenie aplikácie v bezpečnom režime (namiesto natívneho kódu sa použije pomalší kód pre Android).</string>
-    <string name="background_service_is_enabled_question">Služba na pozadí je stále spustená. Chcete ju prerušiť?</string>
-    <string name="tip_recent_changes_1_0_0_t">Zmeny vo verzii 1.0.0 :\n\t* Vylepšená navigácia: rýchlejšia a precíznejšia, až do vzdialenosti 250 km\n\t* Zavedené mapy obsahujúce iba cestnú sieť\n\t* Umiestnenie na mape nie je po prerušeniach stratené\n\t* Zapnutie služby na pozadí počas navigácie
-    </string>
+    <string name="background_service_is_enabled_question">Služba v pozadí je stále spustená. Chcete ju prerušiť?</string>
+    <string name="tip_recent_changes_1_0_0_t">"Zmeny vo verzii 1.0.0 :\n\t* Vylepšená navigácia: rýchlejšia a precíznejšia, až do vzdialenosti 250 km\n\t* Zavedené mapy obsahujúce iba cestnú sieť\n\t* Umiestnenie na mape nie je po prerušeniach stratené\n\t* Zapnutie služby v pozadí počas navigácie "</string>
     <string name="native_library_not_running">Aplikácia je spustená v bezpečnom režime (vypnete ho v nastaveniach).</string>
     <string name="download_roads_only_maps">Iba mapy ciest</string>
     <string name="download_roads_only_item">Len cestná sieť</string>
@@ -1082,9 +1081,9 @@
     
     
     <string name="map_widget_max_speed">Obmedzenie rýchlosti</string>
-    <string name="monitoring_control_start">spustiť</string>
+    <string name="monitoring_control_start">GPX</string>
     <string name="rendering_attr_noAdminboundaries_name">Skryť hranice</string>
-	<string name="rendering_attr_noAdminboundaries_description">Potlačiť zobrazenie regionálnej hranice (admin úrovne 5-9)</string>
+	<string name="rendering_attr_noAdminboundaries_description">Potlačiť zobrazenie regionálnej hranice (administratívne úrovne 5 až 9)</string>
 	<string name="tip_altitude_offset">Korekcia nadmorskej výšky</string>
 	<string name="tip_altitude_offset_t">Väčšina GPS zariadení meria nadmorskú výšku podľa referenčného systému WGS84, z ktorého prepočet na lokálne používaný systém vyžaduje korekcie voči aktuálnej polohe.
 		\n\nNa lepšie aproximácie týchto miestnych systémov sa používa referenčný systém EGM96.
@@ -1184,7 +1183,7 @@
 \n\t* Podpora hodiniek Pebble
     </string>
     
-	<string name="street_name">Ulica</string>
+	<string name="street_name">Názov ulice</string>
 	<string name="hno">Číslo domu</string>
     <string name="monitoring_settings">Zaznamenávanie výletu</string>
     <string name="monitoring_settings_descr">Konfigurovať ako sa majú zaznamenať vaše výlety</string>
@@ -1267,9 +1266,9 @@
     <string name="route_from">Odkiaľ:</string>
     
 	
-    <string name="speak_speed_limit">Ohlásiť obmedzenie rýchlosti</string>
-    <string name="speak_cameras">Ohlásiť radary</string>
-	<string name="speak_traffic_warnings">Ohlásiť dopravné varovania</string>
+    <string name="speak_speed_limit">Obmedzenia rýchlosti</string>
+    <string name="speak_cameras">Rýchlostné radary</string>
+	<string name="speak_traffic_warnings">Dopravné varovania</string>
 	<string name="tip_map_styles">Štýly máp</string>
 	<string name="about_version">Verzia:</string>
     <string name="about_settings">O programe</string>
@@ -1311,10 +1310,10 @@
 	<string name="driving_region_uk">UK, India, Austrália a ostatné</string>
 	    
     
-    <string name="announce_gpx_waypoints">Ohlásiť GPX waypointy</string>
+    <string name="announce_gpx_waypoints">GPX waypointy</string>
     <string name="speak_title">Ohlásiť…</string>
 	<string name="speak_descr">Konfigurácia ohlásení názvov ulíc, dopravných varovaní (vynútené zastavenia, spomaľovače), upozornení na radary, obmedzení rýchlosti</string>
-	<string name="speak_street_names">Ohlásiť názvy ulíc (TTS)</string>
+	<string name="speak_street_names">Názvy ulíc (TTS)</string>
     <string name="osb_author_or_password_not_specified">Prosím, určte používateľa OSM a heslo v nastaveniach</string>
     <string name="clear_intermediate_points">Zmazať prechodné body</string>
     <string name="osb_author_dialog_password">Heslo k OSM (voliteľné)</string>
@@ -1798,16 +1797,16 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="osmo_group_information_desc">" - Všetky vytvorené skupiny sú verejné! Ak chcete byť anonymný, pripojte zariadenia priamo cez Tracker id.\n - Súkromné skupiny sú obmedzené na 8 ľudí.\n - Skupina bude zrušená v prípade nečinnosti alebo aktivity len jednej osoby počas 2 týždňov.\n - Môžete obmedziť vstup do skupiny len na pozvánky, ale pre ovládanie skupiny musíte použiť administračnú konzolu.\n - Ak potrebujete vytvoriť skupinu s inými podmienkami, kontaktujte http://osmo.mobi"</string>
     <string name="osmo_group_information">Prosím prečítajte si pred vytváraním skupiny!</string>
     <string name="stop_navigation_service">Prerušiť</string>
-	<string name="enable_sleep_mode">Zapnúť režim spánku GPS</string>
+	<string name="enable_sleep_mode">Zapnúť režim GPS v pozadí</string>
 	<string name="gps_wake_up_timer">Interval prebúdzania GPS</string>
-	<string name="sleep_mode_stop_dialog">Prerušiť spánok GPS?</string>
+	<string name="sleep_mode_stop_dialog">Prerušiť službu GPS v pozadí?</string>
 	<string name="map_preferred_locale_descr">Preferovaný jazyk pre nápisy na mape (ak nie je dostupný budú použité anglické alebo lokálne názvy)</string>
     <string name="map_preferred_locale">Preferovaný jazyk mapy</string>
     <string name="local_map_names">Lokálne názvy</string>
     <string name="lang_sw">Svahilsky (Kiswahili)</string>
     <string name="lang_he">Hebrejsky (עִבְרִית)</string>
     <string name="forward">Dopredu</string>
-    <string name="home">Domov</string>
+    <string name="home">Úvodný panel</string>
     <string name="live_monitoring_m_descr">Odosielať stopovacie údaje určenej webovej službe ak je zaznamenávanie GPX zapnuté.</string>
 	<string name="live_monitoring_m">Online stopovanie (potrebné GPX)</string>
     <string name="live_monitoring_start">Zapnúť online stopovanie</string>
@@ -1864,8 +1863,8 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="waypoints">Prechodné body</string>
     <string name="targets">Ciele</string>
     <string name="way_alarms">Dopravné varovania</string>
-    <string name="speak_favorites">Ohlásiť blízke obľúbené body</string>
-    <string name="speak_poi">Ohlásiť blízke body záujmu</string>
+    <string name="speak_favorites">Blízke obľúbené body</string>
+    <string name="speak_poi">Blízke body záujmu</string>
     <string name="shared_string_all">Všetky</string>
     <string name="index_tours">Výlety</string>
     <string name="record_plugin_description">"Tento modul zapne funkciu nahratia a uloženia vašich stôp stlačením tlačidla záznamu GPX na mape. Taktiež umožňuje nastaviť automatické zaznamenávanie navigačných trás do GPX súboru.\n\nZaznamenané stopy môžete zdieľať s priateľmi alebo odoslať ako príspevok do OSM. Atléti môžu použiť záznamy na sledovanie svojich tréningov. Základná analýza môže byť vykonaná už priamo v OsmAnd, napr. trvanie stopy, priemerná rýchlosť. Stopy môžu následne skúmať ďalšie špecializované programy. "</string>
@@ -1963,7 +1962,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="rendering_value_americanRoadAtlas_name">Americký atlas ciest</string>
     <string name="routing_attr_no_new_routing_name">Bez smerovacích pravidiel verzie 1.9</string>
     <string name="routing_attr_no_new_routing_description">Nepoužívať pravidlá výpočtu trasy zavedené vo verzii 1.9</string>
-    <string name="speak_pedestrian">Ohlásiť priechody pre chodcov</string>
+    <string name="speak_pedestrian">Priechody pre chodcov</string>
     
 	<string name="save_track_to_gpx_globally_headline">Záznam trasy v prípade potreby</string>
 	<string name="navigation_over_track">Spustiť navigáciu pozdĺž stopy?</string>
@@ -2105,7 +2104,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="shared_string_my_location">Moja poloha</string>
 	<string name="shared_string_my_favorites">Moje obľúbené</string>
 	<string name="shared_string_my_tracks">Moje stopy</string>
-	<string name="shared_string_currently_recording_track">Stopa sa nahráva</string>
+	<string name="shared_string_currently_recording_track">Teraz nahrávaná stopa</string>
 	<string name="delay_to_start_navigation_descr">Zadajte dobu zotrvania na obrazovke plánovania trasy</string>
     <string name="delay_to_start_navigation">Spustiť navigačné pokyny po…</string>
     <string name="shared_string_go">Ísť</string>
@@ -2181,7 +2180,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="local_recordings_delete_all_confirm">Chystáte sa vymazať %1$d poznámok. Ste si istí?</string>
 	<string name="gps_network_not_enabled">Služba zisťovania pozície nie je zapnutá. Chcete ju teraz zapnúť?</string>
     <string name="disable_recording_once_app_killed">Zakázať samostatné zaznamenávanie</string>
-    <string name="disable_recording_once_app_killed_descrp">Zastaví záznam GPX keď je aplikácia ukončená (cez nedávne aplikácie). (Ikona režimu spánku OsmAnd zmizne z notifikačnej oblasti Androidu.)</string>
+    <string name="disable_recording_once_app_killed_descrp">Zastaví záznam GPX keď je aplikácia ukončená (cez nedávne aplikácie). (Ikona režimu na pozadí zmizne z notifikačnej oblasti Androidu.)</string>
 	<string name="archive_wikipedia_data">Máte stiahnuté staré nekompatibilné dáta z Wikipedie. Chcete ich archivovať?</string>
     <string name="download_wikipedia_files">Chcete stiahnuť ďalšie dáta z Wikipedie (%1$s MB) ?</string>
     <string name="lang_es_ar">Argentínska Španielčina</string>
@@ -2252,11 +2251,40 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="error_message_pattern">Chyba: {0}</string>
 <string name="traffic_warning_hazard">Nebezpečenstvo</string>
     <string name="rendering_value_boldOutline_name">Hrubý obrys</string>
-    <string name="dahboard_options_dialog_title">Nastavenia úvodného panela</string>
+    <string name="dahboard_options_dialog_title">Nastaviť úvodný panel</string>
 	<string name="shared_string_card_was_hidden">Karta bola skrytá</string>
 	<string name="shared_string_undo">KROK SPÄŤ</string>
 	<string name="shared_string_skip">Preskočiť</string>
 	<string name="app_name_osmand">OsmAnd</string>
 	<string name="offline_maps_and_navigation">Offline mapy\n&amp; Navigácia</string>
 <string name="commit_poi">Odoslať POI</string>
-</resources>
+<string name="av_locations_descr">GPX súbor s pozíciami poznámok</string>
+    <string name="av_locations">Pozície</string>
+    <string name="plugin_settings">Zásuvné moduly</string>
+	<string name="routing_attr_avoid_shuttle_train_name">Nepoužiť autovlak</string>
+	<string name="routing_attr_avoid_shuttle_train_description">Nepoužiť autovlak</string>
+    <string name="tab_title_basic">Základné</string>
+	<string name="tab_title_advanced">Rozšírené</string>
+	<string name="building_number">Číslo domu</string>
+	<string name="next_proceed">Ďalší</string>
+	<string name="opening_at">Otvára o</string>
+	<string name="closing_at">Zatvára o</string>
+	<string name="tag_poi_name">názov</string>
+	<string name="tag_poi_amenity">občianska vybavenosť</string>
+	<string name="contact_info">Kontaktné údaje</string>
+	<string name="description">Popis</string>
+	<string name="add_opening_hours">Pridať otváracie hodiny</string>
+	<string name="poi_dialog_poi_type">Typ bodu záujmu</string>
+	<string name="number_of_rows_in_dash">Počet riadkov v bloku %1$s</string>
+	<string name="please_specify_poi_type">Prosím zadajte typ bodu záujmu.</string>
+<string name="poi_action_delete">odstrániť</string>
+	<string name="working_days">Pracovné dni</string>
+	<string name="recent_places">História miest</string>
+	<string name="favourites">Obľúbené</string>
+<string name="saved_at_time">Úspešne uložené na: %1$s</string>
+	<string name="poi_deleted_localy">Bod POI bude vymazaný keď zmeny odošlete</string>
+	<string name="show_gpx">Zobraziť GPX</string>
+<string name="count_of_lines">Počet riadkov</string>
+<string name="show_on_start">Zobraziť po štarte</string>
+	<string name="address_unknown">Adresa ešte nie je známa</string>
+    </resources>

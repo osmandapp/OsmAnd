@@ -666,7 +666,7 @@ public class RouteCalculationResult {
 	public float getCurrentMaxSpeed() {
 		RouteSegmentResult res = getCurrentSegmentResult();
 		if(res != null) {
-			return res.getObject().getMaximumSpeed();
+			return res.getObject().getMaximumSpeed(res.isForwardDirection());
 		}
 		return 0;
 	}

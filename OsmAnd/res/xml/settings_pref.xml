@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-	<Preference android:title="@string/index_settings" android:key="local_indexes" android:summary="@string/index_settings_descr"></Preference>
-	<Preference android:title="@string/prefs_plugins" android:summary="@string/prefs_plugins_descr" android:key="plugins"
-	    />
 	<Preference android:key="general_settings" android:title="@string/general_settings_2" android:summary="@string/general_settings_descr"/>
 	<Preference android:key="routing_settings" android:title="@string/routing_settings_2" android:summary="@string/routing_settings_descr"/>
-	<Preference android:title="@string/shared_string_help" android:summary="@string/tips_and_tricks_descr" android:key="help"
-	    />
-	
-	<!-- <Preference android:title="@string/support_new_features" android:summary="@string/support_new_features_descr" android:key="bidforfix"/>  -->
+	<PreferenceCategory android:key="plugin_settings" android:title="@string/plugin_settings" />
 </PreferenceScreen>

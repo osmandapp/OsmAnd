@@ -15,7 +15,7 @@
     <string name="context_menu_item_intermediate_point">Lisää välietapiksi</string>
     <string name="map_widget_intermediate_distance">Välietappi</string>
     <string name="ending_point_too_far">Päätepiste on liian kaukana lähimmästä tiestä.</string>
-    <string name="btn_add_tag">Lisää avainsana</string>
+    <string name="add_tag">Lisää avainsana</string>
     <string name="btn_advanced_mode">Edistynyt näkymä…</string>
     <string name="poi_filter_parking">Pysäköinti</string>
     <string name="poi_filter_emergency">Hätätapaus</string>
@@ -317,7 +317,7 @@
 	<string name="search_offline_address">Yhteydetön</string>
 	<string name="search_online_address">Internetistä</string>
 	<string name="router_service">Navigointipalvelu</string>
-	<string name="sd_dir_not_accessible">Tallennuspolku muistikortilta ei ole käytettävissä</string>
+	<string name="sd_dir_not_accessible">Tallennuspolku muistikortilta ei ole käytettävissä!</string>
 	<string name="download_question">Lataa {0} - {1} ?</string>
 	<string name="address">Osoite</string>
 	<string name="shared_string_download_successful">Lataus onnistui</string>
@@ -325,7 +325,7 @@
 	
 	
 	<string name="downloading_list_indexes">Ladataan saatavilla olevien alueiden listaa…</string>
-	<string name="list_index_files_was_not_loaded">Listaa alueista ei noudettu osmand.net:stä</string>
+	<string name="list_index_files_was_not_loaded">Listaa alueista ei noudettu osmand.net:stä.</string>
 	
 	<string name="fav_points_edited">Suosikkipaikkaa muokattiin</string>
 	<string name="fav_points_not_exist">Suosikkipaikkoja ei ole</string>
@@ -522,7 +522,7 @@
 	<string name="use_english_names_descr">Valitse omakieliset tai englanninkieliset nimet</string>
 	<string name="go_back_to_osmand">Palaa OsmAnd karttaan</string>
 	<string name="empty_route_calculated">Virhe: Laskettu reitti on tyhjä</string>					
-	<string name="route_general_information">Välimatka %1$s,\n matka-aika %2$d h %3$d m.</string>
+	<string name="route_general_information">Välimatka %1$s, matka-aika %2$d h %3$d m.</string>
 	<string name="gps_provider">GPS</string>
 	<string name="int_seconds">sekuntia</string>
 	<string name="int_min">min.</string>
@@ -843,4 +843,37 @@
 	<string name="osmand_srtm_short_description_80_chars">OsmAnd lisäosa offline korkeuskäyrille</string>
 	<string name="osmand_srtm_long_description_1000_chars">"Tämä lisäosa tarjoaa sekä korkeuskäyrä päällyskerros ja (helpotus) mäkisävy tason näytettäväksi OsmAnd offline karttojen päällä. Tätä toiminnallisuutta arvostavat paljon urheilijat, retkeilijät, vuoristo seikkailijat, ja ketkä tahansa maisemien ihailusta kiinnostuneet.\n\nMaailmanlaajuiset tiedot (välillä 70 astetta pohjoista ja 70 astetta eteläistä) perustuu mittauksiin jotka on tehnyt SRTM (Shuttle Radar Topography Mission) ja ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), ja kuvausvälineet mukana kulkeva Terra, NASAn maapallontarkkailujärjestelmän lippulaiva satelliitti. ASTER on yhteistyö NASAn, Japanin talous-, kauppa ja teollisuusministeriön (METI), ja Japanin avaruusjärjestelmien (J-spacesystems) välillä. "</string>
 	<string name="srtm_plugin_description">"Tämä lisäosa tarjoaa sekä korkeuskäyrä päällyskerros ja (helpotus) mäkisävy tason näytettäväksi OsmAnd offline karttojen päällä. Tätä toiminnallisuutta arvostavat paljon urheilijat, retkeilijät, vuoristo seikkailijat, ja ketkä tahansa maisemien ihailusta kiinnostuneet.\n\nMaailmanlaajuiset tiedot (välillä 70 astetta pohjoista ja 70 astetta eteläistä) perustuu mittauksiin jotka on tehnyt SRTM (Shuttle Radar Topography Mission) ja ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), ja kuvausvälineet mukana kulkeva Terra, NASAn maapallontarkkailujärjestelmän lippulaiva satelliitti. ASTER on yhteistyö NASAn, Japanin talous-, kauppa ja teollisuusministeriön (METI), ja Japanin avaruusjärjestelmien (J-spacesystems) välillä. "</string>
+	<string name="layer_gpx_layer">GPX-reitti…</string>
+	<string name="layer_map">Kartan lähde…</string>
+	<string name="text_size">Tekstin koko</string>
+    <string name="map_locale">Kartan kieli</string>
+    <string name="map_widget_map_rendering">Kartan renderöinti</string>
+    <string name="rendering_category_hide">Piilota</string>
+    <string name="rendering_category_routes">Reitit</string>
+    <string name="rendering_category_details">Yksityiskohdat</string>
+    <string name="light_theme">Vaalea</string>
+    <string name="traffic_warning_pedestrian">Suojatie</string>
+	<string name="rendering_attr_hideBuildings_name">Piilota rakennukset</string>
+    <string name="use_kalman_filter_compass">Käytä Kalman-suodatinta</string>
+    <string name="plugin_settings">Lisäosat</string>
+	<string name="rendering_attr_currentTrackColor_name">GPX-reitin väri</string>
+    <string name="rendering_value_red_name">Punainen</string>
+    <string name="rendering_value_orange_name">Oranssi</string>
+    <string name="rendering_value_yellow_name">Keltainen</string>
+    <string name="rendering_value_lightgreen_name">Vaaleanvihreä</string>
+    <string name="rendering_value_green_name">Vihreä</string>
+    <string name="rendering_value_lightblue_name">Vaaleansininen</string>
+    <string name="rendering_value_blue_name">Sininen</string>
+    <string name="dark_theme">Tumma</string>
+    <string name="rendering_value_disabled_name">Ei käytössä</string>
+    <string name="rename_failed">Nimen vaihto epäonnistui.</string>
+	<string name="notes">Muistiinpanot</string>
+	<string name="roads_only">Vain tiet</string>
+    <string name="edit_group">Muokkaa ryhmää</string>
+    <string name="show_gpx">Näytä GPX</string>
+	<string name="favourites">Suosikit</string>
+	<string name="description">Kuvaus</string>
+	<string name="tag_poi_name">nimi</string>
+	<string name="closing_at">Sulkeutuu</string>
+	<string name="opening_at">Avautuu</string>
 	</resources>

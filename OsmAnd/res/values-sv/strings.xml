@@ -93,7 +93,7 @@
 <string name="bg_service_interval">Ställ in väckningsintervall:</string>
 <string name="show_cameras">Visa fartkameror</string>
 <string name="show_traffic_warnings">Visa hastighetsgränser</string>
-<string name="avoid_toll_roads">Undvik betalvägar</string>
+<string name="avoid_toll_roads">Betalvägar</string>
 <string name="continue_follow_previous_route_auto">En tidigare navigering avbröts. Fortsätta att följa den? (%1$s sekunder)</string>
 <string name="route_updated_loc_found">Resvägen kommer att beräknas så snart positionen hittas</string>
 <string name="osmand_parking_hours">timmar</string>
@@ -225,15 +225,15 @@
 <string name="osmand_rastermaps_plugin_description">"Med denna modul får man tillgång till många typer av online-kartor, från fördefinierade Openstreetmap-rutor (som Mapnik) till satellitbilder och speciella lager såsom väderkartor, klimatkartor, geologiska kartor, reliefkartor etc.
 \n\nDessa kartor kan användas antingen som huvudkarta (baskarta) och visas på kartskärmen i OsmAnd eller som ett över- eller underlägg till en annan baskarta (som OsmAnds vanliga offline-kartor). För att göra en underliggande karta tydligare kan vissa element i OsmAnds vektorkartor lätt döljas via menyn \'Konfigurera karta\'.
 \n\nKartbitar (tile maps) kan hämtas direkt online eller förberedas för användning offline (och kopieras manuellt till OsmAnds datamapp) som en sqlite-databas som kan skapas med olika tredjepartsverktyg. "</string>
-<string name="osmand_background_plugin_description">Visa inställningarna för att aktivera spårning och navigering i viloläge (skärm av) genom att periodvis väcka GPS-enheten.</string>
+<string name="osmand_background_plugin_description">Visa inställningarna för att aktivera spårning och navigering i bakgrundsläge (skärm av) genom att periodvis väcka GPS-enheten.</string>
 
 <string name="osmand_development_plugin_description">Denna modul visar inställningarna för utvecklings- och felsökningsfunktioner som rutt-testning och -simulering eller visning av renderingsprestanda eller röststyrning. Dessa inställningar är avsedda för utvecklare och behövs inte för den vanliga användaren.</string>
 <string name="plugins_screen">Hantera insticksmoduler</string>
 <string name="tip_recent_changes_0_8_2_t">"Förändringar i 0.8.2 :\n\t* Förbättrad ruttuträkning\n\t* Widgets för dynamisk karta\n\t* Kartinställningar flyttade till kartskärmen\n\t* Lås skärm knapp med logga tjänster\n\t* Fixat arabiska, Kannada skript och RTL språk "</string>
 
 <string name="map_widget_fluorescent">Fluorescerande rutter</string>
-<string name="bg_service_sleep_mode_off">Aktivera\n viloläge</string>
-<string name="bg_service_sleep_mode_on">Stoppa\n viloläge</string>
+<string name="bg_service_sleep_mode_off">Kör\n appen i bakgrunden</string>
+<string name="bg_service_sleep_mode_on">Stoppa\n körning i bakgrunden</string>
 <string name="osmand_parking_time_limit">Tidsbegränsad parkering</string>
 <string name="osmand_parking_time_no_limit">Ej tidsbegränsad parkering</string>
 <string name="osmand_parking_position_description">Din parkerade bils position. %1$s</string>
@@ -356,8 +356,8 @@
 <string name="user_name_descr">Behövs för ändringar i openstreetmap.org</string>
 <string name="user_password">Ditt OSM-lösenord</string>
 <string name="user_password_descr">Behövs för ändringar i openstreetmap.org</string>
-<string name="osmand_service">Viloläge</string>
-<string name="osmand_service_descr">Används för att köra OsmAnd medan skärmen är avstängd</string>
+<string name="osmand_service">Bakgrundsläge</string>
+<string name="osmand_service_descr">OsmAnd körs i bakgrunden medan skärmen är avstängd</string>
 <string name="tip_rotation_switching">Kartorientering</string>
 <string name="tip_rotation_switching_t_v2">"Du kan växla mellan om och hur kartbilden roteras genom att upprepade gånger klicka på kartskärmens kompassikon.
 \n\nAlternativen är:
@@ -589,11 +589,10 @@
 <string name="use_osmand_routing_service">OsmAnd-navigering &gt;20km</string>
 <string name="use_osmand_routing_service_descr">Använd OsmAnd offline navigering gäller endast rutter &gt;20 km (experimentell)</string>
 <string name="specified_dir_doesnt_exist">Kan inte hitta den angivna mappen.</string>
-<string name="tip_recent_changes_0_8_4_t">Förändringar i 0.8.4:
-	\n\t* Några buggfixar
-	\n\t* Kartan tappar inte bort positionslås efter avbrott
-	\n\t* Aktivera viloläge under navigering
-    </string>
+<string name="tip_recent_changes_0_8_4_t">"Förändringar i 0.8.4:
+\n\t* Några buggfixar
+\n\t* Kartan tappar inte bort positionslås efter avbrott
+\n\t* Aktivera bakgrundstjänst under navigering "</string>
     <string name="context_menu_item_last_intermediate_point">Lägg till som sista waypoint</string>
     <string name="context_menu_item_first_intermediate_point">Lägg till som första waypoint</string>
     <string name="add_as_last_destination_point">Lägg till som sista waypoint</string>
@@ -607,7 +606,7 @@
     <string name="context_menu_item_intermediate_point">Lägg till som waypoint</string>
     <string name="map_widget_intermediate_distance">Waypoint</string>
     <string name="ending_point_too_far">Slutpunkten för långt från närmaste väg.</string>
-    <string name="btn_add_tag">Lägg till tagg</string>
+    <string name="add_tag">Lägg till tagg</string>
     <string name="btn_advanced_mode">Avancerat läge…</string>
     <string name="poi_filter_parking">Parkering</string>
     <string name="poi_filter_emergency">Olycksfall</string>
@@ -716,19 +715,19 @@
 	<string name="use_trackball">Använd styrkula</string>
 	<string name="background_service_wait_int_descr">Ange maximal väntetid för varje positionsbestämning i bakgrunden</string>
 	<string name="background_service_wait_int">Maximal väntetid för fix</string>
-	<string name="service_stop_background_service">Stäng av navigeringstjänsten i viloläge</string>
+	<string name="service_stop_background_service">Stäng av navigeringstjänsten i bakgrunden</string>
 	<string name="where_am_i">Var är jag?</string>
 	<string name="process_navigation_service">OsmAnd navigeringstjänst</string>
 	<string name="network_provider">Nätverk</string>
 	<string name="gps_provider">GPS</string>
 	<string name="int_seconds">sekunder</string>
-	<string name="background_service_int_descr">Ange väckningsintervall som används under viloläget</string>
+	<string name="background_service_int_descr">Ange väckningsintervall som används av bakgrundstjänsten</string>
 	<string name="background_service_int">GPS-väckningsintervall</string>
-	<string name="background_service_provider_descr">Välj platsleverantör när du kör i viloläge</string>
+	<string name="background_service_provider_descr">Välj platsleverantör för bakgrundstjänsten</string>
 	<string name="background_service_provider">Platsleverantör</string>
 	<string name="background_router_service_descr">Kör OsmAnd i bakgrunden för att spåra din position medan skärmen är avstängd</string>
-	<string name="background_router_service">Kör i viloläge</string>
-	<string name="off_router_service_no_gps_available">Tjänsten vilolägesnavigering kräver en platsleverantör för att vara påslagen.</string>
+	<string name="background_router_service">Kör OsmAnd i bakgrunden</string>
+	<string name="off_router_service_no_gps_available">Tjänsten bakgrundsnavigering kräver en platsleverantör för att vara påslagen.</string>
 	<string name="hide_poi_filter">Dölj filter</string>
 	<string name="show_poi_filter">Visa filter</string>
 	<string name="search_poi_filter">Filter</string>
@@ -867,7 +866,7 @@
     <string name="safe_mode_description">Kör program i felsäkert läge (för långsammare Android istället för inbyggd kod).</string>
     <string name="safe_mode">Felsäkert läge</string>
     <string name="native_library_not_running">Programmet körs i felsäkert läge (inaktivera det i Inställningar).</string>
-    <string name="background_service_is_enabled_question">Vilolägestjänsten körs fortfarande. Vill du avbryta den också?</string>
+    <string name="background_service_is_enabled_question">Bakgrundstjänsten körs fortfarande. Vill du avbryta den också?</string>
     
 	<string name="edit_filter_create_message">Filter {0} har skapats</string>
 	<string name="poi_error_info_not_loaded">Info om noden laddades inte</string>
@@ -1076,12 +1075,11 @@
     <string name="osmand_srtm_long_description_1000_chars">"Denna modul erbjuder både ett överlägg med konturlinjer och ett höjdkurvslager som kan visas ovanpå OsmAnds offline-kartor. Denna funktion kommer att uppskattas av idrottsmän, vandrare och alla som är intresserade av höjdskillnader i landskapet.\n\nDessa globala data (mellan 70 grader norr och 70 grader syd) är baserade på SRTM (Shuttle Radar Topography Mission) och ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), ett bildinstrument på Terra, NASA:s Earth Observing Systems satellit. ASTER är ett samarbete mellan NASA, Japans finansdepartement, Trade and Industry (METI) och Japan Space Systems (J-spacesystems). "</string>
     <string name="access_arrival_time">Ankomsttid</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
-    <string name="tip_recent_changes_1_0_0_t">Ändringar i 1.0.0:
-	\n\t* Förbättrad ruttning: snabbare, mer exakt, upp till 250 km
-	\n\t* Introduktion av kartor med bara vägar
-	\n\t* Kartan tappar inte positionslåsning efter avbrott
-	\n\t* Aktivera bakgrundsläge under navigering
-    </string>
+    <string name="tip_recent_changes_1_0_0_t">"Ändringar i 1.0.0:
+\n\t* Förbättrad ruttning: snabbare, mer exakt, upp till 250 km
+\n\t* Introduktion av kartor med bara vägar
+\n\t* Kartan tappar inte positionslåsning efter avbrott
+\n\t* Aktivera bakgrundstjänst under navigering "</string>
     <string name="tip_recent_changes_0_6_6_t">Ändringar för 0.6.6:
 	\n\t- Text till tal-motor för röstnavigering
 	\n\t- Kartrenderaren mer detaljerad
@@ -1105,7 +1103,7 @@
     <string name="cancel_navigation">Avbryt navigeringen</string>
     <string name="clear_destination">Ta bort destinationen</string>
     <string name="download_using_mobile_internet">Wi-Fi är för tillfället inte anslutet. Vill du ladda ned med din nuvarande anslutning till Internet?</string>
-    <string name="street_name">Gata</string>
+    <string name="street_name">Gatunamn</string>
 	<string name="hno">Husnummer</string>
     
     <string name="monitoring_settings_descr">Konfigurera inspelning av dina resor</string>
@@ -1286,13 +1284,13 @@
     <string name="app_mode_truck">Lastbil</string>
     <string name="routing_attr_prefer_motorway_name">Föredra motorvägar</string>
 	<string name="routing_attr_prefer_motorway_description">Föredra motorvägar</string>
-	<string name="routing_attr_avoid_toll_name">Undvik betalvägar</string>
+	<string name="routing_attr_avoid_toll_name">Betalvägar</string>
 	<string name="routing_attr_avoid_toll_description">Undvik betalvägar</string>
-	<string name="routing_attr_avoid_unpaved_name">Undvik oasfalterade vägar</string>
+	<string name="routing_attr_avoid_unpaved_name">Oasfalterade vägar</string>
 	<string name="routing_attr_avoid_unpaved_description">Undvik oasfalterade vägar</string>
-	<string name="routing_attr_avoid_ferries_name">Undvik färjor</string>
+	<string name="routing_attr_avoid_ferries_name">Färjor</string>
 	<string name="routing_attr_avoid_ferries_description">Undvik färjor</string>
-	<string name="routing_attr_avoid_motorway_name">Undvik motorvägar</string>
+	<string name="routing_attr_avoid_motorway_name">Motorvägar</string>
 	<string name="routing_attr_avoid_motorway_description">Undvik motorvägar</string>
 	<string name="routing_attr_weight_name">Viktgräns</string>
 	<string name="routing_attr_weight_description">Ange fordonsvikt tillåten på rutter</string>
@@ -1477,7 +1475,7 @@
 	<string name="gpx_info_distance">Avstånd: %1$s (%2$s punkter) </string>
 	<string name="gpx_info_start_time">Starttid: %1$tF,  %1$tT </string>
 	<string name="gpx_info_end_time">Sluttid: %1$tF,  %1$tT </string>
-	<string name="gpx_info_average_speed">Snittid: %1$s </string>
+	<string name="gpx_info_average_speed">"Genomsnittshastighet: %1$s "</string>
 	<string name="gpx_info_maximum_speed">Maxhastighet: %1$s </string>
 	<string name="gpx_info_avg_altitude">Snitthöjd: %1$s</string>
 	<string name="gpx_info_diff_altitude">Höjdskillnad: %1$s</string>
@@ -1526,16 +1524,16 @@
     <string name="osmo_group_information">Läs detta innan du skapar en grupp!</string>
     <string name="keep_navigation_service">Behåll</string>
 	<string name="stop_navigation_service">Avbryt</string>
-	<string name="enable_sleep_mode">Aktivera GPS-viloläge</string>
+	<string name="enable_sleep_mode">Aktivera GPS-bakgrundsläge</string>
 	<string name="gps_wake_up_timer">Väckningsintervall för GPS</string>
-	<string name="sleep_mode_stop_dialog">Avbryta GPS-viloläget?</string>
+	<string name="sleep_mode_stop_dialog">Avbryta GPS-bakgrundsläget?</string>
 	<string name="map_preferred_locale_descr">Föredraget språk för etiketter på kartan (växlar till engelska eller lokala namn om ej tillgängligt)</string>
     <string name="map_preferred_locale">Föredraget språk på kartan</string>
     <string name="local_map_names">Lokala namn</string>
     <string name="lang_sw">Swahili</string>
     <string name="lang_he">Hebreiska</string>
     <string name="forward">Framåt</string>
-    <string name="home">Hem</string>
+    <string name="home">Panelen</string>
     <string name="live_monitoring_m_descr">Skicka spårningsdata till en specificerad webbtjänst om GPX-loggning är aktiverad.</string>
 	<string name="live_monitoring_m">Online-spårning (GPX krävs)</string>
     <string name="live_monitoring_start">Starta online-spårning</string>
@@ -1776,7 +1774,7 @@
 	<string name="shared_string_deselect">Avmarkera</string>
 	<string name="shared_string_deselect_all">Avmarkera alla</string>
 	<string name="shared_string_clear">Töm</string>
-	<string name="shared_string_clear_all">Töm alla</string>
+	<string name="shared_string_clear_all">Ta bort alla</string>
 	<string name="shared_string_save">Spara</string>
 	<string name="shared_string_save_as_gpx">Spara som GPX-spår</string>
 	<string name="shared_string_rename">Byt namn</string>
@@ -1878,7 +1876,7 @@
 	<string name="routing_attr_height_name">Höjdgräns</string>
 	<string name="use_fast_recalculation">Smart omräkning av rutt</string>
 	<string name="use_fast_recalculation_desc">Räkna om endast början av rutten för långa resor</string>
-<string name="routing_attr_avoid_borders_name">Undvik gränsövergångar</string>
+<string name="routing_attr_avoid_borders_name">Gränsövergångar</string>
 	<string name="routing_attr_height_description">Ange tillåten fordonshöjd på rutter</string>
     <string name="osmo_share_my_location">Dela ut min plats</string>
     <string name="shared_string_logoff">Logga ut</string>
@@ -1893,7 +1891,7 @@
 	<string name="download_wikipedia_maps">Wikipedia</string>
     <string name="shared_string_import2osmand">Importera till OsmAnd</string>
     <string name="gps_network_not_enabled">Platstjänsten är inte aktiverad. Vill du slå på den?</string>
-    <string name="disable_recording_once_app_killed_descrp">Gör paus i GPX-loggningen när appen stängs (via tidigare appar). (OsmAnds vilolägesindikation försvinner från Androids aviseringsfält.)</string>
+    <string name="disable_recording_once_app_killed_descrp">Gör paus i GPX-loggningen när appen stängs (via tidigare appar). (OsmAnds bakgrundsindikation försvinner från Androids aviseringsfält.)</string>
 	<string name="archive_wikipedia_data">Du har hämtat gamla och inkompatibla data från Wikipedia. Vill du arkivera dem?</string>
     <string name="download_wikipedia_files">Vill du hämta ytterligare data från Wikipedia (%1$s MB)?</string>
     <string name="lang_vo">Volapük</string>
@@ -1968,4 +1966,34 @@
 	<string name="shared_string_undo">ÅNGRA</string>
 	<string name="shared_string_skip">Hoppa över</string>
 	<string name="app_name_osmand">OsmAnd</string>
+	<string name="routing_attr_avoid_shuttle_train_name">Pendeltåg</string>
+	<string name="routing_attr_avoid_shuttle_train_description">Undvik pendeltåg</string>
+    <string name="plugin_settings">Insticksprogram</string>
+	<string name="traffic_warning_hazard">Varning</string>
+    <string name="tab_title_basic">Grundläggande</string>
+	<string name="tab_title_advanced">Utökad</string>
+	<string name="building_number">Husnummer</string>
+	<string name="next_proceed">Nästa</string>
+	<string name="opening_at">Öppnar</string>
+	<string name="closing_at">Stänger</string>
+<string name="av_locations">Platser</string>
+    <string name="av_locations_descr">GPX-fil med anteckning om platser</string>
+    <string name="poi_dialog_poi_type">Typ av POI</string>
+	<string name="add_opening_hours">Lägg till öppettider</string>
+	<string name="description">Beskrivning</string>
+	<string name="contact_info">Kontaktinformation</string>
+	<string name="dahboard_options_dialog_title">Konfigurera panelen</string>
+	<string name="commit_poi">Skicka in POI</string>
+	<string name="tag_poi_name">namn</string>
+	<string name="tag_poi_amenity">service</string>
+	<string name="number_of_rows_in_dash">Antal rader i panelen: %1$s</string>
+<string name="please_specify_poi_type">Ange typ av POI.</string>
+<string name="favourites">Favoriter</string>
+<string name="working_days">Arbetsdagar</string>
+	<string name="recent_places">Nyliga platser</string>
+	<string name="poi_action_delete">ta bort</string>
+	<string name="saved_at_time">Sparades utan problem kl. %1$s</string>
+<string name="poi_deleted_localy">POI tas bort så snart du laddat upp dina ändringar</string>
+	<string name="show_gpx">Visa GPX</string>
+<string name="show_on_start">Visa vid start</string>
 	</resources>

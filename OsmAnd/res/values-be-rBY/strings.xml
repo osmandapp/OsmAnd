@@ -776,7 +776,7 @@
     <string name="context_menu_item_intermediate_point">Dadać jak kropku šliachu</string>
     <string name="map_widget_intermediate_distance">Kropka šliachu</string>
     <string name="ending_point_too_far">Kančatkovaja kropka zanadta dalioka ad blіžejšaj darohі.</string>
-    <string name="btn_add_tag">Dadać adznaku</string>
+    <string name="add_tag">Dadać adznaku</string>
     <string name="btn_advanced_mode">Pašyrany režym…</string>
     <string name="poi_filter_parking">Parkoŭka</string>
     <string name="poi_filter_emergency">Avaryjnyja služby</string>

@@ -28,7 +28,7 @@
     <string name="context_menu_item_intermediate_point">增為航點</string>
     <string name="map_widget_intermediate_distance">航點</string>
     <string name="ending_point_too_far">結束標點離最近的道路太遠。</string>
-    <string name="btn_add_tag">增加旗標</string>
+    <string name="add_tag">增加旗標</string>
     <string name="btn_advanced_mode">進階模式…</string>
     <string name="poi_filter_parking">停車場</string>
     <string name="poi_filter_emergency">緊急救助</string>
@@ -88,8 +88,8 @@
 	<string name="map_widget_transparent">透明面版</string>
 	
 	
-	<string name="bg_service_sleep_mode_off">開啟\n 休眠模式</string>
-	<string name="bg_service_sleep_mode_on">關閉\n 休眠模式</string>
+	<string name="bg_service_sleep_mode_off">運行\n 應用程式在背景運轉</string>
+	<string name="bg_service_sleep_mode_on">停止\n 在背景運轉</string>
 	<string name="gps_wakeup_interval">GPS 喚醒間隔：%s</string>
 	<string name="int_continuosly">繼續</string>
 	<string name="screen_is_locked">要解鎖螢幕，按下鎖圖示</string>
@@ -119,7 +119,7 @@
 	<string name="bg_service_interval">設定喚醒間隔：</string>
 	<string name="show_cameras">顯示測速照相</string>
 	<string name="show_traffic_warnings">顯示交通狀況警示</string>
-	<string name="avoid_toll_roads">避開付費道路</string>
+	<string name="avoid_toll_roads">避開收費道路</string>
 	<string name="continue_follow_previous_route_auto">先前的導航未完成。要按照它繼續嗎？ (%1$s 秒)</string>
 	<string name="route_updated_loc_found">一旦找到定位時，導航路線將重新規劃</string>
 	<string name="osmand_parking_hours">小時</string>
@@ -202,7 +202,7 @@
 	
 	<string name="osmand_rastermaps_plugin_description">"有了這個外掛元件，您可以存取多種類型的網絡（所謂的圖磚或網格）地圖，從預設的 Openstreetmap 圖磚（如 Mapnik）到衛星圖像和特殊用途的圖層，比如天氣地圖、氣候地圖、地質地圖、山體陰影層等。\n\n這些地圖可以被用來作為主要的（基本）地圖，以便在 OsmAnd 地圖螢幕上顯示，或作為覆疊層又或另外基本地圖的底層（如 OsmAnd 正常的離線地圖）。為了使任何的底層地圖可以看見，OsmAnd 向量地圖可以容易的根據需要透過 \'組態地圖\' 選單來隱藏某些構成。
 \n\n地圖圖磚可以直接透過線上資料來源獲得，或著可以使用準備好的離線地圖（手動複製到 OsmAnd 的資料檔案夾中） 作為一個 sqlite 資料庫，可以透過各種的第三方地圖編制工具產生。 "</string>
-	<string name="osmand_background_plugin_description">透過週期性的喚醒 GPS 裝置，在休眠模式下(螢幕關閉)顯示設定以啟用追蹤與導航。</string>
+	<string name="osmand_background_plugin_description">透過週期性的喚醒 GPS 裝置，在背景模式下(螢幕關閉)顯示設定，以啟用追蹤與導航。</string>
 	<string name="osmand_accessibility_description">這個外掛元件，讓裝置在 OsmAnd 可以便利的直接用無障礙功能，例如調整 TTS 語音的語音速率、組態螢幕導航方位、使用軌跡球為縮放控制，或使用文字轉語音的回應，如自動告知您的位置。</string>
 	
 	
@@ -343,8 +343,8 @@
 	<string name="user_name_descr">需要在 openstreetmap.org 註冊</string>
 	<string name="user_password">您 OSM 的密碼</string>
 	<string name="user_password_descr">需要在 openstreetmap.org 註冊</string>
-	<string name="osmand_service">休眠模式</string>
-	<string name="osmand_service_descr">螢幕關閉時執行 OsmAnd</string>
+	<string name="osmand_service">背景模式</string>
+	<string name="osmand_service_descr">當螢幕關閉時，讓 OsmAnd 在背景執行</string>
 	<string name="tip_rotation_switching">地圖方向</string>
 	<string name="tip_rotation_switching_t_v2">"在地圖畫面上您可點選羅盤的圖示，可循環切換地圖旋轉顯示方式。
 \n\n選項有：
@@ -695,20 +695,20 @@
 	<string name="use_trackball">使用軌跡球</string>
 	<string name="background_service_wait_int_descr">設定背景定位等待時間</string>
 	<string name="background_service_wait_int">定位等待時間</string>
-	<string name="service_stop_background_service">關閉 OsmAnd 休眠模式導航服務</string>
+	<string name="service_stop_background_service">關閉 OsmAnd 背景導航服務</string>
 	<string name="where_am_i">我在那兒？</string>
 	<string name="process_navigation_service">OsmAnd 導航服務</string>
 	<string name="network_provider">網路</string>
 	<string name="gps_provider">GPS</string>
 	<string name="int_seconds">秒</string>
 	<string name="int_min">分。</string>
-	<string name="background_service_int_descr">設定休眠模式背景喚醒間隔</string>
+	<string name="background_service_int_descr">設定使用在背景服務的喚醒間隔</string>
 	<string name="background_service_int">GPS 喚醒間隔</string>
-	<string name="background_service_provider_descr">選擇位置提供使用於休眠模式服務</string>
+	<string name="background_service_provider_descr">選擇位置提供，使用在背景服務</string>
 	<string name="background_service_provider">位置提供</string>
-	<string name="background_router_service_descr">當螢幕關閉時，在背景執行 OsmAnd 追蹤您的位置</string>
-	<string name="background_router_service">在背景執行</string>
-	<string name="off_router_service_no_gps_available">休眠模式導航服務，需要提供一個已開啟的位置。</string>
+	<string name="background_router_service_descr">當螢幕關閉時，讓 OsmAnd 在背景執行，追蹤您的位置</string>
+	<string name="background_router_service">在背景執行 OsmAnd</string>
+	<string name="off_router_service_no_gps_available">背景導航服務，需要提供一個已開啟的位置。</string>
 	<string name="hide_poi_filter">隱藏篩選器</string>
 	<string name="show_poi_filter">顯示篩選</string>
 	<string name="search_poi_filter">篩選</string>
@@ -770,7 +770,7 @@
 	<string name="search_history_city">縣市：{0}</string>
 	<string name="search_history_street">道路：{0}, {1}</string>
 	<string name="search_history_int_streets">交叉路口：{0} x {1} 在{2}</string>
-	<string name="search_history_building">建物：{0}, {1}, {2}</string>
+	<string name="search_history_building">建築物：{0}, {1}, {2}</string>
 	<string name="favorite">我的最愛</string>
 	<string name="uploading_data">上傳資料中…</string>
 	<string name="uploading">上傳中…</string>
@@ -809,7 +809,7 @@
 	<string name="auth_failed">授權失敗</string>
 	<string name="failed_op">失敗</string>
 	<string name="converting_names">本地/英文名稱轉換中…</string>
-	<string name="loading_streets_buildings">正在載入道路/建物…</string>
+	<string name="loading_streets_buildings">正在載入道路/建築物…</string>
 	<string name="loading_postcodes">正在載入郵遞區號…</string>
 	<string name="loading_streets">正在載入街道…</string>
 	<string name="loading_cities">正在載入縣市…</string>
@@ -855,7 +855,7 @@
 	<string name="use_english_names">在地圖上使用英文名稱</string>
 	<string name="app_settings">應用程式設定</string>
 	<string name="search_address">地址查詢</string>
-	<string name="choose_building">選取建物</string>
+	<string name="choose_building">選取建築物</string>
 	<string name="choose_street">選擇道路</string>
 	<string name="choose_city">選擇縣市</string>
 	<string name="ChooseCountry">選擇國家</string>
@@ -880,7 +880,7 @@
 	<string name="search_POI_level_btn">查尋更多</string>
 	<string name="incremental_search_city">漸進式城市查尋</string>
 	<string name="incremental_search_street">漸進式查尋街道</string>
-	<string name="incremental_search_building">漸進式查尋建物</string>
+	<string name="incremental_search_building">漸進式查尋建築物</string>
 	<string name="choose_available_region">由列表選取區域</string>
 	<string name="choose_intersected_street">選擇交叉路口</string>
 	<string name="Closest_Amenities">最近的設施</string>
@@ -902,8 +902,8 @@
 	<string name="search_address_region">地區</string>
 	<string name="search_address_city">縣市</string>
 	<string name="search_address_street">道路</string>
-	<string name="search_address_building">建物</string>
-	<string name="search_address_building_option">建物</string>
+	<string name="search_address_building">建築物</string>
+	<string name="search_address_building_option">建築物</string>
 	<string name="search_address_street_option">交叉路口</string>
 	<string name="search_tabs_location">位置</string>
 	
@@ -937,7 +937,7 @@
 	<string name="osb_close_dialog_error">發生異常：評論未關閉</string>
 	<string name="poi_edit_title">編輯興趣點</string>
 	<string name="poi_create_title">建立興趣點</string>
-	<string name="poi_error_poi_not_found">找不到節點或設施不是單一的節點</string>
+	<string name="poi_error_poi_not_found">找不到節點或者便利設施不是單一的節點</string>
 	<string name="poi_remove_confirm_template">刪除 {0} (輸入評論)？</string>
 	<string name="poi_remove_title">刪除興趣點</string>
 	<string name="poi_remove_success">興趣點刪除成功</string>
@@ -990,7 +990,7 @@
     <string name="cancel_navigation">停止導航</string>
     <string name="clear_destination">清除目的地</string>
     <string name="download_using_mobile_internet">WiFi 現在並未連線。您想要使用目前的網路連線下載嗎？</string>
-    <string name="street_name">街道</string>
+    <string name="street_name">街道名稱</string>
 	<string name="hno">門牌號碼</string>
     <string name="monitoring_settings">旅程錄製</string>
     <string name="monitoring_settings_descr">組態如何錄製您的旅程</string>
@@ -1100,14 +1100,14 @@
     <string name="route_descr_current_location">目前位置</string>
     
     
-    <string name="no_buildings_found">無建築物符合。</string>
+    <string name="no_buildings_found">未找到建築物。</string>
     <string name="search_villages_and_postcodes">查尋更多城鎮/郵遞區號</string>
 	<string name="rendering_attr_showRoadMaps_description">選擇何時顯示僅有道路的地圖：</string>
 	<string name="rendering_attr_showRoadMaps_name">僅有道路的地圖</string>
     <string name="safe_mode_description">應用程式執行在安全模式下(使用較慢的 Android 而非原生碼)。</string>
     <string name="safe_mode">安全模式</string>
     <string name="native_library_not_running">應用程式在安全模式中執行(在設定裡停用它)。</string>
-    <string name="background_service_is_enabled_question">OsmAnd 休眠模式服務仍在執行，您想要中斷嗎？</string>
+    <string name="background_service_is_enabled_question">OsmAnd 服務仍在背景執行，您想要中斷嗎？</string>
     <string name="osmand_play_title_30_chars">OsmAnd 地圖和導航</string>
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ 地圖和導航</string>
 	<string name="native_app_allocated_memory_descr">原生記憶體總計由應用程式 %1$s MB (Dalvik %2$s MB，其它 %3$s MB) 。Proportional memory %4$s MB (Android 限制 %5$s MB，Dalvik %6$s MB)分配佔用。</string>
@@ -1292,21 +1292,21 @@
     <string name="keep_intermediate_points">保留中間點</string>
     <string name="new_directions_point_dialog">您已經有中間點設定。</string>
     <string name="context_menu_item_directions_to">導引到</string>
-    <string name="context_menu_item_directions_from">從此導引</string>
+    <string name="context_menu_item_directions_from">導引由</string>
     <string name="route_descr_map_location">地圖： </string>
     <string name="route_to">到：</string>
     <string name="route_via">經過：</string>
     <string name="route_from">從：</string>
     
 	
-    <string name="speak_speed_limit">通報速限</string>
-    <string name="speak_cameras">通報測速照相</string>
-	<string name="speak_traffic_warnings">通報交通流量警示</string>
+    <string name="speak_speed_limit">速度限制</string>
+    <string name="speak_cameras">測速照相</string>
+	<string name="speak_traffic_warnings">交通流量警示</string>
 	<string name="osb_author_dialog_password">OSM 密碼 (選項)</string>
-	<string name="announce_gpx_waypoints">通報 GPX 航點</string>
+	<string name="announce_gpx_waypoints">GPX 航點</string>
     <string name="speak_title">通報…</string>
 	<string name="speak_descr">組態通報街道名稱、交通流量警示（強制停止、減速丘）、測速照相警告、速限</string>
-	<string name="speak_street_names">通報街道名稱 (TTS)</string>
+	<string name="speak_street_names">街道名稱 (TTS)</string>
         
     
     <string name="driving_region_descr">選擇駕駛區域：美國、歐洲、英國、亞洲和其它</string>
@@ -1407,7 +1407,7 @@
 	<string name="routing_attr_short_way_description">使用最短路線</string>
 	<string name="routing_attr_avoid_toll_name">避開收費道路</string>
 	<string name="routing_attr_avoid_toll_description">避開收費道路</string>
-	<string name="routing_attr_avoid_unpaved_name">避開未鋪路面</string>
+	<string name="routing_attr_avoid_unpaved_name">避開未鋪設路面</string>
 	<string name="routing_attr_avoid_unpaved_description">避開未鋪路面</string>
 	<string name="routing_attr_avoid_ferries_name">避開渡輪</string>
 	<string name="routing_attr_avoid_ferries_description">避開渡輪</string>
@@ -1657,7 +1657,7 @@
     <string name="lang_sw">斯瓦希里</string>
     <string name="lang_he">希伯來</string>
     <string name="forward">往前</string>
-    <string name="home">首頁</string>
+    <string name="home">儀表板</string>
     <string name="live_monitoring_m">線上即時追蹤 (需要 GPX)</string>
     <string name="live_monitoring_start">開始線上即時追蹤</string>
 	<string name="live_monitoring_stop">停止線上即時追蹤</string>
@@ -1669,9 +1669,9 @@
     <string name="live_monitoring_m_descr">如果已啟用了 GPX 記錄，傳送軌跡資料到指定的 web 服務。</string>
 	<string name="keep_navigation_service">保持</string>
 	<string name="stop_navigation_service">中斷</string>
-	<string name="enable_sleep_mode">啟用 GPS 休眠模式</string>
+	<string name="enable_sleep_mode">啟用 GPS 背景模式</string>
 	<string name="gps_wake_up_timer">GPS 喚醒間隔</string>
-	<string name="sleep_mode_stop_dialog">要中斷 GPS 休眠模式嗎？</string>
+	<string name="sleep_mode_stop_dialog">要中斷 GPS 背景模式嗎？</string>
 	<string name="lang_al">阿爾巴尼亞</string>
 	<string name="lang_ar">阿拉伯</string>
 	<string name="lang_sc">薩丁尼亞島</string>
@@ -1707,8 +1707,8 @@
     <string name="waypoints">航點</string>
     <string name="targets">目的地</string>
     <string name="way_alarms">交通狀況提醒</string>
-    <string name="speak_favorites">通報附近我的最愛</string>
-    <string name="speak_poi">通報附近 POI</string>
+    <string name="speak_favorites">附近我的最愛</string>
+    <string name="speak_poi">附近的興趣點</string>
     <string name="shared_string_all">全部</string>
     <string name="index_tours">旅遊</string>
     <string name="record_plugin_description">"這個外掛元件在地圖螢幕上，以手動點觸 GPX 記錄小工具，以啟動去錄製和儲存您軌跡的功能，或是自動記錄您所有的導航路線到 GPX 檔案。\n\n錄製的軌跡可以與您的朋友共享或用作為 OSM 的貢獻。運動選手可以使用錄製的軌跡，監看他們的訓練。一些基本的軌跡分析，可以直接在 OsmAnd 進行，如一圈的時間、平均速度等，而軌跡當然也可於事後在專門的第三方分析工具解析。 "</string>
@@ -1805,7 +1805,7 @@
 	<string name="traffic_warning_pedestrian">行人穿越道</string>
 	<string name="show_railway_warnings">顯示鐵路平交道</string>
 	<string name="show_pedestrian_warnings">顯示行人穿越道</string>
-    <string name="speak_pedestrian">通報行人穿越道</string>
+    <string name="speak_pedestrian">行人穿越道</string>
     
 	<string name="navigation_over_track">沿著軌跡開始導航嗎？</string>
 	<string name="avoid_roads_msg">您可以觸發一條替代線路，經由選擇道路去避免</string>
@@ -1983,7 +1983,7 @@
     <string name="storage_directory">地圖存儲</string>
     <string name="shared_string_copy">複製</string>
     <string name="rendering_attr_hideHouseNumbers_name">隱藏門牌號碼</string>
-    <string name="routing_attr_avoid_borders_name">防止越過邊境</string>
+    <string name="routing_attr_avoid_borders_name">避開越過邊境</string>
 	<string name="routing_attr_avoid_borders_description">防止越過邊界進入別國</string>
 	<string name="routing_attr_height_name">高度限制</string>
 	<string name="routing_attr_height_description">指定許可在路線行駛的車輛高度</string>
@@ -2004,7 +2004,7 @@
     <string name="local_recordings_delete_all_confirm">您要刪除 %1$d 的注解。您確定嗎？</string>
 	<string name="gps_network_not_enabled">未啟用位置服務。您想要開啟它嗎？</string>
     <string name="disable_recording_once_app_killed">預防單獨的日誌記錄</string>
-    <string name="disable_recording_once_app_killed_descrp">當應用程式被停止，將暫停 GPX 日誌記錄 (藉由新的應用程式)。(OsmAnd 睡眠模式指示，從通知列消失。)</string>
+    <string name="disable_recording_once_app_killed_descrp">當應用程式被停止，將暫停 GPX 日誌記錄 (藉由新的應用程式)。(OsmAnd 背景標示，從通知列消失。)</string>
 	<string name="archive_wikipedia_data">您已下載有，舊的且不相容的維基百科資料。您想要將其存檔嗎？</string>
     <string name="download_wikipedia_files">您想要下載所增加的維基百科資料 (%1$s MB) 嗎？</string>
     <string name="lang_vo">沃拉普克語</string>
@@ -2075,11 +2075,40 @@
     <string name="we_really_care_about_your_opinion">我們很在乎您的意見，並且聽到您的反映對我們來說是很重要的。</string>
 	<string name="rendering_value_boldOutline_name">粗外框</string>
     <string name="traffic_warning_hazard">危險</string>
-    <string name="dahboard_options_dialog_title">儀表板選項</string>
+    <string name="dahboard_options_dialog_title">組態儀表板</string>
 	<string name="shared_string_card_was_hidden">卡為隱藏</string>
 	<string name="shared_string_undo">復原</string>
 	<string name="shared_string_skip">跳過</string>
 	<string name="app_name_osmand">OsmAnd</string>
 	<string name="offline_maps_and_navigation">離線地圖\n和導航</string>
 <string name="commit_poi">提交興趣點</string>
-</resources>
+<string name="routing_attr_avoid_shuttle_train_name">往返避開鐵路</string>
+	<string name="routing_attr_avoid_shuttle_train_description">往返避開鐵路</string>
+    <string name="plugin_settings">外掛元件</string>
+	<string name="tab_title_basic">基本</string>
+	<string name="tab_title_advanced">展開</string>
+	<string name="building_number">門牌號碼</string>
+	<string name="opening_at">營業于</string>
+	<string name="closing_at">結束于</string>
+<string name="next_proceed">下頁</string>
+	<string name="av_locations_descr">Gpx 檔案偕同地點注解</string>
+    <string name="av_locations">地點</string>
+    <string name="tag_poi_name">名稱</string>
+	<string name="tag_poi_amenity">便利設施</string>
+	<string name="contact_info">連絡資訊</string>
+	<string name="description">記述</string>
+	<string name="add_opening_hours">增加營業時間</string>
+	<string name="poi_dialog_poi_type">興趣點類型</string>
+<string name="number_of_rows_in_dash">在長劃 %1$s 的行數</string>
+<string name="please_specify_poi_type">請指定興趣點類型。</string>
+<string name="poi_action_delete">删除</string>
+	<string name="working_days">工作日</string>
+	<string name="recent_places">最近的地點</string>
+	<string name="favourites">我的最愛</string>
+<string name="saved_at_time">已順利的儲存於：%1$s</string>
+<string name="poi_deleted_localy">一旦您上傳您的變更，興趣點會被刪除</string>
+	<string name="show_gpx">顯示 GPX</string>
+<string name="count_of_lines">計算行數</string>
+<string name="show_on_start">在開始上顯示</string>
+	<string name="address_unknown">還不知道地址</string>
+    </resources>

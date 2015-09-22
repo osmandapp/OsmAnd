@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:osmand="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        osmand:theme="?attr/new_app_theme">
 
-        <TextView
+        <net.osmand.plus.widgets.TextViewEx
             android:id="@+id/contactInfoTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:text="Contact info"
-            android:textColor="@color/color_black"/>
+            android:layout_marginTop="18dp"
+            android:text="@string/contact_info"
+            android:textColor="?android:textColorPrimary"
+            osmand:typeface="@string/font_roboto_medium"/>
 
         <ImageView
             android:id="@+id/streetImageView"
@@ -27,8 +31,8 @@
             android:id="@+id/streetEditText"
             style="@style/create_poi_text_field"
             android:layout_below="@id/contactInfoTextView"
-            android:hint="Street"
-            android:inputType="text"/>
+            android:hint="@string/street_name"
+            android:inputType="textMultiLine"/>
 
         <ImageView
             android:id="@+id/houseNumberImageView"
@@ -40,7 +44,7 @@
             android:id="@+id/houseNumberEditText"
             style="@style/create_poi_text_field"
             android:layout_below="@id/streetEditText"
-            android:hint="35"
+            android:hint="@string/building_number"
             android:inputType="text"/>
 
         <ImageView
@@ -53,7 +57,7 @@
             android:id="@+id/phoneEditText"
             style="@style/create_poi_text_field"
             android:layout_below="@id/houseNumberEditText"
-            android:hint="Phone"
+            android:hint="@string/phone"
             android:inputType="phone"/>
 
         <ImageView
@@ -66,7 +70,7 @@
             android:id="@+id/webSiteEditText"
             style="@style/create_poi_text_field"
             android:layout_below="@id/phoneEditText"
-            android:hint="Web site"
+            android:hint="@string/website"
             android:inputType="textUri"/>
 
         <ImageView
@@ -80,31 +84,51 @@
             style="@style/create_poi_text_field"
             android:layout_width="match_parent"
             android:layout_below="@id/webSiteEditText"
-            android:hint="Description"
+            android:hint="@string/description"
             android:inputType="textMultiLine"/>
 
-        <TextView
+        <net.osmand.plus.widgets.TextViewEx
             android:id="@+id/openHoursTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/descriptionEditText"
             android:layout_marginLeft="16dp"
-            android:text="Open hours"
-            android:textColor="@color/color_black"/>
+            android:layout_marginTop="18dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/opening_hours"
+            android:textColor="?android:textColorPrimary"
+            osmand:typeface="@string/font_roboto_medium"/>
+
+        <LinearLayout
+            android:id="@+id/openHoursContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/openHoursTextView"
+            android:orientation="vertical"
+            android:layout_marginBottom="4dp"/>
 
         <ImageView
-            android:id="@+id/openHoursImageView"
+            android:id="@+id/openingHoursImageView"
             style="@style/edit_poi_imageview_style"
-            android:layout_below="@id/openHoursTextView"
+            android:layout_below="@id/openHoursContainer"
+            android:layout_marginTop="12dp"
             tools:src="@drawable/ic_action_time"/>
 
-        <EditText
-            android:id="@+id/openHoursEditText"
-            style="@style/create_poi_text_field"
-            android:layout_width="match_parent"
-            android:layout_below="@id/openHoursTextView"
-            android:hint="Mo-Su 08:00-20:00"
-            android:inputType="textMultiLine"/>
+        <net.osmand.plus.widgets.ButtonEx
+            android:id="@+id/addOpeningHoursButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/openHoursContainer"
+            android:layout_marginLeft="72dp"
+            android:text="@string/add_opening_hours"
+            android:textSize="@dimen/default_sub_text_size"
+            osmand:typeface="@string/font_roboto_medium"/>
 
+        <!--XXX due to bug in NestedScrollView-->
+        <Space
+            android:id="@+id/screenFiller"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:visibility="visible"/>
     </RelativeLayout>
 </android.support.v4.widget.NestedScrollView>

@@ -310,7 +310,7 @@ public class RouteResultPreparation {
 				additional.append("rtime = \"").append(res.getRoutingTime()).append("\" ");
 				additional.append("name = \"").append(name).append("\" ");
 //				float ms = res.getSegmentSpeed();
-				float ms = res.getObject().getMaximumSpeed();
+				float ms = res.getObject().getMaximumSpeed(res.isForwardDirection());
 				if(ms > 0) {
 					additional.append("maxspeed = \"").append(ms * 3.6f).append("\" ").append(res.getObject().getHighway()).append(" ");
 				}
@@ -600,11 +600,12 @@ public class RouteResultPreparation {
 //				mpi = MapUtils.degreesDiff(prev.getBearingEnd(), begin);
 			}
 			if (mpi >= TURN_DEGREE_MIN) {
-				if (mpi < 60) {
+				if (mpi < 45) {
+					// Slight turn detection here causes many false positives where drivers would expect a "normal" TL. Best use limit-angle=TURN_DEGREE_MIN, this reduces TSL to the turn-lanes cases.
 					t = TurnType.valueOf(TurnType.TSLL, leftSide);
 				} else if (mpi < 120) {
 					t = TurnType.valueOf(TurnType.TL, leftSide);
-				} else if (mpi < 135 || leftSide) {
+				} else if (mpi < 150 || leftSide) {
 					t = TurnType.valueOf(TurnType.TSHL, leftSide);
 				} else {
 					t = TurnType.valueOf(TurnType.TU, leftSide);
@@ -612,11 +613,11 @@ public class RouteResultPreparation {
 				int[] lanes = getTurnLanesInfo(prev, t.getValue());
 				t.setLanes(lanes);
 			} else if (mpi < -TURN_DEGREE_MIN) {
-				if (mpi > -60) {
+				if (mpi > -45) {
 					t = TurnType.valueOf(TurnType.TSLR, leftSide);
 				} else if (mpi > -120) {
 					t = TurnType.valueOf(TurnType.TR, leftSide);
-				} else if (mpi > -135 || !leftSide) {
+				} else if (mpi > -150 || !leftSide) {
 					t = TurnType.valueOf(TurnType.TSHR, leftSide);
 				} else {
 					t = TurnType.valueOf(TurnType.TRU, leftSide);

@@ -1,24 +1,6 @@
 package net.osmand.plus.parkingpoint;
 
 
-import java.util.Calendar;
-
-import net.osmand.data.LatLon;
-import net.osmand.plus.ApplicationMode;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
-import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.OsmandSettings.CommonPreference;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.views.AnimateDraggingMapThread;
-import net.osmand.plus.views.MapInfoLayer;
-import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -33,6 +15,26 @@ import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.TimePicker;
+
+import net.osmand.data.LatLon;
+import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.CommonPreference;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.dashboard.tools.DashFragmentData;
+import net.osmand.plus.views.AnimateDraggingMapThread;
+import net.osmand.plus.views.MapInfoLayer;
+import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.mapwidgets.TextInfoWidget;
+
+import java.util.Calendar;
 
 /**
  * 
@@ -558,5 +560,11 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 			timeLimitDesc.append(getFormattedTime(getParkingTime(),ctx));
 		}
 		return ctx.getString(R.string.osmand_parking_position_description, timeLimitDesc.toString());
+	}
+
+	@Override
+	public DashFragmentData getCardFragment() {
+		return new DashFragmentData(DashParkingFragment.TAG, DashParkingFragment.class,
+				R.string.osmand_parking_plugin_name, 5);
 	}
 }

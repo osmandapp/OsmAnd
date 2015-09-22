@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/LinearLayout1"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:layout_marginLeft="5dip"
-    android:layout_marginRight="5dip"
-    android:background="@color/color_white">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:id="@+id/LinearLayout1"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              android:layout_marginLeft="5dip"
+              android:layout_marginRight="5dip"
+              android:background="@color/color_white">
 
     <ImageView
         android:layout_marginLeft="14dip"
@@ -15,19 +16,23 @@
         android:layout_height="wrap_content"
         android:visibility="gone"
         android:gravity="center"
-        android:layout_gravity="center_vertical" />
+        android:layout_gravity="center_vertical"
+        tools:visibility="visible"
+        tools:background="@drawable/ic_action_delete_dark"/>
 
     <TextView
         android:id="@+id/title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="12dip"
+        android:layout_marginLeft="16dp"
+        tools:drawableLeft="@drawable/ic_action_search_dark"
         android:layout_marginTop="11dip"
         android:layout_marginBottom="11dip"
         android:gravity="center_vertical"
         android:text="@string/layer_poi"
         android:textSize="@dimen/default_list_text_size"
         android:textColor="@color/color_black"
+        android:drawablePadding="24dp"
         android:layout_weight="1" />
 
     <LinearLayout

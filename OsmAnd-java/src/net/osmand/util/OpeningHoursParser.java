@@ -1,7 +1,6 @@
 package net.osmand.util;
 /* Can be commented out in order to run the main function separately */
 
-
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -39,7 +38,7 @@ public class OpeningHoursParser {
 	 * 
 	 * @author sander
 	 */
-	public static class OpeningHours {
+	public static class OpeningHours implements Serializable {
 		
 		/**
 		 * list of the different rules
@@ -109,15 +108,6 @@ public class OpeningHoursParser {
 			String ruleOpen = null;
 			String ruleClosed = null;
 			for (OpeningHoursRule r : rules){
-				if(r.containsDay(cal) && r.containsMonth(cal)){
-					if(r.isOpenedForTime(cal, false)) {
-						ruleOpen = r.toRuleString(true);
-					} else {
-						ruleClosed = r.toRuleString(true);
-					}
-				}
-			}
-			for (OpeningHoursRule r : rules){
 				if(r.containsPreviousDay(cal) && r.containsMonth(cal)){
 					if(r.isOpenedForTime(cal, true)) {
 						ruleOpen = r.toRuleString(true);
@@ -126,6 +116,16 @@ public class OpeningHoursParser {
 					}
 				}
 			}
+			for (OpeningHoursRule r : rules){
+				if(r.containsDay(cal) && r.containsMonth(cal)){
+					if(r.isOpenedForTime(cal, false)) {
+						ruleOpen = r.toRuleString(true);
+					} else {
+						ruleClosed = r.toRuleString(true);
+					}
+				}
+			}
+			
 			if(ruleOpen != null) {
 				return ruleOpen;
 			}
@@ -147,7 +147,18 @@ public class OpeningHoursParser {
 			return s.substring(0, s.length()-2);
 		}
 
-		
+		public String toStringNoMonths() {
+			StringBuilder s = new StringBuilder();
+			if (rules.isEmpty()) {
+				return "";
+			}
+
+			for (OpeningHoursRule r : rules) {
+				s.append(r.toRuleString(true)).append("; ");
+			}
+
+			return s.substring(0, s.length()-2);
+		}
 		
 	}
 	
@@ -158,7 +169,7 @@ public class OpeningHoursParser {
 	 *  - a collection of days/dates
 	 *  - a time range
 	 */
-	public static interface OpeningHoursRule {
+	public static interface OpeningHoursRule extends Serializable {
 		
 		/**
 		 * Check if, for this rule, the feature is opened for time "cal"
@@ -200,7 +211,7 @@ public class OpeningHoursParser {
 	 * This implementation only supports month, day of weeks and numeral times, or the value "off"
 	 *
 	 */
-	public static class BasicOpeningHourRule  implements OpeningHoursRule, Serializable {
+	public static class BasicOpeningHourRule  implements OpeningHoursRule {
 		/**
 		 * represents the list on which days it is open.
 		 * Day number 0 is MONDAY
@@ -396,28 +407,13 @@ public class OpeningHoursParser {
 			}
 			// Day
 			boolean open24_7 = true;
-			dash  = false;
-			first = true;
 			for (int i = 0; i < 7; i++) {
-				if (days[i]) {
-					if (i > 0 && days[i - 1] && i < 6 && days[i + 1]) {
-						if (!dash) {
-							dash = true;
-							b.append("-"); //$NON-NLS-1$
-						}
-						continue;
-					}
-					if (first) {
-						first = false;
-					} else if (!dash) {
-						b.append(", "); //$NON-NLS-1$
-					}
-					b.append(daysStr[i]);
-					dash = false;
-				} else {
+				if (!days[i]) {
 					open24_7 = false;
+					break;
 				}
 			}
+			appendDaysString(b);
 			// Time
 			if (startTimes == null || startTimes.length == 0){
 				b.append(" off ");
@@ -441,10 +437,33 @@ public class OpeningHoursParser {
 			}
 			return b.substring(0, b.length()-1);
 		}
-		
+
 		@Override
 		public String toString() {
 			return toRuleString(false);
+		}
+
+		public void appendDaysString(StringBuilder builder) {
+			boolean dash  = false;
+			boolean first = true;
+			for (int i = 0; i < 7; i++) {
+				if (days[i]) {
+					if (i > 0 && days[i - 1] && i < 6 && days[i + 1]) {
+						if (!dash) {
+							dash = true;
+							builder.append("-"); //$NON-NLS-1$
+						}
+						continue;
+					}
+					if (first) {
+						first = false;
+					} else if (!dash) {
+						builder.append(", "); //$NON-NLS-1$
+					}
+					builder.append(daysStr[i]);
+					dash = false;
+				}
+			}
 		}
 
 		/**
@@ -593,7 +612,8 @@ public class OpeningHoursParser {
 		String timeSubstr = r.substring(k);
 		String[] times = timeSubstr.split(",");
 		boolean timesExist = true;
-		for (String time : times) {
+		for (int i = 0; i < times.length; i++) {
+			String time = times[i];
 			time = time.trim();
 			if(time.length() == 0){
 				continue;
@@ -608,6 +628,9 @@ public class OpeningHoursParser {
 			}
 			String[] stEnd = time.split("-"); //$NON-NLS-1$
 			if (stEnd.length != 2) {
+				if (i == times.length - 1 && basic.getStartTime() == 0 && basic.getEndTime() == 0) {
+					return false;
+				}
 				continue;
 			}
 			timesExist = true;
@@ -698,8 +721,8 @@ public class OpeningHoursParser {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(new SimpleDateFormat("dd.MM.yyyy HH:mm").parse(time));
 		boolean calculated = hours.isOpenedForTime(cal);
-		System.out.printf("  %sok: Expected %s: %b = %b\n",
-			((calculated != expected) ? "NOT " : ""), time, expected, calculated);
+		System.out.printf("  %sok: Expected %s: %b = %b (rule %s)\n",
+			((calculated != expected) ? "NOT " : ""), time, expected, calculated, hours.getCurrentRuleTime(cal));
         if(calculated != expected) {
             throw new IllegalArgumentException("BUG!!!");
         }
@@ -712,6 +735,12 @@ public class OpeningHoursParser {
 		System.out.println(hours);
 		testOpened("09.08.2012 11:00", hours, true);
 		testOpened("09.08.2012 16:00", hours, false);
+		
+		hours = parseOpenedHours("Mo-Fr 11:30-15:00,17:30-23:00; Sa-Su,PH 11:30-23:00");
+		System.out.println(hours);
+		testOpened("7.09.2015 14:54", hours, true);
+		testOpened("7.09.2015 15:05", hours, false);
+		
 
 		// two time and date ranges
 		hours = parseOpenedHours("Mo-We, Fr 08:30-14:40,15:00-19:00"); //$NON-NLS-1$

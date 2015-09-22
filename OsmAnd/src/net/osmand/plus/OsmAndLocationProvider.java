@@ -8,6 +8,7 @@ import java.util.List;
 
 import net.osmand.GeoidAltitudeCorrection;
 import net.osmand.PlatformUtil;
+import net.osmand.ResultMatcher;
 import net.osmand.access.NavigationInfo;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
@@ -218,10 +219,6 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		locationSimulation = new OsmAndLocationSimulation(app, this);
 	}
 	
-	public RouteDataObject findRoute(double lat , double lon) {
-		return currentPositionHelper.runUpdateInThreadCatch(lat, lon);
-	}
-
 	public void resumeAllUpdates() {
 		final LocationManager service = (LocationManager) app.getSystemService(Context.LOCATION_SERVICE);
 		if(app.getSettings().isInternetConnectionAvailable()) {
@@ -845,6 +842,10 @@ public class OsmAndLocationProvider implements SensorEventListener {
 
 	public RouteDataObject getLastKnownRouteSegment() {
 		return currentPositionHelper.getLastKnownRouteSegment(getLastKnownLocation());
+	}
+	
+	public void getRouteSegment(net.osmand.Location loc, ResultMatcher<RouteDataObject> result) {
+		currentPositionHelper.getRouteSegment(loc, result);
 	}
 
 	public net.osmand.Location getLastKnownLocation() {

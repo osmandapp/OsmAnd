@@ -1,12 +1,16 @@
 package net.osmand.plus.dialogs;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnMultiChoiceClickListener;
+import android.content.Intent;
+import android.support.v7.app.AlertDialog;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import net.osmand.access.AccessibleToast;
+import net.osmand.core.android.MapRendererContext;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.ContextMenuAdapter.OnRowItemClick;
@@ -20,7 +24,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.PluginActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.activities.TransportRouteHelper;
-import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.render.RendererRegistry;
@@ -28,21 +31,18 @@ import net.osmand.plus.views.GPXLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.RouteLayer;
 import net.osmand.plus.views.corenative.NativeCoreContext;
-import gnu.trove.list.array.TIntArrayList;
-import net.osmand.core.android.MapRendererContext;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleStorageProperties;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.DialogInterface.OnMultiChoiceClickListener;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+
+import gnu.trove.list.array.TIntArrayList;
 
 public class ConfigureMapMenu {
 
@@ -473,7 +473,7 @@ public class ConfigureMapMenu {
 
 	protected void showPreferencesDialog(final ContextMenuAdapter adapter, final ArrayAdapter<?> a, final int pos, final MapActivity activity, 
 			String category, List<RenderingRuleProperty> ps, final List<CommonPreference<Boolean>> prefs) {
-		Builder bld = new AlertDialog.Builder(activity);
+		AlertDialog.Builder bld = new AlertDialog.Builder(activity);
 		boolean[] checkedItems = new boolean[prefs.size()];
 		for (int i = 0; i < prefs.size(); i++) {
 			checkedItems[i] = prefs.get(i).get();

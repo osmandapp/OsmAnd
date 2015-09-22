@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.CallbackWithObject;
+import net.osmand.Location;
+import net.osmand.ResultMatcher;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmAndFormatter;
@@ -19,7 +21,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
-import android.os.AsyncTask;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -143,33 +144,32 @@ public class AvoidSpecificRoads {
 		});
 	}
 	private void findRoad(final MapActivity activity, final LatLon loc) {
-		new AsyncTask<LatLon, Void, RouteDataObject>() {
-			Exception e = null;
+		Location ll = new Location("");
+		ll.setLatitude(loc.getLatitude());
+		ll.setLongitude(loc.getLongitude());
+		app.getLocationProvider().getRouteSegment(ll, new ResultMatcher<RouteDataObject>() {
 
 			@Override
-			protected RouteDataObject doInBackground(LatLon... params) {
-				try {
-					return app.getLocationProvider().findRoute(loc.getLatitude(), loc.getLongitude());
-				} catch (Exception e) {
-					this.e = e;
-					e.printStackTrace();
-					return null;
-				}
-			}
-			
-			protected void onPostExecute(RouteDataObject result) {
-				if(e != null) {
+			public boolean publish(RouteDataObject object) {
+				if(object == null) {
 					Toast.makeText(activity, R.string.error_avoid_specific_road, Toast.LENGTH_LONG).show();
-				} else if(result != null) {
-					getBuilder().addImpassableRoad(result);
+				} else {
+					getBuilder().addImpassableRoad(object);
 					RoutingHelper rh = app.getRoutingHelper();
 					if(rh.isRouteCalculated() || rh.isRouteBeingCalculated()) {
 						rh.recalculateRouteDueToSettingsChange();
 					}
 					showDialog(activity);
 				}
-			};
-		}.execute(loc);
+				return true;
+			}
+
+			@Override
+			public boolean isCancelled() {
+				return false;
+			}
+			
+		});
 	}
 	
 	public static void showOnMap(OsmandApplication app, Activity a, double lat, double lon, String name,

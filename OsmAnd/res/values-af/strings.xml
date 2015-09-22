@@ -972,7 +972,7 @@
     <string name="context_menu_item_intermediate_point">Voeg by as oorgangspunt</string>
     <string name="map_widget_intermediate_distance">Oorgangspunt</string>
     <string name="ending_point_too_far">Eindpunt te ver van naaste pad.</string>
-    <string name="btn_add_tag">Voeg naamplaatjie by</string>
+    <string name="add_tag">Voeg naamplaatjie by</string>
     <string name="btn_advanced_mode">Gevorderde gebruikswyse…</string>
     <string name="poi_filter_parking">Parkering</string>
     <string name="poi_filter_emergency">Noodgeval</string>

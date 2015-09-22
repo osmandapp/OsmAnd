@@ -11,14 +11,13 @@ import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
 import net.osmand.Location;
-import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.Amenity;
-import net.osmand.data.PointDescription;
 import net.osmand.data.Amenity.AmenityRoutePoint;
 import net.osmand.data.LocationPoint;
+import net.osmand.data.PointDescription;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -258,7 +257,13 @@ public class WaypointHelper {
 	
 	public AlarmInfo calculateMostImportantAlarm(RouteDataObject ro, Location loc, 
 			MetricsConstants mc, boolean showCameras) {
-		float mxspeed = ro.getMaximumSpeed();
+		boolean direction = true;
+		if(loc.hasBearing()) {
+			double diff = MapUtils.alignAngleDifference(ro.directionRoute(0, true) -  
+					loc.getBearing() / (2 * Math.PI));
+			direction = Math.abs(diff) < Math.PI;
+		}
+		float mxspeed = ro.getMaximumSpeed(direction);
 		float delta = app.getSettings().SPEED_LIMIT_EXCEED.get() / 3.6f;
 		AlarmInfo speedAlarm = createSpeedAlarm(mc, mxspeed, loc, delta);
 		if (speedAlarm != null) {
@@ -330,15 +335,15 @@ public class WaypointHelper {
 								point.getLatitude(), point.getLongitude()) - lwp.getDeviationDistance());
 						Integer state = locationPointsStates.get(point);
 						if (state != null && state.intValue() == ANNOUNCED_ONCE
-								&& getVoiceRouter().isDistanceLess(lastKnownLocation.getSpeed(), d1, SHORT_ANNOUNCE_RADIUS)) {
+								&& getVoiceRouter().isDistanceLess(lastKnownLocation.getSpeed(), d1, SHORT_ANNOUNCE_RADIUS, 0f)) {
 							locationPointsStates.put(point, ANNOUNCED_DONE);
 							announcePoints.add(lwp);
 						} else if (type != ALARMS && (state == null || state == NOT_ANNOUNCED)
-								&& getVoiceRouter().isDistanceLess(lastKnownLocation.getSpeed(), d1, LONG_ANNOUNCE_RADIUS)) {
+								&& getVoiceRouter().isDistanceLess(lastKnownLocation.getSpeed(), d1, LONG_ANNOUNCE_RADIUS, 0f)) {
 							locationPointsStates.put(point, ANNOUNCED_ONCE);
 							approachPoints.add(lwp);
 						} else if (type == ALARMS && (state == null || state == NOT_ANNOUNCED)
-								&& getVoiceRouter().isDistanceLess(lastKnownLocation.getSpeed(), d1, ALARMS_ANNOUNCE_RADIUS)) {
+								&& getVoiceRouter().isDistanceLess(lastKnownLocation.getSpeed(), d1, ALARMS_ANNOUNCE_RADIUS, 0f)) {
 							locationPointsStates.put(point, ANNOUNCED_ONCE);
 							approachPoints.add(lwp);
 						}

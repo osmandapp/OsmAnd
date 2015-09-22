@@ -135,7 +135,7 @@ public class FavoriteDialogs {
 				point.setName(editText.getText().toString().trim());
 				point.setDescription(description.getText().toString().trim());
 				point.setCategory(categoryStr);
-				Builder bld = FavouritesDbHelper.checkDublicates(point, helper, activity);
+				Builder bld = FavouritesDbHelper.checkDuplicates(point, helper, activity);
 				if(bld != null) {
 					bld.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 						@Override

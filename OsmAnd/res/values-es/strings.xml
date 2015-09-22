@@ -1057,7 +1057,7 @@
     <string name="context_menu_item_intermediate_point">Añadir como punto de ruta</string>
     <string name="map_widget_intermediate_distance">Punto de ruta</string>
     <string name="ending_point_too_far">Punto final demasiado lejos de la carretera más cercana.</string>
-    <string name="btn_add_tag">Añadir etiqueta</string>
+    <string name="add_tag">Añadir etiqueta</string>
     <string name="btn_advanced_mode">Modo Avanzado…</string>
     <string name="poi_filter_parking">Aparcamiento</string>
     <string name="poi_filter_emergency">Emergencia</string>
@@ -1254,7 +1254,7 @@
 	<string name="tip_recent_changes_1_1_4_t">"Cambios en 1.1.4:\n\t* Rediseño de interfaz de usuario\n\t* Corrección de errores "
     </string>
     
-	<string name="street_name">Calle</string>
+	<string name="street_name">Nombre de calle</string>
 	<string name="hno">Número</string>
     <string name="tip_recent_changes_1_3_t">"Cambios en 1.3:
 \n\t* Reimplementado en tabletas y pantallas grandes\n\t* Tema Holo (personalizado)
@@ -1333,16 +1333,16 @@
     <string name="route_from">Desde:</string>
     
 	
-    <string name="speak_speed_limit">Anunciar límites de velocidad</string>
-    <string name="speak_cameras">Anunciar radares</string>
-	<string name="speak_traffic_warnings">Anuncia advertencias de tráfico</string>
+    <string name="speak_speed_limit">Límites de velocidad</string>
+    <string name="speak_cameras">Radares</string>
+	<string name="speak_traffic_warnings">Advertencias de tráfico</string>
 	<string name="osb_author_dialog_password">Contraseña OSM (opcional)</string>
 	    
     
-    <string name="announce_gpx_waypoints">Anunciar puntos de ruta GPX</string>
+    <string name="announce_gpx_waypoints">Puntos de ruta GPX</string>
     <string name="speak_title">Anunciar…</string>
 	<string name="speak_descr">Configura el anuncio de nombres de calles, advertencias de tráfico (paradas, badenes), advertencias de radares de velocidad, límites de velocidad</string>
-	<string name="speak_street_names">Anunciar nombres de calles (TTS)</string>
+	<string name="speak_street_names">Nombres de calles (TTS)</string>
     <string name="tip_recent_changes_1_5_t">"Cambios en 1.5:
 \n\t* Avisos de voz sobre límites de velocidad y radares
 \n\t* Más posibilidades de mensajes de voz (anuncio de nombres de calles)
@@ -1506,7 +1506,7 @@
 	<string name="routing_attr_avoid_toll_description">Evita las carreteras con peaje</string>
 	<string name="routing_attr_avoid_unpaved_name">Evitar carreteras no pavimentadas</string>
 	<string name="routing_attr_avoid_unpaved_description">Evita las carreteras no pavimentadas</string>
-	<string name="routing_attr_avoid_ferries_name">Evitar ferries</string>
+	<string name="routing_attr_avoid_ferries_name">Evitar ferris / transbordadores</string>
 	<string name="routing_attr_avoid_ferries_description">Evita utilizar ferries</string>
 	<string name="routing_attr_avoid_motorway_name">Evitar autopistas</string>
 	<string name="routing_attr_avoid_motorway_description">Evita las autopistas</string>
@@ -1774,7 +1774,7 @@
     <string name="lang_sw">Swahili</string>
     <string name="lang_he">Hebreo</string>
     <string name="forward">Siguiente</string>
-    <string name="home">Inicio</string>
+    <string name="home">Panel de control</string>
     <string name="live_monitoring_m_descr">Envía los datos de seguimiento a un servicio web específico si el registro GPX está habilitada.</string>
 	<string name="live_monitoring_m">Seguimiento en línea (requiere GPX)</string>
     <string name="live_monitoring_start">Iniciar seguimiento en línea</string>
@@ -1819,8 +1819,8 @@
     <string name="waypoints">Puntos de ruta</string>
     <string name="targets">Destinos</string>
     <string name="way_alarms">Advertencias de tráfico</string>
-    <string name="speak_favorites">Anunciar favoritos cercanos</string>
-    <string name="speak_poi">Anunciar PDI cercano</string>
+    <string name="speak_favorites">Favoritos cercanos</string>
+    <string name="speak_poi">PDI cercano</string>
     <string name="shared_string_all">Todos</string>
     <string name="index_tours">Excursiones</string>
     <string name="int_hour">h</string>
@@ -1923,7 +1923,7 @@
     <string name="rendering_value_americanRoadAtlas_name">Atlas americano de carreteras</string>
     <string name="navigate_point_easting">Al este</string>
     <string name="navigate_point_northing">Al norte</string>
-    <string name="speak_pedestrian">Anunciar pasos de peatones</string>
+    <string name="speak_pedestrian">Pasos de peatones</string>
     
 	<string name="save_track_to_gpx_globally_headline">Registro de trazas bajo demanda</string>
 	<string name="navigation_over_track">¿Iniciar la navegación a lo largo de la traza?</string>
@@ -2156,11 +2156,40 @@
     <string name="we_really_care_about_your_opinion">Nos interesa mucho y es importante para nosotros oír su opinión.</string>
 	<string name="rendering_value_boldOutline_name">Borde remarcado</string>
     <string name="traffic_warning_hazard">Advertencia de riesgo</string>
-    <string name="dahboard_options_dialog_title">Opciones del panel</string>
-	<string name="shared_string_card_was_hidden">La tarjeta estaba oculta</string>
+    <string name="dahboard_options_dialog_title">Configurar panel</string>
+	<string name="shared_string_card_was_hidden">Se ocultó la tarjeta</string>
 	<string name="shared_string_undo">Deshacer</string>
 	<string name="shared_string_skip">Omitir</string>
 	<string name="app_name_osmand">OsmAnd</string>
-	<string name="offline_maps_and_navigation">Mapas y navegación fuera de línea</string>
+	<string name="offline_maps_and_navigation">Mapas y navegación\nfuera de línea</string>
 <string name="commit_poi">Enviar PDI</string>
-</resources>
+<string name="routing_attr_avoid_shuttle_train_name">Evitar tren de enlace</string>
+	<string name="routing_attr_avoid_shuttle_train_description">Evite tomar trenes de enlace</string>
+    <string name="plugin_settings">Complementos</string>
+	<string name="tab_title_basic">Básico</string>
+	<string name="tab_title_advanced">Extendido</string>
+	<string name="building_number">Número de edificio</string>
+	<string name="next_proceed">Siguiente</string>
+	<string name="opening_at">Abren a las</string>
+	<string name="closing_at">Cierran a las</string>
+<string name="av_locations_descr">Archivo GPX con ubicaciones de nota</string>
+    <string name="av_locations">Ubicaciones</string>
+    <string name="tag_poi_name">nombre</string>
+	<string name="tag_poi_amenity">servicio</string>
+	<string name="contact_info">Información de contacto</string>
+	<string name="description">Descripción</string>
+	<string name="add_opening_hours">Añadir horario de atención</string>
+	<string name="poi_dialog_poi_type">Tipo de PDI</string>
+<string name="number_of_rows_in_dash">Número de filas en el panel %1$s</string>
+	<string name="please_specify_poi_type">Especifica tipo de PDI.</string>
+<string name="working_days">Días laborales</string>
+	<string name="recent_places">Lugares recientes</string>
+	<string name="favourites">Favoritos</string>
+<string name="poi_action_delete">borrar</string>
+	<string name="saved_at_time">Guardado exitosamente en: %1$s</string>
+<string name="poi_deleted_localy">El PDI se eliminará una vez subido los cambios</string>
+	<string name="show_gpx">Mostrar GPX</string>
+<string name="count_of_lines">Número de líneas</string>
+<string name="show_on_start">Mostrar al inicio</string>
+	<string name="address_unknown">Dirección desconocida</string>
+    </resources>

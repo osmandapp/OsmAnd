@@ -4,9 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dashboard_background"
+    android:background="?attr/spinnerListBackground"
+    android:clickable="true"
     android:orientation="vertical"
     tools:context="net.osmand.plus.osmedit.EditPoiFragment">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/dashboard_map_toolbar"
+        android:background="?attr/pstsTabBackground"
+        android:minHeight="@dimen/dashboard_map_toolbar"
+        android:theme="?attr/toolbar_theme"
+        app:contentInsetLeft="72dp"
+        app:contentInsetStart="72dp"/>
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -17,17 +28,9 @@
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/OsmandLightTheme.DarkActionbar">
-
+            android:background="?attr/pstsTabBackground"
+            android:theme="?attr/appbar_layout_theme">
             <!-- TODO change theme -->
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="fill_parent"
-                android:layout_height="@dimen/dashboard_map_toolbar"
-                app:contentInsetLeft="72dp"
-                app:contentInsetStart="72dp"
-                app:layout_scrollFlags="scroll"/>
-
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -37,14 +40,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="72dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginTop="16dp">
+                    android:layout_marginRight="16dp">
 
                     <EditText
                         android:id="@+id/poiNameEditText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Name"
+                        android:hint="@string/poi_dialog_name"
                         tools:text="@string/lorem_ipsum"/>
 
                 </android.support.design.widget.TextInputLayout>
@@ -68,7 +70,6 @@
                     android:id="@+id/poiTypeTextInputLayout"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
                     android:layout_marginLeft="24dp"
                     android:layout_weight="1">
 
@@ -76,9 +77,9 @@
                         android:id="@+id/poiTypeEditText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:drawableRight="@drawable/ic_action_arrow_drop_down"
-                        android:hint="POI Type"
                         android:completionThreshold="1"
+                        android:drawableRight="@drawable/ic_action_arrow_drop_down"
+                        android:hint="@string/poi_dialog_poi_type"
                         tools:text="@string/lorem_ipsum"/>
 
                 </android.support.design.widget.TextInputLayout>
@@ -89,16 +90,17 @@
                     android:layout_height="48dp"
                     android:layout_gravity="bottom"
                     android:background="@null"
-                    android:src="@drawable/ic_action_help"/>
+                    tools:src="@drawable/ic_action_help"/>
             </LinearLayout>
 
             <android.support.design.widget.TabLayout
                 android:id="@+id/tab_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/color_white"
-                app:tabIndicatorColor="@color/osmand_orange"
-                app:tabSelectedTextColor="@color/osmand_orange"
+                android:background="?attr/bg_color"
+                app:layout_scrollFlags="scroll"
+                app:tabIndicatorColor="?attr/pstsIndicatorColor"
+                app:tabSelectedTextColor="?attr/pstsIndicatorColor"
                 app:tabTextColor="@android:color/darker_gray"/>
         </android.support.design.widget.AppBarLayout>
 
@@ -115,7 +117,7 @@
         android:id="@+id/buttonDivider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/divider_color"/>
+        android:background="?attr/dashboard_divider"/>
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -123,20 +125,20 @@
         android:layout_gravity="bottom"
         android:gravity="right">
 
-        <Button
+        <net.osmand.plus.widgets.ButtonEx
             android:id="@+id/cancelButton"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/DashboardGeneralButton"
+            android:layout_height="48dp"
+            android:gravity="center"
             android:text="@string/shared_string_cancel"
-            android:textColor="@color/dashboard_general_button_text_light"/>
+            app:textAllCapsCompat="true"/>
 
-        <Button
+        <net.osmand.plus.widgets.ButtonEx
             android:id="@+id/saveButton"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/dashboard_general_button_text_light"
+            style="@style/DashboardGeneralButton"
+            android:layout_height="48dp"
+            android:gravity="center"
+            app:textAllCapsCompat="true"
             tools:text="Save"/>
     </LinearLayout>
 </LinearLayout>

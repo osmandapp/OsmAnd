@@ -57,6 +57,7 @@ public class BinaryMapRouteReaderAdapter {
 		private float floatValue;
 		private int type;
         private List<RouteTypeCondition> conditions = null;
+		private int forward;
 
 		public RouteTypeRule(String t, String v) {
 			this.t = t.intern();
@@ -73,6 +74,10 @@ public class BinaryMapRouteReaderAdapter {
 				System.err.println("Error analyzing tag/value = " + t + "/" +v);
 				throw e;
 			}
+		}
+		
+		public int isForward() {
+			return forward;
 		}
 		
 		public String getTag() {
@@ -173,6 +178,14 @@ public class BinaryMapRouteReaderAdapter {
                 type = MAXSPEED;
 			} else if(t.equalsIgnoreCase("maxspeed") && v != null){
 				type = MAXSPEED;
+				floatValue = RouteDataObject.parseSpeed(v, 0);
+			} else if(t.equalsIgnoreCase("maxspeed:forward") && v != null){
+				type = MAXSPEED;
+				forward = 1;
+				floatValue = RouteDataObject.parseSpeed(v, 0);
+			} else if(t.equalsIgnoreCase("maxspeed:backward") && v != null){
+				type = MAXSPEED;
+				forward = -1;
 				floatValue = RouteDataObject.parseSpeed(v, 0);
             } else if (t.equalsIgnoreCase("lanes") && v != null) {
 				intValue = -1;

@@ -555,7 +555,7 @@
 	<string name="replace_destination_point">替换终点</string>
     <string name="new_destination_point_dialog">您已经设置了终点。</string>
     <string name="ending_point_too_far">结束点与最近道路太远。</string>
-    <string name="btn_add_tag">添加标记</string>
+    <string name="add_tag">添加标记</string>
     <string name="btn_advanced_mode">高级模式…</string>
     <string name="show_warnings_title">显示警报…</string>
 	<string name="snap_to_road">吸附道路</string>

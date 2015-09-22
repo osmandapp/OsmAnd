@@ -496,6 +496,7 @@ public class RoutingHelper {
 				app.runInUIThread(new Runnable() {
 					@Override
 					public void run() {
+						settings.LAST_ROUTING_APPLICATION_MODE = settings.APPLICATION_MODE.get();
 						settings.APPLICATION_MODE.set(settings.DEFAULT_APPLICATION_MODE.get());
 					}
 				});
@@ -694,12 +695,12 @@ public class RoutingHelper {
 		}
 	}
 	
-	protected boolean isDistanceLess(float currentSpeed, double dist, double etalon, double defSpeed){
-		if(dist < etalon || ((dist / currentSpeed) < (etalon / defSpeed))){
-			return true;
-		}
-		return false;
-	}
+//	protected boolean isDistanceLess(float currentSpeed, double dist, double etalon, float defSpeed){
+//		if(dist < etalon || ((dist / currentSpeed) < (etalon / defSpeed))){
+//			return true;
+//		}
+//		return false;
+//	}
 	
 	public synchronized String getCurrentName(TurnType[] next){
 		NextDirectionInfo n = getNextRouteDirectionInfo(new NextDirectionInfo(), false);
@@ -709,7 +710,7 @@ public class RoutingHelper {
 			speed = l.getSpeed();
 		}
 		if(n.distanceTo > 0  && n.directionInfo != null && !n.directionInfo.getTurnType().isSkipToSpeak() && 
-				voiceRouter.isDistanceLess(speed, n.distanceTo, voiceRouter.PREPARE_DISTANCE * 0.75f)) {
+				voiceRouter.isDistanceLess(speed, n.distanceTo, voiceRouter.PREPARE_DISTANCE * 0.75f, 0f)) {
 			String nm = n.directionInfo.getStreetName();
 			String rf = n.directionInfo.getRef();
 			String dn = n.directionInfo.getDestinationName();

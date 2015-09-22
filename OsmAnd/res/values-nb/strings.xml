@@ -20,7 +20,7 @@
     <string name="context_menu_item_intermediate_point">Legg til som rutepunkt</string>
     <string name="map_widget_intermediate_distance">Rutepunkt</string>
     <string name="ending_point_too_far">Sluttpunkt for langt fra nærmeste vei.</string>
-    <string name="btn_add_tag">Legg til merke</string>
+    <string name="add_tag">Legg til merke</string>
     <string name="btn_advanced_mode">Avansert modus…</string>
     <string name="poi_filter_parking">Parkering</string>
     <string name="poi_filter_emergency">Nødsituasjon</string>
@@ -629,13 +629,13 @@
 	<string name="driving_region">Region for bilkjøring</string>
 	    
     
-    <string name="announce_gpx_waypoints">Meld om GPX-rutepunkter</string>
+    <string name="announce_gpx_waypoints">GPX-rutepunkter</string>
     <string name="speak_title">Meld om…</string>
 	<string name="speak_descr">Still inn for å meddele gatenavn, trafikkvarsler (tvungne stopp, fartsdumper), fotoboksvarsler, fartsgrenser</string>
-	<string name="speak_street_names">Meld om gatenavn (TTS)</string>
-    <string name="speak_speed_limit">Meld om fartsgrense</string>
-    <string name="speak_cameras">Meld om fotobokser</string>
-	<string name="speak_traffic_warnings">Meld om trafikkvarsler</string>
+	<string name="speak_street_names">Gatenavn (TTS)</string>
+    <string name="speak_speed_limit">Fartsgrense</string>
+    <string name="speak_cameras">Fotobokser</string>
+	<string name="speak_traffic_warnings">Trafikkvarsler</string>
     <string name="tip_recent_changes_1_5_t">"Endringer i 1.5:↵ →\n\t* Talevarslinger om fartsgrenser og fotobokser ↵ →\n\t* Flere muligheter for talemeldinger (gatenavn blir meddelt) ↵ →\n\t* Kartikoner i høy oppløsning ↵ →\n\t* Flere endringer i brukergrensesnittet ↵ →\n\t* Feilrettinger i avstandsvisningen, GPX-analyse, håndtering av rutepunkter, planleggingsmodulen, opplasting til OSM, https-håndtering "</string>
     <string name="osb_author_or_password_not_specified">Oppgi OSM brukernavn og passord i Innstillinger</string>
     <string name="clear_intermediate_points">Slett mellomliggende rutepunkter</string>
@@ -750,7 +750,7 @@
    	<string name="map_widget_top">Statuslinje</string>
 	<string name="map_preferred_locale_descr">Foretrukket språk for påskrifter på kartet (hvis det ikke er tilgjengelig skiftes til engelsk eller til lokale navn)</string>
     <string name="map_preferred_locale">Foretrukket språk på kart</string>
-    <string name="home">Hjem</string>
+    <string name="home">Dashbord</string>
     <string name="rendering_attr_showCycleRoutes_name">Vis sykkelruter</string>
     <string name="show_zoom_buttons_navigation_descr">Vis zoom-knapper under navigering</string>
     <string name="show_zoom_buttons_navigation">Vis zoom-knapper</string>
@@ -816,8 +816,8 @@
     <string name="speed_limit_exceed_message">Velg toleransemargin for fartsgrense, overskrides denne vil du få talevarsel.</string>
 	<string name="fav_point_dublicate">Duplisering av favorittpunktnavn</string>
     <string name="traffic_warning_payment">Bomstasjon</string>
-    <string name="speak_favorites">Meld om nærliggende favoritter</string>
-	<string name="speak_poi">Meld om nærliggende interessepunkter</string>
+    <string name="speak_favorites">Nærliggende favoritter</string>
+	<string name="speak_poi">Nærliggende interessepunkter</string>
 	<string name="save_global_track_interval">Generelt loggeintervall</string>
 	<string name="int_hour">t</string>
     <string name="duration">Varighet</string>
@@ -866,7 +866,7 @@
     <string name="available_downloads_left">Er tilgjengelig %1$d filer til nedlasting</string>
     <string name="install_paid">Fullversjon</string>
     <string name="clear_destination">Slett reisemål</string>
-    <string name="street_name">Gate</string>
+    <string name="street_name">Gatenavn</string>
 	<string name="choose_osmand_theme">Tema</string>
     <string name="clear_dest_confirm">Er du sikker på at du vil slette reisemålpunktet (og rutepunkter)?</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Fottursymbol-overlegg</string>
@@ -1052,12 +1052,12 @@
     <string name="dash_download_new_one">Last ned nytt kart</string>
     <string name="dash_download_manage">Administrer</string>
     <string name="traffic_warning_calming">Trafikkdemping</string>
-    <string name="background_service_is_enabled_question">OsmAnd-tjenesten for hvilemodus kjører fortsatt. Skal den også avbrytes?</string>
-	<string name="sleep_mode_stop_dialog">Avbryte GPS-hvilemodus?</string>
+    <string name="background_service_is_enabled_question">OsmAnd-bakgrunnstjeneste kjører fortsatt. Skal den også avbrytes?</string>
+	<string name="sleep_mode_stop_dialog">Avbryte GPS-bakgrunnsmodus?</string>
 	<string name="stop_navigation_service">Avbryt</string>
 	<string name="confirm_every_run">Spør alltid</string>
 	<string name="background_service_int">GPS-vekkingsintervall</string>
-	<string name="enable_sleep_mode">Aktiver GPS-hvilemodus</string>
+	<string name="enable_sleep_mode">Aktiver GPS-bakgrunnsmodus</string>
 	<string name="save_track_to_gpx_globally">Logg spor til GPX-fil</string>
 	<string name="monitoring_settings">Tur-opptak</string>
     <string name="monitoring_settings_descr">Still inn opptak av dine turer</string>
@@ -1107,21 +1107,21 @@
     <string name="monitoring_control_start">GPX</string>
     <string name="tip_update_index">Oppdaterer offline-kart</string>
 	<string name="filterpoi_activity">Opprett interessepunkt-filter</string>
-	<string name="bg_service_sleep_mode_off">Aktiver\n hvilemodus</string>
-	<string name="bg_service_sleep_mode_on">Stopp\n hvilemodus</string>
+	<string name="bg_service_sleep_mode_off">Kjør\n i bakgrunnen</string>
+	<string name="bg_service_sleep_mode_on">Stopp\n kjøring i bakgrunnen</string>
 	<string name="gps_wakeup_interval">GPS-vekkingsintervall: %s</string>
 	<string name="route_kl">Hold til venstre og kjør</string>
 	<string name="route_kr">Hold til høyre og kjør</string>
 	<string name="debugging_and_development">OsmAnd-utvikling</string>
 	<string name="local_openstreetmap_uploading">Laster opp …</string>
-	<string name="osmand_service">Hvilemodus</string>
-	<string name="osmand_service_descr">Bruk til å kjøre OsmAnd mens skjermen er av</string>
+	<string name="osmand_service">Bakgrunnsmodus</string>
+	<string name="osmand_service_descr">OsmAnd kjører i bakgrunnen mens skjermen er av</string>
 	<string name="overlay_transparency_descr">Endre overleggsgjennomsiktighet</string>
 	<string name="overlay_transparency">Overleggsgjennomsiktighet</string>
 	<string name="map_transparency_descr">Endre gjennomsiktighet for basiskart</string>
 	<string name="map_transparency">Gjennomsiktighet for basiskart</string>
 	<string name="send_location_sms_pattern">Posisjon: %1$s\n%2$s</string>
-	<string name="background_router_service">Kjør i hvilemodus</string>
+	<string name="background_router_service">Kjør OsmAnd i bakgrunnen</string>
 	<string name="menu_mute_off">Lyd er på</string>
 	<string name="menu_mute_on">Lyd er av</string>
 	<string name="route_tr">Ta til høyre og kjør</string>
@@ -1151,7 +1151,7 @@
     <string name="av_camera_focus_hiperfocal">Hyperfokal fokus</string>
 	<string name="lock_screen_request_explanation">%1$s trenger denne tillatelsen til å slå av skjermen (Strømsparingsfunksjon).</string>
     <string name="shared_string_show_all">Vis alle</string>
-	<string name="speak_pedestrian">Meld om fotgjengeroverganger</string>
+	<string name="speak_pedestrian">Fotgjengeroverganger</string>
     
 	<string name="rendering_attr_streetLighting_name">Gatebelysning</string>
     <string name="edit_group">Rediger gruppe</string>
@@ -1407,9 +1407,12 @@
 	<string name="successfully_uploaded_pattern">Vellykket lastet opp {0}/{1}</string>
 	<string name="try_again">Prøv igjen</string>
 	<string name="error_message_pattern">Feil: {0}</string>
-	<string name="dahboard_options_dialog_title">Dashbord-alternativer</string>
+	<string name="dahboard_options_dialog_title">Still inn dashbord</string>
 	<string name="shared_string_undo">Angre</string>
 	<string name="shared_string_skip">Hopp over</string>
 	<string name="app_name_osmand">OsmAnd</string>
 	<string name="offline_maps_and_navigation">Offline-kart\n&amp; navigering</string>
-</resources>
+<string name="address_unknown">Adresse er ikke kjent ennå</string>
+    <string name="routing_attr_avoid_shuttle_train_name">Unngå pendeltog</string>
+	<string name="routing_attr_avoid_shuttle_train_description">Unngå pendeltog</string>
+    </resources>

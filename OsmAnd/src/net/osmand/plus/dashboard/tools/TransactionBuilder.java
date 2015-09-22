@@ -11,6 +11,8 @@ import net.osmand.plus.dashboard.DashBaseFragment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -19,7 +21,7 @@ import java.util.List;
 public final class TransactionBuilder {
 	private static final String TAG = "TransactionBuilder";
 	private FragmentManager manager;
-	private List<DashFragmentData> fragments = new ArrayList<>();
+	private final List<DashFragmentData> fragments;
 	private OsmandSettings settings;
 	private MapActivity mapActivity;
 
@@ -28,6 +30,7 @@ public final class TransactionBuilder {
 		this.manager = manager;
 		this.settings = settings;
 		this.mapActivity = mapActivity;
+		fragments = new ArrayList<>();
 	}
 
 	public TransactionBuilder addFragmentsData(DashFragmentData... dashFragmentsData) {
@@ -35,9 +38,20 @@ public final class TransactionBuilder {
 		return this;
 	}
 
+	public TransactionBuilder addFragmentsData(Collection<DashFragmentData> dashFragmentsData) {
+		fragments.addAll(dashFragmentsData);
+		return this;
+	}
+
+	public TransactionBuilder addFragment(DashFragmentData fragmentData) {
+		fragments.add(fragmentData);
+		return this;
+	}
+
 	public FragmentTransaction getFragmentTransaction() {
 		Log.v(TAG, "getFragmentTransaction(" + ")");
 		FragmentTransaction fragmentTransaction = manager.beginTransaction();
+		Collections.sort(fragments);
 		for (DashFragmentData dashFragmentData : fragments) {
 			DashBaseFragment fragment =
 					(DashBaseFragment) manager.findFragmentByTag(dashFragmentData.tag);

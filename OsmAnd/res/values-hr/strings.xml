@@ -90,7 +90,7 @@
 	<string name="map_widget_monitoring_services">Bilježenje položaja</string>
 	<string name="no_route">Nema rute</string>
     <string name="poi_filter_parking">Parkiralište</string>
-    <string name="btn_add_tag">Dodaj oznaku</string>
+    <string name="add_tag">Dodaj oznaku</string>
     <string name="btn_advanced_mode">Napredni način rada…</string>
     <string name="poi_filter_emergency">Prva pomoć</string>
     <string name="poi_filter_public_transport">Javni prijevoz</string>

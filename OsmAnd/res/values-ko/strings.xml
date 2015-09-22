@@ -972,13 +972,13 @@
     
     
     
-    <string name="announce_gpx_waypoints">GPX 경유지 알리기</string>
+    <string name="announce_gpx_waypoints">GPX 경유지</string>
     <string name="speak_title">알리기…</string>
 	<string name="speak_descr">거리 이름, 교통 경고(강제 정지, 속도 범프), 속도 카메라 경고, 제한 속도를 알리기 위해  구성합니다</string>
-	<string name="speak_street_names">거리 이름을 말하기 (TTS )</string>
-    <string name="speak_speed_limit">속도 제한 알리기</string>
-    <string name="speak_cameras">속도 카메라 알리기</string>
-	<string name="speak_traffic_warnings">트래픽 경고 알리기</string>
+	<string name="speak_street_names">거리 이름 (TTS )</string>
+    <string name="speak_speed_limit">속도 제한</string>
+    <string name="speak_cameras">속도 카메라</string>
+	<string name="speak_traffic_warnings">트래픽 경고</string>
     <string name="index_item_world_bitcoin_payments">세계 비트코인 지급</string>
 	<string name="lang_be">백러시아어</string>
 	<string name="lang_bs">보스니아어</string>
@@ -1008,8 +1008,8 @@
     <string name="clear_intermediate_points">경유지 지우기</string>
     <string name="keep_intermediate_points">경유지 유지</string>
     <string name="new_directions_point_dialog">이미 경유자를 설정했습니다.</string>
-    <string name="context_menu_item_directions_to">~까지 운행</string>
-    <string name="context_menu_item_directions_from">~부터 운행</string>
+    <string name="context_menu_item_directions_to">여기까지 가기</string>
+    <string name="context_menu_item_directions_from">여기부터 출발</string>
     <string name="route_descr_map_location">지도 : </string>
     <string name="route_descr_lat_lon">위도 %1$.3f, 경도 %2$.3f</string>
     <string name="route_descr_current_location">현재 위치</string>
@@ -1064,7 +1064,7 @@
     <string name="cancel_navigation">운행 중지</string>
     <string name="clear_destination">도착지 지우기</string>
     <string name="download_using_mobile_internet">현재 와이파이(WiFi)가 연결되어 있지 않습니다. 현재의 인터넷 연결(3G)을 통해서 계속 다운로드 하시겠습니까?</string>
-    <string name="street_name">거리</string>
+    <string name="street_name">거리 이름</string>
 	<string name="hno">주택 수</string>
     <string name="tip_recent_changes_1_3_t">버전 1.3 의 변경 사항 :
          \n\t* 재 구현 정제 및 대형 스크린 지원
@@ -1206,7 +1206,7 @@
     <string name="context_menu_item_intermediate_point">경유지로 추가</string>
     <string name="map_widget_intermediate_distance">경유지</string>
     <string name="ending_point_too_far">도로에서 너무 멀리 떨어진 마지막 포인트.</string>
-    <string name="btn_add_tag">태그 추가</string>
+    <string name="add_tag">태그 추가</string>
     <string name="btn_advanced_mode">고급 모드…</string>
     <string name="poi_filter_parking">주차</string>
     <string name="poi_filter_emergency">비상 사태</string>
@@ -1348,7 +1348,7 @@
 	<string name="map_widget_transparent">투명 스킨</string>
 	
 	
-	<string name="bg_service_sleep_mode_off">활성화\n 절전 모드</string>
+	<string name="bg_service_sleep_mode_off">동작중\n 절전 모드</string>
 	<string name="bg_service_sleep_mode_on">정지\n 절전 모드</string>
 	<string name="gps_wakeup_interval">GPS 깨우는(wake-up) 간격: %s</string>
 	<string name="int_continuosly">연속적인</string>
@@ -1895,7 +1895,7 @@
     <string name="lang_sw">스와힐리어</string>
     <string name="lang_he">히브리어</string>
     <string name="forward">앞으로</string>
-    <string name="home">홈</string>
+    <string name="home">계기판</string>
     <string name="live_monitoring_m_descr">GPX 로깅이 활성화 될때, 지정된 웹 서비스에 트래킹을 전송합니다.</string>
 	<string name="live_monitoring_m">온라인 트래킹 (GPX 파일 필요)</string>
     <string name="live_monitoring_start">온라인 트래킹 시작</string>
@@ -1946,8 +1946,8 @@
     <string name="waypoints">경유지</string>
     <string name="targets">도착지</string>
     <string name="way_alarms">교통 경고</string>
-    <string name="speak_favorites">주변의 즐겨찾기 알리기</string>
-    <string name="speak_poi">주변의 POI 알리기</string>
+    <string name="speak_favorites">주변의 즐겨찾기</string>
+    <string name="speak_poi">주변의 POI</string>
     <string name="rendering_attr_publicTransportMode_name">버스, 무궤도전차, 셔틀 노선</string>
 	<string name="save_track_to_gpx_globally">현재 트랙을 GPX파일로 저장</string>
 	<string name="save_track_to_gpx_globally_descr">GPX 파일에 기록하는 일반적인 위치는 지도 화면에 GPX 로깅 위젯을 사용하여 켜거나 끌 수 있습니다</string>
@@ -2047,7 +2047,7 @@
 	<string name="traffic_warning_pedestrian">보행자 횡단보도</string>
 	<string name="show_railway_warnings">철도 교차로 표시</string>
 	<string name="show_pedestrian_warnings">보행자 횡단보도 표시</string>
-    <string name="speak_pedestrian">보행자 횡단보도 알리기</string>
+    <string name="speak_pedestrian">보행자 횡단보도</string>
     
 	<string name="navigation_over_track">경로를 따라 운행을 시작할까요?</string>
 	<string name="avoid_roads_msg">원하는 도로를 선택하여 대체 경로를 실행할 수 있습니다</string>
@@ -2321,4 +2321,55 @@
     <string name="rendering_value_purple_name">보라색</string>
     <string name="rendering_value_translucent_purple_name">반투명 보라색</string>
     <string name="restart_is_required">변화를 완전히 적용 하려면, 수동으로 응용 프로그램을 다시 시작해야 합니다.</string>
-    </resources>
+    <string name="plugin_settings">플러그인</string>
+	<string name="routing_attr_avoid_shuttle_train_name">셔틀 열차 피하기</string>
+	<string name="routing_attr_avoid_shuttle_train_description">셔틀 열차 피하기</string>
+    <string name="traffic_warning_hazard">위험</string>
+    <string name="rendering_value_boldOutline_name">큰 선</string>
+    <string name="no_updates_available">사용 가능한 업데이트 없음</string>
+    <string name="download_live_updates">라이브 업데이트</string>
+	<string name="do_you_like_osmand">OsmAnd를 좋아 합니까?</string>
+	<string name="we_really_care_about_your_opinion">의견에 대한 많은 관심 부탁드립니다 그리고 우리가 당신의 의견을 듣는 것이 중요합니다.</string>
+	<string name="rate_this_app">이 앱 평점매기기</string>
+	<string name="rate_this_app_long">구글 플레이에 OsmAnd을 평가해 주세요</string>
+	<string name="user_hates_app_get_feedback">우리에게 이유를 가르쳐 쥬세요.</string>
+	<string name="user_hates_app_get_feedback_long">우리가 이 응용 프로그램에서 무엇을 변경 해야 하는 지 알려 주세요.</string>
+	<string name="failed_to_upload">업로드 하지 못했습니다</string>
+	<string name="delete_change">변경을 삭제합니다</string>
+	<string name="successfully_uploaded_pattern">성공적으로 업로드 {0}/{1}</string>
+	<string name="try_again">다시 시도하십시오</string>
+	<string name="error_message_pattern">오류: {0}</string>
+	<string name="dahboard_options_dialog_title">계기판 구성</string>
+	<string name="shared_string_card_was_hidden">카드는 숨겨졌습니다</string>
+	<string name="shared_string_undo">실행 취소</string>
+	<string name="shared_string_skip">건너뛰기</string>
+	<string name="app_name_osmand">OsmAnd</string>
+	<string name="offline_maps_and_navigation">오프 라인 지도 및 내비게이션</string>
+	<string name="commit_poi">POI 커밋</string>
+<string name="address_unknown">주소는 아직 등록되지 않았습니다</string>
+    <string name="av_locations_descr">Gpx 파일에 위치와 관련된 메모를 첨부합니다</string>
+    <string name="av_locations">위치</string>
+    <string name="poi_action_delete">삭제</string>
+	<string name="show_on_start">시작할 때 보여주기</string>
+	<string name="tab_title_basic">기본</string>
+	<string name="tab_title_advanced">고급</string>
+	<string name="building_number">건물 번호</string>
+	<string name="next_proceed">다음</string>
+	<string name="opening_at">~ 열기</string>
+	<string name="closing_at">에 닫기</string>
+	<string name="tag_poi_name">이름</string>
+	<string name="tag_poi_amenity">시설</string>
+	<string name="contact_info">연락처 정보</string>
+	<string name="description">설명</string>
+	<string name="add_opening_hours">오프닝 시간 추가</string>
+	<string name="poi_dialog_poi_type">POI 유형</string>
+	<string name="number_of_rows_in_dash">대시 %1$s에 있는 행의 수</string>
+	<string name="please_specify_poi_type">POI 유형을 지정 하십시오.</string>
+	<string name="working_days">영업일</string>
+	<string name="recent_places">최근 장소</string>
+	<string name="favourites">즐겨찾기</string>
+	<string name="saved_at_time">%1$s에 성공적으로 저장 되었습니다</string>
+	<string name="poi_deleted_localy">변경 내용을 업로드 하는 동안 POI는 삭제 됩니다</string>
+	<string name="show_gpx">GPX 보여주기</string>
+	<string name="count_of_lines">라인의 수</string>
+</resources>

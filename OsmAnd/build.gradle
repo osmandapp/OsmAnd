@@ -19,7 +19,7 @@ apply plugin: 'com.android.application'
 
 android {
 	compileSdkVersion 21
-	buildToolsVersion "21.1.2"
+	buildToolsVersion "23.0.1"
 
 	signingConfigs {
 		development {
@@ -38,7 +38,7 @@ android {
 	}
 
 	defaultConfig {
-		minSdkVersion 14
+		minSdkVersion System.getenv("MIN_SDK_VERSION") ? System.getenv("MIN_SDK_VERSION").toInteger() : 14
 		targetSdkVersion 21
 
 		versionCode System.getenv("APK_NUMBER_VERSION") ? System.getenv("APK_NUMBER_VERSION").toInteger() : versionCode
@@ -190,6 +190,14 @@ task collectVoiceAssets(type: Sync) {
 	include "**/*.p"
 }
 
+
+task collectFonts(type: Copy) {
+	from "../../resources/fonts"
+	from "../../resources/rendering_styles/fonts/OpenSans"
+	into "assets/fonts"
+	include "*.ttf"
+}
+
 task collectHelpContentsAssets(type: Sync) {
 	from "../../help/help"
 	into "assets/help"
@@ -237,6 +245,7 @@ task copyStyleIcons(type: Copy) {
 
 task collectExternalResources << {}
 collectExternalResources.dependsOn collectVoiceAssets,
+		collectFonts,
 		collectHelpContentsAssets,
 		collectRoutingResources,
 		collectRenderingStylesResources,

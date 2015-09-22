@@ -10,14 +10,15 @@ import net.londatiga.android.ActionItem;
 import net.londatiga.android.QuickAction;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
+import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.access.AccessibleToast;
+import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.ITileSource;
-import net.osmand.plus.AppInitializer;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
@@ -40,6 +41,7 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.BaseMapLayer;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.util.MapUtils;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -59,8 +61,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.apache.commons.logging.Log;
+
 public class MapActivityActions implements DialogProvider {
-	
+	private static final Log LOG = PlatformUtil.getLog(MapActivityActions.class);
 	public static final String KEY_LONGITUDE = "longitude";
 	public static final String KEY_LATITUDE = "latitude";
 	public static final String KEY_NAME = "name";
@@ -87,12 +91,75 @@ public class MapActivityActions implements DialogProvider {
 	}
 	
 
-	protected void addFavouritePoint(final double latitude, final double longitude){
+	public void addFavouritePoint(final double latitude, final double longitude){
 		String name = mapActivity.getMapLayers().getContextMenuLayer().getSelectedObjectName();
 		enhance(dialogBundle, latitude, longitude, name);
 		mapActivity.showDialog(DIALOG_ADD_FAVORITE);
 	}
-	
+
+	public void editFavoritePoint(final FavouritePoint a) {
+		FavoritesTreeFragment.editPoint(mapActivity.getMapView().getContext(), a, null);
+	}
+
+	public void shareLocation(double latitude, double longitude) {
+		enhance(dialogBundle,latitude,longitude,mapActivity.getMapView().getZoom());
+		new ShareLocation(mapActivity).run();
+	}
+
+	public void showNavigationContextMenuPoint(final double latitude, final double longitude) {
+		final ContextMenuAdapter adapter = new ContextMenuAdapter(mapActivity);
+
+		if(!mapActivity.getRoutingHelper().isFollowingMode() && !mapActivity.getRoutingHelper().isRoutePlanningMode()) {
+			adapter.item(R.string.context_menu_item_directions_to).iconColor(
+					R.drawable.ic_action_gdirections_dark).reg();
+			adapter.item(R.string.context_menu_item_directions_from).iconColor(
+					R.drawable.ic_action_gdirections_dark).reg();
+		}
+		final TargetPointsHelper targets = getMyApplication().getTargetPointsHelper();
+		if(targets.getPointToNavigate() != null) {
+			adapter.item(R.string.context_menu_item_destination_point).iconColor(R.drawable.ic_action_flag_dark).reg();
+			adapter.item(R.string.context_menu_item_intermediate_point).iconColor(R.drawable.ic_action_flage_dark).reg();
+			// For button-less search UI
+		} else {
+			adapter.item(R.string.context_menu_item_destination_point).iconColor(R.drawable.ic_action_flag_dark).reg();
+		}
+
+		getMyApplication().getAppCustomization().prepareLocationMenu(mapActivity, adapter);
+
+		final Builder builder = new AlertDialog.Builder(mapActivity);
+		builder.setTitle(R.string.get_directions);
+		final ArrayAdapter<?>  listAdapter =
+				adapter.createListAdapter(mapActivity, getMyApplication().getSettings().isLightContent());
+		builder.setAdapter(listAdapter, new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				int standardId = adapter.getElementId(which);
+				OnContextMenuClick click = adapter.getClickAdapter(which);
+				if (click != null) {
+					click.onContextMenuClick(listAdapter, standardId, which, false);
+				} else if (standardId == R.string.context_menu_item_directions_to) {
+					targets.navigateToPoint(new LatLon(latitude, longitude), true, -1, null);
+					enterRoutePlanningMode(null, null, false);
+				} else if (standardId == R.string.context_menu_item_directions_from) {
+					List<PointDescription> nms = mapActivity.getMapLayers().getContextMenuLayer().getSelectedObjectNames();
+					enterRoutePlanningMode(new LatLon(latitude, longitude), nms.isEmpty() ? null : nms.get(0), false);
+				} else if (standardId == R.string.context_menu_item_intermediate_point ||
+						standardId == R.string.context_menu_item_destination_point) {
+					boolean dest = standardId == R.string.context_menu_item_destination_point;
+					List<PointDescription> nms = mapActivity.getMapLayers().getContextMenuLayer().getSelectedObjectNames();
+					targets.navigateToPoint(new LatLon(latitude, longitude), true,
+							dest ? -1 : targets.getIntermediatePoints().size(), nms.size() == 0?null :
+									nms.get(0));
+					if(targets.getIntermediatePoints().size() > 0) {
+						openIntermediatePointsDialog();
+					}
+				}
+			}
+		});
+		builder.create().show();
+	}
+
 	private Bundle enhance(Bundle aBundle, double latitude, double longitude, String name) {
 		aBundle.putDouble(KEY_LATITUDE, latitude);
 		aBundle.putDouble(KEY_LONGITUDE, longitude);
@@ -130,7 +197,7 @@ public class MapActivityActions implements DialogProvider {
 				SavingTrackHelper savingTrackHelper = mapActivity.getMyApplication().getSavingTrackHelper();
 				savingTrackHelper.insertPointData(latitude, longitude, System.currentTimeMillis(), name);
 				AccessibleToast.makeText(mapActivity, MessageFormat.format(getString(R.string.add_waypoint_dialog_added), name), Toast.LENGTH_SHORT)
-							.show();
+						.show();
 				dialog.dismiss();
 			}
 		});
@@ -206,14 +273,14 @@ public class MapActivityActions implements DialogProvider {
 				String name = edit.getText().toString();
 				fileDir.mkdirs();
 				File toSave = fileDir;
-				if(name.length() > 0) {
-					if(!name.endsWith(".gpx")){
+				if (name.length() > 0) {
+					if (!name.endsWith(".gpx")) {
 						name += ".gpx";
 					}
 					toSave = new File(fileDir, name);
 				}
-				if(toSave.exists()){
-					dlg.findViewById(R.id.DuplicateFileName).setVisibility(View.VISIBLE);					
+				if (toSave.exists()) {
+					dlg.findViewById(R.id.DuplicateFileName).setVisibility(View.VISIBLE);
 				} else {
 					dlg.dismiss();
 					new SaveDirectionsAsyncTask(app).execute(toSave);
@@ -259,7 +326,7 @@ public class MapActivityActions implements DialogProvider {
 		}
 		
 	}
-	
+
 	public void contextMenuPoint(final double latitude, final double longitude, final ContextMenuAdapter iadapter, Object selectedObj) {
 		final ContextMenuAdapter adapter = iadapter == null ? new ContextMenuAdapter(mapActivity) : iadapter;
 
@@ -284,11 +351,12 @@ public class MapActivityActions implements DialogProvider {
 				R.drawable.ic_action_fav_dark).reg();
 		
 		
-
+		LOG.debug("contextMenuPoint()");
 		OsmandPlugin.registerMapContextMenu(mapActivity, latitude, longitude, adapter, selectedObj);
 		getMyApplication().getAppCustomization().prepareLocationMenu(mapActivity, adapter);
 		
 		final Builder builder = new AlertDialog.Builder(mapActivity);
+		builder.setTitle(R.string.show_point_options);
 		final ArrayAdapter<?>  listAdapter =
 				adapter.createListAdapter(mapActivity, getMyApplication().getSettings().isLightContent());
 		builder.setAdapter(listAdapter, new DialogInterface.OnClickListener() {
@@ -322,8 +390,7 @@ public class MapActivityActions implements DialogProvider {
 						openIntermediatePointsDialog();
 					}
 				} else if (standardId == R.string.context_menu_item_share_location) {
-					enhance(dialogBundle,latitude,longitude,mapActivity.getMapView().getZoom());
-					new ShareLocation(mapActivity).run();
+					shareLocation(latitude, longitude);
 				} else if (standardId == R.string.shared_string_add_to_favorites) {
 					addFavouritePoint(latitude, longitude);
 				}
@@ -331,7 +398,7 @@ public class MapActivityActions implements DialogProvider {
 		});
 		builder.create().show();
 	}
-	
+
 	public void setGPXRouteParams(GPXFile result) {
 		if(result == null) {
 			mapActivity.getRoutingHelper().setGpxParams(null);
@@ -424,14 +491,29 @@ public class MapActivityActions implements DialogProvider {
 
 		ApplicationMode mode = settings.DEFAULT_APPLICATION_MODE.get();
 		ApplicationMode selected = settings.APPLICATION_MODE.get();
+		OsmandApplication app = mapActivity.getMyApplication();
+		TargetPointsHelper targets = app.getTargetPointsHelper();
 		if( selected != ApplicationMode.DEFAULT) {
 			mode = selected;
 		} else if (mode == ApplicationMode.DEFAULT) {
-			mode = ApplicationMode.CAR ;
+			mode = ApplicationMode.CAR;
+			if(settings.LAST_ROUTING_APPLICATION_MODE != null && 
+					settings.LAST_ROUTING_APPLICATION_MODE != ApplicationMode.DEFAULT) {
+				mode = settings.LAST_ROUTING_APPLICATION_MODE;
+			}
+			if(from != null && targets.getPointToNavigate() != null) {
+				double dist = MapUtils.getDistance(from, targets.getPointToNavigate().getLatitude(),
+						targets.getPointToNavigate().getLongitude());
+				if(dist >= 50000 && mode.isDerivedRoutingFrom(ApplicationMode.PEDESTRIAN)) {
+					mode = ApplicationMode.CAR ;			
+				} else if(dist >= 300000 && mode.isDerivedRoutingFrom(ApplicationMode.BICYCLE)) {
+					mode = ApplicationMode.CAR ;
+				} else if(dist < 2000 && mode.isDerivedRoutingFrom(ApplicationMode.CAR)) {
+					mode = ApplicationMode.PEDESTRIAN ;
+				}
+			}
 		}
 
-		OsmandApplication app = mapActivity.getMyApplication();
-		TargetPointsHelper targets = app.getTargetPointsHelper();
 		app.getSettings().APPLICATION_MODE.set(mode);
 		app.getRoutingHelper().setAppMode(mode);
 		app.initVoiceCommandPlayer(mapActivity);
@@ -543,7 +625,24 @@ public class MapActivityActions implements DialogProvider {
 		final OsmandMapTileView mapView = mapActivity.getMapView();
 		final OsmandApplication app = mapActivity.getMyApplication();
 		ContextMenuAdapter optionsMenuHelper = new ContextMenuAdapter(app);
-		
+
+		optionsMenuHelper.item(R.string.home).iconColor(R.drawable.map_dashboard)
+				.listen(new OnContextMenuClick() {
+					@Override
+					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+						mapActivity.closeDrawer();
+						mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.DASHBOARD);
+						return true;
+					}
+				}).reg();
+		optionsMenuHelper.item(R.string.target_points).iconColor(R.drawable.ic_action_flage_dark)
+				.listen(new OnContextMenuClick() {
+					@Override
+					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+						mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.WAYPOINTS);
+						return false;
+					}
+				}).reg();
 		optionsMenuHelper.item(R.string.get_directions).iconColor(R.drawable.ic_action_gdirections_dark)
 				.listen(new OnContextMenuClick() {
 					@Override
@@ -557,15 +656,7 @@ public class MapActivityActions implements DialogProvider {
 						return true;
 					}
 				}).reg();
-		optionsMenuHelper.item(R.string.target_points).iconColor(R.drawable.ic_action_flage_dark)
-				.listen(new OnContextMenuClick() {
-					@Override
-					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-						mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.WAYPOINTS);
-						return false;
-					}
-				}).reg();
-		// Default actions (Layers, Configure Map screen, Settings, Search, Favorites) 
+		// Default actions (Layers, Configure Map screen, Settings, Search, Favorites)
 		optionsMenuHelper.item(R.string.search_button)
 				.iconColor(R.drawable.ic_action_search_dark)
 				.listen(new OnContextMenuClick() {
@@ -662,9 +753,29 @@ public class MapActivityActions implements DialogProvider {
 						return true;
 					}
 				}).reg();
+		optionsMenuHelper.item(R.string.shared_string_help).iconColor(R.drawable.ic_action_help)
+		.listen(new OnContextMenuClick() {
+			@Override
+			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+				mapActivity.startActivity(new Intent(mapActivity, HelpActivity.class));
+				// FIXME show ABOUT!
+//				showAboutDialog(getMyApplication());
+//				String version = Version.getFullVersion(app);
+//				String vt = this.getString(R.string.about_version) + "\t";
+//				String edition = "";
+//				if (!this.getString(R.string.app_edition).equals("")) {
+//					edition = this.getString(R.string.shared_string_release) + " : \t" + this.getString(R.string.app_edition);
+//				}
+//				tv.setText(vt + version + "\n" +
+//						edition + "\n\n" +
+//						this.getString(R.string.about_content));
+				return true;
+			}
+		}).reg();
 
 		//////////// Others
 		OsmandPlugin.registerOptionsMenu(mapActivity, optionsMenuHelper);
+		
 //		optionsMenuHelper.item(R.string.shared_string_exit).iconColor(R.drawable.ic_action_quit_dark )
 //					.listen(new OnContextMenuClick() {
 //			@Override
@@ -701,6 +812,7 @@ public class MapActivityActions implements DialogProvider {
 		routingHelper.getVoiceRouter().interruptRouteCommands();
 		routingHelper.clearCurrentRoute(null, new ArrayList<LatLon>());
 		routingHelper.setRoutePlanningMode(false);
+		settings.LAST_ROUTING_APPLICATION_MODE = settings.APPLICATION_MODE.get();
 		settings.APPLICATION_MODE.set(settings.DEFAULT_APPLICATION_MODE.get());
 		mapActivity.updateApplicationModeSettings();
 	}

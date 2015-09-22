@@ -7,7 +7,6 @@ import java.util.Map;
 
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
-import net.osmand.Location;
 import net.osmand.data.LocationPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.PluginsActivity;
@@ -110,9 +109,6 @@ public class OsmAndAppCustomization {
 		return true;
 	}
 
-	public boolean saveGPXPoint(Location location) {
-		return false;
-	}
 
 	public File getTracksDir() {
 		return app.getAppPath(IndexConstants.GPX_RECORDED_INDEX_DIR);

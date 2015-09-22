@@ -543,7 +543,7 @@
   <string name="background_service_provider_descr">Vybrat poskytovatele polohy pro službu na pozadí</string>
   <string name="background_service_provider">Poskytovatel polohy</string>
   <string name="background_router_service_descr">Spustí OsmAnd na pozadí, aby bylo možno zaznamenávat pozici i při vypnuté obrazovce</string>
-  <string name="background_router_service">Sledování polohy</string>
+  <string name="background_router_service">Sledování polohy na pozadí</string>
   <string name="off_router_service_no_gps_available">Služba pro navigaci na pozadí vyžaduje zapnutý zdroj polohy.</string>
   <string name="hide_poi_filter">Skrýt filtr</string>
   <string name="show_poi_filter">Zobrazit filtr</string>
@@ -906,7 +906,7 @@
   <string name="osmand_parking_pm">odpoledne</string>
   <string name="osmand_parking_am">dopoledne</string>
   <string name="osmand_parking_position_name">Místo parkování</string>
-  <string name="osmand_parking_plugin_description">Modul Parkovací místo umožňuje zapamatovat si kdy bylo auto zaparkované a kolik zůstává času, pokud je parkování časově omezené. Parkovací místo a čas parkování můžete najít na panelu aktuální mapy.\nTaké je možné přidat upomínku do kalendáře, pokud chcete být upozorněni.</string>
+  <string name="osmand_parking_plugin_description">Modul Parkovací místo umožňuje zapamatování si, kdy jste auto zaparkovali a v případě časově omezeného parkování také kolik času zbývá. Parkovací místo a čas parkování můžete najít na panelu aktuální mapy. Je také možné přidat upomínku do kalendáře, pokud chcete být upozorněni.</string>
   <string name="osmand_parking_plugin_name">Parkovací místo</string>
   <string name="context_menu_item_add_parking_point">Označit jako místo parkování</string>
   <string name="context_menu_item_delete_parking_point">Smazat místo parkování</string>
@@ -1016,7 +1016,7 @@
 <string name="context_menu_item_intermediate_point">Přidat mezicíl</string>
 <string name="map_widget_intermediate_distance">Mezicíl</string>
 <string name="ending_point_too_far">Cíl je příliš daleko od nejbližší cesty.</string>
-<string name="btn_add_tag">Přidat označení</string>
+<string name="add_tag">Přidat označení</string>
 <string name="btn_advanced_mode">Pokročilý režim…</string>
 <string name="tip_app_mode_t_v2">\tOsmAnd podporuje několik konfigurovatelných profilů pro různé způsoby dopravy.
 \t\nProfil můžete změnit tlačítkem v levém dolním rohu mapové obrazovky (ikona auta, kola nebo chodce) nebo při zadávání navigace.
@@ -1185,7 +1185,7 @@
     
 	<string name="choose_osmand_theme">Vzhled aplikace</string>
     <string name="choose_osmand_theme_descr">Vybrat téma aplikace</string>
-    <string name="street_name">ulice</string>
+    <string name="street_name">Název ulice</string>
 	<string name="hno">číslo domu</string>
     <string name="download_using_mobile_internet">Momentálně nejste připojeni přes WiFi. Chcete pokračovat ve stahování se současným internetovým připojením?</string>
     
@@ -1266,7 +1266,7 @@
     
 	
     <string name="speak_speed_limit">Rychlostní omezení</string>
-    <string name="speak_cameras">Radary</string>
+    <string name="speak_cameras">Rychlostní radary</string>
 	<string name="speak_traffic_warnings">Dopravní varování</string>
 	
 	<string name="osb_author_dialog_password">Heslo OSM (volitelné)</string>
@@ -1640,12 +1640,12 @@ s často kladenými otázkami.</string>
     <string name="osmo_auth_error_short">Autorizace selhala</string>
     <string name="rendering_attr_showCycleRoutes_name">Zobrazit cyklostezky</string>
     <string name="forward">Vpřed</string>
-    <string name="home">Domů</string>
+    <string name="home">Domovská stránka</string>
     <string name="keep_navigation_service">Ponechat</string>
 	<string name="stop_navigation_service">Přerušit</string>
-	<string name="enable_sleep_mode">Zapnout režim spánku GPS</string>
+	<string name="enable_sleep_mode">Zapnout GPS v režimu na pozadí</string>
 	<string name="gps_wake_up_timer">Interval probouzení GPS</string>
-	<string name="sleep_mode_stop_dialog">Přerušit režim spánku GPS?</string>
+	<string name="sleep_mode_stop_dialog">Přerušit GPS běžící na pozadí?</string>
 	<string name="map_preferred_locale_descr">Preferovaný jazyk pro nápisy na mapě (pokud není dostupný budou použité anglické nebo lokální názvy)</string>
     <string name="map_preferred_locale">Preferovaný jazyk mapy</string>
     <string name="local_map_names">Lokální názvy</string>
@@ -1808,7 +1808,7 @@ s často kladenými otázkami.</string>
     <string name="rendering_value_americanRoadAtlas_name">Americký Atlas cest</string>
     <string name="routing_attr_no_new_routing_name">Nepoužívat routovací pravidla v1.9</string>
     <string name="routing_attr_no_new_routing_description">Nepoužívat pravidla výpočtu trasy zavedené ve verzi 1.9</string>
-    <string name="speak_pedestrian">Oznamovat přechody pro chodce</string>
+    <string name="speak_pedestrian">Přechody pro chodce</string>
     
 	<string name="gps_status">GPS stav</string>
     <string name="version_settings_descr">Stáhnout vývojové verze</string>
@@ -1943,11 +1943,11 @@ s často kladenými otázkami.</string>
     <string name="storage_directory">Úložiště map</string>
     <string name="shared_string_copy">Kopírovat</string>
     <string name="rendering_attr_hideHouseNumbers_name">Skrýt popisná čísla domů</string>
-    <string name="routing_attr_avoid_borders_name">Nepřekračovat hranice</string>
+    <string name="routing_attr_avoid_borders_name">Vyhnout se překročení hranic</string>
 	<string name="routing_attr_avoid_borders_description">Nepřekračovat hranice do jiné země</string>
 	<string name="routing_attr_height_name">Výškové omezení</string>
 	<string name="routing_attr_height_description">Zadejte výšku vozidla, jaká má být povolena na cestách</string>
-    <string name="use_fast_recalculation">inteligentní přepočítávání trasy</string>
+    <string name="use_fast_recalculation">Inteligentní přepočítávání trasy</string>
 	<string name="use_fast_recalculation_desc">Přepočítat pouze počáteční úsek trasy při dlouhých cestách</string>
 <string name="osmo_share_my_location">Sdílet moji polohu</string>
     <string name="shared_string_logoff">Odhlásit</string>
@@ -1984,14 +1984,92 @@ s často kladenými otázkami.</string>
     <string name="rendering_value_translucent_lightblue_name">Průsvitná světlemodrá</string>
     <string name="rendering_value_translucent_blue_name">Průsvitná modrá</string>
     <string name="rendering_value_translucent_purple_name">Průsvitná fialová</string>
-    <string name="lang_pms">Piedmontese</string>
+    <string name="lang_pms">Piedmontsky</string>
     <string name="archive_wikipedia_data">Stáhli jste zastaralá nekompatibilní Wikipedia data. Chcete je archivovat?</string>
     <string name="download_wikipedia_files">Chcete stáhnout dodatečná Wikipedia data (%1$s MB) ?</string>
     <string name="gps_network_not_enabled">Služba zjištění polohy není zapnuta. Chcete ji aktivovat?</string>
-    <string name="disable_recording_once_app_killed">Zabránit samotnému logování</string>
-    <string name="disable_recording_once_app_killed_descrp">Pozastaví záznam trasy pokud je aplikace ukončena (přes nedávné aplikace). (OsmAnd indikátor zmizí z upozorňovacího řádku Androidu.)</string>
+    <string name="disable_recording_once_app_killed">Zabránit samostatnému logování</string>
+    <string name="disable_recording_once_app_killed_descrp">Pozastaví záznam GPX trasy pokud je aplikace ukončena (přes nedávné aplikace). (OsmAnd indikátor zmizí ze stavového řádku Androidu.)</string>
     <string name="download_live_updates">Živé aktualizace</string>
 	<string name="no_updates_available">Nejsou dostupné žádné aktualizace</string>
     <string name="traffic_warning_hazard">Nebezpečí</string>
     <string name="rendering_value_boldOutline_name">Tučný obrys</string>
-    </resources>
+    <string name="favourites">Oblíbené</string>
+<string name="recent_places">Nedávná místa</string>
+	<string name="working_days">Pracovní dny</string>
+	<string name="please_specify_poi_type">Vyberte prosím typ POI.</string>
+	<string name="add_opening_hours">Přidat otevírací dobu</string>
+	<string name="description">Popis</string>
+	<string name="contact_info">Kontaktní informace</string>
+	<string name="do_you_like_osmand">Máte rádi OsmAnd?</string>
+	<string name="we_really_care_about_your_opinion">Záleží nám na vašem názoru, ceníme si vaší zpětné vazby.</string>
+	<string name="rate_this_app">Ohodnoťte tuto aplikaci</string>
+	<string name="rate_this_app_long">Ohodnoťte prosím aplikaci OsmAnd na Google Play</string>
+	<string name="user_hates_app_get_feedback">Řekněte nám proč.</string>
+	<string name="user_hates_app_get_feedback_long">Sdělte nám prosím, co byste chtěli v této aplikaci změnit.</string>
+	<string name="shared_string_skip">Přeskočit</string>
+	<string name="app_name_osmand">OsmAnd</string>
+	<string name="plugin_settings">Moduly</string>
+	<string name="av_locations_descr">GPX soubor s poznámkou umístění</string>
+    <string name="av_locations">Umístění</string>
+    <string name="routing_attr_avoid_shuttle_train_name">Vyhnout se kyvadlovému vlaku</string>
+	<string name="routing_attr_avoid_shuttle_train_description">Nepoužít kyvadlový vlak</string>
+    <string name="lang_la">Latinsky</string>
+    <string name="poi_action_delete">smazat</string>
+	<string name="failed_to_upload">Nepodařilo se odeslat</string>
+	<string name="delete_change">Smazat změnu</string>
+	<string name="successfully_uploaded_pattern">Úspěšně odeslané {0}/{1}</string>
+	<string name="try_again">Zkusit znovu</string>
+	<string name="error_message_pattern">Chyba: {0}</string>
+	<string name="dahboard_options_dialog_title">Nastavení domovské stránky</string>
+	<string name="shared_string_card_was_hidden">Karta byla skryta</string>
+	<string name="shared_string_undo">ZPĚT</string>
+	<string name="offline_maps_and_navigation">Offline mapy\n&amp; Navigace</string>
+	<string name="commit_poi">Odeslat POI</string>
+	<string name="tab_title_basic">Základní</string>
+	<string name="tab_title_advanced">Rozšířené</string>
+	<string name="building_number">Číslo domu</string>
+	<string name="next_proceed">Další</string>
+	<string name="tag_poi_name">název</string>
+	<string name="poi_dialog_poi_type">Typ POI</string>
+	<string name="number_of_rows_in_dash">Počet řádků v bloku %1$s</string>
+	<string name="saved_at_time">Úspěšně uloženo na: %1$s</string>
+	<string name="poi_deleted_localy">POI bude smazán jakmile vaše změny odešlete</string>
+	<string name="show_gpx">Zobrazit GPX</string>
+<string name="lang_bn">Bengálsky</string>
+    <string name="lang_tl">Tagalog</string>
+    <string name="lang_sh">Srbochorvatsky</string>
+    <string name="lang_az">Azersky</string>
+    <string name="lang_br">Bretonsky</string>
+    <string name="lang_sq">Albánsky</string>
+    <string name="lang_is">Islandsky</string>
+    <string name="lang_bpy">Bišnuprijsky</string>
+    <string name="lang_nv">Navajsky</string>
+    <string name="lang_ga">Irsky</string>
+    <string name="lang_ku">Kurdsky</string>
+    <string name="lang_ta">Tamilsky</string>
+    <string name="lang_ml">Malabarsky</string>
+    <string name="lang_lb">Lucembursky</string>
+    <string name="lang_os">Osetsky</string>
+    <string name="lang_eo">Esperanto</string>
+    <string name="lang_es_ar">Argentínsko Španělsky</string>
+    <string name="lang_nb">Norsky Bokmål</string>
+    <string name="lang_vo">Volapuk</string>
+    <string name="lang_th">Thajsky</string>
+    <string name="lang_te">Telugsky</string>
+    <string name="lang_nn">Norsky (Nynorsk)</string>
+    <string name="lang_new">Newar / Nepálsky Bhasa</string>
+    <string name="lang_ms">Malajsky</string>
+    <string name="lang_ht">Haitsky</string>
+    <string name="lang_gl">Galicijsky</string>
+    <string name="lang_et">Estonsky</string>
+    <string name="lang_ceb">Cebuansky</string>
+    <string name="tag_poi_amenity">občanská vybavenost</string>
+	<string name="opening_at">Otevřeno od</string>
+	<string name="closing_at">Otevřeno do</string>
+	<string name="count_of_lines">Počet řádků</string>
+<string name="show_on_start">Zobrazit po spuštění</string>
+	<string name="address_unknown">Adresa ještě není známa</string>
+    <string name="are_you_sure">Jste si jistý?</string>
+	<string name="unsaved_changes_will_be_lost">Neuložené změny budou ztraceny. Pokračovat?</string>
+</resources>

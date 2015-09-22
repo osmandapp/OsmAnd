@@ -33,7 +33,6 @@ public class DashSearchFragment extends DashBaseFragment {
 		((TextView) view.findViewById(R.id.search_for)).setTypeface(typeface);
 		((Button) view.findViewById(R.id.recents)).setTypeface(typeface);
 
-
 		return view;
 	}
 
@@ -61,7 +60,7 @@ public class DashSearchFragment extends DashBaseFragment {
 			}
 		});
 		btn.setCompoundDrawablesWithIntrinsicBounds(null, iconsCache.getIcon(R.drawable.ic_action_info2,
-				light ? R.color.dash_search_icon_light : R.color.dash_search_icon_dark), null, null);
+				light ? R.color.dash_search_icon_light : R.color.dashboard_subheader_text_dark), null, null);
 
 		btn = (Button)view.findViewById(R.id.address);
 		btn.setOnClickListener(new View.OnClickListener() {
@@ -72,7 +71,7 @@ public class DashSearchFragment extends DashBaseFragment {
 			}
 		});
 		btn.setCompoundDrawablesWithIntrinsicBounds(null, iconsCache.getIcon(R.drawable.ic_action_home2,
-				light ? R.color.dash_search_icon_light : R.color.dash_search_icon_dark), null, null);
+				light ? R.color.dash_search_icon_light : R.color.dashboard_subheader_text_dark), null, null);
 
 		btn = (Button) view.findViewById(R.id.coord);
 		btn.setOnClickListener(new View.OnClickListener() {
@@ -83,7 +82,7 @@ public class DashSearchFragment extends DashBaseFragment {
 			}
 		});
 		btn.setCompoundDrawablesWithIntrinsicBounds(null, iconsCache.getIcon(R.drawable.ic_action_marker2,
-				light ? R.color.dash_search_icon_light : R.color.dash_search_icon_dark), null, null);
+				light ? R.color.dash_search_icon_light : R.color.dashboard_subheader_text_dark), null, null);
 
 		(view.findViewById(R.id.recents)).setOnClickListener(new View.OnClickListener() {
 			@Override

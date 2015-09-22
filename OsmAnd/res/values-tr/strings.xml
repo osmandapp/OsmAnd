@@ -29,7 +29,7 @@
     <string name="context_menu_item_intermediate_point">Ara nokta olarak ekle</string>
     <string name="map_widget_intermediate_distance">Ara nokta</string>
     <string name="ending_point_too_far">Bitiş noktası en yakın yola çok fazla uzaklıkta.</string>
-    <string name="btn_add_tag">Etiket Ekle</string>
+    <string name="add_tag">Etiket Ekle</string>
     <string name="btn_advanced_mode">Gelişmiş Kip…</string>
     <string name="poi_filter_parking">Park Etme</string>
     <string name="poi_filter_emergency">Acil Durum</string>
@@ -169,7 +169,7 @@
     <string name="shared_string_control_start">Başlat</string>
     <string name="map_widget_av_notes">Ses/video notları</string>
     <string name="osmand_srtm_short_description_80_chars">Çevrimdışı çevreleme çizgileri için OsmAnd eklentisi</string>
-    <string name="osmand_srtm_long_description_1000_chars">Bu eklenti OsmAnd adlı çevrimdışı haritalar gösterilebilir kontür çizgileri sağlar. Global veri (70 derece kuzey ve 70 derece güney arasındaki) SRTM (Mekik Radar Topografi Misyonu) ve ASTER (Gelişmiş Uzay Termal Yayılma ve Yansıma Radyometre), bir görüntüleme aracı onboard Terra, NASA&amp;#39;nın Earth Gözlem amiral gemisi uydudan ölçümleri esas Sistemi. ASTER NASA arasında bir kooperatif çabadır, Ekonomi, Ticaret ve Sanayi Odası (METI) ve Japonya Uzay Sistemleri (J-spacesystems) Japonya Bakanlığı.</string>
+    <string name="osmand_srtm_long_description_1000_chars">"Bu eklenti OsmAnd çevrimdışı haritalarda eşyükseltileri (kabartma olarak) ve gölgeli yamaçları gösterir. Bu özellik çoğunlukla sporcular, uzun yürüyüşcüler, yürüyüşçüler ve tabii ki bir manzaranın kabartma yapısıyla ilgilenen herkesin takdirinedir.\n\nGlobal veri (70 derece kuzey ve 70 derece güney arasındaki) SRTM (Mekik Radar Topografi Misyonu) ve ASTER (Gelişmiş Uzay Termal Yayılma ve Yansıma Radyometre), bir görüntüleme aracı onboard Terra, NASA&amp;#39;nın Earth Gözlem amiral gemisi uydudan ölçümleri esas Sistemi. ASTER NASA arasında bir kooperatif çabadır, Ekonomi, Ticaret ve Sanayi Odası (METI) ve Japonya Uzay Sistemleri (J-spacesystems) Japonya Bakanlığı. "</string>
     
     
     
@@ -182,8 +182,8 @@
     <string name="audionotes_plugin_name">Ses/video notları</string>
     <string name="index_srtm_parts">bölümler</string>
     <string name="index_srtm_ele">Çevreleme çizgileri</string>
-    <string name="srtm_plugin_description">Çevrimdışı çevreleme çizgileri indirmeyi ve tepe gölgelendirmeyi başlat (Ayarlar -&gt; Veri Yönetim -&gt; İndir -&gt; İstenilen harita türünü seç).</string>
-    <string name="srtm_plugin_name">Çevreleme çizgileri eklentisi</string>
+    <string name="srtm_plugin_description">"Bu eklenti OsmAnd çevrimdışı haritalarda eşyükseltileri (kabartma olarak) ve gölgeli yamaçları gösterir. Bu özellik çoğunlukla sporcular, uzun yürüyüşcüler, yürüyüşçüler ve tabii ki bir manzaranın kabartma yapısıyla ilgilenen herkesin takdirinedir. "</string>
+    <string name="srtm_plugin_name">Eşyükselti çizgileri</string>
     <string name="download_select_map_types">Diğer haritalar</string>
     <string name="download_roads_only_item">Sadece yollar</string>
     <string name="download_srtm_maps">Çevreleme çizgileri</string>
@@ -582,7 +582,7 @@
 	<string name="map_online_data_descr">Çevrimiçi haritalar kullan (SD kart üzerine indirme ve önbellek verisi)</string>
 	<string name="online_map_settings_descr">Çevrimiçi veya önbelleğe alınmış çini harita kaynaklarını yapılandırın</string>
 	
-	<string name="osmand_rastermaps_plugin_description">Altlık olarak veya tamamlayıcı / altlık haritaları gibi online veya önbelleğe kiremit haritalar çeşitli yapılandırmak için ayarları göster. Bu haritalar ayrıca çevrimdışı ve OsmAnd klasöre kopyalanır hazırlanabilir.</string>
+	<string name="osmand_rastermaps_plugin_description">"Bu eklenti ile bir çok çevirimiçi (karo ya da raster) haritaya erişebilirsiniz, önceden tanımlanmış Openstreetmap karolarından (Mapnik gibi) uydu görüntülerine, hava haritaları gibi özel amaçlı katmanları, iklim haritaları, jeolojik haritalar, tepe katmanları, vb\n\nHerhangi bir harita ana (taban) olarak kullanılabilir ve OsmAnd ana harita ekranında gösterilir, veya başka bir ana haritaya üstlük, ya da altlık olabilir (normal OsmAnd çevrimdışı haritalar gibi). Herhangi bir altlık haritayı daha görünür yapmak, veya istediğiniz unsurları gizlemek için ‘Haritayı yapılandır’ bölümünden seçilebilir.\n\nKaro haritalar doğrudan çevrimiçi edinilebilir, veya çevrimdışı kullanmak için sqlite veritabanı üçüncü parti harita hazırlama araçları ile oluşturup hazırlanabilir (OsmAnd klasörüne elle kopyalamak gerekir). "</string>
 	<string name="osmand_accessibility_description">Özel erişilebilirlik özellikleri için ayarları göster.</string>
 	
 	
@@ -1263,7 +1263,7 @@
 	<string name="successfully_uploaded_pattern">Başarıyla yüklendi {0}/{1}</string>
 	<string name="try_again">Tekrar deneyin</string>
 	<string name="archive_wikipedia_data">Daha önce eski ve uyumsuz Wikipedia verisi indirmişsiniz. Bunları arşivlemek ister misiniz?</string>
-    <string name="download_wikipedia_files">Ekstra Wikipedia verisi indirmek ister misiniz? (%1$s MB)</string>
+    <string name="download_wikipedia_files">Ekstra Wikipedia verisi indirmek ister misiniz? (%1$s MB)?</string>
     <string name="gps_network_not_enabled">Konum servisi devre dışı. Ektinleştirmek ister misiniz?</string>
     <string name="shared_string_show_details">Detayları göster</string>
     <string name="rendering_value_disabled_name">Devre dışı</string>
@@ -1389,4 +1389,76 @@
 	<string name="color_blue">mavi</string>
 	<string name="color_green">yeşil</string>
 
+    <string name="av_locations_descr">Not lokasyonlu Gpx dosyası</string>
+    <string name="av_locations">Lokasyonlar</string>
+    <string name="plugin_settings">Eklentiler</string>
+	<string name="routing_attr_avoid_shuttle_train_description">Mekik treninden kaçın</string>
+    <string name="traffic_warning_hazard">Tehlike</string>
+    <string name="rendering_value_boldOutline_name">Kalın anahat</string>
+    <string name="lang_bn">Bengalce</string>
+    <string name="lang_tl">Tagalogca</string>
+    <string name="lang_sh">Sırp-Hırvatça</string>
+    <string name="lang_az">Azerice</string>
+    <string name="lang_br">Bretonca</string>
+    <string name="lang_sq">Arnavutça</string>
+    <string name="lang_is">İzlandaca</string>
+    <string name="lang_bpy">Bishnupriya</string>
+    <string name="lang_nv">Navajo</string>
+    <string name="lang_ga">İrlandaca</string>
+    <string name="lang_la">Latince</string>
+    <string name="lang_ku">Kürtçe</string>
+    <string name="lang_ta">Tamilce</string>
+    <string name="lang_ml">Malayalam dili</string>
+    <string name="lang_lb">Lüksemburgca</string>
+    <string name="lang_os">Osetçe</string>
+    <string name="lang_eo">Esperanto dili</string>
+    <string name="lang_es_ar">Arjantin İspanyolca</string>
+    <string name="lang_nb">Bokmål Norveççe</string>
+    <string name="lang_vo">Volapük</string>
+    <string name="lang_th">Tayca</string>
+    <string name="lang_te">Telugu dili</string>
+    <string name="lang_nn">Norveç dili (Nynorsk)</string>
+    <string name="lang_ms">Malezyalı</string>
+    <string name="lang_ht">Haitice</string>
+    <string name="lang_gl">Galiçyaca</string>
+    <string name="lang_et">Estonca</string>
+    <string name="lang_ceb">Sabuan dili</string>
+    <string name="disable_recording_once_app_killed">Tek başına günlüğe eklemeyi önle</string>
+    <string name="disable_recording_once_app_killed_descrp">Uygulama kapatılırsa (son uygulamalardan) GPX iz kaydına ara verilecektir. (OsmAnd Uyku modu simgesi Bildirim alanından kaybolur)</string>
+    <string name="download_wikipedia_item">Vikipedi</string>
+    <string name="routing_attr_avoid_shuttle_train_name">Mekik treninden kaçın</string>
+	<string name="local_indexes_cat_wiki">Vikipedi</string>
+    <string name="osm_edit_context_menu_delete">OSM Düzeltmesini Sil</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Rota kapsamına göre boyama</string>
+    <string name="shared_string_logoff">Çıkış yap</string>
+    <string name="application_dir_change_warning3">OsmAnd\'ın verileri ayrıca yeni hedefe de kopyalamasını ister misiniz?</string>
+    <string name="welcome_select_region">Doğru trafik işaretleri ve düzenlemeleri yansıtmak için sürüş bölgenizi seçin:</string>
+	<string name="welcome_text">OsmAnd global çevrimdışı harita tarama ve genel çevrimdışı gezinti sunar!</string>
+	<string name="osm_changes_added_to_local_edits">OSM değişiklikleri yerel değişiklik kümesine eklendi</string>
+   	<string name="delay_to_start_navigation_descr">Rota hesaplama için bekleme süresini belirtin</string>
+    <string name="delay_to_start_navigation">Sonra adım-adım navigasyona başla…</string>
+    <string name="osmand_parking_overdue">süresi geçmiş</string>
+	<string name="parking_place_limited">Zaman sınırlı otopark</string>
+	<string name="waypoint_visit_after">Sonra ziyaret edin</string>
+    <string name="waypoint_visit_before">Önce ziyaret et</string>
+    <string name="simulate_your_location">Konumunuzu simüle et</string>
+    <string name="drawer">Düz liste</string>
+    <string name="short_location_on_map">Enl %1$s\nBoyl %2$s</string>
+    <string name="shared_string_ellipsis">…</string>
+	<string name="shared_string_dismiss">Vazgeç</string>
+	<string name="shared_string_selected_lowercase">seçili</string>
+	<string name="shared_string_deselect">Seçimini kaldırın</string>
+	<string name="shared_string_deselect_all">Tüm Seçimleri Kaldır</string>
+	<string name="shared_string_collapse">Daralt</string>
+	<string name="shared_string_my_tracks">Benim İzlerim</string>
+	<string name="shared_string_currently_recording_track">Mevcut kaydedilen izim</string>
+	<string name="route_points">Rota noktaları</string>
+	<string name="track_segments">İz bölümü</string>
+	<string name="track_points">İz noktası</string>
+	<string name="record_plugin_name">Seyahat kaydetme</string>
+	<string name="record_plugin_description">"Bu eklenti harita ekranında zımbırtıya elle donunca GPX iz oluşturma ve saklama özelliğini etkinleştirir, ya da GPX izini navigasyon boyunca otomatik olarak saklayabilir.\n\nKaydedilen izler arkadaşlarınızla veya OSM katkıcılarıyla paylaşılabilir. Atletler çalışmalarını izlemek için iz kaydedebilir.  Basit iz analizi OsmAnd içinden yapılabilir, misal tur zamanı, ortalama hız vs., ve izler tabii ki daha sonra üçüncü parti araçlarla da analiz edilebilir. "</string>
+	<string name="osmo_plugin_name">OsMo (OSM İzleme)</string>
+	<string name="osmo_plugin_description">"Bu eklenti OsMo adlı gelişmiş canlı izlemeyi etkinleştirir, bkz  http://osmo.mobi.\n\nBir grup içindeki bütün aygıtları gerçek zamanlı olarak izleyebilir ve birbiriyle iletişim kurabilir. Oturum izleme veya daimi izleme için çeşitli seçenekleri vardır.\n\nAnonim gruplar belirli günlerde, ve belirli özelliklerde kendiliğinden oluşturulabilir, örn. uzaktan herhangi kontrol ve yönetici olmadan. Diğer yandan, tam özellikli gruplar websitesinde oluşturulabilir ve sadece kayıtlı kullanıcılar erişebilir. "</string>
+	<string name="plugin_touringview_name">Harita gezinti görünümü</string>
+	<string name="lang_new">Newar / Nepal Bhasa</string>
     </resources>

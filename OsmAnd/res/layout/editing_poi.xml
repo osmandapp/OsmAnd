@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
 
@@ -201,7 +202,9 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:stretchColumns="1"
-            android:visibility="gone" >
+            android:visibility="gone"
+            tools:layout_height="25dp"
+            tools:visibility="visible">
         </TableLayout>
 
         <LinearLayout
@@ -214,7 +217,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:minWidth="150dp"
-                android:text="@string/btn_add_tag"
+                android:text="@string/add_tag"
                 android:visibility="gone" />
 
             <Button

@@ -94,7 +94,7 @@ public class OsmEditsUploadListenerHelper implements OsmEditsUploadListener {
 				resources.getString(R.string.local_openstreetmap_uploading),
 				ProgressDialog.STYLE_HORIZONTAL).getDialog();
 		UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask(
-				dialog, helper, plugin, remotepoi, remotebug, toUpload.length);
+				dialog, helper, plugin, remotepoi, remotebug, toUpload.length, false);
 		uploadTask.execute(toUpload);
 
 		dialog.show();

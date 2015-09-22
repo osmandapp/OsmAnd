@@ -1,7 +1,8 @@
 package net.osmand.data;
 
+import java.io.Serializable;
 
-public class LatLon {
+public class LatLon implements Serializable {
 	private final double longitude;
 	private final double latitude;
 

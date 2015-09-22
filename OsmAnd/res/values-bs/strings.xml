@@ -106,7 +106,7 @@
     <string name="map_widget_show_destination_arrow">Prikaži smjer odredišta</string>
     <string name="no_route">Nema rute</string>
 	<string name="replace_destination_point">Promjeni odredište</string>
-    <string name="btn_add_tag">Dodaj oznaku</string>
+    <string name="add_tag">Dodaj oznaku</string>
     <string name="poi_filter_public_transport">Javni prijevoz</string>
     <string name="poi_filter_entertainment">Zabava</string>
     <string name="poi_filter_accomodation">Smještaj</string>

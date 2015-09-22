@@ -9,6 +9,12 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="address_unknown">Address is not known yet</string>
+    <string name="av_locations_descr">Gpx file with note locations</string>
+    <string name="av_locations">Locations</string>
+    <string name="plugin_settings">Plugins</string>
+	<string name="routing_attr_avoid_shuttle_train_name">Avoid shuttle train</string>
+	<string name="routing_attr_avoid_shuttle_train_description">Avoid shuttle train</string>
     <string name="traffic_warning_hazard">Hazard</string>
     <string name="rendering_value_boldOutline_name">Bold outline</string>
     <string name="no_updates_available">No updates available</string>
@@ -70,7 +76,7 @@
     <string name="download_wikipedia_files">Do you want to download additional Wikipedia data (%1$s MB) ?</string>
     <string name="gps_network_not_enabled">Location service is not enabled. Do you want to turn it on?</string>
     <string name="disable_recording_once_app_killed">Prevent standalone logging</string>
-    <string name="disable_recording_once_app_killed_descrp">Will pause GPX logging when the app is killed (via recent apps). (OsmAnd Sleep mode indication disappears from the Android notification bar.)</string>
+    <string name="disable_recording_once_app_killed_descrp">Will pause GPX logging when the app is killed (via recent apps). (OsmAnd background indication disappears from the Android notification bar.)</string>
     <string name="shared_string_import2osmand">Import to OsmAnd</string>
     <string name="read_full_article">Read full article (online)</string>
     <string name="download_wikipedia_item">Wikipedia</string>
@@ -299,7 +305,7 @@
     <string name="points">Points</string>
 	<string name="navigation_over_track">Start navigation along track?</string>
 	<string name="avoid_roads_msg">You can trigger an alternative route by selecting roads to avoid</string>
-	<string name="speak_pedestrian">Announce pedestrian crosswalks</string>
+	<string name="speak_pedestrian">Pedestrian crosswalks</string>
     <string name="rendering_attr_roadStyle_name">Road style</string>
     <string name="rendering_value__name">Default</string>
     <string name="rendering_value_default_name">Default</string>
@@ -395,8 +401,8 @@
     <string name="traffic_warning_calming">Traffic calming</string>
     <string name="traffic_warning_speed_camera">Speed camera</string>
     <string name="traffic_warning">Traffic warning</string>
-	<string name="speak_favorites">Announce nearby Favorites</string>
-	<string name="speak_poi">Announce nearby POI</string>
+	<string name="speak_favorites">Nearby Favorites</string>
+	<string name="speak_poi">Nearby POI</string>
 	<string name="way_alarms">Traffic warnings</string>
 	<string name="tip_navigation">Navigation</string>
 	<string name="tip_navigation_t">To get directions to a place, either directly long-click on it on the map, (then tap its description marker and select \'Directions to\'), or select \'Directions to\' after tapping any entry in a search results list or favorite list.
@@ -415,14 +421,14 @@
 		\n\t* or via your predefined favorites.
 		\n\nFor all hits a context menu or action bar offers options like \'Directions to\' or \'Show on map\', etc.
 	</string>
-	<string name="background_service_is_enabled_question">OsmAnd sleep mode service is still running. Do you want to interrupt it, too?</string>
-	<string name="sleep_mode_stop_dialog">Interrupt GPS sleep mode?</string>
+	<string name="background_service_is_enabled_question">OsmAnd background service is still running. Do you want to interrupt it, too?</string>
+	<string name="sleep_mode_stop_dialog">Interrupt GPS background mode?</string>
 	<string name="stop_navigation_service">Interrupt</string>
 	<string name="confirm_every_run">Always ask</string>
 	<string name="save_global_track_interval_descr">Choose logging interval for the general track recording (enabled via the GPX logging widget on the map)</string>
 	<string name="save_global_track_interval">General logging interval</string>
 	<string name="background_service_int">GPS Wake-up interval</string>
-	<string name="enable_sleep_mode">Enable GPS sleep mode</string>
+	<string name="enable_sleep_mode">Enable GPS background mode</string>
 	<string name="save_track_to_gpx_globally">Log track to GPX file</string>
 	<string name="save_track_to_gpx_globally_headline">On demand track logging</string>
 	<string name="save_track_to_gpx_globally_descr">General position logging to a GPX file can be turned on or off using the GPX logging widget on the map screen</string>
@@ -454,7 +460,7 @@
     <string name="shared_string_all">All</string>
     <string name="waypoints">Waypoints</string>
     <string name="targets">Destinations</string>
-    <string name="announce_gpx_waypoints">Announce GPX waypoints</string>
+    <string name="announce_gpx_waypoints">GPX waypoints</string>
     <string name="download_additional_maps">Download missing maps %1$s (%2$d MB)?</string>
     <string name="rendering_value_browse_map_name">Browse map</string>
     <string name="rendering_value_car_name">Car</string>
@@ -474,7 +480,7 @@
     <string name="lang_sw">Swahili</string>
     <string name="lang_he">Hebrew</string>
     <string name="forward">Forward</string>
-    <string name="home">Home</string>
+    <string name="home">Dashboard</string>
     <string name="live_monitoring_m_descr">Send tracking data to a specified web service if GPX logging is enabled.</string>
 	<string name="live_monitoring_m">Online tracking (GPX required)</string>
     <string name="live_monitoring_start">Start online tracking</string>
@@ -819,10 +825,10 @@
 	<string name="driving_region_uk">UK, India, Australia &amp; Others</string>
     <string name="speak_title">Announce…</string>
 	<string name="speak_descr">Configure to announce street names, traffic warnings (forced stops, speed bumps), speed camera warnings, speed limits</string>
-	<string name="speak_street_names">Announce street names (TTS)</string>
-    <string name="speak_speed_limit">Announce speed limit</string>
-    <string name="speak_cameras">Announce speed cameras</string>
-	<string name="speak_traffic_warnings">Announce traffic warnings</string>
+	<string name="speak_street_names">Street names (TTS)</string>
+    <string name="speak_speed_limit">Speed limit</string>
+    <string name="speak_cameras">Speed cameras</string>
+	<string name="speak_traffic_warnings">Traffic warnings</string>
     <string name="tip_recent_changes_1_5_t">Changes in 1.5:
 	\n\t* Voice warnings about speed limits and cameras
 	\n\t* More voice prompt capabilities (street names announced)
@@ -834,8 +840,8 @@
     <string name="clear_intermediate_points">Clear intermediate points</string>
     <string name="keep_intermediate_points">Keep intermediate points</string>
     <string name="new_directions_point_dialog">You already have intermediate points set.</string>
-    <string name="context_menu_item_directions_to">Directions To</string>
-    <string name="context_menu_item_directions_from">Directions From</string>
+    <string name="context_menu_item_directions_to">Directions to</string>
+    <string name="context_menu_item_directions_from">Directions from</string>
     <string name="route_descr_map_location">Map: </string>
     <string name="route_descr_lat_lon">Lat %1$.3f, lon %2$.3f</string>
     <string name="route_descr_current_location">Current position</string>
@@ -896,7 +902,7 @@
     <string name="cancel_navigation">Stop navigation</string>
     <string name="clear_destination">Clear destination</string>
     <string name="download_using_mobile_internet">Wi-Fi is currently not connected. Do you want to use the current Internet connection for downloading?</string>
-    <string name="street_name">Street</string>
+    <string name="street_name">Street name</string>
 	<string name="hno">House number</string>
     <string name="website">Web site</string>
 	<string name="phone">Phone</string>
@@ -906,7 +912,7 @@
         \n\t* Additional settings for stabilizing compass
         \n\t* Top left button on the map screen replaces Menu button
     </string>
-    <string name="osmand_background_plugin_description">Shows the settings to enable tracking and navigation in sleep (screen off) mode via periodically waking up the GPS device.</string>
+    <string name="osmand_background_plugin_description">Shows the settings to enable tracking and navigation in background (screen off) mode via periodically waking up the GPS device.</string>
     <string name="contribution_activity">Install version</string>
     <string name="choose_osmand_theme_descr">Choose application theme</string>
     <string name="choose_osmand_theme">App theme</string>
@@ -1038,12 +1044,12 @@
 	\n\t* Improved routing: faster, more precise, up to 250 km
 	\n\t* Introduce roads-only maps
 	\n\t* Map does not lose position lock after interruptions
-	\n\t* Enable sleep mode service during navigation
+	\n\t* Enable background service during navigation
     </string>
     <string name="tip_recent_changes_0_8_4_t">Changes in 0.8.4:
 	\n\t* Some bug fixes
 	\n\t* Map does not lose position lock after interruptions
-	\n\t* Enable sleep mode service during navigation
+	\n\t* Enable background service during navigation
     </string>
     <string name="close_changeset">Close changeset</string>
 	<string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner application not installed. Search in Market?</string>
@@ -1078,7 +1084,7 @@
     <string name="context_menu_item_intermediate_point">Add as waypoint</string>
     <string name="map_widget_intermediate_distance">Waypoint</string>
     <string name="ending_point_too_far">Ending point too far from nearest road.</string>
-    <string name="btn_add_tag">Add Tag</string>
+    <string name="add_tag">Add Tag</string>
     <string name="btn_advanced_mode">Advanced Mode…</string>
     <string name="poi_filter_parking">Parking</string>
     <string name="poi_filter_emergency">Emergency</string>
@@ -1328,8 +1334,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="map_widget_show_ruler">Ruler</string>
 	<string name="map_widget_view_direction">Viewing direction</string>
 	<string name="map_widget_transparent">Transparent skin</string>
-	<string name="bg_service_sleep_mode_off">Enable\n sleep mode</string>
-	<string name="bg_service_sleep_mode_on">Stop\n sleep mode</string>
+	<string name="bg_service_sleep_mode_off">Run\n app in background</string>
+	<string name="bg_service_sleep_mode_on">Stop\n running in background</string>
 	<string name="gps_wakeup_interval">GPS wake-up interval: %s</string>
 	<string name="int_continuosly">Continuous</string>
 	<string name="screen_is_locked">To unlock screen press lock icon</string>
@@ -1605,8 +1611,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="user_name_descr">Needed for openstreetmap.org submissions</string>
 	<string name="user_password">Your OSM password</string>
 	<string name="user_password_descr">Needed for openstreetmap.org submissions</string>
-	<string name="osmand_service">Sleep mode</string>
-	<string name="osmand_service_descr">Use to run OsmAnd while screen is off</string>
+	<string name="osmand_service">Background mode</string>
+	<string name="osmand_service_descr">OsmAnd runs in background while screen is off</string>
 	<string name="tip_rotation_switching">Map Orientation</string>
 	<string name="tip_rotation_switching_t_v2">You can toggle whether and how the map display is rotated by repeatedly clicking on the map screen\'s compass icon.
 		\n\nThe choices are:
@@ -1968,19 +1974,19 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="use_trackball">Use trackball</string>
 	<string name="background_service_wait_int_descr">Set maximum waiting time for each background position fix</string>
 	<string name="background_service_wait_int">Maximum wait for fix</string>
-	<string name="service_stop_background_service">Switch off OsmAnd sleep mode navigation service</string>
+	<string name="service_stop_background_service">Switch off OsmAnd background navigation service</string>
 	<string name="where_am_i">Where am I?</string>
 	<string name="process_navigation_service">OsmAnd navigation service</string>
 	<string name="network_provider">Network</string>
 	<string name="gps_provider">GPS</string>
 	<string name="int_seconds">seconds</string>
 	<string name="int_min">min.</string>
-	<string name="background_service_int_descr">Set wake-up interval used by sleep mode service</string>
-	<string name="background_service_provider_descr">Choose location provider used by sleep mode service</string>
+	<string name="background_service_int_descr">Set wake-up interval used by background service</string>
+	<string name="background_service_provider_descr">Choose location provider used by background service</string>
 	<string name="background_service_provider">Location provider</string>
 	<string name="background_router_service_descr">Runs OsmAnd in the background to track your position while screen is off</string>
-	<string name="background_router_service">Run in sleep mode</string>
-	<string name="off_router_service_no_gps_available">The sleep mode navigation service requires a location provider to be turned on.</string>
+	<string name="background_router_service">Run OsmAnd in background</string>
+	<string name="off_router_service_no_gps_available">The background navigation service requires a location provider to be turned on.</string>
 	<string name="hide_poi_filter">Hide filter</string>
 	<string name="show_poi_filter">Show filter</string>
 	<string name="search_poi_filter">Filter</string>
@@ -2185,6 +2191,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="poi_remove_success">POI was successfully deleted</string>
 	<string name="poi_action_add">add</string>
 	<string name="poi_action_change">change</string>
+	<string name="poi_action_delete">delete</string>
 	<string name="poi_action_succeded_template">Action {0} completed successfully.</string>
 	<string name="poi_error_unexpected_template">Unexpected error occurred while performing action {0}.</string>
 	<string name="poi_error_io_error_template">I/O error occurred while performing action {0}.</string>
@@ -2230,11 +2237,35 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="successfully_uploaded_pattern">Successfully uploaded {0}/{1}</string>
 	<string name="try_again">Try again</string>
 	<string name="error_message_pattern">Error: {0}</string>
-	<string name="dahboard_options_dialog_title">Dashboard options</string>
+	<string name="dahboard_options_dialog_title">Configure dashboard</string>
+	<string name="show_on_start">Show on start</string>
 	<string name="shared_string_card_was_hidden">Card was hidden</string>
 	<string name="shared_string_undo">UNDO</string>
 	<string name="shared_string_skip">Skip</string>
 	<string name="app_name_osmand">OsmAnd</string>
 	<string name="offline_maps_and_navigation"><![CDATA[Offline Maps\n& Navigation]]></string>
 	<string name="commit_poi">Commit POI</string>
+	<string name="tab_title_basic">Basic</string>
+	<string name="tab_title_advanced">Advanced</string>
+	<string name="building_number">Building Number</string>
+	<string name="next_proceed">Next</string>
+	<string name="opening_at">Opening at</string>
+	<string name="closing_at">Closing at</string>
+	<string name="tag_poi_name">name</string>
+	<string name="tag_poi_amenity">amenity</string>
+	<string name="contact_info">Contact info</string>
+	<string name="description">Description</string>
+	<string name="add_opening_hours">Add opening hours</string>
+	<string name="poi_dialog_poi_type">POI Type</string>
+	<string name="number_of_rows_in_dash">Number of rows in dash %1$s</string>
+	<string name="please_specify_poi_type">Please specify POI type.</string>
+	<string name="working_days">Working days</string>
+	<string name="recent_places">Recent places</string>
+	<string name="favourites">Favourites</string>
+	<string name="saved_at_time">Successfully saved at: %1$s</string>
+	<string name="poi_deleted_localy">POI will be deleted once you upload your changes</string>
+	<string name="show_gpx">Show GPX</string>
+	<string name="count_of_lines">Count of lines</string>
+	<string name="are_you_sure">Are you sure?</string>
+	<string name="unsaved_changes_will_be_lost">Any unsaved changes will be lost. Continue?</string>
 </resources>

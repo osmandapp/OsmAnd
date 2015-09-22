@@ -155,7 +155,7 @@
     <string name="settings_privacy">Privacidad</string>
     <string name="points">Puntos</string>
 	<string name="navigation_over_track">¿Iniciar la navegación a lo largo de la traza?</string>
-	<string name="speak_pedestrian">Anunciar cruces peatonales</string>
+	<string name="speak_pedestrian">Cruces peatonales</string>
     <string name="rendering_attr_roadStyle_name">Estilo vial</string>
     <string name="rendering_value_orange_name">Anaranjado</string>
     <string name="rendering_value_germanRoadAtlas_name">Atlas de caminos alemanes</string>
@@ -216,8 +216,8 @@
     <string name="traffic_warning_calming">Reductor de velocidad</string>
     <string name="traffic_warning_speed_camera">Radar de velocidad</string>
     <string name="traffic_warning">Aviso de tráfico</string>
-	<string name="speak_favorites">Anunciar favoritos cercanos</string>
-	<string name="speak_poi">Anunciar PDI cercanos</string>
+	<string name="speak_favorites">Favoritos cercanos</string>
+	<string name="speak_poi">PDI cercanos</string>
 	<string name="way_alarms">Avisos de tráfico</string>
 	<string name="tip_navigation">Navegación</string>
 	<string name="tip_search">Buscando</string>
@@ -239,7 +239,7 @@
     <string name="shared_string_all">Todos</string>
     <string name="waypoints">Puntos de ruta</string>
     <string name="targets">Destinos</string>
-    <string name="announce_gpx_waypoints">Anunciar puntos de ruta GPX</string>
+    <string name="announce_gpx_waypoints">Puntos de ruta GPX</string>
     <string name="download_additional_maps">¿Descargar los %1$s mapas que faltan (%2$d MB)?</string>
     <string name="rendering_value_bicycle_name">Bicicleta</string>
     <string name="rendering_value_pedestrian_name">Peatón</string>
@@ -512,20 +512,20 @@
     <string name="fav_point_dublicate">Nombre de punto favorito duplicado</string>
     <string name="fav_point_dublicate_message">El nombre del favorito elegido ya está en uso, se cambió a %1$s para evitar duplicación.</string>
     <string name="text_size_descr">Define el tamaño del texto en el mapa.</string>
-    <string name="tip_navigation_t">"Para recibir indicaciones hasta un lugar, o bien mantén pulsado sobre el mismo en el mapa, (luego pulsa sobre su descripción y selecciona \'Indicaciones a\'), o selecciona \'Indicaciones a\' luego de pulsar sobre una entrada en una lista de resultados de búsqueda o de favoritos.
+    <string name="tip_navigation_t">"Para recibir indicaciones hasta un lugar, o bien mantén pulsado sobre el mismo en el mapa, (luego pulsa sobre su descripción y selecciona \'Ir hasta\'), o selecciona \'Ir hasta\' luego de pulsar sobre una entrada en una lista de resultados de búsqueda o de favoritos.
 \n\nEl destino se marca en el mapa como una bandera y OsmAnd muestra la distancia y la dirección al mismo (triángulo naranja).
 \n\nPuede elegir \'Iniciar Navegación\', lo que implica que OsmAnd te guiará, te dará indicaciones vocales (si están activas), etc. O puede elegir \'Mostrar ruta\', y solamente mostrará la ruta, sin indicaciones ni reajustes según se mueva.
-\n\nPara mostrar una ruta al destino desde cualquier punto diferente de la posición actual, selecciónelo posteriormente en el mapa y pulsa \'Indicaciones desde\'.
-\n\nSi usa \'Indicaciones desde\' y luego \'Iniciar Navegación\', OsmAnd cambiará a su ubicación actual tan pronto como la conozca (por lo que se puede usar para iniciar la ruta antes de conocer la ubicación real). Por otro lado, \'Indicaciones desde\' y \'Mostrar ruta\' no realizará actualizaciones de la ruta mostrada. "</string>
-	<string name="tip_search_t">"Puede buscar lugares directamente en el mapa vía \'Usar ubicación\'→\'Buscar cerca de aquí\', o mediante la pantalla de búsqueda vía \'Menú\'→\'Buscar\'.
+\n\nPara mostrar una ruta al destino desde cualquier punto diferente de la posición actual, selecciónelo posteriormente en el mapa y pulsa \'Ir desde\'.
+\n\nSi usa \'Ir desde\' y luego \'Iniciar Navegación\', OsmAnd cambiará a su ubicación actual tan pronto como la conozca (por lo que se puede usar para iniciar la ruta antes de conocer la ubicación real). Por otro lado, \'Ir desde\' y \'Mostrar ruta\' no realizará actualizaciones de la ruta mostrada. "</string>
+	<string name="tip_search_t">"Puede buscar lugares directamente en el mapa vía \'Usar ubicación\'→\'Buscar cerca\', o mediante la pantalla de búsqueda vía \'Menú\'→\'Buscar\'.
 \n\nLa pantalla de búsqueda proporciona plantillas para buscar:
 \n\t* por dirección
 \n\t* por coordenadas
 \n\t* como PDI (por tipo o por nombre)
 \n\t* por su historial de búsquedas
 \n\t* o en sus favoritos predefinidos.
-\n\nPara los puntos encontrados, se ofrece un menú contextual o barra de acciones con opciones como \'Indicaciones a\' o \'Mostrar en mapa\', etc. "</string>
-	<string name="background_service_is_enabled_question">El modo reposo, aún está funcionando. ¿Quiere interrumpirlo también?</string>
+\n\nPara los puntos encontrados, se ofrece un menú contextual o barra de acciones con opciones como \'Ir hasta\' o \'Mostrar en mapa\', etc. "</string>
+	<string name="background_service_is_enabled_question">El servicio de fondo, aún está funcionando. ¿Quiere interrumpirlo también?</string>
 	<string name="sleep_mode_stop_dialog">¿Interrumpir el modo reposo del GPS?</string>
 	<string name="save_global_track_interval_descr">Elige el intervalo de registro para la grabación de trazas general (activar mediante el control de grabación GPX en el mapa)</string>
 	<string name="save_global_track_interval">Intervalo general de guardado</string>
@@ -553,7 +553,7 @@
 	<string name="map_preferred_locale_descr">Idioma preferido para las etiquetas en el mapa (si no está disponible, se cambiará a inglés o a nombres locales)</string>
     <string name="map_preferred_locale">Idioma preferido del mapa</string>
     <string name="forward">Siguiente</string>
-    <string name="home">Inicio</string>
+    <string name="home">Panel</string>
     <string name="live_monitoring_m_descr">Envíe los datos de rastreo a un servicio web específico, si la grabación GPX está activada.</string>
 	<string name="live_monitoring_m">Rastreo en línea (requiere GPX)</string>
     <string name="live_monitoring_start">Iniciar rastreo en línea</string>
@@ -605,7 +605,7 @@
 	<string name="calculate_osmand_route_without_internet">Calcular el segmento de la ruta OsmAnd sin Internet</string>
     <string name="gpx_option_calculate_first_last_segment">Calcular la ruta OsmAnd para el primer y último segmento de ruta</string>
     <string name="use_displayed_track_for_navigation">¿Desea usar la ruta mostrada para la navegación?</string>
-    <string name="routing_attr_avoid_ferries_name">Evitar ferries</string>
+    <string name="routing_attr_avoid_ferries_name">Evitar ferris / transbordadores</string>
 	<string name="routing_attr_avoid_ferries_description">Evite usar transbordadores</string>
 	<string name="android_19_location_disabled">Desde la versión Android 4.4 (KitKat), no puede descargar ni actualizar los mapas en la carpeta de almacenamiento anterior (%s). ¿Quiere cambiar a la ubicación de almacenamiento permitida y copiar todos los archivos de OsmAnd allí?
 \n Nota 1: Sus archivos antiguos permanecerán intactos (pero pueden ser borrados manualmente).
@@ -698,10 +698,10 @@
 	<string name="driving_region_uk">Reino Unido, India, Australia y otros</string>
     <string name="speak_title">Anunciar…</string>
 	<string name="speak_descr">Configure el anuncio de nombres de calles, avisos de tráfico (paradas, badenes), de radares y límites de velocidad</string>
-	<string name="speak_street_names">Anunciar nombres de calles (TTS)</string>
-    <string name="speak_speed_limit">Anunciar límites de velocidad</string>
-    <string name="speak_cameras">Anunciar radares</string>
-	<string name="speak_traffic_warnings">Anunciar avisos de tráfico</string>
+	<string name="speak_street_names">Nombres de calles (TTS)</string>
+    <string name="speak_speed_limit">Límites de velocidad</string>
+    <string name="speak_cameras">Radares</string>
+	<string name="speak_traffic_warnings">Avisos de tráfico</string>
     <string name="tip_recent_changes_1_5_t">"Cambios en 1.5:
 \n\t* Avisos de voz sobre límites de velocidad y radares
 \n\t* Más posibilidades de avisos de voz (anuncio de nombres de calles)
@@ -712,8 +712,8 @@
     <string name="clear_intermediate_points">Quitar puntos intermedios</string>
     <string name="keep_intermediate_points">Mantener puntos intermedios</string>
     <string name="new_directions_point_dialog">Ya definió puntos intermedios.</string>
-    <string name="context_menu_item_directions_to">Indicaciones a</string>
-    <string name="context_menu_item_directions_from">Indicaciones desde</string>
+    <string name="context_menu_item_directions_to">Llegar hasta aquí</string>
+    <string name="context_menu_item_directions_from">Ir desde aquí</string>
     <string name="route_descr_map_location">"Mapa: "</string>
     <string name="route_descr_lat_lon">Lat %1$.3f, Lon %2$.3f</string>
     <string name="route_descr_current_location">Posición actual</string>
@@ -763,7 +763,7 @@
     <string name="cancel_navigation">Parar navegación</string>
     <string name="clear_destination">Quitar destino</string>
     <string name="download_using_mobile_internet">El Wi-Fi no está conectado en este momento. ¿Desea usar la conexión actual a Internet para descargar?</string>
-    <string name="street_name">Calle</string>
+    <string name="street_name">Nombre de calle</string>
 	<string name="hno">Número</string>
     <string name="website">Sitio web</string>
 	<string name="phone">Teléfono</string>
@@ -871,7 +871,7 @@
     <string name="safe_mode">Modo seguro</string>
     <string name="native_library_not_running">La aplicación se está ejecutando en modo seguro (desactívelo en Ajustes).</string>
     <string name="tip_recent_changes_1_0_0_t">"Cambios en 1.0.0:\n\t* Navegación mejorada: más rápida y precisa (hasta 250 km)\n\t* Introduce mapas viales (sólo caminos)\n\t* El mapa no pierde el bloqueo de posición luego de interrupciones\n\t* Activa el servicio de fondo durante la navegación "</string>
-    <string name="tip_recent_changes_0_8_4_t">"Cambios en 0.8.4 :\n\t* Algunos fallos corregidos\n\t* El mapa no pierde el bloqueo de posición luego de las interrupciones\n\t* Active el servicio de modo reposo durante la navegación "</string>
+    <string name="tip_recent_changes_0_8_4_t">"Cambios en 0.8.4 :\n\t* Algunos fallos corregidos\n\t* El mapa no pierde el bloqueo de posición luego de las interrupciones\n\t* Active el servicio de fondo durante la navegación "</string>
     <string name="close_changeset">Cerrar conjunto de cambios</string>
 	<string name="zxing_barcode_scanner_not_found">La aplicación ZXing Barcode Scanner no está instalada. ¿Buscarla en la Tienda?</string>
 	<string name="rendering_attr_roadColors_description">Elige un esquema de color vial:</string>
@@ -903,7 +903,7 @@
     <string name="context_menu_item_intermediate_point">Añadir como punto de ruta</string>
     <string name="map_widget_intermediate_distance">Punto de ruta</string>
     <string name="ending_point_too_far">Punto final demasiado lejos del camino más cercano.</string>
-    <string name="btn_add_tag">Añadir Etiqueta</string>
+    <string name="add_tag">Añadir Etiqueta</string>
     <string name="btn_advanced_mode">Modo Avanzado…</string>
     <string name="poi_filter_parking">Estacionamiento</string>
     <string name="poi_filter_emergency">Emergencia</string>
@@ -1077,8 +1077,8 @@
 	<string name="map_widget_show_ruler">Escala</string>
 	<string name="map_widget_view_direction">Dirección de visualización</string>
 	<string name="map_widget_transparent">Apecto transparente</string>
-	<string name="bg_service_sleep_mode_off">Activar\n modo reposo</string>
-	<string name="bg_service_sleep_mode_on">Parar\n modo reposo</string>
+	<string name="bg_service_sleep_mode_off">Correr\n aplicación en segundo plano</string>
+	<string name="bg_service_sleep_mode_on">Parar\n servicio en segundo plano</string>
 	<string name="gps_wakeup_interval">Intervalo de activación del GPS: %s</string>
 	<string name="int_continuosly">Continuamente</string>
 	<string name="screen_is_locked">Para desbloquear la pantalla presiona el icono del candado</string>
@@ -1196,7 +1196,7 @@
 	<string name="vector_maps_may_display_faster_on_some_devices">Los mapas vectoriales pueden mostrarse más rápido. Puede no funcionar correctamente en algunos dispositivos.</string>
 	<string name="play_commands_of_currently_selected_voice">Reproduce indicaciones de voz elegidas</string>
 	<string name="native_rendering">Dibujo nativo</string>
-	<string name="test_voice_prompts">Probar indicaciones de voz</string>    
+	<string name="test_voice_prompts">Probar avisos de voz</string>    
 	<string name="switch_to_raster_map_to_see">No existe mapa vectorial sin conexión presente en esta ubicación. Puede descargar uno en Opciones (Gestionar mapas), o cambiar al mapa en línea (para esto, activar el complemento de mapas en línea).</string>
 	<string name="tip_recent_changes_0_7_2_t">"Cambios en 0.7.2 :
 \n\t- Dibujo nativo para todos los dispositivos
@@ -1313,8 +1313,8 @@
 	<string name="index_name_oceania">Oceanía</string>
 	<string name="index_name_other">Mapas mundiales y temáticos</string>
 	<string name="index_name_wiki">Wikipedia mundial</string>
-	<string name="index_name_voice">Indicaciones de voz (grabado, funciones limitadas)</string>
-	<string name="index_name_tts_voice">Indicaciones de voz (sintetizado TTS, preferido)</string>
+	<string name="index_name_voice">Avisos de voz (grabado, funciones limitadas)</string>
+	<string name="index_name_tts_voice">Avisos de voz (sintetizado TTS, preferido)</string>
 	<string name="amenity_type_osmwiki">Wikipedia (sin conexión)</string>
 	<string name="amenity_type_user_defined">Definido por el usuario</string>
 	<string name="fav_export_confirmation">Ya existe un archivo anterior con favoritos exportados. ¿Quiere sustituirlo?</string>
@@ -1331,7 +1331,7 @@
 	<string name="user_password">Su clave de OSM</string>
 	<string name="user_password_descr">Necesario para envíos a OpenStreetMap.org</string>
 	<string name="osmand_service">Modo reposo</string>
-	<string name="osmand_service_descr">Ejecutar OsmAnd mientras la pantalla este apagada</string>
+	<string name="osmand_service_descr">Ejecutar OsmAnd en segundo plano, mientras la pantalla este apagada</string>
 	<string name="tip_rotation_switching">Orientación del mapa</string>
 	<string name="tip_rotation_switching_t_v2">"Puede alternar cuándo y cómo el mapa se gira, pulsando repetidamente el icono de la brújula.
 \n\nLas opciones son:
@@ -1409,7 +1409,7 @@
 	<string name="search_position_current_location">Ubicación actual…</string>
 	<string name="search_position_map_view">Vista actual del mapa</string>
 	<string name="select_search_position">Origen:</string>
-	<string name="context_menu_item_search">Buscar cerca de aquí</string>
+	<string name="context_menu_item_search">Buscar cerca</string>
 	<string name="tip_recent_changes_0_6_7_t">"Cambios en 0.6.7 :
 \n\t- Gestor de datos descargados (descargar, borrar, activar/desactivar datos descargados directamente en OsmAnd)
 \n\t- Puntos y grupos favoritos (categorizar, borrar, gestionar favoritos)
@@ -1634,7 +1634,7 @@
 	<string name="transport_searching_route">Resultados de transporte ({0} al destino):</string>
 	<string name="transport_search_again">Reiniciar búsqueda de transporte</string>
 	<string name="voice">Voz grabada</string>
-	<string name="voices">Indicaciones de voz</string>
+	<string name="voices">Avisos de voz</string>
 	<string name="no_vector_map_loaded">Los mapas vectoriales no están cargados</string>
 	<string name="map_route_by_gpx">Navegar usando GPX</string>
 	<string name="gpx_files_not_found">Sin archivos GPX en la carpeta de trazas</string>
@@ -1676,19 +1676,19 @@
 	<string name="use_trackball">Usar rueda de desplazamiento</string>
 	<string name="background_service_wait_int_descr">Defina el tiempo de espera máximo para determinar la ubicación en cada lectura del servicio de fondo</string>
 	<string name="background_service_wait_int">Máxima espera para posicionamiento</string>
-	<string name="service_stop_background_service">Apagar servicio de navegación en modo reposo</string>
+	<string name="service_stop_background_service">Apagar el servicio de navegación de fondo</string>
 	<string name="where_am_i">¿Dónde estoy?</string>
 	<string name="process_navigation_service">Servicio de navegación OsmAnd</string>
 	<string name="network_provider">Red</string>
 	<string name="gps_provider">GPS</string>
 	<string name="int_seconds">segundos</string>
 	<string name="int_min">min.</string>
-	<string name="background_service_int_descr">Defina el intervalo de activación del modo reposo</string>
-	<string name="background_service_provider_descr">Elige el proveedor de ubicación del modo reposo</string>
+	<string name="background_service_int_descr">Defina el intervalo de activación del servicio de fondo</string>
+	<string name="background_service_provider_descr">Elige el proveedor de ubicación del servicio de fondo</string>
 	<string name="background_service_provider">Proveedor de ubicación</string>
 	<string name="background_router_service_descr">Ejecute OsmAnd de fondo para trazar su ubicación con la pantalla apagada</string>
-	<string name="background_router_service">Ejecutar en modo reposo</string>
-	<string name="off_router_service_no_gps_available">El servicio de navegación en modo reposo, necesita un proveedor de ubicación para activarse.</string>
+	<string name="background_router_service">Ejecutar en segundo plano</string>
+	<string name="off_router_service_no_gps_available">El servicio de navegación en segundo plano, necesita un proveedor de ubicación para activarse.</string>
 	<string name="hide_poi_filter">Ocultar filtro</string>
 	<string name="show_poi_filter">Mostrar filtro</string>
 	<string name="search_poi_filter">Filtro</string>
@@ -1946,7 +1946,7 @@
     <string name="shared_string_import2osmand">Importar a OsmAnd</string>
     <string name="local_recordings_delete_all_confirm">Borrará %1$d nota(s). ¿Seguro?</string>
 	<string name="disable_recording_once_app_killed">Prevenir grabación independiente</string>
-    <string name="disable_recording_once_app_killed_descrp">La grabación GPX se pausará cuando se cierre la aplicación (mediante aplicaciones recientes). (La indicación del modo reposo de OsmAnd, desaparecerá de la barra de notificaciones de Android.)</string>
+    <string name="disable_recording_once_app_killed_descrp">La grabación GPX se pausará cuando se cierre la aplicación (mediante aplicaciones recientes). (La indicación de fondo de OsmAnd, desaparecerá de la barra de notificaciones de Android.)</string>
 	<string name="gps_network_not_enabled">El servicio de ubicación está desactivado. ¿Quiere activarlo?</string>
     <string name="archive_wikipedia_data">Tiene descargado datos de Wikipedia viejos e incompatibles. ¿Quiere archivarlos?</string>
     <string name="download_wikipedia_files">¿Descargar datos adicionales de Wikipedia (%1$s MB)?</string>
@@ -2018,11 +2018,41 @@
     <string name="we_really_care_about_your_opinion">Nos interesa mucho y es importante oír su opinión.</string>
 	<string name="rendering_value_boldOutline_name">Borde remarcado</string>
     <string name="traffic_warning_hazard">Advertencia de riesgo</string>
-    <string name="dahboard_options_dialog_title">Opciones del panel</string>
-	<string name="shared_string_card_was_hidden">La tarjeta estaba oculta</string>
+    <string name="dahboard_options_dialog_title">Configurar panel</string>
+	<string name="shared_string_card_was_hidden">La tarjeta se ocultó</string>
 	<string name="shared_string_undo">Deshacer</string>
 	<string name="shared_string_skip">Omitir</string>
 	<string name="app_name_osmand">OsmAnd</string>
-	<string name="offline_maps_and_navigation">Mapas y navegación sin conexión</string>
+	<string name="offline_maps_and_navigation">Mapas y navegación
+\nsin conexión</string>
 <string name="commit_poi">Enviar PDI</string>
-</resources>
+<string name="routing_attr_avoid_shuttle_train_name">Evitar tren de enlace</string>
+	<string name="routing_attr_avoid_shuttle_train_description">Evite tomar trenes de enlace</string>
+    <string name="plugin_settings">Complementos</string>
+	<string name="tab_title_basic">Básico</string>
+	<string name="tab_title_advanced">Extendido</string>
+	<string name="building_number">Número de edificio</string>
+	<string name="next_proceed">Siguiente</string>
+	<string name="opening_at">Abren a las</string>
+	<string name="closing_at">Cierran a las</string>
+<string name="av_locations_descr">Archivo GPX con ubicaciones de la nota</string>
+    <string name="av_locations">Ubicaciones</string>
+    <string name="tag_poi_name">nombre</string>
+	<string name="tag_poi_amenity">servicio</string>
+	<string name="contact_info">Información de contacto</string>
+	<string name="description">Descripción</string>
+	<string name="add_opening_hours">Añadir horario de atención</string>
+	<string name="poi_dialog_poi_type">Tipo de PDI</string>
+<string name="number_of_rows_in_dash">Número de filas en el panel %1$s</string>
+	<string name="please_specify_poi_type">Especifica el tipo de PDI.</string>
+<string name="working_days">Días laborales</string>
+	<string name="recent_places">Lugares recientes</string>
+	<string name="favourites">Favoritos</string>
+<string name="poi_action_delete">borrar</string>
+	<string name="saved_at_time">Guardado exitosamente como: %1$s</string>
+<string name="poi_deleted_localy">El PDI se eliminará una vez subido los cambios</string>
+	<string name="show_gpx">Mostrar GPX</string>
+<string name="count_of_lines">Número de líneas</string>
+<string name="show_on_start">Mostrar al inicio</string>
+	<string name="address_unknown">Dirección desconocida</string>
+    </resources>

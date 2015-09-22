@@ -1,16 +1,7 @@
 package net.osmand.plus;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.text.Collator;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import android.app.AlertDialog;
+import android.content.Context;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
@@ -22,8 +13,17 @@ import net.osmand.util.Algorithms;
 
 import org.apache.tools.bzip2.CBZip2OutputStream;
 
-import android.app.AlertDialog;
-import android.content.Context;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.text.Collator;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class FavouritesDbHelper {
 
@@ -173,7 +173,7 @@ public class FavouritesDbHelper {
 		return true;
 	}
 	
-	public static AlertDialog.Builder checkDublicates(FavouritePoint p, FavouritesDbHelper fdb, Context uiContext) {
+	public static AlertDialog.Builder checkDuplicates(FavouritePoint p, FavouritesDbHelper fdb, Context uiContext) {
 		boolean emoticons = false;
 		String index = "";
 		int number = 0;
@@ -477,13 +477,17 @@ public class FavouritesDbHelper {
 				String s2 = o2.getName();
 				int i1 = Algorithms.extractIntegerNumber(s1);
 				int i2 = Algorithms.extractIntegerNumber(s2);
-				if(i1 == i2) {
-					String ot1 = Algorithms.extractIntegerPrefix(s1);
-					String ot2 = Algorithms.extractIntegerPrefix(s2);
-					return collator.compare(ot1, ot2);	
+				String ot1 = Algorithms.extractIntegerPrefix(s1);
+				String ot2 = Algorithms.extractIntegerPrefix(s2);
+				int res = collator.compare(ot1, ot2);
+				if (res == 0) {
+					res = i1 - i2;
 				}
-				
-				return i1 - i2;
+				if (res == 0) {
+					res = collator.compare(s1, s2);
+				}
+				return res;
+
 			}
 		};
 		return favoritesComparator;
@@ -516,7 +520,7 @@ public class FavouritesDbHelper {
 		return null;
 	}
 	
-	public void editFavouriteGroup(FavoriteGroup group, int color, boolean visible) {
+	public void editFavouriteGroup(FavoriteGroup group, String newName, int color, boolean visible) {
 		if(color != 0 && group.color != color) {
 			FavoriteGroup gr = flatGroups.get(group.name);
 			group.color = color;
@@ -530,6 +534,13 @@ public class FavouritesDbHelper {
 			for(FavouritePoint p : gr.points) {
 				p.setVisible(visible);
 			}	
+		}
+		if (!group.name.equals(newName)) {
+			FavoriteGroup gr = flatGroups.get(group.name);
+			group.name = newName;
+			for(FavouritePoint p : gr.points) {
+				p.setCategory(newName);
+			}
 		}
 		saveCurrentPointsIntoFile();
 	}

@@ -831,4 +831,8 @@
 	<string name="poi_tree">나무</string>
 	<string name="poi_wiki_place">위키백과</string>
 	<string name="poi_wiki_lang_en">영어 위키</string>
+	<string name="poi_node_networks">하이킹/자전거 네트워크 노드</string>
+		<string name="poi_hiking_routes">하이킹 코스</string>
+		<string name="poi_traffic_enforcement">트래픽 집행</string>
+	<string name="poi_doors">문</string>
 	</resources>

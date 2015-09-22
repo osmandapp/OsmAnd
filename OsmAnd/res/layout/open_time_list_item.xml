@@ -7,69 +7,85 @@
     android:gravity="center_vertical"
     android:orientation="horizontal">
 
-    <ImageButton
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_gravity="bottom"
+    <ImageView
+        android:id="@+id/clockIconImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
         android:src="@drawable/ic_action_time"/>
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="24dp"
-        android:orientation="vertical"
-        android:layout_weight="1">
+        android:layout_marginLeft="32dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
 
         <TextView
+            android:id="@+id/daysTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="@dimen/default_list_text_size"
             tools:text="Mo-We"/>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/divider_color"/>
+            android:background="?android:textColorSecondary"/>
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/timeContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:orientation="vertical">
+        android:gravity="center_vertical">
 
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="08:00"/>
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/openingTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="@dimen/default_list_text_size"
+                tools:text="08:00"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:textColorSecondary"/>
+        </LinearLayout>
 
         <View
-            android:layout_width="match_parent"
+            android:layout_width="16dp"
             android:layout_height="1dp"
-            android:background="@color/divider_color"/>
-    </LinearLayout>
+            android:background="?android:textColorSecondary"/>
 
-    <View
-        android:layout_width="16dp"
-        android:layout_height="1dp"
-        android:background="@color/divider_color"/>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:orientation="vertical">
-
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="20:00"/>
+            android:layout_marginLeft="16dp"
+            android:orientation="vertical">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/divider_color"/>
+            <TextView
+                android:id="@+id/closingTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="@dimen/default_list_text_size"
+                tools:text="20:00"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:textColorSecondary"/>
+        </LinearLayout>
     </LinearLayout>
 
     <ImageButton
@@ -78,6 +94,6 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_gravity="bottom"
-        android:src="@drawable/ic_action_close_dark"/>
+        android:src="@drawable/ic_action_remove_dark"/>
 
 </LinearLayout>

@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
 	android:layout_height="wrap_content"
-	android:minHeight="@dimen/list_item_height">
+	android:minHeight="@dimen/list_item_height"
+	android:paddingLeft="16dp"
+	android:paddingRight="10dp">
 
     <TextView
         android:id="@+id/download_tag"

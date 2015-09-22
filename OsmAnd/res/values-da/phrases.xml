@@ -355,14 +355,14 @@
         <string name="poi_chalet">Udlejningshytte</string>
 
         <string name="poi_place_of_worship">Sted for tilbedelse</string>
-        <string name="poi_religion_christian">Sted for tilbedelse: Kristen</string>
-        <string name="poi_religion_jewish">Sted for tilbedelse: Jødisk</string>
-        <string name="poi_religion_muslim">Sted for tilbedelse: Muslim</string>
-        <string name="poi_religion_sikh">Sted for tilbedelse: Sikh</string>
-        <string name="poi_religion_buddhist">Sted for tilbedelse: Buddhist</string>
-        <string name="poi_religion_hindu">Sted for tilbedelse: Hindu</string>
-        <string name="poi_religion_shinto">Sted for tilbedelse: Shinto</string>
-        <string name="poi_religion_taoist">Sted for tilbedelse: Taoistisk</string>
+        <string name="poi_religion_christian">Kristendom</string>
+        <string name="poi_religion_jewish">Jødedom</string>
+        <string name="poi_religion_muslim">Islam</string>
+        <string name="poi_religion_sikh">Sikhisme</string>
+        <string name="poi_religion_buddhist">Buddhisme</string>
+        <string name="poi_religion_hindu">Hinduisme</string>
+        <string name="poi_religion_shinto">Shinto</string>
+        <string name="poi_religion_taoist">Taoisme</string>
         <string name="poi_monastery">Kloster</string>
         <string name="poi_historic_monastery">Historisk kloster</string>
         <string name="poi_wayside_cross">Vejside kors</string>
@@ -1056,7 +1056,314 @@
 	<string name="poi_seasonal_winter">Vinter</string>
 
 	<string name="poi_crossing_traffic_signals">Med trafiksignaler</string>
-	<string name="poi_crossing_uncontrolled">Ukontrolleret</string>
+	<string name="poi_crossing_uncontrolled">Ikke kontrolleret</string>
 	<string name="poi_crossing_unmarked">Ikke markeret</string>
 
-	</resources>
+	<string name="poi_mill_pond">Mølledam</string>
+	<string name="poi_twitter">Twitter</string>
+	<string name="poi_skype">Skype</string>
+	<string name="poi_youtube">Youtube</string>
+	<string name="poi_instagram">Instagram</string>
+	<string name="poi_vk">VKontakte</string>
+	<string name="poi_google_plus">Google+</string>
+	<string name="poi_perfumery">Parfumeri</string>
+
+	<string name="poi_building">Bygning</string>
+
+<string name="poi_military_office">Militærkontor</string>
+	<string name="poi_notary">Notar</string>
+	<string name="poi_political_party">Partikontor</string>
+	<string name="poi_tax_advisor">Skatterådgvliningskontor</string>
+
+	<string name="poi_office_religion">Kontor for trossamfund</string>
+	<string name="poi_association">Foreningskontor</string>
+	<string name="poi_financial">Finansiel kontor</string>
+	<string name="poi_foundation">Fondskontor</string>
+	<string name="poi_religion_voodoo">Voodoo</string>
+	<string name="poi_religion_scientologist">Scientology</string>
+	<string name="poi_denomination_catholic">Katolsk</string>
+	<string name="poi_denomination_baptist">Baptist</string>
+	<string name="poi_denomination_roman_catholic">Romersk-katolsk</string>
+	<string name="poi_denomination_orthodox">Ortodoks</string>
+	<string name="poi_denomination_lutheran">Luthersk</string>
+	<string name="poi_denomination_sunni">Sunni</string>
+	<string name="poi_denomination_protestant">Protestant</string>
+	<string name="poi_denomination_methodist">Methodist</string>
+	<string name="poi_denomination_anglican">Anglikansk</string>
+	<string name="poi_denomination_presbyterian">Presbyteriansk</string>
+	<string name="poi_denomination_evangelical">Evangelisk</string>
+	<string name="poi_denomination_russian_orthodox">Russisk-ortodoks</string>
+	<string name="poi_denomination_pentecostal">Pinsebevægelsen</string>
+	<string name="poi_denomination_mormon">Mormon</string>
+	<string name="poi_denomination_jehovahs_witness">Jehovahs Vidner</string>
+	<string name="poi_denomination_reformed">Reformeret</string>
+	<string name="poi_denomination_episcopal">Episkopal</string>
+	<string name="poi_denomination_greek_catholic">Græsk-katolsk</string>
+	<string name="poi_denomination_tibetan">Tibetansk</string>
+	<string name="poi_denomination_salvation_army">Frelsens Hær</string>
+	<string name="poi_denomination_quaker">Kvæker</string>
+	<string name="poi_denomination_bulgarian_orthodox">Bulgarsk-ortodoks</string>
+	<string name="poi_denomination_adventist">Adventist</string>
+	<string name="poi_denomination_serbian_orthodox">Serbisk-ortodoks</string>
+	<string name="poi_denomination_spiritist">Spiritist</string>
+	<string name="poi_denomination_armenian_apostolic">Armensk apostolsk</string>
+	<string name="poi_denomination_dutch_reformed">Hollandsk reformeret</string>
+	<string name="poi_denomination_apostolic">Apostolsk</string>
+	<string name="poi_denomination_latter_day_saints">Sidste dages hellige</string>
+	<string name="poi_denomination_church_of_christ">Kristi kirke</string>
+	<string name="poi_denomination_georgian_orthodox">Georgisk-ortodoks</string>
+	<string name="poi_denomination_romanian_orthodox">Rumænsk-ortodoks</string>
+	<string name="poi_denomination_ethiopian_orthodox_tewahedo">Etiopisk-ortodoks tewahedo</string>
+	<string name="poi_denomination_coptic_orthodox">Koptisk-ortodoks</string>
+	<string name="poi_denomination_mahayana">Mahayana</string>
+
+	<string name="poi_religion_unitarian_universalist">Unitarisk universalisme</string>
+	<string name="poi_religion_multifaith">Multireligiøs</string>
+	<string name="poi_religion_jain">Jainisme</string>
+	<string name="poi_religion_spiritualist">Spiritisme</string>
+	<string name="poi_religion_bahai">Bahaism</string>
+	<string name="poi_religion_pagan">Hedenskab</string>
+	<string name="poi_religion_tenrikyo">Tenrikyo</string>
+	<string name="poi_religion_zoroastrian">Zarathustrisme</string>
+
+	<string name="poi_denomination_greek_orthodox">Græsk-ortodoks</string>
+	<string name="poi_denomination_seventh_day_adventist">Syvende Dags Adventist</string>
+	<string name="poi_denomination_new_apostolic">Nyapostolsk</string>
+	<string name="poi_denomination_church_of_england">Den Engelske kirke</string>
+	<string name="poi_denomination_shia">Shiisme</string>
+	<string name="poi_denomination_united_reformed">Forenede reformerte kirke</string>
+	<string name="poi_denomination_church_of_scotland">Den Skotske kirke</string>
+	<string name="poi_denomination_iglesia_ni_cristo">Iglesia ni cristo</string>
+	<string name="poi_denomination_mennonite">Mennonit</string>
+	<string name="poi_denomination_assemblies_of_god">Assemblies of god</string>
+	<string name="poi_denomination_nondenominational">Non-denominational</string>
+	<string name="poi_denomination_nazarene">Nazarene</string>
+	<string name="poi_denomination_united_methodist">Forenede methodister</string>
+	<string name="poi_denomination_congregational">Kongregationalisme</string>
+	<string name="poi_denomination_old_believers">Gammeltroende</string>
+	<string name="poi_denomination_united_church_of_christ">United church of christ</string>
+	<string name="poi_denomination_unitarian">Unitarisme</string>
+	<string name="poi_denomination_wesleyan">Wesleyan</string>
+	<string name="poi_denomination_shaktism">Shaktism</string>
+	<string name="poi_denomination_shingon_shu">Shingon buddhisme</string>
+	<string name="poi_denomination_maronite">Maronit</string>
+	<string name="poi_denomination_reform">Reformert</string>
+	<string name="poi_denomination_united">United Church of Christ</string>
+	<string name="poi_denomination_uniting">Uniting kirken</string>
+	<string name="poi_denomination_scientist">Kristen Videnskab</string>
+	<string name="poi_landfill_waste_nuclear">Atomaffald</string>
+	<string name="poi_start_date">Startdato</string>
+	<string name="poi_wheelchair">Kørestol</string>
+
+	<string name="poi_content_silage">Ensilage (indhold)</string>
+	<string name="poi_content_water">Vand (indhold)</string>
+	<string name="poi_content_slurry">Gylle (indhold)</string>
+	<string name="poi_content_oil">Olie (indhold)</string>
+	<string name="poi_content_fuel">Brændstof (indhold)</string>
+	<string name="poi_content_manure">Gødning (indhold)</string>
+	<string name="poi_content_wine">Vin (indhold)</string>
+	<string name="poi_content_sewage">Spildevand (indhold)</string>
+	<string name="poi_content_gas">Gas (indhold)</string>
+	<string name="poi_content_biomass">Biomasse (indhold)</string>
+	<string name="poi_content_wastewater">Afløbsvand (indhold)</string>
+	<string name="poi_content_crop">Afgrøde (indhold)</string>
+	<string name="poi_content_fodder">Foder (indhold)</string>
+	<string name="poi_content_beer">Øl (indhold)</string>
+	<string name="poi_content_salt">Salt (indhold)</string>
+	<string name="poi_content_grain">Korn (indhold)</string>
+
+	<string name="poi_bunker_silo">Plansilo</string>
+	<string name="poi_brownfield">Nedlagt industrigrund</string>
+	<string name="poi_greenfield">Nye byggegrunde</string>
+	<string name="poi_wholesale">Engros</string>
+
+	<string name="poi_trade_building_supplies">Byggematerialer</string>
+	<string name="poi_trade_plumbing">VVS materialer</string>
+	<string name="poi_trade_wood">Tømmer</string>
+	<string name="poi_trade_agricultural_supplies">Grovvarer</string>
+	<string name="poi_trade_tile">Fliser</string>
+
+	<string name="poi_population">Befolkning</string>
+
+	<string name="poi_parking_multi_storey">P-hus</string>
+
+	<string name="poi_bicycle_parking_stands">Cykelsstativ</string>
+	<string name="poi_bicycle_parking_wall_loops">Vægmonteret cykelparkering</string>
+	<string name="poi_bicycle_parking_building">Cykelparkeringsboks</string>
+	<string name="poi_bicycle_parking_shed">Cykelskur</string>
+	<string name="poi_bicycle_parking_bollard">Cykellæn</string>
+	<string name="poi_bicycle_parking_informal">Uformel</string>
+
+	<string name="poi_leaf_type_broadleaved">Bredbladet</string>
+	<string name="poi_leaf_type_needleleaved">Nålebladet</string>
+	<string name="poi_leaf_type_mixed">Blandet</string>
+	<string name="poi_leaf_type_leafless">Bladløs</string>
+
+	<string name="poi_trees_olive">Oliven</string>
+	<string name="poi_trees_apple">Æble</string>
+	<string name="poi_trees_oil">Palmeolie</string>
+	<string name="poi_trees_orange">Appelsin</string>
+	<string name="poi_trees_almond">Mandel</string>
+	<string name="poi_trees_banana">Banan</string>
+	<string name="poi_trees_hazel">Hassel</string>
+	<string name="poi_trees_coconut">Kokospalme</string>
+	<string name="poi_trees_persimmon">Ibenholt</string>
+	<string name="poi_trees_cherry">Kirsebær</string>
+	<string name="poi_trees_walnut">Valnød</string>
+	<string name="poi_trees_plum">Blommetræ</string>
+	<string name="poi_trees_peach">Fersken</string>
+	<string name="poi_trees_tea">Te</string>
+	<string name="poi_trees_coca">Cocabuske</string>
+	<string name="poi_trees_kiwi">Kiwi</string>
+	<string name="poi_trees_meadow_orchard">"Eng  frugthave"</string>
+	<string name="poi_trees_nectorine">Nektarin</string>
+	<string name="poi_trees_mango">Mango</string>
+	<string name="poi_trees_rubber">Gummitræ</string>
+	<string name="poi_trees_date">Daddelpalmeq</string>
+	<string name="poi_trees_coffea">Kaffetræ</string>
+	<string name="poi_trees_pomegranate">Granatæble</string>
+
+	<string name="poi_parking_underground">Párkeringskælder</string>
+	<string name="poi_bicycle_parking_rack">Cykelsstativ</string>
+	<string name="poi_nudism_yes">Naturisme: tilladt</string>
+	<string name="poi_nudism_no">Naturisme: forbudt</string>
+	<string name="poi_nudism_obligatory">Naturisme: obligatorisk</string>
+	<string name="poi_nudism_customary">Naturisme: sædvane</string>
+	<string name="poi_nudism_permissive">Naturisme: liberalt</string>
+
+	<string name="poi_height">Højde</string>
+	<string name="poi_ele">Højde over havoverfladen</string>
+	<string name="poi_cooling_tower">Køletårn</string>
+	<string name="poi_rural">Landlig</string>
+
+	<string name="poi_seats">Sæder</string>
+	<string name="poi_backrest_yes">Ryglæn: Ja</string>
+	<string name="poi_backrest_no">Ryglæn: nej</string>
+
+	<string name="poi_intermittent">Intermitterende</string>
+
+	<string name="poi_deadlock">Blindgyde</string>
+
+	<string name="poi_generator_source_coal">Energikilde: kul</string>
+	<string name="poi_generator_source_gas">Energikilde: gas</string>
+	<string name="poi_generator_source_nuclear">Energikilde: nuklear</string>
+	<string name="poi_generator_source_solar">Energikilde: solar</string>
+	<string name="poi_generator_source_hydro">Energikilde: hydro</string>
+	<string name="poi_generator_source_wind">Energikilde: vind</string>
+	<string name="poi_generator_source_geothermal">Energikilde: geotermisk</string>
+	<string name="poi_generator_source_oil">Energikilde: olie</string>
+	<string name="poi_generator_source_diesel">Energikilde: diesel</string>
+
+<string name="poi_aerialway_pylon">Svævebanepylon</string>
+
+	<string name="poi_power_tower">Højspændingsmast</string>
+	<string name="poi_power_pole">Elmast</string>
+
+	<string name="poi_lighting_tower">Lysmast</string>
+	<string name="poi_urban">Bymæssig</string>
+	<string name="poi_car_wash_self_service">Selvbetjening</string>
+
+	<string name="poi_int_name">International navn</string>
+	<string name="poi_nat_name">National navn</string>
+	<string name="poi_reg_name">Regional navn</string>
+	<string name="poi_loc_name">Lokalt navn</string>
+	<string name="poi_old_name">Gammelt navn</string>
+	<string name="poi_alt_name">Alternativt navn</string>
+
+	<string name="poi_pump_manual">Manuel pumpe</string>
+	<string name="poi_pump_powered">Motordrevet pumpe</string>
+	<string name="poi_pump_no">Ingen pumpe</string>
+
+	<string name="poi_water_characteristic_mineral">Vandkarakteristisk: mineralsk</string>
+	<string name="poi_water_characteristic_mud">Vandkarakteristisk: mudret</string>
+	<string name="poi_water_characteristic_sulfuric">Vandkarakteristisk: svovlholdig</string>
+
+	<string name="poi_water_point">Vandtilslutning</string>
+
+<string name="poi_species">Arter</string>
+	<string name="poi_genus">Slægt</string>
+	<string name="poi_taxon">Takson</string>
+
+	<string name="poi_cuisine">Køkken</string>
+
+<string name="poi_information_guidepost">Vejvisning</string>
+	<string name="poi_information_board">Informationstavle</string>
+	<string name="poi_information_map">Kort</string>
+	<string name="poi_information_office">Informationskontor</string>
+	<string name="poi_information_terminal">Informationsstander</string>
+	<string name="poi_information_route_marker">Ruteskilte</string>
+	<string name="poi_information_hikingmap">Vandrekort</string>
+	<string name="poi_information_nature">Information om natur</string>
+	<string name="poi_information_wildlife">Information om dyreliv</string>
+	<string name="poi_information_history">Information om historie</string>
+	<string name="poi_information_sign">Skilt</string>
+	<string name="poi_information_audioguide">Audioguide</string>
+	<string name="poi_information_bicyclemap">Cykelkort</string>
+	<string name="poi_information_tactile_model">Taktilmodel</string>
+	<string name="poi_information_tactile_map">Taktilkort</string>
+	<string name="poi_board_type_plants">Information om planter</string>
+	<string name="poi_board_type_geology">Information om geologi</string>
+	<string name="poi_board_type_public_transport">Information om offentlig transport</string>
+	<string name="poi_board_type_technology">Information om teknologi</string>
+	<string name="poi_board_type_astronomy">Information om astronomi</string>
+
+<string name="poi_information_trail_blaze">Stiafmærkning</string>
+	<string name="poi_board_type_notice">Advarseltavle</string>
+	<string name="poi_commercial">Forretningsområde</string>
+	<string name="poi_retail">Detailhandelsområde</string>
+
+	<string name="poi_fireplace_yes">Ildsted</string>
+	<string name="poi_fireplace_no">Intet ildsted</string>
+
+	<string name="poi_covered_yes">Med læ</string>
+	<string name="poi_covered_no">Uden læ</string>
+
+	<string name="poi_smoking_no">Rygning forbudt</string>
+	<string name="poi_smoking_outside">Rygning er kun tilladt udendørs</string>
+	<string name="poi_smoking_yes">Rygning tilladt</string>
+	<string name="poi_smoking_separated">Rygning er tilladt i et særskilt rum uden effektiv adskillelse</string>
+	<string name="poi_smoking_isolated">Rygning er tilladt i et separat rum med effektiv adskillelse</string>
+	<string name="poi_smoking_dedicated">Dedikeret til rygere</string>
+
+	<string name="poi_toll_no">Betaling af afgifter opkræves ikke</string>
+	<string name="poi_toll_yes">Betaling af afgifter opkræves</string>
+	<string name="poi_tactile_paving_yes">Med taktilbelægning</string>
+	<string name="poi_tactile_paving_no">Uden taktilbelægning</string>
+	<string name="poi_traffic_signals_sound_yes">Med lydsignal</string>
+	<string name="poi_traffic_signals_sound_no">Uden lydsignal</string>
+	<string name="poi_traffic_signals_sound_walk">Med lydsignal når det er tilladt at gå</string>
+
+<string name="poi_ford_stepping_stones">Trædestensbro</string>
+	<string name="poi_toll_hgv_yes">Betaling af afgifter opkræves for tunge lastvogne</string>
+	<string name="poi_rescue_station">Redningsstation</string>
+
+<string name="poi_bicycle_parking_anchors">Ankre</string>
+	<string name="poi_services">Serviceområde</string>
+
+<string name="poi_doors">Døre</string>
+	<string name="poi_paediatrics">Pædiatri</string>
+
+	<string name="poi_mini_roundabout">Mini-rundkørsel</string>
+	<string name="poi_railway_crossing">Jernbane fodgængerovergang</string>
+	<string name="poi_railway_level_crossing">Jernbaneoverskæring</string>
+	<string name="poi_bird_hide">Fugletårn</string>
+	<string name="poi_horse_riding">Ridning</string>
+	<string name="poi_garden">Have</string>
+
+	<string name="poi_heath">Hede</string>
+	<string name="poi_grass">Græs</string>
+	<string name="poi_grassland">Græsslette</string>
+	<string name="poi_scrub">Krat</string>
+	<string name="poi_farmland">Landbrugsjord</string>
+	<string name="poi_logging">Tømmerhugst</string>
+	<string name="poi_sand">Sand</string>
+
+	<string name="poi_windfall">Stormfald</string>
+	<string name="poi_dead_wood">Dødt træ</string>
+
+	<string name="poi_passing_place">Vigeplads</string>
+
+<string name="poi_leisure_common">Fælles rekreativt område</string>
+	<string name="poi_level">Niveau</string>
+
+</resources>

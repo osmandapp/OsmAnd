@@ -290,11 +290,6 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 		return false;
 	}
 
-	@Override
-	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
-		return false;
-	}
-
 
 
 	@Override

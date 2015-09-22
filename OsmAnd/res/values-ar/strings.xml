@@ -405,7 +405,7 @@
     <string name="context_menu_item_intermediate_point">أضف كإحداثية</string>
     <string name="map_widget_intermediate_distance">إحداثية</string>
     <string name="ending_point_too_far">نقطة النهاية بعيدة جدا عن أقرب طريق.</string>
-    <string name="btn_add_tag">أضف وسما</string>
+    <string name="add_tag">أضف وسما</string>
     <string name="show_warnings_descr">ضبط تحذيرات المرور ( حدود السرعة، والتوقف القسري، والمطبات الصناعية ) ، وتحذيرات كاميرا السرعة ، ومعلومات الممرات</string>
 	<string name="tip_recent_changes_1_6_t">التّغيرات في الإصدار 1.6:
     \n\t* دعم أجهزة الدّقة العالية الكاملة

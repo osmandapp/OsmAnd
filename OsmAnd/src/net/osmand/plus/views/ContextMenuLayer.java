@@ -1,19 +1,5 @@
 package net.osmand.plus.views;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.concurrent.ConcurrentHashMap;
-
-import net.osmand.CallbackWithObject;
-import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
-import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
@@ -30,10 +16,25 @@ import android.widget.FrameLayout.LayoutParams;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import net.osmand.CallbackWithObject;
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
+import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentHashMap;
+
 public class ContextMenuLayer extends OsmandMapLayer {
 	
 	public interface IContextMenuProvider {
-	
+
 		public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o);
 		
 		public LatLon getObjectLocation(Object o);
@@ -41,8 +42,10 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		public String getObjectDescription(Object o);
 		
 		public PointDescription getObjectName(Object o);
+
+		public boolean disableSingleTap();
 		
-		
+		public boolean disableLongPressOnMap();
 	}
 	
 	public interface IContextMenuProviderSelection {
@@ -59,7 +62,9 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	private LatLon latLon;
 	private String description;
 	private Map<Object, IContextMenuProvider> selectedObjects = new ConcurrentHashMap<Object, IContextMenuProvider>();
-	
+	private Object selectedObj;
+	private IContextMenuProvider contextObject;
+
 	private TextView textView;
 	private ImageView closeButton;
 	private OsmandMapTileView view;
@@ -68,7 +73,10 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	private final MapActivity activity;
 	private float scaleCoefficient = 1;
 	private CallbackWithObject<LatLon> selectOnMap = null;
-	
+
+	private boolean showContextMarker;
+	private ImageView contextMarker;
+
 	public ContextMenuLayer(MapActivity activity){
 		this.activity = activity;
 		if(activity.getLastNonConfigurationInstanceByKey(KEY_LAT_LAN) != null) {
@@ -115,6 +123,16 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		closeButton.setLayoutParams(lp);
 		closeButton.setImageDrawable(view.getResources().getDrawable(R.drawable.headliner_close));
 		closeButton.setClickable(true);
+
+		showContextMarker = false;
+		contextMarker = new ImageView(view.getContext());
+		contextMarker.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+		contextMarker.setImageDrawable(view.getResources().getDrawable(R.drawable.map_pin_context_menu));
+		contextMarker.setClickable(true);
+		int minw = contextMarker.getDrawable().getMinimumWidth();
+		int minh = contextMarker.getDrawable().getMinimumHeight();
+		contextMarker.layout(0, 0, minw, minh);
+
 		if(latLon != null){
 			setLocation(latLon, description);
 		}
@@ -131,6 +149,12 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		if(latLon != null){
 			int x = (int) box.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
 			int y = (int) box.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
+
+			if (showContextMarker) {
+				canvas.translate(x - contextMarker.getWidth() / 2, y - contextMarker.getHeight());
+				contextMarker.draw(canvas);
+			}
+
 			textView.setTextColor(nightMode != null && nightMode.isNightMode() ? Color.GRAY : Color.WHITE);
 			if (textView.getText().length() > 0) {
 				canvas.translate(x - textView.getWidth() / 2, y - textView.getHeight());
@@ -174,7 +198,19 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		int minh = closeButton.getDrawable().getMinimumHeight();
 		closeButton.layout(0, 0, minw, minh);
 	}
-	
+
+	public void showMapContextMenuMarker() {
+		showContextMarker = true;
+		view.refreshMap();
+	}
+
+	public void hideMapContextMenuMarker() {
+		if (showContextMarker) {
+			showContextMarker = false;
+			view.refreshMap();
+		}
+	}
+
 	public void setLocation(LatLon loc, String description){
 		latLon = loc;
 		if(latLon != null){
@@ -226,16 +262,60 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			view.refreshMap();
 			return true;
 		}
+
+		if (disableLongPressOnMap()) {
+			return false;
+		}
 		LatLon latLon = selectObjectsForContextMenu(tileBox, point);
-		String description = getSelectedObjectDescription();
-		setLocation(latLon, description);
+		if (latLon != null) {
+			if (selectedObjects.size() == 1) {
+				setLocation(null, "");
+				selectedObj = selectedObjects.keySet().iterator().next();
+				contextObject = selectedObjects.get(selectedObj);
+				showMapContextMenu(latLon);
+			} else if (selectedObjects.size() > 1) {
+				showContextMenuForSelectedObjects(latLon);
+			}
+		} else {
+			setLocation(null, "");
+			final double lat = tileBox.getLatFromPixel((int) point.x, (int) point.y);
+			final double lon = tileBox.getLonFromPixel((int) point.x, (int) point.y);
+			selectedObj = null;
+			contextObject = null;
+			showMapContextMenu(new LatLon(lat, lon));
+			//setLocation(new LatLon(lat, lon), null);
+		}
 		view.refreshMap();
 		return true;
 	}
 
+	public boolean disableSingleTap() {
+		boolean res = false;
+		for(OsmandMapLayer lt : view.getLayers()){
+			if(lt instanceof ContextMenuLayer.IContextMenuProvider) {
+				if (((IContextMenuProvider) lt).disableSingleTap()) {
+					res = true;
+					break;
+				}
+			}
+		}
+		return res;
+	}
+
+	public boolean disableLongPressOnMap() {
+		boolean res = false;
+		for (OsmandMapLayer lt : view.getLayers()) {
+			if (lt instanceof ContextMenuLayer.IContextMenuProvider) {
+				if (((IContextMenuProvider) lt).disableLongPressOnMap()) {
+					res = true;
+					break;
+				}
+			}
+		}
+		return res;
+	}
+
 	public LatLon selectObjectsForContextMenu(RotatedTileBox tileBox, PointF point) {
-		final double lat = tileBox.getLatFromPixel((int) point.x, (int) point.y);
-		final double lon = tileBox.getLonFromPixel((int) point.x, (int) point.y);
 		clearSelectedObjects();
 		List<Object> s = new ArrayList<Object>();
 		LatLon latLon = null;
@@ -250,24 +330,21 @@ public class ContextMenuLayer extends OsmandMapLayer {
 						((IContextMenuProviderSelection) l).setSelectedObject(o);
 					}
 					if(latLon == null) {
-						latLon = ((ContextMenuLayer.IContextMenuProvider) l).getObjectLocation(o);
+						latLon = l.getObjectLocation(o);
 					}
 				}
 			}
 		}
-		if(latLon == null) {
-			latLon = new LatLon(lat, lon);
-		}
 		return latLon;
 	}
-	
+
 	@Override
 	public boolean drawInScreenPixels() {
 		return true;
 	}
 	
 	public int pressedInTextView(RotatedTileBox tb, float px, float py) {
-		if (latLon != null) {
+		if (latLon != null && textView.getText().length() > 0) {
 			Rect bs = textView.getBackground().getBounds();
 			Rect closes = closeButton.getDrawable().getBounds();
 			int dx = (int) (px - tb.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude()));
@@ -284,7 +361,19 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		}
 		return 0;
 	}
-	
+
+	public boolean pressedContextMarker(RotatedTileBox tb, float px, float py) {
+		if (latLon != null && showContextMarker) {
+			Rect bs = contextMarker.getDrawable().getBounds();
+			int dx = (int) (px - tb.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude()));
+			int dy = (int) (py - tb.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude()));
+			int bx = dx + bs.width() / 2;
+			int by = dy + bs.height();
+			return (bs.contains(bx, by));
+		}
+		return false;
+	}
+
 	public String getSelectedObjectName(){
 		return getSelectedObjectInfo(true);
 	}
@@ -334,6 +423,11 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	@Override
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
+		if (pressedContextMarker(tileBox, point.x, point.y)) {
+			showMapContextMenu(latLon);
+			return true;
+		}
+
 		boolean nativeMode = (Build.VERSION.SDK_INT >= 14) || view.getSettings().SCROLL_MAP_BY_GESTURES.get();
 		int val = pressedInTextView(tileBox, point.x, point.y);
 		if(selectOnMap != null) {
@@ -355,6 +449,20 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				activity.getMapActions().contextMenuPoint(latLon.getLatitude(), latLon.getLongitude());
 			}
 			return true;
+		} else if (!disableSingleTap()) {
+			LatLon latLon = selectObjectsForContextMenu(tileBox, point);
+			if (latLon != null) {
+				if (selectedObjects.size() == 1) {
+					setLocation(null, "");
+					selectedObj = selectedObjects.keySet().iterator().next();
+					contextObject = selectedObjects.get(selectedObj);
+					showMapContextMenu(latLon);
+					return true;
+				} else if (selectedObjects.size() > 1) {
+					showContextMenuForSelectedObjects(latLon);
+					return true;
+				}
+			}
 		}
 		return false;
 	}
@@ -375,23 +483,36 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			builder.setItems(d, new OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					Object selectedObj = s.get(which);
-					for (OsmandMapLayer layer : view.getLayers()) {
-						layer.populateObjectContextMenu(selectedObj, menuAdapter);
-					}
-					activity.getMapActions().contextMenuPoint(l.getLatitude(), l.getLongitude(), menuAdapter, selectedObj);
+					selectedObj = s.get(which);
+					contextObject = selectedObjects.get(selectedObj);
+					showMapContextMenu(l);
 				}
 			});
 			builder.show();
 		} else {
-			Object selectedObj = selectedObjects.keySet().iterator().next();
-			for (OsmandMapLayer layer : view.getLayers()) {
-				layer.populateObjectContextMenu(selectedObj, menuAdapter);
-			}
-			activity.getMapActions().contextMenuPoint(l.getLatitude(), l.getLongitude(), menuAdapter, selectedObj);
+			selectedObj = selectedObjects.keySet().iterator().next();
+			contextObject = selectedObjects.get(selectedObj);
+			showMapContextMenu(l);
 		}
 	}
-	
+
+	private void showMapContextMenu(LatLon latLon) {
+		PointDescription pointDescription;
+		if (selectedObj != null && contextObject != null) {
+			pointDescription = contextObject.getObjectName(selectedObj);
+			LatLon objLocation = contextObject.getObjectLocation(selectedObj);
+			pointDescription.setLat(objLocation.getLatitude());
+			pointDescription.setLon(objLocation.getLongitude());
+		} else {
+			pointDescription = new PointDescription(latLon.getLatitude(), latLon.getLongitude());
+		}
+		this.latLon = new LatLon(pointDescription.getLat(), pointDescription.getLon());
+
+		showMapContextMenuMarker();
+		activity.getContextMenu().show(activity, pointDescription, selectedObj);
+	}
+
+
 	@Override
 	public boolean onTouchEvent(MotionEvent event, RotatedTileBox tileBox) {
 		if (latLon != null) {

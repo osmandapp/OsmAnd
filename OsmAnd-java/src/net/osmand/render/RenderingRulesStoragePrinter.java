@@ -1,7 +1,6 @@
 package net.osmand.render;
 
 import gnu.trove.iterator.TIntObjectIterator;
-import gnu.trove.map.hash.TIntObjectHashMap;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -24,12 +23,17 @@ public class RenderingRulesStoragePrinter {
 	public static void main(String[] args) throws XmlPullParserException, IOException {
 		RenderingRulesStorage.STORE_ATTTRIBUTES = true;
 //		InputStream is = RenderingRulesStorage.class.getResourceAsStream("default.render.xml");
-		String file = "/Users/victorshcherb/osmand/repos/resources/rendering_styles/default.render.xml";
-		Map<String, String> renderingConstants = new LinkedHashMap<String, String>();
-		InputStream is = new FileInputStream(file);
-		if(args != null && args.length > 0) {
-			is = new FileInputStream(args[0]);
+		String defaultFile = "/Users/victorshcherb/osmand/repos/resources/rendering_styles/default.render.xml";
+		if(args.length > 0) {
+			defaultFile = args[0];
 		}
+		String outputPath = ".";
+		if(args.length > 1) {
+			outputPath = args[1];
+		}
+		String name = "Style";
+		Map<String, String> renderingConstants = new LinkedHashMap<String, String>();
+		InputStream is = new FileInputStream(defaultFile);
 		// buggy attributes
 		try {
 			XmlPullParser parser = PlatformUtil.newXMLPullParser();
@@ -49,7 +53,7 @@ public class RenderingRulesStoragePrinter {
 		} finally {
 			is.close();
 		}
-		is = new FileInputStream(file);
+		is = new FileInputStream(defaultFile);
 		RenderingRulesStorage storage = new RenderingRulesStorage("default", renderingConstants);
 		final RenderingRulesStorageResolver resolver = new RenderingRulesStorageResolver() {
 			@Override
@@ -60,62 +64,48 @@ public class RenderingRulesStoragePrinter {
 			}
 		};
 		storage.parseRulesFromXmlInputStream(is, resolver);
-		new RenderingRulesStoragePrinter().printCppRules(storage, RenderingRulesStorage.ORDER_RULES);
+		new RenderingRulesStoragePrinter().printJavaFile(outputPath, name, storage);
+	
 	}
 	
-	protected void printCppRules(RenderingRulesStorage storage, int rules) throws IOException  {
-		TIntObjectHashMap<RenderingRule> rp = storage.tagValueGlobalRules[rules];
-		
-	}
-	
-	protected void printJavaFile(RenderingRulesStorage storage) throws IOException {
+	protected void printJavaFile(String path, String name, RenderingRulesStorage storage) throws IOException {
 		PrintStream out = System.out;
-		out = new PrintStream(
-				new File(
-						"/Users/victorshcherb/osmand/repos/android/OsmAnd-java/src/net/osmand/render/DefaultRenderingRulesStorage.java"));
-		out.println("\n\npackage net.osmand.render;\n\npublic class DefaultRenderingRulesStorage {");
+		out = new PrintStream(new File(path, name + "RenderingRulesStorage.java"));
+		out.println("\n\npackage net.osmand.render;\n\npublic class " + name + "RenderingRulesStorage {");
 		String defindent = "\t";
 		String indent = defindent;
-		out.println(""+indent + defindent +"RenderingRulesStorage storage;");
-		
-		out.println(
-		"\tprivate java.util.Map<String, String> createMap(int... attrs) {\n" +
-		"\t	java.util.Map<String, String> mp = new java.util.HashMap<String, String>();\n" +
-		"\t		for(int i = 0; i< attrs.length; i+=2) {\n" +
-		"\t			mp.put(storage.getStringValue(attrs[i]), storage.getStringValue(attrs[i+1]));\n" +
-		"\t		}\n"+
-		"\t	return mp;\n"+
-		"\t}");
-		
-		out.println(
-				"\tprivate java.util.Map<String, String> createMap(String... attrs) {\n" +
-				"\t	java.util.Map<String, String> mp = new java.util.HashMap<String, String>();\n" +
-				"\t		for(int i = 0; i< attrs.length; i+=2) {\n" +
-				"\t			mp.put(attrs[i], attrs[i+1]);\n" +
-				"\t		}\n"+
-				"\t	return mp;\n"+
-				"\t}");
-		
+		out.println("" + indent + defindent + "RenderingRulesStorage storage;");
+
+		out.println("\tprivate java.util.Map<String, String> createMap(int... attrs) {\n"
+				+ "\t	java.util.Map<String, String> mp = new java.util.HashMap<String, String>();\n"
+				+ "\t		for(int i = 0; i< attrs.length; i+=2) {\n"
+				+ "\t			mp.put(storage.getStringValue(attrs[i]), storage.getStringValue(attrs[i+1]));\n" + "\t		}\n"
+				+ "\t	return mp;\n" + "\t}");
+
+		out.println("\tprivate java.util.Map<String, String> createMap(String... attrs) {\n"
+				+ "\t	java.util.Map<String, String> mp = new java.util.HashMap<String, String>();\n"
+				+ "\t		for(int i = 0; i< attrs.length; i+=2) {\n" + "\t			mp.put(attrs[i], attrs[i+1]);\n" + "\t		}\n"
+				+ "\t	return mp;\n" + "\t}");
+
 		out.println("\n" + indent + "public void createStyle(RenderingRulesStorage storage) {");
-		out.println(""+indent + defindent +"this.storage=storage;");
-		out.println(""+indent + defindent +"storage.renderingName="+javaString(storage.renderingName)+";");
-		out.println(""+indent + defindent +"storage.internalRenderingName="+javaString(storage.internalRenderingName)+";");
+		out.println("" + indent + defindent + "this.storage=storage;");
+		out.println("" + indent + defindent + "storage.renderingName=" + javaString(storage.renderingName) + ";");
+		out.println("" + indent + defindent + "storage.internalRenderingName="
+				+ javaString(storage.internalRenderingName) + ";");
 		// init dictionary must be first here
-		out.println(""+indent + defindent +"initDictionary();");
-		out.println(""+indent + defindent +"initProperties();");
-		out.println(""+indent + defindent +"initConstants();");
-		out.println(""+indent + defindent +"initAttributes();");
-		out.println(""+indent + defindent +"initRules();");
-		out.println(""+indent +"}");
+		out.println("" + indent + defindent + "initDictionary();");
+		out.println("" + indent + defindent + "initProperties();");
+		out.println("" + indent + defindent + "initConstants();");
+		out.println("" + indent + defindent + "initAttributes();");
+		out.println("" + indent + defindent + "initRules();");
+		out.println("" + indent + "}");
 		printJavaInitConstants(storage, out, indent, defindent);
 		printJavaInitProperties(storage, out, indent, defindent);
 		printJavaInitRules(storage, out, indent, defindent);
 		printJavaInitAttributes(storage, out, indent, defindent);
 		// PRINT last one in order to initialize storage properly
 		printJavaInitDictionary(storage, out, indent, defindent);
-		
 
-		
 		out.println("\n\n}");
 	}
 	

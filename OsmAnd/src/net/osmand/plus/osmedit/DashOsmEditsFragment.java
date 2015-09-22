@@ -1,28 +1,24 @@
 package net.osmand.plus.osmedit;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.ProgressImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashBaseFragment;
+import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +28,8 @@ import java.util.Map;
  * Created by Denis
  * on 20.01.2015.
  */
-public class DashOsmEditsFragment extends DashBaseFragment {
+public class DashOsmEditsFragment extends DashBaseFragment
+		implements SendPoiDialogFragment.ProgressDialogPoiUploader {
 	public static final String TAG = "DASH_OSM_EDITS_FRAGMENT";
 
 	OsmEditingPlugin plugin;
@@ -96,7 +93,7 @@ public class DashOsmEditsFragment extends DashBaseFragment {
 				@Override
 				public void onClick(View v) {
 					if (point.getGroup() == OsmPoint.Group.POI) {
-						SendPoiDialogFragment.createInstance((OpenstreetmapPoint) point)
+						SendPoiDialogFragment.createInstance(new OsmPoint[] {point})
 								.show(getChildFragmentManager(), "SendPoiDialogFragment");
 					} else {
 						uploadItem(point);
@@ -123,22 +120,23 @@ public class DashOsmEditsFragment extends DashBaseFragment {
 		}
 	}
 
+	// TODO: 9/7/15 Redesign osm notes.
 	private void uploadItem(final OsmPoint point) {
 		AlertDialog.Builder b = new AlertDialog.Builder(getActivity());
 		b.setMessage(getString(R.string.local_osm_changes_upload_all_confirm, 1));
 		b.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				showProgressDialog(point);
+				showProgressDialog(new OsmPoint[] {point}, false);
 			}
 		});
 		b.setNegativeButton(R.string.shared_string_cancel, null);
 		b.show();
 	}
 
-	private void showProgressDialog(OsmPoint point) {
+	public void showProgressDialog(OsmPoint[] points, boolean closeChangeSet) {
 		OpenstreetmapRemoteUtil remotepoi = new OpenstreetmapRemoteUtil(getActivity());
-		OsmPoint[] toUpload = new OsmPoint[]{point};
+		OsmPoint[] toUpload = points;
 		OsmBugsRemoteUtil remotebug = new OsmBugsRemoteUtil(getMyApplication());
 		ProgressDialog dialog = ProgressImplementation.createProgressDialog(getActivity(),
 				getString(R.string.uploading), getString(R.string.local_openstreetmap_uploading),
@@ -162,7 +160,7 @@ public class DashOsmEditsFragment extends DashBaseFragment {
 			}
 		};
 		UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask(dialog,
-				listener, plugin, remotepoi, remotebug, toUpload.length);
+				listener, plugin, remotepoi, remotebug, toUpload.length, closeChangeSet);
 		uploadTask.execute(toUpload);
 		dialog.show();
 	}
@@ -199,43 +197,4 @@ public class DashOsmEditsFragment extends DashBaseFragment {
 		}
 	}
 
-	public static class SendPoiDialogFragment extends DialogFragment {
-		public static final String OPENSTREETMAP_POINT = "openstreetmap_point";
-
-		@NonNull
-		@Override
-		public Dialog onCreateDialog(Bundle savedInstanceState) {
-			final OpenstreetmapPoint poi = (OpenstreetmapPoint) getArguments().getSerializable(OPENSTREETMAP_POINT);
-			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-			View view = getActivity().getLayoutInflater().inflate(R.layout.send_poi_dialog, null);
-			final EditText messageEditText = (EditText) view.findViewById(R.id.messageEditText);
-			final EditText userNameEditText = (EditText) view.findViewById(R.id.userNameEditText);
-			final EditText passwordEditText = (EditText) view.findViewById(R.id.passwordEditText);
-
-			final OsmandSettings settings = ((MapActivity) getActivity()).getMyApplication().getSettings();
-			userNameEditText.setText(settings.USER_NAME.get());
-			passwordEditText.setText(settings.USER_PASSWORD.get());
-			builder.setTitle(R.string.commit_poi)
-					.setView(view)
-					.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							settings.USER_NAME.set(userNameEditText.getText().toString());
-							settings.USER_PASSWORD.set(passwordEditText.getText().toString());
-							poi.setComment(messageEditText.getText().toString());
-							((DashOsmEditsFragment) getParentFragment()).showProgressDialog(poi);
-						}
-					})
-					.setNegativeButton(R.string.shared_string_cancel, null);
-			return builder.create();
-		}
-
-		public static SendPoiDialogFragment createInstance(OpenstreetmapPoint poi) {
-			SendPoiDialogFragment fragment = new SendPoiDialogFragment();
-			Bundle bundle = new Bundle();
-			bundle.putSerializable(OPENSTREETMAP_POINT, poi);
-			fragment.setArguments(bundle);
-			return fragment;
-		}
-	}
 }

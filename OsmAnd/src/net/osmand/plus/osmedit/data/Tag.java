@@ -1,8 +1,13 @@
 package net.osmand.plus.osmedit.data;
 
+import net.osmand.PlatformUtil;
+
+import org.apache.commons.logging.Log;
+
 import java.io.Serializable;
 
 public class Tag implements Serializable {
+	private static final Log LOG = PlatformUtil.getLog(Tag.class);
 	public String tag;
 	public String value;
 

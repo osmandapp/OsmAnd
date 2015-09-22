@@ -36,7 +36,7 @@
     <string name="context_menu_item_intermediate_point">הוספה כנקודת ציון</string>
     <string name="map_widget_intermediate_distance">נקודת ציון</string>
     <string name="ending_point_too_far">נקודת הסיום רחוקה מדי מהדרך הקרובה אליה.</string>
-    <string name="btn_add_tag">הוספת תגית</string>
+    <string name="add_tag">הוספת תגית</string>
     <string name="btn_advanced_mode">מצב מתקדם…</string>
     <string name="poi_filter_parking">חנייה</string>
     <string name="poi_filter_emergency">חירום</string>

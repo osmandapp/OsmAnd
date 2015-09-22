@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import net.osmand.Location;
+import net.osmand.ResultMatcher;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
@@ -35,14 +36,14 @@ public class CurrentPositionHelper {
 		} else if (am.isDerivedRoutingFrom(ApplicationMode.CAR)) {
 			p = GeneralRouterProfile.CAR;
 		} else {
-			return;
+			p = GeneralRouterProfile.PEDESTRIAN;
 		}
 		RoutingConfiguration cfg = app.getDefaultRoutingConfig().build(p.name().toLowerCase(), 10, 
 				new HashMap<String, String>());
 		ctx = new RoutePlannerFrontEnd(false).buildRoutingContext(cfg, null, app.getResourceManager().getRoutingMapFiles());
 	}
 	
-	public synchronized RouteDataObject runUpdateInThread(double lat, double lon) throws IOException {
+	public synchronized RouteDataObject runUpdateInThread(double lat, double lon, final ResultMatcher<RouteDataObject> result) throws IOException {
 		RoutePlannerFrontEnd rp = new RoutePlannerFrontEnd(false);
 		if (ctx == null || am != app.getSettings().getApplicationMode()) {
 			initCtx(app);
@@ -50,7 +51,14 @@ public class CurrentPositionHelper {
 				return null;
 			}
 		}
-		RouteSegment sg = rp.findRouteSegment(lat, lon, ctx);
+		final RouteSegment sg = rp.findRouteSegment(lat, lon, ctx);
+		if(result != null) {
+			app.runInUIThread(new Runnable() {
+				public void run() {
+					result.publish(sg == null ? null : sg.getRoad());
+				}
+			});
+		}
 		if (sg == null) {
 			return null;
 		}
@@ -59,18 +67,18 @@ public class CurrentPositionHelper {
 	}
 	
 	
-	private void scheduleRouteSegmentFind(final Location loc) {
+	private void scheduleRouteSegmentFind(final Location loc, final ResultMatcher<RouteDataObject> result) {
 		Thread calcThread = calculatingThread;
 		if (calcThread == Thread.currentThread()) {
-			lastFound = runUpdateInThreadCatch(loc.getLatitude(), loc.getLongitude());
+			lastFound = runUpdateInThreadCatch(loc.getLatitude(), loc.getLongitude(), result);
 		} else if (loc != null) {
 			if (calcThread == null) {
 				Runnable run = new Runnable() {
 					@Override
 					public void run() {
 						try {
-							lastFound = runUpdateInThreadCatch(loc.getLatitude(), loc.getLongitude());
-							if (lastAskedLocation != loc) {
+							lastFound = runUpdateInThreadCatch(loc.getLatitude(), loc.getLongitude(), result);
+							if (lastAskedLocation != loc && result != null) {
 								// refresh and run new task if needed
 								getLastKnownRouteSegment(lastAskedLocation);
 							}
@@ -87,9 +95,9 @@ public class CurrentPositionHelper {
 
 	}
 	
-	protected RouteDataObject runUpdateInThreadCatch(double latitude, double longitude) {
+	protected RouteDataObject runUpdateInThreadCatch(double latitude, double longitude, final ResultMatcher<RouteDataObject> result) {
 		try {
-			return runUpdateInThread(latitude, longitude);
+			return runUpdateInThread(latitude, longitude, result);
 		} catch (IOException e) {
 			e.printStackTrace();
 			return null;
@@ -115,6 +123,10 @@ public class CurrentPositionHelper {
 		return d;
 	}
 	
+	public void getRouteSegment(Location loc, ResultMatcher<RouteDataObject> result) {
+		scheduleRouteSegmentFind(loc, result);
+	}
+	
 	public RouteDataObject getLastKnownRouteSegment(Location loc) {
 		lastAskedLocation = loc;
 		RouteDataObject r = lastFound;
@@ -122,12 +134,12 @@ public class CurrentPositionHelper {
 			return null;
 		}
 		if (r == null) {
-			scheduleRouteSegmentFind(loc);
+			scheduleRouteSegmentFind(loc, null);
 			return null;
 		}
 		double d = getOrthogonalDistance(r, loc);
 		if (d > 25) {
-			scheduleRouteSegmentFind(loc);
+			scheduleRouteSegmentFind(loc, null);
 		}
 		if (d < 70) {
 			return r;
