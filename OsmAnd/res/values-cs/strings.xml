@@ -2070,4 +2070,6 @@ s často kladenými otázkami.</string>
 	<string name="count_of_lines">Počet řádků</string>
 <string name="show_on_start">Zobrazit po spuštění</string>
 	<string name="address_unknown">Adresa ještě není známa</string>
-    </resources>
+    <string name="are_you_sure">Jste si jistý?</string>
+	<string name="unsaved_changes_will_be_lost">Neuložené změny budou ztraceny. Pokračovat?</string>
+</resources>
