@@ -40,6 +40,9 @@ public class MapContextMenu {
 
 	private static final String KEY_CTX_MENU_OBJECT = "key_ctx_menu_object";
 	private static final String KEY_CTX_MENU_POINT_DESC = "key_ctx_menu_point_desc";
+	private static final String KEY_CTX_MENU_NAME_STR = "key_ctx_menu_name_str";
+	private static final String KEY_CTX_MENU_TYPE_STR = "key_ctx_menu_type_str";
+	private static final String KEY_CTX_MENU_STREET_STR = "key_ctx_menu_street_str";
 
 	public boolean isMenuVisible(MapActivity mapActivity) {
 		return mapActivity.getSupportFragmentManager().findFragmentByTag("MapContextMenuFragment") != null;
@@ -60,8 +63,13 @@ public class MapContextMenu {
 
 	public void show(MapActivity mapActivity, PointDescription pointDescription, Object object) {
 
-		if (isMenuVisible(mapActivity))
-			hide(mapActivity);
+		if (isMenuVisible(mapActivity)) {
+			if (this.object == null || !this.object.equals(object)) {
+				hide(mapActivity);
+			} else {
+				return;
+			}
+		}
 
 		this.pointDescription = pointDescription;
 		this.object = object;
@@ -256,6 +264,9 @@ public class MapContextMenu {
 				bundle.putSerializable(KEY_CTX_MENU_OBJECT, (Amenity)object);
 		}
 		bundle.putSerializable(KEY_CTX_MENU_POINT_DESC, pointDescription);
+		bundle.putSerializable(KEY_CTX_MENU_NAME_STR, nameStr);
+		bundle.putSerializable(KEY_CTX_MENU_TYPE_STR, typeStr);
+		bundle.putSerializable(KEY_CTX_MENU_STREET_STR, streetStr);
 	}
 
 	public void restoreMenuState(Bundle bundle) {
@@ -263,5 +274,17 @@ public class MapContextMenu {
 		Object pDescObj = bundle.getSerializable(KEY_CTX_MENU_POINT_DESC);
 		if (pDescObj != null)
 			pointDescription = (PointDescription)pDescObj;
+		Object nameStrObj = bundle.getSerializable(KEY_CTX_MENU_NAME_STR);
+		if (nameStrObj != null) {
+			nameStr = nameStrObj.toString();
+		}
+		Object typeStrObj = bundle.getSerializable(KEY_CTX_MENU_TYPE_STR);
+		if (typeStrObj != null) {
+			typeStr = typeStrObj.toString();
+		}
+		Object streetStrObj = bundle.getSerializable(KEY_CTX_MENU_STREET_STR);
+		if (streetStrObj != null) {
+			streetStr = streetStrObj.toString();
+		}
 	}
 }
