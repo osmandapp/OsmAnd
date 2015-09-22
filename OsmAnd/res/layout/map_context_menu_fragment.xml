@@ -7,13 +7,6 @@
     android:background="@android:color/transparent">
 
     <LinearLayout
-        android:id="@+id/context_menu_shadow_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical"/>
-
-    <LinearLayout
         android:id="@+id/context_menu_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

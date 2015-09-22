@@ -10,6 +10,7 @@ import android.graphics.PointF;
 import android.graphics.Rect;
 import android.os.Build;
 import android.text.Html;
+import android.view.GestureDetector;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.widget.FrameLayout.LayoutParams;
@@ -77,8 +78,11 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	private boolean showContextMarker;
 	private ImageView contextMarker;
 
+	private GestureDetector movementListener;
+
 	public ContextMenuLayer(MapActivity activity){
 		this.activity = activity;
+		movementListener = new GestureDetector(activity, new MenuLayerOnGestureListener());
 		if(activity.getLastNonConfigurationInstanceByKey(KEY_LAT_LAN) != null) {
 			latLon = (LatLon) activity.getLastNonConfigurationInstanceByKey(KEY_LAT_LAN);
 			description = (String) activity.getLastNonConfigurationInstanceByKey(KEY_DESCRIPTION);
@@ -464,6 +468,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				}
 			}
 		}
+
+		activity.getContextMenu().hide(activity);
 		return false;
 	}
 
@@ -515,6 +521,13 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	@Override
 	public boolean onTouchEvent(MotionEvent event, RotatedTileBox tileBox) {
+
+		if (movementListener.onTouchEvent(event)) {
+			if (activity.getContextMenu().isMenuVisible(activity)) {
+				activity.getContextMenu().hide(activity);
+			}
+		}
+
 		if (latLon != null) {
 			if (event.getAction() == MotionEvent.ACTION_DOWN) {
 				int vl = pressedInTextView(tileBox, event.getX(), event.getY());
@@ -564,4 +577,16 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		map.put(KEY_DESCRIPTION, textView.getText().toString());
 	}
 
+	private class MenuLayerOnGestureListener extends GestureDetector.SimpleOnGestureListener {
+
+		@Override
+		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+			return true;
+		}
+
+		@Override
+		public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+			return true;
+		}
+	}
 }

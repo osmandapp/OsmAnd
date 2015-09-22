@@ -231,7 +231,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				clickRouteCancel();
 			}
 
-			
+
 		});
 		mapRouteInfoControlDialog = new MapRouteInfoControl(mapActivity.getMapLayers().getContextMenuLayer(),
 				mapActivity, this);
@@ -278,7 +278,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	public void updateRouteButtons(View main, boolean routeInfo) {
 		ImageView dashButton = (ImageView) main.findViewById(R.id.map_dashboard_route_button);
 		dashButton.setImageDrawable(app.getIconsCache().getContentIcon(R.drawable.map_dashboard));
-		dashButton.setVisibility(AndroidUiHelper.isOrientationPortrait(mapActivity) ? 
+		dashButton.setVisibility(AndroidUiHelper.isOrientationPortrait(mapActivity) ?
 				View.GONE : View.VISIBLE);
 		dashButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -328,7 +328,13 @@ public class MapControlsLayer extends OsmandMapLayer {
 			}
 		});		
 	}
-	
+
+	public void setControlsClickable(boolean clickable) {
+		for (MapHudButton mb : controls) {
+			mb.iv.setClickable(clickable);
+		}
+	}
+
 	protected void clickRouteParams() {
 		notifyClicked();
 		mapRouteInfoControlDialog.hideDialog();
