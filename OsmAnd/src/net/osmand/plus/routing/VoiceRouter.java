@@ -500,9 +500,12 @@ public class VoiceRouter {
 		if(isTargetPoint(nextInfo) && (!playedAndArriveAtTarget || repeat)) {
 			if(next.getTurnType().goAhead()) {
 				playGoAhead(nextInfo.distanceTo, getSpeakableStreetName(currentSegment, next));
+				andSpeakArriveAtPoint(nextInfo);
+				playedAndArriveAtTarget = true;
+			} else if(nextInfo.distanceTo <= 2 * TURN_IN_DISTANCE) {
+				andSpeakArriveAtPoint(nextInfo);
+				playedAndArriveAtTarget = true;
 			}
-			andSpeakArriveAtPoint(nextInfo);
-			playedAndArriveAtTarget = true;
 		}
 	}
 
