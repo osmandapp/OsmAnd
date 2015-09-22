@@ -877,4 +877,13 @@
 	<string name="closing_at">Sulkeutuu</string>
 	<string name="opening_at">Avautuu</string>
 	<string name="address_unknown">Osoitetta ei tiedetä vielä</string>
+    <string name="no_updates_available">Ei päivityksiä saatavilla</string>
+    <string name="days_behind">päivää jäljessä</string>
+	<string name="download_tab_updates">Päivitykset</string>
+    <string name="download_tab_downloads">Lataukset</string>
+    <string name="free">"Vapaana %1$s "</string>
+	<string name="local_index_mi_restore">Ota käyttöön</string>
+	<string name="local_index_mi_backup">Poista käytöstä</string>
+	<string name="dash_download_msg_none">Haluatko ladata offline-karttoja?</string>
+    <string name="available_downloads_left">%1$d latausta jäljellä</string>
     </resources>
