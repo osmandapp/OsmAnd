@@ -321,8 +321,8 @@
 
 	<string name="poi_recycling">Recycling</string>
 
-	<string name="poi_recycling_centre">Centre</string>
-	<string name="poi_recycling_container">Container</string>
+	<string name="poi_recycling_centre">Type: recycling centre</string>
+	<string name="poi_recycling_container">Type: container</string>
 	<string name="poi_recycling_glass">Glass</string>
 	<string name="poi_recycling_paper">Paper</string>
 	<string name="poi_recycling_clothes">Clothes</string>
@@ -1247,6 +1247,7 @@
 	<string name="poi_pump_manual">Manual pump</string>
 	<string name="poi_pump_powered">Powered pump</string>
 	<string name="poi_pump_no">No pump</string>
+	<string name="poi_pump">Pump</string>
 
 	<string name="poi_water_characteristic_mineral">Water characteristic: mineral</string>
 	<string name="poi_water_characteristic_mud">Water characteristic: mud</string>
