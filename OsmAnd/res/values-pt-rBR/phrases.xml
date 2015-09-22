@@ -1328,4 +1328,22 @@
 	<string name="poi_mini_roundabout">Mini-rotatória</string>
 	<string name="poi_railway_crossing">Travessia de pedestres em ferrovia</string>
 	<string name="poi_railway_level_crossing">Passagem em nível</string>
+	<string name="poi_horse_riding">Local de equitação</string>
+	<string name="poi_leisure_common">Área de lazer comum</string>
+	<string name="poi_garden">Jardim</string>
+
+	<string name="poi_heath">Urzal</string>
+	<string name="poi_grass">Gramado</string>
+	<string name="poi_grassland">Relvado</string>
+	<string name="poi_scrub">Matagal</string>
+	<string name="poi_farmland">Lavoura</string>
+	<string name="poi_logging">Desmatamento</string>
+	<string name="poi_sand">Areia</string>
+
+	<string name="poi_dead_wood">Madeira morta</string>
+
+	<string name="poi_passing_place">Passing place</string>
+	<string name="poi_level">Nível</string>
+
+<string name="poi_bird_hide">Observatório de aves</string>
 	</resources>
