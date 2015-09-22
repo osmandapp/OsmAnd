@@ -876,4 +876,5 @@
 	<string name="tag_poi_name">nimi</string>
 	<string name="closing_at">Sulkeutuu</string>
 	<string name="opening_at">Avautuu</string>
-	</resources>
+	<string name="address_unknown">Osoitetta ei tiedetä vielä</string>
+    </resources>
