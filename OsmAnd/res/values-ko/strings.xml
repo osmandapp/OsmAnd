@@ -2346,8 +2346,8 @@
 	<string name="app_name_osmand">OsmAnd</string>
 	<string name="offline_maps_and_navigation">오프 라인 지도 및 내비게이션</string>
 	<string name="commit_poi">POI 커밋</string>
-<string name="address_unknown">주소는 아직 등록되지 않았습니다.</string>
-    <string name="av_locations_descr">Gpx 파일에 위치와 관련된 메모를 첨부합니다.</string>
+<string name="address_unknown">주소는 아직 등록되지 않았습니다</string>
+    <string name="av_locations_descr">Gpx 파일에 위치와 관련된 메모를 첨부합니다</string>
     <string name="av_locations">위치</string>
     <string name="poi_action_delete">삭제</string>
 	<string name="show_on_start">시작할 때 보여주기</string>
@@ -2369,7 +2369,7 @@
 	<string name="recent_places">최근 장소</string>
 	<string name="favourites">즐겨찾기</string>
 	<string name="saved_at_time">%1$s에 성공적으로 저장 되었습니다</string>
-	<string name="poi_deleted_localy">변경 내용을 업로드 하는 동안 POI는 삭제 됩니다.</string>
+	<string name="poi_deleted_localy">변경 내용을 업로드 하는 동안 POI는 삭제 됩니다</string>
 	<string name="show_gpx">GPX 보여주기</string>
 	<string name="count_of_lines">라인의 수</string>
 </resources>
