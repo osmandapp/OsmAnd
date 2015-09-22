@@ -1156,4 +1156,75 @@
 	<string name="poi_ford_stepping_stones">Рудыментарны мост з камянёў</string>
 	<string name="poi_services">Зона паслуг, прылеглая да шашы</string>
 
-</resources>
+<string name="poi_brownfield">Землі пад забудову (выкарыстаныя раней)</string>
+	<string name="poi_greenfield">Зямля пад забудову</string>
+	<string name="poi_bunker_silo">Збудаваньне для захоўваньня сіласу</string>
+	<string name="poi_paediatrics">Пэдыятар</string>
+
+	<string name="poi_office_religion">Офіс рэлігійнай арганізацыі</string>
+	<string name="poi_association">Офіс таварыства, асацыяцыі</string>
+	<string name="poi_financial">Фінансавая кантора</string>
+	<string name="poi_political_party">Офіс палітычнай партыі</string>
+	<string name="poi_foundation">Офіс фонду (грамадзкай арганізацыі)</string>
+	<string name="poi_tax_advisor">Спэцыяліст па падрыхтоўцы падатковых дэклярацый</string>
+
+	<string name="poi_religion_spiritualist">Спірытуалізм</string>
+	<string name="poi_religion_tenrikyo">Тэнрыкё</string>
+	<string name="poi_rtsa_scale">Катэгорыя складанасьці перавала</string>
+
+<string name="poi_garden">Сад</string>
+
+	<string name="poi_heath">Пустка</string>
+	<string name="poi_grass">Газон</string>
+	<string name="poi_grassland">Луг</string>
+	<string name="poi_scrub">Хмызьняк</string>
+	<string name="poi_farmland">Сельскагаспадарчыя ўгодзьдзі</string>
+	<string name="poi_logging">Высечкі</string>
+	<string name="poi_sand">Пясок</string>
+
+	<string name="poi_dead_wood">Сухастой</string>
+
+	<string name="poi_passing_place">Месца разьезду</string>
+	<string name="poi_level">Паверх</string>
+	<string name="poi_generator_source_coal">Крыніца энергіі: вугаль</string>
+	<string name="poi_generator_source_gas">Крыніца энэргіі: газ</string>
+	<string name="poi_generator_source_nuclear">Крыніца энэргіі: ядзернае паліва</string>
+	<string name="poi_generator_source_solar">Крыніца энэргіі: сонца</string>
+	<string name="poi_generator_source_hydro">Крыніца энэргіі: вада</string>
+	<string name="poi_generator_source_wind">Крыніца энэргіі: вецер</string>
+	<string name="poi_generator_source_geothermal">Крыніца энэргіі: геатэрмальны</string>
+	<string name="poi_generator_source_oil">Крыніца энэргіі: мазут</string>
+	<string name="poi_generator_source_diesel">Крыніца энэргіі: дызельнае паліва</string>
+
+	<string name="poi_car_wash_self_service">Самаабслугоўваньне</string>
+
+	<string name="poi_int_name">Міжнародная назва</string>
+	<string name="poi_nat_name">Агульнанацыянальная назва</string>
+	<string name="poi_reg_name">Рэгіянальная назва</string>
+	<string name="poi_loc_name">Мясцовая назва</string>
+	<string name="poi_old_name">Гістарычная назва</string>
+	<string name="poi_alt_name">Альтэрнатыўная назва</string>
+
+	<string name="poi_pump_manual">Ручная помпа</string>
+	<string name="poi_pump_powered">Аўтаматычная помпа</string>
+	<string name="poi_pump_no">Бяз помпы</string>
+
+	<string name="poi_water_characteristic_mineral">Характарыстыка вады: мінэральная</string>
+	<string name="poi_water_characteristic_mud">Характарыстыка вады: брудная</string>
+	<string name="poi_water_characteristic_sulfuric">Характарыстыка вады: серная</string>
+
+	<string name="poi_water_point">Пункт водазабесьпячэньня</string>
+
+	<string name="poi_cuisine">Кухня</string>
+
+	<string name="poi_information_guidepost">Паказальнік</string>
+	<string name="poi_information_board">Інфармацыйны шчыт</string>
+	<string name="poi_information_map">Мапа</string>
+	<string name="poi_information_office">Інфармацыйны офіс</string>
+	<string name="poi_information_terminal">Інфармацыйны тэрмінал</string>
+	<string name="poi_information_nature">Інфармацыя пра прыроду</string>
+	<string name="poi_information_wildlife">Інфармацыя аб дзікай прыродзе</string>
+	<string name="poi_information_history">Гістарычная інфармацыя</string>
+	<string name="poi_information_sign">Знак</string>
+	<string name="poi_information_audioguide">Аўдыягід</string>
+	</resources>
