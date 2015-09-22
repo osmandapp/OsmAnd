@@ -60,8 +60,8 @@
   <string name="user_name_descr">Necessario per inviare contributi a openstreetmap.org</string>
   <string name="user_password">Password in OSM</string>
   <string name="user_password_descr">Necessaria per inviare contributi a openstreetmap.org</string>
-  <string name="osmand_service">Modalità attesa</string>
-  <string name="osmand_service_descr">Usato per eseguire OsmAnd con lo schermo spento</string>
+  <string name="osmand_service">"Modalità  backgraund"</string>
+  <string name="osmand_service_descr">OsmAnd a schermo spento è eseguito in background</string>
   <string name="tip_rotation_switching">Orientamento della mappa</string>
   
   <string name="switch_to_raster_map_to_see">Nessuna mappa vettoriale è presente per questa posizione. Ne puoi scaricare una in Impostazioni (Gestisci i file mappe), o passa alle mappe online (abilita il plugin delle mappe online).</string>
@@ -458,7 +458,7 @@
   <string name="gps_provider">GPS</string>
   <string name="int_seconds">secondi</string>
   <string name="int_min">min.</string>
-  <string name="background_service_int_descr">Scegli l\'intervallo di tempo di risveglio usato dal servizio modo quiescente</string>
+  <string name="background_service_int_descr">Scegli l\'intervallo di tempo di risveglio usato dal servizio in background</string>
   <string name="background_service_int">Intervallo di risveglio GPS</string>
   <string name="background_service_provider_descr">Scegli il fornitore di posizione finché si sta usando il modo background</string>
   <string name="background_service_provider">Fornitore di posizionamento</string>
@@ -970,8 +970,8 @@
   <string name="bg_service_interval">Imposta l\'intervallo di risveglio:</string>
   <string name="screen_is_locked">Per sbloccare lo schermo tocca l\'icona del lucchetto</string>
   <string name="bg_service_screen_unlock">Sblocca schermo</string>
-  <string name="bg_service_sleep_mode_off">Abilita\n modalità sleep</string>
-  <string name="bg_service_sleep_mode_on">Ferma\n modalità sleep</string>
+  <string name="bg_service_sleep_mode_off">Esegui l\'app in\n modalità quiescente</string>
+  <string name="bg_service_sleep_mode_on">Interrompi l\'esecuzione dell\'app in modalità quiescente</string>
 <string name="filterpoi_activity">Crea un filtro per i PDI</string>
 <string name="select_navigation_mode">Scelta del mezzo di trasporto</string>
 <string name="day_night_info_description">Alba: %1$s
@@ -1324,9 +1324,9 @@
 
 	
 	
-    <string name="speak_speed_limit">Annuncia limiti di velocità</string>
-    <string name="speak_cameras">Annuncia autovelox</string>
-	<string name="speak_traffic_warnings">Annuncia avvisi di traffico</string>
+    <string name="speak_speed_limit">Limiti di velocità</string>
+    <string name="speak_cameras">Autovelox</string>
+	<string name="speak_traffic_warnings">Avvisi di traffico</string>
 	<string name="tip_recent_changes_1_5_t">Cambiamenti nella versione 1.5:
 	\n\t* Avvisi vocali per autovelox e limiti di velocità
 	\n\t* Più capacità di fornire avvisi vocali ( annuncio dei nomi delle strade)
@@ -1347,8 +1347,8 @@
     <string name="osb_author_dialog_password">Password OSM (opzionale)</string>
 	<string name="speak_title">Annuncia…</string>
 	<string name="speak_descr">Configura per annunciare i nomi delle strade, gli avvertimenti di traffico (fermate forzate, dossi), gli avvisi autovelox, i limiti di velocità</string>
-	<string name="speak_street_names">Annuncia i nomi delle strade (TTS)</string>
-    <string name="announce_gpx_waypoints">Annuncia i punti GPX di passaggio</string>
+	<string name="speak_street_names">Nomi delle strade (TTS)</string>
+    <string name="announce_gpx_waypoints">Punti GPX di passaggio</string>
         
     
     <string name="driving_region_descr">Scegliete la regione di guida: USA, Europa, UK, Asia o Altre</string>
@@ -1750,8 +1750,8 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="waypoints">Punti intermedi</string>
     <string name="targets">Destinazioni</string>
     <string name="way_alarms">Avvisi del traffico</string>
-    <string name="speak_favorites">Annuncia i preferiti nelle vicinanze</string>
-    <string name="speak_poi">Annuncia PDI nelle vicinanze</string>
+    <string name="speak_favorites">Preferiti nelle vicinanze</string>
+    <string name="speak_poi">PDI nelle vicinanze</string>
     <string name="index_tours">Itinerari</string>
     <string name="shared_string_all">Tutto</string>
     <string name="record_plugin_description">"Questo componente aggiuntivo attiva la funzionalità di registrare e salvare le tue tracce, o manualmente attraverso il pulsante dedicato nello schermo della mappa, oppure automaticamente tenendo traccia di tutti i tuoi spostamenti in un file GPX.\n\nLe tracce registrate possono essere condivise con i tuoi amici o essere usate per chi contribuire a OSM. Gli atleti possono utilizzate le tracce registrate per monitorare i loro allenamenti. Alcune analisi di base possono essere fatte direttamente in OsmAnd, come il tempo sul giro, la velocità media ecc., le tracce naturalmente possono essere in seguito analizzate con strumenti di analisi esterni. "</string>
@@ -1849,7 +1849,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="traffic_warning_pedestrian">Attraversamento pedonale</string>
 	<string name="show_railway_warnings">Mostra i passaggi a livello</string>
 	<string name="show_pedestrian_warnings">Mostra gli attraversamenti pedonali</string>
-    <string name="speak_pedestrian">Annuncia gli attraversamenti pedonali</string>
+    <string name="speak_pedestrian">Attraversamenti pedonali</string>
     
 	<string name="navigation_over_track">Iniziare la navigazione sulla traccia?</string>
 	<string name="avoid_roads_msg">Puoi variare il percorso selezionando le strade da evitare</string>
@@ -2048,7 +2048,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="rendering_value_highContrastRoads_name">Strade ad alto contrasto</string>
 	<string name="storage_directory_multiuser">Memorizzazione multiutente</string>
     <string name="rendering_attr_hideHouseNumbers_name">Nascondi i numeri civici</string>
-    <string name="routing_attr_avoid_borders_name">Evita la frontiera</string>
+    <string name="routing_attr_avoid_borders_name">Evita attraversamenti di frontiera</string>
 	<string name="routing_attr_avoid_borders_description">Evita l\'attraversamento di una frontiera verso un\'altra nazione</string>
 	<string name="routing_attr_height_name">Limite di altezza</string>
 	<string name="routing_attr_height_description">Specifica l\'altezza del veicolo che deve essere permessa sui percorsi</string>
@@ -2173,4 +2173,5 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 <string name="saved_at_time">Salvato con successo in: %1$s</string>
 	<string name="poi_deleted_localy">I PDI verranno cancellati una volta caricate le modiche</string>
 	<string name="show_gpx">Visualizza GPX</string>
-</resources>
+<string name="address_unknown">Indirizzo sconosciuto</string>
+    </resources>
