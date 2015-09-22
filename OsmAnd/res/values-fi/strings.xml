@@ -887,4 +887,9 @@
 	<string name="dash_download_msg_none">Haluatko ladata offline-karttoja?</string>
     <string name="available_downloads_left">%1$d latausta jäljellä</string>
     <string name="rendering_category_others">Muut kartan ominaisuudet</string>
+    <string name="gps_network_not_enabled">Sijaintipalvelu poistettu käytöstä. Haluatko ottaa sen käyttöön?</string>
+    <string name="shared_string_import2osmand">Tuo OsmAndiin</string>
+    <string name="read_full_article">Lue koko artikkeli (online)</string>
+    <string name="download_wikipedia_item">Wikipedia</string>
+    <string name="shared_string_show_details">Näytä tiedot</string>
     </resources>
