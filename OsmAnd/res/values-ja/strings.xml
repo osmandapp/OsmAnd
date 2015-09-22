@@ -944,7 +944,7 @@ POIの更新は利用できません</string>
 	<string name="bg_service_interval">呼び出し間隔の設定:</string>
 	<string name="show_cameras">スピード監視カメラ(オービス等)を通知</string>
 	<string name="show_traffic_warnings">交通警告を通知</string>
-	<string name="avoid_toll_roads">有料道路</string>
+	<string name="avoid_toll_roads">有料道路を使用しない</string>
 	<string name="continue_follow_previous_route_auto">前回のナビゲーションがまだ終わっていません。続行しますか？ (%1$s seconds)</string>
 	<string name="route_updated_loc_found">現在位置が見つかるとルートを検索します</string>
 	<string name="osmand_parking_hours">時間</string>
@@ -1479,13 +1479,13 @@ POIの更新は利用できません</string>
 	<string name="routing_attr_prefer_motorway_description">高速道路を優先する</string>
 	<string name="routing_attr_short_way_name">最も短い道</string>
 	<string name="routing_attr_short_way_description">最も短い道を使用する</string>
-	<string name="routing_attr_avoid_toll_name">有料道路</string>
+	<string name="routing_attr_avoid_toll_name">有料道路を使用しない</string>
 	<string name="routing_attr_avoid_toll_description">有料道路を使用しない</string>
-	<string name="routing_attr_avoid_unpaved_name">未舗装道路</string>
+	<string name="routing_attr_avoid_unpaved_name">未舗装道路を使用しない</string>
 	<string name="routing_attr_avoid_unpaved_description">未舗装道路を使用しない</string>
-	<string name="routing_attr_avoid_ferries_name">フェリー</string>
+	<string name="routing_attr_avoid_ferries_name">フェリーを使用しない</string>
 	<string name="routing_attr_avoid_ferries_description">フェリーを使用しない</string>
-	<string name="routing_attr_avoid_motorway_name">高速道路</string>
+	<string name="routing_attr_avoid_motorway_name">高速道路を使用しない</string>
 	<string name="routing_attr_avoid_motorway_description">高速道路を使用しない</string>
 	<string name="routing_attr_weight_name">重量制限</string>
 	<string name="routing_attr_weight_description">ルート上で通行可能な車両重量を指定します</string>
@@ -2030,7 +2030,7 @@ POIの更新は利用できません</string>
     <string name="rendering_value_disabled_name">無効</string>
     <string name="osmo_share_my_location">現在地の共有</string>
     <string name="shared_string_logoff">ログオフ</string>
-    <string name="routing_attr_avoid_borders_name">国境越え</string>
+    <string name="routing_attr_avoid_borders_name">国境越えを回避する</string>
 	<string name="routing_attr_avoid_borders_description">国境越えを避ける</string>
 	<string name="routing_attr_height_name">高さ制限</string>
 	<string name="routing_attr_height_description">ルート上で通行可能な車両の高さを指定します</string>
@@ -2119,7 +2119,7 @@ POIの更新は利用できません</string>
 	<string name="try_again">再試行</string>
 	<string name="error_message_pattern">エラー: {0}</string>
 <string name="plugin_settings">プラグイン</string>
-	<string name="routing_attr_avoid_shuttle_train_name">カートレイン</string>
+	<string name="routing_attr_avoid_shuttle_train_name">カートレインを使用しない</string>
 	<string name="routing_attr_avoid_shuttle_train_description">カートレインを使用しない</string>
     <string name="dahboard_options_dialog_title">ダッシュボード設定</string>
 	<string name="shared_string_undo">元に戻す</string>
@@ -2152,5 +2152,6 @@ POIの更新は利用できません</string>
 <string name="tab_title_basic">基本</string>
 	<string name="tab_title_advanced">拡張</string>
 	<string name="show_on_start">起動時に表示</string>
-	<string name="count_of_lines">行数のカウント</string>
-</resources>
+	<string name="count_of_lines">表示する数の指定</string>
+<string name="address_unknown">住所はまだ登録されていません</string>
+    </resources>
