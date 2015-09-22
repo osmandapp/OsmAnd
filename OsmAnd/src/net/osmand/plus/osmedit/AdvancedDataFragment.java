@@ -230,7 +230,6 @@ public class AdvancedDataFragment extends Fragment {
 			}
 //			addPoiToStringSet(mapPoiTypes.getOtherPoiCategory(), tagKeys);
 			addPoiToStringSet(mapPoiTypes.getOtherMapCategory(), tagKeys);
-			TagTester.areAllTagsPresent(tagKeys);
 
 			ArrayAdapter<Object> adapter = new ArrayAdapter<>(linearLayout.getContext(),
 					R.layout.list_textview, tagKeys.toArray());
