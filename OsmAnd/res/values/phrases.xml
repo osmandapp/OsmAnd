@@ -1328,5 +1328,6 @@
 
 	<string name="poi_passing_place">Passing place</string>
 	<string name="poi_level">Level</string>
+	<string name="poi_rtsa_scale">Difficulty of mountain pass</string>
 
 </resources>
