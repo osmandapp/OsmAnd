@@ -396,6 +396,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		refreshMap();
 	}
 
+	public int getMapPosition() {
+		return mapPosition;
+	}
+
 	public void setMapPosition(int type) {
 		this.mapPosition = type;
 	}

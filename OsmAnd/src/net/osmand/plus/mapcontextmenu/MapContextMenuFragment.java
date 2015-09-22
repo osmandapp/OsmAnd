@@ -26,11 +26,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.osmand.PlatformUtil;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.sections.MenuController;
+import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
 
 import org.apache.commons.logging.Log;
@@ -196,9 +199,7 @@ public class MapContextMenuFragment extends Fragment {
 			public boolean onTouch(View v, MotionEvent event) {
 
 				if (singleTapDetector.onTouchEvent(event)) {
-					OsmandMapTileView mapView = getMapActivity().getMapView();
-					mapView.getAnimatedDraggingThread().startMoving(getCtxMenu().getPointDescription().getLat(), getCtxMenu().getPointDescription().getLon(),
-							mapView.getZoom(), true);
+					showOnMap(getCtxMenu().getPointDescription().getLat(), getCtxMenu().getPointDescription().getLon());
 
 					if (hasMoved) {
 						applyPosY(getViewY());
@@ -408,6 +409,22 @@ public class MapContextMenuFragment extends Fragment {
 	public void onDestroyView() {
 		super.onDestroyView();
 		getMapActivity().getMapLayers().getMapControlsLayer().setControlsClickable(true);
+	}
+
+	private void showOnMap(double latitude, double longitude) {
+		MapActivity ctx = getMapActivity();
+		AnimateDraggingMapThread thread = ctx.getMapView().getAnimatedDraggingThread();
+		int fZoom = ctx.getMapView().getZoom();
+		double flat = latitude;
+		double flon = longitude;
+
+		RotatedTileBox cp = ctx.getMapView().getCurrentRotatedTileBox().copy();
+		cp.setCenterLocation(0.5f, ctx.getMapView().getMapPosition() == OsmandSettings.BOTTOM_CONSTANT ? 0.15f : 0.5f);
+		cp.setLatLonCenter(flat, flon);
+		flat = cp.getLatFromPixel(cp.getPixWidth() / 2, cp.getPixHeight() / 2);
+		flon = cp.getLonFromPixel(cp.getPixWidth() / 2, cp.getPixHeight() / 2);
+
+		thread.startMoving(flat, flon, fZoom, true);
 	}
 
 	private void setAddressLocation() {
