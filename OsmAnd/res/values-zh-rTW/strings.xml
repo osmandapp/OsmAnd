@@ -2112,4 +2112,5 @@
 <string name="show_on_start">在開始上顯示</string>
 	<string name="address_unknown">還不知道地址</string>
     <string name="are_you_sure">您確定嗎？</string>
-	</resources>
+	<string name="unsaved_changes_will_be_lost">任何未儲存的變更將會失去。要繼續嗎?</string>
+</resources>
