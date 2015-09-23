@@ -1370,4 +1370,18 @@
 
 <string name="poi_pump">Pumpe</string>
 
-	</resources>
+	<string name="poi_piste_difficulty_easy">Piste sværhedsgrad: let</string>
+	<string name="poi_piste_difficulty_intermediate">Piste sværhedsgrad: mellemliggende</string>
+	<string name="poi_piste_difficulty_advanced">Piste sværhedsgrad: avanceret</string>
+	<string name="poi_piste_difficulty_novice">Piste sværhedsgrad: nybegynder</string>
+	<string name="poi_piste_difficulty_expert">Piste sværhedsgrad: ekspert</string>
+	<string name="poi_piste_difficulty_freeride">Piste sværhedsgrad: freeride</string>
+	<string name="poi_piste_grooming_classic">Pistepreparering: klassisk</string>
+	<string name="poi_piste_grooming_classic_skating">Pistepreparering: klassisk+skating</string>
+	<string name="poi_piste_grooming_backcountry">Pistepreparering:backcountry</string>
+	<string name="poi_piste_grooming_scooter">Pistepreparering: scooter</string>
+	<string name="poi_piste_grooming_skating">Pistepreparering:skøjteløb</string>
+	<string name="poi_piste_grooming_no">Pistepreparering: ingen</string>
+	<string name="poi_piste_grooming_mogul">Pistepreparering: mogul</string>
+
+</resources>
