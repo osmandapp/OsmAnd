@@ -121,7 +121,7 @@ public abstract class DashLocationFragment extends DashBaseFragment {
 										  ImageView arrow, int arrowResId, TextView txt, LatLon toLoc,
 										  int screenOrientation, OsmandApplication app, Context ctx, boolean paint) {
 		float[] mes = new float[2];
-		if (fromLoc != null) {
+		if (fromLoc != null && toLoc != null) {
 			Location.distanceBetween(toLoc.getLatitude(), toLoc.getLongitude(), fromLoc.getLatitude(), fromLoc.getLongitude(), mes);
 		}
 		if (arrow != null) {
