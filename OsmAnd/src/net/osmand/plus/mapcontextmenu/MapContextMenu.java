@@ -63,17 +63,12 @@ public class MapContextMenu {
 		settings = app.getSettings();
 	}
 
-	public void show() {
-		MapContextMenuFragment.showInstance(mapActivity);
-	}
-
-	public void show(PointDescription pointDescription, Object object) {
-
+	public boolean init(PointDescription pointDescription, Object object) {
 		if (isMenuVisible()) {
 			if (this.object == null || !this.object.equals(object)) {
 				hide();
 			} else {
-				return;
+				return false;
 			}
 		}
 
@@ -89,9 +84,19 @@ public class MapContextMenu {
 		if (object != null || Algorithms.isEmpty(pointDescription.getName())) {
 			acquireStreetName(new LatLon(pointDescription.getLat(), pointDescription.getLon()));
 		}
+		return true;
+	}
 
-		MapContextMenuFragment.showInstance(mapActivity);
+	public void show() {
+		if (!isMenuVisible()) {
+			MapContextMenuFragment.showInstance(mapActivity);
+		}
+	}
 
+	public void show(PointDescription pointDescription, Object object) {
+		if (init(pointDescription, object)) {
+			MapContextMenuFragment.showInstance(mapActivity);
+		}
 	}
 
 	public void hide() {

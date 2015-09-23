@@ -37,11 +37,11 @@ public class AmenityInfoMenuBuilder extends MenuBuilder {
 		this.amenity = amenity;
 	}
 
-	private void buildRow(View view, int iconId, String text, int textColor, boolean isDescription) {
-		buildRow(view, getRowIcon(iconId), text, textColor, isDescription);
+	private void buildRow(View view, int iconId, String text, int textColor, boolean isWiki) {
+		buildRow(view, getRowIcon(iconId), text, textColor, isWiki);
 	}
 
-	private void buildRow(final View view, Drawable icon, String text, int textColor, final boolean isDescription) {
+	private void buildRow(final View view, Drawable icon, String text, int textColor, final boolean isWiki) {
 		boolean light = app.getSettings().isLightContent();
 
 		LinearLayout ll = new LinearLayout(view.getContext());
@@ -80,7 +80,7 @@ public class AmenityInfoMenuBuilder extends MenuBuilder {
 
 		textView.setAutoLinkMask(Linkify.ALL);
 		textView.setLinksClickable(true);
-		if (isDescription) {
+		if (isWiki) {
 			textView.setMinLines(1);
 			textView.setMaxLines(5);
 		}
@@ -88,13 +88,11 @@ public class AmenityInfoMenuBuilder extends MenuBuilder {
 		if (textColor > 0) {
 			textView.setTextColor(view.getResources().getColor(textColor));
 		}
-		if (isDescription) {
+		if (isWiki) {
 			textView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					if (isDescription) {
-						POIMapLayer.showDescriptionDialog(view.getContext(), app, amenity);
-					}
+					POIMapLayer.showDescriptionDialog(view.getContext(), app, amenity);
 				}
 			});
 		}
@@ -143,7 +141,7 @@ public class AmenityInfoMenuBuilder extends MenuBuilder {
 			int iconId = 0;
 			Drawable icon = null;
 			int textColor = 0;
-			boolean isDescription = false;
+			boolean isWiki = false;
 			String key = e.getKey();
 			String vl = e.getValue();
 
@@ -166,7 +164,7 @@ public class AmenityInfoMenuBuilder extends MenuBuilder {
 						vl = vl.substring(0, 300);
 					}
 					hasWiki = true;
-					isDescription = true;
+					isWiki = true;
 				} else {
 					continue;
 				}
@@ -195,7 +193,6 @@ public class AmenityInfoMenuBuilder extends MenuBuilder {
 			} else {
 				if (Amenity.DESCRIPTION.equals(key)) {
 					iconId = R.drawable.ic_action_note_dark;
-					isDescription = true;
 				} else {
 					iconId = R.drawable.ic_action_info_dark;
 				}
@@ -217,9 +214,9 @@ public class AmenityInfoMenuBuilder extends MenuBuilder {
 			}
 
 			if (icon != null) {
-				buildRow(view, icon, vl, textColor, isDescription);
+				buildRow(view, icon, vl, textColor, isWiki);
 			} else {
-				buildRow(view, iconId, vl, textColor, isDescription);
+				buildRow(view, iconId, vl, textColor, isWiki);
 			}
 		}
 	}
