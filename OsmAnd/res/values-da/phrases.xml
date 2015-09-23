@@ -1378,10 +1378,10 @@
 	<string name="poi_piste_difficulty_freeride">Piste sværhedsgrad: freeride</string>
 	<string name="poi_piste_grooming_classic">Pistepreparering: klassisk</string>
 	<string name="poi_piste_grooming_classic_skating">Pistepreparering: klassisk+skating</string>
-	<string name="poi_piste_grooming_backcountry">Pistepreparering:backcountry</string>
+	<string name="poi_piste_grooming_backcountry">Pistepreparering: offpiste</string>
 	<string name="poi_piste_grooming_scooter">Pistepreparering: scooter</string>
-	<string name="poi_piste_grooming_skating">Pistepreparering:skøjteløb</string>
+	<string name="poi_piste_grooming_skating">Pistepreparering: skøjteløb</string>
 	<string name="poi_piste_grooming_no">Pistepreparering: ingen</string>
-	<string name="poi_piste_grooming_mogul">Pistepreparering: mogul</string>
+	<string name="poi_piste_grooming_mogul">Pistepreparering: pukkelpist</string>
 
 </resources>
