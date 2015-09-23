@@ -974,7 +974,7 @@
 	<string name="poi_animal_shelter_bird">Fugleinternat</string>
 
 <string name="poi_shower">Bruser</string>
-	<string name="poi_recycling_centre">Type: genanvendelse centre</string>
+	<string name="poi_recycling_centre">Type: genbrugsplads</string>
 	<string name="poi_recycling_container">Type: container</string>
 	<string name="poi_recycling_glass">Glas</string>
 	<string name="poi_recycling_paper">Papir</string>
