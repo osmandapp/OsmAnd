@@ -2013,7 +2013,7 @@
     <string name="lang_ceb">Cebuanu</string>
     <string name="archive_wikipedia_data">Bi sunt datos Wikipedia bècios e non cumpatìbiles. Los boles archiviare?</string>
     <string name="download_wikipedia_files">Boles iscarrigare àteros datos Wikipedia in prus (%1$s MB) ?</string>
-    <string name="disable_recording_once_app_killed_descrp">At a pònnere in pàusa sa registratzione GPX cando OsmAnd at a èssere istudadu (tràmite sas aplicatziones reghentes). (S\'indicatore de sa modalidade OsmAnd de isfundu at a iscumpàrrere dae sa barra de notìfica de Android.)</string>
+    <string name="disable_recording_once_app_killed_descrp">At a pònnere in pàusa sa registratzione GPX cando OsmAnd at a èssere istudadu (pro mèdiu de sas aplicatziones reghentes). (S\'indicatore de sa modalidade OsmAnd de isfundu at a iscumpàrrere dae sa barra de notìfica de Android.)</string>
     <string name="rendering_attr_currentTrackColor_name">Colore GPX</string>
     <string name="rendering_attr_currentTrackWidth_name">Largària GPX</string>
     <string name="rendering_value_red_name">Ruju</string>
