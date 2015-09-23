@@ -1,22 +1,24 @@
 package net.osmand.plus.download;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import android.content.Context;
+import android.support.annotation.NonNull;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.helpers.HasName;
 
 import org.apache.commons.logging.Log;
 
-import android.content.Context;
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
-public class IndexItem implements Comparable<IndexItem> {
+public class IndexItem implements Comparable<IndexItem>, HasName {
 	private static final Log log = PlatformUtil.getLog(IndexItem.class);
 	
 	String description;
@@ -110,7 +112,7 @@ public class IndexItem implements Comparable<IndexItem> {
 	}
 	
 	@Override
-	public int compareTo(IndexItem another) {
+	public int compareTo(@NonNull IndexItem another) {
 		if(another == null) {
 			return -1;
 		}
@@ -141,4 +143,8 @@ public class IndexItem implements Comparable<IndexItem> {
 		return format.format(new Date(timestamp));
 	}
 
+	@Override
+	public String getName() {
+		return getBasename();
+	}
 }

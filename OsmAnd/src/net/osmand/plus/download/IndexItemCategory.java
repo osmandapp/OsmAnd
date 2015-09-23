@@ -1,12 +1,6 @@
 package net.osmand.plus.download;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import android.support.annotation.NonNull;
 
 import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
@@ -15,9 +9,17 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
 public class IndexItemCategory implements Comparable<IndexItemCategory> {
 	public final String name;
-	public final List<IndexItem> items = new ArrayList<IndexItem>();
+	public final List<IndexItem> items = new ArrayList<>();
 	private final int order;
 
 	public IndexItemCategory(String name, int order) {
@@ -26,14 +28,14 @@ public class IndexItemCategory implements Comparable<IndexItemCategory> {
 	}
 
 	@Override
-	public int compareTo(IndexItemCategory another) {
+	public int compareTo(@NonNull IndexItemCategory another) {
 		return order < another.order ? -1 : 1;
 	}
 
 	public static List<IndexItemCategory> categorizeIndexItems(final OsmandApplication ctx, 
 			Collection<IndexItem> indexItems) {
 		boolean skipWiki = Version.isFreeVersion(ctx);
-		final Map<String, IndexItemCategory> cats = new TreeMap<String, IndexItemCategory>();
+		final Map<String, IndexItemCategory> cats = new TreeMap<>();
 		for (IndexItem i : indexItems) {
 			int nameId = R.string.index_name_other;
 			int order = 0;
@@ -110,7 +112,7 @@ public class IndexItemCategory implements Comparable<IndexItemCategory> {
 			}
 			cats.get(name).items.add(i);
 		}
-		ArrayList<IndexItemCategory> r = new ArrayList<IndexItemCategory>(cats.values());
+		ArrayList<IndexItemCategory> r = new ArrayList<>(cats.values());
 		final Collator collator = OsmAndCollator.primaryCollator();
 		for(IndexItemCategory ct : r) {
 			final OsmandRegions osmandRegions = ctx.getResourceManager().getOsmandRegions();
