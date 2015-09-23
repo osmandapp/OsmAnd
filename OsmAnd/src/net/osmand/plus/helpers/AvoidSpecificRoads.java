@@ -186,7 +186,7 @@ public class AvoidSpecificRoads {
 		} else {
 			thread.startMoving(lat, lon, fZoom, true);
 		}
-		ctx.getMapLayers().getContextMenuLayer().setLocation(new LatLon(lat, lon), name);
+		ctx.getMapLayers().getContextMenuLayer().showMapContextMenu(new LatLon(lat, lon), name);
 		dialog.dismiss();
 	}
 

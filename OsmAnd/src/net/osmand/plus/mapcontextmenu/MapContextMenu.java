@@ -63,6 +63,10 @@ public class MapContextMenu {
 		settings = app.getSettings();
 	}
 
+	public void show() {
+		MapContextMenuFragment.showInstance(mapActivity);
+	}
+
 	public void show(PointDescription pointDescription, Object object) {
 
 		if (isMenuVisible()) {
@@ -82,7 +86,9 @@ public class MapContextMenu {
 
 		acquireLeftIcon();
 		acquireNameAndType();
-		acquireStreetName(new LatLon(pointDescription.getLat(), pointDescription.getLon()));
+		if (object != null || Algorithms.isEmpty(pointDescription.getName())) {
+			acquireStreetName(new LatLon(pointDescription.getLat(), pointDescription.getLon()));
+		}
 
 		MapContextMenuFragment.showInstance(mapActivity);
 
