@@ -1474,7 +1474,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	\n\t* Impostazioni della velocità della vocalizzazione
     </string>
     <string name="calculate_osmand_route_without_internet">Calcola un tratto di percorso OsmAnd senza l\'utilizzo di Internet</string>
-    <string name="gpx_option_calculate_first_last_segment">Calcola un percorso OsmAnd per i tratti prima e dopo il GPX</string>
+    <string name="gpx_option_calculate_first_last_segment">Calcola percorso OsmAnd per i tratti prima e dopo il GPX</string>
     
     <string name="lang_en">Inglese</string>
 	<string name="lang_af">Afrikaans</string>
