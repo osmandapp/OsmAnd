@@ -6,26 +6,7 @@
     android:paddingRight="7dp"
     android:stretchColumns="1">
 
-    <TableRow>
 
-        <RadioGroup
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_span="2">
-
-            <RadioButton
-                android:id="@+id/ConnectToDevice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/osmo_connect_to_device" />
-
-            <RadioButton
-                android:id="@+id/ConnectToGroup"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/osmo_connect_to_group" />
-        </RadioGroup>
-    </TableRow>
 
     <TableRow>
 

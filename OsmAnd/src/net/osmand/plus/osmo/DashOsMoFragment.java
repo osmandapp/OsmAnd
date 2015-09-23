@@ -198,22 +198,8 @@ public class DashOsMoFragment extends DashLocationFragment implements OsMoGroups
 	}
 
 	private List<OsMoGroupsStorage.OsMoDevice> getOsMoDevices(ArrayList<OsMoGroupsStorage.OsMoGroup> groups) {
-		OsMoGroupsStorage.OsMoGroup mainGroup = null;
-		for (OsMoGroupsStorage.OsMoGroup grp : groups) {
-			if (grp.getGroupId() == null) {
-				mainGroup = grp;
-				groups.remove(grp);
-				break;
-			}
-		}
-
-		if (mainGroup == null) {
-			return new ArrayList<>();
-		}
 		String trackerId = plugin.getService().getMyGroupTrackerId();
-		List<OsMoGroupsStorage.OsMoDevice> devices =
-				new ArrayList<>(mainGroup.getVisibleGroupUsers(trackerId));
-
+		List<OsMoGroupsStorage.OsMoDevice> devices = new ArrayList<>();
 		if (groups.size() > 0) {
 			for (OsMoGroupsStorage.OsMoGroup grp : groups) {
 				for (OsMoGroupsStorage.OsMoDevice device : grp.getVisibleGroupUsers(trackerId)) {
@@ -313,28 +299,17 @@ public class DashOsMoFragment extends DashLocationFragment implements OsMoGroups
 			distances.add(dv);
 
 			final CompoundButton enableDevice = (CompoundButton) v.findViewById(R.id.check_item);
+			enableDevice.setVisibility(View.GONE);
 			ImageView icon = (ImageView) v.findViewById(R.id.icon);
 			if (device.isEnabled()) {
-				enableDevice.setVisibility(View.GONE);
 				icon.setImageDrawable(getMyApplication().getIconsCache().
 						getPaintedContentIcon(R.drawable.ic_person, device.getColor()));
 			} else {
-				enableDevice.setVisibility(View.VISIBLE);
-				enableDevice.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						plugin.getGroups().connectDevice(device);
-						refreshItems();
-					}
-				});
 				showOnMap.setVisibility(View.GONE);
 				icon.setImageDrawable(getMyApplication().getIconsCache().
 						getContentIcon(R.drawable.ic_person));
 			}
 
-			if (device.isActive()) {
-
-			}
 			((TextView) v.findViewById(R.id.name)).setText(name);
 			v.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -347,18 +322,6 @@ public class DashOsMoFragment extends DashLocationFragment implements OsMoGroups
 		this.distances = distances;
 	}
 
-	private void refreshItems() {
-		if (!uiHandler.hasMessages(OsMoGroupsActivity.LIST_REFRESH_MSG_ID)) {
-			Message msg = Message.obtain(uiHandler, new Runnable() {
-				@Override
-				public void run() {
-					updateConnectedDevices(getView());
-				}
-			});
-			msg.what = OsMoGroupsActivity.LIST_REFRESH_MSG_ID;
-			uiHandler.sendMessageDelayed(msg, 100);
-		}
-	}
 
 	private void launchOsMoGroupsActivity() {
 		Intent intent = new Intent(getActivity(), OsMoGroupsActivity.class);
