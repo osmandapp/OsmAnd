@@ -91,6 +91,7 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -506,7 +507,8 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 
 				if (mi != null) {
 					final LayoutInflater inflater = LayoutInflater.from(OsMoGroupsActivity.this);
-					View view = inflater.inflate(R.layout.check_item_rel, null);
+					FrameLayout l = new FrameLayout(OsMoGroupsActivity.this);
+					View view = inflater.inflate(R.layout.check_item_rel, l);
 					final CompoundButton check = (CompoundButton) view.findViewById(R.id.check_item);
 					check.setChecked((device != null && device.isActive() && device.isEnabled()) || (group != null && group.isActive() && group.isEnabled()));
 					check.setOnCheckedChangeListener(new OnCheckedChangeListener() {
@@ -516,7 +518,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 							onOffAction(check);
 						}
 					});
-					MenuItemCompat.setActionView(mi, view);
+					MenuItemCompat.setActionView(mi, l);
 				}
 				return true;
 			}
