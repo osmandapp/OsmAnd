@@ -351,7 +351,7 @@ public class MapContextMenuFragment extends Fragment {
 		buttonNavigate.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				getCtxMenu().buttonNavigatePressed(getMapActivity());
+				getCtxMenu().buttonNavigatePressed();
 			}
 		});
 
@@ -361,7 +361,7 @@ public class MapContextMenuFragment extends Fragment {
 		buttonFavorite.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				getCtxMenu().buttonFavoritePressed(getMapActivity());
+				getCtxMenu().buttonFavoritePressed();
 			}
 		});
 
@@ -371,7 +371,7 @@ public class MapContextMenuFragment extends Fragment {
 		buttonShare.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				getCtxMenu().buttonSharePressed(getMapActivity());
+				getCtxMenu().buttonSharePressed();
 			}
 		});
 
@@ -381,7 +381,7 @@ public class MapContextMenuFragment extends Fragment {
 		buttonMore.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				getCtxMenu().buttonMorePressed(getMapActivity());
+				getCtxMenu().buttonMorePressed();
 			}
 		});
 
@@ -434,7 +434,7 @@ public class MapContextMenuFragment extends Fragment {
 
 		// Text line 2
 		TextView line2 = (TextView) view.findViewById(R.id.context_menu_line2);
-		line2.setText(getCtxMenu().getLocationStr(getMapActivity()));
+		line2.setText(getCtxMenu().getLocationStr());
 	}
 
 	private int getPosY() {
