@@ -327,7 +327,7 @@ public class MapContextMenuFragment extends Fragment {
 			iconLayout.setVisibility(View.GONE);
 		} else {
 			iconView.setImageDrawable(iconsCache.getIcon(iconId,
-					light ? R.color.osmand_orange : R.color.osmand_orange_dark));
+					light ? R.color.osmand_orange : R.color.osmand_orange_dark, 0.75f));
 		}
 
 		setAddressLocation();
