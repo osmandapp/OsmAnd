@@ -56,21 +56,23 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		Preference pref = new Preference(this);
 		final Preference simulate = pref;
 		final OsmAndLocationSimulation sim = getMyApplication().getLocationProvider().getLocationSimulation();
+		final Runnable updateTitle = new Runnable(){
+
+			@Override
+			public void run() {
+				simulate.setSummary(sim.isRouteAnimating() ? 
+						R.string.simulate_your_location_stop_descr : R.string.simulate_your_location_descr);						
+			}
+		};
 		pref.setTitle(R.string.simulate_your_location);
-		simulate.setSummary(sim.isRouteAnimating() ? 
-				R.string.simulate_your_location_stop_descr : R.string.simulate_your_location_descr);
+		updateTitle.run();
 		pref.setKey("simulate_your_location");
+		sim.isRouteAnimating()
 		pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
-				sim.startStopRouteAnimation(SettingsDevelopmentActivity.this, new Runnable(){
-
-					@Override
-					public void run() {
-						simulate.setSummary(sim.isRouteAnimating() ? 
-								R.string.simulate_your_location_stop_descr : R.string.simulate_your_location_descr);						
-					}
-				});
+				updateTitle.run();
+				sim.startStopRouteAnimation(SettingsDevelopmentActivity.this, updateTitle);
 				return true;
 			}
 		});
