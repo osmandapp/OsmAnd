@@ -204,8 +204,8 @@ public class EditPoiFragment extends DialogFragment {
 				getMyApplication().getIconsCache()
 						.getPaintedContentIcon(R.drawable.ic_action_help,
 								getResources().getColor(
-										isLightTheme ? R.color.dash_search_icon_dark
-												: R.color.inactive_item_orange)));
+										isLightTheme ? R.color.inactive_item_orange
+												: R.color.dash_search_icon_dark)));
 		final ImageButton poiTypeButton = (ImageButton) view.findViewById(R.id.poiTypeButton);
 		poiTypeButton.setOnClickListener(new View.OnClickListener() {
 			@Override
