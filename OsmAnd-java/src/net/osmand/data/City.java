@@ -36,6 +36,9 @@ public class City extends MapObject {
 			if("township".equals(place)) {
 				return CityType.TOWN;
 			}
+			if("borough".equals(place)) {
+				return CityType.SUBURB;
+			}
 			for (CityType t : CityType.values()) {
 				if (t.name().equalsIgnoreCase(place)) {
 					return t;
