@@ -63,9 +63,14 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
-				sim.startStopRouteAnimation(SettingsDevelopmentActivity.this);
-				simulate.setSummary(sim.isRouteAnimating() ? 
-						R.string.simulate_your_location_stop_descr : R.string.simulate_your_location_descr);
+				sim.startStopRouteAnimation(SettingsDevelopmentActivity.this, new Runnable(){
+
+					@Override
+					public void run() {
+						simulate.setSummary(sim.isRouteAnimating() ? 
+								R.string.simulate_your_location_stop_descr : R.string.simulate_your_location_descr);						
+					}
+				});
 				return true;
 			}
 		});
