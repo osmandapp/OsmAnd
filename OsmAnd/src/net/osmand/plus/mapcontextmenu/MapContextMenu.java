@@ -29,6 +29,7 @@ public class MapContextMenu {
 
 	private OsmandApplication app;
 	private OsmandSettings settings;
+	private final MapActivity mapActivity;
 
 	private PointDescription pointDescription;
 	private Object object;
@@ -44,7 +45,7 @@ public class MapContextMenu {
 	private static final String KEY_CTX_MENU_TYPE_STR = "key_ctx_menu_type_str";
 	private static final String KEY_CTX_MENU_STREET_STR = "key_ctx_menu_street_str";
 
-	public boolean isMenuVisible(MapActivity mapActivity) {
+	public boolean isMenuVisible() {
 		return mapActivity.getSupportFragmentManager().findFragmentByTag("MapContextMenuFragment") != null;
 	}
 
@@ -56,16 +57,17 @@ public class MapContextMenu {
 		return object;
 	}
 
-	public MapContextMenu(OsmandApplication app) {
+	public MapContextMenu(OsmandApplication app, MapActivity mapActivity) {
 		this.app = app;
+		this.mapActivity = mapActivity;
 		settings = app.getSettings();
 	}
 
-	public void show(MapActivity mapActivity, PointDescription pointDescription, Object object) {
+	public void show(PointDescription pointDescription, Object object) {
 
-		if (isMenuVisible(mapActivity)) {
+		if (isMenuVisible()) {
 			if (this.object == null || !this.object.equals(object)) {
-				hide(mapActivity);
+				hide();
 			} else {
 				return;
 			}
@@ -80,25 +82,25 @@ public class MapContextMenu {
 
 		acquireLeftIconId();
 		acquireNameAndType();
-		acquireStreetName(mapActivity, new LatLon(pointDescription.getLat(), pointDescription.getLon()));
+		acquireStreetName(new LatLon(pointDescription.getLat(), pointDescription.getLon()));
 
 		MapContextMenuFragment.showInstance(mapActivity);
 
 	}
 
-	public void hide(MapActivity mapActivity) {
-		MapContextMenuFragment fragment = findMenuFragment(mapActivity);
+	public void hide() {
+		MapContextMenuFragment fragment = findMenuFragment();
 		if (fragment != null)
 			fragment.dismissMenu();
 	}
 
-	public void refreshMenuTitle(MapActivity mapActivity) {
-		MapContextMenuFragment fragment = findMenuFragment(mapActivity);
+	public void refreshMenuTitle() {
+		MapContextMenuFragment fragment = findMenuFragment();
 		if (fragment != null)
 			fragment.refreshTitle();
 	}
 
-	private MapContextMenuFragment findMenuFragment(MapActivity mapActivity) {
+	private MapContextMenuFragment findMenuFragment() {
 		Fragment fragment = mapActivity.getSupportFragmentManager().findFragmentByTag("MapContextMenuFragment");
 		if (fragment != null)
 			return (MapContextMenuFragment)fragment;
@@ -114,7 +116,7 @@ public class MapContextMenu {
 		return nameStr;
 	}
 
-	public String getLocationStr(MapActivity mapActivity) {
+	public String getLocationStr() {
 		if (Algorithms.isEmpty(streetStr))
 			return pointDescription.getLocationName(mapActivity, true).replaceAll("\n", "");
 		else
@@ -179,7 +181,7 @@ public class MapContextMenu {
 		}
 	}
 
-	private void acquireStreetName(final MapActivity activity, final LatLon loc) {
+	private void acquireStreetName(final LatLon loc) {
 		Location ll = new Location("");
 		ll.setLatitude(loc.getLatitude());
 		ll.setLongitude(loc.getLongitude());
@@ -199,9 +201,9 @@ public class MapContextMenu {
 							nameStr = streetStr;
 							streetStr = null;
 						}
-						activity.runOnUiThread(new Runnable() {
+						mapActivity.runOnUiThread(new Runnable() {
 							public void run() {
-								refreshMenuTitle(activity);
+								refreshMenuTitle();
 							}
 						});
 					}
@@ -235,11 +237,11 @@ public class MapContextMenu {
 		return null;
 	}
 
-	public void buttonNavigatePressed(MapActivity mapActivity) {
+	public void buttonNavigatePressed() {
 		mapActivity.getMapActions().showNavigationContextMenuPoint(pointDescription.getLat(), pointDescription.getLon());
 	}
 
-	public void buttonFavoritePressed(MapActivity mapActivity) {
+	public void buttonFavoritePressed() {
 		if (object != null && object instanceof FavouritePoint) {
 			mapActivity.getMapActions().editFavoritePoint((FavouritePoint)object);
 		} else {
@@ -247,11 +249,11 @@ public class MapContextMenu {
 		}
 	}
 
-	public void buttonSharePressed(MapActivity mapActivity) {
+	public void buttonSharePressed() {
 		mapActivity.getMapActions().shareLocation(pointDescription.getLat(), pointDescription.getLon());
 	}
 
-	public void buttonMorePressed(MapActivity mapActivity) {
+	public void buttonMorePressed() {
 		final ContextMenuAdapter menuAdapter = new ContextMenuAdapter(mapActivity);
 		if (object != null) {
 			for (OsmandMapLayer layer : mapActivity.getMapView().getLayers()) {

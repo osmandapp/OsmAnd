@@ -226,7 +226,7 @@ public class GPXUtilities {
 			double totalSpeedSum = 0;
 			points = 0;
 			
-			double channelThres = 5;
+			double channelThres = 10;
 			double channelBase;
 			double channelTop;
 			double channelBottom;
