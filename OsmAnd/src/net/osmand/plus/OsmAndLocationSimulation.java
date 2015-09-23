@@ -7,10 +7,9 @@ import java.util.List;
 import net.osmand.CallbackWithObject;
 import net.osmand.Location;
 import net.osmand.access.AccessibleToast;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
-import net.osmand.plus.routing.RoutingHelper;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
@@ -51,7 +50,7 @@ public class OsmAndLocationSimulation {
 //		}
 //	}
 
-	public void startStopRouteAnimation(final MapActivity ma) {
+	public void startStopRouteAnimation(final Activity ma) {
 		if (!isRouteAnimating()) {
 			Builder builder = new AlertDialog.Builder(ma);
 			builder.setTitle(R.string.animate_route);
