@@ -1300,4 +1300,18 @@
 	<string name="poi_bicycle_parking_anchors">Držiaky</string>
 	<string name="poi_rtsa_scale">Náročnosť horského priesmyku</string>
 
+<string name="poi_piste_difficulty_easy">Obtiažnosť zjazdovky: ľahká</string>
+	<string name="poi_piste_difficulty_intermediate">Obtiažnosť zjazdovky: stredná</string>
+	<string name="poi_piste_difficulty_advanced">Obtiažnosť zjazdovky: pokročilí</string>
+	<string name="poi_piste_difficulty_novice">Obtiažnosť zjazdovky: pre začiatočníkov</string>
+	<string name="poi_piste_difficulty_expert">Obtiažnosť zjazdovky: pre skúsených</string>
+	<string name="poi_piste_difficulty_freeride">Obtiažnosť zjazdovky: voľný zjazd</string>
+	<string name="poi_piste_grooming_classic">Úprava trate: klasická</string>
+	<string name="poi_piste_grooming_classic_skating">Úprava trate: klasická+korčuľovanie na lyžiach</string>
+	<string name="poi_piste_grooming_backcountry">Úprava trate: cez krajinu</string>
+	<string name="poi_piste_grooming_scooter">Úprava trate: snežným skútrom</string>
+	<string name="poi_piste_grooming_skating">Úprava trate: korčuľovanie na lyžiach</string>
+	<string name="poi_piste_grooming_no">Úprava trate: žiadna</string>
+	<string name="poi_piste_grooming_mogul">Úprava trate: bubny</string>
+
 </resources>
