@@ -1331,4 +1331,18 @@
 	<string name="poi_level">Level</string>
 	<string name="poi_rtsa_scale">Difficulty of mountain pass</string>
 
+	<string name="poi_piste_difficulty_easy">Piste difficulty: easy</string>
+	<string name="poi_piste_difficulty_intermediate">Piste difficulty: intermediate</string>
+	<string name="poi_piste_difficulty_advanced">Piste difficulty: advanced</string>
+	<string name="poi_piste_difficulty_novice">Piste difficulty: novice</string>
+	<string name="poi_piste_difficulty_expert">Piste difficulty: expert</string>
+	<string name="poi_piste_difficulty_freeride">Piste difficulty: freeride</string>
+	<string name="poi_piste_grooming_classic">Piste grooming: classic</string>
+	<string name="poi_piste_grooming_classic_skating">Piste grooming: classic+skating</string>
+	<string name="poi_piste_grooming_backcountry">Piste grooming: backcountry</string>
+	<string name="poi_piste_grooming_scooter">Piste grooming: scooter</string>
+	<string name="poi_piste_grooming_skating">Piste grooming: skating</string>
+	<string name="poi_piste_grooming_no">Piste grooming: no</string>
+	<string name="poi_piste_grooming_mogul">Piste grooming: mogul</string>
+
 </resources>
