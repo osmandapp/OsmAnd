@@ -2136,5 +2136,5 @@
 <string name="are_you_sure">Sikker?</string>
 	<string name="simulate_your_location_stop_descr">Stop simulering af position</string>
     <string name="simulate_your_location_descr">Simuler ved brug af indspillet GPX eller beregnet rute</string>
-    <string name="downloads_left_template">%1$s downloads tilbage</string>
+    <string name="downloads_left_template">%1$s filhentninger tilbage</string>
 </resources>
