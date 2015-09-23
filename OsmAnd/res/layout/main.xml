@@ -48,6 +48,14 @@
 
             <include layout="@layout/map_hud_bottom"/>
         </FrameLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"/>
+        </FrameLayout>
 
         <include
             layout="@layout/dashboard_over_map"

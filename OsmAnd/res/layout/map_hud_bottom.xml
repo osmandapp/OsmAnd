@@ -190,13 +190,6 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"/>
-    </FrameLayout>
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
 
         <include layout="@layout/map_route_prepare_bottom"/>
         <LinearLayout
