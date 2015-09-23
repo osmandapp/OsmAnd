@@ -1,19 +1,6 @@
 package net.osmand.plus.development;
 
 
-import java.text.SimpleDateFormat;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
-
-import net.osmand.plus.ApplicationMode;
-import net.osmand.plus.OsmAndLocationSimulation;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.SettingsBaseActivity;
-import net.osmand.plus.activities.actions.AppModeDialog;
-//import net.osmand.plus.development.OsmandDevelopmentPlugin;
-import net.osmand.util.SunriseSunset;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Intent;
@@ -25,6 +12,21 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceScreen;
 import android.view.View;
+
+import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.OsmAndLocationSimulation;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.SettingsBaseActivity;
+import net.osmand.plus.activities.actions.AppModeDialog;
+import net.osmand.util.SunriseSunset;
+
+import java.text.SimpleDateFormat;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
+
+//import net.osmand.plus.development.OsmandDevelopmentPlugin;
 
 public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 
@@ -67,7 +69,7 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		pref.setTitle(R.string.simulate_your_location);
 		updateTitle.run();
 		pref.setKey("simulate_your_location");
-		sim.isRouteAnimating()
+		sim.isRouteAnimating();
 		pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
