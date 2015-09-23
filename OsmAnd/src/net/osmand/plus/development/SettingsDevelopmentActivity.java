@@ -69,7 +69,6 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		pref.setTitle(R.string.simulate_your_location);
 		updateTitle.run();
 		pref.setKey("simulate_your_location");
-		sim.isRouteAnimating();
 		pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(Preference preference) {

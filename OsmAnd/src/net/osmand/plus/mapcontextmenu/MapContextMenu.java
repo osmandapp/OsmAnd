@@ -80,7 +80,7 @@ public class MapContextMenu {
 		typeStr = null;
 		streetStr = null;
 
-		acquireLeftIconId();
+		acquireLeftIcon();
 		acquireNameAndType();
 		acquireStreetName(new LatLon(pointDescription.getLat(), pointDescription.getLon()));
 
@@ -123,7 +123,7 @@ public class MapContextMenu {
 			return streetStr;
 	}
 
-	private void acquireLeftIconId() {
+	private void acquireLeftIcon() {
 		leftIconId = 0;
 		if (object != null) {
 			if (object instanceof Amenity) {
@@ -131,17 +131,14 @@ public class MapContextMenu {
 				Amenity o = (Amenity) object;
 				PoiType st = o.getType().getPoiTypeByKeyName(o.getSubType());
 				if (st != null) {
-					if (RenderingIcons.containsSmallIcon(st.getIconKeyName())) {
+					if (RenderingIcons.containsBigIcon(st.getIconKeyName())) {
 						id = st.getIconKeyName();
-					} else if (RenderingIcons.containsSmallIcon(st.getOsmTag() + "_" + st.getOsmValue())) {
+					} else if (RenderingIcons.containsBigIcon(st.getOsmTag() + "_" + st.getOsmValue())) {
 						id = st.getOsmTag() + "_" + st.getOsmValue();
 					}
 				}
 				if (id != null) {
-					Integer resId = RenderingIcons.getResId(id);
-					if (resId != null) {
-						leftIconId = resId;
-					}
+					leftIconId = RenderingIcons.getBigIconResourceId(id);
 				}
 			}
 		}
@@ -292,5 +289,6 @@ public class MapContextMenu {
 		if (streetStrObj != null) {
 			streetStr = streetStrObj.toString();
 		}
+		acquireLeftIcon();
 	}
 }

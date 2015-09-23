@@ -34,7 +34,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.sections.MenuController;
 import net.osmand.plus.views.AnimateDraggingMapThread;
-import net.osmand.plus.views.OsmandMapTileView;
 
 import org.apache.commons.logging.Log;
 
@@ -327,7 +326,7 @@ public class MapContextMenuFragment extends Fragment {
 			iconLayout.setVisibility(View.GONE);
 		} else {
 			iconView.setImageDrawable(iconsCache.getIcon(iconId,
-					light ? R.color.osmand_orange : R.color.osmand_orange_dark));
+					light ? R.color.osmand_orange : R.color.osmand_orange_dark, 0.75f));
 		}
 
 		setAddressLocation();

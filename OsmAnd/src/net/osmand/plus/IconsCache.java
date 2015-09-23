@@ -1,6 +1,8 @@
 package net.osmand.plus;
 
+import android.graphics.Bitmap;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
 import gnu.trove.map.hash.TLongObjectHashMap;
@@ -13,13 +15,33 @@ public class IconsCache {
 	public IconsCache(OsmandApplication app) {
 		this.app = app;
 	}
-	
-	
+
+	public Drawable scaleImage(Drawable image, float scaleFactor) {
+		if ((image == null) || !(image instanceof BitmapDrawable)) {
+			return image;
+		}
+		Bitmap b = ((BitmapDrawable)image).getBitmap();
+
+		int sizeX = Math.round(image.getIntrinsicWidth() * scaleFactor);
+		int sizeY = Math.round(image.getIntrinsicHeight() * scaleFactor);
+
+		Bitmap bitmapResized = Bitmap.createScaledBitmap(b, sizeX, sizeY, false);
+		return new BitmapDrawable(app.getResources(), bitmapResized);
+	}
+
 	private Drawable getDrawable(int resId, int clrId) {
-		long hash = ((long)resId << 31l) + clrId;
+		return getDrawable(resId, clrId, 0);
+	}
+
+	private Drawable getDrawable(int resId, int clrId, float scale) {
+		long hash = ((long)resId << 31l) + clrId + (int)(scale * 10000f);
 		Drawable d = drawable.get(hash);
 		if(d == null) {
-			d = app.getResources().getDrawable(resId).mutate();
+			if (scale > 0) {
+				d = scaleImage(app.getResources().getDrawable(resId).mutate(), scale);
+			} else {
+				d = app.getResources().getDrawable(resId).mutate();
+			}
 			d.clearColorFilter();
 			if (clrId != 0) {
 				d.setColorFilter(app.getResources().getColor(clrId), PorterDuff.Mode.SRC_IN);
@@ -49,11 +71,13 @@ public class IconsCache {
 		return getDrawable(id, colorId);
 	}
 
+	public Drawable getIcon(int id, int colorId, float scale) {
+		return getDrawable(id, colorId, scale);
+	}
 
 	public Drawable getContentIcon(int id) {
 		return getDrawable(id, app.getSettings().isLightContent() ? R.color.icon_color : 0);
 	}
-
 
 	public Drawable getIcon(int id) {
 		return getDrawable(id, 0);

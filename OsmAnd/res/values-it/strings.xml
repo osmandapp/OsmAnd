@@ -2102,7 +2102,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="lang_gl">Gallego</string>
     <string name="lang_et">Estone</string>
     <string name="lang_ceb">Cebuano</string>
-    <string name="rendering_attr_currentTrackColor_name">Colore GPX</string>
+    <string name="rendering_attr_currentTrackColor_name">Colore traccia GPX</string>
     <string name="rendering_attr_currentTrackWidth_name">Spessore traccia GPX</string>
     <string name="rendering_value_translucent_red_name">Rosso traslucido</string>
     <string name="rendering_value_translucent_orange_name">Arancione traslucido</string>
@@ -2178,4 +2178,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="count_of_lines">Conteggio delle linee</string>
 	<string name="are_you_sure">Sei sicuro?</string>
 	<string name="unsaved_changes_will_be_lost">Tutte le modifiche non salvate andranno perse. Continuare?</string>
+<string name="simulate_your_location_stop_descr">Arresta la simulazione del percorso</string>
+    <string name="simulate_your_location_descr">Simula utilizzando un GPX registrato o una percorso calcolato</string>
+    <string name="downloads_left_template">%1$s download rimanenti</string>
 </resources>
