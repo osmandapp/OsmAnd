@@ -1,19 +1,5 @@
 package net.osmand.plus.download;
 
-import java.lang.ref.WeakReference;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
-import net.osmand.access.AccessibleToast;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.Version;
-import net.osmand.plus.activities.ActionBarProgressActivity;
-import net.osmand.plus.base.BasicProgressAsyncTask;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
@@ -23,6 +9,22 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.widget.Toast;
 
+import net.osmand.access.AccessibleToast;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.Version;
+import net.osmand.plus.activities.ActionBarProgressActivity;
+import net.osmand.plus.base.BasicProgressAsyncTask;
+import net.osmand.plus.download.newimplementation.IndexItemCategoryWithSubcat;
+
+import java.lang.ref.WeakReference;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * Created by Denis
  * on 25.11.2014.
@@ -31,8 +33,8 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 	protected DownloadActivityType type = DownloadActivityType.NORMAL_FILE;
 	protected OsmandSettings settings;
 	public static DownloadIndexesThread downloadListIndexThread;
-	protected List<WeakReference<Fragment>> fragList = new ArrayList<WeakReference<Fragment>>();
-	protected List<IndexItem> downloadQueue = new ArrayList<IndexItem>();
+	protected List<WeakReference<Fragment>> fragList = new ArrayList<>();
+	protected List<IndexItem> downloadQueue = new ArrayList<>();
 
 	public static final int MAXIMUM_AVAILABLE_FREE_DOWNLOADS = 10;
 
@@ -63,7 +65,7 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 		super.onResume();
 		downloadListIndexThread.setUiActivity(this);
 	}
-	
+
 	@Override
 	protected void onPause() {
 		super.onPause();
@@ -85,7 +87,7 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 
 	public Map<IndexItem, List<DownloadEntry>> getEntriesToDownload() {
 		if (downloadListIndexThread == null) {
-			return new LinkedHashMap<IndexItem, List<DownloadEntry>>();
+			return new LinkedHashMap<>();
 		}
 		return downloadListIndexThread.getEntriesToDownload();
 	}
@@ -107,6 +109,11 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 	}
 
 	public void categorizationFinished(List<IndexItem> filtered, List<IndexItemCategory> cats) {
+
+	}
+
+	public void onCategorizationFinished(List<IndexItem> filtered,
+										 List<IndexItemCategoryWithSubcat> cats) {
 
 	}
 
@@ -267,7 +274,7 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 			} else {
 				msg.setNeutralButton(R.string.shared_string_ok, null);
 			}
-			
+
 			msg.show();
 		}
 	}

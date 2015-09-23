@@ -32,6 +32,8 @@ import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.activities.OsmandExpandableListFragment;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.base.BasicProgressAsyncTask;
+import net.osmand.plus.download.newimplementation.IndexItemCategoryWithSubcat;
+import net.osmand.plus.download.newimplementation.NewLocalIndexesFragment;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 
@@ -298,6 +300,19 @@ public class DownloadActivity extends BaseDownloadActivity {
 			if (f instanceof DownloadIndexFragment) {
 				if (!f.isDetached()) {
 					((DownloadIndexFragment) f).categorizationFinished(filtered, cats);
+				}
+			}
+		}
+	}
+
+	@Override
+	public void onCategorizationFinished(List<IndexItem> filtered,
+										 List<IndexItemCategoryWithSubcat> cats) {
+		for (WeakReference<Fragment> ref : fragList) {
+			Fragment f = ref.get();
+			if (f instanceof NewLocalIndexesFragment) {
+				if (!f.isDetached()) {
+					((NewLocalIndexesFragment) f).onCategorizationFinished(filtered, cats);
 				}
 			}
 		}
