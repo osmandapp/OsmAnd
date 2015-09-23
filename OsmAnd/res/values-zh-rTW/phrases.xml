@@ -956,8 +956,8 @@
 	<string name="poi_animal_shelter_bird">野鳥庇護所</string>
 
 <string name="poi_shower">淋浴</string>
-	<string name="poi_recycling_centre">中心</string>
-	<string name="poi_recycling_container">貨櫃</string>
+	<string name="poi_recycling_centre">類型：資源回收中心</string>
+	<string name="poi_recycling_container">類型：貨櫃</string>
 	<string name="poi_recycling_glass">玻璃</string>
 	<string name="poi_recycling_paper">紙</string>
 	<string name="poi_recycling_clothes">衣服</string>
@@ -1345,4 +1345,8 @@
 	<string name="poi_passing_place">避讓車處</string>
 	<string name="poi_level">等級</string>
 
-</resources>
+<string name="poi_rtsa_scale">隘口的艱難度</string>
+
+<string name="poi_pump">泵浦</string>
+
+	</resources>

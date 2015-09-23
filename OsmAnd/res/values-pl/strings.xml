@@ -2239,4 +2239,6 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 <string name="show_on_start">Wyświetlaj przy starcie</string>
 	<string name="count_of_lines">Liczba linii</string>
 <string name="address_unknown">Adres nie jest jeszcze znany</string>
-    </resources>
+    <string name="unsaved_changes_will_be_lost">Wszelkie niezapisane zmiany zostaną utracone. Kontynuować?</string>
+<string name="are_you_sure">Czy na pewno?</string>
+	</resources>

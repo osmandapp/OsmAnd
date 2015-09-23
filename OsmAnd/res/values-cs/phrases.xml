@@ -1001,8 +1001,8 @@
 	<string name="poi_cooling_tower">Chladicí věž</string>
 	<string name="poi_lighting_tower">Osvětlovací věž</string>
 	<string name="poi_landfill_waste_nuclear">Jaderný odpad</string>
-	<string name="poi_brownfield">Brownfield</string>
-	<string name="poi_greenfield">Greenfield</string>
+	<string name="poi_brownfield">Zanedbaná plocha</string>
+	<string name="poi_greenfield">Nezastavěná plocha</string>
 	<string name="poi_office_religion">Náboženský úřad</string>
 	<string name="poi_financial">Finanční úřad</string>
 	<string name="poi_political_party">Kancelář politické strany</string>
@@ -1010,7 +1010,7 @@
 	<string name="poi_foundation">Kancelář nadace</string>
 	<string name="poi_tax_advisor">Kancelář daňového poradce</string>
 
-	<string name="poi_religion_voodoo">Voodoo</string>
+	<string name="poi_religion_voodoo">Vúdú (Voodoo)</string>
 	<string name="poi_religion_unitarian_universalist">Unitární univerzalismus</string>
 	<string name="poi_religion_multifaith">Mnohonáboženství</string>
 	<string name="poi_religion_jain">Džinismus</string>
@@ -1125,7 +1125,7 @@
 
 <string name="poi_node_networks">Body turistických/cyklistických sítí</string>
 		<string name="poi_doors">Dveře</string>
-	<string name="poi_free_flying">Obchod se zbožím pro volné létání</string>
+	<string name="poi_free_flying">Obchod freeflyingového zboží</string>
 	<string name="poi_power_tower">Stožár elektrického vedení</string>
 	<string name="poi_power_pole">Sloup elektrického vedení</string>
 
@@ -1269,4 +1269,12 @@
 	<string name="poi_dead_wood">Mrtvé dřevo</string>
 
 	<string name="poi_passing_place">Výhybna</string>
+	<string name="poi_traffic_enforcement">Dopravní kontrola</string>
+	<string name="poi_ford_stepping_stones">Přechod po kamenech pro pěší</string>
+	<string name="poi_aerialway_pylon">Stožár lanovky</string>
+
+	<string name="poi_recycling_hardcore">Stavební suť</string>
+	<string name="poi_denomination_sunni">Sunnitství</string>
+	<string name="poi_denomination_protestant">Protestantské</string>
+	<string name="poi_denomination_methodist">Metodistické</string>
 	</resources>

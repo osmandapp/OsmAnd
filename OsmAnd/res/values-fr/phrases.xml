@@ -972,8 +972,8 @@
 	<string name="poi_animal_shelter_dog_cat">Refuge pour chiens et chats</string>
 	<string name="poi_animal_shelter_bird">Refuge pour oiseaux</string>
 
-<string name="poi_recycling_centre">Centre</string>
-	<string name="poi_recycling_container">Containeur</string>
+<string name="poi_recycling_centre">Type : centre de tri</string>
+	<string name="poi_recycling_container">Type : containeur</string>
 	<string name="poi_recycling_plastic_packaging">Emballage plastique</string>
 	<string name="poi_recycling_paper_packaging">Emballage en papier</string>
 	<string name="poi_recycling_fluorescent_tubes">Tubes fluorescents</string>
@@ -1034,4 +1034,10 @@
 
 <string name="poi_political_party">Bureau de parti politique</string>
 	<string name="poi_notary">Notaire</string>
+	<string name="poi_doors">Portes</string>
+	<string name="poi_landfill_waste_nuclear">Déchet nucléaire</string>
+	<string name="poi_capital">Capitale</string>
+	<string name="poi_office_religion">Lieu de culte</string>
+	<string name="poi_association">Bureau d\'association</string>
+	<string name="poi_financial">Bureau financier</string>
 	</resources>

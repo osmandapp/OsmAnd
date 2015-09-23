@@ -974,8 +974,8 @@
 	<string name="poi_animal_shelter_bird">Fugleinternat</string>
 
 <string name="poi_shower">Bruser</string>
-	<string name="poi_recycling_centre">Centrum</string>
-	<string name="poi_recycling_container">Container</string>
+	<string name="poi_recycling_centre">Type: genanvendelse centre</string>
+	<string name="poi_recycling_container">Type: container</string>
 	<string name="poi_recycling_glass">Glas</string>
 	<string name="poi_recycling_paper">Papir</string>
 	<string name="poi_recycling_clothes">Tøj</string>
@@ -1366,4 +1366,8 @@
 <string name="poi_leisure_common">Fælles rekreativt område</string>
 	<string name="poi_level">Niveau</string>
 
-</resources>
+<string name="poi_rtsa_scale">Vanskeligt bjergpas</string>
+
+<string name="poi_pump">Pumpe</string>
+
+	</resources>

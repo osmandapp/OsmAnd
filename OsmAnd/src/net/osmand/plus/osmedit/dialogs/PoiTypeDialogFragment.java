@@ -13,6 +13,7 @@ import net.osmand.osm.PoiCategory;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.osmedit.EditPoiFragment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PoiTypeDialogFragment extends DialogFragment {
@@ -25,11 +26,14 @@ public class PoiTypeDialogFragment extends DialogFragment {
 		final Amenity amenity = (Amenity) getArguments().getSerializable(KEY_AMENITY);
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		final List<PoiCategory> categories = poiTypes.getCategories(false);
-		String[] vals = new String[categories.size()];
-		for (int i = 0; i < vals.length; i++) {
-			vals[i] = categories.get(i).getTranslation();
+		ArrayList<String> vals = new ArrayList<>(categories.size());
+		// TODO replace with constants
+		for (PoiCategory category : categories) {
+			if (category.getKeyName().equals("user_defined_other")
+					|| category.getKeyName().equals("osmwiki")) continue;
+			vals.add(category.getTranslation());
 		}
-		builder.setItems(vals, new Dialog.OnClickListener() {
+		builder.setItems(vals.toArray(new String[vals.size()]), new Dialog.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				PoiCategory aType = categories.get(which);
