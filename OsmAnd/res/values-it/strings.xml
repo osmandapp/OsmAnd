@@ -2179,4 +2179,6 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="are_you_sure">Sei sicuro?</string>
 	<string name="unsaved_changes_will_be_lost">Tutte le modifiche non salvate andranno perse. Continuare?</string>
 <string name="simulate_your_location_stop_descr">Arresta la simulazione del percorso</string>
-    </resources>
+    <string name="simulate_your_location_descr">Simula utilizzando un GPX registrato o una percorso calcolato</string>
+    <string name="downloads_left_template">%1$s download rimanenti</string>
+</resources>
