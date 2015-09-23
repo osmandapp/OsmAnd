@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.SettingsBaseActivity;
@@ -52,8 +53,32 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		
 		cat.addPreference(createCheckBoxPreference(settings.BETA_TESTING_LIVE_UPDATES,
 				"Live updates", "Beta testing for live updates"));
-
 		Preference pref = new Preference(this);
+		final Preference simulate = pref;
+		final OsmAndLocationSimulation sim = getMyApplication().getLocationProvider().getLocationSimulation();
+		final Runnable updateTitle = new Runnable(){
+
+			@Override
+			public void run() {
+				simulate.setSummary(sim.isRouteAnimating() ? 
+						R.string.simulate_your_location_stop_descr : R.string.simulate_your_location_descr);						
+			}
+		};
+		pref.setTitle(R.string.simulate_your_location);
+		updateTitle.run();
+		pref.setKey("simulate_your_location");
+		sim.isRouteAnimating()
+		pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+			@Override
+			public boolean onPreferenceClick(Preference preference) {
+				updateTitle.run();
+				sim.startStopRouteAnimation(SettingsDevelopmentActivity.this, updateTitle);
+				return true;
+			}
+		});
+		cat.addPreference(pref);
+		
+		pref = new Preference(this);
 		pref.setTitle(R.string.test_voice_prompts);
 		pref.setSummary(R.string.play_commands_of_currently_selected_voice);
 		pref.setKey("test_voice_commands");
@@ -65,6 +90,8 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 			}
 		});
 		cat.addPreference(pref);
+		
+		
 
 		pref = new Preference(this);
 		pref.setTitle(R.string.app_modes_choose);

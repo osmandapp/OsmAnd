@@ -276,9 +276,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	@Override
 	public void locationChanged(double newLatitude, double newLongitude, Object source) {
 		// when user start dragging 
-		if(app.getLocationProvider().getLastKnownLocation() != null){
-			setMapLinkedToLocation(false);
-		}
+		setMapLinkedToLocation(false);
 	}
 	
 	public void switchRotateMapMode(){

@@ -851,8 +851,8 @@
 
 	<string name="poi_cooling_tower">Turre de isfritamentu</string>
 	<string name="poi_lighting_tower">Turre de illuminadura</string>
-	<string name="poi_recycling_centre">Tzentru</string>
-	<string name="poi_recycling_container">Cuntenidore</string>
+	<string name="poi_recycling_centre">Casta: tzentru de ritziclu</string>
+	<string name="poi_recycling_container">Casta: cuntenidore</string>
 	<string name="poi_recycling_glass">Bidru</string>
 	<string name="poi_recycling_paper">Paperi</string>
 	<string name="poi_recycling_clothes">Bestires</string>
@@ -1060,4 +1060,31 @@
 	<string name="poi_seasonal_summer">Istiu</string>
 	<string name="poi_seasonal_autumn">Atòngiu</string>
 	<string name="poi_seasonal_winter">Ierru</string>
+	<string name="poi_paediatrics">Pediatra</string>
+
+	<string name="poi_sand">Arena</string>
+
+	<string name="poi_smoking_isolated">Si podet pipare in un’aposentu indipendente e iscrobadu de su totu</string>
+	<string name="poi_smoking_dedicated">Pipadores ebbia</string>
+
+	<string name="poi_toll_yes">B’est de pagare unu pedàgiu</string>
+	<string name="poi_toll_no">Non b’est perunu pedàgiu</string>
+	<string name="poi_toll_hgv_yes">B’est de pagare unu pedàgiu pro veìculos pesantes</string>
+	<string name="poi_information_bicyclemap">Mapa tziclìstica</string>
+	<string name="poi_water_characteristic_mineral">Caraterìstica de s’abba: minerale</string>
+	<string name="poi_water_characteristic_mud">Caraterìsica de s’abba: ludu</string>
+	<string name="poi_water_characteristic_sulfuric">Caraterìstica de s’abba: solfòrica</string>
+
+	<string name="poi_water_point">Puntu de abba</string>
+
+	<string name="poi_cuisine">Coghina</string>
+
+	<string name="poi_information_board">Vetrinedda de informatziones</string>
+	<string name="poi_information_map">Mapa</string>
+	<string name="poi_information_office">Ufìtziu de informatziones</string>
+	<string name="poi_information_terminal">Tèrminal de informatziones</string>
+	<string name="poi_information_hikingmap">Mapa pro escursionismu</string>
+	<string name="poi_information_history">Informatziones istòricas</string>
+	<string name="poi_information_sign">Sinnu</string>
+	<string name="poi_information_audioguide">Audioghia</string>
 	</resources>

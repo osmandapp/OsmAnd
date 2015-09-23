@@ -40,8 +40,6 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 	private static final String LAST_ONLINE = "last_online";
 	private static final String TRACK = "track";
 	private static final String POINT = "point";
-	private static final String TRACKER_ID = "tracker_id";
-	private static final String OK = "1";
 	
 	private OsMoTracker tracker;
 	private OsMoService service;
@@ -65,9 +63,7 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 		service.registerReactor(this);
 		tracker.setTrackerListener(this);
 		storage = new OsMoGroupsStorage(this, app.getSettings().OSMO_GROUPS);
-		if (service.isLoggedIn()) {
-			storage.loadOnlyMainGroup();
-		} else {
+		if (!service.isLoggedIn()) {
 			storage.load();
 		}
 	}
@@ -95,14 +91,8 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 	
 	@Override
 	public void onConnected() {
-		for(OsMoDevice d : storage.getMainGroup().getGroupUsers(null)) {
-			if(d.isEnabled()) {
-				connectDeviceImpl(d);
-			}
-		}
 		if (service.isLoggedIn()) {
 			service.pushCommand("GROUP_GET_ALL");
-			service.pushCommand("DEVICE_GET_ALL");
 		}
 	}
 
@@ -123,12 +113,6 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 		return op;
 	}
 	
-	public void connectDevice(OsMoDevice model) {
-		connectDeviceImpl(model);
-		storage.save();
-	}
-	
-
 	public String disconnectGroup(OsMoGroup model) {
 		model.enabled = false;
 		String operation = "GROUP_DISCONNECT:"+model.groupId;
@@ -140,11 +124,6 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 		return operation;
 	}
 	
-	public void disconnectDevice(OsMoDevice model) {
-		model.enabled = false;
-		disconnectImpl(model);
-		storage.save();
-	}
 
 	private void disconnectImpl(OsMoDevice model) {
 		model.active = false;
@@ -279,74 +258,6 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 				service.showErrorMessage(e.getMessage());
 				return processed;
 			}
-		} else if (command.equals("DEVICE_GET_ALL")) {
-			try {
-				JSONArray arr = new JSONArray(data);
-				int arrLength = arr.length();
-				if (arrLength > 0) {
-					OsMoGroup mainGroup = storage.getMainGroup();
-					String mid = service.getMyTrackerId();
-					Set<String> toDelete = new HashSet<String>(mainGroup.users.keySet());
-					for (int i = 0; i < arrLength; i++) {
-						JSONObject o = arr.getJSONObject(i);
-						OsMoDevice device = parseDevice(o);
-						device.group = mainGroup;
-						String trackerId = device.getTrackerId();
-						if (!mid.equals(trackerId)) {
-							if (toDelete.contains(trackerId)) {
-								toDelete.remove(trackerId);
-								OsMoDevice dv = mainGroup.users.get(trackerId);
-								dv.serverColor = device.userColor;
-								dv.serverName  = device.userName;
-							} else {
-								mainGroup.users.put(trackerId, device);
-							}
-						}
-					}
-					for (String id : toDelete) {
-						mainGroup.users.remove(id);
-					}
-					storage.save();
-					for(OsMoDevice d : mainGroup.getGroupUsers(null)) {
-						if(d.isEnabled() && !d.isActive()) {
-							connectDeviceImpl(d);
-						}
-					}
-				}
-				processed = true;
-			} catch (JSONException e) {
-				e.printStackTrace();
-				service.showErrorMessage(e.getMessage());
-				return processed;
-			}
-		} else if (command.equals("SUBSCRIBE")) {
-			OsMoGroup mainGroup = storage.getMainGroup();
-			OsMoDevice device = mainGroup.users.get(gid);
-			if (device != null) {
-				if (OK.equals(data)) {
-					connectDeviceImpl(device);
-				} else {
-					mainGroup.users.remove(gid);
-					storage.save();
-					if (obj == null) {
-						app.showToastMessage(app.getString(R.string.osmo_device_not_found));
-					}
-				}
-			}
-			processed = true;
-		} else if (command.equals("UNSUBSCRIBE")) {
-			OsMoGroup mainGroup = storage.getMainGroup();
-			OsMoDevice device = mainGroup.users.get(gid);
-			if (device != null) {
-				mainGroup.users.remove(gid);
-				storage.save();
-			}
-			if (!OK.equals(data)) {
-				if (obj == null) {
-					app.showToastMessage(app.getString(R.string.osmo_device_not_found));
-				}
-			}
-			processed = true;
 		}
 		if(processed && uiListeners != null) {
 			for(OsMoGroupsUIListener listener : uiListeners){
@@ -381,13 +292,6 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 		return groupe;
 	}
 
-	private OsMoDevice parseDevice(JSONObject obj) throws JSONException {
-		OsMoDevice device = new OsMoDevice();
-		device.enabled = true;
-		device.userName = obj.optString(USER_NAME);
-		device.trackerId = obj.getString(TRACKER_ID);
-		return device;
-	}
 	
 	private void parseGroup(JSONObject obj, OsMoGroup gr) {
 		try {
@@ -533,36 +437,11 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 	}
 	
 	
-	public void deleteDevice(OsMoDevice device) {
-		if(device.isEnabled()) {
-			disconnectImpl(device);
-		}
-		StringBuilder unsubscribeCmd = new StringBuilder();
-		unsubscribeCmd.append("UNSUBSCRIBE:");
-		unsubscribeCmd.append(device.trackerId);
-		service.pushCommand(unsubscribeCmd.toString());
-	}
 	public void setGenColor(OsMoDevice device, int genColor) {
 		device.genColor = genColor;
 		storage.save();
 	}
 	
-	public OsMoDevice addConnectedDevice(String trackerId, String nameUser, int genColor) {
-		OsMoDevice us = new OsMoDevice();
-		us.group = storage.getMainGroup();
-		us.trackerId = trackerId;
-		us.userName = nameUser;
-		us.genColor = genColor;
-		us.group.users.put(trackerId, us);
-		storage.save();
-		StringBuilder subscribeCmd = new StringBuilder();
-		subscribeCmd.append("SUBSCRIBE:");
-		subscribeCmd.append(trackerId);
-		subscribeCmd.append('|');
-		subscribeCmd.append(nameUser);
-		service.pushCommand(subscribeCmd.toString());
-		return us;
-	}
 	public String joinGroup(String groupId, String userName, String nick) {
 		final String op = "GROUP_JOIN:"+groupId+"|"+nick;
 		OsMoGroup g = storage.getGroup(groupId);

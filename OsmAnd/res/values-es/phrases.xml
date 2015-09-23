@@ -1349,4 +1349,6 @@
 	<string name="poi_heath">Brezal</string>
 	<string name="poi_logging">Inicio de sesión</string>
 	<string name="poi_windfall">Fruto caído</string>
-	</resources>
+	<string name="poi_rtsa_scale">Dificultad del paso de montaña</string>
+
+</resources>

@@ -1823,4 +1823,6 @@
 <string name="address_unknown">Endereço ainda não é conhecido</string>
     <string name="show_on_start">Mostrar no início</string>
 	<string name="count_of_lines">Número de linhas</string>
+<string name="are_you_sure">Tem certeza?</string>
+	<string name="unsaved_changes_will_be_lost">Quaisquer alterações não salvas serão perdidas. Continuar?</string>
 </resources>

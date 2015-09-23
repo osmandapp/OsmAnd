@@ -40,13 +40,6 @@ public class OsMoIntentHandler extends AsyncTask<Intent, Void, String> {
 							name = "";
 						}
 						plugin.getGroups().joinGroup(gid, name, app.getSettings().OSMO_USER_NAME.get());
-					} else if(lastPath.equals("connect")) {
-						String gid = data.getQueryParameter("id");
-						String name = data.getQueryParameter("name");
-						if(name == null) {
-							name = gid;
-						}
-						plugin.getGroups().addConnectedDevice(gid, name, 0);
 					}
 				}
 				return null;

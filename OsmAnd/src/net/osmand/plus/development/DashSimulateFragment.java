@@ -1,5 +1,8 @@
 package net.osmand.plus.development;
 
+import net.osmand.plus.OsmAndLocationProvider;
+import net.osmand.plus.R;
+import net.osmand.plus.dashboard.DashBaseFragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -10,11 +13,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import net.osmand.plus.OsmAndLocationProvider;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.dashboard.DashBaseFragment;
 
 public class DashSimulateFragment extends DashBaseFragment {
 
@@ -46,10 +44,8 @@ public class DashSimulateFragment extends DashBaseFragment {
 
 			@Override
 			public void onClick(View v) {
-				if (getActivity() instanceof MapActivity) {
-					loc.getLocationSimulation().startStopRouteAnimation((MapActivity) getActivity());
-					dashboard.hideDashboard();
-				}
+				loc.getLocationSimulation().startStopRouteAnimation(getActivity());
+				dashboard.hideDashboard();
 			}
 		};
 		item.setOnClickListener(listener);

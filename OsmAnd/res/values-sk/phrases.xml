@@ -920,8 +920,8 @@
 		<string name="poi_hiking_routes">Turistické trasy</string>
 		<string name="poi_traffic_enforcement">Dopravné vynútenie</string>
 	<string name="poi_free_flying">Obchod pre voľné lietanie</string>
-	<string name="poi_recycling_centre">Stredisko</string>
-	<string name="poi_recycling_container">Kontajner</string>
+	<string name="poi_recycling_centre">Typ: recyklačné stredisko</string>
+	<string name="poi_recycling_container">Typ: kontajner</string>
 	<string name="poi_recycling_glass">Sklo</string>
 	<string name="poi_recycling_paper">Papier</string>
 	<string name="poi_recycling_clothes">Oblečenie</string>
@@ -1298,4 +1298,6 @@
 	<string name="poi_religion_zoroastrian">Zoroastrizmus</string>
 
 	<string name="poi_bicycle_parking_anchors">Držiaky</string>
-	</resources>
+	<string name="poi_rtsa_scale">Náročnosť horského priesmyku</string>
+
+</resources>

@@ -93,7 +93,7 @@
 <string name="bg_service_interval">Ställ in väckningsintervall:</string>
 <string name="show_cameras">Visa fartkameror</string>
 <string name="show_traffic_warnings">Visa hastighetsgränser</string>
-<string name="avoid_toll_roads">Betalvägar</string>
+<string name="avoid_toll_roads">Undvik betalvägar</string>
 <string name="continue_follow_previous_route_auto">En tidigare navigering avbröts. Fortsätta att följa den? (%1$s sekunder)</string>
 <string name="route_updated_loc_found">Resvägen kommer att beräknas så snart positionen hittas</string>
 <string name="osmand_parking_hours">timmar</string>
@@ -1162,9 +1162,9 @@
     <string name="context_menu_item_destination_point">Ange som destination</string>
     
 	
-    <string name="speak_speed_limit">Meddela om hastighetsbegränsningar</string>
-    <string name="speak_cameras">Meddela om fartkameror</string>
-	<string name="speak_traffic_warnings">Meddela om trafikvarningar</string>
+    <string name="speak_speed_limit">Hastighetsbegränsningar</string>
+    <string name="speak_cameras">Fartkameror</string>
+	<string name="speak_traffic_warnings">Trafikvarningar</string>
 	
 	
 	<string name="plugin_distance_point_hdop">noggrannhet</string>
@@ -1187,8 +1187,8 @@
     <string name="route_from">Från:</string>
     <string name="speak_title">Läs upp …</string>
 	<string name="speak_descr">Konfigurera för att läsa upp gatunamn, trafikvarningar (t.ex. fartbulor), varningar för fartkameror, hastighetsbegränsningar</string>
-	<string name="speak_street_names">Läs upp gatunamn (TTS)</string>
-    <string name="announce_gpx_waypoints">Meddela om GPX-waypoints</string>
+	<string name="speak_street_names">Gatunamn (TTS)</string>
+    <string name="announce_gpx_waypoints">GPX-waypoints</string>
         
     
     <string name="map_widget_fps_info">FPS-avbuggningsinfo</string>
@@ -1284,13 +1284,13 @@
     <string name="app_mode_truck">Lastbil</string>
     <string name="routing_attr_prefer_motorway_name">Föredra motorvägar</string>
 	<string name="routing_attr_prefer_motorway_description">Föredra motorvägar</string>
-	<string name="routing_attr_avoid_toll_name">Betalvägar</string>
+	<string name="routing_attr_avoid_toll_name">Undvik betalvägar</string>
 	<string name="routing_attr_avoid_toll_description">Undvik betalvägar</string>
-	<string name="routing_attr_avoid_unpaved_name">Oasfalterade vägar</string>
+	<string name="routing_attr_avoid_unpaved_name">Undvik oasfalterade vägar</string>
 	<string name="routing_attr_avoid_unpaved_description">Undvik oasfalterade vägar</string>
-	<string name="routing_attr_avoid_ferries_name">Färjor</string>
+	<string name="routing_attr_avoid_ferries_name">Undvik färjor</string>
 	<string name="routing_attr_avoid_ferries_description">Undvik färjor</string>
-	<string name="routing_attr_avoid_motorway_name">Motorvägar</string>
+	<string name="routing_attr_avoid_motorway_name">Undvik motorvägar</string>
 	<string name="routing_attr_avoid_motorway_description">Undvik motorvägar</string>
 	<string name="routing_attr_weight_name">Viktgräns</string>
 	<string name="routing_attr_weight_description">Ange fordonsvikt tillåten på rutter</string>
@@ -1591,8 +1591,8 @@
     <string name="waypoints">Waypoints</string>
     <string name="targets">Mål</string>
     <string name="way_alarms">Trafikskyltar</string>
-    <string name="speak_favorites">Meddela om närbelägna favoriter</string>
-    <string name="speak_poi">Meddela om närbelägna intresssepunkter</string>
+    <string name="speak_favorites">Närbelägna favoriter</string>
+    <string name="speak_poi">Närbelägna intresssepunkter</string>
     <string name="index_tours">Rundturer</string>
     <string name="shared_string_all">Alla</string>
     <string name="record_plugin_description">"Denna modul aktiverar funktionen att antingen spela in och spara dina spår genom att du trycker på widgeten GPX-loggning på kartskärmen eller alla dina rutter sparas automatiskt i en GPX-fil.
@@ -1692,7 +1692,7 @@
     <string name="download_tab_local">Hämtat</string>
 	<string name="route_descr_destination">Destination</string>
     <string name="voices">Röstprompter</string>
-	<string name="speak_pedestrian">Meddela om övergångsställen</string>
+	<string name="speak_pedestrian">Övergångsställen</string>
     
 	<string name="avoid_roads_msg">Du kan ändra till en alternativ rutt genom att välja vägar att undvika</string>
     
@@ -1876,7 +1876,7 @@
 	<string name="routing_attr_height_name">Höjdgräns</string>
 	<string name="use_fast_recalculation">Smart omräkning av rutt</string>
 	<string name="use_fast_recalculation_desc">Räkna om endast början av rutten för långa resor</string>
-<string name="routing_attr_avoid_borders_name">Gränsövergångar</string>
+<string name="routing_attr_avoid_borders_name">Undvik gränsövergångar</string>
 	<string name="routing_attr_height_description">Ange tillåten fordonshöjd på rutter</string>
     <string name="osmo_share_my_location">Dela ut min plats</string>
     <string name="shared_string_logoff">Logga ut</string>
@@ -1966,7 +1966,7 @@
 	<string name="shared_string_undo">ÅNGRA</string>
 	<string name="shared_string_skip">Hoppa över</string>
 	<string name="app_name_osmand">OsmAnd</string>
-	<string name="routing_attr_avoid_shuttle_train_name">Pendeltåg</string>
+	<string name="routing_attr_avoid_shuttle_train_name">Undvik pendeltåg</string>
 	<string name="routing_attr_avoid_shuttle_train_description">Undvik pendeltåg</string>
     <string name="plugin_settings">Insticksprogram</string>
 	<string name="traffic_warning_hazard">Varning</string>
@@ -1996,4 +1996,7 @@
 <string name="poi_deleted_localy">POI tas bort så snart du laddat upp dina ändringar</string>
 	<string name="show_gpx">Visa GPX</string>
 <string name="show_on_start">Visa vid start</string>
-	</resources>
+	<string name="address_unknown">Adressen är inte känd än</string>
+    <string name="are_you_sure">Är du säker?</string>
+	<string name="unsaved_changes_will_be_lost">Alla osparade ändringar kommer att förloras. Fortsätta ändå?</string>
+</resources>

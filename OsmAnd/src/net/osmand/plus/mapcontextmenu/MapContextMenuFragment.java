@@ -5,7 +5,6 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.res.Resources;
-import android.graphics.PointF;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -30,10 +29,11 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.sections.MenuController;
-import net.osmand.plus.views.ContextMenuLayer;
+import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
 
 import org.apache.commons.logging.Log;
@@ -50,8 +50,6 @@ public class MapContextMenuFragment extends Fragment {
 
 	private View view;
 	private View mainView;
-	private View bottomView;
-	private View shadowView;
 
 	MenuController menuController;
 
@@ -183,25 +181,7 @@ public class MapContextMenuFragment extends Fragment {
 
 		});
 
-		shadowView = view.findViewById(R.id.context_menu_shadow_view);
 		final GestureDetector singleTapDetector = new GestureDetector(view.getContext(), new SingleTapConfirm());
-		shadowView.setOnTouchListener(new View.OnTouchListener() {
-			public boolean onTouch(View view, MotionEvent event) {
-
-				if (singleTapDetector.onTouchEvent(event)) {
-					MapActivity mapActivity = getMapActivity();
-					ContextMenuLayer contextMenuLayer = mapActivity.getMapLayers().getContextMenuLayer();
-
-					PointF point = new PointF(event.getX(), event.getY());
-					RotatedTileBox tileBox = mapActivity.getMapView().getCurrentRotatedTileBox();
-					if (!contextMenuLayer.pressedContextMarker(tileBox, point.x, point.y) &&
-							!contextMenuLayer.onSingleTap(point, tileBox)) {
-						dismissMenu();
-					}
-				}
-				return true;
-			}
-		});
 
 		final View.OnTouchListener slideTouchListener = new View.OnTouchListener() {
 			private float dy;
@@ -219,9 +199,7 @@ public class MapContextMenuFragment extends Fragment {
 			public boolean onTouch(View v, MotionEvent event) {
 
 				if (singleTapDetector.onTouchEvent(event)) {
-					OsmandMapTileView mapView = getMapActivity().getMapView();
-					mapView.getAnimatedDraggingThread().startMoving(getCtxMenu().getPointDescription().getLat(), getCtxMenu().getPointDescription().getLon(),
-							mapView.getZoom(), true);
+					showOnMap(getCtxMenu().getPointDescription().getLat(), getCtxMenu().getPointDescription().getLon());
 
 					if (hasMoved) {
 						applyPosY(getViewY());
@@ -373,7 +351,7 @@ public class MapContextMenuFragment extends Fragment {
 		buttonNavigate.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				getCtxMenu().buttonNavigatePressed(getMapActivity());
+				getCtxMenu().buttonNavigatePressed();
 			}
 		});
 
@@ -383,7 +361,7 @@ public class MapContextMenuFragment extends Fragment {
 		buttonFavorite.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				getCtxMenu().buttonFavoritePressed(getMapActivity());
+				getCtxMenu().buttonFavoritePressed();
 			}
 		});
 
@@ -393,7 +371,7 @@ public class MapContextMenuFragment extends Fragment {
 		buttonShare.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				getCtxMenu().buttonSharePressed(getMapActivity());
+				getCtxMenu().buttonSharePressed();
 			}
 		});
 
@@ -403,12 +381,12 @@ public class MapContextMenuFragment extends Fragment {
 		buttonMore.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				getCtxMenu().buttonMorePressed(getMapActivity());
+				getCtxMenu().buttonMorePressed();
 			}
 		});
 
 		// Menu controller
-		bottomView = view.findViewById(R.id.context_menu_bottom_view);
+		View bottomView = view.findViewById(R.id.context_menu_bottom_view);
 		if (menuController != null) {
 			bottomView.setOnTouchListener(new View.OnTouchListener() {
 				@Override
@@ -422,7 +400,31 @@ public class MapContextMenuFragment extends Fragment {
 		bottomView.measure(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		menuBottomViewHeight = bottomView.getMeasuredHeight();
 
+		getMapActivity().getMapLayers().getMapControlsLayer().setControlsClickable(false);
+
 		return view;
+	}
+
+	@Override
+	public void onDestroyView() {
+		super.onDestroyView();
+		getMapActivity().getMapLayers().getMapControlsLayer().setControlsClickable(true);
+	}
+
+	private void showOnMap(double latitude, double longitude) {
+		MapActivity ctx = getMapActivity();
+		AnimateDraggingMapThread thread = ctx.getMapView().getAnimatedDraggingThread();
+		int fZoom = ctx.getMapView().getZoom();
+		double flat = latitude;
+		double flon = longitude;
+
+		RotatedTileBox cp = ctx.getMapView().getCurrentRotatedTileBox().copy();
+		cp.setCenterLocation(0.5f, ctx.getMapView().getMapPosition() == OsmandSettings.BOTTOM_CONSTANT ? 0.15f : 0.5f);
+		cp.setLatLonCenter(flat, flon);
+		flat = cp.getLatFromPixel(cp.getPixWidth() / 2, cp.getPixHeight() / 2);
+		flon = cp.getLonFromPixel(cp.getPixWidth() / 2, cp.getPixHeight() / 2);
+
+		thread.startMoving(flat, flon, fZoom, true);
 	}
 
 	private void setAddressLocation() {
@@ -432,7 +434,7 @@ public class MapContextMenuFragment extends Fragment {
 
 		// Text line 2
 		TextView line2 = (TextView) view.findViewById(R.id.context_menu_line2);
-		line2.setText(getCtxMenu().getLocationStr(getMapActivity()));
+		line2.setText(getCtxMenu().getLocationStr());
 	}
 
 	private int getPosY() {

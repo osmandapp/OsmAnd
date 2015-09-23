@@ -43,39 +43,21 @@ public class OsMoGroupsStorage {
 	private OsmandPreference<String> pref;
 	private OsMoGroups service;
 	private ConcurrentHashMap<String, OsMoGroup> groups = new ConcurrentHashMap<String, OsMoGroup>();
-	private OsMoGroup mainGroup;
 
 	public OsMoGroupsStorage(OsMoGroups service, OsmandPreference<String> pref) {
 		this.service = service;
 		this.pref = pref;
-		mainGroup = new OsMoGroup();
-		groups.put("", mainGroup);
-	}
-	
-	public OsMoGroup getMainGroup() {
-		return mainGroup;
 	}
 	
 	public Collection<OsMoGroup> getGroups() {
 		return groups.values();
 	}
 	
-	public void loadOnlyMainGroup() {
-		String grp = pref.get();
-		try {
-			JSONObject obj = new JSONObject(grp);
-			parseGroupUsers(mainGroup, obj);
-		} catch (JSONException e) {
-			e.printStackTrace();
-			service.showErrorMessage(e.getMessage());
-		}
-	}
 
 	public void load() {
 		String grp = pref.get();
 		try {
 			JSONObject obj = new JSONObject(grp);
-			parseGroupUsers(mainGroup, obj);
 			if(!obj.has(GROUPS)) {
 				return;
 			}
@@ -115,7 +97,6 @@ public class OsMoGroupsStorage {
 	public void save() {
 		JSONObject mainObj = new JSONObject();
 		try {
-			saveGroupUsers(mainGroup, mainObj);
 			JSONArray ar = new JSONArray();
 			for(OsMoGroup gr : groups.values()) {
 				if(gr.isMainGroup()) {
@@ -493,7 +474,7 @@ public class OsMoGroupsStorage {
 		}
 		for (String id: toDelete) {
 			OsMoGroup group = getGroup(id); 
-			if ((group != null) && (!group.equals(mainGroup))) {
+			if (group != null) {
 				deleteGroup(group);
 			}
 		}
@@ -501,7 +482,6 @@ public class OsMoGroupsStorage {
 	
 	public void clearGroups() {
 		groups.clear();
-		groups.put("", mainGroup);
 	}
 	
 }

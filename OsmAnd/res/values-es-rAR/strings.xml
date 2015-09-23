@@ -2055,4 +2055,6 @@
 <string name="count_of_lines">Número de líneas</string>
 <string name="show_on_start">Mostrar al inicio</string>
 	<string name="address_unknown">Dirección desconocida</string>
-    </resources>
+    <string name="are_you_sure">¿Está seguro?</string>
+	<string name="unsaved_changes_will_be_lost">Se perderán los cambios no guardados. ¿Continuar?</string>
+</resources>

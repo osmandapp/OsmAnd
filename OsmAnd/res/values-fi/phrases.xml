@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="poi_shop">Kauppa</string>
+		<string name="poi_shop_food">Ruokakauppa</string>
+	<string name="poi_emergency">Hätätapaus</string>
+	<string name="poi_filling_station">Huoltoasema</string>
+		<string name="poi_man_made">Rakennelma</string>
+		<string name="poi_education">Koulutus</string>
+	<string name="poi_healthcare">Terveydenhuolto</string>
+	<string name="poi_office">Toimisto</string>
+	<string name="poi_sport">Urheilu</string>
+	<string name="poi_tourism">Turismi</string>
+		<string name="poi_sightseeing">Nähtävyys</string>
+		<string name="poi_accomodation">Majoitus</string>
+		<string name="poi_entertainment">Vapaa-aika</string>
+		</resources>

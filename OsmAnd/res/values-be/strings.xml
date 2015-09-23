@@ -45,13 +45,13 @@
 	<string name="driving_region_uk">Вялікабрытанія, Індыія, Аўстралія ды іншыя</string>
 	    
     
-    <string name="announce_gpx_waypoints">Агалошваць маршрутныя пункты GPX</string>
+    <string name="announce_gpx_waypoints">Маршрутныя пункты GPX</string>
     <string name="speak_title">Агалошваць…</string>
 	<string name="speak_descr">Агалошваць назвы вуліц, дарожныя перасьцярогі (вымушаныя прыпынкі, ляжачыя паліцэйскія), перасьцярогі аб камерах хуткасьці, абмежаваньні хуткасьці</string>
-	<string name="speak_street_names">Агалошваць назвы вуліц (TTS)</string>
-    <string name="speak_speed_limit">Папярэджваць пра абмежаваньне хуткасьці</string>
-    <string name="speak_cameras">Папярэджваць пра камэры хуткасьці</string>
-	<string name="speak_traffic_warnings">Папярэджваць пра перашкоды руху</string>
+	<string name="speak_street_names">Назвы вуліц (TTS)</string>
+    <string name="speak_speed_limit">Абмежаваньне хуткасьці</string>
+    <string name="speak_cameras">Камэры хуткасьці</string>
+	<string name="speak_traffic_warnings">Перасьцярогі руху</string>
     <string name="tip_recent_changes_1_5_t">Зьмены ў 1.5:
 	\n\t* Галасавыя папярэджваньні аб абмежаваньні хуткасьці і камерах
 	\n\t* Больш галасавых падказкак (агалошэньне назваў вуліц)
@@ -375,7 +375,7 @@
 	<string name="bg_service_interval">Задайце інтэрвал абуджэньня:</string>
 	<string name="show_cameras">Камэры хуткасьці</string>
 	<string name="show_traffic_warnings">Абмежаваньне руху</string>
-	<string name="avoid_toll_roads">Платныя дарогі</string>
+	<string name="avoid_toll_roads">Пазьбягаць платныя дарогі</string>
 	<string name="continue_follow_previous_route_auto">Папярэдняя навігацыя не была скончаная. Працягваць кіравацца ёю? (%1$s сэкундаў)</string>
 	<string name="route_updated_loc_found">Маршрут будзе разлічвацца як толькі вызначыцца становішча</string>
 	<string name="osmand_parking_hours">Гадзін</string>
@@ -1313,13 +1313,13 @@
     <string name="routing_attr_prefer_motorway_name">Аддаваць перавагу аўтамагістралям</string>
 	<string name="routing_attr_short_way_name">Самы кароткі шлях</string>
 	<string name="routing_attr_short_way_description">Выкарыстоўваць кароткі шлях</string>
-	<string name="routing_attr_avoid_toll_name">Платныя дарогі</string>
+	<string name="routing_attr_avoid_toll_name">Пазьбягаць платныя дарогі</string>
 	<string name="routing_attr_avoid_toll_description">Пазьбягаць платных дарог</string>
-	<string name="routing_attr_avoid_unpaved_name">Грунтавыя дарогі</string>
+	<string name="routing_attr_avoid_unpaved_name">Пазьбягаць грунтавыя дарогі</string>
 	<string name="routing_attr_avoid_unpaved_description">Пазбягаць грунтавыя дарогі</string>
-	<string name="routing_attr_avoid_ferries_name">Паромныя пераправы</string>
+	<string name="routing_attr_avoid_ferries_name">Пазьбягаць паромныя пераправы</string>
 	<string name="routing_attr_avoid_ferries_description">Пазбягаць пераправы</string>
-	<string name="routing_attr_avoid_motorway_name">Аўтамагістралі</string>
+	<string name="routing_attr_avoid_motorway_name">Пазьбягаць аўтамагістралі</string>
 	<string name="routing_attr_avoid_motorway_description">Пазьбягаць аўтамагістралі</string>
 	<string name="routing_attr_weight_name">Абмежаваньне вагі</string>
 	<string name="routing_attr_weight_description">Задайце вагу аўтамабіля для пракладаньня маршрутаў</string>
@@ -1669,8 +1669,8 @@
     
     <string name="waypoints">Кропкі шляху</string>
     <string name="way_alarms">Дарожныя папярэджаньні</string>
-    <string name="speak_favorites">Абвяшчаць выбраныя паблізу</string>
-    <string name="speak_poi">Абвяшчаць навакольныя POI</string>
+    <string name="speak_favorites">Упадабаныя паблізу</string>
+    <string name="speak_poi">Навакольныя POI</string>
     <string name="targets">Цэлі</string>
     <string name="shared_string_all">Усе</string>
     <string name="index_tours">Паездкі</string>
@@ -1769,7 +1769,7 @@
     <string name="traffic_warning_pedestrian">Пешаходны пераход</string>
 	<string name="traffic_warning_railways">Чыгуначны пераезд</string>
 	<string name="show_railway_warnings">Паказваць чыгуначныя пераезды</string>
-	<string name="speak_pedestrian">Папярэджваць пра пешаходныя пераходы</string>
+	<string name="speak_pedestrian">Пешаходныя пераходы</string>
     
 	<string name="save_track_to_gpx_globally_headline">Запіс сьледу па запатрабаваньні</string>
 	<string name="avoid_roads_msg">Вы можаце абраць іншы маршрут, пазначыўшы дарогі, якія варта пазьбягаць</string>
@@ -1966,7 +1966,7 @@
     <string name="storage_directory_multiuser">Агульнае сховішча</string>
     <string name="application_dir_change_warning3">Вы хочаце, каб OsmAnd таксама скапіяваў свае файлы дадзеных у новае месца прызначэньня?</string>
     <string name="rendering_attr_hideHouseNumbers_name">Схаваць нумары дамоў</string>
-    <string name="routing_attr_avoid_borders_name">Перасячэньне мяжы</string>
+    <string name="routing_attr_avoid_borders_name">Пазьбягаць перасячэньне мяжы</string>
 	<string name="routing_attr_avoid_borders_description">Пазьбягаць перасячэньня мяжы іншай краіны</string>
 	<string name="routing_attr_height_name">Абмежаваньне па вышыні</string>
 	<string name="routing_attr_height_description">Пазначце вышыню транспартнага сродку для разьліку маршруту</string>
@@ -2066,7 +2066,7 @@
 	<string name="shared_string_skip">Прапусьціць</string>
 	<string name="plugin_settings">Модулі</string>
 	<string name="commit_poi">Укласьці POI</string>
-<string name="routing_attr_avoid_shuttle_train_name">Трансфер-цягнік</string>
+<string name="routing_attr_avoid_shuttle_train_name">Пазьбягаць трансфер-цягнік</string>
 	<string name="routing_attr_avoid_shuttle_train_description">Пазьбягаць трансфер-цягнікоў</string>
     <string name="tab_title_basic">Асноўнае</string>
 	<string name="building_number">Нумар будынка</string>
@@ -2094,4 +2094,6 @@
 	<string name="show_on_start">Паказваць пры запуску</string>
 	<string name="count_of_lines">Колькасьць радкоў</string>
 <string name="address_unknown">Адрас пакуль невядомы</string>
-    </resources>
+    <string name="are_you_sure">Вы ўпэўненыя?</string>
+	<string name="unsaved_changes_will_be_lost">Усе незахаваныя зьмены будуць страчаны. Працягваць?</string>
+</resources>

@@ -2,6 +2,7 @@ package net.osmand.plus.mapcontextmenu.sections;
 
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.text.Html;
 import android.text.util.Linkify;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -17,6 +18,7 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.views.POIMapLayer;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
 
@@ -35,11 +37,11 @@ public class AmenityInfoMenuBuilder extends MenuBuilder {
 		this.amenity = amenity;
 	}
 
-	private void buildRow(View view, int iconId, String text, int textColor) {
-		buildRow(view, getRowIcon(iconId), text, textColor);
+	private void buildRow(View view, int iconId, String text, int textColor, boolean isDescription) {
+		buildRow(view, getRowIcon(iconId), text, textColor, isDescription);
 	}
 
-	private void buildRow(View view, Drawable icon, String text, int textColor) {
+	private void buildRow(final View view, Drawable icon, String text, int textColor, final boolean isDescription) {
 		boolean light = app.getSettings().isLightContent();
 
 		LinearLayout ll = new LinearLayout(view.getContext());
@@ -78,11 +80,24 @@ public class AmenityInfoMenuBuilder extends MenuBuilder {
 
 		textView.setAutoLinkMask(Linkify.ALL);
 		textView.setLinksClickable(true);
+		if (isDescription) {
+			textView.setMinLines(1);
+			textView.setMaxLines(5);
+		}
 		textView.setText(text);
 		if (textColor > 0) {
 			textView.setTextColor(view.getResources().getColor(textColor));
 		}
-		//textView.setText("sdf dsaf fsdasdfg adsf asdsfd asdf sdf adsfg asdf sdfa sdf dsf agsfdgd fgsfd sdf asdf adg adf sdf asdf dfgdfsg sdfg adsf asdf asdf sdf SDF ASDF ADSF ASDF ASDF DAF SDAF dfg dsfg dfg sdfg rg rth sfghs dfgs dfgsdfg adfg dfg sdfg dfs ");
+		if (isDescription) {
+			textView.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					if (isDescription) {
+						POIMapLayer.showDescriptionDialog(view.getContext(), app, amenity);
+					}
+				}
+			});
+		}
 
 		LinearLayout.LayoutParams llTextViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		llTextViewParams.setMargins(0, 0, dpToPx(10f), 0);
@@ -117,9 +132,10 @@ public class AmenityInfoMenuBuilder extends MenuBuilder {
 	public void build(View view) {
 
 		firstRow = true;
+		boolean hasWiki = false;
 
 		for (PlainMenuItem item : plainMenuItems) {
-			buildRow(view, item.getIconId(), item.getText(), 0);
+			buildRow(view, item.getIconId(), item.getText(), 0, false);
 		}
 
 		MapPoiTypes poiTypes = app.getPoiTypes();
@@ -127,9 +143,34 @@ public class AmenityInfoMenuBuilder extends MenuBuilder {
 			int iconId = 0;
 			Drawable icon = null;
 			int textColor = 0;
+			boolean isDescription = false;
 			String key = e.getKey();
 			String vl = e.getValue();
-			if (key.startsWith("name:")) {
+
+			if (amenity.getType().isWiki()) {
+				if (!hasWiki) {
+					iconId = R.drawable.ic_action_note_dark;
+					String preferredLang = app.getSettings().MAP_PREFERRED_LOCALE.get();
+					if (Algorithms.isEmpty(preferredLang)) {
+						preferredLang = app.getLanguage();
+					}
+					String lng = amenity.getContentSelected("content", preferredLang, "en");
+					if (Algorithms.isEmpty(lng)) {
+						lng = "en";
+					}
+
+					final String langSelected = lng;
+					String content = amenity.getDescription(langSelected);
+					vl = Html.fromHtml(content).toString();
+					if (vl.length() > 300) {
+						vl = vl.substring(0, 300);
+					}
+					hasWiki = true;
+					isDescription = true;
+				} else {
+					continue;
+				}
+			} else if (key.startsWith("name:")) {
 				continue;
 			} else if (Amenity.OPENING_HOURS.equals(key)) {
 				iconId = R.drawable.ic_action_time;
@@ -154,6 +195,7 @@ public class AmenityInfoMenuBuilder extends MenuBuilder {
 			} else {
 				if (Amenity.DESCRIPTION.equals(key)) {
 					iconId = R.drawable.ic_action_note_dark;
+					isDescription = true;
 				} else {
 					iconId = R.drawable.ic_action_info_dark;
 				}
@@ -175,9 +217,9 @@ public class AmenityInfoMenuBuilder extends MenuBuilder {
 			}
 
 			if (icon != null) {
-				buildRow(view, icon, vl, textColor);
+				buildRow(view, icon, vl, textColor, isDescription);
 			} else {
-				buildRow(view, iconId, vl, textColor);
+				buildRow(view, iconId, vl, textColor, isDescription);
 			}
 		}
 	}
