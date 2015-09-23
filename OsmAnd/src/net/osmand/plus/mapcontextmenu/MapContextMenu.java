@@ -195,6 +195,10 @@ public class MapContextMenu {
 					}
 
 					if (streetStr != null) {
+						if (getObject() == null) {
+							nameStr = streetStr;
+							streetStr = null;
+						}
 						activity.runOnUiThread(new Runnable() {
 							public void run() {
 								refreshMenuTitle(activity);
