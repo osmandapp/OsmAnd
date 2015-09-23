@@ -779,8 +779,6 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		
 	}
 
-	
-
 	protected class LocalIndexesAdapter extends OsmandBaseExpandableListAdapter {
 		
 		Map<LocalIndexInfo, List<LocalIndexInfo>> data = new LinkedHashMap<LocalIndexInfo, List<LocalIndexInfo>>();
