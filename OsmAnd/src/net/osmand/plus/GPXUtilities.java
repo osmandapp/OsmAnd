@@ -226,8 +226,17 @@ public class GPXUtilities {
 			double totalSpeedSum = 0;
 			points = 0;
 			
+			double channelThres = 5;
+			double channelBase;
+			double channelTop;
+			double channelBottom;
+			boolean climb = false;
+
 			for (SplitSegment s : splitSegments) {
 				final int numberOfPoints = s.getNumberOfPoints();
+
+				channelBase = 99999;
+
 				metricEnd += s.metricEnd;
 				points += numberOfPoints;
 				for (int j = 0; j < numberOfPoints; j++) {
@@ -259,17 +268,58 @@ public class GPXUtilities {
 						speedCount++;
 					}
 
+					// Trend channel approach for elevation gain/loss, Hardy 2015-09-22
+					if (!Double.isNaN(point.ele)) {
+						// Init channel
+						if (channelBase == 99999) {
+							channelBase = point.ele;
+							channelTop = channelBase;
+							channelBottom = channelBase;
+						}
+						// Channel maintenance
+						if (point.ele > channelTop) {
+							channelTop = point.ele;
+						} else if (point.ele < channelBottom) {
+							channelBottom = point.ele;
+						}
+						// Turnaround (breakout) detection
+						if ((point.ele <= (channelTop - channelThres)) && (climb == true)) {
+							if ((channelTop - channelBase) >= channelThres) {
+								diffElevationUp += channelTop - channelBase;
+							}
+							channelBase = channelTop;
+							channelBottom = point.ele;
+							climb = false;
+						} else if ((point.ele >= (channelBottom + channelThres)) && (climb == false)) {
+							if ((channelBase - channelBottom) >= channelThres) {
+								diffElevationDown += channelBase - channelBottom;
+							}
+							channelBase = channelBottom;
+							channelTop = point.ele;
+							climb = true;
+						// End detection without breakout
+						} else if (j == numberOfPoints -1) {
+							if ((channelTop - channelBase) >= channelThres) {
+								diffElevationUp += channelTop - channelBase;
+							}
+							if ((channelBase - channelBottom) >= channelThres) {
+								diffElevationDown += channelBase - channelBottom;
+							}
+						}
+					}
+
 					if (j > 0) {
 						WptPt prev = s.get(j - 1);
 
-						if (!Double.isNaN(point.ele) && !Double.isNaN(prev.ele)) {
-							double diff = point.ele - prev.ele;
-							if (diff > 0) {
-								diffElevationUp += diff;
-							} else {
-								diffElevationDown -= diff;
-							}
-						}
+						// Old complete summation approach for elevation gain/loss
+						//if (!Double.isNaN(point.ele) && !Double.isNaN(prev.ele)) {
+						//	double diff = point.ele - prev.ele;
+						//	if (diff > 0) {
+						//		diffElevationUp += diff;
+						//	} else {
+						//		diffElevationDown -= diff;
+						//	}
+						//}
 
 						// totalDistance += MapUtils.getDistance(prev.lat, prev.lon, point.lat, point.lon);
 						// using ellipsoidal 'distanceBetween' instead of spherical haversine (MapUtils.getDistance) is
