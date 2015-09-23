@@ -236,6 +236,8 @@ public class GPXUtilities {
 				final int numberOfPoints = s.getNumberOfPoints();
 
 				channelBase = 99999;
+				channelTop = channelBase;
+				channelBottom = channelBase;
 
 				metricEnd += s.metricEnd;
 				points += numberOfPoints;
