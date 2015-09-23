@@ -2134,4 +2134,7 @@
 	<string name="address_unknown">Adressen kendes endnu ikke</string>
     <string name="unsaved_changes_will_be_lost">Eventuelle ikke-gemte ændringer vil gå tabt. Fortsæt?</string>
 <string name="are_you_sure">Sikker?</string>
-	</resources>
+	<string name="simulate_your_location_stop_descr">Stop simulering af position</string>
+    <string name="simulate_your_location_descr">Simuler ved brug af indspillet GPX eller beregnet rute</string>
+    <string name="downloads_left_template">%1$s downloads tilbage</string>
+</resources>
