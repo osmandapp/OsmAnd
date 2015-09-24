@@ -1015,7 +1015,7 @@
   
   <string name="show_cameras">Показать камеры контроля скорости</string>
   <string name="show_traffic_warnings">Показать ограничения скорости</string>
-  <string name="avoid_toll_roads">Избегать платных дорог</string>
+  <string name="avoid_toll_roads">Платные дороги</string>
   <string name="tip_recent_changes_0_8_2_t">Изменения в 0.8.2:
 		\n\t* Улучшенная прокладка маршрута.
 		\n\t* Возможность выбора информационных элементов (виджетов), отображаемых на карте (кнопка Настройки в правом верхнему углу карты).
@@ -1281,9 +1281,9 @@
 	<string name="av_camera_pic_size">Размер фото</string>
 	<string name="av_camera_pic_size_descr">Размер изображения для встроенного приложения фотографирования</string>
     
-	<string name="speak_speed_limit">Сообщать о превышении скорости</string>
-    <string name="speak_cameras">Сообщать о камерах</string>
-	<string name="speak_traffic_warnings">Сообщать о дорожных событиях</string>
+	<string name="speak_speed_limit">Ограничение скорости</string>
+    <string name="speak_cameras">Камеры контроля скорости</string>
+	<string name="speak_traffic_warnings">Дорожные предупреждения</string>
 	
     <string name="clear_intermediate_points">Очистить промежуточные точки</string>
     <string name="keep_intermediate_points">Оставить промежуточные точки</string>
@@ -1298,10 +1298,10 @@
 	\n\t* Множество изменений интерфейса
 	\n\t* Исправление ошибок отображения дистанции, анализатора GPX, виджета планирования, выгрузки OSM, обработки путевых точек и поддержки https
     </string>
-    <string name="speak_street_names">Произносить названия улиц (TTS)</string>
-    <string name="speak_title">Озвучивание…</string>
+    <string name="speak_street_names">Названия улиц (TTS)</string>
+    <string name="speak_title">Объявлять…</string>
 	<string name="speak_descr">Настройка озвучивания названий улиц, предупреждений (лежачих полицейских, знаков \"Движение без остановки запрещено\"), камер контроля скорости, ограничений скорости</string>
-	<string name="announce_gpx_waypoints">Озвучивание маршрутных точек GPX</string>
+	<string name="announce_gpx_waypoints">Маршрутные точки GPX</string>
         
     
     
@@ -1700,8 +1700,8 @@
     <string name="waypoints">Путевые точки</string>
     <string name="targets">Пункты назначения</string>
     <string name="way_alarms">Дорожные предупреждения</string>
-    <string name="speak_favorites">Объявлять близлежащие избранные</string>
-    <string name="speak_poi">Объявлять близлежащие POI</string>
+    <string name="speak_favorites">Близлежащие избранные</string>
+    <string name="speak_poi">Близлежащие POI</string>
     <string name="index_tours">Туры</string>
     <string name="shared_string_all">Все</string>
     <string name="distance">Расстояние</string>
@@ -1801,7 +1801,7 @@
 	<string name="show_pedestrian_warnings">Показывать пешеходные переходы</string>
     <string name="traffic_warning_railways">Железнодорожный переезд</string>
 	<string name="traffic_warning_pedestrian">Пешеходный переход</string>
-	<string name="speak_pedestrian">Сообщать о пешеходных переходах</string>
+	<string name="speak_pedestrian">Пешеходные переходы</string>
     
 	<string name="navigation_over_track">Начать навигацию по треку?</string>
 	<string name="avoid_roads_msg">Вы можете выбрать альтернативный маршрут, выбрав дороги, которые стоит избегать</string>
@@ -2099,4 +2099,6 @@
 	<string name="address_unknown">Адрес неизвестен</string>
     <string name="are_you_sure">Вы уверены?</string>
 	<string name="unsaved_changes_will_be_lost">Все несохраненные изменения будут потеряны. Продолжить?</string>
-	</resources>
+	<string name="simulate_your_location_descr">Моделировать используя записанный GPX или рассчитанный маршрут</string>
+    <string name="simulate_your_location_stop_descr">Остановить моделирование</string>
+    </resources>
