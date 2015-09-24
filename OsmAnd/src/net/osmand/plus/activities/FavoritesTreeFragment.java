@@ -196,7 +196,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 				null, false);
 		final AutoCompleteTextView cat = (AutoCompleteTextView) v.findViewById(R.id.Category);
 		final EditText editText = (EditText) v.findViewById(R.id.Name);
-		final EditText editDescr = (EditText) v.findViewById(R.id.descr);
+		final EditText editDescr = (EditText) v.findViewById(R.id.description);
 		builder.setView(v);
 		editText.setText(point.getName());
 		editDescr.setText(point.getDescription());

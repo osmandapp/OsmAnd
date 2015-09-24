@@ -6,15 +6,12 @@ import android.support.annotation.NonNull;
 
 import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
-import net.osmand.PlatformUtil;
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.HasName;
-
-import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -26,7 +23,7 @@ import java.util.TreeMap;
 
 public class IndexItemCategoryWithSubcat implements Comparable<IndexItemCategoryWithSubcat>,
 		Parcelable, HasName {
-	private static final Log LOG = PlatformUtil.getLog(IndexItemCategoryWithSubcat.class);
+//	private static final Log LOG = PlatformUtil.getLog(IndexItemCategoryWithSubcat.class);
 
 	public final List<IndexItem> items;
 	public final List<IndexItemCategoryWithSubcat> subcats;
@@ -116,7 +113,6 @@ public class IndexItemCategoryWithSubcat implements Comparable<IndexItemCategory
 					new IndexItemCategoryWithSubcat(categoryStaticData);
 			if (!cats.containsKey(name)) {
 				cats.put(name, category);
-				LOG.debug("category=" + category.categoryStaticData);
 				if (!categoryStaticData.hasParent()) {
 					mainList.add(category);
 				} else {

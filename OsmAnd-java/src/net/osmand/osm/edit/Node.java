@@ -1,9 +1,9 @@
 package net.osmand.osm.edit;
 
+import net.osmand.data.LatLon;
+
 import java.io.Serializable;
 import java.util.Map;
-
-import net.osmand.data.LatLon;
 
 public class Node extends Entity implements Serializable {
 
@@ -52,4 +52,12 @@ public class Node extends Entity implements Serializable {
 		
 	}
 
+	@Override
+	public String toString() {
+		return "Node{" +
+				"latitude=" + latitude +
+				", longitude=" + longitude +
+				", tags=" + getTags() +
+				'}';
+	}
 }

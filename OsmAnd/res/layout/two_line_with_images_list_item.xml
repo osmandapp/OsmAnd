@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants"
+    android:minHeight="@dimen/list_item_height"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/list_item_height"
+        android:paddingLeft="@dimen/list_content_padding">
+
+        <ImageView
+            android:id="@+id/leftIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/favorites_icon_right_margin"
+            tools:src="@drawable/ic_map"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="@dimen/default_list_text_size"
+                tools:text="Germany"/>
+
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:maxLines="25"
+                android:textColor="?android:textColorSecondary"
+                android:textSize="@dimen/default_sub_text_size"
+                tools:text="Map, Contour Lines, Wikipedia"/>
+
+
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/rightIcon"
+            android:layout_width="@dimen/list_item_height"
+            android:layout_height="@dimen/list_item_height"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/dashFavIconMargin"
+            android:background="?attr/dashboard_button"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            tools:src="@drawable/ic_action_import"/>
+    </LinearLayout>
+
+</LinearLayout>

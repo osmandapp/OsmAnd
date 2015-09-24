@@ -342,7 +342,7 @@ public class OsmEditsFragment extends OsmAndListFragment
 					getIcon(R.drawable.ic_type_bug, R.color.color_distance));
 		}
 
-		TextView descr = (TextView) v.findViewById(R.id.descr);
+		TextView descr = (TextView) v.findViewById(R.id.description);
 		if (child.getAction() == OsmPoint.Action.CREATE) {
 			descr.setText(R.string.action_create);
 		} else if (child.getAction() == OsmPoint.Action.MODIFY) {

@@ -43,7 +43,7 @@
 			android:text="@string/osmo_group_description"/>
 
 		<EditText
-			android:id="@+id/descr"
+			android:id="@+id/description"
 			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
 			android:inputType="textMultiLine|textCapSentences"

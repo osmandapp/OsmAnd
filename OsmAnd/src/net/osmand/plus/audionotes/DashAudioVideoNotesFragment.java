@@ -110,7 +110,7 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 		String name = recording.getName(ctx);
 		TextView nameText = ((TextView) view.findViewById(R.id.name));
 		nameText.setText(name);
-		((TextView) view.findViewById(R.id.descr)).setText(recording.getSmallDescription(ctx));
+		((TextView) view.findViewById(R.id.description)).setText(recording.getSmallDescription(ctx));
 
 		ImageView icon = (ImageView) view.findViewById(R.id.icon);
 		Drawable iconDrawable;
