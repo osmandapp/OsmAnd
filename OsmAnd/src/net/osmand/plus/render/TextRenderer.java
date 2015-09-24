@@ -29,7 +29,6 @@ import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
-import android.util.FloatMath;
 
 public class TextRenderer {
 
@@ -145,13 +144,13 @@ public class TextRenderer {
 		}
 
 		// determine difference close to 180/0 degrees
-		if (Math.abs(FloatMath.sin(tRot - sRot)) < 0.3) {
+		if (Math.abs(Math.sin(tRot - sRot)) < 0.3) {
 			// rotate t box
 			// (calculate offset for t center suppose we rotate around s center)
 			float diff = (float) (-Math.atan2(tRect.centerX() - sRect.centerX(), tRect.centerY() - sRect.centerY()) + Math.PI / 2);
 			diff -= sRot;
-			double left = sRect.centerX() + dist * FloatMath.cos(diff) - tRect.width() / 2;
-			double top = sRect.centerY() - dist * FloatMath.sin(diff) - tRect.height() / 2;
+			double left = sRect.centerX() + dist * Math.cos(diff) - tRect.width() / 2;
+			double top = sRect.centerY() - dist * Math.sin(diff) - tRect.height() / 2;
 			QuadRect nRect = new QuadRect(left, top, left + tRect.width(), top + tRect.height());
 			return QuadRect.intersects(nRect, sRect);
 		}
@@ -458,7 +457,7 @@ public class TextRenderer {
 			boolean inside = points[i].x >= 0 && points[i].x <= rc.width &&
 					points[i].x >= 0 && points[i].y <= rc.height;
 			if (i > 0) {
-				float d = FloatMath.sqrt(fsqr(points[i].x - points[i - 1].x) + 
+				float d = (float) Math.sqrt(fsqr(points[i].x - points[i - 1].x) + 
 						fsqr(points[i].y - points[i - 1].y));
 				distances[i-1]= d;
 				roadLength += d;
