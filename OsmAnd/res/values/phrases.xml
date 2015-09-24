@@ -1356,4 +1356,34 @@
 	<string name="poi_garden_style_english">Garden style: english</string>
 	<string name="poi_garden_style_japanese">Garden style: japanese</string>
 
+	<string name="poi_capacity">Capacity</string>
+	<string name="poi_capacity_disabled_yes">Dedicated places for disabled</string>
+	<string name="poi_capacity_disabled_no">No dedicated places for disabled</string>
+	<string name="poi_capacity_disabled">Dedicated places for disabled</string>
+	<string name="poi_capacity_women_yes">Dedicated places for women</string>
+	<string name="poi_capacity_women_no">No dedicated places for women</string>
+	<string name="poi_capacity_women">Dedicated places for women</string>
+	<string name="poi_capacity_pupils">Dedicated places for pupils</string>
+	<string name="poi_capacity_teachers">Dedicated places for teachers</string>
+	<string name="poi_capacity_parent_yes">Dedicated places for parents</string>
+	<string name="poi_capacity_parent_no">No dedicated places for parents</string>
+	<string name="poi_capacity_parent">Dedicated places for parents</string>
+
+	<string name="poi_aerialway_occupancy">Cabin/chair/car capacity</string>
+	<string name="poi_aerialway_capacity">Capacity per hour</string>
+	<string name="poi_aerialway_duration">Average travel time, minutes</string>
+	<string name="poi_aerialway_bubble_yes">Bubble</string>
+	<string name="poi_aerialway_bubble_no">No bubble</string>
+	<string name="poi_aerialway_heating_yes">Heating</string>
+	<string name="poi_aerialway_heating_no">No heating</string>
+	<string name="poi_aerialway_bicycle_yes">Bicycle: allowed</string>
+	<string name="poi_aerialway_bicycle_no">Bicycle: not allowed</string>
+	<string name="poi_aerialway_bicycle_summer">Bicycle: allowed only in summer</string>
+	<string name="poi_aerialway_access_entry">Entry only</string>
+	<string name="poi_aerialway_access_exit">Exit only</string>
+	<string name="poi_aerialway_access_both">Entry and exit</string>
+	<string name="poi_aerialway_summer_access_entry">Summer access: entry only</string>
+	<string name="poi_aerialway_summer_access_exit">Summer access: exit only</string>
+	<string name="poi_aerialway_summer_access_both">Summer access: entry and exit</string>
+
 </resources>
