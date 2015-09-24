@@ -1363,4 +1363,45 @@
 	<string name="poi_piste_grooming_no">Sin preparación de la pista</string>
 	<string name="poi_piste_grooming_mogul">Pista de entrenamiento: magnate</string>
 
+<string name="poi_garden_type_residential">Jardín residencial</string>
+	<string name="poi_garden_type_community">Jardín comunitario</string>
+	<string name="poi_garden_type_private">Jardín privado</string>
+	<string name="poi_garden_type_botanical">Jardín botánico</string>
+
+	<string name="poi_garden_style_kitchen">Jardín huerta</string>
+	<string name="poi_garden_style_rosarium">Jardín rosedal</string>
+	<string name="poi_garden_style_french">Jardín francés</string>
+	<string name="poi_garden_style_english">Jardín inglés</string>
+	<string name="poi_garden_style_japanese">Jardín japonés</string>
+
+	<string name="poi_capacity">Capacidad</string>
+	<string name="poi_capacity_disabled_yes">Lugar reservado para discapacitados</string>
+	<string name="poi_capacity_disabled_no">Sin lugar reservado para discapacitados</string>
+	<string name="poi_capacity_disabled">Lugares para discapacitados</string>
+	<string name="poi_capacity_women_yes">Lugares reservados para mujeres</string>
+	<string name="poi_capacity_women_no">Sin lugar dedicado para mujeres</string>
+	<string name="poi_capacity_women">Lugares reservados para mujeres</string>
+	<string name="poi_capacity_pupils">Lugares reservados para alumnos</string>
+	<string name="poi_capacity_teachers">Lugares reservados para profesores</string>
+	<string name="poi_capacity_parent_yes">Lugares reservados para padres</string>
+	<string name="poi_capacity_parent_no">Sin lugares reservados para padres</string>
+	<string name="poi_capacity_parent">Lugares reservados para padres</string>
+
+	<string name="poi_aerialway_occupancy">Capacidad de cabina/silla/coche</string>
+	<string name="poi_aerialway_capacity">Capacidad por hora</string>
+	<string name="poi_aerialway_duration">Tiempo de viaje promedio, minutos</string>
+	<string name="poi_aerialway_bubble_yes">Burbuja</string>
+	<string name="poi_aerialway_bubble_no">Sin burbuja</string>
+	<string name="poi_aerialway_heating_yes">Calefaccionado</string>
+	<string name="poi_aerialway_heating_no">Sin colefacción</string>
+	<string name="poi_aerialway_bicycle_yes">Bicicletas permitidas</string>
+	<string name="poi_aerialway_bicycle_no">Bicicletas no permitidas</string>
+	<string name="poi_aerialway_bicycle_summer">Bicicletas permitidas sólo en verano</string>
+	<string name="poi_aerialway_access_entry">Sólo entrada</string>
+	<string name="poi_aerialway_access_exit">Sólo salida</string>
+	<string name="poi_aerialway_access_both">Entrada y salida</string>
+	<string name="poi_aerialway_summer_access_entry">Sólo acceso de entrada en verano</string>
+	<string name="poi_aerialway_summer_access_exit">Sólo acceso de salida en verano</string>
+	<string name="poi_aerialway_summer_access_both">Acesso de entrada y salida en verano</string>
+
 </resources>
