@@ -1,5 +1,6 @@
 package net.osmand.plus.osmedit;
 
+import android.content.res.Resources;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.TypedValue;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,8 +64,12 @@ public class BasicDataFragment extends Fragment {
 		int height = size.y;
 		view.findViewById(R.id.screenFiller).setMinimumHeight(height);
 
+		TypedValue typedValue = new TypedValue();
+		Resources.Theme theme = getActivity().getTheme();
+		theme.resolveAttribute(android.R.attr.textColorSecondary, typedValue, true);
+		int iconColor = typedValue.data;
+
 		IconsCache iconsCache = getMyApplication().getIconsCache();
-		int iconColor = getResources().getColor(R.color.dash_search_icon_dark);
 
 		ImageView streetImageView = (ImageView) view.findViewById(R.id.streetImageView);
 		streetImageView.setImageDrawable(

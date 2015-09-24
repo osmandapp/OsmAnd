@@ -1999,4 +1999,6 @@
 	<string name="address_unknown">Adressen är inte känd än</string>
     <string name="are_you_sure">Är du säker?</string>
 	<string name="unsaved_changes_will_be_lost">Alla osparade ändringar kommer att förloras. Fortsätta ändå?</string>
-</resources>
+<string name="simulate_your_location_stop_descr">Sluta simulera din plats</string>
+    <string name="simulate_your_location_descr">Simulera med inspelad GPX eller beräknad rutt</string>
+    </resources>

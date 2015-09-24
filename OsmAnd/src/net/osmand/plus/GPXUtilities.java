@@ -299,8 +299,9 @@ public class GPXUtilities {
 							channelBase = channelBottom;
 							channelTop = point.ele;
 							climb = true;
+						}
 						// End detection without breakout
-						} else if (j == numberOfPoints -1) {
+						if (j == (numberOfPoints -1)) {
 							if ((channelTop - channelBase) >= channelThres) {
 								diffElevationUp += channelTop - channelBase;
 							}

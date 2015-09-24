@@ -1347,4 +1347,20 @@
 	<string name="poi_windfall">Fruto caído</string>
 	<string name="poi_rtsa_scale">Dificultad del paso de montaña</string>
 
+<string name="poi_pump">Bomba</string>
+
+	<string name="poi_piste_difficulty_easy">Dificultad de la pista: fácil</string>
+	<string name="poi_piste_difficulty_intermediate">Dificultad de la pista: intermedia</string>
+	<string name="poi_piste_difficulty_advanced">Dificultad de la pista: avanzada</string>
+	<string name="poi_piste_difficulty_novice">Dificultad de la pista: novato</string>
+	<string name="poi_piste_difficulty_expert">Dificultad de la pista: experto</string>
+	<string name="poi_piste_difficulty_freeride">Dificultad de la pista: estilo libre</string>
+	<string name="poi_piste_grooming_classic">Pista de entrenamiento: clásico</string>
+	<string name="poi_piste_grooming_classic_skating">Pista de entrenamiento: patinaje clásico</string>
+	<string name="poi_piste_grooming_backcountry">Pista de entrenamiento: fuera de pista</string>
+	<string name="poi_piste_grooming_scooter">Pista de entrenamiento: scooter</string>
+	<string name="poi_piste_grooming_skating">Pista de entrenamiento: patinaje</string>
+	<string name="poi_piste_grooming_no">Sin preparación de la pista</string>
+	<string name="poi_piste_grooming_mogul">Pista de entrenamiento: magnate</string>
+
 </resources>
