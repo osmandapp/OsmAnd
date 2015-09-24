@@ -86,7 +86,7 @@
   <string name="user_name_descr">Necesario para envíos a openstreetmap.org</string>
   <string name="user_password">Su clave OSM</string>
   <string name="user_password_descr">Necesario para envíos a openstreetmap.org</string>
-  <string name="osmand_service">Modo reposo</string>
+  <string name="osmand_service">Modo en segundo plano</string>
   <string name="osmand_service_descr">OsmAnd se ejecuta en segundo plano mientras la pantalla está apagada</string>
   <string name="tip_rotation_switching">Rotación del mapa</string>
   
@@ -1765,9 +1765,9 @@
     <string name="osmo_gpx_track_downloaded">Traza OsMo %1$s descargada.</string>
     <string name="keep_navigation_service">Mantener</string>
 	<string name="stop_navigation_service">Interrumpir</string>
-	<string name="enable_sleep_mode">Habilita el modo reposo del GPS</string>
+	<string name="enable_sleep_mode">Habilita el modo de fondo del GPS</string>
 	<string name="gps_wake_up_timer">Intervalo para despertar GPS</string>
-	<string name="sleep_mode_stop_dialog">¿Interrumpir el modo reposo del GPS?</string>
+	<string name="sleep_mode_stop_dialog">¿Interrumpir el modo de fondo del GPS?</string>
 	<string name="map_preferred_locale_descr">Idioma preferido para las etiquetas en el mapa (si no está disponible se cambiará a inglés o a nombres locales)</string>
     <string name="map_preferred_locale">Idioma preferido del mapa</string>
     <string name="local_map_names">Nombres locales</string>
@@ -2196,4 +2196,5 @@
 	<string name="unsaved_changes_will_be_lost">Se perderán los cambios no guardados. ¿Continuar?</string>
 <string name="simulate_your_location_stop_descr">Parar simulación de posición</string>
     <string name="simulate_your_location_descr">Simular utilizando grabación GPX o ruta calculada</string>
-    </resources>
+    <string name="downloads_left_template">Quedan %$1s descargas</string>
+</resources>
