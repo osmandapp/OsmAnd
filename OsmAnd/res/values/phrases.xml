@@ -1345,4 +1345,15 @@
 	<string name="poi_piste_grooming_no">Piste grooming: no</string>
 	<string name="poi_piste_grooming_mogul">Piste grooming: mogul</string>
 
+	<string name="poi_garden_type_residential">Garden type: residential</string>
+	<string name="poi_garden_type_community">Garden type: community</string>
+	<string name="poi_garden_type_private">Garden type: private</string>
+	<string name="poi_garden_type_botanical">Garden type: botanical</string>
+
+	<string name="poi_garden_style_kitchen">Garden style: kitchen</string>
+	<string name="poi_garden_style_rosarium">Garden style: rosarium</string>
+	<string name="poi_garden_style_french">Garden style: french</string>
+	<string name="poi_garden_style_english">Garden style: english</string>
+	<string name="poi_garden_style_japanese">Garden style: japanese</string>
+
 </resources>

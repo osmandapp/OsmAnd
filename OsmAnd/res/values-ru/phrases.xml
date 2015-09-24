@@ -1200,4 +1200,13 @@
 	<string name="poi_piste_grooming_no">Обслуживание трассы: не обслуживаемая</string>
 	<string name="poi_piste_grooming_mogul">Обслуживание трассы: могул</string>
 
+	<string name="poi_garden_type_community">Тип сада: общественный</string>
+	<string name="poi_garden_type_private">Тип сада: частный</string>
+	<string name="poi_garden_type_botanical">Тип сада: ботанический</string>
+
+	<string name="poi_garden_style_rosarium">Стиль сада: розарий</string>
+	<string name="poi_garden_style_french">Стиль сада: французский</string>
+	<string name="poi_garden_style_english">Стиль сада: английский</string>
+	<string name="poi_garden_style_japanese">Стиль сада: японский</string>
+
 	</resources>
