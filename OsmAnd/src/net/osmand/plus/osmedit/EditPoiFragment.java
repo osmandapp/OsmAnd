@@ -126,7 +126,6 @@ public class EditPoiFragment extends DialogFragment {
 			editPoiData.tags = (LinkedHashSet<Tag>) savedInstanceState.getSerializable(TAGS_LIST);
 		} else {
 			editPoiData.tags = new LinkedHashSet<>();
-			LOG.debug("node.tags=" + node.getTags());
 
 			tryAddTag(OSMSettings.OSMTagKey.ADDR_STREET.getValue(),
 					node.getTag(OSMSettings.OSMTagKey.ADDR_STREET));
@@ -291,14 +290,13 @@ public class EditPoiFragment extends DialogFragment {
 					return;
 				}
 				OsmPoint.Action action = node.getId() == -1 ? OsmPoint.Action.CREATE : OsmPoint.Action.MODIFY;
-				String description = "";
 				for (Tag tag : editPoiData.tags) {
 					if (tag.tag.equals(POI_TYPE_TAG)) {
-						if (allTranslatedSubTypes.get(tag.value) != null) {
-							PoiType pt = allTranslatedSubTypes.get(tag.value);
-							node.putTag(pt.getOsmTag(), pt.getOsmValue());
-							if (pt.getOsmTag2() != null) {
-								node.putTag(pt.getOsmTag2(), pt.getOsmValue2());
+						final PoiType poiType = allTranslatedSubTypes.get(tag.value.trim().toLowerCase());
+						if (poiType != null) {
+							node.putTag(poiType.getOsmTag(), poiType.getOsmValue());
+							if (poiType.getOsmTag2() != null) {
+								node.putTag(poiType.getOsmTag2(), poiType.getOsmValue2());
 							}
 						} else {
 							node.putTag(editPoiData.amenity.getType().getDefaultTag(), tag.value);
@@ -429,10 +427,6 @@ public class EditPoiFragment extends DialogFragment {
 								  final Runnable successAction,
 								  final Activity activity,
 								  final OpenstreetmapUtil openstreetmapUtil) {
-		LOG.debug("commitNode(" + "action=" + action + ", n=" + n + ", info=" + info
-				+ ", comment=" + comment + ", closeChangeSet=" + closeChangeSet
-				+ ", successAction=" + successAction + ", activity=" + activity
-				+ ", openstreetmapUtil=" + openstreetmapUtil + ")");
 		if (info == null && OsmPoint.Action.CREATE != action) {
 
 			AccessibleToast.makeText(activity, activity.getResources().getString(R.string.poi_error_info_not_loaded), Toast.LENGTH_LONG).show();
