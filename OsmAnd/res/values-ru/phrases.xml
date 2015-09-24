@@ -1186,4 +1186,57 @@
 
 	<string name="poi_rtsa_scale">Категория сложности перевала</string>
 
+	<string name="poi_piste_difficulty_easy">Сложность трассы: низкая</string>
+	<string name="poi_piste_difficulty_intermediate">Сложность трассы: средняя</string>
+	<string name="poi_piste_difficulty_advanced">Сложность трассы: высокая</string>
+	<string name="poi_piste_difficulty_novice">Сложность трассы: простейшая</string>
+	<string name="poi_piste_difficulty_expert">Сложность трассы: эксперт</string>
+	<string name="poi_piste_difficulty_freeride">Сложность трассы: фрирайд</string>
+	<string name="poi_piste_grooming_classic">Обслуживание трассы: классика</string>
+	<string name="poi_piste_grooming_classic_skating">Обслуживание трассы: классика+конёк</string>
+	<string name="poi_piste_grooming_backcountry">Обслуживание трассы: кросс-кантри</string>
+	<string name="poi_piste_grooming_scooter">Обслуживание трассы: снежный скутер</string>
+	<string name="poi_piste_grooming_skating">Обслуживание трассы: конёк</string>
+	<string name="poi_piste_grooming_no">Обслуживание трассы: не обслуживаемая</string>
+	<string name="poi_piste_grooming_mogul">Обслуживание трассы: могул</string>
+
+	<string name="poi_garden_type_community">Тип сада: общественный</string>
+	<string name="poi_garden_type_private">Тип сада: частный</string>
+	<string name="poi_garden_type_botanical">Тип сада: ботанический</string>
+
+	<string name="poi_garden_style_rosarium">Стиль сада: розарий</string>
+	<string name="poi_garden_style_french">Стиль сада: французский</string>
+	<string name="poi_garden_style_english">Стиль сада: английский</string>
+	<string name="poi_garden_style_japanese">Стиль сада: японский</string>
+
+	<string name="poi_capacity">Вместимость</string>
+	<string name="poi_capacity_disabled_yes">Места для инвалидов</string>
+	<string name="poi_capacity_disabled_no">Нет выделенных мест для инвалидов</string>
+	<string name="poi_capacity_disabled">Места для инвалидов</string>
+	<string name="poi_capacity_women_yes">Места для женщин</string>
+	<string name="poi_capacity_women_no">Нет выделенных мест для женщин</string>
+	<string name="poi_capacity_women">Места для женщин</string>
+	<string name="poi_capacity_pupils">Места для учеников</string>
+	<string name="poi_capacity_teachers">Места для учителей</string>
+	<string name="poi_capacity_parent_yes">Места для родителей с детьми</string>
+	<string name="poi_capacity_parent_no">Нет выделенных мест для родителей с детьми</string>
+	<string name="poi_capacity_parent">Места для родителей с детьми</string>
+
+	<string name="poi_aerialway_occupancy">Ёмкость кабинки</string>
+	<string name="poi_aerialway_capacity">Пропускная способность, в час</string>
+	<string name="poi_aerialway_duration">Среднее время движения, минут</string>
+	<string name="poi_aerialway_bubble_yes">Остекление</string>
+	<string name="poi_aerialway_bubble_no">Нет остекления</string>
+	<string name="poi_aerialway_heating_yes">Обогрев</string>
+	<string name="poi_aerialway_heating_no">Без обогрева</string>
+	<string name="poi_aerialway_bicycle_yes">Провоз велосипедов разрешён</string>
+	<string name="poi_aerialway_bicycle_no">Провоз велосипедов запрещён</string>
+	<string name="poi_aerialway_bicycle_summer">Провоз велосипедов разрешен только летом</string>
+	<string name="poi_aerialway_access_entry">Только вход</string>
+	<string name="poi_aerialway_access_exit">Только выход</string>
+	<string name="poi_aerialway_access_both">Вход и выход</string>
+	<string name="poi_aerialway_summer_access_entry">Доступ летом: только вход</string>
+	<string name="poi_aerialway_summer_access_exit">Доступ летом: только выход</string>
+	<string name="poi_aerialway_summer_access_both">Доступ летом: вход и выход</string>
+
 	</resources>

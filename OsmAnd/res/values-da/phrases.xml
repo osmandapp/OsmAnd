@@ -974,7 +974,7 @@
 	<string name="poi_animal_shelter_bird">Fugleinternat</string>
 
 <string name="poi_shower">Bruser</string>
-	<string name="poi_recycling_centre">Type: genanvendelse centre</string>
+	<string name="poi_recycling_centre">Type: genbrugsplads</string>
 	<string name="poi_recycling_container">Type: container</string>
 	<string name="poi_recycling_glass">Glas</string>
 	<string name="poi_recycling_paper">Papir</string>
@@ -1370,4 +1370,59 @@
 
 <string name="poi_pump">Pumpe</string>
 
-	</resources>
+	<string name="poi_piste_difficulty_easy">Pistesværhedsgrad: let</string>
+	<string name="poi_piste_difficulty_intermediate">Pistesværhedsgrad: medium</string>
+	<string name="poi_piste_difficulty_advanced">Pistesværhedsgrad: avanceret</string>
+	<string name="poi_piste_difficulty_novice">Pistesværhedsgrad: nybegynder</string>
+	<string name="poi_piste_difficulty_expert">Pistesværhedsgrad: ekspert</string>
+	<string name="poi_piste_difficulty_freeride">Pistesværhedsgrad: freeride</string>
+	<string name="poi_piste_grooming_classic">Pistepreparering: klassisk</string>
+	<string name="poi_piste_grooming_classic_skating">Pistepreparering: klassisk+skating</string>
+	<string name="poi_piste_grooming_backcountry">Pistepreparering: offpiste</string>
+	<string name="poi_piste_grooming_scooter">Pistepreparering: snescooter</string>
+	<string name="poi_piste_grooming_skating">Pistepreparering: skating</string>
+	<string name="poi_piste_grooming_no">Pistepreparering: ingen</string>
+	<string name="poi_piste_grooming_mogul">Pistepreparering: pukkelpist</string>
+
+<string name="poi_garden_type_residential">Havetype: bolig</string>
+	<string name="poi_garden_type_community">Havetype: offentlig</string>
+	<string name="poi_garden_type_private">Havetype: privat</string>
+	<string name="poi_garden_type_botanical">Havetype: botanisk</string>
+
+	<string name="poi_garden_style_french">Havestil: fransk</string>
+	<string name="poi_garden_style_english">Havestil: engelsk</string>
+	<string name="poi_garden_style_japanese">Havestil: japansk</string>
+
+<string name="poi_garden_style_kitchen">Havestil: køkken</string>
+	<string name="poi_garden_style_rosarium">Havestil: rosen</string>
+	<string name="poi_capacity">Kapacitet</string>
+	<string name="poi_capacity_disabled_yes">Dedikerede pladser til handicappede</string>
+	<string name="poi_capacity_disabled_no">Ingen dedikerede pladser til handicappede</string>
+	<string name="poi_capacity_disabled">Dedikerede pladser til handicappede</string>
+	<string name="poi_capacity_women_yes">Dedikerede pladser til kvinder</string>
+	<string name="poi_capacity_women_no">Ingen dedikerede pladser til kvinder</string>
+	<string name="poi_capacity_women">Dedikerede pladser til kvinder</string>
+	<string name="poi_capacity_pupils">Dedikerede pladser til elever</string>
+	<string name="poi_capacity_teachers">Dedikerede pladser til lærere</string>
+	<string name="poi_capacity_parent_yes">Dedikerede pladser til forældre</string>
+	<string name="poi_capacity_parent_no">Ingen dedikerede pladser til forældre</string>
+	<string name="poi_capacity_parent">Dedikerede pladser til forældre</string>
+
+	<string name="poi_aerialway_occupancy">Hytte/stol/bil kapacitet</string>
+	<string name="poi_aerialway_capacity">Kapacitet pr. time</string>
+	<string name="poi_aerialway_duration">Gennemsnitlige rejsetid, minutter</string>
+	<string name="poi_aerialway_bubble_yes">Boble</string>
+	<string name="poi_aerialway_bubble_no">Ingen boble</string>
+	<string name="poi_aerialway_heating_yes">Opvarmning</string>
+	<string name="poi_aerialway_heating_no">Ingen opvarmning</string>
+	<string name="poi_aerialway_bicycle_yes">Cykel: tilladt</string>
+	<string name="poi_aerialway_bicycle_no">Cykel: ikke tilladt</string>
+	<string name="poi_aerialway_bicycle_summer">Cykel: tilladt kun om sommeren</string>
+	<string name="poi_aerialway_access_entry">Kun indgang</string>
+	<string name="poi_aerialway_access_exit">Kun udgang</string>
+	<string name="poi_aerialway_access_both">Ind- og udgang</string>
+	<string name="poi_aerialway_summer_access_entry">Sommer adgang: kun indgang</string>
+	<string name="poi_aerialway_summer_access_exit">Sommer adgang: kun udgang</string>
+	<string name="poi_aerialway_summer_access_both">Sommer adgang: ind- og udgang</string>
+
+</resources>

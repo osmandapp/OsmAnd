@@ -1349,4 +1349,29 @@
 
 <string name="poi_pump">泵浦</string>
 
-	</resources>
+	<string name="poi_piste_difficulty_easy">滑雪道難度：容易</string>
+	<string name="poi_piste_difficulty_intermediate">滑雪道難度：中等</string>
+	<string name="poi_piste_difficulty_advanced">滑雪道難度：高級</string>
+	<string name="poi_piste_difficulty_novice">滑雪道難度：初學者</string>
+	<string name="poi_piste_difficulty_expert">滑雪道難度： 熟練者</string>
+	<string name="poi_piste_difficulty_freeride">滑雪道難度：隨意的</string>
+	<string name="poi_piste_grooming_classic">滑雪道修整：最優秀</string>
+	<string name="poi_piste_grooming_classic_skating">滑雪道修整：最優秀+滑冰</string>
+	<string name="poi_piste_grooming_backcountry">滑雪道修整：偏僻的</string>
+	<string name="poi_piste_grooming_scooter">滑雪道修整：滑橇車</string>
+	<string name="poi_piste_grooming_skating">滑雪道修整：滑冰</string>
+	<string name="poi_piste_grooming_no">滑雪道修整：無</string>
+	<string name="poi_piste_grooming_mogul">滑雪道修整：障礙 (mogul)</string>
+
+<string name="poi_garden_type_residential">花園類型：住宅</string>
+	<string name="poi_garden_type_community">花園類型：社區</string>
+	<string name="poi_garden_type_private">花園類型：私人的</string>
+	<string name="poi_garden_type_botanical">花園類型：植物學</string>
+
+	<string name="poi_garden_style_kitchen">花園風格：廚房</string>
+	<string name="poi_garden_style_rosarium">花園風格：玫瑰園</string>
+	<string name="poi_garden_style_french">花園風格：法國式</string>
+	<string name="poi_garden_style_english">花園風格：英格蘭</string>
+	<string name="poi_garden_style_japanese">花園風格：日式</string>
+
+</resources>

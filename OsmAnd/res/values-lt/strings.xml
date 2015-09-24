@@ -2141,4 +2141,7 @@
 	<string name="offline_maps_and_navigation">Offline žemėlapiai\n&amp; navigacija</string>
 	<string name="commit_poi"/>
 	<string name="count_of_lines">Eilučių kiekis</string>
+<string name="are_you_sure">Ar įsitikinę?</string>
+	<string name="unsaved_changes_will_be_lost">Neišsaugoti duomenys bus prarasti. Ar norite tęsti?</string>
+	<string name="downloads_left_template">%1$s liko atsisiųsti</string>
 </resources>

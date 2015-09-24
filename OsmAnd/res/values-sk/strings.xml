@@ -2289,4 +2289,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 	<string name="address_unknown">Adresa ešte nie je známa</string>
     <string name="are_you_sure">Ste si istí?</string>
 	<string name="unsaved_changes_will_be_lost">Všetky neuložené zmeny budú stratené. Pokračovať?</string>
+<string name="simulate_your_location_stop_descr">Skončiť simuláciu polohy</string>
+    <string name="simulate_your_location_descr">Simulovať pomocou zaznamenaného GPX alebo vypočítanej trasy</string>
+    <string name="downloads_left_template">%1$s sťahovaní zostáva</string>
 </resources>

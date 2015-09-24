@@ -335,54 +335,6 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		return true;
 	}
 
-	@Override
-	public void populateObjectContextMenu(Object o, ContextMenuAdapter adapter) {
-		if (o instanceof Amenity) {
-			final Amenity a = (Amenity) o;
-			OnContextMenuClick listener = new ContextMenuAdapter.OnContextMenuClick() {
-				@Override
-				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-					if (itemId == R.string.poi_context_menu_call) {
-						try {
-							Intent intent = new Intent(Intent.ACTION_VIEW);
-							intent.setData(Uri.parse("tel:" + a.getPhone())); //$NON-NLS-1$
-							view.getContext().startActivity(intent);
-						} catch (RuntimeException e) {
-							log.error("Failed to invoke call", e); //$NON-NLS-1$
-							AccessibleToast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-						}
-					} else if (itemId == R.string.poi_context_menu_website) {
-						try {
-							Intent intent = new Intent(Intent.ACTION_VIEW);
-							intent.setData(Uri.parse(a.getSite()));
-							view.getContext().startActivity(intent);
-						} catch (RuntimeException e) {
-							log.error("Failed to invoke call", e); //$NON-NLS-1$
-							AccessibleToast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-						}
-					} else if (itemId == R.string.poi_context_menu_showdescription) {
-						showDescriptionDialog(view.getContext(), app, a);
-					}
-					return true;
-				}
-			};
-			if (OsmAndFormatter.getAmenityDescriptionContent(view.getApplication(), a, false).length() > 0 || 
-					a.getType().isWiki()) {
-				adapter.item(R.string.poi_context_menu_showdescription)
-						.iconColor(R.drawable.ic_action_note_dark).listen(listener).reg();
-			}
-			if (a.getPhone() != null) {
-				adapter.item(R.string.poi_context_menu_call)
-						.iconColor(R.drawable.ic_action_call_dark).listen(listener).reg();
-			}
-			if (a.getSite() != null) {
-				adapter.item(R.string.poi_context_menu_website)
-						.iconColor(R.drawable.ic_world_globe_dark).listen(listener)
-						.reg();
-			}
-		}
-	}
-
 	public static void showDescriptionDialog(Context ctx, OsmandApplication app, Amenity a) {
 		String lang = app.getSettings().MAP_PREFERRED_LOCALE.get();
 		if (a.getType().isWiki()) {

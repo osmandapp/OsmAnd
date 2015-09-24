@@ -2097,4 +2097,6 @@
 	<string name="count_of_lines">Количество строк</string>
 <string name="show_on_start">Показывать при запуске</string>
 	<string name="address_unknown">Адрес неизвестен</string>
-    </resources>
+    <string name="are_you_sure">Вы уверены?</string>
+	<string name="unsaved_changes_will_be_lost">Все несохраненные изменения будут потеряны. Продолжить?</string>
+	</resources>
