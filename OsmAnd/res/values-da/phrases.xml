@@ -1396,17 +1396,17 @@
 <string name="poi_garden_style_kitchen">Havestil: køkken</string>
 	<string name="poi_garden_style_rosarium">Havestil: rosen</string>
 	<string name="poi_capacity">Kapacitet</string>
-	<string name="poi_capacity_disabled_yes">Dedikerede steder for handicappede</string>
-	<string name="poi_capacity_disabled_no">Ingen dedikerede steder for handicappede</string>
-	<string name="poi_capacity_disabled">Dedikerede steder for handicappede</string>
+	<string name="poi_capacity_disabled_yes">Dedikerede pladser til handicappede</string>
+	<string name="poi_capacity_disabled_no">Ingen dedikerede pladser til handicappede</string>
+	<string name="poi_capacity_disabled">Dedikerede pladser til handicappede</string>
 	<string name="poi_capacity_women_yes">Dedikerede pladser til kvinder</string>
 	<string name="poi_capacity_women_no">Ingen dedikerede pladser til kvinder</string>
 	<string name="poi_capacity_women">Dedikerede pladser til kvinder</string>
-	<string name="poi_capacity_pupils">Dedikeret plads til elever</string>
-	<string name="poi_capacity_teachers">Dedikeret steder for lærere</string>
-	<string name="poi_capacity_parent_yes">Dedikeret steder for forældre</string>
-	<string name="poi_capacity_parent_no">Ingen dedikeret steder for forældre</string>
-	<string name="poi_capacity_parent">Dedikeret steder for forældre</string>
+	<string name="poi_capacity_pupils">Dedikerede pladser til elever</string>
+	<string name="poi_capacity_teachers">Dedikerede pladser til lærere</string>
+	<string name="poi_capacity_parent_yes">Dedikerede pladser til forældre</string>
+	<string name="poi_capacity_parent_no">Ingen dedikerede pladser til forældre</string>
+	<string name="poi_capacity_parent">Dedikerede pladser til forældre</string>
 
 	<string name="poi_aerialway_occupancy">Hytte/stol/bil kapacitet</string>
 	<string name="poi_aerialway_capacity">Kapacitet pr. time</string>
