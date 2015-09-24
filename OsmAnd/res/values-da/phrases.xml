@@ -1384,4 +1384,15 @@
 	<string name="poi_piste_grooming_no">Pistepreparering: ingen</string>
 	<string name="poi_piste_grooming_mogul">Pistepreparering: pukkelpist</string>
 
-</resources>
+<string name="poi_garden_type_residential">Havetype: bolig</string>
+	<string name="poi_garden_type_community">Havetype: offentlig</string>
+	<string name="poi_garden_type_private">Havetype: privat</string>
+	<string name="poi_garden_type_botanical">Havetype: botanisk</string>
+
+	<string name="poi_garden_style_french">Havestil: fransk</string>
+	<string name="poi_garden_style_english">Havestil: engelsk</string>
+	<string name="poi_garden_style_japanese">Havestil: japansk</string>
+
+<string name="poi_garden_style_kitchen">Havestil: køkken</string>
+	<string name="poi_garden_style_rosarium">Havestil: rosenhave</string>
+	</resources>
