@@ -2001,4 +2001,5 @@
 	<string name="unsaved_changes_will_be_lost">Alla osparade ändringar kommer att förloras. Fortsätta ändå?</string>
 <string name="simulate_your_location_stop_descr">Sluta simulera din plats</string>
     <string name="simulate_your_location_descr">Simulera med inspelad GPX eller beräknad rutt</string>
-    </resources>
+    <string name="downloads_left_template">%1$s nedladdningar kvar</string>
+</resources>
