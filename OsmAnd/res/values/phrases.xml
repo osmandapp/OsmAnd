@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
 <!--  categories -->
 	<string name="poi_shop">Shop</string>
@@ -1126,22 +1126,22 @@
 	<string name="poi_access_delivery">Delivery access</string>
 	<string name="poi_access_agricultural">Agricultural access</string>
 
-	<string name="poi_content_silage">Silage (content)</string>
-	<string name="poi_content_water">Water (content)</string>
-	<string name="poi_content_slurry">Slurry (content)</string>
-	<string name="poi_content_oil">Oil (content)</string>
-	<string name="poi_content_fuel">Fuel (content)</string>
-	<string name="poi_content_manure">Manure (content)</string>
-	<string name="poi_content_wine">Wine (content)</string>
-	<string name="poi_content_sewage">Sewage (content)</string>
-	<string name="poi_content_gas">Gas (content)</string>
-	<string name="poi_content_biomass">Biomass (content)</string>
-	<string name="poi_content_wastewater">Wastewater (content)</string>
-	<string name="poi_content_crop">Crop (content)</string>
-	<string name="poi_content_fodder">Fodder (content)</string>
-	<string name="poi_content_beer">Beer (content)</string>
-	<string name="poi_content_salt">Salt (content)</string>
-	<string name="poi_content_grain">Grain (content)</string>
+	<string name="poi_content_silage">Content: silage</string>
+	<string name="poi_content_water">Content: water</string>
+	<string name="poi_content_slurry">Content: slurry</string>
+	<string name="poi_content_oil">Content: oil</string>
+	<string name="poi_content_fuel">Content: fuel</string>
+	<string name="poi_content_manure">Content: manure</string>
+	<string name="poi_content_wine">Content: wine</string>
+	<string name="poi_content_sewage">Content: sewage</string>
+	<string name="poi_content_gas">Content: gas</string>
+	<string name="poi_content_biomass">Content: biomass</string>
+	<string name="poi_content_wastewater">Content: wastewater</string>
+	<string name="poi_content_crop">Content: crop</string>
+	<string name="poi_content_fodder">Content: fodder</string>
+	<string name="poi_content_beer">Content: beer</string>
+	<string name="poi_content_salt">Content: salt</string>
+	<string name="poi_content_grain">Content: grain</string>
 
 	<string name="poi_nudism_yes">Nudism: allowed</string>
 	<string name="poi_nudism_no">Nudism: prohibited</string>
