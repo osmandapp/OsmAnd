@@ -1,10 +1,14 @@
 package net.osmand.plus.views;
 
-import java.util.ArrayList;
-import java.util.List;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
+import android.content.res.Resources;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.PointF;
+import android.widget.ArrayAdapter;
 
-import net.osmand.access.AccessibleToast;
-import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
@@ -14,22 +18,14 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.FavouritesDbHelper;
-import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.FavoritesTreeFragment;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.views.MapTextLayer.MapTextProvider;
-import net.osmand.util.Algorithms;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.content.DialogInterface;
-import android.content.res.Resources;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.PointF;
-import android.widget.ArrayAdapter;
-import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FavoritesLayer  extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider, MapTextProvider<LocationPoint> {
 
@@ -203,8 +199,6 @@ public class FavoritesLayer  extends OsmandMapLayer implements ContextMenuLayer.
 				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 					if (itemId == R.string.favourites_context_menu_edit) {
 						FavoritesTreeFragment.editPoint(view.getContext(), a, null);
-					} else if (itemId == R.string.shared_string_show_description) {
-						showDescriptionDialog(a);
 					} else if (itemId == R.string.favourites_context_menu_delete) {
 						final Resources resources = view.getContext().getResources();
 						Builder builder = new AlertDialog.Builder(view.getContext());
@@ -222,24 +216,12 @@ public class FavoritesLayer  extends OsmandMapLayer implements ContextMenuLayer.
 					return true;
 				}
 			};
-			if (!Algorithms.isEmpty(a.getDescription())) {
-				adapter.item(R.string.shared_string_show_description).iconColor(R.drawable.ic_action_note_dark)
-						.listen(listener).reg();
-			}
 			adapter.item(R.string.favourites_context_menu_edit).iconColor(R.drawable.ic_action_edit_dark)
 					.listen(listener).reg();
 			adapter.item(R.string.favourites_context_menu_delete)
 						.iconColor(R.drawable.ic_action_delete_dark).listen(listener)
 						.reg();
 		}
-	}
-	
-	private void showDescriptionDialog(FavouritePoint a) {
-		Builder bs = new AlertDialog.Builder(view.getContext());
-		bs.setTitle(a.getName(view.getContext()));
-		bs.setMessage(a.getDescription());
-		bs.setPositiveButton(R.string.shared_string_ok, null);
-		bs.show();
 	}
 
 	@Override

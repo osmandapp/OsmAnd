@@ -38,13 +38,24 @@ public abstract class MenuBuilder {
 
 	protected OsmandApplication app;
 	protected LinkedList<PlainMenuItem> plainMenuItems;
+	private boolean firstRow;
 
 	public MenuBuilder(OsmandApplication app) {
 		this.app = app;
 		plainMenuItems = new LinkedList<>();
 	}
 
-	public abstract void build(View view);
+	public void build(View view) {
+		firstRow = true;
+	}
+
+	protected boolean isFirstRow() {
+		return firstRow;
+	}
+
+	protected void rowBuilt() {
+		firstRow = false;
+	}
 
 	public void addPlainMenuItem(int iconId, String text) {
 		plainMenuItems.add(new PlainMenuItem(iconId, text));

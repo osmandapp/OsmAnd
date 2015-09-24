@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -318,17 +319,18 @@ public class MapContextMenuFragment extends Fragment {
 		IconsCache iconsCache = getMyApplication().getIconsCache();
 		boolean light = getMyApplication().getSettings().isLightContent();
 
-		int iconId = getCtxMenu().getLeftIconId();
-
 		final View iconLayout = view.findViewById(R.id.context_menu_icon_layout);
-		final ImageView iconView = (ImageView)view.findViewById(R.id.context_menu_icon_view);
-		if (iconId == 0) {
-			iconLayout.setVisibility(View.GONE);
-		} else {
+		final ImageView iconView = (ImageView) view.findViewById(R.id.context_menu_icon_view);
+		Drawable icon = getCtxMenu().getLeftIcon();
+		int iconId = getCtxMenu().getLeftIconId();
+		if (icon != null) {
+			iconView.setImageDrawable(icon);
+		} else if (iconId != 0) {
 			iconView.setImageDrawable(iconsCache.getIcon(iconId,
 					light ? R.color.osmand_orange : R.color.osmand_orange_dark, 0.75f));
+		} else {
+			iconLayout.setVisibility(View.GONE);
 		}
-
 		setAddressLocation();
 
 		// Close button
@@ -434,6 +436,11 @@ public class MapContextMenuFragment extends Fragment {
 		// Text line 2
 		TextView line2 = (TextView) view.findViewById(R.id.context_menu_line2);
 		line2.setText(getCtxMenu().getLocationStr());
+		Drawable icon = getCtxMenu().getSecondLineIcon();
+		if (icon != null) {
+			line2.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
+			line2.setCompoundDrawablePadding(dpToPx(5f));
+		}
 	}
 
 	private int getPosY() {
