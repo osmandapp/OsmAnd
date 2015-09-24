@@ -149,11 +149,11 @@
                     android:layout_gravity="top|left"
                     android:orientation="vertical" >
 
+                    <!-- 
                     <include layout="@layout/map_hud_widget" />
-
                     <include layout="@layout/map_hud_widget" />
-
                     <include layout="@layout/map_hud_widget" />
+                     -->
                 </LinearLayout>
 
                 <LinearLayout

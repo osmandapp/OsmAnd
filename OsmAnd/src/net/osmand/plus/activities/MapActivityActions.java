@@ -336,7 +336,6 @@ public class MapActivityActions implements DialogProvider {
 		getMyApplication().getAppCustomization().prepareLocationMenu(mapActivity, adapter);
 		
 		final Builder builder = new AlertDialog.Builder(mapActivity);
-		builder.setTitle(R.string.show_point_options);
 		final ArrayAdapter<?>  listAdapter =
 				adapter.createListAdapter(mapActivity, getMyApplication().getSettings().isLightContent());
 		builder.setAdapter(listAdapter, new DialogInterface.OnClickListener() {
