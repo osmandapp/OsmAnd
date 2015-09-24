@@ -1361,6 +1361,6 @@
 	<string name="poi_piste_grooming_scooter">滑雪道修整：滑橇車</string>
 	<string name="poi_piste_grooming_skating">滑雪道修整：滑冰</string>
 	<string name="poi_piste_grooming_no">滑雪道修整：無</string>
-	<string name="poi_piste_grooming_mogul">滑雪道修整：障礙</string>
+	<string name="poi_piste_grooming_mogul">滑雪道修整：障礙 (mogul)</string>
 
 </resources>
