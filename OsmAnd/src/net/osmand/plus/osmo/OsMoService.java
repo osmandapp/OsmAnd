@@ -61,7 +61,7 @@ public class OsMoService implements OsMoReactor {
 	public static final String SHARE_TRACKER_URL = "http://z.osmo.mobi/connect?id=";
 	public static final String SHARE_GROUP_URL = "http://z.osmo.mobi/join?id=";
 	public static final String SIGNED_IN_CONTAINS = "z.osmo.mobi/login";
-	public static final String TRACK_URL = "http://osmo.mobi/u/";
+	public static final String TRACK_URL = "http://osmo.mobi/s/";
 	private String lastRegistrationError = null;
 	private OsMoPlugin plugin;  
 	private boolean enabled = false;
