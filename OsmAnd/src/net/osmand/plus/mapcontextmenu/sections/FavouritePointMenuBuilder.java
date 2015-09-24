@@ -2,7 +2,6 @@ package net.osmand.plus.mapcontextmenu.sections;
 
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
-import android.text.Html;
 import android.text.util.Linkify;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -12,35 +11,27 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import net.osmand.data.Amenity;
-import net.osmand.osm.AbstractPoiType;
-import net.osmand.osm.MapPoiTypes;
-import net.osmand.osm.PoiType;
+import net.osmand.data.FavouritePoint;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.views.POIMapLayer;
 import net.osmand.util.Algorithms;
-import net.osmand.util.OpeningHoursParser;
-
-import java.util.Calendar;
-import java.util.Map;
 
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 
-public class AmenityInfoMenuBuilder extends MenuBuilder {
+public class FavouritePointMenuBuilder extends MenuBuilder {
 
-	private final Amenity amenity;
+	private final FavouritePoint fav;
 
-	public AmenityInfoMenuBuilder(OsmandApplication app, final Amenity amenity) {
+	public FavouritePointMenuBuilder(OsmandApplication app, final FavouritePoint fav) {
 		super(app);
-		this.amenity = amenity;
+		this.fav = fav;
 	}
 
-	private void buildRow(View view, int iconId, String text, int textColor, boolean isWiki) {
-		buildRow(view, getRowIcon(iconId), text, textColor, isWiki);
+	private void buildRow(View view, int iconId, String text, int textColor, boolean isDescription) {
+		buildRow(view, getRowIcon(iconId), text, textColor, isDescription);
 	}
 
-	private void buildRow(final View view, Drawable icon, String text, int textColor, final boolean isWiki) {
+	private void buildRow(final View view, Drawable icon, String text, int textColor, final boolean isDescription) {
 		boolean light = app.getSettings().isLightContent();
 
 		LinearLayout ll = new LinearLayout(view.getContext());
@@ -79,7 +70,7 @@ public class AmenityInfoMenuBuilder extends MenuBuilder {
 
 		textView.setAutoLinkMask(Linkify.ALL);
 		textView.setLinksClickable(true);
-		if (isWiki) {
+		if (isDescription) {
 			textView.setMinLines(1);
 			textView.setMaxLines(5);
 		}
@@ -87,11 +78,12 @@ public class AmenityInfoMenuBuilder extends MenuBuilder {
 		if (textColor > 0) {
 			textView.setTextColor(view.getResources().getColor(textColor));
 		}
-		if (isWiki) {
+		if (isDescription) {
 			textView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					POIMapLayer.showDescriptionDialog(view.getContext(), app, amenity);
+					//todo: implement edit fav description dialog
+					//POIMapLayer.showDescriptionDialog(view.getContext(), app, fav);
 				}
 			});
 		}
@@ -129,94 +121,12 @@ public class AmenityInfoMenuBuilder extends MenuBuilder {
 	public void build(View view) {
 		super.build(view);
 
-		boolean hasWiki = false;
+		if (!Algorithms.isEmpty(fav.getDescription())) {
+			buildRow(view, R.drawable.ic_action_note_dark, fav.getDescription(), 0, true);
+		}
 
 		for (PlainMenuItem item : plainMenuItems) {
 			buildRow(view, item.getIconId(), item.getText(), 0, false);
-		}
-
-		MapPoiTypes poiTypes = app.getPoiTypes();
-		for (Map.Entry<String, String> e : amenity.getAdditionalInfo().entrySet()) {
-			int iconId = 0;
-			Drawable icon = null;
-			int textColor = 0;
-			boolean isWiki = false;
-			String key = e.getKey();
-			String vl = e.getValue();
-
-			if (amenity.getType().isWiki()) {
-				if (!hasWiki) {
-					iconId = R.drawable.ic_action_note_dark;
-					String preferredLang = app.getSettings().MAP_PREFERRED_LOCALE.get();
-					if (Algorithms.isEmpty(preferredLang)) {
-						preferredLang = app.getLanguage();
-					}
-					String lng = amenity.getContentSelected("content", preferredLang, "en");
-					if (Algorithms.isEmpty(lng)) {
-						lng = "en";
-					}
-
-					final String langSelected = lng;
-					String content = amenity.getDescription(langSelected);
-					vl = Html.fromHtml(content).toString();
-					if (vl.length() > 300) {
-						vl = vl.substring(0, 300);
-					}
-					hasWiki = true;
-					isWiki = true;
-				} else {
-					continue;
-				}
-			} else if (key.startsWith("name:")) {
-				continue;
-			} else if (Amenity.OPENING_HOURS.equals(key)) {
-				iconId = R.drawable.ic_action_time;
-
-				OpeningHoursParser.OpeningHours rs = OpeningHoursParser.parseOpenedHours(amenity.getOpeningHours());
-				if (rs != null) {
-					Calendar inst = Calendar.getInstance();
-					inst.setTimeInMillis(System.currentTimeMillis());
-					boolean opened = rs.isOpenedForTime(inst);
-					if (opened) {
-						textColor = R.color.color_ok;
-					} else {
-						textColor = R.color.color_invalid;
-					}
-				}
-
-			} else if (Amenity.PHONE.equals(key)) {
-				iconId = R.drawable.ic_action_call_dark;
-			} else if (Amenity.WEBSITE.equals(key)) {
-				iconId = R.drawable.ic_world_globe_dark;
-				vl = vl.replace(' ', '_');
-			} else {
-				if (Amenity.DESCRIPTION.equals(key)) {
-					iconId = R.drawable.ic_action_note_dark;
-				} else {
-					iconId = R.drawable.ic_action_info_dark;
-				}
-				AbstractPoiType pt = poiTypes.getAnyPoiAdditionalTypeByKey(key);
-				if (pt != null) {
-					PoiType pType = (PoiType) pt;
-					if (pType.getParentType() != null && pType.getParentType() instanceof PoiType) {
-						icon = getRowIcon(view.getContext(), ((PoiType) pType.getParentType()).getOsmTag() + "_" + pType.getOsmTag().replace(':', '_') + "_" + pType.getOsmValue());
-					}
-					if (pt instanceof PoiType && !((PoiType) pt).isText()) {
-						vl = pt.getTranslation();
-					} else {
-						vl = pt.getTranslation() + ": " + amenity.unzipContent(e.getValue());
-					}
-				} else {
-					vl = Algorithms.capitalizeFirstLetterAndLowercase(e.getKey()) +
-							": " + amenity.unzipContent(e.getValue());
-				}
-			}
-
-			if (icon != null) {
-				buildRow(view, icon, vl, textColor, isWiki);
-			} else {
-				buildRow(view, iconId, vl, textColor, isWiki);
-			}
 		}
 	}
 }
