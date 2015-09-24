@@ -1374,4 +1374,17 @@
 	<string name="poi_garden_style_english">花園風格：英格蘭</string>
 	<string name="poi_garden_style_japanese">花園風格：日式</string>
 
-</resources>
+<string name="poi_capacity">容量</string>
+	<string name="poi_capacity_disabled_yes">身障人士專用場所</string>
+	<string name="poi_capacity_disabled_no">無身障人士專用場所</string>
+	<string name="poi_capacity_disabled">身障人士專用場所</string>
+	<string name="poi_capacity_women_yes">婦女專用場所</string>
+	<string name="poi_capacity_women_no">無婦女專用場所</string>
+	<string name="poi_capacity_women">婦女專用場所</string>
+	<string name="poi_capacity_pupils">小學生專用場所</string>
+	<string name="poi_capacity_teachers">教師專用場所</string>
+	<string name="poi_capacity_parent_yes">父母專用場所</string>
+	<string name="poi_capacity_parent_no">無父母專用場所</string>
+	<string name="poi_capacity_parent">父母專用場所</string>
+
+	</resources>
