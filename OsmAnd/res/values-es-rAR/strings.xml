@@ -2059,4 +2059,5 @@
 	<string name="unsaved_changes_will_be_lost">Se perderán los cambios no guardados. ¿Continuar?</string>
 <string name="simulate_your_location_stop_descr">Parar simulación de ubicación</string>
     <string name="simulate_your_location_descr">Simular usando grabación GPX o ruta calculada</string>
-    </resources>
+    <string name="downloads_left_template">Quedan %1$s descargas</string>
+</resources>
