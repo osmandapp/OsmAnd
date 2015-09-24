@@ -1363,4 +1363,15 @@
 	<string name="poi_piste_grooming_no">滑雪道修整：無</string>
 	<string name="poi_piste_grooming_mogul">滑雪道修整：障礙 (mogul)</string>
 
+<string name="poi_garden_type_residential">花園類型：住宅</string>
+	<string name="poi_garden_type_community">花園類型：社區</string>
+	<string name="poi_garden_type_private">花園類型：私人的</string>
+	<string name="poi_garden_type_botanical">花園類型：植物學</string>
+
+	<string name="poi_garden_style_kitchen">花園風格：廚房</string>
+	<string name="poi_garden_style_rosarium">花園風格：玫瑰園</string>
+	<string name="poi_garden_style_french">花園風格：法國式</string>
+	<string name="poi_garden_style_english">花園風格：英格蘭</string>
+	<string name="poi_garden_style_japanese">花園風格：日式</string>
+
 </resources>
