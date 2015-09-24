@@ -1408,7 +1408,7 @@
 	<string name="poi_capacity_parent_no">Ingen dedikerede pladser til forældre</string>
 	<string name="poi_capacity_parent">Dedikerede pladser til forældre</string>
 
-	<string name="poi_aerialway_occupancy">Hytte/stol/bil kapacitet</string>
+	<string name="poi_aerialway_occupancy">Kabine/stol/vogn kapacitet</string>
 	<string name="poi_aerialway_capacity">Kapacitet pr. time</string>
 	<string name="poi_aerialway_duration">Gennemsnitlige rejsetid, minutter</string>
 	<string name="poi_aerialway_bubble_yes">Boble</string>
@@ -1417,7 +1417,7 @@
 	<string name="poi_aerialway_heating_no">Ingen opvarmning</string>
 	<string name="poi_aerialway_bicycle_yes">Cykel: tilladt</string>
 	<string name="poi_aerialway_bicycle_no">Cykel: ikke tilladt</string>
-	<string name="poi_aerialway_bicycle_summer">Cykel: tilladt kun om sommeren</string>
+	<string name="poi_aerialway_bicycle_summer">Cykel: kun tilladt om sommeren</string>
 	<string name="poi_aerialway_access_entry">Kun indgang</string>
 	<string name="poi_aerialway_access_exit">Kun udgang</string>
 	<string name="poi_aerialway_access_both">Ind- og udgang</string>
