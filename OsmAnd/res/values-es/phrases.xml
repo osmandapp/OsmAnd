@@ -959,8 +959,8 @@
 	<string name="poi_animal_shelter_dog_cat">Refugio para perros y gatos</string>
 	<string name="poi_animal_shelter_bird">Refugio para aves</string>
 
-<string name="poi_recycling_centre">Centro de reciclaje</string>
-	<string name="poi_recycling_container">Contenedor</string>
+<string name="poi_recycling_centre">Tipo: Centro de reciclaje</string>
+	<string name="poi_recycling_container">Tipo: contenedor</string>
 	<string name="poi_recycling_glass">Vidrio</string>
 	<string name="poi_recycling_paper">Papel</string>
 	<string name="poi_recycling_clothes">Ropa</string>
