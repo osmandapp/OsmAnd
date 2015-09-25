@@ -2172,7 +2172,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="rendering_value_walkingRoutesOSMC_name">Zafarbenie podľa OSMC</string>
     <string name="osm_edit_context_menu_delete">Odstrániť OSM zmenu</string>
     <string name="read_full_article">Prečítať celý článok (online)</string>
-    <string name="download_wikipedia_item">Wikipedia</string>
+    <string name="shared_string_wikipedia">Wikipedia</string>
     <string name="local_indexes_cat_wiki">Wikipedia</string>
     <string name="shared_string_show_details">Zobraziť detaily</string>
     <string name="download_wikipedia_maps">Wikipedia</string>

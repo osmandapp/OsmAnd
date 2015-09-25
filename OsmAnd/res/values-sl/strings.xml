@@ -1867,7 +1867,7 @@
     <string name="rendering_value_walkingRoutesOSMC_name">Barvanje poti po OSMC</string>
     <string name="osm_edit_context_menu_delete">Izbriši urejanje OSM</string>    
     <string name="read_full_article">Pokaži celoten prispevek</string>
-    <string name="download_wikipedia_item">Wikipedija</string>
+    <string name="shared_string_wikipedia">Wikipedija</string>
     <string name="local_indexes_cat_wiki">Wikipedija</string>
     <string name="shared_string_show_details">Pokaži podrobnosti</string>
     <string name="download_wikipedia_maps">Wikipedija</string>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:minHeight="@dimen/list_header_height"
-    android:orientation="horizontal"
-    android:paddingLeft="@dimen/list_header_padding" >
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:minHeight="@dimen/list_header_height"
+              android:orientation="horizontal"
+              android:paddingLeft="@dimen/list_header_padding">
 
     <CheckBox
         android:id="@+id/check_item"
@@ -14,7 +14,8 @@
         android:layout_gravity="center_vertical"
         android:background="?attr/dashboard_button"
         android:focusable="false"
-        android:visibility="gone" />
+        android:visibility="gone"
+        tools:visiblity="visible"/>
 
     <ImageView
         android:id="@+id/explist_indicator"
@@ -24,23 +25,24 @@
 
     <TextView
         android:id="@+id/category_name"
-        android:layout_weight="1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="@dimen/list_header_text_left_margin"
+        android:layout_weight="1"
         android:textSize="@dimen/default_desc_text_size"
-        tools:text="@string/lorem_ipsum" />
-    
+        tools:text="@string/lorem_ipsum"/>
+
     <ImageView
-		android:id="@+id/options"
-		android:layout_width="24dp"
-		android:layout_height="24dp"
-		android:layout_gravity="center_vertical"
-		android:focusable="false"
-		android:visibility="gone"
-		android:background="?attr/dashboard_button"
-		android:src="@drawable/ic_overflow_menu_white"/>
-    
+        android:id="@+id/options"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_gravity="center_vertical"
+        android:background="?attr/dashboard_button"
+        android:focusable="false"
+        android:src="@drawable/ic_overflow_menu_white"
+        android:visibility="gone"
+        tools:visiblity="visible"/>
+
 
 </LinearLayout>

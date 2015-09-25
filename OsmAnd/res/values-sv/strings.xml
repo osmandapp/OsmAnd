@@ -1884,7 +1884,7 @@
     <string name="osm_edit_context_menu_delete">Ta bort OSM-redigering</string>    
     <string name="rendering_value_walkingRoutesOSMC_name">Färgläggning efter OSMC</string>
     <string name="read_full_article">Läs hela artikeln (online)</string>
-    <string name="download_wikipedia_item">Wikipedia</string>
+    <string name="shared_string_wikipedia">Wikipedia</string>
     <string name="local_indexes_cat_wiki">Wikipedia</string>
     <string name="shared_string_show_details">Visa detaljer</string>
     <string name="local_recordings_delete_all_confirm">Du håller på att ta bort %1$d anteckningar. Är du säker?</string>

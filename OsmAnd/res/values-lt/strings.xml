@@ -2033,7 +2033,7 @@
     <string name="gps_network_not_enabled">Neįjungta vietos nustatymo paslauga. Įjungti?</string>
     <string name="shared_string_import2osmand">Importavimas į OsmAnd</string>
     <string name="read_full_article">Skaityti visą straipsnį (internete)</string>
-    <string name="download_wikipedia_item">Vikipedija</string>
+    <string name="shared_string_wikipedia">Vikipedija</string>
     <string name="local_indexes_cat_wiki">Vikipedija</string>
     <string name="shared_string_show_details">Rodyti detales</string>
     <string name="osm_edit_context_menu_delete">Ištrinti OSM taisymus</string>

@@ -81,7 +81,7 @@
     <string name="disable_recording_once_app_killed_descrp">Will pause GPX logging when the app is killed (via recent apps). (OsmAnd background indication disappears from the Android notification bar.)</string>
     <string name="shared_string_import2osmand">Import to OsmAnd</string>
     <string name="read_full_article">Read full article (online)</string>
-    <string name="download_wikipedia_item">Wikipedia</string>
+    <string name="shared_string_wikipedia">Wikipedia</string>
     <string name="local_indexes_cat_wiki">Wikipedia</string>
     <string name="shared_string_show_details">Show details</string>
     <string name="osm_edit_context_menu_delete">Delete OSM Edit</string>
@@ -2271,4 +2271,5 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="are_you_sure">Are you sure?</string>
 	<string name="unsaved_changes_will_be_lost">Any unsaved changes will be lost. Continue?</string>
 	<string name="downloads_left_template">%1$s downloads left</string>
+	<string name="roads">Roads</string>
 </resources>

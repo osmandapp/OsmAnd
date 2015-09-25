@@ -104,7 +104,7 @@ public class NewLocalIndexesFragment extends OsmAndListFragment {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == RELOAD_ID) {
 			// re-create the thread
-			DownloadActivity.downloadListIndexThread.runReloadIndexFiles(true);
+			DownloadActivity.downloadListIndexThread.runReloadIndexFiles();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);

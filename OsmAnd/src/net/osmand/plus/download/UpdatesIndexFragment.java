@@ -1,18 +1,5 @@
 package net.osmand.plus.download;
 
-import java.text.MessageFormat;
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-
-import net.osmand.access.AccessibleToast;
-import net.osmand.map.OsmandRegions;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.OsmAndListFragment;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -29,6 +16,20 @@ import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import net.osmand.access.AccessibleToast;
+import net.osmand.map.OsmandRegions;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.OsmAndListFragment;
+
+import java.text.MessageFormat;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Denis
@@ -340,7 +341,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment {
 		if (resId == R.string.download_regular_maps){
 			return activity.getString(R.string.shared_string_map);
 		} else if (resId == R.string.download_wikipedia_maps){
-			return activity.getString(R.string.download_wikipedia_item);
+			return activity.getString(R.string.shared_string_wikipedia);
 		} else if (resId == R.string.voices) {
 			return item.getTargetFileName().contains("tts") ? activity.getString(R.string.ttsvoice) : activity
 					.getString(R.string.voice);

@@ -1,15 +1,6 @@
 package net.osmand.plus.download;
 
-import static net.osmand.IndexConstants.BINARY_MAP_INDEX_EXT;
-
-import java.io.File;
-import java.io.IOException;
-import java.net.URLEncoder;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import android.content.Context;
 
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
@@ -22,7 +13,16 @@ import net.osmand.util.Algorithms;
 
 import org.xmlpull.v1.XmlPullParser;
 
-import android.content.Context;
+import java.io.File;
+import java.io.IOException;
+import java.net.URLEncoder;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+import static net.osmand.IndexConstants.BINARY_MAP_INDEX_EXT;
 
 public class DownloadActivityType {
 	private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
@@ -222,7 +222,7 @@ public class DownloadActivityType {
 		if (this == DownloadActivityType.SRTM_COUNTRY_FILE) {
 			return ctx.getString(R.string.download_srtm_maps);
 		} else if (this == DownloadActivityType.WIKIPEDIA_FILE) {
-			return ctx.getString(R.string.download_wikipedia_item);
+			return ctx.getString(R.string.shared_string_wikipedia);
 		} else if (this == DownloadActivityType.ROADS_FILE) {
 			return ctx.getString(R.string.download_roads_only_item);
 		}

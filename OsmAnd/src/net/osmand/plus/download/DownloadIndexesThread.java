@@ -398,10 +398,6 @@ public class DownloadIndexesThread {
 	}
 
 	public void runReloadIndexFiles() {
-		runReloadIndexFiles(false);
-	}
-
-	public void runReloadIndexFiles(final boolean withSubcats) {
 		checkRunning();
 		final BasicProgressAsyncTask<Void, Void, IndexFileList> inst
 				= new BasicProgressAsyncTask<Void, Void, IndexFileList>(ctx) {
@@ -447,7 +443,8 @@ public class DownloadIndexesThread {
 				currentRunningTask.remove(this);
 				if (uiActivity != null) {
 					uiActivity.updateProgress(false);
-					runCategorization(uiActivity.getDownloadType(), withSubcats);
+					runCategorization(uiActivity.getDownloadType());
+					runCategorization(); // for new implementation
 				}
 			}
 
@@ -481,12 +478,8 @@ public class DownloadIndexesThread {
 				}
 
 			}
-
-			;
-
 		};
 		execute(inst);
-
 	}
 
 	public void runDownloadFiles() {
@@ -510,14 +503,9 @@ public class DownloadIndexesThread {
 	}
 
 	public void runCategorization(final DownloadActivityType type) {
-		runCategorization(type, false);
-	}
-
-	public void runCategorization(final DownloadActivityType type, final boolean withSubcats) {
 		final BasicProgressAsyncTask<Void, Void, List<IndexItem>> inst
 				= new BasicProgressAsyncTask<Void, Void, List<IndexItem>>(ctx) {
 			private List<IndexItemCategory> cats;
-			private List<IndexItemCategoryWithSubcat> catsWithSubcats;
 
 			@Override
 			protected void onPreExecute() {
@@ -532,12 +520,7 @@ public class DownloadIndexesThread {
 			@Override
 			protected List<IndexItem> doInBackground(Void... params) {
 				final List<IndexItem> filtered = getFilteredByType();
-				if (withSubcats) {
-					catsWithSubcats =
-							IndexItemCategoryWithSubcat.categorizeIndexItems(app, filtered);
-				} else {
-					cats = IndexItemCategory.categorizeIndexItems(app, filtered);
-				}
+				cats = IndexItemCategory.categorizeIndexItems(app, filtered);
 				updateLoadedFiles();
 				return filtered;
 			}
@@ -563,11 +546,7 @@ public class DownloadIndexesThread {
 				prepareFilesToUpdate();
 				currentRunningTask.remove(this);
 				if (uiActivity != null) {
-					if (withSubcats) {
-						uiActivity.onCategorizationFinished(filtered, catsWithSubcats);
-					} else {
-						uiActivity.categorizationFinished(filtered, cats);
-					}
+					uiActivity.categorizationFinished(filtered, cats);
 					uiActivity.updateProgress(false);
 				}
 			}
@@ -580,6 +559,62 @@ public class DownloadIndexesThread {
 
 			}
 
+		};
+		execute(inst);
+	}
+
+	public void runCategorization() {
+		final BasicProgressAsyncTask<Void, Void, List<IndexItem>> inst
+				= new BasicProgressAsyncTask<Void, Void, List<IndexItem>>(ctx) {
+			private List<IndexItemCategoryWithSubcat> catsWithSubcats;
+
+			@Override
+			protected void onPreExecute() {
+				super.onPreExecute();
+				currentRunningTask.add(this);
+				this.message = ctx.getString(R.string.downloading_list_indexes);
+				if (uiActivity != null) {
+					uiActivity.updateProgress(false);
+				}
+			}
+
+			@Override
+			protected List<IndexItem> doInBackground(Void... params) {
+				final List<IndexItem> filtered = getFilteredByType();
+				catsWithSubcats =
+						IndexItemCategoryWithSubcat.categorizeIndexItems(app, filtered);
+				updateLoadedFiles();
+				return filtered;
+			}
+
+			public List<IndexItem> getFilteredByType() {
+				final List<IndexItem> filtered = new ArrayList<IndexItem>();
+				List<IndexItem> cachedIndexFiles = getCachedIndexFiles();
+				if (cachedIndexFiles != null) {
+					for (IndexItem file : cachedIndexFiles) {
+						filtered.add(file);
+					}
+				}
+				return filtered;
+			}
+
+			@Override
+			protected void onPostExecute(List<IndexItem> filtered) {
+				prepareFilesToUpdate();
+				currentRunningTask.remove(this);
+				if (uiActivity != null) {
+					uiActivity.onCategorizationFinished(filtered, catsWithSubcats);
+					uiActivity.updateProgress(false);
+				}
+			}
+
+			@Override
+			protected void updateProgress(boolean updateOnlyProgress) {
+				if (uiActivity != null) {
+					uiActivity.updateProgress(updateOnlyProgress);
+				}
+
+			}
 		};
 		execute(inst);
 	}
@@ -734,6 +769,4 @@ public class DownloadIndexesThread {
 		}
 		return i;
 	}
-
-
 }
