@@ -273,6 +273,7 @@ public class GPXUtilities {
 					}
 
 					// Trend channel approach for elevation gain/loss, Hardy 2015-09-22
+					// Self-adjusting turnarund threshold added for testing 2015-09-25: Current rule is now: "All up/down trends of amplitude <X are ignored to smooth the noise, where X is the maximum observed hdop value of any point which contributed to the current trend (but at least 5 m as the minimum noise threshold)".
 					if (!Double.isNaN(point.ele)) {
 						// Init channel
 						if (channelBase == 99999) {
