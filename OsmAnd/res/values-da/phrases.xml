@@ -931,11 +931,11 @@
 	<string name="poi_service_times">Service-tider</string>
 	<string name="poi_brand">Varemærke</string>
 
-	<string name="poi_enforcement_traffic_signals">Overvågning: trafiksignaler</string>
+	<string name="poi_enforcement_traffic_signals">Overvågning: stoplys</string>
 	<string name="poi_enforcement_maxspeed">Overvågning: hastighedskontrol</string>
 	<string name="poi_enforcement_maxheight">Overvågning: højdekontrol</string>
 	<string name="poi_enforcement_mindistance">Overvågning: afstandskontrol</string>
-	<string name="poi_enforcement_check">Overvågning: trafikontrol</string>
+	<string name="poi_enforcement_check">Overvågning: trafikkontrol</string>
 	<string name="poi_enforcement_access">Overvågning: adgangskontrol</string>
 	<string name="poi_enforcement_toll">Overvågning: vejafgiftskontrol</string>
 
@@ -1396,17 +1396,17 @@
 <string name="poi_garden_style_kitchen">Havestil: køkken</string>
 	<string name="poi_garden_style_rosarium">Havestil: rosen</string>
 	<string name="poi_capacity">Kapacitet</string>
-	<string name="poi_capacity_disabled_yes">Dedikerede pladser til handicappede</string>
-	<string name="poi_capacity_disabled_no">Ingen dedikerede pladser til handicappede</string>
-	<string name="poi_capacity_disabled">Dedikerede pladser til handicappede</string>
-	<string name="poi_capacity_women_yes">Dedikerede pladser til kvinder</string>
-	<string name="poi_capacity_women_no">Ingen dedikerede pladser til kvinder</string>
-	<string name="poi_capacity_women">Dedikerede pladser til kvinder</string>
+	<string name="poi_capacity_disabled_yes">Pladser forbeholdt handicappede</string>
+	<string name="poi_capacity_disabled_no">Ingen pladser forbeholdt handicappede</string>
+	<string name="poi_capacity_disabled">Pladser forbeholdt handicappede</string>
+	<string name="poi_capacity_women_yes">Pladser forbeholdt kvinder</string>
+	<string name="poi_capacity_women_no">Ingen pladser forbeholdt kvinder</string>
+	<string name="poi_capacity_women">Pladser forbeholdt kvinder</string>
 	<string name="poi_capacity_pupils">Dedikerede pladser til studerende</string>
-	<string name="poi_capacity_teachers">Dedikerede pladser til lærere</string>
-	<string name="poi_capacity_parent_yes">Dedikerede pladser til forældre</string>
-	<string name="poi_capacity_parent_no">Ingen dedikerede pladser til forældre</string>
-	<string name="poi_capacity_parent">Dedikerede pladser til forældre</string>
+	<string name="poi_capacity_teachers">Pladser forbeholdt lærere</string>
+	<string name="poi_capacity_parent_yes">Pladser forbeholdt forældre</string>
+	<string name="poi_capacity_parent_no">Ingen pladser forbeholdt forældre</string>
+	<string name="poi_capacity_parent">Pladser forbeholdt forældre</string>
 
 	<string name="poi_aerialway_occupancy">Kabine/stol/vogn kapacitet</string>
 	<string name="poi_aerialway_capacity">Kapacitet pr. time</string>
