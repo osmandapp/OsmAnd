@@ -907,6 +907,8 @@
 	<string name="poi_population">Население</string>
 	<string name="poi_start_date">Дата начала постройки</string>
 	<string name="poi_wheelchair">Доступно для инвалидных кресел</string>
+	<string name="poi_wheelchair_no">Недоступно для инвалидных кресел</string>
+	<string name="poi_wheelchair_limited">Инвалидные кресла: ограничено</string>
 	<string name="poi_wholesale">Опт</string>
 	<string name="poi_parking_underground">Подземный(ая)</string>
 	<string name="poi_parking_multi_storey">Многоэтажный(ая)</string>
@@ -1238,5 +1240,21 @@
 	<string name="poi_aerialway_summer_access_entry">Доступ летом: только вход</string>
 	<string name="poi_aerialway_summer_access_exit">Доступ летом: только выход</string>
 	<string name="poi_aerialway_summer_access_both">Доступ летом: вход и выход</string>
+
+	<string name="poi_stars_1">Число звёзд: 1 (туристский класс)</string>
+	<string name="poi_stars_1s">Число звёзд: 1S (улучшенный туристский класс)</string>
+	<string name="poi_stars_2">Число звёзд: 2 (стандартный класс)</string>
+	<string name="poi_stars_2s">Число звёзд: 2S (улучшенный стандартный класс)</string>
+	<string name="poi_stars_3">Число звёзд: 3 (комфортный класс)</string>
+	<string name="poi_stars_3s">Число звёзд: 3S (улучшенный комфортный класс)</string>
+	<string name="poi_stars_4">Число звёзд: 4 (первый класс)</string>
+	<string name="poi_stars_4s">Число звёзд: 4S (улучшенный первый класс)</string>
+	<string name="poi_stars_5">Число звёзд: 5 (категория люкс)</string>
+	<string name="poi_stars_5s">Число звёзд: 5S (категория люкс+)</string>
+	<string name="poi_stars_5">Число звёзд: 6</string>
+	<string name="poi_stars_5">Число звёзд: 7</string>
+	<string name="poi_rooms">Количество номеров</string>
+
+	<string name="poi_love_hotel">Love-отель</string>
 
 	</resources>
