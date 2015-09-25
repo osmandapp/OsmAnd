@@ -226,7 +226,8 @@ public class GPXUtilities {
 			double totalSpeedSum = 0;
 			points = 0;
 			
-			double channelThres = 10;
+			double channelThresMin = 5;            // Minimum oscillation amplitude considered as noise for Up/Down analysis
+			double channelThres = channelThresMin; // Actual oscillation amplitude considered as noise, try depedency on current hdop
 			double channelBase;
 			double channelTop;
 			double channelBottom;
@@ -238,6 +239,7 @@ public class GPXUtilities {
 				channelBase = 99999;
 				channelTop = channelBase;
 				channelBottom = channelBase;
+				channelThres = channelThresMin;
 
 				metricEnd += s.metricEnd;
 				points += numberOfPoints;
@@ -271,18 +273,26 @@ public class GPXUtilities {
 					}
 
 					// Trend channel approach for elevation gain/loss, Hardy 2015-09-22
+					// Self-adjusting turnarund threshold added for testing 2015-09-25: Current rule is now: "All up/down trends of amplitude <X are ignored to smooth the noise, where X is the maximum observed hdop value of any point which contributed to the current trend (but at least 5 m as the minimum noise threshold)".
 					if (!Double.isNaN(point.ele)) {
 						// Init channel
 						if (channelBase == 99999) {
 							channelBase = point.ele;
 							channelTop = channelBase;
 							channelBottom = channelBase;
+							channelThres = channelThresMin;
 						}
 						// Channel maintenance
 						if (point.ele > channelTop) {
 							channelTop = point.ele;
+							if (!Double.isNaN(point.hdop)) {
+								channelThres = Math.max(channelThres, point.hdop);
+							}
 						} else if (point.ele < channelBottom) {
 							channelBottom = point.ele;
+							if (!Double.isNaN(point.hdop)) {
+								channelThres = Math.max(channelThres, point.hdop);
+							}
 						}
 						// Turnaround (breakout) detection
 						if ((point.ele <= (channelTop - channelThres)) && (climb == true)) {
@@ -292,6 +302,7 @@ public class GPXUtilities {
 							channelBase = channelTop;
 							channelBottom = point.ele;
 							climb = false;
+							channelThres = channelThresMin;
 						} else if ((point.ele >= (channelBottom + channelThres)) && (climb == false)) {
 							if ((channelBase - channelBottom) >= channelThres) {
 								diffElevationDown += channelBase - channelBottom;
@@ -299,6 +310,7 @@ public class GPXUtilities {
 							channelBase = channelBottom;
 							channelTop = point.ele;
 							climb = true;
+							channelThres = channelThresMin;
 						}
 						// End detection without breakout
 						if (j == (numberOfPoints -1)) {
