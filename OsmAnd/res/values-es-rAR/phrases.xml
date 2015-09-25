@@ -892,15 +892,15 @@
 
 	<string name="poi_tourism_attraction">Atracción turística</string>
 	<string name="poi_cutline">Cortafuegos forestal</string>
-	<string name="poi_icn_ref">Red de nodos ciclista internacional</string>
-	<string name="poi_ncn_ref">Red de nodos ciclista nacional</string>
-	<string name="poi_rcn_ref">Red de nodos ciclista regional</string>
-	<string name="poi_lcn_ref">Red de nodos ciclista local</string>
+	<string name="poi_icn_ref">Red de ruta ciclista internacional</string>
+	<string name="poi_ncn_ref">Red de ruta ciclista nacional</string>
+	<string name="poi_rcn_ref">Red de ruta ciclista regional</string>
+	<string name="poi_lcn_ref">Red de ruta ciclista local</string>
 
-	<string name="poi_iwn_ref">Red internacional de senderismo</string>
-	<string name="poi_nwn_ref">Red nacional de senderismo</string>
-	<string name="poi_rwn_ref">Red regional de senderismo</string>
-	<string name="poi_lwn_ref">Red local de senderismo</string>
+	<string name="poi_iwn_ref">Red de ruta internacional de senderismo</string>
+	<string name="poi_nwn_ref">Red de ruta nacional de senderismo</string>
+	<string name="poi_rwn_ref">Red de ruta regional de senderismo</string>
+	<string name="poi_lwn_ref">Red de ruta local de senderismo</string>
 
 	<string name="poi_opening_hours">Horario de atención</string>
 	<string name="poi_collection_times">Horario de recolección</string>
@@ -939,7 +939,7 @@
 	<string name="poi_access_no">Sin acceso</string>
 	<string name="poi_access_destination">Acceso a destino</string>
 	<string name="poi_access_permissive">Acceso permisivo</string>
-	<string name="poi_access_customers">Acceso de clientes</string>
+	<string name="poi_access_customers">Acceso a clientes</string>
 	<string name="poi_access_agricultural">Acceso agrícola</string>
 
 	<string name="poi_access_delivery">Acceso para entregas</string>
@@ -951,7 +951,7 @@
 	<string name="poi_fax">Fax</string>
 	<string name="poi_facebook">Facebook</string>
 	<string name="poi_mobile">Celular</string>
-	<string name="poi_animal_shelter_dog">Refugio para perros</string>
+	<string name="poi_animal_shelter_dog">Refugio canino</string>
 	<string name="poi_animal_shelter_cat">Refugio para gatos</string>
 	<string name="poi_animal_shelter_dog_cat">Refugio para perros y gatos</string>
 	<string name="poi_animal_shelter_bird">Refugio para aves</string>
@@ -1044,7 +1044,7 @@
 	<string name="poi_mill_pond">Laguna de molino</string>
 	<string name="poi_twitter">Twitter</string>
 	<string name="poi_skype">Skype</string>
-	<string name="poi_youtube">Youtube</string>
+	<string name="poi_youtube">YouTube</string>
 	<string name="poi_instagram">Instagram</string>
 	<string name="poi_vk">VKontakte</string>
 	<string name="poi_google_plus">Google+</string>
@@ -1137,24 +1137,24 @@
 	<string name="poi_start_date">Fecha de inicio</string>
 	<string name="poi_wheelchair">Silla de rueda</string>
 
-	<string name="poi_content_silage">Ensilado (contenido)</string>
-	<string name="poi_content_water">Agua (contenido)</string>
-	<string name="poi_content_oil">Petróleo (contenido)</string>
-	<string name="poi_content_fuel">Combustible (contenido)</string>
-	<string name="poi_content_manure">Estiércol (contenido)</string>
-	<string name="poi_content_wine">Vino (contenido)</string>
-	<string name="poi_content_sewage">Agua residual (contenido)</string>
-	<string name="poi_content_gas">Gas (contenido)</string>
-	<string name="poi_content_biomass">Biomasa (contenido)</string>
-	<string name="poi_content_wastewater">Agua residual (contenido)</string>
-	<string name="poi_content_crop">Cultivo (contenido)</string>
-	<string name="poi_content_fodder">Forraje (contenido)</string>
-	<string name="poi_content_beer">Cerveza (contenido)</string>
-	<string name="poi_content_salt">Sal (contenido)</string>
-	<string name="poi_content_grain">Cereal (contenido)</string>
+	<string name="poi_content_silage">Contenido: ensilaje</string>
+	<string name="poi_content_water">Contenido: agua</string>
+	<string name="poi_content_oil">Contenido: petróleo</string>
+	<string name="poi_content_fuel">Contenido: combustible</string>
+	<string name="poi_content_manure">Contenido: estiércol</string>
+	<string name="poi_content_wine">Contenido: vino</string>
+	<string name="poi_content_sewage">Contenido: aguas negras</string>
+	<string name="poi_content_gas">Contenido: gas</string>
+	<string name="poi_content_biomass">Contenido: biomasa</string>
+	<string name="poi_content_wastewater">Contenido: aguas residuales</string>
+	<string name="poi_content_crop">Contenido: cultivo</string>
+	<string name="poi_content_fodder">Contenido: forraje</string>
+	<string name="poi_content_beer">Contenido: cerveza</string>
+	<string name="poi_content_salt">Contenido: sal</string>
+	<string name="poi_content_grain">Contenido: granos</string>
 
 	<string name="poi_bunker_silo">Silo bunker</string>
-	<string name="poi_content_slurry">Mezcla (contenido)</string>
+	<string name="poi_content_slurry">Contenido: mezcla</string>
 	<string name="poi_brownfield">Suelo abandonado urbanizable</string>
 	<string name="poi_greenfield">Suelo urbanizable</string>
 	<string name="poi_wholesale">Venta mayorista</string>
@@ -1273,48 +1273,48 @@
 	<string name="poi_information_terminal">Terminal de información</string>
 	<string name="poi_information_route_marker">Marcador de ruta</string>
 	<string name="poi_information_hikingmap">Mapa de senderismo</string>
-	<string name="poi_information_nature">Información sobre la naturaleza</string>
-	<string name="poi_information_wildlife">Información sobre la vida silvestre</string>
-	<string name="poi_information_history">Información histórica</string>
+	<string name="poi_information_nature">Información: naturaleza</string>
+	<string name="poi_information_wildlife">Información: vida salvaje</string>
+	<string name="poi_information_history">Información: historia</string>
 	<string name="poi_information_sign">Señal</string>
 	<string name="poi_information_audioguide">Audio-guía</string>
 	<string name="poi_information_bicyclemap">Mapa ciclista</string>
 	<string name="poi_information_tactile_model">Modelo táctil</string>
 	<string name="poi_information_tactile_map">Mapa táctil</string>
-	<string name="poi_board_type_notice">Tablero con aviso</string>
-	<string name="poi_board_type_plants">Información sobre plantas</string>
-	<string name="poi_board_type_geology">Información geológica</string>
-	<string name="poi_board_type_public_transport">Información sobre el transporte público</string>
-	<string name="poi_board_type_technology">Información tecnológica</string>
-	<string name="poi_board_type_astronomy">Información astronómica</string>
+	<string name="poi_board_type_notice">Tablón con anuncio</string>
+	<string name="poi_board_type_plants">Información: plantas</string>
+	<string name="poi_board_type_geology">Información: geología</string>
+	<string name="poi_board_type_public_transport">Información: transporte público</string>
+	<string name="poi_board_type_technology">Información: tecnología</string>
+	<string name="poi_board_type_astronomy">Información: astronomía</string>
 
 	<string name="poi_commercial">Área de oficinas</string>
 	<string name="poi_fireplace_yes">Chimenea</string>
 	<string name="poi_fireplace_no">Sin chimenea</string>
 
-	<string name="poi_covered_yes">Con refugio</string>
-	<string name="poi_covered_no">Sin refugio</string>
+	<string name="poi_covered_yes">Cubierto</string>
+	<string name="poi_covered_no">Sin cobertura</string>
 
 	<string name="poi_smoking_no">No fumar</string>
-	<string name="poi_smoking_outside">Permitido fumar en el exterior</string>
+	<string name="poi_smoking_outside">Permitido fumar afuera</string>
 	<string name="poi_smoking_yes">Permitido fumar</string>
-	<string name="poi_smoking_separated">Permitido fumar en habitación separada y sin separación efectiva</string>
-	<string name="poi_smoking_isolated">Permitido fumar en una sala aislada físicamente</string>
+	<string name="poi_smoking_separated">Permitido fumar en habitación separada</string>
+	<string name="poi_smoking_isolated">Permitido fumar en habitación aislada</string>
 	<string name="poi_smoking_dedicated">Solo fumadores</string>
 
-	<string name="poi_toll_no">Peaje sin tarifa</string>
-	<string name="poi_toll_yes">Peaje tarifado</string>
+	<string name="poi_toll_no">Sin Peaje</string>
+	<string name="poi_toll_yes">Peaje</string>
 	<string name="poi_tactile_paving_yes">Con pavimento táctil</string>
 	<string name="poi_tactile_paving_no">Sin pavimento táctil</string>
 	<string name="poi_traffic_signals_sound_yes">Sonoro</string>
 	<string name="poi_traffic_signals_sound_no">Sin sonido</string>
-	<string name="poi_traffic_signals_sound_walk">Sonoro sólo cuando se permite caminar</string>
+	<string name="poi_traffic_signals_sound_walk">Sonoro cuando se permite caminar</string>
 
 <string name="poi_retail">Área comercial</string>
 
 	<string name="poi_ford_stepping_stones">Puente de piedras</string>
 	<string name="poi_information_board">Tablero de información</string>
-	<string name="poi_toll_hgv_yes">Peaje tarifado para vehículos pesados</string>
+	<string name="poi_toll_hgv_yes">Peaje para camiones</string>
 	<string name="poi_information_trail_blaze">Marcador del camino</string>
 	<string name="poi_rescue_station">Estación de rescate</string>
 
@@ -1345,7 +1345,7 @@
 <string name="poi_leisure_common">Área de ocio común</string>
 	<string name="poi_heath">Brezal</string>
 	<string name="poi_windfall">Fruto caído</string>
-	<string name="poi_rtsa_scale">Dificultad del paso de montaña</string>
+	<string name="poi_rtsa_scale">Escala RTSA</string>
 
 <string name="poi_pump">Bomba</string>
 
@@ -1381,7 +1381,7 @@
 	<string name="poi_capacity_women_yes">Lugares reservados para mujeres</string>
 	<string name="poi_capacity_women_no">Sin lugar dedicado para mujeres</string>
 	<string name="poi_capacity_women">Lugares reservados para mujeres</string>
-	<string name="poi_capacity_pupils">Lugares reservados para alumnos</string>
+	<string name="poi_capacity_pupils">Lugares reservados para estudiantes</string>
 	<string name="poi_capacity_teachers">Lugares reservados para profesores</string>
 	<string name="poi_capacity_parent_yes">Lugares reservados para padres</string>
 	<string name="poi_capacity_parent_no">Sin lugares reservados para padres</string>
@@ -1403,5 +1403,23 @@
 	<string name="poi_aerialway_summer_access_entry">Sólo acceso de entrada en verano</string>
 	<string name="poi_aerialway_summer_access_exit">Sólo acceso de salida en verano</string>
 	<string name="poi_aerialway_summer_access_both">Acesso de entrada y salida en verano</string>
+
+<string name="poi_wheelchair_no">Silla de ruedas: no permitido</string>
+	<string name="poi_wheelchair_limited">Silla de ruedas: limitado</string>
+	<string name="poi_stars_1">Estrellas: 1 (Turista)</string>
+	<string name="poi_stars_1s">Estrellas: 1S (Turista Superior)</string>
+	<string name="poi_stars_2">Estrellas: 2 (Estándar)</string>
+	<string name="poi_stars_2s">Estrellas: 2S (Estándar Superior)</string>
+	<string name="poi_stars_3">Estrellas: 3 (Confortable)</string>
+	<string name="poi_stars_3s">Estrellas: 3S (Confortable Superior)</string>
+	<string name="poi_stars_4">Estrellas: 4 (Primera Clase)</string>
+	<string name="poi_stars_4s">Estrellas: 4S (Primera Clase Superior)</string>
+	<string name="poi_stars_5">Estrellas: 5 (Lujurioso)</string>
+	<string name="poi_stars_5s">Estrellas: 5S (Lujurioso Superior)</string>
+	<string name="poi_stars_6">Estrellas: 6</string>
+	<string name="poi_stars_7">Estrellas: 7</string>
+	<string name="poi_rooms">Habitaciones</string>
+
+	<string name="poi_love_hotel">Telo</string>
 
 </resources>
