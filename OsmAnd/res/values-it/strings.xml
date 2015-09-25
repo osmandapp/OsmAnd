@@ -2181,4 +2181,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 <string name="simulate_your_location_stop_descr">Arresta la simulazione del percorso</string>
     <string name="simulate_your_location_descr">Simula utilizzando un GPX registrato o una percorso calcolato</string>
     <string name="downloads_left_template">%1$s download rimanenti</string>
+<string name="favourites_edit_dialog_title">Informazioni preferite</string>
+    <string name="favourites_context_menu_add">Aggiungi preferito</string>
+	<string name="roads">Strade</string>
 </resources>
