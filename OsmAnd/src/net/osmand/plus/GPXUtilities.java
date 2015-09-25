@@ -239,6 +239,7 @@ public class GPXUtilities {
 				channelBase = 99999;
 				channelTop = channelBase;
 				channelBottom = channelBase;
+				channelThres = channelThresMin;
 
 				metricEnd += s.metricEnd;
 				points += numberOfPoints;
