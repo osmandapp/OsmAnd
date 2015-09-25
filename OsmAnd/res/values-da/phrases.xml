@@ -1425,4 +1425,22 @@
 	<string name="poi_aerialway_summer_access_exit">Sommeradgang: kun udgang</string>
 	<string name="poi_aerialway_summer_access_both">Sommeradgang: ind- og udgang</string>
 
+<string name="poi_wheelchair_no">Kørestol: ikke tilladt</string>
+	<string name="poi_wheelchair_limited">Kørestol: begrænset</string>
+	<string name="poi_stars_1">Stjerner: 1 (turist)</string>
+	<string name="poi_stars_1s">Stjerner: 1S (super turist)</string>
+	<string name="poi_stars_2">Stjerner: 2 (Standard)</string>
+	<string name="poi_stars_2s">Stjerner: 2S (Superior Standard)</string>
+	<string name="poi_stars_3">Stjerner: 3 (komfort)</string>
+	<string name="poi_stars_3s">Stjerner: 3S (super komfort)</string>
+	<string name="poi_stars_4">Stjerner: 4 (Førsteklasses)</string>
+	<string name="poi_stars_4s">Stjerner: 4S (super førsteklasse)</string>
+	<string name="poi_stars_5">Stjerner: 5 (luksus)</string>
+	<string name="poi_stars_5s">Stjerner: 5S (Superior luksus)</string>
+	<string name="poi_stars_6">Stjerner: 6</string>
+	<string name="poi_stars_7">Stjerner: 7</string>
+	<string name="poi_rooms">Værelser</string>
+
+	<string name="poi_love_hotel">Kærlighedshotel</string>
+
 </resources>
