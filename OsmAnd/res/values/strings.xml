@@ -9,6 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+	<string name="favourites_edit_dialog_title">Favorite informaton</string>
     <string name="simulate_your_location_stop_descr">Stop simulating your position</string>
     <string name="simulate_your_location_descr">Simulate using recorded GPX or calculated route</string>
     <string name="address_unknown">Address is not known yet</string>
@@ -2165,6 +2166,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="add_favorite_dialog_top_text">Enter favorite name</string>
 	<string name="add_favorite_dialog_default_favourite_name">Favorite</string>
 	<string name="add_favorite_dialog_favourite_added_template">Favorite point \'\'{0}\'\' was added successfully.</string>
+	<string name="favourites_context_menu_add">Add favorite</string>
 	<string name="favourites_context_menu_edit">Edit favorite</string>
 	<string name="favourites_context_menu_delete">Delete favorite</string>
 	<string name="favourites_remove_dialog_msg">Remove favorite point \'%s\'?</string>

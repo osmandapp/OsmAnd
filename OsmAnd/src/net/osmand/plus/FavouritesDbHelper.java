@@ -189,7 +189,7 @@ public class FavouritesDbHelper {
 		while (fl) {
 			fl = false;
 			for (FavouritePoint fp : fdb.getFavouritePoints()) {
-				if (fp.getName().equals(name)) {
+				if (fp.getName().equals(name) && p.getLatitude() != fp.getLatitude() && p.getLongitude() != fp.getLongitude()) {
 					number++;
 					index = " (" + number + ")";
 					name = p.getName() + index;
@@ -423,7 +423,14 @@ public class FavouritesDbHelper {
 	public List<FavoriteGroup> getFavoriteGroups() {
 		return favoriteGroups;
 	}
-	
+
+	public FavoriteGroup getGroup(FavouritePoint p) {
+		if (flatGroups.containsKey(p.getCategory())) {
+			return flatGroups.get(p.getCategory());
+		} else {
+			return null;
+		}
+	}
 
 	private FavouritePoint findFavoriteByAllProperties(String category, String name, double lat, double lon){
 		if (flatGroups.containsKey(category)) {

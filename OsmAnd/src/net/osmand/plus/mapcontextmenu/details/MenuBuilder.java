@@ -1,4 +1,4 @@
-package net.osmand.plus.mapcontextmenu.sections;
+package net.osmand.plus.mapcontextmenu.details;
 
 import android.content.Context;
 import android.graphics.Bitmap;

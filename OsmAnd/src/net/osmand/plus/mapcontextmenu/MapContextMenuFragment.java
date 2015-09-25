@@ -33,14 +33,14 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.mapcontextmenu.sections.MenuController;
+import net.osmand.plus.mapcontextmenu.details.MenuController;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 
 import org.apache.commons.logging.Log;
 
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
-import static net.osmand.plus.mapcontextmenu.sections.MenuBuilder.SHADOW_HEIGHT_BOTTOM_DP;
-import static net.osmand.plus.mapcontextmenu.sections.MenuBuilder.SHADOW_HEIGHT_TOP_DP;
+import static net.osmand.plus.mapcontextmenu.details.MenuBuilder.SHADOW_HEIGHT_BOTTOM_DP;
+import static net.osmand.plus.mapcontextmenu.details.MenuBuilder.SHADOW_HEIGHT_TOP_DP;
 
 
 public class MapContextMenuFragment extends Fragment {
