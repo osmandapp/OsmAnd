@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources> 
 	<string name="poi_bakery">Булочная</string>
 	<string name="poi_alcohol">Винно-водочный магазин</string>
@@ -1251,8 +1251,8 @@
 	<string name="poi_stars_4s">Число звёзд: 4S (улучшенный первый класс)</string>
 	<string name="poi_stars_5">Число звёзд: 5 (категория люкс)</string>
 	<string name="poi_stars_5s">Число звёзд: 5S (категория люкс+)</string>
-	<string name="poi_stars_5">Число звёзд: 6</string>
-	<string name="poi_stars_5">Число звёзд: 7</string>
+	<string name="poi_stars_6">Число звёзд: 6</string>
+	<string name="poi_stars_7">Число звёзд: 7</string>
 	<string name="poi_rooms">Количество номеров</string>
 
 	<string name="poi_love_hotel">Love-отель</string>
