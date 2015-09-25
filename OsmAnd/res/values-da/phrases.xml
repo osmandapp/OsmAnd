@@ -931,13 +931,13 @@
 	<string name="poi_service_times">Service-tider</string>
 	<string name="poi_brand">Varemærke</string>
 
-	<string name="poi_enforcement_traffic_signals">Trafiksignaler</string>
-	<string name="poi_enforcement_maxspeed">Hastighedskontrol</string>
-	<string name="poi_enforcement_maxheight">Højdekontrol</string>
-	<string name="poi_enforcement_mindistance">Afstandskontrol</string>
-	<string name="poi_enforcement_check">Trafikontrol</string>
-	<string name="poi_enforcement_access">Adgangskontrol</string>
-	<string name="poi_enforcement_toll">Vejafgiftskontrol</string>
+	<string name="poi_enforcement_traffic_signals">Overvågning: trafiksignaler</string>
+	<string name="poi_enforcement_maxspeed">Overvågning: hastighedskontrol</string>
+	<string name="poi_enforcement_maxheight">Overvågning: højdekontrol</string>
+	<string name="poi_enforcement_mindistance">Overvågning: afstandskontrol</string>
+	<string name="poi_enforcement_check">Overvågning: trafikontrol</string>
+	<string name="poi_enforcement_access">Overvågning: adgangskontrol</string>
+	<string name="poi_enforcement_toll">Overvågning: vejafgiftskontrol</string>
 
 <string name="poi_country">Landlig</string>
 	<string name="poi_fee_yes">Gebyr</string>
@@ -956,7 +956,7 @@
 	<string name="poi_access_no">Ingen adgang</string>
 	<string name="poi_access_destination">Adgang destination</string>
 	<string name="poi_access_permissive">Adgang tolerant</string>
-	<string name="poi_access_customers">Adgang for kunde</string>
+	<string name="poi_access_customers">Kundenadgang</string>
 	<string name="poi_access_delivery">Adgang for levering</string>
 	<string name="poi_access_agricultural">Adgang for landbrug</string>
 
@@ -1055,14 +1055,14 @@
 	<string name="poi_seasonal_autumn">Efterår</string>
 	<string name="poi_seasonal_winter">Vinter</string>
 
-	<string name="poi_crossing_traffic_signals">Med trafiksignaler</string>
+	<string name="poi_crossing_traffic_signals">Med stoplys</string>
 	<string name="poi_crossing_uncontrolled">Ikke kontrolleret</string>
 	<string name="poi_crossing_unmarked">Ikke markeret</string>
 
 	<string name="poi_mill_pond">Mølledam</string>
 	<string name="poi_twitter">Twitter</string>
 	<string name="poi_skype">Skype</string>
-	<string name="poi_youtube">Youtube</string>
+	<string name="poi_youtube">YouTube</string>
 	<string name="poi_instagram">Instagram</string>
 	<string name="poi_vk">VKontakte</string>
 	<string name="poi_google_plus">Google+</string>
@@ -1155,22 +1155,22 @@
 	<string name="poi_start_date">Startdato</string>
 	<string name="poi_wheelchair">Kørestol</string>
 
-	<string name="poi_content_silage">Ensilage (indhold)</string>
-	<string name="poi_content_water">Vand (indhold)</string>
-	<string name="poi_content_slurry">Gylle (indhold)</string>
-	<string name="poi_content_oil">Olie (indhold)</string>
-	<string name="poi_content_fuel">Brændstof (indhold)</string>
-	<string name="poi_content_manure">Gødning (indhold)</string>
-	<string name="poi_content_wine">Vin (indhold)</string>
-	<string name="poi_content_sewage">Spildevand (indhold)</string>
-	<string name="poi_content_gas">Gas (indhold)</string>
-	<string name="poi_content_biomass">Biomasse (indhold)</string>
-	<string name="poi_content_wastewater">Afløbsvand (indhold)</string>
-	<string name="poi_content_crop">Afgrøde (indhold)</string>
-	<string name="poi_content_fodder">Foder (indhold)</string>
-	<string name="poi_content_beer">Øl (indhold)</string>
-	<string name="poi_content_salt">Salt (indhold)</string>
-	<string name="poi_content_grain">Korn (indhold)</string>
+	<string name="poi_content_silage">Indhold: ensilage</string>
+	<string name="poi_content_water">Indhold: vand</string>
+	<string name="poi_content_slurry">Indhold: gylle</string>
+	<string name="poi_content_oil">Indhold: olie</string>
+	<string name="poi_content_fuel">Indhold: brændstof</string>
+	<string name="poi_content_manure">Indhold: gødning</string>
+	<string name="poi_content_wine">Indhold: vin</string>
+	<string name="poi_content_sewage">Indhold: spildevand</string>
+	<string name="poi_content_gas">Indhold: gas</string>
+	<string name="poi_content_biomass">Indhold: biomasse</string>
+	<string name="poi_content_wastewater">Indhold: afløbsvand</string>
+	<string name="poi_content_crop">Indhold: afgrøde</string>
+	<string name="poi_content_fodder">Indhold: foder</string>
+	<string name="poi_content_beer">Indhold: øl</string>
+	<string name="poi_content_salt">Indhold: salt</string>
+	<string name="poi_content_grain">Indhold: korn</string>
 
 	<string name="poi_bunker_silo">Plansilo</string>
 	<string name="poi_brownfield">Nedlagt industrigrund</string>
@@ -1293,40 +1293,40 @@
 	<string name="poi_information_terminal">Informationsstander</string>
 	<string name="poi_information_route_marker">Ruteskilte</string>
 	<string name="poi_information_hikingmap">Vandrekort</string>
-	<string name="poi_information_nature">Information om natur</string>
-	<string name="poi_information_wildlife">Information om dyreliv</string>
-	<string name="poi_information_history">Information om historie</string>
+	<string name="poi_information_nature">Information om: natur</string>
+	<string name="poi_information_wildlife">Information om: dyreliv</string>
+	<string name="poi_information_history">Information om: historie</string>
 	<string name="poi_information_sign">Skilt</string>
 	<string name="poi_information_audioguide">Audioguide</string>
 	<string name="poi_information_bicyclemap">Cykelkort</string>
 	<string name="poi_information_tactile_model">Taktilmodel</string>
 	<string name="poi_information_tactile_map">Taktilkort</string>
-	<string name="poi_board_type_plants">Information om planter</string>
-	<string name="poi_board_type_geology">Information om geologi</string>
-	<string name="poi_board_type_public_transport">Information om offentlig transport</string>
-	<string name="poi_board_type_technology">Information om teknologi</string>
-	<string name="poi_board_type_astronomy">Information om astronomi</string>
+	<string name="poi_board_type_plants">Information om: planter</string>
+	<string name="poi_board_type_geology">Information om: geologi</string>
+	<string name="poi_board_type_public_transport">Information om: offentlig transport</string>
+	<string name="poi_board_type_technology">Information om: teknologi</string>
+	<string name="poi_board_type_astronomy">Information om: astronomi</string>
 
 <string name="poi_information_trail_blaze">Stiafmærkning</string>
-	<string name="poi_board_type_notice">Advarseltavle</string>
+	<string name="poi_board_type_notice">Opslagstavle</string>
 	<string name="poi_commercial">Forretningsområde</string>
 	<string name="poi_retail">Detailhandelsområde</string>
 
 	<string name="poi_fireplace_yes">Ildsted</string>
 	<string name="poi_fireplace_no">Intet ildsted</string>
 
-	<string name="poi_covered_yes">Med læ</string>
-	<string name="poi_covered_no">Uden læ</string>
+	<string name="poi_covered_yes">Overdækket</string>
+	<string name="poi_covered_no">Ikke overdækket</string>
 
 	<string name="poi_smoking_no">Rygning forbudt</string>
 	<string name="poi_smoking_outside">Rygning er kun tilladt udendørs</string>
 	<string name="poi_smoking_yes">Rygning tilladt</string>
-	<string name="poi_smoking_separated">Rygning er tilladt i et særskilt rum uden effektiv adskillelse</string>
-	<string name="poi_smoking_isolated">Rygning er tilladt i et separat rum med effektiv adskillelse</string>
+	<string name="poi_smoking_separated">Rygning tilladt i et adskilt lokale</string>
+	<string name="poi_smoking_isolated">Rygning tilladt i et isoleret rum</string>
 	<string name="poi_smoking_dedicated">Dedikeret til rygere</string>
 
-	<string name="poi_toll_no">Betaling af afgifter opkræves ikke</string>
-	<string name="poi_toll_yes">Betaling af afgifter opkræves</string>
+	<string name="poi_toll_no">Ingen vejafgift</string>
+	<string name="poi_toll_yes">Vejafgift</string>
 	<string name="poi_tactile_paving_yes">Med taktilbelægning</string>
 	<string name="poi_tactile_paving_no">Uden taktilbelægning</string>
 	<string name="poi_traffic_signals_sound_yes">Med lydsignal</string>
@@ -1334,7 +1334,7 @@
 	<string name="poi_traffic_signals_sound_walk">Med lydsignal når det er tilladt at gå</string>
 
 <string name="poi_ford_stepping_stones">Trædestensbro</string>
-	<string name="poi_toll_hgv_yes">Betaling af afgifter opkræves for tunge lastvogne</string>
+	<string name="poi_toll_hgv_yes">HGV vejafgift</string>
 	<string name="poi_rescue_station">Redningsstation</string>
 
 <string name="poi_bicycle_parking_anchors">Ankre</string>
@@ -1344,7 +1344,7 @@
 	<string name="poi_paediatrics">Pædiatri</string>
 
 	<string name="poi_mini_roundabout">Mini-rundkørsel</string>
-	<string name="poi_railway_crossing">Jernbane fodgængerovergang</string>
+	<string name="poi_railway_crossing">Jernbaneoverskæring</string>
 	<string name="poi_railway_level_crossing">Jernbaneoverskæring</string>
 	<string name="poi_bird_hide">Fugletårn</string>
 	<string name="poi_horse_riding">Ridning</string>
@@ -1366,7 +1366,7 @@
 <string name="poi_leisure_common">Fælles rekreativt område</string>
 	<string name="poi_level">Niveau</string>
 
-<string name="poi_rtsa_scale">Vanskeligt bjergpas</string>
+<string name="poi_rtsa_scale">RTSA skala</string>
 
 <string name="poi_pump">Pumpe</string>
 
@@ -1389,9 +1389,9 @@
 	<string name="poi_garden_type_private">Havetype: privat</string>
 	<string name="poi_garden_type_botanical">Havetype: botanisk</string>
 
-	<string name="poi_garden_style_french">Havestil: fransk</string>
-	<string name="poi_garden_style_english">Havestil: engelsk</string>
-	<string name="poi_garden_style_japanese">Havestil: japansk</string>
+	<string name="poi_garden_style_french">Havestil: Fransk</string>
+	<string name="poi_garden_style_english">Havestil: Eengelsk</string>
+	<string name="poi_garden_style_japanese">Havestil: Japansk</string>
 
 <string name="poi_garden_style_kitchen">Havestil: køkken</string>
 	<string name="poi_garden_style_rosarium">Havestil: rosen</string>
@@ -1402,7 +1402,7 @@
 	<string name="poi_capacity_women_yes">Dedikerede pladser til kvinder</string>
 	<string name="poi_capacity_women_no">Ingen dedikerede pladser til kvinder</string>
 	<string name="poi_capacity_women">Dedikerede pladser til kvinder</string>
-	<string name="poi_capacity_pupils">Dedikerede pladser til elever</string>
+	<string name="poi_capacity_pupils">Dedikerede pladser til studerende</string>
 	<string name="poi_capacity_teachers">Dedikerede pladser til lærere</string>
 	<string name="poi_capacity_parent_yes">Dedikerede pladser til forældre</string>
 	<string name="poi_capacity_parent_no">Ingen dedikerede pladser til forældre</string>
