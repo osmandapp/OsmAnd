@@ -2161,4 +2161,6 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="unsaved_changes_will_be_lost">Les modifications non enregistrées seront perdues. Souhaitez-vous poursuivre ?</string>
 	<string name="downloads_left_template">%1$s téléchargement(s) restant(s)</string>
 	<string name="roads">Routes</string>
-</resources>
+<string name="favourites_edit_dialog_title">Propriétés du favori</string>
+    <string name="favourites_context_menu_add">Ajouter un favori</string>
+	</resources>
