@@ -889,15 +889,15 @@
 	<string name="poi_tourism_attraction">旅遊景點</string>
 	<string name="poi_cutline">圖例</string>
 	<string name="poi_tree">樹</string>
-	<string name="poi_icn_ref">國際自行車節點網路</string>
-	<string name="poi_ncn_ref">全國自行車節點網路</string>
-	<string name="poi_rcn_ref">地區性自行車節點網路</string>
-	<string name="poi_lcn_ref">本地自行車節點網路</string>
+	<string name="poi_icn_ref">國際自行車網路路線</string>
+	<string name="poi_ncn_ref">全國自行車網路路線</string>
+	<string name="poi_rcn_ref">地區性自行車網路路線</string>
+	<string name="poi_lcn_ref">本地自行車網路路線</string>
 
-	<string name="poi_iwn_ref">國際步行節點網路</string>
-	<string name="poi_nwn_ref">全國步行節點網路</string>
-	<string name="poi_rwn_ref">地區性步行節點網路</string>
-	<string name="poi_lwn_ref">本地步行節點網路</string>
+	<string name="poi_iwn_ref">國際步行網路路線</string>
+	<string name="poi_nwn_ref">全國步行網路路線</string>
+	<string name="poi_rwn_ref">地區性步行網路路線</string>
+	<string name="poi_lwn_ref">本地步行網路路線</string>
 
 	<string name="poi_opening_hours">營業時間</string>
 	<string name="poi_collection_times">採收時間</string>
@@ -913,7 +913,7 @@
 	<string name="poi_operator">經營者</string>
 	<string name="poi_brand">品牌</string>
 
-	<string name="poi_enforcement_traffic_signals">執法：交通號誌</string>
+	<string name="poi_enforcement_traffic_signals">執法：停止號誌</string>
 	<string name="poi_enforcement_maxspeed">執法：最高速限</string>
 	<string name="poi_enforcement_maxheight">執法：最高高度</string>
 	<string name="poi_enforcement_mindistance">執法：最少間隔距離</string>
@@ -925,10 +925,10 @@
 	<string name="poi_fee_yes">費用</string>
 
 	<string name="poi_abandoned_poi">已遺棄的物件</string>
-	<string name="poi_route_hiking_iwn_poi">國際步行路線</string>
-	<string name="poi_route_hiking_nwn_poi">全國步行路線</string>
-	<string name="poi_route_hiking_rwn_poi">地區性步行路線</string>
-	<string name="poi_route_hiking_lwn_poi">當地步行路線</string>
+	<string name="poi_route_hiking_iwn_poi">國際徒步登山路線</string>
+	<string name="poi_route_hiking_nwn_poi">全國徒步登山路線</string>
+	<string name="poi_route_hiking_rwn_poi">地區性徒步登山路線</string>
+	<string name="poi_route_hiking_lwn_poi">當地徒步登山路線</string>
 	<string name="poi_route_hiking_ref_poi">徒步旅行路線參考</string>
 
 	<string name="poi_node_networks">徒步旅行/自行車網路節點</string>
@@ -950,10 +950,10 @@
 	<string name="poi_fax">傳真</string>
 	<string name="poi_facebook">臉書</string>
 	<string name="poi_mobile">行動電話</string>
-	<string name="poi_animal_shelter_dog">流浪狗庇護所</string>
-	<string name="poi_animal_shelter_cat">流浪貓庇護所</string>
-	<string name="poi_animal_shelter_dog_cat">流浪狗和貓庇護所</string>
-	<string name="poi_animal_shelter_bird">野鳥庇護所</string>
+	<string name="poi_animal_shelter_dog">流浪狗收容所</string>
+	<string name="poi_animal_shelter_cat">流浪貓收容所</string>
+	<string name="poi_animal_shelter_dog_cat">流浪狗和貓收容所</string>
+	<string name="poi_animal_shelter_bird">傷鳥收容所</string>
 
 <string name="poi_shower">淋浴</string>
 	<string name="poi_recycling_centre">類型：資源回收中心</string>
@@ -1030,7 +1030,7 @@
 	<string name="poi_seasonal_summer">夏季</string>
 	<string name="poi_seasonal_autumn">秋季</string>
 	<string name="poi_seasonal_winter">冬季</string>
-	<string name="poi_crossing_traffic_signals">偕同交通號誌</string>
+	<string name="poi_crossing_traffic_signals">有停止號誌</string>
 	<string name="poi_crossing_uncontrolled">無控制的</string>
 	<string name="poi_crossing_unmarked">無標志的</string>
 
@@ -1139,22 +1139,22 @@
 	<string name="poi_start_date">開始日期</string>
 	<string name="poi_wheelchair">輪椅</string>
 
-	<string name="poi_content_silage">青貯飼料 (內容)</string>
-	<string name="poi_content_water">水 (內容)</string>
-	<string name="poi_content_slurry">礦泥 (內容)</string>
-	<string name="poi_content_oil">油 (內容)</string>
-	<string name="poi_content_fuel">燃料 (內容)</string>
-	<string name="poi_content_manure">肥料 (內容)</string>
-	<string name="poi_content_wine">酒 (內容)</string>
-	<string name="poi_content_sewage">污水 (內容)</string>
-	<string name="poi_content_gas">瓦斯 (內容)</string>
-	<string name="poi_content_biomass">生物質 (內容)</string>
-	<string name="poi_content_wastewater">污水 (內容)</string>
-	<string name="poi_content_crop">農作物 (內容)</string>
-	<string name="poi_content_fodder">飼料 (內容)</string>
-	<string name="poi_content_beer">啤酒 (內容)</string>
-	<string name="poi_content_salt">鹽 (內容)</string>
-	<string name="poi_content_grain">榖物 (內容)</string>
+	<string name="poi_content_silage">內容：青貯飼料</string>
+	<string name="poi_content_water">內容：水</string>
+	<string name="poi_content_slurry">內容：礦泥</string>
+	<string name="poi_content_oil">內容：油</string>
+	<string name="poi_content_fuel">內容：燃料</string>
+	<string name="poi_content_manure">內容：肥料</string>
+	<string name="poi_content_wine">內容：酒</string>
+	<string name="poi_content_sewage">內容：污水</string>
+	<string name="poi_content_gas">內容：瓦斯</string>
+	<string name="poi_content_biomass">內容：生物質</string>
+	<string name="poi_content_wastewater">內容：污水</string>
+	<string name="poi_content_crop">內容：農作物</string>
+	<string name="poi_content_fodder">內容：飼料</string>
+	<string name="poi_content_beer">內容：啤酒</string>
+	<string name="poi_content_salt">內容：鹽</string>
+	<string name="poi_content_grain">內容：榖物</string>
 
 	<string name="poi_wholesale">批發商</string>
 
@@ -1276,22 +1276,22 @@
 	<string name="poi_information_terminal">資訊終端機</string>
 	<string name="poi_information_route_marker">路線標識</string>
 	<string name="poi_information_hikingmap">徒步旅行地圖</string>
-	<string name="poi_information_nature">關於自然的資訊</string>
+	<string name="poi_information_nature">資訊標誌：大自然</string>
 	<string name="poi_doors">門</string>
 	<string name="poi_bicycle_parking_anchors">錨泊點</string>
-	<string name="poi_information_wildlife">有關野生動物的資訊</string>
-	<string name="poi_information_history">關於歷史的資訊</string>
+	<string name="poi_information_wildlife">資訊標誌：野生動物</string>
+	<string name="poi_information_history">資訊標誌：歷史</string>
 	<string name="poi_information_sign">標誌</string>
 	<string name="poi_information_audioguide">導覽機</string>
 	<string name="poi_information_bicyclemap">自行車地圖</string>
 	<string name="poi_information_tactile_model">觸摸模式</string>
 	<string name="poi_information_tactile_map">觸摸地圖</string>
-	<string name="poi_board_type_notice">布告板</string>
-	<string name="poi_board_type_plants">關於植物的資訊</string>
-	<string name="poi_board_type_geology">關於地質資訊</string>
-	<string name="poi_board_type_public_transport">有關公共交通工具的資訊</string>
-	<string name="poi_board_type_technology">有關技術的資訊</string>
-	<string name="poi_board_type_astronomy">關於天文資訊</string>
+	<string name="poi_board_type_notice">布告欄</string>
+	<string name="poi_board_type_plants">資訊標誌：植物</string>
+	<string name="poi_board_type_geology">資訊標誌：地質</string>
+	<string name="poi_board_type_public_transport">資訊標誌：公共交通工具</string>
+	<string name="poi_board_type_technology">資訊標誌：術語</string>
+	<string name="poi_board_type_astronomy">資訊標誌：天文</string>
 
 	<string name="poi_commercial">商業的土地利用</string>
 	<string name="poi_retail">零售的土地利用</string>
@@ -1299,8 +1299,8 @@
 	<string name="poi_fireplace_yes">壁爐</string>
 	<string name="poi_fireplace_no">沒有壁爐</string>
 
-	<string name="poi_covered_yes">有涼亭</string>
-	<string name="poi_covered_no">無涼亭</string>
+	<string name="poi_covered_yes">有覆蓋物</string>
+	<string name="poi_covered_no">無覆蓋物</string>
 
 	<string name="poi_smoking_no">禁止吸煙</string>
 	<string name="poi_smoking_outside">只有外面允許吸煙</string>
@@ -1311,20 +1311,20 @@
 	<string name="poi_tactile_paving_no">無導盲磚</string>
 	<string name="poi_paediatrics">小兒科</string>
 
-	<string name="poi_smoking_separated">允許吸煙，在一個單獨的房間，沒有隔離</string>
-	<string name="poi_smoking_isolated">允許吸煙，在一個單獨的房間，有隔離</string>
-	<string name="poi_toll_yes">收取通行費用</string>
-	<string name="poi_toll_no">不收取通行費用</string>
-	<string name="poi_toll_hgv_yes">收取大貨車通行費用</string>
+	<string name="poi_smoking_separated">在一個單獨的房間，允許吸煙</string>
+	<string name="poi_smoking_isolated">在一個隔離的房間，允許吸煙</string>
+	<string name="poi_toll_yes">收費</string>
+	<string name="poi_toll_no">不收費</string>
+	<string name="poi_toll_hgv_yes">收大貨車費用</string>
 	<string name="poi_traffic_signals_sound_yes">有聲音</string>
 	<string name="poi_traffic_signals_sound_no">沒有聲音</string>
-	<string name="poi_traffic_signals_sound_walk">有聲音時才允許走</string>
+	<string name="poi_traffic_signals_sound_walk">當有聲响時允許行走</string>
 
 	<string name="poi_rescue_station">救護站</string>
 
 	<string name="poi_services">服務區</string>
 	<string name="poi_mini_roundabout">迷你圓環</string>
-	<string name="poi_railway_crossing">鐵路行人道</string>
+	<string name="poi_railway_crossing">鐵路平交道</string>
 	<string name="poi_railway_level_crossing">平交道</string>
 	<string name="poi_bird_hide">賞鳥屋</string>
 	<string name="poi_horse_riding">騎馬運動</string>
@@ -1345,7 +1345,7 @@
 	<string name="poi_passing_place">避讓車處</string>
 	<string name="poi_level">等級</string>
 
-<string name="poi_rtsa_scale">隘口的艱難度</string>
+<string name="poi_rtsa_scale">RTSA 的難度</string>
 
 <string name="poi_pump">泵浦</string>
 
@@ -1370,8 +1370,8 @@
 
 	<string name="poi_garden_style_kitchen">花園風格：廚房</string>
 	<string name="poi_garden_style_rosarium">花園風格：玫瑰園</string>
-	<string name="poi_garden_style_french">花園風格：法國式</string>
-	<string name="poi_garden_style_english">花園風格：英格蘭</string>
+	<string name="poi_garden_style_french">花園風格：法式</string>
+	<string name="poi_garden_style_english">花園風格：英式</string>
 	<string name="poi_garden_style_japanese">花園風格：日式</string>
 
 <string name="poi_capacity">容量</string>
@@ -1381,10 +1381,23 @@
 	<string name="poi_capacity_women_yes">婦女專用場所</string>
 	<string name="poi_capacity_women_no">無婦女專用場所</string>
 	<string name="poi_capacity_women">婦女專用場所</string>
-	<string name="poi_capacity_pupils">小學生專用場所</string>
+	<string name="poi_capacity_pupils">學生專用場所</string>
 	<string name="poi_capacity_teachers">教師專用場所</string>
 	<string name="poi_capacity_parent_yes">父母專用場所</string>
 	<string name="poi_capacity_parent_no">無父母專用場所</string>
 	<string name="poi_capacity_parent">父母專用場所</string>
 
+	<string name="poi_aerialway_occupancy">座艙/席位/載客量</string>
+	<string name="poi_aerialway_capacity">每小時載客量</string>
+	<string name="poi_aerialway_duration">平均行程時間，分鐘</string>
+	<string name="poi_aerialway_bubble_yes">安全罩</string>
+	<string name="poi_aerialway_bubble_no">無安全罩</string>
+	<string name="poi_aerialway_heating_yes">暖氣</string>
+	<string name="poi_aerialway_heating_no">無暖氣</string>
+	<string name="poi_aerialway_bicycle_yes">自行車：允許</string>
+	<string name="poi_aerialway_bicycle_no">自行車：不允許</string>
+	<string name="poi_aerialway_bicycle_summer">自行車：只在夏天允許</string>
+	<string name="poi_aerialway_access_entry">入口</string>
+	<string name="poi_aerialway_access_exit">出口</string>
+	<string name="poi_aerialway_access_both">出入口</string>
 	</resources>
