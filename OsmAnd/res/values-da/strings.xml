@@ -2137,4 +2137,5 @@
 	<string name="simulate_your_location_stop_descr">Stop simulering af position</string>
     <string name="simulate_your_location_descr">Simuler ved brug af optaget GPX eller beregnet rute</string>
     <string name="downloads_left_template">%1$s filhentninger tilbage</string>
+<string name="roads">Veje</string>
 </resources>
