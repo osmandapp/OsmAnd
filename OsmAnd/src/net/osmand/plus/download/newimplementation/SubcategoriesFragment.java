@@ -1,6 +1,7 @@
 package net.osmand.plus.download.newimplementation;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -57,7 +58,7 @@ public class SubcategoriesFragment extends Fragment {
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				final HasName item = mAdapter.getItem(position);
+				final HasName item = mAdapter.getItem(position - 1);
 				if (item instanceof IndexItemCategoryWithSubcat) {
 					((MapsInCategoryFragment) getParentFragment())
 							.onCategorySelected((IndexItemCategoryWithSubcat) item);
@@ -105,9 +106,30 @@ public class SubcategoriesFragment extends Fragment {
 			} else {
 				viewHolder = (ViewHolder) convertView.getTag();
 			}
-			viewHolder.nameTextView.setText(getItem(position).getName());
-			// TODO replace with real values
-			viewHolder.descrTextView.setText("Map, Roads, Contour lines, Wikipedia");
+			HasName item = getItem(position);
+			if (item instanceof IndexItemCategoryWithSubcat) {
+				IndexItemCategoryWithSubcat category = (IndexItemCategoryWithSubcat) item;
+				viewHolder.nameTextView.setText(category.getName());
+				if (category.types.size() > 0) {
+					StringBuilder stringBuilder = new StringBuilder();
+					Resources resources = getContext().getResources();
+					for (Integer mapType : category.types) {
+						stringBuilder.append(resources.getString(mapType));
+						stringBuilder.append(", ");
+					}
+					LOG.debug("stringBuilder=" + stringBuilder);
+					stringBuilder.delete(stringBuilder.capacity() - 3, stringBuilder.capacity());
+					viewHolder.descrTextView.setText(stringBuilder.toString());
+				} else {
+					// TODO replace with string constant
+					viewHolder.descrTextView.setText("Others");
+				}
+				LOG.debug("category.types=" + category.types);
+			} else {
+				viewHolder.nameTextView.setText(item.getName());
+				// TODO replace with real values
+				viewHolder.descrTextView.setText("Temp values");
+			}
 			viewHolder.leftImageView.setImageDrawable(iconsCache.getContentIcon(R.drawable.ic_map));
 			return convertView;
 		}

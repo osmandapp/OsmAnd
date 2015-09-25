@@ -2099,4 +2099,6 @@
 <string name="simulate_your_location_stop_descr">Спыніць эмуляцыю свайго становішча</string>
     <string name="simulate_your_location_descr">Эмуляваць, выкарыстоўваючы запісаны GPX або разьлічаны маршрут</string>
     <string name="downloads_left_template">%1$s сьцягваньняў засталося</string>
+<string name="shared_string_wikipedia">Вікіпэдыя</string>
+    <string name="roads">Дарогі</string>
 </resources>

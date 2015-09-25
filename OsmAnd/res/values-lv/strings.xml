@@ -2071,7 +2071,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="disable_recording_once_app_killed_descrp">GPX loggings tiks nopauzēts, ja aplikāciju nobeidzēs (caur nesenajiem appiem). (OsmAnd fona servisa indikācija pazudīs no Android piezīmju joslas)</string>
     <string name="shared_string_import2osmand">Importēt OsmAndā</string>
     <string name="read_full_article">Lasīt visu rakstu (onlainā)</string>
-    <string name="download_wikipedia_item">Vikipēdija</string>
+    <string name="shared_string_wikipedia">Vikipēdija</string>
     <string name="local_indexes_cat_wiki">Vikipēdija</string>
     <string name="shared_string_show_details">Rādīt detaļas</string>
     <string name="osm_edit_context_menu_delete">Dzēst OSM labojumu</string>

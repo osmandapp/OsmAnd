@@ -1986,7 +1986,7 @@
     <string name="osmo_share_my_location">Поделиться моим местоположением</string>
     <string name="shared_string_logoff">Выход</string>
     <string name="index_name_netherlands">Европа - Нидерланды</string>
-	<string name="download_wikipedia_item">Википедия</string>
+	<string name="shared_string_wikipedia">Википедия</string>
     <string name="local_indexes_cat_wiki">Википедия</string>
     <string name="shared_string_show_details">Показать детали</string>
     <string name="download_wikipedia_maps">Википедия</string>

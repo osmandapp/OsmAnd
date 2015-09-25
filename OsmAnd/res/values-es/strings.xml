@@ -2078,7 +2078,7 @@
     <string name="osm_edit_context_menu_delete">Borrar edición de OSM</string>    
     <string name="shared_string_import2osmand">Importar a OsmAnd</string>
     <string name="read_full_article">Leer el artículo completo (en línea)</string>
-    <string name="download_wikipedia_item">Wikipedia</string>
+    <string name="shared_string_wikipedia">Wikipedia</string>
     <string name="local_indexes_cat_wiki">Wikipedia</string>
     <string name="shared_string_show_details">Mostrar detalles</string>
     <string name="local_recordings_delete_all_confirm">Va a borrar %1$d notas. ¿Está seguro?</string>

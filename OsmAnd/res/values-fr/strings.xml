@@ -2041,7 +2041,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="osm_edit_context_menu_delete">Supprimer la modification OSM</string>    
     <string name="shared_string_show_details">Afficher les détails</string>
     <string name="read_full_article">Lire l\'article complet (en ligne)</string>
-    <string name="download_wikipedia_item">Wikipédia</string>
+    <string name="shared_string_wikipedia">Wikipédia</string>
     <string name="local_indexes_cat_wiki">Wikipédia</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="shared_string_import2osmand">Importer dans OsmAnd</string>
@@ -2155,4 +2155,10 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="routing_attr_avoid_shuttle_train_name">Éviter les trains-navettes</string>
 	<string name="av_locations_descr">Fichier GPS avec notes</string>
     <string name="tag_poi_amenity">aménité</string>
-	</resources>
+	<string name="simulate_your_location_stop_descr">Arrêter de simuler votre position</string>
+    <string name="simulate_your_location_descr">Simuler la position à partir d\'un fichier GPX ou d\'une route</string>
+    <string name="are_you_sure">Etes-vous certain ?</string>
+	<string name="unsaved_changes_will_be_lost">Les modifications non enregistrées seront perdues. Souhaitez-vous poursuivre ?</string>
+	<string name="downloads_left_template">%1$s téléchargement(s) restant(s)</string>
+	<string name="roads">Routes</string>
+</resources>

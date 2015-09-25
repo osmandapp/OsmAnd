@@ -7,7 +7,7 @@
     <string name="lang_ms">ಮಲೇಷ್ಯಾ</string>
     <string name="download_wikipedia_files">ನೀವು ಅಧಿಕ ವಿಕಿಪೀಡಿಯ ದತ್ತಾಂಶವನ್ನು (%1$s MB) ಡೌನ್ ಲೋಡ್ ಮಾಡಲು ಇಚ್ಚಿಸುವಿರಾ?</string>
     <string name="read_full_article">ಪೂರ್ಣ ಲೇಖನ ಓದಿ(ಮಿಂಬಲೆಯೊಳಗೆ)</string>
-    <string name="download_wikipedia_item">ವಿಕಿಪೀಡಿಯ</string>
+    <string name="shared_string_wikipedia">ವಿಕಿಪೀಡಿಯ</string>
     <string name="local_indexes_cat_wiki">ವಿಕಿಪೀಡಿಯ</string>
     <string name="shared_string_show_details">ವಿವರಣೆ ತೋರಿಸಿ</string>
     <string name="osm_edit_context_menu_delete">ಒಎಸ್ಎಂ ಸಂಪಾದನೆಯನ್ನು ಅಳಿಸು</string>

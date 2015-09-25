@@ -1960,7 +1960,7 @@
     <string name="osm_edit_context_menu_delete">OSM szerkesztés törlése</string>    
     <string name="shared_string_show_details">Részletek megjelenítése</string>
     <string name="read_full_article">Teljes cikk elolvasása (interneten)</string>
-    <string name="download_wikipedia_item">Wikipédia</string>
+    <string name="shared_string_wikipedia">Wikipédia</string>
     <string name="local_indexes_cat_wiki">Wikipédia</string>
     <string name="download_wikipedia_maps">Wikipédia</string>
     <string name="shared_string_import2osmand">Importálás az OsmAnd programba</string>
