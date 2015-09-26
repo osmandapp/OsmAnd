@@ -9,11 +9,11 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-	<string name="favourites_edit_dialog_title">Favorite informaton</string>
+	<string name="favourites_edit_dialog_title">Favorite information</string>
     <string name="simulate_your_location_stop_descr">Stop simulating your position</string>
     <string name="simulate_your_location_descr">Simulate using recorded GPX or calculated route</string>
     <string name="address_unknown">Address is not known yet</string>
-    <string name="av_locations_descr">Gpx file with note locations</string>
+    <string name="av_locations_descr">GPX file with note locations</string>
     <string name="av_locations">Locations</string>
     <string name="plugin_settings">Plugins</string>
 	<string name="routing_attr_avoid_shuttle_train_name">Avoid shuttle train</string>
@@ -558,7 +558,7 @@
     <string name="gpx_selection_route_points">%1$s \nRoute points %2$s</string>
     <string name="gpx_selection_points">%1$s \nPoints</string>
     <string name="gpx_selection_track">%1$s \nTrack %2$s</string>
-    <string name="gpx_file_is_empty">Gpx track is empty</string>
+    <string name="gpx_file_is_empty">GPX track is empty</string>
     <string name="osmo_user_joined">User %1$s joined group %2$s</string>
     <string name="osmo_user_left">User %1$s left group %2$s</string>
     <string name="osmo_show_group_notifications">Show group notifications</string>
@@ -1957,7 +1957,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="fav_file_to_load_not_found">GPX file containing favorites is not found at {0}</string>
 	<string name="fav_saved_sucessfully">Favorites successfully saved to {0}</string>
 	<string name="no_fav_to_save">No favorite points to save</string>
-	<string name="share_fav_subject">Favourites shared via OsmAnd</string>
+	<string name="share_fav_subject">Favorites shared via OsmAnd</string>
 	<string name="error_occurred_loading_gpx">Error occurred while loading GPX</string>
 	<string name="send_report">Send report</string>
 	<string name="none_region_found">No offline data for regions found on SD card. Download regions from the Internet.</string>
@@ -2265,7 +2265,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="please_specify_poi_type">Please specify POI type.</string>
 	<string name="working_days">Working days</string>
 	<string name="recent_places">Recent places</string>
-	<string name="favourites">Favourites</string>
+	<string name="favourites">Favorites</string>
 	<string name="saved_at_time">Successfully saved at: %1$s</string>
 	<string name="poi_deleted_localy">POI will be deleted once you upload your changes</string>
 	<string name="show_gpx">Show GPX</string>
