@@ -2091,4 +2091,8 @@
 <string name="simulate_your_location_stop_descr">Firma sa simulatzione de sa positzione tua</string>
     <string name="simulate_your_location_descr">Sìmula impreande unu GPX registradu o un’àndala calculada</string>
     <string name="downloads_left_template">Abarrant galu %1$s iscarrigamentos</string>
+<string name="favourites_edit_dialog_title">Informatziones prefèrridas</string>
+    <string name="shared_string_wikipedia">Wikipedia</string>
+    <string name="favourites_context_menu_add">Annanghe unu prefèrridu</string>
+	<string name="roads">Istradas</string>
 </resources>
