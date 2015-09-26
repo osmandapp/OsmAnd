@@ -2292,4 +2292,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 <string name="simulate_your_location_stop_descr">Skončiť simuláciu polohy</string>
     <string name="simulate_your_location_descr">Simulovať pomocou zaznamenaného GPX alebo vypočítanej trasy</string>
     <string name="downloads_left_template">%1$s sťahovaní zostáva</string>
+<string name="favourites_edit_dialog_title">Informácie o obľúbenom bode</string>
+    <string name="favourites_context_menu_add">Pridať obľúbený bod</string>
+	<string name="roads">Cesty</string>
 </resources>
