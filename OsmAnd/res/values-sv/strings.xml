@@ -2002,4 +2002,7 @@
 <string name="simulate_your_location_stop_descr">Sluta simulera din plats</string>
     <string name="simulate_your_location_descr">Simulera med inspelad GPX eller beräknad rutt</string>
     <string name="downloads_left_template">%1$s nedladdningar kvar</string>
-</resources>
+<string name="favourites_edit_dialog_title">Information om favoriter</string>
+    <string name="roads">Vägar</string>
+<string name="favourites_context_menu_add">Lägg till favorit</string>
+	</resources>
