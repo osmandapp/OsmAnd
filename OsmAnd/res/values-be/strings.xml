@@ -2101,4 +2101,6 @@
     <string name="downloads_left_template">%1$s сьцягваньняў засталося</string>
 <string name="shared_string_wikipedia">Вікіпэдыя</string>
     <string name="roads">Дарогі</string>
-</resources>
+<string name="favourites_edit_dialog_title">Зьвесткі пра ўпадабанае</string>
+    <string name="favourites_context_menu_add">Дадаць упадабанае</string>
+	</resources>
