@@ -1632,7 +1632,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     
     
     <string name="osmo_show_group_notifications_descr">Mostra un messaggio popup quando l\'utente aderisce o lascia il gruppo</string>
-    <string name="gpx_file_is_empty">La traccia Gpx è vuota</string>
+    <string name="gpx_file_is_empty">La traccia GPX è vuota</string>
     <string name="gpx_info_start_time">Orario di partenza: %1$tF, %1$tT </string>
 	<string name="gpx_info_average_speed">Velocità media: %1$s </string>
 	<string name="gpx_info_maximum_speed">Velocità massima: %1$s </string>
@@ -2156,7 +2156,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="next_proceed">Avanti</string>
 	<string name="opening_at">Apre alle</string>
 	<string name="closing_at">Chiude alle</string>
-<string name="av_locations_descr">File gpx con note locali</string>
+<string name="av_locations_descr">File GPX con note locali</string>
     <string name="av_locations">Località</string>
     <string name="tag_poi_name">Nome</string>
 	<string name="tag_poi_amenity">amenità</string>
