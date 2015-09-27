@@ -176,6 +176,7 @@ public class OsmandApplication extends Application {
         if(DashRateUsFragment.shouldShow(osmandSettings)) {
             osmandSettings.RATE_US_STATE.set(DashRateUsFragment.RateUsState.IGNORED);
         }
+        getNotificationHelper().removeServiceNotification();
 	}
 
 	public RendererRegistry getRendererRegistry() {
