@@ -61,6 +61,11 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer implemen
 	@Override
 	public synchronized void playCommands(CommandBuilder builder) {
 		if(vrt.isMute()) {
+			StringBuilder bld = new StringBuilder();
+			for (String s : builder.execute()) {
+				bld.append(s).append(' ');
+			}
+			sendAlertToAndroidWear(ctx, bld.toString());
 			return;
 		}
 		filesToPlay.addAll(builder.execute());

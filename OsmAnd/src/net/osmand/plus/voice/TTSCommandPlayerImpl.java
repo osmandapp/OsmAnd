@@ -116,6 +116,8 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 			params.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID,""+System.currentTimeMillis());
 			mTts.speak(bld.toString(), TextToSpeech.QUEUE_ADD, params);
 			// Audio focus will be released when onUtteranceCompleted() completed is called by the TTS engine.
+		} else {
+			sendAlertToAndroidWear(ctx, bld.toString());
 		}
 	}
 
@@ -126,35 +128,20 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 		}
 	}
 
-	public void sendAlertToPebble(String message) {
+	public void sendAlertToPebble(String bld) {
 	    final Intent i = new Intent("com.getpebble.action.SEND_NOTIFICATION");
 	    final Map<String, Object> data = new HashMap<String, Object>();
 	    data.put("title", "Voice");
-	    data.put("body", message);
+	    data.put("body", bld.toString());
 	    final JSONObject jsonData = new JSONObject(data);
 	    final String notificationData = new JSONArray().put(jsonData).toString();
 	    i.putExtra("messageType", PEBBLE_ALERT);
 	    i.putExtra("sender", "OsmAnd");
 	    i.putExtra("notificationData", notificationData);
 	    mTtsContext.sendBroadcast(i);
-	    log.info("Send message to pebble " + message);
+	    log.info("Send message to pebble " + bld.toString());
 	}
 
-	public void sendAlertToAndroidWear(String message) {
-		int notificationId = 1;
-		NotificationCompat.Builder notificationBuilder =
-				new NotificationCompat.Builder(mTtsContext)
-						.setSmallIcon(R.drawable.icon)
-						.setContentTitle(mTtsContext.getString(R.string.app_name))
-						.setContentText(message)
-						.setGroup(WEAR_ALERT);
-
-		// Get an instance of the NotificationManager service
-		NotificationManagerCompat notificationManager =
-				NotificationManagerCompat.from(mTtsContext);
-		// Build the notification and issues it with notification manager.
-		notificationManager.notify(notificationId, notificationBuilder.build());
-	}
 
 	private void initializeEngine(final Context ctx, final Activity act)
 	{

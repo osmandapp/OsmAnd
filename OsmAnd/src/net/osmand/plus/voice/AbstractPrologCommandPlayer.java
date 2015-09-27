@@ -32,6 +32,9 @@ import alice.tuprolog.Struct;
 import alice.tuprolog.Term;
 import alice.tuprolog.Theory;
 import alice.tuprolog.Var;
+import android.content.Context;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 
 public abstract class AbstractPrologCommandPlayer implements CommandPlayer, StateChangedListener<ApplicationMode> {
 
@@ -51,6 +54,8 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 	public static final String A_RIGHT_SL = "right_sl";
 	public static final String A_RIGHT_KEEP = "right_keep";
 	protected static final String DELAY_CONST = "delay_";
+
+	private static final String WEAR_ALERT = "WEAR_ALERT";
 	/** Must be sorted array! */
 	private final int[] sortedVoiceVersions;
 	private AudioFocusHelper mAudioFocusHelper;
@@ -92,6 +97,22 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 	public String[] getLibraries(){
 		return new String[] { "alice.tuprolog.lib.BasicLibrary",
 					"alice.tuprolog.lib.ISOLibrary"/*, "alice.tuprolog.lib.IOLibrary"*/};
+	}
+	
+	public void sendAlertToAndroidWear(Context ctx, String message) {
+		int notificationId = 1;
+		NotificationCompat.Builder notificationBuilder =
+				new NotificationCompat.Builder(ctx)
+						.setSmallIcon(R.drawable.icon)
+						.setContentTitle(ctx.getString(R.string.app_name))
+						.setContentText(message)
+						.setGroup(WEAR_ALERT);
+
+		// Get an instance of the NotificationManager service
+		NotificationManagerCompat notificationManager =
+				NotificationManagerCompat.from(ctx);
+		// Build the notification and issues it with notification manager.
+		notificationManager.notify(notificationId, notificationBuilder.build());
 	}
 
 	@Override

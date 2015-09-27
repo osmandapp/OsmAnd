@@ -5,11 +5,14 @@ import java.util.Arrays;
 import java.util.List;
 
 import net.osmand.PlatformUtil;
+import net.osmand.plus.R;
 
 import org.apache.commons.logging.Log;
 
 import alice.tuprolog.Struct;
 import alice.tuprolog.Term;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 
 public class CommandBuilder {
 	
@@ -249,6 +252,7 @@ public class CommandBuilder {
 	public void play(){
 		this.commandPlayer.playCommands(this);
 	}
+	
 	
 	protected List<String> execute(){
 		alreadyExecuted = true;
