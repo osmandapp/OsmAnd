@@ -158,13 +158,10 @@ public class NotificationHelper {
 		if(newNotification != null) {
 			mNotificationManager.notify(NOTIFICATION_SERVICE_ID, newNotification.build());
 		}
-//		if (stopBroadcastReceiver != null) {
-//			app.unregisterReceiver(stopBroadcastReceiver);
-//			stopBroadcastReceiver = null;
-//		}
-//		if (saveBroadcastReceiver != null) {
-//			app.unregisterReceiver(saveBroadcastReceiver);
-//			saveBroadcastReceiver = null;
-//		}		
+	}
+	
+	public void removeServiceNotificationCompletely() {
+		NotificationManager mNotificationManager = (NotificationManager) app.getSystemService(Context.NOTIFICATION_SERVICE);
+		mNotificationManager.cancel( NOTIFICATION_SERVICE_ID);
 	}
 }
