@@ -672,7 +672,7 @@ public class MapActivity extends AccessibleActivity {
 		mapViewTrackingUtilities.setMapView(null);
 		cancelNotification();
 		if(getMyApplication().getNavigationService() == null) {
-			getMyApplication().getNotificationHelper().removeServiceNotification();
+			getMyApplication().getNotificationHelper().removeServiceNotificationCompletely();
 		}
 		app.getResourceManager().getMapTileDownloader().removeDownloaderCallback(mapView);
 		if (atlasMapRendererView != null) {
