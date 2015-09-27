@@ -599,7 +599,7 @@
     <string name="gpx_selection_track">%1$s
 \nRasta %2$s</string>
     
-    <string name="gpx_file_is_empty">Sa rasta Gpx est boida</string>
+    <string name="gpx_file_is_empty">Sa rasta GPX est boida</string>
     
     <string name="shared_string_my_tracks">Totu sas rastas</string>
     <string name="shared_string_my_favorites">Prefèrridos meos</string>
@@ -2066,7 +2066,7 @@
 	<string name="next_proceed">Imbeniente</string>
 	<string name="opening_at">Aberit a sas</string>
 	<string name="closing_at">Serrat a sas</string>
-<string name="av_locations_descr">Documentu gpx cun notas locales</string>
+<string name="av_locations_descr">Documentu GPX cun notas locales</string>
     <string name="av_locations">Localidades</string>
     <string name="tag_poi_name">nùmene</string>
 	<string name="contact_info">Informatziones de cuntatu</string>
@@ -2095,4 +2095,7 @@
     <string name="shared_string_wikipedia">Wikipedia</string>
     <string name="favourites_context_menu_add">Annanghe unu prefèrridu</string>
 	<string name="roads">Istradas</string>
-</resources>
+<string name="shared_string_trip_recording">Registratzione biàgiu</string>
+    <string name="shared_string_navigation">Nàvigu</string>
+    <string name="osmand_running_in_background">Funtzionamentu in isfondu</string>
+    </resources>
