@@ -118,27 +118,30 @@ public class NotificationHelper {
 				.setContentTitle(Version.getAppName(app)).setContentText(notificationText).setSmallIcon(icon)
 				.setContentIntent(contentPendingIntent).setOngoing(service != null);
 		if (monitoringPlugin != null) {
-			if(service != null && (service.getUsedBy() & NavigationService.USED_BY_GPX) != 0) {
+			Intent saveIntent = new Intent(OSMAND_SAVE_GPX_SERVICE_ACTION);
+			PendingIntent savePendingIntent = PendingIntent.getBroadcast(app, 0, saveIntent,
+					PendingIntent.FLAG_UPDATE_CURRENT);
+
+			if(service != null && service.getUsedBy() == NavigationService.USED_BY_GPX) {
 				Intent stopIntent = new Intent(OSMAND_STOP_GPX_SERVICE_ACTION);
 				PendingIntent stopPendingIntent = PendingIntent.getBroadcast(app, 0, stopIntent,
 						PendingIntent.FLAG_UPDATE_CURRENT);
-
 				notificationBuilder.addAction(R.drawable.ic_action_rec_stop,
-						app.getString(R.string.shared_string_control_stop), stopPendingIntent);				
-			} else {
+						app.getString(R.string.shared_string_control_stop), stopPendingIntent);
+				notificationBuilder.addAction(R.drawable.ic_action_save, app.getString(R.string.shared_string_save),
+						savePendingIntent);
+			} else if(service == null) {
 				Intent startIntent = new Intent(OSMAND_START_GPX_SERVICE_ACTION);
 				PendingIntent startPendingIntent = PendingIntent.getBroadcast(app, 0, startIntent,
 						PendingIntent.FLAG_UPDATE_CURRENT);
 				notificationBuilder.addAction(R.drawable.ic_action_rec_start,
 						app.getString(R.string.shared_string_control_start), startPendingIntent);
+				notificationBuilder.addAction(R.drawable.ic_action_save, app.getString(R.string.shared_string_save),
+						savePendingIntent);
 			}
 
-			Intent saveIntent = new Intent(OSMAND_SAVE_GPX_SERVICE_ACTION);
-			PendingIntent savePendingIntent = PendingIntent.getBroadcast(app, 0, saveIntent,
-					PendingIntent.FLAG_UPDATE_CURRENT);
 
-			notificationBuilder.addAction(R.drawable.ic_action_save, app.getString(R.string.shared_string_save),
-					savePendingIntent);
+			
 		}
 		return notificationBuilder;
 	}
