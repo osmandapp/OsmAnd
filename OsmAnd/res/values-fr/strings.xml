@@ -2165,5 +2165,5 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="favourites_context_menu_add">Ajouter un favori</string>
 	<string name="shared_string_trip_recording">Enregistrement de l\'itinéraire</string>
     <string name="shared_string_navigation">Navigation</string>
-    <string name="osmand_running_in_background">Exécuter en tâche de fond</string>
+    <string name="osmand_running_in_background">Exécution en tâche de fond</string>
     </resources>
