@@ -2065,5 +2065,5 @@
     <string name="osmand_running_in_background">Ejecutando en segundo plano</string>
     <string name="favourites_edit_dialog_title">Información del favorito</string>
     <string name="favourites_context_menu_add">Añadir favorito</string>
-	<string name="roads">Carreteras</string>
+	<string name="roads">Caminos</string>
 </resources>
