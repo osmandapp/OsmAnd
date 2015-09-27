@@ -13,6 +13,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
+import net.osmand.util.Algorithms;
 
 public class FavoritePointEditorFragment extends PointEditorFragment {
 
@@ -69,7 +70,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 
 		if (favorite.getName().equals(point.getName()) &&
 				favorite.getCategory().equals(point.getCategory()) &&
-				favorite.getDescription().equals(point.getDescription())) {
+				Algorithms.stringsEqual(favorite.getDescription(), point.getDescription())) {
 
 			if (needDismiss) {
 				dismiss(true);

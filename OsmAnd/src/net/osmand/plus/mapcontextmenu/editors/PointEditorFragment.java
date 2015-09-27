@@ -6,7 +6,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -25,6 +24,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.widgets.AutoCompleteTextViewEx;
+import net.osmand.util.Algorithms;
 
 import java.util.List;
 
@@ -100,7 +100,9 @@ public abstract class PointEditorFragment extends Fragment {
 		categoryEdit.setAdapter(new ArrayAdapter<>(getMapActivity(), R.layout.list_textview, list));
 
 		EditText descriptionEdit = (EditText) view.findViewById(R.id.description_edit);
-		descriptionEdit.setText(getDescriptionValue());
+		if (getDescriptionValue() != null) {
+			descriptionEdit.setText(getDescriptionValue());
+		}
 
 		ImageView nameImage = (ImageView) view.findViewById(R.id.name_image);
 		nameImage.setImageDrawable(getNameIcon());
@@ -206,7 +208,8 @@ public abstract class PointEditorFragment extends Fragment {
 
 	public String getDescription() {
 		EditText descriptionEdit = (EditText) getView().findViewById(R.id.description_edit);
-		return descriptionEdit.getText().toString().trim();
+		String res = descriptionEdit.getText().toString().trim();
+		return Algorithms.isEmpty(res) ? null : res;
 	}
 
 }

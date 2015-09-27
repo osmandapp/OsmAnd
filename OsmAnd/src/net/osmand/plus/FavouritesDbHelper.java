@@ -180,7 +180,10 @@ public class FavouritesDbHelper {
 		String name = checkEmoticons(p.getName());
 		String category = checkEmoticons(p.getCategory());
 		p.setCategory(category);
-		String description = checkEmoticons(p.getDescription());
+		String description = null;
+		if (p.getDescription() != null) {
+			description = checkEmoticons(p.getDescription());
+		}
 		p.setDescription(description);
 		if (name.length() != p.getName().length()) {
 			emoticons = true;
