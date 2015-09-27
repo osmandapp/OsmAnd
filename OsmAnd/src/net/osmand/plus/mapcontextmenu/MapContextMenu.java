@@ -119,7 +119,7 @@ public class MapContextMenu {
 					Amenity a = (Amenity) object;
 					if (a.getSubType() != null && a.getType() != null) {
 						PoiType pt = a.getType().getPoiTypeByKeyName(a.getSubType());
-						if (pt != null && pt.getOsmTag().equals("place")) {
+						if (pt != null && pt.getOsmTag() != null && pt.getOsmTag().equals("place")) {
 							res = false;
 						}
 					}

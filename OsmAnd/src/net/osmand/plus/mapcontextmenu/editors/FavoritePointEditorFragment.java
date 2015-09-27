@@ -6,17 +6,13 @@ import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import android.widget.Toast;
 
-import net.osmand.access.AccessibleToast;
 import net.osmand.data.FavouritePoint;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
-
-import java.text.MessageFormat;
 
 public class FavoritePointEditorFragment extends PointEditorFragment {
 
