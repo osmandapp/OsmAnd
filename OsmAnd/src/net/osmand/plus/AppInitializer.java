@@ -1,12 +1,13 @@
 package net.osmand.plus;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
@@ -29,23 +30,23 @@ import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.corenative.NativeCoreContext;
+import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.voice.CommandPlayerException;
-import net.osmand.plus.voice.CommandPlayerFactory;
+import net.osmand.plus.voice.MediaCommandPlayerImpl;
+import net.osmand.plus.voice.TTSCommandPlayerImpl;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.util.Algorithms;
 
 import org.xmlpull.v1.XmlPullParserException;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import btools.routingapp.BRouterServiceConnection;
 
 /**
@@ -319,13 +320,32 @@ public class AppInitializer implements IProgress {
 		final ProgressDialog dlg = showDialog ? ProgressDialog.show(uiContext, app.getString(R.string.loading_data),
 				app.getString(R.string.voice_data_initializing)) : null;
 		new Thread(new Runnable() {
+			
+			public CommandPlayer createCommandPlayer(String voiceProvider, OsmandApplication osmandApplication, Activity ctx)
+					throws CommandPlayerException {
+				if (voiceProvider != null) {
+					File parent = osmandApplication.getAppPath(IndexConstants.VOICE_INDEX_DIR);
+					File voiceDir = new File(parent, voiceProvider);
+					if (!voiceDir.exists()) {
+						throw new CommandPlayerException(ctx.getString(R.string.voice_data_unavailable));
+					}
+
+					if (MediaCommandPlayerImpl.isMyData(voiceDir)) {
+						return new MediaCommandPlayerImpl(osmandApplication, osmandApplication.getRoutingHelper().getVoiceRouter(), voiceProvider);
+					} else if (TTSCommandPlayerImpl.isMyData(voiceDir)) {
+						return new TTSCommandPlayerImpl(ctx, osmandApplication.getRoutingHelper().getVoiceRouter(), voiceProvider);
+					}
+					throw new CommandPlayerException(ctx.getString(R.string.voice_data_not_supported));
+				}
+				return null;
+			}
 			@Override
 			public void run() {
 				try {
 					if (app.player != null) {
 						app.player.clear();
 					}
-					app.player = CommandPlayerFactory.createCommandPlayer(voiceProvider, app, uiContext);
+					app.player = createCommandPlayer(voiceProvider, app, uiContext);
 					app.getRoutingHelper().getVoiceRouter().setPlayer(app.player);
 					if(dlg != null) {
 						dlg.dismiss();

@@ -14,6 +14,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.SettingsActivity;
+import net.osmand.plus.routing.VoiceRouter;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -69,10 +70,12 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 	private TextToSpeech mTts;
 	private Context mTtsContext;
 	private HashMap<String, String> params = new HashMap<String, String>();
+	private VoiceRouter vrt;
 
-	protected TTSCommandPlayerImpl(Activity ctx, String voiceProvider)
+	public TTSCommandPlayerImpl(Activity ctx, VoiceRouter vrt, String voiceProvider)
 			throws CommandPlayerException {
 		super((OsmandApplication) ctx.getApplicationContext(), voiceProvider, CONFIG_FILE, TTS_VOICE_VERSION);
+		this.vrt = vrt;
 		if (Algorithms.isEmpty(language)) {
 			throw new CommandPlayerException(
 					ctx.getString(R.string.voice_data_corrupted));
@@ -100,17 +103,16 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 	// Called from the calculating route thread.
 	@Override
 	public synchronized void playCommands(CommandBuilder builder) {
-		if (mTts != null) {
-			final List<String> execute = builder.execute(); //list of strings, the speech text, play it
-			StringBuilder bld = new StringBuilder();
-			for (String s : execute) {
-				bld.append(s).append(' ');
-			}
+		final List<String> execute = builder.execute(); //list of strings, the speech text, play it
+		StringBuilder bld = new StringBuilder();
+		for (String s : execute) {
+			bld.append(s).append(' ');
+		}
+		sendAlertToPebble(bld.toString());
+		if (mTts != null && !vrt.isMute()) {
 			if (ttsRequests++ == 0)
 				requestAudioFocus();
 			log.debug("ttsRequests="+ttsRequests);
-			sendAlertToPebble(bld.toString());
-			
 			params.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID,""+System.currentTimeMillis());
 			mTts.speak(bld.toString(), TextToSpeech.QUEUE_ADD, params);
 			// Audio focus will be released when onUtteranceCompleted() completed is called by the TTS engine.
