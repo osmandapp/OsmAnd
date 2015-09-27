@@ -2153,7 +2153,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="routing_attr_avoid_shuttle_train_description">Éviter les trains-navettes</string>
     <string name="shared_string_card_was_hidden">La carte a été masquée</string>
 	<string name="routing_attr_avoid_shuttle_train_name">Éviter les trains-navettes</string>
-	<string name="av_locations_descr">Fichier GPS avec notes</string>
+	<string name="av_locations_descr">Fichier GPX avec notes</string>
     <string name="tag_poi_amenity">aménité</string>
 	<string name="simulate_your_location_stop_descr">Arrêter de simuler votre position</string>
     <string name="simulate_your_location_descr">Simuler la position à partir d\'un fichier GPX ou d\'une route</string>
