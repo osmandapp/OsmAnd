@@ -2163,4 +2163,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="roads">Routes</string>
 <string name="favourites_edit_dialog_title">Propriétés du favori</string>
     <string name="favourites_context_menu_add">Ajouter un favori</string>
-	</resources>
+	<string name="shared_string_trip_recording">Enregistrement de l\'itinéraire</string>
+    <string name="shared_string_navigation">Navigation</string>
+    <string name="osmand_running_in_background">Exécuter en tâche de fond</string>
+    </resources>
