@@ -584,15 +584,16 @@ public class MapPoiTypes {
 	}
 	
 	public boolean isTextAdditionalInfo(String key, String value) {
-		if(key.startsWith("name:") || key.equals("name")) {
+		if (key.startsWith("name:") || key.equals("name")) {
 			return true;
 		}
-		initPoiTypesByTag();
-		PoiType pat = poiTypesByTag.get(key+"/"+value);
-		if(pat == null) {
-			 pat = poiTypesByTag.get(key);
-		}
-		if(pat == null) {
+		PoiType pat = (PoiType) getAnyPoiAdditionalTypeByKey(key);
+//		initPoiTypesByTag();
+//		PoiType pat = poiTypesByTag.get(key + "/" + value);
+//		if (pat == null) {
+//			pat = poiTypesByTag.get(key);
+//		}
+		if (pat == null) {
 			return true;
 		} else {
 			return pat.isText();
