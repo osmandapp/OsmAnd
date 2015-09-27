@@ -1,38 +1,68 @@
 package net.osmand.plus.download.newimplementation;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
 
+import net.osmand.PlatformUtil;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.HasName;
 
+import org.apache.commons.logging.Log;
+
 public class MapsInCategoryFragment extends DialogFragment {
+	private static final Log LOG = PlatformUtil.getLog(IndexItemCategoryWithSubcat.class);
 	public static final String TAG = "MapsInCategoryFragment";
 	private static final String CATEGORY = "category";
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		boolean isLightTheme = ((OsmandApplication) getActivity().getApplication())
+				.getSettings().OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME;
+		int themeId = isLightTheme ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
+		setStyle(STYLE_NO_FRAME, themeId);
+	}
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+							 Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.maps_in_category_fragment, container, false);
 
 		IndexItemCategoryWithSubcat category = getArguments().getParcelable(CATEGORY);
 		assert category != null;
-		ListView listView = (ListView) view.findViewById(android.R.id.list);
-		final MapFilesAdapter mAdapter = new MapFilesAdapter(getActivity());
-		listView.setAdapter(mAdapter);
-		mAdapter.add(new Divider("maps"));
-		mAdapter.addAll(category.items);
-		mAdapter.add(new Divider("subcategories"));
-		mAdapter.addAll(category.subcats);
+		getChildFragmentManager().beginTransaction().add(R.id.fragmentContainer,
+				SubcategoriesFragment.createInstance(category)).commit();
+
+
+		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+		toolbar.setTitle(category.getName());
+		toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				dismiss();
+			}
+		});
 
 		return view;
+	}
+
+	public void onCategorySelected(@NonNull IndexItemCategoryWithSubcat category) {
+		LOG.debug("onCategorySelected()");
+		getChildFragmentManager().beginTransaction().replace(R.id.fragmentContainer,
+				SubcategoriesFragment.createInstance(category)).addToBackStack(null).commit();
+	}
+
+	public void onIndexItemSelected(@NonNull IndexItem indexItem) {
+		LOG.debug("onIndexItemSelected()");
 	}
 
 	public static MapsInCategoryFragment createInstance(
@@ -42,33 +72,6 @@ public class MapsInCategoryFragment extends DialogFragment {
 		MapsInCategoryFragment fragment = new MapsInCategoryFragment();
 		fragment.setArguments(bundle);
 		return fragment;
-	}
-
-	private static class MapFilesAdapter extends ArrayAdapter<HasName> {
-
-		public MapFilesAdapter(Context context) {
-			super(context, R.layout.simple_list_menu_item);
-		}
-
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			ViewHolder viewHolder;
-			if (convertView == null) {
-				convertView = LayoutInflater.from(parent.getContext())
-						.inflate(R.layout.simple_list_menu_item, parent, false);
-				viewHolder = new ViewHolder();
-				viewHolder.textView = (TextView) convertView.findViewById(R.id.title);
-				convertView.setTag(viewHolder);
-			} else {
-				viewHolder = (ViewHolder) convertView.getTag();
-			}
-			viewHolder.textView.setText(getItem(position).getName());
-			return convertView;
-		}
-
-		private static class ViewHolder {
-			TextView textView;
-		}
 	}
 
 	public static class Divider implements HasName {

@@ -9,10 +9,11 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+	<string name="favourites_edit_dialog_title">Favorite information</string>
     <string name="simulate_your_location_stop_descr">Stop simulating your position</string>
     <string name="simulate_your_location_descr">Simulate using recorded GPX or calculated route</string>
     <string name="address_unknown">Address is not known yet</string>
-    <string name="av_locations_descr">Gpx file with note locations</string>
+    <string name="av_locations_descr">GPX file with note locations</string>
     <string name="av_locations">Locations</string>
     <string name="plugin_settings">Plugins</string>
 	<string name="routing_attr_avoid_shuttle_train_name">Avoid shuttle train</string>
@@ -81,7 +82,7 @@
     <string name="disable_recording_once_app_killed_descrp">Will pause GPX logging when the app is killed (via recent apps). (OsmAnd background indication disappears from the Android notification bar.)</string>
     <string name="shared_string_import2osmand">Import to OsmAnd</string>
     <string name="read_full_article">Read full article (online)</string>
-    <string name="download_wikipedia_item">Wikipedia</string>
+    <string name="shared_string_wikipedia">Wikipedia</string>
     <string name="local_indexes_cat_wiki">Wikipedia</string>
     <string name="shared_string_show_details">Show details</string>
     <string name="osm_edit_context_menu_delete">Delete OSM Edit</string>
@@ -557,7 +558,7 @@
     <string name="gpx_selection_route_points">%1$s \nRoute points %2$s</string>
     <string name="gpx_selection_points">%1$s \nPoints</string>
     <string name="gpx_selection_track">%1$s \nTrack %2$s</string>
-    <string name="gpx_file_is_empty">Gpx track is empty</string>
+    <string name="gpx_file_is_empty">GPX track is empty</string>
     <string name="osmo_user_joined">User %1$s joined group %2$s</string>
     <string name="osmo_user_left">User %1$s left group %2$s</string>
     <string name="osmo_show_group_notifications">Show group notifications</string>
@@ -1956,7 +1957,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="fav_file_to_load_not_found">GPX file containing favorites is not found at {0}</string>
 	<string name="fav_saved_sucessfully">Favorites successfully saved to {0}</string>
 	<string name="no_fav_to_save">No favorite points to save</string>
-	<string name="share_fav_subject">Favourites shared via OsmAnd</string>
+	<string name="share_fav_subject">Favorites shared via OsmAnd</string>
 	<string name="error_occurred_loading_gpx">Error occurred while loading GPX</string>
 	<string name="send_report">Send report</string>
 	<string name="none_region_found">No offline data for regions found on SD card. Download regions from the Internet.</string>
@@ -2165,6 +2166,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="add_favorite_dialog_top_text">Enter favorite name</string>
 	<string name="add_favorite_dialog_default_favourite_name">Favorite</string>
 	<string name="add_favorite_dialog_favourite_added_template">Favorite point \'\'{0}\'\' was added successfully.</string>
+	<string name="favourites_context_menu_add">Add favorite</string>
 	<string name="favourites_context_menu_edit">Edit favorite</string>
 	<string name="favourites_context_menu_delete">Delete favorite</string>
 	<string name="favourites_remove_dialog_msg">Remove favorite point \'%s\'?</string>
@@ -2263,7 +2265,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="please_specify_poi_type">Please specify POI type.</string>
 	<string name="working_days">Working days</string>
 	<string name="recent_places">Recent places</string>
-	<string name="favourites">Favourites</string>
+	<string name="favourites">Favorites</string>
 	<string name="saved_at_time">Successfully saved at: %1$s</string>
 	<string name="poi_deleted_localy">POI will be deleted once you upload your changes</string>
 	<string name="show_gpx">Show GPX</string>
@@ -2271,4 +2273,5 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="are_you_sure">Are you sure?</string>
 	<string name="unsaved_changes_will_be_lost">Any unsaved changes will be lost. Continue?</string>
 	<string name="downloads_left_template">%1$s downloads left</string>
+	<string name="roads">Roads</string>
 </resources>

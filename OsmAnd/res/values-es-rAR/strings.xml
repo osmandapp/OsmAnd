@@ -1939,7 +1939,7 @@
     <string name="rendering_value_walkingRoutesOSMC_name">Colorear según OSMC</string>
     <string name="osm_edit_context_menu_delete">Quitar edición OSM</string>    
     <string name="read_full_article">Leer artículo completo (en línea)</string>
-    <string name="download_wikipedia_item">Wikipedia</string>
+    <string name="shared_string_wikipedia">Wikipedia</string>
     <string name="local_indexes_cat_wiki">Wikipedia</string>
     <string name="shared_string_show_details">Ver detalles</string>
     <string name="download_wikipedia_maps">Wikipedia</string>

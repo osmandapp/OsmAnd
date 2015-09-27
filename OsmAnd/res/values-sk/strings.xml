@@ -1655,7 +1655,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="osmo_mode_on">Zastaviť reláciu OsMo</string>    
     <string name="osmo_mode_off">Spustiť reláciu OsMo</string>
     
-	<string name="share_fav_subject">Obľúbené zdieľané cez OsmAnd</string>
+	<string name="share_fav_subject">Obľúbené body zdieľané cez OsmAnd</string>
 	<string name="tip_recent_changes_1_8_alpha">Zmeny v 1.8:
         * Počítanie trasy medzi bodmi v GPX stope
         * Zmenené rozmiestnenie krajín na stiahnutie (podporuje vyhľadanie podľa lokálnych názvov)
@@ -2172,7 +2172,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="rendering_value_walkingRoutesOSMC_name">Zafarbenie podľa OSMC</string>
     <string name="osm_edit_context_menu_delete">Odstrániť OSM zmenu</string>
     <string name="read_full_article">Prečítať celý článok (online)</string>
-    <string name="download_wikipedia_item">Wikipedia</string>
+    <string name="shared_string_wikipedia">Wikipedia</string>
     <string name="local_indexes_cat_wiki">Wikipedia</string>
     <string name="shared_string_show_details">Zobraziť detaily</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
@@ -2292,4 +2292,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 <string name="simulate_your_location_stop_descr">Skončiť simuláciu polohy</string>
     <string name="simulate_your_location_descr">Simulovať pomocou zaznamenaného GPX alebo vypočítanej trasy</string>
     <string name="downloads_left_template">%1$s sťahovaní zostáva</string>
+<string name="favourites_edit_dialog_title">Informácie o obľúbenom bode</string>
+    <string name="favourites_context_menu_add">Pridať obľúbený bod</string>
+	<string name="roads">Cesty</string>
 </resources>

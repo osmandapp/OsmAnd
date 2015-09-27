@@ -2033,7 +2033,7 @@
     <string name="gps_network_not_enabled">Neįjungta vietos nustatymo paslauga. Įjungti?</string>
     <string name="shared_string_import2osmand">Importavimas į OsmAnd</string>
     <string name="read_full_article">Skaityti visą straipsnį (internete)</string>
-    <string name="download_wikipedia_item">Vikipedija</string>
+    <string name="shared_string_wikipedia">Vikipedija</string>
     <string name="local_indexes_cat_wiki">Vikipedija</string>
     <string name="shared_string_show_details">Rodyti detales</string>
     <string name="osm_edit_context_menu_delete">Ištrinti OSM taisymus</string>
@@ -2141,4 +2141,7 @@
 	<string name="offline_maps_and_navigation">Offline žemėlapiai\n&amp; navigacija</string>
 	<string name="commit_poi"/>
 	<string name="count_of_lines">Eilučių kiekis</string>
+<string name="are_you_sure">Ar įsitikinę?</string>
+	<string name="unsaved_changes_will_be_lost">Neišsaugoti duomenys bus prarasti. Ar norite tęsti?</string>
+	<string name="downloads_left_template">%1$s liko atsisiųsti</string>
 </resources>

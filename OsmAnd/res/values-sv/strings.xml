@@ -1884,7 +1884,7 @@
     <string name="osm_edit_context_menu_delete">Ta bort OSM-redigering</string>    
     <string name="rendering_value_walkingRoutesOSMC_name">Färgläggning efter OSMC</string>
     <string name="read_full_article">Läs hela artikeln (online)</string>
-    <string name="download_wikipedia_item">Wikipedia</string>
+    <string name="shared_string_wikipedia">Wikipedia</string>
     <string name="local_indexes_cat_wiki">Wikipedia</string>
     <string name="shared_string_show_details">Visa detaljer</string>
     <string name="local_recordings_delete_all_confirm">Du håller på att ta bort %1$d anteckningar. Är du säker?</string>
@@ -2002,4 +2002,7 @@
 <string name="simulate_your_location_stop_descr">Sluta simulera din plats</string>
     <string name="simulate_your_location_descr">Simulera med inspelad GPX eller beräknad rutt</string>
     <string name="downloads_left_template">%1$s nedladdningar kvar</string>
-</resources>
+<string name="favourites_edit_dialog_title">Information om favoriter</string>
+    <string name="roads">Vägar</string>
+<string name="favourites_context_menu_add">Lägg till favorit</string>
+	</resources>

@@ -79,7 +79,7 @@
 	<string name="email">elektronski naslov</string>
 <string name="tip_recent_changes_0_8_4_t">"Spremembe v 0.8.4:
 \n\t* Odpravljene so nekatere napake delovanja\n\t* Zemljevid med prekinitvami ne izgubi pridobljenega položaja
-\n\t* Med navigacijo je omogočeno izvajanje storitev v pripravljenosti "</string>
+\n\t* Med navigacijo omogoči delovanje storitev v ozadju "</string>
     <string name="tip_recent_changes_0_8_3_t">"Spremembe v 0.8.3:
 \n\t* Vmesne točke
 \n\t* Izboljšano vodenje po poti\n\t* Možnost izogibanja avtocestam pri pripravi poti\n\t* Dodana nova vrsta kolesarske poti na zemljevid (Cycleway)
@@ -347,8 +347,8 @@
 	<string name="map_widget_view_direction">Smer gledanja</string>
 	<string name="map_widget_transparent">Prosojni bočni pult</string>
 	<string name="use_transparent_map_theme">Prosojna tema</string>
-	<string name="bg_service_sleep_mode_off">Omogoči\n način spanja</string>
-	<string name="bg_service_sleep_mode_on">Ustavi\n način spanja</string>
+	<string name="bg_service_sleep_mode_off">Omogoči\n ozadnji način delovanja</string>
+	<string name="bg_service_sleep_mode_on">Zaustavi\n ozadnji način delovanja</string>
 	<string name="gps_wakeup_interval">Interval prebujanja GPS: na %s</string>
 	<string name="int_continuosly">neprekinjeno delovanje</string>
 	<string name="screen_is_locked">Za odklepanje zaslona pritisnite ikono ključavnice</string>
@@ -408,7 +408,7 @@
 \n\t* Izboljšano usmerjanje: hitrejše in natančnejše; do 250 km
 \n\t* Možnost prikaza le cest
 \n\t* Zemljevid med prekinitvami ne izgubi pridobljenega položaja
-\n\t* Med navigacijo je omogočeno izvajanje storitev v pripravljenosti "</string>
+\n\t* Med navigacijo omogoči delovanje storitev v ozadju "</string>
     <string name="close_changeset">Zapri paket sprememb</string>
 	<string name="zxing_barcode_scanner_not_found">Program ZXing Barcode Scanner ni nameščen. Ali želite program poiskati?</string>
 	<string name="rendering_attr_roadColors_description">Izberite barvno shemo cest:</string>
@@ -444,7 +444,7 @@
 	<string name="osmand_development_plugin_description">Vstavek omogoča prikaz nastavitev za razvoj in razhroščevanje programa. Med možnostmi so simuliranje vodenja poti, hitrost izrisovanja zemljevida na zaslonu, glasovni opomniki in podobno. Nastavitve so namenjene razvijalcem programske opreme.</string>
 	
 	<string name="osmand_accessibility_description">Vstavek omogoča nastavljanje in uporabo možnosti dostopnosti pri uporabi programa OsmAnd. Podpira prilagajanje hitrosti govora med vodenjem, nastavljanje prikaza zaslona in prikaz sledilnika za nadzor pogleda zemljevida. Omogoča tudi glasovno objavljanje mesta.</string>
-	<string name="osmand_background_plugin_description">Prikaži nastavitve za sledenje in navigacijo v načinu pripravljenosti (izklopljen zaslon) in občasno uporabo GPS.</string>
+	<string name="osmand_background_plugin_description">Prikaži nastavitve za sledenje in navigacijo v ozadnjem načinu (izklopljen zaslon) in občasno uporabo GPS.</string>
 	<string name="shared_string_close">Zapri</string>
 	<string name="opening_hours">Delovni čas</string>
 	<string name="send_location_way_choose_title">Za objavljanje trenutnega mesta uporabi:</string>
@@ -684,8 +684,8 @@
 	<string name="settings_preset">Privzeti profil</string>
 	<string name="global_settings">Splošne nastavitve</string>
 	<string name="index_settings">Upravljalnik datotek zemljevidov</string>
-	<string name="osmand_service">Način pripravljenosti</string>
-	<string name="osmand_service_descr">Uporabi za izvajanje OsmAnd, ko je zaslon izklopljen</string>
+	<string name="osmand_service">Način delovanja v ozadju</string>
+	<string name="osmand_service_descr">Osmand se zažene v ozadju, ko je zaslon izklopljen</string>
 	
 	<string name="tip_day_night_mode">Dnevni/Nočni način</string>
 	<string name="daynight_mode_auto">Glede na sončni vzhod in zahod</string>
@@ -886,7 +886,7 @@
 	<string name="background_service_provider_descr">Izberite ponudnika določevanja mesta med izvajanjem v ozadju</string>
 	<string name="background_service_provider">Ponudnik mesta</string>
 	<string name="background_router_service_descr">Izvaja OsmAnd v ozadju in omogoča spremljanje položaja, ko je zaslon izklopljen</string>
-	<string name="background_router_service">Izvajaj v ozadju</string>
+	<string name="background_router_service">Zaženi OsmAnd v ozadju</string>
 	<string name="off_router_service_no_gps_available">Storitev navigacije v ozadju zahteva, da je zagnan vsaj en program, ki zahteva te podatke.</string>
 	<string name="search_poi_filter">Filter</string>
 	
@@ -1215,9 +1215,9 @@
 	<string name="av_photo_play_sound_descr">Ali naj se med fotografiranjem predvaja zvok</string>
 
 	
-    <string name="speak_speed_limit">Najavi omejitve hitrosti</string>
-    <string name="speak_cameras">Najavi hitrostne kamere</string>
-	<string name="speak_traffic_warnings">Najavi prometna opozorila</string>
+    <string name="speak_speed_limit">Omejitve hitrosti</string>
+    <string name="speak_cameras">Hitrostne kamere</string>
+	<string name="speak_traffic_warnings">Pometna opozorila</string>
 	<string name="tip_recent_changes_1_5_t">"Spremembe v 1.5:
 \n\t* Glasovna opozorila o omejitvah hitrosti in kamere\n\t* Več možnosti glasovnih pozivov (najavljanje imen ulic)\n\t* Ikone za mape visoke gostote\n\t* Veliko sprememb v uporabniškem vmesniku\n\t* Popravek hroščev pri prikazu razdalj, analizatorju GPX, upravljanju točk, orodju za načrtovanje, nalaganje na OSM, pri uporabi protokola HTTPS in drugo "</string>
     <string name="osb_author_or_password_not_specified">V nastavitvah je treba določiti uporabniško ime in geslo za OSM</string>
@@ -1233,10 +1233,10 @@
     <string name="osb_author_dialog_password">Geslo OSM (neobvezno)</string>
         
     
-    <string name="announce_gpx_waypoints">Najavljanje vmesnih točk GPX</string>
+    <string name="announce_gpx_waypoints">Vmesne točke GPX</string>
     <string name="speak_title">Najavi …</string>
 	<string name="speak_descr">Nastavitve za najavljanje imen ulic, prometnih opozoril (ležeče ovire in podobno), opozoril merilnikov hitrosti, omejitve hitrosti in drugo</string>
-	<string name="speak_street_names">Najavi imena ulic (TTS)</string>
+	<string name="speak_street_names">Imena ulic (TTS)</string>
     <string name="map_widget_fps_info">Podatki razhroščevanja FPS</string>
 	<string name="driving_region_descr">Izbira določil vožnje: ZDA, Evropa, Velika Britanija, Azija in druga</string>
 	<string name="driving_region">Režim vožnje</string>
@@ -1541,9 +1541,9 @@
     <string name="no_index_file_to_download">Prejetih datotek ni mogoče najti. Preverite internetno povezavo.</string>
     <string name="keep_navigation_service">Obdrži</string>
 	<string name="stop_navigation_service">Prekini</string>
-	<string name="enable_sleep_mode">Način delovanja sprejemnika GPS</string>
+	<string name="enable_sleep_mode">Omogoči način delovanja GPS v ozadju</string>
 	<string name="gps_wake_up_timer">Interval prebujanja GPS</string>
-	<string name="sleep_mode_stop_dialog">Nastavitve delovanja sprejemnika GPS</string>
+	<string name="sleep_mode_stop_dialog">Ali želite prekiniti ozadnji način GPS?</string>
 	<string name="map_preferred_locale_descr">Prednostno uporabljeni jezik oznak na zemljevidu (če jezik ni na voljo, so uporabljene angleške ali krajevne oznake)</string>
     <string name="map_preferred_locale">Jezik oznak na zemljevidu</string>
     <string name="local_map_names">Krajevna imena</string>
@@ -1610,7 +1610,7 @@
     <string name="rendering_value_pedestrian_name">Pešačenje</string>
     
     <string name="way_alarms">Prometna opozorila</string>
-    <string name="speak_favorites">Najavi bližnje priljubljene točke</string>
+    <string name="speak_favorites">Bližnje priljubljene točke</string>
     <string name="int_hour">ur</string>
     <string name="duration">Trajanje</string>
     <string name="distance">Razdalja</string>
@@ -1624,7 +1624,7 @@
 	<string name="record_plugin_name">Dnevnik potovanj</string>
     <string name="index_tours">Izleti</string>
     <string name="waypoints">Vmesne točke</string>
-    <string name="speak_poi">Najavi bližnje točke POI</string>
+    <string name="speak_poi">Bližnje točke POI</string>
     <string name="rendering_value_browse_map_name">Poišči na zemljevidu</string>  
     <string name="rendering_attr_alpineHiking_description">Izriši poti po lestvici SAC</string>
     <string name="pause_navigation">Ustavi navigacijo</string>
@@ -1718,7 +1718,7 @@
     <string name="osmo_use_https_descr">Uporabi varno povezavo s strežnikom</string>
     <string name="error_avoid_specific_road">Ni najdenih možnosti obvoza</string>
     <string name="voices">Glasovna navodila</string>
-	<string name="speak_pedestrian">Najavi prehode za pešce</string>
+	<string name="speak_pedestrian">Prehodi za pešce</string>
     <string name="navigate_point_zone">Območje</string>
     <string name="navigate_point_northing">Koordinata v smeri proti severu</string>
     <string name="navigate_point_easting">Koordinata v smeri proti vzhodu</string>
@@ -1867,7 +1867,7 @@
     <string name="rendering_value_walkingRoutesOSMC_name">Barvanje poti po OSMC</string>
     <string name="osm_edit_context_menu_delete">Izbriši urejanje OSM</string>    
     <string name="read_full_article">Pokaži celoten prispevek</string>
-    <string name="download_wikipedia_item">Wikipedija</string>
+    <string name="shared_string_wikipedia">Wikipedija</string>
     <string name="local_indexes_cat_wiki">Wikipedija</string>
     <string name="shared_string_show_details">Pokaži podrobnosti</string>
     <string name="download_wikipedia_maps">Wikipedija</string>
@@ -1981,4 +1981,13 @@
 	<string name="saved_at_time">Uspešno shranjeno ob: %1$s</string>
 	<string name="poi_deleted_localy">Točka POI bo izbrisana po pošiljanju sprememb</string>
 	<string name="show_gpx">Pokaži GPX</string>
+<string name="simulate_your_location_stop_descr">Zaustavi simuliranje položaja</string>
+    <string name="simulate_your_location_descr">Simuliraj s shranjeno potjo GPX oziroma izračunano potjo</string>
+    <string name="address_unknown">Naslov še ni znan</string>
+    <string name="show_on_start">Pokaži ob zagonu</string>
+	<string name="count_of_lines">Seštevek vrstic</string>
+	<string name="are_you_sure">Ali ste prepričani?</string>
+	<string name="unsaved_changes_will_be_lost">Vse neshranjene spremembe bodo izgubljene. Ali želite nadaljevati?</string>
+	<string name="downloads_left_template">%1$s prejemov v vrsti</string>
+	<string name="roads">Poti</string>
 </resources>

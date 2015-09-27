@@ -2135,7 +2135,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="disable_recording_once_app_killed_descrp">Po zakończeniu pracy aplikacji wstrzymuje rejestrowanie trasy. (Ikona pracy w tle znika z paska powiadomień)</string>
     <string name="shared_string_import2osmand">Import do OsmAnd</string>
     <string name="read_full_article">Czytaj cały artykuł (online)</string>
-    <string name="download_wikipedia_item">Wikipedia</string>
+    <string name="shared_string_wikipedia">Wikipedia</string>
     <string name="local_indexes_cat_wiki">Wikipedia</string>
     <string name="shared_string_show_details">Pokaż szczegóły</string>
     <string name="local_recordings_delete_all_confirm">Usunąć %1$d notatek?</string>

@@ -407,8 +407,8 @@ public class ContextMenuAdapter {
 			}
 
 			String itemDescr = getItemDescr(position);
-			if (convertView.findViewById(R.id.descr) != null) {
-				((TextView) convertView.findViewById(R.id.descr)).setText(itemDescr);
+			if (convertView.findViewById(R.id.description) != null) {
+				((TextView) convertView.findViewById(R.id.description)).setText(itemDescr);
 			}
 			return convertView;
 		}

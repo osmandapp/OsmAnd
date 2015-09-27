@@ -2261,7 +2261,7 @@
     <string name="disable_recording_once_app_killed_descrp">앱이 죽을 때 GPX 로깅은 일시 중지 합니다. (OsmAnd 절전 모드 표시는 안드로이드 알림 표시줄에서 사라집니다.)</string>
 	<string name="shared_string_import2osmand">OsmAnd로 가져오기</string>
     <string name="read_full_article">전체 기사 읽기 (온라인)</string>
-    <string name="download_wikipedia_item">위키백과</string>
+    <string name="shared_string_wikipedia">위키백과</string>
     <string name="local_indexes_cat_wiki">위키백과</string>
     <string name="shared_string_show_details">세부 정보 보기</string>
     <string name="osm_edit_context_menu_delete">OSM 편집을 삭제</string>

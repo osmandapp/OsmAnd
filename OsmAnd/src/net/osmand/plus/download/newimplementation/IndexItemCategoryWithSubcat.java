@@ -11,6 +11,7 @@ import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.HasName;
 
@@ -23,19 +24,22 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.TreeSet;
 
 public class IndexItemCategoryWithSubcat implements Comparable<IndexItemCategoryWithSubcat>,
-		Parcelable, HasName {
+		HasName, Parcelable {
 	private static final Log LOG = PlatformUtil.getLog(IndexItemCategoryWithSubcat.class);
 
 	public final List<IndexItem> items;
 	public final List<IndexItemCategoryWithSubcat> subcats;
 	public final CategoryStaticData categoryStaticData;
+	public final TreeSet<Integer> types;
 
 	public IndexItemCategoryWithSubcat(CategoryStaticData categoryStaticData) {
 		this.categoryStaticData = categoryStaticData;
 		items = new ArrayList<>();
 		subcats = new ArrayList<>();
+		types = new TreeSet<>();
 	}
 
 	@Override
@@ -112,11 +116,11 @@ public class IndexItemCategoryWithSubcat implements Comparable<IndexItemCategory
 			}
 			String name = ctx.getString(categoryStaticData.getNameId());
 			categoryStaticData.setName(name);
-			final IndexItemCategoryWithSubcat category =
-					new IndexItemCategoryWithSubcat(categoryStaticData);
-			if (!cats.containsKey(name)) {
+
+			IndexItemCategoryWithSubcat category = cats.get(name);
+			if (category == null) {
+				category = new IndexItemCategoryWithSubcat(categoryStaticData);
 				cats.put(name, category);
-				LOG.debug("category=" + category.categoryStaticData);
 				if (!categoryStaticData.hasParent()) {
 					mainList.add(category);
 				} else {
@@ -128,7 +132,31 @@ public class IndexItemCategoryWithSubcat implements Comparable<IndexItemCategory
 					}
 				}
 			}
-			cats.get(name).items.add(i);
+
+			IndexItemCategoryWithSubcat region;
+			region = cats.get(i.getBasename());
+			final String visibleName = i.getVisibleName(ctx, ctx.getRegions());
+			i.setName(visibleName);
+			if (region == null) {
+				final CategoryStaticData regionStaticData = new CategoryStaticData(0, 0);
+				regionStaticData.setName(visibleName);
+				region = new IndexItemCategoryWithSubcat(regionStaticData);
+				cats.put(i.getBasename(), region);
+				category.subcats.add(region);
+			}
+			region.items.add(i);
+
+			if (i.getType() == DownloadActivityType.NORMAL_FILE) {
+				region.types.add(R.string.shared_string_map);
+			}
+			if (i.getType() == DownloadActivityType.WIKIPEDIA_FILE) {
+				region.types.add(R.string.shared_string_wikipedia);
+			}
+			if (i.getType() == DownloadActivityType.ROADS_FILE) {
+				region.types.add(R.string.roads);
+			}
+
+			final CategoryStaticData parent = category.categoryStaticData.getParent();
 		}
 		final Collator collator = OsmAndCollator.primaryCollator();
 		for (IndexItemCategoryWithSubcat ct : mainList) {
@@ -150,79 +178,14 @@ public class IndexItemCategoryWithSubcat implements Comparable<IndexItemCategory
 		return categoryStaticData.getName();
 	}
 
-	public enum CategoryStaticData {
-		WORLD_WIDE_AND_TOPIC(R.string.index_name_other, 0),
-		NAME_VOICE(R.string.index_name_voice, 1),
-		TTS_VOICE(R.string.index_name_tts_voice, 2),
-		WIKI(R.string.index_name_wiki, 10),
-		OPENMAPS(R.string.index_name_openmaps, 90),
-		NORTH_AMERICA(R.string.index_name_north_america, 30),
-		US(R.string.index_name_us, 31, NORTH_AMERICA),
-		CANADA(R.string.index_name_canada, 32, NORTH_AMERICA),
-		CENTRAL_AMERICA(R.string.index_name_central_america, 40),
-		SOUTH_AMERICA(R.string.index_name_south_america, 45),
-		RUSSIA(R.string.index_name_russia, 25),
-		EUROPE(R.string.index_name_europe, 15),
-		GERMANY(R.string.index_name_germany, 16, EUROPE),
-		FRANCE(R.string.index_name_france, 17, EUROPE),
-		ITALY(R.string.index_name_italy, 18, EUROPE),
-		GB(R.string.index_name_gb, 19, EUROPE),
-		NETHERLANDS(R.string.index_name_netherlands, 20, EUROPE),
-		AFRICA(R.string.index_name_africa, 80),
-		ASIA(R.string.index_name_asia, 50),
-		OCEANIA(R.string.index_name_oceania, 70),
-		TOURS(R.string.index_tours, 0);
 
-		private final int nameId;
-		private final int order;
-		private final CategoryStaticData parent;
-		private String name;
-
-		CategoryStaticData(int nameId, int order) {
-			this.nameId = nameId;
-			this.order = order;
-			parent = null;
-		}
-
-		CategoryStaticData(int nameId, int order, CategoryStaticData parent) {
-			this.nameId = nameId;
-			this.order = order;
-			this.parent = parent;
-		}
-
-		public int getNameId() {
-			return nameId;
-		}
-
-		public int getOrder() {
-			return order;
-		}
-
-		public CategoryStaticData getParent() {
-			return parent;
-		}
-
-		public boolean hasParent() {
-			return parent != null;
-		}
-
-		public String getName() {
-			return name;
-		}
-
-		public void setName(String name) {
-			this.name = name;
-		}
-
-		@Override
-		public String toString() {
-			return "CategoryStaticData{" +
-					"nameId=" + nameId +
-					", order=" + order +
-					", parent=" + parent +
-					", name='" + name + '\'' +
-					'}';
-		}
+	@Override
+	public String toString() {
+		return "IndexItemCategoryWithSubcat{" +
+				"items=" + items +
+				", subcats=" + subcats +
+				", categoryStaticData=" + categoryStaticData +
+				'}';
 	}
 
 	@Override
@@ -234,8 +197,8 @@ public class IndexItemCategoryWithSubcat implements Comparable<IndexItemCategory
 	public void writeToParcel(Parcel dest, int flags) {
 		dest.writeList(this.items);
 		dest.writeList(this.subcats);
-		dest.writeInt(this.categoryStaticData.ordinal());
-		dest.writeString(this.categoryStaticData.getName());
+		dest.writeParcelable(this.categoryStaticData, 0);
+		dest.writeSerializable(this.types);
 	}
 
 	protected IndexItemCategoryWithSubcat(Parcel in) {
@@ -243,13 +206,11 @@ public class IndexItemCategoryWithSubcat implements Comparable<IndexItemCategory
 		in.readList(this.items, List.class.getClassLoader());
 		this.subcats = new ArrayList<IndexItemCategoryWithSubcat>();
 		in.readList(this.subcats, List.class.getClassLoader());
-		int tmpCategoryStaticData = in.readInt();
-		this.categoryStaticData = CategoryStaticData.values()[tmpCategoryStaticData];
-		this.categoryStaticData.setName(in.readString());
+		this.categoryStaticData = in.readParcelable(CategoryStaticData.class.getClassLoader());
+		this.types = (TreeSet<Integer>) in.readSerializable();
 	}
 
-	public static final Parcelable.Creator<IndexItemCategoryWithSubcat> CREATOR =
-			new Parcelable.Creator<IndexItemCategoryWithSubcat>() {
+	public static final Parcelable.Creator<IndexItemCategoryWithSubcat> CREATOR = new Parcelable.Creator<IndexItemCategoryWithSubcat>() {
 		public IndexItemCategoryWithSubcat createFromParcel(Parcel source) {
 			return new IndexItemCategoryWithSubcat(source);
 		}

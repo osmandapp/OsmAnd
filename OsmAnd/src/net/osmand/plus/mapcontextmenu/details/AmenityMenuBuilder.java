@@ -1,4 +1,4 @@
-package net.osmand.plus.mapcontextmenu.sections;
+package net.osmand.plus.mapcontextmenu.details;
 
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -27,12 +27,11 @@ import java.util.Map;
 
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 
-public class AmenityInfoMenuBuilder extends MenuBuilder {
+public class AmenityMenuBuilder extends MenuBuilder {
 
-	boolean firstRow;
 	private final Amenity amenity;
 
-	public AmenityInfoMenuBuilder(OsmandApplication app, final Amenity amenity) {
+	public AmenityMenuBuilder(OsmandApplication app, final Amenity amenity) {
 		super(app);
 		this.amenity = amenity;
 	}
@@ -53,13 +52,13 @@ public class AmenityInfoMenuBuilder extends MenuBuilder {
 		// Icon
 		LinearLayout llIcon = new LinearLayout(view.getContext());
 		llIcon.setOrientation(LinearLayout.HORIZONTAL);
-		llIcon.setLayoutParams(new LinearLayout.LayoutParams(dpToPx(72f), firstRow ? dpToPx(48f) - dpToPx(SHADOW_HEIGHT_BOTTOM_DP) : dpToPx(48f)));
+		llIcon.setLayoutParams(new LinearLayout.LayoutParams(dpToPx(72f), isFirstRow() ? dpToPx(48f) - dpToPx(SHADOW_HEIGHT_BOTTOM_DP) : dpToPx(48f)));
 		llIcon.setGravity(Gravity.CENTER_VERTICAL);
 		ll.addView(llIcon);
 
 		ImageView iconView = new ImageView(view.getContext());
 		LinearLayout.LayoutParams llIconParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-		llIconParams.setMargins(dpToPx(16f), firstRow ? dpToPx(12f) - dpToPx(SHADOW_HEIGHT_BOTTOM_DP / 2f) : dpToPx(12f), dpToPx(32f), dpToPx(12f));
+		llIconParams.setMargins(dpToPx(16f), isFirstRow() ? dpToPx(12f) - dpToPx(SHADOW_HEIGHT_BOTTOM_DP / 2f) : dpToPx(12f), dpToPx(32f), dpToPx(12f));
 		llIconParams.gravity = Gravity.CENTER_VERTICAL;
 		iconView.setLayoutParams(llIconParams);
 		iconView.setScaleType(ImageView.ScaleType.CENTER);
@@ -73,7 +72,7 @@ public class AmenityInfoMenuBuilder extends MenuBuilder {
 
 		TextView textView = new TextView(view.getContext());
 		LinearLayout.LayoutParams llTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-		llTextParams.setMargins(0, firstRow ? dpToPx(8f) - dpToPx(SHADOW_HEIGHT_BOTTOM_DP) : dpToPx(8f), 0, dpToPx(8f));
+		llTextParams.setMargins(0, isFirstRow() ? dpToPx(8f) - dpToPx(SHADOW_HEIGHT_BOTTOM_DP) : dpToPx(8f), 0, dpToPx(8f));
 		textView.setLayoutParams(llTextParams);
 		textView.setTextSize(16); // todo: create constant
 		textView.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_info_text_light : R.color.ctx_menu_info_text_dark));
@@ -114,7 +113,7 @@ public class AmenityInfoMenuBuilder extends MenuBuilder {
 
 		((LinearLayout) view).addView(horizontalLine);
 
-		firstRow = false;
+		rowBuilt();
 	}
 
 	public int dpToPx(float dp) {
@@ -128,8 +127,8 @@ public class AmenityInfoMenuBuilder extends MenuBuilder {
 
 	@Override
 	public void build(View view) {
+		super.build(view);
 
-		firstRow = true;
 		boolean hasWiki = false;
 
 		for (PlainMenuItem item : plainMenuItems) {

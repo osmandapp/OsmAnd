@@ -4,10 +4,8 @@
     <!--<item android:id="@android:id/background">-->
     <!--</item>-->
 
-    <item android:id="@android:id/secondaryProgress">
-        <clip>
-            <nine-patch android:src="@drawable/bg_download_bar_light_orange"/>
-        </clip>
+    <item android:id="@android:id/background">
+        <nine-patch android:src="@drawable/bg_download_bar_light_orange"/>
     </item>
 
     <item android:id="@android:id/progress">

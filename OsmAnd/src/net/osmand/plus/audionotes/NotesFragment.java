@@ -358,7 +358,7 @@ public class NotesFragment extends OsmAndListFragment {
 			final AudioVideoNotesPlugin.Recording recording = getItem(position);
 			if (recording == shareLocationFile) {
 				((TextView) row.findViewById(R.id.name)).setText(R.string.av_locations);
-				((TextView) row.findViewById(R.id.descr)).setText(R.string.av_locations_descr);
+				((TextView) row.findViewById(R.id.description)).setText(R.string.av_locations_descr);
 			} else {
 				DashAudioVideoNotesFragment.getNoteView(recording, row, getMyApplication());
 			}

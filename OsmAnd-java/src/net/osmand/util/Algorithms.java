@@ -35,7 +35,19 @@ public class Algorithms {
 	public static boolean isEmpty(String s){
 		return s == null || s.length() == 0;
 	}
-	
+
+	public static boolean stringsEqual(String s1, String s2) {
+		if (s1 == null && s2 == null) {
+			return true;
+		} else if (s1 == null) {
+			return false;
+		} else if (s2 == null) {
+			return false;
+		} else {
+			return s2.equals(s1);
+		}
+	}
+
 	public static long parseLongSilently(String input, long def) {
 		if(input != null && input.length() > 0) {
 			try {

@@ -1,8 +1,10 @@
 package net.osmand.plus.download.newimplementation;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.StatFs;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.MenuItemCompat;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
@@ -19,9 +21,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import net.osmand.PlatformUtil;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmAndListFragment;
-import net.osmand.plus.download.BaseDownloadActivity;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.IndexItem;
 
@@ -50,9 +52,29 @@ public class NewLocalIndexesFragment extends OsmAndListFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.local_index_fragment, container, false);
 
-		getDownloadActivity().setSupportProgressBarIndeterminateVisibility(false);
+		ListView listView = (ListView) view.findViewById(android.R.id.list);
+		mAdapter = new CategoriesAdapter(getActivity(), getMyApplication());
+		listView.setAdapter(mAdapter);
+		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				LOG.debug("onItemClick()");
 
-		ProgressBar sizeProgress = (ProgressBar) view.findViewById(R.id.memory_progress);
+			}
+		});
+
+		View header = inflater.inflate(R.layout.local_index_fragment_header, listView, false);
+		initMemoryConsumedCard(header);
+		DownloadsUiInitHelper.initFreeVersionBanner(header, getMyApplication().getSettings(),
+				getResources());
+		listView.addHeaderView(header);
+
+		getDownloadActivity().setSupportProgressBarIndeterminateVisibility(false);
+		return view;
+	}
+
+	private void initMemoryConsumedCard(View header) {
+		ProgressBar sizeProgress = (ProgressBar) header.findViewById(R.id.memory_progress);
 		File dir = getMyApplication().getAppPath("").getParentFile();
 		String size = formatGb.format(new Object[]{0});
 		int percent = 0;
@@ -66,34 +88,9 @@ public class NewLocalIndexesFragment extends OsmAndListFragment {
 		sizeProgress.setProgress(percent);
 		String text = getString(R.string.free, size);
 
-		TextView descriptionText = (TextView) view.findViewById(R.id.memory_size);
+		TextView descriptionText = (TextView) header.findViewById(R.id.memory_size);
 		descriptionText.setText(Html.fromHtml(text));
 		descriptionText.setMovementMethod(LinkMovementMethod.getInstance());
-
-		TextView downloadsLeftTextView = (TextView) view.findViewById(R.id.downloadsLeftTextView);
-		downloadsLeftTextView.setText(getString(R.string.downloads_left_template,
-				BaseDownloadActivity.MAXIMUM_AVAILABLE_FREE_DOWNLOADS
-						- getMyApplication().getSettings().NUMBER_OF_FREE_DOWNLOADS.get()));
-		TextView freeVersionDescriptionTextView =
-				(TextView) view.findViewById(R.id.freeVersionDescriptionTextView);
-		freeVersionDescriptionTextView.setText(getString(R.string.free_version_message,
-				BaseDownloadActivity.MAXIMUM_AVAILABLE_FREE_DOWNLOADS));
-
-
-		ListView listView = (ListView) view.findViewById(android.R.id.list);
-		mAdapter = new CategoriesAdapter(getActivity());
-		listView.setAdapter(mAdapter);
-		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				LOG.debug("onItemClick()");
-
-			}
-		});
-//		listAdapter = new LocalIndexesAdapter(getActivity());
-//		listView.setAdapter(listAdapter);
-//		setListView(listView);
-		return view;
 	}
 
 	@Override
@@ -107,7 +104,7 @@ public class NewLocalIndexesFragment extends OsmAndListFragment {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == RELOAD_ID) {
 			// re-create the thread
-			DownloadActivity.downloadListIndexThread.runReloadIndexFiles(true);
+			DownloadActivity.downloadListIndexThread.runReloadIndexFiles();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -115,10 +112,11 @@ public class NewLocalIndexesFragment extends OsmAndListFragment {
 
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
-		MapsInCategoryFragment.createInstance(mAdapter.getItem(position))
-				.show(getChildFragmentManager(), MapsInCategoryFragment.TAG);
+		FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
+		fragmentTransaction.addToBackStack(null);
+		MapsInCategoryFragment.createInstance(mAdapter.getItem(position-1))
+				.show(fragmentTransaction, MapsInCategoryFragment.TAG);
 		LOG.debug("onListItemClick()");
-		super.onListItemClick(l, v, position, id);
 	}
 
 	private DownloadActivity getDownloadActivity() {
@@ -132,8 +130,11 @@ public class NewLocalIndexesFragment extends OsmAndListFragment {
 	}
 
 	private static class CategoriesAdapter extends ArrayAdapter<IndexItemCategoryWithSubcat> {
-		public CategoriesAdapter(Context context) {
+		private final OsmandApplication osmandApplication;
+
+		public CategoriesAdapter(Context context, OsmandApplication osmandApplication) {
 			super(context, R.layout.simple_list_menu_item);
+			this.osmandApplication = osmandApplication;
 		}
 
 		@Override
@@ -148,6 +149,9 @@ public class NewLocalIndexesFragment extends OsmAndListFragment {
 			} else {
 				viewHolder = (ViewHolder) convertView.getTag();
 			}
+			Drawable iconLeft = osmandApplication.getIconsCache()
+					.getContentIcon(R.drawable.ic_world_globe_dark);
+			viewHolder.textView.setCompoundDrawablesWithIntrinsicBounds(iconLeft, null, null, null);
 			viewHolder.textView.setText(getItem(position).categoryStaticData.getName());
 			return convertView;
 		}

@@ -24,7 +24,7 @@
             android:layout_height="wrap_content" />
 
         <TextView
-            android:id="@+id/descr"
+            android:id="@+id/description"
             android:textSize="@dimen/default_desc_text_size"
             android:textColor="#bebebe"
             android:layout_width="64dp"

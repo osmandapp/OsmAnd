@@ -2048,7 +2048,7 @@ OsmAnd е с отворен код и активно да се развива. �
     <string name="osmo_session_token">Маркер за сесия: %1$s</string>
     <string name="osmo_auth_pending">Чака за разрешение…</string>
     <string name="av_camera_pic_size_descr">Изберете размер на снимката за вградената камера</string>
-    <string name="download_wikipedia_item">Уикипедия</string>
+    <string name="shared_string_wikipedia">Уикипедия</string>
     <string name="local_indexes_cat_wiki">Уикипедия</string>
     <string name="shared_string_show_details">Покажи подробни данни</string>
     <string name="gps_network_not_enabled">Услугата за местоположение не е разрешена. Искате ли да я включите?</string>

@@ -172,7 +172,7 @@ public class WaypointDialogHelper {
 		View v;
 		IconsCache iconsCache  = app.getIconsCache();
 		v = ctx.getLayoutInflater().inflate(R.layout.drawer_list_radius, null);
-		final TextView radius = (TextView) v.findViewById(R.id.descr);
+		final TextView radius = (TextView) v.findViewById(R.id.description);
 		((ImageView) v.findViewById(R.id.waypoint_icon)).setImageDrawable(iconsCache.getContentIcon(R.drawable.ic_poi_radius_dark));
 		radius.setText(OsmAndFormatter.getFormattedDistance(waypointHelper.getSearchDeviationRadius(type), app));
 		radius.setOnClickListener(new View.OnClickListener() {

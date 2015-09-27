@@ -30,6 +30,7 @@ public class IndexItem implements Comparable<IndexItem>, HasName {
 	DownloadActivityType type;
 	boolean extra;
 
+	private String initializedName;
 
 	public IndexItem(String fileName, String description, long timestamp, String size, long contentSize,
 			long containerSize, DownloadActivityType tp) {
@@ -145,6 +146,24 @@ public class IndexItem implements Comparable<IndexItem>, HasName {
 
 	@Override
 	public String getName() {
-		return getBasename();
+		return initializedName;
+	}
+
+	public void setName(String initializedName) {
+		this.initializedName = initializedName;
+	}
+
+	@Override
+	public String toString() {
+		return "IndexItem{" +
+				"description='" + description + '\'' +
+				", fileName='" + fileName + '\'' +
+				", size='" + size + '\'' +
+				", timestamp=" + timestamp +
+				", contentSize=" + contentSize +
+				", containerSize=" + containerSize +
+				", type=" + type.getTag() +
+				", extra=" + extra +
+				'}';
 	}
 }

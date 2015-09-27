@@ -890,6 +890,8 @@
     <string name="gps_network_not_enabled">Sijaintipalvelu poistettu käytöstä. Haluatko ottaa sen käyttöön?</string>
     <string name="shared_string_import2osmand">Tuo OsmAndiin</string>
     <string name="read_full_article">Lue koko artikkeli (online)</string>
-    <string name="download_wikipedia_item">Wikipedia</string>
+    <string name="shared_string_wikipedia">Wikipedia</string>
     <string name="shared_string_show_details">Näytä tiedot</string>
+    <string name="layer_amenity_label">POI-nimet</string>
+    <string name="context_menu_item_directions_to">Navigoi kohteeseen</string>
     </resources>

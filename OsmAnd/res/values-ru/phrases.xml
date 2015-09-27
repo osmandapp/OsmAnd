@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources> 
 	<string name="poi_bakery">Булочная</string>
 	<string name="poi_alcohol">Винно-водочный магазин</string>
@@ -907,6 +907,8 @@
 	<string name="poi_population">Население</string>
 	<string name="poi_start_date">Дата начала постройки</string>
 	<string name="poi_wheelchair">Доступно для инвалидных кресел</string>
+	<string name="poi_wheelchair_no">Недоступно для инвалидных кресел</string>
+	<string name="poi_wheelchair_limited">Инвалидные кресла: ограничено</string>
 	<string name="poi_wholesale">Опт</string>
 	<string name="poi_parking_underground">Подземный(ая)</string>
 	<string name="poi_parking_multi_storey">Многоэтажный(ая)</string>
@@ -1199,5 +1201,60 @@
 	<string name="poi_piste_grooming_skating">Обслуживание трассы: конёк</string>
 	<string name="poi_piste_grooming_no">Обслуживание трассы: не обслуживаемая</string>
 	<string name="poi_piste_grooming_mogul">Обслуживание трассы: могул</string>
+
+	<string name="poi_garden_type_community">Тип сада: общественный</string>
+	<string name="poi_garden_type_private">Тип сада: частный</string>
+	<string name="poi_garden_type_botanical">Тип сада: ботанический</string>
+
+	<string name="poi_garden_style_rosarium">Стиль сада: розарий</string>
+	<string name="poi_garden_style_french">Стиль сада: французский</string>
+	<string name="poi_garden_style_english">Стиль сада: английский</string>
+	<string name="poi_garden_style_japanese">Стиль сада: японский</string>
+
+	<string name="poi_capacity">Вместимость</string>
+	<string name="poi_capacity_disabled_yes">Места для инвалидов</string>
+	<string name="poi_capacity_disabled_no">Нет выделенных мест для инвалидов</string>
+	<string name="poi_capacity_disabled">Места для инвалидов</string>
+	<string name="poi_capacity_women_yes">Места для женщин</string>
+	<string name="poi_capacity_women_no">Нет выделенных мест для женщин</string>
+	<string name="poi_capacity_women">Места для женщин</string>
+	<string name="poi_capacity_pupils">Места для учеников</string>
+	<string name="poi_capacity_teachers">Места для учителей</string>
+	<string name="poi_capacity_parent_yes">Места для родителей с детьми</string>
+	<string name="poi_capacity_parent_no">Нет выделенных мест для родителей с детьми</string>
+	<string name="poi_capacity_parent">Места для родителей с детьми</string>
+
+	<string name="poi_aerialway_occupancy">Ёмкость кабинки</string>
+	<string name="poi_aerialway_capacity">Пропускная способность, в час</string>
+	<string name="poi_aerialway_duration">Среднее время движения, минут</string>
+	<string name="poi_aerialway_bubble_yes">Остекление</string>
+	<string name="poi_aerialway_bubble_no">Нет остекления</string>
+	<string name="poi_aerialway_heating_yes">Обогрев</string>
+	<string name="poi_aerialway_heating_no">Без обогрева</string>
+	<string name="poi_aerialway_bicycle_yes">Провоз велосипедов разрешён</string>
+	<string name="poi_aerialway_bicycle_no">Провоз велосипедов запрещён</string>
+	<string name="poi_aerialway_bicycle_summer">Провоз велосипедов разрешен только летом</string>
+	<string name="poi_aerialway_access_entry">Только вход</string>
+	<string name="poi_aerialway_access_exit">Только выход</string>
+	<string name="poi_aerialway_access_both">Вход и выход</string>
+	<string name="poi_aerialway_summer_access_entry">Доступ летом: только вход</string>
+	<string name="poi_aerialway_summer_access_exit">Доступ летом: только выход</string>
+	<string name="poi_aerialway_summer_access_both">Доступ летом: вход и выход</string>
+
+	<string name="poi_stars_1">Число звёзд: 1 (туристский класс)</string>
+	<string name="poi_stars_1s">Число звёзд: 1S (улучшенный туристский класс)</string>
+	<string name="poi_stars_2">Число звёзд: 2 (стандартный класс)</string>
+	<string name="poi_stars_2s">Число звёзд: 2S (улучшенный стандартный класс)</string>
+	<string name="poi_stars_3">Число звёзд: 3 (комфортный класс)</string>
+	<string name="poi_stars_3s">Число звёзд: 3S (улучшенный комфортный класс)</string>
+	<string name="poi_stars_4">Число звёзд: 4 (первый класс)</string>
+	<string name="poi_stars_4s">Число звёзд: 4S (улучшенный первый класс)</string>
+	<string name="poi_stars_5">Число звёзд: 5 (категория люкс)</string>
+	<string name="poi_stars_5s">Число звёзд: 5S (категория люкс+)</string>
+	<string name="poi_stars_6">Число звёзд: 6</string>
+	<string name="poi_stars_7">Число звёзд: 7</string>
+	<string name="poi_rooms">Количество номеров</string>
+
+	<string name="poi_love_hotel">Love-отель</string>
 
 	</resources>

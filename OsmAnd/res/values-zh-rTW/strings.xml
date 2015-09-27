@@ -1996,7 +1996,7 @@
     <string name="rendering_value_walkingRoutesOSMC_name">依據 OSMC 來著色</string>
     <string name="osm_edit_context_menu_delete">刪除 OSM 的編輯</string>    
     <string name="read_full_article">閱讀全部文章 (線上)</string>
-    <string name="download_wikipedia_item">維基百科</string>
+    <string name="shared_string_wikipedia">維基百科</string>
     <string name="local_indexes_cat_wiki">維基百科</string>
     <string name="shared_string_show_details">顯示詳細資訊</string>
     <string name="download_wikipedia_maps">維基百科</string>
@@ -2091,7 +2091,7 @@
 	<string name="opening_at">營業于</string>
 	<string name="closing_at">結束于</string>
 <string name="next_proceed">下頁</string>
-	<string name="av_locations_descr">Gpx 檔案偕同地點注解</string>
+	<string name="av_locations_descr">GPX 檔案加上地點注解</string>
     <string name="av_locations">地點</string>
     <string name="tag_poi_name">名稱</string>
 	<string name="tag_poi_amenity">便利設施</string>
@@ -2116,4 +2116,7 @@
 <string name="simulate_your_location_stop_descr">停止模擬您的位置</string>
     <string name="simulate_your_location_descr">模擬使用記錄的 GPX 或計算的路線</string>
     <string name="downloads_left_template">離開下載的 %1$s</string>
+<string name="favourites_edit_dialog_title">我的最愛資訊</string>
+    <string name="favourites_context_menu_add">增加到我的最愛</string>
+	<string name="roads">道路</string>
 </resources>

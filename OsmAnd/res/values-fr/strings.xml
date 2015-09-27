@@ -369,7 +369,7 @@
   <string name="version_index_is_not_supported">La version de l\'\'index \'\'{0}\'\' n\'\'est pas supporté</string>
   <string name="use_osmand_routing_service">Navigation hors-ligne OsmAnd &gt;20km</string>
   <string name="use_osmand_routing_service_descr">Utiliser la navigation hors-ligne pour les longues distances (expérimental)</string>
-  <string name="osmand_routing_experimental">La navigation hors-ligne OsmAnd est une fonction expérimentale ne fonctionnant pas pour une distance de plus de 20 km.\n\nLe service utilise alors automatiquement le service en ligne CloudMade.</string>
+  <string name="osmand_routing_experimental">La navigation hors-ligne OsmAnd est une fonction expérimentale ne fonctionnant pas pour une distance de plus de 20 km.\n\nAu delà la navigation bascule automatiquement sur le service en ligne CloudMade.</string>
   <string name="specified_dir_doesnt_exist">Le dossier spécifié est introuvable.</string>
   <string name="application_dir">Dossier de stockage</string>
   
@@ -550,7 +550,7 @@
   <string name="search_history_street">Rue :\n{0}\n{1}</string>
   <string name="search_history_int_streets">Intersection :\n{0} x {1} à {2}</string>
   <string name="search_history_building">Bâtiment :\n{0} {1}\n{2}</string>
-  <string name="favorite">Favori</string>
+  <string name="favorite">Favoris</string>
   <string name="shared_string_clear_all">Supprimer tout</string>
   <string name="shared_string_history">Historique</string>
   <string name="uploading_data">Envoi des données…</string>
@@ -565,7 +565,7 @@
   <string name="max_level_download_tile">Niveau de zoom maximum</string>
   <string name="max_level_download_tile_descr">Sélectionnez un niveau de zoom maximum pour le téléchargement des cartes (tuiles) en ligne</string>
   <string name="route_general_information">Distance totale : %1$s, Durée estimée : %2$d h %3$d m.</string>
-  <string name="router_service_descr">Sélectionner un service de navigation, hors-ligne ou en ligne</string>
+  <string name="router_service_descr">Sélectionnez un service de navigation, hors-ligne ou en ligne</string>
   <string name="router_service">Service de navigation</string>
   <string name="sd_dir_not_accessible">Le dossier contenant les données sur la carte SD est inaccessible !</string>
   <string name="download_question">Voulez-vous télécharger {0} - {1} ?</string>
@@ -879,7 +879,7 @@
   <string name="transport_search_desc">Recherche de transports publics</string>
   <string name="favourites_search_desc">Recherche dans les favoris</string>
   
-  <string name="route_roundabout">Rond-point : prenez la %1$d sortie puis continuez</string>
+  <string name="route_roundabout">Rond-point : prenez la sortie %1$d puis continuez</string>
   <string name="route_kl">Serrez à gauche et continuez</string>
   <string name="route_kr">Serrez à droite et continuez</string>
   <string name="rendering_attr_noPolygons_description">Rendre invisibles les surfaces représentant des éléments de terrain</string>
@@ -978,15 +978,15 @@
 <string name="show_lanes">Afficher les voies de circulation</string>
 <string name="avoid_unpaved">Éviter les voies non revêtues</string>
 <string name="avoid_ferries">Éviter les ferries</string>
-<string name="avoid_in_routing_title">Éviter…</string>
+<string name="avoid_in_routing_title">Éviter</string>
 <string name="avoid_in_routing_descr">Éviter péages, voies non revêtues, ferries, autoroutes</string>
-<string name="show_warnings_title">Annonces visuelles…</string>
+<string name="show_warnings_title">Annonces visuelles</string>
 <string name="show_warnings_descr">Afficher les avertissements (limitations de vitesse, stops, ralentisseurs, radars), les voies de circulation</string>
 <string name="map_widget_fluorescent">Itinéraires fluorescents</string>
 <string name="map_widget_show_ruler">Échelle</string>
 
 <string name="map_widget_view_direction">Orientation</string>
-<string name="map_widget_transparent">Habillage transparent</string>
+<string name="map_widget_transparent">Gadgets transparents</string>
 
 
 <string name="gps_wakeup_interval">Intervalle d\'activation du GPS: %s</string>
@@ -1322,7 +1322,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="local_osm_changes_backup">Sauvegarder comme une modification OSM</string>
     <string name="delete_point">Supprimer le point de mesure</string>
     <string name="plugin_distance_point">Point</string>
-    <string name="use_distance_measurement_help">* Ajout d\'un point : appui bref sur la carte\n* Suppression d\'un point : appui long sur le point (affiche une bulle d\'information) puis nouvel appui dans la bulle pour Supprimer le point\n* Pour plus d\'actions : appuyez sur le gadget de mesure.</string>
+    <string name="use_distance_measurement_help">* Ajout d\'un point : appui bref sur la carte\n* Suppression du dernier point : appui long sur la carte\n* Pour plus d\'actions : appuyez sur le gadget de mesure.</string>
     <string name="distance_measurement_finish_subtrack">Ajouter une nouvelle mesure</string>
     <string name="distance_measurement_clear_route">Supprimer la mesure</string>
     <string name="shared_string_downloading">Téléchargement en cours</string>
@@ -1360,7 +1360,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="driving_region_uk">Angleterre, Inde, Australie et autres</string>
 	    
     
-    <string name="speak_title">Annonces vocales…</string>
+    <string name="speak_title">Annonces vocale</string>
 	<string name="speak_cameras">Radars</string>
 	<string name="speak_traffic_warnings">Alerte de traffic</string>
     <string name="osb_author_or_password_not_specified">Merci de spécifier votre nom d\'utilisateur et mot de passe OSM dans les paramètres</string>
@@ -1828,7 +1828,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="rendering_category_details">Détails</string>
     <string name="rendering_category_transport">Transports en commun</string>
     <string name="rendering_category_others">Autres caractéristiques de la carte</string>
-    <string name="map_widget_appearance_rem">Éléments restants</string>
+    <string name="map_widget_appearance_rem">Autres éléments</string>
     <string name="map_widget_top">Barre d\'état</string>
 	<string name="map_widget_right">Panneau de droite</string>
 	<string name="map_widget_left">Panneau de gauche</string>
@@ -1844,7 +1844,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="rendering_attr_shareTaxiRoutes_name">Voies partagées pour les taxi</string>
     <string name="rendering_attr_tramTrainRoutes_name">Lignes de tramway et train</string>
     
-    <string name="impassable_road">Évitez les routes…</string>
+    <string name="impassable_road">Évitez les routes</string>
     <string name="rendering_category_hide">Masquer</string>
     <string name="wake_on_voice">Allumer l\'écran</string>
     <string name="wake_on_voice_descr">Allumer l\'écran (si éteint) à l\'approche d\'une bifurcation</string>
@@ -1989,7 +1989,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="shared_string_not_use">Non utilisé</string>
 	<string name="confirmation_to_clear_history">Souhaitez-vous effacer l\'historique ?</string>
     <string name="local_osm_changes_upload_all_confirm">%1$d modification(s) vont être envoyé(s) vers OSM. Confirmez-vous cet envoi ?</string>
-    <string name="delay_to_start_navigation">Démarrer la navigation après…</string>
+    <string name="delay_to_start_navigation">Démarrer la navigation après</string>
     <string name="osmo_grop_name_length_alert">Le nom d\'un groupe doit être de 3 caractères minimum !</string>
 	<string name="osm_changes_added_to_local_edits">Modifications OSM mémorisées localement</string>
    	<string name="mark_to_delete">Marquer pour suppression</string>
@@ -2041,7 +2041,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="osm_edit_context_menu_delete">Supprimer la modification OSM</string>    
     <string name="shared_string_show_details">Afficher les détails</string>
     <string name="read_full_article">Lire l\'article complet (en ligne)</string>
-    <string name="download_wikipedia_item">Wikipédia</string>
+    <string name="shared_string_wikipedia">Wikipédia</string>
     <string name="local_indexes_cat_wiki">Wikipédia</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="shared_string_import2osmand">Importer dans OsmAnd</string>
@@ -2153,6 +2153,14 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="routing_attr_avoid_shuttle_train_description">Éviter les trains-navettes</string>
     <string name="shared_string_card_was_hidden">La carte a été masquée</string>
 	<string name="routing_attr_avoid_shuttle_train_name">Éviter les trains-navettes</string>
-	<string name="av_locations_descr">Fichier GPS avec notes</string>
+	<string name="av_locations_descr">Fichier GPX avec notes</string>
     <string name="tag_poi_amenity">aménité</string>
+	<string name="simulate_your_location_stop_descr">Arrêter de simuler votre position</string>
+    <string name="simulate_your_location_descr">Simuler la position à partir d\'un fichier GPX ou d\'une route</string>
+    <string name="are_you_sure">Etes-vous certain ?</string>
+	<string name="unsaved_changes_will_be_lost">Les modifications non enregistrées seront perdues. Souhaitez-vous poursuivre ?</string>
+	<string name="downloads_left_template">%1$s téléchargement(s) restant(s)</string>
+	<string name="roads">Routes</string>
+<string name="favourites_edit_dialog_title">Propriétés du favori</string>
+    <string name="favourites_context_menu_add">Ajouter un favori</string>
 	</resources>

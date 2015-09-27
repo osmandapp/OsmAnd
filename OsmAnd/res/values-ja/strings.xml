@@ -2095,7 +2095,7 @@ POIの更新は利用できません</string>
 	<string name="rendering_value_defaultTranslucentCyan_name">デフォルト (半透明シアン)</string>
     <string name="shared_string_import2osmand">OsmAndにインポート</string>
     <string name="read_full_article">記事全文を読む (オンライン)</string>
-    <string name="download_wikipedia_item">Wikipedia</string>
+    <string name="shared_string_wikipedia">Wikipedia</string>
     <string name="local_indexes_cat_wiki">Wikipedia</string>
     <string name="shared_string_show_details">パーソナルトラッカーIDを表示</string>
     <string name="local_recordings_delete_all_confirm">%1$d個のメモを削除します。よろしいですか？</string>
