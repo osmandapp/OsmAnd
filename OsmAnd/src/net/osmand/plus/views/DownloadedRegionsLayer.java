@@ -76,6 +76,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 			public void layerOnPostExecute() {
 				view.refreshMap();
 			}
+			
 			public boolean queriedBoxContains(final RotatedTileBox queriedData, final RotatedTileBox newBox) {
 				if (newBox.getZoom() < ZOOM_TO_SHOW_BORDERS) {
 					if (queriedData != null && queriedData.getZoom() < ZOOM_TO_SHOW_BORDERS) {
