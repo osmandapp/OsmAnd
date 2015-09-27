@@ -370,9 +370,6 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 			}
 			misc.addPreference(nativeCheckbox);
 
-			final CheckBoxPreference openGlRender = createCheckBoxPreference(settings.USE_OPENGL_RENDER, R.string.use_opengl_render,R.string.use_opengl_render_descr);
-			misc.addPreference(openGlRender);
-
 			int nav = getResources().getConfiguration().navigation;
 			if (nav == Configuration.NAVIGATION_DPAD || nav == Configuration.NAVIGATION_TRACKBALL ||
 					nav == Configuration.NAVIGATION_WHEEL ||
