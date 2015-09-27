@@ -9,7 +9,6 @@ import org.apache.commons.logging.Log;
 
 import android.content.Context;
 import android.graphics.PointF;
-import android.util.FloatMath;
 import android.view.MotionEvent;
 
 
@@ -96,7 +95,7 @@ public class MultiTouchSupport {
 			Float x2 = (Float) getX.invoke(event, 1);
 			Float y1 = (Float) getY.invoke(event, 0);
 			Float y2 = (Float) getY.invoke(event, 1);
-			float distance = FloatMath.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+			float distance = (float) Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
 		    float angle = 0;
 		    boolean angleDefined = false;
 		    if(x1 != x2 || y1 != y2) {
