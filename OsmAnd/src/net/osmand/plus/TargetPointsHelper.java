@@ -182,6 +182,7 @@ public class TargetPointsHelper {
 			if (sz > 0) {
 				settings.deleteIntermediatePoint(sz - 1);
 				pointToNavigate = intermediatePoints.remove(sz - 1);
+				pointToNavigate.intermediate = false;
 				settings.setPointToNavigate(pointToNavigate.getLatitude(), pointToNavigate.getLongitude(),
 						pointToNavigate.pointDescription);
 			}
