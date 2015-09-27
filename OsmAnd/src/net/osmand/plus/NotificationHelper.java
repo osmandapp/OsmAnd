@@ -62,7 +62,6 @@ public class NotificationHelper {
 			}
 		};
 		app.registerReceiver(stopBroadcastReceiver, new IntentFilter(OSMAND_STOP_GPX_SERVICE_ACTION));
-		showNotification();
 	}
 
 	public Builder buildNotificationInStatusBar() {

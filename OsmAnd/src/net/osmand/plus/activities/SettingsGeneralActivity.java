@@ -454,9 +454,10 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				Intent intent = getIntent();
-				finish();
-				startActivity(intent);				
+			    android.os.Process.killProcess(android.os.Process.myPid());
+//				Intent intent = getIntent();
+//				finish();
+//				startActivity(intent);				
 			}
 		});
 		bld.show();

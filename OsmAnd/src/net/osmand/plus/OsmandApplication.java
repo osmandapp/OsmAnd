@@ -166,7 +166,7 @@ public class OsmandApplication extends Application {
 	public IconsCache getIconsCache() {
 		return iconsCache;
 	}
-
+	
 	@Override
 	public void onTerminate() {
 		super.onTerminate();

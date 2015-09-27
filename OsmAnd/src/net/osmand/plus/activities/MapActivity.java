@@ -640,6 +640,7 @@ public class MapActivity extends AccessibleActivity {
 	protected void onStart() {
 		super.onStart();
 		wakeLockHelper.onStart(this);
+		getMyApplication().getNotificationHelper().showNotification();
 	}
 
 	protected void setProgressDlg(Dialog progressDlg) {
@@ -670,10 +671,14 @@ public class MapActivity extends AccessibleActivity {
 		getMyApplication().unsubscribeInitListener(initListener);
 		mapViewTrackingUtilities.setMapView(null);
 		cancelNotification();
+		if(getMyApplication().getNavigationService() == null) {
+			getMyApplication().getNotificationHelper().removeServiceNotification();
+		}
 		app.getResourceManager().getMapTileDownloader().removeDownloaderCallback(mapView);
 		if (atlasMapRendererView != null) {
 			atlasMapRendererView.handleOnDestroy();
 		}
+		
 	}
 
 	private void cancelNotification() {
