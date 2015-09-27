@@ -921,7 +921,7 @@
 	<string name="poi_access_private">Propriété privée</string>
 	<string name="poi_access_no">Accès interdit</string>
 	<string name="poi_access_permissive">Accès autorisé</string>
-	<string name="poi_access_customers">Accès réservé aux clients</string>
+	<string name="poi_access_customers">Accès client</string>
 	<string name="poi_access_delivery">Accès réservé aux livraisons</string>
 	<string name="poi_recycling_glass">Verre</string>
 	<string name="poi_recycling_paper">Papier</string>
@@ -1021,7 +1021,7 @@
 	<string name="poi_recycling_fridge_and_freezer">Réfrigérateur et congélateur</string>
 	<string name="poi_twitter">Twitter</string>
 	<string name="poi_skype">Skype</string>
-	<string name="poi_youtube">Youtube</string>
+	<string name="poi_youtube">YouTube</string>
 	<string name="poi_instagram">Instagram</string>
 	<string name="poi_google_plus">Google+</string>
 	<string name="poi_mobile">Mobile</string>
@@ -1040,4 +1040,164 @@
 	<string name="poi_office_religion">Lieu de culte</string>
 	<string name="poi_association">Bureau d\'association</string>
 	<string name="poi_financial">Bureau financier</string>
+	<string name="poi_tax_advisor">Bureau de perception</string>
+
+	<string name="poi_religion_voodoo">Vaudou</string>
+	<string name="poi_religion_spiritualist">Spiritualisme</string>
+	<string name="poi_religion_scientologist">Scientologie</string>
+	<string name="poi_religion_pagan">Paganisme</string>
+	<string name="poi_denomination_catholic">Catholique</string>
+	<string name="poi_denomination_roman_catholic">Catholique romain</string>
+	<string name="poi_denomination_orthodox">Orthodoxe</string>
+	<string name="poi_denomination_lutheran">Luthérien</string>
+	<string name="poi_denomination_protestant">Protestant</string>
+	<string name="poi_denomination_anglican">Anglican</string>
+	<string name="poi_denomination_evangelical">Évangéliste</string>
+	<string name="poi_denomination_russian_orthodox">Orthodoxe russe</string>
+	<string name="poi_denomination_pentecostal">Pentecôtiste</string>
+	<string name="poi_denomination_mormon">Mormon</string>
+	<string name="poi_denomination_jehovahs_witness">Témoins de Jéhovah</string>
+	<string name="poi_denomination_greek_orthodox">Orthodoxe grecque</string>
+	<string name="poi_denomination_reformed">Réformé</string>
+	<string name="poi_denomination_seventh_day_adventist">Adventiste du septième jour</string>
+	<string name="poi_denomination_new_apostolic">Nouveau apostolique</string>
+	<string name="poi_denomination_church_of_england">Église d’Angleterre</string>
+	<string name="poi_denomination_episcopal">Épiscopal</string>
+	<string name="poi_denomination_united">Uni</string>
+	<string name="poi_denomination_greek_catholic">Catholique grecque</string>
+	<string name="poi_denomination_tibetan">Tibétain</string>
+	<string name="poi_denomination_church_of_scotland">Église d’Écosse</string>
+	<string name="poi_denomination_salvation_army">Armée du Salut</string>
+	<string name="poi_denomination_quaker">Quaker</string>
+	<string name="poi_denomination_bulgarian_orthodox">Orthodoxe bulgare</string>
+	<string name="poi_denomination_adventist">Adventiste</string>
+	<string name="poi_denomination_nazarene">Nazaréen</string>
+	<string name="poi_denomination_serbian_orthodox">Orthodoxe serbe</string>
+	<string name="poi_denomination_armenian_apostolic">Apostolique arménien</string>
+	<string name="poi_denomination_apostolic">Apostolique</string>
+	<string name="poi_denomination_reform">Réformé</string>
+	<string name="poi_denomination_latter_day_saints">Saints du dernier jour</string>
+	<string name="poi_denomination_scientist">Scientiste</string>
+	<string name="poi_denomination_romanian_orthodox">Orthodoxe roumain</string>
+	<string name="poi_denomination_maronite">Maronite</string>
+	<string name="poi_military_office">Bureau militaire</string>
+	<string name="poi_route_hiking_ref_poi">Légende des chemins de randonnée</string>
+
+	<string name="poi_height">Hauteur</string>
+	<string name="poi_ele">Hauteur au dessus du niveau de la mer</string>
+	<string name="poi_start_date">Date de début</string>
+	<string name="poi_wheelchair">Fauteuil roulant</string>
+	<string name="poi_wheelchair_no">Fauteuil roulant interdit</string>
+	<string name="poi_wheelchair_limited">Fauteuil roulant partiel</string>
+	<string name="poi_wholesale">Vente en gros</string>
+
+	<string name="poi_content_wine">Contenu : vin</string>
+	<string name="poi_content_gas">Contenu : gaz</string>
+	<string name="poi_content_wastewater">Contenu : eaux usées</string>
+	<string name="poi_content_beer">Contenu : bière</string>
+	<string name="poi_content_salt">Contenu : sel</string>
+	<string name="poi_content_grain">Contenu : grain</string>
+
+	<string name="poi_nudism_yes">Nudisme autorisé</string>
+	<string name="poi_nudism_no">Nudisme interdit</string>
+	<string name="poi_nudism_obligatory">Nudisme obligatoire</string>
+	<string name="poi_population">Population</string>
+	<string name="poi_parking_underground">Sous-terrain</string>
+	<string name="poi_trees_olive">Olivier</string>
+	<string name="poi_trees_apple">Pommier</string>
+	<string name="poi_trees_oil">Palmier</string>
+	<string name="poi_trees_orange">Oranger</string>
+	<string name="poi_trees_almond">Amandier</string>
+	<string name="poi_trees_banana">Bananier</string>
+	<string name="poi_trees_hazel">Noisetier</string>
+	<string name="poi_trees_coconut">Cocotier</string>
+	<string name="poi_trees_cherry">Cerisier</string>
+	<string name="poi_trees_walnut">Noyer</string>
+	<string name="poi_trees_plum">Prunier</string>
+	<string name="poi_trees_peach">Pêcher</string>
+	<string name="poi_trees_tea">Théier</string>
+	<string name="poi_trees_mango">Manguier</string>
+	<string name="poi_trees_rubber">Caoutchouc</string>
+	<string name="poi_trees_date">Dattier</string>
+	<string name="poi_trees_coffea">Caféier</string>
+	<string name="poi_urban">Urbain</string>
+	<string name="poi_rural">Rural</string>
+
+	<string name="poi_seats">Bancs</string>
+	<string name="poi_intermittent">Intermittent</string>
+
+	<string name="poi_generator_source_coal">Source d\'énergie : charbon</string>
+	<string name="poi_generator_source_gas">Source d\'énergie : gaz</string>
+	<string name="poi_generator_source_nuclear">Source d\'énergie : nucléaire</string>
+	<string name="poi_generator_source_solar">Source d\'énergie : solaire</string>
+	<string name="poi_generator_source_hydro">Source d\'énergie : hydraulique</string>
+	<string name="poi_generator_source_wind">Source d\'énergie : éolien</string>
+	<string name="poi_generator_source_geothermal">Source d\'énergie : géothermie</string>
+	<string name="poi_generator_source_oil">Source d\'énergie : pétrole</string>
+	<string name="poi_generator_source_diesel">Source d\'énergie : diesel</string>
+
+	<string name="poi_car_wash_self_service">Self service</string>
+
+	<string name="poi_int_name">Nom international</string>
+	<string name="poi_nat_name">Nom national</string>
+	<string name="poi_reg_name">Nom régional</string>
+	<string name="poi_loc_name">Nom local</string>
+	<string name="poi_old_name">Ancien nom</string>
+	<string name="poi_alt_name">Autre dénomination</string>
+
+	<string name="poi_pump_manual">Pompe manuelle</string>
+	<string name="poi_pump_no">Sans pompe</string>
+	<string name="poi_pump">Pompe</string>
+
+	<string name="poi_pump_powered">Pompe automatique</string>
+	<string name="poi_water_point">Point d\'eau</string>
+
+	<string name="poi_cuisine">Cuisine</string>
+
+	<string name="poi_information_board">Panneau d\'information</string>
+	<string name="poi_information_map">Carte</string>
+	<string name="poi_information_office">Office du tourisme</string>
+	<string name="poi_information_hikingmap">Carte des randonnées</string>
+	<string name="poi_information_audioguide">Audioguide</string>
+	<string name="poi_information_bicyclemap">Carte cycliste</string>
+	<string name="poi_smoking_no">Non fumeur</string>
+	<string name="poi_smoking_dedicated">Réservé aux fumeurs</string>
+
+	<string name="poi_toll_yes">Péage</string>
+	<string name="poi_toll_no">Gratuit</string>
+	<string name="poi_rescue_station">Station de sauvetage</string>
+
+	<string name="poi_railway_crossing">Passage à niveau</string>
+	<string name="poi_garden">Jardin</string>
+
+	<string name="poi_grass">Pelouse</string>
+	<string name="poi_sand">Sable</string>
+
+	<string name="poi_dead_wood">Bois mort</string>
+
+	<string name="poi_piste_difficulty_easy">Piste : facile</string>
+	<string name="poi_piste_difficulty_intermediate">Piste : intermédiaire</string>
+	<string name="poi_piste_difficulty_advanced">Piste : difficile</string>
+	<string name="poi_piste_difficulty_novice">Piste : débutant</string>
+	<string name="poi_piste_difficulty_expert">Piste : expert</string>
+	<string name="poi_piste_difficulty_freeride">Piste : freeride</string>
+	<string name="poi_capacity">Capacité</string>
+	<string name="poi_aerialway_capacity">Capacité horaire</string>
+	<string name="poi_aerialway_duration">Durée moyenne du trajet (minutes)</string>
+	<string name="poi_aerialway_bubble_yes">Fermé</string>
+	<string name="poi_aerialway_bubble_no">Non fermé</string>
+	<string name="poi_aerialway_heating_yes">Chauffé</string>
+	<string name="poi_aerialway_heating_no">Non chauffé</string>
+	<string name="poi_aerialway_bicycle_yes">Vélos autorisés</string>
+	<string name="poi_aerialway_bicycle_no">Vélos interdits</string>
+	<string name="poi_aerialway_bicycle_summer">Vélos autorisés en été seulement</string>
+	<string name="poi_aerialway_access_entry">Entrée uniquement</string>
+	<string name="poi_aerialway_access_exit">Sortie uniquement</string>
+	<string name="poi_aerialway_access_both">Entrée et Sortie</string>
+	<string name="poi_aerialway_summer_access_entry">Accès d\'été : entrée uniquement</string>
+	<string name="poi_aerialway_summer_access_exit">Accès d\'été : sortie uniquement</string>
+	<string name="poi_aerialway_summer_access_both">Accès d\'été : entrée et sortie</string>
+
+	<string name="poi_rooms">Chambres</string>
+
 	</resources>
