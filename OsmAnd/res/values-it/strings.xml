@@ -2198,4 +2198,8 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="si_min_m">Minuti per miglia</string>
     <string name="si_nm_h">Miglia nautiche per ora (knot)</string>
     <string name="nm_h">nmh</string>
+    <string name="min_mile">min/m</string>
+    <string name="min_km">min/km</string>
+    <string name="m_s">m/s</string>
+    
     </resources>
