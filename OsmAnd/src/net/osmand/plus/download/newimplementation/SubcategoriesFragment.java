@@ -20,6 +20,7 @@ import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.HasName;
 
@@ -38,8 +39,9 @@ public class SubcategoriesFragment extends Fragment {
 		assert category != null;
 
 		ListView listView = new ListView(getActivity());
+		final OsmandApplication application = (OsmandApplication) getActivity().getApplication();
 		final MapFilesAdapter mAdapter = new MapFilesAdapter(getActivity(),
-				((OsmandApplication) getActivity().getApplication()).getIconsCache());
+				application.getIconsCache(), application);
 		listView.setAdapter(mAdapter);
 		mAdapter.addAll(category.items);
 		mAdapter.addAll(category.subcats);
@@ -51,8 +53,7 @@ public class SubcategoriesFragment extends Fragment {
 		});
 
 		View freeVersionBanner = inflater.inflate(R.layout.free_version_banner, listView, false);
-		final OsmandSettings settings =
-				((OsmandApplication) getActivity().getApplication()).getSettings();
+		final OsmandSettings settings = application.getSettings();
 		DownloadsUiInitHelper.initFreeVersionBanner(freeVersionBanner, settings, getResources());
 		listView.addHeaderView(freeVersionBanner);
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -85,10 +86,12 @@ public class SubcategoriesFragment extends Fragment {
 	private static class MapFilesAdapter extends ArrayAdapter<HasName> {
 
 		private final IconsCache iconsCache;
+		private final OsmandApplication application;
 
-		public MapFilesAdapter(Context context, IconsCache iconsCache) {
+		public MapFilesAdapter(Context context, IconsCache iconsCache, OsmandApplication application) {
 			super(context, R.layout.two_line_with_images_list_item);
 			this.iconsCache = iconsCache;
+			this.application = application;
 		}
 
 		@Override
@@ -117,20 +120,28 @@ public class SubcategoriesFragment extends Fragment {
 						stringBuilder.append(resources.getString(mapType));
 						stringBuilder.append(", ");
 					}
-					LOG.debug("stringBuilder=" + stringBuilder);
-					stringBuilder.delete(stringBuilder.capacity() - 3, stringBuilder.capacity());
+					stringBuilder.delete(stringBuilder.length() - 2, stringBuilder.capacity());
 					viewHolder.descrTextView.setText(stringBuilder.toString());
 				} else {
 					// TODO replace with string constant
 					viewHolder.descrTextView.setText("Others");
 				}
+				viewHolder.leftImageView.setImageDrawable(iconsCache.getContentIcon(R.drawable.ic_map));
 				LOG.debug("category.types=" + category.types);
+			} else if (item instanceof IndexItem) {
+				IndexItem indexItem = (IndexItem) item;
+				if (indexItem.getType() == DownloadActivityType.VOICE_FILE) {
+					viewHolder.nameTextView.setText(indexItem.getVisibleName(getContext(),
+							application.getRegions()));
+				} else {
+					viewHolder.nameTextView.setText(indexItem.getType().getString(getContext()));
+				}
+				viewHolder.descrTextView.setText(indexItem.getSizeDescription(getContext()));
+				viewHolder.leftImageView.setImageResource(indexItem.getType().getIconResource());
 			} else {
-				viewHolder.nameTextView.setText(item.getName());
-				// TODO replace with real values
-				viewHolder.descrTextView.setText("Temp values");
+				throw new IllegalArgumentException("Item must be of type IndexItem or " +
+						"IndexItemCategory but is of type:" + item.getClass());
 			}
-			viewHolder.leftImageView.setImageDrawable(iconsCache.getContentIcon(R.drawable.ic_map));
 			return convertView;
 		}
 

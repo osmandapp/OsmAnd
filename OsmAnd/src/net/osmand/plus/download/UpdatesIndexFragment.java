@@ -40,7 +40,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment {
 	private OsmandRegions osmandRegions;
 	private java.text.DateFormat format;
 	private UpdateIndexAdapter listAdapter;
-	List<IndexItem> indexItems = new ArrayList<IndexItem>();
+	List<IndexItem> indexItems = new ArrayList<>();
 
 
 	@Override
@@ -233,7 +233,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment {
 	private void filterExisting() {
 		final Map<String, String> listAlreadyDownloaded = DownloadActivity.downloadListIndexThread.getDownloadedIndexFileNames();
 
-		final List<IndexItem> filtered = new ArrayList<IndexItem>();
+		final List<IndexItem> filtered = new ArrayList<>();
 		for (IndexItem fileItem : listAdapter.getIndexFiles()) {
 			if (fileItem.isAlreadyDownloaded(listAlreadyDownloaded)) {
 				filtered.add(fileItem);
@@ -329,7 +329,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment {
 	}
 
 	private String getMapDescription(IndexItem item){
-		String typeName = getTypeName(item, item.getType().getResource());
+		String typeName = getTypeName(item, item.getType().getStringResource());
 		String date = item.getDate(format);
 		String size = item.getSizeDescription(getActivity());
 		return typeName + "  " + date + "  " + size;

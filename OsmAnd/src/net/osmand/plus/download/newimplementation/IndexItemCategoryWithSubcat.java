@@ -9,7 +9,6 @@ import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.IndexItem;
@@ -133,30 +132,32 @@ public class IndexItemCategoryWithSubcat implements Comparable<IndexItemCategory
 				}
 			}
 
-			IndexItemCategoryWithSubcat region;
-			region = cats.get(i.getBasename());
-			final String visibleName = i.getVisibleName(ctx, ctx.getRegions());
-			i.setName(visibleName);
-			if (region == null) {
-				final CategoryStaticData regionStaticData = new CategoryStaticData(0, 0);
-				regionStaticData.setName(visibleName);
-				region = new IndexItemCategoryWithSubcat(regionStaticData);
-				cats.put(i.getBasename(), region);
-				category.subcats.add(region);
+			if (i.getType() == DownloadActivityType.VOICE_FILE){
+				// TODO remove
+				final String visibleName = i.getVisibleName(ctx, ctx.getRegions());
+				i.setName(visibleName);
+				category.items.add(i);
+			} else {
+				IndexItemCategoryWithSubcat region;
+				region = cats.get(i.getBasename());
+				// TODO remove
+				final String visibleName = i.getVisibleName(ctx, ctx.getRegions());
+				i.setName(visibleName);
+				if (region == null) {
+					final CategoryStaticData regionStaticData = new CategoryStaticData(0, 0);
+					regionStaticData.setName(visibleName);
+					region = new IndexItemCategoryWithSubcat(regionStaticData);
+					cats.put(i.getBasename(), region);
+					category.subcats.add(region);
+				}
+				region.items.add(i);
+				if (i.getType() == DownloadActivityType.NORMAL_FILE
+						|| i.getType() == DownloadActivityType.WIKIPEDIA_FILE
+						|| i.getType() == DownloadActivityType.SRTM_COUNTRY_FILE
+						|| i.getType() == DownloadActivityType.HILLSHADE_FILE) {
+					region.types.add(i.getType().getStringResource());
+				}
 			}
-			region.items.add(i);
-
-			if (i.getType() == DownloadActivityType.NORMAL_FILE) {
-				region.types.add(R.string.shared_string_map);
-			}
-			if (i.getType() == DownloadActivityType.WIKIPEDIA_FILE) {
-				region.types.add(R.string.shared_string_wikipedia);
-			}
-			if (i.getType() == DownloadActivityType.ROADS_FILE) {
-				region.types.add(R.string.roads);
-			}
-
-			final CategoryStaticData parent = category.categoryStaticData.getParent();
 		}
 		final Collator collator = OsmAndCollator.primaryCollator();
 		for (IndexItemCategoryWithSubcat ct : mainList) {

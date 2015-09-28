@@ -1,6 +1,8 @@
 package net.osmand.plus.download;
 
 import android.content.Context;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
 import net.osmand.IndexConstants;
@@ -18,7 +20,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-public class IndexItem implements Comparable<IndexItem>, HasName {
+public class IndexItem implements Comparable<IndexItem>, HasName, Parcelable {
 	private static final Log log = PlatformUtil.getLog(IndexItem.class);
 	
 	String description;
@@ -114,9 +116,9 @@ public class IndexItem implements Comparable<IndexItem>, HasName {
 	
 	@Override
 	public int compareTo(@NonNull IndexItem another) {
-		if(another == null) {
-			return -1;
-		}
+//		if(another == null) {
+//			return -1;
+//		}
 		return getFileName().compareTo(another.getFileName());
 	}
 
@@ -146,7 +148,7 @@ public class IndexItem implements Comparable<IndexItem>, HasName {
 
 	@Override
 	public String getName() {
-		return initializedName;
+		return initializedName + " must be fixed";
 	}
 
 	public void setName(String initializedName) {
@@ -166,4 +168,44 @@ public class IndexItem implements Comparable<IndexItem>, HasName {
 				", extra=" + extra +
 				'}';
 	}
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(this.description);
+		dest.writeString(this.fileName);
+		dest.writeString(this.size);
+		dest.writeLong(this.timestamp);
+		dest.writeLong(this.contentSize);
+		dest.writeLong(this.containerSize);
+		dest.writeParcelable(this.type, flags);
+		dest.writeByte(extra ? (byte) 1 : (byte) 0);
+		dest.writeString(this.initializedName);
+	}
+
+	protected IndexItem(Parcel in) {
+		this.description = in.readString();
+		this.fileName = in.readString();
+		this.size = in.readString();
+		this.timestamp = in.readLong();
+		this.contentSize = in.readLong();
+		this.containerSize = in.readLong();
+		this.type = in.readParcelable(DownloadActivityType.class.getClassLoader());
+		this.extra = in.readByte() != 0;
+		this.initializedName = in.readString();
+	}
+
+	public static final Parcelable.Creator<IndexItem> CREATOR = new Parcelable.Creator<IndexItem>() {
+		public IndexItem createFromParcel(Parcel source) {
+			return new IndexItem(source);
+		}
+
+		public IndexItem[] newArray(int size) {
+			return new IndexItem[size];
+		}
+	};
 }
