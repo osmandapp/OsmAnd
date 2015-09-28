@@ -2241,4 +2241,9 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 <string name="address_unknown">Adres nie jest jeszcze znany</string>
     <string name="unsaved_changes_will_be_lost">Wszelkie niezapisane zmiany zostaną utracone. Kontynuować?</string>
 <string name="are_you_sure">Czy na pewno?</string>
-	</resources>
+	<string name="shared_string_navigation">Nawigacja</string>
+    <string name="osmand_running_in_background">Uruchomiona w tle</string>
+    <string name="simulate_your_location_stop_descr">Zatrzymaj symulację pozycji</string>
+    <string name="favourites_context_menu_add">Dodaj do ulubionych</string>
+	<string name="roads">Drogi</string>
+</resources>
