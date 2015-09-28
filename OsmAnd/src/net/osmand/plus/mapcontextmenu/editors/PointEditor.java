@@ -13,7 +13,6 @@ public abstract class PointEditor {
 	protected OsmandApplication app;
 	protected final MapActivity mapActivity;
 
-	protected Object object;
 	protected boolean isNew;
 
 	private boolean portraitMode;
@@ -53,10 +52,10 @@ public abstract class PointEditor {
 	public abstract void saveState(Bundle bundle);
 	public abstract void restoreState(Bundle bundle);
 
-	public abstract String getFragmentName();
+	public abstract String getFragmentTag();
 
 	public void hide() {
-		Fragment fragment = mapActivity.getSupportFragmentManager().findFragmentByTag(getFragmentName());
+		Fragment fragment = mapActivity.getSupportFragmentManager().findFragmentByTag(getFragmentTag());
 		if (fragment != null)
 			((PointEditorFragment)fragment).dismiss();
 	}
