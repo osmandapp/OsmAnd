@@ -57,8 +57,7 @@ public class MapsInCategoryFragment extends DialogFragment {
 
 	public void onCategorySelected(@NonNull IndexItemCategoryWithSubcat category) {
 		LOG.debug("onCategorySelected()");
-		getChildFragmentManager().beginTransaction().replace(R.id.fragmentContainer,
-				SubcategoriesFragment.createInstance(category)).addToBackStack(null).commit();
+		createInstance(category).show(getChildFragmentManager(), TAG);
 	}
 
 	public void onIndexItemSelected(@NonNull IndexItem indexItem) {
