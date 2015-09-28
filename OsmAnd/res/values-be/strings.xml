@@ -736,7 +736,7 @@
 	<string name="favorite_home_category">Дом</string>
 	<string name="favorite_friends_category">Сябры</string>
 	<string name="favorite_places_category">Месцы</string>
-	<string name="favorite_default_category">Іншае</string>
+	<string name="shared_string_others">Іншае</string>
 	<string name="favourites_edit_dialog_name">Назва</string>
 	<string name="favourites_edit_dialog_category">Катэгорыя</string>
 	<string name="shared_string_no_thanks">Не, дзякуй</string>

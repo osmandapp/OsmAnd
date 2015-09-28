@@ -142,7 +142,7 @@ public class DownloadActivity extends BaseDownloadActivity {
 			}
 		});
 
-		findViewById(R.id.DownloadButton).setOnClickListener(new View.OnClickListener() {
+		findViewById(R.id.downloadButton).setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
@@ -150,7 +150,7 @@ public class DownloadActivity extends BaseDownloadActivity {
 			}
 
 		});
-		findViewById(R.id.WikiButton).setOnClickListener(new View.OnClickListener() {
+		findViewById(R.id.wikiButton).setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
@@ -423,7 +423,7 @@ public class DownloadActivity extends BaseDownloadActivity {
 		} else {
 			BasicProgressAsyncTask<?, ?, ?> task = DownloadActivity.downloadListIndexThread.getCurrentRunningTask();
 			boolean running = task instanceof DownloadIndexesThread.DownloadIndexesAsyncTask;
-			((Button) findViewById(R.id.DownloadButton)).setEnabled(!running);
+			((Button) findViewById(R.id.downloadButton)).setEnabled(!running);
 			String text;
 			int downloads = DownloadActivity.downloadListIndexThread.getDownloads();
 			if (!running) {
@@ -441,9 +441,9 @@ public class DownloadActivity extends BaseDownloadActivity {
 					text += " (" + (excessLimit ? "! " : "") + getString(R.string.files_limit, left).toLowerCase() + ")";
 				}
 			}
-			((Button) findViewById(R.id.DownloadButton)).setText(text);
+			((Button) findViewById(R.id.downloadButton)).setText(text);
 			List<IndexItem> wikipediaItems = getWikipediaItems();
-			findViewById(R.id.WikiButton).setVisibility(wikipediaItems.size() == 0 ? View.GONE : View.VISIBLE);
+			findViewById(R.id.wikiButton).setVisibility(wikipediaItems.size() == 0 ? View.GONE : View.VISIBLE);
 		}
 
 		for (WeakReference<Fragment> ref : fragList) {

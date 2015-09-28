@@ -110,7 +110,7 @@
             android:gravity="center"/>
         
         <Button
-            android:id="@+id/DownloadButton"
+            android:id="@+id/downloadButton"
             android:layout_width="0dp"
             android:layout_height="@dimen/list_item_height"
             android:layout_weight="1"
@@ -120,7 +120,7 @@
             android:textColor="?attr/pstsTextColor"/>
 
         <ImageView
-            android:id="@+id/WikiButton"
+            android:id="@+id/wikiButton"
             android:layout_width="@dimen/list_item_height"
             android:layout_height="@dimen/list_item_height"
             android:scaleType="centerInside"

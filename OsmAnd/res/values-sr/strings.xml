@@ -273,7 +273,7 @@
 	<string name="favourites_delete_multiple_succesful">Омиљена тачка(е) је успешно избрисана.</string>
 	<string name="favorite_friends_category">Пријатељи</string>
 	<string name="favorite_places_category">Места</string>
-	<string name="favorite_default_category">Остало</string>
+	<string name="shared_string_others">Остало</string>
 	<string name="favourites_edit_dialog_name">Име</string>
 	<string name="favourites_edit_dialog_category">Врста</string>
 	<string name="shared_string_no_thanks">Не, хвала</string>

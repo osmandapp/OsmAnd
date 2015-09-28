@@ -302,7 +302,7 @@
 <string name="favourites_delete_multiple_succesful">S\'ha suprimit amb èxit el(s) punt(s) preferit(s).</string>
 <string name="favorite_friends_category">Amics</string>
 <string name="favorite_places_category">Llocs</string>
-<string name="favorite_default_category">Altres</string>
+<string name="shared_string_others">Altres</string>
 <string name="favourites_edit_dialog_name">Nom</string>
 <string name="favourites_edit_dialog_category">Categoria</string>
 

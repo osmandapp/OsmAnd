@@ -554,7 +554,7 @@
     <string name="favorite_home_category">Hjem</string>
     <string name="favorite_friends_category">Venner</string>
     <string name="favorite_places_category">Steder</string>
-    <string name="favorite_default_category">Andre</string>
+    <string name="shared_string_others">Andre</string>
     <string name="favourites_edit_dialog_name">Navn</string>
     <string name="favourites_edit_dialog_category">Kategori</string>
     <string name="shared_string_no_thanks">Nej tak</string>

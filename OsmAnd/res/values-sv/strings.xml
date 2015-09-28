@@ -434,7 +434,7 @@
 <string name="favorite_home_category">Hem</string>
 <string name="favorite_friends_category">Vänner</string>
 <string name="favorite_places_category">Platser</string>
-<string name="favorite_default_category">Annat</string>
+<string name="shared_string_others">Annat</string>
 <string name="favourites_edit_dialog_name">Namn</string>
 <string name="favourites_edit_dialog_category">Kategori</string>
 <string name="shared_string_no_thanks">Nej, tack</string>
