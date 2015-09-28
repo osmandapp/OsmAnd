@@ -10,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.GestureDetector;
@@ -511,7 +512,7 @@ public class MapContextMenuFragment extends Fragment {
 	public void dismissMenu() {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
-			activity.getSupportFragmentManager().popBackStack();
+			activity.getSupportFragmentManager().popBackStack(TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 		}
 	}
 
@@ -540,8 +541,8 @@ public class MapContextMenuFragment extends Fragment {
 		MapContextMenuFragment fragment = new MapContextMenuFragment();
 		mapActivity.getSupportFragmentManager().beginTransaction()
 				.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
-				.add(R.id.fragmentContainer, fragment, "MapContextMenuFragment")
-				.addToBackStack(null).commit();
+				.add(R.id.fragmentContainer, fragment, TAG)
+				.addToBackStack(TAG).commit();
 	}
 
 	private MapContextMenu getCtxMenu() {

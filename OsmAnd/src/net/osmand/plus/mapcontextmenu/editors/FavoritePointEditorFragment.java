@@ -6,8 +6,10 @@ import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 
 import net.osmand.data.FavouritePoint;
+import net.osmand.data.PointDescription;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -28,6 +30,11 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		super.onAttach(activity);
 		helper = getMyApplication().getFavorites();
 		editor = getMapActivity().getFavoritePointEditor();
+	}
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 		favorite = editor.getFavorite();
 	}
 
@@ -53,7 +60,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		FavoritePointEditorFragment fragment = new FavoritePointEditorFragment();
 		mapActivity.getSupportFragmentManager().beginTransaction()
 				//.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
-				.add(R.id.fragmentContainer, fragment, editor.getFragmentName())
+				.add(R.id.fragmentContainer, fragment, editor.getFragmentTag())
 				.addToBackStack(null).commit();
 	}
 
@@ -82,30 +89,31 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 			builder.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					if (editor.isNew()) {
-						doAddFavorite(point.getName(), point.getCategory(), point.getDescription());
-					} else {
-						helper.editFavouriteName(favorite, point.getName(), point.getCategory(), point.getDescription());
-					}
-					getMapActivity().getMapView().refreshMap(true);
-					if (needDismiss) {
-						dismiss(true);
-					}
+					doSave(favorite, point.getName(), point.getCategory(), point.getDescription(), needDismiss);
 				}
 			});
 			builder.create().show();
 		} else {
-			if (editor.isNew()) {
-				doAddFavorite(point.getName(), point.getCategory(), point.getDescription());
-			} else {
-				helper.editFavouriteName(favorite, point.getName(), point.getCategory(), point.getDescription());
-			}
-			getMapActivity().getMapView().refreshMap(true);
-			if (needDismiss) {
-				dismiss(true);
-			}
+			doSave(favorite, point.getName(), point.getCategory(), point.getDescription(), needDismiss);
 		}
 		saved = true;
+	}
+
+	private void doSave(FavouritePoint favorite, String name, String category, String description, boolean needDismiss) {
+		if (editor.isNew()) {
+			doAddFavorite(name, category, description);
+		} else {
+			helper.editFavouriteName(favorite, name, category, description);
+		}
+		getMapActivity().getMapView().refreshMap(true);
+		if (needDismiss) {
+			dismiss(false);
+		}
+
+		PointDescription pointDescription = favorite.getPointDescription();
+		pointDescription.setLat(favorite.getLatitude());
+		pointDescription.setLon(favorite.getLongitude());
+		getMapActivity().getContextMenu().show(pointDescription, new FavouritePoint(favorite));
 	}
 
 	private void doAddFavorite(String name, String category, String description) {

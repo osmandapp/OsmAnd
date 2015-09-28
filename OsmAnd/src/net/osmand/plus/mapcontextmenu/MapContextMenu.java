@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 
 import net.osmand.Location;
 import net.osmand.ResultMatcher;
@@ -52,7 +53,7 @@ public class MapContextMenu {
 	private static final String KEY_CTX_MENU_STREET_STR = "key_ctx_menu_street_str";
 
 	public boolean isMenuVisible() {
-		return mapActivity.getSupportFragmentManager().findFragmentByTag("MapContextMenuFragment") != null;
+		return findMenuFragment() != null;
 	}
 
 	public PointDescription getPointDescription() {
@@ -107,8 +108,9 @@ public class MapContextMenu {
 
 	public void hide() {
 		MapContextMenuFragment fragment = findMenuFragment();
-		if (fragment != null)
+		if (fragment != null) {
 			fragment.dismissMenu();
+		}
 	}
 
 	private boolean needStreetName() {
@@ -138,11 +140,12 @@ public class MapContextMenu {
 	}
 
 	private MapContextMenuFragment findMenuFragment() {
-		Fragment fragment = mapActivity.getSupportFragmentManager().findFragmentByTag("MapContextMenuFragment");
-		if (fragment != null)
-			return (MapContextMenuFragment)fragment;
-		else
+		Fragment fragment = mapActivity.getSupportFragmentManager().findFragmentByTag(MapContextMenuFragment.TAG);
+		if (fragment != null) {
+			return (MapContextMenuFragment) fragment;
+		} else {
 			return null;
+		}
 	}
 
 	public int getLeftIconId() {
@@ -335,8 +338,11 @@ public class MapContextMenu {
 
 	public void saveMenuState(Bundle bundle) {
 		if (object != null) {
-			if (object instanceof Amenity)
-				bundle.putSerializable(KEY_CTX_MENU_OBJECT, (Amenity)object);
+			if (object instanceof Amenity) {
+				bundle.putSerializable(KEY_CTX_MENU_OBJECT, (Amenity) object);
+			} else if (object instanceof FavouritePoint) {
+				bundle.putSerializable(KEY_CTX_MENU_OBJECT, (FavouritePoint) object);
+			}
 		}
 		bundle.putSerializable(KEY_CTX_MENU_POINT_DESC, pointDescription);
 		bundle.putSerializable(KEY_CTX_MENU_NAME_STR, nameStr);

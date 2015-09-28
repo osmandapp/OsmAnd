@@ -2140,7 +2140,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="rendering_value_boldOutline_name">Contorno in grassetto</string>
     <string name="traffic_warning_hazard">Pericolo</string>
     <string name="dahboard_options_dialog_title">Configura il pannello di controllo</string>
-	<string name="shared_string_card_was_hidden">La carta era nascosta</string>
+	<string name="shared_string_card_was_hidden">La scheda è stata nascosta</string>
 	<string name="shared_string_undo">Annulla azione</string>
 	<string name="shared_string_skip">Salta</string>
 	<string name="app_name_osmand">OsmAnd</string>
@@ -2158,14 +2158,14 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="closing_at">Chiude alle</string>
 <string name="av_locations_descr">File GPX con note locali</string>
     <string name="av_locations">Località</string>
-    <string name="tag_poi_name">Nome</string>
+    <string name="tag_poi_name">nome</string>
 	<string name="tag_poi_amenity">amenità</string>
 	<string name="contact_info">Informazioni di contatto</string>
 	<string name="description">Descrizione</string>
 	<string name="add_opening_hours">Aggiungi orari di apertura</string>
 	<string name="poi_dialog_poi_type">Tipo di PDI</string>
 <string name="number_of_rows_in_dash">Numero di righe del cruscotto %1$s</string>
-<string name="please_specify_poi_type">Per favore specifica il tipo si PDI.</string>
+<string name="please_specify_poi_type">Per favore specifica il tipo di PDI.</string>
 <string name="poi_action_delete">elimina</string>
 	<string name="working_days">Giorni lavorativi</string>
 	<string name="recent_places">Luoghi recenti</string>
