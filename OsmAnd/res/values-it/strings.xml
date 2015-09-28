@@ -2184,4 +2184,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 <string name="favourites_edit_dialog_title">Informazioni preferite</string>
     <string name="favourites_context_menu_add">Aggiungi preferito</string>
 	<string name="roads">Strade</string>
-</resources>
+<string name="shared_string_trip_recording">Registrazione viaggio</string>
+    <string name="shared_string_navigation">Navigazione</string>
+    <string name="osmand_running_in_background">Avviato in backgroung</string>
+    </resources>
