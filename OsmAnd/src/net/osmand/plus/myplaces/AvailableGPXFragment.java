@@ -183,7 +183,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		if (OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) == null) {
 			return;
 		}
-		if (v == null) {
+		if (v == null || ctx == null || app == null) {
 			return;
 		}
 		final boolean isRecording = app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get();
