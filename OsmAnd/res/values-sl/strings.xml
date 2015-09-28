@@ -508,7 +508,7 @@
 	<string name="favorite_friends_category">Naslovi prijateljev</string>
 	<string name="favourites_edit_dialog_name">Naziv</string>
 	<string name="favourites_edit_dialog_category">Skupina</string>
-	<string name="favorite_default_category">Druge točke</string>
+	<string name="shared_string_others">Druge točke</string>
 	<string name="favorite_home_category">Domači naslovi</string>
 	<string name="favorite_places_category">Priljubljeni kraji</string>
 	<string name="favorite_delete_multiple">Izbrisane bodo priljubljene točke (%1$d) in skupine (%2$d). Ali ste prepričani, da želite nadaljevati?</string>
@@ -1990,4 +1990,9 @@
 	<string name="unsaved_changes_will_be_lost">Vse neshranjene spremembe bodo izgubljene. Ali želite nadaljevati?</string>
 	<string name="downloads_left_template">%1$s prejemov v vrsti</string>
 	<string name="roads">Poti</string>
-</resources>
+<string name="shared_string_trip_recording">Beleženje poti</string>
+    <string name="shared_string_navigation">Navigacija</string>
+    <string name="osmand_running_in_background">Delovanje v ozadju</string>
+    <string name="favourites_edit_dialog_title">Podrobnosti o točki</string>
+    <string name="favourites_context_menu_add">Dodaj priljubljeno</string>
+	</resources>

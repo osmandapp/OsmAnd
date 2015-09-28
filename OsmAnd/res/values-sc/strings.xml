@@ -1151,7 +1151,7 @@
 	<string name="favorite_home_category">Domo</string>
 	<string name="favorite_friends_category">Amigos</string>
 	<string name="favorite_places_category">Logos</string>
-	<string name="favorite_default_category">Àteru</string>
+	<string name="shared_string_others">Àteru</string>
 	<string name="favourites_edit_dialog_name">Nùmene</string>
 	<string name="favourites_edit_dialog_category">Categoria</string>
 	<string name="shared_string_no_thanks">No, gràtzias</string>

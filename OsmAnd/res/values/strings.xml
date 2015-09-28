@@ -1483,7 +1483,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="favorite_home_category">Home</string>
 	<string name="favorite_friends_category">Friends</string>
 	<string name="favorite_places_category">Places</string>
-	<string name="favorite_default_category">Others</string>
+	<string name="shared_string_others">Others</string>
 	<string name="favourites_edit_dialog_name">Name</string>
 	<string name="favourites_edit_dialog_category">Category</string>
 	<string name="shared_string_no_thanks">No, thanks</string>

@@ -262,7 +262,7 @@
 	<string name="favorite_home_category">집</string>
 	<string name="favorite_friends_category">친구</string>
 	<string name="favorite_places_category">장소</string>
-	<string name="favorite_default_category">기타</string>
+	<string name="shared_string_others">기타</string>
 	
 	<string name="favourites_edit_dialog_name">이름</string>
 	<string name="favourites_edit_dialog_category">카테고리</string>

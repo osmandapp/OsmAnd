@@ -9,7 +9,6 @@ import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.IndexItem;
@@ -133,44 +132,62 @@ public class IndexItemCategoryWithSubcat implements Comparable<IndexItemCategory
 				}
 			}
 
-			IndexItemCategoryWithSubcat region;
-			region = cats.get(i.getBasename());
-			final String visibleName = i.getVisibleName(ctx, ctx.getRegions());
-			i.setName(visibleName);
-			if (region == null) {
-				final CategoryStaticData regionStaticData = new CategoryStaticData(0, 0);
-				regionStaticData.setName(visibleName);
-				region = new IndexItemCategoryWithSubcat(regionStaticData);
-				cats.put(i.getBasename(), region);
-				category.subcats.add(region);
+			if (i.getType() == DownloadActivityType.VOICE_FILE) {
+				category.items.add(i);
+			} else {
+				IndexItemCategoryWithSubcat region;
+				region = cats.get(i.getBasename());
+				// TODO remove
+				final String visibleName = i.getVisibleName(ctx, ctx.getRegions());
+				i.setName(visibleName);
+				if (region == null) {
+					final CategoryStaticData regionStaticData = new CategoryStaticData(0, 0);
+					regionStaticData.setName(visibleName);
+					region = new IndexItemCategoryWithSubcat(regionStaticData);
+					cats.put(i.getBasename(), region);
+					category.subcats.add(region);
+				}
+				region.items.add(i);
+				if (i.getType() == DownloadActivityType.NORMAL_FILE
+						|| i.getType() == DownloadActivityType.WIKIPEDIA_FILE
+						|| i.getType() == DownloadActivityType.SRTM_COUNTRY_FILE
+						|| i.getType() == DownloadActivityType.HILLSHADE_FILE) {
+					category.types.add(i.getType().getStringResource());
+					region.types.add(i.getType().getStringResource());
+				}
 			}
-			region.items.add(i);
-
-			if (i.getType() == DownloadActivityType.NORMAL_FILE) {
-				region.types.add(R.string.shared_string_map);
-			}
-			if (i.getType() == DownloadActivityType.WIKIPEDIA_FILE) {
-				region.types.add(R.string.shared_string_wikipedia);
-			}
-			if (i.getType() == DownloadActivityType.ROADS_FILE) {
-				region.types.add(R.string.roads);
-			}
-
-			final CategoryStaticData parent = category.categoryStaticData.getParent();
 		}
 		final Collator collator = OsmAndCollator.primaryCollator();
-		for (IndexItemCategoryWithSubcat ct : mainList) {
+		for (IndexItemCategoryWithSubcat category : mainList) {
 			final OsmandRegions osmandRegions = ctx.getResourceManager().getOsmandRegions();
-			Collections.sort(ct.items, new Comparator<IndexItem>() {
-				@Override
-				public int compare(IndexItem lhs, IndexItem rhs) {
-					return collator.compare(lhs.getVisibleName(ctx, osmandRegions),
-							rhs.getVisibleName(ctx, osmandRegions));
-				}
-			});
+			sortIndexItemCategoryWithSybcat(category, ctx, osmandRegions, collator);
 		}
 		Collections.sort(mainList);
 		return mainList;
+	}
+
+	private static void sortIndexItemCategoryWithSybcat(final IndexItemCategoryWithSubcat category,
+														final OsmandApplication context,
+														final OsmandRegions osmandRegions,
+														final Collator collator) {
+		if (category.subcats.size() > 0) {
+			Collections.sort(category.subcats, new Comparator<IndexItemCategoryWithSubcat>() {
+				@Override
+				public int compare(IndexItemCategoryWithSubcat lhs, IndexItemCategoryWithSubcat rhs) {
+					return collator.compare(lhs.getName(), rhs.getName());
+				}
+			});
+			for (IndexItemCategoryWithSubcat subcat : category.subcats) {
+				sortIndexItemCategoryWithSybcat(subcat, context, osmandRegions, collator);
+			}
+		}
+		Collections.sort(category.items, new Comparator<IndexItem>() {
+			@Override
+			public int compare(IndexItem lhs, IndexItem rhs) {
+				return collator.compare(lhs.getVisibleName(context, osmandRegions),
+						rhs.getVisibleName(context, osmandRegions));
+			}
+		});
 	}
 
 	@Override

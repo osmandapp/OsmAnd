@@ -168,7 +168,7 @@
   <string name="favorite_home_category">Casa</string>
   <string name="favorite_friends_category">Amici</string>
   <string name="favorite_places_category">Luoghi</string>
-  <string name="favorite_default_category">Altro</string>
+  <string name="shared_string_others">Altro</string>
   <string name="shared_string_no_thanks">No, grazie</string>
   <string name="basemap_missing">La mappa di base del mondo (ricopre l\'intero mondo per zoom bassi) è mancante. Puoi scaricare World_basemap_x.obf per un sistema completo.</string>
   <string name="vector_data_missing">Mancano i dati (\'offline\') nella scheda SD. Ti consigliamo di scaricarli per poter usare le mappe offline.</string>
@@ -2140,7 +2140,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="rendering_value_boldOutline_name">Contorno in grassetto</string>
     <string name="traffic_warning_hazard">Pericolo</string>
     <string name="dahboard_options_dialog_title">Configura il pannello di controllo</string>
-	<string name="shared_string_card_was_hidden">La carta era nascosta</string>
+	<string name="shared_string_card_was_hidden">La scheda è stata nascosta</string>
 	<string name="shared_string_undo">Annulla azione</string>
 	<string name="shared_string_skip">Salta</string>
 	<string name="app_name_osmand">OsmAnd</string>
@@ -2158,14 +2158,14 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="closing_at">Chiude alle</string>
 <string name="av_locations_descr">File GPX con note locali</string>
     <string name="av_locations">Località</string>
-    <string name="tag_poi_name">Nome</string>
+    <string name="tag_poi_name">nome</string>
 	<string name="tag_poi_amenity">amenità</string>
 	<string name="contact_info">Informazioni di contatto</string>
 	<string name="description">Descrizione</string>
 	<string name="add_opening_hours">Aggiungi orari di apertura</string>
 	<string name="poi_dialog_poi_type">Tipo di PDI</string>
 <string name="number_of_rows_in_dash">Numero di righe del cruscotto %1$s</string>
-<string name="please_specify_poi_type">Per favore specifica il tipo si PDI.</string>
+<string name="please_specify_poi_type">Per favore specifica il tipo di PDI.</string>
 <string name="poi_action_delete">elimina</string>
 	<string name="working_days">Giorni lavorativi</string>
 	<string name="recent_places">Luoghi recenti</string>
@@ -2184,4 +2184,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 <string name="favourites_edit_dialog_title">Informazioni preferite</string>
     <string name="favourites_context_menu_add">Aggiungi preferito</string>
 	<string name="roads">Strade</string>
-</resources>
+<string name="shared_string_trip_recording">Registrazione viaggio</string>
+    <string name="shared_string_navigation">Navigazione</string>
+    <string name="osmand_running_in_background">Avviato in backgroung</string>
+    </resources>

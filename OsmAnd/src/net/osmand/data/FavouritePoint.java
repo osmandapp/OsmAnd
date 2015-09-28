@@ -27,6 +27,16 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		this.name = name;
 	}
 
+	public FavouritePoint(FavouritePoint favouritePoint) {
+		this.latitude = favouritePoint.latitude;
+		this.longitude = favouritePoint.longitude;
+		this.category = favouritePoint.category;
+		this.name = favouritePoint.name;
+		this.color = favouritePoint.color;
+		this.description = favouritePoint.description;
+		this.visible = favouritePoint.visible;
+	}
+
 	public int getColor() {
 		return color;
 	}

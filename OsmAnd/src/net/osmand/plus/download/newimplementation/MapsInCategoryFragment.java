@@ -12,6 +12,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.HasName;
 
@@ -57,12 +58,12 @@ public class MapsInCategoryFragment extends DialogFragment {
 
 	public void onCategorySelected(@NonNull IndexItemCategoryWithSubcat category) {
 		LOG.debug("onCategorySelected()");
-		getChildFragmentManager().beginTransaction().replace(R.id.fragmentContainer,
-				SubcategoriesFragment.createInstance(category)).addToBackStack(null).commit();
+		createInstance(category).show(getChildFragmentManager(), TAG);
 	}
 
 	public void onIndexItemSelected(@NonNull IndexItem indexItem) {
 		LOG.debug("onIndexItemSelected()");
+		((DownloadActivity) getActivity()).startDownload(indexItem);
 	}
 
 	public static MapsInCategoryFragment createInstance(

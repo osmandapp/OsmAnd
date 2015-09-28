@@ -302,7 +302,7 @@
 <string name="favourites_delete_multiple_succesful">S\'ha suprimit amb èxit el(s) punt(s) preferit(s).</string>
 <string name="favorite_friends_category">Amics</string>
 <string name="favorite_places_category">Llocs</string>
-<string name="favorite_default_category">Altres</string>
+<string name="shared_string_others">Altres</string>
 <string name="favourites_edit_dialog_name">Nom</string>
 <string name="favourites_edit_dialog_category">Categoria</string>
 
@@ -2131,4 +2131,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
 	<string name="unsaved_changes_will_be_lost">Es perdran tots els canvis no desats. Voleu continuar?</string>
 	<string name="downloads_left_template">%1$s baixades pendents</string>
 	<string name="roads">Carreteres</string>
-</resources>
+<string name="shared_string_trip_recording">Enregistrament de trajectes</string>
+    <string name="shared_string_navigation">Navegació</string>
+    <string name="osmand_running_in_background">Execució en procés de fons</string>
+    </resources>

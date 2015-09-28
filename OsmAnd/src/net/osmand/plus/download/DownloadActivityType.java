@@ -1,6 +1,8 @@
 package net.osmand.plus.download;
 
 import android.content.Context;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
@@ -24,34 +26,53 @@ import java.util.Map;
 
 import static net.osmand.IndexConstants.BINARY_MAP_INDEX_EXT;
 
-public class DownloadActivityType {
+public class DownloadActivityType implements Parcelable {
 	private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
-	private static Map<String, DownloadActivityType> byTag = new HashMap<String, DownloadActivityType>();
+	private static Map<String, DownloadActivityType> byTag = new HashMap<>();
 	
 	public static final DownloadActivityType NORMAL_FILE = new DownloadActivityType(R.string.download_regular_maps, "map");
-	public static final DownloadActivityType VOICE_FILE = new DownloadActivityType(R.string.voices, "voice");
+	public static final DownloadActivityType VOICE_FILE =
+			new DownloadActivityType(R.string.voices, R.drawable.ic_action_volume_up, "voice");
 	public static final DownloadActivityType ROADS_FILE = new DownloadActivityType(R.string.download_roads_only_maps, "road_map");
-	public static final DownloadActivityType SRTM_COUNTRY_FILE  = new DownloadActivityType(R.string.download_srtm_maps, "srtm_map"); 
-	public static final DownloadActivityType HILLSHADE_FILE = new DownloadActivityType(R.string.download_hillshade_maps, "hillshade");
-	public static final DownloadActivityType WIKIPEDIA_FILE = new DownloadActivityType(R.string.download_wikipedia_maps, "wikimap");
+	public static final DownloadActivityType SRTM_COUNTRY_FILE =
+			new DownloadActivityType(R.string.download_srtm_maps,
+					R.drawable.ic_plugin_srtm, "srtm_map");
+	public static final DownloadActivityType HILLSHADE_FILE =
+			new DownloadActivityType(R.string.download_hillshade_maps,
+					R.drawable.ic_action_hillshade_dark, "hillshade");
+	public static final DownloadActivityType WIKIPEDIA_FILE =
+			new DownloadActivityType(R.string.download_wikipedia_maps,
+					R.drawable.ic_world_globe_dark, "wikimap");
 	public static final DownloadActivityType LIVE_UPDATES_FILE = new DownloadActivityType(R.string.download_live_updates, "live_updates");
-	private int resource;
-	private String[] tags;
+	private final int stringResource;
+	private final int iconResource;
 
-	public DownloadActivityType(int resource, String... tags) {
-		this.resource = resource;
-		this.tags = tags;
-		for(String st : tags) {
-			byTag.put(st, this);
-		}
+	private String tag;
+
+	public DownloadActivityType(int stringResource, int iconResource, String tag) {
+		this.stringResource = stringResource;
+		this.tag = tag;
+		byTag.put(tag, this);
+		this.iconResource = iconResource;
 	}
 
-	public int getResource(){
-		return resource;
+	public DownloadActivityType(int stringResource, String tag) {
+		this.stringResource = stringResource;
+		this.tag = tag;
+		byTag.put(tag, this);
+		iconResource = R.drawable.ic_map;
 	}
-	
+
+	public int getStringResource(){
+		return stringResource;
+	}
+
+	public int getIconResource() {
+		return iconResource;
+	}
+
 	public String getTag() {
-		return tags[0];
+		return tag;
 	}
 	
 
@@ -66,7 +87,7 @@ public class DownloadActivityType {
 	}
 
 	public String getString(Context c) {
-		return c.getString(resource);
+		return c.getString(stringResource);
 	}
 
 	public static DownloadActivityType getIndexType(String tagName) {
@@ -230,9 +251,8 @@ public class DownloadActivityType {
 	}
 	
 	public String getVisibleName(IndexItem indexItem, Context ctx, OsmandRegions osmandRegions) {
-		String fileName = indexItem.fileName;
-		
 		if (this == VOICE_FILE) {
+			String fileName = indexItem.fileName;
 			if (fileName.endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)) {
 				return FileNameTranslationHelper.getVoiceName(ctx, getBasename(indexItem));
 			} else if (fileName.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_ZIP)) {
@@ -244,9 +264,9 @@ public class DownloadActivityType {
 		if (bn.endsWith(FileNameTranslationHelper.WIKI_NAME)){
 			return FileNameTranslationHelper.getWikiName(ctx,bn);
 		}
-		if (bn.startsWith(FileNameTranslationHelper.HILL_SHADE)){
-			return FileNameTranslationHelper.getHillShadeName(ctx, osmandRegions, bn);
-		}
+//		if (this == HILLSHADE_FILE){
+//			return FileNameTranslationHelper.getHillShadeName(ctx, osmandRegions, bn);
+//		}
 		final String lc = bn.toLowerCase();
 		String std = FileNameTranslationHelper.getStandardMapName(ctx, lc);
 		if (std != null) {
@@ -271,8 +291,7 @@ public class DownloadActivityType {
 			if (l == -1) {
 				l = fileName.length();
 			}
-			String s = fileName.substring(0, l);
-			return s;
+			return fileName.substring(0, l);
 		} else if (this == HILLSHADE_FILE) {
 			return fileName.replace('_', ' ');
 		} else if (this == LIVE_UPDATES_FILE) {
@@ -314,16 +333,19 @@ public class DownloadActivityType {
 		if (fileName.endsWith(IndexConstants.EXTRA_ZIP_EXT)) {
 			return fileName.substring(0, fileName.length() - IndexConstants.EXTRA_ZIP_EXT.length());
 		}
+		if (this == HILLSHADE_FILE) {
+			return fileName.substring(0, fileName.length() - IndexConstants.SQLITE_EXT.length())
+					.replace(FileNameTranslationHelper.HILL_SHADE, "");
+		}
 		if (fileName.endsWith(IndexConstants.SQLITE_EXT)) {
-			return fileName.substring(0, fileName.length() - IndexConstants.SQLITE_EXT.length()).replace('_', ' ');
+			return fileName.substring(0, fileName.length() - IndexConstants.SQLITE_EXT.length());
 		}
 		if (this == VOICE_FILE) {
 			int l = fileName.lastIndexOf('_');
 			if (l == -1) {
 				l = fileName.length();
 			}
-			String s = fileName.substring(0, l);
-			return s;
+			return fileName.substring(0, l);
 		}
 		if (this == LIVE_UPDATES_FILE) {
 			if(fileName.indexOf('.') > 0){
@@ -340,6 +362,32 @@ public class DownloadActivityType {
 		return fileName;
 	}
 
+	@Override
+	public int describeContents() {
+		return 0;
+	}
 
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeInt(this.stringResource);
+		dest.writeInt(this.iconResource);
+		dest.writeString(this.tag);
+	}
 
+	protected DownloadActivityType(Parcel in) {
+		this.stringResource = in.readInt();
+		this.iconResource = in.readInt();
+		this.tag = in.readString();
+		byTag.put(tag, this);
+	}
+
+	public static final Parcelable.Creator<DownloadActivityType> CREATOR = new Parcelable.Creator<DownloadActivityType>() {
+		public DownloadActivityType createFromParcel(Parcel source) {
+			return new DownloadActivityType(source);
+		}
+
+		public DownloadActivityType[] newArray(int size) {
+			return new DownloadActivityType[size];
+		}
+	};
 }

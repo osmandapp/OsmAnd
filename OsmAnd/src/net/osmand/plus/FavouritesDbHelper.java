@@ -559,7 +559,7 @@ public class FavouritesDbHelper {
 		addEmptyCategory(context.getString(R.string.favorite_home_category));
 		addEmptyCategory(context.getString(R.string.favorite_friends_category));
 		addEmptyCategory(context.getString(R.string.favorite_places_category));
-		addEmptyCategory(context.getString(R.string.favorite_default_category));
+		addEmptyCategory(context.getString(R.string.shared_string_others));
 	}
 
 	private FavoriteGroup getOrCreateGroup(FavouritePoint p, int defColor) {

@@ -14,7 +14,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -55,13 +54,6 @@ public class NewLocalIndexesFragment extends OsmAndListFragment {
 		ListView listView = (ListView) view.findViewById(android.R.id.list);
 		mAdapter = new CategoriesAdapter(getActivity(), getMyApplication());
 		listView.setAdapter(mAdapter);
-		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				LOG.debug("onItemClick()");
-
-			}
-		});
 
 		View header = inflater.inflate(R.layout.local_index_fragment_header, listView, false);
 		initMemoryConsumedCard(header);
@@ -116,7 +108,6 @@ public class NewLocalIndexesFragment extends OsmAndListFragment {
 		fragmentTransaction.addToBackStack(null);
 		MapsInCategoryFragment.createInstance(mAdapter.getItem(position-1))
 				.show(fragmentTransaction, MapsInCategoryFragment.TAG);
-		LOG.debug("onListItemClick()");
 	}
 
 	private DownloadActivity getDownloadActivity() {
@@ -124,7 +115,6 @@ public class NewLocalIndexesFragment extends OsmAndListFragment {
 	}
 
 	public void onCategorizationFinished(List<IndexItem> filtered, List<IndexItemCategoryWithSubcat> cats) {
-		LOG.debug("cats=" + cats);
 		mAdapter.clear();
 		mAdapter.addAll(cats);
 	}

@@ -1,12 +1,15 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,8 +17,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import net.osmand.plus.FavouritesDbHelper;
@@ -23,10 +29,13 @@ import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.widgets.AutoCompleteTextViewEx;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
+
+import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 
 public abstract class PointEditorFragment extends Fragment {
 
@@ -36,16 +45,26 @@ public abstract class PointEditorFragment extends Fragment {
 		getEditor().saveState(outState);
 	}
 
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		if (savedInstanceState != null)
+			getEditor().restoreState(savedInstanceState);
+	}
+
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 
-		if (savedInstanceState != null)
-			getEditor().restoreState(savedInstanceState);
+		getActivity().findViewById(R.id.MapHudButtonsOverlay).setVisibility(View.INVISIBLE);
 
-		View view = inflater.inflate(R.layout.point_editor_fragment, container, false);
-
+		View view;
+		if (getEditor().isLandscapeLayout()) {
+			view = inflater.inflate(R.layout.point_editor_fragment_land, container, false);
+		} else {
+			view = inflater.inflate(R.layout.point_editor_fragment, container, false);
+		}
 		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
 		toolbar.setTitle(getToolbarTitle());
 		toolbar.setNavigationIcon(getMyApplication().getIconsCache().getIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha));
@@ -128,6 +147,8 @@ public abstract class PointEditorFragment extends Fragment {
 			save(false);
 		}
 		super.onDestroyView();
+
+		getActivity().findViewById(R.id.MapHudButtonsOverlay).setVisibility(View.VISIBLE);
 	}
 
 	protected void savePressed() {
@@ -210,6 +231,22 @@ public abstract class PointEditorFragment extends Fragment {
 		EditText descriptionEdit = (EditText) getView().findViewById(R.id.description_edit);
 		String res = descriptionEdit.getText().toString().trim();
 		return Algorithms.isEmpty(res) ? null : res;
+	}
+
+	// Utils
+	private int getScreenHeight() {
+		DisplayMetrics dm = new DisplayMetrics();
+		getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
+		return dm.heightPixels;
+	}
+
+	private int dpToPx(float dp) {
+		Resources r = getActivity().getResources();
+		return (int) TypedValue.applyDimension(
+				COMPLEX_UNIT_DIP,
+				dp,
+				r.getDisplayMetrics()
+		);
 	}
 
 }
