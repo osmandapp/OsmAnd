@@ -895,10 +895,10 @@
 	<string name="poi_cutline">Tablica wyjaśniająca</string>
 	<string name="poi_tree">Drzewo</string>
 	<string name="poi_kent_carriage_gap">Bramka (szerokość powozu)</string>
-	<string name="poi_icn_ref">Sieć węzłów międzynarodowej sieci rowerowej</string>
-	<string name="poi_ncn_ref">Sieć węzłów krajowej sieci rowerowej</string>
-	<string name="poi_rcn_ref">Sieć węzłów regionalnej sieci rowerowej</string>
-	<string name="poi_lcn_ref">Sieć węzłów lokalnej sieci rowerowej</string>
+	<string name="poi_icn_ref">Międzynarodowa trasa rowerowa</string>
+	<string name="poi_ncn_ref">Krajowa trasa rowerowa</string>
+	<string name="poi_rcn_ref">Regionalna trasa rowerowa</string>
+	<string name="poi_lcn_ref">Lokalna trasa rowerowa</string>
 	<string name="poi_iwn_ref">Sieć węzłów międzynarodowej sieci pieszej</string>
 	<string name="poi_nwn_ref">Sieć węzłów krajowej sieci pieszej</string>
 	<string name="poi_rwn_ref">Sieć węzłów regionalnej sieci pieszej</string>
