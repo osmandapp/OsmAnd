@@ -2140,4 +2140,7 @@
 <string name="roads">Veje</string>
 <string name="favourites_edit_dialog_title">Favorit information</string>
     <string name="favourites_context_menu_add">Tilføj favorit</string>
-	</resources>
+	<string name="shared_string_trip_recording">Optag ture</string>
+    <string name="shared_string_navigation">Navigation</string>
+    <string name="osmand_running_in_background">Kører i baggrunden</string>
+    </resources>
