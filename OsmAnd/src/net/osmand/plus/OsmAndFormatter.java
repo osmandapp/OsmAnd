@@ -11,12 +11,15 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
+import net.osmand.plus.OsmandSettings.SpeedConstants;
 import net.osmand.util.Algorithms;
 import android.content.Context;
 
 public class OsmAndFormatter {
 	public final static float METERS_IN_KILOMETER = 1000f;
 	public final static float METERS_IN_ONE_MILE = 1609.344f; // 1609.344
+	public final static float METERS_IN_ONE_NAUTICALMILE = 1852f; // 1852
+	
 	public final static float YARDS_IN_ONE_METER = 1.0936f;
 	public final static float FOOTS_IN_ONE_METER = YARDS_IN_ONE_METER * 3f;
 	private static final DecimalFormat fixed2 = new DecimalFormat("0.00");
@@ -36,6 +39,9 @@ public class OsmAndFormatter {
 		if (mc == MetricsConstants.MILES_AND_FOOTS) {
 			mainUnitInMeter = FOOTS_IN_ONE_METER;
 			metersInSecondUnit = METERS_IN_ONE_MILE;
+		} else if (mc == MetricsConstants.NAUTICAL_MILES) {
+			mainUnitInMeter = 1;
+			metersInSecondUnit = METERS_IN_ONE_NAUTICALMILE;
 		} else if (mc == MetricsConstants.MILES_AND_YARDS) {
 			mainUnitInMeter = YARDS_IN_ONE_METER;
 			metersInSecondUnit = METERS_IN_ONE_MILE;
@@ -84,6 +90,9 @@ public class OsmAndFormatter {
 		if (mc == MetricsConstants.KILOMETERS_AND_METERS) {
 			mainUnitStr = R.string.km;
 			mainUnitInMeters = METERS_IN_KILOMETER;
+		} else if (mc == MetricsConstants.NAUTICAL_MILES) {
+			mainUnitStr = R.string.nm;
+			mainUnitInMeters = METERS_IN_ONE_NAUTICALMILE;
 		} else {
 			mainUnitStr = R.string.mile;
 			mainUnitInMeters = METERS_IN_ONE_MILE;
@@ -95,6 +104,8 @@ public class OsmAndFormatter {
 			return MessageFormat.format("{0,number,#.#} " + ctx.getString(mainUnitStr), ((float) meters) / mainUnitInMeters).replace('\n', ' '); //$NON-NLS-1$
 		} else if (meters > 0.999f * mainUnitInMeters) {
 			return MessageFormat.format("{0,number,#.##} " + ctx.getString(mainUnitStr), ((float) meters) / mainUnitInMeters).replace('\n', ' '); //$NON-NLS-1$
+		} else if (mc == MetricsConstants.NAUTICAL_MILES && meters > 0.09f * mainUnitInMeters) {
+			return MessageFormat.format("{0,number,.##} " + ctx.getString(mainUnitStr), ((float) meters) / mainUnitInMeters).replace('\n', ' '); //$NON-NLS-1$
 		} else {
 			if (mc == MetricsConstants.KILOMETERS_AND_METERS) {
 				return ((int) (meters + 0.5)) + " " + ctx.getString(R.string.m); //$NON-NLS-1$
@@ -121,25 +132,62 @@ public class OsmAndFormatter {
 	
 	public static String getFormattedSpeed(float metersperseconds, OsmandApplication ctx) {
 		OsmandSettings settings = ctx.getSettings();
-		MetricsConstants mc = settings.METRIC_SYSTEM.get();
+		SpeedConstants mc = settings.SPEED_SYSTEM.get();
 		ApplicationMode am = settings.getApplicationMode();
 		float kmh = metersperseconds * 3.6f;
-		if (mc == MetricsConstants.KILOMETERS_AND_METERS) {
+		if (mc == SpeedConstants.KILOMETERS_PER_HOUR) {
 			// e.g. car case and for high-speeds: Display rounded to 1 km/h (5% precision at 20 km/h)
 			if (kmh >= 20 || am.hasFastSpeed()) {
-				return ((int) Math.round(kmh)) + " " + ctx.getString(R.string.km_h);
+				return ((int) Math.round(kmh)) + " " + mc.toShortString(ctx);
 			}
 			// for smaller values display 1 decimal digit x.y km/h, (0.5% precision at 20 km/h)
 			int kmh10 = (int) Math.round(kmh * 10f);
-			return (kmh10 / 10f) + " " + ctx.getString(R.string.km_h);
-		} else {
+			return (kmh10 / 10f) + " " + mc.toShortString(ctx);
+		} else if (mc == SpeedConstants.MILES_PER_HOUR) {
 			float mph = kmh * METERS_IN_KILOMETER / METERS_IN_ONE_MILE;
 			if (mph >= 20 || am.hasFastSpeed()) {
-				return ((int) Math.round(mph)) + " " + ctx.getString(R.string.mile_per_hour);
+				return ((int) Math.round(mph)) + " " + mc.toShortString(ctx);
 			} else {
 				int mph10 = (int) Math.round(mph * 10f);
-				return (mph10 / 10f) + " " + ctx.getString(R.string.mile_per_hour);
+				return (mph10 / 10f) + " " + mc.toShortString(ctx);
 			}
+		} else if (mc == SpeedConstants.NAUTICALMILES_PER_HOUR) {
+			float mph = kmh * METERS_IN_KILOMETER / METERS_IN_ONE_NAUTICALMILE;
+			if (mph >= 20 || am.hasFastSpeed()) {
+				return ((int) Math.round(mph)) + " " + mc.toShortString(ctx);
+			} else {
+				int mph10 = (int) Math.round(mph * 10f);
+				return (mph10 / 10f) + " " + mc.toShortString(ctx);
+			}
+		} else if (mc == SpeedConstants.MINUTES_PER_KILOMETER) {
+			if (metersperseconds < 0.111111111) {
+				return "-" + mc.toShortString(ctx);
+			}
+			float minperkm = METERS_IN_KILOMETER / (metersperseconds * 60);
+			if (minperkm >= 10) {
+				return ((int) Math.round(minperkm)) + " " + mc.toShortString(ctx);
+			} else {
+				int mph10 = (int) Math.round(minperkm * 10f);
+				return (mph10 / 10f) + " " + mc.toShortString(ctx);
+			}
+		} else if (mc == SpeedConstants.MINUTES_PER_MILE) {
+			if (metersperseconds < 0.111111111) {
+				return "-" + mc.toShortString(ctx);
+			}
+			float minperm = (METERS_IN_ONE_MILE) / (metersperseconds * 60);
+			if (minperm >= 10) {
+				return ((int) Math.round(minperm)) + " " + mc.toShortString(ctx);
+			} else {
+				int mph10 = (int) Math.round(minperm * 10f);
+				return (mph10 / 10f) + " " + mc.toShortString(ctx);
+			}
+		} else /*if (mc == SpeedConstants.METERS_PER_SECOND) */ {
+			if (metersperseconds >= 10) {
+				return ((int) Math.round(metersperseconds)) + " " + SpeedConstants.METERS_PER_SECOND.toShortString(ctx);
+			}
+			// for smaller values display 1 decimal digit x.y km/h, (0.5% precision at 20 km/h)
+			int kmh10 = (int) Math.round(metersperseconds * 10f);
+			return (kmh10 / 10f) + " " + SpeedConstants.METERS_PER_SECOND.toShortString(ctx);
 		}
 	}
 	

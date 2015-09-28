@@ -247,7 +247,8 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 			items.add(R.string.gpx_start_new_segment);
 			if(settings.LIVE_MONITORING.get()) {
 				items.add(R.string.live_monitoring_stop);
-			} else if(!settings.LIVE_MONITORING_URL.getProfileDefaultValue().equals(settings.LIVE_MONITORING_URL.get())){
+			} else if(!settings.LIVE_MONITORING_URL.getProfileDefaultValue(settings.APPLICATION_MODE.get()).
+					equals(settings.LIVE_MONITORING_URL.get())){
 				items.add(R.string.live_monitoring_start);
 			}
 		} else {

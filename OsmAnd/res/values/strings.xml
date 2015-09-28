@@ -9,6 +9,21 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="default_speed_system_descr">Define speed measurement system</string>
+    <string name="default_speed_system">Speed measurement</string>
+    <string name="nm">nm</string>
+    <string name="si_nm">Nautical miles</string>
+    <string name="si_kmh">Kilometers per hour</string>
+    <string name="si_mph">Miles per hour</string>
+    <string name="si_m_s">Meters per second</string>
+    <string name="si_min_km">Minutes per kilometer</string>
+    <string name="si_min_m">Minutes per mile</string>
+    <string name="si_nm_h">Nautical miles per hour (knot)</string>
+    <string name="nm_h">nmh</string>
+    <string name="min_mile">min/m</string>
+    <string name="min_km">min/km</string>
+    <string name="m_s">m/s</string>
+    
     <string name="shared_string_trip_recording">Trip recording</string>
     <string name="shared_string_navigation">Navigation</string>
     <string name="osmand_running_in_background">Running in background</string>
