@@ -15,7 +15,7 @@
         android:paddingLeft="@dimen/list_content_padding">
 
         <ImageView
-            android:id="@+id/leftIcon"
+            android:id="@+id/leftImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -52,7 +52,7 @@
         </LinearLayout>
 
         <ImageButton
-            android:id="@+id/rightIcon"
+            android:id="@+id/rightImageButton"
             android:layout_width="@dimen/list_item_height"
             android:layout_height="@dimen/list_item_height"
             android:layout_gravity="center_vertical"

@@ -183,7 +183,7 @@
   <string name="favorite_home_category">Inicio</string>
   <string name="favorite_friends_category">Amigos</string>
   <string name="favorite_places_category">Lugares</string>
-  <string name="favorite_default_category">Otros</string>
+  <string name="shared_string_others">Otros</string>
   <string name="favourites_edit_dialog_name">Nombre</string>
   <string name="favourites_edit_dialog_category">Categoría</string>
   <string name="shared_string_no_thanks">No, gracias</string>

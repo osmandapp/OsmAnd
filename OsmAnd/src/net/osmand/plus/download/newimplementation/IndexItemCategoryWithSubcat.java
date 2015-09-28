@@ -132,10 +132,7 @@ public class IndexItemCategoryWithSubcat implements Comparable<IndexItemCategory
 				}
 			}
 
-			if (i.getType() == DownloadActivityType.VOICE_FILE){
-				// TODO remove
-				final String visibleName = i.getVisibleName(ctx, ctx.getRegions());
-				i.setName(visibleName);
+			if (i.getType() == DownloadActivityType.VOICE_FILE) {
 				category.items.add(i);
 			} else {
 				IndexItemCategoryWithSubcat region;
@@ -155,23 +152,42 @@ public class IndexItemCategoryWithSubcat implements Comparable<IndexItemCategory
 						|| i.getType() == DownloadActivityType.WIKIPEDIA_FILE
 						|| i.getType() == DownloadActivityType.SRTM_COUNTRY_FILE
 						|| i.getType() == DownloadActivityType.HILLSHADE_FILE) {
+					category.types.add(i.getType().getStringResource());
 					region.types.add(i.getType().getStringResource());
 				}
 			}
 		}
 		final Collator collator = OsmAndCollator.primaryCollator();
-		for (IndexItemCategoryWithSubcat ct : mainList) {
+		for (IndexItemCategoryWithSubcat category : mainList) {
 			final OsmandRegions osmandRegions = ctx.getResourceManager().getOsmandRegions();
-			Collections.sort(ct.items, new Comparator<IndexItem>() {
-				@Override
-				public int compare(IndexItem lhs, IndexItem rhs) {
-					return collator.compare(lhs.getVisibleName(ctx, osmandRegions),
-							rhs.getVisibleName(ctx, osmandRegions));
-				}
-			});
+			sortIndexItemCategoryWithSybcat(category, ctx, osmandRegions, collator);
 		}
 		Collections.sort(mainList);
 		return mainList;
+	}
+
+	private static void sortIndexItemCategoryWithSybcat(final IndexItemCategoryWithSubcat category,
+														final OsmandApplication context,
+														final OsmandRegions osmandRegions,
+														final Collator collator) {
+		if (category.subcats.size() > 0) {
+			Collections.sort(category.subcats, new Comparator<IndexItemCategoryWithSubcat>() {
+				@Override
+				public int compare(IndexItemCategoryWithSubcat lhs, IndexItemCategoryWithSubcat rhs) {
+					return collator.compare(lhs.getName(), rhs.getName());
+				}
+			});
+			for (IndexItemCategoryWithSubcat subcat : category.subcats) {
+				sortIndexItemCategoryWithSybcat(subcat, context, osmandRegions, collator);
+			}
+		}
+		Collections.sort(category.items, new Comparator<IndexItem>() {
+			@Override
+			public int compare(IndexItem lhs, IndexItem rhs) {
+				return collator.compare(lhs.getVisibleName(context, osmandRegions),
+						rhs.getVisibleName(context, osmandRegions));
+			}
+		});
 	}
 
 	@Override

@@ -66,7 +66,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com --><resources>
 	<string name="favorite_home_category">Nhà</string>
 	<string name="favorite_friends_category">Bạn bè</string>
 	<string name="favorite_places_category">Địa điểm</string>
-	<string name="favorite_default_category">Khác</string>
+	<string name="shared_string_others">Khác</string>
 
 	<string name="shared_string_no_thanks">Không cần</string>
 	<string name="basemap_missing">Bản đồ nền (bao phủ toàn bộ thế giới ở tỉ lệ xem nhỏ) bị thiếu. Hãy tải về tập tin World_basemap_x.obf để bổ sung đầy đủ.</string>

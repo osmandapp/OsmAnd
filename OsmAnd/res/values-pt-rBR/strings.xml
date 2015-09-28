@@ -1263,7 +1263,7 @@
 	<string name="favorite_delete_multiple">Você apagará %1$d favorito(s) e %2$d grupo(s) favorito(s). Continuar?</string>
 	<string name="favorite_friends_category">Amigos</string>
 	<string name="favorite_places_category">Lugares</string>
-	<string name="favorite_default_category">Outros</string>
+	<string name="shared_string_others">Outros</string>
 	<string name="favourites_edit_dialog_name">Nome</string>
 	<string name="favourites_edit_dialog_category">Categori­a</string>
 	<string name="shared_string_no_thanks">Não, obrigado</string>

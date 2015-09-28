@@ -427,7 +427,7 @@
 	<string name="favorite_home_category">住家</string>
 	<string name="favorite_friends_category">朋友</string>
 	<string name="favorite_places_category">地點</string>
-	<string name="favorite_default_category">其它</string>
+	<string name="shared_string_others">其它</string>
 	<string name="favourites_edit_dialog_name">名稱</string>
 	<string name="favourites_edit_dialog_category">類別</string>
 	<string name="shared_string_no_thanks">不需要，謝謝</string>
