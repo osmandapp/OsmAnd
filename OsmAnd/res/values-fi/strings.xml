@@ -892,4 +892,6 @@
     <string name="read_full_article">Lue koko artikkeli (online)</string>
     <string name="shared_string_wikipedia">Wikipedia</string>
     <string name="shared_string_show_details">Näytä tiedot</string>
+    <string name="layer_amenity_label">POI-nimet</string>
+    <string name="context_menu_item_directions_to">Navigoi kohteeseen</string>
     </resources>

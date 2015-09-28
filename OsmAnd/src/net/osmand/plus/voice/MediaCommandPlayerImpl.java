@@ -8,6 +8,7 @@ import java.util.List;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.routing.VoiceRouter;
 
 import org.apache.commons.logging.Log;
 
@@ -30,12 +31,14 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer implemen
 	private MediaPlayer mediaPlayer;
 	// indicates that player is ready to play first file
 	private List<String> filesToPlay = Collections.synchronizedList(new ArrayList<String>());
+	private VoiceRouter vrt;
 
 	
-	public MediaCommandPlayerImpl(OsmandApplication ctx, String voiceProvider)
+	public MediaCommandPlayerImpl(OsmandApplication ctx, VoiceRouter vrt, String voiceProvider)
 		throws CommandPlayerException
 	{
 		super(ctx, voiceProvider, CONFIG_FILE, MEDIA_VOICE_VERSION);
+		this.vrt = vrt;
 	}
 	
 	@Override
@@ -57,6 +60,14 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer implemen
 	//  Called from the calculating route thread.
 	@Override
 	public synchronized void playCommands(CommandBuilder builder) {
+		if(vrt.isMute()) {
+			StringBuilder bld = new StringBuilder();
+			for (String s : builder.execute()) {
+				bld.append(s).append(' ');
+			}
+			sendAlertToAndroidWear(ctx, bld.toString());
+			return;
+		}
 		filesToPlay.addAll(builder.execute());
 		
 		// If we have not already started to play audio, start.

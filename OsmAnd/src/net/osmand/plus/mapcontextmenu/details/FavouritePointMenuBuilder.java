@@ -1,4 +1,4 @@
-package net.osmand.plus.mapcontextmenu.sections;
+package net.osmand.plus.mapcontextmenu.details;
 
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -70,23 +70,23 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 
 		textView.setAutoLinkMask(Linkify.ALL);
 		textView.setLinksClickable(true);
-		if (isDescription) {
-			textView.setMinLines(1);
-			textView.setMaxLines(5);
-		}
+//		if (isDescription) {
+//			textView.setMinLines(1);
+//			textView.setMaxLines(5);
+//		}
 		textView.setText(text);
 		if (textColor > 0) {
 			textView.setTextColor(view.getResources().getColor(textColor));
 		}
-		if (isDescription) {
-			textView.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					//todo: implement edit fav description dialog
-					//POIMapLayer.showDescriptionDialog(view.getContext(), app, fav);
-				}
-			});
-		}
+//		if (isDescription) {
+//			textView.setOnClickListener(new View.OnClickListener() {
+//				@Override
+//				public void onClick(View v) {
+//					//todo: implement edit fav description dialog
+//					//POIMapLayer.showDescriptionDialog(view.getContext(), app, fav);
+//				}
+//			});
+//		}
 
 		LinearLayout.LayoutParams llTextViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		llTextViewParams.setMargins(0, 0, dpToPx(10f), 0);

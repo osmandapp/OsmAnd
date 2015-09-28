@@ -1459,7 +1459,7 @@
     <string name="osmo_mode_on">Спыніць сэсыю OsMo</string>    
     <string name="osmo_mode_off">Запусьціць сэсыю OSMo</string>
     
-	<string name="share_fav_subject">Выбранае адаслана праз OsmAnd</string>
+	<string name="share_fav_subject">Упадабанае адаслана праз OsmAnd</string>
 	<string name="use_points_as_intermediates">Разлічыць маршрут паміж кропкамі</string>
     <string name="tip_recent_changes_1_8_alpha">Зьмены ў 1.8:
 	* Разьлік маршруту паміж маршрутнымі пунктамі GPX-сьледу
@@ -2080,14 +2080,14 @@
 	<string name="add_opening_hours">Дадаць гадзіны працы</string>
 	<string name="poi_dialog_poi_type">Тып POI</string>
 	<string name="please_specify_poi_type">Калі ласка, пазначце тып POI.</string>
-<string name="av_locations_descr">Gpx-файл з мецазнаходжаньнем заўваг</string>
+<string name="av_locations_descr">GPX-файл зь мецазнаходжаньнем заўваг</string>
     <string name="av_locations">Месцазнаходжаньні</string>
     <string name="number_of_rows_in_dash">Колькасьць радкоў на галоўным экране %1$s</string>
 	<string name="tag_poi_amenity">грамадзкі аб\'ект</string>
 	<string name="poi_action_delete">выдаліць</string>
 	<string name="working_days">Працоўныя дні</string>
 	<string name="recent_places">Нядаўнія месцы</string>
-	<string name="favourites">Упадабанае</string>
+	<string name="favourites">Упадабаныя</string>
 <string name="saved_at_time">Пасьпяхова захаваны ў: %1$s</string>
 <string name="show_gpx">Паказаць GPX</string>
 <string name="poi_deleted_localy">POI будуць выдаленыя, як толькі вы загрузіце вашы зьмены</string>
@@ -2099,4 +2099,11 @@
 <string name="simulate_your_location_stop_descr">Спыніць эмуляцыю свайго становішча</string>
     <string name="simulate_your_location_descr">Эмуляваць, выкарыстоўваючы запісаны GPX або разьлічаны маршрут</string>
     <string name="downloads_left_template">%1$s сьцягваньняў засталося</string>
-</resources>
+<string name="shared_string_wikipedia">Вікіпэдыя</string>
+    <string name="roads">Дарогі</string>
+<string name="favourites_edit_dialog_title">Зьвесткі пра ўпадабанае</string>
+    <string name="favourites_context_menu_add">Дадаць упадабанае</string>
+	<string name="shared_string_trip_recording">Запіс падарожжа</string>
+    <string name="shared_string_navigation">Навігацыя</string>
+    <string name="osmand_running_in_background">Працуе ў фоне</string>
+    </resources>

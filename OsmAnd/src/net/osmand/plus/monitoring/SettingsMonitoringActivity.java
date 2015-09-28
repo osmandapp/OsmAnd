@@ -1,27 +1,19 @@
 package net.osmand.plus.monitoring;
 
 
+import net.osmand.plus.OsmAndTaskManager.OsmAndTaskRunnable;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.SavingTrackHelper;
+import net.osmand.plus.activities.SettingsBaseActivity;
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
-import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.view.Window;
-
-import net.osmand.plus.NavigationService;
-import net.osmand.plus.OsmAndTaskManager.OsmAndTaskRunnable;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.SavingTrackHelper;
-import net.osmand.plus.activities.SettingsBaseActivity;
 
 
 public class SettingsMonitoringActivity extends SettingsBaseActivity {
@@ -30,7 +22,6 @@ public class SettingsMonitoringActivity extends SettingsBaseActivity {
 	
 	public static final int[] BG_SECONDS = new int[]{0, 30, 60, 90};
 	public static final int[] BG_MINUTES = new int[]{2, 3, 5, 10, 15, 30, 60, 90};
-	private final static boolean REGISTER_BG_SETTINGS = false;
 	private static final int[] SECONDS = OsmandMonitoringPlugin.SECONDS;
 	private static final int[] MINUTES = OsmandMonitoringPlugin.MINUTES;
 	
@@ -49,9 +40,6 @@ public class SettingsMonitoringActivity extends SettingsBaseActivity {
 		
 		createLoggingSection(grp);
 		createLiveSection(grp);
-		if(REGISTER_BG_SETTINGS) {
-			registerBackgroundSettings();
-		}
 		profileDialog();
     }
 
@@ -152,51 +140,7 @@ public class SettingsMonitoringActivity extends SettingsBaseActivity {
 		}
 	}
 	
-	private void registerBackgroundSettings() {
-		PreferenceCategory cat = new PreferenceCategory(this);
-		cat.setTitle(R.string.osmand_service);
-		getPreferenceScreen().addPreference(cat);
-
-		if(broadcastReceiver != null) {
-			unregisterReceiver(broadcastReceiver);
-			broadcastReceiver = null;
-		}
-		
-		routeServiceEnabled = new CheckBoxPreference(this);
-		broadcastReceiver = new BroadcastReceiver(){
-			@Override
-			public void onReceive(Context context, Intent intent) {
-				routeServiceEnabled.setChecked(false);
-			}
-			
-		};
-		registerReceiver(broadcastReceiver, new IntentFilter(NavigationService.OSMAND_STOP_SERVICE_ACTION));
-		routeServiceEnabled.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-			
-			@Override
-			public boolean onPreferenceChange(Preference preference, Object newValue) {
-				Intent serviceIntent = new Intent(SettingsMonitoringActivity.this, NavigationService.class);
-				if ((Boolean) newValue) {
-					ComponentName name = startService(serviceIntent);
-					if (name == null) {
-						routeServiceEnabled.setChecked(getMyApplication().getNavigationService() != null);
-					}
-				} else {
-					if(!stopService(serviceIntent)){
-						routeServiceEnabled.setChecked(getMyApplication().getNavigationService() != null);
-					}
-				}
-				return true;
-			}
-		});
-		routeServiceEnabled.setTitle(R.string.background_router_service);
-		routeServiceEnabled.setSummary(R.string.background_router_service_descr);
-		routeServiceEnabled.setKey(OsmandSettings.SERVICE_OFF_ENABLED);
-		cat.addPreference(routeServiceEnabled);
-		
-		cat.addPreference(createTimeListPreference(settings.SERVICE_OFF_INTERVAL, BG_SECONDS, BG_MINUTES, 1000,
-				R.string.background_service_int, R.string.background_service_int_descr));
-	}
+	
 	
 	
 }

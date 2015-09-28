@@ -28,7 +28,7 @@
 
 
 <string name="bg_service_interval">Defineix el temps de despertament:</string>
-<string name="avoid_toll_roads">Evita les carreteres de peatge</string>
+<string name="avoid_toll_roads">Evita vies de peatge</string>
 <string name="continue_follow_previous_route_auto">La navegació anterior no ha estat finalitzada. Desitgeu continuar-la? (%1$s segons)</string>
 <string name="osmand_parking_hours">Hores</string>
 <string name="osmand_parking_minutes">Minuts</string>
@@ -378,7 +378,7 @@
 <string name="settings_preset">Perfil d\'usuari</string>
 <string name="settings_preset_descr">Seleccioneu un perfil d\'usuari amb paràmetres personalitzats dels mapes i la navegació.</string>
 <string name="osmand_service">Mode en segon pla</string>
-<string name="osmand_service_descr">Utilitzeu per executar l\'OsmAnd mentres la pantalla està apagada</string>
+<string name="osmand_service_descr">OsmAnd s\'executa en procés de fons mentre la pantalla està apagada</string>
 <string name="pref_raster_map">Configuració de la font del mapa</string>
 <string name="pref_vector_map">Configuració del mapa de vectors</string>
 <string name="button_upgrade_osmandplus">Actualitza a l\'OsmAnd+</string>
@@ -539,7 +539,7 @@
 <string name="layer_poi">Punts d\'interès…</string>
 <string name="context_menu_item_search_poi">Cerca PDI</string>
 <string name="int_min">min.</string>
-<string name="background_router_service">Executa en segon pla</string>
+<string name="background_router_service">Executa OsmAnd en segon pla</string>
 <string name="show_poi_filter">Mostrar filtre</string>
 <string name="search_poi_filter">Filtre</string>
 <string name="hide_poi_filter">Ocultar filtre</string>
@@ -1241,13 +1241,13 @@
 	<string name="poi_error_io_error_template">S\'ha produït un error d\'E/S durant l\'acció {0}.</string>
 	    
     
-    <string name="announce_gpx_waypoints">Anuncia fites GPX</string>
+    <string name="announce_gpx_waypoints">Fites GPX</string>
     <string name="speak_title">Anuncia…</string>
 	<string name="speak_descr">Configureu per anunciar noms de carrer, avisos de trànsit (cues, bandes sonores), avisos de radar, límits de velocitat</string>
-	<string name="speak_street_names">Anuncia els noms dels carrers (TTS)</string>
-    <string name="speak_speed_limit">Anuncia els límits de velocitat</string>
-    <string name="speak_cameras">Anuncia els radars</string>
-	<string name="speak_traffic_warnings">Anuncia els avisos de trànsit</string>
+	<string name="speak_street_names">Noms de carrers (TTS)</string>
+    <string name="speak_speed_limit">Límit de velocitat</string>
+    <string name="speak_cameras">Radars</string>
+	<string name="speak_traffic_warnings">Avisos de trànsit</string>
     <string name="tip_recent_changes_1_5_t">"Canvis a la 1.5:
 	\n\t* Avisos de veu sobre els límits de velocitat i radars
 	\n\t* Més funcions de veu (informació dels noms de carrers)
@@ -1361,7 +1361,7 @@
 	<string name="routing_attr_prefer_motorway_description">Es prioritza l\'ús d\'autopistes</string>
 	<string name="routing_attr_short_way_name">Camí més curt</string>
 	<string name="routing_attr_short_way_description">Usa el camí més curt</string>
-	<string name="routing_attr_avoid_toll_name">Evita peatges</string>
+	<string name="routing_attr_avoid_toll_name">Evita vies de peatge</string>
 	<string name="routing_attr_avoid_toll_description">Prioritza carreteres sense peatge</string>
 	<string name="routing_attr_avoid_unpaved_name">Evita les vies sense pavimentar</string>
 	<string name="routing_attr_avoid_unpaved_description">Evita camins sense pavimentar</string>
@@ -1541,7 +1541,7 @@
 	<string name="osmand_plus_extended_description_4000_chars">"L\'OsmAnd (OSM Automated Navigation Directions, Guia de Navegació Automatitzada) és un mapa i una aplicació de navegació amb accés a dades d\'OpenStreetMap (OSM) lliure, de tot el món i d\'una gran qualitat. Totes les dades dels mapes es poden emmagatzemar a la memòria local del dispositiu (o en una targeta) pel seu ús sense connexió. A través del GPS del seu dispositiu, l\'OsmAnd ofereix navegació, amb indicacions òptiques i de veu, per anar en cotxe, moto o caminant. Totes les funciones principals són disponibles tant amb connexió com sense Internet. Algunes de les característiques principals: Navegació: - Funciona connectat (més ràpid) o sense connexió (sense càrrecs per serveis de dades quan s\'està al estranger...) - Indicacions gir-a-gir per veu (gravades). Veus sintetitzades en català pendent. - Indicacions del carril , del nom del carrer i del temps estimat d\'arribada, opcionals - Accepta punts de pas en el seu itinerari - Canvi automàtic de ruta quan ens desviem de l\'itinerari previst - Cerca de llocs per l\'adreça, pel tipus (por exemple: restaurant, hotel, gasolinera, museu), o per les coordenades geogràfiques Visualització del mapa: - Mostra la vostra posició i orientació en el mapa - Com opció, orienta el mapa segons la brúixola o el sentit de la marxa - Desa els vostres llocs més importants com a favorits - Mostra PDI (punts d\'interès) al vostre voltant - Pot mostrar mapes especialitzats de tessel·les amb connexió a Internet - Pot mostrar imatges de satèl·lit (de Bing) - Pot mostrar superposicions diferents com traces de navegació GPX i mapes addicionals amb transparència ajustable - Com opció, mostra els noms dels llocs en anglès, idioma local o transcripció fonètica Usa dades d\'OpenStreetMap i de la Viquipèdia: - Informació d\'alta qualitat des dels millors projectes col·laboratius del món - Mapes globals d\'OpenStreetMap, disponibles segons el país o regió - Punts d\'interès de la Viquipèdia, ideal per fer visites turístiques (no disponible en la versió gratuïta) - Baixada il·limitada gratuïta, directament des la aplicació (límit de baixada de 16 fitxers de mapes a la versió gratuïta) - Mapes sempre actualitzats (si més no un cop al mes) - Mapes vectorials compactes sense connexió - Selecció entre mapes complerts o només la xarxa de carreteres (exemple: el mapa complert del Japó és de 700 MB i 200 MB per la xarxa de carreteres i prou) - També admet mapes de tessel·les en línia o de còpies locals Característiques de seguretat - Commutació automàtica de la vista dia/nit, opcional - Indicació de límit de velocitat, amb recordatori si s\'excedeix, opcional - Zoom del mapa variable depenent de la velocitat, opcional - Compartir la vostra ubicació per què els vostres amics us puguin trobar Característiques per bicicletes i vianants - Els mapes inclouen camins a peu, sendes i vies per bicicletes, ideal per activitats al aire lliure - Navegació especial i modes de visualització específics per bicicletes i vianants - Parades de transport públic (autobús, tramvia, tren), inclosos els noms de línia, opcional - Gravació opcional del recorregut en fitxer local GPX o servei en línia - Mostra velocitat i altitud, opcional - Visualització de corbes de nivell i relleu (a través d\'un connector addicional) Contribució a OpenStreetMap directe - Informació dels errors del mapa - Pujar rutes GPX a OSM directament des la aplicació - Afegir punts d\'interès i enviar-los directament a OSM (o més tard si s\'està desconnectat) - Gravació de viatge opcional, també en procés de fons (mentre el dispositiu està en mode de repòs) OsmAnd és de codi obert i s\'està desenvolupant activament. Tot el món pot contribuir a l\'aplicació, informant d\'errades, millorant les traduccions, o codificant noves característiques. El projecte es troba en un estat molt animat, amb millores continues, per totes aquestes formes de interacció entre usuaris i desenvolupadors. L\'avanç del projecte també es basa en les contribucions econòmiques per pagar el desenvolupament, codificació i proves de noves funcionalitats. En comprar l\'OsmAnd+ esteu ajudant a que l\'aplicació sigui encara més impressionant! És possible el finançament adreçat a unes noves característiques específiques, o fer una donació general a osmand.net. Mapa aproximat de la cobertura i qualitat: - Europa Occidental: **** - Europa del Est: *** - Rússia: *** - Amèrica del Nord: *** - Amèrica del Sur: ** - Àsia: ** - Japó i Corea: *** - Orient Mitjà: ** - Àfrica: ** - Antàrtida: * La llista de països inclosos (bàsicament tot el món!): Afganistan, Albània, Alemanya, Antilles Holandeses, Algèria, Andorra, Angola, Anguila, Antigua i Barbados, Aràbia Saudita, Argentina, Armènia, Aruba, Austràlia, Àustria, Azerbaidjan, Bahames, Bahrain, Bangladesh, Barbados, Bèlgica, Belize, Benín, Bermuda, Bielorússia, Butà, Bolívia, Bonaire, Bòsnia i Hercegovina, Botswana, Brasil, Illes Verges Britàniques, Brunei, Bulgària, Burkina Faso, Burundi, Cambodja, Camerun, Canadà, Cap Verd, República Centre-africana, Txad, Xile, Xina, Xipre, Colòmbia, Comores, Congo, Costa de Marfil, Costa Rica, Croàcia, Cuba, Curaçao, Dinamarca, Djibouti, Dominica, Equador, Egipte, El Salvador, El Vaticà, Emirats Àrabs Units, Eritrea, Eslovàquia, Eslovènia, Espanya, Estats Units d\'Amèrica, Estònia, Etiòpia, Fiji, Filipines, Finlàndia, França, Guaiana Francesa, Gabó, Gàmbia, Geòrgia, Geòrgia del Sud, Ghana, Gibraltar, Grècia, Granada, Groenlàndia, Guadalupe, Guam, Guatemala, Guernsey, Guinea, Guinea Equatorial, Guinea-Bissau, Guyana, Haití, Hondures, Hong Kong, Hongria, Índia, Indonèsia, Iran, Iraq, Irlanda, Illa de Man, Islàndia, Israel, Itàlia, Jamaica, Japó, Jersei, Jordània, Kazakhstan, Kenya, Kiribati, Corea del Nord i Corea del Sud, Kuwait, Kirguizistan, Laos, Letònia, Lesotho, Líban, Libèria, Líbia, Liechtenstein, Lituània, Luxemburg, Macau, Macedònia, Madagascar, Malàisia, Malawi, Maldives, Mali, Malta, Marroc, Martinica, Maurici, Mauritània, Mayotte, Mèxic, Micronèsia, Moldàvia, Mònaco, Mongòlia, Montenegro, Montserrat, Moçambic, Myanmar, Namíbia, Nauru, Nepal, Nicaragua, Níger, Nigèria, Noruega, Nova Caledònia, Nova Zelanda, Oman, Països Baixos, Pakistan, Palau, Panamà, Papua Nova Guinea, Paraguai, Perú, Polinèsia Francesa, Polònia, Portugal, Puerto Rico, Qatar, Regne Unit, República Txeca, República Dominicana, Romania, Rússia, Ruanda, Sàhara Occidental, Saint-Barthelemy, Santa Helena, Saint Kitts i Nevis, Samoa, San Martí, San Pere i Miqueló, Sant Vicenç i les Granadines, San Marino, Santa Lucia, Senegal, Sèrbia, Seychelles, Serra Lleona, Singapur, Síria, Somàlia, Sud-àfrica, Sudan, Sudan del Sur, Surinam, Sri Lanka, Suècia, Suïssa, Swazilàndia, Tailàndia, Taiwan, Tanzània, Tadjikistan, Territori Palestí, Timor Oriental, Togo, Tokelau, Tonga, Trinitat i Tobago, Tunis, Turkmenistan, Turquia, Tuvalu, Ucraïna, Uganda, Uruguai, Uzbekistan, Vanuatu, Veneçuela, Vietnam, Wallis i Futuna, Iemen, Zàmbia, Zimbabwe.↵ "</string>
 	<string name="route_descr_destination">Destí</string>
     <string name="shared_string_share">Compartir</string>
-	<string name="share_fav_subject">Favorits compartits via OsmAnd</string>
+	<string name="share_fav_subject">Preferits compartits via OsmAnd</string>
 	<string name="use_points_as_intermediates">Calcula la ruta entre punts</string>
     <string name="tip_recent_changes_1_8_alpha">Canvis a la 1.8:
 	* Calcula la ruta entre els punts de la traça GPX
@@ -1752,8 +1752,8 @@
     <string name="waypoints">Fites</string>
     <string name="targets">Destinacions</string>
     <string name="way_alarms">Notificacions de trànsit</string>
-    <string name="speak_favorites">Indica els preferits propers</string>
-    <string name="speak_poi">Indica els PDI propers</string>
+    <string name="speak_favorites">Preferits propers</string>
+    <string name="speak_poi">PDI propers</string>
     <string name="index_tours">Itineraris</string>
     <string name="shared_string_all">Totes</string>
     <string name="record_plugin_description">"Aquest connector activa la funcionalitat d\'enregistrar i desar els vostres trajectes, sigui prement sobre la pantalla del mapa el giny de gravació GPX, o sigui desant-los tots en un fitxer GPX automàticament.\n\nLes rutes enregistrades es poden compartir amb els vostres amics o aportar-les per ser utilitzades a OSM. Els atletes poden utilitzar els seus registres per monitoritzar els seus entrenaments. Es pot fer una anàlisi bàsica de les rutes directament a OsmAnd com la durada de cada volta, velocitat mitjana, etc.,  i, per descomptat, es poden analitzar amb eines especialitzades de tercers. "</string>
@@ -1855,7 +1855,7 @@
     <string name="rendering_value_americanRoadAtlas_name">Atles de carreteres americà</string>
     <string name="routing_attr_no_new_routing_name">Sense preferències de navegació v1.9</string>
     <string name="routing_attr_no_new_routing_description">No feu ús de les preferències de navegació introduïdes a la v1.9</string>
-    <string name="speak_pedestrian">Anuncia els passos de zebra</string>
+    <string name="speak_pedestrian">Passos de zebra</string>
     
 	<string name="navigation_over_track">Voleu iniciar la navegació seguint la traça?</string>
 	<string name="avoid_roads_msg">Podeu generar una ruta alternativa amb la selecció de les vies a evitar</string>
@@ -2014,7 +2014,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="download_wikipedia_maps">Viquipèdia</string>
     <string name="gps_network_not_enabled">El servei de posicionament està aturat. Voleu activar-lo?</string>
     <string name="disable_recording_once_app_killed">Evita la gravació en procés de fons</string>
-    <string name="disable_recording_once_app_killed_descrp">L\'enregistrament en format GPX s\'aturarà quan ho faci OsmAnd (via les aplicacions recents). (La indicació de procés de fons de l\'OsmAnd desapareixerà de la barra de notificacions d\'Android).</string>
+    <string name="disable_recording_once_app_killed_descrp">L\'enregistrament en format GPX s\'aturarà quan ho faci OsmAnd (via les aplicacions recents). (La indicació de procés de fons de l\'OsmAnd desapareixerà de la barra de notificacions d\'Android)</string>
 	<string name="shared_string_import2osmand">Importa a l\'OsmAnd</string>
     <string name="local_recordings_delete_all_confirm">Esteu a punt d\'esborrar %1$d notes. N\'esteu segur?</string>
 	<string name="archive_wikipedia_data">Teniu dades baixades de Viquipèdia, antigues i incompatibles. Les voleu desar?</string>
@@ -2116,8 +2116,22 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
 	<string name="poi_action_delete">Suprimeix</string>
 	<string name="working_days">Dies laborables</string>
 	<string name="recent_places">Llocs recents</string>
-	<string name="favourites">Favorits</string>
+	<string name="favourites">Preferits</string>
 	<string name="saved_at_time">S\'ha desat correctament a: %1$s</string>
 <string name="poi_deleted_localy">El PDI s\'eliminara un cop pugeu els vostres canvis</string>
 	<string name="show_gpx">Mostra GPX</string>
-</resources>
+<string name="favourites_edit_dialog_title">Detalls del preferit</string>
+    <string name="simulate_your_location_stop_descr">Atura la simulació de la vostra posició</string>
+    <string name="simulate_your_location_descr">Simula utilitzant un GPX enregistrat o una ruta calculada</string>
+    <string name="address_unknown">L\'adreça encara no es coneix</string>
+    <string name="favourites_context_menu_add">Afegeix un preferit</string>
+	<string name="show_on_start">Mostra a l\'inici</string>
+	<string name="count_of_lines">Recompte de línies</string>
+	<string name="are_you_sure">N\'esteu segur?</string>
+	<string name="unsaved_changes_will_be_lost">Es perdran tots els canvis no desats. Voleu continuar?</string>
+	<string name="downloads_left_template">%1$s baixades pendents</string>
+	<string name="roads">Carreteres</string>
+<string name="shared_string_trip_recording">Enregistrament de trajectes</string>
+    <string name="shared_string_navigation">Navegació</string>
+    <string name="osmand_running_in_background">Execució en procés de fons</string>
+    </resources>

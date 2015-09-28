@@ -89,7 +89,7 @@
 	
 	
 	<string name="bg_service_sleep_mode_off">運行\n 應用程式在背景運轉</string>
-	<string name="bg_service_sleep_mode_on">停止\n 在背景運轉</string>
+	<string name="bg_service_sleep_mode_on">停止\n在背景執行</string>
 	<string name="gps_wakeup_interval">GPS 喚醒間隔：%s</string>
 	<string name="int_continuosly">繼續</string>
 	<string name="screen_is_locked">要解鎖螢幕，按下鎖圖示</string>
@@ -2091,7 +2091,7 @@
 	<string name="opening_at">營業于</string>
 	<string name="closing_at">結束于</string>
 <string name="next_proceed">下頁</string>
-	<string name="av_locations_descr">Gpx 檔案偕同地點注解</string>
+	<string name="av_locations_descr">GPX 檔案加上地點注解</string>
     <string name="av_locations">地點</string>
     <string name="tag_poi_name">名稱</string>
 	<string name="tag_poi_amenity">便利設施</string>
@@ -2116,4 +2116,10 @@
 <string name="simulate_your_location_stop_descr">停止模擬您的位置</string>
     <string name="simulate_your_location_descr">模擬使用記錄的 GPX 或計算的路線</string>
     <string name="downloads_left_template">離開下載的 %1$s</string>
-</resources>
+<string name="favourites_edit_dialog_title">我的最愛資訊</string>
+    <string name="favourites_context_menu_add">增加到我的最愛</string>
+	<string name="roads">道路</string>
+<string name="shared_string_trip_recording">旅程錄製</string>
+    <string name="shared_string_navigation">導航</string>
+    <string name="osmand_running_in_background">在背景執行</string>
+    </resources>

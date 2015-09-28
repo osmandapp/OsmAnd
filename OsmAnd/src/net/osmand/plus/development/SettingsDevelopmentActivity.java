@@ -53,6 +53,10 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 				R.string.use_magnetic_sensor,
 				R.string.use_magnetic_sensor_descr));
 		
+		final CheckBoxPreference openGlRender = createCheckBoxPreference(settings.USE_OPENGL_RENDER, R.string.use_opengl_render,R.string.use_opengl_render_descr);
+		cat.addPreference(openGlRender);
+
+		
 		cat.addPreference(createCheckBoxPreference(settings.BETA_TESTING_LIVE_UPDATES,
 				"Live updates", "Beta testing for live updates"));
 		Preference pref = new Preference(this);

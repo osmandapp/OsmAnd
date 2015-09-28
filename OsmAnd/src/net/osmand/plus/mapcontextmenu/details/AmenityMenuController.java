@@ -1,14 +1,14 @@
-package net.osmand.plus.mapcontextmenu.sections;
+package net.osmand.plus.mapcontextmenu.details;
 
 import android.app.Activity;
 
 import net.osmand.data.Amenity;
 import net.osmand.plus.OsmandApplication;
 
-public class AmenityInfoMenuController extends MenuController {
+public class AmenityMenuController extends MenuController {
 
-	public AmenityInfoMenuController(OsmandApplication app, Activity activity, final Amenity amenity) {
-		super(new AmenityInfoMenuBuilder(app, amenity), activity);
+	public AmenityMenuController(OsmandApplication app, Activity activity, final Amenity amenity) {
+		super(new AmenityMenuBuilder(app, amenity), activity);
 	}
 
 	@Override

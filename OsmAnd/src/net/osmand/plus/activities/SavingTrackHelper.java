@@ -349,6 +349,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		if (record) {
 			insertData(location.getLatitude(), location.getLongitude(), location.getAltitude(), location.getSpeed(),
 					location.getAccuracy(), locationTime, settings);
+			ctx.getNotificationHelper().showNotification();
 		}
 	}
 	

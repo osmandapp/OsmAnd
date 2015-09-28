@@ -233,7 +233,7 @@
 	<string name="poi_employment_agency">Oficina de empleo</string>
 	<string name="poi_studio">Estudio</string>
 	<string name="poi_stadium">Estadio</string>
-	<string name="poi_sports_centre">Polideportivo</string>
+	<string name="poi_sports_centre">Centro deportivo</string>
 	<string name="poi_golf_course">Campo de golf</string>
 	<string name="poi_pitch">Cancha</string>
 	<string name="poi_raceway">Pista de carreras</string>
@@ -254,7 +254,7 @@
 	<string name="poi_golf">Golf</string>
 	<string name="poi_hockey">Hockey</string>
 	<string name="poi_horse_racing">Carrera de caballos</string>
-	<string name="poi_sport_multi">Deporte múltiple</string>
+	<string name="poi_sport_multi">Deportes múltiples</string>
 	<string name="poi_sport_motor">Deporte de motor</string>
 	<string name="poi_rugby_league">Liga de rugby</string>
 	<string name="poi_skateboard">Patineta</string>
@@ -966,7 +966,7 @@
 	<string name="poi_recycling_clothes">Ropa</string>
 	<string name="poi_recycling_cans">Latas</string>
 	<string name="poi_recycling_glass_bottles">Botellas de vidrio</string>
-	<string name="poi_recycling_plastic">Plastico</string>
+	<string name="poi_recycling_plastic">Plásticos</string>
 	<string name="poi_recycling_scrap_metal">Chatarra</string>
 	<string name="poi_recycling_batteries">Baterias</string>
 	<string name="poi_recycling_plastic_bottles">Botellas de plástico</string>

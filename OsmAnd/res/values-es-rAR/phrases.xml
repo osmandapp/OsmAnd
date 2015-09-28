@@ -230,7 +230,7 @@
 	<string name="poi_lighthouse">Faro</string>
 
 	<string name="poi_bicycle_rental">Alquiler de bicicletas</string>
-	<string name="poi_bicycle_parking">Bicicletero/guardería</string>
+	<string name="poi_bicycle_parking">Bicicletero / Guardería</string>
 
 	<string name="poi_aerialway_station">Estación de transporte elevado</string>
 	<string name="poi_aerialway_cable_car">Teleférico</string>
@@ -391,7 +391,7 @@
 	<string name="poi_bookmaker">Casa de apuestas</string>
 
 	<string name="poi_stadium">Estadio</string>
-	<string name="poi_sports_centre">Polideportivo</string>
+	<string name="poi_sports_centre">Centro deportivo</string>
 	<string name="poi_golf_course">Campo de golf</string>
 	<string name="poi_ice_rink">Pista de hielo</string>
 	<string name="poi_pitch">Cancha</string>
@@ -434,7 +434,7 @@
 	<string name="poi_ice_stock">Curling bávaro</string>
 	<string name="poi_korfbal">Balonkorf</string>
 	<string name="poi_sport_motor">Deporte de motor</string>
-	<string name="poi_sport_multi">Multi deportes</string>
+	<string name="poi_sport_multi">Deportes múltiples</string>
 	<string name="poi_orienteering">Orientación</string>
 	<string name="poi_paddle_tennis">Pádel</string>
 	<string name="poi_paragliding">Parapente</string>
@@ -608,7 +608,7 @@
 	<string name="poi_bench">"Banco (asiento) "</string>
 	<string name="poi_swimming_pool">Piscina</string>
 	<string name="poi_water_park">Parque acuático</string>
-	<string name="poi_park">Parque/Plaza</string>
+	<string name="poi_park">Parque / Plaza</string>
 	<string name="poi_recreation_ground">Zona recreativa</string>
 	<string name="poi_village_green">Zona verde</string>
 	<string name="poi_trail_riding_station">Estación de equitación</string>
@@ -956,14 +956,14 @@
 	<string name="poi_animal_shelter_dog_cat">Refugio para perros y gatos</string>
 	<string name="poi_animal_shelter_bird">Refugio para aves</string>
 
-<string name="poi_recycling_centre">Centro de reciclaje</string>
-	<string name="poi_recycling_container">Contenedor</string>
+<string name="poi_recycling_centre">Tipo: Centro de reciclaje</string>
+	<string name="poi_recycling_container">Tipo: Contenedor</string>
 	<string name="poi_recycling_glass">Vidrio</string>
 	<string name="poi_recycling_paper">Papel</string>
 	<string name="poi_recycling_clothes">Ropa</string>
 	<string name="poi_recycling_cans">Latas</string>
 	<string name="poi_recycling_glass_bottles">Botellas de vidrio</string>
-	<string name="poi_recycling_plastic">Plastico</string>
+	<string name="poi_recycling_plastic">Plásticos</string>
 	<string name="poi_recycling_scrap_metal">Chatarra</string>
 	<string name="poi_recycling_batteries">Baterias</string>
 	<string name="poi_recycling_plastic_bottles">Botellas de plástico</string>
@@ -1315,7 +1315,7 @@
 	<string name="poi_ford_stepping_stones">Puente de piedras</string>
 	<string name="poi_information_board">Tablero de información</string>
 	<string name="poi_toll_hgv_yes">Peaje para camiones</string>
-	<string name="poi_information_trail_blaze">Marcador del camino</string>
+	<string name="poi_information_trail_blaze">Marcador en el camino</string>
 	<string name="poi_rescue_station">Estación de rescate</string>
 
 <string name="poi_doors">Puertas</string>

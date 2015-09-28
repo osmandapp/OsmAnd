@@ -9,10 +9,15 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="shared_string_trip_recording">Trip recording</string>
+    <string name="shared_string_navigation">Navigation</string>
+    <string name="osmand_running_in_background">Running in background</string>
+    <string name="gps_wake_up_timer">GPS wake-up interval</string>
+	<string name="favourites_edit_dialog_title">Favorite information</string>
     <string name="simulate_your_location_stop_descr">Stop simulating your position</string>
     <string name="simulate_your_location_descr">Simulate using recorded GPX or calculated route</string>
     <string name="address_unknown">Address is not known yet</string>
-    <string name="av_locations_descr">Gpx file with note locations</string>
+    <string name="av_locations_descr">GPX file with note locations</string>
     <string name="av_locations">Locations</string>
     <string name="plugin_settings">Plugins</string>
 	<string name="routing_attr_avoid_shuttle_train_name">Avoid shuttle train</string>
@@ -351,21 +356,6 @@
     <string name="wake_on_voice">Turn screen on</string>
     <string name="wake_on_voice_descr">Turn on device screen (if off) when approaching a turn</string>
     <string name="impassable_road">Avoid roads…</string>
-    <string name="tip_recent_changes_1_9_t">Changes in 1.9:
-        * Updated maps styles with road surface rendering, transport layers and hiking symbols
-        * Search POI along the route
-        * Mark road as impassable per session
-        * Easier to download and update maps
-        * Get visual and audio notification by approaching to waypoint
-        * Print itinerary and turn information
-        * Support of turn lanes
-        * Support Android Wear
-        * Lots UI changes
-        * Separate zoom for Text Size on the map
-        * Special audio notifications in case you are off the route
-        * OsMo login functionality
-        * Fix OsMo version incompatibilities
-    </string>
     <string name="rendering_attr_trainLightrailRoutes_name">Train routes</string>
     <string name="rendering_attr_tramRoutes_name">Tram routes</string>
     <string name="rendering_attr_shareTaxiRoutes_name">Share taxi routes</string>
@@ -406,23 +396,6 @@
 	<string name="speak_favorites">Nearby Favorites</string>
 	<string name="speak_poi">Nearby POI</string>
 	<string name="way_alarms">Traffic warnings</string>
-	<string name="tip_navigation">Navigation</string>
-	<string name="tip_navigation_t">To get directions to a place, either directly long-click on it on the map, (then tap its description marker and select \'Directions to\'), or select \'Directions to\' after tapping any entry in a search results list or favorite list.
-		\n\nThe destination is marked as a target flag marker on the map and OsmAnd displays the distance to it and the direction to it (orange triangle).
-		\n\nYou may chose either \'Start navigation\', which means that OsmAnd would live-guide you, give you voice instructions (if enabled), etc. Or you can select \'Display route\', resulting in static route without any live-guideance or adjustments as you move.
-		\n\nTo display a route to the selected destination from any point other than your current position, select the start point on the map and tap \'Directions from\'.
-		\n\nIf you use \'Directions from\' together with \'Start navigation\', OsmAnd will switch to your actual position as soon as it is found (so this can be used to jump-start routing before the position is found), while \'Directions from\' in combination with \'Display route\' just shows you the route from any arbitrary point you had selected without subsequent updates.
-	</string>
-	<string name="tip_search">Searching</string>
-	<string name="tip_search_t">You can search for places directly on the map via \'Use location\' → \'Search near here\', or by calling the search screen via \'Menu\' → \'Search\'.
-		\n\nThe search screen provides templates for searching
-		\n\t* by address
-		\n\t* via coordinates
-		\n\t* as POI (by type or by name)
-		\n\t* via your search history
-		\n\t* or via your predefined favorites.
-		\n\nFor all hits a context menu or action bar offers options like \'Directions to\' or \'Show on map\', etc.
-	</string>
 	<string name="background_service_is_enabled_question">OsmAnd background service is still running. Do you want to interrupt it, too?</string>
 	<string name="sleep_mode_stop_dialog">Interrupt GPS background mode?</string>
 	<string name="stop_navigation_service">Interrupt</string>
@@ -450,9 +423,6 @@
 	<string name="proxy_host_descr">Configure your proxy\'s hostname (e.g. 127.0.0.1)</string>
 	<string name="proxy_port_title">Proxy Port</string>
 	<string name="proxy_port_descr">Configure your proxy\'s port number (e.g. 8118)</string>
-	<string name="tip_initial_t">OsmAnd is a navigation application with many features.
-		\n\nAs a basic introduction, some usage tips and tricks are linked via \'Menu\' → \'Help\' from the map screen.
-	</string>
     <string name="monitoring_settings">Trip recording</string>
     <string name="monitoring_settings_descr">Configure how to record your trips</string>
     <string name="int_hour">h</string>
@@ -475,7 +445,6 @@
     <string name="continue_navigation">Continue Navigation</string>
     <string name="pause_navigation">Pause Navigation</string>
  	<string name="keep_navigation_service">Keep</string>
-	<string name="gps_wake_up_timer">GPS wake-up interval</string>
 	<string name="map_preferred_locale_descr">Preferred language for labels on the map (if it is not available will switch to English or to local names)</string>
     <string name="map_preferred_locale">Map preferred language</string>
     <string name="local_map_names">Local names</string>
@@ -557,7 +526,7 @@
     <string name="gpx_selection_route_points">%1$s \nRoute points %2$s</string>
     <string name="gpx_selection_points">%1$s \nPoints</string>
     <string name="gpx_selection_track">%1$s \nTrack %2$s</string>
-    <string name="gpx_file_is_empty">Gpx track is empty</string>
+    <string name="gpx_file_is_empty">GPX track is empty</string>
     <string name="osmo_user_joined">User %1$s joined group %2$s</string>
     <string name="osmo_user_left">User %1$s left group %2$s</string>
     <string name="osmo_show_group_notifications">Show group notifications</string>
@@ -629,14 +598,6 @@
     <string name="osmo_conn_successfull">Connection established: %1$s </string>
     <string name="osmo_io_error">OsMo connection problem: </string>
     <string name="osmo_settings_uuid">Unique device id</string>
-    <string name="tip_recent_changes_1_8_alpha">Changes in 1.8:
-        * Calculate route between route points of GPX track
-        * Changed layout of countries for downloads (support local names search)
-        * Supports GPX/KML import (convert from KML to GPX)
-        * GPX tracks has moved to \'My Data\'
-        * You can split GPX track by distance and check altitude difference/ speed
-        * Auto start navigation after delay
-    </string>
     <string name="use_points_as_intermediates">Calculate route between points</string>
     <string name="osmo_mode_restart">Restart OsMo session</string>
     <string name="osmo_mode_on">Stop OsMo session</string>
@@ -744,17 +705,6 @@
     <string name="routing_preferences_descr">Routing preferences</string>
     <string name="speech_rate_descr">Specify speech rate for TTS</string>
     <string name="speech_rate">Speech Rate</string>
-    <string name="tip_recent_changes_1_7_1_t">Changes in 1.7:
-    \n\t* IMPORTANT maps should be newer than February 2014.
-	\n\t* Completely updated routing (fast and precise) -
-    \n\t* New screen with Route Planning (more intuitive and more powerful)
-    \n\t** NOTE GPX route is available under Route Settings buttton
-    \n\t* Auto hide buttons in navigation mode
-    \n\t* Calculate offline route to the first point of GPX route (\'pass the whole track\' option)
-	\n\t* Active simulation in tunnels
-	\n\t* Lots of small UX improvements &amp; usability fixes
-	\n\t* Speech rate accessibility setting
-    </string>
     <string name="complex_route_calculation_failed">Fast route calculation failed (%s), fallback to slow calculation.</string>
     <string name="disable_complex_routing_descr">Disable 2-phase routing for car navigation</string>
     <string name="disable_complex_routing">Disable complex routing</string>
@@ -766,8 +716,6 @@
     <string name="app_mode_motorcycle">Motorcycle</string>
     <string name="app_mode_boat">Boat</string>
     <string name="app_mode_aircraft">Aircraft</string>
-    <string name="tip_faq_t">Please visit https://code.google.com/p/osmand/wiki/FAQ to see frequently asked questions.</string>
-    <string name="tip_faq">Frequently Asked Questions</string>
     <string name="local_osm_changes_delete_all_confirm">You are going to delete %1$d OSM changes. Are you sure?</string>
     <string name="animate_routing_route_not_calculated">Please calculate the route first</string>
     <string name="animate_routing_route">Simulate using calculated route </string>
@@ -779,29 +727,9 @@
 	<string name="auto_zoom_farthest">To long-range</string>
 	<string name="map_magnifier">Map magnifier</string>
 	<string name="base_world_map">World basemap</string>
-	<string name="tip_map_styles">Map Styles</string>
-	<string name="tip_map_styles_t">OsmAnd supports displaying the offline vector maps in different map styles to suit your to needs:
-		\n\nOther than the balanced \'default\' map style, you may in \'Menu\' → \'Configure map\' → \'Map Style\' select for example
-		\n\t* The \'Touring view\' style, which contains the most detailed information feasable for traveling and touring, including optimization for professional drivers (higher contrast, distinguishable roads), options for Alpine hiking (SAC scale), cycle routes, hiking symbol support, etc.
-		\n\t* \'High contrast roads\' shows roads in very accentuated colors for bright ambient lighting situations
-		\n\t* \'Winter and ski\' creates a (snow covered) winter landscape view, and shows global ski slopes and lifts (in connection with the \'World ski\' map download)
-	</string>
     <string name="about_version">Version :</string>
     <string name="about_settings">About</string>
     <string name="about_settings_descr">Version info, licenses, project members</string>
-
-    <string name="tip_recent_changes_1_6_t">Changes in 1.6:
-	\n\t* Support of Full HD devices
-	\n\t* Support transparent map background
-	\n\t* Show downloaded maps and facilitate downloading missing maps directly from the map view
-	\n\t* Contour line map files now bundled for countries/regions
-	\n\t* New world basemap with major roads, railroads, and major areal features like forests
-	\n\t* Map magnifier feature (long click on zoom button) - Useful both for tile and vector maps
-	\n\t* Define/edit custom online tile sources (and specify expiration time)
-	\n\t* Support of time conditional speed limits (Netherlands)
-	\n\t* Faster search address input
-	\n\t* Bug fixes with routing and rendering
-    </string>
     <string name="local_index_tile_data_zooms">Zooms downloaded: %1$s</string>
     <string name="local_index_tile_data_expire">Expire (minutes): %1$s</string>
     <string name="local_index_tile_data_downloadable">Downloadable: %1$s</string>
@@ -831,13 +759,6 @@
     <string name="speak_speed_limit">Speed limit</string>
     <string name="speak_cameras">Speed cameras</string>
 	<string name="speak_traffic_warnings">Traffic warnings</string>
-    <string name="tip_recent_changes_1_5_t">Changes in 1.5:
-	\n\t* Voice warnings about speed limits and cameras
-	\n\t* More voice prompt capabilities (street names announced)
-	\n\t* High density map icons
-	\n\t* Lots of UI changes
-	\n\t* Bugfixes in distance display, GPX analyzer, waypoint handling, planning widget, OSM uploading, https handling
-    </string>
     <string name="osb_author_or_password_not_specified">Please specify OSM user and password in Settings</string>
     <string name="clear_intermediate_points">Clear intermediate points</string>
     <string name="keep_intermediate_points">Keep intermediate points</string>
@@ -858,15 +779,6 @@
     <string name="destination_point">Destination %1$s</string>
     <string name="context_menu_item_destination_point">Set as destination</string>
     <string name="please_select_address">Select city or street first</string>
-    <string name="tip_recent_changes_1_4_t">Changes in 1.4:
-	\n\t* Order waypoints in optimal way to visit all (Travelling salesman, door-to-door)
-	\n\t* Search street by name (in neighborhood)
-	\n\t* Planning mode plugin (load/edit/save GPX tracks)
-	\n\t* New download screen (download in background)
-	\n\t* Support GPX subfolders (organize your GPX tracks)
-	\n\t* Delete SRTM files
-	\n\t* Support OSM Notes
-    </string>
     <string name="search_street_in_neighborhood_cities">Search street in neighborhood cities</string>
     <string name="intermediate_items_sort_return">Intermediate waypoints resorted to optimize their order on the way from current location to the destination.</string>
     <string name="intermediate_items_sort_by_distance">Sort (door-to-door)</string>
@@ -908,12 +820,6 @@
 	<string name="hno">House number</string>
     <string name="website">Web site</string>
 	<string name="phone">Phone</string>
-    <string name="tip_recent_changes_1_3_t">Changes in 1.3:
-        \n\t* Reimplement Tablets and Large screen support
-        \n\t* Holo Theme (customization)
-        \n\t* Additional settings for stabilizing compass
-        \n\t* Top left button on the map screen replaces Menu button
-    </string>
     <string name="osmand_background_plugin_description">Shows the settings to enable tracking and navigation in background (screen off) mode via periodically waking up the GPS device.</string>
     <string name="contribution_activity">Install version</string>
     <string name="choose_osmand_theme_descr">Choose application theme</string>
@@ -922,25 +828,8 @@
     <string name="select_address_activity">Select address</string>
     <string name="favourites_list_activity">Select favorite</string>
     <string name="local_openstreetmap_act_title">OSM modifications</string>
-	<string name="tip_recent_changes_1_2_t">Fixes in 1.2.1:
-	    \n\t*Fix Geo Intent (Foursquare, c:geo)
-	    \n\t*Fix screen tremble during navigation
-	    \n\t*Other small fixes
-	    \n\nChanges in 1.2:
-		\n\t* Bug fixes (tuned routing, search, AV recording, voice prompts, some display improvements)
-		\n\t* Easier hillshade overlay configuration (requires Contour Lines plugin)
-		\n\t* Now accepts maps.google.com location links
-		\n\t* New widget (GPS info)
-		\n\t* Added multi-window support for recent Samsung devices
-		\n\t* Kalman filter for compass
-		\n\t* Pebble watch support
-	</string>
     <string name="layer_hillshade">Hillshade layer</string>
     <string name="map_widget_gps_info">GPS info</string>
-    <string name="tip_recent_changes_1_1_4_t">Changes in 1.1.4:
-        \n\t* UI redesign
-		\n\t* Bug fixes
-    </string>
     <string name="access_arrival_time">Arrival time</string>
     <string name="item_checked">checked</string>
     <string name="item_unchecked">unchecked</string>
@@ -952,13 +841,6 @@
     <string name="download_hillshade_item">Hillshade</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="download_hillshade_maps">Hillshade overlays</string>
-    <string name="tip_recent_changes_1_1_2_t">Changes in 1.1.2:
-		\n\t* Audio/video plugin enhancement (photos with EXIF information)
-		\n\t* Usability fixed and restructured Contour lines plugin
-		\n\t* Hillshade packages for Contour lines plugin
-		\n\t* Bug fixes (suboptimal routing)
-    </string>
-
     <string name="local_indexes_cat_srtm">Contour lines data</string>
     <string name="local_indexes_cat_av">Audio/Video data</string>
     <string name="stop_routing_confirm">Are you sure you want to stop the navigation?</string>
@@ -992,14 +874,6 @@
     <string name="recording_playing">An audio from the specified recording is being played.\n%1$s</string>
     <string name="recording_open_external_player">Open external player</string>
     <string name="recording_delete_confirm">Do you want to remove this recording?</string>
-    <string name="tip_recent_changes_1_1_0_t">Changes in 1.1.0:
-		\n\t* Distance calculator plugin
-		\n\t* Audio/video notes plugin
-		\n\t* Contour lines plugin
-		\n\t* Bug fixes
-		\n\t* \'Touring view\' map style option with more map details, new road styles, more contrast, and Alpine hiking (SAC scale) option
-		\n\t* EGM96 geoid offset correction for GPS altitude readings
-    </string>
     <string name="recording_unavailable">unavailable</string>
     <string name="recording_context_menu_arecord">Take an audio note</string>
     <string name="recording_context_menu_vrecord">Take a video note</string>
@@ -1027,11 +901,6 @@
 
 	<string name="rendering_attr_noAdminboundaries_name">Hide boundaries</string>
 	<string name="rendering_attr_noAdminboundaries_description">Suppress display of regional boundaries (admin levels 5-9)</string>
-	<string name="tip_altitude_offset">Altitude Correction</string>
-	<string name="tip_altitude_offset_t">Most GPS devices report altitude measurements in the ellipsoid-based WGS84 reference system, from which a conversion to locally used systems requires a position-dependent correction.
-		\n\nA better approximation to these local systems is the EGM96 (geoid) reference.
-		\n\nOsmAnd will display your positions\'s altitude in the EGM96 system after you download the file \'World Altitide Correction\' (WW15MGH.DAC) via \'Settings\' → \'Manage map files\'. (Original is at http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC.)
-	</string>
     <string name="map_widget_max_speed">Speed limit</string>
     <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">No buildings found.</string>
@@ -1042,17 +911,6 @@
     <string name="safe_mode_description">Run the application in safe mode (using slower Android instead of native code).</string>
     <string name="safe_mode">Safe mode</string>
     <string name="native_library_not_running">The application is running in safe mode (disable it in the Settings).</string>
-    <string name="tip_recent_changes_1_0_0_t">Changes in 1.0.0:
-	\n\t* Improved routing: faster, more precise, up to 250 km
-	\n\t* Introduce roads-only maps
-	\n\t* Map does not lose position lock after interruptions
-	\n\t* Enable background service during navigation
-    </string>
-    <string name="tip_recent_changes_0_8_4_t">Changes in 0.8.4:
-	\n\t* Some bug fixes
-	\n\t* Map does not lose position lock after interruptions
-	\n\t* Enable background service during navigation
-    </string>
     <string name="close_changeset">Close changeset</string>
 	<string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner application not installed. Search in Market?</string>
 	<string name="rendering_attr_roadColors_description">Select a road color scheme:</string>
@@ -1061,13 +919,6 @@
     <string name="enable_plugin_monitoring_services">Enable the Trip recording plugin to use position logging services (GPX logging, online tracking)</string>
     <string name="non_optimal_route_calculation">Calculate possibly non-optimal route over long distances</string>
 	<string name="gps_not_available">Please enable GPS in the settings</string>
-    <string name="tip_recent_changes_0_8_3_t">Changes in 0.8.3:
-	\n\t* Waypoints
-	\n\t* Improved route guidance
-	\n\t* Added a setting which allows to avoid motorways while building a route
-	\n\t* Added one more type of roads for bicycles to the map (Cycleway=track)
-	\n\t* Bug fixes
-	</string>
 	<string name="map_widget_monitoring_services">Logging services</string>
 	<string name="no_route">No route</string>
 	<string name="delete_target_point">Remove waypoint</string>
@@ -1110,13 +961,6 @@
 	<string name="snap_to_road">Snap to road</string>
 	<string name="interrupt_music_descr">Interrupt music when making announcement</string>
 	<string name="interrupt_music">Interrupt music</string>
-	<string name="tip_recent_changes_0_8_2_t">Changes in 0.8.2:
-		\n\t* Improved Routing
-		\n\t* Dynamic map widgets
-		\n\t* Map settings moved to map screen
-		\n\t* Lock screen button with logging services
-		\n\t* Fixed Arabic, Kannada scripting and RTL languages
-	</string>
 	<string name="osmand_play_title_30_chars">OsmAnd Maps &amp; Navigation</string>
 	<string name="osmand_short_description_80_chars">Global Mobile Map Viewing &amp; Navigation for Offline and Online OSM Maps</string>
 	<string name="osmand_long_description_1000_chars">
@@ -1310,15 +1154,6 @@ Approximate map coverage and quality:
 List of countries supported (basically world wide!):
 Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, Argentina, Armenia, Aruba, Australia, Austria, Azerbaijan, Bahamas, Bahrain, Bangladesh, Barbados, Belarus, Belgium, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnia and Herzegovina, Botswana, Brazil, British Virgin Islands, Brunei, Bulgaria, Burkina Faso, Burundi, Cambodia, Cameroon, Canada, Cape Verde, Central African Republic, Chad, Chile, China, Colombia, Comoros, Congo, Costa Rica, Ivory Coast, Croatia, Cuba, Curaçao, Cyprus, Czech Republic, Denmark, Djibouti, Dominica, Dominican Republic, Ecuador, Egypt, El Salvador, Equatorial Guinea, Eritrea, Estonia, Ethiopia, Fiji, Finland, France, French Guiana, French Polynesia, Gabon, Gambia, Georgia, Germany, Ghana, Gibraltar, Greece, Greenland, Grenada, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Vatican, Honduras, Hong Kong, Hungary, Iceland, India, Indonesia, Iran, Iraq, Ireland, Isle of Man, Israel, Italy, Jamaica, Japan, Jersey, Jordan, Kazakhstan, Kenya, Kiribati, North Korea and South Korea, Kuwait, Kyrgyzstan, Laos, Latvia, Lebanon, Lesotho, Liberia, Libya, Liechtenstein, Lithuania, Luxembourg, Macao, Macedonia, Madagascar, Malawi, Malaysia, Maldives, Mali, Malta, Martinique, Mauritania, Mauritius, Mayotte, Mexico, Micronesia, Moldova, Monaco, Mongolia, Montenegro, Montserrat, Morocco, Mozambique, Myanmar, Namibia, Nauru, Nepal, Netherlands, Netherlands Antilles, New Caledonia, New Zealand, Nicaragua, Niger, Nigeria, Norway, Oman, Pakistan, Palau, Palestinian Territory, Panama, Papua New Guinea, Paraguay, Peru, Philippines, Poland, Portugal, Puerto Rico, Qatar, Romania, Russia, Rwanda, Saint Barthelemy, Saint Helena, Saint Kitts and Nevis, Saint Lucia, Saint Martin, Saint Pierre and Miquelon, Saint Vincent and the Grenadines, Samoa, San Marino, Saudi Arabia, Senegal, Serbia, Seychelles, Sierra Leone, Singapore, Slovakia, Slovenia, Somalia, South Africa, South Georgia, South Sudan, Spain, Sri Lanka, Sudan, Suriname, Swaziland, Sweden, Switzerland, Syria, Taiwan, Tajikistan, Tanzania, Thailand, Timor-Leste, Togo, Tokelau, Tonga, Trinidad and Tobago, Tunisia, Turkey, Turkmenistan, Tuvalu, Uganda, Ukraine, United Arab Emirates, United Kingdom (UK), United States of America (USA), Uruguay, Uzbekistan, Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Zimbabwe.
 	</string>
-	<string name="tip_update_index">Updating Offline Maps</string>
-	<string name="tip_update_index_t">Up-to-date map data is essential for offline map viewing, for POI/address search, and for offline navigation. OsmAnd provides a map file manager to download these offline maps and to check for available updates.
-		\n\nTo download maps go to \'Settings\' → \'Manage map files\' → \'Download\'.
-		\n\nAfter the global region list is retrieved from the Internet, click on any entry to download or update a file. Please note the file type selector near the top of the screen to select the type of download you want (regular maps, hillshade overlays, etc.).
-		\n\nYou can filter the region list by typing some letters, or you may select the option \'Settings\' → \'Filter downloaded\' to see updates only for the data already on your device.
-		\n\n\t* Entries in \'green\' indicate data files identical on device and server
-		\n\t* Entries in \'blue\' indicate available updates on server
-		\n\t* Entries in italic font indicate data de-activated on the device
-	</string>
 	<string name="filterpoi_activity">Create POI filter</string>
 	<string name="recalculate_route_to_your_location">Transport mode:</string>
 	<string name="select_navigation_mode">Select transport mode</string>
@@ -1369,15 +1204,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="osmand_parking_hours">Hours</string>
 	<string name="osmand_parking_minutes">Minutes</string>
 	<string name="osmand_parking_position_description_add_time">The car was parked at:</string>
-	<string name="tip_recent_changes_0_8_1_t">Changes in 0.8.1:
-		\n\t* More precise routes (a bit slower)
-		\n\t* Smart and fast Route recalculation
-		\n\t* Direction by lanes
-		\n\t* Information about speed limits, speed cams, and speed bumps
-		\n\t* Improved voice guidance on highways
-		\n\t* Parking plugin (\'Where is my car parked at?\')
-		\n\t* Enable/disable logging widget
-	</string>
 	<string name="select_animate_speedup">Select speed of route simulation</string>
     	<string name="global_app_allocated_memory_descr">Allocated memory %1$s MB (Android limit %2$s MB, Dalvik %3$s MB).</string>
 	<string name="global_app_allocated_memory">Allocated memory</string>
@@ -1451,29 +1277,11 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="plugins_screen">Plugins</string>
 	<string name="prefs_plugins_descr">Plugins activate advanced settings and additional functionality</string>
 	<string name="prefs_plugins">Plugins</string>
-	<string name="tip_recent_changes_0_8_0_t">Changes in 0.8.0:
-		\n\t- *Plugin functionality*
-		\n\t    - Most functionality is grouped by features and can be enabled/disabled in the Settings/Plugins.
-		You can enable (online or cached) tile map sources, tracking settings, and many other new and previously existing features.
-		\n\t- *New offline map data support*
-		\n\t    - Map rendering becomes faster and more precise (coastline and flooded area problems are mainly fixed).
-		\n\t    - You need to download completely new offline data (old data will not be supported anymore)
-		\n\t- *Offline Routing*
-		\n\t	- Offline routing becomes more robust
-		\n\t  *Usability and UI experience*
-		\n\t	- Improved in many areas
-	</string>
 	<string name="vector_maps_may_display_faster_on_some_devices">Vector maps likely display faster. May not work well on some devices.</string>
 	<string name="play_commands_of_currently_selected_voice">Play commands of selected voice</string>
 	<string name="native_rendering">Native rendering</string>
 	<string name="test_voice_prompts">Test voice prompts</string>
 	<string name="switch_to_raster_map_to_see">No offline vector map present for this location. You can download one in Settings (Manage map files), or switch to online maps (enable online maps plugin for this).</string>
-	<string name="tip_recent_changes_0_7_2_t">Changes in 0.7.2:
-		\n\t- Native rendering for all devices
-		\n\t- Offline POI editing
-		\n\t- Accessibility
-		\n\t- Lots of bug fixes
-	</string>
 	<string name="send_files_to_osm">Send GPX files to OSM?</string>
 	<string name="gpx_visibility_txt">Visibility</string>
 	<string name="gpx_tags_txt">Tags</string>
@@ -1549,16 +1357,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="use_fluorescent_overlays_descr">Use fluorescent colors to display tracks and routes</string>
 	<string name="offline_edition">Offline editing</string>
 	<string name="offline_edition_descr">Always use offline editing</string>
-	<string name="tip_recent_changes_0_7_1_t">Changes in 0.7.1:
-		\n\t- Offline POI editing
-		\n\t- Online Tracking option - send coordinates to web service periodically (read how to setup your own web service in HowTo Articles)
-		\n\t- Show currently recorded track on map
-		\n\t- Direction detection: \'Make U-turn\' is indicated and announced when heading in opposite direction or after missing a turn
-		\n\t- New voice prompt \'Route recalculated\'
-		\n\t- Optical indication of an imminent turn within 100m by diretion arrow changing color
-		\n\t- Actuality also of deactivated index files now shown on Download screen in dark green and dark blue
-		\n\t- Other changes
-	</string>
 	<string name="update_poi_does_not_change_indexes">POI changes inside application do not affect downloaded map files, changes are saved to local file instead.</string>
 	<string name="local_openstreetmap_uploading">Uploading …</string>
 	<string name="local_openstreetmap_were_uploaded">{0} POI/Notes were uploaded</string>
@@ -1574,11 +1372,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="live_monitoring_url">Online tracking web address</string>
 	<string name="gpx_monitoring_disabled_warn">Log track using GPX widget or via \'Trip recording\' settings.</string>
 	<string name="show_current_gpx_title">Show current track</string>
-	<string name="tip_recent_changes_0_7_0_t">Changes in 0.7.0:
-		\n\t- Offline wikipedia data with articles
-		\n\t- Updated maps
-		\n\t- Other small features
-	</string>
 	<string name="free_version_message">This free OsmAnd version is limited to %1$s downloads and does not support offline Wikipedia articles.</string>
 	<string name="free_version_title">Free version</string>
 	<string name="poi_context_menu_showdescription">Show POI description</string>
@@ -1615,39 +1408,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="user_password_descr">Needed for openstreetmap.org submissions</string>
 	<string name="osmand_service">Background mode</string>
 	<string name="osmand_service_descr">OsmAnd runs in background while screen is off</string>
-	<string name="tip_rotation_switching">Map Orientation</string>
-	<string name="tip_rotation_switching_t_v2">You can toggle whether and how the map display is rotated by repeatedly clicking on the map screen\'s compass icon.
-		\n\nThe choices are:
-		\n\t* \'Don\'t rotate (north is up)\': Map will not be rotated. North will be always up
-		\n\t* \'To direction of movement\': Map will continuously be aligned with your heading
-		\n\t* \'To compass\': Map will continuously be aligned with the device\'s compass reading
-	</string>
-	<string name="tip_day_night_mode">Day/Night Mode</string>
-	<string name="tip_day_night_mode_t_v2">The map appearance can for offline vector maps be changed between day (brighter) and night (darker). Night colors are safer and more comfortable for night driving.
-		\n\nYou can set a policy for day/night switching in \'Menu\' → \'Configure map\' → \'Day/night map\'.
-		\n\nThe choices are:
-		\n\t* \'Sunrise/Sunset\': automatic mode, controlled by the position of the sun (default)
-		\n\t* \'Day\': always use day mode
-		\n\t* \'Night\': always use night mode
-		\n\t* \'Light sensor\': map appearance is controlled by the device\'s light sensor (only if equipped)
-	</string>
-	<string name="tip_osm_improve">Improving OSM Data</string>
-	<string name="tip_osm_improve_t">OsmAnd uses maps based on Openstreetmap.org (OSM) data and can directly be used to improve OSM data quality. You can create and upload new POI or OSM bug reports with just a few clicks.
-		\n\nFor this you need to activate the \'OSM Editing\' plugin under \'Settings\' → \'Plugins\', then provide your OSM login information in \'Settings\' → \'OSM editing\'.
-		\n\nTo add a new POI use option \'Create POI\' in the \'Use location\' context menu. Proceed with entering the information about the new POI in \'Create POI\' dialogue and finally commit it.
-		\n\nAlso errors in maps can immediately be reported via an OSM bug, so the OSM community can then fix this problem. Use the option \'Open OSM bug\' in the \'Use location\' context menu. Then enter the detailed description of the problem and finally post it using the \'Add\' button.
-		\n\nOsmAnd supports caching your entries offline (see respective setting), but Internet connectivity is of course needed to upload your OSM POI and OSM bug contributions.
-	</string>
 	<string name="download_files_not_enough_space">There is not enough free space to download %1$s MB (free: %2$s).</string>
 	<string name="download_files_question_space">Free space now {2} MB! Download {0} file(s) ({1} MB)?</string>
-	<string name="tip_recent_changes_0_6_9_t">Changes in 0.6.9 :
-		\n\t- Improved offline map rendering
-		\n\t- Fast Native offline rendering - look in experimental features (may not work on some devices)
-		\n\t- Massive look and feel changes
-		\n\t- Altitude info
-		\n\t- New translations (Vienamese, Polish)
-		\n\t- Other small features
-	</string>
 	<string name="use_transparent_map_theme">Transparent theme</string>
 	<string name="native_library_not_supported">Native library is not supported on this device.</string>
 	<string name="init_native_library">Initializing native library…</string>
@@ -1673,16 +1435,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 
 	<string name="animate_route_off">Stop simulation</string>
 	<string name="animate_route">Start simulation</string>
-	<string name="tip_recent_changes_0_6_8_t">Changes in 0.6.8:
-		\n\t- Completely redesigned search (POI, Address)! Make address search much faster and more responsive. Create one Search interface with many different options.
-		\n\t- Implement POI search by name in big areas (countries)
-		\n\t- Fix flickering map screen for tablets (Issue 641)
-		\n\t- Auto-center map view option (Issue 356)
-		\n\t- GPX navigation moved to \'Directions\' and \'Save Directions\' moved to \'About route\'
-		\n\t- POI data included in .obf file (all download indexes after 01/10/11)
-		\n\t- Voice prompt fixes (GPS position fix, omitting first command)
-		\n\t- Small improvements
-	</string>
 	<string name="file_can_not_be_renamed">File can not be renamed.</string>
 	<string name="file_with_name_already_exists">File with that name already exists.</string>
 	<string name="gpx_navigation">GPX route</string>
@@ -1703,18 +1455,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="search_position_map_view">Current map center</string>
 	<string name="select_search_position">Origin:</string>
 	<string name="context_menu_item_search">Search near here</string>
-	<string name="tip_recent_changes_0_6_7_t">Recent changes for 0.6.7:
-		\n\t- Offline data manager (download, delete, activate / deactivate offline data directly in OsmAnd)
-		\n\t- Favorite points and groups (categorize, delete, manage favorites)
-		\n\t- GPX Explorer in application (view track detail, distance, average speed, elevation, etc.)
-		\n\t- GPX navigation (more options, continue navigation after crash, support roundabouts)
-		\n\t- Function to save route as GPX track for offline use
-		\n\t- Improve GPX monitoring  (filter some inaccurate position and save accuracy/elevation/speed)
-		\n\t- Upload GPX to OSM community (http://download.osmand.net/gpx/)
-		\n\t- Improve vector rendering
-		\n\t- Improvement of TTS engine (announce exact distance, enable miles)
-		\n\t- Bug fixes
-	</string>
 	<string name="route_successfully_saved_at">Route successfully saved as \'%1$s\'.</string>
 	<string name="filename_input">File name: </string>
 	<string name="file_with_name_already_exist">File with same name already exists.</string>
@@ -1760,15 +1500,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="map_text_size">Map font size</string>
 	<string name="trace_rendering">Rendering debug info</string>
 	<string name="trace_rendering_descr">Display rendering performance</string>
-	<string name="tip_recent_changes">Recent Changes</string>
-	<string name="tip_recent_changes_0_6_6_t">Recent changes for 0.6.6:
-		\n\t- Text To Speech engine for voice navigation
-		\n\t- Make map renderer more detailed
-		\n\t- Basemap for whole world packaged with app
-		\n\t- Tweak offline navigation (still experimental)
-		\n\t- GPX navigation options
-		\n\t- UI update and large bug fixing
-	</string>
 	<string name="installing_new_resources">Unpacking new data…</string>
 	<string name="internet_connection_required_for_online_route">An online navigation service is selected but no Internet connection is available.</string>
 	<string name="tts_language_not_supported_title">Language not supported</string>
@@ -1801,16 +1532,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="install_more">Install more…</string>
 	<string name="level_to_switch_vector_raster_descr">Minimum zoom level to use vector maps</string>
 	<string name="level_to_switch_vector_raster">Min. vector zoom level</string>
-	<string name="tip_location_sharing">Share a Location</string>
-	<string name="tip_location_sharing_t">You can share the location of interesting places on your trip with family or friends via the \'Use location\' context menu → \'Share location\'.
-		\n\nThen chose a way to share your location. The choices are: E-Mail, SMS(text), or just copy the location coordinates to the device clipboard.
-	</string>
-	<string name="tip_favorites">Favorite Points</string>
-	<string name="tip_favorites_t">Frequently used points can be saved as Favorites, as follows:
-		\n\nIn the \'Use location\' context menu for any point, select option \'Add to favorites\' and then enter a name for it.
-		\n\nAfter saving a Favorite, it is accessible via \'Menu\' → \'My Places\'. Tapping on any entry in the \'Favorites\' list provides options like to navigate to it, edit or delete it.
-		\n\nTo display all Favorite points directly on the map, on the map screen enable layer \'Favorites\' in \'Menu\' → \'Configure map\'.
-	</string>
 	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u> map classification with images</string>
 	<string name="error_doing_search">Error occurred in offline search</string>
 	<string name="search_offline_geo_error">Could not parse geo intent \'%s\'</string>
@@ -1819,20 +1540,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="preferred_locale_descr">Select display language (please restart OsmAnd after changing)</string>
 	<string name="preferred_locale">Display language</string>
 	<string name="incomplete_locale">incomplete</string>
-	<string name="tip_map_switch">Select a Map Source</string>
-	<string name="tip_map_switch_t_v2">The map source and map layers displayed are changed via \'Menu\' → \'Configure map\'.
-		\n\nUnder \'Map source…\' you can choose using the pre-loaded offline vector maps (default, also needed for offline navigation), or predefined (online or cached offline) tile sources (activate the \'Online maps\' plugin under \'Settings\' → \'Plugins\' for this), or maps manually created using e.g. OsmAndMapCreator on a PC.
-		\n\nOsmAnd also supports custom sources.
-	</string>
-	<string name="tip_app_mode">Use Profile</string>
-	<string name="tip_app_mode_t_v2">OsmAnd supports different (customizable) application profiles for different use cases.
-		\n\nYou can change profiles via the profile button in the lower left corner of the map screen (icon car, bicycle, or pedestrian), or when creating a route (\'transport mode\').
-	</string>
-	<string name="tip_map_context_menu">\'Use location\' Menu</string>
-	<string name="tip_map_context_menu_t">The \'Use location\' context menu contains all actions referring to a point (location).
-		\n\nIt is available by long-pressing any point on the map (then tapping its marker), or by pressing the trackball button, or by selecting \'Menu\' → \'Use location\' (the last two ways take the map center as reference).
-		\n\nA marker box can be hidden again by long-clicking on it.
-	</string>
 	<string name="unit_of_length_descr">Change units of length and speed</string>
 	<string name="unit_of_length">Unit of measure</string>
 	<string name="si_mi_foots">Miles/feet</string>
@@ -1956,7 +1663,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="fav_file_to_load_not_found">GPX file containing favorites is not found at {0}</string>
 	<string name="fav_saved_sucessfully">Favorites successfully saved to {0}</string>
 	<string name="no_fav_to_save">No favorite points to save</string>
-	<string name="share_fav_subject">Favourites shared via OsmAnd</string>
+	<string name="share_fav_subject">Favorites shared via OsmAnd</string>
 	<string name="error_occurred_loading_gpx">Error occurred while loading GPX</string>
 	<string name="send_report">Send report</string>
 	<string name="none_region_found">No offline data for regions found on SD card. Download regions from the Internet.</string>
@@ -1976,7 +1683,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="use_trackball">Use trackball</string>
 	<string name="background_service_wait_int_descr">Set maximum waiting time for each background position fix</string>
 	<string name="background_service_wait_int">Maximum wait for fix</string>
-	<string name="service_stop_background_service">Switch off OsmAnd background navigation service</string>
 	<string name="where_am_i">Where am I?</string>
 	<string name="process_navigation_service">OsmAnd navigation service</string>
 	<string name="network_provider">Network</string>
@@ -2165,6 +1871,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="add_favorite_dialog_top_text">Enter favorite name</string>
 	<string name="add_favorite_dialog_default_favourite_name">Favorite</string>
 	<string name="add_favorite_dialog_favourite_added_template">Favorite point \'\'{0}\'\' was added successfully.</string>
+	<string name="favourites_context_menu_add">Add favorite</string>
 	<string name="favourites_context_menu_edit">Edit favorite</string>
 	<string name="favourites_context_menu_delete">Delete favorite</string>
 	<string name="favourites_remove_dialog_msg">Remove favorite point \'%s\'?</string>
@@ -2263,7 +1970,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="please_specify_poi_type">Please specify POI type.</string>
 	<string name="working_days">Working days</string>
 	<string name="recent_places">Recent places</string>
-	<string name="favourites">Favourites</string>
+	<string name="favourites">Favorites</string>
 	<string name="saved_at_time">Successfully saved at: %1$s</string>
 	<string name="poi_deleted_localy">POI will be deleted once you upload your changes</string>
 	<string name="show_gpx">Show GPX</string>

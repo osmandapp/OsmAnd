@@ -21,9 +21,9 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
-import net.osmand.plus.mapcontextmenu.sections.AmenityInfoMenuController;
-import net.osmand.plus.mapcontextmenu.sections.FavouritePointMenuController;
-import net.osmand.plus.mapcontextmenu.sections.MenuController;
+import net.osmand.plus.mapcontextmenu.details.AmenityMenuController;
+import net.osmand.plus.mapcontextmenu.details.FavouritePointMenuController;
+import net.osmand.plus.mapcontextmenu.details.MenuController;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.OsmandMapLayer;
@@ -119,7 +119,7 @@ public class MapContextMenu {
 					Amenity a = (Amenity) object;
 					if (a.getSubType() != null && a.getType() != null) {
 						PoiType pt = a.getType().getPoiTypeByKeyName(a.getSubType());
-						if (pt != null && pt.getOsmTag().equals("place")) {
+						if (pt != null && pt.getOsmTag() != null && pt.getOsmTag().equals("place")) {
 							res = false;
 						}
 					}
@@ -290,7 +290,7 @@ public class MapContextMenu {
 		MenuController menuController = null;
 		if (object != null) {
 			if (object instanceof Amenity) {
-				menuController = new AmenityInfoMenuController(app, activity, (Amenity)object);
+				menuController = new AmenityMenuController(app, activity, (Amenity)object);
 				if (!Algorithms.isEmpty(typeStr)) {
 					menuController.addPlainMenuItem(R.drawable.ic_action_info_dark, typeStr);
 				}
@@ -310,9 +310,11 @@ public class MapContextMenu {
 
 	public void buttonFavoritePressed() {
 		if (object != null && object instanceof FavouritePoint) {
-			mapActivity.getMapActions().editFavoritePoint((FavouritePoint)object);
+			mapActivity.getFavoritePointEditor().edit((FavouritePoint)object);
+			//mapActivity.getMapActions().editFavoritePoint((FavouritePoint) object);
 		} else {
-			mapActivity.getMapActions().addFavouritePoint(pointDescription.getLat(), pointDescription.getLon());
+			mapActivity.getFavoritePointEditor().add(pointDescription);
+			//mapActivity.getMapActions().addFavouritePoint(pointDescription.getLat(), pointDescription.getLon());
 		}
 	}
 

@@ -183,7 +183,7 @@
   <string name="local_index_no_items_to_do">Nessun oggetto da %1$s</string>
   <string name="local_index_action_do">Stai per %1$s %2$s oggetto/i. Continuare?</string>
   <string name="local_index_descr_title">Gestisci i file delle mappe</string>
-  <string name="local_index_mi_restore">Attivare</string>
+  <string name="local_index_mi_restore">Attiva</string>
   <string name="local_index_mi_backup">Disattiva</string>
   
   <string name="local_index_mi_reload">Ricarica dalla scheda SD</string>  
@@ -1632,7 +1632,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     
     
     <string name="osmo_show_group_notifications_descr">Mostra un messaggio popup quando l\'utente aderisce o lascia il gruppo</string>
-    <string name="gpx_file_is_empty">La traccia Gpx è vuota</string>
+    <string name="gpx_file_is_empty">La traccia GPX è vuota</string>
     <string name="gpx_info_start_time">Orario di partenza: %1$tF, %1$tT </string>
 	<string name="gpx_info_average_speed">Velocità media: %1$s </string>
 	<string name="gpx_info_maximum_speed">Velocità massima: %1$s </string>
@@ -2156,7 +2156,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="next_proceed">Avanti</string>
 	<string name="opening_at">Apre alle</string>
 	<string name="closing_at">Chiude alle</string>
-<string name="av_locations_descr">File gpx con note locali</string>
+<string name="av_locations_descr">File GPX con note locali</string>
     <string name="av_locations">Località</string>
     <string name="tag_poi_name">Nome</string>
 	<string name="tag_poi_amenity">amenità</string>
@@ -2181,4 +2181,10 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 <string name="simulate_your_location_stop_descr">Arresta la simulazione del percorso</string>
     <string name="simulate_your_location_descr">Simula utilizzando un GPX registrato o una percorso calcolato</string>
     <string name="downloads_left_template">%1$s download rimanenti</string>
-</resources>
+<string name="favourites_edit_dialog_title">Informazioni preferite</string>
+    <string name="favourites_context_menu_add">Aggiungi preferito</string>
+	<string name="roads">Strade</string>
+<string name="shared_string_trip_recording">Registrazione viaggio</string>
+    <string name="shared_string_navigation">Navigazione</string>
+    <string name="osmand_running_in_background">Avviato in backgroung</string>
+    </resources>

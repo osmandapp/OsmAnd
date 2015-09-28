@@ -1,4 +1,4 @@
-package net.osmand.plus.mapcontextmenu.sections;
+package net.osmand.plus.mapcontextmenu.details;
 
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -27,11 +27,11 @@ import java.util.Map;
 
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 
-public class AmenityInfoMenuBuilder extends MenuBuilder {
+public class AmenityMenuBuilder extends MenuBuilder {
 
 	private final Amenity amenity;
 
-	public AmenityInfoMenuBuilder(OsmandApplication app, final Amenity amenity) {
+	public AmenityMenuBuilder(OsmandApplication app, final Amenity amenity) {
 		super(app);
 		this.amenity = amenity;
 	}

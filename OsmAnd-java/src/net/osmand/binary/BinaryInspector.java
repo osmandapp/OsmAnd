@@ -66,17 +66,17 @@ public class BinaryInspector {
 		// test cases show info
 		if(args.length == 1 && "test".equals(args[0])) {
 			in.inspector(new String[]{
-//				"-vpoi",
+				"-vpoi",
 //				"-vmap", "-vmapobjects", // "-vmapcoordinates", 
 //				"-vrouting",
-				"-vaddress", "-vcities",//"-vstreetgroups", 
+//				"-vaddress", "-vcities",//"-vstreetgroups", 
 //				"-vstreets", "-vbuildings", "-vintersections", 
 //				"-zoom=15",
 //				"-bbox=1.74,51.17,1.75,51.16",
 //				"-vstats",
 //				"/Users/victorshcherb/osmand/maps/Synthetic_test_rendering.obf"
-				"/Users/victorshcherb/osmand/maps/Netherlands_gelderland_europe_2.obf"
-//				"/Users/victorshcherb/osmand/temp/Czech-republic_jihovychod_europe_2.road.obf"
+//				"/Users/victorshcherb/osmand/maps/Netherlands_europe_2.road.obf"
+				"/Users/victorshcherb/osmand/maps/Map.obf"
 					});
 		} else {
 			in.inspector(args);

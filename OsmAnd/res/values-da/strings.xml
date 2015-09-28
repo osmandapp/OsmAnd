@@ -2137,4 +2137,10 @@
 	<string name="simulate_your_location_stop_descr">Stop simulering af position</string>
     <string name="simulate_your_location_descr">Simuler ved brug af optaget GPX eller beregnet rute</string>
     <string name="downloads_left_template">%1$s filhentninger tilbage</string>
-</resources>
+<string name="roads">Veje</string>
+<string name="favourites_edit_dialog_title">Favorit information</string>
+    <string name="favourites_context_menu_add">Tilføj favorit</string>
+	<string name="shared_string_trip_recording">Optag ture</string>
+    <string name="shared_string_navigation">Navigation</string>
+    <string name="osmand_running_in_background">Kører i baggrunden</string>
+    </resources>

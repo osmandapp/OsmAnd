@@ -599,7 +599,7 @@
     <string name="gpx_selection_track">%1$s
 \nRasta %2$s</string>
     
-    <string name="gpx_file_is_empty">Sa rasta Gpx est boida</string>
+    <string name="gpx_file_is_empty">Sa rasta GPX est bòida</string>
     
     <string name="shared_string_my_tracks">Totu sas rastas</string>
     <string name="shared_string_my_favorites">Prefèrridos meos</string>
@@ -1349,7 +1349,7 @@
 	<string name="shared_string_import">Importa</string>
 	
 	<string name="shared_string_share">Cumpartzi</string>
-	<string name="share_fav_subject">Prefèrridos cumpartzidos tramite OsmAnd</string>
+	<string name="share_fav_subject">Prefèrridos cumpartzidos pro mèdiu de OsmAnd</string>
 	<string name="error_occurred_loading_gpx">Errore durante su carrigamentu de su documentu GPX</string>
 	<string name="send_report">Imbia resumu</string>
 	<string name="any_poi">Totus</string>
@@ -2066,7 +2066,7 @@
 	<string name="next_proceed">Imbeniente</string>
 	<string name="opening_at">Aberit a sas</string>
 	<string name="closing_at">Serrat a sas</string>
-<string name="av_locations_descr">Documentu gpx cun notas locales</string>
+<string name="av_locations_descr">Documentu GPX cun notas locales</string>
     <string name="av_locations">Localidades</string>
     <string name="tag_poi_name">nùmene</string>
 	<string name="contact_info">Informatziones de cuntatu</string>
@@ -2091,4 +2091,11 @@
 <string name="simulate_your_location_stop_descr">Firma sa simulatzione de sa positzione tua</string>
     <string name="simulate_your_location_descr">Sìmula impreande unu GPX registradu o un’àndala calculada</string>
     <string name="downloads_left_template">Abarrant galu %1$s iscarrigamentos</string>
-</resources>
+<string name="favourites_edit_dialog_title">Informatziones prefèrridas</string>
+    <string name="shared_string_wikipedia">Wikipedia</string>
+    <string name="favourites_context_menu_add">Annanghe unu prefèrridu</string>
+	<string name="roads">Istradas</string>
+<string name="shared_string_trip_recording">Registratzione biàgiu</string>
+    <string name="shared_string_navigation">Nàvigu</string>
+    <string name="osmand_running_in_background">Funtzionamentu in isfondu</string>
+    </resources>

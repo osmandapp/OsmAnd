@@ -31,7 +31,6 @@ import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffColorFilter;
-import android.util.FloatMath;
 
 public class RouteLayer extends OsmandMapLayer {
 	
@@ -204,7 +203,7 @@ public class RouteLayer extends OsmandMapLayer {
 						canvas.drawPath(pth, actionPaint);
 						double angleRad = Math.atan2(y - py, x - px);
 						double angle = (angleRad * 180 / Math.PI) + 90f;
-						double distSegment = FloatMath.sqrt((y - py) * (y - py) + (x - px) * (x - px));
+						double distSegment = Math.sqrt((y - py) * (y - py) + (x - px) * (x - px));
 						if (distSegment == 0) {
 							continue;
 						}
@@ -285,7 +284,7 @@ public class RouteLayer extends OsmandMapLayer {
 			int y = lst.get(i + 3);
 			float angleRad = (float) Math.atan2(y - py, x - px);
 			float angle = (float) (angleRad * 180 / Math.PI) + 90f;
-			float distSegment = FloatMath.sqrt((y - py) * (y - py) + (x - px) * (x - px));
+			float distSegment = (float) Math.sqrt((y - py) * (y - py) + (x - px) * (x - px));
 			if(distSegment == 0) {
 				continue;
 			}

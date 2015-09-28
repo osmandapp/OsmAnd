@@ -67,6 +67,7 @@
         <item name="bg_color">@color/bg_color_light</item>
         <item name="bg_card">@drawable/bg_card_light</item>
         <item name="bg_map_context_menu">@drawable/bg_map_context_menu_light</item>
+        <item name="bg_point_editor_view">@drawable/bg_point_editor_view_light</item>
         <item name="dashboard_divider">@color/dashboard_divider_light</item>
         <item name="divider_color">@color/divider_color</item>
         <item name="dashboard_button">@drawable/dashboard_button_light</item>
@@ -151,6 +152,7 @@
         <item name="bg_color">@color/bg_color_dark</item>
         <item name="bg_card">@drawable/bg_card_dark</item>
         <item name="bg_map_context_menu">@drawable/bg_map_context_menu_dark</item>
+        <item name="bg_point_editor_view">@drawable/bg_point_editor_view_dark</item>
         <item name="dashboard_divider">@color/dashboard_divider_dark</item>
         <item name="divider_color">@color/dashboard_divider_dark</item>
         <item name="dashboard_button">@drawable/dashboard_button_dark</item>

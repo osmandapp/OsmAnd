@@ -51,7 +51,6 @@ import android.graphics.Shader.TileMode;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.DisplayMetrics;
-import android.util.FloatMath;
 import android.view.WindowManager;
 
 public class OsmandRenderer {
@@ -184,8 +183,8 @@ public class OsmandRenderer {
 			Bitmap bmp, RenderingRuleSearchRequest render, final MapTileDownloader mapTileDownloader) {
 		long now = System.currentTimeMillis();
 		if (rc.width > 0 && rc.height > 0 && searchResultHandler != null) {
-			rc.cosRotateTileSize = FloatMath.cos((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
-			rc.sinRotateTileSize = FloatMath.sin((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
+			rc.cosRotateTileSize = (float) (Math.cos(Math.toRadians(rc.rotate)) * TILE_SIZE);
+			rc.sinRotateTileSize = (float) (Math.sin(Math.toRadians(rc.rotate)) * TILE_SIZE);
 			try {
 				if(Looper.getMainLooper() != null && library.useDirectRendering()) {
 					final Handler h = new Handler(Looper.getMainLooper());
@@ -249,8 +248,8 @@ public class OsmandRenderer {
 			cv.drawColor(rc.defaultColor);
 		}
 		if (objects != null && !objects.isEmpty() && rc.width > 0 && rc.height > 0) {
-			rc.cosRotateTileSize = FloatMath.cos((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
-			rc.sinRotateTileSize = FloatMath.sin((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
+			rc.cosRotateTileSize = (float) (Math.cos((float) Math.toRadians(rc.rotate)) * TILE_SIZE);
+			rc.sinRotateTileSize = (float) (Math.sin((float) Math.toRadians(rc.rotate)) * TILE_SIZE);
 			
 			// put in order map
 			List<MapDataObjectPrimitive>  pointsArray = new ArrayList<OsmandRenderer.MapDataObjectPrimitive>();

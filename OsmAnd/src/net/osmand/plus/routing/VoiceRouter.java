@@ -110,7 +110,7 @@ public class VoiceRouter {
 	
 	
 	protected CommandBuilder getNewCommandPlayerToPlay(){
-		if(player == null || mute){
+		if(player == null){
 			return null;
 		}
         lastAnnouncement = System.currentTimeMillis();

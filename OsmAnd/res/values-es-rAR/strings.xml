@@ -2035,7 +2035,7 @@
 	<string name="next_proceed">Siguiente</string>
 	<string name="opening_at">Abren a las</string>
 	<string name="closing_at">Cierran a las</string>
-<string name="av_locations_descr">Archivo GPX con ubicaciones de la nota</string>
+<string name="av_locations_descr">Archivo GPX con notas de ubicaciones</string>
     <string name="av_locations">Ubicaciones</string>
     <string name="tag_poi_name">nombre</string>
 	<string name="tag_poi_amenity">servicio</string>
@@ -2060,4 +2060,10 @@
 <string name="simulate_your_location_stop_descr">Parar simulación de ubicación</string>
     <string name="simulate_your_location_descr">Simular usando grabación GPX o ruta calculada</string>
     <string name="downloads_left_template">Quedan %1$s descargas</string>
+<string name="shared_string_trip_recording">Grabando viaje</string>
+    <string name="shared_string_navigation">Navegación</string>
+    <string name="osmand_running_in_background">Ejecutando en segundo plano</string>
+    <string name="favourites_edit_dialog_title">Información del favorito</string>
+    <string name="favourites_context_menu_add">Añadir favorito</string>
+	<string name="roads">Caminos</string>
 </resources>

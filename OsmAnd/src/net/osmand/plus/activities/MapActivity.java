@@ -66,6 +66,7 @@ import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.helpers.GpxImportHelper;
 import net.osmand.plus.helpers.WakeLockHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
+import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RoutingHelper;
@@ -126,6 +127,7 @@ public class MapActivity extends AccessibleActivity {
 
 	private DashboardOnMap dashboardOnMap = new DashboardOnMap(this);
 	private MapContextMenu contextMenuOnMap;
+	private FavoritePointEditor favoritePointEditor;
 	private AppInitializeListener initListener;
 	private IMapDownloaderCallback downloaderCallback;
 	private DrawerLayout drawerLayout;
@@ -638,6 +640,7 @@ public class MapActivity extends AccessibleActivity {
 	protected void onStart() {
 		super.onStart();
 		wakeLockHelper.onStart(this);
+		getMyApplication().getNotificationHelper().showNotification();
 	}
 
 	protected void setProgressDlg(Dialog progressDlg) {
@@ -668,10 +671,14 @@ public class MapActivity extends AccessibleActivity {
 		getMyApplication().unsubscribeInitListener(initListener);
 		mapViewTrackingUtilities.setMapView(null);
 		cancelNotification();
+		if(getMyApplication().getNavigationService() == null) {
+			getMyApplication().getNotificationHelper().removeServiceNotificationCompletely();
+		}
 		app.getResourceManager().getMapTileDownloader().removeDownloaderCallback(mapView);
 		if (atlasMapRendererView != null) {
 			atlasMapRendererView.handleOnDestroy();
 		}
+		
 	}
 
 	private void cancelNotification() {
@@ -976,6 +983,13 @@ public class MapActivity extends AccessibleActivity {
 
 	public MapContextMenu getContextMenu() {
 		return contextMenuOnMap;
+	}
+
+	public FavoritePointEditor getFavoritePointEditor() {
+		if (favoritePointEditor == null) {
+			favoritePointEditor = new FavoritePointEditor(app, this);
+		}
+		return favoritePointEditor;
 	}
 
 	public void openDrawer() {

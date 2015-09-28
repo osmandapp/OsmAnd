@@ -273,7 +273,7 @@ public class GPXUtilities {
 					}
 
 					// Trend channel approach for elevation gain/loss, Hardy 2015-09-22
-					// Self-adjusting turnarund threshold added for testing 2015-09-25: Current rule is now: "All up/down trends of amplitude <X are ignored to smooth the noise, where X is the maximum observed hdop value of any point which contributed to the current trend (but at least 5 m as the minimum noise threshold)".
+					// Self-adjusting turnarund threshold added for testing 2015-09-25: Current rule is now: "All up/down trends of amplitude <X are ignored to smooth the noise, where X is the maximum observed DOP value of any point which contributed to the current trend (but at least 5 m as the minimum noise threshold)".
 					if (!Double.isNaN(point.ele)) {
 						// Init channel
 						if (channelBase == 99999) {
@@ -286,12 +286,12 @@ public class GPXUtilities {
 						if (point.ele > channelTop) {
 							channelTop = point.ele;
 							if (!Double.isNaN(point.hdop)) {
-								channelThres = Math.max(channelThres, point.hdop);
+								channelThres = Math.max(channelThres, 2.0*point.hdop);  //Try empirical 2*hdop, may better serve very flat tracks, or high dop tracks
 							}
 						} else if (point.ele < channelBottom) {
 							channelBottom = point.ele;
 							if (!Double.isNaN(point.hdop)) {
-								channelThres = Math.max(channelThres, point.hdop);
+								channelThres = Math.max(channelThres, 2.0*point.hdop);
 							}
 						}
 						// Turnaround (breakout) detection
