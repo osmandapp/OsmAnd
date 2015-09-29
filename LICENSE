@@ -44,6 +44,25 @@
     * Map icons are taken from sjjb and some are drawn and distributed under Public Domain (except icons8)
         - https://github.com/osmandapp/OsmAnd-resources/tree/master/icons/svg
 
+    * Subway icons
+	- Moscow: Art Lebedev Studio (http://www.artlebedev.ru/everything/metro/logo/) [Public domain], undefined
+	- Samara: «Metro-logo» (Altoing) - Own work. Under Public domain Commons licensefrom the site - https://commons.wikimedia.org/wiki/File:Metro-logo.svg#/media/File:Metro-logo.svg
+	- Budapest: «BKV metro» (Plexipajzs) - hu:Fájl:BKV metro.svg. Under license Public domain Commons licensefrom the site - https://commons.wikimedia.org/wiki/File:BKV_metro.svg#/media/File:BKV_metro.svg
+	- Saint-Petersburg: «Spb metro logo» (Orange-kun) (vector version) - Vectorised version made with Adobe Illustrator. Under license Public domain Commons licensefrom the site - https://commons.wikimedia.org/wiki/File:Spb_metro_logo.svg#/media/File:Spb_metro_logo.svg
+	- Germany: «U-Bahn» (3247) - own work. Under Public domain Commons license from the site - https://commons.wikimedia.org/wiki/File:U-Bahn.svg#/media/File:U-Bahn.svg
+	- Wien: «U-Bahn Wien» (Siegele Roland) - Logo der U-Bahn Wien. Under Public domain Commons license from the site - https://commons.wikimedia.org/wiki/File:U-Bahn_Wien.svg#/media/File:U-Bahn_Wien.svg
+	- Kazan: «Kazan-metro-Logo» (Россиянин) - own work. Under Public domain Commons license from the site - https://commons.wikimedia.org/wiki/File:Kazan-metro-Logo.svg#/media/File:Kazan-metro-Logo.svg
+	- Tbilisi: «Metro Tbilisi logo» (Carnby) - own work. Under CC BY-SA 3.0 license from site - https://commons.wikimedia.org/wiki/File:Metro_Tbilisi_logo.svg#/media/File:Metro_Tbilisi_logo.svg
+	- Minsk: «Minsk metro logo» (Skip405) - own work. Under Public domain Commons license from the site - https://commons.wikimedia.org/wiki/File:Minsk_metro_logo.svg#/media/File:Minsk_metro_logo.svg
+	- Nizhny Novgorod: «NNMetro» (AlexTref871) - own work. This vector image includes elements borrowed from another image:  Coat of arms of Nizhny Novgorod Region.svg.. Under Public domain Commons licensefrom the site - https://commons.wikimedia.org/wiki/File:NNMetro.svg#/media/File:NNMetro.svg
+	- Novosibirsk: «Logo-Nsk-Metro» (AlexTref871) - own work. Under Public domain Commons license from the site - https://commons.wikimedia.org/wiki/File:Logo-Nsk-Metro.svg#/media/File:Logo-Nsk-Metro.svg
+	- Yekaterinburg: «Ekt-metro-logo-01» (AlexTref871) - own work. Under CC BY-SA 4.0 license from site - https://commons.wikimedia.org/wiki/File:Ekt-metro-logo-01.svg#/media/File:Ekt-metro-logo-01.svg
+	- New York: «MTA New York City Subway logo» (Metropolitan Transportation Authority) - http://mta.info/. Under Public domain Commons license from the site - https://commons.wikimedia.org/wiki/File:MTA_New_York_City_Subway_logo.svg#/media/File:MTA_New_York_City_Subway_logo.svg
+	- Paris: «Metro-M» (Pb 2001) - own work. Under Public domain Commons license from the site - https://commons.wikimedia.org/wiki/File:Metro-M.svg#/media/File:Metro-M.svg
+	- Madrid: «MetroMadridLogo» (Przemysław Sakrajda) - own work based on (na podstawie) www.metromadrid.es. Under Public domain Commons license from the site - https://commons.wikimedia.org/wiki/File:MetroMadridLogo.svg#/media/File:MetroMadridLogo.svg
+	- London: «Underground» (Dream out loud) - own work. Under Public domain Commons license from the site - https://commons.wikimedia.org/wiki/File:Underground.svg#/media/File:Underground.svg
+	- Barcelona: «Logometrobcn» (Javitomad) - own work. Under GFDL license - https://commons.wikimedia.org/wiki/File:Logometrobcn.svg#/media/File:Logometrobcn.svg
+
     * Integration with Qt library in (https://github.com/osmandapp/Osmand-core/) - dynamic linking
         - LGPL (http://www.qt.io/qt-licensing-terms/)
 
