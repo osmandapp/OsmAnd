@@ -176,11 +176,11 @@ public class MapVectorLayer extends BaseMapLayer {
 			canvas.rotate(rot, currentViewport.getCenterPixelX(), currentViewport.getCenterPixelY());
 			final RotatedTileBox calc = currentViewport.copy();
 			calc.setRotate(bmpLoc.getRotate());
-			QuadPointDouble lt = calc.getLeftTopTile(bmpLoc.getZoom());
-			QuadPointDouble rb = calc.getRightBottomTile(bmpLoc.getZoom());
+			QuadPointDouble lt = bmpLoc.getLeftTopTile(bmpLoc.getZoom());
+			QuadPointDouble rb = bmpLoc.getRightBottomTile(bmpLoc.getZoom());
 			final float x1 = calc.getPixXFromTile(lt.x, lt.y, bmpLoc.getZoom());
-			final float x2 = calc.getPixXFromTile(lt.x, lt.y, bmpLoc.getZoom());
-			final float y1 = calc.getPixYFromTile(rb.x, rb.y, bmpLoc.getZoom());
+			final float x2 = calc.getPixXFromTile(rb.x, rb.y, bmpLoc.getZoom());
+			final float y1 = calc.getPixYFromTile(lt.x, lt.y, bmpLoc.getZoom());
 			final float y2 = calc.getPixYFromTile(rb.x, rb.y, bmpLoc.getZoom());
 			
 //			LatLon lt = bmpLoc.getLeftTopLatLon();
