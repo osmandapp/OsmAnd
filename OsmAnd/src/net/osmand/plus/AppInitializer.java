@@ -211,6 +211,7 @@ public class AppInitializer implements IProgress {
 							new FileOutputStream(file));
 				}
 				app.regions.prepareFile(file.getAbsolutePath());
+				loadWorldRegions();
 			}
 		} catch (Exception e) {
 			warnings.add(e.getMessage());
@@ -218,6 +219,9 @@ public class AppInitializer implements IProgress {
 		}
 	}
 
+	private void loadWorldRegions() {
+		app.worldRegion = WorldRegion.loadWorldRegions(app);
+	}
 	
 	private void initPoiTypes() {
 		if(app.getAppPath("poi_types.xml").exists()) {
