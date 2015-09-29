@@ -1519,4 +1519,5 @@
 	<string name="poi_payment_euroshell_no">Accepter ikke Euroshell brændstof kort</string>
 	<string name="poi_payment_kitcard_yes">Accepter KITCard</string>
 	<string name="poi_payment_kitcard_no">Accepter ikke KITCard</string>
+	<string name="poi_payment_westfalen_card_yes">Acceptere Westfalen kort</string>
 	</resources>
