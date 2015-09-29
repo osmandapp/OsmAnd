@@ -1534,4 +1534,21 @@
 	<string name="poi_payment_ep_proton_yes">Acceptere Proton kort</string>
 	<string name="poi_payment_ep_proton_no">Accepter ikke Proton kort</string>
 	<string name="poi_payment_ep_avant_yes">Accepter AvantCard</string>
+	<string name="poi_payment_ep_avant_no">Accepter ikke AvantCard</string>
+	<string name="poi_payment_ep_mep_yes">Acceptere MEP</string>
+	<string name="poi_payment_ep_mep_no">Accepter ikke MEP</string>
+	<string name="poi_payment_ep_minipay_yes">Accepter Minipay</string>
+	<string name="poi_payment_ep_minipay_no">Accepter ikke Minipay</string>
+	<string name="poi_payment_ep_minicash_yes">Accepter miniCash</string>
+	<string name="poi_payment_ep_minicash_no">Accepter ikke miniCash</string>
+	<string name="poi_payment_ep_moneo_yes">Acceptere Moneo</string>
+	<string name="poi_payment_ep_moneo_no">Accepter ikke Moneo</string>
+	<string name="poi_payment_ep_monedero4b_yes">Acceptere Monedero 4B</string>
+	<string name="poi_payment_ep_monedero4b_no">Áccepter ikke Monedero 4B</string>
+	<string name="poi_payment_ep_monedero_yes">Accepter Monedero</string>
+	<string name="poi_payment_ep_monedero_no">Accepter ikke Monedero</string>
+	<string name="poi_payment_bankaxess_yes">Accepter BankAxess</string>
+	<string name="poi_payment_bankaxess_no">Acceptere ikke BankAxess</string>
+	<string name="poi_payment_coinkite_yes">Accepter Coinkite</string>
+	<string name="poi_payment_coinkite_no">Accepter ikke Coinkite</string>
 	</resources>
