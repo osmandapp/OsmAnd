@@ -1,27 +1,25 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import net.osmand.plus.FavouritesDbHelper;
@@ -29,7 +27,7 @@ import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.mapcontextmenu.editors.dialogs.SelectCategoryDialogFragment;
 import net.osmand.plus.widgets.AutoCompleteTextViewEx;
 import net.osmand.util.Algorithms;
 
@@ -99,16 +97,16 @@ public abstract class PointEditorFragment extends Fragment {
 		}
 
 		TextView headerCaption = (TextView) view.findViewById(R.id.header_caption);
-		headerCaption.setText(getHeaderText());
+		headerCaption.setText(getHeaderCaption());
 		TextView nameCaption = (TextView) view.findViewById(R.id.name_caption);
-		nameCaption.setText(getNameText());
+		nameCaption.setText(getNameCaption());
 		TextView categoryCaption = (TextView) view.findViewById(R.id.category_caption);
-		categoryCaption.setText(getCategoryText());
+		categoryCaption.setText(getCategoryCaption());
 
 		EditText nameEdit = (EditText) view.findViewById(R.id.name_edit);
-		nameEdit.setText(getNameValue());
+		nameEdit.setText(getNameInitValue());
 		AutoCompleteTextViewEx categoryEdit = (AutoCompleteTextViewEx) view.findViewById(R.id.category_edit);
-		categoryEdit.setText(getCategoryValue());
+		categoryEdit.setText(getCategoryInitValue());
 		categoryEdit.setThreshold(1);
 		final FavouritesDbHelper helper = getMyApplication().getFavorites();
 		List<FavouritesDbHelper.FavoriteGroup> gs = helper.getFavoriteGroups();
@@ -117,10 +115,29 @@ public abstract class PointEditorFragment extends Fragment {
 			list[i] =gs.get(i).name;
 		}
 		categoryEdit.setAdapter(new ArrayAdapter<>(getMapActivity(), R.layout.list_textview, list));
+		categoryEdit.setOnTouchListener(new View.OnTouchListener() {
+			@Override
+			public boolean onTouch(final View v, MotionEvent event) {
+				final EditText editText = (EditText) v;
+				final int DRAWABLE_RIGHT = 2;
+				if (event.getAction() == MotionEvent.ACTION_UP) {
+					if (event.getX() >= (editText.getRight()
+							- editText.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width()
+							- editText.getPaddingRight())) {
+
+						DialogFragment dialogFragment =
+								SelectCategoryDialogFragment.createInstance();
+						dialogFragment.show(getChildFragmentManager(), "SelectCategoryDialogFragment");
+						return true;
+					}
+				}
+				return false;
+			}
+		});
 
 		EditText descriptionEdit = (EditText) view.findViewById(R.id.description_edit);
-		if (getDescriptionValue() != null) {
-			descriptionEdit.setText(getDescriptionValue());
+		if (getDescriptionInitValue() != null) {
+			descriptionEdit.setText(getDescriptionInitValue());
 		}
 
 		ImageView nameImage = (ImageView) view.findViewById(R.id.name_image);
@@ -172,8 +189,14 @@ public abstract class PointEditorFragment extends Fragment {
 	}
 
 	public abstract PointEditor getEditor();
-
 	public abstract String getToolbarTitle();
+
+	public void setCategory(String name) {
+		AutoCompleteTextViewEx categoryEdit = (AutoCompleteTextViewEx) getView().findViewById(R.id.category_edit);
+		categoryEdit.setText(name);
+		ImageView categoryImage = (ImageView) getView().findViewById(R.id.category_image);
+		categoryImage.setImageDrawable(getCategoryIcon());
+	}
 
 	protected MapActivity getMapActivity() {
 		return (MapActivity)getActivity();
@@ -201,33 +224,33 @@ public abstract class PointEditorFragment extends Fragment {
 		}
 	}
 
-	public abstract String getHeaderText();
+	public abstract String getHeaderCaption();
 
-	public String getNameText() {
+	public String getNameCaption() {
 		return getMapActivity().getResources().getString(R.string.favourites_edit_dialog_name);
 	}
-	public String getCategoryText() {
+	public String getCategoryCaption() {
 		return getMapActivity().getResources().getString(R.string.favourites_edit_dialog_category);
 	}
 
-	public abstract String getNameValue();
-	public abstract String getCategoryValue();
-	public abstract String getDescriptionValue();
+	public abstract String getNameInitValue();
+	public abstract String getCategoryInitValue();
+	public abstract String getDescriptionInitValue();
 
 	public abstract Drawable getNameIcon();
 	public abstract Drawable getCategoryIcon();
 
-	public String getName() {
+	public String getNameTextValue() {
 		EditText nameEdit = (EditText) getView().findViewById(R.id.name_edit);
 		return nameEdit.getText().toString().trim();
 	}
 
-	public String getCategory() {
+	public String getCategoryTextValue() {
 		AutoCompleteTextViewEx categoryEdit = (AutoCompleteTextViewEx) getView().findViewById(R.id.category_edit);
 		return categoryEdit.getText().toString().trim();
 	}
 
-	public String getDescription() {
+	public String getDescriptionTextValue() {
 		EditText descriptionEdit = (EditText) getView().findViewById(R.id.description_edit);
 		String res = descriptionEdit.getText().toString().trim();
 		return Algorithms.isEmpty(res) ? null : res;

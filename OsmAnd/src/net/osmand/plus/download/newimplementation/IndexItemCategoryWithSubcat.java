@@ -59,7 +59,7 @@ public class IndexItemCategoryWithSubcat implements Comparable<IndexItemCategory
 
 	public static List<IndexItemCategoryWithSubcat> categorizeIndexItems(final OsmandApplication ctx,
 																		 Collection<IndexItem> indexItems) {
-		boolean skipWiki = Version.isFreeVersion(ctx);
+		boolean skipWiki = Version.isFreeVersion(ctx);NewLocalIndexesFragment
 		final Map<String, IndexItemCategoryWithSubcat> cats = new TreeMap<>();
 		ArrayList<IndexItemCategoryWithSubcat> mainList = new ArrayList<>();
 		for (IndexItem i : indexItems) {
