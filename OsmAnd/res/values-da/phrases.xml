@@ -1520,4 +1520,18 @@
 	<string name="poi_payment_kitcard_yes">Accepter KITCard</string>
 	<string name="poi_payment_kitcard_no">Accepter ikke KITCard</string>
 	<string name="poi_payment_westfalen_card_yes">Acceptere Westfalen kort</string>
+	<string name="poi_payment_westfalen_card_no">Accepter ikke Westfalen kort</string>
+	<string name="poi_payment_v_pay_yes">Accepter V PAY kort</string>
+	<string name="poi_payment_v_pay_no">Accepter ikke V PAY kort</string>
+	<string name="poi_payment_dogecoin_yes">Accepter Dogecoin</string>
+	<string name="poi_payment_dogecoin_no">Accepter ikke Dogecoin</string>
+	<string name="poi_payment_cibus_yes">Accepter Cibus kort</string>
+	<string name="poi_payment_cibus_no">Acceptere ikke Cibus kort</string>
+	<string name="poi_payment_wire_transfer_yes">Acceptere bankoverførsler</string>
+	<string name="poi_payment_wire_transfer_no">Accepter ikke bankoverførsler</string>
+	<string name="poi_payment_ep_cash_yes">Acceptere kontanter (Geldkarte)</string>
+	<string name="poi_payment_ep_cash_no">Accepter ikke kontanter (Geldkarte)</string>
+	<string name="poi_payment_ep_proton_yes">Acceptere Proton kort</string>
+	<string name="poi_payment_ep_proton_no">Accepter ikke Proton kort</string>
+	<string name="poi_payment_ep_avant_yes">Accepter AvantCard</string>
 	</resources>
