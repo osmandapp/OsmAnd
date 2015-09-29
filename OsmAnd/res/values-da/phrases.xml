@@ -1555,4 +1555,36 @@
 	<string name="poi_payment_roadrunner_no">Accepter ikke Roadrunner kort</string>
 	<string name="poi_payment_svg_yes">Acceptere SVG</string>
 	<string name="poi_payment_svg_no">Accepter ikke SVG</string>
-	</resources>
+	<string name="poi_payment_sms_yes">Accepter SMS betalinger</string>
+	<string name="poi_payment_sms_no">Accepter ikke SMS betalinger</string>
+	<string name="poi_payment_ov_chipkaart_yes">Acceptere OV-Chipkaart</string>
+	<string name="poi_payment_ov_chipkaart_no">Accepter ikke OV-Chipkaart</string>
+	<string name="poi_payment_oyster_yes">Accepter Oyster kort</string>
+	<string name="poi_payment_oyster_no">Accepter ikke Oyster kort</string>
+	<string name="poi_payment_sube_yes">Accepter SUBE kort</string>
+	<string name="poi_payment_sube_no">Accepter ikke SUBE kort</string>
+	<string name="poi_payment_via_verde_yes">Acceptere Via Verde</string>
+	<string name="poi_payment_via_verde_no">Accepter ikke Via Verde</string>
+	<string name="poi_payment_meal_voucher_yes">Acceptere spisebilletter</string>
+	<string name="poi_payment_meal_voucher_no">Accepter ikke spisebilletter</string>
+	<string name="poi_payment_paypal_yes">Acceptere PayPal</string>
+	<string name="poi_payment_paypal_no">Accepter ikke PayPal</string>
+	<string name="poi_payment_u_key_yes">Accepter U-Key</string>
+	<string name="poi_payment_u_key_no">Accepter ikke U-Key</string>
+	<string name="poi_payment_token_yes">Acceptere poletter</string>
+	<string name="poi_payment_token_no">Accepter ikke poletter</string>
+	<string name="poi_payment_gift_card_yes">Accepter gavekort</string>
+	<string name="poi_payment_gift_card_no">Accepter ikke gavekort</string>
+	<string name="poi_payment_golden_crown_yes">Accepter Golden Crown kort</string>
+	<string name="poi_payment_golden_crown_no">Accepter Golden Crown kort</string>
+	<string name="poi_payment_pro100_yes">Acceptere PRO100 kort</string>
+	<string name="poi_payment_pro100_no">Accepter ikke PRO100 kort</string>
+	<string name="poi_payment_union_card_yes">Accepter Union kort</string>
+	<string name="poi_payment_union_card_no">Accepter ikke Union kort</string>
+	<string name="poi_payment_mtsmoney_yes">Acceptere MTS-penge</string>
+	<string name="poi_payment_mtsmoney_no">Accepter ike MTS-penge</string>
+	<string name="poi_payment_yandexmoney_yes">Acceptere Yandex.Money</string>
+	<string name="poi_payment_yandexmoney_no">Accepter ikke Yandex.Money</string>
+	<string name="poi_description_payment">Betalingsbeskrivelse</string>
+
+</resources>
