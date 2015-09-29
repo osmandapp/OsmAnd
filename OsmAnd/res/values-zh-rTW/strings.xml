@@ -2137,4 +2137,6 @@
     <string name="m_s">秒/公尺</string>
     
     <string name="nm_h">浬時</string>
+    <string name="favorite_category_add_new">增加新的</string>
+    <string name="favorite_category_select">選擇類別</string>
     </resources>
