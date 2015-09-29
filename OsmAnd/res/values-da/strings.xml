@@ -2144,7 +2144,7 @@
     <string name="shared_string_navigation">Navigation</string>
     <string name="osmand_running_in_background">Kører i baggrunden</string>
     <string name="default_speed_system">Hastighedsmåling</string>
-    <string name="nm">nm</string>
+    <string name="nm">nmi</string>
     <string name="si_nm">Sømil</string>
     <string name="si_kmh">Kilometer i timen</string>
     <string name="si_mph">Mil i timen</string>
@@ -2152,7 +2152,7 @@
     <string name="si_min_km">Minutter pr. kilometer</string>
     <string name="si_min_m">Minutter pr. mil</string>
     <string name="si_nm_h">Sømil i timen (knob)</string>
-    <string name="nm_h">nmh</string>
+    <string name="nm_h">nmi/t</string>
     <string name="min_mile">min/mil</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>

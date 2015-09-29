@@ -364,14 +364,14 @@
 	<string name="poi_hunting_lodge">Lovska koča</string>
 
 	<string name="poi_place_of_worship">Svetišče</string>
-	<string name="poi_religion_christian">Svetišče: krščansko</string>
-	<string name="poi_religion_jewish">Svetišče: židovsko</string>
-	<string name="poi_religion_muslim">Svetišče: muslimansko</string>
-	<string name="poi_religion_sikh">Svetišče: sikhovsko</string>
-	<string name="poi_religion_buddhist">Svetišče: budistično</string>
-	<string name="poi_religion_hindu">Svetišče: hindujsko</string>
-	<string name="poi_religion_shinto">Svetišče: sintsko</string>
-	<string name="poi_religion_taoist">Svetišče: taoistično</string>
+	<string name="poi_religion_christian">Krščansko svetišče</string>
+	<string name="poi_religion_jewish">Židovsko svetišče</string>
+	<string name="poi_religion_muslim">Muslimansko svetišče</string>
+	<string name="poi_religion_sikh">Sikhovsko svetišče</string>
+	<string name="poi_religion_buddhist">Budistično svetišče</string>
+	<string name="poi_religion_hindu">Hindujsko svetišče</string>
+	<string name="poi_religion_shinto">Sintsko svetišče</string>
+	<string name="poi_religion_taoist">Taoistično svetišče</string>
 
 	<string name="poi_internet_access_wlan">Internetni dostop: wlan</string>
 	<string name="poi_internet_access_terminal">Internetni dostop: terminalski</string>
@@ -413,4 +413,5 @@
 	<string name="poi_barrier_entrance">Vhod</string>
 	<string name="poi_entrance_main">Glavni vhod</string>
 	<string name="poi_entrance">Vhod</string>
-	</resources>
+	<string name="poi_hiking_routes">Pohodniške poti</string>
+		</resources>
