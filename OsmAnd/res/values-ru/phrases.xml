@@ -1369,8 +1369,8 @@
 	<string name="poi_payment_svg_no">SVG не принимаются</string>
 	<string name="poi_payment_sms_yes">Принимаются СМС-платежи</string>
 	<string name="poi_payment_sms_no">СМС-платежи не принимаются</string>
-	<string name="poi_payment_OV-Chipkaart_yes">Принимаются OV-Chipkaart</string>
-	<string name="poi_payment_OV-Chipkaart_no">OV-Chipkaart не принимаются</string>
+	<string name="poi_payment_ov_chipkaart_yes">Принимаются OV-Chipkaart</string>
+	<string name="poi_payment_ov_chipkaart_no">OV-Chipkaart не принимаются</string>
 	<string name="poi_payment_oyster_yes">Принимаются карты Oyster</string>
 	<string name="poi_payment_oyster_no">Карты Oyster не принимаются</string>
 	<string name="poi_payment_sube_yes">Принимаются карты SUBE</string>
