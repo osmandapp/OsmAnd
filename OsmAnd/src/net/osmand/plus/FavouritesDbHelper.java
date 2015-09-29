@@ -435,6 +435,14 @@ public class FavouritesDbHelper {
 		}
 	}
 
+	public FavoriteGroup getGroup(String name) {
+		if (flatGroups.containsKey(name)) {
+			return flatGroups.get(name);
+		} else {
+			return null;
+		}
+	}
+
 	private FavouritePoint findFavoriteByAllProperties(String category, String name, double lat, double lon){
 		if (flatGroups.containsKey(category)) {
 			FavoriteGroup fg = flatGroups.get(category);

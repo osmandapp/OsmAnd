@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="favorite_category_add_new">Add new</string>
+    <string name="favorite_category_select">Select category</string>
     <string name="shared_string_trip_recording">Trip recording</string>
     <string name="shared_string_navigation">Navigation</string>
     <string name="osmand_running_in_background">Running in background</string>
