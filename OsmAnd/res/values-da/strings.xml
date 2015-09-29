@@ -2158,4 +2158,6 @@
     <string name="m_s">m/s</string>
     
     <string name="default_speed_system_descr">Vælg enheder</string>
+    <string name="favorite_category_add_new">Tilføj ny</string>
+    <string name="favorite_category_select">Vælg kategori</string>
     </resources>
