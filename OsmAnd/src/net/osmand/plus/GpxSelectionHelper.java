@@ -180,7 +180,9 @@ public class GpxSelectionHelper {
 				item.group = group;
 				if(split) {
 					item.splitMetric = analysis.metricEnd;
+					item.secondarySplitMetric = analysis.secondaryMetricEnd;
 					item.splitName = formatSplitName(analysis.metricEnd, group, app);
+					item.splitName += " ("+formatSecondarySplitName(analysis.secondaryMetricEnd, group, app) +") ";
 				}
 				
 				item.description = GpxUiHelper.getDescription(app, analysis, true);
@@ -233,6 +235,14 @@ public class GpxSelectionHelper {
 				list.add(item);
 			}
 		}		
+	}
+	
+	private static String formatSecondarySplitName(double metricEnd, GpxDisplayGroup group, OsmandApplication app) {
+		if (group.isSplitDistance()) {
+			return Algorithms.formatDuration((int) metricEnd);
+		} else {
+			return OsmAndFormatter.getFormattedDistance((float) metricEnd, app);
+		}
 	}
 
 	private static String formatSplitName(double metricEnd, GpxDisplayGroup group, OsmandApplication app) {
@@ -607,6 +617,7 @@ public class GpxSelectionHelper {
 		public WptPt locationStart;
 		public WptPt locationEnd;
 		public double splitMetric = -1;
+		public double secondarySplitMetric = -1;
 		public String splitName;
 		public String name;
 		public String description;

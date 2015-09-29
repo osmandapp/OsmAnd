@@ -232,7 +232,7 @@
   <string name="favorite_home_category">Család</string>
   <string name="favorite_friends_category">Barátok</string>
   <string name="favorite_places_category">Helyek</string>
-  <string name="favorite_default_category">Egyéb</string>
+  <string name="shared_string_others">Egyéb</string>
   <string name="favourites_edit_dialog_name">Név</string>
   <string name="favourites_edit_dialog_category">Kategória</string>
   <string name="shared_string_no_thanks">Nem szükséges</string>

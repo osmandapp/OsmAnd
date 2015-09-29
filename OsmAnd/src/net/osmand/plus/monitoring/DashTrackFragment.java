@@ -80,6 +80,9 @@ public class DashTrackFragment extends DashBaseFragment {
 		View mainView = getView();
 		final File dir = getMyApplication().getAppPath(IndexConstants.GPX_INDEX_DIR);
 		final OsmandApplication app = getMyApplication();
+		if(app == null) {
+			return;
+		}
 		
 		final List<String> list  = new ArrayList<String>();
 		for(SelectedGpxFile sg :  app.getSelectedGpxHelper().getSelectedGPXFiles() ) {

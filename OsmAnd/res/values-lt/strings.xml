@@ -369,7 +369,7 @@
   <string name="favorite_home_category">Namai</string>
   <string name="favorite_friends_category">Draugai</string>
   <string name="favorite_places_category">Vietos</string>
-  <string name="favorite_default_category">Kitos</string>
+  <string name="shared_string_others">Kitos</string>
   <string name="favourites_edit_dialog_name">Pavadinimas</string>
   <string name="favourites_edit_dialog_category">Kategorija</string>
   <string name="shared_string_no_thanks">Ačiū, ne</string>

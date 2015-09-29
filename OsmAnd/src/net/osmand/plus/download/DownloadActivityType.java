@@ -251,9 +251,8 @@ public class DownloadActivityType implements Parcelable {
 	}
 	
 	public String getVisibleName(IndexItem indexItem, Context ctx, OsmandRegions osmandRegions) {
-		String fileName = indexItem.fileName;
-		
 		if (this == VOICE_FILE) {
+			String fileName = indexItem.fileName;
 			if (fileName.endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)) {
 				return FileNameTranslationHelper.getVoiceName(ctx, getBasename(indexItem));
 			} else if (fileName.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_ZIP)) {
@@ -265,9 +264,9 @@ public class DownloadActivityType implements Parcelable {
 		if (bn.endsWith(FileNameTranslationHelper.WIKI_NAME)){
 			return FileNameTranslationHelper.getWikiName(ctx,bn);
 		}
-		if (bn.startsWith(FileNameTranslationHelper.HILL_SHADE)){
-			return FileNameTranslationHelper.getHillShadeName(ctx, osmandRegions, bn);
-		}
+//		if (this == HILLSHADE_FILE){
+//			return FileNameTranslationHelper.getHillShadeName(ctx, osmandRegions, bn);
+//		}
 		final String lc = bn.toLowerCase();
 		String std = FileNameTranslationHelper.getStandardMapName(ctx, lc);
 		if (std != null) {
@@ -334,8 +333,12 @@ public class DownloadActivityType implements Parcelable {
 		if (fileName.endsWith(IndexConstants.EXTRA_ZIP_EXT)) {
 			return fileName.substring(0, fileName.length() - IndexConstants.EXTRA_ZIP_EXT.length());
 		}
+		if (this == HILLSHADE_FILE) {
+			return fileName.substring(0, fileName.length() - IndexConstants.SQLITE_EXT.length())
+					.replace(FileNameTranslationHelper.HILL_SHADE, "");
+		}
 		if (fileName.endsWith(IndexConstants.SQLITE_EXT)) {
-			return fileName.substring(0, fileName.length() - IndexConstants.SQLITE_EXT.length()).replace('_', ' ');
+			return fileName.substring(0, fileName.length() - IndexConstants.SQLITE_EXT.length());
 		}
 		if (this == VOICE_FILE) {
 			int l = fileName.lastIndexOf('_');
@@ -358,7 +361,6 @@ public class DownloadActivityType implements Parcelable {
 		}
 		return fileName;
 	}
-
 
 	@Override
 	public int describeContents() {

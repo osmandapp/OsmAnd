@@ -23,6 +23,11 @@
                     android:key="arrival_distance_factor"
                     android:title="@string/arrival_distance"
                     android:summary="@string/arrival_distance_descr" />
+            <ListPreference
+                    android:key="default_speed_system"
+                    android:title="@string/default_speed_system"
+                    android:summary="@string/default_speed_system_descr" />
+            
 			<ListPreference
 				android:key="speed_limit_exceed"
 				android:title="@string/speed_limit_exceed"

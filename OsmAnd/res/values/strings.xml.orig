@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
     <!--
     	 Disclaimer:
@@ -9,8 +9,10 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+<<<<<<< HEAD
     <string name="favorite_category_add_new">Add new</string>
     <string name="favorite_category_select">Select category</string>
+=======
     <string name="default_speed_system_descr">Define speed measurement system</string>
     <string name="default_speed_system">Speed measurement</string>
     <string name="nm">nm</string>
@@ -26,6 +28,7 @@
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
     
+>>>>>>> ff881803a9a66267c564cd8bcbfb5d929cc25310
     <string name="shared_string_trip_recording">Trip recording</string>
     <string name="shared_string_navigation">Navigation</string>
     <string name="osmand_running_in_background">Running in background</string>

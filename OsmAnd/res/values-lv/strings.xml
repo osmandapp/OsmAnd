@@ -239,7 +239,7 @@
   <string name="favorite_home_category">Mājas</string>
   <string name="favorite_friends_category">Draugi</string>
   <string name="favorite_places_category">Vietas</string>
-  <string name="favorite_default_category">Pārējais</string>
+  <string name="shared_string_others">Pārējais</string>
   <string name="favourites_edit_dialog_name">Nosaukums</string>
   <string name="favourites_edit_dialog_category">Kategorija</string>
   <string name="shared_string_no_thanks">Nē, paldies</string>

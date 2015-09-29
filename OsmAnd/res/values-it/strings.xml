@@ -168,7 +168,7 @@
   <string name="favorite_home_category">Casa</string>
   <string name="favorite_friends_category">Amici</string>
   <string name="favorite_places_category">Luoghi</string>
-  <string name="favorite_default_category">Altro</string>
+  <string name="shared_string_others">Altro</string>
   <string name="shared_string_no_thanks">No, grazie</string>
   <string name="basemap_missing">La mappa di base del mondo (ricopre l\'intero mondo per zoom bassi) è mancante. Puoi scaricare World_basemap_x.obf per un sistema completo.</string>
   <string name="vector_data_missing">Mancano i dati (\'offline\') nella scheda SD. Ti consigliamo di scaricarli per poter usare le mappe offline.</string>
@@ -2187,4 +2187,19 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 <string name="shared_string_trip_recording">Registrazione viaggio</string>
     <string name="shared_string_navigation">Navigazione</string>
     <string name="osmand_running_in_background">Avviato in backgroung</string>
+    <string name="default_speed_system_descr">Definsci l\'unità di misura della velocità</string>
+    <string name="default_speed_system">Misurazione della velocità</string>
+    <string name="nm">nm</string>
+    <string name="si_nm">Miglia nautiche</string>
+    <string name="si_kmh">Chilometri all\'ora</string>
+    <string name="si_mph">Miglia per ora</string>
+    <string name="si_m_s">Metri al secondo</string>
+    <string name="si_min_km">Minuti al chilometro</string>
+    <string name="si_min_m">Minuti per miglia</string>
+    <string name="si_nm_h">Miglia nautiche per ora (knot)</string>
+    <string name="nm_h">nmh</string>
+    <string name="min_mile">min/m</string>
+    <string name="min_km">min/km</string>
+    <string name="m_s">m/s</string>
+    
     </resources>

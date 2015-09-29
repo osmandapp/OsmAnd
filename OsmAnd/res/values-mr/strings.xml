@@ -125,7 +125,7 @@
   <string name="favorite_home_category">घर</string>
   <string name="favorite_friends_category">मित्र</string>
   <string name="favorite_places_category">ठिकाणे</string>
-  <string name="favorite_default_category">इतर</string>
+  <string name="shared_string_others">इतर</string>
   <string name="favourites_edit_dialog_name">नाव</string>
   <string name="favourites_edit_dialog_category">वर्गीकरण</string>
   <string name="shared_string_no_thanks">नाही, धन्यवाद</string>

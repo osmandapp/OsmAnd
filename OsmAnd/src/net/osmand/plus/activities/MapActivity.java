@@ -660,6 +660,9 @@ public class MapActivity extends AccessibleActivity {
 			}
 		}
 		wakeLockHelper.onStop(this);
+		if(getMyApplication().getNavigationService() == null) {
+			getMyApplication().getNotificationHelper().removeServiceNotificationCompletely();
+		}
 		super.onStop();
 	}
 
@@ -671,9 +674,6 @@ public class MapActivity extends AccessibleActivity {
 		getMyApplication().unsubscribeInitListener(initListener);
 		mapViewTrackingUtilities.setMapView(null);
 		cancelNotification();
-		if(getMyApplication().getNavigationService() == null) {
-			getMyApplication().getNotificationHelper().removeServiceNotificationCompletely();
-		}
 		app.getResourceManager().getMapTileDownloader().removeDownloaderCallback(mapView);
 		if (atlasMapRendererView != null) {
 			atlasMapRendererView.handleOnDestroy();

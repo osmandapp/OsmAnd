@@ -947,7 +947,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="favorite_home_category">Дом</string>
 	<string name="favorite_friends_category">Приятели</string>
 	<string name="favorite_places_category">Места</string>
-	<string name="favorite_default_category">Други</string>
+	<string name="shared_string_others">Други</string>
 	<string name="favourites_edit_dialog_name">Име</string>
 	<string name="favourites_edit_dialog_category">Категория</string>
 	<string name="shared_string_no_thanks">Не, благодаря</string>

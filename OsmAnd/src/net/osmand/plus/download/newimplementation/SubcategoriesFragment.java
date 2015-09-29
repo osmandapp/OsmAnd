@@ -16,17 +16,15 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.HasName;
 
 import org.apache.commons.logging.Log;
-
-import java.util.Comparator;
 
 public class SubcategoriesFragment extends Fragment {
 	private static final Log LOG = PlatformUtil.getLog(SubcategoriesFragment.class);
@@ -40,17 +38,10 @@ public class SubcategoriesFragment extends Fragment {
 
 		ListView listView = new ListView(getActivity());
 		final OsmandApplication application = (OsmandApplication) getActivity().getApplication();
-		final MapFilesAdapter mAdapter = new MapFilesAdapter(getActivity(),
-				application.getIconsCache(), application);
+		final MapFilesAdapter mAdapter = new MapFilesAdapter(getActivity());
 		listView.setAdapter(mAdapter);
 		mAdapter.addAll(category.items);
 		mAdapter.addAll(category.subcats);
-		mAdapter.sort(new Comparator<HasName>() {
-			@Override
-			public int compare(HasName lhs, HasName rhs) {
-				return lhs.getName().compareTo(rhs.getName());
-			}
-		});
 
 		View freeVersionBanner = inflater.inflate(R.layout.free_version_banner, listView, false);
 		final OsmandSettings settings = application.getSettings();
@@ -84,14 +75,8 @@ public class SubcategoriesFragment extends Fragment {
 
 
 	private static class MapFilesAdapter extends ArrayAdapter<HasName> {
-
-		private final IconsCache iconsCache;
-		private final OsmandApplication application;
-
-		public MapFilesAdapter(Context context, IconsCache iconsCache, OsmandApplication application) {
+		public MapFilesAdapter(Context context) {
 			super(context, R.layout.two_line_with_images_list_item);
-			this.iconsCache = iconsCache;
-			this.application = application;
 		}
 
 		@Override
@@ -100,44 +85,17 @@ public class SubcategoriesFragment extends Fragment {
 			if (convertView == null) {
 				convertView = LayoutInflater.from(parent.getContext())
 						.inflate(R.layout.two_line_with_images_list_item, parent, false);
-				viewHolder = new ViewHolder();
-				viewHolder.nameTextView = (TextView) convertView.findViewById(R.id.name);
-				viewHolder.descrTextView = (TextView) convertView.findViewById(R.id.description);
-				viewHolder.leftImageView = (ImageView) convertView.findViewById(R.id.leftIcon);
-				viewHolder.rightImageView = (ImageView) convertView.findViewById(R.id.rightIcon);
+				viewHolder = new ViewHolder(convertView);
 				convertView.setTag(viewHolder);
 			} else {
 				viewHolder = (ViewHolder) convertView.getTag();
 			}
 			HasName item = getItem(position);
 			if (item instanceof IndexItemCategoryWithSubcat) {
-				IndexItemCategoryWithSubcat category = (IndexItemCategoryWithSubcat) item;
-				viewHolder.nameTextView.setText(category.getName());
-				if (category.types.size() > 0) {
-					StringBuilder stringBuilder = new StringBuilder();
-					Resources resources = getContext().getResources();
-					for (Integer mapType : category.types) {
-						stringBuilder.append(resources.getString(mapType));
-						stringBuilder.append(", ");
-					}
-					stringBuilder.delete(stringBuilder.length() - 2, stringBuilder.capacity());
-					viewHolder.descrTextView.setText(stringBuilder.toString());
-				} else {
-					// TODO replace with string constant
-					viewHolder.descrTextView.setText("Others");
-				}
-				viewHolder.leftImageView.setImageDrawable(iconsCache.getContentIcon(R.drawable.ic_map));
-				LOG.debug("category.types=" + category.types);
+				viewHolder.bindCategory((IndexItemCategoryWithSubcat) item,
+						(DownloadActivity)getContext());
 			} else if (item instanceof IndexItem) {
-				IndexItem indexItem = (IndexItem) item;
-				if (indexItem.getType() == DownloadActivityType.VOICE_FILE) {
-					viewHolder.nameTextView.setText(indexItem.getVisibleName(getContext(),
-							application.getRegions()));
-				} else {
-					viewHolder.nameTextView.setText(indexItem.getType().getString(getContext()));
-				}
-				viewHolder.descrTextView.setText(indexItem.getSizeDescription(getContext()));
-				viewHolder.leftImageView.setImageResource(indexItem.getType().getIconResource());
+				viewHolder.bindIndexItem((IndexItem) item, (DownloadActivity) getContext());
 			} else {
 				throw new IllegalArgumentException("Item must be of type IndexItem or " +
 						"IndexItemCategory but is of type:" + item.getClass());
@@ -149,7 +107,45 @@ public class SubcategoriesFragment extends Fragment {
 			TextView nameTextView;
 			TextView descrTextView;
 			ImageView leftImageView;
-			ImageView rightImageView;
+			ImageView rightImageButton;
+
+			public ViewHolder(View convertView) {
+				nameTextView = (TextView) convertView.findViewById(R.id.name);
+				descrTextView = (TextView) convertView.findViewById(R.id.description);
+				leftImageView = (ImageView) convertView.findViewById(R.id.leftImageView);
+				rightImageButton = (ImageView) convertView.findViewById(R.id.rightImageButton);
+			}
+
+			public void bindIndexItem(IndexItem indexItem, DownloadActivity context) {
+				if (indexItem.getType() == DownloadActivityType.VOICE_FILE) {
+					nameTextView.setText(indexItem.getVisibleName(context,
+							context.getMyApplication().getRegions()));
+				} else {
+					nameTextView.setText(indexItem.getType().getString(context));
+				}
+				descrTextView.setText(indexItem.getSizeDescription(context));
+				leftImageView.setImageDrawable(context.getMyApplication()
+						.getIconsCache().getContentIcon(indexItem.getType().getIconResource()));
+			}
+
+			public void bindCategory(IndexItemCategoryWithSubcat category,
+									 DownloadActivity context) {
+				nameTextView.setText(category.getName());
+				if (category.types.size() > 0) {
+					StringBuilder stringBuilder = new StringBuilder();
+					Resources resources = context.getResources();
+					for (Integer mapType : category.types) {
+						stringBuilder.append(resources.getString(mapType));
+						stringBuilder.append(", ");
+					}
+					stringBuilder.delete(stringBuilder.length() - 2, stringBuilder.capacity());
+					descrTextView.setText(stringBuilder.toString());
+				} else {
+					descrTextView.setText(R.string.shared_string_others);
+				}
+				leftImageView.setImageDrawable(context.getMyApplication()
+						.getIconsCache().getContentIcon(R.drawable.ic_map));
+			}
 		}
 	}
 }
