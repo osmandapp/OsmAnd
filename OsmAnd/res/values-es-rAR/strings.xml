@@ -2081,4 +2081,6 @@
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
     
+    <string name="favorite_category_add_new">Añadir nuevo</string>
+    <string name="favorite_category_select">Elegir categoría</string>
     </resources>
