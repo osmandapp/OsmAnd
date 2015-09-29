@@ -2166,4 +2166,19 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="shared_string_trip_recording">Enregistrement de l\'itinéraire</string>
     <string name="shared_string_navigation">Navigation</string>
     <string name="osmand_running_in_background">Exécution en tâche de fond</string>
+    <string name="default_speed_system_descr">Système de mesure de la vitesse</string>
+    <string name="default_speed_system">Mesure de vitesse</string>
+    <string name="nm">mn</string>
+    <string name="si_nm">Miles nautiques</string>
+    <string name="si_kmh">Kilomètres par heure</string>
+    <string name="si_mph">Miles par heure</string>
+    <string name="si_m_s">Mètres par seconde</string>
+    <string name="si_min_km">Minutes par kilomètre</string>
+    <string name="si_min_m">Minutes par mile</string>
+    <string name="si_nm_h">Nœuds (miles nautiques par heure)</string>
+    <string name="nm_h">noeuds</string>
+    <string name="min_mile">min/m</string>
+    <string name="min_km">min/km</string>
+    <string name="m_s">m/s</string>
+    
     </resources>

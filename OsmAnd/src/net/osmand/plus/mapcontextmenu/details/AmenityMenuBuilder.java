@@ -3,6 +3,7 @@ package net.osmand.plus.mapcontextmenu.details;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.text.Html;
+import android.text.TextUtils;
 import android.text.util.Linkify;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -79,9 +80,10 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 		textView.setAutoLinkMask(Linkify.ALL);
 		textView.setLinksClickable(true);
+		textView.setEllipsize(TextUtils.TruncateAt.END);
 		if (isWiki) {
 			textView.setMinLines(1);
-			textView.setMaxLines(5);
+			textView.setMaxLines(15);
 		}
 		textView.setText(text);
 		if (textColor > 0) {

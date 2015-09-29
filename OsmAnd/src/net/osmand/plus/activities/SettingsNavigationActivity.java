@@ -11,6 +11,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.AutoZoomMap;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
+import net.osmand.plus.OsmandSettings.SpeedConstants;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.routing.RouteProvider.RouteService;
@@ -135,6 +136,14 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
             keepInformingNames[i] = keepInformingValues[i] + " " + getString(R.string.int_min);
         }
         registerListPreference(settings.KEEP_INFORMING, screen, keepInformingNames, keepInformingValues);
+        
+
+		SpeedConstants[] speedValues = SpeedConstants.values();
+		String[] speedNamesVls = new String[speedValues.length];
+		for(int i = 0; i < speedValues.length; i++) {
+			speedNamesVls[i] = speedValues[i].toHumanString(this);
+		};
+		registerListPreference(settings.SPEED_SYSTEM, screen, speedNamesVls, speedValues);
         
 		// screen power save option:
 		Integer[] screenPowerSaveValues = new Integer[] { 0, 5, 10, 15, 20, 30, 45, 60 };
