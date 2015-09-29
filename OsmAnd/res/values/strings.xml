@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
     <!--
     	 Disclaimer:
@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="favorite_category_add_new">Add new</string>
+    <string name="favorite_category_select">Select category</string>
     <string name="default_speed_system_descr">Define speed measurement system</string>
     <string name="default_speed_system">Speed measurement</string>
     <string name="nm">nm</string>

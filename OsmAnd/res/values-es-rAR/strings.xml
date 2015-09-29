@@ -2060,10 +2060,27 @@
 <string name="simulate_your_location_stop_descr">Parar simulación de ubicación</string>
     <string name="simulate_your_location_descr">Simular usando grabación GPX o ruta calculada</string>
     <string name="downloads_left_template">Quedan %1$s descargas</string>
-<string name="shared_string_trip_recording">Grabando viaje</string>
+<string name="shared_string_trip_recording">Grabación de viaje</string>
     <string name="shared_string_navigation">Navegación</string>
     <string name="osmand_running_in_background">Ejecutando en segundo plano</string>
     <string name="favourites_edit_dialog_title">Información del favorito</string>
     <string name="favourites_context_menu_add">Añadir favorito</string>
 	<string name="roads">Caminos</string>
-</resources>
+<string name="default_speed_system_descr">Define el sistema de medición de velocidad</string>
+    <string name="default_speed_system">Medición de la velocidad</string>
+    <string name="nm">nm</string>
+    <string name="si_nm">Millas náuticas</string>
+    <string name="si_kmh">Kilómetros por hora</string>
+    <string name="si_mph">Millas por hora</string>
+    <string name="si_m_s">Metros por segundo</string>
+    <string name="si_min_km">Minutos por kilómetro</string>
+    <string name="si_min_m">Minutos por milla</string>
+    <string name="si_nm_h">Millas náuticas por hora (nudos)</string>
+    <string name="nm_h">nmh</string>
+    <string name="min_mile">min/m</string>
+    <string name="min_km">min/km</string>
+    <string name="m_s">m/s</string>
+    
+    <string name="favorite_category_add_new">Añadir nuevo</string>
+    <string name="favorite_category_select">Elegir categoría</string>
+    </resources>

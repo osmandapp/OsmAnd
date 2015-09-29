@@ -27,12 +27,17 @@ public class PoiTypeDialogFragment extends DialogFragment {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		final List<PoiCategory> categories = poiTypes.getCategories(false);
 		ArrayList<String> vals = new ArrayList<>(categories.size());
+		ArrayList<PoiCategory> toDelete = new ArrayList<>();
 		// TODO replace with constants
 		for (PoiCategory category : categories) {
 			if (category.getKeyName().equals("user_defined_other")
-					|| category.getKeyName().equals("osmwiki")) continue;
-			vals.add(category.getTranslation());
+					|| category.getKeyName().equals("osmwiki")) {
+				toDelete.add(category);
+			} else {
+				vals.add(category.getTranslation());
+			}
 		}
+		categories.removeAll(toDelete);
 		builder.setItems(vals.toArray(new String[vals.size()]), new Dialog.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {

@@ -75,6 +75,7 @@ public class DownloadActivity extends BaseDownloadActivity {
 	public static final String UPDATES_TAB = "updates";
 	public static final String SINGLE_TAB = "SINGLE_TAB";
 	private List<DownloadActivityType> downloadTypes = new ArrayList<DownloadActivityType>();
+	private List<IndexItemCategoryWithSubcat> cats;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -164,13 +165,13 @@ public class DownloadActivity extends BaseDownloadActivity {
 			public void onClick(View v) {
 				getEntriesToDownload().clear();
 				updateDownloadButton();
-				for (WeakReference<Fragment> ref : fragList) {
+				for (WeakReference<Fragment> ref : fragSet) {
 					Fragment f = ref.get();
 					if (f instanceof OsmAndListFragment) {
-						if (!f.isDetached() && ((OsmAndListFragment) f).getListAdapter() instanceof ArrayAdapter) {
+						if (f.isAdded() && ((OsmAndListFragment) f).getListAdapter() instanceof ArrayAdapter) {
 							((ArrayAdapter) ((OsmAndListFragment) f).getListAdapter()).notifyDataSetChanged();
 						}
-					} else if (!f.isDetached() && f instanceof OsmandExpandableListFragment &&
+					} else if (f.isAdded() && f instanceof OsmandExpandableListFragment &&
 							((OsmandExpandableListFragment) f).getAdapter() instanceof BaseExpandableListAdapter) {
 						((BaseExpandableListAdapter) ((OsmandExpandableListFragment) f).getAdapter()).notifyDataSetChanged();
 					}
@@ -283,10 +284,10 @@ public class DownloadActivity extends BaseDownloadActivity {
 
 	@Override
 	public void updateDownloadList(List<IndexItem> list) {
-		for (WeakReference<Fragment> ref : fragList) {
+		for (WeakReference<Fragment> ref : fragSet) {
 			Fragment f = ref.get();
 			if (f instanceof UpdatesIndexFragment) {
-				if (!f.isDetached()) {
+				if (f.isAdded()) {
 					((UpdatesIndexFragment) f).updateItemsList(list);
 				}
 			}
@@ -295,10 +296,10 @@ public class DownloadActivity extends BaseDownloadActivity {
 
 	@Override
 	public void categorizationFinished(List<IndexItem> filtered, List<IndexItemCategory> cats) {
-		for (WeakReference<Fragment> ref : fragList) {
+		for (WeakReference<Fragment> ref : fragSet) {
 			Fragment f = ref.get();
 			if (f instanceof DownloadIndexFragment) {
-				if (!f.isDetached()) {
+				if (f.isAdded()) {
 					((DownloadIndexFragment) f).categorizationFinished(filtered, cats);
 				}
 			}
@@ -308,22 +309,28 @@ public class DownloadActivity extends BaseDownloadActivity {
 	@Override
 	public void onCategorizationFinished(List<IndexItem> filtered,
 										 List<IndexItemCategoryWithSubcat> cats) {
-		for (WeakReference<Fragment> ref : fragList) {
+		boolean isPushed = false;
+		for (WeakReference<Fragment> ref : fragSet) {
 			Fragment f = ref.get();
 			if (f instanceof NewLocalIndexesFragment) {
-				if (!f.isDetached()) {
+				if (f.isAdded()) {
+					isPushed = true;
 					((NewLocalIndexesFragment) f).onCategorizationFinished(filtered, cats);
 				}
 			}
 		}
+		if (!isPushed) {
+			this.cats = cats;
+		}
 	}
 
 	public void downloadListUpdated() {
-		for (WeakReference<Fragment> ref : fragList) {
+		for (WeakReference<Fragment> ref : fragSet) {
 			Fragment f = ref.get();
 			if (f instanceof DownloadIndexFragment) {
-				if (!f.isDetached()) {
-					((DownloadIndexAdapter) ((DownloadIndexFragment) f).getExpandableListAdapter()).notifyDataSetInvalidated();
+				if (f.isAdded()) {
+					((DownloadIndexAdapter) ((DownloadIndexFragment) f).getExpandableListAdapter())
+							.notifyDataSetInvalidated();
 				}
 			}
 		}
@@ -331,15 +338,16 @@ public class DownloadActivity extends BaseDownloadActivity {
 
 	@Override
 	public void downloadedIndexes() {
-		for (WeakReference<Fragment> ref : fragList) {
+		for (WeakReference<Fragment> ref : fragSet) {
 			Fragment f = ref.get();
 			if (f instanceof LocalIndexesFragment) {
-				if (!f.isDetached()) {
+				if (f.isAdded()) {
 					((LocalIndexesFragment) f).reloadData();
 				}
 			} else if (f instanceof DownloadIndexFragment) {
-				if (!f.isDetached()) {
-					DownloadIndexAdapter adapter = ((DownloadIndexAdapter) ((DownloadIndexFragment) f).getExpandableListAdapter());
+				if (f.isAdded()) {
+					DownloadIndexAdapter adapter = ((DownloadIndexAdapter)
+							((DownloadIndexFragment) f).getExpandableListAdapter());
 					if (adapter != null) {
 						adapter.setLoadedFiles(getIndexActivatedFileNames(), getIndexFileNames());
 
@@ -446,22 +454,23 @@ public class DownloadActivity extends BaseDownloadActivity {
 			findViewById(R.id.wikiButton).setVisibility(wikipediaItems.size() == 0 ? View.GONE : View.VISIBLE);
 		}
 
-		for (WeakReference<Fragment> ref : fragList) {
+		for (WeakReference<Fragment> ref : fragSet) {
 			Fragment f = ref.get();
-			if (!f.isDetached()) {
-				if (f instanceof OsmandExpandableListFragment) {
-					ExpandableListAdapter ad = ((OsmandExpandableListFragment) f).getExpandableListView()
-							.getExpandableListAdapter();
-					if (ad instanceof OsmandBaseExpandableListAdapter) {
-						((OsmandBaseExpandableListAdapter) ad).notifyDataSetChanged();
-					}
-				} else if (f instanceof ListFragment) {
-					ListAdapter la = ((ListFragment) f).getListAdapter();
-					if (la instanceof BaseAdapter) {
-						((BaseAdapter) la).notifyDataSetChanged();
+			if (f != null)
+				if (f.isAdded()) {
+					if (f instanceof OsmandExpandableListFragment) {
+						ExpandableListAdapter ad = ((OsmandExpandableListFragment) f).getExpandableListView()
+								.getExpandableListAdapter();
+						if (ad instanceof OsmandBaseExpandableListAdapter) {
+							((OsmandBaseExpandableListAdapter) ad).notifyDataSetChanged();
+						}
+					} else if (f instanceof ListFragment) {
+						ListAdapter la = ((ListFragment) f).getListAdapter();
+						if (la instanceof BaseAdapter) {
+							((BaseAdapter) la).notifyDataSetChanged();
+						}
 					}
 				}
-			}
 		}
 //		if (scroll) {
 //			getExpandableListView().scrollTo(x, y);
@@ -531,6 +540,12 @@ public class DownloadActivity extends BaseDownloadActivity {
 
 	public Map<String, String> getIndexFileNames() {
 		return downloadListIndexThread != null ? downloadListIndexThread.getIndexFileNames() : null;
+	}
+
+	public List<IndexItemCategoryWithSubcat> getCats() {
+		List<IndexItemCategoryWithSubcat> toReturn = cats;
+		cats = null;
+		return toReturn;
 	}
 
 	public void showDialogToDownloadMaps(Collection<String> maps) {

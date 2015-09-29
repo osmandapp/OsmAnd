@@ -21,9 +21,11 @@ import net.osmand.plus.download.newimplementation.IndexItemCategoryWithSubcat;
 import java.lang.ref.WeakReference;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by Denis
@@ -33,7 +35,7 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 	protected DownloadActivityType type = DownloadActivityType.NORMAL_FILE;
 	protected OsmandSettings settings;
 	public static DownloadIndexesThread downloadListIndexThread;
-	protected List<WeakReference<Fragment>> fragList = new ArrayList<>();
+	protected Set<WeakReference<Fragment>> fragSet = new HashSet<>();
 	protected List<IndexItem> downloadQueue = new ArrayList<>();
 
 	public static final int MAXIMUM_AVAILABLE_FREE_DOWNLOADS = 10;
@@ -217,7 +219,7 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 
 	@Override
 	public void onAttachFragment(Fragment fragment) {
-		fragList.add(new WeakReference<Fragment>(fragment));
+		fragSet.add(new WeakReference<Fragment>(fragment));
 	}
 
 	public void makeSureUserCancelDownload() {
