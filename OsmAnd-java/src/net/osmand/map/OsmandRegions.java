@@ -49,7 +49,7 @@ public class OsmandRegions {
 	QuadTree<String> quadTree = null ;
 
 	public Map<String, String> getFullNamesToLowercaseCopy() {
-		return new HashMap<>(fullNamesToLowercaseIndex);
+		return new HashMap<String, String>(fullNamesToLowercaseIndex);
 	}
 
 	Integer parentFullName = null;
