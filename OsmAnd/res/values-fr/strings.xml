@@ -2181,4 +2181,6 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
     
+    <string name="favorite_category_add_new">Ajouter une catégorie</string>
+    <string name="favorite_category_select">Sélectionner une catégorie</string>
     </resources>
