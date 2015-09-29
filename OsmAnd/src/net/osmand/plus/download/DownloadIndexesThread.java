@@ -430,7 +430,7 @@ public class DownloadIndexesThread {
 							AccessibleToast.makeText(uiActivity, R.string.basemap_was_selected_to_download,
 									Toast.LENGTH_LONG).show();
 							if (uiActivity instanceof DownloadActivity) {
-								((DownloadActivity) uiActivity).updateDownloadButton();
+								uiActivity.updateDownloadButton();
 							}
 						}
 					}

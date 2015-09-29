@@ -15,7 +15,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -24,10 +23,7 @@ import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.HasName;
 
-import org.apache.commons.logging.Log;
-
 public class SubcategoriesFragment extends Fragment {
-	private static final Log LOG = PlatformUtil.getLog(SubcategoriesFragment.class);
 	private static final String CATEGORY = "category";
 
 	@Nullable
