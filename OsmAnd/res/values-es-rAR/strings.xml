@@ -2060,7 +2060,7 @@
 <string name="simulate_your_location_stop_descr">Parar simulación de ubicación</string>
     <string name="simulate_your_location_descr">Simular usando grabación GPX o ruta calculada</string>
     <string name="downloads_left_template">Quedan %1$s descargas</string>
-<string name="shared_string_trip_recording">Grabando viaje</string>
+<string name="shared_string_trip_recording">Grabación de viaje</string>
     <string name="shared_string_navigation">Navegación</string>
     <string name="osmand_running_in_background">Ejecutando en segundo plano</string>
     <string name="favourites_edit_dialog_title">Información del favorito</string>

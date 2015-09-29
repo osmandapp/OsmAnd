@@ -2005,4 +2005,16 @@
 <string name="favourites_edit_dialog_title">Information om favoriter</string>
     <string name="roads">Vägar</string>
 <string name="favourites_context_menu_add">Lägg till favorit</string>
-	</resources>
+	<string name="default_speed_system_descr">Ange system för hastighetsmätning</string>
+    <string name="default_speed_system">Hastighetsmätning</string>
+    <string name="si_nm">Sjömil</string>
+    <string name="si_kmh">Kilometer i timmen</string>
+    <string name="si_mph">Engelska mil i timmen</string>
+    <string name="si_m_s">Meter i sekunden</string>
+    <string name="si_min_km">Minuter per kilometer</string>
+    <string name="si_min_m">Minuter per engelsk mil</string>
+    <string name="si_nm_h">Sjömil i timmen (knop)</string>
+    <string name="shared_string_trip_recording">Trippinspelning</string>
+    <string name="shared_string_navigation">Navigering</string>
+    <string name="osmand_running_in_background">Körs i bakgrunden</string>
+    </resources>
