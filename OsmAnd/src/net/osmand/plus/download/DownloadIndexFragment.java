@@ -1,17 +1,6 @@
 package net.osmand.plus.download;
 
 
-import java.io.File;
-import java.io.FilenameFilter;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import net.osmand.access.AccessibleToast;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.OsmandExpandableListFragment;
-import net.osmand.plus.base.BasicProgressAsyncTask;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
@@ -31,9 +20,21 @@ import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
 
+import net.osmand.access.AccessibleToast;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.OsmandExpandableListFragment;
+import net.osmand.plus.base.BasicProgressAsyncTask;
+
+import java.io.File;
+import java.io.FilenameFilter;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 
 public class DownloadIndexFragment extends OsmandExpandableListFragment {
-	
+
 	/** menus **/
 	private static boolean SHOW_ONLY_RELOAD = true;
 	public static final int MORE_ID = 10;

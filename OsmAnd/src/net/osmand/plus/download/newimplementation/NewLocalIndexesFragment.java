@@ -30,12 +30,14 @@ import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 
 public class NewLocalIndexesFragment extends OsmAndListFragment {
 	private static final Log LOG = PlatformUtil.getLog(NewLocalIndexesFragment.class);
+	public static final String CATEGORIES = "categories";
 	private static final MessageFormat formatGb = new MessageFormat("{0, number,<b>#.##</b>} GB", Locale.US);
 
 	public static final int RELOAD_ID = 0;
@@ -54,6 +56,16 @@ public class NewLocalIndexesFragment extends OsmAndListFragment {
 		ListView listView = (ListView) view.findViewById(android.R.id.list);
 		mAdapter = new CategoriesAdapter(getActivity(), getMyApplication());
 		listView.setAdapter(mAdapter);
+
+		List<IndexItemCategoryWithSubcat> cats = ((DownloadActivity) getActivity()).getCats();
+		if (cats != null) {
+			onCategorizationFinished(null, cats);
+		}
+		if (savedInstanceState != null) {
+			List<IndexItemCategoryWithSubcat> savedCats =
+					savedInstanceState.getParcelableArrayList(CATEGORIES);
+			onCategorizationFinished(null, savedCats);
+		}
 
 		View header = inflater.inflate(R.layout.local_index_fragment_header, listView, false);
 		initMemoryConsumedCard(header);
@@ -103,10 +115,21 @@ public class NewLocalIndexesFragment extends OsmAndListFragment {
 	}
 
 	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		LOG.debug("onSaveInstanceState()");
+		ArrayList<IndexItemCategoryWithSubcat> items = new ArrayList<>(mAdapter.getCount());
+		for (int i = 0; i < mAdapter.getCount(); i++) {
+			items.add(mAdapter.getItem(i));
+		}
+		outState.putParcelableArrayList(CATEGORIES, items);
+		super.onSaveInstanceState(outState);
+	}
+
+	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
 		fragmentTransaction.addToBackStack(null);
-		MapsInCategoryFragment.createInstance(mAdapter.getItem(position-1))
+		MapsInCategoryFragment.createInstance(mAdapter.getItem(position - 1))
 				.show(fragmentTransaction, MapsInCategoryFragment.TAG);
 	}
 
@@ -115,8 +138,10 @@ public class NewLocalIndexesFragment extends OsmAndListFragment {
 	}
 
 	public void onCategorizationFinished(List<IndexItem> filtered, List<IndexItemCategoryWithSubcat> cats) {
-		mAdapter.clear();
-		mAdapter.addAll(cats);
+		if (mAdapter != null) {
+			mAdapter.clear();
+			mAdapter.addAll(cats);
+		}
 	}
 
 	private static class CategoriesAdapter extends ArrayAdapter<IndexItemCategoryWithSubcat> {

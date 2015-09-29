@@ -1,11 +1,11 @@
 package net.osmand.plus.activities;
 
-import java.util.List;
-
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+
+import java.util.List;
 
 /**
  * Created by Denis
@@ -34,7 +34,7 @@ public class TabActivity extends ActionBarProgressActivity {
 		pager.setAdapter(new OsmandFragmentPagerAdapter(getSupportFragmentManager(), items));
 	}
 
-	public static class OsmandFragmentPagerAdapter extends FragmentPagerAdapter {
+	public static class OsmandFragmentPagerAdapter extends FragmentStatePagerAdapter {
 
 		private List<TabItem> mTabs;
 
