@@ -1518,8 +1518,8 @@
 	<string name="poi_payment_svg_no">Don\'t accept SVG</string>
 	<string name="poi_payment_sms_yes">Accept SMS payments</string>
 	<string name="poi_payment_sms_no">Don\'t accept SMS payments</string>
-	<string name="poi_payment_OV-Chipkaart_yes">Accept OV-Chipkaart</string>
-	<string name="poi_payment_OV-Chipkaart_no">Don\'t accept OV-Chipkaart</string>
+	<string name="poi_payment_ov_chipkaart_yes">Accept OV-Chipkaart</string>
+	<string name="poi_payment_ov_chipkaart_no">Don\'t accept OV-Chipkaart</string>
 	<string name="poi_payment_oyster_yes">Accept Oyster cards</string>
 	<string name="poi_payment_oyster_no">Don\'t accept Oyster cards</string>
 	<string name="poi_payment_sube_yes">Accept SUBE cards</string>
