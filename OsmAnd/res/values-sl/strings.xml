@@ -1995,4 +1995,21 @@
     <string name="osmand_running_in_background">Delovanje v ozadju</string>
     <string name="favourites_edit_dialog_title">Podrobnosti o točki</string>
     <string name="favourites_context_menu_add">Dodaj priljubljeno</string>
-	</resources>
+	<string name="favorite_category_add_new">Dodaj novo</string>
+    <string name="favorite_category_select">Izberi kategorijo</string>
+    <string name="default_speed_system_descr">Določi sistem merjenja hitrosti</string>
+    <string name="default_speed_system">Merjenje hitrosti</string>
+    <string name="nm">nmi</string>
+    <string name="si_nm">Morske milje</string>
+    <string name="si_kmh">Kilometri na uro</string>
+    <string name="si_mph">Milje na uro</string>
+    <string name="si_m_s">Metri na sekundo</string>
+    <string name="si_min_km">Minute na kilometer</string>
+    <string name="si_min_m">Minute na miljo</string>
+    <string name="si_nm_h">Morske milje na uro (vozli)</string>
+    <string name="nm_h">nmi/h</string>
+    <string name="min_mile">min/m</string>
+    <string name="min_km">min/km</string>
+    <string name="m_s">m/s</string>
+    
+    </resources>
