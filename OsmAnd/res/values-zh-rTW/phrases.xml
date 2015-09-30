@@ -1424,14 +1424,14 @@
 
 <string name="poi_payment_coins_yes">接受硬幣</string>
 	<string name="poi_payment_coins_no">不接受硬幣</string>
-	<string name="poi_payment_coins_0.5">接受 0.5 美元硬幣</string>
+	<string name="poi_payment_coins_0.5">接受 0.5 美元的硬幣</string>
 	<string name="poi_payment_coins_50c12">接受 50 分、1 歐元和 2 歐元硬幣</string>
 	<string name="poi_payment_telephone_cards_yes">接受電話卡</string>
 	<string name="poi_payment_telephone_cards_no">不接受電話卡</string>
 	<string name="poi_payment_credit_cards_yes">接受信用卡</string>
 	<string name="poi_payment_credit_cards_no">不接受信用卡</string>
-	<string name="poi_payment_notes_yes">接受紙幣</string>
-	<string name="poi_payment_notes_no">不接受紙幣</string>
+	<string name="poi_payment_notes_yes">接受紙鈔</string>
+	<string name="poi_payment_notes_no">不接受紙鈔</string>
 	<string name="poi_payment_electronic_purses_yes">接受電子錢包</string>
 	<string name="poi_payment_electronic_purses_no">不接受電子錢包</string>
 	<string name="poi_payment_cash_yes">接受現金</string>
@@ -1466,10 +1466,22 @@
 	<string name="poi_payment_girocard_no">不接受 Girocard</string>
 	<string name="poi_payment_discover_card_yes">接受發現卡</string>
 	<string name="poi_payment_discover_card_no">不接受發現卡</string>
-	<string name="poi_payment_visa_electron_yes">接受 Visa Visa Electron 卡</string>
+	<string name="poi_payment_visa_electron_yes">接受 Visa Electron 卡</string>
 	<string name="poi_payment_visa_electron_no">不接受 Visa Electron 卡</string>
 	<string name="poi_payment_litecoin_yes">接受 Litecoins</string>
 	<string name="poi_payment_litecoin_no">不接受 Litecoins</string>
 	<string name="poi_payment_cheque_yes">接受支票</string>
 	<string name="poi_payment_cheque_no">不接受支票</string>
+	<string name="poi_payment_pikepass_yes">接受 PIKEPASS</string>
+	<string name="poi_payment_pikepass_no">不接受 PIKEPASS</string>
+	<string name="poi_payment_pikepass_designated">接受 PIKEPASS (指定)</string>
+	<string name="poi_payment_visa_debit_yes">接受 Visa Debit 卡</string>
+	<string name="poi_payment_visa_debit_no">不接受 Visa Electron 卡</string>
+	<string name="poi_payment_cryptocurrencies_no">不接受 Cryptocurrencies</string>
+	<string name="poi_payment_others_yes">接受其它付款方法</string>
+	<string name="poi_payment_others_no">不接受其它付款方法</string>
+	<string name="poi_payment_routex_yes">接受 Routex 燃料卡</string>
+	<string name="poi_payment_routex_no">不接受 Routex 燃料卡</string>
+	<string name="poi_payment_bancomat_yes">接受 Bancomat</string>
+	<string name="poi_payment_bancomat_no">不接受 Bancomat</string>
 	</resources>
