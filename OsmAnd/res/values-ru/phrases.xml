@@ -781,7 +781,9 @@
 	<string name="poi_internet_access_wired">Доступ в Интернет: проводное подключение</string>
 	<string name="poi_internet_access_public">Доступ в Интернет: общедоступный</string>
 	<string name="poi_internet_access_service">Доступ в Интернет: сервис</string>
-	
+	<string name="poi_internet_access_yes">Доступ в Интернет</string>
+	<string name="poi_internet_access_no">Нет доступа в Интернет</string>
+
 	<string name="poi_farm">Фермерский магазин</string>
 	<string name="poi_personal_transport">Личный транспорт</string>
 		<string name="poi_public_transport">Общественный транспорт</string>
@@ -1398,5 +1400,8 @@
 	<string name="poi_payment_yandexmoney_yes">Принимается оплата через Яндекс.Деньги</string>
 	<string name="poi_payment_yandexmoney_no">Оплата через Яндекс.Деньги не принимается</string>
 	<string name="poi_description_payment">Описание способа оплаты</string>
+
+	<string name="poi_internet_access_fee_yes">Взимается плата за интернет</string>
+	<string name="poi_internet_access_fee_no">Плата за интернет не взимается</string>
 
 </resources>
