@@ -1590,7 +1590,7 @@
 <string name="poi_internet_access_yes">Internetadgang: Ja</string>
 	<string name="poi_internet_access_no">Internet access: nej</string>
 
-	<string name="poi_internet_access_fee_yes">Opkræve gebyrer for adgang til internettet</string>
-	<string name="poi_internet_access_fee_no">Opkræve ikke gebyrer for adgang til internettet</string>
+	<string name="poi_internet_access_fee_yes">Opkræver gebyrer for internettetadgang</string>
+	<string name="poi_internet_access_fee_no">Opkræver ikke gebyrer for internettetadgang</string>
 
 </resources>
