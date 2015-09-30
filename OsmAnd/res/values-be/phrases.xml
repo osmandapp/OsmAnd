@@ -967,8 +967,8 @@
 	<string name="poi_animal_shelter_bird">Прытулак для птушак</string>
 
 <string name="poi_shower">Душ</string>
-	<string name="poi_recycling_centre">Пункт прыёму</string>
-	<string name="poi_recycling_container">Кантэйнэр</string>
+	<string name="poi_recycling_centre">Тып: пункт прыёму</string>
+	<string name="poi_recycling_container">Тып: кантэйнэр</string>
 	<string name="poi_recycling_glass">Шкло</string>
 	<string name="poi_recycling_paper">Папера</string>
 	<string name="poi_recycling_clothes">Вопратка</string>
@@ -1227,4 +1227,5 @@
 	<string name="poi_information_history">Гістарычная інфармацыя</string>
 	<string name="poi_information_sign">Знак</string>
 	<string name="poi_information_audioguide">Аўдыягід</string>
+	<string name="poi_cooling_tower">Градзірня</string>
 	</resources>

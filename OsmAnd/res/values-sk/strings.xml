@@ -2295,4 +2295,24 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 <string name="favourites_edit_dialog_title">Informácie o obľúbenom bode</string>
     <string name="favourites_context_menu_add">Pridať obľúbený bod</string>
 	<string name="roads">Cesty</string>
-</resources>
+<string name="favorite_category_add_new">Pridať nový</string>
+    <string name="favorite_category_select">Zvoľte kategóriu</string>
+    <string name="default_speed_system_descr">Zvoľte spôsob merania rýchlosti</string>
+    <string name="default_speed_system">Meranie rýchlosti</string>
+    <string name="nm">nm</string>
+    <string name="si_nm">Námorné míle</string>
+    <string name="si_kmh">Kilometre za hodinu</string>
+    <string name="si_mph">Míle za hodinu</string>
+    <string name="si_m_s">Metre za sekundu</string>
+    <string name="si_min_km">Minúty za kilometer</string>
+    <string name="si_min_m">Minúty za míľu</string>
+    <string name="si_nm_h">Námorné míle za hodinu (uzly)</string>
+    <string name="nm_h">nm/h</string>
+    <string name="min_mile">min/m</string>
+    <string name="min_km">min/km</string>
+    <string name="m_s">m/s</string>
+    
+    <string name="shared_string_trip_recording">Nahrávanie výletu</string>
+    <string name="shared_string_navigation">Navigácia</string>
+    <string name="osmand_running_in_background">Beh v pozadí</string>
+    </resources>

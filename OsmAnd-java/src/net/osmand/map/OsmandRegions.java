@@ -44,8 +44,13 @@ public class OsmandRegions {
 	Map<String, String> fullMapNamesToDownloadNames = new HashMap<String, String>();
 	Map<String, String> downloadNamesToFullNames = new HashMap<String, String>();
 	Map<String, String> fullNamesToLowercaseIndex = new HashMap<String, String>();
+	Map<String, String> fullNamesToParentFullNames = new HashMap<String, String>();
+	Map<String, String> fullNamesToDownloadNames = new HashMap<String, String>();
 	QuadTree<String> quadTree = null ;
 
+	public Map<String, String> getFullNamesToLowercaseCopy() {
+		return new HashMap<String, String>(fullNamesToLowercaseIndex);
+	}
 
 	Integer parentFullName = null;
 	Integer fullNameType = null;
@@ -86,7 +91,15 @@ public class OsmandRegions {
 		}
 		return downloadName.replace('_', ' ');
 	}
-	
+
+	public String getLocaleNameByFullName(String fullName) {
+		if (fullNamesToLocaleNames.containsKey(fullName)) {
+			return fullNamesToLocaleNames.get(fullName);
+		} else {
+			return fullName.replace('_', ' ');
+		}
+	}
+
 	public String getDownloadNameIndexLowercase(String downloadName) {
 		if(downloadName == null) {
 			return null;
@@ -304,7 +317,15 @@ public class OsmandRegions {
 	public String getMapDownloadType(String fullname) {
 		return fullMapNamesToDownloadNames.get(fullname);
 	}
-	
+
+	public String getDownloadName(String fullname) {
+		return fullNamesToDownloadNames.get(fullname);
+	}
+
+	public String getParentFullName(String fullname) {
+		return fullNamesToParentFullNames.get(fullname);
+	}
+
 	public void initLocaleNames() throws IOException {
 //		final Collator clt = OsmAndCollator.primaryCollator();
 		final Map<String, String> parentRelations = new LinkedHashMap<String, String>();
@@ -323,6 +344,7 @@ public class OsmandRegions {
 				String parentFullName = getParentFullName(object);
 				String fullName = getFullName(object);
 				if(!Algorithms.isEmpty(parentFullName)) {
+					fullNamesToParentFullNames.put(fullName, parentFullName);
 					parentRelations.put(fullName, parentFullName);
 				}				
 				String locName = getLocaleName(object);
@@ -350,6 +372,7 @@ public class OsmandRegions {
 				fullNamesToLowercaseIndex.put(fullName, ind.toString());
 				String downloadName = getDownloadName(object);
 				if(downloadName != null) {
+					fullNamesToDownloadNames.put(fullName, downloadName);
 					downloadNamesToFullNames.put(downloadName, fullName);
 					if(isDownloadOfType(object, MAP_TYPE)) {
 						fullMapNamesToDownloadNames.put(fullName, downloadName);

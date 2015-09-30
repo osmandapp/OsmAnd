@@ -2106,4 +2106,21 @@
 	<string name="shared_string_trip_recording">Запіс падарожжа</string>
     <string name="shared_string_navigation">Навігацыя</string>
     <string name="osmand_running_in_background">Працуе ў фоне</string>
+    <string name="favorite_category_add_new">Дадаць новую</string>
+    <string name="favorite_category_select">Абраць катэгорыю</string>
+    <string name="default_speed_system_descr">Вызначыць сыстэму вымярэньня хуткасьці</string>
+    <string name="default_speed_system">Вымярэньне хуткасьці</string>
+    <string name="nm">м.мілі</string>
+    <string name="si_nm">Марскія мілі</string>
+    <string name="si_kmh">Кілямэтраў за гадзіну</string>
+    <string name="si_mph">Міляў за гадзіну</string>
+    <string name="si_m_s">Мэтраў за сэкунду</string>
+    <string name="si_min_km">Хвілін на кілямэтар</string>
+    <string name="si_min_m">Хвілін на мілю</string>
+    <string name="si_nm_h">Марскіх міль за гадзіну (вузлоў)</string>
+    <string name="nm_h">м.міль/г</string>
+    <string name="min_mile">хв/м</string>
+    <string name="min_km">хв/км</string>
+    <string name="m_s">м/с</string>
+    
     </resources>

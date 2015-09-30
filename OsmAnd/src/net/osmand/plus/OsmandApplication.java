@@ -96,7 +96,8 @@ public class OsmandApplication extends Application {
 	AvoidSpecificRoads avoidSpecificRoads;
 	BRouterServiceConnection bRouterServiceConnection;
 	OsmandRegions regions;
-	
+	WorldRegion worldRegion;
+
 
 	RoutingConfiguration.Builder defaultRoutingConfig;
 	private Locale preferredLocale = null;
@@ -653,7 +654,10 @@ public class OsmandApplication extends Application {
 	public OsmandRegions getRegions() {
 		return regions;
 	}
-	
+	public WorldRegion getWorldRegion() {
+		return worldRegion;
+	}
+
 	public boolean accessibilityExtensions() {
 		return (Build.VERSION.SDK_INT < 14) ? getSettings().ACCESSIBILITY_EXTENSIONS.get() : false;
 	}
