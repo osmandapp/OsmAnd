@@ -117,8 +117,8 @@ public class DashUpdatesFragment extends DashBaseFragment {
 			String d = item.getDate(getMyApplication().getResourceManager().getDateFormat()) + ", "
 					+ item.getSizeDescription(getMyApplication());
 			String eName = name.replace("\n", " ");
-			((TextView) view.findViewById(R.id.map_name)).setText(eName);
-			((TextView) view.findViewById(R.id.map_descr)).setText(d);
+			((TextView) view.findViewById(R.id.name)).setText(eName);
+			((TextView) view.findViewById(R.id.description)).setText(d);
 			final ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.ProgressBar);
 			View downloadButton = (view.findViewById(R.id.btn_download));
 			downloadButton.setOnClickListener(new View.OnClickListener() {
@@ -170,8 +170,8 @@ public class DashUpdatesFragment extends DashBaseFragment {
 			}
 			cancelButton.setImageDrawable(getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_remove_dark));
 			View view = (View) cancelButton.getParent();
-			if (view != null && view.findViewById(R.id.map_descr) != null) {
-				view.findViewById(R.id.map_descr).setVisibility(View.GONE);
+			if (view != null && view.findViewById(R.id.description) != null) {
+				view.findViewById(R.id.description).setVisibility(View.GONE);
 			}
 			cancelButton.setOnClickListener(new View.OnClickListener() {
 				@Override

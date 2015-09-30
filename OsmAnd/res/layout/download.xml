@@ -78,7 +78,8 @@
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                tools:progress="50"/>
 
             <ImageView
                 android:id="@+id/Cancel"
