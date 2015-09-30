@@ -1,16 +1,16 @@
 package net.osmand.plus.osmedit.data;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Set;
-
 import net.osmand.data.Amenity;
 import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.OSMSettings;
 import net.osmand.util.Algorithms;
+
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Set;
 
 public class EditPoiData {
 	private Set<TagsChangedListener> mListeners = new HashSet<>();
@@ -107,7 +107,11 @@ public class EditPoiData {
 			isInEdit = false;
 		}
 	}
-	
+
+	public void setIsInEdit(boolean isInEdit) {
+		this.isInEdit = isInEdit;
+	}
+
 	public boolean isInEdit() {
 		return isInEdit;
 	}

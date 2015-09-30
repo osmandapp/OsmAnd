@@ -324,7 +324,4 @@ public class BasicDataFragment extends Fragment
 			return view;
 		}
 	}
-
-	// TODO: 8/27/15 Consider moving to OpeningHoursParser
-
 }
