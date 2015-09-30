@@ -487,19 +487,56 @@ public class OpeningHoursParser {
 		}
 		
 	}
-	
+
+	public static class UnparseableRule implements OpeningHoursParser.OpeningHoursRule {
+		private String ruleString;
+
+		public UnparseableRule(String ruleString) {
+			this.ruleString = ruleString;
+		}
+
+		@Override
+		public boolean isOpenedForTime(Calendar cal, boolean checkPrevious) {
+			return false;
+		}
+
+		@Override
+		public boolean containsPreviousDay(Calendar cal) {
+			return false;
+		}
+
+		@Override
+		public boolean containsDay(Calendar cal) {
+			return false;
+		}
+
+		@Override
+		public boolean containsMonth(Calendar cal) {
+			return false;
+		}
+
+		@Override
+		public String toRuleString(boolean avoidMonths) {
+			return ruleString;
+		}
+	}
+
+
 	/**
 	 * Parse an opening_hours string from OSM to an OpeningHours object which can be used to check
 	 * @param r the string to parse
-	 * @param rs the resulting object representing the opening hours of the feature
-	 * @return true if the String is successfully parsed
+	 * @return BasicRule if the String is successfully parsed and UnparseableRule otherwise
 	 */
-	public static boolean parseRule(String r, OpeningHours rs){
+	public static OpeningHoursParser.OpeningHoursRule parseRule(final String r){
 		// replace words "sunrise" and "sunset" by real hours
-		r = r.replaceAll("sunset", sunset);
-		r = r.replaceAll("sunrise", sunrise);
-		// replace the '+' by an arbitrary value
-		r = r.replaceAll("\\+", "-" + endOfDay);
+		final String[] daysStr = new String[] {"Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"};
+		final String[] monthsStr = new String[] {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+		String sunrise = "07:00";
+		String sunset = "21:00";
+		String endOfDay = "24:00";
+
+		String localRuleString = r.replaceAll("sunset", sunset).replaceAll("sunrise", sunrise)
+				.replaceAll("\\+", "-" + endOfDay);
 		int startDay      = -1;
 		int previousDay   = -1;
 		int startMonth    = -1;
@@ -510,32 +547,32 @@ public class OpeningHoursParser {
 		boolean[] days   = basic.getDays();
 		boolean[] months = basic.getMonths();
 		// check 24/7
-		if("24/7".equals(r)){
+		if("24/7".equals(localRuleString)){
 			Arrays.fill(days, true);
-            Arrays.fill(months, true);
-			basic.addTimeRange(0, 24*60);
-			rs.addRule(basic);
-			return true;
+			Arrays.fill(months, true);
+			basic.addTimeRange(0, 24 * 60);
+			return basic;
 		}
-		
-		for (; k < r.length(); k++) {
-			char ch = r.charAt(k);
+
+		for (; k < localRuleString.length(); k++) {
+			char ch = localRuleString.charAt(k);
 			if (Character.isDigit(ch)) {
 				// time starts
 				break;
 			}
-			if ((k + 2 < r.length()) && r.substring(k, k + 3).equals("off")) {
+			if ((k + 2 < localRuleString.length())
+					&& localRuleString.substring(k, k + 3).equals("off")) {
 				// value "off" is found
 				break;
 			}
 			if(Character.isWhitespace(ch) || ch == ','){
-            } else if (ch == '-') {
+			} else if (ch == '-') {
 				if(previousDay != -1){
 					startDay = previousDay;
 				} else if (previousMonth != -1) {
 					startMonth = previousMonth;
 				} else {
-					return false;
+					return new UnparseableRule(r);
 				}
 			} else if (k < r.length() - 1) {
 				int i = 0;
@@ -594,7 +631,7 @@ public class OpeningHoursParser {
 					}
 				}
 			} else {
-				return false;
+				return new UnparseableRule(r);
 			}
 		}
 		if(previousDay == -1){
@@ -609,7 +646,7 @@ public class OpeningHoursParser {
 				months[i] = true;
 			}
 		}
-		String timeSubstr = r.substring(k);
+		String timeSubstr = localRuleString.substring(k);
 		String[] times = timeSubstr.split(",");
 		boolean timesExist = true;
 		for (int i = 0; i < times.length; i++) {
@@ -629,7 +666,7 @@ public class OpeningHoursParser {
 			String[] stEnd = time.split("-"); //$NON-NLS-1$
 			if (stEnd.length != 2) {
 				if (i == times.length - 1 && basic.getStartTime() == 0 && basic.getEndTime() == 0) {
-					return false;
+					return new UnparseableRule(r);
 				}
 				continue;
 			}
@@ -659,15 +696,14 @@ public class OpeningHoursParser {
 				st  = startHour * 60 + startMin;
 				end = endHour   * 60 + endMin;
 			} catch (NumberFormatException e) {
-				return false;
+				return new UnparseableRule(r);
 			}
 			basic.addTimeRange(st, end);
 		}
-		rs.addRule(basic);
 		if(!timesExist){
-			return false;
+			return new UnparseableRule(r);
 		}
-		return true;
+		return basic;
 	}
 	
 	/**
@@ -690,14 +726,39 @@ public class OpeningHoursParser {
 				continue;
 			}
 			// check if valid
-			boolean rule = parseRule(r, rs);
+			final OpeningHoursRule r1 = parseRule(r);
+			boolean rule = r1 instanceof UnparseableRule;
 			if (!rule) {
 				return null;
 			}
+			rs.addRule(r1);
 		}
 		return rs;
 	}
-	
+
+	/**
+	 * parse OSM opening_hours string to an OpeningHours object.
+	 * Does not return null when parsing unsuccessful. When parsing rule is unsuccessful,
+	 * such rule is stored as UnparseableRule.
+	 * @param format the string to parse
+	 * @return the OpeningHours object
+	 */
+	private static OpeningHoursParser.OpeningHours parseOpenedHoursHandleErrors(String format){
+		if(format == null) {
+			return null;
+		}
+		String[] rules = format.split(";"); //$NON-NLS-1$
+		OpeningHoursParser.OpeningHours rs = new OpeningHoursParser.OpeningHours();
+		for(String r : rules){
+			r = r.trim();
+			if (r.length() == 0) {
+				continue;
+			}
+			// check if valid
+			rs.addRule(OpeningHoursParser.parseRule(r));
+		}
+		return rs;
+	}
 	
 	private static void formatTime(int h, int t, StringBuilder b){
 		if (h < 10) {

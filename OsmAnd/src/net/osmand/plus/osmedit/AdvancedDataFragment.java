@@ -1,24 +1,5 @@
 package net.osmand.plus.osmedit;
 
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import net.osmand.PlatformUtil;
-import net.osmand.StringMatcher;
-import net.osmand.osm.AbstractPoiType;
-import net.osmand.osm.MapPoiTypes;
-import net.osmand.osm.PoiCategory;
-import net.osmand.osm.PoiFilter;
-import net.osmand.osm.PoiType;
-import net.osmand.osm.edit.OSMSettings;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.osmedit.data.EditPoiData;
-
-import org.apache.commons.logging.Log;
-
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.graphics.Point;
@@ -40,13 +21,39 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class AdvancedDataFragment extends Fragment {
+import net.osmand.PlatformUtil;
+import net.osmand.StringMatcher;
+import net.osmand.osm.AbstractPoiType;
+import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiCategory;
+import net.osmand.osm.PoiFilter;
+import net.osmand.osm.PoiType;
+import net.osmand.osm.edit.OSMSettings;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.osmedit.data.EditPoiData;
+import net.osmand.util.Algorithms;
+
+import org.apache.commons.logging.Log;
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+public class AdvancedDataFragment extends Fragment
+		implements EditPoiFragment.OnFragmentActivatedListener {
 	private static final String TAG = "AdvancedDataFragment";
 	private static final Log LOG = PlatformUtil.getLog(AdvancedDataFragment.class);
 
 	private TagAdapterLinearLayoutHack mAdapter;
 	private EditPoiData.TagsChangedListener mTagsChangedListener;
 	private Drawable deleteDrawable;
+	private TextView nameTextView;
+	private TextView amenityTagTextView;
+	private TextView amenityTextView;
+	private Map<String, PoiType> allTranslatedSubTypes;
 
 	@Override
 	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -68,14 +75,16 @@ public class AdvancedDataFragment extends Fragment {
 		deleteDrawable = ((OsmandApplication) getActivity().getApplication()).getIconsCache()
 				.getPaintedContentIcon(R.drawable.ic_action_remove_dark,
 						getActivity().getResources().getColor(R.color.dash_search_icon_dark));
-		TextView nameTextView = (TextView) view.findViewById(R.id.nameTextView);
-		TextView amenityTagTextView = (TextView) view.findViewById(R.id.amenityTagTextView);
-		TextView amenityTextView = (TextView) view.findViewById(R.id.amenityTextView);
+		nameTextView = (TextView) view.findViewById(R.id.nameTextView);
+		amenityTagTextView = (TextView) view.findViewById(R.id.amenityTagTextView);
+		amenityTextView = (TextView) view.findViewById(R.id.amenityTextView);
 		LinearLayout editTagsLineaLayout =
 				(LinearLayout) view.findViewById(R.id.editTagsList);
+
+		final MapPoiTypes mapPoiTypes = ((OsmandApplication) getActivity().getApplication()).getPoiTypes();
+		allTranslatedSubTypes = mapPoiTypes.getAllTranslatedNames();
 		mAdapter = new TagAdapterLinearLayoutHack(editTagsLineaLayout, getData(),
-				nameTextView, amenityTagTextView, amenityTextView,
-				((OsmandApplication) getActivity().getApplication()).getPoiTypes());
+				mapPoiTypes);
 //		setListViewHeightBasedOnChildren(editTagsLineaLayout);
 		Button addTagButton = (Button) view.findViewById(R.id.addTagButton);
 		addTagButton.setOnClickListener(new View.OnClickListener() {
@@ -94,7 +103,22 @@ public class AdvancedDataFragment extends Fragment {
 		mTagsChangedListener = new EditPoiData.TagsChangedListener() {
 			@Override
 			public void onTagsChanged(String anyTag) {
-				mAdapter.updateViews();
+				LOG.debug("onTagsChanged()");
+				final String value = getData().getTagValues().get(anyTag);
+				if (Algorithms.objectEquals(anyTag, OSMSettings.OSMTagKey.NAME.getValue())) {
+					nameTextView.setText(value);
+				}
+				if (Algorithms.objectEquals(anyTag, EditPoiData.POI_TYPE_TAG)) {
+					String subType = value == null ? "" : value.trim().toLowerCase();
+					if (allTranslatedSubTypes.get(subType) != null) {
+						PoiType pt = allTranslatedSubTypes.get(subType);
+						amenityTagTextView.setText(pt.getOsmTag());
+						amenityTextView.setText(pt.getOsmValue());
+					} else {
+						amenityTagTextView.setText(getData().amenity.getType().getDefaultTag());
+						amenityTextView.setText(subType);
+					}
+				}
 			}
 		};
 		getData().addListener(mTagsChangedListener);
@@ -119,56 +143,46 @@ public class AdvancedDataFragment extends Fragment {
 		return getEditPoiFragment().getEditPoiData();
 	}
 
+	@Override
+	public void onFragmentActivated() {
+		mAdapter.updateViews();
+	}
+
 	public class TagAdapterLinearLayoutHack {
 		private final LinearLayout linearLayout;
 		private final EditPoiData editPoiData;
-
-		private final TextView nameTextView;
-		private final TextView amenityTagTextView;
-		private final TextView amenityTextView;
-		private final Map<String, PoiType> allTranslatedSubTypes;
-		private final Map<String, AbstractPoiType> allTypes;
 		private final MapPoiTypes mapPoiTypes;
+		private final Map<String, AbstractPoiType> allTypes;
+		private final HashSet<String> tagKeys;
+		private final HashSet<String> valueKeys;
+		private final HashMap<String, View> cachedViews = new HashMap<>();
 
 		public TagAdapterLinearLayoutHack(LinearLayout linearLayout,
 										  EditPoiData editPoiData,
-										  TextView nameTextView,
-										  TextView amenityTagTextView,
-										  TextView amenityTextView,
 										  MapPoiTypes mapPoiTypes) {
 			this.linearLayout = linearLayout;
 			this.editPoiData = editPoiData;
-			this.nameTextView = nameTextView;
-			this.amenityTagTextView = amenityTagTextView;
-			this.amenityTextView = amenityTextView;
-			this.allTranslatedSubTypes = mapPoiTypes.getAllTranslatedNames();
+			this.mapPoiTypes = mapPoiTypes;
 			this.allTypes = mapPoiTypes.getAllTypesTranslatedNames(new StringMatcher() {
 				@Override
 				public boolean matches(String name) {
 					return true;
 				}
 			});
-			this.mapPoiTypes = mapPoiTypes;
+
+			tagKeys = new HashSet<>();
+			valueKeys = new HashSet<>();
+			for (AbstractPoiType abstractPoiType : allTypes.values()) {
+				addPoiToStringSet(abstractPoiType, tagKeys, valueKeys);
+			}
+			addPoiToStringSet(mapPoiTypes.getOtherMapCategory(), tagKeys, valueKeys);
+
 		}
 
 		public void updateViews() {
 			linearLayout.removeAllViews();
 			for (Entry<String, String> tag : editPoiData.getTagValues().entrySet()) {
-				if (tag.getKey().equals(OSMSettings.OSMTagKey.NAME.getValue())) {
-					nameTextView.setText(tag.getValue());
-				} else if (tag.getKey().equals(EditPoiData.POI_TYPE_TAG)) {
-					String subType = tag.getValue().trim().toLowerCase();
-					if (allTranslatedSubTypes.get(subType) != null) {
-						PoiType pt = allTranslatedSubTypes.get(subType);
-						amenityTagTextView.setText(pt.getOsmTag());
-						amenityTextView.setText(pt.getOsmValue());
-					} else {
-						amenityTagTextView.setText(editPoiData.amenity.getType().getDefaultTag());
-						amenityTextView.setText(subType);
-					}
-				} else {
-					addTagView(tag.getKey(), tag.getValue());
-				}
+				addTagView(tag.getKey(), tag.getValue());
 			}
 		}
 
@@ -178,8 +192,13 @@ public class AdvancedDataFragment extends Fragment {
 		}
 
 		private View getView(String tg, String vl) {
-			final View convertView = LayoutInflater.from(linearLayout.getContext())
-					.inflate(R.layout.poi_tag_list_item, null, false);
+			View convertView = cachedViews.get(tg);
+			LOG.debug("convertView=" + convertView);
+			if (convertView == null) {
+				convertView = LayoutInflater.from(linearLayout.getContext())
+						.inflate(R.layout.poi_tag_list_item, null, false);
+				cachedViews.put(tg, convertView);
+			}
 			final AutoCompleteTextView tagEditText =
 					(AutoCompleteTextView) convertView.findViewById(R.id.tagEditText);
 			tagEditText.setText(tg);
@@ -189,7 +208,7 @@ public class AdvancedDataFragment extends Fragment {
 					(ImageButton) convertView.findViewById(R.id.deleteItemImageButton);
 			valueEditText.setText(vl);
 			deleteItemImageButton.setImageDrawable(deleteDrawable);
-			final String[] previousTag = new String[] {tg}; 
+			final String[] previousTag = new String[]{tg};
 			deleteItemImageButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -218,13 +237,6 @@ public class AdvancedDataFragment extends Fragment {
 					}
 				}
 			});
-			final Set<String> tagKeys = new HashSet<>();
-			final Set<String> valueKeys = new HashSet<>();
-			for (String s : allTypes.keySet()) {
-				AbstractPoiType abstractPoiType = allTypes.get(s);
-				addPoiToStringSet(abstractPoiType, tagKeys, valueKeys);
-			}
-			addPoiToStringSet(mapPoiTypes.getOtherMapCategory(), tagKeys, valueKeys);
 
 			ArrayAdapter<Object> tagAdapter = new ArrayAdapter<>(linearLayout.getContext(),
 					R.layout.list_textview, tagKeys.toArray());
@@ -289,7 +301,7 @@ public class AdvancedDataFragment extends Fragment {
 	}
 
 	private static void addPoiToStringSet(AbstractPoiType abstractPoiType, Set<String> stringSet,
-			Set<String> values) {
+										  Set<String> values) {
 		if (abstractPoiType instanceof PoiType) {
 			PoiType poiType = (PoiType) abstractPoiType;
 			if (poiType.getOsmTag() != null &&
@@ -298,7 +310,7 @@ public class AdvancedDataFragment extends Fragment {
 				if (poiType.getOsmTag2() != null) {
 					stringSet.add(poiType.getOsmTag2());
 				}
-				
+
 			}
 			if (poiType.getOsmValue() != null) {
 				values.add(poiType.getOsmValue());
