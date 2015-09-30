@@ -181,9 +181,11 @@ public class AdvancedDataFragment extends Fragment
 
 		public void updateViews() {
 			linearLayout.removeAllViews();
+			editPoiData.setIsInEdit(true);
 			for (Entry<String, String> tag : editPoiData.getTagValues().entrySet()) {
 				addTagView(tag.getKey(), tag.getValue());
 			}
+			editPoiData.setIsInEdit(false);
 		}
 
 		public void addTagView(String tg, String vl) {
@@ -201,21 +203,20 @@ public class AdvancedDataFragment extends Fragment
 			}
 			final AutoCompleteTextView tagEditText =
 					(AutoCompleteTextView) convertView.findViewById(R.id.tagEditText);
-			tagEditText.setText(tg);
-			final AutoCompleteTextView valueEditText =
-					(AutoCompleteTextView) convertView.findViewById(R.id.valueEditText);
 			ImageButton deleteItemImageButton =
 					(ImageButton) convertView.findViewById(R.id.deleteItemImageButton);
-			valueEditText.setText(vl);
 			deleteItemImageButton.setImageDrawable(deleteDrawable);
 			final String[] previousTag = new String[]{tg};
 			deleteItemImageButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					linearLayout.removeView((View) v.getParent());
-					editPoiData.removeTag(tagEditText.toString());
+					editPoiData.removeTag(tagEditText.getText().toString());
 				}
 			});
+			final AutoCompleteTextView valueEditText =
+					(AutoCompleteTextView) convertView.findViewById(R.id.valueEditText);
+			tagEditText.setText(tg);
 			tagEditText.addTextChangedListener(new TextWatcher() {
 				@Override
 				public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -259,6 +260,8 @@ public class AdvancedDataFragment extends Fragment
 				}
 			});
 
+
+			valueEditText.setText(vl);
 			valueEditText.addTextChangedListener(new TextWatcher() {
 				@Override
 				public void beforeTextChanged(CharSequence s, int start, int count, int after) {
