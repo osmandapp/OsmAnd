@@ -1,30 +1,5 @@
 package net.osmand.plus.osmedit;
 
-import java.io.Serializable;
-import java.text.MessageFormat;
-import java.util.LinkedHashMap;
-import java.util.Map;
-
-import net.osmand.PlatformUtil;
-import net.osmand.access.AccessibleToast;
-import net.osmand.data.Amenity;
-import net.osmand.osm.PoiType;
-import net.osmand.osm.edit.EntityInfo;
-import net.osmand.osm.edit.Node;
-import net.osmand.osm.edit.OSMSettings;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.osmedit.data.EditPoiData;
-import net.osmand.plus.osmedit.dialogs.DeletePoiDialogFragment;
-import net.osmand.plus.osmedit.dialogs.PoiSubTypeDialogFragment;
-import net.osmand.plus.osmedit.dialogs.PoiTypeDialogFragment;
-import net.osmand.util.Algorithms;
-
-import org.apache.commons.logging.Log;
-
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Dialog;
@@ -66,6 +41,31 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import net.osmand.PlatformUtil;
+import net.osmand.access.AccessibleToast;
+import net.osmand.data.Amenity;
+import net.osmand.osm.PoiType;
+import net.osmand.osm.edit.EntityInfo;
+import net.osmand.osm.edit.Node;
+import net.osmand.osm.edit.OSMSettings;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.osmedit.data.EditPoiData;
+import net.osmand.plus.osmedit.dialogs.DeletePoiDialogFragment;
+import net.osmand.plus.osmedit.dialogs.PoiSubTypeDialogFragment;
+import net.osmand.plus.osmedit.dialogs.PoiTypeDialogFragment;
+import net.osmand.util.Algorithms;
+
+import org.apache.commons.logging.Log;
+
+import java.io.Serializable;
+import java.text.MessageFormat;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 public class EditPoiFragment extends DialogFragment {
 	public static final String TAG = "EditPoiFragment";
 	private static final Log LOG = PlatformUtil.getLog(EditPoiFragment.class);
@@ -80,7 +80,7 @@ public class EditPoiFragment extends DialogFragment {
 	private AutoCompleteTextView poiTypeEditText;
 	private Node node;
 	private Map<String, PoiType> allTranslatedSubTypes;
-	
+
 	private OpenstreetmapUtil mOpenstreetmapUtil;
 	private TextInputLayout poiTypeTextInputLayout;
 
@@ -100,7 +100,7 @@ public class EditPoiFragment extends DialogFragment {
 
 		node = (Node) getArguments().getSerializable(KEY_AMENITY_NODE);
 		allTranslatedSubTypes = getMyApplication().getPoiTypes().getAllTranslatedNames();
-		
+
 		Amenity amenity = (Amenity) getArguments().getSerializable(KEY_AMENITY);
 		editPoiData = new EditPoiData(amenity, node, allTranslatedSubTypes);
 	}
@@ -125,7 +125,7 @@ public class EditPoiFragment extends DialogFragment {
 		boolean isLightTheme = settings.OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME;
 
 		if (savedInstanceState != null) {
-			Map<String, String> mp =(Map<String, String>) savedInstanceState.getSerializable(TAGS_LIST);
+			Map<String, String> mp = (Map<String, String>) savedInstanceState.getSerializable(TAGS_LIST);
 			editPoiData.updateTags(mp);
 		}
 
@@ -142,8 +142,24 @@ public class EditPoiFragment extends DialogFragment {
 		viewPager = (ViewPager) view.findViewById(R.id.viewpager);
 		String basicTitle = getResources().getString(R.string.tab_title_basic);
 		String extendedTitle = getResources().getString(R.string.tab_title_advanced);
-		MyAdapter pagerAdapter = new MyAdapter(getChildFragmentManager(), basicTitle, extendedTitle);
+		final MyAdapter pagerAdapter = new MyAdapter(getChildFragmentManager(), basicTitle, extendedTitle);
 		viewPager.setAdapter(pagerAdapter);
+		viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+			@Override
+			public void onPageScrolled(int i, float v, int i1) {
+
+			}
+
+			@Override
+			public void onPageSelected(int i) {
+				((OnFragmentActivatedListener) pagerAdapter.getItem(i)).onFragmentActivated();
+			}
+
+			@Override
+			public void onPageScrollStateChanged(int i) {
+
+			}
+		});
 
 		final TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
 		tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
@@ -497,13 +513,13 @@ public class EditPoiFragment extends DialogFragment {
 	}
 
 	public static class MyAdapter extends FragmentPagerAdapter {
-		private final String basicTitle;
-		private final String extendedTitle;
+		private final Fragment[] fragments = new Fragment[]{new BasicDataFragment(),
+				new AdvancedDataFragment()};
+		private final String[] titles;
 
 		public MyAdapter(FragmentManager fm, String basicTitle, String extendedTitle) {
 			super(fm);
-			this.basicTitle = basicTitle;
-			this.extendedTitle = extendedTitle;
+			titles = new String[]{basicTitle, extendedTitle};
 		}
 
 		@Override
@@ -513,25 +529,12 @@ public class EditPoiFragment extends DialogFragment {
 
 		@Override
 		public Fragment getItem(int position) {
-			switch (position) {
-				case 0:
-					return new BasicDataFragment();
-				case 1:
-					return new AdvancedDataFragment();
-			}
-			throw new IllegalArgumentException("Unexpected position");
+			return fragments[position];
 		}
 
 		@Override
 		public CharSequence getPageTitle(int position) {
-			// TODO replace with string resources
-			switch (position) {
-				case 0:
-					return basicTitle;
-				case 1:
-					return extendedTitle;
-			}
-			throw new IllegalArgumentException("Unexpected position");
+			return titles[position];
 		}
 	}
 
@@ -597,4 +600,7 @@ public class EditPoiFragment extends DialogFragment {
 					return handled;
 				}
 			};
+	public interface OnFragmentActivatedListener {
+		void onFragmentActivated();
+	}
 }

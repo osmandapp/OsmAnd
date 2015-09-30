@@ -153,7 +153,7 @@ public class MapPoiTypes {
 	}
 	
 	public Map<String, AbstractPoiType> getAllTypesTranslatedNames(StringMatcher matcher) {
-		TreeMap<String, AbstractPoiType> tm = new TreeMap<String, AbstractPoiType>(Collator.getInstance());
+		Map<String, AbstractPoiType> tm = new TreeMap<String, AbstractPoiType>(Collator.getInstance());
 		for (PoiCategory pc : categories) {
 			if(pc == otherMapCategory) {
 				continue;
