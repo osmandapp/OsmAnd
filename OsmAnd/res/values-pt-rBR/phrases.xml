@@ -887,15 +887,15 @@
 	<string name="poi_crane">Guindaste</string>
 	<string name="poi_tourism_attraction">Atração turística</string>
 	<string name="poi_tree">Árvore</string>
-	<string name="poi_icn_ref">Ponto de rede cicloviária internacional</string>
-	<string name="poi_ncn_ref">Ponto de rede cicloviária nacional</string>
-	<string name="poi_rcn_ref">Ponto de rede cicloviária regional</string>
-	<string name="poi_lcn_ref">Ponto de rede cicloviária local</string>
+	<string name="poi_icn_ref">Rede de rota cicloviária internacional</string>
+	<string name="poi_ncn_ref">Rede de rota cicloviária nacional</string>
+	<string name="poi_rcn_ref">Rede de rota cicloviária regional</string>
+	<string name="poi_lcn_ref">Rede de rota cicloviária local</string>
 
-	<string name="poi_iwn_ref">Ponto de rede de caminhada internacional</string>
-	<string name="poi_nwn_ref">Ponto de rede de caminhada nacional</string>
-	<string name="poi_rwn_ref">Ponto de rede de caminhada regional</string>
-	<string name="poi_lwn_ref">Ponto de rede de caminhada local</string>
+	<string name="poi_iwn_ref">Rede de rota internacional de caminhada</string>
+	<string name="poi_nwn_ref">Rede de rota nacional de caminhada</string>
+	<string name="poi_rwn_ref">Rede de rota regional de caminhada</string>
+	<string name="poi_lwn_ref">Rede de rota local de caminhada</string>
 
 	<string name="poi_opening_hours">Horário de funcionamento</string>
 	<string name="poi_description">Descrição</string>
@@ -926,10 +926,10 @@
 	<string name="poi_fee_yes">Taxa</string>
 
 	<string name="poi_abandoned_poi">Objeto abandonado</string>
-	<string name="poi_route_hiking_iwn_poi">Rota de caminhada internacional</string>
-	<string name="poi_route_hiking_nwn_poi">Rota de caminhada nacional</string>
-	<string name="poi_route_hiking_rwn_poi">Rota de caminhada regional</string>
-	<string name="poi_route_hiking_lwn_poi">Rota de caminhada local</string>
+	<string name="poi_route_hiking_iwn_poi">Rota internacional de caminhada</string>
+	<string name="poi_route_hiking_nwn_poi">Rota nacional de caminhada</string>
+	<string name="poi_route_hiking_rwn_poi">Rota regional de caminhada</string>
+	<string name="poi_route_hiking_lwn_poi">Rota local de caminhada</string>
 	<string name="poi_route_hiking_ref_poi">Referência de rota de caminhada</string>
 
 	<string name="poi_traffic_enforcement">Fiscalização de trânsito</string>
@@ -939,7 +939,7 @@
 	<string name="poi_access_no">Acesso proibido</string>
 	<string name="poi_access_destination">Acesso de destino</string>
 	<string name="poi_access_permissive">Acesso autorizado</string>
-	<string name="poi_access_customers">Acesso para clientes</string>
+	<string name="poi_access_customers">Acesso para cliente</string>
 	<string name="poi_access_delivery">Acesso para entrega</string>
 	<string name="poi_access_agricultural">Acesso agrícola</string>
 
@@ -1141,22 +1141,22 @@
 	<string name="poi_wheelchair">Cadeirante</string>
 
 	<string name="poi_bunker_silo">Silo de abrigo</string>
-	<string name="poi_content_silage">Silagem (conteúdo)</string>
-	<string name="poi_content_water">Água (conteúdo)</string>
-	<string name="poi_content_slurry">Chorume (conteúdo)</string>
-	<string name="poi_content_oil">Óleo (conteúdo)</string>
-	<string name="poi_content_fuel">Combustível (conteúdo)</string>
-	<string name="poi_content_manure">Estrume (conteúdo)</string>
-	<string name="poi_content_wine">Vinho (conteúdo)</string>
-	<string name="poi_content_sewage">Esgoto (conteúdo)</string>
-	<string name="poi_content_gas">Gás (conteúdo)</string>
-	<string name="poi_content_biomass">Biomassa (conteúdo)</string>
-	<string name="poi_content_wastewater">Águas residuais (conteúdo)</string>
-	<string name="poi_content_crop">Colheita (conteúdo)</string>
-	<string name="poi_content_fodder">Forragens (conteúdo)</string>
-	<string name="poi_content_beer">Cerveja (conteúdo)</string>
-	<string name="poi_content_salt">Sal (conteúdo)</string>
-	<string name="poi_content_grain">Grão (conteúdo)</string>
+	<string name="poi_content_silage">Conteúdo: silagem</string>
+	<string name="poi_content_water">Conteúdo: água</string>
+	<string name="poi_content_slurry">Conteúdo: chorume</string>
+	<string name="poi_content_oil">Conteúdo: óleo</string>
+	<string name="poi_content_fuel">Conteúdo: combustível</string>
+	<string name="poi_content_manure">Conteúdo: estrume</string>
+	<string name="poi_content_wine">Conteúdo: vinho</string>
+	<string name="poi_content_sewage">Conteúdo: esgoto</string>
+	<string name="poi_content_gas">Conteúdo: gás</string>
+	<string name="poi_content_biomass">Conteúdo: biomassa</string>
+	<string name="poi_content_wastewater">Conteúdo: águas residuais</string>
+	<string name="poi_content_crop">Conteúdo: colheita</string>
+	<string name="poi_content_fodder">Conteúdo: forragens</string>
+	<string name="poi_content_beer">Conteúdo: cerveja</string>
+	<string name="poi_content_salt">Conteúdo: sal</string>
+	<string name="poi_content_grain">Conteúdo: grão</string>
 
 	<string name="poi_wholesale">Atacado</string>
 
@@ -1213,7 +1213,7 @@
 	<string name="poi_trees_coca">Coca</string>
 	<string name="poi_trees_meadow_orchard">Prado com pomar</string>
 	<string name="poi_height">Altura</string>
-	<string name="poi_ele">Altura acima do nível do mar</string>
+	<string name="poi_ele">Elevação acima do nível do mar</string>
 	<string name="poi_aerialway_pylon">Torre de teleférico</string>
 
 	<string name="poi_power_tower">Torre de transmissão</string>
@@ -1346,4 +1346,9 @@
 	<string name="poi_level">Nível</string>
 
 <string name="poi_bird_hide">Observatório de aves</string>
+	<string name="poi_internet_access_yes">Com acesso à Internet</string>
+	<string name="poi_internet_access_no">Sem acesso à Internet</string>
+
+	<string name="poi_wheelchair_no">Cadeira de rodas: não permitido</string>
+	<string name="poi_wheelchair_limited">Cadeira de rodas: limitado</string>
 	</resources>
