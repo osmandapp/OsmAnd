@@ -2134,4 +2134,9 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
 <string name="shared_string_trip_recording">Enregistrament de trajectes</string>
     <string name="shared_string_navigation">Navegació</string>
     <string name="osmand_running_in_background">Execució en procés de fons</string>
+    <string name="favorite_category_add_new">Afegeix nova categoria</string>
+    <string name="favorite_category_select">Selecciona categoria</string>
+    <string name="default_speed_system_descr">Defineix el sistema de mesura de velocitat</string>
+    <string name="default_speed_system">Mesura de velocitat</string>
+    <string name="nm">nm</string>
     </resources>
