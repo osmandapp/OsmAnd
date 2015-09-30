@@ -10,6 +10,7 @@ import net.osmand.plus.download.DownloadActivityType;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -34,12 +35,12 @@ public class WorldRegion {
 	private LatLon bboxTopLeft;
 	private LatLon bboxBottomRight;
 
-	private LinkedList<DownloadActivityType> resourceTypes;
+	private List<DownloadActivityType> resourceTypes;
 
 	// Hierarchy
 	private WorldRegion superregion;
-	private LinkedList<WorldRegion> subregions;
-	private LinkedList<WorldRegion> flattenedSubregions;
+	private List<WorldRegion> subregions;
+	private List<WorldRegion> flattenedSubregions;
 
 	private boolean purchased;
 	private boolean isInPurchasedArea;
@@ -64,19 +65,23 @@ public class WorldRegion {
 		return bboxBottomRight;
 	}
 
-	public LinkedList<DownloadActivityType> getResourceTypes() {
+	public List<DownloadActivityType> getResourceTypes() {
 		return resourceTypes;
+	}
+
+	public void setResourceTypes(List<DownloadActivityType> resourceTypes) {
+		this.resourceTypes = resourceTypes;
 	}
 
 	public WorldRegion getSuperregion() {
 		return superregion;
 	}
 
-	public LinkedList<WorldRegion> getSubregions() {
+	public List<WorldRegion> getSubregions() {
 		return subregions;
 	}
 
-	public LinkedList<WorldRegion> getFlattenedSubregions() {
+	public List<WorldRegion> getFlattenedSubregions() {
 		return flattenedSubregions;
 	}
 

@@ -25,6 +25,7 @@ import net.osmand.plus.Version;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.download.DownloadFileHelper.DownloadFileShowWarning;
 import net.osmand.plus.download.DownloadOsmandIndexesHelper.AssetIndexItem;
+import net.osmand.plus.download.items.ItemsListBuilder;
 import net.osmand.plus.download.newimplementation.IndexItemCategoryWithSubcat;
 import net.osmand.plus.helpers.DatabaseHelper;
 import net.osmand.plus.resources.ResourceManager;
@@ -411,11 +412,17 @@ public class DownloadIndexesThread {
 
 			@Override
 			protected IndexFileList doInBackground(Void... params) {
-				return DownloadOsmandIndexesHelper.getIndexesList(ctx);
+				IndexFileList indexFileList = DownloadOsmandIndexesHelper.getIndexesList(ctx);
+				indexFiles = indexFileList;
+				if (indexFileList != null) {
+					ItemsListBuilder builder = new ItemsListBuilder(app, app.getWorldRegion());
+					builder.invalidate();
+					builder.build();
+				}
+				return indexFileList;
 			}
 
 			protected void onPostExecute(IndexFileList result) {
-				indexFiles = result;
 				if (indexFiles != null && uiActivity != null) {
 					prepareFilesToUpdate();
 					boolean basemapExists = uiActivity.getMyApplication().getResourceManager().containsBasemap();
@@ -445,6 +452,7 @@ public class DownloadIndexesThread {
 					uiActivity.updateProgress(false);
 					runCategorization(uiActivity.getDownloadType());
 					runCategorization(); // for new implementation
+					uiActivity.onCategorizationFinished();
 				}
 			}
 
