@@ -831,6 +831,9 @@ public class VoiceRouter {
 	}
 
 	private void makeSound(){
+		if(isMute()) {
+			return;
+		}
 		SoundPool sp = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
 		int soundClick = -1;
 		boolean success = true;

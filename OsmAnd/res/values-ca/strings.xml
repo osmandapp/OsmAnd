@@ -2134,4 +2134,21 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
 <string name="shared_string_trip_recording">Enregistrament de trajectes</string>
     <string name="shared_string_navigation">Navegació</string>
     <string name="osmand_running_in_background">Execució en procés de fons</string>
+    <string name="favorite_category_add_new">Afegeix nova categoria</string>
+    <string name="favorite_category_select">Selecciona categoria</string>
+    <string name="default_speed_system_descr">Defineix el sistema de mesura de velocitat</string>
+    <string name="default_speed_system">Mesura de velocitat</string>
+    <string name="nm">mm</string>
+    <string name="si_nm">Milles marines</string>
+    <string name="si_kmh">Quilòmetres per hora</string>
+    <string name="si_mph">Milles per hora</string>
+    <string name="si_m_s">Metres per segon</string>
+    <string name="si_min_km">Minuts per quilòmetre</string>
+    <string name="si_min_m">Minuts per milla</string>
+    <string name="si_nm_h">Millesmarines per hora (nusos)</string>
+    <string name="nm_h">mmh</string>
+    <string name="min_mile">min/m</string>
+    <string name="min_km">min/km</string>
+    <string name="m_s">m/s</string>
+    
     </resources>

@@ -2218,4 +2218,6 @@
     <string name="favourites_edit_dialog_title">Información del favorito</string>
     <string name="favourites_context_menu_add">Añadir favorito</string>
 	<string name="roads">Carreteras</string>
-</resources>
+<string name="favorite_category_add_new">Añadir nuevo</string>
+    <string name="favorite_category_select">Seleccionar categoría</string>
+    </resources>

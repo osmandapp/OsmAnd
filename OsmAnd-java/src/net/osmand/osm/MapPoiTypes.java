@@ -1,20 +1,5 @@
 package net.osmand.osm;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.text.Collator;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.TreeMap;
-
 import net.osmand.PlatformUtil;
 import net.osmand.StringMatcher;
 import net.osmand.data.Amenity;
@@ -23,6 +8,22 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.text.Collator;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.TreeMap;
 
 
 public class MapPoiTypes {
@@ -138,7 +139,7 @@ public class MapPoiTypes {
 	}
 	
 	public Map<String, PoiType> getAllTranslatedNames() {
-		Map<String, PoiType> translation = new TreeMap<String, PoiType>(); 
+		Map<String, PoiType> translation = new HashMap<>();
 		for(PoiCategory pc : categories) {
 			for(PoiType pt :  pc.getPoiTypes()) {
 				if(pt.isReference()) {
@@ -152,7 +153,7 @@ public class MapPoiTypes {
 	}
 	
 	public Map<String, AbstractPoiType> getAllTypesTranslatedNames(StringMatcher matcher) {
-		TreeMap<String, AbstractPoiType> tm = new TreeMap<String, AbstractPoiType>(Collator.getInstance());
+		Map<String, AbstractPoiType> tm = new TreeMap<String, AbstractPoiType>(Collator.getInstance());
 		for (PoiCategory pc : categories) {
 			if(pc == otherMapCategory) {
 				continue;

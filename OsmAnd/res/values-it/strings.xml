@@ -845,7 +845,7 @@
   <string name="use_short_object_names">Usa i nomi degli oggetti</string>
   <string name="accessibility_preferences_descr">Preferenze relative all\'accessibilità</string>
   <string name="accessibility_preferences">Accessibilità</string>
-  <string name="index_name_north_america">Nord America</string>
+  <string name="index_name_north_america">Nord America - Messico</string>
   <string name="index_name_us">Nord America - Stati Uniti</string>
   <string name="index_name_central_america">America Centrale</string>
   <string name="index_name_south_america">Sud America</string>
@@ -1519,7 +1519,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="index_name_gb">Europa - Gran Bretagna</string>
     <string name="lang_zh">Cinese</string>
     <string name="lang_pt_br">Portoghese (Brasile)</string>
-    <string name="index_name_canada">Nord americano - Canada</string>
+    <string name="index_name_canada">Nord America - Canada</string>
     <string name="index_item_nation_addresses">indirizzi nazionali</string>
 	<string name="index_item_world_altitude_correction">Correzione altitudine mondiale</string>
 	<string name="index_item_world_seamarks">Boe mondiali</string>
@@ -2202,4 +2202,6 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
     
+    <string name="favorite_category_add_new">Aggiungi nuova</string>
+    <string name="favorite_category_select">Scegli la categoria</string>
     </resources>
