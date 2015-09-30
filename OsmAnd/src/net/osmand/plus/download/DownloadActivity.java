@@ -360,7 +360,8 @@ public class DownloadActivity extends BaseDownloadActivity {
 
 	protected void downloadWikiFiles() {
 		if (Version.isFreeVersion(getMyApplication())) {
-			dialogToInstallPaid();
+			new InstallPaidVersionDialogFragment().show(getSupportFragmentManager(),
+					InstallPaidVersionDialogFragment.TAG);
 		} else {
 			Builder bld = new AlertDialog.Builder(this);
 			final List<IndexItem> wi = getWikipediaItems();

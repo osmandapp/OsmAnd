@@ -48,6 +48,12 @@
                 android:textSize="@dimen/default_sub_text_size"
                 tools:text="Map, Contour Lines, Wikipedia"/>
 
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
 
         </LinearLayout>
 
@@ -60,7 +66,9 @@
             android:background="?attr/dashboard_button"
             android:focusable="false"
             android:focusableInTouchMode="false"
-            tools:src="@drawable/ic_action_import"/>
+            tools:src="@drawable/ic_action_import"
+            tools:visibility="visible"
+            android:visibility="gone"/>
     </LinearLayout>
 
 </LinearLayout>

@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -61,8 +62,9 @@ public class MapsInCategoryFragment extends DialogFragment {
 		createInstance(category).show(getChildFragmentManager(), TAG);
 	}
 
-	public void onIndexItemSelected(@NonNull IndexItem indexItem) {
-		LOG.debug("onIndexItemSelected()");
+	public void startMapDownload(@NonNull IndexItem indexItem,
+								 @NonNull ProgressBar progressBar) {
+		LOG.debug("startMapDownload()");
 		((DownloadActivity) getActivity()).startDownload(indexItem);
 	}
 
