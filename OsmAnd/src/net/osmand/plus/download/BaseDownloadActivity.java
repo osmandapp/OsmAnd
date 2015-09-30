@@ -118,6 +118,10 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 
 	}
 
+	public void onCategorizationFinished() {
+
+	}
+
 	public boolean startDownload(IndexItem item) {
 		if (downloadListIndexThread.getCurrentRunningTask() != null && getEntriesToDownload().get(item) == null) {
 			downloadQueue.add(item);

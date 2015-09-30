@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:text="World Regions"
+                android:textSize="@dimen/default_list_text_size"/>
+
+            <ListView
+                android:id="@+id/list_world_regions"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:groupIndicator="@android:color/transparent"
+                android:isScrollContainer="false"
+                android:scrollbars="none"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:text="World Map"
+                android:textSize="@dimen/default_list_text_size"/>
+
+            <ListView
+                android:id="@+id/list_world_map"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:groupIndicator="@android:color/transparent"
+                android:isScrollContainer="false"
+                android:scrollbars="none"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:text="Voice Promts"
+                android:textSize="@dimen/default_list_text_size"/>
+
+            <ListView
+                android:id="@+id/list_voice_promts"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:groupIndicator="@android:color/transparent"
+                android:isScrollContainer="false"
+                android:scrollbars="none"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
