@@ -20,6 +20,7 @@ import android.widget.TextView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.download.BaseDownloadActivity;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.IndexItem;
@@ -118,7 +119,7 @@ public class SubcategoriesFragment extends Fragment {
 				progressBar = (ProgressBar) convertView.findViewById(R.id.progressBar);
 			}
 
-			public void bindIndexItem(final IndexItem indexItem, DownloadActivity context,
+			public void bindIndexItem(final IndexItem indexItem, final DownloadActivity context,
 									  MapsInCategoryFragment fragment) {
 				if (indexItem.getType() == DownloadActivityType.VOICE_FILE) {
 					nameTextView.setText(indexItem.getVisibleName(context,
@@ -133,13 +134,14 @@ public class SubcategoriesFragment extends Fragment {
 				rightImageButton.setImageDrawable(getContextIcon(context,
 						R.drawable.ic_action_import));
 				rightImageButton.setTag(R.id.index_item, indexItem);
-				rightImageButton.setTag(R.id.fragment, fragment);
 				rightImageButton.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						((MapsInCategoryFragment) v.getTag(R.id.fragment))
-								.startMapDownload((IndexItem) v.getTag(R.id.index_item), progressBar);
+						((BaseDownloadActivity) v.getContext())
+								.startDownload((IndexItem) v.getTag(R.id.index_item));
 						progressBar.setVisibility(View.VISIBLE);
+						rightImageButton.setImageDrawable(getContextIcon(context,
+								R.drawable.ic_action_remove_dark));
 					}
 				});
 				progressBar.setVisibility(View.GONE);

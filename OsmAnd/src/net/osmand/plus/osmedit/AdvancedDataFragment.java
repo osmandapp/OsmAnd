@@ -92,7 +92,6 @@ public class AdvancedDataFragment extends Fragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		// TODO read more about lifecycle
 		mAdapter.updateViews();
 		mTagsChangedListener = new EditPoiData.TagsChangedListener() {
 			@Override
