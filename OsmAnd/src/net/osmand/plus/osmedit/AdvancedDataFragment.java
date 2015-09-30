@@ -93,7 +93,7 @@ public class AdvancedDataFragment extends Fragment {
 		mAdapter.updateViews();
 		mTagsChangedListener = new EditPoiData.TagsChangedListener() {
 			@Override
-			public void onTagsChanged() {
+			public void onTagsChanged(String anyTag) {
 				mAdapter.updateViews();
 			}
 		};
@@ -189,6 +189,7 @@ public class AdvancedDataFragment extends Fragment {
 					(ImageButton) convertView.findViewById(R.id.deleteItemImageButton);
 			valueEditText.setText(vl);
 			deleteItemImageButton.setImageDrawable(deleteDrawable);
+			final String[] previousTag = new String[] {tg}; 
 			deleteItemImageButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -199,6 +200,9 @@ public class AdvancedDataFragment extends Fragment {
 			tagEditText.addTextChangedListener(new TextWatcher() {
 				@Override
 				public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+					if (!editPoiData.isInEdit()) {
+						editPoiData.removeTag(s.toString());
+					}
 				}
 
 				@Override
@@ -208,7 +212,9 @@ public class AdvancedDataFragment extends Fragment {
 				@Override
 				public void afterTextChanged(Editable s) {
 					if (!editPoiData.isInEdit()) {
+						editPoiData.removeTag(previousTag[0]);
 						editPoiData.putTag(s.toString(), valueEditText.getText().toString());
+						previousTag[0] = s.toString();
 					}
 				}
 			});

@@ -180,13 +180,14 @@ public class BasicDataFragment extends Fragment {
 		listeners.add(new TagsChangedListener() {
 			
 			@Override
-			public void onTagsChanged() {
-				String vl = getData().getTagValues().get(tag);
-				if(vl == null) {
-					vl = "";
+			public void onTagsChanged(String t) {
+				if (tag.equals(t)) {
+					String vl = getData().getTagValues().get(tag);
+					if (vl == null) {
+						vl = "";
+					}
+					e.setText(vl);
 				}
-				e.setText(vl);
-				
 			}
 		});
 	}

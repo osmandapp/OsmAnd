@@ -77,8 +77,6 @@ public class EditPoiFragment extends DialogFragment {
 	private EditPoiData editPoiData;
 	private ViewPager viewPager;
 	private boolean isLocalEdit;
-	private boolean mIsUserInput = true;
-	private EditPoiData.TagsChangedListener mTagsChangedListener;
 	private AutoCompleteTextView poiTypeEditText;
 	private Node node;
 	private Map<String, PoiType> allTranslatedSubTypes;
@@ -406,13 +404,9 @@ public class EditPoiFragment extends DialogFragment {
 	}
 
 	public void updateType(Amenity amenity) {
-		mIsUserInput = false;
 		poiTypeEditText.setText(amenity.getSubType());
-		mIsUserInput = true;
 		poiTypeTextInputLayout.setHint(amenity.getType().getTranslation());
-
 		setAdapterForPoiTypeEditText();
-
 		poiTypeEditText.setOnTouchListener(new View.OnTouchListener() {
 			@Override
 			public boolean onTouch(final View v, MotionEvent event) {

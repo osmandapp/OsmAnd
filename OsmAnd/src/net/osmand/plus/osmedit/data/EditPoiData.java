@@ -36,7 +36,7 @@ public class EditPoiData {
 	}
 	
 	private void initTags(Node node, Map<String, PoiType> allTranslatedSubTypes) {
-
+		checkNotInEdit();
 		tryAddTag(OSMSettings.OSMTagKey.ADDR_STREET.getValue(),
 				node.getTag(OSMSettings.OSMTagKey.ADDR_STREET));
 		tryAddTag(OSMSettings.OSMTagKey.ADDR_HOUSE_NUMBER.getValue(),
@@ -70,38 +70,39 @@ public class EditPoiData {
 	
 
 	public void putTag(String tag, String value) {
-		if(isInEdit) {
-			throw new IllegalStateException("Can't modify in edit mode");
-		}
+		checkNotInEdit();
 		try { 
 			isInEdit = true;
 			tagValues.put(tag, value);
-			notifyDatasetChanged();
+			notifyDatasetChanged(tag);
 		} finally {
 			isInEdit = false;
 		}
 	}
-	
-	public void notifyToUpdateUI() {
+
+
+	private void checkNotInEdit() {
 		if(isInEdit) {
 			throw new IllegalStateException("Can't modify in edit mode");
 		}
+	}
+	
+	public void notifyToUpdateUI() {
+		checkNotInEdit();
 		try { 
 			isInEdit = true;
-			notifyDatasetChanged();
+			notifyDatasetChanged(null);
 		} finally {
 			isInEdit = false;
 		}		
 	}
 	
 	public void removeTag(String tag) {
-		if(isInEdit) {
-			throw new IllegalStateException("Can't modify in edit mode");
-		}
+		checkNotInEdit();
 		try { 
 			isInEdit = true;
 			tagValues.remove(tag);
-			notifyDatasetChanged();
+			notifyDatasetChanged(tag);
 		} finally {
 			isInEdit = false;
 		}
@@ -112,9 +113,9 @@ public class EditPoiData {
 	}
 	
 	
-	private void notifyDatasetChanged() {
+	private void notifyDatasetChanged(String tag) {
 		for (TagsChangedListener listener : mListeners) {
-			listener.onTagsChanged();
+			listener.onTagsChanged(tag);
 		}
 	}
 
@@ -128,11 +129,7 @@ public class EditPoiData {
 
 	public interface TagsChangedListener {
 		
-		void onTagsChanged();
+		void onTagsChanged(String tag);
 		
 	}
-
-	
-
-	
 }
