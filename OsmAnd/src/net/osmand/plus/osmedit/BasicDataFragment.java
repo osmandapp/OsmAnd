@@ -11,6 +11,7 @@ import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.osmedit.data.EditPoiData;
+import net.osmand.plus.osmedit.data.EditPoiData.TagsChangedListener;
 import net.osmand.plus.osmedit.dialogs.OpeningHoursDaysDialogFragment;
 import net.osmand.plus.osmedit.dialogs.OpeningHoursHoursDialogFragment;
 import net.osmand.util.OpeningHoursParser;
@@ -92,6 +93,7 @@ public class BasicDataFragment extends Fragment {
 		phoneEditText = (EditText) view.findViewById(R.id.phoneEditText);
 		webSiteEditText = (EditText) view.findViewById(R.id.webSiteEditText);
 		descriptionEditText = (EditText) view.findViewById(R.id.descriptionEditText);
+		listeners.clear();
 		addTextWatcher(OSMSettings.OSMTagKey.ADDR_STREET.getValue(), streetEditText);
 		addTextWatcher(OSMSettings.OSMTagKey.WEBSITE.getValue(), webSiteEditText);
 		addTextWatcher(OSMSettings.OSMTagKey.PHONE.getValue(), phoneEditText);
@@ -156,7 +158,7 @@ public class BasicDataFragment extends Fragment {
 //		}
 	}
 
-	protected void addTextWatcher(final String tag, EditText e) {
+	protected void addTextWatcher(final String tag, final EditText e) {
 		e.addTextChangedListener(new TextWatcher() {
 
 			@Override
@@ -174,6 +176,18 @@ public class BasicDataFragment extends Fragment {
 				}				
 			}
 			
+		});
+		listeners.add(new TagsChangedListener() {
+			
+			@Override
+			public void onTagsChanged() {
+				String vl = getData().getTagValues().get(tag);
+				if(vl == null) {
+					vl = "";
+				}
+				e.setText(vl);
+				
+			}
 		});
 	}
 
