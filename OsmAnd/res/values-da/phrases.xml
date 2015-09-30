@@ -1495,7 +1495,7 @@
 	<string name="poi_payment_pikepass_designated">PIKEPASS (udpeget) accepteres</string>
 	<string name="poi_payment_visa_debit_yes">Visa kreditkort accepteres</string>
 	<string name="poi_payment_visa_debit_no">Visa kreditkort accepteres ikke</string>
-	<string name="poi_payment_cryptocurrencies_no">Accepterer ikke kryptovalutaer</string>
+	<string name="poi_payment_cryptocurrencies_no">Kryptovalutaer accepteres ikke</string>
 	<string name="poi_payment_others_yes">Accepterer andre betalingsformer</string>
 	<string name="poi_payment_others_no">Accepterer ikke andre betalingsformer</string>
 	<string name="poi_payment_routex_yes">Routex benzinkort accepteres</string>
