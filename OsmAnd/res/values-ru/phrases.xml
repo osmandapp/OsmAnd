@@ -1028,8 +1028,6 @@
 	<string name="poi_generator_source_oil">Источник энергии: мазут</string>
 	<string name="poi_generator_source_diesel">Источник энергии: дизельное топливо</string>
 
-	<string name="poi_car_wash_self_service">Самообслуживание</string>
-
 	<string name="poi_int_name">Интернациональное название</string>
 	<string name="poi_nat_name">Общенациональное название</string>
 	<string name="poi_reg_name">Региональное название</string>
@@ -1403,5 +1401,94 @@
 
 	<string name="poi_internet_access_fee_yes">Взимается плата за интернет</string>
 	<string name="poi_internet_access_fee_no">Плата за интернет не взимается</string>
+
+	<string name="poi_events_venue">Место проведения мероприятий</string>
+
+	<string name="poi_diet_vegetarian_only">Только вегетарианское питание</string>
+	<string name="poi_diet_vegetarian_yes">Вегетарианское питание</string>
+	<string name="poi_diet_vegetarian_no">Вегетарианское питание не предлагается</string>
+	<string name="poi_diet_vegetarian_few">Вегетарианское питание: небольшой выбор</string>
+	<string name="poi_diet_vegan_only">Только веганское питание</string>
+	<string name="poi_diet_vegan_yes">Веганское питание</string>
+	<string name="poi_diet_vegan_no">Веганское питание не предлагается</string>
+	<string name="poi_diet_gluten_free_only">Только безглютеновое питание</string>
+	<string name="poi_diet_gluten_free_yes">Безглютеновое питание</string>
+	<string name="poi_diet_gluten_free_no">Безглютеновое питание не предлагается</string>
+	<string name="poi_diet_kosher_only">Только кошерное питание</string>
+	<string name="poi_diet_kosher_yes">Кошерное питание</string>
+	<string name="poi_diet_kosher_no">Кошерное питание не предлагается</string>
+	<string name="poi_diet_halal_only">Только халяльная пища</string>
+	<string name="poi_diet_halal_yes">Халяльная пища</string>
+	<string name="poi_diet_halal_no">Халяльная пища не предлагается</string>
+	<string name="poi_diet_lactose_free_only">Только безлактозные продукты</string>
+	<string name="poi_diet_lactose_free_yes">Безлактозные продукты</string>
+	<string name="poi_diet_lactose_free_no">Безлактозные продукты не предлагаются</string>
+	<string name="poi_diet_pescetarian_yes">Пескетарианская диета</string>
+
+	<string name="poi_drive_in_yes">Обслуживание клиентов сидящих в автомобиле</string>
+	<string name="poi_drive_in_no">Клиенты, сидящие в автомобиле, не обслуживаются</string>
+	<string name="poi_drive_through_yes">Обслуживание клиентов сидящих в автомобиле</string>
+	<string name="poi_drive_through_no">Клиенты, сидящие в автомобиле, не обслуживаются</string>
+
+	<string name="poi_brewery_additional">Пивоварня поставщик</string>
+	<string name="poi_microbrewery_yes">Собственная пивоварня</string>
+	<string name="poi_microbrewery_no">Нет собственной пивоварни</string>
+
+	<string name="poi_takeaway_yes">На вынос</string>
+	<string name="poi_takeaway_no">На вынос: нет</string>
+	<string name="poi_takeaway_only">Только на вынос</string>
+
+	<string name="poi_delivery_yes">С доставкой</string>
+	<string name="poi_delivery_no">Без доставки</string>
+	<string name="poi_delivery_only">Только с доставкой</string>
+
+	<string name="poi_outdoor_seating_yes">Места на открытом воздухе</string>
+	<string name="poi_outdoor_seating_no">Нет мест на открытом воздухе</string>
+	<string name="poi_outdoor_seating_terrace">Места на открытом воздухе: терраса</string>
+	<string name="poi_outdoor_seating_sidewalk">Места на открытом воздухе: тротуар</string>
+	<string name="poi_outdoor_seating_pedestrian_zone">Места на открытом воздухе: пешеходная зона</string>
+	<string name="poi_outdoor_seating_garden">Места на открытом воздухе: сад</string>
+	<string name="poi_outdoor_seating_patio">Места на открытом воздухе: патио</string>
+
+	<string name="poi_cocktails_yes">Коктейли</string>
+
+	<string name="poi_second_hand_yes">Подержанный товар</string>
+	<string name="poi_second_hand_no">Подержанный товар отсутствует</string>
+	<string name="poi_second_hand_only">Только подержанный товар</string>
+
+	<string name="poi_service_parts">Запчасти</string>
+	<string name="poi_service_dealer">Дилер</string>
+	<string name="poi_service_repair">Ремонт</string>
+	<string name="poi_service_repair_no">Ремонт не производится</string>
+	<string name="poi_service_electrical">Ремонт электротранспорта</string>
+	<string name="poi_motorcycle_repair">Ремонт мотоциклов</string>
+	<string name="poi_self_service_yes">Самообслуживание</string>
+	<string name="poi_self_service_no">Самообслуживание: нет</string>
+	<string name="poi_automated_yes">Автоматизация</string>
+	<string name="poi_automated_no">Без автоматизации</string>
+	<string name="poi_full_service_yes">Полный комплекс услуг</string>
+	<string name="poi_brushless_yes">Бесконтактная</string>
+	<string name="poi_brushless_no">Контактная</string>
+
+	<string name="poi_aeroway_fuel">Заправочная станция для воздушного транспорта</string>
+	<string name="poi_public_bath">Общественная баня</string>
+
+	<string name="poi_male_yes">Для мужчин</string>
+	<string name="poi_male_no">Не для мужчин</string>
+	<string name="poi_female_yes">Для женщин</string>
+	<string name="poi_female_no">Не для женщин</string>
+	<string name="poi_indoor_yes">Внутри помещения</string>
+	<string name="poi_indoor_no">Снаружи</string>
+	<string name="poi_toilets_yes">С туалетом</string>
+	<string name="poi_toilets_no">Без туалета</string>
+	<string name="poi_toilets_wheelchair_yes">Доступ в туалет для инвалидных колясок: да</string>
+	<string name="poi_toilets_wheelchair_no">Доступ в туалет для инвалидных колясок: нет</string>
+	<string name="poi_toilets_access_customers">Доступ в туалет: только для посетителей</string>
+	<string name="poi_toilets_access_permissive">Доступ в туалет: с разрешения владельца</string>
+	<string name="poi_toilets_access_public">Доступ в туалет: общественный</string>
+
+	<string name="poi_diaper_yes">Пеленальный столик</string>
+	<string name="poi_diaper_no">Пеленальный столик отсутствует</string>
+	<string name="poi_diaper_room">Пеленальная комната</string>
 
 </resources>
