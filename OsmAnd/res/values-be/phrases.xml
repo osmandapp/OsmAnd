@@ -1228,4 +1228,9 @@
 	<string name="poi_information_sign">Знак</string>
 	<string name="poi_information_audioguide">Аўдыягід</string>
 	<string name="poi_cooling_tower">Градзірня</string>
+	<string name="poi_denomination_adventist">Адвентысты</string>
+	<string name="poi_trees_apple">Яблык</string>
+	<string name="poi_trees_oil">Пальмавы алей</string>
+	<string name="poi_trees_orange">Апельсін</string>
+	<string name="poi_trees_banana">Банан</string>
 	</resources>

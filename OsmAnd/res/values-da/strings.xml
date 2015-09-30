@@ -2143,7 +2143,7 @@
 	<string name="shared_string_trip_recording">Optag ture</string>
     <string name="shared_string_navigation">Navigation</string>
     <string name="osmand_running_in_background">Kører i baggrunden</string>
-    <string name="default_speed_system">Hastighedsmåling</string>
+    <string name="default_speed_system">Hastighedsenhed</string>
     <string name="nm">nmi</string>
     <string name="si_nm">Sømil</string>
     <string name="si_kmh">Kilometer i timen</string>
@@ -2157,7 +2157,7 @@
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
     
-    <string name="default_speed_system_descr">Vælg enheder</string>
+    <string name="default_speed_system_descr">Vælg enhed for hastighed</string>
     <string name="favorite_category_add_new">Tilføj ny</string>
     <string name="favorite_category_select">Vælg kategori</string>
     </resources>
