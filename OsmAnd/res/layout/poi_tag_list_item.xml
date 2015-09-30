@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1">
 
-        <EditText
+        <AutoCompleteTextView
             android:id="@+id/valueEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

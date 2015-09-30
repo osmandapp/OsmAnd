@@ -1,5 +1,24 @@
 package net.osmand.plus.osmedit;
 
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import net.osmand.PlatformUtil;
+import net.osmand.StringMatcher;
+import net.osmand.osm.AbstractPoiType;
+import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiCategory;
+import net.osmand.osm.PoiFilter;
+import net.osmand.osm.PoiType;
+import net.osmand.osm.edit.OSMSettings;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.osmedit.data.EditPoiData;
+
+import org.apache.commons.logging.Log;
+
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.graphics.Point;
@@ -17,29 +36,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import net.osmand.PlatformUtil;
-import net.osmand.StringMatcher;
-import net.osmand.osm.AbstractPoiType;
-import net.osmand.osm.MapPoiTypes;
-import net.osmand.osm.PoiCategory;
-import net.osmand.osm.PoiFilter;
-import net.osmand.osm.PoiType;
-import net.osmand.osm.edit.OSMSettings;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.osmedit.data.EditPoiData;
-import net.osmand.plus.osmedit.data.Tag;
-
-import org.apache.commons.logging.Log;
-
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 
 public class AdvancedDataFragment extends Fragment {
 	private static final String TAG = "AdvancedDataFragment";
@@ -47,7 +46,6 @@ public class AdvancedDataFragment extends Fragment {
 
 	private TagAdapterLinearLayoutHack mAdapter;
 	private EditPoiData.TagsChangedListener mTagsChangedListener;
-	private boolean mIsUserInput = true;
 	private Drawable deleteDrawable;
 
 	@Override
@@ -83,7 +81,7 @@ public class AdvancedDataFragment extends Fragment {
 		addTagButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-					mAdapter.addTag(new Tag("", ""));
+				mAdapter.addTagView("", "");
 			}
 		});
 		return view;
@@ -92,14 +90,11 @@ public class AdvancedDataFragment extends Fragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		// TODO read more about lifecycle
 		mAdapter.updateViews();
 		mTagsChangedListener = new EditPoiData.TagsChangedListener() {
 			@Override
 			public void onTagsChanged() {
-				mIsUserInput = false;
 				mAdapter.updateViews();
-				mIsUserInput = true;
 			}
 		};
 		getData().addListener(mTagsChangedListener);
@@ -156,20 +151,13 @@ public class AdvancedDataFragment extends Fragment {
 			this.mapPoiTypes = mapPoiTypes;
 		}
 
-		public void addTag(Tag tag) {
-			editPoiData.tags.add(tag);
-			if (mIsUserInput)
-				editPoiData.notifyDatasetChanged(mTagsChangedListener);
-			updateViews();
-		}
-
 		public void updateViews() {
 			linearLayout.removeAllViews();
-			for (Tag tag : editPoiData.tags) {
-				if (tag.tag.equals(OSMSettings.OSMTagKey.NAME.getValue())) {
-					nameTextView.setText(tag.value);
-				} else if (tag.tag.equals(EditPoiFragment.POI_TYPE_TAG)) {
-					String subType = tag.value.trim().toLowerCase();
+			for (Entry<String, String> tag : editPoiData.getTagValues().entrySet()) {
+				if (tag.getKey().equals(OSMSettings.OSMTagKey.NAME.getValue())) {
+					nameTextView.setText(tag.getValue());
+				} else if (tag.getKey().equals(EditPoiData.POI_TYPE_TAG)) {
+					String subType = tag.getValue().trim().toLowerCase();
 					if (allTranslatedSubTypes.get(subType) != null) {
 						PoiType pt = allTranslatedSubTypes.get(subType);
 						amenityTagTextView.setText(pt.getOsmTag());
@@ -179,30 +167,33 @@ public class AdvancedDataFragment extends Fragment {
 						amenityTextView.setText(subType);
 					}
 				} else {
-					View view = getView(tag);
-					linearLayout.addView(view);
+					addTagView(tag.getKey(), tag.getValue());
 				}
 			}
 		}
 
-		private View getView(final Tag tag) {
+		public void addTagView(String tg, String vl) {
+			View view = getView(tg, vl);
+			linearLayout.addView(view);
+		}
+
+		private View getView(String tg, String vl) {
 			final View convertView = LayoutInflater.from(linearLayout.getContext())
 					.inflate(R.layout.poi_tag_list_item, null, false);
 			final AutoCompleteTextView tagEditText =
 					(AutoCompleteTextView) convertView.findViewById(R.id.tagEditText);
-			tagEditText.setText(tag.tag);
-			final EditText valueEditText = (EditText) convertView.findViewById(R.id.valueEditText);
+			tagEditText.setText(tg);
+			final AutoCompleteTextView valueEditText =
+					(AutoCompleteTextView) convertView.findViewById(R.id.valueEditText);
 			ImageButton deleteItemImageButton =
 					(ImageButton) convertView.findViewById(R.id.deleteItemImageButton);
-			valueEditText.setText(tag.value);
+			valueEditText.setText(vl);
 			deleteItemImageButton.setImageDrawable(deleteDrawable);
 			deleteItemImageButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					linearLayout.removeView((View) v.getParent());
-					editPoiData.tags.remove(tag);
-					if (mIsUserInput)
-						editPoiData.notifyDatasetChanged(null);
+					editPoiData.removeTag(tagEditText.toString());
 				}
 			});
 			tagEditText.addTextChangedListener(new TextWatcher() {
@@ -216,29 +207,26 @@ public class AdvancedDataFragment extends Fragment {
 
 				@Override
 				public void afterTextChanged(Editable s) {
-					editPoiData.tags.remove(tag);
-					tag.tag = tagEditText.getText().toString();
-					editPoiData.tags.add(tag);
-					if (mIsUserInput)
-						editPoiData.notifyDatasetChanged(mTagsChangedListener);
+					if (!editPoiData.isInEdit()) {
+						editPoiData.putTag(s.toString(), valueEditText.getText().toString());
+					}
 				}
 			});
 			final Set<String> tagKeys = new HashSet<>();
+			final Set<String> valueKeys = new HashSet<>();
 			for (String s : allTypes.keySet()) {
 				AbstractPoiType abstractPoiType = allTypes.get(s);
-				addPoiToStringSet(abstractPoiType, tagKeys);
+				addPoiToStringSet(abstractPoiType, tagKeys, valueKeys);
 			}
-//			addPoiToStringSet(mapPoiTypes.getOtherPoiCategory(), tagKeys);
-			addPoiToStringSet(mapPoiTypes.getOtherMapCategory(), tagKeys);
+			addPoiToStringSet(mapPoiTypes.getOtherMapCategory(), tagKeys, valueKeys);
 
-			ArrayAdapter<Object> adapter = new ArrayAdapter<>(linearLayout.getContext(),
+			ArrayAdapter<Object> tagAdapter = new ArrayAdapter<>(linearLayout.getContext(),
 					R.layout.list_textview, tagKeys.toArray());
-			tagEditText.setAdapter(adapter);
+			tagEditText.setAdapter(tagAdapter);
 			tagEditText.setThreshold(1);
 			tagEditText.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					// TODO: 8/29/15 Rewrite as dialog fragment
 					AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 					final String[] tags = tagKeys.toArray(new String[tagKeys.size()]);
 					builder.setItems(tags, new Dialog.OnClickListener() {
@@ -252,6 +240,7 @@ public class AdvancedDataFragment extends Fragment {
 					builder.show();
 				}
 			});
+
 			valueEditText.addTextChangedListener(new TextWatcher() {
 				@Override
 				public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -263,18 +252,38 @@ public class AdvancedDataFragment extends Fragment {
 
 				@Override
 				public void afterTextChanged(Editable s) {
-					editPoiData.tags.remove(tag);
-					tag.value = valueEditText.getText().toString();
-					editPoiData.tags.add(tag);
-					if (mIsUserInput)
-						editPoiData.notifyDatasetChanged(mTagsChangedListener);
+					if (!editPoiData.isInEdit()) {
+						editPoiData.putTag(tagEditText.getText().toString(), s.toString());
+					}
 				}
 			});
+			ArrayAdapter<Object> valueAdapter = new ArrayAdapter<>(linearLayout.getContext(),
+					R.layout.list_textview, valueKeys.toArray());
+			valueEditText.setAdapter(valueAdapter);
+			valueEditText.setThreshold(1);
+			valueEditText.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+					final String[] values = valueKeys.toArray(new String[tagKeys.size()]);
+					builder.setItems(values, new Dialog.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							valueEditText.setText(values[which]);
+						}
+
+					});
+					builder.create();
+					builder.show();
+				}
+			});
+
 			return convertView;
 		}
 	}
 
-	private static void addPoiToStringSet(AbstractPoiType abstractPoiType, Set<String> stringSet) {
+	private static void addPoiToStringSet(AbstractPoiType abstractPoiType, Set<String> stringSet,
+			Set<String> values) {
 		if (abstractPoiType instanceof PoiType) {
 			PoiType poiType = (PoiType) abstractPoiType;
 			if (poiType.getOsmTag() != null &&
@@ -283,22 +292,29 @@ public class AdvancedDataFragment extends Fragment {
 				if (poiType.getOsmTag2() != null) {
 					stringSet.add(poiType.getOsmTag2());
 				}
+				
+			}
+			if (poiType.getOsmValue() != null) {
+				values.add(poiType.getOsmValue());
+			}
+			if (poiType.getOsmValue2() != null) {
+				values.add(poiType.getOsmValue2());
 			}
 		} else if (abstractPoiType instanceof PoiCategory) {
 			PoiCategory poiCategory = (PoiCategory) abstractPoiType;
 			for (PoiFilter filter : poiCategory.getPoiFilters()) {
-				addPoiToStringSet(filter, stringSet);
+				addPoiToStringSet(filter, stringSet, values);
 			}
 			for (PoiType poiType : poiCategory.getPoiTypes()) {
-				addPoiToStringSet(poiType, stringSet);
+				addPoiToStringSet(poiType, stringSet, values);
 			}
 			for (PoiType poiType : poiCategory.getPoiAdditionals()) {
-				addPoiToStringSet(poiType, stringSet);
+				addPoiToStringSet(poiType, stringSet, values);
 			}
 		} else if (abstractPoiType instanceof PoiFilter) {
 			PoiFilter poiFilter = (PoiFilter) abstractPoiType;
 			for (PoiType poiType : poiFilter.getPoiTypes()) {
-				addPoiToStringSet(poiType, stringSet);
+				addPoiToStringSet(poiType, stringSet, values);
 			}
 		} else {
 			throw new IllegalArgumentException("abstractPoiType can't be instance of class "

@@ -1,5 +1,23 @@
 package net.osmand.plus.osmedit;
 
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.LinkedList;
+import java.util.List;
+
+import net.osmand.PlatformUtil;
+import net.osmand.osm.edit.OSMSettings;
+import net.osmand.plus.IconsCache;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.osmedit.data.EditPoiData;
+import net.osmand.plus.osmedit.dialogs.OpeningHoursDaysDialogFragment;
+import net.osmand.plus.osmedit.dialogs.OpeningHoursHoursDialogFragment;
+import net.osmand.util.OpeningHoursParser;
+import net.osmand.util.OpeningHoursParser.BasicOpeningHourRule;
+
+import org.apache.commons.logging.Log;
+
 import android.content.res.Resources;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
@@ -7,7 +25,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.Display;
@@ -21,25 +38,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import net.osmand.PlatformUtil;
-import net.osmand.osm.edit.OSMSettings;
-import net.osmand.plus.IconsCache;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.osmedit.data.EditPoiData;
-import net.osmand.plus.osmedit.data.Tag;
-import net.osmand.plus.osmedit.dialogs.OpeningHoursDaysDialogFragment;
-import net.osmand.plus.osmedit.dialogs.OpeningHoursHoursDialogFragment;
-import net.osmand.util.OpeningHoursParser;
-import net.osmand.util.OpeningHoursParser.BasicOpeningHourRule;
-
-import org.apache.commons.logging.Log;
-
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
-
 public class BasicDataFragment extends Fragment {
 	private static final String TAG = "BasicDataFragment";
 	private static final Log LOG = PlatformUtil.getLog(BasicDataFragment.class);
@@ -49,8 +47,7 @@ public class BasicDataFragment extends Fragment {
 	private EditText phoneEditText;
 	private EditText webSiteEditText;
 	private EditText descriptionEditText;
-	private EditPoiData.TagsChangedListener mTagsChangedListener;
-	private boolean mIsUserInput = true;
+	private List<EditPoiData.TagsChangedListener> listeners = new LinkedList<EditPoiData.TagsChangedListener>();
 	OpeningHoursAdapter mOpeningHoursAdapter;
 
 	@Nullable
@@ -91,26 +88,20 @@ public class BasicDataFragment extends Fragment {
 				iconsCache.getPaintedContentIcon(R.drawable.ic_action_time, iconColor));
 
 		streetEditText = (EditText) view.findViewById(R.id.streetEditText);
-		streetEditText.addTextChangedListener(new MyOnFocusChangeListener(getData(),
-				OSMSettings.OSMTagKey.ADDR_STREET.getValue()));
 		houseNumberEditText = (EditText) view.findViewById(R.id.houseNumberEditText);
-		houseNumberEditText.addTextChangedListener(new MyOnFocusChangeListener(getData(),
-				OSMSettings.OSMTagKey.ADDR_HOUSE_NUMBER.getValue()));
 		phoneEditText = (EditText) view.findViewById(R.id.phoneEditText);
-		phoneEditText.addTextChangedListener(new MyOnFocusChangeListener(getData(),
-				OSMSettings.OSMTagKey.PHONE.getValue()));
 		webSiteEditText = (EditText) view.findViewById(R.id.webSiteEditText);
-		webSiteEditText.addTextChangedListener(new MyOnFocusChangeListener(getData(),
-				OSMSettings.OSMTagKey.WEBSITE.getValue()));
 		descriptionEditText = (EditText) view.findViewById(R.id.descriptionEditText);
-		descriptionEditText.addTextChangedListener(new MyOnFocusChangeListener(getData(),
-				OSMSettings.OSMTagKey.DESCRIPTION.getValue()));
+		addTextWatcher(OSMSettings.OSMTagKey.ADDR_STREET.getValue(), streetEditText);
+		addTextWatcher(OSMSettings.OSMTagKey.WEBSITE.getValue(), webSiteEditText);
+		addTextWatcher(OSMSettings.OSMTagKey.PHONE.getValue(), phoneEditText);
+		addTextWatcher(OSMSettings.OSMTagKey.ADDR_HOUSE_NUMBER.getValue(), houseNumberEditText);
+		addTextWatcher(OSMSettings.OSMTagKey.DESCRIPTION.getValue(), descriptionEditText);
 		Button addOpeningHoursButton = (Button) view.findViewById(R.id.addOpeningHoursButton);
 		addOpeningHoursButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				BasicOpeningHourRule rule = new BasicOpeningHourRule();
-				// TODO: 8/27/15 Figure out some better defauls or leave it as it is
 				rule.setStartTime(9 * 60);
 				rule.setEndTime(18 * 60);
 				OpeningHoursDaysDialogFragment fragment = OpeningHoursDaysDialogFragment.createInstance(rule, -1);
@@ -141,39 +132,57 @@ public class BasicDataFragment extends Fragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		mTagsChangedListener = new EditPoiData.TagsChangedListener() {
-			@Override
-			public void onTagsChanged() {
-				TagMapProcessor tagMapProcessor = new TagMapProcessor();
-				tagMapProcessor.addFilter(OSMSettings.OSMTagKey.ADDR_STREET.getValue(),
-						new EditTextTagFilter(streetEditText));
-				tagMapProcessor.addFilter(OSMSettings.OSMTagKey.ADDR_HOUSE_NUMBER.getValue(),
-						new EditTextTagFilter(houseNumberEditText));
-				tagMapProcessor.addFilter(OSMSettings.OSMTagKey.PHONE.getValue(),
-						new EditTextTagFilter(phoneEditText));
-				tagMapProcessor.addFilter(OSMSettings.OSMTagKey.WEBSITE.getValue(),
-						new EditTextTagFilter(webSiteEditText));
-				tagMapProcessor.addFilter(OSMSettings.OSMTagKey.DESCRIPTION.getValue(),
-						new EditTextTagFilter(descriptionEditText));
-				tagMapProcessor.addFilter(OSMSettings.OSMTagKey.OPENING_HOURS.getValue(),
-						new OpenHoursTagFilter(mOpeningHoursAdapter));
+		for(EditPoiData.TagsChangedListener tl : listeners) {
+			getData().addListener(tl);
+		}
+		getData().notifyToUpdateUI();
+		
+		// FIXME opening hours
+//		@Override
+//		public void process(			String openingHoursString ) {
+//					parseOpenedHoursHandleErrors(openingHoursString);
+//			if (openingHours == null) {
+//				openingHours = new OpeningHoursParser.OpeningHours();
+//			}
+//			LOG.debug("openingHours=" + openingHours);
+//			adapter.replaceOpeningHours(openingHours);
+//			adapter.updateViews();
+//		}
+//
+//		@Override
+//		public void onUntriggered() {
+//			adapter.replaceOpeningHours(new OpeningHoursParser.OpeningHours());
+//			adapter.updateViews();
+//		}
+	}
 
-				mIsUserInput = false;
-				for (Tag tag : getData().tags) {
-					tagMapProcessor.process(tag);
-				}
-				tagMapProcessor.clearEmptyFields();
-				mIsUserInput = true;
+	protected void addTextWatcher(final String tag, EditText e) {
+		e.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 			}
-		};
-		mTagsChangedListener.onTagsChanged();
-		getData().addListener(mTagsChangedListener);
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				if (!getData().isInEdit()) {
+					getData().putTag(tag, s.toString());
+				}				
+			}
+			
+		});
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		getData().deleteListener(mTagsChangedListener);
+		for(EditPoiData.TagsChangedListener tl : listeners) {
+			getData().deleteListener(tl);
+		}
 	}
 
 	@Override
@@ -187,80 +196,10 @@ public class BasicDataFragment extends Fragment {
 		mOpeningHoursAdapter.setOpeningHoursRule(item, position);
 	}
 
-	private static class TagMapProcessor {
-		private final Map<String, TagFilter> mFilters = new HashMap<>();
+	
 
-		public void addFilter(String tag, TagFilter filter) {
-			mFilters.put(tag, filter);
-		}
 
-		public void process(Tag tag) {
-			if (mFilters.containsKey(tag.tag)) {
-				final TagFilter filter = mFilters.get(tag.tag);
-				filter.process(tag);
-				mFilters.remove(tag.tag);
-			}
-		}
-
-		public void clearEmptyFields() {
-			for (String tag : mFilters.keySet()) {
-				mFilters.get(tag).onUntriggered();
-			}
-		}
-	}
-
-	private interface TagFilter {
-		void process(Tag tag);
-
-		void onUntriggered();
-	}
-
-	private static class EditTextTagFilter implements TagFilter {
-		private final EditText editText;
-
-		private EditTextTagFilter(EditText editText) {
-			this.editText = editText;
-		}
-
-		@Override
-		public void process(Tag tag) {
-			editText.setText(tag.value);
-		}
-
-		@Override
-		public void onUntriggered() {
-			editText.setText(null);
-		}
-	}
-
-	private static class OpenHoursTagFilter implements TagFilter {
-		private final OpeningHoursAdapter adapter;
-
-		private OpenHoursTagFilter(OpeningHoursAdapter adapter) {
-			this.adapter = adapter;
-		}
-
-		@Override
-		public void process(Tag tag) {
-			String openingHoursString = tag.value;
-			LOG.debug("openingHoursString=" + openingHoursString);
-			OpeningHoursParser.OpeningHours openingHours =
-					parseOpenedHoursHandleErrors(openingHoursString);
-			if (openingHours == null) {
-				openingHours = new OpeningHoursParser.OpeningHours();
-				// TODO show error message
-			}
-			LOG.debug("openingHours=" + openingHours);
-			adapter.replaceOpeningHours(openingHours);
-			adapter.updateViews();
-		}
-
-		@Override
-		public void onUntriggered() {
-			adapter.replaceOpeningHours(new OpeningHoursParser.OpeningHours());
-			adapter.updateViews();
-		}
-	}
+	
 
 	private EditPoiFragment getEditPoiFragment() {
 		return (EditPoiFragment) getParentFragment();
@@ -480,37 +419,7 @@ public class BasicDataFragment extends Fragment {
 		return basic;
 	}
 
-	private class MyOnFocusChangeListener implements TextWatcher {
-		private final EditPoiData data;
-		private final String tagName;
-
-		public MyOnFocusChangeListener(EditPoiData data,
-									   String tagName) {
-			this.data = data;
-			this.tagName = tagName;
-		}
-
-		@Override
-		public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-		}
-
-		@Override
-		public void onTextChanged(CharSequence s, int start, int before, int count) {
-		}
-
-		@Override
-		public void afterTextChanged(Editable s) {
-			if (mIsUserInput) {
-				String string = s.toString();
-				if (!TextUtils.isEmpty(string)) {
-					Tag tag = new Tag(tagName, string);
-					data.tags.remove(tag);
-					data.tags.add(tag);
-					data.notifyDatasetChanged(mTagsChangedListener);
-				}
-			}
-		}
-	}
+	
 
 	private class OpeningHoursAdapter {
 		private OpeningHoursParser.OpeningHours openingHours;
@@ -547,12 +456,9 @@ public class BasicDataFragment extends Fragment {
 			for (int i = 0; i < openingHours.getRules().size(); i++) {
 				linearLayout.addView(getView(i));
 			}
-			if (mIsUserInput) {
-				Tag openHours = new Tag(OSMSettings.OSMTagKey.OPENING_HOURS.getValue(),
+			if (!data.isInEdit()) {
+				data.putTag(OSMSettings.OSMTagKey.OPENING_HOURS.getValue(),
 						openingHours.toStringNoMonths());
-				data.tags.remove(openHours);
-				data.tags.add(openHours);
-				data.notifyDatasetChanged(null);
 			}
 		}
 
