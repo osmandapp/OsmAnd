@@ -719,6 +719,8 @@
 	<string name="poi_internet_access_wired">Internet access: wired</string>
 	<string name="poi_internet_access_public">Internet access: public</string>
 	<string name="poi_internet_access_service">Internet access: service</string>
+	<string name="poi_internet_access_yes">Internet access: yes</string>
+	<string name="poi_internet_access_no">Internet access: no</string>
 
 	<string name="poi_monastery">Monastery</string>
 	<string name="poi_historic_monastery">Historic monastery</string>
@@ -1547,5 +1549,8 @@
 	<string name="poi_payment_yandexmoney_yes">Accept Yandex.Money</string>
 	<string name="poi_payment_yandexmoney_no">Don\'t accept Yandex.Money</string>
 	<string name="poi_description_payment">Payment description</string>
+
+	<string name="poi_internet_access_fee_yes">Charge fees for internet access</string>
+	<string name="poi_internet_access_fee_no">Don\'t charge fees for internet access</string>
 
 </resources>
