@@ -891,15 +891,15 @@
 	<string name="poi_tree">Arbre</string>
 	<string name="poi_highway_crossing">Pas de vianants</string>
 
-	<string name="poi_icn_ref">Xarxa de nodes d\'una ruta ciclista internacional</string>
-	<string name="poi_ncn_ref">Xarxa de nodes d\'una ruta ciclista nacional</string>
-	<string name="poi_rcn_ref">Xarxa de nodes d\'una ruta ciclista regional</string>
-	<string name="poi_lcn_ref">Xarxa de nodes d\'una ruta ciclista local</string>
+	<string name="poi_icn_ref">Xarxa internacional de rutes ciclistes</string>
+	<string name="poi_ncn_ref">Xarxa nacional de rutes ciclistes</string>
+	<string name="poi_rcn_ref">Xarxa regional de rutes ciclistes</string>
+	<string name="poi_lcn_ref">Xarxa local de rutes ciclistes</string>
 
-	<string name="poi_iwn_ref">Xarxa de nodes d\'una ruta senderista internacional</string>
-	<string name="poi_nwn_ref">Xarxa de nodes d\'una ruta senderista nacional</string>
-	<string name="poi_rwn_ref">Xarxa de nodes d\'una ruta senderista regional</string>
-	<string name="poi_lwn_ref">Xarxa de nodes d\'una ruta senderista local</string>
+	<string name="poi_iwn_ref">Xarxa internacional de rutes de senderisme</string>
+	<string name="poi_nwn_ref">Xarxa nacional de rutes de senderisme</string>
+	<string name="poi_rwn_ref">Xarxa regional de rutes de senderisme</string>
+	<string name="poi_lwn_ref">Xarxa local de rutes de senderisme</string>
 
 	<string name="poi_opening_hours">Horari de servei</string>
 	<string name="poi_collection_times">Horari de recollida</string>
@@ -961,8 +961,8 @@
 	<string name="poi_animal_shelter_dog_cat">Refugi per a gossos i gats</string>
 	<string name="poi_animal_shelter_bird">Refugi per a ocells</string>
 
-<string name="poi_recycling_centre">Deixalleria</string>
-	<string name="poi_recycling_container">Contenidor</string>
+<string name="poi_recycling_centre">Tipus: deixalleria</string>
+	<string name="poi_recycling_container">Tipus: contenidor</string>
 	<string name="poi_recycling_glass">Vidre</string>
 	<string name="poi_recycling_paper">Paper</string>
 	<string name="poi_recycling_clothes">Roba</string>
@@ -1040,7 +1040,7 @@
 	<string name="poi_recycling_diapers">Bolquers</string>
 	<string name="poi_supervised_yes">Supervisat</string>
 	<string name="poi_supervised_no">No supervisat</string>
-	<string name="poi_crossing_traffic_signals">Encreuament senyalitzat</string>
+	<string name="poi_crossing_traffic_signals">Amb llums de parada</string>
 	<string name="poi_crossing_uncontrolled">Encreuament no controlat</string>
 	<string name="poi_crossing_unmarked">Encreuament no senyalitzat</string>
 
@@ -1050,7 +1050,7 @@
 	<string name="poi_mill_pond">Bassa del molí</string>
 	<string name="poi_twitter">Twitter</string>
 	<string name="poi_skype">Skype</string>
-	<string name="poi_youtube">Youtube</string>
+	<string name="poi_youtube">YouTube</string>
 	<string name="poi_instagram">Instagram</string>
 	<string name="poi_vk">VKontakte</string>
 	<string name="poi_google_plus">Google+</string>
@@ -1170,11 +1170,38 @@
 	<string name="poi_ele">Alçada sobre el nivell del mar</string>
 	<string name="poi_wholesale">Venda majorista</string>
 
-	<string name="poi_content_water">Aigua (contingut)</string>
+	<string name="poi_content_water">Contingut: aigua</string>
 	<string name="poi_doors">Portes</string>
 	<string name="poi_ford_stepping_stones">Pas sobre pedres</string>
 	<string name="poi_lighting_tower">Torre d\'il·luminació</string>
 	<string name="poi_greenfield">Zona de desenvolupament urbà</string>
-	<string name="poi_content_wine">Vi (contingut)</string>
-	<string name="poi_content_sewage">Aigües residuals (contingut)</string>
+	<string name="poi_content_wine">Contingut: vi</string>
+	<string name="poi_content_sewage">Contingut: aigües residuals</string>
+	<string name="poi_description_payment">Descripció de pagament</string>
+
+	<string name="poi_payment_gift_card_yes">S\'accepta targes de regal</string>
+	<string name="poi_payment_gift_card_no">No s\'accepta targes de regal</string>
+	<string name="poi_paediatrics">Pediatria</string>
+
+	<string name="poi_internet_access_yes">Accés a Internet: sí</string>
+	<string name="poi_internet_access_no">Accés a Internet: no</string>
+
+	<string name="poi_wheelchair_no">Cadira de rodes: no permesa</string>
+	<string name="poi_wheelchair_limited">Cadira de rodes: restringida</string>
+	<string name="poi_content_fuel">Contingut: carburant</string>
+	<string name="poi_content_gas">Contingut: gas</string>
+	<string name="poi_content_biomass">Contingut: biomassa</string>
+	<string name="poi_content_wastewater">Contingut: aigües residuals</string>
+	<string name="poi_content_beer">Contingut: cervesa</string>
+	<string name="poi_content_salt">Contingut: sal</string>
+	<string name="poi_content_grain">Contingut: gra</string>
+
+	<string name="poi_nudism_yes">Nudisme: permès</string>
+	<string name="poi_nudism_no">Nudisme: prohibit</string>
+	<string name="poi_nudism_obligatory">Nudisme: obligatori</string>
+	<string name="poi_population">Població</string>
+	<string name="poi_bicycle_parking_building">Edifici especial</string>
+	<string name="poi_bicycle_parking_bollard">Pilona</string>
+	<string name="poi_bicycle_parking_informal">Informal</string>
+
 	</resources>
