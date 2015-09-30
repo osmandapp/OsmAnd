@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.Display;
@@ -162,7 +163,11 @@ public class BasicDataFragment extends Fragment
 			@Override
 			public void afterTextChanged(Editable s) {
 				if (!getData().isInEdit()) {
-					getData().putTag(tag, s.toString());
+					if (!TextUtils.isEmpty(s)) {
+						getData().putTag(tag, s.toString());
+					} else {
+						getData().removeTag(tag);
+					}
 				}
 			}
 
