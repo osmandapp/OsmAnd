@@ -174,12 +174,12 @@ public class ItemsListBuilder {
 		collectSubregionsDataAndItems();
 		collectResourcesDataAndItems();
 
-		LOG.warn("getRegionMapItems");
+		LOG.warn("getRegionMapItems >>>");
 		for (ResourceItem resourceItem : getRegionMapItems()) {
 			LOG.warn("resId=" + resourceItem.getIndexItem().getFileName() + " title=" + resourceItem.getTitle());
 		}
 
-		LOG.warn("getAllResourceItems");
+		LOG.warn("getAllResourceItems >>>");
 		for (Object obj : getAllResourceItems()) {
 			if (obj instanceof WorldRegion) {
 				WorldRegion item = (WorldRegion)obj;
