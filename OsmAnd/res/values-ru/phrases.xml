@@ -1469,6 +1469,7 @@
 	<string name="poi_full_service_yes">Полный комплекс услуг</string>
 	<string name="poi_brushless_yes">Бесконтактная</string>
 	<string name="poi_brushless_no">Контактная</string>
+	<string name="poi_car_wash_no">Без автомойки</string>
 
 	<string name="poi_aeroway_fuel">Заправочная станция для воздушного транспорта</string>
 	<string name="poi_public_bath">Общественная баня</string>
@@ -1490,5 +1491,56 @@
 	<string name="poi_diaper_yes">Пеленальный столик</string>
 	<string name="poi_diaper_no">Пеленальный столик отсутствует</string>
 	<string name="poi_diaper_room">Пеленальная комната</string>
+
+	<string name="poi_maxstay">Максимальное время стоянки</string>
+
+	<string name="poi_vending_parking_tickets">Парковочные талоны</string>
+	<string name="poi_vending_cigarettes">Сигареты</string>
+	<string name="poi_vending_excrement_bags">Пакеты для экскрементов животных</string>
+	<string name="poi_vending_public_transport_tickets">Билеты на общественный транспорт</string>
+	<string name="poi_vending_drinks">Продажа напитков</string>
+	<string name="poi_vending_sweets">Сладости</string>
+	<string name="poi_vending_parcel_pickup_mail_in">Получение и отправление посылок</string>
+	<string name="poi_vending_condoms">Презервативы</string>
+	<string name="poi_vending_stamps">Марки</string>
+	<string name="poi_vending_bicycle_tube">Велосипедные камеры</string>
+	<string name="poi_vending_food">Питание</string>
+	<string name="poi_vending_drinks_food">Напитки и закуски</string>
+	<string name="poi_vending_fuel">Топливо</string>
+	<string name="poi_vending_parcel_pickup">Получение посылок</string>
+	<string name="poi_vending_parcel_mail_in">Отправление посылок</string>
+	<string name="poi_vending_milk">Молоко</string>
+	<string name="poi_vending_elongated_coin">Удлинённые монеты (сувениры)</string>
+	<string name="poi_vending_bread">Хлеб</string>
+	<string name="poi_vending_chewing_gums">Жевательная резинка</string>
+	<string name="poi_vending_parking_tickets_public_transport_tickets">Парковочные талоны; билеты на общественный транспорт</string>
+	<string name="poi_vending_coffee">Кофе</string>
+	<string name="poi_vending_toll">Оплата за проезд</string>
+	<string name="poi_vending_tickets">Билеты</string>
+	<string name="poi_vending_water">Продажа воды</string>
+	<string name="poi_vending_telephone_vouchers">Телефонные карты</string>
+	<string name="poi_vending_animal_food">Еда для животных</string>
+	<string name="poi_vending_public_transport_plans">Карты общественного транспорта</string>
+	<string name="poi_vending_drinks_sweets">Напитки и сладости</string>
+	<string name="poi_vending_vouchers">Ваучеры</string>
+	<string name="poi_vending_dvd">DVD</string>
+	<string name="poi_vending_candles">Свечи</string>
+	<string name="poi_vending_toys">Продажа игрушек</string>
+	<string name="poi_vending_ice_cream">Продажа мороженого</string>
+	<string name="poi_vending_sim_cards">SIM-карты</string>
+
+	<string name="poi_branch">Филиал</string>
+
+	<string name="poi_memorial_war">Военный</string>
+	<string name="poi_memorial_plaque">Доска</string>
+	<string name="poi_memorial_statue">Статуя</string>
+	<string name="poi_memorial_stone">Камень</string>
+	<string name="poi_memorial_stele">Стелла</string>
+	<string name="poi_memorial_bust">Бюст</string>
+	<string name="poi_memorial_blue_plaque">Синяя табличка</string>
+	<string name="poi_memorial_jizo">Дзидзо</string>
+	<string name="poi_memorial_cross">Крест</string>
+	<string name="poi_memorial_vehicle">Средство передвижения</string>
+	<string name="poi_memorial_obelisk">Обелиск</string>
 
 </resources>

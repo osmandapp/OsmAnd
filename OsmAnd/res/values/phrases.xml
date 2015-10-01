@@ -1101,8 +1101,8 @@
 	<string name="poi_brand">Brand</string>
 	<string name="poi_fee_yes">Fee is charged</string>
 	<string name="poi_fee_no">No fee</string>
-	<string name="poi_drinking_water_yes">Drinking water</string>
-	<string name="poi_drinking_water_no">No drinking water</string>
+	<string name="poi_drinking_water_yes">Drinking water: yes</string>
+	<string name="poi_drinking_water_no">Drinking water: no</string>
 	<string name="poi_supervised_yes">Supervised</string>
 	<string name="poi_supervised_no">Without supervision</string>
 	<string name="poi_seasonal_yes">Seasonal</string>
@@ -1618,6 +1618,7 @@
 	<string name="poi_full_service_yes">Full service</string>
 	<string name="poi_brushless_yes">Brushless</string>
 	<string name="poi_brushless_no">Brushless: no</string>
+	<string name="poi_car_wash_no">Car wash: no</string>
 
 	<string name="poi_aeroway_fuel">Aircraft fuel station</string>
 	<string name="poi_public_bath">Public bath</string>
@@ -1640,5 +1641,57 @@
 	<string name="poi_diaper_yes">Diaper changing table</string>
 	<string name="poi_diaper_no">No diaper changing table</string>
 	<string name="poi_diaper_room">Diaper changing room</string>
+
+	<string name="poi_maxstay">Parking time limit</string>
+
+	<string name="poi_vending_parking_tickets">Parking tickets</string>
+	<string name="poi_vending_cigarettes">Cigarettes</string>
+	<string name="poi_vending_excrement_bags">Excrement bags</string>
+	<string name="poi_vending_public_transport_tickets">Public transport tickets</string>
+	<string name="poi_vending_drinks">Drinks</string>
+	<string name="poi_vending_sweets">Sweets</string>
+	<string name="poi_vending_parcel_pickup_mail_in">Parcel pickup and mail in</string>
+	<string name="poi_vending_condoms">Condoms</string>
+	<string name="poi_vending_stamps">Stamps</string>
+	<string name="poi_vending_bicycle_tube">Bicycle tubes</string>
+	<string name="poi_vending_food">Food</string>
+	<string name="poi_vending_drinks_food">Drinks and food</string>
+	<string name="poi_vending_fuel">Fuel vending</string>
+	<string name="poi_vending_parcel_pickup">Parcel pickup</string>
+	<string name="poi_vending_parcel_mail_in">Parcel mail-in</string>
+	<string name="poi_vending_milk">Milk</string>
+	<string name="poi_vending_elongated_coin">Elongated coin</string>
+	<string name="poi_vending_bread">Bread</string>
+	<string name="poi_vending_chewing_gums">Chewing gums</string>
+	<string name="poi_vending_parking_tickets_public_transport_tickets">Parking tickets; public transport tickets</string>
+	<string name="poi_vending_coffee">Coffee</string>
+	<string name="poi_vending_toll">Toll vending</string>
+	<string name="poi_vending_tickets">Tickets vending</string>
+	<string name="poi_vending_water">Water vending</string>
+	<string name="poi_vending_telephone_vouchers">Telephone vouchers</string>
+	<string name="poi_vending_animal_food">Animal food</string>
+	<string name="poi_vending_public_transport_plans">Public transport plans</string>
+	<string name="poi_vending_drinks_sweets">Drinks and sweets</string>
+	<string name="poi_vending_vouchers">Vouchers</string>
+	<string name="poi_vending_dvd">DVD</string>
+	<string name="poi_vending_candles">Candles</string>
+	<string name="poi_vending_toys">Toys</string>
+	<string name="poi_vending_ice_cream">Ice cream</string>
+	<string name="poi_vending_sim_cards">SIM-cards</string>
+
+	<string name="poi_branch">Branch</string>
+
+	<string name="poi_memorial_war">War memorial</string>
+	<string name="poi_memorial_plaque">Plaque</string>
+	<string name="poi_memorial_statue">Statue</string>
+	<string name="poi_memorial_stone">Stone</string>
+	<string name="poi_memorial_stele">Stele</string>
+	<string name="poi_memorial_bust">Bust</string>
+	<string name="poi_memorial_koshinto">Koshinto</string>
+	<string name="poi_memorial_blue_plaque">Blue plaque</string>
+	<string name="poi_memorial_jizo">Jizo</string>
+	<string name="poi_memorial_cross">Cross</string>
+	<string name="poi_memorial_vehicle">Vehicle</string>
+	<string name="poi_memorial_obelisk">Obelisk</string>
 
 </resources>
