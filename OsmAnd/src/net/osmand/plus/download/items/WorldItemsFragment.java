@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.MenuItemCompat;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -11,6 +12,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -21,26 +23,34 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.WorldRegion;
 import net.osmand.plus.download.DownloadActivity;
+<<<<<<< HEAD:OsmAnd/src/net/osmand/plus/download/items/WorldItemsFragment.java
+import net.osmand.plus.download.newimplementation.MapsInCategoryFragment;
+=======
 import net.osmand.plus.download.newimplementation.DownloadsUiInitHelper;
+>>>>>>> 380dcbe6d79e0f54421d0b67ce3688dfe910e78e:OsmAnd/src/net/osmand/plus/download/items/DownloadItemsFragment.java
 
 import org.apache.commons.logging.Log;
 
 import java.text.MessageFormat;
 import java.util.Locale;
 
-public class DownloadItemsFragment extends Fragment {
-	private static final Log LOG = PlatformUtil.getLog(DownloadItemsFragment.class);
+public class WorldItemsFragment extends Fragment {
+	public static final String TAG = "WorldItemsFragment";
+	private static final Log LOG = PlatformUtil.getLog(WorldItemsFragment.class);
 	private static final MessageFormat formatGb = new MessageFormat("{0, number,<b>#.##</b>} GB", Locale.US);
 
 	public static final int RELOAD_ID = 0;
 
 	private ItemsListBuilder builder;
 	private WorldRegionsAdapter worldRegionsAdapter;
-	private WorldMapAdapter worldMapAdapter;
+	private WorldMapsAdapter worldMapsAdapter;
 	private VoicePromtsAdapter voicePromtsAdapter;
 
+	private TextView worldRegionsTextView;
 	private ListView worldRegionsListView;
-	private ListView worldMapListView;
+	private TextView worldMapsTextView;
+	private ListView worldMapsListView;
+	private TextView voicePromtsTextView;
 	private ListView voicePromtsListView;
 
 	@Override
@@ -54,28 +64,37 @@ public class DownloadItemsFragment extends Fragment {
 		View view = inflater.inflate(R.layout.download_index_fragment, container, false);
 
 		builder = new ItemsListBuilder(getMyApplication(), getMyApplication().getWorldRegion());
-		boolean hasBuilt = builder.build();
 
+		worldRegionsTextView = (TextView) view.findViewById(R.id.list_world_regions_title);
+		worldRegionsTextView.setText("World regions".toUpperCase());
 		worldRegionsListView = (ListView) view.findViewById(R.id.list_world_regions);
 		worldRegionsAdapter = new WorldRegionsAdapter(getActivity(), getMyApplication());
 		worldRegionsListView.setAdapter(worldRegionsAdapter);
-		if (hasBuilt) {
-			fillWorldRegionsAdapter();
-		}
+		worldRegionsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				WorldRegion region = worldRegionsAdapter.getItem(position);
 
-		worldMapListView = (ListView) view.findViewById(R.id.list_world_map);
-		worldMapAdapter = new WorldMapAdapter(getActivity(), getMyApplication());
-		worldMapListView.setAdapter(worldMapAdapter);
-		if (hasBuilt) {
-			fillWorldMapAdapter();
-		}
+				FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
+				fragmentTransaction.addToBackStack(null);
+				LocalDialogFragment.createInstance(region)
+						.show(fragmentTransaction, MapsInCategoryFragment.TAG);
+			}
+		});
 
+		worldMapsTextView = (TextView) view.findViewById(R.id.list_world_maps_title);
+		worldMapsTextView.setText("World maps".toUpperCase());
+		worldMapsListView = (ListView) view.findViewById(R.id.list_world_maps);
+		worldMapsAdapter = new WorldMapsAdapter(getActivity());
+		worldMapsListView.setAdapter(worldMapsAdapter);
+
+		voicePromtsTextView = (TextView) view.findViewById(R.id.list_voice_promts_title);
+		voicePromtsTextView.setText("Voice promts".toUpperCase());
 		voicePromtsListView = (ListView) view.findViewById(R.id.list_voice_promts);
 		voicePromtsAdapter = new VoicePromtsAdapter(getActivity(), getMyApplication());
 		voicePromtsListView.setAdapter(voicePromtsAdapter);
-		if (hasBuilt) {
-			fillVoicePromtsAdapter();
-		}
+
+		onCategorizationFinished();
 
 		DownloadsUiInitHelper.initFreeVersionBanner(view,
 				getMyApplication().getSettings(), getResources());
@@ -111,15 +130,15 @@ public class DownloadItemsFragment extends Fragment {
 		if (worldRegionsAdapter != null) {
 			worldRegionsAdapter.clear();
 			worldRegionsAdapter.addAll(builder.getRegionsFromAllItems());
-			setListViewHeightBasedOnChildren(worldRegionsListView);
+			updateVisibility(worldRegionsAdapter, worldRegionsTextView, worldRegionsListView);
 		}
 	}
 
-	private void fillWorldMapAdapter() {
-		if (worldMapAdapter != null) {
-			worldMapAdapter.clear();
-			worldMapAdapter.addAll(builder.getRegionMapItems());
-			setListViewHeightBasedOnChildren(worldMapListView);
+	private void fillWorldMapsAdapter() {
+		if (worldMapsAdapter != null) {
+			worldMapsAdapter.clear();
+			worldMapsAdapter.addAll(builder.getRegionMapItems());
+			updateVisibility(worldMapsAdapter, worldMapsTextView, worldMapsListView);
 		}
 	}
 
@@ -127,6 +146,18 @@ public class DownloadItemsFragment extends Fragment {
 		if (voicePromtsAdapter != null) {
 			voicePromtsAdapter.clear();
 			//voicePromtsAdapter.addAll(cats);
+			updateVisibility(voicePromtsAdapter, voicePromtsTextView, voicePromtsListView);
+		}
+	}
+
+	private void updateVisibility(ArrayAdapter adapter, TextView textView, ListView listView) {
+		if (adapter.isEmpty()) {
+			textView.setVisibility(View.GONE);
+			listView.setVisibility(View.GONE);
+		} else {
+			textView.setVisibility(View.VISIBLE);
+			listView.setVisibility(View.VISIBLE);
+			setListViewHeightBasedOnChildren(listView);
 		}
 	}
 
@@ -154,7 +185,7 @@ public class DownloadItemsFragment extends Fragment {
 	public void onCategorizationFinished() {
 		if (builder.build()) {
 			fillWorldRegionsAdapter();
-			fillWorldMapAdapter();
+			fillWorldMapsAdapter();
 			fillVoicePromtsAdapter();
 		}
 	}
@@ -191,30 +222,25 @@ public class DownloadItemsFragment extends Fragment {
 		}
 	}
 
-	private static class WorldMapAdapter extends ArrayAdapter<ItemsListBuilder.ResourceItem> {
-		private final OsmandApplication osmandApplication;
+	private static class WorldMapsAdapter extends ArrayAdapter<ItemsListBuilder.ResourceItem> {
 
-		public WorldMapAdapter(Context context, OsmandApplication osmandApplication) {
+		public WorldMapsAdapter(Context context) {
 			super(context, R.layout.simple_list_menu_item);
-			this.osmandApplication = osmandApplication;
 		}
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			ViewHolder viewHolder;
+			ItemViewHolder viewHolder;
 			if (convertView == null) {
 				convertView = LayoutInflater.from(parent.getContext())
-						.inflate(R.layout.simple_list_menu_item, parent, false);
-				viewHolder = new ViewHolder();
-				viewHolder.textView = (TextView) convertView.findViewById(R.id.title);
+						.inflate(R.layout.two_line_with_images_list_item, parent, false);
+				viewHolder = new ItemViewHolder(convertView);
 				convertView.setTag(viewHolder);
 			} else {
-				viewHolder = (ViewHolder) convertView.getTag();
+				viewHolder = (ItemViewHolder) convertView.getTag();
 			}
-			Drawable iconLeft = osmandApplication.getIconsCache()
-					.getContentIcon(R.drawable.ic_world_globe_dark);
-			viewHolder.textView.setCompoundDrawablesWithIntrinsicBounds(iconLeft, null, null, null);
-			viewHolder.textView.setText(getItem(position).getTitle());
+			ItemsListBuilder.ResourceItem item = getItem(position);
+			viewHolder.bindIndexItem(item.getIndexItem(), (DownloadActivity) getContext(), false, false);
 			return convertView;
 		}
 

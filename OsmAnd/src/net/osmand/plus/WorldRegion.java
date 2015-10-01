@@ -7,6 +7,7 @@ import net.osmand.data.LatLon;
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.download.DownloadActivityType;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -14,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public class WorldRegion {
+public class WorldRegion implements Serializable {
 
 	public static final String AFRICA_REGION_ID = "africa";
 	public static final String ASIA_REGION_ID = "asia";
@@ -127,14 +128,14 @@ public class WorldRegion {
 		this.regionId = regionId;
 		String downloadName = osmandRegions.getDownloadName(regionId);
 		if (downloadName != null) {
-			downloadsIdPrefix = downloadName + ".";
+			downloadsIdPrefix = downloadName.toLowerCase() + ".";
 			if (name != null) {
 				this.name = name;
 			} else {
 				this.name = osmandRegions.getLocaleName(downloadName);
 			}
 		} else {
-			this.downloadsIdPrefix = regionId + ".";
+			this.downloadsIdPrefix = regionId.toLowerCase() + ".";
 			this.name = name;
 		}
 		return this;
@@ -144,10 +145,10 @@ public class WorldRegion {
 		this.regionId = regionId;
 		String downloadName = osmandRegions.getDownloadName(regionId);
 		if (downloadName != null) {
-			downloadsIdPrefix = downloadName + ".";
-			this.name = osmandRegions.getLocaleName(regionId);
+			downloadsIdPrefix = downloadName.toLowerCase() + ".";
+			this.name = osmandRegions.getLocaleName(downloadName);
 		} else {
-			this.downloadsIdPrefix = regionId + ".";
+			this.downloadsIdPrefix = regionId.toLowerCase() + ".";
 			this.name = regionId;
 		}
 		return this;
@@ -155,7 +156,7 @@ public class WorldRegion {
 
 	private WorldRegion init(String regionId, String name) {
 		this.regionId = regionId;
-		this.downloadsIdPrefix = regionId + ".";
+		this.downloadsIdPrefix = regionId.toLowerCase() + ".";
 		this.name = name;
 		return this;
 	}

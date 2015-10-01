@@ -9,6 +9,7 @@ import net.osmand.plus.WorldRegion;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.mapcontextmenu.editors.PointEditor;
 import net.osmand.util.Algorithms;
 
 import java.util.Collections;
@@ -17,6 +18,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class ItemsListBuilder {
 
@@ -92,16 +95,16 @@ public class ItemsListBuilder {
 			String str2;
 
 			if (obj1 instanceof WorldRegion) {
-				str1 = ((WorldRegion)obj1).getName();
+				str1 = ((WorldRegion) obj1).getName();
 			} else {
-				ResourceItem item = (ResourceItem)obj1;
+				ResourceItem item = (ResourceItem) obj1;
 				str1 = item.title + item.getIndexItem().getType().getTag();
 			}
 
 			if (obj2 instanceof WorldRegion) {
-				str2 = ((WorldRegion)obj2).getName();
+				str2 = ((WorldRegion) obj2).getName();
 			} else {
-				ResourceItem item = (ResourceItem)obj2;
+				ResourceItem item = (ResourceItem) obj2;
 				str2 = item.title + item.getIndexItem().getType().getTag();
 			}
 
@@ -114,6 +117,8 @@ public class ItemsListBuilder {
 	private static Map<WorldRegion, Map<String, IndexItem>> resourcesByRegions =
 			new HashMap<>();
 	private static List<WorldRegion> searchableWorldwideRegionItems = new LinkedList<>();
+	private static final Lock lock = new ReentrantLock();
+
 
 	private List<ResourceItem> regionMapItems;
 	private List allResourceItems;
@@ -122,7 +127,6 @@ public class ItemsListBuilder {
 	private OsmandApplication app;
 	private WorldRegion region;
 
-	private boolean invalidated;
 	private boolean srtmDisabled;
 	private boolean hasSrtm;
 
@@ -138,7 +142,7 @@ public class ItemsListBuilder {
 		List<WorldRegion> list = new LinkedList<>();
 		for (Object obj : allResourceItems) {
 			if (obj instanceof WorldRegion) {
-				list.add((WorldRegion)obj);
+				list.add((WorldRegion) obj);
 			}
 		}
 		return list;
@@ -157,18 +161,20 @@ public class ItemsListBuilder {
 	}
 
 	public boolean build() {
-		return obtainDataAndItems();
+		if (lock.tryLock()) {
+			try {
+				return obtainDataAndItems();
+			} finally {
+				lock.unlock();
+			}
+		} else {
+			return false;
+		}
 	}
 
 	private boolean obtainDataAndItems() {
-		if (invalidated) {
-			resourcesByRegions.clear();
-		}
-
-		if (resourcesByRegions.isEmpty()) {
-			if (!prepareData()) {
-				return false;
-			}
+		if (resourcesByRegions.isEmpty() || region == null) {
+			return false;
 		}
 
 		collectSubregionsDataAndItems();
@@ -182,97 +188,99 @@ public class ItemsListBuilder {
 		LOG.warn("getAllResourceItems >>>");
 		for (Object obj : getAllResourceItems()) {
 			if (obj instanceof WorldRegion) {
-				WorldRegion item = (WorldRegion)obj;
+				WorldRegion item = (WorldRegion) obj;
 				LOG.warn("W resId=" + item.getRegionId() + " title=" + item.getName());
 			} else if (obj instanceof ResourceItem) {
-				ResourceItem resourceItem = (ResourceItem)obj;
+				ResourceItem resourceItem = (ResourceItem) obj;
 				LOG.warn("R resId=" + resourceItem.getIndexItem().getFileName() + " title=" + resourceItem.getTitle());
 			}
 		}
 
-		invalidated = false;
-
 		return true;
 	}
 
-	public void invalidate() {
-		invalidated = true;
-	}
+	public static boolean prepareData(OsmandApplication app, List<IndexItem> resources) {
+		lock.lock();
+		try {
+			List<IndexItem> resourcesInRepository;
+			if (resources != null) {
+				resourcesInRepository = resources;
+			} else {
+				resourcesInRepository = DownloadActivity.downloadListIndexThread.getCachedIndexFiles();
+			}
+			if (resourcesInRepository == null) {
+				return false;
+			}
 
-	private boolean prepareData() {
-		List<IndexItem> resourcesInRepository = DownloadActivity.downloadListIndexThread.getCachedIndexFiles();
-		if (resourcesInRepository == null) {
-			return false;
-		}
+			boolean doInit = resourcesByRegions.isEmpty();
+			boolean initSearchableRegions = searchableWorldwideRegionItems.isEmpty() || doInit;
 
-		boolean doInit = resourcesByRegions.isEmpty();
-		boolean initSearchableRegions = searchableWorldwideRegionItems.isEmpty() || doInit;
-
-		if (initSearchableRegions) {
-			searchableWorldwideRegionItems.clear();
-		}
-
-		List<WorldRegion> mergedRegions = app.getWorldRegion().getFlattenedSubregions();
-		mergedRegions.add(app.getWorldRegion());
-		for(WorldRegion region : mergedRegions)
-		{
 			if (initSearchableRegions) {
-				searchableWorldwideRegionItems.add(region);
+				searchableWorldwideRegionItems.clear();
 			}
 
-			String downloadsIdPrefix = region.getDownloadsIdPrefix().toLowerCase();
-
-			Map<String, IndexItem> regionResources = new HashMap<>();
-
-			if (!doInit)
-			{
-				regionResources.putAll(resourcesByRegions.get(region));
-			}
-
-			if (doInit)
-			{
-				List<DownloadActivityType> typesArray = new LinkedList<>();
-				boolean hasSrtm = false;
-				for (IndexItem resource : resourcesInRepository)
-				{
-					if (!resource.getFileName().startsWith(downloadsIdPrefix))
-						continue;
-
-					if (resource.getType() == DownloadActivityType.SRTM_COUNTRY_FILE) {
-						hasSrtm = true;
-					}
-
-					typesArray.add(resource.getType());
-
-					regionResources.put(resource.getFileName(), resource);
+			List<WorldRegion> mergedRegions = app.getWorldRegion().getFlattenedSubregions();
+			mergedRegions.add(app.getWorldRegion());
+			for (WorldRegion region : mergedRegions) {
+				if (initSearchableRegions) {
+					searchableWorldwideRegionItems.add(region);
 				}
 
-				if (region.getSuperregion() != null && hasSrtm && region.getSuperregion().getSuperregion() != app.getWorldRegion())
-				{
-					if (!region.getSuperregion().getResourceTypes().contains(DownloadActivityType.SRTM_COUNTRY_FILE))
-					{
-						region.getSuperregion().getResourceTypes().add(DownloadActivityType.SRTM_COUNTRY_FILE);
-						Collections.sort(region.getSuperregion().getResourceTypes(), new Comparator<DownloadActivityType>() {
-							@Override
-							public int compare(DownloadActivityType dat1, DownloadActivityType dat2) {
-								return dat1.getTag().compareTo(dat2.getTag());
-							}
-						});
-					}
+				String downloadsIdPrefix = region.getDownloadsIdPrefix();
+
+				Map<String, IndexItem> regionResources = new HashMap<>();
+
+				if (!doInit) {
+					regionResources.putAll(resourcesByRegions.get(region));
 				}
 
-				Collections.sort(typesArray, new Comparator<DownloadActivityType>() {
-					@Override
-					public int compare(DownloadActivityType dat1, DownloadActivityType dat2) {
-						return dat1.getTag().compareTo(dat2.getTag());
-					}
-				});
-				region.setResourceTypes(typesArray);
-			}
+				if (doInit) {
+					List<DownloadActivityType> typesArray = new LinkedList<>();
+					boolean hasSrtm = false;
 
-			resourcesByRegions.put(region, regionResources);
+					for (IndexItem resource : resourcesInRepository) {
+
+						if (!resource.getSimplifiedFileName().startsWith(downloadsIdPrefix)) {
+							continue;
+						}
+
+						if (resource.getType() == DownloadActivityType.SRTM_COUNTRY_FILE) {
+							hasSrtm = true;
+						}
+
+						typesArray.add(resource.getType());
+
+						regionResources.put(resource.getSimplifiedFileName(), resource);
+					}
+
+					if (region.getSuperregion() != null && hasSrtm && region.getSuperregion().getSuperregion() != app.getWorldRegion()) {
+						if (!region.getSuperregion().getResourceTypes().contains(DownloadActivityType.SRTM_COUNTRY_FILE)) {
+							region.getSuperregion().getResourceTypes().add(DownloadActivityType.SRTM_COUNTRY_FILE);
+							Collections.sort(region.getSuperregion().getResourceTypes(), new Comparator<DownloadActivityType>() {
+								@Override
+								public int compare(DownloadActivityType dat1, DownloadActivityType dat2) {
+									return dat1.getTag().compareTo(dat2.getTag());
+								}
+							});
+						}
+					}
+
+					Collections.sort(typesArray, new Comparator<DownloadActivityType>() {
+						@Override
+						public int compare(DownloadActivityType dat1, DownloadActivityType dat2) {
+							return dat1.getTag().compareTo(dat2.getTag());
+						}
+					});
+					region.setResourceTypes(typesArray);
+				}
+
+				resourcesByRegions.put(region, regionResources);
+			}
+			return true;
+
+		} finally {
+			lock.unlock();
 		}
-		return true;
 	}
 
 	private void collectSubregionsDataAndItems() {
@@ -286,10 +294,8 @@ public class ItemsListBuilder {
 		allSubregionItems.clear();
 		regionMapItems.clear();
 
-		for (WorldRegion subregion : region.getFlattenedSubregions())
-		{
-			if (subregion.getSuperregion() == region)
-			{
+		for (WorldRegion subregion : region.getFlattenedSubregions()) {
+			if (subregion.getSuperregion() == region) {
 				if (subregion.getFlattenedSubregions().size() > 0) {
 					allSubregionItems.add(subregion);
 				} else {
@@ -316,26 +322,24 @@ public class ItemsListBuilder {
 			}
 
 			ResourceItem resItem = new ResourceItem(indexItem, region);
-			resItem.setResourceId(indexItem.getFileName());
+			resItem.setResourceId(indexItem.getSimplifiedFileName());
 			resItem.setTitle(name);
 			resItem.setContentSize(indexItem.getContentSize());
 			resItem.setContainerSize(indexItem.getSize());
 
-				if (region != this.region && srtmDisabled)
-				{
-					if (hasSrtm && indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE)
-						continue;
+			if (region != this.region && srtmDisabled) {
+				if (hasSrtm && indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE)
+					continue;
 
-					if (indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE)
-					{
-						resItem.setTitle("srtm_disabled"); // todo: constant
-						resItem.setContentSize(0);
-						resItem.setContainerSize(0);
-					}
-
-					if (!hasSrtm && indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE)
-						hasSrtm = true;
+				if (indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE) {
+					resItem.setTitle("srtm_disabled"); // todo: constant
+					resItem.setContentSize(0);
+					resItem.setContainerSize(0);
 				}
+
+				if (!hasSrtm && indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE)
+					hasSrtm = true;
+			}
 
 
 			if (region == this.region) {

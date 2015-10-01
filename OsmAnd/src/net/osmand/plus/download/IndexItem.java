@@ -25,6 +25,7 @@ public class IndexItem implements Comparable<IndexItem>, HasName, Parcelable {
 	
 	String description;
 	String fileName;
+	String simplifiedFileName;
 	String size;
 	long timestamp;
 	long contentSize;
@@ -37,6 +38,7 @@ public class IndexItem implements Comparable<IndexItem>, HasName, Parcelable {
 	public IndexItem(String fileName, String description, long timestamp, String size, long contentSize,
 			long containerSize, DownloadActivityType tp) {
 		this.fileName = fileName;
+		this.simplifiedFileName = fileName.toLowerCase().replace("_2.", ".");
 		this.description = description;
 		this.timestamp = timestamp;
 		this.size = size;
@@ -51,6 +53,10 @@ public class IndexItem implements Comparable<IndexItem>, HasName, Parcelable {
 
 	public String getFileName() {
 		return fileName;
+	}
+
+	public String getSimplifiedFileName() {
+		return simplifiedFileName;
 	}
 
 	public String getDescription() {
@@ -160,6 +166,7 @@ public class IndexItem implements Comparable<IndexItem>, HasName, Parcelable {
 		return "IndexItem{" +
 				"description='" + description + '\'' +
 				", fileName='" + fileName + '\'' +
+				", simplifiedFileName='" + simplifiedFileName + '\'' +
 				", size='" + size + '\'' +
 				", timestamp=" + timestamp +
 				", contentSize=" + contentSize +
@@ -185,6 +192,7 @@ public class IndexItem implements Comparable<IndexItem>, HasName, Parcelable {
 		dest.writeParcelable(this.type, flags);
 		dest.writeByte(extra ? (byte) 1 : (byte) 0);
 		dest.writeString(this.initializedName);
+		dest.writeString(this.simplifiedFileName);
 	}
 
 	protected IndexItem(Parcel in) {
@@ -197,6 +205,7 @@ public class IndexItem implements Comparable<IndexItem>, HasName, Parcelable {
 		this.type = in.readParcelable(DownloadActivityType.class.getClassLoader());
 		this.extra = in.readByte() != 0;
 		this.initializedName = in.readString();
+		this.simplifiedFileName = in.readString();
 	}
 
 	public static final Parcelable.Creator<IndexItem> CREATOR = new Parcelable.Creator<IndexItem>() {

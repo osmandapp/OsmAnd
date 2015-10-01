@@ -32,7 +32,7 @@ import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.activities.OsmandExpandableListFragment;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.base.BasicProgressAsyncTask;
-import net.osmand.plus.download.items.DownloadItemsFragment;
+import net.osmand.plus.download.items.WorldItemsFragment;
 import net.osmand.plus.download.newimplementation.IndexItemCategoryWithSubcat;
 import net.osmand.plus.download.newimplementation.NewLocalIndexesFragment;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
@@ -123,7 +123,7 @@ public class DownloadActivity extends BaseDownloadActivity {
 //		mTabs.add(new TabActivity.TabItem(R.string.download_tab_local,
 //				getString(R.string.download_tab_local), NewLocalIndexesFragment.class));
 		mTabs.add(new TabActivity.TabItem(R.string.download_tab_local,
-				getString(R.string.download_tab_local), DownloadItemsFragment.class));
+				getString(R.string.download_tab_local), WorldItemsFragment.class));
 
 		viewPager.setAdapter(new TabActivity.OsmandFragmentPagerAdapter(getSupportFragmentManager(), mTabs));
 		mSlidingTabLayout.setViewPager(viewPager);
@@ -343,9 +343,9 @@ public class DownloadActivity extends BaseDownloadActivity {
 	public void onCategorizationFinished() {
 		for (WeakReference<Fragment> ref : fragSet) {
 			Fragment f = ref.get();
-			if (f instanceof DownloadItemsFragment) {
+			if (f instanceof WorldItemsFragment) {
 				if (f.isAdded()) {
-					((DownloadItemsFragment) f).onCategorizationFinished();
+					((WorldItemsFragment) f).onCategorizationFinished();
 				}
 			}
 		}

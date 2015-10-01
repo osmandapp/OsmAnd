@@ -15,13 +15,14 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/list_world_regions_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
                 android:text="World Regions"
-                android:textSize="@dimen/default_list_text_size"/>
+                android:textSize="@dimen/default_desc_text_size"/>
 
             <ListView
                 android:id="@+id/list_world_regions"
@@ -32,16 +33,17 @@
                 android:scrollbars="none"/>
 
             <TextView
+                android:id="@+id/list_world_maps_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
-                android:text="World Map"
-                android:textSize="@dimen/default_list_text_size"/>
+                android:text="World Maps"
+                android:textSize="@dimen/default_desc_text_size"/>
 
             <ListView
-                android:id="@+id/list_world_map"
+                android:id="@+id/list_world_maps"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:groupIndicator="@android:color/transparent"
@@ -49,13 +51,14 @@
                 android:scrollbars="none"/>
 
             <TextView
+                android:id="@+id/list_voice_promts_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
                 android:text="Voice Promts"
-                android:textSize="@dimen/default_list_text_size"/>
+                android:textSize="@dimen/default_desc_text_size"/>
 
             <ListView
                 android:id="@+id/list_voice_promts"
