@@ -1996,4 +1996,5 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="unsaved_changes_will_be_lost">Any unsaved changes will be lost. Continue?</string>
 	<string name="downloads_left_template">%1$s downloads left</string>
 	<string name="roads">Roads</string>
+    <string name="downloading_number_of_fiels">Downloding - %1$d file</string>
 </resources>

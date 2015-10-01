@@ -2033,7 +2033,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="shared_string_manage">Gestisci</string>
 	<string name="shared_string_edit">Modifica</string>
 	<string name="filter_poi_hint">Filtra per nome</string>
-    <string name="search_poi_category_hint">Digita per cercare fra tutti i PDI</string>
+    <string name="search_poi_category_hint">Scrivi per cercare fra tutti i PDI</string>
     <string name="index_name_netherlands">Europa - Paesi Bassi</string>
 	<string name="copying_osmand_file_failed">Copia dei file fallita</string>    
     <string name="storage_directory_external">Memoria esterna</string>
@@ -2127,7 +2127,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="we_really_care">Ci teniamo molto</string>
 	<string name="rate_this_app">Valuta questa app</string>
 	<string name="user_hates_app_get_feedback">Dicci perché.</string>
-	<string name="rate_this_app_long">Per favore dai a OsmAnd la tua valutazione su Google Play</string>
+	<string name="rate_this_app_long">Dai a OsmAnd un punteggio su Google Play</string>
 	<string name="user_hates_app_get_feedback_long">Dicci cosa cambieresti in questa app.</string>
 <string name="download_live_updates">Aggiornamenti automatici</string>
 	<string name="failed_to_upload">Caricamento fallito</string>

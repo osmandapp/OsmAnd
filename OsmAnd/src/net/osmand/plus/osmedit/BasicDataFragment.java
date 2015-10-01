@@ -36,7 +36,7 @@ import net.osmand.util.OpeningHoursParser.BasicOpeningHourRule;
 import org.apache.commons.logging.Log;
 
 public class BasicDataFragment extends Fragment
-		implements EditPoiFragment.OnFragmentActivatedListener{
+		implements EditPoiFragment.OnFragmentActivatedListener {
 	private static final String TAG = "BasicDataFragment";
 	private static final Log LOG = PlatformUtil.getLog(BasicDataFragment.class);
 	private static final String OPENING_HOURS = "opening_hours";
@@ -126,29 +126,6 @@ public class BasicDataFragment extends Fragment
 		return (OsmandApplication) getActivity().getApplication();
 	}
 
-	@Override
-	public void onResume() {
-		super.onResume();
-		
-		// FIXME opening hours
-//		@Override
-//		public void process(			String openingHoursString ) {
-//					parseOpenedHoursHandleErrors(openingHoursString);
-//			if (openingHours == null) {
-//				openingHours = new OpeningHoursParser.OpeningHours();
-//			}
-//			LOG.debug("openingHours=" + openingHours);
-//			adapter.replaceOpeningHours(openingHours);
-//			adapter.updateViews();
-//		}
-//
-//		@Override
-//		public void onUntriggered() {
-//			adapter.replaceOpeningHours(new OpeningHoursParser.OpeningHours());
-//			adapter.updateViews();
-//		}
-	}
-
 	protected void addTextWatcher(final String tag, final EditText e) {
 		e.addTextChangedListener(new TextWatcher() {
 
@@ -186,26 +163,12 @@ public class BasicDataFragment extends Fragment
 	}
 
 
-
 	private EditPoiFragment getEditPoiFragment() {
 		return (EditPoiFragment) getParentFragment();
 	}
 
 	private EditPoiData getData() {
 		return getEditPoiFragment().getEditPoiData();
-	}
-
-	private static String formatTime(int h, int t) {
-		StringBuilder b = new StringBuilder();
-		if (h < 10) {
-			b.append("0"); //$NON-NLS-1$
-		}
-		b.append(h).append(":"); //$NON-NLS-1$
-		if (t < 10) {
-			b.append("0"); //$NON-NLS-1$
-		}
-		b.append(t);
-		return b.toString();
 	}
 
 	@Override
@@ -220,6 +183,16 @@ public class BasicDataFragment extends Fragment
 				.get(OSMSettings.OSMTagKey.WEBSITE.getValue()));
 		descriptionEditText.setText(getData().getTagValues()
 				.get(OSMSettings.OSMTagKey.DESCRIPTION.getValue()));
+
+		OpeningHoursParser.OpeningHours openingHours =
+				OpeningHoursParser.parseOpenedHoursHandleErrors(getData().getTagValues()
+						.get(OSMSettings.OSMTagKey.OPENING_HOURS.getValue()));
+		if (openingHours == null) {
+			openingHours = new OpeningHoursParser.OpeningHours();
+		}
+		LOG.debug("openingHours=" + openingHours);
+		mOpeningHoursAdapter.replaceOpeningHours(openingHours);
+		mOpeningHoursAdapter.updateViews();
 	}
 
 	private class OpeningHoursAdapter {
@@ -282,10 +255,10 @@ public class BasicDataFragment extends Fragment
 				daysTextView.setText(stringBuilder.toString());
 
 				TextView openingTextView = (TextView) view.findViewById(R.id.openingTextView);
-				openingTextView.setText(Algorithms.formatDuration(rule.getStartTime() * 60));
+				openingTextView.setText(Algorithms.formatMinutesDuration(rule.getStartTime()));
 
 				TextView closingTextView = (TextView) view.findViewById(R.id.closingTextView);
-				closingTextView.setText(Algorithms.formatDuration(rule.getStartTime() * 60));
+				closingTextView.setText(Algorithms.formatMinutesDuration(rule.getEndTime()));
 				timeContainer.setVisibility(View.VISIBLE);
 
 				daysTextView.setOnClickListener(new View.OnClickListener() {

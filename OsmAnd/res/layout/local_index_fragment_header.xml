@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:background="@color/ctx_menu_info_view_bg_dark"
@@ -9,11 +8,13 @@
     <include layout="@layout/free_version_banner"/>
 
     <LinearLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:layout_margin="4dp"
         android:background="?attr/bg_card"
-        android:orientation="vertical"
         android:padding="10dp">
 
         <LinearLayout
@@ -23,14 +24,15 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/leftTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:text="@string/device_memory"/>
+                tools:text="@string/device_memory"/>
 
             <TextView
-                android:id="@+id/memory_size"
+                android:id="@+id/rightTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -38,7 +40,7 @@
         </LinearLayout>
 
         <ProgressBar
-            android:id="@+id/memory_progress"
+            android:id="@+id/progressBar"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="fill_parent"
             android:layout_height="20dp"

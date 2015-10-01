@@ -1484,4 +1484,6 @@
 	<string name="poi_payment_routex_no">不接受 Routex 燃料卡</string>
 	<string name="poi_payment_bancomat_yes">接受 Bancomat</string>
 	<string name="poi_payment_bancomat_no">不接受 Bancomat</string>
+	<string name="poi_payment_icsf_yes">接受 IC 儲值卡</string>
+	<string name="poi_payment_icsf_no">不接受 IC 儲值卡</string>
 	</resources>

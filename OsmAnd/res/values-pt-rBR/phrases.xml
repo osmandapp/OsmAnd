@@ -910,17 +910,17 @@
 	<string name="poi_operator">Operador</string>
 	<string name="poi_brand">Bandeira</string>
 
-	<string name="poi_enforcement_traffic_signals">Fiscalização:semáforo</string>
-	<string name="poi_enforcement_maxspeed">Fiscalização:velocidade máxima</string>
-	<string name="poi_enforcement_maxheight">Fiscalização:peso máximo</string>
-	<string name="poi_enforcement_mindistance">Fiscalização:distância mínima</string>
-	<string name="poi_enforcement_access">Fiscalização:acesso</string>
-	<string name="poi_enforcement_toll">Fiscalização:pedágio</string>
+	<string name="poi_enforcement_traffic_signals">Fiscalização: semáforo</string>
+	<string name="poi_enforcement_maxspeed">Fiscalização: velocidade máxima</string>
+	<string name="poi_enforcement_maxheight">Fiscalização: peso máximo</string>
+	<string name="poi_enforcement_mindistance">Fiscalização: distância mínima</string>
+	<string name="poi_enforcement_access">Fiscalização: acesso</string>
+	<string name="poi_enforcement_toll">Fiscalização: pedágio</string>
 
 <string name="poi_conservation">Área de conservação</string>
 
 	<string name="poi_collection_times">Horário de coleta</string>
-	<string name="poi_enforcement_check">Fiscalização:verificação</string>
+	<string name="poi_enforcement_check">Fiscalização: verificação</string>
 	<string name="poi_cutline">Linha de corte</string>
 	<string name="poi_country">País</string>
 	<string name="poi_fee_yes">Taxa</string>
@@ -1023,8 +1023,8 @@
 	<string name="poi_recycling_bicycles">Bicicletas</string>
 
 	<string name="poi_shower">Chuveiro</string>
-	<string name="poi_drinking_water_yes">Água potável</string>
-	<string name="poi_drinking_water_no">Água impotável</string>
+	<string name="poi_drinking_water_yes">Com água potável</string>
+	<string name="poi_drinking_water_no">Sem água potável</string>
 	<string name="poi_supervised_yes">Supervisionado</string>
 	<string name="poi_supervised_no">Sem supervisão</string>
 	<string name="poi_seasonal_yes">Sazonal</string>
@@ -1277,9 +1277,9 @@
 	<string name="poi_information_terminal">Terminal de informação</string>
 	<string name="poi_information_route_marker">Marcador de rota</string>
 	<string name="poi_information_hikingmap">Mapa de caminhadas</string>
-	<string name="poi_information_nature">Informações sobre natureza</string>
-	<string name="poi_information_wildlife">Informações sobre vida selvagem</string>
-	<string name="poi_information_history">Informações sobre história</string>
+	<string name="poi_information_nature">Ponto de informação: natureza</string>
+	<string name="poi_information_wildlife">Ponto de informação: vida selvagem</string>
+	<string name="poi_information_history">Ponto de informação: história</string>
 	<string name="poi_information_sign">Placa</string>
 	<string name="poi_information_audioguide">Audioguia</string>
 	<string name="poi_information_bicyclemap">Mapa ciclístico</string>
@@ -1351,4 +1351,6 @@
 
 	<string name="poi_wheelchair_no">Cadeira de rodas: não permitido</string>
 	<string name="poi_wheelchair_limited">Cadeira de rodas: limitado</string>
+	<string name="poi_pump">Bomba</string>
+
 	</resources>
