@@ -2019,4 +2019,12 @@
     <string name="osmand_running_in_background">Körs i bakgrunden</string>
     <string name="favorite_category_add_new">Lägg till ny</string>
     <string name="favorite_category_select">Välj kategori</string>
+    <string name="downloading_number_of_fiels">Hämtar - %1$d fil</string>
+<string name="count_of_lines">Antal rader</string>
+	<string name="nm">nm</string>
+    <string name="nm_h">nmh</string>
+    <string name="min_mile">min/m</string>
+    <string name="min_km">min/km</string>
+    <string name="m_s">m/s</string>
+    
     </resources>
