@@ -637,7 +637,7 @@
 		<string name="poi_sightseeing">Vista turìstica</string>
 		<string name="poi_internet_access">Atzessu ìnternet</string>
 	<string name="poi_club">Tzirculu</string>
-	<string name="poi_cafe_and_restaurant">Tzilleri e ristorante</string>
+	<string name="poi_cafe_and_restaurant">Tzilleris e ristorantes</string>
 	<string name="poi_shop_food">Butega alimentare</string>
 	<string name="poi_road_obstacle">Impèigu/ostàculu istradale</string>
 		<string name="poi_accomodation">Allògiu</string>
@@ -1171,10 +1171,10 @@
 
 	<string name="poi_trees_olive">Olia</string>
 	<string name="poi_trees_apple">Mela</string>
-	<string name="poi_trees_oil">Ògiu de palma</string>
+	<string name="poi_trees_oil">Ògiu de prama</string>
 	<string name="poi_trees_orange">Arantzu</string>
 	<string name="poi_trees_almond">Mèndula</string>
-	<string name="poi_trees_banana">Bananu</string>
+	<string name="poi_trees_banana">Banana</string>
 	<string name="poi_trees_hazel">Nutzola</string>
 	<string name="poi_trees_coconut">Nughe de coco</string>
 	<string name="poi_trees_persimmon">Cachi</string>
@@ -1187,4 +1187,15 @@
 	<string name="poi_trees_kiwi">Kiwi</string>
 	<string name="poi_trees_meadow_orchard">Pradu cun fruttedu</string>
 	<string name="poi_trees_nectorine">Pèssighe-nughe</string>
+	<string name="poi_trees_mango">Mango</string>
+	<string name="poi_trees_rubber">Gomma</string>
+	<string name="poi_trees_date">Dàteru</string>
+	<string name="poi_trees_coffea">Cafè</string>
+	<string name="poi_trees_pomegranate">Mela granada</string>
+
+	<string name="poi_urban">Urbanu</string>
+	<string name="poi_rural">Rurale</string>
+
+	<string name="poi_memorial_statue">Istàtua</string>
+	<string name="poi_vending_bread">Pane</string>
 	</resources>
