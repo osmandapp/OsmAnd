@@ -1463,4 +1463,10 @@
 	<string name="lang_new">Newar / Nepal Bhasa</string>
     <string name="favorite_category_add_new">Yeni Ekle</string>
     <string name="favorite_category_select">Kategori Seç</string>
+    <string name="default_speed_system_descr">Hız ölçüm sistemini tanımlar</string>
+    <string name="default_speed_system">Hız Ölçümü</string>
+    <string name="si_nm">Deniz Mili</string>
+    <string name="si_m_s">Saniyede Metre</string>
+    <string name="si_min_km">Kilometre Başına Dakika</string>
+    <string name="si_mph">Saatte Mil</string>
     </resources>
