@@ -2100,7 +2100,7 @@
     <string name="osmand_running_in_background">Funtzionamentu in isfondu</string>
     <string name="favorite_category_add_new">Annanghe noa</string>
     <string name="favorite_category_select">Ischerta sa categoria</string>
-    <string name="default_speed_system_descr">Dislinda s’unidade de medida de sa lestresa</string>
+    <string name="default_speed_system_descr">Issèbera s’unidade de medida de sa lestresa</string>
     <string name="default_speed_system">Medida de sa lestresa</string>
     <string name="nm">nm</string>
     <string name="si_nm">Mìglios nàuticos</string>
