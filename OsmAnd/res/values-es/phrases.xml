@@ -1557,4 +1557,110 @@
 	<string name="poi_internet_access_fee_yes">Acceso a Internet tarifado</string>
 	<string name="poi_internet_access_fee_no">Acceso a Internet sin cargo</string>
 
+<string name="poi_payment_pikepass_designated">Acepta PIKEPASS (designado)</string>
+	<string name="poi_payment_routex_yes">Acepta tarjetas de combustible Routex</string>
+	<string name="poi_payment_routex_no">No acepta tarjetas de combustible Routex</string>
+	<string name="poi_payment_ep_quick_yes">Acepta tarjetas Quick</string>
+	<string name="poi_payment_ep_quick_no">No acepta tarjetas Quick</string>
+	<string name="poi_payment_ep_cash_yes">Acepta tarjeta de dinero (Geldkarte)</string>
+	<string name="poi_payment_ep_cash_no">No acepta tarjeta de dinero (Geldkarte)</string>
+	<string name="poi_payment_ep_minicash_yes">Acepta MiniCash</string>
+	<string name="poi_payment_ep_minicash_no">No acepta MiniCash</string>
+	<string name="poi_payment_ep_moneo_yes">Acepta Moneo</string>
+	<string name="poi_payment_ep_moneo_no">No acepta Moneo</string>
+	<string name="poi_payment_svg_yes">Acepta SVG</string>
+	<string name="poi_payment_svg_no">No acepta SVG</string>
+	<string name="poi_payment_meal_voucher_yes">Acepta vales de comida</string>
+	<string name="poi_payment_meal_voucher_no">No acepta vales de comida</string>
+	<string name="poi_payment_golden_crown_yes">Acepta tarjetas Golden Crown</string>
+	<string name="poi_payment_golden_crown_no">No acepta tarjetas Golden Crown</string>
+	<string name="poi_payment_mtsmoney_yes">Acepta MTS-Money</string>
+	<string name="poi_payment_mtsmoney_no">No acepta MTS-Money</string>
+	<string name="poi_events_venue">Lugar de eventos</string>
+
+	<string name="poi_diet_vegetarian_only">Sólo dieta vegetariana</string>
+	<string name="poi_diet_vegetarian_yes">Dieta vegetariana</string>
+	<string name="poi_diet_vegetarian_no">Sin dieta vegetariana</string>
+	<string name="poi_diet_vegetarian_few">Poca dieta vegetariana</string>
+	<string name="poi_diet_vegan_only">Sólo dieta vegana</string>
+	<string name="poi_diet_vegan_yes">Dieta vegana</string>
+	<string name="poi_diet_vegan_no">Sin dieta vegana</string>
+	<string name="poi_diet_gluten_free_only">Sólo dieta libre de gluten</string>
+	<string name="poi_diet_gluten_free_yes">Dieta libre de gluten</string>
+	<string name="poi_diet_gluten_free_no">Sin dieta libre de gluten</string>
+	<string name="poi_diet_kosher_only">Sólo dieta kosher</string>
+	<string name="poi_diet_kosher_yes">Dieta kosher</string>
+	<string name="poi_diet_kosher_no">Sin dieta kosher</string>
+	<string name="poi_diet_halal_only">Sólo dieta halal</string>
+	<string name="poi_diet_halal_yes">Dieta halal</string>
+	<string name="poi_diet_halal_no">Sin dieta halal</string>
+	<string name="poi_diet_lactose_free_only">Sólo dieta libre de lactosa</string>
+	<string name="poi_diet_lactose_free_yes">Dieta libre de lactosa</string>
+	<string name="poi_diet_lactose_free_no">Sin dieta libre de lactosa</string>
+	<string name="poi_diet_pescetarian_yes">Dieta pescetariana</string>
+
+	<string name="poi_drive_in_yes">Conducir dentro: si</string>
+	<string name="poi_drive_in_no">Conducir dentro: no</string>
+	<string name="poi_drive_through_yes">Autoservicio: si</string>
+	<string name="poi_drive_through_no">Autoservicio: no</string>
+
+	<string name="poi_brewery_additional">Nombre de cervecería</string>
+	<string name="poi_microbrewery_yes">Micro-cervecería</string>
+	<string name="poi_microbrewery_no">Sin micro-cervecería</string>
+
+	<string name="poi_takeaway_yes">Servicio de comida para llevar</string>
+	<string name="poi_takeaway_no">Sin servicio de comida para llevar</string>
+	<string name="poi_takeaway_only">Sólo servicio de comida para llevar</string>
+
+	<string name="poi_delivery_yes">Con delivery</string>
+	<string name="poi_delivery_no">Sin delivery</string>
+	<string name="poi_delivery_only">Sólo delivery</string>
+
+	<string name="poi_outdoor_seating_yes">Con asientos exteriores</string>
+	<string name="poi_outdoor_seating_no">Sin asientos exteriores</string>
+	<string name="poi_outdoor_seating_terrace">Asientos exteriores: terraza</string>
+	<string name="poi_outdoor_seating_sidewalk">Asientos exteriores: vereda</string>
+	<string name="poi_outdoor_seating_pedestrian_zone">Asientos exteriores: zona peatonal</string>
+	<string name="poi_outdoor_seating_garden">Asientos exteriores: jardín</string>
+	<string name="poi_outdoor_seating_patio">Asientos exteriores: patio</string>
+
+	<string name="poi_cocktails_yes">Con cócteles</string>
+
+	<string name="poi_second_hand_yes">Con artículos de segunda mano</string>
+	<string name="poi_second_hand_no">Sin artículos de segunda mano</string>
+	<string name="poi_second_hand_only">Sólo artículos de segunda mano</string>
+
+	<string name="poi_service_parts">Partes</string>
+	<string name="poi_service_dealer">Repartidor</string>
+	<string name="poi_service_repair">Reparación</string>
+	<string name="poi_service_repair_no">Sin reparación</string>
+	<string name="poi_service_electrical">Reparación de vehículos eléctricos</string>
+	<string name="poi_motorcycle_repair">Reparación de motocicletas</string>
+	<string name="poi_self_service_yes">Con autoservicio</string>
+	<string name="poi_self_service_no">Sin autoservicio</string>
+	<string name="poi_automated_yes">Automatizado</string>
+	<string name="poi_automated_no">No automatizado</string>
+	<string name="poi_full_service_yes">Servicio completo</string>
+	<string name="poi_aeroway_fuel">Estación de combustible para aviones</string>
+	<string name="poi_public_bath">Baño público</string>
+
+	<string name="poi_male_yes">Masculino</string>
+	<string name="poi_male_no">Prohibido para hombres</string>
+	<string name="poi_female_yes">Femenino</string>
+	<string name="poi_female_no">Prohibido para mujeres</string>
+	<string name="poi_indoor_yes">Cubierto (puertas adentro)</string>
+	<string name="poi_indoor_no">Al aire libre</string>
+	<string name="poi_toilets_yes">Con baños</string>
+	<string name="poi_toilets_no">Sin baños</string>
+	<string name="poi_toilets_wheelchair_yes">Acceso a los baños para sillas de rueda</string>
+	<string name="poi_toilets_wheelchair_no">Sin acceso a los baños para sillas de rueda</string>
+	<string name="poi_toilets_access_customers">Acceso a los baños: clientes</string>
+	<string name="poi_toilets_access_permissive">Acceso a los baños: permisivo</string>
+	<string name="poi_toilets_access_community">Acceso a los baños: comunidad</string>
+	<string name="poi_toilets_access_public">Acceso a los baños: público</string>
+
+	<string name="poi_diaper_yes">Con cambiador de pañales</string>
+	<string name="poi_diaper_no">Sin cambiador de pañales</string>
+	<string name="poi_diaper_room">Habitación para cambio de pañales</string>
+
 </resources>
