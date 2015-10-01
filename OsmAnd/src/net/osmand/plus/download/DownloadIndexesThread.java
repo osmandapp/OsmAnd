@@ -413,16 +413,14 @@ public class DownloadIndexesThread {
 			@Override
 			protected IndexFileList doInBackground(Void... params) {
 				IndexFileList indexFileList = DownloadOsmandIndexesHelper.getIndexesList(ctx);
-				indexFiles = indexFileList;
 				if (indexFileList != null) {
-					ItemsListBuilder builder = new ItemsListBuilder(app, app.getWorldRegion());
-					builder.invalidate();
-					builder.build();
+					ItemsListBuilder.prepareData(app, indexFileList.getIndexFiles());
 				}
 				return indexFileList;
 			}
 
 			protected void onPostExecute(IndexFileList result) {
+				indexFiles = result;
 				if (indexFiles != null && uiActivity != null) {
 					prepareFilesToUpdate();
 					boolean basemapExists = uiActivity.getMyApplication().getResourceManager().containsBasemap();
