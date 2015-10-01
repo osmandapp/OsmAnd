@@ -955,7 +955,7 @@
 	<string name="poi_access_private">Adgang privat</string>
 	<string name="poi_access_no">Ingen adgang</string>
 	<string name="poi_access_destination">Adgang destination</string>
-	<string name="poi_access_permissive">Adgang tolerant</string>
+	<string name="poi_access_permissive">Adgang med tilladelse</string>
 	<string name="poi_access_customers">Kundenadgang</string>
 	<string name="poi_access_delivery">Adgang for levering</string>
 	<string name="poi_access_agricultural">Adgang for landbrug</string>
@@ -1229,7 +1229,7 @@
 	<string name="poi_nudism_no">Naturisme: forbudt</string>
 	<string name="poi_nudism_obligatory">Naturisme: obligatorisk</string>
 	<string name="poi_nudism_customary">Naturisme: sædvane</string>
-	<string name="poi_nudism_permissive">Naturisme: liberalt</string>
+	<string name="poi_nudism_permissive">Naturisme: med tilladelse</string>
 
 	<string name="poi_height">Højde</string>
 	<string name="poi_ele">Højde over havoverfladen</string>
@@ -1381,7 +1381,7 @@
 	<string name="poi_piste_grooming_backcountry">Pistepreparering: offpiste</string>
 	<string name="poi_piste_grooming_scooter">Pistepreparering: snescooter</string>
 	<string name="poi_piste_grooming_skating">Pistepreparering: skating</string>
-	<string name="poi_piste_grooming_no">Pistepreparering: ingen</string>
+	<string name="poi_piste_grooming_no">Pistepreparering: nej</string>
 	<string name="poi_piste_grooming_mogul">Pistepreparering: pukkelpist</string>
 
 <string name="poi_garden_type_residential">Havetype: beboelse</string>
@@ -1593,4 +1593,94 @@
 	<string name="poi_internet_access_fee_yes">Internetadgang - gebyr</string>
 	<string name="poi_internet_access_fee_no">Internetadgang - inget gebyr</string>
 
-</resources>
+<string name="poi_diet_vegetarian_only">Kun vegetarkost</string>
+	<string name="poi_diet_vegetarian_yes">Vegetarkost</string>
+	<string name="poi_diet_vegetarian_no">Vegetarkost: nej</string>
+	<string name="poi_diet_vegetarian_few">Vegetarkost: kun få</string>
+	<string name="poi_diet_vegan_only">Kun veganerkost</string>
+	<string name="poi_diet_vegan_yes">Veganerkost</string>
+	<string name="poi_diet_vegan_no">Veganerkost: nej</string>
+	<string name="poi_diet_gluten_free_only">Kun glutenfri kost</string>
+	<string name="poi_diet_gluten_free_yes">Glutenfri kost</string>
+	<string name="poi_diet_gluten_free_no">Glutenfri kost: nej</string>
+	<string name="poi_diet_kosher_only">Kun kosher kost</string>
+	<string name="poi_diet_kosher_yes">Kosher kost</string>
+	<string name="poi_diet_kosher_no">Kosher kost: nej</string>
+	<string name="poi_diet_halal_only">Kun halal kost</string>
+	<string name="poi_diet_halal_yes">Halal kost</string>
+	<string name="poi_diet_halal_no">Halal kost: nej</string>
+	<string name="poi_diet_lactose_free_only">Kun laktosefri kost</string>
+	<string name="poi_diet_lactose_free_yes">Laktosefri kost</string>
+	<string name="poi_diet_lactose_free_no">Laktosefri kost: nej</string>
+	<string name="poi_diet_pescetarian_yes">pesco-vegetarkost</string>
+
+	<string name="poi_drive_in_yes">Drive-in: ja</string>
+	<string name="poi_drive_in_no">Drive-in: nej</string>
+	<string name="poi_drive_through_yes">Drive-through: ja</string>
+	<string name="poi_drive_through_no">Drive-through: nej</string>
+
+	<string name="poi_brewery_additional">Bryggeriet navn</string>
+	<string name="poi_microbrewery_yes">Mikrobryggeri</string>
+	<string name="poi_microbrewery_no">Ingen mikrobryggeri</string>
+
+	<string name="poi_takeaway_yes">Takeway</string>
+	<string name="poi_takeaway_no">Ingen takeaway</string>
+	<string name="poi_takeaway_only">Kun takeaway</string>
+
+	<string name="poi_delivery_yes">Levering</string>
+	<string name="poi_delivery_no">Ingen levering</string>
+	<string name="poi_delivery_only">Kun levering</string>
+
+	<string name="poi_outdoor_seating_yes">Udendørsservering</string>
+	<string name="poi_outdoor_seating_no">Ingen udendørsservering</string>
+	<string name="poi_outdoor_seating_terrace">Udendørsservering: terrasse</string>
+	<string name="poi_outdoor_seating_sidewalk">Udendørsservering: fortov</string>
+	<string name="poi_outdoor_seating_pedestrian_zone">Udendørsservering: gågade</string>
+	<string name="poi_outdoor_seating_garden">Udendørsservering: have</string>
+	<string name="poi_outdoor_seating_patio">Udendørsservering: gårdhave</string>
+
+	<string name="poi_cocktails_yes">Cocktails</string>
+
+	<string name="poi_second_hand_yes">Brugte varer</string>
+	<string name="poi_second_hand_no">Ingen brugte varer</string>
+	<string name="poi_second_hand_only">Kun brugte varer</string>
+
+	<string name="poi_service_parts">Dele</string>
+	<string name="poi_service_dealer">Forhandler</string>
+	<string name="poi_service_repair">Reparation</string>
+	<string name="poi_service_repair_no">Ingen reparation</string>
+	<string name="poi_service_electrical">Reparation af elektriske køretøjer</string>
+	<string name="poi_motorcycle_repair">Motorcykel reparation</string>
+	<string name="poi_self_service_yes">Selvbetjening</string>
+	<string name="poi_self_service_no">Ingen selvbetjening</string>
+	<string name="poi_automated_yes">Automatiseret</string>
+	<string name="poi_automated_no">Ikke automatiseret</string>
+	<string name="poi_full_service_yes">Fuld service</string>
+	<string name="poi_brushless_yes">Børsteløs</string>
+	<string name="poi_brushless_no">Børsteløs: nej</string>
+
+	<string name="poi_aeroway_fuel">Fly tankstation</string>
+	<string name="poi_public_bath">Offentligt bad</string>
+
+	<string name="poi_male_yes">Mand</string>
+	<string name="poi_male_no">Forbudt for mænd</string>
+	<string name="poi_female_yes">Kvinde</string>
+	<string name="poi_female_no">Forbudt for kvinder</string>
+	<string name="poi_indoor_yes">Indendørs</string>
+	<string name="poi_indoor_no">Udendørs</string>
+	<string name="poi_toilets_yes">Med toiletter</string>
+	<string name="poi_toilets_no">Uden toiletter</string>
+	<string name="poi_toilets_wheelchair_yes">Adgang til toiletter for kørestole: ja</string>
+	<string name="poi_toilets_wheelchair_no">Adgang til toiletter for kørestole: nej</string>
+	<string name="poi_toilets_access_customers">Toiletadgang: kunder</string>
+	<string name="poi_toilets_access_permissive">Toiletadgang: med tilladelse</string>
+	<string name="poi_toilets_access_community">Toiletadgang: fællesskab</string>
+	<string name="poi_toilets_access_public">Toiletadgang: offentlig</string>
+
+	<string name="poi_diaper_yes">Puslebord</string>
+	<string name="poi_diaper_no">Ingen puslebord</string>
+	<string name="poi_diaper_room">Puslerum</string>
+
+<string name="poi_events_venue">begivenheder mødested</string>
+
+	</resources>

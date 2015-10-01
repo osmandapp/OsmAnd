@@ -2101,4 +2101,6 @@
 	<string name="unsaved_changes_will_be_lost">Все несохраненные изменения будут потеряны. Продолжить?</string>
 	<string name="simulate_your_location_descr">Моделировать используя записанный GPX или рассчитанный маршрут</string>
     <string name="simulate_your_location_stop_descr">Остановить моделирование</string>
+    <string name="favorite_category_add_new">Добавить новую</string>
+    <string name="favorite_category_select">Выберите категорию</string>
     </resources>

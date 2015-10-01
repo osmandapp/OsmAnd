@@ -139,7 +139,7 @@ public class MapPoiTypes {
 	}
 	
 	public Map<String, PoiType> getAllTranslatedNames() {
-		Map<String, PoiType> translation = new HashMap<>();
+		Map<String, PoiType> translation = new HashMap<String, PoiType>();
 		for(PoiCategory pc : categories) {
 			for(PoiType pt :  pc.getPoiTypes()) {
 				if(pt.isReference()) {
