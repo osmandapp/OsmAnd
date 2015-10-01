@@ -1,6 +1,10 @@
 package net.osmand.util;
 
 
+import net.osmand.PlatformUtil;
+
+import org.apache.commons.logging.Log;
+
 import java.io.BufferedReader;
 import java.io.Closeable;
 import java.io.EOFException;
@@ -11,7 +15,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
@@ -19,10 +22,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import net.osmand.PlatformUtil;
-
-import org.apache.commons.logging.Log;
 
 
 /**
@@ -502,6 +501,21 @@ public class Algorithms {
 			}
 			int hours = minutes / 60;
 			return hours + ":" + min + ":" + sec;
+		}
+	}
+
+	public static String formatMinutesDuration(int minutes) {
+		if (minutes < 60) {
+			return String.valueOf(minutes);
+		} else {
+			String min;
+			if (minutes % 60 < 10) {
+				min = "0" + (minutes % 60);
+			} else {
+				min = (minutes % 60) + "";
+			}
+			int hours = minutes / 60;
+			return hours + ":" + min;
 		}
 	}
 	

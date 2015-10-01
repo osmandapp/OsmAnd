@@ -255,10 +255,10 @@ public class BasicDataFragment extends Fragment
 				daysTextView.setText(stringBuilder.toString());
 
 				TextView openingTextView = (TextView) view.findViewById(R.id.openingTextView);
-				openingTextView.setText(Algorithms.formatDuration(rule.getStartTime()));
+				openingTextView.setText(Algorithms.formatMinutesDuration(rule.getStartTime()));
 
 				TextView closingTextView = (TextView) view.findViewById(R.id.closingTextView);
-				closingTextView.setText(Algorithms.formatDuration(rule.getEndTime()));
+				closingTextView.setText(Algorithms.formatMinutesDuration(rule.getEndTime()));
 				timeContainer.setVisibility(View.VISIBLE);
 
 				daysTextView.setOnClickListener(new View.OnClickListener() {

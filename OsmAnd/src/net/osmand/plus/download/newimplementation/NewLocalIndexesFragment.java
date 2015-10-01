@@ -78,7 +78,7 @@ public class NewLocalIndexesFragment extends OsmAndListFragment {
 	}
 
 	private void initMemoryConsumedCard(View header) {
-		ProgressBar sizeProgress = (ProgressBar) header.findViewById(R.id.memory_progress);
+		ProgressBar sizeProgress = (ProgressBar) header.findViewById(R.id.progressBar);
 		File dir = getMyApplication().getAppPath("").getParentFile();
 		String size = formatGb.format(new Object[]{0});
 		int percent = 0;
@@ -92,9 +92,11 @@ public class NewLocalIndexesFragment extends OsmAndListFragment {
 		sizeProgress.setProgress(percent);
 		String text = getString(R.string.free, size);
 
-		TextView descriptionText = (TextView) header.findViewById(R.id.memory_size);
+		TextView descriptionText = (TextView) header.findViewById(R.id.rightTextView);
 		descriptionText.setText(Html.fromHtml(text));
 		descriptionText.setMovementMethod(LinkMovementMethod.getInstance());
+
+		((TextView) header.findViewById(R.id.leftTextView)).setText(R.string.device_memory);
 	}
 
 	@Override
