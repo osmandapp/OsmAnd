@@ -743,7 +743,7 @@ public class OpeningHoursParser {
 	 * @param format the string to parse
 	 * @return the OpeningHours object
 	 */
-	private static OpeningHoursParser.OpeningHours parseOpenedHoursHandleErrors(String format){
+	public static OpeningHoursParser.OpeningHours parseOpenedHoursHandleErrors(String format){
 		if(format == null) {
 			return null;
 		}

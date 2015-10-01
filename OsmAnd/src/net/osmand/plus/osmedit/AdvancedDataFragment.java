@@ -151,7 +151,6 @@ public class AdvancedDataFragment extends Fragment
 	public class TagAdapterLinearLayoutHack {
 		private final LinearLayout linearLayout;
 		private final EditPoiData editPoiData;
-		private final MapPoiTypes mapPoiTypes;
 		private final Map<String, AbstractPoiType> allTypes;
 		private final HashSet<String> tagKeys;
 		private final HashSet<String> valueKeys;
@@ -162,7 +161,6 @@ public class AdvancedDataFragment extends Fragment
 										  MapPoiTypes mapPoiTypes) {
 			this.linearLayout = linearLayout;
 			this.editPoiData = editPoiData;
-			this.mapPoiTypes = mapPoiTypes;
 			this.allTypes = mapPoiTypes.getAllTypesTranslatedNames(new StringMatcher() {
 				@Override
 				public boolean matches(String name) {
@@ -183,6 +181,9 @@ public class AdvancedDataFragment extends Fragment
 			linearLayout.removeAllViews();
 			editPoiData.setIsInEdit(true);
 			for (Entry<String, String> tag : editPoiData.getTagValues().entrySet()) {
+				if(tag.getKey().equals(EditPoiData.POI_TYPE_TAG)
+						|| tag.getKey().equals(OSMSettings.OSMTagKey.NAME.getValue()))
+					continue;
 				addTagView(tag.getKey(), tag.getValue());
 			}
 			editPoiData.setIsInEdit(false);
