@@ -18,7 +18,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.download.BaseDownloadActivity;
 import net.osmand.plus.download.DownloadActivity;
@@ -43,14 +42,10 @@ public class SubcategoriesFragment extends Fragment {
 		mAdapter.addAll(category.items);
 		mAdapter.addAll(category.subcats);
 
-		View freeVersionBanner = inflater.inflate(R.layout.free_version_banner, listView, false);
-		final OsmandSettings settings = application.getSettings();
-		DownloadsUiInitHelper.initFreeVersionBanner(freeVersionBanner, settings, getResources());
-		listView.addHeaderView(freeVersionBanner);
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				final HasName item = mAdapter.getItem(position - 1);
+				final HasName item = mAdapter.getItem(position);
 				if (item instanceof IndexItemCategoryWithSubcat) {
 					((MapsInCategoryFragment) getParentFragment())
 							.onCategorySelected((IndexItemCategoryWithSubcat) item);
@@ -139,9 +134,6 @@ public class SubcategoriesFragment extends Fragment {
 					public void onClick(View v) {
 						((BaseDownloadActivity) v.getContext())
 								.startDownload((IndexItem) v.getTag(R.id.index_item));
-						progressBar.setVisibility(View.VISIBLE);
-						rightImageButton.setImageDrawable(getContextIcon(context,
-								R.drawable.ic_action_remove_dark));
 					}
 				});
 				progressBar.setVisibility(View.GONE);

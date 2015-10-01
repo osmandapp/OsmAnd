@@ -78,6 +78,8 @@ public class DownloadActivity extends BaseDownloadActivity {
 	private List<DownloadActivityType> downloadTypes = new ArrayList<DownloadActivityType>();
 	private List<IndexItemCategoryWithSubcat> cats;
 
+	private OnProgressUpdateListener onProgressUpdateListener;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		getMyApplication().applyTheme(this);
@@ -255,6 +257,17 @@ public class DownloadActivity extends BaseDownloadActivity {
 	@Override
 	public void updateProgress(boolean updateOnlyProgress) {
 		BasicProgressAsyncTask<?, ?, ?> basicProgressAsyncTask = DownloadActivity.downloadListIndexThread.getCurrentRunningTask();
+		final boolean isFinished = basicProgressAsyncTask == null
+				|| basicProgressAsyncTask.getStatus() == AsyncTask.Status.FINISHED;
+		if (onProgressUpdateListener != null) {
+			if (isFinished) {
+				onProgressUpdateListener.onFinished();
+			} else {
+				onProgressUpdateListener.onProgressUpdate(
+						basicProgressAsyncTask.getProgressPercentage(),
+						downloadListIndexThread.getDownloads());
+			}
+		}
 		//needed when rotation is performed and progress can be null
 		if (progressView == null) {
 			return;
@@ -265,9 +278,8 @@ public class DownloadActivity extends BaseDownloadActivity {
 				determinateProgressBar.setProgress(basicProgressAsyncTask.getProgressPercentage());
 			}
 		} else {
-			boolean visible = basicProgressAsyncTask != null && basicProgressAsyncTask.getStatus() != AsyncTask.Status.FINISHED;
-			progressView.setVisibility(visible ? View.VISIBLE : View.GONE);
-			if (visible) {
+			progressView.setVisibility(!isFinished ? View.VISIBLE : View.GONE);
+			if (!isFinished) {
 				boolean indeterminate = basicProgressAsyncTask.isIndeterminate();
 				indeterminateProgressBar.setVisibility(!indeterminate ? View.GONE : View.VISIBLE);
 				determinateProgressBar.setVisibility(indeterminate ? View.GONE : View.VISIBLE);
@@ -613,5 +625,18 @@ public class DownloadActivity extends BaseDownloadActivity {
 		}
 	}
 
+	public void setOnProgressUpdateListener(OnProgressUpdateListener onProgressUpdateListener) {
+		this.onProgressUpdateListener = onProgressUpdateListener;
+		BasicProgressAsyncTask<?, ?, ?> basicProgressAsyncTask = DownloadActivity.downloadListIndexThread.getCurrentRunningTask();
+		final boolean isFinished = basicProgressAsyncTask == null
+				|| basicProgressAsyncTask.getStatus() == AsyncTask.Status.FINISHED;
+		if (isFinished) {
+			this.onProgressUpdateListener.onFinished();
+		}
+	}
 
+	public interface OnProgressUpdateListener {
+		void onProgressUpdate(int progressPercentage, int activeTasks);
+		void onFinished();
+	}
 }
