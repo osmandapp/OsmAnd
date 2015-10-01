@@ -2160,4 +2160,5 @@
     <string name="default_speed_system_descr">Vælg enhed for hastighed</string>
     <string name="favorite_category_add_new">Tilføj ny</string>
     <string name="favorite_category_select">Vælg kategori</string>
-    </resources>
+    <string name="downloading_number_of_fiels">Henter - %1$d fil</string>
+</resources>
