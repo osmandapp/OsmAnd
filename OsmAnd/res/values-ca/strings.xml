@@ -2151,4 +2151,5 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
     
-    </resources>
+    <string name="downloading_number_of_fiels">Baixada - %1$d fitxer</string>
+</resources>
