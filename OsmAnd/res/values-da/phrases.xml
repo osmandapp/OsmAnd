@@ -1619,7 +1619,7 @@
 	<string name="poi_drive_through_yes">Drive-through: ja</string>
 	<string name="poi_drive_through_no">Drive-through: nej</string>
 
-	<string name="poi_brewery_additional">Bryggeriet navn</string>
+	<string name="poi_brewery_additional">Bryggerinavn</string>
 	<string name="poi_microbrewery_yes">Mikrobryggeri</string>
 	<string name="poi_microbrewery_no">Ingen mikrobryggeri</string>
 
@@ -1681,6 +1681,6 @@
 	<string name="poi_diaper_no">Ingen puslebord</string>
 	<string name="poi_diaper_room">Puslerum</string>
 
-<string name="poi_events_venue">begivenheder mødested</string>
+<string name="poi_events_venue">Kulturhus</string>
 
 	</resources>
