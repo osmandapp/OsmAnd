@@ -2217,7 +2217,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="poi_dialog_poi_type">Rodzaj POI</string>
 	<string name="poi_action_delete">usuń</string>
 	<string name="building_number">Numer wersji</string>
-	<string name="av_locations_descr">Plik gpx z notatkami o lokalizacjach</string>
+	<string name="av_locations_descr">Plik GPS z notatkami o lokalizacjach</string>
     <string name="rendering_value_boldOutline_name">Pogrubione kontury</string>
     <string name="download_live_updates">Aktualizacje na żywo</string>
 	<string name="commit_poi">Wyślij POI</string>
@@ -2246,4 +2246,25 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="simulate_your_location_stop_descr">Zatrzymaj symulację pozycji</string>
     <string name="favourites_context_menu_add">Dodaj do ulubionych</string>
 	<string name="roads">Drogi</string>
+<string name="favorite_category_add_new">Dodaj nową</string>
+    <string name="favorite_category_select">Wybierz kategorię</string>
+    <string name="default_speed_system_descr">Zdefiniuj system miar prędkości</string>
+    <string name="default_speed_system">System pomiaru prędkości</string>
+    <string name="si_nm">Mile morskie</string>
+    <string name="nm">nm</string>
+    <string name="si_kmh">Kilometrów na godzinę</string>
+    <string name="si_mph">Mil na godzinę</string>
+    <string name="si_m_s">Metrów na sekundę</string>
+    <string name="si_min_km">Minut na kilometr</string>
+    <string name="si_min_m">Minut na milę</string>
+    <string name="si_nm_h">Mile morskie na godzinę (węzły)</string>
+    <string name="nm_h">nmh</string>
+    <string name="min_mile">min/m</string>
+    <string name="min_km">min/km</string>
+    <string name="m_s">m/s</string>
+    
+    <string name="shared_string_trip_recording">Zapis podróży</string>
+    <string name="simulate_your_location_descr">Symuluj za pomocą nagranej trasy GPX lub wyznaczonej trasy</string>
+    <string name="downloads_left_template">%1$s pozostało do pobrania</string>
+	<string name="downloading_number_of_fiels">Pobieranie - %1$d pliku</string>
 </resources>
