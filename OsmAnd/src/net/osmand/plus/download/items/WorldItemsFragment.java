@@ -23,21 +23,13 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.WorldRegion;
 import net.osmand.plus.download.DownloadActivity;
-<<<<<<< HEAD:OsmAnd/src/net/osmand/plus/download/items/WorldItemsFragment.java
-import net.osmand.plus.download.newimplementation.MapsInCategoryFragment;
-=======
 import net.osmand.plus.download.newimplementation.DownloadsUiInitHelper;
->>>>>>> 380dcbe6d79e0f54421d0b67ce3688dfe910e78e:OsmAnd/src/net/osmand/plus/download/items/DownloadItemsFragment.java
 
 import org.apache.commons.logging.Log;
-
-import java.text.MessageFormat;
-import java.util.Locale;
 
 public class WorldItemsFragment extends Fragment {
 	public static final String TAG = "WorldItemsFragment";
 	private static final Log LOG = PlatformUtil.getLog(WorldItemsFragment.class);
-	private static final MessageFormat formatGb = new MessageFormat("{0, number,<b>#.##</b>} GB", Locale.US);
 
 	public static final int RELOAD_ID = 0;
 
@@ -78,7 +70,7 @@ public class WorldItemsFragment extends Fragment {
 				FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
 				fragmentTransaction.addToBackStack(null);
 				LocalDialogFragment.createInstance(region)
-						.show(fragmentTransaction, MapsInCategoryFragment.TAG);
+						.show(fragmentTransaction, LocalDialogFragment.TAG);
 			}
 		});
 
@@ -242,10 +234,6 @@ public class WorldItemsFragment extends Fragment {
 			ItemsListBuilder.ResourceItem item = getItem(position);
 			viewHolder.bindIndexItem(item.getIndexItem(), (DownloadActivity) getContext(), false, false);
 			return convertView;
-		}
-
-		private static class ViewHolder {
-			TextView textView;
 		}
 	}
 
