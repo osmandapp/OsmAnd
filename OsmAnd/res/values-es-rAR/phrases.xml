@@ -1022,8 +1022,8 @@
 	<string name="poi_recycling_bicycles">Bicicletas</string>
 
 	<string name="poi_shower">Duchas</string>
-	<string name="poi_drinking_water_yes">Agua potable</string>
-	<string name="poi_drinking_water_no">Agua no potable</string>
+	<string name="poi_drinking_water_yes">Con agua potable</string>
+	<string name="poi_drinking_water_no">Sin agua potable</string>
 	<string name="poi_supervised_yes">Supervisado</string>
 	<string name="poi_supervised_no">Sin supervisión</string>
 	<string name="poi_seasonal_yes">Estacional</string>
@@ -1659,4 +1659,13 @@
 	<string name="poi_diaper_no">Sin cambiador de pañales</string>
 	<string name="poi_diaper_room">Habitación para cambio de pañales</string>
 
-</resources>
+<string name="poi_car_wash_no">Lavado de autos: no</string>
+
+	<string name="poi_maxstay">Estadía máxima</string>
+
+	<string name="poi_vending_parking_tickets">Tickets de estacionamiento</string>
+	<string name="poi_vending_cigarettes">Cigarrillos</string>
+	<string name="poi_vending_excrement_bags">Bolsas para excremento</string>
+	<string name="poi_vending_public_transport_tickets">Tickets de transporte público</string>
+	<string name="poi_vending_drinks">Bebidas</string>
+	</resources>

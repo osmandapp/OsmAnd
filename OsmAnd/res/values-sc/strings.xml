@@ -2098,4 +2098,21 @@
 <string name="shared_string_trip_recording">Registratzione biàgiu</string>
     <string name="shared_string_navigation">Nàvigu</string>
     <string name="osmand_running_in_background">Funtzionamentu in isfondu</string>
+    <string name="favorite_category_add_new">Annanghe noa</string>
+    <string name="favorite_category_select">Ischerta sa categoria</string>
+    <string name="default_speed_system_descr">Issèbera s’unidade de medida de sa lestresa</string>
+    <string name="default_speed_system">Medida de sa lestresa</string>
+    <string name="nm">nm</string>
+    <string name="si_nm">Mìglios nàuticos</string>
+    <string name="si_kmh">Chilòmetros pro ora</string>
+    <string name="si_mph">Mìglios pro ora</string>
+    <string name="si_m_s">Metros pro segundu</string>
+    <string name="si_min_km">Minutos pro chilòmetru</string>
+    <string name="si_min_m">Minutos pro mìgliu</string>
+    <string name="si_nm_h">Mìglios nàuticos pro ora (knot)</string>
+    <string name="nm_h">nmh</string>
+    <string name="min_mile">min/m</string>
+    <string name="min_km">min/km</string>
+    <string name="m_s">m/s</string>
+    
     </resources>
