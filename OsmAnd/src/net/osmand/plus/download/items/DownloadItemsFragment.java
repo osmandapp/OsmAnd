@@ -38,6 +38,10 @@ public class DownloadItemsFragment extends Fragment {
 	private WorldMapAdapter worldMapAdapter;
 	private VoicePromtsAdapter voicePromtsAdapter;
 
+	private ListView worldRegionsListView;
+	private ListView worldMapListView;
+	private ListView voicePromtsListView;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -51,21 +55,21 @@ public class DownloadItemsFragment extends Fragment {
 		builder = new ItemsListBuilder(getMyApplication(), getMyApplication().getWorldRegion());
 		boolean hasBuilt = builder.build();
 
-		ListView worldRegionsListView = (ListView) view.findViewById(R.id.list_world_regions);
+		worldRegionsListView = (ListView) view.findViewById(R.id.list_world_regions);
 		worldRegionsAdapter = new WorldRegionsAdapter(getActivity(), getMyApplication());
 		worldRegionsListView.setAdapter(worldRegionsAdapter);
 		if (hasBuilt) {
 			fillWorldRegionsAdapter();
 		}
 
-		ListView worldMapListView = (ListView) view.findViewById(R.id.list_world_map);
+		worldMapListView = (ListView) view.findViewById(R.id.list_world_map);
 		worldMapAdapter = new WorldMapAdapter(getActivity(), getMyApplication());
 		worldMapListView.setAdapter(worldMapAdapter);
 		if (hasBuilt) {
 			fillWorldMapAdapter();
 		}
 
-		ListView voicePromtsListView = (ListView) view.findViewById(R.id.list_voice_promts);
+		voicePromtsListView = (ListView) view.findViewById(R.id.list_voice_promts);
 		voicePromtsAdapter = new VoicePromtsAdapter(getActivity(), getMyApplication());
 		voicePromtsListView.setAdapter(voicePromtsAdapter);
 		if (hasBuilt) {
@@ -103,7 +107,7 @@ public class DownloadItemsFragment extends Fragment {
 		if (worldRegionsAdapter != null) {
 			worldRegionsAdapter.clear();
 			worldRegionsAdapter.addAll(builder.getRegionsFromAllItems());
-			setListViewHeightBasedOnChildren((ListView) getView().findViewById(R.id.list_world_regions));
+			setListViewHeightBasedOnChildren(worldRegionsListView);
 		}
 	}
 
@@ -111,7 +115,7 @@ public class DownloadItemsFragment extends Fragment {
 		if (worldMapAdapter != null) {
 			worldMapAdapter.clear();
 			worldMapAdapter.addAll(builder.getRegionMapItems());
-			setListViewHeightBasedOnChildren((ListView) getView().findViewById(R.id.list_world_map));
+			setListViewHeightBasedOnChildren(worldMapListView);
 		}
 	}
 
