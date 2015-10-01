@@ -1048,7 +1048,7 @@
 	<string name="poi_facebook">Facebook</string>
 	<string name="poi_twitter">Twitter</string>
 	<string name="poi_skype">Skype</string>
-	<string name="poi_youtube">Youtube</string>
+	<string name="poi_youtube">YouTube</string>
 	<string name="poi_instagram">Instagram</string>
 	<string name="poi_vk">VKontakte</string>
 	<string name="poi_google_plus">Google+</string>
@@ -1087,4 +1087,102 @@
 	<string name="poi_information_history">Informatziones istòricas</string>
 	<string name="poi_information_sign">Sinnu</string>
 	<string name="poi_information_audioguide">Audioghia</string>
+	<string name="poi_internet_access_yes">Atzessu a ìnternet: eja</string>
+	<string name="poi_internet_access_no">Atzessu a ìnternet: nono</string>
+
+	<string name="poi_seamark_building">Edifìtziu nàutico</string>
+	<string name="poi_seamark_bridge">Ponte nàuticu</string>
+	<string name="poi_highway_crossing">Coladòrgiu pedonale</string>
+
+	<string name="poi_icn_ref">Àndala retza tziclàbile internatzionale</string>
+	<string name="poi_ncn_ref">Àndala retza tziclàbile natzionale</string>
+	<string name="poi_rcn_ref">Àndala retza tziclàbile regionale</string>
+	<string name="poi_lcn_ref">Àndala retza tziclàbile locale</string>
+	<string name="poi_iwn_ref">Àndala retza internatzionale pro s’escursionismu</string>
+	<string name="poi_nwn_ref">Àndala retza natzionale pro s’escursionismu</string>
+	<string name="poi_rwn_ref">Àndala retza regionale pro s’escursionismu</string>
+	<string name="poi_lwn_ref">Àndala retza locale pro s’escursionismu</string>
+
+	<string name="poi_route_hiking_iwn_poi">Àndala internatzionale pro s’escursionismu</string>
+	<string name="poi_route_hiking_nwn_poi">Àndala natzionale pro s’escursionismu</string>
+	<string name="poi_route_hiking_rwn_poi">Àndala regionale pro s’escursionismu</string>
+	<string name="poi_route_hiking_lwn_poi">Àndala locale pro s’escursionismu</string>
+	<string name="poi_route_hiking_ref_poi">Legenda pro sas àndalas pro s’escursionismu</string>
+
+	<string name="poi_fax">Fax</string>
+	<string name="poi_drinking_water_yes">Abba potàbile: eja</string>
+	<string name="poi_drinking_water_no">Abba potàbile:nono</string>
+	<string name="poi_supervised_yes">Tentadu</string>
+	<string name="poi_supervised_no">Non tentadu</string>
+	<string name="poi_seasonal_yes">Istajonale</string>
+	<string name="poi_seasonal_no">Non istajonale</string>
+	<string name="poi_seasonal_dry_season">Istajone sica</string>
+	<string name="poi_seasonal_wet_season">Istajone ùmida</string>
+	<string name="poi_crossing_traffic_signals">Cun semàforos</string>
+	<string name="poi_crossing_uncontrolled">Non controlladu</string>
+	<string name="poi_crossing_unmarked">Non sinnaladu</string>
+	<string name="poi_start_date">Data de cumintzu</string>
+	<string name="poi_wheelchair">Cadira a rodas</string>
+	<string name="poi_wheelchair_no">Cadira a rodas: non permitidas</string>
+	<string name="poi_wheelchair_limited">Cadira a rodas: limitadas</string>
+	<string name="poi_access_private">Atzessu privadu</string>
+	<string name="poi_access_no">Sena atzessu</string>
+	<string name="poi_access_customers">Atzessu pro clientes</string>
+	<string name="poi_access_delivery">Atzessu pro cunsinnas</string>
+	<string name="poi_access_agricultural">Atzessu agrìcolu</string>
+
+	<string name="poi_content_silage">Cuntenutu: insilatu</string>
+	<string name="poi_content_water">Cuntenutu: abba</string>
+	<string name="poi_content_slurry">Cuntenutu: licuames</string>
+	<string name="poi_content_oil">Cuntenutu: ògiu</string>
+	<string name="poi_content_fuel">Cuntenutu: combustìbile</string>
+	<string name="poi_content_manure">Cuntenutu: ledàmene</string>
+	<string name="poi_content_wine">Cuntenutu: binu</string>
+	<string name="poi_content_sewage">Cuntenutu: abbas nieddas</string>
+	<string name="poi_content_gas">Cuntenutu: gas</string>
+	<string name="poi_content_biomass">Cuntenutu: biomassa</string>
+	<string name="poi_content_wastewater">Cuntenutu: abbas de iscàrrigu</string>
+	<string name="poi_content_crop">Cuntenutu: regorta</string>
+	<string name="poi_content_fodder">Cuntenutu: proenda</string>
+	<string name="poi_content_beer">Cuntenutu: birra</string>
+	<string name="poi_content_salt">Cuntenutu: sale</string>
+	<string name="poi_content_grain">Cuntenutu: trigu</string>
+
+	<string name="poi_nudism_yes">Nudismu: permìtidu</string>
+	<string name="poi_nudism_no">Nudismu: proibidu</string>
+	<string name="poi_nudism_obligatory">Nudismu: obligatòriu</string>
+	<string name="poi_nudism_customary">Nudismu: abituale</string>
+	<string name="poi_nudism_permissive">Nudismu: permissivu</string>
+
+	<string name="poi_population">Populatzione</string>
+	<string name="poi_parking_underground">Suta-terra</string>
+	<string name="poi_parking_multi_storey">Medas pianos</string>
+
+	<string name="poi_bicycle_parking_building">Edifìtziu ispetziale</string>
+	<string name="poi_bicycle_parking_informal">Informale</string>
+
+	<string name="poi_leaf_type_broadleaved">Fògia larga (latifògia)</string>
+	<string name="poi_leaf_type_needleleaved">Fògia a agu (aghifògia)</string>
+	<string name="poi_leaf_type_mixed">Mistu</string>
+	<string name="poi_leaf_type_leafless">Sena fògias</string>
+	<string name="poi_species">Genia</string>
+	<string name="poi_genus">Gènere</string>
+	<string name="poi_taxon">Tàxon</string>
+
+	<string name="poi_trees_olive">Olia</string>
+	<string name="poi_trees_apple">Mela</string>
+	<string name="poi_trees_oil">Ògiu de palma</string>
+	<string name="poi_trees_orange">Arantzu</string>
+	<string name="poi_trees_almond">Mèndula</string>
+	<string name="poi_trees_banana">Bananu</string>
+	<string name="poi_trees_hazel">Nutzola</string>
+	<string name="poi_trees_coconut">Nughe de coco</string>
+	<string name="poi_trees_persimmon">Cachi</string>
+	<string name="poi_trees_cherry">Cariasa</string>
+	<string name="poi_trees_walnut">Nughe</string>
+	<string name="poi_trees_plum">Pruna</string>
+	<string name="poi_trees_peach">Pèssighe</string>
+	<string name="poi_trees_tea">Te</string>
+	<string name="poi_trees_coca">Coca</string>
+	<string name="poi_trees_kiwi">Kiwi</string>
 	</resources>
