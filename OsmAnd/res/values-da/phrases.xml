@@ -1690,29 +1690,29 @@
 	<string name="poi_vending_parking_tickets">Parkeringsbilletter</string>
 	<string name="poi_vending_cigarettes">Cigaretter</string>
 	<string name="poi_vending_public_transport_tickets">Billetter til offentlig transport</string>
-	<string name="poi_vending_drinks">Drinks</string>
+	<string name="poi_vending_drinks">Drikkevarer</string>
 	<string name="poi_vending_sweets">Slik</string>
-	<string name="poi_vending_parcel_pickup_mail_in">Pakke afhentning og post i</string>
+	<string name="poi_vending_parcel_pickup_mail_in">Pakke afhentning og post Indsendelsesservice</string>
 	<string name="poi_vending_condoms">Kondomer</string>
 	<string name="poi_vending_stamps">Frimærker</string>
 	<string name="poi_vending_bicycle_tube">Cykelslanger</string>
 	<string name="poi_vending_food">Mad</string>
-	<string name="poi_vending_drinks_food">Drinks og mad</string>
-	<string name="poi_vending_fuel">Brændstof automater</string>
+	<string name="poi_vending_drinks_food">Drikkevarer og mad</string>
+	<string name="poi_vending_fuel">Benzinautomat</string>
 	<string name="poi_vending_parcel_pickup">Pakke afhentning</string>
-	<string name="poi_vending_parcel_mail_in">Pakke aflevering</string>
+	<string name="poi_vending_parcel_mail_in">Pakke Indsendelsesservice</string>
 	<string name="poi_vending_milk">Mælk</string>
-	<string name="poi_vending_elongated_coin">Aflangt mønt</string>
+	<string name="poi_vending_elongated_coin">Souvenirmønt</string>
 	<string name="poi_vending_bread">Brød</string>
 	<string name="poi_vending_chewing_gums">Tyggegummi</string>
 	<string name="poi_vending_parking_tickets_public_transport_tickets">Parkeringsbilletter; billetter til offentlig transport</string>
 	<string name="poi_vending_coffee">Kaffe</string>
-	<string name="poi_vending_toll">Toll automater</string>
+	<string name="poi_vending_toll">Vejafgiftautomat</string>
 	<string name="poi_vending_tickets">Billetautomat</string>
-	<string name="poi_vending_water">Vand automater</string>
+	<string name="poi_vending_water">Vandautomat</string>
 	<string name="poi_vending_telephone_vouchers">Telefon værdikuponer</string>
 	<string name="poi_vending_animal_food">Dyrefoder</string>
-	<string name="poi_vending_public_transport_plans">Offentlig køreplaner</string>
+	<string name="poi_vending_public_transport_plans">Køreplaner</string>
 	<string name="poi_vending_drinks_sweets">Drikkevarer og slik</string>
 	<string name="poi_vending_vouchers">Gavekort</string>
 	<string name="poi_vending_dvd">DVD</string>
@@ -1724,19 +1724,19 @@
 	<string name="poi_branch">Branche</string>
 
 	<string name="poi_memorial_war">Krigsmindesmærke</string>
-	<string name="poi_memorial_plaque">Plak</string>
+	<string name="poi_memorial_plaque">Plakette</string>
 	<string name="poi_memorial_statue">Statue</string>
 	<string name="poi_memorial_stone">Sten</string>
 	<string name="poi_memorial_stele">Stele</string>
 	<string name="poi_memorial_bust">Buste</string>
 	<string name="poi_memorial_koshinto">Koshinto</string>
-	<string name="poi_memorial_blue_plaque">Blå plak</string>
+	<string name="poi_memorial_blue_plaque">"Blå  plakette"</string>
 	<string name="poi_memorial_jizo">Jizo</string>
 	<string name="poi_memorial_cross">Kors</string>
 	<string name="poi_memorial_vehicle">Køretøj</string>
 	<string name="poi_memorial_obelisk">Obelisk</string>
 
-<string name="poi_vending_excrement_bags">ekskrement poser</string>
+<string name="poi_vending_excrement_bags">Hundeposer</string>
 	<string name="poi_inscription">Inskription</string>
 
 </resources>
