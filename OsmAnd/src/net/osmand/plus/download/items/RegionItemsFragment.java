@@ -24,9 +24,9 @@ import org.apache.commons.logging.Log;
 import java.text.MessageFormat;
 import java.util.Locale;
 
-public class LocalItemsFragment extends Fragment {
-	public static final String TAG = "LocalItemsFragment";
-	private static final Log LOG = PlatformUtil.getLog(LocalItemsFragment.class);
+public class RegionItemsFragment extends Fragment {
+	public static final String TAG = "RegionItemsFragment";
+	private static final Log LOG = PlatformUtil.getLog(RegionItemsFragment.class);
 	private static final MessageFormat formatGb = new MessageFormat("{0, number,<b>#.##</b>} GB", Locale.US);
 
 	private ItemsListBuilder builder;
@@ -90,7 +90,7 @@ public class LocalItemsFragment extends Fragment {
 				Object obj = regionsAdapter.getItem(position);
 				if (obj instanceof WorldRegion) {
 					WorldRegion region = (WorldRegion) obj;
-					((LocalDialogFragment) getParentFragment())
+					((RegionDialogFragment) getParentFragment())
 							.onRegionSelected(region);
 				}
 			}
@@ -180,10 +180,10 @@ public class LocalItemsFragment extends Fragment {
 		return (DownloadActivity) getActivity();
 	}
 
-	public static LocalItemsFragment createInstance(WorldRegion region) {
+	public static RegionItemsFragment createInstance(WorldRegion region) {
 		Bundle bundle = new Bundle();
 		bundle.putSerializable(REGION_KEY, region);
-		LocalItemsFragment fragment = new LocalItemsFragment();
+		RegionItemsFragment fragment = new RegionItemsFragment();
 		fragment.setArguments(bundle);
 		return fragment;
 	}

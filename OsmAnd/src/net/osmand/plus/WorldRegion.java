@@ -14,6 +14,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 public class WorldRegion implements Serializable {
 
@@ -36,7 +37,7 @@ public class WorldRegion implements Serializable {
 	private LatLon bboxTopLeft;
 	private LatLon bboxBottomRight;
 
-	private List<DownloadActivityType> resourceTypes;
+	private Set<DownloadActivityType> resourceTypes;
 
 	// Hierarchy
 	private WorldRegion superregion;
@@ -66,11 +67,11 @@ public class WorldRegion implements Serializable {
 		return bboxBottomRight;
 	}
 
-	public List<DownloadActivityType> getResourceTypes() {
+	public Set<DownloadActivityType> getResourceTypes() {
 		return resourceTypes;
 	}
 
-	public void setResourceTypes(List<DownloadActivityType> resourceTypes) {
+	public void setResourceTypes(Set<DownloadActivityType> resourceTypes) {
 		this.resourceTypes = resourceTypes;
 	}
 
@@ -129,14 +130,16 @@ public class WorldRegion implements Serializable {
 		String downloadName = osmandRegions.getDownloadName(regionId);
 		if (downloadName != null) {
 			downloadsIdPrefix = downloadName.toLowerCase() + ".";
-			if (name != null) {
-				this.name = name;
-			} else {
-				this.name = osmandRegions.getLocaleName(downloadName);
-			}
 		} else {
 			this.downloadsIdPrefix = regionId.toLowerCase() + ".";
+		}
+		if (name != null) {
 			this.name = name;
+		} else {
+			this.name = osmandRegions.getLocaleNameByFullName(regionId);
+			if (this.name == null) {
+				this.name = capitalize(regionId.replace('_', ' '));
+			}
 		}
 		return this;
 	}
@@ -146,10 +149,12 @@ public class WorldRegion implements Serializable {
 		String downloadName = osmandRegions.getDownloadName(regionId);
 		if (downloadName != null) {
 			downloadsIdPrefix = downloadName.toLowerCase() + ".";
-			this.name = osmandRegions.getLocaleName(downloadName);
 		} else {
 			this.downloadsIdPrefix = regionId.toLowerCase() + ".";
-			this.name = regionId;
+		}
+		this.name = osmandRegions.getLocaleNameByFullName(regionId);
+		if (this.name == null) {
+			this.name = capitalize(regionId.replace('_', ' '));
 		}
 		return this;
 	}
@@ -280,5 +285,20 @@ public class WorldRegion implements Serializable {
 			worldRegion = new WorldRegion().init(regionId, localizedName);
 		}
 		return worldRegion;
+	}
+
+	private String capitalize(String s) {
+		String[] words = s.split(" ");
+		if (words[0].length() > 0) {
+			StringBuilder sb = new StringBuilder();
+			sb.append(Character.toUpperCase(words[0].charAt(0))).append(words[0].subSequence(1, words[0].length()).toString().toLowerCase());
+			for (int i = 1; i < words.length; i++) {
+				sb.append(" ");
+				sb.append(Character.toUpperCase(words[i].charAt(0))).append(words[i].subSequence(1, words[i].length()).toString().toLowerCase());
+			}
+			return sb.toString();
+		} else {
+			return s;
+		}
 	}
 }

@@ -1020,8 +1020,8 @@
 	<string name="poi_recycling_cars">汽車</string>
 	<string name="poi_recycling_bicycles">自行車</string>
 
-	<string name="poi_drinking_water_yes">飲用水</string>
-	<string name="poi_drinking_water_no">非飲用水</string>
+	<string name="poi_drinking_water_yes">飲用水：是</string>
+	<string name="poi_drinking_water_no">飲用水：否</string>
 	<string name="poi_seasonal_yes">季節性的</string>
 	<string name="poi_seasonal_no">非季節性的</string>
 	<string name="poi_seasonal_dry_season">乾燥季節</string>
@@ -1486,4 +1486,25 @@
 	<string name="poi_payment_bancomat_no">不接受 Bancomat</string>
 	<string name="poi_payment_icsf_yes">接受 IC 儲值卡</string>
 	<string name="poi_payment_icsf_no">不接受 IC 儲值卡</string>
+	<string name="poi_payment_prepaid_ticket_yes">接受預付票</string>
+	<string name="poi_payment_jcb_yes">接受 JCB 卡</string>
+	<string name="poi_payment_jcb_no">不接受 JCB 卡</string>
+	<string name="poi_payment_laser_yes">接受鐳射卡</string>
+	<string name="poi_payment_laser_no">不接受鐳射卡</string>
+	<string name="poi_payment_ep_quick_yes">接受 Quick 卡</string>
+	<string name="poi_payment_ep_quick_no">不接受 Quick 卡</string>
+	<string name="poi_payment_eurowag_yes">接受 Eurowag 卡</string>
+	<string name="poi_payment_eurowag_no">不接受 Eurowag 卡</string>
+	<string name="poi_payment_e_zpass_yes">接受 E‑ZPass</string>
+	<string name="poi_payment_e_zpass_no">不接受 E‑ZPass</string>
+	<string name="poi_payment_euroshell_yes">接受 Euroshell 燃料卡</string>
+	<string name="poi_payment_euroshell_no">不接受 Euroshell 燃料卡</string>
+	<string name="poi_payment_kitcard_yes">接受 KITCard</string>
+	<string name="poi_payment_kitcard_no">不接受 KITCard</string>
+	<string name="poi_payment_westfalen_card_yes">接受 Westfalen 卡</string>
+	<string name="poi_payment_westfalen_card_no">不接受 Westfalen 卡</string>
+	<string name="poi_payment_v_pay_yes">接受 V PAY 卡</string>
+	<string name="poi_payment_v_pay_no">不接受 V PAY 卡</string>
+	<string name="poi_payment_dogecoin_yes">接受多吉幣</string>
+	<string name="poi_payment_dogecoin_no">不接受多吉幣</string>
 	</resources>
