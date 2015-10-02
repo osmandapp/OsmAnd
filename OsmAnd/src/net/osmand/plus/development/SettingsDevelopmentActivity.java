@@ -1,6 +1,7 @@
 package net.osmand.plus.development;
 
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Intent;
@@ -142,6 +143,7 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		final Preference agpspref = new Preference(this);
 		agpspref.setTitle(R.string.agps_info);
 		if (settings.AGPS_DATA_LAST_TIME_DOWNLOADED.get() != 0L) {
+			@SuppressLint("SimpleDateFormat")
 			SimpleDateFormat prt = new SimpleDateFormat("yyyy-MM-dd  HH:mm");
 			agpspref.setSummary(getString(R.string.agps_data_last_downloaded, prt.format(settings.AGPS_DATA_LAST_TIME_DOWNLOADED.get())));
 		} else {
@@ -155,6 +157,7 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 			public boolean onPreferenceClick(Preference preference) {
 				if(getMyApplication().getSettings().isInternetConnectionAvailable(true)) {
 					getMyApplication().getLocationProvider().redownloadAGPS();
+					@SuppressLint("SimpleDateFormat")
 					SimpleDateFormat prt = new SimpleDateFormat("yyyy-MM-dd  HH:mm");
 					agpspref.setSummary(getString(R.string.agps_data_last_downloaded, prt.format(settings.AGPS_DATA_LAST_TIME_DOWNLOADED.get())));
 				}
@@ -167,6 +170,7 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		pref = new Preference(this);
 		pref.setTitle(R.string.day_night_info);
 		if (sunriseSunset != null) {
+			@SuppressLint("SimpleDateFormat")
 			SimpleDateFormat prt = new SimpleDateFormat("yyyy-MM-dd  HH:mm");
 			pref.setSummary(getString(R.string.day_night_info_description, prt.format(sunriseSunset.getSunrise()),
 					prt.format(sunriseSunset.getSunset())));
@@ -176,7 +180,11 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		pref.setSelectable(false);
 		//setEnabled(false) creates bad readability on some devices
 		//pref.setEnabled(false);
-		cat.addPreference(pref);	
+		cat.addPreference(pref);
+
+		cat.addPreference(createCheckBoxPreference(settings.SHOULD_SHOW_FREE_VERSION_BANNER,
+				R.string.show_free_version_banner,
+				R.string.show_free_version_banner_description));
 	}
 	
 	protected void availableProfileDialog() {
@@ -193,7 +201,7 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 						StringBuilder vls = new StringBuilder(ApplicationMode.DEFAULT.getStringKey()+",");
 						for(ApplicationMode mode :  modes) {
 							if(selected.contains(mode)) {
-								vls.append(mode.getStringKey()+",");
+								vls.append(mode.getStringKey()).append(",");
 							}
 						}
 						settings.AVAILABLE_APP_MODES.set(vls.toString());

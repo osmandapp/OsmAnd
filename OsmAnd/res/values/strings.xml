@@ -1998,4 +1998,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="downloads_left_template">%1$s downloads left</string>
 	<string name="roads">Roads</string>
     <string name="downloading_number_of_fiels">Downloding - %1$d file</string>
+    <string name="show_free_version_banner">Show free version banner</string>
+    <string name="show_free_version_banner_description">Even if you have paid version you still can see free version banner</string>
 </resources>

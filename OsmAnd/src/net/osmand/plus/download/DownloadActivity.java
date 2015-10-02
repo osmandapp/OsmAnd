@@ -34,7 +34,6 @@ import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.download.items.WorldItemsFragment;
 import net.osmand.plus.download.newimplementation.IndexItemCategoryWithSubcat;
-import net.osmand.plus.download.newimplementation.NewLocalIndexesFragment;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 
@@ -318,24 +317,6 @@ public class DownloadActivity extends BaseDownloadActivity {
 					((DownloadIndexFragment) f).categorizationFinished(filtered, cats);
 				}
 			}
-		}
-	}
-
-	@Override
-	public void onCategorizationFinished(List<IndexItem> filtered,
-										 List<IndexItemCategoryWithSubcat> cats) {
-		boolean isPushed = false;
-		for (WeakReference<Fragment> ref : fragSet) {
-			Fragment f = ref.get();
-			if (f instanceof NewLocalIndexesFragment) {
-				if (f.isAdded()) {
-					isPushed = true;
-					((NewLocalIndexesFragment) f).onCategorizationFinished(filtered, cats);
-				}
-			}
-		}
-		if (!isPushed) {
-			this.cats = cats;
 		}
 	}
 

@@ -84,7 +84,7 @@ public class WorldItemsFragment extends Fragment {
 		onCategorizationFinished();
 
 		DownloadsUiHelper.initFreeVersionBanner(view,
-				getMyApplication().getSettings(), getResources());
+				getMyApplication(), getResources());
 
 		return view;
 	}
