@@ -65,7 +65,7 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 
 		this.region = region;
 
-		View view = inflater.inflate(R.layout.local_items_fragment, container, false);
+		View view = inflater.inflate(R.layout.download_items_fragment, container, false);
 
 		builder = new ItemsListBuilder(getMyApplication(), this.region);
 
