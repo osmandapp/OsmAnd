@@ -72,14 +72,12 @@ public class RegionDialogFragment extends DialogFragment {
 			}
 			toolbar.setTitle(this.region.getName());
 		}
-		DownloadsUiHelper.initFreeVersionBanner(view, getMyApplication().getSettings(),
+		DownloadsUiHelper.initFreeVersionBanner(view, getMyApplication(),
 				getResources());
 
-		final WorldRegion finalRegion = region;
 		mProgressListener = new DownloadsUiHelper.MapDownloadListener(view, getResources()){
 			@Override
 			public void onProgressUpdate(int progressPercentage, int activeTasks) {
-				LOG.debug(finalRegion.getName() + " onProgressUpdate()");
 				super.onProgressUpdate(progressPercentage, activeTasks);
 			}
 
@@ -87,7 +85,7 @@ public class RegionDialogFragment extends DialogFragment {
 			public void onFinished() {
 				super.onFinished();
 				DownloadsUiHelper.initFreeVersionBanner(view,
-						getMyApplication().getSettings(), getResources());
+						getMyApplication(), getResources());
 			}
 		};
 

@@ -61,7 +61,7 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 		onCategorizationFinished();
 
 		DownloadsUiHelper.initFreeVersionBanner(view,
-				getMyApplication().getSettings(), getResources());
+				getMyApplication(), getResources());
 
 		return view;
 	}

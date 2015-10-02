@@ -2083,4 +2083,8 @@
     
     <string name="favorite_category_add_new">Añadir nuevo</string>
     <string name="favorite_category_select">Elegir categoría</string>
-    </resources>
+    <string name="srtm_plugin_disabled">Curvas de nivel desactivadas</string>
+    <string name="downloading_number_of_fiels">Descargando - %1$s archivo/s</string>
+    <string name="show_free_version_banner">Mostrar banner de versión gratuita</string>
+    <string name="show_free_version_banner_description">Aunque tenga la versión paga, podrá ver el banner de la versión gratuita</string>
+</resources>

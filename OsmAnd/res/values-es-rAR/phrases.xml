@@ -1437,8 +1437,8 @@
 	<string name="poi_payment_notes_no">No acepta billetes</string>
 	<string name="poi_payment_electronic_purses_yes">Acepta monederos electrónicos</string>
 	<string name="poi_payment_electronic_purses_no">No acepta monederos electrónicos</string>
-	<string name="poi_payment_cash_yes">Acepta efectivo</string>
-	<string name="poi_payment_cash_no">No acepta efectivo</string>
+	<string name="poi_payment_cash_yes">Acepta dinero</string>
+	<string name="poi_payment_cash_no">No acepta dinero</string>
 	<string name="poi_payment_debit_cards_yes">Acepta tarjetas de débito</string>
 	<string name="poi_payment_debit_cards_no">No acepta tarjetas de débito</string>
 	<string name="poi_payment_bitcoin_yes">Acepta Bitcoin</string>
@@ -1644,7 +1644,7 @@
 	<string name="poi_male_no">Prohibido para hombres</string>
 	<string name="poi_female_yes">Femenino</string>
 	<string name="poi_female_no">Prohibido para mujeres</string>
-	<string name="poi_indoor_yes">Cubierto (puertas adentro)</string>
+	<string name="poi_indoor_yes">Cubierto (interior)</string>
 	<string name="poi_indoor_no">Al aire libre</string>
 	<string name="poi_toilets_yes">Con baños</string>
 	<string name="poi_toilets_no">Sin baños</string>
@@ -1671,7 +1671,7 @@
 	<string name="poi_vending_sweets">Dulces</string>
 	<string name="poi_vending_condoms">Condones</string>
 	<string name="poi_vending_stamps">Sellos</string>
-	<string name="poi_vending_bicycle_tube">Tubos de bicicleta</string>
+	<string name="poi_vending_bicycle_tube">Válvulas de bicicleta</string>
 	<string name="poi_vending_food">Comida</string>
 	<string name="poi_vending_drinks_food">Bebidas y comidas</string>
 	<string name="poi_vending_fuel">Surtidor de combustible</string>
@@ -1709,4 +1709,12 @@
 
 	<string name="poi_inscription">Inscripción</string>
 
-</resources>
+<string name="poi_brushless_yes">Con cepillo giratorio</string>
+	<string name="poi_brushless_no">Sin cepillo giratorio</string>
+	<string name="poi_vending_parcel_pickup_mail_in">Estación de paquetes y correos</string>
+	<string name="poi_vending_parcel_pickup">Estación de paquetería</string>
+	<string name="poi_vending_parcel_mail_in">Estación de correos</string>
+	<string name="poi_vending_elongated_coin">Moneda elongada</string>
+	<string name="poi_memorial_koshinto">Koshinto</string>
+	<string name="poi_memorial_jizo">Jizo</string>
+	</resources>

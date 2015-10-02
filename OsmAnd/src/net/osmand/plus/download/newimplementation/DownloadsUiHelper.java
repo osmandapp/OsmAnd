@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -22,8 +23,15 @@ public final class DownloadsUiHelper {
 	private DownloadsUiHelper() {
 	}
 
-	public static void initFreeVersionBanner(View header, OsmandSettings settings,
+	public static void initFreeVersionBanner(View header, OsmandApplication application,
 											 Resources resources) {
+		final View freeVersionBanner = header.findViewById(R.id.freeVersionBanner);
+		OsmandSettings settings = application.getSettings();
+		if(!Version.isFreeVersion(application) && !settings.SHOULD_SHOW_FREE_VERSION_BANNER.get()) {
+			freeVersionBanner.setVisibility(View.GONE);
+			return;
+		}
+
 		TextView downloadsLeftTextView = (TextView) header.findViewById(R.id.downloadsLeftTextView);
 		final int downloadsLeft = BaseDownloadActivity.MAXIMUM_AVAILABLE_FREE_DOWNLOADS
 				- settings.NUMBER_OF_FREE_DOWNLOADS.get();
@@ -35,8 +43,7 @@ public final class DownloadsUiHelper {
 				BaseDownloadActivity.MAXIMUM_AVAILABLE_FREE_DOWNLOADS));
 
 		final View buttonsLinearLayout = header.findViewById(R.id.buttonsLinearLayout);
-
-		header.findViewById(R.id.freeVersionBanner).setOnClickListener(
+		freeVersionBanner.setOnClickListener(
 				new ToggleCollapseFreeVersionBanner(freeVersionDescriptionTextView,
 						buttonsLinearLayout));
 
