@@ -5,10 +5,13 @@ import android.content.Context;
 import net.osmand.PlatformUtil;
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.WorldRegion;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
+import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.util.Algorithms;
 
 import java.util.Collections;
@@ -23,6 +26,9 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class ItemsListBuilder {
+
+	public static final String WORLD_BASEMAP_KEY = "world_basemap.obf.zip";
+	public static final String WORLD_SEAMARKS_KEY = "world_seamarks_basemap.obf.zip";
 
 	public class ResourceItem {
 
@@ -273,7 +279,7 @@ public class ItemsListBuilder {
 	}
 
 	private void collectSubregionsDataAndItems() {
-		srtmDisabled = false; //todo: check if srtm plugin disabled
+		srtmDisabled = OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) == null;
 		hasSrtm = false;
 
 		// Collect all regions (and their parents) that have at least one
@@ -356,15 +362,19 @@ public class ItemsListBuilder {
 		Collections.sort(allResourceItems, new ResourceItemComparator());
 		Collections.sort(regionMapItems, new ResourceItemComparator());
 
-		/*
-		 * todo: remove seamarks if plugin is off
-		if (![[OAIAPHelper sharedInstance] productPurchased:kInAppId_Addon_Nautical]) {
-			for (ResourceItem *item in _regionMapItems)
-			if (item.resourceId.compare(QString(kWorldSeamarksKey)) == 0) {
-				[_regionMapItems removeObject:item];
-				break;
+		boolean nauticalPluginDisabled = OsmandPlugin.getEnabledPlugin(NauticalMapsPlugin.class) == null;
+
+		if (nauticalPluginDisabled) {
+			ResourceItem seamarksMapItem = null;
+			for (ResourceItem item : regionMapItems) {
+				if (item.getResourceId().equals(WORLD_SEAMARKS_KEY)) {
+					seamarksMapItem = item;
+					break;
+				}
+			}
+			if (seamarksMapItem != null) {
+				regionMapItems.remove(seamarksMapItem);
 			}
 		}
-		*/
 	}
 }
