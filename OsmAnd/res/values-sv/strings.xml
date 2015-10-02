@@ -2027,4 +2027,5 @@
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
     
+    <string name="srtm_plugin_disabled">Konturlinjer inaktiverade</string>
     </resources>
