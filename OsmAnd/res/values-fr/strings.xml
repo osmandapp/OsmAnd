@@ -2184,4 +2184,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="favorite_category_add_new">Ajouter une catégorie</string>
     <string name="favorite_category_select">Sélectionner une catégorie</string>
     <string name="downloading_number_of_fiels">Téléchargement - %1$d fichiers</string>
+<string name="srtm_plugin_disabled">Courbes de niveau désactivées</string>
+    <string name="show_free_version_banner">Afficher le bandeau \"Version Gratuite\"</string>
+    <string name="show_free_version_banner_description">Même si vous avez acheté la version payante, le bandeau \"Version Gratuite\" peut-être affiché</string>
 </resources>
