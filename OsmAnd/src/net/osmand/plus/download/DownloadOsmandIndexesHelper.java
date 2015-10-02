@@ -1,6 +1,8 @@
 package net.osmand.plus.download;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URLConnection;
@@ -107,9 +109,27 @@ public class DownloadOsmandIndexesHelper {
 				
 				log.info(strUrl);
 				XmlPullParser parser = XmlPullParserFactory.newInstance().newPullParser();
-				URLConnection connection = NetworkUtils.getHttpURLConnection(strUrl);
-				InputStream in = connection.getInputStream();
-				GZIPInputStream gzin = new GZIPInputStream(in);
+				File tmp = new File(ctx.getAppPath(IndexConstants.BACKUP_INDEX_DIR), "map_indexes.tmp");
+				if (!tmp.exists()) {
+					log.info(strUrl);
+
+					log.warn("111 - NO FILE");
+
+					URLConnection connection = NetworkUtils.getHttpURLConnection(strUrl);
+					InputStream in = connection.getInputStream();
+
+					FileOutputStream out = new FileOutputStream(tmp);
+					int read;
+					byte[] buffer = new byte[32256];
+					while ((read = in.read(buffer)) != -1) {
+						out.write(buffer, 0, read);
+					}
+					out.close();
+				} else {
+					log.warn("111 - READ BACKUP");
+				}
+
+				GZIPInputStream gzin = new GZIPInputStream(new FileInputStream(tmp));
 				parser.setInput(gzin, "UTF-8"); //$NON-NLS-1$
 				int next;
 				while((next = parser.next()) != XmlPullParser.END_DOCUMENT) {
@@ -128,7 +148,7 @@ public class DownloadOsmandIndexesHelper {
 				}
 				result.sort();
 				gzin.close();
-				in.close();
+				//in.close();
 			} catch (IOException e) {
 				log.error("Error while loading indexes from repository", e); //$NON-NLS-1$
 				return null;

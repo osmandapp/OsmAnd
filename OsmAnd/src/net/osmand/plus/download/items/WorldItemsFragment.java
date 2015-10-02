@@ -1,9 +1,9 @@
 package net.osmand.plus.download.items;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -11,38 +11,34 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
-import android.widget.ListView;
+import android.widget.ExpandableListView;
 import android.widget.TextView;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.WorldRegion;
+import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
+import net.osmand.plus.activities.OsmandExpandableListFragment;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.newimplementation.DownloadsUiHelper;
 
 import org.apache.commons.logging.Log;
 
-public class WorldItemsFragment extends Fragment {
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
+public class WorldItemsFragment extends OsmandExpandableListFragment {
 	public static final String TAG = "WorldItemsFragment";
 	private static final Log LOG = PlatformUtil.getLog(WorldItemsFragment.class);
 
 	public static final int RELOAD_ID = 0;
 
 	private ItemsListBuilder builder;
-	private WorldRegionsAdapter worldRegionsAdapter;
-	private WorldMapsAdapter worldMapsAdapter;
-	private VoicePromtsAdapter voicePromtsAdapter;
-
-	private TextView worldRegionsTextView;
-	private ListView worldRegionsListView;
-	private TextView worldMapsTextView;
-	private ListView worldMapsListView;
-	private TextView voicePromtsTextView;
-	private ListView voicePromtsListView;
+	private WorldItemsAdapter listAdapter;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -56,30 +52,11 @@ public class WorldItemsFragment extends Fragment {
 
 		builder = new ItemsListBuilder(getMyApplication(), getMyApplication().getWorldRegion());
 
-		worldRegionsTextView = (TextView) view.findViewById(R.id.list_world_regions_title);
-		worldRegionsTextView.setText("World regions".toUpperCase());
-		worldRegionsListView = (ListView) view.findViewById(R.id.list_world_regions);
-		worldRegionsAdapter = new WorldRegionsAdapter(getActivity(), getMyApplication());
-		worldRegionsListView.setAdapter(worldRegionsAdapter);
-		worldRegionsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				WorldRegion region = worldRegionsAdapter.getItem(position);
-				DownloadsUiHelper.showDialog(getActivity(), RegionDialogFragment.createInstance(region));
-			}
-		});
-
-		worldMapsTextView = (TextView) view.findViewById(R.id.list_world_maps_title);
-		worldMapsTextView.setText("World maps".toUpperCase());
-		worldMapsListView = (ListView) view.findViewById(R.id.list_world_maps);
-		worldMapsAdapter = new WorldMapsAdapter(getActivity());
-		worldMapsListView.setAdapter(worldMapsAdapter);
-
-		voicePromtsTextView = (TextView) view.findViewById(R.id.list_voice_promts_title);
-		voicePromtsTextView.setText("Voice promts".toUpperCase());
-		voicePromtsListView = (ListView) view.findViewById(R.id.list_voice_promts);
-		voicePromtsAdapter = new VoicePromtsAdapter(getActivity(), getMyApplication());
-		voicePromtsListView.setAdapter(voicePromtsAdapter);
+		ExpandableListView listView = (ExpandableListView)view.findViewById(android.R.id.list);
+		listAdapter = new WorldItemsAdapter(getActivity());
+		listView.setAdapter(listAdapter);
+		expandAllGroups();
+		setListView(listView);
 
 		onCategorizationFinished();
 
@@ -89,63 +66,33 @@ public class WorldItemsFragment extends Fragment {
 		return view;
 	}
 
-	public static void setListViewHeightBasedOnChildren(ListView listView) {
-		ListAdapter listAdapter = listView.getAdapter();
-		if (listAdapter == null) {
-			// pre-condition
-			return;
+	private void expandAllGroups() {
+		for (int i = 0; i < listAdapter.getGroupCount(); i++) {
+			getExpandableListView().expandGroup(i);
 		}
-
-		int totalHeight = 0;
-		for (int i = 0; i < listAdapter.getCount(); i++) {
-			View listItem = listAdapter.getView(i, null, listView);
-			listItem.measure(0, 0);
-			totalHeight += listItem.getMeasuredHeight();
-		}
-
-		ViewGroup.LayoutParams params = listView.getLayoutParams();
-		params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
-		listView.setLayoutParams(params);
-		listView.requestLayout();
 	}
 
 	public OsmandApplication getMyApplication() {
 		return (OsmandApplication)getActivity().getApplication();
 	}
 
-	private void fillWorldRegionsAdapter() {
-		if (worldRegionsAdapter != null) {
-			worldRegionsAdapter.clear();
-			worldRegionsAdapter.addAll(builder.getRegionsFromAllItems());
-			updateVisibility(worldRegionsAdapter, worldRegionsTextView, worldRegionsListView);
+	private void fillWorldItemsAdapter() {
+		if (listAdapter != null) {
+			listAdapter.clear();
+			listAdapter.add("World regions".toUpperCase(), builder.getRegionsFromAllItems());
+			listAdapter.add("World maps".toUpperCase(), builder.getRegionMapItems());
+			//listAdapter.add("Voice promts".toUpperCase(), null);
 		}
 	}
 
-	private void fillWorldMapsAdapter() {
-		if (worldMapsAdapter != null) {
-			worldMapsAdapter.clear();
-			worldMapsAdapter.addAll(builder.getRegionMapItems());
-			updateVisibility(worldMapsAdapter, worldMapsTextView, worldMapsListView);
+	@Override
+	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+		if (groupPosition == 0) {
+			WorldRegion region = (WorldRegion)listAdapter.getChild(groupPosition, childPosition);
+			DownloadsUiHelper.showDialog(getActivity(), RegionDialogFragment.createInstance(region));
+			return true;
 		}
-	}
-
-	private void fillVoicePromtsAdapter() {
-		if (voicePromtsAdapter != null) {
-			voicePromtsAdapter.clear();
-			//voicePromtsAdapter.addAll(cats);
-			updateVisibility(voicePromtsAdapter, voicePromtsTextView, voicePromtsListView);
-		}
-	}
-
-	private void updateVisibility(ArrayAdapter adapter, TextView textView, ListView listView) {
-		if (adapter.isEmpty()) {
-			textView.setVisibility(View.GONE);
-			listView.setVisibility(View.GONE);
-		} else {
-			textView.setVisibility(View.VISIBLE);
-			listView.setVisibility(View.VISIBLE);
-			setListViewHeightBasedOnChildren(listView);
-		}
+		return false;
 	}
 
 	@Override
@@ -171,97 +118,160 @@ public class WorldItemsFragment extends Fragment {
 
 	public void onCategorizationFinished() {
 		if (builder.build()) {
-			fillWorldRegionsAdapter();
-			fillWorldMapsAdapter();
-			fillVoicePromtsAdapter();
+			fillWorldItemsAdapter();
+			listAdapter.notifyDataSetChanged();
+			expandAllGroups();
 		}
 	}
 
-	private static class WorldRegionsAdapter extends ArrayAdapter<WorldRegion> {
-		private final OsmandApplication osmandApplication;
+	private class WorldItemsAdapter extends OsmandBaseExpandableListAdapter {
 
-		public WorldRegionsAdapter(Context context, OsmandApplication osmandApplication) {
-			super(context, R.layout.simple_list_menu_item);
-			this.osmandApplication = osmandApplication;
-		}
+		Map<String, List> data = new LinkedHashMap<>();
+		List<String> sections = new LinkedList<>();
+		Context ctx;
 
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			ViewHolder viewHolder;
-			if (convertView == null) {
-				convertView = LayoutInflater.from(parent.getContext())
-						.inflate(R.layout.simple_list_menu_item, parent, false);
-				viewHolder = new ViewHolder();
-				viewHolder.textView = (TextView) convertView.findViewById(R.id.title);
-				convertView.setTag(viewHolder);
-			} else {
-				viewHolder = (ViewHolder) convertView.getTag();
-			}
-			Drawable iconLeft = osmandApplication.getIconsCache()
-					.getContentIcon(R.drawable.ic_world_globe_dark);
-			viewHolder.textView.setCompoundDrawablesWithIntrinsicBounds(iconLeft, null, null, null);
-			viewHolder.textView.setText(getItem(position).getName());
-			return convertView;
-		}
-
-		private static class ViewHolder {
+		private class SimpleViewHolder {
 			TextView textView;
 		}
-	}
 
-	private static class WorldMapsAdapter extends ArrayAdapter<ItemsListBuilder.ResourceItem> {
+		public WorldItemsAdapter(Context ctx) {
+			this.ctx = ctx;
+			TypedArray ta = ctx.getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorPrimary});
+			ta.recycle();
+		}
 
-		public WorldMapsAdapter(Context context) {
-			super(context, R.layout.simple_list_menu_item);
+		public void clear() {
+			data.clear();
+			sections.clear();
+			notifyDataSetChanged();
+		}
+
+		public void add(String section, List list) {
+			if (!sections.contains(section)) {
+				sections.add(section);
+			}
+			if (!data.containsKey(section)) {
+				data.put(section, new ArrayList());
+			}
+			data.get(section).addAll(list);
 		}
 
 		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			ItemViewHolder viewHolder;
-			if (convertView == null) {
-				convertView = LayoutInflater.from(parent.getContext())
-						.inflate(R.layout.two_line_with_images_list_item, parent, false);
-				viewHolder = new ItemViewHolder(convertView);
-				convertView.setTag(viewHolder);
-			} else {
-				viewHolder = (ItemViewHolder) convertView.getTag();
-			}
-			ItemsListBuilder.ResourceItem item = getItem(position);
-			viewHolder.bindIndexItem(item.getIndexItem(), (DownloadActivity) getContext(), false, false);
-			return convertView;
-		}
-	}
-
-	private static class VoicePromtsAdapter extends ArrayAdapter {
-		private final OsmandApplication osmandApplication;
-
-		public VoicePromtsAdapter(Context context, OsmandApplication osmandApplication) {
-			super(context, R.layout.simple_list_menu_item);
-			this.osmandApplication = osmandApplication;
+		public Object getChild(int groupPosition, int childPosition) {
+			String section = sections.get(groupPosition);
+			return data.get(section).get(childPosition);
 		}
 
 		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			ViewHolder viewHolder;
-			if (convertView == null) {
-				convertView = LayoutInflater.from(parent.getContext())
-						.inflate(R.layout.simple_list_menu_item, parent, false);
-				viewHolder = new ViewHolder();
-				viewHolder.textView = (TextView) convertView.findViewById(R.id.title);
-				convertView.setTag(viewHolder);
+		public long getChildId(int groupPosition, int childPosition) {
+			return groupPosition * 10000 + childPosition;
+		}
+
+		@Override
+		public int getChildType(int groupPosition, int childPosition) {
+			final Object child = getChild(groupPosition, childPosition);
+			if (child instanceof WorldRegion) {
+				return 0;
 			} else {
-				viewHolder = (ViewHolder) convertView.getTag();
+				return 1;
 			}
-			Drawable iconLeft = osmandApplication.getIconsCache()
-					.getContentIcon(R.drawable.ic_world_globe_dark);
-			viewHolder.textView.setCompoundDrawablesWithIntrinsicBounds(iconLeft, null, null, null);
-			viewHolder.textView.setText(getItem(position).toString());
+		}
+
+		@Override
+		public int getChildTypeCount() {
+			return 2;
+		}
+
+		@Override
+		public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+
+			final Object child = getChild(groupPosition, childPosition);
+
+			if (child instanceof WorldRegion) {
+				WorldRegion item = (WorldRegion)child;
+				SimpleViewHolder viewHolder;
+				if (convertView == null) {
+					convertView = LayoutInflater.from(parent.getContext())
+							.inflate(R.layout.simple_list_menu_item, parent, false);
+					viewHolder = new SimpleViewHolder();
+					viewHolder.textView = (TextView) convertView.findViewById(R.id.title);
+					convertView.setTag(viewHolder);
+				} else {
+					viewHolder = (SimpleViewHolder) convertView.getTag();
+				}
+				Drawable iconLeft = getMyApplication().getIconsCache()
+						.getContentIcon(R.drawable.ic_world_globe_dark);
+				viewHolder.textView.setCompoundDrawablesWithIntrinsicBounds(iconLeft, null, null, null);
+				viewHolder.textView.setText(item.getName());
+
+			} else if (child instanceof ItemsListBuilder.ResourceItem) {
+				ItemsListBuilder.ResourceItem item = (ItemsListBuilder.ResourceItem) child;
+				ItemViewHolder viewHolder;
+				if (convertView == null) {
+					convertView = LayoutInflater.from(parent.getContext())
+							.inflate(R.layout.two_line_with_images_list_item, parent, false);
+					viewHolder = new ItemViewHolder(convertView);
+					convertView.setTag(viewHolder);
+				} else {
+					viewHolder = (ItemViewHolder) convertView.getTag();
+				}
+				viewHolder.bindIndexItem(item.getIndexItem(), getDownloadActivity(), false, false);
+			}
+
+			convertView.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					onChildClick(null, v, groupPosition, childPosition, 0);
+				}
+			});
+
 			return convertView;
 		}
 
-		private static class ViewHolder {
-			TextView textView;
+		@Override
+		public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
+			View v = convertView;
+			String section = getGroup(groupPosition);
+			if (v == null) {
+				LayoutInflater inflater = (LayoutInflater) getDownloadActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+				v = inflater.inflate(R.layout.download_item_list_section, parent, false);
+			}
+			TextView nameView = ((TextView) v.findViewById(R.id.section_name));
+			nameView.setText(section);
+
+			v.setOnClickListener(null);
+			return v;
+		}
+
+		@Override
+		public int getChildrenCount(int groupPosition) {
+			String section = sections.get(groupPosition);
+			return data.get(section).size();
+		}
+
+		@Override
+		public String getGroup(int groupPosition) {
+			return sections.get(groupPosition);
+		}
+
+		@Override
+		public int getGroupCount() {
+			return sections.size();
+		}
+
+		@Override
+		public long getGroupId(int groupPosition) {
+			return groupPosition;
+		}
+
+		@Override
+		public boolean hasStableIds() {
+			return false;
+		}
+
+		@Override
+		public boolean isChildSelectable(int groupPosition, int childPosition) {
+			return true;
 		}
 	}
-
 }

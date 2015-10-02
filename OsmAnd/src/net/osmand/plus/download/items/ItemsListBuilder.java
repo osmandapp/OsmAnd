@@ -6,12 +6,10 @@ import net.osmand.PlatformUtil;
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.R;
 import net.osmand.plus.WorldRegion;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.util.Algorithms;
 
@@ -35,9 +33,6 @@ public class ItemsListBuilder {
 
 		private String resourceId;
 		private String title;
-		private long contentSize;
-		private long containerSize;
-		private boolean disabled;
 
 		private IndexItem indexItem;
 		private WorldRegion worldRegion;
@@ -64,30 +59,6 @@ public class ItemsListBuilder {
 
 		public void setTitle(String title) {
 			this.title = title;
-		}
-
-		public long getContentSize() {
-			return contentSize;
-		}
-
-		public void setContentSize(long contentSize) {
-			this.contentSize = contentSize;
-		}
-
-		public long getContainerSize() {
-			return containerSize;
-		}
-
-		public void setContainerSize(long containerSize) {
-			this.containerSize = containerSize;
-		}
-
-		public boolean isDisabled() {
-			return disabled;
-		}
-
-		public void setDisabled(boolean disabled) {
-			this.disabled = disabled;
 		}
 
 		public ResourceItem(IndexItem indexItem, WorldRegion worldRegion) {
@@ -158,7 +129,7 @@ public class ItemsListBuilder {
 
 	public ItemsListBuilder(OsmandApplication app) {
 		this.app = app;
-		regionMapItems = new LinkedList();
+		regionMapItems = new LinkedList<>();
 		allResourceItems = new LinkedList();
 		allSubregionItems = new LinkedList<>();
 	}
@@ -320,8 +291,6 @@ public class ItemsListBuilder {
 			ResourceItem resItem = new ResourceItem(indexItem, region);
 			resItem.setResourceId(indexItem.getSimplifiedFileName());
 			resItem.setTitle(name);
-			resItem.setContentSize(indexItem.getContentSize());
-			resItem.setContainerSize(indexItem.getSize());
 
 			if (region != this.region && srtmDisabled) {
 				if (hasSrtm && indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE)
