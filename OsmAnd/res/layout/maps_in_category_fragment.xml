@@ -15,7 +15,8 @@
         app:contentInsetLeft="72dp"
         app:contentInsetStart="72dp"/>
 
-    <include layout="@layout/free_version_banner"/>
+    <include layout="@layout/free_version_banner"
+        android:background="#F00"/>
     <LinearLayout
         android:id="@+id/downloadProgressLayout"
         xmlns:tools="http://schemas.android.com/tools"

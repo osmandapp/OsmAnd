@@ -9,20 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.WorldRegion;
-import net.osmand.plus.download.BaseDownloadActivity;
 import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.download.DownloadActivityType;
-import net.osmand.plus.download.IndexItem;
 
 import org.apache.commons.logging.Log;
 
@@ -74,7 +69,7 @@ public class LocalItemsFragment extends Fragment {
 
 		this.region = region;
 
-		View view = inflater.inflate(R.layout.download_index_fragment, container, false);
+		View view = inflater.inflate(R.layout.local_items_fragment, container, false);
 
 		builder = new ItemsListBuilder(getMyApplication(), this.region);
 

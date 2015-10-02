@@ -69,7 +69,7 @@ public class NewLocalIndexesFragment extends OsmAndListFragment {
 
 		View header = inflater.inflate(R.layout.local_index_fragment_header, listView, false);
 		initMemoryConsumedCard(header);
-		DownloadsUiInitHelper.initFreeVersionBanner(header, getMyApplication().getSettings(),
+		DownloadsUiHelper.initFreeVersionBanner(header, getMyApplication().getSettings(),
 				getResources());
 		listView.addHeaderView(header);
 

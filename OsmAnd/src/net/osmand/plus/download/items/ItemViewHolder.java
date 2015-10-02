@@ -55,9 +55,9 @@ public class ItemViewHolder {
 			public void onClick(View v) {
 				((BaseDownloadActivity) v.getContext())
 						.startDownload((IndexItem) v.getTag(R.id.index_item));
-				progressBar.setVisibility(View.VISIBLE);
-				rightImageButton.setImageDrawable(getContextIcon(context,
-						R.drawable.ic_action_remove_dark));
+//				progressBar.setVisibility(View.VISIBLE);
+//				rightImageButton.setImageDrawable(getContextIcon(context,
+//						R.drawable.ic_action_remove_dark));
 			}
 		});
 		progressBar.setVisibility(View.GONE);

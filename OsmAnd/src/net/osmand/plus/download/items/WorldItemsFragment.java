@@ -23,7 +23,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.WorldRegion;
 import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.download.newimplementation.DownloadsUiInitHelper;
+import net.osmand.plus.download.newimplementation.DownloadsUiHelper;
 
 import org.apache.commons.logging.Log;
 
@@ -88,7 +88,7 @@ public class WorldItemsFragment extends Fragment {
 
 		onCategorizationFinished();
 
-		DownloadsUiInitHelper.initFreeVersionBanner(view,
+		DownloadsUiHelper.initFreeVersionBanner(view,
 				getMyApplication().getSettings(), getResources());
 
 		return view;

@@ -12,6 +12,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.WorldRegion;
+import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.download.newimplementation.DownloadsUiHelper;
 
 import org.apache.commons.logging.Log;
 
@@ -20,6 +22,7 @@ public class LocalDialogFragment extends DialogFragment {
 	public static final String TAG = "LocalDialogFragment";
 	private static final String REGION_DLG_KEY = "world_region_dialog_key";
 	private WorldRegion region;
+	private DownloadsUiHelper.MapDownloadListener mProgressListener;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -33,7 +36,7 @@ public class LocalDialogFragment extends DialogFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.maps_in_category_fragment, container, false);
+		final View view = inflater.inflate(R.layout.maps_in_category_fragment, container, false);
 
 		WorldRegion region = null;
 		if (savedInstanceState != null) {
@@ -65,8 +68,30 @@ public class LocalDialogFragment extends DialogFragment {
 					LocalItemsFragment.createInstance(region)).commit();
 			toolbar.setTitle(this.region.getName());
 		}
+		DownloadsUiHelper.initFreeVersionBanner(view, getMyApplication().getSettings(),
+				getResources());
+		mProgressListener = new DownloadsUiHelper.MapDownloadListener(view, getResources()){
+			@Override
+			public void onFinished() {
+				super.onFinished();
+				DownloadsUiHelper.initFreeVersionBanner(view,
+						getMyApplication().getSettings(), getResources());
+			}
+		};
 
 		return view;
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		getMyActivity().setOnProgressUpdateListener(mProgressListener);
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		getMyActivity().setOnProgressUpdateListener(null);
 	}
 
 	@Override
@@ -77,6 +102,10 @@ public class LocalDialogFragment extends DialogFragment {
 
 	private OsmandApplication getMyApplication() {
 		return (OsmandApplication) getActivity().getApplication();
+	}
+
+	private DownloadActivity getMyActivity() {
+		return (DownloadActivity) getActivity();
 	}
 
 	public void onRegionSelected(WorldRegion region) {

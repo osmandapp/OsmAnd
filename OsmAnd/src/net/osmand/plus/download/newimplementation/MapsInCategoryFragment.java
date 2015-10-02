@@ -1,6 +1,5 @@
 package net.osmand.plus.download.newimplementation;
 
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
@@ -8,8 +7,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -23,7 +20,7 @@ public class MapsInCategoryFragment extends DialogFragment {
 	private static final Log LOG = PlatformUtil.getLog(IndexItemCategoryWithSubcat.class);
 	public static final String TAG = "MapsInCategoryFragment";
 	private static final String CATEGORY = "category";
-	private MapDownloadListener mProgressListener;
+	private DownloadsUiHelper.MapDownloadListener mProgressListener;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -44,7 +41,6 @@ public class MapsInCategoryFragment extends DialogFragment {
 		getChildFragmentManager().beginTransaction().add(R.id.fragmentContainer,
 				SubcategoriesFragment.createInstance(category)).commit();
 
-
 		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
 		toolbar.setTitle(category.getName());
 		toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
@@ -55,13 +51,13 @@ public class MapsInCategoryFragment extends DialogFragment {
 			}
 		});
 
-		DownloadsUiInitHelper.initFreeVersionBanner(view,
+		DownloadsUiHelper.initFreeVersionBanner(view,
 				getMyActivity().getMyApplication().getSettings(), getResources());
-		mProgressListener = new MapDownloadListener(view, getResources()){
+		mProgressListener = new DownloadsUiHelper.MapDownloadListener(view, getResources()){
 			@Override
 			public void onFinished() {
 				super.onFinished();
-				DownloadsUiInitHelper.initFreeVersionBanner(view,
+				DownloadsUiHelper.initFreeVersionBanner(view,
 						getMyActivity().getMyApplication().getSettings(), getResources());
 			}
 		};
@@ -104,39 +100,5 @@ public class MapsInCategoryFragment extends DialogFragment {
 		return fragment;
 	}
 
-	private static class MapDownloadListener implements DownloadActivity.OnProgressUpdateListener {
-		private final View freeVersionBanner;
-		private final View downloadProgressLayout;
-		private final ProgressBar progressBar;
-		private final TextView leftTextView;
-		private final TextView rightTextView;
-		private final Resources resources;
 
-		MapDownloadListener(View view, Resources resources) {
-			this.resources = resources;
-			freeVersionBanner = view.findViewById(R.id.freeVersionBanner);
-			downloadProgressLayout = view.findViewById(R.id.downloadProgressLayout);
-			progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
-			leftTextView = (TextView) view.findViewById(R.id.leftTextView);
-			rightTextView = (TextView) view.findViewById(R.id.rightTextView);
-		}
-		@Override
-		public void onProgressUpdate(int progressPercentage, int activeTasks) {
-			if (freeVersionBanner.getVisibility() == View.VISIBLE) {
-				freeVersionBanner.setVisibility(View.GONE);
-				downloadProgressLayout.setVisibility(View.VISIBLE);
-			}
-			progressBar.setProgress(progressPercentage);
-			final String format = resources.getString(R.string.downloading_number_of_fiels);
-			String numberOfTasks = String.format(format, activeTasks);
-			leftTextView.setText(numberOfTasks);
-			rightTextView.setText(progressPercentage + "%");
-		}
-
-		@Override
-		public void onFinished() {
-			freeVersionBanner.setVisibility(View.VISIBLE);
-			downloadProgressLayout.setVisibility(View.GONE);
-		}
-	}
 }
