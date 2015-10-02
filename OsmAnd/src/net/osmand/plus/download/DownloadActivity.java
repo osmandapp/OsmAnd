@@ -627,11 +627,17 @@ public class DownloadActivity extends BaseDownloadActivity {
 
 	public void setOnProgressUpdateListener(OnProgressUpdateListener onProgressUpdateListener) {
 		this.onProgressUpdateListener = onProgressUpdateListener;
-		BasicProgressAsyncTask<?, ?, ?> basicProgressAsyncTask = DownloadActivity.downloadListIndexThread.getCurrentRunningTask();
+		if (onProgressUpdateListener == null) return;
+		BasicProgressAsyncTask<?, ?, ?> basicProgressAsyncTask =
+				DownloadActivity.downloadListIndexThread.getCurrentRunningTask();
 		final boolean isFinished = basicProgressAsyncTask == null
 				|| basicProgressAsyncTask.getStatus() == AsyncTask.Status.FINISHED;
 		if (isFinished) {
-			this.onProgressUpdateListener.onFinished();
+			onProgressUpdateListener.onFinished();
+		} else {
+			onProgressUpdateListener.onProgressUpdate(
+					basicProgressAsyncTask.getProgressPercentage(),
+					downloadListIndexThread.getDownloads());
 		}
 	}
 

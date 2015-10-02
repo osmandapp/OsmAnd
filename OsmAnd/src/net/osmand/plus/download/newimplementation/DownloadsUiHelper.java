@@ -1,6 +1,10 @@
 package net.osmand.plus.download.newimplementation;
 
 import android.content.res.Resources;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -44,6 +48,17 @@ public final class DownloadsUiHelper {
 		ProgressBar downloadsLeftProgressBar =
 				(ProgressBar) header.findViewById(R.id.downloadsLeftProgressBar);
 		downloadsLeftProgressBar.setProgress(settings.NUMBER_OF_FREE_DOWNLOADS.get());
+	}
+
+	public static void showDialog(FragmentActivity activity, DialogFragment fragment) {
+		FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
+		Fragment prev = activity.getSupportFragmentManager().findFragmentByTag("dialog");
+		if (prev != null) {
+			ft.remove(prev);
+		}
+		ft.addToBackStack(null);
+
+		fragment.show(ft, "dialog");
 	}
 
 	public static class MapDownloadListener implements DownloadActivity.OnProgressUpdateListener {

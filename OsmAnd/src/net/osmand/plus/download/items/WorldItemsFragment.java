@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.MenuItemCompat;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -66,11 +65,7 @@ public class WorldItemsFragment extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				WorldRegion region = worldRegionsAdapter.getItem(position);
-
-				FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
-				fragmentTransaction.addToBackStack(null);
-				RegionDialogFragment.createInstance(region)
-						.show(fragmentTransaction, RegionDialogFragment.TAG);
+				DownloadsUiHelper.showDialog(getActivity(), RegionDialogFragment.createInstance(region));
 			}
 		});
 

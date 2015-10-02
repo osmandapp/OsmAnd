@@ -2,6 +2,7 @@ package net.osmand.plus.download.items;
 
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -64,13 +65,24 @@ public class RegionDialogFragment extends DialogFragment {
 		});
 
 		if (this.region != null) {
-			getChildFragmentManager().beginTransaction().add(R.id.fragmentContainer,
-					RegionItemsFragment.createInstance(region)).commit();
+			Fragment fragment = getChildFragmentManager().findFragmentById(R.id.fragmentContainer);
+			if (fragment == null) {
+				getChildFragmentManager().beginTransaction().add(R.id.fragmentContainer,
+						RegionItemsFragment.createInstance(region)).commit();
+			}
 			toolbar.setTitle(this.region.getName());
 		}
 		DownloadsUiHelper.initFreeVersionBanner(view, getMyApplication().getSettings(),
 				getResources());
+
+		final WorldRegion finalRegion = region;
 		mProgressListener = new DownloadsUiHelper.MapDownloadListener(view, getResources()){
+			@Override
+			public void onProgressUpdate(int progressPercentage, int activeTasks) {
+				LOG.debug(finalRegion.getName() + " onProgressUpdate()");
+				super.onProgressUpdate(progressPercentage, activeTasks);
+			}
+
 			@Override
 			public void onFinished() {
 				super.onFinished();
@@ -85,6 +97,7 @@ public class RegionDialogFragment extends DialogFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
+		LOG.debug(region.getName() + " onResume()");
 		getMyActivity().setOnProgressUpdateListener(mProgressListener);
 	}
 
@@ -109,7 +122,7 @@ public class RegionDialogFragment extends DialogFragment {
 	}
 
 	public void onRegionSelected(WorldRegion region) {
-		createInstance(region).show(getChildFragmentManager(), TAG);
+		DownloadsUiHelper.showDialog(getActivity(), createInstance(region));
 	}
 
 	public static RegionDialogFragment createInstance(WorldRegion region) {
