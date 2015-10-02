@@ -15,9 +15,11 @@ import android.widget.TextView;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.WorldRegion;
 import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.srtmplugin.SRTMPlugin;
 
 import org.apache.commons.logging.Log;
 
@@ -111,26 +113,6 @@ public class RegionItemsFragment extends Fragment {
 		return view;
 	}
 
-	public static void setListViewHeightBasedOnChildren(ListView listView) {
-		ListAdapter listAdapter = listView.getAdapter();
-		if (listAdapter == null) {
-			// pre-condition
-			return;
-		}
-
-		int totalHeight = 0;
-		for (int i = 0; i < listAdapter.getCount(); i++) {
-			View listItem = listAdapter.getView(i, null, listView);
-			listItem.measure(0, 0);
-			totalHeight += listItem.getMeasuredHeight();
-		}
-
-		ViewGroup.LayoutParams params = listView.getLayoutParams();
-		params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
-		listView.setLayoutParams(params);
-		listView.requestLayout();
-	}
-
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		outState.putSerializable(REGION_KEY, region);
@@ -172,7 +154,6 @@ public class RegionItemsFragment extends Fragment {
 		} else {
 			textView.setVisibility(View.VISIBLE);
 			listView.setVisibility(View.VISIBLE);
-			setListViewHeightBasedOnChildren(listView);
 		}
 	}
 
@@ -189,9 +170,11 @@ public class RegionItemsFragment extends Fragment {
 	}
 
 	private static class MapsAdapter extends ArrayAdapter<ItemsListBuilder.ResourceItem> {
+		private boolean srtmDisabled;
 
 		public MapsAdapter(Context context) {
 			super(context, R.layout.simple_list_menu_item);
+			srtmDisabled = OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) == null;
 		}
 
 		@Override
@@ -205,6 +188,8 @@ public class RegionItemsFragment extends Fragment {
 			} else {
 				viewHolder = (ItemViewHolder) convertView.getTag();
 			}
+			viewHolder.setSrtmDisabled(srtmDisabled);
+
 			ItemsListBuilder.ResourceItem item = getItem(position);
 			viewHolder.bindIndexItem(item.getIndexItem(), (DownloadActivity) getContext(), true, false);
 			return convertView;
@@ -212,9 +197,11 @@ public class RegionItemsFragment extends Fragment {
 	}
 
 	private static class RegionsAdapter extends ArrayAdapter {
+		private boolean srtmDisabled;
 
 		public RegionsAdapter(Context context) {
 			super(context, R.layout.two_line_with_images_list_item);
+			srtmDisabled = OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) == null;
 		}
 
 		@Override
@@ -228,6 +215,8 @@ public class RegionItemsFragment extends Fragment {
 			} else {
 				viewHolder = (ItemViewHolder) convertView.getTag();
 			}
+			viewHolder.setSrtmDisabled(srtmDisabled);
+
 			Object item = getItem(position);
 			if (item instanceof WorldRegion) {
 				viewHolder.bindRegion((WorldRegion) item, (DownloadActivity) getContext());

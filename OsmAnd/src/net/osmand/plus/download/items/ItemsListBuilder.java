@@ -6,6 +6,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.R;
 import net.osmand.plus.WorldRegion;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
@@ -326,12 +327,6 @@ public class ItemsListBuilder {
 				if (hasSrtm && indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE)
 					continue;
 
-				if (indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE) {
-					resItem.setTitle("srtm_disabled"); // todo: constant
-					resItem.setContentSize(0);
-					resItem.setContainerSize(0);
-				}
-
 				if (!hasSrtm && indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE)
 					hasSrtm = true;
 			}
@@ -362,6 +357,7 @@ public class ItemsListBuilder {
 		Collections.sort(allResourceItems, new ResourceItemComparator());
 		Collections.sort(regionMapItems, new ResourceItemComparator());
 
+		/*
 		boolean nauticalPluginDisabled = OsmandPlugin.getEnabledPlugin(NauticalMapsPlugin.class) == null;
 
 		if (nauticalPluginDisabled) {
@@ -376,5 +372,6 @@ public class ItemsListBuilder {
 				regionMapItems.remove(seamarksMapItem);
 			}
 		}
+		*/
 	}
 }

@@ -19,6 +19,7 @@ public class ItemViewHolder {
 	private final ImageView leftImageView;
 	private final ImageView rightImageButton;
 	private final ProgressBar progressBar;
+	private boolean srtmDisabled;
 
 	public ItemViewHolder(View convertView) {
 		nameTextView = (TextView) convertView.findViewById(R.id.name);
@@ -28,18 +29,30 @@ public class ItemViewHolder {
 		progressBar = (ProgressBar) convertView.findViewById(R.id.progressBar);
 	}
 
+	public void setSrtmDisabled(boolean srtmDisabled) {
+		this.srtmDisabled = srtmDisabled;
+	}
+
 	public void bindIndexItem(final IndexItem indexItem, final DownloadActivity context, boolean showTypeInTitle, boolean showTypeInDesc) {
+		boolean light = context.getMyApplication().getSettings().isLightContent();
+
 		if (indexItem.getType() == DownloadActivityType.VOICE_FILE) {
 			nameTextView.setText(indexItem.getVisibleName(context,
 					context.getMyApplication().getRegions()));
 		} else {
-			if (showTypeInTitle) {
+			if (indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE && srtmDisabled) {
+				nameTextView.setText(context.getString(R.string.srtm_plugin_disabled));
+				nameTextView.setTextColor(context.getResources().getColor(light ? android.R.color.secondary_text_light : android.R.color.secondary_text_dark));
+			} else if (showTypeInTitle) {
 				nameTextView.setText(indexItem.getType().getString(context));
 			} else {
 				nameTextView.setText(indexItem.getVisibleName(context, context.getMyApplication().getRegions()));
 			}
 		}
-		if (showTypeInDesc) {
+
+		if (!showTypeInTitle && indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE && srtmDisabled) {
+			descrTextView.setText(indexItem.getType().getString(context));
+		} else if (showTypeInDesc) {
 			descrTextView.setText(indexItem.getType().getString(context) + "  •  " + indexItem.getSizeDescription(context));
 		} else {
 			descrTextView.setText(indexItem.getSizeDescription(context));
