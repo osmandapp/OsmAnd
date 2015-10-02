@@ -877,14 +877,14 @@
 	<string name="poi_kissing_gate">Portillon à chicane</string>
 	<string name="poi_sally_port">Poterne</string>
 	<string name="poi_swing_gate">Portillon pivotant</string>
-	<string name="poi_icn_ref">Réseau cycliste international</string>
-	<string name="poi_ncn_ref">Réseau cycliste national</string>
-	<string name="poi_rcn_ref">Réseau cycliste régional</string>
-	<string name="poi_lcn_ref">Réseau cycliste local</string>
+	<string name="poi_icn_ref">Noeud du réseau cycliste international</string>
+	<string name="poi_ncn_ref">Noeud du réseau cycliste national</string>
+	<string name="poi_rcn_ref">Noeud du réseau cycliste régional</string>
+	<string name="poi_lcn_ref">Noeud du réseau cycliste local</string>
 
-	<string name="poi_iwn_ref">Réseau international de randonnée pédestre</string>
-	<string name="poi_nwn_ref">Réseau national de randonnée pédestre</string>
-	<string name="poi_lwn_ref">Réseau local de randonnée pédestre</string>
+	<string name="poi_iwn_ref">Noeud du réseau international de randonnée pédestre</string>
+	<string name="poi_nwn_ref">Noeud du réseau national de randonnée pédestre</string>
+	<string name="poi_lwn_ref">Noeud du réseau local de randonnée pédestre</string>
 
 	<string name="poi_opening_hours">Heures d\'ouverture</string>
 	<string name="poi_description">Description</string>
@@ -913,7 +913,7 @@
 	<string name="poi_general_barrier">Barrière générale</string>
 	<string name="poi_collection_times">Heures de levée</string>
 	<string name="poi_bus_trap">Passe à bus</string>
-	<string name="poi_rwn_ref">Réseau régional de randonnée pédestre</string>
+	<string name="poi_rwn_ref">Noeud du réseau régional de randonnée pédestre</string>
 	<string name="poi_country">Pays</string>
 	<string name="poi_fee_yes">Tarif</string>
 
@@ -957,8 +957,8 @@
 	<string name="poi_email">Email</string>
 	<string name="poi_fax">Fax</string>
 	<string name="poi_facebook">Facebook</string>
-	<string name="poi_drinking_water_yes">Eau potable</string>
-	<string name="poi_drinking_water_no">Eau non potable</string>
+	<string name="poi_drinking_water_yes">Eau potable : Oui</string>
+	<string name="poi_drinking_water_no">Eau potable : Non</string>
 	<string name="poi_seasonal_no">Permanent</string>
 	<string name="poi_seasonal_yes">Saisonnier</string>
 	<string name="poi_seasonal_wet_season">Saison humide</string>
@@ -1200,4 +1200,189 @@
 
 	<string name="poi_rooms">Chambres</string>
 
+	<string name="poi_recycling_beverage_cartons">Cartons de boissons</string>
+	<string name="poi_foundation">Bureau d\'une fondation</string>
+	<string name="poi_denomination_baptist">Baptiste</string>
+	<string name="poi_denomination_methodist">Méthodiste</string>
+	<string name="poi_denomination_presbyterian">Presbytérien</string>
+	<string name="poi_denomination_united_reformed">Réformé unifié</string>
+	<string name="poi_denomination_iglesia_ni_cristo">Iglesia ni cristo</string>
+	<string name="poi_denomination_assemblies_of_god">Assemblées de Dieu</string>
+	<string name="poi_denomination_united_methodist">Méthodiste unifié</string>
+	<string name="poi_denomination_old_believers">Anciens croyants</string>
+	<string name="poi_denomination_spiritist">Spiritiste</string>
+	<string name="poi_denomination_church_of_christ">Eglise du Christ</string>
+	<string name="poi_denomination_united_church_of_christ">Eglise unifée du Christ</string>
+	<string name="poi_denomination_georgian_orthodox">Orthodoxe georgien</string>
+	<string name="poi_internet_access_yes">Accès Internet : Oui</string>
+	<string name="poi_internet_access_no">Accès Internet : Non</string>
+
+	<string name="poi_content_water">Contenu : Eau</string>
+	<string name="poi_content_oil">Contenu : Pétrole</string>
+	<string name="poi_content_fuel">Contenu : Fioul</string>
+	<string name="poi_content_biomass">Contenu : Biomasse</string>
+	<string name="poi_trade_agricultural_supplies">Fournitures agricoles</string>
+	<string name="poi_trade_building_supplies">Fournitures pour la construction</string>
+	<string name="poi_inscription">Inscription</string>
+
+<string name="poi_memorial_obelisk">Obélisque</string>
+
+	<string name="poi_memorial_cross">Carrefour</string>
+	<string name="poi_memorial_vehicle">Véhicule</string>
+	<string name="poi_bicycle_parking_wall_loops">Boucles murales</string>
+	<string name="poi_species">Espèces</string>
+	<string name="poi_information_sign">Panneau</string>
+	<string name="poi_covered_yes">Couvert</string>
+	<string name="poi_covered_no">Non couvert</string>
+
+	<string name="poi_smoking_outside">Autorisation de fumer à l\'extérieur uniquement</string>
+	<string name="poi_services">Zone de service</string>
+	<string name="poi_mini_roundabout">Mini rond-point</string>
+	<string name="poi_level">Niveau</string>
+	<string name="poi_garden_type_residential">Type de jardin : résidentiel</string>
+	<string name="poi_garden_type_community">Type de jardin : partagé</string>
+	<string name="poi_garden_type_private">Type de jardin : privé</string>
+	<string name="poi_garden_type_botanical">Type de jardin : botanique</string>
+
+	<string name="poi_garden_style_kitchen">Type de jardin : potager</string>
+	<string name="poi_garden_style_rosarium">Type de jardin : roseraie</string>
+	<string name="poi_garden_style_french">Type de jardin : français</string>
+	<string name="poi_garden_style_english">Type de jardin : anglais</string>
+	<string name="poi_garden_style_japanese">Type de jardin : japonais</string>
+
+	<string name="poi_capacity_disabled_yes">Places réservées aux handicapés</string>
+	<string name="poi_capacity_disabled">Places réservées aux handicapés</string>
+	<string name="poi_capacity_women_yes">Places réservées aux femmes</string>
+	<string name="poi_capacity_women">Places réservées aux femmes</string>
+	<string name="poi_capacity_pupils">Places réservées aux étudiants</string>
+	<string name="poi_capacity_teachers">Places réservées aux enseignants</string>
+	<string name="poi_capacity_parent_yes">Places réservées aux parents</string>
+	<string name="poi_capacity_parent">Places réservées aux parents</string>
+
+	<string name="poi_stars_1">Etoiles : 1 (touriste)</string>
+	<string name="poi_stars_1s">Etoiles : 1S (touriste supérieur)</string>
+	<string name="poi_stars_2">Etoiles : 2 (standard)</string>
+	<string name="poi_stars_2s">Etoiles : 2S (standard supérieur)</string>
+	<string name="poi_stars_3">Etoiles : 3 (confort)</string>
+	<string name="poi_stars_3s">Etoiles : 3S (confort supérieur)</string>
+	<string name="poi_stars_4">Etoiles : 4 (première classe)</string>
+	<string name="poi_stars_4s">Etoiles : 4S (première classe supérieure)</string>
+	<string name="poi_stars_5">Etoiles : 5 (luxe)</string>
+	<string name="poi_stars_5s">Etoiles : 5S (luxe supérieur)</string>
+	<string name="poi_stars_6">Etoiles : 6</string>
+	<string name="poi_stars_7">Etoiles : 7</string>
+	<string name="poi_payment_coins_yes">Liquide accepté</string>
+	<string name="poi_payment_coins_no">Liquide non accepté</string>
+	<string name="poi_payment_coins_50c12">50 cent, 1€ et 2€ acceptés</string>
+	<string name="poi_payment_telephone_cards_yes">Carte téléphonique acceptée</string>
+	<string name="poi_payment_telephone_cards_no">Carte téléphonique non acceptée</string>
+	<string name="poi_payment_credit_cards_yes">Carte de crédit acceptée</string>
+	<string name="poi_payment_credit_cards_no">Carte de crédit non acceptée</string>
+	<string name="poi_payment_notes_yes">Chèques acceptés</string>
+	<string name="poi_payment_notes_no">Chèques non acceptés</string>
+	<string name="poi_payment_bitcoin_yes">Bitcoin acceptés</string>
+	<string name="poi_payment_bitcoin_no">Bitcoin non acceptés</string>
+	<string name="poi_payment_visa_yes">Carte VISA acceptée</string>
+	<string name="poi_payment_visa_no">Carte VISA non acceptée</string>
+	<string name="poi_payment_mastercard_yes">Carte MasterCard acceptée</string>
+	<string name="poi_payment_mastercard_no">Carte MasterCard non acceptée</string>
+	<string name="poi_payment_maestro_yes">Carte Maestro acceptée</string>
+	<string name="poi_payment_maestro_no">Carte Maestro non acceptée</string>
+	<string name="poi_payment_american_express_yes">Carte American Express (AMEX) acceptée</string>
+	<string name="poi_payment_american_express_no">Carte American Express (AMEX) non acceptée</string>
+	<string name="poi_payment_diners_club_yes">Carte Diners Club acceptée</string>
+	<string name="poi_payment_diners_club_no">Carte Diners Club non acceptée</string>
+	<string name="poi_payment_visa_electron_yes">Carte Visa Electron acceptée</string>
+	<string name="poi_payment_visa_electron_no">Carte Visa Electron non acceptée</string>
+	<string name="poi_payment_litecoin_yes">Litecoin accepté</string>
+	<string name="poi_payment_litecoin_no">Litecoin non accepté</string>
+	<string name="poi_payment_ep_moneo_yes">Moneo accepté</string>
+	<string name="poi_payment_ep_moneo_no">Moneo non accepté</string>
+	<string name="poi_payment_sms_yes">Paiements SMS acceptés</string>
+	<string name="poi_payment_sms_no">Paiements SMS non acceptés</string>
+	<string name="poi_payment_meal_voucher_yes">Tickets restaurant acceptés</string>
+	<string name="poi_payment_meal_voucher_no">Tickets restaurant non acceptés</string>
+	<string name="poi_payment_paypal_yes">PayPal accepté</string>
+	<string name="poi_payment_paypal_no">PayPal non accepté</string>
+	<string name="poi_payment_token_yes">Jetons acceptés</string>
+	<string name="poi_payment_token_no">Jetons non acceptés</string>
+	<string name="poi_payment_gift_card_yes">Cartes cadeaux acceptées</string>
+	<string name="poi_payment_gift_card_no">Cartes cadeaux non acceptées</string>
+	<string name="poi_internet_access_fee_yes">Accès Internet payant</string>
+	<string name="poi_internet_access_fee_no">Accès Internet gratuit</string>
+
+	<string name="poi_diet_vegetarian_no">Plats végétariens : Non</string>
+	<string name="poi_diet_vegetarian_few">Plats végétariens : Quelques-uns</string>
+	<string name="poi_diet_vegetarian_yes">Repas végétariens</string>
+	<string name="poi_diet_gluten_free_only">Repas sans gluten uniquement</string>
+	<string name="poi_diet_gluten_free_yes">Repas sans gluten</string>
+	<string name="poi_diet_gluten_free_no">Plats sans gluten : Non</string>
+	<string name="poi_diet_vegetarian_only">Uniquement repas végétarien</string>
+	<string name="poi_diet_vegan_only">Repas végan uniquement</string>
+	<string name="poi_diet_vegan_yes">Plats végan</string>
+	<string name="poi_diet_vegan_no">Plat végan : Non</string>
+	<string name="poi_diet_halal_only">Repas halal uniquement</string>
+	<string name="poi_diet_halal_yes">Plats halals</string>
+	<string name="poi_diet_halal_no">Plats halals : Non</string>
+	<string name="poi_takeaway_yes">A emporter</string>
+	<string name="poi_takeaway_only">A emporter uniquement</string>
+
+	<string name="poi_cocktails_yes">Cocktails</string>
+
+	<string name="poi_second_hand_yes">Biens d\'occasion</string>
+	<string name="poi_second_hand_no">Pas de biens d\'occasion</string>
+	<string name="poi_second_hand_only">Biens d\'occasion uniquement</string>
+
+	<string name="poi_service_parts">Pièces détachées</string>
+	<string name="poi_service_dealer">Distributeur</string>
+	<string name="poi_service_repair">Réparation</string>
+	<string name="poi_service_electrical">Réparation de véhicules électriques</string>
+	<string name="poi_motorcycle_repair">Réparation de motocycle</string>
+	<string name="poi_self_service_yes">Self-service</string>
+	<string name="poi_self_service_no">Pas de self-service</string>
+	<string name="poi_automated_yes">Automatisé</string>
+	<string name="poi_automated_no">Non automatisé</string>
+	<string name="poi_public_bath">Bain public</string>
+
+	<string name="poi_male_yes">Homme</string>
+	<string name="poi_male_no">Interdit aux hommes</string>
+	<string name="poi_female_yes">Femme</string>
+	<string name="poi_female_no">Interdit aux femmes</string>
+	<string name="poi_indoor_yes">Intérieur</string>
+	<string name="poi_indoor_no">Extérieur</string>
+	<string name="poi_toilets_yes">Avec toilettes</string>
+	<string name="poi_toilets_no">Sans toilettes</string>
+	<string name="poi_toilets_wheelchair_yes">Accès aux toilettes en fauteuil roulant : Oui</string>
+	<string name="poi_toilets_wheelchair_no">Accès aux toilettes en fauteuil roulant : Non</string>
+	<string name="poi_toilets_access_customers">Accès aux toilettes : Clients</string>
+	<string name="poi_toilets_access_permissive">Accès aux toilettes : Autorisé</string>
+	<string name="poi_toilets_access_public">Accès aux toilettes : Public</string>
+
+	<string name="poi_diaper_yes">Table à langer</string>
+	<string name="poi_diaper_no">Pas de table à langer</string>
+	<string name="poi_diaper_room">Pièce avec table à langer</string>
+
+	<string name="poi_vending_cigarettes">Cigarettes</string>
+	<string name="poi_vending_drinks">Boissons</string>
+	<string name="poi_vending_condoms">Préservatifs</string>
+	<string name="poi_vending_stamps">Timbres</string>
+	<string name="poi_vending_food">Nourriture</string>
+	<string name="poi_vending_drinks_food">Nourriture et boissons</string>
+	<string name="poi_vending_milk">Lait</string>
+	<string name="poi_vending_bread">Pain</string>
+	<string name="poi_vending_chewing_gums">Chewing gums</string>
+	<string name="poi_vending_coffee">Café</string>
+	<string name="poi_vending_public_transport_plans">Plan des transports publics</string>
+	<string name="poi_vending_dvd">DVD</string>
+	<string name="poi_vending_candles">Bougies</string>
+	<string name="poi_vending_toys">Jouets</string>
+	<string name="poi_vending_ice_cream">Glace</string>
+	<string name="poi_vending_sim_cards">Cartes SIM</string>
+
+	<string name="poi_memorial_war">Mémorial de guerre</string>
+	<string name="poi_memorial_plaque">Plaque</string>
+	<string name="poi_memorial_statue">Statue</string>
+	<string name="poi_memorial_stone">Pierre</string>
+	<string name="poi_memorial_stele">Stèle</string>
+	<string name="poi_memorial_bust">Buste</string>
 	</resources>
