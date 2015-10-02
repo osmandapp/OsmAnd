@@ -75,7 +75,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		LinearLayout.LayoutParams llTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		llTextParams.setMargins(0, isFirstRow() ? dpToPx(8f) - dpToPx(SHADOW_HEIGHT_BOTTOM_DP) : dpToPx(8f), 0, dpToPx(8f));
 		textView.setLayoutParams(llTextParams);
-		textView.setTextSize(16); // todo: create constant
+		textView.setTextSize(16);
 		textView.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_info_text_light : R.color.ctx_menu_info_text_dark));
 
 		textView.setAutoLinkMask(Linkify.ALL);
