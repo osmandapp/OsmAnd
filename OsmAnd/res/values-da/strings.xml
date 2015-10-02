@@ -2162,4 +2162,6 @@
     <string name="favorite_category_select">Vælg kategori</string>
     <string name="downloading_number_of_fiels">Henter - %1$d fil</string>
 <string name="srtm_plugin_disabled">Højdekurver er deaktiveret</string>
-    </resources>
+    <string name="show_free_version_banner">Vis gratis version banner</string>
+    <string name="show_free_version_banner_description">Selv hvis du har betalt version kan du stadig se gratis version banner</string>
+</resources>
