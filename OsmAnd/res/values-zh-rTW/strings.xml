@@ -2139,4 +2139,5 @@
     <string name="nm_h">浬時</string>
     <string name="favorite_category_add_new">增加新的</string>
     <string name="favorite_category_select">選擇類別</string>
-    </resources>
+    <string name="downloading_number_of_fiels">正在下載 - %1$d 檔案</string>
+</resources>
