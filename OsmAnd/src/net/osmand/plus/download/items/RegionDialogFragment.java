@@ -15,9 +15,9 @@ import net.osmand.plus.WorldRegion;
 
 import org.apache.commons.logging.Log;
 
-public class LocalDialogFragment extends DialogFragment {
-	private static final Log LOG = PlatformUtil.getLog(LocalDialogFragment.class);
-	public static final String TAG = "LocalDialogFragment";
+public class RegionDialogFragment extends DialogFragment {
+	private static final Log LOG = PlatformUtil.getLog(RegionDialogFragment.class);
+	public static final String TAG = "RegionDialogFragment";
 	private static final String REGION_DLG_KEY = "world_region_dialog_key";
 	private WorldRegion region;
 
@@ -62,7 +62,7 @@ public class LocalDialogFragment extends DialogFragment {
 
 		if (this.region != null) {
 			getChildFragmentManager().beginTransaction().add(R.id.fragmentContainer,
-					LocalItemsFragment.createInstance(region)).commit();
+					RegionItemsFragment.createInstance(region)).commit();
 			toolbar.setTitle(this.region.getName());
 		}
 
@@ -83,10 +83,10 @@ public class LocalDialogFragment extends DialogFragment {
 		createInstance(region).show(getChildFragmentManager(), TAG);
 	}
 
-	public static LocalDialogFragment createInstance(WorldRegion region) {
+	public static RegionDialogFragment createInstance(WorldRegion region) {
 		Bundle bundle = new Bundle();
 		bundle.putSerializable(REGION_DLG_KEY, region);
-		LocalDialogFragment fragment = new LocalDialogFragment();
+		RegionDialogFragment fragment = new RegionDialogFragment();
 		fragment.setArguments(bundle);
 		return fragment;
 	}

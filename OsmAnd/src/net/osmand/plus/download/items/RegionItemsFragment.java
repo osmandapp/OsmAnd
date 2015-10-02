@@ -9,29 +9,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.WorldRegion;
-import net.osmand.plus.download.BaseDownloadActivity;
 import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.download.DownloadActivityType;
-import net.osmand.plus.download.IndexItem;
 
 import org.apache.commons.logging.Log;
 
 import java.text.MessageFormat;
 import java.util.Locale;
 
-public class LocalItemsFragment extends Fragment {
-	public static final String TAG = "LocalItemsFragment";
-	private static final Log LOG = PlatformUtil.getLog(LocalItemsFragment.class);
+public class RegionItemsFragment extends Fragment {
+	public static final String TAG = "RegionItemsFragment";
+	private static final Log LOG = PlatformUtil.getLog(RegionItemsFragment.class);
 	private static final MessageFormat formatGb = new MessageFormat("{0, number,<b>#.##</b>} GB", Locale.US);
 
 	private ItemsListBuilder builder;
@@ -95,7 +90,7 @@ public class LocalItemsFragment extends Fragment {
 				Object obj = regionsAdapter.getItem(position);
 				if (obj instanceof WorldRegion) {
 					WorldRegion region = (WorldRegion) obj;
-					((LocalDialogFragment) getParentFragment())
+					((RegionDialogFragment) getParentFragment())
 							.onRegionSelected(region);
 				}
 			}
@@ -185,10 +180,10 @@ public class LocalItemsFragment extends Fragment {
 		return (DownloadActivity) getActivity();
 	}
 
-	public static LocalItemsFragment createInstance(WorldRegion region) {
+	public static RegionItemsFragment createInstance(WorldRegion region) {
 		Bundle bundle = new Bundle();
 		bundle.putSerializable(REGION_KEY, region);
-		LocalItemsFragment fragment = new LocalItemsFragment();
+		RegionItemsFragment fragment = new RegionItemsFragment();
 		fragment.setArguments(bundle);
 		return fragment;
 	}

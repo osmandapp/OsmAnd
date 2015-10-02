@@ -9,7 +9,6 @@ import net.osmand.plus.WorldRegion;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.mapcontextmenu.editors.PointEditor;
 import net.osmand.util.Algorithms;
 
 import java.util.Collections;
@@ -18,6 +17,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -235,8 +236,12 @@ public class ItemsListBuilder {
 				}
 
 				if (doInit) {
-					List<DownloadActivityType> typesArray = new LinkedList<>();
-					boolean hasSrtm = false;
+					Set<DownloadActivityType> typesSet = new TreeSet<>(new Comparator<DownloadActivityType>() {
+						@Override
+						public int compare(DownloadActivityType dat1, DownloadActivityType dat2) {
+							return dat1.getTag().compareTo(dat2.getTag());
+						}
+					});
 
 					for (IndexItem resource : resourcesInRepository) {
 
@@ -244,36 +249,20 @@ public class ItemsListBuilder {
 							continue;
 						}
 
-						if (resource.getType() == DownloadActivityType.SRTM_COUNTRY_FILE) {
-							hasSrtm = true;
-						}
-
-						typesArray.add(resource.getType());
-
+						typesSet.add(resource.getType());
 						regionResources.put(resource.getSimplifiedFileName(), resource);
 					}
 
-					if (region.getSuperregion() != null && hasSrtm && region.getSuperregion().getSuperregion() != app.getWorldRegion()) {
-						if (!region.getSuperregion().getResourceTypes().contains(DownloadActivityType.SRTM_COUNTRY_FILE)) {
-							region.getSuperregion().getResourceTypes().add(DownloadActivityType.SRTM_COUNTRY_FILE);
-							Collections.sort(region.getSuperregion().getResourceTypes(), new Comparator<DownloadActivityType>() {
-								@Override
-								public int compare(DownloadActivityType dat1, DownloadActivityType dat2) {
-									return dat1.getTag().compareTo(dat2.getTag());
-								}
-							});
+					if (region.getSuperregion() != null && region.getSuperregion().getSuperregion() != app.getWorldRegion()) {
+						if (region.getSuperregion().getResourceTypes() == null) {
+							region.getSuperregion().setResourceTypes(typesSet);
+						} else {
+							region.getSuperregion().getResourceTypes().addAll(typesSet);
 						}
 					}
 
-					Collections.sort(typesArray, new Comparator<DownloadActivityType>() {
-						@Override
-						public int compare(DownloadActivityType dat1, DownloadActivityType dat2) {
-							return dat1.getTag().compareTo(dat2.getTag());
-						}
-					});
-					region.setResourceTypes(typesArray);
+					region.setResourceTypes(typesSet);
 				}
-
 				resourcesByRegions.put(region, regionResources);
 			}
 			return true;
