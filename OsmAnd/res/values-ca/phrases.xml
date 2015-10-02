@@ -915,7 +915,7 @@
 	<string name="poi_operator">Operador</string>
 	<string name="poi_brand">Marca</string>
 
-	<string name="poi_enforcement_traffic_signals">Control de tràfic: obeir el semàfor</string>
+	<string name="poi_enforcement_traffic_signals">Control de tràfic: semàfor</string>
 	<string name="poi_enforcement_maxspeed">Control de trànsit: velocitat màxima</string>
 	<string name="poi_enforcement_maxheight">Control de trànsit: alçada màxima</string>
 	<string name="poi_enforcement_mindistance">Control de trànsit: distància mínima</string>
@@ -1017,8 +1017,8 @@
 	<string name="poi_recycling_bicycles">Bicicletes</string>
 
 	<string name="poi_shower">Dutxa</string>
-	<string name="poi_drinking_water_yes">Aigua potable</string>
-	<string name="poi_drinking_water_no">Aigua no potable</string>
+	<string name="poi_drinking_water_yes">Aigua potable: sí</string>
+	<string name="poi_drinking_water_no">Aigua potable: no</string>
 	<string name="poi_seasonal_yes">De temporada</string>
 	<string name="poi_seasonal_no">Tot l\'any</string>
 	<string name="poi_seasonal_dry_season">Estació seca</string>
@@ -1093,7 +1093,7 @@
 	<string name="poi_denomination_pentecostal">Pentecostal</string>
 	<string name="poi_denomination_mormon">Mormó</string>
 	<string name="poi_denomination_jehovahs_witness">Testimonis de Jehovà</string>
-	<string name="poi_denomination_greek_orthodox">Ortodox grec</string>
+	<string name="poi_denomination_greek_orthodox">Ortodoxa grega</string>
 	<string name="poi_denomination_reformed">Calvinisme</string>
 	<string name="poi_denomination_seventh_day_adventist">Adventisme del setè dia</string>
 	<string name="poi_denomination_new_apostolic">Nova apostòlica</string>
@@ -1221,4 +1221,11 @@
 	<string name="poi_vending_coffee">Cafè</string>
 	<string name="poi_vending_tickets">Venda de tiquets</string>
 	<string name="poi_vending_water">Venda d\'aigua</string>
+	<string name="poi_bunker_silo">Sitja búnquer</string>
+	<string name="poi_vending_dvd">DVD</string>
+	<string name="poi_vending_candles">Espelmes</string>
+	<string name="poi_vending_toys">Joguines</string>
+	<string name="poi_vending_ice_cream">Gelat</string>
+	<string name="poi_vending_sim_cards">Targes SIM</string>
+
 	</resources>
