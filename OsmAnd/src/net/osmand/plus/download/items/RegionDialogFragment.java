@@ -2,6 +2,7 @@ package net.osmand.plus.download.items;
 
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.WorldRegion;
+import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.download.newimplementation.DownloadsUiHelper;
 
 import org.apache.commons.logging.Log;
 
@@ -20,6 +23,7 @@ public class RegionDialogFragment extends DialogFragment {
 	public static final String TAG = "RegionDialogFragment";
 	private static final String REGION_DLG_KEY = "world_region_dialog_key";
 	private WorldRegion region;
+	private DownloadsUiHelper.MapDownloadListener mProgressListener;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -33,7 +37,7 @@ public class RegionDialogFragment extends DialogFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.maps_in_category_fragment, container, false);
+		final View view = inflater.inflate(R.layout.maps_in_category_fragment, container, false);
 
 		WorldRegion region = null;
 		if (savedInstanceState != null) {
@@ -61,12 +65,46 @@ public class RegionDialogFragment extends DialogFragment {
 		});
 
 		if (this.region != null) {
-			getChildFragmentManager().beginTransaction().add(R.id.fragmentContainer,
-					RegionItemsFragment.createInstance(region)).commit();
+			Fragment fragment = getChildFragmentManager().findFragmentById(R.id.fragmentContainer);
+			if (fragment == null) {
+				getChildFragmentManager().beginTransaction().add(R.id.fragmentContainer,
+						RegionItemsFragment.createInstance(region)).commit();
+			}
 			toolbar.setTitle(this.region.getName());
 		}
+		DownloadsUiHelper.initFreeVersionBanner(view, getMyApplication().getSettings(),
+				getResources());
+
+		final WorldRegion finalRegion = region;
+		mProgressListener = new DownloadsUiHelper.MapDownloadListener(view, getResources()){
+			@Override
+			public void onProgressUpdate(int progressPercentage, int activeTasks) {
+				LOG.debug(finalRegion.getName() + " onProgressUpdate()");
+				super.onProgressUpdate(progressPercentage, activeTasks);
+			}
+
+			@Override
+			public void onFinished() {
+				super.onFinished();
+				DownloadsUiHelper.initFreeVersionBanner(view,
+						getMyApplication().getSettings(), getResources());
+			}
+		};
 
 		return view;
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		LOG.debug(region.getName() + " onResume()");
+		getMyActivity().setOnProgressUpdateListener(mProgressListener);
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		getMyActivity().setOnProgressUpdateListener(null);
 	}
 
 	@Override
@@ -79,8 +117,12 @@ public class RegionDialogFragment extends DialogFragment {
 		return (OsmandApplication) getActivity().getApplication();
 	}
 
+	private DownloadActivity getMyActivity() {
+		return (DownloadActivity) getActivity();
+	}
+
 	public void onRegionSelected(WorldRegion region) {
-		createInstance(region).show(getChildFragmentManager(), TAG);
+		DownloadsUiHelper.showDialog(getActivity(), createInstance(region));
 	}
 
 	public static RegionDialogFragment createInstance(WorldRegion region) {
