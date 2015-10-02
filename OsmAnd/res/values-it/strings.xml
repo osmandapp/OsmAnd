@@ -2205,4 +2205,5 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="favorite_category_add_new">Aggiungi nuova</string>
     <string name="favorite_category_select">Scegli la categoria</string>
     <string name="downloading_number_of_fiels">In download - %1$d file</string>
-</resources>
+<string name="srtm_plugin_disabled">Linee isocline disattivate</string>
+    </resources>
