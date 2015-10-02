@@ -2206,4 +2206,6 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="favorite_category_select">Scegli la categoria</string>
     <string name="downloading_number_of_fiels">In download - %1$d file</string>
 <string name="srtm_plugin_disabled">Linee isocline disattivate</string>
-    </resources>
+    <string name="show_free_version_banner">Mostra il banner della versione gratuita</string>
+    <string name="show_free_version_banner_description">Anche se hai la versione a pagamento puoi comunque vedere il banner della versione gratuita</string>
+</resources>
