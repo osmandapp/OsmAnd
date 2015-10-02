@@ -69,8 +69,8 @@ public class WorldItemsFragment extends Fragment {
 
 				FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
 				fragmentTransaction.addToBackStack(null);
-				LocalDialogFragment.createInstance(region)
-						.show(fragmentTransaction, LocalDialogFragment.TAG);
+				RegionDialogFragment.createInstance(region)
+						.show(fragmentTransaction, RegionDialogFragment.TAG);
 			}
 		});
 
