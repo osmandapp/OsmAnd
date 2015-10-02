@@ -2315,4 +2315,8 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="shared_string_trip_recording">Nahrávanie výletu</string>
     <string name="shared_string_navigation">Navigácia</string>
     <string name="osmand_running_in_background">Beh v pozadí</string>
-    </resources>
+    <string name="srtm_plugin_disabled">Vrstevnice vypnuté</string>
+    <string name="downloading_number_of_fiels">Sťahovanie - %1$d súbor</string>
+    <string name="show_free_version_banner">Zobraziť nápis verzie zdarma</string>
+    <string name="show_free_version_banner_description">Aj keď používate platenú verziu, môžete vidieť nápis z verzie zadarmo</string>
+</resources>
