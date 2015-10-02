@@ -559,8 +559,8 @@
     <string name="non_optimal_route_calculation">Laske mahdollisesti epäoptimaalinen reitti pitkille matkoille</string>
     <string name="offline_edition_descr">Käytä aina offline editointia</string>
 	<string name="free_version_message">Tämä ilmainen OsmAnd versio on rajoitettu %1$s lataukseen ja ei tue offline wikipedia artikkeleita.</string>
-	<string name="index_name_voice">Äänipaketit (nauhoitettu, rajoitetut ominaisuudet)</string>
-	<string name="index_name_tts_voice">Äänipaketit (Syntetisoitu ääni, suositeltu)</string>
+	<string name="index_name_voice">Äänikehotteet (nauhoitettu, rajoitetut ominaisuudet)</string>
+	<string name="index_name_tts_voice">Äänikehotteet (Syntetisoitu ääni, suositeltu)</string>
 	<string name="settings_preset_descr">Valitse käyttäjäprofiili yksilöllisillä kartta- ja navigaatioasetuksilla.</string>
 	<string name="tip_day_night_mode">Päivä/Yö moodi</string>
 	<string name="use_transparent_map_theme">Läpinäkvä teema</string>
@@ -895,4 +895,9 @@
     <string name="layer_amenity_label">POI-nimet</string>
     <string name="context_menu_item_directions_to">Navigoi kohteeseen</string>
     <string name="interrupt_music">Keskeytä musiikki</string>
+	<string name="map_widget_right">Oikea paneeli</string>
+	<string name="map_widget_left">Vasen paneeli</string>
+	<string name="always_center_position_on_map">Näytä sijainti aina keskellä</string>
+    <string name="voice_is_not_available_msg">Ääniohjausta ei ole saatavilla. Mene \\\'Asetukset\\\' → \\\'Yleiset asetukset\\\' → \'\\Ääniohjaus\\\' ja valitse tai lataa äänikehote.</string>
+	<string name="download_type_to_filter">etsi</string>
 	</resources>
