@@ -2119,4 +2119,5 @@
 <string name="srtm_plugin_disabled">Lìnias de livellu disativadas</string>
     <string name="show_free_version_banner">Ammustra s’insigna de sa versione a indonu (gratùita)</string>
     <string name="show_free_version_banner_description">Fintzas si tenes sa versione a pagamentu podes bìere s’insigna de sa versione a indonu (gratùita)</string>
-</resources>
+<string name="downloading_number_of_files">Iscarrigande - %1$d documentu/os</string>
+    </resources>
