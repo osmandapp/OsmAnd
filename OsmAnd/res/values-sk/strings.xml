@@ -2319,4 +2319,5 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="downloading_number_of_fiels">Sťahovanie - %1$d súbor</string>
     <string name="show_free_version_banner">Zobraziť nápis verzie zdarma</string>
     <string name="show_free_version_banner_description">Aj keď používate platenú verziu, môžete vidieť nápis z verzie zadarmo</string>
-</resources>
+<string name="downloading_number_of_files">Sťahovanie - súbor %1$d</string>
+    </resources>
