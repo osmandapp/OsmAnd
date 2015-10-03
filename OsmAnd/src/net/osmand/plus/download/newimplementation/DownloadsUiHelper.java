@@ -125,7 +125,7 @@ public final class DownloadsUiHelper {
 				downloadProgressLayout.setVisibility(View.VISIBLE);
 			}
 			progressBar.setProgress(progressPercentage);
-			final String format = resources.getString(R.string.downloading_number_of_fiels);
+			final String format = resources.getString(R.string.downloading_number_of_files);
 			String numberOfTasks = String.format(format, activeTasks);
 			leftTextView.setText(numberOfTasks);
 			rightTextView.setText(progressPercentage + "%");
