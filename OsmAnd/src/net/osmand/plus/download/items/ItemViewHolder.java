@@ -1,6 +1,8 @@
 package net.osmand.plus.download.items;
 
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -19,7 +21,10 @@ public class ItemViewHolder {
 	private final ImageView leftImageView;
 	private final ImageView rightImageButton;
 	private final ProgressBar progressBar;
+
 	private boolean srtmDisabled;
+	private int textColorPrimary;
+	private int textColorSecondary;
 
 	public ItemViewHolder(View convertView) {
 		nameTextView = (TextView) convertView.findViewById(R.id.name);
@@ -27,6 +32,13 @@ public class ItemViewHolder {
 		leftImageView = (ImageView) convertView.findViewById(R.id.leftImageView);
 		rightImageButton = (ImageView) convertView.findViewById(R.id.rightImageButton);
 		progressBar = (ProgressBar) convertView.findViewById(R.id.progressBar);
+
+		TypedValue typedValue = new TypedValue();
+		Resources.Theme theme = convertView.getContext().getTheme();
+		theme.resolveAttribute(android.R.attr.textColorPrimary, typedValue, true);
+		textColorPrimary = typedValue.data;
+		theme.resolveAttribute(android.R.attr.textColorSecondary, typedValue, true);
+		textColorSecondary = typedValue.data;
 	}
 
 	public void setSrtmDisabled(boolean srtmDisabled) {
@@ -35,14 +47,14 @@ public class ItemViewHolder {
 
 	public void bindIndexItem(final IndexItem indexItem, final DownloadActivity context, boolean showTypeInTitle, boolean showTypeInDesc) {
 		boolean light = context.getMyApplication().getSettings().isLightContent();
-
+		boolean disabled = false;
 		if (indexItem.getType() == DownloadActivityType.VOICE_FILE) {
 			nameTextView.setText(indexItem.getVisibleName(context,
 					context.getMyApplication().getRegions()));
 		} else {
 			if (indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE && srtmDisabled) {
 				nameTextView.setText(context.getString(R.string.srtm_plugin_disabled));
-				nameTextView.setTextColor(context.getResources().getColor(light ? android.R.color.secondary_text_light : android.R.color.secondary_text_dark));
+				disabled = true;
 			} else if (showTypeInTitle) {
 				nameTextView.setText(indexItem.getType().getString(context));
 			} else {
@@ -57,11 +69,8 @@ public class ItemViewHolder {
 		} else {
 			descrTextView.setText(indexItem.getSizeDescription(context));
 		}
-		leftImageView.setImageDrawable(getContextIcon(context,
-				indexItem.getType().getIconResource()));
 		rightImageButton.setVisibility(View.VISIBLE);
-		rightImageButton.setImageDrawable(getContextIcon(context,
-				R.drawable.ic_action_import));
+		rightImageButton.setImageDrawable(getContextIcon(context, R.drawable.ic_action_import));
 		rightImageButton.setTag(R.id.index_item, indexItem);
 		rightImageButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -74,6 +83,14 @@ public class ItemViewHolder {
 			}
 		});
 		progressBar.setVisibility(View.GONE);
+
+		if (disabled) {
+			leftImageView.setImageDrawable(getContextIcon(context, indexItem.getType().getIconResource(), textColorSecondary));
+			nameTextView.setTextColor(textColorSecondary);
+		} else {
+			leftImageView.setImageDrawable(getContextIcon(context, indexItem.getType().getIconResource()));
+			nameTextView.setTextColor(textColorPrimary);
+		}
 	}
 
 	public void bindRegion(WorldRegion region, DownloadActivity context) {
@@ -97,5 +114,9 @@ public class ItemViewHolder {
 
 	private Drawable getContextIcon(DownloadActivity context, int resourceId) {
 		return context.getMyApplication().getIconsCache().getContentIcon(resourceId);
+	}
+
+	private Drawable getContextIcon(DownloadActivity context, int resourceId, int color) {
+		return context.getMyApplication().getIconsCache().getPaintedContentIcon(resourceId, color);
 	}
 }
