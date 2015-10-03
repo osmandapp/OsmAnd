@@ -2187,4 +2187,5 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 <string name="srtm_plugin_disabled">Courbes de niveau désactivées</string>
     <string name="show_free_version_banner">Afficher le bandeau \"Version Gratuite\"</string>
     <string name="show_free_version_banner_description">Même si vous avez acheté la version payante, le bandeau \"Version Gratuite\" peut-être affiché</string>
-</resources>
+<string name="downloading_number_of_files">Téléchargement de %1$d fichiers</string>
+    </resources>
