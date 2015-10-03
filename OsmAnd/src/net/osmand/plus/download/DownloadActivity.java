@@ -171,13 +171,15 @@ public class DownloadActivity extends BaseDownloadActivity {
 				updateDownloadButton();
 				for (WeakReference<Fragment> ref : fragSet) {
 					Fragment f = ref.get();
-					if (f instanceof OsmAndListFragment) {
-						if (f.isAdded() && ((OsmAndListFragment) f).getListAdapter() instanceof ArrayAdapter) {
-							((ArrayAdapter) ((OsmAndListFragment) f).getListAdapter()).notifyDataSetChanged();
+					if (f != null) {
+						if (f instanceof OsmAndListFragment) {
+							if (f.isAdded() && ((OsmAndListFragment) f).getListAdapter() instanceof ArrayAdapter) {
+								((ArrayAdapter) ((OsmAndListFragment) f).getListAdapter()).notifyDataSetChanged();
+							}
+						} else if (f.isAdded() && f instanceof OsmandExpandableListFragment &&
+								((OsmandExpandableListFragment) f).getAdapter() instanceof BaseExpandableListAdapter) {
+							((BaseExpandableListAdapter) ((OsmandExpandableListFragment) f).getAdapter()).notifyDataSetChanged();
 						}
-					} else if (f.isAdded() && f instanceof OsmandExpandableListFragment &&
-							((OsmandExpandableListFragment) f).getAdapter() instanceof BaseExpandableListAdapter) {
-						((BaseExpandableListAdapter) ((OsmandExpandableListFragment) f).getAdapter()).notifyDataSetChanged();
 					}
 				}
 			}
