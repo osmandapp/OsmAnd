@@ -2155,4 +2155,5 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
 <string name="srtm_plugin_disabled">Corbes de nivell desactivades</string>
     <string name="show_free_version_banner">Mostra bàner de la versió gratuïta</string>
     <string name="show_free_version_banner_description">Encara que tinguéssiu una versió de pagament també podríeu veure el bàner de la versió gratuïta</string>
-</resources>
+<string name="downloading_number_of_files">Baixada - %1$d fitxer</string>
+    </resources>
