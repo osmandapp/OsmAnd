@@ -117,7 +117,7 @@
         <string name="poi_traffic_calming_rumble_strip">Rumlestriber</string>
         <string name="poi_traffic_calming_table">Plateau bumb</string>
         <string name="poi_traffic_calming_choker">Indsnævring</string>
-        <string name="poi_traffic_signals">Lyskurv</string>
+        <string name="poi_traffic_signals">Lyskryds</string>
 
         <string name="poi_car_repair">Autoværksted</string>
         <string name="poi_service_tyres">Dækservice</string>
@@ -931,13 +931,13 @@
 	<string name="poi_service_times">Service-tider</string>
 	<string name="poi_brand">Varemærke</string>
 
-	<string name="poi_enforcement_traffic_signals">Overvågning: stoplys</string>
-	<string name="poi_enforcement_maxspeed">Overvågning: hastighedskontrol</string>
-	<string name="poi_enforcement_maxheight">Overvågning: højdekontrol</string>
-	<string name="poi_enforcement_mindistance">Overvågning: afstandskontrol</string>
-	<string name="poi_enforcement_check">Overvågning: trafikkontrol</string>
-	<string name="poi_enforcement_access">Overvågning: adgangskontrol</string>
-	<string name="poi_enforcement_toll">Overvågning: vejafgiftskontrol</string>
+	<string name="poi_enforcement_traffic_signals">Kontrol: stoplys</string>
+	<string name="poi_enforcement_maxspeed">Kontrol: max. hastighed</string>
+	<string name="poi_enforcement_maxheight">Kontrol: max. højde</string>
+	<string name="poi_enforcement_mindistance">Kontrol: min. afstand</string>
+	<string name="poi_enforcement_check">Kontrol: tjek</string>
+	<string name="poi_enforcement_access">Kontrol: adgang</string>
+	<string name="poi_enforcement_toll">Kontrol: vejafgift</string>
 
 <string name="poi_country">Landlig</string>
 	<string name="poi_fee_yes">Gebyr</string>
@@ -1293,19 +1293,19 @@
 	<string name="poi_information_terminal">Informationsstander</string>
 	<string name="poi_information_route_marker">Ruteskilte</string>
 	<string name="poi_information_hikingmap">Vandrekort</string>
-	<string name="poi_information_nature">Information om: natur</string>
-	<string name="poi_information_wildlife">Information om: dyreliv</string>
-	<string name="poi_information_history">Information om: historie</string>
+	<string name="poi_information_nature">Informationsmarkør: natur</string>
+	<string name="poi_information_wildlife">Informationsmarkør: dyreliv</string>
+	<string name="poi_information_history">Informationsmarkør: historie</string>
 	<string name="poi_information_sign">Skilt</string>
 	<string name="poi_information_audioguide">Audioguide</string>
 	<string name="poi_information_bicyclemap">Cykelkort</string>
 	<string name="poi_information_tactile_model">Taktilmodel</string>
 	<string name="poi_information_tactile_map">Taktilkort</string>
-	<string name="poi_board_type_plants">Information om: planter</string>
-	<string name="poi_board_type_geology">Information om: geologi</string>
-	<string name="poi_board_type_public_transport">Information om: offentlig transport</string>
-	<string name="poi_board_type_technology">Information om: teknologi</string>
-	<string name="poi_board_type_astronomy">Information om: astronomi</string>
+	<string name="poi_board_type_plants">Informationsmarkør: planter</string>
+	<string name="poi_board_type_geology">Informationsmarkør: geologi</string>
+	<string name="poi_board_type_public_transport">Informationsmarkør: offentlig transport</string>
+	<string name="poi_board_type_technology">Informationsmarkør: teknologi</string>
+	<string name="poi_board_type_astronomy">Informationsmarkør: astronomi</string>
 
 <string name="poi_information_trail_blaze">Stiafmærkning</string>
 	<string name="poi_board_type_notice">Opslagstavle</string>
@@ -1385,7 +1385,7 @@
 	<string name="poi_piste_grooming_mogul">Pistepreparering: pukkelpist</string>
 
 <string name="poi_garden_type_residential">Havetype: beboelse</string>
-	<string name="poi_garden_type_community">Havetype: offentlig</string>
+	<string name="poi_garden_type_community">Havetype: fælles</string>
 	<string name="poi_garden_type_private">Havetype: privat</string>
 	<string name="poi_garden_type_botanical">Havetype: botanisk</string>
 
@@ -1411,8 +1411,8 @@
 	<string name="poi_aerialway_occupancy">Kabine/stol/vogn kapacitet</string>
 	<string name="poi_aerialway_capacity">Kapacitet pr. time</string>
 	<string name="poi_aerialway_duration">Gennemsnitlige rejsetid, minutter</string>
-	<string name="poi_aerialway_bubble_yes">Boble</string>
-	<string name="poi_aerialway_bubble_no">Ingen boble</string>
+	<string name="poi_aerialway_bubble_yes">Boble lukket</string>
+	<string name="poi_aerialway_bubble_no">Ikke boble lukket</string>
 	<string name="poi_aerialway_heating_yes">Opvarmet</string>
 	<string name="poi_aerialway_heating_no">Ikke opvarmet</string>
 	<string name="poi_aerialway_bicycle_yes">Cykel: tilladt</string>
@@ -1674,7 +1674,7 @@
 	<string name="poi_toilets_wheelchair_no">Adgang til toiletter for kørestole: nej</string>
 	<string name="poi_toilets_access_customers">Toiletadgang: kunder</string>
 	<string name="poi_toilets_access_permissive">Toiletadgang: med tilladelse</string>
-	<string name="poi_toilets_access_community">Toiletadgang: fællesskab</string>
+	<string name="poi_toilets_access_community">Toiletadgang: fælles</string>
 	<string name="poi_toilets_access_public">Toiletadgang: offentlig</string>
 
 	<string name="poi_diaper_yes">Puslebord</string>
@@ -1685,7 +1685,7 @@
 
 	<string name="poi_car_wash_no">Bilvask: nej</string>
 
-	<string name="poi_maxstay">Parkering tidsfrist</string>
+	<string name="poi_maxstay">Parkering tidsgrænse</string>
 
 	<string name="poi_vending_parking_tickets">Parkeringsbilletter</string>
 	<string name="poi_vending_cigarettes">Cigaretter</string>
@@ -1710,7 +1710,7 @@
 	<string name="poi_vending_toll">Vejafgiftautomat</string>
 	<string name="poi_vending_tickets">Billetautomat</string>
 	<string name="poi_vending_water">Vandautomat</string>
-	<string name="poi_vending_telephone_vouchers">Telefon værdikuponer</string>
+	<string name="poi_vending_telephone_vouchers">Telekort</string>
 	<string name="poi_vending_animal_food">Dyrefoder</string>
 	<string name="poi_vending_public_transport_plans">Køreplaner</string>
 	<string name="poi_vending_drinks_sweets">Drikkevarer og slik</string>
