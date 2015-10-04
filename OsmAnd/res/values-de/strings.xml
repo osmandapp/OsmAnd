@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="gps_network_not_enabled">Kein Standortdienst aktiviert. Aktivieren?</string>
 	<string name="disable_recording_once_app_killed">Eigenständige Streckenaufzeichnung unterbinden</string>
@@ -1229,7 +1229,7 @@
 
 	<string name="show_cameras">Radarfallen anzeigen</string>
 	<string name="show_traffic_warnings">Verkehrswarnungen anzeigen</string>
-	<string name="avoid_toll_roads">Vermeide Mautstraßen</string>
+	<string name="avoid_toll_roads">Mautstraßen vermeiden</string>
 	<string name="map_widget_top_text">Straßenname</string>
 	<string name="map_widget_config">Konfiguration</string>
 	
@@ -2166,7 +2166,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="shared_string_logoff">Abmelden</string>
     <string name="osmo_share_my_location">Teile meine Position</string>
     <string name="rendering_value_disabled_name">Deaktiviert</string>
-    <string name="routing_attr_avoid_borders_name">Überfahren von Grenzen vermeiden</string>
+    <string name="routing_attr_avoid_borders_name">Grenzübergänge vermeiden</string>
 	<string name="routing_attr_height_name">Höhenbeschränkung</string>
 	<string name="read_full_article">Vollständigen Artikel lesen (online)</string>
     <string name="shared_string_wikipedia">Wikipedia</string>
@@ -2264,4 +2264,27 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="building_number">Gebäude-Nummer</string>
 	<string name="opening_at">geöffnet ab</string>
 	<string name="closing_at">geschlossen ab</string>
+<string name="si_nm">Nautische Meilen</string>
+    <string name="si_kmh">Kilometer pro Stunde</string>
+    <string name="si_mph">Meilen pro Stunde</string>
+    <string name="si_m_s">Meter pro Sekunde</string>
+    <string name="si_min_km">Minuten pro Kilometer</string>
+    <string name="si_min_m">Minuten pro Meile</string>
+    <string name="si_nm_h">Nautische Meilen pro Stunde (Knoten)</string>
+    <string name="shared_string_navigation">Navigation</string>
+    <string name="address_unknown">Adresse noch unbekannt</string>
+    <string name="favourites_context_menu_add">Favorit hinzufügen</string>
+	<string name="poi_action_delete">löschen</string>
+	<string name="show_on_start">Beim Start anzeigen</string>
+	<string name="description">Beschreibung</string>
+	<string name="add_opening_hours">Öffnungszeiten hinzufügen</string>
+	<string name="please_specify_poi_type">Bitte Art des POI angeben.</string>
+	<string name="working_days">Werktage</string>
+	<string name="favourites">Favoriten</string>
+	<string name="poi_deleted_localy">Der POI wird hier gelöscht, sobald sie ihre Änderungen hochladen.</string>
+	<string name="show_gpx">GPX anzeigen</string>
+	<string name="are_you_sure">Sicher?</string>
+	<string name="unsaved_changes_will_be_lost">Alle ungesicherten Änderungen gehen verloren. Fortfahren?</string>
+	<string name="roads">Straßen</string>
+    <string name="show_free_version_banner_description">Auch bei der bezahlten Version ist das Banner der kostenlosen Version sichtbar.</string>
 </resources>
