@@ -121,8 +121,8 @@ public class DownloadActivity extends BaseDownloadActivity {
 
 //		mTabs.add(new TabActivity.TabItem(R.string.download_tab_local,
 //				getString(R.string.download_tab_local), NewLocalIndexesFragment.class));
-		mTabs.add(new TabActivity.TabItem(R.string.download_tab_local,
-				getString(R.string.download_tab_local), WorldItemsFragment.class));
+		mTabs.add(new TabActivity.TabItem(R.string.download_tab_downloads,
+				getString(R.string.download_tab_downloads), WorldItemsFragment.class));
 
 		viewPager.setAdapter(new TabActivity.OsmandFragmentPagerAdapter(getSupportFragmentManager(), mTabs));
 		mSlidingTabLayout.setViewPager(viewPager);

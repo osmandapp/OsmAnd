@@ -54,28 +54,27 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		View view = inflater.inflate(R.layout.download_items_fragment, container, false);
 
 		WorldRegion region = null;
 		if (savedInstanceState != null) {
 			Object regionObj = savedInstanceState.getSerializable(REGION_KEY);
 			if (regionObj != null) {
-				region = (WorldRegion)regionObj;
+				region = (WorldRegion) regionObj;
 			}
 		}
 		if (region == null) {
 			Object regionObj = getArguments().getSerializable(REGION_KEY);
 			if (regionObj != null) {
-				region = (WorldRegion)regionObj;
+				region = (WorldRegion) regionObj;
 			}
 		}
 
 		this.region = region;
 
-		View view = inflater.inflate(R.layout.download_items_fragment, container, false);
-
 		builder = new ItemsListBuilder(getMyApplication(), this.region);
 
-		ExpandableListView listView = (ExpandableListView)view.findViewById(android.R.id.list);
+		ExpandableListView listView = (ExpandableListView) view.findViewById(android.R.id.list);
 		listAdapter = new RegionsItemsAdapter(getActivity());
 		listView.setAdapter(listAdapter);
 		setListView(listView);
@@ -115,7 +114,7 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 	}
 
 	public OsmandApplication getMyApplication() {
-		return (OsmandApplication)getActivity().getApplication();
+		return (OsmandApplication) getActivity().getApplication();
 	}
 
 	private void fillRegionItemsAdapter() {
@@ -221,7 +220,7 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 				viewHolder.setNauticalPluginDisabled(nauticalPluginDisabled);
 				viewHolder.setFreeVersion(freeVersion);
 
-				ItemsListBuilder.ResourceItem item = (ItemsListBuilder.ResourceItem)child;
+				ItemsListBuilder.ResourceItem item = (ItemsListBuilder.ResourceItem) child;
 				viewHolder.bindIndexItem(item.getIndexItem(), getDownloadActivity(), true, false);
 			} else {
 				ItemViewHolder viewHolder;
@@ -248,13 +247,6 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 				}
 			}
 
-			convertView.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					onChildClick(null, v, groupPosition, childPosition, 0);
-				}
-			});
-
 			return convertView;
 		}
 
@@ -262,12 +254,14 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 		public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
 			View v = convertView;
 			String section = getGroup(groupPosition);
+			/*
 			if (section.length() == 0) {
 				LinearLayout emptyLL = new LinearLayout(parent.getContext());
 				LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0);
 				emptyLL.setLayoutParams(params);
 				return emptyLL;
 			}
+			*/
 
 			if (v == null) {
 				LayoutInflater inflater = (LayoutInflater) getDownloadActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);

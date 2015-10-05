@@ -2,32 +2,41 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
               xmlns:tools="http://schemas.android.com/tools"
-              android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              android:orientation="vertical"
               tools:context="net.osmand.plus.download.newimplementation.NewLocalIndexesFragment">
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="fill_parent"
-        android:layout_height="@dimen/dashboard_map_toolbar"
-        android:background="?attr/pstsTabBackground"
-        android:minHeight="@dimen/dashboard_map_toolbar"
-        app:contentInsetLeft="72dp"
-        app:contentInsetStart="72dp"/>
 
-    <include layout="@layout/free_version_banner"
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/dashboard_map_toolbar"
+            android:background="?attr/pstsTabBackground"
+            android:minHeight="@dimen/dashboard_map_toolbar"
+            android:theme="?attr/toolbar_theme"
+            app:contentInsetLeft="72dp"
+            app:contentInsetStart="72dp"/>
+    </android.support.design.widget.AppBarLayout>
+
+    <include
+        layout="@layout/free_version_banner"
         android:background="#F00"/>
+
     <LinearLayout
         android:id="@+id/downloadProgressLayout"
-        xmlns:tools="http://schemas.android.com/tools"
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_margin="4dp"
+        android:orientation="vertical"
         android:padding="10dp"
-        tools:visibility="visible"
-        android:visibility="gone">
+        android:visibility="gone"
+        tools:visibility="visible">
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -60,7 +69,6 @@
 
 
     </LinearLayout>
-
 
 
     <FrameLayout

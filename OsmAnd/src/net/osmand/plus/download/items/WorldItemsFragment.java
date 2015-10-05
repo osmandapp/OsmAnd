@@ -64,7 +64,7 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 
 		builder = new ItemsListBuilder(getMyApplication(), getMyApplication().getWorldRegion());
 
-		ExpandableListView listView = (ExpandableListView)view.findViewById(android.R.id.list);
+		ExpandableListView listView = (ExpandableListView) view.findViewById(android.R.id.list);
 		listAdapter = new WorldItemsAdapter(getActivity());
 		listView.setAdapter(listAdapter);
 		expandAllGroups();
@@ -94,7 +94,7 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 	}
 
 	public OsmandApplication getMyApplication() {
-		return (OsmandApplication)getActivity().getApplication();
+		return (OsmandApplication) getActivity().getApplication();
 	}
 
 	private void fillWorldItemsAdapter() {
@@ -285,13 +285,6 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 				viewHolder.textView.setCompoundDrawablesWithIntrinsicBounds(iconLeft, null, null, null);
 				viewHolder.textView.setText(item);
 			}
-
-			convertView.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					onChildClick(null, v, groupPosition, childPosition, 0);
-				}
-			});
 
 			return convertView;
 		}
