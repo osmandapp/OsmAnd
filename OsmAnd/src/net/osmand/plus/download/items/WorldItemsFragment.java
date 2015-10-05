@@ -52,7 +52,7 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 
 		builder = new ItemsListBuilder(getMyApplication(), getMyApplication().getWorldRegion());
 
-		ExpandableListView listView = (ExpandableListView)view.findViewById(android.R.id.list);
+		ExpandableListView listView = (ExpandableListView) view.findViewById(android.R.id.list);
 		listAdapter = new WorldItemsAdapter(getActivity());
 		listView.setAdapter(listAdapter);
 		expandAllGroups();
@@ -73,7 +73,7 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 	}
 
 	public OsmandApplication getMyApplication() {
-		return (OsmandApplication)getActivity().getApplication();
+		return (OsmandApplication) getActivity().getApplication();
 	}
 
 	private void fillWorldItemsAdapter() {
@@ -88,7 +88,7 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 	@Override
 	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 		if (groupPosition == 0) {
-			WorldRegion region = (WorldRegion)listAdapter.getChild(groupPosition, childPosition);
+			WorldRegion region = (WorldRegion) listAdapter.getChild(groupPosition, childPosition);
 			DownloadsUiHelper.showDialog(getActivity(), RegionDialogFragment.createInstance(region));
 			return true;
 		}
@@ -188,7 +188,7 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 			final Object child = getChild(groupPosition, childPosition);
 
 			if (child instanceof WorldRegion) {
-				WorldRegion item = (WorldRegion)child;
+				WorldRegion item = (WorldRegion) child;
 				SimpleViewHolder viewHolder;
 				if (convertView == null) {
 					convertView = LayoutInflater.from(parent.getContext())
@@ -217,13 +217,6 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 				}
 				viewHolder.bindIndexItem(item.getIndexItem(), getDownloadActivity(), false, false);
 			}
-
-			convertView.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					onChildClick(null, v, groupPosition, childPosition, 0);
-				}
-			});
 
 			return convertView;
 		}

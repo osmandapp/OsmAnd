@@ -3,5 +3,8 @@
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
               android:orientation="vertical">
-    <include layout="@layout/free_version_banner"/><include layout="@layout/download_items_list"/>
+
+    <include layout="@layout/free_version_banner"/>
+
+    <include layout="@layout/download_items_list"/>
 </LinearLayout>
