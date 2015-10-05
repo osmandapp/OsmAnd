@@ -2,10 +2,13 @@ package net.osmand.plus.download.items;
 
 import android.content.Context;
 
+import net.osmand.Collator;
+import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.R;
 import net.osmand.plus.WorldRegion;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
@@ -91,13 +94,21 @@ public class ItemsListBuilder {
 		}
 	}
 
+	public enum VoicePromptsType {
+		RECORDED,
+		TTS
+	}
+
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(ItemsListBuilder.class);
 
 	private static Map<WorldRegion, Map<String, IndexItem>> resourcesByRegions =
 			new HashMap<>();
 	private static List<WorldRegion> searchableWorldwideRegionItems = new LinkedList<>();
-	private static final Lock lock = new ReentrantLock();
 
+	private static List<IndexItem> voiceRecItems = new LinkedList<>();
+	private static List<IndexItem> voiceTTSItems = new LinkedList<>();
+
+	private static final Lock lock = new ReentrantLock();
 
 	private List<ResourceItem> regionMapItems;
 	private List<Object> allResourceItems;
@@ -125,6 +136,39 @@ public class ItemsListBuilder {
 			}
 		}
 		return list;
+	}
+
+	public static String getVoicePromtName(Context context, VoicePromptsType type) {
+		switch (type) {
+			case RECORDED:
+				return context.getResources().getString(R.string.index_name_voice);
+			case TTS:
+				return context.getResources().getString(R.string.index_name_tts_voice);
+			default:
+				return null;
+		}
+	}
+
+	public static List<IndexItem> getVoicePromptsItems(VoicePromptsType type) {
+		switch (type) {
+			case RECORDED:
+				return voiceRecItems;
+			case TTS:
+				return voiceTTSItems;
+			default:
+				return null;
+		}
+	}
+
+	public static boolean isVoicePromptsItemsEmpty(VoicePromptsType type) {
+		switch (type) {
+			case RECORDED:
+				return voiceRecItems.isEmpty();
+			case TTS:
+				return voiceTTSItems.isEmpty();
+			default:
+				return true;
+		}
 	}
 
 	public ItemsListBuilder(OsmandApplication app) {
@@ -159,26 +203,10 @@ public class ItemsListBuilder {
 		collectSubregionsDataAndItems();
 		collectResourcesDataAndItems();
 
-		LOG.warn("getRegionMapItems >>>");
-		for (ResourceItem resourceItem : getRegionMapItems()) {
-			LOG.warn("resId=" + resourceItem.getIndexItem().getFileName() + " title=" + resourceItem.getTitle());
-		}
-
-		LOG.warn("getAllResourceItems >>>");
-		for (Object obj : getAllResourceItems()) {
-			if (obj instanceof WorldRegion) {
-				WorldRegion item = (WorldRegion) obj;
-				LOG.warn("W resId=" + item.getRegionId() + " title=" + item.getName());
-			} else if (obj instanceof ResourceItem) {
-				ResourceItem resourceItem = (ResourceItem) obj;
-				LOG.warn("R resId=" + resourceItem.getIndexItem().getFileName() + " title=" + resourceItem.getTitle());
-			}
-		}
-
 		return true;
 	}
 
-	public static boolean prepareData(OsmandApplication app, List<IndexItem> resources) {
+	public static boolean prepareData(final OsmandApplication app, List<IndexItem> resources) {
 		lock.lock();
 		try {
 			List<IndexItem> resourcesInRepository;
@@ -191,58 +219,72 @@ public class ItemsListBuilder {
 				return false;
 			}
 
-			boolean doInit = resourcesByRegions.isEmpty();
-			boolean initSearchableRegions = searchableWorldwideRegionItems.isEmpty() || doInit;
-
-			if (initSearchableRegions) {
-				searchableWorldwideRegionItems.clear();
-			}
+			resourcesByRegions.clear();
+			searchableWorldwideRegionItems.clear();
+			voiceRecItems.clear();
+			voiceTTSItems.clear();
 
 			List<WorldRegion> mergedRegions = app.getWorldRegion().getFlattenedSubregions();
 			mergedRegions.add(app.getWorldRegion());
+			boolean voiceFilesProcessed = false;
 			for (WorldRegion region : mergedRegions) {
-				if (initSearchableRegions) {
-					searchableWorldwideRegionItems.add(region);
-				}
+				searchableWorldwideRegionItems.add(region);
 
 				String downloadsIdPrefix = region.getDownloadsIdPrefix();
 
 				Map<String, IndexItem> regionResources = new HashMap<>();
 
-				if (!doInit) {
-					regionResources.putAll(resourcesByRegions.get(region));
-				}
+				Set<DownloadActivityType> typesSet = new TreeSet<>(new Comparator<DownloadActivityType>() {
+					@Override
+					public int compare(DownloadActivityType dat1, DownloadActivityType dat2) {
+						return dat1.getTag().compareTo(dat2.getTag());
+					}
+				});
 
-				if (doInit) {
-					Set<DownloadActivityType> typesSet = new TreeSet<>(new Comparator<DownloadActivityType>() {
-						@Override
-						public int compare(DownloadActivityType dat1, DownloadActivityType dat2) {
-							return dat1.getTag().compareTo(dat2.getTag());
-						}
-					});
+				for (IndexItem resource : resourcesInRepository) {
 
-					for (IndexItem resource : resourcesInRepository) {
-
-						if (!resource.getSimplifiedFileName().startsWith(downloadsIdPrefix)) {
+					if (!voiceFilesProcessed) {
+						if (resource.getSimplifiedFileName().endsWith(".voice.zip")) {
+							voiceRecItems.add(resource);
+							continue;
+						} else if (resource.getSimplifiedFileName().contains(".ttsvoice.zip")) {
+							voiceTTSItems.add(resource);
 							continue;
 						}
-
-						typesSet.add(resource.getType());
-						regionResources.put(resource.getSimplifiedFileName(), resource);
 					}
 
-					if (region.getSuperregion() != null && region.getSuperregion().getSuperregion() != app.getWorldRegion()) {
-						if (region.getSuperregion().getResourceTypes() == null) {
-							region.getSuperregion().setResourceTypes(typesSet);
-						} else {
-							region.getSuperregion().getResourceTypes().addAll(typesSet);
-						}
+					if (!resource.getSimplifiedFileName().startsWith(downloadsIdPrefix)) {
+						continue;
 					}
 
-					region.setResourceTypes(typesSet);
+					typesSet.add(resource.getType());
+					regionResources.put(resource.getSimplifiedFileName(), resource);
 				}
+
+				voiceFilesProcessed = true;
+
+				if (region.getSuperregion() != null && region.getSuperregion().getSuperregion() != app.getWorldRegion()) {
+					if (region.getSuperregion().getResourceTypes() == null) {
+						region.getSuperregion().setResourceTypes(typesSet);
+					} else {
+						region.getSuperregion().getResourceTypes().addAll(typesSet);
+					}
+				}
+
+				region.setResourceTypes(typesSet);
 				resourcesByRegions.put(region, regionResources);
 			}
+
+			final Collator collator = OsmAndCollator.primaryCollator();
+			final OsmandRegions osmandRegions = app.getRegions();
+			Collections.sort(voiceRecItems, new Comparator<IndexItem>() {
+				@Override
+				public int compare(IndexItem lhs, IndexItem rhs) {
+					return collator.compare(lhs.getVisibleName(app.getApplicationContext(), osmandRegions),
+							rhs.getVisibleName(app.getApplicationContext(), osmandRegions));
+				}
+			});
+
 			return true;
 
 		} finally {
@@ -325,22 +367,5 @@ public class ItemsListBuilder {
 
 		Collections.sort(allResourceItems, new ResourceItemComparator());
 		Collections.sort(regionMapItems, new ResourceItemComparator());
-
-		/*
-		boolean nauticalPluginDisabled = OsmandPlugin.getEnabledPlugin(NauticalMapsPlugin.class) == null;
-
-		if (nauticalPluginDisabled) {
-			ResourceItem seamarksMapItem = null;
-			for (ResourceItem item : regionMapItems) {
-				if (item.getResourceId().equals(WORLD_SEAMARKS_KEY)) {
-					seamarksMapItem = item;
-					break;
-				}
-			}
-			if (seamarksMapItem != null) {
-				regionMapItems.remove(seamarksMapItem);
-			}
-		}
-		*/
 	}
 }

@@ -220,7 +220,7 @@ public class AppInitializer implements IProgress {
 	}
 
 	private void loadWorldRegions() {
-		app.worldRegion = WorldRegion.loadWorldRegions(app);
+		app.worldRegion.loadWorldRegions(app);
 	}
 	
 	private void initPoiTypes() {
@@ -274,6 +274,8 @@ public class AppInitializer implements IProgress {
 		app.selectedGpxHelper = startupInit(new GpxSelectionHelper(app, app.savingTrackHelper), GpxSelectionHelper.class);
 		app.favorites = startupInit(new FavouritesDbHelper(app), FavouritesDbHelper.class);
 		app.waypointHelper = startupInit(new WaypointHelper(app), WaypointHelper.class);
+		app.worldRegion = startupInit(new WorldRegion(), WorldRegion.class);
+		app.worldRegion.initWorld();
 		app.regions = startupInit(new OsmandRegions(), OsmandRegions.class);
 		app.regions.setLocale(app.getLanguage());
 		app.poiFilters = startupInit(new PoiFiltersHelper(app), PoiFiltersHelper.class);

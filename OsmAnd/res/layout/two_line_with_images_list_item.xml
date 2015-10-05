@@ -69,6 +69,16 @@
             tools:src="@drawable/ic_action_import"
             tools:visibility="visible"
             android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/rightButton"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="4dp"
+            android:text="BUY"
+            android:visibility="gone"/>
+
     </LinearLayout>
 
 </LinearLayout>
