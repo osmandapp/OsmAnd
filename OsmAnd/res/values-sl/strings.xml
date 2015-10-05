@@ -2012,4 +2012,8 @@
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
     
-    </resources>
+    <string name="downloading_number_of_files">Prejemanje datotek: %1$d</string>
+    <string name="show_free_version_banner">Pokaži pasico brezplačne različice</string>
+    <string name="srtm_plugin_disabled">Izris izohips je onemogočen</string>
+    <string name="show_free_version_banner_description">Četudi imate plačljivo različico, še vedno lahko prikažete pasico brezplačne različice.</string>
+</resources>
