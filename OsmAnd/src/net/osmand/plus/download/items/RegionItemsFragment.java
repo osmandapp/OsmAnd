@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.osmand.PlatformUtil;
@@ -21,7 +20,6 @@ import net.osmand.plus.activities.OsmandExpandableListFragment;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
-import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -38,13 +36,12 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 	private static final Log LOG = PlatformUtil.getLog(RegionItemsFragment.class);
 	private static final MessageFormat formatGb = new MessageFormat("{0, number,<b>#.##</b>} GB", Locale.US);
 
-	private ItemsListBuilder builder;
 	private RegionsItemsAdapter listAdapter;
 	private int regionMapsGroupPos = -1;
 	private int additionalMapsGroupPos = -1;
 
-	private static final String REGION_KEY = "world_region_key";
-	private WorldRegion region;
+	private static final String REGION_ID_KEY = "world_region_id_key";
+	private String regionId;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -56,33 +53,25 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.download_items_fragment, container, false);
 
-		WorldRegion region = null;
 		if (savedInstanceState != null) {
-			Object regionObj = savedInstanceState.getSerializable(REGION_KEY);
-			if (regionObj != null) {
-				region = (WorldRegion) regionObj;
-			}
+			regionId = savedInstanceState.getString(REGION_ID_KEY);
 		}
-		if (region == null) {
-			Object regionObj = getArguments().getSerializable(REGION_KEY);
-			if (regionObj != null) {
-				region = (WorldRegion) regionObj;
-			}
+		if (regionId == null) {
+			regionId = getArguments().getString(REGION_ID_KEY);
 		}
-
-		this.region = region;
-
-		builder = new ItemsListBuilder(getMyApplication(), this.region);
 
 		ExpandableListView listView = (ExpandableListView) view.findViewById(android.R.id.list);
 		listAdapter = new RegionsItemsAdapter(getActivity());
 		listView.setAdapter(listAdapter);
 		setListView(listView);
 
-		if (builder.build()) {
-			fillRegionItemsAdapter();
-			listAdapter.notifyDataSetChanged();
-			expandAllGroups();
+		if (regionId != null) {
+			ItemsListBuilder builder = getDownloadActivity().getItemsBuilder(regionId);
+			if (builder != null && builder.build()) {
+				fillRegionItemsAdapter(builder);
+				listAdapter.notifyDataSetChanged();
+				expandAllGroups();
+			}
 		}
 
 		return view;
@@ -90,7 +79,7 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
-		outState.putSerializable(REGION_KEY, region);
+		outState.putString(REGION_ID_KEY, regionId);
 		super.onSaveInstanceState(outState);
 	}
 
@@ -100,7 +89,7 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 		if (obj instanceof WorldRegion) {
 			WorldRegion region = (WorldRegion) obj;
 			((RegionDialogFragment) getParentFragment())
-					.onRegionSelected(region);
+					.onRegionSelected(region.getRegionId());
 			return true;
 		} else {
 			return false;
@@ -117,17 +106,12 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 		return (OsmandApplication) getActivity().getApplication();
 	}
 
-	private void fillRegionItemsAdapter() {
+	private void fillRegionItemsAdapter(ItemsListBuilder builder) {
 		if (listAdapter != null) {
 			listAdapter.clear();
 			int nextAvailableGroupPos = 0;
 			if (builder.getRegionMapItems().size() > 0) {
-				String sectionTitle;
-				if (builder.getAllResourceItems().size() > 0) {
-					sectionTitle = "Region maps";
-				} else {
-					sectionTitle = "";
-				}
+				String sectionTitle = "Region maps";
 				regionMapsGroupPos = nextAvailableGroupPos++;
 				listAdapter.add(sectionTitle, builder.getRegionMapItems());
 			}
@@ -136,7 +120,7 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 				if (builder.getRegionMapItems().size() > 0) {
 					sectionTitle = "Additional maps";
 				} else {
-					sectionTitle = "";
+					sectionTitle = "Regions";
 				}
 				additionalMapsGroupPos = nextAvailableGroupPos;
 				listAdapter.add(sectionTitle, builder.getAllResourceItems());
@@ -148,9 +132,9 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 		return (DownloadActivity) getActivity();
 	}
 
-	public static RegionItemsFragment createInstance(WorldRegion region) {
+	public static RegionItemsFragment createInstance(String regionId) {
 		Bundle bundle = new Bundle();
-		bundle.putSerializable(REGION_KEY, region);
+		bundle.putString(REGION_ID_KEY, regionId);
 		RegionItemsFragment fragment = new RegionItemsFragment();
 		fragment.setArguments(bundle);
 		return fragment;
@@ -254,14 +238,6 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 		public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
 			View v = convertView;
 			String section = getGroup(groupPosition);
-			/*
-			if (section.length() == 0) {
-				LinearLayout emptyLL = new LinearLayout(parent.getContext());
-				LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0);
-				emptyLL.setLayoutParams(params);
-				return emptyLL;
-			}
-			*/
 
 			if (v == null) {
 				LayoutInflater inflater = (LayoutInflater) getDownloadActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
