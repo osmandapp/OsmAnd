@@ -1578,4 +1578,40 @@
 	<string name="poi_internet_access_fee_yes">網路存取 - 收取費用</string>
 	<string name="poi_internet_access_fee_no">網路存取 - 不收費</string>
 
+	<string name="poi_events_venue">活動場地</string>
+
+	<string name="poi_diet_vegetarian_only">只有素食</string>
+	<string name="poi_diet_vegetarian_yes">純素食</string>
+	<string name="poi_diet_vegetarian_no">純素食：無</string>
+	<string name="poi_diet_vegetarian_few">純素食：很少</string>
+	<string name="poi_diet_vegan_only">只有素食</string>
+	<string name="poi_diet_vegan_yes">素食</string>
+	<string name="poi_diet_vegan_no">素食：不是</string>
+	<string name="poi_diet_gluten_free_only">只有無麩質食物</string>
+	<string name="poi_diet_gluten_free_yes">無麩質食物</string>
+	<string name="poi_diet_gluten_free_no">無麩質食物：無</string>
+	<string name="poi_diet_kosher_only">只有符合猶太教規食物</string>
+	<string name="poi_diet_kosher_yes">符合猶太教規食物</string>
+	<string name="poi_diet_kosher_no">符合猶太教規食物：無</string>
+	<string name="poi_diet_halal_only">只有清真食物</string>
+	<string name="poi_diet_halal_yes">清真食物</string>
+	<string name="poi_diet_halal_no">清真食物：無</string>
+	<string name="poi_diet_lactose_free_only">只有無乳糖食物</string>
+	<string name="poi_diet_lactose_free_yes">無乳糖食物</string>
+	<string name="poi_diet_lactose_free_no">無乳糖食物：無</string>
+	<string name="poi_diet_pescetarian_yes">魚素食物</string>
+
+	<string name="poi_drive_in_yes">免下車服務：有</string>
+	<string name="poi_drive_in_no">免下車服務：無</string>
+	<string name="poi_drive_through_yes">得來速：有</string>
+	<string name="poi_drive_through_no">得來速：無</string>
+
+	<string name="poi_brewery_additional">啤酒廠名</string>
+	<string name="poi_microbrewery_yes">自釀酒廠</string>
+	<string name="poi_microbrewery_no">無自釀酒廠</string>
+
+	<string name="poi_takeaway_yes">腳架</string>
+	<string name="poi_takeaway_no">無腳架</string>
+	<string name="poi_takeaway_only">只有腳架</string>
+
 	</resources>
