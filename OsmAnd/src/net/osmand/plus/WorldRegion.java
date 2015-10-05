@@ -282,4 +282,17 @@ public class WorldRegion implements Serializable {
 			return s;
 		}
 	}
+
+	public WorldRegion getRegionById(String regionId) {
+		if (regionId == null) {
+			return this;
+		} else {
+			for (WorldRegion region : flattenedSubregions) {
+				if (region.getRegionId().equals(regionId)) {
+					return region;
+				}
+			}
+		}
+		return null;
+	}
 }
