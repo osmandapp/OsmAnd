@@ -16,12 +16,17 @@ import android.widget.TextView;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.WorldRegion;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.activities.OsmandExpandableListFragment;
 import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.download.newimplementation.DownloadsUiHelper;
+import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
+import net.osmand.plus.srtmplugin.SRTMPlugin;
 
 import org.apache.commons.logging.Log;
 
@@ -39,6 +44,13 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 
 	private ItemsListBuilder builder;
 	private WorldItemsAdapter listAdapter;
+
+	private int worldRegionsIndex = -1;
+	private int worldMapsIndex = -1;
+	private int voicePromptsIndex = -1;
+
+	private int voicePromptsItemsRecordedSubIndex = -1;
+	private int voicePromptsItemsTTSSubIndex = -1;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -66,6 +78,15 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 		return view;
 	}
 
+	@Override
+	public void onResume() {
+		super.onResume();
+
+		if (!listAdapter.isEmpty()) {
+			expandAllGroups();
+		}
+	}
+
 	private void expandAllGroups() {
 		for (int i = 0; i < listAdapter.getGroupCount(); i++) {
 			getExpandableListView().expandGroup(i);
@@ -79,18 +100,40 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 	private void fillWorldItemsAdapter() {
 		if (listAdapter != null) {
 			listAdapter.clear();
-			listAdapter.add("World regions".toUpperCase(), builder.getRegionsFromAllItems());
-			listAdapter.add("World maps".toUpperCase(), builder.getRegionMapItems());
-			//listAdapter.add("Voice promts".toUpperCase(), null);
+			if (builder.getRegionMapItems().size() > 0) {
+				int unusedIndex = 0;
+				worldRegionsIndex = unusedIndex++;
+				listAdapter.add("World regions", builder.getRegionsFromAllItems());
+				worldMapsIndex = unusedIndex++;
+				listAdapter.add("World maps", builder.getRegionMapItems());
+
+				int unusedSubIndex = 0;
+				List<String> voicePromptsItems = new LinkedList<>();
+				if (!ItemsListBuilder.isVoicePromptsItemsEmpty(ItemsListBuilder.VoicePromptsType.RECORDED)) {
+					voicePromptsItems.add(ItemsListBuilder.getVoicePromtName(getMyApplication(), ItemsListBuilder.VoicePromptsType.RECORDED));
+					voicePromptsItemsRecordedSubIndex = unusedSubIndex++;
+				}
+				if (!ItemsListBuilder.isVoicePromptsItemsEmpty(ItemsListBuilder.VoicePromptsType.TTS)) {
+					voicePromptsItems.add(ItemsListBuilder.getVoicePromtName(getMyApplication(), ItemsListBuilder.VoicePromptsType.TTS));
+					voicePromptsItemsTTSSubIndex = unusedSubIndex;
+				}
+				if (!voicePromptsItems.isEmpty()) {
+					voicePromptsIndex = unusedIndex;
+					listAdapter.add("Voice prompts", voicePromptsItems);
+				}
+			}
+			//listAdapter.add("Voice promts", null);
 		}
 	}
 
 	@Override
 	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-		if (groupPosition == 0) {
+		if (groupPosition == worldRegionsIndex) {
 			WorldRegion region = (WorldRegion)listAdapter.getChild(groupPosition, childPosition);
 			DownloadsUiHelper.showDialog(getActivity(), RegionDialogFragment.createInstance(region));
 			return true;
+		} else if (groupPosition == voicePromptsIndex) {
+			//
 		}
 		return false;
 	}
@@ -126,9 +169,12 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 
 	private class WorldItemsAdapter extends OsmandBaseExpandableListAdapter {
 
-		Map<String, List> data = new LinkedHashMap<>();
-		List<String> sections = new LinkedList<>();
-		Context ctx;
+		private Map<String, List> data = new LinkedHashMap<>();
+		private List<String> sections = new LinkedList<>();
+		private Context ctx;
+		private boolean srtmDisabled;
+		private boolean nauticalPluginDisabled;
+		private boolean freeVersion;
 
 		private class SimpleViewHolder {
 			TextView textView;
@@ -136,6 +182,9 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 
 		public WorldItemsAdapter(Context ctx) {
 			this.ctx = ctx;
+			srtmDisabled = OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) == null;
+			nauticalPluginDisabled = OsmandPlugin.getEnabledPlugin(NauticalMapsPlugin.class) == null;
+			freeVersion = Version.isFreeVersion(getMyApplication());
 			TypedArray ta = ctx.getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorPrimary});
 			ta.recycle();
 		}
@@ -169,8 +218,7 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 
 		@Override
 		public int getChildType(int groupPosition, int childPosition) {
-			final Object child = getChild(groupPosition, childPosition);
-			if (child instanceof WorldRegion) {
+			if (groupPosition == worldRegionsIndex || groupPosition == voicePromptsIndex) {
 				return 0;
 			} else {
 				return 1;
@@ -187,7 +235,7 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 
 			final Object child = getChild(groupPosition, childPosition);
 
-			if (child instanceof WorldRegion) {
+			if (groupPosition == worldRegionsIndex) {
 				WorldRegion item = (WorldRegion)child;
 				SimpleViewHolder viewHolder;
 				if (convertView == null) {
@@ -204,7 +252,7 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 				viewHolder.textView.setCompoundDrawablesWithIntrinsicBounds(iconLeft, null, null, null);
 				viewHolder.textView.setText(item.getName());
 
-			} else if (child instanceof ItemsListBuilder.ResourceItem) {
+			} else if (groupPosition == worldMapsIndex) {
 				ItemsListBuilder.ResourceItem item = (ItemsListBuilder.ResourceItem) child;
 				ItemViewHolder viewHolder;
 				if (convertView == null) {
@@ -215,7 +263,27 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 				} else {
 					viewHolder = (ItemViewHolder) convertView.getTag();
 				}
+				viewHolder.setSrtmDisabled(srtmDisabled);
+				viewHolder.setNauticalPluginDisabled(nauticalPluginDisabled);
+				viewHolder.setFreeVersion(freeVersion);
 				viewHolder.bindIndexItem(item.getIndexItem(), getDownloadActivity(), false, false);
+
+			} else if (groupPosition == voicePromptsIndex) {
+				String item = (String)child;
+				SimpleViewHolder viewHolder;
+				if (convertView == null) {
+					convertView = LayoutInflater.from(parent.getContext())
+							.inflate(R.layout.simple_list_menu_item, parent, false);
+					viewHolder = new SimpleViewHolder();
+					viewHolder.textView = (TextView) convertView.findViewById(R.id.title);
+					convertView.setTag(viewHolder);
+				} else {
+					viewHolder = (SimpleViewHolder) convertView.getTag();
+				}
+				Drawable iconLeft = getMyApplication().getIconsCache()
+						.getContentIcon(R.drawable.ic_action_volume_up);
+				viewHolder.textView.setCompoundDrawablesWithIntrinsicBounds(iconLeft, null, null, null);
+				viewHolder.textView.setText(item);
 			}
 
 			convertView.setOnClickListener(new View.OnClickListener() {

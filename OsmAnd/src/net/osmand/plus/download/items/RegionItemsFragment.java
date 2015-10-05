@@ -7,17 +7,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.WorldRegion;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.activities.OsmandExpandableListFragment;
 import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -36,6 +40,8 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 
 	private ItemsListBuilder builder;
 	private RegionsItemsAdapter listAdapter;
+	private int regionMapsGroupPos = -1;
+	private int additionalMapsGroupPos = -1;
 
 	private static final String REGION_KEY = "world_region_key";
 	private WorldRegion region;
@@ -115,11 +121,26 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 	private void fillRegionItemsAdapter() {
 		if (listAdapter != null) {
 			listAdapter.clear();
+			int nextAvailableGroupPos = 0;
 			if (builder.getRegionMapItems().size() > 0) {
-				listAdapter.add("Region maps".toUpperCase(), builder.getRegionMapItems());
+				String sectionTitle;
+				if (builder.getAllResourceItems().size() > 0) {
+					sectionTitle = "Region maps";
+				} else {
+					sectionTitle = "";
+				}
+				regionMapsGroupPos = nextAvailableGroupPos++;
+				listAdapter.add(sectionTitle, builder.getRegionMapItems());
 			}
 			if (builder.getAllResourceItems().size() > 0) {
-				listAdapter.add("Additional maps".toUpperCase(), builder.getAllResourceItems());
+				String sectionTitle;
+				if (builder.getRegionMapItems().size() > 0) {
+					sectionTitle = "Additional maps";
+				} else {
+					sectionTitle = "";
+				}
+				additionalMapsGroupPos = nextAvailableGroupPos;
+				listAdapter.add(sectionTitle, builder.getAllResourceItems());
 			}
 		}
 	}
@@ -142,10 +163,14 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 		private List<String> sections = new LinkedList<>();
 		private Context ctx;
 		private boolean srtmDisabled;
+		private boolean nauticalPluginDisabled;
+		private boolean freeVersion;
 
 		public RegionsItemsAdapter(Context ctx) {
 			this.ctx = ctx;
 			srtmDisabled = OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) == null;
+			nauticalPluginDisabled = OsmandPlugin.getEnabledPlugin(NauticalMapsPlugin.class) == null;
+			freeVersion = Version.isFreeVersion(getMyApplication());
 			TypedArray ta = ctx.getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorPrimary});
 			ta.recycle();
 		}
@@ -182,7 +207,7 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 
 			final Object child = getChild(groupPosition, childPosition);
 
-			if (child instanceof ItemsListBuilder.ResourceItem && groupPosition == 0 && getGroupCount() > 1) {
+			if (child instanceof ItemsListBuilder.ResourceItem && groupPosition == regionMapsGroupPos) {
 				ItemViewHolder viewHolder;
 				if (convertView == null) {
 					convertView = LayoutInflater.from(parent.getContext())
@@ -193,6 +218,8 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 					viewHolder = (ItemViewHolder) convertView.getTag();
 				}
 				viewHolder.setSrtmDisabled(srtmDisabled);
+				viewHolder.setNauticalPluginDisabled(nauticalPluginDisabled);
+				viewHolder.setFreeVersion(freeVersion);
 
 				ItemsListBuilder.ResourceItem item = (ItemsListBuilder.ResourceItem)child;
 				viewHolder.bindIndexItem(item.getIndexItem(), getDownloadActivity(), true, false);
@@ -207,6 +234,8 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 					viewHolder = (ItemViewHolder) convertView.getTag();
 				}
 				viewHolder.setSrtmDisabled(srtmDisabled);
+				viewHolder.setNauticalPluginDisabled(nauticalPluginDisabled);
+				viewHolder.setFreeVersion(freeVersion);
 
 				if (child instanceof WorldRegion) {
 					viewHolder.bindRegion((WorldRegion) child, getDownloadActivity());
@@ -233,6 +262,13 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 		public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
 			View v = convertView;
 			String section = getGroup(groupPosition);
+			if (section.length() == 0) {
+				LinearLayout emptyLL = new LinearLayout(parent.getContext());
+				LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0);
+				emptyLL.setLayoutParams(params);
+				return emptyLL;
+			}
+
 			if (v == null) {
 				LayoutInflater inflater = (LayoutInflater) getDownloadActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 				v = inflater.inflate(R.layout.download_item_list_section, parent, false);

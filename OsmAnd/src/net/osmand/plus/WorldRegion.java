@@ -3,7 +3,6 @@ package net.osmand.plus;
 import android.content.res.Resources;
 
 import net.osmand.PlatformUtil;
-import net.osmand.data.LatLon;
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.download.DownloadActivityType;
 
@@ -34,9 +33,6 @@ public class WorldRegion implements Serializable {
 	private String downloadsIdPrefix;
 	private String name;
 
-	private LatLon bboxTopLeft;
-	private LatLon bboxBottomRight;
-
 	private Set<DownloadActivityType> resourceTypes;
 
 	// Hierarchy
@@ -57,14 +53,6 @@ public class WorldRegion implements Serializable {
 
 	public String getName() {
 		return name;
-	}
-
-	public LatLon getBboxTopLeft() {
-		return bboxTopLeft;
-	}
-
-	public LatLon getBboxBottomRight() {
-		return bboxBottomRight;
 	}
 
 	public Set<DownloadActivityType> getResourceTypes() {
@@ -110,19 +98,17 @@ public class WorldRegion implements Serializable {
 		return name != null ? name.hashCode() : 0;
 	}
 
-	private WorldRegion() {
+	public WorldRegion() {
 		superregion = null;
 		subregions = new LinkedList<>();
 		flattenedSubregions = new LinkedList<>();
 	}
 
-	private WorldRegion initWorld() {
+	public void initWorld() {
 		regionId = null;
 		downloadsIdPrefix = "world_";
 		name = null;
 		superregion = null;
-
-		return this;
 	}
 
 	private WorldRegion init(String regionId, OsmandRegions osmandRegions, String name) {
@@ -179,60 +165,57 @@ public class WorldRegion implements Serializable {
 		}
 	}
 
-	public static WorldRegion loadWorldRegions(OsmandApplication app) {
+	public void loadWorldRegions(OsmandApplication app) {
 		OsmandRegions osmandRegions = app.getRegions();
 
 		Map<String, String> loadedItems = osmandRegions.getFullNamesToLowercaseCopy();
 		if (loadedItems.size() == 0) {
-			return null;
+			return;
 		}
 
 		HashMap<String, WorldRegion> regionsLookupTable = new HashMap<>(loadedItems.size());
-
-		// Create root region
-		WorldRegion entireWorld = new WorldRegion().initWorld();
 
 		// Create main regions
 		Resources res = app.getResources();
 
 		WorldRegion africaRegion = createRegionAs(AFRICA_REGION_ID,
 				loadedItems, osmandRegions, res.getString(R.string.index_name_africa));
-		entireWorld.addSubregion(africaRegion);
+		addSubregion(africaRegion);
 		regionsLookupTable.put(africaRegion.regionId, africaRegion);
 
 		WorldRegion asiaRegion = createRegionAs(ASIA_REGION_ID,
 				loadedItems, osmandRegions, res.getString(R.string.index_name_asia));
-		entireWorld.addSubregion(asiaRegion);
+		addSubregion(asiaRegion);
 		regionsLookupTable.put(asiaRegion.regionId, asiaRegion);
 
 		WorldRegion australiaAndOceaniaRegion = createRegionAs(AUSTRALIA_AND_OCEANIA_REGION_ID,
 				loadedItems, osmandRegions, res.getString(R.string.index_name_oceania));
-		entireWorld.addSubregion(australiaAndOceaniaRegion);
+		addSubregion(australiaAndOceaniaRegion);
 		regionsLookupTable.put(australiaAndOceaniaRegion.regionId, australiaAndOceaniaRegion);
 
 		WorldRegion centralAmericaRegion = createRegionAs(CENTRAL_AMERICA_REGION_ID,
 				loadedItems, osmandRegions, res.getString(R.string.index_name_central_america));
-		entireWorld.addSubregion(centralAmericaRegion);
+		addSubregion(centralAmericaRegion);
 		regionsLookupTable.put(centralAmericaRegion.regionId, centralAmericaRegion);
 
 		WorldRegion europeRegion = createRegionAs(EUROPE_REGION_ID,
 				loadedItems, osmandRegions, res.getString(R.string.index_name_europe));
-		entireWorld.addSubregion(europeRegion);
+		addSubregion(europeRegion);
 		regionsLookupTable.put(europeRegion.regionId, europeRegion);
 
 		WorldRegion northAmericaRegion = createRegionAs(NORTH_AMERICA_REGION_ID,
 				loadedItems, osmandRegions, res.getString(R.string.index_name_north_america));
-		entireWorld.addSubregion(northAmericaRegion);
+		addSubregion(northAmericaRegion);
 		regionsLookupTable.put(northAmericaRegion.regionId, northAmericaRegion);
 
 		WorldRegion russiaRegion = createRegionAs(RUSSIA_REGION_ID,
 				loadedItems, osmandRegions, res.getString(R.string.index_name_russia));
-		entireWorld.addSubregion(russiaRegion);
+		addSubregion(russiaRegion);
 		regionsLookupTable.put(russiaRegion.regionId, russiaRegion);
 
 		WorldRegion southAmericaRegion = createRegionAs(SOUTH_AMERICA_REGION_ID,
 				loadedItems, osmandRegions, res.getString(R.string.index_name_south_america));
-		entireWorld.addSubregion(southAmericaRegion);
+		addSubregion(southAmericaRegion);
 		regionsLookupTable.put(southAmericaRegion.regionId, southAmericaRegion);
 
 		// Process remaining regions
@@ -271,8 +254,6 @@ public class WorldRegion implements Serializable {
 		for (String regionId : loadedItems.keySet()) {
 			LOG.warn("FullName = " + regionId + " parent=" + osmandRegions.getParentFullName(regionId));
 		}
-
-		return entireWorld;
 	}
 
 	private static WorldRegion createRegionAs(String regionId, Map<String, String> loadedItems, OsmandRegions osmandRegions, String localizedName) {
