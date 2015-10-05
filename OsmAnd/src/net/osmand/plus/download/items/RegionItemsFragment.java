@@ -262,12 +262,14 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 		public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
 			View v = convertView;
 			String section = getGroup(groupPosition);
+			/*
 			if (section.length() == 0) {
 				LinearLayout emptyLL = new LinearLayout(parent.getContext());
 				LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0);
 				emptyLL.setLayoutParams(params);
 				return emptyLL;
 			}
+			*/
 
 			if (v == null) {
 				LayoutInflater inflater = (LayoutInflater) getDownloadActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
