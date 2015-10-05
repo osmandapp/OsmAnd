@@ -2123,4 +2123,8 @@
     <string name="min_km">хв/км</string>
     <string name="m_s">м/с</string>
     
+    <string name="srtm_plugin_disabled">Ізалініі вышынь адключаны</string>
+    <string name="downloading_number_of_files">Сьцягваецца - %1$d файл</string>
+    <string name="show_free_version_banner_description">Нават калі вы маеце платную вэрсію вы можаце ўбачыць банэр бясплатнай вэрсіі</string>
+<string name="show_free_version_banner">Паказваць банэр бясплатнай вэрсіі</string>
     </resources>

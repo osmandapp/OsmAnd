@@ -892,14 +892,14 @@
 	<string name="poi_highway_crossing">Pas de vianants</string>
 
 	<string name="poi_icn_ref">Xarxa internacional de rutes ciclistes</string>
-	<string name="poi_ncn_ref">Xarxa nacional de rutes ciclistes</string>
-	<string name="poi_rcn_ref">Xarxa regional de rutes ciclistes</string>
-	<string name="poi_lcn_ref">Xarxa local de rutes ciclistes</string>
+	<string name="poi_ncn_ref">Node de la xarxa ciclista nacional</string>
+	<string name="poi_rcn_ref">Node de la xarxa ciclista regional</string>
+	<string name="poi_lcn_ref">Node de la xarxa ciclista local</string>
 
-	<string name="poi_iwn_ref">Xarxa internacional de rutes de senderisme</string>
-	<string name="poi_nwn_ref">Xarxa nacional de rutes de senderisme</string>
-	<string name="poi_rwn_ref">Xarxa regional de rutes de senderisme</string>
-	<string name="poi_lwn_ref">Xarxa local de rutes de senderisme</string>
+	<string name="poi_iwn_ref">Node de la xarxa de senderisme internacional</string>
+	<string name="poi_nwn_ref">Node de la xarxa senderista nacional</string>
+	<string name="poi_rwn_ref">Node de la xarxa senderista regional</string>
+	<string name="poi_lwn_ref">Node de la xarxa senderista local</string>
 
 	<string name="poi_opening_hours">Horari de servei</string>
 	<string name="poi_collection_times">Horari de recollida</string>
@@ -919,7 +919,7 @@
 	<string name="poi_enforcement_maxspeed">Control de trànsit: velocitat màxima</string>
 	<string name="poi_enforcement_maxheight">Control de trànsit: alçada màxima</string>
 	<string name="poi_enforcement_mindistance">Control de trànsit: distància mínima</string>
-	<string name="poi_enforcement_check">Control de trànsit</string>
+	<string name="poi_enforcement_check">Control de trànsit: control</string>
 	<string name="poi_enforcement_access">Control de trànsit: accés</string>
 	<string name="poi_enforcement_toll">Control de trànsit: peatge</string>
 
@@ -1228,4 +1228,60 @@
 	<string name="poi_vending_ice_cream">Gelat</string>
 	<string name="poi_vending_sim_cards">Targes SIM</string>
 
+	<string name="poi_nudism_customary">Nudisme: habitual</string>
+	<string name="poi_nudism_permissive">Nudisme: permissiu</string>
+
+	<string name="poi_parking_underground">Subterrani</string>
+	<string name="poi_bicycle_parking_anchors">Ancoratges</string>
+	<string name="poi_leaf_type_leafless">Sense fulles</string>
+	<string name="poi_species">Espècies</string>
+	<string name="poi_genus">Gènere</string>
+	<string name="poi_trees_olive">Olivera</string>
+	<string name="poi_trees_apple">Pomer</string>
+	<string name="poi_trees_orange">Taronger</string>
+	<string name="poi_trees_almond">Ametller</string>
+	<string name="poi_trees_banana">Bananer</string>
+	<string name="poi_trees_hazel">Avellaner</string>
+	<string name="poi_trees_coconut">Cocoter</string>
+	<string name="poi_trees_cherry">Cirerer</string>
+	<string name="poi_trees_walnut">Noguera</string>
+	<string name="poi_trees_plum">Pruner</string>
+	<string name="poi_trees_peach">Presseguer</string>
+	<string name="poi_trees_tea">Te</string>
+	<string name="poi_trees_pomegranate">Magraner</string>
+
+	<string name="poi_urban">Urbà</string>
+	<string name="poi_rural">Rural</string>
+
+	<string name="poi_int_name">Nom internacional</string>
+	<string name="poi_nat_name">Nom nacional</string>
+	<string name="poi_reg_name">Nom regional</string>
+	<string name="poi_loc_name">Nom local</string>
+	<string name="poi_old_name">Nom antic</string>
+	<string name="poi_alt_name">Nom alternatiu</string>
+
+	<string name="poi_pump_manual">Bomba manual</string>
+	<string name="poi_pump_powered">Bomba motoritzada</string>
+	<string name="poi_pump_no">Sense bomba</string>
+	<string name="poi_pump">Bomba</string>
+
+	<string name="poi_water_characteristic_mineral">Característica de l\'aigua: mineral</string>
+	<string name="poi_water_characteristic_mud">Característica de l\'aigua: argilosa</string>
+	<string name="poi_water_characteristic_sulfuric">Característica de l\'aigua: sulfúrica</string>
+
+	<string name="poi_cuisine">Cuina</string>
+
+	<string name="poi_information_board">Panell d\'informació</string>
+	<string name="poi_information_map">Mapa</string>
+	<string name="poi_information_office">Oficina d\'informació</string>
+	<string name="poi_information_terminal">Terminal d\'informació</string>
+	<string name="poi_information_route_marker">Marcador de ruta</string>
+	<string name="poi_information_hikingmap">Mapa de senderisme</string>
+	<string name="poi_information_audioguide">Audioguia</string>
+	<string name="poi_information_bicyclemap">Mapa ciclista</string>
+	<string name="poi_information_tactile_model">Model tàctil</string>
+	<string name="poi_information_tactile_map">Mapa tàctil</string>
+	<string name="poi_board_type_notice">Tauler d\'anuncis</string>
+	<string name="poi_vending_drinks_sweets">Begudes i dolços</string>
+	<string name="poi_vending_animal_food">Menjar per animals</string>
 	</resources>

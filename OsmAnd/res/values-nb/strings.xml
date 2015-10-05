@@ -757,8 +757,8 @@
     <string name="map_widget_plain_time">Gjeldende tid</string>
     <string name="osmo_edit_color">Visningsfarge</string>
     <string name="always_center_position_on_map">Vis posisjon alltid i midten</string>
-    <string name="guidance_preferences_descr">Innstillinger for navigering</string>
-    <string name="routing_preferences_descr">Innstillinger for ruteplanlegging</string>
+    <string name="guidance_preferences_descr">Navigeringsinnstillinger</string>
+    <string name="routing_preferences_descr">Ruteplanleggingsinnstillinger</string>
     <string name="rendering_attr_noAdminboundaries_name">Skjul grenser</string>
 	<string name="map_widget_max_speed">Fartsgrense</string>
     <string name="map_widget_transparent">Gjennomsiktig layout</string>
@@ -1415,4 +1415,21 @@
 <string name="address_unknown">Adresse er ikke kjent ennå</string>
     <string name="routing_attr_avoid_shuttle_train_name">Unngå pendeltog</string>
 	<string name="routing_attr_avoid_shuttle_train_description">Unngå pendeltog</string>
-    </resources>
+    <string name="srtm_plugin_disabled">Koter deaktivert</string>
+    <string name="favorite_category_add_new">Legg til ny</string>
+    <string name="favorite_category_select">Velg kategori</string>
+    <string name="shared_string_navigation">Navigering</string>
+    <string name="osmand_running_in_background">Kjører i bakgrunnen</string>
+    <string name="favourites_edit_dialog_title">Favorittinformasjon</string>
+    <string name="next_proceed">Neste</string>
+	<string name="tag_poi_name">navn</string>
+	<string name="description">Beskrivelse</string>
+	<string name="add_opening_hours">Legg til åpningstider</string>
+	<string name="poi_dialog_poi_type">Interessepunkttype</string>
+	<string name="please_specify_poi_type">Spesifiser interessepunkttype.</string>
+	<string name="working_days">Arbeidsdager</string>
+	<string name="favourites">Favoritter</string>
+	<string name="show_gpx">Vis GPX</string>
+	<string name="roads">Veier</string>
+    <string name="favourites_context_menu_add">Legg til favoritt</string>
+	</resources>
