@@ -67,7 +67,7 @@ public class ItemsListBuilder {
 		}
 	}
 
-	class ResourceItemComparator implements Comparator {
+	class ResourceItemComparator implements Comparator<Object> {
 		@Override
 		public int compare(Object obj1, Object obj2) {
 			String str1;
@@ -100,7 +100,7 @@ public class ItemsListBuilder {
 
 
 	private List<ResourceItem> regionMapItems;
-	private List allResourceItems;
+	private List<Object> allResourceItems;
 	private List<WorldRegion> allSubregionItems;
 
 	private OsmandApplication app;
@@ -113,7 +113,7 @@ public class ItemsListBuilder {
 		return regionMapItems;
 	}
 
-	public List getAllResourceItems() {
+	public List<Object> getAllResourceItems() {
 		return allResourceItems;
 	}
 
@@ -130,7 +130,7 @@ public class ItemsListBuilder {
 	public ItemsListBuilder(OsmandApplication app) {
 		this.app = app;
 		regionMapItems = new LinkedList<>();
-		allResourceItems = new LinkedList();
+		allResourceItems = new LinkedList<Object>();
 		allSubregionItems = new LinkedList<>();
 	}
 
@@ -276,7 +276,7 @@ public class ItemsListBuilder {
 		Map<String, IndexItem> regionResources = resourcesByRegions.get(region);
 
 		List<ResourceItem> regionMapArray = new LinkedList<>();
-		List allResourcesArray = new LinkedList();
+		List<Object> allResourcesArray = new LinkedList<Object>();
 
 		Context context = app.getApplicationContext();
 		OsmandRegions osmandRegions = app.getRegions();
