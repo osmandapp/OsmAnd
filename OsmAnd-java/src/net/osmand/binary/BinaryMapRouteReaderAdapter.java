@@ -451,11 +451,14 @@ public class BinaryMapRouteReaderAdapter {
 				o.names = new TIntObjectHashMap<String>();
 				int sizeL = codedIS.readRawVarint32();
 				int old = codedIS.pushLimit(sizeL);
+				TIntArrayList list = new TIntArrayList();
 				while (codedIS.getBytesUntilLimit() > 0) {
 					int stag = codedIS.readRawVarint32();
 					int pId = codedIS.readRawVarint32();
 					o.names.put(stag, ((char)pId)+"");
+					list.add(stag);
 				}
+				o.nameIds = list.toArray();
 				codedIS.popLimit(old);
 				break;
 			case RouteData.POINTS_FIELD_NUMBER:

@@ -26,6 +26,7 @@ public class RouteDataObject {
 	public long id;
 	public TIntObjectHashMap<String> names;
 	public final static float NONE_MAX_SPEED = 40f;
+	public int[] nameIds;
 	
 	public RouteDataObject(RouteRegion region) {
 		this.region = region;
@@ -33,6 +34,7 @@ public class RouteDataObject {
 	
 	public RouteDataObject(RouteRegion region, int[] nameIds, String[] nameValues) {
 		this.region = region;
+		this.nameIds = nameIds;
 		if (nameIds.length > 0) {
 			names = new TIntObjectHashMap<String>();
 		}
@@ -84,6 +86,10 @@ public class RouteDataObject {
 			return names.get(region.nameTypeRule);
 		}
 		return null;
+	}
+	
+	public int[] getNameIds() {
+		return nameIds;
 	}
 	
 	public TIntObjectHashMap<String> getNames() {
