@@ -78,7 +78,6 @@ public final class DownloadsUiHelper {
 		ft.addToBackStack(null);
 
 		fragment.show(ft, "dialog");
-		ft.commit();
 	}
 
 	private static class ToggleCollapseFreeVersionBanner implements View.OnClickListener {
