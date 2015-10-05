@@ -1233,4 +1233,122 @@
 	<string name="poi_trees_oil">Пальмавы алей</string>
 	<string name="poi_trees_orange">Апельсін</string>
 	<string name="poi_trees_banana">Банан</string>
+	<string name="poi_aerialway_bubble_no">Няма шкленьня</string>
+	<string name="poi_aerialway_heating_yes">Абаграваньне</string>
+	<string name="poi_aerialway_heating_no">Без абаграваньня</string>
+	<string name="poi_aerialway_bicycle_yes">Правоз ровараў дазволены</string>
+	<string name="poi_aerialway_bicycle_no">Правоз ровараў забаронены</string>
+	<string name="poi_aerialway_bicycle_summer">Правоз ровараў дазволены толькі летам</string>
+	<string name="poi_aerialway_access_entry">Толькі ўваход</string>
+	<string name="poi_aerialway_access_exit">Толькі выхад</string>
+	<string name="poi_aerialway_access_both">Уваход і выхад</string>
+	<string name="poi_aerialway_summer_access_entry">Доступ летам: толькі ўваход</string>
+	<string name="poi_aerialway_summer_access_exit">Доступ летам: толькі выхад</string>
+	<string name="poi_aerialway_summer_access_both">Доступ летам: уваход і выхад</string>
+
+	<string name="poi_stars_1">Колькасьць зорак: 1 (турысцкі клас)</string>
+	<string name="poi_stars_1s">Колькасьць зорак: 1S (палепшаны турысцкі клас)</string>
+	<string name="poi_stars_2">Колькасьць зорак: 2 (стандартны кляс)</string>
+	<string name="poi_stars_2s">Колькасьць зорак: 2S (палепшаны стандартны кляс)</string>
+	<string name="poi_stars_3">Колькасьць зорак: 3 (камфортны кляс)</string>
+	<string name="poi_stars_3s">Колькасьць зорак: 3S (палепшаны камфортны кляс)</string>
+	<string name="poi_stars_4">Колькасьць зорак: 4 (першы кляс)</string>
+	<string name="poi_stars_4s">Колькасьць зорак: 4S (палепшаны першы кляс)</string>
+	<string name="poi_stars_5">Колькасьць зорак: 5 (катэгорыя люкс)</string>
+	<string name="poi_stars_5s">Колькасьць зорак: 5S (катэгорыя люкс +)</string>
+	<string name="poi_stars_6">Колькасьць зорак: 6</string>
+	<string name="poi_stars_7">Колькасьць зорак: 7</string>
+	<string name="poi_rooms">Колькасць нумароў</string>
+
+	<string name="poi_love_hotel">Love-гатэль</string>
+
+	<string name="poi_takeaway_no">На вынас: не</string>
+	<string name="poi_takeaway_only">Толькі на вынас</string>
+
+	<string name="poi_delivery_yes">З дастаўкай</string>
+	<string name="poi_delivery_no">Без дастаўкі</string>
+	<string name="poi_delivery_only">Толькі з дастаўкай</string>
+
+	<string name="poi_outdoor_seating_yes">Месцы на адкрытым паветры</string>
+	<string name="poi_outdoor_seating_no">Няма месцаў на адкрытым паветры</string>
+	<string name="poi_outdoor_seating_terrace">Месцы на адкрытым паветры: тэраса</string>
+	<string name="poi_outdoor_seating_sidewalk">Месцы на адкрытым паветры: тратуар</string>
+	<string name="poi_outdoor_seating_pedestrian_zone">Месцы на адкрытым паветры: пешаходная зона</string>
+	<string name="poi_outdoor_seating_garden">Месцы на адкрытым паветры: сад</string>
+	<string name="poi_outdoor_seating_patio">Месцы на адкрытым паветры: паціа</string>
+
+	<string name="poi_cocktails_yes">Кактэйлі</string>
+
+	<string name="poi_second_hand_yes">Ужываны тавар</string>
+	<string name="poi_second_hand_no">Ужываны тавар адсутнічае</string>
+	<string name="poi_second_hand_only">Толькі ўжываны тавар</string>
+
+	<string name="poi_service_parts">Запчасткі</string>
+	<string name="poi_service_dealer">Дылер</string>
+	<string name="poi_service_repair">Рамонт</string>
+	<string name="poi_service_repair_no">Рамонт не ажыцьцяўляецца</string>
+	<string name="poi_service_electrical">Рамонт электратранспарту</string>
+	<string name="poi_motorcycle_repair">Рамонт матацыклаў</string>
+	<string name="poi_self_service_yes">Самаабслугоўваньне</string>
+	<string name="poi_self_service_no">Самаабслугоўваньне: няма</string>
+	<string name="poi_automated_yes">Аўтаматызацыя</string>
+	<string name="poi_automated_no">Без аўтаматызацыі</string>
+	<string name="poi_full_service_yes">Поўны комплекс паслуг</string>
+	<string name="poi_brushless_yes">Безкантактная</string>
+	<string name="poi_brushless_no">Кантактная</string>
+	<string name="poi_car_wash_no">Без аўтамыйні</string>
+
+	<string name="poi_aeroway_fuel">Заправачная станцыя для паветранага транспарту</string>
+	<string name="poi_public_bath">Грамадзкая лазьня</string>
+
+	<string name="poi_male_yes">Для мужчын</string>
+	<string name="poi_male_no">Не для мужчын</string>
+	<string name="poi_female_yes">Для жанчын</string>
+	<string name="poi_female_no">Не для жанчын</string>
+	<string name="poi_indoor_yes">Унутры памяшканьня</string>
+	<string name="poi_indoor_no">Знадворку</string>
+	<string name="poi_toilets_yes">З прыбіральняй</string>
+	<string name="poi_toilets_no">Без прыбіральні</string>
+	<string name="poi_toilets_wheelchair_yes">Доступ у прыбіральню для інвалідных вазкоў: так</string>
+	<string name="poi_toilets_wheelchair_no">Доступ у прыбіральню для інвалідных вазкоў: не</string>
+	<string name="poi_toilets_access_customers">Доступ у прыбіральню: толькі для наведвальнікаў</string>
+	<string name="poi_toilets_access_permissive">Доступ у прыбіральню: з дазволу ўладальніка</string>
+	<string name="poi_toilets_access_public">Доступ у прыбіральню: агульны</string>
+
+	<string name="poi_maxstay">Максімальны час стаянкі</string>
+
+	<string name="poi_vending_parking_tickets">Парковачныя талоны</string>
+	<string name="poi_vending_cigarettes">Цыгарэты</string>
+	<string name="poi_vending_excrement_bags">Пакеты для экскрыментаў жывёл</string>
+	<string name="poi_vending_public_transport_tickets">Квіткі на грамадзкі транспарт</string>
+	<string name="poi_vending_drinks">Продаж напояў</string>
+	<string name="poi_vending_sweets">Саладосьці</string>
+	<string name="poi_vending_parcel_pickup_mail_in">Атрыманьне і адпраўленьне пасылак</string>
+	<string name="poi_vending_condoms">Прэзэрватывы</string>
+	<string name="poi_vending_stamps">Маркі</string>
+	<string name="poi_vending_bicycle_tube">Веласіпедныя камэры</string>
+	<string name="poi_vending_food">Харчаваньне</string>
+	<string name="poi_vending_drinks_food">Напоі і закускі</string>
+	<string name="poi_vending_fuel">Паліва</string>
+	<string name="poi_vending_parcel_pickup">Атрыманьне пасылак</string>
+	<string name="poi_memorial_plaque">Дошка</string>
+	<string name="poi_memorial_statue">Статуя</string>
+	<string name="poi_memorial_stone">Камень</string>
+	<string name="poi_memorial_stele">Стэла</string>
+	<string name="poi_memorial_bust">Бюст</string>
+	<string name="poi_memorial_blue_plaque">Сіняя шыльда</string>
+	<string name="poi_memorial_cross">Крыж</string>
+	<string name="poi_memorial_obelisk">Абеліск</string>
+
+	<string name="poi_inscription">Надпіс</string>
+
+<string name="poi_trees_almond">Міндаль</string>
+	<string name="poi_trees_hazel">Лясны арэх</string>
+	<string name="poi_trees_coconut">Какос</string>
+	<string name="poi_trees_persimmon">Хурма</string>
+	<string name="poi_trees_cherry">Вішня</string>
+	<string name="poi_trees_walnut">Грэцкі арэх</string>
+	<string name="poi_trees_plum">Сліва</string>
+	<string name="poi_trees_meadow_orchard">Пладовы сад</string>
+	<string name="poi_trees_date">Фінікі</string>
 	</resources>
