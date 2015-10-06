@@ -1637,4 +1637,10 @@
 	<string name="poi_service_repair">維修</string>
 	<string name="poi_service_repair_no">無維修</string>
 	<string name="poi_service_electrical">電動車維修</string>
+	<string name="poi_motorcycle_repair">機車維修</string>
+	<string name="poi_self_service_yes">自助服務</string>
+	<string name="poi_self_service_no">無自助服務</string>
+	<string name="poi_automated_yes">自動化</string>
+	<string name="poi_automated_no">無自動化</string>
+	<string name="poi_full_service_yes">全方位服務</string>
 	</resources>
