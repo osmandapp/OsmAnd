@@ -2168,4 +2168,5 @@
     <string name="buy">KØB</string>
 <string name="hillshade_layer_disabled">Relieflag deaktiveret</string>
     <string name="activate_seamarks_plugin">Aktiver sømærkeudvidelsen</string>
-    </resources>
+    <string name="activate_srtm_plugin">Aktiver SRTM udvidelsen</string>
+</resources>
