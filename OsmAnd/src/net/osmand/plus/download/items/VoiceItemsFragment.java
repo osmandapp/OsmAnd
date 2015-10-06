@@ -65,7 +65,7 @@ public class VoiceItemsFragment extends OsmandExpandableListFragment {
 		} catch (IllegalArgumentException e) {
 			LOG.warn("VOICE_PROMPT_TYPE_KEY=" + value);
 		}
-		
+
 		ExpandableListView listView = (ExpandableListView) view.findViewById(android.R.id.list);
 		listAdapter = new VoiceItemsAdapter(getActivity());
 		listView.setAdapter(listAdapter);

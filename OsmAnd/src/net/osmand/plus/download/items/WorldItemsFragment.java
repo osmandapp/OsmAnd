@@ -1,5 +1,26 @@
 package net.osmand.plus.download.items;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
+import net.osmand.PlatformUtil;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.R;
+import net.osmand.plus.Version;
+import net.osmand.plus.WorldRegion;
+import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
+import net.osmand.plus.activities.OsmandExpandableListFragment;
+import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.download.items.ItemsListBuilder.VoicePromptsType;
+import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
+import net.osmand.plus.srtmplugin.SRTMPlugin;
+
+import org.apache.commons.logging.Log;
+
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -15,28 +36,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
-
-import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.R;
-import net.osmand.plus.Version;
-import net.osmand.plus.WorldRegion;
-import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
-import net.osmand.plus.activities.OsmandExpandableListFragment;
-import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.download.items.ItemsListBuilder.VoicePromptsType;
-import net.osmand.plus.download.newimplementation.DownloadsUiHelper;
-import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
-import net.osmand.plus.srtmplugin.SRTMPlugin;
-
-import org.apache.commons.logging.Log;
-
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
 
 public class WorldItemsFragment extends OsmandExpandableListFragment {
 	public static final String TAG = "WorldItemsFragment";
@@ -71,8 +70,7 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 
 		onCategorizationFinished();
 
-		DownloadsUiHelper.initFreeVersionBanner(view,
-				getMyApplication(), getResources());
+		((DownloadActivity) getActivity()).initFreeVersionBanner(view);
 
 		return view;
 	}
@@ -129,14 +127,14 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 		if (groupPosition == worldRegionsIndex) {
 			WorldRegion region = (WorldRegion)listAdapter.getChild(groupPosition, childPosition);
-			DownloadsUiHelper.showDialog(getActivity(), RegionDialogFragment.createInstance(region.getRegionId()));
+			((DownloadActivity)getActivity()).showDialog(getActivity(), RegionDialogFragment.createInstance(region.getRegionId()));
 			return true;
 		} else if (groupPosition == voicePromptsIndex) {
 			if (childPosition == voicePromptsItemsRecordedSubIndex) {
-				DownloadsUiHelper.showDialog(getActivity(),
+				((DownloadActivity)getActivity()).showDialog(getActivity(),
 						VoiceDialogFragment.createInstance(VoicePromptsType.RECORDED));
 			} else {
-				DownloadsUiHelper.showDialog(getActivity(),
+				((DownloadActivity) getActivity()).showDialog(getActivity(),
 						VoiceDialogFragment.createInstance(VoicePromptsType.TTS));
 			}
 		}

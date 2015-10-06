@@ -20,7 +20,6 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.ActionBarProgressActivity;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.download.items.ItemsListBuilder;
-import net.osmand.plus.download.newimplementation.IndexItemCategoryWithSubcat;
 
 import java.lang.ref.WeakReference;
 import java.text.MessageFormat;
@@ -111,11 +110,6 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 	}
 
 	public void categorizationFinished(List<IndexItem> filtered, List<IndexItemCategory> cats) {
-
-	}
-
-	public void onCategorizationFinished(List<IndexItem> filtered,
-										 List<IndexItemCategoryWithSubcat> cats) {
 
 	}
 
