@@ -57,7 +57,7 @@
 
         </LinearLayout>
 
-        <ImageButton
+        <ImageView
             android:id="@+id/rightImageButton"
             android:layout_width="@dimen/list_item_height"
             android:layout_height="@dimen/list_item_height"
@@ -65,6 +65,7 @@
             android:layout_marginLeft="@dimen/dashFavIconMargin"
             android:background="?attr/dashboard_button"
             tools:src="@drawable/ic_action_import"
+            android:scaleType="center"
             tools:visibility="visible"
             android:visibility="gone"/>
 

@@ -96,10 +96,13 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 					.onRegionSelected(region.getRegionId());
 			return true;
 		} else if (obj instanceof ItemsListBuilder.ResourceItem) {
-			IndexItem indexItem = ((ItemsListBuilder.ResourceItem) obj).getIndexItem();
-			((BaseDownloadActivity) getActivity())
-					.startDownload(indexItem);
-			return true;
+			if(((ItemViewHolder) v.getTag()).isItemAvailable()) {
+				IndexItem indexItem = ((ItemsListBuilder.ResourceItem) obj).getIndexItem();
+				((BaseDownloadActivity) getActivity())
+						.startDownload(indexItem);
+
+				return true;
+			}
 		}
 		return false;
 	}

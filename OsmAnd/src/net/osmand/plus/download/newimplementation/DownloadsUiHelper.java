@@ -133,7 +133,6 @@ public final class DownloadsUiHelper {
 
 		@Override
 		public void onFinished() {
-			freeVersionBanner.setVisibility(View.VISIBLE);
 			downloadProgressLayout.setVisibility(View.GONE);
 		}
 	}

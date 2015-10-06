@@ -2001,4 +2001,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="show_free_version_banner">Show free version banner</string>
     <string name="show_free_version_banner_description">Even if you have paid version you still can see free version banner</string>
     <string name="buy">BUY</string>
+    <string name="activate_seamarks_plugin">Please activate Seamarks plugin</string>
+    <string name="activate_srtm_plugin">Please activate SRTM plugin</string>
 </resources>

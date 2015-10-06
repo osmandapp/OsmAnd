@@ -1,7 +1,9 @@
 package net.osmand.plus.download.items;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +16,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.WorldRegion;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
@@ -35,6 +38,7 @@ public class ItemViewHolder {
 	private boolean freeVersion;
 	private int textColorPrimary;
 	private int textColorSecondary;
+	private RightButtonAction rightButtonAction;
 
 	private enum RightButtonAction {
 		UNKNOWN,
@@ -72,10 +76,11 @@ public class ItemViewHolder {
 		this.freeVersion = freeVersion;
 	}
 
-	public void bindIndexItem(final IndexItem indexItem, final DownloadActivity context, boolean showTypeInTitle, boolean showTypeInDesc) {
+	public void bindIndexItem(final IndexItem indexItem, final DownloadActivity context,
+							  boolean showTypeInTitle, boolean showTypeInDesc) {
 		boolean disabled = false;
 		String textButtonCaption = "GET";
-		RightButtonAction rightButtonAction = RightButtonAction.UNKNOWN;
+		rightButtonAction = RightButtonAction.UNKNOWN;
 
 		if (indexItem.getType() == DownloadActivityType.VOICE_FILE) {
 			nameTextView.setText(indexItem.getVisibleName(context,
@@ -112,7 +117,6 @@ public class ItemViewHolder {
 		} else {
 			descrTextView.setText(indexItem.getSizeDescription(context));
 		}
-		// TODO replace with imageView.
 		rightImageButton.setVisibility(View.VISIBLE);
 		rightImageButton.setImageDrawable(getContextIcon(context, R.drawable.ic_action_import));
 		progressBar.setVisibility(View.GONE);
@@ -129,16 +133,26 @@ public class ItemViewHolder {
 				public void onClick(View v) {
 					switch (action) {
 						case ASK_FOR_FULL_VERSION_PURCHASE:
-							AccessibleToast.makeText(context, "Please purchase Full version", Toast.LENGTH_SHORT).show();
+							Intent intent = new Intent(Intent.ACTION_VIEW,
+									Uri.parse(Version.marketPrefix(context.getMyApplication())
+											+ "net.osmand.plus"));
+							context.startActivity(intent);
 							break;
 						case ASK_FOR_SEAMARKS_PLUGIN:
-							AccessibleToast.makeText(context.getApplicationContext(), "Please turn on Seamarks plugin", Toast.LENGTH_SHORT).show();
+							context.startActivity(new Intent(context,
+									context.getMyApplication().getAppCustomization().getPluginsActivity()));
+							AccessibleToast.makeText(context.getApplicationContext(),
+									context.getString(R.string.activate_seamarks_plugin), Toast.LENGTH_SHORT).show();
 							break;
 						case ASK_FOR_SRTM_PLUGIN_PURCHASE:
-							AccessibleToast.makeText(context, "Please purchase SRTM plugin", Toast.LENGTH_SHORT).show();
+							OsmandPlugin plugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
+							context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL())));
 							break;
 						case ASK_FOR_SRTM_PLUGIN_ENABLE:
-							AccessibleToast.makeText(context, "Please activate SRTM plugin", Toast.LENGTH_SHORT).show();
+							context.startActivity(new Intent(context,
+									context.getMyApplication().getAppCustomization().getPluginsActivity()));
+							AccessibleToast.makeText(context,
+									context.getString(R.string.activate_srtm_plugin), Toast.LENGTH_SHORT).show();
 							break;
 					}
 				}
@@ -183,5 +197,9 @@ public class ItemViewHolder {
 
 	private Drawable getContextIcon(DownloadActivity context, int resourceId, int color) {
 		return context.getMyApplication().getIconsCache().getPaintedContentIcon(resourceId, color);
+	}
+
+	public boolean isItemAvailable() {
+		return rightButtonAction == RightButtonAction.UNKNOWN;
 	}
 }
