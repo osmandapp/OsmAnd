@@ -2188,4 +2188,6 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="show_free_version_banner">Afficher le bandeau \"Version Gratuite\"</string>
     <string name="show_free_version_banner_description">Même si vous avez acheté la version payante, le bandeau \"Version Gratuite\" peut-être affiché</string>
 <string name="downloading_number_of_files">Téléchargement de %1$d fichiers</string>
+    <string name="hillshade_layer_disabled">Affichage du relief désactivé</string>
+    <string name="buy">Acheter</string>
     </resources>
