@@ -2211,4 +2211,5 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 <string name="downloading_number_of_files">In download - %1$d file</string>
     <string name="hillshade_layer_disabled">Livello Ombreggiatura rilievi disabilitato</string>
     <string name="buy">ACQUISTA</string>
+<string name="activate_srtm_plugin">Attiva il componente aggiuntivo SRTM</string>
 </resources>
