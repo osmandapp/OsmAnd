@@ -2092,4 +2092,6 @@
     <string name="buy">COMPRAR</string>
     <string name="activate_seamarks_plugin">Active el complemento náutico</string>
     <string name="activate_srtm_plugin">Active el complemento SRTM</string>
+<string name="later">Luego</string>
+    <string name="get_full_version">Obtener versión completa</string>
 </resources>
