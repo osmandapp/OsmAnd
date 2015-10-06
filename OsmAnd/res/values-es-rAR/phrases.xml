@@ -1769,4 +1769,12 @@
 	<string name="poi_resource_zinc">Zinc</string>
 	<string name="poi_resource_zircon">Circón</string>
 
+	<string name="poi_resource_barite">Barita</string>
+	<string name="poi_resource_peat">Turba</string>
+	<string name="poi_resource_rutile">Rutilo</string>
+	<string name="poi_wetland_wet_meadow">Prado húmedo</string>
+	<string name="poi_wetland_swamp">Ciénaga</string>
+	<string name="poi_wetland_bog">Pantano</string>
+	<string name="poi_wetland_marsh">Marisma</string>
+	<string name="poi_wetland_reedbed">Cañaveral</string>
 	</resources>
