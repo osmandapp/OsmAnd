@@ -2088,4 +2088,8 @@
     <string name="show_free_version_banner">Mostrar banner de versión gratuita</string>
     <string name="show_free_version_banner_description">Aunque tenga la versión paga, podrá ver el banner de la versión gratuita</string>
 <string name="downloading_number_of_files">Descargando - %1$d archivo/s</string>
-    </resources>
+    <string name="hillshade_layer_disabled">Capa de sombreado desactivada</string>
+    <string name="buy">COMPRAR</string>
+    <string name="activate_seamarks_plugin">Active el complemento náutico</string>
+    <string name="activate_srtm_plugin">Active el complemento SRTM</string>
+</resources>
