@@ -1817,4 +1817,10 @@
 	<string name="poi_cypress">Cypres</string>
 	<string name="poi_flagpole">Flagstang</string>
 
-</resources>
+<string name="poi_bench_yes">Med bænk</string>
+	<string name="poi_bench_no">Uden bænk</string>
+	<string name="poi_waste_basket_yes">Med kurv</string>
+	<string name="poi_waste_basket_no">Uden kurv</string>
+
+	<string name="poi_shelter_type_public_transport">Husly type: offentlig transport</string>
+	</resources>
