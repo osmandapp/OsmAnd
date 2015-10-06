@@ -2016,4 +2016,10 @@
     <string name="show_free_version_banner">Pokaži pasico brezplačne različice</string>
     <string name="srtm_plugin_disabled">Izris izohips je onemogočen</string>
     <string name="show_free_version_banner_description">Četudi imate plačljivo različico, še vedno lahko prikažete pasico brezplačne različice.</string>
+<string name="hillshade_layer_disabled">Senčenje terena je onemogočeno</string>
+    <string name="buy">Nakup</string>
+    <string name="activate_seamarks_plugin">Omogočite vstavek pomorskih oznak</string>
+    <string name="activate_srtm_plugin">Omogočite vstavek SRTM</string>
+    <string name="later">Kasneje</string>
+    <string name="get_full_version">Pridobi polno različico programa</string>
 </resources>
