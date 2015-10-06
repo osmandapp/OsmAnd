@@ -175,7 +175,6 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 
 		private Map<String, List<Object>> data = new LinkedHashMap<>();
 		private List<String> sections = new LinkedList<>();
-		private Context ctx;
 		private boolean srtmDisabled;
 		private boolean nauticalPluginDisabled;
 		private boolean freeVersion;
@@ -185,7 +184,6 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 		}
 
 		public WorldItemsAdapter(Context ctx) {
-			this.ctx = ctx;
 			srtmDisabled = OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) == null;
 			nauticalPluginDisabled = OsmandPlugin.getEnabledPlugin(NauticalMapsPlugin.class) == null;
 			freeVersion = Version.isFreeVersion(getMyApplication());

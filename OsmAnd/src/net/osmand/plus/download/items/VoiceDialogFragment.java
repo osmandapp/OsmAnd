@@ -14,7 +14,6 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.items.ItemsListBuilder.VoicePromptsType;
-import net.osmand.plus.download.newimplementation.DownloadsUiHelper;
 
 import org.apache.commons.logging.Log;
 
@@ -23,7 +22,6 @@ public class VoiceDialogFragment extends DialogFragment {
 	public static final String TAG = "VoiceDialogFragment";
 	private static final String VOICE_PROMPT_TYPE_DLG_KEY = "voice_prompt_type_dlg_key";
 	private VoicePromptsType voicePromptsType = VoicePromptsType.NONE;
-	private DownloadsUiHelper.MapDownloadListener mProgressListener;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -76,36 +74,9 @@ public class VoiceDialogFragment extends DialogFragment {
 			ItemsListBuilder builder = getDownloadActivity().getItemsBuilder();
 			toolbar.setTitle(builder.getVoicePromtName(voicePromptsType));
 		}
-		DownloadsUiHelper.initFreeVersionBanner(view, getMyApplication(),
-				getResources());
-
-		mProgressListener = new DownloadsUiHelper.MapDownloadListener(view, getResources()){
-			@Override
-			public void onProgressUpdate(int progressPercentage, int activeTasks) {
-				super.onProgressUpdate(progressPercentage, activeTasks);
-			}
-
-			@Override
-			public void onFinished() {
-				super.onFinished();
-				DownloadsUiHelper.initFreeVersionBanner(view,
-						getMyApplication(), getResources());
-			}
-		};
+		((DownloadActivity)getActivity()).initFreeVersionBanner(view);
 
 		return view;
-	}
-
-	@Override
-	public void onResume() {
-		super.onResume();
-		getDownloadActivity().setOnProgressUpdateListener(mProgressListener);
-	}
-
-	@Override
-	public void onPause() {
-		super.onPause();
-		getDownloadActivity().setOnProgressUpdateListener(null);
 	}
 
 	@Override
