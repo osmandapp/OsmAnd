@@ -2192,4 +2192,6 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="buy">Acheter</string>
     <string name="activate_seamarks_plugin">Merci d\'activer le greffon balisage</string>
     <string name="activate_srtm_plugin">Merci d\'activer le greffon SRTM</string>
+<string name="later">Plus tard</string>
+    <string name="get_full_version">Obtenir la version complète</string>
 </resources>
