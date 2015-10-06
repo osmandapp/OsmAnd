@@ -1798,4 +1798,23 @@
 	<string name="poi_internet_access_type_service">Internet access type: service</string>
 	<string name="poi_internet_access_type_no">Internet access type: no</string>
 
+	<string name="poi_maxwidth">Maximum width</string>
+	<string name="poi_iata">IATA code</string>
+	<string name="poi_icao">ICAO code</string>
+	<string name="poi_faa">FAA code</string>
+	
+	<string name="poi_artwork_type_sculpture">Artwork type: sculpture</string>
+	<string name="poi_artwork_type_statue">Artwork type: statue</string>
+	<string name="poi_artwork_type_mural">Artwork type: mural</string>
+	<string name="poi_artwork_type_architecture">Artwork type: architecture</string>
+	<string name="poi_artwork_type_painting">Artwork type: painting</string>
+	<string name="poi_artwork_type_stone">Artwork type: stone</string>
+	<string name="poi_artwork_type_bust">Artwork type: bust</string>
+	<string name="poi_artwork_type_installation">Artwork type: installation</string>
+	<string name="poi_artwork_type_mosaic">Artwork type: mosaic</string>
+	<string name="poi_artwork_type_relief">Artwork type: relief</string>
+	<string name="poi_artwork_type_graffiti">Artwork type: graffiti</string>
+	<string name="poi_artwork_type_stele">Artwork type: stele</string>
+	<string name="poi_artwork_type_fountain">Artwork type: fountain</string>
+
 </resources>
