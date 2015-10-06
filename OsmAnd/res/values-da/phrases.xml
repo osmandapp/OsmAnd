@@ -1825,4 +1825,21 @@
 	<string name="poi_shelter_type_public_transport">Husly type: offentlig transport</string>
 	<string name="poi_shelter_type_picnic_shelter">Husly type: picnic ly</string>
 	<string name="poi_shelter_type_weather_shelter">Husly type: Vejret ly</string>
-	</resources>
+	<string name="poi_shelter_type_lean_to">Husly type: lean</string>
+	<string name="poi_shelter_type_basic_hut">Husly type: grundlæggende hut</string>
+	<string name="poi_shelter_type_building">Husly type: bygning</string>
+	<string name="poi_shelter_type_wildlife_hide">Husly type: wildlife Skjul</string>
+	<string name="poi_shelter_type_rock_shelter">Husly type: rock ly</string>
+	<string name="poi_shelter_type_sun_shelter">Husly type: sun ly</string>
+	<string name="poi_shelter_type_field_shelter">Husly type: feltet ly</string>
+	<string name="poi_shelter_type_tent">Husly type: telt</string>
+	<string name="poi_shelter_type_abandoned">Husly type: opgivet</string>
+
+	<string name="poi_internet_access_type_wlan">Internet adgangstype: wlan</string>
+	<string name="poi_internet_access_type_terminal">Internet adgangstype: terminal</string>
+	<string name="poi_internet_access_type_wired">Internet adgangstype: wired</string>
+	<string name="poi_internet_access_type_public">Internet adgangstype: offentlig</string>
+	<string name="poi_internet_access_type_service">Internet adgangstype: service</string>
+	<string name="poi_internet_access_type_no">Internet adgangstype: ingen</string>
+
+</resources>
