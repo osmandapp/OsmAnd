@@ -892,15 +892,15 @@
 
 	<string name="poi_tourism_attraction">Atracción turística</string>
 	<string name="poi_cutline">Cortafuegos forestal</string>
-	<string name="poi_icn_ref">Red de ruta ciclista internacional</string>
-	<string name="poi_ncn_ref">Red de ruta ciclista nacional</string>
-	<string name="poi_rcn_ref">Red de ruta ciclista regional</string>
-	<string name="poi_lcn_ref">Red de ruta ciclista local</string>
+	<string name="poi_icn_ref">Nodo de red internacional de ciclismo</string>
+	<string name="poi_ncn_ref">Nodo de red nacional de ciclismo</string>
+	<string name="poi_rcn_ref">Nodo de red regional de ciclismo</string>
+	<string name="poi_lcn_ref">Nodo de red local de ciclismo</string>
 
-	<string name="poi_iwn_ref">Red de ruta internacional de senderismo</string>
-	<string name="poi_nwn_ref">Red de ruta nacional de senderismo</string>
-	<string name="poi_rwn_ref">Red de ruta regional de senderismo</string>
-	<string name="poi_lwn_ref">Red de ruta local de senderismo</string>
+	<string name="poi_iwn_ref">Nodo de red internacional de senderismo</string>
+	<string name="poi_nwn_ref">Nodo de red nacional de senderismo</string>
+	<string name="poi_rwn_ref">Nodo de red regional de senderismo</string>
+	<string name="poi_lwn_ref">Nodo de red local de senderismo</string>
 
 	<string name="poi_opening_hours">Horario de atención</string>
 	<string name="poi_collection_times">Horario de recolección</string>
@@ -1717,4 +1717,56 @@
 	<string name="poi_vending_elongated_coin">Moneda elongada</string>
 	<string name="poi_memorial_koshinto">Koshinto</string>
 	<string name="poi_memorial_jizo">Jizo</string>
+	<string name="poi_historic_quarry">Cantera histórica</string>
+
+	<string name="poi_resource_aggregate">Agregado</string>
+	<string name="poi_resource_antimony">Antimonio</string>
+	<string name="poi_resource_asbestos">Asbesto</string>
+	<string name="poi_resource_basalt">Basalto</string>
+	<string name="poi_resource_bauxite">Bauxita</string>
+	<string name="poi_resource_beryl">Berilo</string>
+	<string name="poi_resource_bismuth">Bismuto</string>
+	<string name="poi_resource_cereal">Cereal</string>
+	<string name="poi_resource_chromite">Cromita</string>
+	<string name="poi_resource_clay">Arcilla</string>
+	<string name="poi_resource_coal">Carbón</string>
+	<string name="poi_resource_copper">Cobre</string>
+	<string name="poi_resource_diamond">Diamante</string>
+	<string name="poi_resource_dimension_stone">Piedra de dimensión</string>
+	<string name="poi_resource_dolomite">Dolomita</string>
+	<string name="poi_resource_gas">Gas</string>
+	<string name="poi_resource_gold">Oro</string>
+	<string name="poi_resource_graphite">Grafito</string>
+	<string name="poi_resource_gravel">Grava</string>
+	<string name="poi_resource_gypsum">Yeso</string>
+	<string name="poi_resource_iron_ore">Mineral de hierro</string>
+	<string name="poi_resource_lead">Plomo</string>
+	<string name="poi_resource_lignite">Lignito</string>
+	<string name="poi_resource_limestone">Piedra caliza</string>
+	<string name="poi_resource_marble">Mármol</string>
+	<string name="poi_resource_mercury">Mercurio</string>
+	<string name="poi_resource_mica">Micáceo</string>
+	<string name="poi_resource_mineral_oil">Aceite mineral</string>
+	<string name="poi_resource_nickel">Níquel</string>
+	<string name="poi_resource_oil">Petróleo</string>
+	<string name="poi_resource_opal">Ópalo</string>
+	<string name="poi_resource_platinum">Platino</string>
+	<string name="poi_resource_radium">Radio</string>
+	<string name="poi_resource_ruby">Rubí</string>
+	<string name="poi_resource_salt">Sal</string>
+	<string name="poi_resource_sand">Arena</string>
+	<string name="poi_resource_sandstone">Arenisca</string>
+	<string name="poi_resource_silica">Sílice</string>
+	<string name="poi_resource_silver">Plata</string>
+	<string name="poi_resource_slate_iron_ore_copper">Loza, mineral de hierro y cobre</string>
+	<string name="poi_resource_slate">Loza</string>
+	<string name="poi_resource_stone">Piedra</string>
+	<string name="poi_resource_tin">Estaño</string>
+	<string name="poi_resource_tuff">Toba</string>
+	<string name="poi_resource_uranium">Uranio</string>
+	<string name="poi_resource_vanadium">Vanadio</string>
+	<string name="poi_resource_water">Agua</string>
+	<string name="poi_resource_zinc">Zinc</string>
+	<string name="poi_resource_zircon">Circón</string>
+
 	</resources>
