@@ -2191,4 +2191,5 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="hillshade_layer_disabled">Affichage du relief désactivé</string>
     <string name="buy">Acheter</string>
     <string name="activate_seamarks_plugin">Merci d\'activer le greffon balisage</string>
-    </resources>
+    <string name="activate_srtm_plugin">Merci d\'activer le greffon SRTM</string>
+</resources>
