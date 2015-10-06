@@ -1612,10 +1612,17 @@
 	<string name="poi_wetland_string_bog">Аапа-болото</string>
 	<string name="poi_wetland_fen">Низинное болото</string>
 	<string name="poi_wetland_palsa_bog">Пальза</string>
+	<string name="poi_wetland_mud">Грязь</string>
 
 	<string name="poi_beach_sand">Тип пляжа: песчаный</string>
 	<string name="poi_beach_shingle">Тип пляжа: галька</string>
 	<string name="poi_beach_rocky">Тип пляжа: каменистый</string>
+
+	<string name="poi_chimney">Дымовая труба</string>
+
+	<string name="poi_palm">Пальма</string>
+	<string name="poi_cypress">Кипарис</string>
+	<string name="poi_flagpole">Флагшток</string>
 
 
 </resources>
