@@ -1842,4 +1842,23 @@
 	<string name="poi_internet_access_type_service">Internetadgang: tjeneste</string>
 	<string name="poi_internet_access_type_no">Internetadgang: ingen</string>
 
+<string name="poi_maxwidth">Maksimale bredde</string>
+	<string name="poi_iata">IATA kode</string>
+	<string name="poi_icao">ICAO kode</string>
+	<string name="poi_faa">FAA kode</string>
+	
+	<string name="poi_artwork_type_sculpture">Kunsttype: skulptur</string>
+	<string name="poi_artwork_type_statue">Kunsttype: statue</string>
+	<string name="poi_artwork_type_mural">Kunsttype: vægmaleri</string>
+	<string name="poi_artwork_type_architecture">Kunsttype: arkitektur</string>
+	<string name="poi_artwork_type_painting">Kunsttype: maleri</string>
+	<string name="poi_artwork_type_stone">Kunsttype: sten</string>
+	<string name="poi_artwork_type_bust">Kunsttype: buste</string>
+	<string name="poi_artwork_type_installation">Kunsttype: installation</string>
+	<string name="poi_artwork_type_mosaic">Kunsttype: mosaik</string>
+	<string name="poi_artwork_type_relief">Kunsttype: relief</string>
+	<string name="poi_artwork_type_graffiti">Kunsttype: graffiti</string>
+	<string name="poi_artwork_type_stele">Kunsttype: stele</string>
+	<string name="poi_artwork_type_fountain">Kunsttype: springvand</string>
+
 </resources>
