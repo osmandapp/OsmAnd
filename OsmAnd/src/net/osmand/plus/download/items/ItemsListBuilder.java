@@ -1,6 +1,8 @@
 package net.osmand.plus.download.items;
 
 import android.content.Context;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import net.osmand.PlatformUtil;
 import net.osmand.map.OsmandRegions;
@@ -13,6 +15,7 @@ import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.util.Algorithms;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
@@ -76,14 +79,14 @@ public class ItemsListBuilder {
 				str1 = ((WorldRegion) obj1).getName();
 			} else {
 				ResourceItem item = (ResourceItem) obj1;
-				str1 = item.title + item.getIndexItem().getType().getTag();
+				str1 = item.title + item.getIndexItem().getType().getOrderIndex();
 			}
 
 			if (obj2 instanceof WorldRegion) {
 				str2 = ((WorldRegion) obj2).getName();
 			} else {
 				ResourceItem item = (ResourceItem) obj2;
-				str2 = item.title + item.getIndexItem().getType().getTag();
+				str2 = item.title + item.getIndexItem().getType().getOrderIndex();
 			}
 
 			return str1.compareTo(str2);
@@ -91,8 +94,9 @@ public class ItemsListBuilder {
 	}
 
 	public enum VoicePromptsType {
+		NONE,
 		RECORDED,
-		TTS
+		TTS;
 	}
 
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(ItemsListBuilder.class);
@@ -106,6 +110,7 @@ public class ItemsListBuilder {
 
 	private boolean srtmDisabled;
 	private boolean hasSrtm;
+	private boolean hasHillshade;
 
 	public List<ResourceItem> getRegionMapItems() {
 		return regionMapItems;
@@ -190,6 +195,7 @@ public class ItemsListBuilder {
 	private void collectSubregionsDataAndItems() {
 		srtmDisabled = OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) == null;
 		hasSrtm = false;
+		hasHillshade = false;
 
 		// Collect all regions (and their parents) that have at least one
 		// resource available in repository or locally.
@@ -230,11 +236,19 @@ public class ItemsListBuilder {
 			resItem.setTitle(name);
 
 			if (region != this.region && srtmDisabled) {
-				if (hasSrtm && indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE)
-					continue;
-
-				if (!hasSrtm && indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE)
-					hasSrtm = true;
+				if (indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE) {
+					if (hasSrtm) {
+						continue;
+					} else {
+						hasSrtm = true;
+					}
+				} else if (indexItem.getType() == DownloadActivityType.HILLSHADE_FILE) {
+					if (hasHillshade) {
+						continue;
+					} else {
+						hasHillshade = true;
+					}
+				}
 			}
 
 

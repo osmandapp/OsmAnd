@@ -2072,4 +2072,28 @@ s často kladenými otázkami.</string>
 	<string name="address_unknown">Adresa ještě není známa</string>
     <string name="are_you_sure">Jste si jisti?</string>
 	<string name="unsaved_changes_will_be_lost">Neuložené změny budou ztraceny. Pokračovat?</string>
-</resources>
+<string name="srtm_plugin_disabled">Vrstevnice vypnuté</string>
+    <string name="favorite_category_add_new">Přidat nový</string>
+    <string name="favorite_category_select">Zvolte kategorii</string>
+    <string name="default_speed_system_descr">Zvolte způsob měření rychlosti</string>
+    <string name="default_speed_system">Měření rychlosti</string>
+    <string name="nm">nm</string>
+    <string name="si_nm">Námořní míle</string>
+    <string name="si_kmh">Kilometry za hodinu</string>
+    <string name="si_mph">Míle za hodinu</string>
+    <string name="si_m_s">Metrů za sekundu</string>
+    <string name="si_min_km">Minut za kilometr</string>
+    <string name="si_min_m">Minut za míli</string>
+    <string name="si_nm_h">Námořní míle za hodinu (uzly)</string>
+    <string name="nm_h">nm/h</string>
+    <string name="min_mile">min/m</string>
+    <string name="min_km">min/km</string>
+    <string name="m_s">m/s</string>
+    
+    <string name="shared_string_trip_recording">Záznam cesty</string>
+    <string name="shared_string_navigation">Navigace</string>
+    <string name="osmand_running_in_background">Běh na pozadí</string>
+    <string name="favourites_edit_dialog_title">Informace o oblíbeném bodu</string>
+    <string name="simulate_your_location_stop_descr">Ukončit simulaci vaší polohy</string>
+    <string name="simulate_your_location_descr">Simulovat pomocí zaznamenané GPX nebo vypočítané trasy</string>
+    </resources>

@@ -2209,4 +2209,6 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="show_free_version_banner">Mostra il banner della versione gratuita</string>
     <string name="show_free_version_banner_description">Anche se hai la versione a pagamento puoi comunque vedere il banner della versione gratuita</string>
 <string name="downloading_number_of_files">In download - %1$d file</string>
-    </resources>
+    <string name="hillshade_layer_disabled">Livello Ombreggiatura rilievi disabilitato</string>
+    <string name="buy">ACQUISTA</string>
+</resources>

@@ -1794,4 +1794,27 @@
 	<string name="poi_resource_zinc">Zink</string>
 	<string name="poi_resource_zircon">Zirkon</string>
 
+<string name="poi_wetland_wet_meadow">Vådområde</string>
+	<string name="poi_wetland_bog">Mose</string>
+	<string name="poi_wetland_marsh">Marsk</string>
+	<string name="poi_wetland_reedbed">Siv</string>
+	<string name="poi_wetland_swamp">Sump</string>
+	<string name="poi_wetland_saltern">Saltsyderiet</string>
+	<string name="poi_wetland_tidalflat">Vade</string>
+	<string name="poi_wetland_saltmarsh">Strandeng</string>
+	<string name="poi_wetland_mangrove">Mangrove</string>
+	<string name="poi_wetland_string_bog">Højmose</string>
+	<string name="poi_wetland_fen">Lavmose</string>
+	<string name="poi_wetland_palsa_bog">Pals</string>
+	<string name="poi_wetland_mud">Mudder</string>
+
+	<string name="poi_beach_sand">Strandtype: sand</string>
+	<string name="poi_beach_shingle">Strandtype: rullesten</string>
+	<string name="poi_beach_rocky">Strandtype: stenet</string>
+
+	<string name="poi_chimney">Skorsten</string>
+	<string name="poi_palm">Palme</string>
+	<string name="poi_cypress">Cypres</string>
+	<string name="poi_flagpole">Flagstang</string>
+
 </resources>

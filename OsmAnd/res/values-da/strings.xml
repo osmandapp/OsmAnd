@@ -2165,4 +2165,6 @@
     <string name="show_free_version_banner">Vis banner for gratis version</string>
     <string name="show_free_version_banner_description">"Selvom du har en  betalt version kan du stadig se banner for den gratis version"</string>
 <string name="downloading_number_of_files">Henter - %1$d fil</string>
+    <string name="buy">KØB</string>
+<string name="hillshade_layer_disabled">Relieflag deaktiveret</string>
     </resources>
