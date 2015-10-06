@@ -709,8 +709,7 @@ public class OsmandSettings {
 					return SpeedConstants.MILES_PER_HOUR;
 				}	
 			}
-			if(mode.isDerivedRoutingFrom(ApplicationMode.BOAT) || 
-					mode.isDerivedRoutingFrom(ApplicationMode.AIRCRAFT)) {
+			if(mode.isDerivedRoutingFrom(ApplicationMode.BOAT)) {
 				return SpeedConstants.NAUTICALMILES_PER_HOUR;
 			}
 			if(mc == MetricsConstants.NAUTICAL_MILES) {
