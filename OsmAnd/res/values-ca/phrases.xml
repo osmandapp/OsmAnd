@@ -1303,4 +1303,14 @@
 	<string name="poi_resource_platinum">Platí</string>
 	<string name="poi_resource_radium">Radi</string>
 	<string name="poi_resource_ruby">Robí</string>
+	<string name="poi_resource_rutile">Rútil</string>
+	<string name="poi_resource_salt">Sal</string>
+	<string name="poi_resource_sand">Sorra</string>
+	<string name="poi_resource_sandstone">Gres</string>
+	<string name="poi_resource_silica">Sílice</string>
+	<string name="poi_resource_silver">Plata</string>
+	<string name="poi_resource_slate">Pissarra</string>
+	<string name="poi_resource_stone">Pedra</string>
+	<string name="poi_resource_tin">Estany</string>
+	<string name="poi_resource_tuff">Tuf</string>
 	</resources>
