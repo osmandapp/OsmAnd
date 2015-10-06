@@ -105,7 +105,7 @@ public class WorldRegion implements Serializable {
 	}
 
 	public void initWorld() {
-		regionId = null;
+		regionId = "";
 		downloadsIdPrefix = "world_";
 		name = null;
 		superregion = null;
@@ -284,11 +284,11 @@ public class WorldRegion implements Serializable {
 	}
 
 	public WorldRegion getRegionById(String regionId) {
-		if (regionId == null) {
+		if (regionId.length() == 0) {
 			return this;
 		} else {
 			for (WorldRegion region : flattenedSubregions) {
-				if (region.getRegionId().equals(regionId)) {
+				if (region != null && region.getRegionId().equals(regionId)) {
 					return region;
 				}
 			}

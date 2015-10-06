@@ -62,12 +62,15 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 			regionId = getArguments().getString(REGION_ID_KEY);
 		}
 
+		if (regionId == null)
+			regionId = "";
+
 		ExpandableListView listView = (ExpandableListView) view.findViewById(android.R.id.list);
 		listAdapter = new RegionsItemsAdapter(getActivity());
 		listView.setAdapter(listAdapter);
 		setListView(listView);
 
-		if (regionId != null) {
+		if (regionId.length() > 0) {
 			ItemsListBuilder builder = getDownloadActivity().getItemsBuilder(regionId);
 			if (builder != null && builder.build()) {
 				fillRegionItemsAdapter(builder);

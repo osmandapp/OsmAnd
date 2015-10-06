@@ -124,12 +124,7 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 	}
 
 	public ItemsListBuilder getItemsBuilder() {
-		if (downloadListIndexThread.isDataPrepared()) {
-			return new ItemsListBuilder(getMyApplication(), null, downloadListIndexThread.getResourcesByRegions(),
-					downloadListIndexThread.getVoiceRecItems(), downloadListIndexThread.getVoiceTTSItems());
-		} else {
-			return null;
-		}
+		return getItemsBuilder("");
 	}
 
 	public ItemsListBuilder getItemsBuilder(String regionId) {

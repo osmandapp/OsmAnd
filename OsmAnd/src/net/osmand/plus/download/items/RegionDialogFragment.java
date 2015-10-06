@@ -45,6 +45,8 @@ public class RegionDialogFragment extends DialogFragment {
 		if (regionId == null) {
 			regionId = getArguments().getString(REGION_ID_DLG_KEY);
 		}
+		if (regionId == null)
+			regionId = "";
 
 		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
 		toolbar.setNavigationIcon(getMyApplication().getIconsCache().getIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha));
@@ -55,7 +57,7 @@ public class RegionDialogFragment extends DialogFragment {
 			}
 		});
 
-		if (regionId != null) {
+		if (regionId.length() > 0) {
 			Fragment fragment = getChildFragmentManager().findFragmentById(R.id.fragmentContainer);
 			if (fragment == null) {
 				getChildFragmentManager().beginTransaction().add(R.id.fragmentContainer,

@@ -1,6 +1,8 @@
 package net.osmand.plus.download.items;
 
 import android.content.Context;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import net.osmand.PlatformUtil;
 import net.osmand.map.OsmandRegions;
@@ -13,6 +15,7 @@ import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.util.Algorithms;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
@@ -91,8 +94,9 @@ public class ItemsListBuilder {
 	}
 
 	public enum VoicePromptsType {
+		NONE,
 		RECORDED,
-		TTS
+		TTS;
 	}
 
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(ItemsListBuilder.class);
