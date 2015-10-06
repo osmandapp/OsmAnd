@@ -2190,4 +2190,5 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 <string name="downloading_number_of_files">Téléchargement de %1$d fichiers</string>
     <string name="hillshade_layer_disabled">Affichage du relief désactivé</string>
     <string name="buy">Acheter</string>
+    <string name="activate_seamarks_plugin">Merci d\'activer le greffon balisage</string>
     </resources>
