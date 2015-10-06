@@ -1824,4 +1824,5 @@
 
 	<string name="poi_shelter_type_public_transport">Husly type: offentlig transport</string>
 	<string name="poi_shelter_type_picnic_shelter">Husly type: picnic ly</string>
+	<string name="poi_shelter_type_weather_shelter">Husly type: Vejret ly</string>
 	</resources>
