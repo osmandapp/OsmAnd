@@ -19,7 +19,9 @@ import net.osmand.plus.Version;
 import net.osmand.plus.WorldRegion;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.activities.OsmandExpandableListFragment;
+import net.osmand.plus.download.BaseDownloadActivity;
 import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 
@@ -93,9 +95,13 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 			((RegionDialogFragment) getParentFragment())
 					.onRegionSelected(region.getRegionId());
 			return true;
-		} else {
-			return false;
+		} else if (obj instanceof ItemsListBuilder.ResourceItem) {
+			IndexItem indexItem = ((ItemsListBuilder.ResourceItem) obj).getIndexItem();
+			((BaseDownloadActivity) getActivity())
+					.startDownload(indexItem);
+			return true;
 		}
+		return false;
 	}
 
 	private void expandAllGroups() {
@@ -232,12 +238,6 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 							"IndexItem but is of type:" + child.getClass());
 				}
 			}
-
-			TypedValue typedValue = new TypedValue();
-			Resources.Theme theme = getActivity().getTheme();
-			theme.resolveAttribute(R.attr.bg_color, typedValue, true);
-			int mainBackgroundColor = typedValue.resourceId;
-			convertView.setBackgroundResource(mainBackgroundColor);
 
 			return convertView;
 		}

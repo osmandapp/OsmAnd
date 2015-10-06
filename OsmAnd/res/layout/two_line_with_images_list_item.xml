@@ -64,8 +64,6 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/dashFavIconMargin"
             android:background="?attr/dashboard_button"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
             tools:src="@drawable/ic_action_import"
             tools:visibility="visible"
             android:visibility="gone"/>
@@ -76,7 +74,7 @@
             android:layout_height="40dp"
             android:layout_gravity="center_vertical"
             android:layout_marginRight="4dp"
-            android:text="BUY"
+            android:text="@string/buy"
             android:visibility="gone"/>
 
     </LinearLayout>

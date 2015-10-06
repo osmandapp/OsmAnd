@@ -2000,4 +2000,5 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="downloading_number_of_files">Downloading - %1$d file</string>
     <string name="show_free_version_banner">Show free version banner</string>
     <string name="show_free_version_banner_description">Even if you have paid version you still can see free version banner</string>
+    <string name="buy">BUY</string>
 </resources>
