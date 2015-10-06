@@ -1780,4 +1780,41 @@
 	<string name="poi_wetland_tidalflat">Humedal costero</string>
 	<string name="poi_wetland_saltmarsh">Salina</string>
 	<string name="poi_wetland_mangrove">Manglar</string>
-	</resources>
+	<string name="poi_wetland_mud">Lodazal</string>
+
+	<string name="poi_beach_sand">Playa arenosa</string>
+	<string name="poi_beach_shingle">Playa con guijarro</string>
+	<string name="poi_beach_rocky">Playa rocosa</string>
+
+	<string name="poi_chimney">Chimenea</string>
+	<string name="poi_palm">Palmera</string>
+	<string name="poi_cypress">Ciprés</string>
+	<string name="poi_flagpole">Mástil de bandera</string>
+
+	<string name="poi_bench_yes">Con asientos</string>
+	<string name="poi_bench_no">Sin asientos</string>
+	<string name="poi_waste_basket_yes">Con cesto de basura</string>
+	<string name="poi_waste_basket_no">Sin cesto de basura</string>
+
+	<string name="poi_shelter_type_public_transport">Refugio para transporte público</string>
+	<string name="poi_shelter_type_picnic_shelter">Refugio para campamentos</string>
+	<string name="poi_shelter_type_weather_shelter">Refugio contra el clima</string>
+	<string name="poi_shelter_type_lean_to">Refugio colgadizo</string>
+	<string name="poi_shelter_type_basic_hut">Tipo de refugio: cabaña precaria</string>
+	<string name="poi_shelter_type_building">Tipo de refugio: edificio</string>
+	<string name="poi_shelter_type_wildlife_hide">Tipo de refugio: fauna oculta</string>
+	<string name="poi_shelter_type_rock_shelter">Tipo de refugio: roca</string>
+	<string name="poi_shelter_type_sun_shelter">Refugio del sol</string>
+	<string name="poi_shelter_type_abandoned">Refugio abandonado</string>
+
+	<string name="poi_shelter_type_tent">Tipo de refugio: carpa</string>
+	<string name="poi_internet_access_type_wlan">Tipo de acceso a Internet: inalámbrico</string>
+	<string name="poi_wetland_fen">Humedal subterráneo</string>
+	<string name="poi_shelter_type_field_shelter">Refugio para animales</string>
+	<string name="poi_internet_access_type_terminal">Tipo de acceso a Internet: terminal</string>
+	<string name="poi_internet_access_type_wired">Tipo de acceso a Internet: cableado</string>
+	<string name="poi_internet_access_type_public">Tipo de acceso a Internet: público</string>
+	<string name="poi_internet_access_type_service">Tipo de acceso a Internet: servicio</string>
+	<string name="poi_internet_access_type_no">Sin acceso a Internet</string>
+
+</resources>
