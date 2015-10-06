@@ -1750,4 +1750,22 @@
 	<string name="poi_resource_zinc">Zinc</string>
 	<string name="poi_resource_zircon">Zircon</string>
 
+	<string name="poi_wetland_wet_meadow">Wet meadow</string>
+	<string name="poi_wetland_bog">Bog</string>
+	<string name="poi_wetland_marsh">Marsh</string>
+	<string name="poi_wetland_reedbed">Reedbed</string>
+	<string name="poi_wetland_swamp">Swamp</string>
+	<string name="poi_wetland_saltern">Saltern</string>
+	<string name="poi_wetland_tidalflat">Tidal flat</string>
+	<string name="poi_wetland_saltmarsh">Salt marsh</string>
+	<string name="poi_wetland_mangrove">Mangrove</string>
+	<string name="poi_wetland_string_bog">String bog</string>
+	<string name="poi_wetland_fen">Fen</string>
+	<string name="poi_wetland_palsa_bog">Palsa bog</string>
+
+	<string name="poi_beach_sand">Beach type: sand</string>
+	<string name="poi_beach_shingle">Beach type: shingle</string>
+	<string name="poi_beach_rocky">Beach type: rocky</string>
+
+
 </resources>
