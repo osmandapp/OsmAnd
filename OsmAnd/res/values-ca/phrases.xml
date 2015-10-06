@@ -1284,4 +1284,23 @@
 	<string name="poi_board_type_notice">Tauler d\'anuncis</string>
 	<string name="poi_vending_drinks_sweets">Begudes i dolços</string>
 	<string name="poi_vending_animal_food">Menjar per animals</string>
+	<string name="poi_resource_uranium">Urani</string>
+	<string name="poi_resource_vanadium">Vanadi</string>
+	<string name="poi_resource_water">Aigua</string>
+	<string name="poi_resource_zinc">Zinc</string>
+	<string name="poi_resource_zircon">Zircó</string>
+
+<string name="poi_resource_iron_ore">Mena de ferro</string>
+	<string name="poi_resource_lead">Plom</string>
+	<string name="poi_resource_lignite">Lignit</string>
+	<string name="poi_resource_limestone">Pedra calcària</string>
+	<string name="poi_resource_marble">Marbre</string>
+	<string name="poi_resource_mercury">Mercuri</string>
+	<string name="poi_resource_mica">Mica</string>
+	<string name="poi_resource_nickel">Níquel</string>
+	<string name="poi_resource_opal">Òpal</string>
+	<string name="poi_resource_peat">Torba</string>
+	<string name="poi_resource_platinum">Platí</string>
+	<string name="poi_resource_radium">Radi</string>
+	<string name="poi_resource_ruby">Robí</string>
 	</resources>
