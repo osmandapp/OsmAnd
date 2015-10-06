@@ -1423,4 +1423,12 @@
 	<string name="poi_palm">Palmier</string>
 	<string name="poi_cypress">Cyprès</string>
 	<string name="poi_internet_access_type_wired">Type d\'accès Internet : filaire</string>
+	<string name="poi_internet_access_type_public">Type d\'accès Internet : public</string>
+	<string name="poi_internet_access_type_service">Type d\'accès Internet : service</string>
+	<string name="poi_internet_access_type_no">Type d\'accès Internet : aucun</string>
+
+	<string name="poi_delivery_yes">Avec livraison</string>
+	<string name="poi_delivery_no">Sans livraison</string>
+	<string name="poi_delivery_only">Livraison uniquement</string>
+
 	</resources>
