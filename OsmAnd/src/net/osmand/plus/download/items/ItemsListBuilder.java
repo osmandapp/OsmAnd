@@ -137,7 +137,7 @@ public class ItemsListBuilder {
 			case TTS:
 				return app.getResources().getString(R.string.index_name_tts_voice);
 			default:
-				return null;
+				return "";
 		}
 	}
 
@@ -148,7 +148,7 @@ public class ItemsListBuilder {
 			case TTS:
 				return voiceTTSItems;
 			default:
-				return null;
+				return new LinkedList<>();
 		}
 	}
 
