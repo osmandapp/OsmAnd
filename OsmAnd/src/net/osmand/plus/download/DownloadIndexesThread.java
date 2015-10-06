@@ -1,6 +1,7 @@
 package net.osmand.plus.download;
 
 
+
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
@@ -30,7 +31,6 @@ import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.download.DownloadFileHelper.DownloadFileShowWarning;
 import net.osmand.plus.download.DownloadOsmandIndexesHelper.AssetIndexItem;
 import net.osmand.plus.download.items.ItemsListBuilder;
-import net.osmand.plus.download.newimplementation.IndexItemCategoryWithSubcat;
 import net.osmand.plus.helpers.DatabaseHelper;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.util.Algorithms;
@@ -689,7 +689,6 @@ public class DownloadIndexesThread {
 	public void runCategorization() {
 		final BasicProgressAsyncTask<Void, Void, List<IndexItem>> inst
 				= new BasicProgressAsyncTask<Void, Void, List<IndexItem>>(ctx) {
-			private List<IndexItemCategoryWithSubcat> catsWithSubcats;
 
 			@Override
 			protected void onPreExecute() {
@@ -704,8 +703,6 @@ public class DownloadIndexesThread {
 			@Override
 			protected List<IndexItem> doInBackground(Void... params) {
 				final List<IndexItem> filtered = getFilteredByType();
-				catsWithSubcats =
-						IndexItemCategoryWithSubcat.categorizeIndexItems(app, filtered);
 				updateLoadedFiles();
 				return filtered;
 			}
@@ -726,7 +723,6 @@ public class DownloadIndexesThread {
 				prepareFilesToUpdate();
 				currentRunningTask.remove(this);
 				if (uiActivity != null) {
-					uiActivity.onCategorizationFinished(filtered, catsWithSubcats);
 					uiActivity.updateProgress(false);
 				}
 			}

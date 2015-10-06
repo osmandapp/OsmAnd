@@ -1,5 +1,10 @@
 package net.osmand.plus.download.items;
 
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.WorldRegion;
+import net.osmand.plus.download.DownloadActivity;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -8,22 +13,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.WorldRegion;
-import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.download.newimplementation.DownloadsUiHelper;
-
-import org.apache.commons.logging.Log;
-
 public class RegionDialogFragment extends DialogFragment {
-	private static final Log LOG = PlatformUtil.getLog(RegionDialogFragment.class);
 	public static final String TAG = "RegionDialogFragment";
 	private static final String REGION_ID_DLG_KEY = "world_region_dialog_key";
 	private String regionId;
-	private DownloadsUiHelper.MapDownloadListener mProgressListener;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -68,38 +61,10 @@ public class RegionDialogFragment extends DialogFragment {
 				toolbar.setTitle(region.getName());
 			}
 		}
-		DownloadsUiHelper.initFreeVersionBanner(view, getMyApplication(),
-				getResources());
-
-		mProgressListener = new DownloadsUiHelper.MapDownloadListener(view, getResources()){
-			@Override
-			public void onProgressUpdate(int progressPercentage, int activeTasks) {
-				super.onProgressUpdate(progressPercentage, activeTasks);
-			}
-
-			@Override
-			public void onFinished() {
-				super.onFinished();
-				DownloadsUiHelper.initFreeVersionBanner(view,
-						getMyApplication(), getResources());
-			}
-		};
-
+		((DownloadActivity)getActivity()).initFreeVersionBanner(view);
 		return view;
 	}
-
-	@Override
-	public void onResume() {
-		super.onResume();
-		getMyActivity().setOnProgressUpdateListener(mProgressListener);
-	}
-
-	@Override
-	public void onPause() {
-		super.onPause();
-		getMyActivity().setOnProgressUpdateListener(null);
-	}
-
+	
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		outState.putString(REGION_ID_DLG_KEY, regionId);
@@ -110,12 +75,8 @@ public class RegionDialogFragment extends DialogFragment {
 		return (OsmandApplication) getActivity().getApplication();
 	}
 
-	private DownloadActivity getMyActivity() {
-		return (DownloadActivity) getActivity();
-	}
-
 	public void onRegionSelected(String regionId) {
-		DownloadsUiHelper.showDialog(getActivity(), createInstance(regionId));
+		((DownloadActivity)getActivity()).showDialog(getActivity(), createInstance(regionId));
 	}
 
 	public static RegionDialogFragment createInstance(String regionId) {
