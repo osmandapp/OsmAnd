@@ -38,7 +38,7 @@ public class IndexItem implements Comparable<IndexItem>, HasName, Parcelable {
 	public IndexItem(String fileName, String description, long timestamp, String size, long contentSize,
 			long containerSize, DownloadActivityType tp) {
 		this.fileName = fileName;
-		this.simplifiedFileName = fileName.toLowerCase().replace("_2.", ".");
+		this.simplifiedFileName = fileName.toLowerCase().replace("_2.", ".").replace("hillshade_", "");
 		this.description = description;
 		this.timestamp = timestamp;
 		this.size = size;

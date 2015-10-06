@@ -30,35 +30,41 @@ public class DownloadActivityType implements Parcelable {
 	private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
 	private static Map<String, DownloadActivityType> byTag = new HashMap<>();
 	
-	public static final DownloadActivityType NORMAL_FILE = new DownloadActivityType(R.string.download_regular_maps, "map");
+	public static final DownloadActivityType NORMAL_FILE =
+			new DownloadActivityType(R.string.download_regular_maps, "map", 10);
 	public static final DownloadActivityType VOICE_FILE =
-			new DownloadActivityType(R.string.voices, R.drawable.ic_action_volume_up, "voice");
-	public static final DownloadActivityType ROADS_FILE = new DownloadActivityType(R.string.download_roads_only_maps, "road_map");
+			new DownloadActivityType(R.string.voices, R.drawable.ic_action_volume_up, "voice", 20);
+	public static final DownloadActivityType ROADS_FILE =
+			new DownloadActivityType(R.string.download_roads_only_maps, "road_map", 30);
 	public static final DownloadActivityType SRTM_COUNTRY_FILE =
 			new DownloadActivityType(R.string.download_srtm_maps,
-					R.drawable.ic_plugin_srtm, "srtm_map");
+					R.drawable.ic_plugin_srtm, "srtm_map", 40);
 	public static final DownloadActivityType HILLSHADE_FILE =
 			new DownloadActivityType(R.string.download_hillshade_maps,
-					R.drawable.ic_action_hillshade_dark, "hillshade");
+					R.drawable.ic_action_hillshade_dark, "hillshade", 50);
 	public static final DownloadActivityType WIKIPEDIA_FILE =
 			new DownloadActivityType(R.string.download_wikipedia_maps,
-					R.drawable.ic_world_globe_dark, "wikimap");
-	public static final DownloadActivityType LIVE_UPDATES_FILE = new DownloadActivityType(R.string.download_live_updates, "live_updates");
+					R.drawable.ic_world_globe_dark, "wikimap", 60);
+	public static final DownloadActivityType LIVE_UPDATES_FILE =
+			new DownloadActivityType(R.string.download_live_updates, "live_updates", 70);
 	private final int stringResource;
 	private final int iconResource;
 
 	private String tag;
+	private int orderIndex;
 
-	public DownloadActivityType(int stringResource, int iconResource, String tag) {
+	public DownloadActivityType(int stringResource, int iconResource, String tag, int orderIndex) {
 		this.stringResource = stringResource;
 		this.tag = tag;
+		this.orderIndex = orderIndex;
 		byTag.put(tag, this);
 		this.iconResource = iconResource;
 	}
 
-	public DownloadActivityType(int stringResource, String tag) {
+	public DownloadActivityType(int stringResource, String tag, int orderIndex) {
 		this.stringResource = stringResource;
 		this.tag = tag;
+		this.orderIndex = orderIndex;
 		byTag.put(tag, this);
 		iconResource = R.drawable.ic_map;
 	}
@@ -74,7 +80,10 @@ public class DownloadActivityType implements Parcelable {
 	public String getTag() {
 		return tag;
 	}
-	
+
+	public int getOrderIndex() {
+		return orderIndex;
+	}
 
 	public static boolean isCountedInDownloads(IndexItem es) {
 		DownloadActivityType tp = es.getType();
