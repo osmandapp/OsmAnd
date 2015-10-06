@@ -2004,4 +2004,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="buy">BUY</string>
     <string name="activate_seamarks_plugin">Please activate Seamarks plugin</string>
     <string name="activate_srtm_plugin">Please activate SRTM plugin</string>
+    <string name="later">Later</string>
+    <string name="get_full_version">Get full version</string>
 </resources>
