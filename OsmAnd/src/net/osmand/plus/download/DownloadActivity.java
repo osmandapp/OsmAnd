@@ -30,7 +30,6 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -53,10 +52,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
-/**
- * Created by Denis
- * on 08.09.2014.
- */
 public class DownloadActivity extends BaseDownloadActivity {
 
 	private View progressView;
@@ -619,8 +614,8 @@ public class DownloadActivity extends BaseDownloadActivity {
 	
 	
 	public void initFreeVersionBanner(View header) {
-		final View freeVersionBanner = header.findViewById(R.id.freeVersionBanner);
-		visibleBanner = new BannerAndDownloadFreeVersion(freeVersionBanner, this);
+		visibleBanner = new BannerAndDownloadFreeVersion(header, this);
+		updateProgress(true);
 	}
 	
 	
