@@ -1762,10 +1762,15 @@
 	<string name="poi_wetland_string_bog">String bog</string>
 	<string name="poi_wetland_fen">Fen</string>
 	<string name="poi_wetland_palsa_bog">Palsa bog</string>
+	<string name="poi_wetland_mud">Mud</string>
 
 	<string name="poi_beach_sand">Beach type: sand</string>
 	<string name="poi_beach_shingle">Beach type: shingle</string>
 	<string name="poi_beach_rocky">Beach type: rocky</string>
 
+	<string name="poi_chimney">Chimney</string>
+	<string name="poi_palm">Palm</string>
+	<string name="poi_cypress">Cypress</string>
+	<string name="poi_flagpole">Flagpole</string>
 
 </resources>
