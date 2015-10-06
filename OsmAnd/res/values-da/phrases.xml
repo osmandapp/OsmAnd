@@ -1799,7 +1799,7 @@
 	<string name="poi_wetland_marsh">Marsk</string>
 	<string name="poi_wetland_reedbed">Rørskov</string>
 	<string name="poi_wetland_swamp">Sump</string>
-	<string name="poi_wetland_saltern">Saltsyderiet</string>
+	<string name="poi_wetland_saltern">Saltdamme</string>
 	<string name="poi_wetland_tidalflat">Vade</string>
 	<string name="poi_wetland_saltmarsh">Strandeng</string>
 	<string name="poi_wetland_mangrove">Mangrove</string>
@@ -1822,24 +1822,24 @@
 	<string name="poi_waste_basket_yes">Med kurv</string>
 	<string name="poi_waste_basket_no">Uden kurv</string>
 
-	<string name="poi_shelter_type_public_transport">Husly type: offentlig transport</string>
-	<string name="poi_shelter_type_picnic_shelter">Husly type: picnic ly</string>
-	<string name="poi_shelter_type_weather_shelter">Husly type: Vejret ly</string>
-	<string name="poi_shelter_type_lean_to">Husly type: lean</string>
-	<string name="poi_shelter_type_basic_hut">Husly type: grundlæggende hut</string>
-	<string name="poi_shelter_type_building">Husly type: bygning</string>
-	<string name="poi_shelter_type_wildlife_hide">Husly type: wildlife Skjul</string>
-	<string name="poi_shelter_type_rock_shelter">Husly type: rock ly</string>
-	<string name="poi_shelter_type_sun_shelter">Husly type: sun ly</string>
-	<string name="poi_shelter_type_field_shelter">Husly type: feltet ly</string>
-	<string name="poi_shelter_type_tent">Husly type: telt</string>
-	<string name="poi_shelter_type_abandoned">Husly type: opgivet</string>
+	<string name="poi_shelter_type_public_transport">Sheltertype: stoppested</string>
+	<string name="poi_shelter_type_picnic_shelter">Sheltertype: skovtur</string>
+	<string name="poi_shelter_type_weather_shelter">Sheltertype: Tarp</string>
+	<string name="poi_shelter_type_lean_to">Sheltertype: Bivuak</string>
+	<string name="poi_shelter_type_basic_hut">Sheltertype: hytte</string>
+	<string name="poi_shelter_type_building">Sheltertype: bygning</string>
+	<string name="poi_shelter_type_wildlife_hide">Sheltertype: vildtskjul</string>
+	<string name="poi_shelter_type_rock_shelter">Sheltertype: heller</string>
+	<string name="poi_shelter_type_sun_shelter">Sheltertype: solafskærming</string>
+	<string name="poi_shelter_type_field_shelter">Sheltertype: feltly</string>
+	<string name="poi_shelter_type_tent">Sheltertype: telt</string>
+	<string name="poi_shelter_type_abandoned">Sheltertype: forladt</string>
 
-	<string name="poi_internet_access_type_wlan">Internet adgangstype: wlan</string>
-	<string name="poi_internet_access_type_terminal">Internet adgangstype: terminal</string>
-	<string name="poi_internet_access_type_wired">Internet adgangstype: wired</string>
-	<string name="poi_internet_access_type_public">Internet adgangstype: offentlig</string>
-	<string name="poi_internet_access_type_service">Internet adgangstype: service</string>
-	<string name="poi_internet_access_type_no">Internet adgangstype: ingen</string>
+	<string name="poi_internet_access_type_wlan">Internetadgang: wlan</string>
+	<string name="poi_internet_access_type_terminal">Internetadgangs: terminal</string>
+	<string name="poi_internet_access_type_wired">Internet adgangstype: kablet</string>
+	<string name="poi_internet_access_type_public">Internetadgang: offentlig</string>
+	<string name="poi_internet_access_type_service">Internetadgang: tjeneste</string>
+	<string name="poi_internet_access_type_no">Internetadgang: ingen</string>
 
 </resources>
