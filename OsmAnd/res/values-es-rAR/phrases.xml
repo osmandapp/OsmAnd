@@ -1777,4 +1777,6 @@
 	<string name="poi_wetland_bog">Pantano</string>
 	<string name="poi_wetland_marsh">Marisma</string>
 	<string name="poi_wetland_reedbed">Cañaveral</string>
+	<string name="poi_wetland_tidalflat">Humedal costero</string>
+	<string name="poi_wetland_saltmarsh">Marisma de sal</string>
 	</resources>
