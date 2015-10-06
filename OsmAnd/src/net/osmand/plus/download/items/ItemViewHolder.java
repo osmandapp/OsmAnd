@@ -85,8 +85,13 @@ public class ItemViewHolder {
 				rightButtonAction = RightButtonAction.ASK_FOR_SEAMARKS_PLUGIN;
 				disabled = true;
 			}
-			if (indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE && srtmDisabled) {
-				nameTextView.setText(context.getString(R.string.srtm_plugin_disabled));
+			if ((indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE ||
+					indexItem.getType() == DownloadActivityType.HILLSHADE_FILE) && srtmDisabled) {
+				if (indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE) {
+					nameTextView.setText(context.getString(R.string.srtm_plugin_disabled));
+				} else {
+					nameTextView.setText(context.getString(R.string.hillshade_layer_disabled));
+				}
 				OsmandPlugin srtmPlugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
 				if (srtmPlugin == null || srtmPlugin.needsInstallation()) {
 					rightButtonAction = RightButtonAction.ASK_FOR_SRTM_PLUGIN_PURCHASE;
@@ -105,7 +110,8 @@ public class ItemViewHolder {
 			}
 		}
 
-		if (!showTypeInTitle && indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE && srtmDisabled) {
+		if (!showTypeInTitle && (indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE ||
+				indexItem.getType() == DownloadActivityType.HILLSHADE_FILE) && srtmDisabled) {
 			descrTextView.setText(indexItem.getType().getString(context));
 		} else if (showTypeInDesc) {
 			descrTextView.setText(indexItem.getType().getString(context) + "  •  " + indexItem.getSizeDescription(context));
