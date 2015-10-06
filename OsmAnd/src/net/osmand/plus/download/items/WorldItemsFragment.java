@@ -1,10 +1,12 @@
 package net.osmand.plus.download.items;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -249,6 +251,12 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 				viewHolder.textView.setCompoundDrawablesWithIntrinsicBounds(iconLeft, null, null, null);
 				viewHolder.textView.setText(item.getName());
 
+				TypedValue typedValue = new TypedValue();
+				Resources.Theme theme = getActivity().getTheme();
+				theme.resolveAttribute(R.attr.bg_color, typedValue, true);
+				int mainBackgroundColor = typedValue.resourceId;
+				convertView.setBackgroundResource(mainBackgroundColor);
+
 			} else if (groupPosition == worldMapsIndex) {
 				ItemsListBuilder.ResourceItem item = (ItemsListBuilder.ResourceItem) child;
 				ItemViewHolder viewHolder;
@@ -287,17 +295,25 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 		}
 
 		@Override
-		public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
+		public View getGroupView(int groupPosition, boolean isExpanded, final View convertView,
+								 final ViewGroup parent) {
 			View v = convertView;
 			String section = getGroup(groupPosition);
 			if (v == null) {
-				LayoutInflater inflater = (LayoutInflater) getDownloadActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+				LayoutInflater inflater = (LayoutInflater) getDownloadActivity()
+						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 				v = inflater.inflate(R.layout.download_item_list_section, parent, false);
 			}
 			TextView nameView = ((TextView) v.findViewById(R.id.section_name));
 			nameView.setText(section);
 
 			v.setOnClickListener(null);
+
+			TypedValue typedValue = new TypedValue();
+			Resources.Theme theme = getActivity().getTheme();
+			theme.resolveAttribute(R.attr.ctx_menu_info_view_bg, typedValue, true);
+			v.setBackgroundColor(typedValue.data);
+
 			return v;
 		}
 

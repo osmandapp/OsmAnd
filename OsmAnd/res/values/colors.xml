@@ -29,13 +29,13 @@
 	<color name="list_item_dark">#00000000</color>
 	<color name="list_item_light_pressed">#8cd0d0d0</color>
 	<color name="list_item_dark_pressed">#be39464d</color>
-	<color name="bg_color_light">#ffffff</color>
+	<color name="bg_color_light">#fff</color>
 	<color name="bg_color_dark">#333b40</color>
 	
 	
 	<color name="map_widget_icon_color">#ff8f00</color>
 	<color name="map_widget_stroke">#4C000000</color>
-	<color name="map_widget_light">#ffffff</color>
+	<color name="map_widget_light">#fff</color>
 	<color name="map_widget_dark">#a0000000</color>
 	<color name="map_widget_dark_stroke">#80ffffff</color>
 	<color name="map_widget_dark_pressed">#80aaaaaa</color>
@@ -77,7 +77,7 @@
 	<color name="dashboard_general_button_text_light">#536DFE</color>
 
 
-	<color name="color_transparent">#00000000</color>
+	<color name="color_transparent">#0000</color>
 	<color name="widgettext_night">#ffC8C8C8</color>
 	<!-- widgettext_shadow_night is the same as widget background color for non-transparent night skin (from box_night_free_simple.9.png) -->
 	<color name="widgettext_shadow_night">#dc262626</color>
@@ -93,8 +93,8 @@
 	<color name="color_myloc_distance">#0080FF</color>
 	<color name="wpt_distance_color">#dd6CB336</color>
 	<!-- Old dialogs colors -->
-	<color name="color_white">#FFFFFF</color>
-	<color name="color_black">#000000</color>
+	<color name="color_white">#FFF</color>
+	<color name="color_black">#000</color>
 	
 	<color name="row_selection_color">#CC33BBE0</color>
 	

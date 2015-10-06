@@ -1,8 +1,10 @@
 package net.osmand.plus.download.items;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -231,6 +233,12 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 				}
 			}
 
+			TypedValue typedValue = new TypedValue();
+			Resources.Theme theme = getActivity().getTheme();
+			theme.resolveAttribute(R.attr.bg_color, typedValue, true);
+			int mainBackgroundColor = typedValue.resourceId;
+			convertView.setBackgroundResource(mainBackgroundColor);
+
 			return convertView;
 		}
 
@@ -247,6 +255,12 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 			nameView.setText(section);
 
 			v.setOnClickListener(null);
+
+			TypedValue typedValue = new TypedValue();
+			Resources.Theme theme = getActivity().getTheme();
+			theme.resolveAttribute(R.attr.ctx_menu_info_view_bg, typedValue, true);
+			v.setBackgroundColor(typedValue.data);
+
 			return v;
 		}
 

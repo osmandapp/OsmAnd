@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="50dp"
-              android:orientation="vertical"
-              android:paddingLeft="@dimen/list_header_padding"
-              android:paddingRight="@dimen/list_header_padding">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/list_header_padding"
+    android:paddingRight="@dimen/list_header_padding">
 
     <TextView
         android:id="@+id/section_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/list_header_top_margin"
         android:layout_marginLeft="12dp"
         android:maxLines="1"
-        android:text="World Regions"
-        android:textSize="@dimen/default_list_text_size"/>
+        android:textSize="@dimen/default_list_text_size"
+        tools:text="World Regions"/>
 
 </LinearLayout>
