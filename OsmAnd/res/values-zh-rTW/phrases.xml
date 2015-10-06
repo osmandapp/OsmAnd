@@ -1614,4 +1614,22 @@
 	<string name="poi_takeaway_no">無腳架</string>
 	<string name="poi_takeaway_only">只有腳架</string>
 
+	<string name="poi_delivery_yes">外送</string>
+	<string name="poi_delivery_no">沒外送</string>
+	<string name="poi_delivery_only">只有外送</string>
+
+	<string name="poi_outdoor_seating_yes">室外座位</string>
+	<string name="poi_outdoor_seating_no">無室外座位</string>
+	<string name="poi_outdoor_seating_terrace">室外座位：露臺</string>
+	<string name="poi_outdoor_seating_sidewalk">室外座位：人行道</string>
+	<string name="poi_outdoor_seating_pedestrian_zone">室外座位：步行區</string>
+	<string name="poi_outdoor_seating_garden">室外座位：花園</string>
+	<string name="poi_outdoor_seating_patio">室外座位：天井</string>
+
+	<string name="poi_cocktails_yes">雞尾酒</string>
+
+	<string name="poi_second_hand_yes">二手商品</string>
+	<string name="poi_second_hand_no">無二手商品</string>
+	<string name="poi_second_hand_only">只有二手商品</string>
+
 	</resources>
