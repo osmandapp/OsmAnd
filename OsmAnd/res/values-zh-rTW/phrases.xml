@@ -1632,4 +1632,9 @@
 	<string name="poi_second_hand_no">無二手商品</string>
 	<string name="poi_second_hand_only">只有二手商品</string>
 
+	<string name="poi_service_parts">零配件</string>
+	<string name="poi_service_dealer">經銷商</string>
+	<string name="poi_service_repair">維修</string>
+	<string name="poi_service_repair_no">無維修</string>
+	<string name="poi_service_electrical">電動車維修</string>
 	</resources>

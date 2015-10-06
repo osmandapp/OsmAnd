@@ -11,8 +11,6 @@
         android:layout_height="@dimen/list_item_height"
         android:layout_gravity="center_vertical"
         android:drawablePadding="24dp"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
         android:gravity="center_vertical"
         android:paddingLeft="16dp"
         android:textColor="?android:textColorPrimary"

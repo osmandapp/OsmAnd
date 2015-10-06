@@ -251,12 +251,6 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 				viewHolder.textView.setCompoundDrawablesWithIntrinsicBounds(iconLeft, null, null, null);
 				viewHolder.textView.setText(item.getName());
 
-				TypedValue typedValue = new TypedValue();
-				Resources.Theme theme = getActivity().getTheme();
-				theme.resolveAttribute(R.attr.bg_color, typedValue, true);
-				int mainBackgroundColor = typedValue.resourceId;
-				convertView.setBackgroundResource(mainBackgroundColor);
-
 			} else if (groupPosition == worldMapsIndex) {
 				ItemsListBuilder.ResourceItem item = (ItemsListBuilder.ResourceItem) child;
 				ItemViewHolder viewHolder;
@@ -272,7 +266,6 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 				viewHolder.setNauticalPluginDisabled(nauticalPluginDisabled);
 				viewHolder.setFreeVersion(freeVersion);
 				viewHolder.bindIndexItem(item.getIndexItem(), getDownloadActivity(), false, false);
-
 			} else if (groupPosition == voicePromptsIndex) {
 				String item = (String)child;
 				SimpleViewHolder viewHolder;

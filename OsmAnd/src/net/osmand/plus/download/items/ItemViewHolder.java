@@ -15,7 +15,6 @@ import net.osmand.access.AccessibleToast;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.WorldRegion;
-import net.osmand.plus.download.BaseDownloadActivity;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.IndexItem;
@@ -113,19 +112,9 @@ public class ItemViewHolder {
 		} else {
 			descrTextView.setText(indexItem.getSizeDescription(context));
 		}
+		// TODO replace with imageView.
 		rightImageButton.setVisibility(View.VISIBLE);
 		rightImageButton.setImageDrawable(getContextIcon(context, R.drawable.ic_action_import));
-		rightImageButton.setTag(R.id.index_item, indexItem);
-		rightImageButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				((BaseDownloadActivity) v.getContext())
-						.startDownload((IndexItem) v.getTag(R.id.index_item));
-//				progressBar.setVisibility(View.VISIBLE);
-//				rightImageButton.setImageDrawable(getContextIcon(context,
-//						R.drawable.ic_action_remove_dark));
-			}
-		});
 		progressBar.setVisibility(View.GONE);
 
 		if (rightButtonAction != RightButtonAction.UNKNOWN) {
