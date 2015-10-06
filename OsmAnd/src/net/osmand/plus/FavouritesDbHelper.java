@@ -512,10 +512,13 @@ public class FavouritesDbHelper {
 	}
 	
 
-	private String loadGPXFile(File file, Map<String, FavouritePoint> points) {
+	private boolean loadGPXFile(File file, Map<String, FavouritePoint> points) {
+		if(!file.exists()) {
+			return false;
+		}
 		GPXFile res = GPXUtilities.loadGPXFile(context, file);
 		if (res.warning != null) {
-			return res.warning;
+			return false;
 		}
 		for (WptPt p : res.points) {
 			int c;
@@ -535,7 +538,7 @@ public class FavouritesDbHelper {
 			fp.setVisible(!p.getExtensionsToRead().containsKey(HIDDEN));
 			points.put(getKey(fp), fp);
 		}
-		return null;
+		return true;
 	}
 	
 	public void editFavouriteGroup(FavoriteGroup group, String newName, int color, boolean visible) {
