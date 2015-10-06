@@ -925,8 +925,8 @@
 
 	<string name="poi_country">Krajina</string>
 	<string name="poi_abandoned_poi">Opuštěný objekt</string>
-	<string name="poi_recycling_centre">Centrum</string>
-	<string name="poi_recycling_container">Kontejner</string>
+	<string name="poi_recycling_centre">Typ: recyklační centrum</string>
+	<string name="poi_recycling_container">Typ: kontejner</string>
 	<string name="poi_recycling_glass">Sklo</string>
 	<string name="poi_recycling_paper">Papír</string>
 	<string name="poi_recycling_clothes">Oblečení</string>

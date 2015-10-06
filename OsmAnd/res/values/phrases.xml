@@ -1773,4 +1773,29 @@
 	<string name="poi_cypress">Cypress</string>
 	<string name="poi_flagpole">Flagpole</string>
 
+	<string name="poi_bench_yes">With bench</string>
+	<string name="poi_bench_no">Without bench</string>
+	<string name="poi_waste_basket_yes">With basket</string>
+	<string name="poi_waste_basket_no">Without basket</string>
+
+	<string name="poi_shelter_type_public_transport">Shelter type: public transport</string>
+	<string name="poi_shelter_type_picnic_shelter">Shelter type: picnic shelter</string>
+	<string name="poi_shelter_type_weather_shelter">Shelter type: weather shelter</string>
+	<string name="poi_shelter_type_lean_to">Shelter type: lean-to</string>
+	<string name="poi_shelter_type_basic_hut">Shelter type: basic hut</string>
+	<string name="poi_shelter_type_building">Shelter type: building</string>
+	<string name="poi_shelter_type_wildlife_hide">Shelter type: wildlife hide</string>
+	<string name="poi_shelter_type_rock_shelter">Shelter type: rock shelter</string>
+	<string name="poi_shelter_type_sun_shelter">Shelter type: sun shelter</string>
+	<string name="poi_shelter_type_field_shelter">Shelter type: field shelter</string>
+	<string name="poi_shelter_type_tent">Shelter type: tent</string>
+	<string name="poi_shelter_type_abandoned">Shelter type: abandoned</string>
+
+	<string name="poi_internet_access_type_wlan">Internet access type: wlan</string>
+	<string name="poi_internet_access_type_terminal">Internet access type: terminal</string>
+	<string name="poi_internet_access_type_wired">Internet access type: wired</string>
+	<string name="poi_internet_access_type_public">Internet access type: public</string>
+	<string name="poi_internet_access_type_service">Internet access type: service</string>
+	<string name="poi_internet_access_type_no">Internet access type: no</string>
+
 </resources>

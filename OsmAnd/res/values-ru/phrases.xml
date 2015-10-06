@@ -776,7 +776,7 @@
 	<string name="poi_man_made">Инфраструктура</string>
 	<string name="poi_administrative">Административные объекты</string>
 	<string name="poi_seamark">Морские объекты</string>
-	<string name="poi_internet_access_wlan">Доступ в Интернет: wlan</string>
+	<string name="poi_internet_access_wlan">Доступ в Интернет: беспроводной</string>
 	<string name="poi_internet_access_terminal">Доступ в Интернет: терминал</string>
 	<string name="poi_internet_access_wired">Доступ в Интернет: проводное подключение</string>
 	<string name="poi_internet_access_public">Доступ в Интернет: общедоступный</string>
@@ -1624,5 +1624,27 @@
 	<string name="poi_cypress">Кипарис</string>
 	<string name="poi_flagpole">Флагшток</string>
 
+	<string name="poi_bench_yes">Со скамейкой</string>
+	<string name="poi_bench_no">Без скамейки</string>
+	<string name="poi_waste_basket_yes">С мусорной корзиной</string>
+	<string name="poi_waste_basket_no">Без мусорной корзины</string>
+
+	<string name="poi_shelter_type_public_transport">Тип укрытия: остановка общественного транспорта</string>
+	<string name="poi_shelter_type_picnic_shelter">Тип укрытия: для пикника</string>
+	<string name="poi_shelter_type_weather_shelter">Тип укрытия: от непогоды</string>
+	<string name="poi_shelter_type_lean_to">Тип укрытия: навес</string>
+	<string name="poi_shelter_type_basic_hut">Тип укрытия: хижина</string>
+	<string name="poi_shelter_type_building">Тип укрытия: здание</string>
+	<string name="poi_shelter_type_wildlife_hide">Тип укрытия: в дикой природе</string>
+	<string name="poi_shelter_type_rock_shelter">Тип укрытия: в камнях</string>
+	<string name="poi_shelter_type_sun_shelter">Тип укрытия: от солнца</string>
+	<string name="poi_shelter_type_field_shelter">Тип укрытия: в поле</string>
+	<string name="poi_shelter_type_tent">Тип укрытия: тент</string>
+	<string name="poi_shelter_type_abandoned">Тип укрытия: заброшенное</string>
+
+	<string name="poi_internet_access_type_wlan">Беспроводной интернет</string>
+	<string name="poi_internet_access_type_wired">Интернет через кабель</string>
+	<string name="poi_internet_access_type_public">Общедоступный доступ в интернет</string>
+	<string name="poi_internet_access_type_no">Без доступа в интернет</string>
 
 </resources>

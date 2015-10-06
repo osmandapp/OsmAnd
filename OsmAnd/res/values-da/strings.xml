@@ -211,7 +211,7 @@
     <string name="map_widget_lock_screen">Lås skærm</string>
     <string name="map_widget_compass">Kompas</string>
 
-    <string name="download_hillshade_item">Relief skygger</string>
+    <string name="download_hillshade_item">Reliefskygger</string>
     <string name="download_hillshade_maps">Relief overlejringer</string>
     <string name="tip_recent_changes_1_1_2_t">Ændringer i 1.1.2:
 	\n* Audio/video udvidelse forbedring (fotos med EXIF information)
@@ -307,7 +307,7 @@
     <string name="route_roundabout">Rundkørsel: tag afkørsel %1$d</string>
     <string name="route_kl">Hold til venstre og kør</string>
     <string name="route_kr">Hold til højre og kør</string>
-    <string name="layer_hillshade">Relief overlejringer</string>
+    <string name="layer_hillshade">Relieflag</string>
     <string name="target_points">Rutepunkter</string>
     <string name="map_widget_intermediate_distance">Rutepunkt</string>
     <string name="osmand_play_title_30_chars">OsmAnd kort &amp; navigation</string>
@@ -2167,4 +2167,6 @@
 <string name="downloading_number_of_files">Henter - %1$d fil</string>
     <string name="buy">KØB</string>
 <string name="hillshade_layer_disabled">Relieflag deaktiveret</string>
-    </resources>
+    <string name="activate_seamarks_plugin">Aktiver sømærkeudvidelsen</string>
+    <string name="activate_srtm_plugin">Aktiver SRTM udvidelsen</string>
+</resources>
