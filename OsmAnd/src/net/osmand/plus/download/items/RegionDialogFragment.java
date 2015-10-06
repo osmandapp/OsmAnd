@@ -21,8 +21,8 @@ import org.apache.commons.logging.Log;
 public class RegionDialogFragment extends DialogFragment {
 	private static final Log LOG = PlatformUtil.getLog(RegionDialogFragment.class);
 	public static final String TAG = "RegionDialogFragment";
-	private static final String REGION_DLG_KEY = "world_region_dialog_key";
-	private WorldRegion region;
+	private static final String REGION_ID_DLG_KEY = "world_region_dialog_key";
+	private String regionId;
 	private DownloadsUiHelper.MapDownloadListener mProgressListener;
 
 	@Override
@@ -39,21 +39,12 @@ public class RegionDialogFragment extends DialogFragment {
 							 Bundle savedInstanceState) {
 		final View view = inflater.inflate(R.layout.maps_in_category_fragment, container, false);
 
-		WorldRegion region = null;
 		if (savedInstanceState != null) {
-			Object regionObj = savedInstanceState.getSerializable(REGION_DLG_KEY);
-			if (regionObj != null) {
-				region = (WorldRegion)regionObj;
-			}
+			regionId = savedInstanceState.getString(REGION_ID_DLG_KEY);
 		}
-		if (region == null) {
-			Object regionObj = getArguments().getSerializable(REGION_DLG_KEY);
-			if (regionObj != null) {
-				region = (WorldRegion)regionObj;
-			}
+		if (regionId == null) {
+			regionId = getArguments().getString(REGION_ID_DLG_KEY);
 		}
-
-		this.region = region;
 
 		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
 		toolbar.setNavigationIcon(getMyApplication().getIconsCache().getIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha));
@@ -64,13 +55,16 @@ public class RegionDialogFragment extends DialogFragment {
 			}
 		});
 
-		if (this.region != null) {
+		if (regionId != null) {
 			Fragment fragment = getChildFragmentManager().findFragmentById(R.id.fragmentContainer);
 			if (fragment == null) {
 				getChildFragmentManager().beginTransaction().add(R.id.fragmentContainer,
-						RegionItemsFragment.createInstance(region)).commit();
+						RegionItemsFragment.createInstance(regionId)).commit();
 			}
-			toolbar.setTitle(this.region.getName());
+			WorldRegion region = getMyApplication().getWorldRegion().getRegionById(regionId);
+			if (region != null) {
+				toolbar.setTitle(region.getName());
+			}
 		}
 		DownloadsUiHelper.initFreeVersionBanner(view, getMyApplication(),
 				getResources());
@@ -95,7 +89,6 @@ public class RegionDialogFragment extends DialogFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		LOG.debug(region.getName() + " onResume()");
 		getMyActivity().setOnProgressUpdateListener(mProgressListener);
 	}
 
@@ -107,7 +100,7 @@ public class RegionDialogFragment extends DialogFragment {
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
-		outState.putSerializable(REGION_DLG_KEY, region);
+		outState.putString(REGION_ID_DLG_KEY, regionId);
 		super.onSaveInstanceState(outState);
 	}
 
@@ -119,13 +112,13 @@ public class RegionDialogFragment extends DialogFragment {
 		return (DownloadActivity) getActivity();
 	}
 
-	public void onRegionSelected(WorldRegion region) {
-		DownloadsUiHelper.showDialog(getActivity(), createInstance(region));
+	public void onRegionSelected(String regionId) {
+		DownloadsUiHelper.showDialog(getActivity(), createInstance(regionId));
 	}
 
-	public static RegionDialogFragment createInstance(WorldRegion region) {
+	public static RegionDialogFragment createInstance(String regionId) {
 		Bundle bundle = new Bundle();
-		bundle.putSerializable(REGION_DLG_KEY, region);
+		bundle.putString(REGION_ID_DLG_KEY, regionId);
 		RegionDialogFragment fragment = new RegionDialogFragment();
 		fragment.setArguments(bundle);
 		return fragment;

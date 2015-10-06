@@ -43,7 +43,6 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 
 	public static final int RELOAD_ID = 0;
 
-	private ItemsListBuilder builder;
 	private WorldItemsAdapter listAdapter;
 
 	private int worldRegionsIndex = -1;
@@ -62,8 +61,6 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.download_index_fragment, container, false);
-
-		builder = new ItemsListBuilder(getMyApplication(), getMyApplication().getWorldRegion());
 
 		ExpandableListView listView = (ExpandableListView) view.findViewById(android.R.id.list);
 		listAdapter = new WorldItemsAdapter(getActivity());
@@ -98,7 +95,7 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 		return (OsmandApplication) getActivity().getApplication();
 	}
 
-	private void fillWorldItemsAdapter() {
+	private void fillWorldItemsAdapter(ItemsListBuilder builder) {
 		if (listAdapter != null) {
 			listAdapter.clear();
 			if (builder.getRegionMapItems().size() > 0) {
@@ -110,12 +107,12 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 
 				int unusedSubIndex = 0;
 				List<String> voicePromptsItems = new LinkedList<>();
-				if (!ItemsListBuilder.isVoicePromptsItemsEmpty(ItemsListBuilder.VoicePromptsType.RECORDED)) {
-					voicePromptsItems.add(ItemsListBuilder.getVoicePromtName(getMyApplication(), ItemsListBuilder.VoicePromptsType.RECORDED));
+				if (!builder.isVoicePromptsItemsEmpty(ItemsListBuilder.VoicePromptsType.RECORDED)) {
+					voicePromptsItems.add(builder.getVoicePromtName(ItemsListBuilder.VoicePromptsType.RECORDED));
 					voicePromptsItemsRecordedSubIndex = unusedSubIndex++;
 				}
-				if (!ItemsListBuilder.isVoicePromptsItemsEmpty(ItemsListBuilder.VoicePromptsType.TTS)) {
-					voicePromptsItems.add(ItemsListBuilder.getVoicePromtName(getMyApplication(), ItemsListBuilder.VoicePromptsType.TTS));
+				if (!builder.isVoicePromptsItemsEmpty(ItemsListBuilder.VoicePromptsType.TTS)) {
+					voicePromptsItems.add(builder.getVoicePromtName(ItemsListBuilder.VoicePromptsType.TTS));
 					voicePromptsItemsTTSSubIndex = unusedSubIndex;
 				}
 				if (!voicePromptsItems.isEmpty()) {
@@ -131,7 +128,7 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 		if (groupPosition == worldRegionsIndex) {
 			WorldRegion region = (WorldRegion)listAdapter.getChild(groupPosition, childPosition);
-			DownloadsUiHelper.showDialog(getActivity(), RegionDialogFragment.createInstance(region));
+			DownloadsUiHelper.showDialog(getActivity(), RegionDialogFragment.createInstance(region.getRegionId()));
 			return true;
 		} else if (groupPosition == voicePromptsIndex) {
 			//
@@ -161,8 +158,9 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 	}
 
 	public void onCategorizationFinished() {
-		if (builder.build()) {
-			fillWorldItemsAdapter();
+		ItemsListBuilder builder = 	getDownloadActivity().getItemsBuilder();
+		if (builder != null && builder.build()) {
+			fillWorldItemsAdapter(builder);
 			listAdapter.notifyDataSetChanged();
 			expandAllGroups();
 		}

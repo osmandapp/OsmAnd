@@ -15,13 +15,17 @@ import android.os.StatFs;
 import android.view.View;
 import android.widget.Toast;
 
+import net.osmand.Collator;
 import net.osmand.IndexConstants;
+import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
+import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.WorldRegion;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.download.DownloadFileHelper.DownloadFileShowWarning;
 import net.osmand.plus.download.DownloadOsmandIndexesHelper.AssetIndexItem;
@@ -39,13 +43,17 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
 
 @SuppressLint("NewApi")
@@ -63,6 +71,12 @@ public class DownloadIndexesThread {
 	private Map<String, String> indexActivatedFileNames = new LinkedHashMap<String, String>();
 	private java.text.DateFormat dateFormat;
 	private List<IndexItem> itemsToUpdate = new ArrayList<IndexItem>();
+
+	private Map<WorldRegion, Map<String, IndexItem>> resourcesByRegions = new HashMap<>();
+	private List<IndexItem> voiceRecItems = new LinkedList<>();
+	private List<IndexItem> voiceTTSItems = new LinkedList<>();
+
+	private boolean dataPrepared;
 
 	DatabaseHelper dbHelper;
 
@@ -141,6 +155,107 @@ public class DownloadIndexesThread {
 		return itemsToUpdate;
 	}
 
+	public boolean isDataPrepared() {
+		return dataPrepared;
+	}
+
+	public Map<WorldRegion, Map<String, IndexItem>> getResourcesByRegions() {
+		return resourcesByRegions;
+	}
+
+	public List<IndexItem> getVoiceRecItems() {
+		return voiceRecItems;
+	}
+
+	public List<IndexItem> getVoiceTTSItems() {
+		return voiceTTSItems;
+	}
+
+	private boolean prepareData(List<IndexItem> resources) {
+		List<IndexItem> resourcesInRepository;
+		if (resources != null) {
+			resourcesInRepository = resources;
+		} else {
+			resourcesInRepository = DownloadActivity.downloadListIndexThread.getCachedIndexFiles();
+		}
+		if (resourcesInRepository == null) {
+			return false;
+		}
+
+		resourcesByRegions.clear();
+		voiceRecItems.clear();
+		voiceTTSItems.clear();
+
+		List<WorldRegion> mergedRegions = app.getWorldRegion().getFlattenedSubregions();
+		mergedRegions.add(app.getWorldRegion());
+		boolean voiceFilesProcessed = false;
+		for (WorldRegion region : mergedRegions) {
+			String downloadsIdPrefix = region.getDownloadsIdPrefix();
+
+			Map<String, IndexItem> regionResources = new HashMap<>();
+
+			Set<DownloadActivityType> typesSet = new TreeSet<>(new Comparator<DownloadActivityType>() {
+				@Override
+				public int compare(DownloadActivityType dat1, DownloadActivityType dat2) {
+					return dat1.getTag().compareTo(dat2.getTag());
+				}
+			});
+
+			for (IndexItem resource : resourcesInRepository) {
+
+				if (!voiceFilesProcessed) {
+					if (resource.getSimplifiedFileName().endsWith(".voice.zip")) {
+						voiceRecItems.add(resource);
+						continue;
+					} else if (resource.getSimplifiedFileName().contains(".ttsvoice.zip")) {
+						voiceTTSItems.add(resource);
+						continue;
+					}
+				}
+
+				if (!resource.getSimplifiedFileName().startsWith(downloadsIdPrefix)) {
+					continue;
+				}
+
+				typesSet.add(resource.getType());
+				regionResources.put(resource.getSimplifiedFileName(), resource);
+			}
+
+			voiceFilesProcessed = true;
+
+			if (region.getSuperregion() != null && region.getSuperregion().getSuperregion() != app.getWorldRegion()) {
+				if (region.getSuperregion().getResourceTypes() == null) {
+					region.getSuperregion().setResourceTypes(typesSet);
+				} else {
+					region.getSuperregion().getResourceTypes().addAll(typesSet);
+				}
+			}
+
+			region.setResourceTypes(typesSet);
+			resourcesByRegions.put(region, regionResources);
+		}
+
+		final Collator collator = OsmAndCollator.primaryCollator();
+		final OsmandRegions osmandRegions = app.getRegions();
+
+		Collections.sort(voiceRecItems, new Comparator<IndexItem>() {
+			@Override
+			public int compare(IndexItem lhs, IndexItem rhs) {
+				return collator.compare(lhs.getVisibleName(app.getApplicationContext(), osmandRegions),
+						rhs.getVisibleName(app.getApplicationContext(), osmandRegions));
+			}
+		});
+
+		Collections.sort(voiceTTSItems, new Comparator<IndexItem>() {
+			@Override
+			public int compare(IndexItem lhs, IndexItem rhs) {
+				return collator.compare(lhs.getVisibleName(app.getApplicationContext(), osmandRegions),
+						rhs.getVisibleName(app.getApplicationContext(), osmandRegions));
+			}
+		});
+
+		return true;
+	}
 
 	public class DownloadIndexesAsyncTask extends BasicProgressAsyncTask<IndexItem, Object, String> implements DownloadFileShowWarning {
 
@@ -408,13 +523,14 @@ public class DownloadIndexesThread {
 				currentRunningTask.add(this);
 				super.onPreExecute();
 				this.message = ctx.getString(R.string.downloading_list_indexes);
+				dataPrepared = false;
 			}
 
 			@Override
 			protected IndexFileList doInBackground(Void... params) {
 				IndexFileList indexFileList = DownloadOsmandIndexesHelper.getIndexesList(ctx);
 				if (indexFileList != null) {
-					ItemsListBuilder.prepareData(app, indexFileList.getIndexFiles());
+					prepareData(indexFileList.getIndexFiles());
 				}
 				return indexFileList;
 			}
@@ -422,6 +538,7 @@ public class DownloadIndexesThread {
 			protected void onPostExecute(IndexFileList result) {
 				indexFiles = result;
 				if (indexFiles != null && uiActivity != null) {
+					dataPrepared = resourcesByRegions.size() > 0;
 					prepareFilesToUpdate();
 					boolean basemapExists = uiActivity.getMyApplication().getResourceManager().containsBasemap();
 					IndexItem basemap = indexFiles.getBasemap();

@@ -66,9 +66,9 @@ public class BinaryInspector {
 		// test cases show info
 		if(args.length == 1 && "test".equals(args[0])) {
 			in.inspector(new String[]{
-				"-vpoi",
+//				"-vpoi",
 //				"-vmap", "-vmapobjects", // "-vmapcoordinates", 
-//				"-vrouting",
+				"-vrouting",
 //				"-vaddress", "-vcities",//"-vstreetgroups", 
 //				"-vstreets", "-vbuildings", "-vintersections", 
 //				"-zoom=15",
@@ -535,16 +535,15 @@ public class BinaryInspector {
 				b.setLength(0);
 				b.append("Road ");
 				b.append(obj.id);
-				for(int i = 0; i < obj.getTypes().length; i++) {
+				for (int i = 0; i < obj.getTypes().length; i++) {
 					RouteTypeRule rr = obj.region.quickGetEncodingRule(obj.getTypes()[i]);
 					b.append(" ").append(rr.getTag()).append("='").append(rr.getValue()).append("'");
 				}
-				if (obj.getNames() != null) {
-					TIntObjectIterator<String> it = obj.getNames().iterator();
-					while (it.hasNext()) {
-						it.advance();
-						RouteTypeRule rr = obj.region.quickGetEncodingRule(it.key());
-						b.append(" ").append(rr.getTag()).append("='").append(it.value()).append("'");
+				int[] nameIds = obj.getNameIds();
+				if (nameIds != null) {
+					for (int key : nameIds) {
+						RouteTypeRule rr = obj.region.quickGetEncodingRule(key);
+						b.append(" ").append(rr.getTag()).append("='").append(obj.getNames().get(key)).append("'");
 					}
 				}
 				println(b.toString());

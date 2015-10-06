@@ -1545,4 +1545,59 @@
 
 	<string name="poi_inscription">Надпись</string>
 
+	<string name="poi_historic_quarry">Исторический карьер</string>
+
+	<string name="poi_resource_aggregate">Заполнители бетона</string>
+	<string name="poi_resource_antimony">Сурьма</string>
+	<string name="poi_resource_asbestos">Асбест</string>
+	<string name="poi_resource_barite">Барит</string>
+	<string name="poi_resource_basalt">Базальт</string>
+	<string name="poi_resource_bauxite">Бокситы</string>
+	<string name="poi_resource_beryl">Берил</string>
+	<string name="poi_resource_bismuth">Висмут</string>
+	<string name="poi_resource_cereal">Зерновые культуры</string>
+	<string name="poi_resource_chromite">Хромиты, хромовая руда</string>
+	<string name="poi_resource_clay">Глина</string>
+	<string name="poi_resource_coal">Уголь</string>
+	<string name="poi_resource_copper">Медь</string>
+	<string name="poi_resource_diamond">Алмазы</string>
+	<string name="poi_resource_dimension_stone">Строительный камень</string>
+	<string name="poi_resource_dolomite">Доломит</string>
+	<string name="poi_resource_gas">Природный газ</string>
+	<string name="poi_resource_gold">Золото</string>
+	<string name="poi_resource_graphite">Графит</string>
+	<string name="poi_resource_gravel">Гравий</string>
+	<string name="poi_resource_gypsum">Гипс</string>
+	<string name="poi_resource_iron_ore">Железная руда</string>
+	<string name="poi_resource_lead">Свинец</string>
+	<string name="poi_resource_lignite">Бурый уголь</string>
+	<string name="poi_resource_limestone">Известняк</string>
+	<string name="poi_resource_marble">Мрамор</string>
+	<string name="poi_resource_mercury">Ртуть</string>
+	<string name="poi_resource_mica">Слюда</string>
+	<string name="poi_resource_mineral_oil">Минеральное масло</string>
+	<string name="poi_resource_nickel">Никель</string>
+	<string name="poi_resource_oil">Нефть/масло</string>
+	<string name="poi_resource_opal">Опал</string>
+	<string name="poi_resource_peat">Торф</string>
+	<string name="poi_resource_platinum">Платина</string>
+	<string name="poi_resource_radium">Радий</string>
+	<string name="poi_resource_ruby">Рубин</string>
+	<string name="poi_resource_rutile">Рутил</string>
+	<string name="poi_resource_salt">Соль</string>
+	<string name="poi_resource_sand">Песок</string>
+	<string name="poi_resource_sandstone">Песчаник</string>
+	<string name="poi_resource_silica">Кремнезём, кварц</string>
+	<string name="poi_resource_silver">Серебро</string>
+	<string name="poi_resource_slate_iron_ore_copper">Сланец;железная руда;медь</string>
+	<string name="poi_resource_slate">Сланец</string>
+	<string name="poi_resource_stone">Камень (ресурс)</string>
+	<string name="poi_resource_tin">Олово</string>
+	<string name="poi_resource_tuff">Вулканический туф</string>
+	<string name="poi_resource_uranium">Уран</string>
+	<string name="poi_resource_vanadium">Ванадий</string>
+	<string name="poi_resource_water">Вода (ресурс)</string>
+	<string name="poi_resource_zinc">Цинк</string>
+	<string name="poi_resource_zircon">Циркон</string>
+
 </resources>

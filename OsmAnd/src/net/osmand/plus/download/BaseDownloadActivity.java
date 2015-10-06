@@ -19,6 +19,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.ActionBarProgressActivity;
 import net.osmand.plus.base.BasicProgressAsyncTask;
+import net.osmand.plus.download.items.ItemsListBuilder;
 import net.osmand.plus.download.newimplementation.IndexItemCategoryWithSubcat;
 
 import java.lang.ref.WeakReference;
@@ -120,6 +121,24 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 
 	public void onCategorizationFinished() {
 
+	}
+
+	public ItemsListBuilder getItemsBuilder() {
+		if (downloadListIndexThread.isDataPrepared()) {
+			return new ItemsListBuilder(getMyApplication(), null, downloadListIndexThread.getResourcesByRegions(),
+					downloadListIndexThread.getVoiceRecItems(), downloadListIndexThread.getVoiceTTSItems());
+		} else {
+			return null;
+		}
+	}
+
+	public ItemsListBuilder getItemsBuilder(String regionId) {
+		if (downloadListIndexThread.isDataPrepared()) {
+			return new ItemsListBuilder(getMyApplication(), regionId, downloadListIndexThread.getResourcesByRegions(),
+					downloadListIndexThread.getVoiceRecItems(), downloadListIndexThread.getVoiceTTSItems());
+		} else {
+			return null;
+		}
 	}
 
 	public boolean startDownload(IndexItem item) {
