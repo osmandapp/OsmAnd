@@ -2145,4 +2145,7 @@
     <string name="show_free_version_banner_description">即使您已是付費版本，您仍然可以看到免費版本的標題</string>
 <string name="downloading_number_of_files">正在下載 - %1$d 檔案</string>
     <string name="buy">購買</string>
+<string name="hillshade_layer_disabled">地形陰影圖層停用</string>
+    <string name="activate_seamarks_plugin">請啟動航線標識外掛元件</string>
+    <string name="activate_srtm_plugin">請啟動 SRTM 外掛元件</string>
 </resources>
