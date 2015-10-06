@@ -25,6 +25,7 @@ import net.osmand.plus.WorldRegion;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.activities.OsmandExpandableListFragment;
 import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.download.items.ItemsListBuilder.VoicePromptsType;
 import net.osmand.plus.download.newimplementation.DownloadsUiHelper;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
@@ -107,12 +108,12 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 
 				int unusedSubIndex = 0;
 				List<String> voicePromptsItems = new LinkedList<>();
-				if (!builder.isVoicePromptsItemsEmpty(ItemsListBuilder.VoicePromptsType.RECORDED)) {
-					voicePromptsItems.add(builder.getVoicePromtName(ItemsListBuilder.VoicePromptsType.RECORDED));
+				if (!builder.isVoicePromptsItemsEmpty(VoicePromptsType.RECORDED)) {
+					voicePromptsItems.add(builder.getVoicePromtName(VoicePromptsType.RECORDED));
 					voicePromptsItemsRecordedSubIndex = unusedSubIndex++;
 				}
-				if (!builder.isVoicePromptsItemsEmpty(ItemsListBuilder.VoicePromptsType.TTS)) {
-					voicePromptsItems.add(builder.getVoicePromtName(ItemsListBuilder.VoicePromptsType.TTS));
+				if (!builder.isVoicePromptsItemsEmpty(VoicePromptsType.TTS)) {
+					voicePromptsItems.add(builder.getVoicePromtName(VoicePromptsType.TTS));
 					voicePromptsItemsTTSSubIndex = unusedSubIndex;
 				}
 				if (!voicePromptsItems.isEmpty()) {
@@ -131,7 +132,13 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 			DownloadsUiHelper.showDialog(getActivity(), RegionDialogFragment.createInstance(region.getRegionId()));
 			return true;
 		} else if (groupPosition == voicePromptsIndex) {
-			//
+			if (childPosition == voicePromptsItemsRecordedSubIndex) {
+				DownloadsUiHelper.showDialog(getActivity(),
+						VoiceDialogFragment.createInstance(VoicePromptsType.RECORDED));
+			} else {
+				DownloadsUiHelper.showDialog(getActivity(),
+						VoiceDialogFragment.createInstance(VoicePromptsType.TTS));
+			}
 		}
 		return false;
 	}
@@ -168,7 +175,7 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 
 	private class WorldItemsAdapter extends OsmandBaseExpandableListAdapter {
 
-		private Map<String, List> data = new LinkedHashMap<>();
+		private Map<String, List<Object>> data = new LinkedHashMap<>();
 		private List<String> sections = new LinkedList<>();
 		private Context ctx;
 		private boolean srtmDisabled;
@@ -199,7 +206,7 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 				sections.add(section);
 			}
 			if (!data.containsKey(section)) {
-				data.put(section, new ArrayList());
+				data.put(section, new ArrayList<>());
 			}
 			data.get(section).addAll(list);
 		}
