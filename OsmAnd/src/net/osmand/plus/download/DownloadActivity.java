@@ -1,29 +1,5 @@
 package net.osmand.plus.download;
 
-import java.io.File;
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import net.osmand.IndexConstants;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.Version;
-import net.osmand.plus.activities.LocalIndexInfo;
-import net.osmand.plus.activities.OsmAndListFragment;
-import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
-import net.osmand.plus.activities.OsmandExpandableListFragment;
-import net.osmand.plus.activities.TabActivity;
-import net.osmand.plus.base.BasicProgressAsyncTask;
-import net.osmand.plus.download.items.WorldItemsFragment;
-import net.osmand.plus.srtmplugin.SRTMPlugin;
-import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.ActivityNotFoundException;
@@ -50,6 +26,31 @@ import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import net.osmand.IndexConstants;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.Version;
+import net.osmand.plus.activities.LocalIndexInfo;
+import net.osmand.plus.activities.OsmAndListFragment;
+import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
+import net.osmand.plus.activities.OsmandExpandableListFragment;
+import net.osmand.plus.activities.TabActivity;
+import net.osmand.plus.base.BasicProgressAsyncTask;
+import net.osmand.plus.download.items.WorldItemsFragment;
+import net.osmand.plus.srtmplugin.SRTMPlugin;
+import net.osmand.plus.views.controls.PagerSlidingTabStrip;
+
+import java.io.File;
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 
 public class DownloadActivity extends BaseDownloadActivity {
@@ -286,7 +287,7 @@ public class DownloadActivity extends BaseDownloadActivity {
 		}
 		
 		if (updateOnlyProgress) {
-			if (!basicProgressAsyncTask.isIndeterminate()) {
+			if (basicProgressAsyncTask != null && !basicProgressAsyncTask.isIndeterminate()) {
 				progressPercent.setText(basicProgressAsyncTask.getProgressPercentage() + "%");
 				determinateProgressBar.setProgress(basicProgressAsyncTask.getProgressPercentage());
 			}
@@ -675,12 +676,13 @@ public class DownloadActivity extends BaseDownloadActivity {
 		public void updateProgress(boolean isFinished, boolean indeterminate, int percent, String message) {
 			if(isFinished) {
 				downloadProgressLayout.setVisibility(View.GONE);
-				// TODO BUG restore free version
+				freeVersionBanner.setVisibility(View.VISIBLE);
 			} else {
 				if (freeVersionBanner.getVisibility() == View.VISIBLE) {
 					freeVersionBanner.setVisibility(View.GONE);
 				}
 				downloadProgressLayout.setVisibility(View.VISIBLE);
+				progressBar.setIndeterminate(indeterminate);
 				if(indeterminate) {
 					// TODO
 					leftTextView.setText(message);

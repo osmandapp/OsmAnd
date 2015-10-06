@@ -7,5 +7,7 @@
 
     <include layout="@layout/free_version_banner"/>
 
+    <include layout="@layout/progress_with_two_texts"/>
+
     <include layout="@layout/download_items_list"/>
 </LinearLayout>
