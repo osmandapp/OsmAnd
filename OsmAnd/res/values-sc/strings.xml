@@ -2120,4 +2120,10 @@
     <string name="show_free_version_banner">Ammustra s’insigna de sa versione a indonu (gratùita)</string>
     <string name="show_free_version_banner_description">Fintzas si tenes sa versione a pagamentu podes bìere s’insigna de sa versione a indonu (gratùita)</string>
 <string name="downloading_number_of_files">Iscarrigande - %1$d documentu/os</string>
-    </resources>
+    <string name="hillshade_layer_disabled">Livellu umbradura rilievos disativadu</string>
+    <string name="buy">CÒMPORA</string>
+    <string name="activate_seamarks_plugin">Pro piaghere allue su plugin nàuticu</string>
+    <string name="activate_srtm_plugin">Pro piaghere allue su plugin SRTM</string>
+    <string name="later">Prus a tardu</string>
+    <string name="get_full_version">Còmpora sa versione cumpleta</string>
+</resources>
