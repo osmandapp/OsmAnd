@@ -1556,7 +1556,7 @@ s často kladenými otázkami.</string>
 	<string name="import_file_favourites">Uložit body jako GPX soubor nebo je importovat do oblíbených?</string>
 	
 	<string name="shared_string_share">Sdílet</string>
-	<string name="share_fav_subject">Oblíbené sdílené přes OsmAnd</string>
+	<string name="share_fav_subject">Oblíbené body sdílené přes OsmAnd</string>
 	<string name="navigation_intent_invalid">Neplatný formát: %s</string>
 <string name="osmo_follow">Sledovat</string>
     <string name="osmo_sign_in">Přihlásit se</string>
@@ -2096,4 +2096,10 @@ s často kladenými otázkami.</string>
     <string name="favourites_edit_dialog_title">Informace o oblíbeném bodu</string>
     <string name="simulate_your_location_stop_descr">Ukončit simulaci vaší polohy</string>
     <string name="simulate_your_location_descr">Simulovat pomocí zaznamenané GPX nebo vypočítané trasy</string>
+    <string name="favourites_context_menu_add">Přidat oblíbený bod</string>
+	<string name="downloads_left_template">%1$s stahování zbývá</string>
+	<string name="roads">Cesty</string>
+    <string name="downloading_number_of_files">Stahování - soubor %1$d</string>
+    <string name="buy">KOUPIT</string>
+<string name="hillshade_layer_disabled">Vrstva stínování vypnutá</string>
     </resources>
