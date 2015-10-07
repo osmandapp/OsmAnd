@@ -107,7 +107,7 @@ public class WorldRegion implements Serializable {
 	public void initWorld() {
 		regionId = "";
 		downloadsIdPrefix = "world_";
-		name = null;
+		name = "";
 		superregion = null;
 	}
 

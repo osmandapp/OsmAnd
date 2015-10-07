@@ -1,6 +1,9 @@
 package net.osmand.plus.download.items;
 
+<<<<<<< HEAD
+=======
 import android.content.DialogInterface;
+>>>>>>> 123c270bc595f997b400d0de3681e6ab22f427cf
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -15,7 +18,11 @@ import net.osmand.plus.R;
 import net.osmand.plus.WorldRegion;
 import net.osmand.plus.download.DownloadActivity;
 
+<<<<<<< HEAD
+public class RegionDialogFragment extends DialogFragment {
+=======
 public class RegionDialogFragment extends DialogFragment{
+>>>>>>> 123c270bc595f997b400d0de3681e6ab22f427cf
 	public static final String TAG = "RegionDialogFragment";
 	private static final String REGION_ID_DLG_KEY = "world_region_dialog_key";
 	private String regionId;
@@ -65,6 +72,9 @@ public class RegionDialogFragment extends DialogFragment{
 				toolbar.setTitle(region.getName());
 			}
 		}
+<<<<<<< HEAD
+		getDownloadActivity().initFreeVersionBanner(view);
+=======
 		((DownloadActivity) getActivity()).initFreeVersionBanner(view);
 		listener = new DialogDismissListener() {
 			@Override
@@ -72,6 +82,7 @@ public class RegionDialogFragment extends DialogFragment{
 				((DownloadActivity) getActivity()).initFreeVersionBanner(view);
 			}
 		};
+>>>>>>> 123c270bc595f997b400d0de3681e6ab22f427cf
 		return view;
 	}
 
@@ -90,9 +101,13 @@ public class RegionDialogFragment extends DialogFragment{
 	}
 
 	public void onRegionSelected(String regionId) {
+<<<<<<< HEAD
+		getDownloadActivity().showDialog(getActivity(), createInstance(regionId));
+=======
 		final RegionDialogFragment regionDialogFragment = createInstance(regionId);
 		regionDialogFragment.setOnDismissListener(listener);
 		((DownloadActivity) getActivity()).showDialog(getActivity(), regionDialogFragment);
+>>>>>>> 123c270bc595f997b400d0de3681e6ab22f427cf
 	}
 
 	public static RegionDialogFragment createInstance(String regionId) {
