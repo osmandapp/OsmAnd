@@ -99,9 +99,9 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 			if (builder.getRegionMapItems().size() > 0) {
 				int unusedIndex = 0;
 				worldRegionsIndex = unusedIndex++;
-				listAdapter.add("World regions", builder.getRegionsFromAllItems());
+				listAdapter.add(getResources().getString(R.string.world_regions), builder.getRegionsFromAllItems());
 				worldMapsIndex = unusedIndex++;
-				listAdapter.add("World maps", builder.getRegionMapItems());
+				listAdapter.add(getResources().getString(R.string.world_maps), builder.getRegionMapItems());
 
 				int unusedSubIndex = 0;
 				List<String> voicePromptsItems = new LinkedList<>();
@@ -115,7 +115,7 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 				}
 				if (!voicePromptsItems.isEmpty()) {
 					voicePromptsIndex = unusedIndex;
-					listAdapter.add("Voice prompts", voicePromptsItems);
+					listAdapter.add(getResources().getString(R.string.voices), voicePromptsItems);
 				}
 			}
 			//listAdapter.add("Voice promts", null);
