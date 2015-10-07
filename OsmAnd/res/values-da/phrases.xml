@@ -5,7 +5,7 @@
         <string name="poi_convenience">Nærbutik</string>
         <string name="poi_mall">Butikscenter</string>
         <string name="poi_beverages">Drikkevarer</string>
-        <string name="poi_butcher">Kødmarked</string>
+        <string name="poi_butcher">Slagter</string>
         <string name="poi_deli">Delikatesse</string>
         <string name="poi_farm">Gårdbutik</string>
         <string name="poi_greengrocer">Grønthandler</string>
@@ -201,7 +201,7 @@
         <string name="poi_communication_tower">Kommunikationstårn</string>
         <string name="poi_telephone_exchange">Telefoncentral</string>
 
-        <string name="poi_recycling">Genbrugsplads</string>
+        <string name="poi_recycling">Genbrug</string>
         <string name="poi_landfill">Losseplads</string>
         <string name="poi_waste_disposal">Affaldsbortskaffelse</string>
         <string name="poi_waste_basket">Skraldespand</string>
@@ -672,8 +672,8 @@
 	<string name="poi_child_clothes">Børnetøj</string>
 	<string name="poi_apartment">Lejlighed</string>
 
-	<string name="poi_public_transport_stop_position">Offentlig transport stopposition</string>
-	<string name="poi_halt">Jernbane stop</string>
+	<string name="poi_public_transport_stop_position">Offentlig transport stoppested</string>
+	<string name="poi_halt">Trinbræt</string>
 	<string name="poi_lodging">Logi</string>
 	<string name="poi_internet_access_wlan">Internetadgang: wlan</string>
 	<string name="poi_internet_access_terminal">Internetadgang: terminal</string>
@@ -1842,23 +1842,23 @@
 	<string name="poi_internet_access_type_service">Internetadgang: tjeneste</string>
 	<string name="poi_internet_access_type_no">Internetadgang: ingen</string>
 
-<string name="poi_maxwidth">Maksimale bredde</string>
+<string name="poi_maxwidth">Max. bredde</string>
 	<string name="poi_iata">IATA kode</string>
 	<string name="poi_icao">ICAO kode</string>
 	<string name="poi_faa">FAA kode</string>
 	
-	<string name="poi_artwork_type_sculpture">Kunsttype: skulptur</string>
-	<string name="poi_artwork_type_statue">Kunsttype: statue</string>
-	<string name="poi_artwork_type_mural">Kunsttype: vægmaleri</string>
-	<string name="poi_artwork_type_architecture">Kunsttype: arkitektur</string>
-	<string name="poi_artwork_type_painting">Kunsttype: maleri</string>
-	<string name="poi_artwork_type_stone">Kunsttype: sten</string>
-	<string name="poi_artwork_type_bust">Kunsttype: buste</string>
-	<string name="poi_artwork_type_installation">Kunsttype: installation</string>
-	<string name="poi_artwork_type_mosaic">Kunsttype: mosaik</string>
-	<string name="poi_artwork_type_relief">Kunsttype: relief</string>
-	<string name="poi_artwork_type_graffiti">Kunsttype: graffiti</string>
-	<string name="poi_artwork_type_stele">Kunsttype: stele</string>
-	<string name="poi_artwork_type_fountain">Kunsttype: springvand</string>
+	<string name="poi_artwork_type_sculpture">Kunstværk: skulptur</string>
+	<string name="poi_artwork_type_statue">Kunstværk: statue</string>
+	<string name="poi_artwork_type_mural">Kunstværk: vægmaleri</string>
+	<string name="poi_artwork_type_architecture">Kunstværk: arkitektur</string>
+	<string name="poi_artwork_type_painting">Kunstværk: maleri</string>
+	<string name="poi_artwork_type_stone">Kunstværk: sten</string>
+	<string name="poi_artwork_type_bust">Kunstværk: buste</string>
+	<string name="poi_artwork_type_installation">Kunstværk: installation</string>
+	<string name="poi_artwork_type_mosaic">Kunstværk: mosaik</string>
+	<string name="poi_artwork_type_relief">Kunstværk: relief</string>
+	<string name="poi_artwork_type_graffiti">Kunstværk: graffiti</string>
+	<string name="poi_artwork_type_stele">Kunstværk: stele</string>
+	<string name="poi_artwork_type_fountain">Kunstværk: springvand</string>
 
 </resources>
