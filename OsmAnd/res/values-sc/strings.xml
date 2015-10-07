@@ -2131,4 +2131,5 @@
     <string name="region_maps">Mapas regionales</string>
     <string name="world_maps">Mapas mundiales</string>
     <string name="world_regions">Regiones de su mundu</string>
-    </resources>
+    <string name="downloads">Iscarrigamentos</string>
+</resources>
