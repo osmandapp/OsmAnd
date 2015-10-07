@@ -2214,4 +2214,5 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 <string name="activate_srtm_plugin">Attiva il componente aggiuntivo SRTM</string>
 <string name="later">In seguito</string>
     <string name="get_full_version">Acquista la versione completa</string>
-</resources>
+<string name="activate_seamarks_plugin">Attiva il componente aggiuntivo</string>
+    </resources>
