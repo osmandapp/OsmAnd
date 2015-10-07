@@ -127,8 +127,8 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 		if (groupPosition == worldRegionsIndex) {
 			WorldRegion region = (WorldRegion)listAdapter.getChild(groupPosition, childPosition);
 			final RegionDialogFragment regionDialogFragment = RegionDialogFragment.createInstance(region.getRegionId());
-			regionDialogFragment.setOnDismissListener((DownloadActivity) getActivity());
-			((DownloadActivity)getActivity()).showDialog(getActivity(), regionDialogFragment);
+			regionDialogFragment.setOnDismissListener(getDownloadActivity());
+			getDownloadActivity().showDialog(getActivity(), regionDialogFragment);
 			return true;
 		} else if (groupPosition == voicePromptsIndex) {
 			if (childPosition == voicePromptsItemsRecordedSubIndex) {

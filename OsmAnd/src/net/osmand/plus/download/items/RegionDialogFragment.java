@@ -65,11 +65,11 @@ public class RegionDialogFragment extends DialogFragment{
 				toolbar.setTitle(region.getName());
 			}
 		}
-		((DownloadActivity) getActivity()).initFreeVersionBanner(view);
+		getDownloadActivity().initFreeVersionBanner(view);
 		listener = new DialogDismissListener() {
 			@Override
 			public void onDialogDismissed() {
-				((DownloadActivity) getActivity()).initFreeVersionBanner(view);
+				getDownloadActivity().initFreeVersionBanner(view);
 			}
 		};
 		return view;
@@ -92,7 +92,7 @@ public class RegionDialogFragment extends DialogFragment{
 	public void onRegionSelected(String regionId) {
 		final RegionDialogFragment regionDialogFragment = createInstance(regionId);
 		regionDialogFragment.setOnDismissListener(listener);
-		((DownloadActivity) getActivity()).showDialog(getActivity(), regionDialogFragment);
+		getDownloadActivity().showDialog(getActivity(), regionDialogFragment);
 	}
 
 	public static RegionDialogFragment createInstance(String regionId) {
