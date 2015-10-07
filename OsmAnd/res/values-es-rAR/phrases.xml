@@ -1817,4 +1817,23 @@
 	<string name="poi_internet_access_type_service">Tipo de acceso a Internet: servicio</string>
 	<string name="poi_internet_access_type_no">Sin acceso a Internet</string>
 
+<string name="poi_maxwidth">Ancho máximo</string>
+	<string name="poi_iata">Código IATA</string>
+	<string name="poi_icao">Código ICAO</string>
+	<string name="poi_faa">Código FAA</string>
+	
+	<string name="poi_artwork_type_sculpture">Tipo de obra: escultura</string>
+	<string name="poi_artwork_type_statue">Tipo de obra: estatua</string>
+	<string name="poi_artwork_type_mural">Tipo de obra: mural</string>
+	<string name="poi_artwork_type_architecture">Tipo de obra: arquitectura</string>
+	<string name="poi_artwork_type_painting">Tipo de obra: pintura</string>
+	<string name="poi_artwork_type_stone">Tipo de obra: piedra</string>
+	<string name="poi_artwork_type_bust">Tipo de obra: busto</string>
+	<string name="poi_artwork_type_installation">Tipo de obra: instalación</string>
+	<string name="poi_artwork_type_mosaic">Tipo de obra: mosaico</string>
+	<string name="poi_artwork_type_relief">Tipo de obra: relieve</string>
+	<string name="poi_artwork_type_graffiti">Tipo de obra: graffiti</string>
+	<string name="poi_artwork_type_stele">Tipo de obra: estela</string>
+	<string name="poi_artwork_type_fountain">Tipo de obra: fuente</string>
+
 </resources>

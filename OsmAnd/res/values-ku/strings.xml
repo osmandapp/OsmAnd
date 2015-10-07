@@ -12,6 +12,7 @@
     <string name="application_dir_change_warning3">Vai vēlaties, lai OsmAnd kopē uz jauno vietu arī savus datu failus?</string>
     <string name="specified_directiory_not_writeable">Norādītajā direktorijā nevar veidot Kartes</string>
 	<string name="favorite_category_add_new">Nu Texe</string>
-    <string name="si_nm">Milla Bahra</string>
-    <string name="shared_string_trip_recording">Tomara Ger</string>
+    <string name="si_nm">Milla Bahre</string>
+    <string name="shared_string_trip_recording">Tomarkerê Ger</string>
+    <string name="favourites_edit_dialog_title">Agahdarî En Qu Mın</string>
     </resources>

@@ -512,6 +512,9 @@ public class DownloadActivity extends BaseDownloadActivity implements RegionDial
 		return downloadListIndexThread != null ? downloadListIndexThread.getIndexFileNames() : null;
 	}
 
+	public List<IndexItem> getIndexFiles() {
+		return downloadListIndexThread != null ? downloadListIndexThread.getCachedIndexFiles() : null;
+	}
 
 	public void showDialogToDownloadMaps(Collection<String> maps) {
 		int count = 0;

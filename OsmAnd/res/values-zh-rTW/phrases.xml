@@ -1643,4 +1643,26 @@
 	<string name="poi_automated_yes">自動化</string>
 	<string name="poi_automated_no">無自動化</string>
 	<string name="poi_full_service_yes">全方位服務</string>
+	<string name="poi_brushless_yes">無刷</string>
+	<string name="poi_brushless_no">無刷：無</string>
+	<string name="poi_car_wash_no">洗車：無</string>
+
+	<string name="poi_aeroway_fuel">飛機燃料站</string>
+	<string name="poi_public_bath">公共浴室</string>
+
+	<string name="poi_male_yes">男性</string>
+	<string name="poi_male_no">禁止男性</string>
+	<string name="poi_female_yes">女性</string>
+	<string name="poi_female_no">禁止女性</string>
+	<string name="poi_indoor_yes">室內</string>
+	<string name="poi_indoor_no">戶外</string>
+	<string name="poi_toilets_yes">附洗手間</string>
+	<string name="poi_toilets_no">未附洗手間</string>
+	<string name="poi_toilets_wheelchair_yes">供輪椅進出洗手間：有</string>
+	<string name="poi_toilets_wheelchair_no">供輪椅進出洗手間：無</string>
+	<string name="poi_toilets_access_customers">洗手間進出：客戶</string>
+	<string name="poi_toilets_access_permissive">洗手間進出：容許</string>
+	<string name="poi_toilets_access_community">洗手間進出：社區</string>
+	<string name="poi_toilets_access_public">洗手間進出：公共</string>
+
 	</resources>
