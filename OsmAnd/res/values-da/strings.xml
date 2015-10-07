@@ -2173,4 +2173,7 @@
     <string name="get_full_version">Hent den fulde version</string>
 <string name="regions">Regioner</string>
     <string name="additional_maps">Yderligere kort</string>
+    <string name="region_maps">Regionskort</string>
+    <string name="world_maps">Verdenskort</string>
+    <string name="world_regions">Regioner i verden</string>
     </resources>
