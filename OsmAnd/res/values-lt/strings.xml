@@ -2144,4 +2144,31 @@
 <string name="are_you_sure">Ar įsitikinę?</string>
 	<string name="unsaved_changes_will_be_lost">Neišsaugoti duomenys bus prarasti. Ar norite tęsti?</string>
 	<string name="downloads_left_template">%1$s liko atsisiųsti</string>
-</resources>
+<string name="regions">Regionai</string>
+    <string name="additional_maps">Papildomi žemėlapiai</string>
+    <string name="region_maps">Regiono žemėlapiai</string>
+    <string name="world_maps">Pasaulio žemėlapiai</string>
+    <string name="world_regions">Pasaulio regionai</string>
+    <string name="favorite_category_add_new">Prideti naują</string>
+    <string name="favorite_category_select">Pasirinkti kategoriją</string>
+    <string name="default_speed_system_descr">Pasirinkti greičio matavimo vienetą</string>
+    <string name="default_speed_system">Greičio matavimo vienetas</string>
+    <string name="si_nm">Jūrmylės</string>
+    <string name="si_kmh">Kilometrai per valandą</string>
+    <string name="si_mph">Mylios per valandą</string>
+    <string name="si_m_s">Metrai per sekundę</string>
+    <string name="si_min_km">Minutės per kilometrą</string>
+    <string name="si_min_m">Minutės per mylią</string>
+    <string name="si_nm_h">Jūrmylė per valandą (mazgas)</string>
+    <string name="nm_h">nmh</string>
+    <string name="min_mile">min/m</string>
+    <string name="min_km">min/km</string>
+    <string name="m_s">m/s</string>
+    
+    <string name="shared_string_navigation">Navigacija</string>
+    <string name="osmand_running_in_background">Veikia fone</string>
+    <string name="roads">Keliai</string>
+    <string name="downloading_number_of_files">Siunčiamas - %1$d failas</string>
+    <string name="buy">PIRKTI</string>
+    <string name="later">Vėliau</string>
+    </resources>
