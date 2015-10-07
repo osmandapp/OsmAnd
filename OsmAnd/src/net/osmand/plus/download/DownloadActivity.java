@@ -61,7 +61,7 @@ public class DownloadActivity extends BaseDownloadActivity {
 	private TextView progressMessage;
 	private TextView progressPercent;
 	private ImageView cancel;
-	
+
 	private List<LocalIndexInfo> localIndexInfos = new ArrayList<LocalIndexInfo>();
 
 	private String initialFilter = "";
@@ -265,27 +265,27 @@ public class DownloadActivity extends BaseDownloadActivity {
 		boolean indeterminate = true;
 		int percent = 0;
 		String message = "";
-		if(!isFinished) {
+		if (!isFinished) {
 			indeterminate = basicProgressAsyncTask.isIndeterminate();
 			message = basicProgressAsyncTask.getDescription();
-			if(!indeterminate) {
+			if (!indeterminate) {
 				percent = basicProgressAsyncTask.getProgressPercentage();
 			}
 		}
-		if(visibleBanner != null) {
+		if (visibleBanner != null) {
 			visibleBanner.updateProgress(isFinished, indeterminate, percent, message);
 		}
-		if(!updateOnlyProgress) {
+		if (!updateOnlyProgress) {
 			updateDownloadButton();
 		}
-		
-		
+
+
 		// TODO delete after refactoring!
 		//needed when rotation is performed and progress can be null
 		if (progressView == null) {
 			return;
 		}
-		
+
 		if (updateOnlyProgress) {
 			if (basicProgressAsyncTask != null && !basicProgressAsyncTask.isIndeterminate()) {
 				progressPercent.setText(basicProgressAsyncTask.getProgressPercentage() + "%");
@@ -354,6 +354,13 @@ public class DownloadActivity extends BaseDownloadActivity {
 				}
 			}
 		}
+	}
+
+	@Override
+	public boolean startDownload(IndexItem item) {
+		final boolean b = super.startDownload(item);
+		visibleBanner.initFreeVersionBanner();
+		return b;
 	}
 
 	@Override
@@ -612,14 +619,14 @@ public class DownloadActivity extends BaseDownloadActivity {
 
 		}
 	}
-	
-	
+
+
 	public void initFreeVersionBanner(View header) {
 		visibleBanner = new BannerAndDownloadFreeVersion(header, this);
 		updateProgress(true);
 	}
-	
-	
+
+
 	public void showDialog(FragmentActivity activity, DialogFragment fragment) {
 		FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
 		Fragment prev = activity.getSupportFragmentManager().findFragmentByTag("dialog");
@@ -653,14 +660,19 @@ public class DownloadActivity extends BaseDownloadActivity {
 		}
 	}
 
-	public static class BannerAndDownloadFreeVersion  {
+	public static class BannerAndDownloadFreeVersion {
 		private final View freeVersionBanner;
 		private final View downloadProgressLayout;
 		private final ProgressBar progressBar;
 		private final TextView leftTextView;
 		private final TextView rightTextView;
 		private final Context ctx;
+		private final boolean shouldShowFreeVersionBanner;
+		private final ProgressBar downloadsLeftProgressBar;
+		private final View buttonsLinearLayout;
+		private final TextView freeVersionDescriptionTextView;
 		private OsmandApplication application;
+		private final TextView downloadsLeftTextView;
 
 		public BannerAndDownloadFreeVersion(View view, Context ctx) {
 			this.ctx = ctx;
@@ -669,21 +681,30 @@ public class DownloadActivity extends BaseDownloadActivity {
 			progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
 			leftTextView = (TextView) view.findViewById(R.id.leftTextView);
 			rightTextView = (TextView) view.findViewById(R.id.rightTextView);
-			application = (OsmandApplication) ctx.getApplicationContext(); 
-			onCreateBanner(view);
+			application = (OsmandApplication) ctx.getApplicationContext();
+			shouldShowFreeVersionBanner = Version.isFreeVersion(application)
+					|| application.getSettings().SHOULD_SHOW_FREE_VERSION_BANNER.get();
+			initFreeVersionBanner();
+			downloadsLeftTextView = (TextView) freeVersionBanner.findViewById(R.id.downloadsLeftTextView);
+					downloadsLeftProgressBar = (ProgressBar) freeVersionBanner.findViewById(R.id.downloadsLeftProgressBar);
+			buttonsLinearLayout = freeVersionBanner.findViewById(R.id.buttonsLinearLayout);
+			freeVersionDescriptionTextView = (TextView) freeVersionBanner
+					.findViewById(R.id.freeVersionDescriptionTextView);
+
 		}
-		
+
 		public void updateProgress(boolean isFinished, boolean indeterminate, int percent, String message) {
-			if(isFinished) {
+			if (isFinished) {
 				downloadProgressLayout.setVisibility(View.GONE);
-				freeVersionBanner.setVisibility(View.VISIBLE);
+				// TODO
+//				freeVersionBanner.setVisibility(View.VISIBLE);
 			} else {
 				if (freeVersionBanner.getVisibility() == View.VISIBLE) {
 					freeVersionBanner.setVisibility(View.GONE);
 				}
 				downloadProgressLayout.setVisibility(View.VISIBLE);
 				progressBar.setIndeterminate(indeterminate);
-				if(indeterminate) {
+				if (indeterminate) {
 					// TODO
 					leftTextView.setText(message);
 				} else {
@@ -694,36 +715,18 @@ public class DownloadActivity extends BaseDownloadActivity {
 					rightTextView.setText(percent + "%");
 				}
 			}
-			
+
 		}
 
-		private void onCreateBanner(View view) {
-			OsmandSettings settings = application.getSettings();
-			if (!Version.isFreeVersion(application) && !settings.SHOULD_SHOW_FREE_VERSION_BANNER.get()) {
+		private void initFreeVersionBanner() {
+			if (!shouldShowFreeVersionBanner) {
 				freeVersionBanner.setVisibility(View.GONE);
 				return;
 			}
-
-			TextView downloadsLeftTextView = (TextView) view.findViewById(R.id.downloadsLeftTextView);
-			final int downloadsLeft = BaseDownloadActivity.MAXIMUM_AVAILABLE_FREE_DOWNLOADS
-					- settings.NUMBER_OF_FREE_DOWNLOADS.get();
-			downloadsLeftTextView.setText(ctx.getString(R.string.downloads_left_template, downloadsLeft));
-			
-			
-			final TextView freeVersionDescriptionTextView = (TextView) view
-					.findViewById(R.id.freeVersionDescriptionTextView);
+			downloadsLeftProgressBar.setMax(BaseDownloadActivity.MAXIMUM_AVAILABLE_FREE_DOWNLOADS);
 			freeVersionDescriptionTextView.setText(ctx.getString(R.string.free_version_message,
 					BaseDownloadActivity.MAXIMUM_AVAILABLE_FREE_DOWNLOADS));
-
-			
-			View buttonsLinearLayout = view.findViewById(R.id.buttonsLinearLayout);
-			freeVersionBanner.setOnClickListener(new ToggleCollapseFreeVersionBanner(freeVersionDescriptionTextView,
-					buttonsLinearLayout));
-
-			ProgressBar downloadsLeftProgressBar = (ProgressBar) view.findViewById(R.id.downloadsLeftProgressBar);
-			downloadsLeftProgressBar.setProgress(settings.NUMBER_OF_FREE_DOWNLOADS.get());
-
-			view.findViewById(R.id.getFullVersionButton).setOnClickListener(new View.OnClickListener() {
+			freeVersionBanner.findViewById(R.id.getFullVersionButton).setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					BaseDownloadActivity context = (BaseDownloadActivity) v.getContext();
@@ -735,9 +738,21 @@ public class DownloadActivity extends BaseDownloadActivity {
 					}
 				}
 			});
-			view.findViewById(R.id.laterButton).setOnClickListener(
-					new ToggleCollapseFreeVersionBanner(freeVersionDescriptionTextView, buttonsLinearLayout));			
+			freeVersionBanner.findViewById(R.id.laterButton).setOnClickListener(
+					new ToggleCollapseFreeVersionBanner(freeVersionDescriptionTextView, buttonsLinearLayout));
+		}
+
+		private void updateFreeVersionBanner() {
+			if (!shouldShowFreeVersionBanner) return;
+			OsmandSettings settings = application.getSettings();
+			downloadsLeftProgressBar.setProgress(settings.NUMBER_OF_FREE_DOWNLOADS.get());
+			final int downloadsLeft = BaseDownloadActivity.MAXIMUM_AVAILABLE_FREE_DOWNLOADS
+					- settings.NUMBER_OF_FREE_DOWNLOADS.get();
+			downloadsLeftTextView.setText(ctx.getString(R.string.downloads_left_template, downloadsLeft));
+			// TODO review logic
+			freeVersionBanner.setOnClickListener(new ToggleCollapseFreeVersionBanner(freeVersionDescriptionTextView,
+					buttonsLinearLayout));
 		}
 	}
-	
+
 }
