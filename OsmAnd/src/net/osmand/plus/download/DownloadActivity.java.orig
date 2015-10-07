@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
 import android.support.v4.view.ViewPager;
 import android.view.MenuItem;
@@ -39,8 +38,11 @@ import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.activities.OsmandExpandableListFragment;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.base.BasicProgressAsyncTask;
-import net.osmand.plus.download.items.RegionDialogFragment;
+<<<<<<< HEAD
 import net.osmand.plus.download.items.SearchDialogFragment;
+=======
+import net.osmand.plus.download.items.RegionDialogFragment;
+>>>>>>> 123c270bc595f997b400d0de3681e6ab22f427cf
 import net.osmand.plus.download.items.WorldItemsFragment;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
