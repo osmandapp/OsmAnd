@@ -118,7 +118,6 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 					listAdapter.add(getResources().getString(R.string.voices), voicePromptsItems);
 				}
 			}
-			//listAdapter.add("Voice promts", null);
 		}
 	}
 

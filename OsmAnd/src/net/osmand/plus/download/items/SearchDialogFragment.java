@@ -5,13 +5,11 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
-import android.widget.SearchView;
 import android.widget.RelativeLayout.LayoutParams;
+import android.widget.SearchView;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -60,7 +58,6 @@ public class SearchDialogFragment extends DialogFragment {
 		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
 				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		params.setMargins(0, 0, 0, 0);
-		search.setQueryHint("Enter map name");
 		search.setLayoutParams(params);
 		toolbar.addView(search);
 
@@ -106,7 +103,6 @@ public class SearchDialogFragment extends DialogFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		//search.setIconifiedByDefault(false);
 		search.setIconified(false);
 	}
 
