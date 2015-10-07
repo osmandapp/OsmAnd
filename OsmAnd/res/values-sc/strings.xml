@@ -2126,4 +2126,9 @@
     <string name="activate_srtm_plugin">Pro piaghere allue su plugin SRTM</string>
     <string name="later">Prus a tardu</string>
     <string name="get_full_version">Còmpora sa versione cumpleta</string>
-</resources>
+<string name="regions">Regiones</string>
+    <string name="additional_maps">Mapas agiuntivas</string>
+    <string name="region_maps">Mapas regionales</string>
+    <string name="world_maps">Mapas mundiales</string>
+    <string name="world_regions">Regiones de su mundu</string>
+    </resources>
