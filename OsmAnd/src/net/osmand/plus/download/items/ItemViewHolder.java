@@ -115,6 +115,7 @@ public class ItemViewHolder {
 			}
 		}
 
+		descrTextView.setVisibility(View.VISIBLE);
 		if (!showTypeInTitle && (indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE ||
 				indexItem.getType() == DownloadActivityType.HILLSHADE_FILE) && srtmDisabled) {
 			descrTextView.setText(indexItem.getType().getString(context));
@@ -188,10 +189,8 @@ public class ItemViewHolder {
 				}
 				stringBuilder.append(activityType.getString(context));
 			}
-			descrTextView.setText(stringBuilder.toString());
-		} else {
-			descrTextView.setText(R.string.shared_string_others);
 		}
+		descrTextView.setVisibility(View.GONE);
 		leftImageView.setImageDrawable(getContextIcon(context, R.drawable.ic_map));
 		rightImageButton.setVisibility(View.GONE);
 		progressBar.setVisibility(View.GONE);

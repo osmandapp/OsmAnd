@@ -46,7 +46,8 @@
                 android:maxLines="25"
                 android:textColor="?android:textColorSecondary"
                 android:textSize="@dimen/default_sub_text_size"
-                tools:text="Map, Contour Lines, Wikipedia"/>
+                tools:text="Map, Contour Lines, Wikipedia"
+                tools:visibility="gone"/>
 
             <ProgressBar
                 android:id="@+id/progressBar"
