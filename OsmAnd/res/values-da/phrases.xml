@@ -262,7 +262,7 @@
         <string name="poi_research">Forskning</string>
         <string name="poi_it">IT kontor</string>
         <string name="poi_newspaper">Avisredaktion</string>
-        <string name="poi_architect">Arkitekt</string>
+        <string name="poi_architect">Arkitektkontor</string>
         <string name="poi_advertising_agency">Reklamebureau</string>
         <string name="poi_educational_institution">Uddannelsesinstitution</string>
         <string name="poi_studio">Lydstudio</string>
@@ -1860,5 +1860,30 @@
 	<string name="poi_artwork_type_graffiti">Kunstværk: graffiti</string>
 	<string name="poi_artwork_type_stele">Kunstværk: stele</string>
 	<string name="poi_artwork_type_fountain">Kunstværk: springvand</string>
+
+<string name="poi_width">Bredde</string>
+
+	<string name="poi_architect_name">Arkitekt</string>
+
+	<string name="poi_architecture_modern">Arkitektur: moderne</string>
+	<string name="poi_architecture_stalinist_neoclassicism">Arkitektur: stalinistisk nyklassicisme</string>
+	<string name="poi_architecture_eclectic">Arkitektur: eklektisk</string>
+	<string name="poi_architecture_new_objectivity">Arkitektur: nye objektivitet</string>
+	<string name="poi_architecture_contemporary">Arkitektur: moderne</string>
+	<string name="poi_architecture_constructivism">Arkitektur: konstruktivisme</string>
+	<string name="poi_architecture_umgebinde">Arkitektur: umgebinde</string>
+	<string name="poi_architecture_timber_frame">Arkitektur: træskelet</string>
+	<string name="poi_architecture_art_nouveau">Arkitektur: art nouveau</string>
+	<string name="poi_architecture_neoclassicism">Arkitektur: nyklassicisme</string>
+	<string name="poi_architecture_victorian">Arkitektur: victoriansk</string>
+	<string name="poi_architecture_brutalism">Arkitektur: brutalisme</string>
+	<string name="poi_architecture_classicism">Arkitektur: klassicisme</string>
+	<string name="poi_architecture_gothic">Arkitektur: gothic</string>
+	<string name="poi_architecture_oldrussian">Arkitektur: oldrussian</string>
+	<string name="poi_architecture_baroque">Arkitektur: barok</string>
+	<string name="poi_architecture_postconstructivism">Arkitektur: postkonstruktivisme</string>
+	<string name="poi_architecture_wilhelminian_style">Arkitektur: wilheminsk stil</string>
+	<string name="poi_architecture_renaissance">Arkitektur: renæssance</string>
+	<string name="poi_architecture_romanesque">Arkitektur: romansk</string>
 
 </resources>
