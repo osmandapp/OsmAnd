@@ -39,6 +39,7 @@ import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.activities.OsmandExpandableListFragment;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.base.BasicProgressAsyncTask;
+import net.osmand.plus.download.items.SearchDialogFragment;
 import net.osmand.plus.download.items.WorldItemsFragment;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
@@ -339,6 +340,10 @@ public class DownloadActivity extends BaseDownloadActivity {
 			if (f instanceof WorldItemsFragment) {
 				if (f.isAdded()) {
 					((WorldItemsFragment) f).onCategorizationFinished();
+				}
+			} else if (f instanceof SearchDialogFragment) {
+				if (f.isAdded()) {
+					((SearchDialogFragment) f).onCategorizationFinished();
 				}
 			}
 		}

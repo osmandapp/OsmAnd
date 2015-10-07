@@ -1,10 +1,5 @@
 package net.osmand.plus.download.items;
 
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.WorldRegion;
-import net.osmand.plus.download.DownloadActivity;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -12,6 +7,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.WorldRegion;
+import net.osmand.plus.download.DownloadActivity;
 
 public class RegionDialogFragment extends DialogFragment {
 	public static final String TAG = "RegionDialogFragment";
@@ -21,7 +22,7 @@ public class RegionDialogFragment extends DialogFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		boolean isLightTheme = ((OsmandApplication) getActivity().getApplication())
+		boolean isLightTheme = getMyApplication()
 				.getSettings().OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME;
 		int themeId = isLightTheme ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
 		setStyle(STYLE_NO_FRAME, themeId);
@@ -61,7 +62,7 @@ public class RegionDialogFragment extends DialogFragment {
 				toolbar.setTitle(region.getName());
 			}
 		}
-		((DownloadActivity)getActivity()).initFreeVersionBanner(view);
+		getDownloadActivity().initFreeVersionBanner(view);
 		return view;
 	}
 	
@@ -75,8 +76,12 @@ public class RegionDialogFragment extends DialogFragment {
 		return (OsmandApplication) getActivity().getApplication();
 	}
 
+	private DownloadActivity getDownloadActivity() {
+		return (DownloadActivity) getActivity();
+	}
+
 	public void onRegionSelected(String regionId) {
-		((DownloadActivity)getActivity()).showDialog(getActivity(), createInstance(regionId));
+		getDownloadActivity().showDialog(getActivity(), createInstance(regionId));
 	}
 
 	public static RegionDialogFragment createInstance(String regionId) {

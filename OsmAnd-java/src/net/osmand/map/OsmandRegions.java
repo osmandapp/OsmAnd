@@ -403,7 +403,7 @@ public class OsmandRegions {
 				if(locPrefix == null || locName == null) {
 					throw new IllegalStateException("There is no prefix registered for " + fullName + " (" + parentFullName + ") ");
 				}
-				fullNamesToLocaleNames.put(fullName, locPrefix + " " + locName);
+				fullNamesToLocaleNames.put(fullName, /*locPrefix + " " +*/ locName);
 				String index = fullNamesToLowercaseIndex.get(fullName);
 				String prindex = fullNamesToLowercaseIndex.get(parentFullName);
 				fullNamesToLowercaseIndex.put(fullName, index + " " + prindex);	

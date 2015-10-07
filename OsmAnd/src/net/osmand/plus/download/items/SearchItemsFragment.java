@@ -13,6 +13,8 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ListView;
 
+import net.osmand.Collator;
+import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
@@ -29,8 +31,11 @@ import net.osmand.plus.srtmplugin.SRTMPlugin;
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 public class SearchItemsFragment extends Fragment {
 	public static final String TAG = "SearchItemsFragment";
@@ -49,7 +54,7 @@ public class SearchItemsFragment extends Fragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.download_items_fragment, container, false);
+		View view = inflater.inflate(R.layout.download_search_items_fragment, container, false);
 
 		if (savedInstanceState != null) {
 			searchText = savedInstanceState.getString(SEARCH_TEXT_KEY);
@@ -73,7 +78,6 @@ public class SearchItemsFragment extends Fragment {
 		});
 
 		fillSearchItemsAdapter();
-		listAdapter.notifyDataSetChanged();
 
 		return view;
 	}
@@ -113,8 +117,25 @@ public class SearchItemsFragment extends Fragment {
 	private void fillSearchItemsAdapter() {
 		if (listAdapter != null) {
 			listAdapter.clear();
-			listAdapter.addWorldRegions(getMyApplication().getWorldRegion().getFlattenedSubregions());
-			listAdapter.addIndexItems(getDownloadActivity().getIndexFiles());
+			List<WorldRegion> flattenedList = getMyApplication().getWorldRegion().getFlattenedSubregions();
+			List<IndexItem> indexItems = getDownloadActivity().getIndexFiles();
+			if (flattenedList != null && flattenedList.size() > 0 &&
+					indexItems != null && indexItems.size() > 0) {
+				listAdapter.addWorldRegions(flattenedList);
+				listAdapter.addIndexItems(indexItems);
+				listAdapter.notifyDataSetChanged();
+			}
+		}
+	}
+
+	public void onCategorizationFinished() {
+		fillSearchItemsAdapter();
+	}
+
+	public void updateSearchText(String searchText) {
+		this.searchText = searchText;
+		if(listAdapter != null){
+			listAdapter.getFilter().filter(searchText);
 		}
 	}
 
@@ -229,7 +250,7 @@ public class SearchItemsFragment extends Fragment {
 			@Override
 			protected FilterResults performFiltering(CharSequence constraint) {
 				FilterResults results = new FilterResults();
-				if (constraint == null || constraint.length() == 0) {
+				if (constraint == null || constraint.length() < 2) {
 					results.values = new ArrayList<>();
 					results.count = 0;
 				} else {
@@ -251,21 +272,42 @@ public class SearchItemsFragment extends Fragment {
 					Context c = getDownloadActivity();
 
 					for (WorldRegion region : worldRegions) {
-						String indexLC = region.getName();
+						String indexLC = region.getName().toLowerCase();
 						if (isMatch(conds, false, indexLC)) {
 							filter.add(region);
 						}
 					}
 
 					for (IndexItem item : indexItems) {
-						String indexLC = osmandRegions.getDownloadNameIndexLowercase(item.getBasename());
-						if (indexLC == null) {
-							indexLC = item.getVisibleName(c, osmandRegions).toLowerCase();
-						}
+						String indexLC = item.getVisibleName(c, osmandRegions).toLowerCase();
 						if (isMatch(conds, false, indexLC)) {
 							filter.add(item);
 						}
 					}
+
+					final Collator collator = OsmAndCollator.primaryCollator();
+					Collections.sort(filter, new Comparator<Object>() {
+						@Override
+						public int compare(Object obj1, Object obj2) {
+
+							String str1;
+							String str2;
+
+							if (obj1 instanceof WorldRegion) {
+								str1 = ((WorldRegion) obj1).getName();
+							} else {
+								str1 = ((IndexItem) obj1).getVisibleName(getMyApplication(), osmandRegions);
+							}
+
+							if (obj2 instanceof WorldRegion) {
+								str2 = ((WorldRegion) obj2).getName();
+							} else {
+								str2 = ((IndexItem) obj2).getVisibleName(getMyApplication(), osmandRegions);
+							}
+
+							return collator.compare(str1, str2);
+						}
+					});
 
 					results.values = filter;
 					results.count = filter.size();
@@ -296,6 +338,7 @@ public class SearchItemsFragment extends Fragment {
 			@SuppressWarnings("unchecked")
 			@Override
 			protected void publishResults(CharSequence constraint, FilterResults results) {
+				items.clear();
 				List<Object> values = (List<Object>) results.values;
 				if (values != null && !values.isEmpty()) {
 					items.addAll(values);
