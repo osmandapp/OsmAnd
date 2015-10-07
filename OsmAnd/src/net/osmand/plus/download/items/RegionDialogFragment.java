@@ -1,10 +1,6 @@
 package net.osmand.plus.download.items;
 
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.WorldRegion;
-import net.osmand.plus.download.DownloadActivity;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -13,10 +9,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class RegionDialogFragment extends DialogFragment {
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.WorldRegion;
+import net.osmand.plus.download.DownloadActivity;
+
+public class RegionDialogFragment extends DialogFragment{
 	public static final String TAG = "RegionDialogFragment";
 	private static final String REGION_ID_DLG_KEY = "world_region_dialog_key";
 	private String regionId;
+	private DialogDismissListener dialogDismissListener;
+	private DialogDismissListener listener;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -61,10 +65,16 @@ public class RegionDialogFragment extends DialogFragment {
 				toolbar.setTitle(region.getName());
 			}
 		}
-		((DownloadActivity)getActivity()).initFreeVersionBanner(view);
+		((DownloadActivity) getActivity()).initFreeVersionBanner(view);
+		listener = new DialogDismissListener() {
+			@Override
+			public void onDialogDismissed() {
+				((DownloadActivity) getActivity()).initFreeVersionBanner(view);
+			}
+		};
 		return view;
 	}
-	
+
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		outState.putString(REGION_ID_DLG_KEY, regionId);
@@ -76,7 +86,9 @@ public class RegionDialogFragment extends DialogFragment {
 	}
 
 	public void onRegionSelected(String regionId) {
-		((DownloadActivity)getActivity()).showDialog(getActivity(), createInstance(regionId));
+		final RegionDialogFragment regionDialogFragment = createInstance(regionId);
+		regionDialogFragment.setOnDismissListener(listener);
+		((DownloadActivity) getActivity()).showDialog(getActivity(), regionDialogFragment);
 	}
 
 	public static RegionDialogFragment createInstance(String regionId) {
@@ -85,5 +97,20 @@ public class RegionDialogFragment extends DialogFragment {
 		RegionDialogFragment fragment = new RegionDialogFragment();
 		fragment.setArguments(bundle);
 		return fragment;
+	}
+
+	@Override
+	public void onDismiss(DialogInterface dialog) {
+		super.onDismiss(dialog);
+		if (dialogDismissListener != null)
+			dialogDismissListener.onDialogDismissed();
+	}
+
+	public void setOnDismissListener(DialogDismissListener listener) {
+		this.dialogDismissListener = listener;
+	}
+
+	public interface DialogDismissListener {
+		void onDialogDismissed();
 	}
 }

@@ -2,12 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
-              android:orientation="vertical"
-    android:background="?attr/ctx_menu_info_view_bg">
-
-    <include layout="@layout/free_version_banner"/>
-
-    <include layout="@layout/progress_with_two_texts"/>
-
+              android:background="?attr/ctx_menu_info_view_bg"
+              android:orientation="vertical">
     <include layout="@layout/download_items_list"/>
 </LinearLayout>
