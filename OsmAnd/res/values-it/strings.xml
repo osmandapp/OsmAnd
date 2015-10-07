@@ -2220,4 +2220,5 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="region_maps">Mappe regionali</string>
     <string name="world_maps">Mappe mondiali</string>
     <string name="world_regions">Regioni mondiali</string>
-    </resources>
+    <string name="downloads">Download</string>
+</resources>
