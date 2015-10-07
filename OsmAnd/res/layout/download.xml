@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:id="@+id/mainLayout">
 
     <net.osmand.plus.views.controls.PagerSlidingTabStrip
         android:id="@+id/sliding_tabs"
@@ -11,83 +12,10 @@
         android:layout_height="@dimen/list_item_height"
         android:background="?attr/colorPrimary" />
 
-    <LinearLayout
-        android:id="@+id/ProgressView"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:visibility="gone"
-        tools:visibility="visible" >
 
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="3dp"
-            android:layout_marginRight="5dp"
-            android:gravity="center_vertical|left"
-            android:orientation="horizontal" >
+    <include layout="@layout/free_version_banner"/>
 
-            <ProgressBar
-                android:id="@+id/IndeterminateProgressBar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:indeterminate="true"
-                android:indeterminateOnly="true"
-                android:visibility="gone"
-                tools:visibility="visible" />
-
-            <TextView
-                android:id="@+id/ProgressPercent"
-                android:layout_width="48dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:gravity="right|center_vertical"
-                android:maxLines="1"
-                android:text=""
-                android:textSize="@dimen/default_desc_text_size"
-                tools:text="@string/lorem_ipsum" />
-
-            <TextView
-                android:id="@+id/ProgressMessage"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="3dp"
-                android:layout_toLeftOf="@id/ProgressPercent"
-                android:layout_toRightOf="@id/IndeterminateProgressBar"
-                android:ellipsize="end"
-                android:gravity="left|center_vertical"
-                android:singleLine="true"
-                android:text=""
-                android:textSize="@dimen/default_desc_text_size"
-                tools:text="@string/lorem_ipsum" />
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal" >
-
-            <ProgressBar
-                android:id="@+id/memory_progress"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                tools:progress="50"/>
-
-            <ImageView
-                android:id="@+id/Cancel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_action_remove_dark" />
-        </LinearLayout>
-    </LinearLayout>
+    <include layout="@layout/progress_with_two_texts"/>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/pager"

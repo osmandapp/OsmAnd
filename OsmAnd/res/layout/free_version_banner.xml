@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/freeVersionBanner"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:osmand="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/freeVersionBanner"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -12,6 +12,7 @@
     tools:showIn="@layout/local_index_fragment_header">
 
     <LinearLayout
+        android:id="@+id/freeVersionBannerTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="4dp">
@@ -47,8 +48,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:max="10"
-            tools:progress="5"
-            android:progressDrawable="@drawable/number_of_downloads_progress_bar_drawable"/>
+            android:progressDrawable="@drawable/number_of_downloads_progress_bar_drawable"
+            android:saveEnabled="false"
+            tools:progress="5"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -162,16 +164,16 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            osmand:textAllCapsCompat="true"
-            android:text="@string/get_full_version"/>
+            android:text="@string/get_full_version"
+            osmand:textAllCapsCompat="true"/>
 
         <net.osmand.plus.widgets.ButtonEx
             android:id="@+id/laterButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            osmand:textAllCapsCompat="true"
-            android:text="@string/later"/>
+            android:text="@string/later"
+            osmand:textAllCapsCompat="true"/>
 
     </LinearLayout>
 </LinearLayout>

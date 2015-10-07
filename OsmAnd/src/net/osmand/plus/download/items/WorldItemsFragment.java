@@ -70,8 +70,6 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 
 		onCategorizationFinished();
 
-		((DownloadActivity) getActivity()).initFreeVersionBanner(view);
-
 		return view;
 	}
 
@@ -127,7 +125,9 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 		if (groupPosition == worldRegionsIndex) {
 			WorldRegion region = (WorldRegion)listAdapter.getChild(groupPosition, childPosition);
-			((DownloadActivity)getActivity()).showDialog(getActivity(), RegionDialogFragment.createInstance(region.getRegionId()));
+			final RegionDialogFragment regionDialogFragment = RegionDialogFragment.createInstance(region.getRegionId());
+			regionDialogFragment.setOnDismissListener((DownloadActivity) getActivity());
+			((DownloadActivity)getActivity()).showDialog(getActivity(), regionDialogFragment);
 			return true;
 		} else if (groupPosition == voicePromptsIndex) {
 			if (childPosition == voicePromptsItemsRecordedSubIndex) {
