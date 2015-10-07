@@ -2122,4 +2122,6 @@
     <string name="routing_attr_avoid_shuttle_train_name">Избегать пригородных поездов</string>
 	<string name="routing_attr_avoid_shuttle_train_description">Избегать пригородных поездов</string>
     <string name="traffic_warning_hazard">Опасность</string>
+    <string name="regions">Регионы</string>
+    <string name="additional_maps">Дополнительные карты</string>
     </resources>
