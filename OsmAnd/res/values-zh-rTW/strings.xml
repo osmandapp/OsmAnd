@@ -2148,4 +2148,6 @@
 <string name="hillshade_layer_disabled">地形陰影圖層停用</string>
     <string name="activate_seamarks_plugin">請啟動航線標識外掛元件</string>
     <string name="activate_srtm_plugin">請啟動 SRTM 外掛元件</string>
+<string name="later">接著</string>
+    <string name="get_full_version">獲取完整版</string>
 </resources>
