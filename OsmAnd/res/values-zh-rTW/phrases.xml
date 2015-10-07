@@ -1665,4 +1665,12 @@
 	<string name="poi_toilets_access_community">洗手間進出：社區</string>
 	<string name="poi_toilets_access_public">洗手間進出：公共</string>
 
+	<string name="poi_diaper_room">尿布更換室</string>
+
+	<string name="poi_diaper_yes">尿布更換台</string>
+	<string name="poi_diaper_no">無尿布更換台</string>
+	<string name="poi_maxstay">停車時限</string>
+
+	<string name="poi_vending_parking_tickets">停車票卡</string>
+	<string name="poi_vending_cigarettes">香菸</string>
 	</resources>
