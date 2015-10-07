@@ -61,6 +61,17 @@ public class SearchDialogFragment extends DialogFragment {
 		search.setLayoutParams(params);
 		toolbar.addView(search);
 
+		search.setOnCloseListener(new SearchView.OnCloseListener() {
+			@Override
+			public boolean onClose() {
+				if (search.getQuery().length() == 0) {
+					dismiss();
+					return true;
+				}
+				return false;
+			}
+		});
+		
 		search.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
 			@Override
 			public void onFocusChange(View v, boolean hasFocus) {

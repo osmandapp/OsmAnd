@@ -35,6 +35,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class SearchItemsFragment extends Fragment {
@@ -268,22 +269,45 @@ public class SearchItemsFragment extends Fragment {
 							conds.add(cond);
 						}
 					}
-					List<Object> filter = new ArrayList<>();
-					Context c = getDownloadActivity();
 
+					List<Object> filter = new ArrayList<>();
+					List<WorldRegion> regions = new ArrayList<>();
 					for (WorldRegion region : worldRegions) {
 						String indexLC = region.getName().toLowerCase();
 						if (isMatch(conds, false, indexLC)) {
-							filter.add(region);
+							regions.add(region);
 						}
 					}
 
+					for (WorldRegion region : regions) {
+						Map<String, IndexItem> indexItems = getDownloadActivity().getIndexItemsByRegion(region);
+						List<IndexItem> items = new LinkedList<>();
+
+						if (region.getSubregions().size() > 0) {
+							filter.add(region);
+						}
+						for (IndexItem item : indexItems.values()) {
+							items.add(item);
+						}
+
+						if (items.size() > 1) {
+							if (!filter.contains(region)) {
+								filter.add(region);
+							}
+						} else {
+							filter.addAll(items);
+						}
+					}
+
+					/*
+					Context c = getDownloadActivity();
 					for (IndexItem item : indexItems) {
 						String indexLC = item.getVisibleName(c, osmandRegions).toLowerCase();
 						if (isMatch(conds, false, indexLC)) {
 							filter.add(item);
 						}
 					}
+					*/
 
 					final Collator collator = OsmAndCollator.primaryCollator();
 					Collections.sort(filter, new Comparator<Object>() {
