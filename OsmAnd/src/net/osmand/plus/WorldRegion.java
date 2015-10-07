@@ -6,7 +6,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.download.DownloadActivityType;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -15,7 +14,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-public class WorldRegion implements Serializable {
+public class WorldRegion {
 
 	public static final String AFRICA_REGION_ID = "africa";
 	public static final String ASIA_REGION_ID = "asia";
