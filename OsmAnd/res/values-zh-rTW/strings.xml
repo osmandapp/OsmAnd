@@ -2155,4 +2155,5 @@
     <string name="region_maps">地區地圖</string>
     <string name="world_maps">世界地圖</string>
     <string name="world_regions">全球地區</string>
-    </resources>
+    <string name="downloads">下載</string>
+</resources>
