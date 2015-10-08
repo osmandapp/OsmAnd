@@ -43,7 +43,8 @@ public class SelectCategoryDialogFragment extends DialogFragment {
 				icon.setImageDrawable(getIcon(getActivity(), R.drawable.ic_action_folder));
 			}
 			Button button = (Button)itemView.findViewById(R.id.button);
-			button.setText(category.name);
+			String name = category.name.length() == 0 ? getString(R.string.shared_string_favorites) : category.name;
+			button.setText(name);
 			button.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {

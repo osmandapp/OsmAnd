@@ -169,7 +169,7 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginRight="16dp"
                         android:layout_marginLeft="8dp"
-                        android:completionThreshold="1"
+                        android:editable="false"
                         android:drawableRight="@drawable/ic_action_arrow_drop_down"/>
 
                 </LinearLayout>

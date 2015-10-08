@@ -27,11 +27,11 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 		this.fav = fav;
 	}
 
-	private void buildRow(View view, int iconId, String text, int textColor, boolean isDescription) {
-		buildRow(view, getRowIcon(iconId), text, textColor, isDescription);
+	private void buildRow(View view, int iconId, String text, int textColor) {
+		buildRow(view, getRowIcon(iconId), text, textColor);
 	}
 
-	private void buildRow(final View view, Drawable icon, String text, int textColor, final boolean isDescription) {
+	private void buildRow(final View view, Drawable icon, String text, int textColor) {
 		boolean light = app.getSettings().isLightContent();
 
 		LinearLayout ll = new LinearLayout(view.getContext());
@@ -65,28 +65,15 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 		LinearLayout.LayoutParams llTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		llTextParams.setMargins(0, isFirstRow() ? dpToPx(8f) - dpToPx(SHADOW_HEIGHT_BOTTOM_DP) : dpToPx(8f), 0, dpToPx(8f));
 		textView.setLayoutParams(llTextParams);
-		textView.setTextSize(16); // todo: create constant
+		textView.setTextSize(16);
 		textView.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_info_text_light : R.color.ctx_menu_info_text_dark));
 
 		textView.setAutoLinkMask(Linkify.ALL);
 		textView.setLinksClickable(true);
-//		if (isDescription) {
-//			textView.setMinLines(1);
-//			textView.setMaxLines(5);
-//		}
 		textView.setText(text);
 		if (textColor > 0) {
 			textView.setTextColor(view.getResources().getColor(textColor));
 		}
-//		if (isDescription) {
-//			textView.setOnClickListener(new View.OnClickListener() {
-//				@Override
-//				public void onClick(View v) {
-//					//todo: implement edit fav description dialog
-//					//POIMapLayer.showDescriptionDialog(view.getContext(), app, fav);
-//				}
-//			});
-//		}
 
 		LinearLayout.LayoutParams llTextViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		llTextViewParams.setMargins(0, 0, dpToPx(10f), 0);
@@ -122,11 +109,11 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 		super.build(view);
 
 		if (!Algorithms.isEmpty(fav.getDescription())) {
-			buildRow(view, R.drawable.ic_action_note_dark, fav.getDescription(), 0, true);
+			buildRow(view, R.drawable.ic_action_note_dark, fav.getDescription(), 0);
 		}
 
 		for (PlainMenuItem item : plainMenuItems) {
-			buildRow(view, item.getIconId(), item.getText(), 0, false);
+			buildRow(view, item.getIconId(), item.getText(), 0);
 		}
 	}
 }

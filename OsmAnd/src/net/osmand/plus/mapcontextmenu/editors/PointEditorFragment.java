@@ -15,14 +15,12 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -30,8 +28,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.editors.dialogs.SelectCategoryDialogFragment;
 import net.osmand.plus.widgets.AutoCompleteTextViewEx;
 import net.osmand.util.Algorithms;
-
-import java.util.List;
 
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 
@@ -107,29 +103,14 @@ public abstract class PointEditorFragment extends Fragment {
 		nameEdit.setText(getNameInitValue());
 		AutoCompleteTextViewEx categoryEdit = (AutoCompleteTextViewEx) view.findViewById(R.id.category_edit);
 		categoryEdit.setText(getCategoryInitValue());
-		categoryEdit.setThreshold(1);
-		final FavouritesDbHelper helper = getMyApplication().getFavorites();
-		List<FavouritesDbHelper.FavoriteGroup> gs = helper.getFavoriteGroups();
-		String[] list = new String[gs.size()];
-		for(int i = 0; i < list.length; i++) {
-			list[i] =gs.get(i).name;
-		}
-		categoryEdit.setAdapter(new ArrayAdapter<>(getMapActivity(), R.layout.list_textview, list));
 		categoryEdit.setOnTouchListener(new View.OnTouchListener() {
 			@Override
 			public boolean onTouch(final View v, MotionEvent event) {
-				final EditText editText = (EditText) v;
-				final int DRAWABLE_RIGHT = 2;
 				if (event.getAction() == MotionEvent.ACTION_UP) {
-					if (event.getX() >= (editText.getRight()
-							- editText.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width()
-							- editText.getPaddingRight())) {
-
-						DialogFragment dialogFragment =
-								SelectCategoryDialogFragment.createInstance();
-						dialogFragment.show(getChildFragmentManager(), "SelectCategoryDialogFragment");
-						return true;
-					}
+					DialogFragment dialogFragment =
+							SelectCategoryDialogFragment.createInstance();
+					dialogFragment.show(getChildFragmentManager(), "SelectCategoryDialogFragment");
+					return true;
 				}
 				return false;
 			}
@@ -193,7 +174,8 @@ public abstract class PointEditorFragment extends Fragment {
 
 	public void setCategory(String name) {
 		AutoCompleteTextViewEx categoryEdit = (AutoCompleteTextViewEx) getView().findViewById(R.id.category_edit);
-		categoryEdit.setText(name);
+		String n = name.length() == 0 ? getString(R.string.shared_string_favorites) : name;
+		categoryEdit.setText(n);
 		ImageView categoryImage = (ImageView) getView().findViewById(R.id.category_image);
 		categoryImage.setImageDrawable(getCategoryIcon());
 	}
@@ -247,7 +229,9 @@ public abstract class PointEditorFragment extends Fragment {
 
 	public String getCategoryTextValue() {
 		AutoCompleteTextViewEx categoryEdit = (AutoCompleteTextViewEx) getView().findViewById(R.id.category_edit);
-		return categoryEdit.getText().toString().trim();
+		String name = categoryEdit.getText().toString().trim();
+		return name.equals(getString(R.string.shared_string_favorites)) ? "" : name;
+
 	}
 
 	public String getDescriptionTextValue() {
