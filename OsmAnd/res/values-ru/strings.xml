@@ -2087,7 +2087,7 @@
 	<string name="please_specify_poi_type">Пожалуйста, укажите тип POI.</string>
 <string name="rendering_value_boldOutline_name">Жирный контур</string>
     <string name="working_days">Рабочие дни</string>
-	<string name="favourites">Избранное</string>
+	<string name="favourites">Избранные</string>
 <string name="saved_at_time">Успешно сохранён в: %1$s</string>
 <string name="poi_deleted_localy">POI будут удалены после того как вы загрузите ваши изменения</string>
 	<string name="show_gpx">Показать GPX</string>
@@ -2124,4 +2124,7 @@
     <string name="traffic_warning_hazard">Опасность</string>
     <string name="regions">Регионы</string>
     <string name="additional_maps">Дополнительные карты</string>
-    </resources>
+    <string name="world_maps">Карты мира</string>
+    <string name="world_regions">Регионы мира</string>
+    <string name="favourites_context_menu_add">Добавить избранное</string>
+	</resources>

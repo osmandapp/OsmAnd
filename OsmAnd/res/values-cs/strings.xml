@@ -2102,4 +2102,9 @@ s často kladenými otázkami.</string>
     <string name="downloading_number_of_files">Stahování - soubor %1$d</string>
     <string name="buy">KOUPIT</string>
 <string name="hillshade_layer_disabled">Vrstva stínování vypnutá</string>
+    <string name="regions">Regiony</string>
+    <string name="additional_maps">Další mapy</string>
+    <string name="region_maps">Mapy regionů</string>
+    <string name="world_maps">Světové mapy</string>
+    <string name="world_regions">Světové regiony</string>
     </resources>

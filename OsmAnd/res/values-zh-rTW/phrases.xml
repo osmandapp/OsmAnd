@@ -1656,14 +1656,14 @@
 	<string name="poi_female_no">禁止女性</string>
 	<string name="poi_indoor_yes">室內</string>
 	<string name="poi_indoor_no">戶外</string>
-	<string name="poi_toilets_yes">附洗手間</string>
-	<string name="poi_toilets_no">未附洗手間</string>
-	<string name="poi_toilets_wheelchair_yes">供輪椅進出洗手間：有</string>
-	<string name="poi_toilets_wheelchair_no">供輪椅進出洗手間：無</string>
-	<string name="poi_toilets_access_customers">洗手間進出：客戶</string>
-	<string name="poi_toilets_access_permissive">洗手間進出：容許</string>
-	<string name="poi_toilets_access_community">洗手間進出：社區</string>
-	<string name="poi_toilets_access_public">洗手間進出：公共</string>
+	<string name="poi_toilets_yes">附廁所</string>
+	<string name="poi_toilets_no">未附廁所</string>
+	<string name="poi_toilets_wheelchair_yes">供輪椅進出的廁所：有</string>
+	<string name="poi_toilets_wheelchair_no">供輪椅進出的廁所：無</string>
+	<string name="poi_toilets_access_customers">廁所的進出：客戶</string>
+	<string name="poi_toilets_access_permissive">廁所的進出：容許</string>
+	<string name="poi_toilets_access_community">廁所的進出：社區</string>
+	<string name="poi_toilets_access_public">廁所的進出：公共</string>
 
 	<string name="poi_diaper_room">尿布更換室</string>
 
@@ -1673,4 +1673,14 @@
 
 	<string name="poi_vending_parking_tickets">停車票卡</string>
 	<string name="poi_vending_cigarettes">香菸</string>
+	<string name="poi_vending_excrement_bags">糞便袋</string>
+	<string name="poi_vending_public_transport_tickets">公共交通票卡</string>
+	<string name="poi_vending_drinks">飲料</string>
+	<string name="poi_vending_sweets">糖果</string>
+	<string name="poi_vending_parcel_pickup_mail_in">包裹收集和郵遞</string>
+	<string name="poi_vending_condoms">保險套</string>
+	<string name="poi_vending_stamps">郵票</string>
+	<string name="poi_vending_bicycle_tube">自行車內胎</string>
+	<string name="poi_vending_food">食品</string>
+	<string name="poi_vending_drinks_food">飲料和食物</string>
 	</resources>
