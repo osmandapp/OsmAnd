@@ -1,2 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="poi_shop">দোকান</string>
+		<string name="poi_shop_food">খাবার দোকান</string>
+	<string name="poi_emergency">জরুরী</string>
+	<string name="poi_transportation">পরিবহন</string>
+		<string name="poi_road_obstacle">সড়ক বাঁধা</string>
+		<string name="poi_filling_station">তেল স্টেশন</string>
+		<string name="poi_personal_transport">ব্যক্তিগত পরিবহন</string>
+		<string name="poi_public_transport">গণপরিবহন</string>
+		<string name="poi_air_transport">বিমান পরিবহন</string>
+		<string name="poi_water_transport">জল পরিবহন</string>
+		<string name="poi_bicycle_transport">বাইসাইকেল পরিবহন</string>
+		</resources>
