@@ -1,5 +1,6 @@
 package net.osmand.plus.download;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
@@ -623,12 +624,12 @@ public class DownloadActivity extends BaseDownloadActivity implements RegionDial
 		private final TextView downloadsLeftTextView;
 		private final View laterButton;
 
-		private final Context ctx;
+		private final FragmentActivity ctx;
 		private final OsmandApplication application;
 		private final boolean shouldShowFreeVersionBanner;
 		private final View freeVersionBannerTitle;
 
-		public BannerAndDownloadFreeVersion(View view, Context ctx) {
+		public BannerAndDownloadFreeVersion(View view, final FragmentActivity ctx) {
 			this.ctx = ctx;
 			application = (OsmandApplication) ctx.getApplicationContext();
 			freeVersionBanner = view.findViewById(R.id.freeVersionBanner);
@@ -649,6 +650,12 @@ public class DownloadActivity extends BaseDownloadActivity implements RegionDial
 
 			initFreeVersionBanner();
 			updateFreeVersionBanner();
+			downloadProgressLayout.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					new ActiveDownloadsDialogFragment().show(ctx.getSupportFragmentManager(), "dialog");
+				}
+			});
 		}
 
 		public void updateProgress(int countedDownloads,
@@ -740,6 +747,17 @@ public class DownloadActivity extends BaseDownloadActivity implements RegionDial
 				buttonsLinearLayout.setVisibility(View.VISIBLE);
 				freeVersionBannerTitle.setVisibility(View.VISIBLE);
 			}
+		}
+	}
+
+	public static class ActiveDownloadsDialogFragment extends DialogFragment {
+		@NonNull
+		@Override
+		public Dialog onCreateDialog(Bundle savedInstanceState) {
+			AlertDialog.Builder builder = new Builder(getActivity());
+			builder.setTitle(R.string.downloads).setNegativeButton(R.string.shared_string_cancel, null);
+//			builder.setAdapter(DownloadActivity.downloadListIndexThread.g)
+			return super.onCreateDialog(savedInstanceState);
 		}
 	}
 }

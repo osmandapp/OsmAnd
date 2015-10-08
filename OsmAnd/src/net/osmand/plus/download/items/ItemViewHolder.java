@@ -70,7 +70,6 @@ public class ItemViewHolder {
 		rightButton = (Button) convertView.findViewById(R.id.rightButton);
 		progressBar = (ProgressBar) convertView.findViewById(R.id.progressBar);
 		mapDateTextView = (TextView) convertView.findViewById(R.id.mapDateTextView);
-		;
 
 		TypedValue typedValue = new TypedValue();
 		Resources.Theme theme = convertView.getContext().getTheme();
@@ -196,9 +195,8 @@ public class ItemViewHolder {
 
 		if (indexFileNames != null && indexItem.isAlreadyDownloaded(indexFileNames)) {
 			boolean outdated = false;
-			String date = null;
+			String date;
 			if (indexItem.getType() == DownloadActivityType.HILLSHADE_FILE) {
-				// TODO write logic for outdated
 				date = indexItem.getDate(dateFormat);
 			} else {
 				String sfName = indexItem.getTargetFileName();
@@ -212,7 +210,6 @@ public class ItemViewHolder {
 			int colorId = outdated ? R.color.color_distance : R.color.color_ok;
 			mapDateTextView.setTextColor(context.getResources().getColor(colorId));
 		}
-
 	}
 
 	public void bindRegion(WorldRegion region, DownloadActivity context) {
@@ -227,6 +224,8 @@ public class ItemViewHolder {
 			}
 		}
 		descrTextView.setVisibility(View.GONE);
+		mapDateTextView.setVisibility(View.GONE);
+
 		leftImageView.setImageDrawable(getContextIcon(context, R.drawable.ic_map));
 		rightImageButton.setVisibility(View.GONE);
 		progressBar.setVisibility(View.GONE);

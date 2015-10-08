@@ -1,7 +1,5 @@
 package net.osmand.plus.download;
 
-
-
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
