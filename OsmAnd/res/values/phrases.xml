@@ -1842,4 +1842,35 @@
 	<string name="poi_architecture_renaissance">Architecture: renaissance</string>
 	<string name="poi_architecture_romanesque">Architecture: romanesque</string>
 
+	<string name="poi_tunnel_waterway">Water tunnel</string>
+	<string name="poi_tunnel_car">Road tunnel</string>
+	<string name="poi_tunnel_pedestrian">Pedestrian tunnel</string>
+	<string name="poi_tunnel_railway">Railway tunnel</string>
+	<string name="poi_bridge_car">Road bridge</string>
+	<string name="poi_bridge_pedestrian">Pedestrian bridge</string>
+	<string name="poi_bridge_bicycle">Bicycle bridge</string>
+	<string name="poi_bridge_railway">Railway bridge</string>
+	<string name="poi_bridge_waterway">Waterway bridge</string>
+	<string name="poi_bridge_structure_beam">Bridge structure: beam</string>
+	<string name="poi_bridge_structure_simple_suspension">Bridge structure: simple suspension</string>
+	<string name="poi_bridge_structure_suspension">Bridge structure: suspension</string>
+	<string name="poi_bridge_structure_arch">Bridge structure: arch</string>
+	<string name="poi_bridge_structure_truss">Bridge structure: truss</string>
+	<string name="poi_bridge_structure_floating">Bridge structure: floating</string>
+	<string name="poi_bridge_structure_humpback">Bridge structure: humpback</string>
+	<string name="poi_bridge_structure_cable_stayed">Bridge structure: cable-stayed</string>
+	<string name="poi_bridge_structure_boardwalk">Bridge structure: boardwalk</string>
+	<string name="poi_bridge_structure_simple_wooden">Bridge structure: simple wooden</string>
+	<string name="poi_bridge_structure_viaduct">Bridge structure: viaduct</string>
+	<string name="poi_bridge_structure_aqueduct">Bridge structure: aqueduct</string>
+	<string name="poi_bridge_structure_log">Bridge structure: log</string>
+	<string name="poi_bridge_type_movable">Bridge type: movable</string>
+	<string name="poi_bridge_movable_bascule">Movable bridge type: bascule</string>
+	<string name="poi_bridge_movable_swing">Movable bridge type: swing</string>
+	<string name="poi_bridge_movable_lift">Movable bridge type: lift</string>
+	<string name="poi_bridge_movable_drawbridge">Movable bridge type: drawbridge</string>
+	<string name="poi_bridge_movable_submersible">Movable bridge type: submersible</string>
+	<string name="poi_bridge_movable_transporter">Movable bridge type: transporter</string>
+	<string name="poi_bridge_movable_retractable">Movable bridge type: retractable</string>
+
 </resources>
