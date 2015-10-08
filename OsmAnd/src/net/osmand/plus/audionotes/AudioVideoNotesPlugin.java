@@ -75,6 +75,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -129,7 +130,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	public final OsmandPreference<Boolean> SHOW_RECORDINGS;
 
 	private DataTileManager<Recording> recordings = new DataTileManager<AudioVideoNotesPlugin.Recording>(14);
-	private Map<String, Recording> recordingByFileName = new LinkedHashMap<String, Recording>();
+	private Map<String, Recording> recordingByFileName = Collections.synchronizedMap(new LinkedHashMap<String, Recording>());
 	private AudioNotesLayer audioNotesLayer;
 	private MapActivity activity;
 	private MediaRecorder mediaRec;
