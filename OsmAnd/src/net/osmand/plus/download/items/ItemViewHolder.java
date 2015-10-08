@@ -23,6 +23,9 @@ import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 
+import java.text.DateFormat;
+import java.util.Map;
+
 public class ItemViewHolder {
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(WorldItemsFragment.class);
 
@@ -32,6 +35,11 @@ public class ItemViewHolder {
 	private final ImageView rightImageButton;
 	private final Button rightButton;
 	private final ProgressBar progressBar;
+	private final TextView mapDateTextView;
+
+	private final Map<String, String> indexFileNames;
+	private final Map<String, String> indexActivatedFileNames;
+	private final java.text.DateFormat dateFormat;
 
 	private boolean srtmDisabled;
 	private boolean nauticalPluginDisabled;
@@ -48,13 +56,21 @@ public class ItemViewHolder {
 		ASK_FOR_FULL_VERSION_PURCHASE
 	}
 
-	public ItemViewHolder(View convertView) {
+	public ItemViewHolder(View convertView,
+						  DateFormat dateFormat,
+						  Map<String, String> indexFileNames,
+						  Map<String, String> indexActivatedFileNames) {
+		this.indexFileNames = indexFileNames;
+		this.indexActivatedFileNames = indexActivatedFileNames;
+		this.dateFormat = dateFormat;
 		nameTextView = (TextView) convertView.findViewById(R.id.name);
 		descrTextView = (TextView) convertView.findViewById(R.id.description);
 		leftImageView = (ImageView) convertView.findViewById(R.id.leftImageView);
 		rightImageButton = (ImageView) convertView.findViewById(R.id.rightImageButton);
 		rightButton = (Button) convertView.findViewById(R.id.rightButton);
 		progressBar = (ProgressBar) convertView.findViewById(R.id.progressBar);
+		mapDateTextView = (TextView) convertView.findViewById(R.id.mapDateTextView);
+		;
 
 		TypedValue typedValue = new TypedValue();
 		Resources.Theme theme = convertView.getContext().getTheme();
@@ -177,6 +193,26 @@ public class ItemViewHolder {
 			leftImageView.setImageDrawable(getContextIcon(context, indexItem.getType().getIconResource()));
 			nameTextView.setTextColor(textColorPrimary);
 		}
+
+		if (indexFileNames != null && indexItem.isAlreadyDownloaded(indexFileNames)) {
+			boolean outdated = false;
+			String date = null;
+			if (indexItem.getType() == DownloadActivityType.HILLSHADE_FILE) {
+				// TODO write logic for outdated
+				date = indexItem.getDate(dateFormat);
+			} else {
+				String sfName = indexItem.getTargetFileName();
+				final boolean updatableResource = indexActivatedFileNames.containsKey(sfName);
+				date = updatableResource ? indexActivatedFileNames.get(sfName) : indexFileNames.get(sfName);
+				outdated = DownloadActivity.downloadListIndexThread.checkIfItemOutdated(indexItem);
+			}
+			String updateDescr = context.getResources().getString(R.string.local_index_installed) + ": "
+					+ date;
+			mapDateTextView.setText(updateDescr);
+			int colorId = outdated ? R.color.color_distance : R.color.color_ok;
+			mapDateTextView.setTextColor(context.getResources().getColor(colorId));
+		}
+
 	}
 
 	public void bindRegion(WorldRegion region, DownloadActivity context) {

@@ -120,6 +120,10 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 		return (OsmandApplication) getActivity().getApplication();
 	}
 
+	public DownloadActivity getMyActivity() {
+		return (DownloadActivity) getActivity();
+	}
+
 	private void fillRegionItemsAdapter(ItemsListBuilder builder) {
 		if (listAdapter != null) {
 			listAdapter.clear();
@@ -207,7 +211,10 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 				if (convertView == null) {
 					convertView = LayoutInflater.from(parent.getContext())
 							.inflate(R.layout.two_line_with_images_list_item, parent, false);
-					viewHolder = new ItemViewHolder(convertView);
+					viewHolder = new ItemViewHolder(convertView,
+							getMyApplication().getResourceManager().getDateFormat(),
+							getMyActivity().getIndexActivatedFileNames(),
+							getMyActivity().getIndexFileNames());
 					convertView.setTag(viewHolder);
 				} else {
 					viewHolder = (ItemViewHolder) convertView.getTag();
@@ -223,7 +230,10 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 				if (convertView == null) {
 					convertView = LayoutInflater.from(parent.getContext())
 							.inflate(R.layout.two_line_with_images_list_item, parent, false);
-					viewHolder = new ItemViewHolder(convertView);
+					viewHolder = new ItemViewHolder(convertView,
+							getMyApplication().getResourceManager().getDateFormat(),
+							getMyActivity().getIndexActivatedFileNames(),
+							getMyActivity().getIndexFileNames());
 					convertView.setTag(viewHolder);
 				} else {
 					viewHolder = (ItemViewHolder) convertView.getTag();

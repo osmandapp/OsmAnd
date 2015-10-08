@@ -2,6 +2,7 @@ package net.osmand.plus.download;
 
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -9,6 +10,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -27,7 +29,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import net.osmand.IndexConstants;
-import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -44,8 +45,6 @@ import net.osmand.plus.download.items.SearchDialogFragment;
 import net.osmand.plus.download.items.WorldItemsFragment;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
-
-import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
@@ -572,8 +571,8 @@ public class DownloadActivity extends BaseDownloadActivity implements RegionDial
 	}
 
 
-	public void initFreeVersionBanner(View header) {
-		visibleBanner = new BannerAndDownloadFreeVersion(header, this);
+	public void initFreeVersionBanner(View view) {
+		visibleBanner = new BannerAndDownloadFreeVersion(view, this);
 		updateProgress(true);
 	}
 
@@ -590,11 +589,13 @@ public class DownloadActivity extends BaseDownloadActivity implements RegionDial
 	private static class ToggleCollapseFreeVersionBanner implements View.OnClickListener {
 		private final View freeVersionDescriptionTextView;
 		private final View buttonsLinearLayout;
+		private final View freeVersionTitle;
 
 		private ToggleCollapseFreeVersionBanner(View freeVersionDescriptionTextView,
-												View buttonsLinearLayout) {
+												View buttonsLinearLayout, View freeVersionTitle) {
 			this.freeVersionDescriptionTextView = freeVersionDescriptionTextView;
 			this.buttonsLinearLayout = buttonsLinearLayout;
+			this.freeVersionTitle = freeVersionTitle;
 		}
 
 		@Override
@@ -605,6 +606,7 @@ public class DownloadActivity extends BaseDownloadActivity implements RegionDial
 			} else {
 				freeVersionDescriptionTextView.setVisibility(View.VISIBLE);
 				buttonsLinearLayout.setVisibility(View.VISIBLE);
+				freeVersionTitle.setVisibility(View.VISIBLE);
 			}
 		}
 	}
@@ -700,7 +702,8 @@ public class DownloadActivity extends BaseDownloadActivity implements RegionDial
 				}
 			});
 			laterButton.setOnClickListener(
-					new ToggleCollapseFreeVersionBanner(freeVersionDescriptionTextView, buttonsLinearLayout));
+					new ToggleCollapseFreeVersionBanner(freeVersionDescriptionTextView,
+							buttonsLinearLayout, freeVersionBannerTitle));
 		}
 
 		private void updateFreeVersionBanner() {
@@ -718,7 +721,7 @@ public class DownloadActivity extends BaseDownloadActivity implements RegionDial
 			downloadsLeftTextView.setText(ctx.getString(R.string.downloads_left_template, downloadsLeft));
 			// TODO review logic
 			freeVersionBanner.setOnClickListener(new ToggleCollapseFreeVersionBanner(freeVersionDescriptionTextView,
-					buttonsLinearLayout));
+					buttonsLinearLayout, freeVersionBannerTitle));
 		}
 
 		private void updateAvailableDownloads(int activeTasks) {
@@ -739,5 +742,4 @@ public class DownloadActivity extends BaseDownloadActivity implements RegionDial
 			}
 		}
 	}
-
 }
