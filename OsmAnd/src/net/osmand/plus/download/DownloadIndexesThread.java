@@ -28,7 +28,6 @@ import net.osmand.plus.WorldRegion;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.download.DownloadFileHelper.DownloadFileShowWarning;
 import net.osmand.plus.download.DownloadOsmandIndexesHelper.AssetIndexItem;
-import net.osmand.plus.download.items.ItemsListBuilder;
 import net.osmand.plus.helpers.DatabaseHelper;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.util.Algorithms;
@@ -302,7 +301,10 @@ public class DownloadIndexesThread {
 				} else if (o instanceof String) {
 					String message = (String) o;
 					if (!message.equals("I/O error occurred : Interrupted")) {
-						AccessibleToast.makeText(ctx, message, Toast.LENGTH_LONG).show();
+						if (uiActivity == null ||
+								!message.equals(uiActivity.getString(R.string.shared_string_download_successful))) {
+							AccessibleToast.makeText(ctx, message, Toast.LENGTH_LONG).show();
+						}
 					}
 				}
 			}
@@ -470,7 +472,6 @@ public class DownloadIndexesThread {
 		@Override
 		public void showWarning(String warning) {
 			publishProgress(warning);
-
 		}
 
 		public boolean downloadFile(DownloadEntry de, List<File> filesToReindex, boolean forceWifi)

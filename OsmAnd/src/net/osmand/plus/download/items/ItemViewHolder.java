@@ -107,11 +107,6 @@ public class ItemViewHolder {
 			}
 			if ((indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE ||
 					indexItem.getType() == DownloadActivityType.HILLSHADE_FILE) && srtmDisabled) {
-				if (indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE) {
-					nameTextView.setText(context.getString(R.string.srtm_plugin_disabled));
-				} else {
-					nameTextView.setText(context.getString(R.string.hillshade_layer_disabled));
-				}
 				OsmandPlugin srtmPlugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
 				if (srtmPlugin == null || srtmPlugin.needsInstallation()) {
 					rightButtonAction = RightButtonAction.ASK_FOR_SRTM_PLUGIN_PURCHASE;
@@ -123,7 +118,8 @@ public class ItemViewHolder {
 			} else if (indexItem.getType() == DownloadActivityType.WIKIPEDIA_FILE && freeVersion) {
 				rightButtonAction = RightButtonAction.ASK_FOR_FULL_VERSION_PURCHASE;
 				disabled = true;
-			} else if (showTypeInTitle) {
+			}
+			if (showTypeInTitle) {
 				nameTextView.setText(indexItem.getType().getString(context));
 			} else {
 				nameTextView.setText(indexItem.getVisibleName(context, context.getMyApplication().getRegions()));

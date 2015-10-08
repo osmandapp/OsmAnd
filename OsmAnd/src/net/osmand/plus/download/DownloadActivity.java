@@ -7,6 +7,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.ListFragment;
 import android.support.v4.view.ViewPager;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -110,8 +112,10 @@ public class DownloadActivity extends BaseDownloadActivity implements RegionDial
 		ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
 		PagerSlidingTabStrip mSlidingTabLayout = (PagerSlidingTabStrip) findViewById(R.id.sliding_tabs);
 
-		mTabs.add(new TabActivity.TabItem(R.string.download_tab_local,
-				getString(R.string.download_tab_local), LocalIndexesFragment.class));
+		mTabs.add(new TabActivity.TabItem(R.string.download_tab_downloads,
+				getString(R.string.download_tab_downloads), WorldItemsFragment.class));
+//		mTabs.add(new TabActivity.TabItem(R.string.download_tab_local,
+//				getString(R.string.download_tab_local), LocalIndexesFragment.class));
 		mTabs.add(new TabActivity.TabItem(R.string.download_tab_downloads,
 				getString(R.string.download_tab_downloads), DownloadIndexFragment.class));
 		mTabs.add(new TabActivity.TabItem(R.string.download_tab_updates,
@@ -119,8 +123,6 @@ public class DownloadActivity extends BaseDownloadActivity implements RegionDial
 
 //		mTabs.add(new TabActivity.TabItem(R.string.download_tab_local,
 //				getString(R.string.download_tab_local), NewLocalIndexesFragment.class));
-		mTabs.add(new TabActivity.TabItem(R.string.download_tab_downloads,
-				getString(R.string.download_tab_downloads), WorldItemsFragment.class));
 
 		viewPager.setAdapter(new TabActivity.OsmandFragmentPagerAdapter(getSupportFragmentManager(), mTabs));
 		mSlidingTabLayout.setViewPager(viewPager);
@@ -201,7 +203,7 @@ public class DownloadActivity extends BaseDownloadActivity implements RegionDial
 	protected void onResume() {
 		super.onResume();
 		getMyApplication().getAppCustomization().resumeActivity(DownloadActivity.class, this);
-		initFreeVersionBanner(findViewById(R.id.mainLayout));
+		registerFreeVersionBanner(findViewById(R.id.mainLayout));
 	}
 
 
@@ -572,11 +574,10 @@ public class DownloadActivity extends BaseDownloadActivity implements RegionDial
 	}
 
 
-	public void initFreeVersionBanner(View view) {
+	public void registerFreeVersionBanner(View view) {
 		visibleBanner = new BannerAndDownloadFreeVersion(view, this);
 		updateProgress(true);
 	}
-
 
 	public void showDialog(FragmentActivity activity, DialogFragment fragment) {
 		fragment.show(activity.getSupportFragmentManager(), "dialog");
@@ -584,7 +585,7 @@ public class DownloadActivity extends BaseDownloadActivity implements RegionDial
 
 	@Override
 	public void onDialogDismissed() {
-		initFreeVersionBanner(findViewById(R.id.mainLayout));
+		registerFreeVersionBanner(findViewById(R.id.mainLayout));
 	}
 
 	private static class ToggleCollapseFreeVersionBanner implements View.OnClickListener {
@@ -762,25 +763,36 @@ public class DownloadActivity extends BaseDownloadActivity implements RegionDial
 			for (List<DownloadEntry> list : vs) {
 				downloadEntries.addAll(list);
 			}
-			builder.setAdapter(new ArrayAdapter<DownloadEntry>(getActivity(),
-							android.R.layout.test_list_item,
-							downloadEntries),
-					null);
+			builder.setAdapter(new DownloadEntryAdapter(getActivity(), downloadEntries), null);
 			return builder.create();
 		}
 
-		private class DownloadEntryAdapter extends ArrayAdapter<DownloadEntry> {
+		private static class DownloadEntryAdapter extends ArrayAdapter<DownloadEntry> {
+			private final Drawable deleteDrawable;
+
 			public DownloadEntryAdapter(Context context, List<DownloadEntry> objects) {
 				super(context, R.layout.two_line_with_images_list_item, objects);
+				deleteDrawable = ((OsmandApplication) context.getApplicationContext()).getIconsCache()
+						.getPaintedContentIcon(R.drawable.ic_action_remove_dark,
+								context.getResources().getColor(R.color.dash_search_icon_dark));
 			}
 
 			@Override
 			public View getView(int position, View convertView, ViewGroup parent) {
-				return super.getView(position, convertView, parent);
+				if (convertView == null) {
+					convertView = LayoutInflater.from(parent.getContext())
+							.inflate(R.layout.two_line_with_images_list_item, parent, false);
+					DownloadEntryViewHolder viewHolder =
+							new DownloadEntryViewHolder(convertView, deleteDrawable);
+					convertView.setTag(viewHolder);
+				}
+				DownloadEntryViewHolder viewHolder = (DownloadEntryViewHolder) convertView.getTag();
+				viewHolder.bindDownloadEntry(getItem(position));
+				return convertView;
 			}
 		}
 
-		private class DownloadEntryViewHolder {
+		private static class DownloadEntryViewHolder {
 			private final TextView nameTextView;
 			private final TextView descrTextView;
 			private final ImageView leftImageView;
@@ -788,8 +800,10 @@ public class DownloadActivity extends BaseDownloadActivity implements RegionDial
 			private final Button rightButton;
 			private final ProgressBar progressBar;
 			private final TextView mapDateTextView;
+			private final Drawable deleteDrawable;
 
-			private DownloadEntryViewHolder(View convertView) {
+			private DownloadEntryViewHolder(View convertView, Drawable deleteDrawable) {
+				this.deleteDrawable = deleteDrawable;
 				nameTextView = (TextView) convertView.findViewById(R.id.name);
 				descrTextView = (TextView) convertView.findViewById(R.id.description);
 				leftImageView = (ImageView) convertView.findViewById(R.id.leftImageView);
@@ -798,6 +812,22 @@ public class DownloadActivity extends BaseDownloadActivity implements RegionDial
 				progressBar = (ProgressBar) convertView.findViewById(R.id.progressBar);
 				mapDateTextView = (TextView) convertView.findViewById(R.id.mapDateTextView);
 			}
+			public void bindDownloadEntry(DownloadEntry downloadEntry) {
+				nameTextView.setText(downloadEntry.baseName);
+				descrTextView.setText(String.format("%1$s MBb from %2$s Mb", 123.440,
+						downloadEntry.sizeMB));
+				rightImageButton.setImageDrawable(deleteDrawable);
+				rightImageButton.setVisibility(View.VISIBLE);
+				rightImageButton.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+
+					}
+				});
+				progressBar.setVisibility(View.VISIBLE);
+				progressBar.setIndeterminate(true);
+			}
+
 		}
 	}
 }

@@ -32,6 +32,4 @@ public class DownloadEntry {
 		this.assetName = assetName;
 		isAsset = true;
 	}
-	
-
 }

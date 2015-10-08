@@ -68,6 +68,7 @@
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                tools:visibility="visible"
                 android:visibility="gone"/>
 
         </LinearLayout>

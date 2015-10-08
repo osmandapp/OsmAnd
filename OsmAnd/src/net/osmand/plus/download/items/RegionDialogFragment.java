@@ -65,11 +65,11 @@ public class RegionDialogFragment extends DialogFragment{
 				toolbar.setTitle(region.getName());
 			}
 		}
-		getDownloadActivity().initFreeVersionBanner(view);
+		getDownloadActivity().registerFreeVersionBanner(view);
 		listener = new DialogDismissListener() {
 			@Override
 			public void onDialogDismissed() {
-				getDownloadActivity().initFreeVersionBanner(view);
+				getDownloadActivity().registerFreeVersionBanner(view);
 			}
 		};
 		return view;
