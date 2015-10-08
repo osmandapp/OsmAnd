@@ -14,7 +14,6 @@ import android.widget.TextView;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.WorldRegion;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.activities.OsmandExpandableListFragment;
 import net.osmand.plus.download.BaseDownloadActivity;
@@ -113,6 +112,10 @@ public class VoiceItemsFragment extends OsmandExpandableListFragment {
 		return (OsmandApplication) getActivity().getApplication();
 	}
 
+	public DownloadActivity getMyActivity() {
+		return (DownloadActivity) getActivity();
+	}
+
 	private void fillVoiceItemsAdapter(ItemsListBuilder builder) {
 		if (listAdapter != null) {
 			listAdapter.clear();
@@ -181,7 +184,10 @@ public class VoiceItemsFragment extends OsmandExpandableListFragment {
 			if (convertView == null) {
 				convertView = LayoutInflater.from(parent.getContext())
 						.inflate(R.layout.two_line_with_images_list_item, parent, false);
-				viewHolder = new ItemViewHolder(convertView);
+				viewHolder = new ItemViewHolder(convertView,
+						getMyApplication().getResourceManager().getDateFormat(),
+						getMyActivity().getIndexActivatedFileNames(),
+						getMyActivity().getIndexFileNames());
 				convertView.setTag(viewHolder);
 			} else {
 				viewHolder = (ItemViewHolder) convertView.getTag();

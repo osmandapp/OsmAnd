@@ -37,17 +37,31 @@
                 android:textSize="@dimen/default_list_text_size"
                 tools:text="Germany"/>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/description"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:maxLines="25"
-                android:textColor="?android:textColorSecondary"
-                android:textSize="@dimen/default_sub_text_size"
-                tools:text="Map, Contour Lines, Wikipedia"
-                tools:visibility="gone"/>
+                <TextView
+                    android:id="@+id/description"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:maxLines="25"
+                    android:textColor="?android:textColorSecondary"
+                    android:textSize="@dimen/default_sub_text_size"
+                    tools:text="Contour Lines"/>
+
+                <TextView
+                    android:id="@+id/mapDateTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:maxLines="25"
+                    android:textSize="@dimen/default_sub_text_size"
+                    tools:text="Local version: 10/3/2015"/>
+
+            </LinearLayout>
 
             <ProgressBar
                 android:id="@+id/progressBar"
@@ -65,10 +79,10 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/dashFavIconMargin"
             android:background="?attr/dashboard_button"
-            tools:src="@drawable/ic_action_import"
             android:scaleType="center"
-            tools:visibility="visible"
-            android:visibility="gone"/>
+            android:visibility="gone"
+            tools:src="@drawable/ic_action_import"
+            tools:visibility="visible"/>
 
         <Button
             android:id="@+id/rightButton"
