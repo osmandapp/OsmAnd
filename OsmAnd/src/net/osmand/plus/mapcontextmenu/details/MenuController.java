@@ -1,9 +1,12 @@
 package net.osmand.plus.mapcontextmenu.details;
 
-import android.app.Activity;
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.view.View;
 
+import net.osmand.plus.IconsCache;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 
 public abstract class MenuController {
@@ -14,16 +17,22 @@ public abstract class MenuController {
 		public static final int FULL_SCREEN = 4;
 	}
 
+	private MapActivity mapActivity;
 	private MenuBuilder builder;
 	private int currentMenuState;
 	private boolean portraitMode;
 	private boolean largeDevice;
 
-	public MenuController(MenuBuilder builder, Activity activity) {
+	public MenuController(MenuBuilder builder, MapActivity mapActivity) {
 		this.builder = builder;
-		portraitMode = AndroidUiHelper.isOrientationPortrait(activity);
-		largeDevice = AndroidUiHelper.isXLargeDevice(activity);
+		this.mapActivity = mapActivity;
+		portraitMode = AndroidUiHelper.isOrientationPortrait(mapActivity);
+		largeDevice = AndroidUiHelper.isXLargeDevice(mapActivity);
 		this.currentMenuState = getInitialMenuState();
+	}
+
+	public MapActivity getMapActivity() {
+		return mapActivity;
 	}
 
 	public void build(View rootView) {
@@ -118,7 +127,38 @@ public abstract class MenuController {
 		return .7f;
 	}
 
+	protected Drawable getIcon(int iconId) {
+		IconsCache iconsCache = mapActivity.getMyApplication().getIconsCache();
+		boolean light = mapActivity.getMyApplication().getSettings().isLightContent();
+		return iconsCache.getIcon(iconId,
+				light ? R.color.icon_color : R.color.icon_color_light);
+	}
+
 	public boolean shouldShowButtons() {
 		return true;
 	}
+
+	public boolean handleSingleTapOnMap() {
+		return false;
+	}
+
+	public boolean needStreetName() {
+		return true;
+	}
+
+	public boolean needTypeStr() {
+		return false;
+	}
+
+	public int getLeftIconId() { return 0; }
+
+	public Drawable getLeftIcon() { return null; }
+
+	public Drawable getSecondLineIcon() { return null; }
+
+	public String getTypeStr() { return ""; }
+
+	public String getNameStr() { return ""; }
+
+	public abstract void saveEntityState(Bundle bundle, String key);
 }

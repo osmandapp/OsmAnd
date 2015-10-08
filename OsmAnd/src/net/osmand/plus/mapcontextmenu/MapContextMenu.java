@@ -1,6 +1,5 @@
 package net.osmand.plus.mapcontextmenu;
 
-import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,19 +12,14 @@ import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.osm.PoiCategory;
-import net.osmand.osm.PoiType;
 import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.mapcontextmenu.details.AmenityMenuController;
 import net.osmand.plus.mapcontextmenu.details.FavouritePointMenuController;
 import net.osmand.plus.mapcontextmenu.details.MenuController;
-import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.util.Algorithms;
@@ -38,6 +32,7 @@ public class MapContextMenu {
 
 	private PointDescription pointDescription;
 	private Object object;
+	MenuController menuController;
 
 	private int leftIconId;
 	private Drawable leftIcon;
@@ -64,6 +59,10 @@ public class MapContextMenu {
 		return object;
 	}
 
+	public MenuController getMenuController() {
+		return menuController;
+	}
+
 	public MapContextMenu(OsmandApplication app, MapActivity mapActivity) {
 		this.app = app;
 		this.mapActivity = mapActivity;
@@ -71,7 +70,11 @@ public class MapContextMenu {
 	}
 
 	public boolean init(PointDescription pointDescription, Object object) {
-		if (isMenuVisible()) {
+		return init(pointDescription, object, false);
+	}
+
+	public boolean init(PointDescription pointDescription, Object object, boolean reload) {
+		if (!reload && isMenuVisible()) {
 			if (this.object == null || !this.object.equals(object)) {
 				hide();
 			} else {
@@ -82,10 +85,11 @@ public class MapContextMenu {
 		this.pointDescription = pointDescription;
 		this.object = object;
 		leftIconId = 0;
-		nameStr = null;
-		typeStr = null;
-		streetStr = null;
+		nameStr = "";
+		typeStr = "";
+		streetStr = "";
 
+		acquireMenuController();
 		acquireIcons();
 		acquireNameAndType();
 		if (needStreetName()) {
@@ -106,6 +110,14 @@ public class MapContextMenu {
 		}
 	}
 
+	public void refreshMenu(PointDescription pointDescription, Object object) {
+		MapContextMenuFragment fragment = findMenuFragment();
+		if (fragment != null) {
+			init(pointDescription, object, true);
+			fragment.rebuildMenu();
+		}
+	}
+
 	public void hide() {
 		MapContextMenuFragment fragment = findMenuFragment();
 		if (fragment != null) {
@@ -113,22 +125,36 @@ public class MapContextMenu {
 		}
 	}
 
-	private boolean needStreetName() {
-		boolean res = object != null || Algorithms.isEmpty(pointDescription.getName());
-		if (res) {
-			if (object != null) {
-				if (object instanceof Amenity) {
-					Amenity a = (Amenity) object;
-					if (a.getSubType() != null && a.getType() != null) {
-						PoiType pt = a.getType().getPoiTypeByKeyName(a.getSubType());
-						if (pt != null && pt.getOsmTag() != null && pt.getOsmTag().equals("place")) {
-							res = false;
-						}
-					}
-				} else if (object instanceof FavouritePoint) {
-					res = false;
+	private void acquireMenuController() {
+		menuController = null;
+		if (object != null) {
+			if (object instanceof Amenity) {
+				menuController = new AmenityMenuController(app, mapActivity, (Amenity)object);
+				if (!Algorithms.isEmpty(typeStr)) {
+					menuController.addPlainMenuItem(R.drawable.ic_action_info_dark, typeStr);
+				}
+				if (pointDescription != null) {
+					menuController.addPlainMenuItem(R.drawable.map_my_location, pointDescription.getLocationName(mapActivity, true).replaceAll("\n", ""));
+				}
+			} else if (object instanceof FavouritePoint) {
+				menuController = new FavouritePointMenuController(app, mapActivity, (FavouritePoint)object);
+				if (pointDescription != null) {
+					menuController.addPlainMenuItem(R.drawable.map_my_location, pointDescription.getLocationName(mapActivity, true).replaceAll("\n", ""));
 				}
 			}
+		}
+	}
+
+	public void onSingleTapOnMap() {
+		if (menuController == null || !menuController.handleSingleTapOnMap()) {
+			hide();
+		}
+	}
+
+	private boolean needStreetName() {
+		boolean res = object != null || Algorithms.isEmpty(pointDescription.getName());
+		if (res && menuController != null) {
+			res = menuController.needStreetName();
 		}
 		return res;
 	}
@@ -165,7 +191,7 @@ public class MapContextMenu {
 	}
 
 	public String getLocationStr() {
-		if (object != null && object instanceof FavouritePoint) {
+		if (menuController != null && menuController.needTypeStr()) {
 			return typeStr;
 		} else {
 			if (Algorithms.isEmpty(streetStr)) {
@@ -181,55 +207,17 @@ public class MapContextMenu {
 		leftIcon = null;
 		secondLineIcon = null;
 
-		if (object != null) {
-			if (object instanceof Amenity) {
-				String id = null;
-				Amenity o = (Amenity) object;
-				PoiType st = o.getType().getPoiTypeByKeyName(o.getSubType());
-				if (st != null) {
-					if (RenderingIcons.containsBigIcon(st.getIconKeyName())) {
-						id = st.getIconKeyName();
-					} else if (RenderingIcons.containsBigIcon(st.getOsmTag() + "_" + st.getOsmValue())) {
-						id = st.getOsmTag() + "_" + st.getOsmValue();
-					}
-				}
-				if (id != null) {
-					leftIconId = RenderingIcons.getBigIconResourceId(id);
-				}
-			} else if (object instanceof FavouritePoint) {
-				FavouritePoint fav = (FavouritePoint)object;
-				leftIcon = FavoriteImageDrawable.getOrCreate(mapActivity, fav.getColor(), mapActivity.getMapView().getCurrentRotatedTileBox().getDensity());
-				secondLineIcon = getIcon(R.drawable.ic_small_group);
-			}
+		if (menuController != null) {
+			leftIconId = menuController.getLeftIconId();
+			leftIcon = menuController.getLeftIcon();
+			secondLineIcon = menuController.getSecondLineIcon();
 		}
 	}
 
-	private Drawable getIcon(int iconId) {
-		IconsCache iconsCache = app.getIconsCache();
-		boolean light = app.getSettings().isLightContent();
-		return iconsCache.getIcon(iconId,
-				light ? R.color.icon_color : R.color.icon_color_light);
-	}
-
 	private void acquireNameAndType() {
-		if (object != null) {
-			if (object instanceof Amenity) {
-				Amenity amenity = (Amenity) object;
-
-				PoiCategory pc = amenity.getType();
-				PoiType pt = pc.getPoiTypeByKeyName(amenity.getSubType());
-				typeStr = amenity.getSubType();
-				if (pt != null) {
-					typeStr = pt.getTranslation();
-				} else if(typeStr != null){
-					typeStr = Algorithms.capitalizeFirstLetterAndLowercase(typeStr.replace('_', ' '));
-				}
-				nameStr = amenity.getName(settings.MAP_PREFERRED_LOCALE.get());
-			} else if (object instanceof FavouritePoint) {
-				FavouritePoint fav = (FavouritePoint)object;
-				nameStr = fav.getName();
-				typeStr = fav.getCategory();
-			}
+		if (menuController != null) {
+			nameStr = menuController.getNameStr();
+			typeStr = menuController.getTypeStr();
 		}
 
 		if (Algorithms.isEmpty(nameStr)) {
@@ -242,7 +230,7 @@ public class MapContextMenu {
 		if (Algorithms.isEmpty(nameStr)) {
 			if (!Algorithms.isEmpty(typeStr)) {
 				nameStr = typeStr;
-				typeStr = null;
+				typeStr = "";
 			} else {
 				nameStr = app.getResources().getString(R.string.address_unknown);
 			}
@@ -260,14 +248,11 @@ public class MapContextMenu {
 				if (object != null) {
 					streetStr = RoutingHelper.formatStreetName(object.getName(settings.MAP_PREFERRED_LOCALE.get()),
 							object.getRef(), object.getDestinationName(settings.MAP_PREFERRED_LOCALE.get()));
-					if (streetStr != null && streetStr.trim().length() == 0) {
-						streetStr = null;
-					}
 
-					if (streetStr != null) {
+					if (!Algorithms.isEmpty(streetStr)) {
 						if (getObject() == null) {
 							nameStr = streetStr;
-							streetStr = null;
+							streetStr = "";
 						}
 						mapActivity.runOnUiThread(new Runnable() {
 							public void run() {
@@ -276,7 +261,7 @@ public class MapContextMenu {
 						});
 					}
 				} else {
-					streetStr = null;
+					streetStr = "";
 				}
 				return true;
 			}
@@ -289,24 +274,6 @@ public class MapContextMenu {
 		});
 	}
 
-	public MenuController getMenuController(Activity activity) {
-		MenuController menuController = null;
-		if (object != null) {
-			if (object instanceof Amenity) {
-				menuController = new AmenityMenuController(app, activity, (Amenity)object);
-				if (!Algorithms.isEmpty(typeStr)) {
-					menuController.addPlainMenuItem(R.drawable.ic_action_info_dark, typeStr);
-				}
-				menuController.addPlainMenuItem(R.drawable.map_my_location, pointDescription.getLocationName(activity, true).replaceAll("\n", ""));
-			} else if (object instanceof FavouritePoint) {
-				menuController = new FavouritePointMenuController(app, activity, (FavouritePoint)object);
-				menuController.addPlainMenuItem(R.drawable.map_my_location, pointDescription.getLocationName(activity, true).replaceAll("\n", ""));
-			}
-		}
-
-		return menuController;
-	}
-
 	public void buttonNavigatePressed() {
 		mapActivity.getMapActions().showNavigationContextMenuPoint(pointDescription.getLat(), pointDescription.getLon());
 	}
@@ -314,10 +281,8 @@ public class MapContextMenu {
 	public void buttonFavoritePressed() {
 		if (object != null && object instanceof FavouritePoint) {
 			mapActivity.getFavoritePointEditor().edit((FavouritePoint)object);
-			//mapActivity.getMapActions().editFavoritePoint((FavouritePoint) object);
 		} else {
 			mapActivity.getFavoritePointEditor().add(pointDescription);
-			//mapActivity.getMapActions().addFavouritePoint(pointDescription.getLat(), pointDescription.getLon());
 		}
 	}
 
@@ -337,36 +302,27 @@ public class MapContextMenu {
 	}
 
 	public void saveMenuState(Bundle bundle) {
-		if (object != null) {
-			if (object instanceof Amenity) {
-				bundle.putSerializable(KEY_CTX_MENU_OBJECT, (Amenity) object);
-			} else if (object instanceof FavouritePoint) {
-				bundle.putSerializable(KEY_CTX_MENU_OBJECT, (FavouritePoint) object);
-			}
+		if (menuController != null) {
+			menuController.saveEntityState(bundle, KEY_CTX_MENU_OBJECT);
 		}
 		bundle.putSerializable(KEY_CTX_MENU_POINT_DESC, pointDescription);
-		bundle.putSerializable(KEY_CTX_MENU_NAME_STR, nameStr);
-		bundle.putSerializable(KEY_CTX_MENU_TYPE_STR, typeStr);
-		bundle.putSerializable(KEY_CTX_MENU_STREET_STR, streetStr);
+		bundle.putString(KEY_CTX_MENU_NAME_STR, nameStr);
+		bundle.putString(KEY_CTX_MENU_TYPE_STR, typeStr);
+		bundle.putString(KEY_CTX_MENU_STREET_STR, streetStr);
 	}
 
 	public void restoreMenuState(Bundle bundle) {
 		object = bundle.getSerializable(KEY_CTX_MENU_OBJECT);
 		Object pDescObj = bundle.getSerializable(KEY_CTX_MENU_POINT_DESC);
-		if (pDescObj != null)
-			pointDescription = (PointDescription)pDescObj;
-		Object nameStrObj = bundle.getSerializable(KEY_CTX_MENU_NAME_STR);
-		if (nameStrObj != null) {
-			nameStr = nameStrObj.toString();
+		if (pDescObj != null) {
+			pointDescription = (PointDescription) pDescObj;
 		}
-		Object typeStrObj = bundle.getSerializable(KEY_CTX_MENU_TYPE_STR);
-		if (typeStrObj != null) {
-			typeStr = typeStrObj.toString();
-		}
-		Object streetStrObj = bundle.getSerializable(KEY_CTX_MENU_STREET_STR);
-		if (streetStrObj != null) {
-			streetStr = streetStrObj.toString();
-		}
+		acquireMenuController();
+
+		nameStr = bundle.getString(KEY_CTX_MENU_NAME_STR);
+		typeStr = bundle.getString(KEY_CTX_MENU_TYPE_STR);
+		streetStr = bundle.getString(KEY_CTX_MENU_STREET_STR);
+
 		acquireIcons();
 	}
 }

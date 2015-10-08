@@ -477,7 +477,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			}
 		}
 
-		activity.getContextMenu().hide();
+		activity.getContextMenu().onSingleTapOnMap();
 		return false;
 	}
 
