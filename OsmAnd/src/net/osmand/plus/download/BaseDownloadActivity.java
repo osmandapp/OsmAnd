@@ -17,6 +17,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.WorldRegion;
 import net.osmand.plus.activities.ActionBarProgressActivity;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.download.items.ItemsListBuilder;
@@ -125,6 +126,14 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 		if (downloadListIndexThread.isDataPrepared()) {
 			return new ItemsListBuilder(getMyApplication(), regionId, downloadListIndexThread.getResourcesByRegions(),
 					downloadListIndexThread.getVoiceRecItems(), downloadListIndexThread.getVoiceTTSItems());
+		} else {
+			return null;
+		}
+	}
+
+	public Map<String, IndexItem> getIndexItemsByRegion(WorldRegion region) {
+		if (downloadListIndexThread.isDataPrepared()) {
+			return downloadListIndexThread.getResourcesByRegions().get(region);
 		} else {
 			return null;
 		}

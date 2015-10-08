@@ -186,54 +186,10 @@ public class DownloadIndexesThread {
 		voiceRecItems.clear();
 		voiceTTSItems.clear();
 
-		List<WorldRegion> mergedRegions = app.getWorldRegion().getFlattenedSubregions();
-		mergedRegions.add(app.getWorldRegion());
-		boolean voiceFilesProcessed = false;
-		for (WorldRegion region : mergedRegions) {
-			String downloadsIdPrefix = region.getDownloadsIdPrefix();
-
-			Map<String, IndexItem> regionResources = new HashMap<>();
-
-			Set<DownloadActivityType> typesSet = new TreeSet<>(new Comparator<DownloadActivityType>() {
-				@Override
-				public int compare(DownloadActivityType dat1, DownloadActivityType dat2) {
-					return dat1.getTag().compareTo(dat2.getTag());
-				}
-			});
-
-			for (IndexItem resource : resourcesInRepository) {
-
-				if (!voiceFilesProcessed) {
-					if (resource.getSimplifiedFileName().endsWith(".voice.zip")) {
-						voiceRecItems.add(resource);
-						continue;
-					} else if (resource.getSimplifiedFileName().contains(".ttsvoice.zip")) {
-						voiceTTSItems.add(resource);
-						continue;
-					}
-				}
-
-				if (!resource.getSimplifiedFileName().startsWith(downloadsIdPrefix)) {
-					continue;
-				}
-
-				typesSet.add(resource.getType());
-				regionResources.put(resource.getSimplifiedFileName(), resource);
-			}
-
-			voiceFilesProcessed = true;
-
-			if (region.getSuperregion() != null && region.getSuperregion().getSuperregion() != app.getWorldRegion()) {
-				if (region.getSuperregion().getResourceTypes() == null) {
-					region.getSuperregion().setResourceTypes(typesSet);
-				} else {
-					region.getSuperregion().getResourceTypes().addAll(typesSet);
-				}
-			}
-
-			region.setResourceTypes(typesSet);
-			resourcesByRegions.put(region, regionResources);
+		for (WorldRegion region : app.getWorldRegion().getFlattenedSubregions()) {
+			processRegion(resourcesInRepository, false, region);
 		}
+		processRegion(resourcesInRepository, true, app.getWorldRegion());
 
 		final Collator collator = OsmAndCollator.primaryCollator();
 		final OsmandRegions osmandRegions = app.getRegions();
@@ -255,6 +211,50 @@ public class DownloadIndexesThread {
 		});
 
 		return true;
+	}
+
+	private void processRegion(List<IndexItem> resourcesInRepository, boolean processVoiceFiles, WorldRegion region) {
+		String downloadsIdPrefix = region.getDownloadsIdPrefix();
+
+		Map<String, IndexItem> regionResources = new HashMap<>();
+
+		Set<DownloadActivityType> typesSet = new TreeSet<>(new Comparator<DownloadActivityType>() {
+			@Override
+			public int compare(DownloadActivityType dat1, DownloadActivityType dat2) {
+				return dat1.getTag().compareTo(dat2.getTag());
+			}
+		});
+
+		for (IndexItem resource : resourcesInRepository) {
+
+			if (processVoiceFiles) {
+				if (resource.getSimplifiedFileName().endsWith(".voice.zip")) {
+					voiceRecItems.add(resource);
+					continue;
+				} else if (resource.getSimplifiedFileName().contains(".ttsvoice.zip")) {
+					voiceTTSItems.add(resource);
+					continue;
+				}
+			}
+
+			if (!resource.getSimplifiedFileName().startsWith(downloadsIdPrefix)) {
+				continue;
+			}
+
+			typesSet.add(resource.getType());
+			regionResources.put(resource.getSimplifiedFileName(), resource);
+		}
+
+		if (region.getSuperregion() != null && region.getSuperregion().getSuperregion() != app.getWorldRegion()) {
+			if (region.getSuperregion().getResourceTypes() == null) {
+				region.getSuperregion().setResourceTypes(typesSet);
+			} else {
+				region.getSuperregion().getResourceTypes().addAll(typesSet);
+			}
+		}
+
+		region.setResourceTypes(typesSet);
+		resourcesByRegions.put(region, regionResources);
 	}
 
 	public class DownloadIndexesAsyncTask extends BasicProgressAsyncTask<IndexItem, Object, String> implements DownloadFileShowWarning {

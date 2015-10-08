@@ -25,7 +25,7 @@ public class RegionDialogFragment extends DialogFragment{
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		boolean isLightTheme = ((OsmandApplication) getActivity().getApplication())
+		boolean isLightTheme = getMyApplication()
 				.getSettings().OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME;
 		int themeId = isLightTheme ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
 		setStyle(STYLE_NO_FRAME, themeId);
@@ -65,11 +65,11 @@ public class RegionDialogFragment extends DialogFragment{
 				toolbar.setTitle(region.getName());
 			}
 		}
-		((DownloadActivity) getActivity()).initFreeVersionBanner(view);
+		getDownloadActivity().initFreeVersionBanner(view);
 		listener = new DialogDismissListener() {
 			@Override
 			public void onDialogDismissed() {
-				((DownloadActivity) getActivity()).initFreeVersionBanner(view);
+				getDownloadActivity().initFreeVersionBanner(view);
 			}
 		};
 		return view;
@@ -85,10 +85,14 @@ public class RegionDialogFragment extends DialogFragment{
 		return (OsmandApplication) getActivity().getApplication();
 	}
 
+	private DownloadActivity getDownloadActivity() {
+		return (DownloadActivity) getActivity();
+	}
+
 	public void onRegionSelected(String regionId) {
 		final RegionDialogFragment regionDialogFragment = createInstance(regionId);
 		regionDialogFragment.setOnDismissListener(listener);
-		((DownloadActivity) getActivity()).showDialog(getActivity(), regionDialogFragment);
+		getDownloadActivity().showDialog(getActivity(), regionDialogFragment);
 	}
 
 	public static RegionDialogFragment createInstance(String regionId) {

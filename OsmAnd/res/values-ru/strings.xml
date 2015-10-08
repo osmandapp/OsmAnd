@@ -574,12 +574,12 @@
   <string name="gps_provider">GPS</string>
   <string name="int_seconds">секунд</string>
   <string name="int_min">мин.</string>
-  <string name="background_service_int_descr">Выберите интервал позиционирования для сервиса</string>
+  <string name="background_service_int_descr">Выберите интервал пробуждения для фоновой службы</string>
   <string name="background_service_int">Интервал пробуждения GPS</string>
-  <string name="background_service_provider_descr">Выберите источник позиционирования для сервиса</string>
+  <string name="background_service_provider_descr">Выберите источник позиционирования для фоновой службы</string>
   <string name="background_service_provider">Источник позиционирования</string>
   <string name="background_router_service_descr">Запускает OsmAnd в фоновом режиме для отслеживания местоположения при выключенном экране</string>
-  <string name="background_router_service">Сервис навигации</string>
+  <string name="background_router_service">Запуск приложения в фоновом режиме</string>
   <string name="off_router_service_no_gps_available">Сервис маршрутизации OsmAnd включён, если отключить позиционирование, он перестанет вести по маршруту.</string>
   <string name="routing_settings_descr">Настройки навигации</string>
   <string name="routing_settings">Навигация</string>
@@ -2103,4 +2103,25 @@
     <string name="simulate_your_location_stop_descr">Остановить моделирование</string>
     <string name="favorite_category_add_new">Добавить новую</string>
     <string name="favorite_category_select">Выберите категорию</string>
+    <string name="default_speed_system_descr">Выберите единицы измерения скорости</string>
+    <string name="default_speed_system">Единицы измерения скорости</string>
+    <string name="si_nm">Морские мили</string>
+    <string name="si_kmh">Километр в час</string>
+    <string name="si_mph">Миля в час</string>
+    <string name="si_m_s">Метр в секунду</string>
+    <string name="si_min_km">Минута на километр</string>
+    <string name="si_min_m">Минута на милю</string>
+    <string name="si_nm_h">Морская миля в час (узел)</string>
+    <string name="min_mile">мин/м</string>
+    <string name="min_km">мин/км</string>
+    <string name="m_s">м/с</string>
+    
+    <string name="shared_string_trip_recording">Запись поездки</string>
+    <string name="shared_string_navigation">Навигация</string>
+    <string name="favourites_edit_dialog_title">Информация об избранной точке</string>
+    <string name="routing_attr_avoid_shuttle_train_name">Избегать пригородных поездов</string>
+	<string name="routing_attr_avoid_shuttle_train_description">Избегать пригородных поездов</string>
+    <string name="traffic_warning_hazard">Опасность</string>
+    <string name="regions">Регионы</string>
+    <string name="additional_maps">Дополнительные карты</string>
     </resources>

@@ -1692,7 +1692,7 @@
 	<string name="poi_vending_public_transport_tickets">Billetter til offentlig transport</string>
 	<string name="poi_vending_drinks">Drikkevarer</string>
 	<string name="poi_vending_sweets">Slik</string>
-	<string name="poi_vending_parcel_pickup_mail_in">Pakke afhentning og post Indsendelsesservice</string>
+	<string name="poi_vending_parcel_pickup_mail_in">Pakke afhentning og post afsendelse</string>
 	<string name="poi_vending_condoms">Kondomer</string>
 	<string name="poi_vending_stamps">Frimærker</string>
 	<string name="poi_vending_bicycle_tube">Cykelslanger</string>
@@ -1700,7 +1700,7 @@
 	<string name="poi_vending_drinks_food">Drikkevarer og mad</string>
 	<string name="poi_vending_fuel">Benzinautomat</string>
 	<string name="poi_vending_parcel_pickup">Pakke afhentning</string>
-	<string name="poi_vending_parcel_mail_in">Pakke Indsendelsesservice</string>
+	<string name="poi_vending_parcel_mail_in">Pakke afsendelse</string>
 	<string name="poi_vending_milk">Mælk</string>
 	<string name="poi_vending_elongated_coin">Souvenirmønt</string>
 	<string name="poi_vending_bread">Brød</string>
@@ -1819,8 +1819,8 @@
 
 <string name="poi_bench_yes">Med bænk</string>
 	<string name="poi_bench_no">Uden bænk</string>
-	<string name="poi_waste_basket_yes">Med kurv</string>
-	<string name="poi_waste_basket_no">Uden kurv</string>
+	<string name="poi_waste_basket_yes">Med affaldskurv</string>
+	<string name="poi_waste_basket_no">Uden affaldskurv</string>
 
 	<string name="poi_shelter_type_public_transport">Sheltertype: stoppested</string>
 	<string name="poi_shelter_type_picnic_shelter">Sheltertype: skovtur</string>
@@ -1829,9 +1829,9 @@
 	<string name="poi_shelter_type_basic_hut">Sheltertype: hytte</string>
 	<string name="poi_shelter_type_building">Sheltertype: bygning</string>
 	<string name="poi_shelter_type_wildlife_hide">Sheltertype: vildtskjul</string>
-	<string name="poi_shelter_type_rock_shelter">Sheltertype: heller</string>
+	<string name="poi_shelter_type_rock_shelter">Sheltertype: klippehule</string>
 	<string name="poi_shelter_type_sun_shelter">Sheltertype: solafskærming</string>
-	<string name="poi_shelter_type_field_shelter">Sheltertype: feltly</string>
+	<string name="poi_shelter_type_field_shelter">Sheltertype: dyreshelter</string>
 	<string name="poi_shelter_type_tent">Sheltertype: telt</string>
 	<string name="poi_shelter_type_abandoned">Sheltertype: forladt</string>
 
@@ -1868,10 +1868,10 @@
 	<string name="poi_architecture_modern">Arkitektur: moderne</string>
 	<string name="poi_architecture_stalinist_neoclassicism">Arkitektur: stalinistisk nyklassicisme</string>
 	<string name="poi_architecture_eclectic">Arkitektur: eklecticisme</string>
-	<string name="poi_architecture_new_objectivity">Arkitektur: nye objektivitet</string>
+	<string name="poi_architecture_new_objectivity">Arkitektur: ny objektivitet</string>
 	<string name="poi_architecture_contemporary">Arkitektur: moderne</string>
 	<string name="poi_architecture_constructivism">Arkitektur: konstruktivisme</string>
-	<string name="poi_architecture_umgebinde">Arkitektur: umgebinde</string>
+	<string name="poi_architecture_umgebinde">Arkitektur: umgebindehaus</string>
 	<string name="poi_architecture_timber_frame">Arkitektur: træskelet</string>
 	<string name="poi_architecture_art_nouveau">Arkitektur: jugendstil</string>
 	<string name="poi_architecture_neoclassicism">Arkitektur: nyklassicisme</string>
@@ -1879,7 +1879,7 @@
 	<string name="poi_architecture_brutalism">Arkitektur: brutalisme</string>
 	<string name="poi_architecture_classicism">Arkitektur: klassicisme</string>
 	<string name="poi_architecture_gothic">Arkitektur: gotik</string>
-	<string name="poi_architecture_oldrussian">Arkitektur: oldrussian</string>
+	<string name="poi_architecture_oldrussian">Arkitektur: gammelrussisk</string>
 	<string name="poi_architecture_baroque">Arkitektur: barok</string>
 	<string name="poi_architecture_postconstructivism">Arkitektur: postkonstruktivisme</string>
 	<string name="poi_architecture_wilhelminian_style">Arkitektur: wilheminsk stil</string>

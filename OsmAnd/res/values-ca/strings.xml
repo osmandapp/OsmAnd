@@ -2156,4 +2156,6 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="show_free_version_banner">Mostra bàner de la versió gratuïta</string>
     <string name="show_free_version_banner_description">Encara que tinguéssiu una versió de pagament també podríeu veure el bàner de la versió gratuïta</string>
 <string name="downloading_number_of_files">Baixada - %1$d fitxer</string>
+    <string name="hillshade_layer_disabled">Capa d\'ombrejat desactivada</string>
+    <string name="buy">Compra</string>
     </resources>

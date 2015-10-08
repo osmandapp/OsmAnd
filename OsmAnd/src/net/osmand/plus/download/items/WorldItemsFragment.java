@@ -42,6 +42,7 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 	private static final Log LOG = PlatformUtil.getLog(WorldItemsFragment.class);
 
 	public static final int RELOAD_ID = 0;
+	public static final int SEARCH_ID = 1;
 
 	private WorldItemsAdapter listAdapter;
 
@@ -102,9 +103,9 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 			if (builder.getRegionMapItems().size() > 0) {
 				int unusedIndex = 0;
 				worldRegionsIndex = unusedIndex++;
-				listAdapter.add("World regions", builder.getRegionsFromAllItems());
+				listAdapter.add(getResources().getString(R.string.world_regions), builder.getRegionsFromAllItems());
 				worldMapsIndex = unusedIndex++;
-				listAdapter.add("World maps", builder.getRegionMapItems());
+				listAdapter.add(getResources().getString(R.string.world_maps), builder.getRegionMapItems());
 
 				int unusedSubIndex = 0;
 				List<String> voicePromptsItems = new LinkedList<>();
@@ -118,10 +119,9 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 				}
 				if (!voicePromptsItems.isEmpty()) {
 					voicePromptsIndex = unusedIndex;
-					listAdapter.add("Voice prompts", voicePromptsItems);
+					listAdapter.add(getResources().getString(R.string.voices), voicePromptsItems);
 				}
 			}
-			//listAdapter.add("Voice promts", null);
 		}
 	}
 
@@ -130,15 +130,15 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 		if (groupPosition == worldRegionsIndex) {
 			WorldRegion region = (WorldRegion)listAdapter.getChild(groupPosition, childPosition);
 			final RegionDialogFragment regionDialogFragment = RegionDialogFragment.createInstance(region.getRegionId());
-			regionDialogFragment.setOnDismissListener((DownloadActivity) getActivity());
-			((DownloadActivity)getActivity()).showDialog(getActivity(), regionDialogFragment);
+			regionDialogFragment.setOnDismissListener(getDownloadActivity());
+			getDownloadActivity().showDialog(getActivity(), regionDialogFragment);
 			return true;
 		} else if (groupPosition == voicePromptsIndex) {
 			if (childPosition == voicePromptsItemsRecordedSubIndex) {
-				((DownloadActivity)getActivity()).showDialog(getActivity(),
+				getDownloadActivity().showDialog(getActivity(),
 						VoiceDialogFragment.createInstance(VoicePromptsType.RECORDED));
 			} else {
-				((DownloadActivity) getActivity()).showDialog(getActivity(),
+				getDownloadActivity().showDialog(getActivity(),
 						VoiceDialogFragment.createInstance(VoicePromptsType.TTS));
 			}
 		}
@@ -147,19 +147,28 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		MenuItem item = menu.add(0, RELOAD_ID, 0, R.string.shared_string_refresh);
-		item.setIcon(R.drawable.ic_action_refresh_dark);
-		MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+		MenuItem itemReload = menu.add(0, RELOAD_ID, 0, R.string.shared_string_refresh);
+		itemReload.setIcon(R.drawable.ic_action_refresh_dark);
+		MenuItemCompat.setShowAsAction(itemReload, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+
+		MenuItem itemSearch = menu.add(0, SEARCH_ID, 1, R.string.shared_string_search);
+		itemSearch.setIcon(R.drawable.ic_action_search_dark);
+		MenuItemCompat.setShowAsAction(itemSearch, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		if (item.getItemId() == RELOAD_ID) {
-			// re-create the thread
-			DownloadActivity.downloadListIndexThread.runReloadIndexFiles();
-			return true;
+		switch (item.getItemId()) {
+			case RELOAD_ID:
+				// re-create the thread
+				DownloadActivity.downloadListIndexThread.runReloadIndexFiles();
+				return true;
+			case SEARCH_ID:
+				getDownloadActivity().showDialog(getActivity(), SearchDialogFragment.createInstance(""));
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
 		}
-		return super.onOptionsItemSelected(item);
 	}
 
 	private DownloadActivity getDownloadActivity() {

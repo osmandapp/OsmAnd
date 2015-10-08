@@ -129,16 +129,16 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 			listAdapter.clear();
 			int nextAvailableGroupPos = 0;
 			if (builder.getRegionMapItems().size() > 0) {
-				String sectionTitle = "Region maps";
+				String sectionTitle = getResources().getString(R.string.region_maps);
 				regionMapsGroupPos = nextAvailableGroupPos++;
 				listAdapter.add(sectionTitle, builder.getRegionMapItems());
 			}
 			if (builder.getAllResourceItems().size() > 0) {
 				String sectionTitle;
 				if (builder.getRegionMapItems().size() > 0) {
-					sectionTitle = "Additional maps";
+					sectionTitle = getResources().getString(R.string.additional_maps);
 				} else {
-					sectionTitle = "Regions";
+					sectionTitle = getResources().getString(R.string.regions);
 				}
 				additionalMapsGroupPos = nextAvailableGroupPos;
 				listAdapter.add(sectionTitle, builder.getAllResourceItems());

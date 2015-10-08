@@ -120,7 +120,7 @@ public class VoiceItemsFragment extends OsmandExpandableListFragment {
 		if (listAdapter != null) {
 			listAdapter.clear();
 			if (builder.getVoicePromptsItems(voicePromptsType).size() > 0) {
-				String sectionTitle = "Voice prompts";
+				String sectionTitle = getResources().getString(R.string.voices);
 				listAdapter.add(sectionTitle, builder.getVoicePromptsItems(voicePromptsType));
 			}
 		}

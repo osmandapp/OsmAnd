@@ -9,6 +9,11 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="regions">Regions</string>
+    <string name="additional_maps">Additional maps</string>
+    <string name="region_maps">Region maps</string>
+    <string name="world_maps">World maps</string>
+    <string name="world_regions">World regions</string>
     <string name="hillshade_layer_disabled">Hillshade layer disabled</string>
     <string name="srtm_plugin_disabled">Contour lines disabled</string>
     <string name="favorite_category_add_new">Add new</string>

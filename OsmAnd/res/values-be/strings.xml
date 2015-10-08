@@ -2133,4 +2133,9 @@
 <string name="hillshade_layer_disabled">Зацяненьне рэльефу адключана</string>
     <string name="activate_srtm_plugin">Калі ласка, актывуйце модуль SRTM</string>
     <string name="activate_seamarks_plugin">Калі ласка, актывуйце модуль Навігацыйныя знакі</string>
+    <string name="regions">Рэгіёны</string>
+    <string name="additional_maps">Дадатковыя мапы</string>
+    <string name="region_maps">Рэгіянальныя мапы</string>
+    <string name="world_maps">Сусьветныя мапы</string>
+    <string name="world_regions">Рэгіёны сьвету</string>
     </resources>
