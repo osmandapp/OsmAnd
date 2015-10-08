@@ -1886,4 +1886,35 @@
 	<string name="poi_architecture_renaissance">Arkitektur: renæssance</string>
 	<string name="poi_architecture_romanesque">Arkitektur: romansk stil</string>
 
+<string name="poi_tunnel_waterway">Vand tunnel</string>
+	<string name="poi_tunnel_car">Vejtunnel</string>
+	<string name="poi_tunnel_pedestrian">Fodgænger tunnel</string>
+	<string name="poi_tunnel_railway">Jernbanetunnel</string>
+	<string name="poi_bridge_car">Vejbro</string>
+	<string name="poi_bridge_pedestrian">Fodgængerbro</string>
+	<string name="poi_bridge_bicycle">Cykelbro</string>
+	<string name="poi_bridge_railway">Jernbanebro</string>
+	<string name="poi_bridge_waterway">Vandvejsbro</string>
+	<string name="poi_bridge_structure_beam">Broen struktur: stråle</string>
+	<string name="poi_bridge_structure_simple_suspension">Broen struktur: simple suspension</string>
+	<string name="poi_bridge_structure_suspension">Broen struktur: simple suspension</string>
+	<string name="poi_bridge_structure_arch">Broen struktur: arch</string>
+	<string name="poi_bridge_structure_truss">Broen struktur: bandagist</string>
+	<string name="poi_bridge_structure_floating">Broen struktur: flydende</string>
+	<string name="poi_bridge_structure_humpback">Broen struktur: pukkelhval</string>
+	<string name="poi_bridge_structure_cable_stayed">Broen struktur: skråstagsbro</string>
+	<string name="poi_bridge_structure_boardwalk">Broen struktur: boardwalk</string>
+	<string name="poi_bridge_structure_simple_wooden">Broen struktur: simple træ</string>
+	<string name="poi_bridge_structure_viaduct">Broen struktur: viadukt</string>
+	<string name="poi_bridge_structure_aqueduct">Broen struktur: akvædukt</string>
+	<string name="poi_bridge_structure_log">Broen struktur: bandagist</string>
+	<string name="poi_bridge_type_movable">Bro type: bevægelige</string>
+	<string name="poi_bridge_movable_bascule">Flytbar bro type: klapbro</string>
+	<string name="poi_bridge_movable_swing">Flytbar bro type: swing</string>
+	<string name="poi_bridge_movable_lift">Flytbar bro type: løft</string>
+	<string name="poi_bridge_movable_drawbridge">Flytbar bro type: vindebro</string>
+	<string name="poi_bridge_movable_submersible">Flytbar bro type: dykkede</string>
+	<string name="poi_bridge_movable_transporter">Flytbar bro type: transporter</string>
+	<string name="poi_bridge_movable_retractable">Flytbar bro type: Udtrækkelig</string>
+
 </resources>
