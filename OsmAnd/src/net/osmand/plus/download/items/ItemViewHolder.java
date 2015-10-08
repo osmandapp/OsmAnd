@@ -70,7 +70,6 @@ public class ItemViewHolder {
 		rightButton = (Button) convertView.findViewById(R.id.rightButton);
 		progressBar = (ProgressBar) convertView.findViewById(R.id.progressBar);
 		mapDateTextView = (TextView) convertView.findViewById(R.id.mapDateTextView);
-		;
 
 		TypedValue typedValue = new TypedValue();
 		Resources.Theme theme = convertView.getContext().getTheme();
@@ -108,11 +107,6 @@ public class ItemViewHolder {
 			}
 			if ((indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE ||
 					indexItem.getType() == DownloadActivityType.HILLSHADE_FILE) && srtmDisabled) {
-				if (indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE) {
-					nameTextView.setText(context.getString(R.string.srtm_plugin_disabled));
-				} else {
-					nameTextView.setText(context.getString(R.string.hillshade_layer_disabled));
-				}
 				OsmandPlugin srtmPlugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
 				if (srtmPlugin == null || srtmPlugin.needsInstallation()) {
 					rightButtonAction = RightButtonAction.ASK_FOR_SRTM_PLUGIN_PURCHASE;
@@ -124,7 +118,8 @@ public class ItemViewHolder {
 			} else if (indexItem.getType() == DownloadActivityType.WIKIPEDIA_FILE && freeVersion) {
 				rightButtonAction = RightButtonAction.ASK_FOR_FULL_VERSION_PURCHASE;
 				disabled = true;
-			} else if (showTypeInTitle) {
+			}
+			if (showTypeInTitle) {
 				nameTextView.setText(indexItem.getType().getString(context));
 			} else {
 				nameTextView.setText(indexItem.getVisibleName(context, context.getMyApplication().getRegions()));
@@ -196,9 +191,8 @@ public class ItemViewHolder {
 
 		if (indexFileNames != null && indexItem.isAlreadyDownloaded(indexFileNames)) {
 			boolean outdated = false;
-			String date = null;
+			String date;
 			if (indexItem.getType() == DownloadActivityType.HILLSHADE_FILE) {
-				// TODO write logic for outdated
 				date = indexItem.getDate(dateFormat);
 			} else {
 				String sfName = indexItem.getTargetFileName();
@@ -212,7 +206,6 @@ public class ItemViewHolder {
 			int colorId = outdated ? R.color.color_distance : R.color.color_ok;
 			mapDateTextView.setTextColor(context.getResources().getColor(colorId));
 		}
-
 	}
 
 	public void bindRegion(WorldRegion region, DownloadActivity context) {
@@ -227,6 +220,8 @@ public class ItemViewHolder {
 			}
 		}
 		descrTextView.setVisibility(View.GONE);
+		mapDateTextView.setVisibility(View.GONE);
+
 		leftImageView.setImageDrawable(getContextIcon(context, R.drawable.ic_map));
 		rightImageButton.setVisibility(View.GONE);
 		progressBar.setVisibility(View.GONE);

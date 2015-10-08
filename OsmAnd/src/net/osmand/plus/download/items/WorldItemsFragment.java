@@ -14,7 +14,9 @@ import net.osmand.plus.Version;
 import net.osmand.plus.WorldRegion;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.activities.OsmandExpandableListFragment;
+import net.osmand.plus.download.BaseDownloadActivity;
 import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.download.items.ItemsListBuilder.VoicePromptsType;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
@@ -140,6 +142,15 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 			} else {
 				getDownloadActivity().showDialog(getActivity(),
 						VoiceDialogFragment.createInstance(VoicePromptsType.TTS));
+			}
+		}else if (groupPosition == worldMapsIndex) {
+			if(((ItemViewHolder) v.getTag()).isItemAvailable()) {
+				IndexItem indexItem = ((ItemsListBuilder.ResourceItem)
+						listAdapter.getChild(groupPosition, childPosition)).getIndexItem();
+				((BaseDownloadActivity) getActivity())
+						.startDownload(indexItem);
+
+				return true;
 			}
 		}
 		return false;

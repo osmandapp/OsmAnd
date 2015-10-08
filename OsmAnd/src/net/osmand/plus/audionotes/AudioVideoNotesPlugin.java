@@ -35,6 +35,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.googlecode.concurrentlinkedhashmap.ConcurrentLinkedHashMap;
+
 import net.osmand.AndroidUtils;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
@@ -77,7 +79,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -129,18 +130,22 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	public final OsmandPreference<Boolean> SHOW_RECORDINGS;
 
 	private DataTileManager<Recording> recordings = new DataTileManager<AudioVideoNotesPlugin.Recording>(14);
-	private Map<String, Recording> recordingByFileName = new LinkedHashMap<String, Recording>();
+	private Map<String, Recording> recordingByFileName =
+			new ConcurrentLinkedHashMap.Builder<String, Recording>()
+					.maximumWeightedCapacity(1000)
+					.build();
 	private AudioNotesLayer audioNotesLayer;
 	private MapActivity activity;
 	private MediaRecorder mediaRec;
 	private File lastTakingPhoto;
 
-	private final static char SPLIT_DESC = ' '; 
+	private final static char SPLIT_DESC = ' ';
+
 	public static class Recording {
 		public Recording(File f) {
 			this.file = f;
 		}
-		
+
 		private File file;
 
 		private double lat;
@@ -177,7 +182,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		public File getFile() {
 			return file;
 		}
-		
+
 
 		public boolean setName(String name) {
 			File directory = file.getParentFile();
@@ -193,24 +198,24 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		public String getFileName() {
 			return file.getName();
 		}
-		
+
 		public String getDescriptionName(String fileName) {
 			int hashInd = fileName.lastIndexOf(SPLIT_DESC);
 			//backward compatibility
-			if( fileName.indexOf('.') - fileName.indexOf('_') > 12 && 
+			if (fileName.indexOf('.') - fileName.indexOf('_') > 12 &&
 					hashInd < fileName.indexOf('_')) {
 				hashInd = fileName.indexOf('_');
 			}
-			if(hashInd == -1) {
+			if (hashInd == -1) {
 				return null;
 			} else {
 				return fileName.substring(0, hashInd);
 			}
 		}
-		
+
 		public String getOtherName(String fileName) {
 			String descriptionName = getDescriptionName(fileName);
-			if(descriptionName != null) {
+			if (descriptionName != null) {
 				return fileName.substring(descriptionName.length() + 1); // SPLIT_DESC
 			} else {
 				return fileName;
@@ -232,8 +237,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			return "";
 		}
 
-		public String getSearchHistoryType(){
-			if (isPhoto()){
+		public String getSearchHistoryType() {
+			if (isPhoto()) {
 				return PointDescription.POINT_TYPE_PHOTO_NOTE;
 			} else if (isVideo()) {
 				return PointDescription.POINT_TYPE_VIDEO_NOTE;
@@ -349,7 +354,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			return ctx.getString(R.string.recording_description, "", getDuration(ctx), time)
 					.trim();
 		}
-		
+
 		public String getSmallDescription(Context ctx) {
 			String time = AndroidUtils.formatDateTime(ctx, file.lastModified());
 			if (isPhoto()) {
@@ -357,7 +362,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			}
 			updateInternalDescription();
 			return time + " " + getDuration(ctx);
-			
+
 		}
 
 		private String getDuration(Context ctx) {
@@ -444,7 +449,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		}
 		audioNotesLayer = new AudioNotesLayer(activity, this);
 		activity.getMapView().addLayer(audioNotesLayer, 3.5f);
-		if(recordControl == null) {
+		if (recordControl == null) {
 			registerWidget(activity);
 		}
 	}
@@ -534,7 +539,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			} else if (audioNotesLayer != null) {
 				mapView.removeLayer(audioNotesLayer);
 			}
-			if(recordControl == null) {
+			if (recordControl == null) {
 				registerWidget(activity);
 			}
 		} else {
@@ -543,7 +548,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				audioNotesLayer = null;
 			}
 			MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();
-			if(recordControl != null && mapInfoLayer != null) {
+			if (recordControl != null && mapInfoLayer != null) {
 				mapInfoLayer.removeSideWidget(recordControl);
 				recordControl = null;
 				mapInfoLayer.recreateControls();
@@ -1290,7 +1295,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			}
 		}
 	}
-	
+
 	@Override
 	public int getLogoResourceId() {
 		return R.drawable.ic_action_micro_dark;

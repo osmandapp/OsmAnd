@@ -101,7 +101,7 @@ public class SearchDialogFragment extends DialogFragment {
 					SearchItemsFragment.createInstance(searchText), SearchItemsFragment.TAG).commit();
 		}
 
-		getDownloadActivity().initFreeVersionBanner(view);
+		getDownloadActivity().registerFreeVersionBanner(view);
 		return view;
 	}
 
