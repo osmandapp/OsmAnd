@@ -2322,4 +2322,14 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 <string name="downloading_number_of_files">Sťahovanie - súbor %1$d</string>
     <string name="regions">Oblasti</string>
     <string name="additional_maps">Doplnkové mapy</string>
-    </resources>
+    <string name="region_maps">Mapy oblastí</string>
+    <string name="world_maps">Svetové mapy</string>
+    <string name="world_regions">Oblasti sveta</string>
+    <string name="hillshade_layer_disabled">Tieňovaný reliéf vypnutý</string>
+    <string name="buy">KÚPIŤ</string>
+    <string name="activate_seamarks_plugin">Prosím zapnite modul Námorné značky</string>
+    <string name="activate_srtm_plugin">Prosím zapnite modul Vrstevnice</string>
+    <string name="later">Neskôr</string>
+    <string name="get_full_version">Získať plnú verziu</string>
+    <string name="downloads">Sťahovania</string>
+</resources>
