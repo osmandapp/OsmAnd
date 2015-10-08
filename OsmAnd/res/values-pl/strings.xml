@@ -2267,4 +2267,21 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="simulate_your_location_descr">Symuluj za pomocą nagranej trasy GPX lub wyznaczonej trasy</string>
     <string name="downloads_left_template">%1$s pozostało do pobrania</string>
 	<string name="downloading_number_of_fiels">Pobieranie - %1$d pliku</string>
+<string name="regions">Regiony</string>
+    <string name="additional_maps">Dodatkowe mapy</string>
+    <string name="region_maps">Mapy regionów</string>
+    <string name="world_maps">Mapy świata</string>
+    <string name="world_regions">Regiony świata</string>
+    <string name="hillshade_layer_disabled">Wyłączona warstwa cieniowania wzgórz</string>
+    <string name="srtm_plugin_disabled">Wyłączone poziomice</string>
+    <string name="favourites_edit_dialog_title">Informacje ulubione</string>
+    <string name="downloading_number_of_files">Pobieranie - %1$d plik</string>
+    <string name="show_free_version_banner">Pokaż baner darmowej wersji</string>
+    <string name="show_free_version_banner_description">Nawet jeśli posiadasz płatną wersję to nadal nadal możesz zobaczyć baner darmowej wersji</string>
+    <string name="buy">KUP</string>
+    <string name="activate_seamarks_plugin">Proszę aktywuj plugin latarni morskich</string>
+    <string name="activate_srtm_plugin">Proszę aktywuj plugin SRTM</string>
+    <string name="later">Później</string>
+    <string name="get_full_version">Pobierz pełną wersję</string>
+    <string name="downloads">Pobierz</string>
 </resources>
