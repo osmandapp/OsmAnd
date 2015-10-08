@@ -2124,4 +2124,6 @@
     <string name="traffic_warning_hazard">Опасность</string>
     <string name="regions">Регионы</string>
     <string name="additional_maps">Дополнительные карты</string>
+    <string name="world_maps">Карты мира</string>
+    <string name="world_regions">Регионы мира</string>
     </resources>
