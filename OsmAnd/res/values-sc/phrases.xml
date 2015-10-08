@@ -1236,4 +1236,18 @@
 	<string name="poi_artwork_type_stele">Casta de òpera: losa</string>
 	<string name="poi_artwork_type_fountain">Casta de òpera: funtana</string>
 
+	<string name="poi_maxwidth">Largària màssima</string>
+	<string name="poi_iata">Còdighe IATA</string>
+	<string name="poi_icao">Còdighe ICAO</string>
+	<string name="poi_faa">Còdighe FAA</string>
+	
+	<string name="poi_flagpole">Palu de bandera</string>
+
+	<string name="poi_palm">Prama</string>
+	<string name="poi_cypress">Tzipressu</string>
+	<string name="poi_chimney">Fumajolu</string>
+	<string name="poi_beach_sand">Casta de plàia: arena</string>
+	<string name="poi_beach_shingle">Casta de plàia: giarra/ghiàia</string>
+	<string name="poi_beach_rocky">Casta de plàia: pedrosa</string>
+
 	</resources>
