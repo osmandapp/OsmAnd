@@ -1673,4 +1673,14 @@
 
 	<string name="poi_vending_parking_tickets">停車票卡</string>
 	<string name="poi_vending_cigarettes">香菸</string>
+	<string name="poi_vending_excrement_bags">糞便袋</string>
+	<string name="poi_vending_public_transport_tickets">公共交通票卡</string>
+	<string name="poi_vending_drinks">飲料</string>
+	<string name="poi_vending_sweets">糖果</string>
+	<string name="poi_vending_parcel_pickup_mail_in">包裹收集和郵遞</string>
+	<string name="poi_vending_condoms">保險套</string>
+	<string name="poi_vending_stamps">郵票</string>
+	<string name="poi_vending_bicycle_tube">自行車內胎</string>
+	<string name="poi_vending_food">食品</string>
+	<string name="poi_vending_drinks_food">飲料和食物</string>
 	</resources>
