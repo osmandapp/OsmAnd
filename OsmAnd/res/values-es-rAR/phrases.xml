@@ -1861,4 +1861,35 @@
 	<string name="poi_architecture_renaissance">Arquitectura renacentista</string>
 	<string name="poi_architecture_romanesque">Arquitectura románica</string>
 
+<string name="poi_tunnel_waterway">Túnel fluvial</string>
+	<string name="poi_tunnel_car">Túnel vial</string>
+	<string name="poi_tunnel_pedestrian">Túnel peatonal</string>
+	<string name="poi_tunnel_railway">Túnel ferroviario</string>
+	<string name="poi_bridge_car">Puente vial</string>
+	<string name="poi_bridge_pedestrian">Puente peatonal</string>
+	<string name="poi_bridge_bicycle">Puente para bicicletas</string>
+	<string name="poi_bridge_railway">Puente ferroviario</string>
+	<string name="poi_bridge_waterway">Puente fluvial</string>
+	<string name="poi_wetland_saltern">Salina</string>
+	<string name="poi_bridge_structure_beam">Estructura del puente: viga</string>
+	<string name="poi_bridge_structure_simple_suspension">Estructura del puente: suspensión simple</string>
+	<string name="poi_bridge_structure_suspension">Estructura del puente: suspensión</string>
+	<string name="poi_bridge_structure_arch">Estructura del puente: arco</string>
+	<string name="poi_bridge_structure_truss">Estructura del puente: reticulada</string>
+	<string name="poi_bridge_structure_floating">Estructura del puente: flotante</string>
+	<string name="poi_bridge_structure_cable_stayed">Estructura del puente: atirantado</string>
+	<string name="poi_bridge_structure_humpback">Estructura del puente: jorobado</string>
+	<string name="poi_bridge_structure_boardwalk">Estructura del puente: pasarela</string>
+	<string name="poi_bridge_structure_viaduct">Estructura del puente: viaducto</string>
+	<string name="poi_bridge_structure_aqueduct">Estructura del puente: acueducto</string>
+	<string name="poi_bridge_structure_log">Estructura del puente: tronco</string>
+	<string name="poi_bridge_type_movable">Estructura del puente: móvil</string>
+	<string name="poi_bridge_movable_bascule">Tipo de puente móvil: báscula</string>
+	<string name="poi_bridge_movable_swing">Tipo de puente móvil: oscilación</string>
+	<string name="poi_bridge_movable_lift">Tipo de puente móvil: ascensor</string>
+	<string name="poi_bridge_movable_drawbridge">Tipo de puente móvil: levadizo</string>
+	<string name="poi_bridge_movable_submersible">Tipo de puente móvil: sumergible</string>
+	<string name="poi_bridge_movable_transporter">Tipo de puente móvil: transportador</string>
+	<string name="poi_bridge_movable_retractable">Tipo de puente móvil: retráctil</string>
+
 </resources>
