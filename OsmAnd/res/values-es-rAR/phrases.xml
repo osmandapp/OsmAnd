@@ -1836,4 +1836,29 @@
 	<string name="poi_artwork_type_stele">Tipo de obra: estela</string>
 	<string name="poi_artwork_type_fountain">Tipo de obra: fuente</string>
 
+<string name="poi_width">Ancho</string>
+
+	<string name="poi_architect_name">Arquitecto</string>
+
+	<string name="poi_architecture_modern">Arquitectura moderna</string>
+	<string name="poi_architecture_stalinist_neoclassicism">Arquitectura neoclasista stalinista</string>
+	<string name="poi_architecture_eclectic">Arquitectura ecléctica</string>
+	<string name="poi_architecture_new_objectivity">Arquitectura: nueva objetividad</string>
+	<string name="poi_architecture_contemporary">Arquitectura contemporánea</string>
+	<string name="poi_architecture_constructivism">Arquitectura constructivista</string>
+	<string name="poi_architecture_umgebinde">Arquitectura: umgebinde</string>
+	<string name="poi_architecture_timber_frame">Arquitectura de madera</string>
+	<string name="poi_architecture_art_nouveau">Arquitectura: arte nuevo</string>
+	<string name="poi_architecture_neoclassicism">Arquitectura neoclasista</string>
+	<string name="poi_architecture_victorian">Arquitectura victoriana</string>
+	<string name="poi_architecture_brutalism">Arquitectura brutalista</string>
+	<string name="poi_architecture_classicism">Arquitectura clasicista</string>
+	<string name="poi_architecture_gothic">Arquitectura gótica</string>
+	<string name="poi_architecture_oldrussian">Arquitectura rusa antigua</string>
+	<string name="poi_architecture_baroque">Arquitectura barroca</string>
+	<string name="poi_architecture_postconstructivism">Arquitectura post-constructivista</string>
+	<string name="poi_architecture_wilhelminian_style">Arquitectura estilo guillerminista</string>
+	<string name="poi_architecture_renaissance">Arquitectura renacentista</string>
+	<string name="poi_architecture_romanesque">Arquitectura románica</string>
+
 </resources>
