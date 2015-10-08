@@ -1,6 +1,5 @@
 package net.osmand.plus.download;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
@@ -15,16 +14,17 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
 import android.support.v4.view.ViewPager;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.ExpandableListAdapter;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -756,8 +756,48 @@ public class DownloadActivity extends BaseDownloadActivity implements RegionDial
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
 			AlertDialog.Builder builder = new Builder(getActivity());
 			builder.setTitle(R.string.downloads).setNegativeButton(R.string.shared_string_cancel, null);
-//			builder.setAdapter(DownloadActivity.downloadListIndexThread.g)
-			return super.onCreateDialog(savedInstanceState);
+			Collection<List<DownloadEntry>> vs =
+					DownloadActivity.downloadListIndexThread.getEntriesToDownload().values();
+			ArrayList<DownloadEntry> downloadEntries = new ArrayList<>();
+			for (List<DownloadEntry> list : vs) {
+				downloadEntries.addAll(list);
+			}
+			builder.setAdapter(new ArrayAdapter<DownloadEntry>(getActivity(),
+							android.R.layout.test_list_item,
+							downloadEntries),
+					null);
+			return builder.create();
+		}
+
+		private class DownloadEntryAdapter extends ArrayAdapter<DownloadEntry> {
+			public DownloadEntryAdapter(Context context, List<DownloadEntry> objects) {
+				super(context, R.layout.two_line_with_images_list_item, objects);
+			}
+
+			@Override
+			public View getView(int position, View convertView, ViewGroup parent) {
+				return super.getView(position, convertView, parent);
+			}
+		}
+
+		private class DownloadEntryViewHolder {
+			private final TextView nameTextView;
+			private final TextView descrTextView;
+			private final ImageView leftImageView;
+			private final ImageView rightImageButton;
+			private final Button rightButton;
+			private final ProgressBar progressBar;
+			private final TextView mapDateTextView;
+
+			private DownloadEntryViewHolder(View convertView) {
+				nameTextView = (TextView) convertView.findViewById(R.id.name);
+				descrTextView = (TextView) convertView.findViewById(R.id.description);
+				leftImageView = (ImageView) convertView.findViewById(R.id.leftImageView);
+				rightImageButton = (ImageView) convertView.findViewById(R.id.rightImageButton);
+				rightButton = (Button) convertView.findViewById(R.id.rightButton);
+				progressBar = (ProgressBar) convertView.findViewById(R.id.progressBar);
+				mapDateTextView = (TextView) convertView.findViewById(R.id.mapDateTextView);
+			}
 		}
 	}
 }
