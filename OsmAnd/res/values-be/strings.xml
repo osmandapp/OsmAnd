@@ -2139,4 +2139,7 @@
     <string name="world_maps">Сусьветныя мапы</string>
     <string name="world_regions">Рэгіёны сьвету</string>
     <string name="downloads">Сьцягваньні</string>
-</resources>
+<string name="favorite_category_name">Назва катэгорыі</string>
+    <string name="favorite_category_add_new_title">Дадаць новую катэгорыю</string>
+    <string name="favorite_category_dublicate_message">Катэгорыя з пазначанай назвай ужо існуе. Калі ласка, падайце іншую назву.</string>
+    </resources>
