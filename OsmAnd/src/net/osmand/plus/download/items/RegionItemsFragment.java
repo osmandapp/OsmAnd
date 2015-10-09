@@ -68,7 +68,7 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 			regionId = "";
 
 		ExpandableListView listView = (ExpandableListView) view.findViewById(android.R.id.list);
-		listAdapter = new RegionsItemsAdapter(getActivity());
+		listAdapter = new RegionsItemsAdapter();
 		listView.setAdapter(listAdapter);
 		setListView(listView);
 
@@ -166,12 +166,10 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 		private boolean nauticalPluginDisabled;
 		private boolean freeVersion;
 
-		public RegionsItemsAdapter(Context ctx) {
+		public RegionsItemsAdapter() {
 			srtmDisabled = OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) == null;
 			nauticalPluginDisabled = OsmandPlugin.getEnabledPlugin(NauticalMapsPlugin.class) == null;
 			freeVersion = Version.isFreeVersion(getMyApplication());
-			TypedArray ta = ctx.getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorPrimary});
-			ta.recycle();
 		}
 
 		public void clear() {
