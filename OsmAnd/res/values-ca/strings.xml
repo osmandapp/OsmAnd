@@ -2158,4 +2158,12 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
 <string name="downloading_number_of_files">Baixada - %1$d fitxer</string>
     <string name="hillshade_layer_disabled">Capa d\'ombrejat desactivada</string>
     <string name="buy">Compra</string>
-    </resources>
+    <string name="regions">Regions</string>
+    <string name="additional_maps">Mapes addicionals</string>
+    <string name="region_maps">Mapes de regió</string>
+    <string name="world_maps">Mapes del món</string>
+    <string name="world_regions">Regions del món</string>
+    <string name="later">Mes tard</string>
+    <string name="get_full_version">Obteniu la versió completa</string>
+    <string name="downloads">Baixades</string>
+</resources>

@@ -1691,4 +1691,62 @@
 	<string name="poi_architecture_renaissance">Архитектурный стиль: ренессанс</string>
 	<string name="poi_architecture_romanesque">Архитектурный стиль: романский</string>
 
+	<string name="poi_tunnel_waterway">Водный туннель</string>
+	<string name="poi_tunnel_car">Туннель для автомобилей</string>
+	<string name="poi_tunnel_pedestrian">Туннель для пешеходов</string>
+	<string name="poi_tunnel_railway">Железнодорожный тоннель</string>
+	<string name="poi_bridge_car">Автомобильный туннель</string>
+	<string name="poi_bridge_pedestrian">Пешеходный мост</string>
+	<string name="poi_bridge_bicycle">Велосипедный мост</string>
+	<string name="poi_bridge_railway">Железнодорожный мост</string>
+	<string name="poi_bridge_waterway">Водный мост</string>
+	<string name="poi_bridge_structure_beam">Конструкция моста: балочный</string>
+	<string name="poi_bridge_structure_simple_suspension">Конструкция моста: простой подвесной</string>
+	<string name="poi_bridge_structure_suspension">Конструкция моста: подвесной</string>
+	<string name="poi_bridge_structure_arch">Конструкция моста: арочный</string>
+	<string name="poi_bridge_structure_truss">Конструкция моста: ферма</string>
+	<string name="poi_bridge_structure_floating">Конструкция моста: понтонный</string>
+	<string name="poi_bridge_structure_humpback">Конструкция моста: горбатый</string>
+	<string name="poi_bridge_structure_cable_stayed">Конструкция моста: вантовый</string>
+	<string name="poi_bridge_structure_boardwalk">Конструкция моста: дощатый настил</string>
+	<string name="poi_bridge_structure_simple_wooden">Конструкция моста: простой деревянный</string>
+	<string name="poi_bridge_structure_viaduct">Конструкция моста: виадук</string>
+	<string name="poi_bridge_structure_aqueduct">Конструкция моста: акведук</string>
+	<string name="poi_bridge_structure_log">Конструкция моста: бревно</string>
+	<string name="poi_bridge_type_movable">Тип моста: разводной</string>
+	<string name="poi_bridge_movable_bascule">Тип разводного моста: раскрывающийся</string>
+	<string name="poi_bridge_movable_swing">Тип разводного моста: поворотный</string>
+	<string name="poi_bridge_movable_lift">Тип разводного моста: вертикально-подъёмный</string>
+	<string name="poi_bridge_movable_drawbridge">Тип разводного моста: подъёмный</string>
+	<string name="poi_bridge_movable_submersible">Тип разводного моста: затопляемый</string>
+	<string name="poi_bridge_movable_transporter">Тип разводного моста: летающий паром</string>
+	<string name="poi_bridge_movable_retractable">Тип разводного моста: выдвигаемый</string>
+
+	<string name="poi_lit_yes">Объект освещён: да</string>
+	<string name="poi_lit_no">Объект освещён: нет</string>
+
+	<string name="poi_surface_unpaved">Поверхность: без покрытия</string>
+	<string name="poi_surface_paved">Поверхность: с покрытием</string>
+	<string name="poi_surface_asphalt">Поверхность: асфальт</string>
+	<string name="poi_surface_concrete">Поверхность: бетон</string>
+	<string name="poi_surface_sett">Поверхность: брусчатка</string>
+	<string name="poi_surface_cobblestone">Поверхность: уложенный булыжник</string>
+	<string name="poi_surface_paving_stones">Поверхность: тротуарная плитка</string>
+	<string name="poi_surface_pebblestone">Поверхность: галька</string>
+	<string name="poi_surface_stone">Поверхность: каменистая</string>
+	<string name="poi_surface_metal">Поверхность: металл</string>
+	<string name="poi_surface_wood">Поверхность: лес</string>
+	<string name="poi_surface_gravel">Поверхность: гравий</string>
+	<string name="poi_surface_fine_gravel">Поверхность: многослойный гравий</string>
+	<string name="poi_surface_compacted">Поверхность: утрамбованная почва и камни</string>
+	<string name="poi_surface_sand">Поверхность: песок</string>
+	<string name="poi_surface_grass">Поверхность: трава</string>
+	<string name="poi_surface_grass_paver">Поверхность: неплотное мощение камнями</string>
+	<string name="poi_surface_ground">Поверхность: голая почва</string>
+	<string name="poi_surface_dirt">Поверхность: грязь</string>
+	<string name="poi_surface_mud">Поверхность: грязь без твёрдого слоя</string>
+	<string name="poi_surface_ice">Поверхность: лёд</string>
+	<string name="poi_surface_salt">Поверхность: соль (соляные озёра)</string>
+	<string name="poi_surface_snow">Поверхность: снег (зимник)</string>
+
 </resources>

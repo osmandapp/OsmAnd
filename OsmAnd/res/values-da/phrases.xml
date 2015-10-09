@@ -1886,4 +1886,62 @@
 	<string name="poi_architecture_renaissance">Arkitektur: renæssance</string>
 	<string name="poi_architecture_romanesque">Arkitektur: romansk stil</string>
 
+<string name="poi_tunnel_waterway">Vand tunnel</string>
+	<string name="poi_tunnel_car">Vejtunnel</string>
+	<string name="poi_tunnel_pedestrian">Fodgænger tunnel</string>
+	<string name="poi_tunnel_railway">Jernbanetunnel</string>
+	<string name="poi_bridge_car">Vejbro</string>
+	<string name="poi_bridge_pedestrian">Fodgængerbro</string>
+	<string name="poi_bridge_bicycle">Cykelbro</string>
+	<string name="poi_bridge_railway">Jernbanebro</string>
+	<string name="poi_bridge_waterway">Vandvejsbro</string>
+	<string name="poi_bridge_structure_beam">Broen struktur: stråle</string>
+	<string name="poi_bridge_structure_simple_suspension">Broen struktur: simple suspension</string>
+	<string name="poi_bridge_structure_suspension">Broen struktur: simple suspension</string>
+	<string name="poi_bridge_structure_arch">Broen struktur: arch</string>
+	<string name="poi_bridge_structure_truss">Broen struktur: bandagist</string>
+	<string name="poi_bridge_structure_floating">Broen struktur: flydende</string>
+	<string name="poi_bridge_structure_humpback">Broen struktur: pukkelhval</string>
+	<string name="poi_bridge_structure_cable_stayed">Broen struktur: skråstagsbro</string>
+	<string name="poi_bridge_structure_boardwalk">Broen struktur: boardwalk</string>
+	<string name="poi_bridge_structure_simple_wooden">Broen struktur: simple træ</string>
+	<string name="poi_bridge_structure_viaduct">Broen struktur: viadukt</string>
+	<string name="poi_bridge_structure_aqueduct">Broen struktur: akvædukt</string>
+	<string name="poi_bridge_structure_log">Broen struktur: bandagist</string>
+	<string name="poi_bridge_type_movable">Bro type: bevægelige</string>
+	<string name="poi_bridge_movable_bascule">Flytbar bro type: klapbro</string>
+	<string name="poi_bridge_movable_swing">Flytbar bro type: swing</string>
+	<string name="poi_bridge_movable_lift">Flytbar bro type: løft</string>
+	<string name="poi_bridge_movable_drawbridge">Flytbar bro type: vindebro</string>
+	<string name="poi_bridge_movable_submersible">Flytbar bro type: dykkede</string>
+	<string name="poi_bridge_movable_transporter">Flytbar bro type: transporter</string>
+	<string name="poi_bridge_movable_retractable">Flytbar bro type: Udtrækkelig</string>
+
+<string name="poi_lit_yes">Tændt: ja</string>
+	<string name="poi_lit_no">Tændt: nej</string>
+
+	<string name="poi_surface_unpaved">Overflade: asfalterede</string>
+	<string name="poi_surface_paved">Overflade: banede</string>
+	<string name="poi_surface_asphalt">Overflade: asfalt</string>
+	<string name="poi_surface_concrete">Overflade: beton</string>
+	<string name="poi_surface_sett">Overflade: Indstil</string>
+	<string name="poi_surface_cobblestone">Overflade: brosten</string>
+	<string name="poi_surface_paving_stones">Overflade: brosten</string>
+	<string name="poi_surface_pebblestone">Overflade: pebblestone</string>
+	<string name="poi_surface_stone">Overflade: sten</string>
+	<string name="poi_surface_metal">Overflade: metal</string>
+	<string name="poi_surface_wood">Overflade: træ</string>
+	<string name="poi_surface_gravel">Overflade: grus</string>
+	<string name="poi_surface_fine_gravel">Overflade: fint grus</string>
+	<string name="poi_surface_compacted">Overflade: komprimeret</string>
+	<string name="poi_surface_sand">Overflade: sand</string>
+	<string name="poi_surface_grass">Overflade: græs</string>
+	<string name="poi_surface_grass_paver">Overflade: græs brolægger</string>
+	<string name="poi_surface_ground">Overflade: jorden</string>
+	<string name="poi_surface_dirt">Overflade: snavs</string>
+	<string name="poi_surface_mud">Overflade: mudder</string>
+	<string name="poi_surface_ice">Overflade: is</string>
+	<string name="poi_surface_salt">Overflade: salt</string>
+	<string name="poi_surface_snow">Overflade: sne</string>
+
 </resources>

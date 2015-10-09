@@ -2022,4 +2022,10 @@
     <string name="activate_srtm_plugin">Omogočite vstavek SRTM</string>
     <string name="later">Kasneje</string>
     <string name="get_full_version">Pridobi polno različico programa</string>
+<string name="regions">Območja</string>
+    <string name="additional_maps">Dodatni zemljevidi</string>
+    <string name="region_maps">Zemljevidi regij</string>
+    <string name="world_maps">Svetovni zemljevidi</string>
+    <string name="world_regions">Svetovna območja</string>
+    <string name="downloads">Prejemi</string>
 </resources>

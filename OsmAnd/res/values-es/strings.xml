@@ -2219,5 +2219,21 @@
     <string name="favourites_context_menu_add">Añadir favorito</string>
 	<string name="roads">Carreteras</string>
 <string name="favorite_category_add_new">Añadir nuevo</string>
-    <string name="favorite_category_select">Seleccionar categoría</string>
-    </resources>
+    <string name="favorite_category_select">Elegir categoría</string>
+    <string name="regions">Regiones</string>
+    <string name="additional_maps">Mapas adicionales</string>
+    <string name="region_maps">Mapas regionales</string>
+    <string name="world_maps">Mapas mundiales</string>
+    <string name="world_regions">Regiones del mundo</string>
+    <string name="hillshade_layer_disabled">Capa de sombreado desactivada</string>
+    <string name="srtm_plugin_disabled">Curvas de nivel desactivadas</string>
+    <string name="downloading_number_of_files">Descargando - %1$d archivo/s</string>
+    <string name="show_free_version_banner">Mostrar banner de versión gratuita</string>
+    <string name="show_free_version_banner_description">Aunque tenga la versión paga, podrá ver el banner de la versión gratuita</string>
+    <string name="buy">COMPRAR</string>
+    <string name="activate_seamarks_plugin">Active el complemento náutico</string>
+    <string name="activate_srtm_plugin">Active el complemento SRTM</string>
+    <string name="later">Luego</string>
+    <string name="get_full_version">Obtener versión completa</string>
+    <string name="downloads">Descargas</string>
+</resources>

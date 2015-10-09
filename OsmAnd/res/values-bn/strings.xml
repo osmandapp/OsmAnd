@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="regions">অঞ্চল</string>
+    <string name="additional_maps">অতিরিক্ত ম্যাপ</string>
+    <string name="region_maps">অঞ্চল ম্যাপ</string>
+    <string name="world_maps">বিশ্ব মানচিত্র</string>
+    <string name="world_regions">বিশ্ব অঞ্চল</string>
+    <string name="hillshade_layer_disabled">পর্বতছায়া স্তর নিষ্ক্রিয়</string>
+    <string name="favorite_category_add_new">নতুন সংযোজন</string>
+    </resources>

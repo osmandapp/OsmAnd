@@ -1198,4 +1198,56 @@
 
 	<string name="poi_memorial_statue">Istàtua</string>
 	<string name="poi_vending_bread">Pane</string>
+	<string name="poi_architect_name">Architetu</string>
+
+	<string name="poi_architecture_modern">Architetura: modernu</string>
+	<string name="poi_architecture_stalinist_neoclassicism">Architetura: classicismu sotzialista/stalinista</string>
+	<string name="poi_architecture_eclectic">Architetura: ecletismu</string>
+	<string name="poi_architecture_new_objectivity">Architetura: ogetividade noa</string>
+	<string name="poi_architecture_contemporary">Architetura: contemporàneu</string>
+	<string name="poi_architecture_constructivism">Architetura: constructivismu</string>
+	<string name="poi_architecture_umgebinde">Architetura: umgebinde</string>
+	<string name="poi_architecture_art_nouveau">Architetura: art nouveau/liberty</string>
+	<string name="poi_architecture_neoclassicism">Architetura: neoclassicismu</string>
+	<string name="poi_architecture_victorian">Architetura: istile vitorianu</string>
+	<string name="poi_architecture_brutalism">Architetura: brutalismu</string>
+	<string name="poi_architecture_classicism">Architetura: classicismu</string>
+	<string name="poi_architecture_gothic">Architetura: istile gòticu</string>
+	<string name="poi_architecture_baroque">Architetura: barocu</string>
+	<string name="poi_architecture_postconstructivism">Architetura: postconstructivismu</string>
+	<string name="poi_architecture_wilhelminian_style">Architetura: istile wilhelminianu</string>
+	<string name="poi_architecture_renaissance">Architetura: rinascimentu</string>
+	<string name="poi_architecture_romanesque">Architetura: romànicu</string>
+
+<string name="poi_architecture_timber_frame"/>
+	<string name="poi_width">Largària</string>
+
+	<string name="poi_artwork_type_sculpture">Casta de òpera: iscultura</string>
+	<string name="poi_artwork_type_statue">Casta de òpera: istàtua</string>
+	<string name="poi_artwork_type_mural">Casta de òpera: murale</string>
+	<string name="poi_artwork_type_architecture">Casta de òpera: architetura</string>
+	<string name="poi_artwork_type_painting">Casta de òpera: pintura</string>
+	<string name="poi_artwork_type_stone">Casta de òpera: pedra</string>
+	<string name="poi_artwork_type_bust">Casta de òpera: bustu</string>
+	<string name="poi_artwork_type_installation">Casta de òpera: installatzione</string>
+	<string name="poi_artwork_type_mosaic">Casta de òpera: mosàicu</string>
+	<string name="poi_artwork_type_relief">Casta de òpera: rilievu/bassorilievu</string>
+	<string name="poi_artwork_type_graffiti">Casta de òpera: grafitos</string>
+	<string name="poi_artwork_type_stele">Casta de òpera: losa</string>
+	<string name="poi_artwork_type_fountain">Casta de òpera: funtana</string>
+
+	<string name="poi_maxwidth">Largària màssima</string>
+	<string name="poi_iata">Còdighe IATA</string>
+	<string name="poi_icao">Còdighe ICAO</string>
+	<string name="poi_faa">Còdighe FAA</string>
+	
+	<string name="poi_flagpole">Palu de bandera</string>
+
+	<string name="poi_palm">Prama</string>
+	<string name="poi_cypress">Tzipressu</string>
+	<string name="poi_chimney">Fumajolu</string>
+	<string name="poi_beach_sand">Casta de plàia: arena</string>
+	<string name="poi_beach_shingle">Casta de plàia: giarra/ghiàia</string>
+	<string name="poi_beach_rocky">Casta de plàia: pedrosa</string>
+
 	</resources>

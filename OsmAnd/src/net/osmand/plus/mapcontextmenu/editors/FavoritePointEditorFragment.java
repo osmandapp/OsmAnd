@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.PointDescription;
@@ -15,6 +16,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
+import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.util.Algorithms;
 
 public class FavoritePointEditorFragment extends PointEditorFragment {
@@ -84,7 +86,8 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 
 	@Override
 	protected void save(final boolean needDismiss) {
-		final FavouritePoint point = new FavouritePoint(favorite.getLatitude(), favorite.getLongitude(), getNameTextValue(), getCategoryTextValue());
+		final FavouritePoint point = new FavouritePoint(favorite.getLatitude(), favorite.getLongitude(),
+				getNameTextValue(), getCategoryTextValue());
 		point.setDescription(getDescriptionTextValue());
 		AlertDialog.Builder builder = FavouritesDbHelper.checkDuplicates(point, helper, getMapActivity());
 
@@ -123,10 +126,13 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 			dismiss(false);
 		}
 
-		PointDescription pointDescription = favorite.getPointDescription();
-		pointDescription.setLat(favorite.getLatitude());
-		pointDescription.setLon(favorite.getLongitude());
-		getMapActivity().getContextMenu().show(pointDescription, new FavouritePoint(favorite));
+		MapContextMenu menu = getMapActivity().getContextMenu();
+		if (menu.getObject() == favorite) {
+			PointDescription pointDescription = favorite.getPointDescription();
+			pointDescription.setLat(favorite.getLatitude());
+			pointDescription.setLon(favorite.getLongitude());
+			menu.refreshMenu(pointDescription, favorite);
+		}
 	}
 
 	private void doAddFavorite(String name, String category, String description) {
@@ -166,7 +172,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 
 	@Override
 	public String getCategoryInitValue() {
-		return favorite.getCategory();
+		return favorite.getCategory().length() == 0 ? getString(R.string.shared_string_favorites) : favorite.getCategory();
 	}
 
 	@Override

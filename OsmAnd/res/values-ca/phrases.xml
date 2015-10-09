@@ -1313,4 +1313,15 @@
 	<string name="poi_resource_stone">Pedra</string>
 	<string name="poi_resource_tin">Estany</string>
 	<string name="poi_resource_tuff">Tuf</string>
+	<string name="poi_bridge_movable_retractable">Tipus de pont mòbil: retràctil</string>
+
+<string name="poi_bridge_movable_bascule">Tipus de pont mòbil: basculant</string>
+	<string name="poi_bridge_movable_swing">Tipus de pont mòbil: giratori</string>
+	<string name="poi_bridge_movable_lift">Tipus de pont mòbil: ascensional</string>
+	<string name="poi_bridge_movable_drawbridge">Tipus de pont mòbil: llevadís</string>
+	<string name="poi_bridge_movable_submersible">Tipus de pont mòbil: sumergible</string>
+	<string name="poi_bridge_movable_transporter">Tipus de pont mòbil: transbordador</string>
+	<string name="poi_bridge_pedestrian">Passarel·la de vianants</string>
+	<string name="poi_bridge_bicycle">Pont per bicicletes</string>
+	<string name="poi_bridge_railway">Pont ferroviari</string>
 	</resources>
