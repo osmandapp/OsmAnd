@@ -238,6 +238,15 @@ public class DownloadIndexesThread {
 				continue;
 			}
 
+			if (resource.type == DownloadActivityType.NORMAL_FILE
+					|| resource.type == DownloadActivityType.ROADS_FILE) {
+				if (resource.isAlreadyDownloaded(indexFileNames)) {
+					region.processNewMapState(checkIfItemOutdated(resource)
+							? WorldRegion.MapState.OUTDATED : WorldRegion.MapState.DOWNLOADED);
+				} else {
+					region.processNewMapState(WorldRegion.MapState.NOT_DOWNLOADED);
+				}
+			}
 			typesSet.add(resource.getType());
 			regionResources.put(resource.getSimplifiedFileName(), resource);
 		}
@@ -529,6 +538,8 @@ public class DownloadIndexesThread {
 			protected IndexFileList doInBackground(Void... params) {
 				IndexFileList indexFileList = DownloadOsmandIndexesHelper.getIndexesList(ctx);
 				if (indexFileList != null) {
+					updateLoadedFiles();
+					prepareFilesToUpdate();
 					prepareData(indexFileList.getIndexFiles());
 				}
 				return indexFileList;
@@ -538,7 +549,6 @@ public class DownloadIndexesThread {
 				indexFiles = result;
 				if (indexFiles != null && uiActivity != null) {
 					dataPrepared = resourcesByRegions.size() > 0;
-					prepareFilesToUpdate();
 					boolean basemapExists = uiActivity.getMyApplication().getResourceManager().containsBasemap();
 					IndexItem basemap = indexFiles.getBasemap();
 					if (basemap != null) {
@@ -565,7 +575,6 @@ public class DownloadIndexesThread {
 				if (uiActivity != null) {
 					uiActivity.updateProgress(false);
 					runCategorization(uiActivity.getDownloadType());
-					runCategorization(); // for new implementation
 					uiActivity.onCategorizationFinished();
 				}
 			}
@@ -647,8 +656,6 @@ public class DownloadIndexesThread {
 				return filtered;
 			}
 
-			;
-
 			public List<IndexItem> getFilteredByType() {
 				final List<IndexItem> filtered = new ArrayList<IndexItem>();
 				List<IndexItem> cachedIndexFiles = getCachedIndexFiles();
@@ -681,58 +688,6 @@ public class DownloadIndexesThread {
 
 			}
 
-		};
-		execute(inst);
-	}
-
-	public void runCategorization() {
-		final BasicProgressAsyncTask<Void, Void, List<IndexItem>> inst
-				= new BasicProgressAsyncTask<Void, Void, List<IndexItem>>(ctx) {
-
-			@Override
-			protected void onPreExecute() {
-				super.onPreExecute();
-				currentRunningTask.add(this);
-				this.message = ctx.getString(R.string.downloading_list_indexes);
-				if (uiActivity != null) {
-					uiActivity.updateProgress(false);
-				}
-			}
-
-			@Override
-			protected List<IndexItem> doInBackground(Void... params) {
-				final List<IndexItem> filtered = getFilteredByType();
-				updateLoadedFiles();
-				return filtered;
-			}
-
-			public List<IndexItem> getFilteredByType() {
-				final List<IndexItem> filtered = new ArrayList<IndexItem>();
-				List<IndexItem> cachedIndexFiles = getCachedIndexFiles();
-				if (cachedIndexFiles != null) {
-					for (IndexItem file : cachedIndexFiles) {
-						filtered.add(file);
-					}
-				}
-				return filtered;
-			}
-
-			@Override
-			protected void onPostExecute(List<IndexItem> filtered) {
-				prepareFilesToUpdate();
-				currentRunningTask.remove(this);
-				if (uiActivity != null) {
-					uiActivity.updateProgress(false);
-				}
-			}
-
-			@Override
-			protected void updateProgress(boolean updateOnlyProgress) {
-				if (uiActivity != null) {
-					uiActivity.updateProgress(updateOnlyProgress);
-				}
-
-			}
 		};
 		execute(inst);
 	}
