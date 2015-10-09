@@ -1313,7 +1313,7 @@
 	<string name="poi_mini_roundabout">Mini roundabout</string>
 	<string name="poi_railway_crossing">Railroad crossing</string>
 	<string name="poi_railway_level_crossing">Level crossing</string>
-	<string name="poi_bird_hide">Bird hide</string>
+	<string name="poi_bird_hide">Place to observe birds</string>
 	<string name="poi_horse_riding">Horse riding</string>
 	<string name="poi_leisure_common">Common leisure area</string>
 	<string name="poi_garden">Garden</string>
@@ -1932,5 +1932,19 @@
 	<string name="poi_service_bicycle_chaintool_no">Bicycle chaintool: no</string>
 	<string name="poi_service_bicycle_second_hand_yes">Retail sale of second-hand bicycles: yes</string>
 	<string name="poi_service_bicycle_second_hand_no">Retail sale of second-hand bicycles: no</string>
+
+	<string name="poi_wildlife_hide">Place to observe wildlife</string>
+
+	<string name="poi_training_language">Training: language</string>
+	<string name="poi_training_music">Training: music</string>
+	<string name="poi_training_dance">Training: dance</string>
+	<string name="poi_training_sport">Training: sport</string>
+	<string name="poi_training_art">Training: art</string>
+	<string name="poi_training_cooking">Training: cooking</string>
+	<string name="poi_training_computer">Training: computer</string>
+	<string name="poi_training_yoga">Training: yoga</string>
+	<string name="poi_training_martial_art">Training: martial art</string>
+	<string name="poi_training_aviation">Training: aviation</string>
+	<string name="poi_training_hairdressing">Training: hairdressing</string>
 
 </resources>
