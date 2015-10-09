@@ -1903,7 +1903,7 @@
 	<string name="poi_bridge_structure_floating">Brokonstruktion: pontonbro</string>
 	<string name="poi_bridge_structure_humpback">Brokonstruktion: humpback</string>
 	<string name="poi_bridge_structure_cable_stayed">Brokonstruktion: skråstagsbro</string>
-	<string name="poi_bridge_structure_boardwalk">Brokonstruktion: mole</string>
+	<string name="poi_bridge_structure_boardwalk">Brokonstruktion: havnepromenade</string>
 	<string name="poi_bridge_structure_simple_wooden">Brokonstruktion: simpel træbro</string>
 	<string name="poi_bridge_structure_viaduct">Brokonstruktion: viadukt</string>
 	<string name="poi_bridge_structure_aqueduct">Brokonstruktion: akvædukt</string>
@@ -1954,6 +1954,6 @@
 	<string name="poi_route_funicular_ref">Kabelbane</string>
 	<string name="poi_route_ferry_ref">Færge</string>
 
-	<string name="poi_route_railway_ref">Rute for en jernbane</string>
+	<string name="poi_route_railway_ref">Jernbanerute</string>
 
 </resources>
