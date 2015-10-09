@@ -1761,5 +1761,25 @@
 
 	<string name="poi_route_railway_ref">Железнодорожный путь</string>
 
+	<string name="poi_historic_yes">Исторический объект</string>
+	<string name="poi_surveillance_yes">С видеонаблюдением</string>
+	<string name="poi_shop_yes">С магазином</string>
+
+	<string name="poi_service_bicycle_retail_yes">Продажа велосипедов: да</string>
+	<string name="poi_service_bicycle_retail_no">Продажа велосипедов: нет</string>
+	<string name="poi_service_bicycle_repair_yes">Ремонт велосипедов: да</string>
+	<string name="poi_service_bicycle_repair_no">Ремонт велосипедов: нет</string>
+	<string name="poi_service_bicycle_rental_yes">Прокат велосипедов: да</string>
+	<string name="poi_service_bicycle_rental_no">Прокат велосипедов: нет</string>
+	<string name="poi_service_bicycle_pump_yes">Подкачка велосипедных шин: да</string>
+	<string name="poi_service_bicycle_pump_no">Подкачка велосипедных шин: нет</string>
+	<string name="poi_service_bicycle_diy_yes">Инструменты для самостоятельного ремонта велосипеда: да</string>
+	<string name="poi_service_bicycle_diy_no">Инструменты для самостоятельного ремонта велосипеда: нет</string>
+	<string name="poi_service_bicycle_cleaning_yes">Мойка велосипедов: да</string>
+	<string name="poi_service_bicycle_cleaning_no">Мойка велосипедов: нет</string>
+	<string name="poi_service_bicycle_chaintool_yes">Выжимка цепи для велосипедов: да</string>
+	<string name="poi_service_bicycle_chaintool_no">Выжимка цепи для велосипедов: нет</string>
+	<string name="poi_service_bicycle_second_hand_yes">Продажа подержанных велосипедов: да</string>
+	<string name="poi_service_bicycle_second_hand_no">Продажа подержанных велосипедов: нет</string>
 
 </resources>
