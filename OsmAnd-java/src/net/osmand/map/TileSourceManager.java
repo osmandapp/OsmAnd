@@ -140,6 +140,9 @@ public class TileSourceManager {
 			return expirationTimeMillis;
 		}
 		
+		public String getReferer() {
+			return null;
+		}
 
 		@Override
 		public int getTileSize() {
