@@ -2177,7 +2177,7 @@
     <string name="world_maps">Verdenskort</string>
     <string name="world_regions">Regioner i verden</string>
     <string name="downloads">Filhentninger</string>
-<string name="favorite_category_dublicate_message">Angivne kategorinavn findes allerede. Angiv et andet navn.</string>
+<string name="favorite_category_dublicate_message">Kategorinavnet findes allerede. Angiv et andet navn.</string>
     <string name="favorite_category_name">Kategorinavn</string>
     <string name="favorite_category_add_new_title">Tilføj ny kategori</string>
     </resources>
