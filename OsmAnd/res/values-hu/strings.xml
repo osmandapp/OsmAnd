@@ -138,8 +138,8 @@
   <string name="user_name_descr">openstreetmap.org felé történő adatküldéshez szükséges</string>
   <string name="user_password">OSM jelszavad</string>
   <string name="user_password_descr">openstreetmap.org felé történő adatküldéshez szükséges</string>
-  <string name="osmand_service">Alvó mód</string>
-  <string name="osmand_service_descr">OsmAnd kikapcsolt képernyővel való használatához</string>
+  <string name="osmand_service">Háttér mód</string>
+  <string name="osmand_service_descr">Az OsmAnd háttérben fut, ha ki van kapcsolava a képernyő</string>
   <string name="tip_rotation_switching">Térkép elforgatása</string>
   
   <string name="switch_to_raster_map_to_see">Nincs internet nélkül használható térkép erre a területre. Letölthetsz egyet a Beállításokban (Térképek kezelése), vagy átválthatsz online térképekre (engedélyezd az online bővítményt).</string>
@@ -532,13 +532,13 @@
   <string name="gps_provider">GPS</string>
   <string name="int_seconds">másodperc</string>
   <string name="int_min">perc</string>
-  <string name="background_service_int_descr">Alvó mód szolgáltatás felébredési intervallumának megadása</string>
+  <string name="background_service_int_descr">Háttérszolgáltatás felébredési intervallumának megadása</string>
   <string name="background_service_int">GPS felébredési időköz</string>
-  <string name="background_service_provider_descr">Helymeghatározási szolgáltatás kiválasztása az alvó mód szolgáltatáshoz</string>
+  <string name="background_service_provider_descr">Helymeghatározási szolgáltatás kiválasztása a háttérszolgáltatáshoz</string>
   <string name="background_service_provider">Helymeghatározási szolgáltatás</string>
   <string name="background_router_service_descr">OsmAnd futtatása a háttérben, hogy kikapcsolt képernyővel is kövesse a pozíciódat</string>
-  <string name="background_router_service">Működés alvó módban</string>
-  <string name="off_router_service_no_gps_available">Az Alvó mód szolgáltatásnak szüksége van bekapcsolt GPS-re.</string>
+  <string name="background_router_service">Működés háttér üzemmódban</string>
+  <string name="off_router_service_no_gps_available">Az navigációs háttérszolgáltatásnak szüksége van bekapcsolt GPS-re.</string>
   <string name="hide_poi_filter">Szűrő elrejtése</string>
   <string name="show_poi_filter">Szűrő megjelenítése</string>
   <string name="search_poi_filter">Szűrés:</string>
@@ -832,7 +832,7 @@
   
   
   <string name="osmand_rastermaps_plugin_description">"Ezzel a bővítménnyel az online (úgynevezett csempés vagy raszteres) térképek több típusához is hozzáférhet az előre meghatározott Openstreetmap csempéktől kezdve (mint például a Mapnik) a műholdképekig és a speciális célú rétegekig, úgymint időjárási térképek, éghajlati térképek, földtani térképek, domborzatnyékolási rétegek, stb.\n\nEzen térképek bármelyike használható az OsmAnd térkép képernyőjén megjelenítendő fő (alap) térképként, vagy egy másik alaptérkép borításaként vagy alátétjeként (mint például az OsmAnd szokásos kapcsolat nélküli térképei). Bármely alátét térkép jobban láthatóbbá tételének érdekében az OsmAnd vektoros térképeinek bizonyos elemei igény szerint könnyedén elrejthetők a „Térkép beállítása” menün keresztül.\n\nA csempés térképek internetes forrásokon keresztül szerezhetők be, vagy előkészíthetők kapcsolat nélküli használathoz (és kézzel átmásolva az OsmAnd adatmappájába) egy olyan sqlite adatbázisként, amelyet különféle harmadik féltől származó térkép-előkészítő eszközök állíthatnak elő. "</string>
-  <string name="osmand_background_plugin_description">Megjeleníti az útvonal követéséhez és a navigációhoz engedélyezett beállításokat alvó üzemmódban (kikapcsolt képernyővel) úgy, hogy bizonyos időközönként felébreszti a GPS eszközt.</string>
+  <string name="osmand_background_plugin_description">"Megjeleníti a háttér üzemmódban  (kikapcsolt képernyővel) való útvonalrögzítéshez és navigációhoz tartozó beállításokat. (A készülék bizonyos időközönként felébreszti a GPS-t.)"</string>
   <string name="osmand_accessibility_description">Ez a bővítmény elérhetővé teszi az eszköz akadálymentesítési lehetőségeit közvetlenül az OsmAnd programban. Ez megkönnyíti például a TTS hangok beszédsebességének állítását, az irányító gombok képernyő navigációjának beállítását, egy görgető használatát a nagyítás vezérléséhez, vagy szövegfelolvasó visszajelzés használatát, például a pozíció automatikus bejelentésénél.</string>
   
   
@@ -951,8 +951,8 @@
   <string name="bg_service_interval">GPS bekapcsolási időköz:</string>
   <string name="screen_is_locked">Képernyőzár feloldásához nyomj a lakat ikonra</string>
   <string name="bg_service_screen_unlock">Képernyőzár ki</string>
-  <string name="bg_service_sleep_mode_off">Alvó mód\n bekapcsolása</string>
-  <string name="bg_service_sleep_mode_on">Alvó mód\n kikapcsolása</string>
+  <string name="bg_service_sleep_mode_off">Futtatás\n háttérben</string>
+  <string name="bg_service_sleep_mode_on">Háttérben futás\n leállítása</string>
 <string name="avoid_in_routing_title">Elkerülés…</string>
 <string name="avoid_in_routing_descr">Fizetős utak, kompok, földutak elkerülése</string>
 <string name="show_warnings_title">Riasztások megjelenítése…</string>
@@ -1049,7 +1049,7 @@
 	<string name="rendering_attr_roadColors_name">Útszín séma</string>
     <string name="close_changeset">Módosításcsomag lezárása</string>
 	<string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner nincs feltelepítve. Megkeresed a Play Store-ban?</string>
-	<string name="background_service_is_enabled_question">Az OsmAnd alvó mód szolgáltatás még fut. Azt is meg szeretnéd szakítani?</string>
+	<string name="background_service_is_enabled_question">Az OsmAnd háttérszolgáltatás még fut. Azt is meg szeretnéd szakítani?</string>
     <string name="tip_recent_changes_1_0_0_t">Az 1.0.0 kiadás változásai:
 \n\t* Pontosabb és sokkal gyorsabb útvonaltervezés, akár 250 km-re
 \n\t* Csak-út térképek bevezetése\n\t* A térkép nem veszti el a pozíciórögzítést megszakítások után
@@ -1617,9 +1617,9 @@
     <string name="loading_smth">%1$s betöltése…</string>
     <string name="keep_navigation_service">Megtart</string>
 	<string name="stop_navigation_service">Megszakítás</string>
-	<string name="enable_sleep_mode">GPS alvó mód engedélyezése</string>
+	<string name="enable_sleep_mode">GPS háttér mód engedélyezése</string>
 	<string name="gps_wake_up_timer">GPS felébresztési intervallum</string>
-	<string name="sleep_mode_stop_dialog">Megszakítod a GPS alvó módot?</string>
+	<string name="sleep_mode_stop_dialog">Megszakítod a GPS háttér módot?</string>
 	<string name="map_preferred_locale_descr">A térképfeliratok preferált nyelve (ha nem elérhető, angolra vált, vagy a helyi nyelvre)</string>
     <string name="map_preferred_locale">Térképfeliratok nyelve</string>
     <string name="local_map_names">Helyi név</string>
@@ -1646,7 +1646,7 @@
     <string name="rendering_attr_showSurfaces_name">Útfelület</string>
     <string name="rendering_attr_showCycleRoutes_name">Kerékpáros útvonalak</string>
     <string name="osmo_auth_error_short">Azonosítás sikertelen</string>
-    <string name="home">Kezdőlap</string>
+    <string name="home">Műszerfal</string>
     <string name="lang_fa">perzsa</string>
 	<string name="rendering_attr_coloredBuildings_name">Épületek színezése típus szerint</string>
     <string name="osmo_invite">Meghívás…</string>
@@ -1967,7 +1967,7 @@
     <string name="local_recordings_delete_all_confirm">%1$d jegyzetet fog törölni. Biztos vagy benne?</string>
 	<string name="disable_recording_once_app_killed">Önálló naplózás megakadályozása</string>
     <string name="gps_network_not_enabled">A helymeghatározó szolgáltatás nincs engedélyezve. Be szeretnéd kapcsolni?</string>
-    <string name="disable_recording_once_app_killed_descrp">Szüneteltetni fogja a GPX-naplózást, ha az alkalmazást kilőtték (a legutóbbi alkalmazásokon keresztül). (Az OsmAnd alvó mód jelzője eltűnik az Android értesítési sávjáról.)</string>
+    <string name="disable_recording_once_app_killed_descrp">Szüneteltetni fogja a GPX-naplózást, ha az alkalmazást kilőtték (a legutóbbi alkalmazásokon keresztül). (Az OsmAnd háttérben futás jelzője eltűnik az Android értesítési sávjáról.)</string>
 	<string name="lang_vo">volapük</string>
     <string name="lang_th">thai</string>
     <string name="lang_te">telugu</string>
@@ -2042,7 +2042,7 @@
 	<string name="app_name_osmand">OsmAnd</string>
 	<string name="offline_maps_and_navigation">Offline térképek\nés navigáció</string>
 	<string name="next_proceed">Tovább</string>
-	<string name="dahboard_options_dialog_title">Kezdőlap beállításai</string>
+	<string name="dahboard_options_dialog_title">Műszerfal beállításai</string>
 	<string name="traffic_warning_hazard">Veszély</string>
     <string name="poi_action_delete">törlés</string>
 	<string name="shared_string_undo">VISSZAVON</string>
@@ -2064,4 +2064,56 @@
 	<string name="recent_places">Gyakori helyek</string>
 	<string name="favourites">Kedvencek</string>
 	<string name="saved_at_time">Sikeresen mentve ekkor: %1$s</string>
-</resources>
+<string name="regions">Régiók</string>
+    <string name="additional_maps">További térképek</string>
+    <string name="region_maps">Régiótérképek</string>
+    <string name="world_maps">Világtérképek</string>
+    <string name="world_regions">Térségek</string>
+    <string name="hillshade_layer_disabled">Domborzatárnyékolás letiltva</string>
+    <string name="srtm_plugin_disabled">Szintvonalak letiltva</string>
+    <string name="favorite_category_add_new">Új hozzáadása</string>
+    <string name="favorite_category_select">Válassz kategóriát</string>
+    <string name="default_speed_system_descr">Sebességmérési rendszer megadása</string>
+    <string name="default_speed_system">Sebesség mértékegysége</string>
+    <string name="nm">nm</string>
+    <string name="si_nm">Tengeri mérföld</string>
+    <string name="si_kmh">Kilométer per óra</string>
+    <string name="si_mph">Mérföld per óra</string>
+    <string name="si_m_s">Méter per szekundum</string>
+    <string name="si_min_km">Perc per kilométer</string>
+    <string name="si_min_m">Perc per mérföld</string>
+    <string name="si_nm_h">Tengeri mérföld per óra (csomó)</string>
+    <string name="nm_h">nm/h</string>
+    <string name="min_mile">perc/mf</string>
+    <string name="min_km">perc/km</string>
+    <string name="m_s">m/s</string>
+    
+    <string name="shared_string_trip_recording">Útvonalrögzítés</string>
+    <string name="shared_string_navigation">Navigáció</string>
+    <string name="osmand_running_in_background">Háttérben fut</string>
+    <string name="simulate_your_location_stop_descr">Pozíció szimulálás leállítása</string>
+    <string name="simulate_your_location_descr">Szimuláció felvett GPX-szel vagy megtervezett útvonallal</string>
+    <string name="address_unknown">Cím még nem ismert</string>
+    <string name="av_locations_descr">GPX fájl jegyzet helyszínnel</string>
+    <string name="av_locations">Helyszín</string>
+    <string name="routing_attr_avoid_shuttle_train_name">Autószállító vonat elkerülése</string>
+	<string name="routing_attr_avoid_shuttle_train_description">Autószállító vonat elkerülése</string>
+    <string name="favourites_context_menu_add">Kedvenc létrehozása</string>
+	<string name="show_on_start">Megjelenítés indításkor</string>
+	<string name="poi_deleted_localy">A POI törölve lesz, amint feltöltöd a változtatásokat</string>
+	<string name="show_gpx">GPX megjelenítése</string>
+	<string name="count_of_lines">Sorok száma</string>
+	<string name="are_you_sure">Biztos vagy benne?</string>
+	<string name="unsaved_changes_will_be_lost">A nem mentett változtatások el fognak veszni. Folytatod?</string>
+	<string name="downloads_left_template">%1$s letöltés maradt</string>
+	<string name="roads">Utak</string>
+    <string name="show_free_version_banner">Ingyenes verzió banner megjelenítése</string>
+    <string name="show_free_version_banner_description">Az ingyenes verzió bannerének megjelenítése akkor is, ha fizetős verziót használsz</string>
+    <string name="buy">VÁSÁRLÁS</string>
+    <string name="activate_seamarks_plugin">Kérlek aktiváld a Hajózási térkép bővítményt</string>
+    <string name="activate_srtm_plugin">Kérlek aktiváld a Szintvonalak bővítményt</string>
+    <string name="later">Később</string>
+    <string name="get_full_version">Teljes verzió</string>
+    <string name="downloads">Letöltések</string>
+<string name="downloading_number_of_files">Letöltés - %1$d fájl</string>
+    </resources>

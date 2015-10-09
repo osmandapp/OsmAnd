@@ -2166,4 +2166,6 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="later">Mes tard</string>
     <string name="get_full_version">Obteniu la versió completa</string>
     <string name="downloads">Baixades</string>
-</resources>
+<string name="activate_seamarks_plugin">Activeu el connector de cartes marines</string>
+    <string name="activate_srtm_plugin">Activeu el connector de corbes de nivell</string>
+    </resources>

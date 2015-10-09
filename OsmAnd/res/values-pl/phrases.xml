@@ -1129,4 +1129,30 @@
 	<string name="poi_garden">Ogród</string>
 
 	<string name="poi_grass">Trawa</string>
+	<string name="poi_surface_snow">Nawierzchnia: śnieg</string>
+
+<string name="poi_surface_ice">Nawierzchnia: lód</string>
+	<string name="poi_surface_mud">Powierzchnia: błoto</string>
+	<string name="poi_surface_dirt">Powierzchnia: brud</string>
+	<string name="poi_surface_salt">Nawierzchnia: sól</string>
+	<string name="poi_surface_grass_paver">Nawierzchnia: wyłożona trawa</string>
+	<string name="poi_surface_grass">Nawierzchnia: trawa</string>
+	<string name="poi_surface_sand">Nawierzchnia: piasek</string>
+	<string name="poi_surface_compacted">Nawierzchnia: ubita</string>
+	<string name="poi_surface_fine_gravel">Nawierzchnia: drobny żwir</string>
+	<string name="poi_surface_gravel">Nawierzchnia: żwir</string>
+	<string name="poi_surface_wood">Nawierzchnia: drewno</string>
+	<string name="poi_surface_metal">Nawierzchnia: metal</string>
+	<string name="poi_surface_stone">Nawierzchnia: kamień</string>
+	<string name="poi_surface_pebblestone">Nawierzchnia: gruby żwir</string>
+	<string name="poi_surface_paving_stones">Nawierzchnia: kostka brukowa</string>
+	<string name="poi_surface_cobblestone">Nawierzchnia: bruk</string>
+	<string name="poi_surface_sett">Nawierzchnia: brukowana</string>
+	<string name="poi_surface_concrete">Nawierzchnia: beton</string>
+	<string name="poi_surface_asphalt">Nawierzchnia: asfalt</string>
+	<string name="poi_surface_paved">Nawierzchnia: utwardzona</string>
+	<string name="poi_surface_unpaved">Nawierzchnia: nieutwardzona</string>
+	<string name="poi_lit_no">Oświetlenie: nie</string>
+
+	<string name="poi_lit_yes">Oświetlenie: tak</string>
 	</resources>
