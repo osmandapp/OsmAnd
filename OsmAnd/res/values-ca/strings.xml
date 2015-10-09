@@ -1371,7 +1371,7 @@
 	<string name="routing_attr_avoid_motorway_description">Evita autopistes</string>
 	<string name="routing_attr_weight_name">Límit de pes</string>
 	<string name="routing_attr_weight_description">Especifiqueu el pes del vehicle que cal permetre a les rutes</string>
-    <string name="background_service_int_descr">Trieu cada quan voleu que s\'actualitzi la posició en el mode en segon pla</string>
+    <string name="background_service_int_descr">Trieu l\'interval d\'activació del servei executat en segon pla</string>
 	<string name="av_photo_play_sound_descr">Trieu si voleu reproduir un so en fer fotos</string>
 <string name="av_camera_focus_continuous">La càmera intenta enfocar de manera contínua</string>
 	<string name="av_camera_focus_macro">Mode macro (per a enfocar de prop)</string>
@@ -2110,7 +2110,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
 	<string name="description">Descripció</string>
 	<string name="add_opening_hours">Afegeix l\'horari de servei</string>
 	<string name="poi_dialog_poi_type">Tipus de PDI</string>
-	<string name="please_specify_poi_type">Especifiqueu el tipus de PDI</string>
+	<string name="please_specify_poi_type">Especifiqueu el tipus de PDI.</string>
 <string name="tag_poi_amenity">instal·lació comunitària</string>
 	<string name="number_of_rows_in_dash">Nombre de files al tauler %1$s</string>
 	<string name="poi_action_delete">Suprimeix</string>

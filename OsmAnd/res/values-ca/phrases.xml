@@ -1324,4 +1324,15 @@
 	<string name="poi_bridge_pedestrian">Passarel·la de vianants</string>
 	<string name="poi_bridge_bicycle">Pont per bicicletes</string>
 	<string name="poi_bridge_railway">Pont ferroviari</string>
+	<string name="poi_surface_ice">Superfície: gel</string>
+	<string name="poi_surface_salt">Superfície: sal</string>
+	<string name="poi_surface_snow">Superfície: neu</string>
+
+<string name="poi_surface_unpaved">Superfície: no pavimentada</string>
+	<string name="poi_surface_paved">Superfície: pavimentada</string>
+	<string name="poi_surface_asphalt">Superfície: asfalt</string>
+	<string name="poi_surface_concrete">Superfície: formigó</string>
+	<string name="poi_surface_sett">Superfície: llambordes</string>
+	<string name="poi_surface_cobblestone">Superfície: empedrat</string>
+	<string name="poi_surface_paving_stones">Superfície: paviment de pedres</string>
 	</resources>

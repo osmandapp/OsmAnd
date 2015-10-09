@@ -1693,4 +1693,42 @@
 	<string name="poi_vending_parking_tickets_public_transport_tickets">停車票卡；公共交通票卡</string>
 	<string name="poi_vending_coffee">咖啡</string>
 	<string name="poi_vending_toll">收費機</string>
+	<string name="poi_vending_tickets">售票機</string>
+	<string name="poi_vending_water">水販賣機</string>
+	<string name="poi_vending_telephone_vouchers">電話卡</string>
+	<string name="poi_vending_animal_food">動物食品</string>
+	<string name="poi_vending_public_transport_plans">公共交通規劃</string>
+	<string name="poi_vending_drinks_sweets">飲料和糖果</string>
+	<string name="poi_vending_vouchers">代金券</string>
+	<string name="poi_vending_dvd">DVD</string>
+	<string name="poi_vending_candles">蠟燭</string>
+	<string name="poi_vending_toys">玩具</string>
+	<string name="poi_vending_ice_cream">冰淇淋</string>
+	<string name="poi_vending_sim_cards">SIM 卡</string>
+
+	<string name="poi_branch">分公司</string>
+
+	<string name="poi_memorial_war">戰爭紀念碑</string>
+	<string name="poi_memorial_plaque">牌匾</string>
+	<string name="poi_memorial_statue">雕像</string>
+	<string name="poi_memorial_stone">石頭</string>
+	<string name="poi_memorial_stele">石碑</string>
+	<string name="poi_memorial_bust">半身像</string>
+	<string name="poi_memorial_koshinto">庚申塔</string>
+	<string name="poi_memorial_blue_plaque">藍色牌匾</string>
+	<string name="poi_memorial_jizo">地藏菩薩</string>
+	<string name="poi_historic_quarry">歷史性採石場</string>
+
+	<string name="poi_resource_aggregate">聚集物</string>
+	<string name="poi_resource_antimony">銻</string>
+	<string name="poi_resource_asbestos">石棉</string>
+	<string name="poi_resource_barite">重晶石</string>
+	<string name="poi_resource_basalt">玄武岩</string>
+	<string name="poi_resource_bauxite">鋁氧石</string>
+	<string name="poi_resource_beryl">綠寶石</string>
+	<string name="poi_resource_bismuth">鉍</string>
+	<string name="poi_resource_cereal">穀類</string>
+	<string name="poi_resource_chromite">鉻鐵礦</string>
+	<string name="poi_resource_clay">黏土</string>
+	<string name="poi_resource_coal">煤</string>
 	</resources>
