@@ -2028,4 +2028,15 @@
     <string name="m_s">m/s</string>
     
     <string name="srtm_plugin_disabled">Konturlinjer inaktiverade</string>
+    <string name="regions">Regioner</string>
+    <string name="additional_maps">Fler kartor</string>
+    <string name="region_maps">Regionskartor</string>
+    <string name="world_maps">Världskartor</string>
+    <string name="world_regions">Världsregioner</string>
+    <string name="downloads">Nedladdningar</string>
+<string name="buy">KÖP</string>
+    <string name="activate_seamarks_plugin">Aktivera modulen Sjömärken</string>
+    <string name="activate_srtm_plugin">Aktivera modulen SRTM</string>
+    <string name="later">Senare</string>
+    <string name="get_full_version">Köp fullversionen</string>
     </resources>
