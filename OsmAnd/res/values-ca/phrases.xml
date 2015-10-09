@@ -1335,4 +1335,15 @@
 	<string name="poi_surface_sett">Superfície: llambordes</string>
 	<string name="poi_surface_cobblestone">Superfície: empedrat</string>
 	<string name="poi_surface_paving_stones">Superfície: paviment de pedres</string>
+	<string name="poi_surface_pebblestone">Superfície: còdols</string>
+	<string name="poi_surface_stone">Superfície: pedra</string>
+	<string name="poi_surface_metal">Superfície: metall</string>
+	<string name="poi_surface_wood">Superfície: fusta</string>
+	<string name="poi_surface_gravel">Superfície: grava</string>
+	<string name="poi_surface_fine_gravel">Superfície: grava fina</string>
+	<string name="poi_surface_compacted">Superfície: compactada</string>
+	<string name="poi_surface_sand">Superfície: sorra</string>
+	<string name="poi_surface_grass">Superfície: gespa</string>
+	<string name="poi_surface_grass_paver">Superfície: pavimentació permeable</string>
+	<string name="poi_surface_ground">Superfície: terra</string>
 	</resources>
