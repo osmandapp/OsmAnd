@@ -77,6 +77,7 @@ public class DownloadActivity extends BaseDownloadActivity implements RegionDial
 	public static final String SINGLE_TAB = "SINGLE_TAB";
 	private List<DownloadActivityType> downloadTypes = new ArrayList<DownloadActivityType>();
 	private BannerAndDownloadFreeVersion visibleBanner;
+	private ActiveDownloadsDialogFragment.DownloadEntryAdapter progressAdapter;
 
 
 	@Override
@@ -249,6 +250,9 @@ public class DownloadActivity extends BaseDownloadActivity implements RegionDial
 		if (visibleBanner != null) {
 			final int countedDownloads = DownloadActivity.downloadListIndexThread.getCountedDownloads();
 			visibleBanner.updateProgress(countedDownloads, basicProgressAsyncTask);
+		}
+		if (progressAdapter != null) {
+			progressAdapter.setProgress(basicProgressAsyncTask.getProgressPercentage());
 		}
 		if (!updateOnlyProgress) {
 			updateDownloadButton();
@@ -580,6 +584,11 @@ public class DownloadActivity extends BaseDownloadActivity implements RegionDial
 		updateProgress(true);
 	}
 
+	public void registerUpdateListener(ActiveDownloadsDialogFragment.DownloadEntryAdapter adapter) {
+		progressAdapter = adapter;
+		updateProgress(true);
+	}
+
 	public void showDialog(FragmentActivity activity, DialogFragment fragment) {
 		fragment.show(activity.getSupportFragmentManager(), "dialog");
 	}
@@ -790,6 +799,10 @@ public class DownloadActivity extends BaseDownloadActivity implements RegionDial
 				DownloadEntryViewHolder viewHolder = (DownloadEntryViewHolder) convertView.getTag();
 				viewHolder.bindDownloadEntry(getItem(position));
 				return convertView;
+			}
+
+			public void setProgress(int percent) {
+				// TODO: 10/9/15 implement
 			}
 		}
 
