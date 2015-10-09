@@ -1635,7 +1635,7 @@
 	<string name="poi_shelter_type_lean_to">Тип укрытия: навес</string>
 	<string name="poi_shelter_type_basic_hut">Тип укрытия: хижина</string>
 	<string name="poi_shelter_type_building">Тип укрытия: здание</string>
-	<string name="poi_shelter_type_wildlife_hide">Тип укрытия: в дикой природе</string>
+	<string name="poi_shelter_type_wildlife_hide">Тип укрытия: для наблюдения за дикой природой</string>
 	<string name="poi_shelter_type_rock_shelter">Тип укрытия: в камнях</string>
 	<string name="poi_shelter_type_sun_shelter">Тип укрытия: от солнца</string>
 	<string name="poi_shelter_type_field_shelter">Тип укрытия: в поле</string>
@@ -1781,5 +1781,19 @@
 	<string name="poi_service_bicycle_chaintool_no">Выжимка цепи для велосипедов: нет</string>
 	<string name="poi_service_bicycle_second_hand_yes">Продажа подержанных велосипедов: да</string>
 	<string name="poi_service_bicycle_second_hand_no">Продажа подержанных велосипедов: нет</string>
+
+	<string name="poi_wildlife_hide">Укрытие для наблюдения за дикой природой</string>
+
+	<string name="poi_training_language">Обучение: иностранный язык</string>
+	<string name="poi_training_music">Обучение: музыка</string>
+	<string name="poi_training_dance">Обучение: танцы</string>
+	<string name="poi_training_sport">Обучение: спорт</string>
+	<string name="poi_training_art">Обучение: искусство</string>
+	<string name="poi_training_cooking">Обучение: приготовление пищи</string>
+	<string name="poi_training_computer">Обучение: работа на компьютере</string>
+	<string name="poi_training_yoga">Обучение: йога</string>
+	<string name="poi_training_martial_art">Обучение: боевые искусства</string>
+	<string name="poi_training_aviation">Обучение: авиация</string>
+	<string name="poi_training_hairdressing">Обучение: парикмахер</string>
 
 </resources>
