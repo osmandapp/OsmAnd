@@ -1912,4 +1912,25 @@
 
 	<string name="poi_route_railway_ref">Route of a railway</string>
 
+	<string name="poi_historic_yes">Historical object</string>
+	<string name="poi_surveillance_yes">Surveillance: yes</string>
+	<string name="poi_shop_yes">With shop</string>
+
+	<string name="poi_service_bicycle_retail_yes">Bicycle retail: yes</string>
+	<string name="poi_service_bicycle_retail_no">Bicycle retail: no</string>
+	<string name="poi_service_bicycle_repair_yes">Bicycle repair: yes</string>
+	<string name="poi_service_bicycle_repair_no">Bicycle repair: no</string>
+	<string name="poi_service_bicycle_rental_yes">Bicycle rental: yes</string>
+	<string name="poi_service_bicycle_rental_no">Bicycle rental: no</string>
+	<string name="poi_service_bicycle_pump_yes">Bicycle pump: yes</string>
+	<string name="poi_service_bicycle_pump_no">Bicycle pump: no</string>
+	<string name="poi_service_bicycle_diy_yes">Bicycle tools for DIY repair: yes</string>
+	<string name="poi_service_bicycle_diy_no">Bicycle tools for DIY repair: no</string>
+	<string name="poi_service_bicycle_cleaning_yes">Bicycle cleaning: yes</string>
+	<string name="poi_service_bicycle_cleaning_no">Bicycle cleaning: no</string>
+	<string name="poi_service_bicycle_chaintool_yes">Bicycle chaintool: yes</string>
+	<string name="poi_service_bicycle_chaintool_no">Bicycle chaintool: no</string>
+	<string name="poi_service_bicycle_second_hand_yes">Retail sale of second-hand bicycles: yes</string>
+	<string name="poi_service_bicycle_second_hand_no">Retail sale of second-hand bicycles: no</string>
+
 </resources>
