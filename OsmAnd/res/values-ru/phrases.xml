@@ -1749,4 +1749,17 @@
 	<string name="poi_surface_salt">Поверхность: соль (соляные озёра)</string>
 	<string name="poi_surface_snow">Поверхность: снег (зимник)</string>
 
+	<string name="poi_route_bus_ref">Автобус</string>
+	<string name="poi_route_share_taxi_ref">Маршрутное такси</string>
+	<string name="poi_route_trolleybus_ref">Троллейбус</string>
+	<string name="poi_route_tram_ref">Трамвай</string>
+	<string name="poi_route_train_ref">Поезд</string>
+	<string name="poi_route_light_rail_ref">Легкорельсовый транспорт</string>
+	<string name="poi_route_monorail_ref">Монорельс</string>
+	<string name="poi_route_funicular_ref">Фуникулёр</string>
+	<string name="poi_route_ferry_ref">Паром</string>
+
+	<string name="poi_route_railway_ref">Железнодорожный путь</string>
+
+
 </resources>

@@ -1900,4 +1900,16 @@
 	<string name="poi_surface_salt">Surface: salt</string>
 	<string name="poi_surface_snow">Surface: snow</string>
 
+	<string name="poi_route_bus_ref">Bus</string>
+	<string name="poi_route_share_taxi_ref">Share taxi</string>
+	<string name="poi_route_trolleybus_ref">Trolleybus</string>
+	<string name="poi_route_tram_ref">Tram</string>
+	<string name="poi_route_train_ref">Train</string>
+	<string name="poi_route_light_rail_ref">Light rail</string>
+	<string name="poi_route_monorail_ref">Monorail</string>
+	<string name="poi_route_funicular_ref">Funicular</string>
+	<string name="poi_route_ferry_ref">Ferry</string>
+
+	<string name="poi_route_railway_ref">Route of a railway</string>
+
 </resources>
