@@ -189,40 +189,6 @@ public class FavoritesLayer  extends OsmandMapLayer implements ContextMenuLayer.
 		}
 		return null;
 	}
-	
-	@Override
-	public void populateObjectContextMenu(Object o, ContextMenuAdapter adapter) {
-		if(o instanceof FavouritePoint) {
-			final FavouritePoint a = (FavouritePoint) o;
-			OnContextMenuClick listener = new ContextMenuAdapter.OnContextMenuClick() {
-				@Override
-				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-					if (itemId == R.string.favourites_context_menu_edit) {
-						FavoritesTreeFragment.editPoint(view.getContext(), a, null);
-					} else if (itemId == R.string.favourites_context_menu_delete) {
-						final Resources resources = view.getContext().getResources();
-						Builder builder = new AlertDialog.Builder(view.getContext());
-						builder.setMessage(resources.getString(R.string.favourites_remove_dialog_msg, a.getName()));
-						builder.setNegativeButton(R.string.shared_string_no, null);
-						builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								favorites.deleteFavourite(a);
-								view.refreshMap();
-							}
-						});
-						builder.create().show();
-					}
-					return true;
-				}
-			};
-			adapter.item(R.string.favourites_context_menu_edit).iconColor(R.drawable.ic_action_edit_dark)
-					.listen(listener).reg();
-			adapter.item(R.string.favourites_context_menu_delete)
-						.iconColor(R.drawable.ic_action_delete_dark).listen(listener)
-						.reg();
-		}
-	}
 
 	@Override
 	public LatLon getTextLocation(LocationPoint o) {

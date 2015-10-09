@@ -411,9 +411,17 @@ public class FavouritesDbHelper {
 	}
 
 	
-	private void addEmptyCategory(String name) {
+	public void addEmptyCategory(String name) {
 		FavoriteGroup group = new FavoriteGroup();
 		group.name = name;
+		favoriteGroups.add(group);
+		flatGroups.put(name, group);
+	}
+
+	public void addEmptyCategory(String name, int color) {
+		FavoriteGroup group = new FavoriteGroup();
+		group.name = name;
+		group.color = color;
 		favoriteGroups.add(group);
 		flatGroups.put(name, group);
 	}
@@ -425,6 +433,16 @@ public class FavouritesDbHelper {
 
 	public List<FavoriteGroup> getFavoriteGroups() {
 		return favoriteGroups;
+	}
+
+	public boolean groupExists(String name) {
+		String nameLowercase = name.toLowerCase();
+		for (String groupName : flatGroups.keySet()) {
+			if (groupName.toLowerCase().equals(nameLowercase)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public FavoriteGroup getGroup(FavouritePoint p) {

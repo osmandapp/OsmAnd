@@ -7,6 +7,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.widgets.AutoCompleteTextViewEx;
 
 public abstract class PointEditor {
 
@@ -58,5 +59,13 @@ public abstract class PointEditor {
 		Fragment fragment = mapActivity.getSupportFragmentManager().findFragmentByTag(getFragmentTag());
 		if (fragment != null)
 			((PointEditorFragment)fragment).dismiss();
+	}
+
+	public void setCategory(String name) {
+		Fragment fragment = mapActivity.getSupportFragmentManager().findFragmentByTag(getFragmentTag());
+		if (fragment != null) {
+			PointEditorFragment editorFragment = (PointEditorFragment) fragment;
+			editorFragment.setCategory(name);
+		}
 	}
 }
