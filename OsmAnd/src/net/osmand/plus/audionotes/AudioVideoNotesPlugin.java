@@ -35,8 +35,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.googlecode.concurrentlinkedhashmap.ConcurrentLinkedHashMap;
-
 import net.osmand.AndroidUtils;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
@@ -79,6 +77,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -130,10 +129,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	public final OsmandPreference<Boolean> SHOW_RECORDINGS;
 
 	private DataTileManager<Recording> recordings = new DataTileManager<AudioVideoNotesPlugin.Recording>(14);
-	private Map<String, Recording> recordingByFileName =
-			new ConcurrentLinkedHashMap.Builder<String, Recording>()
-					.maximumWeightedCapacity(1000)
-					.build();
+	private Map<String, Recording> recordingByFileName = new LinkedHashMap<>();
 	private AudioNotesLayer audioNotesLayer;
 	private MapActivity activity;
 	private MediaRecorder mediaRec;
@@ -1055,7 +1051,11 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			lastTakingPhoto = null;
 		}
 		recordings.registerObject(r.lat, r.lon, r);
-		recordingByFileName.put(f.getName(), r);
+
+		Map<String, Recording> newMap = new LinkedHashMap<>(recordingByFileName);
+		newMap.put(f.getName(), r);
+		recordingByFileName = newMap;
+
 		return true;
 	}
 
@@ -1077,7 +1077,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		if (avPath.canRead()) {
 			if (!reIndexAndKeepOld) {
 				recordings.clear();
-				recordingByFileName.clear();
+				recordingByFileName = new LinkedHashMap<>();
 			}
 			File[] files = avPath.listFiles();
 			if (files != null) {
@@ -1125,7 +1125,9 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	public void deleteRecording(Recording r) {
 		recordings.unregisterObject(r.lat, r.lon, r);
-		recordingByFileName.remove(r.file.getName());
+		Map<String, Recording> newMap = new LinkedHashMap<>(recordingByFileName);
+		newMap.remove(r.file.getName());
+		recordingByFileName = newMap;
 		Algorithms.removeAllFiles(r.file);
 		if (activity != null) {
 			activity.getMapLayers().getContextMenuLayer().setLocation(null, "");
