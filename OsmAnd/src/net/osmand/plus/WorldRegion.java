@@ -42,6 +42,8 @@ public class WorldRegion {
 	private boolean purchased;
 	private boolean isInPurchasedArea;
 
+	private MapState mapState = MapState.NOT_DOWNLOADED;
+
 	public String getRegionId() {
 		return regionId;
 	}
@@ -80,6 +82,26 @@ public class WorldRegion {
 
 	public boolean isInPurchasedArea() {
 		return isInPurchasedArea;
+	}
+
+	public MapState getMapState() {
+		return mapState;
+	}
+
+	public void processNewMapState(MapState mapState) {
+		LOG.debug("old state=" + this.mapState);
+		switch (this.mapState) {
+			case NOT_DOWNLOADED:
+				this.mapState = mapState;
+				break;
+			case DOWNLOADED:
+				if (mapState == MapState.OUTDATED)
+					this.mapState = mapState;
+				break;
+			case OUTDATED:
+				break;
+		}
+		LOG.debug("new state=" + this.mapState);
 	}
 
 	@Override
@@ -218,7 +240,7 @@ public class WorldRegion {
 		regionsLookupTable.put(southAmericaRegion.regionId, southAmericaRegion);
 
 		// Process remaining regions
-		for (;;) {
+		for (; ; ) {
 			int processedRegions = 0;
 
 			Iterator<Entry<String, String>> iterator = loadedItems.entrySet().iterator();
@@ -293,5 +315,11 @@ public class WorldRegion {
 			}
 		}
 		return null;
+	}
+
+	public enum MapState {
+		NOT_DOWNLOADED,
+		DOWNLOADED,
+		OUTDATED
 	}
 }

@@ -12,7 +12,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -27,8 +26,6 @@ import java.text.DateFormat;
 import java.util.Map;
 
 public class ItemViewHolder {
-	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(WorldItemsFragment.class);
-
 	private final TextView nameTextView;
 	private final TextView descrTextView;
 	private final ImageView leftImageView;
@@ -222,7 +219,21 @@ public class ItemViewHolder {
 		descrTextView.setVisibility(View.GONE);
 		mapDateTextView.setVisibility(View.GONE);
 
-		leftImageView.setImageDrawable(getContextIcon(context, R.drawable.ic_map));
+		Drawable leftImageDrawable = null;
+		switch (region.getMapState()) {
+			case NOT_DOWNLOADED:
+				leftImageDrawable = getContextIcon(context, R.drawable.ic_map);
+				break;
+			case DOWNLOADED:
+				leftImageDrawable = getContextIcon(context, R.drawable.ic_map,
+						context.getResources().getColor(R.color.color_ok));
+				break;
+			case OUTDATED:
+				leftImageDrawable = getContextIcon(context, R.drawable.ic_map,
+						context.getResources().getColor(R.color.color_distance));
+				break;
+		}
+		leftImageView.setImageDrawable(leftImageDrawable);
 		rightImageButton.setVisibility(View.GONE);
 		progressBar.setVisibility(View.GONE);
 	}
