@@ -2100,4 +2100,7 @@
     <string name="world_maps">Mapas mundiales</string>
     <string name="world_regions">Regiones del mundo</string>
     <string name="downloads">Descargas</string>
-</resources>
+<string name="favorite_category_dublicate_message">El nombre de categoría, ya existe. Defina otro nombre.</string>
+    <string name="favorite_category_name">Nombre de categoría</string>
+    <string name="favorite_category_add_new_title">Añadir nueva categoría</string>
+    </resources>
