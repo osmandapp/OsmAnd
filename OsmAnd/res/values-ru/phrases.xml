@@ -1136,10 +1136,12 @@
 	<string name="poi_breakwater">Волнорез</string>
 	<string name="poi_groyne">Мол</string>
 
-	<string name="poi_animal_shelter_dog">Приют для собак</string>
-	<string name="poi_animal_shelter_cat">Приют для кошек</string>
-	<string name="poi_animal_shelter_dog_cat">Приют для кошек и собак</string>
-	<string name="poi_animal_shelter_bird">Приют для птиц</string>
+	<string name="poi_animal_shelter">Приют для животных</string>
+
+	<string name="poi_animal_shelter_dog">Тип приюта: для собак</string>
+	<string name="poi_animal_shelter_cat">Тип приюта: для кошек</string>
+	<string name="poi_animal_shelter_dog_cat">Тип приюта: для собак и кошек</string>
+	<string name="poi_animal_shelter_bird">Тип приюта: для птиц</string>
 
 	<string name="poi_shower">Душ</string>
 
@@ -1801,5 +1803,39 @@
 	<string name="poi_training_hairdressing">Обучение: парикмахер</string>
 
 	<string name="poi_monument_yes">Монументальный объект</string>
+
+	<string name="poi_industrial_oil">Тип: нефтяная промышленность</string>
+	<string name="poi_industrial_wellsite">Тип: буровая площадка</string>
+	<string name="poi_industrial_factory">Тип: фабрика</string>
+	<string name="poi_industrial_gas">Тип: газовая промышленность</string>
+	<string name="poi_industrial_timber">Тип: лесоматериалы</string>
+	<string name="poi_industrial_refinery">Тип: очистительный завод</string>
+	<string name="poi_industrial_warehouse">Тип: склад</string>
+	<string name="poi_industrial_auto_wrecker">Тип: утилизация машин</string>
+	<string name="poi_industrial_agriculture">Тип: сельскохозяйственная промышленность</string>
+	<string name="poi_industrial_brewery">Тип: пивоварня</string>
+	<string name="poi_industrial_brickyard">Тип: кирпичный завод</string>
+	<string name="poi_industrial_intermodal_freight_terminal">Тип: интермодальный грузовой терминал</string>
+	<string name="poi_industrial_sawmill">Тип: лесопилка</string>
+	<string name="poi_industrial_water_purification">Тип: очистка воды</string>
+	<string name="poi_industrial_port">Тип: порт</string>
+	<string name="poi_industrial_depot">Тип: депо</string>
+
+	<string name="poi_note">Заметка</string>
+	<string name="poi_watering_place">Водопой</string>
+	<string name="poi_animal_boarding">Временное содержание животных</string>
+	<string name="poi_animal_boarding_dog">Тип приюта: для собак</string>
+	<string name="poi_animal_boarding_cat">Тип приюта: для кошек</string>
+	<string name="poi_animal_boarding_dog_cat">Тип приюта: для собак и кошек</string>
+	<string name="poi_animal_boarding_horse">Тип приюта: для лошадей</string>
+
+	<string name="poi_historic_aircraft">Исторический самолёт</string>
+
+	<string name="poi_honey">Мёд</string>
+
+	<string name="poi_elevator_yes">С лифтом</string>
+	<string name="poi_elevator_no">Без лифта</string>
+
+	<string name="poi_technical_monument">Технический памятник</string>
 
 </resources>

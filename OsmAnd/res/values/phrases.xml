@@ -1215,10 +1215,11 @@
 	<string name="poi_enforcement_access">Enforcement: access</string>
 	<string name="poi_enforcement_toll">Enforcement: toll</string>
 
-	<string name="poi_animal_shelter_dog">Dog shelter</string>
-	<string name="poi_animal_shelter_cat">Cat shelter</string>
-	<string name="poi_animal_shelter_dog_cat">Dog and cat shelter</string>
-	<string name="poi_animal_shelter_bird">Bird shelter</string>
+	<string name="poi_animal_shelter">Animal shelter</string>
+	<string name="poi_animal_shelter_dog">Shelter type: dog</string>
+	<string name="poi_animal_shelter_cat">Shelter type: cat</string>
+	<string name="poi_animal_shelter_dog_cat">Shelter type: dog, cat</string>
+	<string name="poi_animal_shelter_bird">Shelter type: bird</string>
 
 	<string name="poi_seats">Seats</string>
 	<string name="poi_backrest_yes">Backrest: yes</string>
@@ -1952,5 +1953,39 @@
 	<string name="poi_training_hairdressing">Training: hairdressing</string>
 
 	<string name="poi_monument_yes">Monumental object</string>
+
+	<string name="poi_industrial_oil">Type: oil industry</string>
+	<string name="poi_industrial_wellsite">Type: wellsite</string>
+	<string name="poi_industrial_factory">Type: factory</string>
+	<string name="poi_industrial_gas">Type: gas industry</string>
+	<string name="poi_industrial_timber">Type: timber</string>
+	<string name="poi_industrial_refinery">Type: refinery</string>
+	<string name="poi_industrial_warehouse">Type: warehouse</string>
+	<string name="poi_industrial_auto_wrecker">Type: auto wrecker</string>
+	<string name="poi_industrial_agriculture">Type: agriculture</string>
+	<string name="poi_industrial_brewery">Type: brewery</string>
+	<string name="poi_industrial_brickyard">Type: brickyard</string>
+	<string name="poi_industrial_intermodal_freight_terminal">Type: intermodal freight terminal</string>
+	<string name="poi_industrial_sawmill">Type: sawmill</string>
+	<string name="poi_industrial_water_purification">Type: water purification</string>
+	<string name="poi_industrial_port">Type: port</string>
+	<string name="poi_industrial_depot">Type: depot</string>
+
+	<string name="poi_note">Note</string>
+	<string name="poi_watering_place">Watering place</string>
+	<string name="poi_animal_boarding">Animal boarding</string>
+	<string name="poi_animal_boarding_dog">Boarding type: dog</string>
+	<string name="poi_animal_boarding_cat">Boarding type: cat</string>
+	<string name="poi_animal_boarding_dog_cat">Boarding type: dog, cat</string>
+	<string name="poi_animal_boarding_horse">Boarding type: horse</string>
+
+	<string name="poi_historic_aircraft">Historic aircraft</string>
+
+	<string name="poi_honey">Honey store</string>
+
+	<string name="poi_elevator_yes">With elevator</string>
+	<string name="poi_elevator_no">Without elevator</string>
+
+	<string name="poi_technical_monument">Technical monument</string>
 
 </resources>
