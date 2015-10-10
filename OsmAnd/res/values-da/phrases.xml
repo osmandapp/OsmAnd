@@ -1346,7 +1346,7 @@
 	<string name="poi_mini_roundabout">Mini-rundkørsel</string>
 	<string name="poi_railway_crossing">Jernbaneoverskæring</string>
 	<string name="poi_railway_level_crossing">Jernbaneoverskæring</string>
-	<string name="poi_bird_hide">Fugletårn</string>
+	<string name="poi_bird_hide">Observering af fugle</string>
 	<string name="poi_horse_riding">Ridning</string>
 	<string name="poi_garden">Have</string>
 
@@ -1955,5 +1955,40 @@
 	<string name="poi_route_ferry_ref">Færge</string>
 
 	<string name="poi_route_railway_ref">Jernbanerute</string>
+
+<string name="poi_historic_yes">Historiske objekt</string>
+	<string name="poi_surveillance_yes">Overvågning: Ja</string>
+	<string name="poi_shop_yes">Med butik</string>
+
+	<string name="poi_service_bicycle_retail_yes">Cykel detail: Ja</string>
+	<string name="poi_service_bicycle_retail_no">Cykel detail: nej</string>
+	<string name="poi_service_bicycle_repair_yes">Cykelreparation: ja</string>
+	<string name="poi_service_bicycle_repair_no">Cykelreparation: nej</string>
+	<string name="poi_service_bicycle_rental_yes">Cykeludlejning: ja</string>
+	<string name="poi_service_bicycle_rental_no">Cykeludlejning: nej</string>
+	<string name="poi_service_bicycle_pump_yes">Cykelpumpe: ja</string>
+	<string name="poi_service_bicycle_pump_no">Cykelpumpe: nej</string>
+	<string name="poi_service_bicycle_diy_yes">Cykelværktøj til DIY reparation: ja</string>
+	<string name="poi_service_bicycle_diy_no">Cykelværktøj til DIY reparation: nej</string>
+	<string name="poi_service_bicycle_cleaning_yes">Cykelrengøring: ja</string>
+	<string name="poi_service_bicycle_cleaning_no">Cykelrengøring: nej</string>
+	<string name="poi_service_bicycle_chaintool_yes">Cykel kædeværktøj: ja</string>
+	<string name="poi_service_bicycle_chaintool_no">Cykel kædeværktøj: nej</string>
+	<string name="poi_service_bicycle_second_hand_yes">Detailsalg af brugte cykler: ja</string>
+	<string name="poi_service_bicycle_second_hand_no">Detailsalg af brugte cykler: nej</string>
+
+	<string name="poi_wildlife_hide">"Obsevering af  dyreliv"</string>
+
+	<string name="poi_training_language">Uddannelse: sprog</string>
+	<string name="poi_training_music">Uddannelse: musik</string>
+	<string name="poi_training_dance">Uddannelse: dans</string>
+	<string name="poi_training_sport">Uddannelse: sport</string>
+	<string name="poi_training_art">Uddannelse: kunst</string>
+	<string name="poi_training_cooking">Uddannelse: madlavning</string>
+	<string name="poi_training_computer">Uddannelse: computer</string>
+	<string name="poi_training_yoga">Uddannelse: yoga</string>
+	<string name="poi_training_martial_art">Uddannelse: kampsport</string>
+	<string name="poi_training_aviation">Uddannelse: luftfart</string>
+	<string name="poi_training_hairdressing">Uddannelse: frisør</string>
 
 </resources>
