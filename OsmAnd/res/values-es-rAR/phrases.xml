@@ -1572,7 +1572,7 @@
 	<string name="poi_payment_golden_crown_no">No acepta tarjetas Golden Crown</string>
 	<string name="poi_payment_mtsmoney_yes">Acepta MTS-Money</string>
 	<string name="poi_payment_mtsmoney_no">No acepta MTS-Money</string>
-	<string name="poi_events_venue">Lugar de eventos</string>
+	<string name="poi_events_venue">Salón de eventos</string>
 
 	<string name="poi_diet_vegetarian_only">Sólo dieta vegetariana</string>
 	<string name="poi_diet_vegetarian_yes">Dieta vegetariana</string>
@@ -1732,7 +1732,7 @@
 	<string name="poi_resource_coal">Carbón</string>
 	<string name="poi_resource_copper">Cobre</string>
 	<string name="poi_resource_diamond">Diamante</string>
-	<string name="poi_resource_dimension_stone">Piedra de dimensión</string>
+	<string name="poi_resource_dimension_stone">Piedras grandes</string>
 	<string name="poi_resource_dolomite">Dolomita</string>
 	<string name="poi_resource_gas">Gas</string>
 	<string name="poi_resource_gold">Oro</string>
@@ -1783,7 +1783,7 @@
 	<string name="poi_wetland_mud">Lodazal</string>
 
 	<string name="poi_beach_sand">Playa arenosa</string>
-	<string name="poi_beach_shingle">Playa con guijarro</string>
+	<string name="poi_beach_shingle">Playa rocosa</string>
 	<string name="poi_beach_rocky">Playa rocosa</string>
 
 	<string name="poi_chimney">Chimenea</string>
@@ -1901,7 +1901,7 @@
 	<string name="poi_surface_concrete">Superficie: hormigón</string>
 	<string name="poi_surface_sett">Superficie: intertrabado</string>
 	<string name="poi_surface_cobblestone">Superficie: empedrado</string>
-	<string name="poi_surface_paving_stones">Superficie: adoquinado</string>
+	<string name="poi_surface_paving_stones">Superficie: adoquín prefabricado</string>
 	<string name="poi_surface_pebblestone">Superficie: empedrado</string>
 	<string name="poi_surface_stone">Superficie: piedras</string>
 	<string name="poi_surface_metal">Superficie: metalizado</string>
@@ -1913,8 +1913,8 @@
 	<string name="poi_surface_grass">Superficie: césped</string>
 	<string name="poi_surface_grass_paver">Superficie: césped pavimentado</string>
 	<string name="poi_surface_ground">Superficie: tierra</string>
-	<string name="poi_surface_dirt">Superficie: tierra</string>
-	<string name="poi_surface_mud">Superficie: lodoso</string>
+	<string name="poi_surface_dirt">Superficie: lodoso</string>
+	<string name="poi_surface_mud">Superficie: sobre hojas</string>
 	<string name="poi_surface_ice">Superficie: hielo</string>
 	<string name="poi_surface_salt">Superficie: sal</string>
 	<string name="poi_surface_snow">Superficie: nieve</string>
@@ -1925,10 +1925,46 @@
 	<string name="poi_route_tram_ref">Tranvía</string>
 	<string name="poi_route_train_ref">Tren</string>
 	<string name="poi_route_light_rail_ref">Tren ligero</string>
-	<string name="poi_route_monorail_ref">Monorail</string>
+	<string name="poi_route_monorail_ref">Monorriel</string>
 	<string name="poi_route_funicular_ref">Funicular</string>
 	<string name="poi_route_ferry_ref">Transbordador</string>
 
 	<string name="poi_route_railway_ref">Ruta ferroviaria</string>
+
+<string name="poi_bridge_structure_simple_wooden">Estructura del puente: de madera simple</string>
+	<string name="poi_historic_yes">Objeto histórico</string>
+	<string name="poi_surveillance_yes">Vigilado</string>
+	<string name="poi_shop_yes">Con negocio</string>
+
+	<string name="poi_service_bicycle_retail_yes">Vende bicicletas</string>
+	<string name="poi_service_bicycle_retail_no">No vende bicicletas</string>
+	<string name="poi_service_bicycle_repair_yes">Repara bicicletas</string>
+	<string name="poi_service_bicycle_repair_no">No repara bicicletas</string>
+	<string name="poi_service_bicycle_rental_yes">Alquila bicicletas</string>
+	<string name="poi_service_bicycle_rental_no">No alquila bicicletas</string>
+	<string name="poi_service_bicycle_pump_yes">Infla de bicicletas</string>
+	<string name="poi_service_bicycle_pump_no">No infla bicicletas</string>
+	<string name="poi_service_bicycle_diy_yes">Autoservicio de herramientas para bicicletas</string>
+	<string name="poi_service_bicycle_diy_no">Sin autoservicio de herramientas para bicicletas</string>
+	<string name="poi_service_bicycle_cleaning_yes">Limpia bicicletas</string>
+	<string name="poi_service_bicycle_cleaning_no">No limpia bicicletas</string>
+	<string name="poi_service_bicycle_chaintool_yes">Con herramientas para cadenas de bicicletas</string>
+	<string name="poi_service_bicycle_chaintool_no">Sin herramientas para cadenas de bicicletas</string>
+	<string name="poi_service_bicycle_second_hand_yes">Vende bicicletas de segunda mano</string>
+	<string name="poi_service_bicycle_second_hand_no">No vende bicicletas de segunda mano</string>
+
+	<string name="poi_wildlife_hide">Observatorio de vida salvaje</string>
+
+	<string name="poi_training_language">Capacitación: idioma</string>
+	<string name="poi_training_music">Capacitación: música</string>
+	<string name="poi_training_dance">Capacitación: danza</string>
+	<string name="poi_training_sport">Capacitación: deportes</string>
+	<string name="poi_training_art">Capacitación: arte</string>
+	<string name="poi_training_cooking">Capacitación: cocina</string>
+	<string name="poi_training_computer">Capacitación: computación</string>
+	<string name="poi_training_yoga">Capacitación: yoga</string>
+	<string name="poi_training_martial_art">Capacitación: artes marciales</string>
+	<string name="poi_training_aviation">Capacitación: aviación</string>
+	<string name="poi_training_hairdressing">Capacitación: peluquería</string>
 
 </resources>
