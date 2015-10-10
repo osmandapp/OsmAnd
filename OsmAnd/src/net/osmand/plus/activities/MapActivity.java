@@ -38,6 +38,7 @@ import net.osmand.access.AccessibleActivity;
 import net.osmand.access.AccessibleToast;
 import net.osmand.access.MapAccessibilityActions;
 import net.osmand.core.android.AtlasMapRendererView;
+import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
@@ -545,8 +546,12 @@ public class MapActivity extends AccessibleActivity {
 			}
 			if (mapLabelToShow != null) {
 				mapLayers.getContextMenuLayer().setSelectedObject(toShow);
-				mapLayers.getContextMenuLayer().setLocation(latLonToShow,
-						mapLabelToShow.getFullPlainName(this));
+				if (toShow instanceof FavouritePoint) {
+					mapLayers.getContextMenuLayer().showContextMenuForSelectedObjects(latLonToShow);
+				} else {
+					mapLayers.getContextMenuLayer().setLocation(latLonToShow,
+							mapLabelToShow.getFullPlainName(this));
+				}
 			}
 			if (!latLonToShow.equals(cur)) {
 				mapView.getAnimatedDraggingThread().startMoving(latLonToShow.getLatitude(),
