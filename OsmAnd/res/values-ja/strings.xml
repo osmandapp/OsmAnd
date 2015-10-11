@@ -681,13 +681,13 @@ POIの更新は利用できません</string>
 	<string name="driving_region_uk">イギリス, インド, オーストラリア &amp; その他</string>
 	    
     
-    <string name="announce_gpx_waypoints">GPX経由地点をアナウンス</string>
+    <string name="announce_gpx_waypoints">GPX経由地点</string>
     <string name="speak_title">音声アナウンス設定…</string>
 	<string name="speak_descr">通りの名称、トラフィック警告(通行に関する一般的な指示、強制停止、スピードバンプ等)、スピードカメラ(オービス)、法定速度の音声アナウンスの設定をします</string>
-	<string name="speak_street_names">通りの名前をアナウンス(TTS形式音声のみ)</string>
-    <string name="speak_speed_limit">法定速度をアナウンス</string>
-    <string name="speak_cameras">スピードカメラ(オービス)をアナウンス</string>
-	<string name="speak_traffic_warnings">トラフィック警告(通行に関する指示)をアナウンス</string>
+	<string name="speak_street_names">通りの名前 (TTS形式音声のみ)</string>
+    <string name="speak_speed_limit">制限速度</string>
+    <string name="speak_cameras">スピードカメラ(オービス)</string>
+	<string name="speak_traffic_warnings">通行に関する警告</string>
     <string name="osb_author_or_password_not_specified">OSMのユーザー名とパスワードを設定して下さい</string>
     <string name="clear_intermediate_points">中間点をクリア</string>
     <string name="keep_intermediate_points">中間点を保持</string>
@@ -1790,8 +1790,8 @@ POIの更新は利用できません</string>
     <string name="waypoints">経由地点</string>
     <string name="targets">目的地</string>
     <string name="way_alarms">交通警告</string>
-    <string name="speak_favorites">周辺のお気に入りをアナウンスする</string>
-    <string name="speak_poi">周辺のPOIをアナウンスする</string>
+    <string name="speak_favorites">周辺のお気に入り</string>
+    <string name="speak_poi">周辺のPOI</string>
     <string name="download_additional_maps">不足分のマップ %1$s (%2$d MB)をダウンロードしますか?</string>
     <string name="shared_string_more">追加…</string>
     <string name="rendering_value_browse_map_name">マップの閲覧</string>  
@@ -1884,7 +1884,7 @@ POIの更新は利用できません</string>
 	<string name="navigation_over_track">経路に沿って居ナビゲーションを開始しますか？</string>
 	<string name="avoid_roads_msg">使用しない道路を選択することで、別の経路を検索することができます</string>
     
-	<string name="speak_pedestrian">横断歩道をアナウンス</string>
+	<string name="speak_pedestrian">横断歩道</string>
     <string name="rendering_attr_roadStyle_name">道路の表示形式</string>
     <string name="rendering_value_default_name">標準</string>
     <string name="rendering_value_orange_name">オレンジ</string>
@@ -2154,4 +2154,51 @@ POIの更新は利用できません</string>
 	<string name="show_on_start">起動時に表示</string>
 	<string name="count_of_lines">表示する数の指定</string>
 <string name="address_unknown">住所はまだ登録されていません</string>
-    </resources>
+    <string name="favorite_category_dublicate_message">指定したカテゴリ名は既に使用されています。別の名前を付けてください。</string>
+    <string name="favorite_category_name">カテゴリ名</string>
+    <string name="favorite_category_add_new_title">新しいカテゴリを追加</string>
+    <string name="regions">地域</string>
+    <string name="additional_maps">追加設定</string>
+    <string name="region_maps">地域マップ</string>
+    <string name="world_maps">世界地図</string>
+    <string name="world_regions">世界の地域</string>
+    <string name="hillshade_layer_disabled">陰影起伏層無効</string>
+    <string name="srtm_plugin_disabled">等高線無効</string>
+    <string name="favorite_category_add_new">新規追加</string>
+    <string name="favorite_category_select">カテゴリを選択</string>
+    <string name="default_speed_system_descr">移動速度の表示形式を設定します</string>
+    <string name="default_speed_system">速度表示形式</string>
+    <string name="nm">nm</string>
+    <string name="si_nm">海里</string>
+    <string name="si_kmh">キロメートル毎時(km/h)</string>
+    <string name="si_mph">マイル毎時(mph・mi/h)</string>
+    <string name="si_m_s">メートル毎秒(m/s)</string>
+    <string name="si_min_km">キロメートル毎分(km/min)</string>
+    <string name="si_min_m">マイル毎分(mi/min)</string>
+    <string name="si_nm_h">海里毎時(ノット)</string>
+    <string name="nm_h">nmh</string>
+    <string name="min_mile">min/m</string>
+    <string name="min_km">min/km</string>
+    <string name="m_s">m/s</string>
+    
+    <string name="shared_string_trip_recording">旅程記録</string>
+    <string name="shared_string_navigation">ナビゲーション</string>
+    <string name="osmand_running_in_background">バックグラウンドで実行</string>
+    <string name="favourites_edit_dialog_title">お気に入りの情報</string>
+    <string name="simulate_your_location_stop_descr">位置シミュレーションの停止</string>
+    <string name="simulate_your_location_descr">GPXに記録されたルート、または計算されたルートを使用してシミュレートします</string>
+    <string name="favourites_context_menu_add">お気に入りに追加</string>
+	<string name="are_you_sure">よろしいですか？</string>
+	<string name="unsaved_changes_will_be_lost">未保存の変更は失われます。続行しますか？</string>
+	<string name="downloads_left_template">残りダウンロード %1$s</string>
+	<string name="roads">道路</string>
+    <string name="downloading_number_of_files">%1$d のファイルをダウンロード中</string>
+    <string name="show_free_version_banner">無料版のバナーを表示</string>
+    <string name="show_free_version_banner_description">有料版を所持している場合でも無料版バナーを見ることが出来ます</string>
+    <string name="buy">購入</string>
+    <string name="activate_seamarks_plugin">水位線プラグインを有効にしてください</string>
+    <string name="activate_srtm_plugin">SRTMプラグインを有効にしてください</string>
+    <string name="later">後で</string>
+    <string name="get_full_version">フルバージョンの入手</string>
+    <string name="downloads">ダウンロード</string>
+</resources>
