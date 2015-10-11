@@ -950,10 +950,10 @@
 	<string name="poi_fax">傳真</string>
 	<string name="poi_facebook">臉書</string>
 	<string name="poi_mobile">行動電話</string>
-	<string name="poi_animal_shelter_dog">流浪狗收容所</string>
-	<string name="poi_animal_shelter_cat">流浪貓收容所</string>
-	<string name="poi_animal_shelter_dog_cat">流浪狗和貓收容所</string>
-	<string name="poi_animal_shelter_bird">傷鳥收容所</string>
+	<string name="poi_animal_shelter_dog">收容所類型：狗</string>
+	<string name="poi_animal_shelter_cat">收容所：貓</string>
+	<string name="poi_animal_shelter_dog_cat">收容所：狗、貓</string>
+	<string name="poi_animal_shelter_bird">收容所：鳥</string>
 
 <string name="poi_shower">淋浴</string>
 	<string name="poi_recycling_centre">類型：資源回收中心</string>
@@ -1778,4 +1778,25 @@
 	<string name="poi_wetland_reedbed">蘆葦叢</string>
 	<string name="poi_wetland_swamp">沼澤</string>
 	<string name="poi_wetland_saltern">鹽田</string>
+	<string name="poi_animal_shelter">動物收容所</string>
+	<string name="poi_memorial_stolperstein">絆腳石</string>
+	<string name="poi_memorial_column">欄位</string>
+	<string name="poi_memorial_stupa">舍利塔</string>
+	<string name="poi_memorial_prasat">綠石英</string>
+
+	<string name="poi_wetland_tidalflat">泥潮灘</string>
+	<string name="poi_wetland_saltmarsh">鹽沼地</string>
+	<string name="poi_wetland_mangrove">紅樹林</string>
+	<string name="poi_wetland_string_bog">帶狀泥沼</string>
+	<string name="poi_wetland_fen">沼澤</string>
+	<string name="poi_wetland_palsa_bog">泥炭堆沼澤</string>
+	<string name="poi_wetland_mud">泥漿</string>
+
+	<string name="poi_beach_sand">海灘類型：沙子</string>
+	<string name="poi_beach_shingle">海灘類型：扁礫石</string>
+	<string name="poi_beach_rocky">海灘類型：多岩的</string>
+
+	<string name="poi_chimney">煙囪</string>
+	<string name="poi_palm">棕櫚</string>
+	<string name="poi_cypress">柏樹</string>
 	</resources>
