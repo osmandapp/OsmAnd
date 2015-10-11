@@ -470,7 +470,7 @@ POIの更新は利用できません</string>
  <string name="auto_zoom_map">マップを自動ズーム</string>
  <string name="additional_settings">追加設定</string>
  <string name="settings_preset_descr">マップの表示とナビゲーション設定はプロファイルごとに記憶されます。標準で使用するプロファイルを指定してください</string>
- <string name="settings_preset">デフォルトプロファイル</string>
+ <string name="settings_preset">標準プロファイル</string>
  <string name="shared_string_settings">設定</string>
  <string name="save_current_track_descr">現在の経路を今すぐSDに保存します</string>
  <string name="save_current_track">現在の経路を保存</string>
@@ -1239,7 +1239,7 @@ POIの更新は利用できません</string>
 	<string name="shared_string_others">その他</string>
 	<string name="favourites_edit_dialog_name">名前</string>
 	<string name="favourites_edit_dialog_category">カテゴリー</string>
-	<string name="shared_string_no_thanks">必要ありません</string>
+	<string name="shared_string_no_thanks">遠慮します</string>
 	<string name="basemap_missing">ベースワールドマップ(小さなズームでのみ全世界をカバーします)が欠落しています。World_basemap_x.obfをダウンロードしてみてください。</string>
 	<string name="vector_data_missing">オンボード(オフライン)データがSDカード上に見つかりません。オフラインマップを使用するにはそれらをダウンロードしてください。</string>
 	<string name="local_index_gpx_info_show">\n\nオプションを表示するには長押しして下さい</string>
@@ -1789,7 +1789,7 @@ POIの更新は利用できません</string>
     <string name="shared_string_all">全て</string>
     <string name="waypoints">経由地点</string>
     <string name="targets">目的地</string>
-    <string name="way_alarms">交通警告</string>
+    <string name="way_alarms">通行に関する警告</string>
     <string name="speak_favorites">周辺のお気に入り</string>
     <string name="speak_poi">周辺のPOI</string>
     <string name="download_additional_maps">不足分のマップ %1$s (%2$d MB)をダウンロードしますか?</string>
