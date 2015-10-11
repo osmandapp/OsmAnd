@@ -3,6 +3,7 @@ package net.osmand.plus.views.mapwidgets;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.TurnPathHelper;
 import net.osmand.router.TurnType;
@@ -84,6 +85,17 @@ public class NextTurnInfoWidget extends TextInfoWidget {
 	private void updateDistance() {
 		int deviatePath = turnDrawable.deviatedFromRoute ? deviatedPath : nextTurnDistance;
 		String ds = OsmAndFormatter.getFormattedDistance(deviatePath, app);
+
+		if (ds != null) {
+			TurnType turnType = getTurnType();
+			RoutingHelper routingHelper = app.getRoutingHelper();
+			if ((turnType != null) && (routingHelper != null)) {
+				setContentDescription(ds + " " + routingHelper.getRoute().toString(turnType, app));
+			} else {
+				setContentDescription(ds);
+			}
+		}
+
 		int ls = ds.lastIndexOf(' ');
 		if (ls == -1) {
 			setTextNoUpdateVisibility(ds, null);
