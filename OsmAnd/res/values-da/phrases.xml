@@ -968,10 +968,10 @@
 	<string name="poi_fax">Fax</string>
 	<string name="poi_facebook">Facebook</string>
 	<string name="poi_mobile">Mobiltelefon</string>
-	<string name="poi_animal_shelter_dog">Hundenternat</string>
-	<string name="poi_animal_shelter_cat">Katteinternat</string>
-	<string name="poi_animal_shelter_dog_cat">Hunde- og katteinternat</string>
-	<string name="poi_animal_shelter_bird">Fugleinternat</string>
+	<string name="poi_animal_shelter_dog">Internat: hund</string>
+	<string name="poi_animal_shelter_cat">Internat: kat</string>
+	<string name="poi_animal_shelter_dog_cat">"Internat: hund,  kat"</string>
+	<string name="poi_animal_shelter_bird">Internat: fugl</string>
 
 <string name="poi_shower">Bruser</string>
 	<string name="poi_recycling_centre">Type: genbrugsplads</string>
@@ -1998,4 +1998,39 @@
 
 	<string name="poi_monument_yes">Monumental objekt</string>
 
-</resources>
+<string name="poi_animal_shelter">Dyreinternat</string>
+	<string name="poi_industrial_factory">Type: fabrik</string>
+	<string name="poi_industrial_gas">Type: gasindustrien</string>
+	<string name="poi_industrial_timber">Type: tømmer</string>
+	<string name="poi_industrial_refinery">Type: raffinaderi</string>
+	<string name="poi_industrial_warehouse">Type: lager</string>
+	<string name="poi_industrial_auto_wrecker">Type: autoophug</string>
+	<string name="poi_industrial_agriculture">Type: landbrug</string>
+	<string name="poi_industrial_brewery">Type: bryggeri</string>
+	<string name="poi_industrial_brickyard">Type: teglværk</string>
+	<string name="poi_industrial_intermodal_freight_terminal">Type: intermodal godstransport</string>
+	<string name="poi_industrial_sawmill">Type: savværk</string>
+	<string name="poi_industrial_water_purification">Type: vandrensning</string>
+	<string name="poi_industrial_port">Type: havn</string>
+	<string name="poi_industrial_depot">Type: depot</string>
+
+	<string name="poi_note">Bemærk</string>
+	<string name="poi_watering_place">Vandingssted</string>
+	<string name="poi_animal_boarding">opstaldning</string>
+	<string name="poi_animal_boarding_dog">Opstaldning: hund</string>
+	<string name="poi_animal_boarding_cat">Opstaldning: kat</string>
+	<string name="poi_animal_boarding_dog_cat">Opstaldning: hund, kat</string>
+	<string name="poi_animal_boarding_horse">Opstaldning: hest</string>
+
+	<string name="poi_historic_aircraft">Historisk fly</string>
+
+	<string name="poi_honey">Honningbutik</string>
+
+	<string name="poi_elevator_yes">Med elevator</string>
+	<string name="poi_elevator_no">Uden elevator</string>
+
+	<string name="poi_technical_monument">Teknisk monument</string>
+
+<string name="poi_industrial_oil">Type: olieindustri</string>
+	<string name="poi_industrial_wellsite">Type: borested</string>
+	</resources>
