@@ -952,8 +952,8 @@
 	<string name="poi_facebook">Facebook</string>
 	<string name="poi_mobile">Celular</string>
 	<string name="poi_animal_shelter_dog">Refugio canino</string>
-	<string name="poi_animal_shelter_cat">Refugio para gatos</string>
-	<string name="poi_animal_shelter_dog_cat">Refugio para perros y gatos</string>
+	<string name="poi_animal_shelter_cat">Refugio gatuno</string>
+	<string name="poi_animal_shelter_dog_cat">Refugio canino y gatuno</string>
 	<string name="poi_animal_shelter_bird">Refugio para aves</string>
 
 <string name="poi_recycling_centre">Tipo: Centro de reciclaje</string>
@@ -1608,9 +1608,9 @@
 	<string name="poi_takeaway_no">Sin servicio de comida para llevar</string>
 	<string name="poi_takeaway_only">Sólo servicio de comida para llevar</string>
 
-	<string name="poi_delivery_no">Sin delivery</string>
-	<string name="poi_delivery_yes">Con delivery</string>
-	<string name="poi_delivery_only">Sólo delivery</string>
+	<string name="poi_delivery_no">Sin servicio a domicilio</string>
+	<string name="poi_delivery_yes">Con servicio a domicilio</string>
+	<string name="poi_delivery_only">Sólo servicio a domicilio</string>
 
 	<string name="poi_outdoor_seating_yes">Con asientos exteriores</string>
 	<string name="poi_outdoor_seating_no">Sin asientos exteriores</string>
@@ -1846,7 +1846,7 @@
 	<string name="poi_architecture_new_objectivity">Arquitectura: nueva objetividad</string>
 	<string name="poi_architecture_contemporary">Arquitectura contemporánea</string>
 	<string name="poi_architecture_constructivism">Arquitectura constructivista</string>
-	<string name="poi_architecture_umgebinde">Arquitectura: umgebinde</string>
+	<string name="poi_architecture_umgebinde">Arquitectura alemana</string>
 	<string name="poi_architecture_timber_frame">Arquitectura de madera</string>
 	<string name="poi_architecture_art_nouveau">Arquitectura: arte nuevo</string>
 	<string name="poi_architecture_neoclassicism">Arquitectura neoclasista</string>
@@ -1967,4 +1967,42 @@
 	<string name="poi_training_aviation">Capacitación: aviación</string>
 	<string name="poi_training_hairdressing">Capacitación: peluquería</string>
 
-</resources>
+<string name="poi_animal_shelter">Refugio para animales</string>
+	<string name="poi_memorial_stolperstein">Stolperstein</string>
+	<string name="poi_memorial_column">Columna</string>
+	<string name="poi_memorial_stupa">Estupa</string>
+	<string name="poi_monument_yes">Monumento</string>
+
+	<string name="poi_industrial_oil">Tipo: industria petrolera</string>
+	<string name="poi_industrial_factory">Tipo: fábrica</string>
+	<string name="poi_industrial_wellsite">Tipo: wellsite</string>
+	<string name="poi_industrial_gas">Tipo: industria gasífera</string>
+	<string name="poi_industrial_timber">Tipo: maderera</string>
+	<string name="poi_industrial_refinery">Tipo: refinería</string>
+	<string name="poi_industrial_warehouse">Tipo: almacén</string>
+	<string name="poi_industrial_auto_wrecker">Tipo: vehículo de auxilio</string>
+	<string name="poi_industrial_agriculture">Tipo: agrícola</string>
+	<string name="poi_industrial_brewery">Tipo: cervecería</string>
+	<string name="poi_industrial_brickyard">Tipo: fábrica de ladrillos</string>
+	<string name="poi_industrial_intermodal_freight_terminal">Tipo: terminal intermodal de mercancías</string>
+	<string name="poi_industrial_sawmill">Tipo: aserradero</string>
+	<string name="poi_industrial_water_purification">Tipo: purificación del agua</string>
+	<string name="poi_industrial_port">Tipo: puerto</string>
+	<string name="poi_industrial_depot">Tipo: depósito</string>
+
+	<string name="poi_note">Nota</string>
+	<string name="poi_watering_place">Lugar de riego</string>
+	<string name="poi_animal_boarding">Alojamiento de animales</string>
+	<string name="poi_animal_boarding_dog">Alojamiento canino</string>
+	<string name="poi_animal_boarding_cat">Alojamiento gatuno</string>
+	<string name="poi_animal_boarding_dog_cat">Alojamiento canino y gatuno</string>
+	<string name="poi_animal_boarding_horse">Alojamiento ecuestre</string>
+
+	<string name="poi_historic_aircraft">Avión histórico</string>
+
+	<string name="poi_honey">Miel</string>
+
+	<string name="poi_elevator_yes">Con ascensor</string>
+	<string name="poi_elevator_no">Sin ascensor</string>
+
+	</resources>
