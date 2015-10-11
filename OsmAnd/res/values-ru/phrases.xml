@@ -1701,7 +1701,7 @@
 	<string name="poi_tunnel_car">Туннель для автомобилей</string>
 	<string name="poi_tunnel_pedestrian">Туннель для пешеходов</string>
 	<string name="poi_tunnel_railway">Железнодорожный тоннель</string>
-	<string name="poi_bridge_car">Автомобильный туннель</string>
+	<string name="poi_bridge_car">Автомобильный мост</string>
 	<string name="poi_bridge_pedestrian">Пешеходный мост</string>
 	<string name="poi_bridge_bicycle">Велосипедный мост</string>
 	<string name="poi_bridge_railway">Железнодорожный мост</string>
@@ -1837,5 +1837,16 @@
 	<string name="poi_elevator_no">Без лифта</string>
 
 	<string name="poi_technical_monument">Технический памятник</string>
+
+	<string name="poi_office_camping">Приёмная лагеря</string>
+	<string name="poi_model_aerodrome">Авиамодельный спорт</string>
+	<string name="poi_guide">Офис гида</string>
+	<string name="poi_quango">Квазиавтономная неправительственная организация</string>
+	<string name="poi_consulting">Консультации</string>
+	<string name="poi_cooperative">Офис кооператива</string>
+	<string name="poi_office_forestry">Офис лесничества</string>
+	<string name="poi_logistics">Офис транспортно-логистической компании</string>
+	<string name="poi_parish">Приход</string>
+	<string name="poi_publisher">Издательство</string>
 
 </resources>
