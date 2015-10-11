@@ -2033,4 +2033,15 @@
 
 <string name="poi_industrial_oil">Type: olieindustri</string>
 	<string name="poi_industrial_wellsite">Type: borested</string>
-	</resources>
+	<string name="poi_office_camping">campingpladskontor</string>
+	<string name="poi_model_aerodrome">Model flyveplads</string>
+	<string name="poi_guide">Guide kontor</string>
+	<string name="poi_quango">Quango</string>
+	<string name="poi_consulting">Rådgivning kontor</string>
+	<string name="poi_cooperative">Kooperativ kontor</string>
+	<string name="poi_office_forestry">Skovbrug kontor</string>
+	<string name="poi_logistics">Logistik kontor</string>
+	<string name="poi_parish">Sognekontor</string>
+	<string name="poi_publisher">forlag kontor</string>
+
+</resources>
