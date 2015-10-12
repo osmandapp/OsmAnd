@@ -177,7 +177,7 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 	public void deselectAll() {
 		DownloadActivity.downloadListIndexThread.getEntriesToDownload().clear();
 		listAdapter.notifyDataSetInvalidated();
-		getDownloadActivity().updateDownloadButton();
+		getDownloadActivity().updateFragments();
 	}
 
 
@@ -210,7 +210,7 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 		AccessibleToast.makeText(getDownloadActivity(), MessageFormat.format(getString(R.string.items_were_selected), selected), Toast.LENGTH_SHORT).show();
 		listAdapter.notifyDataSetInvalidated();
 		if(selected > 0){
-			getDownloadActivity().updateDownloadButton();
+			getDownloadActivity().updateFragments();
 		}
 	}
 
@@ -222,7 +222,7 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 		if(ch.isChecked()){
 			ch.setChecked(!ch.isChecked());
 			getDownloadActivity().getEntriesToDownload().remove(e);
-			getDownloadActivity().updateDownloadButton();
+			getDownloadActivity().updateFragments();
 			return true;
 		}
 		
@@ -231,7 +231,7 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 			// if(!fileToUnzip.exists()){
 			// builder.setMessage(MessageFormat.format(getString(R.string.download_question), baseName, extractDateAndSize(e.getValue())));
 			getDownloadActivity().getEntriesToDownload().put(e, download);
-			getDownloadActivity().updateDownloadButton();
+			getDownloadActivity().updateFragments();
 			ch.setChecked(!ch.isChecked());
 		}
 		return true;

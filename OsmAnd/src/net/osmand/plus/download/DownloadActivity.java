@@ -2,43 +2,33 @@ package net.osmand.plus.download;
 
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
-import android.app.Dialog;
 import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.ListFragment;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.BaseExpandableListAdapter;
-import android.widget.Button;
 import android.widget.ExpandableListAdapter;
-import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import net.osmand.IndexConstants;
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.LocalIndexInfo;
-import net.osmand.plus.activities.OsmAndListFragment;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.activities.OsmandExpandableListFragment;
 import net.osmand.plus.activities.TabActivity;
@@ -61,7 +51,7 @@ import java.util.Set;
 
 
 public class DownloadActivity extends BaseDownloadActivity implements DialogDismissListener {
-	private List<LocalIndexInfo> localIndexInfos = new ArrayList<LocalIndexInfo>();
+	private List<LocalIndexInfo> localIndexInfos = new ArrayList<>();
 
 	private String initialFilter = "";
 	private boolean singleTab;
@@ -135,44 +125,6 @@ public class DownloadActivity extends BaseDownloadActivity implements DialogDism
 
 		settings = ((OsmandApplication) getApplication()).getSettings();
 
-		findViewById(R.id.downloadButton).setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				downloadFilesCheckFreeVersion();
-			}
-
-		});
-		findViewById(R.id.wikiButton).setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				downloadWikiFiles();
-			}
-		});
-
-		findViewById(R.id.CancelAll).setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				getEntriesToDownload().clear();
-				updateDownloadButton();
-				for (WeakReference<Fragment> ref : fragSet) {
-					Fragment f = ref.get();
-					if (f != null) {
-						if (f instanceof OsmAndListFragment) {
-							if (f.isAdded() && ((OsmAndListFragment) f).getListAdapter() instanceof ArrayAdapter) {
-								((ArrayAdapter) ((OsmAndListFragment) f).getListAdapter()).notifyDataSetChanged();
-							}
-						} else if (f.isAdded() && f instanceof OsmandExpandableListFragment &&
-								((OsmandExpandableListFragment) f).getAdapter() instanceof BaseExpandableListAdapter) {
-							((BaseExpandableListAdapter) ((OsmandExpandableListFragment) f).getAdapter()).notifyDataSetChanged();
-						}
-					}
-				}
-			}
-		});
-
 		downloadTypes = createDownloadTypes();
 		final Intent intent = getIntent();
 		if (intent != null && intent.getExtras() != null) {
@@ -191,6 +143,7 @@ public class DownloadActivity extends BaseDownloadActivity implements DialogDism
 			}
 		}
 		changeType(downloadTypes.get(0));
+		registerFreeVersionBanner(findViewById(R.id.mainLayout));
 	}
 
 
@@ -206,7 +159,6 @@ public class DownloadActivity extends BaseDownloadActivity implements DialogDism
 	protected void onResume() {
 		super.onResume();
 		getMyApplication().getAppCustomization().resumeActivity(DownloadActivity.class, this);
-		registerFreeVersionBanner(findViewById(R.id.mainLayout));
 	}
 
 
@@ -256,7 +208,7 @@ public class DownloadActivity extends BaseDownloadActivity implements DialogDism
 			progressAdapter.setProgress(basicProgressAsyncTask, tag);
 		}
 		if (!updateOnlyProgress) {
-			updateDownloadButton();
+			updateFragments();
 		}
 	}
 
@@ -360,7 +312,7 @@ public class DownloadActivity extends BaseDownloadActivity implements DialogDism
 					for (IndexItem i : wi) {
 						addToDownload(i);
 					}
-					updateDownloadButton();
+					updateFragments();
 					checkOldWikiFiles();
 				}
 			});
@@ -403,41 +355,7 @@ public class DownloadActivity extends BaseDownloadActivity implements DialogDism
 
 
 	@Override
-	public void updateDownloadButton() {
-//		View view = getView();
-//		if (view == null || getExpandableListView() == null){
-//			return;
-//		}
-//		int x = getExpandableListView().getScrollX();
-//		int y = getExpandableListView().getScrollY();
-		if (getEntriesToDownload().isEmpty()) {
-			findViewById(R.id.DownloadLayout).setVisibility(View.GONE);
-		} else {
-			BasicProgressAsyncTask<?, ?, ?> task = DownloadActivity.downloadListIndexThread.getCurrentRunningTask();
-			boolean running = task instanceof DownloadIndexesThread.DownloadIndexesAsyncTask;
-			((Button) findViewById(R.id.downloadButton)).setEnabled(!running);
-			String text;
-			int downloads = DownloadActivity.downloadListIndexThread.getDownloads();
-			if (!running) {
-				text = getString(R.string.shared_string_download) + "  (" + downloads + ")"; //$NON-NLS-1$
-			} else {
-				text = getString(R.string.shared_string_downloading) + "  (" + downloads + ")"; //$NON-NLS-1$
-			}
-			findViewById(R.id.DownloadLayout).setVisibility(View.VISIBLE);
-			if (Version.isFreeVersion(getMyApplication())) {
-				int left = DownloadActivity.MAXIMUM_AVAILABLE_FREE_DOWNLOADS - settings.NUMBER_OF_FREE_DOWNLOADS.get() - downloads;
-				boolean excessLimit = left < 0;
-				if (left < 0)
-					left = 0;
-				if (getDownloadType() == DownloadActivityType.NORMAL_FILE || getDownloadType() == DownloadActivityType.ROADS_FILE) {
-					text += " (" + (excessLimit ? "! " : "") + getString(R.string.files_limit, left).toLowerCase() + ")";
-				}
-			}
-			((Button) findViewById(R.id.downloadButton)).setText(text);
-			List<IndexItem> wikipediaItems = getWikipediaItems();
-			findViewById(R.id.wikiButton).setVisibility(wikipediaItems.size() == 0 ? View.GONE : View.VISIBLE);
-		}
-
+	public void updateFragments() {
 		for (WeakReference<Fragment> ref : fragSet) {
 			Fragment f = ref.get();
 			if (f != null)
@@ -456,9 +374,6 @@ public class DownloadActivity extends BaseDownloadActivity implements DialogDism
 					}
 				}
 		}
-//		if (scroll) {
-//			getExpandableListView().scrollTo(x, y);
-//		}
 	}
 
 

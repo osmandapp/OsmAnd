@@ -154,12 +154,12 @@ public class UpdatesIndexFragment extends OsmAndListFragment {
 		if (ch.isChecked()) {
 			ch.setChecked(!ch.isChecked());
 			getDownloadActivity().getEntriesToDownload().remove(e);
-			getDownloadActivity().updateDownloadButton();
+			getDownloadActivity().updateFragments();
 		} else {
 			List<DownloadEntry> download = e.createDownloadEntry(getMyApplication(), e.getType(), new ArrayList<DownloadEntry>());
 			if (download.size() > 0) {
 				getDownloadActivity().getEntriesToDownload().put(e, download);
-				getDownloadActivity().updateDownloadButton();
+				getDownloadActivity().updateFragments();
 				ch.setChecked(!ch.isChecked());
 			}
 		}
@@ -220,14 +220,14 @@ public class UpdatesIndexFragment extends OsmAndListFragment {
 		AccessibleToast.makeText(getDownloadActivity(), MessageFormat.format(getString(R.string.items_were_selected), selected), Toast.LENGTH_SHORT).show();
 		listAdapter.notifyDataSetInvalidated();
 		if (selected > 0) {
-			getDownloadActivity().updateDownloadButton();
+			getDownloadActivity().updateFragments();
 		}
 	}
 
 	public void deselectAll() {
 		DownloadActivity.downloadListIndexThread.getEntriesToDownload().clear();
 		listAdapter.notifyDataSetInvalidated();
-		getDownloadActivity().updateDownloadButton();
+		getDownloadActivity().updateFragments();
 	}
 
 	private void filterExisting() {
