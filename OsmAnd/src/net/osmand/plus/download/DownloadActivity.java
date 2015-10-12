@@ -43,6 +43,8 @@ import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.activities.OsmandExpandableListFragment;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.base.BasicProgressAsyncTask;
+import net.osmand.plus.download.items.ActiveDownloadsDialogFragment;
+import net.osmand.plus.download.items.DialogDismissListener;
 import net.osmand.plus.download.items.RegionDialogFragment;
 import net.osmand.plus.download.items.SearchDialogFragment;
 import net.osmand.plus.download.items.WorldItemsFragment;
@@ -59,7 +61,7 @@ import java.util.Map;
 import java.util.Set;
 
 
-public class DownloadActivity extends BaseDownloadActivity implements RegionDialogFragment.DialogDismissListener {
+public class DownloadActivity extends BaseDownloadActivity implements DialogDismissListener {
 	private List<LocalIndexInfo> localIndexInfos = new ArrayList<LocalIndexInfo>();
 
 	private String initialFilter = "";
@@ -114,12 +116,12 @@ public class DownloadActivity extends BaseDownloadActivity implements RegionDial
 		PagerSlidingTabStrip mSlidingTabLayout = (PagerSlidingTabStrip) findViewById(R.id.sliding_tabs);
 
 
-		mTabs.add(new TabActivity.TabItem(R.string.download_tab_local,
-				getString(R.string.download_tab_local), LocalIndexesFragment.class));
 		mTabs.add(new TabActivity.TabItem(R.string.download_tab_downloads,
 				getString(R.string.download_tab_downloads), WorldItemsFragment.class));
-//		mTabs.add(new TabActivity.TabItem(R.string.download_tab_downloads,
-//				getString(R.string.download_tab_downloads), DownloadIndexFragment.class));
+		mTabs.add(new TabActivity.TabItem(R.string.download_tab_downloads,
+				getString(R.string.download_tab_downloads), DownloadIndexFragment.class));
+		mTabs.add(new TabActivity.TabItem(R.string.download_tab_local,
+				getString(R.string.download_tab_local), LocalIndexesFragment.class));
 		mTabs.add(new TabActivity.TabItem(R.string.download_tab_updates,
 				getString(R.string.download_tab_updates), UpdatesIndexFragment.class));
 
@@ -758,117 +760,6 @@ public class DownloadActivity extends BaseDownloadActivity implements RegionDial
 				buttonsLinearLayout.setVisibility(View.VISIBLE);
 				freeVersionBannerTitle.setVisibility(View.VISIBLE);
 			}
-		}
-	}
-
-	public static class ActiveDownloadsDialogFragment extends DialogFragment {
-		@NonNull
-		@Override
-		public Dialog onCreateDialog(Bundle savedInstanceState) {
-			AlertDialog.Builder builder = new Builder(getActivity());
-			builder.setTitle(R.string.downloads).setNegativeButton(R.string.shared_string_cancel, null);
-			Collection<List<DownloadEntry>> vs =
-					DownloadActivity.downloadListIndexThread.getEntriesToDownload().values();
-			ArrayList<DownloadEntry> downloadEntries = new ArrayList<>();
-			for (List<DownloadEntry> list : vs) {
-				downloadEntries.addAll(list);
-			}
-			final DownloadEntryAdapter adapter = new DownloadEntryAdapter(getActivity(), downloadEntries);
-			builder.setAdapter(adapter, null);
-			((DownloadActivity) getActivity()).registerUpdateListener(adapter);
-			return builder.create();
-		}
-
-		private static class DownloadEntryAdapter extends ArrayAdapter<DownloadEntry> {
-			private final Drawable deleteDrawable;
-			private int itemInProgressPosition = -1;
-			private int progress = -1;
-			private final Set<Integer> downloadedItems = new HashSet<>();
-			private boolean isFinished;
-
-			public DownloadEntryAdapter(Context context, List<DownloadEntry> objects) {
-				super(context, R.layout.two_line_with_images_list_item, objects);
-				deleteDrawable = ((OsmandApplication) context.getApplicationContext()).getIconsCache()
-						.getPaintedContentIcon(R.drawable.ic_action_remove_dark,
-								context.getResources().getColor(R.color.dash_search_icon_dark));
-			}
-
-			@Override
-			public View getView(int position, View convertView, ViewGroup parent) {
-				if (convertView == null) {
-					convertView = LayoutInflater.from(parent.getContext())
-							.inflate(R.layout.two_line_with_images_list_item, parent, false);
-					DownloadEntryViewHolder viewHolder =
-							new DownloadEntryViewHolder(convertView, deleteDrawable);
-					convertView.setTag(viewHolder);
-				}
-				DownloadEntryViewHolder viewHolder = (DownloadEntryViewHolder) convertView.getTag();
-				viewHolder.bindDownloadEntry(getItem(position));
-				if (position == itemInProgressPosition) {
-					viewHolder.progressBar.setIndeterminate(false);
-					viewHolder.progressBar.setProgress(progress);
-				} else if (isFinished || downloadedItems.contains(position)) {
-					viewHolder.progressBar.setIndeterminate(false);
-					viewHolder.progressBar.setProgress(viewHolder.progressBar.getMax());
-				}
-				return convertView;
-			}
-
-			public void setProgress(BasicProgressAsyncTask<?, ?, ?> task, Object tag) {
-				isFinished = task == null
-						|| task.getStatus() == AsyncTask.Status.FINISHED;
-				itemInProgressPosition = -1;
-				progress = -1;
-				if (isFinished) return;
-				if (tag instanceof DownloadEntry) {
-					progress = task.getProgressPercentage();
-					for (int i = 0; i < getCount(); i++) {
-						if (getItem(i).equals(tag)) {
-							itemInProgressPosition = i;
-							downloadedItems.add(i);
-						}
-					}
-				}
-				notifyDataSetChanged();
-			}
-		}
-
-		private static class DownloadEntryViewHolder {
-			private final TextView nameTextView;
-			private final TextView descrTextView;
-			private final ImageView leftImageView;
-			private final ImageView rightImageButton;
-			private final Button rightButton;
-			private final ProgressBar progressBar;
-			private final TextView mapDateTextView;
-			private final Drawable deleteDrawable;
-
-			private DownloadEntryViewHolder(View convertView, Drawable deleteDrawable) {
-				this.deleteDrawable = deleteDrawable;
-				nameTextView = (TextView) convertView.findViewById(R.id.name);
-				descrTextView = (TextView) convertView.findViewById(R.id.description);
-				leftImageView = (ImageView) convertView.findViewById(R.id.leftImageView);
-				rightImageButton = (ImageView) convertView.findViewById(R.id.rightImageButton);
-				rightButton = (Button) convertView.findViewById(R.id.rightButton);
-				progressBar = (ProgressBar) convertView.findViewById(R.id.progressBar);
-				mapDateTextView = (TextView) convertView.findViewById(R.id.mapDateTextView);
-			}
-			public void bindDownloadEntry(DownloadEntry downloadEntry) {
-				nameTextView.setText(downloadEntry.baseName);
-				descrTextView.setText(String.format("%1$s MBb from %2$s Mb", 123.440,
-						downloadEntry.sizeMB));
-				rightImageButton.setImageDrawable(deleteDrawable);
-				rightImageButton.setVisibility(View.VISIBLE);
-				rightImageButton.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-
-					}
-				});
-				progressBar.setVisibility(View.VISIBLE);
-				progressBar.setIndeterminate(true);
-			}
-
 		}
 	}
 }

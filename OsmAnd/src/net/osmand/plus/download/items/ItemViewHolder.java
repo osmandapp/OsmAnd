@@ -178,14 +178,6 @@ public class ItemViewHolder {
 			rightImageButton.setVisibility(View.VISIBLE);
 		}
 
-		if (disabled) {
-			leftImageView.setImageDrawable(getContextIcon(context, indexItem.getType().getIconResource(), textColorSecondary));
-			nameTextView.setTextColor(textColorSecondary);
-		} else {
-			leftImageView.setImageDrawable(getContextIcon(context, indexItem.getType().getIconResource()));
-			nameTextView.setTextColor(textColorPrimary);
-		}
-
 		if (indexFileNames != null && indexItem.isAlreadyDownloaded(indexFileNames)) {
 			boolean outdated = false;
 			String date;
@@ -201,7 +193,19 @@ public class ItemViewHolder {
 					+ date;
 			mapDateTextView.setText(updateDescr);
 			int colorId = outdated ? R.color.color_distance : R.color.color_ok;
-			mapDateTextView.setTextColor(context.getResources().getColor(colorId));
+			final int color = context.getResources().getColor(colorId);
+			mapDateTextView.setTextColor(color);
+			leftImageView.setImageDrawable(getContextIcon(context,
+					indexItem.getType().getIconResource(), color));
+			nameTextView.setTextColor(textColorPrimary);
+		} else if (disabled) {
+			leftImageView.setImageDrawable(getContextIcon(context,
+					indexItem.getType().getIconResource(), textColorSecondary));
+			nameTextView.setTextColor(textColorSecondary);
+		} else {
+			leftImageView.setImageDrawable(getContextIcon(context,
+					indexItem.getType().getIconResource()));
+			nameTextView.setTextColor(textColorPrimary);
 		}
 	}
 

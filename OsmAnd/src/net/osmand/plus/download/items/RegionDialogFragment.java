@@ -113,8 +113,4 @@ public class RegionDialogFragment extends DialogFragment{
 	public void setOnDismissListener(DialogDismissListener listener) {
 		this.dialogDismissListener = listener;
 	}
-
-	public interface DialogDismissListener {
-		void onDialogDismissed();
-	}
 }

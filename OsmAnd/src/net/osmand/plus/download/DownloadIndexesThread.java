@@ -364,7 +364,6 @@ public class DownloadIndexesThread {
 				String breakDownloadMessage = null;
 				downloadCycle:
 				while (!entriesToDownload.isEmpty()) {
-
 					Iterator<Entry<IndexItem, List<DownloadEntry>>> it = entriesToDownload.entrySet().iterator();
 					IndexItem file = null;
 					List<DownloadEntry> list = null;
