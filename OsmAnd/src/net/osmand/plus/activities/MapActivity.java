@@ -545,13 +545,13 @@ public class MapActivity extends AccessibleActivity {
 				dashboardOnMap.hideDashboard();
 			}
 			if (mapLabelToShow != null) {
-				mapLayers.getContextMenuLayer().setSelectedObject(toShow);
-				if (toShow instanceof FavouritePoint) {
-					mapLayers.getContextMenuLayer().showContextMenuForSelectedObjects(latLonToShow);
-				} else {
+//				mapLayers.getContextMenuLayer().setSelectedObject(toShow);
+//				if (toShow instanceof FavouritePoint) {
+//					mapLayers.getContextMenuLayer().showContextMenuForSelectedObjects(latLonToShow);
+//				} else {
 					mapLayers.getContextMenuLayer().setLocation(latLonToShow,
 							mapLabelToShow.getFullPlainName(this));
-				}
+//				}
 			}
 			if (!latLonToShow.equals(cur)) {
 				mapView.getAnimatedDraggingThread().startMoving(latLonToShow.getLatitude(),

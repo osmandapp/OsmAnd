@@ -95,6 +95,10 @@ public class MapContextMenu {
 		if (needStreetName()) {
 			acquireStreetName(new LatLon(pointDescription.getLat(), pointDescription.getLon()));
 		}
+		if (menuController != null) {
+			menuController.addPlainMenuItems(typeStr, this.pointDescription);
+		}
+
 		return true;
 	}
 
@@ -130,17 +134,8 @@ public class MapContextMenu {
 		if (object != null) {
 			if (object instanceof Amenity) {
 				menuController = new AmenityMenuController(app, mapActivity, (Amenity)object);
-				if (!Algorithms.isEmpty(typeStr)) {
-					menuController.addPlainMenuItem(R.drawable.ic_action_info_dark, typeStr);
-				}
-				if (pointDescription != null) {
-					menuController.addPlainMenuItem(R.drawable.map_my_location, pointDescription.getLocationName(mapActivity, true).replaceAll("\n", ""));
-				}
 			} else if (object instanceof FavouritePoint) {
 				menuController = new FavouritePointMenuController(app, mapActivity, (FavouritePoint)object);
-				if (pointDescription != null) {
-					menuController.addPlainMenuItem(R.drawable.map_my_location, pointDescription.getLocationName(mapActivity, true).replaceAll("\n", ""));
-				}
 			}
 		}
 	}

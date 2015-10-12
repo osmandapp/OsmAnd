@@ -1,11 +1,14 @@
 package net.osmand.plus.mapcontextmenu.details;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import net.osmand.data.Amenity;
+import net.osmand.data.PointDescription;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.util.Algorithms;
@@ -68,6 +71,16 @@ public class AmenityMenuController extends MenuController {
 			typeStr = Algorithms.capitalizeFirstLetterAndLowercase(typeStr.replace('_', ' '));
 		}
 		return typeStr;
+	}
+
+	@Override
+	public void addPlainMenuItems(String typeStr, PointDescription pointDescription) {
+		if (!Algorithms.isEmpty(typeStr)) {
+			addPlainMenuItem(R.drawable.ic_action_info_dark, typeStr);
+		}
+		if (pointDescription != null) {
+			addPlainMenuItem(R.drawable.map_my_location, pointDescription.getLocationName(getMapActivity(), true).replaceAll("\n", ""));
+		}
 	}
 
 	@Override

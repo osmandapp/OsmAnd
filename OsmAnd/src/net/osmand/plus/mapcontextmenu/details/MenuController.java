@@ -4,6 +4,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 
+import net.osmand.data.PointDescription;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -41,6 +42,9 @@ public abstract class MenuController {
 
 	public void addPlainMenuItem(int iconId, String text) {
 		builder.addPlainMenuItem(iconId, text);
+	}
+
+	public void addPlainMenuItems(String typeStr, PointDescription pointDescription) {
 	}
 
 	public int getInitialMenuState() {
