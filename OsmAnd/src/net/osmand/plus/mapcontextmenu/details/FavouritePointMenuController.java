@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 import net.osmand.data.FavouritePoint;
+import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -71,6 +72,13 @@ public class FavouritePointMenuController extends MenuController {
 	@Override
 	public String getNameStr() {
 		return fav.getName();
+	}
+
+	@Override
+	public void addPlainMenuItems(String typeStr, PointDescription pointDescription) {
+		if (pointDescription != null) {
+			addPlainMenuItem(R.drawable.map_my_location, pointDescription.getLocationName(getMapActivity(), true).replaceAll("\n", ""));
+		}
 	}
 
 	@Override

@@ -218,6 +218,10 @@ public class ItemsListBuilder {
 	private void collectSubregionItems(WorldRegion region) {
 		Map<String, IndexItem> regionResources = resourcesByRegions.get(region);
 
+		if (regionResources == null) {
+			return;
+		}
+
 		List<ResourceItem> regionMapArray = new LinkedList<>();
 		List<Object> allResourcesArray = new LinkedList<Object>();
 

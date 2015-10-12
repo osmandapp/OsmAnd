@@ -21,7 +21,6 @@ import net.osmand.CallbackWithObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 
@@ -39,7 +38,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o);
 		
 		public LatLon getObjectLocation(Object o);
-		
+
+		// todo: remove
 		public String getObjectDescription(Object o);
 		
 		public PointDescription getObjectName(Object o);
@@ -220,6 +220,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		}
 	}
 
+	// Opens black box menu
+	// todo: needs to be removed (exchanged completly by new context menu)
 	public void setLocation(LatLon loc, String description){
 		latLon = loc;
 		if(latLon != null){
@@ -482,7 +484,6 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 
 	public void showContextMenuForSelectedObjects(final LatLon l) {
-		final ContextMenuAdapter menuAdapter = new ContextMenuAdapter(activity);
 		if (selectedObjects.size() > 1) {
 			Builder builder = new AlertDialog.Builder(view.getContext());
 			String[] d = new String[selectedObjects.size()];

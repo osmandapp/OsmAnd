@@ -1901,7 +1901,7 @@
 	<string name="poi_bridge_structure_arch">Brokonstruktion: buebro</string>
 	<string name="poi_bridge_structure_truss">Brokonstruktion: gitterbro</string>
 	<string name="poi_bridge_structure_floating">Brokonstruktion: pontonbro</string>
-	<string name="poi_bridge_structure_humpback">Brokonstruktion: humpback</string>
+	<string name="poi_bridge_structure_humpback">Brokonstruktion: buet bro</string>
 	<string name="poi_bridge_structure_cable_stayed">Brokonstruktion: skråstagsbro</string>
 	<string name="poi_bridge_structure_boardwalk">Brokonstruktion: havnepromenade</string>
 	<string name="poi_bridge_structure_simple_wooden">Brokonstruktion: simpel træbro</string>
@@ -1917,8 +1917,8 @@
 	<string name="poi_bridge_movable_transporter">Bevægeligbro: transportbro</string>
 	<string name="poi_bridge_movable_retractable">Bevægeligbro: rullebro</string>
 
-<string name="poi_lit_yes">Tændt: ja</string>
-	<string name="poi_lit_no">Tændt: nej</string>
+<string name="poi_lit_yes">Belyst: ja</string>
+	<string name="poi_lit_no">Belyst: nej</string>
 
 	<string name="poi_surface_unpaved">Overflade: uden belægning</string>
 	<string name="poi_surface_paved">Overflade: med belægning</string>
@@ -2000,7 +2000,7 @@
 
 <string name="poi_animal_shelter">Dyreinternat</string>
 	<string name="poi_industrial_factory">Type: fabrik</string>
-	<string name="poi_industrial_gas">Type: gasindustrien</string>
+	<string name="poi_industrial_gas">Type: gasindustri</string>
 	<string name="poi_industrial_timber">Type: tømmer</string>
 	<string name="poi_industrial_refinery">Type: raffinaderi</string>
 	<string name="poi_industrial_warehouse">Type: lager</string>
@@ -2016,11 +2016,11 @@
 
 	<string name="poi_note">Bemærk</string>
 	<string name="poi_watering_place">Vandingssted</string>
-	<string name="poi_animal_boarding">opstaldning</string>
-	<string name="poi_animal_boarding_dog">Opstaldning: hund</string>
-	<string name="poi_animal_boarding_cat">Opstaldning: kat</string>
-	<string name="poi_animal_boarding_dog_cat">Opstaldning: hund, kat</string>
-	<string name="poi_animal_boarding_horse">Opstaldning: hest</string>
+	<string name="poi_animal_boarding">Dyrepension</string>
+	<string name="poi_animal_boarding_dog">Dyrepension: hund</string>
+	<string name="poi_animal_boarding_cat">Dyrepension: kat</string>
+	<string name="poi_animal_boarding_dog_cat">Dyrepension: hund, kat</string>
+	<string name="poi_animal_boarding_horse">Dyrepension: hest</string>
 
 	<string name="poi_historic_aircraft">Historisk fly</string>
 
@@ -2033,15 +2033,15 @@
 
 <string name="poi_industrial_oil">Type: olieindustri</string>
 	<string name="poi_industrial_wellsite">Type: borested</string>
-	<string name="poi_office_camping">campingpladskontor</string>
-	<string name="poi_model_aerodrome">Model flyveplads</string>
-	<string name="poi_guide">Guide kontor</string>
+	<string name="poi_office_camping">Campingpladskontor</string>
+	<string name="poi_model_aerodrome">Modelflyveplads</string>
+	<string name="poi_guide">Guidekontor</string>
 	<string name="poi_quango">Quango</string>
-	<string name="poi_consulting">Rådgivning kontor</string>
+	<string name="poi_consulting">Rådgivningskontor</string>
 	<string name="poi_cooperative">Kooperativ kontor</string>
 	<string name="poi_office_forestry">Skovbrug kontor</string>
-	<string name="poi_logistics">Logistik kontor</string>
+	<string name="poi_logistics">Logistikkontor</string>
 	<string name="poi_parish">Sognekontor</string>
-	<string name="poi_publisher">forlag kontor</string>
+	<string name="poi_publisher">Forlagskontor</string>
 
 </resources>

@@ -424,15 +424,15 @@ public class WaypointDialogHelper {
 			if(ctx.getDashboard().isVisible()) {
 				ctx.getDashboard().hideDashboard();
 				ctx.getMapLayers().getContextMenuLayer().setSelectedObject(locationPoint);
-				if (locationPoint instanceof FavouritePoint) {
-					ctx.getMapLayers().getContextMenuLayer()
-							.showContextMenuForSelectedObjects(new LatLon(locationPoint.getLatitude(), locationPoint.getLongitude()));
-				} else {
+//				if (locationPoint instanceof FavouritePoint) {
+//					ctx.getMapLayers().getContextMenuLayer()
+//							.showContextMenuForSelectedObjects(new LatLon(locationPoint.getLatitude(), locationPoint.getLongitude()));
+//				} else {
 					ctx.getMapLayers()
 							.getContextMenuLayer()
 							.setLocation(new LatLon(locationPoint.getLatitude(), locationPoint.getLongitude()),
 									PointDescription.getSimpleName(locationPoint, ctx));
-				}
+//				}
 			}
 		}
 	}
