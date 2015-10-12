@@ -170,6 +170,15 @@ public class AsyncLoadingThread extends Thread {
 			this.tileId = tileId;
 		}
 		
+		public TileLoadDownloadRequest(File dirWithTiles, String url, File fileToSave, String tileId, ITileSource source, int tileX,
+				int tileY, int zoom, String referer) {
+			super(url, fileToSave, tileX, tileY, zoom);
+			this.dirWithTiles = dirWithTiles;
+			this.tileSource = source;
+			this.tileId = tileId;
+			this.referer = referer;
+		}
+		
 		public void saveTile(InputStream inputStream) throws IOException {
 			if(tileSource instanceof SQLiteTileSource){
 				ByteArrayOutputStream stream = null;

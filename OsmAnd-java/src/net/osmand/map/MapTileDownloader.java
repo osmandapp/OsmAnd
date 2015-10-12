@@ -91,6 +91,7 @@ public class MapTileDownloader {
 		public final int xTile;
 		public final int yTile;
 		public final String url;
+		public String referer = null;
 		public boolean error;
 		
 		public DownloadRequest(String url, File fileToSave, int xTile, int yTile, int zoom) {
@@ -262,6 +263,8 @@ public class MapTileDownloader {
 				try {
 					URLConnection connection = NetworkUtils.getHttpURLConnection(request.url);
 					connection.setRequestProperty("User-Agent", USER_AGENT); //$NON-NLS-1$
+					if(request.referer != null)
+						connection.setRequestProperty("Referer", request.referer); //$NON-NLS-1$
 					connection.setConnectTimeout(CONNECTION_TIMEOUT);
 					connection.setReadTimeout(CONNECTION_TIMEOUT);
 					BufferedInputStream inputStream = new BufferedInputStream(connection.getInputStream(), 8 * 1024);
