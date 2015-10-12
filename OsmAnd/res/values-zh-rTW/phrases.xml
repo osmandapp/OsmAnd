@@ -1799,4 +1799,19 @@
 	<string name="poi_chimney">煙囪</string>
 	<string name="poi_palm">棕櫚</string>
 	<string name="poi_cypress">柏樹</string>
+	<string name="poi_flagpole">旗竿</string>
+
+	<string name="poi_bench_yes">有長椅</string>
+	<string name="poi_bench_no">沒有長椅</string>
+	<string name="poi_waste_basket_yes">有籃子</string>
+	<string name="poi_waste_basket_no">沒有籃子</string>
+
+	<string name="poi_shelter_type_public_transport">遮蔽類型：公共交通</string>
+	<string name="poi_shelter_type_picnic_shelter">遮蔽類型：野餐涼亭</string>
+	<string name="poi_shelter_type_weather_shelter">遮蔽類型：天氣遮避</string>
+	<string name="poi_shelter_type_lean_to">遮蔽類型：木棚</string>
+	<string name="poi_shelter_type_basic_hut">遮蔽類型：簡陋小屋</string>
+	<string name="poi_shelter_type_building">遮蔽類型：建築物</string>
+	<string name="poi_shelter_type_wildlife_hide">遮蔽類型：野生動物的偽裝</string>
+	<string name="poi_shelter_type_rock_shelter">遮蔽類型：懸巖遮蔽</string>
 	</resources>
