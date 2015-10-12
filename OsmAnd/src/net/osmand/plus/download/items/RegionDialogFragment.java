@@ -69,7 +69,8 @@ public class RegionDialogFragment extends DialogFragment{
 		listener = new DialogDismissListener() {
 			@Override
 			public void onDialogDismissed() {
-				getDownloadActivity().registerFreeVersionBanner(view);
+				if (getDownloadActivity() != null)
+					getDownloadActivity().registerFreeVersionBanner(view);
 			}
 		};
 		return view;

@@ -45,7 +45,6 @@ import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.download.items.ActiveDownloadsDialogFragment;
 import net.osmand.plus.download.items.DialogDismissListener;
-import net.osmand.plus.download.items.RegionDialogFragment;
 import net.osmand.plus.download.items.SearchDialogFragment;
 import net.osmand.plus.download.items.WorldItemsFragment;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
@@ -118,8 +117,8 @@ public class DownloadActivity extends BaseDownloadActivity implements DialogDism
 
 		mTabs.add(new TabActivity.TabItem(R.string.download_tab_downloads,
 				getString(R.string.download_tab_downloads), WorldItemsFragment.class));
-		mTabs.add(new TabActivity.TabItem(R.string.download_tab_downloads,
-				getString(R.string.download_tab_downloads), DownloadIndexFragment.class));
+//		mTabs.add(new TabActivity.TabItem(R.string.download_tab_downloads,
+//				getString(R.string.download_tab_downloads), DownloadIndexFragment.class));
 		mTabs.add(new TabActivity.TabItem(R.string.download_tab_local,
 				getString(R.string.download_tab_local), LocalIndexesFragment.class));
 		mTabs.add(new TabActivity.TabItem(R.string.download_tab_updates,

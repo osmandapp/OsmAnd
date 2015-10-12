@@ -156,6 +156,7 @@ public class ActiveDownloadsDialogFragment extends DialogFragment {
 						downloadEntry.sizeMB));
 			} else if (isDownloaded) {
 				// Downloaded
+				isIndeterminate = false;
 				localProgress = progressBar.getMax();
 				descrTextView.setText(String.format("%.1f MB", downloadEntry.sizeMB));
 
