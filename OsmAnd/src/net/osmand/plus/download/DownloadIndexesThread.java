@@ -61,13 +61,13 @@ public class DownloadIndexesThread {
 	private Set<DownloadEntry> currentDownloads = new HashSet<DownloadEntry>();
 	private final Context ctx;
 	private OsmandApplication app;
-	private final static Log log = PlatformUtil.getLog(DownloadIndexesThread.class);
+	private final static Log LOG = PlatformUtil.getLog(DownloadIndexesThread.class);
 	private DownloadFileHelper downloadFileHelper;
 	private List<BasicProgressAsyncTask<?, ?, ?>> currentRunningTask = Collections.synchronizedList(new ArrayList<BasicProgressAsyncTask<?, ?, ?>>());
-	private Map<String, String> indexFileNames = new LinkedHashMap<String, String>();
-	private Map<String, String> indexActivatedFileNames = new LinkedHashMap<String, String>();
+	private Map<String, String> indexFileNames = new LinkedHashMap<>();
+	private Map<String, String> indexActivatedFileNames = new LinkedHashMap<>();
 	private java.text.DateFormat dateFormat;
-	private List<IndexItem> itemsToUpdate = new ArrayList<IndexItem>();
+	private List<IndexItem> itemsToUpdate = new ArrayList<>();
 
 	private Map<WorldRegion, Map<String, IndexItem>> resourcesByRegions = new HashMap<>();
 	private List<IndexItem> voiceRecItems = new LinkedList<>();
@@ -349,7 +349,7 @@ public class DownloadIndexesThread {
 			}
 			currentRunningTask.remove(this);
 			if (uiActivity != null) {
-				uiActivity.updateProgress(false);
+				uiActivity.updateProgress(false, tag);
 			}
 			updateFilesToUpdate();
 		}
@@ -401,6 +401,7 @@ public class DownloadIndexesThread {
 										+ "");
 								break downloadCycle;
 							}
+							setTag(entry);
 							boolean result = downloadFile(entry, filesToReindex, forceWifi);
 							success = result || success;
 							if (result) {
@@ -431,7 +432,7 @@ public class DownloadIndexesThread {
 				updateLoadedFiles();
 				return warn;
 			} catch (InterruptedException e) {
-				log.info("Download Interrupted");
+				LOG.info("Download Interrupted");
 				// do not dismiss dialog
 			}
 			return null;
@@ -492,12 +493,12 @@ public class DownloadIndexesThread {
 						ResourceManager.copyAssets(ctx.getAssets(), de.assetName, de.targetFile);
 						boolean changedDate = de.targetFile.setLastModified(de.dateModified);
 						if (!changedDate) {
-							log.error("Set last timestamp is not supported");
+							LOG.error("Set last timestamp is not supported");
 						}
 						res = true;
 					}
 				} catch (IOException e) {
-					log.error("Copy exception", e);
+					LOG.error("Copy exception", e);
 				}
 			} else {
 				res = downloadFileHelper.downloadFile(de, this, filesToReindex, this, forceWifi);
@@ -506,9 +507,9 @@ public class DownloadIndexesThread {
 		}
 
 		@Override
-		protected void updateProgress(boolean updateOnlyProgress) {
+		protected void updateProgress(boolean updateOnlyProgress, Object tag) {
 			if (uiActivity != null) {
-				uiActivity.updateProgress(updateOnlyProgress);
+				uiActivity.updateProgress(updateOnlyProgress, tag);
 			}
 		}
 	}
@@ -573,7 +574,7 @@ public class DownloadIndexesThread {
 				}
 				currentRunningTask.remove(this);
 				if (uiActivity != null) {
-					uiActivity.updateProgress(false);
+					uiActivity.updateProgress(false, tag);
 					runCategorization(uiActivity.getDownloadType());
 					uiActivity.onCategorizationFinished();
 				}
@@ -603,9 +604,9 @@ public class DownloadIndexesThread {
 			}
 
 			@Override
-			protected void updateProgress(boolean updateOnlyProgress) {
+			protected void updateProgress(boolean updateOnlyProgress, Object tag) {
 				if (uiActivity != null) {
-					uiActivity.updateProgress(updateOnlyProgress);
+					uiActivity.updateProgress(updateOnlyProgress, tag);
 				}
 
 			}
@@ -644,7 +645,7 @@ public class DownloadIndexesThread {
 				currentRunningTask.add(this);
 				this.message = ctx.getString(R.string.downloading_list_indexes);
 				if (uiActivity != null) {
-					uiActivity.updateProgress(false);
+					uiActivity.updateProgress(false, tag);
 				}
 			}
 
@@ -676,14 +677,14 @@ public class DownloadIndexesThread {
 				currentRunningTask.remove(this);
 				if (uiActivity != null) {
 					uiActivity.categorizationFinished(filtered, cats);
-					uiActivity.updateProgress(false);
+					uiActivity.updateProgress(false, tag);
 				}
 			}
 
 			@Override
-			protected void updateProgress(boolean updateOnlyProgress) {
+			protected void updateProgress(boolean updateOnlyProgress, Object tag) {
 				if (uiActivity != null) {
-					uiActivity.updateProgress(updateOnlyProgress);
+					uiActivity.updateProgress(updateOnlyProgress, tag);
 				}
 
 			}
