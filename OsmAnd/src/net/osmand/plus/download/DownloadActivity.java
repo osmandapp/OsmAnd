@@ -244,7 +244,7 @@ public class DownloadActivity extends BaseDownloadActivity implements RegionDial
 	}
 
 	@Override
-	public void updateProgress(boolean updateOnlyProgress) {
+	public void updateProgress(boolean updateOnlyProgress, Object tag) {
 		BasicProgressAsyncTask<?, ?, ?> basicProgressAsyncTask =
 				DownloadActivity.downloadListIndexThread.getCurrentRunningTask();
 		if (visibleBanner != null) {
@@ -252,7 +252,7 @@ public class DownloadActivity extends BaseDownloadActivity implements RegionDial
 			visibleBanner.updateProgress(countedDownloads, basicProgressAsyncTask);
 		}
 		if (progressAdapter != null) {
-			progressAdapter.setProgress(basicProgressAsyncTask.getProgressPercentage());
+			progressAdapter.setProgress(basicProgressAsyncTask, tag);
 		}
 		if (!updateOnlyProgress) {
 			updateDownloadButton();
@@ -581,12 +581,12 @@ public class DownloadActivity extends BaseDownloadActivity implements RegionDial
 
 	public void registerFreeVersionBanner(View view) {
 		visibleBanner = new BannerAndDownloadFreeVersion(view, this);
-		updateProgress(true);
+		updateProgress(true, null);
 	}
 
 	public void registerUpdateListener(ActiveDownloadsDialogFragment.DownloadEntryAdapter adapter) {
 		progressAdapter = adapter;
-		updateProgress(true);
+		updateProgress(true, null);
 	}
 
 	public void showDialog(FragmentActivity activity, DialogFragment fragment) {
@@ -773,12 +773,18 @@ public class DownloadActivity extends BaseDownloadActivity implements RegionDial
 			for (List<DownloadEntry> list : vs) {
 				downloadEntries.addAll(list);
 			}
-			builder.setAdapter(new DownloadEntryAdapter(getActivity(), downloadEntries), null);
+			final DownloadEntryAdapter adapter = new DownloadEntryAdapter(getActivity(), downloadEntries);
+			builder.setAdapter(adapter, null);
+			((DownloadActivity) getActivity()).registerUpdateListener(adapter);
 			return builder.create();
 		}
 
 		private static class DownloadEntryAdapter extends ArrayAdapter<DownloadEntry> {
 			private final Drawable deleteDrawable;
+			private int itemInProgressPosition = -1;
+			private int progress = -1;
+			private final Set<Integer> downloadedItems = new HashSet<>();
+			private boolean isFinished;
 
 			public DownloadEntryAdapter(Context context, List<DownloadEntry> objects) {
 				super(context, R.layout.two_line_with_images_list_item, objects);
@@ -798,11 +804,32 @@ public class DownloadActivity extends BaseDownloadActivity implements RegionDial
 				}
 				DownloadEntryViewHolder viewHolder = (DownloadEntryViewHolder) convertView.getTag();
 				viewHolder.bindDownloadEntry(getItem(position));
+				if (position == itemInProgressPosition) {
+					viewHolder.progressBar.setIndeterminate(false);
+					viewHolder.progressBar.setProgress(progress);
+				} else if (isFinished || downloadedItems.contains(position)) {
+					viewHolder.progressBar.setIndeterminate(false);
+					viewHolder.progressBar.setProgress(viewHolder.progressBar.getMax());
+				}
 				return convertView;
 			}
 
-			public void setProgress(int percent) {
-				// TODO: 10/9/15 implement
+			public void setProgress(BasicProgressAsyncTask<?, ?, ?> task, Object tag) {
+				isFinished = task == null
+						|| task.getStatus() == AsyncTask.Status.FINISHED;
+				itemInProgressPosition = -1;
+				progress = -1;
+				if (isFinished) return;
+				if (tag instanceof DownloadEntry) {
+					progress = task.getProgressPercentage();
+					for (int i = 0; i < getCount(); i++) {
+						if (getItem(i).equals(tag)) {
+							itemInProgressPosition = i;
+							downloadedItems.add(i);
+						}
+					}
+				}
+				notifyDataSetChanged();
 			}
 		}
 

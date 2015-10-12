@@ -16,6 +16,7 @@ public abstract class BasicProgressAsyncTask<Params, Progress, Result> extends A
 	protected String message = ""; //$NON-NLS-1$
 	protected Context ctx;
 	protected boolean interrupted = false;
+	protected Object tag;
 	private Handler uiHandler;
 
 	public BasicProgressAsyncTask(Context ctx) {
@@ -45,7 +46,7 @@ public abstract class BasicProgressAsyncTask<Params, Progress, Result> extends A
 		updProgress(false);
 	}
 
-	protected abstract void updateProgress(boolean updateOnlyProgress);
+	protected abstract void updateProgress(boolean updateOnlyProgress, Object tag);
 
 	@Override
 	public void startWork(int work) {
@@ -75,7 +76,7 @@ public abstract class BasicProgressAsyncTask<Params, Progress, Result> extends A
 			Message msg = Message.obtain(uiHandler, new Runnable() {
 				@Override
 				public void run() {
-					updateProgress(updateOnlyProgress);
+					updateProgress(updateOnlyProgress, tag);
 				}
 			});
 			msg.what = OsmAndConstants.UI_HANDLER_PROGRESS + 2;
@@ -122,4 +123,7 @@ public abstract class BasicProgressAsyncTask<Params, Progress, Result> extends A
 		return interrupted;
 	}
 
+	protected void setTag(Object tag) {
+		this.tag = tag;
+	}
 }

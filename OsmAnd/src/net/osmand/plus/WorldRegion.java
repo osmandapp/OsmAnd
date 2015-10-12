@@ -89,7 +89,6 @@ public class WorldRegion {
 	}
 
 	public void processNewMapState(MapState mapState) {
-		LOG.debug("old state=" + this.mapState);
 		switch (this.mapState) {
 			case NOT_DOWNLOADED:
 				this.mapState = mapState;
@@ -101,7 +100,6 @@ public class WorldRegion {
 			case OUTDATED:
 				break;
 		}
-		LOG.debug("new state=" + this.mapState);
 	}
 
 	@Override

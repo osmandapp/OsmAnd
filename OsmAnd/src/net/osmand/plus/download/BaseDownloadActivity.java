@@ -79,7 +79,7 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 
 	}
 
-	public void updateProgress(boolean updateOnlyProgress) {
+	public void updateProgress(boolean updateOnlyProgress, Object tag) {
 
 	}
 

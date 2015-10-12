@@ -101,7 +101,7 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		getDownloadActivity().updateProgress(false);
+		getDownloadActivity().updateProgress(false, null);
 		BasicProgressAsyncTask<?, ?, ?> t = DownloadActivity.downloadListIndexThread.getCurrentRunningTask();
 		if(t instanceof DownloadIndexesThread.DownloadIndexesAsyncTask) {
 			View mainView = getView().findViewById(R.id.MainLayout);
@@ -300,7 +300,7 @@ public class DownloadIndexFragment extends OsmandExpandableListFragment {
 	public View findViewById(int id){ return getView().findViewById(id);}
 
 	public void updateProgress(boolean b) {
-		getDownloadActivity().updateProgress(b);
+		getDownloadActivity().updateProgress(b, null);
 	}
 
 	public void categorizationFinished(List<IndexItem> filtered, List<IndexItemCategory> cats) {
