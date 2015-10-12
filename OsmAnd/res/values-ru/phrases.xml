@@ -780,7 +780,6 @@
 	<string name="poi_internet_access_terminal">Доступ в Интернет: терминал</string>
 	<string name="poi_internet_access_wired">Доступ в Интернет: проводное подключение</string>
 	<string name="poi_internet_access_public">Доступ в Интернет: общедоступный</string>
-	<string name="poi_internet_access_service">Доступ в Интернет: сервис</string>
 	<string name="poi_internet_access_yes">Доступ в Интернет</string>
 	<string name="poi_internet_access_no">Нет доступа в Интернет</string>
 
