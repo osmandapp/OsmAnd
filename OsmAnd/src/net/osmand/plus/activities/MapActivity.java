@@ -545,7 +545,7 @@ public class MapActivity extends AccessibleActivity {
 				dashboardOnMap.hideDashboard();
 			}
 			if (mapLabelToShow != null) {
-//				mapLayers.getContextMenuLayer().setSelectedObject(toShow);
+				mapLayers.getContextMenuLayer().setSelectedObject(toShow);
 //				if (toShow instanceof FavouritePoint) {
 //					mapLayers.getContextMenuLayer().showContextMenuForSelectedObjects(latLonToShow);
 //				} else {
