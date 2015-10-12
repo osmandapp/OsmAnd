@@ -1814,4 +1814,9 @@
 	<string name="poi_shelter_type_building">遮蔽類型：建築物</string>
 	<string name="poi_shelter_type_wildlife_hide">遮蔽類型：野生動物的偽裝</string>
 	<string name="poi_shelter_type_rock_shelter">遮蔽類型：懸巖遮蔽</string>
+	<string name="poi_shelter_type_sun_shelter">遮蔽類型：陽光遮避</string>
+	<string name="poi_shelter_type_field_shelter">遮蔽類型：牧場遮蓋屋</string>
+	<string name="poi_shelter_type_tent">遮蔽類型：帳篷</string>
+	<string name="poi_shelter_type_abandoned">遮蔽類型：已遺棄</string>
+
 	</resources>
