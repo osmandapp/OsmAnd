@@ -38,6 +38,7 @@ import net.osmand.access.AccessibleActivity;
 import net.osmand.access.AccessibleToast;
 import net.osmand.access.MapAccessibilityActions;
 import net.osmand.core.android.AtlasMapRendererView;
+import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
@@ -67,6 +68,7 @@ import net.osmand.plus.helpers.GpxImportHelper;
 import net.osmand.plus.helpers.WakeLockHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
+import net.osmand.plus.mapcontextmenu.editors.PointEditor;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RoutingHelper;
@@ -544,8 +546,12 @@ public class MapActivity extends AccessibleActivity {
 			}
 			if (mapLabelToShow != null) {
 				mapLayers.getContextMenuLayer().setSelectedObject(toShow);
-				mapLayers.getContextMenuLayer().setLocation(latLonToShow,
-						mapLabelToShow.getFullPlainName(this));
+				if (toShow instanceof FavouritePoint) {
+					mapLayers.getContextMenuLayer().showContextMenuForSelectedObjects(latLonToShow);
+				} else {
+					mapLayers.getContextMenuLayer().setLocation(latLonToShow,
+							mapLabelToShow.getFullPlainName(this));
+				}
 			}
 			if (!latLonToShow.equals(cur)) {
 				mapView.getAnimatedDraggingThread().startMoving(latLonToShow.getLatitude(),
@@ -990,6 +996,13 @@ public class MapActivity extends AccessibleActivity {
 			favoritePointEditor = new FavoritePointEditor(app, this);
 		}
 		return favoritePointEditor;
+	}
+
+	public PointEditor getPointEditor(String tag) {
+		if (favoritePointEditor != null && favoritePointEditor.getFragmentTag().equals(tag)) {
+			return favoritePointEditor;
+		}
+		return null;
 	}
 
 	public void openDrawer() {

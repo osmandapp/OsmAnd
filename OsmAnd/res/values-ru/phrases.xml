@@ -1136,10 +1136,12 @@
 	<string name="poi_breakwater">Волнорез</string>
 	<string name="poi_groyne">Мол</string>
 
-	<string name="poi_animal_shelter_dog">Приют для собак</string>
-	<string name="poi_animal_shelter_cat">Приют для кошек</string>
-	<string name="poi_animal_shelter_dog_cat">Приют для кошек и собак</string>
-	<string name="poi_animal_shelter_bird">Приют для птиц</string>
+	<string name="poi_animal_shelter">Приют для животных</string>
+
+	<string name="poi_animal_shelter_dog">Тип приюта: для собак</string>
+	<string name="poi_animal_shelter_cat">Тип приюта: для кошек</string>
+	<string name="poi_animal_shelter_dog_cat">Тип приюта: для собак и кошек</string>
+	<string name="poi_animal_shelter_bird">Тип приюта: для птиц</string>
 
 	<string name="poi_shower">Душ</string>
 
@@ -1541,7 +1543,11 @@
 	<string name="poi_memorial_jizo">Дзидзо</string>
 	<string name="poi_memorial_cross">Крест</string>
 	<string name="poi_memorial_vehicle">Средство передвижения</string>
+	<string name="poi_memorial_stolperstein">Камень преткновения</string>
 	<string name="poi_memorial_obelisk">Обелиск</string>
+	<string name="poi_memorial_column">Колонна</string>
+	<string name="poi_memorial_stupa">Ступа</string>
+	<string name="poi_memorial_prasat">Прасат</string>
 
 	<string name="poi_inscription">Надпись</string>
 
@@ -1635,7 +1641,7 @@
 	<string name="poi_shelter_type_lean_to">Тип укрытия: навес</string>
 	<string name="poi_shelter_type_basic_hut">Тип укрытия: хижина</string>
 	<string name="poi_shelter_type_building">Тип укрытия: здание</string>
-	<string name="poi_shelter_type_wildlife_hide">Тип укрытия: в дикой природе</string>
+	<string name="poi_shelter_type_wildlife_hide">Тип укрытия: для наблюдения за дикой природой</string>
 	<string name="poi_shelter_type_rock_shelter">Тип укрытия: в камнях</string>
 	<string name="poi_shelter_type_sun_shelter">Тип укрытия: от солнца</string>
 	<string name="poi_shelter_type_field_shelter">Тип укрытия: в поле</string>
@@ -1695,7 +1701,7 @@
 	<string name="poi_tunnel_car">Туннель для автомобилей</string>
 	<string name="poi_tunnel_pedestrian">Туннель для пешеходов</string>
 	<string name="poi_tunnel_railway">Железнодорожный тоннель</string>
-	<string name="poi_bridge_car">Автомобильный туннель</string>
+	<string name="poi_bridge_car">Автомобильный мост</string>
 	<string name="poi_bridge_pedestrian">Пешеходный мост</string>
 	<string name="poi_bridge_bicycle">Велосипедный мост</string>
 	<string name="poi_bridge_railway">Железнодорожный мост</string>
@@ -1748,5 +1754,99 @@
 	<string name="poi_surface_ice">Поверхность: лёд</string>
 	<string name="poi_surface_salt">Поверхность: соль (соляные озёра)</string>
 	<string name="poi_surface_snow">Поверхность: снег (зимник)</string>
+
+	<string name="poi_route_bus_ref">Автобус</string>
+	<string name="poi_route_share_taxi_ref">Маршрутное такси</string>
+	<string name="poi_route_trolleybus_ref">Троллейбус</string>
+	<string name="poi_route_tram_ref">Трамвай</string>
+	<string name="poi_route_train_ref">Поезд</string>
+	<string name="poi_route_light_rail_ref">Легкорельсовый транспорт</string>
+	<string name="poi_route_monorail_ref">Монорельс</string>
+	<string name="poi_route_funicular_ref">Фуникулёр</string>
+	<string name="poi_route_ferry_ref">Паром</string>
+
+	<string name="poi_route_railway_ref">Железнодорожный путь</string>
+
+	<string name="poi_historic_yes">Исторический объект</string>
+	<string name="poi_surveillance_yes">С видеонаблюдением</string>
+	<string name="poi_shop_yes">С магазином</string>
+
+	<string name="poi_service_bicycle_retail_yes">Продажа велосипедов: да</string>
+	<string name="poi_service_bicycle_retail_no">Продажа велосипедов: нет</string>
+	<string name="poi_service_bicycle_repair_yes">Ремонт велосипедов: да</string>
+	<string name="poi_service_bicycle_repair_no">Ремонт велосипедов: нет</string>
+	<string name="poi_service_bicycle_rental_yes">Прокат велосипедов: да</string>
+	<string name="poi_service_bicycle_rental_no">Прокат велосипедов: нет</string>
+	<string name="poi_service_bicycle_pump_yes">Подкачка велосипедных шин: да</string>
+	<string name="poi_service_bicycle_pump_no">Подкачка велосипедных шин: нет</string>
+	<string name="poi_service_bicycle_diy_yes">Инструменты для самостоятельного ремонта велосипеда: да</string>
+	<string name="poi_service_bicycle_diy_no">Инструменты для самостоятельного ремонта велосипеда: нет</string>
+	<string name="poi_service_bicycle_cleaning_yes">Мойка велосипедов: да</string>
+	<string name="poi_service_bicycle_cleaning_no">Мойка велосипедов: нет</string>
+	<string name="poi_service_bicycle_chaintool_yes">Выжимка цепи для велосипедов: да</string>
+	<string name="poi_service_bicycle_chaintool_no">Выжимка цепи для велосипедов: нет</string>
+	<string name="poi_service_bicycle_second_hand_yes">Продажа подержанных велосипедов: да</string>
+	<string name="poi_service_bicycle_second_hand_no">Продажа подержанных велосипедов: нет</string>
+
+	<string name="poi_wildlife_hide">Укрытие для наблюдения за дикой природой</string>
+
+	<string name="poi_training_language">Обучение: иностранный язык</string>
+	<string name="poi_training_music">Обучение: музыка</string>
+	<string name="poi_training_dance">Обучение: танцы</string>
+	<string name="poi_training_sport">Обучение: спорт</string>
+	<string name="poi_training_art">Обучение: искусство</string>
+	<string name="poi_training_cooking">Обучение: приготовление пищи</string>
+	<string name="poi_training_computer">Обучение: работа на компьютере</string>
+	<string name="poi_training_yoga">Обучение: йога</string>
+	<string name="poi_training_martial_art">Обучение: боевые искусства</string>
+	<string name="poi_training_aviation">Обучение: авиация</string>
+	<string name="poi_training_hairdressing">Обучение: парикмахер</string>
+
+	<string name="poi_monument_yes">Монументальный объект</string>
+
+	<string name="poi_industrial_oil">Тип: нефтяная промышленность</string>
+	<string name="poi_industrial_wellsite">Тип: буровая площадка</string>
+	<string name="poi_industrial_factory">Тип: фабрика</string>
+	<string name="poi_industrial_gas">Тип: газовая промышленность</string>
+	<string name="poi_industrial_timber">Тип: лесоматериалы</string>
+	<string name="poi_industrial_refinery">Тип: очистительный завод</string>
+	<string name="poi_industrial_warehouse">Тип: склад</string>
+	<string name="poi_industrial_auto_wrecker">Тип: утилизация машин</string>
+	<string name="poi_industrial_agriculture">Тип: сельскохозяйственная промышленность</string>
+	<string name="poi_industrial_brewery">Тип: пивоварня</string>
+	<string name="poi_industrial_brickyard">Тип: кирпичный завод</string>
+	<string name="poi_industrial_intermodal_freight_terminal">Тип: интермодальный грузовой терминал</string>
+	<string name="poi_industrial_sawmill">Тип: лесопилка</string>
+	<string name="poi_industrial_water_purification">Тип: очистка воды</string>
+	<string name="poi_industrial_port">Тип: порт</string>
+	<string name="poi_industrial_depot">Тип: депо</string>
+
+	<string name="poi_note">Заметка</string>
+	<string name="poi_watering_place">Водопой</string>
+	<string name="poi_animal_boarding">Временное содержание животных</string>
+	<string name="poi_animal_boarding_dog">Тип приюта: для собак</string>
+	<string name="poi_animal_boarding_cat">Тип приюта: для кошек</string>
+	<string name="poi_animal_boarding_dog_cat">Тип приюта: для собак и кошек</string>
+	<string name="poi_animal_boarding_horse">Тип приюта: для лошадей</string>
+
+	<string name="poi_historic_aircraft">Исторический самолёт</string>
+
+	<string name="poi_honey">Мёд</string>
+
+	<string name="poi_elevator_yes">С лифтом</string>
+	<string name="poi_elevator_no">Без лифта</string>
+
+	<string name="poi_technical_monument">Технический памятник</string>
+
+	<string name="poi_office_camping">Приёмная лагеря</string>
+	<string name="poi_model_aerodrome">Авиамодельный спорт</string>
+	<string name="poi_guide">Офис гида</string>
+	<string name="poi_quango">Квазиавтономная неправительственная организация</string>
+	<string name="poi_consulting">Консультации</string>
+	<string name="poi_cooperative">Офис кооператива</string>
+	<string name="poi_office_forestry">Офис лесничества</string>
+	<string name="poi_logistics">Офис транспортно-логистической компании</string>
+	<string name="poi_parish">Приход</string>
+	<string name="poi_publisher">Издательство</string>
 
 </resources>

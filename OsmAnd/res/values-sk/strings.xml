@@ -2332,4 +2332,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="later">Neskôr</string>
     <string name="get_full_version">Získať plnú verziu</string>
     <string name="downloads">Sťahovania</string>
-</resources>
+<string name="favorite_category_dublicate_message">Zadaný názov kategórie už existuje. Prosím zadajte iný názov.</string>
+    <string name="favorite_category_name">Názov kategórie</string>
+    <string name="favorite_category_add_new_title">Pridať novú kategóriu</string>
+    </resources>

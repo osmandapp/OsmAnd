@@ -108,8 +108,8 @@ public abstract class PointEditorFragment extends Fragment {
 			public boolean onTouch(final View v, MotionEvent event) {
 				if (event.getAction() == MotionEvent.ACTION_UP) {
 					DialogFragment dialogFragment =
-							SelectCategoryDialogFragment.createInstance();
-					dialogFragment.show(getChildFragmentManager(), "SelectCategoryDialogFragment");
+							SelectCategoryDialogFragment.createInstance(getEditor().getFragmentTag());
+					dialogFragment.show(getChildFragmentManager(), SelectCategoryDialogFragment.TAG);
 					return true;
 				}
 				return false;
@@ -231,7 +231,6 @@ public abstract class PointEditorFragment extends Fragment {
 		AutoCompleteTextViewEx categoryEdit = (AutoCompleteTextViewEx) getView().findViewById(R.id.category_edit);
 		String name = categoryEdit.getText().toString().trim();
 		return name.equals(getString(R.string.shared_string_favorites)) ? "" : name;
-
 	}
 
 	public String getDescriptionTextValue() {

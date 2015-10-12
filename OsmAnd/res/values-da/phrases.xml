@@ -968,10 +968,10 @@
 	<string name="poi_fax">Fax</string>
 	<string name="poi_facebook">Facebook</string>
 	<string name="poi_mobile">Mobiltelefon</string>
-	<string name="poi_animal_shelter_dog">Hundenternat</string>
-	<string name="poi_animal_shelter_cat">Katteinternat</string>
-	<string name="poi_animal_shelter_dog_cat">Hunde- og katteinternat</string>
-	<string name="poi_animal_shelter_bird">Fugleinternat</string>
+	<string name="poi_animal_shelter_dog">Internat: hund</string>
+	<string name="poi_animal_shelter_cat">Internat: kat</string>
+	<string name="poi_animal_shelter_dog_cat">"Internat: hund,  kat"</string>
+	<string name="poi_animal_shelter_bird">Internat: fugl</string>
 
 <string name="poi_shower">Bruser</string>
 	<string name="poi_recycling_centre">Type: genbrugsplads</string>
@@ -1903,7 +1903,7 @@
 	<string name="poi_bridge_structure_floating">Brokonstruktion: pontonbro</string>
 	<string name="poi_bridge_structure_humpback">Brokonstruktion: humpback</string>
 	<string name="poi_bridge_structure_cable_stayed">Brokonstruktion: skråstagsbro</string>
-	<string name="poi_bridge_structure_boardwalk">Brokonstruktion: mole</string>
+	<string name="poi_bridge_structure_boardwalk">Brokonstruktion: havnepromenade</string>
 	<string name="poi_bridge_structure_simple_wooden">Brokonstruktion: simpel træbro</string>
 	<string name="poi_bridge_structure_viaduct">Brokonstruktion: viadukt</string>
 	<string name="poi_bridge_structure_aqueduct">Brokonstruktion: akvædukt</string>
@@ -1943,5 +1943,105 @@
 	<string name="poi_surface_ice">Overflade: is</string>
 	<string name="poi_surface_salt">Overflade: salt</string>
 	<string name="poi_surface_snow">Overflade: sne</string>
+
+<string name="poi_route_bus_ref">Bus</string>
+	<string name="poi_route_share_taxi_ref">Deletaxi</string>
+	<string name="poi_route_trolleybus_ref">Trolleybus</string>
+	<string name="poi_route_tram_ref">Sporvogn</string>
+	<string name="poi_route_train_ref">Tog</string>
+	<string name="poi_route_light_rail_ref">Letbane</string>
+	<string name="poi_route_monorail_ref">Monorail</string>
+	<string name="poi_route_funicular_ref">Kabelbane</string>
+	<string name="poi_route_ferry_ref">Færge</string>
+
+	<string name="poi_route_railway_ref">Jernbanerute</string>
+
+<string name="poi_historic_yes">Historisk objekt</string>
+	<string name="poi_surveillance_yes">Overvågning: ja</string>
+	<string name="poi_shop_yes">Med butik</string>
+
+	<string name="poi_service_bicycle_retail_yes">Cykelsalg: ja</string>
+	<string name="poi_service_bicycle_retail_no">Cykelsalg: nej</string>
+	<string name="poi_service_bicycle_repair_yes">Cykelreparation: ja</string>
+	<string name="poi_service_bicycle_repair_no">Cykelreparation: nej</string>
+	<string name="poi_service_bicycle_rental_yes">Cykeludlejning: ja</string>
+	<string name="poi_service_bicycle_rental_no">Cykeludlejning: nej</string>
+	<string name="poi_service_bicycle_pump_yes">Cykelpumpe: ja</string>
+	<string name="poi_service_bicycle_pump_no">Cykelpumpe: nej</string>
+	<string name="poi_service_bicycle_diy_yes">Cykelværktøj til gør det selv reparation: ja</string>
+	<string name="poi_service_bicycle_diy_no">Cykelværktøj til gør det selv reparation: nej</string>
+	<string name="poi_service_bicycle_cleaning_yes">Cykelrengøring: ja</string>
+	<string name="poi_service_bicycle_cleaning_no">Cykelrengøring: nej</string>
+	<string name="poi_service_bicycle_chaintool_yes">Cykel kædeværktøj: ja</string>
+	<string name="poi_service_bicycle_chaintool_no">Cykel kædeværktøj: nej</string>
+	<string name="poi_service_bicycle_second_hand_yes">Salg af brugte cykler: ja</string>
+	<string name="poi_service_bicycle_second_hand_no">Salg af brugte cykler: nej</string>
+
+	<string name="poi_wildlife_hide">Vildtskjul</string>
+
+	<string name="poi_training_language">Uddannelse: sprog</string>
+	<string name="poi_training_music">Uddannelse: musik</string>
+	<string name="poi_training_dance">Uddannelse: dans</string>
+	<string name="poi_training_sport">Uddannelse: sport</string>
+	<string name="poi_training_art">Uddannelse: kunst</string>
+	<string name="poi_training_cooking">Uddannelse: madlavning</string>
+	<string name="poi_training_computer">Uddannelse: computer</string>
+	<string name="poi_training_yoga">Uddannelse: yoga</string>
+	<string name="poi_training_martial_art">Uddannelse: kampsport</string>
+	<string name="poi_training_aviation">Uddannelse: luftfart</string>
+	<string name="poi_training_hairdressing">Uddannelse: frisør</string>
+
+<string name="poi_memorial_stolperstein">Snublesten</string>
+	<string name="poi_memorial_column">Søjle</string>
+	<string name="poi_memorial_stupa">Stupa</string>
+	<string name="poi_memorial_prasat">Prasat</string>
+
+	<string name="poi_monument_yes">Monumental objekt</string>
+
+<string name="poi_animal_shelter">Dyreinternat</string>
+	<string name="poi_industrial_factory">Type: fabrik</string>
+	<string name="poi_industrial_gas">Type: gasindustrien</string>
+	<string name="poi_industrial_timber">Type: tømmer</string>
+	<string name="poi_industrial_refinery">Type: raffinaderi</string>
+	<string name="poi_industrial_warehouse">Type: lager</string>
+	<string name="poi_industrial_auto_wrecker">Type: autoophug</string>
+	<string name="poi_industrial_agriculture">Type: landbrug</string>
+	<string name="poi_industrial_brewery">Type: bryggeri</string>
+	<string name="poi_industrial_brickyard">Type: teglværk</string>
+	<string name="poi_industrial_intermodal_freight_terminal">Type: intermodal godstransport</string>
+	<string name="poi_industrial_sawmill">Type: savværk</string>
+	<string name="poi_industrial_water_purification">Type: vandrensning</string>
+	<string name="poi_industrial_port">Type: havn</string>
+	<string name="poi_industrial_depot">Type: depot</string>
+
+	<string name="poi_note">Bemærk</string>
+	<string name="poi_watering_place">Vandingssted</string>
+	<string name="poi_animal_boarding">opstaldning</string>
+	<string name="poi_animal_boarding_dog">Opstaldning: hund</string>
+	<string name="poi_animal_boarding_cat">Opstaldning: kat</string>
+	<string name="poi_animal_boarding_dog_cat">Opstaldning: hund, kat</string>
+	<string name="poi_animal_boarding_horse">Opstaldning: hest</string>
+
+	<string name="poi_historic_aircraft">Historisk fly</string>
+
+	<string name="poi_honey">Honningbutik</string>
+
+	<string name="poi_elevator_yes">Med elevator</string>
+	<string name="poi_elevator_no">Uden elevator</string>
+
+	<string name="poi_technical_monument">Teknisk monument</string>
+
+<string name="poi_industrial_oil">Type: olieindustri</string>
+	<string name="poi_industrial_wellsite">Type: borested</string>
+	<string name="poi_office_camping">campingpladskontor</string>
+	<string name="poi_model_aerodrome">Model flyveplads</string>
+	<string name="poi_guide">Guide kontor</string>
+	<string name="poi_quango">Quango</string>
+	<string name="poi_consulting">Rådgivning kontor</string>
+	<string name="poi_cooperative">Kooperativ kontor</string>
+	<string name="poi_office_forestry">Skovbrug kontor</string>
+	<string name="poi_logistics">Logistik kontor</string>
+	<string name="poi_parish">Sognekontor</string>
+	<string name="poi_publisher">forlag kontor</string>
 
 </resources>

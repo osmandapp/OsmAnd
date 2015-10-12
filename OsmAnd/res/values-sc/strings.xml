@@ -2132,4 +2132,7 @@
     <string name="world_maps">Mapas mundiales</string>
     <string name="world_regions">Regiones de su mundu</string>
     <string name="downloads">Iscarrigamentos</string>
-</resources>
+<string name="favorite_category_dublicate_message">Su nùmene dislindadu pro sa categoria esistit giai. Pro praghere dislinda-ne unu diferente.</string>
+    <string name="favorite_category_name">Nùmene de sa categoria</string>
+    <string name="favorite_category_add_new_title">Annanghe una categoria noa</string>
+    </resources>

@@ -881,15 +881,15 @@
 	<string name="poi_tree">Strom</string>
 	<string name="poi_conservation">Chránené územie</string>
 
-	<string name="poi_icn_ref">Medzinárodná cyklistická sieť</string>
-	<string name="poi_ncn_ref">Národná cyklistická sieť</string>
-	<string name="poi_rcn_ref">Regionálna cyklistická sieť</string>
-	<string name="poi_lcn_ref">Lokálna cyklistická sieť</string>
+	<string name="poi_icn_ref">Bod medzinárodnej cyklistickej siete</string>
+	<string name="poi_ncn_ref">Bod národnej cyklistickej siete</string>
+	<string name="poi_rcn_ref">Bod regionálnej cyklistickej siete</string>
+	<string name="poi_lcn_ref">Bod lokálnej cyklistickej siete</string>
 
-	<string name="poi_iwn_ref">Medzinárodná pešia sieť</string>
-	<string name="poi_nwn_ref">Národná pešia sieť</string>
-	<string name="poi_rwn_ref">Regionálna pešia sieť</string>
-	<string name="poi_lwn_ref">Lokálna pešia sieť</string>
+	<string name="poi_iwn_ref">Bod medzinárodnej pešej siete</string>
+	<string name="poi_nwn_ref">Bod národnej pešej siete</string>
+	<string name="poi_rwn_ref">Bod regionálnej pešej siete</string>
+	<string name="poi_lwn_ref">Bod lokálnej pešej siete</string>
 
 	<string name="poi_collection_times">Čas výberu pošty</string>
 	<string name="poi_description">Popis</string>
@@ -904,15 +904,15 @@
 	<string name="poi_operator">Prevádzkovateľ</string>
 	<string name="poi_brand">Značka</string>
 
-	<string name="poi_enforcement_traffic_signals">Vynútenie:semafory</string>
-	<string name="poi_enforcement_maxheight">Vynútenie:maximálna výška</string>
-	<string name="poi_enforcement_check">Vynútenie:kontrola</string>
-	<string name="poi_enforcement_access">Vynútenie:prístup</string>
-	<string name="poi_enforcement_toll">Vynútenie:mýto</string>
+	<string name="poi_enforcement_traffic_signals">Vynútenie: svetelná signalizácia</string>
+	<string name="poi_enforcement_maxheight">Vynútenie: maximálna výška</string>
+	<string name="poi_enforcement_check">Vynútenie: kontrola</string>
+	<string name="poi_enforcement_access">Vynútenie: prístup</string>
+	<string name="poi_enforcement_toll">Vynútenie: mýto</string>
 
 <string name="poi_country">Krajina</string>
-	<string name="poi_enforcement_mindistance">Vynútenie:minimálna vzdialenosť</string>
-	<string name="poi_enforcement_maxspeed">Vynútenie:maximálna rýchlosť</string>
+	<string name="poi_enforcement_mindistance">Vynútenie: minimálna vzdialenosť</string>
+	<string name="poi_enforcement_maxspeed">Vynútenie: maximálna rýchlosť</string>
 	<string name="poi_fee_yes">Poplatok</string>
 
 	<string name="poi_opening_hours">Otváracie hodiny</string>
@@ -996,8 +996,8 @@
 	<string name="poi_animal_shelter_cat">Prístrešok pre mačky</string>
 	<string name="poi_animal_shelter_dog_cat">Prístrešok pre psy a mačky</string>
 	<string name="poi_fee_no">Bez poplatku</string>
-	<string name="poi_drinking_water_yes">Pitná voda</string>
-	<string name="poi_drinking_water_no">Nepitná voda</string>
+	<string name="poi_drinking_water_yes">Pitná voda: áno</string>
+	<string name="poi_drinking_water_no">Pitná voda: nie</string>
 	<string name="poi_supervised_yes">Strážené</string>
 	<string name="poi_supervised_no">Nestrážené</string>
 	<string name="poi_seasonal_yes">Sezónne</string>
@@ -1008,7 +1008,7 @@
 	<string name="poi_seasonal_summer">Leto</string>
 	<string name="poi_seasonal_autumn">Jeseň</string>
 	<string name="poi_seasonal_winter">Zima</string>
-	<string name="poi_crossing_traffic_signals">So semaforom</string>
+	<string name="poi_crossing_traffic_signals">So svetelnou signalizáciou</string>
 	<string name="poi_crossing_uncontrolled">Neriadený</string>
 	<string name="poi_crossing_unmarked">Nevyznačený</string>
 
@@ -1077,7 +1077,7 @@
 
 <string name="poi_twitter">Twitter</string>
 	<string name="poi_skype">Skype</string>
-	<string name="poi_youtube">Youtube</string>
+	<string name="poi_youtube">YouTube</string>
 	<string name="poi_instagram">Instagram</string>
 	<string name="poi_vk">VKontakte</string>
 	<string name="poi_google_plus">Google+</string>
@@ -1099,22 +1099,22 @@
 	<string name="poi_wheelchair">Invalidný vozík</string>
 	<string name="poi_wholesale">Veľkoobchod</string>
 
-	<string name="poi_content_silage">Siláž (obsah)</string>
-	<string name="poi_content_water">Voda (obsah)</string>
-	<string name="poi_content_slurry">Minerálny olej (obsah)</string>
-	<string name="poi_content_oil">Ropa (obsah)</string>
-	<string name="poi_content_fuel">Palivo (obsah)</string>
-	<string name="poi_content_manure">Hnoj (obsah)</string>
-	<string name="poi_content_wine">Víno (obsah)</string>
-	<string name="poi_content_sewage">Kanalizácia (obsah)</string>
-	<string name="poi_content_gas">Plyn (obsah)</string>
-	<string name="poi_content_biomass">Biomasa (obsah)</string>
-	<string name="poi_content_wastewater">Odpadová voda (obsah)</string>
-	<string name="poi_content_crop">Plodiny (obsah)</string>
-	<string name="poi_content_fodder">Krmivo (obsah)</string>
-	<string name="poi_content_beer">Pivo (obsah)</string>
-	<string name="poi_content_salt">Soľ (obsah)</string>
-	<string name="poi_content_grain">Zrno (obsah)</string>
+	<string name="poi_content_silage">Obsah: Siláž</string>
+	<string name="poi_content_water">Obsah: Voda</string>
+	<string name="poi_content_slurry">Obsah: Minerálny olej</string>
+	<string name="poi_content_oil">Obsah: Ropa</string>
+	<string name="poi_content_fuel">Obsah: Palivo</string>
+	<string name="poi_content_manure">Obsah: Hnoj</string>
+	<string name="poi_content_wine">Obsah: Víno</string>
+	<string name="poi_content_sewage">Obsah: Splašky</string>
+	<string name="poi_content_gas">Obsah: Plyn</string>
+	<string name="poi_content_biomass">Obsah: Biomasa</string>
+	<string name="poi_content_wastewater">Obsah: Odpadová voda</string>
+	<string name="poi_content_crop">Obsah: Plodiny</string>
+	<string name="poi_content_fodder">Obsah: Krmivo</string>
+	<string name="poi_content_beer">Obsah: Pivo</string>
+	<string name="poi_content_salt">Obsah: Soľ</string>
+	<string name="poi_content_grain">Obsah: Zrno</string>
 
 	<string name="poi_nudism_yes">Nudizmus: povolený</string>
 	<string name="poi_nudism_no">Nudizmus: zakázaný</string>
@@ -1227,19 +1227,19 @@
 	<string name="poi_information_office">Informačná kancelária</string>
 	<string name="poi_information_terminal">Informačný terminál</string>
 	<string name="poi_information_hikingmap">Turistická mapa</string>
-	<string name="poi_information_nature">Informácie o prírode</string>
-	<string name="poi_information_wildlife">Informácie o živočíchoch</string>
-	<string name="poi_information_history">Informácie o histórii</string>
+	<string name="poi_information_nature">Informačné značenie: príroda</string>
+	<string name="poi_information_wildlife">Informačné značenie: živočíchy</string>
+	<string name="poi_information_history">Informačné značenie: história</string>
 	<string name="poi_information_sign">Značka</string>
 	<string name="poi_information_bicyclemap">Cyklomapa</string>
 	<string name="poi_information_tactile_model">Dotykový model</string>
 	<string name="poi_information_tactile_map">Dotyková mapa</string>
-	<string name="poi_board_type_notice">Tabuľa s oznamom</string>
-	<string name="poi_board_type_plants">Informácie o rastlinách</string>
-	<string name="poi_board_type_geology">Informácie o geológii</string>
-	<string name="poi_board_type_public_transport">Informácie o hromadnej doprave</string>
-	<string name="poi_board_type_technology">Informácie o technológii</string>
-	<string name="poi_board_type_astronomy">Informácie o astronómii</string>
+	<string name="poi_board_type_notice">Výveska</string>
+	<string name="poi_board_type_plants">Informačné značenie: rastliny</string>
+	<string name="poi_board_type_geology">Informačné značenie: geológia</string>
+	<string name="poi_board_type_public_transport">Informačné značenie: hromadná doprava</string>
+	<string name="poi_board_type_technology">Informačné značenie: technológia</string>
+	<string name="poi_board_type_astronomy">Informačné značenie: astronómia</string>
 
 <string name="poi_information_audioguide">Audiosprievodca</string>
 	<string name="poi_commercial">Komerčný pozemok</string>
@@ -1248,24 +1248,24 @@
 	<string name="poi_fireplace_yes">Ohnisko</string>
 	<string name="poi_fireplace_no">Bez ohniska</string>
 
-	<string name="poi_covered_yes">S prístreškom</string>
+	<string name="poi_covered_yes">Pod prístreškom</string>
 	<string name="poi_covered_no">Bez prístrešku</string>
 
 	<string name="poi_smoking_no">Zákaz fajčenia</string>
 	<string name="poi_smoking_outside">Fajčenie povolené len vonku</string>
 	<string name="poi_smoking_yes">Fajčenie povolené</string>
-	<string name="poi_smoking_separated">Fajčenie povolené v samostatnej neoddelenej miestnosti</string>
-	<string name="poi_smoking_isolated">Fajčenie povolené v samostatnej oddelenej miestnosti</string>
+	<string name="poi_smoking_separated">Fajčenie povolené v samostatnej miestnosti</string>
+	<string name="poi_smoking_isolated">Fajčenie povolené v izolovanej miestnosti</string>
 	<string name="poi_smoking_dedicated">Vyhradené pre fajčiarov</string>
 
 	<string name="poi_toll_yes">Mýtny poplatok</string>
-	<string name="poi_toll_no">Mýtny poplatok sa nevyberá</string>
-	<string name="poi_toll_hgv_yes">Mýtny poplatok sa vyberá len pre nákladné vozidlá</string>
+	<string name="poi_toll_no">Žiadny mýtny poplatok</string>
+	<string name="poi_toll_hgv_yes">Mýtny poplatok za nákladné vozidlá</string>
 	<string name="poi_tactile_paving_yes">Značenie pre slepých</string>
 	<string name="poi_tactile_paving_no">Bez značenia pre slepých</string>
 	<string name="poi_traffic_signals_sound_yes">Zvuková signalizácia</string>
 	<string name="poi_traffic_signals_sound_no">Bez zvukovej signalizácie</string>
-	<string name="poi_traffic_signals_sound_walk">Zvuková signalizácia len keď je prechod povolený</string>
+	<string name="poi_traffic_signals_sound_walk">Zvuková signalizácia keď je prechod povolený</string>
 
 <string name="poi_rescue_station">Záchranná stanica</string>
 
@@ -1298,7 +1298,7 @@
 	<string name="poi_religion_zoroastrian">Zoroastrizmus</string>
 
 	<string name="poi_bicycle_parking_anchors">Držiaky</string>
-	<string name="poi_rtsa_scale">Náročnosť horského priesmyku</string>
+	<string name="poi_rtsa_scale">Stupnica RTSA</string>
 
 <string name="poi_piste_difficulty_easy">Obtiažnosť zjazdovky: ľahká</string>
 	<string name="poi_piste_difficulty_intermediate">Obtiažnosť zjazdovky: stredná</string>
@@ -1314,4 +1314,76 @@
 	<string name="poi_piste_grooming_no">Úprava trate: žiadna</string>
 	<string name="poi_piste_grooming_mogul">Úprava trate: bubny</string>
 
-</resources>
+<string name="poi_internet_access_yes">Internetové pripojenie: áno</string>
+	<string name="poi_internet_access_no">Internetové pripojenie: nie</string>
+
+	<string name="poi_wheelchair_no">Invalidný vozík: nepovolený</string>
+	<string name="poi_wheelchair_limited">Invalidný vozík: obmedzene</string>
+	<string name="poi_pump">Čerpadlo</string>
+
+	<string name="poi_garden_type_residential">Typ záhrady: v obytnej oblasti</string>
+	<string name="poi_garden_type_community">Typ záhrady: spoločenstvo</string>
+	<string name="poi_garden_type_private">Typ záhrady: súkromná</string>
+	<string name="poi_garden_type_botanical">Typ záhrady: botanická</string>
+
+	<string name="poi_garden_style_kitchen">Typ záhrady: kuchyňa</string>
+	<string name="poi_garden_style_rosarium">Typ záhrady: rozárium</string>
+	<string name="poi_garden_style_french">Typ záhrady: francúzska</string>
+	<string name="poi_garden_style_english">Typ záhrady: anglická</string>
+	<string name="poi_garden_style_japanese">Typ záhrady: Japonská</string>
+
+	<string name="poi_capacity">Kapacita</string>
+	<string name="poi_capacity_disabled_yes">Vyhradené miesta pre invalidov</string>
+	<string name="poi_capacity_disabled_no">Žiadne vyhradené miesta pre invalidov</string>
+	<string name="poi_capacity_disabled">Vyhradené miesta pre invalidov</string>
+	<string name="poi_capacity_women_yes">Vyhradené miesta pre ženy</string>
+	<string name="poi_capacity_women_no">Žiadne vyhradené miesta pre ženy</string>
+	<string name="poi_capacity_women">Vyhradené miesta pre ženy</string>
+	<string name="poi_capacity_pupils">Vyhradené miesta pre študentov</string>
+	<string name="poi_capacity_teachers">Vyhradené miesta pre učiteľov</string>
+	<string name="poi_capacity_parent_yes">Vyhradené miesta pre rodičov</string>
+	<string name="poi_capacity_parent_no">Žiadne vyhradené miesta pre rodičov</string>
+	<string name="poi_capacity_parent">Vyhradené miesta pre rodičov</string>
+
+	<string name="poi_aerialway_occupancy">Kapacita kabínky</string>
+	<string name="poi_aerialway_capacity">Hodinová kapacita</string>
+	<string name="poi_aerialway_duration">Priemerný čas cesty v minútach</string>
+	<string name="poi_aerialway_bubble_yes">Kryt</string>
+	<string name="poi_aerialway_bubble_no">Bez krytu</string>
+	<string name="poi_aerialway_heating_yes">Vykurovanie</string>
+	<string name="poi_aerialway_heating_no">Žiadne vykurovanie</string>
+	<string name="poi_aerialway_bicycle_yes">Bicykle: povolené</string>
+	<string name="poi_aerialway_bicycle_no">Bicykle: nepovolené</string>
+	<string name="poi_aerialway_bicycle_summer">Bicykle: povolené len v lete</string>
+	<string name="poi_aerialway_access_entry">Iba vstup</string>
+	<string name="poi_aerialway_access_exit">Iba výstup</string>
+	<string name="poi_aerialway_access_both">Vstup aj výstup</string>
+	<string name="poi_aerialway_summer_access_entry">Letný prístup: len vstup</string>
+	<string name="poi_aerialway_summer_access_exit">Letný prístup: len výstup</string>
+	<string name="poi_aerialway_summer_access_both">Letný prístup: vstup aj výstup</string>
+
+	<string name="poi_stars_1">Počet hviezd: 1 (Turistický)</string>
+	<string name="poi_stars_1s">Počet hviezd: 1S (Vyšší turistický)</string>
+	<string name="poi_stars_2">Počet hviezd: 2 (Štandard)</string>
+	<string name="poi_stars_2s">Počet hviezd: 2S (Vyšší štandard)</string>
+	<string name="poi_stars_3">Počet hviezd: 3 (Komfort)</string>
+	<string name="poi_stars_3s">Počet hviezd: 3 (Vyšší komfort)</string>
+	<string name="poi_stars_4">Počet hviezd: 4 (Prvá trieda)</string>
+	<string name="poi_stars_4s">Počet hviezd: 4S (Vyššia prvá trieda)</string>
+	<string name="poi_stars_5">Počet hviezd: 5 (Luxusný)</string>
+	<string name="poi_stars_5s">Počet hviezd: 5S (Vyšší luxus)</string>
+	<string name="poi_stars_6">Počet hviezd: 6</string>
+	<string name="poi_stars_7">Počet hviezd: 7</string>
+	<string name="poi_rooms">Počet izieb</string>
+
+	<string name="poi_love_hotel">Hodinový hotel</string>
+
+	<string name="poi_payment_coins_yes">Prijíma mince</string>
+	<string name="poi_payment_coins_no">Neprijíma mince</string>
+	<string name="poi_payment_coins_0.5">Prijíma mince 1/2USD</string>
+	<string name="poi_payment_coins_50c12">Prijíma mince 50c, 1€, a 2€</string>
+	<string name="poi_payment_telephone_cards_yes">Prijíma telefónne karty</string>
+	<string name="poi_payment_telephone_cards_no">Neprijíma telefónne karty</string>
+	<string name="poi_payment_credit_cards_yes">Prijíma kreditné karty</string>
+	<string name="poi_payment_credit_cards_no">Neprijíma kreditné karty</string>
+	</resources>

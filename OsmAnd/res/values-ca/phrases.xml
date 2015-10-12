@@ -1321,7 +1321,7 @@
 	<string name="poi_bridge_movable_drawbridge">Tipus de pont mòbil: llevadís</string>
 	<string name="poi_bridge_movable_submersible">Tipus de pont mòbil: sumergible</string>
 	<string name="poi_bridge_movable_transporter">Tipus de pont mòbil: transbordador</string>
-	<string name="poi_bridge_pedestrian">Passarel·la de vianants</string>
+	<string name="poi_bridge_pedestrian">Pont de vianants</string>
 	<string name="poi_bridge_bicycle">Pont per bicicletes</string>
 	<string name="poi_bridge_railway">Pont ferroviari</string>
 	<string name="poi_surface_ice">Superfície: gel</string>
@@ -1346,4 +1346,17 @@
 	<string name="poi_surface_grass">Superfície: gespa</string>
 	<string name="poi_surface_grass_paver">Superfície: pavimentació permeable</string>
 	<string name="poi_surface_ground">Superfície: terra</string>
+	<string name="poi_surface_dirt">Superfície: terra batuda</string>
+	<string name="poi_surface_mud">Superfície: fang</string>
+	<string name="poi_lit_yes">Il·luminat: Sí</string>
+	<string name="poi_lit_no">Il·luminat: no</string>
+
+	<string name="poi_architecture_renaissance">Arquitectura: renaixement</string>
+	<string name="poi_architecture_romanesque">Arquitectura: romànic</string>
+
+	<string name="poi_tunnel_waterway">Tunel d\'aqüeducte</string>
+	<string name="poi_tunnel_car">Túnel de carretera</string>
+	<string name="poi_tunnel_pedestrian">Túnel per vianants</string>
+	<string name="poi_bridge_car">Pont de carretera</string>
+	<string name="poi_bridge_waterway">Pont fluvial</string>
 	</resources>

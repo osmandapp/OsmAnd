@@ -2221,4 +2221,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="world_maps">Mappe mondiali</string>
     <string name="world_regions">Regioni mondiali</string>
     <string name="downloads">Download</string>
-</resources>
+<string name="favorite_category_dublicate_message">Il nome della categoria specificata esiste già. Specificane uno diverso.</string>
+    <string name="favorite_category_name">Nome della categoria</string>
+    <string name="favorite_category_add_new_title">Aggiungi una nuova categoria</string>
+    </resources>

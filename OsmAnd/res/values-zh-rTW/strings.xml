@@ -2156,4 +2156,7 @@
     <string name="world_maps">世界地圖</string>
     <string name="world_regions">全球地區</string>
     <string name="downloads">下載</string>
-</resources>
+<string name="favorite_category_dublicate_message">已有指定的類別名稱。請定義其它名稱。</string>
+    <string name="favorite_category_name">類別名稱</string>
+    <string name="favorite_category_add_new_title">增加新的類別</string>
+    </resources>

@@ -43,6 +43,7 @@
 
     * Map icons are taken from sjjb and some are drawn and distributed under Public Domain (except icons8)
         - https://github.com/osmandapp/OsmAnd-resources/tree/master/icons/svg
+	- some icons are from http://osm-icons.org/wiki/Icons (CC-0 by Markus59, CC BY-SA 2.0)
 
     * Integration with Qt library in (https://github.com/osmandapp/Osmand-core/) - dynamic linking
         - LGPL (http://www.qt.io/qt-licensing-terms/)
