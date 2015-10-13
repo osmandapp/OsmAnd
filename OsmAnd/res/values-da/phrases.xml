@@ -2056,4 +2056,6 @@
 	<string name="poi_fuel_charcoal">Brændstof: trækul</string>
 	<string name="poi_fuel_coal">Brændstof: kul</string>
 
+<string name="poi_street_lamp">Gadelampe</string>
+
 </resources>
