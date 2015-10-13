@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
@@ -153,7 +154,7 @@ public class MapContextMenuFragment extends Fragment {
 					showOnMap(menu.getLatLon());
 
 					if (hasMoved) {
-						applyPosY(getViewY());
+						applyPosY(getViewY(), false);
 					}
 					return true;
 				}
@@ -204,15 +205,15 @@ public class MapContextMenuFragment extends Fragment {
 
 						velocity.recycle();
 
-						if (menu.isExtended()) {
-							if (menuBottomViewHeight > 0 && slidingUp) {
-								menu.slideUp();
-							} else if (slidingDown) {
-								menu.slideDown();
-							}
+						boolean needCloseMenu = false;
+
+						if (menuBottomViewHeight > 0 && slidingUp) {
+							menu.slideUp();
+						} else if (slidingDown) {
+							needCloseMenu = !menu.slideDown();
 						}
 
-						applyPosY(currentY);
+						applyPosY(currentY, needCloseMenu);
 
 						break;
 
@@ -220,8 +221,8 @@ public class MapContextMenuFragment extends Fragment {
 				return true;
 			}
 
-			private void applyPosY(int currentY) {
-				final int posY = getPosY();
+			private void applyPosY(final int currentY, final boolean needCloseMenu) {
+				final int posY = getPosY(needCloseMenu);
 				if (currentY != posY) {
 					if (posY < currentY) {
 						updateMainViewLayout(posY);
@@ -234,12 +235,20 @@ public class MapContextMenuFragment extends Fragment {
 								.setListener(new AnimatorListenerAdapter() {
 									@Override
 									public void onAnimationCancel(Animator animation) {
-										updateMainViewLayout(posY);
+										if (needCloseMenu) {
+											menu.close();
+										} else {
+											updateMainViewLayout(posY);
+										}
 									}
 
 									@Override
 									public void onAnimationEnd(Animator animation) {
-										updateMainViewLayout(posY);
+										if (needCloseMenu) {
+											menu.close();
+										} else {
+											updateMainViewLayout(posY);
+										}
 									}
 								})
 								.start();
@@ -450,6 +459,14 @@ public class MapContextMenuFragment extends Fragment {
 	}
 
 	private int getPosY() {
+		return getPosY(false);
+	}
+
+	private int getPosY(boolean needCloseMenu) {
+		if (needCloseMenu) {
+			return getScreenHeight();
+		}
+
 		int destinationState;
 		int minHalfY;
 		if (menu.isExtended()) {
@@ -579,6 +596,12 @@ public class MapContextMenuFragment extends Fragment {
 				dp,
 				r.getDisplayMetrics()
 		);
+	}
+
+	private int getScreenHeight() {
+		DisplayMetrics dm = new DisplayMetrics();
+		getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
+		return dm.heightPixels;
 	}
 }
 
