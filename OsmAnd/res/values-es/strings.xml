@@ -2236,4 +2236,7 @@
     <string name="later">Luego</string>
     <string name="get_full_version">Obtener versión completa</string>
     <string name="downloads">Descargas</string>
-</resources>
+<string name="favorite_category_dublicate_message">Ya existe ese nombre de categoría. Defina otro nombre.</string>
+    <string name="favorite_category_name">Nombre de categoría</string>
+    <string name="favorite_category_add_new_title">Añadir nueva categoría</string>
+    </resources>
