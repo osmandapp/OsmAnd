@@ -2044,7 +2044,7 @@
 	<string name="poi_parish">Sognekontor</string>
 	<string name="poi_publisher">Forlagskontor</string>
 
-<string name="poi_debris">Snavs</string>
+<string name="poi_debris">Debris</string>
 	<string name="poi_jersey_barrier">Jersey barriere</string>
 	<string name="poi_fuel_91ul">91UL brændstof</string>
 	<string name="poi_fuel_100ll">100LL brændstof</string>
@@ -2052,7 +2052,7 @@
 	<string name="poi_jeta1">Jet A-1 brændstof</string>
 	<string name="poi_fuel_adblue">AdBlue brændstof</string>
 
-	<string name="poi_fuel_wood">Brændsel: træ</string>
+	<string name="poi_fuel_wood">Brændstof: træ</string>
 	<string name="poi_fuel_charcoal">Brændstof: trækul</string>
 	<string name="poi_fuel_coal">Brændstof: kul</string>
 
