@@ -10,6 +10,10 @@
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
 
+    <string name="access_smart_autoannounce">Smart autoannounce</string>
+    <string name="access_smart_autoannounce_descr">Notify only when direction to the target point is changed</string>
+    <string name="access_autoannounce_period">Autoannounce period</string>
+    <string name="access_autoannounce_period_descr">Minimal time interval between announces</string>
     <string name="access_default_color">Default color</string>
     <string name="access_category_choice">Choose category</string>
     <string name="access_hint_enter_name">Enter name</string>

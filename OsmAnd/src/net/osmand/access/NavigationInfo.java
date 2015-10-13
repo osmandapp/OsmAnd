@@ -20,7 +20,6 @@ import java.util.List;
 
 public class NavigationInfo {
 
-	private static final long MIN_NOTIFICATION_PERIOD = 10000;
 	private static final float FULL_CIRCLE = 360.0f;
 
 	private class RelativeDirection {
@@ -227,11 +226,11 @@ public class NavigationInfo {
 			if (point != null) {
 				if ((currentLocation != null) && currentLocation.hasBearing()) {
 					final long now = SystemClock.uptimeMillis();
-					if ((now - lastNotificationTime) >= MIN_NOTIFICATION_PERIOD) {
+					if ((now - lastNotificationTime) >= settings.ACCESSIBILITY_AUTOANNOUNCE_PERIOD.get()) {
 						Location destination = new Location("map"); //$NON-NLS-1$
 						destination.setLatitude(point.getLatitude());
 						destination.setLongitude(point.getLongitude());
-						if (lastDirection.update(destination)) {
+						if (lastDirection.update(destination) || !settings.ACCESSIBILITY_SMART_AUTOANNOUNCE.get()) {
 							final String notification = distanceString(destination) + " " + lastDirection.getString(); //$NON-NLS-1$
 							lastNotificationTime = now;
 							app.runInUIThread(new Runnable() {
