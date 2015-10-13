@@ -2039,4 +2039,7 @@
     <string name="activate_srtm_plugin">Aktivera modulen SRTM</string>
     <string name="later">Senare</string>
     <string name="get_full_version">Köp fullversionen</string>
+    <string name="favorite_category_dublicate_message">Det angivna kategorinamnet finns redan. Ange ett annat namn.</string>
+    <string name="favorite_category_name">Kategorinamn</string>
+    <string name="favorite_category_add_new_title">Lägg till en ny kategori</string>
     </resources>
