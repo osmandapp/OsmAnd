@@ -2010,4 +2010,30 @@
 
 	<string name="poi_escape_lane">Полоса аварийного торможения</string>
 
+	<string name="poi_crop_rice">Выращиваемая культура: рис</string>
+	<string name="poi_crop_grass">Выращиваемая культура: трава</string>
+	<string name="poi_crop_corn">Выращиваемая культура: кукуруза</string>
+	<string name="poi_crop_cereal">Выращиваемая культура: зерновая</string>
+	<string name="poi_crop_sugarcane">Выращиваемая культура: сахарный тростник</string>
+	<string name="poi_crop_wheat">Выращиваемая культура: пшеница</string>
+	<string name="poi_crop_soy">Выращиваемая культура: соя</string>
+	<string name="poi_crop_barley">Выращиваемая культура: ячмень</string>
+	<string name="poi_crop_vegetables">Выращиваемая культура: овощи</string>
+	<string name="poi_crop_hop">Выращиваемая культура: хмель</string>
+	<string name="poi_crop_rape">Выращиваемая культура: рапс</string>
+	<string name="poi_crop_beet">Выращиваемая культура: свёкла</string>
+	<string name="poi_crop_lavender">Выращиваемая культура: лаванда</string>
+	<string name="poi_crop_tea">Выращиваемая культура: чай</string>
+	<string name="poi_crop_coffee">Выращиваемая культура: кофе</string>
+	<string name="poi_crop_poultry">Выращиваемая культура: кормовое растение</string>
+	<string name="poi_crop_sunflower">Выращиваемая культура: подсолнечник</string>
+	<string name="poi_crop_raspberry">Выращиваемая культура: малина</string>
+	<string name="poi_crop_tobacco">Выращиваемая культура: табак</string>
+	<string name="poi_crop_strawberry">Выращиваемая культура: клубника</string>
+	<string name="poi_crop_vegetables_flowers">Выращиваемая культура: овощи, цветы</string>
+	<string name="poi_crop_cassava">Выращиваемая культура: маниока</string>
+	<string name="poi_crop_cranberry">Выращиваемая культура: клюква</string>
+	<string name="poi_crop_asparagus">Выращиваемая культура: спаржа</string>
+	<string name="poi_crop_flowers">Выращиваемая культура: цветы</string>
+
 </resources>

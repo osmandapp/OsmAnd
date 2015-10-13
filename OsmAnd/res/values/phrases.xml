@@ -2015,4 +2015,30 @@
 
 	<string name="poi_escape_lane">Escape lane</string>
 
+	<string name="poi_crop_rice">Crop: rice</string>
+	<string name="poi_crop_grass">Crop: grass</string>
+	<string name="poi_crop_corn">Crop: corn</string>
+	<string name="poi_crop_cereal">Crop: cereal</string>
+	<string name="poi_crop_sugarcane">Crop: sugarcane</string>
+	<string name="poi_crop_wheat">Crop: wheat</string>
+	<string name="poi_crop_soy">Crop: soy</string>
+	<string name="poi_crop_barley">Crop: barley</string>
+	<string name="poi_crop_vegetables">Crop: vegetables</string>
+	<string name="poi_crop_hop">Crop: hop</string>
+	<string name="poi_crop_rape">Crop: rape</string>
+	<string name="poi_crop_beet">Crop: beet</string>
+	<string name="poi_crop_lavender">Crop: lavender</string>
+	<string name="poi_crop_tea">Crop: tea</string>
+	<string name="poi_crop_coffee">Crop: coffee</string>
+	<string name="poi_crop_poultry">Crop: poultry</string>
+	<string name="poi_crop_sunflower">Crop: sunflower</string>
+	<string name="poi_crop_raspberry">Crop: raspberry</string>
+	<string name="poi_crop_tobacco">Crop: tobacco</string>
+	<string name="poi_crop_strawberry">Crop: strawberry</string>
+	<string name="poi_crop_vegetables_flowers">Crop: vegetables, flowers</string>
+	<string name="poi_crop_cassava">Crop: cassava</string>
+	<string name="poi_crop_cranberry">Crop: cranberry</string>
+	<string name="poi_crop_asparagus">Crop: asparagus</string>
+	<string name="poi_crop_flowers">Crop: flowers</string>
+
 </resources>
