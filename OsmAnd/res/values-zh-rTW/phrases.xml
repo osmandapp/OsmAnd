@@ -192,7 +192,7 @@
 	<string name="poi_fuel_e10">混合配方油 E10</string>
 	<string name="poi_fuel_e20">混合配方油 E20</string>
 	<string name="poi_fuel_e85">混合配方油 E85</string>
-	<string name="poi_fuel_biogas">混合配方油 E85</string>
+	<string name="poi_fuel_biogas">生物氣體</string>
 	<string name="poi_fuel_lh2">液態氫</string>
 	<string name="poi_fuel_electricity">電力</string>
 	<string name="poi_charging_station">充電站</string>
@@ -847,7 +847,7 @@
 	<string name="poi_swing_gate">搖擺彈門</string>
 	<string name="poi_turnstile">旋轉門</string>
 	<string name="poi_kent_carriage_gap">馬車間格柱</string>
-	<string name="poi_barrier_entrance">入口</string>
+	<string name="poi_barrier_entrance">在一堵牆或柵欄的出入口</string>
 	<string name="poi_entrance_main">主入口</string>
 	<string name="poi_entrance">入口</string>
 	<string name="poi_entrance_exit">出口</string>
@@ -1647,7 +1647,7 @@
 	<string name="poi_brushless_no">無刷：無</string>
 	<string name="poi_car_wash_no">洗車：無</string>
 
-	<string name="poi_aeroway_fuel">飛機燃料站</string>
+	<string name="poi_aeroway_fuel">飛機燃油站</string>
 	<string name="poi_public_bath">公共浴室</string>
 
 	<string name="poi_male_yes">男性</string>
@@ -1818,5 +1818,14 @@
 	<string name="poi_shelter_type_field_shelter">遮蔽類型：牧場遮蓋屋</string>
 	<string name="poi_shelter_type_tent">遮蔽類型：帳篷</string>
 	<string name="poi_shelter_type_abandoned">遮蔽類型：已遺棄</string>
+
+	<string name="poi_debris">碎瓦礫</string>
+	<string name="poi_jersey_barrier">紐澤西護欄</string>
+	<string name="poi_internet_access_type_wlan">網際網路存取類型：wlan</string>
+	<string name="poi_internet_access_type_terminal">網際網路存取類型：終端機</string>
+	<string name="poi_internet_access_type_wired">網際網路存取類型：有線網路</string>
+	<string name="poi_internet_access_type_public">網際網路存取類型：公共網路</string>
+	<string name="poi_internet_access_type_service">網際網路存取類型：網路服務</string>
+	<string name="poi_internet_access_type_no">網際網路存取類型：無</string>
 
 	</resources>
