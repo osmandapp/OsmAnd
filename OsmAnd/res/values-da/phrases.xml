@@ -2058,4 +2058,32 @@
 
 <string name="poi_street_lamp">Gadelampe</string>
 
-</resources>
+<string name="poi_crop_rice">Afgrøde: ris</string>
+	<string name="poi_crop_grass">Afgrøde: græs</string>
+	<string name="poi_crop_corn">Afgrøde: majs</string>
+	<string name="poi_crop_cereal">Afgrøde: korn</string>
+	<string name="poi_crop_sugarcane">Afgrøde: sukkerrør</string>
+	<string name="poi_crop_wheat">Afgrøde: hvede</string>
+	<string name="poi_crop_soy">Afgrøde: soja</string>
+	<string name="poi_crop_barley">Afgrøde: Byg</string>
+	<string name="poi_crop_vegetables">Afgrøde: grøntsager</string>
+	<string name="poi_crop_hop">Afgrøde: humle</string>
+	<string name="poi_crop_rape">Afgrøde: raps</string>
+	<string name="poi_crop_beet">Afgrøde: sukkerroer</string>
+	<string name="poi_crop_lavender">Afgrøde: lavendel</string>
+	<string name="poi_crop_tea">Afgrøde: te</string>
+	<string name="poi_crop_coffee">Afgrøde: kaffe</string>
+	<string name="poi_crop_poultry">Afgrøde: fjerkræ</string>
+	<string name="poi_crop_sunflower">Afgrøde: solsikke</string>
+	<string name="poi_crop_raspberry">Afgrøde: hindbær</string>
+	<string name="poi_crop_tobacco">Afgrøde: tobak</string>
+	<string name="poi_crop_strawberry">Afgrøde: jordbær</string>
+	<string name="poi_crop_vegetables_flowers">Afgrøde: grøntsager, blomster</string>
+	<string name="poi_crop_cassava">Afgrøde: cassava</string>
+	<string name="poi_crop_cranberry">Afgrøde: tranebær</string>
+	<string name="poi_crop_asparagus">Afgrøde: asparges</string>
+	<string name="poi_crop_flowers">Afgrøde: blomster</string>
+
+<string name="poi_escape_lane">Nødstopsspor</string>
+
+	</resources>
