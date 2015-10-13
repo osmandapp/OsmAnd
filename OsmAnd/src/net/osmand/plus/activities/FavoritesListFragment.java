@@ -5,7 +5,6 @@ package net.osmand.plus.activities;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.widget.PopupMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,6 +19,7 @@ import android.widget.TextView;
 
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -28,7 +28,6 @@ import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.dashboard.DashLocationFragment;
-import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.util.MapUtils;
 
 import java.util.Comparator;
@@ -133,7 +132,7 @@ public class FavoritesListFragment extends OsmAndListFragment implements SearchA
 
 		if (!isSelectFavoriteMode()) {
 			FavouritePoint point = favouritesAdapter.getItem(position);
-			showItemPopupOptionsMenu(point, getActivity(), v);
+			showOnMap(point, getActivity());
 		} else {
 			Intent intent = getActivity().getIntent();
 			intent.putExtra(SELECT_FAVORITE_POINT_INTENT_KEY, favouritesAdapter.getItem(position));
@@ -212,7 +211,7 @@ public class FavoritesListFragment extends OsmAndListFragment implements SearchA
 				options.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						showItemPopupOptionsMenu(favorite, activity, v);
+						showOnMap(favorite, activity);
 					}
 				});
 			}
@@ -254,13 +253,17 @@ public class FavoritesListFragment extends OsmAndListFragment implements SearchA
 		}
 	}
 
-	public static void showItemPopupOptionsMenu(FavouritePoint point, Activity activity, View view) {
+	public static void showOnMap(FavouritePoint point, Activity activity) {
+		OsmandApplication app = (OsmandApplication) activity.getApplication();
+		final OsmandSettings settings = app.getSettings();
 		LatLon location = new LatLon(point.getLatitude(), point.getLongitude());
-		final PopupMenu optionsMenu = new PopupMenu(activity, view);
-		DirectionsDialogs.createDirectionActionsPopUpMenu(optionsMenu, location,
-				point, point.getPointDescription(),
-				((OsmandApplication) activity.getApplication()).getSettings().getLastKnownMapZoom(),
-				activity, true, false);
-		optionsMenu.show();
+
+		settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
+				settings.getLastKnownMapZoom(),
+				new PointDescription(PointDescription.POINT_TYPE_FAVORITE, point.getName()),
+				true,
+				point); //$NON-NLS-1$
+		MapActivity.launchMapActivityMoveToTop(activity);
+
 	}
 }

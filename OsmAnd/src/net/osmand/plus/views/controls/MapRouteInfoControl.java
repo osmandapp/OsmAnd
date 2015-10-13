@@ -36,10 +36,10 @@ import net.osmand.plus.activities.actions.AppModeDialog;
 import net.osmand.plus.activities.search.SearchAddressActivity;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.dialogs.FavoriteDialogs;
+import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.IRouteInformationListener;
-import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.controls.MapRoutePreferencesControl.RoutePrepareDialog;
@@ -52,7 +52,7 @@ import java.util.Set;
 public class MapRouteInfoControl implements IRouteInformationListener {
 	public static int directionInfo = -1;
 	public static boolean controlVisible = false;
-	private final ContextMenuLayer contextMenu;
+	private final MapContextMenu contextMenu;
 	private final RoutingHelper routingHelper;
 	private OsmandMapTileView mapView;
 	private Dialog dialog;
@@ -64,11 +64,10 @@ public class MapRouteInfoControl implements IRouteInformationListener {
 	private MapControlsLayer mapControlsLayer;
 	public static final String TARGET_SELECT = "TARGET_SELECT";
 
-	public MapRouteInfoControl(ContextMenuLayer contextMenu,
-			MapActivity mapActivity, MapControlsLayer mapControlsLayer) {
-		this.contextMenu = contextMenu;
+	public MapRouteInfoControl(MapActivity mapActivity, MapControlsLayer mapControlsLayer) {
 		this.mapActivity = mapActivity;
 		this.mapControlsLayer = mapControlsLayer;
+		contextMenu = mapActivity.getContextMenu();
 		routingHelper = mapActivity.getRoutingHelper();
 		mapView = mapActivity.getMapView();
 		routingHelper.addListener(this);
@@ -83,7 +82,7 @@ public class MapRouteInfoControl implements IRouteInformationListener {
 			} else {
 				getTargets().setStartPoint(latlon, true, null);
 			}
-			contextMenu.setLocation(latlon, null);
+			contextMenu.show(latlon, null, null);
 			showDialog();
 			return true;
 		}
@@ -340,8 +339,9 @@ public class MapRouteInfoControl implements IRouteInformationListener {
 						if (routingHelper.getRouteDirections().size() > directionInfo) {
 							RouteDirectionInfo info = routingHelper.getRouteDirections().get(directionInfo);
 							net.osmand.Location l = routingHelper.getLocationFromRouteDirection(info);
-							contextMenu.setLocation(new LatLon(l.getLatitude(), l.getLongitude()),
-									info.getDescriptionRoute(ctx));
+							contextMenu.show(new LatLon(l.getLatitude(), l.getLongitude()), null, info);
+//							contextMenuLayer.setLocation(new LatLon(l.getLatitude(), l.getLongitude()),
+//									info.getDescriptionRoute(ctx));
 							mapView.getAnimatedDraggingThread().startMoving(l.getLatitude(), l.getLongitude(),
 									mapView.getZoom(), true);
 						}
@@ -364,7 +364,8 @@ public class MapRouteInfoControl implements IRouteInformationListener {
 					directionInfo++;
 					RouteDirectionInfo info = routingHelper.getRouteDirections().get(directionInfo);
 					net.osmand.Location l = routingHelper.getLocationFromRouteDirection(info);
-					contextMenu.setLocation(new LatLon(l.getLatitude(), l.getLongitude()), info.getDescriptionRoute(ctx));
+					contextMenu.show(new LatLon(l.getLatitude(), l.getLongitude()), null, info);
+//					contextMenuLayer.setLocation(new LatLon(l.getLatitude(), l.getLongitude()), info.getDescriptionRoute(ctx));
 					mapView.getAnimatedDraggingThread().startMoving(l.getLatitude(), l.getLongitude(), mapView.getZoom(), true);
 				}
 				mapView.refreshMap();

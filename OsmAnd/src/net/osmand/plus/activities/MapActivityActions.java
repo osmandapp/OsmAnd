@@ -90,17 +90,6 @@ public class MapActivityActions implements DialogProvider {
 		settings = mapActivity.getMyApplication().getSettings();
 		routingHelper = mapActivity.getMyApplication().getRoutingHelper();
 	}
-	
-
-	public void addFavouritePoint(final double latitude, final double longitude){
-		String name = mapActivity.getMapLayers().getContextMenuLayer().getSelectedObjectName();
-		enhance(dialogBundle, latitude, longitude, name);
-		mapActivity.showDialog(DIALOG_ADD_FAVORITE);
-	}
-
-	public void editFavoritePoint(final FavouritePoint a) {
-		FavoritesTreeFragment.editPoint(mapActivity.getMapView().getContext(), a, null);
-	}
 
 	public void shareLocation(double latitude, double longitude) {
 		enhance(dialogBundle,latitude,longitude,mapActivity.getMapView().getZoom());
@@ -143,15 +132,14 @@ public class MapActivityActions implements DialogProvider {
 					targets.navigateToPoint(new LatLon(latitude, longitude), true, -1, null);
 					enterRoutePlanningMode(null, null, false);
 				} else if (standardId == R.string.context_menu_item_directions_from) {
-					List<PointDescription> nms = mapActivity.getMapLayers().getContextMenuLayer().getSelectedObjectNames();
-					enterRoutePlanningMode(new LatLon(latitude, longitude), nms.isEmpty() ? null : nms.get(0), false);
+					enterRoutePlanningMode(new LatLon(latitude, longitude),
+							mapActivity.getContextMenu().getPointDescription(), false);
 				} else if (standardId == R.string.context_menu_item_intermediate_point ||
 						standardId == R.string.context_menu_item_destination_point) {
 					boolean dest = standardId == R.string.context_menu_item_destination_point;
-					List<PointDescription> nms = mapActivity.getMapLayers().getContextMenuLayer().getSelectedObjectNames();
 					targets.navigateToPoint(new LatLon(latitude, longitude), true,
-							dest ? -1 : targets.getIntermediatePoints().size(), nms.size() == 0?null :
-									nms.get(0));
+							dest ? -1 : targets.getIntermediatePoints().size(),
+							mapActivity.getContextMenu().getPointDescription());
 					if(targets.getIntermediatePoints().size() > 0) {
 						openIntermediatePointsDialog();
 					}
@@ -176,8 +164,8 @@ public class MapActivityActions implements DialogProvider {
 	}
 
 
-    public void addWaypoint(final double latitude, final double longitude){
-    	String name = mapActivity.getMapLayers().getContextMenuLayer().getSelectedObjectName();
+    public void addWaypoint(final double latitude, final double longitude) {
+    	String name = mapActivity.getContextMenu().getPointDescription().getFullPlainName(mapActivity);
     	enhance(dialogBundle,latitude,longitude, name);
     	mapActivity.showDialog(DIALOG_ADD_WAYPOINT);
     }

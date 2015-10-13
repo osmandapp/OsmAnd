@@ -28,21 +28,6 @@ public class MapAccessibilityActions implements AccessibilityActionsProvider {
 
     @Override
     public boolean onLongClick(PointF point, RotatedTileBox tileBox) {
-        if ((Build.VERSION.SDK_INT >= 14) && activity.getMyApplication().accessibilityEnabled()) {
-            final OsmandMapTileView mapView = activity.getMapView();
-	        final double lat = tileBox.getLatFromPixel((int)point.x, (int) point.y);
-	        final double lon = tileBox.getLonFromPixel((int)point.x, (int) point.y);
-            ContextMenuLayer cm = activity.getMapLayers().getContextMenuLayer();
-            LatLon loc = cm.selectObjectsForContextMenu(tileBox, point);
-            if (cm.getSelectedObjectName() != null) {
-            	cm.showContextMenuForSelectedObjects(loc);
-			} else {
-				activity.getMapActions().contextMenuPoint(lat, lon);
-			}
-            
-//            activity.getMapActions().contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
-            return true;
-        }
         return false;
     }
 

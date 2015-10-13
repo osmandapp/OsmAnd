@@ -232,7 +232,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 							targetPointsHelper.removeWayPoint(true, -1);
 						}
 					}
-					map.getMapLayers().getContextMenuLayer().setLocation(null, "");
+					map.getContextMenu().close();
 					return true;
 				}
 			};

@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
@@ -28,6 +27,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.osmand.PlatformUtil;
+import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
@@ -52,13 +52,11 @@ public class MapContextMenuFragment extends Fragment {
 	private View view;
 	private View mainView;
 
-	MenuController menuController;
+	MapContextMenu menu;
 
-	private int menuTopHeight;
 	private int menuTopShadowHeight;
 	private int menuTopShadowAllHeight;
 	private int menuTitleHeight;
-	private int menuButtonsHeight;
 	private int menuBottomViewHeight;
 	private int menuFullHeight;
 	private int menuFullHeightMax;
@@ -101,7 +99,7 @@ public class MapContextMenuFragment extends Fragment {
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		getCtxMenu().saveMenuState(outState);
+		menu.saveMenuState(outState);
 	}
 
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
@@ -109,46 +107,20 @@ public class MapContextMenuFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 
-		if (savedInstanceState != null)
-			getCtxMenu().restoreMenuState(savedInstanceState);
+		menu = getMapActivity().getContextMenu();
+		if (savedInstanceState != null) {
+			menu.restoreMenuState(savedInstanceState);
+		}
 
 		view = inflater.inflate(R.layout.map_context_menu_fragment, container, false);
 		mainView = view.findViewById(R.id.context_menu_main);
 
-		menuController = getCtxMenu().getMenuController();
-		if (menuController != null && menuController.isLandscapeLayout()) {
-			mainView.setLayoutParams(new FrameLayout.LayoutParams(dpToPx(menuController.getLandscapeWidthDp()), ViewGroup.LayoutParams.MATCH_PARENT));
+		if (menu.isLandscapeLayout()) {
+			mainView.setLayoutParams(new FrameLayout.LayoutParams(dpToPx(menu.getLandscapeWidthDp()),
+					ViewGroup.LayoutParams.MATCH_PARENT));
 		}
 
-		ViewTreeObserver vto = view.getViewTreeObserver();
-		vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-
-			@Override
-			public void onGlobalLayout() {
-
-				menuTopHeight = view.findViewById(R.id.context_menu_top_view).getHeight();
-				menuTopShadowHeight = view.findViewById(R.id.context_menu_top_shadow).getHeight();
-				menuTopShadowAllHeight = view.findViewById(R.id.context_menu_top_shadow_all).getHeight();
-				menuButtonsHeight = view.findViewById(R.id.context_menu_buttons).getHeight();
-				menuFullHeight = view.findViewById(R.id.context_menu_main).getHeight();
-
-				menuTitleHeight = menuTopShadowHeight + menuTopShadowAllHeight;
-				menuBottomViewHeight = view.findViewById(R.id.context_menu_bottom_view).getHeight();
-
-				recalculateFullHeightMax();
-
-				ViewTreeObserver obs = view.getViewTreeObserver();
-
-				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-					obs.removeOnGlobalLayoutListener(this);
-				} else {
-					obs.removeGlobalOnLayoutListener(this);
-				}
-
-				doLayoutMenu();
-			}
-
-		});
+		runLayoutListener();
 
 		final GestureDetector singleTapDetector = new GestureDetector(view.getContext(), new SingleTapConfirm());
 
@@ -168,7 +140,7 @@ public class MapContextMenuFragment extends Fragment {
 			public boolean onTouch(View v, MotionEvent event) {
 
 				if (singleTapDetector.onTouchEvent(event)) {
-					showOnMap(getCtxMenu().getPointDescription().getLat(), getCtxMenu().getPointDescription().getLon());
+					showOnMap(menu.getLatLon());
 
 					if (hasMoved) {
 						applyPosY(getViewY());
@@ -176,7 +148,7 @@ public class MapContextMenuFragment extends Fragment {
 					return true;
 				}
 
-				if (menuController != null && menuController.isLandscapeLayout()) {
+				if (menu.isLandscapeLayout()) {
 					return true;
 				}
 
@@ -222,11 +194,11 @@ public class MapContextMenuFragment extends Fragment {
 
 						velocity.recycle();
 
-						if (menuController != null) {
+						if (menu.isExtended()) {
 							if (menuBottomViewHeight > 0 && slidingUp) {
-								menuController.slideUp();
+								menu.slideUp();
 							} else if (slidingDown) {
-								menuController.slideDown();
+								menu.slideDown();
 							}
 						}
 
@@ -296,8 +268,7 @@ public class MapContextMenuFragment extends Fragment {
 		closeButtonView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				((MapActivity) getActivity()).getMapLayers().getContextMenuLayer().hideMapContextMenuMarker();
-				dismissMenu();
+				getMapActivity().getContextMenu().close();
 			}
 		});
 
@@ -308,7 +279,7 @@ public class MapContextMenuFragment extends Fragment {
 		buttonNavigate.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				getCtxMenu().buttonNavigatePressed();
+				menu.buttonNavigatePressed();
 			}
 		});
 
@@ -318,7 +289,7 @@ public class MapContextMenuFragment extends Fragment {
 		buttonFavorite.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				getCtxMenu().buttonFavoritePressed();
+				menu.buttonFavoritePressed();
 			}
 		});
 
@@ -328,7 +299,7 @@ public class MapContextMenuFragment extends Fragment {
 		buttonShare.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				getCtxMenu().buttonSharePressed();
+				menu.buttonSharePressed();
 			}
 		});
 
@@ -338,7 +309,7 @@ public class MapContextMenuFragment extends Fragment {
 		buttonMore.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				getCtxMenu().buttonMorePressed();
+				menu.buttonMorePressed();
 			}
 		});
 
@@ -359,13 +330,15 @@ public class MapContextMenuFragment extends Fragment {
 
 		final View iconLayout = view.findViewById(R.id.context_menu_icon_layout);
 		final ImageView iconView = (ImageView) view.findViewById(R.id.context_menu_icon_view);
-		Drawable icon = getCtxMenu().getLeftIcon();
-		int iconId = getCtxMenu().getLeftIconId();
+		Drawable icon = menu.getLeftIcon();
+		int iconId = menu.getLeftIconId();
 		if (icon != null) {
 			iconView.setImageDrawable(icon);
+			iconLayout.setVisibility(View.VISIBLE);
 		} else if (iconId != 0) {
 			iconView.setImageDrawable(iconsCache.getIcon(iconId,
 					light ? R.color.osmand_orange : R.color.osmand_orange_dark, 0.75f));
+			iconLayout.setVisibility(View.VISIBLE);
 		} else {
 			iconLayout.setVisibility(View.GONE);
 		}
@@ -374,14 +347,14 @@ public class MapContextMenuFragment extends Fragment {
 
 	private void buildBottomView() {
 		View bottomView = view.findViewById(R.id.context_menu_bottom_view);
-		if (menuController != null) {
+		if (menu.isExtended()) {
 			bottomView.setOnTouchListener(new View.OnTouchListener() {
 				@Override
 				public boolean onTouch(View v, MotionEvent event) {
 					return true;
 				}
 			});
-			menuController.build(bottomView);
+			menu.build(bottomView);
 		}
 	}
 
@@ -398,15 +371,45 @@ public class MapContextMenuFragment extends Fragment {
 		bottomLayout.removeAllViews();
 		buildBottomView();
 
-		recalculateFullHeightMax();
+		runLayoutListener();
 	}
 
-	private void showOnMap(double latitude, double longitude) {
+	private void runLayoutListener() {
+		ViewTreeObserver vto = view.getViewTreeObserver();
+		vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+
+			@Override
+			public void onGlobalLayout() {
+
+				menuTopShadowHeight = view.findViewById(R.id.context_menu_top_shadow).getHeight();
+				menuTopShadowAllHeight = view.findViewById(R.id.context_menu_top_shadow_all).getHeight();
+				menuFullHeight = view.findViewById(R.id.context_menu_main).getHeight();
+
+				menuTitleHeight = menuTopShadowHeight + menuTopShadowAllHeight;
+				menuBottomViewHeight = view.findViewById(R.id.context_menu_bottom_view).getHeight();
+
+				recalculateFullHeightMax();
+
+				ViewTreeObserver obs = view.getViewTreeObserver();
+
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+					obs.removeOnGlobalLayoutListener(this);
+				} else {
+					obs.removeGlobalOnLayoutListener(this);
+				}
+
+				doLayoutMenu();
+			}
+
+		});
+	}
+
+	private void showOnMap(LatLon latLon) {
 		MapActivity ctx = getMapActivity();
 		AnimateDraggingMapThread thread = ctx.getMapView().getAnimatedDraggingThread();
 		int fZoom = ctx.getMapView().getZoom();
-		double flat = latitude;
-		double flon = longitude;
+		double flat = latLon.getLatitude();
+		double flon = latLon.getLongitude();
 
 		RotatedTileBox cp = ctx.getMapView().getCurrentRotatedTileBox().copy();
 		cp.setCenterLocation(0.5f, ctx.getMapView().getMapPosition() == OsmandSettings.BOTTOM_CONSTANT ? 0.15f : 0.5f);
@@ -420,12 +423,12 @@ public class MapContextMenuFragment extends Fragment {
 	private void setAddressLocation() {
 		// Text line 1
 		TextView line1 = (TextView) view.findViewById(R.id.context_menu_line1);
-		line1.setText(getCtxMenu().getTitleStr());
+		line1.setText(menu.getTitleStr());
 
 		// Text line 2
 		TextView line2 = (TextView) view.findViewById(R.id.context_menu_line2);
-		line2.setText(getCtxMenu().getLocationStr());
-		Drawable icon = getCtxMenu().getSecondLineIcon();
+		line2.setText(menu.getLocationStr());
+		Drawable icon = menu.getSecondLineIcon();
 		if (icon != null) {
 			line2.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
 			line2.setCompoundDrawablePadding(dpToPx(5f));
@@ -435,9 +438,9 @@ public class MapContextMenuFragment extends Fragment {
 	private int getPosY() {
 		int destinationState;
 		int minHalfY;
-		if (menuController != null) {
-			destinationState = menuController.getCurrentMenuState();
-			minHalfY = view.getHeight() - (int)(view.getHeight() * menuController.getHalfScreenMaxHeightKoef());
+		if (menu.isExtended()) {
+			destinationState = menu.getCurrentMenuState();
+			minHalfY = view.getHeight() - (int)(view.getHeight() * menu.getHalfScreenMaxHeightKoef());
 		} else {
 			destinationState = MenuController.MenuState.HEADER_ONLY;
 			minHalfY = view.getHeight();
@@ -508,6 +511,14 @@ public class MapContextMenuFragment extends Fragment {
 		setAddressLocation();
 	}
 
+	public void setFragmentVisibility(boolean visible) {
+		if (visible) {
+			view.setVisibility(View.VISIBLE);
+		} else {
+			view.setVisibility(View.GONE);
+		}
+	}
+
 	public OsmandApplication getMyApplication() {
 		if (getActivity() == null) {
 			return null;
@@ -520,10 +531,10 @@ public class MapContextMenuFragment extends Fragment {
 		int slideInAnim = R.anim.slide_in_bottom;
 		int slideOutAnim = R.anim.slide_out_bottom;
 
-		MenuController menuController = mapActivity.getContextMenu().getMenuController();
-		if (menuController != null) {
-			slideInAnim = menuController.getSlideInAnimation();
-			slideOutAnim = menuController.getSlideOutAnimation();
+		MapContextMenu menu = mapActivity.getContextMenu();
+		if (menu.isExtended()) {
+			slideInAnim = menu.getSlideInAnimation();
+			slideOutAnim = menu.getSlideOutAnimation();
 		}
 
 		MapContextMenuFragment fragment = new MapContextMenuFragment();
@@ -533,25 +544,8 @@ public class MapContextMenuFragment extends Fragment {
 				.addToBackStack(TAG).commit();
 	}
 
-	private MapContextMenu getCtxMenu() {
-		return getMapActivity().getContextMenu();
-	}
-
 	private MapActivity getMapActivity() {
 		return (MapActivity)getActivity();
-	}
-
-	// Utils
-	private int getScreenHeight() {
-		DisplayMetrics dm = new DisplayMetrics();
-		getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
-		return dm.heightPixels;
-	}
-
-	private int getScreenWidth() {
-		DisplayMetrics dm = new DisplayMetrics();
-		getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
-		return dm.widthPixels;
 	}
 
 	private int dpToPx(float dp) {

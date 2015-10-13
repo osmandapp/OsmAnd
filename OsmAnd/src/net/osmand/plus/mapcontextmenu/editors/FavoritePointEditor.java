@@ -3,6 +3,7 @@ package net.osmand.plus.mapcontextmenu.editors;
 import android.os.Bundle;
 
 import net.osmand.data.FavouritePoint;
+import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
@@ -41,12 +42,13 @@ public class FavoritePointEditor extends PointEditor {
 		return favorite;
 	}
 
-	public void add(PointDescription point) {
-		if (point == null) {
+	public void add(LatLon latLon, String title) {
+		if (latLon == null) {
 			return;
 		}
 		isNew = true;
-		favorite = new FavouritePoint(point.getLat(), point.getLon(), point.getName(), app.getSettings().LAST_FAV_CATEGORY_ENTERED.get());
+		favorite = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(), title,
+				app.getSettings().LAST_FAV_CATEGORY_ENTERED.get());
 		favorite.setDescription("");
 		FavoritePointEditorFragment.showInstance(mapActivity);
 	}
