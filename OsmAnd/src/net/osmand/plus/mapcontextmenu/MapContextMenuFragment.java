@@ -49,8 +49,11 @@ public class MapContextMenuFragment extends Fragment {
 	public static final String TAG = "MapContextMenuFragment";
 	private static final Log LOG = PlatformUtil.getLog(MapContextMenuFragment.class);
 
+	private static final float FAB_PADDING_TOP = 10f;
+
 	private View view;
 	private View mainView;
+	ImageView fabView;
 
 	MapContextMenu menu;
 
@@ -60,6 +63,8 @@ public class MapContextMenuFragment extends Fragment {
 	private int menuBottomViewHeight;
 	private int menuFullHeight;
 	private int menuFullHeightMax;
+
+	private int fabPaddingTopPx;
 
 	private class SingleTapConfirm implements OnGestureListener {
 
@@ -107,6 +112,8 @@ public class MapContextMenuFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 
+		fabPaddingTopPx = dpToPx(FAB_PADDING_TOP);
+
 		menu = getMapActivity().getContextMenu();
 		if (savedInstanceState != null) {
 			menu.restoreMenuState(savedInstanceState);
@@ -117,6 +124,9 @@ public class MapContextMenuFragment extends Fragment {
 
 		if (menu.isLandscapeLayout()) {
 			mainView.setLayoutParams(new FrameLayout.LayoutParams(dpToPx(menu.getLandscapeWidthDp()),
+					ViewGroup.LayoutParams.MATCH_PARENT));
+			View fabContainer = view.findViewById(R.id.context_menu_fab_container);
+			fabContainer.setLayoutParams(new FrameLayout.LayoutParams(dpToPx(menu.getLandscapeWidthDp()),
 					ViewGroup.LayoutParams.MATCH_PARENT));
 		}
 
@@ -233,6 +243,10 @@ public class MapContextMenuFragment extends Fragment {
 									}
 								})
 								.start();
+						fabView.animate().y(getFabY(posY))
+								.setDuration(200)
+								.setInterpolator(new DecelerateInterpolator())
+								.start();
 					} else {
 						setViewY(posY);
 						updateMainViewLayout(posY);
@@ -261,14 +275,14 @@ public class MapContextMenuFragment extends Fragment {
 		IconsCache iconsCache = getMyApplication().getIconsCache();
 		boolean light = getMyApplication().getSettings().isLightContent();
 
-		// Close button
-		final ImageView closeButtonView = (ImageView)view.findViewById(R.id.context_menu_close_btn_view);
-		closeButtonView.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_remove_dark,
-				light ? R.color.icon_color_light : R.color.dash_search_icon_dark));
-		closeButtonView.setOnClickListener(new View.OnClickListener() {
+		// FAB
+		fabView = (ImageView)view.findViewById(R.id.context_menu_fab_view);
+		//fabView.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_remove_dark,
+		//		light ? R.color.icon_color_light : R.color.dash_search_icon_dark));
+		fabView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				getMapActivity().getContextMenu().close();
+				menu.buttonNavigatePressed();
 			}
 		});
 
@@ -485,9 +499,19 @@ public class MapContextMenuFragment extends Fragment {
 	private void setViewY(int y) {
 		if (!oldAndroid()) {
 			mainView.setY(y);
+			fabView.setY(getFabY(y));
 		} else {
 			mainView.setPadding(0, y, 0, 0);
+			fabView.setPadding(0, getFabY(y), 0, 0);
 		}
+	}
+
+	private int getFabY(int y) {
+		int fabY = y + fabPaddingTopPx;
+		if (fabY < fabPaddingTopPx) {
+			fabY = fabPaddingTopPx;
+		}
+		return fabY;
 	}
 
 	private boolean oldAndroid() {
