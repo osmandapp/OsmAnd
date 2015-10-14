@@ -1843,4 +1843,12 @@
 	<string name="poi_artwork_type_installation">藝術品類型：裝置</string>
 	<string name="poi_artwork_type_mosaic">藝術品類型： 鑲嵌</string>
 	<string name="poi_artwork_type_relief">藝術品類型：浮雕</string>
+	<string name="poi_artwork_type_graffiti">藝術品類型：塗鴉</string>
+	<string name="poi_artwork_type_stele">藝術品類型：碑</string>
+	<string name="poi_artwork_type_fountain">藝術品類型：噴泉</string>
+
+	<string name="poi_width">寬度</string>
+
+	<string name="poi_architect_name">建築師</string>
+
 	</resources>
