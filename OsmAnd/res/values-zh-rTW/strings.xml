@@ -2159,4 +2159,7 @@
 <string name="favorite_category_dublicate_message">已有指定的類別名稱。請定義其它名稱。</string>
     <string name="favorite_category_name">類別名稱</string>
     <string name="favorite_category_add_new_title">增加新的類別</string>
-    </resources>
+    <string name="confirm_download_roadmaps">您確定要下載地圖的道路，即使您已擁有完整的地圖？</string>
+    <string name="value_downloaded_from_max">%1$.1f 從 %2$.1f MB</string>
+    <string name="file_size_in_mb">%.1f MB</string>
+</resources>
