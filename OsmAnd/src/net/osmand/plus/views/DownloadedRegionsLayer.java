@@ -250,7 +250,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 						String fullName = osmandRegions.getFullName(o);
 						String downloadName = osmandRegions.getMapDownloadType(fullName);
 						if (!Algorithms.isEmpty(downloadName)) {
-							String name = osmandRegions.getLocaleName(downloadName); // Algorithms.capitalizeFirstLetterAndLowercase(o.getName());
+							String name = osmandRegions.getLocaleName(downloadName, true); // Algorithms.capitalizeFirstLetterAndLowercase(o.getName());
 							if (checkIfObjectDownloaded(downloadName)) {
 								return null;
 							}

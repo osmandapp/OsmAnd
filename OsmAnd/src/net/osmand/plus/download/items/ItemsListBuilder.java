@@ -231,7 +231,7 @@ public class ItemsListBuilder {
 
 		for (IndexItem indexItem : regionResources.values()) {
 
-			String name = indexItem.getVisibleName(context, osmandRegions);
+			String name = indexItem.getVisibleName(context, osmandRegions, false);
 			if (Algorithms.isEmpty(name)) {
 				continue;
 			}
