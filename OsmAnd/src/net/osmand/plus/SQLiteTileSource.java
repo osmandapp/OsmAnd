@@ -10,6 +10,7 @@ import java.util.List;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.access.AccessibleToast;
 import net.osmand.data.QuadRect;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
@@ -24,6 +25,7 @@ import bsh.Interpreter;
 import android.database.sqlite.SQLiteDiskIOException;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.widget.Toast;
 
 
 public class SQLiteTileSource implements ITileSource {
@@ -44,6 +46,7 @@ public class SQLiteTileSource implements ITileSource {
 	private int expirationTimeMillis = -1; // never
 	private boolean isEllipsoid = false;
 	private String rule = null;
+	private String referer = null;
 	
 	static final int tileSize = 256;
 	private OsmandApplication ctx;
@@ -122,6 +125,8 @@ public class SQLiteTileSource implements ITileSource {
 				}
 				return (String) bshInterpreter.eval("getTileUrl("+zoom+","+x+","+y+");");
 			} catch (bsh.EvalError e) {
+				WDebug.log("getUrlToLoad Error"+e.getMessage());
+				AccessibleToast.makeText(ctx, e.getMessage(), Toast.LENGTH_LONG).show();
 				log.error(e.getMessage(), e);
 				return null;
 			}
@@ -164,6 +169,7 @@ public class SQLiteTileSource implements ITileSource {
 	
 	protected SQLiteConnection getDatabase(){
 		if((db == null || db.isClosed()) && file.exists() ){
+			WDebug.log("Open "+file.getAbsolutePath());
 			try {
 				onlyReadonlyAvailable = false;
 				db = ctx.getSQLiteAPI().openByAbsolutePath(file.getAbsolutePath(), false);
@@ -187,6 +193,10 @@ public class SQLiteTileSource implements ITileSource {
 					int ruleId = list.indexOf("rule");
 					if(ruleId != -1) {
 						rule = cursor.getString(ruleId);
+					}
+					int refererId = list.indexOf("referer");
+					if(refererId != -1) {
+						referer = cursor.getString(refererId);
 					}
 					int tnumbering = list.indexOf("tilenumbering");
 					if(tnumbering != -1) {
@@ -442,11 +452,24 @@ public class SQLiteTileSource implements ITileSource {
 	}
 	
 	public void closeDB(){
+		WDebug.log("closeDB");
 		bshInterpreter = null;
+		if(timeSupported)
+			clearOld();
 		if(db != null){
 			db.close();
 			db = null;
 		}
+	}
+
+	public void clearOld() {
+		SQLiteConnection db = getDatabase();
+		if(db == null || db.isReadOnly()){
+			return;
+		}
+		WDebug.log("DELETE FROM tiles WHERE time<"+(System.currentTimeMillis()-getExpirationTimeMillis()));
+		db.execSQL("DELETE FROM tiles WHERE time<"+(System.currentTimeMillis()-getExpirationTimeMillis()));    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
+		db.execSQL("VACUUM");    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
 	}
 
 	@Override
@@ -474,6 +497,9 @@ public class SQLiteTileSource implements ITileSource {
 		return expirationTimeMillis;
 	}
 	
+	public String getReferer() {
+		return referer;
+	}
 
 }
 

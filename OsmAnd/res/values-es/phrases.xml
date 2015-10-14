@@ -870,7 +870,7 @@
 	<string name="poi_height_restrictor">Limitador de altura</string>
 	<string name="poi_swing_gate">Barrera giratoria</string>
 	<string name="poi_turnstile">Molinete</string>
-	<string name="poi_barrier_entrance">Entrada</string>
+	<string name="poi_barrier_entrance">Pasaje en una pared o valla</string>
 	<string name="poi_entrance_main">Entrada principal</string>
 	<string name="poi_entrance">Entrada</string>
 	<string name="poi_entrance_exit">Salida</string>
@@ -955,8 +955,8 @@
 	<string name="poi_facebook">Facebook</string>
 	<string name="poi_mobile">Celular</string>
 	<string name="poi_animal_shelter_dog">Refugio canino</string>
-	<string name="poi_animal_shelter_cat">Refugio para gatos</string>
-	<string name="poi_animal_shelter_dog_cat">Refugio para perros y gatos</string>
+	<string name="poi_animal_shelter_cat">Refugio gatuno</string>
+	<string name="poi_animal_shelter_dog_cat">Refugio canino y gatuno</string>
 	<string name="poi_animal_shelter_bird">Refugio para aves</string>
 
 <string name="poi_recycling_centre">Tipo: Centro de reciclaje</string>
@@ -1641,7 +1641,7 @@
 	<string name="poi_automated_yes">Automatizado</string>
 	<string name="poi_automated_no">No automatizado</string>
 	<string name="poi_full_service_yes">Servicio completo</string>
-	<string name="poi_aeroway_fuel">Estación de combustible para aviones</string>
+	<string name="poi_aeroway_fuel">Gasolinera para aviones</string>
 	<string name="poi_public_bath">Baño público</string>
 
 	<string name="poi_male_yes">Masculino</string>
@@ -1737,7 +1737,7 @@
 	<string name="poi_resource_coal">Carbón</string>
 	<string name="poi_resource_copper">Cobre</string>
 	<string name="poi_resource_diamond">Diamante</string>
-	<string name="poi_resource_dimension_stone">Piedra de dimensión</string>
+	<string name="poi_resource_dimension_stone">Piedras grandes</string>
 	<string name="poi_resource_dolomite">Dolomita</string>
 	<string name="poi_resource_gas">Gas</string>
 	<string name="poi_resource_gold">Oro</string>
@@ -1788,7 +1788,7 @@
 	<string name="poi_wetland_mud">Lodazal</string>
 
 	<string name="poi_beach_sand">Playa arenosa</string>
-	<string name="poi_beach_shingle">Playa con guijarro</string>
+	<string name="poi_beach_shingle">Playa rocosa</string>
 	<string name="poi_beach_rocky">Playa rocosa</string>
 
 	<string name="poi_chimney">Chimenea</string>
@@ -1850,7 +1850,7 @@
 	<string name="poi_architecture_new_objectivity">Arquitectura: nueva objetividad</string>
 	<string name="poi_architecture_contemporary">Arquitectura contemporánea</string>
 	<string name="poi_architecture_constructivism">Arquitectura constructivista</string>
-	<string name="poi_architecture_umgebinde">Arquitectura: umgebinde</string>
+	<string name="poi_architecture_umgebinde">Arquitectura alemana</string>
 	<string name="poi_architecture_timber_frame">Arquitectura de madera</string>
 	<string name="poi_architecture_art_nouveau">Arquitectura: arte nuevo</string>
 	<string name="poi_architecture_neoclassicism">Arquitectura neoclasista</string>
@@ -1864,5 +1864,178 @@
 	<string name="poi_architecture_wilhelminian_style">Arquitectura estilo guillerminista</string>
 	<string name="poi_architecture_renaissance">Arquitectura renacentista</string>
 	<string name="poi_architecture_romanesque">Arquitectura románica</string>
+
+<string name="poi_debris">Escombros</string>
+	<string name="poi_jersey_barrier">Barrera New Jersey</string>
+	<string name="poi_animal_shelter">Refugio para animales</string>
+	<string name="poi_memorial_stolperstein">Stolperstein</string>
+	<string name="poi_memorial_column">Columna</string>
+	<string name="poi_memorial_stupa">Estupa</string>
+	<string name="poi_memorial_prasat">Templo piramidal</string>
+
+	<string name="poi_wetland_saltern">Salina</string>
+	<string name="poi_wetland_string_bog">Cadena de humedales</string>
+	<string name="poi_wetland_palsa_bog">Palsa (humedal)</string>
+	<string name="poi_tunnel_waterway">Túnel fluvial</string>
+	<string name="poi_tunnel_car">Túnel vial</string>
+	<string name="poi_tunnel_pedestrian">Túnel peatonal</string>
+	<string name="poi_tunnel_railway">Túnel ferroviario</string>
+	<string name="poi_bridge_car">Puente vial</string>
+	<string name="poi_bridge_pedestrian">Puente peatonal</string>
+	<string name="poi_bridge_bicycle">Puente para bicicletas</string>
+	<string name="poi_bridge_railway">Puente ferroviario</string>
+	<string name="poi_bridge_waterway">Puente fluvial</string>
+	<string name="poi_bridge_structure_beam">Estructura del puente: viga</string>
+	<string name="poi_bridge_structure_simple_suspension">Estructura del puente: suspensión simple</string>
+	<string name="poi_bridge_structure_suspension">Estructura del puente: suspensión</string>
+	<string name="poi_bridge_structure_arch">Estructura del puente: arco</string>
+	<string name="poi_bridge_structure_truss">Estructura del puente: reticulada</string>
+	<string name="poi_bridge_structure_floating">Estructura del puente: flotante</string>
+	<string name="poi_bridge_structure_humpback">Estructura del puente: jorobado</string>
+	<string name="poi_bridge_structure_cable_stayed">Estructura del puente: atirantado</string>
+	<string name="poi_bridge_structure_boardwalk">Estructura del puente: pasarela</string>
+	<string name="poi_bridge_structure_simple_wooden">Estructura del puente: de madera simple</string>
+	<string name="poi_bridge_structure_viaduct">Estructura del puente: viaducto</string>
+	<string name="poi_bridge_structure_aqueduct">Estructura del puente: acueducto</string>
+	<string name="poi_bridge_structure_log">Estructura del puente: tronco</string>
+	<string name="poi_bridge_type_movable">Estructura del puente: móvil</string>
+	<string name="poi_bridge_movable_bascule">Tipo de puente móvil: báscula</string>
+	<string name="poi_bridge_movable_swing">Tipo de puente móvil: oscilación</string>
+	<string name="poi_bridge_movable_lift">Tipo de puente móvil: ascensor</string>
+	<string name="poi_bridge_movable_drawbridge">Tipo de puente móvil: levadizo</string>
+	<string name="poi_bridge_movable_submersible">Tipo de puente móvil: sumergible</string>
+	<string name="poi_bridge_movable_transporter">Tipo de puente móvil: transportador</string>
+	<string name="poi_bridge_movable_retractable">Tipo de puente móvil: retráctil</string>
+
+	<string name="poi_lit_yes">Iluminado</string>
+	<string name="poi_lit_no">No iluminado</string>
+
+	<string name="poi_surface_unpaved">Superficie: sin pavimento</string>
+	<string name="poi_surface_paved">Superficie: pavimentado</string>
+	<string name="poi_surface_asphalt">Superficie: asfaltado</string>
+	<string name="poi_surface_concrete">Superficie: hormigón</string>
+	<string name="poi_surface_sett">Superficie: intertrabado</string>
+	<string name="poi_surface_cobblestone">Superficie: empedrado</string>
+	<string name="poi_surface_paving_stones">Superficie: adoquín prefabricado</string>
+	<string name="poi_surface_pebblestone">Superficie: empedrado</string>
+	<string name="poi_surface_stone">Superficie: piedras</string>
+	<string name="poi_surface_metal">Superficie: metalizado</string>
+	<string name="poi_surface_wood">Superficie: madera</string>
+	<string name="poi_surface_gravel">Superficie: ripio</string>
+	<string name="poi_surface_fine_gravel">Superficie: ripio fino</string>
+	<string name="poi_surface_compacted">Superficie: compactado</string>
+	<string name="poi_surface_sand">Superficie: arenoso</string>
+	<string name="poi_surface_grass">Superficie: césped</string>
+	<string name="poi_surface_grass_paver">Superficie: césped pavimentado</string>
+	<string name="poi_surface_ground">Superficie: tierra</string>
+	<string name="poi_surface_dirt">Superficie: lodoso</string>
+	<string name="poi_surface_mud">Superficie: sobre hojas</string>
+	<string name="poi_surface_ice">Superficie: hielo</string>
+	<string name="poi_surface_salt">Superficie: sal</string>
+	<string name="poi_surface_snow">Superficie: nieve</string>
+
+	<string name="poi_route_bus_ref">Colectivo</string>
+	<string name="poi_route_share_taxi_ref">Taxi compartido</string>
+	<string name="poi_route_trolleybus_ref">Trolebús</string>
+	<string name="poi_route_tram_ref">Tranvía</string>
+	<string name="poi_route_train_ref">Tren</string>
+	<string name="poi_route_light_rail_ref">Tren ligero</string>
+	<string name="poi_route_monorail_ref">Monorriel</string>
+	<string name="poi_route_funicular_ref">Funicular</string>
+	<string name="poi_route_ferry_ref">Transbordador</string>
+
+	<string name="poi_route_railway_ref">Ruta ferroviaria</string>
+
+	<string name="poi_historic_yes">Objeto histórico</string>
+	<string name="poi_surveillance_yes">Vigilado</string>
+	<string name="poi_shop_yes">Con negocio</string>
+
+	<string name="poi_service_bicycle_retail_yes">Vende bicicletas</string>
+	<string name="poi_service_bicycle_retail_no">No vende bicicletas</string>
+	<string name="poi_service_bicycle_repair_yes">Repara bicicletas</string>
+	<string name="poi_service_bicycle_repair_no">No repara bicicletas</string>
+	<string name="poi_service_bicycle_rental_yes">Alquila bicicletas</string>
+	<string name="poi_service_bicycle_rental_no">No alquila bicicletas</string>
+	<string name="poi_service_bicycle_pump_yes">Infla de bicicletas</string>
+	<string name="poi_service_bicycle_pump_no">No infla bicicletas</string>
+	<string name="poi_service_bicycle_diy_yes">Autoservicio de herramientas para bicicletas</string>
+	<string name="poi_service_bicycle_diy_no">Sin autoservicio de herramientas para bicicletas</string>
+	<string name="poi_service_bicycle_cleaning_yes">Limpia bicicletas</string>
+	<string name="poi_service_bicycle_cleaning_no">No limpia bicicletas</string>
+	<string name="poi_service_bicycle_chaintool_yes">Con herramientas para cadenas de bicicletas</string>
+	<string name="poi_service_bicycle_chaintool_no">Sin herramientas para cadenas de bicicletas</string>
+	<string name="poi_service_bicycle_second_hand_yes">Vende bicicletas de segunda mano</string>
+	<string name="poi_service_bicycle_second_hand_no">No vende bicicletas de segunda mano</string>
+
+	<string name="poi_wildlife_hide">Observatorio de vida salvaje</string>
+
+	<string name="poi_training_language">Capacitación: idioma</string>
+	<string name="poi_training_music">Capacitación: música</string>
+	<string name="poi_training_dance">Capacitación: danza</string>
+	<string name="poi_training_sport">Capacitación: deportes</string>
+	<string name="poi_training_art">Capacitación: arte</string>
+	<string name="poi_training_cooking">Capacitación: cocina</string>
+	<string name="poi_training_computer">Capacitación: computación</string>
+	<string name="poi_training_yoga">Capacitación: yoga</string>
+	<string name="poi_training_martial_art">Capacitación: artes marciales</string>
+	<string name="poi_training_aviation">Capacitación: aviación</string>
+	<string name="poi_training_hairdressing">Capacitación: peluquería</string>
+
+	<string name="poi_monument_yes">Monumento</string>
+
+	<string name="poi_industrial_oil">Tipo: industria petrolera</string>
+	<string name="poi_industrial_wellsite">Tipo: wellsite</string>
+	<string name="poi_industrial_factory">Tipo: fábrica</string>
+	<string name="poi_industrial_gas">Tipo: industria gasífera</string>
+	<string name="poi_industrial_timber">Tipo: maderera</string>
+	<string name="poi_industrial_refinery">Tipo: refinería</string>
+	<string name="poi_industrial_warehouse">Tipo: almacén</string>
+	<string name="poi_industrial_auto_wrecker">Tipo: vehículo de auxilio</string>
+	<string name="poi_industrial_agriculture">Tipo: agrícola</string>
+	<string name="poi_industrial_brewery">Tipo: cervecería</string>
+	<string name="poi_industrial_brickyard">Tipo: fábrica de ladrillos</string>
+	<string name="poi_industrial_intermodal_freight_terminal">Tipo: terminal intermodal de mercancías</string>
+	<string name="poi_industrial_sawmill">Tipo: aserradero</string>
+	<string name="poi_industrial_water_purification">Tipo: purificación del agua</string>
+	<string name="poi_industrial_port">Tipo: puerto</string>
+	<string name="poi_industrial_depot">Tipo: depósito</string>
+
+	<string name="poi_note">Nota</string>
+	<string name="poi_watering_place">Lugar de riego</string>
+	<string name="poi_animal_boarding">Alojamiento de animales</string>
+	<string name="poi_animal_boarding_dog">Alojamiento canino</string>
+	<string name="poi_animal_boarding_cat">Alojamiento gatuno</string>
+	<string name="poi_animal_boarding_dog_cat">Alojamiento canino y gatuno</string>
+	<string name="poi_animal_boarding_horse">Alojamiento ecuestre</string>
+
+	<string name="poi_historic_aircraft">Avión histórico</string>
+
+	<string name="poi_honey">Miel</string>
+
+	<string name="poi_elevator_yes">Con ascensor</string>
+	<string name="poi_elevator_no">Sin ascensor</string>
+
+	<string name="poi_technical_monument">Monumento técnico</string>
+
+	<string name="poi_office_camping">Oficina del campamento</string>
+	<string name="poi_model_aerodrome">Aeródromo a escala</string>
+	<string name="poi_guide">Oficina del guía</string>
+	<string name="poi_quango">ONG dependiente</string>
+	<string name="poi_consulting">Oficina de consultoría</string>
+	<string name="poi_cooperative">Oficina de cooperativa</string>
+	<string name="poi_office_forestry">Oficina forestal</string>
+	<string name="poi_logistics">Oficina logística</string>
+	<string name="poi_parish">Oficina parroquial</string>
+	<string name="poi_publisher">Oficina de editorial</string>
+
+	<string name="poi_fuel_91ul">91UL (sin plomo, para aviones)</string>
+	<string name="poi_fuel_100ll">100LL (con plomo, para aviones)</string>
+	<string name="poi_autogas">Autogas (etanol libre de plomo)</string>
+	<string name="poi_jeta1">Jet A-1 (diésel)</string>
+	<string name="poi_fuel_adblue">AdBlue</string>
+
+	<string name="poi_fuel_wood">Combustible: madera</string>
+	<string name="poi_fuel_charcoal">Combustible: carbón vegetal</string>
+	<string name="poi_fuel_coal">Combustible: carbón</string>
 
 </resources>
