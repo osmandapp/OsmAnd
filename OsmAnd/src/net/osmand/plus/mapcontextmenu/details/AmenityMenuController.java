@@ -79,7 +79,8 @@ public class AmenityMenuController extends MenuController {
 			addPlainMenuItem(R.drawable.ic_action_info_dark, typeStr);
 		}
 		if (pointDescription != null) {
-			addPlainMenuItem(R.drawable.map_my_location, pointDescription.getLocationName(getMapActivity(), true).replaceAll("\n", ""));
+			addPlainMenuItem(R.drawable.map_my_location, PointDescription.getLocationName(getMapActivity(),
+					amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(), true).replaceAll("\n", ""));
 		}
 	}
 

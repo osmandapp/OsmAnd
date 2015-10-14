@@ -43,18 +43,6 @@ public class PointDescription implements Serializable {
 
 	public static final PointDescription LOCATION_POINT = new PointDescription(POINT_TYPE_LOCATION, "");
 
-	public String getType() {
-		return type;
-	}
-
-	public double getLat() {
-		return lat;
-	}
-
-	public double getLon() {
-		return lon;
-	}
-
 	public PointDescription(double lat, double lon) {
 		this(POINT_TYPE_LOCATION, "");
 		this.lat = lat;
@@ -141,11 +129,7 @@ public class PointDescription implements Serializable {
 		}
 	}
 
-	public String getLocationName(Context ctx, boolean shortText) {
-		return getLocationName(ctx, lat, lon, shortText);
-	}
-
-	private String getLocationName(Context ctx, double lat, double lon, boolean sh) {
+	public static String getLocationName(Context ctx, double lat, double lon, boolean sh) {
 		OsmandSettings st = ((OsmandApplication) ctx.getApplicationContext()).getSettings();
 		int f = st.COORDINATES_FORMAT.get();
 		if (f == PointDescription.UTM_FORMAT) {

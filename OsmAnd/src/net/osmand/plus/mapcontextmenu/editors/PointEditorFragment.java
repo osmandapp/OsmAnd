@@ -25,6 +25,7 @@ import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.mapcontextmenu.MapContextMenuFragment;
 import net.osmand.plus.mapcontextmenu.editors.dialogs.SelectCategoryDialogFragment;
 import net.osmand.plus.widgets.AutoCompleteTextViewEx;
 import net.osmand.util.Algorithms;
@@ -140,6 +141,18 @@ public abstract class PointEditorFragment extends Fragment {
 	}
 
 	@Override
+	public void onStart() {
+		super.onStart();
+		getMapActivity().getContextMenu().setBaseFragmentVisibility(false);
+	}
+
+	@Override
+	public void onStop() {
+		super.onStop();
+		getMapActivity().getContextMenu().setBaseFragmentVisibility(true);
+	}
+
+	@Override
 	public void onDestroyView() {
 		if (!wasSaved() && !getEditor().isNew()) {
 			save(false);
@@ -199,8 +212,7 @@ public abstract class PointEditorFragment extends Fragment {
 		if (includingMenu) {
 			//getMapActivity().getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 			getMapActivity().getSupportFragmentManager().popBackStack();
-			getMapActivity().getMapLayers().getContextMenuLayer().hideMapContextMenuMarker();
-			getMapActivity().getContextMenu().hide();
+			getMapActivity().getContextMenu().close();
 		} else {
 			getMapActivity().getSupportFragmentManager().popBackStack();
 		}

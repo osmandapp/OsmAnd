@@ -17,6 +17,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.util.Algorithms;
@@ -230,11 +231,14 @@ public class SearchAddressOnlineFragment extends Fragment implements SearchActiv
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		Place item = adapter.getItem(position);
-		final PopupMenu optionsMenu = new PopupMenu(getActivity(), view);
-		DirectionsDialogs.createDirectionsActionsPopUpMenu(optionsMenu, new LatLon(item.lat, item.lon), item,
-				new PointDescription(PointDescription.POINT_TYPE_ADDRESS, item.displayName), Math.max(15, settings.getLastKnownMapZoom()),
-				getActivity(), true);
-		optionsMenu.show();
+
+		LatLon location = new LatLon(item.lat, item.lon);
+		settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
+				Math.max(15, settings.getLastKnownMapZoom()),
+				new PointDescription(PointDescription.POINT_TYPE_ADDRESS, item.displayName),
+				true,
+				item); //$NON-NLS-1$
+		MapActivity.launchMapActivityMoveToTop(getActivity());
 	}
 	
 	private static class Place {

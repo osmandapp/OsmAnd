@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import net.osmand.data.FavouritePoint;
+import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
@@ -127,11 +128,12 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		}
 
 		MapContextMenu menu = getMapActivity().getContextMenu();
-		if (menu.getObject() == favorite) {
+		LatLon latLon = new LatLon(favorite.getLatitude(), favorite.getLongitude());
+		if (menu.getLatLon().equals(latLon)) {
 			PointDescription pointDescription = favorite.getPointDescription();
 			pointDescription.setLat(favorite.getLatitude());
 			pointDescription.setLon(favorite.getLongitude());
-			menu.refreshMenu(pointDescription, favorite);
+			menu.refreshMenu(latLon, pointDescription, favorite);
 		}
 	}
 

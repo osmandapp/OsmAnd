@@ -1,23 +1,5 @@
 package net.osmand.plus.helpers;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import net.osmand.CallbackWithObject;
-import net.osmand.Location;
-import net.osmand.ResultMatcher;
-import net.osmand.binary.RouteDataObject;
-import net.osmand.data.LatLon;
-import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.views.AnimateDraggingMapThread;
-import net.osmand.plus.views.ContextMenuLayer;
-import net.osmand.router.RoutingConfiguration;
-import net.osmand.util.MapUtils;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
@@ -28,6 +10,25 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import net.osmand.CallbackWithObject;
+import net.osmand.Location;
+import net.osmand.ResultMatcher;
+import net.osmand.binary.RouteDataObject;
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
+import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.views.AnimateDraggingMapThread;
+import net.osmand.plus.views.ContextMenuLayer;
+import net.osmand.router.RoutingConfiguration;
+import net.osmand.util.MapUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AvoidSpecificRoads {
 	private List<RouteDataObject> missingRoads;
@@ -114,7 +115,7 @@ public class AvoidSpecificRoads {
 					RouteDataObject obj = getMissingRoads().get(which);
 					double lat = MapUtils.get31LatitudeY(obj.getPoint31YTile(0));
 					double lon = MapUtils.get31LongitudeX(obj.getPoint31XTile(0));
-					showOnMap(app, mapActivity, lat, lon, getText(obj), dialog);
+					showOnMap(mapActivity, lat, lon, getText(obj), dialog);
 				}
 
 			});
@@ -172,12 +173,8 @@ public class AvoidSpecificRoads {
 		});
 	}
 	
-	public static void showOnMap(OsmandApplication app, Activity a, double lat, double lon, String name,
+	private void showOnMap(MapActivity ctx, double lat, double lon, String name,
 			DialogInterface dialog) {
-		if (!(a instanceof MapActivity)) {
-			return;
-		}
-		MapActivity ctx = (MapActivity) a;
 		AnimateDraggingMapThread thread = ctx.getMapView().getAnimatedDraggingThread();
 		int fZoom = ctx.getMapView().getZoom() < 15 ? 15 : ctx.getMapView().getZoom();
 		if (thread.isAnimating()) {
@@ -186,7 +183,7 @@ public class AvoidSpecificRoads {
 		} else {
 			thread.startMoving(lat, lon, fZoom, true);
 		}
-		ctx.getMapLayers().getContextMenuLayer().showMapContextMenu(new LatLon(lat, lon), name);
+		ctx.getContextMenu().show(new LatLon(lat, lon), new PointDescription("", name), null);
 		dialog.dismiss();
 	}
 

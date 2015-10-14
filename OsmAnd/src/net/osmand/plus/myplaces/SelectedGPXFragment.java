@@ -1,37 +1,6 @@
 package net.osmand.plus.myplaces;
 
 
-import gnu.trove.list.array.TIntArrayList;
-
-import java.io.File;
-import java.text.Collator;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
-import net.osmand.data.FavouritePoint;
-import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.FavouritesDbHelper;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.WptPt;
-import net.osmand.plus.GpxSelectionHelper;
-import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
-import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
-import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.OsmAndListFragment;
-import net.osmand.plus.activities.TrackActivity;
-import net.osmand.plus.base.FavoriteImageDrawable;
-import net.osmand.plus.dialogs.DirectionsDialogs;
-import net.osmand.plus.helpers.ColorDialogs;
-import net.osmand.util.Algorithms;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -57,6 +26,38 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import net.osmand.data.FavouritePoint;
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
+import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.FavouritesDbHelper;
+import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.GpxSelectionHelper;
+import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
+import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
+import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
+import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.OsmAndListFragment;
+import net.osmand.plus.activities.TrackActivity;
+import net.osmand.plus.base.FavoriteImageDrawable;
+import net.osmand.plus.dialogs.DirectionsDialogs;
+import net.osmand.plus.helpers.ColorDialogs;
+import net.osmand.util.Algorithms;
+
+import java.io.File;
+import java.text.Collator;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import gnu.trove.list.array.TIntArrayList;
 
 
 public class SelectedGPXFragment extends OsmAndListFragment {
@@ -475,7 +476,19 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
+
 		GpxDisplayItem child = adapter.getItem(position);
+
+		final OsmandSettings settings = app.getSettings();
+		LatLon location = new LatLon(child.locationStart.lat, child.locationStart.lon);
+
+		settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
+				settings.getLastKnownMapZoom(),
+				new PointDescription(PointDescription.POINT_TYPE_FAVORITE, Html.fromHtml(child.name).toString()),
+				false,
+				child.locationStart); //$NON-NLS-1$
+		MapActivity.launchMapActivityMoveToTop(getActivity());
+/*
 //		if(child.group.getType() == GpxDisplayItemType.TRACK_POINTS ||
 //				child.group.getType() == GpxDisplayItemType.TRACK_ROUTE_POINTS) {
 			ContextMenuAdapter qa = new ContextMenuAdapter(v.getContext());
@@ -491,5 +504,6 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 //			child.expanded = !child.expanded;
 //			adapter.notifyDataSetInvalidated();
 //		}
+*/
 	}
 }

@@ -347,11 +347,11 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 		boolean sameId = Algorithms.objectEquals(followTrackerId, device.trackerId);
 		if(sameId && !schedule && l != null) {
 			ContextMenuLayer cl = map.getMapLayers().getContextMenuLayer();
-			final boolean sameObject; 
-			if(cl.getFirstSelectedObject() instanceof OsMoDevice && cl.isVisible()) {
-				sameObject = Algorithms.objectEquals(device.trackerId, ((OsMoDevice) cl.getFirstSelectedObject()).trackerId) ;
-			} else{
-				sameObject = false; 
+			final boolean sameObject;
+			if (map.getContextMenu().getObject() instanceof OsMoDevice && cl.isVisible()) {
+				sameObject = Algorithms.objectEquals(device.trackerId, ((OsMoDevice) map.getContextMenu().getObject()).trackerId);
+			} else {
+				sameObject = false;
 			}
 			LatLon mapLoc = new LatLon(map.getMapView().getLatitude(), map.getMapView().getLongitude());
 			final boolean centered = followMapLocation != null && MapUtils.getDistance(mapLoc, followMapLocation) < 1;
@@ -373,10 +373,10 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 					public void run() {
 						schedule = false;
 						if (sameObject) {
-							ContextMenuLayer cl = map.getMapLayers().getContextMenuLayer();
 							Location l = device.getLastLocation();
-							cl.setLocation(new LatLon(l.getLatitude(), l.getLongitude()), getObjectDescription(device));
-							cl.setSelectedObject(device);
+							map.getContextMenu().show(new LatLon(l.getLatitude(), l.getLongitude()), getObjectName(device), device);
+							//cl.setLocation(new LatLon(l.getLatitude(), l.getLongitude()), getObjectDescription(device));
+							//cl.setSelectedObject(device);
 						}
 						if (centered) {
 							map.getMapView().setLatLon(loc.getLatitude(),
@@ -408,7 +408,7 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 	}
 
 	@Override
-	public void clearSelectedObjects() {
+	public void clearSelectedObject() {
 		LatLon mapLoc = new LatLon(map.getMapView().getLatitude(), map.getMapView().getLongitude());
 		final boolean centered = Algorithms.objectEquals(followMapLocation, mapLoc);
 		if(!centered && followTrackerId != null) {

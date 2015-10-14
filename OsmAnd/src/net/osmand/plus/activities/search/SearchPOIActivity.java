@@ -550,36 +550,14 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 				app.getSettings().MAP_PREFERRED_LOCALE.get());
 		PointDescription name = new PointDescription(PointDescription.POINT_TYPE_POI, poiSimpleFormat);
 		int z = Math.max(16, settings.getLastKnownMapZoom());
-		final PopupMenu optionsMenu = new PopupMenu(this, view);
-		DirectionsDialogs.createDirectionsActionsPopUpMenu(optionsMenu, amenity.getLocation(), amenity, name, z, this,
-				true);
-		final String d = OsmAndFormatter.getAmenityDescriptionContent(getMyApplication(), amenity, false);
-		if (d.toString().trim().length() > 0 || amenity.getType().isWiki()) {
-			MenuItem item = optionsMenu
-					.getMenu()
-					.add(R.string.poi_context_menu_showdescription)
-					.setIcon(
-							getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_note_dark));
-			item.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-				@Override
-				public boolean onMenuItemClick(MenuItem item) {
-					// Build text(amenity)
-					POIMapLayer.showDescriptionDialog(SearchPOIActivity.this, app, amenity);	
-					return true;
-				}
-			});
-		}
-		if (((OsmandApplication) getApplication()).accessibilityEnabled()) {
-			MenuItem item = optionsMenu.getMenu().add(R.string.shared_string_show_details);
-			item.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-				@Override
-				public boolean onMenuItemClick(MenuItem item) {
-					showPOIDetails(amenity, app.getSettings().MAP_PREFERRED_LOCALE.get());
-					return true;
-				}
-			});
-		}
-		optionsMenu.show();
+
+		LatLon location = amenity.getLocation();
+		settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
+				z,
+				name,
+				true,
+				amenity); //$NON-NLS-1$
+		MapActivity.launchMapActivityMoveToTop(this);
 	}
 
 	
