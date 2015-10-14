@@ -1840,4 +1840,7 @@
 	<string name="poi_artwork_type_painting">藝術品類型：繪畫</string>
 	<string name="poi_artwork_type_stone">藝術品類型：石頭</string>
 	<string name="poi_artwork_type_bust">藝術品類型：半身像</string>
+	<string name="poi_artwork_type_installation">藝術品類型：裝置</string>
+	<string name="poi_artwork_type_mosaic">藝術品類型： 鑲嵌</string>
+	<string name="poi_artwork_type_relief">藝術品類型：浮雕</string>
 	</resources>
