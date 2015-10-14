@@ -1931,7 +1931,7 @@
 
 	<string name="poi_route_railway_ref">Ruta ferroviaria</string>
 
-<string name="poi_bridge_structure_simple_wooden">Estructura del puente: de madera simple</string>
+<string name="poi_bridge_structure_simple_wooden">Estructura del puente: madera simple</string>
 	<string name="poi_historic_yes">Objeto histórico</string>
 	<string name="poi_surveillance_yes">Vigilado</string>
 	<string name="poi_shop_yes">Con negocio</string>
