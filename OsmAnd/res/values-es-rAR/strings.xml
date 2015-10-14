@@ -2103,4 +2103,7 @@
 <string name="favorite_category_dublicate_message">El nombre de categoría, ya existe. Defina otro nombre.</string>
     <string name="favorite_category_name">Nombre de categoría</string>
     <string name="favorite_category_add_new_title">Añadir nueva categoría</string>
-    </resources>
+    <string name="confirm_download_roadmaps">¿Seguro que desea descargar el mapa vial, aunque tenga el mapa completo?</string>
+    <string name="value_downloaded_from_max">%1$.1f de %2$.1f MB</string>
+    <string name="file_size_in_mb">%.1f MB</string>
+</resources>

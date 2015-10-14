@@ -73,8 +73,8 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 		setListView(listView);
 
 		if (regionId.length() > 0) {
-			ItemsListBuilder builder = getDownloadActivity().getItemsBuilder(regionId);
-			if (builder != null && builder.build()) {
+			ItemsListBuilder builder = getDownloadActivity().getItemsBuilder(regionId, false);
+			if (builder != null) {
 				fillRegionItemsAdapter(builder);
 				listAdapter.notifyDataSetChanged();
 				expandAllGroups();

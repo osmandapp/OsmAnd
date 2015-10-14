@@ -71,8 +71,7 @@ public class VoiceDialogFragment extends DialogFragment {
 						VoiceItemsFragment.createInstance(voicePromptsType)).commit();
 			}
 
-			ItemsListBuilder builder = getDownloadActivity().getItemsBuilder();
-			toolbar.setTitle(builder.getVoicePromtName(voicePromptsType));
+			toolbar.setTitle(ItemsListBuilder.getVoicePromtName(getActivity(), voicePromptsType));
 		}
 		((DownloadActivity)getActivity()).registerFreeVersionBanner(view);
 

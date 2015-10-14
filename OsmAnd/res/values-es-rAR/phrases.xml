@@ -1931,7 +1931,7 @@
 
 	<string name="poi_route_railway_ref">Ruta ferroviaria</string>
 
-<string name="poi_bridge_structure_simple_wooden">Estructura del puente: de madera simple</string>
+<string name="poi_bridge_structure_simple_wooden">Estructura del puente: madera simple</string>
 	<string name="poi_historic_yes">Objeto histórico</string>
 	<string name="poi_surveillance_yes">Vigilado</string>
 	<string name="poi_shop_yes">Con negocio</string>
@@ -2034,4 +2034,34 @@
 	<string name="poi_fuel_coal">Combustible: carbón</string>
 
 <string name="poi_wetland_string_bog">Cadena de humedales</string>
+	<string name="poi_street_lamp">Farola</string>
+
+	<string name="poi_escape_lane">Camino de emergencia</string>
+
+	<string name="poi_crop_rice">Cultivo de arroz</string>
+	<string name="poi_crop_grass">Cultivo de césped</string>
+	<string name="poi_crop_corn">Cultivo de maíz</string>
+	<string name="poi_crop_cereal">Cultivo de cereales</string>
+	<string name="poi_crop_sugarcane">Cultivo de cañas de azúcar</string>
+	<string name="poi_crop_wheat">Cultivo de trigo</string>
+	<string name="poi_crop_soy">Cultivo de soja</string>
+	<string name="poi_crop_barley">Cultivo de cebada</string>
+	<string name="poi_crop_vegetables">Cultivo de verduras</string>
+	<string name="poi_crop_hop">Cultivo de lúpulo</string>
+	<string name="poi_crop_rape">Cultivo de colza</string>
+	<string name="poi_crop_beet">Cultivo de remolacha</string>
+	<string name="poi_crop_lavender">Cultivo de lavanda</string>
+	<string name="poi_crop_tea">Cultivo de té</string>
+	<string name="poi_crop_coffee">Cultivo de café</string>
+	<string name="poi_crop_sunflower">Cultivo de girasoles</string>
+	<string name="poi_crop_raspberry">Cultivo de frambuesas</string>
+	<string name="poi_crop_tobacco">Cultivo de tabaco</string>
+	<string name="poi_crop_strawberry">Cultivo de fresas</string>
+	<string name="poi_crop_vegetables_flowers">Cultivo de verduras y flores</string>
+	<string name="poi_crop_cassava">Cultivo de mandioca</string>
+	<string name="poi_crop_cranberry">Cultivo de arándanos</string>
+	<string name="poi_crop_asparagus">Cultivo de espárragos</string>
+	<string name="poi_crop_flowers">Cultivo de flores</string>
+
+<string name="poi_crop_poultry">Granja avícola</string>
 	</resources>

@@ -141,7 +141,7 @@ public class WorldRegion {
 		if (name != null) {
 			this.name = name;
 		} else {
-			this.name = osmandRegions.getLocaleNameByFullName(regionId);
+			this.name = osmandRegions.getLocaleNameByFullName(regionId, false);
 			if (this.name == null) {
 				this.name = capitalize(regionId.replace('_', ' '));
 			}
@@ -157,7 +157,7 @@ public class WorldRegion {
 		} else {
 			this.downloadsIdPrefix = regionId.toLowerCase() + ".";
 		}
-		this.name = osmandRegions.getLocaleNameByFullName(regionId);
+		this.name = osmandRegions.getLocaleNameByFullName(regionId, false);
 		if (this.name == null) {
 			this.name = capitalize(regionId.replace('_', ' '));
 		}

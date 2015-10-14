@@ -48,7 +48,7 @@ public class FileNameTranslationHelper {
 		}
 
 		if (regions != null) {
-			return regions.getLocaleName(basename);
+			return regions.getLocaleName(basename, true);
 		}
 
 		return null;
@@ -56,7 +56,7 @@ public class FileNameTranslationHelper {
 
 	public static String getHillShadeName(Context ctx, OsmandRegions regions, String basename) {
 		String hillsh = ctx.getString(R.string.download_hillshade_item) + " ";
-		String locName = regions.getLocaleName(basename.trim());
+		String locName = regions.getLocaleName(basename.trim(), true);
 		return hillsh + locName;
 	}
 

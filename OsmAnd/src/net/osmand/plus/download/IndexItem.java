@@ -137,7 +137,11 @@ public class IndexItem implements Comparable<IndexItem>, HasName, Parcelable {
 	}
 
 	public String getVisibleName(Context ctx, OsmandRegions osmandRegions) {
-		return type.getVisibleName(this, ctx, osmandRegions);
+		return type.getVisibleName(this, ctx, osmandRegions, true);
+	}
+
+	public String getVisibleName(Context ctx, OsmandRegions osmandRegions, boolean includingParent) {
+		return type.getVisibleName(this, ctx, osmandRegions, includingParent);
 	}
 
 	public String getVisibleDescription(OsmandApplication clctx) {

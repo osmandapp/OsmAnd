@@ -1,8 +1,6 @@
 package net.osmand.plus.download.items;
 
 import android.content.Context;
-import android.os.Parcel;
-import android.os.Parcelable;
 
 import net.osmand.PlatformUtil;
 import net.osmand.map.OsmandRegions;
@@ -15,7 +13,6 @@ import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.util.Algorithms;
 
-import java.io.Serializable;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
@@ -24,7 +21,7 @@ import java.util.Map;
 
 public class ItemsListBuilder {
 
-	public static final String WORLD_BASEMAP_KEY = "world_basemap.obf.zip";
+	//public static final String WORLD_BASEMAP_KEY = "world_basemap.obf.zip";
 	public static final String WORLD_SEAMARKS_KEY = "world_seamarks_basemap.obf.zip";
 
 	private Map<WorldRegion, Map<String, IndexItem>> resourcesByRegions;
@@ -96,7 +93,7 @@ public class ItemsListBuilder {
 	public enum VoicePromptsType {
 		NONE,
 		RECORDED,
-		TTS;
+		TTS
 	}
 
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(ItemsListBuilder.class);
@@ -130,12 +127,12 @@ public class ItemsListBuilder {
 		return list;
 	}
 
-	public String getVoicePromtName(VoicePromptsType type) {
+	public static String getVoicePromtName(Context ctx, VoicePromptsType type) {
 		switch (type) {
 			case RECORDED:
-				return app.getResources().getString(R.string.index_name_voice);
+				return ctx.getResources().getString(R.string.index_name_voice);
 			case TTS:
-				return app.getResources().getString(R.string.index_name_tts_voice);
+				return ctx.getResources().getString(R.string.index_name_tts_voice);
 			default:
 				return "";
 		}
@@ -167,8 +164,8 @@ public class ItemsListBuilder {
 							List<IndexItem> voiceRecItems, List<IndexItem> voiceTTSItems) {
 		this.app = app;
 		this.resourcesByRegions = resourcesByRegions;
-		this.voiceRecItems = voiceRecItems;
-		this.voiceTTSItems = voiceTTSItems;
+		this.voiceRecItems = new LinkedList<>(voiceRecItems);
+		this.voiceTTSItems = new LinkedList<>(voiceTTSItems);
 
 		regionMapItems = new LinkedList<>();
 		allResourceItems = new LinkedList<>();
@@ -177,8 +174,12 @@ public class ItemsListBuilder {
 		region = app.getWorldRegion().getRegionById(regionId);
 	}
 
-	public boolean build() {
-		return obtainDataAndItems();
+	public ItemsListBuilder build() {
+		if (obtainDataAndItems()) {
+			return this;
+		} else {
+			return null;
+		}
 	}
 
 	private boolean obtainDataAndItems() {
@@ -223,14 +224,14 @@ public class ItemsListBuilder {
 		}
 
 		List<ResourceItem> regionMapArray = new LinkedList<>();
-		List<Object> allResourcesArray = new LinkedList<Object>();
+		List<Object> allResourcesArray = new LinkedList<>();
 
 		Context context = app.getApplicationContext();
 		OsmandRegions osmandRegions = app.getRegions();
 
 		for (IndexItem indexItem : regionResources.values()) {
 
-			String name = indexItem.getVisibleName(context, osmandRegions);
+			String name = indexItem.getVisibleName(context, osmandRegions, false);
 			if (Algorithms.isEmpty(name)) {
 				continue;
 			}
