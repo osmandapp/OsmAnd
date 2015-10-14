@@ -259,7 +259,7 @@ public class DownloadActivityType implements Parcelable {
 		return "";
 	}
 	
-	public String getVisibleName(IndexItem indexItem, Context ctx, OsmandRegions osmandRegions) {
+	public String getVisibleName(IndexItem indexItem, Context ctx, OsmandRegions osmandRegions, boolean includingParent) {
 		if (this == VOICE_FILE) {
 			String fileName = indexItem.fileName;
 			if (fileName.endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)) {
@@ -284,11 +284,11 @@ public class DownloadActivityType implements Parcelable {
 		if (bn.contains("addresses-nationwide")) {
 			final int ind = bn.indexOf("addresses-nationwide");
 			String downloadName = bn.substring(0, ind - 1) + bn.substring(ind + "addresses-nationwide".length());
-			return osmandRegions.getLocaleName(downloadName) + 
+			return osmandRegions.getLocaleName(downloadName, includingParent) +
 					" "+ ctx.getString(R.string.index_item_nation_addresses);
 		}
 
-		return osmandRegions.getLocaleName(bn);
+		return osmandRegions.getLocaleName(bn, includingParent);
 	}
 	
 	public String getTargetFileName(IndexItem item) {

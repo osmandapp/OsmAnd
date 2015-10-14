@@ -322,13 +322,13 @@ public class SearchItemsFragment extends Fragment {
 							if (obj1 instanceof WorldRegion) {
 								str1 = ((WorldRegion) obj1).getName();
 							} else {
-								str1 = ((IndexItem) obj1).getVisibleName(getMyApplication(), osmandRegions);
+								str1 = ((IndexItem) obj1).getVisibleName(getMyApplication(), osmandRegions, false);
 							}
 
 							if (obj2 instanceof WorldRegion) {
 								str2 = ((WorldRegion) obj2).getName();
 							} else {
-								str2 = ((IndexItem) obj2).getVisibleName(getMyApplication(), osmandRegions);
+								str2 = ((IndexItem) obj2).getVisibleName(getMyApplication(), osmandRegions, false);
 							}
 
 							return collator.compare(str1, str2);
