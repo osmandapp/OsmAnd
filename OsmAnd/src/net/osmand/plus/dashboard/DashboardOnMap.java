@@ -87,7 +87,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 			new DashFragmentData(DashErrorFragment.TAG, DashErrorFragment.class,
 					-1, errorShouldShow, true, 3),
 			new DashFragmentData(DashNavigationFragment.TAG, DashNavigationFragment.class,
-					R.string.tip_navigation, 4),
+					R.string.shared_string_navigation, 4),
 			new DashFragmentData(DashWaypointsFragment.TAG, DashWaypointsFragment.class,
 					R.string.waypoints, 6),
 			new DashFragmentData(DashSearchFragment.TAG, DashSearchFragment.class,

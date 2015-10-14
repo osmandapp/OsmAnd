@@ -10,6 +10,7 @@ import java.util.List;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.access.AccessibleToast;
 import net.osmand.data.QuadRect;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
@@ -24,13 +25,14 @@ import bsh.Interpreter;
 import android.database.sqlite.SQLiteDiskIOException;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.widget.Toast;
 
 
 public class SQLiteTileSource implements ITileSource {
 
 	
 	public static final String EXT = IndexConstants.SQLITE_EXT;
-	private static final Log log = PlatformUtil.getLog(SQLiteTileSource.class);
+	private static final Log LOG = PlatformUtil.getLog(SQLiteTileSource.class);
 	
 	private ITileSource base;
 	private String urlTemplate = null;
@@ -44,6 +46,7 @@ public class SQLiteTileSource implements ITileSource {
 	private int expirationTimeMillis = -1; // never
 	private boolean isEllipsoid = false;
 	private String rule = null;
+	private String referer = null;
 	
 	static final int tileSize = 256;
 	private OsmandApplication ctx;
@@ -122,7 +125,9 @@ public class SQLiteTileSource implements ITileSource {
 				}
 				return (String) bshInterpreter.eval("getTileUrl("+zoom+","+x+","+y+");");
 			} catch (bsh.EvalError e) {
-				log.error(e.getMessage(), e);
+				LOG.debug("getUrlToLoad Error" + e.getMessage());
+				AccessibleToast.makeText(ctx, e.getMessage(), Toast.LENGTH_LONG).show();
+				LOG.error(e.getMessage(), e);
 				return null;
 			}
 		}
@@ -164,6 +169,7 @@ public class SQLiteTileSource implements ITileSource {
 	
 	protected SQLiteConnection getDatabase(){
 		if((db == null || db.isClosed()) && file.exists() ){
+			LOG.debug("Open " + file.getAbsolutePath());
 			try {
 				onlyReadonlyAvailable = false;
 				db = ctx.getSQLiteAPI().openByAbsolutePath(file.getAbsolutePath(), false);
@@ -187,6 +193,10 @@ public class SQLiteTileSource implements ITileSource {
 					int ruleId = list.indexOf("rule");
 					if(ruleId != -1) {
 						rule = cursor.getString(ruleId);
+					}
+					int refererId = list.indexOf("referer");
+					if(refererId != -1) {
+						referer = cursor.getString(refererId);
 					}
 					int tnumbering = list.indexOf("tilenumbering");
 					if(tnumbering != -1) {
@@ -279,8 +289,8 @@ public class SQLiteTileSource implements ITileSource {
 				return false;
 			}
 		} finally {
-			if (log.isDebugEnabled()) {
-				log.debug("Checking tile existance x = " + x + " y = " + y + " z = " + zoom + " for " + (System.currentTimeMillis() - time)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+			if (LOG.isDebugEnabled()) {
+				LOG.debug("Checking tile existance x = " + x + " y = " + y + " z = " + zoom + " for " + (System.currentTimeMillis() - time)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 			}
 		}
 	}
@@ -318,8 +328,8 @@ public class SQLiteTileSource implements ITileSource {
 			}
 			return null;
 		} finally {
-			if(log.isDebugEnabled()) {
-				log.debug("Load tile " + x + "/" + y + "/" + zoom + " for " + (System.currentTimeMillis() - ts)
+			if(LOG.isDebugEnabled()) {
+				LOG.debug("Load tile " + x + "/" + y + "/" + zoom + " for " + (System.currentTimeMillis() - ts)
 					+ " ms ");
 			}
 		}
@@ -442,11 +452,24 @@ public class SQLiteTileSource implements ITileSource {
 	}
 	
 	public void closeDB(){
+		LOG.debug("closeDB");
 		bshInterpreter = null;
+		if(timeSupported)
+			clearOld();
 		if(db != null){
 			db.close();
 			db = null;
 		}
+	}
+
+	public void clearOld() {
+		SQLiteConnection db = getDatabase();
+		if(db == null || db.isReadOnly()){
+			return;
+		}
+		LOG.debug("DELETE FROM tiles WHERE time<" + (System.currentTimeMillis() - getExpirationTimeMillis()));
+		db.execSQL("DELETE FROM tiles WHERE time<"+(System.currentTimeMillis()-getExpirationTimeMillis()));    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
+		db.execSQL("VACUUM");    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
 	}
 
 	@Override
@@ -474,6 +497,9 @@ public class SQLiteTileSource implements ITileSource {
 		return expirationTimeMillis;
 	}
 	
+	public String getReferer() {
+		return referer;
+	}
 
 }
 

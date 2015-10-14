@@ -414,21 +414,6 @@
   <string name="system_locale">Stelsel</string>
   <string name="preferred_locale_descr">Kies die taal vir die program</string>
   <string name="preferred_locale">Vertoon taal</string>
-  <string name="tip_map_switch">Kaartbron</string>
-  
-  <string name="tip_app_mode">Gebruikersprofiel</string>
-  
-  <string name="tip_navigation">Navigasie</string>
-  <string name="tip_navigation_t">\tVoordat \'n navigasie begin moet jy \'n bestemming kies. Druk daarna \'kieslys\' -&gt; \'aanwysings\' op die kaart en kies die navigasie wyse.</string>
-  <string name="tip_search">op soek</string>
-  <string name="tip_search_t">"\tJy kan soek vir plekke op die kaart of van die soek skerm, deur adres, deur Ligging, as interessante plek, of as voorafgedefinieerde gunsteling.\n\tDeur \'Soek\' in die hoofkieslys te druk word die soek aktiwiteite begin. Vir al die resultate bied `n kieslys 2 keuses: \'Stel as bestemming \' of \' Wys op die kaart\'. "
-	</string>
-  <string name="tip_map_context_menu">Kaartinhoud kieslys</string>
-  <string name="tip_map_context_menu_t">\tDie kaart inhoud kieslys is beskikbaar deur te druk en te hou op die kaart of deur die trekbal-knoppie te druk.\n\tDit lewer \'n boks met punt koördinate. Om die kaart inhoud kieslys venster oop te maak, tik op dit. (Of druk en hou die boks om dit weer te versteek.)\n\tDie kaart inhoud kieslys bevat alle aksies met verwysing na \'n punt (ligging).
-	</string>
-  
-  <string name="tip_initial_t">\tOsmAnd is \'n navigasietoepassing met baie funksies.\n\tAs \'n basiese inleiding, is sommige gebruikswenke en wyses beskikbaar in skakels vanaf die hoof kieslys skerm.
-	</string>
   <string name="shared_string_next">Volgende</string>
   <string name="shared_string_previous">Vorige</string>
   <string name="unit_of_length_descr">Verander eenhede van lengte en spoed</string>

@@ -1,6 +1,7 @@
 package net.osmand.plus.dashboard.tools;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.StringRes;
 
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.activities.MapActivity;
@@ -17,7 +18,7 @@ public final class DashFragmentData implements Comparable<DashFragmentData> {
 	public final String rowNumberTag;
 
 	public DashFragmentData(String tag, Class<? extends DashBaseFragment> fragmentClass,
-							int titleStringId, ShouldShowFunction shouldShowFunction,
+							@StringRes int titleStringId, ShouldShowFunction shouldShowFunction,
 							boolean customDeletionLogic, int position, String rowNumberTag) {
 		this.tag = tag;
 		this.fragmentClass = fragmentClass;

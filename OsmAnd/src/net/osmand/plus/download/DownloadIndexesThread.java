@@ -286,7 +286,7 @@ public class DownloadIndexesThread {
 				if (o instanceof DownloadEntry) {
 					if (uiActivity != null) {
 						uiActivity.downloadListUpdated();
-						uiActivity.updateDownloadButton();
+						uiActivity.updateFragments();
 						DownloadEntry item = (DownloadEntry) o;
 						String name = item.item.getBasename();
 						long count = dbHelper.getCount(name, DatabaseHelper.DOWNLOAD_ENTRY) + 1;
@@ -301,7 +301,7 @@ public class DownloadIndexesThread {
 					entriesToDownload.remove(o);
 					if (uiActivity != null) {
 						uiActivity.downloadListUpdated();
-						uiActivity.updateDownloadButton();
+						uiActivity.updateFragments();
 						IndexItem item = (IndexItem) o;
 
 						long count = dbHelper.getCount(item.getBasename(), DatabaseHelper.DOWNLOAD_ENTRY) + 1;
@@ -364,7 +364,6 @@ public class DownloadIndexesThread {
 				String breakDownloadMessage = null;
 				downloadCycle:
 				while (!entriesToDownload.isEmpty()) {
-
 					Iterator<Entry<IndexItem, List<DownloadEntry>>> it = entriesToDownload.entrySet().iterator();
 					IndexItem file = null;
 					List<DownloadEntry> list = null;
@@ -562,7 +561,7 @@ public class DownloadIndexesThread {
 							AccessibleToast.makeText(uiActivity, R.string.basemap_was_selected_to_download,
 									Toast.LENGTH_LONG).show();
 							if (uiActivity instanceof DownloadActivity) {
-								uiActivity.updateDownloadButton();
+								uiActivity.updateFragments();
 							}
 						}
 					}

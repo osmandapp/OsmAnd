@@ -756,7 +756,7 @@
 	<string name="poi_fuel_e10">E10</string>
 	<string name="poi_fuel_e20">E20</string>
 	<string name="poi_fuel_e85">E85</string>
-	<string name="poi_fuel_biogas">E85</string>
+	<string name="poi_fuel_biogas">Biogas</string>
 	<string name="poi_fuel_lh2">Flydende brint</string>
 	<string name="poi_fuel_electricity">Elektricitet</string>
 	<string name="poi_industrial">Industriområde</string>
@@ -863,7 +863,7 @@
 	<string name="poi_sally_port">Fæstningssport</string>
 	<string name="poi_swing_gate">Svingport</string>
 	<string name="poi_turnstile">Adgangsmølle</string>
-	<string name="poi_barrier_entrance">Indgang</string>
+	<string name="poi_barrier_entrance">Passage i en mur eller et hegn</string>
 	<string name="poi_entrance_main">Hovedindgang</string>
 	<string name="poi_entrance">Indgang</string>
 	<string name="poi_entrance_exit">Udgang</string>
@@ -2044,4 +2044,46 @@
 	<string name="poi_parish">Sognekontor</string>
 	<string name="poi_publisher">Forlagskontor</string>
 
-</resources>
+<string name="poi_debris">Debris</string>
+	<string name="poi_jersey_barrier">Jersey barriere</string>
+	<string name="poi_fuel_91ul">91UL brændstof</string>
+	<string name="poi_fuel_100ll">100LL brændstof</string>
+	<string name="poi_autogas">Autogas</string>
+	<string name="poi_jeta1">Jet A-1 brændstof</string>
+	<string name="poi_fuel_adblue">AdBlue brændstof</string>
+
+	<string name="poi_fuel_wood">Brændstof: træ</string>
+	<string name="poi_fuel_charcoal">Brwændstof: trækul</string>
+	<string name="poi_fuel_coal">Brændstof: kul</string>
+
+<string name="poi_street_lamp">Gadelampe</string>
+
+<string name="poi_crop_rice">Afgrøde: ris</string>
+	<string name="poi_crop_grass">Afgrøde: græs</string>
+	<string name="poi_crop_corn">Afgrøde: majs</string>
+	<string name="poi_crop_cereal">Afgrøde: korn</string>
+	<string name="poi_crop_sugarcane">Afgrøde: sukkerrør</string>
+	<string name="poi_crop_wheat">Afgrøde: hvede</string>
+	<string name="poi_crop_soy">Afgrøde: soja</string>
+	<string name="poi_crop_barley">Afgrøde: Byg</string>
+	<string name="poi_crop_vegetables">Afgrøde: grøntsager</string>
+	<string name="poi_crop_hop">Afgrøde: humle</string>
+	<string name="poi_crop_rape">Afgrøde: raps</string>
+	<string name="poi_crop_beet">Afgrøde: sukkerroer</string>
+	<string name="poi_crop_lavender">Afgrøde: lavendel</string>
+	<string name="poi_crop_tea">Afgrøde: te</string>
+	<string name="poi_crop_coffee">Afgrøde: kaffe</string>
+	<string name="poi_crop_poultry">Afgrøde: fjerkræ</string>
+	<string name="poi_crop_sunflower">Afgrøde: solsikke</string>
+	<string name="poi_crop_raspberry">Afgrøde: hindbær</string>
+	<string name="poi_crop_tobacco">Afgrøde: tobak</string>
+	<string name="poi_crop_strawberry">Afgrøde: jordbær</string>
+	<string name="poi_crop_vegetables_flowers">Afgrøde: grøntsager, blomster</string>
+	<string name="poi_crop_cassava">Afgrøde: cassava</string>
+	<string name="poi_crop_cranberry">Afgrøde: tranebær</string>
+	<string name="poi_crop_asparagus">Afgrøde: asparges</string>
+	<string name="poi_crop_flowers">Afgrøde: blomster</string>
+
+<string name="poi_escape_lane">Nødstopsspor</string>
+
+	</resources>

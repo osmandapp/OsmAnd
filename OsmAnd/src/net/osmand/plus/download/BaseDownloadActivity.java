@@ -98,7 +98,7 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 
 	}
 
-	public void updateDownloadButton() {
+	public void updateFragments() {
 
 	}
 
@@ -140,11 +140,10 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 	}
 
 	public boolean startDownload(IndexItem item) {
+		addToDownload(item);
 		if (downloadListIndexThread.getCurrentRunningTask() != null && getEntriesToDownload().get(item) == null) {
-			downloadQueue.add(item);
 			return false;
 		}
-		addToDownload(item);
 		downloadFilesCheckFreeVersion();
 		return true;
 	}

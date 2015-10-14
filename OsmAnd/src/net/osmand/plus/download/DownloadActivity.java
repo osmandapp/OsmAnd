@@ -2,48 +2,39 @@ package net.osmand.plus.download;
 
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
-import android.app.Dialog;
 import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.ListFragment;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.BaseExpandableListAdapter;
-import android.widget.Button;
 import android.widget.ExpandableListAdapter;
-import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import net.osmand.IndexConstants;
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.LocalIndexInfo;
-import net.osmand.plus.activities.OsmAndListFragment;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.activities.OsmandExpandableListFragment;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.base.BasicProgressAsyncTask;
-import net.osmand.plus.download.items.RegionDialogFragment;
+import net.osmand.plus.download.items.ActiveDownloadsDialogFragment;
+import net.osmand.plus.download.items.DialogDismissListener;
 import net.osmand.plus.download.items.SearchDialogFragment;
 import net.osmand.plus.download.items.WorldItemsFragment;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
@@ -59,8 +50,8 @@ import java.util.Map;
 import java.util.Set;
 
 
-public class DownloadActivity extends BaseDownloadActivity implements RegionDialogFragment.DialogDismissListener {
-	private List<LocalIndexInfo> localIndexInfos = new ArrayList<LocalIndexInfo>();
+public class DownloadActivity extends BaseDownloadActivity implements DialogDismissListener {
+	private List<LocalIndexInfo> localIndexInfos = new ArrayList<>();
 
 	private String initialFilter = "";
 	private boolean singleTab;
@@ -114,12 +105,12 @@ public class DownloadActivity extends BaseDownloadActivity implements RegionDial
 		PagerSlidingTabStrip mSlidingTabLayout = (PagerSlidingTabStrip) findViewById(R.id.sliding_tabs);
 
 
-		mTabs.add(new TabActivity.TabItem(R.string.download_tab_local,
-				getString(R.string.download_tab_local), LocalIndexesFragment.class));
 		mTabs.add(new TabActivity.TabItem(R.string.download_tab_downloads,
 				getString(R.string.download_tab_downloads), WorldItemsFragment.class));
 //		mTabs.add(new TabActivity.TabItem(R.string.download_tab_downloads,
 //				getString(R.string.download_tab_downloads), DownloadIndexFragment.class));
+		mTabs.add(new TabActivity.TabItem(R.string.download_tab_local,
+				getString(R.string.download_tab_local), LocalIndexesFragment.class));
 		mTabs.add(new TabActivity.TabItem(R.string.download_tab_updates,
 				getString(R.string.download_tab_updates), UpdatesIndexFragment.class));
 
@@ -133,44 +124,6 @@ public class DownloadActivity extends BaseDownloadActivity implements RegionDial
 //		}
 
 		settings = ((OsmandApplication) getApplication()).getSettings();
-
-		findViewById(R.id.downloadButton).setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				downloadFilesCheckFreeVersion();
-			}
-
-		});
-		findViewById(R.id.wikiButton).setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				downloadWikiFiles();
-			}
-		});
-
-		findViewById(R.id.CancelAll).setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				getEntriesToDownload().clear();
-				updateDownloadButton();
-				for (WeakReference<Fragment> ref : fragSet) {
-					Fragment f = ref.get();
-					if (f != null) {
-						if (f instanceof OsmAndListFragment) {
-							if (f.isAdded() && ((OsmAndListFragment) f).getListAdapter() instanceof ArrayAdapter) {
-								((ArrayAdapter) ((OsmAndListFragment) f).getListAdapter()).notifyDataSetChanged();
-							}
-						} else if (f.isAdded() && f instanceof OsmandExpandableListFragment &&
-								((OsmandExpandableListFragment) f).getAdapter() instanceof BaseExpandableListAdapter) {
-							((BaseExpandableListAdapter) ((OsmandExpandableListFragment) f).getAdapter()).notifyDataSetChanged();
-						}
-					}
-				}
-			}
-		});
 
 		downloadTypes = createDownloadTypes();
 		final Intent intent = getIntent();
@@ -190,6 +143,7 @@ public class DownloadActivity extends BaseDownloadActivity implements RegionDial
 			}
 		}
 		changeType(downloadTypes.get(0));
+		registerFreeVersionBanner(findViewById(R.id.mainLayout));
 	}
 
 
@@ -205,7 +159,6 @@ public class DownloadActivity extends BaseDownloadActivity implements RegionDial
 	protected void onResume() {
 		super.onResume();
 		getMyApplication().getAppCustomization().resumeActivity(DownloadActivity.class, this);
-		registerFreeVersionBanner(findViewById(R.id.mainLayout));
 	}
 
 
@@ -255,7 +208,7 @@ public class DownloadActivity extends BaseDownloadActivity implements RegionDial
 			progressAdapter.setProgress(basicProgressAsyncTask, tag);
 		}
 		if (!updateOnlyProgress) {
-			updateDownloadButton();
+			updateFragments();
 		}
 	}
 
@@ -359,7 +312,7 @@ public class DownloadActivity extends BaseDownloadActivity implements RegionDial
 					for (IndexItem i : wi) {
 						addToDownload(i);
 					}
-					updateDownloadButton();
+					updateFragments();
 					checkOldWikiFiles();
 				}
 			});
@@ -402,41 +355,7 @@ public class DownloadActivity extends BaseDownloadActivity implements RegionDial
 
 
 	@Override
-	public void updateDownloadButton() {
-//		View view = getView();
-//		if (view == null || getExpandableListView() == null){
-//			return;
-//		}
-//		int x = getExpandableListView().getScrollX();
-//		int y = getExpandableListView().getScrollY();
-		if (getEntriesToDownload().isEmpty()) {
-			findViewById(R.id.DownloadLayout).setVisibility(View.GONE);
-		} else {
-			BasicProgressAsyncTask<?, ?, ?> task = DownloadActivity.downloadListIndexThread.getCurrentRunningTask();
-			boolean running = task instanceof DownloadIndexesThread.DownloadIndexesAsyncTask;
-			((Button) findViewById(R.id.downloadButton)).setEnabled(!running);
-			String text;
-			int downloads = DownloadActivity.downloadListIndexThread.getDownloads();
-			if (!running) {
-				text = getString(R.string.shared_string_download) + "  (" + downloads + ")"; //$NON-NLS-1$
-			} else {
-				text = getString(R.string.shared_string_downloading) + "  (" + downloads + ")"; //$NON-NLS-1$
-			}
-			findViewById(R.id.DownloadLayout).setVisibility(View.VISIBLE);
-			if (Version.isFreeVersion(getMyApplication())) {
-				int left = DownloadActivity.MAXIMUM_AVAILABLE_FREE_DOWNLOADS - settings.NUMBER_OF_FREE_DOWNLOADS.get() - downloads;
-				boolean excessLimit = left < 0;
-				if (left < 0)
-					left = 0;
-				if (getDownloadType() == DownloadActivityType.NORMAL_FILE || getDownloadType() == DownloadActivityType.ROADS_FILE) {
-					text += " (" + (excessLimit ? "! " : "") + getString(R.string.files_limit, left).toLowerCase() + ")";
-				}
-			}
-			((Button) findViewById(R.id.downloadButton)).setText(text);
-			List<IndexItem> wikipediaItems = getWikipediaItems();
-			findViewById(R.id.wikiButton).setVisibility(wikipediaItems.size() == 0 ? View.GONE : View.VISIBLE);
-		}
-
+	public void updateFragments() {
 		for (WeakReference<Fragment> ref : fragSet) {
 			Fragment f = ref.get();
 			if (f != null)
@@ -455,9 +374,6 @@ public class DownloadActivity extends BaseDownloadActivity implements RegionDial
 					}
 				}
 		}
-//		if (scroll) {
-//			getExpandableListView().scrollTo(x, y);
-//		}
 	}
 
 
@@ -737,7 +653,6 @@ public class DownloadActivity extends BaseDownloadActivity implements RegionDial
 				laterButton.setVisibility(View.GONE);
 			}
 			downloadsLeftTextView.setText(ctx.getString(R.string.downloads_left_template, downloadsLeft));
-			// TODO review logic
 			freeVersionBanner.setOnClickListener(new ToggleCollapseFreeVersionBanner(freeVersionDescriptionTextView,
 					buttonsLinearLayout, freeVersionBannerTitle));
 		}
@@ -758,117 +673,6 @@ public class DownloadActivity extends BaseDownloadActivity implements RegionDial
 				buttonsLinearLayout.setVisibility(View.VISIBLE);
 				freeVersionBannerTitle.setVisibility(View.VISIBLE);
 			}
-		}
-	}
-
-	public static class ActiveDownloadsDialogFragment extends DialogFragment {
-		@NonNull
-		@Override
-		public Dialog onCreateDialog(Bundle savedInstanceState) {
-			AlertDialog.Builder builder = new Builder(getActivity());
-			builder.setTitle(R.string.downloads).setNegativeButton(R.string.shared_string_cancel, null);
-			Collection<List<DownloadEntry>> vs =
-					DownloadActivity.downloadListIndexThread.getEntriesToDownload().values();
-			ArrayList<DownloadEntry> downloadEntries = new ArrayList<>();
-			for (List<DownloadEntry> list : vs) {
-				downloadEntries.addAll(list);
-			}
-			final DownloadEntryAdapter adapter = new DownloadEntryAdapter(getActivity(), downloadEntries);
-			builder.setAdapter(adapter, null);
-			((DownloadActivity) getActivity()).registerUpdateListener(adapter);
-			return builder.create();
-		}
-
-		private static class DownloadEntryAdapter extends ArrayAdapter<DownloadEntry> {
-			private final Drawable deleteDrawable;
-			private int itemInProgressPosition = -1;
-			private int progress = -1;
-			private final Set<Integer> downloadedItems = new HashSet<>();
-			private boolean isFinished;
-
-			public DownloadEntryAdapter(Context context, List<DownloadEntry> objects) {
-				super(context, R.layout.two_line_with_images_list_item, objects);
-				deleteDrawable = ((OsmandApplication) context.getApplicationContext()).getIconsCache()
-						.getPaintedContentIcon(R.drawable.ic_action_remove_dark,
-								context.getResources().getColor(R.color.dash_search_icon_dark));
-			}
-
-			@Override
-			public View getView(int position, View convertView, ViewGroup parent) {
-				if (convertView == null) {
-					convertView = LayoutInflater.from(parent.getContext())
-							.inflate(R.layout.two_line_with_images_list_item, parent, false);
-					DownloadEntryViewHolder viewHolder =
-							new DownloadEntryViewHolder(convertView, deleteDrawable);
-					convertView.setTag(viewHolder);
-				}
-				DownloadEntryViewHolder viewHolder = (DownloadEntryViewHolder) convertView.getTag();
-				viewHolder.bindDownloadEntry(getItem(position));
-				if (position == itemInProgressPosition) {
-					viewHolder.progressBar.setIndeterminate(false);
-					viewHolder.progressBar.setProgress(progress);
-				} else if (isFinished || downloadedItems.contains(position)) {
-					viewHolder.progressBar.setIndeterminate(false);
-					viewHolder.progressBar.setProgress(viewHolder.progressBar.getMax());
-				}
-				return convertView;
-			}
-
-			public void setProgress(BasicProgressAsyncTask<?, ?, ?> task, Object tag) {
-				isFinished = task == null
-						|| task.getStatus() == AsyncTask.Status.FINISHED;
-				itemInProgressPosition = -1;
-				progress = -1;
-				if (isFinished) return;
-				if (tag instanceof DownloadEntry) {
-					progress = task.getProgressPercentage();
-					for (int i = 0; i < getCount(); i++) {
-						if (getItem(i).equals(tag)) {
-							itemInProgressPosition = i;
-							downloadedItems.add(i);
-						}
-					}
-				}
-				notifyDataSetChanged();
-			}
-		}
-
-		private static class DownloadEntryViewHolder {
-			private final TextView nameTextView;
-			private final TextView descrTextView;
-			private final ImageView leftImageView;
-			private final ImageView rightImageButton;
-			private final Button rightButton;
-			private final ProgressBar progressBar;
-			private final TextView mapDateTextView;
-			private final Drawable deleteDrawable;
-
-			private DownloadEntryViewHolder(View convertView, Drawable deleteDrawable) {
-				this.deleteDrawable = deleteDrawable;
-				nameTextView = (TextView) convertView.findViewById(R.id.name);
-				descrTextView = (TextView) convertView.findViewById(R.id.description);
-				leftImageView = (ImageView) convertView.findViewById(R.id.leftImageView);
-				rightImageButton = (ImageView) convertView.findViewById(R.id.rightImageButton);
-				rightButton = (Button) convertView.findViewById(R.id.rightButton);
-				progressBar = (ProgressBar) convertView.findViewById(R.id.progressBar);
-				mapDateTextView = (TextView) convertView.findViewById(R.id.mapDateTextView);
-			}
-			public void bindDownloadEntry(DownloadEntry downloadEntry) {
-				nameTextView.setText(downloadEntry.baseName);
-				descrTextView.setText(String.format("%1$s MBb from %2$s Mb", 123.440,
-						downloadEntry.sizeMB));
-				rightImageButton.setImageDrawable(deleteDrawable);
-				rightImageButton.setVisibility(View.VISIBLE);
-				rightImageButton.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-
-					}
-				});
-				progressBar.setVisibility(View.VISIBLE);
-				progressBar.setIndeterminate(true);
-			}
-
 		}
 	}
 }

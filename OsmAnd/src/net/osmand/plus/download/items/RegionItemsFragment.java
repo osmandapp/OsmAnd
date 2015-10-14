@@ -1,9 +1,12 @@
 package net.osmand.plus.download.items;
 
-import android.content.Context;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.res.Resources;
-import android.content.res.TypedArray;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AlertDialog;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,26 +22,23 @@ import net.osmand.plus.Version;
 import net.osmand.plus.WorldRegion;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.activities.OsmandExpandableListFragment;
-import net.osmand.plus.download.BaseDownloadActivity;
 import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 
 import org.apache.commons.logging.Log;
 
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 public class RegionItemsFragment extends OsmandExpandableListFragment {
 	public static final String TAG = "RegionItemsFragment";
 	private static final Log LOG = PlatformUtil.getLog(RegionItemsFragment.class);
-	private static final MessageFormat formatGb = new MessageFormat("{0, number,<b>#.##</b>} GB", Locale.US);
 
 	private RegionsItemsAdapter listAdapter;
 	private int regionMapsGroupPos = -1;
@@ -91,7 +91,8 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 	}
 
 	@Override
-	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition,
+								int childPosition, long id) {
 		Object obj = listAdapter.getChild(groupPosition, childPosition);
 		if (obj instanceof WorldRegion) {
 			WorldRegion region = (WorldRegion) obj;
@@ -99,10 +100,19 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 					.onRegionSelected(region.getRegionId());
 			return true;
 		} else if (obj instanceof ItemsListBuilder.ResourceItem) {
-			if(((ItemViewHolder) v.getTag()).isItemAvailable()) {
+			if (((ItemViewHolder) v.getTag()).isItemAvailable()) {
 				IndexItem indexItem = ((ItemsListBuilder.ResourceItem) obj).getIndexItem();
-				((BaseDownloadActivity) getActivity())
-						.startDownload(indexItem);
+				if (indexItem.getType() == DownloadActivityType.ROADS_FILE) {
+					IndexItem regularMap =
+							((ItemsListBuilder.ResourceItem) listAdapter.getChild(0, 0))
+									.getIndexItem();
+					if (regularMap.getType() == DownloadActivityType.NORMAL_FILE) {
+						ConfirmDownloadUnneededMapDialogFragment.createInstance(indexItem)
+								.show(getChildFragmentManager(), "dialog");
+						return true;
+					}
+				}
+				getMyActivity().startDownload(indexItem);
 
 				return true;
 			}
@@ -200,68 +210,52 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 		}
 
 		@Override
-		public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+		public View getChildView(final int groupPosition, final int childPosition,
+								 boolean isLastChild, View convertView, ViewGroup parent) {
 
+			ItemViewHolder viewHolder;
+			if (convertView == null) {
+				convertView = LayoutInflater.from(parent.getContext())
+						.inflate(R.layout.two_line_with_images_list_item, parent, false);
+				viewHolder = new ItemViewHolder(convertView,
+						getMyApplication().getResourceManager().getDateFormat(),
+						getMyActivity().getIndexActivatedFileNames(),
+						getMyActivity().getIndexFileNames());
+				convertView.setTag(viewHolder);
+			} else {
+				viewHolder = (ItemViewHolder) convertView.getTag();
+			}
+			viewHolder.setSrtmDisabled(srtmDisabled);
+			viewHolder.setNauticalPluginDisabled(nauticalPluginDisabled);
+			viewHolder.setFreeVersion(freeVersion);
 			final Object child = getChild(groupPosition, childPosition);
 
-			if (child instanceof ItemsListBuilder.ResourceItem && groupPosition == regionMapsGroupPos) {
-				ItemViewHolder viewHolder;
-				if (convertView == null) {
-					convertView = LayoutInflater.from(parent.getContext())
-							.inflate(R.layout.two_line_with_images_list_item, parent, false);
-					viewHolder = new ItemViewHolder(convertView,
-							getMyApplication().getResourceManager().getDateFormat(),
-							getMyActivity().getIndexActivatedFileNames(),
-							getMyActivity().getIndexFileNames());
-					convertView.setTag(viewHolder);
-				} else {
-					viewHolder = (ItemViewHolder) convertView.getTag();
-				}
-				viewHolder.setSrtmDisabled(srtmDisabled);
-				viewHolder.setNauticalPluginDisabled(nauticalPluginDisabled);
-				viewHolder.setFreeVersion(freeVersion);
-
+			if (child instanceof ItemsListBuilder.ResourceItem
+					&& groupPosition == regionMapsGroupPos) {
 				ItemsListBuilder.ResourceItem item = (ItemsListBuilder.ResourceItem) child;
 				viewHolder.bindIndexItem(item.getIndexItem(), getDownloadActivity(), true, false);
+			} else if (child instanceof WorldRegion) {
+				viewHolder.bindRegion((WorldRegion) child, getDownloadActivity());
+			} else if (child instanceof ItemsListBuilder.ResourceItem) {
+				viewHolder.bindIndexItem(((ItemsListBuilder.ResourceItem) child).getIndexItem(),
+						getDownloadActivity(), false, true);
 			} else {
-				ItemViewHolder viewHolder;
-				if (convertView == null) {
-					convertView = LayoutInflater.from(parent.getContext())
-							.inflate(R.layout.two_line_with_images_list_item, parent, false);
-					viewHolder = new ItemViewHolder(convertView,
-							getMyApplication().getResourceManager().getDateFormat(),
-							getMyActivity().getIndexActivatedFileNames(),
-							getMyActivity().getIndexFileNames());
-					convertView.setTag(viewHolder);
-				} else {
-					viewHolder = (ItemViewHolder) convertView.getTag();
-				}
-				viewHolder.setSrtmDisabled(srtmDisabled);
-				viewHolder.setNauticalPluginDisabled(nauticalPluginDisabled);
-				viewHolder.setFreeVersion(freeVersion);
-
-				if (child instanceof WorldRegion) {
-					viewHolder.bindRegion((WorldRegion) child, getDownloadActivity());
-				} else if (child instanceof ItemsListBuilder.ResourceItem) {
-					viewHolder.bindIndexItem(((ItemsListBuilder.ResourceItem) child).getIndexItem(),
-							getDownloadActivity(), false, true);
-				} else {
-					throw new IllegalArgumentException("Item must be of type WorldRegion or " +
-							"IndexItem but is of type:" + child.getClass());
-				}
+				throw new IllegalArgumentException("Item must be of type WorldRegion or " +
+						"IndexItem but is of type:" + child.getClass());
 			}
 
 			return convertView;
 		}
 
 		@Override
-		public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
+		public View getGroupView(int groupPosition, boolean isExpanded, View convertView,
+								 ViewGroup parent) {
 			View v = convertView;
 			String section = getGroup(groupPosition);
 
 			if (v == null) {
-				LayoutInflater inflater = (LayoutInflater) getDownloadActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				v = inflater.inflate(R.layout.download_item_list_section, parent, false);
+				v = LayoutInflater.from(getDownloadActivity())
+						.inflate(R.layout.download_item_list_section, parent, false);
 			}
 			TextView nameView = ((TextView) v.findViewById(R.id.section_name));
 			nameView.setText(section);
@@ -305,6 +299,37 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 		@Override
 		public boolean isChildSelectable(int groupPosition, int childPosition) {
 			return true;
+		}
+	}
+
+	public static class ConfirmDownloadUnneededMapDialogFragment extends DialogFragment {
+		private static final String INDEX_ITEM = "index_item";
+
+		@NonNull
+		@Override
+		public Dialog onCreateDialog(Bundle savedInstanceState) {
+			final IndexItem indexItem = getArguments().getParcelable(INDEX_ITEM);
+			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+			builder.setTitle(R.string.are_you_sure);
+			builder.setMessage(R.string.confirm_download_roadmaps);
+			builder.setNegativeButton(R.string.shared_string_cancel, null)
+					.setPositiveButton(R.string.shared_string_download,
+							new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									((DownloadActivity) getActivity()).startDownload(indexItem);
+								}
+							});
+			return builder.create();
+		}
+
+		public static ConfirmDownloadUnneededMapDialogFragment createInstance(@NonNull IndexItem indexItem) {
+			ConfirmDownloadUnneededMapDialogFragment fragment =
+					new ConfirmDownloadUnneededMapDialogFragment();
+			Bundle args = new Bundle();
+			args.putParcelable(INDEX_ITEM, indexItem);
+			fragment.setArguments(args);
+			return fragment;
 		}
 	}
 }
