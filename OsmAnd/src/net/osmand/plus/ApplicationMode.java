@@ -16,7 +16,6 @@ public class ApplicationMode {
 	private static Map<String, Set<ApplicationMode>> widgets = new LinkedHashMap<String, Set<ApplicationMode>>(); 
 	private static List<ApplicationMode> values = new ArrayList<ApplicationMode>();
 	private static List<ApplicationMode> cachedFilteredValues = new ArrayList<ApplicationMode>();
-	private static boolean listenerRegistered = false;
 	/*
 	 * DEFAULT("Browse map"), CAR("Car"), BICYCLE("Bicycle"), PEDESTRIAN("Pedestrian");
 	 */
@@ -51,7 +50,6 @@ public class ApplicationMode {
 	
 	static {
 		ApplicationMode[] exceptPedestrianAndDefault = new ApplicationMode[] { CAR, BICYCLE, BOAT, AIRCRAFT };
-		ApplicationMode[] exceptAirBoat = new ApplicationMode[] { DEFAULT, CAR, BICYCLE, PEDESTRIAN };
 		ApplicationMode[] exceptAirBoatDefault = new ApplicationMode[] { CAR, BICYCLE, PEDESTRIAN };
 		ApplicationMode[] pedestrian = new ApplicationMode[] { PEDESTRIAN };
 		ApplicationMode[] pedestrianBicycle = new ApplicationMode[] { PEDESTRIAN, BICYCLE };
