@@ -153,15 +153,15 @@ public abstract class MapRenderingTypes {
 		return a;
 	}
 	
-	protected MapRulType getRuleType(String tag, String val, boolean poi) {
+	protected MapRulType getRuleType(String tag, String val, boolean poi, boolean map) {
 		Map<String, MapRulType> types = getEncodingRuleTypes();
 		tag = lc(tag);
 		val = lc(val);
 		MapRulType rType = types.get(constructRuleKey(tag, val));
-		if (rType == null || (!rType.isPOI() && poi) || (!rType.isMap() && !poi)) {
+		if (rType == null || (!rType.isPOI() && poi) || (!rType.isMap() && map)) {
 			rType = types.get(constructRuleKey(tag, null));
 		}
-		if(rType == null || (!rType.isPOI() && poi) || (!rType.isMap() && !poi)) {
+		if(rType == null || (!rType.isPOI() && poi) || (!rType.isMap() && map)) {
 			return null;
 		} else if(rType.isAdditional() && rType.tagValuePattern.value == null) {
 			MapRulType parent = rType;
