@@ -1899,10 +1899,10 @@
 	<string name="poi_surface_paved">Superficie: pavimentado</string>
 	<string name="poi_surface_asphalt">Superficie: asfaltado</string>
 	<string name="poi_surface_concrete">Superficie: hormigón</string>
-	<string name="poi_surface_sett">Superficie: intertrabado</string>
-	<string name="poi_surface_cobblestone">Superficie: empedrado</string>
+	<string name="poi_surface_sett">Superficie: adoquín</string>
+	<string name="poi_surface_cobblestone">Superficie: empedrado (adoquín)</string>
 	<string name="poi_surface_paving_stones">Superficie: adoquín prefabricado</string>
-	<string name="poi_surface_pebblestone">Superficie: empedrado</string>
+	<string name="poi_surface_pebblestone">Superficie: empedrado (canto rodado)</string>
 	<string name="poi_surface_stone">Superficie: piedras</string>
 	<string name="poi_surface_metal">Superficie: metalizado</string>
 	<string name="poi_surface_wood">Superficie: madera</string>
