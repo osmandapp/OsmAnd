@@ -2036,4 +2036,8 @@
 	<string name="poi_crop_asparagus">Выращиваемая культура: спаржа</string>
 	<string name="poi_crop_flowers">Выращиваемая культура: цветы</string>
 
+	<string name="poi_surveillance_indoor">Видеонаблюдение: внутри</string>
+	<string name="poi_surveillance_outdoor">Видеонаблюдение: снаружи</string>
+	<string name="poi_surveillance_public">Видеонаблюдение: в общественных местах</string>
+
 </resources>
