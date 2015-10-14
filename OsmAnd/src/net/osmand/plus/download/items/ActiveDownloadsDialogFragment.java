@@ -141,7 +141,8 @@ public class ActiveDownloadsDialogFragment extends DialogFragment {
 
 		public void bindDownloadEntry(final DownloadEntry downloadEntry, final int progress,
 									  boolean isDownloaded) {
-			nameTextView.setText(downloadEntry.baseName);
+			nameTextView.setText(downloadEntry.item.getVisibleName(context,
+					context.getMyApplication().getRegions()));
 			rightImageButton.setVisibility(View.VISIBLE);
 
 			int localProgress = progress;
@@ -152,13 +153,14 @@ public class ActiveDownloadsDialogFragment extends DialogFragment {
 				isIndeterminate = false;
 				onClickListener = activeDownloadOnClickListener;
 				double downloaded = downloadEntry.sizeMB * progress / 100;
-				descrTextView.setText(String.format("%.1f from %.1f MB", downloaded,
+				descrTextView.setText(context.getString(R.string.value_downloaded_from_max, downloaded,
 						downloadEntry.sizeMB));
 			} else if (isDownloaded) {
 				// Downloaded
 				isIndeterminate = false;
 				localProgress = progressBar.getMax();
-				descrTextView.setText(String.format("%.1f MB", downloadEntry.sizeMB));
+				descrTextView.setText(context.getString(R.string.file_size_in_mb,
+						downloadEntry.sizeMB));
 
 			} else {
 				// pending
@@ -169,7 +171,8 @@ public class ActiveDownloadsDialogFragment extends DialogFragment {
 						adapter.remove(downloadEntry);
 					}
 				};
-				descrTextView.setText(String.format("%.1f MB", downloadEntry.sizeMB));
+				descrTextView.setText(context.getString(R.string.file_size_in_mb,
+						downloadEntry.sizeMB));
 			}
 			rightImageButton.setOnClickListener(onClickListener);
 			progressBar.setIndeterminate(isIndeterminate);

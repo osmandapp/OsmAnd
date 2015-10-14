@@ -653,7 +653,6 @@ public class DownloadActivity extends BaseDownloadActivity implements DialogDism
 				laterButton.setVisibility(View.GONE);
 			}
 			downloadsLeftTextView.setText(ctx.getString(R.string.downloads_left_template, downloadsLeft));
-			// TODO review logic
 			freeVersionBanner.setOnClickListener(new ToggleCollapseFreeVersionBanner(freeVersionDescriptionTextView,
 					buttonsLinearLayout, freeVersionBannerTitle));
 		}

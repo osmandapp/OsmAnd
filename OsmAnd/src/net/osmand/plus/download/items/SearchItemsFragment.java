@@ -307,7 +307,7 @@ public class SearchItemsFragment extends Fragment {
 					}
 
 					/*
-					Context c = getDownloadActivity();
+					Context c = getMyActivity();
 					for (IndexItem item : indexItems) {
 						String indexLC = item.getVisibleName(c, osmandRegions).toLowerCase();
 						if (isMatch(conds, false, indexLC)) {
