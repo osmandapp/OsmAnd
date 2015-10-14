@@ -1828,4 +1828,16 @@
 	<string name="poi_internet_access_type_service">網際網路存取類型：網路服務</string>
 	<string name="poi_internet_access_type_no">網際網路存取類型：無</string>
 
+	<string name="poi_maxwidth">最大寬度</string>
+	<string name="poi_iata">IATA 編碼</string>
+	<string name="poi_icao">ICAO 編碼</string>
+	<string name="poi_faa">FAA 編碼</string>
+	
+	<string name="poi_artwork_type_sculpture">藝術品類型：雕塑</string>
+	<string name="poi_artwork_type_statue">藝術品類型：塑像</string>
+	<string name="poi_artwork_type_mural">藝術品類型：壁畫</string>
+	<string name="poi_artwork_type_architecture">藝術品類型： 建築風格</string>
+	<string name="poi_artwork_type_painting">藝術品類型：繪畫</string>
+	<string name="poi_artwork_type_stone">藝術品類型：石頭</string>
+	<string name="poi_artwork_type_bust">藝術品類型：半身像</string>
 	</resources>
