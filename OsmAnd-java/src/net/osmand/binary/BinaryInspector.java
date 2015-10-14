@@ -66,8 +66,8 @@ public class BinaryInspector {
 		// test cases show info
 		if(args.length == 1 && "test".equals(args[0])) {
 			in.inspector(new String[]{
-				"-vpoi",
-//				"-vmap","-vmapobjects", // "-vmapcoordinates", 
+//				"-vpoi",
+				"-vmap","-vmapobjects", // "-vmapcoordinates", 
 //				"-vrouting",
 //				"-vaddress", "-vcities",//"-vstreetgroups", 
 //				"-vstreets", "-vbuildings", "-vintersections", 
