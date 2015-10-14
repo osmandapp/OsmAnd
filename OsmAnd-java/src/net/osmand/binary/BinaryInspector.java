@@ -66,17 +66,17 @@ public class BinaryInspector {
 		// test cases show info
 		if(args.length == 1 && "test".equals(args[0])) {
 			in.inspector(new String[]{
-//				"-vpoi",
-//				"-vmap", "-vmapobjects", // "-vmapcoordinates", 
-				"-vrouting",
+				"-vpoi",
+//				"-vmap","-vmapobjects", // "-vmapcoordinates", 
+//				"-vrouting",
 //				"-vaddress", "-vcities",//"-vstreetgroups", 
 //				"-vstreets", "-vbuildings", "-vintersections", 
 //				"-zoom=15",
 //				"-bbox=1.74,51.17,1.75,51.16",
 //				"-vstats",
-//				"/Users/victorshcherb/osmand/maps/Synthetic_test_rendering.obf"
+				"/Users/victorshcherb/osmand/maps/Synthetic_test_rendering.obf"
 //				"/Users/victorshcherb/osmand/maps/Netherlands_europe_2.road.obf"
-				"/Users/victorshcherb/osmand/maps/Map.obf"
+//				"/Users/victorshcherb/osmand/maps/Map.obf"
 					});
 		} else {
 			in.inspector(args);
@@ -1036,9 +1036,9 @@ public class BinaryInspector {
 						while(it.hasNext()) {
 							Entry<String, String> e = it.next();
 							if(e.getValue().startsWith(" gz ")) {
-								s += e.getKey() +"=...";
+								s += " " + e.getKey() +"=...";
 							} else {
-								s += e.getKey() +"=" +e.getValue();
+								s += " " + e.getKey() +"=" +e.getValue();
 							}
 						}
 						
