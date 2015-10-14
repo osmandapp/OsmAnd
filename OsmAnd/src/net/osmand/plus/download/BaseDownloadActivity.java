@@ -27,6 +27,7 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -119,23 +120,40 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 	}
 
 	public ItemsListBuilder getItemsBuilder() {
-		return getItemsBuilder("");
+		return getItemsBuilder("", false);
 	}
 
-	public ItemsListBuilder getItemsBuilder(String regionId) {
-		if (downloadListIndexThread.isDataPrepared()) {
-			return new ItemsListBuilder(getMyApplication(), regionId, downloadListIndexThread.getResourcesByRegions(),
-					downloadListIndexThread.getVoiceRecItems(), downloadListIndexThread.getVoiceTTSItems());
+	public ItemsListBuilder getVoicePromptsBuilder() {
+		return getItemsBuilder("", true);
+	}
+
+	public ItemsListBuilder getItemsBuilder(String regionId, boolean voicePromptsOnly) {
+		if (downloadListIndexThread.getResourcesLock().tryLock()) {
+			try {
+				ItemsListBuilder builder = new ItemsListBuilder(getMyApplication(), regionId, downloadListIndexThread.getResourcesByRegions(),
+						downloadListIndexThread.getVoiceRecItems(), downloadListIndexThread.getVoiceTTSItems());
+				if (!voicePromptsOnly) {
+					return builder.build();
+				} else {
+					return builder;
+				}
+			} finally {
+				downloadListIndexThread.getResourcesLock().unlock();
+			}
 		} else {
 			return null;
 		}
 	}
 
-	public Map<String, IndexItem> getIndexItemsByRegion(WorldRegion region) {
-		if (downloadListIndexThread.isDataPrepared()) {
-			return downloadListIndexThread.getResourcesByRegions().get(region);
+	public List<IndexItem> getIndexItemsByRegion(WorldRegion region) {
+		if (downloadListIndexThread.getResourcesLock().tryLock()) {
+			try {
+				return new LinkedList<>(downloadListIndexThread.getResourcesByRegions().get(region).values());
+			} finally {
+				downloadListIndexThread.getResourcesLock().unlock();
+			}
 		} else {
-			return null;
+			return new LinkedList<>();
 		}
 	}
 

@@ -287,16 +287,11 @@ public class SearchItemsFragment extends Fragment {
 					}
 
 					for (WorldRegion region : regions) {
-						Map<String, IndexItem> indexItems = getDownloadActivity().getIndexItemsByRegion(region);
-						List<IndexItem> items = new LinkedList<>();
-
 						if (region.getSubregions().size() > 0) {
 							filter.add(region);
 						}
-						for (IndexItem item : indexItems.values()) {
-							items.add(item);
-						}
 
+						List<IndexItem> items = getDownloadActivity().getIndexItemsByRegion(region);
 						if (items.size() > 1) {
 							if (!filter.contains(region)) {
 								filter.add(region);
