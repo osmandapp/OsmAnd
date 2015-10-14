@@ -211,6 +211,7 @@ public class ItemViewHolder {
 
 	public void bindRegion(WorldRegion region, DownloadActivity context) {
 		nameTextView.setText(region.getName());
+		nameTextView.setTextColor(textColorPrimary);
 		if (region.getResourceTypes().size() > 0) {
 			StringBuilder stringBuilder = new StringBuilder();
 			for (DownloadActivityType activityType : region.getResourceTypes()) {
@@ -238,6 +239,7 @@ public class ItemViewHolder {
 				break;
 		}
 		leftImageView.setImageDrawable(leftImageDrawable);
+		rightButton.setVisibility(View.GONE);
 		rightImageButton.setVisibility(View.GONE);
 		progressBar.setVisibility(View.GONE);
 	}

@@ -2015,4 +2015,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="later">Later</string>
     <string name="get_full_version">Get full version</string>
     <string name="downloads">Downloads</string>
+    <string name="confirm_download_roadmaps">Are you sure you want to download map of roads, even though you have full map?</string>
+    <string name="value_downloaded_from_max">%1$.1f from %2$.1f MB</string>
+    <string name="file_size_in_mb">%.1f MB</string>
 </resources>
