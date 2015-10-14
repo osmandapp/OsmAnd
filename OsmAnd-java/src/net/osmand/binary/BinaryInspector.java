@@ -74,9 +74,9 @@ public class BinaryInspector {
 //				"-zoom=15",
 //				"-bbox=1.74,51.17,1.75,51.16",
 //				"-vstats",
-				"/Users/victorshcherb/osmand/maps/Synthetic_test_rendering.obf"
+//				"/Users/victorshcherb/osmand/maps/Synthetic_test_rendering.obf"
 //				"/Users/victorshcherb/osmand/maps/Netherlands_europe_2.road.obf"
-//				"/Users/victorshcherb/osmand/maps/Map.obf"
+				"/Users/victorshcherb/osmand/maps/Map.obf"
 					});
 		} else {
 			in.inspector(args);
