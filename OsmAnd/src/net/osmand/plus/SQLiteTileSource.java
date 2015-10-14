@@ -32,7 +32,7 @@ public class SQLiteTileSource implements ITileSource {
 
 	
 	public static final String EXT = IndexConstants.SQLITE_EXT;
-	private static final Log log = PlatformUtil.getLog(SQLiteTileSource.class);
+	private static final Log LOG = PlatformUtil.getLog(SQLiteTileSource.class);
 	
 	private ITileSource base;
 	private String urlTemplate = null;
@@ -125,9 +125,9 @@ public class SQLiteTileSource implements ITileSource {
 				}
 				return (String) bshInterpreter.eval("getTileUrl("+zoom+","+x+","+y+");");
 			} catch (bsh.EvalError e) {
-				WDebug.log("getUrlToLoad Error"+e.getMessage());
+				LOG.debug("getUrlToLoad Error" + e.getMessage());
 				AccessibleToast.makeText(ctx, e.getMessage(), Toast.LENGTH_LONG).show();
-				log.error(e.getMessage(), e);
+				LOG.error(e.getMessage(), e);
 				return null;
 			}
 		}
@@ -169,7 +169,7 @@ public class SQLiteTileSource implements ITileSource {
 	
 	protected SQLiteConnection getDatabase(){
 		if((db == null || db.isClosed()) && file.exists() ){
-			WDebug.log("Open "+file.getAbsolutePath());
+			LOG.debug("Open " + file.getAbsolutePath());
 			try {
 				onlyReadonlyAvailable = false;
 				db = ctx.getSQLiteAPI().openByAbsolutePath(file.getAbsolutePath(), false);
@@ -289,8 +289,8 @@ public class SQLiteTileSource implements ITileSource {
 				return false;
 			}
 		} finally {
-			if (log.isDebugEnabled()) {
-				log.debug("Checking tile existance x = " + x + " y = " + y + " z = " + zoom + " for " + (System.currentTimeMillis() - time)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+			if (LOG.isDebugEnabled()) {
+				LOG.debug("Checking tile existance x = " + x + " y = " + y + " z = " + zoom + " for " + (System.currentTimeMillis() - time)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 			}
 		}
 	}
@@ -328,8 +328,8 @@ public class SQLiteTileSource implements ITileSource {
 			}
 			return null;
 		} finally {
-			if(log.isDebugEnabled()) {
-				log.debug("Load tile " + x + "/" + y + "/" + zoom + " for " + (System.currentTimeMillis() - ts)
+			if(LOG.isDebugEnabled()) {
+				LOG.debug("Load tile " + x + "/" + y + "/" + zoom + " for " + (System.currentTimeMillis() - ts)
 					+ " ms ");
 			}
 		}
@@ -452,7 +452,7 @@ public class SQLiteTileSource implements ITileSource {
 	}
 	
 	public void closeDB(){
-		WDebug.log("closeDB");
+		LOG.debug("closeDB");
 		bshInterpreter = null;
 		if(timeSupported)
 			clearOld();
@@ -467,7 +467,7 @@ public class SQLiteTileSource implements ITileSource {
 		if(db == null || db.isReadOnly()){
 			return;
 		}
-		WDebug.log("DELETE FROM tiles WHERE time<"+(System.currentTimeMillis()-getExpirationTimeMillis()));
+		LOG.debug("DELETE FROM tiles WHERE time<" + (System.currentTimeMillis() - getExpirationTimeMillis()));
 		db.execSQL("DELETE FROM tiles WHERE time<"+(System.currentTimeMillis()-getExpirationTimeMillis()));    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
 		db.execSQL("VACUUM");    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
 	}
