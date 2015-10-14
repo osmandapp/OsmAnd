@@ -56,6 +56,11 @@ public class MapPoiTypes {
 	}
 	
 
+	public static void setDefault(MapPoiTypes types) {
+		DEFAULT_INSTANCE = types;
+		DEFAULT_INSTANCE.init();
+	}
+	
 	public static MapPoiTypes getDefault() {
 		if(DEFAULT_INSTANCE == null){
 			DEFAULT_INSTANCE = new MapPoiTypes(null);
