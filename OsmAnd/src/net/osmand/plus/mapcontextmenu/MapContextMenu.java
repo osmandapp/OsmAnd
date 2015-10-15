@@ -45,6 +45,8 @@ public class MapContextMenu {
 	private Drawable secondLineIcon;
 	private String streetStr;
 
+	private int favActionIconId;
+
 	private static final String KEY_CTX_MENU_OBJECT = "key_ctx_menu_object";
 	private static final String KEY_CTX_MENU_ACTIVE = "key_ctx_menu_active";
 	private static final String KEY_CTX_MENU_LATLON = "key_ctx_menu_latlon";
@@ -222,6 +224,10 @@ public class MapContextMenu {
 		return leftIconId;
 	}
 
+	public int getFavActionIconId() {
+		return favActionIconId;
+	}
+
 	public Drawable getLeftIcon() {
 		return leftIcon;
 	}
@@ -249,6 +255,7 @@ public class MapContextMenu {
 
 	private void acquireIcons() {
 		leftIconId = 0;
+		favActionIconId = 0;
 		leftIcon = null;
 		secondLineIcon = null;
 
@@ -256,6 +263,8 @@ public class MapContextMenu {
 			leftIconId = menuController.getLeftIconId();
 			leftIcon = menuController.getLeftIcon();
 			secondLineIcon = menuController.getSecondLineIcon();
+
+			favActionIconId = menuController.getFavActionIconId();
 		}
 	}
 

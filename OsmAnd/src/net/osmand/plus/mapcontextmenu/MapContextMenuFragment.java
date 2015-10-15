@@ -30,7 +30,6 @@ import android.widget.TextView;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -296,6 +295,16 @@ public class MapContextMenuFragment extends Fragment {
 		});
 
 		// Action buttons
+		final ImageButton buttonFavorite = (ImageButton) view.findViewById(R.id.context_menu_fav_button);
+		buttonFavorite.setImageDrawable(iconsCache.getIcon(menu.getFavActionIconId(),
+				light ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
+		buttonFavorite.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				menu.buttonFavoritePressed();
+			}
+		});
+
 		final ImageButton buttonWaypoint = (ImageButton) view.findViewById(R.id.context_menu_route_button);
 		buttonWaypoint.setImageDrawable(iconsCache.getIcon(R.drawable.map_action_waypoints,
 				light ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
@@ -303,16 +312,6 @@ public class MapContextMenuFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				menu.buttonWaypointPressed();
-			}
-		});
-
-		final ImageButton buttonFavorite = (ImageButton) view.findViewById(R.id.context_menu_fav_button);
-		buttonFavorite.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_fav_dark,
-				light ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
-		buttonFavorite.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				menu.buttonFavoritePressed();
 			}
 		});
 
