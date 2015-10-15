@@ -78,7 +78,7 @@
 	<string name="poi_charity">"ചാരിറ്റി ഷോപ് "</string>
 	<string name="poi_chemist">"മരുന്നു കട "</string>
 	<string name="poi_clothes">"തുണിക്കട "</string>
-	<string name="poi_child_clothes">കുട്ടികളുടെ വസ്ത്രങ്ങള്‍</string>
+	<string name="poi_clothes_children">കുട്ടികളുടെ വസ്ത്രങ്ങള്‍</string>
 	<string name="poi_shoes">"ചെരിപ്പ് കട "</string>
 	<string name="poi_candles">കാന്ഡില്‍ സ്ടോര്‍</string>
 	<string name="poi_computer">കംപ്യൂട്ടര്‍ സ്ടോര്‍</string>

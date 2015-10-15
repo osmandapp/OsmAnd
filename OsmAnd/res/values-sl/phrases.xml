@@ -226,7 +226,7 @@
 	<string name="poi_boutique">Modni butik</string>
 	<string name="poi_carpet">Trgovina s preprogami</string>
 	<string name="poi_clothes">Trgovina z oblačili</string>
-	<string name="poi_child_clothes">Trgovina z otroškimi oblačili</string>
+	<string name="poi_clothes_children">Trgovina z otroškimi oblačili</string>
 	<string name="poi_shoes">Trgovina s čevlji</string>
 	<string name="poi_curtain">Trgovina z zavesami</string>
 	<string name="poi_dive">Trgovina s potapljaško opremo</string>

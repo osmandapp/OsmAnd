@@ -94,7 +94,7 @@
 	<string name="poi_carpet">敷物店(Carpet shop)</string>
 	<string name="poi_chemist">ドラッグストア・薬局(Drug store)</string>
 	<string name="poi_clothes">衣料品店(Apparel store)</string>
-	<string name="poi_child_clothes">子供用衣料品店(Childrens apparel)</string>
+	<string name="poi_clothes_children">子供用衣料品店(Childrens apparel)</string>
 	<string name="poi_shoes">靴屋(Shoe store)</string>
 	<string name="poi_computer">パソコンショップ(Computer store)</string>
 	<string name="poi_copyshop">印刷、現像店(Copy shop)</string>
