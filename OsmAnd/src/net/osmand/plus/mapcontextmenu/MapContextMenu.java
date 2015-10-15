@@ -255,9 +255,10 @@ public class MapContextMenu {
 
 	private void acquireIcons() {
 		leftIconId = 0;
-		favActionIconId = 0;
 		leftIcon = null;
 		secondLineIcon = null;
+
+		favActionIconId = R.drawable.ic_action_fav_dark;
 
 		if (menuController != null) {
 			leftIconId = menuController.getLeftIconId();
