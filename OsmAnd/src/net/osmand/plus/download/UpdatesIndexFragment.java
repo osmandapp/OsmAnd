@@ -78,7 +78,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment {
 	}
 
 	private void updateHeader() {
-1		View view = getView();
+		View view = getView();
 		if (getView() == null) {
 			return;
 		}
