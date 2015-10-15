@@ -85,12 +85,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 	protected static int RESTORE_OPERATION = 3;
 	
 	MessageFormat formatMb = new MessageFormat("{0, number,##.#} MB", Locale.US);
-	MessageFormat formatGb = new MessageFormat("{0, number,#.##} GB", Locale.US);
 	private ContextMenuAdapter optionsMenuAdapter;
 	private ActionMode actionMode;
-
-	private TextView descriptionText;
-	private ProgressBar sizeProgress;
 
 	Drawable backup;
 	Drawable sdcard;
@@ -107,9 +103,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		listView.setAdapter(listAdapter);
 		expandAllGroups();
 			setListView(listView);
-		descriptionText = (TextView) view.findViewById(R.id.memory_size);
-		sizeProgress = (ProgressBar) view.findViewById(R.id.memory_progress);
-		updateDescriptionTextWithSize();
+		((DownloadActivity) getActivity()).updateDescriptionTextWithSize(view);
 		colorDrawables();
 		return view;
 	}
@@ -655,8 +649,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			@Override
 			public void onDestroyActionMode(ActionMode mode) {
 				selectionMode = false;
-				descriptionText.setVisibility(View.VISIBLE);
-				updateDescriptionTextWithSize();
+				((DownloadActivity) getActivity()).updateDescriptionTextWithSize(getView());
 				listAdapter.cancelFilter();
 				expandAllGroups();
 				listAdapter.notifyDataSetChanged();
@@ -665,26 +658,6 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		});
 		//findViewById(R.id.DescriptionText).setVisibility(View.GONE);
 		listAdapter.notifyDataSetChanged();
-	}
-
-	@SuppressWarnings("deprecation")
-	private void updateDescriptionTextWithSize(){
-		File dir = getMyApplication().getAppPath("").getParentFile();
-		String size = formatGb.format(new Object[]{0});
-		int percent = 0;
-		if(dir.canRead()){
-			StatFs fs = new StatFs(dir.getAbsolutePath());
-			size = formatGb.format(new Object[]{(float) (fs.getAvailableBlocks()) * fs.getBlockSize() / (1 << 30) });
-			percent = 100 - (int) (fs.getAvailableBlocks() * 100 / fs.getBlockCount());
-		}
-		sizeProgress.setProgress(percent);
-		String text = getString(R.string.free, size);
-		int l = text.indexOf('.');
-		if(l == -1) {
-			l = text.length();
-		}
-		descriptionText.setText(text);
-		descriptionText.setMovementMethod(LinkMovementMethod.getInstance());
 	}
 
 	public void localOptionsMenu(final int itemId) {
@@ -1061,7 +1034,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 			String sz = "";
 			if (size > 0) {
 				if (size > 1 << 20) {
-					sz = formatGb.format(new Object[] { (float) size / (1 << 20) });
+					sz = DownloadActivity.formatGb.format(new Object[] { (float) size / (1 << 20) });
 				} else {
 					sz = formatMb.format(new Object[] { (float) size / (1 << 10) });
 				}

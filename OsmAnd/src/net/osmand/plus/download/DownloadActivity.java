@@ -8,11 +8,13 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.StatFs;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.ListFragment;
 import android.support.v4.view.ViewPager;
+import android.text.method.LinkMovementMethod;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.BaseAdapter;
@@ -22,7 +24,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import net.osmand.IndexConstants;
-import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -42,10 +43,12 @@ import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -66,6 +69,8 @@ public class DownloadActivity extends BaseDownloadActivity implements DialogDism
 	public static final String DOWNLOAD_TAB = "download";
 	public static final String UPDATES_TAB = "updates";
 	public static final String SINGLE_TAB = "SINGLE_TAB";
+	public static final MessageFormat formatGb = new MessageFormat("{0, number,#.##} GB", Locale.US);
+
 	private List<DownloadActivityType> downloadTypes = new ArrayList<DownloadActivityType>();
 	private BannerAndDownloadFreeVersion visibleBanner;
 	private ActiveDownloadsDialogFragment.DownloadEntryAdapter progressAdapter;
@@ -674,5 +679,29 @@ public class DownloadActivity extends BaseDownloadActivity implements DialogDism
 				freeVersionBannerTitle.setVisibility(View.VISIBLE);
 			}
 		}
+	}
+
+
+	@SuppressWarnings("deprecation")
+	public void updateDescriptionTextWithSize(View view){
+		TextView descriptionText = (TextView) view.findViewById(R.id.sizeFreeTextView);
+		ProgressBar sizeProgress = (ProgressBar) view.findViewById(R.id.memoryLeftProgressBar);
+
+		File dir = getMyApplication().getAppPath("").getParentFile();
+		String size = formatGb.format(new Object[]{0});
+		int percent = 0;
+		if(dir.canRead()){
+			StatFs fs = new StatFs(dir.getAbsolutePath());
+			size = formatGb.format(new Object[]{(float) (fs.getAvailableBlocks()) * fs.getBlockSize() / (1 << 30) });
+			percent = 100 - (int) (fs.getAvailableBlocks() * 100 / fs.getBlockCount());
+		}
+		sizeProgress.setProgress(percent);
+		String text = getString(R.string.free, size);
+		int l = text.indexOf('.');
+		if(l == -1) {
+			l = text.length();
+		}
+		descriptionText.setText(text);
+		descriptionText.setMovementMethod(LinkMovementMethod.getInstance());
 	}
 }

@@ -27,7 +27,7 @@
 				android:text="@string/device_memory"/>
 
 			<TextView
-				android:id="@+id/memory_size"
+				android:id="@+id/sizeFreeTextView"
 				android:layout_gravity="center_vertical"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
 		</LinearLayout>
 
 		<ProgressBar
-			android:id="@+id/memory_progress"
+			android:id="@+id/memoryLeftProgressBar"
 			style="?android:attr/progressBarStyleHorizontal"
 			android:progressDrawable="?attr/size_progress_bar"
 			android:layout_width="fill_parent"

@@ -24,7 +24,7 @@ public abstract class OsmandExpandableListFragment extends Fragment
 
 
 	public OsmandApplication getMyApplication() {
-		return (OsmandApplication)getActivity().getApplication();
+		return (OsmandApplication) getActivity().getApplication();
 	}
 	
 	@Override

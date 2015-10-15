@@ -71,7 +71,8 @@ public class UpdatesIndexFragment extends OsmAndListFragment {
 		listAdapter.sort(new Comparator<IndexItem>() {
 			@Override
 			public int compare(IndexItem indexItem, IndexItem indexItem2) {
-				return indexItem.getVisibleName(getMyApplication(), osmandRegions).compareTo(indexItem2.getVisibleName(getMyApplication(), osmandRegions));
+				return indexItem.getVisibleName(getMyApplication(), osmandRegions)
+						.compareTo(indexItem2.getVisibleName(getMyApplication(), osmandRegions));
 			}
 		});
 		setListAdapter(listAdapter);

@@ -71,6 +71,10 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 		expandAllGroups();
 		setListView(listView);
 
+		View usedSpaceCard = inflater.inflate(R.layout.used_space_card, listView, false);
+		getMyActivity().updateDescriptionTextWithSize(usedSpaceCard);
+		listView.addHeaderView(usedSpaceCard);
+
 		onCategorizationFinished();
 
 		return view;
