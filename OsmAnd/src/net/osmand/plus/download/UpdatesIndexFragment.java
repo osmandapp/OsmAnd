@@ -19,11 +19,14 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmAndListFragment;
+
+import org.apache.commons.logging.Log;
 
 import java.text.MessageFormat;
 import java.text.ParseException;
@@ -33,11 +36,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by Denis
- * on 09.09.2014.
- */
 public class UpdatesIndexFragment extends OsmAndListFragment {
+	private static final Log LOG = PlatformUtil.getLog(UpdateIndexAdapter.class);
 	private UpdateIndexAdapter listAdapter;
 	List<IndexItem> indexItems = new ArrayList<>();
 
@@ -45,7 +45,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		if (BaseDownloadActivity.downloadListIndexThread != null) {
-			indexItems = new ArrayList<IndexItem>(DownloadActivity.downloadListIndexThread.getItemsToUpdate());
+			indexItems = new ArrayList<>(DownloadActivity.downloadListIndexThread.getItemsToUpdate());
 		}
 		createListView();
 		setHasOptionsMenu(true);
@@ -53,11 +53,11 @@ public class UpdatesIndexFragment extends OsmAndListFragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.update_index, container, false);
+		return inflater.inflate(R.layout.update_index_frament, container, false);
 	}
 
 	private void createListView() {
-		updateHeader();
+		updateUpdateAllButton();
 		if (indexItems.size() == 0) {
 			if (DownloadActivity.downloadListIndexThread.isDownloadedFromInternet()) {
 				indexItems.add(new IndexItem(getString(R.string.everything_up_to_date), "", 0, "", 0, 0, null));
@@ -77,14 +77,32 @@ public class UpdatesIndexFragment extends OsmAndListFragment {
 		setListAdapter(listAdapter);
 	}
 
-	private void updateHeader() {
+	private void updateUpdateAllButton() {
 		View view = getView();
 		if (getView() == null) {
 			return;
 		}
-		String header = getActivity().getString(R.string.download_tab_updates) + " - " + indexItems.size();
-		((TextView) view.findViewById(R.id.header)).
-				setText(header);
+		final TextView updateAllButton = (TextView) view.findViewById(R.id.updateAllButton);
+		if (indexItems.size() == 0 || indexItems.get(0).getType() == null) {
+			updateAllButton.setVisibility(View.GONE);
+		} else {
+			updateAllButton.setVisibility(View.VISIBLE);
+			long downloadsSize = 0;
+			for (IndexItem indexItem : indexItems) {
+				downloadsSize += indexItem.getSize();
+			}
+			String updateAllText = getActivity().getString(R.string.update_all, downloadsSize >> 20);
+			updateAllButton.setText(updateAllText);
+			updateAllButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					for (IndexItem indexItem : indexItems) {
+						getMyActivity().addToDownload(indexItem);
+					}
+					getMyActivity().downloadFilesCheckFreeVersion();
+				}
+			});
+		}
 	}
 
 	@Override
@@ -112,7 +130,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment {
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		updateHeader();
+		updateUpdateAllButton();
 		ActionBar actionBar = getMyActivity().getSupportActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 

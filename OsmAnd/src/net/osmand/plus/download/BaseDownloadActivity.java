@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.UiThread;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.widget.Toast;
@@ -76,10 +77,12 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 	}
 
 
+	@UiThread
 	public void updateDownloadList(List<IndexItem> list) {
 
 	}
 
+	@UiThread
 	public void updateProgress(boolean updateOnlyProgress, Object tag) {
 
 	}
