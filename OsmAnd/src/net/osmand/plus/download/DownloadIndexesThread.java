@@ -53,7 +53,6 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.locks.ReentrantLock;
 
 @SuppressLint("NewApi")
 public class DownloadIndexesThread {
@@ -75,7 +74,12 @@ public class DownloadIndexesThread {
 	private List<IndexItem> voiceRecItems = new LinkedList<>();
 	private List<IndexItem> voiceTTSItems = new LinkedList<>();
 
-	private final ReentrantLock resourcesLock = new ReentrantLock();
+	private class DownloadIndexesResult {
+		Map<WorldRegion, Map<String, IndexItem>> resourcesByRegions = new HashMap<>();
+		List<IndexItem> voiceRecItems = new LinkedList<>();
+		List<IndexItem> voiceTTSItems = new LinkedList<>();
+		IndexFileList indexFiles = null;
+	}
 
 	DatabaseHelper dbHelper;
 
@@ -85,10 +89,6 @@ public class DownloadIndexesThread {
 		downloadFileHelper = new DownloadFileHelper(app);
 		dateFormat = app.getResourceManager().getDateFormat();
 		dbHelper = new DatabaseHelper(app);
-	}
-
-	public ReentrantLock getResourcesLock() {
-		return resourcesLock;
 	}
 
 	public DatabaseHelper getDbHelper() {
@@ -170,56 +170,51 @@ public class DownloadIndexesThread {
 		return voiceTTSItems;
 	}
 
-	private boolean prepareData(List<IndexItem> resources) {
-		resourcesLock.lock();
-		try {
-
-			List<IndexItem> resourcesInRepository;
-			if (resources != null) {
-				resourcesInRepository = resources;
-			} else {
-				resourcesInRepository = DownloadActivity.downloadListIndexThread.getCachedIndexFiles();
-			}
-			if (resourcesInRepository == null) {
-				return false;
-			}
-
-			resourcesByRegions.clear();
-			voiceRecItems.clear();
-			voiceTTSItems.clear();
-
-			for (WorldRegion region : app.getWorldRegion().getFlattenedSubregions()) {
-				processRegion(resourcesInRepository, false, region);
-			}
-			processRegion(resourcesInRepository, true, app.getWorldRegion());
-
-			final Collator collator = OsmAndCollator.primaryCollator();
-			final OsmandRegions osmandRegions = app.getRegions();
-
-			Collections.sort(voiceRecItems, new Comparator<IndexItem>() {
-				@Override
-				public int compare(IndexItem lhs, IndexItem rhs) {
-					return collator.compare(lhs.getVisibleName(app.getApplicationContext(), osmandRegions),
-							rhs.getVisibleName(app.getApplicationContext(), osmandRegions));
-				}
-			});
-
-			Collections.sort(voiceTTSItems, new Comparator<IndexItem>() {
-				@Override
-				public int compare(IndexItem lhs, IndexItem rhs) {
-					return collator.compare(lhs.getVisibleName(app.getApplicationContext(), osmandRegions),
-							rhs.getVisibleName(app.getApplicationContext(), osmandRegions));
-				}
-			});
-
-			return true;
-
-		} finally {
-			resourcesLock.unlock();
+	private boolean prepareData(List<IndexItem> resources,
+								Map<WorldRegion, Map<String, IndexItem>> resourcesByRegions,
+								List<IndexItem> voiceRecItems, List<IndexItem> voiceTTSItems) {
+		List<IndexItem> resourcesInRepository;
+		if (resources != null) {
+			resourcesInRepository = resources;
+		} else {
+			resourcesInRepository = DownloadActivity.downloadListIndexThread.getCachedIndexFiles();
 		}
+		if (resourcesInRepository == null) {
+			return false;
+		}
+
+		for (WorldRegion region : app.getWorldRegion().getFlattenedSubregions()) {
+			processRegion(resourcesInRepository, resourcesByRegions, voiceRecItems, voiceTTSItems, false, region);
+		}
+		processRegion(resourcesInRepository, resourcesByRegions, voiceRecItems, voiceTTSItems, true, app.getWorldRegion());
+
+		final Collator collator = OsmAndCollator.primaryCollator();
+		final OsmandRegions osmandRegions = app.getRegions();
+
+		Collections.sort(voiceRecItems, new Comparator<IndexItem>() {
+			@Override
+			public int compare(IndexItem lhs, IndexItem rhs) {
+				return collator.compare(lhs.getVisibleName(app.getApplicationContext(), osmandRegions),
+						rhs.getVisibleName(app.getApplicationContext(), osmandRegions));
+			}
+		});
+
+		Collections.sort(voiceTTSItems, new Comparator<IndexItem>() {
+			@Override
+			public int compare(IndexItem lhs, IndexItem rhs) {
+				return collator.compare(lhs.getVisibleName(app.getApplicationContext(), osmandRegions),
+						rhs.getVisibleName(app.getApplicationContext(), osmandRegions));
+			}
+		});
+
+		return true;
 	}
 
-	private void processRegion(List<IndexItem> resourcesInRepository, boolean processVoiceFiles, WorldRegion region) {
+	private void processRegion(List<IndexItem> resourcesInRepository, Map<WorldRegion,
+			Map<String, IndexItem>> resourcesByRegions,
+							   List<IndexItem> voiceRecItems, List<IndexItem> voiceTTSItems,
+							   boolean processVoiceFiles, WorldRegion region) {
+
 		String downloadsIdPrefix = region.getDownloadsIdPrefix();
 
 		Map<String, IndexItem> regionResources = new HashMap<>();
@@ -532,8 +527,8 @@ public class DownloadIndexesThread {
 
 	public void runReloadIndexFiles() {
 		checkRunning();
-		final BasicProgressAsyncTask<Void, Void, IndexFileList> inst
-				= new BasicProgressAsyncTask<Void, Void, IndexFileList>(ctx) {
+		final BasicProgressAsyncTask<Void, Void, DownloadIndexesResult> inst
+				= new BasicProgressAsyncTask<Void, Void, DownloadIndexesResult>(ctx) {
 
 			@Override
 			protected void onPreExecute() {
@@ -543,19 +538,24 @@ public class DownloadIndexesThread {
 			}
 
 			@Override
-			protected IndexFileList doInBackground(Void... params) {
+			protected DownloadIndexesResult doInBackground(Void... params) {
+				DownloadIndexesResult result = new DownloadIndexesResult();
 				IndexFileList indexFileList = DownloadOsmandIndexesHelper.getIndexesList(ctx);
+				result.indexFiles = indexFileList;
 				if (indexFileList != null) {
 					updateLoadedFiles();
 					prepareFilesToUpdate();
-					prepareData(indexFileList.getIndexFiles());
+					prepareData(indexFileList.getIndexFiles(), result.resourcesByRegions, result.voiceRecItems, result.voiceTTSItems);
 				}
-				return indexFileList;
+				return result;
 			}
 
-			protected void onPostExecute(IndexFileList result) {
+			protected void onPostExecute(DownloadIndexesResult result) {
 				notifyFilesToUpdateChanged();
-				indexFiles = result;
+				indexFiles = result.indexFiles;
+				resourcesByRegions = result.resourcesByRegions;
+				voiceRecItems = result.voiceRecItems;
+				voiceTTSItems = result.voiceTTSItems;
 				if (indexFiles != null && uiActivity != null) {
 					boolean basemapExists = uiActivity.getMyApplication().getResourceManager().containsBasemap();
 					IndexItem basemap = indexFiles.getBasemap();
