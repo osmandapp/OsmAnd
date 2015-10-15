@@ -551,8 +551,8 @@ public class DownloadIndexesThread {
 			}
 
 			protected void onPostExecute(DownloadIndexesResult result) {
-				notifyFilesToUpdateChanged();
 				indexFiles = result.indexFiles;
+				notifyFilesToUpdateChanged();
 				resourcesByRegions = result.resourcesByRegions;
 				voiceRecItems = result.voiceRecItems;
 				voiceTTSItems = result.voiceTTSItems;
