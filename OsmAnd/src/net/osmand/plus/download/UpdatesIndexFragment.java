@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -43,28 +42,6 @@ public class UpdatesIndexFragment extends OsmAndListFragment {
 	private UpdateIndexAdapter listAdapter;
 	List<IndexItem> indexItems = new ArrayList<>();
 
-
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.update_index, container, false);
-		return view;
-	}
-
-	private void refreshSelectAll() {
-		View view = getView();
-		if (view == null) {
-			return;
-		}
-		CheckBox selectAll = (CheckBox) view.findViewById(R.id.select_all);
-		for (IndexItem item : indexItems) {
-			if (!getMyActivity().getEntriesToDownload().containsKey(item)){
-				selectAll.setChecked(false);
-				return;
-			}
-		}
-		selectAll.setChecked(true);
-	}
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -73,6 +50,11 @@ public class UpdatesIndexFragment extends OsmAndListFragment {
 		}
 		createListView();
 		setHasOptionsMenu(true);
+	}
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		return inflater.inflate(R.layout.update_index, container, false);
 	}
 
 	private void createListView() {
@@ -94,7 +76,8 @@ public class UpdatesIndexFragment extends OsmAndListFragment {
 		setListAdapter(listAdapter);
 	}
 
-	private void updateHeader(){
+	private void updateHeader() {
+		osmandRegions = getMyApplication().getRegions();
 		View view = getView();
 		if (getView() == null) {
 			return;
@@ -119,25 +102,8 @@ public class UpdatesIndexFragment extends OsmAndListFragment {
 
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
-		final CheckBox ch = (CheckBox) v.findViewById(R.id.check_download_item);
-		onItemSelected(ch, position);
-	}
-
-	private void onItemSelected(CheckBox ch, int position) {
 		final IndexItem e = (IndexItem) getListAdapter().getItem(position);
-		if (ch.isChecked()) {
-			ch.setChecked(!ch.isChecked());
-			getMyActivity().getEntriesToDownload().remove(e);
-			getMyActivity().updateFragments();
-		} else {
-			List<DownloadEntry> download = e.createDownloadEntry(getMyApplication(), e.getType(), new ArrayList<DownloadEntry>());
-			if (download.size() > 0) {
-				getMyActivity().getEntriesToDownload().put(e, download);
-				getMyActivity().updateFragments();
-				ch.setChecked(!ch.isChecked());
-			}
-		}
-		refreshSelectAll();
+		getMyActivity().startDownload(e);
 	}
 
 	public DownloadActivity getMyActivity() {
@@ -293,8 +259,8 @@ public class UpdatesIndexFragment extends OsmAndListFragment {
 					context.getMyApplication().getResourceManager().getOsmandRegions();
 			String eName = indexItem.getVisibleName(context.getMyApplication(), osmandRegions);
 
-			nameTextView.setText(eName.trim().replace('\n', ' ').replace("TTS","")); //$NON-NLS-1$
-			String d =  getMapDescription(indexItem);
+			nameTextView.setText(eName.trim().replace('\n', ' ').replace("TTS", "")); //$NON-NLS-1$
+			String d = getMapDescription(indexItem);
 			descrTextView.setText(d);
 
 			String sfName = indexItem.getTargetFileName();
@@ -304,36 +270,40 @@ public class UpdatesIndexFragment extends OsmAndListFragment {
 			if (dt != null) {
 				try {
 					Date tm = format.parse(dt);
-					long days = Math.max(1, (indexItem.getTimestamp() -  tm.getTime()) / (24 * 60 * 60 * 1000) + 1);
+					long days = Math.max(1, (indexItem.getTimestamp() - tm.getTime()) / (24 * 60 * 60 * 1000) + 1);
 					mapDateTextView.setText(days + " " + context.getString(R.string.days_behind));
 				} catch (ParseException e1) {
 					e1.printStackTrace();
 				}
 			}
+			rightImageButton.setVisibility(View.VISIBLE);
+			rightImageButton.setImageDrawable(
+					context.getMyApplication().getIconsCache()
+							.getContentIcon(R.drawable.ic_action_import));
 		}
 
 
-		private String getMapDescription(IndexItem item){
+		private String getMapDescription(IndexItem item) {
 			String typeName = getTypeName(item, item.getType().getStringResource());
 			String date = item.getDate(format);
 			String size = item.getSizeDescription(context);
 			return typeName + "  " + date + "  " + size;
 		}
 
-		private String getTypeName(IndexItem item, int resId){
+		private String getTypeName(IndexItem item, int resId) {
 			Activity activity = context;
-			if (resId == R.string.download_regular_maps){
+			if (resId == R.string.download_regular_maps) {
 				return activity.getString(R.string.shared_string_map);
-			} else if (resId == R.string.download_wikipedia_maps){
+			} else if (resId == R.string.download_wikipedia_maps) {
 				return activity.getString(R.string.shared_string_wikipedia);
 			} else if (resId == R.string.voices) {
 				return item.getTargetFileName().contains("tts") ? activity.getString(R.string.ttsvoice) : activity
 						.getString(R.string.voice);
-			} else if (resId == R.string.download_roads_only_maps){
+			} else if (resId == R.string.download_roads_only_maps) {
 				return activity.getString(R.string.roads_only);
-			} else if (resId == R.string.download_srtm_maps){
+			} else if (resId == R.string.download_srtm_maps) {
 				return activity.getString(R.string.download_srtm_maps);
-			} else if (resId == R.string.download_hillshade_maps){
+			} else if (resId == R.string.download_hillshade_maps) {
 				return activity.getString(R.string.download_hillshade_maps);
 			}
 			return "";

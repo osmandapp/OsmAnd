@@ -133,7 +133,7 @@ public class ItemViewHolder {
 			descrTextView.setText(indexItem.getSizeDescription(context));
 		}
 		rightImageButton.setVisibility(View.VISIBLE);
-		rightImageButton.setImageDrawable(getContextIcon(context, R.drawable.ic_action_import));
+		rightImageButton.setImageDrawable(getContentIcon(context, R.drawable.ic_action_import));
 		progressBar.setVisibility(View.GONE);
 
 		if (rightButtonAction != RightButtonAction.UNKNOWN) {
@@ -195,15 +195,15 @@ public class ItemViewHolder {
 			int colorId = outdated ? R.color.color_distance : R.color.color_ok;
 			final int color = context.getResources().getColor(colorId);
 			mapDateTextView.setTextColor(color);
-			leftImageView.setImageDrawable(getContextIcon(context,
+			leftImageView.setImageDrawable(getContentIcon(context,
 					indexItem.getType().getIconResource(), color));
 			nameTextView.setTextColor(textColorPrimary);
 		} else if (disabled) {
-			leftImageView.setImageDrawable(getContextIcon(context,
+			leftImageView.setImageDrawable(getContentIcon(context,
 					indexItem.getType().getIconResource(), textColorSecondary));
 			nameTextView.setTextColor(textColorSecondary);
 		} else {
-			leftImageView.setImageDrawable(getContextIcon(context,
+			leftImageView.setImageDrawable(getContentIcon(context,
 					indexItem.getType().getIconResource()));
 			nameTextView.setTextColor(textColorPrimary);
 		}
@@ -227,14 +227,14 @@ public class ItemViewHolder {
 		Drawable leftImageDrawable = null;
 		switch (region.getMapState()) {
 			case NOT_DOWNLOADED:
-				leftImageDrawable = getContextIcon(context, R.drawable.ic_map);
+				leftImageDrawable = getContentIcon(context, R.drawable.ic_map);
 				break;
 			case DOWNLOADED:
-				leftImageDrawable = getContextIcon(context, R.drawable.ic_map,
+				leftImageDrawable = getContentIcon(context, R.drawable.ic_map,
 						context.getResources().getColor(R.color.color_ok));
 				break;
 			case OUTDATED:
-				leftImageDrawable = getContextIcon(context, R.drawable.ic_map,
+				leftImageDrawable = getContentIcon(context, R.drawable.ic_map,
 						context.getResources().getColor(R.color.color_distance));
 				break;
 		}
@@ -244,11 +244,11 @@ public class ItemViewHolder {
 		progressBar.setVisibility(View.GONE);
 	}
 
-	private Drawable getContextIcon(DownloadActivity context, int resourceId) {
+	private Drawable getContentIcon(DownloadActivity context, int resourceId) {
 		return context.getMyApplication().getIconsCache().getContentIcon(resourceId);
 	}
 
-	private Drawable getContextIcon(DownloadActivity context, int resourceId, int color) {
+	private Drawable getContentIcon(DownloadActivity context, int resourceId, int color) {
 		return context.getMyApplication().getIconsCache().getPaintedContentIcon(resourceId, color);
 	}
 
