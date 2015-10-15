@@ -78,8 +78,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment {
 	}
 
 	private void updateHeader() {
-		osmandRegions = getMyApplication().getRegions();
-		View view = getView();
+1		View view = getView();
 		if (getView() == null) {
 			return;
 		}
