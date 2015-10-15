@@ -33,7 +33,7 @@
 	<string name="poi_carpet">Tapijtwinkel</string>
 	<string name="poi_chemist">Drogisterij</string>
 	<string name="poi_clothes">Kledingwinkel</string>
-	<string name="poi_child_clothes">Kinderkledingwinkel</string>
+	<string name="poi_clothes_children">Kinderkledingwinkel</string>
 	<string name="poi_shoes">Schoenenwinkel</string>
 	<string name="poi_computer">Computerwinkel</string>
 	<string name="poi_copyshop">Kopieerzaak</string>

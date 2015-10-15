@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
 <!--  categories -->
 	<string name="poi_shop">Shop</string>
@@ -85,7 +85,7 @@
 	<string name="poi_charity">Charity shop</string>
 	<string name="poi_chemist">Drug store</string>
 	<string name="poi_clothes">Apparel store</string>
-	<string name="poi_child_clothes">Childrens apparel</string>
+	<string name="poi_clothes_children">Childrens apparel</string>
 	<string name="poi_shoes">Shoe store</string>
 	<string name="poi_candles">Candles store</string>
 	<string name="poi_computer">Computer store</string>
@@ -2044,5 +2044,29 @@
 	<string name="poi_surveillance_indoor">Surveillance: indoor</string>
 	<string name="poi_surveillance_outdoor">Surveillance: outdoor</string>
 	<string name="poi_surveillance_public">Surveillance: public</string>
+
+	<string name="poi_clothes_women">Women's clothes</string>
+	<string name="poi_clothes_underwear">Underwear</string>
+	<string name="poi_clothes_men">Men's clothing</string>
+	<string name="poi_clothes_wedding">Wedding dresses</string>
+	<string name="poi_clothes_sports">Sports wear</string>
+	<string name="poi_clothes_babies">Babies clothes</string>
+	<string name="poi_clothes_denim">Clothing from denim</string>
+	<string name="poi_clothes_workwear">Workwear</string>
+	<string name="poi_clothes_hats">Hats</string>
+	<string name="poi_clothes_fur">Fur</string>
+	<string name="poi_clothes_leather">Leather</string>
+	<string name="poi_clothes_costumes">Costumes</string>
+	<string name="poi_clothes_traditional">Traditional clothes</string>
+	<string name="poi_clothes_suits">Suits</string>
+	<string name="poi_clothes_maternity">Maternity clothes</string>
+	<string name="poi_clothes_vintage">Vintage clothes</string>
+	<string name="poi_clothes_oversize">Oversize clothes</string>
+	<string name="poi_clothes_schoolwear">School wear</string>
+	<string name="poi_clothes_swimwear">Swimwear</string>
+	<string name="poi_clothes_socks">Socks</string>
+	<string name="poi_clothes_shirts">Shirts</string>
+	<string name="poi_clothes_dance">Clothes for dancing</string>
+	<string name="poi_clothes_military">Military clothes</string>
 
 </resources>

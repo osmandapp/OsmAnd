@@ -38,7 +38,7 @@
 	<string name="poi_charity">Благотворительный магазин</string>
 	<string name="poi_chemist">Бытовая химия, косметика</string>
 	<string name="poi_clothes">Одежда</string>
-	<string name="poi_child_clothes">Детская одежда</string>
+	<string name="poi_clothes_children">Детская одежда</string>
 	<string name="poi_shoes">Обувь</string>
 	<string name="poi_computer">Компьютеры</string>
 	<string name="poi_copyshop">Ксерокопия, полиграфия</string>
@@ -2039,5 +2039,29 @@
 	<string name="poi_surveillance_indoor">Видеонаблюдение: внутри</string>
 	<string name="poi_surveillance_outdoor">Видеонаблюдение: снаружи</string>
 	<string name="poi_surveillance_public">Видеонаблюдение: в общественных местах</string>
+
+	<string name="poi_clothes_women">Женская одежда</string>
+	<string name="poi_clothes_underwear">Нижнее бельё</string>
+	<string name="poi_clothes_men">Мужская одежда</string>
+	<string name="poi_clothes_wedding">Свадебные платья</string>
+	<string name="poi_clothes_sports">Спортивная одежда</string>
+	<string name="poi_clothes_babies">Одежда для новорождённых</string>
+	<string name="poi_clothes_denim">Одежда из джинсовой ткани</string>
+	<string name="poi_clothes_workwear">Рабочая одежда</string>
+	<string name="poi_clothes_hats">Шляпы</string>
+	<string name="poi_clothes_fur">Меховая одежда</string>
+	<string name="poi_clothes_leather">Кожаная одежда</string>
+	<string name="poi_clothes_costumes">Карнавальные костюмы</string>
+	<string name="poi_clothes_traditional">Традиционная одежда</string>
+	<string name="poi_clothes_suits">Костюмы, смокинги</string>
+	<string name="poi_clothes_maternity">Одежда для беременных</string>
+	<string name="poi_clothes_vintage">Старинная одежда</string>
+	<string name="poi_clothes_oversize">Одежда для больших людей</string>
+	<string name="poi_clothes_schoolwear">Школьная форма</string>
+	<string name="poi_clothes_swimwear">Купальные костюмы</string>
+	<string name="poi_clothes_socks">Носки</string>
+	<string name="poi_clothes_shirts">Футболки</string>
+	<string name="poi_clothes_dance">Одежда для танцев</string>
+	<string name="poi_clothes_military">Военная одежда</string>
 
 </resources>

@@ -52,7 +52,7 @@
 	<string name="poi_carpet">Koberce</string>
 	<string name="poi_chemist">Drogéria</string>
 	<string name="poi_clothes">Oblečenie/Konfekcia</string>
-	<string name="poi_child_clothes">Detské oblečenie</string>
+	<string name="poi_clothes_children">Detské oblečenie</string>
 	<string name="poi_shoes">Obuv</string>
 	<string name="poi_computer">Počítače</string>
 	<string name="poi_copyshop">Kopírovanie</string>

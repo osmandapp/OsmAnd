@@ -115,7 +115,7 @@
 	<string name="poi_tobacco">Venda de tabac</string>
 	<string name="poi_carpet">Botiga de catifes</string>
 	<string name="poi_clothes">Magatzem de roba</string>
-	<string name="poi_child_clothes">Roba infantil</string>
+	<string name="poi_clothes_children">Roba infantil</string>
 	<string name="poi_curtain">Pelleteria</string>
 	<string name="poi_fabric">Botiga de teixits</string>
 	<string name="poi_public_transport_platform">Parada de transport públic</string>
