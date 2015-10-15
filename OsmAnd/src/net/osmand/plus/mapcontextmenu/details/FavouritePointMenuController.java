@@ -64,6 +64,11 @@ public class FavouritePointMenuController extends MenuController {
 	}
 
 	@Override
+	public int getFavActionIconId() {
+		return R.drawable.ic_action_edit_dark;
+	}
+
+	@Override
 	public String getTypeStr() {
 		return fav.getCategory().length() == 0 ?
 				getMapActivity().getString(R.string.shared_string_favorites) : fav.getCategory();
