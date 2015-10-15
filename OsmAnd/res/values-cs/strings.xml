@@ -2107,4 +2107,14 @@ s často kladenými otázkami.</string>
     <string name="region_maps">Mapy regionů</string>
     <string name="world_maps">Světové mapy</string>
     <string name="world_regions">Světové regiony</string>
-    </resources>
+    <string name="favorite_category_dublicate_message">Zadané jméno kategorie již existuje. Prosím určete jiný název.</string>
+    <string name="favorite_category_name">Název kategorie</string>
+    <string name="favorite_category_add_new_title">Přidat novou kategorii</string>
+    <string name="activate_seamarks_plugin">Prosím aktivujte modul Námořní značky</string>
+    <string name="activate_srtm_plugin">Prosím aktivujte modul Vrstevnice</string>
+    <string name="later">Později</string>
+    <string name="get_full_version">Získat plnou verzi</string>
+    <string name="downloads">Stahování</string>
+    <string name="value_downloaded_from_max">%1$.1f z %2$.1f MB</string>
+    <string name="file_size_in_mb">%.1f MB</string>
+</resources>
