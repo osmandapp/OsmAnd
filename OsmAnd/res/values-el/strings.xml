@@ -1051,7 +1051,7 @@
 	<string name="safe_mode_description">Εκτέλεση της εφαρμογής σε ασφαλή λειτουργία (χρησιμοποιώντας πιο αργό Android αντί του εγγενούς κώδικα).</string>
     <string name="safe_mode">Ασφαλής λειτουργία</string>
     <string name="native_library_not_running">Η εφαρμογή εκτελείται σε ασφαλή λειτουργία (απενεργοποίηση από τις Ρυθμίσεις).</string>
-    <string name="background_service_is_enabled_question">Η υπηρεσία κατάστασης νάρκης του OsmAnd εκτελείται ακόμη. Θέλετε να την διακόψετε;</string>
+    <string name="background_service_is_enabled_question">Ο OsmAnd εκτελείται ακόμη. Θέλετε να τον διακόψετε;</string>
     <string name="tip_recent_changes_1_0_0_t">Αλλαγές στην 1.0.0:
 \n\t* Βελτιωμένη δρομολόγηση: γρηγορότερη, με καλύτερη ακρίβεια, μέχρι 250 χλμ
 \n\t* Εισαγωγή οδικών-μόνο χαρτών\n\t* Ο χάρτης δεν χάνει το κλείδωμα θέσης μετά από διακοπές
@@ -1249,7 +1249,7 @@
 	<string name="av_camera_focus_edof">Εκτεταμένου βάθους πεδίου (EDOF)</string>
 	<string name="av_camera_focus_infinity">Η εστίαση ρυθμίστηκε στο άπειρο</string>
 	<string name="av_photo_play_sound">Αναπαραγωγή ήχου κατά τη λήψη φωτογραφίας</string>
-	<string name="announce_gpx_waypoints">Εκφώνηση GPX σημείων διαδρομής</string>
+	<string name="announce_gpx_waypoints">GPX σημεία διαδρομής</string>
     <string name="speak_title">Εκφώνηση…</string>
 	<string name="speak_descr">Ρυθμίστε για εκφώνηση ονομάτων οδών, προειδοποιήσεων κυκλοφορίας (αναγκαστικές στάσεις, σαμαράκια), κάμερες ταχύτητας, όρια ταχύτητας</string>
 	<string name="speak_street_names">Εκφώνηση ονομάτων οδών (TTS)</string>
@@ -1399,7 +1399,7 @@
     <string name="gpx_selection_segment_title">Τμήμα</string>
     <string name="gpx_selection_track">%1$s
 \nΊχνος %2$s</string>
-    <string name="gpx_file_is_empty">Το ίχνος gpx είναι άδειο</string>
+    <string name="gpx_file_is_empty">Το ίχνος GPX είναι άδειο</string>
     <string name="osmo_center_location">Κέντρο στην οθόνη</string>
     <string name="osmo_track_interval_descr">Επιλέξτε το χρονικό διάστημα αποστολής της θέσης</string>
     <string name="osmo_expire_group">Λήγει στις</string>
@@ -1507,7 +1507,7 @@
 	<string name="shared_string_share">Διαμοιρασμός</string>
 	<string name="navigation_intent_invalid">Μη έγκυρη μορφή: %s</string>
 <string name="stop_navigation_service">Διακοπή</string>
-	<string name="sleep_mode_stop_dialog">Διακοπή κατάστασης νάρκης του GPS;</string>
+	<string name="sleep_mode_stop_dialog">Διακοπή λειτουργίας παρασκηνίου του GPS;</string>
 	<string name="map_preferred_locale_descr">Προτιμώμενη γλώσσα για τις ετικέτες στον χάρτη (αν δεν είναι διαθέσιμη θα μεταβεί στα Αγγλικά ή στα τοπικά ονόματα)</string>
     <string name="map_preferred_locale">Προτιμώμενη γλώσσα χάρτη</string>
     <string name="local_map_names">Τοπικά ονόματα</string>
@@ -1529,7 +1529,7 @@
     <string name="continue_navigation">Συνέχιση της Πλοήγησης</string>
     <string name="pause_navigation">Παύση Πλοήγησης</string>
     <string name="keep_navigation_service">Διατήρηση</string>
-	<string name="enable_sleep_mode">Ενεργοποίηση κατάστασης νάρκης GPS</string>
+	<string name="enable_sleep_mode">Ενεργοποίηση λειτουργίας παρασκηνίου του GPS</string>
 	<string name="gps_wake_up_timer">Διάστημα αφύπνισης GPS</string>
 	<string name="rendering_attr_hideNonVehicleHighways_name">Απόκρυψη μη αμαξιτών δρόμων</string>
     <string name="rendering_attr_showSurfaces_name">Εμφάνιση οδοστρωμάτων</string>
@@ -1564,8 +1564,8 @@
     <string name="shared_string_all">Όλα</string>
     <string name="targets">Προορισμοί</string>
     <string name="way_alarms">Προειδοποιήσεις κυκλοφορίας</string>
-    <string name="speak_favorites">Ανακοίνωση κοντινών Αγαπημένων</string>
-    <string name="speak_poi">Ανακοίνωση κοντινών ΣΕ</string>
+    <string name="speak_favorites">Κοντινά Αγαπημένα</string>
+    <string name="speak_poi">Κοντινά ΣΕ</string>
     <string name="record_plugin_name">Καταγραφή ταξιδίων</string>
     <string name="int_hour">ω</string>
     <string name="duration">Διάρκεια</string>
@@ -1624,7 +1624,7 @@
     <string name="rendering_attr_transportStops_name">Στάσεις ΜΜΜ</string>
     <string name="shared_string_dismiss">Απόρριψη</string>
     
-	<string name="speak_pedestrian">Ανακοίνωση διαβάσεων πεζών</string>
+	<string name="speak_pedestrian">Διαβάσεις πεζών</string>
     <string name="traffic_warning_pedestrian">Διάβαση πεζών</string>
 	<string name="routing_attr_no_new_routing_name">Κανόνες δρομολόγησης v1.9</string>
     <string name="routing_attr_no_new_routing_description">Να μην χρησιμοποιηθούν οι κανόνες δρομολόγησης που εισήχθησαν στην έκδοση 1.9</string>
@@ -1638,7 +1638,7 @@
 	<string name="wake_on_voice">Άναμμα οθόνης</string>
     <string name="map_widget_appearance_rem">Εναπομείναντα στοιχεία</string>
     <string name="speed_limit_exceed_message">Επιλέξτε το περιθώριο του ορίου ταχύτητας, πάνω από το οποίο θα ακούτε ηχητική προειδοποίηση.</string>
-	<string name="fav_point_dublicate_message">Αλλάχτηκε το όνομα του αγαπημένου σημείου σε %1$s για να αποφευχθούν διπλά ονόματα.</string>
+	<string name="fav_point_dublicate_message">Το καθορισμένο όνομα αγαπημένου είναι ήδη σε χρήση, αλλάχτηκε σε %1$s για να αποφευχθούν διπλά ονόματα.</string>
     <string name="rendering_value_germanRoadAtlas_name">Γερμανικός άτλαντας δρόμων</string>
 	<string name="rendering_value_americanRoadAtlas_name">Αμερικάνικος άτλαντας δρόμων</string>
     <string name="use_opengl_render">Χρήση αποτύπωσης OpenGL</string>
@@ -1830,4 +1830,29 @@
     <string name="rendering_value_highContrastRoads_name">Δρόμοι με υψηλή αντίθεση</string>
 	<string name="plugin_settings">Πρόσθετα</string>
 	<string name="av_locations">Τοποθεσίες</string>
-    </resources>
+    <string name="favorite_category_dublicate_message">Το συγκεκριμένο όνομα κατηγορίας υπάρχει ήδη. Παρακαλώ ορίστε διαφορετικό όνομα.</string>
+    <string name="favorite_category_name">Όνομα κατηγορίας</string>
+    <string name="favorite_category_add_new_title">Προσθήκη νέας κατηγορίας</string>
+    <string name="regions">Περιοχές</string>
+    <string name="additional_maps">Πρόσθετοι χάρτες</string>
+    <string name="world_maps">Παγκόσμιοι χάρτες</string>
+    <string name="srtm_plugin_disabled">Ισοϋψείς γραμμές απενεργοποιημένες</string>
+    <string name="favorite_category_add_new">Προσθήκη νέου</string>
+    <string name="favorite_category_select">Επιλέξτε κατηγορία</string>
+    <string name="default_speed_system_descr">Ορισμός συστήματος μέτρησης ταχύτητας</string>
+    <string name="default_speed_system">Μέτρηση ταχύτητας</string>
+    <string name="si_nm">Ναυτικά μίλια</string>
+    <string name="si_kmh">Χιλιόμετρα ανά ώρα</string>
+    <string name="si_mph">Μίλια ανά ώρα</string>
+    <string name="si_m_s">Μέτρα ανά δευτερόλεπτο</string>
+    <string name="si_min_km">Λεπτά ανά χιλιόμετρο</string>
+    <string name="si_min_m">Λεπτά ανά μίλι</string>
+    <string name="si_nm_h">Ναυτικά μίλια ανά ώρα (κόμβοι)</string>
+    <string name="shared_string_trip_recording">Καταγραφή ταξιδιού</string>
+    <string name="shared_string_navigation">Πλοήγηση</string>
+    <string name="osmand_running_in_background">Εκτέλεση στο υπόβαθρο</string>
+    <string name="address_unknown">Η διεύθυνση δεν είναι ακόμη γνωστή</string>
+    <string name="navigate_point_northing">Βόρεια</string>
+    <string name="navigate_point_easting">Ανατολικά</string>
+    <string name="proxy_port_title">Θύρα διακομιστή μεσολάβησης</string>
+	</resources>

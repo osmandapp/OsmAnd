@@ -67,8 +67,8 @@ public class BinaryInspector {
 		if(args.length == 1 && "test".equals(args[0])) {
 			in.inspector(new String[]{
 //				"-vpoi",
-//				"-vmap", "-vmapobjects", // "-vmapcoordinates", 
-				"-vrouting",
+				"-vmap","-vmapobjects", // "-vmapcoordinates", 
+//				"-vrouting",
 //				"-vaddress", "-vcities",//"-vstreetgroups", 
 //				"-vstreets", "-vbuildings", "-vintersections", 
 //				"-zoom=15",
@@ -1036,9 +1036,9 @@ public class BinaryInspector {
 						while(it.hasNext()) {
 							Entry<String, String> e = it.next();
 							if(e.getValue().startsWith(" gz ")) {
-								s += e.getKey() +"=...";
+								s += " " + e.getKey() +"=...";
 							} else {
-								s += e.getKey() +"=" +e.getValue();
+								s += " " + e.getKey() +"=" +e.getValue();
 							}
 						}
 						

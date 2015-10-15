@@ -2202,4 +2202,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="downloads">Téléchargements</string>
 <string name="favorite_category_name">Nom de la catégorie</string>
     <string name="favorite_category_add_new_title">Ajouter une catégorie</string>
-    </resources>
+    <string name="favorite_category_dublicate_message">Cette catégorie existe déjà. Merci d\'indiquer un autre nom.</string>
+    <string name="confirm_download_roadmaps">Êtes-vous certains de vouloir télécharger les routes alors que vous disposez d\'une carte complète ?</string>
+    <string name="value_downloaded_from_max">%1$.1f de %2$.1f MB</string>
+    <string name="file_size_in_mb">%.1f MB</string>
+</resources>

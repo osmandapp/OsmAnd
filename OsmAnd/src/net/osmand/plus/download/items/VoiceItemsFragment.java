@@ -71,7 +71,7 @@ public class VoiceItemsFragment extends OsmandExpandableListFragment {
 		setListView(listView);
 
 		if (voicePromptsType != VoicePromptsType.NONE) {
-			ItemsListBuilder builder = getDownloadActivity().getItemsBuilder();
+			ItemsListBuilder builder = getDownloadActivity().getVoicePromptsBuilder();
 			if (builder != null) {
 				fillVoiceItemsAdapter(builder);
 				listAdapter.notifyDataSetChanged();

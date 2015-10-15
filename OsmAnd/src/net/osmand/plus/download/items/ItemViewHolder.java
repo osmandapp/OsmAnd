@@ -96,7 +96,7 @@ public class ItemViewHolder {
 
 		if (indexItem.getType() == DownloadActivityType.VOICE_FILE) {
 			nameTextView.setText(indexItem.getVisibleName(context,
-					context.getMyApplication().getRegions()));
+					context.getMyApplication().getRegions(), false));
 		} else {
 			if (indexItem.getSimplifiedFileName().equals(ItemsListBuilder.WORLD_SEAMARKS_KEY) && nauticalPluginDisabled) {
 				rightButtonAction = RightButtonAction.ASK_FOR_SEAMARKS_PLUGIN;
@@ -119,7 +119,7 @@ public class ItemViewHolder {
 			if (showTypeInTitle) {
 				nameTextView.setText(indexItem.getType().getString(context));
 			} else {
-				nameTextView.setText(indexItem.getVisibleName(context, context.getMyApplication().getRegions()));
+				nameTextView.setText(indexItem.getVisibleName(context, context.getMyApplication().getRegions(), false));
 			}
 		}
 

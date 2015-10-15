@@ -52,6 +52,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.locks.ReentrantLock;
 
 @SuppressLint("NewApi")
 public class DownloadIndexesThread {
@@ -73,7 +74,7 @@ public class DownloadIndexesThread {
 	private List<IndexItem> voiceRecItems = new LinkedList<>();
 	private List<IndexItem> voiceTTSItems = new LinkedList<>();
 
-	private boolean dataPrepared;
+	private final ReentrantLock resourcesLock = new ReentrantLock();
 
 	DatabaseHelper dbHelper;
 
@@ -83,6 +84,10 @@ public class DownloadIndexesThread {
 		downloadFileHelper = new DownloadFileHelper(app);
 		dateFormat = app.getResourceManager().getDateFormat();
 		dbHelper = new DatabaseHelper(app);
+	}
+
+	public ReentrantLock getResourcesLock() {
+		return resourcesLock;
 	}
 
 	public DatabaseHelper getDbHelper() {
@@ -152,10 +157,6 @@ public class DownloadIndexesThread {
 		return itemsToUpdate;
 	}
 
-	public boolean isDataPrepared() {
-		return dataPrepared;
-	}
-
 	public Map<WorldRegion, Map<String, IndexItem>> getResourcesByRegions() {
 		return resourcesByRegions;
 	}
@@ -169,45 +170,52 @@ public class DownloadIndexesThread {
 	}
 
 	private boolean prepareData(List<IndexItem> resources) {
-		List<IndexItem> resourcesInRepository;
-		if (resources != null) {
-			resourcesInRepository = resources;
-		} else {
-			resourcesInRepository = DownloadActivity.downloadListIndexThread.getCachedIndexFiles();
-		}
-		if (resourcesInRepository == null) {
-			return false;
-		}
+		resourcesLock.lock();
+		try {
 
-		resourcesByRegions.clear();
-		voiceRecItems.clear();
-		voiceTTSItems.clear();
-
-		for (WorldRegion region : app.getWorldRegion().getFlattenedSubregions()) {
-			processRegion(resourcesInRepository, false, region);
-		}
-		processRegion(resourcesInRepository, true, app.getWorldRegion());
-
-		final Collator collator = OsmAndCollator.primaryCollator();
-		final OsmandRegions osmandRegions = app.getRegions();
-
-		Collections.sort(voiceRecItems, new Comparator<IndexItem>() {
-			@Override
-			public int compare(IndexItem lhs, IndexItem rhs) {
-				return collator.compare(lhs.getVisibleName(app.getApplicationContext(), osmandRegions),
-						rhs.getVisibleName(app.getApplicationContext(), osmandRegions));
+			List<IndexItem> resourcesInRepository;
+			if (resources != null) {
+				resourcesInRepository = resources;
+			} else {
+				resourcesInRepository = DownloadActivity.downloadListIndexThread.getCachedIndexFiles();
 			}
-		});
-
-		Collections.sort(voiceTTSItems, new Comparator<IndexItem>() {
-			@Override
-			public int compare(IndexItem lhs, IndexItem rhs) {
-				return collator.compare(lhs.getVisibleName(app.getApplicationContext(), osmandRegions),
-						rhs.getVisibleName(app.getApplicationContext(), osmandRegions));
+			if (resourcesInRepository == null) {
+				return false;
 			}
-		});
 
-		return true;
+			resourcesByRegions.clear();
+			voiceRecItems.clear();
+			voiceTTSItems.clear();
+
+			for (WorldRegion region : app.getWorldRegion().getFlattenedSubregions()) {
+				processRegion(resourcesInRepository, false, region);
+			}
+			processRegion(resourcesInRepository, true, app.getWorldRegion());
+
+			final Collator collator = OsmAndCollator.primaryCollator();
+			final OsmandRegions osmandRegions = app.getRegions();
+
+			Collections.sort(voiceRecItems, new Comparator<IndexItem>() {
+				@Override
+				public int compare(IndexItem lhs, IndexItem rhs) {
+					return collator.compare(lhs.getVisibleName(app.getApplicationContext(), osmandRegions),
+							rhs.getVisibleName(app.getApplicationContext(), osmandRegions));
+				}
+			});
+
+			Collections.sort(voiceTTSItems, new Comparator<IndexItem>() {
+				@Override
+				public int compare(IndexItem lhs, IndexItem rhs) {
+					return collator.compare(lhs.getVisibleName(app.getApplicationContext(), osmandRegions),
+							rhs.getVisibleName(app.getApplicationContext(), osmandRegions));
+				}
+			});
+
+			return true;
+
+		} finally {
+			resourcesLock.unlock();
+		}
 	}
 
 	private void processRegion(List<IndexItem> resourcesInRepository, boolean processVoiceFiles, WorldRegion region) {
@@ -531,7 +539,6 @@ public class DownloadIndexesThread {
 				currentRunningTask.add(this);
 				super.onPreExecute();
 				this.message = ctx.getString(R.string.downloading_list_indexes);
-				dataPrepared = false;
 			}
 
 			@Override
@@ -548,7 +555,6 @@ public class DownloadIndexesThread {
 			protected void onPostExecute(IndexFileList result) {
 				indexFiles = result;
 				if (indexFiles != null && uiActivity != null) {
-					dataPrepared = resourcesByRegions.size() > 0;
 					boolean basemapExists = uiActivity.getMyApplication().getResourceManager().containsBasemap();
 					IndexItem basemap = indexFiles.getBasemap();
 					if (basemap != null) {

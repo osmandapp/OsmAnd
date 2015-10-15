@@ -1130,7 +1130,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		recordingByFileName = newMap;
 		Algorithms.removeAllFiles(r.file);
 		if (activity != null) {
-			activity.getMapLayers().getContextMenuLayer().setLocation(null, "");
+			activity.getContextMenu().close();
 			activity.getMapView().refreshMap();
 		}
 	}

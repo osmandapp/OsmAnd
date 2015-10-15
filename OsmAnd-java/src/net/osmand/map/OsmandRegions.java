@@ -41,6 +41,7 @@ public class OsmandRegions {
 	private BinaryMapIndexReader reader;
 	Map<String, LinkedList<BinaryMapDataObject>> countriesByDownloadName = new HashMap<String, LinkedList<BinaryMapDataObject>>();
 	Map<String, String> fullNamesToLocaleNames = new HashMap<String, String>();
+	Map<String, String> fullNamesNoParentToLocaleNames = new HashMap<String, String>();
 	Map<String, String> fullMapNamesToDownloadNames = new HashMap<String, String>();
 	Map<String, String> downloadNamesToFullNames = new HashMap<String, String>();
 	Map<String, String> fullNamesToLowercaseIndex = new HashMap<String, String>();
@@ -81,22 +82,36 @@ public class OsmandRegions {
 		return nameEnType;
 	}
 	
-	public String getLocaleName(String downloadName) {
+	public String getLocaleName(String downloadName, boolean includingParent) {
 		final String lc = downloadName.toLowerCase();
 		if (downloadNamesToFullNames.containsKey(lc)) {
 			String fullName = downloadNamesToFullNames.get(lc);
-			if (fullNamesToLocaleNames.containsKey(fullName)) {
-				return fullNamesToLocaleNames.get(fullName);
+			if (includingParent) {
+				if (fullNamesToLocaleNames.containsKey(fullName)) {
+					return fullNamesToLocaleNames.get(fullName);
+				}
+			} else {
+				if (fullNamesNoParentToLocaleNames.containsKey(fullName)) {
+					return fullNamesNoParentToLocaleNames.get(fullName);
+				}
 			}
 		}
 		return downloadName.replace('_', ' ');
 	}
 
-	public String getLocaleNameByFullName(String fullName) {
-		if (fullNamesToLocaleNames.containsKey(fullName)) {
-			return fullNamesToLocaleNames.get(fullName);
+	public String getLocaleNameByFullName(String fullName, boolean includingParent) {
+		if (includingParent) {
+			if (fullNamesToLocaleNames.containsKey(fullName)) {
+				return fullNamesToLocaleNames.get(fullName);
+			} else {
+				return fullName.replace('_', ' ');
+			}
 		} else {
-			return fullName.replace('_', ' ');
+			if (fullNamesNoParentToLocaleNames.containsKey(fullName)) {
+				return fullNamesNoParentToLocaleNames.get(fullName);
+			} else {
+				return fullName.replace('_', ' ');
+			}
 		}
 	}
 
@@ -350,6 +365,7 @@ public class OsmandRegions {
 				String locName = getLocaleName(object);
 				if(!Algorithms.isEmpty(locName)){
 					fullNamesToLocaleNames.put(fullName, locName);
+					fullNamesNoParentToLocaleNames.put(fullName, locName);
 				}
 				MapIndex mi = object.getMapIndex();
 				TIntObjectIterator<String> it = object.getObjectNames().iterator();
@@ -358,8 +374,9 @@ public class OsmandRegions {
 					it.advance();
 					TagValuePair tp = mi.decodeType(it.key());
 					if (tp.tag.equals("key_name") && Algorithms.isEmpty(locName)) {
-						fullNamesToLocaleNames.put(fullName,
-								Algorithms.capitalizeFirstLetterAndLowercase(it.value().replace('_', '-')));
+						String str = Algorithms.capitalizeFirstLetterAndLowercase(it.value().replace('_', '-'));
+						fullNamesToLocaleNames.put(fullName, str);
+						fullNamesNoParentToLocaleNames.put(fullName, str);
 					}
 					if(tp.tag.startsWith("name") || tp.tag.equals("key_name")) {
 						final String vl = it.value().toLowerCase();
@@ -403,7 +420,8 @@ public class OsmandRegions {
 				if(locPrefix == null || locName == null) {
 					throw new IllegalStateException("There is no prefix registered for " + fullName + " (" + parentFullName + ") ");
 				}
-				fullNamesToLocaleNames.put(fullName, /*locPrefix + " " +*/ locName);
+				fullNamesToLocaleNames.put(fullName, locPrefix + " " + locName);
+				fullNamesNoParentToLocaleNames.put(fullName, locName);
 				String index = fullNamesToLowercaseIndex.get(fullName);
 				String prindex = fullNamesToLowercaseIndex.get(parentFullName);
 				fullNamesToLowercaseIndex.put(fullName, index + " " + prindex);	

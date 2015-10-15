@@ -38,7 +38,6 @@ import java.util.Map;
  * on 09.09.2014.
  */
 public class UpdatesIndexFragment extends OsmAndListFragment {
-	private OsmandRegions osmandRegions;
 	private UpdateIndexAdapter listAdapter;
 	List<IndexItem> indexItems = new ArrayList<>();
 
@@ -66,6 +65,8 @@ public class UpdatesIndexFragment extends OsmAndListFragment {
 				indexItems.add(new IndexItem(getString(R.string.no_index_file_to_download), "", 0, "", 0, 0, null));
 			}
 		}
+		final OsmandRegions osmandRegions =
+				getMyApplication().getResourceManager().getOsmandRegions();
 		listAdapter = new UpdateIndexAdapter(getMyActivity(), R.layout.download_index_list_item, indexItems);
 		listAdapter.sort(new Comparator<IndexItem>() {
 			@Override
@@ -213,6 +214,8 @@ public class UpdatesIndexFragment extends OsmAndListFragment {
 			for (IndexItem item : filtered) {
 				add(item);
 			}
+			final OsmandRegions osmandRegions =
+					getMyApplication().getResourceManager().getOsmandRegions();
 			sort(new Comparator<IndexItem>() {
 				@Override
 				public int compare(IndexItem indexItem, IndexItem indexItem2) {

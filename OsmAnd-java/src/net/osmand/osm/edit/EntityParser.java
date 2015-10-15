@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import net.osmand.data.Amenity;
-import net.osmand.data.AmenityType;
 import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.City.CityType;
@@ -15,7 +14,6 @@ import net.osmand.data.MapObject;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.MapRenderingTypes;
-import net.osmand.osm.PoiCategory;
 import net.osmand.osm.edit.Entity.EntityType;
 import net.osmand.osm.edit.OSMSettings.OSMTagKey;
 import net.osmand.util.Algorithms;
@@ -130,23 +128,6 @@ public class EntityParser {
 		mo.setName(op);
 	}
 	
-	public static Amenity parseAmenity(Entity entity, Map<String, String> tagValues, PoiCategory type, String subtype, 
-			MapRenderingTypes types) {
-		Amenity am = new Amenity();
-		parseMapObject(am, entity, tagValues);
-		am.setType(type);
-		am.setSubType(subtype);
-		AmenityType at = AmenityType.findOrCreateTypeNoReg(type.getKeyName());
-		am.setAdditionalInfo(types.getAmenityAdditionalInfo(tagValues, at, subtype));
-		String wbs = getWebSiteURL(tagValues);
-		if(wbs != null) {
-			am.setAdditionalInfo("website", wbs);
-		}
-		return am;
-	}
-	
-
-	
 
 	private static String getWebSiteURL(Map<String, String> tagValues) {
 		String siteUrl = tagValues.get(OSMTagKey.WIKIPEDIA.getValue());
@@ -200,32 +181,7 @@ public class EntityParser {
 		return amenitiesList;
 	}
 	
-	public static List<Amenity> parseAmenities(MapRenderingTypes renderingTypes,
-			MapPoiTypes poiTypes, Entity entity, Map<String, String> tags, List<Amenity> amenitiesList){
-		amenitiesList.clear();
-		// it could be collection of amenities
-		boolean relation = entity instanceof Relation;
-		Collection<Map<String, String>> it = renderingTypes.splitTagsIntoDifferentObjects(tags);
-		for(Map<String, String> stags : it) {
-			if (!stags.isEmpty()) {
-				boolean purerelation = relation && !"multipolygon".equals(stags.get("type"));
-				boolean hasName = !Algorithms.isEmpty(stags.get("name"));
-				for (Map.Entry<String, String> e : stags.entrySet()) {
-					AmenityType type = purerelation ? renderingTypes.getAmenityTypeForRelation(e.getKey(), e.getValue(), hasName)
-							: renderingTypes.getAmenityType(e.getKey(), e.getValue(), hasName );
-					if (type != null) {
-						String subtype = renderingTypes.getAmenitySubtype(e.getKey(), e.getValue());
-						PoiCategory pc = poiTypes.getPoiCategoryByName(type.getCategoryName(), true);
-						Amenity a = parseAmenity(entity, stags, pc, subtype, renderingTypes);
-						if (checkAmenitiesToAdd(a, amenitiesList) && !"no".equals(subtype)) {
-							amenitiesList.add(a);
-						}
-					}
-				}
-			}
-		}
-		return amenitiesList;
-	}
+	
 	
 	private static boolean checkAmenitiesToAdd(Amenity a, List<Amenity> amenitiesList){
 		// check amenity for duplication

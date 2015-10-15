@@ -77,7 +77,8 @@ public class FavouritePointMenuController extends MenuController {
 	@Override
 	public void addPlainMenuItems(String typeStr, PointDescription pointDescription) {
 		if (pointDescription != null) {
-			addPlainMenuItem(R.drawable.map_my_location, pointDescription.getLocationName(getMapActivity(), true).replaceAll("\n", ""));
+			addPlainMenuItem(R.drawable.map_my_location, PointDescription.getLocationName(getMapActivity(),
+					fav.getLatitude(), fav.getLongitude(), true).replaceAll("\n", ""));
 		}
 	}
 

@@ -1,10 +1,20 @@
 package net.osmand.plus.download.items;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import android.content.Context;
+import android.content.res.Resources;
+import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
+import android.util.TypedValue;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ExpandableListView;
+import android.widget.TextView;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -23,21 +33,11 @@ import net.osmand.plus.srtmplugin.SRTMPlugin;
 
 import org.apache.commons.logging.Log;
 
-import android.content.Context;
-import android.content.res.Resources;
-import android.content.res.TypedArray;
-import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.support.v4.view.MenuItemCompat;
-import android.util.TypedValue;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ExpandableListView;
-import android.widget.TextView;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 public class WorldItemsFragment extends OsmandExpandableListFragment {
 	public static final String TAG = "WorldItemsFragment";
@@ -112,11 +112,11 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 				int unusedSubIndex = 0;
 				List<String> voicePromptsItems = new LinkedList<>();
 				if (!builder.isVoicePromptsItemsEmpty(VoicePromptsType.RECORDED)) {
-					voicePromptsItems.add(builder.getVoicePromtName(VoicePromptsType.RECORDED));
+					voicePromptsItems.add(ItemsListBuilder.getVoicePromtName(getActivity(), VoicePromptsType.RECORDED));
 					voicePromptsItemsRecordedSubIndex = unusedSubIndex++;
 				}
 				if (!builder.isVoicePromptsItemsEmpty(VoicePromptsType.TTS)) {
-					voicePromptsItems.add(builder.getVoicePromtName(VoicePromptsType.TTS));
+					voicePromptsItems.add(ItemsListBuilder.getVoicePromtName(getActivity(), VoicePromptsType.TTS));
 					voicePromptsItemsTTSSubIndex = unusedSubIndex;
 				}
 				if (!voicePromptsItems.isEmpty()) {
@@ -187,8 +187,8 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 	}
 
 	public void onCategorizationFinished() {
-		ItemsListBuilder builder = 	getDownloadActivity().getItemsBuilder();
-		if (builder != null && builder.build()) {
+		ItemsListBuilder builder = getDownloadActivity().getItemsBuilder();
+		if (builder != null) {
 			fillWorldItemsAdapter(builder);
 			listAdapter.notifyDataSetChanged();
 			expandAllGroups();
