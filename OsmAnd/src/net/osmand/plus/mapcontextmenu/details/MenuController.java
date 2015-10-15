@@ -160,6 +160,8 @@ public abstract class MenuController {
 
 	public Drawable getSecondLineIcon() { return null; }
 
+	public int getFavActionIconId() { return R.drawable.ic_action_fav_dark; }
+
 	public String getTypeStr() { return ""; }
 
 	public String getNameStr() { return ""; }

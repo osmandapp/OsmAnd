@@ -1,20 +1,24 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -104,6 +108,7 @@ public abstract class PointEditorFragment extends Fragment {
 		nameEdit.setText(getNameInitValue());
 		AutoCompleteTextViewEx categoryEdit = (AutoCompleteTextViewEx) view.findViewById(R.id.category_edit);
 		categoryEdit.setText(getCategoryInitValue());
+		categoryEdit.setFocusable(false);
 		categoryEdit.setOnTouchListener(new View.OnTouchListener() {
 			@Override
 			public boolean onTouch(final View v, MotionEvent event) {
@@ -149,6 +154,7 @@ public abstract class PointEditorFragment extends Fragment {
 	@Override
 	public void onStop() {
 		super.onStop();
+		hideKeyboard();
 		getMapActivity().getContextMenu().setBaseFragmentVisibility(true);
 	}
 
@@ -160,6 +166,17 @@ public abstract class PointEditorFragment extends Fragment {
 		super.onDestroyView();
 
 		getActivity().findViewById(R.id.MapHudButtonsOverlay).setVisibility(View.VISIBLE);
+	}
+
+	private void hideKeyboard() {
+		InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+		View currentFocus =  getActivity().getCurrentFocus();
+		if (currentFocus != null) {
+			IBinder windowToken = currentFocus.getWindowToken();
+			if (windowToken != null) {
+				inputMethodManager.hideSoftInputFromWindow(windowToken, 0);
+			}
+		}
 	}
 
 	protected void savePressed() {
