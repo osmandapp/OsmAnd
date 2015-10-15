@@ -11,6 +11,7 @@ import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
 import android.os.Build;
 import android.os.StatFs;
+import android.support.annotation.UiThread;
 import android.view.View;
 import android.widget.Toast;
 
@@ -553,6 +554,7 @@ public class DownloadIndexesThread {
 			}
 
 			protected void onPostExecute(IndexFileList result) {
+				notifyFilesToUpdateChanged();
 				indexFiles = result;
 				if (indexFiles != null && uiActivity != null) {
 					boolean basemapExists = uiActivity.getMyApplication().getResourceManager().containsBasemap();
@@ -679,6 +681,7 @@ public class DownloadIndexesThread {
 			@Override
 			protected void onPostExecute(List<IndexItem> filtered) {
 				prepareFilesToUpdate();
+				notifyFilesToUpdateChanged();
 				currentRunningTask.remove(this);
 				if (uiActivity != null) {
 					uiActivity.categorizationFinished(filtered, cats);
@@ -709,6 +712,13 @@ public class DownloadIndexesThread {
 					itemsToUpdate.add(item);
 				}
 			}
+		}
+	}
+
+	@UiThread
+	private void notifyFilesToUpdateChanged() {
+		List<IndexItem> filtered = getCachedIndexFiles();
+		if (filtered != null) {
 			if (uiActivity != null) {
 				uiActivity.updateDownloadList(itemsToUpdate);
 			}

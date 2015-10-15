@@ -165,20 +165,20 @@ public class IndexItem implements Comparable<IndexItem>, HasName, Parcelable {
 		this.initializedName = initializedName;
 	}
 
-	@Override
-	public String toString() {
-		return "IndexItem{" +
-				"description='" + description + '\'' +
-				", fileName='" + fileName + '\'' +
-				", simplifiedFileName='" + simplifiedFileName + '\'' +
-				", size='" + size + '\'' +
-				", timestamp=" + timestamp +
-				", contentSize=" + contentSize +
-				", containerSize=" + containerSize +
-				", type=" + type.getTag() +
-				", extra=" + extra +
-				'}';
-	}
+//	@Override
+//	public String toString() {
+//		return "IndexItem{" +
+//				"description='" + description + '\'' +
+//				", fileName='" + fileName + '\'' +
+//				", simplifiedFileName='" + simplifiedFileName + '\'' +
+//				", size='" + size + '\'' +
+//				", timestamp=" + timestamp +
+//				", contentSize=" + contentSize +
+//				", containerSize=" + containerSize +
+//				", type=" + type.getTag() +
+//				", extra=" + extra +
+//				'}';
+//	}
 
 	@Override
 	public int describeContents() {
