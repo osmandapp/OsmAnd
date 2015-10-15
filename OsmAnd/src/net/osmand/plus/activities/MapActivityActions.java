@@ -186,7 +186,13 @@ public class MapActivityActions implements DialogProvider {
 
 
     public void addWaypoint(final double latitude, final double longitude) {
-    	String name = mapActivity.getContextMenu().getPointDescription().getFullPlainName(mapActivity);
+		String name;
+		PointDescription pointDescription = mapActivity.getContextMenu().getPointDescription();
+		if (!pointDescription.isWpt() && !mapActivity.getContextMenu().isAddressUnknown()) {
+			name = mapActivity.getContextMenu().getTitleStr();
+		} else {
+			name = "";
+		}
     	enhance(dialogBundle,latitude,longitude, name);
     	mapActivity.showDialog(DIALOG_ADD_WAYPOINT);
     }
@@ -587,6 +593,7 @@ public class MapActivityActions implements DialogProvider {
 			v.setPadding(5, 0, 5, 0);
 			if(args.getString(KEY_NAME) != null) {
 				v.setText(args.getString(KEY_NAME));
+				v.selectAll();
 			} else {
 				v.setText("");
 			}
