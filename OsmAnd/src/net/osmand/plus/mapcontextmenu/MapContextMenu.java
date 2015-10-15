@@ -3,7 +3,6 @@ package net.osmand.plus.mapcontextmenu;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.View;
 
 import net.osmand.Location;
@@ -44,6 +43,7 @@ public class MapContextMenu {
 	private String typeStr;
 	private Drawable secondLineIcon;
 	private String streetStr;
+	private boolean addressUnknown;
 
 	private int favActionIconId;
 
@@ -54,6 +54,7 @@ public class MapContextMenu {
 	private static final String KEY_CTX_MENU_NAME_STR = "key_ctx_menu_name_str";
 	private static final String KEY_CTX_MENU_TYPE_STR = "key_ctx_menu_type_str";
 	private static final String KEY_CTX_MENU_STREET_STR = "key_ctx_menu_street_str";
+	private static final String KEY_CTX_MENU_ADDR_UNKNOWN = "key_ctx_menu_addr_unknown";
 
 	public boolean isActive() {
 		return active;
@@ -114,6 +115,7 @@ public class MapContextMenu {
 		nameStr = "";
 		typeStr = "";
 		streetStr = "";
+		addressUnknown = false;
 
 		active = true;
 
@@ -240,6 +242,10 @@ public class MapContextMenu {
 		return nameStr;
 	}
 
+	public boolean isAddressUnknown() {
+		return addressUnknown;
+	}
+
 	public String getLocationStr() {
 		if (menuController != null && menuController.needTypeStr()) {
 			return typeStr;
@@ -288,6 +294,7 @@ public class MapContextMenu {
 				typeStr = "";
 			} else {
 				nameStr = app.getResources().getString(R.string.address_unknown);
+				addressUnknown = true;
 			}
 		}
 	}
@@ -307,6 +314,7 @@ public class MapContextMenu {
 					if (!Algorithms.isEmpty(streetStr)) {
 						if (getObject() == null) {
 							nameStr = streetStr;
+							addressUnknown = false;
 							streetStr = "";
 						}
 						mapActivity.runOnUiThread(new Runnable() {
@@ -379,6 +387,7 @@ public class MapContextMenu {
 		bundle.putString(KEY_CTX_MENU_NAME_STR, nameStr);
 		bundle.putString(KEY_CTX_MENU_TYPE_STR, typeStr);
 		bundle.putString(KEY_CTX_MENU_STREET_STR, streetStr);
+		bundle.putString(KEY_CTX_MENU_ADDR_UNKNOWN, Boolean.toString(addressUnknown));
 	}
 
 	public void restoreMenuState(Bundle bundle) {
@@ -400,6 +409,7 @@ public class MapContextMenu {
 		nameStr = bundle.getString(KEY_CTX_MENU_NAME_STR);
 		typeStr = bundle.getString(KEY_CTX_MENU_TYPE_STR);
 		streetStr = bundle.getString(KEY_CTX_MENU_STREET_STR);
+		addressUnknown = Boolean.parseBoolean(bundle.getString(KEY_CTX_MENU_ADDR_UNKNOWN));
 
 		acquireIcons();
 
