@@ -106,21 +106,6 @@
                 android:layout_height="54dp">
 
                 <ImageButton
-                    android:id="@+id/context_menu_route_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:background="?attr/dashboard_button"
-                    android:scaleType="center"
-                    android:src="@drawable/map_directions"/>
-
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:background="?attr/dashboard_divider"/>
-
-                <ImageButton
                     android:id="@+id/context_menu_fav_button"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -129,6 +114,21 @@
                     android:background="?attr/dashboard_button"
                     android:scaleType="center"
                     android:src="@drawable/ic_action_fav_dark"/>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="?attr/dashboard_divider"/>
+
+                <ImageButton
+                    android:id="@+id/context_menu_route_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:background="?attr/dashboard_button"
+                    android:scaleType="center"
+                    android:src="@drawable/map_action_waypoints"/>
 
                 <View
                     android:layout_width="1dp"
