@@ -179,6 +179,9 @@ public class PointDescription implements Serializable {
 		return POINT_TYPE_PHOTO_NOTE.equals(type);
 	}
 
+	public boolean isDestination() {
+		return POINT_TYPE_TARGET.equals(type);
+	}
 
 	@Override
 	public int hashCode() {

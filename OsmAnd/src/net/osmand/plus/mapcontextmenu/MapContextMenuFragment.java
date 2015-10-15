@@ -30,6 +30,7 @@ import android.widget.TextView;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -286,23 +287,22 @@ public class MapContextMenuFragment extends Fragment {
 
 		// FAB
 		fabView = (ImageView)view.findViewById(R.id.context_menu_fab_view);
-		//fabView.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_remove_dark,
-		//		light ? R.color.icon_color_light : R.color.dash_search_icon_dark));
+		fabView.setImageDrawable(iconsCache.getIcon(menu.getFabIconId()));
 		fabView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				menu.buttonNavigatePressed();
+				menu.fabPressed();
 			}
 		});
 
 		// Action buttons
-		final ImageButton buttonNavigate = (ImageButton) view.findViewById(R.id.context_menu_route_button);
-		buttonNavigate.setImageDrawable(iconsCache.getIcon(R.drawable.map_directions,
+		final ImageButton buttonWaypoint = (ImageButton) view.findViewById(R.id.context_menu_route_button);
+		buttonWaypoint.setImageDrawable(iconsCache.getIcon(R.drawable.map_action_waypoints,
 				light ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
-		buttonNavigate.setOnClickListener(new View.OnClickListener() {
+		buttonWaypoint.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				menu.buttonNavigatePressed();
+				menu.buttonWaypointPressed();
 			}
 		});
 

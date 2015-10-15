@@ -164,8 +164,8 @@ public class ItemsListBuilder {
 							List<IndexItem> voiceRecItems, List<IndexItem> voiceTTSItems) {
 		this.app = app;
 		this.resourcesByRegions = resourcesByRegions;
-		this.voiceRecItems = new LinkedList<>(voiceRecItems);
-		this.voiceTTSItems = new LinkedList<>(voiceTTSItems);
+		this.voiceRecItems = voiceRecItems;
+		this.voiceTTSItems = voiceTTSItems;
 
 		regionMapItems = new LinkedList<>();
 		allResourceItems = new LinkedList<>();

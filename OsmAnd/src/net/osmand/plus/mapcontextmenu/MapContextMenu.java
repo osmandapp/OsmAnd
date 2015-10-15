@@ -3,6 +3,7 @@ package net.osmand.plus.mapcontextmenu;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.View;
 
 import net.osmand.Location;
@@ -318,8 +319,21 @@ public class MapContextMenu {
 		});
 	}
 
-	public void buttonNavigatePressed() {
-		mapActivity.getMapActions().showNavigationContextMenuPoint(latLon.getLatitude(), latLon.getLongitude());
+	public int getFabIconId() {
+		return mapActivity.getMapActions().getRouteMode(latLon).getSmallIconDark();
+	}
+
+	public void fabPressed() {
+		mapActivity.getMapActions().directionTo(latLon.getLatitude(), latLon.getLongitude());
+	}
+
+	public void buttonWaypointPressed() {
+		if (pointDescription.isDestination()) {
+			mapActivity.getMapActions().editWaypoints();
+		} else {
+			mapActivity.getMapActions().addAsWaypoint(latLon.getLatitude(), latLon.getLongitude());
+		}
+		close();
 	}
 
 	public void buttonFavoritePressed() {

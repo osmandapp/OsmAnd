@@ -131,17 +131,13 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 	}
 
 	public ItemsListBuilder getItemsBuilder(String regionId, boolean voicePromptsOnly) {
-		if (downloadListIndexThread.getResourcesLock().tryLock()) {
-			try {
-				ItemsListBuilder builder = new ItemsListBuilder(getMyApplication(), regionId, downloadListIndexThread.getResourcesByRegions(),
-						downloadListIndexThread.getVoiceRecItems(), downloadListIndexThread.getVoiceTTSItems());
-				if (!voicePromptsOnly) {
-					return builder.build();
-				} else {
-					return builder;
-				}
-			} finally {
-				downloadListIndexThread.getResourcesLock().unlock();
+		if (downloadListIndexThread.getResourcesByRegions().size() > 0) {
+			ItemsListBuilder builder = new ItemsListBuilder(getMyApplication(), regionId, downloadListIndexThread.getResourcesByRegions(),
+					downloadListIndexThread.getVoiceRecItems(), downloadListIndexThread.getVoiceTTSItems());
+			if (!voicePromptsOnly) {
+				return builder.build();
+			} else {
+				return builder;
 			}
 		} else {
 			return null;
@@ -149,12 +145,8 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 	}
 
 	public List<IndexItem> getIndexItemsByRegion(WorldRegion region) {
-		if (downloadListIndexThread.getResourcesLock().tryLock()) {
-			try {
-				return new LinkedList<>(downloadListIndexThread.getResourcesByRegions().get(region).values());
-			} finally {
-				downloadListIndexThread.getResourcesLock().unlock();
-			}
+		if (downloadListIndexThread.getResourcesByRegions().size() > 0) {
+			return new LinkedList<>(downloadListIndexThread.getResourcesByRegions().get(region).values());
 		} else {
 			return new LinkedList<>();
 		}
