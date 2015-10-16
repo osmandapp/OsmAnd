@@ -185,6 +185,7 @@ public class VoiceItemsFragment extends OsmandExpandableListFragment {
 				convertView = LayoutInflater.from(parent.getContext())
 						.inflate(R.layout.two_line_with_images_list_item, parent, false);
 				viewHolder = new ItemViewHolder(convertView,
+						getMyActivity(),
 						getMyApplication().getResourceManager().getDateFormat(),
 						getMyActivity().getIndexFileNames(),
 						getMyActivity().getIndexActivatedFileNames());
@@ -194,7 +195,7 @@ public class VoiceItemsFragment extends OsmandExpandableListFragment {
 			}
 
 			IndexItem item = (IndexItem) child;
-			viewHolder.bindIndexItem(item, getDownloadActivity(), true, false);
+			viewHolder.bindIndexItem(item, true, false);
 
 			return convertView;
 		}

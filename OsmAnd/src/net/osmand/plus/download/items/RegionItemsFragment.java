@@ -3,6 +3,7 @@ package net.osmand.plus.download.items;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.res.Resources;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
@@ -22,8 +23,10 @@ import net.osmand.plus.Version;
 import net.osmand.plus.WorldRegion;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.activities.OsmandExpandableListFragment;
+import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
+import net.osmand.plus.download.DownloadEntry;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
@@ -80,6 +83,7 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 				expandAllGroups();
 			}
 		}
+		getMyActivity().registerUpdateListener(listAdapter);
 
 		return view;
 	}
@@ -168,13 +172,19 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 		return fragment;
 	}
 
-	private class RegionsItemsAdapter extends OsmandBaseExpandableListAdapter {
+	private class RegionsItemsAdapter extends OsmandBaseExpandableListAdapter
+			implements ProgressAdapter {
 
 		private Map<String, List<Object>> data = new LinkedHashMap<>();
 		private List<String> sections = new LinkedList<>();
 		private boolean srtmDisabled;
 		private boolean nauticalPluginDisabled;
 		private boolean freeVersion;
+
+		private int groupInProgressPosition = -1;
+		private int childInProgressPosition = -1;
+		private int progress = -1;
+		private boolean isFinished;
 
 		public RegionsItemsAdapter() {
 			srtmDisabled = OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) == null;
@@ -217,7 +227,7 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 			if (convertView == null) {
 				convertView = LayoutInflater.from(parent.getContext())
 						.inflate(R.layout.two_line_with_images_list_item, parent, false);
-				viewHolder = new ItemViewHolder(convertView,
+				viewHolder = new ItemViewHolder(convertView, getMyActivity(),
 						getMyApplication().getResourceManager().getDateFormat(),
 						getMyActivity().getIndexActivatedFileNames(),
 						getMyActivity().getIndexFileNames());
@@ -230,18 +240,16 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 			viewHolder.setFreeVersion(freeVersion);
 			final Object child = getChild(groupPosition, childPosition);
 
-			if (child instanceof ItemsListBuilder.ResourceItem
-					&& groupPosition == regionMapsGroupPos) {
-				ItemsListBuilder.ResourceItem item = (ItemsListBuilder.ResourceItem) child;
-				viewHolder.bindIndexItem(item.getIndexItem(), getDownloadActivity(), true, false);
-			} else if (child instanceof WorldRegion) {
-				viewHolder.bindRegion((WorldRegion) child, getDownloadActivity());
+			if (child instanceof WorldRegion) {
+				viewHolder.bindRegion((WorldRegion) child);
 			} else if (child instanceof ItemsListBuilder.ResourceItem) {
+				final int localProgress = groupPosition == groupInProgressPosition
+						&& childPosition == childInProgressPosition ? progress : -1;
 				viewHolder.bindIndexItem(((ItemsListBuilder.ResourceItem) child).getIndexItem(),
-						getDownloadActivity(), false, true);
+						false, true, localProgress);
 			} else {
 				throw new IllegalArgumentException("Item must be of type WorldRegion or " +
-						"IndexItem but is of type:" + child.getClass());
+						"ResourceItem but is of type:" + child.getClass());
 			}
 
 			return convertView;
@@ -299,6 +307,39 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 		@Override
 		public boolean isChildSelectable(int groupPosition, int childPosition) {
 			return true;
+		}
+
+		@Override
+		public void setProgress(BasicProgressAsyncTask<?, ?, ?> task, Object tag) {
+			LOG.debug("setProgress()");
+			isFinished = task == null
+					|| task.getStatus() == AsyncTask.Status.FINISHED;
+			groupInProgressPosition = -1;
+			childInProgressPosition = -1;
+			progress = -1;
+			if (isFinished) return;
+			if (tag instanceof DownloadEntry) {
+				progress = task.getProgressPercentage();
+				outer_loop:
+				for (int i = 0; i < getGroupCount(); i++) {
+					for (int j = 0; j < getChildrenCount(i); j++) {
+						final IndexItem child =
+								((ItemsListBuilder.ResourceItem) getChild(i, j)).getIndexItem();
+						LOG.debug("chield=" + child.getBasename());
+						LOG.debug("tag=" + ((DownloadEntry) tag).baseName);
+						if (child.getBasename().equals(((DownloadEntry) tag).baseName)) {
+							groupInProgressPosition = i;
+							childInProgressPosition = j;
+							notifyDataSetChanged();
+							LOG.debug("groupInProgressPosition=" + groupInProgressPosition
+									+ "; childInProgressPosition" + childInProgressPosition);
+							break outer_loop;
+						}
+					}
+				}
+			}
+			LOG.debug("groupInProgressPosition=" + groupInProgressPosition
+					+ "; childInProgressPosition" + childInProgressPosition);
 		}
 	}
 
