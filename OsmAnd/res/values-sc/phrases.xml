@@ -692,7 +692,7 @@
 	<string name="poi_fuel_e10">E10</string>
 	<string name="poi_fuel_e20">E20</string>
 	<string name="poi_fuel_e85">E85</string>
-	<string name="poi_fuel_biogas">Biogas E85</string>
+	<string name="poi_fuel_biogas">Biogàs</string>
 	<string name="poi_junction">Giuntura istradale</string>
 	<string name="poi_bell_tower">Campanile</string>
 	<string name="poi_farmyard">Argiola</string>
@@ -1249,5 +1249,11 @@
 	<string name="poi_beach_sand">Casta de plàia: arena</string>
 	<string name="poi_beach_shingle">Casta de plàia: giarra/ghiàia</string>
 	<string name="poi_beach_rocky">Casta de plàia: pedrosa</string>
+
+	<string name="poi_shoes_children">Iscarpas pro pitzinnos</string>
+	<string name="poi_shoes_women">Iscarpas pro fèminas</string>
+	<string name="poi_shoes_sport">Iscarpas pro isport</string>
+	<string name="poi_shoes_men">Iscarpas pro òmines</string>
+	<string name="poi_shoes_orthopedic">Iscarpas ortopèdicas</string>
 
 	</resources>
