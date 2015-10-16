@@ -2087,4 +2087,45 @@
 	<string name="poi_castle_type_castrum">Castle type: castrum</string>
 	<string name="poi_castle_type_shiro">Castle type: shiro</string>
 
+	<string name="poi_massage_thai">Massage: thai</string>
+	<string name="poi_massage_sexual">Massage: sexual</string>
+	<string name="poi_massage_chinese">Massage: chinese</string>
+	<string name="poi_massage_yes">Massage services</string>
+	<string name="poi_massage_therapeutic">Massage: therapeutic</string>
+
+	<string name="poi_sauna_yes">Sauna services</string>
+	<string name="poi_solarium_yes">Solarium services</string>
+
+	<string name="poi_tents_yes">Tents allowed</string>
+	<string name="poi_tents_no">Tents not allowed</string>
+	<string name="poi_openfire_yes">Open-fire allowed</string>
+	<string name="poi_openfire_no">Open-fire not allowed</string>
+	<string name="poi_backcountry_yes">Backcountry camp site</string>
+	<string name="poi_backcountry_no">Backcountry camp site: no</string>
+	<string name="poi_scout_yes">Scout camp: yes</string>
+	<string name="poi_scout_no">Scout camp: no</string>
+	<string name="poi_group_only_yes">Group only: yes</string>
+	<string name="poi_group_only_no">Group only: no</string>
+	<string name="poi_washing_machine_yes">Washing machine: yes</string>
+	<string name="poi_washing_machine_no">Washing machine: no</string>
+	<string name="poi_shower_yes">Shower: yes</string>
+	<string name="poi_shower_no">Shower: no</string>
+	<string name="poi_shower_hot">Shower: hot</string>
+	<string name="poi_shower_outdoor">Shower: outdoor</string>
+	<string name="poi_shower_cold">Shower: cold</string>
+	<string name="poi_shower_indoor">Shower: indoor</string>
+	<string name="poi_caravans_yes">Caravans: yes</string>
+	<string name="poi_caravans_no">Caravans: no</string>
+	<string name="poi_impromptu_yes">Impromptu: yes</string>
+	<string name="poi_impromptu_no">Impromptu: no</string>
+	<string name="poi_sanitary_dump_station_yes">Sanitary dump station: yes</string>
+	<string name="poi_sanitary_dump_station_no">Sanitary dump station: no</string>
+	<string name="poi_sanitary_dump_station_customers">Sanitary dump station: customers only</string>
+	<string name="poi_power_supply_yes">Power supply: yes</string>
+	<string name="poi_power_supply_no">Power supply: no</string>
+	<string name="poi_power_supply_cee_17_blue">Power supply (socket): CEE 17 blue</string>
+	<string name="poi_power_supply_cee_7_4">Power supply (socket): CEE 7/4</string>
+	<string name="poi_power_supply_cee_7_5">Power supply (socket): CEE 7/5</string>
+	<string name="poi_power_supply_nema_5_15">Power supply (socket): NEMA 5-15</string>
+
 </resources>

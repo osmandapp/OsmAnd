@@ -11,13 +11,12 @@ import android.os.IBinder;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
-import android.util.DisplayMetrics;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,18 +24,27 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import net.osmand.data.LatLon;
+import net.osmand.data.QuadPoint;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.MapContextMenuFragment;
 import net.osmand.plus.mapcontextmenu.editors.dialogs.SelectCategoryDialogFragment;
+import net.osmand.plus.views.AnimateDraggingMapThread;
+import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.widgets.AutoCompleteTextViewEx;
 import net.osmand.util.Algorithms;
 
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 
 public abstract class PointEditorFragment extends Fragment {
+
+	private View view;
+	private int mainViewHeight;
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
@@ -58,7 +66,6 @@ public abstract class PointEditorFragment extends Fragment {
 
 		getActivity().findViewById(R.id.MapHudButtonsOverlay).setVisibility(View.INVISIBLE);
 
-		View view;
 		if (getEditor().isLandscapeLayout()) {
 			view = inflater.inflate(R.layout.point_editor_fragment_land, container, false);
 		} else {
@@ -135,6 +142,8 @@ public abstract class PointEditorFragment extends Fragment {
 		ImageView descriptionImage = (ImageView) view.findViewById(R.id.description_image);
 		descriptionImage.setImageDrawable(getRowIcon(R.drawable.ic_action_note_dark));
 
+		runLayoutListener();
+
 		return view;
 	}
 
@@ -166,6 +175,69 @@ public abstract class PointEditorFragment extends Fragment {
 		super.onDestroyView();
 
 		getActivity().findViewById(R.id.MapHudButtonsOverlay).setVisibility(View.VISIBLE);
+	}
+
+	private void adjustMapPosition(boolean animated) {
+		OsmandMapTileView map = getMapActivity().getMapView();
+		MapContextMenu menu = getMapActivity().getContextMenu();
+		double markerLat = menu.getLatLon().getLatitude();
+		double markerLon = menu.getLatLon().getLongitude();
+
+		RotatedTileBox box = map.getCurrentRotatedTileBox();
+		int origMarkerY = (int)box.getPixYFromLatLon(markerLat, markerLon);
+
+		int markerPaddingPx = dpToPx(MapContextMenuFragment.MARKER_PADDING_DP);
+
+		int y = view.getHeight() - mainViewHeight;
+
+		if (!menu.isLandscapeLayout()) {
+			int markerY = (int)box.getPixYFromLatLon(markerLat, markerLon);
+			if (markerY + markerPaddingPx > y || markerY < origMarkerY) {
+				int dy = markerY - (y - markerPaddingPx);
+				if (markerY - dy <= origMarkerY) {
+					QuadPoint cp = box.getCenterPixelPoint();
+					LatLon latlon = box.getLatLonFromPixel(cp.x + 0, cp.y + dy);
+					double destLat = latlon.getLatitude();
+					double destLon = latlon.getLongitude();
+					if (animated) {
+						AnimateDraggingMapThread thread = map.getAnimatedDraggingThread();
+						int fZoom = map.getZoom();
+						double flat = destLat;
+						double flon = destLon;
+
+						RotatedTileBox cbox = map.getCurrentRotatedTileBox().copy();
+						cbox.setCenterLocation(0.5f, 0.5f);
+						cbox.setLatLonCenter(flat, flon);
+						flat = cbox.getLatFromPixel(cbox.getPixWidth() / 2, cbox.getPixHeight() / 2);
+						flon = cbox.getLonFromPixel(cbox.getPixWidth() / 2, cbox.getPixHeight() / 2);
+
+						thread.startMoving(flat, flon, fZoom, true);
+					} else {
+						map.setLatLon(destLat, destLon);
+					}
+				}
+			}
+		}
+	}
+
+	private void runLayoutListener() {
+		ViewTreeObserver vto = view.getViewTreeObserver();
+		vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+
+			@Override
+			public void onGlobalLayout() {
+				mainViewHeight = view.findViewById(R.id.main_view).getHeight();
+
+				ViewTreeObserver obs = view.getViewTreeObserver();
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+					obs.removeOnGlobalLayoutListener(this);
+				} else {
+					obs.removeGlobalOnLayoutListener(this);
+				}
+				adjustMapPosition(true);
+			}
+
+		});
 	}
 
 	private void hideKeyboard() {
@@ -203,10 +275,10 @@ public abstract class PointEditorFragment extends Fragment {
 	public abstract String getToolbarTitle();
 
 	public void setCategory(String name) {
-		AutoCompleteTextViewEx categoryEdit = (AutoCompleteTextViewEx) getView().findViewById(R.id.category_edit);
+		AutoCompleteTextViewEx categoryEdit = (AutoCompleteTextViewEx) view.findViewById(R.id.category_edit);
 		String n = name.length() == 0 ? getString(R.string.shared_string_favorites) : name;
 		categoryEdit.setText(n);
-		ImageView categoryImage = (ImageView) getView().findViewById(R.id.category_image);
+		ImageView categoryImage = (ImageView) view.findViewById(R.id.category_image);
 		categoryImage.setImageDrawable(getCategoryIcon());
 	}
 
@@ -252,29 +324,23 @@ public abstract class PointEditorFragment extends Fragment {
 	public abstract Drawable getCategoryIcon();
 
 	public String getNameTextValue() {
-		EditText nameEdit = (EditText) getView().findViewById(R.id.name_edit);
+		EditText nameEdit = (EditText) view.findViewById(R.id.name_edit);
 		return nameEdit.getText().toString().trim();
 	}
 
 	public String getCategoryTextValue() {
-		AutoCompleteTextViewEx categoryEdit = (AutoCompleteTextViewEx) getView().findViewById(R.id.category_edit);
+		AutoCompleteTextViewEx categoryEdit = (AutoCompleteTextViewEx) view.findViewById(R.id.category_edit);
 		String name = categoryEdit.getText().toString().trim();
 		return name.equals(getString(R.string.shared_string_favorites)) ? "" : name;
 	}
 
 	public String getDescriptionTextValue() {
-		EditText descriptionEdit = (EditText) getView().findViewById(R.id.description_edit);
+		EditText descriptionEdit = (EditText) view.findViewById(R.id.description_edit);
 		String res = descriptionEdit.getText().toString().trim();
 		return Algorithms.isEmpty(res) ? null : res;
 	}
 
 	// Utils
-	private int getScreenHeight() {
-		DisplayMetrics dm = new DisplayMetrics();
-		getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
-		return dm.heightPixels;
-	}
-
 	private int dpToPx(float dp) {
 		Resources r = getActivity().getResources();
 		return (int) TypedValue.applyDimension(
