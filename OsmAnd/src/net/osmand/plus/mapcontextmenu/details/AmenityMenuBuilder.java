@@ -47,7 +47,6 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		LinearLayout ll = new LinearLayout(view.getContext());
 		ll.setOrientation(LinearLayout.HORIZONTAL);
 		LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-		//llParams.setMargins(0, dpToPx(14f), 0, dpToPx(14f));
 		ll.setLayoutParams(llParams);
 
 		// Icon
@@ -116,15 +115,6 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		((LinearLayout) view).addView(horizontalLine);
 
 		rowBuilt();
-	}
-
-	public int dpToPx(float dp) {
-		Resources r = app.getResources();
-		return (int) TypedValue.applyDimension(
-				COMPLEX_UNIT_DIP,
-				dp,
-				r.getDisplayMetrics()
-		);
 	}
 
 	@Override

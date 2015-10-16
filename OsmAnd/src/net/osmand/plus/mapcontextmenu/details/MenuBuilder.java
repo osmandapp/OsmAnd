@@ -1,9 +1,11 @@
 package net.osmand.plus.mapcontextmenu.details;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.util.TypedValue;
 import android.view.View;
 
 import net.osmand.plus.IconsCache;
@@ -12,6 +14,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.render.RenderingIcons;
 
 import java.util.LinkedList;
+
+import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 
 public abstract class MenuBuilder {
 
@@ -75,5 +79,14 @@ public abstract class MenuBuilder {
 		} else {
 			return null;
 		}
+	}
+
+	public int dpToPx(float dp) {
+		Resources r = app.getResources();
+		return (int) TypedValue.applyDimension(
+				COMPLEX_UNIT_DIP,
+				dp,
+				r.getDisplayMetrics()
+		);
 	}
 }
