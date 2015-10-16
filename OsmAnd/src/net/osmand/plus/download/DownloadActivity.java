@@ -12,14 +12,10 @@ import android.os.StatFs;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.ListFragment;
 import android.support.v4.view.ViewPager;
 import android.text.method.LinkMovementMethod;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.BaseAdapter;
-import android.widget.ExpandableListAdapter;
-import android.widget.ListAdapter;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -30,12 +26,11 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.LocalIndexInfo;
-import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
-import net.osmand.plus.activities.OsmandExpandableListFragment;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.download.items.ActiveDownloadsDialogFragment;
 import net.osmand.plus.download.items.DialogDismissListener;
+import net.osmand.plus.download.items.ProgressAdapter;
 import net.osmand.plus.download.items.SearchDialogFragment;
 import net.osmand.plus.download.items.WorldItemsFragment;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
@@ -73,7 +68,7 @@ public class DownloadActivity extends BaseDownloadActivity implements DialogDism
 
 	private List<DownloadActivityType> downloadTypes = new ArrayList<DownloadActivityType>();
 	private BannerAndDownloadFreeVersion visibleBanner;
-	private ActiveDownloadsDialogFragment.DownloadEntryAdapter progressAdapter;
+	private ProgressAdapter progressAdapter;
 
 
 	@Override
@@ -365,17 +360,8 @@ public class DownloadActivity extends BaseDownloadActivity implements DialogDism
 			Fragment f = ref.get();
 			if (f != null)
 				if (f.isAdded()) {
-					if (f instanceof OsmandExpandableListFragment) {
-						ExpandableListAdapter ad = ((OsmandExpandableListFragment) f).getExpandableListView()
-								.getExpandableListAdapter();
-						if (ad instanceof OsmandBaseExpandableListAdapter) {
-							((OsmandBaseExpandableListAdapter) ad).notifyDataSetChanged();
-						}
-					} else if (f instanceof ListFragment) {
-						ListAdapter la = ((ListFragment) f).getListAdapter();
-						if (la instanceof BaseAdapter) {
-							((BaseAdapter) la).notifyDataSetChanged();
-						}
+					if (f instanceof DataSetChangedListener) {
+						((DataSetChangedListener) f).notifyDataSetChanged();
 					}
 				}
 		}
@@ -505,7 +491,7 @@ public class DownloadActivity extends BaseDownloadActivity implements DialogDism
 		updateProgress(true, null);
 	}
 
-	public void registerUpdateListener(ActiveDownloadsDialogFragment.DownloadEntryAdapter adapter) {
+	public void registerUpdateListener(ProgressAdapter adapter) {
 		progressAdapter = adapter;
 		updateProgress(true, null);
 	}
@@ -703,5 +689,9 @@ public class DownloadActivity extends BaseDownloadActivity implements DialogDism
 		}
 		descriptionText.setText(text);
 		descriptionText.setMovementMethod(LinkMovementMethod.getInstance());
+	}
+
+	public interface DataSetChangedListener {
+		void notifyDataSetChanged();
 	}
 }

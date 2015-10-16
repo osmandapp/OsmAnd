@@ -6,10 +6,6 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.TypedValue;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import net.osmand.access.AccessibleToast;
@@ -25,14 +21,7 @@ import net.osmand.plus.srtmplugin.SRTMPlugin;
 import java.text.DateFormat;
 import java.util.Map;
 
-public class ItemViewHolder {
-	private final TextView nameTextView;
-	private final TextView descrTextView;
-	private final ImageView leftImageView;
-	private final ImageView rightImageButton;
-	private final Button rightButton;
-	private final ProgressBar progressBar;
-	private final TextView mapDateTextView;
+public class ItemViewHolder extends TwoLineWithImagesViewHolder {
 
 	private final Map<String, String> indexFileNames;
 	private final Map<String, String> indexActivatedFileNames;
@@ -54,22 +43,17 @@ public class ItemViewHolder {
 	}
 
 	public ItemViewHolder(View convertView,
+						  DownloadActivity context,
 						  DateFormat dateFormat,
 						  Map<String, String> indexFileNames,
 						  Map<String, String> indexActivatedFileNames) {
+		super(convertView, context);
 		this.indexFileNames = indexFileNames;
 		this.indexActivatedFileNames = indexActivatedFileNames;
 		this.dateFormat = dateFormat;
-		nameTextView = (TextView) convertView.findViewById(R.id.name);
-		descrTextView = (TextView) convertView.findViewById(R.id.description);
-		leftImageView = (ImageView) convertView.findViewById(R.id.leftImageView);
-		rightImageButton = (ImageView) convertView.findViewById(R.id.rightImageButton);
-		rightButton = (Button) convertView.findViewById(R.id.rightButton);
-		progressBar = (ProgressBar) convertView.findViewById(R.id.progressBar);
-		mapDateTextView = (TextView) convertView.findViewById(R.id.mapDateTextView);
 
 		TypedValue typedValue = new TypedValue();
-		Resources.Theme theme = convertView.getContext().getTheme();
+		Resources.Theme theme = context.getTheme();
 		theme.resolveAttribute(android.R.attr.textColorPrimary, typedValue, true);
 		textColorPrimary = typedValue.data;
 		theme.resolveAttribute(android.R.attr.textColorSecondary, typedValue, true);
@@ -88,13 +72,20 @@ public class ItemViewHolder {
 		this.freeVersion = freeVersion;
 	}
 
-	public void bindIndexItem(final IndexItem indexItem, final DownloadActivity context,
-							  boolean showTypeInTitle, boolean showTypeInDesc) {
+	public void bindIndexItem(final IndexItem indexItem,
+							  boolean showTypeInTitle, boolean showTypeInDesc, int progress) {
 		boolean disabled = false;
-		String textButtonCaption = "GET";
 		rightButtonAction = RightButtonAction.UNKNOWN;
-
-		if (indexItem.getType() == DownloadActivityType.VOICE_FILE) {
+		rightImageButton.setClickable(false);
+		if (progress != -1) {
+			rightImageButton.setClickable(true);
+			rightImageButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					context.makeSureUserCancelDownload();
+				}
+			});
+		} else if (indexItem.getType() == DownloadActivityType.VOICE_FILE) {
 			nameTextView.setText(indexItem.getVisibleName(context,
 					context.getMyApplication().getRegions(), false));
 		} else {
@@ -123,22 +114,60 @@ public class ItemViewHolder {
 			}
 		}
 
-		descrTextView.setVisibility(View.VISIBLE);
-		if (!showTypeInTitle && (indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE ||
-				indexItem.getType() == DownloadActivityType.HILLSHADE_FILE) && srtmDisabled) {
-			descrTextView.setText(indexItem.getType().getString(context));
-		} else if (showTypeInDesc) {
-			descrTextView.setText(indexItem.getType().getString(context) + "  •  " + indexItem.getSizeDescription(context));
+		if (progress == -1) {
+			descrTextView.setVisibility(View.VISIBLE);
+			if (!showTypeInTitle && (indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE ||
+					indexItem.getType() == DownloadActivityType.HILLSHADE_FILE) && srtmDisabled) {
+				descrTextView.setText(indexItem.getType().getString(context));
+			} else if (showTypeInDesc) {
+				descrTextView.setText(indexItem.getType().getString(context) + "  •  " + indexItem.getSizeDescription(context));
+			} else {
+				descrTextView.setText(indexItem.getSizeDescription(context));
+			}
+			rightImageButton.setVisibility(View.VISIBLE);
+			rightImageButton.setImageDrawable(getContentIcon(context, R.drawable.ic_action_import));
+			progressBar.setVisibility(View.GONE);
+
+			if (indexFileNames != null && indexItem.isAlreadyDownloaded(indexFileNames)) {
+				boolean outdated = false;
+				String date;
+				if (indexItem.getType() == DownloadActivityType.HILLSHADE_FILE) {
+					date = indexItem.getDate(dateFormat);
+				} else {
+					String sfName = indexItem.getTargetFileName();
+					final boolean updatableResource = indexActivatedFileNames.containsKey(sfName);
+					date = updatableResource ? indexActivatedFileNames.get(sfName) : indexFileNames.get(sfName);
+					outdated = DownloadActivity.downloadListIndexThread.checkIfItemOutdated(indexItem);
+				}
+				String updateDescr = context.getResources().getString(R.string.local_index_installed) + ": "
+						+ date;
+				mapDateTextView.setText(updateDescr);
+				int colorId = outdated ? R.color.color_distance : R.color.color_ok;
+				final int color = context.getResources().getColor(colorId);
+				mapDateTextView.setTextColor(color);
+				leftImageView.setImageDrawable(getContentIcon(context,
+						indexItem.getType().getIconResource(), color));
+				nameTextView.setTextColor(textColorPrimary);
+			} else if (disabled) {
+				leftImageView.setImageDrawable(getContentIcon(context,
+						indexItem.getType().getIconResource(), textColorSecondary));
+				nameTextView.setTextColor(textColorSecondary);
+			} else {
+				leftImageView.setImageDrawable(getContentIcon(context,
+						indexItem.getType().getIconResource()));
+				nameTextView.setTextColor(textColorPrimary);
+			}
 		} else {
-			descrTextView.setText(indexItem.getSizeDescription(context));
+			progressBar.setVisibility(View.VISIBLE);
+			progressBar.setProgress(progress);
+			rightImageButton.setImageDrawable(
+					getContentIcon(context, R.drawable.ic_action_remove_dark));
 		}
-		rightImageButton.setVisibility(View.VISIBLE);
-		rightImageButton.setImageDrawable(getContentIcon(context, R.drawable.ic_action_import));
-		progressBar.setVisibility(View.GONE);
 
 		if (rightButtonAction != RightButtonAction.UNKNOWN) {
-			rightButton.setText(textButtonCaption);
+			rightButton.setText(R.string.get_plugin);
 			rightButton.setVisibility(View.VISIBLE);
+
 			rightImageButton.setVisibility(View.GONE);
 
 			final RightButtonAction action = rightButtonAction;
@@ -177,39 +206,14 @@ public class ItemViewHolder {
 			rightButton.setVisibility(View.GONE);
 			rightImageButton.setVisibility(View.VISIBLE);
 		}
-
-		if (indexFileNames != null && indexItem.isAlreadyDownloaded(indexFileNames)) {
-			boolean outdated = false;
-			String date;
-			if (indexItem.getType() == DownloadActivityType.HILLSHADE_FILE) {
-				date = indexItem.getDate(dateFormat);
-			} else {
-				String sfName = indexItem.getTargetFileName();
-				final boolean updatableResource = indexActivatedFileNames.containsKey(sfName);
-				date = updatableResource ? indexActivatedFileNames.get(sfName) : indexFileNames.get(sfName);
-				outdated = DownloadActivity.downloadListIndexThread.checkIfItemOutdated(indexItem);
-			}
-			String updateDescr = context.getResources().getString(R.string.local_index_installed) + ": "
-					+ date;
-			mapDateTextView.setText(updateDescr);
-			int colorId = outdated ? R.color.color_distance : R.color.color_ok;
-			final int color = context.getResources().getColor(colorId);
-			mapDateTextView.setTextColor(color);
-			leftImageView.setImageDrawable(getContentIcon(context,
-					indexItem.getType().getIconResource(), color));
-			nameTextView.setTextColor(textColorPrimary);
-		} else if (disabled) {
-			leftImageView.setImageDrawable(getContentIcon(context,
-					indexItem.getType().getIconResource(), textColorSecondary));
-			nameTextView.setTextColor(textColorSecondary);
-		} else {
-			leftImageView.setImageDrawable(getContentIcon(context,
-					indexItem.getType().getIconResource()));
-			nameTextView.setTextColor(textColorPrimary);
-		}
 	}
 
-	public void bindRegion(WorldRegion region, DownloadActivity context) {
+	public void bindIndexItem(final IndexItem indexItem,
+							  boolean showTypeInTitle, boolean showTypeInDesc) {
+		bindIndexItem(indexItem, showTypeInTitle, showTypeInDesc, -1);
+	}
+
+	public void bindRegion(WorldRegion region) {
 		nameTextView.setText(region.getName());
 		nameTextView.setTextColor(textColorPrimary);
 		if (region.getResourceTypes().size() > 0) {

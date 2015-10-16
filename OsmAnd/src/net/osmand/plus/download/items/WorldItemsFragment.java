@@ -39,7 +39,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-public class WorldItemsFragment extends OsmandExpandableListFragment {
+public class WorldItemsFragment extends OsmandExpandableListFragment
+		implements DownloadActivity.DataSetChangedListener {
 	public static final String TAG = "WorldItemsFragment";
 	private static final Log LOG = PlatformUtil.getLog(WorldItemsFragment.class);
 
@@ -199,6 +200,12 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 		}
 	}
 
+	@Override
+	public void notifyDataSetChanged() {
+		listAdapter.notifyDataSetChanged();
+		((DownloadActivity) getActivity()).updateDescriptionTextWithSize(getView());
+	}
+
 	private class WorldItemsAdapter extends OsmandBaseExpandableListAdapter {
 
 		private Map<String, List<Object>> data = new LinkedHashMap<>();
@@ -289,6 +296,7 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 					convertView = LayoutInflater.from(parent.getContext())
 							.inflate(R.layout.two_line_with_images_list_item, parent, false);
 					viewHolder = new ItemViewHolder(convertView,
+							getMyActivity(),
 							getMyApplication().getResourceManager().getDateFormat(),
 							getMyActivity().getIndexActivatedFileNames(),
 							getMyActivity().getIndexFileNames());
@@ -299,7 +307,7 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 				viewHolder.setSrtmDisabled(srtmDisabled);
 				viewHolder.setNauticalPluginDisabled(nauticalPluginDisabled);
 				viewHolder.setFreeVersion(freeVersion);
-				viewHolder.bindIndexItem(item.getIndexItem(), getDownloadActivity(), false, false);
+				viewHolder.bindIndexItem(item.getIndexItem(), false, false);
 			} else if (groupPosition == voicePromptsIndex) {
 				String item = (String)child;
 				SimpleViewHolder viewHolder;

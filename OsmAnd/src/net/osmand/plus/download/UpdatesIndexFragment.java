@@ -25,6 +25,7 @@ import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmAndListFragment;
+import net.osmand.plus.download.items.TwoLineWithImagesViewHolder;
 
 import org.apache.commons.logging.Log;
 
@@ -36,7 +37,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-public class UpdatesIndexFragment extends OsmAndListFragment {
+public class UpdatesIndexFragment extends OsmAndListFragment
+		implements DownloadActivity.DataSetChangedListener {
 	private static final Log LOG = PlatformUtil.getLog(UpdateIndexAdapter.class);
 	private UpdateIndexAdapter listAdapter;
 	List<IndexItem> indexItems = new ArrayList<>();
@@ -202,6 +204,11 @@ public class UpdatesIndexFragment extends OsmAndListFragment {
 		listAdapter.notifyDataSetChanged();
 	}
 
+	@Override
+	public void notifyDataSetChanged() {
+		listAdapter.notifyDataSetChanged();
+	}
+
 	private class UpdateIndexAdapter extends ArrayAdapter<IndexItem> {
 		List<IndexItem> items;
 
@@ -243,28 +250,12 @@ public class UpdatesIndexFragment extends OsmAndListFragment {
 		}
 	}
 
-	// TODO: 10/13/15 Extract viewholder parent
-	private static class UpdateViewHolder {
-		private final TextView nameTextView;
-		private final TextView descrTextView;
-		private final ImageView leftImageView;
-		private final ImageView rightImageButton;
-		private final Button rightButton;
-		private final ProgressBar progressBar;
-		private final TextView mapDateTextView;
-		private final DownloadActivity context;
+	private static class UpdateViewHolder extends TwoLineWithImagesViewHolder {
 		private final java.text.DateFormat format;
 
 		private UpdateViewHolder(View convertView,
 								 final DownloadActivity context) {
-			nameTextView = (TextView) convertView.findViewById(R.id.name);
-			descrTextView = (TextView) convertView.findViewById(R.id.description);
-			leftImageView = (ImageView) convertView.findViewById(R.id.leftImageView);
-			rightImageButton = (ImageView) convertView.findViewById(R.id.rightImageButton);
-			rightButton = (Button) convertView.findViewById(R.id.rightButton);
-			progressBar = (ProgressBar) convertView.findViewById(R.id.progressBar);
-			mapDateTextView = (TextView) convertView.findViewById(R.id.mapDateTextView);
-			this.context = context;
+			super(convertView, context);
 			format = context.getMyApplication().getResourceManager().getDateFormat();
 		}
 

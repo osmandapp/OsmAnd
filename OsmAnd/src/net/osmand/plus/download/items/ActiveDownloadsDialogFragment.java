@@ -51,7 +51,8 @@ public class ActiveDownloadsDialogFragment extends DialogFragment {
 		return builder.create();
 	}
 
-	public static class DownloadEntryAdapter extends ArrayAdapter<DownloadEntry> {
+	public static class DownloadEntryAdapter extends ArrayAdapter<DownloadEntry>
+			implements ProgressAdapter {
 		private final Drawable deleteDrawable;
 		private final DownloadActivity context;
 		private int itemInProgressPosition = -1;
@@ -83,6 +84,7 @@ public class ActiveDownloadsDialogFragment extends DialogFragment {
 			return convertView;
 		}
 
+		@Override
 		public void setProgress(BasicProgressAsyncTask<?, ?, ?> task, Object tag) {
 			isFinished = task == null
 					|| task.getStatus() == AsyncTask.Status.FINISHED;
@@ -96,6 +98,7 @@ public class ActiveDownloadsDialogFragment extends DialogFragment {
 						itemInProgressPosition = i;
 						downloadedItems.add(i);
 					}
+					break;
 				}
 			}
 			notifyDataSetChanged();

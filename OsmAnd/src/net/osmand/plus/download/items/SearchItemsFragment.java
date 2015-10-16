@@ -218,6 +218,7 @@ public class SearchItemsFragment extends Fragment {
 				convertView = LayoutInflater.from(parent.getContext())
 						.inflate(R.layout.two_line_with_images_list_item, parent, false);
 				viewHolder = new ItemViewHolder(convertView,
+						getMyActivity(),
 						getMyApplication().getResourceManager().getDateFormat(),
 						getMyActivity().getIndexActivatedFileNames(),
 						getMyActivity().getIndexFileNames());
@@ -230,9 +231,9 @@ public class SearchItemsFragment extends Fragment {
 			viewHolder.setFreeVersion(freeVersion);
 
 			if (item instanceof WorldRegion) {
-				viewHolder.bindRegion((WorldRegion) item, getDownloadActivity());
+				viewHolder.bindRegion((WorldRegion) item);
 			} else if (item instanceof IndexItem) {
-				viewHolder.bindIndexItem((IndexItem) item, getDownloadActivity(), false, true);
+				viewHolder.bindIndexItem((IndexItem) item, false, true);
 			} else {
 				throw new IllegalArgumentException("Item must be of type WorldRegion or " +
 						"IndexItem but is of type:" + item.getClass());
