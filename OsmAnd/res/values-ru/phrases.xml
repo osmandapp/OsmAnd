@@ -1489,7 +1489,7 @@
 	<string name="poi_indoor_no">Снаружи</string>
 	<string name="poi_toilets_yes">С туалетом</string>
 	<string name="poi_toilets_no">Без туалета</string>
-	<string name="poi_toilets_wheelchair_yes">Доступ в туалет для инвалидных колясок: да</string>
+	<string name="poi_toilets_wheelchair_yes">Доступ в туалет для инвалидных колясок: есть</string>
 	<string name="poi_toilets_wheelchair_no">Доступ в туалет для инвалидных колясок: нет</string>
 	<string name="poi_toilets_access_customers">Доступ в туалет: только для посетителей</string>
 	<string name="poi_toilets_access_permissive">Доступ в туалет: с разрешения владельца</string>
@@ -2082,5 +2082,46 @@
 	<string name="poi_castle_type_defensive_stately">Тип замка: защитный, величественный</string>
 	<string name="poi_castle_type_castrum">Тип замка: римский форт</string>
 	<string name="poi_castle_type_shiro">Тип замка: сиро</string>
+
+	<string name="poi_massage_thai">Массаж: тайский</string>
+	<string name="poi_massage_sexual">Массаж: эротический</string>
+	<string name="poi_massage_chinese">Массаж: китайский</string>
+	<string name="poi_massage_yes">Оказываются массажные услуги</string>
+	<string name="poi_massage_therapeutic">Массаж: терапевтический</string>
+
+	<string name="poi_sauna_yes">Оказываются услуги сауны</string>
+	<string name="poi_solarium_yes">Оказываются услуги солярия</string>
+
+	<string name="poi_tents_yes">Установка палаток разрешена</string>
+	<string name="poi_tents_no">Установка палаток запрещена</string>
+	<string name="poi_openfire_yes">Разведение открытого огня разрешено</string>
+	<string name="poi_openfire_no">Разведение открытого огня запрещено</string>
+	<string name="poi_backcountry_yes">Место для лагеря на природе без удобств</string>
+	<string name="poi_backcountry_no">Место для лагеря на природе без удобств: нет</string>
+	<string name="poi_scout_yes">Лагерь скаутов</string>
+	<string name="poi_scout_no">Лагерь скаутов: нет</string>
+	<string name="poi_group_only_yes">Доступно только для групп: да</string>
+	<string name="poi_group_only_no">Доступно только для групп: нет</string>
+	<string name="poi_washing_machine_yes">Стиральная машина: есть</string>
+	<string name="poi_washing_machine_no">Стиральная машина: нет</string>
+	<string name="poi_shower_yes">Душ: есть</string>
+	<string name="poi_shower_no">Душ: нет</string>
+	<string name="poi_shower_hot">Душ: горячий</string>
+	<string name="poi_shower_outdoor">Душ: снаружи</string>
+	<string name="poi_shower_cold">Душ: холодный</string>
+	<string name="poi_shower_indoor">Душ: внутри</string>
+	<string name="poi_caravans_yes">Автоприцепы разрешены</string>
+	<string name="poi_caravans_no">Автоприцепы запрещены</string>
+	<string name="poi_impromptu_yes">Импровизированный: да</string>
+	<string name="poi_impromptu_no">Импровизированный: нет</string>
+	<string name="poi_sanitary_dump_station_yes">Ассенизационная сливная станция: есть</string>
+	<string name="poi_sanitary_dump_station_no">Ассенизационная сливная станция: нет</string>
+	<string name="poi_sanitary_dump_station_customers">Ассенизационная сливная станция: только для посетителей</string>
+	<string name="poi_power_supply_yes">Источник питания: есть</string>
+	<string name="poi_power_supply_no">Источник питания: нет</string>
+	<string name="poi_power_supply_cee_17_blue">Источник питания (разъём): CEE 17 blue</string>
+	<string name="poi_power_supply_cee_7_4">Источник питания (разъём): CEE 7/4</string>
+	<string name="poi_power_supply_cee_7_5">Источник питания (разъём): CEE 7/5</string>
+	<string name="poi_power_supply_nema_5_15">Источник питания (разъём): NEMA 5-15</string>
 
 </resources>
