@@ -2114,4 +2114,22 @@
 	<string name="poi_clothes_dance">Dansekostume</string>
 	<string name="poi_clothes_military">Militærtøj</string>
 
+<string name="poi_historic_milestone">Historisk milepæl</string>
+
+	<string name="poi_shoes_children">Børnesko</string>
+	<string name="poi_shoes_women">Damesko</string>
+	<string name="poi_shoes_sport">Sportssko</string>
+	<string name="poi_shoes_men">Herresko</string>
+	<string name="poi_shoes_orthopedic">Ortopædisksko</string>
+
+	<string name="poi_historic_manor">Historisk herregård</string>
+	<string name="poi_castle_type_stately">Slotstype: majestætisk</string>
+	<string name="poi_castle_type_defensive">Slotstype: forsvar</string>
+	<string name="poi_castle_type_fortress">Slotstype: fæstning</string>
+	<string name="poi_castle_type_palace">Slotstype: palads</string>
+	<string name="poi_castle_type_kremlin">Slotstype: kreml</string>
+	<string name="poi_castle_type_defensive_stately">Slotstype: forsvar, majestætisk</string>
+	<string name="poi_castle_type_castrum">Slotstype: castrum</string>
+	<string name="poi_castle_type_shiro">Slotstype: shiro</string>
+
 </resources>
