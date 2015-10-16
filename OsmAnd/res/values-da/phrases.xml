@@ -2090,28 +2090,28 @@
 	<string name="poi_surveillance_outdoor">Overvågning: udendørs</string>
 	<string name="poi_surveillance_public">Overvågning: offentlig</string>
 
-	<string name="poi_clothes_women">Kvindertøj</string>
+	<string name="poi_clothes_women">Dametøj</string>
 	<string name="poi_clothes_underwear">Undertøj</string>
 	<string name="poi_clothes_men">Herretøj</string>
 	<string name="poi_clothes_wedding">Brudekjoler</string>
 	<string name="poi_clothes_sports">Sportstøj</string>
 	<string name="poi_clothes_babies">Babytøj</string>
-	<string name="poi_clothes_denim">Tøj fra denim</string>
+	<string name="poi_clothes_denim">Denimtøj</string>
 	<string name="poi_clothes_workwear">Arbejdstøj</string>
 	<string name="poi_clothes_hats">Hatte</string>
 	<string name="poi_clothes_fur">Pels</string>
 	<string name="poi_clothes_leather">Læder</string>
 	<string name="poi_clothes_costumes">Kostumer</string>
-	<string name="poi_clothes_traditional">Traditionettøj</string>
+	<string name="poi_clothes_traditional">Traditionel beklædning</string>
 	<string name="poi_clothes_suits">Jakkesæt</string>
-	<string name="poi_clothes_maternity">Barsel tøj</string>
-	<string name="poi_clothes_vintage">Vintage tøj</string>
+	<string name="poi_clothes_maternity">Barselstøj</string>
+	<string name="poi_clothes_vintage">Vintagetøj</string>
 	<string name="poi_clothes_oversize">Oversize tøj</string>
-	<string name="poi_clothes_schoolwear">Skoletøj</string>
+	<string name="poi_clothes_schoolwear">Skoleuniform</string>
 	<string name="poi_clothes_swimwear">Badetøj</string>
 	<string name="poi_clothes_socks">Sokker</string>
 	<string name="poi_clothes_shirts">Skjorter</string>
-	<string name="poi_clothes_dance">Dansetøj</string>
+	<string name="poi_clothes_dance">Dansekostume</string>
 	<string name="poi_clothes_military">Militærtøj</string>
 
 </resources>
