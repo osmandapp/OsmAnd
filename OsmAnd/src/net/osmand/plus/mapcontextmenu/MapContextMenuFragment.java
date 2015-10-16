@@ -29,6 +29,7 @@ import android.widget.TextView;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
+import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
@@ -51,8 +52,9 @@ public class MapContextMenuFragment extends Fragment {
 	public static final String TAG = "MapContextMenuFragment";
 	private static final Log LOG = PlatformUtil.getLog(MapContextMenuFragment.class);
 
-	private static final float FAB_PADDING_TOP = 10f;
-	private static final float MARKER_PADDING_DP = 20f;
+	public static final float FAB_PADDING_TOP = 10f;
+	public static final float MARKER_PADDING_DP = 20f;
+	public static final float MARKER_PADDING_X_DP = 50f;
 
 	private View view;
 	private View mainView;
@@ -69,6 +71,13 @@ public class MapContextMenuFragment extends Fragment {
 
 	private int fabPaddingTopPx;
 	private int markerPaddingPx;
+	private int markerPaddingXPx;
+
+	private OsmandMapTileView map;
+	private double origMapCenterLat;
+	private double origMapCenterLon;
+	private int origMarkerX;
+	private int origMarkerY;
 
 	private class SingleTapConfirm implements OnGestureListener {
 
@@ -118,11 +127,21 @@ public class MapContextMenuFragment extends Fragment {
 
 		fabPaddingTopPx = dpToPx(FAB_PADDING_TOP);
 		markerPaddingPx = dpToPx(MARKER_PADDING_DP);
+		markerPaddingXPx = dpToPx(MARKER_PADDING_X_DP);
 
 		menu = getMapActivity().getContextMenu();
 		if (savedInstanceState != null) {
 			menu.restoreMenuState(savedInstanceState);
 		}
+
+		map = getMapActivity().getMapView();
+		origMapCenterLat = map.getLatitude();
+		origMapCenterLon = map.getLongitude();
+		RotatedTileBox box = map.getCurrentRotatedTileBox();
+		double markerLat = menu.getLatLon().getLatitude();
+		double markerLon = menu.getLatLon().getLongitude();
+		origMarkerX = (int)box.getPixXFromLatLon(markerLat, markerLon);
+		origMarkerY = (int)box.getPixYFromLatLon(markerLat, markerLon);
 
 		view = inflater.inflate(R.layout.map_context_menu_fragment, container, false);
 		mainView = view.findViewById(R.id.context_menu_main);
@@ -155,7 +174,7 @@ public class MapContextMenuFragment extends Fragment {
 			public boolean onTouch(View v, MotionEvent event) {
 
 				if (singleTapDetector.onTouchEvent(event)) {
-					showOnMap(menu.getLatLon());
+					showOnMap(menu.getLatLon(), true, false);
 
 					if (hasMoved) {
 						applyPosY(getViewY(), false);
@@ -182,7 +201,7 @@ public class MapContextMenuFragment extends Fragment {
 						hasMoved = true;
 						float y = event.getY();
 						float newY = getViewY() + (y - dy);
-						setViewY((int) newY);
+						setViewY((int) newY, false);
 
 						menuFullHeight = view.getHeight() - (int) newY + 10;
 						if (!oldAndroid()) {
@@ -256,12 +275,15 @@ public class MapContextMenuFragment extends Fragment {
 									}
 								})
 								.start();
+
 						fabView.animate().y(getFabY(posY))
 								.setDuration(200)
 								.setInterpolator(new DecelerateInterpolator())
 								.start();
+
+						adjustMapPosition(posY, true);
 					} else {
-						setViewY(posY);
+						setViewY(posY, false);
 						updateMainViewLayout(posY);
 					}
 				}
@@ -387,6 +409,7 @@ public class MapContextMenuFragment extends Fragment {
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
+		map.setLatLon(origMapCenterLat, origMapCenterLon);
 		getMapActivity().getMapLayers().getMapControlsLayer().setControlsClickable(true);
 	}
 
@@ -430,7 +453,7 @@ public class MapContextMenuFragment extends Fragment {
 		});
 	}
 
-	private void showOnMap(LatLon latLon) {
+	private void showOnMap(LatLon latLon, boolean updateCoords, boolean ignoreCoef) {
 		MapActivity ctx = getMapActivity();
 		AnimateDraggingMapThread thread = ctx.getMapView().getAnimatedDraggingThread();
 		int fZoom = ctx.getMapView().getZoom();
@@ -438,10 +461,21 @@ public class MapContextMenuFragment extends Fragment {
 		double flon = latLon.getLongitude();
 
 		RotatedTileBox cp = ctx.getMapView().getCurrentRotatedTileBox().copy();
-		cp.setCenterLocation(0.5f, ctx.getMapView().getMapPosition() == OsmandSettings.BOTTOM_CONSTANT ? 0.15f : 0.5f);
+		if (ignoreCoef) {
+			cp.setCenterLocation(0.5f, 0.5f);
+		} else {
+			cp.setCenterLocation(0.5f, ctx.getMapView().getMapPosition() == OsmandSettings.BOTTOM_CONSTANT ? 0.15f : 0.5f);
+		}
 		cp.setLatLonCenter(flat, flon);
 		flat = cp.getLatFromPixel(cp.getPixWidth() / 2, cp.getPixHeight() / 2);
 		flon = cp.getLonFromPixel(cp.getPixWidth() / 2, cp.getPixHeight() / 2);
+
+		if (updateCoords) {
+			origMapCenterLat = flat;
+			origMapCenterLon = flon;
+			origMarkerX = cp.getCenterPixelX();
+			origMarkerY = cp.getCenterPixelY();
+		}
 
 		thread.startMoving(flat, flon, fZoom, true);
 	}
@@ -516,7 +550,7 @@ public class MapContextMenuFragment extends Fragment {
 		}
 	}
 
-	private void setViewY(int y) {
+	private void setViewY(int y, boolean animated) {
 		if (!oldAndroid()) {
 			mainView.setY(y);
 			fabView.setY(getFabY(y));
@@ -524,24 +558,41 @@ public class MapContextMenuFragment extends Fragment {
 			mainView.setPadding(0, y, 0, 0);
 			fabView.setPadding(0, getFabY(y), 0, 0);
 		}
-		//adjustMapPosition(y);
+		adjustMapPosition(y, animated);
 	}
 
-	private void adjustMapPosition(int y) {
-		OsmandMapTileView map = getMapActivity().getMapView();
+	private void adjustMapPosition(int y, boolean animated) {
 		double markerLat = menu.getLatLon().getLatitude();
 		double markerLon = menu.getLatLon().getLongitude();
-		int markerX = (int)map.getCurrentRotatedTileBox().getPixXFromLatLon(markerLat, markerLon);
-		int markerY = (int)map.getCurrentRotatedTileBox().getPixYFromLatLon(markerLat, markerLon);
+		RotatedTileBox box = map.getCurrentRotatedTileBox();
 
+		LatLon latlon = new LatLon(origMapCenterLat, origMapCenterLon);
 		if (menu.isLandscapeLayout()) {
-			int menuX = dpToPx(menu.getLandscapeWidthDp());
-		} else {
-			int menuY = y;
-			if (markerY + markerPaddingPx > menuY) {
-				int dy = markerY - (menuY - markerPaddingPx);
-				map.moveTo(0, dy);
+			int markerX = (int)box.getPixXFromLatLon(markerLat, markerLon);
+			int x = dpToPx(menu.getLandscapeWidthDp());
+			if (markerX - markerPaddingXPx < x || markerX > origMarkerX) {
+				int dx = (x + markerPaddingXPx) - markerX;
+				if (markerX - dx <= origMarkerX) {
+					QuadPoint cp = box.getCenterPixelPoint();
+					latlon = box.getLatLonFromPixel(cp.x - dx, cp.y);
+				} else {
+					latlon = box.getCenterLatLon();
+				}
 			}
+		} else {
+			int markerY = (int)box.getPixYFromLatLon(markerLat, markerLon);
+			if (markerY + markerPaddingPx > y || markerY < origMarkerY) {
+				int dy = markerY - (y - markerPaddingPx);
+				if (markerY - dy <= origMarkerY) {
+					QuadPoint cp = box.getCenterPixelPoint();
+					latlon = box.getLatLonFromPixel(cp.x + 0, cp.y + dy);
+				}
+			}
+		}
+		if (animated) {
+			showOnMap(latlon, false, true);
+		} else {
+			map.setLatLon(latlon.getLatitude(), latlon.getLongitude());
 		}
 	}
 
@@ -559,7 +610,7 @@ public class MapContextMenuFragment extends Fragment {
 
 	private void doLayoutMenu() {
 		final int posY = getPosY();
-		setViewY(posY);
+		setViewY(posY, true);
 		updateMainViewLayout(posY);
 	}
 
@@ -577,6 +628,7 @@ public class MapContextMenuFragment extends Fragment {
 	public void setFragmentVisibility(boolean visible) {
 		if (visible) {
 			view.setVisibility(View.VISIBLE);
+			adjustMapPosition(getPosY(), true);
 		} else {
 			view.setVisibility(View.GONE);
 		}
