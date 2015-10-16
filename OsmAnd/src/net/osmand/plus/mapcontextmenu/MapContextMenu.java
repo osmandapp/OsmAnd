@@ -37,6 +37,8 @@ public class MapContextMenu {
 	private Object object;
 	MenuController menuController;
 
+	private LatLon mapCenter;
+
 	private int leftIconId;
 	private Drawable leftIcon;
 	private String nameStr;
@@ -55,6 +57,7 @@ public class MapContextMenu {
 	private static final String KEY_CTX_MENU_TYPE_STR = "key_ctx_menu_type_str";
 	private static final String KEY_CTX_MENU_STREET_STR = "key_ctx_menu_street_str";
 	private static final String KEY_CTX_MENU_ADDR_UNKNOWN = "key_ctx_menu_addr_unknown";
+	private static final String KEY_CTX_MENU_MAP_CENTER = "key_ctx_menu_map_center";
 
 	public boolean isActive() {
 		return active;
@@ -66,6 +69,14 @@ public class MapContextMenu {
 
 	public LatLon getLatLon() {
 		return latLon;
+	}
+
+	public LatLon getMapCenter() {
+		return mapCenter;
+	}
+
+	public void setMapCenter(LatLon mapCenter) {
+		this.mapCenter = mapCenter;
 	}
 
 	public PointDescription getPointDescription() {
@@ -388,6 +399,7 @@ public class MapContextMenu {
 		bundle.putString(KEY_CTX_MENU_TYPE_STR, typeStr);
 		bundle.putString(KEY_CTX_MENU_STREET_STR, streetStr);
 		bundle.putString(KEY_CTX_MENU_ADDR_UNKNOWN, Boolean.toString(addressUnknown));
+		bundle.putSerializable(KEY_CTX_MENU_MAP_CENTER, mapCenter);
 	}
 
 	public void restoreMenuState(Bundle bundle) {
@@ -404,6 +416,11 @@ public class MapContextMenu {
 			latLon = (LatLon) latLonObj;
 		} else {
 			active = false;
+		}
+
+		Object mapCenterObj = bundle.getSerializable(KEY_CTX_MENU_MAP_CENTER);
+		if (mapCenterObj != null) {
+			mapCenter = (LatLon) mapCenterObj;
 		}
 
 		nameStr = bundle.getString(KEY_CTX_MENU_NAME_STR);

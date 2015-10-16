@@ -74,10 +74,10 @@ public class MapContextMenuFragment extends Fragment {
 	private int markerPaddingXPx;
 
 	private OsmandMapTileView map;
-	private double origMapCenterLat;
-	private double origMapCenterLon;
+	private LatLon mapCenter;
 	private int origMarkerX;
 	private int origMarkerY;
+	private boolean customMapCenter;
 
 	private class SingleTapConfirm implements OnGestureListener {
 
@@ -135,13 +135,20 @@ public class MapContextMenuFragment extends Fragment {
 		}
 
 		map = getMapActivity().getMapView();
-		origMapCenterLat = map.getLatitude();
-		origMapCenterLon = map.getLongitude();
-		RotatedTileBox box = map.getCurrentRotatedTileBox();
-		double markerLat = menu.getLatLon().getLatitude();
-		double markerLon = menu.getLatLon().getLongitude();
-		origMarkerX = (int)box.getPixXFromLatLon(markerLat, markerLon);
-		origMarkerY = (int)box.getPixYFromLatLon(markerLat, markerLon);
+		RotatedTileBox box = map.getCurrentRotatedTileBox().copy();
+		customMapCenter = menu.getMapCenter() != null;
+		if (!customMapCenter) {
+			mapCenter = box.getCenterLatLon();
+			menu.setMapCenter(mapCenter);
+			double markerLat = menu.getLatLon().getLatitude();
+			double markerLon = menu.getLatLon().getLongitude();
+			origMarkerX = (int)box.getPixXFromLatLon(markerLat, markerLon);
+			origMarkerY = (int)box.getPixYFromLatLon(markerLat, markerLon);
+		} else {
+			mapCenter = menu.getMapCenter();
+			origMarkerX = box.getCenterPixelX();
+			origMarkerY = box.getCenterPixelY();
+		}
 
 		view = inflater.inflate(R.layout.map_context_menu_fragment, container, false);
 		mainView = view.findViewById(R.id.context_menu_main);
@@ -409,7 +416,8 @@ public class MapContextMenuFragment extends Fragment {
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
-		map.setLatLon(origMapCenterLat, origMapCenterLon);
+		map.setLatLon(mapCenter.getLatitude(), mapCenter.getLongitude());
+		menu.setMapCenter(null);
 		getMapActivity().getMapLayers().getMapControlsLayer().setControlsClickable(true);
 	}
 
@@ -447,6 +455,11 @@ public class MapContextMenuFragment extends Fragment {
 					obs.removeGlobalOnLayoutListener(this);
 				}
 
+				if (origMarkerX == 0 && origMarkerY == 0) {
+					origMarkerX = view.getWidth() / 2;
+					origMarkerY = view.getHeight() / 2;
+				}
+
 				doLayoutMenu();
 			}
 
@@ -454,25 +467,24 @@ public class MapContextMenuFragment extends Fragment {
 	}
 
 	private void showOnMap(LatLon latLon, boolean updateCoords, boolean ignoreCoef) {
-		MapActivity ctx = getMapActivity();
-		AnimateDraggingMapThread thread = ctx.getMapView().getAnimatedDraggingThread();
-		int fZoom = ctx.getMapView().getZoom();
+		AnimateDraggingMapThread thread = map.getAnimatedDraggingThread();
+		int fZoom = map.getZoom();
 		double flat = latLon.getLatitude();
 		double flon = latLon.getLongitude();
 
-		RotatedTileBox cp = ctx.getMapView().getCurrentRotatedTileBox().copy();
+		RotatedTileBox cp = map.getCurrentRotatedTileBox().copy();
 		if (ignoreCoef) {
 			cp.setCenterLocation(0.5f, 0.5f);
 		} else {
-			cp.setCenterLocation(0.5f, ctx.getMapView().getMapPosition() == OsmandSettings.BOTTOM_CONSTANT ? 0.15f : 0.5f);
+			cp.setCenterLocation(0.5f, map.getMapPosition() == OsmandSettings.BOTTOM_CONSTANT ? 0.15f : 0.5f);
 		}
 		cp.setLatLonCenter(flat, flon);
 		flat = cp.getLatFromPixel(cp.getPixWidth() / 2, cp.getPixHeight() / 2);
 		flon = cp.getLonFromPixel(cp.getPixWidth() / 2, cp.getPixHeight() / 2);
 
 		if (updateCoords) {
-			origMapCenterLat = flat;
-			origMapCenterLon = flon;
+			mapCenter = new LatLon(flat, flon);
+			menu.setMapCenter(mapCenter);
 			origMarkerX = cp.getCenterPixelX();
 			origMarkerY = cp.getCenterPixelY();
 		}
@@ -558,15 +570,19 @@ public class MapContextMenuFragment extends Fragment {
 			mainView.setPadding(0, y, 0, 0);
 			fabView.setPadding(0, getFabY(y), 0, 0);
 		}
-		adjustMapPosition(y, animated);
+		if (!customMapCenter) {
+			adjustMapPosition(y, animated);
+		} else {
+			customMapCenter = false;
+		}
 	}
 
 	private void adjustMapPosition(int y, boolean animated) {
 		double markerLat = menu.getLatLon().getLatitude();
 		double markerLon = menu.getLatLon().getLongitude();
-		RotatedTileBox box = map.getCurrentRotatedTileBox();
+		RotatedTileBox box = map.getCurrentRotatedTileBox().copy();
 
-		LatLon latlon = new LatLon(origMapCenterLat, origMapCenterLon);
+		LatLon latlon = mapCenter;
 		if (menu.isLandscapeLayout()) {
 			int markerX = (int)box.getPixXFromLatLon(markerLat, markerLon);
 			int x = dpToPx(menu.getLandscapeWidthDp());
