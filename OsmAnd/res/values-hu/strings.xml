@@ -2122,4 +2122,7 @@
     <string name="confirm_download_roadmaps">Biztosan letöltesz csak utakat tartalmazó térképet, annak ellenére, hogy már van teljes térképed?</string>
     <string name="value_downloaded_from_max">%1$.1f / %2$.1f MB</string>
     <string name="file_size_in_mb">%.1f MB</string>
+<string name="update_all">Összes frissítése (%1$s Mb)</string>
+    <string name="free_downloads_used">Elhasznált ingyenes letöltés</string>
+    <string name="free_downloads_used_description">Beállíthatod, mennyi ingyenes letöltést használtál</string>
 </resources>
