@@ -318,6 +318,10 @@ public class DownloadIndexesThread {
 								!message.equals(uiActivity.getString(R.string.shared_string_download_successful))) {
 							AccessibleToast.makeText(ctx, message, Toast.LENGTH_LONG).show();
 						}
+					} else {
+						if (uiActivity != null) {
+							uiActivity.updateProgress(true, null);
+						}
 					}
 				}
 			}

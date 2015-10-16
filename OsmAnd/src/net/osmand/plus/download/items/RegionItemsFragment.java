@@ -311,7 +311,6 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 
 		@Override
 		public void setProgress(BasicProgressAsyncTask<?, ?, ?> task, Object tag) {
-			LOG.debug("setProgress()");
 			isFinished = task == null
 					|| task.getStatus() == AsyncTask.Status.FINISHED;
 			groupInProgressPosition = -1;
@@ -323,23 +322,19 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 				outer_loop:
 				for (int i = 0; i < getGroupCount(); i++) {
 					for (int j = 0; j < getChildrenCount(i); j++) {
-						final IndexItem child =
-								((ItemsListBuilder.ResourceItem) getChild(i, j)).getIndexItem();
-						LOG.debug("chield=" + child.getBasename());
-						LOG.debug("tag=" + ((DownloadEntry) tag).baseName);
-						if (child.getBasename().equals(((DownloadEntry) tag).baseName)) {
-							groupInProgressPosition = i;
-							childInProgressPosition = j;
-							notifyDataSetChanged();
-							LOG.debug("groupInProgressPosition=" + groupInProgressPosition
-									+ "; childInProgressPosition" + childInProgressPosition);
-							break outer_loop;
+						if ((getChild(i, j) instanceof ItemsListBuilder.ResourceItem)) {
+							final IndexItem child =
+									((ItemsListBuilder.ResourceItem) getChild(i, j)).getIndexItem();
+							if (child.getBasename().equals(((DownloadEntry) tag).baseName)) {
+								groupInProgressPosition = i;
+								childInProgressPosition = j;
+								notifyDataSetChanged();
+								break outer_loop;
+							}
 						}
 					}
 				}
 			}
-			LOG.debug("groupInProgressPosition=" + groupInProgressPosition
-					+ "; childInProgressPosition" + childInProgressPosition);
 		}
 	}
 

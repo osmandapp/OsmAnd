@@ -44,7 +44,7 @@ public class DownloadActivityType implements Parcelable {
 					R.drawable.ic_action_hillshade_dark, "hillshade", 50);
 	public static final DownloadActivityType WIKIPEDIA_FILE =
 			new DownloadActivityType(R.string.download_wikipedia_maps,
-					R.drawable.ic_world_globe_dark, "wikimap", 60);
+					R.drawable.ic_plugin_wikipedia, "wikimap", 60);
 	public static final DownloadActivityType LIVE_UPDATES_FILE =
 			new DownloadActivityType(R.string.download_live_updates, "live_updates", 70);
 	private final int stringResource;

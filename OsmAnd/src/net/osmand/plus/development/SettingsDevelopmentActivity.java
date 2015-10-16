@@ -185,6 +185,9 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		cat.addPreference(createCheckBoxPreference(settings.SHOULD_SHOW_FREE_VERSION_BANNER,
 				R.string.show_free_version_banner,
 				R.string.show_free_version_banner_description));
+		cat.addPreference(createSeekBarPreference(settings.NUMBER_OF_FREE_DOWNLOADS,
+				R.string.free_downloads_used, R.string.free_downloads_used_description,
+				R.string.free_downloads_used, 5, 10));
 	}
 	
 	protected void availableProfileDialog() {
