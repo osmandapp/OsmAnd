@@ -9,13 +9,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.WorldRegion;
 import net.osmand.plus.download.DownloadActivity;
 
-public class RegionDialogFragment extends DialogFragment{
+public class RegionDialogFragment extends DialogFragment
+		implements DownloadActivity.DataSetChangedListener{
 	public static final String TAG = "RegionDialogFragment";
 	private static final String REGION_ID_DLG_KEY = "world_region_dialog_key";
 	private String regionId;
@@ -113,5 +115,12 @@ public class RegionDialogFragment extends DialogFragment{
 
 	public void setOnDismissListener(DialogDismissListener listener) {
 		this.dialogDismissListener = listener;
+	}
+
+	@Override
+	public void notifyDataSetChanged() {
+		((DownloadActivity.DataSetChangedListener)
+				getChildFragmentManager().findFragmentById(R.id.fragmentContainer))
+				.notifyDataSetChanged();
 	}
 }

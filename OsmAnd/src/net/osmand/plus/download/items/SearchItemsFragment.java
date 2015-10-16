@@ -219,9 +219,7 @@ public class SearchItemsFragment extends Fragment {
 						.inflate(R.layout.two_line_with_images_list_item, parent, false);
 				viewHolder = new ItemViewHolder(convertView,
 						getMyActivity(),
-						getMyApplication().getResourceManager().getDateFormat(),
-						getMyActivity().getIndexActivatedFileNames(),
-						getMyActivity().getIndexFileNames());
+						getMyApplication().getResourceManager().getDateFormat());
 				convertView.setTag(viewHolder);
 			} else {
 				viewHolder = (ItemViewHolder) convertView.getTag();

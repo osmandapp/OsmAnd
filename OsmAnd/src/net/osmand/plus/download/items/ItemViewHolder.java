@@ -23,8 +23,6 @@ import java.util.Map;
 
 public class ItemViewHolder extends TwoLineWithImagesViewHolder {
 
-	private final Map<String, String> indexFileNames;
-	private final Map<String, String> indexActivatedFileNames;
 	private final java.text.DateFormat dateFormat;
 
 	private boolean srtmDisabled;
@@ -44,12 +42,8 @@ public class ItemViewHolder extends TwoLineWithImagesViewHolder {
 
 	public ItemViewHolder(View convertView,
 						  DownloadActivity context,
-						  DateFormat dateFormat,
-						  Map<String, String> indexFileNames,
-						  Map<String, String> indexActivatedFileNames) {
+						  DateFormat dateFormat) {
 		super(convertView, context);
-		this.indexFileNames = indexFileNames;
-		this.indexActivatedFileNames = indexActivatedFileNames;
 		this.dateFormat = dateFormat;
 
 		TypedValue typedValue = new TypedValue();
@@ -89,7 +83,8 @@ public class ItemViewHolder extends TwoLineWithImagesViewHolder {
 			nameTextView.setText(indexItem.getVisibleName(context,
 					context.getMyApplication().getRegions(), false));
 		} else {
-			if (indexItem.getSimplifiedFileName().equals(ItemsListBuilder.WORLD_SEAMARKS_KEY) && nauticalPluginDisabled) {
+			if (indexItem.getSimplifiedFileName().equals(ItemsListBuilder.WORLD_SEAMARKS_KEY)
+					&& nauticalPluginDisabled) {
 				rightButtonAction = RightButtonAction.ASK_FOR_SEAMARKS_PLUGIN;
 				disabled = true;
 			}
@@ -128,6 +123,7 @@ public class ItemViewHolder extends TwoLineWithImagesViewHolder {
 			rightImageButton.setImageDrawable(getContentIcon(context, R.drawable.ic_action_import));
 			progressBar.setVisibility(View.GONE);
 
+			Map<String,String> indexFileNames = context.getIndexFileNames();
 			if (indexFileNames != null && indexItem.isAlreadyDownloaded(indexFileNames)) {
 				boolean outdated = false;
 				String date;
@@ -135,6 +131,7 @@ public class ItemViewHolder extends TwoLineWithImagesViewHolder {
 					date = indexItem.getDate(dateFormat);
 				} else {
 					String sfName = indexItem.getTargetFileName();
+					Map<String,String> indexActivatedFileNames = context.getIndexActivatedFileNames();
 					final boolean updatableResource = indexActivatedFileNames.containsKey(sfName);
 					date = updatableResource ? indexActivatedFileNames.get(sfName) : indexFileNames.get(sfName);
 					outdated = DownloadActivity.downloadListIndexThread.checkIfItemOutdated(indexItem);

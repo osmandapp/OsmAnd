@@ -39,7 +39,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-public class RegionItemsFragment extends OsmandExpandableListFragment {
+public class RegionItemsFragment extends OsmandExpandableListFragment
+		implements DownloadActivity.DataSetChangedListener {
 	public static final String TAG = "RegionItemsFragment";
 	private static final Log LOG = PlatformUtil.getLog(RegionItemsFragment.class);
 
@@ -110,7 +111,8 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 					IndexItem regularMap =
 							((ItemsListBuilder.ResourceItem) listAdapter.getChild(0, 0))
 									.getIndexItem();
-					if (regularMap.getType() == DownloadActivityType.NORMAL_FILE) {
+					if (regularMap.getType() == DownloadActivityType.NORMAL_FILE
+							&& regularMap.isAlreadyDownloaded(getMyActivity().getIndexFileNames())) {
 						ConfirmDownloadUnneededMapDialogFragment.createInstance(indexItem)
 								.show(getChildFragmentManager(), "dialog");
 						return true;
@@ -172,6 +174,12 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 		return fragment;
 	}
 
+	@Override
+	public void notifyDataSetChanged() {
+		LOG.debug("notifyDataSetChanged()");
+		listAdapter.notifyDataSetChanged();
+	}
+
 	private class RegionsItemsAdapter extends OsmandBaseExpandableListAdapter
 			implements ProgressAdapter {
 
@@ -228,9 +236,7 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 				convertView = LayoutInflater.from(parent.getContext())
 						.inflate(R.layout.two_line_with_images_list_item, parent, false);
 				viewHolder = new ItemViewHolder(convertView, getMyActivity(),
-						getMyApplication().getResourceManager().getDateFormat(),
-						getMyActivity().getIndexActivatedFileNames(),
-						getMyActivity().getIndexFileNames());
+						getMyApplication().getResourceManager().getDateFormat());
 				convertView.setTag(viewHolder);
 			} else {
 				viewHolder = (ItemViewHolder) convertView.getTag();
@@ -318,6 +324,7 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 			progress = -1;
 			if (isFinished) return;
 			if (tag instanceof DownloadEntry) {
+				DownloadEntry updatedEntry = (DownloadEntry) tag;
 				progress = task.getProgressPercentage();
 				outer_loop:
 				for (int i = 0; i < getGroupCount(); i++) {
@@ -325,7 +332,8 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 						if ((getChild(i, j) instanceof ItemsListBuilder.ResourceItem)) {
 							final IndexItem child =
 									((ItemsListBuilder.ResourceItem) getChild(i, j)).getIndexItem();
-							if (child.getBasename().equals(((DownloadEntry) tag).baseName)) {
+							if (child.getBasename().equals(updatedEntry.baseName) &&
+									child.getType().equals(updatedEntry.type)) {
 								groupInProgressPosition = i;
 								childInProgressPosition = j;
 								notifyDataSetChanged();
