@@ -493,6 +493,12 @@ public class MapActivityActions implements DialogProvider {
 		ApplicationMode selected = settings.APPLICATION_MODE.get();
 		OsmandApplication app = mapActivity.getMyApplication();
 		TargetPointsHelper targets = app.getTargetPointsHelper();
+		if (from == null) {
+			Location ll = app.getLocationProvider().getLastKnownLocation();
+			if (ll != null) {
+				from = new LatLon(ll.getLatitude(), ll.getLongitude());
+			}
+		}
 		if( selected != ApplicationMode.DEFAULT) {
 			mode = selected;
 		} else if (mode == ApplicationMode.DEFAULT) {

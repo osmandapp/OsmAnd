@@ -22,6 +22,7 @@ import net.osmand.plus.mapcontextmenu.details.AmenityMenuController;
 import net.osmand.plus.mapcontextmenu.details.FavouritePointMenuController;
 import net.osmand.plus.mapcontextmenu.details.HistoryMenuController;
 import net.osmand.plus.mapcontextmenu.details.MenuController;
+import net.osmand.plus.mapcontextmenu.details.PointDescriptionMenuController;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.OsmandMapLayer;
@@ -205,6 +206,8 @@ public class MapContextMenu {
 			} else if (object instanceof HistoryEntry) {
 				menuController = new HistoryMenuController(app, mapActivity, (HistoryEntry) object);
 			}
+		} else {
+			menuController = new PointDescriptionMenuController(app, mapActivity, pointDescription, latLon);
 		}
 	}
 
@@ -358,6 +361,8 @@ public class MapContextMenu {
 
 	public void fabPressed() {
 		mapActivity.getMapActions().directionTo(latLon.getLatitude(), latLon.getLongitude());
+		hide();
+		// open navigation menu
 	}
 
 	public void buttonWaypointPressed() {

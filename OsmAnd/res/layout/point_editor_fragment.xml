@@ -55,13 +55,23 @@
 
                 <TextView
                     android:id="@+id/header_caption"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:layout_marginLeft="16dp"
                     android:layout_gravity="center_vertical"
                     android:text="Point info"
                     android:textColor="?android:textColorPrimary"
                     android:textSize="@dimen/default_list_text_size"/>
+
+                <Button
+                    android:id="@+id/button_replace"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/color_transparent"
+                    android:textColor="@color/color_dialog_buttons"
+                    android:text="@string/update_existing"
+                    android:visibility="gone"/>
 
             </LinearLayout>
 
