@@ -16,6 +16,7 @@ import net.osmand.plus.WorldRegion;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 
 import java.text.DateFormat;
@@ -54,20 +55,15 @@ public class ItemViewHolder extends TwoLineWithImagesViewHolder {
 		textColorSecondary = typedValue.data;
 	}
 
-	public void setSrtmDisabled(boolean srtmDisabled) {
-		this.srtmDisabled = srtmDisabled;
-	}
-
-	public void setNauticalPluginDisabled(boolean nauticalPluginDisabled) {
-		this.nauticalPluginDisabled = nauticalPluginDisabled;
-	}
-
-	public void setFreeVersion(boolean freeVersion) {
-		this.freeVersion = freeVersion;
+	public void initAppStatusVariables() {
+		srtmDisabled = OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) == null;
+		nauticalPluginDisabled = OsmandPlugin.getEnabledPlugin(NauticalMapsPlugin.class) == null;
+		freeVersion = Version.isFreeVersion(context.getMyApplication());
 	}
 
 	public void bindIndexItem(final IndexItem indexItem,
 							  boolean showTypeInTitle, boolean showTypeInDesc, int progress) {
+		initAppStatusVariables();
 		boolean disabled = false;
 		rightButtonAction = RightButtonAction.UNKNOWN;
 		rightImageButton.setClickable(false);

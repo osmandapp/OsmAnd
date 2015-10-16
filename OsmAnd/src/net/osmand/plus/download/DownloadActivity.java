@@ -20,6 +20,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import net.osmand.IndexConstants;
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -36,6 +37,8 @@ import net.osmand.plus.download.items.WorldItemsFragment;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 
+import org.apache.commons.logging.Log;
+
 import java.io.File;
 import java.lang.ref.WeakReference;
 import java.text.MessageFormat;
@@ -49,6 +52,7 @@ import java.util.Set;
 
 
 public class DownloadActivity extends BaseDownloadActivity implements DialogDismissListener {
+	private static final Log LOG = PlatformUtil.getLog(DownloadActivity.class);
 	private List<LocalIndexInfo> localIndexInfos = new ArrayList<>();
 
 	private String initialFilter = "";
@@ -158,7 +162,10 @@ public class DownloadActivity extends BaseDownloadActivity implements DialogDism
 	@Override
 	protected void onResume() {
 		super.onResume();
+		LOG.debug("onResume()");
+		// TODO: 10/16/15 Review: seems like doing nothing
 		getMyApplication().getAppCustomization().resumeActivity(DownloadActivity.class, this);
+		updateFragments();
 	}
 
 

@@ -241,9 +241,6 @@ public class RegionItemsFragment extends OsmandExpandableListFragment
 			} else {
 				viewHolder = (ItemViewHolder) convertView.getTag();
 			}
-			viewHolder.setSrtmDisabled(srtmDisabled);
-			viewHolder.setNauticalPluginDisabled(nauticalPluginDisabled);
-			viewHolder.setFreeVersion(freeVersion);
 			final Object child = getChild(groupPosition, childPosition);
 
 			if (child instanceof WorldRegion) {
