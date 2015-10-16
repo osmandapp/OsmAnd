@@ -334,7 +334,7 @@
         <string name="poi_archaeological_site">Arkæologisk område</string>
         <string name="poi_battlefield">Slagmark</string>
         <string name="poi_boundary_stone">Grænsesten</string>
-        <string name="poi_castle">Slot</string>
+        <string name="poi_castle">Borg</string>
         <string name="poi_city_gate">Byport</string>
         <string name="poi_fort">Fort</string>
         <string name="poi_fountain">Springvand</string>
@@ -2123,13 +2123,13 @@
 	<string name="poi_shoes_orthopedic">Ortopædisksko</string>
 
 	<string name="poi_historic_manor">Historisk herregård</string>
-	<string name="poi_castle_type_stately">Slotstype: majestætisk</string>
-	<string name="poi_castle_type_defensive">Slotstype: forsvar</string>
-	<string name="poi_castle_type_fortress">Slotstype: fæstning</string>
-	<string name="poi_castle_type_palace">Slotstype: palads</string>
-	<string name="poi_castle_type_kremlin">Slotstype: kreml</string>
-	<string name="poi_castle_type_defensive_stately">Slotstype: forsvar, majestætisk</string>
-	<string name="poi_castle_type_castrum">Slotstype: castrum</string>
-	<string name="poi_castle_type_shiro">Slotstype: shiro</string>
+	<string name="poi_castle_type_stately">Borgtype: majestætisk</string>
+	<string name="poi_castle_type_defensive">Borgtype: forsvar</string>
+	<string name="poi_castle_type_fortress">Borgtype: fæstning</string>
+	<string name="poi_castle_type_palace">Borgtype: palads</string>
+	<string name="poi_castle_type_kremlin">Borgtype: kreml</string>
+	<string name="poi_castle_type_defensive_stately">Borgtype: forsvar, majestætisk</string>
+	<string name="poi_castle_type_castrum">Borgtype: castrum</string>
+	<string name="poi_castle_type_shiro">Borgtype: shiro</string>
 
 </resources>
