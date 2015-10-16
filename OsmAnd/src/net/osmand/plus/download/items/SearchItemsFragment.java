@@ -224,9 +224,6 @@ public class SearchItemsFragment extends Fragment {
 			} else {
 				viewHolder = (ItemViewHolder) convertView.getTag();
 			}
-			viewHolder.setSrtmDisabled(srtmDisabled);
-			viewHolder.setNauticalPluginDisabled(nauticalPluginDisabled);
-			viewHolder.setFreeVersion(freeVersion);
 
 			if (item instanceof WorldRegion) {
 				viewHolder.bindRegion((WorldRegion) item);

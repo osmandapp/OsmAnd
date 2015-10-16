@@ -210,18 +210,12 @@ public class WorldItemsFragment extends OsmandExpandableListFragment
 
 		private Map<String, List<Object>> data = new LinkedHashMap<>();
 		private List<String> sections = new LinkedList<>();
-		private boolean srtmDisabled;
-		private boolean nauticalPluginDisabled;
-		private boolean freeVersion;
 
 		private class SimpleViewHolder {
 			TextView textView;
 		}
 
 		public WorldItemsAdapter(Context ctx) {
-			srtmDisabled = OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) == null;
-			nauticalPluginDisabled = OsmandPlugin.getEnabledPlugin(NauticalMapsPlugin.class) == null;
-			freeVersion = Version.isFreeVersion(getMyApplication());
 			TypedArray ta = ctx.getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorPrimary});
 			ta.recycle();
 		}
@@ -302,9 +296,6 @@ public class WorldItemsFragment extends OsmandExpandableListFragment
 				} else {
 					viewHolder = (ItemViewHolder) convertView.getTag();
 				}
-				viewHolder.setSrtmDisabled(srtmDisabled);
-				viewHolder.setNauticalPluginDisabled(nauticalPluginDisabled);
-				viewHolder.setFreeVersion(freeVersion);
 				viewHolder.bindIndexItem(item.getIndexItem(), false, false);
 			} else if (groupPosition == voicePromptsIndex) {
 				String item = (String)child;
