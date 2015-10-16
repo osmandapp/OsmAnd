@@ -2133,7 +2133,7 @@
 	<string name="poi_castle_type_shiro">Borgtype: shiro</string>
 
 <string name="poi_massage_thai">Massage: thailandsk</string>
-	<string name="poi_massage_sexual"/>
+	<string name="poi_massage_sexual">Massage: erotisk</string>
 	<string name="poi_massage_chinese">Massage: kinesisk</string>
 	<string name="poi_massage_yes">Massage tjenester</string>
 	<string name="poi_massage_therapeutic">Massage: terapeutisk</string>
@@ -2169,4 +2169,8 @@
 	<string name="poi_power_supply_yes">Strømforsyning: ja</string>
 	<string name="poi_power_supply_no">Strømforsyning: nej</string>
 	<string name="poi_power_supply_cee_17_blue">Strømforsyning (stik): CEE 17 blå</string>
-	</resources>
+	<string name="poi_power_supply_cee_7_4">Strømforsyning (stik): CEE 7/4</string>
+	<string name="poi_power_supply_cee_7_5">Strømforsyning (stik): CEE 7/5</string>
+	<string name="poi_power_supply_nema_5_15">Strømforsyning (stik): NEMA 5-15</string>
+
+</resources>
