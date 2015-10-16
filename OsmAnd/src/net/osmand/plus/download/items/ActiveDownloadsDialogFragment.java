@@ -19,6 +19,7 @@ import android.widget.TextView;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BasicProgressAsyncTask;
+import net.osmand.plus.download.BaseDownloadActivity;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadEntry;
 
@@ -37,7 +38,7 @@ public class ActiveDownloadsDialogFragment extends DialogFragment {
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		builder.setTitle(R.string.downloads).setNegativeButton(R.string.shared_string_cancel, null);
+		builder.setTitle(R.string.downloads).setNegativeButton(R.string.shared_string_dismiss, null);
 		Collection<List<DownloadEntry>> vs =
 				DownloadActivity.downloadListIndexThread.getEntriesToDownload().values();
 		ArrayList<DownloadEntry> downloadEntries = new ArrayList<>();
@@ -45,7 +46,7 @@ public class ActiveDownloadsDialogFragment extends DialogFragment {
 			downloadEntries.addAll(list);
 		}
 		final DownloadEntryAdapter adapter = new DownloadEntryAdapter(
-				(DownloadActivity) getActivity(), downloadEntries);
+				(DownloadActivity) getActivity());
 		builder.setAdapter(adapter, null);
 		((DownloadActivity) getActivity()).registerUpdateListener(adapter);
 		return builder.create();
@@ -60,12 +61,18 @@ public class ActiveDownloadsDialogFragment extends DialogFragment {
 		private final Set<Integer> downloadedItems = new HashSet<>();
 		private boolean isFinished;
 
-		public DownloadEntryAdapter(DownloadActivity context, List<DownloadEntry> objects) {
-			super(context, R.layout.two_line_with_images_list_item, objects);
+		public DownloadEntryAdapter(DownloadActivity context) {
+			super(context, R.layout.two_line_with_images_list_item, new ArrayList<DownloadEntry>());
 			this.context = context;
 			deleteDrawable = context.getMyApplication().getIconsCache()
 					.getPaintedContentIcon(R.drawable.ic_action_remove_dark,
 							context.getResources().getColor(R.color.dash_search_icon_dark));
+			updateData();
+		}
+
+		public void updateData() {
+			clear();
+			addAll(BaseDownloadActivity.downloadListIndexThread.flattenDownloadEntries());
 		}
 
 		@Override
@@ -74,7 +81,7 @@ public class ActiveDownloadsDialogFragment extends DialogFragment {
 				convertView = LayoutInflater.from(parent.getContext())
 						.inflate(R.layout.two_line_with_images_list_item, parent, false);
 				DownloadEntryViewHolder viewHolder =
-						new DownloadEntryViewHolder(convertView, deleteDrawable, context, this);
+						new DownloadEntryViewHolder(convertView, context, deleteDrawable, this);
 				convertView.setTag(viewHolder);
 			}
 			DownloadEntryViewHolder viewHolder = (DownloadEntryViewHolder) convertView.getTag();
@@ -93,44 +100,33 @@ public class ActiveDownloadsDialogFragment extends DialogFragment {
 			if (isFinished) return;
 			if (tag instanceof DownloadEntry) {
 				progress = task.getProgressPercentage();
+				boolean handled = false;
 				for (int i = 0; i < getCount(); i++) {
 					if (getItem(i).equals(tag)) {
 						itemInProgressPosition = i;
 						downloadedItems.add(i);
+						handled = true;
+						break;
 					}
-					break;
+				}
+				if (!handled) {
+					add((DownloadEntry) tag);
 				}
 			}
 			notifyDataSetChanged();
 		}
 	}
 
-	private static class DownloadEntryViewHolder {
+	private static class DownloadEntryViewHolder extends TwoLineWithImagesViewHolder {
 		public final View.OnClickListener activeDownloadOnClickListener;
-		private final TextView nameTextView;
-		private final TextView descrTextView;
-		private final ImageView leftImageView;
-		private final ImageView rightImageButton;
-		private final Button rightButton;
-		private final ProgressBar progressBar;
-		private final TextView mapDateTextView;
 		private final Drawable deleteDrawable;
-		private final DownloadActivity context;
 		private final DownloadEntryAdapter adapter;
 
-		private DownloadEntryViewHolder(View convertView, Drawable deleteDrawable,
-										final DownloadActivity context,
-										DownloadEntryAdapter adapter) {
+		private DownloadEntryViewHolder(View convertView, final DownloadActivity context,
+										Drawable deleteDrawable, DownloadEntryAdapter adapter) {
+			super(convertView, context);
 			this.deleteDrawable = deleteDrawable;
-			this.context = context;
 			this.adapter = adapter;
-			nameTextView = (TextView) convertView.findViewById(R.id.name);
-			descrTextView = (TextView) convertView.findViewById(R.id.description);
-			leftImageView = (ImageView) convertView.findViewById(R.id.leftImageView);
-			rightImageButton = (ImageView) convertView.findViewById(R.id.rightImageButton);
-			rightButton = (Button) convertView.findViewById(R.id.rightButton);
-			progressBar = (ProgressBar) convertView.findViewById(R.id.progressBar);
-			mapDateTextView = (TextView) convertView.findViewById(R.id.mapDateTextView);
 			progressBar.setVisibility(View.VISIBLE);
 			rightImageButton.setImageDrawable(deleteDrawable);
 
@@ -171,7 +167,7 @@ public class ActiveDownloadsDialogFragment extends DialogFragment {
 					@Override
 					public void onClick(View v) {
 						context.getEntriesToDownload().remove(downloadEntry.item);
-						adapter.remove(downloadEntry);
+						adapter.updateData();
 					}
 				};
 				descrTextView.setText(context.getString(R.string.file_size_in_mb,
