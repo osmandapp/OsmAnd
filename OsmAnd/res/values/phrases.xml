@@ -2069,4 +2069,22 @@
 	<string name="poi_clothes_dance">Clothes for dancing</string>
 	<string name="poi_clothes_military">Military clothes</string>
 
+	<string name="poi_historic_milestone">Historic milestone</string>
+
+	<string name="poi_shoes_children">Children shoes</string>
+	<string name="poi_shoes_women">Women\'s shoes</string>
+	<string name="poi_shoes_sport">Sport shoes</string>
+	<string name="poi_shoes_men">Men\'s footwear</string>
+	<string name="poi_shoes_orthopedic">Orthopedic shoes</string>
+
+	<string name="poi_historic_manor">Historic manor</string>
+	<string name="poi_castle_type_stately">Castle type: stately</string>
+	<string name="poi_castle_type_defensive">Castle type: defensive</string>
+	<string name="poi_castle_type_fortress">Castle type: fortress</string>
+	<string name="poi_castle_type_palace">Castle type: palace</string>
+	<string name="poi_castle_type_kremlin">Castle type: kremlin</string>
+	<string name="poi_castle_type_defensive_stately">Castle type: defensive, stately</string>
+	<string name="poi_castle_type_castrum">Castle type: castrum</string>
+	<string name="poi_castle_type_shiro">Castle type: shiro</string>
+
 </resources>

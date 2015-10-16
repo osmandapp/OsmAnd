@@ -2064,4 +2064,23 @@
 	<string name="poi_clothes_dance">Одежда для танцев</string>
 	<string name="poi_clothes_military">Военная одежда</string>
 
+	<string name="poi_historic_milestone">Исторический дистанционный столб</string>
+
+	<string name="poi_shoes_children">Детская обувь</string>
+	<string name="poi_shoes_women">Женская обувь</string>
+	<string name="poi_shoes_sport">Спортивная обувь</string>
+	<string name="poi_shoes_men">Мужская обувь</string>
+	<string name="poi_shoes_orthopedic">Ортопедическая обувь</string>
+
+	<string name="poi_historic_manor">Историческое поместье</string>
+
+	<string name="poi_castle_type_stately">Тип замка: величественный</string>
+	<string name="poi_castle_type_defensive">Тип замка: оборонительный</string>
+	<string name="poi_castle_type_fortress">Тип замка: крепость</string>
+	<string name="poi_castle_type_palace">Тип замка: дворец</string>
+	<string name="poi_castle_type_kremlin">Тип замка: кремль</string>
+	<string name="poi_castle_type_defensive_stately">Тип замка: защитный, величественный</string>
+	<string name="poi_castle_type_castrum">Тип замка: римский форт</string>
+	<string name="poi_castle_type_shiro">Тип замка: сиро</string>
+
 </resources>
