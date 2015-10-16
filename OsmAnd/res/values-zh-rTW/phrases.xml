@@ -1881,4 +1881,18 @@
 	<string name="poi_bridge_bicycle">自行車橋梁</string>
 	<string name="poi_bridge_railway">鐵路橋梁</string>
 	<string name="poi_bridge_waterway">水路橋梁</string>
+	<string name="poi_bridge_structure_beam">橋樑結構：梁式</string>
+	<string name="poi_bridge_structure_simple_suspension">橋樑結構：簡懸式</string>
+	<string name="poi_bridge_structure_suspension">橋樑結構：懸吊式</string>
+	<string name="poi_bridge_structure_arch">橋樑結構：拱式</string>
+	<string name="poi_bridge_structure_truss">橋樑結構：桁架式</string>
+	<string name="poi_bridge_structure_floating">橋樑結構：浮動式</string>
+	<string name="poi_bridge_structure_humpback">橋樑結構：弓形</string>
+	<string name="poi_bridge_structure_cable_stayed">橋樑結構：斜張式</string>
+	<string name="poi_bridge_structure_boardwalk">橋樑結構：木板式</string>
+	<string name="poi_bridge_structure_simple_wooden">橋樑結構：簡單木板</string>
+	<string name="poi_bridge_structure_viaduct">橋樑結構：高架式</string>
+	<string name="poi_bridge_structure_aqueduct">橋樑結構：高架渠式</string>
+	<string name="poi_bridge_structure_log">橋樑結構：圓木式</string>
+	<string name="poi_bridge_type_movable">橋樑類型：活動型</string>
 	</resources>
