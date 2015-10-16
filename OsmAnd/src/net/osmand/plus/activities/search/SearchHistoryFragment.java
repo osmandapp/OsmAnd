@@ -7,9 +7,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.widget.PopupMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -34,6 +36,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmAndListFragment;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
 import net.osmand.plus.dashboard.DashLocationFragment;
+import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.util.MapUtils;
@@ -80,10 +83,10 @@ public class SearchHistoryFragment extends OsmAndListFragment implements SearchA
 		Builder bld = new AlertDialog.Builder(getActivity());
 		bld.setMessage(R.string.confirmation_to_clear_history);
 		bld.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
-			
+
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				clearWithoutConfirmation();				
+				clearWithoutConfirmation();
 			}
 		});
 		bld.setNegativeButton(R.string.shared_string_no, null);
@@ -190,6 +193,22 @@ public class SearchHistoryFragment extends OsmAndListFragment implements SearchA
 		MapActivity.launchMapActivityMoveToTop(getActivity());
 	}
 
+	private void selectModelOptions(final HistoryEntry model, View v) {
+		final PopupMenu optionsMenu = new PopupMenu(getActivity(), v);
+		MenuItem item = optionsMenu.getMenu().add(
+				R.string.shared_string_delete).setIcon(
+				getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_delete_dark));
+		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				helper.remove(model);
+				historyAdapter.remove(model);
+				return true;
+			}
+		});
+		optionsMenu.show();
+	}
+
 	class HistoryAdapter extends ArrayAdapter<HistoryEntry> {
 		private LatLon location;
 		
@@ -222,7 +241,7 @@ public class SearchHistoryFragment extends OsmAndListFragment implements SearchA
 			options.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					selectModel(historyEntry);
+					selectModelOptions(historyEntry, v);
 				}
 			});
 			return row;
