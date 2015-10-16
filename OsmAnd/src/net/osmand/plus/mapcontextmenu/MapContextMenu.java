@@ -17,8 +17,10 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.mapcontextmenu.details.AmenityMenuController;
 import net.osmand.plus.mapcontextmenu.details.FavouritePointMenuController;
+import net.osmand.plus.mapcontextmenu.details.HistoryMenuController;
 import net.osmand.plus.mapcontextmenu.details.MenuController;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.ContextMenuLayer;
@@ -200,6 +202,8 @@ public class MapContextMenu {
 				menuController = new AmenityMenuController(app, mapActivity, (Amenity) object);
 			} else if (object instanceof FavouritePoint) {
 				menuController = new FavouritePointMenuController(app, mapActivity, (FavouritePoint) object);
+			} else if (object instanceof HistoryEntry) {
+				menuController = new HistoryMenuController(app, mapActivity, (HistoryEntry) object);
 			}
 		}
 	}
