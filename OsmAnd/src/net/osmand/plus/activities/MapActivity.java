@@ -17,6 +17,7 @@ import android.os.Message;
 import android.support.v4.app.NotificationCompat.Builder;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.NotificationCompat;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -545,8 +546,8 @@ public class MapActivity extends AccessibleActivity {
 				dashboardOnMap.hideDashboard();
 			}
 			if (mapLabelToShow != null) {
+				contextMenuOnMap.setMapCenter(latLonToShow);
 				contextMenuOnMap.show(latLonToShow, mapLabelToShow, toShow);
-				//mapLayers.getContextMenuLayer().setLocation(latLonToShow, mapLabelToShow.getFullPlainName(this));
 			}
 			if (!latLonToShow.equals(cur)) {
 				mapView.getAnimatedDraggingThread().startMoving(latLonToShow.getLatitude(),
