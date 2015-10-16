@@ -74,7 +74,7 @@
 	<string name="poi_charity">Благотворителност</string>
 	<string name="poi_chemist">Аптека</string>
 	<string name="poi_clothes">Магазин за дрехи</string>
-	<string name="poi_child_clothes">Детско облекло</string>
+	<string name="poi_clothes_children">Детско облекло</string>
 	<string name="poi_shoes">Магазин за обувки</string>
 	<string name="poi_computer">Магазин за компютри</string>
 	<string name="poi_copyshop">Копирен център</string>

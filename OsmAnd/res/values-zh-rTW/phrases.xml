@@ -74,7 +74,7 @@
 	<string name="poi_charity">慈善義賣店</string>
 	<string name="poi_chemist">藥局</string>
 	<string name="poi_clothes">服飾店</string>
-	<string name="poi_child_clothes">兒童服飾</string>
+	<string name="poi_clothes_children">兒童服飾</string>
 	<string name="poi_shoes">鞋店</string>
 	<string name="poi_computer">電腦商店</string>
 	<string name="poi_copyshop">複印店</string>
@@ -1851,4 +1851,34 @@
 
 	<string name="poi_architect_name">建築師</string>
 
+	<string name="poi_architecture_modern">建築風格：現代化</string>
+	<string name="poi_architecture_stalinist_neoclassicism">建築風格：史達林式建築</string>
+	<string name="poi_architecture_eclectic">建築風格：不拘一格</string>
+	<string name="poi_architecture_new_objectivity">建築風格：新客觀主義</string>
+	<string name="poi_architecture_contemporary">建築風格：當代</string>
+	<string name="poi_architecture_constructivism">建築風格：構成主義</string>
+	<string name="poi_architecture_umgebinde">建築風格：umgebinde</string>
+	<string name="poi_architecture_timber_frame">建築風格：木結構</string>
+	<string name="poi_architecture_art_nouveau">建築風格：新藝術運動</string>
+	<string name="poi_architecture_neoclassicism">建築風格：新古典主義</string>
+	<string name="poi_architecture_victorian">建築風格：維多利亞</string>
+	<string name="poi_architecture_brutalism">建築風格：粗獷主義</string>
+	<string name="poi_architecture_classicism">建築風格：古典</string>
+	<string name="poi_architecture_gothic">建築風格：哥德式</string>
+	<string name="poi_architecture_oldrussian">建築風格：舊俄羅斯</string>
+	<string name="poi_architecture_baroque">建築風格：巴洛克式</string>
+	<string name="poi_architecture_postconstructivism">建築風格：postconstructivism</string>
+	<string name="poi_architecture_wilhelminian_style">建築風格：新藝術風格</string>
+	<string name="poi_architecture_renaissance">建築風格：文藝復興</string>
+	<string name="poi_architecture_romanesque">建築風格：羅馬式</string>
+
+	<string name="poi_tunnel_waterway">引水隧道</string>
+	<string name="poi_tunnel_car">道路隧道</string>
+	<string name="poi_tunnel_pedestrian">步行隧道</string>
+	<string name="poi_tunnel_railway">鐵路隧道</string>
+	<string name="poi_bridge_car">道路橋梁</string>
+	<string name="poi_bridge_pedestrian">人行天橋</string>
+	<string name="poi_bridge_bicycle">自行車橋梁</string>
+	<string name="poi_bridge_railway">鐵路橋梁</string>
+	<string name="poi_bridge_waterway">水路橋梁</string>
 	</resources>

@@ -29,7 +29,7 @@
 	<string name="poi_carpet">Negozio tappeti</string>
 	<string name="poi_chemist">Farmacia</string>
 	<string name="poi_clothes">Abbigliamento</string>
-	<string name="poi_child_clothes">Abbigliamento bambini</string>
+	<string name="poi_clothes_children">Abbigliamento bambini</string>
 	<string name="poi_shoes">Negozio calzature</string>
 	<string name="poi_computer">Negozio di computer</string>
 	<string name="poi_copyshop">Copisteria</string>

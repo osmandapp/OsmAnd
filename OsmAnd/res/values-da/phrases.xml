@@ -669,7 +669,7 @@
 	<string name="poi_user_defined_other">Brugerdefineret</string>
 	
 	<string name="poi_military_landuse">Militærzone</string>
-	<string name="poi_child_clothes">Børnetøj</string>
+	<string name="poi_clothes_children">Børnetøj</string>
 	<string name="poi_apartment">Lejlighed</string>
 
 	<string name="poi_public_transport_stop_position">Offentlig transport stoppested</string>
@@ -2086,4 +2086,50 @@
 
 <string name="poi_escape_lane">Nødstopsspor</string>
 
-	</resources>
+	<string name="poi_surveillance_indoor">Overvågning: indendørs</string>
+	<string name="poi_surveillance_outdoor">Overvågning: udendørs</string>
+	<string name="poi_surveillance_public">Overvågning: offentlig</string>
+
+	<string name="poi_clothes_women">Dametøj</string>
+	<string name="poi_clothes_underwear">Undertøj</string>
+	<string name="poi_clothes_men">Herretøj</string>
+	<string name="poi_clothes_wedding">Brudekjoler</string>
+	<string name="poi_clothes_sports">Sportstøj</string>
+	<string name="poi_clothes_babies">Babytøj</string>
+	<string name="poi_clothes_denim">Denimtøj</string>
+	<string name="poi_clothes_workwear">Arbejdstøj</string>
+	<string name="poi_clothes_hats">Hatte</string>
+	<string name="poi_clothes_fur">Pels</string>
+	<string name="poi_clothes_leather">Læder</string>
+	<string name="poi_clothes_costumes">Kostumer</string>
+	<string name="poi_clothes_traditional">Traditionel beklædning</string>
+	<string name="poi_clothes_suits">Jakkesæt</string>
+	<string name="poi_clothes_maternity">Barselstøj</string>
+	<string name="poi_clothes_vintage">Vintagetøj</string>
+	<string name="poi_clothes_oversize">Oversize tøj</string>
+	<string name="poi_clothes_schoolwear">Skoleuniform</string>
+	<string name="poi_clothes_swimwear">Badetøj</string>
+	<string name="poi_clothes_socks">Sokker</string>
+	<string name="poi_clothes_shirts">Skjorter</string>
+	<string name="poi_clothes_dance">Dansekostume</string>
+	<string name="poi_clothes_military">Militærtøj</string>
+
+<string name="poi_historic_milestone">Historisk milepæl</string>
+
+	<string name="poi_shoes_children">Børnesko</string>
+	<string name="poi_shoes_women">Damesko</string>
+	<string name="poi_shoes_sport">Sportssko</string>
+	<string name="poi_shoes_men">Herresko</string>
+	<string name="poi_shoes_orthopedic">Ortopædisksko</string>
+
+	<string name="poi_historic_manor">Historisk herregård</string>
+	<string name="poi_castle_type_stately">Slotstype: majestætisk</string>
+	<string name="poi_castle_type_defensive">Slotstype: forsvar</string>
+	<string name="poi_castle_type_fortress">Slotstype: fæstning</string>
+	<string name="poi_castle_type_palace">Slotstype: palads</string>
+	<string name="poi_castle_type_kremlin">Slotstype: kreml</string>
+	<string name="poi_castle_type_defensive_stately">Slotstype: forsvar, majestætisk</string>
+	<string name="poi_castle_type_castrum">Slotstype: castrum</string>
+	<string name="poi_castle_type_shiro">Slotstype: shiro</string>
+
+</resources>

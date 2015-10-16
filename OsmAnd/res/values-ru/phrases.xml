@@ -38,7 +38,7 @@
 	<string name="poi_charity">Благотворительный магазин</string>
 	<string name="poi_chemist">Бытовая химия, косметика</string>
 	<string name="poi_clothes">Одежда</string>
-	<string name="poi_child_clothes">Детская одежда</string>
+	<string name="poi_clothes_children">Детская одежда</string>
 	<string name="poi_shoes">Обувь</string>
 	<string name="poi_computer">Компьютеры</string>
 	<string name="poi_copyshop">Ксерокопия, полиграфия</string>
@@ -2035,5 +2035,52 @@
 	<string name="poi_crop_cranberry">Выращиваемая культура: клюква</string>
 	<string name="poi_crop_asparagus">Выращиваемая культура: спаржа</string>
 	<string name="poi_crop_flowers">Выращиваемая культура: цветы</string>
+
+	<string name="poi_surveillance_indoor">Видеонаблюдение: внутри</string>
+	<string name="poi_surveillance_outdoor">Видеонаблюдение: снаружи</string>
+	<string name="poi_surveillance_public">Видеонаблюдение: в общественных местах</string>
+
+	<string name="poi_clothes_women">Женская одежда</string>
+	<string name="poi_clothes_underwear">Нижнее бельё</string>
+	<string name="poi_clothes_men">Мужская одежда</string>
+	<string name="poi_clothes_wedding">Свадебные платья</string>
+	<string name="poi_clothes_sports">Спортивная одежда</string>
+	<string name="poi_clothes_babies">Одежда для новорождённых</string>
+	<string name="poi_clothes_denim">Одежда из джинсовой ткани</string>
+	<string name="poi_clothes_workwear">Рабочая одежда</string>
+	<string name="poi_clothes_hats">Шляпы</string>
+	<string name="poi_clothes_fur">Меховая одежда</string>
+	<string name="poi_clothes_leather">Кожаная одежда</string>
+	<string name="poi_clothes_costumes">Карнавальные костюмы</string>
+	<string name="poi_clothes_traditional">Традиционная одежда</string>
+	<string name="poi_clothes_suits">Костюмы, смокинги</string>
+	<string name="poi_clothes_maternity">Одежда для беременных</string>
+	<string name="poi_clothes_vintage">Старинная одежда</string>
+	<string name="poi_clothes_oversize">Одежда для больших людей</string>
+	<string name="poi_clothes_schoolwear">Школьная форма</string>
+	<string name="poi_clothes_swimwear">Купальные костюмы</string>
+	<string name="poi_clothes_socks">Носки</string>
+	<string name="poi_clothes_shirts">Футболки</string>
+	<string name="poi_clothes_dance">Одежда для танцев</string>
+	<string name="poi_clothes_military">Военная одежда</string>
+
+	<string name="poi_historic_milestone">Исторический дистанционный столб</string>
+
+	<string name="poi_shoes_children">Детская обувь</string>
+	<string name="poi_shoes_women">Женская обувь</string>
+	<string name="poi_shoes_sport">Спортивная обувь</string>
+	<string name="poi_shoes_men">Мужская обувь</string>
+	<string name="poi_shoes_orthopedic">Ортопедическая обувь</string>
+
+	<string name="poi_historic_manor">Историческое поместье</string>
+
+	<string name="poi_castle_type_stately">Тип замка: величественный</string>
+	<string name="poi_castle_type_defensive">Тип замка: оборонительный</string>
+	<string name="poi_castle_type_fortress">Тип замка: крепость</string>
+	<string name="poi_castle_type_palace">Тип замка: дворец</string>
+	<string name="poi_castle_type_kremlin">Тип замка: кремль</string>
+	<string name="poi_castle_type_defensive_stately">Тип замка: защитный, величественный</string>
+	<string name="poi_castle_type_castrum">Тип замка: римский форт</string>
+	<string name="poi_castle_type_shiro">Тип замка: сиро</string>
 
 </resources>

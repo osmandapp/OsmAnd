@@ -74,7 +74,7 @@
 	<string name="poi_charity">Negocio benéfico</string>
 	<string name="poi_chemist">Higiene personal y del hogar</string>
 	<string name="poi_clothes">Negocio de ropa</string>
-	<string name="poi_child_clothes">Ropa infantil</string>
+	<string name="poi_clothes_children">Ropa infantil</string>
 	<string name="poi_shoes">Zapatería</string>
 	<string name="poi_computer">Computadoras</string>
 	<string name="poi_copyshop">Fotocopiadora</string>
@@ -125,7 +125,7 @@
 	<string name="poi_toys">Juguetería</string>
 	<string name="poi_trade">Corralón</string>
 	<string name="poi_vacuum_cleaner">Aspiradoras</string>
-	<string name="poi_variety_store">Bazar</string>
+	<string name="poi_variety_store">Todo por $2</string>
 	<string name="poi_video">Videoclub</string>
 	<string name="poi_window_blind">Tienda de persianas</string>
 	<string name="poi_department_store">Grandes almacenes</string>
@@ -2012,7 +2012,7 @@
 	<string name="poi_office_camping">Oficina del campamento</string>
 	<string name="poi_model_aerodrome">Aeródromo a escala</string>
 	<string name="poi_guide">Oficina del guía</string>
-	<string name="poi_quango">ONG dependiente</string>
+	<string name="poi_quango">ONG casi autónoma</string>
 	<string name="poi_consulting">Oficina de consultoría</string>
 	<string name="poi_cooperative">Oficina de cooperativa</string>
 	<string name="poi_office_forestry">Oficina forestal</string>
@@ -2064,4 +2064,32 @@
 	<string name="poi_crop_flowers">Cultivo de flores</string>
 
 <string name="poi_crop_poultry">Granja avícola</string>
+	<string name="poi_surveillance_indoor">Vigilancia interior</string>
+	<string name="poi_surveillance_outdoor">Vigilancia exterior</string>
+	<string name="poi_surveillance_public">Vigilancia pública</string>
+
+	<string name="poi_clothes_women">Ropa de mujer</string>
+	<string name="poi_clothes_underwear">Ropa interior</string>
+	<string name="poi_clothes_men">Ropa de hombre</string>
+	<string name="poi_clothes_wedding">Vestidos de novia</string>
+	<string name="poi_clothes_sports">Ropa deportiva</string>
+	<string name="poi_clothes_babies">Ropa de bebes</string>
+	<string name="poi_clothes_workwear">Ropa de trabajo</string>
+	<string name="poi_clothes_hats">Sombreros</string>
+	<string name="poi_clothes_fur">Ropa de piel</string>
+	<string name="poi_clothes_leather">Ropa de cuero</string>
+	<string name="poi_clothes_costumes">Disfraces</string>
+	<string name="poi_clothes_traditional">Ropa tradicional</string>
+	<string name="poi_clothes_suits">Trajes</string>
+	<string name="poi_clothes_maternity">Ropa de maternidad</string>
+	<string name="poi_clothes_vintage">Ropa antigua</string>
+	<string name="poi_clothes_oversize">Ropa de grandes tamaños</string>
+	<string name="poi_clothes_schoolwear">Ropa escolar</string>
+	<string name="poi_clothes_swimwear">Trajes de baño</string>
+	<string name="poi_clothes_socks">Medias / Calcetines</string>
+	<string name="poi_clothes_shirts">Camisas</string>
+	<string name="poi_clothes_dance">Ropa de baile</string>
+	<string name="poi_clothes_military">Ropa militar</string>
+
+<string name="poi_clothes_denim">Ropa de mezclilla</string>
 	</resources>

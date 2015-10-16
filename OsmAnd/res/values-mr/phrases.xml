@@ -31,7 +31,7 @@
 
 	<string name="poi_bicycle">सायकल दुकान</string>
 	<string name="poi_clothes">कपड्याचे दुकान</string>
-	<string name="poi_child_clothes">मुलांचे कपडे</string>
+	<string name="poi_clothes_children">मुलांचे कपडे</string>
 	<string name="poi_computer">कॉम्प्युटर दुकान</string>
 	<string name="poi_curtain">पडद्याचे दुकान</string>
 	<string name="poi_florist">फुलांचे दुकान</string>

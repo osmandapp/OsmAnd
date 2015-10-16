@@ -37,6 +37,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.details.MenuController;
 import net.osmand.plus.views.AnimateDraggingMapThread;
+import net.osmand.plus.views.OsmandMapTileView;
 
 import org.apache.commons.logging.Log;
 
@@ -51,6 +52,7 @@ public class MapContextMenuFragment extends Fragment {
 	private static final Log LOG = PlatformUtil.getLog(MapContextMenuFragment.class);
 
 	private static final float FAB_PADDING_TOP = 10f;
+	private static final float MARKER_PADDING_DP = 20f;
 
 	private View view;
 	private View mainView;
@@ -66,6 +68,7 @@ public class MapContextMenuFragment extends Fragment {
 	private int menuFullHeightMax;
 
 	private int fabPaddingTopPx;
+	private int markerPaddingPx;
 
 	private class SingleTapConfirm implements OnGestureListener {
 
@@ -114,6 +117,7 @@ public class MapContextMenuFragment extends Fragment {
 							 Bundle savedInstanceState) {
 
 		fabPaddingTopPx = dpToPx(FAB_PADDING_TOP);
+		markerPaddingPx = dpToPx(MARKER_PADDING_DP);
 
 		menu = getMapActivity().getContextMenu();
 		if (savedInstanceState != null) {
@@ -519,6 +523,25 @@ public class MapContextMenuFragment extends Fragment {
 		} else {
 			mainView.setPadding(0, y, 0, 0);
 			fabView.setPadding(0, getFabY(y), 0, 0);
+		}
+		//adjustMapPosition(y);
+	}
+
+	private void adjustMapPosition(int y) {
+		OsmandMapTileView map = getMapActivity().getMapView();
+		double markerLat = menu.getLatLon().getLatitude();
+		double markerLon = menu.getLatLon().getLongitude();
+		int markerX = (int)map.getCurrentRotatedTileBox().getPixXFromLatLon(markerLat, markerLon);
+		int markerY = (int)map.getCurrentRotatedTileBox().getPixYFromLatLon(markerLat, markerLon);
+
+		if (menu.isLandscapeLayout()) {
+			int menuX = dpToPx(menu.getLandscapeWidthDp());
+		} else {
+			int menuY = y;
+			if (markerY + markerPaddingPx > menuY) {
+				int dy = markerY - (menuY - markerPaddingPx);
+				map.moveTo(0, dy);
+			}
 		}
 	}
 
