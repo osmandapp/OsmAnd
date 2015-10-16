@@ -2124,4 +2124,9 @@
 	<string name="poi_power_supply_cee_7_5">Источник питания (разъём): CEE 7/5</string>
 	<string name="poi_power_supply_nema_5_15">Источник питания (разъём): NEMA 5-15</string>
 
+	<string name="poi_capacity_tents">Максимальное число палаток</string>
+	<string name="poi_capacity_caravans">Максимальное число автоприцепов</string>
+	<string name="poi_dog_yes">Вход с собаками разрешён</string>
+	<string name="poi_dog_no">Вход с собаками запрещён</string>
+
 </resources>
