@@ -2173,4 +2173,9 @@
 	<string name="poi_power_supply_cee_7_5">Strømforsyning (stik): CEE 7/5</string>
 	<string name="poi_power_supply_nema_5_15">Strømforsyning (stik): NEMA 5-15</string>
 
+<string name="poi_capacity_tents">Maks antal telte</string>
+	<string name="poi_capacity_caravans">Maks antal campingvogne</string>
+	<string name="poi_dog_yes">Hunde tilladt</string>
+	<string name="poi_dog_no">Hunde ikke tilladt</string>
+
 </resources>
