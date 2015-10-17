@@ -41,6 +41,7 @@ public class MapContextMenu {
 	MenuController menuController;
 
 	private LatLon mapCenter;
+	private int mapPosition = 0;
 
 	private int leftIconId;
 	private Drawable leftIcon;
@@ -61,6 +62,7 @@ public class MapContextMenu {
 	private static final String KEY_CTX_MENU_STREET_STR = "key_ctx_menu_street_str";
 	private static final String KEY_CTX_MENU_ADDR_UNKNOWN = "key_ctx_menu_addr_unknown";
 	private static final String KEY_CTX_MENU_MAP_CENTER = "key_ctx_menu_map_center";
+	private static final String KEY_CTX_MENU_MAP_POSITION = "key_ctx_menu_map_position";
 
 	public boolean isActive() {
 		return active;
@@ -80,6 +82,10 @@ public class MapContextMenu {
 
 	public void setMapCenter(LatLon mapCenter) {
 		this.mapCenter = mapCenter;
+	}
+
+	public void setMapPosition(int mapPosition) {
+		this.mapPosition = mapPosition;
 	}
 
 	public PointDescription getPointDescription() {
@@ -143,6 +149,10 @@ public class MapContextMenu {
 			menuController.addPlainMenuItems(typeStr, this.pointDescription);
 		}
 
+		if (mapPosition != 0) {
+			mapActivity.getMapView().setMapPosition(0);
+		}
+
 		mapActivity.getMapView().refreshMap();
 
 		return true;
@@ -175,6 +185,10 @@ public class MapContextMenu {
 	}
 
 	public void hide() {
+		if (mapPosition != 0) {
+			mapActivity.getMapView().setMapPosition(mapPosition);
+			mapPosition = 0;
+		}
 		MapContextMenuFragment fragment = findMenuFragment();
 		if (fragment != null) {
 			fragment.dismissMenu();
@@ -409,6 +423,7 @@ public class MapContextMenu {
 		bundle.putString(KEY_CTX_MENU_STREET_STR, streetStr);
 		bundle.putString(KEY_CTX_MENU_ADDR_UNKNOWN, Boolean.toString(addressUnknown));
 		bundle.putSerializable(KEY_CTX_MENU_MAP_CENTER, mapCenter);
+		bundle.putInt(KEY_CTX_MENU_MAP_POSITION, mapPosition);
 	}
 
 	public void restoreMenuState(Bundle bundle) {
@@ -417,7 +432,6 @@ public class MapContextMenu {
 		if (pDescObj != null) {
 			pointDescription = (PointDescription) pDescObj;
 		}
-		acquireMenuController();
 
 		active = Boolean.parseBoolean(bundle.getString(KEY_CTX_MENU_ACTIVE));
 		Object latLonObj = bundle.getSerializable(KEY_CTX_MENU_LATLON);
@@ -426,6 +440,8 @@ public class MapContextMenu {
 		} else {
 			active = false;
 		}
+
+		acquireMenuController();
 
 		Object mapCenterObj = bundle.getSerializable(KEY_CTX_MENU_MAP_CENTER);
 		if (mapCenterObj != null) {
@@ -436,6 +452,7 @@ public class MapContextMenu {
 		typeStr = bundle.getString(KEY_CTX_MENU_TYPE_STR);
 		streetStr = bundle.getString(KEY_CTX_MENU_STREET_STR);
 		addressUnknown = Boolean.parseBoolean(bundle.getString(KEY_CTX_MENU_ADDR_UNKNOWN));
+		mapPosition = bundle.getInt(KEY_CTX_MENU_MAP_POSITION, 0);
 
 		acquireIcons();
 
