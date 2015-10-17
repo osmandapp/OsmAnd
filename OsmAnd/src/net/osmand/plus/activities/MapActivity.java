@@ -547,6 +547,7 @@ public class MapActivity extends AccessibleActivity {
 			}
 			if (mapLabelToShow != null) {
 				contextMenuOnMap.setMapCenter(latLonToShow);
+				contextMenuOnMap.setMapPosition(mapView.getMapPosition());
 				contextMenuOnMap.show(latLonToShow, mapLabelToShow, toShow);
 			}
 			if (!latLonToShow.equals(cur)) {
