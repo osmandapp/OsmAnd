@@ -29,6 +29,7 @@
             android:layout_height="wrap_content"
             android:maxLines="1"
             android:singleLine="true"
+            android:inputType="textNoSuggestions"
             android:lines="1"
             android:layout_weight="1"/>
 

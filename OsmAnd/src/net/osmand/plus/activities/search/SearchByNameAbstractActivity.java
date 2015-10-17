@@ -8,12 +8,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import android.content.pm.ActivityInfo;
-import android.os.*;
-import android.support.v4.view.MenuItemCompat;
-import android.view.*;
-import android.view.MenuItem.OnMenuItemClickListener;
-import android.widget.*;
+
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
@@ -26,26 +21,44 @@ import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandListActivity;
 import net.osmand.plus.activities.search.SearchAddressFragment.AddressInformation;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.dialogs.FavoriteDialogs;
+
 import org.apache.commons.logging.Log;
+
 import android.annotation.SuppressLint;
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
+import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Editable;
 import android.text.Spannable;
 import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.Filter;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.TextView.BufferType;
 import android.widget.TextView.OnEditorActionListener;
 
@@ -516,62 +529,8 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		if (sequentialSearch) {
-			OsmandApplication app  = ((OsmandApplication) getApplication());
-			MenuItem menuItem = menu.add(0, NAVIGATE_TO, 0, R.string.context_menu_item_directions_to);
-			MenuItemCompat.setShowAsAction(menuItem,
-					MenuItemCompat.SHOW_AS_ACTION_ALWAYS | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
-			menuItem = menuItem.setIcon(app.getIconsCache().getIcon(R.drawable.ic_action_gdirections_dark));
-			menuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-				@Override
-				public boolean onMenuItemClick(MenuItem item) {
-					select(NAVIGATE_TO);
-					return true;
-				}
-			});
-			TargetPointsHelper targets = ((OsmandApplication) getApplication()).getTargetPointsHelper();
-			if (targets.getPointToNavigate() != null) {
-				menuItem = menu.add(0, ADD_WAYPOINT, 0, R.string.context_menu_item_intermediate_point);
-				MenuItemCompat.setShowAsAction(menuItem,
-						MenuItemCompat.SHOW_AS_ACTION_ALWAYS | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
-				menuItem = menuItem.setIcon(app.getIconsCache().getIcon(R.drawable.ic_action_flage_dark));
-			} else {
-				menuItem = menu.add(0, ADD_WAYPOINT, 0, R.string.context_menu_item_destination_point);
-				MenuItemCompat.setShowAsAction(menuItem,
-						MenuItemCompat.SHOW_AS_ACTION_ALWAYS | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
-				menuItem = menuItem.setIcon(app.getIconsCache().getIcon( R.drawable.ic_action_flag_dark));
-			}
-			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-				@Override
-				public boolean onMenuItemClick(MenuItem item) {
-					select(ADD_WAYPOINT);
-					return true;
-				}
-			});
-			menuItem = menu.add(0, SHOW_ON_MAP, 0, R.string.shared_string_show_on_map);
-			MenuItemCompat.setShowAsAction(menuItem,
-					MenuItemCompat.SHOW_AS_ACTION_ALWAYS | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
-			menuItem = menuItem.setIcon(app.getIconsCache().getIcon(R.drawable.ic_action_marker_dark));
-
-			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-				@Override
-				public boolean onMenuItemClick(MenuItem item) {
-					select(SHOW_ON_MAP);
-					return true;
-				}
-			});
-
-			menuItem = menu.add(0, ADD_TO_FAVORITE, 0, R.string.shared_string_add_to_favorites);
-			MenuItemCompat.setShowAsAction(menuItem,
-					MenuItemCompat.SHOW_AS_ACTION_ALWAYS | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
-			menuItem = menuItem.setIcon(app.getIconsCache().getIcon(R.drawable.ic_action_fav_dark));
-
-			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-				@Override
-				public boolean onMenuItemClick(MenuItem item) {
-					select(ADD_TO_FAVORITE);
-					return true;
-				}
-			});
+			createMenuItem(menu, SHOW_ON_MAP, R.string.shared_string_show_on_map,
+					R.drawable.ic_action_done, MenuItem.SHOW_AS_ACTION_ALWAYS);
 		} else {
 			createMenuItem(menu, 1, R.string.shared_string_ok,
 					R.drawable.ic_action_done, MenuItem.SHOW_AS_ACTION_ALWAYS);
@@ -600,12 +559,16 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 				DirectionsDialogs.addWaypointDialogAndLaunchMap(getActivity(), searchPoint.getLatitude(),
 						searchPoint.getLongitude(), ai.getHistoryName());
 			} else if (mode == SHOW_ON_MAP) {
-				settings.setMapLocationToShow(searchPoint.getLatitude(), searchPoint.getLongitude(), ai.zoom,
-						ai.getHistoryName());
-				MapActivity.launchMapActivityMoveToTop(getActivity());
+				showOnMap(searchPoint, ai);
 			}
 		}
 		
+	}
+
+	public void showOnMap(LatLon searchPoint, AddressInformation ai) {
+		settings.setMapLocationToShow(searchPoint.getLatitude(), searchPoint.getLongitude(), ai.zoom,
+				ai.getHistoryName());
+		MapActivity.launchMapActivityMoveToTop(getActivity());
 	}
 
 	private Activity getActivity() {
