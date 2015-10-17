@@ -2284,4 +2284,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="later">Później</string>
     <string name="get_full_version">Pobierz pełną wersję</string>
     <string name="downloads">Pobierz</string>
-</resources>
+<string name="favorite_category_add_new_title">Dodaj nową kategorię</string>
+    <string name="favorite_category_name">Nazwa kategorii</string>
+    <string name="favorite_category_dublicate_message">Taka nazwa kategorii już istnieje. Proszę wybrać inną.</string>
+    </resources>
