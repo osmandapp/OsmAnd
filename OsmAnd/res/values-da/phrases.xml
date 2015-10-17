@@ -492,7 +492,7 @@
         <string name="poi_beauty">Skønhedssalon</string>
         <string name="poi_beauty_salon_nails">Neglesalon</string>
         <string name="poi_hairdresser">Frisør</string>
-        <string name="poi_massage">Massage</string>
+        <string name="poi_massage">Massagesalon</string>
         <string name="poi_tattoo">Tatovør</string>
         <string name="poi_dry_cleaning">Renseri</string>
         <string name="poi_laundry">Vaskeri</string>
@@ -2039,7 +2039,7 @@
 	<string name="poi_quango">Quango</string>
 	<string name="poi_consulting">Rådgivningskontor</string>
 	<string name="poi_cooperative">Kooperativ kontor</string>
-	<string name="poi_office_forestry">Skovbrug kontor</string>
+	<string name="poi_office_forestry">Skovbrugskontor</string>
 	<string name="poi_logistics">Logistikkontor</string>
 	<string name="poi_parish">Sognekontor</string>
 	<string name="poi_publisher">Forlagskontor</string>
@@ -2106,7 +2106,7 @@
 	<string name="poi_clothes_suits">Jakkesæt</string>
 	<string name="poi_clothes_maternity">Barselstøj</string>
 	<string name="poi_clothes_vintage">Vintagetøj</string>
-	<string name="poi_clothes_oversize">Oversize tøj</string>
+	<string name="poi_clothes_oversize">Tøj i store størrelser</string>
 	<string name="poi_clothes_schoolwear">Skoleuniform</string>
 	<string name="poi_clothes_swimwear">Badetøj</string>
 	<string name="poi_clothes_socks">Sokker</string>
@@ -2135,11 +2135,11 @@
 <string name="poi_massage_thai">Massage: thai</string>
 	<string name="poi_massage_sexual">Massage: erotisk</string>
 	<string name="poi_massage_chinese">Massage: kinesisk</string>
-	<string name="poi_massage_yes">Massage tjenester</string>
+	<string name="poi_massage_yes">Massage</string>
 	<string name="poi_massage_therapeutic">Massage: terapeutisk</string>
 
-	<string name="poi_sauna_yes">Sauna tjenester</string>
-	<string name="poi_solarium_yes">Solarium tjenester</string>
+	<string name="poi_sauna_yes">Sauna</string>
+	<string name="poi_solarium_yes">Solarium</string>
 
 	<string name="poi_tents_yes">Telte tilladt</string>
 	<string name="poi_tents_no">Telte ikke tilladt</string>
