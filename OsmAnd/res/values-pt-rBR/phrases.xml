@@ -843,7 +843,7 @@
 	<string name="poi_height_restrictor">Limitador de altura</string>
 	<string name="poi_horse_stile">Passagem para cavalos</string>
 	<string name="poi_turnstile">Catraca</string>
-	<string name="poi_barrier_entrance">Entrada</string>
+	<string name="poi_barrier_entrance">Passagem em um muro ou uma cerca</string>
 	<string name="poi_entrance_main">Entrada principal</string>
 	<string name="poi_entrance">Entrada</string>
 	<string name="poi_entrance_exit">Saída</string>
@@ -887,15 +887,15 @@
 	<string name="poi_crane">Guindaste</string>
 	<string name="poi_tourism_attraction">Atração turística</string>
 	<string name="poi_tree">Árvore</string>
-	<string name="poi_icn_ref">Rede de rota cicloviária internacional</string>
-	<string name="poi_ncn_ref">Rede de rota cicloviária nacional</string>
-	<string name="poi_rcn_ref">Rede de rota cicloviária regional</string>
-	<string name="poi_lcn_ref">Rede de rota cicloviária local</string>
+	<string name="poi_icn_ref">Ponto de rede cicloviária internacional</string>
+	<string name="poi_ncn_ref">Ponto de rede cicloviária nacional</string>
+	<string name="poi_rcn_ref">Ponto de rede cicloviária regional</string>
+	<string name="poi_lcn_ref">Ponto de rede cicloviária local</string>
 
-	<string name="poi_iwn_ref">Rede de rota internacional de caminhada</string>
-	<string name="poi_nwn_ref">Rede de rota nacional de caminhada</string>
-	<string name="poi_rwn_ref">Rede de rota regional de caminhada</string>
-	<string name="poi_lwn_ref">Rede de rota local de caminhada</string>
+	<string name="poi_iwn_ref">Ponto de rede internacional de caminhada</string>
+	<string name="poi_nwn_ref">Ponto de rede nacional de caminhada</string>
+	<string name="poi_rwn_ref">Ponto de rede regional de caminhada</string>
+	<string name="poi_lwn_ref">Ponto de rede local de caminhada</string>
 
 	<string name="poi_opening_hours">Horário de funcionamento</string>
 	<string name="poi_description">Descrição</string>
@@ -1285,7 +1285,7 @@
 	<string name="poi_information_bicyclemap">Mapa ciclístico</string>
 	<string name="poi_information_tactile_model">Modelo tátil</string>
 	<string name="poi_information_tactile_map">Mapa tátil</string>
-	<string name="poi_board_type_notice">Placa com aviso</string>
+	<string name="poi_board_type_notice">Quadro de avisos</string>
 	<string name="poi_board_type_plants">Informações sobre plantas</string>
 	<string name="poi_board_type_geology">Informações sobre geologia</string>
 	<string name="poi_board_type_public_transport">Informações sobre transporte público</string>
@@ -1353,4 +1353,7 @@
 	<string name="poi_wheelchair_limited">Cadeira de rodas: limitado</string>
 	<string name="poi_pump">Bomba</string>
 
+	<string name="poi_debris">Escombros</string>
+	<string name="poi_jersey_barrier">Barreira de Nova Jersey</string>
+	<string name="poi_animal_shelter">Abrigo de animais</string>
 	</resources>
