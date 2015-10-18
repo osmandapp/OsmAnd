@@ -84,6 +84,11 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 		return activity;
 	}
 	
+	@Override
+	public ArrayAdapter<?> getAdapter() {
+		return adapter;
+	}
+	
 	
 	private void startHandler() {
 		Handler updateCurrentRecordingTrack = new Handler();

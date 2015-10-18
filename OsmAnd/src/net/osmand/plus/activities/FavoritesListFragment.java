@@ -69,6 +69,11 @@ public class FavoritesListFragment extends OsmAndListFragment implements SearchA
 		}
 	}
 
+	@Override
+	public ArrayAdapter<?> getAdapter() {
+		return favouritesAdapter;
+	}
+	
 	private OsmandApplication getApplication() {
 		return (OsmandApplication) getActivity().getApplication();
 	}

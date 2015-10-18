@@ -1,5 +1,20 @@
 package net.osmand.plus.download;
 
+import java.lang.ref.WeakReference;
+import java.text.MessageFormat;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
+
+import net.osmand.access.AccessibleToast;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.Version;
+import net.osmand.plus.WorldRegion;
+import net.osmand.plus.activities.ActionBarProgressActivity;
+import net.osmand.plus.download.items.ItemsListBuilder;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
@@ -13,33 +28,10 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.widget.Toast;
 
-import net.osmand.access.AccessibleToast;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.Version;
-import net.osmand.plus.WorldRegion;
-import net.osmand.plus.activities.ActionBarProgressActivity;
-import net.osmand.plus.base.BasicProgressAsyncTask;
-import net.osmand.plus.download.items.ItemsListBuilder;
-
-import java.lang.ref.WeakReference;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 public class BaseDownloadActivity extends ActionBarProgressActivity {
-	protected DownloadActivityType type = DownloadActivityType.NORMAL_FILE;
 	protected OsmandSettings settings;
 	public static DownloadIndexesThread downloadListIndexThread;
 	protected Set<WeakReference<Fragment>> fragSet = new HashSet<>();
-	protected List<IndexItem> downloadQueue = new ArrayList<>();
-
 	public static final int MAXIMUM_AVAILABLE_FREE_DOWNLOADS = 10;
 
 	@Override
@@ -49,20 +41,7 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 			downloadListIndexThread = new DownloadIndexesThread(this);
 		}
 		super.onCreate(savedInstanceState);
-		// Having the next line here causes bug AND-197: The storage folder dialogue popped up upon EVERY app startup, because the map list is not indexed yet.
-		// Hence line moved to updateDownloads() now.
-		// prepareDownloadDirectory();
 	}
-
-	public void updateDownloads() {
-		if (downloadListIndexThread.getCachedIndexFiles() != null && downloadListIndexThread.isDownloadedFromInternet()) {
-			downloadListIndexThread.runCategorization(DownloadActivityType.NORMAL_FILE);
-		} else {
-			downloadListIndexThread.runReloadIndexFiles();
-		}
-		prepareDownloadDirectory();
-	}
-
 
 	@Override
 	protected void onResume() {
@@ -76,50 +55,38 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 		downloadListIndexThread.setUiActivity(null);
 	}
 
+	
+	public void cancelDownload(IndexItem item) {
+		// TODO Auto-generated method stub
+		FIXME;
+	}
+
+
+	// FIXME
+	public void onCategorizationFinished() {
+	}
 
 	@UiThread
-	public void updateDownloadList(List<IndexItem> list) {
-
+	public void updateDownloadList() {
 	}
 
 	@UiThread
 	public void updateProgress(boolean updateOnlyProgress, Object tag) {
-
-	}
-
-	public DownloadActivityType getDownloadType() {
-		return type;
-	}
-
-	public Map<IndexItem, List<DownloadEntry>> getEntriesToDownload() {
-		if (downloadListIndexThread == null) {
-			return new LinkedHashMap<>();
-		}
-		return downloadListIndexThread.getEntriesToDownload();
 	}
 
 	public void downloadedIndexes() {
-
 	}
 
 	public void updateFragments() {
-
 	}
 
 	public void downloadListUpdated() {
-
 	}
+	/////// FIXME	
+
 
 	public OsmandApplication getMyApplication() {
 		return (OsmandApplication) getApplication();
-	}
-
-	public void categorizationFinished(List<IndexItem> filtered, List<IndexItemCategory> cats) {
-
-	}
-
-	public void onCategorizationFinished() {
-
 	}
 
 	public ItemsListBuilder getItemsBuilder() {
@@ -152,19 +119,20 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 		}
 	}
 
-	public boolean startDownload(IndexItem item) {
-		addToDownload(item);
-		if (downloadListIndexThread.getCurrentRunningTask() != null && getEntriesToDownload().get(item) == null) {
-			return false;
+	public boolean startDownload(IndexItem... items) {
+		for(IndexItem i : items) {
+			downloadListIndexThread.addToDownload(i);
 		}
-		downloadFilesCheckFreeVersion();
+		// FIXME ??? commented line
+//		if (downloadListIndexThread.getCurrentRunningTask() != null && getEntriesToDownload().get(item) == null) {
+//			return false;
+//		}
+		downloadFilesWithAllChecks();
+		updateFragments();
 		return true;
 	}
 
-	protected void addToDownload(IndexItem item) {
-		List<DownloadEntry> download = item.createDownloadEntry(getMyApplication(), item.getType(), new ArrayList<DownloadEntry>());
-		getEntriesToDownload().put(item, download);
-	}
+	
 
 	public void downloadFilesPreCheckSpace() {
 		double sz = 0;
@@ -188,6 +156,12 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 		} else {
 			downloadListIndexThread.runDownloadFiles();
 		}
+	}
+	
+	
+	
+	protected void downloadFilesWithAllChecks() {
+		downloadFilesCheckFreeVersion();
 	}
 
 	protected void downloadFilesCheckFreeVersion() {
@@ -222,7 +196,8 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 		fragSet.add(new WeakReference<Fragment>(fragment));
 	}
 
-	public void makeSureUserCancelDownload() {
+	public void makeSureUserCancelDownload(IndexItem item) {
+		TODO;
 		AlertDialog.Builder bld = new AlertDialog.Builder(this);
 		bld.setTitle(getString(R.string.shared_string_cancel));
 		bld.setMessage(R.string.confirm_interrupt_download);
@@ -230,65 +205,13 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				dialog.dismiss();
-				cancelDownload();
+				cancelDownload.run();
 			}
 		});
 		bld.setNegativeButton(R.string.shared_string_no, null);
 		bld.show();
 	}
 
-	public void cancelDownload() {
-		BasicProgressAsyncTask<?, ?, ?> t = DownloadActivity.downloadListIndexThread.getCurrentRunningTask();
-		if (t != null) {
-			t.setInterrupted(true);
-		}
-		// list of items to download need to be cleared in case of dashboard activity
-//		if (this instanceof MainMenuActivity) {
-//			getEntriesToDownload().clear();
-//		}
-	}
-
-	private void prepareDownloadDirectory() {
-		if (!getMyApplication().getResourceManager().getIndexFileNames().isEmpty()) {
-			showDialogOfFreeDownloadsIfNeeded();
-		}
-	}
-
-	private void showDialogOfFreeDownloadsIfNeeded() {
-		if (Version.isFreeVersion(getMyApplication())) {
-			AlertDialog.Builder msg = new AlertDialog.Builder(this);
-			msg.setTitle(R.string.free_version_title);
-			String m = getString(R.string.free_version_message, MAXIMUM_AVAILABLE_FREE_DOWNLOADS + "", "") + "\n";
-			m += getString(R.string.available_downloads_left, MAXIMUM_AVAILABLE_FREE_DOWNLOADS - settings.NUMBER_OF_FREE_DOWNLOADS.get());
-			msg.setMessage(m);
-			if (Version.isMarketEnabled(getMyApplication())) {
-				msg.setPositiveButton(R.string.install_paid, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Version.marketPrefix(getMyApplication()) + "net.osmand.plus"));
-						try {
-							startActivity(intent);
-						} catch (ActivityNotFoundException e) {
-						}
-					}
-				});
-				msg.setNegativeButton(R.string.shared_string_cancel, null);
-			} else {
-				msg.setNeutralButton(R.string.shared_string_ok, null);
-			}
-
-			msg.show();
-		}
-	}
-
-
-	public boolean isInQueue(IndexItem item) {
-		return downloadQueue.contains(item);
-	}
-
-	public void removeFromQueue(IndexItem item) {
-		downloadQueue.remove(item);
-	}
 
 	public static class InstallPaidVersionDialogFragment extends DialogFragment {
 		public static final String TAG = "InstallPaidVersionDialogFragment";

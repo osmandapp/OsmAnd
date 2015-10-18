@@ -4,6 +4,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.widget.ArrayAdapter;
 
 public abstract class OsmAndListFragment extends ListFragment {
 	
@@ -15,6 +16,8 @@ public abstract class OsmAndListFragment extends ListFragment {
 						getMyApplication().getSettings().isLightContent() ? R.color.bg_color_light
 								: R.color.bg_color_dark));
 	}
+	
+	public abstract ArrayAdapter<?> getAdapter();
 
 	public OsmandApplication getMyApplication() {
 		return (OsmandApplication)getActivity().getApplication();

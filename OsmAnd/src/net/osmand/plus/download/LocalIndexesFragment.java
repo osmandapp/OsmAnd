@@ -69,8 +69,7 @@ import java.util.Map;
 import java.util.Set;
 
 
-public class LocalIndexesFragment extends OsmandExpandableListFragment
-		implements DownloadActivity.DataSetChangedListener {
+public class LocalIndexesFragment extends OsmandExpandableListFragment {
 
 	private LoadLocalIndexTask asyncLoader;
 	private LocalIndexesAdapter listAdapter;
@@ -273,11 +272,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment
 		}
 	}
 
-	@Override
-	public void notifyDataSetChanged() {
-		listAdapter.notifyDataSetChanged();
-		((DownloadActivity) getActivity()).updateDescriptionTextWithSize(getView());
-	}
+	
 
 	public class LoadLocalIndexTask extends AsyncTask<Activity, LocalIndexInfo, List<LocalIndexInfo>> {
 
@@ -1167,13 +1162,15 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment
 					if (ll.isEmpty()) {
 						Toast.makeText(getDownloadActivity(), R.string.no_updates_available, Toast.LENGTH_SHORT).show();
 					} else {
+						int i = 0;
+						IndexItem[] is = new IndexItem[ll.size()];
 						for (IncrementalUpdate iu : ll) {
 							IndexItem ii = new IndexItem(iu.fileName, "Incremental update", iu.timestamp, iu.sizeText,
 									iu.contentSize, iu.containerSize, DownloadActivityType.LIVE_UPDATES_FILE);
-							getDownloadActivity().addToDownload(ii);
-							getDownloadActivity().downloadFilesCheckFreeVersion();
-							getDownloadActivity().updateFragments();
+							is[i++] = ii;
+							
 						}
+						getDownloadActivity().startDownload(is);
 					}
 				}
 

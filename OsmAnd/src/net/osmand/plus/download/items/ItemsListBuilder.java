@@ -28,7 +28,7 @@ public class ItemsListBuilder {
 	private List<IndexItem> voiceRecItems;
 	private List<IndexItem> voiceTTSItems;
 
-	public class ResourceItem {
+	public static class ResourceItem {
 
 		private String resourceId;
 		private String title;
@@ -160,6 +160,7 @@ public class ItemsListBuilder {
 		}
 	}
 
+	// FIXME
 	public ItemsListBuilder(OsmandApplication app, String regionId, Map<WorldRegion, Map<String, IndexItem>> resourcesByRegions,
 							List<IndexItem> voiceRecItems, List<IndexItem> voiceTTSItems) {
 		this.app = app;

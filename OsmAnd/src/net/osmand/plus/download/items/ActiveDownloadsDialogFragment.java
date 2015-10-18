@@ -1,9 +1,16 @@
 package net.osmand.plus.download.items;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
+import net.osmand.plus.R;
+import net.osmand.plus.download.BaseDownloadActivity;
+import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.download.DownloadEntry;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
@@ -11,49 +18,37 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-
-import net.osmand.PlatformUtil;
-import net.osmand.plus.R;
-import net.osmand.plus.base.BasicProgressAsyncTask;
-import net.osmand.plus.download.BaseDownloadActivity;
-import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.download.DownloadEntry;
-
-import org.apache.commons.logging.Log;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 public class ActiveDownloadsDialogFragment extends DialogFragment {
-	private final static Log LOG = PlatformUtil.getLog(ActiveDownloadsDialogFragment.class);
+
+	private DownloadEntryAdapter adapter;
 
 	@NonNull
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		builder.setTitle(R.string.downloads).setNegativeButton(R.string.shared_string_dismiss, null);
-		Collection<List<DownloadEntry>> vs =
-				DownloadActivity.downloadListIndexThread.getEntriesToDownload().values();
-		ArrayList<DownloadEntry> downloadEntries = new ArrayList<>();
-		for (List<DownloadEntry> list : vs) {
-			downloadEntries.addAll(list);
-		}
-		final DownloadEntryAdapter adapter = new DownloadEntryAdapter(
-				(DownloadActivity) getActivity());
+		adapter = new DownloadEntryAdapter(getDownloadActivity());
 		builder.setAdapter(adapter, null);
-		((DownloadActivity) getActivity()).registerUpdateListener(adapter);
+		getDownloadActivity().setActiveDownloads(this);
 		return builder.create();
 	}
+	
+	public void refresh() {
+		adapter.updateData();
+	}
+	
+	public void onDetach() {
+		super.onDetach();
+		getDownloadActivity().setActiveDownloads(null);
+	};
+	
+	
+	DownloadActivity getDownloadActivity() {
+		return (DownloadActivity) getActivity();
+	}
 
-	public static class DownloadEntryAdapter extends ArrayAdapter<DownloadEntry>
-			implements ProgressAdapter {
+	public static class DownloadEntryAdapter extends ArrayAdapter<DownloadEntry> {
 		private final Drawable deleteDrawable;
 		private final DownloadActivity context;
 		private int itemInProgressPosition = -1;
@@ -90,35 +85,10 @@ public class ActiveDownloadsDialogFragment extends DialogFragment {
 					isFinished || downloadedItems.contains(position));
 			return convertView;
 		}
-
-		@Override
-		public void setProgress(BasicProgressAsyncTask<?, ?, ?> task, Object tag) {
-			isFinished = task == null
-					|| task.getStatus() == AsyncTask.Status.FINISHED;
-			itemInProgressPosition = -1;
-			progress = -1;
-			if (isFinished) return;
-			if (tag instanceof DownloadEntry) {
-				progress = task.getProgressPercentage();
-				boolean handled = false;
-				for (int i = 0; i < getCount(); i++) {
-					if (getItem(i).equals(tag)) {
-						itemInProgressPosition = i;
-						downloadedItems.add(i);
-						handled = true;
-						break;
-					}
-				}
-				if (!handled) {
-					add((DownloadEntry) tag);
-				}
-			}
-			notifyDataSetChanged();
-		}
+		
 	}
 
 	private static class DownloadEntryViewHolder extends TwoLineWithImagesViewHolder {
-		public final View.OnClickListener activeDownloadOnClickListener;
 		private final Drawable deleteDrawable;
 		private final DownloadEntryAdapter adapter;
 
@@ -129,13 +99,6 @@ public class ActiveDownloadsDialogFragment extends DialogFragment {
 			this.adapter = adapter;
 			progressBar.setVisibility(View.VISIBLE);
 			rightImageButton.setImageDrawable(deleteDrawable);
-
-			activeDownloadOnClickListener = new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					context.makeSureUserCancelDownload();
-				}
-			};
 		}
 
 		public void bindDownloadEntry(final DownloadEntry downloadEntry, final int progress,
@@ -146,34 +109,28 @@ public class ActiveDownloadsDialogFragment extends DialogFragment {
 
 			int localProgress = progress;
 			boolean isIndeterminate = true;
-			View.OnClickListener onClickListener = null;
 			if (progress != -1) {
-				// downloading
 				isIndeterminate = false;
-				onClickListener = activeDownloadOnClickListener;
 				double downloaded = downloadEntry.sizeMB * progress / 100;
 				descrTextView.setText(context.getString(R.string.value_downloaded_from_max, downloaded,
 						downloadEntry.sizeMB));
 			} else if (isDownloaded) {
-				// Downloaded
 				isIndeterminate = false;
 				localProgress = progressBar.getMax();
 				descrTextView.setText(context.getString(R.string.file_size_in_mb,
 						downloadEntry.sizeMB));
-
+				rightImageButton.setVisibility(View.GONE);
 			} else {
-				// pending
-				onClickListener = new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						context.getEntriesToDownload().remove(downloadEntry.item);
-						adapter.updateData();
-					}
-				};
 				descrTextView.setText(context.getString(R.string.file_size_in_mb,
 						downloadEntry.sizeMB));
 			}
-			rightImageButton.setOnClickListener(onClickListener);
+			rightImageButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					context.cancelDownload(downloadEntry.item);
+					adapter.updateData();
+				}
+			});
 			progressBar.setIndeterminate(isIndeterminate);
 			progressBar.setProgress(localProgress);
 

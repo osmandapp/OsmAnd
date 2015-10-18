@@ -1,5 +1,25 @@
 package net.osmand.plus.download.items;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
+import net.osmand.PlatformUtil;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.WorldRegion;
+import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
+import net.osmand.plus.activities.OsmandExpandableListFragment;
+import net.osmand.plus.base.BasicProgressAsyncTask;
+import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.download.DownloadActivityType;
+import net.osmand.plus.download.DownloadEntry;
+import net.osmand.plus.download.IndexItem;
+
+import org.apache.commons.logging.Log;
+
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.res.Resources;
@@ -15,38 +35,10 @@ import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 
-import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.R;
-import net.osmand.plus.Version;
-import net.osmand.plus.WorldRegion;
-import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
-import net.osmand.plus.activities.OsmandExpandableListFragment;
-import net.osmand.plus.base.BasicProgressAsyncTask;
-import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.download.DownloadActivityType;
-import net.osmand.plus.download.DownloadEntry;
-import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
-import net.osmand.plus.srtmplugin.SRTMPlugin;
-
-import org.apache.commons.logging.Log;
-
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-
-public class RegionItemsFragment extends OsmandExpandableListFragment
-		implements DownloadActivity.DataSetChangedListener {
+public class RegionItemsFragment extends OsmandExpandableListFragment {
 	public static final String TAG = "RegionItemsFragment";
-	private static final Log LOG = PlatformUtil.getLog(RegionItemsFragment.class);
 
 	private RegionsItemsAdapter listAdapter;
-	private int regionMapsGroupPos = -1;
-	private int additionalMapsGroupPos = -1;
 
 	private static final String REGION_ID_KEY = "world_region_id_key";
 	private String regionId;
@@ -84,7 +76,6 @@ public class RegionItemsFragment extends OsmandExpandableListFragment
 				expandAllGroups();
 			}
 		}
-		getMyActivity().registerUpdateListener(listAdapter);
 
 		return view;
 	}
@@ -143,10 +134,8 @@ public class RegionItemsFragment extends OsmandExpandableListFragment
 	private void fillRegionItemsAdapter(ItemsListBuilder builder) {
 		if (listAdapter != null) {
 			listAdapter.clear();
-			int nextAvailableGroupPos = 0;
 			if (builder.getRegionMapItems().size() > 0) {
 				String sectionTitle = getResources().getString(R.string.region_maps);
-				regionMapsGroupPos = nextAvailableGroupPos++;
 				listAdapter.add(sectionTitle, builder.getRegionMapItems());
 			}
 			if (builder.getAllResourceItems().size() > 0) {
@@ -156,7 +145,6 @@ public class RegionItemsFragment extends OsmandExpandableListFragment
 				} else {
 					sectionTitle = getResources().getString(R.string.regions);
 				}
-				additionalMapsGroupPos = nextAvailableGroupPos;
 				listAdapter.add(sectionTitle, builder.getAllResourceItems());
 			}
 		}
@@ -174,20 +162,10 @@ public class RegionItemsFragment extends OsmandExpandableListFragment
 		return fragment;
 	}
 
-	@Override
-	public void notifyDataSetChanged() {
-		LOG.debug("notifyDataSetChanged()");
-		listAdapter.notifyDataSetChanged();
-	}
-
-	private class RegionsItemsAdapter extends OsmandBaseExpandableListAdapter
-			implements ProgressAdapter {
+	private class RegionsItemsAdapter extends OsmandBaseExpandableListAdapter {
 
 		private Map<String, List<Object>> data = new LinkedHashMap<>();
 		private List<String> sections = new LinkedList<>();
-		private boolean srtmDisabled;
-		private boolean nauticalPluginDisabled;
-		private boolean freeVersion;
 
 		private int groupInProgressPosition = -1;
 		private int childInProgressPosition = -1;
@@ -195,9 +173,6 @@ public class RegionItemsFragment extends OsmandExpandableListFragment
 		private boolean isFinished;
 
 		public RegionsItemsAdapter() {
-			srtmDisabled = OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) == null;
-			nauticalPluginDisabled = OsmandPlugin.getEnabledPlugin(NauticalMapsPlugin.class) == null;
-			freeVersion = Version.isFreeVersion(getMyApplication());
 		}
 
 		public void clear() {
@@ -206,7 +181,7 @@ public class RegionItemsFragment extends OsmandExpandableListFragment
 			notifyDataSetChanged();
 		}
 
-		public void add(String section, List list) {
+		public void add(String section, List<?> list) {
 			if (!sections.contains(section)) {
 				sections.add(section);
 			}
@@ -312,35 +287,6 @@ public class RegionItemsFragment extends OsmandExpandableListFragment
 			return true;
 		}
 
-		@Override
-		public void setProgress(BasicProgressAsyncTask<?, ?, ?> task, Object tag) {
-			isFinished = task == null
-					|| task.getStatus() == AsyncTask.Status.FINISHED;
-			groupInProgressPosition = -1;
-			childInProgressPosition = -1;
-			progress = -1;
-			if (isFinished) return;
-			if (tag instanceof DownloadEntry) {
-				DownloadEntry updatedEntry = (DownloadEntry) tag;
-				progress = task.getProgressPercentage();
-				outer_loop:
-				for (int i = 0; i < getGroupCount(); i++) {
-					for (int j = 0; j < getChildrenCount(i); j++) {
-						if ((getChild(i, j) instanceof ItemsListBuilder.ResourceItem)) {
-							final IndexItem child =
-									((ItemsListBuilder.ResourceItem) getChild(i, j)).getIndexItem();
-							if (child.getBasename().equals(updatedEntry.baseName) &&
-									child.getType().equals(updatedEntry.type)) {
-								groupInProgressPosition = i;
-								childInProgressPosition = j;
-								notifyDataSetChanged();
-								break outer_loop;
-							}
-						}
-					}
-				}
-			}
-		}
 	}
 
 	public static class ConfirmDownloadUnneededMapDialogFragment extends DialogFragment {

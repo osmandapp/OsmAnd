@@ -72,7 +72,7 @@ public class ItemViewHolder extends TwoLineWithImagesViewHolder {
 			rightImageButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					context.makeSureUserCancelDownload();
+					context.makeSureUserCancelDownload(indexItem);
 				}
 			});
 		} else if (indexItem.getType() == DownloadActivityType.VOICE_FILE) {
@@ -111,7 +111,7 @@ public class ItemViewHolder extends TwoLineWithImagesViewHolder {
 					indexItem.getType() == DownloadActivityType.HILLSHADE_FILE) && srtmDisabled) {
 				descrTextView.setText(indexItem.getType().getString(context));
 			} else if (showTypeInDesc) {
-				descrTextView.setText(indexItem.getType().getString(context) + "  •  " + indexItem.getSizeDescription(context));
+				descrTextView.setText(indexItem.getType().getString(context) + " • " + indexItem.getSizeDescription(context));
 			} else {
 				descrTextView.setText(indexItem.getSizeDescription(context));
 			}
@@ -190,6 +190,8 @@ public class ItemViewHolder extends TwoLineWithImagesViewHolder {
 									context.getMyApplication().getAppCustomization().getPluginsActivity()));
 							AccessibleToast.makeText(context,
 									context.getString(R.string.activate_srtm_plugin), Toast.LENGTH_SHORT).show();
+							break;
+						case UNKNOWN:
 							break;
 					}
 				}

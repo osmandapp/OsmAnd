@@ -15,11 +15,14 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.LocalIndexInfo;
+import net.osmand.plus.activities.OsmAndListFragment;
+import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
+import net.osmand.plus.activities.OsmandExpandableListFragment;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.download.items.ActiveDownloadsDialogFragment;
 import net.osmand.plus.download.items.DialogDismissListener;
-import net.osmand.plus.download.items.ProgressAdapter;
+import net.osmand.plus.download.items.RegionItemsFragment;
 import net.osmand.plus.download.items.SearchDialogFragment;
 import net.osmand.plus.download.items.WorldItemsFragment;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
@@ -40,19 +43,17 @@ import android.support.v4.view.ViewPager;
 import android.text.method.LinkMovementMethod;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.BaseExpandableListAdapter;
+import android.widget.ExpandableListAdapter;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
 public class DownloadActivity extends BaseDownloadActivity implements DialogDismissListener {
-	private static final Log LOG = PlatformUtil.getLog(DownloadActivity.class);
 	private List<LocalIndexInfo> localIndexInfos = new ArrayList<>();
 
-	private String initialFilter = "";
-	private boolean singleTab;
-
 	List<TabActivity.TabItem> mTabs = new ArrayList<TabActivity.TabItem>();
-
 	public static final String FILTER_KEY = "filter";
 	public static final String FILTER_CAT = "filter_cat";
 
@@ -60,22 +61,21 @@ public class DownloadActivity extends BaseDownloadActivity implements DialogDism
 	public static final String LOCAL_TAB = "local";
 	public static final String DOWNLOAD_TAB = "download";
 	public static final String UPDATES_TAB = "updates";
-	public static final String SINGLE_TAB = "SINGLE_TAB";
 	public static final MessageFormat formatGb = new MessageFormat("{0, number,#.##} GB", Locale.US);
 
-	private List<DownloadActivityType> downloadTypes = new ArrayList<DownloadActivityType>();
 	private BannerAndDownloadFreeVersion visibleBanner;
-	private ProgressAdapter progressAdapter;
+	private ActiveDownloadsDialogFragment activeDownloads;
 
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		getMyApplication().applyTheme(this);
 		super.onCreate(savedInstanceState);
-		updateDownloads();
-
+		if (downloadListIndexThread.getCachedIndexFiles() == null || !downloadListIndexThread.isDownloadedFromInternet()) {
+			downloadListIndexThread.runReloadIndexFiles();
+		}
+		
 		setContentView(R.layout.download);
-		singleTab = getIntent() != null && getIntent().getBooleanExtra(SINGLE_TAB, false);
 		int currentTab = 0;
 		String tab = getIntent() == null || getIntent().getExtras() == null ? null : getIntent().getExtras().getString(TAB_TO_OPEN);
 		if (tab != null) {
@@ -85,61 +85,28 @@ public class DownloadActivity extends BaseDownloadActivity implements DialogDism
 				currentTab = 2;
 			}
 		}
-//		if (singleTab) {
-//			ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-//			viewPager.setVisibility(View.GONE);
-//			Fragment f = currentTab == 0 ? new LocalIndexesFragment() :
-//				(currentTab == 1? new DownloadIndexFragment() : new UpdatesIndexFragment());
-//			String tag = currentTab == 0 ? LOCAL_TAB :
-//					(currentTab == 1 ? DOWNLOAD_TAB : UPDATES_TAB);
-//			findViewById(R.id.layout).setVisibility(View.VISIBLE);
-//			android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
-//			if (manager.findFragmentByTag(tag) == null){
-//				getSupportFragmentManager().beginTransaction().add(R.id.layout, f, tag).commit();
-//			}
-//		} else {
 		ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
 		PagerSlidingTabStrip mSlidingTabLayout = (PagerSlidingTabStrip) findViewById(R.id.sliding_tabs);
 
 
 		mTabs.add(new TabActivity.TabItem(R.string.download_tab_downloads,
 				getString(R.string.download_tab_downloads), WorldItemsFragment.class));
-//		mTabs.add(new TabActivity.TabItem(R.string.download_tab_downloads,
-//				getString(R.string.download_tab_downloads), DownloadIndexFragment.class));
 		mTabs.add(new TabActivity.TabItem(R.string.download_tab_local,
 				getString(R.string.download_tab_local), LocalIndexesFragment.class));
 		mTabs.add(new TabActivity.TabItem(R.string.download_tab_updates,
 				getString(R.string.download_tab_updates), UpdatesIndexFragment.class));
 
-//		mTabs.add(new TabActivity.TabItem(R.string.download_tab_local,
-//				getString(R.string.download_tab_local), NewLocalIndexesFragment.class));
-
 		viewPager.setAdapter(new TabActivity.OsmandFragmentPagerAdapter(getSupportFragmentManager(), mTabs));
 		mSlidingTabLayout.setViewPager(viewPager);
 
 		viewPager.setCurrentItem(currentTab);
-//		}
 
-		settings = ((OsmandApplication) getApplication()).getSettings();
-
-		downloadTypes = createDownloadTypes();
 		final Intent intent = getIntent();
+		// FIXME INITIAL FILTER & INITIAL KEY
 		if (intent != null && intent.getExtras() != null) {
 			final String filter = intent.getExtras().getString(FILTER_KEY);
-			if (filter != null) {
-				initialFilter = filter;
-			}
-
 			final String filterCat = intent.getExtras().getString(FILTER_CAT);
-			if (filterCat != null) {
-				DownloadActivityType type = DownloadActivityType.getIndexType(filterCat.toLowerCase());
-				if (type != null) {
-					downloadTypes.remove(type);
-					downloadTypes.add(0, type);
-				}
-			}
 		}
-		changeType(downloadTypes.get(0));
 		registerFreeVersionBanner(findViewById(R.id.mainLayout));
 	}
 
@@ -148,15 +115,9 @@ public class DownloadActivity extends BaseDownloadActivity implements DialogDism
 		return downloadListIndexThread != null ? downloadListIndexThread.getIndexActivatedFileNames() : null;
 	}
 
-	public String getInitialFilter() {
-		return initialFilter;
-	}
-
 	@Override
 	protected void onResume() {
 		super.onResume();
-		LOG.debug("onResume()");
-		// TODO: 10/16/15 Review: seems like doing nothing
 		getMyApplication().getAppCustomization().resumeActivity(DownloadActivity.class, this);
 		updateFragments();
 	}
@@ -182,14 +143,6 @@ public class DownloadActivity extends BaseDownloadActivity implements DialogDism
 		return localIndexInfos;
 	}
 
-	public void changeType(final DownloadActivityType tp) {
-		//invalidateOptionsMenu();
-		if (downloadListIndexThread != null && type != tp) {
-			type = tp;
-			downloadListIndexThread.runCategorization(tp);
-		}
-	}
-
 	@Override
 	public void onPause() {
 		super.onPause();
@@ -198,14 +151,11 @@ public class DownloadActivity extends BaseDownloadActivity implements DialogDism
 
 	@Override
 	public void updateProgress(boolean updateOnlyProgress, Object tag) {
-		BasicProgressAsyncTask<?, ?, ?> basicProgressAsyncTask =
-				DownloadActivity.downloadListIndexThread.getCurrentRunningTask();
+		BasicProgressAsyncTask<?, ?, ?, ?> basicProgressAsyncTask =
+				downloadListIndexThread.getCurrentRunningTask();
 		if (visibleBanner != null) {
-			final int countedDownloads = DownloadActivity.downloadListIndexThread.getCountedDownloads();
+			final int countedDownloads = downloadListIndexThread.getCountedDownloads();
 			visibleBanner.updateProgress(countedDownloads, basicProgressAsyncTask);
-		}
-		if (progressAdapter != null) {
-			progressAdapter.setProgress(basicProgressAsyncTask, tag);
 		}
 		if (!updateOnlyProgress) {
 			updateFragments();
@@ -213,24 +163,12 @@ public class DownloadActivity extends BaseDownloadActivity implements DialogDism
 	}
 
 	@Override
-	public void updateDownloadList(List<IndexItem> list) {
+	public void updateDownloadList() {
 		for (WeakReference<Fragment> ref : fragSet) {
 			Fragment f = ref.get();
 			if (f instanceof UpdatesIndexFragment) {
 				if (f.isAdded()) {
-					((UpdatesIndexFragment) f).updateItemsList(list);
-				}
-			}
-		}
-	}
-
-	@Override
-	public void categorizationFinished(List<IndexItem> filtered, List<IndexItemCategory> cats) {
-		for (WeakReference<Fragment> ref : fragSet) {
-			Fragment f = ref.get();
-			if (f instanceof DownloadIndexFragment) {
-				if (f.isAdded()) {
-					((DownloadIndexFragment) f).categorizationFinished(filtered, cats);
+					((UpdatesIndexFragment) f).updateItemsList();
 				}
 			}
 		}
@@ -252,24 +190,6 @@ public class DownloadActivity extends BaseDownloadActivity implements DialogDism
 		}
 	}
 
-	public void downloadListUpdated() {
-		for (WeakReference<Fragment> ref : fragSet) {
-			Fragment f = ref.get();
-			if (f instanceof DownloadIndexFragment) {
-				if (f.isAdded()) {
-					((DownloadIndexAdapter) ((DownloadIndexFragment) f).getExpandableListAdapter())
-							.notifyDataSetInvalidated();
-				}
-			}
-		}
-	}
-
-	@Override
-	public boolean startDownload(IndexItem item) {
-		final boolean b = super.startDownload(item);
-		visibleBanner.initFreeVersionBanner();
-		return b;
-	}
 
 	@Override
 	public void downloadedIndexes() {
@@ -279,60 +199,54 @@ public class DownloadActivity extends BaseDownloadActivity implements DialogDism
 				if (f.isAdded()) {
 					((LocalIndexesFragment) f).reloadData();
 				}
-			} else if (f instanceof DownloadIndexFragment) {
-				if (f.isAdded()) {
-					DownloadIndexAdapter adapter = ((DownloadIndexAdapter)
-							((DownloadIndexFragment) f).getExpandableListAdapter());
-					if (adapter != null) {
-						adapter.setLoadedFiles(getIndexActivatedFileNames(), getIndexFileNames());
+			}
+		}
+	}
 
-					}
+
+	
+	public void setActiveDownloads(ActiveDownloadsDialogFragment activeDownloads) {
+		this.activeDownloads = activeDownloads;
+	}
+	
+	@Override
+	public void updateFragments() {
+		if(activeDownloads != null) {
+			activeDownloads.refresh();
+		}
+		((DownloadActivity) getActivity()).updateDescriptionTextWithSize(getView());
+		for (WeakReference<Fragment> ref : fragSet) {
+			Fragment f = ref.get();
+			notifyUpdateDataSetChanged(f);
+			if(f instanceof RegionItemsFragment) {
+				Fragment innerFragment = ((RegionItemsFragment)f).getChildFragmentManager().findFragmentById(R.id.fragmentContainer);
+				notifyUpdateDataSetChanged(innerFragment);
+			}
+		}
+	}
+
+
+	private void notifyUpdateDataSetChanged(Fragment f) {
+		if (f != null && f.isAdded()) {
+			if(f instanceof OsmandExpandableListFragment) {
+				ExpandableListAdapter adapter = ((OsmandExpandableListFragment) f).getAdapter();
+				if(adapter instanceof BaseExpandableListAdapter) {
+					((BaseExpandableListAdapter)adapter).notifyDataSetChanged();
+				}
+			}
+			if(f instanceof OsmAndListFragment) {
+				 ArrayAdapter<?> adapter = ((OsmAndListFragment) f).getAdapter();
+				if(adapter != null) {
+					adapter.notifyDataSetChanged();
 				}
 			}
 		}
-
 	}
 
-	
-
-	@Override
-	public void updateFragments() {
-		for (WeakReference<Fragment> ref : fragSet) {
-			Fragment f = ref.get();
-			if (f != null)
-				if (f.isAdded()) {
-					if (f instanceof DataSetChangedListener) {
-						((DataSetChangedListener) f).notifyDataSetChanged();
-					}
-				}
-		}
-	}
-
-	public List<DownloadActivityType> getDownloadTypes() {
-		return downloadTypes;
-	}
-
-	public List<DownloadActivityType> createDownloadTypes() {
-		List<DownloadActivityType> items = new ArrayList<DownloadActivityType>();
-		items.add(DownloadActivityType.NORMAL_FILE);
-		if (!Version.isFreeVersion(getMyApplication())) {
-			items.add(DownloadActivityType.WIKIPEDIA_FILE);
-		}
-		items.add(DownloadActivityType.VOICE_FILE);
-		items.add(DownloadActivityType.ROADS_FILE);
-		if (OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null) {
-			items.add(DownloadActivityType.HILLSHADE_FILE);
-			items.add(DownloadActivityType.SRTM_COUNTRY_FILE);
-		}
-
-		getMyApplication().getAppCustomization().getDownloadTypes(items);
-		return items;
-	}
 
 	public boolean isLightActionBar() {
 		return ((OsmandApplication) getApplication()).getSettings().isLightActionBar();
 	}
-
 
 	public Map<String, String> getIndexFileNames() {
 		return downloadListIndexThread != null ? downloadListIndexThread.getIndexFileNames() : null;
@@ -348,10 +262,6 @@ public class DownloadActivity extends BaseDownloadActivity implements DialogDism
 		updateProgress(true, null);
 	}
 
-	public void registerUpdateListener(ProgressAdapter adapter) {
-		progressAdapter = adapter;
-		updateProgress(true, null);
-	}
 
 	public void showDialog(FragmentActivity activity, DialogFragment fragment) {
 		fragment.show(activity.getSupportFragmentManager(), "dialog");
@@ -434,7 +344,7 @@ public class DownloadActivity extends BaseDownloadActivity implements DialogDism
 		}
 
 		public void updateProgress(int countedDownloads,
-								   BasicProgressAsyncTask<?, ?, ?> basicProgressAsyncTask) {
+								   BasicProgressAsyncTask<?, ?, ?, ?> basicProgressAsyncTask) {
 			final boolean isFinished = basicProgressAsyncTask == null
 					|| basicProgressAsyncTask.getStatus() == AsyncTask.Status.FINISHED;
 			if (isFinished) {
@@ -452,7 +362,6 @@ public class DownloadActivity extends BaseDownloadActivity implements DialogDism
 				if (indeterminate) {
 					leftTextView.setText(message);
 				} else {
-					// TODO if only 1 map, show map name
 					progressBar.setProgress(percent);
 //					final String format = ctx.getString(R.string.downloading_number_of_files);
 					leftTextView.setText(message);
@@ -483,9 +392,8 @@ public class DownloadActivity extends BaseDownloadActivity implements DialogDism
 					}
 				}
 			});
-			laterButton.setOnClickListener(
-					new ToggleCollapseFreeVersionBanner(freeVersionDescriptionTextView,
-							buttonsLinearLayout, freeVersionBannerTitle));
+			laterButton.setOnClickListener(new ToggleCollapseFreeVersionBanner(freeVersionDescriptionTextView,
+					buttonsLinearLayout, freeVersionBannerTitle));
 		}
 
 		private void updateFreeVersionBanner() {
@@ -547,8 +455,5 @@ public class DownloadActivity extends BaseDownloadActivity implements DialogDism
 		descriptionText.setText(text);
 		descriptionText.setMovementMethod(LinkMovementMethod.getInstance());
 	}
-
-	public interface DataSetChangedListener {
-		void notifyDataSetChanged();
-	}
+	
 }

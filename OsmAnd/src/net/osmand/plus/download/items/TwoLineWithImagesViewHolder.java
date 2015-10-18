@@ -1,17 +1,14 @@
 package net.osmand.plus.download.items;
 
-import android.view.LayoutInflater;
+import net.osmand.plus.R;
+import net.osmand.plus.download.DownloadActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import net.osmand.plus.R;
-import net.osmand.plus.download.DownloadActivity;
-
 /**
- * Created by GaidamakUA on 10/15/15.
  */
 public class TwoLineWithImagesViewHolder {
 	protected final TextView nameTextView;

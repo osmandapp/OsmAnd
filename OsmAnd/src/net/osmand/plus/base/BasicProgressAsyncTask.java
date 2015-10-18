@@ -8,7 +8,7 @@ import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
 
-public abstract class BasicProgressAsyncTask<Params, Progress, Result> extends AsyncTask<Params, Progress, Result> implements IProgress {
+public abstract class BasicProgressAsyncTask<Tag, Params, Progress, Result> extends AsyncTask<Params, Progress, Result> implements IProgress {
 	protected String taskName;
 	protected int progress;
 	protected int deltaProgress;
@@ -16,7 +16,7 @@ public abstract class BasicProgressAsyncTask<Params, Progress, Result> extends A
 	protected String message = ""; //$NON-NLS-1$
 	protected Context ctx;
 	protected boolean interrupted = false;
-	protected Object tag;
+	protected Tag tag;
 	private Handler uiHandler;
 
 	public BasicProgressAsyncTask(Context ctx) {
@@ -46,7 +46,8 @@ public abstract class BasicProgressAsyncTask<Params, Progress, Result> extends A
 		updProgress(false);
 	}
 
-	protected abstract void updateProgress(boolean updateOnlyProgress, Object tag);
+	protected abstract void updateProgress(boolean updateOnlyProgress, 
+			Tag tag);
 
 	@Override
 	public void startWork(int work) {
@@ -123,7 +124,7 @@ public abstract class BasicProgressAsyncTask<Params, Progress, Result> extends A
 		return interrupted;
 	}
 
-	protected void setTag(Object tag) {
+	protected void setTag(Tag tag) {
 		this.tag = tag;
 	}
 }
