@@ -79,7 +79,7 @@ public class ItemViewHolder extends TwoLineWithImagesViewHolder {
 			nameTextView.setText(indexItem.getVisibleName(context,
 					context.getMyApplication().getRegions(), false));
 		} else {
-			if (indexItem.getSimplifiedFileName().equals(ItemsListBuilder.WORLD_SEAMARKS_KEY)
+			if (indexItem.getSimplifiedFileName().equals(WORLD_SEAMARKS_KEY)
 					&& nauticalPluginDisabled) {
 				rightButtonAction = RightButtonAction.ASK_FOR_SEAMARKS_PLUGIN;
 				disabled = true;

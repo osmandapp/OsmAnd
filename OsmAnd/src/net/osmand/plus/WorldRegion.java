@@ -1,18 +1,16 @@
 package net.osmand.plus;
 
-import android.content.res.Resources;
-
-import net.osmand.PlatformUtil;
-import net.osmand.map.OsmandRegions;
-import net.osmand.plus.download.DownloadActivityType;
-
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
+
+import net.osmand.PlatformUtil;
+import net.osmand.map.OsmandRegions;
+import net.osmand.util.Algorithms;
+import android.content.res.Resources;
 
 public class WorldRegion {
 
@@ -24,15 +22,14 @@ public class WorldRegion {
 	public static final String NORTH_AMERICA_REGION_ID = "northamerica";
 	public static final String RUSSIA_REGION_ID = "russia";
 	public static final String SOUTH_AMERICA_REGION_ID = "southamerica";
+	public static final String WORLD = "world";
 
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(WorldRegion.class);
 
 	// Region data
 	private String regionId;
-	private String downloadsIdPrefix;
+	private String downloadsId;
 	private String name;
-
-	private Set<DownloadActivityType> resourceTypes;
 
 	// Hierarchy
 	private WorldRegion superregion;
@@ -45,20 +42,12 @@ public class WorldRegion {
 		return regionId;
 	}
 
-	public String getDownloadsIdPrefix() {
-		return downloadsIdPrefix;
+	public String getDownloadsId() {
+		return downloadsId;
 	}
 
 	public String getName() {
 		return name;
-	}
-
-	public Set<DownloadActivityType> getResourceTypes() {
-		return resourceTypes;
-	}
-
-	public void setResourceTypes(Set<DownloadActivityType> resourceTypes) {
-		this.resourceTypes = resourceTypes;
 	}
 
 	public WorldRegion getSuperregion() {
@@ -96,7 +85,7 @@ public class WorldRegion {
 
 	public void initWorld() {
 		regionId = "";
-		downloadsIdPrefix = "world_";
+		downloadsId= WORLD;
 		name = "";
 		superregion = null;
 	}
@@ -105,9 +94,9 @@ public class WorldRegion {
 		this.regionId = regionId;
 		String downloadName = osmandRegions.getDownloadName(regionId);
 		if (downloadName != null) {
-			downloadsIdPrefix = downloadName.toLowerCase() + ".";
+			downloadsId = downloadName.toLowerCase();
 		} else {
-			this.downloadsIdPrefix = regionId.toLowerCase() + ".";
+			this.downloadsId = regionId.toLowerCase();
 		}
 		if (name != null) {
 			this.name = name;
@@ -120,24 +109,10 @@ public class WorldRegion {
 		return this;
 	}
 
-	private WorldRegion init(String regionId, OsmandRegions osmandRegions) {
-		this.regionId = regionId;
-		String downloadName = osmandRegions.getDownloadName(regionId);
-		if (downloadName != null) {
-			downloadsIdPrefix = downloadName.toLowerCase() + ".";
-		} else {
-			this.downloadsIdPrefix = regionId.toLowerCase() + ".";
-		}
-		this.name = osmandRegions.getLocaleNameByFullName(regionId, false);
-		if (this.name == null) {
-			this.name = capitalize(regionId.replace('_', ' '));
-		}
-		return this;
-	}
 
 	private WorldRegion init(String regionId, String name) {
 		this.regionId = regionId;
-		this.downloadsIdPrefix = regionId.toLowerCase() + ".";
+		this.downloadsId = regionId.toLowerCase() ;
 		this.name = name;
 		return this;
 	}
@@ -149,22 +124,20 @@ public class WorldRegion {
 	}
 
 	private void propagateSubregionToFlattenedHierarchy(WorldRegion subregion) {
-		flattenedSubregions.add(subregion);
 		if (superregion != null) {
 			superregion.propagateSubregionToFlattenedHierarchy(subregion);
+		} else {
+			flattenedSubregions.add(subregion);
 		}
 	}
 
 	public void loadWorldRegions(OsmandApplication app) {
 		OsmandRegions osmandRegions = app.getRegions();
-
 		Map<String, String> loadedItems = osmandRegions.getFullNamesToLowercaseCopy();
 		if (loadedItems.size() == 0) {
 			return;
 		}
-
 		HashMap<String, WorldRegion> regionsLookupTable = new HashMap<>(loadedItems.size());
-
 		// Create main regions
 		Resources res = app.getResources();
 
@@ -208,10 +181,9 @@ public class WorldRegion {
 		addSubregion(southAmericaRegion);
 		regionsLookupTable.put(southAmericaRegion.regionId, southAmericaRegion);
 
-		// Process remaining regions
+		// Process all regions
 		for (; ; ) {
 			int processedRegions = 0;
-
 			Iterator<Entry<String, String>> iterator = loadedItems.entrySet().iterator();
 			while (iterator.hasNext()) {
 				String regionId = iterator.next().getKey();
@@ -226,7 +198,7 @@ public class WorldRegion {
 					continue;
 				}
 
-				WorldRegion newRegion = new WorldRegion().init(regionId, osmandRegions);
+				WorldRegion newRegion = new WorldRegion().init(regionId, osmandRegions, null);
 				parentRegion.addSubregion(newRegion);
 				regionsLookupTable.put(newRegion.regionId, newRegion);
 
@@ -240,21 +212,18 @@ public class WorldRegion {
 				break;
 		}
 
-		LOG.warn("Found orphaned regions: " + loadedItems.size());
-		for (String regionId : loadedItems.keySet()) {
-			LOG.warn("FullName = " + regionId + " parent=" + osmandRegions.getParentFullName(regionId));
+		if (loadedItems.size() > 0) {
+			LOG.warn("Found orphaned regions: " + loadedItems.size());
+			for (String regionId : loadedItems.keySet()) {
+				LOG.warn("FullName = " + regionId + " parent=" + osmandRegions.getParentFullName(regionId));
+			}
 		}
 	}
 
-	private static WorldRegion createRegionAs(String regionId, Map<String, String> loadedItems, OsmandRegions osmandRegions, String localizedName) {
-		WorldRegion worldRegion;
-		boolean hasRegion = loadedItems.containsKey(regionId);
-		if (hasRegion) {
-			worldRegion = new WorldRegion().init(regionId, osmandRegions, localizedName);
-			loadedItems.remove(regionId);
-		} else {
-			worldRegion = new WorldRegion().init(regionId, localizedName);
-		}
+	private static WorldRegion createRegionAs(String regionId, Map<String, String> loadedItems,
+			OsmandRegions osmandRegions, String localizedName) {
+		WorldRegion worldRegion = new WorldRegion().init(regionId, osmandRegions, localizedName);
+		loadedItems.remove(regionId);
 		return worldRegion;
 	}
 
@@ -262,10 +231,10 @@ public class WorldRegion {
 		String[] words = s.split(" ");
 		if (words[0].length() > 0) {
 			StringBuilder sb = new StringBuilder();
-			sb.append(Character.toUpperCase(words[0].charAt(0))).append(words[0].subSequence(1, words[0].length()).toString().toLowerCase());
+			sb.append(Algorithms.capitalizeFirstLetterAndLowercase(words[0]));
 			for (int i = 1; i < words.length; i++) {
 				sb.append(" ");
-				sb.append(Character.toUpperCase(words[i].charAt(0))).append(words[i].subSequence(1, words[i].length()).toString().toLowerCase());
+				sb.append(Algorithms.capitalizeFirstLetterAndLowercase(words[i]));
 			}
 			return sb.toString();
 		} else {

@@ -1,8 +1,14 @@
 package net.osmand.plus.download;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 
+import net.osmand.OsmAndCollator;
+import net.osmand.map.OsmandRegions;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.WorldRegion;
 
 public class DownloadResourceGroup {
@@ -15,9 +21,12 @@ public class DownloadResourceGroup {
 	protected final String id;
 
 	protected WorldRegion region;
+	public static final String REGION_MAPS_ID = "maps";
 
 	public enum DownloadResourceGroupType {
-		WORLD, VOICE, WORLD_MAPS, REGION
+//		return ctx.getResources().getString(R.string.index_name_voice);
+//		return ctx.getResources().getString(R.string.index_name_tts_voice);
+		WORLD, VOICE_REC, VOICE_TTS, WORLD_MAPS, REGION, REGION_MAPS
 
 	}
 
@@ -33,6 +42,50 @@ public class DownloadResourceGroup {
 		this.id = id;
 		this.type = type;
 		this.parentGroup = parentGroup;
+	}
+	
+	public void trimEmptyGroups() {
+		if(groups != null) {
+			for(DownloadResourceGroup gr : groups) {
+				gr.trimEmptyGroups();
+			}
+			Iterator<DownloadResourceGroup> gr = groups.iterator();
+			while(gr.hasNext()) {
+				DownloadResourceGroup group = gr.next();
+				if(group.isEmpty()) {
+					gr.remove();
+				}
+			}
+		}
+		
+	}
+	
+	public void addGroup(DownloadResourceGroup g) {
+		groups.add(g);
+		if (g.individualResources != null) {
+			final net.osmand.Collator collator = OsmAndCollator.primaryCollator();
+			final OsmandApplication app = getRoot().app;
+			final OsmandRegions osmandRegions = app.getRegions();
+			Collections.sort(g.individualResources, new Comparator<IndexItem>() {
+				@Override
+				public int compare(IndexItem lhs, IndexItem rhs) {
+					return collator.compare(lhs.getVisibleName(app.getApplicationContext(), osmandRegions),
+							rhs.getVisibleName(app.getApplicationContext(), osmandRegions));
+				}
+			});
+		}
+	}
+	
+	public void addItem(IndexItem i) {
+		individualResources.add(i);
+	}
+	
+	public boolean isEmpty() {
+		return isEmpty(individualResources) && isEmpty(groups);
+	}
+
+	private boolean isEmpty(List<?> l) {
+		return l == null || l.isEmpty();
 	}
 
 	public String getGroupId() {

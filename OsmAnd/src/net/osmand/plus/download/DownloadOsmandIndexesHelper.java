@@ -12,19 +12,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.zip.GZIPInputStream;
-
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
-
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
-
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -72,6 +70,7 @@ public class DownloadOsmandIndexesHelper {
 			this.mapversion = mapversion;
 		}
 
+		@SuppressLint("DefaultLocale")
 		public void add(IndexItem indexItem) {
 			indexFiles.add(indexItem);
 			if(indexItem.getFileName().toLowerCase().startsWith("world_basemap")) {
@@ -142,7 +141,6 @@ public class DownloadOsmandIndexesHelper {
 			OsmandSettings settings) {
 		try {
 			String ext = DownloadActivityType.addVersionToExt(IndexConstants.TTSVOICE_INDEX_EXT_ZIP, IndexConstants.TTSVOICE_VERSION);
-			String extvoice = DownloadActivityType.addVersionToExt(IndexConstants.VOICE_INDEX_EXT_ZIP, IndexConstants.VOICE_VERSION);
 			File voicePath = settings.getContext().getAppPath(IndexConstants.VOICE_INDEX_DIR); 
 			// list = amanager.list("voice");
 			String date = "";

@@ -4,35 +4,16 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.Collator;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
 
-import android.content.Context;
 import net.osmand.IndexConstants;
-import net.osmand.OsmAndCollator;
-import net.osmand.PlatformUtil;
-import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.R;
 import net.osmand.plus.WorldRegion;
 import net.osmand.plus.download.DownloadOsmandIndexesHelper.AssetIndexItem;
-import net.osmand.plus.download.ui.DownloadIndexes;
-import net.osmand.plus.download.ui.ItemsListBuilder;
-import net.osmand.plus.download.ui.ResourceItem;
-import net.osmand.plus.download.ui.ResourceItemComparator;
-import net.osmand.plus.download.ui.ItemsListBuilder.VoicePromptsType;
-import net.osmand.plus.srtmplugin.SRTMPlugin;
-import net.osmand.util.Algorithms;
 
 public class DownloadResources extends DownloadResourceGroup {
 	public boolean isDownloadedFromInternet = false;
@@ -40,8 +21,12 @@ public class DownloadResources extends DownloadResourceGroup {
 	public OsmandApplication app;
 	private Map<String, String> indexFileNames = new LinkedHashMap<>();
 	private Map<String, String> indexActivatedFileNames = new LinkedHashMap<>();
+	private List<IndexItem> rawResources;
 	private List<IndexItem> itemsToUpdate = new ArrayList<>();
-
+	//public static final String WORLD_BASEMAP_KEY = "world_basemap.obf.zip";
+	public static final String WORLD_SEAMARKS_KEY = "world_seamarks_basemap.obf.zip";
+	
+	
 	public DownloadResources(OsmandApplication app) {
 		super(null, DownloadResourceGroupType.WORLD, "", false);
 		this.region = app.getWorldRegion();
@@ -63,13 +48,15 @@ public class DownloadResources extends DownloadResourceGroup {
 		prepareFilesToUpdate();
 	}
 
-	public boolean checkIfItemOutdated(IndexItem item) {
+	public boolean checkIfItemOutdated(IndexItem item, java.text.DateFormat format) {
 		boolean outdated = false;
 		String sfName = item.getTargetFileName();
-		java.text.DateFormat format = app.getResourceManager().getDateFormat();
-		String date = item.getDate(format);
 		String indexactivateddate = indexActivatedFileNames.get(sfName);
 		String indexfilesdate = indexFileNames.get(sfName);
+		if(indexactivateddate == null && indexfilesdate == null) {
+			return outdated;
+		}
+		String date = item.getDate(format);
 		if (date != null && !date.equals(indexactivateddate) && !date.equals(indexfilesdate)) {
 			if ((item.getType() == DownloadActivityType.NORMAL_FILE && !item.extra)
 					|| item.getType() == DownloadActivityType.ROADS_FILE
@@ -160,16 +147,13 @@ public class DownloadResources extends DownloadResourceGroup {
 		return file;
 	}
 	
-	
-	
-	////////// FIXME ////////////
-	
 	private void prepareFilesToUpdate() {
-		List<IndexItem> filtered = getCachedIndexFiles();
+		List<IndexItem> filtered = rawResources;
 		if (filtered != null) {
 			itemsToUpdate.clear();
+			java.text.DateFormat format = app.getResourceManager().getDateFormat();
 			for (IndexItem item : filtered) {
-				boolean outdated = checkIfItemOutdated(item);
+				boolean outdated = checkIfItemOutdated(item, format);
 				// include only activated files here
 				if (outdated && indexActivatedFileNames.containsKey(item.getTargetFileName())) {
 					itemsToUpdate.add(item);
@@ -178,287 +162,75 @@ public class DownloadResources extends DownloadResourceGroup {
 		}
 	}
 	
-	private void processRegion(List<IndexItem> resourcesInRepository, DownloadResources di,
-			boolean processVoiceFiles, WorldRegion region) {
-		String downloadsIdPrefix = region.getDownloadsIdPrefix();
-		Map<String, IndexItem> regionResources = new HashMap<>();
-		Set<DownloadActivityType> typesSet = new TreeSet<>(new Comparator<DownloadActivityType>() {
-			@Override
-			public int compare(DownloadActivityType dat1, DownloadActivityType dat2) {
-				return dat1.getTag().compareTo(dat2.getTag());
-			}
-		});
-		for (IndexItem resource : resourcesInRepository) {
-			if (processVoiceFiles) {
-				if (resource.getSimplifiedFileName().endsWith(".voice.zip")) {
-					voiceRecItems.add(resource);
-					continue;
-				} else if (resource.getSimplifiedFileName().contains(".ttsvoice.zip")) {
-					voiceTTSItems.add(resource);
-					continue;
-				}
-			}
-			if (!resource.getSimplifiedFileName().startsWith(downloadsIdPrefix)) {
-				continue;
-			}
-
-			if (resource.type == DownloadActivityType.NORMAL_FILE
-					|| resource.type == DownloadActivityType.ROADS_FILE) {
-				if (resource.isAlreadyDownloaded(indexFileNames)) {
-					region.processNewMapState(checkIfItemOutdated(resource)
-							? WorldRegion.MapState.OUTDATED : WorldRegion.MapState.DOWNLOADED);
-				} else {
-					region.processNewMapState(WorldRegion.MapState.NOT_DOWNLOADED);
-				}
-			}
-			typesSet.add(resource.getType());
-			regionResources.put(resource.getSimplifiedFileName(), resource);
-		}
-
-		if (region.getSuperregion() != null && region.getSuperregion().getSuperregion() != app.getWorldRegion()) {
-			if (region.getSuperregion().getResourceTypes() == null) {
-				region.getSuperregion().setResourceTypes(typesSet);
-			} else {
-				region.getSuperregion().getResourceTypes().addAll(typesSet);
-			}
-		}
-
-		region.setResourceTypes(typesSet);
-		resourcesByRegions.put(region, regionResources);
-	}
-
 	protected boolean prepareData(List<IndexItem> resources) {
-		for (WorldRegion region : app.getWorldRegion().getFlattenedSubregions()) {
-			processRegion(resourcesInRepository, di, false, region);
+		this.rawResources = resources;
+		DownloadResourceGroup voiceRec = new DownloadResourceGroup(this, DownloadResourceGroupType.VOICE_REC, "voice_rec", true);
+		DownloadResourceGroup voiceTTS = new DownloadResourceGroup(this, DownloadResourceGroupType.VOICE_TTS, "voice_tts", true);
+		DownloadResourceGroup worldMaps = new DownloadResourceGroup(this, DownloadResourceGroupType.WORLD_MAPS, "world", true);
+		Map<WorldRegion, List<IndexItem> > groupByRegion = new LinkedHashMap<WorldRegion, List<IndexItem>>();
+		
+		Map<String, WorldRegion> downloadIdForRegion = new LinkedHashMap<String, WorldRegion>();
+		for(WorldRegion wg : region.getFlattenedSubregions()) {
+			downloadIdForRegion.put(wg.getDownloadsId(), wg);
 		}
-		processRegion(resourcesInRepository, di, true, app.getWorldRegion());
-
-		final net.osmand.Collator collator = OsmAndCollator.primaryCollator();
-		final OsmandRegions osmandRegions = app.getRegions();
-
-		Collections.sort(di.voiceRecItems, new Comparator<IndexItem>() {
-			@Override
-			public int compare(IndexItem lhs, IndexItem rhs) {
-				return collator.compare(lhs.getVisibleName(app.getApplicationContext(), osmandRegions),
-						rhs.getVisibleName(app.getApplicationContext(), osmandRegions));
+		
+		for (IndexItem ii : resources) {
+			if (ii.getType() == DownloadActivityType.VOICE_FILE) {
+				if (ii.getFileName().endsWith(IndexConstants.TTSVOICE_INDEX_EXT_ZIP)) {
+					voiceTTS.addItem(ii);
+				} else {
+					voiceRec.addItem(ii);
+				}
 			}
-		});
-
-		Collections.sort(di.voiceTTSItems, new Comparator<IndexItem>() {
-			@Override
-			public int compare(IndexItem lhs, IndexItem rhs) {
-				return collator.compare(lhs.getVisibleName(app.getApplicationContext(), osmandRegions),
-						rhs.getVisibleName(app.getApplicationContext(), osmandRegions));
+			String basename = ii.getBasename().toLowerCase();
+			WorldRegion wg = downloadIdForRegion.get(basename);
+			if (wg != null) {
+				if (!groupByRegion.containsKey(wg)) {
+					groupByRegion.put(wg, new ArrayList<IndexItem>());
+				}
+				groupByRegion.get(wg).add(ii);
+			} else {
+				worldMaps.addItem(ii);
 			}
-		});
+		}
+		LinkedList<WorldRegion> queue = new LinkedList<WorldRegion>();
+		LinkedList<DownloadResourceGroup> parent = new LinkedList<DownloadResourceGroup>();
+		for(WorldRegion rg : region.getSubregions()) {
+			queue.add(rg);
+			parent.add(this);
+		}
+		while(!queue.isEmpty()) {
+			WorldRegion reg = queue.pollFirst();
+			DownloadResourceGroup parentGroup = parent.pollFirst();
+			List<WorldRegion> subregions = reg.getSubregions();
+			DownloadResourceGroup mainGrp = new DownloadResourceGroup(parentGroup, DownloadResourceGroupType.REGION, reg.getRegionId(), false);
+			parentGroup.addGroup(mainGrp);
+			List<IndexItem> list = groupByRegion.get(reg);
+			if(list != null) {
+				DownloadResourceGroup flatFiles = new DownloadResourceGroup(parentGroup, DownloadResourceGroupType.REGION_MAPS, REGION_MAPS_ID, true);
+				for(IndexItem ii : list) {
+					flatFiles.addItem(ii);
+				}
+				mainGrp.addGroup(flatFiles);
+			}
+			// add to processing queue
+			for(WorldRegion rg : subregions) {
+				queue.add(rg);
+				parent.add(mainGrp);
+			}	
+		}
+		// Possible improvements
+		// 1. if there is no subregions no need to create resource group REGIONS_MAPS - objection raise diversity and there is no value
+		// 2. if there is no subregions and there only 1 index item it could be merged to the level up - objection there is no such maps
+		// 3. if hillshade/srtm is disabled, all maps from inner level could be combined into 1 
+		addGroup(worldMaps);
+		addGroup(voiceTTS);
+		addGroup(voiceRec);
+		trimEmptyGroups();
 		initAlreadyLoadedFiles();
 		return true;
 	}
 
 	
-	public class ItemsListBuilder {
-
-		//public static final String WORLD_BASEMAP_KEY = "world_basemap.obf.zip";
-		public static final String WORLD_SEAMARKS_KEY = "world_seamarks_basemap.obf.zip";
-		private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(ItemsListBuilder.class);
-
-		private DownloadIndexes downloadIndexes;
-		
-		private List<ResourceItem> regionMapItems;
-		private List<Object> allResourceItems;
-		private List<WorldRegion> allSubregionItems;
-
-		private OsmandApplication app;
-		private WorldRegion region;
-
-		private boolean srtmDisabled;
-		private boolean hasSrtm;
-		private boolean hasHillshade;
-
-		public List<ResourceItem> getRegionMapItems() {
-			return regionMapItems;
-		}
-
-		public List<Object> getAllResourceItems() {
-			return allResourceItems;
-		}
-
-		public List<WorldRegion> getRegionsFromAllItems() {
-			List<WorldRegion> list = new LinkedList<>();
-			for (Object obj : allResourceItems) {
-				if (obj instanceof WorldRegion) {
-					list.add((WorldRegion) obj);
-				}
-			}
-			return list;
-		}
-
-		public static String getVoicePromtName(Context ctx, VoicePromptsType type) {
-			switch (type) {
-				case RECORDED:
-					return ctx.getResources().getString(R.string.index_name_voice);
-				case TTS:
-					return ctx.getResources().getString(R.string.index_name_tts_voice);
-				default:
-					return "";
-			}
-		}
-
-		public List<IndexItem> getVoicePromptsItems(VoicePromptsType type) {
-			switch (type) {
-				case RECORDED:
-					return downloadIndexes.voiceRecItems;
-				case TTS:
-					return downloadIndexes.voiceTTSItems;
-				default:
-					return new LinkedList<>();
-			}
-		}
-
-		public boolean isVoicePromptsItemsEmpty(VoicePromptsType type) {
-			switch (type) {
-				case RECORDED:
-					return downloadIndexes.voiceRecItems.isEmpty();
-				case TTS:
-					return downloadIndexes.voiceTTSItems.isEmpty();
-				default:
-					return true;
-			}
-		}
-
-		// FIXME
-		public ItemsListBuilder(OsmandApplication app, String regionId, DownloadIndexes di) {
-			this.app = app;
-			this.downloadIndexes = di;
-
-			regionMapItems = new LinkedList<>();
-			allResourceItems = new LinkedList<>();
-			allSubregionItems = new LinkedList<>();
-
-			region = app.getWorldRegion().getRegionById(regionId);
-		}
-
-		public ItemsListBuilder build() {
-			if (obtainDataAndItems()) {
-				return this;
-			} else {
-				return null;
-			}
-		}
-
-		private boolean obtainDataAndItems() {
-			if (downloadIndexes.resourcesByRegions.isEmpty() || region == null) {
-				return false;
-			}
-
-			collectSubregionsDataAndItems();
-			collectResourcesDataAndItems();
-
-			return true;
-		}
-
-		private void collectSubregionsDataAndItems() {
-			srtmDisabled = OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) == null;
-			hasSrtm = false;
-			hasHillshade = false;
-
-			// Collect all regions (and their parents) that have at least one
-			// resource available in repository or locally.
-
-			allResourceItems.clear();
-			allSubregionItems.clear();
-			regionMapItems.clear();
-
-			for (WorldRegion subregion : region.getFlattenedSubregions()) {
-				if (subregion.getSuperregion() == region) {
-					if (subregion.getFlattenedSubregions().size() > 0) {
-						allSubregionItems.add(subregion);
-					} else {
-						collectSubregionItems(subregion);
-					}
-				}
-			}
-		}
-
-		private void collectSubregionItems(WorldRegion region) {
-			Map<String, IndexItem> regionResources = downloadIndexes.resourcesByRegions.get(region);
-
-			if (regionResources == null) {
-				return;
-			}
-
-			List<ResourceItem> regionMapArray = new LinkedList<>();
-			List<Object> allResourcesArray = new LinkedList<>();
-
-			Context context = app.getApplicationContext();
-			OsmandRegions osmandRegions = app.getRegions();
-
-			for (IndexItem indexItem : regionResources.values()) {
-
-				String name = indexItem.getVisibleName(context, osmandRegions, false);
-				if (Algorithms.isEmpty(name)) {
-					continue;
-				}
-
-				ResourceItem resItem = new ResourceItem(indexItem, region);
-				resItem.setResourceId(indexItem.getSimplifiedFileName());
-				resItem.setTitle(name);
-
-				if (region != this.region && srtmDisabled) {
-					if (indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE) {
-						if (hasSrtm) {
-							continue;
-						} else {
-							hasSrtm = true;
-						}
-					} else if (indexItem.getType() == DownloadActivityType.HILLSHADE_FILE) {
-						if (hasHillshade) {
-							continue;
-						} else {
-							hasHillshade = true;
-						}
-					}
-				}
-
-
-				if (region == this.region) {
-					regionMapArray.add(resItem);
-				} else {
-					allResourcesArray.add(resItem);
-				}
-
-			}
-
-			regionMapItems.addAll(regionMapArray);
-
-			if (allResourcesArray.size() > 1) {
-				allSubregionItems.add(region);
-			} else {
-				allResourceItems.addAll(allResourcesArray);
-			}
-		}
-
-		private void collectResourcesDataAndItems() {
-			collectSubregionItems(region);
-
-			allResourceItems.addAll(allSubregionItems);
-
-			Collections.sort(allResourceItems, new ResourceItemComparator());
-			Collections.sort(regionMapItems, new ResourceItemComparator());
-		}
-		
-		public enum MapState {
-			NOT_DOWNLOADED,
-			DOWNLOADED,
-			OUTDATED
-		}
-		
-		
-		public enum VoicePromptsType {
-			NONE,
-			RECORDED,
-			TTS
-		}
-	}
 
 }
