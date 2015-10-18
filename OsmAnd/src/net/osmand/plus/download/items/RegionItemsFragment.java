@@ -291,11 +291,12 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 
 	public static class ConfirmDownloadUnneededMapDialogFragment extends DialogFragment {
 		private static final String INDEX_ITEM = "index_item";
+		private static IndexItem item = null;
 
 		@NonNull
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
-			final IndexItem indexItem = getArguments().getParcelable(INDEX_ITEM);
+			final IndexItem indexItem = item;
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			builder.setTitle(R.string.are_you_sure);
 			builder.setMessage(R.string.confirm_download_roadmaps);
@@ -304,7 +305,9 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 							new DialogInterface.OnClickListener() {
 								@Override
 								public void onClick(DialogInterface dialog, int which) {
-									((DownloadActivity) getActivity()).startDownload(indexItem);
+									if(indexItem != null) {
+										((DownloadActivity) getActivity()).startDownload(indexItem);
+									}
 								}
 							});
 			return builder.create();
@@ -314,7 +317,6 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 			ConfirmDownloadUnneededMapDialogFragment fragment =
 					new ConfirmDownloadUnneededMapDialogFragment();
 			Bundle args = new Bundle();
-			args.putParcelable(INDEX_ITEM, indexItem);
 			fragment.setArguments(args);
 			return fragment;
 		}

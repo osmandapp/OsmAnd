@@ -14,20 +14,16 @@ public class DownloadEntry {
 	
 	public String baseName;
 	public String urlToDownload;
-	public File existingBackupFile;
 	public boolean isAsset;
 	public String assetName;
 	public DownloadActivityType type;
 	
-	public IndexItem item;
 
-	public DownloadEntry(IndexItem item) {
-		this.item = item;
+	public DownloadEntry() {
 	}
-
-	public DownloadEntry(IndexItem pr, String assetName, String fileName, long dateModified) {
+	
+	public DownloadEntry(String assetName, String fileName, long dateModified) {
 		this.dateModified = dateModified;
-		this.item = pr;
 		targetFile = new File(fileName);
 		this.assetName = assetName;
 		isAsset = true;

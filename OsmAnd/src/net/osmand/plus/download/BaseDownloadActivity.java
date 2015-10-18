@@ -57,8 +57,11 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 
 	
 	public void cancelDownload(IndexItem item) {
-		// TODO Auto-generated method stub
-		FIXME;
+		downloadListIndexThread.cancelDownload(item);
+	}
+	
+	public void startDownload(IndexItem... items) {
+		downloadFilesWithAllChecks(items);
 	}
 
 
@@ -71,7 +74,7 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 	}
 
 	@UiThread
-	public void updateProgress(boolean updateOnlyProgress, Object tag) {
+	public void updateProgress(boolean updateOnlyProgress) {
 	}
 
 	public void downloadedIndexes() {
@@ -119,66 +122,63 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 		}
 	}
 
-	public boolean startDownload(IndexItem... items) {
-		for(IndexItem i : items) {
-			downloadListIndexThread.addToDownload(i);
-		}
-		// FIXME ??? commented line
-//		if (downloadListIndexThread.getCurrentRunningTask() != null && getEntriesToDownload().get(item) == null) {
-//			return false;
-//		}
-		downloadFilesWithAllChecks();
-		updateFragments();
-		return true;
-	}
 
-	
-
-	public void downloadFilesPreCheckSpace() {
-		double sz = 0;
-		List<DownloadEntry> list = downloadListIndexThread.flattenDownloadEntries();
-		for (DownloadEntry es : list) {
-			sz += es.sizeMB;
+	public void downloadFilesCheck_3_ValidateSpace(final IndexItem... items) {
+		long szLong = 0;
+		int i = 0;
+		for (IndexItem es : downloadListIndexThread.getCurrentDownloadingItems()) {
+			szLong += es.contentSize;
+			i++;
 		}
+		for (IndexItem es : items) {
+			szLong += es.contentSize;
+			i++;
+		}
+		double sz = ((double) szLong) / (1 << 20);
 		// get availabile space
 		double asz = downloadListIndexThread.getAvailableSpace();
 		if (asz != -1 && asz > 0 && sz / asz > 0.4) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setMessage(MessageFormat.format(getString(R.string.download_files_question_space), list.size(), sz, asz));
+			builder.setMessage(MessageFormat.format(getString(R.string.download_files_question_space), i, sz, asz));
 			builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					downloadListIndexThread.runDownloadFiles();
+					downloadFileCheck_Final_Run(items);
 				}
 			});
 			builder.setNegativeButton(R.string.shared_string_no, null);
 			builder.show();
 		} else {
-			downloadListIndexThread.runDownloadFiles();
+			downloadFileCheck_Final_Run(items);
 		}
 	}
 	
+	private void downloadFileCheck_Final_Run(IndexItem[] items) {
+		downloadListIndexThread.runDownloadFiles(items);
+		updateFragments();
+	}
 	
 	
-	protected void downloadFilesWithAllChecks() {
-		downloadFilesCheckFreeVersion();
+	
+	protected void downloadFilesWithAllChecks(IndexItem[] items) {
+		downloadFilesCheck_1_FreeVersion(items);
 	}
 
-	protected void downloadFilesCheckFreeVersion() {
+	protected void downloadFilesCheck_1_FreeVersion(IndexItem[] items) {
 		if (Version.isFreeVersion(getMyApplication())) {
 			int total = settings.NUMBER_OF_FREE_DOWNLOADS.get();
 			if (total > MAXIMUM_AVAILABLE_FREE_DOWNLOADS) {
 				new InstallPaidVersionDialogFragment()
 						.show(getSupportFragmentManager(), InstallPaidVersionDialogFragment.TAG);
 			} else {
-				downloadFilesCheckInternet();
+				downloadFilesCheck_2_Internet(items);
 			}
 		} else {
-			downloadFilesCheckInternet();
+			downloadFilesCheck_2_Internet(items);
 		}
 	}
 
-	protected void downloadFilesCheckInternet() {
+	protected void downloadFilesCheck_2_Internet(IndexItem[] items) {
 		if (!getMyApplication().getSettings().isWifiConnected()) {
 			if (getMyApplication().getSettings().isInternetConnectionAvailable()) {
 				new ConfirmDownloadDialogFragment().show(getSupportFragmentManager(),
@@ -187,7 +187,7 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 				AccessibleToast.makeText(this, R.string.no_index_file_to_download, Toast.LENGTH_LONG).show();
 			}
 		} else {
-			downloadFilesPreCheckSpace();
+			downloadFilesCheck_3_ValidateSpace(items);
 		}
 	}
 
@@ -196,8 +196,7 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 		fragSet.add(new WeakReference<Fragment>(fragment));
 	}
 
-	public void makeSureUserCancelDownload(IndexItem item) {
-		TODO;
+	public void makeSureUserCancelDownload(final IndexItem item) {
 		AlertDialog.Builder bld = new AlertDialog.Builder(this);
 		bld.setTitle(getString(R.string.shared_string_cancel));
 		bld.setMessage(R.string.confirm_interrupt_download);
@@ -205,14 +204,13 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				dialog.dismiss();
-				cancelDownload.run();
+				cancelDownload(item);
 			}
 		});
 		bld.setNegativeButton(R.string.shared_string_no, null);
 		bld.show();
 	}
-
-
+	
 	public static class InstallPaidVersionDialogFragment extends DialogFragment {
 		public static final String TAG = "InstallPaidVersionDialogFragment";
 		@NonNull
@@ -258,7 +256,7 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 			builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					((BaseDownloadActivity) getActivity()).downloadFilesPreCheckSpace();
+					((BaseDownloadActivity) getActivity()).downloadFilesCheck_3_ValidateSpace();
 				}
 			});
 			builder.setNegativeButton(R.string.shared_string_no, null);

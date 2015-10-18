@@ -169,9 +169,8 @@ public class DownloadOsmandIndexesHelper {
 		}
 
 		@Override
-		public List<DownloadEntry> createDownloadEntry(OsmandApplication ctx, DownloadActivityType type, List<DownloadEntry> res) {
-			res.add(new DownloadEntry(this, assetName, destFile, dateModified));
-			return res;
+		public DownloadEntry createDownloadEntry(OsmandApplication ctx) {
+			return new DownloadEntry(assetName, destFile, dateModified);
 		}
 
 		public String getDestFile(){

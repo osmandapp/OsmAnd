@@ -7,7 +7,7 @@ import java.util.Set;
 import net.osmand.plus.R;
 import net.osmand.plus.download.BaseDownloadActivity;
 import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.download.DownloadEntry;
+import net.osmand.plus.download.IndexItem;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.graphics.drawable.Drawable;
@@ -21,14 +21,14 @@ import android.widget.ArrayAdapter;
 
 public class ActiveDownloadsDialogFragment extends DialogFragment {
 
-	private DownloadEntryAdapter adapter;
+	private IndexItemAdapter adapter;
 
 	@NonNull
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		builder.setTitle(R.string.downloads).setNegativeButton(R.string.shared_string_dismiss, null);
-		adapter = new DownloadEntryAdapter(getDownloadActivity());
+		adapter = new IndexItemAdapter(getDownloadActivity());
 		builder.setAdapter(adapter, null);
 		getDownloadActivity().setActiveDownloads(this);
 		return builder.create();
@@ -48,7 +48,7 @@ public class ActiveDownloadsDialogFragment extends DialogFragment {
 		return (DownloadActivity) getActivity();
 	}
 
-	public static class DownloadEntryAdapter extends ArrayAdapter<DownloadEntry> {
+	public static class IndexItemAdapter extends ArrayAdapter<IndexItem> {
 		private final Drawable deleteDrawable;
 		private final DownloadActivity context;
 		private int itemInProgressPosition = -1;
@@ -56,8 +56,8 @@ public class ActiveDownloadsDialogFragment extends DialogFragment {
 		private final Set<Integer> downloadedItems = new HashSet<>();
 		private boolean isFinished;
 
-		public DownloadEntryAdapter(DownloadActivity context) {
-			super(context, R.layout.two_line_with_images_list_item, new ArrayList<DownloadEntry>());
+		public IndexItemAdapter(DownloadActivity context) {
+			super(context, R.layout.two_line_with_images_list_item, new ArrayList<IndexItem>());
 			this.context = context;
 			deleteDrawable = context.getMyApplication().getIconsCache()
 					.getPaintedContentIcon(R.drawable.ic_action_remove_dark,
@@ -67,7 +67,7 @@ public class ActiveDownloadsDialogFragment extends DialogFragment {
 
 		public void updateData() {
 			clear();
-			addAll(BaseDownloadActivity.downloadListIndexThread.flattenDownloadEntries());
+			addAll(BaseDownloadActivity.downloadListIndexThread.getCurrentDownloadingItems());
 		}
 
 		@Override
@@ -90,10 +90,10 @@ public class ActiveDownloadsDialogFragment extends DialogFragment {
 
 	private static class DownloadEntryViewHolder extends TwoLineWithImagesViewHolder {
 		private final Drawable deleteDrawable;
-		private final DownloadEntryAdapter adapter;
+		private final IndexItemAdapter adapter;
 
 		private DownloadEntryViewHolder(View convertView, final DownloadActivity context,
-										Drawable deleteDrawable, DownloadEntryAdapter adapter) {
+										Drawable deleteDrawable, IndexItemAdapter adapter) {
 			super(convertView, context);
 			this.deleteDrawable = deleteDrawable;
 			this.adapter = adapter;
@@ -101,9 +101,9 @@ public class ActiveDownloadsDialogFragment extends DialogFragment {
 			rightImageButton.setImageDrawable(deleteDrawable);
 		}
 
-		public void bindDownloadEntry(final DownloadEntry downloadEntry, final int progress,
+		public void bindDownloadEntry(final IndexItem item, final int progress,
 									  boolean isDownloaded) {
-			nameTextView.setText(downloadEntry.item.getVisibleName(context,
+			nameTextView.setText(item.getVisibleName(context,
 					context.getMyApplication().getRegions()));
 			rightImageButton.setVisibility(View.VISIBLE);
 
@@ -111,23 +111,23 @@ public class ActiveDownloadsDialogFragment extends DialogFragment {
 			boolean isIndeterminate = true;
 			if (progress != -1) {
 				isIndeterminate = false;
-				double downloaded = downloadEntry.sizeMB * progress / 100;
+				double downloaded = item.getContentSizeMB()  * progress / 100;
 				descrTextView.setText(context.getString(R.string.value_downloaded_from_max, downloaded,
-						downloadEntry.sizeMB));
+						item.getContentSizeMB()));
 			} else if (isDownloaded) {
 				isIndeterminate = false;
 				localProgress = progressBar.getMax();
 				descrTextView.setText(context.getString(R.string.file_size_in_mb,
-						downloadEntry.sizeMB));
+						item.getContentSizeMB()));
 				rightImageButton.setVisibility(View.GONE);
 			} else {
 				descrTextView.setText(context.getString(R.string.file_size_in_mb,
-						downloadEntry.sizeMB));
+						item.getContentSizeMB()));
 			}
 			rightImageButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					context.cancelDownload(downloadEntry.item);
+					context.cancelDownload(item);
 					adapter.updateData();
 				}
 			});

@@ -150,7 +150,7 @@ public class DownloadActivity extends BaseDownloadActivity implements DialogDism
 	}
 
 	@Override
-	public void updateProgress(boolean updateOnlyProgress, Object tag) {
+	public void updateProgress(boolean updateOnlyProgress) {
 		BasicProgressAsyncTask<?, ?, ?, ?> basicProgressAsyncTask =
 				downloadListIndexThread.getCurrentRunningTask();
 		if (visibleBanner != null) {
@@ -214,7 +214,8 @@ public class DownloadActivity extends BaseDownloadActivity implements DialogDism
 		if(activeDownloads != null) {
 			activeDownloads.refresh();
 		}
-		((DownloadActivity) getActivity()).updateDescriptionTextWithSize(getView());
+		// FIXME
+		//((DownloadActivity) getActivity()).updateDescriptionTextWithSize(getView());
 		for (WeakReference<Fragment> ref : fragSet) {
 			Fragment f = ref.get();
 			notifyUpdateDataSetChanged(f);
@@ -259,7 +260,7 @@ public class DownloadActivity extends BaseDownloadActivity implements DialogDism
 
 	public void registerFreeVersionBanner(View view) {
 		visibleBanner = new BannerAndDownloadFreeVersion(view, this);
-		updateProgress(true, null);
+		updateProgress(true);
 	}
 
 
@@ -354,7 +355,6 @@ public class DownloadActivity extends BaseDownloadActivity implements DialogDism
 				boolean indeterminate = basicProgressAsyncTask.isIndeterminate();
 				String message = basicProgressAsyncTask.getDescription();
 				int percent = basicProgressAsyncTask.getProgressPercentage();
-
 				setMinimizedFreeVersionBanner(true);
 				updateAvailableDownloads(countedDownloads);
 				downloadProgressLayout.setVisibility(View.VISIBLE);
