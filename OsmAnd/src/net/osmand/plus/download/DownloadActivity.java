@@ -198,11 +198,11 @@ public class DownloadActivity extends BaseDownloadActivity implements DialogDism
 			Fragment f = ref.get();
 			if (f instanceof WorldItemsFragment) {
 				if (f.isAdded()) {
-					((WorldItemsFragment) f).onCategorizationFinished();
+					((WorldItemsFragment) f).newDownloadIndexes();
 				}
 			} else if (f instanceof SearchDialogFragment) {
 				if (f.isAdded()) {
-					((SearchDialogFragment) f).onCategorizationFinished();
+					((SearchDialogFragment) f).newDownloadIndexes();
 				}
 			} else if (f instanceof LocalIndexesFragment) {
 				if (f.isAdded()) {

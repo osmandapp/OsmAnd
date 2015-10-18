@@ -42,10 +42,10 @@ public class ItemViewHolder extends TwoLineWithImagesViewHolder {
 	}
 
 	public ItemViewHolder(View convertView,
-						  DownloadActivity context,
-						  DateFormat dateFormat) {
+						  DownloadActivity context) {
 		super(convertView, context);
-		this.dateFormat = dateFormat;
+		
+		this.dateFormat = context.getMyApplication().getResourceManager().getDateFormat();
 
 		TypedValue typedValue = new TypedValue();
 		Resources.Theme theme = context.getTheme();

@@ -1,11 +1,9 @@
 package net.osmand.plus.download.ui;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
+import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.WorldRegion;
@@ -13,8 +11,11 @@ import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.activities.OsmandExpandableListFragment;
 import net.osmand.plus.download.BaseDownloadActivity;
 import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.download.DownloadActivityType;
+import net.osmand.plus.download.DownloadResourceGroup;
+import net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType;
+import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.download.ui.ItemsListBuilder.VoicePromptsType;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -36,13 +37,7 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 
 	public static final int RELOAD_ID = 0;
 	public static final int SEARCH_ID = 1;
-	private WorldItemsAdapter listAdapter;
-
-	protected int worldRegionsIndex = -1;
-	protected int worldMapsIndex = -1;
-	protected int voicePromptsIndex = -1;
-	protected int voicePromptsItemsRecordedSubIndex = -1;
-	protected int voicePromptsItemsTTSSubIndex = -1;
+	private DownloadResourceGroupAdapter listAdapter;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -53,9 +48,8 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.download_index_fragment, container, false);
-
 		ExpandableListView listView = (ExpandableListView) view.findViewById(android.R.id.list);
-		listAdapter = new WorldItemsAdapter(getActivity());
+		listAdapter = new DownloadResourceGroupAdapter((DownloadActivity) getActivity());
 		listView.setAdapter(listAdapter);
 		expandAllGroups();
 		setListView(listView);
@@ -63,19 +57,17 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 		View usedSpaceCard = inflater.inflate(R.layout.used_space_card, listView, false);
 		getMyActivity().updateDescriptionTextWithSize(usedSpaceCard);
 		listView.addHeaderView(usedSpaceCard);
-
-		onCategorizationFinished();
-
+		newDownloadIndexes();
 		return view;
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
-
 		if (!listAdapter.isEmpty()) {
 			expandAllGroups();
 		}
+		listAdapter.notifyDataSetChanged();
 	}
 
 	private void expandAllGroups() {
@@ -92,62 +84,23 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 		return (DownloadActivity) getActivity();
 	}
 
-	private void fillWorldItemsAdapter(ItemsListBuilder builder) {
-		if (listAdapter != null) {
-			listAdapter.clear();
-			if (builder.getRegionMapItems().size() > 0) {
-				int unusedIndex = 0;
-				worldRegionsIndex = unusedIndex++;
-				listAdapter.add(getResources().getString(R.string.world_regions), builder.getRegionsFromAllItems());
-				worldMapsIndex = unusedIndex++;
-				listAdapter.add(getResources().getString(R.string.world_maps), builder.getRegionMapItems());
-
-				int unusedSubIndex = 0;
-				List<String> voicePromptsItems = new LinkedList<>();
-				if (!builder.isVoicePromptsItemsEmpty(VoicePromptsType.RECORDED)) {
-					voicePromptsItems.add(ItemsListBuilder.getVoicePromtName(getActivity(), VoicePromptsType.RECORDED));
-					voicePromptsItemsRecordedSubIndex = unusedSubIndex++;
-				}
-				if (!builder.isVoicePromptsItemsEmpty(VoicePromptsType.TTS)) {
-					voicePromptsItems.add(ItemsListBuilder.getVoicePromtName(getActivity(), VoicePromptsType.TTS));
-					voicePromptsItemsTTSSubIndex = unusedSubIndex;
-				}
-				if (!voicePromptsItems.isEmpty()) {
-					voicePromptsIndex = unusedIndex;
-					listAdapter.add(getResources().getString(R.string.voices), voicePromptsItems);
-				}
-			}
-		}
-	}
-
 	@Override
 	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-		if (groupPosition == worldRegionsIndex) {
-			WorldRegion region = (WorldRegion)listAdapter.getChild(groupPosition, childPosition);
-			final RegionDialogFragment regionDialogFragment = RegionDialogFragment.createInstance(region.getRegionId());
+		Object child = listAdapter.getChild(groupPosition, childPosition);
+		if (child instanceof DownloadResourceGroup) {
+			final DownloadResourceGroupFragment regionDialogFragment = DownloadResourceGroupFragment.createInstance(((DownloadResourceGroup) child).getUniqueId());
 			regionDialogFragment.setOnDismissListener(getDownloadActivity());
 			getDownloadActivity().showDialog(getActivity(), regionDialogFragment);
 			return true;
-		} else if (groupPosition == voicePromptsIndex) {
-			if (childPosition == voicePromptsItemsRecordedSubIndex) {
-				getDownloadActivity().showDialog(getActivity(),
-						VoiceDialogFragment.createInstance(VoicePromptsType.RECORDED));
-			} else {
-				getDownloadActivity().showDialog(getActivity(),
-						VoiceDialogFragment.createInstance(VoicePromptsType.TTS));
-			}
-		}else if (groupPosition == worldMapsIndex) {
-			if(((ItemViewHolder) v.getTag()).isItemAvailable()) {
-				IndexItem indexItem = ((ItemsListBuilder.ResourceItem)
-						listAdapter.getChild(groupPosition, childPosition)).getIndexItem();
-				((BaseDownloadActivity) getActivity())
-						.startDownload(indexItem);
-
-				return true;
-			}
+		} else if (child instanceof IndexItem) {
+			IndexItem indexItem = (IndexItem) child;
+			((BaseDownloadActivity) getActivity()).startDownload(indexItem);
+			return true;
 		}
 		return false;
 	}
+	
+	
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -165,7 +118,7 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 		switch (item.getItemId()) {
 			case RELOAD_ID:
 				// re-create the thread
-				DownloadActivity.downloadListIndexThread.runReloadIndexFiles();
+				getDownloadActivity().getDownloadThread().runReloadIndexFiles();
 				return true;
 			case SEARCH_ID:
 				getDownloadActivity().showDialog(getActivity(), SearchDialogFragment.createInstance(""));
@@ -178,50 +131,45 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 	private DownloadActivity getDownloadActivity() {
 		return (DownloadActivity) getActivity();
 	}
-
-	public void onCategorizationFinished() {
-		ItemsListBuilder builder = getDownloadActivity().getItemsBuilder();
-		if (builder != null) {
-			fillWorldItemsAdapter(builder);
-			listAdapter.notifyDataSetChanged();
-			expandAllGroups();
-		}
+	
+	public void newDownloadIndexes() {
+		DownloadResources indexes = getDownloadActivity().getDownloadThread().getIndexes();
+		listAdapter.update(indexes);
+		expandAllGroups();
 	}
 
-	private class WorldItemsAdapter extends OsmandBaseExpandableListAdapter {
+	public static class DownloadResourceGroupAdapter extends OsmandBaseExpandableListAdapter {
 
-		private Map<String, List<Object>> data = new LinkedHashMap<>();
-		private List<String> sections = new LinkedList<>();
+		private List<DownloadResourceGroup> data = new ArrayList<DownloadResourceGroup>();
+		private DownloadActivity ctx;
 
 		private class SimpleViewHolder {
 			TextView textView;
 		}
 
-		public WorldItemsAdapter(Context ctx) {
+		public DownloadResourceGroupAdapter(DownloadActivity ctx) {
+			this.ctx = ctx;
 			TypedArray ta = ctx.getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorPrimary});
 			ta.recycle();
 		}
 
 		public void clear() {
 			data.clear();
-			sections.clear();
 			notifyDataSetChanged();
 		}
-
-		public void add(String section, List<?> list) {
-			if (!sections.contains(section)) {
-				sections.add(section);
-			}
-			if (!data.containsKey(section)) {
-				data.put(section, new ArrayList<>());
-			}
-			data.get(section).addAll(list);
+		
+		public void update(DownloadResourceGroup mainGroup) {
+			data = mainGroup.getGroups();
+			notifyDataSetChanged();
 		}
 
 		@Override
 		public Object getChild(int groupPosition, int childPosition) {
-			String section = sections.get(groupPosition);
-			return data.get(section).get(childPosition);
+			DownloadResourceGroup drg = data.get(groupPosition);
+			if(drg.getType().containsIndexItem()) {
+				return drg.getItemByIndex(childPosition);
+			}
+			return drg.getGroupByIndex(childPosition);
 		}
 
 		@Override
@@ -229,72 +177,81 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 			return groupPosition * 10000 + childPosition;
 		}
 
-		@Override
-		public int getChildType(int groupPosition, int childPosition) {
-			if (groupPosition == worldRegionsIndex || groupPosition == voicePromptsIndex) {
-				return 0;
-			} else {
-				return 1;
-			}
-		}
-
-		@Override
-		public int getChildTypeCount() {
-			return 2;
-		}
 
 		@Override
 		public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-
 			final Object child = getChild(groupPosition, childPosition);
-
-			if (groupPosition == worldRegionsIndex) {
-				WorldRegion item = (WorldRegion)child;
-				SimpleViewHolder viewHolder;
+			if(child instanceof IndexItem) {
+				IndexItem item = (IndexItem) child;
 				if (convertView == null) {
-					convertView = LayoutInflater.from(parent.getContext())
-							.inflate(R.layout.simple_list_menu_item, parent, false);
-					viewHolder = new SimpleViewHolder();
-					viewHolder.textView = (TextView) convertView.findViewById(R.id.title);
-					convertView.setTag(viewHolder);
-				} else {
-					viewHolder = (SimpleViewHolder) convertView.getTag();
+				convertView = LayoutInflater.from(parent.getContext())
+						.inflate(R.layout.two_line_with_images_list_item, parent, false);
 				}
-				Drawable iconLeft = getMyApplication().getIconsCache()
-						.getContentIcon(R.drawable.ic_world_globe_dark);
-				viewHolder.textView.setCompoundDrawablesWithIntrinsicBounds(iconLeft, null, null, null);
-				viewHolder.textView.setText(item.getName());
-
-			} else if (groupPosition == worldMapsIndex) {
-				ItemsListBuilder.ResourceItem item = (ItemsListBuilder.ResourceItem) child;
 				ItemViewHolder viewHolder;
-				if (convertView == null) {
-					convertView = LayoutInflater.from(parent.getContext())
-							.inflate(R.layout.two_line_with_images_list_item, parent, false);
-					viewHolder = new ItemViewHolder(convertView,
-							getMyActivity(),
-							getMyApplication().getResourceManager().getDateFormat());
-					convertView.setTag(viewHolder);
-				} else {
+				if(convertView.getTag() instanceof ItemViewHolder) {
 					viewHolder = (ItemViewHolder) convertView.getTag();
+				} else {
+					viewHolder = new ItemViewHolder(convertView,ctx);
+					convertView.setTag(viewHolder);
 				}
-				viewHolder.bindIndexItem(item.getIndexItem(), false, false);
-			} else if (groupPosition == voicePromptsIndex) {
-				String item = (String)child;
+				viewHolder.bindIndexItem(item, false, false);
+			} else {
+				DownloadResourceGroup group = (DownloadResourceGroup) child;
 				SimpleViewHolder viewHolder;
 				if (convertView == null) {
 					convertView = LayoutInflater.from(parent.getContext())
 							.inflate(R.layout.simple_list_menu_item, parent, false);
-					viewHolder = new SimpleViewHolder();
-					viewHolder.textView = (TextView) convertView.findViewById(R.id.title);
-					convertView.setTag(viewHolder);
-				} else {
-					viewHolder = (SimpleViewHolder) convertView.getTag();
 				}
-				Drawable iconLeft = getMyApplication().getIconsCache()
-						.getContentIcon(R.drawable.ic_action_volume_up);
+				if(convertView.getTag() instanceof SimpleViewHolder) {
+					viewHolder = (SimpleViewHolder) convertView.getTag();
+				} else {
+					viewHolder = new SimpleViewHolder();
+					convertView.setTag(viewHolder);
+				}
+				Drawable iconLeft;
+				if(group.getType() == DownloadResourceGroupType.VOICE_REC || 
+						group.getType() == DownloadResourceGroupType.VOICE_TTS) {
+					iconLeft = ctx.getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_volume_up);	
+				} else {
+					IconsCache cache = ctx.getMyApplication().getIconsCache();
+					if (group.getParentGroup() == null
+							|| group.getParentGroup().getType() == DownloadResourceGroupType.WORLD) {
+						iconLeft = cache.getContentIcon(R.drawable.ic_world_globe_dark);
+					} else {
+						DownloadResourceGroup ggr = group.getGroupById(DownloadResourceGroupType.REGION_MAPS
+								.getDefaultId());
+						iconLeft = cache.getContentIcon(R.drawable.ic_map);
+						if (ggr != null && ggr.getIndividualResources() != null) {
+							IndexItem item = null;
+							for (IndexItem ii : ggr.getIndividualResources()) {
+								if (ii.getType() == DownloadActivityType.NORMAL_FILE
+										|| ii.getType() == DownloadActivityType.ROADS_FILE) {
+									if (ii.isDownloaded() || ii.isOutdated()) {
+										item = ii;
+										break;
+									}
+								}
+							}
+							if (item != null) {
+								if (item.isOutdated()) {
+									iconLeft = cache.getIcon(R.drawable.ic_map,
+											ctx.getResources().getColor(R.color.color_distance));
+								} else {
+									iconLeft = cache.getIcon(R.drawable.ic_map,
+											ctx.getResources().getColor(R.color.color_ok));
+								}
+							}
+						}
+					}
+				}
 				viewHolder.textView.setCompoundDrawablesWithIntrinsicBounds(iconLeft, null, null, null);
-				viewHolder.textView.setText(item);
+				String name = group.getName();
+				WorldRegion region = group.getRegion();
+				if(region != null) {
+					name = region.getName();
+				}
+				viewHolder.textView.setText(name);
+
 			}
 
 			return convertView;
@@ -306,17 +263,14 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 			View v = convertView;
 			String section = getGroup(groupPosition);
 			if (v == null) {
-				LayoutInflater inflater = (LayoutInflater) getDownloadActivity()
-						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+				LayoutInflater inflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 				v = inflater.inflate(R.layout.download_item_list_section, parent, false);
 			}
 			TextView nameView = ((TextView) v.findViewById(R.id.section_name));
 			nameView.setText(section);
-
 			v.setOnClickListener(null);
-
 			TypedValue typedValue = new TypedValue();
-			Resources.Theme theme = getActivity().getTheme();
+			Resources.Theme theme = ctx.getTheme();
 			theme.resolveAttribute(R.attr.ctx_menu_info_view_bg, typedValue, true);
 			v.setBackgroundColor(typedValue.data);
 
@@ -325,18 +279,22 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 
 		@Override
 		public int getChildrenCount(int groupPosition) {
-			String section = sections.get(groupPosition);
-			return data.get(section).size();
+			return data.get(groupPosition).size();
 		}
 
 		@Override
 		public String getGroup(int groupPosition) {
-			return sections.get(groupPosition);
+			DownloadResourceGroup drg = data.get(groupPosition);
+			int rid = drg.getType().getResourceId();
+			if(rid != -1) {
+				return ctx.getString(rid);
+			}
+			return "";
 		}
 
 		@Override
 		public int getGroupCount() {
-			return sections.size();
+			return data.size();
 		}
 
 		@Override
@@ -354,4 +312,6 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 			return true;
 		}
 	}
+	
+	
 }

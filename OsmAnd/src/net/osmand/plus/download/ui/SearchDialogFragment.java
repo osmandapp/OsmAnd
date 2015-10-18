@@ -125,7 +125,7 @@ public class SearchDialogFragment extends DialogFragment {
 		return (DownloadActivity) getActivity();
 	}
 
-	public void onCategorizationFinished() {
+	public void newDownloadIndexes() {
 		Fragment f = getChildFragmentManager().findFragmentByTag(SearchItemsFragment.TAG);
 		if (f != null) {
 			((SearchItemsFragment) f).onCategorizationFinished();

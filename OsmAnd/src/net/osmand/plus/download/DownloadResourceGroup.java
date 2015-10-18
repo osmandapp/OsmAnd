@@ -1,5 +1,7 @@
 package net.osmand.plus.download;
 
+import android.annotation.SuppressLint;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -9,8 +11,10 @@ import java.util.List;
 import net.osmand.OsmAndCollator;
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.WorldRegion;
 
+@SuppressLint("DefaultLocale")
 public class DownloadResourceGroup {
 
 	private final DownloadResourceGroupType type;
@@ -21,17 +25,50 @@ public class DownloadResourceGroup {
 	protected final String id;
 
 	protected WorldRegion region;
-	public static final String REGION_MAPS_ID = "maps";
 
 	public enum DownloadResourceGroupType {
-//		return ctx.getResources().getString(R.string.index_name_voice);
-//		return ctx.getResources().getString(R.string.index_name_tts_voice);
-		WORLD, VOICE_REC, VOICE_TTS, WORLD_MAPS, REGION, REGION_MAPS
+		// headers
+		WORLD_MAPS(R.string.world_maps), REGION_MAPS(R.string.region_maps), VOICE_GROUP(R.string.voices), SUBREGIONS(
+				R.string.regions), VOICE_HEADER_REC(R.string.index_name_voice), VOICE_HEADER_TTS(
+				R.string.index_name_tts_voice),
+		// screen items
+		VOICE_REC(R.string.index_name_voice), VOICE_TTS(R.string.index_name_tts_voice), WORLD(-1), REGION(-1);
+
+		final int resId;
+
+		private DownloadResourceGroupType(int resId) {
+			this.resId = resId;
+		}
+
+		public boolean isScreen() {
+			return this == WORLD || this == REGION || this == VOICE_TTS || this == VOICE_REC;
+		}
+
+		public String getDefaultId() {
+			return name().toLowerCase();
+		}
+
+		public int getResourceId() {
+			return resId;
+		}
+
+		public boolean containsIndexItem() {
+			return isHeader() && this != SUBREGIONS;
+		}
+
+		public boolean isHeader() {
+			return this == VOICE_HEADER_REC || this == VOICE_HEADER_TTS || this == SUBREGIONS || this == WORLD_MAPS
+					|| this == REGION_MAPS || this == VOICE_GROUP;
+		}
 
 	}
+	
+	public DownloadResourceGroup(DownloadResourceGroup parentGroup, DownloadResourceGroupType type) {
+		this(parentGroup, type, type.getDefaultId());
+	}
 
-	public DownloadResourceGroup(DownloadResourceGroup parentGroup, DownloadResourceGroupType type, String id,
-			boolean flat) {
+	public DownloadResourceGroup(DownloadResourceGroup parentGroup, DownloadResourceGroupType type, String id) {
+		boolean flat = type.containsIndexItem();
 		if (flat) {
 			this.individualResources = new ArrayList<IndexItem>();
 			this.groups = null;
@@ -61,6 +98,16 @@ public class DownloadResourceGroup {
 	}
 	
 	public void addGroup(DownloadResourceGroup g) {
+		if(type.isScreen()) {
+			if(!g.type.isHeader()) {
+				throw new UnsupportedOperationException("Trying to add " + g.getUniqueId() + " to " + getUniqueId());
+			}
+		}
+		if(type.isHeader()) {
+			if(!g.type.isScreen()) {
+				throw new UnsupportedOperationException("Trying to add " + g.getUniqueId() + " to " + getUniqueId());
+			}
+		}
 		groups.add(g);
 		if (g.individualResources != null) {
 			final net.osmand.Collator collator = OsmAndCollator.primaryCollator();
@@ -88,16 +135,30 @@ public class DownloadResourceGroup {
 		return l == null || l.isEmpty();
 	}
 
-	public String getGroupId() {
-		return id;
-	}
-
-	public boolean flatGroup() {
-		return individualResources != null;
-	}
-
 	public DownloadResourceGroup getParentGroup() {
 		return parentGroup;
+	}
+	
+	public List<DownloadResourceGroup> getGroups() {
+		return groups;
+	}
+	
+	public int size() {
+		return groups != null ? groups.size() : individualResources.size();
+	}
+	
+	public DownloadResourceGroup getGroupByIndex(int ind) {
+		if(groups != null && ind < groups.size()) {
+			return groups.get(ind);
+		}
+		return null;
+	}
+	
+	public IndexItem getItemByIndex(int ind) {
+		if(individualResources != null && ind < individualResources.size()) {
+			return individualResources.get(ind);
+		}
+		return null;
 	}
 
 	public DownloadResources getRoot() {
@@ -117,6 +178,14 @@ public class DownloadResourceGroup {
 		String[] lst = uid.split("\\#");
 		return getGroupById(lst, 0);
 	}
+	
+	public List<IndexItem> getIndividualResources() {
+		return individualResources;
+	}
+	
+	public WorldRegion getRegion() {
+		return region;
+	}
 
 	private DownloadResourceGroup getGroupById(String[] lst, int subInd) {
 		if (lst.length > subInd && lst[subInd].equals(id)) {
@@ -132,6 +201,10 @@ public class DownloadResourceGroup {
 			}
 		}
 		return null;
+	}
+	
+	public String getName() {
+		return id;
 	}
 
 	public String getUniqueId() {

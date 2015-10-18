@@ -52,7 +52,6 @@ public class ActiveDownloadsDialogFragment extends DialogFragment {
 	public static class IndexItemAdapter extends ArrayAdapter<IndexItem> {
 		private final Drawable deleteDrawable;
 		private final DownloadActivity context;
-		private boolean isFinished;
 
 		public IndexItemAdapter(DownloadActivity context) {
 			super(context, R.layout.two_line_with_images_list_item, new ArrayList<IndexItem>());

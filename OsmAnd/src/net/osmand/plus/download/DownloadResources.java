@@ -28,7 +28,7 @@ public class DownloadResources extends DownloadResourceGroup {
 	
 	
 	public DownloadResources(OsmandApplication app) {
-		super(null, DownloadResourceGroupType.WORLD, "", false);
+		super(null, DownloadResourceGroupType.WORLD, "");
 		this.region = app.getWorldRegion();
 		this.app = app;
 	}
@@ -164,9 +164,18 @@ public class DownloadResources extends DownloadResourceGroup {
 	
 	protected boolean prepareData(List<IndexItem> resources) {
 		this.rawResources = resources;
-		DownloadResourceGroup voiceRec = new DownloadResourceGroup(this, DownloadResourceGroupType.VOICE_REC, "voice_rec", true);
-		DownloadResourceGroup voiceTTS = new DownloadResourceGroup(this, DownloadResourceGroupType.VOICE_TTS, "voice_tts", true);
-		DownloadResourceGroup worldMaps = new DownloadResourceGroup(this, DownloadResourceGroupType.WORLD_MAPS, "world", true);
+		
+		DownloadResourceGroup voiceGroup = new DownloadResourceGroup(this, DownloadResourceGroupType.VOICE_GROUP);
+		DownloadResourceGroup voiceScreenRec = new DownloadResourceGroup(this, DownloadResourceGroupType.VOICE_REC);
+		DownloadResourceGroup voiceRec = new DownloadResourceGroup(this, DownloadResourceGroupType.VOICE_HEADER_REC);
+		DownloadResourceGroup voiceTTS = new DownloadResourceGroup(this, DownloadResourceGroupType.VOICE_TTS);
+		DownloadResourceGroup voiceScreenTTS = new DownloadResourceGroup(this, DownloadResourceGroupType.VOICE_HEADER_TTS);
+		voiceScreenTTS.addGroup(voiceTTS);
+		voiceScreenRec.addGroup(voiceRec);
+		voiceGroup.addGroup(voiceScreenRec);
+		voiceGroup.addGroup(voiceScreenTTS);
+		
+		DownloadResourceGroup worldMaps = new DownloadResourceGroup(this, DownloadResourceGroupType.WORLD_MAPS);
 		Map<WorldRegion, List<IndexItem> > groupByRegion = new LinkedHashMap<WorldRegion, List<IndexItem>>();
 		
 		Map<String, WorldRegion> downloadIdForRegion = new LinkedHashMap<String, WorldRegion>();
@@ -195,19 +204,23 @@ public class DownloadResources extends DownloadResourceGroup {
 		}
 		LinkedList<WorldRegion> queue = new LinkedList<WorldRegion>();
 		LinkedList<DownloadResourceGroup> parent = new LinkedList<DownloadResourceGroup>();
+		DownloadResourceGroup worldSubregions = new DownloadResourceGroup(this, DownloadResourceGroupType.SUBREGIONS);
+		addGroup(worldSubregions);
 		for(WorldRegion rg : region.getSubregions()) {
 			queue.add(rg);
-			parent.add(this);
+			parent.add(worldSubregions);
 		}
 		while(!queue.isEmpty()) {
 			WorldRegion reg = queue.pollFirst();
 			DownloadResourceGroup parentGroup = parent.pollFirst();
 			List<WorldRegion> subregions = reg.getSubregions();
-			DownloadResourceGroup mainGrp = new DownloadResourceGroup(parentGroup, DownloadResourceGroupType.REGION, reg.getRegionId(), false);
+			DownloadResourceGroup mainGrp = new DownloadResourceGroup(parentGroup, DownloadResourceGroupType.REGION, reg.getRegionId());
 			parentGroup.addGroup(mainGrp);
+			DownloadResourceGroup subRegions = new DownloadResourceGroup(mainGrp, DownloadResourceGroupType.SUBREGIONS);
+			mainGrp.addGroup(subRegions);
 			List<IndexItem> list = groupByRegion.get(reg);
 			if(list != null) {
-				DownloadResourceGroup flatFiles = new DownloadResourceGroup(parentGroup, DownloadResourceGroupType.REGION_MAPS, REGION_MAPS_ID, true);
+				DownloadResourceGroup flatFiles = new DownloadResourceGroup(mainGrp, DownloadResourceGroupType.REGION_MAPS);
 				for(IndexItem ii : list) {
 					flatFiles.addItem(ii);
 				}
@@ -216,7 +229,7 @@ public class DownloadResources extends DownloadResourceGroup {
 			// add to processing queue
 			for(WorldRegion rg : subregions) {
 				queue.add(rg);
-				parent.add(mainGrp);
+				parent.add(subRegions);
 			}	
 		}
 		// Possible improvements
@@ -224,8 +237,8 @@ public class DownloadResources extends DownloadResourceGroup {
 		// 2. if there is no subregions and there only 1 index item it could be merged to the level up - objection there is no such maps
 		// 3. if hillshade/srtm is disabled, all maps from inner level could be combined into 1 
 		addGroup(worldMaps);
-		addGroup(voiceTTS);
-		addGroup(voiceRec);
+		addGroup(voiceGroup);
+		
 		trimEmptyGroups();
 		initAlreadyLoadedFiles();
 		return true;

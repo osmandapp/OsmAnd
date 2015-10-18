@@ -96,6 +96,11 @@ public class DownloadIndexesThread {
 
 	// PUBLIC API
 
+	
+	public DownloadResources getIndexes() {
+		return indexes;
+	}
+	
 	public List<IndexItem> getCurrentDownloadingItems() {
 		List<IndexItem> res = new ArrayList<IndexItem>();
 		IndexItem ii = currentDownloadingItem;

@@ -14,7 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class RegionDialogFragment extends DialogFragment {
+public class DownloadResourceGroupFragment extends DialogFragment {
 	public static final String TAG = "RegionDialogFragment";
 	private static final String REGION_ID_DLG_KEY = "world_region_dialog_key";
 	private String regionId;
@@ -90,15 +90,15 @@ public class RegionDialogFragment extends DialogFragment {
 	}
 
 	public void onRegionSelected(String regionId) {
-		final RegionDialogFragment regionDialogFragment = createInstance(regionId);
+		final DownloadResourceGroupFragment regionDialogFragment = createInstance(regionId);
 		regionDialogFragment.setOnDismissListener(listener);
 		getDownloadActivity().showDialog(getActivity(), regionDialogFragment);
 	}
 
-	public static RegionDialogFragment createInstance(String regionId) {
+	public static DownloadResourceGroupFragment createInstance(String regionId) {
 		Bundle bundle = new Bundle();
 		bundle.putString(REGION_ID_DLG_KEY, regionId);
-		RegionDialogFragment fragment = new RegionDialogFragment();
+		DownloadResourceGroupFragment fragment = new DownloadResourceGroupFragment();
 		fragment.setArguments(bundle);
 		return fragment;
 	}
