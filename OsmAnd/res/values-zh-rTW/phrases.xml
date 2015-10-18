@@ -227,7 +227,7 @@
 	<string name="poi_aeroway_gate">登機門</string>
 
 	<string name="poi_slipway">船舶斜滑道</string>
-	<string name="poi_ferry_terminal">輪渡碼頭</string>
+	<string name="poi_ferry_terminal">渡輪碼頭</string>
 	<string name="poi_lighthouse">燈塔</string>
 
 	<string name="poi_bicycle_rental">自行車租賃站</string>
@@ -1938,4 +1938,12 @@
 	<string name="poi_route_light_rail_ref">輕軌車</string>
 	<string name="poi_route_monorail_ref">單軌車</string>
 	<string name="poi_route_funicular_ref">纜索車</string>
+	<string name="poi_route_ferry_ref">渡輪</string>
+
+	<string name="poi_route_railway_ref">鐵路的路線</string>
+
+	<string name="poi_historic_yes">歷史物件</string>
+	<string name="poi_surveillance_yes">監視器：有</string>
+	<string name="poi_shop_yes">有商店</string>
+
 	</resources>
