@@ -56,8 +56,8 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 	}
 
 	
-	public void cancelDownload(IndexItem item) {
-		downloadListIndexThread.cancelDownload(item);
+	public DownloadIndexesThread getDownloadThread() {
+		return downloadListIndexThread;
 	}
 	
 	public void startDownload(IndexItem... items) {
@@ -204,7 +204,7 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				dialog.dismiss();
-				cancelDownload(item);
+				getDownloadThread().cancelDownload(item);
 			}
 		});
 		bld.setNegativeButton(R.string.shared_string_no, null);

@@ -103,14 +103,43 @@ public class DownloadIndexesThread {
 		return res;
 	}
 	
+	public boolean isDownloading(IndexItem item) {
+		if(item == currentDownloadingItem) {
+			return true;
+		}
+		for(IndexItem ii : indexItemDownloading) {
+			if (ii == item) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public int getCountedDownloads() {
+		int i = 0;
+		if(currentDownloadingItem != null && DownloadActivityType.isCountedInDownloads(currentDownloadingItem)) {
+			i++;
+		}
+		for(IndexItem ii : indexItemDownloading) {
+			if (DownloadActivityType.isCountedInDownloads(ii)) {
+				i++;
+			}
+		}
+		return i;
+	}
+	
+	
+	// FIXME
 	public List<IndexItem> getCachedIndexFiles() {
 		return indexes.indexFiles != null ? indexes.indexFiles.getIndexFiles() : null;
 	}
-
+	
+	// FIXME
 	public Map<String, String> getIndexFileNames() {
 		return indexFileNames;
 	}
-
+	
+	// FIXME
 	public Map<String, String> getIndexActivatedFileNames() {
 		return indexActivatedFileNames;
 	}
@@ -466,21 +495,6 @@ public class DownloadIndexesThread {
 		return file;
 	}
 
-
-
-	public int getCountedDownloads() {
-		int i = 0;
-		if(currentDownloadingItem != null && DownloadActivityType.isCountedInDownloads(currentDownloadingItem)) {
-			i++;
-		}
-		for(IndexItem ii : indexItemDownloading) {
-			if (DownloadActivityType.isCountedInDownloads(ii)) {
-				i++;
-			}
-		}
-		return i;
-	}
-	
 
 	public class ReloadIndexesTask extends BasicProgressAsyncTask<Void, Void, Void, DownloadIndexes> {
 

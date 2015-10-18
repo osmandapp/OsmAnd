@@ -51,9 +51,6 @@ public class ActiveDownloadsDialogFragment extends DialogFragment {
 	public static class IndexItemAdapter extends ArrayAdapter<IndexItem> {
 		private final Drawable deleteDrawable;
 		private final DownloadActivity context;
-		private int itemInProgressPosition = -1;
-		private int progress = -1;
-		private final Set<Integer> downloadedItems = new HashSet<>();
 		private boolean isFinished;
 
 		public IndexItemAdapter(DownloadActivity context) {
@@ -67,7 +64,7 @@ public class ActiveDownloadsDialogFragment extends DialogFragment {
 
 		public void updateData() {
 			clear();
-			addAll(BaseDownloadActivity.downloadListIndexThread.getCurrentDownloadingItems());
+			addAll(context.getDownloadThread().getCurrentDownloadingItems());
 		}
 
 		@Override
@@ -80,9 +77,11 @@ public class ActiveDownloadsDialogFragment extends DialogFragment {
 				convertView.setTag(viewHolder);
 			}
 			DownloadEntryViewHolder viewHolder = (DownloadEntryViewHolder) convertView.getTag();
-			int localProgress = itemInProgressPosition == position ? progress : -1;
-			viewHolder.bindDownloadEntry(getItem(position), localProgress,
-					isFinished || downloadedItems.contains(position));
+			IndexItem item = getItem(position);
+			IndexItem cdi = context.getDownloadThread().getCurrentDownloadingItem();
+			viewHolder.bindDownloadEntry(getItem(position), 
+					cdi == item ? context.getDownloadThread().getCurrentDownloadingItemProgress() : -1,
+					context.getDownloadThread().isDownloading(item));
 			return convertView;
 		}
 		
@@ -127,7 +126,7 @@ public class ActiveDownloadsDialogFragment extends DialogFragment {
 			rightImageButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					context.cancelDownload(item);
+					context.getDownloadThread().cancelDownload(item);
 					adapter.updateData();
 				}
 			});
