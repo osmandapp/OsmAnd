@@ -2084,7 +2084,7 @@
 	<string name="poi_crop_asparagus">Afgrøde: asparges</string>
 	<string name="poi_crop_flowers">Afgrøde: blomster</string>
 
-<string name="poi_escape_lane">Nødstopsspor</string>
+<string name="poi_escape_lane">Nødstopsrampe</string>
 
 	<string name="poi_surveillance_indoor">Overvågning: indendørs</string>
 	<string name="poi_surveillance_outdoor">Overvågning: udendørs</string>
@@ -2165,7 +2165,7 @@
 	<string name="poi_impromptu_no">Improviseret: nej</string>
 	<string name="poi_sanitary_dump_station_yes">Sanitære dump station: ja</string>
 	<string name="poi_sanitary_dump_station_no">Sanitære dump station: nej</string>
-	<string name="poi_sanitary_dump_station_customers">Sanitær dump station: kun kunder</string>
+	<string name="poi_sanitary_dump_station_customers">Sanitær dump station: kun for kunder</string>
 	<string name="poi_power_supply_yes">Strømforsyning: ja</string>
 	<string name="poi_power_supply_no">Strømforsyning: nej</string>
 	<string name="poi_power_supply_cee_17_blue">Strømforsyning (stik): CEE 17 blå</string>
