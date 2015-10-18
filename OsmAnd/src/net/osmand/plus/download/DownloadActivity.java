@@ -119,7 +119,7 @@ public class DownloadActivity extends BaseDownloadActivity implements DialogDism
 	protected void onResume() {
 		super.onResume();
 		getMyApplication().getAppCustomization().resumeActivity(DownloadActivity.class, this);
-		updateFragments();
+		updateProgress(false);
 	}
 
 
@@ -157,8 +157,22 @@ public class DownloadActivity extends BaseDownloadActivity implements DialogDism
 			final int countedDownloads = downloadListIndexThread.getCountedDownloads();
 			visibleBanner.updateProgress(countedDownloads, basicProgressAsyncTask);
 		}
-		if (!updateOnlyProgress) {
-			updateFragments();
+		if(activeDownloads != null) {
+			if(updateOnlyProgress) {
+				activeDownloads.notifyDataSetChanged();
+			} else {
+				activeDownloads.notifyDataSetInvalidated();
+			}
+		}
+		// FIXME
+		//((DownloadActivity) getActivity()).updateDescriptionTextWithSize(getView());
+		for (WeakReference<Fragment> ref : fragSet) {
+			Fragment f = ref.get();
+			notifyUpdateDataSetChanged(f);
+			if(f instanceof RegionItemsFragment) {
+				Fragment innerFragment = ((RegionItemsFragment)f).getChildFragmentManager().findFragmentById(R.id.fragmentContainer);
+				notifyUpdateDataSetChanged(innerFragment);
+			}
 		}
 	}
 
@@ -209,22 +223,6 @@ public class DownloadActivity extends BaseDownloadActivity implements DialogDism
 		this.activeDownloads = activeDownloads;
 	}
 	
-	@Override
-	public void updateFragments() {
-		if(activeDownloads != null) {
-			activeDownloads.refresh();
-		}
-		// FIXME
-		//((DownloadActivity) getActivity()).updateDescriptionTextWithSize(getView());
-		for (WeakReference<Fragment> ref : fragSet) {
-			Fragment f = ref.get();
-			notifyUpdateDataSetChanged(f);
-			if(f instanceof RegionItemsFragment) {
-				Fragment innerFragment = ((RegionItemsFragment)f).getChildFragmentManager().findFragmentById(R.id.fragmentContainer);
-				notifyUpdateDataSetChanged(innerFragment);
-			}
-		}
-	}
 
 
 	private void notifyUpdateDataSetChanged(Fragment f) {

@@ -6,24 +6,17 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.WorldRegion;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.activities.OsmandExpandableListFragment;
-import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
-import net.osmand.plus.download.DownloadEntry;
 import net.osmand.plus.download.IndexItem;
-
-import org.apache.commons.logging.Log;
-
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.res.Resources;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;

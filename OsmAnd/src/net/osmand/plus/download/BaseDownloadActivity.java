@@ -80,8 +80,6 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 	public void downloadedIndexes() {
 	}
 
-	public void updateFragments() {
-	}
 
 	public void downloadListUpdated() {
 	}
@@ -155,7 +153,7 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 	
 	private void downloadFileCheck_Final_Run(IndexItem[] items) {
 		downloadListIndexThread.runDownloadFiles(items);
-		updateFragments();
+		updateProgress(false);
 	}
 	
 	

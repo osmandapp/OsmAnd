@@ -34,8 +34,12 @@ public class ActiveDownloadsDialogFragment extends DialogFragment {
 		return builder.create();
 	}
 	
-	public void refresh() {
-		adapter.updateData();
+	public void notifyDataSetInvalidated() {
+		adapter.refreshAllData();
+	}
+	
+	public void notifyDataSetChanged() {
+		adapter.notifyDataSetChanged();
 	}
 	
 	public void onDetach() {
@@ -59,10 +63,10 @@ public class ActiveDownloadsDialogFragment extends DialogFragment {
 			deleteDrawable = context.getMyApplication().getIconsCache()
 					.getPaintedContentIcon(R.drawable.ic_action_remove_dark,
 							context.getResources().getColor(R.color.dash_search_icon_dark));
-			updateData();
+			refreshAllData();
 		}
 
-		public void updateData() {
+		public void refreshAllData() {
 			clear();
 			addAll(context.getDownloadThread().getCurrentDownloadingItems());
 		}
@@ -127,7 +131,7 @@ public class ActiveDownloadsDialogFragment extends DialogFragment {
 				@Override
 				public void onClick(View v) {
 					context.getDownloadThread().cancelDownload(item);
-					adapter.updateData();
+					adapter.refreshAllData();
 				}
 			});
 			progressBar.setIndeterminate(isIndeterminate);
