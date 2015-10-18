@@ -1,4 +1,4 @@
-package net.osmand.plus.download;
+package net.osmand.plus.download.ui;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -12,7 +12,9 @@ import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmAndListFragment;
-import net.osmand.plus.download.items.TwoLineWithImagesViewHolder;
+import net.osmand.plus.download.BaseDownloadActivity;
+import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.download.IndexItem;
 
 import org.apache.commons.logging.Log;
 

@@ -1,4 +1,4 @@
-package net.osmand.plus.download.items;
+package net.osmand.plus.download.ui;
 
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;

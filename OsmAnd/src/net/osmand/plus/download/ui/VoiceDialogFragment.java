@@ -1,4 +1,4 @@
-package net.osmand.plus.download.items;
+package net.osmand.plus.download.ui;
 
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -7,13 +7,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.download.items.ItemsListBuilder.VoicePromptsType;
+import net.osmand.plus.download.ui.ItemsListBuilder.VoicePromptsType;
 
 import org.apache.commons.logging.Log;
 

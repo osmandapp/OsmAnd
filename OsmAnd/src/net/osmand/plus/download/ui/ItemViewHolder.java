@@ -1,4 +1,4 @@
-package net.osmand.plus.download.items;
+package net.osmand.plus.download.ui;
 
 import android.content.Intent;
 import android.content.res.Resources;

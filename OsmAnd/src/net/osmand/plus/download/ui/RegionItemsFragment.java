@@ -1,4 +1,4 @@
-package net.osmand.plus.download.items;
+package net.osmand.plus.download.ui;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

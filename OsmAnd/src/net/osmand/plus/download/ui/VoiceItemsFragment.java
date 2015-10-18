@@ -1,4 +1,4 @@
-package net.osmand.plus.download.items;
+package net.osmand.plus.download.ui;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
-
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -19,7 +18,7 @@ import net.osmand.plus.activities.OsmandExpandableListFragment;
 import net.osmand.plus.download.BaseDownloadActivity;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.download.items.ItemsListBuilder.VoicePromptsType;
+import net.osmand.plus.download.ui.ItemsListBuilder.VoicePromptsType;
 
 import org.apache.commons.logging.Log;
 

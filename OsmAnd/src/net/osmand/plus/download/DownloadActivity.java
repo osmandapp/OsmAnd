@@ -20,10 +20,13 @@ import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.activities.OsmandExpandableListFragment;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.base.BasicProgressAsyncTask;
-import net.osmand.plus.download.items.DialogDismissListener;
-import net.osmand.plus.download.items.RegionItemsFragment;
-import net.osmand.plus.download.items.SearchDialogFragment;
-import net.osmand.plus.download.items.WorldItemsFragment;
+import net.osmand.plus.download.ui.ActiveDownloadsDialogFragment;
+import net.osmand.plus.download.ui.DialogDismissListener;
+import net.osmand.plus.download.ui.LocalIndexesFragment;
+import net.osmand.plus.download.ui.RegionItemsFragment;
+import net.osmand.plus.download.ui.SearchDialogFragment;
+import net.osmand.plus.download.ui.UpdatesIndexFragment;
+import net.osmand.plus.download.ui.WorldItemsFragment;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 

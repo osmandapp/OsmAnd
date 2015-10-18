@@ -1,4 +1,4 @@
-package net.osmand.plus.download.items;
+package net.osmand.plus.download.ui;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -14,7 +14,7 @@ import net.osmand.plus.activities.OsmandExpandableListFragment;
 import net.osmand.plus.download.BaseDownloadActivity;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.download.items.ItemsListBuilder.VoicePromptsType;
+import net.osmand.plus.download.ui.ItemsListBuilder.VoicePromptsType;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;

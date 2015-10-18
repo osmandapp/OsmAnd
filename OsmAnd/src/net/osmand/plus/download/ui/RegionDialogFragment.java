@@ -1,4 +1,4 @@
-package net.osmand.plus.download.items;
+package net.osmand.plus.download.ui;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;

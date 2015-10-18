@@ -26,11 +26,11 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.WorldRegion;
 import net.osmand.plus.download.DownloadOsmandIndexesHelper.AssetIndexItem;
-import net.osmand.plus.download.items.DownloadIndexes;
-import net.osmand.plus.download.items.ItemsListBuilder;
-import net.osmand.plus.download.items.ResourceItem;
-import net.osmand.plus.download.items.ResourceItemComparator;
-import net.osmand.plus.download.items.ItemsListBuilder.VoicePromptsType;
+import net.osmand.plus.download.ui.DownloadIndexes;
+import net.osmand.plus.download.ui.ItemsListBuilder;
+import net.osmand.plus.download.ui.ResourceItem;
+import net.osmand.plus.download.ui.ResourceItemComparator;
+import net.osmand.plus.download.ui.ItemsListBuilder.VoicePromptsType;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.util.Algorithms;
 
