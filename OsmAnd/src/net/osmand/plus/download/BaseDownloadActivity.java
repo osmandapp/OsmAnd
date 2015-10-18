@@ -3,8 +3,6 @@ package net.osmand.plus.download;
 import java.lang.ref.WeakReference;
 import java.text.MessageFormat;
 import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Set;
 
 import net.osmand.access.AccessibleToast;
@@ -12,9 +10,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
-import net.osmand.plus.WorldRegion;
 import net.osmand.plus.activities.ActionBarProgressActivity;
-import net.osmand.plus.download.items.ItemsListBuilder;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
@@ -30,7 +26,7 @@ import android.widget.Toast;
 
 public class BaseDownloadActivity extends ActionBarProgressActivity {
 	protected OsmandSettings settings;
-	public static DownloadIndexesThread downloadListIndexThread;
+	private static DownloadIndexesThread downloadListIndexThread;
 	protected Set<WeakReference<Fragment>> fragSet = new HashSet<>();
 	public static final int MAXIMUM_AVAILABLE_FREE_DOWNLOADS = 10;
 
@@ -65,61 +61,22 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 	}
 
 
-	// FIXME
-	public void onCategorizationFinished() {
+	@UiThread
+	public void downloadInProgress() {
 	}
 
 	@UiThread
-	public void updateDownloadList() {
+	public void downloadHasFinished() {
 	}
-
+	
 	@UiThread
-	public void updateProgress(boolean updateOnlyProgress) {
+	public void newDownloadIndexes() {
 	}
-
-	public void downloadedIndexes() {
-	}
-
-
-	public void downloadListUpdated() {
-	}
-	/////// FIXME	
-
+	
 
 	public OsmandApplication getMyApplication() {
 		return (OsmandApplication) getApplication();
 	}
-
-	public ItemsListBuilder getItemsBuilder() {
-		return getItemsBuilder("", false);
-	}
-
-	public ItemsListBuilder getVoicePromptsBuilder() {
-		return getItemsBuilder("", true);
-	}
-
-	public ItemsListBuilder getItemsBuilder(String regionId, boolean voicePromptsOnly) {
-		if (downloadListIndexThread.getResourcesByRegions().size() > 0) {
-			ItemsListBuilder builder = new ItemsListBuilder(getMyApplication(), regionId, downloadListIndexThread.getResourcesByRegions(),
-					downloadListIndexThread.getVoiceRecItems(), downloadListIndexThread.getVoiceTTSItems());
-			if (!voicePromptsOnly) {
-				return builder.build();
-			} else {
-				return builder;
-			}
-		} else {
-			return null;
-		}
-	}
-
-	public List<IndexItem> getIndexItemsByRegion(WorldRegion region) {
-		if (downloadListIndexThread.getResourcesByRegions().size() > 0) {
-			return new LinkedList<>(downloadListIndexThread.getResourcesByRegions().get(region).values());
-		} else {
-			return new LinkedList<>();
-		}
-	}
-
 
 	public void downloadFilesCheck_3_ValidateSpace(final IndexItem... items) {
 		long szLong = 0;
@@ -153,7 +110,7 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 	
 	private void downloadFileCheck_Final_Run(IndexItem[] items) {
 		downloadListIndexThread.runDownloadFiles(items);
-		updateProgress(false);
+		downloadInProgress();
 	}
 	
 	

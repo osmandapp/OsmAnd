@@ -39,10 +39,7 @@ public class WorldRegion {
 	private List<WorldRegion> subregions;
 	private List<WorldRegion> flattenedSubregions;
 
-	private boolean purchased;
-	private boolean isInPurchasedArea;
 
-	private MapState mapState = MapState.NOT_DOWNLOADED;
 
 	public String getRegionId() {
 		return regionId;
@@ -74,32 +71,6 @@ public class WorldRegion {
 
 	public List<WorldRegion> getFlattenedSubregions() {
 		return flattenedSubregions;
-	}
-
-	public boolean isPurchased() {
-		return purchased;
-	}
-
-	public boolean isInPurchasedArea() {
-		return isInPurchasedArea;
-	}
-
-	public MapState getMapState() {
-		return mapState;
-	}
-
-	public void processNewMapState(MapState mapState) {
-		switch (this.mapState) {
-			case NOT_DOWNLOADED:
-				this.mapState = mapState;
-				break;
-			case DOWNLOADED:
-				if (mapState == MapState.OUTDATED)
-					this.mapState = mapState;
-				break;
-			case OUTDATED:
-				break;
-		}
 	}
 
 	@Override
@@ -315,9 +286,5 @@ public class WorldRegion {
 		return null;
 	}
 
-	public enum MapState {
-		NOT_DOWNLOADED,
-		DOWNLOADED,
-		OUTDATED
-	}
+	
 }

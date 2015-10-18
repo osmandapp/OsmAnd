@@ -1,11 +1,13 @@
 package net.osmand.plus.download;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,9 +34,81 @@ import android.content.res.AssetManager;
 public class DownloadOsmandIndexesHelper {
 	private final static Log log = PlatformUtil.getLog(DownloadOsmandIndexesHelper.class);
 	
+	public static class IndexFileList implements Serializable {
+		private static final long serialVersionUID = 1L;
+
+		private boolean downloadedFromInternet = false;
+		IndexItem basemap;
+		ArrayList<IndexItem> indexFiles = new ArrayList<IndexItem>();
+		private String mapversion;
+		
+		private Comparator<IndexItem> comparator = new Comparator<IndexItem>(){
+			@Override
+			public int compare(IndexItem o1, IndexItem o2) {
+				String object1 = o1.getFileName();
+				String object2 = o2.getFileName();
+				if(object1.endsWith(IndexConstants.ANYVOICE_INDEX_EXT_ZIP)){
+					if(object2.endsWith(IndexConstants.ANYVOICE_INDEX_EXT_ZIP)){
+						return object1.compareTo(object2);
+					} else {
+						return -1;
+					}
+				} else if(object2.endsWith(IndexConstants.ANYVOICE_INDEX_EXT_ZIP)){
+					return 1;
+				}
+				return object1.compareTo(object2);
+			}
+		};
+		
+		public void setDownloadedFromInternet(boolean downloadedFromInternet) {
+			this.downloadedFromInternet = downloadedFromInternet;
+		}
+		
+		public boolean isDownloadedFromInternet() {
+			return downloadedFromInternet;
+		}
+
+		public void setMapVersion(String mapversion) {
+			this.mapversion = mapversion;
+		}
+
+		public void add(IndexItem indexItem) {
+			indexFiles.add(indexItem);
+			if(indexItem.getFileName().toLowerCase().startsWith("world_basemap")) {
+				basemap = indexItem;
+			}
+		}
+		
+		public void sort(){
+			Collections.sort(indexFiles, comparator);
+		}
+
+		public boolean isAcceptable() {
+			return (indexFiles != null && !indexFiles.isEmpty()) || (mapversion != null);
+		}
+
+		public List<IndexItem> getIndexFiles() {
+			return indexFiles;
+		}
+		
+		public IndexItem getBasemap() {
+			return basemap;
+		}
+
+		public boolean isIncreasedMapVersion() {
+			try {
+				int mapVersionInList = Integer.parseInt(mapversion);
+				return IndexConstants.BINARY_MAP_VERSION < mapVersionInList;
+			} catch (NumberFormatException e) {
+				//ignore this...
+			}
+			return false;
+		}
+
+	}	
 
 	public static IndexFileList getIndexesList(Context ctx) {
-		PackageManager pm =ctx.getPackageManager();
+		PackageManager pm = ctx.getPackageManager();
 		AssetManager amanager = ctx.getAssets();
 		IndexFileList result = downloadIndexesListFromInternet((OsmandApplication) ctx.getApplicationContext());
 		if (result == null) {
@@ -42,7 +116,7 @@ public class DownloadOsmandIndexesHelper {
 		} else {
 			result.setDownloadedFromInternet(true);
 		}
-		//add all tts files from assets
+		// add all tts files from assets
 		listVoiceAssets(result, amanager, pm, ((OsmandApplication) ctx.getApplicationContext()).getSettings());
 		return result;
 	}

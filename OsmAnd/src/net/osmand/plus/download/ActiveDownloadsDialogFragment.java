@@ -1,13 +1,9 @@
-package net.osmand.plus.download.items;
+package net.osmand.plus.download;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 
 import net.osmand.plus.R;
-import net.osmand.plus.download.BaseDownloadActivity;
-import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.download.items.TwoLineWithImagesViewHolder;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.graphics.drawable.Drawable;

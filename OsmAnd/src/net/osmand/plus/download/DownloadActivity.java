@@ -20,7 +20,6 @@ import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.activities.OsmandExpandableListFragment;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.base.BasicProgressAsyncTask;
-import net.osmand.plus.download.items.ActiveDownloadsDialogFragment;
 import net.osmand.plus.download.items.DialogDismissListener;
 import net.osmand.plus.download.items.RegionItemsFragment;
 import net.osmand.plus.download.items.SearchDialogFragment;
@@ -36,6 +35,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StatFs;
+import android.support.annotation.UiThread;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -71,8 +71,8 @@ public class DownloadActivity extends BaseDownloadActivity implements DialogDism
 	protected void onCreate(Bundle savedInstanceState) {
 		getMyApplication().applyTheme(this);
 		super.onCreate(savedInstanceState);
-		if (downloadListIndexThread.getCachedIndexFiles() == null || !downloadListIndexThread.isDownloadedFromInternet()) {
-			downloadListIndexThread.runReloadIndexFiles();
+		if (!getDownloadThread().isDownloadedFromInternet()) {
+			getDownloadThread().runReloadIndexFiles();
 		}
 		
 		setContentView(R.layout.download);
@@ -111,15 +111,11 @@ public class DownloadActivity extends BaseDownloadActivity implements DialogDism
 	}
 
 
-	public Map<String, String> getIndexActivatedFileNames() {
-		return downloadListIndexThread != null ? downloadListIndexThread.getIndexActivatedFileNames() : null;
-	}
-
 	@Override
 	protected void onResume() {
 		super.onResume();
 		getMyApplication().getAppCustomization().resumeActivity(DownloadActivity.class, this);
-		updateProgress(false);
+		downloadInProgress();
 	}
 
 
@@ -148,24 +144,39 @@ public class DownloadActivity extends BaseDownloadActivity implements DialogDism
 		super.onPause();
 		getMyApplication().getAppCustomization().pauseActivity(DownloadActivity.class);
 	}
-
+	
 	@Override
-	public void updateProgress(boolean updateOnlyProgress) {
-		BasicProgressAsyncTask<?, ?, ?, ?> basicProgressAsyncTask =
-				downloadListIndexThread.getCurrentRunningTask();
-		if (visibleBanner != null) {
-			final int countedDownloads = downloadListIndexThread.getCountedDownloads();
-			visibleBanner.updateProgress(countedDownloads, basicProgressAsyncTask);
-		}
+	@UiThread
+	public void downloadHasFinished() {
+		
+		updateBannerInProgress();
 		if(activeDownloads != null) {
-			if(updateOnlyProgress) {
-				activeDownloads.notifyDataSetChanged();
-			} else {
-				activeDownloads.notifyDataSetInvalidated();
-			}
+			activeDownloads.notifyDataSetInvalidated();
 		}
 		// FIXME
 		//((DownloadActivity) getActivity()).updateDescriptionTextWithSize(getView());
+		for (WeakReference<Fragment> ref : fragSet) {
+			Fragment f = ref.get();
+			notifyUpdateDataSetChanged(f);
+			if (f instanceof UpdatesIndexFragment) {
+				if (f.isAdded()) {
+					((UpdatesIndexFragment) f).updateItemsList();
+				}
+			} else if(f instanceof RegionItemsFragment) {
+				Fragment innerFragment = ((RegionItemsFragment)f).getChildFragmentManager().findFragmentById(R.id.fragmentContainer);
+				notifyUpdateDataSetChanged(innerFragment);
+				
+			}
+		}
+	}
+	
+	@Override
+	@UiThread
+	public void downloadInProgress() {
+		updateBannerInProgress();
+		if(activeDownloads != null) {
+			activeDownloads.notifyDataSetChanged();
+		}
 		for (WeakReference<Fragment> ref : fragSet) {
 			Fragment f = ref.get();
 			notifyUpdateDataSetChanged(f);
@@ -176,20 +187,18 @@ public class DownloadActivity extends BaseDownloadActivity implements DialogDism
 		}
 	}
 
-	@Override
-	public void updateDownloadList() {
-		for (WeakReference<Fragment> ref : fragSet) {
-			Fragment f = ref.get();
-			if (f instanceof UpdatesIndexFragment) {
-				if (f.isAdded()) {
-					((UpdatesIndexFragment) f).updateItemsList();
-				}
-			}
+
+	private void updateBannerInProgress() {
+		BasicProgressAsyncTask<?, ?, ?, ?> basicProgressAsyncTask = getDownloadThread().getCurrentRunningTask();
+		if (visibleBanner != null) {
+			final int countedDownloads = getDownloadThread().getCountedDownloads();
+			visibleBanner.updateProgress(countedDownloads, basicProgressAsyncTask);
 		}
 	}
-
+	
 	@Override
-	public void onCategorizationFinished() {
+	@UiThread
+	public void newDownloadIndexes() {
 		for (WeakReference<Fragment> ref : fragSet) {
 			Fragment f = ref.get();
 			if (f instanceof WorldItemsFragment) {
@@ -200,31 +209,19 @@ public class DownloadActivity extends BaseDownloadActivity implements DialogDism
 				if (f.isAdded()) {
 					((SearchDialogFragment) f).onCategorizationFinished();
 				}
-			}
-		}
-	}
-
-
-	@Override
-	public void downloadedIndexes() {
-		for (WeakReference<Fragment> ref : fragSet) {
-			Fragment f = ref.get();
-			if (f instanceof LocalIndexesFragment) {
+			} else if (f instanceof LocalIndexesFragment) {
 				if (f.isAdded()) {
 					((LocalIndexesFragment) f).reloadData();
 				}
 			}
 		}
+		downloadHasFinished();
 	}
-
-
 	
 	public void setActiveDownloads(ActiveDownloadsDialogFragment activeDownloads) {
 		this.activeDownloads = activeDownloads;
 	}
 	
-
-
 	private void notifyUpdateDataSetChanged(Fragment f) {
 		if (f != null && f.isAdded()) {
 			if(f instanceof OsmandExpandableListFragment) {
@@ -247,18 +244,10 @@ public class DownloadActivity extends BaseDownloadActivity implements DialogDism
 		return ((OsmandApplication) getApplication()).getSettings().isLightActionBar();
 	}
 
-	public Map<String, String> getIndexFileNames() {
-		return downloadListIndexThread != null ? downloadListIndexThread.getIndexFileNames() : null;
-	}
-
-	public List<IndexItem> getIndexFiles() {
-		return downloadListIndexThread != null ? downloadListIndexThread.getCachedIndexFiles() : null;
-	}
-
 
 	public void registerFreeVersionBanner(View view) {
 		visibleBanner = new BannerAndDownloadFreeVersion(view, this);
-		updateProgress(true);
+		updateBannerInProgress();
 	}
 
 

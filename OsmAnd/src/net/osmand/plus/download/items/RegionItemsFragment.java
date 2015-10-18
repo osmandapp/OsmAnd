@@ -103,7 +103,6 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 					}
 				}
 				getMyActivity().startDownload(indexItem);
-
 				return true;
 			}
 		}
@@ -163,7 +162,6 @@ public class RegionItemsFragment extends OsmandExpandableListFragment {
 		private int groupInProgressPosition = -1;
 		private int childInProgressPosition = -1;
 		private int progress = -1;
-		private boolean isFinished;
 
 		public RegionsItemsAdapter() {
 		}
