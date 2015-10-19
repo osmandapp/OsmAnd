@@ -322,8 +322,8 @@ public class DownloadIndexesThread {
 				if (o instanceof IndexItem) {
 					IndexItem item = (IndexItem) o;
 					String name = item.getBasename();
-					item.setDownloaded(true);
 					long count = dbHelper.getCount(name, DatabaseHelper.DOWNLOAD_ENTRY) + 1;
+					item.setDownloaded(true);
 					DatabaseHelper.HistoryDownloadEntry entry = new DatabaseHelper.HistoryDownloadEntry(name, count);
 					if (count == 1) {
 						dbHelper.add(entry, DatabaseHelper.DOWNLOAD_ENTRY);
@@ -370,8 +370,8 @@ public class DownloadIndexesThread {
 				}
 			}
 			currentRunningTask.remove(this);
-			downloadHasFinished();
 			indexes.updateFilesToUpdate();
+			downloadHasFinished();
 		}
 
 		
