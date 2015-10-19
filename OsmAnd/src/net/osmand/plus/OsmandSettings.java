@@ -1877,7 +1877,9 @@ public class OsmandSettings {
 	
 	
 
-	public final OsmandPreference<Integer> NUMBER_OF_FREE_DOWNLOADS = new IntPreference("free_downloads_v2", 0).makeGlobal();
+//	public final OsmandPreference<Integer> NUMBER_OF_FREE_DOWNLOADS_V2 = new IntPreference("free_downloads_v2", 0).makeGlobal();
+	
+	public final OsmandPreference<Integer> NUMBER_OF_FREE_DOWNLOADS = new IntPreference("free_downloads_v3", 0).makeGlobal();
 
 	// For DashRateUsFragment
 	public final OsmandPreference<Long> LAST_DISPLAY_TIME =
@@ -1890,13 +1892,6 @@ public class OsmandSettings {
                     .makeGlobal()
                     .cache();
 
-	public boolean checkFreeDownloadsNumberZero(){
-		if(!settingsAPI.contains(globalPreferences,NUMBER_OF_FREE_DOWNLOADS.getId())){
-			NUMBER_OF_FREE_DOWNLOADS.set(0);
-			return true;
-		}
-		return false;
-	}
 	
 	public enum DayNightMode {
 		AUTO(R.string.daynight_mode_auto), 

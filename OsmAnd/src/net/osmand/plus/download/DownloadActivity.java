@@ -256,12 +256,6 @@ public class DownloadActivity extends BaseDownloadActivity {
 		
 		public void updateBannerInProgress() {
 			BasicProgressAsyncTask<?, ?, ?, ?> basicProgressAsyncTask = ctx.getDownloadThread().getCurrentRunningTask();
-			final int countedDownloads = ctx.getDownloadThread().getCountedDownloads();
-			updateProgress(countedDownloads, basicProgressAsyncTask);
-		} 
-
-		private void updateProgress(int countedDownloads,
-								   BasicProgressAsyncTask<?, ?, ?, ?> basicProgressAsyncTask) {
 			final boolean isFinished = basicProgressAsyncTask == null
 					|| basicProgressAsyncTask.getStatus() == AsyncTask.Status.FINISHED;
 			if (isFinished) {
@@ -272,7 +266,8 @@ public class DownloadActivity extends BaseDownloadActivity {
 				String message = basicProgressAsyncTask.getDescription();
 				int percent = basicProgressAsyncTask.getProgressPercentage();
 				setMinimizedFreeVersionBanner(true);
-				updateAvailableDownloads(countedDownloads);
+				
+				updateAvailableDownloads();
 				downloadProgressLayout.setVisibility(View.VISIBLE);
 				progressBar.setIndeterminate(indeterminate);
 				if (indeterminate) {
@@ -330,7 +325,8 @@ public class DownloadActivity extends BaseDownloadActivity {
 					buttonsLinearLayout, freeVersionBannerTitle));
 		}
 
-		private void updateAvailableDownloads(int activeTasks) {
+		private void updateAvailableDownloads() {
+			int activeTasks = ctx.getDownloadThread().getCountedDownloads();
 			OsmandSettings settings = application.getSettings();
 			final Integer mapsDownloaded = settings.NUMBER_OF_FREE_DOWNLOADS.get() + activeTasks;
 			downloadsLeftProgressBar.setProgress(mapsDownloaded);
