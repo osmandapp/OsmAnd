@@ -267,7 +267,7 @@ public class DownloadResources extends DownloadResourceGroup {
 		// 3. if hillshade/srtm is disabled, all maps from inner level could be combined into 1 
 		addGroup(worldMaps);
 		addGroup(voiceGroup);
-		
+		createHillshadeSRTMGroups();
 		trimEmptyGroups();
 		initAlreadyLoadedFiles();
 		return true;

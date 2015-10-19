@@ -46,9 +46,11 @@ public class ItemViewHolder {
 	private int textColorSecondary;
 	
 	boolean showTypeInDesc;
+	boolean showTypeInName;
 	boolean showRemoteDate;
 	boolean silentCancelDownload;
 	boolean showProgressInDesc;
+	
 	private DateFormat dateFormat;
 
 	
@@ -96,6 +98,10 @@ public class ItemViewHolder {
 	public void setShowTypeInDesc(boolean showTypeInDesc) {
 		this.showTypeInDesc = showTypeInDesc;
 	}
+	
+	public void setShowTypeInName(boolean showTypeInName) {
+		this.showTypeInName = showTypeInName;
+	}
 
 
 	// FIXME don't initialize on every row 
@@ -116,7 +122,11 @@ public class ItemViewHolder {
 		}
 		boolean disabled = checkDisabledAndClickAction(indexItem);
 		/// name and left item
-		nameTextView.setText(indexItem.getVisibleName(context, context.getMyApplication().getRegions(), false));
+		if(showTypeInName) {
+			nameTextView.setText(indexItem.getType().getString(context));
+		} else {
+			nameTextView.setText(indexItem.getVisibleName(context, context.getMyApplication().getRegions(), false));
+		}
 		if(!disabled) {
 			nameTextView.setTextColor(textColorPrimary);
 		} else {
@@ -143,7 +153,11 @@ public class ItemViewHolder {
 			descrTextView.setVisibility(View.VISIBLE);
 			if ((indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE ||
 					indexItem.getType() == DownloadActivityType.HILLSHADE_FILE) && srtmDisabled) {
-				descrTextView.setText(indexItem.getType().getString(context));
+				if(showTypeInName) {
+					descrTextView.setText("");
+				} else {
+					descrTextView.setText(indexItem.getType().getString(context));
+				}
 			} else if (showTypeInDesc) {
 				descrTextView.setText(indexItem.getType().getString(context) + 
 						" • " + indexItem.getSizeDescription(context) +

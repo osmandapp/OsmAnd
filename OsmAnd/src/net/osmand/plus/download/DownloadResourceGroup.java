@@ -29,9 +29,12 @@ public class DownloadResourceGroup {
 
 	public enum DownloadResourceGroupType {
 		// headers
-		WORLD_MAPS(R.string.world_maps), REGION_MAPS(R.string.region_maps), VOICE_GROUP(R.string.voices), SUBREGIONS(
-				R.string.regions), VOICE_HEADER_REC(R.string.index_name_voice), VOICE_HEADER_TTS(
-				R.string.index_name_tts_voice),
+		WORLD_MAPS(R.string.world_maps), REGION_MAPS(R.string.region_maps),
+		SRTM_HEADER(R.string.download_srtm_maps), HILLSHADE_HEADER(R.string.download_hillshade_maps),
+		// headers with voice items
+		VOICE_HEADER_REC(R.string.index_name_voice), VOICE_HEADER_TTS(R.string.index_name_tts_voice),
+		// headers with resources
+		VOICE_GROUP(R.string.voices), SUBREGIONS(R.string.regions), 
 		// screen items
 		VOICE_REC(R.string.index_name_voice), VOICE_TTS(R.string.index_name_tts_voice), WORLD(-1), REGION(-1);
 
@@ -59,7 +62,7 @@ public class DownloadResourceGroup {
 
 		public boolean isHeader() {
 			return this == VOICE_HEADER_REC || this == VOICE_HEADER_TTS || this == SUBREGIONS || this == WORLD_MAPS
-					|| this == REGION_MAPS || this == VOICE_GROUP;
+					|| this == REGION_MAPS || this == VOICE_GROUP || this == HILLSHADE_HEADER || this == SRTM_HEADER;
 		}
 
 	}
@@ -96,6 +99,42 @@ public class DownloadResourceGroup {
 			}
 		}
 		
+	}
+	
+	public void createHillshadeSRTMGroups() {
+		if(getType().isScreen()) {
+			DownloadResourceGroup regionMaps = getSubGroupById(DownloadResourceGroupType.REGION_MAPS.getDefaultId());
+			if(regionMaps != null && regionMaps.size() == 1 && parentGroup != null && parentGroup.getParentGroup() != null) {
+				IndexItem item = regionMaps.individualResources.get(0);
+				DownloadResourceGroup screenParent = parentGroup.getParentGroup();
+				if(item.getType() == DownloadActivityType.HILLSHADE_FILE) {
+					DownloadResourceGroup hillshades = 
+							screenParent.getSubGroupById(DownloadResourceGroupType.HILLSHADE_HEADER.getDefaultId());
+					if(hillshades == null) {
+						hillshades = new DownloadResourceGroup(screenParent, DownloadResourceGroupType.HILLSHADE_HEADER);
+						screenParent.addGroup(hillshades);
+					}
+					hillshades.addItem(item);
+					regionMaps.individualResources.remove(0);
+				} else if (item.getType() == DownloadActivityType.SRTM_COUNTRY_FILE) {
+					DownloadResourceGroup hillshades = screenParent
+							.getSubGroupById(DownloadResourceGroupType.SRTM_HEADER.getDefaultId());
+					if (hillshades == null) {
+						hillshades = new DownloadResourceGroup(screenParent, DownloadResourceGroupType.SRTM_HEADER);
+						screenParent.addGroup(hillshades);
+					}
+					hillshades.addItem(item);
+					regionMaps.individualResources.remove(0);
+				}
+				
+			}
+			DownloadResourceGroup subregs = getSubGroupById(DownloadResourceGroupType.SUBREGIONS.getDefaultId());
+			if(subregs != null) {
+				for(DownloadResourceGroup g : subregs.getGroups()) {
+					g.createHillshadeSRTMGroups();
+				}
+			}
+		}
 	}
 	
 	public void addGroup(DownloadResourceGroup g) {

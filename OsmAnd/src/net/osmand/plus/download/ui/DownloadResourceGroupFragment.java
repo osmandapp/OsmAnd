@@ -324,6 +324,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 
 		private List<DownloadResourceGroup> data = new ArrayList<DownloadResourceGroup>();
 		private DownloadActivity ctx;
+		private DownloadResourceGroup mainGroup;
 
 		
 
@@ -333,12 +334,8 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 			ta.recycle();
 		}
 
-		public void clear() {
-			data.clear();
-			notifyDataSetChanged();
-		}
-
 		public void update(DownloadResourceGroup mainGroup) {
+			this.mainGroup = mainGroup;
 			data = mainGroup.getGroups();
 			notifyDataSetChanged();
 		}
@@ -362,7 +359,9 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 				View convertView, ViewGroup parent) {
 			final Object child = getChild(groupPosition, childPosition);
 			if (child instanceof IndexItem) {
+				
 				IndexItem item = (IndexItem) child;
+				DownloadResourceGroup group = getGroupObj(groupPosition);
 				ItemViewHolder viewHolder;
 				if (convertView != null && convertView.getTag() instanceof ItemViewHolder) {
 					viewHolder = (ItemViewHolder) convertView.getTag();
@@ -371,8 +370,18 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 							R.layout.two_line_with_images_list_item, parent, false);
 					viewHolder = new ItemViewHolder(convertView, ctx);
 					viewHolder.setShowRemoteDate(true);
-					viewHolder.setShowTypeInDesc(true);
 					convertView.setTag(viewHolder);
+				}
+				if(mainGroup.getType() == DownloadResourceGroupType.REGION && 
+						group != null && group.getType() == DownloadResourceGroupType.REGION_MAPS) {
+					viewHolder.setShowTypeInName(true);
+					viewHolder.setShowTypeInDesc(false);
+				} else if(group != null && (group.getType() == DownloadResourceGroupType.SRTM_HEADER || 
+						group.getType() == DownloadResourceGroupType.HILLSHADE_HEADER)) {
+					viewHolder.setShowTypeInName(false);
+					viewHolder.setShowTypeInDesc(false);
+				} else {
+					viewHolder.setShowTypeInDesc(true);
 				}
 				viewHolder.bindIndexItem(item);
 			} else {
