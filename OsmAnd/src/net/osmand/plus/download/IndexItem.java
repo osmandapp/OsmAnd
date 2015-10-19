@@ -132,16 +132,19 @@ public class IndexItem implements Comparable<IndexItem> {
 
 	
 	public boolean isOutdated() {
-		FIXME;
+		//FIXME;
+		return false;
 	}
 	
 	public String getLocalDate() {
-		FIXME;
+		//FIXME;
+		return "FIXME";
 	}
 	
 	
 	public boolean isDownloaded() {
 //		return listAlreadyDownloaded.containsKey(getTargetFileName());
+		/*
 		Map<String,String> indexFileNames = context.getIndexFileNames();
 		if (indexFileNames != null && indexItem.isAlreadyDownloaded(indexFileNames)) {
 			boolean outdated = false;
@@ -155,6 +158,8 @@ public class IndexItem implements Comparable<IndexItem> {
 				date = updatableResource ? indexActivatedFileNames.get(sfName) : indexFileNames.get(sfName);
 				outdated = DownloadActivity.downloadListIndexThread.checkIfItemOutdated(indexItem);
 			}
+			*/
+		return false; // FIXME
 	}
 
 	public String getVisibleName(Context ctx, OsmandRegions osmandRegions) {

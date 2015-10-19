@@ -16,12 +16,12 @@ import net.osmand.plus.R;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 
-public class SearchDialogFragment extends DialogFragment implements DownloadEvents {
+public class SearchDialogFragment { /*extends DialogFragment implements DownloadEvents {
 
 	public static final String TAG = "SearchDialogFragment";
 	private static final String SEARCH_TEXT_DLG_KEY = "search_text_dlg_key";
 	private String searchText;
-	SearchView search;
+	private SearchView search;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -139,4 +139,5 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 		fragment.setArguments(bundle);
 		return fragment;
 	}
+	*/
 }

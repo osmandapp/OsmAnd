@@ -74,7 +74,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		if (savedInstanceState != null) {
 			groupId = savedInstanceState.getString(REGION_ID_DLG_KEY);
 		}
-		if (groupId == null) {
+		if (groupId == null && getArguments() != null) {
 			groupId = getArguments().getString(REGION_ID_DLG_KEY);
 		}
 		if (groupId == null) {
@@ -112,9 +112,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		group = indexes.getGroupById(groupId);
 		if (group != null) {
 			listAdapter.update(group);
-			if (group.getRegion() != null) {
-				toolbar.setTitle(group.getRegion().getName());
-			}
+			toolbar.setTitle(group.getName(activity));
 		}
 		expandAllGroups();
 	}
@@ -212,16 +210,12 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 			getDownloadActivity().getDownloadThread().runReloadIndexFiles();
 			return true;
 		case SEARCH_ID:
-			getDownloadActivity().showDialog(getActivity(), SearchDialogFragment.createInstance(""));
+			// FIXME
+			//getDownloadActivity().showDialog(getActivity(), SearchDialogFragment.createInstance(""));
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
-	}
-
-	public void onRegionSelected(String regionId) {
-		final DownloadResourceGroupFragment regionDialogFragment = createInstance(regionId);
-		getDownloadActivity().showDialog(getActivity(), regionDialogFragment);
 	}
 
 	public static DownloadResourceGroupFragment createInstance(String regionId) {
@@ -315,12 +309,8 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		public void bindItem(DownloadResourceGroup group) {
 			Drawable iconLeft = getIconForGroup(group);
 			textView.setCompoundDrawablesWithIntrinsicBounds(iconLeft, null, null, null);
-			String name = group.getName();
-			WorldRegion region = group.getRegion();
-			if (region != null) {
-				name = region.getName();
-			}
-			textView.setText(name);			
+			String name = group.getName(ctx);
+			textView.setText(name);
 		}
 	}
 

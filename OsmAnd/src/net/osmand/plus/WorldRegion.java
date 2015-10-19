@@ -1,5 +1,7 @@
 package net.osmand.plus;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -85,7 +87,7 @@ public class WorldRegion {
 
 	public void initWorld() {
 		regionId = "";
-		downloadsId= WORLD;
+		downloadsId = WORLD;
 		name = "";
 		superregion = null;
 	}
@@ -109,26 +111,10 @@ public class WorldRegion {
 		return this;
 	}
 
-
-	private WorldRegion init(String regionId, String name) {
-		this.regionId = regionId;
-		this.downloadsId = regionId.toLowerCase() ;
-		this.name = name;
-		return this;
-	}
-
-	private void addSubregion(WorldRegion subregion) {
+	private void addSubregion(WorldRegion subregion, WorldRegion world) {
 		subregion.superregion = this;
 		subregions.add(subregion);
-		propagateSubregionToFlattenedHierarchy(subregion);
-	}
-
-	private void propagateSubregionToFlattenedHierarchy(WorldRegion subregion) {
-		if (superregion != null) {
-			superregion.propagateSubregionToFlattenedHierarchy(subregion);
-		} else {
-			flattenedSubregions.add(subregion);
-		}
+		world.flattenedSubregions.add(subregion);
 	}
 
 	public void loadWorldRegions(OsmandApplication app) {
@@ -143,42 +129,42 @@ public class WorldRegion {
 
 		WorldRegion africaRegion = createRegionAs(AFRICA_REGION_ID,
 				loadedItems, osmandRegions, res.getString(R.string.index_name_africa));
-		addSubregion(africaRegion);
+		addSubregion(africaRegion, this);
 		regionsLookupTable.put(africaRegion.regionId, africaRegion);
 
 		WorldRegion asiaRegion = createRegionAs(ASIA_REGION_ID,
 				loadedItems, osmandRegions, res.getString(R.string.index_name_asia));
-		addSubregion(asiaRegion);
+		addSubregion(asiaRegion, this);
 		regionsLookupTable.put(asiaRegion.regionId, asiaRegion);
 
 		WorldRegion australiaAndOceaniaRegion = createRegionAs(AUSTRALIA_AND_OCEANIA_REGION_ID,
 				loadedItems, osmandRegions, res.getString(R.string.index_name_oceania));
-		addSubregion(australiaAndOceaniaRegion);
+		addSubregion(australiaAndOceaniaRegion, this);
 		regionsLookupTable.put(australiaAndOceaniaRegion.regionId, australiaAndOceaniaRegion);
 
 		WorldRegion centralAmericaRegion = createRegionAs(CENTRAL_AMERICA_REGION_ID,
 				loadedItems, osmandRegions, res.getString(R.string.index_name_central_america));
-		addSubregion(centralAmericaRegion);
+		addSubregion(centralAmericaRegion, this);
 		regionsLookupTable.put(centralAmericaRegion.regionId, centralAmericaRegion);
 
 		WorldRegion europeRegion = createRegionAs(EUROPE_REGION_ID,
 				loadedItems, osmandRegions, res.getString(R.string.index_name_europe));
-		addSubregion(europeRegion);
+		addSubregion(europeRegion, this);
 		regionsLookupTable.put(europeRegion.regionId, europeRegion);
 
 		WorldRegion northAmericaRegion = createRegionAs(NORTH_AMERICA_REGION_ID,
 				loadedItems, osmandRegions, res.getString(R.string.index_name_north_america));
-		addSubregion(northAmericaRegion);
+		addSubregion(northAmericaRegion, this);
 		regionsLookupTable.put(northAmericaRegion.regionId, northAmericaRegion);
 
 		WorldRegion russiaRegion = createRegionAs(RUSSIA_REGION_ID,
 				loadedItems, osmandRegions, res.getString(R.string.index_name_russia));
-		addSubregion(russiaRegion);
+		addSubregion(russiaRegion, this);
 		regionsLookupTable.put(russiaRegion.regionId, russiaRegion);
 
 		WorldRegion southAmericaRegion = createRegionAs(SOUTH_AMERICA_REGION_ID,
 				loadedItems, osmandRegions, res.getString(R.string.index_name_south_america));
-		addSubregion(southAmericaRegion);
+		addSubregion(southAmericaRegion, this);
 		regionsLookupTable.put(southAmericaRegion.regionId, southAmericaRegion);
 
 		// Process all regions
@@ -199,7 +185,7 @@ public class WorldRegion {
 				}
 
 				WorldRegion newRegion = new WorldRegion().init(regionId, osmandRegions, null);
-				parentRegion.addSubregion(newRegion);
+				parentRegion.addSubregion(newRegion, this);
 				regionsLookupTable.put(newRegion.regionId, newRegion);
 
 				// Remove
@@ -212,10 +198,27 @@ public class WorldRegion {
 				break;
 		}
 
+		Comparator<WorldRegion> nameComparator = new Comparator<WorldRegion>() {
+			@Override
+			public int compare(WorldRegion w1, WorldRegion w2) {
+				return w1.getName().compareTo(w2.getName());
+			}
+		};
+		sortSubregions(this, nameComparator);
+
 		if (loadedItems.size() > 0) {
 			LOG.warn("Found orphaned regions: " + loadedItems.size());
 			for (String regionId : loadedItems.keySet()) {
 				LOG.warn("FullName = " + regionId + " parent=" + osmandRegions.getParentFullName(regionId));
+			}
+		}
+	}
+
+	private void sortSubregions(WorldRegion region, Comparator<WorldRegion> comparator) {
+		Collections.sort(region.subregions, comparator);
+		for (WorldRegion r : region.subregions) {
+			if (r.subregions.size() > 0) {
+				sortSubregions(r, comparator);
 			}
 		}
 	}
