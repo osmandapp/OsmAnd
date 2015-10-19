@@ -69,9 +69,13 @@ public class DownloadIndexesThread {
 		this.ctx = ctx;
 		app = (OsmandApplication) ctx.getApplicationContext();
 		indexes = new DownloadResources(app);
-		indexes.initAlreadyLoadedFiles();
+		updateLoadedFiles();
 		downloadFileHelper = new DownloadFileHelper(app);
 		dbHelper = new DatabaseHelper(app);
+	}
+
+	public void updateLoadedFiles() {
+		indexes.initAlreadyLoadedFiles();
 	}
 
 	/// UI notifications methods
@@ -318,6 +322,7 @@ public class DownloadIndexesThread {
 				if (o instanceof IndexItem) {
 					IndexItem item = (IndexItem) o;
 					String name = item.getBasename();
+					item.setDownloaded(true);
 					long count = dbHelper.getCount(name, DatabaseHelper.DOWNLOAD_ENTRY) + 1;
 					DatabaseHelper.HistoryDownloadEntry entry = new DatabaseHelper.HistoryDownloadEntry(name, count);
 					if (count == 1) {

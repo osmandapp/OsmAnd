@@ -1,5 +1,7 @@
 package net.osmand.plus.download.ui;
 
+import java.text.DateFormat;
+
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -47,6 +49,7 @@ public class ItemViewHolder {
 	boolean showRemoteDate;
 	boolean silentCancelDownload;
 	boolean showProgressInDesc;
+	private DateFormat dateFormat;
 
 	
 
@@ -61,6 +64,7 @@ public class ItemViewHolder {
 
 	public ItemViewHolder(View view, DownloadActivity context) {
 		this.context = context;
+		dateFormat = android.text.format.DateFormat.getMediumDateFormat(context);
 		progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
 		rightButton = (Button) view.findViewById(R.id.rightButton);
 		leftImageView = (ImageView) view.findViewById(R.id.leftImageView);
@@ -143,9 +147,9 @@ public class ItemViewHolder {
 			} else if (showTypeInDesc) {
 				descrTextView.setText(indexItem.getType().getString(context) + 
 						" • " + indexItem.getSizeDescription(context) +
-						" • " + (showRemoteDate ? indexItem.getRemoteDate() : indexItem.getLocalDate()));
+						" • " + (showRemoteDate ? indexItem.getRemoteDate(dateFormat) : indexItem.getLocalDate(dateFormat)));
 			} else {
-				descrTextView.setText(indexItem.getSizeDescription(context) + " • " + (showRemoteDate ? indexItem.getRemoteDate() : indexItem.getLocalDate()));
+				descrTextView.setText(indexItem.getSizeDescription(context) + " • " + (showRemoteDate ? indexItem.getRemoteDate(dateFormat) : indexItem.getLocalDate(dateFormat)));
 			}
 			
 			rightImageButton.setImageDrawable(getContentIcon(context, R.drawable.ic_action_import));

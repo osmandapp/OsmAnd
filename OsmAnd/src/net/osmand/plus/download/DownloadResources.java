@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -57,10 +58,30 @@ public class DownloadResources extends DownloadResourceGroup {
 		String sfName = item.getTargetFileName();
 		String indexactivateddate = indexActivatedFileNames.get(sfName);
 		String indexfilesdate = indexFileNames.get(sfName);
+		item.setDownloaded(false);
+		item.setOutdated(false);
 		if(indexactivateddate == null && indexfilesdate == null) {
 			return outdated;
 		}
+		item.setDownloaded(true);
 		String date = item.getDate(format);
+		boolean parsed = false;
+		if(indexactivateddate != null) {
+			try {
+				item.setLocalTimestamp(format.parse(indexactivateddate).getTime());
+				parsed = true;
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}
+		if (!parsed && indexfilesdate != null) {
+			try {
+				item.setLocalTimestamp(format.parse(indexfilesdate).getTime());
+				parsed = true;
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}
 		if (date != null && !date.equals(indexactivateddate) && !date.equals(indexfilesdate)) {
 			if ((item.getType() == DownloadActivityType.NORMAL_FILE && !item.extra)
 					|| item.getType() == DownloadActivityType.ROADS_FILE
@@ -96,6 +117,7 @@ public class DownloadResources extends DownloadResourceGroup {
 				}
 			}
 		}
+		item.setOutdated(outdated);
 		return outdated;
 	}
 

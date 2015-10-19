@@ -3,9 +3,7 @@ package net.osmand.plus.download;
 import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.util.Date;
-import java.util.Map;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -29,6 +27,11 @@ public class IndexItem implements Comparable<IndexItem> {
 	long containerSize;
 	DownloadActivityType type;
 	boolean extra;
+	
+	// Update information
+	boolean outdated;
+	boolean downloaded;
+	long localTimestamp;
 
 
 	public IndexItem(String fileName, String description, long timestamp, String size, long contentSize,
@@ -134,73 +137,47 @@ public class IndexItem implements Comparable<IndexItem> {
 
 	
 	public String getDaysBehind(OsmandApplication app) {
-		// FIXME
-		DateFormat format = app.getResourceManager().getDateFormat();
-		String sfName = getTargetFileName();
-		Map<String, String> indexActivatedFileNames = app.getResourceManager().getIndexFileNames();
-		String dt = indexActivatedFileNames.get(sfName);
-		if (dt != null) {
-			try {
-				Date tm = format.parse(dt);
-				long days = Math.max(1, (getTimestamp() - tm.getTime()) / (24 * 60 * 60 * 1000) + 1);
-				return days + " " + app.getString(R.string.days_behind);
-			} catch (ParseException e1) {
-				e1.printStackTrace();
-			}
+		if (localTimestamp > 0) {
+			long days = Math.max(1, (getTimestamp() - localTimestamp) / (24 * 60 * 60 * 1000) + 1);
+			return days + " " + app.getString(R.string.days_behind);
 		}
 		return "";
 	}
 	
-	public String getRemoteDate() {
-		// FIXME;
-		return "FIXME";
+	public String getRemoteDate(DateFormat dateFormat) {
+		if(timestamp <= 0) {
+			return "";
+		}
+		return dateFormat.format(new Date(timestamp));
+	}
+	
+	
+	public String getLocalDate(DateFormat dateFormat) {
+		if(localTimestamp <= 0) {
+			return "";
+		}
+		return dateFormat.format(new Date(localTimestamp));
 	}
 	
 	public boolean isOutdated() {
-		//FIXME;
-		return false;
+		return outdated;
 	}
 	
-	public String getLocalDate() {
-		//FIXME;
-//		DateFormat format = app.getResourceManager().getDateFormat();
-//		String sfName = getTargetFileName();
-//		Map<String, String> indexActivatedFileNames = app.getResourceManager().getIndexFileNames();
-//		String dt = indexActivatedFileNames.get(sfName);
-//		if (dt != null) {
-//			try {
-//				Date tm = format.parse(dt);
-//				long days = Math.max(1, (getTimestamp() - tm.getTime()) / (24 * 60 * 60 * 1000) + 1);
-//				return days + " " + app.getString(R.string.days_behind);
-//			} catch (ParseException e1) {
-//				e1.printStackTrace();
-//			}
-//		}
-//		return "";
-
-		return "FIXME";
+	public void setOutdated(boolean outdated) {
+		this.outdated = outdated;
+	}
+	
+	public void setDownloaded(boolean downloaded) {
+		this.downloaded = downloaded;
+	}
+	
+	public void setLocalTimestamp(long localTimestamp) {
+		this.localTimestamp = localTimestamp;
 	}
 	
 	
 	public boolean isDownloaded() {
-		// FIXME
-//		return listAlreadyDownloaded.containsKey(getTargetFileName());
-		/*
-		Map<String,String> indexFileNames = context.getIndexFileNames();
-		if (indexFileNames != null && indexItem.isAlreadyDownloaded(indexFileNames)) {
-			boolean outdated = false;
-			String date;
-			if (indexItem.getType() == DownloadActivityType.HILLSHADE_FILE) {
-				date = indexItem.getDate(dateFormat);
-			} else {
-				String sfName = indexItem.getTargetFileName();
-				Map<String,String> indexActivatedFileNames = context.getIndexActivatedFileNames();
-				final boolean updatableResource = indexActivatedFileNames.containsKey(sfName);
-				date = updatableResource ? indexActivatedFileNames.get(sfName) : indexFileNames.get(sfName);
-				outdated = DownloadActivity.downloadListIndexThread.checkIfItemOutdated(indexItem);
-			}
-			*/
-		return false; 
+		return downloaded;
 	}
 
 	public String getVisibleName(Context ctx, OsmandRegions osmandRegions) {
