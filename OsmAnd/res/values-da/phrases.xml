@@ -2202,21 +2202,21 @@
 	<string name="poi_social_facility_for_drug_addicted">Socialmålgruppe: stofmisbrugere</string>
 	<string name="poi_social_facility_for_unemployed">Socialmålgruppe: arbejdsløse</string>
 	<string name="poi_social_facility_for_diseased">Socialmålgruppe: syge</string>
-	<string name="poi_social_facility_for_child_juvenile">Sociale målgruppe: børn, unge</string>
+	<string name="poi_social_facility_for_child_juvenile">Socialmålgruppe: børn og unge</string>
 
-	<string name="poi_theatre_genre_philharmonic">Genre: philharmonic</string>
-	<string name="poi_theatre_genre_musical">Genre: musikal</string>
+	<string name="poi_theatre_genre_philharmonic">Genre: filharmonisk</string>
+	<string name="poi_theatre_genre_musical">Genre: musical</string>
 	<string name="poi_theatre_genre_drama">Genre: drama</string>
 	<string name="poi_theatre_genre_opera">Genre: opera</string>
 	<string name="poi_theatre_genre_cabaret">Genre: cabaret</string>
-	<string name="poi_theatre_genre_puppet">Genre: marionet</string>
+	<string name="poi_theatre_genre_puppet">Genre: dukketeater</string>
 	<string name="poi_theatre_genre_comedy">Genre: komedie</string>
 	<string name="poi_theatre_genre_chamber_music">Genre: kammermusik</string>
-	<string name="poi_theatre_genre_marionette">Genre: marionet</string>
+	<string name="poi_theatre_genre_marionette">Genre: dukketeater</string>
 	<string name="poi_theatre_genre_ballet">Genre: ballet</string>
-	<string name="poi_theatre_genre_shadow_play">Genre: shadow play</string>
+	<string name="poi_theatre_genre_shadow_play">Genre: skyggespil</string>
 
-	<string name="poi_bandstand">Bandstand</string>
+	<string name="poi_bandstand">Musikpavillon</string>
 
 <string name="poi_kiln">Kiln</string>
 	<string name="poi_product_brick">Produkt: mursten</string>
@@ -2244,7 +2244,7 @@
 	<string name="poi_ramp_bicycle_no">Rampe til cykler: nej</string>
 	<string name="poi_ramp_luggage_yes">Rampe for bagage: ja</string>
 	<string name="poi_ramp_luggage_no">Rampe for bagage: nej</string>
-	<string name="poi_step_count">Skridttæller</string>
+	<string name="poi_step_count">Antal trin</string>
 	<string name="poi_step_condition_even">Trintilstand: jævn</string>
 	<string name="poi_step_condition_uneven">Trintilstand: ujævn</string>
 	<string name="poi_step_condition_rough">Trintilstand: ru</string>
