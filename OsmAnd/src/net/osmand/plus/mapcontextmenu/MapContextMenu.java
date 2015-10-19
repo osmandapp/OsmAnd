@@ -376,7 +376,7 @@ public class MapContextMenu {
 	public void fabPressed() {
 		mapActivity.getMapActions().directionTo(latLon.getLatitude(), latLon.getLongitude());
 		hide();
-		// open navigation menu
+		mapActivity.getMapLayers().getMapControlsLayer().showRouteInfoControlDialog();
 	}
 
 	public void buttonWaypointPressed() {
