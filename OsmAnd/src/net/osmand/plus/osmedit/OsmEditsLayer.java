@@ -88,7 +88,7 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 			} else {
 				b = poi;
 			}
-			canvas.drawBitmap(b, locationX - b.getWidth() / 2, locationY - b.getHeight(), paintIcon);
+			canvas.drawBitmap(b, locationX - b.getWidth() / 2, locationY - b.getHeight() / 2, paintIcon);
 			canvas.rotate(view.getRotate(), locationX, locationY);
 		}
 	}
