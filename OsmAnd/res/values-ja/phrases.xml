@@ -782,4 +782,16 @@
 	<string name="poi_ski_resort">スキーリゾート(Ski resort)</string>
 	<string name="poi_trail_riding_station">トレイルライディング小屋(Trail riding station)</string>
 
+	<string name="poi_hiking_routes">ハイキングルート(Hiking routes)</string>
+		<string name="poi_traffic_enforcement">交通違反取締装置(Traffic enforcement)</string>
+	<string name="poi_cheese">チーズ専門店(Cheese shop)</string>
+	<string name="poi_chocolate">チョコレート専門店(Chocolate shop)</string>
+	<string name="poi_coffee">コーヒーショップ(Coffee shop)</string>
+	<string name="poi_pasta">パスタ屋(Pasta shop)</string>
+	<string name="poi_pastry">洋菓子店(Pastry Shop)</string>
+	<string name="poi_camera">カメラ店(Cameras and lenses)</string>
+	<string name="poi_candles">ろうそく店・キャンドルショップ(Candles store)</string>
+	<string name="poi_doors">ドア店(Doors)</string>
+	<string name="poi_fashion">ファッションショップ(Fashion shop)</string>
+	<string name="poi_free_flying">スカイダイビング／フリーフライ用具店(Free flying goods store)</string>
 	</resources>

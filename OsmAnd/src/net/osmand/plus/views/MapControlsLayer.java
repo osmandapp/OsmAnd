@@ -369,6 +369,10 @@ public class MapControlsLayer extends OsmandMapLayer {
 		}
 	}
 
+	public void showRouteInfoControlDialog() {
+		mapRouteInfoControlDialog.showHideDialog();
+	}
+
 	public void showDialog() {
 		mapRouteInfoControlDialog.setShowDialog();
 	}

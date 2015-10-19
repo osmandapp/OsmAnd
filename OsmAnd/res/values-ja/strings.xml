@@ -943,7 +943,7 @@ POIの更新は利用できません</string>
 	<string name="bg_service_screen_lock_toast">画面はロックされています</string>
 	<string name="bg_service_interval">呼び出し間隔の設定:</string>
 	<string name="show_cameras">スピード監視カメラ(オービス等)を通知</string>
-	<string name="show_traffic_warnings">交通警告を通知</string>
+	<string name="show_traffic_warnings">通行に関する警告を通知</string>
 	<string name="avoid_toll_roads">有料道路を使用しない</string>
 	<string name="continue_follow_previous_route_auto">前回のナビゲーションがまだ終わっていません。続行しますか？ (%1$s seconds)</string>
 	<string name="route_updated_loc_found">現在位置が見つかるとルートを検索します</string>
@@ -2201,4 +2201,10 @@ POIの更新は利用できません</string>
     <string name="later">後で</string>
     <string name="get_full_version">フルバージョンの入手</string>
     <string name="downloads">ダウンロード</string>
+<string name="confirm_download_roadmaps">完全なマップがありますが、道路のみのマップをダウンロードしてよろしいですか？</string>
+    <string name="value_downloaded_from_max">%1$.1f ／ %2$.1f MB</string>
+    <string name="file_size_in_mb">%.1f MB</string>
+    <string name="update_all">全て更新(%1$s MB)</string>
+    <string name="free_downloads_used">使用済み無料ダウンロード枠</string>
+    <string name="free_downloads_used_description">使用する無料ダウンロード枠を設定できます</string>
 </resources>

@@ -2028,4 +2028,13 @@
     <string name="world_maps">Svetovni zemljevidi</string>
     <string name="world_regions">Svetovna območja</string>
     <string name="downloads">Prejemi</string>
+<string name="favorite_category_dublicate_message">Ime kategorije že obstaja. Izberite drugo ime.</string>
+    <string name="favorite_category_name">Ime kategorije</string>
+    <string name="favorite_category_add_new_title">Dodaj kategorijo</string>
+    <string name="confirm_download_roadmaps">Ali ste prepričani, da želite prejeti cestni zemljevid, čeprav imate polni zemljevid že nameščen?</string>
+    <string name="value_downloaded_from_max">%1$.1f od %2$.1f MB</string>
+    <string name="file_size_in_mb">%.1f MB</string>
+    <string name="update_all">Posodobi vse (%1$s MB)</string>
+    <string name="free_downloads_used">Omejitev brezplačnih prejemov je dosežena.</string>
+    <string name="free_downloads_used_description">Videti je mogoče, koliko brezplačnih prejemov je že bilo izvedenih.</string>
 </resources>

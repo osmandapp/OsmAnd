@@ -2129,4 +2129,75 @@
 	<string name="poi_dog_yes">Вход с собаками разрешён</string>
 	<string name="poi_dog_no">Вход с собаками запрещён</string>
 
+	<string name="poi_refugee_yes">Удобства, предназначенные для беженцев</string>
+	<string name="poi_refugee_no">Беженцы: нет</string>
+
+	<string name="poi_social_facility_group_home">Социальное учреждение: групповое проживание</string>
+	<string name="poi_social_facility_assisted_living">Социальное учреждение: дом престарелых</string>
+	<string name="poi_social_facility_outreach">Социальное учреждение: социальные услуги без проживания</string>
+	<string name="poi_social_facility_food_bank">Социальное учреждение: раздача еды</string>
+	<string name="poi_social_facility_shelter">Социальное учреждение: временное укрытие</string>
+	<string name="poi_social_facility_ambulatory_care">Социальное учреждение: амбулаторное лечение</string>
+	<string name="poi_social_facility_workshop">Социальное учреждение: работа</string>
+	<string name="poi_social_facility_day_care">Социальное учреждение: дневной уход</string>
+
+	<string name="poi_social_facility_for_senior">Целевая социальная группа: пожилые</string>
+	<string name="poi_social_facility_for_child">Целевая социальная группа: дети</string>
+	<string name="poi_social_facility_for_orphan">Целевая социальная группа: сироты</string>
+	<string name="poi_social_facility_for_disabled">Целевая социальная группа: инвалиды</string>
+	<string name="poi_social_facility_for_mental_health">Целевая социальная группа: пациенты с расстройствами психики</string>
+	<string name="poi_social_facility_for_juvenile">Целевая социальная группа: подростки</string>
+	<string name="poi_social_facility_for_homeless">Целевая социальная группа: бездомные</string>
+	<string name="poi_social_facility_for_migrant">Целевая социальная группа: мигранты</string>
+	<string name="poi_social_facility_for_underprivileged">Целевая социальная группа: бедняки</string>
+	<string name="poi_social_facility_for_drug_addicted">Целевая социальная группа: наркоманы</string>
+	<string name="poi_social_facility_for_unemployed">Целевая социальная группа: безработные</string>
+	<string name="poi_social_facility_for_diseased">Целевая социальная группа: больные</string>
+	<string name="poi_social_facility_for_child_juvenile">Целевая социальная группа: дети и подростки</string>
+
+	<string name="poi_theatre_genre_philharmonic">Филармония</string>
+	<string name="poi_theatre_genre_musical">Жанр: музыкальный</string>
+	<string name="poi_theatre_genre_drama">Жанр: драматический</string>
+	<string name="poi_theatre_genre_opera">Жанр: оперный</string>
+	<string name="poi_theatre_genre_cabaret">Жанр: кабаре</string>
+	<string name="poi_theatre_genre_puppet">Жанр: кукольный театр</string>
+	<string name="poi_theatre_genre_comedy">Жанр: комедийный</string>
+	<string name="poi_theatre_genre_chamber_music">Жанр: камерная музыка</string>
+	<string name="poi_theatre_genre_marionette">Жанр: марионетки</string>
+	<string name="poi_theatre_genre_ballet">Жанр: балет</string>
+	<string name="poi_theatre_genre_shadow_play">Жанр: театр теней</string>
+
+	<string name="poi_bandstand">Отдельностоящая сцена</string>
+	<string name="poi_kiln">Печь для обжига</string>
+	<string name="poi_product_brick">Производимый продукт: кирпич</string>
+	<string name="poi_product_quicklime">Производимый продукт: негашеная известь</string>
+	<string name="poi_product_leather">Производимый продукт: кожа</string>
+	<string name="poi_product_lime">Производимый продукт: известь</string>
+	<string name="poi_product_beer">Производимый продукт: пиво</string>
+	<string name="poi_product_charcoal">Производимый продукт: древесный уголь</string>
+	<string name="poi_product_meat">Производимый продукт: мясо</string>
+
+	<string name="poi_wheelchair_description">Описание для людей на инвалидных колясках</string>
+	<string name="poi_blind_description">Описание для слепых</string>
+	<string name="poi_deaf_description">Описание для глухих</string>
+
+	<string name="poi_highway_steps">Лестница</string>
+	<string name="poi_handrail_yes">Поручень: есть</string>
+	<string name="poi_handrail_no">Поручень: нет</string>
+	<string name="poi_ramp_yes">Скат: есть</string>
+	<string name="poi_ramp_no">Скат: нет</string>
+	<string name="poi_ramp_wheelchair_yes">Скат для инвалидных колясок: есть</string>
+	<string name="poi_ramp_wheelchair_no">Скат для инвалидных колясок: нет</string>
+	<string name="poi_ramp_stroller_yes">Скат (двойной): есть</string>
+	<string name="poi_ramp_stroller_no">Скат (двойной): нет</string>
+	<string name="poi_ramp_bicycle_yes">Скат для велосипедов: есть</string>
+	<string name="poi_ramp_bicycle_no">Скат для велосипедов: нет</string>
+	<string name="poi_ramp_luggage_yes">Скат для багажа: есть</string>
+	<string name="poi_ramp_luggage_no">Скат для багажа: нет</string>
+	<string name="poi_step_count">Количество ступеней</string>
+	<string name="poi_step_condition_even">Состояние ступеней: хорошее</string>
+	<string name="poi_step_condition_uneven">Состояние ступеней: среднее</string>
+	<string name="poi_step_condition_rough">Состояние ступеней: плохое</string>
+
+
 </resources>
