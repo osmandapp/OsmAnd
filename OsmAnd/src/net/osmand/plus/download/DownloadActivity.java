@@ -52,7 +52,6 @@ import java.util.Set;
 
 
 public class DownloadActivity extends BaseDownloadActivity implements DialogDismissListener {
-	private static final Log LOG = PlatformUtil.getLog(DownloadActivity.class);
 	private List<LocalIndexInfo> localIndexInfos = new ArrayList<>();
 
 	private String initialFilter = "";
@@ -162,7 +161,6 @@ public class DownloadActivity extends BaseDownloadActivity implements DialogDism
 	@Override
 	protected void onResume() {
 		super.onResume();
-		LOG.debug("onResume()");
 		// TODO: 10/16/15 Review: seems like doing nothing
 		getMyApplication().getAppCustomization().resumeActivity(DownloadActivity.class, this);
 		updateFragments();
