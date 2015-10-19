@@ -373,6 +373,10 @@ public class MapControlsLayer extends OsmandMapLayer {
 		mapRouteInfoControlDialog.showHideDialog();
 	}
 
+	public void showDialog() {
+		mapRouteInfoControlDialog.setShowDialog();
+	}
+
 	private void initControls() {
 		View backToLocation = mapActivity.findViewById(R.id.map_my_location_button);
 		backToLocationControl = createHudButton((ImageView) backToLocation, R.drawable.map_my_location)
