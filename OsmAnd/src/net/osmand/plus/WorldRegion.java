@@ -109,18 +109,10 @@ public class WorldRegion {
 		return this;
 	}
 
-	private void addSubregion(WorldRegion subregion) {
+	private void addSubregion(WorldRegion subregion, WorldRegion world) {
 		subregion.superregion = this;
 		subregions.add(subregion);
-		propagateSubregionToFlattenedHierarchy(subregion);
-	}
-
-	private void propagateSubregionToFlattenedHierarchy(WorldRegion subregion) {
-		if (superregion != null) {
-			superregion.propagateSubregionToFlattenedHierarchy(subregion);
-		} else {
-			flattenedSubregions.add(subregion);
-		}
+		world.flattenedSubregions.add(subregion);
 	}
 
 	public void loadWorldRegions(OsmandApplication app) {
@@ -135,42 +127,42 @@ public class WorldRegion {
 
 		WorldRegion africaRegion = createRegionAs(AFRICA_REGION_ID,
 				loadedItems, osmandRegions, res.getString(R.string.index_name_africa));
-		addSubregion(africaRegion);
+		addSubregion(africaRegion, this);
 		regionsLookupTable.put(africaRegion.regionId, africaRegion);
 
 		WorldRegion asiaRegion = createRegionAs(ASIA_REGION_ID,
 				loadedItems, osmandRegions, res.getString(R.string.index_name_asia));
-		addSubregion(asiaRegion);
+		addSubregion(asiaRegion, this);
 		regionsLookupTable.put(asiaRegion.regionId, asiaRegion);
 
 		WorldRegion australiaAndOceaniaRegion = createRegionAs(AUSTRALIA_AND_OCEANIA_REGION_ID,
 				loadedItems, osmandRegions, res.getString(R.string.index_name_oceania));
-		addSubregion(australiaAndOceaniaRegion);
+		addSubregion(australiaAndOceaniaRegion, this);
 		regionsLookupTable.put(australiaAndOceaniaRegion.regionId, australiaAndOceaniaRegion);
 
 		WorldRegion centralAmericaRegion = createRegionAs(CENTRAL_AMERICA_REGION_ID,
 				loadedItems, osmandRegions, res.getString(R.string.index_name_central_america));
-		addSubregion(centralAmericaRegion);
+		addSubregion(centralAmericaRegion, this);
 		regionsLookupTable.put(centralAmericaRegion.regionId, centralAmericaRegion);
 
 		WorldRegion europeRegion = createRegionAs(EUROPE_REGION_ID,
 				loadedItems, osmandRegions, res.getString(R.string.index_name_europe));
-		addSubregion(europeRegion);
+		addSubregion(europeRegion, this);
 		regionsLookupTable.put(europeRegion.regionId, europeRegion);
 
 		WorldRegion northAmericaRegion = createRegionAs(NORTH_AMERICA_REGION_ID,
 				loadedItems, osmandRegions, res.getString(R.string.index_name_north_america));
-		addSubregion(northAmericaRegion);
+		addSubregion(northAmericaRegion, this);
 		regionsLookupTable.put(northAmericaRegion.regionId, northAmericaRegion);
 
 		WorldRegion russiaRegion = createRegionAs(RUSSIA_REGION_ID,
 				loadedItems, osmandRegions, res.getString(R.string.index_name_russia));
-		addSubregion(russiaRegion);
+		addSubregion(russiaRegion, this);
 		regionsLookupTable.put(russiaRegion.regionId, russiaRegion);
 
 		WorldRegion southAmericaRegion = createRegionAs(SOUTH_AMERICA_REGION_ID,
 				loadedItems, osmandRegions, res.getString(R.string.index_name_south_america));
-		addSubregion(southAmericaRegion);
+		addSubregion(southAmericaRegion, this);
 		regionsLookupTable.put(southAmericaRegion.regionId, southAmericaRegion);
 
 		// Process all regions
@@ -191,7 +183,7 @@ public class WorldRegion {
 				}
 
 				WorldRegion newRegion = new WorldRegion().init(regionId, osmandRegions, null);
-				parentRegion.addSubregion(newRegion);
+				parentRegion.addSubregion(newRegion, this);
 				regionsLookupTable.put(newRegion.regionId, newRegion);
 
 				// Remove
