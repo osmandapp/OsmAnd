@@ -1,5 +1,7 @@
 package net.osmand.plus;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -196,10 +198,27 @@ public class WorldRegion {
 				break;
 		}
 
+		Comparator<WorldRegion> nameComparator = new Comparator<WorldRegion>() {
+			@Override
+			public int compare(WorldRegion w1, WorldRegion w2) {
+				return w1.getName().compareTo(w2.getName());
+			}
+		};
+		sortSubregions(this, nameComparator);
+
 		if (loadedItems.size() > 0) {
 			LOG.warn("Found orphaned regions: " + loadedItems.size());
 			for (String regionId : loadedItems.keySet()) {
 				LOG.warn("FullName = " + regionId + " parent=" + osmandRegions.getParentFullName(regionId));
+			}
+		}
+	}
+
+	private void sortSubregions(WorldRegion region, Comparator<WorldRegion> comparator) {
+		Collections.sort(region.subregions, comparator);
+		for (WorldRegion r : region.subregions) {
+			if (r.subregions.size() > 0) {
+				sortSubregions(r, comparator);
 			}
 		}
 	}
