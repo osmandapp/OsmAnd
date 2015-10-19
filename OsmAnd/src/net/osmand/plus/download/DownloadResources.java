@@ -44,7 +44,6 @@ public class DownloadResources extends DownloadResourceGroup {
 		listWithAlternatives(dateFormat, app.getAppPath(""), IndexConstants.EXTRA_EXT, indexActivatedFileNames);
 		Map<String, String> indexFileNames = app.getResourceManager().getIndexFileNames();
 		listWithAlternatives(dateFormat, app.getAppPath(""), IndexConstants.EXTRA_EXT, indexFileNames);
-		app.getAppCustomization().updatedLoadedFiles(indexFileNames, indexActivatedFileNames);
 		listWithAlternatives(dateFormat, app.getAppPath(IndexConstants.TILES_INDEX_DIR), IndexConstants.SQLITE_EXT,
 				indexFileNames);
 		app.getResourceManager().getBackupIndexes(indexFileNames);
@@ -124,6 +123,7 @@ public class DownloadResources extends DownloadResourceGroup {
 	
 
 	protected void updateFilesToUpdate() {
+		initAlreadyLoadedFiles();
 		List<IndexItem> stillUpdate = new ArrayList<IndexItem>();
 		for (IndexItem item : itemsToUpdate) {
 			String sfName = item.getTargetFileName();

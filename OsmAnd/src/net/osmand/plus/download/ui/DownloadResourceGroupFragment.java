@@ -269,6 +269,11 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 			this.ctx = ctx;
 			textView = (TextView) v.findViewById(R.id.title);
 		}
+		
+		private boolean isParentWorld(DownloadResourceGroup group) {
+			return group.getParentGroup() == null
+					|| group.getParentGroup().getType() == DownloadResourceGroupType.WORLD;
+		}
 
 		private Drawable getIconForGroup(DownloadResourceGroup group) {
 			Drawable iconLeft;
@@ -277,8 +282,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 				iconLeft = ctx.getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_volume_up);
 			} else {
 				IconsCache cache = ctx.getMyApplication().getIconsCache();
-				if (group.getParentGroup() == null
-						|| group.getParentGroup().getType() == DownloadResourceGroupType.WORLD) {
+				if (isParentWorld(group) || isParentWorld(group.getParentGroup())) {
 					iconLeft = cache.getContentIcon(R.drawable.ic_world_globe_dark);
 				} else {
 					DownloadResourceGroup ggr = group
