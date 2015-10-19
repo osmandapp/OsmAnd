@@ -2172,5 +2172,35 @@
 	<string name="poi_theatre_genre_shadow_play">Genre: shadow play</string>
 
 	<string name="poi_bandstand">Bandstand</string>
+	<string name="poi_kiln">Kiln</string>
+	<string name="poi_product_brick">Product: brick</string>
+	<string name="poi_product_quicklime">Product: quicklime</string>
+	<string name="poi_product_leather">Product: leather</string>
+	<string name="poi_product_lime">Product: lime</string>
+	<string name="poi_product_beer">Product: beer</string>
+	<string name="poi_product_charcoal">Product: charcoal</string>
+	<string name="poi_product_meat">Product: meat</string>
+
+	<string name="poi_wheelchair_description">Description for wheelchair users</string>
+	<string name="poi_blind_description">Description for blind</string>
+	<string name="poi_deaf_description">Description for deaf</string>
+
+	<string name="poi_highway_steps">Stairs</string>
+	<string name="poi_handrail_yes">Handrail: yes</string>
+	<string name="poi_handrail_no">Handrail: no</string>
+	<string name="poi_ramp_yes">Ramp: yes</string>
+	<string name="poi_ramp_no">Ramp: no</string>
+	<string name="poi_ramp_wheelchair_yes">Ramp for wheelchairs: yes</string>
+	<string name="poi_ramp_wheelchair_no">Ramp for wheelchairs: no</string>
+	<string name="poi_ramp_stroller_yes">Ramp (stroller): yes</string>
+	<string name="poi_ramp_stroller_no">Ramp (stroller): no</string>
+	<string name="poi_ramp_bicycle_yes">Ramp for bicycles: yes</string>
+	<string name="poi_ramp_bicycle_no">Ramp for bicycles: no</string>
+	<string name="poi_ramp_luggage_yes">Ramp for luggage: yes</string>
+	<string name="poi_ramp_luggage_no">Ramp for luggage: no</string>
+	<string name="poi_step_count">Step count</string>
+	<string name="poi_step_condition_even">Step condition: even</string>
+	<string name="poi_step_condition_uneven">Step condition: uneven</string>
+	<string name="poi_step_condition_rough">Step condition: rough</string>
 
 </resources>
