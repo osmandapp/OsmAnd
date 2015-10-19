@@ -125,7 +125,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		final IndexItem e = (IndexItem) getListAdapter().getItem(position);
 		ItemViewHolder vh = (ItemViewHolder) v.getTag();
-		OnClickListener ls = vh.getRightButtonAction(e, vh.getClickAction(e));
+		OnClickListener ls = vh.getRightButtonAction(e, vh.getClickAction(e), null);
 		ls.onClick(v);
 	}
 
@@ -180,7 +180,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 			ItemViewHolder holder = (ItemViewHolder) v.getTag();
 			holder.setShowRemoteDate(true);
 			holder.setShowTypeInDesc(true);
-			holder.bindIndexItem(items.get(position));
+			holder.bindIndexItem(items.get(position), null);
 			return v;
 		}
 	}

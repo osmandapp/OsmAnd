@@ -1,21 +1,25 @@
 package net.osmand.plus.download.ui;
 
 import java.text.DateFormat;
+
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
+import net.osmand.plus.download.DownloadResourceGroup;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.support.v7.app.AlertDialog;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -113,7 +117,7 @@ public class ItemViewHolder {
 		srtmNeedsInstallation = srtmPlugin == null || srtmPlugin.needsInstallation();
 	}
 
-	public void bindIndexItem(final IndexItem indexItem) {
+	public void bindIndexItem(final IndexItem indexItem, final DownloadResourceGroup parentOptional) {
 		initAppStatusVariables();
 		boolean isDownloading = context.getDownloadThread().isDownloading(indexItem);
 		int progress = -1;
@@ -171,7 +175,7 @@ public class ItemViewHolder {
 			rightImageButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					context.startDownload(indexItem);
+					download(indexItem, parentOptional);
 				}
 			});
 		} else {
@@ -212,6 +216,39 @@ public class ItemViewHolder {
 	}
 
 
+	protected void download(IndexItem indexItem, DownloadResourceGroup parentOptional) {
+		boolean handled = false;
+		if (indexItem.getType() == DownloadActivityType.ROADS_FILE && parentOptional != null) {
+			for (IndexItem ii : parentOptional.getIndividualResources()) {
+				if (ii.getType() == DownloadActivityType.NORMAL_FILE) {
+					if (ii.isDownloaded()) {
+						handled = true;
+						confirmDownload(indexItem);
+					}
+					break;
+				}
+			}
+		}		
+		if(!handled) {
+			context.startDownload(indexItem);
+		}
+	}
+	private void confirmDownload(final IndexItem indexItem) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(context);
+		builder.setTitle(R.string.are_you_sure);
+		builder.setMessage(R.string.confirm_download_roadmaps);
+		builder.setNegativeButton(R.string.shared_string_cancel, null).setPositiveButton(
+				R.string.shared_string_download, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						if (indexItem != null) {
+							context.startDownload(indexItem);
+						}
+					}
+				});
+		builder.show();
+	}
+
 	private boolean checkDisabledAndClickAction(final IndexItem indexItem) {
 		RightButtonAction clickAction = getClickAction(indexItem);
 		boolean disabled = clickAction != RightButtonAction.DOWNLOAD;
@@ -219,7 +256,7 @@ public class ItemViewHolder {
 			rightButton.setText(R.string.get_plugin);
 			rightButton.setVisibility(View.VISIBLE);
 			rightImageButton.setVisibility(View.GONE);
-			rightButton.setOnClickListener(getRightButtonAction(indexItem, clickAction));
+			rightButton.setOnClickListener(getRightButtonAction(indexItem, clickAction, null));
 		} else {
 			rightButton.setVisibility(View.GONE);
 			rightImageButton.setVisibility(View.VISIBLE);
@@ -248,7 +285,7 @@ public class ItemViewHolder {
 		return clickAction;
 	}
 
-	public OnClickListener getRightButtonAction(final IndexItem item, final RightButtonAction clickAction) {
+	public OnClickListener getRightButtonAction(final IndexItem item, final RightButtonAction clickAction, final DownloadResourceGroup parentOptional) {
 		if (clickAction != RightButtonAction.DOWNLOAD) {
 			return new View.OnClickListener() {
 				@Override
@@ -292,7 +329,7 @@ public class ItemViewHolder {
 							context.makeSureUserCancelDownload(item);
 						}
 					} else {
-						context.startDownload(item);
+						download(item, parentOptional);
 					}
 				}
 			};

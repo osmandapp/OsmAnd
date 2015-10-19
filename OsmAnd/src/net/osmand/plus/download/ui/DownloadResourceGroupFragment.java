@@ -170,44 +170,15 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		} else if (child instanceof IndexItem) {
 			IndexItem indexItem = (IndexItem) child;
 			DownloadResourceGroup groupObj = listAdapter.getGroupObj(groupPosition);
-			boolean handled = false;
-			if (indexItem.getType() == DownloadActivityType.ROADS_FILE && groupObj != null
-					&& !activity.getDownloadThread().isDownloading(indexItem)) {
-				for (IndexItem ii : groupObj.getIndividualResources()) {
-					if (ii.getType() == DownloadActivityType.NORMAL_FILE) {
-						if (ii.isDownloaded()) {
-							handled = true;
-							confirmDownload(indexItem);
-						}
-						break;
-					}
-				}
-			}
-			if (!handled) {
-				ItemViewHolder vh = (ItemViewHolder) v.getTag();
-				OnClickListener ls = vh.getRightButtonAction(indexItem, vh.getClickAction(indexItem));
-				ls.onClick(v);
-			}
+			ItemViewHolder vh = (ItemViewHolder) v.getTag();
+			OnClickListener ls = vh.getRightButtonAction(indexItem, vh.getClickAction(indexItem), groupObj);
+			ls.onClick(v);
 			return true;
 		}
 		return false;
 	}
 
-	private void confirmDownload(final IndexItem indexItem) {
-		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		builder.setTitle(R.string.are_you_sure);
-		builder.setMessage(R.string.confirm_download_roadmaps);
-		builder.setNegativeButton(R.string.shared_string_cancel, null).setPositiveButton(
-				R.string.shared_string_download, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						if (indexItem != null) {
-							((DownloadActivity) getActivity()).startDownload(indexItem);
-						}
-					}
-				});
-		builder.show();
-	}
+	
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
@@ -383,7 +354,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 				} else {
 					viewHolder.setShowTypeInDesc(true);
 				}
-				viewHolder.bindIndexItem(item);
+				viewHolder.bindIndexItem(item, group);
 			} else {
 				DownloadResourceGroup group = (DownloadResourceGroup) child;
 				DownloadGroupViewHolder viewHolder;
