@@ -244,8 +244,7 @@ public class DownloadResources extends DownloadResourceGroup {
 			DownloadResourceGroup mainGrp = new DownloadResourceGroup(parentGroup, DownloadResourceGroupType.REGION, reg.getRegionId());
 			mainGrp.region = reg;
 			parentGroup.addGroup(mainGrp);
-			DownloadResourceGroup subRegions = new DownloadResourceGroup(mainGrp, DownloadResourceGroupType.SUBREGIONS);
-			mainGrp.addGroup(subRegions);
+			
 			List<IndexItem> list = groupByRegion.get(reg);
 			if(list != null) {
 				DownloadResourceGroup flatFiles = new DownloadResourceGroup(mainGrp, DownloadResourceGroupType.REGION_MAPS);
@@ -254,6 +253,8 @@ public class DownloadResources extends DownloadResourceGroup {
 				}
 				mainGrp.addGroup(flatFiles);
 			}
+			DownloadResourceGroup subRegions = new DownloadResourceGroup(mainGrp, DownloadResourceGroupType.SUBREGIONS);
+			mainGrp.addGroup(subRegions);
 			// add to processing queue
 			for(WorldRegion rg : subregions) {
 				queue.add(rg);

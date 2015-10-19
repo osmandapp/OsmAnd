@@ -117,6 +117,14 @@ public class DownloadResourceGroup {
 			Collections.sort(g.individualResources, new Comparator<IndexItem>() {
 				@Override
 				public int compare(IndexItem lhs, IndexItem rhs) {
+					int lli = lhs.getType().getOrderIndex();
+					int rri = rhs.getType().getOrderIndex();
+					if(lli < rri) {
+						return -1; 
+					} else if(lli > rri) {
+						return 1;
+					}
+
 					return collator.compare(lhs.getVisibleName(app.getApplicationContext(), osmandRegions),
 							rhs.getVisibleName(app.getApplicationContext(), osmandRegions));
 				}
@@ -180,6 +188,11 @@ public class DownloadResourceGroup {
 		return getGroupById(lst, 0);
 	}
 	
+	public DownloadResourceGroup getSubGroupById(String uid) {
+		String[] lst = uid.split("\\#");
+		return getSubGroupById(lst, 0);
+	}
+	
 	public List<IndexItem> getIndividualResources() {
 		return individualResources;
 	}
@@ -193,12 +206,17 @@ public class DownloadResourceGroup {
 			if (lst.length == subInd + 1) {
 				return this;
 			} else if (groups != null) {
-				for (DownloadResourceGroup rg : groups) {
-					DownloadResourceGroup r = rg.getGroupById(lst, subInd + 1);
-					if (r != null) {
-						return r;
-					}
-				}
+				return getSubGroupById(lst, subInd + 1);
+			}
+		}
+		return null;
+	}
+
+	private DownloadResourceGroup getSubGroupById(String[] lst, int subInd) {
+		for (DownloadResourceGroup rg : groups) {
+			DownloadResourceGroup r = rg.getGroupById(lst, subInd );
+			if (r != null) {
+				return r;
 			}
 		}
 		return null;

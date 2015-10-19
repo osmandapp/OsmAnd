@@ -39,7 +39,7 @@ import android.support.annotation.UiThread;
 import android.view.View;
 import android.widget.Toast;
 
-@SuppressLint("NewApi")
+@SuppressLint({ "NewApi", "DefaultLocale" })
 public class DownloadIndexesThread {
 	private final static Log LOG = PlatformUtil.getLog(DownloadIndexesThread.class);
 	private final Context ctx;
@@ -332,7 +332,8 @@ public class DownloadIndexesThread {
 					}
 				} else if (o instanceof String) {
 					String message = (String) o;
-					if (!message.equals("I/O error occurred : Interrupted")) {
+					// ctx.getString(R.string.shared_string_io_error) +": Interrupted";
+					if (!message.toLowerCase().contains("interrupted")) {
 						if (uiActivity == null ||
 								!message.equals(uiActivity.getString(R.string.shared_string_download_successful))) {
 							AccessibleToast.makeText(ctx, message, Toast.LENGTH_LONG).show();

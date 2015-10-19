@@ -286,7 +286,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 					iconLeft = cache.getContentIcon(R.drawable.ic_world_globe_dark);
 				} else {
 					DownloadResourceGroup ggr = group
-							.getGroupById(DownloadResourceGroupType.REGION_MAPS.getDefaultId());
+							.getSubGroupById(DownloadResourceGroupType.REGION_MAPS.getDefaultId());
 					iconLeft = cache.getContentIcon(R.drawable.ic_map);
 					if (ggr != null && ggr.getIndividualResources() != null) {
 						IndexItem item = null;
@@ -301,11 +301,9 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 						}
 						if (item != null) {
 							if (item.isOutdated()) {
-								iconLeft = cache.getIcon(R.drawable.ic_map,
-										ctx.getResources().getColor(R.color.color_distance));
+								iconLeft = cache.getIcon(R.drawable.ic_map, R.color.color_distance);
 							} else {
-								iconLeft = cache.getIcon(R.drawable.ic_map,
-										ctx.getResources().getColor(R.color.color_ok));
+								iconLeft = cache.getIcon(R.drawable.ic_map, R.color.color_ok);
 							}
 						}
 					}
