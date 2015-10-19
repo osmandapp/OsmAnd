@@ -11,6 +11,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.ActionBarProgressActivity;
+import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
@@ -24,7 +25,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.widget.Toast;
 
-public class BaseDownloadActivity extends ActionBarProgressActivity {
+public class BaseDownloadActivity extends ActionBarProgressActivity implements DownloadEvents {
 	protected OsmandSettings settings;
 	private static DownloadIndexesThread downloadListIndexThread;
 	protected Set<WeakReference<Fragment>> fragSet = new HashSet<>();

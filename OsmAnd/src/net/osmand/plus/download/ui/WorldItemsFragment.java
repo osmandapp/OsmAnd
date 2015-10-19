@@ -9,9 +9,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.WorldRegion;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.activities.OsmandExpandableListFragment;
-import net.osmand.plus.download.BaseDownloadActivity;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
+import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadResourceGroup;
 import net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType;
 import net.osmand.plus.download.DownloadResources;
@@ -32,7 +32,7 @@ import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 
-public class WorldItemsFragment extends OsmandExpandableListFragment {
+public class WorldItemsFragment extends OsmandExpandableListFragment implements DownloadEvents {
 	public static final String TAG = "WorldItemsFragment";
 
 	public static final int RELOAD_ID = 0;
@@ -69,6 +69,23 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 		}
 		listAdapter.notifyDataSetChanged();
 	}
+	
+	@Override
+	public void downloadHasFinished() {
+		listAdapter.notifyDataSetChanged();
+	}
+	
+	@Override
+	public void downloadInProgress() {
+		listAdapter.notifyDataSetChanged();		
+	}
+	
+	@Override
+	public void newDownloadIndexes() {
+		DownloadResources indexes = getDownloadActivity().getDownloadThread().getIndexes();
+		listAdapter.update(indexes);
+		expandAllGroups();
+	}
 
 	private void expandAllGroups() {
 		for (int i = 0; i < listAdapter.getGroupCount(); i++) {
@@ -89,12 +106,11 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 		Object child = listAdapter.getChild(groupPosition, childPosition);
 		if (child instanceof DownloadResourceGroup) {
 			final DownloadResourceGroupFragment regionDialogFragment = DownloadResourceGroupFragment.createInstance(((DownloadResourceGroup) child).getUniqueId());
-			regionDialogFragment.setOnDismissListener(getDownloadActivity());
-			getDownloadActivity().showDialog(getActivity(), regionDialogFragment);
+			((DownloadActivity) getActivity()).showDialog(getActivity(), regionDialogFragment);
 			return true;
 		} else if (child instanceof IndexItem) {
 			IndexItem indexItem = (IndexItem) child;
-			((BaseDownloadActivity) getActivity()).startDownload(indexItem);
+			((DownloadActivity) getActivity()).startDownload(indexItem);
 			return true;
 		}
 		return false;
@@ -132,11 +148,7 @@ public class WorldItemsFragment extends OsmandExpandableListFragment {
 		return (DownloadActivity) getActivity();
 	}
 	
-	public void newDownloadIndexes() {
-		DownloadResources indexes = getDownloadActivity().getDownloadThread().getIndexes();
-		listAdapter.update(indexes);
-		expandAllGroups();
-	}
+	
 
 	public static class DownloadResourceGroupAdapter extends OsmandBaseExpandableListAdapter {
 

@@ -54,6 +54,16 @@ public class DownloadIndexesThread {
 	private int currentDownloadingItemProgress = 0;
 
 	private DownloadResources indexes;
+	
+	
+	public interface DownloadEvents {
+		
+		void newDownloadIndexes();
+		
+		void downloadInProgress();
+		
+		void downloadHasFinished();
+	}
 
 
 	public DownloadIndexesThread(Context ctx) {
@@ -166,10 +176,6 @@ public class DownloadIndexesThread {
 	}
 
 
-	public boolean isDownloadedFromInternet() {
-		return indexes.isDownloadedFromInternet;
-	}
-	
 	public IndexItem getCurrentDownloadingItem() {
 		return currentDownloadingItem;
 	}

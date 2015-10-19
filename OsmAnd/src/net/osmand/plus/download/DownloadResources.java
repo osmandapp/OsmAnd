@@ -32,6 +32,10 @@ public class DownloadResources extends DownloadResourceGroup {
 		this.region = app.getWorldRegion();
 		this.app = app;
 	}
+	
+	public List<IndexItem> getItemsToUpdate() {
+		return itemsToUpdate;
+	}
 
 	public void initAlreadyLoadedFiles() {
 		java.text.DateFormat dateFormat = app.getResourceManager().getDateFormat();

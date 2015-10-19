@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import net.osmand.plus.R;
 import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.IndexItem;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -16,7 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
-public class ActiveDownloadsDialogFragment extends DialogFragment {
+public class ActiveDownloadsDialogFragment extends DialogFragment implements DownloadEvents {
 
 	private IndexItemAdapter adapter;
 
@@ -27,21 +28,20 @@ public class ActiveDownloadsDialogFragment extends DialogFragment {
 		builder.setTitle(R.string.downloads).setNegativeButton(R.string.shared_string_dismiss, null);
 		adapter = new IndexItemAdapter(getDownloadActivity());
 		builder.setAdapter(adapter, null);
-		getDownloadActivity().setActiveDownloads(this);
 		return builder.create();
 	}
 	
-	public void notifyDataSetInvalidated() {
+	public void newDownloadIndexes() {
 		adapter.refreshAllData();
+	};
+	
+	@Override
+	public void downloadHasFinished() {
+		adapter.refreshAllData();		
 	}
 	
-	public void notifyDataSetChanged() {
+	public void downloadInProgress() {
 		adapter.notifyDataSetChanged();
-	}
-	
-	public void onDetach() {
-		super.onDetach();
-		getDownloadActivity().setActiveDownloads(null);
 	};
 	
 	
@@ -87,7 +87,9 @@ public class ActiveDownloadsDialogFragment extends DialogFragment {
 		
 	}
 
-	private static class DownloadEntryViewHolder extends TwoLineWithImagesViewHolder {
+	
+	// FIXME review view holder
+	private static class DownloadEntryViewHolder extends ItemViewHolder {
 		private final Drawable deleteDrawable;
 		private final IndexItemAdapter adapter;
 

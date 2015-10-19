@@ -14,6 +14,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.WorldRegion;
 import net.osmand.plus.download.BaseDownloadActivity;
 import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.IndexItem;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -28,7 +29,7 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ListView;
 
-public class SearchItemsFragment extends Fragment {
+public class SearchItemsFragment extends Fragment implements DownloadEvents {
 	public static final String TAG = "SearchItemsFragment";
 
 	private SearchItemsAdapter listAdapter;

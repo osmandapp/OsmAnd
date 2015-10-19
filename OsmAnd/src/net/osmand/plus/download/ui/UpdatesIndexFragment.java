@@ -1,23 +1,19 @@
 package net.osmand.plus.download.ui;
 
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import net.osmand.PlatformUtil;
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmAndListFragment;
-import net.osmand.plus.download.BaseDownloadActivity;
 import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
+import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
-
-import org.apache.commons.logging.Log;
-
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -33,19 +29,14 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class UpdatesIndexFragment extends OsmAndListFragment {
-	private static final Log LOG = PlatformUtil.getLog(UpdateIndexAdapter.class);
+public class UpdatesIndexFragment extends OsmAndListFragment implements DownloadEvents {
 	private static final int RELOAD_ID = 5;
 	private UpdateIndexAdapter listAdapter;
-	List<IndexItem> indexItems = new ArrayList<>();
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		if (BaseDownloadActivity.downloadListIndexThread != null) {
-			indexItems = new ArrayList<>(DownloadActivity.downloadListIndexThread.getItemsToUpdate());
-		}
-		createListView();
+		invalidateListView();
 		setHasOptionsMenu(true);
 	}
 
@@ -58,11 +49,27 @@ public class UpdatesIndexFragment extends OsmAndListFragment {
 	public ArrayAdapter<?> getAdapter() {
 		return listAdapter;
 	}
+	
+	@Override
+	public void downloadHasFinished() {
+		invalidateListView();
+	}
+	
+	@Override
+	public void downloadInProgress() {
+		listAdapter.notifyDataSetChanged();
+	}
+	
+	@Override
+	public void newDownloadIndexes() {
+		invalidateListView();
+	}
 
-	private void createListView() {
-		updateUpdateAllButton();
+	public void invalidateListView() {
+		DownloadResources indexes = getMyActivity().getDownloadThread().getIndexes();
+		List<IndexItem> indexItems = indexes.getItemsToUpdate();
 		if (indexItems.size() == 0) {
-			if (DownloadActivity.downloadListIndexThread.isDownloadedFromInternet()) {
+			if (indexes.isDownloadedFromInternet) {
 				indexItems.add(new IndexItem(getString(R.string.everything_up_to_date), "", 0, "", 0, 0, null));
 			} else {
 				indexItems.add(new IndexItem(getString(R.string.no_index_file_to_download), "", 0, "", 0, 0, null));
@@ -78,10 +85,11 @@ public class UpdatesIndexFragment extends OsmAndListFragment {
 						.compareTo(indexItem2.getVisibleName(getMyApplication(), osmandRegions));
 			}
 		});
+		updateUpdateAllButton(indexes.getItemsToUpdate());
 		setListAdapter(listAdapter);
 	}
 
-	private void updateUpdateAllButton() {
+	private void updateUpdateAllButton(final List<IndexItem> indexItems) {
 		View view = getView();
 		if (getView() == null) {
 			return;
@@ -111,17 +119,6 @@ public class UpdatesIndexFragment extends OsmAndListFragment {
 		super.onResume();
 	}
 
-	public void updateItemsList() {
-		if (listAdapter == null) {
-			return;
-		}
-		List<IndexItem> items = BaseDownloadActivity.downloadListIndexThread.getItemsToUpdate();
-		if(items != null) {
-			indexItems = new ArrayList<IndexItem>(items);
-			createListView();
-		}
-	}
-
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		final IndexItem e = (IndexItem) getListAdapter().getItem(position);
@@ -132,9 +129,9 @@ public class UpdatesIndexFragment extends OsmAndListFragment {
 		return (DownloadActivity) getActivity();
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		updateUpdateAllButton();
 		ActionBar actionBar = getMyActivity().getSupportActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 
@@ -153,7 +150,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == RELOAD_ID) {
 			// re-create the thread
-			DownloadActivity.downloadListIndexThread.runReloadIndexFiles();
+			getMyActivity().getDownloadThread().runReloadIndexFiles();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -167,42 +164,23 @@ public class UpdatesIndexFragment extends OsmAndListFragment {
 			this.items = items;
 		}
 
-		public List<IndexItem> getIndexFiles() {
-			return items;
-		}
-
 		@Override
 		public View getView(final int position, final View convertView, final ViewGroup parent) {
 			View v = convertView;
 			if (v == null) {
 				LayoutInflater inflater = LayoutInflater.from(getMyActivity());
-				v = inflater.inflate(R.layout.two_line_with_images_list_item, null);
+				v = inflater.inflate(R.layout.two_line_with_images_list_item, parent, false);
 				v.setTag(new UpdateViewHolder(v, getMyActivity()));
 			}
 			UpdateViewHolder holder = (UpdateViewHolder) v.getTag();
 			holder.bindUpdatesIndexItem(items.get(position));
 			return v;
 		}
-
-		public void setIndexFiles(List<IndexItem> filtered) {
-			clear();
-			for (IndexItem item : filtered) {
-				add(item);
-			}
-			final OsmandRegions osmandRegions =
-					getMyApplication().getResourceManager().getOsmandRegions();
-			sort(new Comparator<IndexItem>() {
-				@Override
-				public int compare(IndexItem indexItem, IndexItem indexItem2) {
-					return indexItem.getVisibleName(getMyApplication(), osmandRegions).compareTo(indexItem2.getVisibleName(getMyApplication(), osmandRegions));
-				}
-			});
-		}
 	}
 
-	private static class UpdateViewHolder extends TwoLineWithImagesViewHolder {
+	// FIXME review and delete if duplicate
+	private static class UpdateViewHolder extends ItemViewHolder {
 		private final java.text.DateFormat format;
-
 		private UpdateViewHolder(View convertView,
 								 final DownloadActivity context) {
 			super(convertView, context);
@@ -245,6 +223,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment {
 		}
 
 
+		// FIXME general method for all maps
 		private String getMapDescription(IndexItem item) {
 			String typeName = getTypeName(item, item.getType().getStringResource());
 			String date = item.getDate(format);
