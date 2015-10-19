@@ -52,15 +52,6 @@
                     android:textSize="@dimen/default_sub_text_size"
                     tools:text="Contour Lines"/>
 
-                <TextView
-                    android:id="@+id/mapDateTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:maxLines="25"
-                    android:textSize="@dimen/default_sub_text_size"
-                    tools:text="Local version: 10/3/2015"/>
-
             </LinearLayout>
 
             <ProgressBar

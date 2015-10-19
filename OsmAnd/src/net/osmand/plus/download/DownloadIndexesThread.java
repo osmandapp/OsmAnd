@@ -55,7 +55,6 @@ public class DownloadIndexesThread {
 
 	private DownloadResources indexes;
 	
-	
 	public interface DownloadEvents {
 		
 		void newDownloadIndexes();
@@ -74,7 +73,6 @@ public class DownloadIndexesThread {
 		downloadFileHelper = new DownloadFileHelper(app);
 		dbHelper = new DatabaseHelper(app);
 	}
-
 
 	/// UI notifications methods
 	public void setUiActivity(BaseDownloadActivity uiActivity) {

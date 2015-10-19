@@ -24,7 +24,7 @@ public class DownloadResources extends DownloadResourceGroup {
 	private List<IndexItem> rawResources;
 	private List<IndexItem> itemsToUpdate = new ArrayList<>();
 	//public static final String WORLD_BASEMAP_KEY = "world_basemap.obf.zip";
-	public static final String WORLD_SEAMARKS_KEY = "world_seamarks_basemap.obf.zip";
+	public static final String WORLD_SEAMARKS_KEY = "world_seamarks_basemap";
 	
 	
 	public DownloadResources(OsmandApplication app) {
