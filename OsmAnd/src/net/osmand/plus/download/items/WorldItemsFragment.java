@@ -1,5 +1,20 @@
 package net.osmand.plus.download.items;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.WorldRegion;
+import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
+import net.osmand.plus.activities.OsmandExpandableListFragment;
+import net.osmand.plus.download.BaseDownloadActivity;
+import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.download.items.ItemsListBuilder.VoicePromptsType;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -16,45 +31,18 @@ import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 
-import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.R;
-import net.osmand.plus.Version;
-import net.osmand.plus.WorldRegion;
-import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
-import net.osmand.plus.activities.OsmandExpandableListFragment;
-import net.osmand.plus.download.BaseDownloadActivity;
-import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.download.items.ItemsListBuilder.VoicePromptsType;
-import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
-import net.osmand.plus.srtmplugin.SRTMPlugin;
-
-import org.apache.commons.logging.Log;
-
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-
-public class WorldItemsFragment extends OsmandExpandableListFragment
-		implements DownloadActivity.DataSetChangedListener {
+public class WorldItemsFragment extends OsmandExpandableListFragment {
 	public static final String TAG = "WorldItemsFragment";
-	private static final Log LOG = PlatformUtil.getLog(WorldItemsFragment.class);
 
 	public static final int RELOAD_ID = 0;
 	public static final int SEARCH_ID = 1;
-
 	private WorldItemsAdapter listAdapter;
 
-	private int worldRegionsIndex = -1;
-	private int worldMapsIndex = -1;
-	private int voicePromptsIndex = -1;
-
-	private int voicePromptsItemsRecordedSubIndex = -1;
-	private int voicePromptsItemsTTSSubIndex = -1;
+	protected int worldRegionsIndex = -1;
+	protected int worldMapsIndex = -1;
+	protected int voicePromptsIndex = -1;
+	protected int voicePromptsItemsRecordedSubIndex = -1;
+	protected int voicePromptsItemsTTSSubIndex = -1;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -200,12 +188,6 @@ public class WorldItemsFragment extends OsmandExpandableListFragment
 		}
 	}
 
-	@Override
-	public void notifyDataSetChanged() {
-		listAdapter.notifyDataSetChanged();
-		((DownloadActivity) getActivity()).updateDescriptionTextWithSize(getView());
-	}
-
 	private class WorldItemsAdapter extends OsmandBaseExpandableListAdapter {
 
 		private Map<String, List<Object>> data = new LinkedHashMap<>();
@@ -226,7 +208,7 @@ public class WorldItemsFragment extends OsmandExpandableListFragment
 			notifyDataSetChanged();
 		}
 
-		public void add(String section, List list) {
+		public void add(String section, List<?> list) {
 			if (!sections.contains(section)) {
 				sections.add(section);
 			}

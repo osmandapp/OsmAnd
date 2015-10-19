@@ -1,5 +1,20 @@
 package net.osmand.plus.download.items;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.List;
+
+import net.osmand.Collator;
+import net.osmand.OsmAndCollator;
+import net.osmand.map.OsmandRegions;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.WorldRegion;
+import net.osmand.plus.download.BaseDownloadActivity;
+import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.download.IndexItem;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Bundle;
@@ -13,34 +28,8 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ListView;
 
-import net.osmand.Collator;
-import net.osmand.OsmAndCollator;
-import net.osmand.PlatformUtil;
-import net.osmand.map.OsmandRegions;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.R;
-import net.osmand.plus.Version;
-import net.osmand.plus.WorldRegion;
-import net.osmand.plus.download.BaseDownloadActivity;
-import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
-import net.osmand.plus.srtmplugin.SRTMPlugin;
-
-import org.apache.commons.logging.Log;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-
 public class SearchItemsFragment extends Fragment {
 	public static final String TAG = "SearchItemsFragment";
-	private static final Log LOG = PlatformUtil.getLog(SearchItemsFragment.class);
 
 	private SearchItemsAdapter listAdapter;
 
@@ -56,28 +45,24 @@ public class SearchItemsFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.download_search_items_fragment, container, false);
-
 		if (savedInstanceState != null) {
 			searchText = savedInstanceState.getString(SEARCH_TEXT_KEY);
 		}
 		if (searchText == null) {
 			searchText = getArguments().getString(SEARCH_TEXT_KEY);
 		}
-
 		if (searchText == null)
 			searchText = "";
 
 		ListView listView = (ListView) view.findViewById(android.R.id.list);
 		listAdapter = new SearchItemsAdapter(getActivity());
 		listView.setAdapter(listAdapter);
-
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				doItemClick(view, position);
 			}
 		});
-
 		fillSearchItemsAdapter();
 
 		return view;
@@ -166,15 +151,8 @@ public class SearchItemsFragment extends Fragment {
 
 		private OsmandRegions osmandRegions;
 
-		private boolean srtmDisabled;
-		private boolean nauticalPluginDisabled;
-		private boolean freeVersion;
-
 		public SearchItemsAdapter(Context ctx) {
 			osmandRegions = getMyApplication().getResourceManager().getOsmandRegions();
-			srtmDisabled = OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) == null;
-			nauticalPluginDisabled = OsmandPlugin.getEnabledPlugin(NauticalMapsPlugin.class) == null;
-			freeVersion = Version.isFreeVersion(getMyApplication());
 			TypedArray ta = ctx.getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorPrimary});
 			ta.recycle();
 		}
@@ -212,7 +190,6 @@ public class SearchItemsFragment extends Fragment {
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			final Object item = getItem(position);
-
 			ItemViewHolder viewHolder;
 			if (convertView == null) {
 				convertView = LayoutInflater.from(parent.getContext())
@@ -224,7 +201,6 @@ public class SearchItemsFragment extends Fragment {
 			} else {
 				viewHolder = (ItemViewHolder) convertView.getTag();
 			}
-
 			if (item instanceof WorldRegion) {
 				viewHolder.bindRegion((WorldRegion) item);
 			} else if (item instanceof IndexItem) {
@@ -297,36 +273,22 @@ public class SearchItemsFragment extends Fragment {
 						}
 					}
 
-					/*
-					Context c = getMyActivity();
-					for (IndexItem item : indexItems) {
-						String indexLC = item.getVisibleName(c, osmandRegions).toLowerCase();
-						if (isMatch(conds, false, indexLC)) {
-							filter.add(item);
-						}
-					}
-					*/
-
 					final Collator collator = OsmAndCollator.primaryCollator();
 					Collections.sort(filter, new Comparator<Object>() {
 						@Override
 						public int compare(Object obj1, Object obj2) {
-
 							String str1;
 							String str2;
-
 							if (obj1 instanceof WorldRegion) {
 								str1 = ((WorldRegion) obj1).getName();
 							} else {
 								str1 = ((IndexItem) obj1).getVisibleName(getMyApplication(), osmandRegions, false);
 							}
-
 							if (obj2 instanceof WorldRegion) {
 								str2 = ((WorldRegion) obj2).getName();
 							} else {
 								str2 = ((IndexItem) obj2).getVisibleName(getMyApplication(), osmandRegions, false);
 							}
-
 							return collator.compare(str1, str2);
 						}
 					});

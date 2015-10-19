@@ -1,5 +1,21 @@
 package net.osmand.plus.download;
 
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
+import net.osmand.PlatformUtil;
+import net.osmand.map.OsmandRegions;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.OsmAndListFragment;
+import net.osmand.plus.download.items.TwoLineWithImagesViewHolder;
+
+import org.apache.commons.logging.Log;
+
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -12,34 +28,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import net.osmand.PlatformUtil;
-import net.osmand.access.AccessibleToast;
-import net.osmand.map.OsmandRegions;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.OsmAndListFragment;
-import net.osmand.plus.download.items.TwoLineWithImagesViewHolder;
-
-import org.apache.commons.logging.Log;
-
-import java.text.MessageFormat;
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-
-public class UpdatesIndexFragment extends OsmAndListFragment
-		implements DownloadActivity.DataSetChangedListener {
+public class UpdatesIndexFragment extends OsmAndListFragment {
 	private static final Log LOG = PlatformUtil.getLog(UpdateIndexAdapter.class);
+	private static final int RELOAD_ID = 5;
 	private UpdateIndexAdapter listAdapter;
 	List<IndexItem> indexItems = new ArrayList<>();
 
@@ -56,6 +50,11 @@ public class UpdatesIndexFragment extends OsmAndListFragment
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		return inflater.inflate(R.layout.update_index_frament, container, false);
+	}
+	
+	@Override
+	public ArrayAdapter<?> getAdapter() {
+		return listAdapter;
 	}
 
 	private void createListView() {
@@ -99,10 +98,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment
 			updateAllButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					for (IndexItem indexItem : indexItems) {
-						getMyActivity().addToDownload(indexItem);
-					}
-					getMyActivity().downloadFilesCheckFreeVersion();
+					getMyActivity().startDownload(indexItems.toArray(new IndexItem[indexItems.size()]));
 				}
 			});
 		}
@@ -113,12 +109,15 @@ public class UpdatesIndexFragment extends OsmAndListFragment
 		super.onResume();
 	}
 
-	public void updateItemsList(List<IndexItem> items) {
+	public void updateItemsList() {
 		if (listAdapter == null) {
 			return;
 		}
-		indexItems = new ArrayList<IndexItem>(items);
-		createListView();
+		List<IndexItem> items = BaseDownloadActivity.downloadListIndexThread.getItemsToUpdate();
+		if(items != null) {
+			indexItems = new ArrayList<IndexItem>(items);
+			createListView();
+		}
 	}
 
 	@Override
@@ -138,7 +137,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 
 		if (getMyApplication().getAppCustomization().showDownloadExtraActions()) {
-			MenuItem item = menu.add(0, DownloadIndexFragment.RELOAD_ID, 0, R.string.shared_string_refresh);
+			MenuItem item = menu.add(0, RELOAD_ID, 0, R.string.shared_string_refresh);
 			item.setIcon(R.drawable.ic_action_refresh_dark);
 			MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		}
@@ -150,63 +149,12 @@ public class UpdatesIndexFragment extends OsmAndListFragment
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		if (item.getItemId() == DownloadIndexFragment.RELOAD_ID) {
+		if (item.getItemId() == RELOAD_ID) {
 			// re-create the thread
 			DownloadActivity.downloadListIndexThread.runReloadIndexFiles();
 			return true;
-		} else if (item.getItemId() == DownloadIndexFragment.SELECT_ALL_ID) {
-			selectAll();
-			return true;
-		} else if (item.getItemId() == DownloadIndexFragment.FILTER_EXISTING_REGIONS) {
-			filterExisting();
-			return true;
-		} else if (item.getItemId() == DownloadIndexFragment.DESELECT_ALL_ID) {
-			deselectAll();
-			return true;
 		}
 		return super.onOptionsItemSelected(item);
-	}
-
-	private void selectAll() {
-		int selected = 0;
-		for (int i = 0; i < listAdapter.getCount(); i++) {
-			IndexItem es = listAdapter.getItem(i);
-			if (!getMyActivity().getEntriesToDownload().containsKey(es)) {
-				selected++;
-				getMyActivity().getEntriesToDownload().put(es, es.createDownloadEntry(getMyApplication(),
-						getMyActivity().getDownloadType(), new ArrayList<DownloadEntry>(1)));
-
-			}
-		}
-		AccessibleToast.makeText(getMyActivity(), MessageFormat.format(getString(R.string.items_were_selected), selected), Toast.LENGTH_SHORT).show();
-		listAdapter.notifyDataSetInvalidated();
-		if (selected > 0) {
-			getMyActivity().updateFragments();
-		}
-	}
-
-	public void deselectAll() {
-		DownloadActivity.downloadListIndexThread.getEntriesToDownload().clear();
-		listAdapter.notifyDataSetInvalidated();
-		getMyActivity().updateFragments();
-	}
-
-	private void filterExisting() {
-		final Map<String, String> listAlreadyDownloaded = DownloadActivity.downloadListIndexThread.getDownloadedIndexFileNames();
-
-		final List<IndexItem> filtered = new ArrayList<>();
-		for (IndexItem fileItem : listAdapter.getIndexFiles()) {
-			if (fileItem.isAlreadyDownloaded(listAlreadyDownloaded)) {
-				filtered.add(fileItem);
-			}
-		}
-		listAdapter.setIndexFiles(filtered);
-		listAdapter.notifyDataSetChanged();
-	}
-
-	@Override
-	public void notifyDataSetChanged() {
-		listAdapter.notifyDataSetChanged();
 	}
 
 	private class UpdateIndexAdapter extends ArrayAdapter<IndexItem> {

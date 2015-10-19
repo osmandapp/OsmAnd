@@ -96,6 +96,11 @@ public class NotesFragment extends OsmAndListFragment {
 		return view;
 	}
 	
+	@Override
+	public ArrayAdapter<?> getAdapter() {
+		return listAdapter;
+	}
+	
 	private void selectAll() {
 		for (int i = 0; i < listAdapter.getCount(); i++) {
 			Recording point = listAdapter.getItem(i);

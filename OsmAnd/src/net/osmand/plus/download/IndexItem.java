@@ -1,26 +1,22 @@
 package net.osmand.plus.download;
 
-import android.content.Context;
-import android.os.Parcel;
-import android.os.Parcelable;
-import android.support.annotation.NonNull;
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
+import java.util.Map;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.helpers.HasName;
 
 import org.apache.commons.logging.Log;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import android.content.Context;
+import android.support.annotation.NonNull;
 
-public class IndexItem implements Comparable<IndexItem>, HasName, Parcelable {
+public class IndexItem implements Comparable<IndexItem>/*, Parcelable*/ {
 	private static final Log log = PlatformUtil.getLog(IndexItem.class);
 	
 	String description;
@@ -33,7 +29,6 @@ public class IndexItem implements Comparable<IndexItem>, HasName, Parcelable {
 	DownloadActivityType type;
 	boolean extra;
 
-	private String initializedName;
 
 	public IndexItem(String fileName, String description, long timestamp, String size, long contentSize,
 			long containerSize, DownloadActivityType tp) {
@@ -74,14 +69,17 @@ public class IndexItem implements Comparable<IndexItem>, HasName, Parcelable {
 	public long getContentSize() {
 		return contentSize;
 	}
+	
+	public double getContentSizeMB() {
+		return ((double)contentSize) / (1 << 20);
+	}
 
 	public String getSizeDescription(Context ctx) {
 		return size + " MB";
 	}
 	
 
-	public List<DownloadEntry> createDownloadEntry(OsmandApplication ctx, DownloadActivityType type, 
-			List<DownloadEntry> downloadEntries) {
+	public DownloadEntry createDownloadEntry(OsmandApplication ctx) {
 		String fileName = this.fileName;
 		File parent = type.getDownloadFolder(ctx, this);
 		boolean preventMediaIndexing = type.preventMediaIndexing(ctx, this);
@@ -97,11 +95,12 @@ public class IndexItem implements Comparable<IndexItem>, HasName, Parcelable {
 				}
 			}
 		}
-		final DownloadEntry entry;
+		DownloadEntry entry;
 		if (parent == null || !parent.exists()) {
 			ctx.showToastMessage(R.string.sd_dir_not_accessible);
+			entry = null;
 		} else {
-			entry = new DownloadEntry(this);
+			entry = new DownloadEntry();
 			entry.type = type;
 			entry.baseName = getBasename();
 			entry.urlToDownload = entry.type.getBaseUrl(ctx, fileName) + entry.type.getUrlSuffix(ctx);
@@ -109,15 +108,26 @@ public class IndexItem implements Comparable<IndexItem>, HasName, Parcelable {
 			entry.unzipFolder = type.isZipFolder(ctx, this);
 			entry.dateModified = timestamp; 
 			entry.sizeMB = contentSize / (1024f*1024f);
-			String extension = type.getUnzipExtension(ctx, this);
-			entry.targetFile = new File(parent, entry.baseName + extension);
-			File backup = new File(ctx.getAppPath(IndexConstants.BACKUP_INDEX_DIR), entry.targetFile.getName());
-			if (backup.exists()) {
-				entry.existingBackupFile = backup;
-			}
-			downloadEntries.add(entry);
+			entry.targetFile = getTargetFile(ctx);
 		}
-		return downloadEntries;
+		return entry;
+	}
+
+	public String getTargetFileName() {
+		return type.getTargetFileName(this);
+	}
+
+	public String getBasename() {
+		return type.getBasename(this);
+	}
+	
+	private File getTargetFile(OsmandApplication ctx) {
+		return new File(type.getDownloadFolder(ctx, this), getBasename() + type.getUnzipExtension(ctx, this));
+	}
+
+	public File getBackupFile(OsmandApplication ctx) {
+		File backup = new File(ctx.getAppPath(IndexConstants.BACKUP_INDEX_DIR), getTargetFile(ctx).getName());
+		return backup;
 	}
 	
 	@Override
@@ -132,9 +142,7 @@ public class IndexItem implements Comparable<IndexItem>, HasName, Parcelable {
 		return listAlreadyDownloaded.containsKey(getTargetFileName());
 	}
 
-	public String getBasename() {
-		return type.getBasename(this);
-	}
+	
 
 	public String getVisibleName(Context ctx, OsmandRegions osmandRegions) {
 		return type.getVisibleName(this, ctx, osmandRegions, true);
@@ -148,22 +156,12 @@ public class IndexItem implements Comparable<IndexItem>, HasName, Parcelable {
 		return type.getVisibleDescription(this, clctx);
 	}
 
-	public String getTargetFileName() {
-		return type.getTargetFileName(this);
-	}
+	
 
 	public String getDate(java.text.DateFormat format) {
 		return format.format(new Date(timestamp));
 	}
 
-	@Override
-	public String getName() {
-		return initializedName + " must be fixed";
-	}
-
-	public void setName(String initializedName) {
-		this.initializedName = initializedName;
-	}
 
 //	@Override
 //	public String toString() {
@@ -180,45 +178,45 @@ public class IndexItem implements Comparable<IndexItem>, HasName, Parcelable {
 //				'}';
 //	}
 
-	@Override
-	public int describeContents() {
-		return 0;
-	}
-
-	@Override
-	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeString(this.description);
-		dest.writeString(this.fileName);
-		dest.writeString(this.size);
-		dest.writeLong(this.timestamp);
-		dest.writeLong(this.contentSize);
-		dest.writeLong(this.containerSize);
-		dest.writeParcelable(this.type, flags);
-		dest.writeByte(extra ? (byte) 1 : (byte) 0);
-		dest.writeString(this.initializedName);
-		dest.writeString(this.simplifiedFileName);
-	}
-
-	protected IndexItem(Parcel in) {
-		this.description = in.readString();
-		this.fileName = in.readString();
-		this.size = in.readString();
-		this.timestamp = in.readLong();
-		this.contentSize = in.readLong();
-		this.containerSize = in.readLong();
-		this.type = in.readParcelable(DownloadActivityType.class.getClassLoader());
-		this.extra = in.readByte() != 0;
-		this.initializedName = in.readString();
-		this.simplifiedFileName = in.readString();
-	}
-
-	public static final Parcelable.Creator<IndexItem> CREATOR = new Parcelable.Creator<IndexItem>() {
-		public IndexItem createFromParcel(Parcel source) {
-			return new IndexItem(source);
-		}
-
-		public IndexItem[] newArray(int size) {
-			return new IndexItem[size];
-		}
-	};
+//	@Override
+//	public int describeContents() {
+//		return 0;
+//	}
+//
+//	@Override
+//	public void writeToParcel(Parcel dest, int flags) {
+//		dest.writeString(this.description);
+//		dest.writeString(this.fileName);
+//		dest.writeString(this.size);
+//		dest.writeLong(this.timestamp);
+//		dest.writeLong(this.contentSize);
+//		dest.writeLong(this.containerSize);
+//		dest.writeParcelable(this.type, flags);
+//		dest.writeByte(extra ? (byte) 1 : (byte) 0);
+//		dest.writeString(this.initializedName);
+//		dest.writeString(this.simplifiedFileName);
+//	}
+//
+//	protected IndexItem(Parcel in) {
+//		this.description = in.readString();
+//		this.fileName = in.readString();
+//		this.size = in.readString();
+//		this.timestamp = in.readLong();
+//		this.contentSize = in.readLong();
+//		this.containerSize = in.readLong();
+//		this.type = in.readParcelable(DownloadActivityType.class.getClassLoader());
+//		this.extra = in.readByte() != 0;
+//		this.initializedName = in.readString();
+//		this.simplifiedFileName = in.readString();
+//	}
+//
+//	public static final Parcelable.Creator<IndexItem> CREATOR = new Parcelable.Creator<IndexItem>() {
+//		public IndexItem createFromParcel(Parcel source) {
+//			return new IndexItem(source);
+//		}
+//
+//		public IndexItem[] newArray(int size) {
+//			return new IndexItem[size];
+//		}
+//	};
 }

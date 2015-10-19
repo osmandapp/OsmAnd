@@ -154,7 +154,7 @@ public class VoiceItemsFragment extends OsmandExpandableListFragment {
 			notifyDataSetChanged();
 		}
 
-		public void add(String section, List list) {
+		public void add(String section, List<?> list) {
 			if (!sections.contains(section)) {
 				sections.add(section);
 			}

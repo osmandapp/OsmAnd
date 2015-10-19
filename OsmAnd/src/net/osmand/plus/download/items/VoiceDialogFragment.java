@@ -88,9 +88,6 @@ public class VoiceDialogFragment extends DialogFragment {
 		return (OsmandApplication) getActivity().getApplication();
 	}
 
-	private DownloadActivity getDownloadActivity() {
-		return (DownloadActivity) getActivity();
-	}
 
 	public static VoiceDialogFragment createInstance(VoicePromptsType voicePromptsType) {
 		Bundle bundle = new Bundle();
