@@ -1,19 +1,8 @@
 package net.osmand.plus.audionotes;
 
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Paint.Style;
-import android.graphics.PointF;
-import android.widget.ArrayAdapter;
-import android.widget.Toast;
+import java.util.List;
 
 import net.osmand.access.AccessibleAlertBuilder;
-import net.osmand.access.AccessibleToast;
 import net.osmand.data.DataTileManager;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -27,9 +16,16 @@ import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
-
-import java.util.ArrayList;
-import java.util.List;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Paint.Style;
+import android.graphics.PointF;
+import android.widget.ArrayAdapter;
 
 public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvider {
 
@@ -101,7 +97,7 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 					b = video;
 
 				}
-				canvas.drawBitmap(b, x - b.getWidth() / 2, y - b.getHeight(), paintIcon);
+				canvas.drawBitmap(b, x - b.getWidth() / 2, y - b.getHeight() / 2, paintIcon);
 			}
 		}
 	}
