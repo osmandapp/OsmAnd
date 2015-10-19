@@ -2178,4 +2178,44 @@
 	<string name="poi_dog_yes">Hunde tilladt</string>
 	<string name="poi_dog_no">Hunde ikke tilladt</string>
 
+<string name="poi_refugee_yes">Flygtningefaciliteter</string>
+	<string name="poi_refugee_no">Flygtninge: nej</string>
+
+	<string name="poi_social_facility_group_home">Socialfacilitet: bosted</string>
+	<string name="poi_social_facility_assisted_living">Social facilitet: bistået levende</string>
+	<string name="poi_social_facility_outreach">Social facilitet: opsøgende</string>
+	<string name="poi_social_facility_food_bank">Social facilitet: food bank</string>
+	<string name="poi_social_facility_shelter">Social facilitet: ly</string>
+	<string name="poi_social_facility_ambulatory_care">Social facilitet: Ambulant pleje</string>
+	<string name="poi_social_facility_workshop">Social facilitet: workshop</string>
+	<string name="poi_social_facility_day_care">Social facilitet: Dagpleje</string>
+
+	<string name="poi_social_facility_for_senior">Sociale målgruppe: seniorer</string>
+	<string name="poi_social_facility_for_child">Sociale målgruppe: børn</string>
+	<string name="poi_social_facility_for_orphan">Sociale målgruppe: forældreløse</string>
+	<string name="poi_social_facility_for_disabled">Sociale målgruppe: deaktiveret</string>
+	<string name="poi_social_facility_for_mental_health">Sociale målgruppe: patienter med psykiske lidelser</string>
+	<string name="poi_social_facility_for_juvenile">Sociale målgruppe: unge</string>
+	<string name="poi_social_facility_for_homeless">Sociale målgruppe: hjemløse</string>
+	<string name="poi_social_facility_for_migrant">Sociale målgruppe: indvandrere</string>
+	<string name="poi_social_facility_for_underprivileged">Sociale målgruppe: underprivilegerede</string>
+	<string name="poi_social_facility_for_drug_addicted">Sociale målgruppe: lægemiddel forfalden</string>
+	<string name="poi_social_facility_for_unemployed">Sociale målgruppe: arbejdsløs</string>
+	<string name="poi_social_facility_for_diseased">Sociale målgruppe: syge</string>
+	<string name="poi_social_facility_for_child_juvenile">Sociale målgruppe: børn, unge</string>
+
+	<string name="poi_theatre_genre_philharmonic">Genre: philharmonic</string>
+	<string name="poi_theatre_genre_musical">Genre: musikal</string>
+	<string name="poi_theatre_genre_drama">Genre: drama</string>
+	<string name="poi_theatre_genre_opera">Genre: opera</string>
+	<string name="poi_theatre_genre_cabaret">Genre: cabaret</string>
+	<string name="poi_theatre_genre_puppet">Genre: marionet</string>
+	<string name="poi_theatre_genre_comedy">Genre: komedie</string>
+	<string name="poi_theatre_genre_chamber_music">Genre: kammermusik</string>
+	<string name="poi_theatre_genre_marionette">Genre: marionet</string>
+	<string name="poi_theatre_genre_ballet">Genre: ballet</string>
+	<string name="poi_theatre_genre_shadow_play">Genre: shadow play</string>
+
+	<string name="poi_bandstand">Bandstand</string>
+
 </resources>
