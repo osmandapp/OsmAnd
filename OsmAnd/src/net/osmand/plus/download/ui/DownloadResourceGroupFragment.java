@@ -186,7 +186,6 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 					}
 				}
 			}
-			((DownloadActivity) getActivity()).startDownload(indexItem);
 			if (!handled) {
 				ItemViewHolder vh = (ItemViewHolder) v.getTag();
 				OnClickListener ls = vh.getRightButtonAction(indexItem, vh.getClickAction(indexItem));

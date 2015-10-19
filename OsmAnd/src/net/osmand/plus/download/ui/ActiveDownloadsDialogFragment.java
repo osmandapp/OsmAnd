@@ -77,6 +77,7 @@ public class ActiveDownloadsDialogFragment extends DialogFragment implements Dow
 				ItemViewHolder viewHolder =
 						new ItemViewHolder(convertView, context);
 				viewHolder.setSilentCancelDownload(true);
+				viewHolder.setShowTypeInDesc(true);
 				viewHolder.setShowProgressInDescr(true);
 				convertView.setTag(viewHolder);
 			}

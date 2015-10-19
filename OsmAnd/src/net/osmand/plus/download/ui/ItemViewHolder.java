@@ -1,7 +1,6 @@
 package net.osmand.plus.download.ui;
 
 import java.text.DateFormat;
-
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -12,6 +11,7 @@ import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -137,7 +137,7 @@ public class ItemViewHolder {
 			leftImageView.setImageDrawable(getContentIcon(context,
 					indexItem.getType().getIconResource()));
 		}
-		descrTextView.setTextColor(color);
+		descrTextView.setTextColor(textColorSecondary);
 		if (!isDownloading) {
 			progressBar.setVisibility(View.GONE);
 			descrTextView.setVisibility(View.VISIBLE);
@@ -149,7 +149,8 @@ public class ItemViewHolder {
 						" • " + indexItem.getSizeDescription(context) +
 						" • " + (showRemoteDate ? indexItem.getRemoteDate(dateFormat) : indexItem.getLocalDate(dateFormat)));
 			} else {
-				descrTextView.setText(indexItem.getSizeDescription(context) + " • " + (showRemoteDate ? indexItem.getRemoteDate(dateFormat) : indexItem.getLocalDate(dateFormat)));
+				descrTextView.setText(indexItem.getSizeDescription(context) + " • " + 
+						(showRemoteDate ? indexItem.getRemoteDate(dateFormat) : indexItem.getLocalDate(dateFormat)));
 			}
 			
 			rightImageButton.setImageDrawable(getContentIcon(context, R.drawable.ic_action_import));
@@ -165,12 +166,17 @@ public class ItemViewHolder {
 			progressBar.setProgress(progress);
 			
 			if (showProgressInDesc) {
-				double mb = indexItem.getContentSizeMB();
+				double mb = indexItem.getArchiveSizeMB();
+				String v ;
 				if (progress != -1) {
-					descrTextView.setText(context.getString(R.string.value_downloaded_from_max, mb * progress / 100,
-							mb));
+					v = context.getString(R.string.value_downloaded_from_max, mb * progress / 100, mb);
 				} else {
-					descrTextView.setText(context.getString(R.string.file_size_in_mb, mb));
+					v = context.getString(R.string.file_size_in_mb, mb);
+				}
+				if(showTypeInDesc) {
+					descrTextView.setText(indexItem.getType().getString(context) + " • " +v);
+				} else {
+					descrTextView.setText(v);
 				}
 				descrTextView.setVisibility(View.VISIBLE);
 			} else {
@@ -208,6 +214,7 @@ public class ItemViewHolder {
 		return disabled;
 	}
 
+	@SuppressLint("DefaultLocale")
 	public RightButtonAction getClickAction(final IndexItem indexItem) {
 		RightButtonAction clickAction = RightButtonAction.DOWNLOAD;
 		if (indexItem.getBasename().toLowerCase().equals(DownloadResources.WORLD_SEAMARKS_KEY)
