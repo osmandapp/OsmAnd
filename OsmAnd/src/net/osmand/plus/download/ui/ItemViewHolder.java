@@ -173,8 +173,8 @@ public class ItemViewHolder {
 				} else {
 					v = context.getString(R.string.file_size_in_mb, mb);
 				}
-				if(showTypeInDesc) {
-					descrTextView.setText(indexItem.getType().getString(context) + " • " +v);
+				if(showTypeInDesc && indexItem.getType() == DownloadActivityType.ROADS_FILE) {
+					descrTextView.setText(indexItem.getType().getString(context) + " • " + v);
 				} else {
 					descrTextView.setText(v);
 				}
