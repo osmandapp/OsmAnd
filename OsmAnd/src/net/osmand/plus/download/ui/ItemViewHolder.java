@@ -15,15 +15,11 @@ import net.osmand.access.AccessibleToast;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
-import net.osmand.plus.WorldRegion;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
-
-import java.text.DateFormat;
-import java.util.Map;
 
 // FIXME
 public class ItemViewHolder {
@@ -49,7 +45,7 @@ public class ItemViewHolder {
 	private RightButtonAction rightButtonAction;
 
 	private enum RightButtonAction {
-		UNKNOWN,
+		NONE,
 		ASK_FOR_SEAMARKS_PLUGIN,
 		ASK_FOR_SRTM_PLUGIN_PURCHASE,
 		ASK_FOR_SRTM_PLUGIN_ENABLE,
@@ -90,7 +86,7 @@ public class ItemViewHolder {
 							  boolean showTypeInTitle, boolean showTypeInDesc) {
 		initAppStatusVariables();
 		boolean disabled = false;
-		rightButtonAction = RightButtonAction.UNKNOWN;
+		rightButtonAction = RightButtonAction.NONE;
 		boolean downloading = context.getDownloadThread().isDownloading(indexItem);
 		int progress = -1;
 		if (context.getDownloadThread().getCurrentDownloadingItem() == indexItem) {
@@ -109,11 +105,13 @@ public class ItemViewHolder {
 			nameTextView.setText(indexItem.getVisibleName(context,
 					context.getMyApplication().getRegions(), false));
 		} else {
+/* FIXME
 			if (indexItem.getSimplifiedFileName().equals(WORLD_SEAMARKS_KEY)
 					&& nauticalPluginDisabled) {
 				rightButtonAction = RightButtonAction.ASK_FOR_SEAMARKS_PLUGIN;
 				disabled = true;
 			}
+*/
 			if ((indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE ||
 					indexItem.getType() == DownloadActivityType.HILLSHADE_FILE) && srtmDisabled) {
 				OsmandPlugin srtmPlugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
@@ -149,7 +147,6 @@ public class ItemViewHolder {
 			rightImageButton.setImageDrawable(getContentIcon(context, R.drawable.ic_action_import));
 			progressBar.setVisibility(View.GONE);
 
-			Map<String,String> indexFileNames = context.getIndexFileNames();
 			if (indexItem.isDownloaded()) {
 				String date = indexItem.getLocalDate();
 				boolean outdated = indexItem.isOutdated();
@@ -178,7 +175,7 @@ public class ItemViewHolder {
 					getContentIcon(context, R.drawable.ic_action_remove_dark));
 		}
 
-		if (rightButtonAction != RightButtonAction.UNKNOWN) {
+		if (rightButtonAction != RightButtonAction.NONE) {
 			rightButton.setText(R.string.get_plugin);
 			rightButton.setVisibility(View.VISIBLE);
 			rightImageButton.setVisibility(View.GONE);
@@ -210,7 +207,7 @@ public class ItemViewHolder {
 							AccessibleToast.makeText(context,
 									context.getString(R.string.activate_srtm_plugin), Toast.LENGTH_SHORT).show();
 							break;
-						case UNKNOWN:
+						case NONE:
 							break;
 					}
 				}
@@ -231,6 +228,6 @@ public class ItemViewHolder {
 	}
 
 	public boolean isItemAvailable() {
-		return rightButtonAction == RightButtonAction.UNKNOWN;
+		return rightButtonAction == RightButtonAction.NONE;
 	}
 }

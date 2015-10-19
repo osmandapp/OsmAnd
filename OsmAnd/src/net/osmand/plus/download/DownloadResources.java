@@ -170,10 +170,10 @@ public class DownloadResources extends DownloadResourceGroup {
 		this.rawResources = resources;
 		
 		DownloadResourceGroup voiceGroup = new DownloadResourceGroup(this, DownloadResourceGroupType.VOICE_GROUP);
-		DownloadResourceGroup voiceScreenRec = new DownloadResourceGroup(this, DownloadResourceGroupType.VOICE_REC);
-		DownloadResourceGroup voiceRec = new DownloadResourceGroup(this, DownloadResourceGroupType.VOICE_HEADER_REC);
-		DownloadResourceGroup voiceTTS = new DownloadResourceGroup(this, DownloadResourceGroupType.VOICE_TTS);
-		DownloadResourceGroup voiceScreenTTS = new DownloadResourceGroup(this, DownloadResourceGroupType.VOICE_HEADER_TTS);
+		DownloadResourceGroup voiceScreenRec = new DownloadResourceGroup(voiceGroup, DownloadResourceGroupType.VOICE_REC);
+		DownloadResourceGroup voiceScreenTTS = new DownloadResourceGroup(voiceGroup, DownloadResourceGroupType.VOICE_TTS);
+		DownloadResourceGroup voiceRec = new DownloadResourceGroup(voiceGroup, DownloadResourceGroupType.VOICE_HEADER_REC, DownloadResourceGroupType.VOICE_REC.name().toLowerCase());
+		DownloadResourceGroup voiceTTS = new DownloadResourceGroup(voiceGroup, DownloadResourceGroupType.VOICE_HEADER_TTS, DownloadResourceGroupType.VOICE_TTS.name().toLowerCase());
 		voiceScreenTTS.addGroup(voiceTTS);
 		voiceScreenRec.addGroup(voiceRec);
 		voiceGroup.addGroup(voiceScreenRec);
@@ -194,6 +194,7 @@ public class DownloadResources extends DownloadResourceGroup {
 				} else {
 					voiceRec.addItem(ii);
 				}
+				continue;
 			}
 			String basename = ii.getBasename().toLowerCase();
 			WorldRegion wg = downloadIdForRegion.get(basename);
@@ -219,6 +220,7 @@ public class DownloadResources extends DownloadResourceGroup {
 			DownloadResourceGroup parentGroup = parent.pollFirst();
 			List<WorldRegion> subregions = reg.getSubregions();
 			DownloadResourceGroup mainGrp = new DownloadResourceGroup(parentGroup, DownloadResourceGroupType.REGION, reg.getRegionId());
+			mainGrp.region = reg;
 			parentGroup.addGroup(mainGrp);
 			DownloadResourceGroup subRegions = new DownloadResourceGroup(mainGrp, DownloadResourceGroupType.SUBREGIONS);
 			mainGrp.addGroup(subRegions);

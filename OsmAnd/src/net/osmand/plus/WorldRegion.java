@@ -85,7 +85,7 @@ public class WorldRegion {
 
 	public void initWorld() {
 		regionId = "";
-		downloadsId= WORLD;
+		downloadsId = WORLD;
 		name = "";
 		superregion = null;
 	}
@@ -106,14 +106,6 @@ public class WorldRegion {
 				this.name = capitalize(regionId.replace('_', ' '));
 			}
 		}
-		return this;
-	}
-
-
-	private WorldRegion init(String regionId, String name) {
-		this.regionId = regionId;
-		this.downloadsId = regionId.toLowerCase() ;
-		this.name = name;
 		return this;
 	}
 

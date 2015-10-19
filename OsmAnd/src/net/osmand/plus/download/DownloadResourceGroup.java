@@ -1,6 +1,7 @@
 package net.osmand.plus.download;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -53,7 +54,7 @@ public class DownloadResourceGroup {
 		}
 
 		public boolean containsIndexItem() {
-			return isHeader() && this != SUBREGIONS;
+			return isHeader() && this != SUBREGIONS && this != VOICE_GROUP;
 		}
 
 		public boolean isHeader() {
@@ -203,8 +204,14 @@ public class DownloadResourceGroup {
 		return null;
 	}
 	
-	public String getName() {
-		return id;
+	public String getName(Context ctx) {
+		if (region != null) {
+			return region.getName();
+		} else if (type != null && type.resId != -1) {
+			return ctx.getString(type.resId);
+		} else {
+			return id;
+		}
 	}
 
 	public String getUniqueId() {

@@ -29,7 +29,7 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ListView;
 
-public class SearchItemsFragment extends Fragment implements DownloadEvents {
+public class SearchItemsFragment { /*extends Fragment implements DownloadEvents {
 	public static final String TAG = "SearchItemsFragment";
 
 	private SearchItemsAdapter listAdapter;
@@ -332,4 +332,5 @@ public class SearchItemsFragment extends Fragment implements DownloadEvents {
 			}
 		}
 	}
+	*/
 }
