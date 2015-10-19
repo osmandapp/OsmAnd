@@ -138,10 +138,8 @@ public class DownloadActivity extends BaseDownloadActivity {
 		visibleBanner.updateBannerInProgress();
 		for (WeakReference<Fragment> ref : fragSet) {
 			Fragment f = ref.get();
-			if (f.isAdded()) {
-				if(f instanceof DownloadEvents) {
-					((DownloadEvents) f).downloadHasFinished();
-				}
+			if (f instanceof DownloadEvents && f.isAdded()) {
+				((DownloadEvents) f).downloadHasFinished();
 			}
 		}
 	}
@@ -152,10 +150,8 @@ public class DownloadActivity extends BaseDownloadActivity {
 		visibleBanner.updateBannerInProgress();
 		for (WeakReference<Fragment> ref : fragSet) {
 			Fragment f = ref.get();
-			if (f.isAdded()) {
-				if(f instanceof DownloadEvents) {
-					((DownloadEvents) f).downloadInProgress();
-				}
+			if (f instanceof DownloadEvents && f.isAdded()) {
+				((DownloadEvents) f).downloadInProgress();
 			}
 		}
 	}
@@ -168,10 +164,8 @@ public class DownloadActivity extends BaseDownloadActivity {
 		visibleBanner.updateBannerInProgress();
 		for (WeakReference<Fragment> ref : fragSet) {
 			Fragment f = ref.get();
-			if (f.isAdded()) {
-				if(f instanceof DownloadEvents) {
-					((DownloadEvents) f).newDownloadIndexes();
-				}
+			if (f instanceof DownloadEvents && f.isAdded()) {
+				((DownloadEvents) f).newDownloadIndexes();
 			}
 		}
 		downloadHasFinished();
