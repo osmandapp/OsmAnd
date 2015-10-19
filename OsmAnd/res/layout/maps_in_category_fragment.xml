@@ -28,8 +28,15 @@
 
     <include layout="@layout/progress_with_two_texts"/>
 
-    <FrameLayout
-        android:id="@+id/fragmentContainer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+
+    <ExpandableListView
+        android:id="@android:id/list"
+        style="@style/OsmandListView"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_weight="1"
+        android:groupIndicator="@android:color/transparent"/>
 </LinearLayout>

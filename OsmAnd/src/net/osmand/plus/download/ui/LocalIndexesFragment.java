@@ -162,6 +162,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		asyncLoader = new LoadLocalIndexTask();
 		asyncLoader.execute(getActivity());
 	}
+	
+	
 
 
 	private void showContextMenu(final LocalIndexInfo info) {
@@ -449,6 +451,19 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 				reloadIndexes();
 			}
 		}
+	}
+	
+	@Override
+	public void newDownloadIndexes() {
+	}
+	
+	@Override
+	public void downloadHasFinished() {
+		reloadData();
+	}
+	
+	@Override
+	public void downloadInProgress() {
 	}
 
 
