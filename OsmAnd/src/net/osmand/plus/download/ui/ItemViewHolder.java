@@ -129,7 +129,7 @@ public class ItemViewHolder {
 		if (!isDownloading) {
 			progressBar.setVisibility(View.GONE);
 			
-			descrTextView.setVisibility(color);
+			descrTextView.setTextColor(color);
 			descrTextView.setVisibility(View.VISIBLE);
 			if ((indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE ||
 					indexItem.getType() == DownloadActivityType.HILLSHADE_FILE) && srtmDisabled) {
