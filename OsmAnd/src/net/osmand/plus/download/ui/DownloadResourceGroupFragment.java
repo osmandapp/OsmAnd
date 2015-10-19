@@ -1,36 +1,56 @@
 package net.osmand.plus.download.ui;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.WorldRegion;
+import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivity.BannerAndDownloadFreeVersion;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadResourceGroup;
+import net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.util.Algorithms;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.Resources;
+import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
+import android.widget.TextView;
 
 public class DownloadResourceGroupFragment extends DialogFragment implements DownloadEvents, OnChildClickListener {
+	public static final int RELOAD_ID = 0;
+	public static final int SEARCH_ID = 1;
 	public static final String TAG = "RegionDialogFragment";
 	private static final String REGION_ID_DLG_KEY = "world_region_dialog_key";
 	private String groupId;
 	private View view;
 	private BannerAndDownloadFreeVersion banner;
 	protected ExpandableListView listView;
-	protected WorldItemsFragment.DownloadResourceGroupAdapter listAdapter;
+	protected DownloadResourceGroupAdapter listAdapter;
 	private DownloadResourceGroup group;
 	private DownloadActivity activity;
 	private Toolbar toolbar;
@@ -42,6 +62,10 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		int themeId = isLightTheme ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
 		setStyle(STYLE_NO_FRAME, themeId);
 		setHasOptionsMenu(true);
+	}
+
+	public boolean openAsDialog() {
+		return !Algorithms.isEmpty(groupId);
 	}
 
 	@Override
@@ -66,16 +90,19 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 				dismiss();
 			}
 		});
+		if (!openAsDialog()) {
+			toolbar.setVisibility(View.GONE);
+		}
 
 		setHasOptionsMenu(true);
-		
+
 		banner = new BannerAndDownloadFreeVersion(view, (DownloadActivity) getActivity());
-		
+
 		listView = (ExpandableListView) view.findViewById(android.R.id.list);
 		listView.setOnChildClickListener(this);
-		listAdapter = new WorldItemsFragment.DownloadResourceGroupAdapter(activity);
+		listAdapter = new DownloadResourceGroupAdapter(activity);
 		listView.setAdapter(listAdapter);
-		
+
 		reloadData();
 		return view;
 	}
@@ -101,6 +128,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+		setShowsDialog(openAsDialog());
 		listView.setBackgroundColor(getResources().getColor(
 				getMyApplication().getSettings().isLightContent() ? R.color.bg_color_light : R.color.bg_color_dark));
 	}
@@ -163,6 +191,34 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		return (DownloadActivity) getActivity();
 	}
 
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		if (!openAsDialog()) {
+			MenuItem itemReload = menu.add(0, RELOAD_ID, 0, R.string.shared_string_refresh);
+			itemReload.setIcon(R.drawable.ic_action_refresh_dark);
+			MenuItemCompat.setShowAsAction(itemReload, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+
+			MenuItem itemSearch = menu.add(0, SEARCH_ID, 1, R.string.shared_string_search);
+			itemSearch.setIcon(R.drawable.ic_action_search_dark);
+			MenuItemCompat.setShowAsAction(itemSearch, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+		}
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case RELOAD_ID:
+			// re-create the thread
+			getDownloadActivity().getDownloadThread().runReloadIndexFiles();
+			return true;
+		case SEARCH_ID:
+			getDownloadActivity().showDialog(getActivity(), SearchDialogFragment.createInstance(""));
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+	}
+
 	public void onRegionSelected(String regionId) {
 		final DownloadResourceGroupFragment regionDialogFragment = createInstance(regionId);
 		getDownloadActivity().showDialog(getActivity(), regionDialogFragment);
@@ -204,6 +260,194 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 			Bundle args = new Bundle();
 			fragment.setArguments(args);
 			return fragment;
+		}
+	}
+	
+	private static class DownloadGroupViewHolder {
+		TextView textView;
+		private DownloadActivity ctx;
+
+		public DownloadGroupViewHolder(DownloadActivity ctx, View v) {
+			this.ctx = ctx;
+			textView = (TextView) v.findViewById(R.id.title);
+		}
+
+		private Drawable getIconForGroup(DownloadResourceGroup group) {
+			Drawable iconLeft;
+			if (group.getType() == DownloadResourceGroupType.VOICE_REC
+					|| group.getType() == DownloadResourceGroupType.VOICE_TTS) {
+				iconLeft = ctx.getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_volume_up);
+			} else {
+				IconsCache cache = ctx.getMyApplication().getIconsCache();
+				if (group.getParentGroup() == null
+						|| group.getParentGroup().getType() == DownloadResourceGroupType.WORLD) {
+					iconLeft = cache.getContentIcon(R.drawable.ic_world_globe_dark);
+				} else {
+					DownloadResourceGroup ggr = group
+							.getGroupById(DownloadResourceGroupType.REGION_MAPS.getDefaultId());
+					iconLeft = cache.getContentIcon(R.drawable.ic_map);
+					if (ggr != null && ggr.getIndividualResources() != null) {
+						IndexItem item = null;
+						for (IndexItem ii : ggr.getIndividualResources()) {
+							if (ii.getType() == DownloadActivityType.NORMAL_FILE
+									|| ii.getType() == DownloadActivityType.ROADS_FILE) {
+								if (ii.isDownloaded() || ii.isOutdated()) {
+									item = ii;
+									break;
+								}
+							}
+						}
+						if (item != null) {
+							if (item.isOutdated()) {
+								iconLeft = cache.getIcon(R.drawable.ic_map,
+										ctx.getResources().getColor(R.color.color_distance));
+							} else {
+								iconLeft = cache.getIcon(R.drawable.ic_map,
+										ctx.getResources().getColor(R.color.color_ok));
+							}
+						}
+					}
+				}
+			}
+			return iconLeft;
+		}
+
+		public void bindItem(DownloadResourceGroup group) {
+			Drawable iconLeft = getIconForGroup(group);
+			textView.setCompoundDrawablesWithIntrinsicBounds(iconLeft, null, null, null);
+			String name = group.getName();
+			WorldRegion region = group.getRegion();
+			if (region != null) {
+				name = region.getName();
+			}
+			textView.setText(name);			
+		}
+	}
+
+	public static class DownloadResourceGroupAdapter extends OsmandBaseExpandableListAdapter {
+
+		private List<DownloadResourceGroup> data = new ArrayList<DownloadResourceGroup>();
+		private DownloadActivity ctx;
+
+		
+
+		public DownloadResourceGroupAdapter(DownloadActivity ctx) {
+			this.ctx = ctx;
+			TypedArray ta = ctx.getTheme().obtainStyledAttributes(new int[] { android.R.attr.textColorPrimary });
+			ta.recycle();
+		}
+
+		public void clear() {
+			data.clear();
+			notifyDataSetChanged();
+		}
+
+		public void update(DownloadResourceGroup mainGroup) {
+			data = mainGroup.getGroups();
+			notifyDataSetChanged();
+		}
+
+		@Override
+		public Object getChild(int groupPosition, int childPosition) {
+			DownloadResourceGroup drg = data.get(groupPosition);
+			if (drg.getType().containsIndexItem()) {
+				return drg.getItemByIndex(childPosition);
+			}
+			return drg.getGroupByIndex(childPosition);
+		}
+
+		@Override
+		public long getChildId(int groupPosition, int childPosition) {
+			return groupPosition * 10000 + childPosition;
+		}
+
+		@Override
+		public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild,
+				View convertView, ViewGroup parent) {
+			final Object child = getChild(groupPosition, childPosition);
+			if (child instanceof IndexItem) {
+				IndexItem item = (IndexItem) child;
+				ItemViewHolder viewHolder;
+				if (convertView != null && convertView.getTag() instanceof ItemViewHolder) {
+					viewHolder = (ItemViewHolder) convertView.getTag();
+				}  else {
+					convertView = LayoutInflater.from(parent.getContext()).inflate(
+							R.layout.two_line_with_images_list_item, parent, false);
+					viewHolder = new ItemViewHolder(convertView, ctx);
+					convertView.setTag(viewHolder);
+				}
+				viewHolder.bindIndexItem(item, false, false);
+			} else {
+				DownloadResourceGroup group = (DownloadResourceGroup) child;
+				DownloadGroupViewHolder viewHolder;
+				if (convertView != null && convertView.getTag() instanceof DownloadGroupViewHolder) {
+					viewHolder = (DownloadGroupViewHolder) convertView.getTag();
+				}  else {
+					convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.simple_list_menu_item,
+								parent, false);
+					viewHolder = new DownloadGroupViewHolder(ctx, convertView);
+					convertView.setTag(viewHolder);
+				}
+				viewHolder.bindItem(group);
+			}
+
+			return convertView;
+		}
+
+		
+
+		@Override
+		public View getGroupView(int groupPosition, boolean isExpanded, final View convertView, final ViewGroup parent) {
+			View v = convertView;
+			String section = getGroup(groupPosition);
+			if (v == null) {
+				LayoutInflater inflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+				v = inflater.inflate(R.layout.download_item_list_section, parent, false);
+			}
+			TextView nameView = ((TextView) v.findViewById(R.id.section_name));
+			nameView.setText(section);
+			v.setOnClickListener(null);
+			TypedValue typedValue = new TypedValue();
+			Resources.Theme theme = ctx.getTheme();
+			theme.resolveAttribute(R.attr.ctx_menu_info_view_bg, typedValue, true);
+			v.setBackgroundColor(typedValue.data);
+
+			return v;
+		}
+
+		@Override
+		public int getChildrenCount(int groupPosition) {
+			return data.get(groupPosition).size();
+		}
+
+		@Override
+		public String getGroup(int groupPosition) {
+			DownloadResourceGroup drg = data.get(groupPosition);
+			int rid = drg.getType().getResourceId();
+			if (rid != -1) {
+				return ctx.getString(rid);
+			}
+			return "";
+		}
+
+		@Override
+		public int getGroupCount() {
+			return data.size();
+		}
+
+		@Override
+		public long getGroupId(int groupPosition) {
+			return groupPosition;
+		}
+
+		@Override
+		public boolean hasStableIds() {
+			return false;
+		}
+
+		@Override
+		public boolean isChildSelectable(int groupPosition, int childPosition) {
+			return true;
 		}
 	}
 }

@@ -459,6 +459,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 	
 	@Override
 	public void downloadHasFinished() {
+		((DownloadActivity) getActivity()).updateDescriptionTextWithSize(getView());
 		reloadData();
 	}
 	

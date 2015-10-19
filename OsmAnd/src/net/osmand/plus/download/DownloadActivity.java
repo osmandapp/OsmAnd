@@ -16,9 +16,9 @@ import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.ui.ActiveDownloadsDialogFragment;
+import net.osmand.plus.download.ui.DownloadResourceGroupFragment;
 import net.osmand.plus.download.ui.LocalIndexesFragment;
 import net.osmand.plus.download.ui.UpdatesIndexFragment;
-import net.osmand.plus.download.ui.WorldItemsFragment;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
@@ -78,7 +78,7 @@ public class DownloadActivity extends BaseDownloadActivity {
 
 
 		mTabs.add(new TabActivity.TabItem(R.string.download_tab_downloads,
-				getString(R.string.download_tab_downloads), WorldItemsFragment.class));
+				getString(R.string.download_tab_downloads), DownloadResourceGroupFragment.class));
 		mTabs.add(new TabActivity.TabItem(R.string.download_tab_local,
 				getString(R.string.download_tab_local), LocalIndexesFragment.class));
 		mTabs.add(new TabActivity.TabItem(R.string.download_tab_updates,
@@ -136,9 +136,6 @@ public class DownloadActivity extends BaseDownloadActivity {
 	@UiThread
 	public void downloadHasFinished() {
 		visibleBanner.updateBannerInProgress();
-		// FIXME
-		//((DownloadActivity) getActivity()).updateDescriptionTextWithSize(getView());
-		
 		for (WeakReference<Fragment> ref : fragSet) {
 			Fragment f = ref.get();
 			if (f.isAdded()) {
@@ -169,8 +166,6 @@ public class DownloadActivity extends BaseDownloadActivity {
 	@UiThread
 	public void newDownloadIndexes() {
 		visibleBanner.updateBannerInProgress();
-		// FIXME
-		//((DownloadActivity) getActivity()).updateDescriptionTextWithSize(getView());
 		for (WeakReference<Fragment> ref : fragSet) {
 			Fragment f = ref.get();
 			if (f.isAdded()) {

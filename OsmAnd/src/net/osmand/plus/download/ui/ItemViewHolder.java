@@ -25,6 +25,7 @@ import net.osmand.plus.srtmplugin.SRTMPlugin;
 import java.text.DateFormat;
 import java.util.Map;
 
+// FIXME
 public class ItemViewHolder {
 
 	private final java.text.DateFormat dateFormat;
@@ -36,11 +37,13 @@ public class ItemViewHolder {
 	protected final Button rightButton;
 	protected final ProgressBar progressBar;
 	protected final TextView mapDateTextView;
-	protected final DownloadActivity context;
 
 	private boolean srtmDisabled;
 	private boolean nauticalPluginDisabled;
 	private boolean freeVersion;
+	
+	protected final DownloadActivity context;
+	
 	private int textColorPrimary;
 	private int textColorSecondary;
 	private RightButtonAction rightButtonAction;
@@ -63,12 +66,6 @@ public class ItemViewHolder {
 		descrTextView = (TextView) view.findViewById(R.id.description);
 		rightImageButton = (ImageView) view.findViewById(R.id.rightImageButton);
 		nameTextView = (TextView) view.findViewById(R.id.name);
-	}
-
-
-	public ItemViewHolder(View convertView,
-						  DownloadActivity context) {
-		this(convertView, context);
 		
 		this.dateFormat = context.getMyApplication().getResourceManager().getDateFormat();
 
@@ -80,17 +77,25 @@ public class ItemViewHolder {
 		textColorSecondary = typedValue.data;
 	}
 
-	public void initAppStatusVariables() {
+
+	// FIXME don't initialize on every row 
+	private void initAppStatusVariables() {
 		srtmDisabled = OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) == null;
 		nauticalPluginDisabled = OsmandPlugin.getEnabledPlugin(NauticalMapsPlugin.class) == null;
 		freeVersion = Version.isFreeVersion(context.getMyApplication());
 	}
 
+	// FIXME
 	public void bindIndexItem(final IndexItem indexItem,
-							  boolean showTypeInTitle, boolean showTypeInDesc, int progress) {
+							  boolean showTypeInTitle, boolean showTypeInDesc) {
 		initAppStatusVariables();
 		boolean disabled = false;
 		rightButtonAction = RightButtonAction.UNKNOWN;
+		boolean downloading = context.getDownloadThread().isDownloading(indexItem);
+		int progress = -1;
+		if (context.getDownloadThread().getCurrentDownloadingItem() == indexItem) {
+			progress = context.getDownloadThread().getCurrentDownloadingItemProgress();
+		}
 		rightImageButton.setClickable(false);
 		if (progress != -1) {
 			rightImageButton.setClickable(true);
@@ -145,18 +150,9 @@ public class ItemViewHolder {
 			progressBar.setVisibility(View.GONE);
 
 			Map<String,String> indexFileNames = context.getIndexFileNames();
-			if (indexFileNames != null && indexItem.isAlreadyDownloaded(indexFileNames)) {
-				boolean outdated = false;
-				String date;
-				if (indexItem.getType() == DownloadActivityType.HILLSHADE_FILE) {
-					date = indexItem.getDate(dateFormat);
-				} else {
-					String sfName = indexItem.getTargetFileName();
-					Map<String,String> indexActivatedFileNames = context.getIndexActivatedFileNames();
-					final boolean updatableResource = indexActivatedFileNames.containsKey(sfName);
-					date = updatableResource ? indexActivatedFileNames.get(sfName) : indexFileNames.get(sfName);
-					outdated = DownloadActivity.downloadListIndexThread.checkIfItemOutdated(indexItem);
-				}
+			if (indexItem.isDownloaded()) {
+				String date = indexItem.getLocalDate();
+				boolean outdated = indexItem.isOutdated();
 				String updateDescr = context.getResources().getString(R.string.local_index_installed) + ": "
 						+ date;
 				mapDateTextView.setText(updateDescr);
@@ -185,9 +181,7 @@ public class ItemViewHolder {
 		if (rightButtonAction != RightButtonAction.UNKNOWN) {
 			rightButton.setText(R.string.get_plugin);
 			rightButton.setVisibility(View.VISIBLE);
-
 			rightImageButton.setVisibility(View.GONE);
-
 			final RightButtonAction action = rightButtonAction;
 
 			rightButton.setOnClickListener(new View.OnClickListener() {
@@ -226,46 +220,6 @@ public class ItemViewHolder {
 			rightButton.setVisibility(View.GONE);
 			rightImageButton.setVisibility(View.VISIBLE);
 		}
-	}
-
-	public void bindIndexItem(final IndexItem indexItem,
-							  boolean showTypeInTitle, boolean showTypeInDesc) {
-		bindIndexItem(indexItem, showTypeInTitle, showTypeInDesc, -1);
-	}
-
-	public void bindRegion(WorldRegion region) {
-		nameTextView.setText(region.getName());
-		nameTextView.setTextColor(textColorPrimary);
-		if (region.getResourceTypes().size() > 0) {
-			StringBuilder stringBuilder = new StringBuilder();
-			for (DownloadActivityType activityType : region.getResourceTypes()) {
-				if (stringBuilder.length() > 0) {
-					stringBuilder.append(", ");
-				}
-				stringBuilder.append(activityType.getString(context));
-			}
-		}
-		descrTextView.setVisibility(View.GONE);
-		mapDateTextView.setVisibility(View.GONE);
-
-		Drawable leftImageDrawable = null;
-		switch (region.getMapState()) {
-			case NOT_DOWNLOADED:
-				leftImageDrawable = getContentIcon(context, R.drawable.ic_map);
-				break;
-			case DOWNLOADED:
-				leftImageDrawable = getContentIcon(context, R.drawable.ic_map,
-						context.getResources().getColor(R.color.color_ok));
-				break;
-			case OUTDATED:
-				leftImageDrawable = getContentIcon(context, R.drawable.ic_map,
-						context.getResources().getColor(R.color.color_distance));
-				break;
-		}
-		leftImageView.setImageDrawable(leftImageDrawable);
-		rightButton.setVisibility(View.GONE);
-		rightImageButton.setVisibility(View.GONE);
-		progressBar.setVisibility(View.GONE);
 	}
 
 	private Drawable getContentIcon(DownloadActivity context, int resourceId) {

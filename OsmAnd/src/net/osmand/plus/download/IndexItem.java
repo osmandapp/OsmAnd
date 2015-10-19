@@ -135,9 +135,26 @@ public class IndexItem implements Comparable<IndexItem> {
 		FIXME;
 	}
 	
+	public String getLocalDate() {
+		FIXME;
+	}
+	
 	
 	public boolean isDownloaded() {
 //		return listAlreadyDownloaded.containsKey(getTargetFileName());
+		Map<String,String> indexFileNames = context.getIndexFileNames();
+		if (indexFileNames != null && indexItem.isAlreadyDownloaded(indexFileNames)) {
+			boolean outdated = false;
+			String date;
+			if (indexItem.getType() == DownloadActivityType.HILLSHADE_FILE) {
+				date = indexItem.getDate(dateFormat);
+			} else {
+				String sfName = indexItem.getTargetFileName();
+				Map<String,String> indexActivatedFileNames = context.getIndexActivatedFileNames();
+				final boolean updatableResource = indexActivatedFileNames.containsKey(sfName);
+				date = updatableResource ? indexActivatedFileNames.get(sfName) : indexFileNames.get(sfName);
+				outdated = DownloadActivity.downloadListIndexThread.checkIfItemOutdated(indexItem);
+			}
 	}
 
 	public String getVisibleName(Context ctx, OsmandRegions osmandRegions) {
