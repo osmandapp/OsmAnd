@@ -29,7 +29,7 @@ public class BaseDownloadActivity extends ActionBarProgressActivity implements D
 	protected OsmandSettings settings;
 	private static DownloadIndexesThread downloadListIndexThread;
 	protected Set<WeakReference<Fragment>> fragSet = new HashSet<>();
-	public static final int MAXIMUM_AVAILABLE_FREE_DOWNLOADS = 10;
+	public static final int MAXIMUM_AVAILABLE_FREE_DOWNLOADS = 5;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

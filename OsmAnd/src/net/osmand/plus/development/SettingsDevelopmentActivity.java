@@ -1,6 +1,18 @@
 package net.osmand.plus.development;
 
 
+import java.text.SimpleDateFormat;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
+
+import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.OsmAndLocationSimulation;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.SettingsBaseActivity;
+import net.osmand.plus.activities.actions.AppModeDialog;
+import net.osmand.util.SunriseSunset;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -14,24 +26,12 @@ import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceScreen;
 import android.view.View;
 
-import net.osmand.plus.ApplicationMode;
-import net.osmand.plus.OsmAndLocationSimulation;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.SettingsBaseActivity;
-import net.osmand.plus.activities.actions.AppModeDialog;
-import net.osmand.util.SunriseSunset;
-
-import java.text.SimpleDateFormat;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
-
 //import net.osmand.plus.development.OsmandDevelopmentPlugin;
 
 public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 
 
+	@SuppressLint("SimpleDateFormat")
 	@Override
     public void onCreate(Bundle savedInstanceState) {
 		((OsmandApplication) getApplication()).applyTheme(this);
@@ -143,7 +143,6 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		final Preference agpspref = new Preference(this);
 		agpspref.setTitle(R.string.agps_info);
 		if (settings.AGPS_DATA_LAST_TIME_DOWNLOADED.get() != 0L) {
-			@SuppressLint("SimpleDateFormat")
 			SimpleDateFormat prt = new SimpleDateFormat("yyyy-MM-dd  HH:mm");
 			agpspref.setSummary(getString(R.string.agps_data_last_downloaded, prt.format(settings.AGPS_DATA_LAST_TIME_DOWNLOADED.get())));
 		} else {
@@ -157,7 +156,6 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 			public boolean onPreferenceClick(Preference preference) {
 				if(getMyApplication().getSettings().isInternetConnectionAvailable(true)) {
 					getMyApplication().getLocationProvider().redownloadAGPS();
-					@SuppressLint("SimpleDateFormat")
 					SimpleDateFormat prt = new SimpleDateFormat("yyyy-MM-dd  HH:mm");
 					agpspref.setSummary(getString(R.string.agps_data_last_downloaded, prt.format(settings.AGPS_DATA_LAST_TIME_DOWNLOADED.get())));
 				}
@@ -170,7 +168,6 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		pref = new Preference(this);
 		pref.setTitle(R.string.day_night_info);
 		if (sunriseSunset != null) {
-			@SuppressLint("SimpleDateFormat")
 			SimpleDateFormat prt = new SimpleDateFormat("yyyy-MM-dd  HH:mm");
 			pref.setSummary(getString(R.string.day_night_info_description, prt.format(sunriseSunset.getSunrise()),
 					prt.format(sunriseSunset.getSunset())));
@@ -185,9 +182,6 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		cat.addPreference(createCheckBoxPreference(settings.SHOULD_SHOW_FREE_VERSION_BANNER,
 				R.string.show_free_version_banner,
 				R.string.show_free_version_banner_description));
-		cat.addPreference(createSeekBarPreference(settings.NUMBER_OF_FREE_DOWNLOADS,
-				R.string.free_downloads_used, R.string.free_downloads_used_description,
-				R.string.free_downloads_used, 5, 10));
 	}
 	
 	protected void availableProfileDialog() {
