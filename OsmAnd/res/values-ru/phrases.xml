@@ -2168,6 +2168,36 @@
 	<string name="poi_theatre_genre_shadow_play">Жанр: театр теней</string>
 
 	<string name="poi_bandstand">Отдельностоящая сцена</string>
+	<string name="poi_kiln">Печь для обжига</string>
+	<string name="poi_product_brick">Производимый продукт: кирпич</string>
+	<string name="poi_product_quicklime">Производимый продукт: негашеная известь</string>
+	<string name="poi_product_leather">Производимый продукт: кожа</string>
+	<string name="poi_product_lime">Производимый продукт: известь</string>
+	<string name="poi_product_beer">Производимый продукт: пиво</string>
+	<string name="poi_product_charcoal">Производимый продукт: древесный уголь</string>
+	<string name="poi_product_meat">Производимый продукт: мясо</string>
+
+	<string name="poi_wheelchair_description">Описание для людей на инвалидных колясках</string>
+	<string name="poi_blind_description">Описание для слепых</string>
+	<string name="poi_deaf_description">Описание для глухих</string>
+
+	<string name="poi_highway_steps">Лестница</string>
+	<string name="poi_handrail_yes">Поручень: есть</string>
+	<string name="poi_handrail_no">Поручень: нет</string>
+	<string name="poi_ramp_yes">Скат: есть</string>
+	<string name="poi_ramp_no">Скат: нет</string>
+	<string name="poi_ramp_wheelchair_yes">Скат для инвалидных колясок: есть</string>
+	<string name="poi_ramp_wheelchair_no">Скат для инвалидных колясок: нет</string>
+	<string name="poi_ramp_stroller_yes">Скат (двойной): есть</string>
+	<string name="poi_ramp_stroller_no">Скат (двойной): нет</string>
+	<string name="poi_ramp_bicycle_yes">Скат для велосипедов: есть</string>
+	<string name="poi_ramp_bicycle_no">Скат для велосипедов: нет</string>
+	<string name="poi_ramp_luggage_yes">Скат для багажа: есть</string>
+	<string name="poi_ramp_luggage_no">Скат для багажа: нет</string>
+	<string name="poi_step_count">Количество ступеней</string>
+	<string name="poi_step_condition_even">Состояние ступеней: хорошее</string>
+	<string name="poi_step_condition_uneven">Состояние ступеней: среднее</string>
+	<string name="poi_step_condition_rough">Состояние ступеней: плохое</string>
 
 
 </resources>
