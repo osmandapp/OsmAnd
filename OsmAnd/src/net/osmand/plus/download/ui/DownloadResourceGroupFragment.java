@@ -364,9 +364,11 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 					convertView = LayoutInflater.from(parent.getContext()).inflate(
 							R.layout.two_line_with_images_list_item, parent, false);
 					viewHolder = new ItemViewHolder(convertView, ctx);
+					viewHolder.setShowRemoteDate(true);
+					viewHolder.setShowTypeInDesc(true);
 					convertView.setTag(viewHolder);
 				}
-				viewHolder.bindIndexItem(item, false, false);
+				viewHolder.bindIndexItem(item);
 			} else {
 				DownloadResourceGroup group = (DownloadResourceGroup) child;
 				DownloadGroupViewHolder viewHolder;

@@ -1,10 +1,7 @@
 package net.osmand.plus.download.ui;
 
-import java.text.ParseException;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
@@ -14,7 +11,6 @@ import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
@@ -170,84 +166,15 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 			if (v == null) {
 				LayoutInflater inflater = LayoutInflater.from(getMyActivity());
 				v = inflater.inflate(R.layout.two_line_with_images_list_item, parent, false);
-				v.setTag(new UpdateViewHolder(v, getMyActivity()));
+				v.setTag(new ItemViewHolder(v, getMyActivity()));
+				
 			}
-			UpdateViewHolder holder = (UpdateViewHolder) v.getTag();
-			holder.bindUpdatesIndexItem(items.get(position));
+			ItemViewHolder holder = (ItemViewHolder) v.getTag();
+			holder.setShowRemoteDate(true);
+			holder.setShowTypeInDesc(true);
+			holder.bindIndexItem(items.get(position));
 			return v;
 		}
 	}
 
-	// FIXME review and delete if duplicate
-	private static class UpdateViewHolder extends ItemViewHolder {
-		private final java.text.DateFormat format;
-		private UpdateViewHolder(View convertView,
-								 final DownloadActivity context) {
-			super(convertView, context);
-			format = context.getMyApplication().getResourceManager().getDateFormat();
-		}
-
-		public void bindUpdatesIndexItem(IndexItem indexItem) {
-			if (indexItem.getFileName().equals(context.getString(R.string.everything_up_to_date)) ||
-					indexItem.getFileName().equals(context.getString(R.string.no_index_file_to_download))) {
-				nameTextView.setText(indexItem.getFileName());
-				descrTextView.setText("");
-				return;
-			}
-
-			OsmandRegions osmandRegions =
-					context.getMyApplication().getResourceManager().getOsmandRegions();
-			String eName = indexItem.getVisibleName(context.getMyApplication(), osmandRegions);
-
-			nameTextView.setText(eName.trim().replace('\n', ' ').replace("TTS", "")); //$NON-NLS-1$
-			String d = getMapDescription(indexItem);
-			descrTextView.setText(d);
-
-			String sfName = indexItem.getTargetFileName();
-			Map<String, String> indexActivatedFileNames = context.getMyApplication().getResourceManager().getIndexFileNames();
-			String dt = indexActivatedFileNames.get(sfName);
-			mapDateTextView.setText("");
-			if (dt != null) {
-				try {
-					Date tm = format.parse(dt);
-					long days = Math.max(1, (indexItem.getTimestamp() - tm.getTime()) / (24 * 60 * 60 * 1000) + 1);
-					mapDateTextView.setText(days + " " + context.getString(R.string.days_behind));
-				} catch (ParseException e1) {
-					e1.printStackTrace();
-				}
-			}
-			rightImageButton.setVisibility(View.VISIBLE);
-			rightImageButton.setImageDrawable(
-					context.getMyApplication().getIconsCache()
-							.getContentIcon(R.drawable.ic_action_import));
-		}
-
-
-		// FIXME general method for all maps
-		private String getMapDescription(IndexItem item) {
-			String typeName = getTypeName(item, item.getType().getStringResource());
-			String date = item.getDate(format);
-			String size = item.getSizeDescription(context);
-			return typeName + "  " + date + "  " + size;
-		}
-
-		private String getTypeName(IndexItem item, int resId) {
-			Activity activity = context;
-			if (resId == R.string.download_regular_maps) {
-				return activity.getString(R.string.shared_string_map);
-			} else if (resId == R.string.download_wikipedia_maps) {
-				return activity.getString(R.string.shared_string_wikipedia);
-			} else if (resId == R.string.voices) {
-				return item.getTargetFileName().contains("tts") ? activity.getString(R.string.ttsvoice) : activity
-						.getString(R.string.voice);
-			} else if (resId == R.string.download_roads_only_maps) {
-				return activity.getString(R.string.roads_only);
-			} else if (resId == R.string.download_srtm_maps) {
-				return activity.getString(R.string.download_srtm_maps);
-			} else if (resId == R.string.download_hillshade_maps) {
-				return activity.getString(R.string.download_hillshade_maps);
-			}
-			return "";
-		}
-	}
 }

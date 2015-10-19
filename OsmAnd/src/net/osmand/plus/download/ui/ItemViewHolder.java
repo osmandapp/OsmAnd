@@ -1,5 +1,15 @@
 package net.osmand.plus.download.ui;
 
+import net.osmand.access.AccessibleToast;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.R;
+import net.osmand.plus.Version;
+import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.download.DownloadActivityType;
+import net.osmand.plus.download.DownloadResources;
+import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
+import net.osmand.plus.srtmplugin.SRTMPlugin;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -11,19 +21,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import net.osmand.access.AccessibleToast;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.R;
-import net.osmand.plus.Version;
-import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.download.DownloadActivityType;
-import net.osmand.plus.download.DownloadIndexesThread;
-import net.osmand.plus.download.DownloadResources;
-import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
-import net.osmand.plus.srtmplugin.SRTMPlugin;
 
-// FIXME
 public class ItemViewHolder {
 
 	private final java.text.DateFormat dateFormat;
@@ -45,6 +43,9 @@ public class ItemViewHolder {
 	private int textColorPrimary;
 	private int textColorSecondary;
 	private RightButtonAction clickAction;
+	
+	boolean showTypeInDesc;
+	boolean showRemoteDate;
 
 	
 
@@ -75,6 +76,14 @@ public class ItemViewHolder {
 		theme.resolveAttribute(android.R.attr.textColorSecondary, typedValue, true);
 		textColorSecondary = typedValue.data;
 	}
+	
+	public void setShowRemoteDate(boolean showRemoteDate) {
+		this.showRemoteDate = showRemoteDate;
+	}
+	
+	public void setShowTypeInDesc(boolean showTypeInDesc) {
+		this.showTypeInDesc = showTypeInDesc;
+	}
 
 
 	// FIXME don't initialize on every row 
@@ -86,9 +95,7 @@ public class ItemViewHolder {
 		srtmNeedsInstallation = srtmPlugin == null || srtmPlugin.needsInstallation();
 	}
 
-	// FIXME
-	public void bindIndexItem(final IndexItem indexItem,
-							  boolean showTypeInTitle, boolean showTypeInDesc) {
+	public void bindIndexItem(final IndexItem indexItem) {
 		initAppStatusVariables();
 		boolean isDownloading = context.getDownloadThread().isDownloading(indexItem);
 		int progress = -1;
@@ -97,50 +104,51 @@ public class ItemViewHolder {
 		}
 		boolean disabled = checkDisabledAndClickAction(indexItem);
 		/// name and left item
-		if (showTypeInTitle) {
-			nameTextView.setText(indexItem.getType().getString(context));
+		nameTextView.setText(indexItem.getVisibleName(context, context.getMyApplication().getRegions(), false));
+		if(!disabled) {
+			nameTextView.setTextColor(textColorPrimary);
 		} else {
-			nameTextView.setText(indexItem.getVisibleName(context, context.getMyApplication().getRegions(), false));
+			nameTextView.setTextColor(textColorSecondary);
+		}
+		int color = textColorSecondary;
+		if(indexItem.isDownloaded()) {
+			int colorId = indexItem.isOutdated() ? R.color.color_distance : R.color.color_ok;
+			color = context.getResources().getColor(colorId);
 		}
 		if (indexItem.isDownloaded()) {
-			String date = indexItem.getLocalDate();
-			boolean outdated = indexItem.isOutdated();
-			String updateDescr = context.getResources().getString(R.string.local_index_installed) + ": "
-					+ date;
-			mapDateTextView.setText(updateDescr);
-			int colorId = outdated ? R.color.color_distance : R.color.color_ok;
-			final int color = context.getResources().getColor(colorId);
-			mapDateTextView.setTextColor(color);
 			leftImageView.setImageDrawable(getContentIcon(context,
 					indexItem.getType().getIconResource(), color));
-			nameTextView.setTextColor(textColorPrimary);
 		} else if (disabled) {
 			leftImageView.setImageDrawable(getContentIcon(context,
 					indexItem.getType().getIconResource(), textColorSecondary));
-			nameTextView.setTextColor(textColorSecondary);
 		} else {
 			leftImageView.setImageDrawable(getContentIcon(context,
 					indexItem.getType().getIconResource()));
-			nameTextView.setTextColor(textColorPrimary);
 		}
 
-		if (isDownloading) {
+		if (!isDownloading) {
 			progressBar.setVisibility(View.GONE);
 			
-			// FIXME mapDATETextView
+			descrTextView.setVisibility(color);
 			descrTextView.setVisibility(View.VISIBLE);
-			if (!showTypeInTitle && (indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE ||
+			if ((indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE ||
 					indexItem.getType() == DownloadActivityType.HILLSHADE_FILE) && srtmDisabled) {
 				descrTextView.setText(indexItem.getType().getString(context));
 			} else if (showTypeInDesc) {
-				descrTextView.setText(indexItem.getType().getString(context) + " • " + indexItem.getSizeDescription(context));
+				descrTextView.setText(indexItem.getType().getString(context) + 
+						" • " + indexItem.getSizeDescription(context) +
+						" • " + (showRemoteDate ? indexItem.getRemoteDate() : indexItem.getLocalDate()));
 			} else {
-				descrTextView.setText(indexItem.getSizeDescription(context));
+				descrTextView.setText(indexItem.getSizeDescription(context) + " • " + (showRemoteDate ? indexItem.getRemoteDate() : indexItem.getLocalDate()));
 			}
 			
-			rightImageButton.setVisibility(View.VISIBLE);
 			rightImageButton.setImageDrawable(getContentIcon(context, R.drawable.ic_action_import));
-			
+			rightImageButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					context.startDownload(indexItem);
+				}
+			});
 		} else {
 			progressBar.setVisibility(View.VISIBLE);
 			progressBar.setProgress(progress);
@@ -148,7 +156,6 @@ public class ItemViewHolder {
 			descrTextView.setVisibility(View.GONE);
 			
 			rightImageButton.setImageDrawable(getContentIcon(context, R.drawable.ic_action_remove_dark));
-			rightImageButton.setClickable(true);
 			rightImageButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {

@@ -2,6 +2,8 @@ package net.osmand.plus.download;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.Map;
 
@@ -131,6 +133,29 @@ public class IndexItem implements Comparable<IndexItem> {
 	}
 
 	
+	public String getDaysBehind(OsmandApplication app) {
+		// FIXME
+		DateFormat format = app.getResourceManager().getDateFormat();
+		String sfName = getTargetFileName();
+		Map<String, String> indexActivatedFileNames = app.getResourceManager().getIndexFileNames();
+		String dt = indexActivatedFileNames.get(sfName);
+		if (dt != null) {
+			try {
+				Date tm = format.parse(dt);
+				long days = Math.max(1, (getTimestamp() - tm.getTime()) / (24 * 60 * 60 * 1000) + 1);
+				return days + " " + app.getString(R.string.days_behind);
+			} catch (ParseException e1) {
+				e1.printStackTrace();
+			}
+		}
+		return "";
+	}
+	
+	public String getRemoteDate() {
+		// FIXME;
+		return "FIXME";
+	}
+	
 	public boolean isOutdated() {
 		//FIXME;
 		return false;
@@ -138,11 +163,27 @@ public class IndexItem implements Comparable<IndexItem> {
 	
 	public String getLocalDate() {
 		//FIXME;
+//		DateFormat format = app.getResourceManager().getDateFormat();
+//		String sfName = getTargetFileName();
+//		Map<String, String> indexActivatedFileNames = app.getResourceManager().getIndexFileNames();
+//		String dt = indexActivatedFileNames.get(sfName);
+//		if (dt != null) {
+//			try {
+//				Date tm = format.parse(dt);
+//				long days = Math.max(1, (getTimestamp() - tm.getTime()) / (24 * 60 * 60 * 1000) + 1);
+//				return days + " " + app.getString(R.string.days_behind);
+//			} catch (ParseException e1) {
+//				e1.printStackTrace();
+//			}
+//		}
+//		return "";
+
 		return "FIXME";
 	}
 	
 	
 	public boolean isDownloaded() {
+		// FIXME
 //		return listAlreadyDownloaded.containsKey(getTargetFileName());
 		/*
 		Map<String,String> indexFileNames = context.getIndexFileNames();
@@ -159,7 +200,7 @@ public class IndexItem implements Comparable<IndexItem> {
 				outdated = DownloadActivity.downloadListIndexThread.checkIfItemOutdated(indexItem);
 			}
 			*/
-		return false; // FIXME
+		return false; 
 	}
 
 	public String getVisibleName(Context ctx, OsmandRegions osmandRegions) {
