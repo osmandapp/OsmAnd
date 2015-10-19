@@ -36,6 +36,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.TextView;
@@ -170,16 +171,27 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 			return true;
 		} else if (child instanceof IndexItem) {
 			IndexItem indexItem = (IndexItem) child;
-			if (indexItem.getType() == DownloadActivityType.ROADS_FILE) {
-				// FIXME
-				// if (regularMap.getType() == DownloadActivityType.NORMAL_FILE
-				// && regularMap.isAlreadyDownloaded(getMyActivity().getIndexFileNames())) {
-				// ConfirmDownloadUnneededMapDialogFragment.createInstance(indexItem)
-				// .show(getChildFragmentManager(), "dialog");
-				// return true;
-				// }
+			DownloadResourceGroup groupObj = listAdapter.getGroupObj(groupPosition);
+			boolean handled = false;
+			if (indexItem.getType() == DownloadActivityType.ROADS_FILE && groupObj != null
+					&& !activity.getDownloadThread().isDownloading(indexItem)) {
+				for (IndexItem ii : groupObj.getIndividualResources()) {
+					if (ii.getType() == DownloadActivityType.NORMAL_FILE) {
+						if (ii.isDownloaded()) {
+							handled = true;
+							ConfirmDownloadUnneededMapDialogFragment.createInstance(indexItem).show(
+									getChildFragmentManager(), "dialog");
+						}
+						break;
+					}
+				}
 			}
 			((DownloadActivity) getActivity()).startDownload(indexItem);
+			if (!handled) {
+				ItemViewHolder vh = (ItemViewHolder) v.getTag();
+				OnClickListener ls = vh.getRightButtonAction(indexItem, vh.getClickAction(indexItem));
+				ls.onClick(v);
+			}
 			return true;
 		}
 		return false;
@@ -220,8 +232,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 			getDownloadActivity().getDownloadThread().runReloadIndexFiles();
 			return true;
 		case SEARCH_ID:
-			// FIXME
-			//getDownloadActivity().showDialog(getActivity(), SearchDialogFragment.createInstance(""));
+			getDownloadActivity().showDialog(getActivity(), SearchDialogFragment.createInstance(""));
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
@@ -237,7 +248,6 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 	}
 
 	public static class ConfirmDownloadUnneededMapDialogFragment extends DialogFragment {
-		private static final String INDEX_ITEM = "index_item";
 		private static IndexItem item = null;
 
 		@NonNull
@@ -420,6 +430,10 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		@Override
 		public int getChildrenCount(int groupPosition) {
 			return data.get(groupPosition).size();
+		}
+		
+		public DownloadResourceGroup getGroupObj(int groupPosition) {
+			return data.get(groupPosition);
 		}
 
 		@Override

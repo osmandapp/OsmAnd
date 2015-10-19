@@ -1,6 +1,7 @@
 package net.osmand.plus.download.ui;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import net.osmand.plus.R;
 import net.osmand.plus.download.DownloadActivity;
@@ -8,7 +9,6 @@ import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.IndexItem;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
@@ -26,7 +26,7 @@ public class ActiveDownloadsDialogFragment extends DialogFragment implements Dow
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		builder.setTitle(R.string.downloads).setNegativeButton(R.string.shared_string_dismiss, null);
-		adapter = new IndexItemAdapter(getDownloadActivity());
+		adapter = new IndexItemAdapter(this, getDownloadActivity());
 		builder.setAdapter(adapter, null);
 		return builder.create();
 	}
@@ -50,20 +50,22 @@ public class ActiveDownloadsDialogFragment extends DialogFragment implements Dow
 	}
 
 	public static class IndexItemAdapter extends ArrayAdapter<IndexItem> {
-		private final Drawable deleteDrawable;
 		private final DownloadActivity context;
+		private DialogFragment dlgFragment;
 
-		public IndexItemAdapter(DownloadActivity context) {
+		public IndexItemAdapter(DialogFragment dlgFragment, DownloadActivity context) {
 			super(context, R.layout.two_line_with_images_list_item, new ArrayList<IndexItem>());
+			this.dlgFragment = dlgFragment;
 			this.context = context;
-			deleteDrawable = context.getMyApplication().getIconsCache()
-					.getPaintedContentIcon(R.drawable.ic_action_remove_dark,
-							context.getResources().getColor(R.color.dash_search_icon_dark));
 			refreshAllData();
 		}
 
 		public void refreshAllData() {
 			clear();
+			List<IndexItem> items = context.getDownloadThread().getCurrentDownloadingItems();
+			if(items.isEmpty()) {
+				dlgFragment.dismissAllowingStateLoss();
+			}
 			addAll(context.getDownloadThread().getCurrentDownloadingItems());
 		}
 
@@ -72,70 +74,20 @@ public class ActiveDownloadsDialogFragment extends DialogFragment implements Dow
 			if (convertView == null) {
 				convertView = LayoutInflater.from(parent.getContext())
 						.inflate(R.layout.two_line_with_images_list_item, parent, false);
-				DownloadEntryViewHolder viewHolder =
-						new DownloadEntryViewHolder(convertView, context, deleteDrawable, this);
+				ItemViewHolder viewHolder =
+						new ItemViewHolder(convertView, context);
+				viewHolder.setSilentCancelDownload(true);
+				viewHolder.setShowProgressInDescr(true);
 				convertView.setTag(viewHolder);
 			}
-			DownloadEntryViewHolder viewHolder = (DownloadEntryViewHolder) convertView.getTag();
+			ItemViewHolder viewHolder = (ItemViewHolder) convertView.getTag();
 			IndexItem item = getItem(position);
-			IndexItem cdi = context.getDownloadThread().getCurrentDownloadingItem();
-			viewHolder.bindDownloadEntry(getItem(position), 
-					cdi == item ? context.getDownloadThread().getCurrentDownloadingItemProgress() : -1,
-					context.getDownloadThread().isDownloading(item));
+			viewHolder.bindIndexItem(item);
 			return convertView;
 		}
 		
 	}
 
 	
-	// FIXME review view holder
-	private static class DownloadEntryViewHolder extends ItemViewHolder {
-		private final Drawable deleteDrawable;
-		private final IndexItemAdapter adapter;
-
-		private DownloadEntryViewHolder(View convertView, final DownloadActivity context,
-										Drawable deleteDrawable, IndexItemAdapter adapter) {
-			super(convertView, context);
-			this.deleteDrawable = deleteDrawable;
-			this.adapter = adapter;
-			progressBar.setVisibility(View.VISIBLE);
-			rightImageButton.setImageDrawable(deleteDrawable);
-		}
-
-		public void bindDownloadEntry(final IndexItem item, final int progress,
-									  boolean isDownloaded) {
-			nameTextView.setText(item.getVisibleName(context,
-					context.getMyApplication().getRegions()));
-			rightImageButton.setVisibility(View.VISIBLE);
-
-			int localProgress = progress;
-			boolean isIndeterminate = true;
-			if (progress != -1) {
-				isIndeterminate = false;
-				double downloaded = item.getContentSizeMB()  * progress / 100;
-				descrTextView.setText(context.getString(R.string.value_downloaded_from_max, downloaded,
-						item.getContentSizeMB()));
-			} else if (isDownloaded) {
-				isIndeterminate = false;
-				localProgress = progressBar.getMax();
-				descrTextView.setText(context.getString(R.string.file_size_in_mb,
-						item.getContentSizeMB()));
-				rightImageButton.setVisibility(View.GONE);
-			} else {
-				descrTextView.setText(context.getString(R.string.file_size_in_mb,
-						item.getContentSizeMB()));
-			}
-			rightImageButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					context.getDownloadThread().cancelDownload(item);
-					adapter.refreshAllData();
-				}
-			});
-			progressBar.setIndeterminate(isIndeterminate);
-			progressBar.setProgress(localProgress);
-
-		}
-
-	}
+	
 }

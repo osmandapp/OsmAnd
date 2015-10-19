@@ -32,6 +32,7 @@ public class WorldRegion {
 	private String regionId;
 	private String downloadsId;
 	private String name;
+	private String searchText;
 
 	// Hierarchy
 	private WorldRegion superregion;
@@ -95,10 +96,11 @@ public class WorldRegion {
 	private WorldRegion init(String regionId, OsmandRegions osmandRegions, String name) {
 		this.regionId = regionId;
 		String downloadName = osmandRegions.getDownloadName(regionId);
+		this.searchText = osmandRegions.getDownloadNameIndexLowercase(downloadName);
 		if (downloadName != null) {
 			downloadsId = downloadName.toLowerCase();
 		} else {
-			this.downloadsId = regionId.toLowerCase();
+			downloadsId = regionId.toLowerCase();
 		}
 		if (name != null) {
 			this.name = name;
@@ -109,6 +111,10 @@ public class WorldRegion {
 			}
 		}
 		return this;
+	}
+	
+	public String getSearchText() {
+		return searchText;
 	}
 
 	private void addSubregion(WorldRegion subregion, WorldRegion world) {

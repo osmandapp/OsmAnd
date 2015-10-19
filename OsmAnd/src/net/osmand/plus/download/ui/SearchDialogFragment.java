@@ -16,7 +16,16 @@ import net.osmand.plus.R;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 
-public class SearchDialogFragment { /*extends DialogFragment implements DownloadEvents {
+// FIXME
+public class SearchDialogFragment extends DialogFragment {
+
+	public static DialogFragment createInstance(String tg) {
+		return new SearchDialogFragment();
+	}
+
+	
+	
+	/*extends DialogFragment implements DownloadEvents {
 
 	public static final String TAG = "SearchDialogFragment";
 	private static final String SEARCH_TEXT_DLG_KEY = "search_text_dlg_key";

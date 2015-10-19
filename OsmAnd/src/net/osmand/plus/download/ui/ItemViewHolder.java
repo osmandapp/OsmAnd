@@ -16,6 +16,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -24,7 +25,6 @@ import android.widget.Toast;
 
 public class ItemViewHolder {
 
-	private final java.text.DateFormat dateFormat;
 
 	protected final TextView nameTextView;
 	protected final TextView descrTextView;
@@ -42,10 +42,11 @@ public class ItemViewHolder {
 	
 	private int textColorPrimary;
 	private int textColorSecondary;
-	private RightButtonAction clickAction;
 	
 	boolean showTypeInDesc;
 	boolean showRemoteDate;
+	boolean silentCancelDownload;
+	boolean showProgressInDesc;
 
 	
 
@@ -67,7 +68,6 @@ public class ItemViewHolder {
 		rightImageButton = (ImageView) view.findViewById(R.id.rightImageButton);
 		nameTextView = (TextView) view.findViewById(R.id.name);
 		
-		this.dateFormat = context.getMyApplication().getResourceManager().getDateFormat();
 
 		TypedValue typedValue = new TypedValue();
 		Resources.Theme theme = context.getTheme();
@@ -79,6 +79,14 @@ public class ItemViewHolder {
 	
 	public void setShowRemoteDate(boolean showRemoteDate) {
 		this.showRemoteDate = showRemoteDate;
+	}
+	
+	public void setShowProgressInDescr(boolean b) {
+		showProgressInDesc = b;
+	}
+	
+	public void setSilentCancelDownload(boolean silentCancelDownload) {
+		this.silentCancelDownload = silentCancelDownload;
 	}
 	
 	public void setShowTypeInDesc(boolean showTypeInDesc) {
@@ -111,7 +119,7 @@ public class ItemViewHolder {
 			nameTextView.setTextColor(textColorSecondary);
 		}
 		int color = textColorSecondary;
-		if(indexItem.isDownloaded()) {
+		if(indexItem.isDownloaded() && !isDownloading) {
 			int colorId = indexItem.isOutdated() ? R.color.color_distance : R.color.color_ok;
 			color = context.getResources().getColor(colorId);
 		}
@@ -125,11 +133,9 @@ public class ItemViewHolder {
 			leftImageView.setImageDrawable(getContentIcon(context,
 					indexItem.getType().getIconResource()));
 		}
-
+		descrTextView.setTextColor(color);
 		if (!isDownloading) {
 			progressBar.setVisibility(View.GONE);
-			
-			descrTextView.setTextColor(color);
 			descrTextView.setVisibility(View.VISIBLE);
 			if ((indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE ||
 					indexItem.getType() == DownloadActivityType.HILLSHADE_FILE) && srtmDisabled) {
@@ -151,15 +157,31 @@ public class ItemViewHolder {
 			});
 		} else {
 			progressBar.setVisibility(View.VISIBLE);
+			progressBar.setIndeterminate(progress == -1);
 			progressBar.setProgress(progress);
 			
-			descrTextView.setVisibility(View.GONE);
+			if (showProgressInDesc) {
+				double mb = indexItem.getContentSizeMB();
+				if (progress != -1) {
+					descrTextView.setText(context.getString(R.string.value_downloaded_from_max, mb * progress / 100,
+							mb));
+				} else {
+					descrTextView.setText(context.getString(R.string.file_size_in_mb, mb));
+				}
+				descrTextView.setVisibility(View.VISIBLE);
+			} else {
+				descrTextView.setVisibility(View.GONE);
+			}
 			
 			rightImageButton.setImageDrawable(getContentIcon(context, R.drawable.ic_action_remove_dark));
 			rightImageButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					context.makeSureUserCancelDownload(indexItem);
+					if(silentCancelDownload) {
+						context.getDownloadThread().cancelDownload(indexItem);
+					} else {
+						context.makeSureUserCancelDownload(indexItem);
+					}
 				}
 			});
 		}
@@ -167,12 +189,26 @@ public class ItemViewHolder {
 
 
 	private boolean checkDisabledAndClickAction(final IndexItem indexItem) {
-		boolean disabled = false;
-		clickAction = RightButtonAction.DOWNLOAD;
+		RightButtonAction clickAction = getClickAction(indexItem);
+		boolean disabled = clickAction != RightButtonAction.DOWNLOAD;
+		if (clickAction != RightButtonAction.DOWNLOAD) {
+			rightButton.setText(R.string.get_plugin);
+			rightButton.setVisibility(View.VISIBLE);
+			rightImageButton.setVisibility(View.GONE);
+			rightButton.setOnClickListener(getRightButtonAction(indexItem, clickAction));
+		} else {
+			rightButton.setVisibility(View.GONE);
+			rightImageButton.setVisibility(View.VISIBLE);
+		}
+		
+		return disabled;
+	}
+
+	public RightButtonAction getClickAction(final IndexItem indexItem) {
+		RightButtonAction clickAction = RightButtonAction.DOWNLOAD;
 		if (indexItem.getBasename().toLowerCase().equals(DownloadResources.WORLD_SEAMARKS_KEY)
 				&& nauticalPluginDisabled) {
 			clickAction = RightButtonAction.ASK_FOR_SEAMARKS_PLUGIN;
-			disabled = true;
 		} else if ((indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE ||
 				indexItem.getType() == DownloadActivityType.HILLSHADE_FILE) && srtmDisabled) {
 			if (srtmNeedsInstallation) {
@@ -181,55 +217,61 @@ public class ItemViewHolder {
 				clickAction = RightButtonAction.ASK_FOR_SRTM_PLUGIN_ENABLE;
 			}
 
-			disabled = true;
 		} else if (indexItem.getType() == DownloadActivityType.WIKIPEDIA_FILE && freeVersion) {
 			clickAction = RightButtonAction.ASK_FOR_FULL_VERSION_PURCHASE;
-			disabled = true;
 		}
-		
-		if (clickAction != RightButtonAction.DOWNLOAD) {
-			rightButton.setText(R.string.get_plugin);
-			rightButton.setVisibility(View.VISIBLE);
-			rightImageButton.setVisibility(View.GONE);
-			final RightButtonAction action = clickAction;
+		return clickAction;
+	}
 
-			rightButton.setOnClickListener(new View.OnClickListener() {
+	public OnClickListener getRightButtonAction(final IndexItem item, final RightButtonAction clickAction) {
+		if (clickAction != RightButtonAction.DOWNLOAD) {
+			return new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					switch (action) {
-						case ASK_FOR_FULL_VERSION_PURCHASE:
-							Intent intent = new Intent(Intent.ACTION_VIEW,
-									Uri.parse(Version.marketPrefix(context.getMyApplication())
-											+ "net.osmand.plus"));
-							context.startActivity(intent);
-							break;
-						case ASK_FOR_SEAMARKS_PLUGIN:
-							context.startActivity(new Intent(context,
-									context.getMyApplication().getAppCustomization().getPluginsActivity()));
-							AccessibleToast.makeText(context.getApplicationContext(),
-									context.getString(R.string.activate_seamarks_plugin), Toast.LENGTH_SHORT).show();
-							break;
-						case ASK_FOR_SRTM_PLUGIN_PURCHASE:
-							OsmandPlugin plugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
-							context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL())));
-							break;
-						case ASK_FOR_SRTM_PLUGIN_ENABLE:
-							context.startActivity(new Intent(context,
-									context.getMyApplication().getAppCustomization().getPluginsActivity()));
-							AccessibleToast.makeText(context,
-									context.getString(R.string.activate_srtm_plugin), Toast.LENGTH_SHORT).show();
-							break;
-						case DOWNLOAD:
-							break;
+					switch (clickAction) {
+					case ASK_FOR_FULL_VERSION_PURCHASE:
+						Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Version.marketPrefix(context
+								.getMyApplication()) + "net.osmand.plus"));
+						context.startActivity(intent);
+						break;
+					case ASK_FOR_SEAMARKS_PLUGIN:
+						context.startActivity(new Intent(context, context.getMyApplication().getAppCustomization()
+								.getPluginsActivity()));
+						AccessibleToast.makeText(context.getApplicationContext(),
+								context.getString(R.string.activate_seamarks_plugin), Toast.LENGTH_SHORT).show();
+						break;
+					case ASK_FOR_SRTM_PLUGIN_PURCHASE:
+						OsmandPlugin plugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
+						context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL())));
+						break;
+					case ASK_FOR_SRTM_PLUGIN_ENABLE:
+						context.startActivity(new Intent(context, context.getMyApplication().getAppCustomization()
+								.getPluginsActivity()));
+						AccessibleToast.makeText(context, context.getString(R.string.activate_srtm_plugin),
+								Toast.LENGTH_SHORT).show();
+						break;
+					case DOWNLOAD:
+						break;
 					}
 				}
-			});
+			};
 		} else {
-			rightButton.setVisibility(View.GONE);
-			rightImageButton.setVisibility(View.VISIBLE);
+			final boolean isDownloading = context.getDownloadThread().isDownloading(item);
+			return new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					if(isDownloading) {
+						if(silentCancelDownload) {
+							context.getDownloadThread().cancelDownload(item);
+						} else {
+							context.makeSureUserCancelDownload(item);
+						}
+					} else {
+						context.startDownload(item);
+					}
+				}
+			};
 		}
-		
-		return disabled;
 	}
 
 	private Drawable getContentIcon(DownloadActivity context, int resourceId) {
@@ -240,7 +282,5 @@ public class ItemViewHolder {
 		return context.getMyApplication().getIconsCache().getPaintedContentIcon(resourceId, color);
 	}
 
-	public boolean isItemAvailable() {
-		return clickAction == RightButtonAction.DOWNLOAD;
-	}
+	
 }

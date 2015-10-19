@@ -20,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -118,7 +119,9 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		final IndexItem e = (IndexItem) getListAdapter().getItem(position);
-		getMyActivity().startDownload(e);
+		ItemViewHolder vh = (ItemViewHolder) v.getTag();
+		OnClickListener ls = vh.getRightButtonAction(e, vh.getClickAction(e));
+		ls.onClick(v);
 	}
 
 	public DownloadActivity getMyActivity() {
