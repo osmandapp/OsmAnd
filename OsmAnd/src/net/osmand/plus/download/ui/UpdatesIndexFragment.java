@@ -50,6 +50,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 	@Override
 	public void downloadHasFinished() {
 		invalidateListView();
+		updateUpdateAllButton();
 	}
 	
 	@Override
@@ -60,6 +61,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 	@Override
 	public void newDownloadIndexes() {
 		invalidateListView();
+		updateUpdateAllButton();
 	}
 
 	public void invalidateListView() {
@@ -82,15 +84,17 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 						.compareTo(indexItem2.getVisibleName(getMyApplication(), osmandRegions));
 			}
 		});
-		updateUpdateAllButton(indexes.getItemsToUpdate());
 		setListAdapter(listAdapter);
 	}
 
-	private void updateUpdateAllButton(final List<IndexItem> indexItems) {
+	private void updateUpdateAllButton() {
+		
 		View view = getView();
-		if (getView() == null) {
+		if (view == null) {
 			return;
 		}
+		DownloadResources indexes = getMyActivity().getDownloadThread().getIndexes();
+		final List<IndexItem> indexItems = indexes.getItemsToUpdate();
 		final TextView updateAllButton = (TextView) view.findViewById(R.id.updateAllButton);
 		if (indexItems.size() == 0 || indexItems.get(0).getType() == null) {
 			updateAllButton.setVisibility(View.GONE);
@@ -114,6 +118,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 	@Override
 	public void onResume() {
 		super.onResume();
+		updateUpdateAllButton();
 	}
 
 	@Override
