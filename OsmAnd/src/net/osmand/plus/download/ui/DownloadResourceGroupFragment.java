@@ -17,14 +17,12 @@ import net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.util.Algorithms;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AlertDialog;
@@ -35,8 +33,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.TextView;
@@ -179,8 +177,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 					if (ii.getType() == DownloadActivityType.NORMAL_FILE) {
 						if (ii.isDownloaded()) {
 							handled = true;
-							ConfirmDownloadUnneededMapDialogFragment.createInstance(indexItem).show(
-									getChildFragmentManager(), "dialog");
+							confirmDownload(indexItem);
 						}
 						break;
 					}
@@ -194,6 +191,22 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 			return true;
 		}
 		return false;
+	}
+
+	private void confirmDownload(final IndexItem indexItem) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+		builder.setTitle(R.string.are_you_sure);
+		builder.setMessage(R.string.confirm_download_roadmaps);
+		builder.setNegativeButton(R.string.shared_string_cancel, null).setPositiveButton(
+				R.string.shared_string_download, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						if (indexItem != null) {
+							((DownloadActivity) getActivity()).startDownload(indexItem);
+						}
+					}
+				});
+		builder.show();
 	}
 
 	@Override
@@ -246,35 +259,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		return fragment;
 	}
 
-	public static class ConfirmDownloadUnneededMapDialogFragment extends DialogFragment {
-		private static IndexItem item = null;
-
-		@NonNull
-		@Override
-		public Dialog onCreateDialog(Bundle savedInstanceState) {
-			final IndexItem indexItem = item;
-			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-			builder.setTitle(R.string.are_you_sure);
-			builder.setMessage(R.string.confirm_download_roadmaps);
-			builder.setNegativeButton(R.string.shared_string_cancel, null).setPositiveButton(
-					R.string.shared_string_download, new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							if (indexItem != null) {
-								((DownloadActivity) getActivity()).startDownload(indexItem);
-							}
-						}
-					});
-			return builder.create();
-		}
-
-		public static ConfirmDownloadUnneededMapDialogFragment createInstance(@NonNull IndexItem indexItem) {
-			ConfirmDownloadUnneededMapDialogFragment fragment = new ConfirmDownloadUnneededMapDialogFragment();
-			Bundle args = new Bundle();
-			fragment.setArguments(args);
-			return fragment;
-		}
-	}
+	
 	
 	private static class DownloadGroupViewHolder {
 		TextView textView;
