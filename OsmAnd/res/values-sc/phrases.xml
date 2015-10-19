@@ -552,7 +552,7 @@
 	<string name="poi_skiing">Iscì</string>
 	<string name="poi_wreck">Relitu navale</string>
 	<string name="poi_alpine_hut">Refùgiu alpinu</string>
-	<string name="poi_shelter">Cuadorju</string>
+	<string name="poi_shelter">Imbaru</string>
 	<string name="poi_craft_metal_construction">Costrutziones metàllicas</string>
 	<string name="poi_craft_parquet_layer">Assentadore de parquet</string>
 	<string name="poi_craft_tiler">Assentadore de regiolas</string>
@@ -692,7 +692,7 @@
 	<string name="poi_fuel_e10">E10</string>
 	<string name="poi_fuel_e20">E20</string>
 	<string name="poi_fuel_e85">E85</string>
-	<string name="poi_fuel_biogas">Biogas E85</string>
+	<string name="poi_fuel_biogas">Biogàs</string>
 	<string name="poi_junction">Giuntura istradale</string>
 	<string name="poi_bell_tower">Campanile</string>
 	<string name="poi_farmyard">Argiola</string>
@@ -803,7 +803,7 @@
 	<string name="poi_general_barrier">Barriera genèrica</string>
 	<string name="poi_height_restrictor">Limitadore de artària</string>
 	<string name="poi_turnstile">Tornellu</string>
-	<string name="poi_barrier_entrance">Intrada</string>
+	<string name="poi_barrier_entrance">Coladòrgiu in unu muru o una cresura</string>
 	<string name="poi_entrance_main">Intrada printzipale</string>
 	<string name="poi_entrance">Intrada</string>
 	<string name="poi_entrance_exit">Essida</string>
@@ -1094,14 +1094,14 @@
 	<string name="poi_seamark_bridge">Ponte nàuticu</string>
 	<string name="poi_highway_crossing">Coladòrgiu pedonale</string>
 
-	<string name="poi_icn_ref">Àndala retza tziclàbile internatzionale</string>
-	<string name="poi_ncn_ref">Àndala retza tziclàbile natzionale</string>
-	<string name="poi_rcn_ref">Àndala retza tziclàbile regionale</string>
-	<string name="poi_lcn_ref">Àndala retza tziclàbile locale</string>
-	<string name="poi_iwn_ref">Àndala retza internatzionale pro s’escursionismu</string>
-	<string name="poi_nwn_ref">Àndala retza natzionale pro s’escursionismu</string>
-	<string name="poi_rwn_ref">Àndala retza regionale pro s’escursionismu</string>
-	<string name="poi_lwn_ref">Àndala retza locale pro s’escursionismu</string>
+	<string name="poi_icn_ref">Nodu retza tziclàbile internatzionale</string>
+	<string name="poi_ncn_ref">Nodu retza tziclàbile natzionale</string>
+	<string name="poi_rcn_ref">Nodu retza tziclàbile regionale</string>
+	<string name="poi_lcn_ref">Nodu retza tziclàbile locale</string>
+	<string name="poi_iwn_ref">Nodu retza internatzionale pro s’escursionismu</string>
+	<string name="poi_nwn_ref">Nodu retza natzionale pro s’escursionismu</string>
+	<string name="poi_rwn_ref">Nodu retza regionale pro s’escursionismu</string>
+	<string name="poi_lwn_ref">Nodu retza locale pro s’escursionismu</string>
 
 	<string name="poi_route_hiking_iwn_poi">Àndala internatzionale pro s’escursionismu</string>
 	<string name="poi_route_hiking_nwn_poi">Àndala natzionale pro s’escursionismu</string>
@@ -1126,7 +1126,7 @@
 	<string name="poi_wheelchair_no">Cadira a rodas: non permitidas</string>
 	<string name="poi_wheelchair_limited">Cadira a rodas: limitadas</string>
 	<string name="poi_access_private">Atzessu privadu</string>
-	<string name="poi_access_no">Sena atzessu</string>
+	<string name="poi_access_no">Chene atzessu</string>
 	<string name="poi_access_customers">Atzessu pro clientes</string>
 	<string name="poi_access_delivery">Atzessu pro cunsinnas</string>
 	<string name="poi_access_agricultural">Atzessu agrìcolu</string>
@@ -1164,7 +1164,7 @@
 	<string name="poi_leaf_type_broadleaved">Fògia larga (latifògia)</string>
 	<string name="poi_leaf_type_needleleaved">Fògia a agu (aghifògia)</string>
 	<string name="poi_leaf_type_mixed">Mistu</string>
-	<string name="poi_leaf_type_leafless">Sena fògias</string>
+	<string name="poi_leaf_type_leafless">Chene fògias</string>
 	<string name="poi_species">Genia</string>
 	<string name="poi_genus">Gènere</string>
 	<string name="poi_taxon">Tàxon</string>
@@ -1250,4 +1250,53 @@
 	<string name="poi_beach_shingle">Casta de plàia: giarra/ghiàia</string>
 	<string name="poi_beach_rocky">Casta de plàia: pedrosa</string>
 
+	<string name="poi_shoes_children">Iscarpas pro pitzinnos</string>
+	<string name="poi_shoes_women">Iscarpas pro fèminas</string>
+	<string name="poi_shoes_sport">Iscarpas pro isport</string>
+	<string name="poi_shoes_men">Iscarpas pro òmines</string>
+	<string name="poi_shoes_orthopedic">Iscarpas ortopèdicas</string>
+
+	<string name="poi_collection_times">Oràriu de regorta</string>
+	<string name="poi_email">P.eletrònica</string>
+	<string name="poi_fee_yes">A pagamentu</string>
+	<string name="poi_fee_no">De badas</string>
+	<string name="poi_wholesale">Grussista</string>
+
+	<string name="poi_access_destination">Atzessu pro sa destinatzione</string>
+	<string name="poi_access_permissive">Atzessu permissivu</string>
+	<string name="poi_trade_building_supplies">Ainas pro su fràigu</string>
+	<string name="poi_trade_plumbing">Ainas pro s’idràulica</string>
+	<string name="poi_trade_wood">Frunidura de linna</string>
+	<string name="poi_trade_agricultural_supplies">Ainas pro s\'agricultura</string>
+	<string name="poi_trade_tile">Frunidura de regiolas</string>
+
+	<string name="poi_animal_shelter">Imbaru pro animales</string>
+	<string name="poi_animal_shelter_dog">Casta de imbaru: pro canes</string>
+	<string name="poi_animal_shelter_cat">Casta de imbaru: pro gatos</string>
+	<string name="poi_animal_shelter_dog_cat">Casta de imbaru: pro canes e gatos</string>
+	<string name="poi_animal_shelter_bird">Casta de imbaru: pro pugiones</string>
+
+	<string name="poi_generator_source_coal">Mitza de energia: carbone</string>
+	<string name="poi_generator_source_gas">Mitza de energia: gas</string>
+	<string name="poi_generator_source_nuclear">Mitza de energia: nucleare</string>
+	<string name="poi_generator_source_solar">Mitza de energia: solare</string>
+	<string name="poi_generator_source_hydro">Mitza de energia: idroelètrica</string>
+	<string name="poi_generator_source_wind">Mitza de energia: eòlica</string>
+	<string name="poi_generator_source_geothermal">Mitza de energia: geotèrmica</string>
+	<string name="poi_generator_source_oil">Mitza de energia: ògiu</string>
+	<string name="poi_generator_source_diesel">Mitza de energia: diesel</string>
+
+	<string name="poi_int_name">Nùmene internatzionale</string>
+	<string name="poi_nat_name">Nùmene natzionale</string>
+	<string name="poi_reg_name">Nùmene regionale</string>
+	<string name="poi_loc_name">Nùmene locale</string>
+	<string name="poi_old_name">Nùmene antigu</string>
+	<string name="poi_alt_name">Nùmene alternativu</string>
+
+	<string name="poi_pump_manual">Pompa manuale</string>
+	<string name="poi_pump_powered">Pompa automàtica</string>
+	<string name="poi_pump_no">Chene pompa</string>
+	<string name="poi_pump">Pompa</string>
+
+	<string name="poi_building">Edifìtziu</string>
 	</resources>

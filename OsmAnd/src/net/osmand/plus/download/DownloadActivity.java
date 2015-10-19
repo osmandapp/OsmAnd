@@ -1,25 +1,13 @@
 package net.osmand.plus.download;
 
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.content.ActivityNotFoundException;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.os.StatFs;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.view.ViewPager;
-import android.text.method.LinkMovementMethod;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.TextView;
+import java.io.File;
+import java.lang.ref.WeakReference;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
-import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -39,16 +27,21 @@ import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 
 import org.apache.commons.logging.Log;
 
-import java.io.File;
-import java.lang.ref.WeakReference;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.StatFs;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.ViewPager;
+import android.text.method.LinkMovementMethod;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 
 public class DownloadActivity extends BaseDownloadActivity implements DialogDismissListener {
@@ -298,66 +291,7 @@ public class DownloadActivity extends BaseDownloadActivity implements DialogDism
 
 	}
 
-	protected void downloadWikiFiles() {
-		if (Version.isFreeVersion(getMyApplication())) {
-			new InstallPaidVersionDialogFragment().show(getSupportFragmentManager(),
-					InstallPaidVersionDialogFragment.TAG);
-		} else {
-			Builder bld = new AlertDialog.Builder(this);
-			final List<IndexItem> wi = getWikipediaItems();
-			long size = 0;
-			for (IndexItem i : wi) {
-				size += i.getSize();
-			}
-			bld.setMessage(getString(R.string.download_wikipedia_files, (size >> 20)));
-			bld.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
-
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					for (IndexItem i : wi) {
-						addToDownload(i);
-					}
-					updateFragments();
-					checkOldWikiFiles();
-				}
-			});
-			bld.setNegativeButton(R.string.shared_string_cancel, null);
-			if (wi.size() > 0) {
-				bld.show();
-			}
-		}
-	}
-
-	protected void checkOldWikiFiles() {
-		Map<String, String> fileNames = getMyApplication().getResourceManager().getIndexFileNames();
-		final Set<String> wiki = new HashSet<String>();
-		for (String s : fileNames.keySet()) {
-			if (s.contains("_wiki")) {
-				wiki.add(s);
-			}
-		}
-		if (wiki.size() > 0) {
-			Builder bld = new AlertDialog.Builder(this);
-			bld.setMessage(R.string.archive_wikipedia_data);
-			bld.setNegativeButton(R.string.shared_string_cancel, null);
-			bld.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
-
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					for (String w : wiki) {
-						File fl = getMyApplication().getAppPath(w);
-						File nf = new File(fl.getParentFile(), IndexConstants.BACKUP_INDEX_DIR + "/" + fl.getName());
-						boolean res = fl.renameTo(nf);
-						if (!res) {
-							System.err.println("Renaming from " + fl.getAbsolutePath() + " to " + nf.getAbsolutePath() + " failed");
-						}
-					}
-				}
-			});
-			bld.show();
-		}
-	}
-
+	
 
 	@Override
 	public void updateFragments() {
@@ -371,41 +305,6 @@ public class DownloadActivity extends BaseDownloadActivity implements DialogDism
 				}
 		}
 	}
-
-
-	private List<IndexItem> getWikipediaItems() {
-		Set<String> wikipediaItems = new HashSet<String>();
-		Map<String, String> indexed = getMyApplication().getResourceManager().getIndexFileNames();
-		for (IndexItem i : getEntriesToDownload().keySet()) {
-			if (i.getType() == DownloadActivityType.NORMAL_FILE) {
-				boolean fit = true;
-				fit = fit && i.getFileName().contains("obf");
-				fit = fit && !i.getFileName().contains("world");
-				String fname = i.getBasename();
-				if (fit && !indexed.containsKey(fname + ".wiki.obf")) {
-					wikipediaItems.add(fname);
-				}
-			}
-		}
-		for (IndexItem i : getEntriesToDownload().keySet()) {
-			if (i.getType() == DownloadActivityType.WIKIPEDIA_FILE) {
-				wikipediaItems.remove(i.getBasename());
-			}
-		}
-		List<IndexItem> res = new ArrayList<IndexItem>();
-		IndexFileList list = downloadListIndexThread.getIndexFiles();
-		if (list != null) {
-			List<IndexItem> indexFiles = list.getIndexFiles();
-			for (IndexItem i : indexFiles) {
-				if (i.getType() == DownloadActivityType.WIKIPEDIA_FILE &&
-						wikipediaItems.contains(i.getBasename())) {
-					res.add(i);
-				}
-			}
-		}
-		return res;
-	}
-
 
 	public List<DownloadActivityType> getDownloadTypes() {
 		return downloadTypes;
@@ -439,55 +338,6 @@ public class DownloadActivity extends BaseDownloadActivity implements DialogDism
 
 	public List<IndexItem> getIndexFiles() {
 		return downloadListIndexThread != null ? downloadListIndexThread.getCachedIndexFiles() : null;
-	}
-
-	public void showDialogToDownloadMaps(Collection<String> maps) {
-		int count = 0;
-		int sz = 0;
-		String s = "";
-		for (IndexItem i : DownloadActivity.downloadListIndexThread.getCachedIndexFiles()) {
-			for (String map : maps) {
-				if ((i.getFileName().equals(map + ".obf.zip") || i.getFileName().equals(map + "_" + IndexConstants.BINARY_MAP_VERSION + ".obf.zip"))
-						&& i.getType() == DownloadActivityType.NORMAL_FILE) {
-					final List<DownloadEntry> de = i.createDownloadEntry(getMyApplication(), i.getType(), new ArrayList<DownloadEntry>(1));
-					for (DownloadEntry d : de) {
-						count++;
-						sz += d.sizeMB;
-					}
-					if (s.length() > 0) {
-						s += ", ";
-					}
-					s += i.getVisibleName(getMyApplication(), getMyApplication().getResourceManager().getOsmandRegions());
-					getEntriesToDownload().put(i, de);
-				}
-			}
-		}
-		if (count > 0) {
-			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setMessage(getString(R.string.download_additional_maps, s, sz));
-			builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					downloadFilesCheckInternet();
-				}
-			});
-			builder.setNegativeButton(R.string.shared_string_no, new DialogInterface.OnClickListener() {
-
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					getEntriesToDownload().clear();
-				}
-			});
-			builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
-
-				@Override
-				public void onCancel(DialogInterface dialog) {
-					getEntriesToDownload().clear();
-				}
-			});
-			builder.show();
-
-		}
 	}
 
 

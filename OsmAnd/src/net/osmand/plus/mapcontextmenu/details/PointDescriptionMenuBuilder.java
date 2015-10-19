@@ -9,18 +9,16 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import net.osmand.data.FavouritePoint;
+import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.util.Algorithms;
 
-public class FavouritePointMenuBuilder extends MenuBuilder {
+public class PointDescriptionMenuBuilder extends MenuBuilder {
+	private final PointDescription pointDescription;
 
-	private final FavouritePoint fav;
-
-	public FavouritePointMenuBuilder(OsmandApplication app, final FavouritePoint fav) {
+	public PointDescriptionMenuBuilder(OsmandApplication app, final PointDescription pointDescription) {
 		super(app);
-		this.fav = fav;
+		this.pointDescription = pointDescription;
 	}
 
 	private void buildRow(View view, int iconId, String text, int textColor) {
@@ -94,11 +92,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	public void build(View view) {
 		super.build(view);
 
-		if (!Algorithms.isEmpty(fav.getDescription())) {
-			buildRow(view, R.drawable.ic_action_note_dark, fav.getDescription(), 0);
-		}
-
-		for (PlainMenuItem item : plainMenuItems) {
+		for (MenuBuilder.PlainMenuItem item : plainMenuItems) {
 			buildRow(view, item.getIconId(), item.getText(), 0);
 		}
 	}

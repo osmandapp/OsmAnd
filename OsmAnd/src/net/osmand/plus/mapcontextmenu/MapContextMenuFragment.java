@@ -639,6 +639,7 @@ public class MapContextMenuFragment extends Fragment {
 
 	public void refreshTitle() {
 		setAddressLocation();
+		runLayoutListener();
 	}
 
 	public void setFragmentVisibility(boolean visible) {

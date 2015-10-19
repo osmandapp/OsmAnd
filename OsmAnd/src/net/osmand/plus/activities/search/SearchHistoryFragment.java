@@ -265,26 +265,7 @@ public class SearchHistoryFragment extends OsmAndListFragment implements SearchA
 		PointDescription pd = historyEntry.getName();
 		nameText.setText(pd.getSimpleName(activity, false), BufferType.SPANNABLE);
 		ImageView icon = ((ImageView) row.findViewById(R.id.icon));
-
-		if (historyEntry.getName().isAddress()) {
-			icon.setImageDrawable(ic.getContentIcon(R.drawable.ic_type_address));
-		} else if (historyEntry.getName().isFavorite()) {
-			icon.setImageDrawable(ic.getContentIcon(R.drawable.ic_type_favorites));
-		} else if (historyEntry.getName().isLocation()) {
-			icon.setImageDrawable(ic.getContentIcon(R.drawable.ic_type_coordinates));
-		} else if (historyEntry.getName().isPoi()) {
-			icon.setImageDrawable(ic.getContentIcon(R.drawable.ic_type_info));
-		} else if (historyEntry.getName().isWpt()) {
-			icon.setImageDrawable(ic.getContentIcon(R.drawable.ic_type_waypoint));
-		} else if (historyEntry.getName().isAudioNote()) {
-			icon.setImageDrawable(ic.getContentIcon(R.drawable.ic_type_audio));
-		} else if (historyEntry.getName().isVideoNote()) {
-			icon.setImageDrawable(ic.getContentIcon(R.drawable.ic_type_video));
-		}else if (historyEntry.getName().isPhotoNote()) {
-			icon.setImageDrawable(ic.getContentIcon(R.drawable.ic_type_img));
-		}  else {
-			icon.setImageDrawable(ic.getContentIcon(R.drawable.ic_type_address));
-		}
+		icon.setImageDrawable(ic.getContentIcon(getItemIcon(historyEntry.getName())));
 
 		String typeName = historyEntry.getName().getTypeName();
 		if (typeName != null && !typeName.isEmpty()) {
@@ -296,6 +277,30 @@ public class SearchHistoryFragment extends OsmAndListFragment implements SearchA
 			row.findViewById(R.id.type_name_icon).setVisibility(View.GONE);
 			((TextView) row.findViewById(R.id.type_name)).setText("");
 		}
+	}
+
+	public static int getItemIcon(PointDescription pd) {
+		int iconId;
+		if (pd.isAddress()) {
+			iconId = R.drawable.ic_type_address;
+		} else if (pd.isFavorite()) {
+			iconId = R.drawable.ic_type_favorites;
+		} else if (pd.isLocation()) {
+			iconId = R.drawable.ic_type_coordinates;
+		} else if (pd.isPoi()) {
+			iconId = R.drawable.ic_type_info;
+		} else if (pd.isWpt()) {
+			iconId = R.drawable.ic_type_waypoint;
+		} else if (pd.isAudioNote()) {
+			iconId = R.drawable.ic_type_audio;
+		} else if (pd.isVideoNote()) {
+			iconId = R.drawable.ic_type_video;
+		}else if (pd.isPhotoNote()) {
+			iconId = R.drawable.ic_type_img;
+		}  else {
+			iconId = R.drawable.ic_type_address;
+		}
+		return iconId;
 	}
 
 	@Override

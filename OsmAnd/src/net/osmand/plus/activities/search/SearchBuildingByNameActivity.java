@@ -23,7 +23,6 @@ public class SearchBuildingByNameActivity extends SearchByNameAbstractActivity<B
 	private RegionAddressRepository region;
 	private City city;
 	private Street street;
-	private OsmandSettings osmandSettings;
 	
 	@Override
 	protected Comparator<? super Building> createComparator() {
@@ -124,7 +123,7 @@ public class SearchBuildingByNameActivity extends SearchByNameAbstractActivity<B
 			text = hno;
 		}
 		settings.setLastSearchedBuilding(text, loc);
-		quitActivity(null);
+		showOnMap(loc, AddressInformation.buildBuilding(this, settings));
 	}
 	
 	@Override

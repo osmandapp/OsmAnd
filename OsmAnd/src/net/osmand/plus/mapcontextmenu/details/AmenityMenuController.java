@@ -1,7 +1,6 @@
 package net.osmand.plus.mapcontextmenu.details;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import net.osmand.data.Amenity;
 import net.osmand.data.PointDescription;

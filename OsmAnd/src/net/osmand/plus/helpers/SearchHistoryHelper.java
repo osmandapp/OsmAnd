@@ -1,13 +1,5 @@
 package net.osmand.plus.helpers;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
@@ -15,6 +7,14 @@ import net.osmand.plus.R;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.util.Algorithms;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class SearchHistoryHelper {
 	
@@ -51,7 +51,7 @@ public class SearchHistoryHelper {
 		}
 	};
 	
-	public static class HistoryEntry {
+	public static class HistoryEntry implements Serializable {
 		double lat;
 		double lon;
 		PointDescription name;

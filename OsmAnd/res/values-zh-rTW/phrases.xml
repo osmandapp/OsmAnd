@@ -227,7 +227,7 @@
 	<string name="poi_aeroway_gate">登機門</string>
 
 	<string name="poi_slipway">船舶斜滑道</string>
-	<string name="poi_ferry_terminal">輪渡碼頭</string>
+	<string name="poi_ferry_terminal">渡輪碼頭</string>
 	<string name="poi_lighthouse">燈塔</string>
 
 	<string name="poi_bicycle_rental">自行車租賃站</string>
@@ -543,7 +543,7 @@
 	<string name="poi_grave_yard">墓地</string>
 	<string name="poi_tomb">墳墓</string>
 	<string name="poi_shelter">涼亭</string>
-	<string name="poi_funicular">纜索鐵路</string>
+	<string name="poi_funicular">纜索車</string>
 	<string name="poi_resort">度假村</string>
 	<string name="poi_hanami">賞花</string>
 	<string name="poi_wine_cellar">酒窖</string>
@@ -1895,4 +1895,55 @@
 	<string name="poi_bridge_structure_aqueduct">橋樑結構：高架渠式</string>
 	<string name="poi_bridge_structure_log">橋樑結構：圓木式</string>
 	<string name="poi_bridge_type_movable">橋樑類型：活動型</string>
+	<string name="poi_bridge_movable_bascule">活動橋類型：開啟型</string>
+	<string name="poi_bridge_movable_swing">活動橋類型：旋開型</string>
+	<string name="poi_bridge_movable_lift">活動橋類型：昇降型</string>
+	<string name="poi_bridge_movable_drawbridge">活動橋類型：開合型</string>
+	<string name="poi_bridge_movable_submersible">活動橋類型：潛水型</string>
+	<string name="poi_bridge_movable_transporter">活動橋類型：運輸型</string>
+	<string name="poi_bridge_movable_retractable">活動橋類型：伸縮型</string>
+
+	<string name="poi_lit_yes">路燈：有</string>
+	<string name="poi_lit_no">路燈：無</string>
+
+	<string name="poi_surface_unpaved">路面：未鋪設</string>
+	<string name="poi_surface_paved">路面：已鋪設</string>
+	<string name="poi_surface_asphalt">路面：柏油</string>
+	<string name="poi_surface_concrete">路面：混凝土</string>
+	<string name="poi_surface_sett">路面：石塊</string>
+	<string name="poi_surface_cobblestone">路面：圓扁石</string>
+	<string name="poi_surface_paving_stones">路面：鋪路石</string>
+	<string name="poi_surface_pebblestone">路面：鵝卵石</string>
+	<string name="poi_surface_stone">路面：石頭</string>
+	<string name="poi_surface_metal">路面：金屬</string>
+	<string name="poi_surface_wood">路面：木頭</string>
+	<string name="poi_surface_gravel">路面：礫石</string>
+	<string name="poi_surface_fine_gravel">路面：細礫石</string>
+	<string name="poi_surface_compacted">路面：壓緊實</string>
+	<string name="poi_surface_sand">路面：沙</string>
+	<string name="poi_surface_grass">路面：草地</string>
+	<string name="poi_surface_grass_paver">路面：植草磚</string>
+	<string name="poi_surface_ground">路面：土壤</string>
+	<string name="poi_surface_dirt">路面：爛泥</string>
+	<string name="poi_surface_mud">路面：泥漿</string>
+	<string name="poi_surface_ice">路面：冰</string>
+	<string name="poi_surface_salt">路面：鹽</string>
+	<string name="poi_surface_snow">路面：雪</string>
+
+	<string name="poi_route_bus_ref">公車</string>
+	<string name="poi_route_share_taxi_ref">共乘計程車</string>
+	<string name="poi_route_trolleybus_ref">無軌電車</string>
+	<string name="poi_route_tram_ref">電車</string>
+	<string name="poi_route_train_ref">火車</string>
+	<string name="poi_route_light_rail_ref">輕軌車</string>
+	<string name="poi_route_monorail_ref">單軌車</string>
+	<string name="poi_route_funicular_ref">纜索車</string>
+	<string name="poi_route_ferry_ref">渡輪</string>
+
+	<string name="poi_route_railway_ref">鐵路的路線</string>
+
+	<string name="poi_historic_yes">歷史物件</string>
+	<string name="poi_surveillance_yes">監視器：有</string>
+	<string name="poi_shop_yes">有商店</string>
+
 	</resources>
