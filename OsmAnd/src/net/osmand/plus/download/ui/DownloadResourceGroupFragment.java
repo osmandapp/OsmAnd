@@ -7,7 +7,6 @@ import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.WorldRegion;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivity.BannerAndDownloadFreeVersion;
@@ -96,7 +95,12 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 
 		setHasOptionsMenu(true);
 
-		banner = new BannerAndDownloadFreeVersion(view, (DownloadActivity) getActivity());
+		if(openAsDialog()) {
+			banner = new BannerAndDownloadFreeVersion(view, (DownloadActivity) getActivity());
+		} else {
+			banner = null;
+			view.findViewById(R.id.freeVersionBanner).setVisibility(View.GONE);
+		}
 
 		listView = (ExpandableListView) view.findViewById(android.R.id.list);
 		listView.setOnChildClickListener(this);
@@ -133,19 +137,25 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 
 	@Override
 	public void newDownloadIndexes() {
-		banner.updateBannerInProgress();
+		if(banner != null) {
+			banner.updateBannerInProgress();
+		}
 		reloadData();
 	}
 
 	@Override
 	public void downloadHasFinished() {
-		banner.updateBannerInProgress();
+		if(banner != null) {
+			banner.updateBannerInProgress();
+		}
 		listAdapter.notifyDataSetChanged();
 	}
 
 	@Override
 	public void downloadInProgress() {
-		banner.updateBannerInProgress();
+		if(banner != null) {
+			banner.updateBannerInProgress();
+		}
 		listAdapter.notifyDataSetChanged();
 	}
 
