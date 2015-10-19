@@ -32,7 +32,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.ContextMenuAdapter;
@@ -56,7 +55,7 @@ import net.osmand.plus.activities.OsmandExpandableListFragment;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.dialogs.DirectionsDialogs;
-import net.osmand.plus.download.LocalIndexesFragment;
+import net.osmand.plus.download.ui.LocalIndexesFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.osmedit.OsmEditingPlugin;

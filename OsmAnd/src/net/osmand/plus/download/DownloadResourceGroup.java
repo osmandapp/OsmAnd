@@ -1,0 +1,224 @@
+package net.osmand.plus.download;
+
+import android.annotation.SuppressLint;
+import android.content.Context;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
+
+import net.osmand.OsmAndCollator;
+import net.osmand.map.OsmandRegions;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.WorldRegion;
+
+@SuppressLint("DefaultLocale")
+public class DownloadResourceGroup {
+
+	private final DownloadResourceGroupType type;
+	private final DownloadResourceGroup parentGroup;
+	// ASSERT: individualResources are not empty if and only if groups are empty
+	private final List<IndexItem> individualResources;
+	private final List<DownloadResourceGroup> groups;
+	protected final String id;
+
+	protected WorldRegion region;
+
+	public enum DownloadResourceGroupType {
+		// headers
+		WORLD_MAPS(R.string.world_maps), REGION_MAPS(R.string.region_maps), VOICE_GROUP(R.string.voices), SUBREGIONS(
+				R.string.regions), VOICE_HEADER_REC(R.string.index_name_voice), VOICE_HEADER_TTS(
+				R.string.index_name_tts_voice),
+		// screen items
+		VOICE_REC(R.string.index_name_voice), VOICE_TTS(R.string.index_name_tts_voice), WORLD(-1), REGION(-1);
+
+		final int resId;
+
+		private DownloadResourceGroupType(int resId) {
+			this.resId = resId;
+		}
+
+		public boolean isScreen() {
+			return this == WORLD || this == REGION || this == VOICE_TTS || this == VOICE_REC;
+		}
+
+		public String getDefaultId() {
+			return name().toLowerCase();
+		}
+
+		public int getResourceId() {
+			return resId;
+		}
+
+		public boolean containsIndexItem() {
+			return isHeader() && this != SUBREGIONS && this != VOICE_GROUP;
+		}
+
+		public boolean isHeader() {
+			return this == VOICE_HEADER_REC || this == VOICE_HEADER_TTS || this == SUBREGIONS || this == WORLD_MAPS
+					|| this == REGION_MAPS || this == VOICE_GROUP;
+		}
+
+	}
+	
+	public DownloadResourceGroup(DownloadResourceGroup parentGroup, DownloadResourceGroupType type) {
+		this(parentGroup, type, type.getDefaultId());
+	}
+
+	public DownloadResourceGroup(DownloadResourceGroup parentGroup, DownloadResourceGroupType type, String id) {
+		boolean flat = type.containsIndexItem();
+		if (flat) {
+			this.individualResources = new ArrayList<IndexItem>();
+			this.groups = null;
+		} else {
+			this.individualResources = null;
+			this.groups = new ArrayList<DownloadResourceGroup>();
+		}
+		this.id = id;
+		this.type = type;
+		this.parentGroup = parentGroup;
+	}
+	
+	public void trimEmptyGroups() {
+		if(groups != null) {
+			for(DownloadResourceGroup gr : groups) {
+				gr.trimEmptyGroups();
+			}
+			Iterator<DownloadResourceGroup> gr = groups.iterator();
+			while(gr.hasNext()) {
+				DownloadResourceGroup group = gr.next();
+				if(group.isEmpty()) {
+					gr.remove();
+				}
+			}
+		}
+		
+	}
+	
+	public void addGroup(DownloadResourceGroup g) {
+		if(type.isScreen()) {
+			if(!g.type.isHeader()) {
+				throw new UnsupportedOperationException("Trying to add " + g.getUniqueId() + " to " + getUniqueId());
+			}
+		}
+		if(type.isHeader()) {
+			if(!g.type.isScreen()) {
+				throw new UnsupportedOperationException("Trying to add " + g.getUniqueId() + " to " + getUniqueId());
+			}
+		}
+		groups.add(g);
+		if (g.individualResources != null) {
+			final net.osmand.Collator collator = OsmAndCollator.primaryCollator();
+			final OsmandApplication app = getRoot().app;
+			final OsmandRegions osmandRegions = app.getRegions();
+			Collections.sort(g.individualResources, new Comparator<IndexItem>() {
+				@Override
+				public int compare(IndexItem lhs, IndexItem rhs) {
+					return collator.compare(lhs.getVisibleName(app.getApplicationContext(), osmandRegions),
+							rhs.getVisibleName(app.getApplicationContext(), osmandRegions));
+				}
+			});
+		}
+	}
+	
+	public void addItem(IndexItem i) {
+		individualResources.add(i);
+	}
+	
+	public boolean isEmpty() {
+		return isEmpty(individualResources) && isEmpty(groups);
+	}
+
+	private boolean isEmpty(List<?> l) {
+		return l == null || l.isEmpty();
+	}
+
+	public DownloadResourceGroup getParentGroup() {
+		return parentGroup;
+	}
+	
+	public List<DownloadResourceGroup> getGroups() {
+		return groups;
+	}
+	
+	public int size() {
+		return groups != null ? groups.size() : individualResources.size();
+	}
+	
+	public DownloadResourceGroup getGroupByIndex(int ind) {
+		if(groups != null && ind < groups.size()) {
+			return groups.get(ind);
+		}
+		return null;
+	}
+	
+	public IndexItem getItemByIndex(int ind) {
+		if(individualResources != null && ind < individualResources.size()) {
+			return individualResources.get(ind);
+		}
+		return null;
+	}
+
+	public DownloadResources getRoot() {
+		if (this instanceof DownloadResources) {
+			return (DownloadResources) this;
+		} else if (parentGroup != null) {
+			return parentGroup.getRoot();
+		}
+		return null;
+	}
+
+	public DownloadResourceGroupType getType() {
+		return type;
+	}
+
+	public DownloadResourceGroup getGroupById(String uid) {
+		String[] lst = uid.split("\\#");
+		return getGroupById(lst, 0);
+	}
+	
+	public List<IndexItem> getIndividualResources() {
+		return individualResources;
+	}
+	
+	public WorldRegion getRegion() {
+		return region;
+	}
+
+	private DownloadResourceGroup getGroupById(String[] lst, int subInd) {
+		if (lst.length > subInd && lst[subInd].equals(id)) {
+			if (lst.length == subInd + 1) {
+				return this;
+			} else if (groups != null) {
+				for (DownloadResourceGroup rg : groups) {
+					DownloadResourceGroup r = rg.getGroupById(lst, subInd + 1);
+					if (r != null) {
+						return r;
+					}
+				}
+			}
+		}
+		return null;
+	}
+	
+	public String getName(Context ctx) {
+		if (region != null) {
+			return region.getName();
+		} else if (type != null && type.resId != -1) {
+			return ctx.getString(type.resId);
+		} else {
+			return id;
+		}
+	}
+
+	public String getUniqueId() {
+		if (parentGroup == null) {
+			return id;
+		}
+		return parentGroup.getUniqueId() + "#" + id;
+	}
+
+}

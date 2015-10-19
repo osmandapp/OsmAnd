@@ -3,7 +3,6 @@ package net.osmand.plus.download;
 import java.io.File;
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.net.URL;
 import java.net.URLEncoder;
 import java.text.MessageFormat;
 import java.util.Iterator;

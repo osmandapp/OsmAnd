@@ -200,7 +200,7 @@ public class DownloadFileHelper {
 		return ctx.getSettings().isWifiConnected();
 	}
 	
-	public boolean downloadFile(DownloadEntry de, IProgress progress, 
+	public boolean downloadFile(IndexItem.DownloadEntry de, IProgress progress, 
 			List<File> toReIndex, DownloadFileShowWarning showWarningCallback, boolean forceWifi) throws InterruptedException {
 		try {
 			final List<InputStream> downloadInputStreams = new ArrayList<InputStream>();
@@ -235,7 +235,7 @@ public class DownloadFileHelper {
 		}
 	}
 
-	private void copyVoiceConfig(DownloadEntry de) {
+	private void copyVoiceConfig(IndexItem.DownloadEntry de) {
 		File f = ctx.getAppPath("/voice/" + de.baseName + "/_config.p");
 		if (f.exists()) try {
 			InputStream is = ctx.getAssets().open("voice/" + de.baseName + "/config.p");
@@ -252,7 +252,7 @@ public class DownloadFileHelper {
 		}
 	}
 
-	private void unzipFile(DownloadEntry de, IProgress progress,  List<InputStream> is) throws IOException {
+	private void unzipFile(IndexItem.DownloadEntry de, IProgress progress,  List<InputStream> is) throws IOException {
 		CountingMultiInputStream fin = new CountingMultiInputStream(is);
 		int len = (int) fin.available();
 		int mb = (int) (len / (1024f*1024f));
@@ -308,7 +308,7 @@ public class DownloadFileHelper {
 		fin.close();
 	}
 
-	private void copyFile(DownloadEntry de, IProgress progress, 
+	private void copyFile(IndexItem.DownloadEntry de, IProgress progress, 
 			CountingMultiInputStream countIS, int length, InputStream toRead, File targetFile)
 			throws IOException {
 		targetFile.getParentFile().mkdirs();

@@ -1,4 +1,4 @@
-package net.osmand.plus.download.items;
+package net.osmand.plus.download.ui;
 
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -10,18 +10,27 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.SearchView;
-
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 
+// FIXME
 public class SearchDialogFragment extends DialogFragment {
+
+	public static DialogFragment createInstance(String tg) {
+		return new SearchDialogFragment();
+	}
+
+	
+	
+	/*extends DialogFragment implements DownloadEvents {
 
 	public static final String TAG = "SearchDialogFragment";
 	private static final String SEARCH_TEXT_DLG_KEY = "search_text_dlg_key";
 	private String searchText;
-	SearchView search;
+	private SearchView search;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -125,7 +134,7 @@ public class SearchDialogFragment extends DialogFragment {
 		return (DownloadActivity) getActivity();
 	}
 
-	public void onCategorizationFinished() {
+	public void newDownloadIndexes() {
 		Fragment f = getChildFragmentManager().findFragmentByTag(SearchItemsFragment.TAG);
 		if (f != null) {
 			((SearchItemsFragment) f).onCategorizationFinished();
@@ -139,4 +148,5 @@ public class SearchDialogFragment extends DialogFragment {
 		fragment.setArguments(bundle);
 		return fragment;
 	}
+	*/
 }
