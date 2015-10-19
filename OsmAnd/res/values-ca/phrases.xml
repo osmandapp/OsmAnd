@@ -851,7 +851,7 @@
 	<string name="poi_candles">Cereria</string>
 	<string name="poi_leather">Pelleteria</string>
 	<string name="poi_watches">Rellotgeria</string>
-	<string name="poi_barrier_entrance">Entrada</string>
+	<string name="poi_barrier_entrance">Passatge en un mur o una tanca</string>
 	<string name="poi_entrance_main">Entrada principal</string>
 	<string name="poi_entrance">Entrada</string>
 	<string name="poi_entrance_exit">Sortida</string>
@@ -891,7 +891,7 @@
 	<string name="poi_tree">Arbre</string>
 	<string name="poi_highway_crossing">Pas de vianants</string>
 
-	<string name="poi_icn_ref">Xarxa internacional de rutes ciclistes</string>
+	<string name="poi_icn_ref">Node de la xarxa ciclista internacional</string>
 	<string name="poi_ncn_ref">Node de la xarxa ciclista nacional</string>
 	<string name="poi_rcn_ref">Node de la xarxa ciclista regional</string>
 	<string name="poi_lcn_ref">Node de la xarxa ciclista local</string>
@@ -1359,4 +1359,10 @@
 	<string name="poi_tunnel_pedestrian">Túnel per vianants</string>
 	<string name="poi_bridge_car">Pont de carretera</string>
 	<string name="poi_bridge_waterway">Pont fluvial</string>
+	<string name="poi_debris">Runa</string>
+	<string name="poi_jersey_barrier">Barrera Jersey</string>
+	<string name="poi_content_fodder">Contingut: farratge</string>
+	<string name="poi_leaf_type_broadleaved">Fulla ampla</string>
+	<string name="poi_leaf_type_mixed">Barrejat</string>
+	<string name="poi_trees_kiwi">Actinídia</string>
 	</resources>
