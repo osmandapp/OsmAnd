@@ -1,4 +1,4 @@
-package net.osmand.plus.download;
+package net.osmand.plus.download.ui;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -33,7 +33,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
@@ -49,6 +48,10 @@ import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.activities.OsmandExpandableListFragment;
 import net.osmand.plus.dialogs.DirectionsDialogs;
+import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.download.DownloadActivityType;
+import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
+import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.resources.IncrementalChangesManager;
 import net.osmand.plus.resources.IncrementalChangesManager.IncrementalUpdate;
@@ -69,7 +72,7 @@ import java.util.Map;
 import java.util.Set;
 
 
-public class LocalIndexesFragment extends OsmandExpandableListFragment {
+public class LocalIndexesFragment extends OsmandExpandableListFragment implements DownloadEvents {
 
 	private LoadLocalIndexTask asyncLoader;
 	private LocalIndexesAdapter listAdapter;
@@ -159,6 +162,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 		asyncLoader = new LoadLocalIndexTask();
 		asyncLoader.execute(getActivity());
 	}
+	
+	
 
 
 	private void showContextMenu(final LocalIndexInfo info) {
@@ -446,6 +451,20 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment {
 				reloadIndexes();
 			}
 		}
+	}
+	
+	@Override
+	public void newDownloadIndexes() {
+	}
+	
+	@Override
+	public void downloadHasFinished() {
+		((DownloadActivity) getActivity()).updateDescriptionTextWithSize(getView());
+		reloadData();
+	}
+	
+	@Override
+	public void downloadInProgress() {
 	}
 
 

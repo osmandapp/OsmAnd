@@ -1,4 +1,4 @@
-package net.osmand.plus.download.items;
+package net.osmand.plus.download.ui;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,6 +14,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.WorldRegion;
 import net.osmand.plus.download.BaseDownloadActivity;
 import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.IndexItem;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -28,7 +29,8 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ListView;
 
-public class SearchItemsFragment extends Fragment {
+//FIXME merge into search dialog fragment
+public class SearchItemsFragment { /*extends Fragment implements DownloadEvents {
 	public static final String TAG = "SearchItemsFragment";
 
 	private SearchItemsAdapter listAdapter;
@@ -331,4 +333,5 @@ public class SearchItemsFragment extends Fragment {
 			}
 		}
 	}
+	*/
 }

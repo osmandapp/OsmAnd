@@ -6,36 +6,27 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
-import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.LocalIndexInfo;
-import net.osmand.plus.activities.OsmAndListFragment;
-import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
-import net.osmand.plus.activities.OsmandExpandableListFragment;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.base.BasicProgressAsyncTask;
-import net.osmand.plus.download.items.ActiveDownloadsDialogFragment;
-import net.osmand.plus.download.items.DialogDismissListener;
-import net.osmand.plus.download.items.RegionItemsFragment;
-import net.osmand.plus.download.items.SearchDialogFragment;
-import net.osmand.plus.download.items.WorldItemsFragment;
-import net.osmand.plus.srtmplugin.SRTMPlugin;
+import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
+import net.osmand.plus.download.ui.ActiveDownloadsDialogFragment;
+import net.osmand.plus.download.ui.DownloadResourceGroupFragment;
+import net.osmand.plus.download.ui.LocalIndexesFragment;
+import net.osmand.plus.download.ui.UpdatesIndexFragment;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
-
-import org.apache.commons.logging.Log;
-
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StatFs;
+import android.support.annotation.UiThread;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -43,14 +34,11 @@ import android.support.v4.view.ViewPager;
 import android.text.method.LinkMovementMethod;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.BaseExpandableListAdapter;
-import android.widget.ExpandableListAdapter;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
-public class DownloadActivity extends BaseDownloadActivity implements DialogDismissListener {
+public class DownloadActivity extends BaseDownloadActivity {
 	private List<LocalIndexInfo> localIndexInfos = new ArrayList<>();
 
 	List<TabActivity.TabItem> mTabs = new ArrayList<TabActivity.TabItem>();
@@ -64,15 +52,14 @@ public class DownloadActivity extends BaseDownloadActivity implements DialogDism
 	public static final MessageFormat formatGb = new MessageFormat("{0, number,#.##} GB", Locale.US);
 
 	private BannerAndDownloadFreeVersion visibleBanner;
-	private ActiveDownloadsDialogFragment activeDownloads;
-
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		getMyApplication().applyTheme(this);
 		super.onCreate(savedInstanceState);
-		if (downloadListIndexThread.getCachedIndexFiles() == null || !downloadListIndexThread.isDownloadedFromInternet()) {
-			downloadListIndexThread.runReloadIndexFiles();
+		DownloadResources indexes = getDownloadThread().getIndexes();
+		if (!indexes.isDownloadedFromInternet) {
+			getDownloadThread().runReloadIndexFiles();
 		}
 		
 		setContentView(R.layout.download);
@@ -85,12 +72,13 @@ public class DownloadActivity extends BaseDownloadActivity implements DialogDism
 				currentTab = 2;
 			}
 		}
+		visibleBanner = new BannerAndDownloadFreeVersion(findViewById(R.id.mainLayout), this);
 		ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
 		PagerSlidingTabStrip mSlidingTabLayout = (PagerSlidingTabStrip) findViewById(R.id.sliding_tabs);
 
 
 		mTabs.add(new TabActivity.TabItem(R.string.download_tab_downloads,
-				getString(R.string.download_tab_downloads), WorldItemsFragment.class));
+				getString(R.string.download_tab_downloads), DownloadResourceGroupFragment.class));
 		mTabs.add(new TabActivity.TabItem(R.string.download_tab_local,
 				getString(R.string.download_tab_local), LocalIndexesFragment.class));
 		mTabs.add(new TabActivity.TabItem(R.string.download_tab_updates,
@@ -107,19 +95,14 @@ public class DownloadActivity extends BaseDownloadActivity implements DialogDism
 			final String filter = intent.getExtras().getString(FILTER_KEY);
 			final String filterCat = intent.getExtras().getString(FILTER_CAT);
 		}
-		registerFreeVersionBanner(findViewById(R.id.mainLayout));
 	}
 
-
-	public Map<String, String> getIndexActivatedFileNames() {
-		return downloadListIndexThread != null ? downloadListIndexThread.getIndexActivatedFileNames() : null;
-	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
 		getMyApplication().getAppCustomization().resumeActivity(DownloadActivity.class, this);
-		updateFragments();
+		downloadInProgress();
 	}
 
 
@@ -148,129 +131,55 @@ public class DownloadActivity extends BaseDownloadActivity implements DialogDism
 		super.onPause();
 		getMyApplication().getAppCustomization().pauseActivity(DownloadActivity.class);
 	}
-
+	
 	@Override
-	public void updateProgress(boolean updateOnlyProgress) {
-		BasicProgressAsyncTask<?, ?, ?, ?> basicProgressAsyncTask =
-				downloadListIndexThread.getCurrentRunningTask();
-		if (visibleBanner != null) {
-			final int countedDownloads = downloadListIndexThread.getCountedDownloads();
-			visibleBanner.updateProgress(countedDownloads, basicProgressAsyncTask);
-		}
-		if (!updateOnlyProgress) {
-			updateFragments();
-		}
-	}
-
-	@Override
-	public void updateDownloadList() {
+	@UiThread
+	public void downloadHasFinished() {
+		visibleBanner.updateBannerInProgress();
 		for (WeakReference<Fragment> ref : fragSet) {
 			Fragment f = ref.get();
-			if (f instanceof UpdatesIndexFragment) {
-				if (f.isAdded()) {
-					((UpdatesIndexFragment) f).updateItemsList();
-				}
+			if (f instanceof DownloadEvents && f.isAdded()) {
+				((DownloadEvents) f).downloadHasFinished();
 			}
 		}
 	}
-
+	
 	@Override
-	public void onCategorizationFinished() {
+	@UiThread
+	public void downloadInProgress() {
+		visibleBanner.updateBannerInProgress();
 		for (WeakReference<Fragment> ref : fragSet) {
 			Fragment f = ref.get();
-			if (f instanceof WorldItemsFragment) {
-				if (f.isAdded()) {
-					((WorldItemsFragment) f).onCategorizationFinished();
-				}
-			} else if (f instanceof SearchDialogFragment) {
-				if (f.isAdded()) {
-					((SearchDialogFragment) f).onCategorizationFinished();
-				}
-			}
-		}
-	}
-
-
-	@Override
-	public void downloadedIndexes() {
-		for (WeakReference<Fragment> ref : fragSet) {
-			Fragment f = ref.get();
-			if (f instanceof LocalIndexesFragment) {
-				if (f.isAdded()) {
-					((LocalIndexesFragment) f).reloadData();
-				}
+			if (f instanceof DownloadEvents && f.isAdded()) {
+				((DownloadEvents) f).downloadInProgress();
 			}
 		}
 	}
 
 
 	
-	public void setActiveDownloads(ActiveDownloadsDialogFragment activeDownloads) {
-		this.activeDownloads = activeDownloads;
-	}
-	
 	@Override
-	public void updateFragments() {
-		if(activeDownloads != null) {
-			activeDownloads.refresh();
-		}
-		// FIXME
-		//((DownloadActivity) getActivity()).updateDescriptionTextWithSize(getView());
+	@UiThread
+	public void newDownloadIndexes() {
+		visibleBanner.updateBannerInProgress();
 		for (WeakReference<Fragment> ref : fragSet) {
 			Fragment f = ref.get();
-			notifyUpdateDataSetChanged(f);
-			if(f instanceof RegionItemsFragment) {
-				Fragment innerFragment = ((RegionItemsFragment)f).getChildFragmentManager().findFragmentById(R.id.fragmentContainer);
-				notifyUpdateDataSetChanged(innerFragment);
+			if (f instanceof DownloadEvents && f.isAdded()) {
+				((DownloadEvents) f).newDownloadIndexes();
 			}
 		}
+		downloadHasFinished();
 	}
-
-
-	private void notifyUpdateDataSetChanged(Fragment f) {
-		if (f != null && f.isAdded()) {
-			if(f instanceof OsmandExpandableListFragment) {
-				ExpandableListAdapter adapter = ((OsmandExpandableListFragment) f).getAdapter();
-				if(adapter instanceof BaseExpandableListAdapter) {
-					((BaseExpandableListAdapter)adapter).notifyDataSetChanged();
-				}
-			}
-			if(f instanceof OsmAndListFragment) {
-				 ArrayAdapter<?> adapter = ((OsmAndListFragment) f).getAdapter();
-				if(adapter != null) {
-					adapter.notifyDataSetChanged();
-				}
-			}
-		}
-	}
+	
+	
 
 
 	public boolean isLightActionBar() {
 		return ((OsmandApplication) getApplication()).getSettings().isLightActionBar();
 	}
 
-	public Map<String, String> getIndexFileNames() {
-		return downloadListIndexThread != null ? downloadListIndexThread.getIndexFileNames() : null;
-	}
-
-	public List<IndexItem> getIndexFiles() {
-		return downloadListIndexThread != null ? downloadListIndexThread.getCachedIndexFiles() : null;
-	}
-
-
-	public void registerFreeVersionBanner(View view) {
-		visibleBanner = new BannerAndDownloadFreeVersion(view, this);
-		updateProgress(true);
-	}
-
-
 	public void showDialog(FragmentActivity activity, DialogFragment fragment) {
 		fragment.show(activity.getSupportFragmentManager(), "dialog");
-	}
-
-	@Override
-	public void onDialogDismissed() {
-		registerFreeVersionBanner(findViewById(R.id.mainLayout));
 	}
 
 	private static class ToggleCollapseFreeVersionBanner implements View.OnClickListener {
@@ -310,12 +219,12 @@ public class DownloadActivity extends BaseDownloadActivity implements DialogDism
 		private final TextView downloadsLeftTextView;
 		private final View laterButton;
 
-		private final FragmentActivity ctx;
+		private final DownloadActivity ctx;
 		private final OsmandApplication application;
 		private final boolean shouldShowFreeVersionBanner;
 		private final View freeVersionBannerTitle;
 
-		public BannerAndDownloadFreeVersion(View view, final FragmentActivity ctx) {
+		public BannerAndDownloadFreeVersion(View view, final DownloadActivity ctx) {
 			this.ctx = ctx;
 			application = (OsmandApplication) ctx.getApplicationContext();
 			freeVersionBanner = view.findViewById(R.id.freeVersionBanner);
@@ -336,6 +245,7 @@ public class DownloadActivity extends BaseDownloadActivity implements DialogDism
 
 			initFreeVersionBanner();
 			updateFreeVersionBanner();
+			updateBannerInProgress();
 			downloadProgressLayout.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -343,8 +253,14 @@ public class DownloadActivity extends BaseDownloadActivity implements DialogDism
 				}
 			});
 		}
+		
+		public void updateBannerInProgress() {
+			BasicProgressAsyncTask<?, ?, ?, ?> basicProgressAsyncTask = ctx.getDownloadThread().getCurrentRunningTask();
+			final int countedDownloads = ctx.getDownloadThread().getCountedDownloads();
+			updateProgress(countedDownloads, basicProgressAsyncTask);
+		} 
 
-		public void updateProgress(int countedDownloads,
+		private void updateProgress(int countedDownloads,
 								   BasicProgressAsyncTask<?, ?, ?, ?> basicProgressAsyncTask) {
 			final boolean isFinished = basicProgressAsyncTask == null
 					|| basicProgressAsyncTask.getStatus() == AsyncTask.Status.FINISHED;
@@ -397,13 +313,14 @@ public class DownloadActivity extends BaseDownloadActivity implements DialogDism
 		}
 
 		private void updateFreeVersionBanner() {
-			if (!shouldShowFreeVersionBanner) return;
+			if (!shouldShowFreeVersionBanner) {
+				return;
+			}
 			setMinimizedFreeVersionBanner(false);
 			OsmandSettings settings = application.getSettings();
 			final Integer mapsDownloaded = settings.NUMBER_OF_FREE_DOWNLOADS.get();
 			downloadsLeftProgressBar.setProgress(mapsDownloaded);
-			int downloadsLeft = BaseDownloadActivity.MAXIMUM_AVAILABLE_FREE_DOWNLOADS
-					- mapsDownloaded;
+			int downloadsLeft = BaseDownloadActivity.MAXIMUM_AVAILABLE_FREE_DOWNLOADS - mapsDownloaded;
 			downloadsLeft = Math.max(downloadsLeft, 0);
 			if (downloadsLeft <= 0) {
 				laterButton.setVisibility(View.GONE);
