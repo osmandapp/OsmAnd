@@ -2199,5 +2199,6 @@
 	<string name="poi_step_condition_uneven">Состояние ступеней: среднее</string>
 	<string name="poi_step_condition_rough">Состояние ступеней: плохое</string>
 
+	<string name="poi_cairn">Пирамида из камней</string>
 
 </resources>
