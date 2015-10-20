@@ -120,10 +120,10 @@
   <string name="index_name_europe">Evropa</string>
   <string name="index_name_france">Evropa - Francie</string>
   <string name="index_name_germany">Evropa - Německo</string>
-  <string name="index_name_russia">Evropa/Asie - Rusko</string>
+  <string name="index_name_russia">Rusko</string>
   <string name="index_name_africa">Afrika</string>
   <string name="index_name_asia">Asie</string>
-  <string name="index_name_oceania">Oceánie</string>
+  <string name="index_name_oceania">Austrálie a Oceánie</string>
   <string name="index_name_other">Mapy celého světa a tematické mapy</string>
   <string name="index_name_wiki">Celý svět - Wikipedie</string>
   <string name="index_name_voice">Hlasové pokyny (nahrávky, omezené funkce)</string>
@@ -2117,4 +2117,7 @@ s často kladenými otázkami.</string>
     <string name="downloads">Stahování</string>
     <string name="value_downloaded_from_max">%1$.1f z %2$.1f MB</string>
     <string name="file_size_in_mb">%.1f MB</string>
+<string name="update_all">Aktualizovat vše (%1$s MB)</string>
+    <string name="free_downloads_used">Použito volných stáhnutí</string>
+    <string name="free_downloads_used_description">Můžete nastavit, kolik volných stáhnutí jste použili</string>
 </resources>
