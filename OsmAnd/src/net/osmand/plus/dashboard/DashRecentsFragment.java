@@ -18,6 +18,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.activities.search.SearchHistoryFragment;
+import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
@@ -34,6 +35,10 @@ public class DashRecentsFragment extends DashLocationFragment {
 
 	private List<ImageView> arrows = new ArrayList<ImageView>();
 	List<HistoryEntry> points = new ArrayList<HistoryEntry>();
+	private static final String ROW_NUMBER_TAG = TAG + "_row_number";
+	static final DashFragmentData FRAGMENT_DATA =
+			new DashFragmentData(TAG, DashRecentsFragment.class, TITLE_ID,
+					new DashboardOnMap.DefaultShouldShow(), 100, ROW_NUMBER_TAG);
 
 	@Override
 	public View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -76,9 +81,7 @@ public class DashRecentsFragment extends DashLocationFragment {
 
 		LinearLayout recents = (LinearLayout) mainView.findViewById(R.id.items);
 		recents.removeAllViews();
-		if (points.size() > 3) {
-			points = points.subList(0, 3);
-		}
+		DashboardOnMap.handleNumberOfRows(points, getMyApplication().getSettings(), ROW_NUMBER_TAG);
 		LatLon loc = getDefaultLocation();
 		List<DashLocationView> distances = new ArrayList<DashLocationFragment.DashLocationView>();
 		for (final HistoryEntry historyEntry : points) {

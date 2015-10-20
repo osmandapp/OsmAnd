@@ -349,7 +349,6 @@ public class OsmEditingPlugin extends OsmandPlugin {
 
 	@Override
 	public DashFragmentData getCardFragment() {
-		return new DashFragmentData(DashOsmEditsFragment.TAG, DashOsmEditsFragment.class,
-				DashOsmEditsFragment.TITLE_ID, new DashboardOnMap.DefaultShouldShow(), 130, null);
+		return DashOsmEditsFragment.FRAGMENT_DATA;
 	}
 }

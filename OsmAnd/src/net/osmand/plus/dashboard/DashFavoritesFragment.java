@@ -17,6 +17,7 @@ import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
+import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.util.MapUtils;
@@ -36,6 +37,9 @@ public class DashFavoritesFragment extends DashLocationFragment {
 	List<FavouritePoint> points = new ArrayList<FavouritePoint>();
 
 	public static final String ROW_NUMBER_TAG = TAG + "_row_number";
+	public static final DashFragmentData FRAGMENT_DATA =
+			new DashFragmentData(TAG, DashFavoritesFragment.class, TITLE_ID,
+					new DashboardOnMap.DefaultShouldShow(), 90, ROW_NUMBER_TAG);
 
 	@Override
 	public View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -81,13 +85,7 @@ public class DashFavoritesFragment extends DashLocationFragment {
 		}
 		LinearLayout favorites = (LinearLayout) mainView.findViewById(R.id.items);
 		favorites.removeAllViews();
-		int numberOfRows =
-				getMyApplication().getSettings().registerIntPreference(ROW_NUMBER_TAG, 3).get();
-		if (points.size() > numberOfRows) {
-			while (points.size() != numberOfRows) {
-				points.remove(numberOfRows);
-			}
-		}
+		DashboardOnMap.handleNumberOfRows(points, getMyApplication().getSettings(), ROW_NUMBER_TAG);
 		List<DashLocationView> distances = new ArrayList<DashLocationFragment.DashLocationView>();
 		for (final FavouritePoint point : points) {
 			LayoutInflater inflater = getActivity().getLayoutInflater();
