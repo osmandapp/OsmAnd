@@ -5,47 +5,6 @@
 			  android:layout_height="fill_parent"
 			  android:orientation="vertical">
 
-	<LinearLayout
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:orientation="vertical"
-		android:paddingLeft="@dimen/dialog_content_bottom_margin"
-		android:paddingRight="@dimen/dialog_content_bottom_margin"
-		android:layout_marginBottom="@dimen/dialog_content_bottom_margin"
-		android:paddingTop="10dp">
-
-		<LinearLayout
-			android:layout_width="fill_parent"
-			android:layout_height="@dimen/local_size_height"
-			android:orientation="horizontal">
-
-			<TextView
-				android:layout_width="0dp"
-				android:layout_height="wrap_content"
-				android:layout_gravity="center_vertical"
-				android:layout_weight="1"
-				android:text="@string/device_memory"/>
-
-			<TextView
-				android:id="@+id/sizeFreeTextView"
-				android:layout_gravity="center_vertical"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:textStyle="bold"
-				android:text="@string/free"/>
-		</LinearLayout>
-
-		<ProgressBar
-			android:id="@+id/memoryLeftProgressBar"
-			style="?android:attr/progressBarStyleHorizontal"
-			android:progressDrawable="?attr/size_progress_bar"
-			android:layout_width="fill_parent"
-			android:layout_height="20dp" />
-
-
-	</LinearLayout>
-
-
 	<ExpandableListView
 		android:id="@android:id/list"
 		android:layout_width="fill_parent"
