@@ -1958,4 +1958,23 @@
 	<string name="poi_service_bicycle_diy_no">自行車 DIY 維修工具：無</string>
 	<string name="poi_service_bicycle_cleaning_yes">自行車清洗：有</string>
 	<string name="poi_service_bicycle_cleaning_no">自行車清洗：無</string>
+	<string name="poi_service_bicycle_chaintool_yes">自行車打鏈器：有</string>
+	<string name="poi_service_bicycle_chaintool_no">自行車打鏈器：無</string>
+	<string name="poi_service_bicycle_second_hand_yes">二手自行車的零售販賣：有</string>
+	<string name="poi_service_bicycle_second_hand_no">二手自行車的零售販賣：無</string>
+
+	<string name="poi_wildlife_hide">觀察野生動物的地方</string>
+
+	<string name="poi_training_language">培訓：語言</string>
+	<string name="poi_training_music">培訓：音樂</string>
+	<string name="poi_training_dance">培訓：舞蹈</string>
+	<string name="poi_training_sport">培訓：體育</string>
+	<string name="poi_training_art">培訓：藝術</string>
+	<string name="poi_training_cooking">培訓：烹飪</string>
+	<string name="poi_training_computer">培訓：電腦</string>
+	<string name="poi_training_yoga">培訓：瑜伽</string>
+	<string name="poi_training_martial_art">培訓：武術</string>
+	<string name="poi_training_aviation">培訓：航空</string>
+	<string name="poi_training_hairdressing">培訓：美容美髮</string>
+
 	</resources>
