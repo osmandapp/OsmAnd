@@ -27,8 +27,10 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivity.BannerAndDownloadFreeVersion;
+import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadResourceGroup;
+import net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
 
@@ -323,10 +325,44 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 			}
 
 			private void processGroup(DownloadResourceGroup group, List<Object> filter, List<List<String>> conds) {
-				String indexLC = group.getName(ctx).toLowerCase();
-				if (isMatch(conds, false, indexLC)) {
+				String name = group.getName(ctx).toLowerCase();
+				if (group.getType().isScreen() && group.getParentGroup() != null
+						&& group.getParentGroup().getParentGroup() != null
+						&& group.getParentGroup().getParentGroup().getType() != DownloadResourceGroupType.WORLD
+						&& isMatch(conds, false, name)) {
+
 					filter.add(group);
+
+					for (DownloadResourceGroup g : group.getGroups()) {
+						if (g.getType() == DownloadResourceGroupType.REGION_MAPS) {
+							if (g.getIndividualResources() != null) {
+								for (IndexItem item : g.getIndividualResources()) {
+									if (item.getType() == DownloadActivityType.NORMAL_FILE) {
+										filter.add(item);
+										break;
+									}
+								}
+							}
+							break;
+						}
+					}
 				}
+
+				// process other maps & voice prompts
+				if (group.getType() == DownloadResourceGroupType.OTHER_MAPS_HEADER
+						|| group.getType() == DownloadResourceGroupType.VOICE_HEADER_REC
+						|| group.getType() == DownloadResourceGroupType.VOICE_HEADER_TTS) {
+					if (group.getIndividualResources() != null) {
+						for (IndexItem item : group.getIndividualResources()) {
+							name = item.getVisibleName(ctx, osmandRegions, false).toLowerCase();
+							if (isMatch(conds, false, name)) {
+								filter.add(item);
+								break;
+							}
+						}
+					}
+				}
+
 				if (group.getGroups() != null) {
 					for (DownloadResourceGroup g : group.getGroups()) {
 						processGroup(g, filter, conds);
@@ -360,31 +396,6 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 
 					List<Object> filter = new ArrayList<>();
 					processGroup(root, filter, conds);
-
-					/*
-					List<WorldRegion> regions = new ArrayList<>();
-					for (WorldRegion region : worldRegions) {
-						String indexLC = region.getName().toLowerCase();
-						if (isMatch(conds, false, indexLC)) {
-							regions.add(region);
-						}
-					}
-
-					for (WorldRegion region : regions) {
-						if (region.getSubregions().size() > 0) {
-							filter.add(region);
-						}
-
-						List<IndexItem> items = getDownloadActivity().getIndexItemsByRegion(region);
-						if (items.size() > 1) {
-							if (!filter.contains(region)) {
-								filter.add(region);
-							}
-						} else {
-							filter.addAll(items);
-						}
-					}
-					*/
 
 					final Collator collator = OsmAndCollator.primaryCollator();
 					Collections.sort(filter, new Comparator<Object>() {
