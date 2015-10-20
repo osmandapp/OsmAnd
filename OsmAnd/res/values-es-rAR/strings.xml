@@ -1307,10 +1307,10 @@
 	<string name="index_name_europe">Europa</string>
 	<string name="index_name_france">Europa - Francia</string>
 	<string name="index_name_germany">Europa - Alemania</string>
-	<string name="index_name_russia">Europa/Asia - Rusia</string>
+	<string name="index_name_russia">Rusia</string>
 	<string name="index_name_africa">África</string>
 	<string name="index_name_asia">Asia</string>
-	<string name="index_name_oceania">Oceanía</string>
+	<string name="index_name_oceania">Australia y Oceanía</string>
 	<string name="index_name_other">Mapas mundiales y temáticos</string>
 	<string name="index_name_wiki">Wikipedia mundial</string>
 	<string name="index_name_voice">Avisos de voz (grabado, funciones limitadas)</string>
