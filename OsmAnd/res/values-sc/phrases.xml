@@ -1084,7 +1084,7 @@
 	<string name="poi_information_office">Ufìtziu de informatziones</string>
 	<string name="poi_information_terminal">Tèrminal de informatziones</string>
 	<string name="poi_information_hikingmap">Mapa pro escursionismu</string>
-	<string name="poi_information_history">Informatziones istòricas</string>
+	<string name="poi_information_history">Sinnale de informatziones: istòria</string>
 	<string name="poi_information_sign">Sinnu</string>
 	<string name="poi_information_audioguide">Audioghia</string>
 	<string name="poi_internet_access_yes">Atzessu a ìnternet: eja</string>
@@ -1300,4 +1300,8 @@
 
 	<string name="poi_building">Edifìtziu</string>
 	<string name="poi_information_guidepost">Indicadore istradale</string>
+	<string name="poi_information_nature">Sinnale de informatziones: natura</string>
+	<string name="poi_information_wildlife">Sinnale de informatziones: fàuna agreste</string>
+	<string name="poi_information_tactile_model">Modellu tàtile</string>
+	<string name="poi_information_tactile_map">Mapa tàtile</string>
 	</resources>
