@@ -18,6 +18,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
+import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
@@ -469,7 +470,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	@Override
 	public DashFragmentData getCardFragment() {
 		return new DashFragmentData(DashTrackFragment.TAG, DashTrackFragment.class,
-				R.string.record_plugin_name, 11);
+				DashTrackFragment.TITLE_ID, new DashboardOnMap.DefaultShouldShow(), 110, null);
 	}
 
 }

@@ -28,6 +28,7 @@ import java.util.Calendar;
  */
 public class DashParkingFragment extends DashLocationFragment {
 	public static final String TAG = "DASH_PARKING_FRAGMENT";
+	public static final int TITLE_ID = R.string.osmand_parking_plugin_name;
 	ParkingPositionPlugin plugin;
 
 	@Override

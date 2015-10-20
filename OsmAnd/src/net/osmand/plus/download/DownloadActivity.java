@@ -37,7 +37,6 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-
 public class DownloadActivity extends BaseDownloadActivity {
 	private List<LocalIndexInfo> localIndexInfos = new ArrayList<>();
 

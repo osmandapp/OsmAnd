@@ -32,6 +32,7 @@ import java.util.List;
  */
 public class DashFavoritesFragment extends DashLocationFragment {
 	public static final String TAG = "DASH_FAVORITES_FRAGMENT";
+	public static final int TITLE_ID = R.string.shared_string_my_favorites;
 	List<FavouritePoint> points = new ArrayList<FavouritePoint>();
 
 	public static final String ROW_NUMBER_TAG = TAG + "_row_number";

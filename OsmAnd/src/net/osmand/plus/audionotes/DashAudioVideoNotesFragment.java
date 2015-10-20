@@ -27,6 +27,7 @@ import java.util.List;
 public class DashAudioVideoNotesFragment extends DashBaseFragment {
 
 	public static final String TAG = "DASH_NOTES_FRAGMENT";
+	public static final int TITLE_ID = R.string.map_widget_av_notes;
 
 	AudioVideoNotesPlugin plugin;
 
@@ -34,7 +35,7 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 	public View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		plugin = OsmandPlugin.getEnabledPlugin(AudioVideoNotesPlugin.class);
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_common_fragment, container, false);
-		((TextView) view.findViewById(R.id.fav_text)).setText(R.string.map_widget_av_notes);
+		((TextView) view.findViewById(R.id.fav_text)).setText(TITLE_ID);
 		(view.findViewById(R.id.show_all)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {

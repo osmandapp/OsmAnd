@@ -31,6 +31,7 @@ import java.util.Map;
 public class DashOsmEditsFragment extends DashBaseFragment
 		implements SendPoiDialogFragment.ProgressDialogPoiUploader {
 	public static final String TAG = "DASH_OSM_EDITS_FRAGMENT";
+	public static final int TITLE_ID = R.string.osm_settings;
 
 	OsmEditingPlugin plugin;
 
@@ -40,7 +41,7 @@ public class DashOsmEditsFragment extends DashBaseFragment
 
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_common_fragment, container, false);
 		TextView header = ((TextView) view.findViewById(R.id.fav_text));
-		header.setText(R.string.osm_settings);
+		header.setText(TITLE_ID);
 		Button manage = ((Button) view.findViewById(R.id.show_all));
 		manage.setText(R.string.shared_string_manage);
 		(view.findViewById(R.id.show_all)).setOnClickListener(new View.OnClickListener() {

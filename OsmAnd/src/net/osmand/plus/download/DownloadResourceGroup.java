@@ -117,7 +117,8 @@ public class DownloadResourceGroup {
 	public void createHillshadeSRTMGroups() {
 		if(getType().isScreen()) {
 			DownloadResourceGroup regionMaps = getSubGroupById(DownloadResourceGroupType.REGION_MAPS.getDefaultId());
-			if(regionMaps != null && regionMaps.size() == 1 && parentGroup != null && parentGroup.getParentGroup() != null) {
+			if(regionMaps != null && regionMaps.size() == 1 && parentGroup != null && parentGroup.getParentGroup() != null && 
+					isEmpty(getSubGroupById(DownloadResourceGroupType.SUBREGIONS.getDefaultId()))) {
 				IndexItem item = regionMaps.individualResources.get(0);
 				DownloadResourceGroup screenParent = parentGroup.getParentGroup();
 				if(item.getType() == DownloadActivityType.HILLSHADE_FILE) {
@@ -150,6 +151,10 @@ public class DownloadResourceGroup {
 		}
 	}
 	
+	private boolean isEmpty(DownloadResourceGroup subGroupById) {
+		return subGroupById == null || subGroupById.isEmpty();
+	}
+
 	public void addGroup(DownloadResourceGroup g) {
 		if(type.isScreen()) {
 			if(!g.type.isHeader()) {

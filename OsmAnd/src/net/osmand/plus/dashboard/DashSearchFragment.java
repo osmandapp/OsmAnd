@@ -22,7 +22,7 @@ import net.osmand.plus.helpers.FontCache;
  * 24.11.2014.
  */
 public class DashSearchFragment extends DashBaseFragment {
-
+	public static final int TITLE_ID = R.string.search_for;
 	public static final String TAG = "DASH_SEARCH_FRAGMENT";
 
 	@Override

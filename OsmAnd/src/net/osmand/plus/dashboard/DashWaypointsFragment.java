@@ -36,13 +36,14 @@ import java.util.List;
  */
 public class DashWaypointsFragment extends DashLocationFragment {
 	public static final String TAG = "DASH_WAYPOINTS_FRAGMENT";
+	public static final int TITLE_ID = R.string.waypoints;
 	List<TargetPoint> points = new ArrayList<TargetPoint>();
 	private static boolean SHOW_ALL;
 
 	@Override
 	public View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_common_fragment, container, false);
-		((TextView) view.findViewById(R.id.fav_text)).setText(getString(R.string.waypoints));
+		((TextView) view.findViewById(R.id.fav_text)).setText(getString(TITLE_ID));
 		
 		return view;
 	}

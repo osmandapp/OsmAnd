@@ -13,37 +13,18 @@ public final class DashFragmentData implements Comparable<DashFragmentData> {
 	public final Class<? extends DashBaseFragment> fragmentClass;
 	public final int titleStringId;
 	public final ShouldShowFunction shouldShowFunction;
-	public final boolean customDeletionLogic;
 	public final int position;
 	public final String rowNumberTag;
 
 	public DashFragmentData(String tag, Class<? extends DashBaseFragment> fragmentClass,
 							@StringRes int titleStringId, ShouldShowFunction shouldShowFunction,
-							boolean customDeletionLogic, int position, String rowNumberTag) {
+							int position, String rowNumberTag) {
 		this.tag = tag;
 		this.fragmentClass = fragmentClass;
 		this.titleStringId = titleStringId;
 		this.shouldShowFunction = shouldShowFunction;
-		this.customDeletionLogic = customDeletionLogic;
 		this.position = position;
 		this.rowNumberTag = rowNumberTag;
-	}
-
-	public DashFragmentData(String tag, Class<? extends DashBaseFragment> fragmentClass,
-							int titleStringId, ShouldShowFunction shouldShowFunction,
-							boolean customDeletionLogic, int position) {
-		this(tag, fragmentClass, titleStringId, shouldShowFunction, customDeletionLogic, position, null);
-	}
-
-	public DashFragmentData(String tag, Class<? extends DashBaseFragment> fragmentClass,
-							int titleStringId, ShouldShowFunction shouldShowFunction, int position) {
-		this(tag, fragmentClass, titleStringId, shouldShowFunction, false, position, null);
-	}
-
-	public DashFragmentData(String tag, Class<? extends DashBaseFragment> fragmentClass,
-							int titleStringId, int position) {
-		this(tag, fragmentClass, titleStringId, new DashboardOnMap.DefaultShouldShow(), false, position,
-				null);
 	}
 
 	@Override
@@ -51,6 +32,12 @@ public final class DashFragmentData implements Comparable<DashFragmentData> {
 		return position - another.position;
 	}
 
+	public boolean hasRows() {
+		return rowNumberTag != null;
+	}
+	public boolean canBeDisabled() {
+		return titleStringId != -1;
+	}
 	public interface ShouldShowFunction {
 		boolean shouldShow(OsmandSettings settings, MapActivity activity, String tag);
 	}

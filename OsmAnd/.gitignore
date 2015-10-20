@@ -1,6 +1,7 @@
 bin/
 dist/
 res/values/no_translate.xml
+res/values/skip_translate.xml
 assets/specialphrases/*
 assets/voice/*
 assets/fonts/*

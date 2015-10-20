@@ -29,8 +29,8 @@ import java.util.List;
  * on 21.11.2014.
  */
 public class DashPluginsFragment extends DashBaseFragment {
-
 	public static final String TAG = "DASH_PLUGINS_FRAGMENT";
+	public static final int TITLE_ID = R.string.prefs_plugins;
 	private List<OsmandPlugin> plugins;
 
 	private View.OnClickListener getListener(final OsmandPlugin plugin) {
@@ -59,7 +59,7 @@ public class DashPluginsFragment extends DashBaseFragment {
 	public View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.dash_common_fragment, container, false);
 		TextView header = ((TextView) view.findViewById(R.id.fav_text));
-		header.setText(R.string.prefs_plugins);
+		header.setText(TITLE_ID);
 		view.findViewById(R.id.show_all).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {

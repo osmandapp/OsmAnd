@@ -40,6 +40,7 @@ import java.util.List;
 public class DashTrackFragment extends DashBaseFragment {
 
 	public static final String TAG = "DASH_TRACK_FRAGMENT";
+	public static final int TITLE_ID = R.string.shared_string_my_tracks;
 
 	private boolean updateEnable;
 
@@ -47,7 +48,7 @@ public class DashTrackFragment extends DashBaseFragment {
 	public View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_common_fragment, container, false);
 		TextView header = (TextView) view.findViewById(R.id.fav_text);
-		header.setText(R.string.shared_string_my_tracks);
+		header.setText(TITLE_ID);
 
 		(view.findViewById(R.id.show_all)).setOnClickListener(new View.OnClickListener() {
 			@Override
