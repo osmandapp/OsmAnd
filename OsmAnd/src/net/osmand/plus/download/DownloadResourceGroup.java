@@ -29,14 +29,24 @@ public class DownloadResourceGroup {
 
 	public enum DownloadResourceGroupType {
 		// headers
-		WORLD_MAPS(R.string.world_maps), REGION_MAPS(R.string.region_maps),
-		SRTM_HEADER(R.string.download_srtm_maps), HILLSHADE_HEADER(R.string.download_hillshade_maps),
+		WORLD_MAPS(R.string.world_maps),
+		REGION_MAPS(R.string.region_maps),
+		SRTM_HEADER(R.string.download_srtm_maps),
+		HILLSHADE_HEADER(R.string.download_hillshade_maps),
+		OTHER_MAPS_HEADER(R.string.download_select_map_types),
 		// headers with voice items
-		VOICE_HEADER_REC(R.string.index_name_voice), VOICE_HEADER_TTS(R.string.index_name_tts_voice),
+		VOICE_HEADER_REC(R.string.index_name_voice),
+		VOICE_HEADER_TTS(R.string.index_name_tts_voice),
 		// headers with resources
-		VOICE_GROUP(R.string.voices), SUBREGIONS(R.string.regions), 
+		OTHER_MAPS_GROUP(R.string.download_select_map_types),
+		VOICE_GROUP(R.string.voices),
+		SUBREGIONS(R.string.regions),
 		// screen items
-		VOICE_REC(R.string.index_name_voice), VOICE_TTS(R.string.index_name_tts_voice), WORLD(-1), REGION(-1);
+		VOICE_REC(R.string.index_name_voice),
+		VOICE_TTS(R.string.index_name_tts_voice),
+		OTHER_MAPS(R.string.download_select_map_types),
+		WORLD(-1),
+		REGION(-1);
 
 		final int resId;
 
@@ -45,7 +55,8 @@ public class DownloadResourceGroup {
 		}
 
 		public boolean isScreen() {
-			return this == WORLD || this == REGION || this == VOICE_TTS || this == VOICE_REC;
+			return this == WORLD || this == REGION || this == VOICE_TTS
+					|| this == VOICE_REC || this == OTHER_MAPS;
 		}
 
 		public String getDefaultId() {
@@ -57,12 +68,14 @@ public class DownloadResourceGroup {
 		}
 
 		public boolean containsIndexItem() {
-			return isHeader() && this != SUBREGIONS && this != VOICE_GROUP;
+			return isHeader() && this != SUBREGIONS && this != VOICE_GROUP && this != OTHER_MAPS_GROUP;
 		}
 
 		public boolean isHeader() {
-			return this == VOICE_HEADER_REC || this == VOICE_HEADER_TTS || this == SUBREGIONS || this == WORLD_MAPS
-					|| this == REGION_MAPS || this == VOICE_GROUP || this == HILLSHADE_HEADER || this == SRTM_HEADER;
+			return this == VOICE_HEADER_REC || this == VOICE_HEADER_TTS || this == SUBREGIONS
+					|| this == WORLD_MAPS || this == REGION_MAPS || this == VOICE_GROUP
+					|| this == HILLSHADE_HEADER || this == SRTM_HEADER
+					|| this == OTHER_MAPS_HEADER || this == OTHER_MAPS_GROUP;
 		}
 
 	}

@@ -190,7 +190,13 @@ public class DownloadResources extends DownloadResourceGroup {
 	
 	protected boolean prepareData(List<IndexItem> resources) {
 		this.rawResources = resources;
-		
+
+		DownloadResourceGroup otherMapsGroup = new DownloadResourceGroup(this, DownloadResourceGroupType.OTHER_MAPS_GROUP);
+		DownloadResourceGroup otherMapsScreen = new DownloadResourceGroup(otherMapsGroup, DownloadResourceGroupType.OTHER_MAPS);
+		DownloadResourceGroup otherMaps = new DownloadResourceGroup(otherMapsGroup, DownloadResourceGroupType.OTHER_MAPS_HEADER);
+		otherMapsScreen.addGroup(otherMaps);
+		otherMapsGroup.addGroup(otherMapsScreen);
+
 		DownloadResourceGroup voiceGroup = new DownloadResourceGroup(this, DownloadResourceGroupType.VOICE_GROUP);
 		DownloadResourceGroup voiceScreenRec = new DownloadResourceGroup(voiceGroup, DownloadResourceGroupType.VOICE_REC);
 		DownloadResourceGroup voiceScreenTTS = new DownloadResourceGroup(voiceGroup, DownloadResourceGroupType.VOICE_TTS);
@@ -226,7 +232,11 @@ public class DownloadResources extends DownloadResourceGroup {
 				}
 				groupByRegion.get(wg).add(ii);
 			} else {
-				worldMaps.addItem(ii);
+				if (ii.getFileName().startsWith("World_")) {
+					worldMaps.addItem(ii);
+				} else {
+					otherMaps.addItem(ii);
+				}
 			}
 		}
 		LinkedList<WorldRegion> queue = new LinkedList<WorldRegion>();
@@ -266,6 +276,9 @@ public class DownloadResources extends DownloadResourceGroup {
 		// 2. if there is no subregions and there only 1 index item it could be merged to the level up - objection there is no such maps
 		// 3. if hillshade/srtm is disabled, all maps from inner level could be combined into 1 
 		addGroup(worldMaps);
+		if (otherMaps.size() > 0) {
+			addGroup(otherMapsGroup);
+		}
 		addGroup(voiceGroup);
 		createHillshadeSRTMGroups();
 		trimEmptyGroups();
