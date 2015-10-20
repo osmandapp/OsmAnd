@@ -379,7 +379,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 			View v = convertView;
 			String section = getGroup(groupPosition);
 			if (v == null) {
-				LayoutInflater inflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+				LayoutInflater inflater = LayoutInflater.from(ctx);
 				v = inflater.inflate(R.layout.download_item_list_section, parent, false);
 			}
 			TextView nameView = ((TextView) v.findViewById(R.id.section_name));

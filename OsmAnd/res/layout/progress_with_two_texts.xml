@@ -41,7 +41,8 @@
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="fill_parent"
         android:layout_height="20dp"
-        android:progressDrawable="?attr/size_progress_bar"/>
+        android:progressDrawable="?attr/size_progress_bar"
+        tools:progress="50"/>
 
 
 </LinearLayout>

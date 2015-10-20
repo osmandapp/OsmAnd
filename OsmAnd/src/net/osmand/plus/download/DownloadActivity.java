@@ -62,6 +62,9 @@ public class DownloadActivity extends BaseDownloadActivity {
 		}
 		
 		setContentView(R.layout.download);
+		final View downloadProgressLayout = findViewById(R.id.downloadProgressLayout);
+		downloadProgressLayout.setVisibility(View.VISIBLE);
+		updateDescriptionTextWithSize(this, downloadProgressLayout);
 		int currentTab = 0;
 		String tab = getIntent() == null || getIntent().getExtras() == null ? null : getIntent().getExtras().getString(TAB_TO_OPEN);
 		if (tab != null) {
@@ -245,12 +248,6 @@ public class DownloadActivity extends BaseDownloadActivity {
 			initFreeVersionBanner();
 			updateFreeVersionBanner();
 			updateBannerInProgress();
-			downloadProgressLayout.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					new ActiveDownloadsDialogFragment().show(ctx.getSupportFragmentManager(), "dialog");
-				}
-			});
 		}
 		
 		public void updateBannerInProgress() {
@@ -258,8 +255,8 @@ public class DownloadActivity extends BaseDownloadActivity {
 			final boolean isFinished = basicProgressAsyncTask == null
 					|| basicProgressAsyncTask.getStatus() == AsyncTask.Status.FINISHED;
 			if (isFinished) {
-				downloadProgressLayout.setVisibility(View.GONE);
-				updateFreeVersionBanner();
+				downloadProgressLayout.setOnClickListener(null);
+				updateDescriptionTextWithSize(ctx, downloadProgressLayout);
 			} else {
 				boolean indeterminate = basicProgressAsyncTask.isIndeterminate();
 				String message = basicProgressAsyncTask.getDescription();
@@ -267,7 +264,12 @@ public class DownloadActivity extends BaseDownloadActivity {
 				setMinimizedFreeVersionBanner(true);
 				
 				updateAvailableDownloads();
-				downloadProgressLayout.setVisibility(View.VISIBLE);
+				downloadProgressLayout.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						new ActiveDownloadsDialogFragment().show(ctx.getSupportFragmentManager(), "dialog");
+					}
+				});
 				progressBar.setIndeterminate(indeterminate);
 				if (indeterminate) {
 					leftTextView.setText(message);
@@ -346,11 +348,12 @@ public class DownloadActivity extends BaseDownloadActivity {
 
 
 	@SuppressWarnings("deprecation")
-	public void updateDescriptionTextWithSize(View view){
-		TextView descriptionText = (TextView) view.findViewById(R.id.sizeFreeTextView);
-		ProgressBar sizeProgress = (ProgressBar) view.findViewById(R.id.memoryLeftProgressBar);
+	public static void updateDescriptionTextWithSize(DownloadActivity activity, View view){
+		TextView descriptionText = (TextView) view.findViewById(R.id.rightTextView);
+		TextView messageTextView = (TextView) view.findViewById(R.id.leftTextView);
+		ProgressBar sizeProgress = (ProgressBar) view.findViewById(R.id.progressBar);
 
-		File dir = getMyApplication().getAppPath("").getParentFile();
+		File dir = activity.getMyApplication().getAppPath("").getParentFile();
 		String size = formatGb.format(new Object[]{0});
 		int percent = 0;
 		if(dir.canRead()){
@@ -358,14 +361,13 @@ public class DownloadActivity extends BaseDownloadActivity {
 			size = formatGb.format(new Object[]{(float) (fs.getAvailableBlocks()) * fs.getBlockSize() / (1 << 30) });
 			percent = 100 - (int) (fs.getAvailableBlocks() * 100 / fs.getBlockCount());
 		}
+		sizeProgress.setIndeterminate(false);
 		sizeProgress.setProgress(percent);
-		String text = getString(R.string.free, size);
-		int l = text.indexOf('.');
-		if(l == -1) {
-			l = text.length();
-		}
+		String text = activity.getString(R.string.free, size);
 		descriptionText.setText(text);
 		descriptionText.setMovementMethod(LinkMovementMethod.getInstance());
+
+		messageTextView.setText(R.string.device_memory);
 	}
 	
 }
