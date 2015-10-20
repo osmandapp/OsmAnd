@@ -1,9 +1,7 @@
 package net.osmand.plus.parkingpoint;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
@@ -20,7 +18,6 @@ import android.graphics.Paint;
 import android.graphics.PointF;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 /**
  * Class represents a layer which depicts the position of the parked car
@@ -89,7 +86,7 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 		double longitude = parkingPoint.getLongitude();
 		if (isLocationVisible(tb, latitude, longitude)) {
 			int marginX = parkingNoLimitIcon.getWidth() / 2;
-			int marginY = parkingNoLimitIcon.getHeight();
+			int marginY = parkingNoLimitIcon.getHeight() / 2;
 			int locationX = tb.getPixXFromLonNoRot(longitude);
 			int locationY = tb.getPixYFromLatNoRot(latitude);
 			canvas.rotate(-view.getRotate(), locationX, locationY);

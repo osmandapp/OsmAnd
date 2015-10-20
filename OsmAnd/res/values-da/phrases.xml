@@ -2178,4 +2178,75 @@
 	<string name="poi_dog_yes">Hunde tilladt</string>
 	<string name="poi_dog_no">Hunde ikke tilladt</string>
 
+<string name="poi_refugee_yes">Flygtningefaciliteter</string>
+	<string name="poi_refugee_no">Flygtninge: nej</string>
+
+	<string name="poi_social_facility_group_home">Socialfacilitet: bosted</string>
+	<string name="poi_social_facility_assisted_living">Socialfacilitet: plejehjem</string>
+	<string name="poi_social_facility_outreach">Socialfacilitet: opsøgende</string>
+	<string name="poi_social_facility_food_bank">Socialfacilitet: madcentral</string>
+	<string name="poi_social_facility_shelter">Socialfacilitet: herberg</string>
+	<string name="poi_social_facility_ambulatory_care">Socialfacilitet: ambulant behandling</string>
+	<string name="poi_social_facility_workshop">Socialfacilitet: workshop</string>
+	<string name="poi_social_facility_day_care">Socialfacilitet: dagpleje</string>
+
+	<string name="poi_social_facility_for_senior">Socialmålgruppe: seniorer</string>
+	<string name="poi_social_facility_for_child">Socialmålgruppe: børn</string>
+	<string name="poi_social_facility_for_orphan">Socialmålgruppe: forældreløse</string>
+	<string name="poi_social_facility_for_disabled">Socialmålgruppe: handicappede</string>
+	<string name="poi_social_facility_for_mental_health">Socialmålgruppe: patienter med psykiske lidelser</string>
+	<string name="poi_social_facility_for_juvenile">Socialmålgruppe: unge</string>
+	<string name="poi_social_facility_for_homeless">Socialmålgruppe: hjemløse</string>
+	<string name="poi_social_facility_for_migrant">Socialmålgruppe: indvandrere</string>
+	<string name="poi_social_facility_for_underprivileged">Socialmålgruppe: underprivilegerede</string>
+	<string name="poi_social_facility_for_drug_addicted">Socialmålgruppe: stofmisbrugere</string>
+	<string name="poi_social_facility_for_unemployed">Socialmålgruppe: arbejdsløse</string>
+	<string name="poi_social_facility_for_diseased">Socialmålgruppe: syge</string>
+	<string name="poi_social_facility_for_child_juvenile">Socialmålgruppe: børn og unge</string>
+
+	<string name="poi_theatre_genre_philharmonic">Genre: filharmonisk</string>
+	<string name="poi_theatre_genre_musical">Genre: musical</string>
+	<string name="poi_theatre_genre_drama">Genre: drama</string>
+	<string name="poi_theatre_genre_opera">Genre: opera</string>
+	<string name="poi_theatre_genre_cabaret">Genre: cabaret</string>
+	<string name="poi_theatre_genre_puppet">Genre: dukketeater</string>
+	<string name="poi_theatre_genre_comedy">Genre: komedie</string>
+	<string name="poi_theatre_genre_chamber_music">Genre: kammermusik</string>
+	<string name="poi_theatre_genre_marionette">Genre: dukketeater</string>
+	<string name="poi_theatre_genre_ballet">Genre: ballet</string>
+	<string name="poi_theatre_genre_shadow_play">Genre: skyggespil</string>
+
+	<string name="poi_bandstand">Musikpavillon</string>
+
+<string name="poi_kiln">Kiln</string>
+	<string name="poi_product_brick">Produkt: mursten</string>
+	<string name="poi_product_quicklime">Produkt: brændt kalk</string>
+	<string name="poi_product_leather">Produkt: læder</string>
+	<string name="poi_product_lime">Product: kalk</string>
+	<string name="poi_product_beer">Produkt: øl</string>
+	<string name="poi_product_charcoal">Produkt: trækul</string>
+	<string name="poi_product_meat">Produkt: kød</string>
+
+	<string name="poi_wheelchair_description">Beskrivelse for kørestolsbrugere</string>
+	<string name="poi_blind_description">Beskrivelse for blinde</string>
+	<string name="poi_deaf_description">Beskrivelse for døve</string>
+
+	<string name="poi_highway_steps">Trapper</string>
+	<string name="poi_handrail_yes">Gelænder: ja</string>
+	<string name="poi_handrail_no">Gelænder: nej</string>
+	<string name="poi_ramp_yes">Rampe: ja</string>
+	<string name="poi_ramp_no">Rampe: nej</string>
+	<string name="poi_ramp_wheelchair_yes">Rampe til kørestole: ja</string>
+	<string name="poi_ramp_wheelchair_no">Rampe til kørestole: nej</string>
+	<string name="poi_ramp_stroller_yes">Rampe (klapvogn): ja</string>
+	<string name="poi_ramp_stroller_no">Rampe (klapvogn): nej</string>
+	<string name="poi_ramp_bicycle_yes">Rampe til cykler: ja</string>
+	<string name="poi_ramp_bicycle_no">Rampe til cykler: nej</string>
+	<string name="poi_ramp_luggage_yes">Rampe for bagage: ja</string>
+	<string name="poi_ramp_luggage_no">Rampe for bagage: nej</string>
+	<string name="poi_step_count">Antal trin</string>
+	<string name="poi_step_condition_even">Trintilstand: jævn</string>
+	<string name="poi_step_condition_uneven">Trintilstand: ujævn</string>
+	<string name="poi_step_condition_rough">Trintilstand: ru</string>
+
 </resources>

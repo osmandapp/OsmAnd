@@ -1,4 +1,4 @@
-package net.osmand.plus.download;
+package net.osmand.plus.download.ui;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -33,7 +33,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
@@ -49,6 +48,10 @@ import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.activities.OsmandExpandableListFragment;
 import net.osmand.plus.dialogs.DirectionsDialogs;
+import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.download.DownloadActivityType;
+import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
+import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.resources.IncrementalChangesManager;
 import net.osmand.plus.resources.IncrementalChangesManager.IncrementalUpdate;
@@ -69,8 +72,7 @@ import java.util.Map;
 import java.util.Set;
 
 
-public class LocalIndexesFragment extends OsmandExpandableListFragment
-		implements DownloadActivity.DataSetChangedListener {
+public class LocalIndexesFragment extends OsmandExpandableListFragment implements DownloadEvents {
 
 	private LoadLocalIndexTask asyncLoader;
 	private LocalIndexesAdapter listAdapter;
@@ -160,6 +162,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment
 		asyncLoader = new LoadLocalIndexTask();
 		asyncLoader.execute(getActivity());
 	}
+	
+	
 
 
 	private void showContextMenu(final LocalIndexInfo info) {
@@ -273,11 +277,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment
 		}
 	}
 
-	@Override
-	public void notifyDataSetChanged() {
-		listAdapter.notifyDataSetChanged();
-		((DownloadActivity) getActivity()).updateDescriptionTextWithSize(getView());
-	}
+	
 
 	public class LoadLocalIndexTask extends AsyncTask<Activity, LocalIndexInfo, List<LocalIndexInfo>> {
 
@@ -451,6 +451,20 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment
 				reloadIndexes();
 			}
 		}
+	}
+	
+	@Override
+	public void newDownloadIndexes() {
+	}
+	
+	@Override
+	public void downloadHasFinished() {
+		((DownloadActivity) getActivity()).updateDescriptionTextWithSize(getView());
+		reloadData();
+	}
+	
+	@Override
+	public void downloadInProgress() {
 	}
 
 
@@ -1167,13 +1181,15 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment
 					if (ll.isEmpty()) {
 						Toast.makeText(getDownloadActivity(), R.string.no_updates_available, Toast.LENGTH_SHORT).show();
 					} else {
+						int i = 0;
+						IndexItem[] is = new IndexItem[ll.size()];
 						for (IncrementalUpdate iu : ll) {
 							IndexItem ii = new IndexItem(iu.fileName, "Incremental update", iu.timestamp, iu.sizeText,
 									iu.contentSize, iu.containerSize, DownloadActivityType.LIVE_UPDATES_FILE);
-							getDownloadActivity().addToDownload(ii);
-							getDownloadActivity().downloadFilesCheckFreeVersion();
-							getDownloadActivity().updateFragments();
+							is[i++] = ii;
+							
 						}
+						getDownloadActivity().startDownload(is);
 					}
 				}
 

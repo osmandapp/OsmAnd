@@ -102,6 +102,11 @@ public class OsmEditsFragment extends OsmAndListFragment
 		return view;
 	}
 
+	
+	public android.widget.ArrayAdapter<?> getAdapter() {
+		return listAdapter;
+	};
+	
 	private void selectAll() {
 		for (int i = 0; i < listAdapter.getCount(); i++) {
 			OsmPoint point = listAdapter.getItem(i);

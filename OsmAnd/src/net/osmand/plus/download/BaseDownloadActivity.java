@@ -1,5 +1,17 @@
 package net.osmand.plus.download;
 
+import java.lang.ref.WeakReference;
+import java.text.MessageFormat;
+import java.util.HashSet;
+import java.util.Set;
+
+import net.osmand.access.AccessibleToast;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.Version;
+import net.osmand.plus.activities.ActionBarProgressActivity;
+import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
@@ -13,34 +25,11 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.widget.Toast;
 
-import net.osmand.access.AccessibleToast;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.Version;
-import net.osmand.plus.WorldRegion;
-import net.osmand.plus.activities.ActionBarProgressActivity;
-import net.osmand.plus.base.BasicProgressAsyncTask;
-import net.osmand.plus.download.items.ItemsListBuilder;
-
-import java.lang.ref.WeakReference;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-public class BaseDownloadActivity extends ActionBarProgressActivity {
-	protected DownloadActivityType type = DownloadActivityType.NORMAL_FILE;
+public class BaseDownloadActivity extends ActionBarProgressActivity implements DownloadEvents {
 	protected OsmandSettings settings;
-	public static DownloadIndexesThread downloadListIndexThread;
+	private static DownloadIndexesThread downloadListIndexThread;
 	protected Set<WeakReference<Fragment>> fragSet = new HashSet<>();
-	protected List<IndexItem> downloadQueue = new ArrayList<>();
-
-	public static final int MAXIMUM_AVAILABLE_FREE_DOWNLOADS = 10;
+	public static final int MAXIMUM_AVAILABLE_FREE_DOWNLOADS = 5;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,20 +38,7 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 			downloadListIndexThread = new DownloadIndexesThread(this);
 		}
 		super.onCreate(savedInstanceState);
-		// Having the next line here causes bug AND-197: The storage folder dialogue popped up upon EVERY app startup, because the map list is not indexed yet.
-		// Hence line moved to updateDownloads() now.
-		// prepareDownloadDirectory();
 	}
-
-	public void updateDownloads() {
-		if (downloadListIndexThread.getCachedIndexFiles() != null && downloadListIndexThread.isDownloadedFromInternet()) {
-			downloadListIndexThread.runCategorization(DownloadActivityType.NORMAL_FILE);
-		} else {
-			downloadListIndexThread.runReloadIndexFiles();
-		}
-		prepareDownloadDirectory();
-	}
-
 
 	@Override
 	protected void onResume() {
@@ -76,135 +52,89 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 		downloadListIndexThread.setUiActivity(null);
 	}
 
+	
+	public DownloadIndexesThread getDownloadThread() {
+		return downloadListIndexThread;
+	}
+	
+	public void startDownload(IndexItem... items) {
+		downloadFilesWithAllChecks(items);
+	}
+
 
 	@UiThread
-	public void updateDownloadList(List<IndexItem> list) {
-
+	public void downloadInProgress() {
 	}
 
 	@UiThread
-	public void updateProgress(boolean updateOnlyProgress, Object tag) {
-
+	public void downloadHasFinished() {
 	}
-
-	public DownloadActivityType getDownloadType() {
-		return type;
+	
+	@UiThread
+	public void newDownloadIndexes() {
 	}
-
-	public Map<IndexItem, List<DownloadEntry>> getEntriesToDownload() {
-		if (downloadListIndexThread == null) {
-			return new LinkedHashMap<>();
-		}
-		return downloadListIndexThread.getEntriesToDownload();
-	}
-
-	public void downloadedIndexes() {
-
-	}
-
-	public void updateFragments() {
-
-	}
-
-	public void downloadListUpdated() {
-
-	}
+	
 
 	public OsmandApplication getMyApplication() {
 		return (OsmandApplication) getApplication();
 	}
 
-	public void categorizationFinished(List<IndexItem> filtered, List<IndexItemCategory> cats) {
-
-	}
-
-	public void onCategorizationFinished() {
-
-	}
-
-	public ItemsListBuilder getItemsBuilder() {
-		return getItemsBuilder("", false);
-	}
-
-	public ItemsListBuilder getVoicePromptsBuilder() {
-		return getItemsBuilder("", true);
-	}
-
-	public ItemsListBuilder getItemsBuilder(String regionId, boolean voicePromptsOnly) {
-		if (downloadListIndexThread.getResourcesByRegions().size() > 0) {
-			ItemsListBuilder builder = new ItemsListBuilder(getMyApplication(), regionId, downloadListIndexThread.getResourcesByRegions(),
-					downloadListIndexThread.getVoiceRecItems(), downloadListIndexThread.getVoiceTTSItems());
-			if (!voicePromptsOnly) {
-				return builder.build();
-			} else {
-				return builder;
-			}
-		} else {
-			return null;
+	public void downloadFilesCheck_3_ValidateSpace(final IndexItem... items) {
+		long szLong = 0;
+		int i = 0;
+		for (IndexItem es : downloadListIndexThread.getCurrentDownloadingItems()) {
+			szLong += es.contentSize;
+			i++;
 		}
-	}
-
-	public List<IndexItem> getIndexItemsByRegion(WorldRegion region) {
-		if (downloadListIndexThread.getResourcesByRegions().size() > 0) {
-			return new LinkedList<>(downloadListIndexThread.getResourcesByRegions().get(region).values());
-		} else {
-			return new LinkedList<>();
+		for (IndexItem es : items) {
+			szLong += es.contentSize;
+			i++;
 		}
-	}
-
-	public boolean startDownload(IndexItem item) {
-		addToDownload(item);
-		if (downloadListIndexThread.getCurrentRunningTask() != null && getEntriesToDownload().get(item) == null) {
-			return false;
-		}
-		downloadFilesCheckFreeVersion();
-		return true;
-	}
-
-	protected void addToDownload(IndexItem item) {
-		List<DownloadEntry> download = item.createDownloadEntry(getMyApplication(), item.getType(), new ArrayList<DownloadEntry>());
-		getEntriesToDownload().put(item, download);
-	}
-
-	public void downloadFilesPreCheckSpace() {
-		double sz = 0;
-		List<DownloadEntry> list = downloadListIndexThread.flattenDownloadEntries();
-		for (DownloadEntry es : list) {
-			sz += es.sizeMB;
-		}
+		double sz = ((double) szLong) / (1 << 20);
 		// get availabile space
 		double asz = downloadListIndexThread.getAvailableSpace();
 		if (asz != -1 && asz > 0 && sz / asz > 0.4) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setMessage(MessageFormat.format(getString(R.string.download_files_question_space), list.size(), sz, asz));
+			builder.setMessage(MessageFormat.format(getString(R.string.download_files_question_space), i, sz, asz));
 			builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					downloadListIndexThread.runDownloadFiles();
+					downloadFileCheck_Final_Run(items);
 				}
 			});
 			builder.setNegativeButton(R.string.shared_string_no, null);
 			builder.show();
 		} else {
-			downloadListIndexThread.runDownloadFiles();
+			downloadFileCheck_Final_Run(items);
 		}
 	}
+	
+	private void downloadFileCheck_Final_Run(IndexItem[] items) {
+		downloadListIndexThread.runDownloadFiles(items);
+		downloadInProgress();
+	}
+	
+	
+	
+	protected void downloadFilesWithAllChecks(IndexItem[] items) {
+		downloadFilesCheck_1_FreeVersion(items);
+	}
 
-	protected void downloadFilesCheckFreeVersion() {
+	protected void downloadFilesCheck_1_FreeVersion(IndexItem[] items) {
 		if (Version.isFreeVersion(getMyApplication())) {
 			int total = settings.NUMBER_OF_FREE_DOWNLOADS.get();
 			if (total > MAXIMUM_AVAILABLE_FREE_DOWNLOADS) {
 				new InstallPaidVersionDialogFragment()
 						.show(getSupportFragmentManager(), InstallPaidVersionDialogFragment.TAG);
 			} else {
-				downloadFilesCheckInternet();
+				downloadFilesCheck_2_Internet(items);
 			}
 		} else {
-			downloadFilesCheckInternet();
+			downloadFilesCheck_2_Internet(items);
 		}
 	}
 
-	protected void downloadFilesCheckInternet() {
+	protected void downloadFilesCheck_2_Internet(IndexItem[] items) {
 		if (!getMyApplication().getSettings().isWifiConnected()) {
 			if (getMyApplication().getSettings().isInternetConnectionAvailable()) {
 				new ConfirmDownloadDialogFragment().show(getSupportFragmentManager(),
@@ -213,7 +143,7 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 				AccessibleToast.makeText(this, R.string.no_index_file_to_download, Toast.LENGTH_LONG).show();
 			}
 		} else {
-			downloadFilesPreCheckSpace();
+			downloadFilesCheck_3_ValidateSpace(items);
 		}
 	}
 
@@ -222,7 +152,7 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 		fragSet.add(new WeakReference<Fragment>(fragment));
 	}
 
-	public void makeSureUserCancelDownload() {
+	public void makeSureUserCancelDownload(final IndexItem item) {
 		AlertDialog.Builder bld = new AlertDialog.Builder(this);
 		bld.setTitle(getString(R.string.shared_string_cancel));
 		bld.setMessage(R.string.confirm_interrupt_download);
@@ -230,66 +160,13 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				dialog.dismiss();
-				cancelDownload();
+				getDownloadThread().cancelDownload(item);
 			}
 		});
 		bld.setNegativeButton(R.string.shared_string_no, null);
 		bld.show();
 	}
-
-	public void cancelDownload() {
-		BasicProgressAsyncTask<?, ?, ?> t = DownloadActivity.downloadListIndexThread.getCurrentRunningTask();
-		if (t != null) {
-			t.setInterrupted(true);
-		}
-		// list of items to download need to be cleared in case of dashboard activity
-//		if (this instanceof MainMenuActivity) {
-//			getEntriesToDownload().clear();
-//		}
-	}
-
-	private void prepareDownloadDirectory() {
-		if (!getMyApplication().getResourceManager().getIndexFileNames().isEmpty()) {
-			showDialogOfFreeDownloadsIfNeeded();
-		}
-	}
-
-	private void showDialogOfFreeDownloadsIfNeeded() {
-		if (Version.isFreeVersion(getMyApplication())) {
-			AlertDialog.Builder msg = new AlertDialog.Builder(this);
-			msg.setTitle(R.string.free_version_title);
-			String m = getString(R.string.free_version_message, MAXIMUM_AVAILABLE_FREE_DOWNLOADS + "", "") + "\n";
-			m += getString(R.string.available_downloads_left, MAXIMUM_AVAILABLE_FREE_DOWNLOADS - settings.NUMBER_OF_FREE_DOWNLOADS.get());
-			msg.setMessage(m);
-			if (Version.isMarketEnabled(getMyApplication())) {
-				msg.setPositiveButton(R.string.install_paid, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Version.marketPrefix(getMyApplication()) + "net.osmand.plus"));
-						try {
-							startActivity(intent);
-						} catch (ActivityNotFoundException e) {
-						}
-					}
-				});
-				msg.setNegativeButton(R.string.shared_string_cancel, null);
-			} else {
-				msg.setNeutralButton(R.string.shared_string_ok, null);
-			}
-
-			msg.show();
-		}
-	}
-
-
-	public boolean isInQueue(IndexItem item) {
-		return downloadQueue.contains(item);
-	}
-
-	public void removeFromQueue(IndexItem item) {
-		downloadQueue.remove(item);
-	}
-
+	
 	public static class InstallPaidVersionDialogFragment extends DialogFragment {
 		public static final String TAG = "InstallPaidVersionDialogFragment";
 		@NonNull
@@ -335,7 +212,7 @@ public class BaseDownloadActivity extends ActionBarProgressActivity {
 			builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					((BaseDownloadActivity) getActivity()).downloadFilesPreCheckSpace();
+					((BaseDownloadActivity) getActivity()).downloadFilesCheck_3_ValidateSpace();
 				}
 			});
 			builder.setNegativeButton(R.string.shared_string_no, null);

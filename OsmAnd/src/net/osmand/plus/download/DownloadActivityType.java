@@ -1,8 +1,15 @@
 package net.osmand.plus.download;
 
-import android.content.Context;
-import android.os.Parcel;
-import android.os.Parcelable;
+import static net.osmand.IndexConstants.BINARY_MAP_INDEX_EXT;
+
+import java.io.File;
+import java.io.IOException;
+import java.net.URLEncoder;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
@@ -15,18 +22,9 @@ import net.osmand.util.Algorithms;
 
 import org.xmlpull.v1.XmlPullParser;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URLEncoder;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import android.content.Context;
 
-import static net.osmand.IndexConstants.BINARY_MAP_INDEX_EXT;
-
-public class DownloadActivityType implements Parcelable {
+public class DownloadActivityType {
 	private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
 	private static Map<String, DownloadActivityType> byTag = new HashMap<>();
 	
@@ -64,7 +62,6 @@ public class DownloadActivityType implements Parcelable {
 	public DownloadActivityType(int stringResource, String tag, int orderIndex) {
 		this.stringResource = stringResource;
 		this.tag = tag;
-		this.orderIndex = orderIndex;
 		byTag.put(tag, this);
 		iconResource = R.drawable.ic_map;
 	}
@@ -371,32 +368,4 @@ public class DownloadActivityType implements Parcelable {
 		return fileName;
 	}
 
-	@Override
-	public int describeContents() {
-		return 0;
-	}
-
-	@Override
-	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeInt(this.stringResource);
-		dest.writeInt(this.iconResource);
-		dest.writeString(this.tag);
-	}
-
-	protected DownloadActivityType(Parcel in) {
-		this.stringResource = in.readInt();
-		this.iconResource = in.readInt();
-		this.tag = in.readString();
-		byTag.put(tag, this);
-	}
-
-	public static final Parcelable.Creator<DownloadActivityType> CREATOR = new Parcelable.Creator<DownloadActivityType>() {
-		public DownloadActivityType createFromParcel(Parcel source) {
-			return new DownloadActivityType(source);
-		}
-
-		public DownloadActivityType[] newArray(int size) {
-			return new DownloadActivityType[size];
-		}
-	};
 }

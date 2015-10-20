@@ -4,8 +4,7 @@
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:orientation="vertical"
-              tools:context="net.osmand.plus.download.newimplementation.NewLocalIndexesFragment">
+              android:orientation="vertical">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -19,7 +18,8 @@
             android:minHeight="@dimen/dashboard_map_toolbar"
             android:theme="?attr/toolbar_theme"
             app:contentInsetLeft="72dp"
-            app:contentInsetStart="72dp"/>
+            app:contentInsetStart="72dp"
+            />
     </android.support.design.widget.AppBarLayout>
 
     <include
@@ -28,8 +28,15 @@
 
     <include layout="@layout/progress_with_two_texts"/>
 
-    <FrameLayout
-        android:id="@+id/fragmentContainer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+
+    <ExpandableListView
+        android:id="@android:id/list"
+        style="@style/OsmandListView"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_weight="1"
+        android:groupIndicator="@android:color/transparent"/>
 </LinearLayout>

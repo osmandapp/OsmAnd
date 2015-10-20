@@ -233,7 +233,7 @@
 	<string name="poi_government">Regierung</string>
 	<string name="poi_grave_yard">Friedhof</string>
 	<string name="poi_greengrocer">Gemüseladen</string>
-	<string name="poi_grit_bin">Kiesbehälter</string>
+	<string name="poi_grit_bin">Streugutbehälter</string>
 	<string name="poi_guest_house">Gästehaus</string>
 	<string name="poi_gymnastics">Turnen</string>
 	<string name="poi_hairdresser">Friseur</string>
@@ -359,7 +359,7 @@
 	<string name="poi_craft_photographic_laboratory">Fotolabor</string>
 	<string name="poi_physiotherapist">Physiotherapeut</string>
 	<string name="poi_picnic_site">Picknick</string>
-	<string name="poi_pier">Kai</string>
+	<string name="poi_pier">Pier</string>
 	<string name="poi_pitch">Stellplatz</string>
 	<string name="poi_place_allotments">Kleingartensiedlung</string>
 	<string name="poi_place_farm">Farm</string>
@@ -504,7 +504,7 @@
 	<string name="poi_stone">Auffallender Stein</string>
 	<string name="poi_craft_stonemason">Steinmetz</string>
 	<string name="poi_strait">Straße</string>
-	<string name="poi_stream">Fluss</string>
+	<string name="poi_stream">Bach</string>
 	<string name="poi_stripclub">Stripclub</string>
 	<string name="poi_studio">Studio</string>
 	<string name="poi_suburb">Stadtteil</string>
@@ -579,8 +579,8 @@
 	<string name="poi_waterfall">Wasserfall</string>
 	<string name="poi_waterway_turning_point">Wasserwendepunkt</string>
 	<string name="poi_wayside_cross">Wegkreuz</string>
-	<string name="poi_wayside_shrine">Marterl</string>
-	<string name="poi_weir">Stauanlage</string>
+	<string name="poi_wayside_shrine">Bildstock</string>
+	<string name="poi_weir">Wehr</string>
 	<string name="poi_wetland">Aue</string>
 	<string name="poi_windmill">Windmühle</string>
 	<string name="poi_window_blind">Rollvorhang</string>

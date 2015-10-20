@@ -1946,4 +1946,16 @@
 	<string name="poi_surveillance_yes">監視器：有</string>
 	<string name="poi_shop_yes">有商店</string>
 
+	<string name="poi_service_bicycle_retail_yes">自行車零售：有</string>
+	<string name="poi_service_bicycle_retail_no">自行車零售：無</string>
+	<string name="poi_service_bicycle_repair_yes">自行車維修：有</string>
+	<string name="poi_service_bicycle_repair_no">自行車維修：無</string>
+	<string name="poi_service_bicycle_rental_yes">自行車租賃：有</string>
+	<string name="poi_service_bicycle_rental_no">自行車租賃：無</string>
+	<string name="poi_service_bicycle_pump_yes">自行車灌氣泵浦：有</string>
+	<string name="poi_service_bicycle_pump_no">自行車灌氣泵浦：無</string>
+	<string name="poi_service_bicycle_diy_yes">自行車 DIY 維修工具：有</string>
+	<string name="poi_service_bicycle_diy_no">自行車 DIY 維修工具：無</string>
+	<string name="poi_service_bicycle_cleaning_yes">自行車清洗：有</string>
+	<string name="poi_service_bicycle_cleaning_no">自行車清洗：無</string>
 	</resources>
