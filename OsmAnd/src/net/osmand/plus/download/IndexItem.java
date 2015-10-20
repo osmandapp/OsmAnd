@@ -36,7 +36,7 @@ public class IndexItem implements Comparable<IndexItem> {
 
 
 	public IndexItem(String fileName, String description, long timestamp, String size, long contentSize,
-			long containerSize, DownloadActivityType tp) {
+			long containerSize, @NonNull DownloadActivityType tp) {
 		this.fileName = fileName;
 		this.description = description;
 		this.timestamp = timestamp;

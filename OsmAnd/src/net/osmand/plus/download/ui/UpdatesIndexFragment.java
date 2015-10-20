@@ -41,7 +41,13 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		return inflater.inflate(R.layout.update_index_frament, container, false);
 	}
-	
+
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		updateErrorMessage();
+	}
+
 	@Override
 	public ArrayAdapter<?> getAdapter() {
 		return listAdapter;
@@ -67,13 +73,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 	public void invalidateListView() {
 		DownloadResources indexes = getMyActivity().getDownloadThread().getIndexes();
 		List<IndexItem> indexItems = indexes.getItemsToUpdate();
-		if (indexItems.size() == 0) {
-			if (indexes.isDownloadedFromInternet) {
-				indexItems.add(new IndexItem(getString(R.string.everything_up_to_date), "", 0, "", 0, 0, null));
-			} else {
-				indexItems.add(new IndexItem(getString(R.string.no_index_file_to_download), "", 0, "", 0, 0, null));
-			}
-		}
+
 		final OsmandRegions osmandRegions =
 				getMyApplication().getResourceManager().getOsmandRegions();
 		listAdapter = new UpdateIndexAdapter(getMyActivity(), R.layout.download_index_list_item, indexItems);
@@ -85,6 +85,24 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 			}
 		});
 		setListAdapter(listAdapter);
+		updateErrorMessage();
+
+	}
+
+	private void updateErrorMessage() {
+		final View view = getView();
+		if (view == null) return;
+		TextView listMessageTextView = (TextView) view.findViewById(R.id.listMessageTextView);
+
+		if (getListAdapter() != null && getListAdapter().getCount() == 0) {
+			final DownloadResources indexes = getMyActivity().getDownloadThread().getIndexes();
+			int messageId = indexes.isDownloadedFromInternet ? R.string.everything_up_to_date
+					: R.string.no_index_file_to_download;
+			listMessageTextView.setText(messageId);
+			listMessageTextView.setVisibility(View.VISIBLE);
+		} else {
+			listMessageTextView.setVisibility(View.GONE);
+		}
 	}
 
 	private void updateUpdateAllButton() {

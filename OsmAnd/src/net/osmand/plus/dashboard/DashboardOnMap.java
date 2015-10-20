@@ -33,7 +33,6 @@ import com.github.ksoichiro.android.observablescrollview.ScrollState;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
-import net.osmand.osm.edit.OSMSettings;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.ContextMenuAdapter.OnRowItemClick;

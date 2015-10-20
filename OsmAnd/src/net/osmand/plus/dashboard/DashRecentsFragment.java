@@ -38,7 +38,7 @@ public class DashRecentsFragment extends DashLocationFragment {
 	private static final String ROW_NUMBER_TAG = TAG + "_row_number";
 	static final DashFragmentData FRAGMENT_DATA =
 			new DashFragmentData(TAG, DashRecentsFragment.class, TITLE_ID,
-					new DashboardOnMap.DefaultShouldShow(), 100, ROW_NUMBER_TAG);
+					new DashboardOnMap.DefaultShouldShow(), 80, ROW_NUMBER_TAG);
 
 	@Override
 	public View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

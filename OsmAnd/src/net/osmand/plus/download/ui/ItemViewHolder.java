@@ -31,7 +31,6 @@ import android.widget.Toast;
 
 public class ItemViewHolder {
 
-
 	protected final TextView nameTextView;
 	protected final TextView descrTextView;
 	protected final ImageView leftImageView;
@@ -206,7 +205,7 @@ public class ItemViewHolder {
 			rightImageButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					if(silentCancelDownload) {
+					if (silentCancelDownload) {
 						context.getDownloadThread().cancelDownload(indexItem);
 					} else {
 						context.makeSureUserCancelDownload(indexItem);
