@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
@@ -15,6 +16,7 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.PopupMenu;
+import android.util.TypedValue;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
@@ -104,7 +106,6 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		listView.setAdapter(listAdapter);
 		expandAllGroups();
 		setListView(listView);
-		((DownloadActivity) getActivity()).updateDescriptionTextWithSize(view);
 		colorDrawables();
 		return view;
 	}
@@ -459,7 +460,6 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 	
 	@Override
 	public void downloadHasFinished() {
-		((DownloadActivity) getActivity()).updateDescriptionTextWithSize(getView());
 		reloadData();
 	}
 	
@@ -664,7 +664,6 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			@Override
 			public void onDestroyActionMode(ActionMode mode) {
 				selectionMode = false;
-				((DownloadActivity) getActivity()).updateDescriptionTextWithSize(getView());
 				listAdapter.cancelFilter();
 				expandAllGroups();
 				listAdapter.notifyDataSetChanged();
@@ -1021,8 +1020,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			View v = convertView;
 			LocalIndexInfo group = getGroup(groupPosition);
 			if (v == null) {
-				LayoutInflater inflater = (LayoutInflater) getDownloadActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				v = inflater.inflate(R.layout.local_index_list_category, parent, false);
+				LayoutInflater inflater = LayoutInflater.from(ctx);
+				v = inflater.inflate(R.layout.download_item_list_section, parent, false);
 			}
 			StringBuilder name = new StringBuilder(group.getType().getHumanString(getDownloadActivity()));
 			if (group.getSubfolder() != null) {
@@ -1031,8 +1030,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			if (group.isBackupedData()) {
 				name.append(" - ").append(getString(R.string.local_indexes_cat_backup));
 			}
-			TextView nameView = ((TextView) v.findViewById(R.id.category_name));
-			TextView sizeView = ((TextView) v.findViewById(R.id.category_size));
+			TextView nameView = ((TextView) v.findViewById(R.id.section_name));
+			TextView sizeView = ((TextView) v.findViewById(R.id.section_description));
 			List<LocalIndexInfo> list = data.get(group);
 			int size = 0;
 			for (LocalIndexInfo aList : list) {
@@ -1054,14 +1053,15 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 
 			}
 			sizeView.setText(sz);
+			sizeView.setVisibility(View.VISIBLE);
 			nameView.setText(name.toString());
-			if (!group.isBackupedData()) {
-				nameView.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
-			} else {
-				nameView.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
-			}
 
 			v.setOnClickListener(null);
+			
+			TypedValue typedValue = new TypedValue();
+			Resources.Theme theme = ctx.getTheme();
+			theme.resolveAttribute(R.attr.ctx_menu_info_view_bg, typedValue, true);
+			v.setBackgroundColor(typedValue.data);
 			return v;
 		}
 
