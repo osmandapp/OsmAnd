@@ -1064,12 +1064,12 @@
 
 	<string name="poi_sand">Arena</string>
 
-	<string name="poi_smoking_isolated">Si podet pipare in un’aposentu indipendente e iscrobadu de su totu</string>
+	<string name="poi_smoking_isolated">Si podet pipare in un’aposentu isoladu</string>
 	<string name="poi_smoking_dedicated">Pipadores ebbia</string>
 
-	<string name="poi_toll_yes">B’est de pagare unu pedàgiu</string>
-	<string name="poi_toll_no">Non b’est perunu pedàgiu</string>
-	<string name="poi_toll_hgv_yes">B’est de pagare unu pedàgiu pro veìculos pesantes</string>
+	<string name="poi_toll_yes">Pedàgiu</string>
+	<string name="poi_toll_no">Perunu pedàgiu</string>
+	<string name="poi_toll_hgv_yes">Pedàgiu pro veìculos pesantes</string>
 	<string name="poi_information_bicyclemap">Mapa tziclìstica</string>
 	<string name="poi_water_characteristic_mineral">Caraterìstica de s’abba: minerale</string>
 	<string name="poi_water_characteristic_mud">Caraterìsica de s’abba: ludu</string>
@@ -1304,4 +1304,27 @@
 	<string name="poi_information_wildlife">Sinnale de informatziones: fàuna agreste</string>
 	<string name="poi_information_tactile_model">Modellu tàtile</string>
 	<string name="poi_information_tactile_map">Mapa tàtile</string>
+	<string name="poi_board_type_plants">Sinnale de informatziones: fundos/prantas</string>
+	<string name="poi_board_type_geology">Sinnale de informatziones: geologia</string>
+	<string name="poi_board_type_public_transport">Sinnale de informatziones: trasportu pùblicu</string>
+	<string name="poi_board_type_technology">Sinnale de informatziones: tecnologia</string>
+	<string name="poi_board_type_astronomy">Sinnale de informatziones: astronomia</string>
+
+	<string name="poi_fireplace_yes">Tziminera</string>
+	<string name="poi_fireplace_no">Chene tziminera</string>
+
+	<string name="poi_covered_yes">Cobertu</string>
+	<string name="poi_covered_no">Chene cobertura</string>
+
+	<string name="poi_smoking_no">Non si podet pipare</string>
+	<string name="poi_smoking_outside">Si podet pipare in foras ebbia</string>
+	<string name="poi_smoking_yes">Si podet pipare</string>
+	<string name="poi_smoking_separated">Si podet pipare in un’aposentu a un’ala</string>
+	<string name="poi_tactile_paving_yes">Cun pamentu tàtile</string>
+	<string name="poi_tactile_paving_no">Chene pamentu tàtile</string>
+	<string name="poi_traffic_signals_sound_yes">Cun sonu</string>
+	<string name="poi_traffic_signals_sound_no">Chene sonu</string>
+	<string name="poi_traffic_signals_sound_walk">Cun sonu petzi cando est possìbile colare</string>
+
+	<string name="poi_services">Àrea de servìtziu</string>
 	</resources>
