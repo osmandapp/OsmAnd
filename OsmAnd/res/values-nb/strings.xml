@@ -198,10 +198,10 @@
 	<string name="index_name_europe">Europa</string>
 	<string name="index_name_france">Europa - Frankrike</string>
 	<string name="index_name_germany">Europa - Tyskland</string>
-	<string name="index_name_russia">Europa/Asia - Russland</string>
+	<string name="index_name_russia">Russland</string>
 	<string name="index_name_africa">Afrika</string>
 	<string name="index_name_asia">Asia</string>
-	<string name="index_name_oceania">Oseania</string>
+	<string name="index_name_oceania">Australia og Oseania</string>
 	<string name="index_name_other">Verdens- og emnekart</string>
 	<string name="index_name_wiki">Verdensomspennende Wikipedia-interessepunkter</string>
 	<string name="index_name_voice">Talemeldinger (opptak, begrenset funksjonalitet)</string>
@@ -1432,4 +1432,11 @@
 	<string name="show_gpx">Vis GPX</string>
 	<string name="roads">Veier</string>
     <string name="favourites_context_menu_add">Legg til favoritt</string>
-	</resources>
+	<string name="favorite_category_dublicate_message">Spesifisert kategorinavn finnes allerede. Gi et annet navn.</string>
+    <string name="favorite_category_name">Kategorinavn</string>
+    <string name="favorite_category_add_new_title">Legg til ny kategori</string>
+    <string name="regions">Regioner</string>
+    <string name="region_maps">Regionkart</string>
+    <string name="world_maps">Verdenskart</string>
+    <string name="hillshade_layer_disabled">Relieffskyggelag deaktivert</string>
+    </resources>
