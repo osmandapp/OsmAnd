@@ -8,8 +8,8 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com --><resources>
 	<string name="auto_follow_location_enabled">Đã kích hoạt thiết lập tự động bám theo.</string>
 
 	<string name="pref_vector_rendering">Thiết lập hiển thị Vector</string>
-	<string name="pref_overlay">Overlay / Underlay</string>
-	<string name="pref_raster_map">Thiết lập bản đồ source</string>
+	<string name="pref_overlay">Lớp phủ trên / Lớp phủ dưới</string>
+	<string name="pref_raster_map">Thiết lập bản đồ nguồn</string>
 	<string name="pref_vector_map">Thiết lập bản đồ vector</string>
 	<string name="delete_confirmation_msg">Bạn có muốn xóa %1$s?</string>
 	<string name="city_type_suburb">Ngoại thành</string>
@@ -35,7 +35,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com --><resources>
 	
 	<string name="shared_string_rename">Đổi tên</string>
 	
-	<string name="poi_filter_nominatim">Online Nominatim</string>
+	<string name="poi_filter_nominatim">Tìm kiếm cụ thể online</string>
 	<string name="search_position_current_location_search">Đang tìm vị trí…</string>
 	<string name="search_position_current_location_found">Vị trí (Đã tìm thấy)</string>
 	<string name="search_position_address">Địa chỉ…</string>
@@ -125,7 +125,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com --><resources>
 	<string name="tip_rotation_switching">Xoay bản đồ</string>
 	
 	 
-	<string name="choose_audio_stream">Voice guidance output</string>
+	<string name="choose_audio_stream">Đầu ra hướng dẫn bằng giọng nói</string>
 	<string name="choose_audio_stream_descr">Choose channel to play voice guidance (system-dependent)</string>
 	<string name="voice_stream_voice_call">Voice call audio</string>
 	<string name="voice_stream_notification">Âm thanh thông báo</string>
@@ -240,7 +240,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com --><resources>
 	<string name="poi_filter_food_shop">Ăn uống</string>
 	<string name="poi_filter_for_tourists">Du lịch</string>
 	<string name="poi_filter_fuel">Trạm Xăng</string>
-	<string name="poi_filter_namefinder">Online NameFinder</string>
+	<string name="poi_filter_namefinder">Tìm tên online</string>
 	<string name="reading_cached_tiles">Đang đọc các tiles đã được lưu sẵn…</string>
 	<string name="version_index_is_big_for_memory">Chỉ mục \'\'{0}\'\' lớn hơn bộ nhớ</string>
 	<string name="version_index_is_not_supported">Phiên bản chỉ mục \'\'{0}\'\' không được hỗ trợ</string>
