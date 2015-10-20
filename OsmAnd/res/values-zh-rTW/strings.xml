@@ -318,10 +318,10 @@
 	<string name="index_name_europe">歐洲</string>
 	<string name="index_name_france">歐洲 - 法國</string>
 	<string name="index_name_germany">歐洲 - 德國</string>
-	<string name="index_name_russia">歐亞 - 俄羅斯</string>
+	<string name="index_name_russia">俄羅斯</string>
 	<string name="index_name_africa">非洲</string>
 	<string name="index_name_asia">亞洲</string>
-	<string name="index_name_oceania">大洋洲</string>
+	<string name="index_name_oceania">澳洲和大洋洲</string>
 	<string name="index_name_other">世界各地和專題地圖</string>
 	<string name="index_name_wiki">全球維基百科 POI</string>
 	<string name="index_name_voice">提示語音 (真人發音，功能有限)</string>
