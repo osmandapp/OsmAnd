@@ -10,6 +10,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.helpers.FileNameTranslationHelper;
 
 import org.apache.commons.logging.Log;
 
@@ -126,7 +127,13 @@ public class IndexItem implements Comparable<IndexItem> {
 	}
 	
 	private File getTargetFile(OsmandApplication ctx) {
-		return new File(type.getDownloadFolder(ctx, this), getBasename() + type.getUnzipExtension(ctx, this));
+		String basename;
+		if (type == DownloadActivityType.HILLSHADE_FILE) {
+			basename = (FileNameTranslationHelper.HILL_SHADE + getBasename()).replace("_", " ");
+		} else {
+			basename = getBasename();
+		}
+		return new File(type.getDownloadFolder(ctx, this), basename + type.getUnzipExtension(ctx, this));
 	}
 
 	public File getBackupFile(OsmandApplication ctx) {

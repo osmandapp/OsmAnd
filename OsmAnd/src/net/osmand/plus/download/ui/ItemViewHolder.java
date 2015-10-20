@@ -138,7 +138,8 @@ public class ItemViewHolder {
 		}
 		int color = textColorSecondary;
 		if(indexItem.isDownloaded() && !isDownloading) {
-			int colorId = indexItem.isOutdated() ? R.color.color_distance : R.color.color_ok;
+			int colorId = indexItem.getType() != DownloadActivityType.HILLSHADE_FILE &&
+					indexItem.isOutdated() ? R.color.color_distance : R.color.color_ok;
 			color = context.getResources().getColor(colorId);
 		}
 		if (indexItem.isDownloaded()) {
