@@ -2174,7 +2174,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="confirm_download_roadmaps">N\'esteu segur de baixar un mapa de carreteres quan teniu disponible un mapa complet?</string>
     <string name="value_downloaded_from_max">%1$.1f de %2$.1f MB</string>
     <string name="file_size_in_mb">%.1f MB</string>
-<string name="update_all">Actualitzeu tot (%1$ s Mb)</string>
+<string name="update_all">Actualitzeu tot (%1$s MB)</string>
     <string name="free_downloads_used">Baixades gratuïtes realitzades</string>
     <string name="free_downloads_used_description">Podeu veure quantes baixades gratuïtes heu fet</string>
 </resources>
