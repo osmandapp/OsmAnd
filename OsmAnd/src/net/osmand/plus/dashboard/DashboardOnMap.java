@@ -33,6 +33,7 @@ import com.github.ksoichiro.android.observablescrollview.ScrollState;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
+import net.osmand.osm.edit.OSMSettings;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.ContextMenuAdapter.OnRowItemClick;
@@ -92,11 +93,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 					DashWaypointsFragment.TITLE_ID, defaultShouldShow, 60, null),
 			new DashFragmentData(DashSearchFragment.TAG, DashSearchFragment.class,
 					DashSearchFragment.TITLE_ID, defaultShouldShow, 70, null),
-			new DashFragmentData(DashRecentsFragment.TAG, DashRecentsFragment.class,
-					DashRecentsFragment.TITLE_ID, defaultShouldShow, 80, null),
-			new DashFragmentData(DashFavoritesFragment.TAG, DashFavoritesFragment.class,
-					DashFavoritesFragment.TITLE_ID, defaultShouldShow, 90,
-					DashFavoritesFragment.ROW_NUMBER_TAG),
+			DashRecentsFragment.FRAGMENT_DATA,
+			DashFavoritesFragment.FRAGMENT_DATA,
 			new DashFragmentData(DashPluginsFragment.TAG, DashPluginsFragment.class,
 					DashPluginsFragment.TITLE_ID, defaultShouldShow, 140, null)
 	};
@@ -920,6 +918,18 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 
 	View getParentView() {
 		return dashboardView;
+	}
+
+	public static <T> List<T> handleNumberOfRows(List<T> list, OsmandSettings settings,
+												 String rowNumberTag) {
+		int numberOfRows = settings.registerIntPreference(rowNumberTag, 3)
+				.makeGlobal().get();
+		if (list.size() > numberOfRows) {
+			while (list.size() != numberOfRows) {
+				list.remove(numberOfRows);
+			}
+		}
+		return list;
 	}
 
 	public static class SettingsShouldShow implements DashFragmentData.ShouldShowFunction {

@@ -59,6 +59,7 @@ public class DownloadActivity extends BaseDownloadActivity {
 		DownloadResources indexes = getDownloadThread().getIndexes();
 		if (!indexes.isDownloadedFromInternet) {
 			getDownloadThread().runReloadIndexFiles();
+
 		}
 		
 		setContentView(R.layout.download);

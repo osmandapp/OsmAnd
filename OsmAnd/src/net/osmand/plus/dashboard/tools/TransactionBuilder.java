@@ -1,5 +1,6 @@
 package net.osmand.plus.dashboard.tools;
 
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -49,7 +50,6 @@ public final class TransactionBuilder {
 	}
 
 	public FragmentTransaction getFragmentTransaction() {
-		Log.v(TAG, "getFragmentTransaction(" + ")");
 		FragmentTransaction fragmentTransaction = manager.beginTransaction();
 		Collections.sort(fragments);
 		for (DashFragmentData dashFragmentData : fragments) {
