@@ -250,9 +250,15 @@ public class DownloadIndexesThread {
 			DownloadResources result = new DownloadResources(app);
 			DownloadOsmandIndexesHelper.IndexFileList indexFileList = DownloadOsmandIndexesHelper.getIndexesList(ctx);
 			if (indexFileList != null) {
-				result.isDownloadedFromInternet = indexFileList.isDownloadedFromInternet();
-				result.mapVersionIsIncreased = indexFileList.isIncreasedMapVersion();
-				result.prepareData(indexFileList.getIndexFiles());
+				try {
+					while (app.isApplicationInitializing()) {
+						Thread.sleep(200);
+					}
+					result.isDownloadedFromInternet = indexFileList.isDownloadedFromInternet();
+					result.mapVersionIsIncreased = indexFileList.isIncreasedMapVersion();
+					result.prepareData(indexFileList.getIndexFiles());
+				} catch (Exception e) {
+				}
 			}
 			return result;
 		}
