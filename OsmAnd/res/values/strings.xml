@@ -1408,10 +1408,10 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="index_name_europe">Europe</string>
 	<string name="index_name_france">Europe - France</string>
 	<string name="index_name_germany">Europe - Germany</string>
-	<string name="index_name_russia">Europe/Asia - Russia</string>
+	<string name="index_name_russia">Russia</string>
 	<string name="index_name_africa">Africa</string>
 	<string name="index_name_asia">Asia</string>
-	<string name="index_name_oceania">Oceania</string>
+	<string name="index_name_oceania">Australia and Oceania</string>
 	<string name="index_name_other">Worldwide and topic maps</string>
 	<string name="index_name_wiki">Worldwide Wikipedia POIs</string>
 	<string name="index_name_voice">Voice prompts (recorded, limited features)</string>

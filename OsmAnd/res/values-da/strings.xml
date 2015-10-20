@@ -469,10 +469,10 @@
     <string name="index_name_europe">Europa</string>
     <string name="index_name_france">Europa - Frankrig</string>
     <string name="index_name_germany">Europa - Tyskland</string>
-    <string name="index_name_russia">Europa/Asien - Rusland</string>
+    <string name="index_name_russia">Rusland</string>
     <string name="index_name_africa">Afrika</string>
     <string name="index_name_asia">Asien</string>
-    <string name="index_name_oceania">Oceanien</string>
+    <string name="index_name_oceania">Australien og Oceanien</string>
     <string name="index_name_other">Verdens- og emnekort</string>
     <string name="index_name_wiki">Wikipedia interessepunkter på verdensplan</string>
     <string name="index_name_voice">Stemmemeddelelser (optaget, begrænset funktionalitet)</string>
