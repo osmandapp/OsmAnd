@@ -2203,4 +2203,6 @@
 	<string name="poi_step_condition_uneven">Step condition: uneven</string>
 	<string name="poi_step_condition_rough">Step condition: rough</string>
 
+	<string name="poi_cairn">Cairn</string>
+
 </resources>
