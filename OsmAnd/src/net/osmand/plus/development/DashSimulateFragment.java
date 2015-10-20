@@ -17,6 +17,7 @@ import android.widget.TextView;
 public class DashSimulateFragment extends DashBaseFragment {
 
 	public static final String TAG = "DASH_SIMULATE_FRAGMENT";
+	public static final int TITLE_ID = R.string.simulate_your_location;
 
 	@Override
 	public void onOpenDash() {
@@ -34,7 +35,7 @@ public class DashSimulateFragment extends DashBaseFragment {
 	public View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_common_fragment, container, false);
 		TextView header = (TextView) view.findViewById(R.id.fav_text);
-		header.setText(R.string.simulate_your_location);
+		header.setText(TITLE_ID);
 		((Button) view.findViewById(R.id.show_all)).setVisibility(View.GONE);
 		LinearLayout tracks = (LinearLayout) view.findViewById(R.id.items);
 		View item = inflater.inflate(R.layout.dash_simulate_item, null, false);

@@ -30,6 +30,7 @@ import java.util.List;
  */
 public class DashRecentsFragment extends DashLocationFragment {
 	public static final String TAG = "DASH_RECENTS_FRAGMENT";
+	public static final int TITLE_ID = R.string.shared_string_history;
 
 	private List<ImageView> arrows = new ArrayList<ImageView>();
 	List<HistoryEntry> points = new ArrayList<HistoryEntry>();
@@ -37,7 +38,7 @@ public class DashRecentsFragment extends DashLocationFragment {
 	@Override
 	public View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_common_fragment, container, false);
-		((TextView)view.findViewById(R.id.fav_text)).setText(R.string.shared_string_history);
+		((TextView)view.findViewById(R.id.fav_text)).setText(TITLE_ID);
 		(view.findViewById(R.id.show_all)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {

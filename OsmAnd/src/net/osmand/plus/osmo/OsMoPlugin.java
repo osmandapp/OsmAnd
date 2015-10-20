@@ -22,6 +22,7 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.download.DownloadFileHelper;
 import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
@@ -534,6 +535,6 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 	@Override
 	public DashFragmentData getCardFragment() {
 		return new DashFragmentData(DashOsMoFragment.TAG, DashOsMoFragment.class,
-				R.string.osmo_plugin_name, 12);
+				R.string.osmo_plugin_name, new DashboardOnMap.DefaultShouldShow(), 120, null);
 	}
 }

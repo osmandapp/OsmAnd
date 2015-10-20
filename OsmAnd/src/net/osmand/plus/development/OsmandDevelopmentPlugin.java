@@ -130,7 +130,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	public DashFragmentData getCardFragment() {
 		return new DashFragmentData(DashSimulateFragment.TAG,
 				DashSimulateFragment.class,
-				R.string.debugging_and_development,
-				new DashboardOnMap.DefaultShouldShow(), 15);
+				DashSimulateFragment.TITLE_ID,
+				new DashboardOnMap.DefaultShouldShow(), 150, null);
 	}
 }

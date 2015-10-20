@@ -27,6 +27,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.MapInfoLayer;
@@ -565,6 +566,6 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	@Override
 	public DashFragmentData getCardFragment() {
 		return new DashFragmentData(DashParkingFragment.TAG, DashParkingFragment.class,
-				R.string.osmand_parking_plugin_name, 5);
+				DashParkingFragment.TITLE_ID, new DashboardOnMap.DefaultShouldShow(), 50, null);
 	}
 }

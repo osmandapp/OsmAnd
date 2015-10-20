@@ -17,6 +17,8 @@ public class NumberPickerDialogFragment extends DialogFragment {
 	public static final String TAG = "NumberPickerDialogFragment";
 	private static final org.apache.commons.logging.Log LOG =
 			PlatformUtil.getLog(NumberPickerDialogFragment.class);
+
+	private static final String NUMBER_TAG = "number_tag";
 	private static final String HEADER_TEXT = "header_text";
 	private static final String SUBHEADER_TEXT = "subheader_text";
 	private static final String NUMBER_OF_ITEMS = "number_of_items";
@@ -28,10 +30,11 @@ public class NumberPickerDialogFragment extends DialogFragment {
 			throw new RuntimeException("Parent fragment must implement CanAcceptNumber");
 		}
 		Bundle args = getArguments();
+		final String numberTag = args.getString(NUMBER_TAG);
 		String headerText = args.getString(HEADER_TEXT);
 		String subHeaderText = args.getString(SUBHEADER_TEXT);
-		final String tag = args.getString(TAG);
 		int numberOfItems = args.getInt(NUMBER_OF_ITEMS);
+
 		String[] items = new String[numberOfItems];
 		for (int i = 0; i < numberOfItems; i++) {
 			items[i] = String.valueOf(i + 1);
@@ -43,7 +46,7 @@ public class NumberPickerDialogFragment extends DialogFragment {
 					public void onClick(DialogInterface dialog, int which) {
 						final int userChoice =
 								((AlertDialog) dialog).getListView().getCheckedItemPosition() + 1;
-						((CanAcceptNumber) getParentFragment()).acceptNumber(tag, userChoice);
+						((CanAcceptNumber) getParentFragment()).acceptNumber(numberTag, userChoice);
 					}
 				})
 				.setNegativeButton(R.string.shared_string_cancel, null);
@@ -66,7 +69,7 @@ public class NumberPickerDialogFragment extends DialogFragment {
 		Bundle args = new Bundle();
 		args.putString(HEADER_TEXT, header);
 		args.putString(SUBHEADER_TEXT, subheader);
-		args.putString(TAG, tag);
+		args.putString(NUMBER_TAG, tag);
 		args.putInt(NUMBER_OF_ITEMS, number);
 		NumberPickerDialogFragment fragment = new NumberPickerDialogFragment();
 		fragment.setArguments(args);
