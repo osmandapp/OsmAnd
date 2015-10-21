@@ -110,11 +110,7 @@ public class DownloadActivity extends BaseDownloadActivity {
 
 			@Override
 			public void onPageSelected(int i) {
-				if (i == UPDATES_TAB_NUMBER) {
-					visibleBanner.hideDownloadProgressLayout();
-				} else {
-					visibleBanner.showDownloadProgressLayout();
-				}
+				visibleBanner.updateBannerInProgress();
 			}
 
 			@Override
@@ -292,10 +288,6 @@ public class DownloadActivity extends BaseDownloadActivity {
 
 			initFreeVersionBanner();
 			updateBannerInProgress();
-
-			if (ctx.getCurrentTab() != UPDATES_TAB_NUMBER) {
-				downloadProgressLayout.setVisibility(View.VISIBLE);
-			}
 		}
 		
 		public void updateBannerInProgress() {
@@ -307,6 +299,8 @@ public class DownloadActivity extends BaseDownloadActivity {
 				updateDescriptionTextWithSize(ctx, downloadProgressLayout);
 				if (ctx.getCurrentTab() == UPDATES_TAB_NUMBER || !showSpace) {
 					downloadProgressLayout.setVisibility(View.GONE);
+				} else {
+					downloadProgressLayout.setVisibility(View.VISIBLE);
 				}
 				updateFreeVersionBanner();
 			} else {
