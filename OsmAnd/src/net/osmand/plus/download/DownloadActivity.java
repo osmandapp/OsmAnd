@@ -1,25 +1,5 @@
 package net.osmand.plus.download;
 
-import java.io.File;
-import java.lang.ref.WeakReference;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.Version;
-import net.osmand.plus.activities.LocalIndexInfo;
-import net.osmand.plus.activities.TabActivity;
-import net.osmand.plus.base.BasicProgressAsyncTask;
-import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
-import net.osmand.plus.download.ui.ActiveDownloadsDialogFragment;
-import net.osmand.plus.download.ui.DownloadResourceGroupFragment;
-import net.osmand.plus.download.ui.LocalIndexesFragment;
-import net.osmand.plus.download.ui.UpdatesIndexFragment;
-import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
@@ -37,7 +17,31 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.Version;
+import net.osmand.plus.activities.LocalIndexInfo;
+import net.osmand.plus.activities.TabActivity;
+import net.osmand.plus.base.BasicProgressAsyncTask;
+import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
+import net.osmand.plus.download.ui.ActiveDownloadsDialogFragment;
+import net.osmand.plus.download.ui.DownloadResourceGroupFragment;
+import net.osmand.plus.download.ui.LocalIndexesFragment;
+import net.osmand.plus.download.ui.UpdatesIndexFragment;
+import net.osmand.plus.views.controls.PagerSlidingTabStrip;
+
+import java.io.File;
+import java.lang.ref.WeakReference;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
 public class DownloadActivity extends BaseDownloadActivity {
+	public static final int UPDATES_TAB_NUMBER = 2;
+	public static final int LOCAL_TAB_NUMBER = 1;
+	public static final int DOWNLOAD_TAB_NUMBER = 0;
 	private List<LocalIndexInfo> localIndexInfos = new ArrayList<>();
 
 	List<TabActivity.TabItem> mTabs = new ArrayList<TabActivity.TabItem>();
@@ -49,8 +53,10 @@ public class DownloadActivity extends BaseDownloadActivity {
 	public static final String DOWNLOAD_TAB = "download";
 	public static final String UPDATES_TAB = "updates";
 	public static final MessageFormat formatGb = new MessageFormat("{0, number,#.##} GB", Locale.US);
+	public static final MessageFormat formatMb = new MessageFormat("{0, number,##.#} MB", Locale.US);
 
 	private BannerAndDownloadFreeVersion visibleBanner;
+	private ViewPager viewPager;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +66,7 @@ public class DownloadActivity extends BaseDownloadActivity {
 		if (!indexes.isDownloadedFromInternet) {
 			getDownloadThread().runReloadIndexFiles();
 		}
-		
+
 		setContentView(R.layout.download);
 		final View downloadProgressLayout = findViewById(R.id.downloadProgressLayout);
 		downloadProgressLayout.setVisibility(View.VISIBLE);
@@ -69,13 +75,12 @@ public class DownloadActivity extends BaseDownloadActivity {
 		String tab = getIntent() == null || getIntent().getExtras() == null ? null : getIntent().getExtras().getString(TAB_TO_OPEN);
 		if (tab != null) {
 			if (tab.equals(DOWNLOAD_TAB)) {
-				currentTab = 1;
+				currentTab = DOWNLOAD_TAB_NUMBER;
 			} else if (tab.equals(UPDATES_TAB)) {
-				currentTab = 2;
+				currentTab = UPDATES_TAB_NUMBER;
 			}
 		}
-		visibleBanner = new BannerAndDownloadFreeVersion(findViewById(R.id.mainLayout), this);
-		ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+		viewPager = (ViewPager) findViewById(R.id.pager);
 		PagerSlidingTabStrip mSlidingTabLayout = (PagerSlidingTabStrip) findViewById(R.id.sliding_tabs);
 
 
@@ -90,6 +95,27 @@ public class DownloadActivity extends BaseDownloadActivity {
 		mSlidingTabLayout.setViewPager(viewPager);
 
 		viewPager.setCurrentItem(currentTab);
+		viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+			@Override
+			public void onPageScrolled(int i, float v, int i1) {
+
+			}
+
+			@Override
+			public void onPageSelected(int i) {
+				if (i == UPDATES_TAB_NUMBER) {
+					visibleBanner.hideDownloadProgressLayout();
+				} else {
+					visibleBanner.showDownloadProgressLayout();
+				}
+			}
+
+			@Override
+			public void onPageScrollStateChanged(int i) {
+
+			}
+		});
+		visibleBanner = new BannerAndDownloadFreeVersion(findViewById(R.id.mainLayout), this);
 
 		final Intent intent = getIntent();
 		// FIXME INITIAL FILTER & INITIAL KEY
@@ -98,7 +124,6 @@ public class DownloadActivity extends BaseDownloadActivity {
 			final String filterCat = intent.getExtras().getString(FILTER_CAT);
 		}
 	}
-
 
 	@Override
 	protected void onResume() {
@@ -133,7 +158,7 @@ public class DownloadActivity extends BaseDownloadActivity {
 		super.onPause();
 		getMyApplication().getAppCustomization().pauseActivity(DownloadActivity.class);
 	}
-	
+
 	@Override
 	@UiThread
 	public void downloadHasFinished() {
@@ -145,7 +170,7 @@ public class DownloadActivity extends BaseDownloadActivity {
 			}
 		}
 	}
-	
+
 	@Override
 	@UiThread
 	public void downloadInProgress() {
@@ -159,7 +184,6 @@ public class DownloadActivity extends BaseDownloadActivity {
 	}
 
 
-	
 	@Override
 	@UiThread
 	public void newDownloadIndexes() {
@@ -172,9 +196,10 @@ public class DownloadActivity extends BaseDownloadActivity {
 		}
 		downloadHasFinished();
 	}
-	
-	
 
+	private int getCurrentTab() {
+		return viewPager.getCurrentItem();
+	}
 
 	public boolean isLightActionBar() {
 		return ((OsmandApplication) getApplication()).getSettings().isLightActionBar();
@@ -188,17 +213,22 @@ public class DownloadActivity extends BaseDownloadActivity {
 		private final View freeVersionDescriptionTextView;
 		private final View buttonsLinearLayout;
 		private final View freeVersionTitle;
+		private final OsmandSettings settings;
 
 		private ToggleCollapseFreeVersionBanner(View freeVersionDescriptionTextView,
-												View buttonsLinearLayout, View freeVersionTitle) {
+												View buttonsLinearLayout, View freeVersionTitle,
+												OsmandSettings settings) {
 			this.freeVersionDescriptionTextView = freeVersionDescriptionTextView;
 			this.buttonsLinearLayout = buttonsLinearLayout;
 			this.freeVersionTitle = freeVersionTitle;
+			this.settings = settings;
 		}
 
 		@Override
 		public void onClick(View v) {
-			if (freeVersionDescriptionTextView.getVisibility() == View.VISIBLE) {
+
+			if (freeVersionDescriptionTextView.getVisibility() == View.VISIBLE
+					&& isDownlodingPermitted(settings)) {
 				freeVersionDescriptionTextView.setVisibility(View.GONE);
 				buttonsLinearLayout.setVisibility(View.GONE);
 			} else {
@@ -207,6 +237,12 @@ public class DownloadActivity extends BaseDownloadActivity {
 				freeVersionTitle.setVisibility(View.VISIBLE);
 			}
 		}
+	}
+
+	public static boolean isDownlodingPermitted(OsmandSettings settings) {
+		final Integer mapsDownloaded = settings.NUMBER_OF_FREE_DOWNLOADS.get();
+		int downloadsLeft = BaseDownloadActivity.MAXIMUM_AVAILABLE_FREE_DOWNLOADS - mapsDownloaded;
+		return Math.max(downloadsLeft, 0) > 0;
 	}
 
 	public static class BannerAndDownloadFreeVersion {
@@ -248,8 +284,12 @@ public class DownloadActivity extends BaseDownloadActivity {
 			initFreeVersionBanner();
 			updateFreeVersionBanner();
 			updateBannerInProgress();
+
+			if (ctx.getCurrentTab() != UPDATES_TAB_NUMBER) {
+				downloadProgressLayout.setVisibility(View.VISIBLE);
+			}
 		}
-		
+
 		public void updateBannerInProgress() {
 			BasicProgressAsyncTask<?, ?, ?, ?> basicProgressAsyncTask = ctx.getDownloadThread().getCurrentRunningTask();
 			final boolean isFinished = basicProgressAsyncTask == null
@@ -257,13 +297,18 @@ public class DownloadActivity extends BaseDownloadActivity {
 			if (isFinished) {
 				downloadProgressLayout.setOnClickListener(null);
 				updateDescriptionTextWithSize(ctx, downloadProgressLayout);
+				if (ctx.getCurrentTab() == UPDATES_TAB_NUMBER) {
+					downloadProgressLayout.setVisibility(View.GONE);
+				}
+				updateFreeVersionBanner();
 			} else {
 				boolean indeterminate = basicProgressAsyncTask.isIndeterminate();
 				String message = basicProgressAsyncTask.getDescription();
 				int percent = basicProgressAsyncTask.getProgressPercentage();
 				setMinimizedFreeVersionBanner(true);
-				
+
 				updateAvailableDownloads();
+				downloadProgressLayout.setVisibility(View.VISIBLE);
 				downloadProgressLayout.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -273,6 +318,7 @@ public class DownloadActivity extends BaseDownloadActivity {
 				progressBar.setIndeterminate(indeterminate);
 				if (indeterminate) {
 					leftTextView.setText(message);
+					rightTextView.setText(null);
 				} else {
 					progressBar.setProgress(percent);
 //					final String format = ctx.getString(R.string.downloading_number_of_files);
@@ -280,7 +326,14 @@ public class DownloadActivity extends BaseDownloadActivity {
 					rightTextView.setText(percent + "%");
 				}
 			}
+		}
 
+		public void hideDownloadProgressLayout() {
+			downloadProgressLayout.setVisibility(View.GONE);
+		}
+
+		public void showDownloadProgressLayout() {
+			downloadProgressLayout.setVisibility(View.VISIBLE);
 		}
 
 		private void initFreeVersionBanner() {
@@ -305,7 +358,7 @@ public class DownloadActivity extends BaseDownloadActivity {
 				}
 			});
 			laterButton.setOnClickListener(new ToggleCollapseFreeVersionBanner(freeVersionDescriptionTextView,
-					buttonsLinearLayout, freeVersionBannerTitle));
+					buttonsLinearLayout, freeVersionBannerTitle, application.getSettings()));
 		}
 
 		private void updateFreeVersionBanner() {
@@ -323,7 +376,7 @@ public class DownloadActivity extends BaseDownloadActivity {
 			}
 			downloadsLeftTextView.setText(ctx.getString(R.string.downloads_left_template, downloadsLeft));
 			freeVersionBanner.setOnClickListener(new ToggleCollapseFreeVersionBanner(freeVersionDescriptionTextView,
-					buttonsLinearLayout, freeVersionBannerTitle));
+					buttonsLinearLayout, freeVersionBannerTitle, settings));
 		}
 
 		private void updateAvailableDownloads() {
@@ -334,7 +387,7 @@ public class DownloadActivity extends BaseDownloadActivity {
 		}
 
 		private void setMinimizedFreeVersionBanner(boolean minimize) {
-			if (minimize) {
+			if (minimize && isDownlodingPermitted(application.getSettings())) {
 				freeVersionDescriptionTextView.setVisibility(View.GONE);
 				buttonsLinearLayout.setVisibility(View.GONE);
 				freeVersionBannerTitle.setVisibility(View.GONE);
@@ -348,7 +401,7 @@ public class DownloadActivity extends BaseDownloadActivity {
 
 
 	@SuppressWarnings("deprecation")
-	public static void updateDescriptionTextWithSize(DownloadActivity activity, View view){
+	public static void updateDescriptionTextWithSize(DownloadActivity activity, View view) {
 		TextView descriptionText = (TextView) view.findViewById(R.id.rightTextView);
 		TextView messageTextView = (TextView) view.findViewById(R.id.leftTextView);
 		ProgressBar sizeProgress = (ProgressBar) view.findViewById(R.id.progressBar);
@@ -356,9 +409,9 @@ public class DownloadActivity extends BaseDownloadActivity {
 		File dir = activity.getMyApplication().getAppPath("").getParentFile();
 		String size = formatGb.format(new Object[]{0});
 		int percent = 0;
-		if(dir.canRead()){
+		if (dir.canRead()) {
 			StatFs fs = new StatFs(dir.getAbsolutePath());
-			size = formatGb.format(new Object[]{(float) (fs.getAvailableBlocks()) * fs.getBlockSize() / (1 << 30) });
+			size = formatGb.format(new Object[]{(float) (fs.getAvailableBlocks()) * fs.getBlockSize() / (1 << 30)});
 			percent = 100 - (int) (fs.getAvailableBlocks() * 100 / fs.getBlockCount());
 		}
 		sizeProgress.setIndeterminate(false);
@@ -369,5 +422,5 @@ public class DownloadActivity extends BaseDownloadActivity {
 
 		messageTextView.setText(R.string.device_memory);
 	}
-	
+
 }

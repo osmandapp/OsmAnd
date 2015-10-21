@@ -7,8 +7,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/osmo_header_dark"
     android:orientation="vertical"
-    android:padding="8dp"
+    android:paddingBottom="@dimen/list_header_padding"
+    android:paddingLeft="@dimen/list_content_padding"
+    android:paddingRight="@dimen/list_content_padding"
+    android:paddingTop="@dimen/list_header_padding"
     tools:showIn="@layout/local_index_fragment_header">
 
     <LinearLayout

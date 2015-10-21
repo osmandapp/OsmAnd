@@ -347,8 +347,8 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 						group != null && group.getType() == DownloadResourceGroupType.REGION_MAPS) {
 					viewHolder.setShowTypeInName(true);
 					viewHolder.setShowTypeInDesc(false);
-				} else if(group != null && (group.getType() == DownloadResourceGroupType.SRTM_HEADER || 
-						group.getType() == DownloadResourceGroupType.HILLSHADE_HEADER)) {
+				} else if(group != null && (group.getType() == DownloadResourceGroupType.SRTM_HEADER
+						|| group.getType() == DownloadResourceGroupType.HILLSHADE_HEADER)) {
 					viewHolder.setShowTypeInName(false);
 					viewHolder.setShowTypeInDesc(false);
 				} else {

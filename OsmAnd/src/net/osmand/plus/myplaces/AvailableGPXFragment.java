@@ -1360,5 +1360,4 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 		v.findViewById(R.id.check_item).setVisibility(View.GONE);
 	}
-
 }

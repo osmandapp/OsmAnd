@@ -343,6 +343,4 @@ public class ItemViewHolder {
 	private Drawable getContentIcon(DownloadActivity context, int resourceId, int color) {
 		return context.getMyApplication().getIconsCache().getPaintedContentIcon(resourceId, color);
 	}
-
-	
 }
