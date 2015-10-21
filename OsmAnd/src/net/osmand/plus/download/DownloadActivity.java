@@ -78,18 +78,13 @@ public class DownloadActivity extends BaseDownloadActivity {
 		updateDescriptionTextWithSize(this, downloadProgressLayout);
 		int currentTab = DOWNLOAD_TAB_NUMBER;
 		String tab = getIntent() == null || getIntent().getExtras() == null ? null : getIntent().getExtras().getString(TAB_TO_OPEN);
-
 		if (tab != null) {
-			switch (tab) {
-				case DOWNLOAD_TAB:
-					currentTab = DOWNLOAD_TAB_NUMBER;
-					break;
-				case LOCAL_TAB:
-					currentTab = LOCAL_TAB_NUMBER;
-					break;
-				case UPDATES_TAB:
-					currentTab = UPDATES_TAB_NUMBER;
-					break;
+			if (tab.equals(DOWNLOAD_TAB)) {
+				currentTab = DOWNLOAD_TAB_NUMBER;
+			} else if (tab.equals(LOCAL_TAB)) {
+				currentTab = LOCAL_TAB_NUMBER;
+			} else if (tab.equals(UPDATES_TAB)) {
+				currentTab = UPDATES_TAB_NUMBER;
 			}
 		}
 
