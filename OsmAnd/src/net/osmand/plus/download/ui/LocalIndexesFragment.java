@@ -1060,7 +1060,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 					if (child.getSize() > 100) {
 						builder.append(DownloadActivity.formatMb.format(new Object[]{(float) child.getSize() / (1 << 10)}));
 					} else {
-						builder.append(child.getSize()).append(" kB");
+						builder.append(child.getSize()).append(" KB");
 					}
 					builder.append(" • ");
 				}
