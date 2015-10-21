@@ -214,7 +214,7 @@ public class LocalIndexHelper {
 		SRTM_DATA(R.string.local_indexes_cat_srtm, R.drawable.ic_plugin_srtm),
 		WIKI_DATA(R.string.local_indexes_cat_wiki, R.drawable.ic_plugin_wikipedia),
 		VOICE_DATA(R.string.local_indexes_cat_voice, R.drawable.ic_action_volume_up),
-		TTS_VOICE_DATA(R.string.local_indexes_cat_tts);
+		TTS_VOICE_DATA(R.string.local_indexes_cat_tts, R.drawable.ic_action_volume_up);
 //		AV_DATA(R.string.local_indexes_cat_av);;
 
 		@StringRes
