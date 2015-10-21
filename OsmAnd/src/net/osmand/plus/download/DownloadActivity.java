@@ -296,22 +296,25 @@ public class DownloadActivity extends BaseDownloadActivity {
 					|| application.getSettings().SHOULD_SHOW_FREE_VERSION_BANNER.get();
 
 			initFreeVersionBanner();
-			updateFreeVersionBanner();
 			updateBannerInProgress();
 
 			if (ctx.getCurrentTab() != UPDATES_TAB_NUMBER) {
 				downloadProgressLayout.setVisibility(View.VISIBLE);
 			}
 		}
-
+		
 		public void updateBannerInProgress() {
+			updateBannerInProgress(true);
+		}
+
+		public void updateBannerInProgress(boolean showSpace) {
 			BasicProgressAsyncTask<?, ?, ?, ?> basicProgressAsyncTask = ctx.getDownloadThread().getCurrentRunningTask();
 			final boolean isFinished = basicProgressAsyncTask == null
 					|| basicProgressAsyncTask.getStatus() == AsyncTask.Status.FINISHED;
 			if (isFinished) {
 				downloadProgressLayout.setOnClickListener(null);
 				updateDescriptionTextWithSize(ctx, downloadProgressLayout);
-				if (ctx.getCurrentTab() == UPDATES_TAB_NUMBER) {
+				if (ctx.getCurrentTab() == UPDATES_TAB_NUMBER || !showSpace) {
 					downloadProgressLayout.setVisibility(View.GONE);
 				}
 				updateFreeVersionBanner();
@@ -373,6 +376,7 @@ public class DownloadActivity extends BaseDownloadActivity {
 			});
 			laterButton.setOnClickListener(new ToggleCollapseFreeVersionBanner(freeVersionDescriptionTextView,
 					buttonsLinearLayout, freeVersionBannerTitle, application.getSettings()));
+			updateFreeVersionBanner();
 		}
 
 		private void updateFreeVersionBanner() {
