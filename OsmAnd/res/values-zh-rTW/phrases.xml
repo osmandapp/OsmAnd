@@ -1986,4 +1986,12 @@
 	<string name="poi_industrial_timber">類型：木材</string>
 	<string name="poi_industrial_refinery">類型：煉油廠</string>
 	<string name="poi_industrial_warehouse">類型：倉庫</string>
+	<string name="poi_industrial_auto_wrecker">類型：車輛報廢廠</string>
+	<string name="poi_industrial_agriculture">類型：農耕</string>
+	<string name="poi_industrial_brewery">類型：啤酒廠</string>
+	<string name="poi_industrial_brickyard">類型：磚廠</string>
+	<string name="poi_industrial_intermodal_freight_terminal">類型：貨櫃集裝場</string>
+	<string name="poi_industrial_sawmill">類型：鋸木廠</string>
+	<string name="poi_industrial_water_purification">類型：水淨化廠</string>
+	<string name="poi_industrial_port">類型：港埠</string>
 	</resources>
