@@ -31,8 +31,10 @@
 	<color name="list_item_dark_pressed">#be39464d</color>
 	<color name="bg_color_light">#fff</color>
 	<color name="bg_color_dark">#333b40</color>
-	
-	
+
+	<color name="fab_color">#ff8f00</color>
+	<color name="fab_color_pressed">#e58200</color>
+
 	<color name="map_widget_icon_color">#ff8f00</color>
 	<color name="map_widget_stroke">#4C000000</color>
 	<color name="map_widget_light">#fff</color>
