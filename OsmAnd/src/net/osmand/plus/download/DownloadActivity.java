@@ -60,6 +60,8 @@ public class DownloadActivity extends BaseDownloadActivity {
 
 	private BannerAndDownloadFreeVersion visibleBanner;
 	private ViewPager viewPager;
+	private String filter;
+	private String filterCat;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -76,18 +78,13 @@ public class DownloadActivity extends BaseDownloadActivity {
 		updateDescriptionTextWithSize(this, downloadProgressLayout);
 		int currentTab = DOWNLOAD_TAB_NUMBER;
 		String tab = getIntent() == null || getIntent().getExtras() == null ? null : getIntent().getExtras().getString(TAB_TO_OPEN);
-
 		if (tab != null) {
-			switch (tab) {
-				case DOWNLOAD_TAB:
-					currentTab = DOWNLOAD_TAB_NUMBER;
-					break;
-				case LOCAL_TAB:
-					currentTab = LOCAL_TAB_NUMBER;
-					break;
-				case UPDATES_TAB:
-					currentTab = UPDATES_TAB_NUMBER;
-					break;
+			if (tab.equals(DOWNLOAD_TAB)) {
+				currentTab = DOWNLOAD_TAB_NUMBER;
+			} else if (tab.equals(LOCAL_TAB)) {
+				currentTab = LOCAL_TAB_NUMBER;
+			} else if (tab.equals(UPDATES_TAB)) {
+				currentTab = UPDATES_TAB_NUMBER;
 			}
 		}
 
@@ -129,10 +126,9 @@ public class DownloadActivity extends BaseDownloadActivity {
 		visibleBanner = new BannerAndDownloadFreeVersion(findViewById(R.id.mainLayout), this);
 
 		final Intent intent = getIntent();
-		// FIXME INITIAL FILTER & INITIAL KEY
 		if (intent != null && intent.getExtras() != null) {
-			final String filter = intent.getExtras().getString(FILTER_KEY);
-			final String filterCat = intent.getExtras().getString(FILTER_CAT);
+			filter = intent.getExtras().getString(FILTER_KEY);
+			filterCat = intent.getExtras().getString(FILTER_CAT);
 		}
 	}
 
@@ -448,6 +444,17 @@ public class DownloadActivity extends BaseDownloadActivity {
 
 	}
 
+	public String getFilterAndClear() {
+		String res = filter;
+		filter = null;
+		return res;
+	}
+
+	public String getFilterCatAndClear() {
+		String res = filterCat;
+		filterCat = null;
+		return res;
+	}
 
 	@SuppressWarnings("deprecation")
 	public static void updateDescriptionTextWithSize(DownloadActivity activity, View view) {

@@ -60,7 +60,6 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						final Intent intent = new Intent(activity, app.getAppCustomization().getDownloadIndexActivity());
-						intent.putExtra(DownloadActivity.FILTER_KEY, app.getString(net.osmand.plus.R.string.index_item_world_seamarks));
 						intent.putExtra(DownloadActivity.TAB_TO_OPEN, DownloadActivity.DOWNLOAD_TAB);
 						activity.startActivity(intent);
 					}
