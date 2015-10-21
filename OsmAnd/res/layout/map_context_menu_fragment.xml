@@ -190,11 +190,11 @@
 
     <ImageView
         android:id="@+id/context_menu_fab_view"
-        android:layout_width="@dimen/map_button_size"
-        android:layout_height="@dimen/map_button_size"
+        android:layout_width="@dimen/fab_size_with_shadow"
+        android:layout_height="@dimen/fab_size_with_shadow"
         android:layout_gravity="right"
         android:layout_marginRight="12dp"
-        android:background="@drawable/btn_circle_blue"
+        android:background="@drawable/fab_background_style"
         android:scaleType="center"
         android:src="@drawable/map_directions"/>
 

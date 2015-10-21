@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
@@ -29,10 +30,11 @@ public class FavoriteImageDrawable extends Drawable {
 		this.resources = ctx.getResources();
 		this.color = color;
 		paintIcon = new Paint();
-		paintIcon.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN));
+		int col = color == 0 || color == Color.BLACK ? getResources().getColor(R.color.color_favorite) : color;
+		paintIcon.setColorFilter(new PorterDuffColorFilter(col, PorterDuff.Mode.SRC_IN));
 		paintBackground = new Paint();
-		favIcon = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.ic_action_fav_dark);
-		favBackground = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.map_white_shield);
+		favIcon = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.map_favorite);
+		favBackground = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.map_white_favorite_shield);
 	}
 
 	@Override
