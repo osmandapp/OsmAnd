@@ -35,7 +35,6 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -54,6 +53,7 @@ import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.myplaces.FavoritesActivity;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.io.File;
@@ -514,7 +514,8 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			public void onClick(DialogInterface dialog, int which) {
 				int clr = list.get(colorSpinner.getSelectedItemPosition());
 				String name = nameEditText.getText().toString();
-				if (clr != intColor || group.visible != checkBox.isChecked()) {
+				if (clr != intColor || group.visible != checkBox.isChecked() || 
+						!Algorithms.objectEquals(group.name, name)) {
 					getMyApplication().getFavorites().editFavouriteGroup(group, name, clr,
 							checkBox.isChecked());
 					favouritesAdapter.notifyDataSetInvalidated();

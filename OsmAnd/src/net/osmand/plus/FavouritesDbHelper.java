@@ -575,10 +575,19 @@ public class FavouritesDbHelper {
 			}	
 		}
 		if (!group.name.equals(newName)) {
-			FavoriteGroup gr = flatGroups.get(group.name);
-			group.name = newName;
+			FavoriteGroup gr = flatGroups.remove(group.name);
+			gr.name = newName;
+			FavoriteGroup renamedGroup = flatGroups.get(gr.name);
+			boolean existing = renamedGroup != null;
+			if(renamedGroup == null) {
+				renamedGroup = gr;
+				flatGroups.put(gr.name, gr);
+			}
 			for(FavouritePoint p : gr.points) {
 				p.setCategory(newName);
+				if(existing) {
+					renamedGroup.points.add(p);
+				}
 			}
 		}
 		saveCurrentPointsIntoFile();
