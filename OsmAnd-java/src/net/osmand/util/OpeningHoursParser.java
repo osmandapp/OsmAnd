@@ -727,11 +727,10 @@ public class OpeningHoursParser {
 			}
 			// check if valid
 			final OpeningHoursRule r1 = parseRule(r);
-			boolean rule = r1 instanceof UnparseableRule;
-			if (!rule) {
-				return null;
+			boolean rule = r1 instanceof BasicOpeningHourRule;
+			if (rule) {
+				rs.addRule(r1);
 			}
-			rs.addRule(r1);
 		}
 		return rs;
 	}
