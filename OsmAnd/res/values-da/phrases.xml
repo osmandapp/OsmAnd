@@ -2251,4 +2251,19 @@
 
 <string name="poi_cairn">Varde</string>
 
+<string name="poi_memorial_fassade_decoration">Fassade dekoration</string>
+	<string name="poi_defibrillator">Defibrillator</string>
+	<string name="poi_defibrillator_yes">Defibrillator: Ja</string>
+
+	<string name="poi_tomb_war_grave">Type: krigsgrav</string>
+	<string name="poi_tomb_tumulus">Type: gravhøj</string>
+	<string name="poi_tomb_rock_cut">Type: udhugget i sten</string>
+	<string name="poi_tomb_hypogeum">Type: hypogeum</string>
+	<string name="poi_tomb_vault">Type: hvælving</string>
+	<string name="poi_tomb_columbarium">Type: columbarium</string>
+	<string name="poi_tomb_mausoleum">Type: mausoleum</string>
+	<string name="poi_tomb_sarcophagus">Type: sarkofag</string>
+	<string name="poi_tomb_crypt">Type: krypt</string>
+	<string name="poi_tomb_pyramid">Type: pyramide</string>
+
 </resources>
