@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/widget_bg"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -60,7 +61,7 @@
                 android:layout_gravity="bottom"
                 android:maxLines="1"
                 android:minWidth="10dp"
-                android:text="1048"
+                tools:text="1048"
                 android:textColor="@color/color_white"
                 android:textSize="@dimen/map_widget_text_size" />
 
@@ -71,7 +72,7 @@
                 android:layout_gravity="bottom"
                 android:maxLines="1"
                 android:minWidth="10dp"
-                android:text="1048"
+                tools:text="1048"
                 android:textColor="@color/color_black"
                 android:textSize="@dimen/map_widget_text_size" />
         </FrameLayout>
@@ -89,7 +90,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
-                android:text="km"
+                tools:text="km"
                 android:textColor="@color/color_white"
                 android:textSize="@dimen/map_widget_text_size_small" />
             
@@ -98,7 +99,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
-                android:text="km"
+                tools:text="km"
                 android:textColor="@color/color_black"
                 android:textSize="@dimen/map_widget_text_size_small" />
         </FrameLayout>
