@@ -2205,4 +2205,19 @@
 
 	<string name="poi_cairn">Cairn</string>
 
+	<string name="poi_memorial_fassade_decoration">Fassade decoration</string>
+	<string name="poi_defibrillator">Defibrillator</string>
+	<string name="poi_defibrillator_yes">Defibrillator: yes</string>
+
+	<string name="poi_tomb_war_grave">Type: war grave</string>
+	<string name="poi_tomb_tumulus">Type: tumulus</string>
+	<string name="poi_tomb_rock_cut">Type: rock-cut</string>
+	<string name="poi_tomb_hypogeum">Type: hypogeum</string>
+	<string name="poi_tomb_vault">Type: vault</string>
+	<string name="poi_tomb_columbarium">Type: columbarium</string>
+	<string name="poi_tomb_mausoleum">Type: mausoleum</string>
+	<string name="poi_tomb_sarcophagus">Type: sarcophagus</string>
+	<string name="poi_tomb_crypt">Type: crypt</string>
+	<string name="poi_tomb_pyramid">Type: pyramid</string>
+
 </resources>
