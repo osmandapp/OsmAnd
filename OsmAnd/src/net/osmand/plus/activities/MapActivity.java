@@ -147,8 +147,7 @@ public class MapActivity extends AccessibleActivity {
 //		notification.setLatestEventInfo(this, Version.getAppName(app), getString(R.string.go_back_to_osmand),
 //				pi);
 		int smallIcon = app.getSettings().getApplicationMode().getSmallIconDark();
-		final Builder noti = new NotificationCompat.Builder(
-				this).setContentTitle(Version.getAppName(app))
+		final Builder noti = new NotificationCompat.Builder(this).setContentTitle(Version.getAppName(app))
 				.setContentText(getString(R.string.go_back_to_osmand))
 				.setSmallIcon(smallIcon)
 //	        .setLargeIcon(Helpers.getBitmap(R.drawable.mirakel, getBaseContext()))

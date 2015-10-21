@@ -1,6 +1,10 @@
 package net.osmand.plus.download;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -11,13 +15,14 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.NotificationCompat;
+import android.support.v7.app.NotificationCompat.Builder;
 import android.text.method.LinkMovementMethod;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import net.osmand.IProgress;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.OsmandApplication;
@@ -25,6 +30,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.LocalIndexInfo;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
@@ -190,6 +196,7 @@ public class DownloadActivity extends BaseDownloadActivity {
 		}
 	}
 
+	
 
 	@Override
 	@UiThread
