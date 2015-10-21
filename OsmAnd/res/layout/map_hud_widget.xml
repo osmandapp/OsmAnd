@@ -60,6 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:maxLines="1"
+                android:singleLine="true" 
                 android:minWidth="10dp"
                 tools:text="1048"
                 android:textColor="@color/color_white"
@@ -71,6 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:maxLines="1"
+                android:singleLine="true" 
                 android:minWidth="10dp"
                 tools:text="1048"
                 android:textColor="@color/color_black"
@@ -90,6 +92,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
+                android:singleLine="true" 
                 tools:text="km"
                 android:textColor="@color/color_white"
                 android:textSize="@dimen/map_widget_text_size_small" />
@@ -99,6 +102,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
+                android:singleLine="true" 
                 tools:text="km"
                 android:textColor="@color/color_black"
                 android:textSize="@dimen/map_widget_text_size_small" />
