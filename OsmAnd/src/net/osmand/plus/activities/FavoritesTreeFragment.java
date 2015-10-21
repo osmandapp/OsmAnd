@@ -514,10 +514,13 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			public void onClick(DialogInterface dialog, int which) {
 				int clr = list.get(colorSpinner.getSelectedItemPosition());
 				String name = nameEditText.getText().toString();
-				if (clr != intColor || group.visible != checkBox.isChecked() || 
-						!Algorithms.objectEquals(group.name, name)) {
+				boolean nameChanged = !Algorithms.objectEquals(group.name, name);
+				if (clr != intColor || group.visible != checkBox.isChecked() || nameChanged) {
 					getMyApplication().getFavorites().editFavouriteGroup(group, name, clr,
 							checkBox.isChecked());
+					if(nameChanged) {
+						favouritesAdapter.synchronizeGroups();
+					}
 					favouritesAdapter.notifyDataSetInvalidated();
 				}
 
