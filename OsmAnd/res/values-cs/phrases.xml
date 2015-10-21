@@ -341,7 +341,7 @@
 	<string name="poi_fuel_e10">E10 (10% Bioetanol)</string>
 	<string name="poi_fuel_e20">E20 (20% Etanol)</string>
 	<string name="poi_fuel_e85">E85 - (85% Etanol)</string>
-	<string name="poi_fuel_biogas">E85 - (85% Etanol)</string>
+	<string name="poi_fuel_biogas">Etanol</string>
 	<string name="poi_fuel_lh2">Kapalný vodík</string>
 	<string name="poi_fuel_electricity">Nabíjení</string>
 	<string name="poi_vehicle_ramp">Servisní rampa</string>
