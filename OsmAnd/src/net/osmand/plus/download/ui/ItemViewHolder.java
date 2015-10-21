@@ -1,26 +1,34 @@
 package net.osmand.plus.download.ui;
 
+import java.io.File;
 import java.text.DateFormat;
 
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
+import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadResourceGroup;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.download.ui.LocalIndexesFragment.LocalIndexOperationTask;
+import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import android.annotation.SuppressLint;
+import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.PopupMenu;
 import android.util.TypedValue;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -137,8 +145,7 @@ public class ItemViewHolder {
 		}
 		int color = textColorSecondary;
 		if(indexItem.isDownloaded() && !isDownloading) {
-			int colorId = indexItem.getType() != DownloadActivityType.HILLSHADE_FILE &&
-					indexItem.isOutdated() ? R.color.color_distance : R.color.color_ok;
+			int colorId = indexItem.isOutdated() ? R.color.color_distance : R.color.color_ok;
 			color = context.getResources().getColor(colorId);
 		}
 		if (indexItem.isDownloaded()) {
@@ -170,14 +177,7 @@ public class ItemViewHolder {
 				descrTextView.setText(indexItem.getSizeDescription(context) + " • " + 
 						(showRemoteDate ? indexItem.getRemoteDate(dateFormat) : indexItem.getLocalDate(dateFormat)));
 			}
-			
-			rightImageButton.setImageDrawable(getContentIcon(context, R.drawable.ic_action_import));
-			rightImageButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					download(indexItem, parentOptional);
-				}
-			});
+
 		} else {
 			progressBar.setVisibility(View.VISIBLE);
 			progressBar.setIndeterminate(progress == -1);
@@ -201,17 +201,6 @@ public class ItemViewHolder {
 				descrTextView.setVisibility(View.GONE);
 			}
 			
-			rightImageButton.setImageDrawable(getContentIcon(context, R.drawable.ic_action_remove_dark));
-			rightImageButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					if (silentCancelDownload) {
-						context.getDownloadThread().cancelDownload(indexItem);
-					} else {
-						context.makeSureUserCancelDownload(indexItem);
-					}
-				}
-			});
 		}
 	}
 
@@ -249,17 +238,27 @@ public class ItemViewHolder {
 		builder.show();
 	}
 
-	private boolean checkDisabledAndClickAction(final IndexItem indexItem) {
-		RightButtonAction clickAction = getClickAction(indexItem);
+	private boolean checkDisabledAndClickAction(final IndexItem item) {
+		RightButtonAction clickAction = getClickAction(item);
 		boolean disabled = clickAction != RightButtonAction.DOWNLOAD;
+		OnClickListener action = getRightButtonAction(item, clickAction, null);
 		if (clickAction != RightButtonAction.DOWNLOAD) {
 			rightButton.setText(R.string.get_plugin);
 			rightButton.setVisibility(View.VISIBLE);
 			rightImageButton.setVisibility(View.GONE);
-			rightButton.setOnClickListener(getRightButtonAction(indexItem, clickAction, null));
+			rightButton.setOnClickListener(action);
 		} else {
 			rightButton.setVisibility(View.GONE);
 			rightImageButton.setVisibility(View.VISIBLE);
+			final boolean isDownloading = context.getDownloadThread().isDownloading(item);
+			if (isDownloading) {
+				rightImageButton.setImageDrawable(getContentIcon(context, R.drawable.ic_action_remove_dark));
+			} else if(item.isDownloaded() && !item.isOutdated()) {
+				rightImageButton.setImageDrawable(getContentIcon(context, R.drawable.ic_overflow_menu_white));
+			} else {
+				rightImageButton.setImageDrawable(getContentIcon(context, R.drawable.ic_action_import));
+			}
+			rightImageButton.setOnClickListener(action);
 		}
 		
 		return disabled;
@@ -328,12 +327,69 @@ public class ItemViewHolder {
 						} else {
 							context.makeSureUserCancelDownload(item);
 						}
+					} else if(item.isDownloaded() && !item.isOutdated()){
+						contextMenu(v, item, parentOptional);
 					} else {
 						download(item, parentOptional);
 					}
 				}
 			};
 		}
+	}
+
+	protected void contextMenu(View v, final IndexItem indexItem, final DownloadResourceGroup parentOptional) {
+		final PopupMenu optionsMenu = new PopupMenu(context, v);
+		MenuItem item;
+		
+		final File fl = indexItem.getTargetFile(context.getMyApplication());
+		if (fl.exists()) {
+			item = optionsMenu.getMenu().add(R.string.shared_string_delete).setIcon(
+							context.getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_remove_dark));
+			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+				@Override
+				public boolean onMenuItemClick(MenuItem item) {
+					LocalIndexType tp = LocalIndexType.MAP_DATA;
+					if (indexItem.getType() == DownloadActivityType.HILLSHADE_FILE) {
+						tp = LocalIndexType.TILES_DATA;
+					} else if (indexItem.getType() == DownloadActivityType.ROADS_FILE) {
+						tp = LocalIndexType.MAP_DATA;
+					} else if (indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE) {
+						tp = LocalIndexType.SRTM_DATA;
+					} else if (indexItem.getType() == DownloadActivityType.WIKIPEDIA_FILE) {
+						tp = LocalIndexType.MAP_DATA;
+					} else if (indexItem.getType() == DownloadActivityType.VOICE_FILE) {
+						tp = indexItem.getBasename().contains("tts") ? LocalIndexType.TTS_VOICE_DATA
+								: LocalIndexType.VOICE_DATA;
+					}
+					final LocalIndexInfo info = new LocalIndexInfo(tp, fl, false);
+					Builder confirm = new Builder(context);
+					confirm.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							new LocalIndexOperationTask(context, null, LocalIndexOperationTask.DELETE_OPERATION)
+									.execute(info);
+						}
+					});
+					confirm.setNegativeButton(R.string.shared_string_no, null);
+					String fn = FileNameTranslationHelper.getFileName(context, context.getMyApplication().getRegions(),
+							indexItem.getVisibleName(context, context.getMyApplication().getRegions()));
+					confirm.setMessage(context.getString(R.string.delete_confirmation_msg, fn));
+					confirm.show();
+					return true;
+				}
+			});
+		}
+		item = optionsMenu.getMenu().add(R.string.shared_string_download)
+				.setIcon(context.getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_import));
+		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				download(indexItem, parentOptional);
+				return true;
+			}
+		});
+		
+		optionsMenu.show();
 	}
 
 	private Drawable getContentIcon(DownloadActivity context, int resourceId) {

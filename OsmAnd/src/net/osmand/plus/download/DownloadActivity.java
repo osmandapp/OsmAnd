@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import net.osmand.IProgress;
+import net.osmand.access.AccessibleToast;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -36,6 +38,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class DownloadActivity extends BaseDownloadActivity {
 	private List<LocalIndexInfo> localIndexInfos = new ArrayList<>();
@@ -344,6 +347,44 @@ public class DownloadActivity extends BaseDownloadActivity {
 				freeVersionBannerTitle.setVisibility(View.VISIBLE);
 			}
 		}
+	}
+	
+	public void reloadLocalIndexes() {
+		AsyncTask<Void, String, List<String>> task = new AsyncTask<Void, String, List<String>>() {
+			@Override
+			protected void onPreExecute() {
+				super.onPreExecute();
+				setSupportProgressBarIndeterminateVisibility(true);
+			}
+
+			@Override
+			protected List<String> doInBackground(Void... params) {
+				return getMyApplication().getResourceManager().reloadIndexes(IProgress.EMPTY_PROGRESS,
+						new ArrayList<String>()
+				);
+			}
+
+			@Override
+			protected void onPostExecute(List<String> warnings) {
+				setSupportProgressBarIndeterminateVisibility(false);
+				if (!warnings.isEmpty()) {
+					final StringBuilder b = new StringBuilder();
+					boolean f = true;
+					for (String w : warnings) {
+						if (f) {
+							f = false;
+						} else {
+							b.append('\n');
+						}
+						b.append(w);
+					}
+					AccessibleToast.makeText(DownloadActivity.this, b.toString(), Toast.LENGTH_LONG).show();
+				}
+				newDownloadIndexes();
+			}
+		};
+		task.execute();
+
 	}
 
 
