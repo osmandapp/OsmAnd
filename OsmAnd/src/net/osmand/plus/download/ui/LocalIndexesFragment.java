@@ -1032,7 +1032,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 				if (child.isBackupedData()) {
 					icon.setImageDrawable(backup);
 				} else {
-					icon.setImageDrawable(sdcard);
+					icon.setImageDrawable(getContentIcon(ctx, child.getType().getIconResource()));
 				}
 
 				nameTextView.setText(getNameToDisplay(child));
@@ -1050,6 +1050,12 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 					nameTextView.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 				}
 				StringBuilder builder = new StringBuilder();
+
+				final String mapDescription = getMapDescription(child.getFileName());
+				if (mapDescription.length() > 0) {
+					builder.append(mapDescription).append(" • ");
+				}
+
 				if (child.getSize() >= 0) {
 					if (child.getSize() > 100) {
 						builder.append(DownloadActivity.formatMb.format(new Object[]{(float) child.getSize() / (1 << 10)}));
@@ -1057,11 +1063,6 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 						builder.append(child.getSize()).append(" kB");
 					}
 					builder.append(" • ");
-				}
-
-				final String mapDescription = getMapDescription(child.getFileName());
-				if (mapDescription.length() > 0) {
-					builder.append(mapDescription).append(" • ");
 				}
 
 				if (child.getType() == LocalIndexType.TILES_DATA) {
@@ -1091,6 +1092,10 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 					options.setVisibility(View.VISIBLE);
 					icon.setVisibility(View.VISIBLE);
 				}
+			}
+
+			private Drawable getContentIcon(DownloadActivity context, int resourceId) {
+				return context.getMyApplication().getIconsCache().getContentIcon(resourceId);
 			}
 		}
 

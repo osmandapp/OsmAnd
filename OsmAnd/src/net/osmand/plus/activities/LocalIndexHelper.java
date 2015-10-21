@@ -20,6 +20,8 @@ import net.osmand.plus.voice.MediaCommandPlayerImpl;
 import net.osmand.plus.voice.TTSCommandPlayerImpl;
 import android.content.Context;
 import android.os.Build;
+import android.support.annotation.DrawableRes;
+import android.support.annotation.StringRes;
 
 
 public class LocalIndexHelper {
@@ -38,11 +40,12 @@ public class LocalIndexHelper {
 	}
 	
 	public String getInstalledDateEdition(long t, TimeZone timeZone){
-		return app.getString(R.string.local_index_installed) + ": " + app.getResourceManager().getDateFormat().format(new Date(t));
+		return app.getString(R.string.local_index_installed) + ": " + android.text.format.DateFormat.getMediumDateFormat(app)
+				.format(new Date(t));
 	}
 
 	public String getInstalledDate(long t, TimeZone timeZone){
-		return app.getResourceManager().getDateFormat().format(new Date(t));
+		return android.text.format.DateFormat.getMediumDateFormat(app).format(new Date(t));
 	}
 
 	public void updateDescription(LocalIndexInfo info){
@@ -208,20 +211,31 @@ public class LocalIndexHelper {
 	public enum LocalIndexType {
 		MAP_DATA(R.string.local_indexes_cat_map),
 		TILES_DATA(R.string.local_indexes_cat_tile),
-		SRTM_DATA(R.string.local_indexes_cat_srtm),
-		WIKI_DATA(R.string.local_indexes_cat_wiki),
-		VOICE_DATA(R.string.local_indexes_cat_voice),
+		SRTM_DATA(R.string.local_indexes_cat_srtm, R.drawable.ic_plugin_srtm),
+		WIKI_DATA(R.string.local_indexes_cat_wiki, R.drawable.ic_plugin_wikipedia),
+		VOICE_DATA(R.string.local_indexes_cat_voice, R.drawable.ic_action_volume_up),
 		TTS_VOICE_DATA(R.string.local_indexes_cat_tts);
 //		AV_DATA(R.string.local_indexes_cat_av);;
-		
-		private final int resId;
 
-		private LocalIndexType(int resId){
+		@StringRes
+		private final int resId;
+		@DrawableRes
+		private int iconResource;
+
+		private LocalIndexType(@StringRes int resId, @DrawableRes int iconResource){
 			this.resId = resId;
-			
+			this.iconResource = iconResource;
+		}
+
+		private LocalIndexType(@StringRes int resId){
+			this.resId = resId;
+			this.iconResource = R.drawable.ic_map;
 		}
 		public String getHumanString(Context ctx){
 			return ctx.getString(resId);
+		}
+		public int getIconResource() {
+			return iconResource;
 		}
 	}
 	

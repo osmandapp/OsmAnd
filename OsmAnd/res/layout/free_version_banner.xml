@@ -5,6 +5,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:osmand="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:theme="@style/FreeVersionBanner"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/osmo_header_dark"
