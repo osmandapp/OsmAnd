@@ -325,7 +325,13 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 			}
 
 			private void processGroup(DownloadResourceGroup group, List<Object> filter, List<List<String>> conds) {
-				String name = group.getName(ctx).toLowerCase();
+				String name = null;
+				if (group.getRegion() != null && group.getRegion().getSearchText() != null) {
+					name = group.getRegion().getSearchText().toLowerCase();
+				}
+				if (name == null) {
+					name = group.getName(ctx).toLowerCase();
+				}
 				if (group.getType().isScreen() && group.getParentGroup() != null
 						&& group.getParentGroup().getParentGroup() != null
 						&& group.getParentGroup().getParentGroup().getType() != DownloadResourceGroupType.WORLD
