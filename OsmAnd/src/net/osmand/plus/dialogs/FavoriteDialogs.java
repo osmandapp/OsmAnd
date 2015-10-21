@@ -22,6 +22,7 @@ import android.widget.Toast;
 import net.osmand.AndroidUtils;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.FavouritePoint;
+import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
@@ -57,8 +58,10 @@ public class FavoriteDialogs {
 				}
 				FavouritePoint point = (FavouritePoint) args.getSerializable(KEY_FAVORITE);
 				if (helper.editFavourite(fp, point.getLatitude(), point.getLongitude())) {
-					AccessibleToast.makeText(activity, activity.getString(R.string.fav_points_edited),
-							Toast.LENGTH_SHORT).show();
+					if (activity instanceof MapActivity) {
+						((MapActivity) activity).getContextMenu()
+								.show(new LatLon(point.getLatitude(), point.getLongitude()), fp.getPointDescription(), fp);
+					}
 				}
 				if (activity instanceof MapActivity) {
 					((MapActivity) activity).getMapView().refreshMap();
