@@ -425,6 +425,8 @@ public class DownloadIndexesThread {
 								warn += " " + wn;
 							}
 							filesToReindex.clear();
+							// slow down but let update all button work properly
+							indexes.updateFilesToUpdate();;
 						}
 					}
 				} finally {
