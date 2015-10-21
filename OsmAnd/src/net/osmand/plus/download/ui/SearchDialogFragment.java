@@ -33,6 +33,7 @@ import net.osmand.plus.download.DownloadResourceGroup;
 import net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -181,6 +182,9 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 	public void onResume() {
 		super.onResume();
 		search.setIconified(false);
+		if (!Algorithms.isEmpty(searchText)) {
+			search.setQuery(searchText, true);
+		}
 	}
 
 	public void updateSearchText(String searchText) {

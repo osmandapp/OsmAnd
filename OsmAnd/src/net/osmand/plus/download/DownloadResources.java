@@ -202,11 +202,7 @@ public class DownloadResources extends DownloadResourceGroup {
 		DownloadResourceGroup voiceScreenTTS = new DownloadResourceGroup(voiceGroup, DownloadResourceGroupType.VOICE_TTS);
 		DownloadResourceGroup voiceRec = new DownloadResourceGroup(voiceGroup, DownloadResourceGroupType.VOICE_HEADER_REC);
 		DownloadResourceGroup voiceTTS = new DownloadResourceGroup(voiceGroup, DownloadResourceGroupType.VOICE_HEADER_TTS);
-		voiceScreenTTS.addGroup(voiceTTS);
-		voiceScreenRec.addGroup(voiceRec);
-		voiceGroup.addGroup(voiceScreenRec);
-		voiceGroup.addGroup(voiceScreenTTS);
-		
+
 		DownloadResourceGroup worldMaps = new DownloadResourceGroup(this, DownloadResourceGroupType.WORLD_MAPS);
 		Map<WorldRegion, List<IndexItem> > groupByRegion = new LinkedHashMap<WorldRegion, List<IndexItem>>();
 		
@@ -279,7 +275,13 @@ public class DownloadResources extends DownloadResourceGroup {
 		if (otherMaps.size() > 0) {
 			addGroup(otherMapsGroup);
 		}
+
+		voiceScreenTTS.addGroup(voiceTTS);
+		voiceScreenRec.addGroup(voiceRec);
+		voiceGroup.addGroup(voiceScreenRec);
+		voiceGroup.addGroup(voiceScreenTTS);
 		addGroup(voiceGroup);
+
 		createHillshadeSRTMGroups();
 		trimEmptyGroups();
 		initAlreadyLoadedFiles();

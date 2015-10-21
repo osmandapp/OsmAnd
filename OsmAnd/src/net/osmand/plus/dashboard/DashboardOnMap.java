@@ -577,7 +577,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 				hideDashboard(false);
 				final Intent intent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization()
 						.getDownloadIndexActivity());
-				intent.putExtra(DownloadActivity.FILTER_KEY, f);
+				if (f != null && !f.equals("basemap")) {
+					intent.putExtra(DownloadActivity.FILTER_KEY, f);
+				}
 				intent.putExtra(DownloadActivity.TAB_TO_OPEN, DownloadActivity.DOWNLOAD_TAB);
 				mapActivity.startActivity(intent);
 			}
