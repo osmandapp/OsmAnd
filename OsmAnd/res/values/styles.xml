@@ -137,6 +137,11 @@
         <item name="colorAccent">@color/color_white</item>
     </style>
 
+    <style name="FreeVersionBanner" parent="OsmandDarkTheme">
+        <item name="android:textColorSecondary">@color/color_white</item>
+        <item name="colorAccent">@color/map_widget_blue</item>
+    </style>
+
     <style name="OsmandDarkTheme" parent="Theme.AppCompat">
         <item name="list_divider">@color/list_divider_light</item>
         <item name="expandable_category_color">?android:attr/colorBackground</item>

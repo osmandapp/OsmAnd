@@ -124,6 +124,10 @@ public class DownloadResources extends DownloadResourceGroup {
 
 	protected void updateFilesToUpdate() {
 		initAlreadyLoadedFiles();
+		recalculateFilesToUpdate();
+	}
+
+	private void recalculateFilesToUpdate() {
 		List<IndexItem> stillUpdate = new ArrayList<IndexItem>();
 		for (IndexItem item : itemsToUpdate) {
 			String sfName = item.getTargetFileName();

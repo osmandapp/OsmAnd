@@ -2,6 +2,7 @@ package net.osmand.plus.activities;
 
 
 import java.io.File;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -20,13 +21,13 @@ import net.osmand.plus.voice.MediaCommandPlayerImpl;
 import net.osmand.plus.voice.TTSCommandPlayerImpl;
 import android.content.Context;
 import android.os.Build;
+import android.support.annotation.DrawableRes;
+import android.support.annotation.StringRes;
 
 
 public class LocalIndexHelper {
 		
 	private final OsmandApplication app;
-	
-
 
 	public LocalIndexHelper(OsmandApplication app){
 		this.app = app;
@@ -38,11 +39,11 @@ public class LocalIndexHelper {
 	}
 	
 	public String getInstalledDateEdition(long t, TimeZone timeZone){
-		return app.getString(R.string.local_index_installed) + ": " + app.getResourceManager().getDateFormat().format(new Date(t));
+		return android.text.format.DateFormat.getMediumDateFormat(app).format(new Date(t));
 	}
 
 	public String getInstalledDate(long t, TimeZone timeZone){
-		return app.getResourceManager().getDateFormat().format(new Date(t));
+		return android.text.format.DateFormat.getMediumDateFormat(app).format(new Date(t));
 	}
 
 	public void updateDescription(LocalIndexInfo info){
@@ -50,7 +51,12 @@ public class LocalIndexHelper {
 		if(info.getType() == LocalIndexType.MAP_DATA){
 			Map<String, String> ifns = app.getResourceManager().getIndexFileNames();
 			if(ifns.containsKey(info.getFileName())) {
-				info.setDescription(ifns.get(info.getFileName()));
+				try {
+					Date dt = app.getResourceManager().getDateFormat().parse(ifns.get(info.getFileName()));
+					info.setDescription(getInstalledDate(dt.getTime(), null));
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
 			} else {
 				info.setDescription(getInstalledDate(f));
 			}
@@ -199,29 +205,35 @@ public class LocalIndexHelper {
 			}
 		}
 	}
-	
-	
-
-	
-
 
 	public enum LocalIndexType {
 		MAP_DATA(R.string.local_indexes_cat_map),
 		TILES_DATA(R.string.local_indexes_cat_tile),
-		SRTM_DATA(R.string.local_indexes_cat_srtm),
-		WIKI_DATA(R.string.local_indexes_cat_wiki),
-		VOICE_DATA(R.string.local_indexes_cat_voice),
-		TTS_VOICE_DATA(R.string.local_indexes_cat_tts);
+		SRTM_DATA(R.string.local_indexes_cat_srtm, R.drawable.ic_plugin_srtm),
+		WIKI_DATA(R.string.local_indexes_cat_wiki, R.drawable.ic_plugin_wikipedia),
+		VOICE_DATA(R.string.local_indexes_cat_voice, R.drawable.ic_action_volume_up),
+		TTS_VOICE_DATA(R.string.local_indexes_cat_tts, R.drawable.ic_action_volume_up);
 //		AV_DATA(R.string.local_indexes_cat_av);;
-		
-		private final int resId;
 
-		private LocalIndexType(int resId){
+		@StringRes
+		private final int resId;
+		@DrawableRes
+		private int iconResource;
+
+		private LocalIndexType(@StringRes int resId, @DrawableRes int iconResource){
 			this.resId = resId;
-			
+			this.iconResource = iconResource;
+		}
+
+		private LocalIndexType(@StringRes int resId){
+			this.resId = resId;
+			this.iconResource = R.drawable.ic_map;
 		}
 		public String getHumanString(Context ctx){
 			return ctx.getString(resId);
+		}
+		public int getIconResource() {
+			return iconResource;
 		}
 	}
 	
