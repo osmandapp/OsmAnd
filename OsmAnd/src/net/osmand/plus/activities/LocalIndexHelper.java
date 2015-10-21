@@ -2,6 +2,7 @@ package net.osmand.plus.activities;
 
 
 import java.io.File;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -27,8 +28,6 @@ import android.support.annotation.StringRes;
 public class LocalIndexHelper {
 		
 	private final OsmandApplication app;
-	
-
 
 	public LocalIndexHelper(OsmandApplication app){
 		this.app = app;
@@ -40,8 +39,7 @@ public class LocalIndexHelper {
 	}
 	
 	public String getInstalledDateEdition(long t, TimeZone timeZone){
-		return app.getString(R.string.local_index_installed) + ": " + android.text.format.DateFormat.getMediumDateFormat(app)
-				.format(new Date(t));
+		return android.text.format.DateFormat.getMediumDateFormat(app).format(new Date(t));
 	}
 
 	public String getInstalledDate(long t, TimeZone timeZone){
@@ -53,7 +51,12 @@ public class LocalIndexHelper {
 		if(info.getType() == LocalIndexType.MAP_DATA){
 			Map<String, String> ifns = app.getResourceManager().getIndexFileNames();
 			if(ifns.containsKey(info.getFileName())) {
-				info.setDescription(ifns.get(info.getFileName()));
+				try {
+					Date dt = app.getResourceManager().getDateFormat().parse(ifns.get(info.getFileName()));
+					info.setDescription(getInstalledDate(dt.getTime(), null));
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
 			} else {
 				info.setDescription(getInstalledDate(f));
 			}
@@ -202,11 +205,6 @@ public class LocalIndexHelper {
 			}
 		}
 	}
-	
-	
-
-	
-
 
 	public enum LocalIndexType {
 		MAP_DATA(R.string.local_indexes_cat_map),
