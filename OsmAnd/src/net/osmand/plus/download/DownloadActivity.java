@@ -76,7 +76,8 @@ public class DownloadActivity extends BaseDownloadActivity {
 		updateDescriptionTextWithSize(this, downloadProgressLayout);
 		int currentTab = 0;
 		String tab = getIntent() == null || getIntent().getExtras() == null ? null : getIntent().getExtras().getString(TAB_TO_OPEN);
-		switch (tab) {
+		if (tab != null) {
+			switch (tab) {
 			case DOWNLOAD_TAB:
 				currentTab = DOWNLOAD_TAB_NUMBER;
 				break;
@@ -86,6 +87,7 @@ public class DownloadActivity extends BaseDownloadActivity {
 			case UPDATES_TAB:
 				currentTab = UPDATES_TAB_NUMBER;
 				break;
+			}
 		}
 
 		viewPager = (ViewPager) findViewById(R.id.pager);
