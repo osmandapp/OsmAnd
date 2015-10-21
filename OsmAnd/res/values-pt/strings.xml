@@ -1929,4 +1929,31 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="rendering_attr_showCycleRoutes_name">Mostrar rotas para bicicletas</string>
     <string name="rendering_attr_hideBuildings_name">Ocultar edifícios</string>
     <string name="rendering_attr_trolleybusRoutes_name">Rotas de trólebus</string>
+    <string name="favorite_category_dublicate_message">O nome escolhido já existe nessa categoria. Por favor, defina outro nome.</string>
+    <string name="favorite_category_name">Nome da Categoria</string>
+    <string name="favorite_category_add_new_title">Adicionar nova Categoria</string>
+    <string name="regions">Regiões</string>
+    <string name="region_maps">Mapas de Regiões</string>
+    <string name="world_maps">Mapas Mundiais</string>
+    <string name="hillshade_layer_disabled">Camada de Sombra de colinas desligada</string>
+    <string name="srtm_plugin_disabled">Curvas de Nível desligadas</string>
+    <string name="favorite_category_add_new">Adicionar novo</string>
+    <string name="favorite_category_select">Seleccionar Categoria</string>
+    <string name="default_speed_system_descr">Definir unidades de medida para velocidade</string>
+    <string name="default_speed_system">Unidades de medida para velocidade</string>
+    <string name="si_nm">Milhas Náuticas</string>
+    <string name="si_kmh">Quilómetros por Hora</string>
+    <string name="si_mph">Milhas por Hora</string>
+    <string name="si_m_s">Metros por Segundo</string>
+    <string name="si_min_km">Minutos por Quilómetro</string>
+    <string name="si_min_m">Minutos por Milha</string>
+    <string name="si_nm_h">Milhas náuticas por hora (nó)</string>
+    <string name="nm_h">mn/h</string>
+    <string name="min_mile">min/m</string>
+    <string name="min_km">min/km</string>
+    <string name="m_s">m/s</string>
+    
+    <string name="shared_string_trip_recording">Gravar Viagem</string>
+    <string name="shared_string_navigation">Navegação</string>
+    <string name="nm">mn</string>
     </resources>
