@@ -151,7 +151,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 	@Override
 	public void newDownloadIndexes() {
 		if(banner != null) {
-			banner.updateBannerInProgress();
+			banner.updateBannerInProgress(false);
 		}
 		updateSearchText(searchText);
 	}
@@ -159,7 +159,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 	@Override
 	public void downloadHasFinished() {
 		if(banner != null) {
-			banner.updateBannerInProgress();
+			banner.updateBannerInProgress(false);
 		}
 		listAdapter.notifyDataSetChanged();
 	}
@@ -167,7 +167,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 	@Override
 	public void downloadInProgress() {
 		if(banner != null) {
-			banner.updateBannerInProgress();
+			banner.updateBannerInProgress(false);
 		}
 		listAdapter.notifyDataSetChanged();
 	}
