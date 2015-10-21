@@ -242,10 +242,10 @@
   <string name="index_name_france">Európa - Francúzsko</string>
   <string name="index_name_germany">Európa - Nemecko</string>
   <string name="index_name_europe">Európa</string>
-  <string name="index_name_russia">Európa/Ázia - Rusko</string>
+  <string name="index_name_russia">Rusko</string>
   <string name="index_name_africa">Afrika</string>
   <string name="index_name_asia">Ázia</string>
-  <string name="index_name_oceania">Oceánia</string>
+  <string name="index_name_oceania">Austrália a Oceánia</string>
   <string name="index_name_other">Celosvetové a tematické mapy</string>
   <string name="index_name_wiki">Celosvetové body z Wikipedie</string>
   <string name="index_name_voice">Hlasové povely (nahrávky, obmedzená funkcionalita)</string>

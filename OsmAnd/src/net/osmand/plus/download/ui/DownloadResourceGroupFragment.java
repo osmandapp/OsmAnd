@@ -25,7 +25,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -106,8 +105,13 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		listAdapter = new DownloadResourceGroupAdapter(activity);
 		listView.setAdapter(listAdapter);
 
-		reloadData();
 		return view;
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		reloadData();
 	}
 
 	private void reloadData() {

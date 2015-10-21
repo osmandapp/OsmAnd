@@ -152,7 +152,7 @@
 	<string name="poi_service_tyres">Шиномонтаж</string>
 	<string name="poi_vehicle_inspection">Пункт техосмотра</string>
 	<string name="poi_car_wash">Автомойка</string>
-	<string name="poi_fuel">Заправка</string>
+	<string name="poi_fuel">Автомобильная заправка</string>
 	<string name="poi_charging_station">Зарядная станция</string>
 	<string name="poi_vehicle_ramp">Ремонтная эстакада/яма</string>
 	<string name="poi_compressed_air">Компрессор для подкачки шин</string>
@@ -2199,5 +2199,21 @@
 	<string name="poi_step_condition_uneven">Состояние ступеней: среднее</string>
 	<string name="poi_step_condition_rough">Состояние ступеней: плохое</string>
 
+	<string name="poi_cairn">Пирамида из камней</string>
+
+	<string name="poi_memorial_fassade_decoration">Фасадная декорация</string>
+	<string name="poi_defibrillator">Дефибриллятор</string>
+	<string name="poi_defibrillator_yes">Дефибриллятор: есть</string>
+
+	<string name="poi_tomb_war_grave">Тип: братская могила</string>
+	<string name="poi_tomb_tumulus">Тип: тумулус</string>
+	<string name="poi_tomb_rock_cut">Тип: вырезанная в камне</string>
+	<string name="poi_tomb_hypogeum">Тип: гипогей</string>
+	<string name="poi_tomb_vault">Тип: усыпальница</string>
+	<string name="poi_tomb_columbarium">Тип: колумбарий</string>
+	<string name="poi_tomb_mausoleum">Тип: мавзолей</string>
+	<string name="poi_tomb_sarcophagus">Тип: саркофаг</string>
+	<string name="poi_tomb_crypt">Тип: крипта</string>
+	<string name="poi_tomb_pyramid">Тип: пирамида</string>
 
 </resources>

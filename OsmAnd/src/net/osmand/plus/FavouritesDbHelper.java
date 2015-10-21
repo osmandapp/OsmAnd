@@ -1,18 +1,5 @@
 package net.osmand.plus;
 
-import android.app.AlertDialog;
-import android.content.Context;
-
-import net.osmand.PlatformUtil;
-import net.osmand.data.FavouritePoint;
-import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.WptPt;
-import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
-import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
-import net.osmand.util.Algorithms;
-
-import org.apache.tools.bzip2.CBZip2OutputStream;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -24,6 +11,19 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import net.osmand.PlatformUtil;
+import net.osmand.data.FavouritePoint;
+import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
+import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
+import net.osmand.util.Algorithms;
+
+import org.apache.tools.bzip2.CBZip2OutputStream;
+
+import android.app.AlertDialog;
+import android.content.Context;
 
 public class FavouritesDbHelper {
 
@@ -575,10 +575,21 @@ public class FavouritesDbHelper {
 			}	
 		}
 		if (!group.name.equals(newName)) {
-			FavoriteGroup gr = flatGroups.get(group.name);
-			group.name = newName;
+			FavoriteGroup gr = flatGroups.remove(group.name);
+			gr.name = newName;
+			FavoriteGroup renamedGroup = flatGroups.get(gr.name);
+			boolean existing = renamedGroup != null;
+			if(renamedGroup == null) {
+				renamedGroup = gr;
+				flatGroups.put(gr.name, gr);
+			} else {
+				favoriteGroups.remove(gr);
+			}
 			for(FavouritePoint p : gr.points) {
 				p.setCategory(newName);
+				if(existing) {
+					renamedGroup.points.add(p);
+				}
 			}
 		}
 		saveCurrentPointsIntoFile();

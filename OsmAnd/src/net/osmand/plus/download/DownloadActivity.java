@@ -16,7 +16,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import net.osmand.IProgress;
+import net.osmand.access.AccessibleToast;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -73,13 +76,18 @@ public class DownloadActivity extends BaseDownloadActivity {
 		updateDescriptionTextWithSize(this, downloadProgressLayout);
 		int currentTab = 0;
 		String tab = getIntent() == null || getIntent().getExtras() == null ? null : getIntent().getExtras().getString(TAB_TO_OPEN);
-		if (tab != null) {
-			if (tab.equals(DOWNLOAD_TAB)) {
+		switch (tab) {
+			case DOWNLOAD_TAB:
 				currentTab = DOWNLOAD_TAB_NUMBER;
-			} else if (tab.equals(UPDATES_TAB)) {
+				break;
+			case LOCAL_TAB:
+				currentTab = LOCAL_TAB_NUMBER;
+				break;
+			case UPDATES_TAB:
 				currentTab = UPDATES_TAB_NUMBER;
-			}
+				break;
 		}
+
 		viewPager = (ViewPager) findViewById(R.id.pager);
 		PagerSlidingTabStrip mSlidingTabLayout = (PagerSlidingTabStrip) findViewById(R.id.sliding_tabs);
 
@@ -397,6 +405,44 @@ public class DownloadActivity extends BaseDownloadActivity {
 				freeVersionBannerTitle.setVisibility(View.VISIBLE);
 			}
 		}
+	}
+
+	public void reloadLocalIndexes() {
+		AsyncTask<Void, String, List<String>> task = new AsyncTask<Void, String, List<String>>() {
+			@Override
+			protected void onPreExecute() {
+				super.onPreExecute();
+				setSupportProgressBarIndeterminateVisibility(true);
+			}
+
+			@Override
+			protected List<String> doInBackground(Void... params) {
+				return getMyApplication().getResourceManager().reloadIndexes(IProgress.EMPTY_PROGRESS,
+						new ArrayList<String>()
+				);
+			}
+
+			@Override
+			protected void onPostExecute(List<String> warnings) {
+				setSupportProgressBarIndeterminateVisibility(false);
+				if (!warnings.isEmpty()) {
+					final StringBuilder b = new StringBuilder();
+					boolean f = true;
+					for (String w : warnings) {
+						if (f) {
+							f = false;
+						} else {
+							b.append('\n');
+						}
+						b.append(w);
+					}
+					AccessibleToast.makeText(DownloadActivity.this, b.toString(), Toast.LENGTH_LONG).show();
+				}
+				newDownloadIndexes();
+			}
+		};
+		task.execute();
+
 	}
 
 

@@ -608,10 +608,10 @@
 	<string name="index_name_europe">Эўропа</string>
 	<string name="index_name_france">Эўропа - Францыя</string>
 	<string name="index_name_germany">Эўропа - Германія</string>
-	<string name="index_name_russia">Эўразія - РФ</string>
+	<string name="index_name_russia">РФ</string>
 	<string name="index_name_africa">Афрыка</string>
 	<string name="index_name_asia">Азія</string>
-	<string name="index_name_oceania">Акеанія</string>
+	<string name="index_name_oceania">Аўстралія і Акеанія</string>
 	<string name="index_name_other">Сусьветныя і тэматычныя мапы</string>
 	<string name="index_name_wiki">Сусьветная Вікіпэдыя</string>
 	<string name="index_name_voice">Галасавыя падказкі (запісаныя, абмежаваныя магчымасьці)</string>
@@ -2145,5 +2145,7 @@
     <string name="confirm_download_roadmaps">Вы ўпэўненыя, што хочаце сьцягнуць мапу аўтадарог, нават калі ў вас ёсць поўная мапа?</string>
     <string name="value_downloaded_from_max">%1$.1f з %2$.1f Мб</string>
     <string name="file_size_in_mb">%.1f Мб</string>
-    <string name="update_all">Абнавіць усе (%1$s Мб)</string>
-    </resources>
+    <string name="update_all">Абнавіць усе (%1$s МБ)</string>
+    <string name="free_downloads_used">Выкарыстана бясплатных загрузак</string>
+    <string name="free_downloads_used_description">Вы можаце паглядзець колькі бясплатных загрузак вы выкарысталі</string>
+</resources>

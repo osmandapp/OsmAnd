@@ -2,7 +2,6 @@ package net.osmand.plus.activities;
 
 
 import java.io.File;
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -19,7 +18,6 @@ import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.download.ui.LocalIndexesFragment.LoadLocalIndexTask;
 import net.osmand.plus.voice.MediaCommandPlayerImpl;
 import net.osmand.plus.voice.TTSCommandPlayerImpl;
-import net.osmand.util.Algorithms;
 import android.content.Context;
 import android.os.Build;
 

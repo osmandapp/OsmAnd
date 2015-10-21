@@ -52,7 +52,7 @@ public class MapContextMenuFragment extends Fragment {
 	public static final String TAG = "MapContextMenuFragment";
 	private static final Log LOG = PlatformUtil.getLog(MapContextMenuFragment.class);
 
-	public static final float FAB_PADDING_TOP = 10f;
+	public static final float FAB_PADDING_TOP_DP = 4f;
 	public static final float MARKER_PADDING_DP = 20f;
 	public static final float MARKER_PADDING_X_DP = 50f;
 
@@ -125,7 +125,7 @@ public class MapContextMenuFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 
-		fabPaddingTopPx = dpToPx(FAB_PADDING_TOP);
+		fabPaddingTopPx = dpToPx(FAB_PADDING_TOP_DP);
 		markerPaddingPx = dpToPx(MARKER_PADDING_DP);
 		markerPaddingXPx = dpToPx(MARKER_PADDING_X_DP);
 
