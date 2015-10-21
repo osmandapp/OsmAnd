@@ -422,9 +422,10 @@ public class OsmandRegions {
 				}
 				fullNamesToLocaleNames.put(fullName, locPrefix + " " + locName);
 				fullNamesNoParentToLocaleNames.put(fullName, locName);
-				String index = fullNamesToLowercaseIndex.get(fullName);
-				String prindex = fullNamesToLowercaseIndex.get(parentFullName);
-				fullNamesToLowercaseIndex.put(fullName, index + " " + prindex);	
+				// don't add parent to index
+//				String index = fullNamesToLowercaseIndex.get(fullName);
+//				String prindex = fullNamesToLowercaseIndex.get(parentFullName);
+//				fullNamesToLowercaseIndex.put(fullName, index + " " + prindex);	
 			}
 		}
 		
