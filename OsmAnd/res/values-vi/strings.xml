@@ -167,9 +167,9 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com --><resources>
 
 	<string name="tip_favorites">Các điểm ưa thích</string>
 	<string name="tip_favorites_t">\tCác điểm thường xuyên được dùng có thể lưu vào mục Ưa thích.
-	\n\tĐể lưu một điểm như Yêu thích, đi đến menu ngữ cảnh của bản đồ, chọn tùy chọn \ 'Thêm vào Yêu thích \' và sau đó nhập tên cho nó. Sau khi lưu một Ưa thích, nó có thể truy cập thông qua \ 'Menu chính\' -&gt; \'Yêu thích\'.
+	\n\tĐể lưu một điểm như Yêu thích, đi đến menu ngữ cảnh của bản đồ, chọn tùy chọn \'Thêm vào Yêu thích \' và sau đó nhập tên cho nó. Sau khi lưu một Ưa thích, nó có thể truy cập thông qua \'Menu chính\' -&gt; \'Yêu thích\'.
 	\n\tGiữ lâu lên một Yêu thích trong \'Yêu thích\' menu cung cấp tùy chọn để hướng đến, sửa hay xóa nó.
-	\n\tĐể hiển thị tất cả các điểm yêu thích trực tiếp trên bản đồ, cho phép lớp \'Favorites\' trong \ 'Bản đồ menu ngữ cảnh \' -&gt;\'Xác định xem\'.</string>
+	\n\tĐể hiển thị tất cả các điểm yêu thích trực tiếp trên bản đồ, cho phép lớp \'Favorites\' trong \'Bản đồ menu ngữ cảnh \' -&gt;\'Xác định xem\'.</string>
 
 	<string name="tip_osm_improve">Cải thiện dữ liệu OSM</string>
 	<string name="create_poi_link_to_osm_doc">Phân loại bản đồ trên <u>Online OSM</u> với ảnh</string>
@@ -518,7 +518,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com --><resources>
     <string name="auto_zoom_map_descr">Tự động Zoom bản đồ theo tốc độ di chuyển</string>
     <string name="auto_zoom_map">Tự động Zoom bản đồ</string>
     <string name="additional_settings">Thiết lập thêm</string>
-    <string name="settings_preset_descr">Chọn một cấu hình sử dụng. (Mỗi cấu hình\ 's có thể được tùy chỉnh dưới đây.)</string>
+    <string name="settings_preset_descr">Chọn một cấu hình sử dụng. (Mỗi cấu hình\'s có thể được tùy chỉnh dưới đây.)</string>
     <string name="settings_preset">Chế độ Ứng dụng</string>
     <string name="shared_string_settings">Thiết lập</string>
     <string name="save_current_track_descr">Lưu track hiện tại vào thẻ nhớ SD</string>
