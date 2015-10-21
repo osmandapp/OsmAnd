@@ -1,6 +1,5 @@
 package net.osmand.plus.download.ui;
 
-import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.os.Bundle;
@@ -102,8 +101,13 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		listAdapter = new DownloadResourceGroupAdapter(activity);
 		listView.setAdapter(listAdapter);
 
-		reloadData();
 		return view;
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		reloadData();
 	}
 
 	private void reloadData() {
