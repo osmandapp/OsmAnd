@@ -68,10 +68,16 @@ public class DownloadActivity extends BaseDownloadActivity {
 		int currentTab = 0;
 		String tab = getIntent() == null || getIntent().getExtras() == null ? null : getIntent().getExtras().getString(TAB_TO_OPEN);
 		if (tab != null) {
-			if (tab.equals(DOWNLOAD_TAB)) {
-				currentTab = 1;
-			} else if (tab.equals(UPDATES_TAB)) {
-				currentTab = 2;
+			switch (tab) {
+				case DOWNLOAD_TAB:
+					currentTab = 0;
+					break;
+				case LOCAL_TAB:
+					currentTab = 1;
+					break;
+				case UPDATES_TAB:
+					currentTab = 2;
+					break;
 			}
 		}
 		visibleBanner = new BannerAndDownloadFreeVersion(findViewById(R.id.mainLayout), this);
