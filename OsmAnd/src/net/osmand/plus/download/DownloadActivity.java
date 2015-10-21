@@ -78,11 +78,11 @@ public class DownloadActivity extends BaseDownloadActivity {
 		String tab = getIntent() == null || getIntent().getExtras() == null ? null : getIntent().getExtras().getString(TAB_TO_OPEN);
 		if (tab != null) {
 			if (tab.equals(DOWNLOAD_TAB)) {
-				currentTab = 0;
+				currentTab = DOWNLOAD_TAB_NUMBER;
 			} else if (tab.equals(LOCAL_TAB)) {
-				currentTab = 1;
+				currentTab = LOCAL_TAB_NUMBER;
 			} else if (tab.equals(UPDATES_TAB)) {
-				currentTab = 2;
+				currentTab = UPDATES_TAB_NUMBER;
 			}
 		}
 
