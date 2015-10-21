@@ -1,10 +1,28 @@
 package net.osmand.plus.download;
 
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
+import java.io.File;
+import java.lang.ref.WeakReference;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
+import net.osmand.IProgress;
+import net.osmand.access.AccessibleToast;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.Version;
+import net.osmand.plus.activities.LocalIndexInfo;
+import net.osmand.plus.activities.TabActivity;
+import net.osmand.plus.base.BasicProgressAsyncTask;
+import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
+import net.osmand.plus.download.ui.ActiveDownloadsDialogFragment;
+import net.osmand.plus.download.ui.DownloadResourceGroupFragment;
+import net.osmand.plus.download.ui.LocalIndexesFragment;
+import net.osmand.plus.download.ui.UpdatesIndexFragment;
+import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -15,37 +33,12 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.NotificationCompat;
-import android.support.v7.app.NotificationCompat.Builder;
 import android.text.method.LinkMovementMethod;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import net.osmand.IProgress;
-import net.osmand.access.AccessibleToast;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.Version;
-import net.osmand.plus.activities.LocalIndexInfo;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.TabActivity;
-import net.osmand.plus.base.BasicProgressAsyncTask;
-import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
-import net.osmand.plus.download.ui.ActiveDownloadsDialogFragment;
-import net.osmand.plus.download.ui.DownloadResourceGroupFragment;
-import net.osmand.plus.download.ui.LocalIndexesFragment;
-import net.osmand.plus.download.ui.UpdatesIndexFragment;
-import net.osmand.plus.views.controls.PagerSlidingTabStrip;
-
-import java.io.File;
-import java.lang.ref.WeakReference;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 
 public class DownloadActivity extends BaseDownloadActivity {
 	public static final int UPDATES_TAB_NUMBER = 2;
@@ -129,7 +122,7 @@ public class DownloadActivity extends BaseDownloadActivity {
 
 			}
 		});
-		visibleBanner = new BannerAndDownloadFreeVersion(findViewById(R.id.mainLayout), this);
+		visibleBanner = new BannerAndDownloadFreeVersion(findViewById(R.id.mainLayout), this, true);
 
 		final Intent intent = getIntent();
 		if (intent != null && intent.getExtras() != null) {
@@ -275,9 +268,11 @@ public class DownloadActivity extends BaseDownloadActivity {
 		private final OsmandApplication application;
 		private final boolean shouldShowFreeVersionBanner;
 		private final View freeVersionBannerTitle;
+		private boolean showSpace;
 
-		public BannerAndDownloadFreeVersion(View view, final DownloadActivity ctx) {
+		public BannerAndDownloadFreeVersion(View view, final DownloadActivity ctx, boolean showSpace) {
 			this.ctx = ctx;
+			this.showSpace = showSpace;
 			application = (OsmandApplication) ctx.getApplicationContext();
 			freeVersionBanner = view.findViewById(R.id.freeVersionBanner);
 			downloadProgressLayout = view.findViewById(R.id.downloadProgressLayout);
@@ -304,10 +299,6 @@ public class DownloadActivity extends BaseDownloadActivity {
 		}
 		
 		public void updateBannerInProgress() {
-			updateBannerInProgress(true);
-		}
-
-		public void updateBannerInProgress(boolean showSpace) {
 			BasicProgressAsyncTask<?, ?, ?, ?> basicProgressAsyncTask = ctx.getDownloadThread().getCurrentRunningTask();
 			final boolean isFinished = basicProgressAsyncTask == null
 					|| basicProgressAsyncTask.getStatus() == AsyncTask.Status.FINISHED;

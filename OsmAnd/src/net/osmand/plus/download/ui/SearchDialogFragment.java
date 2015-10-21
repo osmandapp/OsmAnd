@@ -82,7 +82,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 			}
 		});
 
-		banner = new BannerAndDownloadFreeVersion(view, (DownloadActivity) getActivity());
+		banner = new BannerAndDownloadFreeVersion(view, (DownloadActivity) getActivity(), false);
 
 		LinearLayout ll = (LinearLayout) view;
 		ExpandableListView expandablelistView = (ExpandableListView) view.findViewById(android.R.id.list);
@@ -151,7 +151,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 	@Override
 	public void newDownloadIndexes() {
 		if(banner != null) {
-			banner.updateBannerInProgress(false);
+			banner.updateBannerInProgress();
 		}
 		updateSearchText(searchText);
 	}
@@ -159,7 +159,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 	@Override
 	public void downloadHasFinished() {
 		if(banner != null) {
-			banner.updateBannerInProgress(false);
+			banner.updateBannerInProgress();
 		}
 		listAdapter.notifyDataSetChanged();
 	}
@@ -167,7 +167,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 	@Override
 	public void downloadInProgress() {
 		if(banner != null) {
-			banner.updateBannerInProgress(false);
+			banner.updateBannerInProgress();
 		}
 		listAdapter.notifyDataSetChanged();
 	}

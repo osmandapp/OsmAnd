@@ -93,7 +93,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		setHasOptionsMenu(true);
 
 		if(openAsDialog()) {
-			banner = new BannerAndDownloadFreeVersion(view, (DownloadActivity) getActivity());
+			banner = new BannerAndDownloadFreeVersion(view, (DownloadActivity) getActivity(), false);
 		} else {
 			banner = null;
 			view.findViewById(R.id.freeVersionBanner).setVisibility(View.GONE);
@@ -153,7 +153,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 	@Override
 	public void newDownloadIndexes() {
 		if(banner != null) {
-			banner.updateBannerInProgress(false);
+			banner.updateBannerInProgress();
 		}
 		reloadData();
 	}
@@ -161,7 +161,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 	@Override
 	public void downloadHasFinished() {
 		if(banner != null) {
-			banner.updateBannerInProgress(false);
+			banner.updateBannerInProgress();
 		}
 		listAdapter.notifyDataSetChanged();
 	}
@@ -169,7 +169,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 	@Override
 	public void downloadInProgress() {
 		if(banner != null) {
-			banner.updateBannerInProgress(false);
+			banner.updateBannerInProgress();
 		}
 		listAdapter.notifyDataSetChanged();
 	}
