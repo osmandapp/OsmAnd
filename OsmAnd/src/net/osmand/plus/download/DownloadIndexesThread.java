@@ -75,7 +75,7 @@ public class DownloadIndexesThread {
 	}
 
 	public void updateLoadedFiles() {
-		indexes.initAlreadyLoadedFiles();
+		indexes.updateLoadedFiles();
 	}
 
 	/// UI notifications methods
