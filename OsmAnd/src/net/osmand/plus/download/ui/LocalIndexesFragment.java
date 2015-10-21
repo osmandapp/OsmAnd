@@ -34,7 +34,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -68,6 +67,8 @@ import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -79,6 +80,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 
 	private static final Log LOG = PlatformUtil.getLog(LocalIndexesFragment.class);
 	private LoadLocalIndexTask asyncLoader;
+	private Map<String, IndexItem> filesToUpdate = new HashMap<String, IndexItem>();
 	private LocalIndexesAdapter listAdapter;
 	private AsyncTask<LocalIndexInfo, ?, ?> operationTask;
 
@@ -161,6 +163,11 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 	}
 
 	public void reloadData() {
+		List<IndexItem> itemsToUpdate = getDownloadActivity().getDownloadThread().getIndexes().getItemsToUpdate();
+		filesToUpdate.clear();
+		for(IndexItem ii : itemsToUpdate) {
+			filesToUpdate.put(ii.getTargetFileName(), ii);
+		}
 		LoadLocalIndexTask current = asyncLoader;
 		if(current == null || current.getStatus() == AsyncTask.Status.FINISHED ||
 				current.isCancelled() || current.getResult() != null) {
@@ -1032,7 +1039,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 				if (child.isBackupedData()) {
 					icon.setImageDrawable(backup);
 				} else {
-					icon.setImageDrawable(getContentIcon(ctx, child.getType().getIconResource()));
+					int colorId = filesToUpdate.containsKey(child.getFileName()) ? R.color.color_distance : R.color.color_ok;
+					icon.setImageDrawable(getContentIcon(ctx, child.getType().getIconResource(), colorId));
 				}
 
 				nameTextView.setText(getNameToDisplay(child));
@@ -1097,6 +1105,10 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			private Drawable getContentIcon(DownloadActivity context, int resourceId) {
 				return context.getMyApplication().getIconsCache().getContentIcon(resourceId);
 			}
+			
+			private Drawable getContentIcon(DownloadActivity context, int resourceId, int colorId) {
+				return context.getMyApplication().getIconsCache().getIcon(resourceId, colorId);
+			}
 		}
 
 	}
@@ -1128,6 +1140,18 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 				return true;
 			}
 		});
+		final IndexItem update = filesToUpdate.get(info.getFileName());
+		if (update != null) {
+			item = optionsMenu.getMenu().add(R.string.shared_string_download)
+					.setIcon(iconsCache.getContentIcon(R.drawable.ic_action_import));
+			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+				@Override
+				public boolean onMenuItemClick(MenuItem item) {
+					getDownloadActivity().startDownload(update);
+					return true;
+				}
+			});
+		}
 
 		item = optionsMenu.getMenu().add(R.string.shared_string_delete)
 				.setIcon(iconsCache.getContentIcon(R.drawable.ic_action_delete_dark));
@@ -1138,7 +1162,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 				return true;
 			}
 		});
-		if (getMyApplication().getSettings().BETA_TESTING_LIVE_UPDATES.get()) {
+		if (info.getType() == LocalIndexType.MAP_DATA && getMyApplication().getSettings().BETA_TESTING_LIVE_UPDATES.get()) {
 			item = optionsMenu.getMenu().add("Live updates")
 					.setIcon(iconsCache.getContentIcon(R.drawable.ic_action_refresh_dark));
 			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
