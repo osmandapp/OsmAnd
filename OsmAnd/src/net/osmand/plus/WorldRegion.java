@@ -39,7 +39,21 @@ public class WorldRegion {
 	private List<WorldRegion> subregions;
 	private List<WorldRegion> flattenedSubregions;
 
+	public String getLang(OsmandRegions osmandRegions) {
+		return osmandRegions.getLang(regionId);
+	}
 
+	public String getMetric(OsmandRegions osmandRegions) {
+		return osmandRegions.getMetric(regionId);
+	}
+
+	public String getLeftHandDriving(OsmandRegions osmandRegions) {
+		return osmandRegions.getLeftHandDriving(regionId);
+	}
+
+	public String getRoadSigns(OsmandRegions osmandRegions) {
+		return osmandRegions.getRoadSigns(regionId);
+	}
 
 	public String getRegionId() {
 		return regionId;
@@ -96,8 +110,8 @@ public class WorldRegion {
 	private WorldRegion init(String regionId, OsmandRegions osmandRegions, String name) {
 		this.regionId = regionId;
 		String downloadName = osmandRegions.getDownloadName(regionId);
-		this.searchText = osmandRegions.getDownloadNameIndexLowercase(downloadName);
 		if (downloadName != null) {
+			this.searchText = osmandRegions.getDownloadNameIndexLowercase(downloadName);
 			downloadsId = downloadName.toLowerCase();
 		} else {
 			downloadsId = regionId.toLowerCase();
