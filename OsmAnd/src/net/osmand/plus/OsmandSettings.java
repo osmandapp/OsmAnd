@@ -1891,6 +1891,10 @@ public class OsmandSettings {
                     DashRateUsFragment.RateUsState.INITIAL_STATE, DashRateUsFragment.RateUsState.values())
                     .makeGlobal()
                     .cache();
+	public final OsmandPreference<Boolean> FIRST_TIME_APP_RUN =
+			new BooleanPreference("first_time_app_run", true).makeGlobal().cache();
+	public final OsmandPreference<String> VERSION_INSTALLED =
+			new StringPreference("version_installed", null).makeGlobal().cache();
 
 	
 	public enum DayNightMode {
