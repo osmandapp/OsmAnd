@@ -398,7 +398,7 @@ public class MapContextMenu {
 	}
 
 	public void buttonSharePressed() {
-		ShareMenu.show(latLon, pointDescription, mapActivity);
+		ShareMenu.show(latLon, nameStr, mapActivity);
 	}
 
 	public void buttonMorePressed() {

@@ -9,7 +9,9 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-    <string name="share_clipboard">Clipboard</string>
+    <string name="share_menu_title">Share location</string>
+    <string name="share_common_send">Send</string>
+    <string name="share_common_copy">Copy</string>
     <string name="share_geo">geo:</string>
     <string name="share_qr_code">QR-Code</string>
     <string name="favorite_category_dublicate_message">Specified category name already exists. Please define other name.</string>
