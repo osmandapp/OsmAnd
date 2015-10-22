@@ -2004,4 +2004,14 @@
 	<string name="poi_animal_boarding_dog_cat">寄宿類型：狗、貓</string>
 	<string name="poi_animal_boarding_horse">寄宿類型：馬</string>
 
+	<string name="poi_historic_aircraft">退役飛機</string>
+
+	<string name="poi_honey">蜂蜜專賣店</string>
+
+	<string name="poi_elevator_yes">有電梯</string>
+	<string name="poi_elevator_no">無電梯</string>
+
+	<string name="poi_technical_monument">工藝不朽的遺迹</string>
+
+	<string name="poi_office_camping">露營服務處</string>
 	</resources>
