@@ -2014,4 +2014,30 @@
 	<string name="poi_technical_monument">工藝不朽的遺迹</string>
 
 	<string name="poi_office_camping">露營服務處</string>
+	<string name="poi_model_aerodrome">模型機的機場</string>
+	<string name="poi_guide">導遊辦公室</string>
+	<string name="poi_quango">特殊法人</string>
+	<string name="poi_consulting">諮詢辦公室</string>
+	<string name="poi_cooperative">合作辦公室</string>
+	<string name="poi_office_forestry">林務辦公室</string>
+	<string name="poi_logistics">後勤辦公室</string>
+	<string name="poi_parish">教區辦公室</string>
+	<string name="poi_publisher">出版業辦公室</string>
+
+	<string name="poi_fuel_91ul">91UL 燃料</string>
+	<string name="poi_fuel_100ll">100LL 燃料</string>
+	<string name="poi_autogas">液化石油氣</string>
+	<string name="poi_jeta1">Jet A-1 燃料</string>
+	<string name="poi_fuel_adblue">AdBlue 燃料</string>
+
+	<string name="poi_fuel_wood">燃料：木材</string>
+	<string name="poi_fuel_charcoal">燃料：木炭</string>
+	<string name="poi_fuel_coal">燃料：煤</string>
+
+	<string name="poi_street_lamp">路燈</string>
+
+	<string name="poi_escape_lane">躲避道</string>
+
+	<string name="poi_crop_rice">作物：水稻</string>
+	<string name="poi_crop_grass">作物：牧草</string>
 	</resources>
