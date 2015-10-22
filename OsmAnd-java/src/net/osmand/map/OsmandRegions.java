@@ -47,6 +47,11 @@ public class OsmandRegions {
 	Map<String, String> fullNamesToLowercaseIndex = new HashMap<String, String>();
 	Map<String, String> fullNamesToParentFullNames = new HashMap<String, String>();
 	Map<String, String> fullNamesToDownloadNames = new HashMap<String, String>();
+	Map<String, String> fullNamesToLangs = new HashMap<String, String>();
+	Map<String, String> fullNamesToMetrics = new HashMap<String, String>();
+	Map<String, String> fullNamesToLeftHandDrivings = new HashMap<String, String>();
+	Map<String, String> fullNamesToRoadSigns = new HashMap<String, String>();
+
 	QuadTree<String> quadTree = null ;
 
 	public Map<String, String> getFullNamesToLowercaseCopy() {
@@ -60,6 +65,10 @@ public class OsmandRegions {
 	Integer nameType = null;
 	Integer nameLocaleType = null;
 	String locale = "en";
+	Integer langType = null;
+	Integer metricType = null;
+	Integer leftHandDrivingType = null;
+	Integer roadSignsType = null;
 
 
 	public void prepareFile(String fileName) throws IOException {
@@ -69,6 +78,38 @@ public class OsmandRegions {
 
 	public boolean containsCountry(String name){
 		return countriesByDownloadName.containsKey(name);
+	}
+
+	public String getLang(String fullName) {
+		return fullNamesToLangs.get(fullName);
+	}
+
+	public String getMetric(String fullName) {
+		return fullNamesToMetrics.get(fullName);
+	}
+
+	public String getLeftHandDriving(String fullName) {
+		return fullNamesToLeftHandDrivings.get(fullName);
+	}
+
+	public String getRoadSigns(String fullName) {
+		return fullNamesToRoadSigns.get(fullName);
+	}
+
+	private String getLang(BinaryMapDataObject o) {
+		return o.getNameByType(langType);
+	}
+
+	private String getMetric(BinaryMapDataObject o) {
+		return o.getNameByType(metricType);
+	}
+
+	private String getLeftHandDriving(BinaryMapDataObject o) {
+		return  o.getNameByType(leftHandDrivingType);
+	}
+
+	private String getRoadSigns(BinaryMapDataObject o) {
+		return o.getNameByType(roadSignsType);
 	}
 
 	public String getDownloadName(BinaryMapDataObject o) {
@@ -367,6 +408,24 @@ public class OsmandRegions {
 					fullNamesToLocaleNames.put(fullName, locName);
 					fullNamesNoParentToLocaleNames.put(fullName, locName);
 				}
+
+				String lang = getLang(object);
+				if(!Algorithms.isEmpty(lang)){
+					fullNamesToLangs.put(fullName, lang);
+				}
+				String metric = getMetric(object);
+				if(!Algorithms.isEmpty(metric)){
+					fullNamesToMetrics.put(fullName, metric);
+				}
+				String leftHandDriving = getLeftHandDriving(object);
+				if(!Algorithms.isEmpty(leftHandDriving)){
+					fullNamesToLeftHandDrivings.put(fullName, leftHandDriving);
+				}
+				String roadSigns = getRoadSigns(object);
+				if(!Algorithms.isEmpty(roadSigns)){
+					fullNamesToRoadSigns.put(fullName, roadSigns);
+				}
+
 				MapIndex mi = object.getMapIndex();
 				TIntObjectIterator<String> it = object.getObjectNames().iterator();
 				StringBuilder ind = new StringBuilder();
@@ -517,7 +576,12 @@ public class OsmandRegions {
 			nameLocaleType = object.getMapIndex().getRule("name:" + locale, null);
 			parentFullName = object.getMapIndex().getRule("region_parent_name", null);
 			fullNameType = object.getMapIndex().getRule("region_full_name", null);
-			
+
+			langType = object.getMapIndex().getRule("lang", null);
+			metricType = object.getMapIndex().getRule("metric", null);
+			leftHandDrivingType = object.getMapIndex().getRule("left_hand_driving", null);
+			roadSignsType = object.getMapIndex().getRule("road_signs", null);
+
 			if (downloadNameType == null || nameType == null) {
 				throw new IllegalStateException();
 			}

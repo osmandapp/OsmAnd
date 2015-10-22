@@ -42,6 +42,7 @@
         <attr name="new_app_theme" format="reference"/>
 
         <attr name="divider_color" format="reference" />
+        <attr name="contextMenuButtonColor" format="reference" />
     </declare-styleable>
 
     <declare-styleable name="PagerSlidingTabStrip">
