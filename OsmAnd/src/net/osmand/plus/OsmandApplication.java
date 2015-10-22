@@ -137,10 +137,6 @@ public class OsmandApplication extends Application {
 		timeToStart = System.currentTimeMillis();
 		OsmandPlugin.initPlugins(this);
 		System.out.println("Time to init plugins " + (System.currentTimeMillis() - timeToStart) + " ms. Should be less < 800 ms");
-
-		osmandSettings.NUMBER_OF_APPLICATION_STARTS.set(
-                osmandSettings.NUMBER_OF_APPLICATION_STARTS.get() + 1);
-
 	}
 	
 	public AppInitializer getAppInitializer() {

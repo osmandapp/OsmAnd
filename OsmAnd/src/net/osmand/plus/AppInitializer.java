@@ -56,6 +56,7 @@ import btools.routingapp.BRouterServiceConnection;
 public class AppInitializer implements IProgress {
 
 	public static final boolean TIPS_AND_TRICKS = false;
+
 	private static final String VECTOR_INDEXES_CHECK = "VECTOR_INDEXES_CHECK"; //$NON-NLS-1$
 	private static final String EXCEPTION_FILE_SIZE = "EXCEPTION_FS"; //$NON-NLS-1$
 
@@ -117,6 +118,10 @@ public class AppInitializer implements IProgress {
 		} else if (!Version.getFullVersion(app).equals(settings.VERSION_INSTALLED.get())) {
 			settings.VERSION_INSTALLED.set(Version.getFullVersion(app));
 			appVersionChanged = true;
+		}
+		settings.NUMBER_OF_APPLICATION_STARTS.set(settings.NUMBER_OF_APPLICATION_STARTS.get() + 1);
+		if (settings.FIRST_INSTALLED_DATE.get() == -1) {
+			settings.FIRST_INSTALLED_DATE.set(System.currentTimeMillis());
 		}
 		initSettings = true;
 	}
