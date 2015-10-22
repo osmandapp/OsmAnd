@@ -182,6 +182,21 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		cat.addPreference(createCheckBoxPreference(settings.SHOULD_SHOW_FREE_VERSION_BANNER,
 				R.string.show_free_version_banner,
 				R.string.show_free_version_banner_description));
+		final Preference firstRunPreference = new Preference(this);
+		firstRunPreference.setTitle("Reset first run");
+		firstRunPreference.setSummary("After reset app wold act like it is it's firs run");
+		firstRunPreference.setSelectable(true);
+		firstRunPreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+			@Override
+			public boolean onPreferenceClick(Preference preference) {
+				final SettingsDevelopmentActivity activity = SettingsDevelopmentActivity.this;
+				activity.getMyApplication().getAppInitializer()
+						.writeFirstTime(true, activity);
+				firstRunPreference.setSummary("First run flag has been reset");
+				return true;
+			}
+		});
+		cat.addPreference(firstRunPreference);
 	}
 	
 	protected void availableProfileDialog() {

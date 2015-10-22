@@ -12,22 +12,26 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.zip.GZIPInputStream;
+
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
+
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.AssetManager;
+import android.provider.Settings.Secure;
 
 public class DownloadOsmandIndexesHelper {
 	private final static Log log = PlatformUtil.getLog(DownloadOsmandIndexesHelper.class);
@@ -178,7 +182,17 @@ public class DownloadOsmandIndexesHelper {
 			log.debug("Start loading list of index files"); //$NON-NLS-1$
 			try {
 				String strUrl = ctx.getAppCustomization().getIndexesUrl();
-
+				OsmandSettings settings = ctx.getSettings();
+				Long nd = settings.FIRST_INSTALLED_DATE.get();
+				if(nd > 0) {
+					strUrl += "&nd=" + ((System.currentTimeMillis() - nd) / (1000l * 24l * 60l * 60l)); 
+				}
+				strUrl += "&ns=" + settings.NUMBER_OF_APPLICATION_STARTS.get();
+				try {
+					strUrl += "&aid=" + Secure.getString(ctx.getContentResolver(), Secure.ANDROID_ID);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 				log.info(strUrl);
 				XmlPullParser parser = XmlPullParserFactory.newInstance().newPullParser();
 				URLConnection connection = NetworkUtils.getHttpURLConnection(strUrl);

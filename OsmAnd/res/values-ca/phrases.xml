@@ -956,10 +956,10 @@
 	<string name="poi_fax">Fax</string>
 	<string name="poi_facebook">Facebook</string>
 	<string name="poi_mobile">Mòbil</string>
-	<string name="poi_animal_shelter_dog">Refugi per a gossos</string>
-	<string name="poi_animal_shelter_cat">Refugi per a gats</string>
-	<string name="poi_animal_shelter_dog_cat">Refugi per a gossos i gats</string>
-	<string name="poi_animal_shelter_bird">Refugi per a ocells</string>
+	<string name="poi_animal_shelter_dog">Tipus de refugi: per gossos</string>
+	<string name="poi_animal_shelter_cat">Tipus de refugi: per gats</string>
+	<string name="poi_animal_shelter_dog_cat">Tipus de refugi: per gossos i gats</string>
+	<string name="poi_animal_shelter_bird">Tipus de refugi: per ocells</string>
 
 <string name="poi_recycling_centre">Tipus: deixalleria</string>
 	<string name="poi_recycling_container">Tipus: contenidor</string>
@@ -1392,4 +1392,21 @@
 	<string name="poi_step_condition_uneven">Condició dels graons: desigual</string>
 	<string name="poi_step_condition_rough">Condició dels graons: ruda</string>
 
-</resources>
+<string name="poi_tomb_columbarium">Tipus: columbari</string>
+	<string name="poi_tomb_mausoleum">Tipus: mausoleu</string>
+	<string name="poi_tomb_sarcophagus">Tipus: sarcòfag</string>
+	<string name="poi_tomb_crypt">Tipus: cripta</string>
+	<string name="poi_tomb_pyramid">Tipus: piràmide</string>
+
+<string name="poi_cairn">Pila de pedres</string>
+
+	<string name="poi_memorial_fassade_decoration">Memorial per decoració de façana</string>
+	<string name="poi_defibrillator">Desfibril·lador</string>
+	<string name="poi_defibrillator_yes">Desfibril·lador: sí</string>
+
+	<string name="poi_tomb_war_grave">Tipus: fosa de guerra</string>
+	<string name="poi_tomb_tumulus">Tipus: túmul</string>
+	<string name="poi_tomb_rock_cut">Tipus: excavació a la roca</string>
+	<string name="poi_tomb_hypogeum">Tipus: subterrani</string>
+	<string name="poi_tomb_vault">Tipus: volta</string>
+	</resources>
