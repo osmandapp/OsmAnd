@@ -97,19 +97,35 @@ public class OsmandRegions {
 	}
 
 	private String getLang(BinaryMapDataObject o) {
-		return o.getNameByType(langType);
+		if (langType != null) {
+			return o.getNameByType(langType);
+		} else {
+			return null;
+		}
 	}
 
 	private String getMetric(BinaryMapDataObject o) {
-		return o.getNameByType(metricType);
+		if (metricType != null) {
+			return o.getNameByType(metricType);
+		} else {
+			return null;
+		}
 	}
 
 	private String getLeftHandDriving(BinaryMapDataObject o) {
-		return  o.getNameByType(leftHandDrivingType);
+		if (leftHandDrivingType != null) {
+			return o.getNameByType(leftHandDrivingType);
+		} else {
+			return null;
+		}
 	}
 
 	private String getRoadSigns(BinaryMapDataObject o) {
-		return o.getNameByType(roadSignsType);
+		if (roadSignsType != null) {
+			return o.getNameByType(roadSignsType);
+		} else {
+			return null;
+		}
 	}
 
 	public String getDownloadName(BinaryMapDataObject o) {
