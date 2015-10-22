@@ -23,6 +23,7 @@ import net.osmand.plus.mapcontextmenu.details.FavouritePointMenuController;
 import net.osmand.plus.mapcontextmenu.details.HistoryMenuController;
 import net.osmand.plus.mapcontextmenu.details.MenuController;
 import net.osmand.plus.mapcontextmenu.details.PointDescriptionMenuController;
+import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.OsmandMapLayer;
@@ -397,7 +398,7 @@ public class MapContextMenu {
 	}
 
 	public void buttonSharePressed() {
-		mapActivity.getMapActions().shareLocation(latLon.getLatitude(), latLon.getLongitude());
+		ShareMenu.show(latLon, pointDescription, mapActivity);
 	}
 
 	public void buttonMorePressed() {
