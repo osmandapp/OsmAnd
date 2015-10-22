@@ -187,7 +187,7 @@ public class DownloadOsmandIndexesHelper {
 				if(nd > 0) {
 					strUrl += "&nd=" + ((System.currentTimeMillis() - nd) / (1000l * 24l * 60l * 60l)); 
 				}
-				strUrl += "&ns=" + settings.NUMBER_OF_STARTS.get();
+				strUrl += "&ns=" + settings.NUMBER_OF_APPLICATION_STARTS.get();
 				try {
 					strUrl += "&aid=" + Secure.getString(ctx.getContentResolver(), Secure.ANDROID_ID);
 				} catch (Exception e) {

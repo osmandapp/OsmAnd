@@ -1873,11 +1873,8 @@ public class OsmandSettings {
 	
 	public final CommonPreference<Boolean> SHOW_RULER = 
 			new BooleanPreference("show_ruler", true).makeProfile().cache();
-	
-	
-	public final OsmandPreference<Integer> NUMBER_OF_STARTS = new IntPreference(AppInitializer.NUMBER_OF_STARTS, 0).makeGlobal();
-	
-	public final OsmandPreference<Long> FIRST_INSTALLED_DATE = new LongPreference(AppInitializer.FIRST_INSTALLED, 0).makeGlobal();
+
+	public final OsmandPreference<Long> FIRST_INSTALLED_DATE = new LongPreference("first_installed_date", -1).makeGlobal();
 
 //	public final OsmandPreference<Integer> NUMBER_OF_FREE_DOWNLOADS_V2 = new IntPreference("free_downloads_v2", 0).makeGlobal();
 	
@@ -1892,9 +1889,13 @@ public class OsmandSettings {
             new EnumIntPreference<>("rate_us_state",
                     DashRateUsFragment.RateUsState.INITIAL_STATE, DashRateUsFragment.RateUsState.values())
                     .makeGlobal()
-                    .cache();
+					.cache();
+	public final OsmandPreference<Boolean> FIRST_TIME_APP_RUN =
+			new BooleanPreference("first_time_app_run", true).makeGlobal().cache();
+	public final OsmandPreference<String> VERSION_INSTALLED =
+			new StringPreference("version_installed", null).makeGlobal().cache();
 
-	
+
 	public enum DayNightMode {
 		AUTO(R.string.daynight_mode_auto), 
 		DAY(R.string.daynight_mode_day), 

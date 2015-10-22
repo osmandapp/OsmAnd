@@ -56,11 +56,8 @@ import btools.routingapp.BRouterServiceConnection;
 public class AppInitializer implements IProgress {
 
 	public static final boolean TIPS_AND_TRICKS = false;
-	private static final String FIRST_TIME_APP_RUN = "FIRST_TIME_APP_RUN"; //$NON-NLS-1$
-	protected static final String NUMBER_OF_STARTS = "NUMBER_OF_STARTS"; //$NON-NLS-1$
-	protected static final String FIRST_INSTALLED = "FIRST_INSTALLED"; //$NON-NLS-1$
+
 	private static final String VECTOR_INDEXES_CHECK = "VECTOR_INDEXES_CHECK"; //$NON-NLS-1$
-	private static final String VERSION_INSTALLED = "VERSION_INSTALLED"; //$NON-NLS-1$
 	private static final String EXCEPTION_FILE_SIZE = "EXCEPTION_FS"; //$NON-NLS-1$
 
 	public static final String LATEST_CHANGES_URL = "changes-2.1.html";
@@ -113,22 +110,18 @@ public class AppInitializer implements IProgress {
 		if(initSettings) {
 			return;
 		}
-		SharedPreferences pref = activity.getPreferences(Context.MODE_WORLD_WRITEABLE);
-		if(!pref.contains(NUMBER_OF_STARTS)) {
-			pref.edit().putInt(NUMBER_OF_STARTS, 1).commit();
-		} else {
-			pref.edit().putInt(NUMBER_OF_STARTS, pref.getInt(NUMBER_OF_STARTS, 0) + 1).commit();
-		}
-		if (!pref.contains(FIRST_INSTALLED)) {
-			pref.edit().putLong(FIRST_INSTALLED, System.currentTimeMillis()).commit();
-		}
-		if (!pref.contains(FIRST_TIME_APP_RUN)) {
-			firstTime = true;
-			pref.edit().putBoolean(FIRST_TIME_APP_RUN, true).commit();
-			pref.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
-		} else if (!Version.getFullVersion(app).equals(pref.getString(VERSION_INSTALLED, ""))) {
-			pref.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
+		OsmandSettings settings = getSettings(activity);
+		firstTime = settings.FIRST_TIME_APP_RUN.get();
+		if (firstTime) {
+			settings.FIRST_TIME_APP_RUN.set(false);
+			settings.VERSION_INSTALLED.set(Version.getFullVersion(app));
+		} else if (!Version.getFullVersion(app).equals(settings.VERSION_INSTALLED.get())) {
+			settings.VERSION_INSTALLED.set(Version.getFullVersion(app));
 			appVersionChanged = true;
+		}
+		settings.NUMBER_OF_APPLICATION_STARTS.set(settings.NUMBER_OF_APPLICATION_STARTS.get() + 1);
+		if (settings.FIRST_INSTALLED_DATE.get() == -1) {
+			settings.FIRST_INSTALLED_DATE.set(System.currentTimeMillis());
 		}
 		initSettings = true;
 	}
@@ -141,7 +134,17 @@ public class AppInitializer implements IProgress {
 	public void setFirstTime(boolean firstTime) {
 		this.firstTime = firstTime;
 	}
-	
+
+	public void writeFirstTime(boolean firstTime, Activity activity) {
+		setFirstTime(firstTime);
+		OsmandSettings settings = getSettings(activity);
+		settings.FIRST_TIME_APP_RUN.set(firstTime);
+	}
+
+	private OsmandSettings getSettings(Activity activity) {
+		return ((OsmandApplication) activity.getApplication()).getSettings();
+	}
+
 	public boolean checkAppVersionChanged(Activity activity) {
 		initUiVars(activity);
 		boolean showRecentChangesDialog = !firstTime && appVersionChanged;
