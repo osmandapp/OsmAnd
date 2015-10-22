@@ -110,17 +110,17 @@ public class DownloadOsmandIndexesHelper {
 
 	}	
 
-	public static IndexFileList getIndexesList(Context ctx) {
-		PackageManager pm = ctx.getPackageManager();
-		AssetManager amanager = ctx.getAssets();
-		IndexFileList result = downloadIndexesListFromInternet((OsmandApplication) ctx.getApplicationContext());
+	public static IndexFileList getIndexesList(OsmandApplication app) {
+		PackageManager pm = app.getPackageManager();
+		AssetManager amanager = app.getAssets();
+		IndexFileList result = downloadIndexesListFromInternet(app);
 		if (result == null) {
 			result = new IndexFileList();
 		} else {
 			result.setDownloadedFromInternet(true);
 		}
 		// add all tts files from assets
-		listVoiceAssets(result, amanager, pm, ((OsmandApplication) ctx.getApplicationContext()).getSettings());
+		listVoiceAssets(result, amanager, pm, app.getSettings());
 		return result;
 	}
 	
@@ -183,11 +183,12 @@ public class DownloadOsmandIndexesHelper {
 			try {
 				String strUrl = ctx.getAppCustomization().getIndexesUrl();
 				OsmandSettings settings = ctx.getSettings();
-				Long nd = settings.FIRST_INSTALLED_DATE.get();
+				
+				long nd = ctx.getAppInitializer().getFirstInstalled();
 				if(nd > 0) {
 					strUrl += "&nd=" + ((System.currentTimeMillis() - nd) / (1000l * 24l * 60l * 60l)); 
 				}
-				strUrl += "&ns=" + settings.NUMBER_OF_APPLICATION_STARTS.get();
+				strUrl += "&ns=" + ctx.getAppInitializer().getNumberOfStarts();
 				try {
 					strUrl += "&aid=" + Secure.getString(ctx.getContentResolver(), Secure.ANDROID_ID);
 				} catch (Exception e) {

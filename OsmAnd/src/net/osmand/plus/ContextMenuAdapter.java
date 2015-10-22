@@ -173,6 +173,7 @@ public class ContextMenuAdapter {
 		i.name = name;
 		return i;
 	}
+	
 
 	public Item item(int resId) {
 		Item i = new Item();
@@ -206,6 +207,7 @@ public class ContextMenuAdapter {
 			this.lightIcon = icon;
 			return this;
 		}
+		
 
 		public Item position(int pos) {
 			this.pos = pos;
@@ -257,6 +259,12 @@ public class ContextMenuAdapter {
 			cat = b;
 			return this;
 		}
+		
+		public Item name(String name) {
+			this.name = name;
+			return this;
+		}
+
 	}
 
 	public String[] getItemNames() {

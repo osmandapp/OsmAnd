@@ -20,7 +20,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import net.londatiga.android.ActionItem;
 import net.londatiga.android.QuickAction;
 import net.osmand.IndexConstants;
@@ -49,6 +48,7 @@ import net.osmand.plus.activities.actions.OsmAndDialogs;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.FavoriteDialogs;
+import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.BaseMapLayer;
@@ -698,8 +698,14 @@ public class MapActivityActions implements DialogProvider {
 						return false;
 					}
 				}).reg();
-		
-		optionsMenuHelper.item(R.string.index_settings).iconColor(R.drawable.ic_type_archive)
+		String d = getString(R.string.index_settings);
+		if(app.getDownloadThread().getIndexes().isDownloadedFromInternet) {
+			List<IndexItem> updt = app.getDownloadThread().getIndexes().getItemsToUpdate();
+			if(updt != null && updt.size() > 0) {
+				d += " ("+updt.size()+")";
+			}
+		}
+		optionsMenuHelper.item(R.string.index_settings).name(d).iconColor(R.drawable.ic_type_archive)
 				.listen(new OnContextMenuClick() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {

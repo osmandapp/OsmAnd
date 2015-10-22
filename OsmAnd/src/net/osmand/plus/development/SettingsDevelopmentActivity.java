@@ -10,6 +10,7 @@ import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.activities.actions.AppModeDialog;
 import net.osmand.util.SunriseSunset;
@@ -58,8 +59,24 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		cat.addPreference(openGlRender);
 
 		
-		cat.addPreference(createCheckBoxPreference(settings.BETA_TESTING_LIVE_UPDATES,
+		final Preference firstRunPreference = new Preference(this);
+		firstRunPreference.setTitle(R.string.simulate_initial_startup);
+		firstRunPreference.setSummary(R.string.simulate_initial_startup_descr);
+		firstRunPreference.setSelectable(true);
+		firstRunPreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+		@Override
+			public boolean onPreferenceClick(Preference preference) {
+				getMyApplication().getAppInitializer().resetFirstTimeRun();
+				getMyApplication().showToastMessage(R.string.shared_string_ok);
+				return true;
+			}
+		});
+		cat.addPreference(firstRunPreference);
+
+		if(Version.isDeveloperVersion(getMyApplication())) {
+			cat.addPreference(createCheckBoxPreference(settings.BETA_TESTING_LIVE_UPDATES,
 				"Live updates", "Beta testing for live updates"));
+		}
 		Preference pref = new Preference(this);
 		final Preference simulate = pref;
 		final OsmAndLocationSimulation sim = getMyApplication().getLocationProvider().getLocationSimulation();

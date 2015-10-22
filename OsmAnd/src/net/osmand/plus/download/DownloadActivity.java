@@ -4,8 +4,10 @@ import java.io.File;
 import java.lang.ref.WeakReference;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 import net.osmand.IProgress;
 import net.osmand.access.AccessibleToast;
@@ -13,6 +15,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.activities.ActionBarProgressActivity;
 import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.base.BasicProgressAsyncTask;
@@ -22,6 +25,7 @@ import net.osmand.plus.download.ui.DownloadResourceGroupFragment;
 import net.osmand.plus.download.ui.LocalIndexesFragment;
 import net.osmand.plus.download.ui.UpdatesIndexFragment;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
+import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
@@ -40,7 +44,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class DownloadActivity extends BaseDownloadActivity {
+public class DownloadActivity extends ActionBarProgressActivity implements DownloadEvents {
 	public static final int UPDATES_TAB_NUMBER = 2;
 	public static final int LOCAL_TAB_NUMBER = 1;
 	public static final int DOWNLOAD_TAB_NUMBER = 0;
@@ -61,11 +65,16 @@ public class DownloadActivity extends BaseDownloadActivity {
 	private ViewPager viewPager;
 	private String filter;
 	private String filterCat;
+	protected Set<WeakReference<Fragment>> fragSet = new HashSet<>();
+	private DownloadIndexesThread downloadThread;
+	private DownloadValidationManager downloadValidationManager;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		getMyApplication().applyTheme(this);
 		super.onCreate(savedInstanceState);
+		downloadValidationManager = new DownloadValidationManager(getMyApplication());
+		downloadThread = getMyApplication().getDownloadThread();
 		DownloadResources indexes = getDownloadThread().getIndexes();
 		if (!indexes.isDownloadedFromInternet) {
 			getDownloadThread().runReloadIndexFiles();
@@ -126,11 +135,29 @@ public class DownloadActivity extends BaseDownloadActivity {
 			filterCat = intent.getExtras().getString(FILTER_CAT);
 		}
 	}
+	
+	public DownloadIndexesThread getDownloadThread() {
+		return downloadThread;
+	}
+	
+	public void startDownload(IndexItem... indexItem) {
+		downloadValidationManager.startDownload(this, indexItem);
+	}
+	
+	public void makeSureUserCancelDownload(IndexItem item) {
+		downloadValidationManager.makeSureUserCancelDownload(this, item);
+	}
+	
+	@Override
+	public void onAttachFragment(Fragment fragment) {
+		fragSet.add(new WeakReference<Fragment>(fragment));
+	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
 		getMyApplication().getAppCustomization().resumeActivity(DownloadActivity.class, this);
+		downloadThread.setUiActivity(this);
 		downloadInProgress();
 	}
 
@@ -154,11 +181,16 @@ public class DownloadActivity extends BaseDownloadActivity {
 	public List<LocalIndexInfo> getLocalIndexInfos() {
 		return localIndexInfos;
 	}
+	
+	public OsmandApplication getMyApplication() {
+		return (OsmandApplication) getApplication();
+	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
 		getMyApplication().getAppCustomization().pauseActivity(DownloadActivity.class);
+		downloadThread.setUiActivity(null);
 	}
 
 	@Override
@@ -244,7 +276,7 @@ public class DownloadActivity extends BaseDownloadActivity {
 
 	public static boolean isDownlodingPermitted(OsmandSettings settings) {
 		final Integer mapsDownloaded = settings.NUMBER_OF_FREE_DOWNLOADS.get();
-		int downloadsLeft = BaseDownloadActivity.MAXIMUM_AVAILABLE_FREE_DOWNLOADS - mapsDownloaded;
+		int downloadsLeft = DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS - mapsDownloaded;
 		return Math.max(downloadsLeft, 0) > 0;
 	}
 
@@ -344,15 +376,15 @@ public class DownloadActivity extends BaseDownloadActivity {
 				return;
 			}
 			freeVersionBanner.setVisibility(View.VISIBLE);
-			downloadsLeftProgressBar.setMax(BaseDownloadActivity.MAXIMUM_AVAILABLE_FREE_DOWNLOADS);
+			downloadsLeftProgressBar.setMax(DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS);
 			freeVersionDescriptionTextView.setText(ctx.getString(R.string.free_version_message,
-					BaseDownloadActivity.MAXIMUM_AVAILABLE_FREE_DOWNLOADS));
+					DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS));
 			freeVersionBanner.findViewById(R.id.getFullVersionButton).setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					BaseDownloadActivity context = (BaseDownloadActivity) v.getContext();
-					Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Version.marketPrefix(context
-							.getMyApplication()) + "net.osmand.plus"));
+					Activity context = (Activity) v.getContext();
+					Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Version.marketPrefix((OsmandApplication) context
+							.getApplication()) + "net.osmand.plus"));
 					try {
 						context.startActivity(intent);
 					} catch (ActivityNotFoundException e) {
@@ -372,7 +404,7 @@ public class DownloadActivity extends BaseDownloadActivity {
 			OsmandSettings settings = application.getSettings();
 			final Integer mapsDownloaded = settings.NUMBER_OF_FREE_DOWNLOADS.get();
 			downloadsLeftProgressBar.setProgress(mapsDownloaded);
-			int downloadsLeft = BaseDownloadActivity.MAXIMUM_AVAILABLE_FREE_DOWNLOADS - mapsDownloaded;
+			int downloadsLeft = DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS - mapsDownloaded;
 			downloadsLeft = Math.max(downloadsLeft, 0);
 			if (downloadsLeft <= 0) {
 				laterButton.setVisibility(View.GONE);
@@ -474,5 +506,9 @@ public class DownloadActivity extends BaseDownloadActivity {
 
 		messageTextView.setText(R.string.device_memory);
 	}
+
+	
+
+	
 
 }

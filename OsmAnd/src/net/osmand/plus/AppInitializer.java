@@ -57,8 +57,8 @@ public class AppInitializer implements IProgress {
 
 	public static final boolean TIPS_AND_TRICKS = false;
 	private static final String FIRST_TIME_APP_RUN = "FIRST_TIME_APP_RUN"; //$NON-NLS-1$
-	protected static final String NUMBER_OF_STARTS = "NUMBER_OF_STARTS"; //$NON-NLS-1$
-	protected static final String FIRST_INSTALLED = "FIRST_INSTALLED"; //$NON-NLS-1$
+	public static final String NUMBER_OF_STARTS = "NUMBER_OF_STARTS"; //$NON-NLS-1$
+	public static final String FIRST_INSTALLED = "FIRST_INSTALLED"; //$NON-NLS-1$
 	private static final String VECTOR_INDEXES_CHECK = "VECTOR_INDEXES_CHECK"; //$NON-NLS-1$
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED"; //$NON-NLS-1$
 	private static final String EXCEPTION_FILE_SIZE = "EXCEPTION_FS"; //$NON-NLS-1$
@@ -79,6 +79,7 @@ public class AppInitializer implements IProgress {
 	private List<String> warnings = new ArrayList<String>();
 	private String taskName;
 	private List<AppInitializeListener> listeners = new ArrayList<AppInitializer.AppInitializeListener>();
+	private SharedPreferences startPrefs;
 	
 	public enum InitEvents {
 		FAVORITES_INITIALIZED, NATIVE_INITIALIZED,
@@ -113,24 +114,44 @@ public class AppInitializer implements IProgress {
 		if(initSettings) {
 			return;
 		}
-		SharedPreferences pref = activity.getPreferences(Context.MODE_WORLD_WRITEABLE);
-		if(!pref.contains(NUMBER_OF_STARTS)) {
-			pref.edit().putInt(NUMBER_OF_STARTS, 1).commit();
+		startPrefs = activity.getPreferences(Context.MODE_WORLD_WRITEABLE);
+		if(!startPrefs.contains(NUMBER_OF_STARTS)) {
+			startPrefs.edit().putInt(NUMBER_OF_STARTS, 1).commit();
 		} else {
-			pref.edit().putInt(NUMBER_OF_STARTS, pref.getInt(NUMBER_OF_STARTS, 0) + 1).commit();
+			startPrefs.edit().putInt(NUMBER_OF_STARTS, startPrefs.getInt(NUMBER_OF_STARTS, 0) + 1).commit();
 		}
-		if (!pref.contains(FIRST_INSTALLED)) {
-			pref.edit().putLong(FIRST_INSTALLED, System.currentTimeMillis()).commit();
+		if (!startPrefs.contains(FIRST_INSTALLED)) {
+			startPrefs.edit().putLong(FIRST_INSTALLED, System.currentTimeMillis()).commit();
 		}
-		if (!pref.contains(FIRST_TIME_APP_RUN)) {
+		if (!startPrefs.contains(FIRST_TIME_APP_RUN)) {
 			firstTime = true;
-			pref.edit().putBoolean(FIRST_TIME_APP_RUN, true).commit();
-			pref.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
-		} else if (!Version.getFullVersion(app).equals(pref.getString(VERSION_INSTALLED, ""))) {
-			pref.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
+			startPrefs.edit().putBoolean(FIRST_TIME_APP_RUN, true).commit();
+			startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
+		} else if (!Version.getFullVersion(app).equals(startPrefs.getString(VERSION_INSTALLED, ""))) {
+			startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
 			appVersionChanged = true;
 		}
 		initSettings = true;
+	}
+	
+	public int getNumberOfStarts() {
+		if(startPrefs == null) {
+			return 0;
+		}
+		return startPrefs.getInt(NUMBER_OF_STARTS, 1);
+	}
+	
+	public long getFirstInstalled() {
+		if(startPrefs == null) {
+			return 0;
+		}
+		return startPrefs.getLong(FIRST_INSTALLED, 0);
+	}
+	
+	public void resetFirstTimeRun() {
+		if(startPrefs != null) {
+			startPrefs.edit().remove(FIRST_TIME_APP_RUN).commit();
+		}
 	}
 	
 	public boolean isFirstTime(Activity activity) {
@@ -154,7 +175,19 @@ public class AppInitializer implements IProgress {
 			activityChangesShowed = true;
 			return true;
 		}
+		checkMapUpdates();
+
 		return false;
+	}
+	
+	private void checkMapUpdates() {
+		long diff = System.currentTimeMillis() - app.getSettings().LAST_CHECKED_UPDATES.get();
+		if(diff >= 2 * 24 * 60 * 60l  && new Random().nextInt(5) == 0 && 
+				app.getSettings().isInternetConnectionAvailable()) {
+			app.getDownloadThread().runReloadIndexFiles();
+		} else if(Version.isDeveloperVersion(app)) {
+//			app.getDownloadThread().runReloadIndexFiles();
+		}
 	}
 
 	public boolean checkPreviousRunsForExceptions(Activity activity, boolean writeFileSize) {
@@ -419,6 +452,9 @@ public class AppInitializer implements IProgress {
 	}
 
 
+	
+
+
 	private void restoreBackupForFavoritesFiles() {
 		final File appDir = app.getAppPath(null);
 		File save = new File(appDir, FavouritesDbHelper.FILE_TO_SAVE);
@@ -619,4 +655,7 @@ public class AppInitializer implements IProgress {
 	public void removeListener(AppInitializeListener listener) {
 		this.listeners.remove(listener);
 	}
+
+
+	
 }
