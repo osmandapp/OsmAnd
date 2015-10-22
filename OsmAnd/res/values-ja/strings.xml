@@ -1816,7 +1816,7 @@ POIの更新は利用できません</string>
     <string name="traffic_warning_stop">一時停止標識</string>
     <string name="traffic_warning_calming">速度抑制</string>
     <string name="traffic_warning_speed_camera">スピードカメラ</string>
-    <string name="traffic_warning">交通警告</string>
+    <string name="traffic_warning">通行に関する警告</string>
 	<string name="local_index_description">選択解除または削除するには長押し、詳細を見るにはタップして下さい。現在のデバイス上のデータ(空き容量 %1$s):</string>
 	<string name="speed_limit_exceed">制限速度の許容範囲</string>
 	<string name="speed_limit_exceed_message">制限速度超過による警告音声の許容値を選択します</string>
@@ -2112,7 +2112,7 @@ POIの更新は利用できません</string>
     <string name="rendering_value_boldOutline_name">太線</string>
     <string name="no_updates_available">更新はありません</string>
     <string name="download_live_updates">ライブ更新</string>
-	<string name="we_really_care_about_your_opinion">私達は常にユーザーを気に掛け、個々の意見を参考にすることを重要視しています。</string>
+	<string name="we_really_care_about_your_opinion">我々はあなた方の意見やフィードバックを大切にし、それらを開発に生かせるよう努めています。</string>
 	<string name="failed_to_upload">アップロードに失敗しました</string>
 	<string name="delete_change">変更を削除します</string>
 	<string name="successfully_uploaded_pattern">正常にアップロードされました {0}/{1}</string>
@@ -2152,7 +2152,7 @@ POIの更新は利用できません</string>
 <string name="tab_title_basic">基本</string>
 	<string name="tab_title_advanced">拡張</string>
 	<string name="show_on_start">起動時に表示</string>
-	<string name="count_of_lines">表示する数の指定</string>
+	<string name="count_of_lines">表示数の選択</string>
 <string name="address_unknown">住所はまだ登録されていません</string>
     <string name="favorite_category_dublicate_message">指定したカテゴリ名は既に使用されています。別の名前を付けてください。</string>
     <string name="favorite_category_name">カテゴリ名</string>
