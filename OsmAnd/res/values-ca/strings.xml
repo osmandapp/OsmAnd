@@ -179,10 +179,10 @@
 <string name="poi_context_menu_showdescription">Mostra la descripció del PDI</string>
 <string name="index_name_france">Europa - França</string>
 <string name="index_name_germany">Europa - Alemanya</string>
-<string name="index_name_russia">Europa/Àsia - Rússia</string>
+<string name="index_name_russia">Rússia</string>
 <string name="index_name_africa">Àfrica</string>
 <string name="index_name_asia">Àsia</string>
-<string name="index_name_oceania">Oceania</string>
+<string name="index_name_oceania">Austràlia i Oceania</string>
 <string name="index_name_voice">Indicadors de veu (enregistrats, funcionalitats limitades)</string>
 <string name="amenity_type_osmwiki">Viquipèdia (fora de línia)</string>
 <string name="routing_settings">Navegació</string>

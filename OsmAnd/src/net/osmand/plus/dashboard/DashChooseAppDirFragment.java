@@ -472,7 +472,8 @@ public class DashChooseAppDirFragment extends DashBaseFragment {
 					FileInputStream fin = new FileInputStream(f);
 					FileOutputStream fout = new FileOutputStream(t);
 					try {
-						Algorithms.streamCopy(fin, fout);
+						progress.startTask(ctx.getString(R.string.copying_osmand_one_file_descr, t.getName()), (int) (f.length() / 1024));
+						Algorithms.streamCopy(fin, fout, progress, 1024);
 					} finally {
 						fin.close();
 						fout.close();

@@ -38,7 +38,12 @@ public class DownloadResources extends DownloadResourceGroup {
 		return itemsToUpdate;
 	}
 
-	public void initAlreadyLoadedFiles() {
+	public void updateLoadedFiles() {
+		initAlreadyLoadedFiles();
+		prepareFilesToUpdate();
+	}
+
+	private void initAlreadyLoadedFiles() {
 		java.text.DateFormat dateFormat = app.getResourceManager().getDateFormat();
 		Map<String, String> indexActivatedFileNames = app.getResourceManager().getIndexFileNames();
 		listWithAlternatives(dateFormat, app.getAppPath(""), IndexConstants.EXTRA_EXT, indexActivatedFileNames);
@@ -49,7 +54,6 @@ public class DownloadResources extends DownloadResourceGroup {
 		app.getResourceManager().getBackupIndexes(indexFileNames);
 		this.indexFileNames = indexFileNames;
 		this.indexActivatedFileNames = indexActivatedFileNames;
-		prepareFilesToUpdate();
 	}
 
 	public boolean checkIfItemOutdated(IndexItem item, java.text.DateFormat format) {
@@ -123,20 +127,16 @@ public class DownloadResources extends DownloadResourceGroup {
 	
 
 	protected void updateFilesToUpdate() {
-		initAlreadyLoadedFiles();
+		initAlreadyLoadedFiles();;
 		recalculateFilesToUpdate();
 	}
 
 	private void recalculateFilesToUpdate() {
 		List<IndexItem> stillUpdate = new ArrayList<IndexItem>();
 		for (IndexItem item : itemsToUpdate) {
-			String sfName = item.getTargetFileName();
 			java.text.DateFormat format = app.getResourceManager().getDateFormat();
-			String date = item.getDate(format);
-			String indexactivateddate = indexActivatedFileNames.get(sfName);
-			String indexfilesdate = indexFileNames.get(sfName);
-			if (date != null && !date.equals(indexactivateddate) && !date.equals(indexfilesdate)
-					&& indexActivatedFileNames.containsKey(sfName)) {
+			checkIfItemOutdated(item, format);
+			if (item.isOutdated()) {
 				stillUpdate.add(item);
 			}
 		}
@@ -206,11 +206,7 @@ public class DownloadResources extends DownloadResourceGroup {
 		DownloadResourceGroup voiceScreenTTS = new DownloadResourceGroup(voiceGroup, DownloadResourceGroupType.VOICE_TTS);
 		DownloadResourceGroup voiceRec = new DownloadResourceGroup(voiceGroup, DownloadResourceGroupType.VOICE_HEADER_REC);
 		DownloadResourceGroup voiceTTS = new DownloadResourceGroup(voiceGroup, DownloadResourceGroupType.VOICE_HEADER_TTS);
-		voiceScreenTTS.addGroup(voiceTTS);
-		voiceScreenRec.addGroup(voiceRec);
-		voiceGroup.addGroup(voiceScreenRec);
-		voiceGroup.addGroup(voiceScreenTTS);
-		
+
 		DownloadResourceGroup worldMaps = new DownloadResourceGroup(this, DownloadResourceGroupType.WORLD_MAPS);
 		Map<WorldRegion, List<IndexItem> > groupByRegion = new LinkedHashMap<WorldRegion, List<IndexItem>>();
 		
@@ -283,10 +279,16 @@ public class DownloadResources extends DownloadResourceGroup {
 		if (otherMaps.size() > 0) {
 			addGroup(otherMapsGroup);
 		}
+
+		voiceScreenTTS.addGroup(voiceTTS);
+		voiceScreenRec.addGroup(voiceRec);
+		voiceGroup.addGroup(voiceScreenRec);
+		voiceGroup.addGroup(voiceScreenTTS);
 		addGroup(voiceGroup);
+
 		createHillshadeSRTMGroups();
 		trimEmptyGroups();
-		initAlreadyLoadedFiles();
+		updateLoadedFiles();
 		return true;
 	}
 

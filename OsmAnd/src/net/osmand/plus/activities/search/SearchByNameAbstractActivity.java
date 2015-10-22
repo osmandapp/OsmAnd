@@ -141,7 +141,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 			}
 		});
 		// Not perfect
-//		searchText.setOnClickListener(new OnClickListener() {
+//		filter.setOnClickListener(new OnClickListener() {
 //			}
 //		});
 		searchText.setImeOptions(EditorInfo.IME_ACTION_DONE);

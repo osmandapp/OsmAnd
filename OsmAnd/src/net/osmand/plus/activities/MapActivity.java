@@ -147,8 +147,7 @@ public class MapActivity extends AccessibleActivity {
 //		notification.setLatestEventInfo(this, Version.getAppName(app), getString(R.string.go_back_to_osmand),
 //				pi);
 		int smallIcon = app.getSettings().getApplicationMode().getSmallIconDark();
-		final Builder noti = new NotificationCompat.Builder(
-				this).setContentTitle(Version.getAppName(app))
+		final Builder noti = new NotificationCompat.Builder(this).setContentTitle(Version.getAppName(app))
 				.setContentText(getString(R.string.go_back_to_osmand))
 				.setSmallIcon(smallIcon)
 //	        .setLargeIcon(Helpers.getBitmap(R.drawable.mirakel, getBaseContext()))
@@ -236,27 +235,10 @@ public class MapActivity extends AccessibleActivity {
 					.add(R.id.fragmentContainer, new FirstUsageFragment(),
 							FirstUsageFragment.TAG).commit();
 		}
-		final ListView menuItemsListView = (ListView) findViewById(R.id.menuItems);
-		menuItemsListView.setDivider(null);
-		final ContextMenuAdapter contextMenuAdapter = mapActions.createMainOptionsMenu();
-		contextMenuAdapter.setDefaultLayoutId(R.layout.simple_list_menu_item);
-		final ArrayAdapter<?> simpleListAdapter = contextMenuAdapter.createListAdapter(this,
-				settings.OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME);
-		menuItemsListView.setAdapter(simpleListAdapter);
-		menuItemsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				ContextMenuAdapter.OnContextMenuClick click =
-						contextMenuAdapter.getClickAdapter(position);
-				if (click.onContextMenuClick(simpleListAdapter,
-						contextMenuAdapter.getElementId(position), position, false)) {
-					closeDrawer();
-				}
-			}
-		});
-
+		mapActions.updateDrawerMenu();
 		drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 	}
+
 
 
 	private void checkAppInitialization() {
@@ -1003,6 +985,7 @@ public class MapActivity extends AccessibleActivity {
 	}
 
 	public void openDrawer() {
+		mapActions.updateDrawerMenu();
 		drawerLayout.openDrawer(Gravity.LEFT);
 	}
 

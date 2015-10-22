@@ -139,7 +139,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top|left"
-                android:layout_weight="0.4"
+                android:layout_weight="0.45"
                 android:orientation="vertical" >
 
                 <LinearLayout
@@ -180,12 +180,12 @@
                         android:src="@drawable/ic_action_test_light" />
                 </LinearLayout>
             </LinearLayout>
-            <!-- empty block to not let widgets grow more than 40% -->
+            <!-- empty block to not let widgets grow more than 45% -->
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_weight="0.6" >
+                android:layout_weight="0.55" >
             </LinearLayout>
         </LinearLayout>
 
@@ -197,19 +197,19 @@
             android:orientation="horizontal"
             android:weightSum="1" >
 
-            <!-- empty block to not let widgets grow more than 40% -->
+            <!-- empty block to not let widgets grow more than 45% -->
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_weight="0.6" >
+                android:layout_weight="0.55" >
             </LinearLayout>
 
             <FrameLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top|right"
-                android:layout_weight="0.4" >
+                android:layout_weight="0.45" >
 
                 <LinearLayout
                     android:layout_width="wrap_content"

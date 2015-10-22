@@ -134,11 +134,19 @@ public class BaseDownloadActivity extends ActionBarProgressActivity implements D
 		}
 	}
 
-	protected void downloadFilesCheck_2_Internet(IndexItem[] items) {
+	protected void downloadFilesCheck_2_Internet(final IndexItem[] items) {
 		if (!getMyApplication().getSettings().isWifiConnected()) {
 			if (getMyApplication().getSettings().isInternetConnectionAvailable()) {
-				new ConfirmDownloadDialogFragment().show(getSupportFragmentManager(),
-						ConfirmDownloadDialogFragment.TAG);
+				AlertDialog.Builder builder = new AlertDialog.Builder(this);
+				builder.setMessage(getString(R.string.download_using_mobile_internet));
+				builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						downloadFilesCheck_3_ValidateSpace(items);
+					}
+				});
+				builder.setNegativeButton(R.string.shared_string_no, null);
+				builder.show();
 			} else {
 				AccessibleToast.makeText(this, R.string.no_index_file_to_download, Toast.LENGTH_LONG).show();
 			}
@@ -202,22 +210,5 @@ public class BaseDownloadActivity extends ActionBarProgressActivity implements D
 		}
 	}
 
-	public static class ConfirmDownloadDialogFragment extends DialogFragment {
-		public static final String TAG = "ConfirmDownloadDialogFragment";
-		@NonNull
-		@Override
-		public Dialog onCreateDialog(Bundle savedInstanceState) {
-			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-			builder.setMessage(getString(R.string.download_using_mobile_internet));
-			builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					((BaseDownloadActivity) getActivity()).downloadFilesCheck_3_ValidateSpace();
-				}
-			});
-			builder.setNegativeButton(R.string.shared_string_no, null);
-			return builder.create();
-		}
-	}
 }
 

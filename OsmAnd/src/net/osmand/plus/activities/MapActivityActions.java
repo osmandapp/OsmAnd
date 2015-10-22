@@ -13,7 +13,6 @@ import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.access.AccessibleToast;
-import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
@@ -58,9 +57,11 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -899,6 +900,26 @@ public class MapActivityActions implements DialogProvider {
 			view.show();
 		}
 	}
-	
+
+	protected void updateDrawerMenu() {
+		final ListView menuItemsListView = (ListView) mapActivity.findViewById(R.id.menuItems);
+		menuItemsListView.setDivider(null);
+		final ContextMenuAdapter contextMenuAdapter = createMainOptionsMenu();
+		contextMenuAdapter.setDefaultLayoutId(R.layout.simple_list_menu_item);
+		final ArrayAdapter<?> simpleListAdapter = contextMenuAdapter.createListAdapter(mapActivity,
+				settings.OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME);
+		menuItemsListView.setAdapter(simpleListAdapter);
+		menuItemsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				ContextMenuAdapter.OnContextMenuClick click =
+						contextMenuAdapter.getClickAdapter(position);
+				if (click.onContextMenuClick(simpleListAdapter,
+						contextMenuAdapter.getElementId(position), position, false)) {
+					mapActivity.closeDrawer();
+				}
+			}
+		});
+	}
     
 }

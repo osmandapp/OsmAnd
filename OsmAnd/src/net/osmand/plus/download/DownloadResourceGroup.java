@@ -78,6 +78,9 @@ public class DownloadResourceGroup {
 					|| this == OTHER_MAPS_HEADER || this == OTHER_MAPS_GROUP;
 		}
 
+		public static String getVoiceTTSId() {
+			return "#" + VOICE_GROUP.name().toLowerCase() + "#" + VOICE_TTS.name().toLowerCase();
+		}
 	}
 	
 	public DownloadResourceGroup(DownloadResourceGroup parentGroup, DownloadResourceGroupType type) {

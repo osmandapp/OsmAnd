@@ -1,6 +1,7 @@
 package net.osmand.util;
 
 
+import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
 
 import org.apache.commons.logging.Log;
@@ -308,6 +309,21 @@ public class Algorithms {
 		int read;
 		while ((read = in.read(b)) != -1) {
 			out.write(b, 0, read);
+		}
+	}
+	
+	
+	public static void streamCopy(InputStream in, OutputStream out, IProgress pg, int bytesDivisor) throws IOException{
+		byte[] b = new byte[BUFFER_SIZE];
+		int read;
+		int cp = 0;
+		while ((read = in.read(b)) != -1) {
+			out.write(b, 0, read);
+			cp += read;
+			if(pg != null && cp > bytesDivisor) {
+				pg.progress(cp / bytesDivisor);
+				cp = cp % bytesDivisor; 
+			}
 		}
 	}
 	

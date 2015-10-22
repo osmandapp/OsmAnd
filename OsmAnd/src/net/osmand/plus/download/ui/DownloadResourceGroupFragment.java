@@ -1,24 +1,5 @@
 package net.osmand.plus.download.ui;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import net.osmand.plus.IconsCache;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
-import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.download.DownloadActivity.BannerAndDownloadFreeVersion;
-import net.osmand.plus.download.DownloadActivityType;
-import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
-import net.osmand.plus.download.DownloadResourceGroup;
-import net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType;
-import net.osmand.plus.download.DownloadResources;
-import net.osmand.plus.download.IndexItem;
-import net.osmand.util.Algorithms;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
@@ -37,6 +18,24 @@ import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.TextView;
+
+import net.osmand.plus.IconsCache;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
+import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.download.DownloadActivity.BannerAndDownloadFreeVersion;
+import net.osmand.plus.download.DownloadActivityType;
+import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
+import net.osmand.plus.download.DownloadResourceGroup;
+import net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType;
+import net.osmand.plus.download.DownloadResources;
+import net.osmand.plus.download.IndexItem;
+import net.osmand.util.Algorithms;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DownloadResourceGroupFragment extends DialogFragment implements DownloadEvents, OnChildClickListener {
 	public static final int RELOAD_ID = 0;
@@ -94,7 +93,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		setHasOptionsMenu(true);
 
 		if(openAsDialog()) {
-			banner = new BannerAndDownloadFreeVersion(view, (DownloadActivity) getActivity());
+			banner = new BannerAndDownloadFreeVersion(view, (DownloadActivity) getActivity(), false);
 		} else {
 			banner = null;
 			view.findViewById(R.id.freeVersionBanner).setVisibility(View.GONE);
@@ -112,6 +111,19 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 	public void onResume() {
 		super.onResume();
 		reloadData();
+		String filter = getDownloadActivity().getFilterAndClear();
+		String filterCat = getDownloadActivity().getFilterCatAndClear();
+		if (filter != null) {
+			getDownloadActivity().showDialog(getActivity(),
+					SearchDialogFragment.createInstance(filter));
+		} else if (filterCat != null) {
+			if (filterCat.equals(DownloadActivityType.VOICE_FILE.getTag())) {
+				String uniqueId = DownloadResourceGroup.DownloadResourceGroupType.getVoiceTTSId();
+				final DownloadResourceGroupFragment regionDialogFragment = DownloadResourceGroupFragment
+						.createInstance(uniqueId);
+				((DownloadActivity) getActivity()).showDialog(getActivity(), regionDialogFragment);
+			}
+		}
 	}
 
 	private void reloadData() {

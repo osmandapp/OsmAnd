@@ -445,9 +445,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		}
 		audioNotesLayer = new AudioNotesLayer(activity, this);
 		activity.getMapView().addLayer(audioNotesLayer, 3.5f);
-		if (recordControl == null) {
-			registerWidget(activity);
-		}
+		registerWidget(activity);
 	}
 
 	private void registerMediaListener(AudioManager am) {

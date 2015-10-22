@@ -1994,4 +1994,14 @@
 	<string name="poi_industrial_sawmill">類型：鋸木廠</string>
 	<string name="poi_industrial_water_purification">類型：水淨化廠</string>
 	<string name="poi_industrial_port">類型：港埠</string>
+	<string name="poi_industrial_depot">類型：車庫</string>
+
+	<string name="poi_note">注釋</string>
+	<string name="poi_watering_place">有水的地方</string>
+	<string name="poi_animal_boarding">動物寄宿</string>
+	<string name="poi_animal_boarding_dog">寄宿類型：狗</string>
+	<string name="poi_animal_boarding_cat">寄宿類型：貓</string>
+	<string name="poi_animal_boarding_dog_cat">寄宿類型：狗、貓</string>
+	<string name="poi_animal_boarding_horse">寄宿類型：馬</string>
+
 	</resources>

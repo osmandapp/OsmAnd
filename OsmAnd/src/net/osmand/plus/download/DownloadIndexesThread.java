@@ -26,6 +26,9 @@ import org.apache.commons.logging.Log;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -36,12 +39,15 @@ import android.os.AsyncTask.Status;
 import android.os.Build;
 import android.os.StatFs;
 import android.support.annotation.UiThread;
+import android.support.v7.app.NotificationCompat;
+import android.support.v7.app.NotificationCompat.Builder;
 import android.view.View;
 import android.widget.Toast;
 
 @SuppressLint({ "NewApi", "DefaultLocale" })
 public class DownloadIndexesThread {
 	private final static Log LOG = PlatformUtil.getLog(DownloadIndexesThread.class);
+	private static final int NOTIFICATION_ID = 45;
 	private final Context ctx;
 	private OsmandApplication app;
 
@@ -54,6 +60,7 @@ public class DownloadIndexesThread {
 	private int currentDownloadingItemProgress = 0;
 
 	private DownloadResources indexes;
+	private Notification notification;
 	
 	public interface DownloadEvents {
 		
@@ -75,7 +82,7 @@ public class DownloadIndexesThread {
 	}
 
 	public void updateLoadedFiles() {
-		indexes.initAlreadyLoadedFiles();
+		indexes.updateLoadedFiles();
 	}
 
 	/// UI notifications methods
@@ -88,6 +95,46 @@ public class DownloadIndexesThread {
 		if (uiActivity != null) {
 			uiActivity.downloadInProgress();
 		}
+		updateNotification();
+	}
+	
+	private void updateNotification() {
+		if(getCurrentDownloadingItem() != null) {
+			BasicProgressAsyncTask<?, ?, ?, ?> task = getCurrentRunningTask();
+			final boolean isFinished = task == null
+					|| task.getStatus() == AsyncTask.Status.FINISHED;
+			Intent contentIntent = new Intent(app, DownloadActivity.class);
+			PendingIntent contentPendingIntent = PendingIntent.getActivity(app, 0, contentIntent,
+					PendingIntent.FLAG_UPDATE_CURRENT);
+			Builder bld = new NotificationCompat.Builder(app);
+			String msg = Version.getAppName(app);
+			if(!isFinished) {
+				msg = task.getDescription();
+			}
+			StringBuilder contentText = new StringBuilder();
+			List<IndexItem> ii = getCurrentDownloadingItems();
+			for(IndexItem i : ii) {
+				if(contentText.length() > 0) {
+					contentText.append(", ");
+				}
+				contentText.append(i.getVisibleName(app, app.getRegions()));
+			}
+			bld.setContentTitle(msg).setSmallIcon(R.drawable.ic_action_import).
+				setContentText(contentText.toString()).
+				setContentIntent(contentPendingIntent).setOngoing(true);
+			int progress = getCurrentDownloadingItemProgress();
+			bld.setProgress(100, Math.max(progress, 0), progress < 0);
+			notification = bld.build();
+			NotificationManager mNotificationManager = (NotificationManager) app.getSystemService(Context.NOTIFICATION_SERVICE);
+			mNotificationManager.notify(NOTIFICATION_ID, notification);
+		} else {
+			if(notification != null) {
+				NotificationManager mNotificationManager = (NotificationManager) app.getSystemService(Context.NOTIFICATION_SERVICE);
+				mNotificationManager.cancel(NOTIFICATION_ID);
+				notification = null;
+			}
+		}
+		
 	}
 	
 
@@ -96,6 +143,7 @@ public class DownloadIndexesThread {
 		if (uiActivity != null) {
 			uiActivity.downloadHasFinished();
 		}
+		updateNotification();
 	}
 	
 	@UiThread
