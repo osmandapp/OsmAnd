@@ -5,7 +5,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:osmand="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:theme="@style/FreeVersionBanner"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/osmo_header_dark"
@@ -14,6 +13,7 @@
     android:paddingLeft="@dimen/list_content_padding"
     android:paddingRight="@dimen/list_content_padding"
     android:paddingTop="@dimen/list_header_padding"
+    android:theme="@style/FreeVersionBanner"
     tools:showIn="@layout/local_index_fragment_header">
 
     <LinearLayout
@@ -162,22 +162,30 @@
     <LinearLayout
         android:id="@+id/buttonsLinearLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/list_content_padding">
 
         <net.osmand.plus.widgets.ButtonEx
             android:id="@+id/getFullVersionButton"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/list_header_height"
             android:layout_weight="1"
+            android:background="@drawable/blue_button_drawable"
             android:text="@string/get_full_version"
+            android:textSize="@dimen/default_desc_text_size"
+            android:textStyle="bold"
             osmand:textAllCapsCompat="true"/>
 
         <net.osmand.plus.widgets.ButtonEx
             android:id="@+id/laterButton"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/list_header_height"
+            android:layout_marginLeft="@dimen/list_content_padding"
             android:layout_weight="1"
+            android:background="@drawable/later_button_drawable"
             android:text="@string/later"
+            android:textSize="@dimen/default_desc_text_size"
+            android:textStyle="bold"
             osmand:textAllCapsCompat="true"/>
 
     </LinearLayout>

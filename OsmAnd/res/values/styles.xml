@@ -138,8 +138,7 @@
     </style>
 
     <style name="FreeVersionBanner" parent="OsmandDarkTheme">
-        <item name="android:textColorSecondary">@color/color_white</item>
-        <item name="colorAccent">@color/map_widget_blue</item>
+        <item name="android:textColor">@color/color_white</item>
     </style>
 
     <style name="OsmandDarkTheme" parent="Theme.AppCompat">
