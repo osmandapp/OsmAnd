@@ -2183,7 +2183,7 @@
 
 	<string name="poi_social_facility_group_home">Socialfacilitet: bosted</string>
 	<string name="poi_social_facility_assisted_living">Socialfacilitet: plejehjem</string>
-	<string name="poi_social_facility_outreach">Socialfacilitet: opsøgende</string>
+	<string name="poi_social_facility_outreach">Socialfacilitet: privat humanitær organisation</string>
 	<string name="poi_social_facility_food_bank">Socialfacilitet: madcentral</string>
 	<string name="poi_social_facility_shelter">Socialfacilitet: herberg</string>
 	<string name="poi_social_facility_ambulatory_care">Socialfacilitet: ambulant behandling</string>
@@ -2198,7 +2198,7 @@
 	<string name="poi_social_facility_for_juvenile">Socialmålgruppe: unge</string>
 	<string name="poi_social_facility_for_homeless">Socialmålgruppe: hjemløse</string>
 	<string name="poi_social_facility_for_migrant">Socialmålgruppe: indvandrere</string>
-	<string name="poi_social_facility_for_underprivileged">Socialmålgruppe: underprivilegerede</string>
+	<string name="poi_social_facility_for_underprivileged">Socialmålgruppe: dårligt stillede</string>
 	<string name="poi_social_facility_for_drug_addicted">Socialmålgruppe: stofmisbrugere</string>
 	<string name="poi_social_facility_for_unemployed">Socialmålgruppe: arbejdsløse</string>
 	<string name="poi_social_facility_for_diseased">Socialmålgruppe: syge</string>
