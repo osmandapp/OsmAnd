@@ -2148,4 +2148,7 @@
 <string name="update_all">Обновить все (%1$s Мб)</string>
 <string name="free_downloads_used">Использовано бесплатных загрузок</string>
     <string name="free_downloads_used_description">Вы можете посмотреть сколько бесплатных загрузок вы использовали</string>
-</resources>
+<string name="share_clipboard">Буфер обмена</string>
+    <string name="share_qr_code">QR-код</string>
+    <string name="share_geo">гео:</string>
+    </resources>
