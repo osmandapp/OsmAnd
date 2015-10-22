@@ -66,11 +66,8 @@ public abstract class PointEditorFragment extends Fragment {
 
 		getActivity().findViewById(R.id.MapHudButtonsOverlay).setVisibility(View.INVISIBLE);
 
-		if (getEditor().isLandscapeLayout()) {
-			view = inflater.inflate(R.layout.point_editor_fragment_land, container, false);
-		} else {
-			view = inflater.inflate(R.layout.point_editor_fragment, container, false);
-		}
+		view = inflater.inflate(R.layout.point_editor_fragment, container, false);
+
 		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
 		toolbar.setTitle(getToolbarTitle());
 		toolbar.setNavigationIcon(getMyApplication().getIconsCache().getIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha));

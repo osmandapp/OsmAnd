@@ -27,7 +27,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
@@ -40,8 +39,6 @@ import net.osmand.plus.mapcontextmenu.details.MenuController;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
 
-import org.apache.commons.logging.Log;
-
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 import static net.osmand.plus.mapcontextmenu.details.MenuBuilder.SHADOW_HEIGHT_BOTTOM_DP;
 import static net.osmand.plus.mapcontextmenu.details.MenuBuilder.SHADOW_HEIGHT_TOP_DP;
@@ -50,7 +47,6 @@ import static net.osmand.plus.mapcontextmenu.details.MenuBuilder.SHADOW_HEIGHT_T
 public class MapContextMenuFragment extends Fragment {
 
 	public static final String TAG = "MapContextMenuFragment";
-	private static final Log LOG = PlatformUtil.getLog(MapContextMenuFragment.class);
 
 	public static final float FAB_PADDING_TOP_DP = 4f;
 	public static final float MARKER_PADDING_DP = 20f;
@@ -62,6 +58,7 @@ public class MapContextMenuFragment extends Fragment {
 
 	MapContextMenu menu;
 
+	private int menuTopViewHeight;
 	private int menuTopShadowHeight;
 	private int menuTopShadowAllHeight;
 	private int menuTitleHeight;
@@ -319,7 +316,6 @@ public class MapContextMenuFragment extends Fragment {
 
 		// FAB
 		fabView = (ImageView)view.findViewById(R.id.context_menu_fab_view);
-		fabView.setImageDrawable(iconsCache.getIcon(menu.getFabIconId()));
 		fabView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -438,11 +434,17 @@ public class MapContextMenuFragment extends Fragment {
 			@Override
 			public void onGlobalLayout() {
 
+				int newMenuTopViewHeight = view.findViewById(R.id.context_menu_top_view).getHeight();
 				menuTopShadowHeight = view.findViewById(R.id.context_menu_top_shadow).getHeight();
 				menuTopShadowAllHeight = view.findViewById(R.id.context_menu_top_shadow_all).getHeight();
 				menuFullHeight = view.findViewById(R.id.context_menu_main).getHeight();
 
-				menuTitleHeight = menuTopShadowHeight + menuTopShadowAllHeight;
+				int dy = 0;
+				if (!menu.isLandscapeLayout() && menuTopViewHeight != 0) {
+					dy = newMenuTopViewHeight - menuTopViewHeight;
+				}
+				menuTopViewHeight = newMenuTopViewHeight;
+				menuTitleHeight = menuTopShadowHeight + menuTopShadowAllHeight + dy;
 				menuBottomViewHeight = view.findViewById(R.id.context_menu_bottom_view).getHeight();
 
 				recalculateFullHeightMax();
@@ -605,6 +607,11 @@ public class MapContextMenuFragment extends Fragment {
 				}
 			}
 		}
+
+		if (map.getLatitude() == latlon.getLatitude() && map.getLongitude() == latlon.getLongitude()) {
+			return;
+		}
+
 		if (animated) {
 			showOnMap(latlon, false, true);
 		} else {
