@@ -58,10 +58,10 @@
   <string name="index_name_europe">Europa</string>
   <string name="index_name_france">Europa - Francia</string>
   <string name="index_name_germany">Europa - Alemania</string>
-  <string name="index_name_russia">Europa/Asia - Rusia</string>
+  <string name="index_name_russia">Rusia</string>
   <string name="index_name_africa">África</string>
   <string name="index_name_asia">Asia</string>
-  <string name="index_name_oceania">Oceanía</string>
+  <string name="index_name_oceania">Australia y Oceanía</string>
   <string name="index_name_other">Mapas del mundo y temáticos</string>
   <string name="index_name_wiki">Wikipedia mundial</string>
   <string name="index_name_voice">Mensajes de voz (grabado, funciones limitadas)</string>
@@ -2245,4 +2245,9 @@
     <string name="update_all">Actualizar todo (%1$s MB)</string>
     <string name="free_downloads_used">Descargas gratis usadas</string>
     <string name="free_downloads_used_description">Puedes configurar cuántas descargas gratis ha usado</string>
-</resources>
+<string name="simulate_initial_startup_descr">Restablece la bandera que indica el primer arranque y mantiene los demás ajustes en su estado original</string>
+    <string name="simulate_initial_startup">Simular arranque inicial</string>
+    <string name="share_geo">geo:</string>
+    <string name="share_menu_location">Compartir ubicación</string>
+    <string name="shared_string_send">Enviar</string>
+    </resources>
