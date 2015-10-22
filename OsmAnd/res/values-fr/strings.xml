@@ -2209,4 +2209,9 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 <string name="update_all">Tout mettre à jour (%1$s MB)</string>
     <string name="free_downloads_used">Téléchargements gratuits effectués</string>
     <string name="free_downloads_used_description">Visualiser le nombre de téléchargements gratuits déjà effectués</string>
-</resources>
+<string name="share_common_send">Envoyer</string>
+    <string name="share_common_copy">Copier</string>
+    <string name="share_geo">geo :</string>
+    <string name="share_qr_code">QR-Code</string>
+    <string name="share_menu_title">Partager ce lieu</string>
+    </resources>

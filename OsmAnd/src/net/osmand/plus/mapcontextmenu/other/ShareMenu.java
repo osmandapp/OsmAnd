@@ -5,13 +5,11 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.activities.actions.ShareDialog;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.mapcontextmenu.details.MenuController;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.LinkedList;
@@ -22,18 +20,18 @@ public class ShareMenu {
 	private final MapActivity mapActivity;
 
 	private LatLon latLon;
-	private PointDescription pointDescription;
+	private String title;
 	private boolean portraitMode;
 	private boolean largeDevice;
 
 	private static final String KEY_SHARE_MENU_LATLON = "key_share_menu_latlon";
-	private static final String KEY_SHARE_MENU_POINT_DESC = "key_share_menu_point_desc";
+	private static final String KEY_SHARE_MENU_POINT_TITLE = "key_share_menu_point_title";
 
 	public enum ShareItem {
-		MESSAGE(R.drawable.ic_action_aircraft, R.string.shared_string_message),
-		CLIPBOARD(R.drawable.ic_action_aircraft, R.string.share_clipboard),
-		GEO(R.drawable.ic_action_aircraft, R.string.share_geo),
-		QR_CODE(R.drawable.ic_action_aircraft, R.string.share_qr_code);
+		MESSAGE(R.drawable.ic_action_export, R.string.shared_string_send),
+		CLIPBOARD(R.drawable.ic_action_export, R.string.shared_string_copy),
+		GEO(R.drawable.ic_action_export, R.string.share_geo),
+		QR_CODE(R.drawable.ic_action_export, R.string.share_qr_code);
 
 		final int iconResourceId;
 		final int titleResourceId;
@@ -95,21 +93,16 @@ public class ShareMenu {
 		return latLon;
 	}
 
-	public PointDescription getPointDescription() {
-		return pointDescription;
+	public String getTitle() {
+		return title;
 	}
 
-	public static void show(LatLon latLon, PointDescription pointDescription, MapActivity mapActivity) {
+	public static void show(LatLon latLon, String title, MapActivity mapActivity) {
 
 		ShareMenu menu = new ShareMenu(mapActivity);
 
-		if (pointDescription == null) {
-			menu.pointDescription = new PointDescription(latLon.getLatitude(), latLon.getLongitude());
-		} else {
-			menu.pointDescription = pointDescription;
-		}
-
 		menu.latLon = latLon;
+		menu.title = title;
 
 		ShareMenuFragment.showInstance(menu);
 	}
@@ -119,7 +112,13 @@ public class ShareMenu {
 		final String geoUrl = MapUtils.buildGeoUrl(latLon.getLatitude(), latLon.getLongitude(), zoom);
 		final String httpUrl = "http://osmand.net/go?lat=" + ((float) latLon.getLatitude())
 				+ "&lon=" + ((float) latLon.getLongitude()) + "&z=" + zoom;
-		String sms = mapActivity.getString(R.string.send_location_sms_pattern, geoUrl, httpUrl);
+		StringBuilder sb = new StringBuilder();
+		if (!Algorithms.isEmpty(title)) {
+			sb.append(title).append("\n");
+		}
+		sb.append(mapActivity.getString(R.string.search_tabs_location)).append(": ");
+		sb.append(geoUrl).append("\n").append(httpUrl);
+		String sms = sb.toString();
 		switch (item) {
 			case MESSAGE:
 				ShareDialog.sendMessage(mapActivity, sms);
@@ -140,23 +139,16 @@ public class ShareMenu {
 		}
 	}
 
-	public float getLandscapeWidthDp() {
-		return MenuController.LANDSCAPE_WIDTH_DP;
-	}
-
 	public void saveMenu(Bundle bundle) {
 		bundle.putSerializable(KEY_SHARE_MENU_LATLON, latLon);
-		bundle.putSerializable(KEY_SHARE_MENU_POINT_DESC, pointDescription);
+		bundle.putString(KEY_SHARE_MENU_POINT_TITLE, title);
 	}
 
 	public static ShareMenu restoreMenu(Bundle bundle, MapActivity mapActivity) {
 
 		ShareMenu menu = new ShareMenu(mapActivity);
 
-		Object pDescObj = bundle.getSerializable(KEY_SHARE_MENU_POINT_DESC);
-		if (pDescObj != null) {
-			menu.pointDescription = (PointDescription) pDescObj;
-		}
+		menu.title = bundle.getString(KEY_SHARE_MENU_POINT_TITLE);
 		Object latLonObj = bundle.getSerializable(KEY_SHARE_MENU_LATLON);
 		if (latLonObj != null) {
 			menu.latLon = (LatLon) latLonObj;

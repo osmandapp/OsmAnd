@@ -11,9 +11,9 @@
     -->
     <string name="simulate_initial_startup_descr">"Resets flag indicating first startup, keep other settings in the original state"</string>
     <string name="simulate_initial_startup">Simulate initial startup</string>
-    <string name="share_clipboard">Clipboard</string>
     <string name="share_geo">geo:</string>
-    <string name="share_qr_code">QR-Code</string>
+    <string name="share_menu_location">Share location</string>
+    <string name="shared_string_send">Send</string>
     <string name="favorite_category_dublicate_message">Specified category name already exists. Please define other name.</string>
     <string name="favorite_category_name">Category name</string>
     <string name="favorite_category_add_new_title">Add new category</string>
