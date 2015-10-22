@@ -57,6 +57,8 @@ public class AppInitializer implements IProgress {
 
 	public static final boolean TIPS_AND_TRICKS = false;
 	private static final String FIRST_TIME_APP_RUN = "FIRST_TIME_APP_RUN"; //$NON-NLS-1$
+	protected static final String NUMBER_OF_STARTS = "NUMBER_OF_STARTS"; //$NON-NLS-1$
+	protected static final String FIRST_INSTALLED = "FIRST_INSTALLED"; //$NON-NLS-1$
 	private static final String VECTOR_INDEXES_CHECK = "VECTOR_INDEXES_CHECK"; //$NON-NLS-1$
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED"; //$NON-NLS-1$
 	private static final String EXCEPTION_FILE_SIZE = "EXCEPTION_FS"; //$NON-NLS-1$
@@ -112,6 +114,14 @@ public class AppInitializer implements IProgress {
 			return;
 		}
 		SharedPreferences pref = activity.getPreferences(Context.MODE_WORLD_WRITEABLE);
+		if(!pref.contains(NUMBER_OF_STARTS)) {
+			pref.edit().putInt(NUMBER_OF_STARTS, 1).commit();
+		} else {
+			pref.edit().putInt(NUMBER_OF_STARTS, pref.getInt(NUMBER_OF_STARTS, 0) + 1).commit();
+		}
+		if (!pref.contains(FIRST_INSTALLED)) {
+			pref.edit().putLong(FIRST_INSTALLED, System.currentTimeMillis()).commit();
+		}
 		if (!pref.contains(FIRST_TIME_APP_RUN)) {
 			firstTime = true;
 			pref.edit().putBoolean(FIRST_TIME_APP_RUN, true).commit();
