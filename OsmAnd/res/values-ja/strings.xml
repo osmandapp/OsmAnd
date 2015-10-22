@@ -448,8 +448,7 @@ POIの更新は利用できません</string>
      <string name="shared_string_close">閉じる</string>
      <string name="loading_data">データをロード中…</string>
      <string name="reading_indexes">索引を読み込み中…</string>
-     <string name="previous_run_crashed">前回のアプリケーション実行はクラッシュしました。
-ログファイルは{0}にあります。ログファイルを添付して問題を報告してください。</string>
+     <string name="previous_run_crashed">前回アプリケーション実行中にクラッシュしました。 詳細は{0}に記録されています。報告する場合はログファイルの添付をお願いします。</string>
      <string name="saving_gpx_tracks">GPX経路をSDに保存中…</string>
      <string name="finished_task">終了</string>
  
@@ -1161,10 +1160,10 @@ POIの更新は利用できません</string>
 	<string name="index_name_europe">ヨーロッパ</string>
 	<string name="index_name_france">ヨーロッパ - フランス</string>
 	<string name="index_name_germany">ヨーロッパ - ドイツ</string>
-	<string name="index_name_russia">ヨーロッパ/アジア - ロシア</string>
+	<string name="index_name_russia">ロシア</string>
 	<string name="index_name_africa">アフリカ</string>
 	<string name="index_name_asia">アジア</string>
-	<string name="index_name_oceania">オセアニア</string>
+	<string name="index_name_oceania">オーストラリアとオセアニア</string>
 	<string name="index_name_other">ワールドワイドとトピックマップ</string>
 	<string name="index_name_wiki">ワールドワイドウィキペディアPOI</string>
 	<string name="index_name_voice">音声指示(記録音声、機能限定)</string>
