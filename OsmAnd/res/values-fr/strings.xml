@@ -2216,4 +2216,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="share_menu_title">Partager ce lieu</string>
     <string name="share_menu_location">Partager ce lieu</string>
     <string name="shared_string_send">Envoyer</string>
+    <string name="application_dir_description">Sélectionnez l\'emplacement pour enregistrer les cartes.</string>
+<string name="simulate_initial_startup">Simuler un premier démarrage</string>
+    <string name="simulate_initial_startup_descr">Efface le compteur de démarrages afin de simuler un premier démarrage (ne modifie aucun autre paramètre)</string>
+    <string name="hello_blank_fragment">Hello fragment vide</string>
     </resources>
