@@ -2148,4 +2148,7 @@
     <string name="update_all">Абнавіць усе (%1$s МБ)</string>
     <string name="free_downloads_used">Выкарыстана бясплатных загрузак</string>
     <string name="free_downloads_used_description">Вы можаце паглядзець колькі бясплатных загрузак вы выкарысталі</string>
-</resources>
+<string name="shared_string_send">Адаслаць</string>
+    <string name="application_dir_description">Выберыце, дзе вы хочаце захоўваць файлы мапаў.</string>
+<string name="share_menu_location">Падзяліцца месцазнаходжаньнем</string>
+    </resources>
