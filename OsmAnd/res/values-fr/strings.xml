@@ -929,7 +929,7 @@
   
   <string name="osmand_parking_hours">Heures</string>
   <string name="osmand_parking_minutes">Minutes</string>
-  <string name="osmand_parking_position_description_add_time">Le véhicule a été garé à :</string>
+  <string name="osmand_parking_position_description_add_time">Le véhicule a été garé à</string>
   <string name="use_compass_navigation_descr">Utiliser la boussole quand l\'orientation n\'est pas détectée</string>
   <string name="use_compass_navigation">Utiliser la boussole</string>
   <string name="route_updated_loc_found">L\'itinéraire sera calculé dès votre position connue</string>
