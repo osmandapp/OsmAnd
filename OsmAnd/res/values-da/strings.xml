@@ -2189,4 +2189,8 @@
     <string name="share_clipboard">Udklipsholder</string>
     <string name="share_geo">geo:</string>
     <string name="share_qr_code">QR-kode</string>
+    <string name="simulate_initial_startup_descr">Nulstiller flag, der angiver første start, holder andre indstillinger i deres oprindelige tilstand</string>
+    <string name="simulate_initial_startup">Simulere indledende opstart</string>
+    <string name="share_menu_location">Del placering</string>
+    <string name="shared_string_send">Send</string>
     </resources>
