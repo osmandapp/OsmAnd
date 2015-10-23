@@ -2230,4 +2230,9 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 <string name="update_all">Aggiorna tutto (%1$s MB)</string>
 <string name="free_downloads_used">Download gratuiti utilizzati</string>
     <string name="free_downloads_used_description">Puoi impostare quanti download gratuiti hai utilizzato</string>
-</resources>
+<string name="share_geo">geo:</string>
+    <string name="shared_string_send">Invia</string>
+    <string name="simulate_initial_startup_descr">"Resetta  l\'indicatore del primo avvio, non modificare tutte le altre impostazioni"</string>
+    <string name="simulate_initial_startup">Simula il primo avvio</string>
+    <string name="share_menu_location">Condivisi la posizione</string>
+    </resources>
