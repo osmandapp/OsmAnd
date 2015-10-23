@@ -2194,4 +2194,5 @@
     <string name="share_menu_location">Del placering</string>
     <string name="shared_string_send">Send</string>
     <string name="hello_blank_fragment">Hej tomme fragment</string>
+<string name="application_dir_description">Vælg hvor kortfilerne skal gemmes.</string>
 </resources>
