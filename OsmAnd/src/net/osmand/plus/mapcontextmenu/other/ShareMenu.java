@@ -28,7 +28,7 @@ public class ShareMenu {
 	private static final String KEY_SHARE_MENU_POINT_TITLE = "key_share_menu_point_title";
 
 	public enum ShareItem {
-		MESSAGE(R.drawable.ic_action_export, R.string.shared_string_send),
+		MESSAGE(R.drawable.ic_action_message, R.string.shared_string_send),
 		CLIPBOARD(R.drawable.ic_action_copy, R.string.shared_string_copy),
 		GEO(R.drawable.ic_world_globe_dark, R.string.share_geo),
 		QR_CODE(R.drawable.ic_action_qrcode, R.string.share_qr_code);
