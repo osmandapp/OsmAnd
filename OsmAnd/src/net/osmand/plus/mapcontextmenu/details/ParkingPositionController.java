@@ -2,24 +2,41 @@ package net.osmand.plus.mapcontextmenu.details;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.search.SearchHistoryFragment;
 import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
+import net.osmand.util.Algorithms;
 
 public class ParkingPositionController extends MenuController {
 
 	private PointDescription pointDescription;
 	private LatLon latLon;
+	ParkingPositionPlugin plugin;
+	String parkingDescription = "";
 
 	public ParkingPositionController(OsmandApplication app, MapActivity mapActivity, final PointDescription pointDescription, LatLon latLon) {
 		super(new ParkingPositionBuilder(app), mapActivity);
 		this.pointDescription = pointDescription;
 		this.latLon = latLon;
+		plugin = OsmandPlugin.getPlugin(ParkingPositionPlugin.class);
+		if (plugin != null) {
+			StringBuilder sb = new StringBuilder();
+			sb.append(plugin.getParkingStartDesc(mapActivity));
+			String leftDesc = plugin.getParkingLeftDesc(mapActivity);
+			if (!Algorithms.isEmpty(leftDesc)) {
+				sb.append("\n").append(leftDesc);
+			}
+			parkingDescription = sb.toString();
+		}
 	}
 
 	@Override
@@ -34,7 +51,7 @@ public class ParkingPositionController extends MenuController {
 
 	@Override
 	public boolean needTypeStr() {
-		return true;
+		return !Algorithms.isEmpty(parkingDescription);
 	}
 
 	@Override
@@ -49,7 +66,7 @@ public class ParkingPositionController extends MenuController {
 
 	@Override
 	public String getTypeStr() {
-		return "Parked at 10:23";
+		return parkingDescription;
 	}
 
 	@Override
@@ -60,6 +77,13 @@ public class ParkingPositionController extends MenuController {
 	@Override
 	public String getTitleButtonCaption() {
 		return getMapActivity().getText(R.string.osmand_parking_delete).toString();
+	}
+
+	@Override
+	public void titleButtonPressed() {
+		if (plugin != null) {
+			plugin.showDeleteDialog(getMapActivity());
+		}
 	}
 
 	@Override

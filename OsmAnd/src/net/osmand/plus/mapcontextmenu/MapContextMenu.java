@@ -220,13 +220,13 @@ public class MapContextMenu {
 				menuController = new FavouritePointMenuController(app, mapActivity, (FavouritePoint) object);
 			} else if (object instanceof HistoryEntry) {
 				menuController = new HistoryMenuController(app, mapActivity, (HistoryEntry) object);
+			} else if (object instanceof LatLon) {
+				if (pointDescription.isParking()) {
+					menuController = new ParkingPositionController(app, mapActivity, pointDescription, latLon);
+				}
 			}
 		} else {
-			if (pointDescription.isParking()) {
-				menuController = new ParkingPositionController(app, mapActivity, pointDescription, latLon);
-			} else {
-				menuController = new PointDescriptionMenuController(app, mapActivity, pointDescription, latLon);
-			}
+			menuController = new PointDescriptionMenuController(app, mapActivity, pointDescription, latLon);
 		}
 	}
 
@@ -540,6 +540,8 @@ public class MapContextMenu {
 	}
 
 	public void titleButtonPressed() {
-
+		if (menuController != null) {
+			menuController.titleButtonPressed();
+		}
 	}
 }
