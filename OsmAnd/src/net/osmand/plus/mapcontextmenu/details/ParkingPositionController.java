@@ -2,16 +2,13 @@ package net.osmand.plus.mapcontextmenu.details;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.search.SearchHistoryFragment;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 import net.osmand.util.Algorithms;
@@ -76,7 +73,7 @@ public class ParkingPositionController extends MenuController {
 
 	@Override
 	public String getTitleButtonCaption() {
-		return getMapActivity().getText(R.string.osmand_parking_delete).toString();
+		return getMapActivity().getString(R.string.osmand_parking_delete);
 	}
 
 	@Override
