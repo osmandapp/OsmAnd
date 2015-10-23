@@ -2170,4 +2170,5 @@
     <string name="share_geo">地理：</string>
     <string name="share_menu_location">分享位置</string>
     <string name="shared_string_send">發送</string>
-    </resources>
+    <string name="hello_blank_fragment">哈囉，成空的片段</string>
+</resources>
