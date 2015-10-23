@@ -1969,7 +1969,7 @@
     <string name="storage_directory_internal_app">Внутренняя память приложения</string>
     <string name="storage_directory_manual">Указать вручную</string>
     <string name="storage_directory">Хранилище карт</string>
-    <string name="shared_string_copy">Переместить</string>
+    <string name="shared_string_copy">Копировать</string>
     <string name="application_dir_change_warning3">Переместить также файлы данных OsmAnd в новое место назначения?</string>
     <string name="search_poi_category_hint">Напечатайте для поиска</string>
     <string name="rendering_attr_hideHouseNumbers_name">Скрыть номера домов</string>
@@ -2151,4 +2151,6 @@
 <string name="share_clipboard">Буфер обмена</string>
     <string name="share_qr_code">QR-код</string>
     <string name="share_geo">гео:</string>
+    <string name="share_menu_location">Поделиться местоположением</string>
+    <string name="shared_string_send">Отправить</string>
     </resources>
