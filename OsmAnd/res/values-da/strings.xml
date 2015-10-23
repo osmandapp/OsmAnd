@@ -2193,4 +2193,5 @@
     <string name="simulate_initial_startup">Simuler første opstart</string>
     <string name="share_menu_location">Del placering</string>
     <string name="shared_string_send">Send</string>
-    </resources>
+    <string name="hello_blank_fragment">Hej tomme fragment</string>
+</resources>
