@@ -928,7 +928,7 @@
   <string name="select_animate_speedup">Seleziona la velocità dell\'animazione del percorso</string>
   <string name="osmand_parking_hours">Ore</string>
   <string name="osmand_parking_minutes">Minuti</string>
-  <string name="osmand_parking_position_description_add_time">L\'automobile è stata parcheggiata alle:</string>
+  <string name="osmand_parking_position_description_add_time">L\'automobile è stata parcheggiata alle</string>
   <string name="use_compass_navigation_descr">Usa la bussola quando la direzione non è altrimenti individuata</string>
   <string name="use_compass_navigation">Usa la bussola</string>
   <string name="route_updated_loc_found">Il percorso verrà calcolato a posizione acquisita</string>
