@@ -2163,9 +2163,9 @@
 	<string name="poi_caravans_no">Campingvogne: nej</string>
 	<string name="poi_impromptu_yes">Improviseret: ja</string>
 	<string name="poi_impromptu_no">Improviseret: nej</string>
-	<string name="poi_sanitary_dump_station_yes">Sanitære dump station: ja</string>
-	<string name="poi_sanitary_dump_station_no">Sanitære dump station: nej</string>
-	<string name="poi_sanitary_dump_station_customers">Sanitær dump station: kun for kunder</string>
+	<string name="poi_sanitary_dump_station_yes">Sanitær tømmestation: ja</string>
+	<string name="poi_sanitary_dump_station_no">Sanitær tømmestation: nej</string>
+	<string name="poi_sanitary_dump_station_customers">Sanitær tømmestation: kun for kunder</string>
 	<string name="poi_power_supply_yes">Strømforsyning: ja</string>
 	<string name="poi_power_supply_no">Strømforsyning: nej</string>
 	<string name="poi_power_supply_cee_17_blue">Strømforsyning (stik): CEE 17 blå</string>
@@ -2183,7 +2183,7 @@
 
 	<string name="poi_social_facility_group_home">Socialfacilitet: bosted</string>
 	<string name="poi_social_facility_assisted_living">Socialfacilitet: plejehjem</string>
-	<string name="poi_social_facility_outreach">Socialfacilitet: opsøgende</string>
+	<string name="poi_social_facility_outreach">Socialfacilitet: privat humanitær organisation</string>
 	<string name="poi_social_facility_food_bank">Socialfacilitet: madcentral</string>
 	<string name="poi_social_facility_shelter">Socialfacilitet: herberg</string>
 	<string name="poi_social_facility_ambulatory_care">Socialfacilitet: ambulant behandling</string>
@@ -2198,7 +2198,7 @@
 	<string name="poi_social_facility_for_juvenile">Socialmålgruppe: unge</string>
 	<string name="poi_social_facility_for_homeless">Socialmålgruppe: hjemløse</string>
 	<string name="poi_social_facility_for_migrant">Socialmålgruppe: indvandrere</string>
-	<string name="poi_social_facility_for_underprivileged">Socialmålgruppe: underprivilegerede</string>
+	<string name="poi_social_facility_for_underprivileged">Socialmålgruppe: dårligt stillede</string>
 	<string name="poi_social_facility_for_drug_addicted">Socialmålgruppe: stofmisbrugere</string>
 	<string name="poi_social_facility_for_unemployed">Socialmålgruppe: arbejdsløse</string>
 	<string name="poi_social_facility_for_diseased">Socialmålgruppe: syge</string>
@@ -2247,7 +2247,7 @@
 	<string name="poi_step_count">Antal trin</string>
 	<string name="poi_step_condition_even">Trintilstand: jævn</string>
 	<string name="poi_step_condition_uneven">Trintilstand: ujævn</string>
-	<string name="poi_step_condition_rough">Trintilstand: ru</string>
+	<string name="poi_step_condition_rough">Trintilstand: dårlig</string>
 
 <string name="poi_cairn">Varde</string>
 
@@ -2260,7 +2260,7 @@
 	<string name="poi_tomb_rock_cut">Type: udhugget i sten</string>
 	<string name="poi_tomb_hypogeum">Type: hypogeum</string>
 	<string name="poi_tomb_vault">Type: hvælving</string>
-	<string name="poi_tomb_columbarium">Type: columbarium</string>
+	<string name="poi_tomb_columbarium">Type: klumbarium</string>
 	<string name="poi_tomb_mausoleum">Type: mausoleum</string>
 	<string name="poi_tomb_sarcophagus">Type: sarkofag</string>
 	<string name="poi_tomb_crypt">Type: krypt</string>

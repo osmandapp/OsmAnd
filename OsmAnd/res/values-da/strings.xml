@@ -2186,4 +2186,11 @@
 <string name="update_all">Opdater alle (%1$s MB)</string>
 <string name="free_downloads_used_description">Indstil hvormange gratis filhentninger der er brugt</string>
 <string name="free_downloads_used">Gratis filhentninger brugt</string>
+    <string name="share_clipboard">Udklipsholder</string>
+    <string name="share_geo">geo:</string>
+    <string name="share_qr_code">QR-kode</string>
+    <string name="simulate_initial_startup_descr">Nulstiller flag, der angiver første opstart, beholder andre indstillinger i deres oprindelige tilstand</string>
+    <string name="simulate_initial_startup">Simuler første opstart</string>
+    <string name="share_menu_location">Del placering</string>
+    <string name="shared_string_send">Send</string>
     </resources>

@@ -2,8 +2,8 @@ package net.osmand.plus.base;
 
 import net.osmand.IProgress;
 import net.osmand.plus.OsmAndConstants;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
@@ -14,13 +14,13 @@ public abstract class BasicProgressAsyncTask<Tag, Params, Progress, Result> exte
 	protected int deltaProgress;
 	protected int work;
 	protected String message = ""; //$NON-NLS-1$
-	protected Context ctx;
+	protected OsmandApplication ctx;
 	protected boolean interrupted = false;
 	protected Tag tag;
 	private Handler uiHandler;
 
-	public BasicProgressAsyncTask(Context ctx) {
-		this.ctx = ctx;
+	public BasicProgressAsyncTask(OsmandApplication app) {
+		this.ctx = app;
 		this.work = -1;
 	}
 

@@ -212,7 +212,7 @@
   <string name="index_name_russia">Евразия - Россия</string>
   <string name="index_name_africa">Африка</string>
   <string name="index_name_asia">Азия</string>
-  <string name="index_name_oceania">Океания</string>
+  <string name="index_name_oceania">Австралия и Океания</string>
   <string name="index_name_other">Карты мира</string>
   <string name="index_name_wiki">Всемирная Википедия</string>
   <string name="index_name_voice">Голосовые данные (запись)</string>
@@ -2148,4 +2148,7 @@
 <string name="update_all">Обновить все (%1$s Мб)</string>
 <string name="free_downloads_used">Использовано бесплатных загрузок</string>
     <string name="free_downloads_used_description">Вы можете посмотреть сколько бесплатных загрузок вы использовали</string>
-</resources>
+<string name="share_clipboard">Буфер обмена</string>
+    <string name="share_qr_code">QR-код</string>
+    <string name="share_geo">гео:</string>
+    </resources>

@@ -71,7 +71,7 @@
                     android:background="?android:selectableItemBackground"
                     android:textColor="?attr/contextMenuButtonColor"
                     android:text="@string/update_existing"
-                    android:visibility="visible"/>
+                    android:visibility="gone"/>
 
             </LinearLayout>
 

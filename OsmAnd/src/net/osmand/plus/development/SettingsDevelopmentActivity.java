@@ -10,6 +10,7 @@ import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.activities.actions.AppModeDialog;
 import net.osmand.util.SunriseSunset;
@@ -58,8 +59,24 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		cat.addPreference(openGlRender);
 
 		
-		cat.addPreference(createCheckBoxPreference(settings.BETA_TESTING_LIVE_UPDATES,
+		final Preference firstRunPreference = new Preference(this);
+		firstRunPreference.setTitle(R.string.simulate_initial_startup);
+		firstRunPreference.setSummary(R.string.simulate_initial_startup_descr);
+		firstRunPreference.setSelectable(true);
+		firstRunPreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+		@Override
+			public boolean onPreferenceClick(Preference preference) {
+				getMyApplication().getAppInitializer().resetFirstTimeRun();
+				getMyApplication().showToastMessage(R.string.shared_string_ok);
+				return true;
+			}
+		});
+		cat.addPreference(firstRunPreference);
+
+		if(Version.isDeveloperVersion(getMyApplication())) {
+			cat.addPreference(createCheckBoxPreference(settings.BETA_TESTING_LIVE_UPDATES,
 				"Live updates", "Beta testing for live updates"));
+		}
 		Preference pref = new Preference(this);
 		final Preference simulate = pref;
 		final OsmAndLocationSimulation sim = getMyApplication().getLocationProvider().getLocationSimulation();
@@ -182,21 +199,6 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		cat.addPreference(createCheckBoxPreference(settings.SHOULD_SHOW_FREE_VERSION_BANNER,
 				R.string.show_free_version_banner,
 				R.string.show_free_version_banner_description));
-		final Preference firstRunPreference = new Preference(this);
-		firstRunPreference.setTitle("Reset first run");
-		firstRunPreference.setSummary("After reset app wold act like it is it's firs run");
-		firstRunPreference.setSelectable(true);
-		firstRunPreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-			@Override
-			public boolean onPreferenceClick(Preference preference) {
-				final SettingsDevelopmentActivity activity = SettingsDevelopmentActivity.this;
-				activity.getMyApplication().getAppInitializer()
-						.writeFirstTime(true, activity);
-				firstRunPreference.setSummary("First run flag has been reset");
-				return true;
-			}
-		});
-		cat.addPreference(firstRunPreference);
 	}
 	
 	protected void availableProfileDialog() {

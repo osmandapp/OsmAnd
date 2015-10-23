@@ -332,7 +332,7 @@
 <string name="index_name_europe">Europa</string>
 <string name="index_name_france">Europa - Frankrike</string>
 <string name="index_name_germany">Europa - Tyskland</string>
-<string name="index_name_russia">Europa/Asien - Ryssland</string>
+<string name="index_name_russia">Ryssland</string>
 <string name="index_name_africa">Afrika</string>
 <string name="index_name_asia">Asien</string>
 <string name="index_name_oceania">Oceanien</string>
@@ -2049,4 +2049,7 @@
 <string name="free_downloads_used">Gratis nedladdningar hämtade</string>
     <string name="free_downloads_used_description">Du kan ange hur många gratis nedladdningar som du har gjort</string>
 <string name="downloading_number_of_files">Hämtar - %1$d fil(er)</string>
+    <string name="share_clipboard">Urklipp</string>
+    <string name="share_geo">geo:</string>
+    <string name="share_qr_code">QR-kod</string>
     </resources>

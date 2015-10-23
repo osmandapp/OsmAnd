@@ -12,6 +12,8 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 
 public abstract class MenuController {
 
+	public final static float LANDSCAPE_WIDTH_DP = 350f;
+
 	public class MenuState {
 		public static final int HEADER_ONLY = 1;
 		public static final int HALF_SCREEN = 2;
@@ -60,7 +62,7 @@ public abstract class MenuController {
 	}
 
 	public float getLandscapeWidthDp() {
-		return 350f;
+		return LANDSCAPE_WIDTH_DP;
 	}
 
 	public int getSupportedMenuStates() {

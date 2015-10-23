@@ -25,6 +25,7 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -48,10 +49,9 @@ import android.widget.Toast;
 public class DownloadIndexesThread {
 	private final static Log LOG = PlatformUtil.getLog(DownloadIndexesThread.class);
 	private static final int NOTIFICATION_ID = 45;
-	private final Context ctx;
 	private OsmandApplication app;
 
-	private BaseDownloadActivity uiActivity = null;
+	private DownloadEvents uiActivity = null;
 	private DatabaseHelper dbHelper;
 	private DownloadFileHelper downloadFileHelper;
 	private List<BasicProgressAsyncTask<?, ?, ?, ?>> currentRunningTask = Collections.synchronizedList(new ArrayList<BasicProgressAsyncTask<?, ?, ?, ?>>());
@@ -72,9 +72,8 @@ public class DownloadIndexesThread {
 	}
 
 
-	public DownloadIndexesThread(Context ctx) {
-		this.ctx = ctx;
-		app = (OsmandApplication) ctx.getApplicationContext();
+	public DownloadIndexesThread(OsmandApplication app) {
+		this.app = app;
 		indexes = new DownloadResources(app);
 		updateLoadedFiles();
 		downloadFileHelper = new DownloadFileHelper(app);
@@ -86,7 +85,7 @@ public class DownloadIndexesThread {
 	}
 
 	/// UI notifications methods
-	public void setUiActivity(BaseDownloadActivity uiActivity) {
+	public void setUiActivity(DownloadEvents uiActivity) {
 		this.uiActivity = uiActivity;
 	}
 	
@@ -200,7 +199,7 @@ public class DownloadIndexesThread {
 		if (checkRunning()) {
 			return;
 		}
-		execute(new ReloadIndexesTask(ctx));
+		execute(new ReloadIndexesTask());
 	}
 
 	public void runDownloadFiles(IndexItem... items) {
@@ -213,7 +212,7 @@ public class DownloadIndexesThread {
 			indexItemDownloading.add(i);
 		}
 		if (currentDownloadingItem == null) {
-			execute(new DownloadIndexesAsyncTask(ctx));
+			execute(new DownloadIndexesAsyncTask());
 		}
 	}
 
@@ -282,8 +281,8 @@ public class DownloadIndexesThread {
 
 	private class ReloadIndexesTask extends BasicProgressAsyncTask<Void, Void, Void, DownloadResources> {
 
-		public ReloadIndexesTask(Context ctx) {
-			super(ctx);
+		public ReloadIndexesTask() {
+			super(app);
 		}
 
 		@Override
@@ -304,6 +303,7 @@ public class DownloadIndexesThread {
 					}
 					result.isDownloadedFromInternet = indexFileList.isDownloadedFromInternet();
 					result.mapVersionIsIncreased = indexFileList.isIncreasedMapVersion();
+					app.getSettings().LAST_CHECKED_UPDATES.set(System.currentTimeMillis());
 					result.prepareData(indexFileList.getIndexFiles());
 				} catch (Exception e) {
 				}
@@ -357,8 +357,8 @@ public class DownloadIndexesThread {
 		private OsmandPreference<Integer> downloads;
 
 
-		public DownloadIndexesAsyncTask(Context ctx) {
-			super(ctx);
+		public DownloadIndexesAsyncTask() {
+			super(app);
 			downloads = app.getSettings().NUMBER_OF_FREE_DOWNLOADS;
 		}
 
@@ -389,8 +389,8 @@ public class DownloadIndexesThread {
 					// ctx.getString(R.string.shared_string_io_error) +": Interrupted";
 					if (!message.toLowerCase().contains("interrupted")) {
 						if (uiActivity == null ||
-								!message.equals(uiActivity.getString(R.string.shared_string_download_successful))) {
-							AccessibleToast.makeText(ctx, message, Toast.LENGTH_LONG).show();
+								!message.equals(app.getString(R.string.shared_string_download_successful))) {
+							app.showToastMessage(message);
 						}
 					}
 				}
@@ -403,14 +403,14 @@ public class DownloadIndexesThread {
 		protected void onPreExecute() {
 			currentRunningTask.add(this);
 			super.onPreExecute();
-			if (uiActivity != null) {
-				downloadFileHelper.setInterruptDownloading(false);
-				View mainView = uiActivity.findViewById(R.id.MainLayout);
+			downloadFileHelper.setInterruptDownloading(false);
+			if (uiActivity instanceof Activity) {
+				View mainView = ((Activity) uiActivity).findViewById(R.id.MainLayout);
 				if (mainView != null) {
 					mainView.setKeepScreenOn(true);
 				}
-				startTask(ctx.getString(R.string.shared_string_downloading) + ctx.getString(R.string.shared_string_ellipsis), -1);
 			}
+			startTask(ctx.getString(R.string.shared_string_downloading) + ctx.getString(R.string.shared_string_ellipsis), -1);
 		}
 
 		@Override
@@ -418,8 +418,8 @@ public class DownloadIndexesThread {
 			if (result != null && result.length() > 0) {
 				AccessibleToast.makeText(ctx, result, Toast.LENGTH_LONG).show();
 			}
-			if (uiActivity != null) {
-				View mainView = uiActivity.findViewById(R.id.MainLayout);
+			if (uiActivity instanceof Activity) {
+				View mainView = ((Activity) uiActivity).findViewById(R.id.MainLayout);
 				if (mainView != null) {
 					mainView.setKeepScreenOn(false);
 				}
@@ -508,10 +508,10 @@ public class DownloadIndexesThread {
 		
 		private boolean validateNotExceedsFreeLimit(IndexItem item) {
 			boolean exceed = Version.isFreeVersion(app) &&
-					DownloadActivityType.isCountedInDownloads(item) && downloads.get() >= DownloadActivity.MAXIMUM_AVAILABLE_FREE_DOWNLOADS;
+					DownloadActivityType.isCountedInDownloads(item) && downloads.get() >= DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS;
 			if(exceed) {
 				String breakDownloadMessage = app.getString(R.string.free_version_message,
-						DownloadActivity.MAXIMUM_AVAILABLE_FREE_DOWNLOADS + "");
+						DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS + "");
 				publishProgress(breakDownloadMessage);
 			}
 			return !exceed;
