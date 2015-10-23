@@ -441,7 +441,7 @@ public class MapContextMenuFragment extends Fragment {
 
 				int dy = 0;
 				if (!menu.isLandscapeLayout() && menuTopViewHeight != 0) {
-					dy = newMenuTopViewHeight - menuTopViewHeight;
+					dy = Math.max(0, newMenuTopViewHeight - menuTopViewHeight);
 				}
 				menuTopViewHeight = newMenuTopViewHeight;
 				menuTitleHeight = menuTopShadowHeight + menuTopShadowAllHeight + dy;
