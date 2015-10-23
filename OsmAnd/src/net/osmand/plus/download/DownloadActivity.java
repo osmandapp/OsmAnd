@@ -1,13 +1,22 @@
 package net.osmand.plus.download;
 
-import java.io.File;
-import java.lang.ref.WeakReference;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Set;
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.StatFs;
+import android.support.annotation.UiThread;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.ViewPager;
+import android.text.method.LinkMovementMethod;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
@@ -27,26 +36,17 @@ import net.osmand.plus.download.ui.DownloadResourceGroupFragment;
 import net.osmand.plus.download.ui.LocalIndexesFragment;
 import net.osmand.plus.download.ui.UpdatesIndexFragment;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
-import android.app.Activity;
-import android.content.ActivityNotFoundException;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.os.StatFs;
-import android.support.annotation.UiThread;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.view.ViewPager;
-import android.text.method.LinkMovementMethod;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import org.apache.commons.logging.Log;
+
+import java.io.File;
+import java.lang.ref.WeakReference;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.Set;
 
 public class DownloadActivity extends ActionBarProgressActivity implements DownloadEvents {
 	private static final Log LOG = PlatformUtil.getLog(DownloadActivity.class);
@@ -54,6 +54,9 @@ public class DownloadActivity extends ActionBarProgressActivity implements Downl
 	public static final int UPDATES_TAB_NUMBER = 2;
 	public static final int LOCAL_TAB_NUMBER = 1;
 	public static final int DOWNLOAD_TAB_NUMBER = 0;
+
+	public static final String FIRST_MAP_DOWNLOADED = "first_map_downloaded";
+
 	private List<LocalIndexInfo> localIndexInfos = new ArrayList<>();
 
 	List<TabActivity.TabItem> mTabs = new ArrayList<TabActivity.TabItem>();
@@ -508,7 +511,7 @@ public class DownloadActivity extends ActionBarProgressActivity implements Downl
 		if (dir.canRead()) {
 			StatFs fs = new StatFs(dir.getAbsolutePath());
 			size = formatGb.format(new Object[]{(float) (fs.getAvailableBlocks()) * fs.getBlockSize() / (1 << 30)});
-			percent = 100 - (int) (fs.getAvailableBlocks() * 100 / fs.getBlockCount());
+			percent = 100 - fs.getAvailableBlocks() * 100 / fs.getBlockCount();
 		}
 		sizeProgress.setIndeterminate(false);
 		sizeProgress.setProgress(percent);
@@ -519,8 +522,15 @@ public class DownloadActivity extends ActionBarProgressActivity implements Downl
 		messageTextView.setText(R.string.device_memory);
 	}
 
-	
 
-	
-
+	private void initSettingsIfFirstMap(IndexItem item) {
+		OsmandSettings.CommonPreference<Boolean> isFirstMapDownloadedPreference =
+				getMyApplication().getSettings()
+				.registerBooleanPreference(FIRST_MAP_DOWNLOADED, false).makeGlobal();
+		boolean wasFirstMapDownloaded = isFirstMapDownloadedPreference.get();
+		if (!wasFirstMapDownloaded) {
+//			item.ge
+			isFirstMapDownloadedPreference.set(true);
+		}
+	}
 }

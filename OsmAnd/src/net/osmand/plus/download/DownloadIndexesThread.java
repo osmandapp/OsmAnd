@@ -1,29 +1,5 @@
 package net.osmand.plus.download;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.concurrent.ConcurrentLinkedQueue;
-
-import net.osmand.IndexConstants;
-import net.osmand.PlatformUtil;
-import net.osmand.access.AccessibleToast;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings.OsmandPreference;
-import net.osmand.plus.R;
-import net.osmand.plus.Version;
-import net.osmand.plus.base.BasicProgressAsyncTask;
-import net.osmand.plus.download.DownloadFileHelper.DownloadFileShowWarning;
-import net.osmand.plus.helpers.DatabaseHelper;
-import net.osmand.plus.resources.ResourceManager;
-import net.osmand.util.Algorithms;
-
-import org.apache.commons.logging.Log;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -44,6 +20,30 @@ import android.support.v7.app.NotificationCompat;
 import android.support.v7.app.NotificationCompat.Builder;
 import android.view.View;
 import android.widget.Toast;
+
+import net.osmand.IndexConstants;
+import net.osmand.PlatformUtil;
+import net.osmand.access.AccessibleToast;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings.OsmandPreference;
+import net.osmand.plus.R;
+import net.osmand.plus.Version;
+import net.osmand.plus.base.BasicProgressAsyncTask;
+import net.osmand.plus.download.DownloadFileHelper.DownloadFileShowWarning;
+import net.osmand.plus.helpers.DatabaseHelper;
+import net.osmand.plus.resources.ResourceManager;
+import net.osmand.util.Algorithms;
+
+import org.apache.commons.logging.Log;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 @SuppressLint({ "NewApi", "DefaultLocale" })
 public class DownloadIndexesThread {
@@ -592,6 +592,4 @@ public class DownloadIndexesThread {
 			downloadInProgress();
 		}
 	}
-
-	
 }

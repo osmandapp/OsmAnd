@@ -125,9 +125,9 @@ public class DataStoragePlaceDialogFragment extends DialogFragment {
 			int size = fs.getAvailableBlocks() * fs.getBlockSize();
 			if (size > 0) {
 				if (size > 1 << 20) {
-					sz = DownloadActivity.formatGb.format(new Object[]{(float) size / (1 << 20)});
+					sz = DownloadActivity.formatGb.format(new Object[]{(float) size / (1 << 30)});
 				} else {
-					sz = DownloadActivity.formatMb.format(new Object[]{(float) size / (1 << 10)});
+					sz = DownloadActivity.formatMb.format(new Object[]{(float) size / (1 << 20)});
 				}
 			}
 		}
