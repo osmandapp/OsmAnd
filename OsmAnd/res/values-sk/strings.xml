@@ -2341,4 +2341,11 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="update_all">Aktualizovať všetko (%1$s MB)</string>
     <string name="free_downloads_used">Počet použitých voľných stiahnutí</string>
     <string name="free_downloads_used_description">Môžete nastaviť, koľko voľných stiahnutí ste už použili</string>
+<string name="simulate_initial_startup_descr">Vymaže príznak indikujúci prvý štart, ostatné nastavenia ponechá nezmenené</string>
+    <string name="simulate_initial_startup">Simulovať prvé spustenie</string>
+    <string name="share_geo">geo:</string>
+    <string name="share_menu_location">Zdieľať polohu</string>
+    <string name="shared_string_send">Odoslať</string>
+    <string name="hello_blank_fragment">Prázdny fragment</string>
+    <string name="application_dir_description">Zvoľte kam chcete uložiť súbory máp.</string>
 </resources>
