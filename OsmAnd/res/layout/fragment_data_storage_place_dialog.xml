@@ -1,0 +1,113 @@
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            tools:background="@color/color_warning"
+            tools:context="net.osmand.plus.download.ui.DataStoragePlaceDialogFragment">
+
+    <ImageView
+        android:id="@+id/folderIconImageView"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="4dp"
+        android:scaleType="center"
+        tools:src="@drawable/ic_action_folder"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_columnSpan="2"
+        android:layout_columnWeight="1"
+        android:layout_gravity="fill_horizontal"
+        android:layout_marginTop="22dp"
+        android:text="Data storage folder"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="@dimen/dialog_header_text_size"/>
+
+    <ImageButton
+        android:id="@+id/crossIconImageView"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:src="@drawable/ic_action_remove_dark"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_column="1"
+        android:layout_columnSpan="2"
+        android:layout_gravity="fill_horizontal"
+        android:layout_marginBottom="24dp"
+        android:layout_row="1"
+        android:text="Choose where you want to save map files."
+        android:textSize="16sp"/>
+
+    <ImageView
+        android:id="@+id/deviceMemoryImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="56dp"
+        android:layout_column="1"
+        android:layout_row="2"
+        android:layout_rowSpan="2"
+        android:paddingRight="16dp"
+        android:scaleType="center"
+        android:src="@drawable/ic_sdcard"/>
+
+    <TextView
+        android:id="@+id/deviceMemoryTitle"
+        android:layout_width="0dp"
+        android:layout_column="2"
+        android:layout_gravity="fill_horizontal"
+        android:layout_marginTop="8dp"
+        android:layout_row="2"
+        android:gravity="center_vertical"
+        android:text="Device memory"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+    <TextView
+        android:id="@+id/deviceMemoryDescription"
+        android:layout_width="0dp"
+        android:layout_column="2"
+        android:layout_gravity="fill_horizontal"
+        android:layout_row="3"
+        android:text="Free: 568 Mb"/>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_column="1"
+        android:layout_columnSpan="3"
+        android:layout_gravity="fill_horizontal"
+        android:layout_row="4"
+        android:background="#FFF"/>
+
+    <ImageView
+        android:id="@+id/memoryStickImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="56dp"
+        android:layout_column="1"
+        android:layout_row="5"
+        android:layout_rowSpan="2"
+        android:paddingRight="16dp"
+        android:scaleType="center"
+        android:src="@drawable/ic_sdcard"/>
+
+    <TextView
+        android:id="@+id/memoryStickTitle"
+        android:layout_width="0dp"
+        android:layout_column="2"
+        android:layout_gravity="fill_horizontal"
+        android:layout_marginTop="8dp"
+        android:layout_row="5"
+        android:text="Memory stick"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_column="2"
+        android:layout_gravity="fill_horizontal"
+        android:layout_row="6"
+        android:text="Free: 9 Gb"
+        android:id="@+id/memoryStickDescription"/>
+</GridLayout>

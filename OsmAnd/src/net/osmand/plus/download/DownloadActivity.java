@@ -18,6 +18,7 @@ import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.ui.ActiveDownloadsDialogFragment;
+import net.osmand.plus.download.ui.DataStoragePlaceDialogFragment;
 import net.osmand.plus.download.ui.DownloadResourceGroupFragment;
 import net.osmand.plus.download.ui.LocalIndexesFragment;
 import net.osmand.plus.download.ui.UpdatesIndexFragment;
@@ -125,6 +126,7 @@ public class DownloadActivity extends BaseDownloadActivity {
 			filter = intent.getExtras().getString(FILTER_KEY);
 			filterCat = intent.getExtras().getString(FILTER_CAT);
 		}
+		new DataStoragePlaceDialogFragment().show(getFragmentManager(), null);
 	}
 
 	@Override

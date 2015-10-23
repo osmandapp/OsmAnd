@@ -2019,4 +2019,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="update_all">Update all (%1$s MB)</string>
     <string name="free_downloads_used">Free downloads used</string>
     <string name="free_downloads_used_description">You can set how many free downloads you have used</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

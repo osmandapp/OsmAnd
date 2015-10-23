@@ -4,6 +4,9 @@ import android.graphics.Bitmap;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.ColorInt;
+import android.support.annotation.ColorRes;
+import android.support.annotation.DrawableRes;
 
 import gnu.trove.map.hash.TLongObjectHashMap;
 
@@ -29,11 +32,11 @@ public class IconsCache {
 		return new BitmapDrawable(app.getResources(), bitmapResized);
 	}
 
-	private Drawable getDrawable(int resId, int clrId) {
+	private Drawable getDrawable(@DrawableRes int resId, @ColorRes int clrId) {
 		return getDrawable(resId, clrId, 0);
 	}
 
-	private Drawable getDrawable(int resId, int clrId, float scale) {
+	private Drawable getDrawable(@DrawableRes int resId, @ColorRes int clrId, float scale) {
 		long hash = ((long)resId << 31l) + clrId + (int)(scale * 10000f);
 		Drawable d = drawable.get(hash);
 		if(d == null) {
@@ -51,7 +54,7 @@ public class IconsCache {
 		return d;
 	}
 
-	private Drawable getPaintedDrawable(int resId, int color){
+	private Drawable getPaintedDrawable(@DrawableRes int resId, @ColorInt int color){
 		long hash = ((long)resId << 31l) + color;
 		Drawable d = drawable.get(hash);
 		if(d == null) {
@@ -63,27 +66,27 @@ public class IconsCache {
 		return d;
 	}
 
-	public Drawable getPaintedContentIcon(int id, int color){
+	public Drawable getPaintedContentIcon(@DrawableRes int id, @ColorInt int color){
 		return getPaintedDrawable(id, color);
 	}
 
-	public Drawable getIcon(int id, int colorId) {
+	public Drawable getIcon(@DrawableRes int id, @ColorRes int colorId) {
 		return getDrawable(id, colorId);
 	}
 
-	public Drawable getIcon(int id, int colorId, float scale) {
+	public Drawable getIcon(@DrawableRes int id, @ColorRes int colorId, float scale) {
 		return getDrawable(id, colorId, scale);
 	}
 
-	public Drawable getContentIcon(int id) {
+	public Drawable getContentIcon(@DrawableRes int id) {
 		return getDrawable(id, app.getSettings().isLightContent() ? R.color.icon_color : 0);
 	}
 
-	public Drawable getIcon(int id) {
+	public Drawable getIcon(@DrawableRes int id) {
 		return getDrawable(id, 0);
 	}
 	
-	public Drawable getIcon(int id, boolean light) {
+	public Drawable getIcon(@DrawableRes int id, boolean light) {
 		return getDrawable(id, light ? R.color.icon_color : 0);
 	}
 

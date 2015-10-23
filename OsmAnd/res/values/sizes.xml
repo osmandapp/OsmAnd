@@ -109,4 +109,6 @@
     <dimen name="default_desc_text_size">14sp</dimen>
     <dimen name="default_sub_text_size">12sp</dimen>
 	<dimen name="welcome_header_text_size">23sp</dimen>
+
+	<dimen name="dialog_header_text_size">20sp</dimen>
 </resources>
