@@ -2243,4 +2243,25 @@
 	<string name="poi_tomb_crypt">Tipo: cripta</string>
 	<string name="poi_tomb_pyramid">Tipo: pirámide</string>
 
+<string name="poi_historic_civilization_ancient_roman">Civilización: antiguos romanos</string>
+	<string name="poi_historic_civilization_nuragic">Civilización: nurágica</string>
+	<string name="poi_historic_civilization_etruscan">Civilización: etrusca</string>
+	<string name="poi_historic_civilization_prehistoric">Civilización: prehistórica</string>
+	<string name="poi_historic_civilization_ancient_greek">Civilización: antiguos griegos</string>
+	<string name="poi_historic_civilization_roman">Civilización: romana</string>
+	<string name="poi_historic_civilization_byzantine">Civilización: bizantina</string>
+	<string name="poi_historic_civilization_imperial_chinese">Civilización: imperio chino</string>
+	<string name="poi_historic_civilization_ancient_egyptian">Civilización: antiguos egipcios</string>
+	<string name="poi_historic_civilization_celtic">Civilización: celta</string>
+	<string name="poi_historic_civilization_western_roman">Civilización: romanos occidentales</string>
+	<string name="poi_historic_civilization_mycenaean">Civilización: micénica</string>
+	<string name="poi_historic_civilization_dacian">Civilización: dacian</string>
+	<string name="poi_historic_civilization_hernici">Civilización: hérnicos</string>
+	<string name="poi_historic_civilization_greek_egyptian">Civilización: griegos egipcios</string>
+	<string name="poi_historic_civilization_roman_and_byzantine_egyptian">Civilización: romanos y bizantinos egipcios</string>
+	<string name="poi_historic_civilization_helladic">Civilización: heládica</string>
+	<string name="poi_historic_civilization_cycladic">Civilización: cíclada</string>
+	<string name="poi_historic_civilization_minoan">Civilización: minoica</string>
+	<string name="poi_historic_civilization_tiahuanacota">Civilización: tiahuanacota</string>
+
 </resources>
