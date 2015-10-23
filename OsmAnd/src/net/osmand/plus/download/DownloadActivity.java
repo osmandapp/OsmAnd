@@ -142,7 +142,7 @@ public class DownloadActivity extends ActionBarProgressActivity implements Downl
 		}
 		final boolean firstTime = getMyApplication().getAppInitializer().isFirstTime(null);
 		final boolean externalExists =
-				DataStoragePlaceDialogFragment.getExternalStorageDirectory(this) != null;
+				DataStoragePlaceDialogFragment.getExternalStorageDirectory() != null;
 		if (firstTime && externalExists) {
 			new DataStoragePlaceDialogFragment().show(getFragmentManager(), null);
 		}

@@ -55,7 +55,7 @@ public class DataStoragePlaceDialogFragment extends DialogFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 		internalStorage = getInternalStorageDirectory(getActivity());
-		externalStorage = getExternalStorageDirectory(getActivity());
+		externalStorage = getExternalStorageDirectory();
 
 		final View view = inflater.inflate(R.layout.fragment_data_storage_place_dialog, container,
 				false);
@@ -95,9 +95,8 @@ public class DataStoragePlaceDialogFragment extends DialogFragment {
 		return view;
 	}
 
-	public static File getExternalStorageDirectory(Activity activity) {
-		return ((OsmandApplication) activity.getApplication()).getSettings()
-				.getExternalStorageDirectory();
+	public static File getExternalStorageDirectory() {
+		return OsmandSettings.getSecondaryStorage();
 	}
 
 	public static File getInternalStorageDirectory(Activity activity) {
@@ -122,6 +121,7 @@ public class DataStoragePlaceDialogFragment extends DialogFragment {
 		String sz = "";
 		if (dir.canRead()) {
 			StatFs fs = new StatFs(dir.getAbsolutePath());
+			@SuppressWarnings("deprecation")
 			int size = fs.getAvailableBlocks() * fs.getBlockSize();
 			if (size > 0) {
 				if (size > 1 << 20) {

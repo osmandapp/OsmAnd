@@ -43,6 +43,8 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Environment;
+import android.support.annotation.Nullable;
+import android.text.TextUtils;
 
 public class OsmandSettings {
 	
@@ -1307,6 +1309,21 @@ public class OsmandSettings {
 				putInt(EXTERNAL_STORAGE_DIR_TYPE_V19, type).
 				putString(EXTERNAL_STORAGE_DIR_V19, externalStorageDir).commit();
 	}
+
+	@Nullable
+	public static File getSecondaryStorage() {
+		final String value = System.getenv("SECONDARY_STORAGE");
+		if (!TextUtils.isEmpty(value)) {
+			final String[] paths = value.split(":");
+			for (String path : paths) {
+				File file = new File(path);
+				if (file.isDirectory() && file.canWrite()) {
+					return file;
+				}
+			}
+		}
+		return null;
+	}
 	
 	public void setExternalStorageDirectory(int type, String directory) {
 		if(Build.VERSION.SDK_INT < 19) {
@@ -1324,7 +1341,6 @@ public class OsmandSettings {
 	public boolean setExternalStorageDirectoryPre19(String externalStorageDir) {
 		return settingsAPI.edit(globalPreferences).putString(EXTERNAL_STORAGE_DIR, externalStorageDir).commit();
 	}
-	
 	
 	public Object getGlobalPreferences() {
 		return globalPreferences;
