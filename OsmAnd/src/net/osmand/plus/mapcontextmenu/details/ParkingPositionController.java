@@ -11,13 +11,13 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.search.SearchHistoryFragment;
 import net.osmand.plus.mapcontextmenu.MenuController;
 
-public class PointDescriptionMenuController extends MenuController {
+public class ParkingPositionController extends MenuController {
 
 	private PointDescription pointDescription;
 	private LatLon latLon;
 
-	public PointDescriptionMenuController(OsmandApplication app, MapActivity mapActivity, final PointDescription pointDescription, LatLon latLon) {
-		super(new PointDescriptionMenuBuilder(app, pointDescription), mapActivity);
+	public ParkingPositionController(OsmandApplication app, MapActivity mapActivity, final PointDescription pointDescription, LatLon latLon) {
+		super(new ParkingPositionBuilder(app), mapActivity);
 		this.pointDescription = pointDescription;
 		this.latLon = latLon;
 	}
@@ -29,46 +29,42 @@ public class PointDescriptionMenuController extends MenuController {
 
 	@Override
 	protected int getSupportedMenuStatesPortrait() {
-		return MenuState.HEADER_ONLY | MenuState.HALF_SCREEN | MenuState.FULL_SCREEN;
+		return MenuState.HEADER_ONLY | MenuState.HALF_SCREEN;
 	}
 
 	@Override
 	public boolean needTypeStr() {
-		String typeName = pointDescription.getTypeName();
-		return (typeName != null && !typeName.isEmpty());
+		return true;
 	}
 
 	@Override
 	public Drawable getLeftIcon() {
-		return getIcon(SearchHistoryFragment.getItemIcon(pointDescription));
-	}
-
-	@Override
-	public Drawable getSecondLineIcon() {
-		if (needTypeStr()) {
-			return getIcon(R.drawable.ic_small_group);
-		} else {
-			return null;
-		}
+		return getIcon(R.drawable.ic_action_parking_dark, R.color.map_widget_blue, R.color.osmand_orange);
 	}
 
 	@Override
 	public String getNameStr() {
-		return pointDescription.getSimpleName(getMapActivity(), false);
+		return pointDescription.getTypeName();
 	}
 
 	@Override
 	public String getTypeStr() {
-		if (needTypeStr()) {
-			return pointDescription.getTypeName();
-		} else {
-			return "";
-		}
+		return "Parked at 10:23";
+	}
+
+	@Override
+	public boolean hasTitleButton() {
+		return true;
+	}
+
+	@Override
+	public String getTitleButtonCaption() {
+		return getMapActivity().getText(R.string.osmand_parking_delete).toString();
 	}
 
 	@Override
 	public boolean needStreetName() {
-		return !pointDescription.isAddress();
+		return false;
 	}
 
 	@Override

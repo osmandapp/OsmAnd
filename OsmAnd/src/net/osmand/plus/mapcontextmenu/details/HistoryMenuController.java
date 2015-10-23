@@ -9,6 +9,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.search.SearchHistoryFragment;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
+import net.osmand.plus.mapcontextmenu.MenuController;
 
 public class HistoryMenuController extends MenuController {
 
