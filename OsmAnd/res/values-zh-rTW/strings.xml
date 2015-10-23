@@ -124,7 +124,7 @@
 	<string name="route_updated_loc_found">一旦找到定位時，導航路線將重新規劃</string>
 	<string name="osmand_parking_hours">小時</string>
 	<string name="osmand_parking_minutes">分鐘</string>
-	<string name="osmand_parking_position_description_add_time">您的愛車停在：</string>
+	<string name="osmand_parking_position_description_add_time">把愛車停在</string>
 	<string name="select_animate_speedup">選擇模擬路線速度</string>
     	<string name="global_app_allocated_memory_descr">已配置記憶體 %1$s MB (Android 限制%2$s MB, Dalvik %3$s MB)。</string>
 	<string name="global_app_allocated_memory">已配置記憶體</string>
