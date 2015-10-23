@@ -2165,4 +2165,9 @@
 <string name="update_all">全部更新 (%1$s MB)</string>
 <string name="free_downloads_used">免費下載使用</string>
     <string name="free_downloads_used_description">您可以設置，您有使用多少免費下載</string>
-</resources>
+<string name="simulate_initial_startup_descr">重置標誌指示第一次啟動，保持著其它設定在原來的狀態</string>
+    <string name="simulate_initial_startup">模擬初始啟動</string>
+    <string name="share_geo">地理：</string>
+    <string name="share_menu_location">分享位置</string>
+    <string name="shared_string_send">發送</string>
+    </resources>
