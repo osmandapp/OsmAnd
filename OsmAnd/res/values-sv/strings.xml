@@ -2052,4 +2052,5 @@
     <string name="share_clipboard">Urklipp</string>
     <string name="share_geo">geo:</string>
     <string name="share_qr_code">QR-kod</string>
-    </resources>
+    <string name="application_dir_description">Välj var du vill spara kartfilerna.</string>
+</resources>
