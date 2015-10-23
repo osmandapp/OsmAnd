@@ -2171,4 +2171,5 @@
     <string name="share_menu_location">分享位置</string>
     <string name="shared_string_send">發送</string>
     <string name="hello_blank_fragment">哈囉，成空的片段</string>
+<string name="application_dir_description">選擇您想要在何處儲存地圖檔案。</string>
 </resources>
