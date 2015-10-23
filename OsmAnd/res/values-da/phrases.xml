@@ -2267,7 +2267,7 @@
 	<string name="poi_tomb_pyramid">Type: pyramide</string>
 
 <string name="poi_historic_civilization_ancient_roman">Civilisation: antik romersk</string>
-	<string name="poi_historic_civilization_nuragic">Civilisation: nuragherkulturen</string>
+	<string name="poi_historic_civilization_nuragic">Civilisation: nuragher</string>
 	<string name="poi_historic_civilization_etruscan">Civilisation: etruskisk</string>
 	<string name="poi_historic_civilization_prehistoric">Civilisation: forhistorisk</string>
 	<string name="poi_historic_civilization_ancient_greek">Civilisation: oldgræsk</string>
@@ -2276,7 +2276,7 @@
 	<string name="poi_historic_civilization_imperial_chinese">Civilisation: kinesiske dynastier</string>
 	<string name="poi_historic_civilization_ancient_egyptian">Civilisation: gammelegyptisk</string>
 	<string name="poi_historic_civilization_celtic">Civilisation: celtic</string>
-	<string name="poi_historic_civilization_western_roman">Civilisation: vestlig romersk</string>
+	<string name="poi_historic_civilization_western_roman">Civilisation: vestromersk</string>
 	<string name="poi_historic_civilization_mycenaean">Civilisation: mykensk</string>
 	<string name="poi_historic_civilization_dacian">Civilisation: daker</string>
 	<string name="poi_historic_civilization_hernici">Civilisation: herniker</string>
