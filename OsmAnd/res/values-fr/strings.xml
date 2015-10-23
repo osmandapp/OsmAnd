@@ -2214,4 +2214,6 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="share_geo">geo :</string>
     <string name="share_qr_code">QR-Code</string>
     <string name="share_menu_title">Partager ce lieu</string>
+    <string name="share_menu_location">Partager ce lieu</string>
+    <string name="shared_string_send">Envoyer</string>
     </resources>
