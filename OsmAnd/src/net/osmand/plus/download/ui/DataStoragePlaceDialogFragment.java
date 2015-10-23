@@ -4,11 +4,8 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
-import android.support.annotation.AnyRes;
-import android.support.annotation.ColorInt;
+import android.os.StatFs;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.view.Gravity;
@@ -17,46 +14,154 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import net.osmand.access.AccessibleToast;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.download.DownloadActivity;
+
+import java.io.File;
 
 public class DataStoragePlaceDialogFragment extends DialogFragment {
 
-	public DataStoragePlaceDialogFragment() {
-		// Required empty public constructor
-	}
+	private File internalStorage;
+	private File externalStorage;
 
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		final Dialog dialog = new Dialog(getActivity(), R.style.BottomSheet_Dialog);
-		Window window = dialog.getWindow();
-		window.setGravity(Gravity.CENTER);
+		dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 		return dialog;
+	}
+
+	@Override
+	public void onStart() {
+		super.onStart();
+
+		final Window window = getDialog().getWindow();
+		WindowManager.LayoutParams params = window.getAttributes();
+		params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+		params.gravity = Gravity.BOTTOM;
+		params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+		window.setAttributes(params);
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
+		internalStorage = getInternalStorageDirectory(getActivity());
+		externalStorage = getExternalStorageDirectory(getActivity());
+
 		final View view = inflater.inflate(R.layout.fragment_data_storage_place_dialog, container,
 				false);
 		((ImageView) view.findViewById(R.id.folderIconImageView))
 				.setImageDrawable(getIcon(R.drawable.ic_action_folder, R.color.map_widget_blue));
+
+		ImageView internalStorageImageView = (ImageView) view.findViewById(R.id.deviceMemoryImageView);
+		internalStorageImageView.setImageDrawable(getContentIcon(R.drawable.ic_sdcard));
+		internalStorageImageView.setOnClickListener(internalMemoryOnClickListener);
+
+		View internalStorageTitle = view.findViewById(R.id.deviceMemoryTitle);
+		internalStorageTitle.setOnClickListener(internalMemoryOnClickListener);
+
+		TextView internalStorageDescription = (TextView) view.findViewById(R.id.deviceMemoryDescription);
+		internalStorageDescription.setOnClickListener(internalMemoryOnClickListener);
+		internalStorageDescription.setText(getFreeSpace(internalStorage));
+
+		ImageView externalStorageImageView = ((ImageView) view.findViewById(R.id.memoryStickImageView));
+		externalStorageImageView.setImageDrawable(getContentIcon(R.drawable.ic_sdcard));
+		externalStorageImageView.setOnClickListener(externalMemoryOnClickListener);
+
+		View externalStorageTitle = view.findViewById(R.id.memoryStickTitle);
+		externalStorageTitle.setOnClickListener(externalMemoryOnClickListener);
+
+		TextView externalStorageDescription = (TextView) view.findViewById(R.id.memoryStickDescription);
+		externalStorageDescription.setOnClickListener(externalMemoryOnClickListener);
+		externalStorageDescription.setText(getFreeSpace(externalStorage));
+
+		final ImageButton closeImageButton = (ImageButton) view.findViewById(R.id.closeImageButton);
+		closeImageButton.setImageDrawable(getContentIcon(R.drawable.ic_action_remove_dark));
+		closeImageButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				dismiss();
+			}
+		});
 		return view;
 	}
 
-	public OsmandApplication getMyApplication() {
+	public static File getExternalStorageDirectory(Activity activity) {
+		return ((OsmandApplication) activity.getApplication()).getSettings()
+				.getExternalStorageDirectory();
+	}
+
+	public static File getInternalStorageDirectory(Activity activity) {
+		return ((OsmandApplication) activity.getApplication()).getSettings()
+				.getDefaultInternalStorage();
+	}
+
+	private OsmandApplication getMyApplication() {
 		return (OsmandApplication) getActivity().getApplication();
 	}
 
-	public Drawable getContentIcon(@DrawableRes int drawableRes) {
+	private Drawable getContentIcon(@DrawableRes int drawableRes) {
 		return getMyApplication().getIconsCache().getContentIcon(drawableRes);
 	}
 
 
-	public Drawable getIcon(@DrawableRes int drawableRes, @ColorRes int color) {
+	private Drawable getIcon(@DrawableRes int drawableRes, @ColorRes int color) {
 		return getMyApplication().getIconsCache().getIcon(drawableRes, color);
+	}
+
+	private String getFreeSpace(File dir) {
+		String sz = "";
+		if (dir.canRead()) {
+			StatFs fs = new StatFs(dir.getAbsolutePath());
+			int size = fs.getAvailableBlocks() * fs.getBlockSize();
+			if (size > 0) {
+				if (size > 1 << 20) {
+					sz = DownloadActivity.formatGb.format(new Object[]{(float) size / (1 << 20)});
+				} else {
+					sz = DownloadActivity.formatMb.format(new Object[]{(float) size / (1 << 10)});
+				}
+			}
+		}
+		return sz;
+	}
+
+	private View.OnClickListener internalMemoryOnClickListener =
+			new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					saveFilesLocation(OsmandSettings.EXTERNAL_STORAGE_TYPE_DEFAULT,
+							internalStorage, getActivity());
+					dismiss();
+				}
+			};
+
+	private View.OnClickListener externalMemoryOnClickListener =
+			new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					saveFilesLocation(OsmandSettings.EXTERNAL_STORAGE_TYPE_EXTERNAL_FILE,
+							externalStorage, getActivity());
+					dismiss();
+				}
+			};
+
+	public static void saveFilesLocation(int type, File selectedFile, Activity context) {
+		boolean wr = OsmandSettings.isWritable(selectedFile);
+		if (wr) {
+			((OsmandApplication) context.getApplication())
+					.setExternalStorageDirectory(type, selectedFile.getAbsolutePath());
+		} else {
+			AccessibleToast.makeText(context, R.string.specified_directiory_not_writeable,
+					Toast.LENGTH_LONG).show();
+		}
 	}
 }

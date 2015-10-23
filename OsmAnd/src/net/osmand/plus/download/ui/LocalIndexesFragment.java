@@ -956,7 +956,6 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 				} else {
 					sz = DownloadActivity.formatMb.format(new Object[]{(float) size / (1 << 10)});
 				}
-
 			}
 			sizeView.setText(sz);
 			sizeView.setVisibility(View.VISIBLE);
