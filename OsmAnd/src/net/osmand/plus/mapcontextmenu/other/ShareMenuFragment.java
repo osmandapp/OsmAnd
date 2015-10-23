@@ -1,20 +1,15 @@
 package net.osmand.plus.mapcontextmenu.other;
 
 import android.annotation.SuppressLint;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -24,8 +19,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu.ShareItem;
 
 import java.util.List;
-
-import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 
 
 public class ShareMenuFragment extends Fragment implements OnItemClickListener {
@@ -119,14 +112,4 @@ public class ShareMenuFragment extends Fragment implements OnItemClickListener {
 			menu.getMapActivity().getSupportFragmentManager().popBackStack();
 		}
 	}
-
-	private int dpToPx(float dp) {
-		Resources r = getActivity().getResources();
-		return (int) TypedValue.applyDimension(
-				COMPLEX_UNIT_DIP,
-				dp,
-				r.getDisplayMetrics()
-		);
-	}
-
 }

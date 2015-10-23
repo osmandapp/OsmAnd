@@ -25,7 +25,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="16dp"
                 android:layout_weight="1"
-                android:text="@string/share_menu_title"
+                android:text="@string/share_menu_location"
                 android:textColor="?android:textColorSecondary"
                 android:textSize="@dimen/default_list_text_size"/>
 
