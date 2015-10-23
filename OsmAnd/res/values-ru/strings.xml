@@ -979,7 +979,7 @@
   <string name="osmand_parking_warning_text">Напоминание об ограниченном времени стоянки автомобиля уже добавлено в календарь. Вам будет необходимо удалить его вручную.</string>
   <string name="osmand_parking_time_limit_title">Задайте максимальное время стоянки</string>
   <string name="osmand_parking_delete_confirm">Хотите удалить расположение запаркованного автомобиля?</string>
-  <string name="osmand_parking_delete">Удалить метку места стоянки</string>
+  <string name="osmand_parking_delete">Удалить точку парковки</string>
   <string name="osmand_parking_choose_type">Выберите тип стоянки</string>
   <string name="osmand_parking_lim_text">С ограничением по времени</string>
   <string name="osmand_parking_no_lim_text">Без ограничения времени</string>
@@ -1005,7 +1005,7 @@
   
   <string name="osmand_parking_hours">Часов</string>
   <string name="osmand_parking_minutes">Минут</string>
-  <string name="osmand_parking_position_description_add_time">Автомобиль был припаркован в:</string>
+  <string name="osmand_parking_position_description_add_time">Припаркован в:</string>
   <string name="use_compass_navigation_descr">Использовать навигацию по компасу, если направление не определено</string>
   <string name="use_compass_navigation">Использовать компас</string>
   <string name="route_updated_loc_found">Маршрут будет пересчитан после определения местоположения</string>

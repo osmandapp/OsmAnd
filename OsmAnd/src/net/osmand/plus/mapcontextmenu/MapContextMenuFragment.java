@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -35,13 +36,12 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.mapcontextmenu.details.MenuController;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
 
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
-import static net.osmand.plus.mapcontextmenu.details.MenuBuilder.SHADOW_HEIGHT_BOTTOM_DP;
-import static net.osmand.plus.mapcontextmenu.details.MenuBuilder.SHADOW_HEIGHT_TOP_DP;
+import static net.osmand.plus.mapcontextmenu.MenuBuilder.SHADOW_HEIGHT_BOTTOM_DP;
+import static net.osmand.plus.mapcontextmenu.MenuBuilder.SHADOW_HEIGHT_TOP_DP;
 
 
 public class MapContextMenuFragment extends Fragment {
@@ -149,6 +149,18 @@ public class MapContextMenuFragment extends Fragment {
 
 		view = inflater.inflate(R.layout.map_context_menu_fragment, container, false);
 		mainView = view.findViewById(R.id.context_menu_main);
+
+		Button titleButton = (Button) view.findViewById(R.id.title_button);
+		titleButton.setVisibility(menu.hasTitleButton() ? View.VISIBLE : View.GONE);
+		if (menu.hasTitleButton()) {
+			titleButton.setText(menu.getTitleButtonCaption());
+			titleButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					menu.titleButtonPressed();
+				}
+			});
+		}
 
 		if (menu.isLandscapeLayout()) {
 			mainView.setLayoutParams(new FrameLayout.LayoutParams(dpToPx(menu.getLandscapeWidthDp()),

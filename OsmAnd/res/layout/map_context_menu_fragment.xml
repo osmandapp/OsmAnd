@@ -81,6 +81,19 @@
                         android:textColor="?android:textColorSecondary"
                         android:textSize="@dimen/default_desc_text_size"/>
 
+                    <Button
+                        android:id="@+id/title_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
+                        android:layout_marginRight="2dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:gravity="left|center_vertical"
+                        android:text="@string/osmand_parking_delete"
+                        android:background="?android:selectableItemBackground"
+                        android:textColor="?attr/contextMenuButtonColor"
+                        android:textSize="@dimen/default_desc_text_size"/>
 
                 </LinearLayout>
 

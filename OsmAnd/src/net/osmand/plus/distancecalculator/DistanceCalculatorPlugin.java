@@ -138,7 +138,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 		if (mapInfoLayer != null ) {
 			distanceControl = createDistanceControl(activity);
 			mapInfoLayer.registerSideWidget(distanceControl,
-					R.drawable.ic_action_ruler_dark, R.string.map_widget_distancemeasurement, "distance.measurement", false, 21);
+					R.drawable.ic_action_ruler, R.string.map_widget_distancemeasurement, "distance.measurement", false, 21);
 			mapInfoLayer.recreateControls();
 			updateText();
 		}

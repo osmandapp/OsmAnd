@@ -9,6 +9,7 @@ import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.util.Algorithms;
 

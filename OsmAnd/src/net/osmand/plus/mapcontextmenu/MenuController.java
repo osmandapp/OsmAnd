@@ -1,4 +1,4 @@
-package net.osmand.plus.mapcontextmenu.details;
+package net.osmand.plus.mapcontextmenu;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -25,12 +25,14 @@ public abstract class MenuController {
 	private int currentMenuState;
 	private boolean portraitMode;
 	private boolean largeDevice;
+	private boolean light;
 
 	public MenuController(MenuBuilder builder, MapActivity mapActivity) {
 		this.builder = builder;
 		this.mapActivity = mapActivity;
 		portraitMode = AndroidUiHelper.isOrientationPortrait(mapActivity);
 		largeDevice = AndroidUiHelper.isXLargeDevice(mapActivity);
+		light = mapActivity.getMyApplication().getSettings().isLightContent();
 		this.currentMenuState = getInitialMenuState();
 	}
 
@@ -134,10 +136,24 @@ public abstract class MenuController {
 	}
 
 	protected Drawable getIcon(int iconId) {
+		return getIcon(iconId, R.color.icon_color, R.color.icon_color_light);
+	}
+
+	protected Drawable getIcon(int iconId, int colorLightId, int colorDarkId) {
 		IconsCache iconsCache = mapActivity.getMyApplication().getIconsCache();
-		boolean light = mapActivity.getMyApplication().getSettings().isLightContent();
 		return iconsCache.getIcon(iconId,
-				light ? R.color.icon_color : R.color.icon_color_light);
+				light ? colorLightId : colorDarkId);
+	}
+
+	public boolean hasTitleButton() {
+		return false;
+	}
+
+	public String getTitleButtonCaption() {
+		return "";
+	}
+
+	public void titleButtonPressed() {
 	}
 
 	public boolean shouldShowButtons() {

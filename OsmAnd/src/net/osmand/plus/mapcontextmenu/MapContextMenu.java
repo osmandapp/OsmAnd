@@ -21,7 +21,7 @@ import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.mapcontextmenu.details.AmenityMenuController;
 import net.osmand.plus.mapcontextmenu.details.FavouritePointMenuController;
 import net.osmand.plus.mapcontextmenu.details.HistoryMenuController;
-import net.osmand.plus.mapcontextmenu.details.MenuController;
+import net.osmand.plus.mapcontextmenu.details.ParkingPositionController;
 import net.osmand.plus.mapcontextmenu.details.PointDescriptionMenuController;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.routing.RoutingHelper;
@@ -220,6 +220,10 @@ public class MapContextMenu {
 				menuController = new FavouritePointMenuController(app, mapActivity, (FavouritePoint) object);
 			} else if (object instanceof HistoryEntry) {
 				menuController = new HistoryMenuController(app, mapActivity, (HistoryEntry) object);
+			} else if (object instanceof LatLon) {
+				if (pointDescription.isParking()) {
+					menuController = new ParkingPositionController(app, mapActivity, pointDescription, (LatLon) object);
+				}
 			}
 		} else {
 			menuController = new PointDescriptionMenuController(app, mapActivity, pointDescription, latLon);
@@ -368,10 +372,6 @@ public class MapContextMenu {
 			}
 
 		});
-	}
-
-	public int getFabIconId() {
-		return mapActivity.getMapActions().getRouteMode(latLon).getSmallIconDark();
 	}
 
 	public void fabPressed() {
@@ -527,4 +527,21 @@ public class MapContextMenu {
 		}
 	}
 
+	public boolean hasTitleButton() {
+		return menuController != null && menuController.hasTitleButton();
+	}
+
+	public String getTitleButtonCaption() {
+		if (menuController != null) {
+			return menuController.getTitleButtonCaption();
+		} else {
+			return "";
+		}
+	}
+
+	public void titleButtonPressed() {
+		if (menuController != null) {
+			menuController.titleButtonPressed();
+		}
+	}
 }

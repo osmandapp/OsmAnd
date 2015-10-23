@@ -29,6 +29,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
+import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
@@ -124,8 +125,8 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	}
 
 	public boolean setParkingPosition(double latitude, double longitude) {
-		parkingLat.set((float)latitude);
-		parkingLon.set((float)longitude);
+		parkingLat.set((float) latitude);
+		parkingLon.set((float) longitude);
         parkingPosition = constructParkingPosition();
 		return true;
 	}
@@ -210,21 +211,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	public void registerMapContextMenuActions(final MapActivity mapActivity,
 			final double latitude, final double longitude,
 			ContextMenuAdapter adapter, Object selectedObj) {
-		if (selectedObj == parkingPosition && parkingPosition != null) {
-			OnContextMenuClick removeListener = new OnContextMenuClick() {
-				@Override
-				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int resId,
-						int pos, boolean isChecked) {
-					if ((resId == R.string.context_menu_item_delete_parking_point)) {
-						showDeleteDialog(mapActivity);
-					}
-					return true;
-				}
-			};
-			adapter.item(R.string.context_menu_item_delete_parking_point)
-				.iconColor( R.drawable.ic_action_remove_dark).listen(removeListener).position(0).reg();
-		}
-		
+
 		OnContextMenuClick addListener = new OnContextMenuClick() {
 			@Override
 			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int resId,
@@ -295,12 +282,12 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				showDeleteEventWarning(activity);
-				if(parkingLayer != null) {
+				if (parkingLayer != null) {
 					parkingLayer.refresh();
 				}
 				clearParkingPosition();
-				if (activity instanceof MapActivity){
-					((MapActivity)activity).getMapView().refreshMap();
+				if (activity instanceof MapActivity) {
+					((MapActivity) activity).getContextMenu().close();
 				}
 			}
 		});
@@ -365,8 +352,8 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 				Calendar cal = Calendar.getInstance();
 				//int hour = cal.get(Calendar.HOUR_OF_DAY );
 				//int minute = cal.get(Calendar.MINUTE);
-                cal.add(Calendar.HOUR_OF_DAY, timePicker.getCurrentHour());
-                cal.add(Calendar.MINUTE, timePicker.getCurrentMinute());
+				cal.add(Calendar.HOUR_OF_DAY, timePicker.getCurrentHour());
+				cal.add(Calendar.MINUTE, timePicker.getCurrentMinute());
 				setParkingTime(cal.getTimeInMillis());
 				CheckBox addCalendarEvent = (CheckBox) setTimeParking.findViewById(R.id.check_event_in_calendar);
 				if (addCalendarEvent.isChecked()) {
@@ -391,7 +378,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		intent.putExtra("calendar_id", 1); //$NON-NLS-1$
 		intent.putExtra("title", view.getContext().getString(R.string.osmand_parking_event)); //$NON-NLS-1$
 		intent.putExtra("beginTime", getParkingTime()); //$NON-NLS-1$
-		intent.putExtra("endTime", getParkingTime()+60*60*1000); //$NON-NLS-1$
+		intent.putExtra("endTime", getParkingTime() + 60 * 60 * 1000); //$NON-NLS-1$
 		view.getContext().startActivity(intent);
 	}
 
@@ -426,6 +413,10 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		setParkingType(isLimited);
 		setParkingStartTime(Calendar.getInstance().getTimeInMillis());
 		if (parkingLayer != null) {
+			MapContextMenu menu = mapActivity.getContextMenu();
+			if (menu.isVisible()) {
+				menu.show(new LatLon(latitude, longitude), parkingLayer.getObjectName(parkingPosition), parkingPosition);
+			}
 			parkingLayer.refresh();
 		}
 	}
@@ -537,6 +528,50 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 					.getString(R.string.osmand_parking_am));
 		}
 		return timeStringBuilder.toString();
+	}
+
+	String getFormattedTimeInterval(long timeInMillis, Activity ctx) {
+		if (timeInMillis < 0) {
+			timeInMillis *= -1;
+		}
+		StringBuilder timeStringBuilder = new StringBuilder();
+		int hours = (int) timeInMillis / (1000 * 60 * 60);
+		int minMills = (int) timeInMillis % (1000 * 60 * 60);
+		int minutes = minMills / (1000 * 60);
+		if (hours > 0) {
+			timeStringBuilder.append(hours);
+			timeStringBuilder.append(" ");
+			timeStringBuilder.append(ctx.getString(R.string.osmand_parking_hour));
+		}
+
+		timeStringBuilder.append(" ");
+		timeStringBuilder.append(minutes);
+		timeStringBuilder.append(" ");
+		timeStringBuilder.append(ctx.getString(R.string.osmand_parking_minute));
+
+
+		return timeStringBuilder.toString();
+	}
+
+	public String getParkingStartDesc(Activity ctx) {
+		return ctx.getString(R.string.osmand_parking_position_description_add_time)
+				+ " " + getFormattedTime(getStartParkingTime(), ctx);
+	}
+
+	public String getParkingLeftDesc(Activity ctx) {
+		StringBuilder descr = new StringBuilder();
+		if (getParkingType()) {
+			long endtime = getParkingTime();
+			long currTime = Calendar.getInstance().getTimeInMillis();
+			long timeDiff = endtime - currTime;
+			descr.append(getFormattedTimeInterval(timeDiff, ctx)).append(" ");
+			if (timeDiff < 0) {
+				descr.append(ctx.getString(R.string.osmand_parking_overdue));
+			} else {
+				descr.append(ctx.getString(R.string.osmand_parking_time_left));
+			}
+		}
+		return descr.toString();
 	}
 
 	public String getParkingDescription(Activity ctx) {
