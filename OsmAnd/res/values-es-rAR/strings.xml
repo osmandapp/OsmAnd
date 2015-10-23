@@ -2114,4 +2114,5 @@
     <string name="share_geo">geo:</string>
     <string name="share_menu_location">Compartir ubicación</string>
     <string name="shared_string_send">Enviar</string>
-    </resources>
+    <string name="application_dir_description">Elija donde guardar los archivos de los mapas.</string>
+</resources>
