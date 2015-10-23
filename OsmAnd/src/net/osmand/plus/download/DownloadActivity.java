@@ -10,6 +10,7 @@ import java.util.Locale;
 import java.util.Set;
 
 import net.osmand.IProgress;
+import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -45,7 +46,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.apache.commons.logging.Log;
+
 public class DownloadActivity extends ActionBarProgressActivity implements DownloadEvents {
+	private static final Log LOG = PlatformUtil.getLog(DownloadActivity.class);
+
 	public static final int UPDATES_TAB_NUMBER = 2;
 	public static final int LOCAL_TAB_NUMBER = 1;
 	public static final int DOWNLOAD_TAB_NUMBER = 0;
@@ -384,12 +389,12 @@ public class DownloadActivity extends ActionBarProgressActivity implements Downl
 			freeVersionBanner.findViewById(R.id.getFullVersionButton).setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Activity context = (Activity) v.getContext();
-					Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Version.marketPrefix((OsmandApplication) context
-							.getApplication()) + "net.osmand.plus"));
+					Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Version.marketPrefix(
+							ctx.getMyApplication()) + "net.osmand.plus"));
 					try {
-						context.startActivity(intent);
+						ctx.startActivity(intent);
 					} catch (ActivityNotFoundException e) {
+						LOG.error("ActivityNotFoundException", e);
 					}
 				}
 			});
