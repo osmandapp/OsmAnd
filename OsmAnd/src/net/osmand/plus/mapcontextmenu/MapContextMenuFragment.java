@@ -193,7 +193,7 @@ public class MapContextMenuFragment extends Fragment {
 					showOnMap(menu.getLatLon(), true, false);
 
 					if (hasMoved) {
-						applyPosY(getViewY(), false);
+						applyPosY(getViewY(), false, false);
 					}
 					return true;
 				}
@@ -217,7 +217,7 @@ public class MapContextMenuFragment extends Fragment {
 						hasMoved = true;
 						float y = event.getY();
 						float newY = getViewY() + (y - dy);
-						setViewY((int) newY, false);
+						setViewY((int) newY, false, false);
 
 						menuFullHeight = view.getHeight() - (int) newY + 10;
 						if (!oldAndroid()) {
@@ -246,13 +246,16 @@ public class MapContextMenuFragment extends Fragment {
 
 						boolean needCloseMenu = false;
 
+						int oldMenuState = menu.getCurrentMenuState();
 						if (menuBottomViewHeight > 0 && slidingUp) {
 							menu.slideUp();
 						} else if (slidingDown) {
 							needCloseMenu = !menu.slideDown();
 						}
+						int newMenuState = menu.getCurrentMenuState();
+						boolean needMapAdjust = oldMenuState != newMenuState && newMenuState != MenuController.MenuState.FULL_SCREEN;
 
-						applyPosY(currentY, needCloseMenu);
+						applyPosY(currentY, needCloseMenu, needMapAdjust);
 
 						break;
 
@@ -260,7 +263,7 @@ public class MapContextMenuFragment extends Fragment {
 				return true;
 			}
 
-			private void applyPosY(final int currentY, final boolean needCloseMenu) {
+			private void applyPosY(final int currentY, final boolean needCloseMenu, boolean needMapAdjust) {
 				final int posY = getPosY(needCloseMenu);
 				if (currentY != posY) {
 					if (posY < currentY) {
@@ -297,9 +300,11 @@ public class MapContextMenuFragment extends Fragment {
 								.setInterpolator(new DecelerateInterpolator())
 								.start();
 
-						adjustMapPosition(posY, true);
+						if (needMapAdjust) {
+							adjustMapPosition(posY, true);
+						}
 					} else {
-						setViewY(posY, false);
+						setViewY(posY, false, needMapAdjust);
 						updateMainViewLayout(posY);
 					}
 				}
@@ -576,7 +581,7 @@ public class MapContextMenuFragment extends Fragment {
 		}
 	}
 
-	private void setViewY(int y, boolean animated) {
+	private void setViewY(int y, boolean animated, boolean adjustMapPos) {
 		if (!oldAndroid()) {
 			mainView.setY(y);
 			fabView.setY(getFabY(y));
@@ -585,7 +590,9 @@ public class MapContextMenuFragment extends Fragment {
 			fabView.setPadding(0, getFabY(y), 0, 0);
 		}
 		if (!customMapCenter) {
-			adjustMapPosition(y, animated);
+			if (adjustMapPos) {
+				adjustMapPosition(y, animated);
+			}
 		} else {
 			customMapCenter = false;
 		}
@@ -645,7 +652,7 @@ public class MapContextMenuFragment extends Fragment {
 
 	private void doLayoutMenu() {
 		final int posY = getPosY();
-		setViewY(posY, true);
+		setViewY(posY, true, true);
 		updateMainViewLayout(posY);
 	}
 
