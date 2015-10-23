@@ -222,7 +222,7 @@ public class MapContextMenu {
 				menuController = new HistoryMenuController(app, mapActivity, (HistoryEntry) object);
 			} else if (object instanceof LatLon) {
 				if (pointDescription.isParking()) {
-					menuController = new ParkingPositionController(app, mapActivity, pointDescription, latLon);
+					menuController = new ParkingPositionController(app, mapActivity, pointDescription, (LatLon) object);
 				}
 			}
 		} else {

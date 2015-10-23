@@ -101,5 +101,6 @@ public class ParkingPositionController extends MenuController {
 
 	@Override
 	public void saveEntityState(Bundle bundle, String key) {
+		bundle.putSerializable(key, latLon);
 	}
 }
