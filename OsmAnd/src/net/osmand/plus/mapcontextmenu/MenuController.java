@@ -4,15 +4,22 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 
+import net.osmand.data.Amenity;
+import net.osmand.data.FavouritePoint;
+import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.IconsCache;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.helpers.SearchHistoryHelper;
+import net.osmand.plus.mapcontextmenu.details.AmenityMenuController;
+import net.osmand.plus.mapcontextmenu.details.FavouritePointMenuController;
+import net.osmand.plus.mapcontextmenu.details.HistoryMenuController;
+import net.osmand.plus.mapcontextmenu.details.ParkingPositionController;
+import net.osmand.plus.mapcontextmenu.details.PointDescriptionMenuController;
 
-public abstract class MenuController {
-
-	public final static float LANDSCAPE_WIDTH_DP = 350f;
+public abstract class MenuController extends BaseMenuController {
 
 	public class MenuState {
 		public static final int HEADER_ONLY = 1;
@@ -20,28 +27,39 @@ public abstract class MenuController {
 		public static final int FULL_SCREEN = 4;
 	}
 
-	private MapActivity mapActivity;
 	private MenuBuilder builder;
 	private int currentMenuState;
-	private boolean portraitMode;
-	private boolean largeDevice;
-	private boolean light;
 
 	public MenuController(MenuBuilder builder, MapActivity mapActivity) {
+		super(mapActivity);
 		this.builder = builder;
-		this.mapActivity = mapActivity;
-		portraitMode = AndroidUiHelper.isOrientationPortrait(mapActivity);
-		largeDevice = AndroidUiHelper.isXLargeDevice(mapActivity);
-		light = mapActivity.getMyApplication().getSettings().isLightContent();
 		this.currentMenuState = getInitialMenuState();
-	}
-
-	public MapActivity getMapActivity() {
-		return mapActivity;
 	}
 
 	public void build(View rootView) {
 		builder.build(rootView);
+	}
+
+	public static MenuController getMenuController(MapActivity mapActivity,
+												   LatLon latLon, PointDescription pointDescription, Object object) {
+		OsmandApplication app = mapActivity.getMyApplication();
+		MenuController menuController = null;
+		if (object != null) {
+			if (object instanceof Amenity) {
+				menuController = new AmenityMenuController(app, mapActivity, (Amenity) object);
+			} else if (object instanceof FavouritePoint) {
+				menuController = new FavouritePointMenuController(app, mapActivity, (FavouritePoint) object);
+			} else if (object instanceof SearchHistoryHelper.HistoryEntry) {
+				menuController = new HistoryMenuController(app, mapActivity, (SearchHistoryHelper.HistoryEntry) object);
+			} else if (object instanceof LatLon) {
+				if (pointDescription.isParking()) {
+					menuController = new ParkingPositionController(app, mapActivity, pointDescription, (LatLon) object);
+				}
+			}
+		} else {
+			menuController = new PointDescriptionMenuController(app, mapActivity, pointDescription, latLon);
+		}
+		return menuController;
 	}
 
 	public void addPlainMenuItem(int iconId, String text) {
@@ -59,35 +77,11 @@ public abstract class MenuController {
 		}
 	}
 
-	public boolean isLandscapeLayout() {
-		return !portraitMode && !largeDevice;
-	}
-
-	public float getLandscapeWidthDp() {
-		return LANDSCAPE_WIDTH_DP;
-	}
-
 	public int getSupportedMenuStates() {
 		if (isLandscapeLayout()) {
 			return MenuState.FULL_SCREEN;
 		} else {
 			return getSupportedMenuStatesPortrait();
-		}
-	}
-
-	public int getSlideInAnimation() {
-		if (isLandscapeLayout()) {
-			return R.anim.slide_in_left;
-		} else {
-			return R.anim.slide_in_bottom;
-		}
-	}
-
-	public int getSlideOutAnimation() {
-		if (isLandscapeLayout()) {
-			return R.anim.slide_out_left;
-		} else {
-			return R.anim.slide_out_bottom;
 		}
 	}
 
@@ -129,20 +123,6 @@ public abstract class MenuController {
 
 	public void setCurrentMenuState(int currentMenuState) {
 		this.currentMenuState = currentMenuState;
-	}
-
-	public float getHalfScreenMaxHeightKoef() {
-		return .7f;
-	}
-
-	protected Drawable getIcon(int iconId) {
-		return getIcon(iconId, R.color.icon_color, R.color.icon_color_light);
-	}
-
-	protected Drawable getIcon(int iconId, int colorLightId, int colorDarkId) {
-		IconsCache iconsCache = mapActivity.getMyApplication().getIconsCache();
-		return iconsCache.getIcon(iconId,
-				light ? colorLightId : colorDarkId);
 	}
 
 	public boolean hasTitleButton() {

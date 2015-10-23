@@ -212,22 +212,7 @@ public class MapContextMenu {
 	}
 
 	private void acquireMenuController() {
-		menuController = null;
-		if (object != null) {
-			if (object instanceof Amenity) {
-				menuController = new AmenityMenuController(app, mapActivity, (Amenity) object);
-			} else if (object instanceof FavouritePoint) {
-				menuController = new FavouritePointMenuController(app, mapActivity, (FavouritePoint) object);
-			} else if (object instanceof HistoryEntry) {
-				menuController = new HistoryMenuController(app, mapActivity, (HistoryEntry) object);
-			} else if (object instanceof LatLon) {
-				if (pointDescription.isParking()) {
-					menuController = new ParkingPositionController(app, mapActivity, pointDescription, (LatLon) object);
-				}
-			}
-		} else {
-			menuController = new PointDescriptionMenuController(app, mapActivity, pointDescription, latLon);
-		}
+		menuController = MenuController.getMenuController(mapActivity, latLon, pointDescription, object);
 	}
 
 	public void onSingleTapOnMap() {

@@ -292,6 +292,6 @@ public class DownloadResources extends DownloadResourceGroup {
 		return true;
 	}
 
-	
+
 
 }
