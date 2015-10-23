@@ -140,7 +140,7 @@ public class DownloadActivity extends ActionBarProgressActivity implements Downl
 			filter = intent.getExtras().getString(FILTER_KEY);
 			filterCat = intent.getExtras().getString(FILTER_CAT);
 		}
-		new DataStoragePlaceDialogFragment().show(getFragmentManager(), null);
+//		new DataStoragePlaceDialogFragment().show(getFragmentManager(), null);
 	}
 	
 	public DownloadIndexesThread getDownloadThread() {
