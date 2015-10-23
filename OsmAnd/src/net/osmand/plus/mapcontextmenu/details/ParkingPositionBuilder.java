@@ -3,15 +3,12 @@ package net.osmand.plus.mapcontextmenu.details;
 import android.view.View;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 
-public class HistoryMenuBuilder extends MenuBuilder {
-	private final HistoryEntry entry;
+public class ParkingPositionBuilder extends MenuBuilder {
 
-	public HistoryMenuBuilder(OsmandApplication app, final HistoryEntry entry) {
+	public ParkingPositionBuilder(OsmandApplication app) {
 		super(app);
-		this.entry = entry;
 	}
 
 	private void buildRow(View view, int iconId, String text, int textColor) {

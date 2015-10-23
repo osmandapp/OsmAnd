@@ -29,9 +29,9 @@ public class ShareMenu {
 
 	public enum ShareItem {
 		MESSAGE(R.drawable.ic_action_export, R.string.shared_string_send),
-		CLIPBOARD(R.drawable.ic_action_export, R.string.shared_string_copy),
-		GEO(R.drawable.ic_action_export, R.string.share_geo),
-		QR_CODE(R.drawable.ic_action_export, R.string.share_qr_code);
+		CLIPBOARD(R.drawable.ic_action_copy, R.string.shared_string_copy),
+		GEO(R.drawable.ic_world_globe_dark, R.string.share_geo),
+		QR_CODE(R.drawable.ic_action_qrcode, R.string.share_qr_code);
 
 		final int iconResourceId;
 		final int titleResourceId;

@@ -1,11 +1,9 @@
 package net.osmand.plus.mapcontextmenu.details;
 
-import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.text.Html;
 import android.text.TextUtils;
 import android.text.util.Linkify;
-import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,14 +17,13 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.views.POIMapLayer;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
 
 import java.util.Calendar;
 import java.util.Map;
-
-import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 
 public class AmenityMenuBuilder extends MenuBuilder {
 
@@ -41,7 +38,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		buildRow(view, getRowIcon(iconId), text, textColor, isWiki);
 	}
 
-	private void buildRow(final View view, Drawable icon, String text, int textColor, final boolean isWiki) {
+	protected void buildRow(final View view, Drawable icon, String text, int textColor, final boolean isWiki) {
 		boolean light = app.getSettings().isLightContent();
 
 		LinearLayout ll = new LinearLayout(view.getContext());
