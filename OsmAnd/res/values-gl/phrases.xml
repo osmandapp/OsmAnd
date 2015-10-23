@@ -236,14 +236,14 @@
 	<string name="poi_chalet">Chalet</string>
 
 	<string name="poi_place_of_worship">Lugar de culto</string>
-	<string name="poi_religion_christian">Lugar de culto: cristián</string>
-	<string name="poi_religion_jewish">Lugar de culto: xudeo</string>
-	<string name="poi_religion_muslim">Lugar de cultu: musulmán</string>
-	<string name="poi_religion_sikh">Lugar de culto: sikh</string>
-	<string name="poi_religion_buddhist">Lugar de culto: budista</string>
-	<string name="poi_religion_hindu">Lugar de culto: hindú</string>
-	<string name="poi_religion_shinto">Lugar de culto: xintoísta</string>
-	<string name="poi_religion_taoist">Lugar de culto: taoísta</string>
+	<string name="poi_religion_christian">Cristiandade</string>
+	<string name="poi_religion_jewish">Xudaísmo</string>
+	<string name="poi_religion_muslim">Islam</string>
+	<string name="poi_religion_sikh"/>
+	<string name="poi_religion_buddhist">Budismo</string>
+	<string name="poi_religion_hindu">Hinduísmo</string>
+	<string name="poi_religion_shinto">Xintoísmo</string>
+	<string name="poi_religion_taoist">Taoísmo</string>
 	<string name="poi_monastery">Mosteiro</string>
 	<string name="poi_historic_monastery">Mosteiro histórico</string>
 	<string name="poi_wayside_cross">Cruceiro</string>
@@ -454,9 +454,9 @@
 	<string name="poi_ferry_terminal">Terminal de ferris</string>
 	<string name="poi_observation_tower">Atalaia</string>
 	<string name="poi_bell_tower">Campanario</string>
-	<string name="poi_recycling_centre">Centro</string>
+	<string name="poi_recycling_centre">Tipo: centro de reciclaxe</string>
 	<string name="poi_recycling_glass">Vidro</string>
-	<string name="poi_recycling_container">Contedor</string>
+	<string name="poi_recycling_container">Tipo: contedor</string>
 	<string name="poi_recycling_paper">Papel</string>
 	<string name="poi_recycling_clothes">Roupa</string>
 	<string name="poi_recycling_cans">Latas</string>
@@ -547,10 +547,10 @@
 	<string name="poi_attraction_slide">Tobogán</string>
 	<string name="poi_apartment">Apartamento</string>
 	<string name="poi_religion_voodoo">Vodú</string>
-	<string name="poi_religion_spiritualist">Espiritualista</string>
-	<string name="poi_religion_bahai">Bahai</string>
+	<string name="poi_religion_spiritualist">Espiritualismo</string>
+	<string name="poi_religion_bahai">Bahaísmo</string>
 	<string name="poi_religion_scientologist">Ciencioloxía</string>
-	<string name="poi_religion_pagan">Pagá</string>
+	<string name="poi_religion_pagan">Pagnismo</string>
 	<string name="poi_religion_tenrikyo">Tenrikyo</string>
 	<string name="poi_denomination_catholic">Católica</string>
 	<string name="poi_denomination_baptist">Baptista</string>
@@ -567,10 +567,10 @@
 	<string name="poi_denomination_pentecostal">Pentecostal</string>
 	<string name="poi_denomination_mormon">Mormona</string>
 	<string name="poi_denomination_jehovahs_witness">Testemuña de Xehová</string>
-	<string name="poi_denomination_greek_orthodox">Ortodoxa grega</string>
+	<string name="poi_denomination_greek_orthodox">Ortodoxia grega</string>
 	<string name="poi_denomination_reformed">Reformada</string>
-	<string name="poi_denomination_seventh_day_adventist">Adventista do Sétimo Día</string>
-	<string name="poi_denomination_new_apostolic">Nova apostólica</string>
+	<string name="poi_denomination_seventh_day_adventist">Adventismo do Sétimo Día</string>
+	<string name="poi_denomination_new_apostolic"/>
 	<string name="poi_denomination_church_of_england">Igrexa de Inglaterra</string>
 	<string name="poi_denomination_episcopal">Epicospaliana</string>
 	<string name="poi_denomination_shia">Shiita</string>
@@ -618,7 +618,7 @@
 	<string name="poi_attraction_amusement_ride">Atracción de feira</string>
 	<string name="poi_lodging">Aloxamento</string>
 	<string name="poi_guest_house">Pensión</string>
-	<string name="poi_religion_zoroastrian">Zoroastriana</string>
+	<string name="poi_religion_zoroastrian">Zoroastrismo</string>
 
 	<string name="poi_denomination_united">Unida</string>
 	<string name="poi_denomination_iglesia_ni_cristo">Iglesia ni cristo</string>
@@ -777,4 +777,25 @@
 	<string name="poi_animal_shelter_dog_cat">Refuxio para cans e gatos</string>
 	<string name="poi_animal_shelter_bird">Refuxio para aves</string>
 
+	<string name="poi_service">Servizo</string>
+		<string name="poi_wine">Enoteca</string>
+
+	<string name="poi_doors">Portas</string>
+	<string name="poi_leather">Curtidoría</string>
+	<string name="poi_photo">Tenda de fotografía</string>
+	<string name="poi_video">Tenda de vídeo</string>
+	<string name="poi_fuel_gtl_diesel">Diesel GTL</string>
+	<string name="poi_fuel_hgv_diesel">Diesel HGV</string>
+	<string name="poi_fuel_biogas">Biogás</string>
+	<string name="poi_railway_platform">Plataforma de tren</string>
+	<string name="poi_recycling_electrical_items">Aparellos eléctricos</string>
+	<string name="poi_orchard">Pomar</string>
+	<string name="poi_monitoring_station">Estación de seguimento</string>
+	<string name="poi_attraction_big_wheel">Nora</string>
+	<string name="poi_attraction_train">Tren (atracción)</string>
+	<string name="poi_internet_access_yes">Acceso á Internet: si</string>
+	<string name="poi_internet_access_no">Acceso á Internet: non</string>
+
+	<string name="poi_picnic_table">Mesa de pícnic</string>
+	<string name="poi_marina">Porto deportivo</string>
 	</resources>
