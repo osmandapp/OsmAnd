@@ -153,6 +153,9 @@ public abstract class MenuController {
 		return "";
 	}
 
+	public void titleButtonPressed() {
+	}
+
 	public boolean shouldShowButtons() {
 		return true;
 	}

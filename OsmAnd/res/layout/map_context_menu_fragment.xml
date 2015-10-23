@@ -88,7 +88,7 @@
                         android:layout_marginLeft="2dp"
                         android:layout_marginRight="2dp"
                         android:paddingLeft="10dp"
-                        android:paddingRight="20dp"
+                        android:paddingRight="10dp"
                         android:gravity="left|center_vertical"
                         android:text="@string/osmand_parking_delete"
                         android:background="?android:selectableItemBackground"
