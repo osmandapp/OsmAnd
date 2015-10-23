@@ -2220,4 +2220,25 @@
 	<string name="poi_tomb_crypt">Type: crypt</string>
 	<string name="poi_tomb_pyramid">Type: pyramid</string>
 
+	<string name="poi_historic_civilization_ancient_roman">Civilization: ancient roman</string>
+	<string name="poi_historic_civilization_nuragic">Civilization: nuragic</string>
+	<string name="poi_historic_civilization_etruscan">Civilization: etruscan</string>
+	<string name="poi_historic_civilization_prehistoric">Civilization: prehistoric</string>
+	<string name="poi_historic_civilization_ancient_greek">Civilization: ancient greek</string>
+	<string name="poi_historic_civilization_roman">Civilization: roman</string>
+	<string name="poi_historic_civilization_byzantine">Civilization: byzantine</string>
+	<string name="poi_historic_civilization_imperial_chinese">Civilization: imperial chinese</string>
+	<string name="poi_historic_civilization_ancient_egyptian">Civilization: ancient egyptian</string>
+	<string name="poi_historic_civilization_celtic">Civilization: celtic</string>
+	<string name="poi_historic_civilization_western_roman">Civilization: western roman</string>
+	<string name="poi_historic_civilization_mycenaean">Civilization: mycenaean</string>
+	<string name="poi_historic_civilization_dacian">Civilization: dacian</string>
+	<string name="poi_historic_civilization_hernici">Civilization: hernici</string>
+	<string name="poi_historic_civilization_greek_egyptian">Civilization: greek egyptian</string>
+	<string name="poi_historic_civilization_roman_and_byzantine_egyptian">Civilization: roman and byzantine egyptian</string>
+	<string name="poi_historic_civilization_helladic">Civilization: helladic</string>
+	<string name="poi_historic_civilization_cycladic">Civilization: cycladic</string>
+	<string name="poi_historic_civilization_minoan">Civilization: minoan</string>
+	<string name="poi_historic_civilization_tiahuanacota">Civilization: tiahuanacota</string>
+
 </resources>

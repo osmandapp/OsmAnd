@@ -2216,4 +2216,25 @@
 	<string name="poi_tomb_crypt">Тип: крипта</string>
 	<string name="poi_tomb_pyramid">Тип: пирамида</string>
 
+	<string name="poi_historic_civilization_ancient_roman">Цивилизация: древнеримская</string>
+	<string name="poi_historic_civilization_nuragic">Цивилизация: нурагическая</string>
+	<string name="poi_historic_civilization_etruscan">Цивилизация: этрусская</string>
+	<string name="poi_historic_civilization_prehistoric">Цивилизация: доисторическая</string>
+	<string name="poi_historic_civilization_ancient_greek">Цивилизация: древнегреческая</string>
+	<string name="poi_historic_civilization_roman">Цивилизация: римская</string>
+	<string name="poi_historic_civilization_byzantine">Цивилизация: византийская</string>
+	<string name="poi_historic_civilization_imperial_chinese">Цивилизация: китайская</string>
+	<string name="poi_historic_civilization_ancient_egyptian">Цивилизация: древнеегипетская</string>
+	<string name="poi_historic_civilization_celtic">Цивилизация: кельтская</string>
+	<string name="poi_historic_civilization_western_roman">Цивилизация: западная римская</string>
+	<string name="poi_historic_civilization_mycenaean">Цивилизация: микенская</string>
+	<string name="poi_historic_civilization_dacian">Цивилизация: гето-дакская</string>
+	<string name="poi_historic_civilization_hernici">Цивилизация: герники</string>
+	<string name="poi_historic_civilization_greek_egyptian">Цивилизация: греко-египетская</string>
+	<string name="poi_historic_civilization_roman_and_byzantine_egyptian">Цивилизация: римская и византийско-египетская</string>
+	<string name="poi_historic_civilization_helladic">Цивилизация: элладская</string>
+	<string name="poi_historic_civilization_cycladic">Цивилизация: кикладская</string>
+	<string name="poi_historic_civilization_minoan">Цивилизация: минойская</string>
+	<string name="poi_historic_civilization_tiahuanacota">Цивилизация: тиуанако</string>
+
 </resources>
