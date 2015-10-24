@@ -13,6 +13,8 @@ import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
 
 import java.io.Serializable;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -41,6 +43,12 @@ public class ObjectSelectionMenu extends BaseMenuController {
 			this.pointDescription = pointDescription;
 			this.object = object;
 			this.mapActivity = mapActivity;
+			init();
+		}
+
+		protected void init() {
+			controller = MenuController.getMenuController(mapActivity, latLon, pointDescription, object);
+			initTitle();
 		}
 
 		@Override
@@ -65,10 +73,6 @@ public class ObjectSelectionMenu extends BaseMenuController {
 
 		@Override
 		public MenuController getMenuController() {
-			if (controller == null) {
-				controller = MenuController.getMenuController(mapActivity, latLon, pointDescription, object);
-				initTitle();
-			}
 			return controller;
 		}
 
@@ -112,6 +116,12 @@ public class ObjectSelectionMenu extends BaseMenuController {
 			MenuObject menuObject = new MenuObject(ll, pointDescription, selectedObj, getMapActivity());
 			objects.add(menuObject);
 		}
+		Collections.sort(objects, new Comparator<MenuObject>() {
+			@Override
+			public int compare(MenuObject obj1, MenuObject obj2) {
+				return obj1.getTitleStr().compareToIgnoreCase(obj2.getTitleStr());
+			}
+		});
 	}
 
 	public static void show(LatLon latLon, Map<Object, IContextMenuProvider> selectedObjects, MapActivity mapActivity) {
@@ -179,6 +189,7 @@ public class ObjectSelectionMenu extends BaseMenuController {
 			menu.objects = (LinkedList<MenuObject>) objects;
 			for (MenuObject menuObject : menu.objects) {
 				menuObject.mapActivity = mapActivity;
+				menuObject.init();
 			}
 		}
 

@@ -3,13 +3,16 @@ package net.osmand.plus.mapcontextmenu.other;
 import android.annotation.SuppressLint;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -28,6 +31,7 @@ import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 public class ObjectSelectionMenuFragment extends Fragment implements AdapterView.OnItemClickListener {
 	public static final String TAG = "ObjectSelectionMenuFragment";
 
+	private View view;
 	private ArrayAdapter<MenuObject> listAdapter;
 	private ObjectSelectionMenu menu;
 
@@ -46,13 +50,16 @@ public class ObjectSelectionMenuFragment extends Fragment implements AdapterView
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.menu_obj_selection_fragment, container, false);
+		view = inflater.inflate(R.layout.menu_obj_selection_fragment, container, false);
 
 		ListView listView = (ListView) view.findViewById(R.id.list);
 		listAdapter = createAdapter();
 		listView.setAdapter(listAdapter);
 		listView.setOnItemClickListener(this);
 
+		if (!oldAndroid()) {
+			runLayoutListener();
+		}
 		return view;
 	}
 
@@ -84,6 +91,34 @@ public class ObjectSelectionMenuFragment extends Fragment implements AdapterView
 				.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
 				.add(R.id.fragmentContainer, fragment, TAG)
 				.addToBackStack(TAG).commit();
+	}
+
+	private void runLayoutListener() {
+		ViewTreeObserver vto = view.getViewTreeObserver();
+		vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+
+			@Override
+			public void onGlobalLayout() {
+
+				int maxHeight = (int) (getScreenHeight() * menu.getHalfScreenMaxHeightKoef());
+				int height = view.findViewById(R.id.main_view).getHeight();
+
+				ViewTreeObserver obs = view.getViewTreeObserver();
+
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+					obs.removeOnGlobalLayoutListener(this);
+				} else {
+					obs.removeGlobalOnLayoutListener(this);
+				}
+
+				if (height > maxHeight) {
+					ViewGroup.LayoutParams lp = view.getLayoutParams();
+					lp.height = maxHeight;
+					view.setLayoutParams(lp);
+					view.requestLayout();
+				}
+			}
+		});
 	}
 
 	private ArrayAdapter<MenuObject> createAdapter() {
@@ -156,5 +191,15 @@ public class ObjectSelectionMenuFragment extends Fragment implements AdapterView
 				dp,
 				r.getDisplayMetrics()
 		);
+	}
+
+	private int getScreenHeight() {
+		DisplayMetrics dm = new DisplayMetrics();
+		getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
+		return dm.heightPixels;
+	}
+
+	private boolean oldAndroid() {
+		return (Build.VERSION.SDK_INT < Build.VERSION_CODES.ICE_CREAM_SANDWICH);
 	}
 }
