@@ -1,10 +1,5 @@
 package net.osmand.plus.views;
 
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnCancelListener;
-import android.content.DialogInterface.OnClickListener;
 import android.graphics.Canvas;
 import android.graphics.PointF;
 import android.graphics.Rect;
@@ -21,12 +16,12 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
+import net.osmand.plus.mapcontextmenu.other.ObjectSelectionMenu;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 public class ContextMenuLayer extends OsmandMapLayer {
 	
@@ -100,14 +95,6 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	
 	public void setSelectOnMap(CallbackWithObject<LatLon> selectOnMap) {
 		this.selectOnMap = selectOnMap;
-	}
-
-	private void clearSelectedObjects(Map<Object, IContextMenuProvider> selectedObjects) {
-		for(IContextMenuProvider p : selectedObjects.values()) {
-			if(p instanceof IContextMenuProviderSelection){
-				((IContextMenuProviderSelection) p).clearSelectedObject();
-			}
-		}
 	}
 
 	@Override
@@ -250,47 +237,13 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			}
 		}
 
+		ObjectSelectionMenu.hide(activity);
 		menu.onSingleTapOnMap();
 		return false;
 	}
 
 	private void showContextMenuForSelectedObjects(final LatLon latLon, final Map<Object, IContextMenuProvider> selectedObjects) {
-		Builder builder = new AlertDialog.Builder(view.getContext());
-		String[] d = new String[selectedObjects.size()];
-		final List<Object> s = new ArrayList<>();
-		int i = 0;
-		for (Entry<Object, IContextMenuProvider> e : selectedObjects.entrySet()) {
-			d[i++] = e.getValue().getObjectDescription(e.getKey());
-			s.add(e.getKey());
-		}
-		builder.setItems(d, new OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				Object selectedObj = s.get(which);
-				IContextMenuProvider contextObject = selectedObjects.get(selectedObj);
-				LatLon ll = null;
-				PointDescription pointDescription = null;
-				if (contextObject != null) {
-					ll = contextObject.getObjectLocation(selectedObj);
-					pointDescription = contextObject.getObjectName(selectedObj);
-				}
-				if (ll == null) {
-					ll = latLon;
-				}
-				menu.show(ll, pointDescription, selectedObj);
-
-				selectedObjects.remove(selectedObj);
-				clearSelectedObjects(selectedObjects);
-			}
-		});
-		builder.setOnCancelListener(new OnCancelListener() {
-			@Override
-			public void onCancel(DialogInterface dialog) {
-				clearSelectedObjects(selectedObjects);
-			}
-		});
-
-		builder.show();
+		ObjectSelectionMenu.show(latLon, selectedObjects, activity);
 	}
 
 	@Override
@@ -299,6 +252,9 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		if (movementListener.onTouchEvent(event)) {
 			if (menu.isVisible()) {
 				menu.hide();
+			}
+			if (ObjectSelectionMenu.isVisible(activity)) {
+				ObjectSelectionMenu.hide(activity);
 			}
 		}
 
