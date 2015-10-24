@@ -2279,7 +2279,7 @@
 	<string name="poi_historic_period_roman_greece">Historic period: Roman Greece (146 BC – 330 AD)</string>
 	<string name="poi_historic_period_roman_kingdom">Historic period: Roman kingdom (753 BC – 509 BC)</string>
 	<string name="poi_historic_period_dominate">Historic period: dominate (285 AD – 476 AD)</string>
-	<string name="poi_historic_period_villager">Historic period: villager (epoch I & II, 1580 BC – 133 AC)</string>
+	<string name="poi_historic_period_villager">Historic period: villager (epoch I \& II, 1580 BC – 133 AC)</string>
 	<string name="poi_historic_period_urban">Historic period: urban (epoch III, 133 AC – 374 AC)</string>
 	<string name="poi_historic_period_classical">Historic period: classical (epoch IV, 374 AC – 900 AC)</string>
 	<string name="poi_historic_period_imperial">Historic period: imperial (epoch V, 900 AC – 1200 AC)</string>
