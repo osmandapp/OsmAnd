@@ -1,56 +1,31 @@
 package net.osmand.plus.mapcontextmenu;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
-import net.osmand.Location;
-import net.osmand.ResultMatcher;
-import net.osmand.binary.RouteDataObject;
-import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
-import net.osmand.plus.mapcontextmenu.details.AmenityMenuController;
-import net.osmand.plus.mapcontextmenu.details.FavouritePointMenuController;
-import net.osmand.plus.mapcontextmenu.details.HistoryMenuController;
-import net.osmand.plus.mapcontextmenu.details.ParkingPositionController;
-import net.osmand.plus.mapcontextmenu.details.PointDescriptionMenuController;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
-import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.OsmandMapLayer;
-import net.osmand.util.Algorithms;
 
-public class MapContextMenu {
+public class MapContextMenu extends MenuTitleController {
 
-	private OsmandApplication app;
-	private OsmandSettings settings;
 	private final MapActivity mapActivity;
 
 	private boolean active;
 	private LatLon latLon;
 	private PointDescription pointDescription;
 	private Object object;
-	MenuController menuController;
+	private MenuController menuController;
 
 	private LatLon mapCenter;
 	private int mapPosition = 0;
-
-	private int leftIconId;
-	private Drawable leftIcon;
-	private String nameStr;
-	private String typeStr;
-	private Drawable secondLineIcon;
-	private String streetStr;
-	private boolean addressUnknown;
 
 	private int favActionIconId;
 
@@ -65,6 +40,11 @@ public class MapContextMenu {
 	private static final String KEY_CTX_MENU_MAP_CENTER = "key_ctx_menu_map_center";
 	private static final String KEY_CTX_MENU_MAP_POSITION = "key_ctx_menu_map_position";
 
+	@Override
+	public MapActivity getMapActivity() {
+		return mapActivity;
+	}
+
 	public boolean isActive() {
 		return active;
 	}
@@ -73,6 +53,7 @@ public class MapContextMenu {
 		return findMenuFragment() != null;
 	}
 
+	@Override
 	public LatLon getLatLon() {
 		return latLon;
 	}
@@ -89,10 +70,12 @@ public class MapContextMenu {
 		this.mapPosition = mapPosition;
 	}
 
+	@Override
 	public PointDescription getPointDescription() {
 		return pointDescription;
 	}
 
+	@Override
 	public Object getObject() {
 		return object;
 	}
@@ -101,10 +84,13 @@ public class MapContextMenu {
 		return menuController != null;
 	}
 
-	public MapContextMenu(OsmandApplication app, MapActivity mapActivity) {
-		this.app = app;
+	@Override
+	public MenuController getMenuController() {
+		return menuController;
+	}
+
+	public MapContextMenu(MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
-		settings = app.getSettings();
 	}
 
 	public boolean init(LatLon latLon, PointDescription pointDescription, Object object) {
@@ -132,20 +118,12 @@ public class MapContextMenu {
 
 		this.latLon = latLon;
 		this.object = object;
-		leftIconId = 0;
-		nameStr = "";
-		typeStr = "";
-		streetStr = "";
-		addressUnknown = false;
 
 		active = true;
 
 		acquireMenuController();
-		acquireIcons();
-		acquireNameAndType();
-		if (needStreetName()) {
-			acquireStreetName(latLon);
-		}
+		initTitle();
+
 		if (menuController != null) {
 			menuController.addPlainMenuItems(typeStr, this.pointDescription);
 		}
@@ -221,14 +199,7 @@ public class MapContextMenu {
 		}
 	}
 
-	private boolean needStreetName() {
-		boolean res = object != null || Algorithms.isEmpty(pointDescription.getName());
-		if (res && menuController != null) {
-			res = menuController.needStreetName();
-		}
-		return res;
-	}
-
+	@Override
 	public void refreshMenuTitle() {
 		MapContextMenuFragment fragment = findMenuFragment();
 		if (fragment != null)
@@ -244,119 +215,18 @@ public class MapContextMenu {
 		}
 	}
 
-	public int getLeftIconId() {
-		return leftIconId;
-	}
-
 	public int getFavActionIconId() {
 		return favActionIconId;
 	}
 
-	public Drawable getLeftIcon() {
-		return leftIcon;
-	}
-
-	public Drawable getSecondLineIcon() {
-		return secondLineIcon;
-	}
-
-	public String getTitleStr() {
-		return nameStr;
-	}
-
-	public boolean isAddressUnknown() {
-		return addressUnknown;
-	}
-
-	public String getLocationStr() {
-		if (menuController != null && menuController.needTypeStr()) {
-			return typeStr;
-		} else {
-			if (Algorithms.isEmpty(streetStr)) {
-				return PointDescription.getLocationName(mapActivity,
-						latLon.getLatitude(), latLon.getLongitude(), true).replaceAll("\n", "");
-			} else {
-				return streetStr;
-			}
-		}
-	}
-
-	private void acquireIcons() {
-		leftIconId = 0;
-		leftIcon = null;
-		secondLineIcon = null;
-
-		favActionIconId = R.drawable.ic_action_fav_dark;
+	protected void acquireIcons() {
+		super.acquireIcons();
 
 		if (menuController != null) {
-			leftIconId = menuController.getLeftIconId();
-			leftIcon = menuController.getLeftIcon();
-			secondLineIcon = menuController.getSecondLineIcon();
-
 			favActionIconId = menuController.getFavActionIconId();
+		} else {
+			favActionIconId = R.drawable.ic_action_fav_dark;
 		}
-	}
-
-	private void acquireNameAndType() {
-		if (menuController != null) {
-			nameStr = menuController.getNameStr();
-			typeStr = menuController.getTypeStr();
-		}
-
-		if (Algorithms.isEmpty(nameStr)) {
-			nameStr = pointDescription.getName();
-		}
-		if (Algorithms.isEmpty(typeStr)) {
-			typeStr = pointDescription.getTypeName();
-		}
-
-		if (Algorithms.isEmpty(nameStr)) {
-			if (!Algorithms.isEmpty(typeStr)) {
-				nameStr = typeStr;
-				typeStr = "";
-			} else {
-				nameStr = app.getResources().getString(R.string.address_unknown);
-				addressUnknown = true;
-			}
-		}
-	}
-
-	private void acquireStreetName(final LatLon loc) {
-		Location ll = new Location("");
-		ll.setLatitude(loc.getLatitude());
-		ll.setLongitude(loc.getLongitude());
-		app.getLocationProvider().getRouteSegment(ll, new ResultMatcher<RouteDataObject>() {
-
-			@Override
-			public boolean publish(RouteDataObject object) {
-				if (object != null) {
-					streetStr = RoutingHelper.formatStreetName(object.getName(settings.MAP_PREFERRED_LOCALE.get()),
-							object.getRef(), object.getDestinationName(settings.MAP_PREFERRED_LOCALE.get()));
-
-					if (!Algorithms.isEmpty(streetStr)) {
-						if (getObject() == null) {
-							nameStr = streetStr;
-							addressUnknown = false;
-							streetStr = "";
-						}
-						mapActivity.runOnUiThread(new Runnable() {
-							public void run() {
-								refreshMenuTitle();
-							}
-						});
-					}
-				} else {
-					streetStr = "";
-				}
-				return true;
-			}
-
-			@Override
-			public boolean isCancelled() {
-				return false;
-			}
-
-		});
 	}
 
 	public void fabPressed() {

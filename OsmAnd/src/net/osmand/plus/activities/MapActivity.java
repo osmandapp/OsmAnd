@@ -161,7 +161,7 @@ public class MapActivity extends AccessibleActivity {
 		app = getMyApplication();
 		settings = app.getSettings();
 		app.applyTheme(this);
-		contextMenuOnMap = new MapContextMenu(app, this);
+		contextMenuOnMap = new MapContextMenu(this);
 		supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
 		// Full screen is not used here
