@@ -1492,7 +1492,7 @@
 	<string name="poi_payment_cheque_no">Checks accepteres ikke</string>
 	<string name="poi_payment_pikepass_yes">PIKEPASS accepteres</string>
 	<string name="poi_payment_pikepass_no">PIKEPASS accepteres ikke</string>
-	<string name="poi_payment_pikepass_designated">PIKEPASS (udpeget) accepteres</string>
+	<string name="poi_payment_pikepass_designated">PIKEPASS (særskilt) accepteres</string>
 	<string name="poi_payment_visa_debit_yes">Visa kreditkort accepteres</string>
 	<string name="poi_payment_visa_debit_no">Visa kreditkort accepteres ikke</string>
 	<string name="poi_payment_cryptocurrencies_no">Kryptovalutaer accepteres ikke</string>
@@ -2044,7 +2044,7 @@
 	<string name="poi_parish">Sognekontor</string>
 	<string name="poi_publisher">Forlagskontor</string>
 
-<string name="poi_debris">Debris</string>
+<string name="poi_debris">Efterladenskab</string>
 	<string name="poi_jersey_barrier">Jersey barriere</string>
 	<string name="poi_fuel_91ul">91UL brændstof</string>
 	<string name="poi_fuel_100ll">100LL brændstof</string>
@@ -2266,15 +2266,15 @@
 	<string name="poi_tomb_crypt">Type: krypt</string>
 	<string name="poi_tomb_pyramid">Type: pyramide</string>
 
-<string name="poi_historic_civilization_ancient_roman">Civilisation: antik romersk</string>
+<string name="poi_historic_civilization_ancient_roman">Civilisation: romerriget</string>
 	<string name="poi_historic_civilization_nuragic">Civilisation: nuragher</string>
 	<string name="poi_historic_civilization_etruscan">Civilisation: etruskisk</string>
 	<string name="poi_historic_civilization_prehistoric">Civilisation: forhistorisk</string>
 	<string name="poi_historic_civilization_ancient_greek">Civilisation: oldgræsk</string>
 	<string name="poi_historic_civilization_roman">Civilisation: romersk</string>
 	<string name="poi_historic_civilization_byzantine">Civilisation: byzantinsk</string>
-	<string name="poi_historic_civilization_imperial_chinese">Civilisation: kinesiske dynastier</string>
-	<string name="poi_historic_civilization_ancient_egyptian">Civilisation: gammelegyptisk</string>
+	<string name="poi_historic_civilization_imperial_chinese">Civilisation: kinesisk dynasti</string>
+	<string name="poi_historic_civilization_ancient_egyptian">Civilisation: det gamle Egypten</string>
 	<string name="poi_historic_civilization_celtic">Civilisation: celtic</string>
 	<string name="poi_historic_civilization_western_roman">Civilisation: vestromersk</string>
 	<string name="poi_historic_civilization_mycenaean">Civilisation: mykensk</string>
@@ -2282,7 +2282,7 @@
 	<string name="poi_historic_civilization_hernici">Civilisation: herniker</string>
 	<string name="poi_historic_civilization_greek_egyptian">Civilisation: græsk egyptisk</string>
 	<string name="poi_historic_civilization_roman_and_byzantine_egyptian">Civilisation: romersk og byzantinsk egyptisk</string>
-	<string name="poi_historic_civilization_helladic">Civilisation: helladisk</string>
+	<string name="poi_historic_civilization_helladic">Civilisation: helladic</string>
 	<string name="poi_historic_civilization_cycladic">Civilisation: kykladisk</string>
 	<string name="poi_historic_civilization_minoan">Civilisation: minoisk</string>
 	<string name="poi_historic_civilization_tiahuanacota">Civilisation: tiahuanacota</string>
