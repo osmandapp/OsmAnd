@@ -2141,4 +2141,5 @@
 <string name="update_all">Agiorna totu (%1$s MB)</string>
 <string name="free_downloads_used">Iscarrigamentos gratùitos impreados</string>
     <string name="free_downloads_used_description">Podes impostare cantos iscarrigamentos gratùitos as impreadu</string>
-</resources>
+<string name="simulate_initial_startup_descr">Reimposta sa bandera chi indicat sa prima allumingiadura, mantène sas àteras impostaziones in s’istadu originale</string>
+    </resources>
