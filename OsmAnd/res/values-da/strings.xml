@@ -261,7 +261,7 @@
     <string name="route_updated_loc_found">Ruten beregnes, når position er fundet</string>
     <string name="osmand_parking_hours">Timer</string>
     <string name="osmand_parking_minutes">Minutter</string>
-    <string name="osmand_parking_position_description_add_time">Bilen blev parkeret kl.:</string>
+    <string name="osmand_parking_position_description_add_time">Bilen blev parkeret kl.</string>
 	<string name="tip_recent_changes_0_8_1_t">"Ændringer i 0.8.1:
 \n * Mere præcise ruter (en smule langsommere)
 \n * Smart og hurtig rutegenberegning
