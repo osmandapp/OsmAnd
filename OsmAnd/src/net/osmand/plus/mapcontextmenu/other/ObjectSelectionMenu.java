@@ -116,6 +116,10 @@ public class ObjectSelectionMenu extends BaseMenuController {
 
 	public static void show(LatLon latLon, Map<Object, IContextMenuProvider> selectedObjects, MapActivity mapActivity) {
 
+		if (isVisible(mapActivity)) {
+			hide(mapActivity);
+		}
+
 		ObjectSelectionMenu menu = new ObjectSelectionMenu(latLon, mapActivity);
 		menu.createCollection(selectedObjects);
 		ObjectSelectionMenuFragment.showInstance(menu);

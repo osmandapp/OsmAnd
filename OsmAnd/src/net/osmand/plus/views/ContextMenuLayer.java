@@ -128,6 +128,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			if (latLon == null) {
 				latLon = getLatLon(point, tileBox);
 			}
+			hideVisibleMenues();
 			menu.show(latLon, pointDescription, selectedObj);
 			return true;
 
@@ -136,6 +137,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			return true;
 
 		} else if (showUnknownLocation) {
+			hideVisibleMenues();
 			menu.show(getLatLon(point, tileBox), null, null);
 			return true;
 		}
@@ -217,6 +219,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	@Override
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
 		if (pressedContextMarker(tileBox, point.x, point.y)) {
+			hideVisibleMenues();
 			menu.show();
 			return true;
 		}
@@ -237,9 +240,15 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			}
 		}
 
-		ObjectSelectionMenu.hide(activity);
+		hideVisibleMenues();
 		menu.onSingleTapOnMap();
 		return false;
+	}
+
+	private void hideVisibleMenues() {
+		if (ObjectSelectionMenu.isVisible(activity)) {
+			ObjectSelectionMenu.hide(activity);
+		}
 	}
 
 	private void showContextMenuForSelectedObjects(final LatLon latLon, final Map<Object, IContextMenuProvider> selectedObjects) {

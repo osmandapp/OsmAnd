@@ -107,8 +107,6 @@ public class ObjectSelectionMenuFragment extends Fragment implements AdapterView
 	private void buildHeader(View view, MenuObject item, MapActivity mapActivity) {
 
 		IconsCache iconsCache = mapActivity.getMyApplication().getIconsCache();
-		boolean light = mapActivity.getMyApplication().getSettings().isLightContent();
-
 		final View iconLayout = view.findViewById(R.id.context_menu_icon_layout);
 		final ImageView iconView = (ImageView) view.findViewById(R.id.context_menu_icon_view);
 		Drawable icon = item.getLeftIcon();
@@ -118,7 +116,7 @@ public class ObjectSelectionMenuFragment extends Fragment implements AdapterView
 			iconLayout.setVisibility(View.VISIBLE);
 		} else if (iconId != 0) {
 			iconView.setImageDrawable(iconsCache.getIcon(iconId,
-					light ? R.color.osmand_orange : R.color.osmand_orange_dark, 0.75f));
+					menu.isLight() ? R.color.osmand_orange : R.color.osmand_orange_dark, 0.75f));
 			iconLayout.setVisibility(View.VISIBLE);
 		} else {
 			iconLayout.setVisibility(View.GONE);
