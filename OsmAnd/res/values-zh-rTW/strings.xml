@@ -2149,7 +2149,7 @@
     <string name="activate_seamarks_plugin">請啟動航線標識外掛元件</string>
     <string name="activate_srtm_plugin">請啟動 SRTM 外掛元件</string>
 <string name="later">接著</string>
-    <string name="get_full_version">獲取完整版</string>
+    <string name="get_full_version">完整版</string>
 <string name="regions">地區</string>
     <string name="additional_maps">另外的地圖</string>
     <string name="region_maps">地區地圖</string>
