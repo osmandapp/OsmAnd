@@ -98,7 +98,6 @@ public class OsmandApplication extends Application {
 	AvoidSpecificRoads avoidSpecificRoads;
 	BRouterServiceConnection bRouterServiceConnection;
 	OsmandRegions regions;
-	WorldRegion worldRegion;
 
 
 	RoutingConfiguration.Builder defaultRoutingConfig;
@@ -658,9 +657,6 @@ public class OsmandApplication extends Application {
 	
 	public OsmandRegions getRegions() {
 		return regions;
-	}
-	public WorldRegion getWorldRegion() {
-		return worldRegion;
 	}
 
 	public boolean accessibilityExtensions() {

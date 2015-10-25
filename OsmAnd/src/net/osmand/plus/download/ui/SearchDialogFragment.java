@@ -1,5 +1,26 @@
 package net.osmand.plus.download.ui;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.List;
+
+import net.osmand.Collator;
+import net.osmand.OsmAndCollator;
+import net.osmand.map.OsmandRegions;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.download.DownloadActivity.BannerAndDownloadFreeVersion;
+import net.osmand.plus.download.DownloadActivityType;
+import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
+import net.osmand.plus.download.DownloadResourceGroup;
+import net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType;
+import net.osmand.plus.download.DownloadResources;
+import net.osmand.plus.download.IndexItem;
+import net.osmand.util.Algorithms;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -18,28 +39,6 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.SearchView;
-
-import net.osmand.Collator;
-import net.osmand.OsmAndCollator;
-import net.osmand.map.OsmandRegions;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.download.DownloadActivity.BannerAndDownloadFreeVersion;
-import net.osmand.plus.download.DownloadActivityType;
-import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
-import net.osmand.plus.download.DownloadResourceGroup;
-import net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType;
-import net.osmand.plus.download.DownloadResources;
-import net.osmand.plus.download.IndexItem;
-import net.osmand.util.Algorithms;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.List;
 
 public class SearchDialogFragment extends DialogFragment implements DownloadEvents, OnItemClickListener {
 
@@ -330,8 +329,8 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 
 			private void processGroup(DownloadResourceGroup group, List<Object> filter, List<List<String>> conds) {
 				String name = null;
-				if (group.getRegion() != null && group.getRegion().getSearchText() != null) {
-					name = group.getRegion().getSearchText().toLowerCase();
+				if (group.getRegion() != null && group.getRegion().getRegionSearchText() != null) {
+					name = group.getRegion().getRegionSearchText().toLowerCase();
 				}
 				if (name == null) {
 					name = group.getName(ctx).toLowerCase();

@@ -14,6 +14,8 @@ import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.map.OsmandRegions;
+import net.osmand.map.OsmandRegions.RegionTranslation;
+import net.osmand.map.WorldRegion;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.plus.activities.DayNightHelper;
@@ -254,7 +256,7 @@ public class AppInitializer implements IProgress {
 							new FileOutputStream(file));
 				}
 				app.regions.prepareFile(file.getAbsolutePath());
-				loadWorldRegions();
+				
 			}
 		} catch (Exception e) {
 			warnings.add(e.getMessage());
@@ -262,9 +264,6 @@ public class AppInitializer implements IProgress {
 		}
 	}
 
-	private void loadWorldRegions() {
-		app.worldRegion.loadWorldRegions(app);
-	}
 	
 	private void initPoiTypes() {
 		if(app.getAppPath("poi_types.xml").exists()) {
@@ -317,13 +316,40 @@ public class AppInitializer implements IProgress {
 		app.selectedGpxHelper = startupInit(new GpxSelectionHelper(app, app.savingTrackHelper), GpxSelectionHelper.class);
 		app.favorites = startupInit(new FavouritesDbHelper(app), FavouritesDbHelper.class);
 		app.waypointHelper = startupInit(new WaypointHelper(app), WaypointHelper.class);
-		app.worldRegion = startupInit(new WorldRegion(), WorldRegion.class);
-		app.worldRegion.initWorld();
 		app.regions = startupInit(new OsmandRegions(), OsmandRegions.class);
-		app.regions.setLocale(app.getLanguage());
+		updateRegionVars();
 		app.poiFilters = startupInit(new PoiFiltersHelper(app), PoiFiltersHelper.class);
 		app.rendererRegistry = startupInit(new RendererRegistry(app), RendererRegistry.class);
 		app.targetPointsHelper = startupInit(new TargetPointsHelper(app), TargetPointsHelper.class);
+	}
+
+
+	private void updateRegionVars() {
+		app.regions.setTranslator(new RegionTranslation() {
+			
+			@Override
+			public String getTranslation(String id) {
+				if(WorldRegion.AFRICA_REGION_ID.equals(id)){
+					return app.getString(R.string.index_name_africa);
+				} else if(WorldRegion.AUSTRALIA_AND_OCEANIA_REGION_ID.equals(id)){
+					return app.getString(R.string.index_name_oceania);
+				} else if(WorldRegion.ASIA_REGION_ID.equals(id)){
+					return app.getString(R.string.index_name_asia);
+				} else if(WorldRegion.CENTRAL_AMERICA_REGION_ID.equals(id)){
+					return app.getString(R.string.index_name_central_america);
+				} else if(WorldRegion.EUROPE_REGION_ID.equals(id)){
+					return app.getString(R.string.index_name_europe);
+				} else if(WorldRegion.RUSSIA_REGION_ID.equals(id)){
+					return app.getString(R.string.index_name_russia);
+				} else if(WorldRegion.NORTH_AMERICA_REGION_ID.equals(id)){
+					return app.getString(R.string.index_name_north_america);
+				} else if(WorldRegion.SOUTH_AMERICA_REGION_ID.equals(id)){
+					return app.getString(R.string.index_name_south_america);
+				}
+				return null;
+			}
+		});
+		app.regions.setLocale(app.getLanguage());
 	}
 
 
