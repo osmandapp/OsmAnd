@@ -1409,4 +1409,22 @@
 	<string name="poi_tomb_rock_cut">Tipus: excavació a la roca</string>
 	<string name="poi_tomb_hypogeum">Tipus: subterrani</string>
 	<string name="poi_tomb_vault">Tipus: volta</string>
+	<string name="poi_trees_nectorine">Nectariner</string>
+	<string name="poi_trees_mango">Mango</string>
+	<string name="poi_trees_date">Data</string>
+	<string name="poi_trees_coffea">Café</string>
+	<string name="poi_animal_shelter">Refugi d\'animals</string>
+	<string name="poi_covered_yes">Cobert</string>
+	<string name="poi_covered_no">Descobert</string>
+
+	<string name="poi_smoking_no">Prohibit fumar</string>
+	<string name="poi_smoking_outside">Només es permet fumar a l\'exterior</string>
+	<string name="poi_smoking_yes">Es permet fumar</string>
+	<string name="poi_smoking_separated">Es permet fumar a una sala separada</string>
+	<string name="poi_smoking_isolated">Es permet fumar a una sala aïllada</string>
+	<string name="poi_smoking_dedicated">Exclusiu per fumadors</string>
+
+	<string name="poi_toll_yes">Peatge</string>
+	<string name="poi_toll_no">Sense peatge</string>
+	<string name="poi_toll_hgv_yes">Peatge de vehicles pesants</string>
 	</resources>
