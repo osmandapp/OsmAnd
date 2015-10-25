@@ -2307,4 +2307,58 @@
 	<string name="poi_historic_period_classical">Período histórico: Clásica (época IV, 374 dC – 900 dC)</string>
 	<string name="poi_historic_period_imperial">Período histórico: Imperial (época V, 900 dC – 1200 dC)</string>
 
+<string name="poi_tourism_yes">Objeto turístico</string>
+	<string name="poi_historic_era_paleolithic">Era histórica: Paleolítico (2.6 millones de años – 10000 AP)</string>
+	<string name="poi_historic_era_mesolithic">Era histórica: Mesolítica</string>
+	<string name="poi_historic_era_neolithic">Era histórica: Neolítico</string>
+	<string name="poi_historic_era_chalcolithic">Era histórica: Calcolítico (IV-III milenios aC)</string>
+
+	<string name="poi_historic_stone">Piedra histórica</string>
+	<string name="poi_stone_type_conciliation_cross">Tipo: Cruz de conciliación</string>
+	<string name="poi_stone_type_coat_of_arms">Tipo: Escudo de armas</string>
+
+	<string name="poi_material_wood">Material: Madera</string>
+	<string name="poi_material_metal">Material: Metal</string>
+	<string name="poi_material_reinforced_concrete">Material: Hormigón reforzado</string>
+	<string name="poi_material_concrete">Material: Hormigón</string>
+	<string name="poi_material_steel">Material: Acero</string>
+	<string name="poi_material_stone">Material: Piedra</string>
+	<string name="poi_material_masonry">Material: Mampostería</string>
+	<string name="poi_material_brick">Material: Ladrillos</string>
+	<string name="poi_material_plastic">Material: Plástico</string>
+	<string name="poi_material_sandstone">Material: Arenisca</string>
+	<string name="poi_material_granite_stone">Material: Piedra de granito</string>
+	<string name="poi_material_metal_wood">Material: Metal y madera</string>
+	<string name="poi_material_glass">Material: Vidrio</string>
+	<string name="poi_material_bronze">Material: Bronce</string>
+	<string name="poi_material_earth">Material: Tierra</string>
+	<string name="poi_material_composite">Material: Compuesto</string>
+	<string name="poi_material_limestone">Material: Piedra caliza</string>
+	<string name="poi_material_marble">Material: Mármol</string>
+	<string name="poi_material_aluminium">Material: Aluminio</string>
+
+	<string name="poi_site_type_megalith">Tipo: Megalito</string>
+	<string name="poi_site_type_tumulus">Tipo: Túmulo</string>
+	<string name="poi_site_type_fortification">Tipo: Fortificación</string>
+	<string name="poi_site_type_settlement">Tipo: Asentamiento</string>
+	<string name="poi_site_type_city">Tipo: Ciudad</string>
+	<string name="poi_site_type_hut_circle">Tipo: Círculo de choza</string>
+	<string name="poi_site_type_necropolis">Tipo: Necrópolis</string>
+	<string name="poi_site_type_petroglyph">Tipo: Petroglifo</string>
+	<string name="poi_site_type_earthwork">Tipo: Obras de tierra</string>
+	<string name="poi_megalith_type_menhir">Tipo de megalito: Menhir</string>
+	<string name="poi_megalith_type_dolmen">Tipo de megalito: Dolmen</string>
+	<string name="poi_megalith_type_nuraghe">Tipo de megalito: Nuraga</string>
+	<string name="poi_megalith_type_stone_circle">Tipo de megalito: Piedra circular</string>
+	<string name="poi_megalith_type_passage_grave">Tipo de megalito: Tumba de corredor</string>
+	<string name="poi_fortification_type_hill_fort">Tipo de fortificación: Castro</string>
+	<string name="poi_fortification_type_limes">Tipo de fortificación: Limes</string>
+	<string name="poi_fortification_type_sconce">Tipo de fortificación: Fortín</string>
+	<string name="poi_fortification_type_ring_ditch">Tipo de fortificación: Recinto circular</string>
+
+	<string name="poi_pa">Pā (asentamiento fortificado maorí)</string>
+
+	<string name="poi_historic_farm">Granja histórica</string>
+	<string name="poi_historic_railway_station">Estación ferroviaria histórica</string>
+
 </resources>
