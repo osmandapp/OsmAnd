@@ -23,7 +23,7 @@ import java.util.LinkedList;
 
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 
-public abstract class MenuBuilder {
+public class MenuBuilder {
 
 	public static final float SHADOW_HEIGHT_TOP_DP = 16f;
 	public static final float SHADOW_HEIGHT_BOTTOM_DP = 6f;
@@ -59,6 +59,19 @@ public abstract class MenuBuilder {
 
 	public void build(View view) {
 		firstRow = true;
+		if (needBuildPlainMenuItems()) {
+			buildPlainMenuItems(view);
+		}
+	}
+
+	protected void buildPlainMenuItems(View view) {
+		for (PlainMenuItem item : plainMenuItems) {
+			buildRow(view, item.getIconId(), item.getText(), 0);
+		}
+	}
+
+	protected boolean needBuildPlainMenuItems() {
+		return true;
 	}
 
 	protected boolean isFirstRow() {
@@ -67,6 +80,10 @@ public abstract class MenuBuilder {
 
 	protected void rowBuilt() {
 		firstRow = false;
+	}
+
+	private void buildRow(View view, int iconId, String text, int textColor) {
+		buildRow(view, getRowIcon(iconId), text, textColor);
 	}
 
 	protected void buildRow(final View view, Drawable icon, String text, int textColor) {

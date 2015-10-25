@@ -47,7 +47,7 @@ public class ObjectSelectionMenu extends BaseMenuController {
 		}
 
 		protected void init() {
-			controller = MenuController.getMenuController(mapActivity, latLon, pointDescription, object);
+			controller = MenuController.getMenuController(mapActivity, pointDescription, object);
 			initTitle();
 		}
 

@@ -8,7 +8,6 @@ import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -41,7 +40,7 @@ public abstract class MenuController extends BaseMenuController {
 	}
 
 	public static MenuController getMenuController(MapActivity mapActivity,
-												   LatLon latLon, PointDescription pointDescription, Object object) {
+												   PointDescription pointDescription, Object object) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		MenuController menuController = null;
 		if (object != null) {
@@ -57,7 +56,7 @@ public abstract class MenuController extends BaseMenuController {
 				}
 			}
 		} else {
-			menuController = new PointDescriptionMenuController(app, mapActivity, pointDescription, latLon);
+			menuController = new PointDescriptionMenuController(app, mapActivity, pointDescription);
 		}
 		return menuController;
 	}
@@ -66,7 +65,15 @@ public abstract class MenuController extends BaseMenuController {
 		builder.addPlainMenuItem(iconId, text);
 	}
 
-	public void addPlainMenuItems(String typeStr, PointDescription pointDescription) {
+	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, LatLon latLon) {
+		addMyLocationToPlainItems(pointDescription, latLon);
+	}
+
+	protected void addMyLocationToPlainItems(PointDescription pointDescription, LatLon latLon) {
+		if (pointDescription != null) {
+			addPlainMenuItem(R.drawable.map_my_location, PointDescription.getLocationName(getMapActivity(),
+					latLon.getLatitude(), latLon.getLongitude(), true).replaceAll("\n", ""));
+		}
 	}
 
 	public int getInitialMenuState() {

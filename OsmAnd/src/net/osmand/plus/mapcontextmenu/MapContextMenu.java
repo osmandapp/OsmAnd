@@ -125,7 +125,7 @@ public class MapContextMenu extends MenuTitleController {
 		initTitle();
 
 		if (menuController != null) {
-			menuController.addPlainMenuItems(typeStr, this.pointDescription);
+			menuController.addPlainMenuItems(typeStr, this.pointDescription, this.latLon);
 		}
 
 		if (mapPosition != 0) {
@@ -190,7 +190,7 @@ public class MapContextMenu extends MenuTitleController {
 	}
 
 	private void acquireMenuController() {
-		menuController = MenuController.getMenuController(mapActivity, latLon, pointDescription, object);
+		menuController = MenuController.getMenuController(mapActivity, pointDescription, object);
 	}
 
 	public void onSingleTapOnMap() {
@@ -313,7 +313,7 @@ public class MapContextMenu extends MenuTitleController {
 		acquireIcons();
 
 		if (menuController != null) {
-			menuController.addPlainMenuItems(typeStr, this.pointDescription);
+			menuController.addPlainMenuItems(typeStr, pointDescription, latLon);
 		}
 	}
 

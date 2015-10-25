@@ -3,23 +3,21 @@ package net.osmand.plus.mapcontextmenu.details;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
-import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.search.SearchHistoryFragment;
+import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 
 public class PointDescriptionMenuController extends MenuController {
 
 	private PointDescription pointDescription;
-	private LatLon latLon;
 
-	public PointDescriptionMenuController(OsmandApplication app, MapActivity mapActivity, final PointDescription pointDescription, LatLon latLon) {
-		super(new PointDescriptionMenuBuilder(app, pointDescription), mapActivity);
+	public PointDescriptionMenuController(OsmandApplication app, MapActivity mapActivity, final PointDescription pointDescription) {
+		super(new MenuBuilder(app), mapActivity);
 		this.pointDescription = pointDescription;
-		this.latLon = latLon;
 	}
 
 	@Override
@@ -69,14 +67,6 @@ public class PointDescriptionMenuController extends MenuController {
 	@Override
 	public boolean needStreetName() {
 		return !pointDescription.isAddress();
-	}
-
-	@Override
-	public void addPlainMenuItems(String typeStr, PointDescription pointDescription) {
-		if (pointDescription != null) {
-			addPlainMenuItem(R.drawable.map_my_location, PointDescription.getLocationName(getMapActivity(),
-					latLon.getLatitude(), latLon.getLongitude(), true).replaceAll("\n", ""));
-		}
 	}
 
 	@Override
