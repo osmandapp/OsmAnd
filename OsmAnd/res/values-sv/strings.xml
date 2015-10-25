@@ -98,7 +98,7 @@
 <string name="route_updated_loc_found">Resvägen kommer att beräknas så snart positionen hittas</string>
 <string name="osmand_parking_hours">timmar</string>
 <string name="osmand_parking_minutes">minuter</string>
-<string name="osmand_parking_position_description_add_time">Bilen parkerades:</string>
+<string name="osmand_parking_position_description_add_time">Bilen parkerades kl</string>
 <string name="tip_recent_changes_0_8_1_t">"Ändringar i 0.8.1 :\n\t* Mer exakt ruttkalkylering (lite långsammare)\n\t* Smart och snabb omkalkylering av rutt\n\t* Navigera med körfält\n\t* Information om hastighetsgränser, fartkameror och vägbulor\n\t* Förbättrat röstnavigering på motorvägar\n\t* Parkeringsplugin (\'Var parkerade jag min bil?\')\n\t* Aktivera/inaktivera logg-widget "</string>
 <string name="select_animate_speedup">Välj animerad ruttacceleration</string>
 <string name="global_app_allocated_memory_descr">Allokerat minne %1$s MB (Android-gräns %2$s MB, Dalvik %3$s MB).</string>
@@ -2038,7 +2038,7 @@
     <string name="activate_seamarks_plugin">Aktivera modulen Sjömärken</string>
     <string name="activate_srtm_plugin">Aktivera modulen SRTM</string>
     <string name="later">Senare</string>
-    <string name="get_full_version">Köp fullversionen</string>
+    <string name="get_full_version">Fullversionen</string>
     <string name="favorite_category_dublicate_message">Det angivna kategorinamnet finns redan. Ange ett annat namn.</string>
     <string name="favorite_category_name">Kategorinamn</string>
     <string name="favorite_category_add_new_title">Lägg till en ny kategori</string>
@@ -2053,4 +2053,6 @@
     <string name="share_geo">geo:</string>
     <string name="share_qr_code">QR-kod</string>
     <string name="application_dir_description">Välj var du vill spara kartfilerna.</string>
-</resources>
+<string name="share_menu_location">Dela plats</string>
+    <string name="shared_string_send">Sänd</string>
+    </resources>
