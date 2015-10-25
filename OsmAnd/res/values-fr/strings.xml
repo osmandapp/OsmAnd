@@ -929,7 +929,7 @@
   
   <string name="osmand_parking_hours">Heures</string>
   <string name="osmand_parking_minutes">Minutes</string>
-  <string name="osmand_parking_position_description_add_time">Le véhicule a été garé à :</string>
+  <string name="osmand_parking_position_description_add_time">Le véhicule a été garé à</string>
   <string name="use_compass_navigation_descr">Utiliser la boussole quand l\'orientation n\'est pas détectée</string>
   <string name="use_compass_navigation">Utiliser la boussole</string>
   <string name="route_updated_loc_found">L\'itinéraire sera calculé dès votre position connue</string>
@@ -2193,7 +2193,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="activate_seamarks_plugin">Merci d\'activer le greffon balisage</string>
     <string name="activate_srtm_plugin">Merci d\'activer le greffon SRTM</string>
 <string name="later">Plus tard</string>
-    <string name="get_full_version">Obtenir la version complète</string>
+    <string name="get_full_version">Version complète</string>
 <string name="regions">Régions</string>
     <string name="additional_maps">Cartes supplémentaires</string>
     <string name="region_maps">Cartes régionales</string>
@@ -2216,4 +2216,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="share_menu_title">Partager ce lieu</string>
     <string name="share_menu_location">Partager ce lieu</string>
     <string name="shared_string_send">Envoyer</string>
+    <string name="application_dir_description">Sélectionnez l\'emplacement pour enregistrer les cartes.</string>
+<string name="simulate_initial_startup">Simuler un premier démarrage</string>
+    <string name="simulate_initial_startup_descr">Efface le compteur de démarrages afin de simuler un premier démarrage (ne modifie aucun autre paramètre)</string>
+    <string name="hello_blank_fragment">Hello fragment vide</string>
     </resources>

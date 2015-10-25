@@ -261,7 +261,7 @@
     <string name="route_updated_loc_found">Ruten beregnes, når position er fundet</string>
     <string name="osmand_parking_hours">Timer</string>
     <string name="osmand_parking_minutes">Minutter</string>
-    <string name="osmand_parking_position_description_add_time">Bilen blev parkeret kl.:</string>
+    <string name="osmand_parking_position_description_add_time">Bilen blev parkeret kl.</string>
 	<string name="tip_recent_changes_0_8_1_t">"Ændringer i 0.8.1:
 \n * Mere præcise ruter (en smule langsommere)
 \n * Smart og hurtig rutegenberegning
@@ -2170,7 +2170,7 @@
     <string name="activate_seamarks_plugin">Aktiver sømærkeudvidelsen</string>
     <string name="activate_srtm_plugin">Aktiver SRTM udvidelsen</string>
 <string name="later">Senere</string>
-    <string name="get_full_version">Hent den fulde version</string>
+    <string name="get_full_version">Fuldversion</string>
 <string name="regions">Regioner</string>
     <string name="additional_maps">Yderligere kort</string>
     <string name="region_maps">Regionskort</string>

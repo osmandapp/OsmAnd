@@ -124,7 +124,7 @@
 	<string name="route_updated_loc_found">一旦找到定位時，導航路線將重新規劃</string>
 	<string name="osmand_parking_hours">小時</string>
 	<string name="osmand_parking_minutes">分鐘</string>
-	<string name="osmand_parking_position_description_add_time">您的愛車停在：</string>
+	<string name="osmand_parking_position_description_add_time">把愛車停在</string>
 	<string name="select_animate_speedup">選擇模擬路線速度</string>
     	<string name="global_app_allocated_memory_descr">已配置記憶體 %1$s MB (Android 限制%2$s MB, Dalvik %3$s MB)。</string>
 	<string name="global_app_allocated_memory">已配置記憶體</string>
@@ -2149,7 +2149,7 @@
     <string name="activate_seamarks_plugin">請啟動航線標識外掛元件</string>
     <string name="activate_srtm_plugin">請啟動 SRTM 外掛元件</string>
 <string name="later">接著</string>
-    <string name="get_full_version">獲取完整版</string>
+    <string name="get_full_version">完整版</string>
 <string name="regions">地區</string>
     <string name="additional_maps">另外的地圖</string>
     <string name="region_maps">地區地圖</string>
@@ -2171,4 +2171,5 @@
     <string name="share_menu_location">分享位置</string>
     <string name="shared_string_send">發送</string>
     <string name="hello_blank_fragment">哈囉，成空的片段</string>
+<string name="application_dir_description">選擇您想要在何處儲存地圖檔案。</string>
 </resources>

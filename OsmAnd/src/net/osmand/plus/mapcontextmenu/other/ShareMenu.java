@@ -8,21 +8,17 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.actions.ShareDialog;
-import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.mapcontextmenu.BaseMenuController;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.LinkedList;
 import java.util.List;
 
-public class ShareMenu {
-
-	private final MapActivity mapActivity;
+public class ShareMenu extends BaseMenuController {
 
 	private LatLon latLon;
 	private String title;
-	private boolean portraitMode;
-	private boolean largeDevice;
 
 	private static final String KEY_SHARE_MENU_LATLON = "key_share_menu_latlon";
 	private static final String KEY_SHARE_MENU_POINT_TITLE = "key_share_menu_point_title";
@@ -51,9 +47,7 @@ public class ShareMenu {
 	}
 
 	private ShareMenu(MapActivity mapActivity) {
-		this.mapActivity = mapActivity;
-		portraitMode = AndroidUiHelper.isOrientationPortrait(mapActivity);
-		largeDevice = AndroidUiHelper.isXLargeDevice(mapActivity);
+		super(mapActivity);
 	}
 
 	public List<ShareItem> getItems() {
@@ -63,30 +57,6 @@ public class ShareMenu {
 		list.add(ShareItem.GEO);
 		list.add(ShareItem.QR_CODE);
 		return list;
-	}
-
-	public boolean isLandscapeLayout() {
-		return !portraitMode && !largeDevice;
-	}
-
-	public int getSlideInAnimation() {
-		if (isLandscapeLayout()) {
-			return R.anim.slide_in_left;
-		} else {
-			return R.anim.slide_in_bottom;
-		}
-	}
-
-	public int getSlideOutAnimation() {
-		if (isLandscapeLayout()) {
-			return R.anim.slide_out_left;
-		} else {
-			return R.anim.slide_out_bottom;
-		}
-	}
-
-	public MapActivity getMapActivity() {
-		return mapActivity;
 	}
 
 	public LatLon getLatLon() {
@@ -108,7 +78,7 @@ public class ShareMenu {
 	}
 
 	public void share(ShareItem item) {
-		final int zoom = mapActivity.getMapView().getZoom();
+		final int zoom = getMapActivity().getMapView().getZoom();
 		final String geoUrl = MapUtils.buildGeoUrl(latLon.getLatitude(), latLon.getLongitude(), zoom);
 		final String httpUrl = "http://osmand.net/go?lat=" + ((float) latLon.getLatitude())
 				+ "&lon=" + ((float) latLon.getLongitude()) + "&z=" + zoom;
@@ -116,25 +86,25 @@ public class ShareMenu {
 		if (!Algorithms.isEmpty(title)) {
 			sb.append(title).append("\n");
 		}
-		sb.append(mapActivity.getString(R.string.search_tabs_location)).append(": ");
+		sb.append(getMapActivity().getString(R.string.search_tabs_location)).append(": ");
 		sb.append(geoUrl).append("\n").append(httpUrl);
 		String sms = sb.toString();
 		switch (item) {
 			case MESSAGE:
-				ShareDialog.sendMessage(mapActivity, sms);
+				ShareDialog.sendMessage(getMapActivity(), sms);
 				break;
 			case CLIPBOARD:
-				ShareDialog.sendToClipboard(mapActivity, sms);
+				ShareDialog.sendToClipboard(getMapActivity(), sms);
 				break;
 			case GEO:
 				Intent mapIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(geoUrl));
-				mapActivity.startActivity(mapIntent);
+				getMapActivity().startActivity(mapIntent);
 				break;
 			case QR_CODE:
 				Bundle bundle = new Bundle();
 				bundle.putFloat("LAT", (float) latLon.getLatitude());
 				bundle.putFloat("LONG", (float) latLon.getLongitude());
-				ShareDialog.sendQRCode(mapActivity, "LOCATION_TYPE", bundle, null);
+				ShareDialog.sendQRCode(getMapActivity(), "LOCATION_TYPE", bundle, null);
 				break;
 		}
 	}

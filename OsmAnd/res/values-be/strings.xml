@@ -380,7 +380,7 @@
 	<string name="route_updated_loc_found">Маршрут будзе разлічвацца як толькі вызначыцца становішча</string>
 	<string name="osmand_parking_hours">Гадзін</string>
 	<string name="osmand_parking_minutes">Хвiлiн</string>
-	<string name="osmand_parking_position_description_add_time">Аўтамабіль быў прыпаркаваны ў:</string>
+	<string name="osmand_parking_position_description_add_time">Аўтамабіль быў прыпаркаваны ў</string>
 	<string name="tip_recent_changes_0_8_1_t">"Зьмены ў 0.8.1: ↵
 \n\t* Больш дакладныя маршруты (крыху больш павольна) ↵
 \n\t* Разумны і хуткі пераразлік маршруту ↵
@@ -2148,4 +2148,8 @@
     <string name="update_all">Абнавіць усе (%1$s МБ)</string>
     <string name="free_downloads_used">Выкарыстана бясплатных загрузак</string>
     <string name="free_downloads_used_description">Вы можаце паглядзець колькі бясплатных загрузак вы выкарысталі</string>
-</resources>
+<string name="shared_string_send">Адаслаць</string>
+    <string name="application_dir_description">Выберыце, дзе вы хочаце захоўваць файлы мапаў.</string>
+<string name="share_menu_location">Падзяліцца месцазнаходжаньнем</string>
+    <string name="share_geo">geo:</string>
+    </resources>

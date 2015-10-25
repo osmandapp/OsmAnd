@@ -2138,7 +2138,7 @@
     <string name="activate_seamarks_plugin">Пожалуйста, активируйте плагин морские карты</string>
     <string name="activate_srtm_plugin">Пожалуйста, активируйте плагин SRTM</string>
     <string name="later">Позже</string>
-    <string name="get_full_version">Получить полную версию</string>
+    <string name="get_full_version">Полная версия</string>
     <string name="downloads">Загрузки</string>
 <string name="show_free_version_banner">Показать баннер бесплатная версия</string>
     <string name="show_free_version_banner_description">Даже если у вас купленная версия вы еще можете увидеть баннер для бесплатной версии</string>

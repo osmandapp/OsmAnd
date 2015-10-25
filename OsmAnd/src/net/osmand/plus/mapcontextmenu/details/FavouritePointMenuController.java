@@ -55,8 +55,7 @@ public class FavouritePointMenuController extends MenuController {
 
 	@Override
 	public Drawable getLeftIcon() {
-		return FavoriteImageDrawable.getOrCreate(getMapActivity().getMyApplication(),
-				fav.getColor(), getMapActivity().getMapView().getCurrentRotatedTileBox().getDensity());
+		return FavoriteImageDrawable.getOrCreate(getMapActivity().getMyApplication(), fav.getColor(), 0);
 	}
 
 	@Override

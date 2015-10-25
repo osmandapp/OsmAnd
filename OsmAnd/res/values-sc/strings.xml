@@ -758,7 +758,7 @@
 	<string name="route_updated_loc_found">S’àndala at a èssere calculada a positzione achirida</string>
 	<string name="osmand_parking_hours">Oras</string>
 	<string name="osmand_parking_minutes">Minutos</string>
-	<string name="osmand_parking_position_description_add_time">Sa màchina est istada parchegiada a sas:</string>
+	<string name="osmand_parking_position_description_add_time">Sa màchina est istada parchegiada a sas</string>
 	<string name="tip_recent_changes_0_8_1_t">"Mudas in sa 0.8.1:
 \n\t* Àndalas prus pretzisas (unu pagu prus lentas)
 \n\t* Ricalculu de s’àndala intelligente e lestru
@@ -2125,7 +2125,7 @@
     <string name="activate_seamarks_plugin">Pro piaghere allue su plugin nàuticu</string>
     <string name="activate_srtm_plugin">Pro piaghere allue su plugin SRTM</string>
     <string name="later">Prus a tardu</string>
-    <string name="get_full_version">Còmpora sa versione cumpleta</string>
+    <string name="get_full_version">Versione cumprida</string>
 <string name="regions">Regiones</string>
     <string name="additional_maps">Mapas agiuntivas</string>
     <string name="region_maps">Mapas regionales</string>
@@ -2141,4 +2141,11 @@
 <string name="update_all">Agiorna totu (%1$s MB)</string>
 <string name="free_downloads_used">Iscarrigamentos gratùitos impreados</string>
     <string name="free_downloads_used_description">Podes impostare cantos iscarrigamentos gratùitos as impreadu</string>
+<string name="simulate_initial_startup_descr">Reimposta sa bandera chi indicat sa prima allumingiadura, mantène sas àteras impostaziones in s’istadu originale</string>
+    <string name="simulate_initial_startup">Sìmula sa prima allumingiadura</string>
+    <string name="share_geo">geo:</string>
+    <string name="share_menu_location">Cumpartzi sa positzione</string>
+    <string name="shared_string_send">Imbia</string>
+    <string name="hello_blank_fragment">Sabuna/Inneta su segmentu</string>
+    <string name="application_dir_description">Issèbera in ue boles pònnere sos documentos de sas mapas.</string>
 </resources>

@@ -1998,4 +1998,30 @@
     <string name="parking_place_limited">Tempo de aparcamento limitado a</string>
 	<string name="plugin_nautical_name">Vista de mapa náutico</string>
 	<string name="save_track_to_gpx_globally_headline">Rexistro de pistas baixo petición</string>
-	</resources>
+	<string name="shared_string_send">Engadir</string>
+    <string name="favorite_category_dublicate_message">O nome de categoría indicado xa existe. Indique outro nome.</string>
+    <string name="favorite_category_name">Nome da categoría</string>
+    <string name="favorite_category_add_new_title">Engadir unha categoría nova</string>
+    <string name="regions">Rexións</string>
+    <string name="region_maps">Mapas rexionais</string>
+    <string name="world_maps">Mapas mundiais</string>
+    <string name="srtm_plugin_disabled">As curvas de nivel están desactivadas</string>
+    <string name="favorite_category_select">Seleccionar categoría</string>
+    <string name="default_speed_system_descr">Indicar o sistema de cálculo da velocidade</string>
+    <string name="default_speed_system">Cálculo da velocidade</string>
+    <string name="nm">mn</string>
+    <string name="si_nm">Millas náuticas</string>
+    <string name="si_kmh">Quilómetros por hora</string>
+    <string name="si_mph">Millas por hora</string>
+    <string name="si_m_s">Metros por segundo</string>
+    <string name="si_min_km">Minutos por quilómetro</string>
+    <string name="si_min_m">Minutos por milla</string>
+    <string name="si_nm_h">Millas náuticas por hora (nós)</string>
+    <string name="nm_h">mnh</string>
+    <string name="shared_string_navigation">Navegación</string>
+    <string name="osmand_running_in_background">En execución en segundo plano</string>
+    <string name="simulate_your_location_stop_descr">Parar a simulación da posición</string>
+    <string name="simulate_your_location_descr">Simular empregando GPX gravado ou rota calculada</string>
+    <string name="address_unknown">O enderezo é aínda descoñecido</string>
+    <string name="traffic_warning_hazard">Perigo</string>
+    </resources>
