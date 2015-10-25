@@ -821,10 +821,10 @@
   <string name="index_name_europe">Europa</string>
   <string name="index_name_france">Europa - Francja</string>
   <string name="index_name_germany">Europa - Niemcy</string>
-  <string name="index_name_russia">Europa/Azja - Rosja</string>
+  <string name="index_name_russia">Rosja</string>
   <string name="index_name_africa">Afryka</string>
   <string name="index_name_asia">Azja</string>
-  <string name="index_name_oceania">Oceania</string>
+  <string name="index_name_oceania">Australia i Oceania</string>
   <string name="index_name_other">Mapy świata i tematyczne</string>
   <string name="index_name_wiki">Wikipedia dla POI</string>
   <string name="index_name_voice">Komunikaty głosowe (nagrane, ograniczone możliwości)</string>
@@ -2282,9 +2282,16 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="activate_seamarks_plugin">Proszę aktywuj plugin latarni morskich</string>
     <string name="activate_srtm_plugin">Proszę aktywuj plugin SRTM</string>
     <string name="later">Później</string>
-    <string name="get_full_version">Pobierz pełną wersję</string>
+    <string name="get_full_version">Pełna wersja</string>
     <string name="downloads">Pobierz</string>
 <string name="favorite_category_add_new_title">Dodaj nową kategorię</string>
     <string name="favorite_category_name">Nazwa kategorii</string>
     <string name="favorite_category_dublicate_message">Taka nazwa kategorii już istnieje. Proszę wybrać inną.</string>
+    <string name="share_menu_location">Udostępnij położenie</string>
+    <string name="shared_string_send">Wyślij</string>
+    <string name="file_size_in_mb">%.1f MB</string>
+    <string name="update_all">Uaktualnij wszystko (%1$s MB)</string>
+    <string name="free_downloads_used">Wykorzystano darmowe pobrania</string>
+    <string name="application_dir_description">Proszę wybrać położenie zapisywania plików map.</string>
+<string name="value_downloaded_from_max">%1$.1f z %2$.1f MB</string>
     </resources>
