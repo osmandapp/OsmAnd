@@ -122,12 +122,12 @@ public class DataStoragePlaceDialogFragment extends DialogFragment {
 		if (dir.canRead()) {
 			StatFs fs = new StatFs(dir.getAbsolutePath());
 			@SuppressWarnings("deprecation")
-			int size = fs.getAvailableBlocks() * fs.getBlockSize();
+			float size = (float) fs.getAvailableBlocks() * fs.getBlockSize();
 			if (size > 0) {
 				if (size > 1 << 20) {
-					sz = DownloadActivity.formatGb.format(new Object[]{(float) size / (1 << 30)});
+					sz = DownloadActivity.formatGb.format(new Object[]{size / (1 << 30)});
 				} else {
-					sz = DownloadActivity.formatMb.format(new Object[]{(float) size / (1 << 20)});
+					sz = DownloadActivity.formatMb.format(new Object[]{size / (1 << 20)});
 				}
 			}
 		}

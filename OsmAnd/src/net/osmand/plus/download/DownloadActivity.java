@@ -609,8 +609,4 @@ public class DownloadActivity extends ActionBarProgressActivity implements Downl
 
 		messageTextView.setText(R.string.device_memory);
 	}
-
-	
-
-
 }

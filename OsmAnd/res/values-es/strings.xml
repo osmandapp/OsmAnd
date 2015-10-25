@@ -948,7 +948,7 @@
   <string name="select_animate_speedup">Seleccionar la velocidad del simulador de ruta</string>
   <string name="osmand_parking_hours">Horas</string>
   <string name="osmand_parking_minutes">Minutos</string>
-  <string name="osmand_parking_position_description_add_time">El automóvil fue aparcado a las:</string>
+  <string name="osmand_parking_position_description_add_time">El automóvil fue aparcado a las</string>
   <string name="use_compass_navigation_descr">Usa la brújula cuando no se detecta la dirección</string>
   <string name="use_compass_navigation">Utilizar brújula</string>
   <string name="route_updated_loc_found">La ruta será calculada una vez encontrada la posición</string>
@@ -2234,7 +2234,7 @@
     <string name="activate_seamarks_plugin">Active el complemento náutico</string>
     <string name="activate_srtm_plugin">Active el complemento SRTM</string>
     <string name="later">Luego</string>
-    <string name="get_full_version">Obtener versión completa</string>
+    <string name="get_full_version">Versión completa</string>
     <string name="downloads">Descargas</string>
 <string name="favorite_category_dublicate_message">El nombre de categoría, ya existe. Defina otro nombre.</string>
     <string name="favorite_category_name">Nombre de categoría</string>
@@ -2250,4 +2250,6 @@
     <string name="share_geo">geo:</string>
     <string name="share_menu_location">Compartir ubicación</string>
     <string name="shared_string_send">Enviar</string>
-    </resources>
+    <string name="hello_blank_fragment">Hola fragmento vacío</string>
+    <string name="application_dir_description">Elige donde guardar los archivos de los mapas.</string>
+</resources>
