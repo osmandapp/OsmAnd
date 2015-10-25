@@ -12,7 +12,7 @@ import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.OsmandRegions;
-import net.osmand.map.OsmandRegions.RegionData;
+import net.osmand.map.WorldRegion;
 import net.osmand.plus.R;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.util.Algorithms;
@@ -249,8 +249,8 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 							continue;
 						}
 						String fullName = osmandRegions.getFullName(o);
-						RegionData rd = osmandRegions.getRegionData(fullName);
-						if (rd != null && rd.isRegionMapDownload()) {
+						WorldRegion rd = osmandRegions.getRegionData(fullName);
+						if (rd != null && rd.isRegionMapDownload() && rd.getRegionDownloadName() != null) {
 							String name = rd.getLocaleName();
 							if (checkIfObjectDownloaded(rd.getRegionDownloadName())) {
 								return null;

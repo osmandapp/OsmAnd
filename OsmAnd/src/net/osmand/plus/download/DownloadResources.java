@@ -12,8 +12,9 @@ import java.util.List;
 import java.util.Map;
 
 import net.osmand.IndexConstants;
+import net.osmand.map.OsmandRegions;
+import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.WorldRegion;
 import net.osmand.plus.download.DownloadOsmandIndexesHelper.AssetIndexItem;
 
 public class DownloadResources extends DownloadResourceGroup {
@@ -30,7 +31,7 @@ public class DownloadResources extends DownloadResourceGroup {
 	
 	public DownloadResources(OsmandApplication app) {
 		super(null, DownloadResourceGroupType.WORLD, "");
-		this.region = app.getWorldRegion();
+		this.region = app.getRegions().getWorldRegion();
 		this.app = app;
 	}
 	
@@ -209,12 +210,7 @@ public class DownloadResources extends DownloadResourceGroup {
 
 		DownloadResourceGroup worldMaps = new DownloadResourceGroup(this, DownloadResourceGroupType.WORLD_MAPS);
 		Map<WorldRegion, List<IndexItem> > groupByRegion = new LinkedHashMap<WorldRegion, List<IndexItem>>();
-		
-		Map<String, WorldRegion> downloadIdForRegion = new LinkedHashMap<String, WorldRegion>();
-		for(WorldRegion wg : region.getFlattenedSubregions()) {
-			downloadIdForRegion.put(wg.getDownloadsId(), wg);
-		}
-		
+		OsmandRegions regs = app.getRegions();
 		for (IndexItem ii : resources) {
 			if (ii.getType() == DownloadActivityType.VOICE_FILE) {
 				if (ii.getFileName().endsWith(IndexConstants.TTSVOICE_INDEX_EXT_ZIP)) {
@@ -225,7 +221,7 @@ public class DownloadResources extends DownloadResourceGroup {
 				continue;
 			}
 			String basename = ii.getBasename().toLowerCase();
-			WorldRegion wg = downloadIdForRegion.get(basename);
+			WorldRegion wg = regs.getRegionDataByDownloadName(basename);
 			if (wg != null) {
 				if (!groupByRegion.containsKey(wg)) {
 					groupByRegion.put(wg, new ArrayList<IndexItem>());

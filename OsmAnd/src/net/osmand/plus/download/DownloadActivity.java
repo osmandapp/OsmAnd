@@ -1,5 +1,39 @@
 package net.osmand.plus.download;
 
+import java.io.File;
+import java.lang.ref.WeakReference;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.Set;
+
+import net.osmand.IProgress;
+import net.osmand.PlatformUtil;
+import net.osmand.access.AccessibleToast;
+import net.osmand.map.WorldRegion;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.DrivingRegion;
+import net.osmand.plus.OsmandSettings.MetricsConstants;
+import net.osmand.plus.R;
+import net.osmand.plus.Version;
+import net.osmand.plus.activities.ActionBarProgressActivity;
+import net.osmand.plus.activities.LocalIndexInfo;
+import net.osmand.plus.activities.TabActivity;
+import net.osmand.plus.base.BasicProgressAsyncTask;
+import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
+import net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType;
+import net.osmand.plus.download.ui.ActiveDownloadsDialogFragment;
+import net.osmand.plus.download.ui.DataStoragePlaceDialogFragment;
+import net.osmand.plus.download.ui.DownloadResourceGroupFragment;
+import net.osmand.plus.download.ui.LocalIndexesFragment;
+import net.osmand.plus.download.ui.UpdatesIndexFragment;
+import net.osmand.plus.views.controls.PagerSlidingTabStrip;
+
+import org.apache.commons.logging.Log;
+
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
@@ -17,40 +51,6 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import net.osmand.IProgress;
-import net.osmand.PlatformUtil;
-import net.osmand.access.AccessibleToast;
-import net.osmand.map.OsmandRegions.RegionData;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.OsmandSettings.DrivingRegion;
-import net.osmand.plus.OsmandSettings.MetricsConstants;
-import net.osmand.plus.R;
-import net.osmand.plus.Version;
-import net.osmand.plus.WorldRegion;
-import net.osmand.plus.activities.ActionBarProgressActivity;
-import net.osmand.plus.activities.LocalIndexInfo;
-import net.osmand.plus.activities.TabActivity;
-import net.osmand.plus.base.BasicProgressAsyncTask;
-import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
-import net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType;
-import net.osmand.plus.download.ui.ActiveDownloadsDialogFragment;
-import net.osmand.plus.download.ui.DataStoragePlaceDialogFragment;
-import net.osmand.plus.download.ui.DownloadResourceGroupFragment;
-import net.osmand.plus.download.ui.LocalIndexesFragment;
-import net.osmand.plus.download.ui.UpdatesIndexFragment;
-import net.osmand.plus.views.controls.PagerSlidingTabStrip;
-
-import org.apache.commons.logging.Log;
-
-import java.io.File;
-import java.lang.ref.WeakReference;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Set;
 
 public class DownloadActivity extends ActionBarProgressActivity implements DownloadEvents {
 	private static final Log LOG = PlatformUtil.getLog(DownloadActivity.class);
@@ -212,7 +212,7 @@ public class DownloadActivity extends ActionBarProgressActivity implements Downl
 	@UiThread
 	public void downloadHasFinished() {
 		visibleBanner.updateBannerInProgress();
-		if(downloadItem != null && !WorldRegion.WORLD.equals(downloadItem.getDownloadsId())) {
+		if(downloadItem != null && !WorldRegion.WORLD_BASEMAP.equals(downloadItem.getRegionDownloadNameLC())) {
 			boolean firstMap = getMyApplication().getSettings().FIRST_MAP_IS_DOWNLOADED.get();
 			if(firstMap) {
 				initSettingsFirstMap(downloadItem);
@@ -501,10 +501,9 @@ public class DownloadActivity extends ActionBarProgressActivity implements Downl
 		// TODO test set correctly (4 tests): when you download first Australia, Japan, Luxembourgh, US  
 		getMyApplication().getSettings().FIRST_MAP_IS_DOWNLOADED.set(false);
 		DrivingRegion drg = null;
-		RegionData rd = reg.getRegionData();
-		boolean americanSigns = "american".equals(rd.getRegionRoadSigns());
-		boolean leftHand = "yes".equals(rd.getRegionLeftHandDriving());
-		MetricsConstants mc  = "miles".equals(rd.getRegionMetric()) ?
+		boolean americanSigns = "american".equals(reg.getRegionRoadSigns());
+		boolean leftHand = "yes".equals(reg.getRegionLeftHandDriving());
+		MetricsConstants mc  = "miles".equals(reg.getRegionMetric()) ?
 				MetricsConstants.MILES_AND_FOOTS : MetricsConstants.KILOMETERS_AND_METERS;
 		for (DrivingRegion r : DrivingRegion.values()) {
 			if(r.americanSigns == americanSigns && r.leftHandDriving == leftHand && 
@@ -516,7 +515,7 @@ public class DownloadActivity extends ActionBarProgressActivity implements Downl
 		if (drg != null) {
 			getMyApplication().getSettings().DRIVING_REGION.set(drg);
 		}
-		String lng = rd.getRegionLang();
+		String lng = reg.getRegionLang();
 		if (lng != null) {
 			String setTts = null;
 			for (String s : OsmandSettings.TTS_AVAILABLE_VOICES) {
@@ -552,7 +551,7 @@ public class DownloadActivity extends ActionBarProgressActivity implements Downl
 		List<IndexItem> list = worldMaps.getIndividualResources();
 		if(list != null) {
 			for(IndexItem ii  : list) {
-				if(ii.getBasename().equalsIgnoreCase("world_basemap")) {
+				if(ii.getBasename().equalsIgnoreCase(WorldRegion.WORLD_BASEMAP)) {
 					worldMap = ii;
 					break;
 				}
