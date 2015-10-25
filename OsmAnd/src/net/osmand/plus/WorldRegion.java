@@ -253,6 +253,7 @@ public class WorldRegion {
 	}
 	
 	public LatLon getCenter() {
+		// TODO
 		return center;
 	}
 

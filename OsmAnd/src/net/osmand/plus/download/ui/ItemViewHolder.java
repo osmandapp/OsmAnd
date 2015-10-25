@@ -47,7 +47,6 @@ public class ItemViewHolder {
 	protected final ImageView rightImageButton;
 	protected final Button rightButton;
 	protected final ProgressBar progressBar;
-	private final OsmandSettings.CommonPreference<Boolean> isFirstMapDownloadedPreference;
 
 	private boolean srtmDisabled;
 	private boolean srtmNeedsInstallation;
@@ -94,9 +93,6 @@ public class ItemViewHolder {
 		textColorPrimary = typedValue.data;
 		theme.resolveAttribute(android.R.attr.textColorSecondary, typedValue, true);
 		textColorSecondary = typedValue.data;
-
-		isFirstMapDownloadedPreference = context.getMyApplication().getSettings()
-				.registerBooleanPreference(DownloadActivity.FIRST_MAP_DOWNLOADED, false).makeGlobal();
 	}
 	
 	public void setShowRemoteDate(boolean showRemoteDate) {
