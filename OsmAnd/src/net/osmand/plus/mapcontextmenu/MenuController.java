@@ -15,6 +15,7 @@ import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.mapcontextmenu.details.AmenityMenuController;
 import net.osmand.plus.mapcontextmenu.details.FavouritePointMenuController;
 import net.osmand.plus.mapcontextmenu.details.HistoryMenuController;
+import net.osmand.plus.mapcontextmenu.details.MyLocationMenuController;
 import net.osmand.plus.mapcontextmenu.details.ParkingPositionController;
 import net.osmand.plus.mapcontextmenu.details.PointDescriptionMenuController;
 
@@ -53,6 +54,8 @@ public abstract class MenuController extends BaseMenuController {
 			} else if (object instanceof LatLon) {
 				if (pointDescription.isParking()) {
 					menuController = new ParkingPositionController(app, mapActivity, pointDescription, (LatLon) object);
+				} else if (pointDescription.isMyLocation()) {
+					menuController = new MyLocationMenuController(app, mapActivity, pointDescription, (LatLon) object);
 				}
 			}
 		} else {

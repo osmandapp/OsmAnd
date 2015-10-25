@@ -7,17 +7,19 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.search.SearchHistoryFragment;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 
 public class MyLocationMenuController  extends MenuController {
 
-	public MyLocationMenuController(OsmandApplication app, MapActivity mapActivity) {
+	private LatLon latLon;
+	private PointDescription pointDescription;
+
+	public MyLocationMenuController(OsmandApplication app, MapActivity mapActivity, final PointDescription pointDescription, LatLon latLon) {
 		super(new MenuBuilder(app), mapActivity);
+		this.pointDescription = pointDescription;
+		this.latLon = latLon;
 	}
 
 	@Override
@@ -38,10 +40,11 @@ public class MyLocationMenuController  extends MenuController {
 
 	@Override
 	public String getNameStr() {
-		return getMapActivity().getString(R.string.shared_string_my_location);
+		return pointDescription.getTypeName();
 	}
 
 	@Override
 	public void saveEntityState(Bundle bundle, String key) {
+		bundle.putSerializable(key, latLon);
 	}
 }

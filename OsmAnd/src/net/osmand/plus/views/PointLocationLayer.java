@@ -2,6 +2,8 @@ package net.osmand.plus.views;
 
 
 import net.osmand.Location;
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmAndLocationProvider;
@@ -12,9 +14,12 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
+import android.graphics.PointF;
 import android.graphics.RectF;
 
-public class PointLocationLayer extends OsmandMapLayer {
+import java.util.List;
+
+public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {
 	protected final static int RADIUS = 7;
 	protected final static float HEADING_ANGLE = 60;
 	
@@ -124,11 +129,8 @@ public class PointLocationLayer extends OsmandMapLayer {
 		}
 	}
 
-	public boolean isLocationVisible(RotatedTileBox tb, Location l){
-		if(l == null ){
-			return false;
-		}
-		return tb.containsLatLon(l.getLatitude(), l.getLongitude());
+	public boolean isLocationVisible(RotatedTileBox tb, Location l) {
+		return l != null && tb.containsLatLon(l.getLatitude(), l.getLongitude());
 	}
 	
 
@@ -150,4 +152,57 @@ public class PointLocationLayer extends OsmandMapLayer {
 	}
 
 
+	@Override
+	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o) {
+		getMyLocationFromPoint(tileBox, point, o);
+	}
+
+	@Override
+	public LatLon getObjectLocation(Object o) {
+		return getMyLocation();
+	}
+
+	@Override
+	public String getObjectDescription(Object o) {
+		return view.getResources().getString(R.string.shared_string_my_location);
+	}
+
+	@Override
+	public PointDescription getObjectName(Object o) {
+		return new PointDescription(PointDescription.POINT_TYPE_MY_LOCATION,
+				view.getContext().getString(R.string.shared_string_my_location), "");
+	}
+
+	@Override
+	public boolean disableSingleTap() {
+		return false;
+	}
+
+	@Override
+	public boolean disableLongPressOnMap() {
+		return false;
+	}
+
+	private LatLon getMyLocation() {
+		Location location = locationProvider.getLastKnownLocation();
+		if (location != null) {
+			return new LatLon(location.getLatitude(), location.getLongitude());
+		} else {
+			return null;
+		}
+	}
+
+	private void getMyLocationFromPoint(RotatedTileBox tb, PointF point, List<? super LatLon> myLocation) {
+		LatLon location = getMyLocation();
+		if (location != null && view != null) {
+			int ex = (int) point.x;
+			int ey = (int) point.y;
+			int x = (int) tb.getPixXFromLatLon(location.getLatitude(), location.getLongitude());
+			int y = (int) tb.getPixYFromLatLon(location.getLatitude(), location.getLongitude());
+			int rad = (int) (18 * tb.getDensity());
+			if (Math.abs(x - ex) <= rad && (ey - y) <= rad && (y - ey) <= 2.5 * rad) {
+				myLocation.add(location);
+			}
+		}
+	}
 }
