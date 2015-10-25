@@ -32,7 +32,7 @@
 <string name="continue_follow_previous_route_auto">La navegació anterior no ha estat finalitzada. Desitgeu continuar-la? (%1$s segons)</string>
 <string name="osmand_parking_hours">Hores</string>
 <string name="osmand_parking_minutes">Minuts</string>
-<string name="osmand_parking_position_description_add_time">El cotxe es va aparcar a:</string>
+<string name="osmand_parking_position_description_add_time">El cotxe es va aparcar a</string>
 <string name="use_compass_navigation_descr">Usa la brúixola quan no es pugui determinar la direcció</string>
 <string name="use_compass_navigation">Usa la brúixola</string>
 <string name="shared_location">Localització compartida</string>
@@ -2164,7 +2164,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="world_maps">Mapes del món</string>
     <string name="world_regions">Regions del món</string>
     <string name="later">Mes tard</string>
-    <string name="get_full_version">Obteniu la versió completa</string>
+    <string name="get_full_version">Versió completa</string>
     <string name="downloads">Baixades</string>
 <string name="activate_seamarks_plugin">Activeu el connector de cartes marines</string>
     <string name="activate_srtm_plugin">Activeu el connector de corbes de nivell</string>
@@ -2177,4 +2177,11 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
 <string name="update_all">Actualitzeu tot (%1$s MB)</string>
     <string name="free_downloads_used">Baixades gratuïtes realitzades</string>
     <string name="free_downloads_used_description">Podeu veure quantes baixades gratuïtes heu fet</string>
+<string name="simulate_initial_startup_descr">Restaura el senyalitzador de primera engegada, mantenint altres paràmetres en l\'estat original</string>
+    <string name="simulate_initial_startup">Simula engegada inicial</string>
+    <string name="share_geo">geo:</string>
+    <string name="share_menu_location">Comparteix la posició</string>
+    <string name="shared_string_send">Envia</string>
+    <string name="hello_blank_fragment">Hola fragment buit</string>
+    <string name="application_dir_description">Trieu on voleu desar els fitxers de mapes.</string>
 </resources>
