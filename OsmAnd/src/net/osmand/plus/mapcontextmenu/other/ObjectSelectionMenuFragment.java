@@ -111,7 +111,7 @@ public class ObjectSelectionMenuFragment extends Fragment implements AdapterView
 					obs.removeGlobalOnLayoutListener(this);
 				}
 
-				if (height > maxHeight) {
+				if (!menu.isLandscapeLayout() && height > maxHeight) {
 					ViewGroup.LayoutParams lp = view.getLayoutParams();
 					lp.height = maxHeight;
 					view.setLayoutParams(lp);
@@ -165,10 +165,8 @@ public class ObjectSelectionMenuFragment extends Fragment implements AdapterView
 		TextView line2 = (TextView) view.findViewById(R.id.context_menu_line2);
 		line2.setText(item.getLocationStr());
 		Drawable slIcon = item.getSecondLineIcon();
-		if (slIcon != null) {
-			line2.setCompoundDrawablesWithIntrinsicBounds(slIcon, null, null, null);
-			line2.setCompoundDrawablePadding(dpToPx(5f));
-		}
+		line2.setCompoundDrawablesWithIntrinsicBounds(slIcon, null, null, null);
+		line2.setCompoundDrawablePadding(dpToPx(5f));
 	}
 
 	@Override
