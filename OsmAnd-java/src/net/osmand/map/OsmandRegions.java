@@ -36,7 +36,7 @@ import net.osmand.util.MapUtils;
 
 public class OsmandRegions {
 
-	private static final String MAP_TYPE = "region_map";
+	public static final String MAP_TYPE = "region_map";
 	
 	public static final String FIELD_LEFT_HAND_DRIVING = "left_hand_driving";
 	public static final String FIELD_DOWNLOAD_NAME = "download_name";
@@ -419,7 +419,7 @@ public class OsmandRegions {
 
 	
 
-	private boolean isDownloadOfType(BinaryMapDataObject object, String type) {
+	public boolean isDownloadOfType(BinaryMapDataObject object, String type) {
 		int[] addtypes = object.getAdditionalTypes();
 		for(int i = 0; i < addtypes.length; i++) {
 			TagValuePair tp = object.getMapIndex().decodeType(addtypes[i]);
