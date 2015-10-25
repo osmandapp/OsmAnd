@@ -207,6 +207,9 @@ public class ItemViewHolder {
 
 	protected void download(IndexItem indexItem, DownloadResourceGroup parentOptional) {
 		boolean handled = false;
+		if(parentOptional != null) {
+			context.setDownloadItem(parentOptional.getRegion());
+		}
 		if (indexItem.getType() == DownloadActivityType.ROADS_FILE && parentOptional != null) {
 			for (IndexItem ii : parentOptional.getIndividualResources()) {
 				if (ii.getType() == DownloadActivityType.NORMAL_FILE) {

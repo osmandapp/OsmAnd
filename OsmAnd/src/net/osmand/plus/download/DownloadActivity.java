@@ -17,19 +17,22 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.DrivingRegion;
+import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.WorldRegion;
 import net.osmand.plus.activities.ActionBarProgressActivity;
 import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
+import net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType;
 import net.osmand.plus.download.ui.ActiveDownloadsDialogFragment;
 import net.osmand.plus.download.ui.DataStoragePlaceDialogFragment;
 import net.osmand.plus.download.ui.DownloadResourceGroupFragment;
@@ -55,7 +58,6 @@ public class DownloadActivity extends ActionBarProgressActivity implements Downl
 	public static final int LOCAL_TAB_NUMBER = 1;
 	public static final int DOWNLOAD_TAB_NUMBER = 0;
 
-	public static final String FIRST_MAP_DOWNLOADED = "first_map_downloaded";
 
 	private List<LocalIndexInfo> localIndexInfos = new ArrayList<>();
 
@@ -69,6 +71,7 @@ public class DownloadActivity extends ActionBarProgressActivity implements Downl
 	public static final String UPDATES_TAB = "updates";
 	public static final MessageFormat formatGb = new MessageFormat("{0, number,#.##} GB", Locale.US);
 	public static final MessageFormat formatMb = new MessageFormat("{0, number,##.#} MB", Locale.US);
+	private static boolean SUGGESTED_TO_DOWNLOAD_BASEMAP = false;
 
 	private BannerAndDownloadFreeVersion visibleBanner;
 	private ViewPager viewPager;
@@ -77,6 +80,7 @@ public class DownloadActivity extends ActionBarProgressActivity implements Downl
 	protected Set<WeakReference<Fragment>> fragSet = new HashSet<>();
 	private DownloadIndexesThread downloadThread;
 	private DownloadValidationManager downloadValidationManager;
+	protected WorldRegion downloadItem;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -143,14 +147,9 @@ public class DownloadActivity extends ActionBarProgressActivity implements Downl
 			filter = intent.getExtras().getString(FILTER_KEY);
 			filterCat = intent.getExtras().getString(FILTER_CAT);
 		}
-		final boolean firstTime = getMyApplication().getAppInitializer().isFirstTime(null);
-		final boolean externalExists =
-				DataStoragePlaceDialogFragment.getExternalStorageDirectory() != null;
-		if (firstTime && externalExists) {
-			new DataStoragePlaceDialogFragment().show(getFragmentManager(), null);
-		}
+		showFirstTimeExternalStorage();
 	}
-	
+
 	public DownloadIndexesThread getDownloadThread() {
 		return downloadThread;
 	}
@@ -212,6 +211,13 @@ public class DownloadActivity extends ActionBarProgressActivity implements Downl
 	@UiThread
 	public void downloadHasFinished() {
 		visibleBanner.updateBannerInProgress();
+		if(downloadItem != null && !WorldRegion.WORLD.equals(downloadItem.getDownloadsId())) {
+			boolean firstMap = getMyApplication().getSettings().FIRST_MAP_IS_DOWNLOADED.get();
+			if(firstMap) {
+				initSettingsFirstMap(downloadItem);
+			}
+			showGoToMap(downloadItem);
+		}
 		for (WeakReference<Fragment> ref : fragSet) {
 			Fragment f = ref.get();
 			if (f instanceof DownloadEvents && f.isAdded()) {
@@ -220,10 +226,14 @@ public class DownloadActivity extends ActionBarProgressActivity implements Downl
 		}
 	}
 
+	
+
+
 	@Override
 	@UiThread
 	public void downloadInProgress() {
 		visibleBanner.updateBannerInProgress();
+		showDownloadWorldMapIfNeeded();
 		for (WeakReference<Fragment> ref : fragSet) {
 			Fragment f = ref.get();
 			if (f instanceof DownloadEvents && f.isAdded()) {
@@ -484,7 +494,85 @@ public class DownloadActivity extends ActionBarProgressActivity implements Downl
 			}
 		};
 		task.execute();
-
+	}
+	
+	private void initSettingsFirstMap(WorldRegion reg) {
+		// TODO test set correctly (4 tests): when you download first Australia, Japan, Luxembourgh, US  
+		getMyApplication().getSettings().FIRST_MAP_IS_DOWNLOADED.set(false);
+		DrivingRegion drg = null;
+		boolean americanSigns = "american".equals(reg.getRoadSigns(getMyApplication().getRegions()));
+		boolean leftHand = "yes".equals(reg.getLeftHandDriving(getMyApplication().getRegions()));
+		MetricsConstants mc  = "miles".equals(reg.getMetric(getMyApplication().getRegions())) ?
+				MetricsConstants.MILES_AND_FOOTS : MetricsConstants.KILOMETERS_AND_METERS;
+		for (DrivingRegion r : DrivingRegion.values()) {
+			if(r.americanSigns == americanSigns && r.leftHandDriving == leftHand && 
+					r.defMetrics == mc) {
+				drg = r;
+				break;
+			}
+		}
+		if (drg != null) {
+			getMyApplication().getSettings().DRIVING_REGION.set(drg);
+		}
+		String lng = reg.getLang(getMyApplication().getRegions());
+		if (lng != null) {
+			String setTts = null;
+			for (String s : OsmandSettings.TTS_AVAILABLE_VOICES) {
+				if (lng.startsWith(s)) {
+					setTts = s + "-tts";
+					break;
+				} else if (lng.contains("," + s)) {
+					setTts = s + "-tts";
+				}
+			}
+			if (setTts != null) {
+				getMyApplication().getSettings().VOICE_PROVIDER.set(setTts);
+			}
+		}
+	}
+	
+	public void setDownloadItem(WorldRegion region) {
+		downloadItem = region;
+	}
+	
+	private void showGoToMap(WorldRegion worldRegion) {
+		// TODO Show dialog go to map (coordinates to open take from WorldRegion.getCenter)
+		
+	}
+	
+	private void showDownloadWorldMapIfNeeded() {
+		if(getDownloadThread().getCurrentDownloadingItem() == null) {
+			return;
+		}
+		DownloadResourceGroup worldMaps = getDownloadThread().getIndexes().
+				getSubGroupById(DownloadResourceGroupType.WORLD_MAPS.getDefaultId());
+		IndexItem worldMap = null;
+		List<IndexItem> list = worldMaps.getIndividualResources();
+		if(list != null) {
+			for(IndexItem ii  : list) {
+				if(ii.getBasename().equalsIgnoreCase("world_basemap")) {
+					worldMap = ii;
+					break;
+				}
+			}
+		}
+		
+		if(!SUGGESTED_TO_DOWNLOAD_BASEMAP && worldMap != null && (!worldMap.isDownloaded() || worldMap.isOutdated()) && 
+				!getDownloadThread().isDownloading(worldMap)) {
+			SUGGESTED_TO_DOWNLOAD_BASEMAP = true;
+			// TODO Show dialog Download world map with 2 buttons to download it or no			
+		}
+		
+	}
+	
+	private void showFirstTimeExternalStorage() {
+		// TODO finish + test & hide dialog if the download has started
+		final boolean firstTime = getMyApplication().getAppInitializer().isFirstTime(this);
+		final boolean externalExists =
+				DataStoragePlaceDialogFragment.getExternalStorageDirectory() != null;
+		if (firstTime && externalExists) {
+			new DataStoragePlaceDialogFragment().show(getFragmentManager(), null);
+		}
 	}
 
 	public String getFilterAndClear() {
@@ -522,15 +610,7 @@ public class DownloadActivity extends ActionBarProgressActivity implements Downl
 		messageTextView.setText(R.string.device_memory);
 	}
 
+	
 
-	private void initSettingsIfFirstMap(IndexItem item) {
-		OsmandSettings.CommonPreference<Boolean> isFirstMapDownloadedPreference =
-				getMyApplication().getSettings()
-				.registerBooleanPreference(FIRST_MAP_DOWNLOADED, false).makeGlobal();
-		boolean wasFirstMapDownloaded = isFirstMapDownloadedPreference.get();
-		if (!wasFirstMapDownloaded) {
-//			item.ge
-			isFirstMapDownloadedPreference.set(true);
-		}
-	}
+
 }

@@ -19,12 +19,12 @@
 	<asset source="voice/hu/ttsconfig.p" destination="voice/hu-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/hr/ttsconfig.p" destination="voice/hr-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" /> 
 	<asset source="voice/it/ttsconfig.p" destination="voice/it-tts/_ttsconfig.p" mode="alwaysOverwriteOrCopy" />
-	<asset source="voice/ja/ttsconfig.p" destination="voice/ja-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
+	<asset source="voice/ja/ttsconfig.p" destination="voice/ja-tts/_ttsconfig.p" mode="alwaysOverwriteOrCopy" />
 	<asset source="voice/ko/ttsconfig.p" destination="voice/ko-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/lv/ttsconfig.p" destination="voice/lv-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
-	<asset source="voice/nl/ttsconfig.p" destination="voice/nl-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
-	<asset source="voice/pl/ttsconfig.p" destination="voice/pl-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
-	<asset source="voice/pt/ttsconfig.p" destination="voice/pt-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
+	<asset source="voice/nl/ttsconfig.p" destination="voice/nl-tts/_ttsconfig.p" mode="alwaysOverwriteOrCopy" />
+	<asset source="voice/pl/ttsconfig.p" destination="voice/pl-tts/_ttsconfig.p" mode="alwaysOverwriteOrCopy" />
+	<asset source="voice/pt/ttsconfig.p" destination="voice/pt-tts/_ttsconfig.p" mode="alwaysOverwriteOrCopy" />
 	<asset source="voice/pt-br/ttsconfig.p" destination="voice/pt-br-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/ro/ttsconfig.p" destination="voice/ro-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/ru/ttsconfig.p" destination="voice/ru-tts/_ttsconfig.p" mode="alwaysOverwriteOrCopy" />
@@ -32,7 +32,7 @@
 	<asset source="voice/sl/ttsconfig.p" destination="voice/sl-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/sv/ttsconfig.p" destination="voice/sv-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/sw/ttsconfig.p" destination="voice/sw-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
-	<asset source="voice/zh/ttsconfig.p" destination="voice/zh-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
+	<asset source="voice/zh/ttsconfig.p" destination="voice/zh-tts/_ttsconfig.p" mode="alwaysOverwriteOrCopy" />
 
 	<asset source="voice/en/config.p" destination="voice/en/_config.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/es/config.p" destination="voice/es/_config.p" mode="overwriteOnlyIfExists" />

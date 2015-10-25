@@ -659,6 +659,9 @@ public class OsmandSettings {
 		}
 	}; 
 	
+	public final OsmandPreference<Boolean> FIRST_MAP_IS_DOWNLOADED = new BooleanPreference(
+			"first_map_is_downloaded", false) ;
+	
 	public final OsmandPreference<DrivingRegion> DRIVING_REGION = new EnumIntPreference<DrivingRegion>(
 			"default_driving_region", DrivingRegion.EUROPE_ASIA, DrivingRegion.values()) {
 		protected boolean setValue(Object prefs, DrivingRegion val) {
@@ -1728,14 +1731,20 @@ public class OsmandSettings {
 
 	public final OsmandPreference<String> SELECTED_POI_FILTER_FOR_MAP = new StringPreference("selected_poi_filter_for_map", null).makeGlobal().cache();
 
-	public static final String VOICE_PROVIDER_NOT_USE = "VOICE_PROVIDER_NOT_USE"; 
+	public static final String VOICE_PROVIDER_NOT_USE = "VOICE_PROVIDER_NOT_USE";
+	
+	public static final String[] TTS_AVAILABLE_VOICES = new String[] {
+		"de", "en",  "es", "fr", "it", "ja", "nl", "pl", "pt", "ru", "zh"
+	};
 	// this value string is synchronized with settings_pref.xml preference name
 	// this value could localized
 	public final OsmandPreference<String> VOICE_PROVIDER = new StringPreference("voice_provider", null){
 		protected String getDefaultValue() {
 			Configuration config = ctx.getResources().getConfiguration();
-			if("de".equals(config.locale.getLanguage())) {
-				return "de-tts";
+			for (String lang : TTS_AVAILABLE_VOICES) {
+				if (lang.equals(config.locale.getLanguage())) {
+					return lang + "-tts";
+				}
 			}
 			return "en-tts";
 		};

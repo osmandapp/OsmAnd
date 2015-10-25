@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import net.osmand.PlatformUtil;
+import net.osmand.data.LatLon;
 import net.osmand.map.OsmandRegions;
 import net.osmand.util.Algorithms;
 import android.content.res.Resources;
@@ -33,6 +34,7 @@ public class WorldRegion {
 	private String downloadsId;
 	private String name;
 	private String searchText;
+	private LatLon center;
 
 	// Hierarchy
 	private WorldRegion superregion;
@@ -248,6 +250,10 @@ public class WorldRegion {
 		WorldRegion worldRegion = new WorldRegion().init(regionId, osmandRegions, localizedName);
 		loadedItems.remove(regionId);
 		return worldRegion;
+	}
+	
+	public LatLon getCenter() {
+		return center;
 	}
 
 	private String capitalize(String s) {
