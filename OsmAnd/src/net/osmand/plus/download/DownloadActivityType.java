@@ -266,26 +266,26 @@ public class DownloadActivityType {
 			}
 			return getBasename(indexItem);
 		}
-		final String bn = getBasename(indexItem);
-		if (bn.endsWith(FileNameTranslationHelper.WIKI_NAME)){
-			return FileNameTranslationHelper.getWikiName(ctx,bn);
+		final String basename = getBasename(indexItem);
+		if (basename.endsWith(FileNameTranslationHelper.WIKI_NAME)){
+			return FileNameTranslationHelper.getWikiName(ctx,basename);
 		}
 //		if (this == HILLSHADE_FILE){
 //			return FileNameTranslationHelper.getHillShadeName(ctx, osmandRegions, bn);
 //		}
-		final String lc = bn.toLowerCase();
+		final String lc = basename.toLowerCase();
 		String std = FileNameTranslationHelper.getStandardMapName(ctx, lc);
 		if (std != null) {
 			return std;
 		}
-		if (bn.contains("addresses-nationwide")) {
-			final int ind = bn.indexOf("addresses-nationwide");
-			String downloadName = bn.substring(0, ind - 1) + bn.substring(ind + "addresses-nationwide".length());
+		if (basename.contains("addresses-nationwide")) {
+			final int ind = basename.indexOf("addresses-nationwide");
+			String downloadName = basename.substring(0, ind - 1) + basename.substring(ind + "addresses-nationwide".length());
 			return osmandRegions.getLocaleName(downloadName, includingParent) +
 					" "+ ctx.getString(R.string.index_item_nation_addresses);
 		}
 
-		return osmandRegions.getLocaleName(bn, includingParent);
+		return osmandRegions.getLocaleName(basename, includingParent);
 	}
 	
 	public String getTargetFileName(IndexItem item) {

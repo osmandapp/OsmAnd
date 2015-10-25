@@ -331,6 +331,8 @@ public class AppInitializer implements IProgress {
 			public String getTranslation(String id) {
 				if(WorldRegion.AFRICA_REGION_ID.equals(id)){
 					return app.getString(R.string.index_name_africa);
+				} else if(WorldRegion.AUSTRALIA_AND_OCEANIA_REGION_ID.equals(id)){
+					return app.getString(R.string.index_name_oceania);
 				} else if(WorldRegion.ASIA_REGION_ID.equals(id)){
 					return app.getString(R.string.index_name_asia);
 				} else if(WorldRegion.CENTRAL_AMERICA_REGION_ID.equals(id)){

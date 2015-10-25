@@ -52,7 +52,7 @@ public class OsmandRegions {
 	private String locale = "en";
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(OsmandRegions.class);
 
-	WorldRegion worldRegion = new WorldRegion(WorldRegion.WORLD, WorldRegion.WORLD);
+	WorldRegion worldRegion = new WorldRegion(WorldRegion.WORLD);
 	Map<String, WorldRegion> fullNamesToRegionData = new HashMap<String, WorldRegion>();
 	Map<String, String> downloadNamesToFullNames = new HashMap<String, String>();
 	Map<String, LinkedList<BinaryMapDataObject>> countriesByDownloadName = new HashMap<String, LinkedList<BinaryMapDataObject>>();
@@ -133,12 +133,6 @@ public class OsmandRegions {
 			if(parent != null && rd != null) {
 				parent.addSubregion(rd);
 			}
-			if(rd != null) {
-				rd.superregion = parent;
-			}
-			if(parent != null) {
-				parent.subregions.add(rd);
-			}
 		}
 		structureWorldRegions(new ArrayList<WorldRegion>(fullNamesToRegionData.values()));
 	}
@@ -162,8 +156,20 @@ public class OsmandRegions {
 		if(rd == null) {
 			return fullName.replace('_', ' ');
 		}
-		if (includingParent && rd.superregion != null) {
-			return rd.superregion.getLocaleName() + " " + rd.getLocaleName();
+		if (includingParent && rd.getSuperregion() != null && rd.getSuperregion().getSuperregion() != null) {
+			WorldRegion parentParent = rd.getSuperregion().getSuperregion();
+			WorldRegion parent = rd.getSuperregion();
+			if(parentParent.getRegionId().equals(WorldRegion.WORLD) && 
+					!parent.getRegionId().equals(WorldRegion.RUSSIA_REGION_ID)) {
+				return rd.getLocaleName();
+			}
+			if(parentParent.getRegionId().equals(WorldRegion.RUSSIA_REGION_ID)) {
+				return parentParent.getRegionId() + " " + rd.getLocaleName(); 
+			}
+			if(parentParent.getRegionId().equals(WorldRegion.JAPAN_REGION_ID)) {
+				return parentParent.getRegionId() + " " + rd.getLocaleName(); 
+			}
+			return parent.getLocaleName() + " " + rd.getLocaleName();
 		} else {
 			return rd.getLocaleName();
 		}
@@ -589,19 +595,24 @@ public class OsmandRegions {
 		initWorldRegion(world, WorldRegion.NORTH_AMERICA_REGION_ID);
 		initWorldRegion(world, WorldRegion.RUSSIA_REGION_ID);
 		initWorldRegion(world, WorldRegion.SOUTH_AMERICA_REGION_ID);
+		initWorldRegion(world, WorldRegion.AUSTRALIA_AND_OCEANIA_REGION_ID);
 		Iterator<WorldRegion> it = loadedItems.iterator();
 		while(it.hasNext()) {
 			WorldRegion region = it.next();
 			if(region.superregion == null) {
 				boolean found = false;
 				for(WorldRegion worldSubregion : world.subregions) {
-					if(worldSubregion.getRegionId().equalsIgnoreCase(region.regionParentFullName)) {
-						worldSubregion.subregions.add(region);
+					if(worldSubregion.getRegionId().equalsIgnoreCase(region.regionFullName)) {
+						for(WorldRegion rg : region.subregions) {
+							worldSubregion.addSubregion(rg);
+						}
 						found = true;
 						break;
-					} 
+					}
 				}
 				if(found) {
+					it.remove();
+				} else if(region.getRegionId().contains("basemap")) {
 					it.remove();
 				}
 			} else {
