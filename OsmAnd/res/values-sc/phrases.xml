@@ -1401,4 +1401,16 @@
 	<string name="poi_memorial_obelisk">Obeliscu</string>
 	<string name="poi_memorial_column">Colunna</string>
 	<string name="poi_memorial_stupa">Stupa</string>
+	<string name="poi_tomb_war_grave">Casta: campusantu de gherra</string>
+	<string name="poi_tomb_tumulus">Casta: tùmulu</string>
+	<string name="poi_tomb_rock_cut">Casta: rupestre (iscavada in sa roca)</string>
+	<string name="poi_tomb_hypogeum">Casta: conchedda</string>
+	<string name="poi_tomb_vault">Casta: tumba a bòveda</string>
+	<string name="poi_tomb_columbarium">Casta: columbàriu</string>
+	<string name="poi_tomb_mausoleum">Casta: mausoleu</string>
+	<string name="poi_tomb_sarcophagus">Casta: sarcòfagu</string>
+	<string name="poi_tomb_crypt">Casta: cripta</string>
+	<string name="poi_tomb_pyramid">Casta: piràmide</string>
+
+	<string name="poi_highway_steps">Iscalas</string>
 	</resources>
