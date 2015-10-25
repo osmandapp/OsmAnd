@@ -20,6 +20,7 @@ import android.widget.Toast;
 import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
+import net.osmand.map.OsmandRegions.RegionData;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.DrivingRegion;
@@ -500,9 +501,10 @@ public class DownloadActivity extends ActionBarProgressActivity implements Downl
 		// TODO test set correctly (4 tests): when you download first Australia, Japan, Luxembourgh, US  
 		getMyApplication().getSettings().FIRST_MAP_IS_DOWNLOADED.set(false);
 		DrivingRegion drg = null;
-		boolean americanSigns = "american".equals(reg.getRoadSigns(getMyApplication().getRegions()));
-		boolean leftHand = "yes".equals(reg.getLeftHandDriving(getMyApplication().getRegions()));
-		MetricsConstants mc  = "miles".equals(reg.getMetric(getMyApplication().getRegions())) ?
+		RegionData rd = reg.getRegionData();
+		boolean americanSigns = "american".equals(rd.getRegionRoadSigns());
+		boolean leftHand = "yes".equals(rd.getRegionLeftHandDriving());
+		MetricsConstants mc  = "miles".equals(rd.getRegionMetric()) ?
 				MetricsConstants.MILES_AND_FOOTS : MetricsConstants.KILOMETERS_AND_METERS;
 		for (DrivingRegion r : DrivingRegion.values()) {
 			if(r.americanSigns == americanSigns && r.leftHandDriving == leftHand && 
@@ -514,7 +516,7 @@ public class DownloadActivity extends ActionBarProgressActivity implements Downl
 		if (drg != null) {
 			getMyApplication().getSettings().DRIVING_REGION.set(drg);
 		}
-		String lng = reg.getLang(getMyApplication().getRegions());
+		String lng = rd.getRegionLang();
 		if (lng != null) {
 			String setTts = null;
 			for (String s : OsmandSettings.TTS_AVAILABLE_VOICES) {

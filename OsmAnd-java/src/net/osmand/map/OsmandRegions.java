@@ -275,6 +275,18 @@ public class OsmandRegions {
 	public RegionData getRegionData(String fullname) {
 		return fullNamesToRegionData.get(fullname);
 	}
+	
+	public String getDownloadName(BinaryMapDataObject o) {
+		return mapIndexFields.get(mapIndexFields.downloadNameType, o);
+	}
+	
+	public String getFullName(BinaryMapDataObject o) {
+		return mapIndexFields.get(mapIndexFields.fullNameType, o);
+	}
+	
+	public List<RegionData> getAllRegionData() {
+		return new ArrayList<OsmandRegions.RegionData>(fullNamesToRegionData.values());
+	}
 
 	public void initRegionData() throws IOException {
 //		final Collator clt = OsmAndCollator.primaryCollator();
@@ -533,6 +545,10 @@ public class OsmandRegions {
 		protected LatLon regionCenter;
 		
 		
+		public boolean isRegionMapDownload() {
+			return regionMapDownload;
+		}
+		
 		public String getLocaleName() {
 			if(!Algorithms.isEmpty(regionNameLocale)) {
 				return regionNameLocale;
@@ -543,14 +559,33 @@ public class OsmandRegions {
 			return regionName;
 		}
 		
-		public LatLon getCenter() {
+		public String getRegionDownloadName() {
+			return regionDownloadName;
+		}
+		
+		public String getRegionLeftHandDriving() {
+			return regionLeftHandDriving;
+		}
+		
+		public String getRegionMetric() {
+			return regionMetric;
+		}
+		
+		public String getRegionRoadSigns() {
+			return regionRoadSigns;
+		}
+		
+		public LatLon getRegionCenter() {
 			return regionCenter;
 		}
 		
-		public String getSearchText() {
+		public String getRegionSearchText() {
 			return regionSearchText;
 		}
 		
+		public String getRegionLang() {
+			return regionLang;
+		}
 		
 
 		///TODO investigate do we need it ???
@@ -570,5 +605,14 @@ public class OsmandRegions {
 		public String getDownloadsId() {
 			return downloadsId;
 		}
+
+		
 	}
+
+
+
+	
+
+
+	
 }

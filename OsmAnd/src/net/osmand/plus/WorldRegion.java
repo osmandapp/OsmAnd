@@ -12,6 +12,7 @@ import java.util.Map.Entry;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.map.OsmandRegions;
+import net.osmand.map.OsmandRegions.RegionData;
 import net.osmand.util.Algorithms;
 import android.content.res.Resources;
 
@@ -117,8 +118,7 @@ public class WorldRegion {
 	}
 
 	public void loadWorldRegions(OsmandApplication app) {
-		OsmandRegions osmandRegions = app.getRegions();
-		Map<String, String> loadedItems = osmandRegions.getFullNamesToLowercaseCopy();
+		List<RegionData> loadedItems = osmandRegions.getAllRegionData();
 		if (loadedItems.size() == 0) {
 			return;
 		}
