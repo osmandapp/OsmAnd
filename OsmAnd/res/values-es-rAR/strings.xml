@@ -1109,7 +1109,7 @@
 	<string name="route_updated_loc_found">La ruta será calculada cuando se encuentre la ubicación</string>
 	<string name="osmand_parking_hours">Horas</string>
 	<string name="osmand_parking_minutes">Minutos</string>
-	<string name="osmand_parking_position_description_add_time">Se estacionó el auto a las:</string>
+	<string name="osmand_parking_position_description_add_time">Se estacionó el auto a las</string>
 	<string name="tip_recent_changes_0_8_1_t">"Cambios en 0.8.1:
 \n\t* Rutas más precisas (algo más lento)
 \n\t* Recálculo inteligente y rápido de la ruta
@@ -2093,7 +2093,7 @@
     <string name="activate_seamarks_plugin">Active el complemento náutico</string>
     <string name="activate_srtm_plugin">Active el complemento SRTM</string>
 <string name="later">Luego</string>
-    <string name="get_full_version">Obtener versión completa</string>
+    <string name="get_full_version">Versión completa</string>
 <string name="regions">Regiones</string>
     <string name="additional_maps">Mapas adicionales</string>
     <string name="region_maps">Mapas regionales</string>
@@ -2115,4 +2115,5 @@
     <string name="share_menu_location">Compartir ubicación</string>
     <string name="shared_string_send">Enviar</string>
     <string name="application_dir_description">Elija donde guardar los archivos de los mapas.</string>
-</resources>
+<string name="hello_blank_fragment">Hola fragmento vacío</string>
+    </resources>
