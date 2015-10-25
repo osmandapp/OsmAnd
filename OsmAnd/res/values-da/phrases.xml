@@ -2304,7 +2304,7 @@
 	<string name="poi_historic_period_archaic_greece">Historiskperiode: Arkaisk tid</string>
 	<string name="poi_historic_period_iron_age">Historiskperiode: Jernalderen</string>
 	<string name="poi_historic_period_roman_republic">Historiskperiode: Romerske republik (508 f.kr. - 27 f.kr.)</string>
-	<string name="poi_historic_period_hellenistic_greece">Historiskperiode: hellenistisk Grækenland</string>
+	<string name="poi_historic_period_hellenistic_greece">Historiskperiode: Hellenistisk Grækenland</string>
 	<string name="poi_historic_period_new_kingdom">Historiskperiode: nye Kongerige (1550-1069 f.kr.)</string>
 	<string name="poi_historic_period_middle_kingdom">Historiskperiode: mellemste rige (2055 -1650 f.kr.)</string>
 	<string name="poi_historic_period_predynastic_egypt">Historiskperiode: prædynastiske Egypten</string>
@@ -2314,7 +2314,7 @@
 	<string name="poi_historic_period_second_intermediate_period">Historiskperiode: anden mellemliggende periode (1650 – 1550 f.Kr.)</string>
 	<string name="poi_historic_period_third_intermediate_period">"Historiskperiode: tredje mellemliggende periode (1069 - 664 f.Kr.) "</string>
 	<string name="poi_historic_period_first_persian_period">Historiskperiode: første persiske periode</string>
-	<string name="poi_historic_period_late_period">Historiskperiode: sene periode (664 -332 f.Kr.)</string>
+	<string name="poi_historic_period_late_period">Historiskperiode: sene periode (664 - 332 f.Kr.)</string>
 	<string name="poi_historic_period_second_persian_period">Historiskperiode: anden Persiske periode</string>
 	<string name="poi_historic_period_alexander_the_great">Historiskperiode: Alexander den Store</string>
 	<string name="poi_historic_period_ptolemaic_egypt">Historiskperiode: ptolemæiske Egypten (305 f.kr. – 30 f.kr.)</string>
@@ -2325,8 +2325,8 @@
 	<string name="poi_historic_period_roman_greece">Historiskperiode: romersk græsk (146 f.Kr. – 330 e.Kr)</string>
 	<string name="poi_historic_period_roman_kingdom">Historiskperiode: det romerske Kongerige (753 f.Kr. – 509 f.Kr.)</string>
 	<string name="poi_historic_period_dominate">Historiskperiode: Dominatet (285 e.Kr. – 476 e.Kr)</string>
-	<string name="poi_historic_period_villager">Historiskperiode: landsbybeboer (epoke I, II, 1580 f.Kr. - 133 e.Kr.)</string>
-	<string name="poi_historic_period_urban">Historiskperiode: urban (epoke III, 133 e.Kr. - 374 e.Kr.)</string>
+	<string name="poi_historic_period_villager">Historiskperiode: landsbyboere (epoke I, II, 1580 f.Kr. - 133 e.Kr.)</string>
+	<string name="poi_historic_period_urban">Historiskperiode: bymæssig (epoke III, 133 e.Kr. - 374 e.Kr.)</string>
 	<string name="poi_historic_period_classical">Historiskperiode: klassisk (epoke IV, 374 e.Kr. - 900 e.Kr.)</string>
 	<string name="poi_historic_period_imperial">Historiskperiode: imperial (epoke V, 900 e.Kr. - 1200 e.Kr.)</string>
 
