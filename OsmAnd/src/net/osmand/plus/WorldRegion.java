@@ -30,43 +30,23 @@ public class WorldRegion {
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(WorldRegion.class);
 
 	// Region data
-	private String regionId;
-	private String downloadsId;
-	private String name;
-	private String searchText;
-	private LatLon center;
+	private OsmandRegions.RegionData regionData;
 
 	// Hierarchy
 	private WorldRegion superregion;
 	private List<WorldRegion> subregions;
 	private List<WorldRegion> flattenedSubregions;
-
-	public String getLang(OsmandRegions osmandRegions) {
-		return osmandRegions.getLang(regionId);
-	}
-
-	public String getMetric(OsmandRegions osmandRegions) {
-		return osmandRegions.getMetric(regionId);
-	}
-
-	public String getLeftHandDriving(OsmandRegions osmandRegions) {
-		return osmandRegions.getLeftHandDriving(regionId);
-	}
-
-	public String getRoadSigns(OsmandRegions osmandRegions) {
-		return osmandRegions.getRoadSigns(regionId);
-	}
-
-	public String getRegionId() {
-		return regionId;
-	}
-
-	public String getDownloadsId() {
-		return downloadsId;
+	
+	public OsmandRegions.RegionData getRegionData() {
+		return regionData;
 	}
 
 	public String getName() {
-		return name;
+		return regionData.getName();
+	}
+	
+	private String getRegionId() {
+		return regionData.getRegionId();
 	}
 
 	public WorldRegion getSuperregion() {
@@ -88,12 +68,12 @@ public class WorldRegion {
 
 		WorldRegion that = (WorldRegion) o;
 
-		return !(name != null ? !name.toLowerCase().equals(that.name.toLowerCase()) : that.name != null);
+		return !(getName() != null ? !getName().toLowerCase().equals(that.getName().toLowerCase()) : that.getName() != null);
 	}
 
 	@Override
 	public int hashCode() {
-		return name != null ? name.hashCode() : 0;
+		return getName() != null ? getName().hashCode() : 0;
 	}
 
 	public WorldRegion() {
@@ -129,9 +109,6 @@ public class WorldRegion {
 		return this;
 	}
 	
-	public String getSearchText() {
-		return searchText;
-	}
 
 	private void addSubregion(WorldRegion subregion, WorldRegion world) {
 		subregion.superregion = this;
@@ -167,27 +144,27 @@ public class WorldRegion {
 		WorldRegion centralAmericaRegion = createRegionAs(CENTRAL_AMERICA_REGION_ID,
 				loadedItems, osmandRegions, res.getString(R.string.index_name_central_america));
 		addSubregion(centralAmericaRegion, this);
-		regionsLookupTable.put(centralAmericaRegion.regionId, centralAmericaRegion);
+		regionsLookupTable.put(centralAmericaRegion.getRegionId(), centralAmericaRegion);
 
 		WorldRegion europeRegion = createRegionAs(EUROPE_REGION_ID,
 				loadedItems, osmandRegions, res.getString(R.string.index_name_europe));
 		addSubregion(europeRegion, this);
-		regionsLookupTable.put(europeRegion.regionId, europeRegion);
+		regionsLookupTable.put(europeRegion.getRegionId(), europeRegion);
 
 		WorldRegion northAmericaRegion = createRegionAs(NORTH_AMERICA_REGION_ID,
 				loadedItems, osmandRegions, res.getString(R.string.index_name_north_america));
 		addSubregion(northAmericaRegion, this);
-		regionsLookupTable.put(northAmericaRegion.regionId, northAmericaRegion);
+		regionsLookupTable.put(northAmericaRegion.getRegionId(), northAmericaRegion);
 
 		WorldRegion russiaRegion = createRegionAs(RUSSIA_REGION_ID,
 				loadedItems, osmandRegions, res.getString(R.string.index_name_russia));
 		addSubregion(russiaRegion, this);
-		regionsLookupTable.put(russiaRegion.regionId, russiaRegion);
+		regionsLookupTable.put(russiaRegion.getRegionId(), russiaRegion);
 
 		WorldRegion southAmericaRegion = createRegionAs(SOUTH_AMERICA_REGION_ID,
 				loadedItems, osmandRegions, res.getString(R.string.index_name_south_america));
 		addSubregion(southAmericaRegion, this);
-		regionsLookupTable.put(southAmericaRegion.regionId, southAmericaRegion);
+		regionsLookupTable.put(southAmericaRegion.getRegionId(), southAmericaRegion);
 
 		// Process all regions
 		for (; ; ) {
@@ -208,7 +185,7 @@ public class WorldRegion {
 
 				WorldRegion newRegion = new WorldRegion().init(regionId, osmandRegions, null);
 				parentRegion.addSubregion(newRegion, this);
-				regionsLookupTable.put(newRegion.regionId, newRegion);
+				regionsLookupTable.put(newRegion.getRegionId(), newRegion);
 
 				// Remove
 				processedRegions++;
@@ -252,10 +229,6 @@ public class WorldRegion {
 		return worldRegion;
 	}
 	
-	public LatLon getCenter() {
-		// TODO
-		return center;
-	}
 
 	private String capitalize(String s) {
 		String[] words = s.split(" ");
@@ -284,6 +257,8 @@ public class WorldRegion {
 		}
 		return null;
 	}
+
+	
 
 	
 }

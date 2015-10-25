@@ -24,6 +24,7 @@ import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.MapIndex;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
+import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.util.Algorithms;
@@ -33,42 +34,51 @@ import net.osmand.util.MapUtils;
 public class OsmandRegions {
 
 	private static final String MAP_TYPE = "region_map";
-//	regionSrtm = object.getMapIndex().getRule("region_srtm", null);
-//	regionWiki = object.getMapIndex().getRule("region_wiki", null);
-//	regionRoads = object.getMapIndex().getRule("region_roads", null);
-//	regionHillshade = object.getMapIndex().getRule("region_hillshade", null);
+	
+	public static final String FIELD_LEFT_HAND_DRIVING = "left_hand_driving";
+	public static final String FIELD_DOWNLOAD_NAME = "download_name";
+	public static final String FIELD_NAME = "name";
+	public static final String FIELD_NAME_EN = "name:en";
+	public static final String FIELD_REGION_PARENT_NAME = "region_parent_name";
+	public static final String FIELD_REGION_FULL_NAME = "region_full_name";
+	public static final String FIELD_LANG = "lang";
+	public static final String FIELD_METRIC = "metric";
+	public static final String FIELD_ROAD_SIGNS = "road_signs";
 	
 	private BinaryMapIndexReader reader;
+	
+	Map<String, RegionData> fullNamesToRegionData = new HashMap<String, RegionData>();
 	Map<String, LinkedList<BinaryMapDataObject>> countriesByDownloadName = new HashMap<String, LinkedList<BinaryMapDataObject>>();
-	Map<String, String> fullNamesToLocaleNames = new HashMap<String, String>();
-	Map<String, String> fullNamesNoParentToLocaleNames = new HashMap<String, String>();
-	Map<String, String> fullMapNamesToDownloadNames = new HashMap<String, String>();
 	Map<String, String> downloadNamesToFullNames = new HashMap<String, String>();
-	Map<String, String> fullNamesToLowercaseIndex = new HashMap<String, String>();
-	Map<String, String> fullNamesToParentFullNames = new HashMap<String, String>();
-	Map<String, String> fullNamesToDownloadNames = new HashMap<String, String>();
-	Map<String, String> fullNamesToLangs = new HashMap<String, String>();
-	Map<String, String> fullNamesToMetrics = new HashMap<String, String>();
-	Map<String, String> fullNamesToLeftHandDrivings = new HashMap<String, String>();
-	Map<String, String> fullNamesToRoadSigns = new HashMap<String, String>();
+//	Map<String, String> fullNamesToLocaleNames = new HashMap<String, String>();
+//	Map<String, String> fullNamesNoParentToLocaleNames = new HashMap<String, String>();
+//	Map<String, String> fullMapNamesToDownloadNames = new HashMap<String, String>();
+//	Map<String, String> fullNamesToLowercaseIndex = new HashMap<String, String>();
+//	Map<String, String> fullNamesToParentFullNames = new HashMap<String, String>();
+//	Map<String, String> fullNamesToDownloadNames = new HashMap<String, String>();
+//	Map<String, String> fullNamesToLangs = new HashMap<String, String>();
+//	Map<String, String> fullNamesToMetrics = new HashMap<String, String>();
+//	Map<String, String> fullNamesToLeftHandDrivings = new HashMap<String, String>();
+//	Map<String, String> fullNamesToRoadSigns = new HashMap<String, String>();
 
 	QuadTree<String> quadTree = null ;
+	String locale = "en";
+	MapIndexFields mapIndexFields = new MapIndexFields();
 
-	public Map<String, String> getFullNamesToLowercaseCopy() {
-		return new HashMap<String, String>(fullNamesToLowercaseIndex);
+	private class MapIndexFields {
+		MapIndex mapIndex;
+		Integer parentFullName = null;
+		Integer fullNameType = null;
+		Integer downloadNameType = null;
+		Integer nameEnType = null;
+		Integer nameType = null;
+		Integer nameLocaleType = null;
+		Integer langType = null;
+		Integer metricType = null;
+		Integer leftHandDrivingType = null;
+		Integer roadSignsType = null;
 	}
 
-	Integer parentFullName = null;
-	Integer fullNameType = null;
-	Integer downloadNameType = null;
-	Integer nameEnType = null;
-	Integer nameType = null;
-	Integer nameLocaleType = null;
-	String locale = "en";
-	Integer langType = null;
-	Integer metricType = null;
-	Integer leftHandDrivingType = null;
-	Integer roadSignsType = null;
 
 
 	public void prepareFile(String fileName) throws IOException {
@@ -80,64 +90,6 @@ public class OsmandRegions {
 		return countriesByDownloadName.containsKey(name);
 	}
 
-	public String getLang(String fullName) {
-		return fullNamesToLangs.get(fullName);
-	}
-
-	public String getMetric(String fullName) {
-		return fullNamesToMetrics.get(fullName);
-	}
-
-	public String getLeftHandDriving(String fullName) {
-		return fullNamesToLeftHandDrivings.get(fullName);
-	}
-
-	public String getRoadSigns(String fullName) {
-		return fullNamesToRoadSigns.get(fullName);
-	}
-
-	private String getLang(BinaryMapDataObject o) {
-		if (langType != null) {
-			return o.getNameByType(langType);
-		} else {
-			return null;
-		}
-	}
-
-	private String getMetric(BinaryMapDataObject o) {
-		if (metricType != null) {
-			return o.getNameByType(metricType);
-		} else {
-			return null;
-		}
-	}
-
-	private String getLeftHandDriving(BinaryMapDataObject o) {
-		if (leftHandDrivingType != null) {
-			return o.getNameByType(leftHandDrivingType);
-		} else {
-			return null;
-		}
-	}
-
-	private String getRoadSigns(BinaryMapDataObject o) {
-		if (roadSignsType != null) {
-			return o.getNameByType(roadSignsType);
-		} else {
-			return null;
-		}
-	}
-
-	public String getDownloadName(BinaryMapDataObject o) {
-		if(downloadNameType == null) {
-			return null;
-		}
-		return o.getNameByType(downloadNameType);
-	}
-	
-	public Integer getNameEnType() {
-		return nameEnType;
-	}
 	
 	public String getLocaleName(String downloadName, boolean includingParent) {
 		final String lc = downloadName.toLowerCase();
@@ -586,22 +538,20 @@ public class OsmandRegions {
 
 	
 	private void initTypes(BinaryMapDataObject object) {
-		if (downloadNameType == null) {
-			downloadNameType = object.getMapIndex().getRule("download_name", null);
-			nameType = object.getMapIndex().getRule("name", null);
-			nameEnType = object.getMapIndex().getRule("name:en", null);
-			nameLocaleType = object.getMapIndex().getRule("name:" + locale, null);
-			parentFullName = object.getMapIndex().getRule("region_parent_name", null);
-			fullNameType = object.getMapIndex().getRule("region_full_name", null);
-
-			langType = object.getMapIndex().getRule("lang", null);
-			metricType = object.getMapIndex().getRule("metric", null);
-			leftHandDrivingType = object.getMapIndex().getRule("left_hand_driving", null);
-			roadSignsType = object.getMapIndex().getRule("road_signs", null);
-
-			if (downloadNameType == null || nameType == null) {
-				throw new IllegalStateException();
-			}
+		if (mapIndexFields == null) {
+			mapIndexFields = new MapIndexFields();
+			mapIndexFields.mapIndex = object.getMapIndex();
+			mapIndexFields.downloadNameType = object.getMapIndex().getRule(FIELD_DOWNLOAD_NAME, null);
+			mapIndexFields.nameType = object.getMapIndex().getRule(FIELD_NAME, null);
+			mapIndexFields.nameEnType = object.getMapIndex().getRule(FIELD_NAME_EN, null);
+			mapIndexFields.nameLocaleType = object.getMapIndex().getRule(FIELD_NAME+":"+locale, null);
+			mapIndexFields.parentFullName = object.getMapIndex().getRule(FIELD_REGION_PARENT_NAME, null);
+			mapIndexFields.fullNameType = object.getMapIndex().getRule(FIELD_REGION_FULL_NAME, null);
+			mapIndexFields.langType = object.getMapIndex().getRule(FIELD_LANG, null);
+			mapIndexFields.metricType = object.getMapIndex().getRule(FIELD_METRIC, null);
+			mapIndexFields.leftHandDrivingType = object.getMapIndex().getRule(FIELD_LEFT_HAND_DRIVING, null);
+			mapIndexFields.roadSignsType = object.getMapIndex().getRule(FIELD_ROAD_SIGNS, null);
+			mapIndexFields.nameType = object.getMapIndex().getRule(FIELD_NAME, null);
 		}
 	}
 
@@ -649,5 +599,32 @@ public class OsmandRegions {
 
 	}
 
-	
+
+	public static class RegionData {
+		String regionId;
+		private String downloadsId;
+		private String name;
+		private String searchText;
+		private LatLon center;
+		
+		public LatLon getCenter() {
+			return center;
+		}
+		
+		public String getSearchText() {
+			return searchText;
+		}
+		
+		public String getName() {
+			return name;
+		}
+		
+		public String getRegionId() {
+			return regionId;
+		}
+		
+		public String getDownloadsId() {
+			return downloadsId;
+		}
+	}
 }
