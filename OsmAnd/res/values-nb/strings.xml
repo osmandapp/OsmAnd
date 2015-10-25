@@ -91,7 +91,7 @@
 	<string name="route_updated_loc_found">Rute blir beregnet når posisjon blir funnet</string>
 	<string name="osmand_parking_hours">Timer</string>
 	<string name="osmand_parking_minutes">Minutter</string>
-	<string name="osmand_parking_position_description_add_time">Bilen ble parkert her:</string>
+	<string name="osmand_parking_position_description_add_time">Bilen ble parkert</string>
 	<string name="rendering_attr_appMode_name">Opptegningsmodus</string>
 	<string name="rendering_attr_contourLines_name">Vis koter</string>
 	<string name="rendering_attr_hmRendered_description">Øk mengden av kartdetaljer vist</string>

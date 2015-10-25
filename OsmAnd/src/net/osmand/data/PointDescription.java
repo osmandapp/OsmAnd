@@ -37,6 +37,7 @@ public class PointDescription implements Serializable {
 	public static final String POINT_TYPE_VIDEO_NOTE = "videonote";
 	public static final String POINT_TYPE_PHOTO_NOTE = "photonote";
 	public static final String POINT_TYPE_LOCATION = "location";
+	public static final String POINT_TYPE_MY_LOCATION = "my_location";
 	public static final String POINT_TYPE_ALARM = "alarm";
 	public static final String POINT_TYPE_TARGET = "destination";
 	public static final String POINT_TYPE_OSM_BUG = "bug";
@@ -186,6 +187,10 @@ public class PointDescription implements Serializable {
 
 	public boolean isParking() {
 		return POINT_TYPE_PARKING_MARKER.equals(type);
+	}
+
+	public boolean isMyLocation() {
+		return POINT_TYPE_MY_LOCATION.equals(type);
 	}
 
 	@Override

@@ -9,6 +9,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 import net.osmand.util.Algorithms;
@@ -21,7 +22,7 @@ public class ParkingPositionController extends MenuController {
 	String parkingDescription = "";
 
 	public ParkingPositionController(OsmandApplication app, MapActivity mapActivity, final PointDescription pointDescription, LatLon latLon) {
-		super(new ParkingPositionBuilder(app), mapActivity);
+		super(new MenuBuilder(app), mapActivity);
 		this.pointDescription = pointDescription;
 		this.latLon = latLon;
 		plugin = OsmandPlugin.getPlugin(ParkingPositionPlugin.class);
@@ -86,14 +87,6 @@ public class ParkingPositionController extends MenuController {
 	@Override
 	public boolean needStreetName() {
 		return false;
-	}
-
-	@Override
-	public void addPlainMenuItems(String typeStr, PointDescription pointDescription) {
-		if (pointDescription != null) {
-			addPlainMenuItem(R.drawable.map_my_location, PointDescription.getLocationName(getMapActivity(),
-					latLon.getLatitude(), latLon.getLongitude(), true).replaceAll("\n", ""));
-		}
 	}
 
 	@Override

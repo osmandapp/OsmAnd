@@ -25,7 +25,7 @@
         <string name="poi_baby_goods">Babyudstryr</string>
         <string name="poi_bag">Tasker</string>
         <string name="poi_bathroom_furnishing">Badeværelsesinventar</string>
-        <string name="poi_bed">Soveværelsesmøbler</string>
+        <string name="poi_bed">sengetøjsbutik</string>
         <string name="poi_boutique">Modebutik</string>
         <string name="poi_carpet">Tæpper</string>
         <string name="poi_chemist">Materialist</string>
@@ -2304,7 +2304,7 @@
 	<string name="poi_historic_period_archaic_greece">Historiskperiode: Arkaisk tid</string>
 	<string name="poi_historic_period_iron_age">Historiskperiode: Jernalderen</string>
 	<string name="poi_historic_period_roman_republic">Historiskperiode: Romerske republik (508 f.kr. - 27 f.kr.)</string>
-	<string name="poi_historic_period_hellenistic_greece">Historiskperiode: hellenistisk Grækenland</string>
+	<string name="poi_historic_period_hellenistic_greece">Historiskperiode: Hellenistisk Grækenland</string>
 	<string name="poi_historic_period_new_kingdom">Historiskperiode: nye Kongerige (1550-1069 f.kr.)</string>
 	<string name="poi_historic_period_middle_kingdom">Historiskperiode: mellemste rige (2055 -1650 f.kr.)</string>
 	<string name="poi_historic_period_predynastic_egypt">Historiskperiode: prædynastiske Egypten</string>
@@ -2314,7 +2314,7 @@
 	<string name="poi_historic_period_second_intermediate_period">Historiskperiode: anden mellemliggende periode (1650 – 1550 f.Kr.)</string>
 	<string name="poi_historic_period_third_intermediate_period">"Historiskperiode: tredje mellemliggende periode (1069 - 664 f.Kr.) "</string>
 	<string name="poi_historic_period_first_persian_period">Historiskperiode: første persiske periode</string>
-	<string name="poi_historic_period_late_period">Historiskperiode: sene periode (664 -332 f.Kr.)</string>
+	<string name="poi_historic_period_late_period">Historiskperiode: sene periode (664 - 332 f.Kr.)</string>
 	<string name="poi_historic_period_second_persian_period">Historiskperiode: anden Persiske periode</string>
 	<string name="poi_historic_period_alexander_the_great">Historiskperiode: Alexander den Store</string>
 	<string name="poi_historic_period_ptolemaic_egypt">Historiskperiode: ptolemæiske Egypten (305 f.kr. – 30 f.kr.)</string>
@@ -2325,9 +2325,63 @@
 	<string name="poi_historic_period_roman_greece">Historiskperiode: romersk græsk (146 f.Kr. – 330 e.Kr)</string>
 	<string name="poi_historic_period_roman_kingdom">Historiskperiode: det romerske Kongerige (753 f.Kr. – 509 f.Kr.)</string>
 	<string name="poi_historic_period_dominate">Historiskperiode: Dominatet (285 e.Kr. – 476 e.Kr)</string>
-	<string name="poi_historic_period_villager">Historiskperiode: landsbybeboer (epoke I, II, 1580 f.Kr. - 133 e.Kr.)</string>
-	<string name="poi_historic_period_urban">Historiskperiode: urban (epoke III, 133 e.Kr. - 374 e.Kr.)</string>
+	<string name="poi_historic_period_villager">Historiskperiode: landsbyboere (epoke I, II, 1580 f.Kr. - 133 e.Kr.)</string>
+	<string name="poi_historic_period_urban">Historiskperiode: bymæssig (epoke III, 133 e.Kr. - 374 e.Kr.)</string>
 	<string name="poi_historic_period_classical">Historiskperiode: klassisk (epoke IV, 374 e.Kr. - 900 e.Kr.)</string>
 	<string name="poi_historic_period_imperial">Historiskperiode: imperial (epoke V, 900 e.Kr. - 1200 e.Kr.)</string>
+
+<string name="poi_tourism_yes">Turistmæssige objekt</string>
+	<string name="poi_historic_era_paleolithic">Historisk æra: Palæolitisk (2,6 millioner år-10000 BP)</string>
+	<string name="poi_historic_era_mesolithic">Historisk æra: Mesolitikum</string>
+	<string name="poi_historic_era_neolithic">Historisk æra: neolitiske</string>
+	<string name="poi_historic_era_chalcolithic">Historisk æra: kalkolitiske (IV-III årtusinde f.Kr.)</string>
+
+	<string name="poi_historic_stone">Historisk sten</string>
+	<string name="poi_stone_type_conciliation_cross">Type: forlig cross</string>
+	<string name="poi_stone_type_coat_of_arms">Type: coat of arms</string>
+
+	<string name="poi_material_wood">Materiale: træ</string>
+	<string name="poi_material_metal">Materiale: metal</string>
+	<string name="poi_material_reinforced_concrete">Materiale: armeret beton</string>
+	<string name="poi_material_concrete">Materiale: beton</string>
+	<string name="poi_material_steel">Materiale: stål</string>
+	<string name="poi_material_stone">Materiale: sten</string>
+	<string name="poi_material_masonry">Materiale: murværk</string>
+	<string name="poi_material_brick">Materiale: mursten</string>
+	<string name="poi_material_plastic">Materiale: plastik</string>
+	<string name="poi_material_sandstone">Materiale: sandsten</string>
+	<string name="poi_material_granite_stone">Materiale: granitsten</string>
+	<string name="poi_material_metal_wood">Materiale: metal, træ</string>
+	<string name="poi_material_glass">Materiale: glas</string>
+	<string name="poi_material_bronze">Materiale: bronze</string>
+	<string name="poi_material_earth">Materiale: jord</string>
+	<string name="poi_material_composite">Materiale: composit</string>
+	<string name="poi_material_limestone">Materiale: kalksten</string>
+	<string name="poi_material_marble">Materiale: marmor</string>
+	<string name="poi_material_aluminium">Materiale: aluminium</string>
+
+	<string name="poi_site_type_megalith">Type: megalith</string>
+	<string name="poi_site_type_tumulus">Type: gravhøj</string>
+	<string name="poi_site_type_fortification">Type: befæstning</string>
+	<string name="poi_site_type_settlement">Type: afregning</string>
+	<string name="poi_site_type_city">Type: by</string>
+	<string name="poi_site_type_hut_circle">Type: hyttecirkel</string>
+	<string name="poi_site_type_necropolis">Type: necropolis</string>
+	<string name="poi_site_type_petroglyph">Type: petroglyph</string>
+	<string name="poi_site_type_earthwork">Type: jordvold</string>
+	<string name="poi_megalith_type_menhir">Megalith type: bautasten</string>
+	<string name="poi_megalith_type_dolmen">Megalith type: dolmen</string>
+	<string name="poi_megalith_type_nuraghe">Megalith type: nuraghe</string>
+	<string name="poi_megalith_type_stone_circle">Megalith type: sten cirkel</string>
+	<string name="poi_megalith_type_passage_grave">Megalith type: jættestue</string>
+	<string name="poi_fortification_type_hill_fort">Befæstning type: hill fort</string>
+	<string name="poi_fortification_type_limes">Befæstning type: kalk</string>
+	<string name="poi_fortification_type_sconce">Befæstning type: sconce</string>
+	<string name="poi_fortification_type_ring_ditch">Befæstning type: ring grøft</string>
+
+	<string name="poi_pa">Pa (maori befæstet bosættelse)</string>
+
+	<string name="poi_historic_farm">Historisk gård</string>
+	<string name="poi_historic_railway_station">Historisk jernbanestation</string>
 
 </resources>

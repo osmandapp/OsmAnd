@@ -22,6 +22,11 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	}
 
 	@Override
+	protected boolean needBuildPlainMenuItems() {
+		return false;
+	}
+
+	@Override
 	public void build(View view) {
 		super.build(view);
 
@@ -29,8 +34,6 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 			buildRow(view, R.drawable.ic_action_note_dark, fav.getDescription(), 0);
 		}
 
-		for (PlainMenuItem item : plainMenuItems) {
-			buildRow(view, item.getIconId(), item.getText(), 0);
-		}
+		buildPlainMenuItems(view);
 	}
 }
