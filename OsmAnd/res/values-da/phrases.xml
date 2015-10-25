@@ -2331,14 +2331,14 @@
 	<string name="poi_historic_period_imperial">Historiskperiode: imperial (epoke V, 900 e.Kr. - 1200 e.Kr.)</string>
 
 <string name="poi_tourism_yes">Turistmæssige objekt</string>
-	<string name="poi_historic_era_paleolithic">Historisk æra: Palæolitisk (2,6 millioner år-10000 BP)</string>
-	<string name="poi_historic_era_mesolithic">Historisk æra: Mesolitikum</string>
-	<string name="poi_historic_era_neolithic">Historisk æra: neolitiske</string>
-	<string name="poi_historic_era_chalcolithic">Historisk æra: kalkolitiske (IV-III årtusinde f.Kr.)</string>
+	<string name="poi_historic_era_paleolithic">Historisk æra: ældste stenalder (2,6 millioner år - 10.000 f.Kr.)</string>
+	<string name="poi_historic_era_mesolithic">Historisk æra: ældre stenalder</string>
+	<string name="poi_historic_era_neolithic">"Historisk æra:  yngre stenalder"</string>
+	<string name="poi_historic_era_chalcolithic">Historisk æra: kobberalderen (IV-III årtusinde f.Kr.)</string>
 
 	<string name="poi_historic_stone">Historisk sten</string>
-	<string name="poi_stone_type_conciliation_cross">Type: forlig cross</string>
-	<string name="poi_stone_type_coat_of_arms">Type: coat of arms</string>
+	<string name="poi_stone_type_conciliation_cross">Type: stenkors</string>
+	<string name="poi_stone_type_coat_of_arms">Type: våbenskjold</string>
 
 	<string name="poi_material_wood">Materiale: træ</string>
 	<string name="poi_material_metal">Materiale: metal</string>
@@ -2360,20 +2360,20 @@
 	<string name="poi_material_marble">Materiale: marmor</string>
 	<string name="poi_material_aluminium">Materiale: aluminium</string>
 
-	<string name="poi_site_type_megalith">Type: megalith</string>
+	<string name="poi_site_type_megalith">Type: megalit</string>
 	<string name="poi_site_type_tumulus">Type: gravhøj</string>
 	<string name="poi_site_type_fortification">Type: befæstning</string>
-	<string name="poi_site_type_settlement">Type: afregning</string>
+	<string name="poi_site_type_settlement">Type: bebyggelse</string>
 	<string name="poi_site_type_city">Type: by</string>
 	<string name="poi_site_type_hut_circle">Type: hyttecirkel</string>
-	<string name="poi_site_type_necropolis">Type: necropolis</string>
-	<string name="poi_site_type_petroglyph">Type: petroglyph</string>
+	<string name="poi_site_type_necropolis">Type: nekropol</string>
+	<string name="poi_site_type_petroglyph">Type: helleristning</string>
 	<string name="poi_site_type_earthwork">Type: jordvold</string>
-	<string name="poi_megalith_type_menhir">Megalith type: bautasten</string>
-	<string name="poi_megalith_type_dolmen">Megalith type: dolmen</string>
-	<string name="poi_megalith_type_nuraghe">Megalith type: nuraghe</string>
-	<string name="poi_megalith_type_stone_circle">Megalith type: sten cirkel</string>
-	<string name="poi_megalith_type_passage_grave">Megalith type: jættestue</string>
+	<string name="poi_megalith_type_menhir">Megalit type: bautasten</string>
+	<string name="poi_megalith_type_dolmen">Megalit type: dysse</string>
+	<string name="poi_megalith_type_nuraghe">Megalit type: nuragh</string>
+	<string name="poi_megalith_type_stone_circle">Megalit type: stenkreds</string>
+	<string name="poi_megalith_type_passage_grave">Megalit type: jættestue</string>
 	<string name="poi_fortification_type_hill_fort">Befæstning type: hill fort</string>
 	<string name="poi_fortification_type_limes">Befæstning type: kalk</string>
 	<string name="poi_fortification_type_sconce">Befæstning type: sconce</string>
