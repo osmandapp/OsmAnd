@@ -95,6 +95,11 @@ public class ObjectSelectionMenu extends BaseMenuController {
 		return objects;
 	}
 
+	@Override
+	public float getHalfScreenMaxHeightKoef() {
+		return 0.5f;
+	}
+
 	private void createCollection(Map<Object, IContextMenuProvider> selectedObjects) {
 		this.selectedObjects.putAll(selectedObjects);
 		for (Map.Entry<Object, IContextMenuProvider> e : selectedObjects.entrySet()) {
