@@ -78,7 +78,7 @@
 	<string name="poi_baby_goods">Baby goods</string>
 	<string name="poi_bag">Bag shop</string>
 	<string name="poi_bathroom_furnishing">Bathroom furnishings</string>
-	<string name="poi_bed">Bed room furnishings</string>
+	<string name="poi_bed">Bedding store</string>
 	<string name="poi_boutique">Fashion boutique</string>
 	<string name="poi_camera">Cameras and lenses</string>
 	<string name="poi_carpet">Carpet shop</string>
@@ -92,7 +92,7 @@
 	<string name="poi_copyshop">Copy shop</string>
 	<string name="poi_curtain">Curtain shop</string>
 	<string name="poi_fabric">Drapery shop</string>
-	<string name="poi_bedding">Bedding store</string>
+<!--	<string name="poi_bedding">Bedding store</string>-->
 	<string name="poi_dive">Diving equipment</string>
 	<string name="poi_doityourself">Home improvement store</string>
 	<string name="poi_doors">Doors</string>
@@ -606,8 +606,8 @@
 	<string name="poi_theme_park">Theme park</string>
 
 	<string name="poi_attraction">Tourist attraction</string>
-	<string name="poi_tourism_attraction">Tourist attraction</string>
-	<string name="poi_general_tourist_attraction_yes">General tourist attraction</string>
+<!--	<string name="poi_tourism_attraction">Tourist attraction</string>-->
+	<string name="poi_tourism_yes">Touristic object</string>
 	<string name="poi_attraction_amusement_ride">Amusement ride</string>
 	<string name="poi_attraction_animal">Animal (attraction)</string>
 	<string name="poi_attraction_big_wheel">Ferris wheel</string>
@@ -723,7 +723,7 @@
 	<string name="poi_internet_access_no">Internet access: no</string>
 
 	<string name="poi_monastery">Monastery</string>
-	<string name="poi_historic_monastery">Historic monastery</string>
+<!--	<string name="poi_historic_monastery">Historic monastery</string>-->
 	<string name="poi_religious">Religious area</string>
 	<string name="poi_wayside_cross">Wayside cross</string>
 	<string name="poi_wayside_shrine">Wayside shrine</string>
@@ -2283,5 +2283,58 @@
 	<string name="poi_historic_period_urban">Historic period: urban (epoch III, 133 AC – 374 AC)</string>
 	<string name="poi_historic_period_classical">Historic period: classical (epoch IV, 374 AC – 900 AC)</string>
 	<string name="poi_historic_period_imperial">Historic period: imperial (epoch V, 900 AC – 1200 AC)</string>
+
+	<string name="poi_historic_era_paleolithic">Historic era: paleolithic (2.6 million years – 10000 BP)</string>
+	<string name="poi_historic_era_mesolithic">Historic era: mesolithic</string>
+	<string name="poi_historic_era_neolithic">Historic era: neolithic</string>
+	<string name="poi_historic_era_chalcolithic">Historic era: chalcolithic (IV-III millennium BC.)</string>
+
+	<string name="poi_historic_stone">Historic stone</string>
+	<string name="poi_stone_type_conciliation_cross">Type: conciliation cross</string>
+	<string name="poi_stone_type_coat_of_arms">Type: coat of arms</string>
+
+	<string name="poi_material_wood">Material: wood</string>
+	<string name="poi_material_metal">Material: metal</string>
+	<string name="poi_material_reinforced_concrete">Material: reinforced concrete</string>
+	<string name="poi_material_concrete">Material: concrete</string>
+	<string name="poi_material_steel">Material: steel</string>
+	<string name="poi_material_stone">Material: stone</string>
+	<string name="poi_material_masonry">Material: masonry</string>
+	<string name="poi_material_brick">Material: brick</string>
+	<string name="poi_material_plastic">Material: plastic</string>
+	<string name="poi_material_sandstone">Material: sandstone</string>
+	<string name="poi_material_granite_stone">Material: granite stone</string>
+	<string name="poi_material_metal_wood">Material: metal;wood</string>
+	<string name="poi_material_glass">Material: glass</string>
+	<string name="poi_material_bronze">Material: bronze</string>
+	<string name="poi_material_earth">Material: earth</string>
+	<string name="poi_material_composite">Material: composite</string>
+	<string name="poi_material_limestone">Material: limestone</string>
+	<string name="poi_material_marble">Material: marble</string>
+	<string name="poi_material_aluminium">Material: aluminium</string>
+
+	<string name="poi_site_type_megalith">Type: megalith</string>
+	<string name="poi_site_type_tumulus">Type: tumulus</string>
+	<string name="poi_site_type_fortification">Type: fortification</string>
+	<string name="poi_site_type_settlement">Type: settlement</string>
+	<string name="poi_site_type_city">Type: city</string>
+	<string name="poi_site_type_hut_circle">Type: hut circle</string>
+	<string name="poi_site_type_necropolis">Type: necropolis</string>
+	<string name="poi_site_type_petroglyph">Type: petroglyph</string>
+	<string name="poi_site_type_earthwork">Type: earthwork</string>
+	<string name="poi_megalith_type_menhir">Megalith type: menhir</string>
+	<string name="poi_megalith_type_dolmen">Megalith type: dolmen</string>
+	<string name="poi_megalith_type_nuraghe">Megalith type: nuraghe</string>
+	<string name="poi_megalith_type_stone_circle">Megalith type: stone circle</string>
+	<string name="poi_megalith_type_passage_grave">Megalith type: passage grave</string>
+	<string name="poi_fortification_type_hill_fort">Fortification type: hill fort</string>
+	<string name="poi_fortification_type_limes">Fortification type: limes</string>
+	<string name="poi_fortification_type_sconce">Fortification type: sconce</string>
+	<string name="poi_fortification_type_ring_ditch">Fortification type: ring ditch</string>
+
+	<string name="poi_pa">Pa (maori fortified settlement)</string>
+
+	<string name="poi_historic_farm">Historic farm</string>
+	<string name="poi_historic_railway_station">Historic railway station</string>
 
 </resources>

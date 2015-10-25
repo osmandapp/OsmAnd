@@ -44,7 +44,7 @@
 	<string name="poi_copyshop">Ксерокопия, полиграфия</string>
 	<string name="poi_curtain">Шторы, портьеры</string>
 	<string name="poi_fabric">Ткани</string>
-	<string name="poi_bedding">Постельное бельё</string>
+<!--	<string name="poi_bedding">Постельное бельё</string>-->
 	<string name="poi_dive">Снаряжение для дайвинга</string>
 	<string name="poi_doityourself">Инструменты и стройматериалы</string>
 	<string name="poi_doors">Двери</string>
@@ -863,7 +863,7 @@
 	<string name="poi_residential">Жилой район</string>
 	<string name="poi_religious">Религиозное землепользование</string>
 
-	<string name="poi_general_tourist_attraction_yes">Достопримечательность (тип неизвестен)</string>
+<!--	<string name="poi_general_tourist_attraction_yes">Достопримечательность (тип неизвестен)</string>-->
 	<string name="poi_attraction_amusement_ride">Парк атракционов</string>
 	<string name="poi_wilderness_hut">Лесной домик</string>
 	<string name="poi_hunting_lodge">Охотничий домик</string>
@@ -2277,5 +2277,60 @@
 	<string name="poi_historic_period_urban">Исторический период: городской (период III, 133 – 374 г. н.э.)</string>
 	<string name="poi_historic_period_classical">Исторический период: классический (период IV, 374 – 900 г. н.э.)</string>
 	<string name="poi_historic_period_imperial">Исторический период: имперский (период V, 900 – 1200 г. н.э.)</string>
+
+	<string name="poi_historic_era_paleolithic">Эра: палеолит (2.6 млн. лет до н.э. – 10000 лет до н.э.)</string>
+	<string name="poi_historic_era_mesolithic">Эра: мезолит</string>
+	<string name="poi_historic_era_neolithic">Эра: неолит</string>
+	<string name="poi_historic_era_chalcolithic">Эра: халколит (медный век) (IV—III тысячелетия до н.э.)</string>
+
+	<string name="poi_historic_stone">Исторический камень</string>
+	<string name="poi_stone_type_conciliation_cross">Тип: примирительный крест</string>
+	<string name="poi_stone_type_coat_of_arms">Тип: герб</string>
+
+	<string name="poi_material_wood">Материал: дерево</string>
+	<string name="poi_material_metal">Материал: металл</string>
+	<string name="poi_material_reinforced_concrete">Материал: железобетон</string>
+	<string name="poi_material_concrete">Материал: бетон</string>
+	<string name="poi_material_steel">Материал: сталь</string>
+	<string name="poi_material_stone">Материал: камень</string>
+	<string name="poi_material_masonry">Материал: каменная кладка</string>
+	<string name="poi_material_brick">Материал: кирпич</string>
+	<string name="poi_material_plastic">Материал: пластик</string>
+	<string name="poi_material_sandstone">Материал: песчаник</string>
+	<string name="poi_material_granite_stone">Материал: гранит</string>
+	<string name="poi_material_metal_wood">Материал: металл, дерево</string>
+	<string name="poi_material_glass">Материал: стекло</string>
+	<string name="poi_material_bronze">Материал: бронза</string>
+	<string name="poi_material_earth">Материал: земля</string>
+	<string name="poi_material_composite">Материал: составной</string>
+	<string name="poi_material_limestone">Материал: известняк</string>
+	<string name="poi_material_marble">Материал: мрамор</string>
+	<string name="poi_material_aluminium">Материал: алюминий</string>
+
+	<string name="poi_site_type_megalith">Тип: мегалит</string>
+	<string name="poi_site_type_tumulus">Тип: тумулус</string>
+	<string name="poi_site_type_fortification">Тип: укрепление</string>
+	<string name="poi_site_type_settlement">Тип: поселение</string>
+	<string name="poi_site_type_city">Тип: город</string>
+	<string name="poi_site_type_hut_circle">Тип: круг из хижин</string>
+	<string name="poi_site_type_necropolis">Тип: некрополь</string>
+	<string name="poi_site_type_petroglyph">Тип: петроглиф</string>
+	<string name="poi_site_type_earthwork">Тип: земляное укрепление</string>
+	<string name="poi_megalith_type_menhir">Тип мегалита: менгир</string>
+	<string name="poi_megalith_type_dolmen">Тип мегалита: дольмен</string>
+	<string name="poi_megalith_type_nuraghe">Тип мегалита: нураги</string>
+	<string name="poi_megalith_type_stone_circle">Тип мегалита: каменный круг</string>
+	<string name="poi_megalith_type_passage_grave">Тип мегалита: коридорная гробница</string>
+	<string name="poi_fortification_type_hill_fort">Тип укрепления: городище</string>
+	<string name="poi_fortification_type_limes">Тип укрепления: лимес</string>
+	<string name="poi_fortification_type_sconce">Тип укрепления: шанец</string>
+	<string name="poi_fortification_type_ring_ditch">Тип укрепления: рондела (кольцевая канава)</string>
+
+	<string name="poi_pa">Па (укреплённое поселение маори)</string>
+
+	<string name="poi_historic_farm">Историческая ферма</string>
+	<string name="poi_historic_railway_station">Историческая железнодорожная станция</string>
+
+	<string name="poi_tourism_yes">Туристический объект</string>
 
 </resources>
