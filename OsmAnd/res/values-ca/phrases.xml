@@ -1427,4 +1427,5 @@
 	<string name="poi_toll_yes">Peatge</string>
 	<string name="poi_toll_no">Sense peatge</string>
 	<string name="poi_toll_hgv_yes">Peatge de vehicles pesants</string>
+	<string name="poi_tactile_paving_yes">Amb paviment tàctil</string>
 	</resources>
