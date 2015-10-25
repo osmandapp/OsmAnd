@@ -77,6 +77,13 @@ public class OsmandRegions {
 		Integer metricType = null;
 		Integer leftHandDrivingType = null;
 		Integer roadSignsType = null;
+		
+		public String get(Integer tp, BinaryMapDataObject object) {
+			if(tp == null) {
+				return null;
+			}
+			return object.getNameByType(tp);
+		}
 	}
 
 
@@ -95,32 +102,20 @@ public class OsmandRegions {
 		final String lc = downloadName.toLowerCase();
 		if (downloadNamesToFullNames.containsKey(lc)) {
 			String fullName = downloadNamesToFullNames.get(lc);
-			if (includingParent) {
-				if (fullNamesToLocaleNames.containsKey(fullName)) {
-					return fullNamesToLocaleNames.get(fullName);
-				}
-			} else {
-				if (fullNamesNoParentToLocaleNames.containsKey(fullName)) {
-					return fullNamesNoParentToLocaleNames.get(fullName);
-				}
-			}
+			return getLocaleNameByFullName(fullName, includingParent);
 		}
 		return downloadName.replace('_', ' ');
 	}
 
 	public String getLocaleNameByFullName(String fullName, boolean includingParent) {
-		if (includingParent) {
-			if (fullNamesToLocaleNames.containsKey(fullName)) {
-				return fullNamesToLocaleNames.get(fullName);
-			} else {
-				return fullName.replace('_', ' ');
-			}
+		RegionData rd = fullNamesToRegionData.get(fullName);
+		if(rd == null) {
+			return fullName.replace('_', ' ');
+		}
+		if (includingParent && rd.parent != null) {
+			return rd.parent.getLocaleName() + " " + rd.getLocaleName();
 		} else {
-			if (fullNamesNoParentToLocaleNames.containsKey(fullName)) {
-				return fullNamesNoParentToLocaleNames.get(fullName);
-			} else {
-				return fullName.replace('_', ' ');
-			}
+			return rd.getLocaleName();
 		}
 	}
 
@@ -138,47 +133,11 @@ public class OsmandRegions {
 		return null;
 	}
 	
-	public String getLocaleName(BinaryMapDataObject object) {
-		String locName = "";
-		if(locName == null || locName.length() == 0){
-			if(nameLocaleType != null) {
-				locName = object.getNameByType(nameLocaleType);
-			}
-		}
-		if(locName == null || locName.length() == 0){
-			if(nameEnType != null) {
-				locName = object.getNameByType(nameEnType);
-			}
-		}
-		if(locName == null || locName.length() == 0){
-			if(nameType != null) {
-				locName = object.getNameByType(nameType);
-			}
-		}
-		return locName;
-	}
-
-	public String getParentFullName(BinaryMapDataObject o) {
-		if(parentFullName == null) {
-			return null;
-		}
-		return o.getNameByType(parentFullName);
-	}
-
 	
-	
-	public String getFullName(BinaryMapDataObject o) {
-		if(fullNameType == null) {
-			return null;
-		}
-		return o.getNameByType(fullNameType);
-	}
 
 	public boolean isInitialized(){
 		return reader != null;
 	}
-
-
 
 	public boolean contain(BinaryMapDataObject bo, int tx, int ty) {
 		int t = 0;
@@ -365,54 +324,27 @@ public class OsmandRegions {
 						return false;
 					}
 				}
-				String parentFullName = getParentFullName(object);
-				String fullName = getFullName(object);
-				if(!Algorithms.isEmpty(parentFullName)) {
-					fullNamesToParentFullNames.put(fullName, parentFullName);
-					parentRelations.put(fullName, parentFullName);
+				RegionData rd = new RegionData();
+				rd.downloadsId = mapIndexFields.get(mapIndexFields.downloadNameType, object);
+				rd.regionFullName = mapIndexFields.get(mapIndexFields.fullNameType, object);
+				rd.regionParentFullName = mapIndexFields.get(mapIndexFields.parentFullName, object);
+				if(!Algorithms.isEmpty(rd.regionParentFullName)) {
+					parentRelations.put(rd.regionFullName, rd.regionParentFullName);
 				}				
-				String locName = getLocaleName(object);
-				if(!Algorithms.isEmpty(locName)){
-					fullNamesToLocaleNames.put(fullName, locName);
-					fullNamesNoParentToLocaleNames.put(fullName, locName);
-				}
+				rd.regionName = mapIndexFields.get(mapIndexFields.nameType, object);
+				rd.regionNameLocale = mapIndexFields.get(mapIndexFields.nameLocaleType, object);
+				rd.regionNameEn = mapIndexFields.get(mapIndexFields.nameEnType, object);
+				rd.regionLang = mapIndexFields.get(mapIndexFields.langType, object);
+				rd.regionLeftHandDriving = mapIndexFields.get(mapIndexFields.leftHandDrivingType, object);
+				rd.regionMetric = mapIndexFields.get(mapIndexFields.metricType, object);
+				rd.regionRoadSigns = mapIndexFields.get(mapIndexFields.roadSignsType, object);
 
-				String lang = getLang(object);
-				if(!Algorithms.isEmpty(lang)){
-					fullNamesToLangs.put(fullName, lang);
-				}
-				String metric = getMetric(object);
-				if(!Algorithms.isEmpty(metric)){
-					fullNamesToMetrics.put(fullName, metric);
-				}
-				String leftHandDriving = getLeftHandDriving(object);
-				if(!Algorithms.isEmpty(leftHandDriving)){
-					fullNamesToLeftHandDrivings.put(fullName, leftHandDriving);
-				}
 				String roadSigns = getRoadSigns(object);
 				if(!Algorithms.isEmpty(roadSigns)){
 					fullNamesToRoadSigns.put(fullName, roadSigns);
 				}
 
-				MapIndex mi = object.getMapIndex();
-				TIntObjectIterator<String> it = object.getObjectNames().iterator();
-				StringBuilder ind = new StringBuilder();
-				while(it.hasNext()) {
-					it.advance();
-					TagValuePair tp = mi.decodeType(it.key());
-					if (tp.tag.equals("key_name") && Algorithms.isEmpty(locName)) {
-						String str = Algorithms.capitalizeFirstLetterAndLowercase(it.value().replace('_', '-'));
-						fullNamesToLocaleNames.put(fullName, str);
-						fullNamesNoParentToLocaleNames.put(fullName, str);
-					}
-					if(tp.tag.startsWith("name") || tp.tag.equals("key_name")) {
-						final String vl = it.value().toLowerCase();
-//						if (!CollatorStringMatcher.ccontains(clt, ind.toString(), vl)) {
-						if(ind.indexOf(vl) == -1) {
-							ind.append(" ").append(vl);
-						}
-					}	
-				}
+				rd.searchText = getSearchIndex(object);
 				fullNamesToLowercaseIndex.put(fullName, ind.toString());
 				String downloadName = getDownloadName(object);
 				if(downloadName != null) {
@@ -423,6 +355,25 @@ public class OsmandRegions {
 					}
 				}
 				return false;
+			}
+
+
+			private String getSearchIndex(BinaryMapDataObject object) {
+				MapIndex mi = object.getMapIndex();
+				TIntObjectIterator<String> it = object.getObjectNames().iterator();
+				StringBuilder ind = new StringBuilder();
+				while(it.hasNext()) {
+					it.advance();
+					TagValuePair tp = mi.decodeType(it.key());
+					if(tp.tag.startsWith("name") || tp.tag.equals("key_name")) {
+						final String vl = it.value().toLowerCase();
+//						if (!CollatorStringMatcher.ccontains(clt, ind.toString(), vl)) {
+						if(ind.indexOf(vl) == -1) {
+							ind.append(" ").append(vl);
+						}
+					}	
+				}
+				return ind.toString();
 			}
 
 
@@ -458,6 +409,7 @@ public class OsmandRegions {
 		
 	}
 	
+
 	private boolean isDownloadOfType(BinaryMapDataObject object, String type) {
 		int[] addtypes = object.getAdditionalTypes();
 		for(int i = 0; i < addtypes.length; i++) {
@@ -601,11 +553,34 @@ public class OsmandRegions {
 
 
 	public static class RegionData {
+		// filled by osmand regions
+		protected RegionData parent = null;
+		protected String regionLeftHandDriving;
+		protected String regionLang;
+		protected String regionMetric;
+		protected String regionRoadSigns;
+		protected String regionFullName;
+		protected String regionParentFullName;
+		protected String regionName;
+		protected String regionNameEn;
+		protected String regionNameLocale;
+		
+		///
 		String regionId;
 		private String downloadsId;
 		private String name;
 		private String searchText;
 		private LatLon center;
+		
+		public String getLocaleName() {
+			if(!Algorithms.isEmpty(regionNameLocale)) {
+				return regionNameLocale;
+			}
+			if(!Algorithms.isEmpty(regionNameEn)) {
+				return regionNameEn;
+			}
+			return regionName;
+		}
 		
 		public LatLon getCenter() {
 			return center;
