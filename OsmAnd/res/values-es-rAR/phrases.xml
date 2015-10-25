@@ -2275,8 +2275,8 @@
 
 	<string name="poi_historic_period_nuragic">Período histórico: Nurágico</string>
 	<string name="poi_historic_period_stone_bronze_undetermined">Período histórico: Edad de piedra/bronce (indeterminado)</string>
-	<string name="poi_historic_period_bronze_age">Período histórico: edad de bronce</string>
-	<string name="poi_historic_period_principate">Período histórico: principado (27 aC – 284 dC)</string>
+	<string name="poi_historic_period_bronze_age">Período histórico: Edad de bronce</string>
+	<string name="poi_historic_period_principate">Período histórico: Principado (27 aC – 284 dC)</string>
 	<string name="poi_historic_period_classical_greece">Período histórico: Grecia clásica (siglos 5 – 4 aC)</string>
 	<string name="poi_historic_period_archaic_greece">Período histórico: Grecia arcaica</string>
 	<string name="poi_historic_period_iron_age">Período histórico: Edad de hierro</string>
@@ -2302,9 +2302,9 @@
 	<string name="poi_historic_period_roman_greece">Período histórico: Romanos Griegos (146 aC – 330 dC)</string>
 	<string name="poi_historic_period_roman_kingdom">Período histórico: Reino romano (753 aC – 509 dC)</string>
 	<string name="poi_historic_period_dominate">Período histórico: Dominado (285 – 476 dC)</string>
-	<string name="poi_historic_period_villager">Período histórico: aldeanos (epoca I, II, 1580 aC – 133 dC)</string>
-	<string name="poi_historic_period_urban">Período histórico: urbana (epoca III, 133 dC – 374 dC)</string>
-	<string name="poi_historic_period_classical">Período histórico: clásica (epoch IV, 374 dC – 900 dC)</string>
-	<string name="poi_historic_period_imperial">Período histórico: imperial (epoch V, 900 dC – 1200 dC)</string>
+	<string name="poi_historic_period_villager">Período histórico: Aldeanos (época I, II, 1580 aC – 133 dC)</string>
+	<string name="poi_historic_period_urban">Período histórico: Urbana (época III, 133 dC – 374 dC)</string>
+	<string name="poi_historic_period_classical">Período histórico: Clásica (época IV, 374 dC – 900 dC)</string>
+	<string name="poi_historic_period_imperial">Período histórico: Imperial (época V, 900 dC – 1200 dC)</string>
 
 </resources>
