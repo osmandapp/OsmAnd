@@ -213,7 +213,7 @@ public class DownloadActivity extends ActionBarProgressActivity implements Downl
 	public void downloadHasFinished() {
 		visibleBanner.updateBannerInProgress();
 		if(downloadItem != null && !WorldRegion.WORLD_BASEMAP.equals(downloadItem.getRegionDownloadNameLC())) {
-			boolean firstMap = getMyApplication().getSettings().FIRST_MAP_IS_DOWNLOADED.get();
+			boolean firstMap = !getMyApplication().getSettings().FIRST_MAP_IS_DOWNLOADED.get();
 			if(firstMap) {
 				initSettingsFirstMap(downloadItem);
 			}
@@ -499,7 +499,7 @@ public class DownloadActivity extends ActionBarProgressActivity implements Downl
 	
 	private void initSettingsFirstMap(WorldRegion reg) {
 		// TODO test set correctly (4 tests): when you download first Australia, Japan, Luxembourgh, US  
-		getMyApplication().getSettings().FIRST_MAP_IS_DOWNLOADED.set(false);
+		getMyApplication().getSettings().FIRST_MAP_IS_DOWNLOADED.set(true);
 		DrivingRegion drg = null;
 		boolean americanSigns = "american".equals(reg.getRegionRoadSigns());
 		boolean leftHand = "yes".equals(reg.getRegionLeftHandDriving());

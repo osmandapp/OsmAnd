@@ -67,6 +67,7 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		@Override
 			public boolean onPreferenceClick(Preference preference) {
 				getMyApplication().getAppInitializer().resetFirstTimeRun();
+				getMyApplication().getSettings().FIRST_MAP_IS_DOWNLOADED.set(false);
 				getMyApplication().showToastMessage(R.string.shared_string_ok);
 				return true;
 			}
