@@ -521,16 +521,4 @@ public class DownloadActivity extends ActionBarProgressActivity implements Downl
 
 		messageTextView.setText(R.string.device_memory);
 	}
-
-
-	private void initSettingsIfFirstMap(IndexItem item) {
-		OsmandSettings.CommonPreference<Boolean> isFirstMapDownloadedPreference =
-				getMyApplication().getSettings()
-				.registerBooleanPreference(FIRST_MAP_DOWNLOADED, false).makeGlobal();
-		boolean wasFirstMapDownloaded = isFirstMapDownloadedPreference.get();
-		if (!wasFirstMapDownloaded) {
-//			item.ge
-			isFirstMapDownloadedPreference.set(true);
-		}
-	}
 }

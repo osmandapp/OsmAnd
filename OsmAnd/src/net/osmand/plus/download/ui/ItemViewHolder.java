@@ -1,23 +1,5 @@
 package net.osmand.plus.download.ui;
 
-import java.io.File;
-import java.text.DateFormat;
-
-import net.osmand.access.AccessibleToast;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.R;
-import net.osmand.plus.Version;
-import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
-import net.osmand.plus.activities.LocalIndexInfo;
-import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.download.DownloadActivityType;
-import net.osmand.plus.download.DownloadResourceGroup;
-import net.osmand.plus.download.DownloadResources;
-import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.download.ui.LocalIndexesFragment.LocalIndexOperationTask;
-import net.osmand.plus.helpers.FileNameTranslationHelper;
-import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
-import net.osmand.plus.srtmplugin.SRTMPlugin;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
@@ -37,6 +19,26 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import net.osmand.access.AccessibleToast;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.Version;
+import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
+import net.osmand.plus.activities.LocalIndexInfo;
+import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.download.DownloadActivityType;
+import net.osmand.plus.download.DownloadResourceGroup;
+import net.osmand.plus.download.DownloadResources;
+import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.download.ui.LocalIndexesFragment.LocalIndexOperationTask;
+import net.osmand.plus.helpers.FileNameTranslationHelper;
+import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
+import net.osmand.plus.srtmplugin.SRTMPlugin;
+
+import java.io.File;
+import java.text.DateFormat;
+
 public class ItemViewHolder {
 
 	protected final TextView nameTextView;
@@ -45,6 +47,7 @@ public class ItemViewHolder {
 	protected final ImageView rightImageButton;
 	protected final Button rightButton;
 	protected final ProgressBar progressBar;
+	private final OsmandSettings.CommonPreference<Boolean> isFirstMapDownloadedPreference;
 
 	private boolean srtmDisabled;
 	private boolean srtmNeedsInstallation;
@@ -64,7 +67,6 @@ public class ItemViewHolder {
 	
 	private DateFormat dateFormat;
 
-	
 
 	private enum RightButtonAction {
 		DOWNLOAD,
@@ -92,6 +94,9 @@ public class ItemViewHolder {
 		textColorPrimary = typedValue.data;
 		theme.resolveAttribute(android.R.attr.textColorSecondary, typedValue, true);
 		textColorSecondary = typedValue.data;
+
+		isFirstMapDownloadedPreference = context.getMyApplication().getSettings()
+				.registerBooleanPreference(DownloadActivity.FIRST_MAP_DOWNLOADED, false).makeGlobal();
 	}
 	
 	public void setShowRemoteDate(boolean showRemoteDate) {
