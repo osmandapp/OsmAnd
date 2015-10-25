@@ -119,14 +119,9 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		super.build(view);
 
 		boolean hasWiki = false;
-
-		for (PlainMenuItem item : plainMenuItems) {
-			buildRow(view, item.getIconId(), item.getText(), 0, false);
-		}
-
 		MapPoiTypes poiTypes = app.getPoiTypes();
 		for (Map.Entry<String, String> e : amenity.getAdditionalInfo().entrySet()) {
-			int iconId = 0;
+			int iconId;
 			Drawable icon = null;
 			int textColor = 0;
 			boolean isWiki = false;

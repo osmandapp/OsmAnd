@@ -3,6 +3,7 @@ package net.osmand.plus.mapcontextmenu.details;
 import android.os.Bundle;
 
 import net.osmand.data.Amenity;
+import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
@@ -74,14 +75,11 @@ public class AmenityMenuController extends MenuController {
 	}
 
 	@Override
-	public void addPlainMenuItems(String typeStr, PointDescription pointDescription) {
+	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, LatLon latLon) {
 		if (!Algorithms.isEmpty(typeStr)) {
 			addPlainMenuItem(R.drawable.ic_action_info_dark, typeStr);
 		}
-		if (pointDescription != null) {
-			addPlainMenuItem(R.drawable.map_my_location, PointDescription.getLocationName(getMapActivity(),
-					amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(), true).replaceAll("\n", ""));
-		}
+		addMyLocationToPlainItems(pointDescription, amenity.getLocation());
 	}
 
 	@Override
