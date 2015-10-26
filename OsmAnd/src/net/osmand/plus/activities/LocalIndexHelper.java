@@ -60,14 +60,6 @@ public class LocalIndexHelper {
 			} else {
 				info.setDescription(getInstalledDate(f));
 			}
-		} else if(info.getType() == LocalIndexType.WIKI_DATA){
-			info.setDescription(getInstalledDate(f));
-		} else if(info.getType() == LocalIndexType.SRTM_DATA){
-			info.setDescription(app.getString(R.string.download_srtm_maps));
-		} else if(info.getType() == LocalIndexType.VOICE_DATA){
-			info.setDescription(getInstalledDate(f));
-		} else if(info.getType() == LocalIndexType.TTS_VOICE_DATA){
-			info.setDescription(getInstalledDate(f));
 		} else if(info.getType() == LocalIndexType.TILES_DATA){
 			ITileSource template ;
 			if(f.isDirectory() && TileSourceManager.isTileSourceMetaInfoExist(f)){
@@ -83,6 +75,14 @@ public class LocalIndexHelper {
 				descr += "\n" + app.getString(R.string.local_index_tile_data_expire, template.getExpirationTimeMinutes());
 			}
 			info.setDescription(descr);
+		} else if(info.getType() == LocalIndexType.SRTM_DATA){
+			info.setDescription(app.getString(R.string.download_srtm_maps));
+		} else if(info.getType() == LocalIndexType.WIKI_DATA){
+			info.setDescription(getInstalledDate(f));
+		} else if(info.getType() == LocalIndexType.TTS_VOICE_DATA){
+			info.setDescription(getInstalledDate(f));
+		} else if(info.getType() == LocalIndexType.VOICE_DATA){
+			info.setDescription(getInstalledDate(f));
 		}
 	}
 
@@ -97,8 +97,8 @@ public class LocalIndexHelper {
 		loadTilesData(app.getAppPath(IndexConstants.TILES_INDEX_DIR), result, false, loadTask);
 		loadSrtmData(app.getAppPath(IndexConstants.SRTM_INDEX_DIR), result, loadTask);
 		loadWikiData(app.getAppPath(IndexConstants.WIKI_INDEX_DIR), result, loadTask);
-		loadVoiceData(app.getAppPath(IndexConstants.VOICE_INDEX_DIR), result, false, loadTask);
 		loadVoiceData(app.getAppPath(IndexConstants.TTSVOICE_INDEX_EXT_ZIP), result, true, loadTask);
+		loadVoiceData(app.getAppPath(IndexConstants.VOICE_INDEX_DIR), result, false, loadTask);
 		
 		return result;
 	}
@@ -211,8 +211,8 @@ public class LocalIndexHelper {
 		TILES_DATA(R.string.local_indexes_cat_tile),
 		SRTM_DATA(R.string.local_indexes_cat_srtm, R.drawable.ic_plugin_srtm),
 		WIKI_DATA(R.string.local_indexes_cat_wiki, R.drawable.ic_plugin_wikipedia),
-		VOICE_DATA(R.string.local_indexes_cat_voice, R.drawable.ic_action_volume_up),
 		TTS_VOICE_DATA(R.string.local_indexes_cat_tts, R.drawable.ic_action_volume_up);
+		VOICE_DATA(R.string.local_indexes_cat_voice, R.drawable.ic_action_volume_up),
 //		AV_DATA(R.string.local_indexes_cat_av);;
 
 		@StringRes
@@ -236,8 +236,5 @@ public class LocalIndexHelper {
 			return iconResource;
 		}
 	}
-	
-	
-
 
 }
