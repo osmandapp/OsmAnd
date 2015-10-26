@@ -115,7 +115,6 @@
         <item name="toolbar_theme">@style/OsmandLightTheme.Toolbar</item>
         <item name="new_app_theme">@style/OsmandLightTheme.NewAppTheme</item>
         <item name="android:textColorSecondary">@color/dashboard_black</item>
-        <item name="android:textColorHint">@color/icon_color</item>
         <item name="contextMenuButtonColor">@color/map_widget_blue</item>
 
     </style>
@@ -198,7 +197,6 @@
         <item name="toolbar_theme">@style/OsmandDarkTheme</item>
         <item name="new_app_theme">@style/OsmandDarkTheme</item>
         <item name="android:textColorSecondary">@color/map_widget_light</item>
-        <item name="android:textColorHint">@color/dash_search_icon_dark</item>
 
         <item name="contextMenuButtonColor">@color/osmand_orange</item>
     </style>
@@ -208,6 +206,7 @@
     <style name="Widget.Styled.ActionBarDark" parent="Widget.AppCompat.Light.ActionBar.Solid.Inverse">
         <item name="background">@color/actionbar_dark_color</item>
         <item name="android:background">@color/actionbar_dark_color</item>
+        <item name="elevation">0dp</item>
     </style>
 
     <style name="Widget.Styled.ActionBarLight" parent="Widget.AppCompat.Light.ActionBar.Solid">
@@ -220,6 +219,7 @@
         <item name="android:titleTextStyle">@style/Widget.Styled.LightActionBarHeader</item>
         <item name="android:subtitleTextStyle">@style/Widget.Styled.LightActionBarHeader</item>
         <item name="android:actionBarWidgetTheme">@style/Theme.AppCompat</item>
+        <item name="elevation">0dp</item>
     </style>
 
     <style name="Widget.Styled.LightActionBarHeader" parent="@android:style/TextAppearance">
