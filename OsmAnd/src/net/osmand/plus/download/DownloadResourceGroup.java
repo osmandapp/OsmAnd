@@ -34,15 +34,15 @@ public class DownloadResourceGroup {
 		HILLSHADE_HEADER(R.string.download_hillshade_maps),
 		OTHER_MAPS_HEADER(R.string.download_select_map_types),
 		// headers with voice items
-		VOICE_HEADER_REC(R.string.index_name_voice),
 		VOICE_HEADER_TTS(R.string.index_name_tts_voice),
+		VOICE_HEADER_REC(R.string.index_name_voice),
 		// headers with resources
 		OTHER_MAPS_GROUP(R.string.download_select_map_types),
 		VOICE_GROUP(R.string.voices),
 		SUBREGIONS(R.string.regions),
 		// screen items
-		VOICE_REC(R.string.index_name_voice),
 		VOICE_TTS(R.string.index_name_tts_voice),
+		VOICE_REC(R.string.index_name_voice),
 		OTHER_MAPS(R.string.download_select_map_types),
 		WORLD(-1),
 		REGION(-1);
