@@ -294,13 +294,14 @@ public class DownloadIndexesThread {
 
 		@Override
 		protected DownloadResources doInBackground(Void... params) {
-			DownloadResources result = new DownloadResources(app);
+			DownloadResources result = null;
 			DownloadOsmandIndexesHelper.IndexFileList indexFileList = DownloadOsmandIndexesHelper.getIndexesList(ctx);
 			if (indexFileList != null) {
 				try {
 					while (app.isApplicationInitializing()) {
 						Thread.sleep(200);
 					}
+					result = new DownloadResources(app);
 					result.isDownloadedFromInternet = indexFileList.isDownloadedFromInternet();
 					result.mapVersionIsIncreased = indexFileList.isIncreasedMapVersion();
 					app.getSettings().LAST_CHECKED_UPDATES.set(System.currentTimeMillis());
@@ -308,7 +309,7 @@ public class DownloadIndexesThread {
 				} catch (Exception e) {
 				}
 			}
-			return result;
+			return result == null ? new DownloadResources(app) : result;
 		}
 
 		protected void onPostExecute(DownloadResources result) {
