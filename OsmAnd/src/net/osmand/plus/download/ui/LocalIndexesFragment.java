@@ -1,4 +1,4 @@
-package net.osmand.plus.download.ui;
+﻿package net.osmand.plus.download.ui;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -388,19 +388,19 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		private File getFileToRestore(LocalIndexInfo i) {
 			if (i.isBackupedData()) {
 				File parent = new File(i.getPathToData()).getParentFile();
-				if (i.getType() == LocalIndexType.SRTM_DATA) {
-					parent = getMyApplication().getAppPath(IndexConstants.SRTM_INDEX_DIR);
+				if (i.getType() == LocalIndexType.MAP_DATA) {
+					parent = getMyApplication().getAppPath(IndexConstants.MAPS_PATH);
 				} else if (i.getFileName().endsWith(IndexConstants.BINARY_ROAD_MAP_INDEX_EXT)) {
 					parent = getMyApplication().getAppPath(IndexConstants.ROADS_INDEX_DIR);
-				} else if (i.getType() == LocalIndexType.WIKI_DATA) {
-					parent = getMyApplication().getAppPath(IndexConstants.WIKI_INDEX_DIR);
-				} else if (i.getType() == LocalIndexType.MAP_DATA) {
-					parent = getMyApplication().getAppPath(IndexConstants.MAPS_PATH);
 				} else if (i.getType() == LocalIndexType.TILES_DATA) {
 					parent = getMyApplication().getAppPath(IndexConstants.TILES_INDEX_DIR);
-				} else if (i.getType() == LocalIndexType.VOICE_DATA) {
-					parent = getMyApplication().getAppPath(IndexConstants.VOICE_INDEX_DIR);
+				} else if (i.getType() == LocalIndexType.SRTM_DATA) {
+					parent = getMyApplication().getAppPath(IndexConstants.SRTM_INDEX_DIR);
+				} else if (i.getType() == LocalIndexType.WIKI_DATA) {
+					parent = getMyApplication().getAppPath(IndexConstants.WIKI_INDEX_DIR);
 				} else if (i.getType() == LocalIndexType.TTS_VOICE_DATA) {
+					parent = getMyApplication().getAppPath(IndexConstants.VOICE_INDEX_DIR);
+				} else if (i.getType() == LocalIndexType.VOICE_DATA) {
 					parent = getMyApplication().getAppPath(IndexConstants.VOICE_INDEX_DIR);
 				}
 				return new File(parent, i.getFileName());
