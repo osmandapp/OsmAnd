@@ -63,8 +63,8 @@
 	<string name="rendering_attr_showRoadMaps_description">Выберите как отображать только дорожные карты:</string>
 	<string name="rendering_attr_showRoadMaps_name">Карты только дорог</string>
     <string name="download_roads_only_item">Только дороги</string>
-    <string name="download_regular_maps">Полные карты</string>
-    <string name="download_roads_only_maps">Карты только дорог</string>
+    <string name="download_regular_maps">Стандартная карта</string>
+    <string name="download_roads_only_maps">Карта дорог</string>
     <string name="safe_mode_description">Запустить приложение в безопасном режиме (замедляет работу приложения, используя только Android функции).</string>
     <string name="safe_mode">Безопасный режим</string>
     <string name="native_library_not_running">Приложение запущено в безопасном режиме (отключите в Настройках).</string>
@@ -110,8 +110,8 @@
   <string name="first_time_msg">Для работы большинства основных возможностей приложения требуются детальные карты регионов, которые можно загрузить из Интернета с помощью пункта меню \"Настройки\" → \"Управление файлами карт\". После загрузки Вы сможете просматривать карты, осуществлять поиск адресов, POI и общественного транспорта.</string>
   <string name="basemap_was_selected_to_download">Базовая карта необходима для корректной работы приложения и автоматически была выбрана для загрузки.</string>
   <string name="select_index_file_to_download">Ничего не было найдено. Вы можете создать карту самостоятельно (смотрите на osmand.net).</string>
-  <string name="local_indexes_cat_tile">Онлайн карты (растровые)</string>
-  <string name="local_indexes_cat_map">Локальные карты (векторные)</string>
+  <string name="local_indexes_cat_tile">Онлайн и кэшированные карты (растровые)</string>
+  <string name="local_indexes_cat_map">Стандартные карты (векторные)</string>
   
   <string name="index_settings_descr">Загрузка и управление локальными файлами карт на вашем устройстве</string>
   <string name="map_online_plugin_is_not_installed">Активируйте плагин онлайн карт, чтобы выбирать различные источники карт</string>
@@ -328,8 +328,8 @@
   <string name="local_index_map_data">Карта</string>
   
   <string name="local_indexes_cat_backup">Архивировано</string>
-  <string name="local_indexes_cat_tts">Голосовые данные (TTS)</string>
-  <string name="local_indexes_cat_voice">Голосовые данные (запись)</string>
+  <string name="local_indexes_cat_tts">Голосовые подсказки (TTS)</string>
+  <string name="local_indexes_cat_voice">Голосовые подсказки (запись)</string>
   
   <string name="local_indexes_cat_poi">Данные POI</string>
   <string name="ttsvoice">Голос TTS</string>
@@ -1148,7 +1148,7 @@
     <string name="recording_context_menu_precord">Сделать фото</string>
     <string name="dropbox_plugin_description">Плагин Dropbox позволяет синхронизировать треки и видео/аудио заметки с вашим аккаунтом dropbox.</string>
     <string name="dropbox_plugin_name">Плагин Dropbox</string>
-    <string name="osmand_srtm_long_description_1000_chars">"Плагин обеспечивает наложение контурных линии и (рельефа) затемняющего слоя, которые будут отображаться поверх оффлайн карт OsmAnd. Эта функция высоко оценится спортсменами, туристами, путешественниками и всеми, кто заинтересован в рельефной структуре ландшафта.\n\nГлобальные данные (между 70 градусов на севере и 70 градусов на юге) основываются на измерениях SRTM (Shuttle Radar Topography Mission) и ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), инструментом визуализации Terra, флагманского спутника Земли системы наблюдения NASA. ASTER является результатом совместных усилий NASA, министерства экономики Японии, торговли и промышленности (METI), космических систем Японии (J-spacesystems). "</string>
+    <string name="osmand_srtm_long_description_1000_chars">"Плагин обеспечивает наложение контурных линии и (рельефа) затемняющего слоя, которые будут отображаться поверх стандартных карт OsmAnd. Эта функция высоко оценится спортсменами, туристами, путешественниками и всеми, кто заинтересован в рельефной структуре ландшафта.\n\nГлобальные данные (между 70 градусов на севере и 70 градусов на юге) основываются на измерениях SRTM (Shuttle Radar Topography Mission) и ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), инструментом визуализации Terra, флагманского спутника Земли системы наблюдения NASA. ASTER является результатом совместных усилий NASA, министерства экономики Японии, торговли и промышленности (METI), космических систем Японии (J-spacesystems). "</string>
     <string name="recording_photo_description">Фото %1$s %2$s</string>
     <string name="local_indexes_cat_av">Аудио/Видео данные</string>
     <string name="stop_routing_confirm">Вы уверены, что хотите остановить навигацию?</string>
@@ -1164,7 +1164,7 @@
 	\n\t* добавлен пакет затемнённого рельефа местности для плагина контурных линий
 	\n\t* исправлены ошибки (неоптимальной маршрутизации)
     </string>
-    <string name="download_hillshade_maps">Карты с затемнённым рельефом</string>
+    <string name="download_hillshade_maps">Карты с рельефом местности</string>
     <string name="av_use_external_camera_descr">Использовать системную программу для фото</string>
     <string name="av_use_external_camera">Использовать приложение Камера</string>
     <string name="index_name_openmaps">OpenMaps - Европа</string>
@@ -1262,7 +1262,7 @@
     <string name="access_mark_final_location_first">Режим доступности: Пожалуйста, выберите сначала пункт назначения</string> 
     <string name="use_magnetic_sensor_descr">Использовать магнитный датчик вместо датчика ориентации</string>
     <string name="other_location">Другие</string>
-    <string name="local_indexes_cat_srtm">Данные горизонталей</string>
+    <string name="local_indexes_cat_srtm">Контурные линии</string>
     <string name="shared_string_downloading">Загрузка</string>
 	<string name="osmand_distance_planning_plugin_description">Плагин добавляет виджет на экран карты, позволяющий создавать маршруты, нажав на карте, а также использовать или изменять существующие файлы GPX, планировать поездку и измерять расстояние между точками. Результаты могут быть сохранены в виде файла GPX, который впоследствии может быть использован для навигации.</string>
     <string name="context_menu_item_destination_point">Пункт назначения</string>
@@ -1534,7 +1534,7 @@
     <string name="osmo_group_name">Название группы</string>
     <string name="osmo_connect_to_group">Подключиться к группе</string>
     <string name="osmo_create_group">Создать группу</string>
-    <string name="osmo_enable_tracker">Отправлять координаты</string>
+    <string name="osmo_enable_tracker">Отправить моё местоположение</string>
     <string name="osmo_group_description">Описание</string>
     <string name="int_days">дней</string>
     <string name="osmo_track_interval">Интервал отправки</string>
@@ -2153,4 +2153,6 @@
     <string name="share_geo">гео:</string>
     <string name="share_menu_location">Поделиться местоположением</string>
     <string name="shared_string_send">Отправить</string>
-    </resources>
+    <string name="application_dir_description">Выберите место где вы хотите сохранить файлы карт.</string>
+    <string name="show_on_start_description">Приложение будет запускаться с экрана карты</string>
+</resources>
