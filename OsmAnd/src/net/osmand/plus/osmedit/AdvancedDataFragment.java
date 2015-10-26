@@ -36,7 +36,6 @@ import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -103,7 +102,7 @@ public class AdvancedDataFragment extends Fragment
 		mTagsChangedListener = new EditPoiData.TagsChangedListener() {
 			@Override
 			public void onTagsChanged(String anyTag) {
-				LOG.debug("onTagsChanged()");
+				LOG.debug("onTagsChanged(" + "anyTag=" + anyTag + ")");
 				final String value = getData().getTagValues().get(anyTag);
 				if (Algorithms.objectEquals(anyTag, OSMSettings.OSMTagKey.NAME.getValue())) {
 					nameTextView.setText(value);
@@ -154,7 +153,6 @@ public class AdvancedDataFragment extends Fragment
 		private final Map<String, AbstractPoiType> allTypes;
 		private final HashSet<String> tagKeys;
 		private final HashSet<String> valueKeys;
-		private final HashMap<String, View> cachedViews = new HashMap<>();
 
 		public TagAdapterLinearLayoutHack(LinearLayout linearLayout,
 										  EditPoiData editPoiData,
@@ -181,7 +179,7 @@ public class AdvancedDataFragment extends Fragment
 			linearLayout.removeAllViews();
 			editPoiData.setIsInEdit(true);
 			for (Entry<String, String> tag : editPoiData.getTagValues().entrySet()) {
-				if(tag.getKey().equals(EditPoiData.POI_TYPE_TAG)
+				if (tag.getKey().equals(EditPoiData.POI_TYPE_TAG)
 						|| tag.getKey().equals(OSMSettings.OSMTagKey.NAME.getValue()))
 					continue;
 				addTagView(tag.getKey(), tag.getValue());
@@ -191,17 +189,13 @@ public class AdvancedDataFragment extends Fragment
 
 		public void addTagView(String tg, String vl) {
 			View view = getView(tg, vl);
+			LOG.debug("tg=" + tg + "; view=" + view);
 			linearLayout.addView(view);
 		}
 
 		private View getView(String tg, String vl) {
-			View convertView = cachedViews.get(tg);
-			LOG.debug("convertView=" + convertView);
-			if (convertView == null) {
-				convertView = LayoutInflater.from(linearLayout.getContext())
-						.inflate(R.layout.poi_tag_list_item, null, false);
-				cachedViews.put(tg, convertView);
-			}
+			View convertView = LayoutInflater.from(linearLayout.getContext())
+					.inflate(R.layout.poi_tag_list_item, null, false);
 			final AutoCompleteTextView tagEditText =
 					(AutoCompleteTextView) convertView.findViewById(R.id.tagEditText);
 			ImageButton deleteItemImageButton =
