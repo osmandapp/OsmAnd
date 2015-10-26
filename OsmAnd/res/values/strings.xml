@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
     <!--
     	 Disclaimer:
@@ -18,7 +18,7 @@
     <string name="favorite_category_name">Category name</string>
     <string name="favorite_category_add_new_title">Add new category</string>
     <string name="regions">Regions</string>
-    <string name="region_maps">Region maps</string>
+    <string name="region_maps">Regionwide maps</string>
     <string name="world_maps">World maps</string>
     <string name="hillshade_layer_disabled">Hillshade layer disabled</string>
     <string name="srtm_plugin_disabled">Contour lines disabled</string>
@@ -123,7 +123,7 @@
     <string name="rendering_value_disabled_name">Disabled</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Coloring according to route scope</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Coloring according to OSMC</string>
-    <string name="osmo_share_my_location">Share my location</string>
+    <string name="osmo_share_my_location">Share my position</string>
     <string name="shared_string_logoff">Log Off</string>
     <string name="rendering_attr_hideHouseNumbers_name">Hide house numbers</string>
     <string name="application_dir_change_warning3">Do you want OsmAnd to also copy its data files to the new destination?</string>
@@ -249,7 +249,7 @@
 	<string name="shared_string_address">Address</string>
 	<string name="shared_string_add">Add</string>
 	<string name="shared_string_add_to_favorites">Add to Favorites</string>
-	<string name="shared_string_my_location">My Location</string>
+	<string name="shared_string_my_location">My Position</string>
 	<string name="shared_string_my_places">My Places</string>
 	<string name="shared_string_my_favorites">My Favorites</string>
 	<string name="shared_string_my_tracks">My Tracks</string>
@@ -262,7 +262,7 @@
 	<string name="track_points">Track points</string>
 	<string name="online_map_settings">Online maps</string>
 	<string name="osmand_rastermaps_plugin_description">With this plugin you can access many types of online (so called tile or raster) maps, from predefined Openstreetmap tiles (like Mapnik) to satellite images and special purpose layers like weather maps, climate maps, geological maps, hillshade layers, etc.
-		\n\nAny of these maps can either be used as the main (base) map to be displayed on the OsmAnd map screen, or as an overlay or underlay to another base map (like OsmAnd\'s regular offline maps). In order to make any underlay map more visible, certain elements of the OsmAnd vector maps can easily be hidden via the \'Configure map\' menu as desired.
+		\n\nAny of these maps can either be used as the main (base) map to be displayed on the OsmAnd map screen, or as an overlay or underlay to another base map (like OsmAnd\'s standard offline maps). In order to make any underlay map more visible, certain elements of the OsmAnd vector maps can easily be hidden via the \'Configure map\' menu as desired.
 		\n\nTile maps can be obtained directly via online sources, or can be prepared for offline use (and manually copied to OsmAnd\'s data folder) as an sqlite database which can be produced by a variety of 3rd party map preparation tools.
 	</string>
 	<string name="record_plugin_name">Trip recording</string>
@@ -277,11 +277,11 @@
 	</string>
 	<string name="srtm_paid_version_title">Contour lines plugin</string>
 	<string name="osmand_srtm_short_description_80_chars">OsmAnd plugin for offline contour lines</string>
-	<string name="osmand_srtm_long_description_1000_chars">This plugin provides both a contour line overlay and a (relief) hillshade layer to be displayed on top of OsmAnd\'s offline maps. This functionality will be much appreciated by athletes, hikers, trekkers, and anybody interested in the relief structure of a landscape.
+	<string name="osmand_srtm_long_description_1000_chars">This plugin provides both a contour line overlay and a (relief) hillshade layer to be displayed on top of OsmAnd\'s standard maps. This functionality will be much appreciated by athletes, hikers, trekkers, and anybody interested in the relief structure of a landscape.
 		\n\nThe global data (between 70 degrees north and 70 degrees south) is based on measurements by SRTM (Shuttle Radar Topography Mission) and ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), an imaging instrument onboard Terra, the flagship satellite of NASA\'s Earth Observing System. ASTER is a cooperative effort between NASA, Japan\'s Ministry of Economy, Trade and Industry (METI), and Japan Space Systems (J-spacesystems).
 	</string>
 	<string name="srtm_plugin_name">Contour Lines</string>
-	<string name="srtm_plugin_description">This plugin provides both a contour line overlay and a (relief) hillshade layer to be displayed on top of OsmAnd\'s offline maps. This functionality will be much appreciated by athletes, hikers, trekkers, and anybody interested in the relief structure of a landscape.
+	<string name="srtm_plugin_description">This plugin provides both a contour line overlay and a (relief) hillshade layer to be displayed on top of OsmAnd\'s standard maps. This functionality will be much appreciated by athletes, hikers, trekkers, and anybody interested in the relief structure of a landscape.
 		\n\nThe global data (between 70 degrees north and 70 degrees south) is based on measurements by SRTM (Shuttle Radar Topography Mission) and ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), an imaging instrument onboard Terra, the flagship satellite of NASA\'s Earth Observing System. ASTER is a cooperative effort between NASA, Japan\'s Ministry of Economy, Trade and Industry (METI), and Japan Space Systems (J-spacesystems).
 	</string>
 	<string name="plugin_touringview_name">Touring map view</string>
@@ -610,7 +610,7 @@
     <string name="osmo_create_group">Create group</string>
     <string name="osmo_server_operation_failed">OsMo Server operation failed</string>
     <string name="osmo_activity">OpenStreetMap Monitoring</string>
-    <string name="osmo_enable_tracker">Send my locations</string>
+    <string name="osmo_enable_tracker">Send my positions</string>
     <string name="osmo_control">OsMo quick access</string>
     <string name="hours_ago">hours ago</string>
     <string name="minutes_ago">min ago</string>
@@ -868,10 +868,10 @@
 	<string name="prefer_in_routing_descr">Prefer motorways</string>
     <string name="max_speed_none">none</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
-    <string name="download_hillshade_item">Hillshade</string>
+    <string name="download_hillshade_item">Hillshades</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
-    <string name="download_hillshade_maps">Hillshade overlays</string>
-    <string name="local_indexes_cat_srtm">Contour lines data</string>
+    <string name="download_hillshade_maps">Hillshades</string>
+    <string name="local_indexes_cat_srtm">Contour lines</string>
     <string name="local_indexes_cat_av">Audio/Video data</string>
     <string name="stop_routing_confirm">Are you sure you want to stop the navigation?</string>
     <string name="clear_dest_confirm">Are you sure you want to clear your destination point (and waypoints)?</string>
@@ -922,8 +922,8 @@
     <string name="download_select_map_types">Other maps</string>
     <string name="download_roads_only_item">Roads only</string>
     <string name="download_srtm_maps">Contour lines</string>
-    <string name="download_regular_maps">Regular maps</string>
-    <string name="download_roads_only_maps">Roads-only maps</string>
+    <string name="download_regular_maps">Standard map</string>
+    <string name="download_roads_only_maps">Roads-only map</string>
     <string name="rendering_attr_alpineHiking_name">Alpine hiking scale (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Render paths according to SAC scale</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Hiking symbol overlay</string>
@@ -1062,7 +1062,7 @@ Bicycle and Pedestrian Features
  - Optional public transport stops (bus, tram, train) including line names
  - Optional trip recording to local GPX file or online service
  - Optional speed and altitude display
- - Display of contour lines and hill-shading (via additional plugin)
+ - Display of contour lines and hillshades (via additional plugin)
 
 Directly Contribute to OpenStreetMap
  - Report map bugs
@@ -1297,8 +1297,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="confirm_interrupt_download">Do you want to interrupt file downloading?</string>
 	<string name="first_time_msg">Thank you for using OsmAnd. For many features of this application you need some regional offline data which you can download via \'Settings\' →  \'Manage map files\'. Afterwards you will be able to view maps, locate addresses, look up POIs, and find public transport.</string>
 	<string name="basemap_was_selected_to_download">Basemap is required for proper application functioning and was selected to download.</string>
-	<string name="local_indexes_cat_tile">Online and tile maps</string>
-	<string name="local_indexes_cat_map">Offline maps (vector)</string>
+	<string name="local_indexes_cat_tile">Online and cached tile maps</string>
+	<string name="local_indexes_cat_map">Standard maps (vector)</string>
 	<string name="index_settings_descr">Download and manage offline map files stored on your device</string>
 	<string name="map_online_plugin_is_not_installed">Enable the Online maps plugin to select different map sources</string>
 	<string name="map_online_data">Online and tile maps</string>
@@ -1520,8 +1520,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="local_index_transport_data">Public transport data</string>
 	<string name="local_index_map_data">Map data</string>
 	<string name="local_indexes_cat_backup">Deactivated</string>
-	<string name="local_indexes_cat_tts">Voice data (TTS)</string>
-	<string name="local_indexes_cat_voice">Voice data (recorded)</string>
+	<string name="local_indexes_cat_tts">Voice prompts (TTS)</string>
+	<string name="local_indexes_cat_voice">Voice prompts (recorded)</string>
 	<!-- string name="local_indexes_cat_gpx">GPX data</string -->
 	<string name="local_indexes_cat_poi">POI data</string>
 	<string name="ttsvoice">TTS voice</string>
