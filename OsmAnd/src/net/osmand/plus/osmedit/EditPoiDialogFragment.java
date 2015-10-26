@@ -66,9 +66,9 @@ import java.text.MessageFormat;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class EditPoiFragment extends DialogFragment {
-	public static final String TAG = "EditPoiFragment";
-	private static final Log LOG = PlatformUtil.getLog(EditPoiFragment.class);
+public class EditPoiDialogFragment extends DialogFragment {
+	public static final String TAG = "EditPoiDialogFragment";
+	private static final Log LOG = PlatformUtil.getLog(EditPoiDialogFragment.class);
 
 	private static final String KEY_AMENITY_NODE = "key_amenity_node";
 	private static final String KEY_AMENITY = "key_amenity";
@@ -259,7 +259,7 @@ public class EditPoiFragment extends DialogFragment {
 			@Override
 			public void onClick(View v) {
 				FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-				fragmentManager.beginTransaction().remove(EditPoiFragment.this).commit();
+				fragmentManager.beginTransaction().remove(EditPoiDialogFragment.this).commit();
 				fragmentManager.popBackStack();
 			}
 		});
@@ -354,7 +354,7 @@ public class EditPoiFragment extends DialogFragment {
 	}
 
 
-	public static EditPoiFragment createAddPoiInstance(double latitude, double longitude,
+	public static EditPoiDialogFragment createAddPoiInstance(double latitude, double longitude,
 													   OsmandApplication application) {
 		Node node = new Node(latitude, longitude, -1);
 		Amenity amenity;
@@ -365,13 +365,13 @@ public class EditPoiFragment extends DialogFragment {
 		return createInstance(node, amenity);
 	}
 
-	public static EditPoiFragment createInstance(Node node, Amenity amenity) {
-		EditPoiFragment editPoiFragment = new EditPoiFragment();
+	public static EditPoiDialogFragment createInstance(Node node, Amenity amenity) {
+		EditPoiDialogFragment editPoiDialogFragment = new EditPoiDialogFragment();
 		Bundle args = new Bundle();
 		args.putSerializable(KEY_AMENITY_NODE, node);
 		args.putSerializable(KEY_AMENITY, amenity);
-		editPoiFragment.setArguments(args);
-		return editPoiFragment;
+		editPoiDialogFragment.setArguments(args);
+		return editPoiDialogFragment;
 	}
 
 	public EditPoiData getEditPoiData() {
@@ -500,8 +500,8 @@ public class EditPoiFragment extends DialogFragment {
 
 			protected void onPostExecute(Node n) {
 				if (n != null) {
-					EditPoiFragment fragment =
-							EditPoiFragment.createInstance(n, amenity);
+					EditPoiDialogFragment fragment =
+							EditPoiDialogFragment.createInstance(n, amenity);
 					fragment.show(activity.getSupportFragmentManager(), TAG);
 				} else {
 					AccessibleToast.makeText(activity,
@@ -513,8 +513,8 @@ public class EditPoiFragment extends DialogFragment {
 	}
 
 	public static class MyAdapter extends FragmentPagerAdapter {
-		private final Fragment[] fragments = new Fragment[]{new BasicDataFragment(),
-				new AdvancedDataFragment()};
+		private final Fragment[] fragments = new Fragment[]{new BasicEditPoiFragment(),
+				new AdvancedEditPoiFragment()};
 		private final String[] titles;
 
 		public MyAdapter(FragmentManager fm, String basicTitle, String extendedTitle) {

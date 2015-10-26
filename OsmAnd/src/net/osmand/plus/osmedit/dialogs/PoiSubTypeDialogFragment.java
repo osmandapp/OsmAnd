@@ -11,9 +11,10 @@ import net.osmand.data.Amenity;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.osmedit.EditPoiFragment;
+import net.osmand.plus.osmedit.EditPoiDialogFragment;
 
 import java.util.Map;
+import java.util.Set;
 
 public class PoiSubTypeDialogFragment extends DialogFragment {
 	private static final String KEY_AMENITY = "amenity";
@@ -26,11 +27,12 @@ public class PoiSubTypeDialogFragment extends DialogFragment {
 		final Amenity a = (Amenity) getArguments().getSerializable(KEY_AMENITY);
 		final Map<String, PoiType> allTranslatedNames = poiTypes.getAllTranslatedNames(a.getType(), true);
 		// (=^.^=)
-		final String[] subCats = allTranslatedNames.keySet().toArray(new String[0]);
+		Set<String> strings = allTranslatedNames.keySet();
+		final String[] subCats = strings.toArray(new String[strings.size()]);
 		builder.setItems(subCats, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				((EditPoiFragment) getParentFragment()).setSubCategory(subCats[which]);
+				((EditPoiDialogFragment) getParentFragment()).setSubCategory(subCats[which]);
 				dismiss();
 			}
 		});

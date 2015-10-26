@@ -1,14 +1,10 @@
 package net.osmand.plus.activities;
 
 
-import java.io.File;
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.TimeZone;
+import android.content.Context;
+import android.os.Build;
+import android.support.annotation.DrawableRes;
+import android.support.annotation.StringRes;
 
 import net.osmand.IndexConstants;
 import net.osmand.map.ITileSource;
@@ -19,10 +15,15 @@ import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.download.ui.LocalIndexesFragment.LoadLocalIndexTask;
 import net.osmand.plus.voice.MediaCommandPlayerImpl;
 import net.osmand.plus.voice.TTSCommandPlayerImpl;
-import android.content.Context;
-import android.os.Build;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.StringRes;
+
+import java.io.File;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.TimeZone;
 
 
 public class LocalIndexHelper {
@@ -89,7 +90,7 @@ public class LocalIndexHelper {
 
 	public List<LocalIndexInfo> getLocalIndexData(LoadLocalIndexTask loadTask){
 		Map<String, String> loadedMaps = app.getResourceManager().getIndexFileNames();
-		List<LocalIndexInfo> result = new ArrayList<LocalIndexInfo>();
+		List<LocalIndexInfo> result = new ArrayList<>();
 		
 		loadObfData(app.getAppPath(IndexConstants.MAPS_PATH), result, false, loadTask, loadedMaps);
 		loadObfData(app.getAppPath(IndexConstants.ROADS_INDEX_DIR), result, false, loadTask, loadedMaps);
@@ -211,8 +212,8 @@ public class LocalIndexHelper {
 		TILES_DATA(R.string.local_indexes_cat_tile),
 		SRTM_DATA(R.string.local_indexes_cat_srtm, R.drawable.ic_plugin_srtm),
 		WIKI_DATA(R.string.local_indexes_cat_wiki, R.drawable.ic_plugin_wikipedia),
-		TTS_VOICE_DATA(R.string.local_indexes_cat_tts, R.drawable.ic_action_volume_up);
-		VOICE_DATA(R.string.local_indexes_cat_voice, R.drawable.ic_action_volume_up),
+		TTS_VOICE_DATA(R.string.local_indexes_cat_tts, R.drawable.ic_action_volume_up),
+		VOICE_DATA(R.string.local_indexes_cat_voice, R.drawable.ic_action_volume_up);
 //		AV_DATA(R.string.local_indexes_cat_av);;
 
 		@StringRes
@@ -220,12 +221,12 @@ public class LocalIndexHelper {
 		@DrawableRes
 		private int iconResource;
 
-		private LocalIndexType(@StringRes int resId, @DrawableRes int iconResource){
+		LocalIndexType(@StringRes int resId, @DrawableRes int iconResource){
 			this.resId = resId;
 			this.iconResource = iconResource;
 		}
 
-		private LocalIndexType(@StringRes int resId){
+		LocalIndexType(@StringRes int resId){
 			this.resId = resId;
 			this.iconResource = R.drawable.ic_map;
 		}

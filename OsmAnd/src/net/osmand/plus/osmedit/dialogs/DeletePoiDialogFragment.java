@@ -14,7 +14,7 @@ import net.osmand.osm.edit.Node;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.osmedit.EditPoiFragment;
+import net.osmand.plus.osmedit.EditPoiDialogFragment;
 import net.osmand.plus.osmedit.OpenstreetmapLocalUtil;
 import net.osmand.plus.osmedit.OpenstreetmapUtil;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
@@ -40,7 +40,7 @@ public class DeletePoiDialogFragment extends DialogFragment {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				Node node = (Node) args.getSerializable(KEY_AMENITY_NODE);
-				EditPoiFragment.commitNode(OsmPoint.Action.DELETE, node,
+				EditPoiDialogFragment.commitNode(OsmPoint.Action.DELETE, node,
 						mOpenstreetmapUtil.getEntityInfo(), null, false,
 						new Runnable() {
 							@Override
