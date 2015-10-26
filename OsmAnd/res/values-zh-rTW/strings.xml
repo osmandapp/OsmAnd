@@ -189,8 +189,8 @@
 	<string name="first_time_msg">感謝您使用 OsmAnd。對於此應用程式的許多功能，您需要一些地區的離線資料，您可以透過\'設定\' -&gt; \'管理地圖檔案\'來下載。之後您可瀏覽地圖、位置的地址、查看興趣點以及尋找大眾運輸工具。</string>    
 	<string name="basemap_was_selected_to_download">底圖為某些特別的應用功能必需使用的，並且預設為下載。</string>
 	<string name="select_index_file_to_download">找不到任何資料。如果您不能在您的區域找到，您可以自行製作(參考http://osmand.net)。</string>
-	<string name="local_indexes_cat_tile">線上地圖圖磚</string>
-	<string name="local_indexes_cat_map">離線地圖(向量地圖)</string>
+	<string name="local_indexes_cat_tile">線上和快取地圖圖磚</string>
+	<string name="local_indexes_cat_map">標準地圖(向量地圖)</string>
 	
 	<string name="index_settings_descr">在您的裝置下載與管理離線地圖和檔案的存儲</string>
 	<string name="map_online_plugin_is_not_installed">啟用線上地圖外掛元件，來選擇不同的地圖來源</string>
@@ -200,7 +200,7 @@
 	<string name="online_map_settings_descr">組態線上或暫存的地圖圖磚來源</string>
 	
 	
-	<string name="osmand_rastermaps_plugin_description">"有了這個外掛元件，您可以存取多種類型的網絡（所謂的圖磚或網格）地圖，從預設的 Openstreetmap 圖磚（如 Mapnik）到衛星圖像和特殊用途的圖層，比如天氣地圖、氣候地圖、地質地圖、山體陰影層等。\n\n這些地圖可以被用來作為主要的（基本）地圖，以便在 OsmAnd 地圖螢幕上顯示，或作為覆疊層又或另外基本地圖的底層（如 OsmAnd 正常的離線地圖）。為了使任何的底層地圖可以看見，OsmAnd 向量地圖可以容易的根據需要透過 \'組態地圖\' 選單來隱藏某些構成。
+	<string name="osmand_rastermaps_plugin_description">"有了這個外掛元件，您可以存取多種類型的網絡（所謂的圖磚或網格）地圖，從預設的 Openstreetmap 圖磚（如 Mapnik）到衛星圖像和特殊用途的圖層，比如天氣地圖、氣候地圖、地質地圖、山體陰影層等。\n\n這些地圖可以被用來作為主要的（基本）地圖，以便在 OsmAnd 地圖螢幕上顯示，或作為覆疊層又或另外基本地圖的底層（如 OsmAnd 標準的離線地圖）。為了使任何的底層地圖可以看見，OsmAnd 向量地圖可以容易的根據需要透過 \'組態地圖\' 選單來隱藏某些構成。
 \n\n地圖圖磚可以直接透過線上資料來源獲得，或著可以使用準備好的離線地圖（手動複製到 OsmAnd 的資料檔案夾中） 作為一個 sqlite 資料庫，可以透過各種的第三方地圖編制工具產生。 "</string>
 	<string name="osmand_background_plugin_description">透過週期性的喚醒 GPS 裝置，在背景模式下(螢幕關閉)顯示設定，以啟用追蹤與導航。</string>
 	<string name="osmand_accessibility_description">這個外掛元件，讓裝置在 OsmAnd 可以便利的直接用無障礙功能，例如調整 TTS 語音的語音速率、組態螢幕導航方位、使用軌跡球為縮放控制，或使用文字轉語音的回應，如自動告知您的位置。</string>
@@ -452,8 +452,8 @@
 	<string name="local_index_transport_data">公共交通資料</string>
 	<string name="local_index_map_data">地圖資料</string>
 	<string name="local_indexes_cat_backup">已停用</string>
-	<string name="local_indexes_cat_tts">語音資料(TTS)</string>
-	<string name="local_indexes_cat_voice">語音資料(真人)</string>
+	<string name="local_indexes_cat_tts">提示語音 (TTS)</string>
+	<string name="local_indexes_cat_voice">提示語音 (真人)</string>
 	
 	<string name="local_indexes_cat_poi">興趣點資料</string>
 	<string name="ttsvoice">TTS 語音</string>
@@ -1017,10 +1017,10 @@
     <string name="prefer_in_routing_title">優先權…</string>
 	<string name="prefer_motorways">高速公路優先權</string>
 	<string name="download_hillshade_item">地形陰影</string>
-    <string name="download_hillshade_maps">山體陰影層</string>
+    <string name="download_hillshade_maps">山體陰影</string>
     
     
-    <string name="local_indexes_cat_srtm">等高線資料</string>
+    <string name="local_indexes_cat_srtm">等高線</string>
     <string name="local_indexes_cat_av">音訊/視訊資料</string>
     <string name="stop_routing_confirm">您確定要停止導航嗎？</string>
     <string name="clear_dest_confirm">您確定想要清除您的目的地標點(含航點)？</string>
@@ -1087,7 +1087,7 @@
     <string name="download_select_map_types">其它地圖</string>
     <string name="download_roads_only_item">僅道路</string>
     <string name="download_srtm_maps">等高線</string>
-    <string name="download_regular_maps">正常地圖</string>
+    <string name="download_regular_maps">標準地圖</string>
     <string name="download_roads_only_maps">僅道路地圖</string>
     
 	<string name="rendering_attr_noAdminboundaries_name">隱藏界線</string>
@@ -1127,9 +1127,9 @@
     <string name="files_limit">剩餘 %1$d 個檔</string>
     <string name="layer_recordings">記錄層</string>
 	<string name="intermediate_items_sort_return">在目前的位置到達目的地之間的路途上，沿途的航點已採取了最佳化排列。</string>
-    <string name="osmand_srtm_long_description_1000_chars">"這個外掛元件同時提供了等高線層和（地貌）山體陰影層，顯示在 OsmAnd 的離線地圖頂部。此功能會讓運動選手、徒步旅行者、背包客，和任何感興趣的人對起伏的地貌結構大加讚賞。\n\n全球圖資（在北緯 70 度至南緯 70 度之間）的量測基礎在於 SRTM (Shuttle Radar Topography Mission)和 ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer)，安裝在美國太空總署地球觀測系統的旗艦衛星 Terra 上的遙測儀器，ASTER 是美國太空總署、日本經濟產業省(METI)、日本太空系統 (J-spacesystems)之間的通力合作產物。 "</string>
+    <string name="osmand_srtm_long_description_1000_chars">"這個外掛元件同時提供了等高線層和（地貌）山體陰影層，顯示在 OsmAnd 標準地圖的頂部。此功能會讓運動選手、徒步旅行者、背包客，和任何感興趣的人對起伏的地貌結構大加讚賞。\n\n全球圖資（在北緯 70 度至南緯 70 度之間）的量測基礎在於 SRTM (Shuttle Radar Topography Mission)和 ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer)，安裝在美國太空總署地球觀測系統的旗艦衛星 Terra 上的遙測儀器，ASTER 是美國太空總署、日本經濟產業省(METI)、日本太空系統 (J-spacesystems)之間的通力合作產物。 "</string>
     <string name="audionotes_location_not_defined">以位置去關聯的注解尚未下定義。\"使用位置 …\"，把注解分配給指定的位置</string>
-    <string name="srtm_plugin_description">"這個外掛元件同時提供了等高線層和（地貌）山體陰影層，顯示在 OsmAnd 的離線地圖頂部。此功能會讓運動選手、徒步旅行者、背包客，和任何感興趣的人對起伏的地貌結構大加讚賞。\n\n全球圖資（在 70 度以北和 70 度以南之間）的量測基礎在於 SRTM（Shuttle Radar Topography Mission）和 ASTER（Advanced Spaceborne Thermal Emission and Reflection Radiometer），安裝在美國太空總署地球觀測系統的旗艦衛星 Terra 上的遙測儀器，ASTER 是美國太空總署、日本經濟產業省（METI）、日本太空系統（J-spacesystems）之間的通力合作的產物。 "</string>
+    <string name="srtm_plugin_description">"這個外掛元件同時提供了等高線層和（地貌）山體陰影層，顯示在 OsmAnd 標準地圖的頂部。此功能會讓運動選手、徒步旅行者、背包客，和任何感興趣的人對起伏的地貌結構大加讚賞。\n\n全球圖資（在 70 度以北和 70 度以南之間）的量測基礎在於 SRTM（Shuttle Radar Topography Mission）和 ASTER（Advanced Spaceborne Thermal Emission and Reflection Radiometer），安裝在美國太空總署地球觀測系統的旗艦衛星 Terra 上的遙測儀器，ASTER 是美國太空總署、日本經濟產業省（METI）、日本太空系統（J-spacesystems）之間的通力合作的產物。 "</string>
     <string name="tip_recent_changes_0_7_2_t">在0.7.2的變更：
 		\n\t- Native rendering for all devices
 		\n\t- Offline POI editing
@@ -1553,7 +1553,7 @@
     <string name="osmo_create_group">建立群組</string>
     <string name="osmo_server_operation_failed">OsMo 伺服器操作失敗</string>
     <string name="osmo_activity">OpenStreetMap 監控</string>
-    <string name="osmo_enable_tracker">傳送我的位置</string>
+    <string name="osmo_enable_tracker">發送我的位置</string>
     <string name="osmo_control">OsMo 快速進入</string>
     
 	<string name="import_file_favourites">儲存標點為 GPX 檔案或把它匯入到我的最愛？</string>
@@ -2152,7 +2152,7 @@
     <string name="get_full_version">完整版</string>
 <string name="regions">地區</string>
     <string name="additional_maps">另外的地圖</string>
-    <string name="region_maps">地區地圖</string>
+    <string name="region_maps">區域地圖</string>
     <string name="world_maps">世界地圖</string>
     <string name="world_regions">全球地區</string>
     <string name="downloads">下載</string>
@@ -2172,4 +2172,5 @@
     <string name="shared_string_send">發送</string>
     <string name="hello_blank_fragment">哈囉，成空的片段</string>
 <string name="application_dir_description">選擇您想要在何處儲存地圖檔案。</string>
+<string name="show_on_start_description">OsmAnd 應用程式會從地圖螢幕開始</string>
 </resources>

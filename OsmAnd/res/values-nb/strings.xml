@@ -110,8 +110,8 @@
 	
 	<string name="unknown_from_location">Startpunkt er ennå ikke bestemt</string>
 	<string name="unknown_location">Posisjon ennå ikke kjent</string>
-	<string name="local_indexes_cat_tile">Nettbaserte- og flis-kart</string>
-	<string name="local_indexes_cat_map">Offline-kart (vektor)</string>
+	<string name="local_indexes_cat_tile">Nettbaserte kart og hurtigbufrede fliskart</string>
+	<string name="local_indexes_cat_map">Standardkart (vektor)</string>
 	
 	<string name="index_settings_descr">Last ned og håndter offline-kart lagret på enheten</string>
 	<string name="map_online_plugin_is_not_installed">Aktiver programtillegget for nettbaserte kart for å velge ulike kartkilder</string>
@@ -293,8 +293,8 @@
 	<string name="local_index_transport_data">Kollektivtrafikkdata</string>
 	<string name="local_index_map_data">Kartdata</string>
 	<string name="local_indexes_cat_backup">Deaktivert</string>
-	<string name="local_indexes_cat_tts">Taledata (TTS)</string>
-	<string name="local_indexes_cat_voice">Taledata (opptak)</string>
+	<string name="local_indexes_cat_tts">Talemeldinger (TTS)</string>
+	<string name="local_indexes_cat_voice">Talemeldinger (opptak)</string>
 	
 	<string name="local_indexes_cat_poi">Interessepunkt-data</string>
 	<string name="ttsvoice">TTS-tale</string>
@@ -968,7 +968,7 @@
     <string name="hno">Husnummer</string>
     <string name="select_address_activity">Velg adresse</string>
     <string name="favourites_list_activity">Velg favoritt</string>
-    <string name="local_indexes_cat_srtm">Kotedata</string>
+    <string name="local_indexes_cat_srtm">Koter</string>
     <string name="recording_context_menu_show">Vis</string>
     <string name="srtm_paid_version_title">Programtillegg for koter</string>
     <string name="av_settings_descr">Still inn lyd og video</string>
@@ -981,8 +981,8 @@
     <string name="download_select_map_types">Andre kart</string>
     <string name="download_roads_only_item">Bare veier</string>
     <string name="download_srtm_maps">Koter</string>
-    <string name="download_regular_maps">Vanlige kart</string>
-    <string name="download_roads_only_maps">Rene veikart</string>
+    <string name="download_regular_maps">Standardkart</string>
+    <string name="download_roads_only_maps">Rent veikart</string>
     
 	<string name="tip_altitude_offset">Høydekorrigering</string>
 	<string name="search_villages_and_postcodes">Søk flere landsbyer/postnummer</string>
@@ -1016,7 +1016,7 @@
 	<string name="loading_postcodes">Laster postnummer…</string>
 	<string name="loading_data">Laster data…</string>
 	
-	<string name="srtm_plugin_description">"Dette programtillegget gir både et lag med koter og et lag med relieffskygger til å vises oppå offline-kartet til OsmAnd. Denne funksjonen vil bli satt stor pris på av idrettsutøvere, turgåere og enhver som er interessert i relieff-strukturen til et landskap.
+	<string name="srtm_plugin_description">"Dette programtillegget gir både et lag med koter og et lag med relieffskygger til å vises oppå standardkartet til OsmAnd. Denne funksjonen vil bli satt stor pris på av idrettsutøvere, turgåere og enhver som er interessert i relieff-strukturen til et landskap.
 \n\nDe globale dataene (mellom 70 grader nord og 70 grader sør) er basert på målinger av SRTM (Shuttle Radar Topography Mission) og ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), et bildeinstrument ombord på Terra, flaggskipsatellitten til NASA\'s Earth Observing System. ASTER er et samarbeid mellom NASA, Japans finansdepartement, Trade and Industry (METI), og Japan Space Systems (J-spacesystems). "</string>
     <string name="tip_update_index_t">"Oppdaterte kartdata er viktig for offline kartvisning, for interessepunkt/adresse-søk og for offline navigering. OsmAnd tilbyr en filbehandler for kart til å laste ned disse offline-kartene og for å se etter tilgjengelige oppdateringer.
 \n\nFor å laste ned kart gå til \'Innstillinger\' → \'Karthåndtering\' → \'Last ned\'.
@@ -1094,8 +1094,8 @@
     <string name="gpx_file_name">GPX-filnavn</string>
     <string name="osmand_distance_planning_plugin_name">Distansekalkulator &amp; planleggingsverktøy</string>
     <string name="layer_hillshade">Relieffskyggelag</string>
-    <string name="download_hillshade_item">Relieffskygge</string>
-    <string name="download_hillshade_maps">Relieffskyggeoverlegg</string>
+    <string name="download_hillshade_item">Relieffskygger</string>
+    <string name="download_hillshade_maps">Relieffskygger</string>
     
     
     <string name="local_indexes_cat_av">Audio/Video-data</string>
@@ -1174,7 +1174,7 @@
 	<string name="map_overlay_descr">Velg overleggskart</string>
 	<string name="audionotes_plugin_name">Audio/video-notater</string>
 	<string name="osm_settings">OSM-redigering</string>
-	<string name="osmand_srtm_long_description_1000_chars">"Dette programtillegget gir både et lag med koter og et lag med relieffskygger til å vises oppå offline-kartet til OsmAnd. Denne funksjonen vil bli satt stor pris på av idrettsutøvere, turgåere og enhver som er interessert i relieff-strukturen til et landskap.
+	<string name="osmand_srtm_long_description_1000_chars">"Dette programtillegget gir både et lag med koter og et lag med relieffskygger til å vises oppå standardkartet til OsmAnd. Denne funksjonen vil bli satt stor pris på av idrettsutøvere, turgåere og enhver som er interessert i relieff-strukturen til et landskap.
 \n\nDe globale dataene (mellom 70 grader nord og 70 grader sør) er basert på målinger av SRTM (Shuttle Radar Topography Mission) og ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), et bildeinstrument ombord på Terra, flaggskipsatellitten til NASA\'s Earth Observing System. ASTER er et samarbeid mellom NASA, Japans finansdepartement, Trade and Industry (METI), og Japan Space Systems (J-spacesystems). "</string>
 	<string name="plugin_ski_name">Skikartvisning</string>
 	<string name="osmand_accessibility_description">Dette programtillegget gjør enhetens tilgjengelighetsfunksjoner tilgjengelige direkte i OsmAnd. Det muliggjør f.eks justering av talehastigheten for TTS-tale, innstilling av styrekors-skjermnavigering ved hjelp av en styrekule for zoomkontroll, eller bruke tekst-til-tale-tilbakemelding, f.eks auto-annonsering av din posisjon.</string>
@@ -1439,4 +1439,6 @@
     <string name="region_maps">Regionkart</string>
     <string name="world_maps">Verdenskart</string>
     <string name="hillshade_layer_disabled">Relieffskyggelag deaktivert</string>
+    <string name="share_menu_location">Del posisjon</string>
+    <string name="shared_string_send">Send</string>
     </resources>

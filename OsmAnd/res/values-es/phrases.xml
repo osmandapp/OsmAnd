@@ -2365,4 +2365,9 @@
 	<string name="poi_historic_farm">Granja histórica</string>
 	<string name="poi_historic_railway_station">Estación ferroviaria histórica</string>
 
+<string name="poi_club_freemasonry">Logia Masónica</string>
+	<string name="poi_club_sailing">Club de veleros</string>
+	<string name="poi_club_scout">Club de exploradores</string>
+
+
 </resources>

@@ -2333,4 +2333,8 @@
 
 	<string name="poi_tourism_yes">Туристический объект</string>
 
+	<string name="poi_club_freemasonry">Масонская Ложа</string>
+	<string name="poi_club_sailing">Клуб парусного спорта</string>
+	<string name="poi_club_scout">Клуб скаутов</string>
+
 </resources>

@@ -474,7 +474,7 @@
 	<string name="srtm_paid_version_title">Complemento de curvas de nivel</string>
 	<string name="osmand_srtm_long_description_1000_chars">"Este complemento proporciona una capa superpuesta de curvas de nivel y una capa (de relieve) sombreada, que se pueden visualizar sobre los mapas descargados de OsmAnd. Esta funcionalidad será muy apreciada por atletas, caminantes, excursionistas, y cualquiera interesado en la estructura de relieve de un paisaje.
 \n\nLos datos globales (entre 70 grados norte y 70 grados sur) se basan en mediciones de SRTM (Shuttle Radar Topography Mission, o en español Misión de Topografía por Radar desde Transbordador) y ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer, o en español Radiómetro Espacial Avanzado de Emisión Térmica y Reflexión), un instrumento de captura de imágenes a bordo de Terra, el satélite insignia del Sistema de Observación de la Tierra de la NASA. ASTER es un esfuerzo cooperativo entre la NASA, el Ministerio de Economía, Comercio e Industria de Japón (METI) y Sistemas Espaciales de Japón (J-spacesystems). "</string>
-	<string name="srtm_plugin_description">"Este complemento proporciona tanto una capa superpuesta de curvas de nivel y una capa (de relieve) sombreada, que se pueden visualizar sobre los mapas sin conexión de OsmAnd. Esta funcionalidad será muy apreciada por atletas, caminantes, excursionistas, y cualquiera interesado en la estructura de relieve de un paisaje.
+	<string name="srtm_plugin_description">"Este complemento proporciona tanto una capa superpuesta de curvas de nivel y una capa (de relieve) sombreada, que se pueden visualizar sobre los mapas descargados de OsmAnd. Esta funcionalidad será muy apreciada por atletas, caminantes, excursionistas, y cualquiera interesado en la estructura de relieve de un paisaje.
 \n\nLos datos globales (entre 70 grados norte y 70 grados sur) se basan en mediciones de SRTM (Shuttle Radar Topography Mission, o en español Misión de Topografía por Radar Shuffle) y ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer, o en español Radiómetro Espacial Avanzado de Emisión Térmica y Reflexión), un instrumento de captura de imágenes a bordo de Terra, el satélite insignia del Sistema de Observación de la Tierra de la NASA. ASTER es un esfuerzo cooperativo entre la NASA, el Ministerio de Economía, Comercio e Industria de Japón (METI) y Sistemas Espaciales de Japón (J-spacesystems). "</string>
 	<string name="plugin_touringview_descr">"Activando esta vista cambia el estilo del mapa OSMAnd a la \'Vista turística\', que es una vista de alto detalle, especial para viajeros y conductores profesionales.
 \n\nEsta vista proporciona, en cualquier nivel de ampliación del mapa, la máxima cantidad de detalles de viaje disponible en los datos del mapa (especialmente carreteras, senderos, caminos y marcas de orientación).
@@ -791,11 +791,11 @@
 	<string name="prefer_in_routing_descr">Preferir usar autopistas</string>
     <string name="max_speed_none">ninguna</string>
     <string name="index_name_openmaps">OpenMaps UE</string>
-    <string name="download_hillshade_item">Sombreado</string>
-    <string name="download_hillshade_maps">Superposición del sombreado</string>
+    <string name="download_hillshade_item">Sombreados</string>
+    <string name="download_hillshade_maps">Sombreado</string>
     <string name="tip_recent_changes_1_1_2_t">"Cambios en 1.1.2:\n\t* Mejoras en el complemento de Audio/vídeo (fotos con información EXIF)\n\t* Usabilidad del complemento de curvas de nivel reestructurada y corregida\n\t* Paquetes del sombreado para el complemento de Curvas de nivel\n\t* Corrección de errores (enrutamiento subóptimo) "</string>
     
-    <string name="local_indexes_cat_srtm">Datos de curvas de nivel</string>
+    <string name="local_indexes_cat_srtm">Curvas de nivel</string>
     <string name="local_indexes_cat_av">Datos multimedia</string>
     <string name="stop_routing_confirm">¿Seguro que quiere parar la navegación?</string>
     <string name="clear_dest_confirm">¿Quiere quitar su punto de destino (y los puntos de ruta)?</string>
@@ -847,8 +847,8 @@
     <string name="download_select_map_types">Otros mapas</string>
     <string name="download_roads_only_item">Sólo caminos</string>
     <string name="download_srtm_maps">Curvas de nivel</string>
-    <string name="download_regular_maps">Mapas normales</string>
-    <string name="download_roads_only_maps">Mapas viales</string>
+    <string name="download_regular_maps">Mapa estándar</string>
+    <string name="download_roads_only_maps">Mapa sólo vial</string>
     <string name="rendering_attr_alpineHiking_name">Escala de senderismo Alpino (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Dibujar senderos según la escala SAC</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Superponer símbolo de senderismo</string>
@@ -971,7 +971,7 @@
 \n- Paradas de transporte público (autobús, tranvía, tren) opcionales, incluidos los nombres de líneas
 \n- Grabación opcional del recorrido a un archivo GPX local o a servicios en línea
 \n- Muestra la velocidad y altitud opcionalmente
-\n- Muestra curvas de nivel y relieve sombreado (a través de un extra adicional)
+\n- Muestra curvas de nivel y relieve sombreado (mediante un complemento adicional)
 \n\nContribuir directamente a OpenStreetMap:\n\n- Informar de los errores del mapa
 \n- Subir rutas GPX a OSM directamente desde la aplicación
 \n- Añadir puntos de interés y subirlos directamente a OSM (o posteriormente si está sin conexión)
@@ -989,7 +989,7 @@
 \n- África: **
 \n- Antártida: *
 \n\nLa lista de países incluidos (¡prácticamente todo el mundo!):
-\n\nAfganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Antillas Holandesas, Arabia Saudita, Argelia, Argentina, Armenia, Aruba, Australia, Austria, Azerbaiyán, Bahamas, Bahrein, Bangladesh, Barbados, Bélgica, Belice, Benín, Bermuda, Bielorrusia, Bolivia, Bonaire, Bosnia y Herzegovina, Botswana, Brasil, Brunei, Bulgaria, Burkina Faso, Burundi, Bután, Cabo Verde, Camboya, Camerún, Canadá, Chad, Chile, China, Chipre, Colombia, Comoras, Congo, Corea del Norte, Corea del Sur, Costa de Marfil, Costa Rica, Croacia, Cuba, Curazao, Dinamarca, Djibouti, Dominica, Ecuador, Egipto, El Salvador, El Vaticano, Emiratos Árabes Unidos, Eritrea, Eslovaquia, Eslovenia, España, Estados Unidos de América, Estonia, Etiopía, Fiji, Filipinas, Finlandia, Francia, Gabón, Gambia, Georgia, Georgia del Sur, Ghana, Gibraltar, Granada, Grecia, Groenlandia, Guadalupe, Guam, Guatemala, Guayana Francesa, Guernsey, Guinea, Guinea-Bissau, Guinea Ecuatorial, Guyana, Haití, Honduras, Hong Kong, Hungría, India, Indonesia, Irán, Iraq, Irlanda, Isla de Man, Islandia, Islas Vírgenes Británicas, Israel, Italia, Jamaica, Japón, Jersey, Jordania, Kazajstán, Kenya, Kirguistán, Kiribati, Kuwait, Laos, Lesotho, Letonia, Líbano, Liberia, Libia, Liechtenstein, Lituania, Luxemburgo, Macao, Macedonia, Madagascar, Malasia, Malawi, Maldivas, Malí, Malta, Marruecos, Martinica, Mauricio, Mauritania, Mayotte, México, Micronesia, Moldavia, Mónaco, Mongolia, Montenegro, Montserrat, Mozambique, Myanmar, Namibia, Nauru, Nepal, Nicaragua, Níger, Nigeria, Noruega, Nueva Caledonia, Nueva Zelanda, Omán, Países Bajos, Pakistán, Palau, Panamá, Papúa Nueva Guinea, Paraguay, Perú, Polinesia Francesa, Polonia, Portugal, Puerto Rico, Qatar, Reino Unido, República Centroafricana, República Checa, República Dominicana, Ruanda, Rumanía, Rusia, Sahara Occidental, Saint-Barthelemy, Saint Helena, Saint Kitts y Nevis, Samoa, San Marino, San Martin, San Pedro y Miquelón, Santa Lucía, San Vicente y las Granadinas, Senegal, Serbia, Seychelles, Sierra Leona, Singapur, Siria, Somalia, Sri Lanka, Sudáfrica, Sudán, Sudán del Sur, Suecia, Suiza, Suriname, Swazilandia, Tailandia, Taiwán, Tanzania, Tayikistán, Territorio Palestino, Timor Oriental, Togo, Tokelau, Tonga, Trinidad y Tobago, Túnez, Turkmenistán, Turquía, Tuvalu, Ucrania, Uganda, Uruguay, Uzbekistán, Vanuatu, Venezuela, Vietnam, Wallis y Futuna, Yemen, Zambia, Zimbabwe. "</string>
+\n\nAfganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Antillas Holandesas, Arabia Saudita, Argelia, Argentina, Armenia, Aruba, Australia, Austria, Azerbaiyán, Bahamas, Bahrein, Bangladesh, Barbados, Bélgica, Belice, Benín, Bermuda, Bielorrusia, Bolivia, Bonaire, Bosnia y Herzegovina, Botswana, Brasil, Brunei, Bulgaria, Burkina Faso, Burundi, Bután, Cabo Verde, Camboya, Camerún, Canadá, Chad, Chile, China, Chipre, Colombia, Comoras, Congo, Corea del Norte, Corea del Sur, Costa de Marfil, Costa Rica, Croacia, Cuba, Curazao, Dinamarca, Djibouti, Dominica, Ecuador, Egipto, El Salvador, El Vaticano, Emiratos Árabes Unidos, Eritrea, Eslovaquia, Eslovenia, España, Estados Unidos de América, Estonia, Etiopía, Fiji, Filipinas, Finlandia, Francia, Gabón, Gambia, Georgia, Georgia del Sur, Ghana, Gibraltar, Granada, Grecia, Groenlandia, Guadalupe, Guam, Guatemala, Guayana Francesa, Guernsey, Guinea, Guinea-Bissau, Guinea Ecuatorial, Guyana, Haití, Honduras, Hong Kong, Hungría, India, Indonesia, Irán, Iraq, Irlanda, Isla de Man, Islandia, Islas Vírgenes Británicas, Israel, Italia, Jamaica, Japón, Jersey, Jordania, Kazajstán, Kenya, Kirguistán, Kiribati, Kuwait, Laos, Lesotho, Letonia, Líbano, Liberia, Libia, Liechtenstein, Lituania, Luxemburgo, Macao, Macedonia, Madagascar, Malasia, Malawi, Maldivas, Malí, Malta, Marruecos, Martinica, Mauricio, Mauritania, Mayotte, México, Micronesia, Moldavia, Mónaco, Mongolia, Montenegro, Montserrat, Mozambique, Myanmar, Namibia, Nauru, Nepal, Nicaragua, Níger, Nigeria, Noruega, Nueva Caledonia, Nueva Zelanda, Omán, Países Bajos, Pakistán, Palau, Panamá, Papúa Nueva Guinea, Paraguay, Perú, Polinesia Francesa, Polonia, Portugal, Puerto Rico, Qatar, Reino Unido, República Centroafricana, República Checa, República Dominicana, Ruanda, Rumanía, Rusia, Sahara Occidental, Saint-Barthelemy, Saint Helena, Saint Kitts y Nevis, Samoa, San Marino, San Martín, San Pedro y Miquelón, Santa Lucía, San Vicente y las Granadinas, Senegal, Serbia, Seychelles, Sierra Leona, Singapur, Siria, Somalia, Sri Lanka, Sudáfrica, Sudán, Sudán del Sur, Suecia, Suiza, Suriname, Swazilandia, Tailandia, Taiwán, Tanzania, Tayikistán, Territorio Palestino, Timor Oriental, Togo, Tokelau, Tonga, Trinidad y Tobago, Túnez, Turkmenistán, Turquía, Tuvalu, Ucrania, Uganda, Uruguay, Uzbekistán, Vanuatu, Venezuela, Vietnam, Wallis y Futuna, Yemen, Zambia, Zimbabwe. "</string>
 	<string name="osmand_plus_play_title_30_chars">Navegación y Mapas OsmAnd+</string>
 	<string name="osmand_plus_short_description_80_chars">Visor y navegador móvil global para mapas de OSM con y sin conexión</string>
 	<string name="osmand_plus_long_description_1000_chars">" OsmAnd+ (OSM Automated Navigation Directions) OsmAnd+ es una aplicación de navegación de código abierto con acceso a una amplia variedad de datos globales de OpenStreetMap (OSM). Todos los datos del mapa (vectores y teselas), pueden ser almacenados en la memoria del teléfono para su uso sin conexión. OsmAnd también ofrece funcionalidad de rutas con y sin conexión con guía giro-a-giro mediante voz. OsmAnd+ es la versión de pago de la aplicación, comprándola da soporte al proyecto, financia el desarrollo de nuevas funciones, y recibe las últimas actualizaciones. Algunas de las funciones fundamentales: - Completa funcionalidad sin conexión (guardar los mapas vectoriales o teselas descargados en el almacenamiento del dispositivo) - Mapas mundiales vectoriales compactos disponibles - Descarga del mapa de país o región directamente desde la aplicación - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés, favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable - Búsqueda sin conexión de direcciones y lugares (PDI) - Rutas sin conexión para distancias cortas (experimental) - Modos de coche, bicicleta, y peatón con: - Cambio automático opcional de vista día/noche - Ampliación opcional según la velocidad - Alineación del mapa opcional según brújula o dirección de movimiento - Indicación de carriles, mostrar límites de velocidad, voces grabadas y generadas opcionales "</string>
@@ -1179,7 +1179,7 @@
 	<string name="confirm_interrupt_download">¿Interrumpir la descarga del archivo?</string>
 	<string name="first_time_msg">Gracias por usar OsmAnd. Para muchas funciones de la aplicación, necesita algunos datos regionales sin conexión que puedes descargar mediante \'Ajustes\' → \'Gestionar mapas\'. Luego será capaz de ver los mapas, ubicar direcciones, buscar PDIs y transporte público.</string>    
 	<string name="basemap_was_selected_to_download">Para el correcto funcionamiento de la aplicación, se necesita el mapa base (World Basemap) y se seleccionó para su descarga.</string>
-	<string name="local_indexes_cat_tile">Mapas en línea y teselas</string>
+	<string name="local_indexes_cat_tile">Mapas de teselas en línea y en caché</string>
 	<string name="local_indexes_cat_map">Mapas descargados (vectores)</string>
 	<string name="index_settings_descr">Descargue y gestione mapas sin conexión almacenados en su dispositivo</string>
 	<string name="map_online_plugin_is_not_installed">Activa el complemento de mapas en línea, para seleccionar diferentes fuentes de mapas</string>
@@ -1456,8 +1456,8 @@
 	<string name="local_index_transport_data">Datos de transporte público</string>
 	<string name="local_index_map_data">Datos de mapa</string>
 	<string name="local_indexes_cat_backup">Desactivado</string>
-	<string name="local_indexes_cat_tts">Datos de voz (TTS)</string>
-	<string name="local_indexes_cat_voice">Datos de voz (grabado)</string>
+	<string name="local_indexes_cat_tts">Avisos de voz (TTS)</string>
+	<string name="local_indexes_cat_voice">Avisos de voz (grabado)</string>
 	<string name="local_indexes_cat_poi">Datos de PDI</string>
 	<string name="ttsvoice">Voz TTS</string>
 	<string name="search_offline_clear_search">Nueva búsqueda</string>
@@ -2096,7 +2096,7 @@
     <string name="get_full_version">Versión completa</string>
 <string name="regions">Regiones</string>
     <string name="additional_maps">Mapas adicionales</string>
-    <string name="region_maps">Mapas regionales</string>
+    <string name="region_maps">Mapas de la región</string>
     <string name="world_maps">Mapas mundiales</string>
     <string name="world_regions">Regiones del mundo</string>
     <string name="downloads">Descargas</string>
@@ -2116,4 +2116,5 @@
     <string name="shared_string_send">Enviar</string>
     <string name="application_dir_description">Elija donde guardar los archivos de los mapas.</string>
 <string name="hello_blank_fragment">Hola fragmento vacío</string>
-    </resources>
+    <string name="show_on_start_description">OsmAnd iniciará desde la pantalla del mapa</string>
+</resources>

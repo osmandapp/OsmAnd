@@ -2337,4 +2337,9 @@
 	<string name="poi_historic_farm">Historic farm</string>
 	<string name="poi_historic_railway_station">Historic railway station</string>
 
+	<string name="poi_club_freemasonry">Masonic Lodge</string>
+	<string name="poi_club_sailing">Sailing club</string>
+	<string name="poi_club_scout">Scout club</string>
+
+
 </resources>
