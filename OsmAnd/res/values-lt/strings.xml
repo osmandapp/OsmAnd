@@ -2135,7 +2135,7 @@
 <string name="recent_places">Vėliausios vietos</string>
 	<string name="address_unknown">Adresas vis dar nežinomas</string>
     <string name="routing_attr_avoid_shuttle_train_name">Vengti greitųjų traukinių</string>
-	<string name="routing_attr_avoid_shuttle_train_description"/>
+	<string name="routing_attr_avoid_shuttle_train_description">Vengti priemiestinių traukinių</string>
     <string name="dahboard_options_dialog_title">Duomenų skydelio nustatymai</string>
 	<string name="show_on_start">Rodyti aktyvuojant</string>
 	<string name="offline_maps_and_navigation">Offline žemėlapiai\n&amp; navigacija</string>
@@ -2174,10 +2174,11 @@
     <string name="favorite_category_dublicate_message">Toks kategorijos pavadinimas jau yra. Sugalvokite naują.</string>
     <string name="favorite_category_name">Kagtegorijos pavadinimas</string>
     <string name="favorite_category_add_new_title">Pridėti naują kategoriją</string>
-    <string name="get_full_version">Atsisiųsti mokamą versiją</string>
+    <string name="get_full_version">Visa versija</string>
     <string name="downloads">Atsisiuntimai</string>
     <string name="value_downloaded_from_max">%1$.1f iš %2$.1f MB</string>
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">Atnaujinti viską (%1$s MB)</string>
 <string name="srtm_plugin_disabled">Kontūro linijos išjungtos</string>
+    <string name="shared_string_send">Siųsti</string>
     </resources>
