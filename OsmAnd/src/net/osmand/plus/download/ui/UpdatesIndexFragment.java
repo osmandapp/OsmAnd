@@ -1,4 +1,4 @@
-﻿package net.osmand.plus.download.ui;
+package net.osmand.plus.download.ui;
 
 import java.util.Comparator;
 import java.util.List;

@@ -1,4 +1,4 @@
-ï»¿package net.osmand.plus.download.ui;
+package net.osmand.plus.download.ui;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -1060,7 +1060,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 
 				final String mapDescription = getMapDescription(child.getFileName());
 				if (mapDescription.length() > 0) {
-					builder.append(mapDescription).append(" â€¢ ");
+					builder.append(mapDescription).append(" • ");
 				}
 
 				if (child.getSize() >= 0) {
@@ -1069,7 +1069,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 					} else {
 						builder.append(child.getSize()).append(" KB");
 					}
-					builder.append(" â€¢ ");
+					builder.append(" • ");
 				}
 
 				if (child.getType() == LocalIndexType.TILES_DATA) {
