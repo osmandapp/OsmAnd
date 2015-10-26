@@ -2108,7 +2108,7 @@
     <string name="file_size_in_mb">%.1f MB</string>
 <string name="update_all">Actualizar todo (%1$s MB)</string>
 <string name="free_downloads_used">Descargas gratis usadas</string>
-    <string name="free_downloads_used_description">Puedes configurar cuántas descargas gratis ha usado</string>
+    <string name="free_downloads_used_description">Configure cuántas descargas gratis usará</string>
 <string name="simulate_initial_startup_descr">Restablece la bandera que indica el primer arranque y mantiene los demás ajustes en su estado original</string>
     <string name="simulate_initial_startup">Simular arranque inicial</string>
     <string name="share_geo">geo:</string>
