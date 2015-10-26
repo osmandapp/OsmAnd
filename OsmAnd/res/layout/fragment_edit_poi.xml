@@ -47,7 +47,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/poi_dialog_name"
-                        android:imeOptions="actionSend"
+                        android:imeOptions="actionNext"
                         android:inputType="text"
                         tools:text="@string/lorem_ipsum"/>
 

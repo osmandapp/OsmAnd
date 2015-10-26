@@ -189,12 +189,11 @@ public class EditPoiDialogFragment extends DialogFragment {
 						Uri.parse("https://wiki.openstreetmap.org/wiki/Map_Features")));
 			}
 		});
-		onlineDocumentationButton.setImageDrawable(
-				getMyApplication().getIconsCache()
-						.getPaintedContentIcon(R.drawable.ic_action_help,
-								getResources().getColor(
-										isLightTheme ? R.color.inactive_item_orange
-												: R.color.dash_search_icon_dark)));
+
+		final int colorId = isLightTheme ? R.color.inactive_item_orange : R.color.dash_search_icon_dark;
+		final int color = getResources().getColor(colorId);
+		onlineDocumentationButton.setImageDrawable(getMyApplication().getIconsCache()
+				.getPaintedContentIcon(R.drawable.ic_action_help, color));
 		final ImageButton poiTypeButton = (ImageButton) view.findViewById(R.id.poiTypeButton);
 		poiTypeButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -266,6 +265,14 @@ public class EditPoiDialogFragment extends DialogFragment {
 		setAdapterForPoiTypeEditText();
 		setCancelable(false);
 		return view;
+	}
+
+	@NonNull
+	@Override
+	public Dialog onCreateDialog(Bundle savedInstanceState) {
+		final Dialog dialog = super.onCreateDialog(savedInstanceState);
+		dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+		return dialog;
 	}
 
 	private void save() {
@@ -355,7 +362,7 @@ public class EditPoiDialogFragment extends DialogFragment {
 
 
 	public static EditPoiDialogFragment createAddPoiInstance(double latitude, double longitude,
-													   OsmandApplication application) {
+															 OsmandApplication application) {
 		Node node = new Node(latitude, longitude, -1);
 		Amenity amenity;
 		amenity = new Amenity();
@@ -600,6 +607,7 @@ public class EditPoiDialogFragment extends DialogFragment {
 					return handled;
 				}
 			};
+
 	public interface OnFragmentActivatedListener {
 		void onFragmentActivated();
 	}
