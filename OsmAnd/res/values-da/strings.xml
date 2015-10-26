@@ -37,7 +37,7 @@
     <string name="recording_default_name">Optager</string>
     <string name="map_widget_av_notes">Audio-/videonoter</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd udvidelse for offline højdekurver</string>
-    <string name="osmand_srtm_long_description_1000_chars">"Udvidelsen giver både en højdekurver overlejring og et relieflag, der vises ovenpå OsmAnds offline kort. Funktionaliteten er meget værdsat af sportsfolk, vandrere, og enhver interesseret i en relief struktur af landskabet.
+    <string name="osmand_srtm_long_description_1000_chars">"Udvidelsen giver både en højdekurver overlejring og et relieflag, der vises ovenpå OsmAnds standard kort. Funktionaliteten er meget værdsat af sportsfolk, vandrere, og enhver interesseret i en relief struktur af landskabet.
 \n\nDe globale data (mellem 70 grader nord og 70 grader syd) er baseret på målinger af SRTM (Shuttle Radar Topografi Mission) og ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), et billeddannende instrument ombord på Terra satellitten, flagskibet i NASAs Earth Observering system. ASTER er et samarbejde mellem NASA, Japans Ministry of Economy, Trade and Industry  (METI), og Japan Space Systems (J-spacesystems). "</string>
     <string name="map_widget_distancemeasurement">Afstandsmåling</string>
     <string name="audionotes_location_not_defined">Placering der skal tilknyttes til noten er ikke defineret endnu. \'Brug placering ...\' for at tildele en note til den angivne placering</string>
@@ -47,13 +47,13 @@
     <string name="audionotes_plugin_name">Audio-/videonoter</string>
     <string name="index_srtm_parts">dele</string>
     <string name="index_srtm_ele">Højdekurver</string>
-    <string name="srtm_plugin_description">"Udvidelsen giver både en højdekurver overlejring og et relieflag, der vises ovenpå OsmAnds offline kort. Funktionaliteten er meget værdsat af sportsfolk, vandrere, og enhver interesseret i en relief struktur af landskabet.
+    <string name="srtm_plugin_description">"Udvidelsen giver både en højdekurver overlejring og et relieflag, der vises ovenpå OsmAnds standard kort. Funktionaliteten er meget værdsat af sportsfolk, vandrere, og enhver interesseret i en relief struktur af landskabet.
 \n\nDe globale data (mellem 70 grader nord og 70 grader syd) er baseret på målinger af SRTM (Shuttle Radar Topografi Mission) og ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), et billeddannende instrument ombord på Terra satellitten, flagskibet i NASAs Earth Observering system. ASTER er et samarbejde mellem NASA, Japans Ministry of Economy, Trade and Industry  (METI), og Japan Space Systems (J-spacesystems). "</string>
     <string name="srtm_plugin_name">Højdekurver</string>
     <string name="download_select_map_types">Andre kort</string>
     <string name="download_roads_only_item">Kun veje</string>
     <string name="download_srtm_maps">Højdekurver</string>
-    <string name="download_regular_maps">Almindelige kort</string>
+    <string name="download_regular_maps">Standard kort</string>
     <string name="download_roads_only_maps">Kort kun med veje</string>
 
     <string name="rendering_attr_noAdminboundaries_name">Skjul grænser</string>
@@ -212,7 +212,7 @@
     <string name="map_widget_compass">Kompas</string>
 
     <string name="download_hillshade_item">Reliefskygger</string>
-    <string name="download_hillshade_maps">Relief overlejringer</string>
+    <string name="download_hillshade_maps">Reliefskygger</string>
     <string name="tip_recent_changes_1_1_2_t">Ændringer i 1.1.2:
 	\n* Audio/video udvidelse forbedring (fotos med EXIF information)
 	\n* Rettet brugbarhed og omstruktureret højdekurverudvidelse
@@ -339,8 +339,8 @@
     <string name="first_time_msg">Til mange af funktionerne i programmet skal der bruges nogle regionale offline data som kan hentes via \'Indstillinger\' → \'Administrer kortfiler\'. Bagefter kan man se kort, søge adresser, finde interessepunkter (IP) og kolllektivtrafik.</string>
     <string name="basemap_was_selected_to_download">Basiskort er nødvendig for korrekt programfunktion og blev automatisk valgt.</string>
     <string name="select_index_file_to_download">Fandt intet. Hvis man ikke kan finde sin region kan man lave den selv (se http://osmand.net).</string>
-    <string name="local_indexes_cat_tile">Onlinekort og kortfliser</string>
-    <string name="local_indexes_cat_map">Offlinekort (vektor)</string>
+    <string name="local_indexes_cat_tile">Onlinekort og cachelagrede kortfliser</string>
+    <string name="local_indexes_cat_map">Standardkort (vektor)</string>
 
     <string name="index_settings_descr">Hent og administrer offline kortfiler gemt på enheden</string>
     <string name="map_online_plugin_is_not_installed">Aktiver onlinekort udvidelsen for at vælge andre kortkilder</string>
@@ -354,7 +354,7 @@
     <string name="osmand_accessibility_description">"Udvidelsen gør  tilgængelighedsfunktioner tilgængelige direkte i OsmAnd. Det letter fx. justering af tale for TTS stemmerne, konfiguration af styrekryds (D-pad) skærmnavigation ved hjælp af en styrekugle til zoomknappen, eller ved hjælp af tekst-til-tale tilbagemeldinger, og som at meddele positionen automatisk."</string>
 	
 	
-	<string name="osmand_rastermaps_plugin_description">"Udvidelsen giver adgang til mange typer af online (såkaldte fliser eller raster) kort, fra foruddefinerede OpenStreetMap kortfliser (som Mapnik) til satellitbilleder og lag til særlig anvendelse som vejr-, klima- eller geologiskekort og relieflag osv.\n\nEnhver af disse kort kan enten bruges som det vigtigste (primær) kort, der skal vises på kortskærmen, eller som en over- eller underlejring til et andet basiskort (såsom OsmAnd offline kort). For at gøre underlejringskortet mere synlig, kan visse elementer af OsmAnd vektorkort nemt skjules via \'Konfigurer kort\' menuen som ønsket.
+	<string name="osmand_rastermaps_plugin_description">"Udvidelsen giver adgang til mange typer af online (såkaldte fliser eller raster) kort, fra foruddefinerede OpenStreetMap kortfliser (som Mapnik) til satellitbilleder og lag til særlig anvendelse som vejr-, klima- eller geologiskekort og relieflag osv.\n\nEnhver af disse kort kan enten bruges som det vigtigste (primær) kort, der skal vises på kortskærmen, eller som en over- eller underlejring til et andet basiskort (såsom OsmAnd standard offline kort). For at gøre underlejringskortet mere synlig, kan visse elementer af OsmAnd vektorkort nemt skjules via \'Konfigurer kort\' menuen som ønsket.
 \n\nKortfliser kan hentes direkte via online-kilder, eller kan fremstilles til offline brug (og manuelt kopieres til OsmAnd datamappen) som en SQLite database. Kort kan fremstilles ved hjælp af en række 3. parts kortværktøjer. "</string>
 
     <string name="osmand_development_plugin_description">Viser indstillinger for udviklings- og fejlretningsfunktioner som rutesimulering eller optegningsydeevne indikation, eller stemmevejledning.\nIndstillinger er beregnet til udviklere og er ikke nødvendig for den almindelige bruger.</string>
@@ -677,8 +677,8 @@
     <string name="local_index_transport_data">Kollektivtrafikdata</string>
     <string name="local_index_map_data">Kortdata</string>
     <string name="local_indexes_cat_backup">Deaktiveret</string>
-    <string name="local_indexes_cat_tts">Stemmedata (TTS)</string>
-    <string name="local_indexes_cat_voice">Stemmedata (optaget)</string>
+    <string name="local_indexes_cat_tts">Stemmemeddelelser (TTS)</string>
+    <string name="local_indexes_cat_voice">Stemmemeddelelser (optaget)</string>
     <string name="local_indexes_cat_poi">Interessepunkt-data</string>
     <string name="ttsvoice">TTS stemme</string>
     <string name="search_offline_clear_search">Ny søgning</string>
@@ -1227,7 +1227,7 @@
     <string name="files_limit">%1$d filer tilbage</string>
     <string name="available_downloads_left">%1$d filer kan hentes</string>
     <string name="use_magnetic_sensor">Magnetisk sensor</string>
-    <string name="local_indexes_cat_srtm">Højdekurvedata</string>
+    <string name="local_indexes_cat_srtm">Højdekurver</string>
     <string name="use_magnetic_sensor_descr">Brug magnetisksensor i stedet for retningssensor til at bestemme kompasværdi</string>
     <string name="use_kalman_filter_compass_descr">Reducerer støj i kompasaflæsninger, men tilføjer inerti</string>
     <string name="use_kalman_filter_compass">Kalman filter</string>
@@ -1551,7 +1551,7 @@
     <string name="osmo_create_group">Opret gruppe</string>
     <string name="osmo_server_operation_failed">Osmo Server operation mislykkedes</string>
     <string name="osmo_activity">OpenStreetMap Overvågning</string>
-    <string name="osmo_enable_tracker">Send placeringer</string>
+    <string name="osmo_enable_tracker">Send positioner</string>
     <string name="osmo_control">OsMo hurtig adgang</string>
 
     <string name="import_file_favourites">Gem punkter som en GPX-fil eller importer dem til favoritter?</string>
@@ -1943,7 +1943,7 @@
     <string name="routing_settings_2">Navigationsindstillinger</string>
     <string name="general_settings_2">Generelle indstillinger</string>
     <string name="shared_string_clear_all">Slet alle</string>
-    <string name="shared_string_my_location">Placering</string>
+    <string name="shared_string_my_location">Position</string>
     <string name="shared_string_my_favorites">Favoritter</string>
     <string name="shared_string_my_tracks">Spor</string>
     <string name="shared_string_currently_recording_track">Nuværende optagelsesspor</string>
@@ -2009,7 +2009,7 @@
     <string name="routing_attr_height_description">Køretøjets højde der tillades på ruter</string>
     <string name="use_fast_recalculation">Smart rutegenberegning</string>
     <string name="use_fast_recalculation_desc">Genberegn kun den indledende del af ruten for lange ture</string>
-    <string name="osmo_share_my_location">Del placering</string>
+    <string name="osmo_share_my_location">Del position</string>
     <string name="shared_string_logoff">Log af</string>
     <string name="rendering_value_disabled_name">Deaktiveret</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Farvelægning ifølge ruteanvendelse</string>
@@ -2195,4 +2195,5 @@
     <string name="shared_string_send">Send</string>
     <string name="hello_blank_fragment">Hej tomme fragment</string>
 <string name="application_dir_description">Vælg hvor kortfilerne skal gemmes.</string>
+<string name="show_on_start_description">OsmAnd vil starte på kortskærmen</string>
 </resources>

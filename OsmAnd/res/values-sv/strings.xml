@@ -136,8 +136,8 @@
 <string name="unknown_from_location">Startpunkten är ännu inte bestämd</string>
 <string name="unknown_location">Positionen är ännu inte känd</string>
 <string name="confirm_interrupt_download">Vill du avbryta nedladdningen?</string>
-<string name="local_indexes_cat_tile">Online-kartor och kartbitar (tiles)</string>
-<string name="local_indexes_cat_map">Offline-kartor (vektor)</string>
+<string name="local_indexes_cat_tile">Online-kartor och mellanlagrade kartbitar (tiles)</string>
+<string name="local_indexes_cat_map">Standardkartor (vektor)</string>
 
 <string name="index_settings_descr">Ladda ner och hantera offline-kartor lagrade på din enhet</string>
 <string name="online_map_settings">Online-kartor</string>
@@ -457,8 +457,8 @@
 <string name="local_index_transport_data">Kollektivtrafikdata</string>
 <string name="local_index_map_data">Kartdata</string>
 <string name="local_indexes_cat_backup">Inaktiverade</string>
-<string name="local_indexes_cat_tts">Röstdata (TTS)</string>
-<string name="local_indexes_cat_voice">Röstdata (inspelat)</string>
+<string name="local_indexes_cat_tts">Röster (TTS)</string>
+<string name="local_indexes_cat_voice">Röster (inspelade)</string>
 
 <string name="local_indexes_cat_poi">Intressepunktsdata</string>
 <string name="ttsvoice">TTS-röst</string>
@@ -861,8 +861,8 @@
 	<string name="rendering_attr_showRoadMaps_description">Välj när du vill visa kartor som endast har vägar:</string>
 	<string name="rendering_attr_showRoadMaps_name">Kartor med enbart vägar</string>
     <string name="download_roads_only_item">"Vägar "</string>
-    <string name="download_regular_maps">Vanliga kartor</string>
-    <string name="download_roads_only_maps">Kartor med enbart vägar</string>
+    <string name="download_regular_maps">Standardkartor</string>
+    <string name="download_roads_only_maps">Karta med enbart vägar</string>
     <string name="safe_mode_description">Kör program i felsäkert läge (för långsammare Android istället för inbyggd kod).</string>
     <string name="safe_mode">Felsäkert läge</string>
     <string name="native_library_not_running">Programmet körs i felsäkert läge (inaktivera det i Inställningar).</string>
@@ -969,7 +969,7 @@
     <string name="av_settings">Inställningar för ljud och video </string>
     <string name="recording_error">Ett fel uppstod under inspelningen </string>
     <string name="recording_camera_not_available">Ingen kamera tillgänglig</string>
-    <string name="srtm_plugin_description">"Denna modul erbjuder överlägg med höjdkurvor som kan visas i kombination med OsmAnds offline-kartor. Denna funktion kommer att uppskattas av idrottsmän, vandrare och alla som är intresserade av höjdskillnander i landskapet.\n\nDessa globala data (mellan 70 grader norr och 70 grader syd) baseras på mätningar av SRTM (Shuttle Radar Topography Mission) och ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), ett bildinstrument ombord Terra, flaggskeppet i NASA:s Earth Observing System. ASTER är ett samprojekt mellan NASA, Japans Ministry of Economy, Trade and Industry (METI), and Japan Space Systems (J-spacesystems). "</string>
+    <string name="srtm_plugin_description">"Denna modul erbjuder överlägg med höjdkurvor som kan visas i kombination med OsmAnds standardkartor. Denna funktion kommer att uppskattas av idrottsmän, vandrare och alla som är intresserade av höjdskillnander i landskapet.\n\nDessa globala data (mellan 70 grader norr och 70 grader syd) baseras på mätningar av SRTM (Shuttle Radar Topography Mission) och ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), ett bildinstrument ombord Terra, flaggskeppet i NASA:s Earth Observing System. ASTER är ett samprojekt mellan NASA, Japans Ministry of Economy, Trade and Industry (METI), and Japan Space Systems (J-spacesystems). "</string>
     <string name="delete_target_point">Ta bort waypoint</string>
 	<string name="intermediate_point">Waypoint %1$s</string>
     <string name="poi_filter_nominatim">Online Nominatim</string>
@@ -1059,7 +1059,7 @@
 	<string name="Closest_Amenities">Närmaste bekvämligheter</string>
 	<string name="support_new_features_descr">Skänk lite pengar så att nya funktioner kan läggas till i appen</string>
 	<string name="download_hillshade_item">Skuggad relief</string>
-    <string name="download_hillshade_maps">Skuggad relief-överlägg</string>
+    <string name="download_hillshade_maps">Skuggad relief</string>
     <string name="tip_recent_changes_1_1_2_t">"Ändringar i 1.1.2:\n\t\t\n\t* Förbättring av ljud-/video-plugin (foton med EXIF-information)\n\t\t\n\t* Fixat till höjdkurvsmodulen\n\t\t\n\t* Skuggad relief-paket för höjdkurvsmodulen\n\t\t\n\t* Buggfixar (suboptimal ruttning) "</string>
     <string name="av_use_external_camera_descr">Andvänd systemets app för foton</string>
     <string name="av_use_external_camera">Använd kamera-app</string>
@@ -1125,7 +1125,7 @@
     <string name="favourites_list_activity">Välj favorit</string>
     <string name="local_openstreetmap_act_title">OSM-modifieringar</string>
 	<string name="tip_recent_changes_1_1_4_t">"Förändringar i 1.1.4:\n\t\n\t* Nytt gränssnitt\n\t* Buggfixar "</string>
-    <string name="local_indexes_cat_srtm">Höjdkurvsdata</string>
+    <string name="local_indexes_cat_srtm">Höjdkurvor</string>
     <string name="route_head">Riktning</string>
 	<string name="wait_current_task_finished">Vänta tills aktuell uppgift är slutförd</string>
 	<string name="tip_recent_changes_1_4_t">"Ändringar i 1.4:
@@ -1806,7 +1806,7 @@
 	<string name="shared_string_favorite">Favorit</string>
 	<string name="shared_string_favorites">Favoriter</string>
 	<string name="shared_string_add_to_favorites">Lägg till i Favoriter</string>
-	<string name="shared_string_my_location">Min plats</string>
+	<string name="shared_string_my_location">Min position</string>
 	<string name="shared_string_my_places">Mina platser</string>
 	<string name="shared_string_my_favorites">Mina favoriter</string>
 	<string name="shared_string_my_tracks">Mina spår</string>
@@ -1878,7 +1878,7 @@
 	<string name="use_fast_recalculation_desc">Räkna om endast början av rutten för långa resor</string>
 <string name="routing_attr_avoid_borders_name">Undvik gränsövergångar</string>
 	<string name="routing_attr_height_description">Ange tillåten fordonshöjd på rutter</string>
-    <string name="osmo_share_my_location">Dela ut min plats</string>
+    <string name="osmo_share_my_location">Dela ut min position</string>
     <string name="shared_string_logoff">Logga ut</string>
     <string name="rendering_value_disabled_name">Inaktiverad</string>
     <string name="osm_edit_context_menu_delete">Ta bort OSM-redigering</string>    
@@ -2055,4 +2055,5 @@
     <string name="application_dir_description">Välj var du vill spara kartfilerna.</string>
 <string name="share_menu_location">Dela plats</string>
     <string name="shared_string_send">Sänd</string>
+    <string name="hillshade_layer_disabled">Skuggad relief-lager inaktiverat</string>
     </resources>
