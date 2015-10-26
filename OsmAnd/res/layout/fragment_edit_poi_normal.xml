@@ -32,7 +32,8 @@
             style="@style/create_poi_text_field"
             android:layout_below="@id/contactInfoTextView"
             android:hint="@string/street_name"
-            android:inputType="textMultiLine"/>
+            android:inputType="textMultiLine"
+            tools:text="testText"/>
 
         <ImageView
             android:id="@+id/houseNumberImageView"

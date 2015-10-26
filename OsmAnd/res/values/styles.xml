@@ -115,6 +115,7 @@
         <item name="toolbar_theme">@style/OsmandLightTheme.Toolbar</item>
         <item name="new_app_theme">@style/OsmandLightTheme.NewAppTheme</item>
         <item name="android:textColorSecondary">@color/dashboard_black</item>
+        <item name="android:textColorHint">@color/icon_color</item>
         <item name="contextMenuButtonColor">@color/map_widget_blue</item>
 
     </style>
@@ -197,6 +198,7 @@
         <item name="toolbar_theme">@style/OsmandDarkTheme</item>
         <item name="new_app_theme">@style/OsmandDarkTheme</item>
         <item name="android:textColorSecondary">@color/map_widget_light</item>
+        <item name="android:textColorHint">@color/dash_search_icon_dark</item>
 
         <item name="contextMenuButtonColor">@color/osmand_orange</item>
     </style>
@@ -278,8 +280,6 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">1</item>
-        <item name="android:textColor">?android:textColorPrimary</item>
-        <item name="android:textColorHint">?android:textColorSecondary</item>
     </style>
 
     <style name="edit_poi_imageview_style">
