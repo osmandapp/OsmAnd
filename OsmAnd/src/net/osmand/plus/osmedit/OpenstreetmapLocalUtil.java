@@ -1,5 +1,7 @@
 package net.osmand.plus.osmedit;
 
+import android.content.Context;
+
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.osm.PoiType;
@@ -9,8 +11,6 @@ import net.osmand.osm.edit.OSMSettings.OSMTagKey;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
-
-import android.content.Context;
 
 public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 	
@@ -50,8 +50,8 @@ public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 	
 	@Override
 	public Node loadNode(Amenity n) {
-		PoiType st = n.getType().getPoiTypeByKeyName(n.getSubType());
-		if(n.getId() % 2 == 1 || st == null){
+		PoiType poiType = n.getType().getPoiTypeByKeyName(n.getSubType());
+		if(n.getId() % 2 == 1 || poiType == null){
 			// that's way id
 			return null;
 		}
@@ -61,9 +61,9 @@ public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 		Node entity = new Node(n.getLocation().getLatitude(),
 							   n.getLocation().getLongitude(),
 							   nodeId);
-		entity.putTag(st.getOsmTag(), st.getOsmValue());
-		if(st.getOsmTag2() != null) {
-			entity.putTag(st.getOsmTag2(), st.getOsmValue2());
+		entity.putTag(poiType.getOsmTag(), poiType.getOsmValue());
+		if(poiType.getOsmTag2() != null) {
+			entity.putTag(poiType.getOsmTag2(), poiType.getOsmValue2());
 		}
 		entity.putTag(OSMTagKey.NAME.getValue(), n.getName());
 		entity.putTag(OSMTagKey.OPENING_HOURS.getValue(), n.getOpeningHours());

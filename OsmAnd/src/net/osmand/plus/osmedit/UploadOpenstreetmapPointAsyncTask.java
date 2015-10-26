@@ -100,7 +100,9 @@ public class UploadOpenstreetmapPointAsyncTask
 
 	@Override
 	protected void onPostExecute(Map<OsmPoint, String> loadErrorsMap) {
-		progress.dismiss();
+		if (progress.isShowing()) {
+			progress.dismiss();
+		}
 		listener.uploadEnded(loadErrorsMap);
 	}
 

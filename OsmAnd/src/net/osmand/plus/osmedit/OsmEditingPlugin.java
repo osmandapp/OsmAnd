@@ -174,7 +174,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 				return true;
 			}
 		};
-		if (selectedObj instanceof Amenity) {
+		if (selectedObj instanceof Amenity && !((Amenity) selectedObj).getType().isWiki()) {
 			adapter.item(R.string.poi_context_menu_modify).iconColor(R.drawable.ic_action_edit_dark).listen(listener).position(1).reg();
 			adapter.item(R.string.poi_context_menu_delete).iconColor(R.drawable.ic_action_delete_dark).listen(listener).position(2).reg();
 		} else {
