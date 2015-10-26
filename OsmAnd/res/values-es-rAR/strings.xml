@@ -1456,8 +1456,8 @@
 	<string name="local_index_transport_data">Datos de transporte público</string>
 	<string name="local_index_map_data">Datos de mapa</string>
 	<string name="local_indexes_cat_backup">Desactivado</string>
-	<string name="local_indexes_cat_tts">Datos de voz (TTS)</string>
-	<string name="local_indexes_cat_voice">Datos de voz (grabado)</string>
+	<string name="local_indexes_cat_tts">Avisos de voz (TTS)</string>
+	<string name="local_indexes_cat_voice">Avisos de voz (grabado)</string>
 	<string name="local_indexes_cat_poi">Datos de PDI</string>
 	<string name="ttsvoice">Voz TTS</string>
 	<string name="search_offline_clear_search">Nueva búsqueda</string>
@@ -2116,4 +2116,5 @@
     <string name="shared_string_send">Enviar</string>
     <string name="application_dir_description">Elija donde guardar los archivos de los mapas.</string>
 <string name="hello_blank_fragment">Hola fragmento vacío</string>
-    </resources>
+    <string name="show_on_start_description">OsmAnd iniciará desde la pantalla del mapa</string>
+</resources>
