@@ -207,8 +207,8 @@
   <string name="local_indexes_cat_tts">Voix de synthèse (TTS)</string>
   <string name="local_indexes_cat_voice">Voix enregistrées</string>
   
-  <string name="local_indexes_cat_tile">Cartes (tuiles)</string>
-  <string name="local_indexes_cat_map">Cartes (vectorielles)</string>
+  <string name="local_indexes_cat_tile">Cartes en ligne ou en cache</string>
+  <string name="local_indexes_cat_map">Cartes standard (vectorielles)</string>
   <string name="local_indexes_cat_poi">Données PI</string>
   <string name="ttsvoice">Voix de synthèse</string>
   <string name="search_offline_clear_search">Nouvelle recherche</string>
@@ -1077,7 +1077,7 @@
 	<string name="rendering_attr_showRoadMaps_name">Cartes routières uniquement</string>
     <string name="download_roads_only_item">Routes uniquement</string>
     <string name="download_regular_maps">Cartes standards</string>
-    <string name="download_roads_only_maps">Cartes routières uniquement</string>
+    <string name="download_roads_only_maps">Carte routière uniquement</string>
     <string name="incomplete_locale">incomplet</string>
 	<string name="no_buildings_found">Aucun numéro de bâtiment trouvé.</string>
     <string name="search_villages_and_postcodes">Rechercher plus de villages et codes postaux</string>
@@ -1097,7 +1097,7 @@
     
     
 	<string name="index_srtm_ele">Courbes de niveau</string>
-    <string name="srtm_plugin_description">"Ce greffon permet l\'affichage de courbes de niveau ainsi que du relief (ombres) qui s\'ajoutent au-dessus des cartes hors-ligne d\'OsmAnd. Ces informations sont particulièrement utiles pour les sportifs, les randonneurs, les cyclistes et d\'une manière générale par toutes les personnes qui souhaitent connaitre le relief.↵\n↵\nLes données globales (entre 70 degrés Nord et 70 degrés Sud) sont basées sur des mesures de SRTM (Shuttle Radar Topography Mission) et ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un instrument d\'imagerie embarqués à bord de Terra, le satellite phare du système d\'observation de la terre de la NASA. ASTER est un effort de coopération entre la NASA, le ministère japonais de l\'économie, du commerce et de l\'industrie (METI) et \"Japan Space Systems\" (J-Spacesystems). "</string>
+    <string name="srtm_plugin_description">"Ce greffon permet l\'affichage de courbes de niveau ainsi que du relief (ombres) qui s\'ajoutent au-dessus des cartes standards d\'OsmAnd. Ces informations sont particulièrement utiles pour les sportifs, les randonneurs, les cyclistes et d\'une manière générale par toutes les personnes qui souhaitent connaitre le relief.↵\n↵\nLes données globales (entre 70 degrés Nord et 70 degrés Sud) sont basées sur des mesures de SRTM (Shuttle Radar Topography Mission) et ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un instrument d\'imagerie embarqués à bord de Terra, le satellite phare du système d\'observation de la terre de la NASA. ASTER est un effort de coopération entre la NASA, le ministère japonais de l\'économie, du commerce et de l\'industrie (METI) et \"Japan Space Systems\" (J-Spacesystems). "</string>
     <string name="srtm_plugin_name">Courbes de niveau</string>
     <string name="download_select_map_types">Autres cartes</string>
     <string name="download_srtm_maps">Courbes de niveau</string>
@@ -1111,7 +1111,7 @@
     <string name="audionotes_plugin_name">Notes audio/vidéo</string>
     
     <string name="osmand_srtm_short_description_80_chars">Greffon OsmAnd pour les courbes de niveau hors-ligne</string>
-    <string name="osmand_srtm_long_description_1000_chars">"Ce greffon permet l\'affichage de courbes de niveau ainsi que du relief (ombres) qui s\'ajoutent au-dessus des cartes hors-ligne d\'OsmAnd. Ces informations sont particulièrement utiles pour les sportifs, les randonneurs, les cyclistes et d\'une manière générale par toutes les personnes qui souhaitent connaitre le relief.\n\nLes données globales (entre 70 degrés Nord et 70 degrés Sud) sont basées sur des mesures de SRTM (Shuttle Radar Topography Mission) et ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un instrument d\'imagerie embarqués à bord de Terra, le satellite phare du système d\'observation de la terre de la NASA. ASTER est un effort de coopération entre la NASA, le ministère japonais de l\'économie, du commerce et de l\'industrie (METI) et \"Japan Space Systems\" (J-Spacesystems). "</string>
+    <string name="osmand_srtm_long_description_1000_chars">"Ce greffon permet l\'affichage de courbes de niveau ainsi que du relief (ombres) qui s\'ajoutent au-dessus des cartes standard d\'OsmAnd. Ces informations sont particulièrement utiles pour les sportifs, les randonneurs, les cyclistes et d\'une manière générale par toutes les personnes qui souhaitent connaitre le relief.\n\nLes données globales (entre 70 degrés Nord et 70 degrés Sud) sont basées sur des mesures de SRTM (Shuttle Radar Topography Mission) et ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un instrument d\'imagerie embarqués à bord de Terra, le satellite phare du système d\'observation de la terre de la NASA. ASTER est un effort de coopération entre la NASA, le ministère japonais de l\'économie, du commerce et de l\'industrie (METI) et \"Japan Space Systems\" (J-Spacesystems). "</string>
     
     
     <string name="map_widget_distancemeasurement">Mesure de distance</string>
@@ -1169,7 +1169,7 @@
     
     <string name="support_new_features_descr">Effectuer un don pour voir de nouvelles fonctionnalités implémentées dans l\'application</string>
 	<string name="download_hillshade_item">Ombrage du relief</string>
-    <string name="download_hillshade_maps">Cartes d\'ombrage du relief</string>
+    <string name="download_hillshade_maps">Ombrage du relief</string>
     <string name="tip_recent_changes_1_1_2_t">Changements dans 1.1.2:
 \n\t* Amélioration du greffon audio/vidéo (photos avec les informations EXIF)
 \n\t* Correction de l\'utilisabilité et restructuration du greffon des courbes de niveau\n\t* Ombrage des reliefs pour le greffon des courbes de niveau\n\t* Corrections d\'erreurs (routage sous-optimal)
@@ -2220,4 +2220,5 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 <string name="simulate_initial_startup">Simuler un premier démarrage</string>
     <string name="simulate_initial_startup_descr">Efface le compteur de démarrages afin de simuler un premier démarrage (ne modifie aucun autre paramètre)</string>
     <string name="hello_blank_fragment">Hello fragment vide</string>
-    </resources>
+    <string name="show_on_start_description">L\'application OmsAnd s\'éxecutera depuis la carte</string>
+</resources>
