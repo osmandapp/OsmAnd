@@ -58,7 +58,11 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		final CheckBoxPreference openGlRender = createCheckBoxPreference(settings.USE_OPENGL_RENDER, R.string.use_opengl_render,R.string.use_opengl_render_descr);
 		cat.addPreference(openGlRender);
 
-		
+		if(Version.isDeveloperVersion(getMyApplication())) {
+			cat.addPreference(createCheckBoxPreference(settings.BETA_TESTING_LIVE_UPDATES,
+				"Live updates", "Beta testing for live updates"));
+		}
+
 		final Preference firstRunPreference = new Preference(this);
 		firstRunPreference.setTitle(R.string.simulate_initial_startup);
 		firstRunPreference.setSummary(R.string.simulate_initial_startup_descr);
@@ -74,10 +78,10 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		});
 		cat.addPreference(firstRunPreference);
 
-		if(Version.isDeveloperVersion(getMyApplication())) {
-			cat.addPreference(createCheckBoxPreference(settings.BETA_TESTING_LIVE_UPDATES,
-				"Live updates", "Beta testing for live updates"));
-		}
+		cat.addPreference(createCheckBoxPreference(settings.SHOULD_SHOW_FREE_VERSION_BANNER,
+				R.string.show_free_version_banner,
+				R.string.show_free_version_banner_description));
+
 		Preference pref = new Preference(this);
 		final Preference simulate = pref;
 		final OsmAndLocationSimulation sim = getMyApplication().getLocationProvider().getLocationSimulation();
@@ -114,8 +118,6 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 			}
 		});
 		cat.addPreference(pref);
-		
-		
 
 		pref = new Preference(this);
 		pref.setTitle(R.string.app_modes_choose);
@@ -196,10 +198,6 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		//setEnabled(false) creates bad readability on some devices
 		//pref.setEnabled(false);
 		cat.addPreference(pref);
-
-		cat.addPreference(createCheckBoxPreference(settings.SHOULD_SHOW_FREE_VERSION_BANNER,
-				R.string.show_free_version_banner,
-				R.string.show_free_version_banner_description));
 	}
 	
 	protected void availableProfileDialog() {
