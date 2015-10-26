@@ -35,10 +35,9 @@ import net.osmand.util.OpeningHoursParser.BasicOpeningHourRule;
 
 import org.apache.commons.logging.Log;
 
-public class BasicDataFragment extends Fragment
-		implements EditPoiFragment.OnFragmentActivatedListener {
-	private static final String TAG = "BasicDataFragment";
-	private static final Log LOG = PlatformUtil.getLog(BasicDataFragment.class);
+public class BasicEditPoiFragment extends Fragment
+		implements EditPoiDialogFragment.OnFragmentActivatedListener {
+	private static final Log LOG = PlatformUtil.getLog(BasicEditPoiFragment.class);
 	private static final String OPENING_HOURS = "opening_hours";
 	private EditText streetEditText;
 	private EditText houseNumberEditText;
@@ -119,6 +118,7 @@ public class BasicDataFragment extends Fragment
 			mOpeningHoursAdapter = new OpeningHoursAdapter(new OpeningHoursParser.OpeningHours(),
 					openHoursContainer, getData(), clockDrawable, deleteDrawable);
 		}
+		onFragmentActivated();
 		return view;
 	}
 
@@ -163,8 +163,8 @@ public class BasicDataFragment extends Fragment
 	}
 
 
-	private EditPoiFragment getEditPoiFragment() {
-		return (EditPoiFragment) getParentFragment();
+	private EditPoiDialogFragment getEditPoiFragment() {
+		return (EditPoiDialogFragment) getParentFragment();
 	}
 
 	private EditPoiData getData() {

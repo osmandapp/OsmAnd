@@ -41,10 +41,10 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-public class AdvancedDataFragment extends Fragment
-		implements EditPoiFragment.OnFragmentActivatedListener {
-	private static final String TAG = "AdvancedDataFragment";
-	private static final Log LOG = PlatformUtil.getLog(AdvancedDataFragment.class);
+public class AdvancedEditPoiFragment extends Fragment
+		implements EditPoiDialogFragment.OnFragmentActivatedListener {
+	private static final String TAG = "AdvancedEditPoiFragment";
+	private static final Log LOG = PlatformUtil.getLog(AdvancedEditPoiFragment.class);
 
 	private TagAdapterLinearLayoutHack mAdapter;
 	private EditPoiData.TagsChangedListener mTagsChangedListener;
@@ -134,8 +134,8 @@ public class AdvancedDataFragment extends Fragment
 		super.onSaveInstanceState(outState);
 	}
 
-	private EditPoiFragment getEditPoiFragment() {
-		return (EditPoiFragment) getParentFragment();
+	private EditPoiDialogFragment getEditPoiFragment() {
+		return (EditPoiDialogFragment) getParentFragment();
 	}
 
 	private EditPoiData getData() {

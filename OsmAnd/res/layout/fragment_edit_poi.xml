@@ -7,7 +7,7 @@
     android:background="?attr/spinnerListBackground"
     android:clickable="true"
     android:orientation="vertical"
-    tools:context="net.osmand.plus.osmedit.EditPoiFragment">
+    tools:context="net.osmand.plus.osmedit.EditPoiDialogFragment">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"

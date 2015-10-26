@@ -28,7 +28,6 @@ import net.osmand.plus.activities.EnumAdapter;
 import net.osmand.plus.activities.EnumAdapter.IEnumWithResource;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity;
-import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.myplaces.AvailableGPXFragment;
 import net.osmand.plus.myplaces.AvailableGPXFragment.GpxInfo;
@@ -156,21 +155,21 @@ public class OsmEditingPlugin extends OsmandPlugin {
 			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int resId, int pos, boolean isChecked) {
 				if (resId == R.string.context_menu_item_create_poi) {
 					//getPoiActions(mapActivity).showCreateDialog(latitude, longitude);
-					EditPoiFragment editPoiFragment =
-							EditPoiFragment.createAddPoiInstance(latitude, longitude,
+					EditPoiDialogFragment editPoiDialogFragment =
+							EditPoiDialogFragment.createAddPoiInstance(latitude, longitude,
 									mapActivity.getMyApplication());
-					editPoiFragment.show(mapActivity.getSupportFragmentManager(),
-							EditPoiFragment.TAG);
+					editPoiDialogFragment.show(mapActivity.getSupportFragmentManager(),
+							EditPoiDialogFragment.TAG);
 				} else if (resId == R.string.context_menu_item_open_bug) {
 					if (osmBugsLayer == null) {
 						registerLayers(mapActivity);
 					}
 					osmBugsLayer.openBug(latitude, longitude);
 				} else if (resId == R.string.poi_context_menu_delete) {
-					new EditPoiFragment.ShowDeleteDialogAsyncTask(mapActivity)
+					new EditPoiDialogFragment.ShowDeleteDialogAsyncTask(mapActivity)
 							.execute((Amenity) selectedObj);
 				} else if (resId == R.string.poi_context_menu_modify) {
-					EditPoiFragment.showEditInstance((Amenity) selectedObj, mapActivity);
+					EditPoiDialogFragment.showEditInstance((Amenity) selectedObj, mapActivity);
 				}
 				return true;
 			}
@@ -265,7 +264,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		Private(R.string.gpxup_private);
 		private final int resourceId;
 
-		private UploadVisibility(int resourceId) {
+		UploadVisibility(int resourceId) {
 			this.resourceId = resourceId;
 		}
 
@@ -296,7 +295,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		}
 		final EditText tags = (EditText) view.findViewById(R.id.TagsText);
 		final Spinner visibility = ((Spinner) view.findViewById(R.id.Visibility));
-		EnumAdapter<UploadVisibility> adapter = new EnumAdapter<UploadVisibility>(la, android.R.layout.simple_spinner_item, UploadVisibility.values());
+		EnumAdapter<UploadVisibility> adapter = new EnumAdapter<>(la, android.R.layout.simple_spinner_item, UploadVisibility.values());
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		visibility.setAdapter(adapter);
 		visibility.setSelection(0);

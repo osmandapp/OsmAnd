@@ -11,7 +11,7 @@ import net.osmand.data.Amenity;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.osmedit.EditPoiFragment;
+import net.osmand.plus.osmedit.EditPoiDialogFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +45,7 @@ public class PoiTypeDialogFragment extends DialogFragment {
 				if (aType != amenity.getType()) {
 					amenity.setType(aType);
 					amenity.setSubType(""); //$NON-NLS-1$
-					((EditPoiFragment) getParentFragment()).updateType(amenity);
+					((EditPoiDialogFragment) getParentFragment()).updateType(amenity);
 				}
 				dismiss();
 			}

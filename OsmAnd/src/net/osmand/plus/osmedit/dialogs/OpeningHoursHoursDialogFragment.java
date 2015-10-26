@@ -14,7 +14,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import net.osmand.plus.R;
-import net.osmand.plus.osmedit.BasicDataFragment;
+import net.osmand.plus.osmedit.BasicEditPoiFragment;
 import net.osmand.util.OpeningHoursParser;
 
 public class OpeningHoursHoursDialogFragment extends DialogFragment {
@@ -63,7 +63,7 @@ public class OpeningHoursHoursDialogFragment extends DialogFragment {
 									} else {
 										item.setEndTime(time);
 									}
-									((BasicDataFragment) getParentFragment())
+									((BasicEditPoiFragment) getParentFragment())
 											.setBasicOpeningHoursRule(item, positionToAdd);
 								}
 							}
