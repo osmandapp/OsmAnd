@@ -1060,7 +1060,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 
 				final String mapDescription = getMapDescription(child.getFileName());
 				if (mapDescription.length() > 0) {
-					builder.append(mapDescription).append(" • ");
+					builder.append(mapDescription).append(" â€¢ ");
 				}
 
 				if (child.getSize() >= 0) {
@@ -1069,7 +1069,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 					} else {
 						builder.append(child.getSize()).append(" KB");
 					}
-					builder.append(" • ");
+					builder.append(" â€¢ ");
 				}
 
 				if (child.getType() == LocalIndexType.TILES_DATA) {

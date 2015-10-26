@@ -25,10 +25,7 @@ public class WorldRegion {
 	protected List<WorldRegion> subregions;
 	
 	// filled by osmand regions
-	protected String regionLeftHandDriving;
-	protected String regionLang;
-	protected String regionMetric;
-	protected String regionRoadSigns;
+	protected RegionParams params = new RegionParams();
 	protected String regionFullName;
 	protected String regionParentFullName;
 	protected String regionName;
@@ -38,6 +35,30 @@ public class WorldRegion {
 	protected String regionDownloadName;
 	protected boolean regionMapDownload;
 	protected LatLon regionCenter;
+
+	public static class RegionParams {
+		protected String regionLeftHandDriving;
+		protected String regionLang;
+		protected String regionMetric;
+		protected String regionRoadSigns;
+
+		public String getRegionLeftHandDriving() {
+			return regionLeftHandDriving;
+		}
+
+		public String getRegionLang() {
+			return regionLang;
+		}
+
+		public String getRegionMetric() {
+			return regionMetric;
+		}
+
+		public String getRegionRoadSigns() {
+			return regionRoadSigns;
+		}
+	}
+
 	
 	
 	public boolean isRegionMapDownload() {
@@ -65,19 +86,11 @@ public class WorldRegion {
 	public String getRegionDownloadNameLC() {
 		return regionDownloadName == null ? null : regionDownloadName.toLowerCase();
 	}
-	
-	public String getRegionLeftHandDriving() {
-		return regionLeftHandDriving;
+
+	public RegionParams getParams() {
+		return params;
 	}
-	
-	public String getRegionMetric() {
-		return regionMetric;
-	}
-	
-	public String getRegionRoadSigns() {
-		return regionRoadSigns;
-	}
-	
+
 	public LatLon getRegionCenter() {
 		return regionCenter;
 	}
@@ -85,11 +98,6 @@ public class WorldRegion {
 	public String getRegionSearchText() {
 		return regionSearchText;
 	}
-	
-	public String getRegionLang() {
-		return regionLang;
-	}
-	
 
 	public WorldRegion getSuperregion() {
 		return superregion;

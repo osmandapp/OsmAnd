@@ -38,16 +38,16 @@ public class OsmandRegions {
 
 	public static final String MAP_TYPE = "region_map";
 	
-	public static final String FIELD_LEFT_HAND_DRIVING = "left_hand_driving";
 	public static final String FIELD_DOWNLOAD_NAME = "download_name";
 	public static final String FIELD_NAME = "name";
 	public static final String FIELD_NAME_EN = "name:en";
 	public static final String FIELD_REGION_PARENT_NAME = "region_parent_name";
 	public static final String FIELD_REGION_FULL_NAME = "region_full_name";
-	public static final String FIELD_LANG = "lang";
-	public static final String FIELD_METRIC = "metric";
-	public static final String FIELD_ROAD_SIGNS = "road_signs";
-	
+	public static final String FIELD_LANG = "region_lang";
+	public static final String FIELD_METRIC = "region_metric";
+	public static final String FIELD_ROAD_SIGNS = "region_road_signs";
+	public static final String FIELD_LEFT_HAND_DRIVING = "region_left_hand_navigation";
+
 	private BinaryMapIndexReader reader;
 	private String locale = "en";
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(OsmandRegions.class);
@@ -164,10 +164,10 @@ public class OsmandRegions {
 				return rd.getLocaleName();
 			}
 			if(parentParent.getRegionId().equals(WorldRegion.RUSSIA_REGION_ID)) {
-				return parentParent.getRegionId() + " " + rd.getLocaleName(); 
+				return parentParent.getLocaleName() + " " + rd.getLocaleName();
 			}
 			if(parentParent.getRegionId().equals(WorldRegion.JAPAN_REGION_ID)) {
-				return parentParent.getRegionId() + " " + rd.getLocaleName(); 
+				return parentParent.getLocaleName() + " " + rd.getLocaleName();
 			}
 			return parent.getLocaleName() + " " + rd.getLocaleName();
 		} else {
@@ -389,10 +389,10 @@ public class OsmandRegions {
 		rd.regionName = mapIndexFields.get(mapIndexFields.nameType, object);
 		rd.regionNameLocale = mapIndexFields.get(mapIndexFields.nameLocaleType, object);
 		rd.regionNameEn = mapIndexFields.get(mapIndexFields.nameEnType, object);
-		rd.regionLang = mapIndexFields.get(mapIndexFields.langType, object);
-		rd.regionLeftHandDriving = mapIndexFields.get(mapIndexFields.leftHandDrivingType, object);
-		rd.regionMetric = mapIndexFields.get(mapIndexFields.metricType, object);
-		rd.regionRoadSigns = mapIndexFields.get(mapIndexFields.roadSignsType, object);
+		rd.params.regionLang = mapIndexFields.get(mapIndexFields.langType, object);
+		rd.params.regionLeftHandDriving = mapIndexFields.get(mapIndexFields.leftHandDrivingType, object);
+		rd.params.regionMetric = mapIndexFields.get(mapIndexFields.metricType, object);
+		rd.params.regionRoadSigns = mapIndexFields.get(mapIndexFields.roadSignsType, object);
 		rd.regionSearchText = getSearchIndex(object);
 		rd.regionMapDownload = isDownloadOfType(object, MAP_TYPE);
 		return rd;

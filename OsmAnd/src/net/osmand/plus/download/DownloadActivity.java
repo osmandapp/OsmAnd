@@ -1,18 +1,28 @@
 package net.osmand.plus.download;
 
-import java.io.File;
-import java.lang.ref.WeakReference;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Set;
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.StatFs;
+import android.support.annotation.UiThread;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.ViewPager;
+import android.text.method.LinkMovementMethod;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.map.WorldRegion;
+import net.osmand.map.WorldRegion.RegionParams;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.DrivingRegion;
@@ -34,23 +44,14 @@ import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 
 import org.apache.commons.logging.Log;
 
-import android.content.ActivityNotFoundException;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.os.StatFs;
-import android.support.annotation.UiThread;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.view.ViewPager;
-import android.text.method.LinkMovementMethod;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
+import java.io.File;
+import java.lang.ref.WeakReference;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.Set;
 
 public class DownloadActivity extends ActionBarProgressActivity implements DownloadEvents {
 	private static final Log LOG = PlatformUtil.getLog(DownloadActivity.class);
@@ -498,12 +499,13 @@ public class DownloadActivity extends ActionBarProgressActivity implements Downl
 	}
 	
 	private void initSettingsFirstMap(WorldRegion reg) {
-		// TODO test set correctly (4 tests): when you download first Australia, Japan, Luxembourgh, US  
+		// TODO Fix metric
 		getMyApplication().getSettings().FIRST_MAP_IS_DOWNLOADED.set(true);
 		DrivingRegion drg = null;
-		boolean americanSigns = "american".equals(reg.getRegionRoadSigns());
-		boolean leftHand = "yes".equals(reg.getRegionLeftHandDriving());
-		MetricsConstants mc  = "miles".equals(reg.getRegionMetric()) ?
+		RegionParams params = reg.getParams();
+		boolean americanSigns = "american".equals(params.getRegionRoadSigns());
+		boolean leftHand = "yes".equals(params.getRegionLeftHandDriving());
+		MetricsConstants mc  = "miles".equals(params.getRegionMetric()) ?
 				MetricsConstants.MILES_AND_FOOTS : MetricsConstants.KILOMETERS_AND_METERS;
 		for (DrivingRegion r : DrivingRegion.values()) {
 			if(r.americanSigns == americanSigns && r.leftHandDriving == leftHand && 
@@ -515,8 +517,9 @@ public class DownloadActivity extends ActionBarProgressActivity implements Downl
 		if (drg != null) {
 			getMyApplication().getSettings().DRIVING_REGION.set(drg);
 		}
-		String lng = reg.getRegionLang();
-		if (lng != null) {
+		String lang = params.getRegionLang();
+		if (lang != null) {
+			String lng = lang.split(",")[0];
 			String setTts = null;
 			for (String s : OsmandSettings.TTS_AVAILABLE_VOICES) {
 				if (lng.startsWith(s)) {
@@ -567,10 +570,9 @@ public class DownloadActivity extends ActionBarProgressActivity implements Downl
 	}
 	
 	private void showFirstTimeExternalStorage() {
-		// TODO finish + test & hide dialog if the download has started
 		final boolean firstTime = getMyApplication().getAppInitializer().isFirstTime(this);
 		final boolean externalExists =
-				DataStoragePlaceDialogFragment.getExternalStorageDirectory() != null;
+				getMyApplication().getSettings().getSecondaryStorage() != null;
 		if (firstTime && externalExists) {
 			new DataStoragePlaceDialogFragment().show(getFragmentManager(), null);
 		}

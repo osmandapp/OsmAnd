@@ -102,14 +102,21 @@ public class DownloadResourceGroup {
 
 	public WorldRegion getIndexItemRegion(IndexItem item) {
 		DownloadResourceGroup group = getIndexItemGroup(item);
+		return getRegion(group);
+	}
+
+	public static WorldRegion getRegion(DownloadResourceGroup group) {
 		if (group != null) {
 			if (group.getRegion() != null) {
 				return group.getRegion();
 			} else if (group.getParentGroup() != null) {
-				return group.getParentGroup().getRegion();
+				return getRegion(group.getParentGroup());
+			} else {
+				return null;
 			}
+		} else {
+			return null;
 		}
-		return null;
 	}
 
 	public DownloadResourceGroup getIndexItemGroup(IndexItem item) {
