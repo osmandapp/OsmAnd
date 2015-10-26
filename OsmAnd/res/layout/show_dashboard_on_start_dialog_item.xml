@@ -46,7 +46,7 @@
         android:layout_marginLeft="@dimen/dialog_content_margin"
         android:layout_marginRight="16dp"
         android:layout_toLeftOf="@id/checkbox_wraper"
-        android:text="OsmAnd app will start from map screen"
+        android:text="@string/show_on_start_description"
         android:textColor="?android:textColorSecondary"
         android:textSize="@dimen/default_sub_text_size"
         android:layout_alignParentLeft="true"
