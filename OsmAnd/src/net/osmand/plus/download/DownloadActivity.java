@@ -499,7 +499,6 @@ public class DownloadActivity extends ActionBarProgressActivity implements Downl
 	}
 	
 	private void initSettingsFirstMap(WorldRegion reg) {
-		// TODO Fix metric
 		getMyApplication().getSettings().FIRST_MAP_IS_DOWNLOADED.set(true);
 		DrivingRegion drg = null;
 		RegionParams params = reg.getParams();
