@@ -38,7 +38,6 @@
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
-    
     <string name="shared_string_trip_recording">Trip recording</string>
     <string name="shared_string_navigation">Navigation</string>
     <string name="osmand_running_in_background">Running in background</string>
