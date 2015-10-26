@@ -1,5 +1,8 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
+	<string name="regions">Regionen</string>
+	<string name="region_maps">Regionsweite Karten</string>
+	<string name="world_maps">Weltweite Karten</string>
 	<string name="gps_network_not_enabled">Kein Standortdienst aktiviert. Aktivieren?</string>
 	<string name="disable_recording_once_app_killed">Eigenständige Streckenaufzeichnung unterbinden</string>
 	<string name="disable_recording_once_app_killed_descrp">Pausiert die GPX-Aufzeichnung wenn OsmAnd gestoppt wird (via zuletzt verwendete Apps). (Der Hintergrunddienst-Indikator in der Android-Benachrichtigungsleiste verschwindet dann.)</string>
@@ -116,8 +119,8 @@
 	<string name="rendering_attr_showRoadMaps_description">Anzeige reiner Straßenkarten:</string>
 	<string name="rendering_attr_showRoadMaps_name">Reine Straßenkarten</string>
 	<string name="download_roads_only_item">"Nur Straßen"</string>
-	<string name="download_regular_maps">Reguläre Karten</string>
-	<string name="download_roads_only_maps">Reine Straßenkarten</string>
+	<string name="download_regular_maps">Standardkarte</string>
+	<string name="download_roads_only_maps">Reine Straßenkarte</string>
 	<string name="safe_mode_description">Anwendung läuft im abgesicherten Modus (Verwendung für langsamere Android-Versionen).</string>
 	<string name="safe_mode">Abgesicherter Modus</string>
 	<string name="native_library_not_running">Die Anwendung läuft im abgesicherten Modus (kann in den Einstellungen deaktiviert werden).</string>
@@ -185,7 +188,7 @@
 	<string name="online_map_settings_descr">Online- oder zwischengespeicherte Kachelkartenquellen konfigurieren</string>
 	
 	
-	<string name="osmand_rastermaps_plugin_description">"Dieses Plugin ermöglicht die Verwendung zahlreicher Online Kachel-Kartenquellen, von vordefinierten Openstreetmap-Kacheln (wie Mapnik) über Satellitenbilder bis zu speziellen Overlays wie Wetterkarten, Klimakarten, geologischen Karten, Reliefkarten, et.\n\nAlle Karten können sowohl als Hauptkarte wie auch als Overlay oder Unterlage für OsmAnds reguläre Offline-Karten verwendet werden. Um unterleget Karten sichtbarer zu machen, können gewisse Elemente der OsmAnd Offline-Karten im Menü \'Karte konfigurieren\' ausgeblendet werden. verwendet werden).\n\nKarten-Kacheln können direkt online bezogen werden, und werden im OsmAnd Unterordner \'tiles\' zwischengespeichert. Sie können für die Offline-Verwendung auch von anderen Tools als sqlite-Datei vorbereitet und manuell in den OsmAnd \'tiles\' Unterordner kopiert werden. "</string>
+	<string name="osmand_rastermaps_plugin_description">"Dieses Plugin ermöglicht die Verwendung zahlreicher Online Kachel-Kartenquellen, von vordefinierten Openstreetmap-Kacheln (wie Mapnik) über Satellitenbilder bis zu speziellen Overlays wie Wetterkarten, Klimakarten, geologischen Karten, Reliefkarten, et.\n\nAlle Karten können sowohl als Hauptkarte wie auch als Overlay oder Unterlage für OsmAnds Standard Offline-Karten verwendet werden. Um unterleget Karten sichtbarer zu machen, können gewisse Elemente der OsmAnd Offline-Karten im Menü \'Karte konfigurieren\' ausgeblendet werden. verwendet werden).\n\nKarten-Kacheln können direkt online bezogen werden, und werden im OsmAnd Unterordner \'tiles\' zwischengespeichert. Sie können für die Offline-Verwendung auch von anderen Tools als sqlite-Datei vorbereitet und manuell in den OsmAnd \'tiles\' Unterordner kopiert werden. "</string>
 	<string name="osmand_background_plugin_description">Zeigt die Einstellungen für die Standort-Aufzeichnung oder die Navigation während das Gerät im Standby-Modus ist (periodisches Aufwecken des GPS-Empfängers).</string>
 	<string name="osmand_accessibility_description">Diese Plugin macht die Funktionalitäten der System-Eingabehilfen direkt in OsmAnd verfügbar. Dadurch kann z.B. die Abspielgeschwindigkeit der Synthesizer-Stimme, die Bildschirmnavigation durch Steuerkreuz, Benutzung eines Trackballs zur Zoomsteuerung, Text-to-Speech Feedback (automatischen Ansage der Position) konfiguriert werden.</string>
 	
@@ -649,8 +652,8 @@
 	<string name="local_indexes_cat_tts">Sprachansagen (TTS)</string>
 	<string name="local_indexes_cat_voice">Sprachansagen (Aufnahmen)</string>
 	
-	<string name="local_indexes_cat_tile">Online- und Kachel-Karten</string>
-	<string name="local_indexes_cat_map">Offline-Karten (Vektor)</string>
+	<string name="local_indexes_cat_tile">Online- und zwischengespeicherte Karten (Kacheln)</string>
+	<string name="local_indexes_cat_map">Standardkarten (Vektor)</string>
 	<string name="local_indexes_cat_poi">POI-Daten</string>
 	<string name="ttsvoice">TTS Sprachansage</string>
 	<string name="search_offline_clear_search">Neue Suche</string>
@@ -1310,7 +1313,7 @@
 	<string name="close_changeset">Änderungssatz schließen</string>
 	<string name="incomplete_locale">unfertig</string>
 	<string name="srtm_plugin_name">Höhenlinien</string>
-	<string name="srtm_plugin_description">"Das Plugin beinhaltet Höhenlinien und Relief-Schattierungen, die als Ergänzung zu den Offline-Karten von OsmAnd angezeigt werden können. Diese Funktionalität ist vor allem für Sportler wie Wanderer, Radfahrer, Trekker und jeden interessant, der sich für die Relief-Struktur von Landschaften interessiert.\n\nDie globalen Daten (zwischen N 70° und S 70°) basieren auf Messungen von SRTM (Shuttle Radar Topography Mission) und ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), einem bildgebenden System des Satelliten Terra, dem Flaggschiff des NASA-Erd-Beobachtungsprogramms. ASTER ist der Erfolg der Zusammenarbeit zwischen der NASA, dem japanischen Ministerium für Wirtschaft, Handel und Industrie (METI) und dem japanischen Raumfahrtsprogramm (J-spacesystems). "</string>
+	<string name="srtm_plugin_description">"Das Plugin beinhaltet Höhenlinien und Relief-Schattierungen, die als Ergänzung zu den Standard Offline-Karten von OsmAnd angezeigt werden können. Diese Funktionalität ist vor allem für Sportler wie Wanderer, Radfahrer, Trekker und jeden interessant, der sich für die Relief-Struktur von Landschaften interessiert.\n\nDie globalen Daten (zwischen N 70° und S 70°) basieren auf Messungen von SRTM (Shuttle Radar Topography Mission) und ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), einem bildgebenden System des Satelliten Terra, dem Flaggschiff des NASA-Erd-Beobachtungsprogramms. ASTER ist der Erfolg der Zusammenarbeit zwischen der NASA, dem japanischen Ministerium für Wirtschaft, Handel und Industrie (METI) und dem japanischen Raumfahrtsprogramm (J-spacesystems). "</string>
 	<string name="srtm_paid_version_title">Höhenlinien-Plugin</string>
 	<string name="srtm_paid_version_msg">Bitte überlegen Sie, ob Sie durch den Kauf des Höhenlinien-Plugins im Play-Store die weitere Entwicklung unterstützen wollen.</string>
 	<string name="download_select_map_types">Andere Karten</string>
@@ -1367,7 +1370,7 @@
 	<string name="audionotes_plugin_description">Das Audio/Video-Notiz Plugin ermöglicht unterwegs die Aufnahme von ortsbezogenen Audio-/Fotografie-/Video-Notizen, entweder über eine Schaltfläche auf dem Kartenbildschirm, oder direkt im Kontext-Manu zu jeder Position auf der Karte.</string>
 	<string name="audionotes_plugin_name">Audio/Video-Notizen</string>
 	<string name="audionotes_location_not_defined">Ein Ort, der mit der Notiz verbunden wird, wurde nicht angegeben. Benutzen Sie \'Verwende Position…\', um der Notiz einen Ort zuzuweisen</string>
-	<string name="osmand_srtm_long_description_1000_chars">"Das Plugin beinhaltet Höhenlinien und Relief-Schattierungen, die als Ergänzung zu den Offline-Karten von OsmAnd angezeigt werden können. Diese Funktionalität ist vor allem für Sportler wie Wanderer, Radfahrer, Trekker und jeden interessant, der sich für die Relief-Struktur von Landschaften interessiert.\n\nDie globalen Daten (zwischen N 70° und S 70°) basieren auf Messungen von SRTM (Shuttle Radar Topography Mission) und ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), einem bildgebenden System des Satelliten Terra, dem Flaggschiff des NASA-Erd-Beobachtungsprogramms. ASTER ist der Erfolg der Zusammenarbeit zwischen der NASA, dem japanischen Ministerium für Wirtschaft, Handel und Industrie (METI) und dem japanischen Raumfahrtsprogramm (J-spacesystems). "</string>
+	<string name="osmand_srtm_long_description_1000_chars">"Das Plugin beinhaltet Höhenlinien und Relief-Schattierungen, die als Ergänzung zu den Standard Offline-Karten von OsmAnd angezeigt werden können. Diese Funktionalität ist vor allem für Sportler wie Wanderer, Radfahrer, Trekker und jeden interessant, der sich für die Relief-Struktur von Landschaften interessiert.\n\nDie globalen Daten (zwischen N 70° und S 70°) basieren auf Messungen von SRTM (Shuttle Radar Topography Mission) und ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), einem bildgebenden System des Satelliten Terra, dem Flaggschiff des NASA-Erd-Beobachtungsprogramms. ASTER ist der Erfolg der Zusammenarbeit zwischen der NASA, dem japanischen Ministerium für Wirtschaft, Handel und Industrie (METI) und dem japanischen Raumfahrtsprogramm (J-spacesystems). "</string>
 	<string name="stop_routing_confirm">Wollen Sie die Navigation wirklich beenden?</string>
 	<string name="clear_dest_confirm">Wollen Sie das Ziel (inkl. Zwischenziele) wirklich löschen?</string>
 	<string name="precise_routing_mode_descr">Auswählen um Routen fehlerfrei zu berechnen. Diese Funktion ist weiterhin auf kurze Entfernung begrenzt und langsam.</string>
@@ -1407,7 +1410,7 @@
 	<string name="access_mark_final_location_first">Eingabehilfen-Modus: Bitte zuerst Ziel auswählen</string>
 	<string name="use_magnetic_sensor_descr">Magnetsensor statt Lagesensor zur Kompassermittlung verwenden</string>
 	<string name="use_magnetic_sensor">Magnetsensor verwenden</string>
-	<string name="local_indexes_cat_srtm">Höhenlinien-Daten</string>
+	<string name="local_indexes_cat_srtm">Höhenlinien</string>
 	<string name="wait_current_task_finished">Bitte warten Sie, der laufende Task wird beendet</string>
 	<string name="shared_string_downloading">Herunterladen</string>
 	<string name="local_osm_changes_backup_successful">OSM-Änderungsdatei erfolgreich erzeugt %1$s</string>
@@ -1862,7 +1865,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="osmo_create_group">Gruppe erstellen</string>
 	<string name="osmo_server_operation_failed">OsMo-Server-Vorgang fehlgeschlagen</string>
 	<string name="osmo_activity">OpenStreetMap-Überwachung</string>
-	<string name="osmo_enable_tracker">meine Standorte senden</string>
+	<string name="osmo_enable_tracker">Meine Standorte senden</string>
 	<string name="osmo_control">OsMo-Schnellzugriff</string>
 	<string name="osmo_connected_devices">Verbundene Geräte</string>
 	<string name="osmo_sign_in">Anmelden</string>
@@ -2043,7 +2046,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="settings_privacy">Privatsphäre</string>
     <string name="points">Punkte</string>
     
-    <string name="shared_string_my_location">Mein Ort</string>
+    <string name="shared_string_my_location">Mein Standort</string>
     <string name="osm_editing_manage">Verwalten</string>
     
     <string name="navigation_over_track">Navigation der Strecke entlang starten?</string>
