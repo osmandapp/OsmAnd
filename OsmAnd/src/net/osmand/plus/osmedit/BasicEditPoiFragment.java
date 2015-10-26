@@ -118,6 +118,7 @@ public class BasicEditPoiFragment extends Fragment
 			mOpeningHoursAdapter = new OpeningHoursAdapter(new OpeningHoursParser.OpeningHours(),
 					openHoursContainer, getData(), clockDrawable, deleteDrawable);
 		}
+		onFragmentActivated();
 		return view;
 	}
 
