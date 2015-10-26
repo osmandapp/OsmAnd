@@ -211,10 +211,10 @@
   <string name="local_index_transport_data">Datos de transporte público</string>
   <string name="local_index_map_data">Datos de mapa</string>
   <string name="local_indexes_cat_backup">Desactivado</string>
-  <string name="local_indexes_cat_tts">Datos de voz (sintetizado)</string>
-  <string name="local_indexes_cat_voice">Datos de voz (grabado)</string>
+  <string name="local_indexes_cat_tts">Avisos de voz (sintetizado)</string>
+  <string name="local_indexes_cat_voice">Avisos de voz (grabado)</string>
   
-  <string name="local_indexes_cat_tile">Mapas en línea y teselas</string>
+  <string name="local_indexes_cat_tile">Mapas de teselas en línea y en caché</string>
   <string name="local_indexes_cat_map">Mapas fuera de línea (vectorial)</string>
   <string name="local_indexes_cat_poi">Dato del PDI</string>
   <string name="ttsvoice">Voz TTS</string>
@@ -1086,8 +1086,8 @@
     <string name="rendering_attr_showRoadMaps_description">Seleccione cuándo mostrar los mapas sólo de carreteras:</string>
 	<string name="rendering_attr_showRoadMaps_name">Mapas sólo de carreteras</string>
     <string name="download_roads_only_item">Sólo carreteras</string>
-    <string name="download_regular_maps">Mapas normales</string>
-    <string name="download_roads_only_maps">Mapas sólo de carreteras</string>
+    <string name="download_regular_maps">Mapa estándar</string>
+    <string name="download_roads_only_maps">Mapa sólo de carreteras</string>
     <string name="incomplete_locale">incompleto</string>
 	<string name="route_descr_lat_lon">Lat %1$.3f, Lon %2$.3f</string>
     <string name="route_descr_current_location">Posición actual</string>
@@ -1108,7 +1108,7 @@
     
 	<string name="index_srtm_parts">piezas</string>
     <string name="index_srtm_ele">Curvas de nivel</string>
-    <string name="srtm_plugin_description">"Este complemento proporciona tanto una capa superpuesta de curvas de nivel y una capa (de relieve) sombreada que se pueden visualizar sobre los mapas en línea de OsmAnd. Esta funcionalidad será muy apreciada por atletas, caminantes, excursionistas, y cualquiera interesado en la estructura de relieve de un paisaje.
+    <string name="srtm_plugin_description">"Este complemento proporciona tanto una capa superpuesta de curvas de nivel y una capa (de relieve) sombreada que se pueden visualizar sobre los mapas descargados de OsmAnd. Esta funcionalidad será muy apreciada por atletas, caminantes, excursionistas, y cualquiera interesado en la estructura de relieve de un paisaje.
 \n\nLos datos globales (entre 70 grados norte y 70 grados sur) se basan en mediciones de SRTM (Shuttle Radar Topography Mission, o en español Misión de Topografía por Radar Shuffle) y ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer, o en español Radiómetro Espacial Avanzado de Emisión Térmica y Reflexión), un instrumento de captura de imágenes a bordo de Terra, el satélite insignia del Sistema de Observación de la Tierra de la NASA. ASTER es un esfuerzo cooperativo entre la NASA, el Ministerio de Economía, Comercio e Industria de Japón (METI) y Sistemas Espaciales de Japón (J-spacesystems). "</string>
     <string name="srtm_plugin_name">Curvas de nivel</string>
     <string name="download_select_map_types">Otros mapas</string>
@@ -1173,8 +1173,8 @@
     <string name="local_indexes_cat_av">Datos de Audio/Vídeo</string>
     
     <string name="support_new_features_descr">Dona para ver nuevas características implementadas en la aplicación</string>
-	<string name="download_hillshade_item">Sombreado</string>
-    <string name="download_hillshade_maps">Superposición del sombreado</string>
+	<string name="download_hillshade_item">Sombreados</string>
+    <string name="download_hillshade_maps">Sombreado</string>
     <string name="tip_recent_changes_1_1_2_t">"Cambios en 1.1.2:\n\t* Mejoras en complemento audio/vídeo (fotos con información EXIF)\n\t* Usabilidad del complemento curvas de nivel corregida y reestructurada\n\t* Paquetes del sombreado para el complemento curvas de nivel\n\t* Corrección de errores (navegación subóptimo) "</string>
     <string name="av_use_external_camera_descr">Usa la aplicación del sistema para fotografía</string>
     <string name="av_use_external_camera">Utilizar aplicación de la cámara</string>
@@ -1284,7 +1284,7 @@
     <string name="cancel_navigation">Parar navegación</string>
     <string name="clear_destination">Borrar destino</string>
     <string name="download_using_mobile_internet">El WiFi no está conectado en este momento. ¿Quiere utilizar la conexión actual a Internet para descargar?</string>
-    <string name="local_indexes_cat_srtm">Datos de curvas de nivel</string>
+    <string name="local_indexes_cat_srtm">Curvas de nivel</string>
     <string name="wait_current_task_finished">Espere hasta que termine la tarea actual</string>
     <string name="shared_string_downloading">Descargando</string>
 	<string name="destination_point">Destino %1$s</string>
@@ -2222,7 +2222,7 @@
     <string name="favorite_category_select">Elegir categoría</string>
     <string name="regions">Regiones</string>
     <string name="additional_maps">Mapas adicionales</string>
-    <string name="region_maps">Mapas regionales</string>
+    <string name="region_maps">Mapas de la región</string>
     <string name="world_maps">Mapas mundiales</string>
     <string name="world_regions">Regiones del mundo</string>
     <string name="hillshade_layer_disabled">Capa de sombreado desactivada</string>
@@ -2252,4 +2252,5 @@
     <string name="shared_string_send">Enviar</string>
     <string name="hello_blank_fragment">Hola fragmento vacío</string>
     <string name="application_dir_description">Elige donde guardar los archivos de los mapas.</string>
+<string name="show_on_start_description">OsmAnd iniciará desde la pantalla del mapa</string>
 </resources>
