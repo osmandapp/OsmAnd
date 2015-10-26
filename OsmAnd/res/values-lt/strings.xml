@@ -67,7 +67,7 @@
   <string name="basemap_was_selected_to_download">Programos funkcionavimui reikalingas bazinis žemėlapis. Jis buvo pažymėtas parsiuntimui.</string>
   <string name="select_index_file_to_download">Nieko nerasta. Jei nerandate savo regiono, jį galite pasigaminti patys (eikite į http://osmand.net).</string>
   <string name="local_indexes_cat_tile">Žemėlapiai internete</string>
-  <string name="local_indexes_cat_map">Parsiųsti žemėlapiai (vektoriniai)</string>
+  <string name="local_indexes_cat_map">Įprastiniai žemėlapiai (vektoriniai)</string>
   
   <string name="index_settings_descr">Parsisiųsti, peržiūrėti detalią informaciją ir valdyti parsiųstus žemėlapius</string>
   <string name="map_online_plugin_is_not_installed">Įjunkite interneto žemėlapių įskiepį norėdami pasirinkti kitus žemėlapių šaltinius</string>
@@ -232,10 +232,10 @@
   <string name="index_name_europe">Europa</string>
   <string name="index_name_france">Europa - Prancūzija</string>
   <string name="index_name_germany">Europa - Vokietija</string>
-  <string name="index_name_russia">Europa/Azija - Rusija</string>
+  <string name="index_name_russia">Rusija</string>
   <string name="index_name_africa">Afrika</string>
   <string name="index_name_asia">Azija</string>
-  <string name="index_name_oceania">Okeanija</string>
+  <string name="index_name_oceania">Australija ir Okeanija</string>
   <string name="index_name_other">Pasauliniai ir specialieji žemėlapiai</string>
   <string name="index_name_wiki">Pasaulinė Wikipedia</string>
   <string name="index_name_voice">Balso pranešimai (įrašyti, ribotos galimybės)</string>
@@ -398,8 +398,8 @@
   <string name="local_index_map_data">Žemėlapio duomenys</string>
   
   <string name="local_indexes_cat_backup">Deaktyvuota</string>
-  <string name="local_indexes_cat_tts">Balso duomenys (TTS)</string>
-  <string name="local_indexes_cat_voice">Balso duomenys (įrašyti)</string>
+  <string name="local_indexes_cat_tts">Balso pranešimai (TTS)</string>
+  <string name="local_indexes_cat_voice">Balso pranešimai (įrašyti)</string>
   
   <string name="local_indexes_cat_poi">LV duomenys</string>
   <string name="ttsvoice">TTS balsas</string>
@@ -963,7 +963,7 @@
   <string name="select_animate_speedup">Pasirinkti animuotą maršruto pagreitinimą</string>
   <string name="osmand_parking_hours">Valandos</string>
   <string name="osmand_parking_minutes">Minutės</string>
-  <string name="osmand_parking_position_description_add_time">Mašina pastatyta:</string>
+  <string name="osmand_parking_position_description_add_time">Mašina pastatyta</string>
   <string name="use_compass_navigation_descr">Naudoti kompasą, kai neina nustatyti krypties</string>
   <string name="use_compass_navigation">Naudoti kompasą</string>
   <string name="route_updated_loc_found">Maršrutas bus perskaičiuotas, kai bus gauta dabartinė vieta</string>
@@ -1289,7 +1289,7 @@
     <string name="use_kalman_filter_compass_descr">Sumažina kompaso triukšmą, tačiau prideda inertiškumo</string>
     <string name="use_kalman_filter_compass">Naudoti Kalmano filtrą</string>
     <string name="access_mark_final_location_first">Prieigos režimas: pirmiausia pasirinkite kelionės tikslą</string> 
-    <string name="local_indexes_cat_srtm">Kontūrinių linijų duomenys</string>
+    <string name="local_indexes_cat_srtm">Kontūrinės linijos</string>
     <string name="wait_current_task_finished">Palaukite kol dabartinė užduotis bus baigta</string>
     <string name="shared_string_downloading">Parsiunčiama</string>
 	<string name="local_osm_changes_backup_successful">OSM pakeitimų failas sėkmingai sugeneruotas %1$s</string>
@@ -1895,7 +1895,7 @@
     <string name="settings_privacy">Privatumas</string>
     <string name="points">Taškai</string>
     
-    <string name="shared_string_my_location">Mano dabatinė vieta</string>
+    <string name="shared_string_my_location">Mano dabartinė vieta</string>
     <string name="osm_editing_manage">Valdyti</string>
     
 	<string name="navigation_over_track">Pradėti navigaciją keliu?</string>
