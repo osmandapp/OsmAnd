@@ -2156,7 +2156,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="av_locations_descr">Fichier GPX avec notes</string>
     <string name="tag_poi_amenity">aménité</string>
 	<string name="simulate_your_location_stop_descr">Arrêter de simuler votre position</string>
-    <string name="simulate_your_location_descr">Simuler la position à partir d\'un fichier GPX ou d\'une route</string>
+    <string name="simulate_your_location_descr">Simuler à partir d\'un fichier GPX ou de la route calculée</string>
     <string name="are_you_sure">Etes-vous certain ?</string>
 	<string name="unsaved_changes_will_be_lost">Les modifications non enregistrées seront perdues. Souhaitez-vous poursuivre ?</string>
 	<string name="downloads_left_template">%1$s téléchargement(s) restant(s)</string>
