@@ -2330,7 +2330,7 @@
 	<string name="poi_historic_period_classical">Historiskperiode: klassisk (epoke IV, 374 e.Kr. - 900 e.Kr.)</string>
 	<string name="poi_historic_period_imperial">Historiskperiode: imperial (epoke V, 900 e.Kr. - 1200 e.Kr.)</string>
 
-<string name="poi_tourism_yes">Turistmæssige objekt</string>
+<string name="poi_tourism_yes">Turistmæssigt objekt</string>
 	<string name="poi_historic_era_paleolithic">Historisk æra: ældste stenalder (2,6 millioner år - 10.000 f.Kr.)</string>
 	<string name="poi_historic_era_mesolithic">Historisk æra: ældre stenalder</string>
 	<string name="poi_historic_era_neolithic">"Historisk æra:  yngre stenalder"</string>
@@ -2365,7 +2365,7 @@
 	<string name="poi_site_type_fortification">Type: befæstning</string>
 	<string name="poi_site_type_settlement">Type: bebyggelse</string>
 	<string name="poi_site_type_city">Type: by</string>
-	<string name="poi_site_type_hut_circle">Type: hyttecirkel</string>
+	<string name="poi_site_type_hut_circle">Type: hyttekreds</string>
 	<string name="poi_site_type_necropolis">Type: nekropol</string>
 	<string name="poi_site_type_petroglyph">Type: helleristning</string>
 	<string name="poi_site_type_earthwork">Type: jordvold</string>
@@ -2374,10 +2374,10 @@
 	<string name="poi_megalith_type_nuraghe">Megalit type: nuragh</string>
 	<string name="poi_megalith_type_stone_circle">Megalit type: stenkreds</string>
 	<string name="poi_megalith_type_passage_grave">Megalit type: jættestue</string>
-	<string name="poi_fortification_type_hill_fort">Befæstning type: hill fort</string>
-	<string name="poi_fortification_type_limes">Befæstning type: kalk</string>
-	<string name="poi_fortification_type_sconce">Befæstning type: sconce</string>
-	<string name="poi_fortification_type_ring_ditch">Befæstning type: ring grøft</string>
+	<string name="poi_fortification_type_hill_fort">Befæstningsype: bakke fort</string>
+	<string name="poi_fortification_type_limes">Befæstningstype: limes</string>
+	<string name="poi_fortification_type_sconce">Befæstningstype: skanse</string>
+	<string name="poi_fortification_type_ring_ditch">Befæstningstype: ring grøft</string>
 
 	<string name="poi_pa">Pa (maori befæstet bosættelse)</string>
 

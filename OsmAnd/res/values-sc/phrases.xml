@@ -1413,4 +1413,18 @@
 	<string name="poi_tomb_pyramid">Casta: piràmide</string>
 
 	<string name="poi_highway_steps">Iscalas</string>
+	<string name="poi_site_type_megalith">Casta: megalitu</string>
+	<string name="poi_site_type_tumulus">Casta: tùmulu</string>
+	<string name="poi_site_type_fortification">Casta: fortificatzione</string>
+	<string name="poi_site_type_settlement">Casta: aposentamentu</string>
+	<string name="poi_site_type_city">Casta: tzitade</string>
+	<string name="poi_site_type_hut_circle">Casta: tzìrculu de pinneta (hut circle)</string>
+	<string name="poi_site_type_necropolis">Casta: necròpoli</string>
+	<string name="poi_site_type_petroglyph">Casta: petroglifu</string>
+	<string name="poi_site_type_earthwork">Casta: òpera de terra (earthwork)</string>
+	<string name="poi_megalith_type_menhir">Casta de megalitu: pedra longa/fitta (menhir)</string>
+	<string name="poi_megalith_type_dolmen">Casta de megalitu: covecada</string>
+	<string name="poi_megalith_type_nuraghe">Casta de megalitu: nuraghe</string>
+	<string name="poi_megalith_type_stone_circle">Casta de megalitu: tzìrculu de pedras</string>
+	<string name="poi_megalith_type_passage_grave">Casta de megalitu: tumba a passaditzu</string>
 	</resources>
