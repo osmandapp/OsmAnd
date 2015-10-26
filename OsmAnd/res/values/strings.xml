@@ -44,7 +44,7 @@
     <string name="gps_wake_up_timer">GPS wake-up interval</string>
 	<string name="favourites_edit_dialog_title">Favorite information</string>
     <string name="simulate_your_location_stop_descr">Stop simulating your position</string>
-    <string name="simulate_your_location_descr">Simulate using calculated route or recorded GPX</string>
+    <string name="simulate_your_location_descr">Simulate using a calculated route or a recorded GPX</string>
     <string name="address_unknown">Address is not known yet</string>
     <string name="av_locations_descr">GPX file with note locations</string>
     <string name="av_locations">Locations</string>
