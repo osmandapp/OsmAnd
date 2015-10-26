@@ -2233,7 +2233,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 <string name="share_geo">geo:</string>
     <string name="shared_string_send">Invia</string>
     <string name="simulate_initial_startup_descr">"Resetta  l\'indicatore del primo avvio, non modificare tutte le altre impostazioni"</string>
-    <string name="simulate_initial_startup">Simula il primo avvio</string>
+    <string name="simulate_initial_startup">Simula il primo avvio dell\'app</string>
     <string name="share_menu_location">Condivisi la posizione</string>
     <string name="hello_blank_fragment">Pulisci il segmento</string>
 <string name="application_dir_description">Scegli dove vuoi salvare i file delle mappe.</string>
