@@ -2189,11 +2189,11 @@
     <string name="share_clipboard">Udklipsholder</string>
     <string name="share_geo">geo:</string>
     <string name="share_qr_code">QR-kode</string>
-    <string name="simulate_initial_startup_descr">Nulstiller flag, der angiver første opstart, beholder andre indstillinger i deres oprindelige tilstand</string>
+    <string name="simulate_initial_startup_descr">Sætter flag, der angiver første programstart, beholder alle andre indstillinger uændret</string>
     <string name="simulate_initial_startup">Simuler første programstart</string>
     <string name="share_menu_location">Del placering</string>
     <string name="shared_string_send">Send</string>
     <string name="hello_blank_fragment">Hej tomme fragment</string>
 <string name="application_dir_description">Vælg hvor kortfilerne skal gemmes.</string>
-<string name="show_on_start_description">OsmAnd vil starte på kortskærmen</string>
+<string name="show_on_start_description">\'Fra\' starter direkte på kortskærmen</string>
 </resources>
