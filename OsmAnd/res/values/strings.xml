@@ -2027,5 +2027,5 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="application_dir_description">Choose where you want to save map files.</string>
-    <string name="show_on_start_description">OsmAnd app will start from map screen</string>
+    <string name="show_on_start_description">\'Off\' directly launches map screen</string>
 </resources>
