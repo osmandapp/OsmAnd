@@ -20,8 +20,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import net.osmand.access.AccessibleToast;
+import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
@@ -209,7 +209,8 @@ public class ItemViewHolder {
 	protected void download(IndexItem indexItem, DownloadResourceGroup parentOptional) {
 		boolean handled = false;
 		if(parentOptional != null) {
-			context.setDownloadItem(parentOptional.getRegion());
+			WorldRegion region = DownloadResourceGroup.getRegion(parentOptional);
+			context.setDownloadItem(region);
 		}
 		if (indexItem.getType() == DownloadActivityType.ROADS_FILE && parentOptional != null) {
 			for (IndexItem ii : parentOptional.getIndividualResources()) {

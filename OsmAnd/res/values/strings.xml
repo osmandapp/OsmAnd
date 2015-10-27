@@ -9,8 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-    <string name="simulate_initial_startup_descr">"Resets flag indicating first startup, keep other settings in the original state"</string>
-    <string name="simulate_initial_startup">Simulate initial startup</string>
+    <string name="simulate_initial_startup_descr">"Sets the flag indicating first app startup, keeps all other settings unchanged"</string>
+    <string name="simulate_initial_startup">Simulate first app start</string>
     <string name="share_geo">geo:</string>
     <string name="share_menu_location">Share location</string>
     <string name="shared_string_send">Send</string>
@@ -44,7 +44,7 @@
     <string name="gps_wake_up_timer">GPS wake-up interval</string>
 	<string name="favourites_edit_dialog_title">Favorite information</string>
     <string name="simulate_your_location_stop_descr">Stop simulating your position</string>
-    <string name="simulate_your_location_descr">Simulate using recorded GPX or calculated route</string>
+    <string name="simulate_your_location_descr">Simulate using a calculated route or a recorded GPX</string>
     <string name="address_unknown">Address is not known yet</string>
     <string name="av_locations_descr">GPX file with note locations</string>
     <string name="av_locations">Locations</string>
@@ -2027,5 +2027,5 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="application_dir_description">Choose where you want to save map files.</string>
-    <string name="show_on_start_description">OsmAnd app will start from map screen</string>
+    <string name="show_on_start_description">\'Off\' directly launches map screen</string>
 </resources>
