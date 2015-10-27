@@ -987,7 +987,7 @@
 	<string name="rendering_attr_noPolygons_description">Faghe divènnere transparentes totu sas caraterìsticas de sas àreas de su terrinu</string>
 	<string name="rendering_attr_hmRendered_description">Aumenta sa cantidade ammustrada de minujos de sa mapa</string>
 	<string name="osmand_rastermaps_plugin_description">"Cun custu plugin podes atzèdere a medas castas de màpas in lìnia (cussas connotas comente \"a tasseddos\" o \"raster\"), dae sas predefinidas de  Openstreetmap (comente Mapnik) a sas immàgines satellitares e a sos istratos pro punnas ispetziales comente sas mapas metereològicas, climàticas, geològicas, e umbradura de sos rilievos etc.
-\n\nTotu custas mapas podent èssere impreadas siat comente mapa printzipale (de base) de ammustrare in s\'ischermada mapa de OsmAnd siat comente un\'istratu se subrapositzione o de isfundu de un’àtera mapa de base (comente sas mapas standard non in lìnia de OsmAnd). Pro permìtere una visibilidade prus manna de sas mapas de isfundu, calicunu de sos elementos de sas mapas vetoriales podet èssere cuadu, impreande su menù \'Cunfigura sa mapa\' sighinde sas netzessidades tuas.
+\n\nTotu custas mapas podent èssere impreadas siat comente mapa printzipale (de base) de ammustrare in s\'ischermada mapa de OsmAnd siat comente un\'istratu se subrapositzione o de isfundu de un’àtera mapa de base (comente sas mapas istandard non in lìnia de OsmAnd). Pro permìtere una visibilidade prus manna de sas mapas de isfundu, calicunu de sos elementos de sas mapas vetoriales podet èssere cuadu, impreande su menù \'Cunfigura sa mapa\' sighinde sas netzessidades tuas.
 \n\nSas mapas a tasseddos podent èssere iscarrigadas deretamente o ammaniadas pro s\'impreu chene lìnia (e a pustis copiadas intre sa cartella de sos datos de OsmAnd) comente unu database sqlite chi podet èssere produidu dae medas ainas pro sa creatzione de mapas esternas (third-party maps). "</string>
 	
 	<string name="tip_recent_changes_0_8_0_t">"Mudas in sa 0.8.0:
@@ -1965,7 +1965,7 @@
 	<string name="use_fast_recalculation_desc">Torra a calculare petzi su cantu initziale de s’àndala pro biàgios longos</string>
 <string name="routing_attr_avoid_borders_name">Non rugres sas fronteras</string>
 	<string name="rendering_value_disabled_name">Disabilitadu</string>
-    <string name="osmo_share_my_location">Cumpartzi sa positzione</string>
+    <string name="osmo_share_my_location">Cumpartzi sa positzione mea</string>
     <string name="shared_string_logoff">Essi</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Coloratzione a segunda de sa casta de àndala</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Coloratzione a segunda de OSMC</string>
@@ -2141,8 +2141,8 @@
 <string name="update_all">Agiorna totu (%1$s MB)</string>
 <string name="free_downloads_used">Iscarrigamentos gratùitos impreados</string>
     <string name="free_downloads_used_description">Podes impostare cantos iscarrigamentos gratùitos as impreadu</string>
-<string name="simulate_initial_startup_descr">Reimposta sa bandera chi indicat sa prima allumingiadura, mantène sas àteras impostaziones in s’istadu originale</string>
-    <string name="simulate_initial_startup">Sìmula sa prima allumingiadura</string>
+<string name="simulate_initial_startup_descr">Imposta sa bandera chi indicat sa prima allumingiadura de s\'aplicatzione, mantène totu sas àteras impostaziones comente sunt</string>
+    <string name="simulate_initial_startup">Sìmula sa prima allumingiadura de s’aplicatzione</string>
     <string name="share_geo">geo:</string>
     <string name="share_menu_location">Cumpartzi sa positzione</string>
     <string name="shared_string_send">Imbia</string>
