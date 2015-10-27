@@ -176,7 +176,7 @@
 \n\t* Выпраўленьне памылак (неаптымальнай маршрутызацыі) "</string>
     
     
-    <string name="local_indexes_cat_srtm">Дадзеныя ізаліній вышынь</string>
+    <string name="local_indexes_cat_srtm">Ізалініі вышынь</string>
     <string name="local_indexes_cat_av">Аўдыё/відэа зьвесткі</string>
     <string name="stop_routing_confirm">Сапраўды спыніць навігацыю?</string>
     <string name="clear_dest_confirm">Сапраўды сьцерці месца прызначэньня (і кропкі шляху)?</string>
@@ -2153,4 +2153,5 @@
 <string name="share_menu_location">Падзяліцца месцазнаходжаньнем</string>
     <string name="share_geo">geo:</string>
     <string name="show_on_start_description">OsmAnd будзе пачынацца экранам з мапай</string>
-</resources>
+<string name="simulate_initial_startup">Імітаваць першы старт праграмы</string>
+    </resources>

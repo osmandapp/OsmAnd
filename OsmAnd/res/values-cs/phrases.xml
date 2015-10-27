@@ -15,7 +15,7 @@
 	<string name="poi_art">Obchod uměním</string>
 	<string name="poi_baby_goods">Dětské zboží</string>
 	<string name="poi_bathroom_furnishing">Vybavení koupelen</string>
-	<string name="poi_bed">Vybavení ložnic</string>
+	<string name="poi_bed">Obchod s lůžkovinami</string>
 	<string name="poi_boutique">Módní butik</string>
 	<string name="poi_chemist">Drogerie</string>
 	<string name="poi_clothes_children">Dětské oblečení</string>
@@ -1277,4 +1277,5 @@
 	<string name="poi_denomination_sunni">Sunnitství</string>
 	<string name="poi_denomination_protestant">Protestantské</string>
 	<string name="poi_denomination_methodist">Metodistické</string>
+	<string name="poi_tourism_yes">Turistický objekt</string>
 	</resources>
