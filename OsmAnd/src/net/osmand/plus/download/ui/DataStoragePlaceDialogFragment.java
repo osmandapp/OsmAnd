@@ -140,6 +140,7 @@ public class DataStoragePlaceDialogFragment extends DialogFragment {
 				public void onClick(View v) {
 					saveFilesLocation(OsmandSettings.EXTERNAL_STORAGE_TYPE_DEFAULT,
 							internalStorage, getActivity());
+					getMyApplication().getAppInitializer().setFirstTime(false);
 					dismiss();
 				}
 			};
@@ -150,6 +151,7 @@ public class DataStoragePlaceDialogFragment extends DialogFragment {
 				public void onClick(View v) {
 					saveFilesLocation(OsmandSettings.EXTERNAL_STORAGE_TYPE_EXTERNAL_FILE,
 							externalStorage, getActivity());
+					getMyApplication().getAppInitializer().setFirstTime(false);
 					dismiss();
 				}
 			};
