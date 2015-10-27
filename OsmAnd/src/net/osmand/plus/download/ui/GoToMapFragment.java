@@ -43,8 +43,6 @@ public class GoToMapFragment extends DialogFragment {
 				: R.style.OsmandDarkTheme_BottomSheet;
 		final Dialog dialog = new Dialog(getActivity(), themeId);
 		dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-		dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-		dialog.getWindow().setDimAmount(0.3f);
 		dialog.getWindow().getAttributes().windowAnimations = R.style.Animations_PopUpMenu_Bottom;
 		return dialog;
 	}
