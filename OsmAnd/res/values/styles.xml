@@ -283,6 +283,11 @@
         <item name="@android:windowExitAnimation">@anim/shrink_from_top</item>
     </style>
 
+    <style name="Animations.PopUpMenu.Bottom">
+        <item name="@android:windowEnterAnimation">@anim/slide_in_bottom</item>
+        <item name="@android:windowExitAnimation">@anim/slide_out_bottom</item>
+    </style>
+
     <style name="create_poi_text_field">
         <item name="android:layout_marginTop">8dp</item>
         <item name="android:layout_marginRight">16dp</item>

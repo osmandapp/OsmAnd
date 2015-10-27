@@ -38,6 +38,7 @@ import net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType;
 import net.osmand.plus.download.ui.ActiveDownloadsDialogFragment;
 import net.osmand.plus.download.ui.DataStoragePlaceDialogFragment;
 import net.osmand.plus.download.ui.DownloadResourceGroupFragment;
+import net.osmand.plus.download.ui.GoToMapFragment;
 import net.osmand.plus.download.ui.LocalIndexesFragment;
 import net.osmand.plus.download.ui.UpdatesIndexFragment;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
@@ -213,7 +214,9 @@ public class DownloadActivity extends ActionBarProgressActivity implements Downl
 	@UiThread
 	public void downloadHasFinished() {
 		visibleBanner.updateBannerInProgress();
-		if(downloadItem != null && !WorldRegion.WORLD_BASEMAP.equals(downloadItem.getRegionDownloadNameLC())) {
+		if(downloadItem != null && downloadItem != getMyApplication().getRegions().getWorldRegion()
+				&& !WorldRegion.WORLD_BASEMAP.equals(downloadItem.getRegionDownloadNameLC())) {
+
 			boolean firstMap = !getMyApplication().getSettings().FIRST_MAP_IS_DOWNLOADED.get();
 			if(firstMap) {
 				initSettingsFirstMap(downloadItem);
@@ -540,6 +543,8 @@ public class DownloadActivity extends ActionBarProgressActivity implements Downl
 	
 	private void showGoToMap(WorldRegion worldRegion) {
 		// TODO Show dialog go to map (coordinates to open take from WorldRegion.getCenter)
+		GoToMapFragment.showInstance(worldRegion, this);
+		LOG.warn("111 - region=" + worldRegion.getRegionId());
 		
 	}
 	
