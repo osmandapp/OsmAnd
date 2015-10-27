@@ -5,8 +5,7 @@
     </item>
     <item>
         <shape>
-            <solid
-                android:color="@color/bg_color_dark" />
+            <solid android:color="@color/bg_color_dark" />
         </shape>
     </item>
 </layer-list>

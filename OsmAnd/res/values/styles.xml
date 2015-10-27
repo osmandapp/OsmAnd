@@ -144,12 +144,16 @@
 
     <style name="OsmandLightTheme.BottomSheet">
         <item name="android:dialogTheme">@style/BottomSheet.Dialog</item>
-        <item name="android:windowBackground">?attr/bottom_menu_view_bg</item>
+        <item name="android:windowBackground">@color/color_transparent</item>
+        <item name="android:backgroundDimAmount">0.3</item>
+        <item name="android:backgroundDimEnabled">true</item>
     </style>
 
     <style name="OsmandDarkTheme.BottomSheet">
         <item name="android:dialogTheme">@style/BottomSheet.Dialog</item>
-        <item name="android:windowBackground">?attr/bottom_menu_view_bg</item>
+        <item name="android:windowBackground">@color/color_transparent</item>
+        <item name="android:backgroundDimAmount">0.3</item>
+        <item name="android:backgroundDimEnabled">true</item>
     </style>
 
     <style name="OsmandDarkTheme" parent="Theme.AppCompat">
@@ -313,7 +317,5 @@
         <item name="android:windowIsFloating">true</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowIsTranslucent">true</item>
-        <item name="android:backgroundDimAmount">0.3</item>
-        <item name="android:backgroundDimEnabled">true</item>
     </style>
 </resources>
