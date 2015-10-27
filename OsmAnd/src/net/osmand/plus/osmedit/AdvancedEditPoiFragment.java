@@ -82,6 +82,7 @@ public class AdvancedEditPoiFragment extends Fragment
 				(LinearLayout) view.findViewById(R.id.editTagsList);
 
 		final MapPoiTypes mapPoiTypes = ((OsmandApplication) getActivity().getApplication()).getPoiTypes();
+		// TODO: 10/27/15 Probably use executor so loading would be paralleled.
 		new InitTranslatedTypesTask(mapPoiTypes).execute();
 		mAdapter = new TagAdapterLinearLayoutHack(editTagsLineaLayout, getData());
 		// TODO do not restart initialization every time, and probably move initialization to appInit

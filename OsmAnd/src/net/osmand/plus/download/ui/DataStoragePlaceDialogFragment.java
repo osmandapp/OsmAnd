@@ -34,7 +34,11 @@ public class DataStoragePlaceDialogFragment extends DialogFragment {
 
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		final Dialog dialog = new Dialog(getActivity(), R.style.BottomSheet_Dialog);
+		boolean isLightTheme = ((OsmandApplication) getActivity().getApplication())
+				.getSettings().OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME;
+		int themeId = isLightTheme ? R.style.OsmandLightTheme_BottomSheet
+				: R.style.OsmandDarkTheme_BottomSheet;
+		final Dialog dialog = new Dialog(getActivity(), themeId);
 		dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 		return dialog;
 	}
