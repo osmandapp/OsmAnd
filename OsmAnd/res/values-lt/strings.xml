@@ -2181,4 +2181,8 @@
     <string name="update_all">Atnaujinti viską (%1$s MB)</string>
 <string name="srtm_plugin_disabled">Kontūro linijos išjungtos</string>
     <string name="shared_string_send">Siųsti</string>
+    <string name="map_downloaded">Žemėlapis atsiųstas</string>
+    <string name="map_downloaded_descr">%1$s žemėlapio jau atsiųsta. Norėdami pradėti juo naudotis, grįžkite į žemėlapį.</string>
+    <string name="go_to_map">Atidaryti žemėlapį</string>
+    <string name="application_dir_description">Pasirinkite vietą, kurioje norėsite išsaugoti žemėlapius.</string>
     </resources>
