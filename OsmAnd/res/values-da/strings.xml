@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
     <string name="av_def_action_audio">Optag audio</string>
@@ -1997,4 +1998,5 @@
 <string name="map_downloaded">Kort hentet</string>
     <string name="map_downloaded_descr">Kort over %1$ s er hentet. Gå tilbage til kortet for at begynde at bruge det.</string>
     <string name="go_to_map">Gå til kortet</string>
+    <string name="shared_string_qr_code">QR kode</string>
     </resources>
