@@ -279,11 +279,11 @@
   <string name="local_index_map_data">Mapová data</string>
   
   <string name="local_indexes_cat_backup">Záloha</string>
-  <string name="local_indexes_cat_tts">Hlasová data (TTS)</string>
-  <string name="local_indexes_cat_voice">Hlasová data (media)</string>
+  <string name="local_indexes_cat_tts">Hlasové pokyny (TTS)</string>
+  <string name="local_indexes_cat_voice">Hlasové pokyny (media)</string>
   
-  <string name="local_indexes_cat_tile">Online mapová data (rastrová)</string>
-  <string name="local_indexes_cat_map">Offline mapová data (vektorová)</string>
+  <string name="local_indexes_cat_tile">Mapy online a dlaždice v mezipaměti</string>
+  <string name="local_indexes_cat_map">Standardní mapy (vektorové)</string>
   <string name="local_indexes_cat_poi">Data POI</string>
   <string name="ttsvoice">TTS hlas</string>
   <string name="amenity_type_administrative">Administrativa</string>
@@ -834,7 +834,7 @@
   <string name="online_map_settings_descr">Nastavení rastrových překryvných nebo podkresových map</string>
   
   
-  <string name="osmand_rastermaps_plugin_description">"S tímto modulem můžete použít mnoho druhů online (také zvané dlaždicové nebo rastrové) map, od předdefinovaných OSM dlaždic (jako Mapnik) až po satelitní snímky a speciální vrstvy jako mapy počasí, klimatické mapy, geologické mapy, stínované vrstvy ... atd.\n\nVšechny tyto mapy mohou být použity jako hlavní (základní) mapa na obrazovce OsmAnd nebo jako překryvná popř. podkladová mapa k jiné základní mapě (např. běžné OsmAnd offline mapě). Pro zlepšení viditelnosti podkladových map je možné vypnout některé objekty z vektorových map OsmAnd, přes menu \'Nastavení mapy\'.\n\nDlaždicové mapy můžete získat přímo z online zdrojů nebo si je můžete připravit pro offline použití (zkopírovat ručně do datového adresáře OsmAnd) jako sqlite databázi, která může být vytvořena mnoha programy pro přípravu map. "</string>
+  <string name="osmand_rastermaps_plugin_description">"S tímto modulem můžete použít mnoho druhů online (také zvané dlaždicové nebo rastrové) map, od předdefinovaných OSM dlaždic (jako Mapnik) až po satelitní snímky a speciální vrstvy jako mapy počasí, klimatické mapy, geologické mapy, stínované vrstvy ... atd.\n\nVšechny tyto mapy mohou být použity jako hlavní (základní) mapa na obrazovce OsmAnd nebo jako překryvná popř. podkladová mapa k jiné základní mapě (např. standardní OsmAnd offline mapě). Pro zlepšení viditelnosti podkladových map je možné vypnout některé objekty z vektorových map OsmAnd, přes menu \'Nastavení mapy\'.\n\nDlaždicové mapy můžete získat přímo z online zdrojů nebo si je můžete připravit pro offline použití (zkopírovat ručně do datového adresáře OsmAnd) jako sqlite databázi, která může být vytvořena mnoha programy pro přípravu map. "</string>
   <string name="osmand_background_plugin_description">Zobrazí nastavení na povolení záznamu trasy a navigace v úsporném režimu (při vypnuté obrazovce) pravidelným probouzením GPS zařízení.</string>
   <string name="osmand_accessibility_description">Tento modul zobrazí nastavení pro speciální funkce ulehčení přístupu přímo v OsmAnd. Například je možné měnit rychlost TTS hlasu, použít trackball na přibližování nebo například použít hlasové předčítání pro oznamování polohy.</string>
   
@@ -920,7 +920,7 @@
   <string name="select_animate_speedup">Vyberte zrychlení simulované navigace</string>
   <string name="osmand_parking_hours">hodin</string>
   <string name="osmand_parking_minutes">minut</string>
-  <string name="osmand_parking_position_description_add_time">Auto bylo zaparkováno v:</string>
+  <string name="osmand_parking_position_description_add_time">Auto bylo zaparkováno v</string>
   <string name="use_compass_navigation_descr">Použít kompas při navigaci, když nelze zjistit směr</string>
   <string name="use_compass_navigation">Použít kompas</string>
   <string name="route_updated_loc_found">Trasa bude přepočítána, jakmile bude nalezena pozice</string>
@@ -1069,8 +1069,8 @@
     <string name="safe_mode_description">Spustit aplikaci v bezpečném režimu (kód pro Android namísto nativního).</string>
     <string name="safe_mode">Bezpečný režim</string>
     <string name="download_roads_only_item">Silniční mapa</string>
-    <string name="download_regular_maps">Běžné mapy</string>
-    <string name="download_roads_only_maps">Silniční mapy</string>
+    <string name="download_regular_maps">Standardní mapy</string>
+    <string name="download_roads_only_maps">Silniční mapa</string>
     <string name="rendering_attr_showRoadMaps_description">Zvolte, kdy zobrazovat silniční mapy:</string>
 	<string name="rendering_attr_showRoadMaps_name">Silniční mapy</string>
     <string name="incomplete_locale">neúplný</string>
@@ -1095,7 +1095,7 @@
 	
 
 	<string name="audionotes_plugin_name">Modul zvukové/video poznámky</string>
-    <string name="srtm_plugin_description">"Tento modul poskytuje zobrazení vrstevnic a vrstvy stínování kopců, které mohou být zobrazené na OsmAnd offline mapách. Tato funkce je vhodná především pro atlety, turisty, chodce a vůbec všechny které zajímá profil terénu.\n\nCelosvětová výšková data (mezi 70 stupni severní šířky a 70 stupni jižní šířky) se zakládají na měřeních SRTM (Shuttle Radar Topography Mission) a ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), snímkovací přístroj na palubě satelitu Terra, vlajkového satelitu Systému pozorování Země NASA. ASTER je společným projektem NASA, japonského ministerstva hospodářství, obchodu a průmyslu (METI) a Japan Space Systems (J-spacesystems). "</string>
+    <string name="srtm_plugin_description">"Tento modul poskytuje zobrazení vrstevnic a vrstvy stínování kopců, které mohou být zobrazené na standardních OsmAnd mapách. Tato funkce je vhodná především pro atlety, turisty, chodce a vůbec všechny které zajímá profil terénu.\n\nCelosvětová výšková data (mezi 70 stupni severní šířky a 70 stupni jižní šířky) se zakládají na měřeních SRTM (Shuttle Radar Topography Mission) a ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), snímkovací přístroj na palubě satelitu Terra, vlajkového satelitu Systému pozorování Země NASA. ASTER je společným projektem NASA, japonského ministerstva hospodářství, obchodu a průmyslu (METI) a Japan Space Systems (J-spacesystems). "</string>
     <string name="srtm_plugin_name">Vrstevnice</string>
     <string name="download_srtm_maps">Vrstevnice</string>
     <string name="audionotes_location_not_defined">GPS pozice pro záznam zvukové poznámky ještě není známa. Pokud chcete použít specifickou lokaci použijte \"Možnosti bodu\"</string>
@@ -1143,7 +1143,7 @@
     <string name="srtm_paid_version_title">Modul Vrstevnice</string>
     <string name="shared_string_control_stop">Zastavit</string>
     <string name="dropbox_plugin_description">Modul Dropbox umožňuje nahrávat trasy, audio a video poznámky do vašeho účtu Dropbox.</string>
-    <string name="osmand_srtm_long_description_1000_chars">"Tento modul poskytuje zobrazení vrstevnic a vrstvy stínování kopců, které mohou být zobrazené na OsmAnd offline mapách. Tato funkce je vhodná především pro atlety, turisty, chodce a vůbec všechny které zajímá profil terénu.\n\nCelosvětová výšková data (mezi 70 stupni severní šířky a 70 stupni jižní šířky) se zakládají na měřeních SRTM (Shuttle Radar Topography Mission) a ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), snímkovací přístroj na palubě satelitu Terra, vlajkového satelitu Systému pozorování Země NASA. ASTER je společným projektem NASA, japonského ministerstva hospodářství, obchodu a průmyslu (METI) a Japan Space Systems (J-spacesystems). "</string>
+    <string name="osmand_srtm_long_description_1000_chars">"Tento modul poskytuje zobrazení vrstevnic a vrstvy stínování kopců, které mohou být zobrazené na standardních OsmAnd mapách. Tato funkce je vhodná především pro atlety, turisty, chodce a vůbec všechny které zajímá profil terénu.\n\nCelosvětová výšková data (mezi 70 stupni severní šířky a 70 stupni jižní šířky) se zakládají na měřeních SRTM (Shuttle Radar Topography Mission) a ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), snímkovací přístroj na palubě satelitu Terra, vlajkového satelitu Systému pozorování Země NASA. ASTER je společným projektem NASA, japonského ministerstva hospodářství, obchodu a průmyslu (METI) a Japan Space Systems (J-spacesystems). "</string>
     <string name="stop_routing_confirm">Opravdu chcete zastavit navigaci?</string>
     <string name="clear_dest_confirm">Opravdu chcete smazat cíl?</string>
     <string name="recording_context_menu_show">Zobrazit</string>
@@ -2113,11 +2113,19 @@ s často kladenými otázkami.</string>
     <string name="activate_seamarks_plugin">Prosím aktivujte modul Námořní značky</string>
     <string name="activate_srtm_plugin">Prosím aktivujte modul Vrstevnice</string>
     <string name="later">Později</string>
-    <string name="get_full_version">Získat plnou verzi</string>
+    <string name="get_full_version">Plná verze</string>
     <string name="downloads">Stahování</string>
     <string name="value_downloaded_from_max">%1$.1f z %2$.1f MB</string>
     <string name="file_size_in_mb">%.1f MB</string>
 <string name="update_all">Aktualizovat vše (%1$s MB)</string>
     <string name="free_downloads_used">Použito volných stáhnutí</string>
     <string name="free_downloads_used_description">Můžete nastavit, kolik volných stáhnutí jste použili</string>
+<string name="simulate_initial_startup">Simulovat první start aplikace</string>
+    <string name="share_geo">geo:</string>
+    <string name="share_menu_location">Sdílet polohu</string>
+    <string name="shared_string_send">Odeslat</string>
+    <string name="simulate_initial_startup_descr">Nastavit příznak označující první start aplikace, ostatní nastavení ponechat nezměněné</string>
+    <string name="confirm_download_roadmaps">Opravdu chcete stáhnout silniční mapu, když už máte podrobnou mapu?</string>
+    <string name="application_dir_description">Zvolte kam chcete uložit mapové soubory.</string>
+    <string name="show_on_start_description">\'Vypnuto\' spouští přímo mapovou obrazovku</string>
 </resources>
