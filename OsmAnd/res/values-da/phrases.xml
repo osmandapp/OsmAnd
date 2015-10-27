@@ -2389,4 +2389,8 @@
 	<string name="poi_club_scout">Spejdergruppe</string>
 
 
+<string name="poi_historic_threshing_floor">Historisk tærskegulv</string>
+	<string name="poi_historic_gallows">Historisk galge</string>
+	<string name="poi_historic_railway">Historisk jernbane</string>
+
 </resources>
