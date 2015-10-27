@@ -2000,7 +2000,7 @@
     <string name="are_you_sure">Är du säker?</string>
 	<string name="unsaved_changes_will_be_lost">Alla osparade ändringar kommer att förloras. Fortsätta ändå?</string>
 <string name="simulate_your_location_stop_descr">Sluta simulera din plats</string>
-    <string name="simulate_your_location_descr">Simulera med beräknad rutt eller med inspelad GPX</string>
+    <string name="simulate_your_location_descr">Simulera med en beräknad rutt eller med inspelad GPX</string>
     <string name="downloads_left_template">%1$s nedladdningar kvar</string>
 <string name="favourites_edit_dialog_title">Information om favoriter</string>
     <string name="roads">Vägar</string>
