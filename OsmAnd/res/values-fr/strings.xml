@@ -2221,4 +2221,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="simulate_initial_startup_descr">Efface le compteur de démarrages afin de simuler un premier démarrage (conserve tous les autres paramètres)</string>
     <string name="hello_blank_fragment">Hello fragment vide</string>
     <string name="show_on_start_description">Si inactif démarre l\'application en mode carte</string>
-</resources>
+<string name="map_downloaded">Carte téléchargée</string>
+    <string name="go_to_map">Aller à la carte</string>
+    <string name="map_downloaded_descr">La carte %1$s a été téléchargée. Allez à la carte pour l’utiliser.</string>
+    </resources>
