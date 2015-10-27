@@ -2135,7 +2135,7 @@
     <string name="unsaved_changes_will_be_lost">Eventuelle ikke-gemte ændringer vil gå tabt. Fortsæt?</string>
 <string name="are_you_sure">Sikker?</string>
 	<string name="simulate_your_location_stop_descr">Stop simulering af position</string>
-    <string name="simulate_your_location_descr">Simuler ved brug af optaget GPX eller beregnet rute</string>
+    <string name="simulate_your_location_descr">Simuler ved brug af beregnet rute eller optaget GPX</string>
     <string name="downloads_left_template">%1$s filhentninger tilbage</string>
 <string name="roads">Veje</string>
 <string name="favourites_edit_dialog_title">Favoritinformation</string>
@@ -2190,7 +2190,7 @@
     <string name="share_geo">geo:</string>
     <string name="share_qr_code">QR-kode</string>
     <string name="simulate_initial_startup_descr">Nulstiller flag, der angiver første opstart, beholder andre indstillinger i deres oprindelige tilstand</string>
-    <string name="simulate_initial_startup">Simuler første opstart</string>
+    <string name="simulate_initial_startup">Simuler første programstart</string>
     <string name="share_menu_location">Del placering</string>
     <string name="shared_string_send">Send</string>
     <string name="hello_blank_fragment">Hej tomme fragment</string>
