@@ -144,10 +144,12 @@
 
     <style name="OsmandLightTheme.BottomSheet">
         <item name="android:dialogTheme">@style/BottomSheet.Dialog</item>
+        <item name="android:windowBackground">?attr/bottom_menu_view_bg</item>
     </style>
 
     <style name="OsmandDarkTheme.BottomSheet">
         <item name="android:dialogTheme">@style/BottomSheet.Dialog</item>
+        <item name="android:windowBackground">?attr/bottom_menu_view_bg</item>
     </style>
 
     <style name="OsmandDarkTheme" parent="Theme.AppCompat">
