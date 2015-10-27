@@ -82,7 +82,7 @@ public class AdvancedEditPoiFragment extends Fragment
 				(LinearLayout) view.findViewById(R.id.editTagsList);
 
 		final MapPoiTypes mapPoiTypes = ((OsmandApplication) getActivity().getApplication()).getPoiTypes();
-		allTranslatedSubTypes = mapPoiTypes.getAllTranslatedNames();
+		new InitTranslatedTypesTask(mapPoiTypes).execute();
 		mAdapter = new TagAdapterLinearLayoutHack(editTagsLineaLayout, getData());
 		// TODO do not restart initialization every time, and probably move initialization to appInit
 		new InitTagsAndValuesAutocompleteTask(mapPoiTypes).execute();
@@ -361,6 +361,24 @@ public class AdvancedEditPoiFragment extends Fragment
 			addPoiToStringSet(mapPoiTypes.getOtherMapCategory(), tagKeys, valueKeys);
 			mAdapter.setTagData(tagKeys.toArray(new String[tagKeys.size()]));
 			mAdapter.setValueData(valueKeys.toArray(new String[valueKeys.size()]));
+		}
+	}
+
+	class InitTranslatedTypesTask extends AsyncTask<Void, Void, Map<String, PoiType>> {
+		private final MapPoiTypes mapPoiTypes;
+
+		public InitTranslatedTypesTask(MapPoiTypes mapPoiTypes) {
+			this.mapPoiTypes = mapPoiTypes;
+		}
+
+		@Override
+		protected Map<String, PoiType> doInBackground(Void... params) {
+			return mapPoiTypes.getAllTranslatedNames();
+		}
+
+		@Override
+		protected void onPostExecute(Map<String, PoiType> result) {
+			allTranslatedSubTypes = result;
 		}
 
 	}
