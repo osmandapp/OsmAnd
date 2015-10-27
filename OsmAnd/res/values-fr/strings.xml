@@ -2218,7 +2218,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="shared_string_send">Envoyer</string>
     <string name="application_dir_description">Sélectionnez l\'emplacement pour enregistrer les cartes.</string>
 <string name="simulate_initial_startup">Simuler un premier démarrage</string>
-    <string name="simulate_initial_startup_descr">Efface le compteur de démarrages afin de simuler un premier démarrage (ne modifie aucun autre paramètre)</string>
+    <string name="simulate_initial_startup_descr">Efface le compteur de démarrages afin de simuler un premier démarrage (conserve tous les autres paramètres)</string>
     <string name="hello_blank_fragment">Hello fragment vide</string>
-    <string name="show_on_start_description">L\'application OmsAnd s\'éxecutera depuis la carte</string>
+    <string name="show_on_start_description">Si inactif démarre l\'application en mode carte</string>
 </resources>
