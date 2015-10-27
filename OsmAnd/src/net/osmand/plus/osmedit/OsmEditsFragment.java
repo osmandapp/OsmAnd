@@ -52,6 +52,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Denis
@@ -509,7 +510,18 @@ public class OsmEditsFragment extends OsmAndListFragment
 				getString(R.string.local_openstreetmap_uploading),
 				ProgressDialog.STYLE_HORIZONTAL).getDialog();
 		OsmEditsUploadListener listener = new OsmEditsUploadListenerHelper(getActivity(),
-				getString(R.string.local_openstreetmap_were_uploaded));
+				getString(R.string.local_openstreetmap_were_uploaded)) {
+			@Override
+			public void uploadEnded(Map<OsmPoint, String> loadErrorsMap) {
+				super.uploadEnded(loadErrorsMap);
+				for (OsmPoint osmPoint : loadErrorsMap.keySet()) {
+					if (loadErrorsMap.get(osmPoint) == null) {
+						listAdapter.remove(osmPoint);
+					}
+				}
+				listAdapter.notifyDataSetChanged();
+			}
+		};
 		UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask(
 				dialog, listener, plugin, remotepoi, remotebug, points.length, closeChangeSet);
 		uploadTask.execute(points);

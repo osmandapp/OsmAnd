@@ -141,8 +141,13 @@
         <item name="colorAccent">@color/color_white</item>
     </style>
 
-    <style name="FreeVersionBanner" parent="OsmandDarkTheme">
-        <item name="android:textColor">@color/color_white</item>
+
+    <style name="OsmandLightTheme.BottomSheet">
+        <item name="android:dialogTheme">@style/BottomSheet.Dialog</item>
+    </style>
+
+    <style name="OsmandDarkTheme.BottomSheet">
+        <item name="android:dialogTheme">@style/BottomSheet.Dialog</item>
     </style>
 
     <style name="OsmandDarkTheme" parent="Theme.AppCompat">
@@ -201,6 +206,9 @@
         <item name="contextMenuButtonColor">@color/osmand_orange</item>
     </style>
 
+    <style name="FreeVersionBanner" parent="OsmandDarkTheme">
+        <item name="android:textColor">@color/color_white</item>
+    </style>
 
     <!-- Standard action bar override -->
     <style name="Widget.Styled.ActionBarDark" parent="Widget.AppCompat.Light.ActionBar.Solid.Inverse">
@@ -294,13 +302,11 @@
         <item name="android:textColor">@null</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:layout_width">fill_parent</item>
-        <item name="android:windowBackground">@color/color_white</item>
+        <item name="android:windowBackground">@null</item>
         <item name="android:windowIsFloating">true</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:backgroundDimAmount">0.3</item>
         <item name="android:backgroundDimEnabled">true</item>
-        <item name="android:textColorPrimary">@color/dashboard_black</item>
-        <item name="android:textColorSecondary">@color/icon_color</item>
     </style>
 </resources>
