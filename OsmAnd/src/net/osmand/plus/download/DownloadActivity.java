@@ -574,7 +574,7 @@ public class DownloadActivity extends ActionBarProgressActivity implements Downl
 		final boolean firstTime = getMyApplication().getAppInitializer().isFirstTime(this);
 		final boolean externalExists =
 				getMyApplication().getSettings().getSecondaryStorage() != null;
-		if (firstTime && externalExists) {
+		if (firstTime && externalExists && DataStoragePlaceDialogFragment.isInterestedInFirstTime) {
 			new DataStoragePlaceDialogFragment().show(getFragmentManager(), null);
 		}
 	}

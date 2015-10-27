@@ -36,9 +36,15 @@ public class DashRecentsFragment extends DashLocationFragment {
 	private List<ImageView> arrows = new ArrayList<ImageView>();
 	List<HistoryEntry> points = new ArrayList<HistoryEntry>();
 	private static final String ROW_NUMBER_TAG = TAG + "_row_number";
-	static final DashFragmentData FRAGMENT_DATA =
-			new DashFragmentData(TAG, DashRecentsFragment.class, TITLE_ID,
-					new DashboardOnMap.DefaultShouldShow(), 80, ROW_NUMBER_TAG);
+	private static final DashFragmentData.ShouldShowFunction SHOULD_SHOW_FUNCTION =
+			new DashboardOnMap.DefaultShouldShow() {
+				@Override
+				public int getTitleId() {
+					return TITLE_ID;
+				}
+			};
+	static final DashFragmentData FRAGMENT_DATA = new DashFragmentData(
+			TAG, DashRecentsFragment.class, SHOULD_SHOW_FUNCTION, 80, ROW_NUMBER_TAG);
 
 	@Override
 	public View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

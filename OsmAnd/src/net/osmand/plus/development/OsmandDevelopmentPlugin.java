@@ -12,7 +12,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.ContributionVersionActivity;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
@@ -128,9 +127,6 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 
 	@Override
 	public DashFragmentData getCardFragment() {
-		return new DashFragmentData(DashSimulateFragment.TAG,
-				DashSimulateFragment.class,
-				DashSimulateFragment.TITLE_ID,
-				new DashboardOnMap.DefaultShouldShow(), 150, null);
+		return DashSimulateFragment.FRAGMENT_DATA;
 	}
 }

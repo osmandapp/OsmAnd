@@ -211,7 +211,8 @@ public class DashboardSettingsDialogFragment extends DialogFragment
 			@Override
 			public void onClick(View v) {
 				DashViewHolder localViewHolder = (DashViewHolder) v.getTag();
-				String header = getContext().getString(getItem(localViewHolder.position).titleStringId);
+				String header = getContext().getString(getItem(localViewHolder.position)
+						.shouldShowFunction.getTitleId());
 				String subheader = getContext().getResources().getString(R.string.count_of_lines);
 				final String stringPosition = String.valueOf(localViewHolder.position);
 				NumberPickerDialogFragment.createInstance(header, subheader, stringPosition, getNumberOfRows(localViewHolder.position), MAXIMUM_NUMBER_OF_ROWS)
@@ -246,7 +247,7 @@ public class DashboardSettingsDialogFragment extends DialogFragment
 			} else {
 				numberOfRowsTextView.setVisibility(View.GONE);
 			}
-			textView.setText(fragmentData.titleStringId);
+			textView.setText(fragmentData.shouldShowFunction.getTitleId());
 			textView.setTextColor(dashFragmentAdapter.isChecked(position)? textColorPrimary :
 					textColorSecondary);
 			this.position = position;
