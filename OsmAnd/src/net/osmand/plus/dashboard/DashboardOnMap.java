@@ -72,30 +72,27 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 	public static final String SHOULD_SHOW = "should_show";
 
 	private static final DashFragmentData.ShouldShowFunction rateUsShouldShow = new DashRateUsFragment.RateUsShouldShow();
-	private static final DefaultShouldShow defaultShouldShow = new DefaultShouldShow();
 	private static final DashFragmentData.ShouldShowFunction errorShouldShow = new ErrorShouldShow();
-	private static final DashFragmentData.ShouldShowFunction firstTimeShouldShow = new FirstTimeShouldShow();
 	private static final DashFragmentData.ShouldShowFunction chooseAppDirShouldShow = new ChooseAppDirShouldShow();
 
 	private final DashFragmentData[] fragmentsData = new DashFragmentData[]{
 			new DashFragmentData(DashRateUsFragment.TAG, DashRateUsFragment.class,
-					-1, rateUsShouldShow, 0, null),
-			new DashFragmentData(DashFirstTimeFragment.TAG, DashFirstTimeFragment.class,
-					-1, firstTimeShouldShow, 10, null),
+					rateUsShouldShow, 0, null),
+			DashFirstTimeFragment.FRAGMENT_DATA,
 			new DashFragmentData(DashChooseAppDirFragment.TAG, DashChooseAppDirFragment.class,
-					-1, chooseAppDirShouldShow, 20, null),
+					chooseAppDirShouldShow, 20, null),
 			new DashFragmentData(DashErrorFragment.TAG, DashErrorFragment.class,
-					-1, errorShouldShow, 30, null),
+					errorShouldShow, 30, null),
 			new DashFragmentData(DashNavigationFragment.TAG, DashNavigationFragment.class,
-					DashNavigationFragment.TITLE_ID, defaultShouldShow, 40, null),
+					DashNavigationFragment.SHOULD_SHOW_FUNCTION, 40, null),
 			new DashFragmentData(DashWaypointsFragment.TAG, DashWaypointsFragment.class,
-					DashWaypointsFragment.TITLE_ID, defaultShouldShow, 60, null),
+					DashWaypointsFragment.SHOULD_SHOW_FUNCTION, 60, null),
 			new DashFragmentData(DashSearchFragment.TAG, DashSearchFragment.class,
-					DashSearchFragment.TITLE_ID, defaultShouldShow, 70, null),
+					DashSearchFragment.SHOULD_SHOW_FUNCTION, 70, null),
 			DashRecentsFragment.FRAGMENT_DATA,
 			DashFavoritesFragment.FRAGMENT_DATA,
 			new DashFragmentData(DashPluginsFragment.TAG, DashPluginsFragment.class,
-					DashPluginsFragment.TITLE_ID, defaultShouldShow, 140, null)
+					DashPluginsFragment.SHOULD_SHOW_FUNCTION, 140, null)
 	};
 
 	private MapActivity mapActivity;
@@ -933,7 +930,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 		return list;
 	}
 
-	public static class SettingsShouldShow implements DashFragmentData.ShouldShowFunction {
+	public static class SettingsShouldShow extends DashFragmentData.ShouldShowFunction {
 		@Override
 		public boolean shouldShow(OsmandSettings settings, MapActivity activity, String tag) {
 			return settings.registerBooleanPreference(SHOULD_SHOW + tag, true)
@@ -949,20 +946,12 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 		}
 	}
 
-	private static class ErrorShouldShow implements DashFragmentData.ShouldShowFunction {
+	private static class ErrorShouldShow extends DashFragmentData.ShouldShowFunction {
 		// If settings null. No changes in setting will be made.
 		@Override
 		public boolean shouldShow(OsmandSettings settings, MapActivity activity, String tag) {
 			return activity.getMyApplication().getAppInitializer()
 					.checkPreviousRunsForExceptions(activity, settings != null);
-		}
-	}
-
-	private static class FirstTimeShouldShow extends SettingsShouldShow {
-		@Override
-		public boolean shouldShow(OsmandSettings settings, MapActivity activity, String tag) {
-			return activity.getMyApplication().getAppInitializer().isFirstTime(activity)
-					&& super.shouldShow(settings, activity, tag);
 		}
 	}
 

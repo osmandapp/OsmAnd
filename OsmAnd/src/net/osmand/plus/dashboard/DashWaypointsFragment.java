@@ -23,6 +23,7 @@ import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
+import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.helpers.WaypointHelper;
@@ -39,6 +40,13 @@ public class DashWaypointsFragment extends DashLocationFragment {
 	public static final int TITLE_ID = R.string.waypoints;
 	List<TargetPoint> points = new ArrayList<TargetPoint>();
 	private static boolean SHOW_ALL;
+	public static final DashFragmentData.ShouldShowFunction SHOULD_SHOW_FUNCTION =
+			new DashboardOnMap.DefaultShouldShow() {
+				@Override
+				public int getTitleId() {
+					return TITLE_ID;
+				}
+			};
 
 	@Override
 	public View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

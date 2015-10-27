@@ -1,13 +1,12 @@
 package net.osmand.plus;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
@@ -42,13 +41,15 @@ import net.osmand.util.Algorithms;
 
 import org.xmlpull.v1.XmlPullParserException;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import btools.routingapp.BRouterServiceConnection;
 
 /**
@@ -160,11 +161,7 @@ public class AppInitializer implements IProgress {
 		initUiVars(activity);
 		return firstTime;
 	}
-	
-	public void setFirstTime(boolean firstTime) {
-		this.firstTime = firstTime;
-	}
-	
+
 	public boolean checkAppVersionChanged(Activity activity) {
 		initUiVars(activity);
 		boolean showRecentChangesDialog = !firstTime && appVersionChanged;

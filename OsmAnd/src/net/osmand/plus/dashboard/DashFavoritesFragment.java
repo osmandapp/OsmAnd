@@ -37,9 +37,15 @@ public class DashFavoritesFragment extends DashLocationFragment {
 	List<FavouritePoint> points = new ArrayList<FavouritePoint>();
 
 	public static final String ROW_NUMBER_TAG = TAG + "_row_number";
+	private static final DashFragmentData.ShouldShowFunction SHOULD_SHOW_FUNCTION =
+			new DashboardOnMap.DefaultShouldShow() {
+				@Override
+				public int getTitleId() {
+					return TITLE_ID;
+				}
+			};
 	public static final DashFragmentData FRAGMENT_DATA =
-			new DashFragmentData(TAG, DashFavoritesFragment.class, TITLE_ID,
-					new DashboardOnMap.DefaultShouldShow(), 90, ROW_NUMBER_TAG);
+			new DashFragmentData(TAG, DashFavoritesFragment.class, SHOULD_SHOW_FUNCTION, 90, ROW_NUMBER_TAG);
 
 	@Override
 	public View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

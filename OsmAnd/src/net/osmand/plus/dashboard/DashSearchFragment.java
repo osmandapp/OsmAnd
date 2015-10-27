@@ -15,6 +15,7 @@ import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.search.SearchActivity;
+import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.helpers.FontCache;
 
 /**
@@ -22,8 +23,14 @@ import net.osmand.plus.helpers.FontCache;
  * 24.11.2014.
  */
 public class DashSearchFragment extends DashBaseFragment {
-	public static final int TITLE_ID = R.string.search_for;
 	public static final String TAG = "DASH_SEARCH_FRAGMENT";
+	public static final DashFragmentData.ShouldShowFunction SHOULD_SHOW_FUNCTION =
+			new DashboardOnMap.DefaultShouldShow() {
+				@Override
+				public int getTitleId() {
+					return R.string.search_for;
+				}
+			};
 
 	@Override
 	public View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

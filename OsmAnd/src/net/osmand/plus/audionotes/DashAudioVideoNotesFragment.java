@@ -31,9 +31,16 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 	public static final String TAG = "DASH_NOTES_FRAGMENT";
 	public static final int TITLE_ID = R.string.map_widget_av_notes;
 	private static final String ROW_NUMBER_TAG = TAG + "_row_number";
-	static final DashFragmentData FRAGMENT_DATA =
-			new DashFragmentData(TAG, DashAudioVideoNotesFragment.class, TITLE_ID,
-					new DashboardOnMap.DefaultShouldShow(), 100, ROW_NUMBER_TAG);
+	private static final DashFragmentData.ShouldShowFunction SHOULD_SHOW_FUNCTION =
+			new DashboardOnMap.DefaultShouldShow() {
+				@Override
+				public int getTitleId() {
+					return TITLE_ID;
+				}
+			};
+	static final DashFragmentData FRAGMENT_DATA = new DashFragmentData(
+			TAG, DashAudioVideoNotesFragment.class, SHOULD_SHOW_FUNCTION, 100, ROW_NUMBER_TAG);
+
 
 	AudioVideoNotesPlugin plugin;
 

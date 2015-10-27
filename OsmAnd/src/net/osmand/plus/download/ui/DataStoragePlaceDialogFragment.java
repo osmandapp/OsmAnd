@@ -31,6 +31,7 @@ public class DataStoragePlaceDialogFragment extends DialogFragment {
 
 	private File internalStorage;
 	private File externalStorage;
+	public static boolean isInterestedInFirstTime = true;
 
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -140,7 +141,7 @@ public class DataStoragePlaceDialogFragment extends DialogFragment {
 				public void onClick(View v) {
 					saveFilesLocation(OsmandSettings.EXTERNAL_STORAGE_TYPE_DEFAULT,
 							internalStorage, getActivity());
-					getMyApplication().getAppInitializer().setFirstTime(false);
+					isInterestedInFirstTime = false;
 					dismiss();
 				}
 			};
@@ -151,7 +152,7 @@ public class DataStoragePlaceDialogFragment extends DialogFragment {
 				public void onClick(View v) {
 					saveFilesLocation(OsmandSettings.EXTERNAL_STORAGE_TYPE_EXTERNAL_FILE,
 							externalStorage, getActivity());
-					getMyApplication().getAppInitializer().setFirstTime(false);
+					isInterestedInFirstTime = false;
 					dismiss();
 				}
 			};

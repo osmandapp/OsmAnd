@@ -45,9 +45,16 @@ public class DashTrackFragment extends DashBaseFragment {
 	public static final int TITLE_ID = R.string.shared_string_my_tracks;
 
 	private static final String ROW_NUMBER_TAG = TAG + "_row_number";
+
+	private static final DashFragmentData.ShouldShowFunction SHOULD_SHOW_FUNCTION =
+			new DashboardOnMap.DefaultShouldShow() {
+				@Override
+				public int getTitleId() {
+					return TITLE_ID;
+				}
+			};
 	static final DashFragmentData FRAGMENT_DATA =
-			new DashFragmentData(TAG, DashTrackFragment.class, TITLE_ID,
-					new DashboardOnMap.DefaultShouldShow(), 110, ROW_NUMBER_TAG);
+			new DashFragmentData(TAG, DashTrackFragment.class, SHOULD_SHOW_FUNCTION, 110, ROW_NUMBER_TAG);
 
 	private boolean updateEnable;
 

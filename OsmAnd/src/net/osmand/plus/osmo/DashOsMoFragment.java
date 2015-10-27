@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +24,8 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashLocationFragment;
+import net.osmand.plus.dashboard.DashboardOnMap;
+import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
 import net.osmand.util.MapUtils;
 
@@ -42,6 +43,15 @@ public class DashOsMoFragment extends DashLocationFragment implements OsMoGroups
 
 	public static final String TAG = "DASH_OSMO_FRAGMENT";
 
+	private static final DashFragmentData.ShouldShowFunction SHOULD_SHOW_FUNCTION =
+			new DashboardOnMap.DefaultShouldShow() {
+				@Override
+				public int getTitleId() {
+					return R.string.osmo_plugin_name;
+				}
+			};
+	static final DashFragmentData FRAGMENT_DATA = new DashFragmentData(
+			DashOsMoFragment.TAG, DashOsMoFragment.class, SHOULD_SHOW_FUNCTION, 120, null);
 	private Handler uiHandler = new Handler();
 
 	OsMoPlugin plugin;
@@ -79,9 +89,9 @@ public class DashOsMoFragment extends DashLocationFragment implements OsMoGroups
 			plugin.setGroupsActivity(getActivity());
 		}
 		setupOsMoView();
-		
+
 	}
-	
+
 	@Override
 	public void onDetach() {
 		super.onDetach();
@@ -89,7 +99,7 @@ public class DashOsMoFragment extends DashLocationFragment implements OsMoGroups
 			plugin.setGroupsActivity(null);
 		}
 	}
-	
+
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
@@ -218,7 +228,7 @@ public class DashOsMoFragment extends DashLocationFragment implements OsMoGroups
 			if (!device.isActive() && !device.isEnabled() && devices.size() > 2) {
 				it.remove();
 			}
-			
+
 		}
 
 		sortDevices(devices);

@@ -18,6 +18,8 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashLocationFragment;
+import net.osmand.plus.dashboard.DashboardOnMap;
+import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.helpers.FontCache;
 
 import java.util.Calendar;
@@ -27,9 +29,20 @@ import java.util.Calendar;
  * 26.01.2015.
  */
 public class DashParkingFragment extends DashLocationFragment {
-	public static final String TAG = "DASH_PARKING_FRAGMENT";
-	public static final int TITLE_ID = R.string.osmand_parking_plugin_name;
+	private static final String TAG = "DASH_PARKING_FRAGMENT";
+	private static final int TITLE_ID = R.string.osmand_parking_plugin_name;
 	ParkingPositionPlugin plugin;
+
+	private static final DashFragmentData.ShouldShowFunction SHOULD_SHOW_FUNCTION =
+			new DashboardOnMap.DefaultShouldShow() {
+				@Override
+				public int getTitleId() {
+					return TITLE_ID;
+				}
+			};
+	static final DashFragmentData FRAGMENT_DATA = new DashFragmentData(
+			DashParkingFragment.TAG, DashParkingFragment.class,
+			SHOULD_SHOW_FUNCTION, 50, null);
 
 	@Override
 	public View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

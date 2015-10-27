@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.download.DownloadActivity;
 
 /**
@@ -22,7 +24,12 @@ import net.osmand.plus.download.DownloadActivity;
 public class DashFirstTimeFragment extends DashBaseFragment {
 
 	public static final String TAG = "DASH_FIRST_TIME_FRAGMENT";
+	private static final DashFragmentData.ShouldShowFunction SHOULD_SHOW_FUNCTION =
+			new FirstTimeShouldShow();
+	static final DashFragmentData FRAGMENT_DATA =
+			new DashFragmentData(TAG, DashFirstTimeFragment.class, SHOULD_SHOW_FUNCTION, 110, null);
 
+	public static boolean interestedInFirstTime = true;
 
 	@Override
 	public void onOpenDash() {
@@ -66,7 +73,7 @@ public class DashFirstTimeFragment extends DashBaseFragment {
 		view.findViewById(R.id.hide).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				getMyApplication().getAppInitializer().setFirstTime(false);
+				interestedInFirstTime = false;
 				dashboard.refreshDashboardFragments();
 			}
 		});
@@ -87,5 +94,13 @@ public class DashFirstTimeFragment extends DashBaseFragment {
 
 	private void updateCurrentRegion(View view) {
 		((TextView) view.findViewById(R.id.region)).setText(getMyApplication().getSettings().DRIVING_REGION.get().name);
+	}
+
+	private static class FirstTimeShouldShow extends DashFragmentData.ShouldShowFunction {
+		@Override
+		public boolean shouldShow(OsmandSettings settings, MapActivity activity, String tag) {
+			return activity.getMyApplication().getAppInitializer().isFirstTime(activity)
+					&& DashFirstTimeFragment.interestedInFirstTime;
+		}
 	}
 }
