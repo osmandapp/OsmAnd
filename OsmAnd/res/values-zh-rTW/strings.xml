@@ -2165,12 +2165,12 @@
 <string name="update_all">全部更新 (%1$s MB)</string>
 <string name="free_downloads_used">免費下載使用</string>
     <string name="free_downloads_used_description">您可以設置，您有使用多少免費下載</string>
-<string name="simulate_initial_startup_descr">重置標誌指示第一次啟動，保持著其它設定在原來的狀態</string>
+<string name="simulate_initial_startup_descr">設定標誌指示第一次應用程式啟動，而保持著所有其它設定不變</string>
     <string name="simulate_initial_startup">模擬第一次應用程式啟動</string>
     <string name="share_geo">地理：</string>
     <string name="share_menu_location">分享位置</string>
     <string name="shared_string_send">發送</string>
     <string name="hello_blank_fragment">哈囉，成空的片段</string>
 <string name="application_dir_description">選擇您想要在何處儲存地圖檔案。</string>
-<string name="show_on_start_description">OsmAnd 應用程式會從地圖螢幕開始</string>
+<string name="show_on_start_description">\'關閉\' 直接啟動地圖螢幕</string>
 </resources>
