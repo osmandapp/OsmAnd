@@ -2337,4 +2337,9 @@
 	<string name="poi_club_sailing">Клуб парусного спорта</string>
 	<string name="poi_club_scout">Клуб скаутов</string>
 
+	<string name="poi_historic_threshing_floor">Историческое гумно</string>
+	<string name="poi_historic_gallows">Историческая виселица</string>
+	<string name="poi_historic_railway">Историческая железная дорога</string>
+
+
 </resources>
