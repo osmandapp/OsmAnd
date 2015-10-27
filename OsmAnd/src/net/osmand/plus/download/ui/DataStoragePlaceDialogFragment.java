@@ -94,6 +94,7 @@ public class DataStoragePlaceDialogFragment extends DialogFragment {
 		closeImageButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				isInterestedInFirstTime = false;
 				dismiss();
 			}
 		});
