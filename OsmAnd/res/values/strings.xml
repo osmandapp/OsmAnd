@@ -9,7 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-    <string name="simulate_initial_startup_descr">"Resets flag indicating first startup, keep other settings in the original state"</string>
+    <string name="simulate_initial_startup_descr">"Sets the flag indicating first app startup, keeps all other settings unchanged"</string>
     <string name="simulate_initial_startup">Simulate first app start</string>
     <string name="share_geo">geo:</string>
     <string name="share_menu_location">Share location</string>
