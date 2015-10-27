@@ -322,7 +322,7 @@
     <string name="max_speed_none">perunu</string>
     <string name="index_name_openmaps">OpenMaps UE</string>
     <string name="download_hillshade_item">Umbraduras rilievos</string>
-    <string name="download_hillshade_maps">Subrapositziones umbraduras rilievos</string>
+    <string name="download_hillshade_maps">Umbraduras rilievos</string>
     <string name="tip_recent_changes_1_1_2_t">Mudas in sa 1.1.2:
 		\n\t* Megioramentu de su plugin àudio/vìdeo (figuras cun sas informatziones EXIF)
 		\n\t* Usabilidade attransada e plugin lìnias de livellu restruturau
@@ -331,7 +331,7 @@
     </string>
     
     
-    <string name="local_indexes_cat_srtm">Datos lìnias de livellu</string>
+    <string name="local_indexes_cat_srtm">Lìnias de livellu</string>
     <string name="local_indexes_cat_av">Datos àudio/vìdeo</string>
     <string name="stop_routing_confirm">Ses seguru de bòlere firmare su nàvigu?</string>
     <string name="clear_dest_confirm">Ses seguru de bòlere burrare sa destinatzione (e sos puntos mesanos)?</string>
@@ -385,7 +385,7 @@
     <string name="shared_string_control_start">Avia/Inghitza</string>
     <string name="map_widget_av_notes">Notas àudio/vìdeo</string>
     <string name="osmand_srtm_short_description_80_chars">Plugin OsmAnd pro sas lìnias de livellu chene lìnia</string>
-    <string name="osmand_srtm_long_description_1000_chars">"Custu plugin frunidi sas lìnias de livellu e sas umbraduras de sos rilievos, chi podent èssere visualizadas in supra de sas mapas non in lìnia de OsmAnd. Custa funtzionalidade at a èssere appretziada meda dae sos atletas, sos escursionistas, e totu sos chi sunt interessados in s\'orografia e su paesàggiu.
+    <string name="osmand_srtm_long_description_1000_chars">"Custu plugin frunidi sas lìnias de livellu e sas umbraduras de sos rilievos, chi podent èssere visualizadas in supra de sas mapas regulares de OsmAnd. Custa funtzionalidade at a èssere appretziada meda dae sos atletas, sos escursionistas, e totu sos chi sunt interessados in s\'orografia e su paesàggiu.
 \n\nSos datos globales (intre sos 70 grados nord e sos 70 grados sud) sunt basados in supra de sas medidas de su SRTM (Shuttle Radar Topography Mission) e de s’ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un’aina medidora a bordu de Terra, su satellite de su sistema di osservatzione de sa terra de sa NASA. ASTER est un’isfortzu de coperassione intre NASA, su Ministeru de s’Economia Cummèrtziu e Industria (METI) de su Giappone, e su sistema ispatziale giapponesu (J-spacesystems). "</string>
     <string name="map_widget_distancemeasurement">Medidura de sa distantzia</string>
     <string name="audionotes_location_not_defined">Sa positzione da assotziare cun sa nota non est galu dessinida. \"Imprea positzione ...\" pro assinzare una nota a sa positzione dislindada</string>
@@ -395,7 +395,7 @@
     <string name="audionotes_plugin_name">Plugin notas àudio/vìdeo</string>
     <string name="index_srtm_parts">partes</string>
     <string name="index_srtm_ele">Lìnias de livellu</string>
-    <string name="srtm_plugin_description">"Custu plugin frunidi sas lìnias de livellu e sas umbraduras de sos rilievos, chi podent èssere visualizadas in supra de sas mapas non in lìnia de OsmAnd. Custa funtzionalidade at a èssere appretziada meda dae sos atletas, sos escursionistas, e totu sos chi sunt interessados in s\'orografia e su paesàggiu.
+    <string name="srtm_plugin_description">"Custu plugin frunidi sas lìnias de livellu e sas umbraduras de sos rilievos, chi podent èssere visualizadas in supra de sas mapas regulares de OsmAnd. Custa funtzionalidade at a èssere appretziada meda dae sos atletas, sos escursionistas, e totu sos chi sunt interessados in s\'orografia e su paesàggiu.
 \n\nSos datos globales (intre sos 70 grados nord e sos 70 grados sud) sunt basados in supra de sas medidas de su SRTM (Shuttle Radar Topography Mission) e de s’ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un’aina medidora a bordu de Terra, su satellite de su sistema di osservatzione de sa terra de sa NASA. ASTER est un’isfortzu de coperassione intre NASA, su Ministeru de s’Economia Cummèrtziu e Industria (METI) de su Giappone, e su sistema ispatziale giapponesu (J-spacesystems). "</string>
     <string name="srtm_plugin_name">Plugin lìnias de livellu</string>
     <string name="download_select_map_types">Àteras mapas</string>
@@ -819,8 +819,8 @@
 	<string name="unknown_location">Positzione calu non connota</string>
 	<string name="modify_transparency">Muda sa trasparèntzia (0 - trasparente, 255 - annapau)</string>
 	<string name="confirm_interrupt_download">Boles firmare s’isgarrigamentu de sos documentos?</string>
-	<string name="local_indexes_cat_tile">Mapas in lìnia a tasseddos</string>
-	<string name="local_indexes_cat_map">Mapas non in lìnia (vetoriales)</string>
+	<string name="local_indexes_cat_tile">Mapas in lìnia e in cache a tasseddos</string>
+	<string name="local_indexes_cat_map">Mapas regulares (vetoriales)</string>
 	<string name="map_online_data">Mapas in lìnia e a tasseddos</string>
 	<string name="map_online_data_descr">Imprea sas mapas in lìnia (iscàrriga e archìvia sos tasseddos in s’ischeda SD)</string>
 	<string name="online_map_settings">Mapas in lìnia</string>
@@ -987,7 +987,7 @@
 	<string name="rendering_attr_noPolygons_description">Faghe divènnere transparentes totu sas caraterìsticas de sas àreas de su terrinu</string>
 	<string name="rendering_attr_hmRendered_description">Aumenta sa cantidade ammustrada de minujos de sa mapa</string>
 	<string name="osmand_rastermaps_plugin_description">"Cun custu plugin podes atzèdere a medas castas de màpas in lìnia (cussas connotas comente \"a tasseddos\" o \"raster\"), dae sas predefinidas de  Openstreetmap (comente Mapnik) a sas immàgines satellitares e a sos istratos pro punnas ispetziales comente sas mapas metereològicas, climàticas, geològicas, e umbradura de sos rilievos etc.
-\n\nTotu custas mapas podent èssere impreadas siat comente mapa printzipale (de base) de ammustrare in s\'ischermada mapa de OsmAnd siat comente un\'istratu se subrapositzione o de isfundu de un’àtera mapa de base (comente sas mapas istandard non in lìnia de OsmAnd). Pro permìtere una visibilidade prus manna de sas mapas de isfundu, calicunu de sos elementos de sas mapas vetoriales podet èssere cuadu, impreande su menù \'Cunfigura sa mapa\' sighinde sas netzessidades tuas.
+\n\nTotu custas mapas podent èssere impreadas siat comente mapa printzipale (de base) de ammustrare in s\'ischermada mapa de OsmAnd siat comente un\'istratu se subrapositzione o de isfundu de un’àtera mapa de base (comente sas mapas regulares non in lìnia de OsmAnd). Pro permìtere una visibilidade prus manna de sas mapas de isfundu, calicunu de sos elementos de sas mapas vetoriales podet èssere cuadu, impreande su menù \'Cunfigura sa mapa\' sighinde sas netzessidades tuas.
 \n\nSas mapas a tasseddos podent èssere iscarrigadas deretamente o ammaniadas pro s\'impreu chene lìnia (e a pustis copiadas intre sa cartella de sos datos de OsmAnd) comente unu database sqlite chi podet èssere produidu dae medas ainas pro sa creatzione de mapas esternas (third-party maps). "</string>
 	
 	<string name="tip_recent_changes_0_8_0_t">"Mudas in sa 0.8.0:
@@ -1175,7 +1175,7 @@
 	<string name="local_index_map_data">Datos mapa</string>
 	<string name="local_indexes_cat_backup">Istudadu</string>
 	<string name="local_indexes_cat_tts">Boghes (TTS)</string>
-	<string name="local_indexes_cat_voice">Boghe (registrada)</string>
+	<string name="local_indexes_cat_voice">Boghes (registradas)</string>
 	
 	<string name="ttsvoice">Boghe TTS</string>
 	<string name="search_offline_clear_search">Chirca noa</string>
