@@ -222,6 +222,7 @@ public class DownloadActivity extends ActionBarProgressActivity implements Downl
 				initSettingsFirstMap(downloadItem);
 			}
 			showGoToMap(downloadItem);
+			downloadItem = null;
 		}
 		for (WeakReference<Fragment> ref : fragSet) {
 			Fragment f = ref.get();

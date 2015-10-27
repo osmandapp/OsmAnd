@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -42,6 +43,8 @@ public class GoToMapFragment extends DialogFragment {
 				: R.style.OsmandDarkTheme_BottomSheet;
 		final Dialog dialog = new Dialog(getActivity(), themeId);
 		dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+		dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+		dialog.getWindow().setDimAmount(0.3f);
 		dialog.getWindow().getAttributes().windowAnimations = R.style.Animations_PopUpMenu_Bottom;
 		return dialog;
 	}
@@ -66,13 +69,14 @@ public class GoToMapFragment extends DialogFragment {
 		((TextView) view.findViewById(R.id.descriptionTextView))
 				.setText(getActivity().getString(R.string.map_downloaded_descr, regionName));
 
-		view.findViewById(R.id.closeImageButton)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						dismiss();
-					}
-				});
+		final ImageButton closeImageButton = (ImageButton) view.findViewById(R.id.closeImageButton);
+		closeImageButton.setImageDrawable(getContentIcon(R.drawable.ic_action_remove_dark));
+		closeImageButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				dismiss();
+			}
+		});
 
 		view.findViewById(R.id.actionButton)
 				.setOnClickListener(new View.OnClickListener() {
@@ -80,6 +84,7 @@ public class GoToMapFragment extends DialogFragment {
 					public void onClick(View v) {
 						OsmandApplication app = (OsmandApplication) getActivity().getApplication();
 						app.getSettings().setMapLocationToShow(regionCenter.getLatitude(), regionCenter.getLongitude(), 5, null);
+						dismiss();
 						MapActivity.launchMapActivityMoveToTop(getActivity());
 					}
 				});
@@ -111,6 +116,10 @@ public class GoToMapFragment extends DialogFragment {
 
 	private Drawable getIcon(@DrawableRes int drawableRes, @ColorRes int color) {
 		return getMyApplication().getIconsCache().getIcon(drawableRes, color);
+	}
+
+	private Drawable getContentIcon(@DrawableRes int drawableRes) {
+		return getMyApplication().getIconsCache().getContentIcon(drawableRes);
 	}
 
 	public static void showInstance(WorldRegion region, DownloadActivity activity) {
