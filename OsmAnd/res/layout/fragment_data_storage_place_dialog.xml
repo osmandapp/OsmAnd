@@ -3,7 +3,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:background="@color/color_transparent"
             tools:context="net.osmand.plus.download.ui.DataStoragePlaceDialogFragment">
 
     <ImageView
