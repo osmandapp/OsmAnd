@@ -542,10 +542,7 @@ public class DownloadActivity extends ActionBarProgressActivity implements Downl
 	}
 	
 	private void showGoToMap(WorldRegion worldRegion) {
-		// TODO Show dialog go to map (coordinates to open take from WorldRegion.getCenter)
 		GoToMapFragment.showInstance(worldRegion, this);
-		LOG.warn("111 - region=" + worldRegion.getRegionId());
-		
 	}
 	
 	private void showDownloadWorldMapIfNeeded() {
