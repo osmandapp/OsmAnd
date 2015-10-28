@@ -284,7 +284,7 @@
     <string name="modify_transparency">Ændre gennemsigtighed (0 - gennemsigtig, 255 - ugennemsigtig)</string>
     <string name="confirm_interrupt_download">Afbryd hentning af fil?</string>
     <string name="first_time_msg">Til mange af funktionerne i programmet skal der bruges nogle regionale offline data som kan hentes via \'Indstillinger\' → \'Administrer kortfiler\'. Bagefter kan man se kort, søge adresser, finde interessepunkter (IP) og kolllektivtrafik.</string>
-    <string name="basemap_was_selected_to_download">Basiskort er nødvendig for korrekt programfunktion og blev automatisk valgt.</string>
+    <string name="basemap_was_selected_to_download">Grundkort er nødvendige for korrekt programfunktion og blev automatisk valgt.</string>
     <string name="select_index_file_to_download">Fandt intet. Hvis man ikke kan finde sin region kan man lave den selv (se http://osmand.net).</string>
     <string name="local_indexes_cat_tile">Onlinekort og cachelagrede kortfliser</string>
     <string name="local_indexes_cat_map">Standardkort (vektor)</string>
@@ -531,7 +531,7 @@
     <string name="show_more_map_detail_descr">Vis nogle vektor-kortdetaljer (f.eks. veje) allerede ved lavere zoom</string>
     <string name="favourites_delete_multiple_succesful">Favoritter er slettet.</string>
     <string name="favorite_delete_multiple">%1$d favoritter og %2$d favoritgrupper slettes. Forsæt?</string>
-    <string name="basemap_missing">Basis verdenskort (dækker hele verden ved lav zoom) mangler. Overvej at hente World_basemap_x.obf for et komplet kortmiljø.</string>
+    <string name="basemap_missing">Verdensgrundkort (dækker hele verden ved lave zoomniveauer) mangler. Overvej at hente World_basemap_x.obf for et komplet kortmiljø.</string>
     <string name="vector_data_missing">Offline-data mangler på SD-kort. Overvej at hente for at kunne bruge kort offline.</string>
 
 
@@ -2000,5 +2000,5 @@
     <string name="go_to_map">Gå til kortet</string>
     <string name="shared_string_qr_code">QR kode</string>
     <string name="enter_country_name">Indtast landenavn</string>
-<string name="world_map_download_descr">Verden grundkort (dækker hele verden ved små zoom) mangler eller er forældede. Overvej at hente verden grundkort for en komplet miljø.</string>
+<string name="world_map_download_descr">Verdensgrundkort (dækker hele verden ved lave zoomniveauer) mangler eller er forældet. Overvej at hente verdensgrundkort for et komplet miljø.</string>
     </resources>
