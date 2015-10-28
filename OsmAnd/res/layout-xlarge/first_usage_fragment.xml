@@ -71,10 +71,10 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="12dp"
                 android:background="@null"
-                android:drawableLeft="@drawable/ic_action_search_dark"
+                tools:drawableLeft="@drawable/ic_action_search_dark"
                 android:drawablePadding="12dp"
                 android:gravity="center_vertical"
-                android:hint="Enter country name"
+                android:hint="@string/enter_country_name"
                 android:textSize="@dimen/default_list_text_size"/>
 
         </android.support.v7.widget.CardView>
