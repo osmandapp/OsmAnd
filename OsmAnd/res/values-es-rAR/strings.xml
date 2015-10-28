@@ -2058,7 +2058,7 @@
     <string name="are_you_sure">¿Está seguro?</string>
 	<string name="unsaved_changes_will_be_lost">Se perderán los cambios no guardados. ¿Continuar?</string>
 <string name="simulate_your_location_stop_descr">Parar simulación de ubicación</string>
-    <string name="simulate_your_location_descr">Simular usando grabación GPX o ruta calculada</string>
+    <string name="simulate_your_location_descr">Simular usando una ruta calculada o una grabación GPX</string>
     <string name="downloads_left_template">Quedan %1$s descargas</string>
 <string name="shared_string_trip_recording">Grabación de viaje</string>
     <string name="shared_string_navigation">Navegación</string>
@@ -2109,12 +2109,15 @@
 <string name="update_all">Actualizar todo (%1$s MB)</string>
 <string name="free_downloads_used">Descargas gratis usadas</string>
     <string name="free_downloads_used_description">Configure cuántas descargas gratis usará</string>
-<string name="simulate_initial_startup_descr">Restablece la bandera que indica el primer arranque y mantiene los demás ajustes en su estado original</string>
-    <string name="simulate_initial_startup">Simular arranque inicial</string>
+<string name="simulate_initial_startup_descr">Muestra la pantalla del primer arranque y mantiene los demás ajustes sin cambios</string>
+    <string name="simulate_initial_startup">Simular el arranque inicial</string>
     <string name="share_geo">geo:</string>
     <string name="share_menu_location">Compartir ubicación</string>
     <string name="shared_string_send">Enviar</string>
     <string name="application_dir_description">Elija donde guardar los archivos de los mapas.</string>
 <string name="hello_blank_fragment">Hola fragmento vacío</string>
-    <string name="show_on_start_description">OsmAnd iniciará desde la pantalla del mapa</string>
-</resources>
+    <string name="show_on_start_description">\'No\', inicia directamente la pantalla del mapa</string>
+<string name="map_downloaded">Mapa descargado</string>
+    <string name="map_downloaded_descr">Se descargó el mapa de %1$s. Vuelve al mapa para empezar a usarlo.</string>
+    <string name="go_to_map">Ir al mapa</string>
+    </resources>
