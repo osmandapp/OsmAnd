@@ -1,19 +1,8 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="plugins_screen">Spraudņu pārvaldnieks</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="plugins_screen">Spraudņu pārvaldnieks</string>
   
   <string name="prefs_plugins_descr">Spraudņi papildina aplikācijas iespējas un dod papildus funkcionalitāti</string>
   <string name="prefs_plugins">Spraudņi</string>
-  <string name="tip_recent_changes_0_8_0_t">Izmaiņas 0.8.0:
-	\n\t* Spraudņu funkcionalitāte
-	\n\t* Funkcionalitāte ir sadalīta grupās un var tikt iespējota/atspējota ar spraudņu menedžeri. Jūs variet iespējot (tiešsaistes vai kešotu) bilžu karti, sekošanas uzstādījumus, un daudz citas iespējas kuras bija pieejamas iepriekš.
-	\n\t* Jauns bezsaistes kartes atbalsts
-	\n\t* Kartes renderēšana ir ātrāka un precīzāka (pamatā izlabotas krasta līnijas un laukuma applūšanas problēmas)
-	\n\t* Jums jāveic pilnīgi jaunu kartes datu lejupielāde (vecie dati vairs netiek atbalstīti)
-	\n\t* Bezsaistes maršrutēšana
-	\n\t* Bezsaistes maršrutēšana ir daudz stabilāka
-	\n\t* Lietojamība un UI
-	\n\t* Veikti uzlabojumi vairākās vietās		
-	</string>
+  
   <string name="osm_editing_plugin_description">Rādīt uzstādījumus OSM pilnveidošanai - OSM POI objektu izveidei/labošanai, GPX treku izplatīšanai un ziņošanai par OSM kļūdām. Vairāk uzziniet http://openstreetmap.org vietnē. Ikviens ir aicināts ņemt aktīvu dalību, ko ir iespējams darīt caur OsmAnd aplikāciju, norādot jūsu OSM lietotāja datus.</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Vektoru kartes tiks attēlotas ātrāk, bet var nestrādāt uz visām ierīcēm.</string>
   
@@ -23,7 +12,7 @@
   
   <string name="test_voice_prompts">Pārbaudīt balss komandas</string>
   <string name="switch_to_raster_map_to_see">Šai vietai nav pieejama karte. Jūs variet to lejupielādēt caur uzstādījumiem vai pārslēgties uz tiešsaistes kartēm (iespējojot tiešsaistes karšu spraudni).</string>
-  <string name="tip_recent_changes_0_7_2_t">"Jaunumi 0.7.2 : \n\t- Iebūvētā renderēšana visām iekārtām \n\t- Bezsaistes POI rediģēšana \n\t- Pieejamība \n\t- Daudz kļūdu labojumu "</string>
+  
   <string name="send_files_to_osm">Sūtīt GPX failus uz OSM?</string>
   <string name="gpx_visibility_txt">Redzamība</string>
   <string name="gpx_tags_txt">Iezīmes</string>
@@ -36,7 +25,7 @@
   <string name="info_button">Informācija</string>
   <string name="back_to_location">Atgriezties atrašanās vietā</string>
   <string name="shared_string_help">Palīdzība</string>
-  <string name="show_details">Rādīt pozīcijas detaļas</string>
+  
   <string name="accessibility_extensions_descr">Pieejamības paplašinājumi vecākām Android versijām</string>
   <string name="accessibility_extensions">Pieejamības paplašinājumi</string>
   <string name="accessibility_mode">Pieejamības režīms</string>
@@ -97,7 +86,7 @@
   <string name="use_fluorescent_overlays_descr">Lietot flurescentās krāsas, lai attēlotu maršruta ceļus</string>
   <string name="offline_edition">Bezsaistes rediģēšana</string>
   <string name="offline_edition_descr">Viemēr lietot bezsaistes rediģēšanu</string>
-  <string name="tip_recent_changes_0_7_1_t">"Jaumi 0.7.1 versijā : \n\t- Bezsaistes POI rediģēšana \n\t- Sekošanas opcija - periodiska koordināšu sūtīšana uz web servisu. (kā izveidot savu web servisu var izlasīt HowTo) \n\t- Parādīt kartē ierakstītos trekus \n\t- Virziena noteikšana: Ja brauciet pretējā virzienā vai esiet pabraucis garām pagriezienam tiek paziņots \'Izpildiet U-pagriezienu\' \n\t- Jauns bals ziņojums \'Maršruts pārrēķināts\' \n\t- Tūlītēja (100m)pagrieziena indikācija ar virziena bultas krāsas maiņu \n\t- Deaktivizēto indeksu failu aktualitāte tiek parādīta lejuplādes ekrānā ar tumši zaļu un tumši zilu \n\t- Citas izmaiņas "</string>
+  
   <string name="update_poi_does_not_change_indexes">POI izmaiņas aplikācijā neietekmē lejupielādētās kartes, izmaiņas tiek glabātas atsevišķā failā.</string>
   <string name="local_openstreetmap_uploading">Augšupielādē …</string>
   <string name="local_openstreetmap_were_uploaded">Tika augšupielādēti {0} POI/kļūdas</string>
@@ -117,7 +106,7 @@
   <string name="live_monitoring_url">Tiešsaistes sekošanas web adrese</string>
   <string name="gpx_monitoring_disabled_warn">Ierakstīt treku ar GPX pogu vai atbilstošiem \'ceļojuma ieraksts\' uzstādījumiem.</string>
   <string name="show_current_gpx_title">Rādīt patreizējo trasi</string>
-  <string name="tip_recent_changes_0_7_0_t">"Jaunumi 0.7.0 versijā : \n\t- Bezsaistes wikipedia dati \n\t- Atjaunotas kartes \n\t- Citi mazi uzlabojumi "</string>
+  
   <string name="free_version_message">Bezmaksas OsmAnd versijai ir ierobežojums uz %1$s lejupielādēm un tā neatbalsta bezsaistes wikipedia rakstus.</string>
   <string name="free_version_title">Bezmaksas versija</string>
   <string name="poi_context_menu_showdescription">Rādīt POI aprakstu</string>
@@ -158,23 +147,18 @@
   <string name="user_password_descr">Nepieciešams, lai veiktu openstreetmap.org augšuplādi</string>
   <string name="osmand_service">Miega režīms</string>
   <string name="osmand_service_descr">Lietojiet, lai OsmAnd darbotos fonā, kad ekrāns ir izslēgts</string>
-  <string name="tip_rotation_switching">Kartes orientācija</string>
   
   
-  <string name="tip_day_night_mode">Dienas/Nakts režīms</string>
   
-  <string name="tip_osm_improve">OSM datu uzlabošana</string>
-  <string name="tip_osm_improve_t">OsmAnd lieto kartes, kuras ir bāzētas uz Openstreetmap.org (OSM) datiem, kuri regulāri tiek atjaunoti. Arī jūs variet vienkārši augšupielādēt jaunus POI vai OSM kļūdas pieteikumus ar dažām dabībām!
-		\n\nLai to izdarītu, jums vispirms ir jāaktivizē OSM labošanas spraudnis \'Uzstādījumi\' -&gt; \'Vispārīgie uzstādījumi\' -&gt; \'OSM labošana\'. 
-		\n\nLai pievienotu jaunu POI, lietojiet opciju \'Izveidot POI\' kartes punkta konteksta izvēlnē. Turpiniet, ievadot POI informāciju par jauno punktu \'Izveidot POI\' dialogā un pabeidzot darbību, apstipriniet ievadu.
-		\n\nTāpat jums ir iespēja ziņot par kļūdām kartē ar OSM kļūdas pieteikuma palīdzību, lai OSM kopiena var šo kļūdu izlabot. Lai pievienotu OSM kļūdas pieteikumu, izmantojiet opciju \'Pieteikt OSM kļūdu\' kartes konteksta izvēlnē. Tad ievadiet detalizētu kļūdas aprakstu un visbeidzot, apstipriniet pieteikumu, nospiežot pogu \'Pievienot\'.
-		\n\nŅemiet vērā, ka, lai gan OsmAnd un interešu punktu (POI) kļūdu pieteikumu var saglabāt bezsaistē, datu nosūtīšanai būs nepieciešams interneta savienojums.
-	</string>
+  
+  
+  
+  
   <string name="download_files_not_enough_space">Nepietiek brīvās vietas, lai lejupielādētu %1$s MB (brīvi: %2$s).</string>
   <string name="download_files_question_space">Patreiz ir brīvi {2} MB! Lejupielādēt {0} failu(s) ({1} MB)?</string>
   
   
-  <string name="tip_recent_changes_0_6_9_t">"Izmaiņas versijā 0.6.9 : \n\t- Uzlabota kartes renderēšana \n\t- Ātra bezsaistes renderēšana - meklējiet eksperimentālās iespējas (var nestrādāt dažās iekārtās) \n\t- Pamatīgas izskata izmaiņas \n\t- Augstuma informācija \n\t- Jauni tulkojumi (Vjetnamiešu, Poļu) \n\t- Citi nelieli papildinājumi "</string>
+  
   
   <string name="use_transparent_map_theme">Caurspīdīgā tēma</string>
   <string name="native_library_not_supported">Iekļautā bibliotēka šajā iekārtā netiek atbalstīta.</string>
@@ -198,7 +182,7 @@
   
   <string name="animate_route_off">Izslēgt animāciju</string>
   <string name="animate_route">Ieslēgt animāciju</string>
-  <string name="tip_recent_changes_0_6_8_t">"Izmaiņas 0.6.8 versijā : \n\t- Pilnībā pārstrādāta meklēšana (POI, Adrese)! Adresu meklēšana ir padarīta daudz ātrāka. Izveiots viena meklēšanas saskarne ar dažādām opcijām. \n\t- Implementēta POI meklēšana lielos apgabalos (valstīs) \n\t- Izlabota kartes raustīšanās tablet PC (Pieteikums 641) \n\t- Kartes auto-centrēšanas iespēja (Pieteikums 356) \n\t- GPX navigation moved to \'Directions\' and \'Save Directions\' moved to \'About route\' \n\t- POI data included in .obf file (all download indexes after 01/10/11) \n\t- Voice prompt fixes (GPS position fix, omitting first command) \n\t- Small improvements "</string>
+  
   <string name="file_can_not_be_renamed">Failu nevar pārsaukt.</string>
   <string name="file_with_name_already_exists">Fails ar šādu nosaukumu jau eksistē.</string>
   <string name="gpx_navigation">GPX maršruts</string>
@@ -222,7 +206,7 @@
   <string name="search_position_map_view">Pašreizējais kartes centrs</string>
   <string name="select_search_position">Tuvumā:</string>
   <string name="context_menu_item_search">Meklēt apkārtnē</string>
-  <string name="tip_recent_changes_0_6_7_t">Izmaiņas 0.6.7 versijā:\n\t- Bezsaistes datu menedžeris (lejuplādēšana, dzēšana un aktivizācija/deaktivizācija neizejot no OsmAnd aplikācijas)\n\t- Izlases punkti un grupas (kategorizēšana, dzēšana, izlases vadība)\n\t- GPX pārlūkošana aplikācijā (skatīt ceļa detaļas, attālumu, vidējo ātrumu, augstuma izmaiņas u.t.t.)\n\t- GPX navigācija (vairāk iespēju, turpināt navigāciju pēc nobrukšanas, loka kustības atbalsts)\n\t- Funkcija GPX ceļa saglabāšanai bezsaistes lietojumam\n\t- Uzlabota GPX monitorēšana (filtrs uz neakurātu pozīciju un saglabāta precizitāte/augstums/ātrums)\n\t- Augšuplādēt GPX uz OSM (http://download.osmand.net/gpx/)\n\t- Uzlabota vektoru renderēšana\n\t- TTS dzinēja uzlabojumi (ziņo precīzu attālumu, jūdžu atbalsts)\n\t- Kļūdu labojumi</string>
+  
   <string name="shared_string_save_as_gpx">Saglabāt maršrutu GPX trasē</string>
   <string name="route_successfully_saved_at">Maršruts veiksmīgi saglabāts kā \'%1$s\'.</string>
   <string name="filename_input">Faila nosaukums : </string>
@@ -280,9 +264,9 @@
   <string name="map_text_size">Teksta izmērs</string>
   <string name="trace_rendering">Renderēšanas atkļūdošanas info</string>
   <string name="trace_rendering_descr">Rādīt renderēšanas veiktspēju</string>
-  <string name="tip_recent_changes">Jaunākās izmaiņas</string>
-  <string name="tip_recent_changes_0_6_6_t">"Izmaiņas aplikācijas versijā 0.6.6 : \n\t- Teksta izrunas dzinējs balss navigācijai \n\t- Kartes renderēšana padarīta detalizētāka \n\t- Pasaules pamatkarte sapakota kopā ar aplikāciju \n\t- Pielabota bezsaistes navigācija (vēl joprojām eksperimentāla) \n\t- GPX navigācijas opcijas \n\t- UI atjauninājums un daudz kļūdu labojumu "</string>
-  <string name="voice_not_use">Nelietot</string>
+  
+  
+  
   
   <string name="installing_new_resources">Atpako jaunos datus…</string>
   <string name="internet_connection_required_for_online_route">Lai darbotos tiešsaistes navigācijas serviss, ir nepieciešams interneta savienojums.</string>
@@ -316,19 +300,14 @@
   <string name="select_tile_source_to_install">Izvēlieties (bilžu) kartes, kuras instalēt vai atjaunināt</string>
   <string name="internet_not_available">Nav savienojums ar internetu</string>
   <string name="install_more">Instalēt vēl…</string>
-  <string name="tip_update_index">Atjaunināt bezsaistes kartes</string>
-  <string name="tip_update_index_t">\tĻoti svarīgi, lai jums būtu jaunakās kartes. OsmAnd iebūvētais lejupielādes menedžeris var pārbaudīt pieejamo bezsaistes datu atjaunošanu. \n\tLai pārbaudītu jauninājumus, izpildiet \'Uzstādījumi\' -&gt; \'Bezsaistes dati\' -&gt; \'Lejuplādēt bezsaistes datus\'. Pēc tam, kad saraksts ir lejupielādēts no interneta, jūs varat izvēlēties opciju \'Izvēlne\' -&gt; \'Filtrēt lejupielādētos\' lai redzētu tikai jauninājumus jau lejuplādētiem datiem. \n\tJauninājumu pieejamība ir norādīta ar krāsām: \n\t\'Zaļa\' - norāda datu failus, kuri ir identiski uz servera un iekārtas \n\t\'Zila\' - norāda uz pieejamiem jauninājumiem
-	</string>
+  
+  
   <string name="level_to_switch_vector_raster_descr">Minimālais palielinājums, kurā var attēlot vektoru (bezsaistes) kartes</string>
   <string name="level_to_switch_vector_raster">Minimālais palielinājums vektoru kartēm</string>
-  <string name="tip_location_sharing">Koplietot vietu</string>
-  <string name="tip_location_sharing_t">"Jūs variet koplietot jūsu ceļojuma interesantās vietas ar jūsu draugiem un ģimeni.  Izmantojot \'Kartes konteksta izvēlne\' -&gt; \'Koplietot atrašanās vietu\'. ↵\n↵
-\nTad izvēlaties veidu kā koplietot jūsu atrašanās vietu. Izvēle ir starp: E-pasts, SMS(teksts), vai vienkārši koordināšu kopēšana starpliktuvē. "</string>
-  <string name="tip_favorites">Vietu izlase</string>
-  <string name="tip_favorites_t">\tBiežāk lietotos punktus var saglabāt izlasē.
-\n\tLai saglabātu punktu izlasē, ejiet uz kartes konteksta izvēlni, izvēlaties opciju \'Pievienot izlasei\' un tad ievadiet nosaukumu. Pēc saglabāšanas izlasē, tas ir pieejams caur \'Galvenā izvēlne\' -&gt; \'Izlase\'.
-\n\tPieturot piespiestu izlases punktu izvēlnē \'Izlase\' parādās izvēlne lai norādītu punktu kā galapunktu, labotu vai dzēstu to.
-\n\tLai attēlotu visus Izlases punktus uz kartes, iespējojat slāni \'Izlase\' kartes \'Konteksta izvēlnē\' -&gt;\'Definēt skatu\'.</string>
+  
+  
+  
+  
   <string name="create_poi_link_to_osm_doc">_<u>Tiešsaistes OSM</u> kartes klasifikācija ar attēliem"</string>
   <string name="error_doing_search">Kļūda meklējot</string>
   <string name="search_offline_geo_error">Kļūda geo pieprasījumā \'%s\'</string>
@@ -336,26 +315,18 @@
   <string name="system_locale">Sistēma</string>
   <string name="preferred_locale_descr">Izvēlēties saskarsmes valodu</string>
   <string name="preferred_locale">Saskarsmes valoda</string>
-  <string name="tip_map_switch">Kartes Avots</string>
   
-  <string name="tip_app_mode">Lietotāja profils</string>
   
-  <string name="tip_navigation">Navigācija</string>
-  <string name="tip_navigation_t">"Pirms sākt navigāciju, jums jāizvēlas galapunkts, tad nospiediet \'Izvēlne\' -&gt; \'Navigācija\' un izvēlieties navigācijas veidu.
-\n\nGalapunkts ir atzīmēts kā oranžs punkts uz kartes, līdz kuram OsmAnd rāda attālumu un norādes.
-\n\nJūs varat izvēlēties sākt navigāciju, kas dos jums balss instrukcijas vai rādīt maršrutu bez vadības.
-\n\nLai parādītu maršrutu no jebkura punkta uz jūsu pašreizējo atrašanās vietu, iezīmējiet punktu uz kartes un izvēlieties norādes uz....
-\n\nJa lietosiet norādes uz... kopā ar sākt navigāciju, OsmAnd pārslēgsies uz jūsu pašreizējo atrašanās vietu, tiklīdz tā būs noteikta, kamēr norādes uz... kopā ar rādīt maršrutu tikai parādīs maršrutu no jebkura punkta, ko jūs esat izvēlējies, bez automātiskas kartes atjaunošanās. "</string>
-  <string name="tip_search">Meklē</string>
-  <string name="tip_search_t">\tJūs variet meklēt vietas tieši kartē, pēc adreses, atrašanās vietas, kā POI, vai arī kā iepriekš definētu izlases punktu.
-\n\tNospiežot galvenajā izvēlnē \'Meklēt\' atver meklēšanas logu. Katram atrastajam ierakstam tiek piedāvātas divas iespējas: \'Izvēlēties kā galamērķi\' vai \'Rādīt kartē\'.</string>
-  <string name="tip_map_context_menu">\'Lietot vietu\' izvēlne</string>
-  <string name="tip_map_context_menu_t">\'Lietot vietu\' izvēlne ir pieejama, turot nospiestu punktu uz kartes.
-		\n\nPēc darbības kartē parādīsies logs ar koordinātēm. Nospiediet, lai atvērtu izvēlni. (Lai aizvērtu logu, nospiediet un pagaidiet, kamēr logs pazūd.
-		\n\nŠī izvēlne satur visas darbības, kuras ir saistītas ar konkrēto vietu uz kartes.
-	</string>
   
-  <string name="tip_initial_t">"OsmAnd ir iespējām bagāta navigācijas aplikācija. …… …… ……\n\nNoderīga informācija ir atrodama ekrāna izvēlnē \'Padomi\'. "</string>
+  
+  
+  
+  
+  
+  
+  
+  
+  
   <string name="shared_string_next">Tālāk</string>
   <string name="shared_string_previous">Atpakaļ</string>
   <string name="unit_of_length_descr">Attāluma un braukšanas ātruma mērvienības</string>
@@ -518,7 +489,7 @@
   <string name="use_trackball">Lietot trackball</string>
   <string name="background_service_wait_int_descr">Uzstādiet maksimālo gaidīšanas laiku pozīcijas noteikšanai fona režīmā</string>
   <string name="background_service_wait_int">Gaidīšanas laiks</string>
-  <string name="service_stop_background_service">Izslēgt fona navigācijas servisu</string>
+  
   <string name="where_am_i">Kur es esmu?</string>
   <string name="process_navigation_service">OsmAnd navigācijas serviss</string>
   <string name="network_provider">Tīkls</string>
@@ -685,8 +656,8 @@
   <string name="update_tile">Atjaunot karti</string>
   <string name="reload_tile">Pārlādēt atēlu</string>
   <string name="mark_point">Mērķis</string>
-  <string name="show_osm_bugs_descr">Rādīt kartē OpenStreetBugs</string>
-  <string name="show_osm_bugs">Rādīt OpenStreetBugs</string>
+  
+  
   
   <string name="shared_string_add_to_favorites">Pievienot izlasei</string>
   <string name="use_english_names_descr">Izvēlieties nosaukumos lietot angļu burtus, lai vietējās valodas nosaukumi ar specifiskiem burtiem būtu vieglāk atrodami un izlasāmi</string>
@@ -852,13 +823,7 @@
   <string name="route_kr">Turēties pa labi</string>
   
   <string name="asap">Pēc iespējas ātri</string>
-  <string name="tip_recent_changes_0_8_1_t">Izmaiņas versijā 0.8.1 :
-\n\t* Daudz precīzāki maršruti (aprēķins nedaudz ilgāks)
-\n\t* Gudrāka un ātrāka ceļa pārrēķināšana
-\n\t* Virziens joslās\n\t* Kartes informācija, fotoradari un ātruma ierobežojumi
-\n\t* Uzlabota balss vadība lielceļiem
-\n\t* Parokšanās spraudnis (\'Kur ir noparkots mans auto?)
-\n\t* Logošanas iespējošana/atspējošana</string>
+  
   <string name="gpxup_public">Publisks</string>
   <string name="gpxup_identifiable">Atpazīstamas</string>
   <string name="gpxup_trackable">Izsekojami</string>
@@ -905,9 +870,7 @@
   <string name="show_cameras">Rādīt radarus</string>
   <string name="show_traffic_warnings">Rādīt ātruma ierobežojumus</string>
   <string name="avoid_toll_roads">Izvairīties no maksas ceļiem</string>
-  <string name="tip_recent_changes_0_8_2_t">Changes in 0.8.2 :
-\n\t* Uzlabota navigācija
-\n\t* Dinamiski kartes instrumenti\n\t* Kartes uzstādījumi pārvietoti uz kartes ekrānu\n\t* Atslēgas ekrānpoga ar ieraksta servisu\n\t* Izlabotas Arābu, Kanādas skriptēšanas un RTL valodas</string>
+  
   <string name="map_widget_top_text">Ielas nosaukums</string>
   <string name="map_widget_config">Ekrāna skats</string>
   
@@ -954,18 +917,8 @@
 
 <string name="gps_wakeup_interval">GPS pamošanās intervāls: %s</string>
 <string name="email">e-pasts</string>
-<string name="tip_recent_changes_0_8_4_t">Izmaiņas 0.8.4:
-	\n\t* Izlabotas dažas kļūdas
-	\n\t* Karte nezaudē vietas pozīciju pēc pārtraukumiem
-	\n\t* Miega režīma iespējošana navigācijas laikā
-    </string>
-    <string name="tip_recent_changes_0_8_3_t">Izmaiņas versijā 0.8.3:
-	\n\t* Ceļapunkti
-	\n\t* Uzlabota navigācija
-	\n\t* Iespēja izlaist automaģistrāles
-	\n\t* Velo ceļš Cycleway=track attēlošana
-	\n\t* daudz kļūdu labojumu
-	</string>
+
+    
     
     <string name="context_menu_item_last_intermediate_point">Pievienot kā pēdējo pieturu</string>
     <string name="context_menu_item_first_intermediate_point">Pievienot kā pirmo pieturu</string>
@@ -1029,20 +982,17 @@
 	<string name="no_route">Nav ceļa</string>
 	<string name="delete_target_point">Noņemt pieturas vietu</string>
 	<string name="intermediate_point">Pietura %1$s</string>
-    <string name="tip_rotation_switching_t_v2">"\tJūs variet pārslēgt kartes attēlojuma rotēšanu klikšķinot uz ekrāna kompasa ikonas.\n\tJūs variet izvēlēties:\n\t\'Negrozīt karti (ziemeļi augšā)\' - Karte netiks grozīta. Ziemeļi vienmēr būs augšā\n\t\'Kustības virzienā\' - Karte tiks pagriezta jūsu kustības virzienā\n\t\'Atbilstoši kompasam\' - Karte tiks pagriezta atbilstoši kompasa rādījumam "</string>
-	<string name="tip_day_night_mode_t_v2">"\tDažām vektoru kartēm izskats var tikt mainīts starp dienas (gaišākām) un nakts (tumšākām).\n\tNakts krāsas ir drošākas braukšanai naktī.\n\tJūs variet uzstādīt nakts/dienas pārslēgšanas režīmu ar \'Izvēlne\'-&gt;\'Konfigurēt ekrānu...\'-&gt;\'Dienas/nakts karte\'.\n\tJūs variet izvēlēties:\n\t\'Saulriets/Ausma\' - automātiskais režīms atbilstoši saules pozīcijai (noklusēti)\n\t\'Diena\' - vienmēr pielietot dienas režīmu\n\t\'Nakts\' - vienmēr pielietot nakts režīmu\n\t\'Gaismas sensors\' - kartes izskats tiks mainīts atbilstoši jūsu iekārtas gaismas sensoram (tikai ja tāds eksistē) "</string>	
-	<string name="tip_map_switch_t_v2">tKartes avots un slāņi tiek attēloti kartes skatā ar \'Menu\' -&gt; \'Definēt skatu\'.
-		\n\nZem \'Kartes avots...\' jūs varat izvēlēties lejupielādētās vektoru kartes, predefinētas tiešsaistes karšu bilžu avotus (aktivizējas ar \'Bezsaistes kartes\' spraudni) vai kartes, kuras ir izveidotas ar OsmAndMapCreator uz jūsu datora.
-		\n\nOsmAnd atbalsta arī citus karšu avotus.
-	</string>
+    
+		
+	
 	<string name="close_changeset">Aizvērt izmaiņu kopu</string>
 	<string name="zxing_barcode_scanner_not_found">Nav instalēta ZXing Barcode Scanner aplikācija. Meklēt Market?</string>
 	<string name="rendering_attr_roadColors_description">Izvēlēties ceļu krāsu shēmu:</string>
 	<string name="rendering_attr_roadColors_name">Ceļu krāsu shēma</string>
     <string name="map_widget_map_rendering">Kartes renderēšana</string>
     <string name="app_mode_motorcycle">Motocikls</string>
-    <string name="tip_faq_t">Lūdzu apmeklējiet https://code.google.com/p/osmand/wiki/FAQ lai izlasītu biežāk uzdotos jautājumus.</string>
-    <string name="tip_faq">Biežāk uzdotie jautājumi</string>
+    
+    
     <string name="shared_string_delete_all">Dzēst visu</string>
     <string name="animate_routing_route_not_calculated">Vispirms lūdzu aprēķiniet maršrutu</string>
     <string name="animate_routing_route">Aprēķinātā maršruta simulācija </string>
@@ -1057,7 +1007,7 @@
 	<string name="auto_zoom_farthest">Attālināti</string>
 	<string name="map_magnifier">Kartes tālummaiņa</string>
 	<string name="base_world_map">Pasaules karte</string>
-	<string name="tip_map_styles">Kartes veidi</string>
+	
 	<string name="about_version">Versija:</string>
     <string name="about_settings">Par</string>
     <string name="about_settings_descr">Versijas informācija, licenzes, projektā piedalījušies cilvēki</string>
@@ -1124,7 +1074,7 @@
     <string name="distance_measurement_finish_editing">Beigt labot</string>
     <string name="distance_measurement_finish_subtrack">Jauns apakšposms</string>
     <string name="distance_measurement_clear_route">Noņemt visus mērķus</string>
-    <string name="distance_measurement_save_gpx">Saglabāt kā GPX failu</string>
+    
     <string name="distance_measurement_load_gpx">Atvērt GPX failu</string>
     <string name="wait_current_task_finished">Lūdzu uzgaidiet, kamēr tiks pabeigta darbība</string>
     <string name="use_kalman_filter_compass_descr">Samazina kompasa svārstības, bet palielina inerces laiku</string>
@@ -1163,7 +1113,7 @@
 	<string name="prefer_in_routing_title">Dot priekšroku…</string>
 	<string name="prefer_in_routing_descr">Priekšroka automaģistrālēm</string>
     <string name="max_speed_none">Nav</string>
-    <string name="download_hillshade_item">Kalnu reljefs</string>
+    
     <string name="download_hillshade_maps">Kalnu reljefa slāņi</string>
     
     
@@ -1234,7 +1184,7 @@
     
     
     
-	<string name="tip_altitude_offset">Augstuma korekcija</string>
+	
 	<string name="map_widget_max_speed">Ātruma limits</string>
     <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">Nav atrastas ēkas.</string>
@@ -1272,12 +1222,7 @@
 	<string name="av_photo_play_sound_descr">Izvēlieties vai atskaņot skaņu, nospiežot fotografēšanas pogu</string>
 <string name="amenity_type_seamark">Bojas</string>
     <string name="app_mode_aircraft">Aviācija</string>
-    <string name="tip_map_styles_t">OsmAnd atbalsta dažāda veida bezsaistes vektorkartes:…
-		\n\nPapildus pamata mapes stilam, jūs variet uzlikt, piemēram
-		\n\t* \'Tūrisma skats\' stilu, kas satur vairāk detalizētu informāciju par ceļošanu un tūrismu.…
-		\n\t* \'Kontrastains ceļš\' parāda ceļus izceltās krāsās, kas atvieglina kartes pārlūkošanu saulainā laikā.…
-		\n\t* \'Ziema un slēpošana\' iezīmē karti ziemas krāsās un izceļ ar slēpošanu saistītajos apvidos zemes reljefu (ar lejupielādētu \'World ski\' karti)…
-	</string>
+    
     <string name="local_index_tile_data_expire">Derīgums (minūtēs): %1$s</string>
     <string name="local_index_tile_data_name">Attēlu dati: %1$s</string>
     <string name="edit_tilesource_successfully">Attēlu avots %1$s ir saglabāts</string>
@@ -1291,10 +1236,7 @@
 ……… * Nospiediet uz punkta un paturiet, lai pievienotu un lasītu aprakstu.\n…
 ……… * Nospiediet uz mērlineāla, lai izvēlētos citas darbības.</string>
     <string name="osmand_srtm_long_description_1000_chars">Šis spraudnis iespējo kontūrlīnijas, kas var tikt atttēlotas OsmAnd\'a bezsaistes kartēs. Globālie dati (starp 70" Z un 70" D) ir bāzēti uz SRTM (Shuttle Radar Topography Mission) un ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer) mērījumiem, attēlveidošanas rīks uz Terra\'s, vadošais NASA\'s Zemes Novērošanas Sistēmas satelīts. ASTER ir kopējs veikums ar NASA, Japānas Ekonomikas Ministriju, Trade and Industry (METI) un Japānas Izplatījuma Sistēmām (J-spacesystems).</string>
-    <string name="tip_altitude_offset_t">Lielākā daļa GPS ierīces augstuma mērījumus pārraida elipsoīdu bāzētā WGS84 sistēmā, kur ir nepieciešana no atrašanas vietas atkarīga korekcija, lai noteiktu augstumu virs jūras līmeņa lokālajās ierīcēs.…
-		\n\nPrecīzākai augstuma noteikšanai tiek izmantota EGM96(geoid) atsauce.…
-		\n\nOsmAnd attēlos augstumu virs jūras līmeņa pēc EGM96 sistēmas pēc tam, kad jūs būsiet lejupielādējuši \'World Altitide Correction\' (WW15MGH.DAC) failu caur karšu lejupielādes izvēlni aplikācijā. (Oriģināls ir pieejams http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC.)…
-	</string>
+    
     <string name="osb_author_dialog_password">OSM parole (optionāla)</string>
 	<string name="osmand_extended_description_4000_chars">
 OsmAnd (OSM Automated Navigation Directions) ir kartes un navigācijas aplikācija ar brīvi pieejamām, vispasaules, augstas kvalitātes OpenStreetMap (OSM) kartēm. Visus karšu datus iespējams saglabāt jūsu ierīces atmiņas kartē offline (bez interneta pieslēguma) lietošanai. Ar jūsu ierīces GPS uztvērēja palīdzibu, OsmAnd piedāvā maršrutēšanu ar vizuālo un balss vadību automašīnai, velobraucējiem un gājējiem. Visas galvenās funkcijas darbojas ar vai bez interneta pieslēguma.
@@ -1448,12 +1390,11 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="complex_route_calculation_failed">Maršruta ātrā aprēķināšana neizdevās (%s), notiks lēnā aprēķināšana.</string>
     <string name="disable_complex_routing_descr">Izslēgt kompleksu (divfāžu) maršrutēsanu</string>
     <string name="disable_complex_routing">Izslēgt kompleksu maršrutēšanu</string>
-    <string name="tip_app_mode_t_v2">"OsmAnd atbalsta vairākus pielāgojamus profilus dažādiem mērķiem.
-\n\nJūs varat mainīt profilus gan ar speciālas ikonas palīdzību, kas atrodas uz kartes kreisā augšējā stūrī (mašīna, velosipēds vai gājējs), gan veidojot jaunu maršrutu (\'transporta režīms\'). "</string>
+    
 	<string name="android_19_location_disabled">Pēc KitKat jauninājuma vecā karšu krātuve (%s) vairs nav pieejama. Vai vēlaties to nomainīt uz pieejamu vietu un pārkopēt visus failus?
 …………\n Piezīme: vecie faili netiks aiztikti.
 …………\n Piezīme: nebūs iespējams koplietot failus starp OsmAnd un OsmAnd+. </string>
-    <string name="application_dir_change_warning2">Vai kopēt OsmAnd datus uz jauno vietu? Nospiežot \'Nē\', OsmAnd izveidos jaunu datu mapi.</string>
+    
     <string name="copying_osmand_one_file_descr">Kopē (%s) failu uz jauno vietu…</string>
     <string name="copying_osmand_files_descr">Kopē OsmAnd failus uz jauno vietu (%s)…</string>
     <string name="copying_osmand_files">Kopē OsmAnd failus…</string>
@@ -1526,25 +1467,9 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="lang_uk">Ukraiņu</string>
 	<string name="lang_vi">Vjetnamiešu</string>
 	<string name="lang_cy">Velsiešu</string>
-    <string name="tip_recent_changes_1_3_t">Izmaiņas uz 1.3:
-…………\n\t* pārstrādāts atbalsts tabletēm un lieliem ekrāniem
-…………\n\t* Holo tēma (iestatījumi)
-…………\n\t* Papildus uzstādījumi kompasa stabilizēšanai
-…………\n\t* Kreisā augšējā poga uz kartes nomaina izvēlnes pogu
-……
-    </string>
-    <string name="tip_recent_changes_1_1_4_t">Izmaiņas uz 1.1.4:
-…………\n\t* Pārveidota lietotāja saskarsne
-		\n\t* Kļūdu labojumi
-……
-    </string>
-    <string name="tip_recent_changes_1_0_0_t">Izmaiņas uz 1.0.0:
-	\n\t* Uzlabots maršruts: ātrāks, precīzāks, līdz 250km
-	\n\t* Jaunas kartes - tikai autoceļi
-	\n\t* Karte nepazaudē pozīcijas fiksāciju pēc pārtraukumiem
-	\n\t* Miega režīma pieejamība navigācijas laikā
-……
-    </string>
+    
+    
+    
     <string name="index_item_nation_addresses">Adreses valsts mērogā</string>
 	<string name="index_item_world_altitude_correction">Pasaules augstuma korekcija</string>
 	<string name="index_item_world_seamarks">Jūras navigācijas zīmes</string>
@@ -1555,58 +1480,19 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="lang_zh">Ķīniešu</string>
     <string name="lang_pt_br">Portugāļu (Brazīlija)</string>
     <string name="index_name_canada">Ziemeļamerika - Kanāda</string>
-    <string name="tip_recent_changes_1_5_t">Izmaiņas uz 1.5:
-	\n\t* Balss brīdinājumi par ātruma ierobežojumiem un fotokamerām
-	\n\t* Vēl vairāk balss iespējas (ielu nosaukumu teikšana)
-	\n\t* Augstas izšķirtspējas karšu ikonas
-	\n\t* Daudzas izmaiņas lietotāja saskarmē
-	\n\t* Novērstas kļūdas attāluma parādīšanā, GPX  analizatorā, ceļapunktu apstrādē, OSM augšupielādē, https apstrādē
-……
-    </string>
+    
     <string name="always_center_position_on_map">Vienmēr centrēt karti</string>
     <string name="voice_pref_title">Balss</string>
     <string name="misc_pref_title">Dažādi</string>
     <string name="localization_pref_title">Lokalizācija</string>
-    <string name="tip_recent_changes_1_7_1_t">Izmaiņas uz 1.7:
-…\n\t* SVARĪGĀKAJĀM kartēm tagad vajadzētu būt jaunākām par 2014. gada februāri.
-…\n\t* Pilnībā atjaunota maršrutēšana (ātra un precīza).
-…\n\t* Jauns ekrāns Maršruta Plānošanā (intuitīvāks un iespējām bagātāks)
-…\n\t* IEVĒROJIET: GPX maršruts ir pieejams zem Maršruta Uzstādījumi pogas
-…\n\t* Automātiski paslēpt ekrāna pogas navigācijas režīmā
-…\n\t* Aprēķina bezsaistes maršrutu līdz pirmajam punktam GPX maršrutā (\'Izlaist kopējo ceļu\' opcija)
-…	…\n\t* Aktīvā simulācija tuneļos
-…	…\n\t* Vairāki uzlabojumi grafiskajā saskarsmē &amp; lietojamībā
-…	…\n\t* Izrunas ātrums pieejamības uzstādījums
-…
-    </string>
+    
     <string name="osmo_settings_uuid">Ierīces identifikators</string>
     <string name="osmo_settings_descr">Konfigurēt monitoringa uzstādījumus un personīgo monitoringa kanālu</string>
     <string name="osmo_plugin_description">"Sekojiet viens otram reālajā laikā, veidojot anonīmas grupas, komunicējiet savā starpā, kopīgojiet vietas, iespējojiet patstāvīgu vai sesiju sekošanu utt., vairāk lasiet http://osmo.mobi lapā, t.sk. lai reģistrētos grupu pilnvērtīgākai darbībai (attālināta vadība un kontrole utt.). "</string>
     <string name="osmo_plugin_name">OsMo monitorings</string>
     <string name="osmo_settings">OSMo</string>
-   	<string name="tip_recent_changes_1_6_t">Izmaiņas uz 1.6:
-…	…\n\t* Full HD ierīču atbalsts
-…	…\n\t* Caurspīdīga kartes dibenplāna atbalsts
-…	…\n\t* Lejupielādēto karšu apskats un trūkstošo karšu vienkāršota lejupielāde pa tiešo no kartes skata loga
-…	…\n\t* Kontūrlīniju karšu faili tagad apkopoti pa valstīm/reģioniem
-…	…\n\t* Jauna pasaules pamatkarte ar galvenajiem ceļiem, dzelzceļiem un vispārējiem teritorijas apzīmējumiem kā piemēram meži
-…	…\n\t* Kartes palielinājuma iespēja (turot nospiestu tālummaiņas pogu) - Var pielietot gan flīžu, gan vektoru kartēm
-…	…\n\t* Definēt/labot tiešsaistes flīžu avotus (un noteikt derīguma termiņu)
-…	…\n\t* Atbalsts ātruma ierobežojumiem atkarībā no diennakts laika (Nīderlande)
-…	…\n\t* Ātrāka meklēšanas adreses ievadīšana
-…	…\n\t* Kļūdu labojumi maršrutēšanā un kartes renderēšanā
-……
-    </string>
-    <string name="tip_recent_changes_1_4_t">Izmaiņas uz 1.4:
-…	…\n\t* Sakārto ceļapunktus optimālā kārtībā (ceļojošs pārdevējs, no vienas adreses līdz otrai)
-…	…\n\t* Meklē ielas pēc nosaukuma (tuvākā apkārtnē)
-…	…\n\t* Plānošanas režīma spraudnis (atvērt/labot/saglabāt GPX trases)
-…	…\n\t* Launs lejupielādes ekrāns (lejupielāde fonā)
-…	…\n\t* Atbalsts GPX apakšmapēm (organizē GPX trases)
-…	…\n\t* Dzēst SRTM failus
-…	…\n\t* Atbalsts OSM Piezīmēm
-…… 
-    </string>
+   	
+    
     <string name="interrupt_music">Pārtraukt mūziku</string>
 	<string name="share_route_subject">Maršruts kopīgots caur OsmAnd</string>
 	<string name="arrival_distance">Paziņojums par ierašanos</string>
@@ -1624,12 +1510,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="shared_string_share">Kopīgot</string>
 	<string name="share_fav_subject">Izlase kopīgota OsmAnd</string>
 	<string name="use_points_as_intermediates">Rēķināt maršrutu starp punktiem</string>
-    <string name="tip_recent_changes_1_8_alpha">Izmaiņas uz 1.8:
-…… * Maršruta aprēķināšana starp maršruta punktiem GPX trekā
-…… * Izmaiņas valsts karšu lejupielādē (vietējo nosaukumu meklēšanas atbalsts)
-…… * Atbalstīts GPX/HML imports (konvertēšana no KML uz GPX)
-…
-    </string>
+    
     <string name="osmo_group_info">Informācija</string>
     <string name="osmo_group">OsMo grupa</string>
     <string name="osmo_group_share">Lai pievienotos grupai %2$s, norādiet grupas id (%1$s) vai spiediet %3$s.</string>
@@ -1673,20 +1554,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="osmo_conn_successfull">"Izveidots savienojums: %1$s "</string>
     <string name="osmo_mode_restart">Restartēt OsMo sesiju</string>
     <string name="osmo_settings_debug">Atkļūdošanas informācija</string>
-    <string name="tip_recent_changes_1_2_t">Izmaiņas uz 1.2.3:
-……	…… \n\t*Fix Geo Intent (Foursquare, c:geo)
-……	…… \n\t*salabota ekrāna raustīšanās navigācijas laikā
-……	…… \n\t*Citi sīki labojumi
-……	…… \n\t*Izmaiņas uz 1.2:
-……	…… \n\nKļūdu labojumi (uzlabota maršrutēšana, meklēšana, AV ierakstīšana, balss priekšā teikšana, daži ekrāna labojumi)
-……	…… \n\t*Vieglāka kalnu pārklāja konfigurācija (nepieciešanas Kontūrlīniju spraudnis)
-……	…… \n\t*Tiek akceptētas maps.google.com atrašanās vietas linki
-……	…… \n\t*Jauns gadžets (GPS info)
-……	…… \n\t*Pievienots daudz-logu atbalsts patreizējām Samsung ierīcēm
-……	…… \n\t*Kalman filtrs kompasam
-……	…… \n\t*Pebble viedpulksteņa atbalsts
-……	……
-	</string>
+    
     
 	<string name="import_file_favourites">Vai saglabāt vietas GPX failā vai importēt izlasē?</string>
 	
@@ -1949,7 +1817,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="routing_settings_2">Maršruta uzstādījumi</string>
     <string name="general_settings_2">Vispārīgie uzstādījumi</string>
 	<string name="shared_string_ellipsis">…</string>
-	<string name="shared_string_not_use">Netiek lietots</string>
+	
 	<string name="shared_string_enable">Iespējot</string>
 	<string name="shared_string_disable">Atspējots</string>
 	<string name="shared_string_enabled">Iespējots</string>
@@ -1996,7 +1864,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="proxy_pref_descr">Izveidot savienojumu caur proxy</string>
     <string name="settings_privacy">Privātums</string>
     <string name="points">Punkti</string>
-    <string name="osm_editing_manage">Pārvaldīt</string>
+    
 	<string name="navigation_over_track">Sākt navigāciju caur treku?</string>
 	<string name="avoid_roads_msg">Jūs varat izmainīt maršrutu, atzīmējot ceļus, pa kuriem nebraukt</string>
 	<string name="speak_pedestrian">Izrunāt gājēju pārejas</string>

@@ -1,10 +1,5 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="switch_to_raster_map_to_see">Vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v Nastaveních (Spravovat mapové soubory), nebo se přepněte na online mapy.</string>
-  <string name="tip_recent_changes_0_7_2_t">"Změny ve verzi 0.7.2 :
-\n\t- Native rendering pro všechna zařízení
-\n\t- Offline editace POI
-\n\t- Usnadnění
-\n\t- Oprava mnoha chyb "</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="switch_to_raster_map_to_see">Vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v Nastaveních (Spravovat mapové soubory), nebo se přepněte na online mapy.</string>
+  
   <string name="send_files_to_osm">Nahrát GPX soubory do OSM?</string>
   <string name="gpx_visibility_txt">Viditelnost</string>
   <string name="gpx_tags_txt">Tagy</string>
@@ -17,7 +12,7 @@
   <string name="info_button">Informace</string>
   <string name="back_to_location">Zpět na zobrazení pozice</string>
   <string name="shared_string_help">Nápověda</string>
-  <string name="show_details">Zobrazit detaily pozice</string>
+  
   <string name="accessibility_extensions_descr">Moduly pro Usnadnění pro starší verze Androidu</string>
   <string name="accessibility_extensions">Moduly pro Usnadnění</string>
   <string name="accessibility_mode">Režim usnadnění</string>
@@ -77,16 +72,7 @@
   <string name="use_fluorescent_overlays_descr">Použít fluorescentní barvy pro zobrazení cest a tras</string>
   <string name="offline_edition">Offline editace</string>
   <string name="offline_edition_descr">Vždy používat offline editaci</string>
-  <string name="tip_recent_changes_0_7_1_t">"Změny ve verzi 0.7.1 :
-\n\t- offline editace POI
-\n\t- přímý přenos pozice - pravidelně posílá souřadnice na webový server (návod jak nastavit vlastní webovou služby je v HowTo článcích)
-\n\t- Zobrazení momentálně zaznamenávané trasy
-\n\t- Detekce směru pohybu: indikace a hlášení \'Otočte se zpět\' v případě pohybu směrem od cíle nebo po minutí odbočky
-\n\t- Obnovené hlasové hlášení \'Přepočítávám cestu\'
-\n\t- Optická indikace blížící se odbočky během 100m pomocí změny barvy šipky
-\n\t- Zobrazení aktuálnosti offline dat u deaktivovaných souborů (sekce Download) pomocí tmavě zelené a tmavě modré
-\n\t- Další změny
-\n\nSledujte také stránky české podpory osmand.cz "</string>
+  
   <string name="update_poi_does_not_change_indexes">Změny POI bodů v aplikaci nemají vliv na zobrazení stažených map, změny se ukládají do lokálního souboru.</string>
   <string name="local_openstreetmap_uploading">Odesílám …</string>
   <string name="local_openstreetmap_were_uploaded">{0} POI/Poznámek bylo odesláno</string>
@@ -106,10 +92,7 @@
   <string name="live_monitoring_url">Server pro přímý přenos</string>
   <string name="gpx_monitoring_disabled_warn">Ukládat trasu pomocí GPX widgetu nebo s nastavením \'Nahrávat výlet\'.</string>
   <string name="show_current_gpx_title">Zobrazit aktuální trasu</string>
-  <string name="tip_recent_changes_0_7_0_t">"Změny ve verzi 0.7.0 :
-\n\t- Offline informace o místech z Wikipedie
-\n\t- Aktualizované mapy
-\n\t- Další drobné změny "</string>
+  
   <string name="free_version_message">Tato bezplatná verze OsmAnd je omezena na %1$s downloady a nepodporuje offline data z Wikipedie.</string>
   <string name="free_version_title">Bezplatná verze</string>
   <string name="poi_context_menu_showdescription">Zobrazit popis POI</string>
@@ -149,28 +132,18 @@
   <string name="user_password_descr">Vaše heslo na openstreetmap.org</string>
   <string name="osmand_service">Služba na pozadí</string>
   <string name="osmand_service_descr">Umožní běh aplikace při vypnutém displeji</string>
-  <string name="tip_rotation_switching">Natočení mapy</string>
   
   
-  <string name="tip_day_night_mode">Denní/noční režim</string>
   
-  <string name="tip_osm_improve">Vylepšování Openstreetmap</string>
-  <string name="tip_osm_improve_t">"OsmAnd využívá mapy založené na datech Openstreetmap.org (OSM). Program krom navigace umožňuje také přispívání k projektu Openstreetmap. Několika kliknutími tak můžete snadno vytvářet nové body zájmu (POI) nebo hlášení o chybách OSM.\n\t Pro začátek je pouze potřeba zadat přihlašovací informace v \'Nastavení\'-&gt;\'Obecné\'-&gt;\'OSM editace\'.
-\n\t Nové POI zadáte volbou \'Vytvořit POI\' v kontextovém menu mapy. Pak můžete zadat informace o novém POI a stisknutím tlačítka ho odeslat.
-\n\t Pokud v mapě najdete chybu, můžete ji nahlásit a přispět tak k jejímu rychlejšímu opravení.
-\n\t OSM chybu nahlásíte pomocí volby \'Otevřít chybu OSM\' v kontextovém menu mapy. Tím se otevře dialog, kde můžete zadat detailní popis problému. Chybu odešlete tlačítkem \'Přidat\'.
-\n\t Pro zmíněné funkce je nutné internetové připojení. "</string>
+  
+  
+  
+  
   <string name="download_files_not_enough_space">Nedostatek místa pro stažení %1$s MB dat (volné: %2$s).</string>
   <string name="download_files_question_space">Volné místo: {2} MB. Stáhnout {0} soubor(y) ({1} MB)?</string>
   
   
-  <string name="tip_recent_changes_0_6_9_t">"Změny ve verzi 0.6.9 :
-\n\t- Vylepšené vykreslování offline map
-\n\t- Zrychlené vykreslování offline map pomocí Android native library - najdete v \"experimental features\" (na některých zařízeních nemusí fungovat)
-\n\t- Zásadní změny vzhledu zobrazení
-\n\t- Zobrazení nadmořské výšky
-\n\t- Nové překlady (Vietnamština, Polština)
-\n\t- Další drobné změny "</string>
+  
   
   <string name="use_transparent_map_theme">Transparentní téma</string>
   <string name="native_library_not_supported">Android native library není podporovaná na tomto zařízení.</string>
@@ -194,15 +167,7 @@
   
   <string name="animate_route_off">Vypnout animaci</string>
   <string name="animate_route">Zapnout animaci</string>
-  <string name="tip_recent_changes_0_6_8_t">"Změny ve verzi 0.6.8 :
-\n\t- kompletní redesign vyhledávání (POI, adresy)! Hledání adres je nyní mnohem rychlejší. Jednotné vyhledávací rozhraní s mnoha různými parametry.
-\n\t- Vyhledávání POI ve velkých oblastech podle jména (ve státech).
-\n\t- Opravené blikání mapy na tabletech (Chyba č.641)
-\n\t- Automatické sledování pohybu (Chyba č.356)
-\n\t- GPX navigace přesunuta do \'Navigace\' a \'Uložit pokyny\' přesunuto do \'O cestě\'
-\n\t- POI data jsou nyní součástí .obf souboru (všechny stažené indexy po 01/10/11)
-\n\t- Opravy v hlasových pokynech (oprava GPS pozice, zapomenutí prvního pokynu)
-\n\t- Drobná vylepšení "</string>
+  
   <string name="file_can_not_be_renamed">Nelze přejmenovat soubor.</string>
   <string name="file_with_name_already_exists">Soubor tohoto jména již existuje.</string>
   <string name="gpx_navigation">GPX trasa</string>
@@ -226,17 +191,7 @@
   <string name="search_position_map_view">Současný střed mapy</string>
   <string name="select_search_position">Počáteční bod:</string>
   <string name="context_menu_item_search">Hledat</string>
-  <string name="tip_recent_changes_0_6_7_t">"Poslední změny ve verzi 0.6.7 :
-\n\t- Správce offline dat (stáhnout, smazat, zálohovat přímo z OsmAndu)
-\n\t- Oblíbené body a skupiny (uložení do kategorií, smazání, správa oblíbených)
-\n\t- GPX Explorer v aplikaci (zobrazit trasy, vzdálenost, prům. rychlost, nadm. výšku, atd.)
-\n\t- GPX navigace (užitečné nastavení, pokračovat navigaci po pádu aplikace, podpora kruhových objezdů)
-\n\t- Funkce na uložení trasy jako GPX track pro použití offline
-\n\t- Vylepšené monitorování GPX (vyfiltrování nepřesné polohy a uložení přesnosti/nadm. výšky/rychlosti)
-\n\t- Nahrání GPX do komunity (http://download.osmand.net/gpx/)
-\n\t- Vylepšený vektorový renderer
-\n\t- Vylepšený TTS engine (přesná vzdálenost, míle)
-\n\t- Oprava chyb "</string>
+  
   <string name="shared_string_save_as_gpx">Uložit jako GPX trasu</string>
   <string name="route_successfully_saved_at">Trasa úspěšně uložena jako \'%1$s\'.</string>
   <string name="filename_input">Jméno souboru : </string>
@@ -334,32 +289,18 @@
   <string name="loading_builds">Načítám balíčky OsmAnd…</string>
   <string name="select_build_to_install">Vyberte jeden z balíčků OsmAnd k nainstalování</string>
   <string name="contribution_activity">Speciální aktivita pro vývojovou verzi</string>
-  <string name="tip_update_index">Aktualizace offline map</string>
-  <string name="tip_update_index_t">"Mít k dispozici aktuální mapová data je důležité. OsmAnd obsahuje správce stahování map, kde můžete snadno ověřit, zda jsou k dispozici novější mapy.
-\n\t Pro zkontrolování aktualizací \'Hlavní Menu\'-&gt;\'Nastavení\'-&gt;\'Spravovat mapové soubory\'-&gt;\'Stáhnout\'. Po aktualizaci seznamu z Internetu vyberte z kontextového menu \'Zobrazit jen aktualizace\'.
-\n\t Teď se zobrazí jen indexy, které už máte stažené. Navíc jsou zvýrazněné následovně:
-\n\t Zelená - označuje aktuální mapy a data
-\n\t Modrá - označuje mapy a data, u kterých lze stáhnout novější verzi\n\t Tmavě zelená/Modrá - označuje vypnuté datové spojení "</string>
-  <string name="tip_location_sharing">Sdílení polohy</string>
-  <string name="tip_location_sharing_t">"\t Našli jste po cestě nějaké zajímavé místo a chcete se o něj podělit s ostatními?
-\n\t OsmAnd umožňuje vaši polohu snadno sdílet.
-\n\t V kontextovém menu mapy vyberte volbu \'Sdílet polohu\'. Následně můžete zvolit způsob, jak polohu odešlete. Máte na výběr mezi E-Mailem, SMS nebo zkopírováním souřadnic do schránky. "</string>
-  <string name="tip_favorites">Oblíbená místa</string>
-  <string name="tip_favorites_t">"Často navštěvovaná místa mohou být uložena jako Oblíbená místa.\n\t Pro přidání oblíbeného místa otevřete kontextové menu mapy (dlouhý stisk), vyberte \'Přidat k oblíbeným\' a zadejte vhodné jméno. Po uložení se k oblíbeným dostanete skrze \'Hlavní Menu\'-&gt;\'Moje místa\'.
-\n\t Dlouhým stisknutím položky v oblíbených vyvoláte další možnosti - nastavení jako cíl, její úpravy nebo vymazání.
-\n\t Pro zobrazení všech oblíbených bodů na mapě zvolte \'Oblíbené\' v menu \'Kontextové menu\' -&gt; \'Nastavení mapy\'. "</string>
-  <string name="tip_recent_changes">Poslední změny</string>
-  <string name="tip_recent_changes_0_6_6_t">" Změny ve verzi 0.6.6 :
-\n\t - Podpora Text To Speech enginu v hlasové navigaci
-\n\t - Detailnější zobrazení cyklistické mapy
-\n\t - Součástí aplikace je základní mapa světa
-\n\t - Vylepšení (stále experimentální) offline navigace
-\n\t - Nová nastavení pro navigaci podle GPX
-\n\t - Vylepšení UI a opravy chyb "</string>
+  
+  
+  
+  
+  
+  
+  
+  
   <string name="search_offline_clear_search">Nové hledání</string>
   <string name="map_text_size_descr">Zvolte velikost písma ve jménech na mapě</string>
   <string name="map_text_size">Velikost písma</string>
-  <string name="voice_not_use">Nepoužívat</string>
+  
   
   <string name="installing_new_resources">Rozbaluji nová data…</string>
   <string name="internet_connection_required_for_online_route">Snažíte se použít online navigaci, ale nemáte internetové připojení.</string>
@@ -401,19 +342,18 @@
   <string name="system_locale">Podle systému</string>
   <string name="preferred_locale_descr">Volba jazyka (po změně je nutné restartovat OsmAnd)</string>
   <string name="preferred_locale">Jazyk</string>
-  <string name="tip_map_switch">Zdroj map</string>
   
-  <string name="tip_app_mode">Režim aplikace</string>
   
-  <string name="tip_navigation">Navigace</string>
-  <string name="tip_navigation_t">"Chcete-li získat pokyny k cílovému bodu, buď dlouze tapněte na mapu (pak krátce na popis a vyberte \'Navigovat sem\'), nebo vyberte \'Navigace\' po tapnutí na výsledek hledání nebo oblíbeného místa.\n\nCíl je vyznačený jako cílová vlajka - šachovnice na mapě a OsmAnd zobrazí směr (oranžový trojúhelník) a vzdálenost k cíli.\n\nPro zobrazení trasy k cíli z jiného bodu než současného místa, zvolte bod startu na mapě a vyberte volbu \'Navigovat odsud\'\n\nJestliže použijete volbu \'Navigovat odsud\' spolu s volbou \'Navigace\', OsmAnd se přepne na vaší aktuální polohu ihned jakmile bude zjištěna (proto tato kombinace může být použita pro rychlý start navigace) "</string>
-  <string name="tip_search">Vyhledávání</string>
-  <string name="tip_search_t">"Můžete vyhledat místa přímo na mapě přes menu mapy → \'Hledat v okolí\' nebo přes \'Menu\' → \'Hledat\'.\n\nVyhledávací obrazovka obsahuje pomůcky pro hledání\n\t* podle adresy\n\t* podle souřadnic\n\t* bodů zájmu POI (podle názvu nebo typu\n\t* z historie hledání\n\t* nebo z přednastavených oblíbených míst\n\nPro všechny výsledky nabízí kontextové menu nebo panel akcí možnosti jako \"Navigovat sem\" nebo Zobrazit na mapě, atd. "</string>
-  <string name="tip_map_context_menu">Kontextové menu mapy</string>
-  <string name="tip_map_context_menu_t">" \t Kontextové menu mapy obsahuje funkce závisející na aktuální poloze a je dostupné dlouhým stisknutím prstem na mapě, nebo stisknutím trackballu.
-\n\t Po stisknutí se objeví obdélník se souřadnicemi. Klepnutím na něj se otevře kontextové menu, po dlouhém stisknutí obdélník naopak zmizí. Kontextové menu je dostupné také tlačítkem \'Menu\'. "</string>
   
-  <string name="tip_initial_t">"OsmAnd je navigační aplikace s řadou funkcí.\n\nZákladní pokyny, užitečné tipy a rozšířenou pomoc můžete vyvolat klepnutím na \'Menu\' → \'Pomoc\' z mapové obrazovky. "</string>
+  
+  
+  
+  
+  
+  
+  
+  
+  
   <string name="shared_string_next">Další</string>
   <string name="shared_string_previous">Předchozí</string>
   <string name="unit_of_length_descr">Zvolte jednotku vzdálenosti a rychlosti</string>
@@ -531,7 +471,7 @@
   <string name="use_trackball">Použít trackball</string>
   <string name="background_service_wait_int_descr">Vyberte čekací dobu pro určení polohy</string>
   <string name="background_service_wait_int">Čekací doba</string>
-  <string name="service_stop_background_service">Vypnout navigační službu na pozadí</string>
+  
   <string name="where_am_i">Kde jsem?</string>
   <string name="process_navigation_service">Navigační služba OsmAnd</string>
   <string name="network_provider">Síť</string>
@@ -698,8 +638,8 @@
   <string name="update_tile">Aktualizovat mapu</string>
   <string name="reload_tile">Načíst znovu dlaždici</string>
   <string name="mark_point">Cíl</string>
-  <string name="show_osm_bugs_descr">Zobrazit na mapě OpenStreetBugs</string>
-  <string name="show_osm_bugs">Zobrazit OpenStreetBugs</string>
+  
+  
   
   <string name="shared_string_add_to_favorites">Přidat mezi oblíbené</string>
   <string name="use_english_names_descr">Přepíná mezi místními a anglickými názvy</string>
@@ -845,8 +785,7 @@
   
   <string name="prefs_plugins_descr">Moduly umožňují zapnout pokročilé nastavení a přídavné funkce</string>
   <string name="prefs_plugins">Moduly</string>
-  <string name="tip_recent_changes_0_8_0_t">"Změny ve verzi 0.8.0 :
-\n\t- *Moduly*\n\t- Většina funkcí je uspořádána do skupin, které mohou být zapnuty/vypnuty ve správci modulů. Skupiny: mapová data (online nebo uložená), sledování pozice a mnoho dalších dřívějších funkcí\n\t- *Podpora nového formátu offline map*\n\t- Rychlejší a přesnější vykreslování mapy (problémy s pobřežím a vodní hladinou z větší části vyřešeny)\n\t- Pokud používáte offline mapy, musíte stáhnout kompletně nová data, stará nejsou více podporována\n\t- *Offline navigace*\n\t- Robustnější offline navigace\n\t- *Zlepšeno uživatelské rozhraní*\n\t- Opraveno mnoho chyb "</string>
+  
   <string name="osm_editing_plugin_description">Pomocí tohoto modulu může být OsmAnd použit na přispívání do OSM, například vytvářením nebo úpravami POI, vytvářením nebo komentováním OSM chyb a přispíváním zaznamenanými GPX soubory. OSM je celosvětový komunitní projekt mapování. Pro více detailů se podívejte na http://openstreetmap.org. Aktivní účast je vítaná a příspěvky mohou být vytvářené přímo v OsmAnd, jestliže zadáte své osobní přihlašovací údaje do OSM.</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Akcelerace vykreslování pomocí \'Android native\' knihovny. Vektorové mapy se zpravidla vykreslují rychleji, pokud je tato možnost zaškrtnuta. Avšak na některých zařízeních tato funkce nemusí fungovat.</string>
   
@@ -883,8 +822,7 @@
   <string name="route_roundabout">Kruhový objezd : vyjeďte %1$d. výjezdem a pokračujte</string>
   <string name="route_kl">Držte se vlevo a pokračujte</string>
   <string name="route_kr">Držte se vpravo a pokračujte</string>
-  <string name="tip_recent_changes_0_8_1_t">"Změny ve verzi 0.8.1 :
-\n\t* Přesnější výpočet trasy (mírně pomalejší)\n\t* Chytré a rychlé přepočítávání trasy\n\t* Řazení do pruhů\n\t* Informace o retardérech, radarech a rychlostních limitech\n\t* Zlepšená hlasová navigace na dálnici\n\t* Modul parkování (\'kde jsem zaparkoval auto?\')\n\t* Tlačítko ovládání zápisu trasy "</string>
+  
   <string name="gpxup_public">Veřejné</string>
   <string name="gpxup_identifiable">S identifikací</string>
   <string name="gpxup_trackable">Se záznamem trasy</string>
@@ -931,10 +869,7 @@
   <string name="show_cameras">Zobrazovat dopravní radary</string>
   <string name="show_traffic_warnings">Zobrazovat rychlostní omezení</string>
   <string name="avoid_toll_roads">Vyhnout se placeným silnicím</string>
-  <string name="tip_recent_changes_0_8_2_t">"Změny ve verzi 0.8.2:
-\n\t* Vylepšená navigace
-\n\t* Dynamické mapové widgety\n\t* Tlačítko zámku se záznamem trasy
-\n\t* Nastavení mapy přesunuta na mapovou obrazovku\n\t* Opraveno psaní arabštiny, kannadštiny a jazyků psaných zprava "</string>
+  
   <string name="map_widget_top_text">Jméno ulice</string>
   <string name="map_widget_config">Nastavení</string>
   
@@ -992,18 +927,10 @@
 <string name="map_widget_day_night">Denní/noční režim</string>
 <string name="map_widget_renderer">Vektorový vykreslovač</string>
 <string name="avoid_motorway">Vyhnout se dálnicím</string>
-<string name="tip_recent_changes_0_8_3_t">"Změny ve verzi 0.8.3:\n\t* Body trasy
-\n\t* Vylepšené navádění po trase
-\n\t* Možnost vyhnutí se dálnicím
-\n\t* Zobrazení Cycleway=track
-\n\t* Oprava chyb "</string>
+
 <string name="snap_to_road_descr">Zachytí kurzor na nejbližší silnici/cestu během navigace</string>
 <string name="map_widget_vector_attributes">Vlastnosti vykreslování</string>
-<string name="tip_rotation_switching_t_v2">"\tKliknutím na ikonu kompasu na mapové obrazovce můžete přepínat mezi způsobem otáčení mapy.
-\n\tMožnosti jsou:
-\n\t\'Neotáčet (sever nahoře)\' - mapa se nebude otáčet a zůstane vždy orientovaná severem nahoru
-\n\t\'Ve směru pohybu\' - mapa bude neustále sledovat směr vašeho pohybu
-\n\t\'Podle kompasu\' - mapa se bude neustále natáčet podle kompasu "</string>
+
 <string name="poi_filter_parking">Parkoviště</string>
 <string name="poi_filter_public_transport">Veřejná doprava</string>
 <string name="poi_filter_entertainment">Zábava</string>
@@ -1018,24 +945,11 @@
 <string name="ending_point_too_far">Cíl je příliš daleko od nejbližší cesty.</string>
 <string name="add_tag">Přidat označení</string>
 <string name="btn_advanced_mode">Pokročilý režim…</string>
-<string name="tip_app_mode_t_v2">\tOsmAnd podporuje několik konfigurovatelných profilů pro různé způsoby dopravy.
-\t\nProfil můžete změnit tlačítkem v levém dolním rohu mapové obrazovky (ikona auta, kola nebo chodce) nebo při zadávání navigace.
-</string>
+
 <string name="poi_filter_emergency">Pohotovost</string>
-<string name="tip_map_switch_t_v2">"Zdroj map a informace, které se zobrazují, můžete změnit na mapové obrazovce v \'Menu\'-&gt;\'Nastavení mapy\'.
-\n\tPomocí \"Zdroj map...\' můžete zvolit lokálně uložené vektorové mapy nebo online rastrové mapy (pro tuto funkci aktivujte modul \'Online mapy\') nebo vlastní mapy vytvořené na PC pomocí programu OsmAndMapCreator.
-\n\tOsmAnd také podporuje vlastní zdroje map. "</string>
-<string name="tip_day_night_mode_t_v2">"Vzhled mapy může být u některých vektorových map změněn mezi denním (světlejším) a nočním (tmavším).
-\n\tNoční vzhled je bezpečnější pro jízdu v noci (méně oslňují).
-\n\tZpůsob přepínání vzhledu můžete nastavit v \'Menu\'-&gt;\'Nastavení mapy\'-&gt;\'Denní/noční režim\'
-\n\tMožnosti:
-\n\t\'Východ/západ slunce\' - automatické přepínání podle slunce (výchozí)
-\n\t\'Den\' - vždy používá denní režim
-\n\t\'Noc\' - vždy používá noční režim
-\n\t\'Senzor osvětlení\' - vzhled mapy je ovládán senzorem okolního světla na vašem zařízení (pouze pokud je přítomen) "</string>
-<string name="tip_recent_changes_0_8_4_t">"Změny ve verzi 0.8.4 :\n *  Oprava některých chyb
-\n * zámek polohy mapy se neztratí při přerušení
-\n * zapnout službu na pozadí během navigace "</string>
+
+
+
     <string name="context_menu_item_last_intermediate_point">Přidat jako poslední cíl</string>
     <string name="context_menu_item_first_intermediate_point">Nastavit jako první cíl</string>
     <string name="add_as_last_destination_point">Přidat jako poslední cíl</string>
@@ -1062,9 +976,7 @@
     <string name="zxing_barcode_scanner_not_found">Aplikace pro čtení čárových kódů ZXing není nainstalována. Chcete ji vyhledat v Market?</string>
 	<string name="close_changeset">Zavřít změny</string>
 	<string name="background_service_is_enabled_question">Služba OsmAnd stále běží na pozadí. Chcete ji také zastavit?</string>
-    <string name="tip_recent_changes_1_0_0_t">"Změny ve verzi 1.0 :
-\n\t* Rychlejší a přesnější výpočet trasy (až 250 km)
-\n\t* Zavedení silničních map\n\t* Pozice na mapě se po přerušení neztratí\n\t* Služba na pozadí během navigace "</string>
+    
     <string name="native_library_not_running">Aplikace běží v bezpečném režimu (vypněte ho v nastavení).</string>
     <string name="safe_mode_description">Spustit aplikaci v bezpečném režimu (kód pro Android namísto nativního).</string>
     <string name="safe_mode">Bezpečný režim</string>
@@ -1083,13 +995,12 @@
     <string name="map_widget_max_speed">Rychlostní omezení</string>
     <string name="rendering_attr_noAdminboundaries_name">Skrýt hranice</string>
 	<string name="rendering_attr_noAdminboundaries_description">Potlačit zobrazení správních hranic 5-9</string>
-	<string name="tip_altitude_offset">Korekce nadmořské výšky</string>
+	
 	<string name="monitoring_control_start">GPX</string>
     <string name="index_srtm_ele">Vrstevnice</string>
     <string name="download_select_map_types">Ostatní mapy</string>
     
-    <string name="tip_altitude_offset_t">"Většina přijímačů GPS měří výškové souřadnice v systému WGS84. Převod z něj do lokálního systému vyžaduje korekci závislou na pozici.
-\n\tLepší aproximace k těmto lokálním systémům je systém EGM96. OsmAnd nyní podporuje automatické zobrazení nadmořské výšky v tomto systému.\n\tPro zobrazení výšky v systému EGM96 stáhněte soubor WW15MGH.DAC ve Správci offline dat (originál souboru je na http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
+    
     
     
 	
@@ -1126,8 +1037,7 @@
     <string name="recording_error">Při nahrávání došlo k chybě </string>
     <string name="recording_camera_not_available">Kamera není dostupná</string>
     <string name="recording_playing">Přehrávám zvuk z nahrávky:\n%1$s</string>
-    <string name="tip_recent_changes_1_1_0_t">"Změny ve verzi 1.1.0 :
-\n\t* Modul měření vzdálenosti\n\t* Modul zvykové poznámky\n\t* Modul vrstevnice\n\t* Opravení chyb\n\t* Nový styl mapy \'Touring view\' s více mapovými detaily, novými styly vykreslování silnic, větším kontrastem a možností horské turistiky (značení SAC)\n\t* Korekce výpočtu výšky EGM96 "</string>
+    
     <string name="recording_unavailable">nedostupné</string>
     <string name="layer_recordings">Audio/video nahrávky</string>
     <string name="recording_description">Nahrávka %1$s %3$s %2$s</string>
@@ -1159,22 +1069,16 @@
     <string name="av_use_external_camera">Externí foto aplikace</string>
     <string name="prefer_motorways">Upřednostňovat dálnice</string>
 	<string name="prefer_in_routing_title">Upřednostňovat…</string>
-	<string name="tip_recent_changes_1_2_t">"Opravy ve verzi 1.2.1:\n\t* Oprava Geo obsahu (Foursquare, c:geo)\n\t* Oprava nestability obrazovky během navigace\n\t* Další drobné opravy\nZměny ve verzi 1.2:\n\t* Opravené chyby (doladěná navigace, hledání, nahrávky zvuku a videa, hlasové pokyny, drobné změny zobrazení)\n\t* Snadnější konfigurace stínování (vyžaduje modul vrstevnic)\n\t* Podpora odkazů maps.google.com\n\t* Nový widget (GPS info)\n\t* Podpora více oken na nových zařízeních Samsung\n\t* Kalmanův filtr pro kompas\n\t* Podpora pebble watch "</string>
+	
     <string name="max_speed_none">žádná</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
-    <string name="download_hillshade_item">Stínování kopců</string>
+    
     <string name="download_hillshade_maps">Stínování kopců</string>
-    <string name="tip_recent_changes_1_1_2_t">Změny ve verzi 1.1.2:
-\n\t* Vylepšení modulu audio/video (fotografie obsahují EXIF informace)
-\n\t* Opraven modul vrstevnic a změněna jeho struktura\n\t* Balíčky stínování kopců pro modul vrstevnic\n\t* Oprava chyb (neoptimální výpočet trasy)
-    </string>
+    
     <string name="prefer_in_routing_descr">Upřednostňovat dálnice</string>
     <string name="av_def_action_choose">Vybrat při použití</string>
     <string name="access_arrival_time">Čas příjezdu</string>
-    <string name="tip_recent_changes_1_1_4_t">Změny ve verzi 1.1.4:
-\n\t* Nový vzhled aplikace
-\n\t* Opravy chyb
-    </string>
+    
     <string name="layer_hillshade">Stínování</string>
     <string name="map_widget_gps_info">Info o GPS</string>
     <string name="shared_string_map">Mapa</string>
@@ -1191,12 +1095,7 @@
     
     <string name="available_downloads_left">K dispozici %1$d souborů ke stažení</string>
     <string name="files_limit">Zbývá %1$d souborů</string>
-    <string name="tip_recent_changes_1_3_t">Změny ve verzi 1.3:
-        \n\t* Nová implementace pro tablety a zařízení s velkou obrazovkou
-        \n\t* Holo Theme (nastavení vzhledů)
-        \n\t* Další nastavení pro stabilizaci kompasu
-        \n\t* Tlačítko vlevo nahoře na mapové obrazovce nahrazuje tlačítko Menu
-    </string>
+    
     <string name="monitoring_settings">Záznam cesty</string>
     
     <string name="accessibility_options">Volby usnadnění</string>
@@ -1236,7 +1135,7 @@
     <string name="distance_measurement_finish_editing">Ukončit editaci</string>
     <string name="distance_measurement_finish_subtrack">Začít novou podtrasu</string>
     <string name="distance_measurement_clear_route">Vymazat všechny body</string>
-    <string name="distance_measurement_save_gpx">Uložit jako GPX</string>
+    
     <string name="distance_measurement_load_gpx">Otevřít soubor GPX</string>
     
     <string name="osmand_distance_planning_plugin_description">Tento modul poskytuje nástroj na vytvoření trasy klikáním na mapu nebo úpravu stávajících GPX souborů pro plánování výletů a měření vzdálenosti mezi body. Výsledek je možné uložit jako GPX a použito později jako pomůcku.</string>
@@ -1246,16 +1145,8 @@
     <string name="search_street_in_neighborhood_cities">Hledat ulice v okolních obcích</string>
     <string name="intermediate_items_sort_return">Pořadí mezicílů bylo utříděno, aby měly optimální pořadí na cestě z aktuálního místa do místa určení .</string>
     <string name="intermediate_items_sort_by_distance">Utřídit (ode dveří ke dveřím)</string>
-    <string name="tip_recent_changes_1_4_t">Změny ve verzi 1.4:
-\n\t* Optimální třídění průchozích bodů (obchodní cestující, ode dveří ke dveřím)\n\t* Hledání ulic podle jména (v okolí)\n\t* Modul plánování (nahrání/úprava/uložení tras GPX)\n\t* Nová obrazovka stahování (stahování na pozadí)\n\t* Organizace GPX do adresářů\n\t* Mazání souborů s vrstevnicemi\n\t* Podpora OSM poznámek 
-    </string>
-    <string name="tip_recent_changes_1_5_t">Změny ve verzi 1.5:
-	\n\t* Hlasová upozornění na rychlostní omezení a radary
-	\n\t* Hlášení názvů ulic
-	\n\t* Mapové ikony s vysokým rozlišením
-	\n\t* Četné změny uživatelského rozhraní
-	\n\t* Oprava chyb v zobrazení vzdálenosti, GPX analyzéru, práce s mezicíli, plánovacím modulu, nahrávání do OSM uploading, HTTPS
-    </string>
+    
+    
     <string name="osb_author_or_password_not_specified">Prosím zadejte v Nastaveních uživatelské jméno a heslo pro vstup do OSM</string>
     <string name="clear_intermediate_points">Smazat cíle</string>
     <string name="keep_intermediate_points">Zachovat cíle</string>
@@ -1306,7 +1197,7 @@
     <string name="edit_tilesource_choose_existing">Vybrat existující…</string>
     <string name="edit_tilesource_name">Název</string>
     
-    <string name="tip_map_styles">Styly mapy</string>
+    
 	<string name="local_index_tile_data_downloadable">Ke stažení: %1$s</string>
     <string name="maps_define_edit">Vytvořit/Upravit…</string>
 	<string name="edit_tilesource_expiration_time">Doba platnosti (min)</string>
@@ -1322,18 +1213,7 @@
 	<string name="auto_zoom_close">Na malou vzdálenost</string>
 	<string name="auto_zoom_far">Na střední vzdálenost</string>
 	<string name="route_is_too_long">Offline navigace vyžaduje pro svoji správnou funkci, aby cíle nebyly vzdáleny více než 200km. Prosím přidejte jeden nebo více mezicílů cesty.</string>
-	<string name="tip_recent_changes_1_6_t">Změny ve verzi 1.6
-	\n\t* Podpora Full HD zařízení.
-	\n\t* Podpora transparentních pozadí map.
-	\n\t* Zobrazení tlačítka na přímé stáhnutí chybějících mapových podkladů přímo z mapového zobrazení.
-	\n\t* Vrstevnice jsou nyní zabaleny do balíků podle zemí nebo regionů.
-	\n\t* Nová základní mapa s hlavními cestami, kolejemi a význačnými plochami jako lesy a podobně.
-	\n\t* Mapová lupa (dlouhý tap na + nebo – lupu) – užitečná pro oba druhy map.
-	\n\t* Uživatelská možnost definic zdrojů online čtverců map (s možností definice časové expirace).
-	\n\t* Podpora rychlostního omezení podle času (Holandsko).
-	\n\t* Rychlejší hledání adres.
-	\n\t* Opravy routování a renderingu.
-    </string>
+	
     <string name="local_index_tile_data_zooms">Stažené přiblížení: %1$s</string>
     <string name="local_index_tile_data_name">Data dlaždic: %1$s</string>
     <string name="edit_tilesource_successfully">Zdroj dlaždic %1$s byl úspěšně uložen</string>
@@ -1346,10 +1226,8 @@
     <string name="animate_routing_gpx">Simulovat pomocí GPX trasy</string>
     <string name="shared_string_delete_all">Odstranit vše</string>
     <string name="local_osm_changes_delete_all_confirm">Chystáte se odstranit %1$d změn OSM. Jste si jisti?</string>
-    <string name="tip_faq">Často kladené otázky</string>
-    <string name="tip_faq_t">Prosím navštivte
-https://code.google.com/p/osmand/wiki/FAQ
-s často kladenými otázkami.</string>
+    
+    
     <string name="app_mode_hiking">Turistika</string>
     <string name="app_mode_motorcycle">Motocykl</string>
     <string name="app_mode_boat">Loď</string>
@@ -1382,7 +1260,7 @@ s často kladenými otázkami.</string>
 	<string name="routing_attr_weight_description">Zadejte hmotnost vozidla, která musí být povolená na cestách</string>
     <string name="android_19_location_disabled">Od verze Androidu 4.4 (KitKat) není možné stahovat a aktualizovat mapy v předchozím úložišti (%s). Chcete ho změnit na vhodné nové úložiště a zkopírovat do něj všechny soubory?\n Poznámka 1: Původní soubory zůstanou nedotčeny a mohou být smazány ručně.
 \n Poznámka 2: V novém úložišti nebude možné sdílet soubory mezi OsmAnd a OsmAnd+.</string>
-    <string name="application_dir_change_warning2">Chcete aby OsmAnd také zkopíroval své datové soubory do nového cíle? Vybráním \'Ne\' OsmAnd pouze vytvoří a použije nový adresář.</string>
+    
     <string name="copying_osmand_one_file_descr">Kopírování souboru (%s) do nového umístění…</string>
     <string name="copying_osmand_files_descr">Kopírování datových souborů OsmAnd do nového umístění (%s)…</string>
     <string name="copying_osmand_files">Kopírování datových souborů OsmAnd…</string>
@@ -1392,17 +1270,7 @@ s často kladenými otázkami.</string>
     <string name="routing_preferences_descr">Nastavení výpočtu trasy</string>
     <string name="speech_rate_descr">Zadejte rychlost řeči TTS</string>
     <string name="speech_rate">Rychlost řeči</string>
-    <string name="tip_recent_changes_1_7_1_t">Změny verze 1.7:
-    \n\t* DůLEŽITÉ mapy by měly být novější než z února 2014.
-	\n\t* Kompletně aktualizováno určování trasy (rychlejší a přesnější) - 
-    \n\t* Nová obrazovka plánování trasy (výkonnější a více intuitivní)
-    \n\t** POZNÁMKA GPX trasy jsou k dispozici pod tlačítkem nastavení trasy
-    \n\t* Automatické skrytí tlačítek při navigaci
-    \n\t* Výpočet cesty k prvnímu bodu GPX trasy v režimu offline (Volba \'Projet celou trasu\')
-	\n\t* Aktivní simulace v tunelech
-	\n\t* Mnoho malých vylepšení uživatelského vzhledu a opravy použitelnosti
-	\n\t* Nastavení rychlosti řeči
-    </string>
+    
     <string name="complex_route_calculation_failed">Rychlý přepočet trasy selhal (%s), návrat k pomalému výpočtu.</string>
     <string name="disable_complex_routing_descr">Vypnout dvojfázovou navigaci pro profil auta</string>
     <string name="disable_complex_routing">Vypnout komplexní navigaci</string>
@@ -1411,11 +1279,7 @@ s často kladenými otázkami.</string>
     
     <string name="calculate_osmand_route_without_internet">Vypočítat OsmAnd trasu bez připojení na Internet</string>
     <string name="gpx_option_calculate_first_last_segment">Vypočítat OsmAnd trasu pro první a poslední úsek</string>
-    <string name="tip_map_styles_t">"OsmAnd umožňuje zobrazení vektorových map v různých stylech podle vašich potřeb:
-\n\nMimo vyváženého stylu default můžete v Menu → Nastavení mapy → Vektorový vykreslovač vybrat například:
-\n\t* Styl Touring view, který zobrazuje nejpodrobněji informace pro cestování , včetně vylepšení pro profesionální řidiče (vyšší kontrast, dobře rozlišitelné cesty), volby pro Alpskou turistiku (stupnice SAC), cyklotrasy, turistické značky, atd.
-\n\t* High contrast roads zobrazuje cesty ve zvýrazněných barvách pro případ silného okolního osvětlení.
-\n\t* Winter and ski vytvoří (zasněženou) zimní krajinu s lyžařskými svahy a vleky (ve spojení s mapou World ski) "</string>
+    
     <string name="index_item_world_altitude_correction">Svět - korekce výšky</string>
 	<string name="index_item_world_seamarks">Svět - námořní</string>
 	<string name="index_item_world_bitcoin_payments">Svět - platby bitcoin</string>
@@ -1479,14 +1343,7 @@ s často kladenými otázkami.</string>
     <string name="osmo_mode_on">Zastavit OsMo relaci</string>    
     <string name="osmo_mode_off">Spustit OsMo relaci</string>
     <string name="use_points_as_intermediates">Vypočítat trasu mezi body</string>
-    <string name="tip_recent_changes_1_8_alpha">Změny v 1.8:
-        * Počítání trasy mezi body GPX trasy
-        * Změněny názvy krajin v downloadech (podpora národního hledání)
-        * Podpora importu GPX/KML (konverze z KML do GPX)
-	* GPX trasy byly přesunuty do \'Moje místa\'
-	* Můžete rozdělit GPX trasu podle vzdálenosti a kontrolovat výškový rozdíl/rychlost
-	* Automatický start navigace po uplynutí času
-    </string>
+    
     <string name="osmo_plugin_description">"Tento modul poskytuje funkcionalitu pro takzvané OsMo pokročilé živé sledování, podívejte se na http://osmo.mobi.\n\nMůžete sledovat všechna zařízení spolupracující skupiny v reálném čase a vzájemně spolu komunikovat. Jsou dostupné různé možnosti nastavení krátkodobého nebo trvalého sledování.\n\nAnonymní skupiny lze vytvářet spontáně na určený počet dní a jsou omezené na vybrané funkce, nemají například dálkové ovládání a skupinového správce. Plně funkční skupiny se vytvářejí na webové stránce a jsou přístupné pouze pro registrované uživatele. "</string>
     <string name="color_red">červená</string>
 	<string name="color_pink">růžová</string>
@@ -1758,7 +1615,7 @@ s často kladenými otázkami.</string>
     <string name="rendering_attr_trolleybusRoutes_name">Trolejbusové linky</string>
     <string name="rendering_attr_busRoutes_name">Autobusové linky</string>
     <string name="rendering_attr_shareTaxiRoutes_name">Sdílené mikrobusové linky</string>
-    <string name="tip_recent_changes_1_9_t">"Změny v 1.9: * Aktualizované mapové styly s vykreslováním povrchu cest, dopravou a turistickými symboly * Hledání POI podél trasy * Značení neprůchodných cest v rámci relace * Jednodušší stahování a aktualizace map * Vizuální a zvukové upozornění na blížící se průjezdní bod * Tisk itineráře a odbočovacích pokynů * Podpora odbočovacích pruhů * Podpora Android Wear * Mnoho změn zobrazení * Oddělení mapového přiblížení a velikosti písma * Zvukové upozornění při odchýlení z trasy * Přihlášení do služby OsMo * Oprava nekompatibilit s verzí OsMo "</string>
+    
     <string name="rendering_attr_tramTrainRoutes_name">Tramvajové a vlakové linky</string>
     
     <string name="impassable_road">Vyhnout se cestám…</string>
@@ -1820,7 +1677,7 @@ s často kladenými otázkami.</string>
     <string name="points">Body</string>
     
     <string name="shared_string_my_location">Moje poloha</string>
-    <string name="osm_editing_manage">Spravovat</string>
+    
     
 	<string name="navigation_over_track">Spustit navigaci po trase?</string>
 	<string name="avoid_roads_msg">Můžete vynutit náhradní trasu označením cest, kterým je nutné se vyhnout</string>
@@ -1899,7 +1756,7 @@ s často kladenými otázkami.</string>
 	<string name="your_edits">Vaše změny</string>
     <string name="waypoint_visit_after">Navštívit po</string>
     <string name="waypoint_visit_before">Navštívit před</string>
-    <string name="shared_string_not_use">Nepoužívat</string>
+    
 	<string name="confirmation_to_clear_history">Chcete vyčistit historii?</string>
     <string name="local_osm_changes_upload_all_confirm">Požadujete nahrát %1$d změn do OSM. Jste si jisti?</string>
     <string name="shared_string_collapse">Sbalit</string>
@@ -2103,10 +1960,10 @@ s často kladenými otázkami.</string>
     <string name="buy">KOUPIT</string>
 <string name="hillshade_layer_disabled">Vrstva stínování vypnutá</string>
     <string name="regions">Regiony</string>
-    <string name="additional_maps">Další mapy</string>
+    
     <string name="region_maps">Mapy regionů</string>
     <string name="world_maps">Světové mapy</string>
-    <string name="world_regions">Světové regiony</string>
+    
     <string name="favorite_category_dublicate_message">Zadané jméno kategorie již existuje. Prosím určete jiný název.</string>
     <string name="favorite_category_name">Název kategorie</string>
     <string name="favorite_category_add_new_title">Přidat novou kategorii</string>

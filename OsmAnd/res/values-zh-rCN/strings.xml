@@ -38,7 +38,7 @@
 	<string name="use_compass_navigation">使用指南針</string>
 	<string name="avoid_motorway">避開高速路</string>
 	<string name="auto_zoom_map">自動縮放地圖</string>
-	<string name="tip_update_index">正在更新离线地图</string>
+	
 	<string name="recalculate_route_to_your_location">運輸方式：</string>
 	<string name="select_navigation_mode">選擇傳輸模式</string>
 	
@@ -133,7 +133,7 @@
 	<string name="support_new_features_descr">捐赠实现的新功能中的应用</string>
 	<string name="info_button">信息</string>
 	<string name="shared_string_help">帮助</string>
-	<string name="show_details">显示细节</string>
+	
 	<string name="accessibility_extensions_descr">无障碍扩展旧的Android版本</string>
 	<string name="accessibility_extensions">无障碍扩展</string>
 	<string name="accessibility_mode">无障碍模式</string>
@@ -207,8 +207,8 @@
 	<string name="user_password_descr">为提交openstreetmap.org需要</string>
 	<string name="osmand_service">睡眠模式功能</string>
 	<string name="osmand_service_descr">使用屏幕关闭时运行OsmAnd</string>
-	<string name="tip_rotation_switching">地图方位</string>
-	<string name="tip_osm_improve">改善OSM数据</string>
+	
+	
 	
 	<string name="auto_follow_route_never">从来没有</string>
 	<string name="city_type_suburb">市郊</string>
@@ -226,17 +226,17 @@
 	<string name="favorite_home_category">家</string>
 	<string name="favorite_friends_category">朋友</string>
 	<string name="favorite_places_category">地方</string>
-	<string name="favorite_default_category">他人</string>
+	
 	<string name="favourites_edit_dialog_name">名称</string>
 	<string name="favourites_edit_dialog_category">类别</string>
 	<string name="shared_string_no_thanks">谢谢，不用了</string>
 	
 	<string name="trace_rendering">渲染调试信息</string>
-	<string name="voice_not_use">不要使用</string>
+	
 	
 	<string name="gpx_option_reverse_route">反向GPX方向</string>
 	<string name="internet_not_available">操作所需的互联网连接不可用</string>
-	<string name="tip_navigation">导航</string>
+	
 	
 	<string name="shared_string_next">下</string>
 	<string name="shared_string_previous">前</string>
@@ -355,8 +355,8 @@
 	<string name="osm_settings">OSM编辑</string>
 	<string name="save_current_track">保存当前GPX轨迹</string>
 	<string name="save_track_to_gpx">日志跟踪GPX文件</string>
-	<string name="show_osm_bugs_descr">显示的OpenStreetBugs地图</string>
-	<string name="show_osm_bugs">显示OpenStreetBugs“</string>
+	
+	
 	
 	<string name="map_view_3d_descr">启用3D的地图视图</string>
 	<string name="map_view_3d">查看3D地图</string>
@@ -393,15 +393,12 @@
 	<string name="shared_string_delete">删除</string>
 	
 	<string name="layer_hillshade">山体阴影层</string>
-    <string name="tip_recent_changes_1_1_4_t">1.1.4 中的修改：
-        \n\t* UI 重新设计
-		\n\t* Bug 修复
-    </string>
+    
     <string name="shared_string_map">地图</string>
     <string name="prefer_motorways">首选高速公路</string>
 	<string name="prefer_in_routing_title">首选…</string>
 	<string name="index_name_openmaps">开放地图属性索引</string>
-    <string name="download_hillshade_item">山体阴影</string>
+    
     <string name="download_hillshade_maps">山体阴影层</string>
     <string name="prefer_in_routing_descr">首选高速公路</string>
     <string name="local_indexes_cat_av">音频/视频数据</string>
@@ -414,20 +411,13 @@
     <string name="precise_routing_mode">精确路径（alpha）</string>
     <string name="srtm_paid_version_msg">请考虑在谷歌Play商店购买插件以支持进一步发展。</string>
     <string name="srtm_paid_version_title">等高线插件</string>
-    <string name="tip_map_styles">地图风格</string>
-	<string name="tip_map_styles_t">OsmAnd 支持使用不同的地图风格显示离线矢量地图，以满足您的需求：
-		\n\n除了比较平衡的\'缺省\'地图风格以外，您可以在 \'菜单\' → \'屏幕设置\' → \'地图风格\' 中选择:
-		\n\t* \'旅行\' 风格，提供最详细的适用于旅行的信息，包括：为专业司机的优化(高对比度、易于区分的道路显示)、山地徒步(SAC规范)的选项，自行车路线，徒步符号支持，等等。
-		\n\t* \'高对比度道路\' 用非常突出的颜色显示道路，适用于光线强烈的场景。
-		\n\t* \'冬季与滑雪\' 用(白雪覆盖的)冬季场景显示地图，并且显示全球的滑雪道和索道(需要下载 \'世界滑雪\' 地图)。
-	</string>
+    
+	
     <string name="about_version">版本：</string>
     <string name="about_settings">关于</string>
     <string name="about_settings_descr">版本信息，许可证，项目成员</string>
     
-    <string name="tip_recent_changes_1_6_t">1.6 中的改动：
-	\n\t* 定义/编辑在线地图瓦片来源(指定过期失效时间)
-    </string>
+    
     <string name="local_index_tile_data_expire">过期(分钟)：%1$s</string>
     <string name="local_index_tile_data_downloadable">可下载：%1$s</string>
     <string name="local_index_tile_data_maxzoom">最大显示级别：%1$s</string>
@@ -458,13 +448,7 @@
 	<string name="speak_speed_limit">播报限速</string>
     <string name="speak_cameras">播报测速电子眼</string>
 	<string name="speak_traffic_warnings">播报交通信息</string>
-    <string name="tip_recent_changes_1_5_t">1.5 中的改动：
-	\n\t* 限速与电子眼的语音警告
-	\n\t* 更强的语音提示能力(播报街道名称)
-	\n\t* 高密度地图图标
-	\n\t* 用户界面(UI)上的大量修改
-	\n\t* 距离显示，GPX分析器，途经点处理，规划窗口部件，OSM上传，https处理等部分的Bug修正
-    </string>
+    
     <string name="osb_author_or_password_not_specified">请在设置中指定OSM用户名和密码</string>
     <string name="context_menu_item_directions_to">设为终点</string>
     <string name="context_menu_item_directions_from">设为起点</string>
@@ -490,7 +474,7 @@
     <string name="distance_measurement_start_editing">开始编辑</string>
     <string name="distance_measurement_finish_editing">完成编辑</string>
     <string name="distance_measurement_clear_route">清除所有点</string>
-    <string name="distance_measurement_save_gpx">保存为 GPX</string>
+    
     <string name="distance_measurement_load_gpx">打开已有 GPX</string>
     <string name="wait_current_task_finished">请等待当前任务完成</string>
     <string name="install_paid">完整版本</string>
@@ -540,7 +524,7 @@
 	<string name="rendering_attr_noAdminboundaries_description">不显示区域(行政区划级别5-9)的边界</string>
     
     
-	<string name="tip_altitude_offset">海拔修正</string>
+	
 	<string name="rendering_attr_showRoadMaps_description">选择何时显示仅包含道路的地图：</string>
 	<string name="rendering_attr_showRoadMaps_name">仅包含道路的地图</string>
     <string name="safe_mode_description">在安全模式运行应用(使用较慢的 Android 代替本地代码)。</string>
@@ -633,11 +617,7 @@
 	<string name="local_openstreetmap_descr_title">异步 OSM 编辑：</string>
 	<string name="local_openstreetmap_settings">本地保存的 OSM POIs/Bugs</string>
 	<string name="show_current_gpx_title">显示当前轨迹</string>
-	<string name="tip_recent_changes_0_7_0_t">0.7.0 中的改动：
-		\n\t- 离线维基百科数据与文章
-		\n\t- 地图更新
-		\n\t- 其他小功能
-	</string>    
+	    
 	<string name="free_version_message">此 OsmAnd 免费版本最多支持下载 %1$s 套数据，并且不支持离线维基百科文章。</string>
 	<string name="poi_context_menu_showdescription">显示 POI 描述</string>
 	<string name="fav_export_confirmation">已存在上次导出的收藏夹文件。是否要替换它？</string>
@@ -646,7 +626,7 @@
 	<string name="general_settings_descr">配置应用程序的显示与公用设置</string>
 	<string name="global_app_settings">应用程序全局设置</string>
 	
-	<string name="tip_day_night_mode">白天/黑夜模式</string>
+	
 	<string name="download_files_not_enough_space">可用空间不足以下载 %1$s MB (可用空间：%2$s)。</string>
 	<string name="download_files_question_space">当前可用空间 {2} MB！是否要下载这 {0} 个文件({1} MB)？</string>
 	<string name="use_transparent_map_theme">透明主题</string>
@@ -706,7 +686,7 @@
 	<string name="map_text_size_descr">选择地图上名称的字体大小</string>
 	<string name="map_text_size">地图字体大小</string>
 	<string name="trace_rendering_descr">显示渲染性能</string>
-	<string name="tip_recent_changes">最近修改</string>
+	
 	<string name="installing_new_resources">解包新数据…</string>
 	<string name="internet_connection_required_for_online_route">已选择在线导航服务，但网络连接不可用。</string>
 	<string name="tts_language_not_supported_title">语言不支持</string>
@@ -730,15 +710,15 @@
 	<string name="install_more">安装更多…</string>
 	<string name="level_to_switch_vector_raster_descr">使用矢量地图的最小显示级别</string>
 	<string name="level_to_switch_vector_raster">最小矢量显示级别</string>
-	<string name="tip_location_sharing">分享位置</string>
-	<string name="tip_favorites">收藏点</string>
+	
+	
 	<string name="error_doing_search">离线搜索中发生错误</string>
 	<string name="system_locale">系统</string>
 	<string name="preferred_locale_descr">选择显示语言</string>
 	<string name="preferred_locale">显示语言</string>
 	<string name="incomplete_locale">不完整</string>
-	<string name="tip_map_switch">选择地图来源</string>
-	<string name="tip_search">正在搜索</string>
+	
+	
 	<string name="mile">英里</string>
 	<string name="send_location_sms_pattern">位置：%1$s\n%2$s</string>
 	<string name="indexing_address">地址索引中…</string>

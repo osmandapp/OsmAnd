@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="tip_recent_changes_0_8_1_t">"Promjene u 0.8.1 : "</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
   <string name="asap">Što prije</string>
   
   <string name="route_roundabout">Kružni tok : idite %1$d izlaz i idite</string>
@@ -49,7 +49,7 @@
   <string name="show_cameras">Prikaži kamere za mjerenje brzine</string>
   <string name="show_traffic_warnings">Prikaži saobraćajna upozorenja</string>
   <string name="avoid_toll_roads">Izbjegavaj ceste sa naplatom</string>
-  <string name="tip_recent_changes_0_8_2_t">"Changes in 0.8.2 : \n\t* Improved Routing "</string>
+  
   <string name="map_widget_top_text">Naziv ulice</string>
   <string name="map_widget_back_to_loc">Gdje sam</string>
   <string name="map_widget_lock_screen">Zaključaj ekran</string>

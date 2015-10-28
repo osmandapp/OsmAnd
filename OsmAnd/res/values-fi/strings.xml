@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="no_route">Ei reittiä</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="no_route">Ei reittiä</string>
 	<string name="delete_target_point">Poista välietappi</string>
 	<string name="target_point">Välietappi %1$s</string>
     <string name="intermediate_point">Välietappi %1$s</string>
@@ -101,7 +100,7 @@
 	<string name="info_button">Tietoja</string>
 	<string name="back_to_location">Takaisin sijaintiin</string>
 	<string name="shared_string_help">Ohje</string>
-	<string name="show_details">Näytä tiedot</string>
+	
 	<string name="shared_string_on">Päällä</string>
 	<string name="shared_string_off">Pois päältä</string>
 	<string name="backToMenu">Takaisin valikkoon</string>
@@ -185,7 +184,7 @@
 	<string name="user_name_descr">Tarvitaan openstreetmap.org ehdotuksia varten</string>
 	<string name="user_password">OSM salasanasi</string>
 	<string name="user_password_descr">Tarvitaan openstreetmap.org ehdotuksia varten</string>
-	<string name="tip_rotation_switching">Kartan orientaatio</string>
+	
 	<string name="download_files_not_enough_space">Ei ole tarpeeksi tilaa jotta voitaisiin ladata %1$s MB (vapaana: %2$s).</string>
 	<string name="download_files_question_space">Vapaata tilaa on {2} MB! Lataa {0} tiedosto(a) ({1} MB)?</string>
 	
@@ -437,14 +436,9 @@
 	<string name="edit_filter_save_as_menu_item">Tallenna nimellä</string>
 	
 	<string name="rendering_attr_roadColors_description">Valitse tien väriteema:</string>
-	<string name="tip_recent_changes_0_8_4_t">"Muutokset versiossa 0.8.4:\n\t *Joitain bugeja korjattu\n\t *Kartta ei menetä paikkaansa keskeytyksien välillä "</string>
+	
 	<string name="gps_not_available">Salli GPS:n käyttö asetuksista</string>
-    <string name="tip_recent_changes_0_8_3_t">"Muutoksia versiossa 0.8.3 :
-\n\t* Välietapit
-\n\t* Parannettu reitin ohjausta
-\n\t* Lisätty asetus moottoriteiden välttämiseksi reittiä suunniteltaessa
-\n\t* Lisätty kartalle yksi tietyyppi lisää polkupyörille  (Pyörätie=track)
-\n\t* Bugi korjauksia "</string>
+    
 	<string name="poi_filter_car_aid">Autotuki</string>
 	<string name="layer_map_appearance">Muokkaa näyttöä</string>
 	<string name="screen_is_locked">Poistaaksesi näytön lukituksen paina lukitus kuvaketta</string>
@@ -562,7 +556,7 @@
 	<string name="index_name_voice">Äänikehotteet (nauhoitettu, rajoitetut ominaisuudet)</string>
 	<string name="index_name_tts_voice">Äänikehotteet (Syntetisoitu ääni, suositeltu)</string>
 	<string name="settings_preset_descr">Valitse käyttäjäprofiili yksilöllisillä kartta- ja navigaatioasetuksilla.</string>
-	<string name="tip_day_night_mode">Päivä/Yö moodi</string>
+	
 	<string name="use_transparent_map_theme">Läpinäkvä teema</string>
 	<string name="choose_auto_follow_route">Keskitä karttanäkymä automaattisesti</string>
 	<string name="auto_follow_route_navigation_descr">Keskitä karttanäkymä automaattisesti vain navigoidessa.</string>
@@ -656,7 +650,7 @@
     <string name="prefer_motorways">Suosi moottoriteitä</string>
 	<string name="prefer_in_routing_title">Suosi…</string>
 	<string name="prefer_in_routing_descr">Suosi moottoriteitä</string>
-    <string name="tip_recent_changes_1_2_t">"Muutokset versiossa 1.2: "</string>
+    
     
     <string name="intermediate_points_change_order">Vaihda järjestystä</string>
     <string name="recording_unavailable">ei saatavilla</string>
@@ -679,7 +673,7 @@
     <string name="gpx_saved_sucessfully">GPX tiedosto tallennettin onnistuneesti: {0}</string>
     <string name="shared_string_do_not_show_again">Älä näytä enää uudestaan</string>
     <string name="distance_measurement_start_editing">Aloita muokkaus</string>
-    <string name="tip_map_styles">Karttatyylit</string>
+    
 	<string name="about_version">Versio:</string>
     <string name="about_settings">Tietoja</string>
     <string name="about_settings_descr">Versio tietoja, lisenssit, projektin jäsenet</string>

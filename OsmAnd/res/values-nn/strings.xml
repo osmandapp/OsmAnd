@@ -156,13 +156,13 @@
     <string name="app_mode_motorcycle">Motorsykkel</string>
     <string name="app_mode_boat">Båt</string>
     <string name="app_mode_aircraft">Fly</string>
-    <string name="tip_faq">Ofte spurde spørsmål</string>
+    
     <string name="shared_string_delete_all">Slett alt</string>
     <string name="shared_string_and">og</string>
     <string name="shared_string_or">eller</string>
 	
     <string name="base_world_map">Globalt grunnkart</string>
-	<string name="tip_map_styles">Kartstilar</string>
+	
 	<string name="about_version">Versjon:</string>
     <string name="about_settings">Om</string>
     
@@ -198,7 +198,7 @@
     <string name="distance_measurement_start_editing">Start redigering</string>
     <string name="distance_measurement_finish_editing">Fullfør redigering</string>
     <string name="distance_measurement_clear_route">Fjern alle punkta</string>
-    <string name="distance_measurement_save_gpx">Lagra som GPX-fil</string>
+    
     <string name="distance_measurement_load_gpx">Opna GPX-fil</string>
     <string name="use_kalman_filter_compass">Bruk Kalman-filter</string>
     <string name="use_magnetic_sensor">Bruk magnetisk sensor</string>
@@ -227,7 +227,7 @@
 	<string name="prefer_in_routing_descr">Føretrekk motorvegar</string>
     <string name="max_speed_none">ingen</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
-    <string name="download_hillshade_item">Fjellskugge</string>
+    
     <string name="download_hillshade_maps">Fjellskugge-lag</string>
     
     
@@ -268,7 +268,7 @@
     <string name="rendering_attr_alpineHiking_name">Fjellturkart</string>
     <string name="rendering_attr_noAdminboundaries_name">Gøym grenser</string>
 	
-	<string name="tip_altitude_offset">Høgdekorrigeringar</string>
+	
 	<string name="map_widget_max_speed">Fartsgrense</string>
     <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">Fann ingen bygningar.</string>

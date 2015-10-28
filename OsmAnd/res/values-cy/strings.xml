@@ -43,22 +43,13 @@
 <string name="show_cameras">Dangos camerâu cyflymder</string>
 <string name="show_traffic_warnings">Dangos cyfyngiadau cyflymder</string>
 <string name="avoid_toll_roads">Osgoi tollffyrdd</string>
-<string name="tip_recent_changes_0_8_2_t"> 	Newidiadau yn 0.8.2 :↵ 
-\n\t* Gwell Cynllunio Taith↵ 
-\n\t* Teclynnau map dynamig↵ </string>
+
 <string name="continue_follow_previous_route_auto">Nid oedd y llywio diwethaf wedi ei gwblhau. Parhau i\'w ddilyn? (%1$s eiliad)</string>
 <string name="route_updated_loc_found">Bydd y daith yn cael ei ail-gyfrifo ar ôl canfod y lleoliad</string>
 <string name="osmand_parking_hours">Awr</string>
 <string name="osmand_parking_minutes">Munud</string>
 <string name="osmand_parking_position_description_add_time">Roedd y car wedi ei barcio yn:</string>
-<string name="tip_recent_changes_0_8_1_t">Newidiadau yn 0.8.1 :↵
-\n\t* Teithiau mwy manwl (bach yn arafach)↵
-\n\t* Ailgyfeirio taith clyfar a chyflyn↵
-\n\t* Cyfeirio yn ôl lonydd↵
-\n\t* Gwybodaeth am gyfyngiad cyflymder, camerâu cyflymder a thwmpathau traffig↵
-\n\t* Gwell gyfarwyddid llais ar briffyrdd↵
-\n\t* Ategyn parcio (\'Lle mae fy nghar wedi ei barcio?\')↵
-\n\t* Enable/disable logging widget↵</string>
+
 <string name="use_compass_navigation_descr">Defnyddio cwmpawd lle nad yw\'r cyfeiriad wedi ei ganfod</string>
 <string name="use_compass_navigation">Defnyddio cwmpawd</string>
 <string name="select_animate_speedup">Defnyddio cyflymu animeiddio taith</string>
@@ -77,18 +68,12 @@
 <string name="avoid_motorway">Ceisiwch osgoi traffyrdd</string>
 <string name="auto_zoom_map_descr">Zoom Auto mapio yn ôl eich cyflymder (tra map wedi eu cydamseru gyda\'r sefyllfa bresennol)</string>
 <string name="auto_zoom_map">Auto chwyddo map</string>
-<string name="tip_recent_changes_0_8_3_t">Newidiadau mewn 0.8.3: ↵
-\n\t* cyfarwyddyd llwybr Gwell ↵
-\n\t* Osgoi traffyrdd opsiwn ↵
-\n\t* Llwybr Beicio=trac arddangos ↵
-\n\t* well UI gorffen (eiconau) ↵
-\n\t* Mae rhai bug chyfyngderau ↵
-tip_recent_changes_0_8_3_t Cyd-destun</string>
+
 <string name="snap_to_road_descr">Snap sefyllfa i ffyrdd yn ystod llywio</string>
 <string name="snap_to_road">Snap i\'r ffordd</string>
 <string name="osmand_short_description_80_chars">OsmAnd yn gais ffynhonnell agored ar gyfer llywio fapiau all-lein ac ar-lein</string>
 <string name="osmand_plus_short_description_80_chars">OsmAnd yn gais ffynhonnell agored ar gyfer llywio fapiau all-lein ac ar-lein</string>
-<string name="tip_update_index">Diweddaru Data All-lein</string>
+
 <string name="filterpoi_activity">Creu POI hidlo</string>
 <string name="recalculate_route_to_your_location">Dull trafnidiaeth:</string>
 <string name="select_navigation_mode">Dewiswch dull trafnidiaeth</string>
@@ -176,17 +161,7 @@ Cyfrannol cof %4$s MB (terfyn Android %5$s MB, Dalvik %6$s MB).</string>
 
 <string name="prefs_plugins_descr">Plugins galluogi lleoliadau modd arbenigol ac yn darparu swyddogaeth ychwanegol fel mapiau olrhain teils,, gweithredu dull cwsg, lleoliadau hygyrchedd, ac eraill.</string>
 <string name="prefs_plugins">Rheolwr ategyn</string>
-<string name="tip_recent_changes_0_8_0_t">Newidiadau mewn 0.8.0:
-\n\t- *ymarferoldeb Ategyn*
-\n\t - ymarferoldeb y rhan fwyaf o ei grwpio yn ôl nodweddion a gellir eu galluogi / anabl yn y Rheolwr Ategyn
-Gallwch alluogi (ar-lein neu cached) Ffynonellau teils map, lleoliadau olrhain, a nodweddion newydd a fu\'n bodoli eraill.
-\n\t- *data cymorth newydd map offline*
-\n\t - Map rendro yn dod yn gyflymach ac yn fwy manwl gywir (arfordir a phroblemau ardal dan ddŵr yn cael eu gosod yn bennaf).
-\n\t - Mae angen i chi lawrlwytho data all-lein hollol newydd (ni fydd hen ddata yn cael ei gefnogi anymore)
-\n\t- *Routing All-lein*
-\n\t - llwybrau All-lein yn dod yn fwy cadarn
-\n\t *Defnyddioldeb a phrofiad UI*
-\n\t - Gwell mewn llawer o ardaloedd</string>
+
 <string name="vector_maps_may_display_faster_on_some_devices">Mapiau fector debygol arddangos yn gyflymach. Efallai na gweithio\'n dda ar rai dyfeisiau.</string>
 <string name="play_commands_of_currently_selected_voice">Chwarae gorchmynion llais a ddewiswyd ar hyn o bryd</string>
 <string name="debugging_and_development">OsmAnd datblygu</string>

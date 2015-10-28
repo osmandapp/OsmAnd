@@ -82,6 +82,8 @@ public class LocalIndexHelper {
 			info.setDescription(getInstalledDate(f));
 		} else if(info.getType() == LocalIndexType.TTS_VOICE_DATA){
 			info.setDescription(getInstalledDate(f));
+		} else if(info.getType() == LocalIndexType.DEACTIVATED){
+			info.setDescription(getInstalledDate(f));
 		} else if(info.getType() == LocalIndexType.VOICE_DATA){
 			info.setDescription(getInstalledDate(f));
 		}

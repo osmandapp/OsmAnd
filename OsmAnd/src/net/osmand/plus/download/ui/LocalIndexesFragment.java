@@ -991,9 +991,15 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		}
 
 
-		private String getMapDescription(String fileName) {
-			if (fileName.endsWith(IndexConstants.BINARY_ROAD_MAP_INDEX_EXT)) {
+		private String getMapDescription(LocalIndexInfo child) {
+			if (child.getType() == LocalIndexType.TILES_DATA) {
+				return ctx.getString(R.string.online_map);
+			} else if (child.getFileName().endsWith(IndexConstants.BINARY_ROAD_MAP_INDEX_EXT)) {
 				return ctx.getString(R.string.download_roads_only_item);
+			} else if (child.isBackupedData() && child.getFileName().endsWith(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT)) {
+				return ctx.getString(R.string.download_wikipedia_maps);
+			} else if (child.isBackupedData() && child.getFileName().endsWith(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT)) {
+				return ctx.getString(R.string.download_srtm_maps);
 			}
 			return "";
 		}
@@ -1043,23 +1049,26 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 				}
 				StringBuilder builder = new StringBuilder();
 
-				final String mapDescription = getMapDescription(child.getFileName());
+				final String mapDescription = getMapDescription(child);
 				if (mapDescription.length() > 0) {
-					builder.append(mapDescription).append(" • ");
+					builder.append(mapDescription);
 				}
 
 				if (child.getSize() >= 0) {
+					if(builder.length() > 0) {
+						builder.append(" • ");
+					}
 					if (child.getSize() > 100) {
 						builder.append(DownloadActivity.formatMb.format(new Object[]{(float) child.getSize() / (1 << 10)}));
 					} else {
 						builder.append(child.getSize()).append(" KB");
 					}
-					builder.append(" • ");
 				}
 
-				if (child.getType() == LocalIndexType.TILES_DATA) {
-					builder.append(ctx.getString(R.string.online_map));
-				} else {
+				if(!Algorithms.isEmpty(child.getDescription())){
+					if(builder.length() > 0) {
+						builder.append(" • ");
+					}
 					builder.append(child.getDescription());
 				}
 				descriptionTextView.setText(builder.toString());

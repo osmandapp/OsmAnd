@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="left_side_navigation">डाव्या बाजूने ड्रायव्हिंग</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="left_side_navigation">डाव्या बाजूने ड्रायव्हिंग</string>
   <string name="unknown_location">अजून स्थान माहित नाही</string>
   <string name="modify_transparency">पारदर्शकता बदला (० - पारदर्शक, २५५ - अपारदर्शक)</string>
   <string name="confirm_interrupt_download">फाइल डाउनलोड थांबवायचे का?</string>
@@ -23,7 +22,7 @@
   <string name="show_ruler_level">पट्टी दाखवा</string>
   <string name="info_button">माहिती</string>
   <string name="shared_string_help">मदत</string>
-  <string name="show_details">तपशील दाखवा</string>
+  
   <string name="shared_string_on">चालू</string>
   <string name="shared_string_off">बंद</string>
   <string name="backToMenu">पुन्हा मेनूकडे</string>
@@ -91,7 +90,7 @@
   <string name="general_settings">सर्वसाधारण पर्याय</string>
   <string name="user_name">तुमचे ओएसएम युजरनेम</string>
   <string name="user_password">तुमचा ओएसएम पासवर्ड</string>
-  <string name="tip_day_night_mode">दिवस/रात्र पर्याय</string>
+  
   <string name="download_files_not_enough_space">%1$s एमबी डाउनलोड करण्यसाठी पुरेशी जागा शिल्लक नाही (शिल्लक जागा: %2$s).</string>
   <string name="download_files_question_space">शिल्लक जागा आता {2} एमबी! {0} फाइल डाउनलोड करायच्या का ({1} एमबी)?</string>
   
@@ -135,7 +134,7 @@
   <string name="search_offline_clear_search">नविन शोध</string>
   <string name="map_text_size_descr">नकाशावरील नावांसाठी अक्षरांचा आकार ठरवा</string>
   <string name="map_text_size">अक्षरांचा आकार</string>
-  <string name="voice_not_use">वापरू नका</string>
+  
   
   <string name="shared_string_next">पुढे</string>
   <string name="shared_string_previous">मागे</string>
@@ -451,14 +450,14 @@
 	<string name="amenity_type_barrier">अडथळे</string>
 	<string name="unit_of_length_descr">लांबी आणि वेगाचे माप बदला</string>
 	<string name="unit_of_length">मोजमापाचे एकक</string>
-	<string name="tip_search">शोध</string>
-	<string name="tip_navigation">दिशादर्शन</string>
-	<string name="tip_map_switch">नकाशाचा स्त्रोत निवडा</string>
+	
+	
+	
 	<string name="incomplete_locale">अपूर्ण</string>
 	<string name="preferred_locale">भाषा</string>
 	<string name="preferred_locale_descr">भाषा निवडा (बदलल्यावर ओएसएमएएनडी पुन्हा चालू करा)</string>
 	<string name="system_locale">सिस्टिम</string>
-	<string name="tip_favorites">आवडती ठिकाणे</string>
+	
 	<string name="rendering_attr_hideHouseNumbers_name">घरक्रमांक लपवा</string>
     <string name="shared_string_open">उघडा</string>
     <string name="shared_string_places">ठिकाणे</string>

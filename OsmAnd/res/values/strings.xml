@@ -870,7 +870,6 @@
 	<string name="prefer_in_routing_descr">Prefer motorways</string>
     <string name="max_speed_none">none</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
-    <string name="download_hillshade_item">Hillshades</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="download_hillshade_maps">Hillshades</string>
     <string name="local_indexes_cat_srtm">Contour lines</string>

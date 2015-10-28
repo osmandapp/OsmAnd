@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="download_hillshade_item">Տարածքի ռելիեֆ</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="download_hillshade_maps">Տարածքի մգեցված ռելիեֆով քարտեզներ</string>
     
     <string name="local_indexes_cat_av">Ձայնա/Տեսանյութեր</string>
@@ -43,7 +43,7 @@
 	<string name="hno">Տան համարը</string>
     <string name="website">Վեբ կայք</string>
 	<string name="phone">Հեռախոս</string>
-    <string name="tip_recent_changes_1_3_t">Փոխել է 1.3 * Holo Theme (թեման customization)</string>
+    
     <string name="monitoring_settings">Գրանցման ծառայություն և քնած ռեժիմ</string>
     
     <string name="choose_osmand_theme_descr">Ընտրեք ծրագրի դիզայնի թեման</string>
@@ -67,7 +67,7 @@
     <string name="distance_measurement_start_editing">Սկսել խմբագրելը</string>
     <string name="distance_measurement_finish_editing">Ավարտել խմբագրելը</string>
     <string name="distance_measurement_clear_route">Մաքրել բոլոր կետերը</string>
-    <string name="distance_measurement_save_gpx">Հիշել որպես GPX</string>
+    
     <string name="distance_measurement_load_gpx">Բացել գոյուցյուն ունեցող GPX ֆայլը</string>
     <string name="wait_current_task_finished">Խնդրում ենք սպասել մինջև տվյալ պրոցեսը կվերջանա</string>
     <string name="distance_measurement_finish_subtrack">Սկսել նոր ենթաճանապարհ</string>
@@ -119,7 +119,7 @@
     <string name="shared_string_control_stop">Կանգնել</string>
     <string name="shared_string_control_start">ձայնագրել</string>
     <string name="map_widget_av_notes">Աուդիո/Վիդեո նշումներ</string>
-    <string name="tip_map_styles">Քարտեզի Տեսակը</string>
+    
 	<string name="about_version">Տարբերակ :</string>
     
     <string name="local_index_tile_data_downloadable">Բեռնվող: %1$s</string>
