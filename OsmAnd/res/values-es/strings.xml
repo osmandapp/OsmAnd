@@ -18,8 +18,8 @@
   
   <string name="use_fluorescent_overlays">Utilizar superpuestos fluorescentes</string>
   <string name="use_fluorescent_overlays_descr">Usa colores fluorescentes para mostrar trazas y rutas</string>
-  <string name="offline_edition">Edición fuera de línea</string>
-  <string name="offline_edition_descr">Utilizar siempre edición fuera de línea</string>
+  <string name="offline_edition">Edición sin conexión</string>
+  <string name="offline_edition_descr">Utilizar siempre edición sin conexión</string>
   
   <string name="update_poi_does_not_change_indexes">Los cambios a PDIs (puntos de interés) dentro de la aplicación no afectan a los archivos de mapas descargados, los cambios se guardan en un archivo local.</string>
   <string name="local_openstreetmap_uploading">Enviando …</string>
@@ -40,7 +40,7 @@
   <string name="gpx_monitoring_disabled_warn">Registra trazas utilizando el control GPX o mediante la opción \'Grabar viaje\'.</string>
   <string name="show_current_gpx_title">Mostrar traza actual</string>
   
-  <string name="free_version_message">Esta versión libre de OsmAnd está limitada a %1$s descargas y no soporta artículos wikipedia fuera de línea.</string>
+  <string name="free_version_message">Esta versión libre de OsmAnd está limitada a %1$s descargas y no soporta artículos de Wikipedia sin conexión.</string>
   <string name="free_version_title">Versión libre</string>
   <string name="poi_context_menu_showdescription">Mostrar descripción</string>
   <string name="index_name_north_america">Norteamérica</string>
@@ -56,9 +56,9 @@
   <string name="index_name_oceania">Australia y Oceanía</string>
   <string name="index_name_other">Mapas del mundo y temáticos</string>
   <string name="index_name_wiki">Wikipedia mundial</string>
-  <string name="index_name_voice">Mensajes de voz (grabado, funciones limitadas)</string>
-  <string name="index_name_tts_voice">Mensajes de voz (sintetizado TTS, preferido)</string>
-  <string name="amenity_type_osmwiki">Wikipedia (fuera de línea)</string>
+  <string name="index_name_voice">Avisos de voz (grabado, funciones limitadas)</string>
+  <string name="index_name_tts_voice">Avisos de voz (sintetizado TTS, preferido)</string>
+  <string name="amenity_type_osmwiki">Wikipedia (sin conexión)</string>
   <string name="amenity_type_user_defined">Definido por el usuario</string>
   <string name="fav_export_confirmation">Ya existe un archivo anterior con favoritos exportados. ¿Quiere sustituirlo?</string>
   <string name="profile_settings">Ajustes específicos por perfil</string>
@@ -70,7 +70,7 @@
   <string name="routing_settings_descr">Opciones específicas para la navegación</string>
   <string name="global_settings">Ajustes globales</string>
   <string name="index_settings">Gestionar archivos de mapas</string>
-  <string name="index_settings_descr">Descarga y gestiona mapas fuera de línea almacenados en su dispositivo</string>
+  <string name="index_settings_descr">Descarga y gestiona mapas sin conexión, almacenados en su dispositivo</string>
   <string name="general_settings">General</string>
   <string name="general_settings_descr">Configura la presentación y otros ajustes comunes para la aplicación</string>
   <string name="global_app_settings">Ajustes globales de la aplicación</string>
@@ -82,7 +82,7 @@
   <string name="osmand_service_descr">OsmAnd se ejecuta en segundo plano mientras la pantalla está apagada</string>
   
   
-  <string name="switch_to_raster_map_to_see">No hay ningún mapa vectorial fuera de línea presente para esta ubicación. Puede descargar uno en Ajustes (Gestionar mapas), o cambiar al mapa en línea (para esto active el complemento mapas en línea).</string>
+  <string name="switch_to_raster_map_to_see">No hay ningún mapa vectorial presente descargado para esta ubicación. Puede descargar uno en Ajustes (Gestionar mapas), o cambiar al mapa en línea (para esto active el complemento mapas en línea).</string>
   
   
   
@@ -162,7 +162,7 @@
   <string name="favourites_edit_dialog_category">Categoría</string>
   <string name="shared_string_no_thanks">No, gracias</string>
   <string name="basemap_missing">El mapa mundial base (cubriendo todo el mundo a niveles de acercamiento pequeños) no está disponible. Por favor, considere descargar World_basemap_x.obf para tener un entorno completo.</string>
-  <string name="vector_data_missing">No hay datos (\'fuera de línea\') en la tarjeta SD. Considere descargarlos para utilizar mapas fuera de línea.</string>
+  <string name="vector_data_missing">No hay datos (\'descargados\') en la tarjeta SD. Considere descargarlos para utilizar los mapas sin conexión.</string>
   <string name="local_index_gpx_info_show">\n\nMantenga pulsado para opciones</string>
   
   
@@ -185,7 +185,7 @@
   <string name="local_index_transport_data">Datos de transporte público</string>
   <string name="local_index_map_data">Datos de mapa</string>
   <string name="local_indexes_cat_backup">Desactivado</string>
-  <string name="local_indexes_cat_tts">Avisos de voz (sintetizado)</string>
+  <string name="local_indexes_cat_tts">Avisos de voz (sintetizado TTS)</string>
   <string name="local_indexes_cat_voice">Avisos de voz (grabado)</string>
   
   <string name="local_indexes_cat_tile">Mapas de teselas en línea y en caché</string>
@@ -210,10 +210,10 @@
   <string name="gpx_option_reverse_route">Invertir dirección GPX</string>
   <string name="gpx_option_destination_point">Utilizar destino actual</string>
   <string name="gpx_option_from_start_point">Pasar a lo largo de la traza completa</string>
-  <string name="switch_to_vector_map_to_see">Mapa vectorial fuera de línea presente para esta ubicación.
-\n\nPara utilizar active en \'Menú\' → \'Configurar mapa\' → \'Fuente del mapa…\' → \'Mapas vectoriales fuera de línea\'.</string>
-  <string name="choose_audio_stream">Salida de indicaciones de voz</string>
-  <string name="choose_audio_stream_descr">Elige el canal para reproducir indicaciones de voz (dependiente del sistema)</string>
+  <string name="switch_to_vector_map_to_see">Mapa vectorial sin conexión presente para esta ubicación.
+\n\nPara utilizarlo, activarlo en \'Menú\' → \'Configurar mapa\' → \'Fuente del mapa…\' → \'Mapas vectoriales sin conexión\'.</string>
+  <string name="choose_audio_stream">Salida de los avisos de voz</string>
+  <string name="choose_audio_stream_descr">Elige el canal para reproducir los avisos de voz (dependiente del sistema)</string>
   <string name="voice_stream_voice_call">Audio de llamada de voz</string>
   <string name="voice_stream_notification">Notificación auditiva</string>
   <string name="voice_stream_music">Audio de Media/música</string>
@@ -243,7 +243,7 @@
   
   
   <string name="create_poi_link_to_osm_doc"><u>OSM en línea</u> clasificación de mapa con imágenes</string>
-  <string name="error_doing_search">Se produjo un error en la búsqueda fuera de línea</string>
+  <string name="error_doing_search">Se produjo un error en la búsqueda sin conexión</string>
   <string name="search_offline_geo_error">No se pudo analizar el geo intento \'%s\'</string>
   <string name="search_osm_offline">Buscar ubicación geográfica</string>
   <string name="system_locale">Sistema</string>
@@ -321,8 +321,8 @@
   <string name="version_index_is_big_for_memory">La versión \'\'{0}\'\' de índices no cabe en memoria</string>
   <string name="version_index_is_not_supported">No se soporta la versión \'\'{0}\'\' de índices</string>
   <string name="use_osmand_routing_service">Navegación OsmAnd &gt;20km</string>
-  <string name="use_osmand_routing_service_descr">El uso de la navegación fuera de línea OsmAnd se aplica solo a rutas &gt; 20 km (experimental)</string>
-  <string name="osmand_routing_experimental">La navegación fuera de línea OsmAnd es una característica experimental y no funciona para distancias de más de unos 20 km.\n\nEl servicio de navegación se cambia temporalmente al servicio con conexión CloudMade.</string>
+  <string name="use_osmand_routing_service_descr">El uso de la navegación sin conexión de OsmAnd, se aplica solo a rutas mayores a 20 km (experimental)</string>
+  <string name="osmand_routing_experimental">La navegación sin conexión de OsmAnd, es una característica experimental y no funciona para distancias mayores a 20 km.\n\nEl servicio de navegación, se cambió temporalmente al servicio en línea CloudMade.</string>
   <string name="specified_dir_doesnt_exist">No se puede encontrar la carpeta especificada.</string>
   <string name="application_dir">Carpeta de almacenamiento de datos</string>
   
@@ -335,8 +335,8 @@
   <string name="select_build_to_install">Seleccione una de las compilaciones OsmAnd a instalar</string>
   <string name="contribution_activity">Instalar compilación</string>
   <string name="gps_status_app_not_found">La aplicación GPS status no está instalada. ¿Buscar en la tienda de aplicaciones?</string>
-  <string name="voice_is_not_available_msg">Las indicaciones de voz no están disponibles, vaya a \'Ajustes\' → \'General\' → \'Indicaciones de voz\' y elija o descargue un paquete de mensajes de voz.</string>
-  <string name="voice_is_not_available_title">No se han seleccionado indicaciones de voz</string>
+  <string name="voice_is_not_available_msg">Los avisos de voz, no están disponibles. Vaya a \'Ajustes\' → \'General\' → \'Avisos de voz\' y elija o descargue un paquete de avisos de voz.</string>
+  <string name="voice_is_not_available_title">No se han seleccionado avisos de voz</string>
   <string name="daynight_mode_day">Día</string>
   <string name="daynight_mode_night">Noche</string>
   <string name="daynight_mode_auto">Alba/Ocaso</string>
@@ -385,7 +385,7 @@
   <string name="gpx_files_not_found">No se encontró archivos GPX en la carpeta de trazas</string>
   <string name="layer_gpx_layer">Trazas GPX…</string>
   <string name="error_reading_gpx">Error leyendo datos GPX</string>
-  <string name="vector_data">Mapas vectoriales fuera de línea</string>
+  <string name="vector_data">Mapas vectoriales sin conexión</string>
   <string name="transport_context_menu">Buscar transporte en parada</string>
   
   <string name="osb_bug_name">Nota</string>
@@ -405,7 +405,7 @@
   
   <string name="error_occurred_loading_gpx">Se produjo un error al cargar el GPX</string>
   <string name="send_report">Enviar informe</string>
-  <string name="none_region_found">No hay datos fuera de línea para las regiones en la tarjeta SD. Descargue las regiones desde Internet.</string>
+  <string name="none_region_found">No hay datos de regiones descargados en la tarjeta SD. Descargue las regiones desde Internet.</string>
   <string name="poi_namefinder_query_empty">Introduzca la consulta para buscar el PDI</string>
   <string name="any_poi">Cualquiera</string>
   <string name="layer_transport_route">Ruta de transporte</string>
@@ -443,8 +443,8 @@
   <string name="search_poi_filter">Filtro</string>
   <string name="menu_mute_off">Sonido on</string>
   <string name="menu_mute_on">Sonido off</string>
-  <string name="voice_provider_descr">Selecciona indicaciones de voz para la navegación</string>
-  <string name="voice_provider">Indicaciones de voz</string>
+  <string name="voice_provider_descr">Selecciona el aviso de voz para la navegación</string>
+  <string name="voice_provider">Avisos de voz</string>
   <string name="voice_data_initializing">Inicializando datos de voz…</string>
   <string name="voice_data_not_supported">Versión no soportada de datos de voz</string>
   <string name="voice_data_corrupted">El dato de voz especificado está corrupto</string>
@@ -463,7 +463,7 @@
   <string name="route_head">Partida</string>
   <string name="first_time_continue">Después</string>
   <string name="first_time_download">Descargar regiones</string>
-  <string name="first_time_msg">Gracias por utilizar OsmAnd. Para muchas características de esta aplicación necesita algunos datos regionales fuera de línea que puede descargar a través de \'Ajustes\' → \'Gestionar mapas\'. Después será capaz de ver los mapas, ubicar direcciones, buscar PDIs (puntos de interés) y encontrar el transporte público.</string>
+  <string name="first_time_msg">Gracias por utilizar OsmAnd. Para muchas características de esta aplicación, necesita algunos datos regionales que puede descargar a través de \'Ajustes\' → \'Gestionar mapas\'. Después será capaz de ver los mapas, ubicar direcciones, buscar PDIs (puntos de interés) y encontrar el transporte público.</string>
   <string name="search_poi_location">Buscando señal…</string>
   <string name="search_near_map">Buscar cerca del centro del mapa</string>
   <string name="search_nearby">Buscar cercanos</string>
@@ -493,7 +493,7 @@
   <string name="update_poi_success">Los datos del PDI fueron correctamente actualizados (fueron cargados {0})</string>
   <string name="update_poi_error_local">Error al actualizar la lista de PDIs locales</string>
   <string name="update_poi_error_loading">Error durante la descarga de datos del servidor</string>
-  <string name="update_poi_no_offline_poi_index">No hay datos del PDI fuera de línea para esta área</string>
+  <string name="update_poi_no_offline_poi_index">No hay datos descargados del PDI, para esta área</string>
   <string name="update_poi_is_not_available_for_zoom">No está disponible la actualización de PDIs para niveles de acercamiento pequeños</string>
   <string name="context_menu_item_update_poi">Actualizar PDI</string>
   <string name="context_menu_item_update_map_confirm">¿Actualizar datos locales vía Internet?</string>
@@ -511,7 +511,7 @@
   <string name="searching_address">Buscando dirección…</string>
   <string name="search_osm_nominatim">Buscar en línea utilizando OSM Nominatim</string>
   <string name="hint_search_online">Búsqueda en línea: Número de casa, calle, ciudad</string>
-  <string name="search_offline_address">Búsqueda fuera de línea</string>
+  <string name="search_offline_address">Búsqueda sin conexión</string>
   <string name="search_online_address">Búsqueda en línea</string>
   <string name="max_level_download_tile">Máx. acercamiento con conexión</string>
   <string name="max_level_download_tile_descr">Elige el nivel de acercamiento máximo para descargar teselas de mapas con conexión</string>
@@ -520,7 +520,7 @@
   <string name="router_service">Servicio de navegación</string>
   <string name="sd_dir_not_accessible">¡No se puede acceder a la carpeta de almacenamiento en la tarjeta SD!</string>
   <string name="download_question">¿Descargar {0} - {1} ?</string>
-  <string name="download_question_exist">Ya existen datos fuera de línea ({1}) para {0}. ¿Quiere actualizarlos ({2})?</string>
+  <string name="download_question_exist">Ya existen datos descargados ({1}) para {0}. ¿Quiere actualizarlos ({2})?</string>
   <string name="address">Dirección</string>
   <string name="shared_string_download_successful">Descarga correcta</string>
   
@@ -715,7 +715,7 @@
   <string name="edit_filter_delete_message">Se borró el filtro {0}</string>
   <string name="edit_filter_create_message">Se creó el filtro {0}</string>
   
-  <string name="offline_navigation_not_available">La navegación fuera de línea OSMAnd no está disponible temporalmente.</string>
+  <string name="offline_navigation_not_available">La navegación desconectada de OsmAnd, no está disponible temporalmente.</string>
   <string name="left_side_navigation">Conducción por la izquierda</string>
   <string name="left_side_navigation_descr">Seleccione en países con tráfico por la izquierda</string>
   
@@ -738,7 +738,7 @@
   
   
   
-  <string name="osmand_development_plugin_description">Este complemento muestra los ajustes de características de desarrollo y depuración para probar la simulación de rutas, el rendimiento del renderizado en pantalla, o mensajes de voz.
+  <string name="osmand_development_plugin_description">Este complemento muestra los ajustes de características de desarrollo y depuración para probar la simulación de rutas, el rendimiento del renderizado en pantalla, o los avisos de voz.
 \n\nEstos ajustes están destinados para los desarrolladores y no son necesarios para el usuario general.</string>
   <string name="plugins_screen">Complementos</string>
   
@@ -753,7 +753,7 @@
   <string name="debugging_and_development">Desarrollo de OsmAnd</string>
   <string name="native_rendering">Dibujo nativo</string>
   
-  <string name="test_voice_prompts">Prueba mensajes de voz</string>
+  <string name="test_voice_prompts">Probar avisos de voz</string>
   
   <string name="send_files_to_osm">¿Enviar archivos GPX a OSM?</string>
   <string name="gpx_visibility_txt">Visibilidad</string>
@@ -1028,8 +1028,8 @@
     <string name="download_srtm_maps">Curvas de nivel</string>
     
 	
-<string name="audionotes_plugin_description">Este complemento de notas de audio/vídeo proporciona la funcionalidad para tomar notas de audio/fotografía/vídeo durante un viaje, utilizando un botón en la pantalla del mapa, o directamente en el menú contextual para cualquier posición en el mapa.</string>
-    <string name="audionotes_plugin_name">Notas de audio/vídeo</string>
+<string name="audionotes_plugin_description">Este complemento, proporciona la funcionalidad para tomar notas de audio/fotografía/vídeo durante un viaje, utilizando un botón en la pantalla del mapa, o directamente en el menú contextual para cualquier posición en el mapa.</string>
+    <string name="audionotes_plugin_name">Notas multimedia</string>
     <string name="osmand_srtm_short_description_80_chars">Complemento OsmAnd para curvas de nivel en línea</string>
     <string name="osmand_srtm_long_description_1000_chars">"Este complemento proporciona una capa superpuesta de curvas de nivel y una capa (de relieve) sombreada que se pueden visualizar sobre los mapas descargados de OsmAnd. Esta funcionalidad será muy apreciada por atletas, caminantes, excursionistas, y cualquiera interesado en la estructura de relieve de un paisaje.
 \n\nLos datos globales (entre 70 grados norte y 70 grados sur) se basan en mediciones de SRTM (Shuttle Radar Topography Mission, o en español Misión de Topografía por Radar desde Transbordador) y ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer, o en español Radiómetro Espacial Avanzado de Emisión Térmica y Reflexión), un instrumento de captura de imágenes a bordo de Terra, el satélite insignia del Sistema de Observación de la Tierra de la NASA. ASTER es un esfuerzo cooperativo entre la NASA, el Ministerio de Economía, Comercio e Industria de Japón (METI) y Sistemas Espaciales de Japón (J-spacesystems). "</string>
@@ -1053,7 +1053,7 @@
     <string name="recording_default_name">Grabación</string>
     <string name="shared_string_control_stop">Parar</string>
     <string name="shared_string_control_start">Iniciar</string>
-    <string name="map_widget_av_notes">Notas de audio</string>
+    <string name="map_widget_av_notes">Notas multimedia</string>
     <string name="av_def_action_video">Grabar vídeo</string>
     <string name="av_def_action_audio">Grabar audio</string>
     <string name="av_widget_action">Acción del control predeterminado</string>
@@ -1071,7 +1071,7 @@
     <string name="recording_description">Grabado %1$s %3$s %2$s</string>
     <string name="srtm_paid_version_msg">Considere la compra del complemento curvas de nivel en la tienda de aplicaciones para apoyar desarrollos adicionales.</string>
     <string name="srtm_paid_version_title">Complemento curvas de nivel</string>
-    <string name="dropbox_plugin_description">El complemento Dropbox permite sincronizar trazas y notas de audio/vídeo con su cuenta de dropbox.</string>
+    <string name="dropbox_plugin_description">El complemento Dropbox, permite sincronizar trazas y notas multimedia con su cuenta de Dropbox.</string>
     <string name="dropbox_plugin_name">Complemento Dropbox</string>
     
     <string name="intermediate_points_change_order">Cambiar orden</string>
@@ -1083,7 +1083,7 @@
     <string name="clear_dest_confirm">¿Seguro que quiere borrar su punto de destino (y puntos de ruta)?</string>
     <string name="precise_routing_mode_descr">Habilitar para calcular rutas precisas sin interferencias. Aún está limitado por la distancia y es lento.</string>
     <string name="precise_routing_mode">Enrutado preciso (alfa)</string>
-    <string name="local_indexes_cat_av">Datos de Audio/Vídeo</string>
+    <string name="local_indexes_cat_av">Datos multimedia</string>
     
     <string name="support_new_features_descr">Dona para ver nuevas características implementadas en la aplicación</string>
 	
@@ -1102,32 +1102,32 @@
     <string name="item_unchecked">desmarcado</string>
     <string name="shared_string_map">Mapa</string>
     <string name="access_arrival_time">Hora de llegada</string>
-    <string name="osmand_extended_description_4000_chars">" OsmAnd (OSM Automated Navigation Directions, o traducido al español, Guía de navegación automatizada OSM) es un mapa y una aplicación de navegación con acceso a datos de todo el mundo, de alta calidad y gratuitos de OpenStreetMap (OSM). Todos los datos de los mapas se pueden almacenar en la tarjeta de memoria del dispositivo para su uso fuera de línea. A través del GPS de su dispositivo, OsmAnd ofrece indicaciones de navegación, visuales y de voz, para automóvil, bicicleta y peatonal. Todas las funciones principales funcionan tanto en línea como fuera de línea (no necesita Internet).
+    <string name="osmand_extended_description_4000_chars">" OsmAnd (OSM Automated Navigation Directions, o traducido al español, Guía de navegación automatizada OSM) es un mapa y una aplicación de navegación con acceso a datos de todo el mundo, de alta calidad y gratuitos de OpenStreetMap (OSM). Todos los datos de los mapas se pueden almacenar en la tarjeta de memoria del dispositivo para su uso sin conexión. A través del GPS de su dispositivo, OsmAnd ofrece avisos de navegación, visuales y de voz, para el automóvil, bicicleta y el peatón. Todas las funciones principales funcionan tanto conectado como desconectado (no necesita Internet).
 \n\nOsmAnd+ es la versión de pago de la aplicación. Comprándola da soporte al proyecto, financia el desarrollo de nueva características y obtiene las últimas actualizaciones. Puede probar la aplicación antes de comprarla instalando la versión libre llamada OsmAnd.
 \n\n Algunas de las características principales:
 \n\n* Navegación:
-\n\n- Funciona en línea (rápido) o fuera de línea (sin cargos de roaming cuando está en el extranjero)
-\n- Indicaciones por voz giro-a-giro (grabadas y voces sintetizadas)
+\n\n- Funciona en línea (rápido) o sin conexión (sin cargos de roaming cuando está en el extranjero)
+\n- Avisos por voz giro-a-giro (grabadas y voces sintetizadas)
 \n- Indicaciones de carril opcional, mostrado de nombre de las calles y tiempo estimado de llegada
 \n- Soporta puntos intermedios en su itinerario (ruta)
 \n- Recalcula automáticamente la ruta cada vez que se desvía
-\n- Búsqueda de lugares por dirección, por tipo (por ejemplo: restaurante, hotel, gasolinera, museo), o mediante coordenadas geográficas
+\n- Busca lugares por dirección, por tipo (p.e: restaurante, hotel, gasolinera, museo), o mediante coordenadas geográficas
 \n\n* Visualización:
 \n\n- Muestra su posición y orientación en el mapa
-\n- Opcionalmente orienta el mapa según la brújula o el sentido del movimiento
+\n- Orienta el mapa según la brújula o el sentido del movimiento
 \n- Guarda sus lugares más importantes como favoritos
 \n- Muestra PDIs (puntos de interés) a su alrededor
 \n- Puede mostrar mapas especializados en línea
 \n- Puede mostrar imágenes de satélite (de Bing)
 \n- Puede mostrar superposiciones diferentes como trazas GPX de navegación/turismo y mapas adicionales con transparencia personalizable
-\n- Opcionalmente muestra los nombres de los lugares en inglés, idioma local o transcripción fonética
+\n- Muestra los nombres de los lugares en inglés, idioma local o transcripción fonética
 \n\nUso de datos de OpenStreetMap y Wikipedia:
 \n\n- Información de alta calidad a partir de los mejores proyectos colaborativos del mundo
-\n- Mapas globales de OpenStreetMap, disponibles según el país o región
+\n- Dispone de mapas globales de OpenStreetMap, según el país o región
 \n- Puntos de interés de Wikipedia, ideal para hacer visitas turísticas
 \n- Descarga ilimitada gratuita, directamente desde la aplicación
 \n- Mapas siempre actualizados (al menos una vez al mes)
-\n- Mapas vectoriales compactos fuera de línea
+\n- Mapas vectoriales compactos sin conexión
 \n- Selección entre mapas completos o sólo la red de carreteras (ejemplo: el mapa completo de Japón es de 700 MB y sólo 200 MB para la red de carreteras)
 \n- También admite teselas de mapas en línea o almacenadas localmente\n\nCaracterísticas de seguridad:
 \n\n- Conmutación automática de la vista día/noche
@@ -1143,7 +1143,7 @@
 \n- Muestra curvas de nivel y relieve sombreado (a través de un complemento adicional)
 \n\nContribuir directamente a OpenStreetMap:\n\n- Informar de los errores del mapa
 \n- Subir rutas GPX a OSM directamente desde la aplicación
-\n- Añadir puntos de interés y subirlos directamente a OSM (o posteriormente si está fuera de línea)
+\n- Añadir puntos de interés y subirlos directamente a OSM (o posteriormente si está desconectado)
 \n- Grabación de viaje opcional también en segundo plano (mientras el dispositivo está en modo reposo)
 \n\nOsmAnd es código abierto y se es desarrollado activamente. Todo el mundo puede contribuir a la aplicación informando de fallos, mejorando las traducciones, o codificación nuevas características. El proyecto se encuentra en un estado muy animado con mejoras continuas gracias a todas estas formas de interacción entre usuarios y desarrolladores. El avance del proyecto también necesita de contribuciones financieras para pagar el desarrollo, codificación y pruebas de nuevas funcionalidades. Al comprar OsmAnd+ está ayudando a que la aplicación sea aún más impresionante! También es posible financiar nuevas características específicas, o hacer una donación general a osmand.net.
 \n\nCobertura y calidad aproximadas del mapa:
@@ -1236,14 +1236,14 @@
 	<string name="av_camera_focus_continuous">La camera intenta enfocar continuamente</string>
 	<string name="av_photo_play_sound">Sonido al hacer fotos</string>
 	<string name="av_photo_play_sound_descr">Elige si reproducir un sonido al hacer fotos</string>
-<string name="context_menu_item_directions_from">Cómo llegar desde</string>
+<string name="context_menu_item_directions_from">Ir desde aquí</string>
     <string name="route_via">Vía:</string>
     <string name="route_from">Desde:</string>
     
 	
     <string name="speak_speed_limit">Límites de velocidad</string>
     <string name="speak_cameras">Radares</string>
-	<string name="speak_traffic_warnings">Advertencias de tráfico</string>
+	<string name="speak_traffic_warnings">Avisos de tráfico</string>
 	<string name="osb_author_dialog_password">Contraseña OSM (opcional)</string>
 	    
     
@@ -1256,7 +1256,7 @@
     <string name="clear_intermediate_points">Borrar puntos intermedios</string>
     <string name="keep_intermediate_points">Mantener puntos intermedios</string>
     <string name="new_directions_point_dialog">Ya tiene puntos intermedios definidos.</string>
-    <string name="context_menu_item_directions_to">Cómo llegar a</string>
+    <string name="context_menu_item_directions_to">Llegar hasta aquí</string>
     <string name="route_descr_map_location">Mapa: </string>
     <string name="route_to">Hacia:</string>
     <string name="about_version">Versión:</string>
@@ -1290,12 +1290,12 @@
     <string name="edit_tilesource_elliptic_tile">Mercator elíptica</string>
     <string name="map_widget_fps_info">Info depuración de FPS</string>
 	<string name="base_world_map">Mapa base mundial</string>
-	<string name="osmand_plus_extended_description_4000_chars">" OsmAnd (OSM Automated Navigation Directions, o traducido al español, Guía de navegación automatizada OSM) es un mapa y una aplicación de navegación con acceso a datos de todo el mundo, de alta calidad y gratuitos de OpenStreetMap (OSM). Todos los datos de los mapas se pueden almacenar en la tarjeta de memoria del dispositivo para su uso fuera de línea. A través del GPS de su dispositivo, OsmAnd ofrece indicaciones de navegación, visuales y de voz, para automóvil, bicicleta y peatonal. Todas las funciones principales funcionan tanto en línea como fuera de línea (no necesita Internet).
+	<string name="osmand_plus_extended_description_4000_chars">" OsmAnd (OSM Automated Navigation Directions, o traducido al español, Guía de navegación automatizada OSM) es un mapa y una aplicación de navegación con acceso a datos de todo el mundo, de alta calidad y gratuitos de OpenStreetMap (OSM). Todos los datos de los mapas se pueden almacenar en la tarjeta de memoria del dispositivo para su uso fuera de línea. A través del GPS de su dispositivo, OsmAnd ofrece avisos de navegación, visuales y de voz, para el automóvil, bicicleta y el peatón. Todas las funciones principales funcionan tanto en línea como fuera de línea (no necesita Internet).
 \n\nOsmAnd+ es la versión de pago de la aplicación. Comprándola da soporte al proyecto, financia el desarrollo de nueva características y obtiene las últimas actualizaciones. Puede probar la aplicación antes de comprarla instalando la versión libre llamada OsmAnd.
 \n\n Algunas de las características principales:
 \n\n* Navegación:
 \n\n- Funciona en línea (rápido) o fuera de línea (sin cargos de roaming cuando está en el extranjero)
-\n- Indicaciones por voz giro-a-giro (grabadas y voces sintetizadas)
+\n- Avisos por voz giro-a-giro (grabadas y voces sintetizadas)
 \n- Indicaciones de carril opcional, mostrado de nombre de las calles y tiempo estimado de llegada
 \n- Soporta puntos intermedios en su itinerario (ruta)
 \n- Recalcula automáticamente la ruta cada vez que se desvía
@@ -1463,7 +1463,7 @@
 	<string name="index_item_world_seamarks">Náutico mundial</string>
 	<string name="index_item_world_bitcoin_payments">Pagos bitcoin mundiales</string>
 	<string name="index_item_world_basemap">Mapa mundial general</string>
-    <string name="index_item_world_ski">Mapa de esquí mundial</string>
+    <string name="index_item_world_ski">Mapa mundial de esquí</string>
     <string name="lang_hr">Croata</string>
     <string name="lang_zh">Chino</string>
     <string name="lang_pt_br">Portugués (Brasil)</string>
@@ -1789,7 +1789,7 @@
     <string name="map_locale">Idioma del mapa</string>
     <string name="rendering_attr_transportStops_name">Paradas de transporte</string>
     <string name="navigate_point_zone">Zona</string>
-    <string name="voices">Mensajes de voz</string>
+    <string name="voices">Avisos de voz</string>
 	<string name="dash_download_msg_none">¿Quiere descargar los mapas sin conexión?</string>
     <string name="rendering_attr_roadStyle_name">Estilo de carretera</string>
     <string name="rendering_value_default_name">Predefinido</string>
@@ -1835,10 +1835,10 @@
 	
 <string name="edit_group">Editar grupo</string>
     <string name="plugin_install_needs_network">Necesita una conexión a Internet para instalar este complemento.</string>
-<string name="plugin_ski_name">Mapa vista esquí</string>
-    <string name="plugin_nautical_name">Mapa vista náutica</string>
+<string name="plugin_ski_name">Vista invernal</string>
+    <string name="plugin_nautical_name">Vista náutica</string>
     <string name="world_ski_missing">Para mostrar mapas de esquí, necesita ser descargado el mapa especial sin conexión</string>
-    <string name="nautical_maps_missing">Para mostrar mapas náuticos, necesita ser descargado el mapa especial sin conexión</string>
+    <string name="nautical_maps_missing">Para mostrar los mapas náuticos, necesita ser descargado el mapa especial sin conexión</string>
 	<string name="shared_string_enable">Activar</string>
 	<string name="shared_string_disable">Desactivar</string>
 	<string name="get_plugin">Obtener</string>
@@ -1856,10 +1856,10 @@
 	
 	
 	<string name="plugin_nautical_descr">"Este complemento enriquece el mapa y la navegación de OsmAnd al producir también mapas náuticos para el canotaje, vela y otros tipos de deportes acuáticos.
-\n\nUn mapa especial complementado para OsmAnd proporcionará toda las marcas de navegación náutica y símbolos cartográficos, para el interior así como para la navegación cerca de la costa. La descripción de cada marca de navegación proporciona los datos necesarios para su identificación y su significado (categoría, forma, color, número, referencia, etc.).
+\n\nUn mapa especial complementado para OsmAnd que proporciona toda las marcas de navegación náutica y símbolos cartográficos, para el interior, así como para la navegación cerca de la costa. La descripción de cada marca de navegación proporciona los datos necesarios para su identificación y su significado (categoría, forma, color, número, referencia, etc.).
 \n\nPara volver a uno de los estilos de mapas convencionales de OsmAnd, simplemente desactive este complemento de nuevo, o cambie el \'Estilo del mapa\' en \'Configurar mapa\' cuando desee. "</string>
 	<string name="plugin_ski_descr">"Este complemento para OsmAnd pone a su alcance detalles sobre pistas de esquí de descenso, de travesía, rutas de esquí alpino, teleféricos y remontes a nivel mundial. Las rutas y pistas se muestran por código de color en función de su dificultad, y representados con un estilo del mapa especial \'Invierno\' que lo asemeja a un paisaje invernal nevado.
-\n\nActivando esta vista cambia el estilo del mapa a \'Invierno y esquí\', mostrando las características del terreno en condiciones invernales. Esta vista puede ser revertida desactivando de nuevo aquí, o cambiando el \'Estilo del mapa\' en \'Configurar mapa\' cuando desee. "</string>
+\n\nActivando esta vista cambia el estilo del mapa a \'Invernal\', mostrando las características del terreno en condiciones invernales. Esta vista puede ser revertida desactivando de nuevo aquí, o cambiando el \'Estilo del mapa\' en \'Configurar mapa\' cuando desee. "</string>
 	<string name="plugin_touringview_descr">"Activando esta vista cambia el estilo del mapa OSMAnd a la \'Vista turística\', que es una vista de alto detalle especial para viajeros y conductores profesionales.
 \n\nEsta vista proporciona, en cualquier nivel de acercamiento del mapa, la máxima cantidad de detalles de viaje disponible en los datos del mapa (especialmente carreteras, senderos, caminos y marcas de orientación).
 \n\nTambién representa claramente todos los tipos de carreteras sin ambigüedades por códigos de color, que es útil, por ejemplo, cuando se conducen vehículos grandes.\n\nY proporciona opciones especiales de turismo como mostrar las rutas de bicicleta o rutas de montaña alpina.\n\nNo es necesario descargar un mapa especial, la vista es creada a partir de nuestros mapas estándar.
@@ -1993,7 +1993,7 @@
     <string name="lang_et">Estonio</string>
     <string name="lang_ceb">Cebuano</string>
     <string name="archive_wikipedia_data">Tienes datos descargados de Wikipedia que son antiguos e incompatibles. ¿Deseas archivarlos?</string>
-    <string name="download_wikipedia_files">¿Deseas descargar datos adicionales de la Wikipedia (%1$s MB)?</string>
+    <string name="download_wikipedia_files">¿Deseas descargar datos adicionales de Wikipedia (%1$s MB)?</string>
     <string name="lang_bpy">Bishnupriya</string>
     <string name="lang_ml">Malayalam</string>
     <string name="lang_os">Osetio</string>
@@ -2042,7 +2042,7 @@
 	<string name="shared_string_undo">Deshacer</string>
 	<string name="shared_string_skip">Omitir</string>
 	<string name="app_name_osmand">OsmAnd</string>
-	<string name="offline_maps_and_navigation">Mapas y navegación\nfuera de línea</string>
+	<string name="offline_maps_and_navigation">Mapas y navegación\nsin conexión</string>
 <string name="commit_poi">Enviar PDI</string>
 <string name="routing_attr_avoid_shuttle_train_name">Evitar tren de enlace</string>
 	<string name="routing_attr_avoid_shuttle_train_description">Evite tomar trenes de enlace</string>
@@ -2139,4 +2139,5 @@
     <string name="go_to_map">Ir al mapa</string>
     <string name="shared_string_qr_code">Código QR</string>
     <string name="enter_country_name">Ingrese nombre del país</string>
-</resources>
+<string name="world_map_download_descr">El mapa base mundial (abarca todo el mundo en acercamientos pequeños), falta o está desactualizado. Considere descargarlo para un entorno completo.</string>
+    </resources>
