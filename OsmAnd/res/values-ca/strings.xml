@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="show_warnings_title">Mostra els missatges d\'avís…</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="show_warnings_title">Mostra els missatges d\'avís…</string>
 <string name="map_widget_fluorescent">Rutes amb fluorescència</string>
 <string name="map_widget_show_ruler">Mostra el regle</string>
 <string name="map_widget_transparent">Aparença amb transparència</string>
@@ -1973,11 +1974,15 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
 <string name="update_all">Actualitzeu tot (%1$s MB)</string>
     <string name="free_downloads_used">Baixades gratuïtes realitzades</string>
     <string name="free_downloads_used_description">Podeu veure quantes baixades gratuïtes heu fet</string>
-<string name="simulate_initial_startup_descr">Restaura el senyalitzador de primera engegada, mantenint altres paràmetres en l\'estat original</string>
-    <string name="simulate_initial_startup">Simula engegada inicial</string>
+<string name="simulate_initial_startup_descr">Configura el senyalitzador de primera engegada de l\'aplicació, mantenint la resta de paràmetres sense canvis</string>
+    <string name="simulate_initial_startup">Simula l\'engegada inicial de l\'aplicació</string>
     <string name="share_geo">geo:</string>
     <string name="share_menu_location">Comparteix la posició</string>
     <string name="shared_string_send">Envia</string>
     <string name="hello_blank_fragment">Hola fragment buit</string>
     <string name="application_dir_description">Trieu on voleu desar els fitxers de mapes.</string>
-</resources>
+<string name="shared_string_qr_code">Codi QR</string>
+    <string name="map_downloaded">Mapa baixat</string>
+    <string name="map_downloaded_descr">S\'ha baixat el mapa de %1$s. Torneu al mapa per començar a utilitzar-lo.</string>
+    <string name="go_to_map">Vés al mapa</string>
+    </resources>
