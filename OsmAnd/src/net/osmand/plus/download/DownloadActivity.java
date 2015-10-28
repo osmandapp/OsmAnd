@@ -24,6 +24,7 @@ import net.osmand.access.AccessibleToast;
 import net.osmand.map.WorldRegion;
 import net.osmand.map.WorldRegion.RegionParams;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.DrivingRegion;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
@@ -41,6 +42,8 @@ import net.osmand.plus.download.ui.DownloadResourceGroupFragment;
 import net.osmand.plus.download.ui.GoToMapFragment;
 import net.osmand.plus.download.ui.LocalIndexesFragment;
 import net.osmand.plus.download.ui.UpdatesIndexFragment;
+import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
+import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 
 import org.apache.commons.logging.Log;
@@ -84,6 +87,11 @@ public class DownloadActivity extends ActionBarProgressActivity implements Downl
 	private DownloadIndexesThread downloadThread;
 	private DownloadValidationManager downloadValidationManager;
 	protected WorldRegion downloadItem;
+
+	private boolean srtmDisabled;
+	private boolean srtmNeedsInstallation;
+	private boolean nauticalPluginDisabled;
+	private boolean freeVersion;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -173,6 +181,7 @@ public class DownloadActivity extends ActionBarProgressActivity implements Downl
 	@Override
 	protected void onResume() {
 		super.onResume();
+		initAppStatusVariables();
 		getMyApplication().getAppCustomization().resumeActivity(DownloadActivity.class, this);
 		downloadThread.setUiActivity(this);
 		downloadInProgress();
@@ -613,5 +622,30 @@ public class DownloadActivity extends ActionBarProgressActivity implements Downl
 		descriptionText.setMovementMethod(LinkMovementMethod.getInstance());
 
 		messageTextView.setText(R.string.device_memory);
+	}
+
+	public boolean isSrtmDisabled() {
+		return srtmDisabled;
+	}
+
+	public boolean isSrtmNeedsInstallation() {
+		return srtmNeedsInstallation;
+	}
+
+	public boolean isNauticalPluginDisabled() {
+		return nauticalPluginDisabled;
+	}
+
+	public boolean isFreeVersion() {
+		return freeVersion;
+	}
+
+	public void initAppStatusVariables() {
+		srtmDisabled = OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) == null;
+		nauticalPluginDisabled = OsmandPlugin.getEnabledPlugin(NauticalMapsPlugin.class) == null;
+		freeVersion = Version.isFreeVersion(getMyApplication());
+		OsmandPlugin srtmPlugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
+		srtmNeedsInstallation = srtmPlugin == null || srtmPlugin.needsInstallation();
+
 	}
 }

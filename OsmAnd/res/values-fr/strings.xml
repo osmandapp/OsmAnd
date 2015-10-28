@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="offline_edition">Modifications hors-ligne</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="offline_edition">Modifications hors-ligne</string>
   <string name="offline_edition_descr">Toujours utiliser l\'édition hors-ligne</string>
   
   <string name="update_poi_does_not_change_indexes">Les modifications de PI dans l\'application sont sans effet sur les cartes téléchargées, les modifications sont enregistrées dans un fichier.</string>
@@ -2073,4 +2074,6 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 <string name="map_downloaded">Carte téléchargée</string>
     <string name="go_to_map">Aller à la carte</string>
     <string name="map_downloaded_descr">La carte %1$s a été téléchargée. Allez à la carte pour l’utiliser.</string>
-    </resources>
+    <string name="shared_string_qr_code">QR-code</string>
+    <string name="enter_country_name">Saisissez le pays</string>
+</resources>

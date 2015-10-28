@@ -33,7 +33,6 @@ import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.download.ui.LocalIndexesFragment.LocalIndexOperationTask;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
-import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 
 import java.io.File;
@@ -121,14 +120,11 @@ public class ItemViewHolder {
 		this.showTypeInName = showTypeInName;
 	}
 
-
-	// FIXME don't initialize on every row 
 	private void initAppStatusVariables() {
-		srtmDisabled = OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) == null;
-		nauticalPluginDisabled = OsmandPlugin.getEnabledPlugin(NauticalMapsPlugin.class) == null;
-		freeVersion = Version.isFreeVersion(context.getMyApplication());
-		OsmandPlugin srtmPlugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
-		srtmNeedsInstallation = srtmPlugin == null || srtmPlugin.needsInstallation();
+		srtmDisabled = context.isSrtmDisabled();
+		nauticalPluginDisabled = context.isNauticalPluginDisabled();
+		freeVersion = context.isFreeVersion();
+		srtmNeedsInstallation = context.isSrtmNeedsInstallation();
 	}
 
 	public void bindIndexItem(final IndexItem indexItem, final DownloadResourceGroup parentOptional) {
