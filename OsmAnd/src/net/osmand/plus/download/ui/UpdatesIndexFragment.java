@@ -11,6 +11,7 @@ import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
@@ -33,9 +34,9 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		invalidateListView();
 		setHasOptionsMenu(true);
 	}
+	
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -47,6 +48,12 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 		super.onActivityCreated(savedInstanceState);
 		updateErrorMessage();
 	}
+	
+	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+		invalidateListView(activity);
+	}
 
 	@Override
 	public ArrayAdapter<?> getAdapter() {
@@ -55,7 +62,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 	
 	@Override
 	public void downloadHasFinished() {
-		invalidateListView();
+		invalidateListView(getMyActivity());
 		updateUpdateAllButton();
 	}
 	
@@ -66,17 +73,17 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 	
 	@Override
 	public void newDownloadIndexes() {
-		invalidateListView();
+		invalidateListView(getMyActivity());
 		updateUpdateAllButton();
 	}
 
-	public void invalidateListView() {
-		DownloadResources indexes = getMyActivity().getDownloadThread().getIndexes();
+	public void invalidateListView(Activity a) {
+		DownloadResources indexes = getMyApplication().getDownloadThread().getIndexes();
 		List<IndexItem> indexItems = indexes.getItemsToUpdate();
 
 		final OsmandRegions osmandRegions =
 				getMyApplication().getResourceManager().getOsmandRegions();
-		listAdapter = new UpdateIndexAdapter(getMyActivity(), R.layout.download_index_list_item, indexItems);
+		listAdapter = new UpdateIndexAdapter(a, R.layout.download_index_list_item, indexItems);
 		listAdapter.sort(new Comparator<IndexItem>() {
 			@Override
 			public int compare(IndexItem indexItem, IndexItem indexItem2) {
@@ -198,6 +205,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 			ItemViewHolder holder = (ItemViewHolder) v.getTag();
 			holder.setShowRemoteDate(true);
 			holder.setShowTypeInDesc(true);
+			holder.setShowParentRegionName(true);
 			holder.bindIndexItem(items.get(position), null);
 			return v;
 		}

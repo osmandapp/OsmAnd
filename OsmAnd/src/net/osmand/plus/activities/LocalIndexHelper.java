@@ -98,7 +98,7 @@ public class LocalIndexHelper {
 		loadTilesData(app.getAppPath(IndexConstants.TILES_INDEX_DIR), result, false, loadTask);
 		loadSrtmData(app.getAppPath(IndexConstants.SRTM_INDEX_DIR), result, loadTask);
 		loadWikiData(app.getAppPath(IndexConstants.WIKI_INDEX_DIR), result, loadTask);
-		loadVoiceData(app.getAppPath(IndexConstants.TTSVOICE_INDEX_EXT_ZIP), result, true, loadTask);
+		//loadVoiceData(app.getAppPath(IndexConstants.TTSVOICE_INDEX_EXT_ZIP), result, true, loadTask);
 		loadVoiceData(app.getAppPath(IndexConstants.VOICE_INDEX_DIR), result, false, loadTask);
 		
 		return result;
@@ -213,7 +213,8 @@ public class LocalIndexHelper {
 		SRTM_DATA(R.string.local_indexes_cat_srtm, R.drawable.ic_plugin_srtm),
 		WIKI_DATA(R.string.local_indexes_cat_wiki, R.drawable.ic_plugin_wikipedia),
 		TTS_VOICE_DATA(R.string.local_indexes_cat_tts, R.drawable.ic_action_volume_up),
-		VOICE_DATA(R.string.local_indexes_cat_voice, R.drawable.ic_action_volume_up);
+		VOICE_DATA(R.string.local_indexes_cat_voice, R.drawable.ic_action_volume_up),
+		DEACTIVATED(R.string.local_indexes_cat_backup, R.drawable.ic_type_archive);
 //		AV_DATA(R.string.local_indexes_cat_av);;
 
 		@StringRes
