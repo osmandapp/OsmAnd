@@ -1974,4 +1974,5 @@
     <string name="go_to_map">返回地圖</string>
     <string name="shared_string_qr_code">QR 碼</string>
     <string name="enter_country_name">輸入國家/地區名稱</string>
-</resources>
+<string name="world_map_download_descr">全球底圖 (涵蓋在整個縮小的世界) 丟失或過時。請考量一下為了完整的環境，下載全球底圖。</string>
+    </resources>
