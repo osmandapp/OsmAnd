@@ -18,7 +18,6 @@ import net.osmand.map.WorldRegion;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.plus.activities.DayNightHelper;
-import net.osmand.plus.activities.HelpActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
@@ -79,23 +78,23 @@ public class AppInitializer implements IProgress {
 	private long startTime;
 	private long startBgTime;
 	private boolean appInitializing = true;
-	private List<String> warnings = new ArrayList<String>();
+	private List<String> warnings = new ArrayList<>();
 	private String taskName;
-	private List<AppInitializeListener> listeners = new ArrayList<AppInitializer.AppInitializeListener>();
+	private List<AppInitializeListener> listeners = new ArrayList<>();
 	private SharedPreferences startPrefs;
 	
 	public enum InitEvents {
 		FAVORITES_INITIALIZED, NATIVE_INITIALIZED,
 		NATIVE_OPEN_GLINITIALIZED,
 		TASK_CHANGED, MAPS_INITIALIZED, POI_TYPES_INITIALIZED, ASSETS_COPIED, INIT_RENDERERS,
-		RESTORE_BACKUPS, INDEX_REGION_BOUNDARIES, SAVE_GPX_TRACKS, LOAD_GPX_TRACKS;
+		RESTORE_BACKUPS, INDEX_REGION_BOUNDARIES, SAVE_GPX_TRACKS, LOAD_GPX_TRACKS
 	}
 	
 	public interface AppInitializeListener {
 		
-		public void onProgress(AppInitializer init, InitEvents event);
+		void onProgress(AppInitializer init, InitEvents event);
 		
-		public void onFinish(AppInitializer init);
+		void onFinish(AppInitializer init);
 	}
 	
 	
@@ -167,10 +166,6 @@ public class AppInitializer implements IProgress {
 		boolean showRecentChangesDialog = !firstTime && appVersionChanged;
 //		showRecentChangesDialog = true;
 		if (showRecentChangesDialog && !activityChangesShowed) {
-			final Intent helpIntent = new Intent(activity, HelpActivity.class);
-			helpIntent.putExtra(HelpActivity.TITLE, Version.getAppVersion(app));
-			helpIntent.putExtra(HelpActivity.URL, LATEST_CHANGES_URL);
-			activity.startActivity(helpIntent);
 			activityChangesShowed = true;
 			return true;
 		}
@@ -369,9 +364,7 @@ public class AppInitializer implements IProgress {
 			if (routingXml.exists() && routingXml.canRead()) {
 				try {
 					return RoutingConfiguration.parseFromInputStream(new FileInputStream(routingXml));
-				} catch (XmlPullParserException e) {
-					throw new IllegalStateException(e);
-				} catch (IOException e) {
+				} catch (XmlPullParserException | IOException e) {
 					throw new IllegalStateException(e);
 				}
 			} else {
@@ -662,8 +655,6 @@ public class AppInitializer implements IProgress {
 						}
 					}
 				}, "Initializing app").start();
-		;
-
 	}
 
 

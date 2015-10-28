@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <string name="app_name">OsmAnd~</string>
     <string name="app_version">2.2.0</string>
     <!--
@@ -12,10 +12,10 @@
 
     <!-- Not translatable -->
     <string name="last_release">
-        - New road indexes (including map data, poi, address)
-        - New speed system (knots and minutes per km)
-        - New context menu
-        - Drawer and start with the map
+        \u2022 New Wikipedia data is structured by country and contains many more points than before\n\n
+        \u2022 Better route recalculation (after several attempts engine suggests a different route)\n\n
+        \u2022 POI Search now supports more specific queries (like fuel type and religion specific queries)\n\n
+        and more...
         </string>
     <string name="ga_api_key">UA-28342846-2</string>
     <string name="ga_dispatchPeriod">10</string>
