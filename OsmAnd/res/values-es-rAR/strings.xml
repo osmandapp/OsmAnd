@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="rendering_attr_hideHouseNumbers_name">Ocultar números de casa</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="rendering_attr_hideHouseNumbers_name">Ocultar números de casa</string>
     <string name="copying_osmand_file_failed">Falló al copiar archivos</string>    
     <string name="storage_directory_external">Almacenamiento externo</string>
     <string name="storage_directory_multiuser">Almacenamiento multiusuario</string>
@@ -1988,4 +1989,6 @@
 <string name="map_downloaded">Mapa descargado</string>
     <string name="map_downloaded_descr">Se descargó el mapa de %1$s. Vuelve al mapa para empezar a usarlo.</string>
     <string name="go_to_map">Ir al mapa</string>
-    </resources>
+    <string name="shared_string_qr_code">Código QR</string>
+    <string name="enter_country_name">Escriba el nombre del país</string>
+</resources>
