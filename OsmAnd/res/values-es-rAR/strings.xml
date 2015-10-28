@@ -1991,4 +1991,5 @@
     <string name="go_to_map">Ir al mapa</string>
     <string name="shared_string_qr_code">Código QR</string>
     <string name="enter_country_name">Escriba el nombre del país</string>
-</resources>
+<string name="world_map_download_descr">El mapa base mundial (abarca todo el mundo en acercamientos pequeños), falta o está desactualizado. Considere descargarlo para un entorno completo.</string>
+    </resources>
