@@ -2000,4 +2000,5 @@
     <string name="go_to_map">Gå til kortet</string>
     <string name="shared_string_qr_code">QR kode</string>
     <string name="enter_country_name">Indtast landenavn</string>
-</resources>
+<string name="world_map_download_descr">Verden grundkort (dækker hele verden ved små zoom) mangler eller er forældede. Overvej at hente verden grundkort for en komplet miljø.</string>
+    </resources>
