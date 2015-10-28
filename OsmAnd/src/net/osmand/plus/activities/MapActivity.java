@@ -17,7 +17,6 @@ import android.os.Message;
 import android.support.v4.app.NotificationCompat.Builder;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.NotificationCompat;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -25,20 +24,18 @@ import android.view.View;
 import android.view.ViewStub;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import net.osmand.Location;
+import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.access.AccessibilityPlugin;
 import net.osmand.access.AccessibleActivity;
 import net.osmand.access.AccessibleToast;
 import net.osmand.access.MapAccessibilityActions;
 import net.osmand.core.android.AtlasMapRendererView;
-import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
@@ -50,7 +47,6 @@ import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.BusyIndicator;
-import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.FirstUsageFragment;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
@@ -64,6 +60,7 @@ import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.base.FailSafeFuntions;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.dashboard.DashboardOnMap;
+import net.osmand.plus.dialogs.WhatsNewDialogFragment;
 import net.osmand.plus.helpers.GpxImportHelper;
 import net.osmand.plus.helpers.WakeLockHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
@@ -83,12 +80,13 @@ import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -96,6 +94,8 @@ public class MapActivity extends AccessibleActivity {
 	private static final int SHOW_POSITION_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 1;
 	private static final int LONG_KEYPRESS_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 2;
 	private static final int LONG_KEYPRESS_DELAY = 500;
+
+	private static final Log LOG = PlatformUtil.getLog(MapActivity.class);
 
 	private static MapViewTrackingUtilities mapViewTrackingUtilities;
 
@@ -122,7 +122,7 @@ public class MapActivity extends AccessibleActivity {
 
 	private Dialog progressDlg = null;
 
-	private List<DialogProvider> dialogProviders = new ArrayList<DialogProvider>(2);
+	private List<DialogProvider> dialogProviders = new ArrayList<>(2);
 	private StateChangedListener<ApplicationMode> applicationModeListener;
 	private GpxImportHelper gpxImportHelper;
 	private WakeLockHelper wakeLockHelper;
@@ -170,7 +170,9 @@ public class MapActivity extends AccessibleActivity {
 
 		mapView = new OsmandMapTileView(this, getWindow().getDecorView().getWidth(),
 				getWindow().getDecorView().getHeight());
-		app.getAppInitializer().checkAppVersionChanged(this);
+		if(app.getAppInitializer().checkAppVersionChanged(this)) {
+			new WhatsNewDialogFragment().show(getSupportFragmentManager(), null);
+		}
 		mapActions = new MapActivityActions(this);
 		mapLayers = new MapActivityLayers(this);
 		if (mapViewTrackingUtilities == null) {
@@ -350,7 +352,7 @@ public class MapActivity extends AccessibleActivity {
 
 	@Override
 	public Object onRetainCustomNonConfigurationInstance() {
-		LinkedHashMap<String, Object> l = new LinkedHashMap<String, Object>();
+		LinkedHashMap<String, Object> l = new LinkedHashMap<>();
 		for (OsmandMapLayer ml : mapView.getLayers()) {
 			ml.onRetainNonConfigurationInstance(l);
 		}
@@ -769,8 +771,6 @@ public class MapActivity extends AccessibleActivity {
 
 			protected void onPostExecute(Void result) {
 			}
-
-			;
 		}.execute((Void) null);
 
 	}
@@ -916,6 +916,7 @@ public class MapActivity extends AccessibleActivity {
 						settings.setMapLocationToShow(lt, ln, z, new PointDescription(
 								PointDescription.POINT_TYPE_MARKER, getString(R.string.shared_location)));
 					} catch (NumberFormatException e) {
+						LOG.error("error", e);
 					}
 				}
 			}
