@@ -38,8 +38,9 @@ import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType;
 import net.osmand.plus.download.ui.ActiveDownloadsDialogFragment;
 import net.osmand.plus.download.ui.DataStoragePlaceDialogFragment;
-import net.osmand.plus.download.ui.DownloadResourceGroupFragment;
-import net.osmand.plus.download.ui.GoToMapFragment;
+import net.osmand.plus.download.ui.popups.AskMapDownloadFragment;
+import net.osmand.plus.download.ui.popups.DownloadResourceGroupFragment;
+import net.osmand.plus.download.ui.popups.GoToMapFragment;
 import net.osmand.plus.download.ui.LocalIndexesFragment;
 import net.osmand.plus.download.ui.UpdatesIndexFragment;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
@@ -559,25 +560,12 @@ public class DownloadActivity extends ActionBarProgressActivity implements Downl
 		if(getDownloadThread().getCurrentDownloadingItem() == null) {
 			return;
 		}
-		DownloadResourceGroup worldMaps = getDownloadThread().getIndexes().
-				getSubGroupById(DownloadResourceGroupType.WORLD_MAPS.getDefaultId());
-		IndexItem worldMap = null;
-		List<IndexItem> list = worldMaps.getIndividualResources();
-		if(list != null) {
-			for(IndexItem ii  : list) {
-				if(ii.getBasename().equalsIgnoreCase(WorldRegion.WORLD_BASEMAP)) {
-					worldMap = ii;
-					break;
-				}
-			}
-		}
-		
-		if(!SUGGESTED_TO_DOWNLOAD_BASEMAP && worldMap != null && (!worldMap.isDownloaded() || worldMap.isOutdated()) && 
+		IndexItem worldMap = getDownloadThread().getIndexes().getWorldBaseMapItem();
+		if(!SUGGESTED_TO_DOWNLOAD_BASEMAP && worldMap != null && (!worldMap.isDownloaded() || worldMap.isOutdated()) &&
 				!getDownloadThread().isDownloading(worldMap)) {
 			SUGGESTED_TO_DOWNLOAD_BASEMAP = true;
-			// TODO Show dialog Download world map with 2 buttons to download it or no			
+			AskMapDownloadFragment.showInstance(worldMap, this);
 		}
-		
 	}
 	
 	private void showFirstTimeExternalStorage() {
