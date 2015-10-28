@@ -203,4 +203,9 @@
 	<string name="poi_capital">Hovedstad</string>
 	<string name="poi_residential">Boligområde</string>
 
-	</resources>
+	<string name="poi_historic_farm">Historisk gårdsbruk</string>
+	<string name="poi_historic_railway_station">Historisk jernbanestasjon</string>
+
+	<string name="poi_historic_railway">Historisk jernbane</string>
+
+</resources>
