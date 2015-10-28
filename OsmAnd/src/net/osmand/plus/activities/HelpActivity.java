@@ -16,6 +16,7 @@ import android.webkit.WebViewClient;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.dialogs.HelpScreenDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 
 import java.io.BufferedReader;
@@ -25,7 +26,7 @@ import java.io.InputStreamReader;
 
 
 public class HelpActivity extends OsmandActionBarActivity {
-	
+
 	private static final String FILE_ANDROID_ASSET_HELP = "file:///android_asset/help/";
 	public static final String URL = "url";
 	public static final String TITLE = "title";
@@ -33,8 +34,9 @@ public class HelpActivity extends OsmandActionBarActivity {
 	private static final int BACK = 2;
 	private static final int FORWARD = 3;
 	private static final int CLOSE = 4;
+	private static final int NEW_VERSION = 5;
 	private WebView mWebView;
-	
+
 	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -47,13 +49,13 @@ public class HelpActivity extends OsmandActionBarActivity {
 
 		String title = getString(R.string.shared_string_help);
 		String url = "index.html";
-		if(getIntent() != null) {
+		if (getIntent() != null) {
 			String tl = getIntent().getStringExtra(TITLE);
-			if(tl != null) {
+			if (tl != null) {
 				title = tl;
 			}
 			String ul = getIntent().getStringExtra(URL);
-			if(ul != null) {
+			if (ul != null) {
 				url = ul;
 			}
 		}
@@ -61,7 +63,7 @@ public class HelpActivity extends OsmandActionBarActivity {
 		setContentView(R.layout.help_activity);
 		mWebView = (WebView) findViewById(R.id.webView);
 		mWebView.setFocusable(true);
-        mWebView.setFocusableInTouchMode(true);
+		mWebView.setFocusableInTouchMode(true);
 		mWebView.requestFocus(View.FOCUS_DOWN);
 		mWebView.setOnTouchListener(new View.OnTouchListener() {
 			@Override
@@ -104,40 +106,43 @@ public class HelpActivity extends OsmandActionBarActivity {
 	}
 
 	public String readContent(String url) throws IOException {
-		InputStream index = HelpActivity.class.getClassLoader().getResourceAsStream("help/" +url);
+		InputStream index = HelpActivity.class.getClassLoader().getResourceAsStream("help/" + url);
 		BufferedReader read = new BufferedReader(new InputStreamReader(index));
 		StringBuilder bld = new StringBuilder();
 		String s;
-		while((s = read.readLine()) != null) {
+		while ((s = read.readLine()) != null) {
 			bld.append(s);
 		}
 		read.close();
 		return bld.toString();
 	}
-	
+
 	private OsmandApplication getMyApplication() {
 		return (OsmandApplication) getApplication();
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		if (AndroidUiHelper.isOrientationPortrait(this)){
+		if (AndroidUiHelper.isOrientationPortrait(this)) {
 			menu = getClearToolbar(true).getMenu();
 		} else {
 			getClearToolbar(false);
 		}
-		createMenuItem(menu, HOME, R.string.home, 
+		createMenuItem(menu, HOME, R.string.home,
 				R.drawable.ic_action_home_dark,
 				MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		createMenuItem(menu, BACK, R.string.shared_string_previous,
 				R.drawable.ic_action_undo_dark,
-				MenuItemCompat.SHOW_AS_ACTION_ALWAYS );
+				MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		createMenuItem(menu, FORWARD, R.string.shared_string_next,
 				R.drawable.ic_action_redo_dark,
-				MenuItemCompat.SHOW_AS_ACTION_ALWAYS );
-		createMenuItem(menu, CLOSE, R.string.shared_string_close, 
+				MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+		createMenuItem(menu, CLOSE, R.string.shared_string_close,
 				R.drawable.ic_action_remove_dark,
-				MenuItemCompat.SHOW_AS_ACTION_ALWAYS );
+				MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+		createMenuItem(menu, NEW_VERSION, R.string.new_version,
+				R.drawable.ic_action_help,
+				MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		return super.onCreateOptionsMenu(menu);
 	}
 
@@ -145,29 +150,32 @@ public class HelpActivity extends OsmandActionBarActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int itemId = item.getItemId();
 		switch (itemId) {
-		case android.R.id.home:
-			finish();
-			return true;
-		case HOME:
-			mWebView.loadUrl(FILE_ANDROID_ASSET_HELP + "index.html");
-			return true;
-		case BACK:
-			if(mWebView.canGoBack()) {
-				mWebView.goBack();
-			}
-			return true;
-		case FORWARD:
-			if(mWebView.canGoForward()) {
-				mWebView.goForward();
-			}
-			return true;
-		case CLOSE:
-			finish();
-			return true;
+			case android.R.id.home:
+				finish();
+				return true;
+			case HOME:
+				mWebView.loadUrl(FILE_ANDROID_ASSET_HELP + "index.html");
+				return true;
+			case BACK:
+				if (mWebView.canGoBack()) {
+					mWebView.goBack();
+				}
+				return true;
+			case FORWARD:
+				if (mWebView.canGoForward()) {
+					mWebView.goForward();
+				}
+				return true;
+			case CLOSE:
+				finish();
+				return true;
+			case NEW_VERSION:
+				new HelpScreenDialogFragment().show(getSupportFragmentManager(), null);
+				return true;
 		}
 		return false;
 	}
-	
+
 	public MenuItem createMenuItem(Menu m, int id, int titleRes, int iconDark, int menuItemType) {
 		MenuItem menuItem = m.add(0, id, 0, titleRes);
 		if (iconDark != 0) {
@@ -182,12 +190,12 @@ public class HelpActivity extends OsmandActionBarActivity {
 		});
 		return menuItem;
 	}
-	
+
 	public Toolbar getClearToolbar(boolean visible) {
 		final Toolbar tb = (Toolbar) findViewById(R.id.bottomControls);
 		tb.setTitle(null);
 		tb.getMenu().clear();
-		tb.setVisibility(visible? View.VISIBLE : View.GONE);
+		tb.setVisibility(visible ? View.VISIBLE : View.GONE);
 		return tb;
 	}
 }

@@ -2032,4 +2032,15 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="application_dir_description">Choose where you want to save map files.</string>
     <string name="show_on_start_description">\'Off\' directly launches map screen</string>
     <string name="enter_country_name">Enter country name</string>
+    <string name="new_version">New version</string>
+    <string name="begin_with_osmand_menu_group">Begin with OsmAnd</string>
+    <string name="features_menu_group">Features</string>
+    <string name="help_us_to_improve_menu_group">Help us to improve OsmAnd</string>
+    <string name="other_menu_group">Other</string>
+    <string name="plugins_menu_group">Plugins</string>
+    <string name="first_usage_menu_item">First usage</string>
+    <string name="first_usage_menu_item_description">How to download map, basic settings</string>
+    <string name="navigation_menu_item_description">Setup navigation</string>
+    <string name="faq_menu_item">FAQ</string>
+    <string name="faq_menu_item_description">How to use plugins</string>
 </resources>

@@ -1,7 +1,6 @@
 package net.osmand.plus.download.ui;
 
 import android.content.res.Resources;
-import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -317,8 +316,6 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 
 		public DownloadResourceGroupAdapter(DownloadActivity ctx) {
 			this.ctx = ctx;
-			TypedArray ta = ctx.getTheme().obtainStyledAttributes(new int[] { android.R.attr.textColorPrimary });
-			ta.recycle();
 		}
 
 		public void update(DownloadResourceGroup mainGroup) {
