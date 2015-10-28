@@ -120,6 +120,10 @@ public class LocalIndexInfo {
 	}
 
 	public LocalIndexType getType() {
+		return backupedData ? LocalIndexType.DEACTIVATED : type;
+	}
+	
+	public LocalIndexType getOriginalType() {
 		return type;
 	}
 

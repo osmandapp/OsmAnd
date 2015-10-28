@@ -60,6 +60,7 @@ public class ItemViewHolder {
 	
 	boolean showTypeInDesc;
 	boolean showTypeInName;
+	boolean showParentRegionName;
 	boolean showRemoteDate;
 	boolean silentCancelDownload;
 	boolean showProgressInDesc;
@@ -97,6 +98,11 @@ public class ItemViewHolder {
 	
 	public void setShowRemoteDate(boolean showRemoteDate) {
 		this.showRemoteDate = showRemoteDate;
+	}
+	
+	
+	public void setShowParentRegionName(boolean showParentRegionName) {
+		this.showParentRegionName = showParentRegionName;
 	}
 	
 	public void setShowProgressInDescr(boolean b) {
@@ -137,7 +143,7 @@ public class ItemViewHolder {
 		if(showTypeInName) {
 			nameTextView.setText(indexItem.getType().getString(context));
 		} else {
-			nameTextView.setText(indexItem.getVisibleName(context, context.getMyApplication().getRegions(), false));
+			nameTextView.setText(indexItem.getVisibleName(context, context.getMyApplication().getRegions(), showParentRegionName));
 		}
 		if(!disabled) {
 			nameTextView.setTextColor(textColorPrimary);
