@@ -2173,4 +2173,7 @@
     <string name="hello_blank_fragment">哈囉，成空的片段</string>
 <string name="application_dir_description">選擇您想要在何處儲存地圖檔案。</string>
 <string name="show_on_start_description">\'關閉\' 直接啟動地圖螢幕</string>
-</resources>
+<string name="map_downloaded">地圖已下載</string>
+    <string name="map_downloaded_descr">已下載了 %1$s 地圖。回到地圖以開始使用。</string>
+    <string name="go_to_map">返回地圖</string>
+    </resources>
