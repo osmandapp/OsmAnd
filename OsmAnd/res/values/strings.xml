@@ -9,6 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="shared_string_qr_code">QR-code</string>
     <string name="map_downloaded">Map downloaded</string>
     <string name="map_downloaded_descr">Map of %1$s has been downloaded. Go back to the map to start using it.</string>
     <string name="go_to_map">Go to the map</string>
@@ -870,7 +871,6 @@
 	<string name="prefer_in_routing_descr">Prefer motorways</string>
     <string name="max_speed_none">none</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
-    <string name="download_hillshade_item">Hillshades</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="download_hillshade_maps">Hillshades</string>
     <string name="local_indexes_cat_srtm">Contour lines</string>

@@ -1,5 +1,45 @@
 package net.osmand.plus.download.ui;
 
+import java.io.File;
+import java.text.Collator;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import net.osmand.IndexConstants;
+import net.osmand.PlatformUtil;
+import net.osmand.access.AccessibleToast;
+import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.IconsCache;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.LocalIndexHelper;
+import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
+import net.osmand.plus.activities.LocalIndexInfo;
+import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
+import net.osmand.plus.activities.OsmandExpandableListFragment;
+import net.osmand.plus.dialogs.DirectionsDialogs;
+import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.download.DownloadActivityType;
+import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
+import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.helpers.FileNameTranslationHelper;
+import net.osmand.plus.resources.IncrementalChangesManager;
+import net.osmand.plus.resources.IncrementalChangesManager.IncrementalUpdate;
+import net.osmand.plus.resources.IncrementalChangesManager.IncrementalUpdateList;
+import net.osmand.util.Algorithms;
+
+import org.apache.commons.logging.Log;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -34,51 +74,10 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import net.osmand.IProgress;
-import net.osmand.IndexConstants;
-import net.osmand.PlatformUtil;
-import net.osmand.access.AccessibleToast;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
-import net.osmand.plus.IconsCache;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.LocalIndexHelper;
-import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
-import net.osmand.plus.activities.LocalIndexInfo;
-import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
-import net.osmand.plus.activities.OsmandExpandableListFragment;
-import net.osmand.plus.dialogs.DirectionsDialogs;
-import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.download.DownloadActivityType;
-import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
-import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.helpers.FileNameTranslationHelper;
-import net.osmand.plus.resources.IncrementalChangesManager;
-import net.osmand.plus.resources.IncrementalChangesManager.IncrementalUpdate;
-import net.osmand.plus.resources.IncrementalChangesManager.IncrementalUpdateList;
-import net.osmand.util.Algorithms;
-
-import org.apache.commons.logging.Log;
-
-import java.io.File;
-import java.text.Collator;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 
 public class LocalIndexesFragment extends OsmandExpandableListFragment implements DownloadEvents {
 
-	private static final Log LOG = PlatformUtil.getLog(LocalIndexesFragment.class);
 	private LoadLocalIndexTask asyncLoader;
 	private Map<String, IndexItem> filesToUpdate = new HashMap<String, IndexItem>();
 	private LocalIndexesAdapter listAdapter;
@@ -94,7 +93,6 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 	private ContextMenuAdapter optionsMenuAdapter;
 	private ActionMode actionMode;
 
-	Drawable backup;
 	Drawable sdcard;
 	Drawable planet;
 
@@ -131,11 +129,6 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 
 	private void colorDrawables() {
 		boolean light = getMyApplication().getSettings().isLightContent();
-		backup = getActivity().getResources().getDrawable(R.drawable.ic_type_archive);
-		backup.mutate();
-		if (light) {
-			backup.setColorFilter(getResources().getColor(R.color.icon_color), PorterDuff.Mode.MULTIPLY);
-		}
 		sdcard = getActivity().getResources().getDrawable(R.drawable.ic_sdcard);
 		sdcard.mutate();
 		sdcard.setColorFilter(getActivity().getResources().getColor(R.color.color_distance), PorterDuff.Mode.MULTIPLY);
@@ -388,19 +381,21 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		private File getFileToRestore(LocalIndexInfo i) {
 			if (i.isBackupedData()) {
 				File parent = new File(i.getPathToData()).getParentFile();
-				if (i.getType() == LocalIndexType.MAP_DATA) {
-					parent = getMyApplication().getAppPath(IndexConstants.MAPS_PATH);
-				} else if (i.getFileName().endsWith(IndexConstants.BINARY_ROAD_MAP_INDEX_EXT)) {
-					parent = getMyApplication().getAppPath(IndexConstants.ROADS_INDEX_DIR);
-				} else if (i.getType() == LocalIndexType.TILES_DATA) {
+				if (i.getOriginalType() == LocalIndexType.MAP_DATA) {
+					if (i.getFileName().endsWith(IndexConstants.BINARY_ROAD_MAP_INDEX_EXT)) {
+						parent = getMyApplication().getAppPath(IndexConstants.ROADS_INDEX_DIR);
+					} else {
+						parent = getMyApplication().getAppPath(IndexConstants.MAPS_PATH);
+					}
+				} else if (i.getOriginalType() == LocalIndexType.TILES_DATA) {
 					parent = getMyApplication().getAppPath(IndexConstants.TILES_INDEX_DIR);
-				} else if (i.getType() == LocalIndexType.SRTM_DATA) {
+				} else if (i.getOriginalType() == LocalIndexType.SRTM_DATA) {
 					parent = getMyApplication().getAppPath(IndexConstants.SRTM_INDEX_DIR);
-				} else if (i.getType() == LocalIndexType.WIKI_DATA) {
+				} else if (i.getOriginalType() == LocalIndexType.WIKI_DATA) {
 					parent = getMyApplication().getAppPath(IndexConstants.WIKI_INDEX_DIR);
-				} else if (i.getType() == LocalIndexType.TTS_VOICE_DATA) {
+				} else if (i.getOriginalType() == LocalIndexType.TTS_VOICE_DATA) {
 					parent = getMyApplication().getAppPath(IndexConstants.VOICE_INDEX_DIR);
-				} else if (i.getType() == LocalIndexType.VOICE_DATA) {
+				} else if (i.getOriginalType() == LocalIndexType.VOICE_DATA) {
 					parent = getMyApplication().getAppPath(IndexConstants.VOICE_INDEX_DIR);
 				}
 				return new File(parent, i.getFileName());
@@ -716,7 +711,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 						public void onClick(DialogInterface dialog, int which) {
 							doAction(itemId);
 						}
-					}, null, null);
+					}, null);
 		} else if (itemId == R.string.local_index_mi_backup) {
 			openSelectionMode(itemId, R.drawable.ic_type_archive,
 					new DialogInterface.OnClickListener() {
@@ -725,7 +720,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 						public void onClick(DialogInterface dialog, int which) {
 							doAction(itemId);
 						}
-					}, Boolean.FALSE, LocalIndexType.MAP_DATA);
+					}, EnumSet.of(LocalIndexType.MAP_DATA, LocalIndexType.WIKI_DATA, LocalIndexType.SRTM_DATA));
 		} else if (itemId == R.string.local_index_mi_restore) {
 			openSelectionMode(itemId, R.drawable.ic_type_archive,
 					new DialogInterface.OnClickListener() {
@@ -734,16 +729,12 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 						public void onClick(DialogInterface dialog, int which) {
 							doAction(itemId);
 						}
-					}, Boolean.TRUE, LocalIndexType.MAP_DATA);
-			listAdapter.filterCategories(true);
+					}, EnumSet.of(LocalIndexType.DEACTIVATED));
 		}
 	}
 
-	public void openSelectionMode(int stringRes, int darkIcon, DialogInterface.OnClickListener listener, Boolean backup,
-								  LocalIndexType filter) {
-		if (backup != null) {
-			listAdapter.filterCategories(backup);
-		}
+	public void openSelectionMode(int stringRes, int darkIcon, DialogInterface.OnClickListener listener, 
+								  EnumSet<LocalIndexType> filter) {
 		if (filter != null) {
 			listAdapter.filterCategories(filter);
 		}
@@ -838,14 +829,12 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			notifyDataSetChanged();
 		}
 
-		public void filterCategories(LocalIndexType... types) {
+		public void filterCategories(EnumSet<LocalIndexType> types) {
 			List<LocalIndexInfo> filter = new ArrayList<LocalIndexInfo>();
 			List<LocalIndexInfo> source = filterCategory == null ? category : filterCategory;
 			for (LocalIndexInfo info : source) {
-				for (LocalIndexType ts : types) {
-					if (info.getType() == ts) {
-						filter.add(info);
-					}
+				if(types.contains(info.getType())) {
+					filter.add(info);
 				}
 			}
 			filterCategory = filter;
@@ -934,7 +923,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 				name.append(" ").append(group.getSubfolder());
 			}
 			if (group.isBackupedData()) {
-				name.append(" - ").append(ctx.getString(R.string.local_indexes_cat_backup));
+				ctx.getString(R.string.local_indexes_cat_backup);
 			}
 			TextView nameView = ((TextView) v.findViewById(R.id.section_name));
 			TextView sizeView = ((TextView) v.findViewById(R.id.section_description));
@@ -1002,9 +991,15 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		}
 
 
-		private String getMapDescription(String fileName) {
-			if (fileName.endsWith(IndexConstants.BINARY_ROAD_MAP_INDEX_EXT)) {
+		private String getMapDescription(LocalIndexInfo child) {
+			if (child.getType() == LocalIndexType.TILES_DATA) {
+				return ctx.getString(R.string.online_map);
+			} else if (child.getFileName().endsWith(IndexConstants.BINARY_ROAD_MAP_INDEX_EXT)) {
 				return ctx.getString(R.string.download_roads_only_item);
+			} else if (child.isBackupedData() && child.getFileName().endsWith(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT)) {
+				return ctx.getString(R.string.download_wikipedia_maps);
+			} else if (child.isBackupedData() && child.getFileName().endsWith(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT)) {
+				return ctx.getString(R.string.download_srtm_maps);
 			}
 			return "";
 		}
@@ -1035,12 +1030,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 						openPopUpMenu(v, child);
 					}
 				});
-				if (child.isBackupedData()) {
-					icon.setImageDrawable(backup);
-				} else {
-					int colorId = filesToUpdate.containsKey(child.getFileName()) ? R.color.color_distance : R.color.color_ok;
-					icon.setImageDrawable(getContentIcon(ctx, child.getType().getIconResource(), colorId));
-				}
+				int colorId = filesToUpdate.containsKey(child.getFileName()) ? R.color.color_distance : R.color.color_ok;
+				icon.setImageDrawable(getContentIcon(ctx, child.getType().getIconResource(), colorId));
 
 				nameTextView.setText(getNameToDisplay(child));
 				if (child.isNotSupported()) {
@@ -1058,23 +1049,26 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 				}
 				StringBuilder builder = new StringBuilder();
 
-				final String mapDescription = getMapDescription(child.getFileName());
+				final String mapDescription = getMapDescription(child);
 				if (mapDescription.length() > 0) {
-					builder.append(mapDescription).append(" • ");
+					builder.append(mapDescription);
 				}
 
 				if (child.getSize() >= 0) {
+					if(builder.length() > 0) {
+						builder.append(" • ");
+					}
 					if (child.getSize() > 100) {
 						builder.append(DownloadActivity.formatMb.format(new Object[]{(float) child.getSize() / (1 << 10)}));
 					} else {
 						builder.append(child.getSize()).append(" KB");
 					}
-					builder.append(" • ");
 				}
 
-				if (child.getType() == LocalIndexType.TILES_DATA) {
-					builder.append(ctx.getString(R.string.online_map));
-				} else {
+				if(!Algorithms.isEmpty(child.getDescription())){
+					if(builder.length() > 0) {
+						builder.append(" • ");
+					}
 					builder.append(child.getDescription());
 				}
 				descriptionTextView.setText(builder.toString());
@@ -1120,7 +1114,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		MenuItem item;
 		if (info.getType() == LocalIndexType.MAP_DATA) {
 			item = optionsMenu.getMenu().add(restore ? R.string.local_index_mi_restore : R.string.local_index_mi_backup)
-					.setIcon(backup);
+					.setIcon(iconsCache.getContentIcon(R.drawable.ic_type_archive));
 			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 				@Override
 				public boolean onMenuItemClick(MenuItem item) {

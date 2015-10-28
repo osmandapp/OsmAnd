@@ -4,11 +4,7 @@
     <string name="map_widget_show_destination_arrow">顯示目的地方向</string>
     <string name="enable_plugin_monitoring_services">啟用旅程錄製外掛元件，以使用位置日誌服務(GPX 記錄，線上追蹤)</string>
     <string name="non_optimal_route_calculation">預估過遠的距離，可能不是最佳的路線</string>
-    <string name="tip_recent_changes_0_8_4_t">在0.8.4的變更：
-	\n\t* Some bug fixes
-	\n\t* Map does not lose position lock after interruptions
-	\n\t* Enable sleep mode service during navigation
-    </string>
+    
 	<string name="gps_not_available">請在設定中啟用 GPS</string>
 	<string name="map_widget_monitoring_services">日誌記錄服務</string>
 	<string name="no_route">沒有路線</string>
@@ -54,14 +50,8 @@
 	<string name="osmand_long_description_1000_chars">" OsmAnd (OSM Automated Navigation Directions) OsmAnd 是開放程式碼的導航應用程式，存取各式各樣的全球性 OpenStreetMap (簡稱 OSM 開放街道地圖) 資料。所有圖資(向量圖或地圖圖磚)可存放於手機的記憶卡上，可作離線與線上圖資導航，包含轉向建議(turn by turn)語音導航。 主要功能： - 完整的離線功能(存放下載的向量圖或地圖圖磚於裝置存儲器) - 提供細致的全球離線向量圖資 - 直接從應用程式下載各國或區域圖資 - 可疊加不同的多種地圖層於自訂的透明度，如 GPX 或導航軌跡、興趣點、我的最愛、公共運輸站 - 離線查尋地址、場所(POI) - 短距離的離線使用路線(實驗性) - 汽車、自行車、步行模式有下列選項： - 可選的自動日夜模式切換 - 可選的依據速度自動地圖比例尺縮放 - 可選的地圖正北朝上或行進方向朝上 - 可選的車道引導、速限顯示、使用真人語音或 TTS 語音 OsmAnd 免費版限制: - 地圖下載數量 - 無法使用離線維基百科的 POI OsmAnd 正在積極開發我們的專案，並且它的更進一步發展依賴於提供資金的捐助，用以資助發展和新功能的駕駛測試。請考慮購買 OsmAnd +，或資助特定的新功能或在 osmand.net 網站上一般捐贈。 "</string>
 	<string name="osmand_plus_short_description_80_chars">將離線與線上的 OSM 地圖，用在全球行動地圖檢視和導航</string>
 	<string name="osmand_plus_long_description_1000_chars">" OsmAnd+ OsmAnd (OSM Automated Navigation Directions) OsmAnd 是開放源碼導航應用程式，可以使用各式各樣的全球性 OpenStreetMap (簡稱 OSM 開放街道地圖) 資料。所有圖資(向量圖或地圖圖磚)可存放於裝置的記憶卡上，可作離線與線上圖資導航，包含轉向建議(turn by turn)語音導航。 主要功能： - 完整離線功能 (存放下載的向量圖或地圖圖磚於裝置存儲器) - 全球離線向量圖資 - 直接由手機下載各國或區域圖資 - 可疊加不同的多種地圖層於自訂的透明度，如 GPX 或導航軌跡、興趣點、我的最愛、等高線、大眾運輸停靠站 - 離線查尋地址、場所(POI) - 離線尋找導航路線 - 汽車、自行車、步行模式有下列選項： - 自動日/夜模式切換選項 - 取決於速度的地圖縮放選項 - 地圖正北朝上或行進方向朝上選項 - 車道引導、速限顯示、使用真人語音或 TTS 語音選項 "</string>
-	<string name="tip_update_index">更新離線地圖</string>
-	<string name="tip_update_index_t">"離線地圖的查看與 POI/位址查尋，以及離線導航，有最新的圖資是不可或缺的。OsmAnd 提供了地圖檔案的管理用以下載那些離線圖資，並且檢查能用的更新。
-\n\n下載圖資更新由\'設定\' -&gt; \'管理地圖檔案\' -&gt; \'下載\'。
-\n\n經由網路取得區域列表後，點選任意一個進入，做下載或更新檔案。請注意檔案類型選擇，在畫面上方的附近，選取您想要的類型下載（正常地圖、山體陰影層等）。
-\n\n您可以在篩選區域清單中輸入一些文字，或者您可以按選項的\'設定\' -&gt; \'篩選已下載的\'可看見已篩選出在您裝置上的更新資料。
-\n\t* 登錄為\'綠色\'，表示裝置與伺服器是相同的
-\n\t* 登錄為\'藍色\'，表示伺服器有更新的版本
-\n\t* 登錄為斜體字，表示未在裝置上使用 "</string>
+	
+	
 	<string name="filterpoi_activity">建立興趣點篩選</string>
 	<string name="recalculate_route_to_your_location">交通模式：</string>
 	<string name="select_navigation_mode">選擇交通模式</string>
@@ -229,7 +219,7 @@
 	<string name="show_ruler_level">顯示比例尺</string>	
 	<string name="info_button">資訊</string>
 	<string name="back_to_location">回到目前位置</string>
-	<string name="show_details">顯示位置詳細資訊</string>
+	
 	<string name="accessibility_extensions_descr">給舊 Android 版本的無障礙擴展</string>
 	<string name="accessibility_extensions">無障礙擴展</string>
 	<string name="accessibility_mode">無障礙模式</string>
@@ -345,28 +335,13 @@
 	<string name="user_password_descr">需要在 openstreetmap.org 註冊</string>
 	<string name="osmand_service">背景模式</string>
 	<string name="osmand_service_descr">當螢幕關閉時，讓 OsmAnd 在背景執行</string>
-	<string name="tip_rotation_switching">地圖方向</string>
-	<string name="tip_rotation_switching_t_v2">"在地圖畫面上您可點選羅盤的圖示，可循環切換地圖旋轉顯示方式。
-\n\n選項有：
-\n\t* \'不旋轉(正北朝上)\'：地圖不旋轉，正北方永遠向上
-\n\t* \'行進方向朝上\'：地圖會不斷對準您的車頭方向
-\n\t* \'依羅盤\'：地圖會不斷對準裝置的電子羅盤指示 "</string>
 	
-	<string name="tip_day_night_mode">日/夜模式</string>
-	<string name="tip_day_night_mode_t_v2">"離線向量地圖的地圖外觀顯示，可在日間(較亮)與夜間(較暗)之間切換。夜間顏色是在夜晚行駛時比較安全。
-\n\n您可在\'選項\' -&gt; \'組態地圖\' -&gt;\'日/夜地圖\'設定日/夜間切換原則。
-\n\n選擇有：
-\n\t* \'日出/日落\'：自動模式，依所處位置的日出/日落控制（預設）
-\n\t* \'日間\'：永遠使用日間模式
-\n\t* \'夜間\'：永遠使用夜間模式
-\n\t* \'光線感應器\'：地圖顯示以裝置上的光線感應器來控制（如果有配備） "</string>	
-	<string name="tip_osm_improve">改善 OSM 資料</string>
-	<string name="tip_osm_improve_t">OsmAnd 使用的地圖是基於 Openstreetmap.org (OSM) 的資料，除了查看地圖和導航外，可以直接用它來改善 OSM 的資料品質。只要點幾下您可以輕鬆的建立和上傳新的興趣點或回報 OSM 的錯誤。
-		\n\n為此，您需要啟動\'OSM 編輯\'，在外掛元件管理下的\'設定\' -&gt; \'外掛元件管理\'裡，然後在 \'設定\' -&gt; \'OSM 編輯\'提供您登入 OSM 的資料。
-		\n\n若要新增興趣點，在快顯功能表中\'使用位置\'的選項裡，\'建立興趣點\'。然後在\'建立興趣點\'的對話框輸入興趣點相關資訊，最後按確認。
-		\n\n地圖上的錯誤可透過 OSM 錯誤立即回報，OSM 社群即可快速修正該問題。在快顯功能表中\'使用位置\'的選項裡，\'開啟 OSM 錯誤\'。然後輸入詳細的問題敘述，最後按下 \'新增\'按鈕。
-		\n\nOsmAnd支援離線快取（參見相應的設定），但是當然要連通網路，提供 OSM 興趣點與 OSM 錯誤回報需要上網。
-	</string>
+	
+	
+	
+		
+	
+	
 	<string name="download_files_not_enough_space">空間不足以下載 %1$s MB (空間剩餘：%2$s)。</string>
 	<string name="download_files_question_space">目前可用空間剩下 {2} MB！ 要下載 {0} 個檔 ({1} MB)？</string>
 	
@@ -462,8 +437,8 @@
 	<string name="map_text_size">地圖字型大小</string>
 	<string name="trace_rendering">繪製除錯資訊</string>
 	<string name="trace_rendering_descr">顯示繪製效能</string>
-	<string name="tip_recent_changes">最近的修改</string>
-	<string name="voice_not_use">不要使用</string>
+	
+	
 	
 	<string name="installing_new_resources">安裝新資料…</string>
 	<string name="internet_connection_required_for_online_route">選用線上導航服務，但是無可用的網路連線。</string>
@@ -497,50 +472,28 @@
 	<string name="install_more">安裝更多…</string>
 	<string name="level_to_switch_vector_raster_descr">向量地圖使用最小的縮放比級別</string>
 	<string name="level_to_switch_vector_raster">最小向量縮放比級別</string>
-	<string name="tip_location_sharing">分享位置</string>
-	<string name="tip_location_sharing_t">您可以在旅途中分享有趣的地方和位置，透過\'地圖快顯功能表\' -&gt; \'分享位置\'選單，讓您的家人或朋友。
-		\n\n然後選擇分享位置的方式。選項有：電子郵件、SMS(文字)或複製座標到剪貼簿。
-	</string>
-	<string name="tip_favorites">我的最愛標點</string>
-	<string name="tip_favorites_t">"常用標點可儲存成我的最愛，具體如下：
-\n\n叫出\'使用位置\'的快顯功能表，選\'加到我的最愛\'，然後輸入名字即可將某一標點位置設為我的最愛。事後可經由\'選單\' -&gt;\'我的最愛\'找到它。
-\n\n在\'我的最愛\'清單中輕按提供的任何選項，例如導航去那裡、編輯或刪除它。
-\n\n欲將我的最愛標點全部顯示在地圖上，要在地圖螢幕上啟用圖層\'我的最愛\'，由\'選單\' -&gt;\'組態地圖\'即可。 "</string>
+	
+	
+	
+	
 	<string name="error_doing_search">離線查尋發生錯誤</string>
 	<string name="search_offline_geo_error">無法解析地理含義 \'%s\'</string>
 	<string name="search_osm_offline">查尋地理位置</string>
 	<string name="system_locale">系統</string>
 	<string name="preferred_locale_descr">選擇顯示語言（在更改後，請重新啟動 OsmAnd )</string>
 	<string name="preferred_locale">顯示語言</string>
-	<string name="tip_map_switch">選擇地圖來源</string>
-	<string name="tip_map_switch_t_v2">"地圖來源與圖層顯示可以透過\'選單\'-&gt;\'組態地圖\'來改變。
-\n\n在\'地圖來源…\'之下，您可以選擇使用預先載入的離線向量圖（預設，離線導航所需），或預先定義（連線或離線快取）圖磚來源（在此啟動\'線上地圖\'外掛元件下的\'設定\' → \'外掛元件\'），或手動建立地圖，例如在 PC 上使用的 OsmAndMapCreator。
-\n\nOsmAnd 也支援自訂來源。 "</string>
-	<string name="tip_app_mode">使用設定檔</string>
-	<string name="tip_app_mode_t_v2">"OsmAnd 在不同的使用情況下，支援不同的使用者設定檔 (可自行訂製) 。
-\n\n您可透過地圖畫面左下角的設定檔按鈕(汽車、自行車、步行三種圖示)更改使用設定檔 ，或是作路線規劃(\'交通模式\')。 "</string>
-	<string name="tip_navigation">導航</string>
-	<string name="tip_navigation_t">"需要導引到一個地點，可以直接在地圖上選擇並長按該地點，(然後再點選快顯功能表單的\'導引到\')，或著選擇\'導引\'後，在查尋結果清單或是我的最愛清單點選進入。
-\n\n目的地標點以一目標旗標記在地圖上，同時 OsmAnd 會顯示達到目的地的距離與它的方位(橙色三角形)。
-\n\n您可以選擇到任何一個\'隨行\'的路線，這意味著 OsmAnd 將實地引導您，給您語音指示（如果有啟用語音），或者您可以選擇\'只顯示\'路線在地圖上，它會產生一個靜態的路線不會有任何實地引導或隨著您的移動而調整。
-\n\n顯示從非您目前的位置中，選擇任意標點到目的地的路線，接著在地圖上選擇\'從此導引\'。
-\n\n如果您選擇\'從此導引\'連同\'開始導航\'，只要它發現則 OsmAnd 將切換到您的實際位置（所以這個可以用於在快速啟動路線之前找到位置），當\'從此導引\'在與\'只顯示\'結合，只是告訴您從任意標點的路線，您可選擇不包括隨後的更新。 "</string>
-	<string name="tip_search">查尋</string>
-	<string name="tip_search_t">"您可以在地圖上直接查尋地點，經由 \'使用位置 \' → \'附近查尋\'，或是透過 \'選單 \'→ \'查尋 \'。
-\n\n在查尋畫面上有提供查尋範本
-\n\t*經由地址
-\n\t*透過坐標
-\n\t*興趣點（按類型或名稱）
-\n\t*透過您的查尋履歷
-\n\t*或透過您事先定義的我的最愛
-\n\n為所有在快顯選單中或行動列被點選，都提供有例如\'導引\'或\'在地圖上顯示\'等的選項。 "</string>
-	<string name="tip_map_context_menu">\'使用位置\'選單</string>
-	<string name="tip_map_context_menu_t">"地圖快顯功能表\'使用位置\'，包含了所有作用引到一個點（位置）。
-\n\n它可長按地圖上的任何一點（然後輕點其標記），或按軌跡球的按鈕，或者選擇由\'選單\' → \'使用位置\'（最後兩種方式以地圖中心作為參考）。
-\n\n若長按則可以再次隱藏標記對話框。 "</string>
 	
-	<string name="tip_initial_t">"OsmAnd 是一個導航應用程式，含有很多的功能。
-\n\n一些基本功能介紹、使用提示以及進階的幫助，從地圖畫面可透過\'選單\' → \'幫助\'連結。 "</string>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	<string name="shared_string_next">下一頁</string>
 	<string name="shared_string_previous">上一頁</string>
 	<string name="unit_of_length_descr">更改長度與速度單位</string>
@@ -695,7 +648,7 @@
 	<string name="use_trackball">使用軌跡球</string>
 	<string name="background_service_wait_int_descr">設定背景定位等待時間</string>
 	<string name="background_service_wait_int">定位等待時間</string>
-	<string name="service_stop_background_service">關閉 OsmAnd 背景導航服務</string>
+	
 	<string name="where_am_i">我在那兒？</string>
 	<string name="process_navigation_service">OsmAnd 導航服務</string>
 	<string name="network_provider">網路</string>
@@ -849,8 +802,8 @@
 	<string name="update_tile">更新地圖</string>
 	<string name="reload_tile">重新載入圖磚</string>
 	<string name="mark_point">目的地</string>
-	<string name="show_osm_bugs_descr">在地圖上顯示 OpenStreet 的錯誤</string>
-	<string name="show_osm_bugs">顯示 OpenStreet 的錯誤</string>
+	
+	
 	<string name="use_english_names_descr">在本地語言或英語名稱之間選擇</string>
 	<string name="use_english_names">在地圖上使用英文名稱</string>
 	<string name="app_settings">應用程式設定</string>
@@ -977,7 +930,7 @@
     <string name="distance_measurement_start_editing">開始編輯</string>
     <string name="distance_measurement_finish_editing">結束編輯</string>
     <string name="distance_measurement_finish_subtrack">開始一個新的子軌跡</string>
-    <string name="distance_measurement_save_gpx">另存為 GPX</string>
+    
     <string name="distance_measurement_load_gpx">開啟現有的 GPX</string>
     <string name="wait_current_task_finished">請等待目前的作業結束</string>
     <string name="use_kalman_filter_compass_descr">降低電子羅盤讀值雜訊，但增加了慣性</string>
@@ -1006,17 +959,14 @@
 	<string name="layer_hillshade">地形陰影圖層</string>
     <string name="map_widget_gps_info">GPS 資訊</string>
     <string name="access_arrival_time">抵達時間</string>
-    <string name="tip_recent_changes_1_1_4_t">在1.1.4的變更：
-        \n\t* UI 重新設計
-		\n\t* 錯誤修正
-    </string>
+    
     <string name="item_checked">勾選</string>
     <string name="item_unchecked">取消勾選</string>
     <string name="max_speed_none">無</string>
     <string name="prefer_in_routing_descr">高速公路優先權</string>
     <string name="prefer_in_routing_title">優先權…</string>
 	<string name="prefer_motorways">高速公路優先權</string>
-	<string name="download_hillshade_item">地形陰影</string>
+	
     <string name="download_hillshade_maps">山體陰影</string>
     
     
@@ -1043,14 +993,7 @@
     <string name="av_widget_action">預設小工具作用</string>
     <string name="av_video_format_descr">選擇視訊輸出格式</string>
     <string name="av_video_format">視訊輸出格式</string>
-    <string name="tip_recent_changes_1_4_t">"在1.4的變更：
-\n\t* 排列航點以最佳的方式去全部查訪(巡回的推銷員，送貨到門)
-\n\t* 按名稱查尋街道(在附近一帶)
-\n\t* 規劃模式外掛元件(載入/編輯/儲存 GPX 軌跡)
-\n\t* 新的下載螢幕畫面(在背景下載)
-\n\t* 支援 GPX 子檔案夾(組成您的 GPX 軌跡)
-\n\t* 刪除 SRTM 檔案
-\n\t* 支援 OSM 注解 "</string>
+    
     <string name="search_street_in_neighborhood_cities">在附近一帶的城市查尋街道</string>
     <string name="av_settings_descr">組態音訊和視訊設定</string>
     <string name="av_settings">音訊/視訊設定 </string>
@@ -1094,7 +1037,7 @@
 	<string name="rendering_attr_noAdminboundaries_description">抑制顯示區域界限(管理級別5-9)</string>
     
     
-	<string name="tip_altitude_offset">海拔高度偏移修正</string>
+	
 	<string name="map_widget_max_speed">速限</string>
     <string name="route_descr_lat_lon">緯度 %1$.3f, 經度 %2$.3f</string>
     <string name="route_descr_current_location">目前位置</string>
@@ -1130,145 +1073,26 @@
     <string name="osmand_srtm_long_description_1000_chars">"這個外掛元件同時提供了等高線層和（地貌）山體陰影層，顯示在 OsmAnd 標準地圖的頂部。此功能會讓運動選手、徒步旅行者、背包客，和任何感興趣的人對起伏的地貌結構大加讚賞。\n\n全球圖資（在北緯 70 度至南緯 70 度之間）的量測基礎在於 SRTM (Shuttle Radar Topography Mission)和 ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer)，安裝在美國太空總署地球觀測系統的旗艦衛星 Terra 上的遙測儀器，ASTER 是美國太空總署、日本經濟產業省(METI)、日本太空系統 (J-spacesystems)之間的通力合作產物。 "</string>
     <string name="audionotes_location_not_defined">以位置去關聯的注解尚未下定義。\"使用位置 …\"，把注解分配給指定的位置</string>
     <string name="srtm_plugin_description">"這個外掛元件同時提供了等高線層和（地貌）山體陰影層，顯示在 OsmAnd 標準地圖的頂部。此功能會讓運動選手、徒步旅行者、背包客，和任何感興趣的人對起伏的地貌結構大加讚賞。\n\n全球圖資（在 70 度以北和 70 度以南之間）的量測基礎在於 SRTM（Shuttle Radar Topography Mission）和 ASTER（Advanced Spaceborne Thermal Emission and Reflection Radiometer），安裝在美國太空總署地球觀測系統的旗艦衛星 Terra 上的遙測儀器，ASTER 是美國太空總署、日本經濟產業省（METI）、日本太空系統（J-spacesystems）之間的通力合作的產物。 "</string>
-    <string name="tip_recent_changes_0_7_2_t">在0.7.2的變更：
-		\n\t- Native rendering for all devices
-		\n\t- Offline POI editing
-		\n\t- Accessibility
-		\n\t- Lots of bug fixes
-	</string>
-	<string name="tip_recent_changes_0_7_1_t">在0.7.1的變更：
-		\n\t- Offline POI editing 
-		\n\t- Online Tracking option - send coordinates to web service periodically (read how to setup your own web service in HowTo Articles)
-		\n\t- Show currently recorded track on map
-		\n\t- Direction detection: \'Make U-turn\' is indicated and announced when heading in opposite direction or after missing a turn
-		\n\t- New voice prompt \'Route recalculated\'
-		\n\t- Optical indication of an imminent turn within 100m by diretion arrow changing color
-		\n\t- Actuality also of deactivated index files now shown on Download screen in dark green and dark blue
-		\n\t- Other changes
-	</string>
-	<string name="tip_recent_changes_0_6_8_t">在0.6.8的變更：
-		\n\t- Completely redesigned search (POI, Address)! Make address search much faster and more responsive. Create one Search interface with many different options.
-		\n\t- Implement POI search by name in big areas (countries)  
-		\n\t- Fix flickering map screen for tablets (Issue 641)
-		\n\t- Auto-center map view option (Issue 356)
-		\n\t- GPX navigation moved to \'Directions\' and \'Save Directions\' moved to \'About route\'
-		\n\t- POI data included in .obf file (all download indexes after 01/10/11) 
-		\n\t- Voice prompt fixes (GPS position fix, omitting first command) 
-		\n\t- Small improvements
-	</string>
-	<string name="tip_recent_changes_1_3_t">在1.3的變更：
-        \n\t* 重新植入了平板電腦和大螢幕的支援
-        \n\t* Holo 主題（客制化）
-        \n\t* 為電子羅盤穩定度追加了設定
-        \n\t* 在地圖螢幕的左上方按鈕替換選單按鈕
-    </string>
-    <string name="tip_recent_changes_1_2_t">在1.2.1的修正：1.2.1:
-	    \n\t*Fix Geo Intent (Foursquare, c:geo)
-	    \n\t*Fix screen tremble during navigation
-	    \n\t*Other small fixes
-	    \n\nChanges in 1.2:
-		\n\t* Bug fixes (tuned routing, search, AV recording, voice prompts, some display improvements)
-		\n\t* Easier hillshade overlay configuration (requires Contour Lines plugin)
-		\n\t* Now accepts maps.google.com location links
-		\n\t* New widget (GPS info) 
-		\n\t* Added multi-window support for recent Samsung devices
-		\n\t* Kalman filter for compass
-		\n\t* Pebble watch support
-	</string>
-    <string name="index_name_openmaps">OpenMaps EU</string>
-    <string name="tip_recent_changes_1_1_2_t">在1.1.2的變更：
-		\n\t* Audio/video plugin enhancement (photos with EXIF information)
-		\n\t* Usability fixed and restructured Contour lines plugin
-		\n\t* Hillshade packages for Contour lines plugin
-		\n\t* Bug fixes (suboptimal routing)
-    </string>
-    <string name="tip_recent_changes_1_1_0_t">在1.1.0的變更：
-		\n\t* Distance calculator plugin
-		\n\t* Audio/video notes plugin
-		\n\t* Contour lines plugin
-		\n\t* Bug fixes
-		\n\t* \'Touring view\' map style option with more map details, new road styles, more contrast, and Alpine hiking (SAC scale) option
-		\n\t* EGM96 geoid offset correction for GPS altitude readings
-    </string>
     
-    <string name="tip_altitude_offset_t">"大多數 GPS 裝置回報的高度測量在於橢球體為基礎的 WGS84 參考系統，從哪一個轉換到本地的使用系統需要依賴位置的矯正。
-\n\n到這些地方系統有一個更好的近似值參考是 EGM96。
-\n\n在您透過\'設定\' -&gt; \'管理地圖檔案\'(原本是在 http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC)，下載了\'全球海拔修正\'(WW15MGH.DAC)之後，OsmAnd 會在 EGM96 系統中顯示您所在位置的海拔高度 。 "</string>
+	
+	
+	
+    
+    <string name="index_name_openmaps">OpenMaps EU</string>
+    
+    
+    
+    
     <string name="monitoring_control_start">GPX</string>
-    <string name="tip_recent_changes_1_0_0_t">在1.0.0的變更：
-	\n\t* Improved routing: faster, more precise, up to 250 km
-	\n\t* Introduce roads-only maps
-	\n\t* Map does not lose position lock after interruptions
-	\n\t* Enable sleep mode service during navigation
-    </string>
-    <string name="tip_recent_changes_0_8_3_t">在0.8.3的變更：
-	\n\t* Waypoints
-	\n\t* Improved route guidance
-	\n\t* Added a setting which allows to avoid motorways while building a route
-	\n\t* Added one more type of roads for bicycles to the map (Cycleway=track)
-	\n\t* Bug fixes
-	</string>
-	<string name="tip_recent_changes_0_8_2_t">在0.8.2的變更：
-		\n\t* Improved Routing
-		\n\t* Dynamic map widgets
-		\n\t* Map settings moved to map screen
-		\n\t* Lock screen button with logging services
-		\n\t* Fixed Arabic, Kannada scripting and RTL languages 
-	</string>
-	<string name="tip_recent_changes_0_8_1_t">在0.8.1的變更：
-		\n\t* More precise routes (a bit slower)
-		\n\t* Smart and fast Route recalculation
-		\n\t* Direction by lanes
-		\n\t* Information about speed limits, speed cams, and speed bumps 
-		\n\t* Improved voice guidance on highways
-		\n\t* Parking plugin (\'Where is my car parked at?\')
-		\n\t* Enable/disable logging widget
-	</string>
-	<string name="tip_recent_changes_0_8_0_t">在0.8.0的變更：0.8.0:
-		\n\t- *Plugin functionality*
-		\n\t    - Most functionality is grouped by features and can be enabled/disabled in the Settings/Plugins.
-		You can enable (online or cached) tile map sources, tracking settings, and many other new and previously existing features.     
-		\n\t- *New offline map data support*
-		\n\t    - Map rendering becomes faster and more precise (coastline and flooded area problems are mainly fixed). 
-		\n\t    - You need to download completely new offline data (old data will not be supported anymore)
-		\n\t- *Offline Routing* 
-		\n\t	- Offline routing becomes more robust
-		\n\t  *Usability and UI experience*
-		\n\t	- Improved in many areas		
-	</string>
-	<string name="tip_recent_changes_0_7_0_t">在0.7.0的變更：
-		\n\t- Offline wikipedia data with articles
-		\n\t- Updated maps
-		\n\t- Other small features
-	</string>    
-	<string name="tip_recent_changes_0_6_9_t">在0.6.9的變更：
-		\n\t- Improved offline map rendering
-		\n\t- Fast Native offline rendering - look in experimental features (may not work on some devices)
-		\n\t- Massive look and feel changes
-		\n\t- Altitude info
-		\n\t- New translations (Vienamese, Polish)
-		\n\t- Other small features
-	</string>
-	<string name="tip_recent_changes_0_6_7_t">最近在0.6.7的變更：
-		\n\t- Offline data manager (download, delete, activate / deactivate offline data directly in OsmAnd)
-		\n\t- Favorite points and groups (categorize, delete, manage favorites)
-		\n\t- GPX Explorer in application (view track detail, distance, average speed, elevation, etc.)
-		\n\t- GPX navigation (more options, continue navigation after crash, support roundabouts)
-		\n\t- Function to save route as GPX track for offline use
-		\n\t- Improve GPX monitoring  (filter some inaccurate position and save accuracy/elevation/speed)
-		\n\t- Upload GPX to OSM community (http://download.osmand.net/gpx/)
-		\n\t- Improve vector rendering
-		\n\t- Improvement of TTS engine (announce exact distance, enable miles)
-		\n\t- Bug fixes
-	</string>
-	<string name="tip_recent_changes_0_6_6_t">最近在0.6.6的變更： 
-		\n\t- Text To Speech engine for voice navigation
-		\n\t- Make map renderer more detailed
-		\n\t- Basemap for whole world packaged with app
-		\n\t- Tweak offline navigation (still experimental)
-		\n\t- GPX navigation options
-		\n\t- UI update and large bug fixing
-	</string>
+    
+    
+	
+	
+	
+	    
+	
+	
+	
 	
 	
 	<string name="av_camera_focus">相機對焦類型</string>
@@ -1281,12 +1105,7 @@
 	<string name="av_camera_focus_continuous">相機連續對焦</string>
 	<string name="av_photo_play_sound">快門音效</string>
 	<string name="av_photo_play_sound_descr">選擇在按下快門拍照時，是否發出音效</string>
-<string name="tip_recent_changes_1_5_t">"在1.5.0的變更：
-\n\t* 車速限制和測速照相的語音警告
-\n\t* 更多的語音提示能力（街道名稱通報）
-\n\t* 高密度地圖圖示
-\n\t* 更改很多的使用者界面
-\n\t* 距離顯示的錯誤修正，GPX 分析器，航點的管理，計劃小工具，OSM 上傳，HTTPS 管理 "</string>
+
     <string name="osb_author_or_password_not_specified">請在設定裡指定 OSM 的使用者名稱和密碼</string>
     <string name="clear_intermediate_points">清除中間點</string>
     <string name="keep_intermediate_points">保留中間點</string>
@@ -1317,18 +1136,7 @@
 	<string name="driving_region_uk">英國、印度、澳洲和其他</string>
 	<string name="driving_region">駕駛區域</string>
 	<string name="map_widget_fps_info">FPS 除錯資訊</string>
-	<string name="tip_recent_changes_1_6_t">在1.6的變更：
-	\n\t* 支援完全透明的背景
-	\n\t* 支援 Full HD 裝置
-	\n\t* 直接從地圖檢視下載及概覽地區
-	\n\t* 下載特定國家的 SRTM 檔案  
-	\n\t* 全新的全球底圖與主要道路、森林和鐵路
-	\n\t* 地圖放大鏡 （長按縮放按鈕）- 非常好用的光柵地圖
-	\n\t* 定義/編輯線上圖磚來源 (指定失效時間)
-	\n\t* 支援時間條件速限（荷蘭）
-	\n\t* 更快的地址輸入
-	\n\t* 路線和繪製的錯誤修復
-    </string>
+	
     <string name="local_index_tile_data_zooms">縮放已下載：%1$s</string>
     <string name="local_index_tile_data_expire">有效時間(分鐘)：%1$s</string>
     <string name="local_index_tile_data_downloadable">可下載：%1$s</string>
@@ -1348,12 +1156,8 @@
     <string name="about_settings">關於</string>
     <string name="about_settings_descr">版本訊息、授權、專案成員</string>
     
-    <string name="tip_map_styles">地圖樣式</string>
-	<string name="tip_map_styles_t">"OsmAnd 支援顯示離線的向量地圖，以不同的地圖樣式來適應您的需要：
-\n\n除了均衡的\'預設\'地圖樣式，您可以根據\'選單\' -&gt; \'組態地圖\' -&gt; \'地圖樣式\'選擇例如
-\n\t*\'遊覽檢視\'樣式：盡可能為旅行和遊覽提供包含了最詳細的資訊，包括專業的駕駛（高對比可區別的道路）、為徒步登山 (SAC 等級）作的選項、自行車道、支援徒步旅行符號等。
-\n\t*\'高對比道路\'在明亮的環境照明情況下，非常突出的高亮顏色顯示道路
-\n\t*\'冬季和滑雪\'建立一個（白雪覆蓋）冬季景觀視野，和顯示全球滑雪場和滑雪升降機 "</string>
+    
+	
     <string name="base_world_map">全球底圖</string>
 	
     
@@ -1372,8 +1176,8 @@
     <string name="animate_routing_gpx">使用 GPX 軌跡模擬</string>
     
     <string name="local_osm_changes_delete_all_confirm">您要刪除 %1$d OSM 的更改。您確定嗎？</string>
-    <string name="tip_faq_t">請造訪 https://code.google.com/p/osmand/wiki/FAQ，以查看經常被問到的問題。</string>
-    <string name="tip_faq">常見問題</string>
+    
+    
     <string name="app_mode_hiking">徒步</string>
     <string name="app_mode_motorcycle">機車</string>
     <string name="app_mode_boat">船</string>
@@ -1393,7 +1197,7 @@
     <string name="guidance_preferences_descr">導航偏好</string>
     <string name="routing_preferences_descr">路線偏好</string>
     <string name="app_mode_truck">卡車</string>
-    <string name="application_dir_change_warning2">您想要將 OsmAnd 資料複製到新的目的地嗎？選擇否，OsmAnd 只建立和使用新的資料夾。</string>
+    
     <string name="copying_osmand_one_file_descr">複製檔案 (%s) 到新的目的地…</string>
     <string name="copying_osmand_files_descr">複製 OsmAnd 資料檔到新的目的地 (%s)…</string>
     <string name="copying_osmand_files">複製 OsmAnd 資料檔案…</string>
@@ -1425,15 +1229,7 @@
     <string name="use_displayed_track_for_navigation">您是否要將顯示軌跡使用於導航？</string>
     <string name="calculate_osmand_route_without_internet">OsmAnd 預計的路段沒有網際網路</string>
     <string name="gpx_option_calculate_first_last_segment">OsmAnd 預估最初和最後路段的路線</string>
-    <string name="tip_recent_changes_1_7_1_t">"在1.7的變更：
-\n\t* 重要，地圖應該會比 2014 年 2 月更新。
-\n\t* 完全修改的路線（快速和精確）-\n\t* 新的螢幕畫面與路線規劃（更直觀和更強大）
-\n\t** 注意，在路線設定按鈕之下可用 GPX 路線
-\n\t* 在導航模式下自動隱藏按鈕
-\n\t* 預估離線路線到 GPX 路線的第一標點（\'經過全程軌跡\'選項）
-\n\t* 在隧道主動的模擬
-\n\t* 有很多小的 UX (使用者體驗)改進和適用性修復
-\n\t* 語音速率協助工具設定 "</string>
+    
     <string name="lang_en">英文</string>
 	<string name="lang_af">南非荷蘭語</string>
 	<string name="lang_hy">亞美尼亞</string>
@@ -1509,7 +1305,7 @@
     <string name="osmo_mode_off">啟動 OsMo 連線階段</string>
 	<string name="share_fav_subject">經由 OsmAnd 分享我的最愛</string>
 	<string name="use_points_as_intermediates">預估兩點之間的路線</string>
-    <string name="tip_recent_changes_1_8_alpha">"在1.8的變更： * 預估 GPX 軌跡路線標點之間的路線 * 為下載變更了各國的配置（支援當地名稱搜索） * 支援 GPX/KML 匯入(由 KML 轉換為 GPX ) * GPX 軌跡已經移到\'我的資料\' * 您可以按路程分割 GPX 軌跡和查對海拔高度差異/速度 * 自動開始導航後延遲 "</string>
+    
     <string name="osmo_auto_send_locations_descr">自動開始追蹤連線階段和發送位置之後啟動應用程式</string>
     <string name="osmo_auto_send_locations">自動開始追蹤連線階段</string>
     <string name="osmo_tracker_id">個人追蹤 ID</string>
@@ -1755,7 +1551,7 @@
 	<string name="map_widget_left">左面板</string>
 	<string name="configure_map">組態地圖</string>
     <string name="search_radius_proximity">在接近度上</string>
-    <string name="tip_recent_changes_1_9_t">"在1.9的變更：* 更新了地圖的樣式與路面的繪製，輸運層和徒步旅行符號 * 沿著路線搜尋 POI * 為每個無法通行的道路階段標記 * 更容易的下載和更新地圖 * 接近航點時給予視覺和音訊通知 * 列印行程並打開資訊 * 支援轉彎車道 * 支援 Android 穿戴 * 很多 UI 的更改 * 單獨縮放在地圖上文字的大小 * 您偏離路線的情況下特別的音訊通知 * OsMo 登入功能 * 修復 OsMo 版本的不相容 "</string>
+    
     <string name="rendering_category_routes">導航路線</string>
     <string name="rendering_attr_trainLightrailRoutes_name">火車路線</string>
     <string name="rendering_attr_tramRoutes_name">有軌電車路線</string>
@@ -1825,7 +1621,7 @@
     <string name="version_settings">建構</string>
     <string name="points">點</string>
     
-    <string name="osm_editing_manage">管理</string>
+    
     <string name="gps_status">GPS 狀態</string>
     <string name="parking_place">停車地點</string>
     <string name="remove_the_tag">移除標記</string>
@@ -1943,7 +1739,7 @@
 	<string name="delay_to_start_navigation_descr">在導航規劃螢幕上，指示剩餘等待時間</string>
     <string name="delay_to_start_navigation">導航後開始轉向建議…</string>
     <string name="shared_string_go">執行</string>
-	<string name="shared_string_not_use">不使用</string>
+	
 	<string name="confirmation_to_clear_history">您想要清除過去的記錄嗎？</string>
     <string name="local_osm_changes_upload_all_confirm">您要上載 %1$d 更改到 OSM。您確定嗎？</string>
     <string name="osmo_grop_name_length_alert">群組名稱至少須要有 3 個字元長！</string>
@@ -2060,7 +1856,7 @@
     <string name="rendering_value_default13_name">預設 (13)</string>
 	<string name="rendering_value_defaultTranslucentCyan_name">預設 (半透明青色)</string>
     <string name="do_you_like_osmand">您喜歡 osmand 嗎？</string>
-	<string name="we_really_care">我們真的在意</string>
+	
 	<string name="rate_this_app">評論這個 app</string>
 	<string name="rate_this_app_long">請在 Google Play 給 OsmAnd 分數</string>
 	<string name="user_hates_app_get_feedback">告訴我們為什麼。</string>
@@ -2139,7 +1935,7 @@
     <string name="nm_h">浬時</string>
     <string name="favorite_category_add_new">增加新的</string>
     <string name="favorite_category_select">選擇類別</string>
-    <string name="downloading_number_of_fiels">正在下載 - %1$d 檔案</string>
+    
 <string name="srtm_plugin_disabled">等高線已停用</string>
     <string name="show_free_version_banner">顯示免費版標題</string>
     <string name="show_free_version_banner_description">即使您已是付費版本，您仍然可以看到免費版本的標題</string>
@@ -2151,10 +1947,10 @@
 <string name="later">接著</string>
     <string name="get_full_version">完整版</string>
 <string name="regions">地區</string>
-    <string name="additional_maps">另外的地圖</string>
+    
     <string name="region_maps">區域地圖</string>
     <string name="world_maps">世界地圖</string>
-    <string name="world_regions">全球地區</string>
+    
     <string name="downloads">下載</string>
 <string name="favorite_category_dublicate_message">已有指定的類別名稱。請定義其它名稱。</string>
     <string name="favorite_category_name">類別名稱</string>
@@ -2173,4 +1969,8 @@
     <string name="hello_blank_fragment">哈囉，成空的片段</string>
 <string name="application_dir_description">選擇您想要在何處儲存地圖檔案。</string>
 <string name="show_on_start_description">\'關閉\' 直接啟動地圖螢幕</string>
-</resources>
+<string name="map_downloaded">地圖已下載</string>
+    <string name="map_downloaded_descr">已下載了 %1$s 地圖。回到地圖以開始使用。</string>
+    <string name="go_to_map">返回地圖</string>
+    <string name="shared_string_qr_code">QR 碼</string>
+    </resources>

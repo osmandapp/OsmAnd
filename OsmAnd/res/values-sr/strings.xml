@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="about_version">Верзија:</string>
     <string name="about_settings">Oko</string>
     <string name="about_settings_descr">Верзија инфо, лиценце, чланови пројекта</string>
@@ -17,7 +16,7 @@
     <string name="shared_string_or">или</string>
 	<string name="auto_zoom_none">Без ауто-зума</string>
 	<string name="base_world_map">Основна карта света</string>
-	<string name="tip_map_styles">Стилови мапа</string>
+	
 	<string name="local_index_tile_data_expire">Истиче(минута): %1$s</string>
     <string name="local_index_tile_data_maxzoom">Максимално увеличање: %1$s</string>
     <string name="edit_tilesource_elliptic_tile">Еклиптични приказ земљине кугле</string>
@@ -73,7 +72,7 @@
     <string name="distance_measurement_start_editing">Почните уређивање</string>
     <string name="distance_measurement_finish_editing">Заврши уређивање</string>
     <string name="distance_measurement_clear_route">Обришите све тачке</string>
-    <string name="distance_measurement_save_gpx">Сачувај као GPX</string>
+    
     <string name="distance_measurement_load_gpx">Отвори постојећи GPX</string>
     <string name="wait_current_task_finished">Молимо сачекајте док се не заврши тренутни задатак</string>
     <string name="use_kalman_filter_compass">Користите Калман филтер</string>
@@ -103,16 +102,16 @@
     <string name="download_roads_only_item">Само путеви</string>
     <string name="download_srtm_maps">изохипсе</string>
     <string name="rendering_attr_noAdminboundaries_name">Сакриј границе</string>
-	<string name="tip_altitude_offset">Корекција надморске висине</string>
+	
 	<string name="map_widget_max_speed">Ограничење брзине</string>
     <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">Нема пронађених објеката.</string>
     <string name="incremental_search_city">Тражи град инкрементално</string>
     <string name="search_villages_and_postcodes">Претрага села/Поштански код</string>
-	<string name="tip_rotation_switching">Орјентација мапе</string>
-	<string name="tip_day_night_mode">Дневни/ноћни режим</string>
-	<string name="tip_osm_improve">Побољшање ОСМ података</string>
-	<string name="tip_navigation">Навигација</string>
+	
+	
+	
+	
 	<string name="native_library_not_supported">Нативна библиотека није подржана на овом уређају .</string>
 	<string name="init_native_library">Покретање нативне библиотеке…</string>
 	<string name="choose_auto_follow_route">Аутоцентрирање мапе</string>
@@ -212,8 +211,8 @@
 	<string name="gps_provider">GPS</string>
 	<string name="int_seconds">секунде</string>
 	<string name="int_min">мин.</string>
-	<string name="tip_faq_t">Молимо Вас да посетите следећи линк https://code.google.com/p/osmand/wiki/FAQ да видите најчешће постављана питања.</string>
-    <string name="tip_faq">Најчешће постављана питања</string>
+	
+    
     <string name="max_speed_none">ниједан</string>
     <string name="stop_routing_confirm">Да ли сте сигурни да желите да прекинете навигацију?</string>
     <string name="recording_context_menu_show">Прикажи</string>
@@ -232,7 +231,7 @@
     <string name="dash_download_new_one">Преузми нову карту</string>
     <string name="dash_download_manage">Управљајте</string>
     <string name="map_locale">Језик карте</string>
-    <string name="application_dir_change_warning2">Да ли желите да Османд умножи и своје податке на ново место? Изаберите „Не“ да би Османд само направио и користио нову фасциклу.</string>
+    
     <string name="navigate_point_zone">Област</string>
     <string name="download_tab_downloads">Сва преузимања</string>
     <string name="download_tab_updates">Надоградње</string>
@@ -302,8 +301,8 @@
 	<string name="map_text_size">Величина писма на мапи</string>
 	<string name="trace_rendering">Подаци о отклону грешака приказа</string>
 	<string name="trace_rendering_descr">Приказуј учинак приказа</string>
-	<string name="tip_recent_changes">Скорашње измене</string>
-	<string name="voice_not_use">Не користи</string>
+	
+	
 	
 	<string name="installing_new_resources">Распакујем нове податке…</string>
 	<string name="internet_connection_required_for_online_route">Изабрана је услуга навођења преко мрежне везе, али је мрежна веза недоступна.</string>
@@ -390,7 +389,7 @@
     <string name="points">Тачке</string>
     
     <string name="shared_string_my_location">Мој положај</string>
-    <string name="osm_editing_manage">Управљајте</string>
+    
     <string name="home_button">Кућа</string>
     <string name="rendering_attr_subwayMode_name">Линије метроа</string>
     <string name="search_radius_proximity">У близини</string>

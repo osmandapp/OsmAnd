@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="offline_navigation_not_available">OsmAnd-ით ნავიგაცია გათიშულ რეჟიმში დროებით მიუწვდომელია.</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="offline_navigation_not_available">OsmAnd-ით ნავიგაცია გათიშულ რეჟიმში დროებით მიუწვდომელია.</string>
   <string name="left_side_navigation">მარცხენა ხელით ტარება</string>
   <string name="left_side_navigation_descr">აირჩიეთ მარცხენა მხარეს საჭის გამომყენებელი ქვეყნებისათვის</string>
   
@@ -32,8 +31,7 @@
   
   <string name="prefs_plugins_descr">დამატება გაძლევთ საშუალებას გამოიყენოთ აპლიკაციისათვის თანმოყოლილი ფუნქციები როგორიცაა ნაწილოვანი რუკები, თვალის დევნება, ძილის დროის ოპერაციები და სხვა</string>
   <string name="prefs_plugins">დამატების მმართველი</string>
-  <string name="tip_recent_changes_0_8_0_t">"ცვლილებები 0.8.0-ში :
-\n\t- დამატების შესაძლებლობები\n\t- რუკის გათიშულ რეჟიმში გამოყენების ახალი ფორმატი\n\t- გამოსწორებულია ბევრი შეცდომა "</string>
+  
   <string name="osm_editing_plugin_description">ეს დამატება გაძლევთ საშუალებას გააცნოთ OSM-ს თქვენი აზრი, გახსნა/დახურვა OSM-ის ხოჭოების შესახებ და მიაწოდოთ პროექტს თქვენი ჩაწერილი GPX ფაილები.</string>
   <string name="vector_maps_may_display_faster_on_some_devices">ვექტორული რუკები როგორც წესი ჩანს უფრო სწრაფად. შეიძლება არ იმუშაოს ზოგიერთ მოწყობილობაზე.</string>
   
@@ -43,8 +41,7 @@
   
   <string name="test_voice_prompts">ხმის ტესტირება</string>
   <string name="switch_to_raster_map_to_see">მოცემული ადგილისათვის ვექტორული რუკები ნაპოვნი არაა. შეგიძლიათ გადმოწეროთ პარამეტრებში (გამორთული მონაცემები), ან გადაერთოთ მიმდინარე მონაცემებზე.</string>
-  <string name="tip_recent_changes_0_7_2_t">"ცვლილებები 0.7.2-ში :
-\n\t- ყველა მოწყობილობისათვის პროცესორის მხარდაჭერა\n\t- POI-ს გათიშული გამართვა\n\t- წვდომა\n\t- გასწორებულია ბევრი შეცდომა "</string>
+  
   <string name="send_files_to_osm">გავუგზავნო GPX ფაილები OSM-ს?</string>
   <string name="gpx_visibility_txt">ხილვადობა</string>
   <string name="gpx_tags_txt">ჭდეები</string>
@@ -57,7 +54,7 @@
   <string name="info_button">ინფორმაცია</string>
   <string name="back_to_location">ადგილზე დაბრუნება</string>
   <string name="shared_string_help">დახმარება</string>
-  <string name="show_details">დეტალების ჩვენება</string>
+  
   <string name="accessibility_extensions_descr">წვდომადობის გაფართოებები ანდროიდის ძველი ვერსიებისათვის</string>
   <string name="accessibility_extensions">წვდომადობის გაფართოებები</string>
   <string name="accessibility_mode">წვდომადობის რეჟიმი</string>
@@ -118,10 +115,7 @@
   <string name="use_fluorescent_overlays_descr">ბილიკებისა და გზების მანათობელი ფერებით ჩვენება</string>
   <string name="offline_edition">POI-ს ჩასწორება გათიშულ რეჟიმში</string>
   <string name="offline_edition_descr">ყოველთვის გამოვიყენოთ POI-ს ჩასწორების გათიშული რეჟიმი</string>
-  <string name="tip_recent_changes_0_7_1_t">"ცვლილებები 0.7.1-ში :
-\n\t- POI-ის გათიშულ რეჟიმში ჩასწორება
-\n\t- დევნა რეალურ დროში - კოორდინატების პერიოდულად გაგზავნა ვებსერვერისათვის (საკუთარი ვებსერვერის ასაწყობად იხილეთ დოკუმენტაცია)\n\t- მიმდინარე ჩაწერილი ბილიკის რუკაზე ჩვენება\n\t- მიმართულების დადგენა: \'შემობრუნდით\' იქნება ნაჩვენები როდესაც მიდიხართ ზუსტად საპირისპირო მიმართულებით\n\t- ახალი ხმოვანი შეტყობინება: \'გზის გადათვლა დასრულებულია\'\n\t- შეხვევის ისრით ჩვენება 100 მეტრის დაცილებისას
-\n\t- დეაქტივირებული ინდექს ფაილების ჩვენება მუქი მწვანე და მუქი ლურჯი ფერებით\n\t- სხვა ცვლილებები "</string>
+  
   <string name="update_poi_does_not_change_indexes">აპლიკაციაში POI-ის ცვლილებები არ ეხება ჩამოტვირთულ რუკის ფაილებს. ცვლილებები ინახება ლოკალურ ფაილში.</string>
   <string name="local_openstreetmap_uploading">ატვირთვა…</string>
   <string name="local_openstreetmap_were_uploaded">{0} POI/Bugs ატვირთულია</string>
@@ -141,7 +135,7 @@
   <string name="live_monitoring_url">ცოცხალი დევნის ვებ-მისამართი</string>
   <string name="gpx_monitoring_disabled_warn">გთხოვთ ჩართოთ \'დევნის GPX ჟურნალში ჩაწერა\' დევნის პარამეტრებში.</string>
   <string name="show_current_gpx_title">მიმდინარე დევნის ჩვენება</string>
-  <string name="tip_recent_changes_0_7_0_t">"ცვლილებები 0.7.0-ში : \n\t- ვიკიპედიის გათიშული სტატიები\n\t- განახლებული რუკები\n\t- სხვა მცირე ცვლილებები "</string>
+  
   <string name="free_version_message">OsmAnd-ის უფასო ვერსია ლიმიტირებულია %1$s ჩამოტვირთვით და არ გააჩნია გათიშული ვიკიპედიის სტატიების მხარდაჭერა.</string>
   <string name="free_version_title">უფასო ვერსია</string>
   <string name="poi_context_menu_showdescription">POI-ის აღწერის ჩვენება</string>
@@ -181,20 +175,18 @@
   <string name="user_password_descr">საჭიროა openstreetmap.org-ზე ოპერაციებისათვის</string>
   <string name="osmand_service">ფონური პარამეტრები</string>
   <string name="osmand_service_descr">გამოიყენეთ OsmAnd-ის ეკრანის გათიშულობის დროს გამოსაყენებლად</string>
-  <string name="tip_rotation_switching">რუკის ორიენტაცია</string>
   
   
-  <string name="tip_day_night_mode">დღე/ღამის არჩევა</string>
   
-  <string name="tip_osm_improve">OSM-ს მონაცემების გაუმჯობესება</string>
-  <string name="tip_osm_improve_t">"OsmAnd იყენებს რუკებს, რომლებიც ეყრდნობა Openstreetmap.org (OSM)-ის მონაცემებს და ასევე ანახლებს მათ. თქვენ ადვილად შეგიძლიათ შექმნათ POI-ები და ატვირთოთ ისინი. ასევე შესაძლებელია OSM-ის ხოჭოების შესახებ შეტყობინებების შექმნა მხოლოდ რამოდენიმე წკაპით!\n\tამისათვის საჭიროა შეიყვანოთ OSM-ის მომხმარებლის სახელი და პაროლი. \'პარამეტრები\' -&gt; \'მთავარი პარამეტრები\' -&gt; \'OSM-ის გამართვა\'.
-\n\tახალი POI-ის შესაქმნელად აირჩიეთ ფუნქცია \'POI-ის შექმნა\' კონტექსტურ მენიუში. ინფორმაციის შეყვანის შემდეგ დააჭირეთ \'ახალი POI-ის შექმნა\'.\n\tრუკის შეცდომები შეგიძლიათ მომენტალურად შეატყობინოთ OSM-ს. ეს დაეხმარება მათ ამ შეცდომების ჩასწორებაში.\n\tOSM-ის ხოჭოს დასამატებლად აირჩიეთ \'OSM-ის ხოჭოს რეპორტის გახსნა\' კონტექსტური მენიუდან. მონაცემების შეყვანის შემდეგ დააჭირეთ დამატების ღილაკს.\n\tშენიშვნა: OSM POI-ის დასამატებლად და ხოჭოების რეპორტის გასახსნელად საჭიროა ინტერნეტ-შეერთება "</string>
+  
+  
+  
+  
   <string name="download_files_not_enough_space">არასაკმარისი ადგილი %1$s მბ-ის გადმოსაწერად (თავისუფალია: %2$s).</string>
   <string name="download_files_question_space">თავისუფალი ადგილი {2} მბ! გადმოვწერო {0} ფაილი ზომით ({1} მბ)?</string>
   
   
-  <string name="tip_recent_changes_0_6_9_t">"ცვლილებები 0.6.9-ში :
-\n\t- გაუმჯობესდა გათიშული რუკების რენდერი\n\t- მოყოლილი სწრაფი გათიშული რენდერი - შეიხედეთ ექსპერიმენტალურ მახასიათებლებში(არ მუშაობს ზოგიერთ მოწყობილობაზე)\n\t- მასიურად შეცვლილი ინტერფეისი\n\t- ინფორმაციის ჩვენება სიმაღლის შესახებ\n\t- დაემატა ახალი ენები(ვიეტნამური, პოლონური)\n\t- სხვა პატარა ცვლილებები "</string>
+  
   
   <string name="use_transparent_map_theme">გამჭირვალე თემა</string>
   <string name="native_library_not_supported">ადგილობრივი ბიბლიოთეკა მოცემულ მოწყობილობაზე მხარდაჭერილი არაა.</string>
@@ -218,7 +210,7 @@
   
   <string name="animate_route_off">ანიმაციის შეჩერება</string>
   <string name="animate_route">ანიმაციის დაწყება</string>
-  <string name="tip_recent_changes_0_6_8_t">"ცვლილებები 0.6.8-ში : \n\t- მთლიანად შეიცვალა ძებნის ინტერფეისი! ძებნა გახდა უფრო სწრაფი. შეიძლება ერთიდაიგივე რამის ძებნა სხვადასხვა პარამეტრებით.\n\t- POI-ის ძებნა დიდ არეალზე.\n\t- ჩასწორებულია რუკის ციმციმი (შეცდომა 641)\n\t- თვითცენტრირებადი რუკის პარამეტრი (შეცდომა 356)\n\t- GPX ნავიგაცია გადატანილია. \'მიმართულებები\' და \'მიმართულებების შენახვა\' გადატანილია \'გზის შესახებ\'-ში\n\t- POI-ის მონაცემები ინახება .obf ფაილში (01/10/11-ის შემდეგ ჩამოტვირთულ ინდექსებში) \n\t- ჩასწორებულია ხმოვანი შეტყობინებები (GPS მდებარეობა, პირველი ბრძანების უგულებელყოფა)\n\t- Small improvements "</string>
+  
   <string name="file_can_not_be_renamed">ფაილისათვის სახელის გადარქმევა შეუძლებელია.</string>
   <string name="file_with_name_already_exists">ფაილი მოცემული სახელით უკვე არსებობს.</string>
   <string name="gpx_navigation">GPX გზა</string>
@@ -242,7 +234,7 @@
   <string name="search_position_map_view">უკანასკნელად ნანახი რუკის ხედი</string>
   <string name="select_search_position">ძებნა ახლოს :</string>
   <string name="context_menu_item_search">ახლოს ძებნა</string>
-  <string name="tip_recent_changes_0_6_7_t">"ცვლილებები 0.6.7-ში : \n\t- გათიშული მონაცემების გამმართველი (ჩამოტვირთეთ, წაშალეთ, გაააქტიურეთ / გაუკეთეთ დეაქტივაცია გათიშულ მონაცემებს პირდაპირ OsmAnd-ში) \n\t- რჩეული წერტილები და მათი ჯგუფები (დაალაგეთ, წაშალეთ და მართეთ ისინი) \n\t- GPX გამართველი პირდაპირ აპლიკაციაში(იხილეთ ბილიკის დეტალები, სიგრძე, საშუალო სიჩქარე და ა.შ.) \n\t- GPX ნავიგაცია (მეტი პარამეტრები, ნავიგაციის გაგრძელება, გზის პარამეტრების ჩვენება) \n\t- პარამეტრი გზის შესანახავად მისი გათიშულ რეჟიმში გამოყენებისათვის\n\t- გაუმჯობესდაGPX მონიტორინგი (გაიფილტრა ზოგიერთი არაზუსტი პოზიცია და გაიზარდა სიზუსტე)\n\t- GPX-ის ატვირთვა OSM-ში (http://download.osmand.net/gpx/) \n\t- Improve vector rendering \n\t- Improvement of TTS engine (announce exact distance, enable miles) \n\t- Bug fixes "</string>
+  
   <string name="shared_string_save_as_gpx">გზის GPX ბილიკად შენახვა</string>
   <string name="route_successfully_saved_at">გზა შეინახა წარმატებით. სახელი \'%1$s\'.</string>
   <string name="filename_input">"ფაილის სახელი: "</string>
@@ -259,7 +251,7 @@
   <string name="favorite_home_category">საწყისი</string>
   <string name="favorite_friends_category">მეგობრები</string>
   <string name="favorite_places_category">ადგილები</string>
-  <string name="favorite_default_category">სხვები</string>
+  
   <string name="favourites_edit_dialog_name">სახელი</string>
   <string name="favourites_edit_dialog_category">კატეგორია</string>
   <string name="shared_string_no_thanks">არა, მადლობა</string>
@@ -298,10 +290,9 @@
   <string name="map_text_size">ტექსტის ზომა</string>
   <string name="trace_rendering">რენდერინგის ინფორმაცია</string>
   <string name="trace_rendering_descr">რენდერის სისწრაფის ჩვენება</string>
-  <string name="tip_recent_changes">უახლესი ცვლილებები</string>
-  <string name="tip_recent_changes_0_6_6_t">"ცვლილებები 0.6.6-ში :
-\n\t- ტექსტის ხმაში გადამყვანი ძრავი ხმით ნავიგაციისათვის\n\t- რუკის რენდერერი უფრო დეტალურია\n\t- ბაზური რუკა მოყვება აპლიკაციას\n\t- შეიცვალა გათიშული ნავიგაცია(საცდელი ვარიანტი)\n\t- GPX ნავიგაციის პარამეტრები\n\t- შეიცვალა მომხმარებლის ინტერფეისი და გასწორდა ბევრი შეცდომა "</string>
-  <string name="voice_not_use">არ გამოიყენოთ</string>
+  
+  
+  
   
   <string name="installing_new_resources">ახალი მონაცემების განშლა…</string>
   <string name="internet_connection_required_for_online_route">არჩეულია მიმდინარე ნავიგაციის სერვისი მაგრამ ინტერნეტთან შეერთება წვდომადი არაა.</string>
@@ -334,17 +325,14 @@
   <string name="select_tile_source_to_install">აირჩიეთ რუკა დასაყენებლად ან განსანახლებლად</string>
   <string name="internet_not_available">ოპერაციისათვის საჭიროა ინტერნეტი, რომელთანაც წვდომა არ არსებობს</string>
   <string name="install_more">მეტის ჩაყენება…</string>
-  <string name="tip_update_index">გათიშული მონაცემების განახლება</string>
-  <string name="tip_update_index_t">\tგანახლებული რუკის ქონა ძალიან მნიშვნელოვანია. OsmAnd შეიცავს ჩამოტვირთვების მმართველს, რომელიც პერიოდულად ამოწმებს გათიშული მონაცემების განახლებებს.\n\tგანახლების შესამოწმებლად იხილეთ \'პარამეტრები\' -&gt;გათიშული მონაცემები\' -&gt; \'გათიშული მონაცემების ჩამოტვირთვა\'. რაიონების სიის ჩამოტვიღტვის შემდეგ შეგიძლიათ აირჩიოთ \'მენიუ\' -&gt; \'ჩამოტვირთვების ფილტრი\' რომ იხილოთ მონაცემები, რომლებიც უკვე იმყოფება თქვენს მოწყობილობაზე.\n\tგანახლებების მნიშვნელობა დაყოფილია შემდეგ ფერებად:\n\t\'მწვანე\' - ნიშნავს რომ ფაილები თქვენს მოწყობილობაზე და სერვერზე ერთნაირია.\n\t\'ლურჯი\' - ნიშნავს რომ სერვერზე ხელმისაწვდომია განახლებები</string>
+  
+  
   <string name="level_to_switch_vector_raster_descr">მინიმალური გადიდება ვექტორული რუკების ჩვენებისათვის</string>
   <string name="level_to_switch_vector_raster">ვექტორული გადიდების მინ. ზომა</string>
-  <string name="tip_location_sharing">მდებარეობის გაზიარება</string>
-  <string name="tip_location_sharing_t">"\tშეგიძლიათ გააზიაროთ საინტერესო ადგილების მდებარეობა, რომლებიც მეგობრებთან ან ოჯახთან ერთად მოინახულეთ.
-\n\tიმისათვის რომ გააზიაროთ თქვენი მდებარეობა:
-\n\t\'რუკის კონტექსტური მენიუ\' -&gt; \'მდებარეობის გაზიარება\'.
-\n\tდა აირჩიეთ როგორ გნებავთ მდებარეობის გაზიარება. არჩევანი: ელ-ფოსტა, SMS, ან თქვენი მდებარეობის ბუფერში კოპირება. "</string>
-  <string name="tip_favorites">რჩეული წერტილები</string>
-  <string name="tip_favorites_t">"\tშეინახეთ ხშირად გამოყენებული წერტილები რჩეულებში.\n\tშესანახავად გამოიყენეთ პარამეტრი \'რჩეულებში დამატება\' და დაარქვით მას სახელი. შენახვის შემდეგ მისი პოვნა შესაძლებელია \'მთავარი მენიუ\' -&gt; \'რჩეულები\' - ში.\n\tთუ რჩეულს მენიუში დიდხანს დააწვებით, იხილავთ მენიუს სადაც შეგეძლებათ მისი შეცვლა, სამიზნედ გახდა და წაშლა.\n\tყველა რჩეულის რუკაზე სანახავად, ჩართეთ შრე \'რჩეულები\' რუკის კონტექსტურ მენიუში -&gt; \'ხედვის აღწერა\'. "</string>
+  
+  
+  
+  
   <string name="create_poi_link_to_osm_doc">" <u>Online OSM</u> რუკების დალაგება სურათებით"</string>
   <string name="error_doing_search">შეცდომა გათიშული ძებნის დროს</string>
   <string name="search_offline_geo_error">შეუძლებელია დამუშავდეს მოთხოვნა \'%s\'</string>
@@ -352,18 +340,18 @@
   <string name="system_locale">სისტემა</string>
   <string name="preferred_locale_descr">ენის არჩევა</string>
   <string name="preferred_locale">ენა</string>
-  <string name="tip_map_switch">რუკის წყარო</string>
   
-  <string name="tip_app_mode">მომხმარებლის პროფილი</string>
   
-  <string name="tip_navigation">- ნავიგაცია</string>
-  <string name="tip_navigation_t">\tნავიგაციის დასაწყებად საჭიროა დანიშნულების წერტილის არჩევა. შემდეგ დააჭირეთ \'მენიუ\' -&gt; \'მიმართულებები\' რუკაზე და აირჩიეთ ნავიგაციის ტიპი.</string>
-  <string name="tip_search">მიმდინარეობს ძებნა</string>
-  <string name="tip_search_t">"\tთქვენ შეგიძლიათ ადგილების ძებნა პირდაპირ რუკაზე, მისამართით, მდებარეობით, POI-ით ან წინასწარ განსაზღვრული რჩეულით.\n\t\'ძებნა\'-ზე დაჭერა გახსნის თქვენს ძებნის ისტორიას. ყველას გასახსნელად დააჭირეთ კონტექსტური მენიუ გთავაზობთ ორ გზას: \'დანიშნულების პუნქტის არჩევა\' და \'რუკაზე ჩვენება\'. "</string>
-  <string name="tip_map_context_menu">რუკის კონტექსტური მენიუ</string>
-  <string name="tip_map_context_menu_t">"\tრუკის კონტექსტური მენიუ წვდომადია რუკაზე დაჭერით ან ტრეკბოლის ღილაკზე დაჭერით.\n\tშედეგია ფანჯარა წერტილის კოორდინატებით. რუკის კონტექსტური მენიუს გამოსატანად დაარტყით მას თითი, ან დააჭირეთ მენიუს ღილაკს\n\tრუკის კონტექსტური მენიუ შეიცავს ყველა მოქმედებას მდებარეობასთან დაკავშირებით. "</string>
   
-  <string name="tip_initial_t">"\tOsmAnd არის აპლიკაცია ბევრი სასარგებლო თვისებით.\n\tპროგრამის გაშვებისას მისი თვისებები ეკრანზე გამოჩნდება. "</string>
+  
+  
+  
+  
+  
+  
+  
+  
+  
   <string name="shared_string_next">შემდეგი</string>
   <string name="shared_string_previous">წინა</string>
   <string name="unit_of_length_descr">სიგრძისა და სიჩქარის ერთეულები</string>
@@ -525,7 +513,7 @@
   <string name="use_trackball">გამოიყენეთ ტრეკბოლი</string>
   <string name="background_service_wait_int_descr">გთხოვთ დააყენოთ ფონური პოზიცირების ჩასასწორებელი მაქსიმალური დრო</string>
   <string name="background_service_wait_int">ჩასწორების მოლოდინის მაქსიმალური დრო</string>
-  <string name="service_stop_background_service">ფონური ნავიგაციის სერვისის გამორთვა</string>
+  
   <string name="where_am_i">სად ვარ?</string>
   <string name="process_navigation_service">OsmAnd-ის ნავიგაციის სერვისი</string>
   <string name="network_provider">ქსელი</string>
@@ -690,8 +678,8 @@
   <string name="update_tile">რუკის განახლება</string>
   <string name="reload_tile">ხელახალი ჩატვირთვა</string>
   <string name="mark_point">მიზანი</string>
-  <string name="show_osm_bugs_descr">OpenStreetBugs-ის რუკაზე ჩვენება</string>
-  <string name="show_osm_bugs">OpenStreetBugs-ის ჩვენება</string>
+  
+  
   
   <string name="shared_string_add_to_favorites">რჩეულებში დამატება</string>
   <string name="use_english_names_descr">აირჩიეთ ადგილობრივ და ინგლისურ სახელებს შორის</string>
@@ -835,7 +823,7 @@
   <string name="route_kr">გეჭიროთ მარჯვენა მხარე</string>
   
   <string name="asap">სწრაფად</string>
-  <string name="tip_recent_changes_0_8_1_t">"ცვლილებები 0.8.1-ში :\n\t* გზის ჭკვიანური და სწრაფი გადათვლა\n\t* უფრო ზუსტი გზები (ოდნავ ნელი)\n\t* ბილიკის მიმართულებები\n\t* ინფორმაცია გზის მდგომარეობის, სიჩქარის კამერებისა და ლიმიტების შესახებ\n\t* გაუმჯობესებულია ტრასებზე ხმოვანი დამხმარე\n\t* პარკინგის დამატება * მონიტორინგის ღილაკის ჩართვა/გამორთვა "</string>
+  
   <string name="gpxup_public">საჯარო</string>
   <string name="gpxup_identifiable">გამოსაცნობი</string>
   <string name="gpxup_trackable">მიყოლის შესაძლებლობა</string>
@@ -882,7 +870,7 @@
   <string name="show_cameras">სიჩქარის კამერების ჩვენება</string>
   <string name="show_traffic_warnings">სიჩქარის ლიმიტების ჩვენება</string>
   <string name="avoid_toll_roads">ფასიანი გზებისათვის გვერდის ავლა</string>
-  <string name="tip_recent_changes_0_8_2_t">"ცვლილებები 0.8.2-ში : \n\t* გზის არჩევნის გაუმჯობესება\n\t* რუკის დინამიური ღილაკები "</string>
+  
   <string name="map_widget_top_text">ქუჩის სახელი</string>
   <string name="map_widget_config">გამართვა</string>
   
@@ -936,9 +924,7 @@
 <string name="email">ელ-ფოსტა</string>
 <string name="day_night_info_description">მზის ამოსვლა: %1$s \nჩასვლა: %2$s</string>
 <string name="map_widget_renderer">რენდერის რეჟიმი</string>
-<string name="tip_app_mode_t_v2">\tOsmand-ს გააჩნია მხარდაჭერა სხვადასხვა (ხელით სამართავი) პროფილებისა სხვადასხვა ადგილას გამოყენების დროს.
-\n\tთქვენ შეგიძლიათ შეცვალოთ პროფილი შესაბამისი ღილაკით რუკაზე ქვედა მარცხენა კუთხეში(ხატულის კუთხე, ველოსიპედი ან ფეხით მოსიარულე), ან როდესაც ქმნით გზას.
-</string>
+
 <string name="rendering_attr_showRoadMaps_description">აირჩიეთ მხოლოდ გზების საჩვენებლად:</string>
 	<string name="rendering_attr_showRoadMaps_name">რუკები მხოლოდ გზებით</string>
     <string name="download_roads_only_item">"გზები. "</string>
@@ -948,11 +934,8 @@
     <string name="safe_mode">დაცული რეჟიმი</string>
     <string name="native_library_not_running">აპლიკაცია გაშვებულია დაცულ რეჟიმში(გამოსართველად იხილეთ პარამეტრები).</string>
     <string name="background_service_is_enabled_question">ფონური სერვისი ჯერ კიდევ გაშვებულია. გნებავთ მისი გამორთვა?</string>
-    <string name="tip_recent_changes_1_0_0_t">"ცვლილებები 1.0.0-ში:\n\t* გაუმჯობესდა გზები: სისწრაფე, სიზუსტე. 250 კმ-მდე\n\t* შემოღებულია რუკები მხოლოდ გზებით\n\t* ფონური სერვისის ჩართვა ნავიგაციისას "</string>
-    <string name="tip_recent_changes_0_8_4_t">"ცვლილებები 0.8.4-ში:
-\n\t*შესწორებულია შეცდომები
-\n\t*რუკა არ კარგავს პოზიციას წყვეტისას
-\n\t*ნავიგაციისას ფონური სერვისის გაშვება "</string>
+    
+    
     <string name="close_changeset">ცვლილებების ფანფრის დახურვა</string>
 	<string name="zxing_barcode_scanner_not_found">აპლიკაცია ZXing Barcode Scanner ჩადგმული არაა. გნებავთ მისი მოძებნა მარკეტში?</string>
 	<string name="rendering_attr_roadColors_description">აირჩიეთ გზების ფერების სქემა:</string>
@@ -963,7 +946,7 @@
 	<string name="enable_plugin_monitoring_services">ჩართეთ დევნის დამატება პიზიცირების ჟურნალირების სერვისის გამოსაყენებლად(ჟურნალირება, ცოცხალი დევნა)</string>
     <string name="non_optimal_route_calculation">გრძელი გზის შემთხვევაში მოსალოდნელი არაოპტიმალური მარშრუტის დათვლა</string>
 	<string name="gps_not_available">გთხოვთ ჩართოთ GPS</string>
-    <string name="tip_recent_changes_0_8_3_t">"ცვლილებები 0.8.3-ში:\n\t*გზის მაჩვენებლები\n\t*გაუმჯობესდა გზების სიზუსტე\n\t*დაემატა პარამეტრი გზების დათვლისას საცალფეხო გზების ჩათვლისა\n\t*დაემატა კიდევ ერთი გზის ტიპი (ველოსიპედის)\n\t*ჩასწორდა შეცდომები "</string>
+    
 	<string name="map_widget_monitoring_services">ჟურნალირების სერვისები</string>
 	<string name="no_route">გზა ვერ მოიძებნა</string>
 	<string name="delete_target_point">გზის სანიშნის მოცილება</string>
@@ -1026,7 +1009,7 @@
     <string name="recording_playing">მოცემული ჩანაწერიდან იკვრება მხოლოდ ხმა.\n%1$s</string>
     <string name="recording_open_external_player">გარე დამკვრელის გაშვება</string>
     <string name="recording_delete_confirm">გნებავთ ჩანაწერის წაშლა?</string>
-    <string name="tip_recent_changes_1_1_0_t">ცვლილებები 1.1.0-ში:\n\t*სიშორის დათვლის დამატება\n\t*ხმის/ვიდეო შენიშვნების დამატება\n\t*Contour lines დამატება\n\t*შეცდომების ჩასწორება\n\t*დიდი დისტანციების მხარდაჭერა\n\t*EGM96 geoid-ის მიხედვით GPS მონაცემების ჩასწორება</string>
+    
     <string name="recording_unavailable">მიუწვდომელია</string>
     <string name="recording_context_menu_arecord">ხმოვანი შენიშვნის ჩაწერა</string>
     <string name="recording_context_menu_vrecord">ვიდეო შენიშვნის ჩაწერა</string>
@@ -1060,7 +1043,7 @@
     
     
     
-	<string name="tip_altitude_offset">სიმაღლის ჩვენება - ოფსეტის შესწორება</string>
+	
 	<string name="shared_string_control_stop">შეწყვეტა</string>
     <string name="shared_string_control_start">დაწყება</string>
     <string name="map_widget_max_speed">სიჩქარის ლიმიტი</string>
@@ -1079,8 +1062,8 @@
     <string name="app_mode_motorcycle">მოტოციკლი</string>
     <string name="app_mode_boat">გემი</string>
     <string name="app_mode_aircraft">თვითმფრინავი</string>
-    <string name="tip_faq_t">ხშირად დასმული კითხვების სანახავად გთხოვთ მოინახულოთ https://code.google.com/p/osmand/wiki/FAQ .</string>
-    <string name="tip_faq">ხშირად დასმული კითხვები</string>
+    
+    
     <string name="local_osm_changes_delete_all_confirm">თქვენ შლით osm ცვლილებას %1$d. დარწმუნებული ბრძანდებით?</string>
     <string name="shared_string_delete_all">ყველას წაშლა</string>
     <string name="animate_routing_route_not_calculated">გთხოვთ ჯერ გადაითვალოთ გზა</string>
@@ -1098,7 +1081,7 @@
 	<string name="auto_zoom_farthest">დიდ მანძილზე</string>
 	<string name="map_magnifier">რუკის გამადიდებელი</string>
 	<string name="base_world_map">დედამიწის ბაზისური რუკა</string>
-	<string name="tip_map_styles">რუკის სტილები</string>
+	
 	<string name="about_version">ვერსია:</string>
     <string name="about_settings">შესახებ</string>
     <string name="about_settings_descr">ინფორმაცია ვერსიის, ლიცენზიების და პროექტის წევრების შესახებ</string>
@@ -1172,7 +1155,7 @@
     <string name="distance_measurement_finish_editing">ჩასწორების დამთავრება</string>
     <string name="distance_measurement_finish_subtrack">ახალი ქვეგზის დაწყება</string>
     <string name="distance_measurement_clear_route">ყველა წერტილის გასუფთავება</string>
-    <string name="distance_measurement_save_gpx">GPX-ად შენახვა</string>
+    
     <string name="distance_measurement_load_gpx">არსებული GPX-ის გახსნა</string>
     <string name="wait_current_task_finished">გთხოვთ მოითმინოთ სანამ დასრულდება მიმდინარე ამოცანა</string>
     <string name="use_kalman_filter_compass_descr">კომპასის ცდომილებების თავიდან ასაცილებლად გამოიყენეთ კალმანის ფილტრი</string>
@@ -1202,10 +1185,7 @@
     <string name="shared_string_more_actions">სხვა საქმიანობები</string>
     
 	<string name="map_widget_gps_info">GPS ინფორმაცია</string>
-    <string name="tip_recent_changes_1_1_4_t">ცვლილებები 1.1.4-ში
-	\n\t* UI-ს მთლიანი შეცვლა
-		\n\t* შეცდომების ჩასწორება
-    </string>
+    
     <string name="access_arrival_time">ჩასვლის დრო</string>
     <string name="item_checked">შემოწმებულია</string>
     <string name="item_unchecked">შეუმოწმებელია</string>

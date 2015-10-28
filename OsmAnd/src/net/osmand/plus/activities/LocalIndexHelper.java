@@ -82,6 +82,8 @@ public class LocalIndexHelper {
 			info.setDescription(getInstalledDate(f));
 		} else if(info.getType() == LocalIndexType.TTS_VOICE_DATA){
 			info.setDescription(getInstalledDate(f));
+		} else if(info.getType() == LocalIndexType.DEACTIVATED){
+			info.setDescription(getInstalledDate(f));
 		} else if(info.getType() == LocalIndexType.VOICE_DATA){
 			info.setDescription(getInstalledDate(f));
 		}
@@ -94,12 +96,12 @@ public class LocalIndexHelper {
 		
 		loadObfData(app.getAppPath(IndexConstants.MAPS_PATH), result, false, loadTask, loadedMaps);
 		loadObfData(app.getAppPath(IndexConstants.ROADS_INDEX_DIR), result, false, loadTask, loadedMaps);
-		loadObfData(app.getAppPath(IndexConstants.BACKUP_INDEX_DIR), result, true, loadTask, loadedMaps);
 		loadTilesData(app.getAppPath(IndexConstants.TILES_INDEX_DIR), result, false, loadTask);
 		loadSrtmData(app.getAppPath(IndexConstants.SRTM_INDEX_DIR), result, loadTask);
 		loadWikiData(app.getAppPath(IndexConstants.WIKI_INDEX_DIR), result, loadTask);
-		loadVoiceData(app.getAppPath(IndexConstants.TTSVOICE_INDEX_EXT_ZIP), result, true, loadTask);
+		//loadVoiceData(app.getAppPath(IndexConstants.TTSVOICE_INDEX_EXT_ZIP), result, true, loadTask);
 		loadVoiceData(app.getAppPath(IndexConstants.VOICE_INDEX_DIR), result, false, loadTask);
+		loadObfData(app.getAppPath(IndexConstants.BACKUP_INDEX_DIR), result, true, loadTask, loadedMaps);
 		
 		return result;
 	}
@@ -213,7 +215,8 @@ public class LocalIndexHelper {
 		SRTM_DATA(R.string.local_indexes_cat_srtm, R.drawable.ic_plugin_srtm),
 		WIKI_DATA(R.string.local_indexes_cat_wiki, R.drawable.ic_plugin_wikipedia),
 		TTS_VOICE_DATA(R.string.local_indexes_cat_tts, R.drawable.ic_action_volume_up),
-		VOICE_DATA(R.string.local_indexes_cat_voice, R.drawable.ic_action_volume_up);
+		VOICE_DATA(R.string.local_indexes_cat_voice, R.drawable.ic_action_volume_up),
+		DEACTIVATED(R.string.local_indexes_cat_backup, R.drawable.ic_type_archive);
 //		AV_DATA(R.string.local_indexes_cat_av);;
 
 		@StringRes

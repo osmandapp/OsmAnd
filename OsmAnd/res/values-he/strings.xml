@@ -8,17 +8,9 @@
     <string name="map_widget_show_destination_arrow">הצגת הכיוון ליעד</string>
     <string name="enable_plugin_monitoring_services">יש להפעיל את תוסף המעקב כדי להשתמש בשירותי רישום מיקום (מעקב חי, רישום)</string>
     <string name="non_optimal_route_calculation">יש לחשב מסלול בלתי יעיל למרחקים ארוכים</string>
-    <string name="tip_recent_changes_0_8_4_t">"שינויים ב־0.8.4 :
-\n\t* כמה תיקוני תקלות
-\n\t* המפה אינה מאבדת את נעילת המיקום שלה לאחר הפרעות
-\n\t* ניתן להפעיל יישומי רקע בעת הניווט  "</string>
+    
 	<string name="gps_not_available">נא להפעיל את רכיב האיכון (GPS) בהגדרות</string>
-    <string name="tip_recent_changes_0_8_3_t">"שינויים ב־0.8.3 :
-\n\t* נקודות ציון
-\n\t* הנחיות טוויית מסלול משופרות
-\n\t* נוספה ההגדרה שמאפשר להתעלם מדרכים לכלים ממונעים בעת טוויית מסלול
-\n\t* נוספו סוג אחד או יותר של דרכים לאופניים במפה (Cycleway=track)
-\n\t* תיקוני תקלות "</string>
+    
 	<string name="map_widget_monitoring_services">שירותי רישום</string>
 	<string name="no_route">אין מסלול</string>
 	<string name="delete_target_point">הסרת נקודת ציון</string>
@@ -58,15 +50,10 @@
 	<string name="auto_zoom_map">שינוי תקריב אוטומטי במפה</string>
 	<string name="snap_to_road_descr">יש להצמיד את המיקום לדרכים במהלך הניווט</string>
 	<string name="snap_to_road">הצמדה לדרך</string>
-	<string name="tip_recent_changes_0_8_2_t">"שינויים ב־0.8.2 :
-\n\t* ניווט משופר
-\n\t* וידג׳טים משופרים למפה
-\n\t* הגדרות המפה עברו למסך המפה
-\n\t* לחצן נעילה עם שירותי רישום
-\n\t* תוקן הטיפול בכתב בשפות ערבית וקאנדה ושפות הכתובות מימין לשמאל "</string>
+	
 	<string name="osmand_short_description_80_chars">OsmAnd הנו יישום ניווט בקוד פתוח עבור מפות מקוונות ובלתי מקוונות</string>
 	<string name="osmand_plus_short_description_80_chars">OsmAnd הנו יישום ניווט בקוד פתוח עבור מפות מקוונות ובלתי מקוונות</string>
-	<string name="tip_update_index">עדכון של נתונים בלתי מקוונים</string>
+	
 	<string name="filterpoi_activity">יצירת מסנן נ״ע</string>
 	<string name="recalculate_route_to_your_location">מצב תעבורה:</string>
 	<string name="select_navigation_mode">בחירת מצב תעבורה</string>
@@ -130,12 +117,7 @@
 	<string name="unknown_location">המיקום עדיין לא ידוע</string>
 	<string name="modify_transparency">שינוי השקיפות (0 - שקוף, 255 - אטום)</string>
 	<string name="confirm_interrupt_download">האם להפריע להורדת הקובץ?</string>
-	<string name="tip_update_index_t">"\tחיוני ביותר להתעדכן בנתוני המפה. התכנית OsmAnd מספקת מנהל הורדה שיכול לבדוק האם קיימים עדכוני נתונים בלתי מקוונים.
-\n\tכדי לבדוק אם יש עדכונים יש לגשת אל  \'הגדרות\' -&gt; \'נתונים בלתי מקוונים\' -&gt; \'הורדת נתונים בלתי מקוונים\'. לאחר שרשימת האזורים מתקבלת מהאינטרנט, ניתן לבחור באפשרות \'תפריט\' -&gt; \'סינון ההורדות\' כדי לציין עדכונים רק עבור הנתונים שבהתקן שלך.
-\n\tזמינות העדכונים מצוינת בצבעים הבאים:
-\n\t\'ירוק\' - מציין שקובצי הנתונים זהים בהתקן ובשרת
-\n\t\'כחול\' - מציין שיש עדכונים בשרת
-\n\t\'כחול/ירוק כהה\' - זהים, מציינים שהנתונים נוטרלו בהתקן"</string>
+	
 	<string name="map_widget_fluorescent">הארת מסלולים</string>
 	<string name="map_widget_time">משך הנסיעה</string>
 	<string name="map_widget_mini_route">מפת מסלול ממוזערת</string>
@@ -151,14 +133,7 @@
 	<string name="osmand_parking_hours">שעות</string>
 	<string name="osmand_parking_minutes">דקות</string>
 	<string name="osmand_parking_position_description_add_time">הרכב חונה במיקום:</string>
-	<string name="tip_recent_changes_0_8_1_t">"שינויים ב־0.8.1 :
-\n\t* מסלולים מדויקים יותר (פעולה מעט אטית יותר)
-\n\t* חישוב מחדש של נתיב באופן חכם ומהיר 
-\n\t* הנחיות לפי נתיבים
-\n\t* פרטים על מגבלות מהירות, מכמונות מהירות ופסי האטה
-\n\t* הנחיה קולית משופרת בכבישים מהירים
-\n\t* תוסף חנייה (\'איפה חניתי את האוטו שלי?\')
-\n\t* הפעלה/נטרול של וידג׳ט רישום "</string>
+	
 	<string name="select_animate_speedup">בחירה בהנפשת האצה במסלול</string>
     	<string name="global_app_allocated_memory_descr">הזיכרון המוקצה: %1$s מ״ב (המגבלה של אנדרויד: %2$s מ״ב, Dalvik‏: %3$s מ״ב).</string>
 	<string name="global_app_allocated_memory">הזיכרון המוקצה</string>
@@ -232,14 +207,7 @@
 	
 	<string name="prefs_plugins_descr">התוספים מאפשרים הגדרות במצב מומחה ומספקים תכונות נוספות</string>
 	<string name="prefs_plugins">מנהל התוספים</string>
-	<string name="tip_recent_changes_0_8_0_t">"שינויים ב־0.8.0 :
-\n\t- *תכונת התוספים*
-\n\t - רוב התכונות מקובצות לפי תכונות וניתן להפעיל/לנטרל אותן במנהל התוספים. ניתן להפעיל מקורות אריחי מפות (מקוונים או שמורים), הגדרות מעקב ועוד תכונות קיימות חדשות רבות.\n\t- *תמיכה חדשה בנתוני מפות בלתי מקוונים*
-\n\t - עיבוד המפה לתמונה היא מהירה יותר ומדויקת יותר (קו החוף ובעיית האזורים המוצפים נפתרה).\n\t - עליך להוריד נתונים בלתי מקוונים חדשים לחלוטין (לא תהיה עוד תמיכה בנתונים הישנים)
-\n\t- *ניווט בלתי מקוון*
-\n\t - הניווט הבלתי מקוון הופך ליציב יותר
-\n\t *חוויית משתמש ושימושיות*
-\n\t - שופרו באופנים רבים "</string>
+	
 	<string name="osm_editing_plugin_description">הצגת ההגדרות שנדרשות לטובת משוב ל־OSM כמו איסוף / שינוי פריטי נ״ע של OSM, פתיחה / תגובה על תקלות ב־OSM ותרומה של קובצי GPX מוקלטים (נדרשים פרטי גישה ל־OSM).</string>
 	<string name="vector_maps_may_display_faster_on_some_devices">יתכן שמפות וקטוריות יוצגו מהר יותר. עם זאת לא בטוח שיעבדו כראוי על חלק מההתקנים.</string>
 	<string name="play_commands_of_currently_selected_voice">השמעת הפקודות של הקול שנבחר</string>
@@ -247,11 +215,7 @@
 	<string name="native_rendering">עיבוד תמונה טבעי</string>
 	<string name="test_voice_prompts">בדיקת ההכרזות הקוליות</string>    
 	<string name="switch_to_raster_map_to_see">אין מפה וקטורית בלתי מקוונת לאזור זה. ניתן להוריד אחת בהגדרות (נתונים בלתי מקוונים) או לעבור למפות מקוונות.</string>
-	<string name="tip_recent_changes_0_7_2_t">"שינויים ב־0.7.2 :
-\n\t- עיבוד תמונה טבעי לכל ההתקנים
-\n\t- עריכת נ״ע באופן בלתי מקוון
-\n\t- נגישות
-\n\t- תיקוני תקלות רבים "</string>
+	
 	<string name="send_files_to_osm">האם לשלוח את קובצי ה־GPX ל־OSM?</string>
 	<string name="gpx_visibility_txt">הופעה</string>
 	<string name="gpx_tags_txt">תגיות</string>
@@ -263,7 +227,7 @@
 	<string name="info_button">פרטים</string>
 	<string name="back_to_location">חזרה למיקום</string>
 	<string name="shared_string_help">עזרה</string>
-	<string name="show_details">הצגת פרטים</string>
+	
 	<string name="accessibility_extensions_descr">הרחבות נגישות לגרסאות ישנות של אנדרויד</string>
 	<string name="accessibility_extensions">הרחבות נגישות</string>
 	<string name="accessibility_mode">מצב נגישות</string>
@@ -324,15 +288,7 @@
 	<string name="use_fluorescent_overlays_descr">ניתן להשתמש בצבעים מוארים כדי להציג דרכים ומסלולים</string>
 	<string name="offline_edition">עריכה בלתי מקוונת</string>
 	<string name="offline_edition_descr">תמיד להשתמש בעריכה בלתי מקוונת</string>
-	<string name="tip_recent_changes_0_7_1_t">"שינויים ב־0.7.1 :
-\n\t- עריכה בלתי מקוונת של נ״ע
-\n\t- אפשרות מעקב חי - שליחת הקואורדינטות לשירות מקוון באופן תדיר (ניתן לקרוא כיצד להגדיר שירותי אינטרנט משלך בכתבות ההדרכה - HowTo Articles)
-\n\t- הצגת המסלול שמוקלט כעת על המפה
-\n\t- זיהוי הכוונה: \'לפרסס\' מצוין על המסך ומוכרז בקול בעת נסיעה בכיוון הנגדיר לאחר פספוס פנייה
-\n\t- התרעה קולית חדשה \'המסלול מחושב מחדש\'
-\n\t- חיווי חזותי לפנייה קרבה בטווח של עד 100 מ׳ בעזרת חץ כיוון מחליף צבעים
-\n\t- גם קובצי אינדקס שנוטרלו מופיעים כעת במסך ההורדות בירוק כהה ובכחול כהה
-\n\t- שינויים אחרים "</string>
+	
 	<string name="update_poi_does_not_change_indexes">שינויי הנ״ע בתוך היישום אינם משפיעים על קובצי המפה שהתקבלו, השינויים נשמרים לקבצים מקומיים במקום זאת.</string>
 	<string name="local_openstreetmap_uploading">מתבצעת שליחה…</string>
 	<string name="local_openstreetmap_were_uploaded">{0} נ״ע/תקלות נשלחו</string>
@@ -352,10 +308,7 @@
 	<string name="live_monitoring_url">כתובת שרת המעקב החי</string>
 	<string name="gpx_monitoring_disabled_warn">נא להפעיל את \'מעקב אחר המסלול לקובץ GPX\' בהגדרות.</string>
 	<string name="show_current_gpx_title">הצגת המסלול הנוכחי</string>
-	<string name="tip_recent_changes_0_7_0_t">"שינויים ב־0.7.0 :
-\n\t- נתונים בלתי מקוונים מוויקיפדיה לרבות ערכים
-\n\t- מפות מעודכנות
-\n\t- תכונות קטנות נוספות "</string>    
+	    
 	<string name="free_version_message">גרסה חינמית זו של OsmAnd מוגבלת לכדי %1$s הורדות  ואינה תומכת בכתבות בלתי מקוונות של ויקיפדיה.</string>
 	<string name="free_version_title">גרסה בחינם</string>
 	<string name="poi_context_menu_showdescription">הצגת תיאור של נ״ע</string>
@@ -393,34 +346,17 @@
 	<string name="user_password">הססמה שלך ב־OSM</string>
 	<string name="osmand_service">תכונת מצב השינה</string>
 	<string name="osmand_service_descr">יש להשתמש כדי להריץ את OsmAnd כאשר המסך כבוי</string>
-	<string name="tip_rotation_switching">יישור המפה</string>
-	<string name="tip_rotation_switching_t_v2">"\tניתן לשנות את האופן בו המפה מוצגת ומסתובבת על ידי לחיצה חוזרת על סמל המצפן שעל המפה.
-\n\tהאפשרויות הן:
-\n\t\'לא לסובב (הצפון למעלה)\' - המפה לא תסתובב. הצפון תמיד יהיה למעלה
-\n\t\'לפי התנועה\' - המפה תתיישר תמיד עם כיוון התנועה שלך
-\n\t\'לפי המצפן\' - המפה תתיישר באופן סדיר עם קריאת המצפן של ההתקן "</string>
 	
-	<string name="tip_day_night_mode">מצב יום/לילה</string>
-	<string name="tip_day_night_mode_t_v2">"\tניתן לשנות את אופן הצגת המפה בין תצוגת יום (בהיר יותר) ותצוגת לילה (כהה יותר).
-\n\tהצבעים הכהים יותר בטוחים למטרות נסיעת לילה.
-\n\tניתן להגדיר מדיניות עבור מעבר בין יום ולילה תחת \'תפריט\' -&gt; \'הגדרת המסך...\' -&gt;\'מפת יום/לילה\'.
-\n\tהאפשרויות הן:
-\n\t\'זריחה/שקיעה\' - מצב אוטומטי, נשלט על ידי מיקום השמש (בררת מחדל)
-\n\t\'יום\' - תמיד להשתמש במצב יום
-\n\t\'לילה\' - תמיד להשתמש במצב לילה
-\n\t\'חיישן אור\' - אופן הצגת המפה נשלט על ידי חיישן האור של ההתקן שלך (אם צויד בכזה) "</string>	
-	<string name="tip_osm_improve">שיפור הנתונים של OSM</string>
+	
+	
+	
+		
+	
 	<string name="download_files_not_enough_space">אין די מקום כדי להוריד %1$s מ״ב (פנויים: %2$s).</string>
 	<string name="download_files_question_space">כעת ישנם {2} מ״ב פנויים! האם להוריד {0} קבצים (או קובץ) ({1} מ״ב)?</string>
 	
 	 
-	<string name="tip_recent_changes_0_6_9_t">"שינויים ב־0.6.9 :
-\n\t- עיבוד תמונה משופר למפות בלתי מקוונות
-\n\t- עיבוד תמונה בלתי מקוונת טבעי מהיר - כדי להציץ בתכונות הניסיוניות (יתכן שלא יעבוד על חלק מההתקנים)
-\n\t- שינויים מהותיים במראה ובתחושה
-\n\t- פרטי גובה
-\n\t- תרגומים חדשים (וייטנאמית, פולנית)
-\n\t- תכונות קטנות נוספות "</string>
+	
 	<string name="use_transparent_map_theme">ערכת עיצוב שקופה</string>
 	<string name="native_library_not_supported">אין תמיכה בספרייה טבעית בהתקן זה.</string>
 	<string name="init_native_library">הספרייה הטבעית מופעלת…</string>
@@ -443,15 +379,7 @@
 	
 	<string name="animate_route_off">הפסקת ההנפשה</string>
 	<string name="animate_route">התחלת ההנפשה</string>
-	<string name="tip_recent_changes_0_6_8_t">"שינויים ב־0.6.8 :
-\n\t- החיפוש תוכנן מחדש (נקודות עניין, כתובות)! הפיכת חיפוש הכתובות למהיר יותר ותגובתי יותר. יצירת מנשק חיפוש אחד עם אפשרויות שונות ומגוונות.
-\n\t- הטמעת חיפוש נקודות עניין לפני שם באזורים גדולים (מדינות)
-\n\t- תיקון בהבהוב מסך המפה במחשבי לוח (תקלה 641)
-\n\t- אפשרות מרכוז תצוגת המפה (תקלה 356)
-\n\t- ניווט GPX עבר ל\'הכוונה\' ו\'שמירת ההכוונה\' עברה ל\'על אודות המסלול\'
-\n\t- נתוני נ״ע עברו לקובץ ‎.obf (כל האינדקסים של ההורדות לאחר 01/10/11)
-\n\t- הכרזות קוליות תוקנו (תיקון מיקום האיכון, השמטת הפקודה הראשונה)
-\n\t- שיפורים קטנים "</string>
+	
 	<string name="file_can_not_be_renamed">לא ניתן לשנות את שם הקובץ.</string>
 	<string name="file_with_name_already_exists">כבר קיים קובץ בשם הזה.</string>
 	<string name="gpx_navigation">מסלול GPX</string>
@@ -475,16 +403,7 @@
 	<string name="search_position_map_view">תצוגת המפה אחרונה</string>
 	<string name="select_search_position">חיפוש ליד :</string>
 	<string name="context_menu_item_search">חיפוש באזור הזה</string>
-	<string name="tip_recent_changes_0_6_7_t">"שינויים אחרונים ב־0.6.7 :
-\n\t- מנהל נתונים בלתי מקוונים (הורדה, מחיקה, הפעלה / נטרול של הנתונים הבלתי מקוונים ישירות ב־OsmAnd)
-\n\t- נקודות וקבוצות מועדפים (סידור בקטגוריות, מחיקה, ניהול של המועדפים)
-\n\t- סייר GPX ביישום (צפייה בפרטי המסלול, מרחק, מהירות ממוצעת, עילוי וכו׳)
-\n\t- ניווט GPX (אפשרויות נוספות, המשך בניווט לאחר קריסה, תמיכה בכיכרות)
-\n\t- פונקציה לשמירת מסלול כדרך GPX לצורך שימוש בלתי מקוון\n\t- שיפור מעקב GPX (סינון מיקומים בלתי מדויקים ושמירת דיוק/עילוי/מהירות)
-\n\t- שליחת GPX לקהילת OSM ‏(http://download.osmand.net/gpx/‎)
-\n\t- שיפור עיבוד וקטורי
-\n\t- שיפור המנגנון שממיר טקסט לדיבור (הכרזת המרחק במדויק, הוספת מַיילים)
-\n\t- תיקוני תקלות "</string>
+	
 	<string name="shared_string_save_as_gpx">שמירת מסלול כדרך GPX</string>
 	<string name="route_successfully_saved_at">המסלול נשמר בהצלחה בתור \'%1$s\'.</string>
 	<string name="filename_input">"שם הקובץ : "</string>
@@ -501,7 +420,7 @@
 	<string name="favorite_home_category">בית</string>
 	<string name="favorite_friends_category">חברים</string>
 	<string name="favorite_places_category">מקומות</string>
-	<string name="favorite_default_category">אחרים</string>
+	
 	<string name="favourites_edit_dialog_name">שם</string>
 	<string name="favourites_edit_dialog_category">קטגוריה</string>
 	<string name="shared_string_no_thanks">לא, תודה</string>
@@ -540,8 +459,8 @@
 	<string name="map_text_size">גודל הגופן במפות</string>
 	<string name="trace_rendering">נתוני ניפוי שגיאות של עיבוד</string>
 	<string name="trace_rendering_descr">הצגת ביצועי עיבוד תמונה</string>
-	<string name="tip_recent_changes">שינויים אחרונים</string>
-	<string name="voice_not_use">לא להשתמש</string>
+	
+	
 	
 	<string name="installing_new_resources">הנתונים החדשים נפרסים…</string>
 	<string name="internet_connection_required_for_online_route">נבחר שירות ניווט מקוון אך אין חיבור זמין לאינטרנט.</string>
@@ -577,41 +496,28 @@
 	<string name="install_more">התקנת עוד…</string>
 	<string name="level_to_switch_vector_raster_descr">רמת התקריב המזערית לשימוש במפות וקטוריות</string>
 	<string name="level_to_switch_vector_raster">תקריב מזערי לווקטורים</string>
-	<string name="tip_location_sharing">שיתוף מיקום</string>
-	<string name="tip_location_sharing_t">"\tניתן לשתף את מיקומם של מקומות מעניינים במהלך הטיול שלך עם משפחה או חברים.
-\n\tכדי לשתף כל מיקום שהוא:
-\n\tיש להשתמש ב\'תפריט ההקשר של המפה\' -&gt; תפריט \'שיתוף המיקום\'.
-\n\tואז לבחור את אופן שיתוף המיקום שלך. האפשרויות הן: דוא״ל, SMS(טקסט) או פשוט העתקת קואורדינטות המיקום ללוח הגזירים. "</string>
-	<string name="tip_favorites">נקודות מועדפות</string>
-	<string name="tip_favorites_t">"\tניתן לשמור במועדפים נקודות שבהן נעשה שימוש לאחרונה.
-\n\tכדי לשמור נקודה כמועדפת יש לגשת לתפריט ההקשר של המפה, לבחור באפשרות \'הוספה למועדפים\' ואז לתת לה שם. לאחר שמירה כמועדפת, ניתן לגשת אליה דרך \'מסך ראשי\' -&gt; \'מועדפים\'.
-\n\tלחיצה ארוכה על מועדפת בתפריט \'מועדפים\' מספקת אפשרויות להגדיר אותה כיעד, לערוך או למחוק אותה.
-\n\tכדי להציג את כל הנקודות המועדפות ישירות על המפה, יש ללחוץ על מסך המפה ולהפעיל את השכבה \'מועדפים\' תחת \'תפריט\' -&gt; \'הגדרת תצוגה\'. "</string>
+	
+	
+	
+	
 	<string name="create_poi_link_to_osm_doc">סיווג מפה לפי <u>OSM מקוון</u> עם תמונות</string><string name="error_doing_search">אירעה שגיאה בחיפוש הבלתי מקוון</string>
 	<string name="search_offline_geo_error">לא ניתן לנתח את הפריט הגאוגרפי \'%s\'</string>
 	<string name="search_osm_offline">חיפוש כתובת באמצעות המפה הבלתי מקוונת</string>
 	<string name="system_locale">מערכת</string>
 	<string name="preferred_locale_descr">נא לבחור את שפת התצוגה</string>
 	<string name="preferred_locale">שפת התצוגה</string>
-	<string name="tip_map_switch">מקור המפה</string>
-	<string name="tip_map_switch_t_v2">"\tמקור המפה והשכבות המוצגות ניתנים לשינוי תחת \'תפריט\' -&gt; \'הגדרת תצוגה\' בתצוגת המפה.
-\n\tתחת \'מקור המפה…\' ניתן לבחור האם להשתמש במפות הווקטוריות הבלתי מקוונות שנטענו מראש, במקורות אריחים (מקוונים) שהוגדרו מראש (יש להפעיל את התוסף \'מפות אריחים ומקוונות\' לשם כך) או במפות שנוצרו בעזרת  OsmAndMapCreator על גבי מחשב.
-\n\tל־OsmAnd יש גם תמיכה במקורות מותאמים אישית. "</string>
-	<string name="tip_app_mode">פרופיל משתמש</string>
-	<string name="tip_app_mode_t_v2">"\tב־OsmAnd יש תמיכה בפרופילי יישום (ניתנים להתאמה) עבור מגוון של אופני שימוש.
-\n\tניתן לשנות את הפרופיל דרך לחצן הפרופיל בפינה הימנית התחתונה של מסך המפה (סמל של רכב, אופניים או הולך רגל) או בעת יצירת מסלול. "</string>
-	<string name="tip_navigation">ניווט</string>
-	<string name="tip_navigation_t">\tבטרם תחילת הניווט עליך לבחור ביעד. לאחר מכן ללחוץ על \'תפריט\' -&gt; \'הכוונה\' במפה ולבחור את סוג הניווט.</string>
-	<string name="tip_search">חיפוש</string>
-	<string name="tip_search_t">"\tניתן לחפש אחר מיקומים ישירות מהמפה, לפי כתובת, מיקום, כנ״ע או כמועדפת שהוגדרה מראש.
-\n\tלחיצה על \'חיפוש\' במסך הראשי פותחת את פעילויות החיפוש. לכל תוצאה יש תפריט הקשר המציע שתי אפשרויות: \'הגדרה כיעד\' או \'הצגה במפה\'. "</string>
-	<string name="tip_map_context_menu">תפריט ההקשר של המפה</string>
-	<string name="tip_map_context_menu_t">"\tתפריט ההקשר של המפה זמין על ידי לחיצה והחזקה על המפה או על ידי לחיצה על כדור המעקב.
-\n\tפעולה זו מייצרת תיבה עם הקואורדינטות של הנקודה. כדי לפתוח את תיבת דו־שיח ההקשר של המפה, יש ללחוץ עלי. (או ללחוץ ולהחזיק כדי להסתיר את התיבה.)
-\n\tתפריט ההקשר של המפה מכיל את כל הפעולות המפנות לנקודה (מיקום). "</string>
 	
-	<string name="tip_initial_t">"\tOsmAnd הנו יישום ניווט עם תכונות רבות.
-\n\tכצעד היכרות בסיסי, חלק מהעצות והתכסיסים לשימוש מקושרים למסך הראשי (לפריט לחצן ה־\'?\'). "</string>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	<string name="shared_string_next">הבא</string>
 	<string name="shared_string_previous">הקודם</string>
 	<string name="unit_of_length_descr">שינוי יחידות האורך והמהירות</string>
@@ -671,24 +577,14 @@
     <string name="safe_mode">מצב בטוח</string>
     <string name="native_library_not_running">היישום פועל כעת במצב בטוח (ניתן לנטרל זאת בהגדרות).</string>
     <string name="background_service_is_enabled_question">שירות הרקע עדיין פעיל. האם לבטל אותו?</string>
-    <string name="tip_recent_changes_1_0_0_t">"שינויים ב־1.0 :
-\n\t* טוויית מסלול מהירה ומדויקת יותר (עד 250 ק״מ)
-\n\t* מפות הדרכים
-\n\t* המפה אינה מאבדת את הכיוון לאחר הפרעות
-\n\t* הפעלת שירות רקע במהלך הניווט "</string>
+    
     <string name="osmand_routing_experimental">ניווט בלתי מקוון ב־OsmAnd הנו תכונה ניסיונית ואינה פועלת למרחקים של למעלה מ־20 ק״מ.\n\nשירות הניווט הוחלף זמנית ל־CloudMade.</string>
 	<string name="specified_dir_doesnt_exist">לא ניתן למצוא את התיקייה שצוינה.</string>
 	<string name="application_dir">תיקיית האחסון</string>
 	
 	<string name="osmand_net_previously_installed">מותקנת גרסה קודמת של OsmAnd. כל הנתונים הבלתי מקוונים יתמכו על ידי היישום החדש. אך את הנקודות המועדפות יש לייצא ביישום הישן ולייבא לאחר מכן ליישום החדש.</string>
 	<string name="build_installed">הבנייה {0} הותקנה בהצלחה ({1}).</string>
-	<string name="tip_recent_changes_0_6_6_t">"שינויים אחרונים ב־0.6.6 :
-\n\t- מנגנון טקסט לדיבור לניווט קולי
-\n\t- הפיכת עיבוד תמונת המפה למפורט יותר
-\n\t- מפת בסיס לכל העולם ארוזה ביישום
-\n\t- שיפור הניווט הבלתי מקוון (עדיין ניסיוני)
-\n\t- אפשרויות ניווט GPX
-\n\t- עדכון מנשק משתמש ותיקון באגים נרחב "</string>
+	
 	<string name="downloading_build">הבנייה מתקבלת…</string>
 	<string name="install_selected_build">האם ברצונך להתקין את OsmAnd - {0} מהמיקום {1}‏ {2} מ״ב ?</string>
 	<string name="loading_builds_failed">קבלת רשימת הבניות של OsmAnd נכשלה</string>
@@ -893,7 +789,7 @@
 	
 	<string name="opening_hours">שעות הפתיחה</string>
 	<string name="background_service_wait_int">זמן ההמתנה המרבי לתיקון</string>
-	<string name="service_stop_background_service">כיבוי שירות הניווט ברקע</string>
+	
 	<string name="background_service_wait_int_descr">הגדרת זמן ההמתנה המרבי לכל תיקון במיקום ברקע</string>
 	<string name="opening_changeset">ערכת השינויים נפתחת…</string>
 	<string name="closing_changeset">ערכת השינויים נסגרת…</string>
@@ -944,8 +840,8 @@
 	<string name="update_tile">עדכון המפה</string>
 	<string name="reload_tile">רעניון האריח</string>
 	<string name="mark_point">מטרה</string>
-	<string name="show_osm_bugs_descr">הצגת OpenStreetBugs במפה</string>
-	<string name="show_osm_bugs">הצגת OpenStreetBugs</string>
+	
+	
 	
 	<string name="shared_string_add_to_favorites">הוספה למועדפים</string>
 	<string name="use_english_names_descr">נא לבחור בין שמות מקומיים לאנגליים</string>
@@ -1065,12 +961,7 @@
 	
 	<string name="email">דוא״ל</string>
 <string name="search_history_street">רחוב:\n {0}, {1}</string>
-	<string name="tip_osm_improve_t">\tב־OsmAnd נעשה שימוש במפות המבוססות על הנתונים של Openstreetmap.org ‏(OSM) -למעט צפייה וניווט במפה- וניתן להשתמש בנתונים כדי לשפר את איכות הנתונים של OSM. ניתן בקלות להעלות נ״ע או דיווח חדש על תקלה ב־OSM תוך מספר לחיצות!
-\n\tכדי לעשות זאת, ראשית עליך לספק את פרטי הכניסה שלך ל־OSM תחת \'הגדרות\' -&gt; \'הגדרות כלליות\' -&gt; \'עריכת OSM\'.
-\n\tכדי להוסיף נ״ע חדשה ניתן להשתמש באפשרות \'יצירת נ״ע\' בתפריט ההקשר של המפה. ואז להמשיך בהזנת הפרטים על הנ״ע החדשה בתיבת הדו־שיח \'יצירת נ״ע\' ולבסוף לשלוח אותה.
-\n\tניתן לדווח על תקלות במפות באופן מיידי על ידי שליחת דיווח על תקלה ל־ OSM, ואז קהילת OSM תוכל לתקן תקלה זו מהר יותר.
-\n\tכדי להוסיף דיווח על תקלה ב־ OSM יש להשתמש באפשרות \'פתיחת תקלה ב־OSM\' בתפריט ההקשר של המפה. ואז להזין את התיאור המפורט של התקלה ולבסוף לשלוח את הדיווח באמצעות הלחצן \'הוספה\'.
-\n\tנא לקחת לתשומת לבך שיש צורך בחיבור לאינטרנט לצורך עדכון נ״ע ופתיחת דיווחי תקלות ב־OSM.</string>
+	
 	<string name="osmand_plus_long_description_1000_chars">" OsmAnd+‎ ‏(OSM הכוונת ניווט אוטומטית) OsmAnd+‎ הנו יישום ניווט בקוד פתוח עם גישה למגוון רחב של נתונים מ־OpenStreetMap‏ (OSM). ניתן לשמור את כל נתוני המפה על כרטיס הזיכרון של הטלפון לצורך שימוש ללא אינטרנט. OsmAnd מציעה גם תכונת טוויית מסלול הפועלת עם וללא אינטרנט וכוללת הנחייה קולית לכל פנייה ופנייה. OsmAnd+‎ הנה הגרסה בתשלום של היישום, רכישת גרסה זו מהווה הבעת תמיכה במיזם, מימון פיתוח של תכונות חדשות ומבטיחה קבלת עדכונים במהירות. חלק מתכונות הליבה: - אפשרות להפעלה ללא אינטרנט (איחסון וקטורים או אריחי מפות שהתקבלו לתיקייה נבחרת) - מפות וקטוריות דחוסות זמינות לכל חלקי העולם - הורדה בלתי מוגבלת של מפות לפי מדינה או אזור ישירות מהיישום - תכונת ויקיפדיה בלתי מקוונת (הורדת נ״ע מוויקיפדיה), מושלם לטיולים - ניתן להערים מספר שכבות של מפות, כמו GPX או דרכי ניווט, נקודות עניין, מועדפים, קווי מתאר, תחנות של תחבורה ציבורית, מפות נוספות עם שקיפות מותאמת - חיפוש בלתי מקוון של כתובות ומקומות (נ״ע) - תכנון מסלול לטווחים קצרים ללא חיבור לאינטרנט (ניסיוני) - מצבים לרכבים, אופניים והליכה ברגל עם: - החלפה אוטומטית בין מצבי יום/לילה - ניתן להגדיר תקריב מתכוונן בהתאם למהירות - יישור המפה בהתאם למצפן או לכיוון התנועה - ניתן להשתמש בהנחיות נתיבים, הצגת הגבלת מהירות, קולות הנחיה כטקסט לדיבור או בהקלטה "</string>
 	<string name="use_osmand_routing_service">ניווט עם OsmAnd של פחות מ־20 ק״מ</string>
 	<string name="use_osmand_routing_service_descr">הניווט הבלתי מקוון של OsmAnd תקף אך ורק למסלולים של פחות מ־20 ק״מ (ניסיוני)</string>
@@ -1088,16 +979,14 @@
     
     
     <string name="map_widget_max_speed">מהירות מותרת</string>
-    <string name="tip_altitude_offset">תצוגת גובה - תיקון סטייה</string>
+    
 	<string name="monitoring_control_start">התחלה</string>
     <string name="rendering_attr_noAdminboundaries_name">הסתרת הגבולות</string>
 	<string name="rendering_attr_noAdminboundaries_description">הסתרת דרגות ניהול 5-9</string>
 	
     
     
-	<string name="tip_altitude_offset_t">"\tרוב התקני האיכון מדווחים על מדידות גובה לפי מערכת הצירים WGS84 אשר מבוססת על אליפסואיד, אשר המרה ממנה למערכות בהן משתמשת המערכת דורשת תיקון בהתאם למיקום.
-\n\tדיוק טוב יותר אפשר לקבל עם מערכת הצירים EGM96. ב־OsmAnd יש כעת גם תמיכה בהצגה אוטומטית של גבהים במערכת EGM96.
-\n\tכדי להגיע למצב כזה, עליך פשוט להוריד את הקובץ WW15MGH.DAC דרך מנהל הנתונים הבלתי מקוונים (המקור בכתובת http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
+	
     <string name="index_srtm_parts">קטעים</string>
     <string name="index_srtm_ele">קווי הגבהה</string>
     <string name="srtm_plugin_description">תוסף זה מאפשר להוריד קווי הגבהה (הורדת מפות -&gt; תפריט -&gt; מפות אחרות) עבור קטע מסוים ולהשתמש בהם למפות בלתי מקוונות.</string>
@@ -1120,12 +1009,7 @@
     <string name="recording_playing">השמע מההקלטה שצוינה מושמע.\n%1$s</string>
     <string name="recording_open_external_player">פתיחת נגן חיצוני</string>
     <string name="recording_delete_confirm">האם ברצונך להסיר הקלטה זו?</string>
-    <string name="tip_recent_changes_1_1_0_t">"שינויים ב־1.1.0 :
-\n\t* תוסף מחשבון מרחק
-\n\t* תוסף הערות קוליות
-\n\t* תוסף קווי מתאר
-\n\t* תיקוני תקלות
-\n\t* סגנון מפה \'תצוגת טיול\' עם יותר פרטים במפה, סגנונות דרכים חדשים, יותר ניגודיות ואפשרות טיול באלפים (אמות מידה SAC)\n\t* תיקון סטיית מזהה גאוגרפי EGM96 עבור קריאת גובה דרך התקן האיכון "</string>
+    
     <string name="recording_unavailable">לא זמין</string>
     <string name="recording_context_menu_arecord">הקלטת הערה קולית</string>
     <string name="recording_context_menu_vrecord">צילום הערת וידאו</string>
@@ -1168,24 +1052,13 @@
     <string name="local_indexes_cat_av">נתוני שמע/וידאו</string>
     
     <string name="support_new_features_descr">ניתן לתרום כדי לגלות תכונות חדשות שהוטמעו ביישום</string>
-	<string name="download_hillshade_item">צל מדומה</string>
+	
     <string name="download_hillshade_maps">מפות צל מדומה</string>
-    <string name="tip_recent_changes_1_1_2_t">"שינויים ב־1.1.2:
-\n\t* הרחבת תוסף הווידאו/שמע (תמונות עם נתוני EXIF)\n\t* השימושיות תוקנה ותוסף קווי המתאר הורכב מחדש\n\t* חבילות צל מדומה לתוסף קווי המתאר\n\t* תיקוני תקלות (נתיב תת־מיטבי) "</string>
+    
     <string name="av_use_external_camera_descr">שימוש ביישום המערכת לצילום</string>
     <string name="av_use_external_camera">שימוש ביישום מצלמה</string>
     <string name="index_name_openmaps">OpenMaps אירופה</string>
-    <string name="tip_recent_changes_1_2_t">"תיקונים ב־1.2.1:
-\n\t*תיקון הכוונה גאוגרפית (Foursquare, c:geo)
-\n\t*תיקון רעידת המסך בזמן הניווט
-\n\t*תיקונים קטנים נוספים
-\nשינויים ב־1.2:
-\n\t* תיקוני תקלות (הכנת מסלול מכוונן, חיפוש, הקלטת שמע/וידאו, התרעות קוליות, שיפורי תצוגה)
-\n\t* הגדרות הצללת תבליט פשוטות יותר (נדרש תוסף קווי המתאר)
-\n\t* מעתה מתקבלים גם קישורי מיקום של maps.google.com
-\n\t* וידג׳ט חדש (פרטי איכון)
-\n\t* נוספה תמיכה בריבוי חלונות לגרסאות העדכניות מכשירי סמסונג השונים\n\t* מסנן קלמן עבור המצפן
-\n\t* תמיכה בשעון חכם (Pebble/פֵּבֵּל) "</string>
+    
     <string name="max_speed_none">אין</string>
     <string name="prefer_motorways">העדפת כבישים סלולים</string>
 	<string name="prefer_in_routing_title">העדפה…</string>
@@ -1200,12 +1073,10 @@
     <string name="osmand_play_title_30_chars">מפות וניווט עם OsmAnd</string>
 	<string name="osmand_plus_play_title_30_chars">מפות וניווט עם OsmAnd+‎</string>
 	
-	<string name="tip_recent_changes_1_1_4_t">"שינויים ב־1.1.4:
-\n\t* מנשק המשתמש תוכנן מחדש\n\t* תוקנו תקלות "</string>
+	
     <string name="street_name">רחוב</string>
 	<string name="hno">מספר הבית</string>
-    <string name="tip_recent_changes_1_3_t">"שינויים ב־1.5:
-\n\t* ערכת עיצוב הולו (התאמת ערכות עיצוב) "</string>
+    
     <string name="monitoring_settings">שירותי רישום ומצב שינה</string>
     <string name="monitoring_settings_descr">ניתן להגדיר כיצד לשמור מסלולים ולאפשר מצב שינה</string>
     
@@ -1248,7 +1119,7 @@
     <string name="distance_measurement_finish_editing">סיום העריכה</string>
     <string name="distance_measurement_finish_subtrack">תת מסלול/נקודה הבאים</string>
     <string name="distance_measurement_clear_route">מחיקת הנקודות</string>
-    <string name="distance_measurement_save_gpx">שמירה כ־GPX</string>
+    
     <string name="distance_measurement_load_gpx">פתיחת GPX קיים</string>
     <string name="use_distance_measurement_help">* יש לגעת כדי לסמן נקודה.\n * יש ללחוץ ולהחזיק על המפה כדי למחוק נקודה קודמת.\n * יש ללחוץ ולהחזיק על נקודה כדי לצפות ולצרף תיאור.\n * יש ללחוץ על וידג׳ט המדידה כדי לצפות בפעולות נוספות.</string>
     <string name="local_osm_changes_backup_successful">קובץ השינוי ב־OSM נוצר בהצלחה %1$s</string>
@@ -1257,7 +1128,7 @@
     <string name="search_street_in_neighborhood_cities">חיפוש רחוב בערים סמוכות</string>
     <string name="intermediate_items_sort_return">נקודות הביניים שבדרך סודרו מחדש באופן המיטבי בדרך אל היעד.</string>
     <string name="intermediate_items_sort_by_distance">סידור (דלת לדלת)</string>
-    <string name="tip_recent_changes_1_4_t">"שינויים ב־1.4: * סידור נקודות הביניים בדרך המיטבית כדי לבקר בכולן (הסוכן הנוסע, דלת לדלת) * חיפוש רחוב לפי שם (בשכונה) * תוסף מצב תכנון (טעינה/עריכה/שמירה של מסלולי GPX) * מסך הורדה חדש (הורדה ברקע) * תמיכה בתת־תיקיות של GPX (ארגון מסלולי ה־GPX שלך) * מחיקת קובצי SRTM * תמיכה בהערות של OSM "</string>
+    
     <string name="please_select_address">נא לבחור בעיר או ברחוב תחילה</string>
     <string name="context_menu_item_destination_point">הגדרה כיעד</string>
     <string name="destination_point">יעד %1$s</string>

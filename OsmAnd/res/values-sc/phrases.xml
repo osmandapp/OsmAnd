@@ -1427,4 +1427,10 @@
 	<string name="poi_megalith_type_nuraghe">Casta de megalitu: nuraghe</string>
 	<string name="poi_megalith_type_stone_circle">Casta de megalitu: tzìrculu de pedras</string>
 	<string name="poi_megalith_type_passage_grave">Casta de megalitu: tumba a passaditzu</string>
+	<string name="poi_historic_era_paleolithic">Època istòrica: paleolìticu (2.6 milliones de annos – 10000 BP)</string>
+	<string name="poi_historic_era_mesolithic">Època istòrica: mesolìticu</string>
+	<string name="poi_historic_era_neolithic">Època istòrica: neolìticu</string>
+	<string name="poi_historic_era_chalcolithic">Època istòrica: calcolìticu (IV-III millènniu AC.)</string>
+
+	<string name="poi_historic_stone">Pedra istòrica</string>
 	</resources>

@@ -27,7 +27,7 @@ public class ShareMenu extends BaseMenuController {
 		MESSAGE(R.drawable.ic_action_message, R.string.shared_string_send),
 		CLIPBOARD(R.drawable.ic_action_copy, R.string.shared_string_copy),
 		GEO(R.drawable.ic_world_globe_dark, R.string.share_geo),
-		QR_CODE(R.drawable.ic_action_qrcode, R.string.share_qr_code);
+		QR_CODE(R.drawable.ic_action_qrcode, R.string.shared_string_qr_code);
 
 		final int iconResourceId;
 		final int titleResourceId;

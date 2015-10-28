@@ -17,8 +17,7 @@
 	<string name="hno">Nomor rumah</string>
     <string name="website">Website</string>
 	<string name="phone">Telp</string>
-    <string name="tip_recent_changes_1_3_t">"Perubahan pada 1.5:
-\n\t* Holo Theme (kustomisasi tema) "</string>
+    
     <string name="monitoring_settings">Layanan pencatatan &amp; Mode Sleep</string>
     <string name="monitoring_settings_descr">Atur bagaimana ingin mencatat perjalanan dan mengaktifkan mode sleep</string>
     
@@ -33,22 +32,9 @@
     <string name="local_openstreetmap_act_title">Modifikasi OSM</string>
     <string name="shared_string_more_actions">Perintah lain</string>
     
-	<string name="tip_recent_changes_1_2_t">"Perbaikan pada 1.2.1:
-\n\t*Perbaikan Geo Intent (Foursquare, c:geo)
-\n\t*Perbaikan getaran layar saat navigasi
-\n\t*Perbaikan kecil lain
-\nPerubahan pada 1.2:
-\n\t* Perbaikan bug (routing lebih baik, pencarian, AV recording, voice prompts, beberapa perbaikan tampilan)
-\n\t* Konfigurasi overlay hillshade yang lebih mudah (membutuhkan plugin Contour Lines)
-\n\t* Sekarang bsia menerima link lokasi dari maps.google.com
-\n\t* Widget baru (GPS info)
-\n\t* Menambahkan dukungan banyak window untuk Samsung
-\n\t* Filter Kalman untuk kompas
-\n\t* Dukungan Pebble watch "</string>
+	
     <string name="map_widget_gps_info">Info GPS</string>
-    <string name="tip_recent_changes_1_1_4_t">"Perubahan pada 1.1.4:
-\n\t* redesain UI
-\n\t* Perbaikan bug "</string>
+    
     <string name="access_arrival_time">Waktu tiba</string>
     <string name="shared_string_map">Peta</string>
     <string name="prefer_motorways">Utamakan jalan raya</string>

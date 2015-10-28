@@ -55,7 +55,7 @@ public class FileNameTranslationHelper {
 	}
 
 	public static String getHillShadeName(Context ctx, OsmandRegions regions, String basename) {
-		String hillsh = ctx.getString(R.string.download_hillshade_item) + " ";
+		String hillsh = ctx.getString(R.string.download_hillshade_maps) + " ";
 		String locName = regions.getLocaleName(basename.trim(), true);
 		return hillsh + locName;
 	}
