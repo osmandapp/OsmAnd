@@ -1,4 +1,4 @@
-package net.osmand.plus.download.ui;
+package net.osmand.plus.download.ui.popups;
 
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -14,29 +14,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import net.osmand.data.LatLon;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.download.IndexItem;
 
-public class GoToMapFragment extends DialogFragment {
-	public static final String TAG = "GoToMapFragment";
+public class AskMapDownloadFragment extends DialogFragment {
+	public static final String TAG = "AskMapDownloadFragment";
 
-	private static final String KEY_GOTO_MAP_REGION_CENTER = "key_goto_map_region_center";
-	private static final String KEY_GOTO_MAP_REGION_NAME = "key_goto_map_region_name";
-	private LatLon regionCenter;
-	private String regionName;
+	private static final String KEY_ASK_MAP_DOWNLOAD_ITEM_FILENAME = "key_ask_map_download_item_filename";
+	private IndexItem indexItem;
 
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
-
 		boolean isLightTheme = getMyApplication()
 				.getSettings().OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME;
 		int themeId = isLightTheme ? R.style.OsmandLightTheme_BottomSheet
@@ -52,20 +49,38 @@ public class GoToMapFragment extends DialogFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
 		if (savedInstanceState != null) {
-			regionName = savedInstanceState.getString(KEY_GOTO_MAP_REGION_NAME, "");
-			Object rCenterObj = savedInstanceState.getSerializable(KEY_GOTO_MAP_REGION_CENTER);
-			if (rCenterObj != null) {
-				regionCenter = (LatLon) rCenterObj;
-			} else {
-				regionCenter = new LatLon(0, 0);
+			String itemFileName = savedInstanceState.getString(KEY_ASK_MAP_DOWNLOAD_ITEM_FILENAME);
+			if (itemFileName != null) {
+				indexItem = getMyApplication().getDownloadThread().getIndexes().getIndexItem(itemFileName);
 			}
 		}
 
-		View view = inflater.inflate(R.layout.go_to_map_fragment, container, false);
+		View view = inflater.inflate(R.layout.ask_map_download_fragment, container, false);
 		((ImageView) view.findViewById(R.id.titleIconImageView))
 				.setImageDrawable(getIcon(R.drawable.ic_map, R.color.osmand_orange));
-		((TextView) view.findViewById(R.id.descriptionTextView))
-				.setText(getActivity().getString(R.string.map_downloaded_descr, regionName));
+
+		Button actionButtonOk = (Button) view.findViewById(R.id.actionButtonOk);
+
+		String titleText = null;
+		String descriptionText = null;
+
+		if (indexItem != null) {
+			if (indexItem.getBasename().equalsIgnoreCase(WorldRegion.WORLD_BASEMAP)) {
+				titleText = getString(R.string.index_item_world_basemap);
+				descriptionText = getString(R.string.world_map_download_descr);
+			}
+
+			actionButtonOk.setText(getString(R.string.shared_string_download) + " (" + indexItem.getSizeDescription(getActivity()) + ")");
+		}
+
+		if (titleText != null) {
+			((TextView) view.findViewById(R.id.titleTextView))
+					.setText(titleText);
+		}
+		if (descriptionText != null) {
+			((TextView) view.findViewById(R.id.descriptionTextView))
+					.setText(descriptionText);
+		}
 
 		final ImageButton closeImageButton = (ImageButton) view.findViewById(R.id.closeImageButton);
 		closeImageButton.setImageDrawable(getContentIcon(R.drawable.ic_action_remove_dark));
@@ -76,14 +91,21 @@ public class GoToMapFragment extends DialogFragment {
 			}
 		});
 
-		view.findViewById(R.id.actionButton)
+		actionButtonOk.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (indexItem != null) {
+					((DownloadActivity) getActivity()).startDownload(indexItem);
+					dismiss();
+				}
+			}
+		});
+
+		view.findViewById(R.id.actionButtonCancel)
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						OsmandApplication app = (OsmandApplication) getActivity().getApplication();
-						app.getSettings().setMapLocationToShow(regionCenter.getLatitude(), regionCenter.getLongitude(), 5, null);
 						dismiss();
-						MapActivity.launchMapActivityMoveToTop(getActivity());
 					}
 				});
 
@@ -104,8 +126,9 @@ public class GoToMapFragment extends DialogFragment {
 
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
-		outState.putString(KEY_GOTO_MAP_REGION_NAME, regionName);
-		outState.putSerializable(KEY_GOTO_MAP_REGION_CENTER, regionCenter);
+		if (indexItem != null) {
+			outState.putString(KEY_ASK_MAP_DOWNLOAD_ITEM_FILENAME, indexItem.getFileName());
+		}
 	}
 
 	private OsmandApplication getMyApplication() {
@@ -120,10 +143,9 @@ public class GoToMapFragment extends DialogFragment {
 		return getMyApplication().getIconsCache().getContentIcon(drawableRes);
 	}
 
-	public static void showInstance(WorldRegion region, DownloadActivity activity) {
-		GoToMapFragment fragment = new GoToMapFragment();
-		fragment.regionCenter = region.getRegionCenter();
-		fragment.regionName = region.getLocaleName();
+	public static void showInstance(IndexItem indexItem, DownloadActivity activity) {
+		AskMapDownloadFragment fragment = new AskMapDownloadFragment();
+		fragment.indexItem = indexItem;
 		fragment.show(activity.getFragmentManager(), TAG);
 	}
 }
