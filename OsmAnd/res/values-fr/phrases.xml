@@ -1431,4 +1431,102 @@
 	<string name="poi_delivery_no">Sans livraison</string>
 	<string name="poi_delivery_only">Livraison uniquement</string>
 
+	<string name="poi_industrial_water_purification">Type : purification de l\'eau</string>
+	<string name="poi_industrial_port">Type : port</string>
+	<string name="poi_industrial_depot">Type : dépôt</string>
+
+	<string name="poi_note">Note</string>
+	<string name="poi_elevator_yes">Avec ascenseur</string>
+	<string name="poi_elevator_no">Sans ascenseur</string>
+
+	<string name="poi_castle_type_defensive">Type de château : défensif</string>
+	<string name="poi_castle_type_fortress">Type de château : forteresse</string>
+	<string name="poi_castle_type_palace">Type de château : palace</string>
+	<string name="poi_castle_type_castrum">Type de château : castrum</string>
+	<string name="poi_castle_type_shiro">Type de château : shiro</string>
+
+	<string name="poi_massage_thai">Massage : thai</string>
+	<string name="poi_clothes_military">Tenues militaires</string>
+
+	<string name="poi_shoes_children">Chaussures pour enfant</string>
+	<string name="poi_shoes_women">Chaussures pour femme</string>
+	<string name="poi_shoes_sport">Chaussures de sport</string>
+	<string name="poi_shoes_orthopedic">Chaussures orthopédiques</string>
+
+	<string name="poi_internet_access_type_wlan">Type d\'accès Internet : wlan</string>
+	<string name="poi_internet_access_type_terminal">Type d\'accès Internet : terminal</string>
+	<string name="poi_architecture_contemporary">Architecture: contemporaine</string>
+	<string name="poi_architecture_art_nouveau">Architecture : art nouveau</string>
+	<string name="poi_architecture_neoclassicism">Architecture: néo-classique</string>
+	<string name="poi_architecture_victorian">Architecture: victorien</string>
+	<string name="poi_architecture_gothic">Architecture: gothique</string>
+	<string name="poi_architecture_baroque">Architecture : baroque</string>
+	<string name="poi_architecture_renaissance">Architecture : renaissance</string>
+	<string name="poi_architecture_romanesque">Architecture : romanesque</string>
+
+	<string name="poi_tunnel_car">Tunnel routier</string>
+	<string name="poi_tunnel_pedestrian">Tunnel piéton</string>
+	<string name="poi_tunnel_railway">Tunnel ferroviaire</string>
+	<string name="poi_bridge_car">Pont routier</string>
+	<string name="poi_bridge_pedestrian">Pont piéton</string>
+	<string name="poi_bridge_bicycle">Pont cycliste</string>
+	<string name="poi_bridge_railway">Pont ferroviaire</string>
+	<string name="poi_bridge_structure_arch">Structure du pont : arche</string>
+	<string name="poi_bridge_structure_floating">Structure du pont : flottant</string>
+	<string name="poi_bridge_structure_cable_stayed">Structure du pont : suspendu</string>
+	<string name="poi_bridge_structure_viaduct">Structure du pont : viaduc</string>
+	<string name="poi_bridge_structure_aqueduct">Structure du pont : aqueduc</string>
+	<string name="poi_bridge_type_movable">Type de pont : mobile</string>
+	<string name="poi_bridge_movable_bascule">Type de pont mobile : à bascule</string>
+	<string name="poi_bridge_movable_swing">Type de pont mobile : tournant</string>
+	<string name="poi_bridge_movable_lift">Type de pont mobile : levant</string>
+	<string name="poi_bridge_movable_submersible">Type de pont mobile : submersible</string>
+	<string name="poi_bridge_movable_transporter">Type de pont mobile : transportable</string>
+	<string name="poi_bridge_movable_retractable">Type de pont mobile : rétractable</string>
+
+	<string name="poi_surface_unpaved">Surface : non pavé</string>
+	<string name="poi_surface_paved">Surface : pavé</string>
+	<string name="poi_surface_asphalt">Surface : asphalte</string>
+	<string name="poi_surface_concrete">Surface : béton</string>
+	<string name="poi_surface_stone">Surface : pierre</string>
+	<string name="poi_surface_metal">Surface : métal</string>
+	<string name="poi_surface_wood">Surface : bois</string>
+	<string name="poi_surface_sand">Surface : sable</string>
+	<string name="poi_surface_grass">Surface : herbe</string>
+	<string name="poi_surface_dirt">Surface : poussière</string>
+	<string name="poi_surface_mud">Surface : boue</string>
+	<string name="poi_surface_ice">Surface : glace</string>
+	<string name="poi_surface_salt">Surface : sel</string>
+	<string name="poi_surface_snow">Surface : neige</string>
+
+	<string name="poi_route_bus_ref">Bus</string>
+	<string name="poi_route_share_taxi_ref">Taxi partagé</string>
+	<string name="poi_route_train_ref">Train</string>
+	<string name="poi_route_funicular_ref">Funiculaire</string>
+	<string name="poi_route_ferry_ref">Ferry</string>
+
+	<string name="poi_historic_yes">Objet historique</string>
+	<string name="poi_surveillance_yes">Surveillance : oui</string>
+	<string name="poi_shop_yes">Avec boutique</string>
+
+	<string name="poi_wildlife_hide">Lieu d\'observation de la vie sauvage</string>
+
+	<string name="poi_industrial_factory">Type : usine</string>
+	<string name="poi_industrial_refinery">Type : raffinerie</string>
+	<string name="poi_industrial_warehouse">Type : entrepôt</string>
+	<string name="poi_industrial_auto_wrecker">Type : épaves automobiles</string>
+	<string name="poi_industrial_agriculture">Type : agriculture</string>
+	<string name="poi_industrial_brewery">Type : brasserie</string>
+	<string name="poi_love_hotel">Love hôtel</string>
+
+	<string name="poi_payment_coins_0.5">pièces de $0.5 acceptées</string>
+	<string name="poi_payment_cash_yes">Liquide accepté</string>
+	<string name="poi_payment_cash_no">Liquide non accepté</string>
+	<string name="poi_payment_debit_cards_yes">Cartes de crédit acceptées</string>
+	<string name="poi_payment_debit_cards_no">Cartes de crédit non acceptées</string>
+	<string name="poi_payment_none">Gratuit</string>
+	<string name="poi_social_facility_for_senior">Public ciblé : séniors</string>
+	<string name="poi_social_facility_for_child">Public ciblé : enfants</string>
+	<string name="poi_social_facility_for_orphan">Public ciblé : orphelins</string>
+	<string name="poi_social_facility_for_disabled">Public ciblé : handicapés</string>
 	</resources>
