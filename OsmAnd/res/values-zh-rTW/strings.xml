@@ -1973,5 +1973,5 @@
     <string name="map_downloaded_descr">已下載了 %1$s 地圖。回到地圖以開始使用。</string>
     <string name="go_to_map">返回地圖</string>
     <string name="shared_string_qr_code">QR 碼</string>
-    <string name="enter_country_name">輸入國家名稱</string>
+    <string name="enter_country_name">輸入國家/地區名稱</string>
 </resources>
