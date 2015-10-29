@@ -132,6 +132,10 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		});
 		cat.addPreference(pref);
 
+		PreferenceCategory info = new PreferenceCategory(this);
+		info.setTitle(R.string.info_button);
+		cat.addPreference(info);
+
 		pref = new Preference(this);
 		pref.setTitle(R.string.global_app_allocated_memory);
 
@@ -142,7 +146,7 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		pref.setSelectable(false);
 		//setEnabled(false) creates bad readability on some devices
 		//pref.setEnabled(false);
-		cat.addPreference(pref);
+		info.addPreference(pref);
 		
 //		ActivityManager activityManager = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
 //		ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
@@ -158,7 +162,7 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		pref.setSelectable(false);
 		//setEnabled(false) creates bad readability on some devices
 		//pref.setEnabled(false);
-		cat.addPreference(pref);
+		info.addPreference(pref);
 
 		final Preference agpspref = new Preference(this);
 		agpspref.setTitle(R.string.agps_info);
@@ -182,7 +186,7 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 			return true;
 			}
 		});
-		cat.addPreference(agpspref);
+		info.addPreference(agpspref);
 		
 		SunriseSunset sunriseSunset = getMyApplication().getDaynightHelper().getSunriseSunset();
 		pref = new Preference(this);
@@ -197,9 +201,9 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		pref.setSelectable(false);
 		//setEnabled(false) creates bad readability on some devices
 		//pref.setEnabled(false);
-		cat.addPreference(pref);
+		info.addPreference(pref);
 	}
-	
+
 	protected void availableProfileDialog() {
 		Builder b = new AlertDialog.Builder(this);
 		final List<ApplicationMode> modes = ApplicationMode.allPossibleValues();
