@@ -1,7 +1,6 @@
 package net.osmand.plus.mapcontextmenu.details;
 
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -27,7 +26,7 @@ public class HistoryMenuController extends MenuController {
 
 	@Override
 	protected int getSupportedMenuStatesPortrait() {
-		return MenuState.HEADER_ONLY | MenuState.HALF_SCREEN | MenuState.FULL_SCREEN;
+		return MenuState.HEADER_ONLY | MenuState.HALF_SCREEN;
 	}
 
 	@Override
@@ -67,10 +66,5 @@ public class HistoryMenuController extends MenuController {
 	@Override
 	public boolean needStreetName() {
 		return !entry.getName().isAddress();
-	}
-
-	@Override
-	public void saveEntityState(Bundle bundle, String key) {
-		bundle.putSerializable(key, entry);
 	}
 }

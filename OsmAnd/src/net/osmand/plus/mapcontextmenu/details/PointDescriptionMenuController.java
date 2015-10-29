@@ -1,7 +1,6 @@
 package net.osmand.plus.mapcontextmenu.details;
 
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
 
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
@@ -72,9 +71,5 @@ public class PointDescriptionMenuController extends MenuController {
 	@Override
 	public boolean needStreetName() {
 		return !pointDescription.isAddress();
-	}
-
-	@Override
-	public void saveEntityState(Bundle bundle, String key) {
 	}
 }

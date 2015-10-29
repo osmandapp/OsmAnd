@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 /**
  */
-public interface LocationPoint extends Serializable {
+public interface LocationPoint {
 
 	public double getLatitude();
 

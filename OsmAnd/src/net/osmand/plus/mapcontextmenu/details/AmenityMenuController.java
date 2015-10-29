@@ -1,7 +1,5 @@
 package net.osmand.plus.mapcontextmenu.details;
 
-import android.os.Bundle;
-
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -85,10 +83,5 @@ public class AmenityMenuController extends MenuController {
 	@Override
 	public String getNameStr() {
 		return amenity.getName(getMapActivity().getMyApplication().getSettings().MAP_PREFERRED_LOCALE.get());
-	}
-
-	@Override
-	public void saveEntityState(Bundle bundle, String key) {
-		bundle.putSerializable(key, amenity);
 	}
 }

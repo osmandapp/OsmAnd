@@ -1,20 +1,14 @@
 package net.osmand.plus.mapcontextmenu.details;
 
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
 
-import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
-import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
-import net.osmand.util.Algorithms;
 
 public class TargetPointMenuController extends MenuController {
 
@@ -96,10 +90,5 @@ public class TargetPointMenuController extends MenuController {
 	@Override
 	public boolean needStreetName() {
 		return true;
-	}
-
-	@Override
-	public void saveEntityState(Bundle bundle, String key) {
-		bundle.putSerializable(key, targetPoint);
 	}
 }

@@ -111,12 +111,6 @@ public class MapContextMenuFragment extends Fragment {
 
 	}
 
-	@Override
-	public void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-		menu.saveMenuState(outState);
-	}
-
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -127,9 +121,6 @@ public class MapContextMenuFragment extends Fragment {
 		markerPaddingXPx = dpToPx(MARKER_PADDING_X_DP);
 
 		menu = getMapActivity().getContextMenu();
-		if (savedInstanceState != null) {
-			menu.restoreMenuState(savedInstanceState);
-		}
 
 		map = getMapActivity().getMapView();
 		RotatedTileBox box = map.getCurrentRotatedTileBox().copy();

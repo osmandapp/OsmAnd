@@ -1,6 +1,5 @@
 package net.osmand.plus.mapcontextmenu;
 
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
@@ -16,7 +15,7 @@ import net.osmand.plus.views.OsmandMapLayer;
 
 public class MapContextMenu extends MenuTitleController {
 
-	private final MapActivity mapActivity;
+	private MapActivity mapActivity;
 
 	private boolean active;
 	private LatLon latLon;
@@ -29,20 +28,18 @@ public class MapContextMenu extends MenuTitleController {
 
 	private int favActionIconId;
 
-	private static final String KEY_CTX_MENU_OBJECT = "key_ctx_menu_object";
-	private static final String KEY_CTX_MENU_ACTIVE = "key_ctx_menu_active";
-	private static final String KEY_CTX_MENU_LATLON = "key_ctx_menu_latlon";
-	private static final String KEY_CTX_MENU_POINT_DESC = "key_ctx_menu_point_desc";
-	private static final String KEY_CTX_MENU_NAME_STR = "key_ctx_menu_name_str";
-	private static final String KEY_CTX_MENU_TYPE_STR = "key_ctx_menu_type_str";
-	private static final String KEY_CTX_MENU_STREET_STR = "key_ctx_menu_street_str";
-	private static final String KEY_CTX_MENU_ADDR_UNKNOWN = "key_ctx_menu_addr_unknown";
-	private static final String KEY_CTX_MENU_MAP_CENTER = "key_ctx_menu_map_center";
-	private static final String KEY_CTX_MENU_MAP_POSITION = "key_ctx_menu_map_position";
-
 	@Override
 	public MapActivity getMapActivity() {
 		return mapActivity;
+	}
+
+	public void setMapActivity(MapActivity mapActivity) {
+		this.mapActivity = mapActivity;
+		if (active) {
+			acquireMenuController();
+		} else {
+			menuController = null;
+		}
 	}
 
 	public boolean isActive() {
@@ -89,8 +86,7 @@ public class MapContextMenu extends MenuTitleController {
 		return menuController;
 	}
 
-	public MapContextMenu(MapActivity mapActivity) {
-		this.mapActivity = mapActivity;
+	public MapContextMenu() {
 	}
 
 	public boolean init(LatLon latLon, PointDescription pointDescription, Object object) {
@@ -265,56 +261,6 @@ public class MapContextMenu extends MenuTitleController {
 		}
 
 		mapActivity.getMapActions().contextMenuPoint(latLon.getLatitude(), latLon.getLongitude(), menuAdapter, object);
-	}
-
-	public void saveMenuState(Bundle bundle) {
-		if (menuController != null) {
-			menuController.saveEntityState(bundle, KEY_CTX_MENU_OBJECT);
-		}
-		bundle.putString(KEY_CTX_MENU_ACTIVE, Boolean.toString(active));
-		bundle.putSerializable(KEY_CTX_MENU_LATLON, latLon);
-		bundle.putSerializable(KEY_CTX_MENU_POINT_DESC, pointDescription);
-		bundle.putString(KEY_CTX_MENU_NAME_STR, nameStr);
-		bundle.putString(KEY_CTX_MENU_TYPE_STR, typeStr);
-		bundle.putString(KEY_CTX_MENU_STREET_STR, streetStr);
-		bundle.putString(KEY_CTX_MENU_ADDR_UNKNOWN, Boolean.toString(addressUnknown));
-		bundle.putSerializable(KEY_CTX_MENU_MAP_CENTER, mapCenter);
-		bundle.putInt(KEY_CTX_MENU_MAP_POSITION, mapPosition);
-	}
-
-	public void restoreMenuState(Bundle bundle) {
-		object = bundle.getSerializable(KEY_CTX_MENU_OBJECT);
-		Object pDescObj = bundle.getSerializable(KEY_CTX_MENU_POINT_DESC);
-		if (pDescObj != null) {
-			pointDescription = (PointDescription) pDescObj;
-		}
-
-		active = Boolean.parseBoolean(bundle.getString(KEY_CTX_MENU_ACTIVE));
-		Object latLonObj = bundle.getSerializable(KEY_CTX_MENU_LATLON);
-		if (latLonObj != null) {
-			latLon = (LatLon) latLonObj;
-		} else {
-			active = false;
-		}
-
-		acquireMenuController();
-
-		Object mapCenterObj = bundle.getSerializable(KEY_CTX_MENU_MAP_CENTER);
-		if (mapCenterObj != null) {
-			mapCenter = (LatLon) mapCenterObj;
-		}
-
-		nameStr = bundle.getString(KEY_CTX_MENU_NAME_STR);
-		typeStr = bundle.getString(KEY_CTX_MENU_TYPE_STR);
-		streetStr = bundle.getString(KEY_CTX_MENU_STREET_STR);
-		addressUnknown = Boolean.parseBoolean(bundle.getString(KEY_CTX_MENU_ADDR_UNKNOWN));
-		mapPosition = bundle.getInt(KEY_CTX_MENU_MAP_POSITION, 0);
-
-		acquireIcons();
-
-		if (menuController != null) {
-			menuController.addPlainMenuItems(typeStr, pointDescription, latLon);
-		}
 	}
 
 	public void setBaseFragmentVisibility(boolean visible) {

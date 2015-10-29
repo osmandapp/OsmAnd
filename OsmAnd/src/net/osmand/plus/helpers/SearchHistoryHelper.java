@@ -51,7 +51,7 @@ public class SearchHistoryHelper {
 		}
 	};
 	
-	public static class HistoryEntry implements Serializable {
+	public static class HistoryEntry {
 		double lat;
 		double lon;
 		PointDescription name;

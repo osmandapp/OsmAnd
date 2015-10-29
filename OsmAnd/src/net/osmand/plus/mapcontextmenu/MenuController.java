@@ -1,7 +1,6 @@
 package net.osmand.plus.mapcontextmenu;
 
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
 import android.view.View;
 
 import net.osmand.data.Amenity;
@@ -10,7 +9,6 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.SearchHistoryHelper;
@@ -18,9 +16,12 @@ import net.osmand.plus.mapcontextmenu.details.AmenityMenuController;
 import net.osmand.plus.mapcontextmenu.details.FavouritePointMenuController;
 import net.osmand.plus.mapcontextmenu.details.HistoryMenuController;
 import net.osmand.plus.mapcontextmenu.details.MyLocationMenuController;
+import net.osmand.plus.mapcontextmenu.details.OsMoMenuController;
 import net.osmand.plus.mapcontextmenu.details.ParkingPositionMenuController;
 import net.osmand.plus.mapcontextmenu.details.PointDescriptionMenuController;
 import net.osmand.plus.mapcontextmenu.details.TargetPointMenuController;
+import net.osmand.plus.osmo.OsMoGroupsStorage;
+import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
 
 public abstract class MenuController extends BaseMenuController {
 
@@ -56,11 +57,13 @@ public abstract class MenuController extends BaseMenuController {
 				menuController = new HistoryMenuController(app, mapActivity, (SearchHistoryHelper.HistoryEntry) object);
 			} else if (object instanceof TargetPoint) {
 				menuController = new TargetPointMenuController(app, mapActivity, (TargetPoint) object);
+			} else if (object instanceof OsMoDevice) {
+				menuController = new OsMoMenuController(app, mapActivity, (OsMoDevice) object);
 			} else if (object instanceof LatLon) {
 				if (pointDescription.isParking()) {
-					menuController = new ParkingPositionMenuController(app, mapActivity, pointDescription, (LatLon) object);
+					menuController = new ParkingPositionMenuController(app, mapActivity, pointDescription);
 				} else if (pointDescription.isMyLocation()) {
-					menuController = new MyLocationMenuController(app, mapActivity, pointDescription, (LatLon) object);
+					menuController = new MyLocationMenuController(app, mapActivity, pointDescription);
 				}
 			}
 		} else {
@@ -182,6 +185,4 @@ public abstract class MenuController extends BaseMenuController {
 	public String getTypeStr() { return ""; }
 
 	public String getNameStr() { return ""; }
-
-	public abstract void saveEntityState(Bundle bundle, String key);
 }
