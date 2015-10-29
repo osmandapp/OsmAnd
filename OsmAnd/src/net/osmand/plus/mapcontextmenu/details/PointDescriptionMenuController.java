@@ -37,6 +37,11 @@ public class PointDescriptionMenuController extends MenuController {
 	}
 
 	@Override
+	public boolean displayStreetNameinTitle() {
+		return true;
+	}
+
+	@Override
 	public Drawable getLeftIcon() {
 		return getIcon(SearchHistoryFragment.getItemIcon(pointDescription));
 	}

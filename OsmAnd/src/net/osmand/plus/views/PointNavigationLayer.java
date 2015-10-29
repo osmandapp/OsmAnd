@@ -1,18 +1,5 @@
 package net.osmand.plus.views;
 
-import java.util.List;
-
-import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
-import net.osmand.data.QuadPoint;
-import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
-import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper;
-import net.osmand.plus.TargetPointsHelper.TargetPoint;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -21,7 +8,18 @@ import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
 import android.graphics.PointF;
-import android.widget.ArrayAdapter;
+
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
+import net.osmand.data.QuadPoint;
+import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.R;
+import net.osmand.plus.TargetPointsHelper;
+import net.osmand.plus.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
+
+import java.util.List;
 
 public class PointNavigationLayer extends OsmandMapLayer implements IContextMenuProvider {
 	protected final static int DIST_TO_SHOW = 80;
@@ -216,32 +214,4 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 		}
 		return null;
 	}
-	
-	@Override
-	public void populateObjectContextMenu(Object o, ContextMenuAdapter adapter) {
-		if(o instanceof TargetPoint) {
-			final TargetPoint a = (TargetPoint) o;
-			OnContextMenuClick listener = new ContextMenuAdapter.OnContextMenuClick() {
-				@Override
-				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-					if (itemId == R.string.delete_target_point) {
-						TargetPointsHelper targetPointsHelper = map.getMyApplication().getTargetPointsHelper();
-						if(a.intermediate) {
-							targetPointsHelper.removeWayPoint(true, a.index);
-						} else {
-							targetPointsHelper.removeWayPoint(true, -1);
-						}
-					}
-					map.getContextMenu().close();
-					return true;
-				}
-			};
-			
-			
-			adapter.item(R.string.delete_target_point)
-			.iconColor( R.drawable.ic_action_remove_dark).listen(listener).reg();
-			
-		}
-	}
-
 }

@@ -9,6 +9,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.util.Algorithms;
@@ -139,7 +140,8 @@ public abstract class MenuTitleController {
 									object.getRef(), object.getDestinationName(settings.MAP_PREFERRED_LOCALE.get()));
 
 							if (!Algorithms.isEmpty(streetStr)) {
-								if (getObject() == null) {
+								MenuController menuController = getMenuController();
+								if (menuController == null || menuController.displayStreetNameinTitle()) {
 									nameStr = streetStr;
 									addressUnknown = false;
 									streetStr = "";

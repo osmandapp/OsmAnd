@@ -59,6 +59,11 @@ public abstract class BaseMenuController {
 		}
 	}
 
+	protected Drawable getIconOrig(int iconId) {
+		IconsCache iconsCache = getMapActivity().getMyApplication().getIconsCache();
+		return iconsCache.getIcon(iconId, 0, 0f);
+	}
+
 	protected Drawable getIcon(int iconId) {
 		return getIcon(iconId, R.color.icon_color, R.color.icon_color_light);
 	}

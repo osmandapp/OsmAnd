@@ -14,14 +14,14 @@ import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 import net.osmand.util.Algorithms;
 
-public class ParkingPositionController extends MenuController {
+public class ParkingPositionMenuController extends MenuController {
 
 	private PointDescription pointDescription;
 	private LatLon latLon;
 	ParkingPositionPlugin plugin;
 	String parkingDescription = "";
 
-	public ParkingPositionController(OsmandApplication app, MapActivity mapActivity, final PointDescription pointDescription, LatLon latLon) {
+	public ParkingPositionMenuController(OsmandApplication app, MapActivity mapActivity, final PointDescription pointDescription, LatLon latLon) {
 		super(new MenuBuilder(app), mapActivity);
 		this.pointDescription = pointDescription;
 		this.latLon = latLon;

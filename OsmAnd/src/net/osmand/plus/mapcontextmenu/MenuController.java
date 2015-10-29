@@ -10,14 +10,17 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.TargetPointsHelper;
+import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.mapcontextmenu.details.AmenityMenuController;
 import net.osmand.plus.mapcontextmenu.details.FavouritePointMenuController;
 import net.osmand.plus.mapcontextmenu.details.HistoryMenuController;
 import net.osmand.plus.mapcontextmenu.details.MyLocationMenuController;
-import net.osmand.plus.mapcontextmenu.details.ParkingPositionController;
+import net.osmand.plus.mapcontextmenu.details.ParkingPositionMenuController;
 import net.osmand.plus.mapcontextmenu.details.PointDescriptionMenuController;
+import net.osmand.plus.mapcontextmenu.details.TargetPointMenuController;
 
 public abstract class MenuController extends BaseMenuController {
 
@@ -51,9 +54,11 @@ public abstract class MenuController extends BaseMenuController {
 				menuController = new FavouritePointMenuController(app, mapActivity, (FavouritePoint) object);
 			} else if (object instanceof SearchHistoryHelper.HistoryEntry) {
 				menuController = new HistoryMenuController(app, mapActivity, (SearchHistoryHelper.HistoryEntry) object);
+			} else if (object instanceof TargetPoint) {
+				menuController = new TargetPointMenuController(app, mapActivity, (TargetPoint) object);
 			} else if (object instanceof LatLon) {
 				if (pointDescription.isParking()) {
-					menuController = new ParkingPositionController(app, mapActivity, pointDescription, (LatLon) object);
+					menuController = new ParkingPositionMenuController(app, mapActivity, pointDescription, (LatLon) object);
 				} else if (pointDescription.isMyLocation()) {
 					menuController = new MyLocationMenuController(app, mapActivity, pointDescription, (LatLon) object);
 				}
@@ -159,6 +164,10 @@ public abstract class MenuController extends BaseMenuController {
 	}
 
 	public boolean needTypeStr() {
+		return false;
+	}
+
+	public boolean displayStreetNameinTitle() {
 		return false;
 	}
 

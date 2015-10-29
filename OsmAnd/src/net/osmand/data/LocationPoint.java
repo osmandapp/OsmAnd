@@ -2,10 +2,12 @@ package net.osmand.data;
 
 import android.content.Context;
 
+import java.io.Serializable;
+
 
 /**
  */
-public interface LocationPoint {
+public interface LocationPoint extends Serializable {
 
 	public double getLatitude();
 
