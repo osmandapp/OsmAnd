@@ -2345,4 +2345,6 @@
 	<string name="poi_historic_gallows">Historic gallows</string>
 	<string name="poi_historic_railway">Historic railway</string>
 
+	<string name="poi_square">Square</string>
+
 </resources>
