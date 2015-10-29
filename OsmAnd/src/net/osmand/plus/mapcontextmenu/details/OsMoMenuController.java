@@ -2,6 +2,8 @@ package net.osmand.plus.mapcontextmenu.details;
 
 import android.graphics.drawable.Drawable;
 
+import net.osmand.Location;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -49,8 +51,19 @@ public class OsMoMenuController extends MenuController {
 
 	@Override
 	public String getTypeStr() {
-		// todo
-		return "";
+		OsmandApplication app = getMapActivity().getMyApplication();
+		StringBuilder sb = new StringBuilder();
+		final Location l = device.getLastLocation();
+		if(l != null && l.hasSpeed()) {
+			sb.append(OsmAndFormatter.getFormattedSpeed(l.getSpeed(), app));
+			sb.append(" — ");
+		}
+		Location myLocation = app.getLocationProvider().getLastKnownLocation();
+		if (myLocation != null) {
+			float dist = myLocation.distanceTo(l);
+			sb.append(OsmAndFormatter.getFormattedDistance(dist, app));
+		}
+		return sb.toString();
 	}
 
 	@Override
