@@ -11,16 +11,17 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.helpers.SearchHistoryHelper;
-import net.osmand.plus.mapcontextmenu.details.AmenityMenuController;
-import net.osmand.plus.mapcontextmenu.details.FavouritePointMenuController;
-import net.osmand.plus.mapcontextmenu.details.HistoryMenuController;
-import net.osmand.plus.mapcontextmenu.details.MyLocationMenuController;
-import net.osmand.plus.mapcontextmenu.details.OsMoMenuController;
-import net.osmand.plus.mapcontextmenu.details.ParkingPositionMenuController;
-import net.osmand.plus.mapcontextmenu.details.PointDescriptionMenuController;
-import net.osmand.plus.mapcontextmenu.details.TargetPointMenuController;
-import net.osmand.plus.osmo.OsMoGroupsStorage;
+import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
+import net.osmand.plus.mapcontextmenu.controllers.FavouritePointMenuController;
+import net.osmand.plus.mapcontextmenu.controllers.HistoryMenuController;
+import net.osmand.plus.mapcontextmenu.controllers.MyLocationMenuController;
+import net.osmand.plus.mapcontextmenu.controllers.OsMoMenuController;
+import net.osmand.plus.mapcontextmenu.controllers.ParkingPositionMenuController;
+import net.osmand.plus.mapcontextmenu.controllers.PointDescriptionMenuController;
+import net.osmand.plus.mapcontextmenu.controllers.RecordingItemMenuController;
+import net.osmand.plus.mapcontextmenu.controllers.TargetPointMenuController;
 import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
 
 public abstract class MenuController extends BaseMenuController {
@@ -33,6 +34,38 @@ public abstract class MenuController extends BaseMenuController {
 
 	private MenuBuilder builder;
 	private int currentMenuState;
+
+	protected TitleButtonController titleButtonController;
+
+	public abstract class TitleButtonController {
+
+		public String caption = "";
+		public int leftIconId = 0;
+		public boolean needRightText = false;
+		public String rightTextCaption = "";
+
+		public String getCaption() {
+			return caption;
+		}
+
+		public boolean isNeedRightText() {
+			return needRightText;
+		}
+
+		public String getRightTextCaption() {
+			return rightTextCaption;
+		}
+
+		public Drawable getLeftIcon() {
+			if (leftIconId != 0) {
+				return getIcon(leftIconId, getResIdFromAttribute(R.attr.contextMenuButtonColor));
+			} else {
+				return null;
+			}
+		}
+
+		public abstract void buttonPressed();
+	}
 
 	public MenuController(MenuBuilder builder, MapActivity mapActivity) {
 		super(mapActivity);
@@ -59,6 +92,8 @@ public abstract class MenuController extends BaseMenuController {
 				menuController = new TargetPointMenuController(app, mapActivity, (TargetPoint) object);
 			} else if (object instanceof OsMoDevice) {
 				menuController = new OsMoMenuController(app, mapActivity, (OsMoDevice) object);
+			} else if (object instanceof Recording) {
+				menuController = new RecordingItemMenuController(app, mapActivity, (Recording) object);
 			} else if (object instanceof LatLon) {
 				if (pointDescription.isParking()) {
 					menuController = new ParkingPositionMenuController(app, mapActivity, pointDescription);
@@ -143,15 +178,8 @@ public abstract class MenuController extends BaseMenuController {
 		this.currentMenuState = currentMenuState;
 	}
 
-	public boolean hasTitleButton() {
-		return false;
-	}
-
-	public String getTitleButtonCaption() {
-		return "";
-	}
-
-	public void titleButtonPressed() {
+	public TitleButtonController getTitleButtonController() {
+		return titleButtonController;
 	}
 
 	public boolean shouldShowButtons() {

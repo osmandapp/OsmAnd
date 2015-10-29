@@ -1,4 +1,4 @@
-package net.osmand.plus.mapcontextmenu.details;
+package net.osmand.plus.mapcontextmenu.controllers;
 
 import android.graphics.drawable.Drawable;
 
@@ -17,11 +17,19 @@ public class TargetPointMenuController extends MenuController {
 	public TargetPointMenuController(OsmandApplication app, MapActivity mapActivity, final TargetPoint targetPoint) {
 		super(new MenuBuilder(app), mapActivity);
 		this.targetPoint = targetPoint;
-	}
-
-	@Override
-	protected int getInitialMenuStatePortrait() {
-		return MenuState.HEADER_ONLY;
+		titleButtonController = new TitleButtonController() {
+			@Override
+			public void buttonPressed() {
+				TargetPointsHelper targetPointsHelper = getMapActivity().getMyApplication().getTargetPointsHelper();
+				if(targetPoint.intermediate) {
+					targetPointsHelper.removeWayPoint(true, targetPoint.index);
+				} else {
+					targetPointsHelper.removeWayPoint(true, -1);
+				}
+				getMapActivity().getContextMenu().close();
+			}
+		};
+		titleButtonController.caption = getMapActivity().getString(R.string.delete_target_point);
 	}
 
 	@Override
@@ -68,27 +76,6 @@ public class TargetPointMenuController extends MenuController {
 	@Override
 	public boolean displayStreetNameinTitle() {
 		return true;
-	}
-
-	@Override
-	public boolean hasTitleButton() {
-		return true;
-	}
-
-	@Override
-	public String getTitleButtonCaption() {
-		return getMapActivity().getString(R.string.delete_target_point);
-	}
-
-	@Override
-	public void titleButtonPressed() {
-		TargetPointsHelper targetPointsHelper = getMapActivity().getMyApplication().getTargetPointsHelper();
-		if(targetPoint.intermediate) {
-			targetPointsHelper.removeWayPoint(true, targetPoint.index);
-		} else {
-			targetPointsHelper.removeWayPoint(true, -1);
-		}
-		getMapActivity().getContextMenu().close();
 	}
 
 	@Override
