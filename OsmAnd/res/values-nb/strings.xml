@@ -273,7 +273,7 @@
 	<string name="favourites_edit_dialog_name">Navn</string>
 	<string name="favourites_edit_dialog_category">Kategori</string>
 	<string name="shared_string_no_thanks">Nei takk</string>
-	<string name="basemap_missing">Basis-verdenskart (som dekker hele verden ved lav zoom) mangler. Vurder å laste ned World_basemap_x.obf for et komplett miljø.</string>
+	<string name="basemap_missing">Basiskart verden (som dekker hele verden ved lav zoom) mangler. Vurder å laste ned World_basemap_x.obf for et komplett miljø.</string>
 	<string name="local_index_gpx_info_show">\n\nTrykk og hold for alternativer</string>
 	<string name="local_index_descr_title">Karthåndtering</string>
 	<string name="local_index_mi_restore">Aktiver</string>
@@ -649,7 +649,7 @@
 	<string name="auto_zoom_far">Middels hold</string>
 	<string name="auto_zoom_farthest">Langt hold</string>
 	<string name="map_magnifier">Kartforstørrelse</string>
-	<string name="base_world_map">Grunnkart verden</string>
+	<string name="base_world_map">Basiskart verden</string>
 	<string name="amenity_type_seamark">Sjømerke</string>
     <string name="app_modes_choose">Programprofiler</string>
 	<string name="map_widget_map_rendering">Kartopptegning</string>
@@ -1419,4 +1419,11 @@
     <string name="free_downloads_used">Gratis nedlastinger brukt</string>
     <string name="application_dir_description">Velg hvor du vil lagre kartfiler.</string>
     <string name="enter_country_name">Oppfør navn på land</string>
-</resources>
+<string name="world_map_download_descr">Basiskart verden (som dekker hele verden ved lav zoom) mangler eller er utdatert. Vurder å laste ned Basiskart verden for et komplett miljø.</string>
+    <string name="shared_string_qr_code">QR-kode</string>
+    <string name="basemap_was_selected_to_download">Basiskart er nødvendig for at programmet skal fungere riktig og ble valgt for å laste ned.</string>
+	<string name="get_full_version">Fullversjon</string>
+    <string name="confirm_download_roadmaps">Er du sikker på at du vil laste ned veikart, selv om du har fullstendig kart?</string>
+    <string name="later">Senere</string>
+    <string name="activate_srtm_plugin">Aktiver programtillegg SRTM</string>
+    </resources>
