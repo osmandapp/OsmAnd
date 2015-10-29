@@ -25,6 +25,7 @@ import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceScreen;
+import android.preference.PreferenceCategory;
 import android.view.View;
 
 //import net.osmand.plus.development.OsmandDevelopmentPlugin;
