@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="auto_zoom_none">Без аўтаматычнага маштабаваньня</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="auto_zoom_none">Без аўтаматычнага маштабаваньня</string>
     <string name="auto_zoom_close">Буйней</string>
     <string name="auto_zoom_far">Для сярэдняга маштаба</string>
     <string name="auto_zoom_farthest">Драбней</string>
@@ -1967,4 +1968,6 @@
     <string name="share_geo">geo:</string>
     <string name="show_on_start_description">OsmAnd будзе пачынацца экранам з мапай</string>
 <string name="simulate_initial_startup">Імітаваць першы старт праграмы</string>
+    <string name="shared_string_qr_code">QR-код</string>
+    <string name="map_downloaded">Мапа сьцягнутая</string>
     </resources>
