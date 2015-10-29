@@ -1,6 +1,8 @@
 package net.osmand.plus.mapcontextmenu;
 
+import android.app.Activity;
 import android.graphics.drawable.Drawable;
+import android.util.TypedValue;
 
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.R;
@@ -68,8 +70,22 @@ public abstract class BaseMenuController {
 		return getIcon(iconId, R.color.icon_color, R.color.icon_color_light);
 	}
 
+	protected Drawable getIcon(int iconId, int colorId) {
+		IconsCache iconsCache = getMapActivity().getMyApplication().getIconsCache();
+		return iconsCache.getIcon(iconId, colorId);
+	}
+
 	protected Drawable getIcon(int iconId, int colorLightId, int colorDarkId) {
 		IconsCache iconsCache = getMapActivity().getMyApplication().getIconsCache();
 		return iconsCache.getIcon(iconId, isLight() ? colorLightId : colorDarkId);
 	}
+
+	protected int getResIdFromAttribute(final int attr) {
+		if (attr == 0)
+			return 0;
+		final TypedValue typedvalueattr = new TypedValue();
+		getMapActivity().getTheme().resolveAttribute(attr, typedvalueattr, true);
+		return typedvalueattr.resourceId;
+	}
+
 }

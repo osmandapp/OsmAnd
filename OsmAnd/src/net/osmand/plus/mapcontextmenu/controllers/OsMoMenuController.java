@@ -1,4 +1,4 @@
-package net.osmand.plus.mapcontextmenu.details;
+package net.osmand.plus.mapcontextmenu.controllers;
 
 import android.graphics.drawable.Drawable;
 
@@ -18,11 +18,6 @@ public class OsMoMenuController extends MenuController {
 	public OsMoMenuController(OsmandApplication app, MapActivity mapActivity, final OsMoDevice device) {
 		super(new MenuBuilder(app), mapActivity);
 		this.device = device;
-	}
-
-	@Override
-	protected int getInitialMenuStatePortrait() {
-		return MenuState.HEADER_ONLY;
 	}
 
 	@Override

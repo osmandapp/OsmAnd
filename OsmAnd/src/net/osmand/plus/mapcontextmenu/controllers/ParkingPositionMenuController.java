@@ -1,4 +1,4 @@
-package net.osmand.plus.mapcontextmenu.details;
+package net.osmand.plus.mapcontextmenu.controllers;
 
 import android.graphics.drawable.Drawable;
 
@@ -31,11 +31,15 @@ public class ParkingPositionMenuController extends MenuController {
 			}
 			parkingDescription = sb.toString();
 		}
-	}
-
-	@Override
-	protected int getInitialMenuStatePortrait() {
-		return MenuState.HEADER_ONLY;
+		titleButtonController = new TitleButtonController() {
+			@Override
+			public void buttonPressed() {
+				if (plugin != null) {
+					plugin.showDeleteDialog(getMapActivity());
+				}
+			}
+		};
+		titleButtonController.caption = getMapActivity().getString(R.string.osmand_parking_delete);
 	}
 
 	@Override
@@ -61,23 +65,6 @@ public class ParkingPositionMenuController extends MenuController {
 	@Override
 	public String getTypeStr() {
 		return parkingDescription;
-	}
-
-	@Override
-	public boolean hasTitleButton() {
-		return true;
-	}
-
-	@Override
-	public String getTitleButtonCaption() {
-		return getMapActivity().getString(R.string.osmand_parking_delete);
-	}
-
-	@Override
-	public void titleButtonPressed() {
-		if (plugin != null) {
-			plugin.showDeleteDialog(getMapActivity());
-		}
 	}
 
 	@Override

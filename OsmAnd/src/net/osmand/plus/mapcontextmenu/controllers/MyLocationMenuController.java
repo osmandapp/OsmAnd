@@ -1,4 +1,4 @@
-package net.osmand.plus.mapcontextmenu.details;
+package net.osmand.plus.mapcontextmenu.controllers;
 
 import android.graphics.drawable.Drawable;
 
@@ -16,11 +16,6 @@ public class MyLocationMenuController  extends MenuController {
 	public MyLocationMenuController(OsmandApplication app, MapActivity mapActivity, final PointDescription pointDescription) {
 		super(new MenuBuilder(app), mapActivity);
 		this.pointDescription = pointDescription;
-	}
-
-	@Override
-	protected int getInitialMenuStatePortrait() {
-		return MenuState.HEADER_ONLY;
 	}
 
 	@Override

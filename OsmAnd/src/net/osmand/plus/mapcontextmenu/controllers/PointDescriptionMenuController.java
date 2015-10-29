@@ -1,43 +1,43 @@
-package net.osmand.plus.mapcontextmenu.details;
+package net.osmand.plus.mapcontextmenu.controllers;
 
 import android.graphics.drawable.Drawable;
 
+import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.search.SearchHistoryFragment;
-import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 
-public class HistoryMenuController extends MenuController {
+public class PointDescriptionMenuController extends MenuController {
 
-	private HistoryEntry entry;
+	private PointDescription pointDescription;
 
-	public HistoryMenuController(OsmandApplication app, MapActivity mapActivity, final HistoryEntry entry) {
+	public PointDescriptionMenuController(OsmandApplication app, MapActivity mapActivity, final PointDescription pointDescription) {
 		super(new MenuBuilder(app), mapActivity);
-		this.entry = entry;
-	}
-
-	@Override
-	protected int getInitialMenuStatePortrait() {
-		return MenuState.HEADER_ONLY;
+		this.pointDescription = pointDescription;
 	}
 
 	@Override
 	protected int getSupportedMenuStatesPortrait() {
-		return MenuState.HEADER_ONLY | MenuState.HALF_SCREEN;
+		return MenuState.HEADER_ONLY | MenuState.HALF_SCREEN | MenuState.FULL_SCREEN;
 	}
 
 	@Override
 	public boolean needTypeStr() {
-		String typeName = entry.getName().getTypeName();
+		String typeName = pointDescription.getTypeName();
 		return (typeName != null && !typeName.isEmpty());
 	}
 
 	@Override
+	public boolean displayStreetNameinTitle() {
+		return true;
+	}
+
+	@Override
 	public Drawable getLeftIcon() {
-		return getIcon(SearchHistoryFragment.getItemIcon(entry.getName()));
+		return getIcon(SearchHistoryFragment.getItemIcon(pointDescription));
 	}
 
 	@Override
@@ -51,13 +51,13 @@ public class HistoryMenuController extends MenuController {
 
 	@Override
 	public String getNameStr() {
-		return entry.getName().getSimpleName(getMapActivity(), false);
+		return pointDescription.getSimpleName(getMapActivity(), false);
 	}
 
 	@Override
 	public String getTypeStr() {
 		if (needTypeStr()) {
-			return entry.getName().getTypeName();
+			return pointDescription.getTypeName();
 		} else {
 			return "";
 		}
@@ -65,6 +65,6 @@ public class HistoryMenuController extends MenuController {
 
 	@Override
 	public boolean needStreetName() {
-		return !entry.getName().isAddress();
+		return !pointDescription.isAddress();
 	}
 }

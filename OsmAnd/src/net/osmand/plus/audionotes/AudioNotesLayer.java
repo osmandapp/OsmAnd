@@ -118,10 +118,7 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 			OnContextMenuClick listener = new ContextMenuAdapter.OnContextMenuClick() {
 				@Override
 				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-					if (itemId == R.string.recording_context_menu_play ||
-							itemId == R.string.recording_context_menu_show) {
-						plugin.playRecording(view.getContext(), r);
-					} else if (itemId == R.string.recording_context_menu_delete) {
+					if (itemId == R.string.recording_context_menu_delete) {
 						deleteRecording(r);
 					}
 					return true;
@@ -129,13 +126,6 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 
 
 			};
-			if(r.isPhoto()) {
-				adapter.item(R.string.recording_context_menu_show).iconColor(
-						R.drawable.ic_action_view).listen(listener).reg();
-			} else {
-				adapter.item(R.string.recording_context_menu_play).iconColor(
-						R.drawable.ic_action_play_dark).listen(listener).reg();
-			}
 			adapter.item(R.string.recording_context_menu_delete).iconColor(R.drawable.ic_action_delete_dark
 					).listen(listener).reg();
 		}

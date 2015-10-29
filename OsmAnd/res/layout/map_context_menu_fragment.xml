@@ -81,20 +81,6 @@
                         android:textColor="?android:textColorSecondary"
                         android:textSize="@dimen/default_desc_text_size"/>
 
-                    <Button
-                        android:id="@+id/title_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="2dp"
-                        android:layout_marginRight="2dp"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:gravity="left|center_vertical"
-                        android:text="@string/osmand_parking_delete"
-                        android:background="?android:selectableItemBackground"
-                        android:textColor="?attr/contextMenuButtonColor"
-                        android:textSize="@dimen/default_desc_text_size"/>
-
                 </LinearLayout>
 
                 <LinearLayout
@@ -104,6 +90,41 @@
                     android:orientation="horizontal">
 
                 </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/title_button_container"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="44dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginTop="-16dp"
+                android:layout_marginBottom="4dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/title_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?android:selectableItemBackground"
+                    android:gravity="left|center_vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/osmand_parking_delete"
+                    android:textColor="?attr/contextMenuButtonColor"
+                    android:textSize="@dimen/default_desc_text_size"/>
+
+                <TextView
+                    android:id="@+id/title_button_right_text"
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:clickable="true"
+                    android:textColor="?android:textColorSecondary"
+                    android:textSize="@dimen/default_desc_text_size"
+                    android:text="— 00:26"/>
 
             </LinearLayout>
 
@@ -201,15 +222,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/context_menu_fab_view"
-        android:layout_width="@dimen/fab_size_with_shadow"
-        android:layout_height="@dimen/fab_size_with_shadow"
-        android:layout_gravity="right"
-        android:layout_marginRight="12dp"
-        android:background="@drawable/fab_background_style"
-        android:scaleType="center"
-        android:src="@drawable/map_directions"/>
+        <ImageView
+            android:id="@+id/context_menu_fab_view"
+            android:layout_width="@dimen/fab_size_with_shadow"
+            android:layout_height="@dimen/fab_size_with_shadow"
+            android:layout_gravity="right"
+            android:layout_marginRight="12dp"
+            android:background="@drawable/fab_background_style"
+            android:scaleType="center"
+            android:src="@drawable/map_directions"/>
 
     </FrameLayout>
 

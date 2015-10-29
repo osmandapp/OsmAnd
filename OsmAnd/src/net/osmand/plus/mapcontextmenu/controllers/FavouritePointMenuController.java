@@ -1,4 +1,4 @@
-package net.osmand.plus.mapcontextmenu.details;
+package net.osmand.plus.mapcontextmenu.controllers;
 
 import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
@@ -9,6 +9,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.mapcontextmenu.builders.FavouritePointMenuBuilder;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditorFragment;
 
@@ -19,11 +20,6 @@ public class FavouritePointMenuController extends MenuController {
 	public FavouritePointMenuController(OsmandApplication app, MapActivity mapActivity, final FavouritePoint fav) {
 		super(new FavouritePointMenuBuilder(app, fav), mapActivity);
 		this.fav = fav;
-	}
-
-	@Override
-	protected int getInitialMenuStatePortrait() {
-		return MenuState.HEADER_ONLY;
 	}
 
 	@Override

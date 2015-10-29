@@ -9,6 +9,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.mapcontextmenu.MenuController.TitleButtonController;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.OsmandMapLayer;
@@ -352,21 +353,11 @@ public class MapContextMenu extends MenuTitleController {
 		}
 	}
 
-	public boolean hasTitleButton() {
-		return menuController != null && menuController.hasTitleButton();
-	}
-
-	public String getTitleButtonCaption() {
+	public TitleButtonController getTitleButtonController() {
 		if (menuController != null) {
-			return menuController.getTitleButtonCaption();
+			return menuController.getTitleButtonController();
 		} else {
-			return "";
-		}
-	}
-
-	public void titleButtonPressed() {
-		if (menuController != null) {
-			menuController.titleButtonPressed();
+			return null;
 		}
 	}
 }
