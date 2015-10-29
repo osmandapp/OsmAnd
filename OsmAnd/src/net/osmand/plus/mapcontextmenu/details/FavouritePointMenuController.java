@@ -1,7 +1,6 @@
 package net.osmand.plus.mapcontextmenu.details;
 
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 import net.osmand.data.FavouritePoint;
@@ -77,10 +76,4 @@ public class FavouritePointMenuController extends MenuController {
 	public String getNameStr() {
 		return fav.getName();
 	}
-
-	@Override
-	public void saveEntityState(Bundle bundle, String key) {
-		bundle.putSerializable(key, fav);
-	}
-
 }

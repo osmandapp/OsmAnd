@@ -1,9 +1,7 @@
 package net.osmand.plus.mapcontextmenu.details;
 
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
 
-import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -17,14 +15,12 @@ import net.osmand.util.Algorithms;
 public class ParkingPositionMenuController extends MenuController {
 
 	private PointDescription pointDescription;
-	private LatLon latLon;
 	ParkingPositionPlugin plugin;
 	String parkingDescription = "";
 
-	public ParkingPositionMenuController(OsmandApplication app, MapActivity mapActivity, final PointDescription pointDescription, LatLon latLon) {
+	public ParkingPositionMenuController(OsmandApplication app, MapActivity mapActivity, final PointDescription pointDescription) {
 		super(new MenuBuilder(app), mapActivity);
 		this.pointDescription = pointDescription;
-		this.latLon = latLon;
 		plugin = OsmandPlugin.getPlugin(ParkingPositionPlugin.class);
 		if (plugin != null) {
 			StringBuilder sb = new StringBuilder();
@@ -87,10 +83,5 @@ public class ParkingPositionMenuController extends MenuController {
 	@Override
 	public boolean needStreetName() {
 		return false;
-	}
-
-	@Override
-	public void saveEntityState(Bundle bundle, String key) {
-		bundle.putSerializable(key, latLon);
 	}
 }
