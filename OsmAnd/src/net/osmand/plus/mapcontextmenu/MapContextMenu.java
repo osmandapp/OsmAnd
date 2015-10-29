@@ -93,8 +93,8 @@ public class MapContextMenu extends MenuTitleController {
 		return init(latLon, pointDescription, object, false);
 	}
 
-	public boolean init(LatLon latLon, PointDescription pointDescription, Object object, boolean reload) {
-		if (!reload && isVisible()) {
+	public boolean init(LatLon latLon, PointDescription pointDescription, Object object, boolean update) {
+		if (!update && isVisible()) {
 			if (this.object == null || !this.object.equals(object)) {
 				hide();
 			} else {
@@ -105,6 +105,7 @@ public class MapContextMenu extends MenuTitleController {
 		if (this.object != null) {
 			clearSelectedObject(this.object);
 		}
+		setSelectedObject(object);
 
 		if (pointDescription == null) {
 			this.pointDescription = new PointDescription(latLon.getLatitude(), latLon.getLongitude());
@@ -145,11 +146,19 @@ public class MapContextMenu extends MenuTitleController {
 		}
 	}
 
-	public void refreshMenu(LatLon latLon, PointDescription pointDescription, Object object) {
+	public void update(LatLon latLon, PointDescription pointDescription, Object object) {
 		MapContextMenuFragment fragment = findMenuFragment();
 		if (fragment != null) {
 			init(latLon, pointDescription, object, true);
 			fragment.rebuildMenu();
+		}
+	}
+
+	public void showOrUpdate(LatLon latLon, PointDescription pointDescription, Object object) {
+		if (isVisible() && this.object != null && this.object.equals(object)) {
+			update(latLon, pointDescription, object);
+		} else {
+			show(latLon, pointDescription, object);
 		}
 	}
 
@@ -171,6 +180,21 @@ public class MapContextMenu extends MenuTitleController {
 	}
 
 	private void clearSelectedObject(Object object) {
+		if (object != null) {
+			for (OsmandMapLayer l : mapActivity.getMapView().getLayers()) {
+				if (l instanceof ContextMenuLayer.IContextMenuProvider) {
+					PointDescription pointDescription = ((ContextMenuLayer.IContextMenuProvider) l).getObjectName(object);
+					if (pointDescription != null) {
+						if (l instanceof ContextMenuLayer.IContextMenuProviderSelection) {
+							((ContextMenuLayer.IContextMenuProviderSelection) l).clearSelectedObject();
+						}
+					}
+				}
+			}
+		}
+	}
+
+	private void setSelectedObject(Object object) {
 		if (object != null) {
 			for (OsmandMapLayer l : mapActivity.getMapView().getLayers()) {
 				if (l instanceof ContextMenuLayer.IContextMenuProvider) {

@@ -53,7 +53,11 @@ public class TargetPointMenuController extends MenuController {
 
 	@Override
 	public String getNameStr() {
-		return targetPoint.getOriginalPointDescription().getSimpleName(getMapActivity(), false);
+		if (targetPoint.getOriginalPointDescription() != null) {
+			return targetPoint.getOriginalPointDescription().getSimpleName(getMapActivity(), false);
+		} else {
+			return targetPoint.getOnlyName();
+		}
 	}
 
 	@Override

@@ -349,7 +349,8 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 			ContextMenuLayer cl = map.getMapLayers().getContextMenuLayer();
 			final boolean sameObject;
 			if (map.getContextMenu().getObject() instanceof OsMoDevice && cl.isVisible()) {
-				sameObject = Algorithms.objectEquals(device.trackerId, ((OsMoDevice) map.getContextMenu().getObject()).trackerId);
+				sameObject = Algorithms.objectEquals(device.trackerId,
+						((OsMoDevice) map.getContextMenu().getObject()).trackerId);
 			} else {
 				sameObject = false;
 			}
@@ -374,13 +375,14 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 						schedule = false;
 						if (sameObject) {
 							Location l = device.getLastLocation();
-							map.getContextMenu().show(new LatLon(l.getLatitude(), l.getLongitude()), getObjectName(device), device);
-							//cl.setLocation(new LatLon(l.getLatitude(), l.getLongitude()), getObjectDescription(device));
-							//cl.setSelectedObject(device);
+							if (centered) {
+								map.getContextMenu().setMapCenter(loc);
+							}
+							map.getContextMenu().showOrUpdate(new LatLon(l.getLatitude(), l.getLongitude()),
+									getObjectName(device), device);
 						}
 						if (centered) {
-							map.getMapView().setLatLon(loc.getLatitude(),
-									loc.getLongitude());
+							map.getMapView().setLatLon(loc.getLatitude(), loc.getLongitude());
 						}
 						map.getMapView().refreshMap();
 					}
