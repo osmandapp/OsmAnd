@@ -16,6 +16,7 @@ import android.webkit.WebViewClient;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.helpers.AndroidUiHelper;
 
 import java.io.BufferedReader;
@@ -45,7 +46,7 @@ public class HelpActivity extends OsmandActionBarActivity {
 		}
 		super.onCreate(savedInstanceState);
 
-		String title = getString(R.string.shared_string_help);
+		String title = getString(R.string.shared_string_help) + " (" + Version.getFullVersion(getMyApplication()) + ")";
 		String url = "index.html";
 		if(getIntent() != null) {
 			String tl = getIntent().getStringExtra(TITLE);
