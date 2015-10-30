@@ -1994,4 +1994,6 @@
     <string name="show_on_start_description">Kikapcsolva közvetlenül a térkép képernyőt indítja</string>
     <string name="enter_country_name">Add meg az ország nevét</string>
 <string name="new_version">Új verzió</string>
+    <string name="begin_with_osmand_menu_group">Ismerkedés az OsmAnddal</string>
+    <string name="features_menu_group">Szolgáltatások</string>
     </resources>
