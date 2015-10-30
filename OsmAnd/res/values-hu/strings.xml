@@ -1993,4 +1993,5 @@
     <string name="application_dir_description">Válaszd ki, hova szeretnéd menteni a térképfájlokat.</string>
     <string name="show_on_start_description">Kikapcsolva közvetlenül a térkép képernyőt indítja</string>
     <string name="enter_country_name">Add meg az ország nevét</string>
-</resources>
+<string name="new_version">Új verzió</string>
+    </resources>
