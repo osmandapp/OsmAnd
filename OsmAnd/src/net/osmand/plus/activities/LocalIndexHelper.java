@@ -242,6 +242,24 @@ public class LocalIndexHelper {
 		LocalIndexType(@StringRes int resId){
 			this.resId = resId;
 			this.iconResource = R.drawable.ic_map;
+
+			//TODO: Adjust icon of backed up files to original type
+			//if (getString(resId) == R.string.local_indexes_cat_backup) {
+			//	if (i.getOriginalType() == LocalIndexType.MAP_DATA) {
+			//		this.iconResource = R.drawable.ic_map;
+			//	} else if (i.getOriginalType() == LocalIndexType.TILES_DATA) {
+			//		this.iconResource = R.drawable.ic_map;
+			//	} else if (i.getOriginalType() == LocalIndexType.SRTM_DATA) {
+			//		this.iconResource = R.drawable.ic_plugin_srtm;
+			//	} else if (i.getOriginalType() == LocalIndexType.WIKI_DATA) {
+			//		this.iconResource = R.drawable.ic_plugin_wikipedia;
+			//	} else if (i.getOriginalType() == LocalIndexType.TTS_VOICE_DATA) {
+			//		this.iconResource =  R.drawable.ic_action_volume_up;
+			//	} else if (i.getOriginalType() == LocalIndexType.VOICE_DATA) {
+			//		this.iconResource = R.drawable.ic_action_volume_up;
+			//	} else if (i.getOriginalType() == LocalIndexType.AV_DATA) {
+			//		this.iconResource = R.drawable.ic_action_volume_up;
+			//	}
 		}
 		public String getHumanString(Context ctx){
 			return ctx.getString(resId);
