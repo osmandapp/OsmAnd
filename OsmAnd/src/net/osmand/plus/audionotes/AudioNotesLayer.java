@@ -111,41 +111,6 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 	public boolean drawInScreenPixels() {
 		return true;
 	}
-	
-	@Override
-	public void populateObjectContextMenu(Object o, ContextMenuAdapter adapter) {
-		if (o instanceof Recording) {
-			final Recording r = (Recording) o;
-			OnContextMenuClick listener = new ContextMenuAdapter.OnContextMenuClick() {
-				@Override
-				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-					if (itemId == R.string.recording_context_menu_delete) {
-						deleteRecording(r);
-					}
-					return true;
-				}
-
-
-			};
-			adapter.item(R.string.recording_context_menu_delete).iconColor(R.drawable.ic_action_delete_dark
-					).listen(listener).reg();
-		}
-	}
-	
-	private void deleteRecording(final Recording r) {
-		AccessibleAlertBuilder bld = new AccessibleAlertBuilder(activity);
-		bld.setMessage(R.string.recording_delete_confirm);
-		bld.setPositiveButton(R.string.shared_string_yes, new OnClickListener() {
-			
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				plugin.deleteRecording(r);				
-			}
-		});
-		bld.setNegativeButton(R.string.shared_string_no, null);
-		bld.show();
-		
-	}
 
 	@Override
 	public String getObjectDescription(Object o) {

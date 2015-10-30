@@ -20,7 +20,7 @@ import net.osmand.plus.mapcontextmenu.controllers.MyLocationMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.OsMoMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.ParkingPositionMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.PointDescriptionMenuController;
-import net.osmand.plus.mapcontextmenu.controllers.RecordingItemMenuController;
+import net.osmand.plus.mapcontextmenu.controllers.AudioVideoNoteMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.TargetPointMenuController;
 import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
 
@@ -93,7 +93,7 @@ public abstract class MenuController extends BaseMenuController {
 			} else if (object instanceof OsMoDevice) {
 				menuController = new OsMoMenuController(app, mapActivity, (OsMoDevice) object);
 			} else if (object instanceof Recording) {
-				menuController = new RecordingItemMenuController(app, mapActivity, (Recording) object);
+				menuController = new AudioVideoNoteMenuController(app, mapActivity, (Recording) object);
 			} else if (object instanceof LatLon) {
 				if (pointDescription.isParking()) {
 					menuController = new ParkingPositionMenuController(app, mapActivity, pointDescription);

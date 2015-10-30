@@ -17,10 +17,6 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 		this.fav = fav;
 	}
 
-	private void buildRow(View view, int iconId, String text, int textColor) {
-		buildRow(view, getRowIcon(iconId), text, textColor);
-	}
-
 	@Override
 	protected boolean needBuildPlainMenuItems() {
 		return false;

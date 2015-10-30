@@ -9,7 +9,9 @@ import android.text.util.Linkify;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -82,7 +84,7 @@ public class MenuBuilder {
 		firstRow = false;
 	}
 
-	private void buildRow(View view, int iconId, String text, int textColor) {
+	protected void buildRow(View view, int iconId, String text, int textColor) {
 		buildRow(view, getRowIcon(iconId), text, textColor);
 	}
 
@@ -147,6 +149,48 @@ public class MenuBuilder {
 		rowBuilt();
 	}
 
+	protected void buildButtonRow(final View view, Drawable buttonIcon, String text, OnClickListener onClickListener) {
+		LinearLayout ll = new LinearLayout(view.getContext());
+		ll.setOrientation(LinearLayout.HORIZONTAL);
+		LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		ll.setLayoutParams(llParams);
+
+		// Empty
+		LinearLayout llIcon = new LinearLayout(view.getContext());
+		llIcon.setOrientation(LinearLayout.HORIZONTAL);
+		llIcon.setLayoutParams(new LinearLayout.LayoutParams(dpToPx(62f), isFirstRow() ? dpToPx(58f) - dpToPx(SHADOW_HEIGHT_BOTTOM_DP) : dpToPx(58f)));
+		llIcon.setGravity(Gravity.CENTER_VERTICAL);
+		ll.addView(llIcon);
+
+
+		// Button
+		LinearLayout llButton = new LinearLayout(view.getContext());
+		llButton.setOrientation(LinearLayout.VERTICAL);
+		ll.addView(llButton);
+
+		Button buttonView = new Button(view.getContext());
+		buttonView.setBackgroundResource(resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
+		LinearLayout.LayoutParams llBtnParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		buttonView.setLayoutParams(llBtnParams);
+		buttonView.setPadding(dpToPx(10f), 0, dpToPx(10f), 0);
+		buttonView.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
+		//buttonView.setTextSize(view.getResources().getDimension(resolveAttribute(view.getContext(), R.dimen.default_desc_text_size)));
+		buttonView.setTextColor(view.getResources().getColor(resolveAttribute(view.getContext(), R.attr.contextMenuButtonColor)));
+		buttonView.setText(text);
+
+		if (buttonIcon != null) {
+			buttonView.setCompoundDrawablesWithIntrinsicBounds(buttonIcon, null, null, null);
+			buttonView.setCompoundDrawablePadding(dpToPx(8f));
+		}
+
+		buttonView.setOnClickListener(onClickListener);
+		llButton.addView(buttonView);
+
+		((LinearLayout) view).addView(ll);
+
+		rowBuilt();
+	}
+
 	public void addPlainMenuItem(int iconId, String text) {
 		plainMenuItems.add(new PlainMenuItem(iconId, text));
 	}
@@ -165,6 +209,12 @@ public class MenuBuilder {
 		} else {
 			return null;
 		}
+	}
+
+	public int resolveAttribute(Context ctx, int attribute) {
+		TypedValue outValue = new TypedValue();
+		ctx.getTheme().resolveAttribute(attribute, outValue, true);
+		return outValue.resourceId;
 	}
 
 	public int dpToPx(float dp) {
