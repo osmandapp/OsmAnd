@@ -1720,7 +1720,7 @@
 	<string name="poi_memorial_koshinto">Koshinto</string>
 	<string name="poi_memorial_blue_plaque">Placa azul</string>
 	<string name="poi_memorial_jizo">Jizo</string>
-	<string name="poi_memorial_cross">Cruz</string>
+	<string name="poi_memorial_cross">Forma de cruz</string>
 	<string name="poi_historic_quarry">Cantera histórica</string>
 
 	<string name="poi_resource_aggregate">Agregado</string>
@@ -2386,4 +2386,21 @@
 
 <string name="poi_square">Plaza</string>
 
-	</resources>
+	<string name="poi_artist_name">Artista</string>
+	<string name="poi_sculptor">Escultor</string>
+
+	<string name="poi_cross">Cruz</string>
+	<string name="poi_summit_cross">Cumbre a la cruz: Si</string>
+
+	<string name="poi_prison_camp">Campamento de prisioneros</string>
+	<string name="poi_concentration_camp">Tipo: Campo de concentración</string>
+	<string name="poi_pow_camp">Tipo: Prisioneros de guerra</string>
+	<string name="poi_labor_camp">Tipo: Trabajos forzados</string>
+	<string name="poi_concentration_camp_nazism">Tipo: Nazi</string>
+	<string name="poi_concentration_camp_gulag">Tipo: Gulag</string>
+
+	<string name="poi_temperature">Temperatura</string>
+	<string name="poi_bathing_yes">Permitido bañarse</string>
+	<string name="poi_bathing_no">Prohibido bañarse</string>
+
+</resources>
