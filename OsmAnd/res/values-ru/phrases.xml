@@ -2343,4 +2343,15 @@
 
 	<string name="poi_square">Площадь</string>
 
+	<string name="poi_building_type_church">Тип здания: церковь</string>
+	<string name="poi_building_type_chapel">Тип здания: часовня</string>
+	<string name="poi_building_type_mosque">Тип здания: мечеть</string>
+	<string name="poi_building_type_temple">Тип здания: храм</string>
+	<string name="poi_building_type_cathedral">Тип здания: собор</string>
+	<string name="poi_building_type_monastery">Тип здания: монастырь</string>
+	<string name="poi_building_type_basilica">Тип здания: базилика</string>
+	<string name="poi_building_type_synagogue">Тип здания: синагога</string>
+	<string name="poi_building_type_shrine">Тип здания: святыня</string>
+
+
 </resources>

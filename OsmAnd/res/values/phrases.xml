@@ -2347,4 +2347,14 @@
 
 	<string name="poi_square">Square</string>
 
+	<string name="poi_building_type_church">Building type: church</string>
+	<string name="poi_building_type_chapel">Building type: chapel</string>
+	<string name="poi_building_type_mosque">Building type: mosque</string>
+	<string name="poi_building_type_temple">Building type: temple</string>
+	<string name="poi_building_type_cathedral">Building type: cathedral</string>
+	<string name="poi_building_type_monastery">Building type: monastery</string>
+	<string name="poi_building_type_basilica">Building type: basilica</string>
+	<string name="poi_building_type_synagogue">Building type: synagogue</string>
+	<string name="poi_building_type_shrine">Building type: shrine</string>
+
 </resources>
