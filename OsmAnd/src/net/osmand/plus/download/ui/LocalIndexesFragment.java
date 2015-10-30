@@ -1115,7 +1115,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
 		final boolean restore = info.isBackupedData();
 		MenuItem item;
-		if (info.getType() == LocalIndexType.MAP_DATA) {
+		if ((info.getType() == LocalIndexType.MAP_DATA) || (info.getType() == LocalIndexType.DEACTIVATED)) {
 			item = optionsMenu.getMenu().add(restore ? R.string.local_index_mi_restore : R.string.local_index_mi_backup)
 					.setIcon(iconsCache.getContentIcon(R.drawable.ic_type_archive));
 			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
