@@ -34,11 +34,11 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		this.amenity = amenity;
 	}
 
-	private void buildRow(View view, int iconId, String text, int textColor, boolean isWiki) {
-		buildRow(view, getRowIcon(iconId), text, textColor, isWiki);
+	private void buildRow(View view, int iconId, String text, int textColor, boolean isWiki, boolean needLinks) {
+		buildRow(view, getRowIcon(iconId), text, textColor, isWiki, needLinks);
 	}
 
-	protected void buildRow(final View view, Drawable icon, String text, int textColor, final boolean isWiki) {
+	protected void buildRow(final View view, Drawable icon, String text, int textColor, boolean isWiki, boolean needLinks) {
 		boolean light = app.getSettings().isLightContent();
 
 		LinearLayout ll = new LinearLayout(view.getContext());
@@ -74,8 +74,10 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		textView.setTextSize(16);
 		textView.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_info_text_light : R.color.ctx_menu_info_text_dark));
 
-		textView.setAutoLinkMask(Linkify.ALL);
-		textView.setLinksClickable(true);
+		if (needLinks) {
+			textView.setAutoLinkMask(Linkify.ALL);
+			textView.setLinksClickable(true);
+		}
 		textView.setEllipsize(TextUtils.TruncateAt.END);
 		if (isWiki) {
 			textView.setMinLines(1);
@@ -124,9 +126,11 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			int iconId;
 			Drawable icon = null;
 			int textColor = 0;
-			boolean isWiki = false;
 			String key = e.getKey();
 			String vl = e.getValue();
+
+			boolean isWiki = false;
+			boolean needLinks = !"population".equals(key);
 
 			if (amenity.getType().isWiki()) {
 				if (!hasWiki) {
@@ -197,9 +201,9 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			}
 
 			if (icon != null) {
-				buildRow(view, icon, vl, textColor, isWiki);
+				buildRow(view, icon, vl, textColor, isWiki, needLinks);
 			} else {
-				buildRow(view, iconId, vl, textColor, isWiki);
+				buildRow(view, iconId, vl, textColor, isWiki, needLinks);
 			}
 		}
 	}

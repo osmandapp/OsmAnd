@@ -10,19 +10,20 @@ import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.mapcontextmenu.builders.AudioVideoNoteMenuBuilder;
 
 import java.io.File;
 import java.text.DateFormat;
 import java.util.Date;
 
-public class RecordingItemMenuController extends MenuController {
+public class AudioVideoNoteMenuController extends MenuController {
 	private Recording recording;
 
 	private DateFormat dateFormat;
 	private AudioVideoNotesPlugin plugin;
 
-	public RecordingItemMenuController(OsmandApplication app, MapActivity mapActivity, final Recording recording) {
-		super(new MenuBuilder(app), mapActivity);
+	public AudioVideoNoteMenuController(OsmandApplication app, MapActivity mapActivity, final Recording recording) {
+		super(new AudioVideoNoteMenuBuilder(app, recording), mapActivity);
 		this.recording = recording;
 		plugin = OsmandPlugin.getPlugin(AudioVideoNotesPlugin.class);
 		dateFormat = android.text.format.DateFormat.getMediumDateFormat(mapActivity);
