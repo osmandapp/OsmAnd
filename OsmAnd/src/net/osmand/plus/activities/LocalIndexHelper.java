@@ -109,21 +109,31 @@ public class LocalIndexHelper {
 
 	private void loadVoiceData(File voiceDir, List<LocalIndexInfo> result, boolean backup, LoadLocalIndexTask loadTask) {
 		if (voiceDir.canRead()) {
+			//First list TTS files, they are preferred
 			for (File voiceF : listFilesSorted(voiceDir)) {
-				if (voiceF.isDirectory()) {
+				if (voiceF.isDirectory() && !MediaCommandPlayerImpl.isMyData(voiceF) && (Build.VERSION.SDK_INT >= 4)) {
 					LocalIndexInfo info = null;
-					if (MediaCommandPlayerImpl.isMyData(voiceF)) {
-						info = new LocalIndexInfo(LocalIndexType.VOICE_DATA, voiceF, backup);
-					} else if (Build.VERSION.SDK_INT >= 4) {
-						if (TTSCommandPlayerImpl.isMyData(voiceF)) {
-							info = new LocalIndexInfo(LocalIndexType.TTS_VOICE_DATA, voiceF, backup);
-						}
+					if (TTSCommandPlayerImpl.isMyData(voiceF)) {
+						info = new LocalIndexInfo(LocalIndexType.TTS_VOICE_DATA, voiceF, backup);
 					}
-					if(info != null){
+					if(info != null) {
 						updateDescription(info);
 						result.add(info);
 						loadTask.loadFile(info);
 					}
+				}
+			}
+
+			//Now list recorded voices
+			for (File voiceF : listFilesSorted(voiceDir)) {
+				if (voiceF.isDirectory() && MediaCommandPlayerImpl.isMyData(voiceF)) {
+					LocalIndexInfo info = null;
+					info = new LocalIndexInfo(LocalIndexType.VOICE_DATA, voiceF, backup);
+				}
+				if(info != null){
+					updateDescription(info);
+					result.add(info);
+					loadTask.loadFile(info);
 				}
 			}
 		}
