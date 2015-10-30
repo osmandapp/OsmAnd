@@ -1975,4 +1975,19 @@
     <string name="shared_string_qr_code">QR 碼</string>
     <string name="enter_country_name">輸入國家/地區名稱</string>
 <string name="world_map_download_descr">全球底圖 (涵蓋在整個縮小的世界) 丟失或過時。請考量一下為了完整的環境，下載全球底圖。</string>
+    <string name="new_version">新版本</string>
+    <string name="begin_with_osmand_menu_group">以 OsmAnd 開始</string>
+    <string name="features_menu_group">功能</string>
+    <string name="help_us_to_improve_menu_group">幫助我們改進 OsmAnd</string>
+    <string name="other_menu_group">其它</string>
+    <string name="plugins_menu_group">外掛元件</string>
+    <string name="first_usage_item">首次使用</string>
+    <string name="first_usage_item_description">如何下載地圖、基本設定</string>
+    <string name="navigation_item_description">設置導航</string>
+    <string name="faq_item">常見問題</string>
+    <string name="faq_item_description">如何使用外掛元件</string>
+    <string name="map_viewing_item">地圖檢視</string>
+    <string name="search_on_the_map_item">在地圖上查尋</string>
+    <string name="planning_trip_item">旅程規劃</string>
+    <string name="contour_lines_and_hillshade_maps_item">等高線和山體陰影地圖</string>
     </resources>
