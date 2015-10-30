@@ -1,19 +1,6 @@
 package net.osmand.plus.development;
 
 
-import java.text.SimpleDateFormat;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
-
-import net.osmand.plus.ApplicationMode;
-import net.osmand.plus.OsmAndLocationSimulation;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.Version;
-import net.osmand.plus.activities.SettingsBaseActivity;
-import net.osmand.plus.activities.actions.AppModeDialog;
-import net.osmand.util.SunriseSunset;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -24,9 +11,23 @@ import android.os.Debug.MemoryInfo;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
-import android.preference.PreferenceScreen;
 import android.preference.PreferenceCategory;
+import android.preference.PreferenceScreen;
 import android.view.View;
+
+import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.OsmAndLocationSimulation;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.Version;
+import net.osmand.plus.activities.SettingsBaseActivity;
+import net.osmand.plus.activities.actions.AppModeDialog;
+import net.osmand.util.SunriseSunset;
+
+import java.text.SimpleDateFormat;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
 
 //import net.osmand.plus.development.OsmandDevelopmentPlugin;
 

@@ -726,7 +726,7 @@
   <string name="map_online_plugin_is_not_installed">Habilita el complemento mapas en línea para seleccionar diferentes fuentes de mapas</string>
   <string name="map_online_data">Mapas en línea y teselas</string>
   <string name="map_online_data_descr">Usa mapas en línea (teselas descargadas y almacenadas localmente en la tarjeta SD)</string>
-  <string name="online_map_settings">Mapas en línea</string>
+  <string name="shared_string_online_maps">Mapas en línea</string>
   <string name="online_map_settings_descr">Configura las fuentes de teselas de mapas en línea o almacenadas localmente</string>
   
   
@@ -1280,7 +1280,7 @@
     <string name="edit_tilesource_successfully">Fuente de teselas %1$s ha sido guardada correctamente</string>
     <string name="local_index_tile_data_name">Datos de teselas: %1$s</string>
     <string name="local_index_tile_data_expire">Expirar (minutos): %1$s</string>
-    <string name="about_settings">Acerca de</string>
+    <string name="shared_string_about">Acerca de</string>
     <string name="about_settings_descr">Información de la versión, licencias, miembros del proyecto</string>
     <string name="edit_tilesource_choose_existing">Elegir existente…</string>
     

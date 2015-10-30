@@ -869,7 +869,7 @@
 	<string name="about_version">버전:</string>
     <string name="about_settings_descr">버전 정보, 라이센스, 프로젝트 멤버</string>
     
-    <string name="about_settings">소개</string>
+    <string name="shared_string_about">소개</string>
     <string name="local_index_tile_data_zooms">다운로드된 줌 : %1$s</string>
     <string name="local_index_tile_data_expire">만료(분) : %1$s</string>
     <string name="local_index_tile_data_downloadable">다운로드 가능 : %1$s</string>
@@ -1355,7 +1355,7 @@
 	<string name="map_online_plugin_is_not_installed">다른 지도 소스를 선택하려면 온라인지도 플러그인을 활성화하세요</string>
 	<string name="map_online_data">온라인 및 타일 지도</string>
 	<string name="map_online_data_descr">온라인지도를 사용합니다 (SD 카드에 타일을 다운로드 하고 캐시합니다)</string>
-	<string name="online_map_settings">온라인지도</string>
+	<string name="shared_string_online_maps">온라인지도</string>
 	<string name="online_map_settings_descr">온라인 또는 캐시된 타일 지도 소스를 구성합니다</string>
 	
 	

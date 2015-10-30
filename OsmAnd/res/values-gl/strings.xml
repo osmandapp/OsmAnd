@@ -368,7 +368,7 @@
 	
 	
     <string name="about_version">Versión :</string>
-    <string name="about_settings">Sobre</string>
+    <string name="shared_string_about">Sobre</string>
     <string name="about_settings_descr">Información sobre a versión, licenzas, participantes no proxecto</string>
 
     
@@ -775,7 +775,7 @@
 	<string name="map_online_plugin_is_not_installed">Activar o engadido de mapas con conexión para seleccionar fontes de mapas diferentes</string>
 	<string name="map_online_data">Mapas con conexión e en teselas</string>
 	<string name="map_online_data_descr">Empregar mapas con conexión (descargar e gardar temporalmente as teselas no cartón SD)</string>
-	<string name="online_map_settings">Mapas con conexión</string>
+	<string name="shared_string_online_maps">Mapas con conexión</string>
 	<string name="online_map_settings_descr">Configurar as fontes de mapas en teselas con conexión ou gardados temporalmente</string>
 	
 	

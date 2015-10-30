@@ -791,7 +791,7 @@
   <string name="map_online_plugin_is_not_installed">Aktivizēt tiešsaistes karšu spraudni, lai atlasītu citus karšu avotus</string>
   <string name="map_online_data">Bezsaistes kartes (bildes)</string>
   <string name="map_online_data_descr">Lietot tiešaistes kartes (lejuplādējot un kešojot bildes SD kartē)</string>
-  <string name="online_map_settings">Tiešsaistes kartes</string>
+  <string name="shared_string_online_maps">Tiešsaistes kartes</string>
   <string name="online_map_settings_descr">Konfigurēt tiešaistes vai kešotās kartes bildes</string>
   
   
@@ -1009,7 +1009,7 @@
 	<string name="base_world_map">Pasaules karte</string>
 	
 	<string name="about_version">Versija:</string>
-    <string name="about_settings">Par</string>
+    <string name="shared_string_about">Par</string>
     <string name="about_settings_descr">Versijas informācija, licenzes, projektā piedalījušies cilvēki</string>
     <string name="local_index_tile_data_zooms">Mērogošanas dati ielādēti: %1$s</string>
     <string name="local_index_tile_data_downloadable">Lejupielādējams: %1$s</string>

@@ -1,5 +1,11 @@
 package net.osmand.plus.download;
 
+import net.osmand.IndexConstants;
+import net.osmand.map.OsmandRegions;
+import net.osmand.map.WorldRegion;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.download.DownloadOsmandIndexesHelper.AssetIndexItem;
+
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
@@ -10,12 +16,6 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-
-import net.osmand.IndexConstants;
-import net.osmand.map.OsmandRegions;
-import net.osmand.map.WorldRegion;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.download.DownloadOsmandIndexesHelper.AssetIndexItem;
 
 public class DownloadResources extends DownloadResourceGroup {
 	public boolean isDownloadedFromInternet = false;

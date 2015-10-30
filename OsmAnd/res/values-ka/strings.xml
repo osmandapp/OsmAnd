@@ -16,7 +16,7 @@
   <string name="map_online_plugin_is_not_installed">"ჩართეთ მიმდინარე რუკების დამატება სხვადასხვა წყაროების სანახავად"</string>
   <string name="map_online_data">მიმდინარე რუკები</string>
   <string name="map_online_data_descr">მიმდინარე რუკების გამოყენება (ჩამოტვირთვა და sdcard-ზე ქეშირება)</string>
-  <string name="online_map_settings">მიმდინარე რუკები</string>
+  <string name="shared_string_online_maps">მიმდინარე რუკები</string>
   <string name="online_map_settings_descr">მიმდინარე და დაქეშირებული ნაწილოვანი რუკების წყაროების გამართვა</string>
   
   
@@ -1083,7 +1083,7 @@
 	<string name="base_world_map">დედამიწის ბაზისური რუკა</string>
 	
 	<string name="about_version">ვერსია:</string>
-    <string name="about_settings">შესახებ</string>
+    <string name="shared_string_about">შესახებ</string>
     <string name="about_settings_descr">ინფორმაცია ვერსიის, ლიცენზიების და პროექტის წევრების შესახებ</string>
     
     <string name="local_index_tile_data_zooms">ჩამოტვირთულია გადიდებები: %1$s</string>

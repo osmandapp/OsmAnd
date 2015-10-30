@@ -166,7 +166,7 @@
 	<string name="map_online_plugin_is_not_installed">Ενεργοποιήστε το πρόσθετο για τους online χάρτες για να επιλέξετε διαφορετικές πηγές χάρτη</string>
 	<string name="map_online_data">Online και χάρτες πλακίδια</string>
 	<string name="map_online_data_descr">Χρήση online χαρτών (λήψη και φύλαξη πλακιδίων στην κάρτα SD)</string>
-	<string name="online_map_settings">Online χάρτες</string>
+	<string name="shared_string_online_maps">Online χάρτες</string>
 	<string name="online_map_settings_descr">Διαμορφώστε τις πηγές των online ή προσωρινά αποθηκευμένων πλακιδίων χάρτη</string>
 	
 	
@@ -1129,7 +1129,7 @@
 	<string name="driving_region_europe_asia">Ευρώπη &amp; Ασία</string>
 	<string name="driving_region_uk">ΗΒ, Ινδία, Αυστραλία, Κύπρος κλπ</string>
 	<string name="about_version">Εκδοχή :</string>
-    <string name="about_settings">Περί</string>
+    <string name="shared_string_about">Περί</string>
     <string name="about_settings_descr">Πληροφορίες έκδοσης, άδειες, μέλη έργου</string>
     
     <string name="local_index_tile_data_expire">Λήξη (λεπτά): %1$s</string>

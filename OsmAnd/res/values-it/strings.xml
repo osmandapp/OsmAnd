@@ -664,7 +664,7 @@
   <string name="map_online_plugin_is_not_installed">Abilita il plugin Mappe Online per scegliere altre sorgenti di mappe</string>
   <string name="map_online_data">Mappe online e a tasselli</string>
   <string name="map_online_data_descr">Usa le mappe online (scarica e archivia i tasselli nella scheda SD)</string>
-  <string name="online_map_settings">Mappe online</string>
+  <string name="shared_string_online_maps">Mappe online</string>
   <string name="online_map_settings_descr">Configura le sorgenti delle mappe online o dei tasselli in cache</string>
   
   
@@ -1195,7 +1195,7 @@
     <string name="maps_define_edit">Imposta/Modifica…</string>
 	
     <string name="about_version">Versione:</string>
-    <string name="about_settings">Informazioni</string>
+    <string name="shared_string_about">Informazioni</string>
     <string name="about_settings_descr">Informazioni versione, licenze e membri del progetto</string>
     
     

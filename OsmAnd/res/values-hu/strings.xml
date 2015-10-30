@@ -779,7 +779,7 @@
   <string name="map_online_plugin_is_not_installed">További térképforrások kiválasztásához engedélyezd az online térképek bővítményt</string>
   <string name="map_online_data">Online térképcsempék</string>
   <string name="map_online_data_descr">Internetes térképek használata (letöltés és tárolás az SD kártyán)</string>
-  <string name="online_map_settings">Online térképek</string>
+  <string name="shared_string_online_maps">Online térképek</string>
   <string name="online_map_settings_descr">Internetes és tárolt raszteres térképek beállításai</string>
   
   
@@ -1189,7 +1189,7 @@
 	<string name="map_widget_fps_info">FPS debug infó</string>
 	
 	<string name="about_version">Verzió:</string>
-    <string name="about_settings">Névjegy</string>
+    <string name="shared_string_about">Névjegy</string>
     <string name="about_settings_descr">Verzióinfó, licencek, csapattagok</string>
     
     

@@ -262,7 +262,7 @@
 	<string name="confirm_interrupt_download">Dosya indirmesini durdurmak istiyor musunuz?</string>
 	<string name="select_index_file_to_download">Hiçbir şey bulunamadı. Eğer bölgenizi bulamıyorsanız, kendiniz yapabilirsiniz (bakınız: http://osmand.net).</string>
 	<string name="local_indexes_cat_map">Çevrimdışı haritalar(vektör)</string>
-	<string name="online_map_settings">Çevrimiçi haritalar</string>
+	<string name="shared_string_online_maps">Çevrimiçi haritalar</string>
 	
 	
 	<string name="default_buttons_support">Destek</string>
@@ -824,7 +824,7 @@
     <string name="local_indexes_cat_srtm">Çevreleme çizgileri verisi</string>
     <string name="announce_gpx_waypoints">GPX yol işaretlerini söyle</string>
     <string name="about_version">Sürüm :</string>
-    <string name="about_settings">Hakkında</string>
+    <string name="shared_string_about">Hakkında</string>
     <string name="about_settings_descr">Sürüm bilgisi, lisanslar, proje üyeleri</string>
     
     <string name="local_index_tile_data_expire">Sona erecek (dakika): %1$s</string>

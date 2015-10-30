@@ -625,7 +625,7 @@ POIの更新は利用できません</string>
     <string name="map_magnifier">マップ拡大鏡倍率</string>
     
     <string name="about_version">バージョン：</string>
-    <string name="about_settings">OsmAnd Maps &amp; Navigationについて</string>
+    <string name="shared_string_about">OsmAnd Maps &amp; Navigationについて</string>
     <string name="about_settings_descr">バージョン情報、ライセンス、プロジェクトメンバー</string>
     
     
@@ -984,7 +984,7 @@ POIの更新は利用できません</string>
 	<string name="local_indexes_cat_map">オフラインマップ(ベクター形式)</string>
 	<string name="map_online_plugin_is_not_installed">別のマップソースを選択するためにオンラインマッププラグインを有効にする</string>
 	<string name="map_online_data">オンラインタイルマップ</string>
-	<string name="online_map_settings">オンラインマップ</string>
+	<string name="shared_string_online_maps">オンラインマップ</string>
 	<string name="online_map_settings_descr">オンラインまたはキャッシュされたタイルマップソースを設定します</string>
 	
 	
