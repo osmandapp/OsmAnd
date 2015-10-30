@@ -1932,7 +1932,7 @@
     <string name="dahboard_options_dialog_title">Duomenų skydelio nustatymai</string>
 	<string name="show_on_start">Rodyti aktyvuojant</string>
 	<string name="offline_maps_and_navigation">Offline žemėlapiai\n&amp; navigacija</string>
-	<string name="commit_poi"/>
+	<string name="commit_poi">Užfiksuoti LV</string>
 	<string name="count_of_lines">Eilučių kiekis</string>
 <string name="are_you_sure">Ar įsitikinę?</string>
 	<string name="unsaved_changes_will_be_lost">Neišsaugoti duomenys bus prarasti. Ar norite tęsti?</string>
@@ -1980,4 +1980,37 @@
     <string name="application_dir_description">Pasirinkite vietą, kurioje norėsite išsaugoti žemėlapius.</string>
     <string name="shared_string_qr_code">QR kodas</string>
     <string name="share_menu_location">Pasidalinti esama vietove</string>
+    <string name="confirm_download_roadmaps">Ar tikrai norite atsisiųsti kelių žemėlapį, nors jau turite visą?</string>
+    <string name="free_downloads_used">Išnaudota nemokamų atsisiuntimų</string>
+    <string name="free_downloads_used_description">Jūs galite nustatyti, kiek nemokamų atsisiuntimų išnaudojote</string>
+
+<string name="enter_country_name">Įrašykite šalis pavadinimą</string>
+    <string name="new_version">Nauja versija</string>
+    <string name="help_us_to_improve_menu_group">Padėkite mums gerinti OsmAnd</string>
+    <string name="other_menu_group">Kita</string>
+    <string name="plugins_menu_group">Įskiepiai</string>
+    <string name="faq_item">DUK</string>
+    <string name="search_on_the_map_item">Ieškoti žemėlapyje</string>
+    <string name="planning_trip_item">Kelionės planavimas</string>
+    <string name="trip_recording_tool_item">Kelionės įrašymo įrankis</string>
+    <string name="osmand_ski_maps_item">OsmAnd Slidinėjimo žemėlapiai</string>
+    <string name="osm_editing_item">OSM redagavimas</string>
+    <string name="instalation_troubleshooting_item">Diegimas ir problemų sprendimas</string>
+    <string name="versions_item">Versijos</string>
+    <string name="contact_us">Susisiekti</string>
+<string name="world_map_download_descr">Pasaulio žemėlapis (padengia visą pasauli stambiu masteliu) neįdiegtas arba pasenęs. Prašome atsisiųsti arba atnaujinti.</string>
+    <string name="share_geo">geo:</string>
+    <string name="nm">nm</string>
+    <string name="shared_string_trip_recording">Kelionės įrašymas</string>
+    <string name="tab_title_basic">Pagrindinis</string>
+	<string name="tab_title_advanced">Išplėstinis</string>
+	<string name="activate_srtm_plugin">Prašom aktyvuoti SRTM įskiepį</string>
+    <string name="begin_with_osmand_menu_group">Darbo su OsmAnd pradžia</string>
+    <string name="features_menu_group">Galimybės</string>
+    <string name="faq_item_description">Kaip naudotis įskiepiais</string>
+    <string name="map_viewing_item">Žemėlapio peržiūra</string>
+    <string name="nautical_charts_item">Jūriniai žemėlapiai</string>
+    <string name="audio_video_note_item">Garso/vaizdo pastabos</string>
+    <string name="techical_articles_item">Techniniai straipsniai</string>
+    <string name="poll">apklausa</string>
     </resources>
