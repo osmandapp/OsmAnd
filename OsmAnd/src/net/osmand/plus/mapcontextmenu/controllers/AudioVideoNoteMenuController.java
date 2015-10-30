@@ -27,22 +27,21 @@ public class AudioVideoNoteMenuController extends MenuController {
 		this.recording = recording;
 		plugin = OsmandPlugin.getPlugin(AudioVideoNotesPlugin.class);
 		dateFormat = android.text.format.DateFormat.getMediumDateFormat(mapActivity);
-		titleButtonController = new TitleButtonController() {
-			@Override
-			public void buttonPressed() {
-				if (plugin != null) {
-					plugin.playRecording(getMapActivity(), recording);
-				}
-			}
-		};
+
 		if (!recording.isPhoto()) {
+			titleButtonController = new TitleButtonController() {
+				@Override
+				public void buttonPressed() {
+					if (plugin != null) {
+						plugin.playRecording(getMapActivity(), recording);
+					}
+				}
+			};
 			titleButtonController.caption = getMapActivity().getString(R.string.recording_context_menu_play);
 			titleButtonController.leftIconId = R.drawable.ic_play_dark;
 			String durationStr = recording.getPlainDuration();
 			titleButtonController.needRightText = true;
 			titleButtonController.rightTextCaption = "— " + durationStr;
-		} else {
-			titleButtonController.caption = getMapActivity().getString(R.string.recording_context_menu_show);
 		}
 	}
 
