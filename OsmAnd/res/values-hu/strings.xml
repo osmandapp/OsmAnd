@@ -1996,4 +1996,26 @@
 <string name="new_version">Új verzió</string>
     <string name="begin_with_osmand_menu_group">Ismerkedés az OsmAnddal</string>
     <string name="features_menu_group">Szolgáltatások</string>
-    </resources>
+    <string name="help_us_to_improve_menu_group">Segíts nekünk az OsmAnd fejlesztésében</string>
+    <string name="other_menu_group">Egyebek</string>
+    <string name="plugins_menu_group">Bővítmények</string>
+    <string name="first_usage_item">Első használat</string>
+    <string name="first_usage_item_description">Hogyan tölts le térképet, alap beállítások</string>
+    <string name="navigation_item_description">Navigáció beállítása</string>
+    <string name="faq_item">GYIK</string>
+    <string name="faq_item_description">Hogyan használd a bővítményeket</string>
+    <string name="map_viewing_item">Térkép böngészése</string>
+    <string name="search_on_the_map_item">Keresés a térképen</string>
+    <string name="planning_trip_item">Utazás tervezése</string>
+    <string name="contour_lines_and_hillshade_maps_item">Szintvonal és domborzatárnyékolás</string>
+    <string name="trip_recording_tool_item">Útvonalrögzítő eszköz</string>
+    <string name="osmand_ski_maps_item">OsmAnd sítérkép</string>
+    <string name="nautical_charts_item">Hajózási jelzések</string>
+    <string name="audio_video_note_item">Hang- és videójegyzetek</string>
+    <string name="osm_editing_item">OSM szerkesztés</string>
+    <string name="instalation_troubleshooting_item">Telepítés és hibaelhárítás</string>
+    <string name="techical_articles_item">Technikai cikkek</string>
+    <string name="versions_item">Verziók</string>
+    <string name="poll">szavazás</string>
+    <string name="contact_us">Kapcsolat</string>
+</resources>
