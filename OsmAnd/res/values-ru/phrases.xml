@@ -1546,7 +1546,7 @@
 	<string name="poi_memorial_bust">Бюст</string>
 	<string name="poi_memorial_blue_plaque">Синяя табличка</string>
 	<string name="poi_memorial_jizo">Дзидзо</string>
-	<string name="poi_memorial_cross">Крест</string>
+	<string name="poi_memorial_cross">В виде креста</string>
 	<string name="poi_memorial_vehicle">Средство передвижения</string>
 	<string name="poi_memorial_stolperstein">Камень преткновения</string>
 	<string name="poi_memorial_obelisk">Обелиск</string>
@@ -2342,6 +2342,8 @@
 	<string name="poi_historic_railway">Историческая железная дорога</string>
 
 	<string name="poi_square">Площадь</string>
+	<string name="poi_artist_name">Художник, автор</string>
+	<string name="poi_sculptor">Скульптор</string>
 
 	<string name="poi_building_type_church">Тип здания: церковь</string>
 	<string name="poi_building_type_chapel">Тип здания: часовня</string>
@@ -2353,5 +2355,14 @@
 	<string name="poi_building_type_synagogue">Тип здания: синагога</string>
 	<string name="poi_building_type_shrine">Тип здания: святыня</string>
 
+	<string name="poi_cross">Крест</string>
+	<string name="poi_summit_cross">Крест на вершине: есть</string>
+
+	<string name="poi_prison_camp">Бывший лагерь военнопленных</string>
+	<string name="poi_concentration_camp">Тип: концентрационный лагерь</string>
+	<string name="poi_pow_camp">Тип: для военнопленных</string>
+	<string name="poi_labor_camp">Тип: исправительно-трудовой</string>
+	<string name="poi_concentration_camp_nazism">Тип: нацистский</string>
+	<string name="poi_concentration_camp_gulag">Тип: гулаг</string>
 
 </resources>

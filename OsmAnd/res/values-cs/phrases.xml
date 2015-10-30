@@ -2,7 +2,7 @@
 <resources><string name="poi_bakery">Pekařství</string>
 	<string name="poi_alcohol">Obchod s alkoholem</string>
 	<string name="poi_convenience">Samoobsluha</string>
-	<string name="poi_mall">Obchodní dům</string>
+	<string name="poi_mall">Nákupní centrum</string>
 	<string name="poi_beverages">Obchod s nápoji</string>
 	<string name="poi_butcher">Masna</string>
 	<string name="poi_deli">Delikatesy</string>
@@ -28,7 +28,7 @@
 	<string name="poi_kiosk">Kiosek</string>
 	<string name="poi_kitchen">Kuchyňské studio</string>
 	<string name="poi_musical_instrument">Hudební nástroje</string>
-	<string name="poi_optician">Optik</string>
+	<string name="poi_optician">Oční optika</string>
 	<string name="poi_pet">Zverimex</string>
 	<string name="poi_sports">Sportovní vybavení</string>
 	<string name="poi_toys">Hračkářství</string>
@@ -688,7 +688,7 @@
 	<string name="poi_craft_sun_protection">Ochrany proti slunci</string>
 	<string name="poi_craft_sweep">Úklid</string>
 	<string name="poi_craft_upholsterer">Čalouník</string>
-	<string name="poi_craft_watchmaker">Hodinář</string>
+	<string name="poi_craft_watchmaker">Opravář hodinek</string>
 	<string name="poi_craft_window_construction">Výroba oken</string>
 
 	<string name="poi_funeral_directors">Pohřební ústav</string>
@@ -697,7 +697,7 @@
 	<string name="poi_massage">Masážní salón</string>
 	<string name="poi_dry_cleaning">Chemická čistírna</string>
 	<string name="poi_laundry">Prádelna</string>
-	<string name="poi_car_sharing">Půjčovna aut</string>
+	<string name="poi_car_sharing">Sdílení aut</string>
 	<string name="poi_boat_sharing">Půjčovna lodí</string>
 	<string name="poi_dock">Dok</string>
 	<string name="poi_toilets">Toaleta</string>
@@ -721,7 +721,7 @@
 	<string name="poi_water">Voda</string>
 	<string name="poi_wetland">Mokřina</string>
 	<string name="poi_wood">Háj</string>
-	<string name="poi_anchor_berth">Kotviště</string>
+	<string name="poi_anchor_berth">Kotvící místo</string>
 	<string name="poi_beacon_cardinal">Směrový maják</string>
 	<string name="poi_beacon_special_purpose">Maják pro speciální účely</string>
 	<string name="poi_berth">Kotviště</string>
@@ -748,7 +748,7 @@
 	<string name="poi_seamark_light_minor">Menší světlo, vodní značka</string>
 	<string name="poi_seamark_light_float">Plovoucí světlo, vodní značka</string>
 	<string name="poi_seamark_light_vessel">Kotvící světlo, vodní značka</string>
-	<string name="poi_mooring">Kotviště</string>
+	<string name="poi_mooring">Místo k uvázání lodí</string>
 	<string name="poi_notice">Upozornění, vodní značka</string>
 	<string name="poi_pile">Podpěra</string>
 	<string name="poi_radar_transponder">Radar, vodní značka</string>
@@ -859,7 +859,7 @@
 	<string name="poi_groyne">Pobřežní hráz</string>
 
 	<string name="poi_power_cable_distribution_cabinet">Kabelová rozvodní skříň</string>
-	<string name="poi_basin">Nádrž</string>
+	<string name="poi_basin">Nádrž na dešťovou vodu</string>
 	<string name="poi_conservation">Chráněné území</string>
 
 	<string name="poi_crane">Jeřáb</string>
@@ -1285,4 +1285,18 @@
 
 	<string name="poi_motorcycle_repair">Motocyklová opravna</string>
 	<string name="poi_highway_steps">Schody</string>
+	<string name="poi_kiln">Pec</string>
+	<string name="poi_square">Náměstí</string>
+
+	<string name="poi_water_point">Pitná voda</string>
+
+	<string name="poi_honey">Med</string>
+
+	<string name="poi_animal_shelter">Útulek pro zvířata</string>
+	<string name="poi_animal_boarding">Zvířecí hotel</string>
+	<string name="poi_internet_access_yes">Internetové připojení: ano</string>
+	<string name="poi_defibrillator">Defibrilátor</string>
+	<string name="poi_defibrillator_yes">Defibrilátor: ano</string>
+
+	<string name="poi_office_camping">Kancelář kempu</string>
 	</resources>
