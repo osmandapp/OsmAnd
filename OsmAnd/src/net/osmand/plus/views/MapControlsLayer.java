@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
@@ -854,8 +855,12 @@ public class MapControlsLayer extends OsmandMapLayer {
 			f = false;
 			nightMode = night; 
 			if (bgDark != 0 && bgLight != 0) {
-				iv.setBackgroundDrawable(ctx.getResources().getDrawable(night ? bgDark : bgLight,
-						mapActivity.getTheme()));
+				if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+					iv.setBackgroundDrawable(ctx.getResources().getDrawable(night ? bgDark : bgLight,
+							mapActivity.getTheme()));
+				} else {
+					iv.setBackgroundDrawable(ctx.getResources().getDrawable(night ? bgDark : bgLight));
+				}
 			}
 			Drawable d = null;
 			if(resDarkId != 0 && nightMode) {

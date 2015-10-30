@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -25,6 +26,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -460,8 +462,26 @@ public class EditPoiDialogFragment extends DialogFragment {
 				subCategories.put(Algorithms.capitalizeFirstLetterAndLowercase(s.getKey()), s.getValue());
 			}
 		}
-		final ArrayAdapter<Object> adapter = new ArrayAdapter<>(getActivity(),
-				R.layout.list_textview, subCategories.keySet().toArray());
+		final ArrayAdapter<Object> adapter;
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+			adapter = new ArrayAdapter<>(getActivity(),
+					R.layout.list_textview, subCategories.keySet().toArray());
+		} else {
+			TypedValue typedValue = new TypedValue();
+			Resources.Theme theme = getActivity().getTheme();
+			theme.resolveAttribute(android.R.attr.textColorSecondary, typedValue, true);
+			final int textColor = typedValue.data;
+
+			adapter = new ArrayAdapter<Object>(getActivity(),
+					R.layout.list_textview, subCategories.keySet().toArray()) {
+				@Override
+				public View getView(int position, View convertView, ViewGroup parent) {
+					final View view = super.getView(position, convertView, parent);
+					((TextView) view.findViewById(R.id.textView)).setTextColor(textColor);
+					return view;
+				}
+			};
+		}
 		poiTypeEditText.setAdapter(adapter);
 		poiTypeEditText.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
