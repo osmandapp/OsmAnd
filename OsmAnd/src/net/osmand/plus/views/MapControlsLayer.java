@@ -1,9 +1,22 @@
 package net.osmand.plus.views;
 
-import gnu.trove.list.array.TIntArrayList;
-
-import java.util.ArrayList;
-import java.util.List;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.PointF;
+import android.graphics.drawable.Drawable;
+import android.os.Handler;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
 import net.londatiga.android.ActionItem;
 import net.londatiga.android.QuickAction;
@@ -24,23 +37,11 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.controls.MapRouteInfoControl;
 import net.osmand.plus.views.controls.MapRoutePreferencesControl;
 import net.osmand.plus.views.corenative.NativeCoreContext;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.ColorFilter;
-import android.graphics.PointF;
-import android.graphics.drawable.Drawable;
-import android.os.Handler;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.SeekBar;
-import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import gnu.trove.list.array.TIntArrayList;
 
 public class MapControlsLayer extends OsmandMapLayer {
 
@@ -853,7 +854,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 			f = false;
 			nightMode = night; 
 			if (bgDark != 0 && bgLight != 0) {
-				iv.setBackgroundDrawable(ctx.getResources().getDrawable(night ? bgDark : bgLight));
+				iv.setBackgroundDrawable(ctx.getResources().getDrawable(night ? bgDark : bgLight,
+						mapActivity.getTheme()));
 			}
 			Drawable d = null;
 			if(resDarkId != 0 && nightMode) {

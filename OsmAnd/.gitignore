@@ -5,6 +5,7 @@ res/values/skip_translate.xml
 assets/specialphrases/*
 assets/voice/*
 assets/fonts/*
+assets/feature_articles/*
 gen/
 local.properties
 raw/
