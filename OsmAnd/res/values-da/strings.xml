@@ -2024,4 +2024,6 @@
     <string name="instalation_troubleshooting_item">Installation og fejlfinding</string>
     <string name="techical_articles_item">Tekniske artikler</string>
     <string name="versions_item">Versioner</string>
-    </resources>
+    <string name="poll">meningsmåling</string>
+    <string name="contact_us">Kontakt os</string>
+</resources>
