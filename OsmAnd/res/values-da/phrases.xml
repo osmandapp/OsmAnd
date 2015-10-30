@@ -2418,4 +2418,8 @@
 	<string name="poi_concentration_camp_nazism">Type: nazistisk</string>
 	<string name="poi_concentration_camp_gulag">Type: gulag</string>
 
+<string name="poi_temperature">Temperatur</string>
+	<string name="poi_bathing_yes">Badning: ja</string>
+	<string name="poi_bathing_no">Badning: nej</string>
+
 </resources>
