@@ -88,8 +88,8 @@
 	<string name="poi_art">絵画商・私設ギャラリー(Art shop)</string>
 	<string name="poi_baby_goods">ベビー用品(Baby goods)</string>
 	<string name="poi_bag">カバン店(Bag shop)</string>
-	<string name="poi_bathroom_furnishing">浴室及びトイレ家具</string>
-	<string name="poi_bed">寝室家具</string>
+	<string name="poi_bathroom_furnishing">浴室及びトイレ家具(Bathroom furnishings)</string>
+	<string name="poi_bed">寝具店(Bedding store)</string>
 	<string name="poi_boutique">ブティック(Fashion boutique)</string>
 	<string name="poi_carpet">敷物店(Carpet shop)</string>
 	<string name="poi_chemist">ドラッグストア・薬局(Drug store)</string>
@@ -280,7 +280,7 @@
 	<string name="poi_fuel_e10">E10・バイオエタノール10％混合ガソリン(E10)</string>
 	<string name="poi_fuel_e20">E20・バイオエタノール20％混合ガソリン(E20)</string>
 	<string name="poi_fuel_e85">E85・バイオエタノール85％混合ガソリン(E85)</string>
-	<string name="poi_fuel_biogas">E85・バイオエタノール85％混合ガソリン(E85)</string>
+	<string name="poi_fuel_biogas">バイオガス(Biogas)</string>
 	<string name="poi_fuel_lh2">液体水素(Liquid hydrogen)</string>
 	<string name="poi_fuel_electricity">電気(Electricity)</string>
 	<string name="poi_junction">ジャンクション(Junction)</string>
@@ -794,4 +794,25 @@
 	<string name="poi_doors">ドア店(Doors)</string>
 	<string name="poi_fashion">ファッションショップ(Fashion shop)</string>
 	<string name="poi_free_flying">スカイダイビング／フリーフライ用具店(Free flying goods store)</string>
+	<string name="poi_furnace">暖房機器店(Heating units shop)</string>
+	<string name="poi_garden_furniture">ガーデニングショップ(Garden furniture store)</string>
+	<string name="poi_leather">レザーショップ(Leather shop)</string>
+	<string name="poi_music">楽器店(Music shop)</string>
+	<string name="poi_scuba_diving_shop">スキューバダイビング用品店(Scuba diving goods store)</string>
+	<string name="poi_tyres">タイヤ店(Tyres store)</string>
+	<string name="poi_energy">バッテリー販売店(Energy store)</string>
+	<string name="poi_watches">腕時計店(Watches shop)</string>
+	<string name="poi_swimming_pool_shop">プール用品店(Swimming pool goods store)</string>
+	<string name="poi_games">ゲーム(Games)</string>
+	<string name="poi_model">模型(Scale models)</string>
+	<string name="poi_trophy">トロフィー・賞品(Trophies, awards)</string>
+	<string name="poi_video_games">テレビゲーム(Video games)</string>
+	<string name="poi_pyrotechnics">花火(Pyrotechnics)</string>
+	<string name="poi_weapons">武器店(Weapons store)</string>
+	<string name="poi_perfumery">香水店(Perfume shop)</string>
+
+	<string name="poi_ford_stepping_stones">渡り石(Step-stone bridge)</string>
+	<string name="poi_aerialway_pylon">索道支柱(Aerial lift pylon)</string>
+
+	<string name="poi_breakwater">防波堤(Breakwater)</string>
 	</resources>
