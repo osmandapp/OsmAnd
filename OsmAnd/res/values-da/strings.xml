@@ -2000,14 +2000,14 @@
     <string name="go_to_map">Gå til kortet</string>
     <string name="shared_string_qr_code">QR kode</string>
     <string name="enter_country_name">Indtast landenavn</string>
-<string name="world_map_download_descr">Verdensgrundkort (dækker hele verden ved lave zoomniveauer) mangler eller er forældet. Overvej at hente verdensgrundkort for et komplet miljø.</string>
+<string name="world_map_download_descr">Verdensgrundkort (dækker hele verden ved lave zoomniveauer) mangler eller er forældet. Hent verdensgrundkortet for et komplet miljø.</string>
     <string name="new_version">Ny version</string>
-    <string name="begin_with_osmand_menu_group">Start med Osmand</string>
+    <string name="begin_with_osmand_menu_group">Start med OsmAnd</string>
     <string name="features_menu_group">Funktioner</string>
     <string name="help_us_to_improve_menu_group">Hjælp med at forbedre OsmAnd</string>
     <string name="other_menu_group">Andet</string>
     <string name="plugins_menu_group">Udvidelser</string>
-    <string name="first_usage_item">Første brug</string>
+    <string name="first_usage_item">Første anvendelse</string>
     <string name="first_usage_item_description">Hvordan man henter kort og grundlæggende indstillinger</string>
     <string name="navigation_item_description">Opsætning af navigation</string>
     <string name="faq_item">Spørgsmål og svar</string>
@@ -2016,7 +2016,7 @@
     <string name="search_on_the_map_item">Søg på kortet</string>
     <string name="planning_trip_item">Turplanlægning</string>
     <string name="contour_lines_and_hillshade_maps_item">Højdekurver og reliefoverlejring</string>
-    <string name="trip_recording_tool_item">Tur optagelse værktøj</string>
+    <string name="trip_recording_tool_item">Turoptagelse</string>
     <string name="osmand_ski_maps_item">Skikort</string>
     <string name="nautical_charts_item">Søkort</string>
     <string name="audio_video_note_item">Audio-/videonoter</string>
