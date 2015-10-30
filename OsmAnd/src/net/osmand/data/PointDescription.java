@@ -1,10 +1,7 @@
 package net.osmand.data;
 
-import java.io.Serializable;
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
-import java.util.Locale;
-import java.util.StringTokenizer;
+import android.content.Context;
+import android.support.annotation.NonNull;
 
 import com.jwetherell.openmap.common.LatLonPoint;
 import com.jwetherell.openmap.common.UTMPoint;
@@ -13,8 +10,11 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.util.Algorithms;
-import android.content.Context;
-import android.support.annotation.NonNull;
+
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
+import java.util.StringTokenizer;
 
 public class PointDescription {
 	private String type = "";

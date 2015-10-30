@@ -770,7 +770,7 @@
   <string name="map_online_plugin_is_not_installed">Povolit modul \'Online mapy\' pro výběr různých mapových zdrojů</string>
   <string name="map_online_data">Online mapy (rastrové)</string>
   <string name="map_online_data_descr">Používat online mapy (stáhnout je a uložit na SD kartě)</string>
-  <string name="online_map_settings">Online mapy</string>
+  <string name="shared_string_online_maps">Online mapy</string>
   <string name="online_map_settings_descr">Nastavení rastrových překryvných nebo podkresových map</string>
   
   
@@ -1187,7 +1187,7 @@
 	<string name="driving_region_europe_asia">Evropa a Asie</string>
 	<string name="driving_region_uk">Británie, Indie, Austrálie a ostatní</string>
 	<string name="about_version">Verze:</string>
-    <string name="about_settings">O aplikaci</string>
+    <string name="shared_string_about">O aplikaci</string>
     <string name="about_settings_descr">Informace o verzi, licenci, členech projektu</string>
     <string name="local_index_tile_data_maxzoom">Maximální zvětšení: %1$s</string>
     <string name="local_index_tile_data_minzoom">Minimální zvětšení: %1$s</string>

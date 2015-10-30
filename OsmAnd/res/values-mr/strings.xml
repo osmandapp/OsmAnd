@@ -6,7 +6,7 @@
   <string name="local_indexes_cat_map">ऑफलाइन नकाशे (वेक्टर)</string>
   <string name="map_online_data">ऑनलाइन नकाशे (टाइल्स)</string>
   <string name="map_online_data_descr">ऑनलाइन नकाशे वापरा (डाउनलोड करून एसडी कार्ड वार साठवा)</string>
-  <string name="online_map_settings">ऑनलाइन नकाशे</string>
+  <string name="shared_string_online_maps">ऑनलाइन नकाशे</string>
   <string name="online_map_settings_descr">Configure online or cached tile map sources</string>
   
   <string name="plugins_screen">प्लगिन्स</string>

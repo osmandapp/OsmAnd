@@ -66,7 +66,7 @@
 	<string name="shared_string_audio">Audio</string>
 	<string name="shared_string_video">Video</string>
 	<string name="shared_string_photo">Foto</string>
-	<string name="online_map_settings">Online kaardid</string>
+	<string name="shared_string_online_maps">Online kaardid</string>
 	<string name="record_plugin_name">Reisi salvestus</string>
 	<string name="osmo_plugin_name">OsMo (OSM Monitoorimine)</string>
 	<string name="plugin_nautical_name">Merendus kaardi vaade</string>

@@ -765,7 +765,7 @@
   <string name="map_online_plugin_is_not_installed">Activeer de online kaarten-plugin om andere kaartbronnen te kunnen selecteren</string>
   <string name="map_online_data">Online (raster-) kaarten</string>
   <string name="map_online_data_descr">Gebruik online kaarten (download en bewaar deze op SD-kaart)</string>
-  <string name="online_map_settings">Online kaarten</string>
+  <string name="shared_string_online_maps">Online kaarten</string>
   <string name="online_map_settings_descr">Configureer online of bewaarde kaartbronnen</string>
   
   
@@ -1341,7 +1341,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="maps_define_edit">Definieer/bewerk…</string>
 	
     <string name="about_version">Versie:</string>
-    <string name="about_settings">Over</string>
+    <string name="shared_string_about">Over</string>
     <string name="about_settings_descr">Versieinformatie, licenties, projectdeelnemers</string>
     
     

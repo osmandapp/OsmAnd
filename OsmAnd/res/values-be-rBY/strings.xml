@@ -442,7 +442,7 @@
 	
 	
     <string name="about_version">Viersіja:</string>
-    <string name="about_settings">Ab prahramie</string>
+    <string name="shared_string_about">Ab prahramie</string>
     <string name="about_settings_descr">Viersіja, lіcenzіі, udzieĺnіkі prajekta</string>
 
     
@@ -847,7 +847,7 @@
 	<string name="map_online_plugin_is_not_installed">Aktyvujcie moduĺ onlajn mapaŭ, kab vybіrać roznyja krynіcy dlia mapaŭ</string>
 	<string name="map_online_data">Siecіŭnyja і rastravyja mapy</string>
 	<string name="map_online_data_descr">Karystacca siecіŭnymі mapamі (zladavać і zachoŭvać na kartcy SD)</string>
-	<string name="online_map_settings">Siecіŭnyja mapy</string>
+	<string name="shared_string_online_maps">Siecіŭnyja mapy</string>
 	<string name="online_map_settings_descr">Nastrojka krynіc anlajn abo kešavanych rastravych mapaŭ</string>
 	
 	

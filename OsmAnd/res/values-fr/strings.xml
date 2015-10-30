@@ -702,7 +702,7 @@
   <string name="map_online_plugin_is_not_installed">Activez le greffon \"Cartes en ligne\" pour sélectionner différentes sources de cartes</string>
   <string name="map_online_data">Carte en ligne (tuiles)</string>
   <string name="map_online_data_descr">Utiliser une carte en ligne (télécharger et conserver en cache les tuiles de carte sur la carte SD)</string>
-  <string name="online_map_settings">Cartes en ligne</string>
+  <string name="shared_string_online_maps">Cartes en ligne</string>
   <string name="online_map_settings_descr">Configurer la source de la carte en ligne ou en cache</string>
   
   
@@ -1224,7 +1224,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="driving_region_canada">Canada</string>
 	<string name="speak_speed_limit">Limitation de vitesse</string>
     
-	<string name="about_settings">À propos</string>
+	<string name="shared_string_about">À propos</string>
     <string name="about_settings_descr">Note de version, licences, membres du projet</string>
     
     <string name="local_index_tile_data_zooms">Zooms téléchargés : %1$s</string>

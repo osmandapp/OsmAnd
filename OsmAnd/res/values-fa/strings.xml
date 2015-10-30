@@ -711,7 +711,7 @@
 	<string name="local_indexes_cat_tile">نقشه های آنلاین</string>
 	<string name="map_online_data">نقشه های آنلاین</string>
 	<string name="map_online_data_descr">استفاده از نقشه های آنلاین (دانلود کاشه های نقشه روی حافظه جانبی)</string>
-	<string name="online_map_settings">نقشه های آنلاین</string>
+	<string name="shared_string_online_maps">نقشه های آنلاین</string>
 	<string name="online_map_settings_descr">تنظیمات آنلاین و منابع کاشه های نقشه</string>
 	
 	<string name="vector_maps_may_display_faster_on_some_devices">نقشه های بُرداری سریعتر نمایش داده میشوند. ممکن است روی یرخی دستگاهها خوب کار نکند.</string>
@@ -1348,7 +1348,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
 	<string name="driving_region_europe_asia">اروپا و آسیا</string>
 	<string name="driving_region_uk">انگلستان، هند، استرالیا و سایر کشورها</string>
 	<string name="about_version">ویرایش:</string>
-    <string name="about_settings">درباره</string>
+    <string name="shared_string_about">درباره</string>
     <string name="about_settings_descr">درباره نسخه، گواهی ها، اعضای پروژه</string>
     
     

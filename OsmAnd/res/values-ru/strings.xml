@@ -84,7 +84,7 @@
   <string name="map_online_plugin_is_not_installed">Активируйте плагин онлайн карт, чтобы выбирать различные источники карт</string>
   <string name="map_online_data">Онлайн карты</string>
   <string name="map_online_data_descr">Использовать онлайн карты (загрузка и кэширование на SD-карте)</string>
-  <string name="online_map_settings">Онлайн карты</string>
+  <string name="shared_string_online_maps">Онлайн карты</string>
   <string name="online_map_settings_descr">Настройки источников онлайн карт и слоёв</string>
   
   
@@ -1180,7 +1180,7 @@
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_name">Имя</string>
     <string name="map_widget_fps_info">Отладочная информация FPS</string>
-	<string name="about_settings">О программе</string>
+	<string name="shared_string_about">О программе</string>
     <string name="about_settings_descr">Информация о версии, участниках проекта</string>
     
     <string name="local_index_tile_data_zooms">Загружено данных по масштабам: %1$s</string>

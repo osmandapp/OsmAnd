@@ -64,7 +64,7 @@
   <string name="map_online_plugin_is_not_installed">Įjunkite interneto žemėlapių įskiepį norėdami pasirinkti kitus žemėlapių šaltinius</string>
   <string name="map_online_data">Interneto žemėlapiai</string>
   <string name="map_online_data_descr">Naudoti interneto žemėlapius (parsisiųsti dalis laikinam saugojimui SD kortelėje)</string>
-  <string name="online_map_settings">Interneto žemėlapiai</string>
+  <string name="shared_string_online_maps">Interneto žemėlapiai</string>
   <string name="online_map_settings_descr">Nustatykite interneto ar laikinai išsaugotų žemėlapių šaltinius</string>
   
   
@@ -1191,7 +1191,7 @@
 	<string name="av_photo_play_sound">Groti garsą darant nuotrauką</string>
 	<string name="av_photo_play_sound_descr">Pasirinkite ar groti garsą, kai fotografuojama</string>
 <string name="about_version">Versija :</string>
-    <string name="about_settings">Apie</string>
+    <string name="shared_string_about">Apie</string>
     <string name="about_settings_descr">Versijos informacija, licencijos, projekto nariai</string>
     
     

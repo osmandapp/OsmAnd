@@ -140,7 +140,7 @@
 <string name="local_indexes_cat_map">Standardkartor (vektor)</string>
 
 <string name="index_settings_descr">Ladda ner och hantera offline-kartor lagrade på din enhet</string>
-<string name="online_map_settings">Online-kartor</string>
+<string name="shared_string_online_maps">Online-kartor</string>
 <string name="osmand_accessibility_description">Denna modul gör så att inställningarna för att aktivera speciella tillgänglighetsfunktioner blir direkt åtkomliga i OsmAnd och underlättar t.ex. justering av talhastigheten för TTS-röster, konfigurering av skärmnavigering med hjälp av en styrkula för zoomkontroll eller användande av återkoppling med text-till-tal, t.ex. för att meddela din position automatiskt.</string>
 
 
@@ -1108,7 +1108,7 @@
 	<string name="driving_region_uk">UK, Indien, Australien &amp; andra</string>
 	<string name="local_osm_changes_backup_successful">Ändrad OSM-fil skapad utan problem %1$s</string>
     <string name="about_version">Version:</string>
-    <string name="about_settings">Om</string>
+    <string name="shared_string_about">Om</string>
     <string name="about_settings_descr">Versionsinformation, licenser, projektmedlemmar</string>
     
     

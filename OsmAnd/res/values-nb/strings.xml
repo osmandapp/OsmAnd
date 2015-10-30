@@ -117,7 +117,7 @@
 	<string name="map_online_plugin_is_not_installed">Aktiver programtillegget for nettbaserte kart for å velge ulike kartkilder</string>
 	<string name="map_online_data">Nettbaserte- og flis-kart</string>
 	<string name="map_online_data_descr">Bruk nettbaserte kart (last ned og bufre fliser på SD-kort)</string>
-	<string name="online_map_settings">Nettbaserte kart</string>
+	<string name="shared_string_online_maps">Nettbaserte kart</string>
 	<string name="online_map_settings_descr">Still inn nettbaserte eller hurtigbufrede flis-kartkilder</string>
 	
 	
@@ -631,7 +631,7 @@
     <string name="search_street_in_neighborhood_cities">Søk etter gaten i nabobyer</string>
     
 	<string name="about_version">Versjon:</string>
-    <string name="about_settings">Om</string>
+    <string name="shared_string_about">Om</string>
     <string name="about_settings_descr">Versjonsinformasjon, lisenser, prosjektmedlemmer</string>
     
     <string name="local_index_tile_data_downloadable">Nedlastbar: %1$s</string>

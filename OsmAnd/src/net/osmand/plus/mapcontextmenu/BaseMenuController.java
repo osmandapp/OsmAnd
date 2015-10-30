@@ -1,6 +1,5 @@
 package net.osmand.plus.mapcontextmenu;
 
-import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.util.TypedValue;
 

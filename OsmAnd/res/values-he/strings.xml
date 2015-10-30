@@ -192,7 +192,7 @@
 	<string name="map_online_plugin_is_not_installed">ניתן להפעיל את תוסף המפות המקוונות כדי לבחור במקורות שונים למפה</string>
 	<string name="map_online_data">מפות מקוונות ואריחים</string>
 	<string name="map_online_data_descr">שימוש במפות מקוונות (הורדה ואחסון המפות בכרטיס ה־SD)</string>
-	<string name="online_map_settings">מפות מקוונות</string>
+	<string name="shared_string_online_maps">מפות מקוונות</string>
 	<string name="online_map_settings_descr">הגדרת מקורות אריחי מפה מקוונים או שמורים</string>
 	
 	
