@@ -1433,4 +1433,16 @@
 	<string name="poi_historic_era_chalcolithic">Època istòrica: calcolìticu (IV-III millènniu AC.)</string>
 
 	<string name="poi_historic_stone">Pedra istòrica</string>
-	</resources>
+	<string name="poi_square">Pratza</string>
+
+	<string name="poi_building_type_church">Casta de edifìtziu: crèsia</string>
+	<string name="poi_building_type_chapel">Casta de edifìtziu: capella</string>
+	<string name="poi_building_type_mosque">Casta de edifìtziu: moschea</string>
+	<string name="poi_building_type_temple">Casta de edifìtziu: tèmpiu</string>
+	<string name="poi_building_type_cathedral">Casta de edifìtziu: Seu/Catedrale</string>
+	<string name="poi_building_type_monastery">Casta de edifìtziu: monastèriu/muristene</string>
+	<string name="poi_building_type_basilica">Casta de edifìtziu: basìlica</string>
+	<string name="poi_building_type_synagogue">Casta de edifìtziu: sinagoga</string>
+	<string name="poi_building_type_shrine">Casta de edifìtziu: sacràriu</string>
+
+</resources>
