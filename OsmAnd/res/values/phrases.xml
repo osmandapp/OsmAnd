@@ -2346,6 +2346,8 @@
 	<string name="poi_historic_railway">Historic railway</string>
 
 	<string name="poi_square">Square</string>
+	<string name="poi_artist_name">Artist</string>
+	<string name="poi_sculptor">Sculptor</string>
 
 	<string name="poi_building_type_church">Building type: church</string>
 	<string name="poi_building_type_chapel">Building type: chapel</string>
