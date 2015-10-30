@@ -11,17 +11,12 @@
         android:layout_height="wrap_content"
         app:title="@string/shared_string_help"
         app:navigationIcon="@drawable/abc_ic_ab_back_mtrl_am_alpha"
+        app:theme="?attr/toolbar_theme"
         android:background="?attr/pstsTabBackground"/>
 
-    <ExpandableListView
-        android:id="@android:id/list"
+    <WebView
+        android:id="@+id/webView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        style="@style/OsmandListView"
-        android:layout_marginLeft="0dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginTop="0dp"
-        android:layout_weight="1"
-        android:groupIndicator="@android:color/transparent"/>
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

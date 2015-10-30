@@ -85,8 +85,9 @@ public class MyMenuItem {
 			return this;
 		}
 
-		public void setListener(OnClickListener listener) {
+		public Builder setListener(OnClickListener listener) {
 			this.listener = listener;
+			return this;
 		}
 
 		public Builder reset() {

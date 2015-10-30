@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.v4.app.DialogFragment;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -45,6 +46,14 @@ public class HelpScreenDialogFragment extends DialogFragment implements Expandab
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		final View view = inflater.inflate(R.layout.fragment_help_screen, container, false);
 
+		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				dismiss();
+			}
+		});
+
 		MenuCategory.BEGIN_WITH_OSMAND.initItems(createBeginWithOsmandItems());
 		MenuCategory.FEATURES.initItems(createFeaturesItems());
 		MenuCategory.PLUGINS.initItems(createPluginsItems());
@@ -67,8 +76,11 @@ public class HelpScreenDialogFragment extends DialogFragment implements Expandab
 	@Override
 	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition,
 								int childPosition, long id) {
+		LOG.debug("Chield=" + categories[groupPosition].getItem(childPosition) + "; clicker="
+				+ categories[groupPosition].getItem(childPosition).getOnClickListener());
 		if (categories[groupPosition] != MenuCategory.HELP_US_TO_IMPROVE &&
 				categories[groupPosition].getItem(childPosition).getOnClickListener() != null) {
+			LOG.debug("nice");
 			categories[groupPosition].getItem(childPosition).getOnClickListener().onClick(v);
 		}
 		return false;
@@ -98,7 +110,6 @@ public class HelpScreenDialogFragment extends DialogFragment implements Expandab
 		@Override
 		public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild,
 								 View convertView, ViewGroup parent) {
-			LOG.debug("categories[groupPosition]=" + categories[groupPosition]);
 			if(categories[groupPosition] == MenuCategory.HELP_US_TO_IMPROVE) {
 				convertView = LayoutInflater.from(parent.getContext()).inflate(
 						R.layout.help_to_improve_item, parent, false);
@@ -274,11 +285,19 @@ public class HelpScreenDialogFragment extends DialogFragment implements Expandab
 		return arrayList;
 	}
 
-	private static List<MyMenuItem> createPluginsItems() {
+	private List<MyMenuItem> createPluginsItems() {
 		ArrayList<MyMenuItem> arrayList = new ArrayList<>();
 		MyMenuItem.Builder builder = new MyMenuItem.Builder()
 				.setTitle(R.string.shared_string_online_maps)
-				.setIcon(R.drawable.ic_world_globe_dark);
+				.setIcon(R.drawable.ic_world_globe_dark)
+				.setListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						HelpArticleDialogFragment.createInstance(
+								"feature_articles/online-maps-plugin.html")
+						.show(getActivity().getSupportFragmentManager(), null);
+					}
+				});
 		arrayList.add(builder.create());
 		builder.reset()
 				.setTitle(R.string.contour_lines_and_hillshade_maps_item)
