@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="search_button">Poišči</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="search_button">Poišči</string>
 	<string name="search_activity">Iskanje podatkov</string>
 	
 	
@@ -1663,7 +1664,7 @@
     <string name="settings_privacy">Zasebnost</string>
     <string name="points">Točke</string>
     
-    <string name="shared_string_my_location">Trenutno mesto</string>
+    <string name="shared_string_my_location">Moj položaj</string>
     
     <string name="enable_proxy_title">Omogoči posredniški strežnik HTTP</string>
 	<string name="enable_proxy_descr">Nastavitev posredniškega strežnika HTTP za vse omrežne zahteve</string>
@@ -1785,7 +1786,7 @@
 	<string name="routing_attr_height_description">Določitev omejitve višine vozila za določeno pot</string>
     <string name="use_fast_recalculation">Pametno preračunavanje poti</string>
 	<string name="use_fast_recalculation_desc">Preračunavanje je začetnega dela zelo dolge poti</string>
-<string name="osmo_share_my_location">Deli mojo lokacijo</string>
+<string name="osmo_share_my_location">Objavi trenutni položaj</string>
     <string name="shared_string_logoff">Odjava</string>
     <string name="rendering_value_disabled_name">Onemogočeno</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Barvanje poti po vrsti poti</string>
@@ -1962,4 +1963,14 @@
     <string name="update_all">Posodobi vse (%1$s MB)</string>
     <string name="free_downloads_used">Omejitev brezplačnih prejemov je dosežena.</string>
     <string name="free_downloads_used_description">Videti je mogoče, koliko brezplačnih prejemov je že bilo izvedenih.</string>
-</resources>
+<string name="osm_edit_created_poi">Ustvarjena točka POI</string>
+    <string name="osm_edit_created_bug">Ustvarjen hrošč OSM</string>
+    <string name="shared_string_qr_code">Koda QR</string>
+    <string name="map_downloaded">Zemljevid je prejet</string>
+    <string name="map_downloaded_descr">Zemljevid %1$s je prejet in je pripravljen za uporabo.</string>
+    <string name="go_to_map">Na zemljevid</string>
+    <string name="simulate_initial_startup">Simuliraj prvi zagon programa</string>
+    <string name="share_geo">geo:</string>
+    <string name="share_menu_location">Objavi trenutni položaj</string>
+    <string name="shared_string_send">Pošlji</string>
+    </resources>
