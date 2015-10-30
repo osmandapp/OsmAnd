@@ -1955,4 +1955,25 @@
     <string name="enter_country_name">Ange land</string>
     <string name="new_version">Ny version</string>
     <string name="begin_with_osmand_menu_group">Börja med OsmAnd</string>
-    </resources>
+    <string name="features_menu_group">Funktioner</string>
+    <string name="help_us_to_improve_menu_group">Hjälp till att förbättra OsmAnd</string>
+    <string name="other_menu_group">Annat</string>
+    <string name="plugins_menu_group">Insticksmoduler</string>
+    <string name="first_usage_item">Första gången</string>
+    <string name="first_usage_item_description">Hur man hämtar kartor, grundinställningar</string>
+    <string name="navigation_item_description">Ställa in navigering</string>
+    <string name="faq_item">Frågor och svar</string>
+    <string name="faq_item_description">Hur man använder insticksmoduler</string>
+    <string name="map_viewing_item">Kartvisning</string>
+    <string name="search_on_the_map_item">Sök på kartan</string>
+    <string name="planning_trip_item">Att planera en resa</string>
+    <string name="trip_recording_tool_item">Verktyg för inspelning av resa</string>
+    <string name="osmand_ski_maps_item">OsmAnd skidkartor</string>
+    <string name="nautical_charts_item">Sjökort</string>
+    <string name="audio_video_note_item">Ljud-/Videoanteckningar</string>
+    <string name="osm_editing_item">OSM-redigering</string>
+    <string name="instalation_troubleshooting_item">Installation och problemlösning</string>
+    <string name="techical_articles_item">Tekniska artiklar</string>
+    <string name="versions_item">Versioner</string>
+    <string name="contact_us">Kontakta oss</string>
+</resources>
