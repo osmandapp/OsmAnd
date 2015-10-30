@@ -99,6 +99,11 @@ public abstract class MenuTitleController {
 	}
 
 	protected void acquireNameAndType() {
+		nameStr = "";
+		typeStr = "";
+		streetStr = "";
+		addressUnknown = false;
+
 		MenuController menuController = getMenuController();
 		PointDescription pointDescription = getPointDescription();
 		if (menuController != null) {

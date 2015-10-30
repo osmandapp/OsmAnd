@@ -15,8 +15,8 @@ import net.osmand.util.Algorithms;
 public class ParkingPositionMenuController extends MenuController {
 
 	private PointDescription pointDescription;
-	ParkingPositionPlugin plugin;
-	String parkingDescription = "";
+	private ParkingPositionPlugin plugin;
+	private String parkingDescription = "";
 
 	public ParkingPositionMenuController(OsmandApplication app, MapActivity mapActivity, final PointDescription pointDescription) {
 		super(new MenuBuilder(app), mapActivity);

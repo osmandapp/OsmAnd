@@ -20,6 +20,11 @@ public class SendPoiDialogFragment extends DialogFragment {
 	public static final String TAG = "SendPoiDialogFragment";
 	public static final String OPENSTREETMAP_POINT = "openstreetmap_point";
 	private static String comment;
+	private ProgressDialogPoiUploader poiUploader;
+
+	public void setPoiUploader(ProgressDialogPoiUploader poiUploader) {
+		this.poiUploader = poiUploader;
+	}
 
 	@NonNull
 	@Override
@@ -38,8 +43,12 @@ public class SendPoiDialogFragment extends DialogFragment {
 		userNameEditText.setText(settings.USER_NAME.get());
 		passwordEditText.setText(settings.USER_PASSWORD.get());
 
-		final ProgressDialogPoiUploader progressDialogPoiUploader =
-				(ProgressDialogPoiUploader) getParentFragment();
+		final ProgressDialogPoiUploader progressDialogPoiUploader;
+		if (poiUploader != null) {
+			progressDialogPoiUploader = poiUploader;
+		} else {
+			progressDialogPoiUploader = (ProgressDialogPoiUploader) getParentFragment();
+		}
 
 		builder.setTitle(R.string.commit_poi)
 				.setView(view)
