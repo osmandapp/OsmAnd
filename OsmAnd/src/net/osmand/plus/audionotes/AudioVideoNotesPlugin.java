@@ -361,6 +361,16 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 		}
 
+		public String getPlainDuration() {
+			updateInternalDescription();
+			if (duration > 0) {
+				int d = (int) (duration / 1000);
+				return Algorithms.formatDuration(d);
+			} else {
+				return "";
+			}
+		}
+
 		private String getDuration(Context ctx) {
 			String additional = "";
 			if (duration > 0) {

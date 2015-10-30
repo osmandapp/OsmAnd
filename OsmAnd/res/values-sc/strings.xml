@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="always_center_position_on_map">Ammustra sa positzione semper a su tzentru</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="always_center_position_on_map">Ammustra sa positzione semper a su tzentru</string>
     <string name="voice_pref_title">Boghe</string>
     <string name="misc_pref_title">Mistura</string>
     <string name="localization_pref_title">Localizatzione</string>
@@ -1968,4 +1969,6 @@
 <string name="map_downloaded">Mapa iscarrigada</string>
     <string name="map_downloaded_descr">Sa mapa de %1$s est istada iscarrigada. Torra a sa mapa pro incumintzare a l’impreare.</string>
     <string name="go_to_map">Bae a sa mapa</string>
-    </resources>
+    <string name="shared_string_qr_code">Còdighe QR</string>
+    <string name="enter_country_name">Inserta su nùmene de s\'istadu</string>
+</resources>

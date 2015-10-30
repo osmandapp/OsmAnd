@@ -1,6 +1,15 @@
 package net.osmand.plus.audionotes;
 
-import java.util.List;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Paint.Style;
+import android.graphics.PointF;
+import android.widget.ArrayAdapter;
 
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.data.DataTileManager;
@@ -16,16 +25,8 @@ import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Paint.Style;
-import android.graphics.PointF;
-import android.widget.ArrayAdapter;
+
+import java.util.List;
 
 public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvider {
 
@@ -118,10 +119,7 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 			OnContextMenuClick listener = new ContextMenuAdapter.OnContextMenuClick() {
 				@Override
 				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-					if (itemId == R.string.recording_context_menu_play ||
-							itemId == R.string.recording_context_menu_show) {
-						plugin.playRecording(view.getContext(), r);
-					} else if (itemId == R.string.recording_context_menu_delete) {
+					if (itemId == R.string.recording_context_menu_delete) {
 						deleteRecording(r);
 					}
 					return true;
@@ -129,13 +127,6 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 
 
 			};
-			if(r.isPhoto()) {
-				adapter.item(R.string.recording_context_menu_show).iconColor(
-						R.drawable.ic_action_view).listen(listener).reg();
-			} else {
-				adapter.item(R.string.recording_context_menu_play).iconColor(
-						R.drawable.ic_action_play_dark).listen(listener).reg();
-			}
 			adapter.item(R.string.recording_context_menu_delete).iconColor(R.drawable.ic_action_delete_dark
 					).listen(listener).reg();
 		}

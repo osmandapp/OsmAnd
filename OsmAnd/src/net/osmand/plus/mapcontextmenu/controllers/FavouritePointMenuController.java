@@ -1,7 +1,6 @@
-package net.osmand.plus.mapcontextmenu.details;
+package net.osmand.plus.mapcontextmenu.controllers;
 
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 import net.osmand.data.FavouritePoint;
@@ -10,6 +9,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.mapcontextmenu.builders.FavouritePointMenuBuilder;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditorFragment;
 
@@ -20,11 +20,6 @@ public class FavouritePointMenuController extends MenuController {
 	public FavouritePointMenuController(OsmandApplication app, MapActivity mapActivity, final FavouritePoint fav) {
 		super(new FavouritePointMenuBuilder(app, fav), mapActivity);
 		this.fav = fav;
-	}
-
-	@Override
-	protected int getInitialMenuStatePortrait() {
-		return MenuState.HEADER_ONLY;
 	}
 
 	@Override
@@ -77,10 +72,4 @@ public class FavouritePointMenuController extends MenuController {
 	public String getNameStr() {
 		return fav.getName();
 	}
-
-	@Override
-	public void saveEntityState(Bundle bundle, String key) {
-		bundle.putSerializable(key, fav);
-	}
-
 }

@@ -36,6 +36,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.mapcontextmenu.MenuController.TitleButtonController;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
 
@@ -56,7 +57,8 @@ public class MapContextMenuFragment extends Fragment {
 	private View mainView;
 	ImageView fabView;
 
-	MapContextMenu menu;
+	private MapContextMenu menu;
+	private TitleButtonController titleButtonController;
 
 	private int menuTopViewHeight;
 	private int menuTopShadowHeight;
@@ -111,12 +113,6 @@ public class MapContextMenuFragment extends Fragment {
 
 	}
 
-	@Override
-	public void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-		menu.saveMenuState(outState);
-	}
-
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -127,9 +123,7 @@ public class MapContextMenuFragment extends Fragment {
 		markerPaddingXPx = dpToPx(MARKER_PADDING_X_DP);
 
 		menu = getMapActivity().getContextMenu();
-		if (savedInstanceState != null) {
-			menu.restoreMenuState(savedInstanceState);
-		}
+		titleButtonController = menu.getTitleButtonController();
 
 		map = getMapActivity().getMapView();
 		RotatedTileBox box = map.getCurrentRotatedTileBox().copy();
@@ -150,17 +144,35 @@ public class MapContextMenuFragment extends Fragment {
 		view = inflater.inflate(R.layout.map_context_menu_fragment, container, false);
 		mainView = view.findViewById(R.id.context_menu_main);
 
-		Button titleButton = (Button) view.findViewById(R.id.title_button);
-		titleButton.setVisibility(menu.hasTitleButton() ? View.VISIBLE : View.GONE);
-		if (menu.hasTitleButton()) {
-			titleButton.setText(menu.getTitleButtonCaption());
+		// Title button
+		final View titleButtonContainer = view.findViewById(R.id.title_button_container);
+		if (titleButtonController != null) {
+			titleButtonContainer.setVisibility(View.VISIBLE);
+
+			final Button titleButton = (Button) view.findViewById(R.id.title_button);
+			titleButton.setText(titleButtonController.getCaption());
+
+			Drawable leftIcon = titleButtonController.getLeftIcon();
+			if (leftIcon != null) {
+				titleButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, null, null);
+				titleButton.setCompoundDrawablePadding(dpToPx(8f));
+			}
 			titleButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					menu.titleButtonPressed();
+					titleButtonController.buttonPressed();
 				}
 			});
+
+			final TextView titleButtonRightText = (TextView) view.findViewById(R.id.title_button_right_text);
+			titleButtonRightText.setVisibility(titleButtonController.isNeedRightText() ? View.VISIBLE : View.GONE);
+			if (titleButtonController.isNeedRightText()) {
+				titleButtonRightText.setText(titleButtonController.getRightTextCaption());
+			}
+		} else {
+			titleButtonContainer.setVisibility(View.GONE);
 		}
+
 
 		if (menu.isLandscapeLayout()) {
 			mainView.setLayoutParams(new FrameLayout.LayoutParams(dpToPx(menu.getLandscapeWidthDp()),

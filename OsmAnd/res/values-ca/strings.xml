@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="show_warnings_title">Mostra els missatges d\'avís…</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="show_warnings_title">Mostra els missatges d\'avís…</string>
 <string name="map_widget_fluorescent">Rutes amb fluorescència</string>
 <string name="map_widget_show_ruler">Mostra el regle</string>
 <string name="map_widget_transparent">Aparença amb transparència</string>
@@ -89,8 +90,8 @@
 <string name="offline_navigation_not_available">La navegació fora de línia de l\'OsmAnd no està disponible temporalment.</string>
 <string name="confirm_interrupt_download">Voleu interrompre la baixada del fitxer?</string>
 <string name="select_index_file_to_download">No s\'ha trobat res. Si no trobeu la vostra regió, podeu crear-la vosaltres mateixos (vegeu http://osmand.net).</string>
-<string name="local_indexes_cat_tile">Mapes en línia (tessel·les)</string>
-<string name="local_indexes_cat_map">Mapes fora de línia (vectors)</string>
+<string name="local_indexes_cat_tile">Mapes de tessel·les en línia i cau</string>
+<string name="local_indexes_cat_map">Mapes estàndards (vectorials)</string>
 <string name="map_online_plugin_is_not_installed">Activeu el connector Mapes en línia per poder seleccionar diferents fonts de mapes</string>
 <string name="map_online_data">Mapes en línia (tessel·les)</string>
 <string name="map_online_data_descr">Utilitzeu mapes en línia (les tessel·les es baixen i es desen a la memòria cau de la targeta SD)</string>
@@ -313,8 +314,8 @@
 <string name="local_index_transport_data">Dades de transports públics</string>
 <string name="local_index_map_data">Dades de mapes</string>
 <string name="local_indexes_cat_backup">Desactivat</string>
-<string name="local_indexes_cat_tts">Dades de veu (TTS)</string>
-<string name="local_indexes_cat_voice">Dades de veu (gravades)</string>
+<string name="local_indexes_cat_tts">Indicacions de veu (TTS)</string>
+<string name="local_indexes_cat_voice">Indicacions de veu (gravades)</string>
 
 <string name="local_indexes_cat_poi">Dades dels PDI</string>
 <string name="ttsvoice">Veu sintetitzada TTS</string>
@@ -913,7 +914,7 @@
     
     <string name="download_select_map_types">Altres mapes</string>
     <string name="rendering_attr_noAdminboundaries_name">Amaga els límits administratius</string>
-	<string name="download_roads_only_maps">Mapes de només carreteres</string>
+	<string name="download_roads_only_maps">Mapa només de carreteres</string>
     
 	<string name="safe_mode">Mode segur</string>
     <string name="background_service_is_enabled_question">El mode en segon pla encara s\'està executant. També el voleu interrompre?</string>
@@ -993,7 +994,7 @@
 	
 	<string name="save_track_to_gpx">Desa la traça en un fitxer GPX durant la navegació</string>
 	<string name="use_english_names_descr">Escolliu entre noms nadius i noms anglesos</string>
-	<string name="srtm_plugin_description">"Aquest connector proporciona tant corbes de nivell superposades com una capa d\'ombres amb efecte relleu per posar a sobre els mapes locals de OsmAnd. Corredors, ciclistes, excursionistes i qualsevol interessat en el perfil de relleu del terreny ho agrairan força.\n\nLes dades globals (entre 70 graus nord i 70 graus sud) estan basades en mesures del SRTM (Shuttle Radar Topography Mission) i del ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un instrument de generació d\'imatges a bord de Terra, el satèl·lit insígnia del Sistema d\'Observació de la Terra de la NASA. ASTER és un esforç de col·laboració entre la NASA, el Ministeri d\'Economia i Comerç del Japó (METI) i la fundació Japan Space Systems (J-spacesystems). "</string>
+	<string name="srtm_plugin_description">"Aquest connector proporciona tant corbes de nivell superposades com una capa d\'ombres amb efecte relleu per superposar als mapes de OsmAnd. Corredors, ciclistes, excursionistes i qualsevol interessat en el perfil de relleu del terreny ho agrairan força.\n\nLes dades globals (entre 70 graus nord i 70 graus sud) estan basades en mesures del SRTM (Shuttle Radar Topography Mission) i del ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un instrument de generació d\'imatges a bord de Terra, el satèl·lit insígnia del Sistema d\'Observació de la Terra de la NASA. ASTER és un esforç de col·laboració entre la NASA, el Ministeri d\'Economia i Comerç del Japó (METI) i la fundació Japan Space Systems (J-spacesystems). "</string>
     <string name="rendering_attr_showRoadMaps_description">Indiqueu quan mostrar mapes de només carreteres:</string>
 	
     <string name="auto_announce_on">Inicia els anuncis automàtics</string>
@@ -1017,7 +1018,7 @@
     <string name="av_def_action_picture">Fes una fotografia</string>
     <string name="recording_context_menu_precord">Fes una fotografia</string>
     
-    <string name="download_hillshade_maps">Mapes de relleu</string>
+    <string name="download_hillshade_maps">Ombres de relleu</string>
     
     <string name="precise_routing_mode_descr">Activeu per calcular itineraris precisos sense errades. Encara és lent i de distància limitada.</string>
     <string name="precise_routing_mode">Encaminament precís (alfa)</string>
@@ -1080,7 +1081,7 @@
 	<string name="prefer_in_routing_title">Preferències…</string>
 	<string name="prefer_in_routing_descr">Millor autopistes</string>
     <string name="max_speed_none">cap</string>
-    <string name="local_indexes_cat_srtm">Dades de les corbes de nivell</string>
+    <string name="local_indexes_cat_srtm">Corbes de nivell</string>
     <string name="monitoring_settings_descr">Configureu com enregistrar els vostres recorreguts</string>
     
     <string name="av_use_external_camera_descr">Usa l\\\'aplicació del sistema per a les fotografies</string>
@@ -1257,7 +1258,7 @@
     <string name="route_info">Informació de ruta</string>
     
     
-    <string name="osmand_srtm_long_description_1000_chars">"Aquest connector proporciona tant corbes de nivell superposades com una capa d\'ombres amb efecte relleu per posar a sobre els mapes locals de OsmAnd. Corredors, ciclistes, excursionistes i qualsevol interessat en el perfil de relleu del terreny ho agrairan força.\n\nLes dades globals (entre 70 graus nord i 70 graus sud) estan basades en mesures del SRTM (Shuttle Radar Topography Mission) i del ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un instrument de generació d\'imatges a bord de Terra, el satèl·lit insígnia del Sistema d\'Observació de la Terra de la NASA. ASTER és un esforç de col·laboració entre la NASA, el Ministeri d\'Economia i Comerç del Japó (METI) i la fundació Japan Space Systems (J-spacesystems). "</string>
+    <string name="osmand_srtm_long_description_1000_chars">"Aquest connector proporciona tant corbes de nivell superposades com una capa d\'ombres amb efecte relleu per superposar als mapes de OsmAnd. Corredors, ciclistes, excursionistes i qualsevol interessat en el perfil de relleu del terreny ho agrairan força.\n\nLes dades globals (entre 70 graus nord i 70 graus sud) estan basades en mesures del SRTM (Shuttle Radar Topography Mission) i del ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un instrument de generació d\'imatges a bord de Terra, el satèl·lit insígnia del Sistema d\'Observació de la Terra de la NASA. ASTER és un esforç de col·laboració entre la NASA, el Ministeri d\'Economia i Comerç del Japó (METI) i la fundació Japan Space Systems (J-spacesystems). "</string>
     <string name="keep_and_add_destination_point">Afegeix com a punt de destinació</string>
     <string name="calculate_osmand_route_without_internet">Calcula un segment de ruta a l\'OsmAnd sense Internet</string>
     <string name="gpx_option_calculate_first_last_segment">Calcula una ruta a l\'OsmAnd pels seus segments primer i darrer</string>
@@ -1668,7 +1669,7 @@
 	<string name="proxy_port_descr">Configureu el número de port del vostre servidor intermediari (p.ex. 8118)</string>
 	<string name="points">Punts</string>
     
-    <string name="shared_string_my_location">La vostra posició</string>
+    <string name="shared_string_my_location">La meva posició</string>
     
     <string name="version_settings_descr">Baixada de les darreres versions</string>
     <string name="version_settings">Versions</string>
@@ -1956,7 +1957,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="buy">Compra</string>
     <string name="regions">Regions</string>
     
-    <string name="region_maps">Mapes de regió</string>
+    <string name="region_maps">Mapes de regions</string>
     <string name="world_maps">Mapes del món</string>
     
     <string name="later">Mes tard</string>
@@ -1973,11 +1974,18 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
 <string name="update_all">Actualitzeu tot (%1$s MB)</string>
     <string name="free_downloads_used">Baixades gratuïtes realitzades</string>
     <string name="free_downloads_used_description">Podeu veure quantes baixades gratuïtes heu fet</string>
-<string name="simulate_initial_startup_descr">Restaura el senyalitzador de primera engegada, mantenint altres paràmetres en l\'estat original</string>
-    <string name="simulate_initial_startup">Simula engegada inicial</string>
+<string name="simulate_initial_startup_descr">Configura el senyalitzador de primera engegada de l\'aplicació, mantenint la resta de paràmetres sense canvis</string>
+    <string name="simulate_initial_startup">Simula l\'engegada inicial de l\'aplicació</string>
     <string name="share_geo">geo:</string>
     <string name="share_menu_location">Comparteix la posició</string>
     <string name="shared_string_send">Envia</string>
     <string name="hello_blank_fragment">Hola fragment buit</string>
     <string name="application_dir_description">Trieu on voleu desar els fitxers de mapes.</string>
+<string name="shared_string_qr_code">Codi QR</string>
+    <string name="map_downloaded">Mapa baixat</string>
+    <string name="map_downloaded_descr">S\'ha baixat el mapa de %1$s. Torneu al mapa per començar a utilitzar-lo.</string>
+    <string name="go_to_map">Vés al mapa</string>
+    <string name="world_map_download_descr">El mapa base mundial (que abasta el món sencer però amb poca ampliació) no es troba o està malmès. Considereu baixar-lo per una operació completa.</string>
+    <string name="show_on_start_description">Si es desactiva s\'engega amb la pantalla del mapa</string>
+    <string name="enter_country_name">Indiqueu el nom del país</string>
 </resources>

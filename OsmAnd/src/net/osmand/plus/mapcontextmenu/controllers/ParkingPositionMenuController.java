@@ -1,9 +1,7 @@
-package net.osmand.plus.mapcontextmenu.details;
+package net.osmand.plus.mapcontextmenu.controllers;
 
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
 
-import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -14,17 +12,15 @@ import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 import net.osmand.util.Algorithms;
 
-public class ParkingPositionController extends MenuController {
+public class ParkingPositionMenuController extends MenuController {
 
 	private PointDescription pointDescription;
-	private LatLon latLon;
 	ParkingPositionPlugin plugin;
 	String parkingDescription = "";
 
-	public ParkingPositionController(OsmandApplication app, MapActivity mapActivity, final PointDescription pointDescription, LatLon latLon) {
+	public ParkingPositionMenuController(OsmandApplication app, MapActivity mapActivity, final PointDescription pointDescription) {
 		super(new MenuBuilder(app), mapActivity);
 		this.pointDescription = pointDescription;
-		this.latLon = latLon;
 		plugin = OsmandPlugin.getPlugin(ParkingPositionPlugin.class);
 		if (plugin != null) {
 			StringBuilder sb = new StringBuilder();
@@ -35,11 +31,15 @@ public class ParkingPositionController extends MenuController {
 			}
 			parkingDescription = sb.toString();
 		}
-	}
-
-	@Override
-	protected int getInitialMenuStatePortrait() {
-		return MenuState.HEADER_ONLY;
+		titleButtonController = new TitleButtonController() {
+			@Override
+			public void buttonPressed() {
+				if (plugin != null) {
+					plugin.showDeleteDialog(getMapActivity());
+				}
+			}
+		};
+		titleButtonController.caption = getMapActivity().getString(R.string.osmand_parking_delete);
 	}
 
 	@Override
@@ -68,29 +68,7 @@ public class ParkingPositionController extends MenuController {
 	}
 
 	@Override
-	public boolean hasTitleButton() {
-		return true;
-	}
-
-	@Override
-	public String getTitleButtonCaption() {
-		return getMapActivity().getString(R.string.osmand_parking_delete);
-	}
-
-	@Override
-	public void titleButtonPressed() {
-		if (plugin != null) {
-			plugin.showDeleteDialog(getMapActivity());
-		}
-	}
-
-	@Override
 	public boolean needStreetName() {
 		return false;
-	}
-
-	@Override
-	public void saveEntityState(Bundle bundle, String key) {
-		bundle.putSerializable(key, latLon);
 	}
 }

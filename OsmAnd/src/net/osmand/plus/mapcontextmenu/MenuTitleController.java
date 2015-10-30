@@ -139,7 +139,8 @@ public abstract class MenuTitleController {
 									object.getRef(), object.getDestinationName(settings.MAP_PREFERRED_LOCALE.get()));
 
 							if (!Algorithms.isEmpty(streetStr)) {
-								if (getObject() == null) {
+								MenuController menuController = getMenuController();
+								if (menuController == null || menuController.displayStreetNameinTitle()) {
 									nameStr = streetStr;
 									addressUnknown = false;
 									streetStr = "";

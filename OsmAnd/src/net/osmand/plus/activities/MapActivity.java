@@ -98,6 +98,7 @@ public class MapActivity extends AccessibleActivity {
 	private static final Log LOG = PlatformUtil.getLog(MapActivity.class);
 
 	private static MapViewTrackingUtilities mapViewTrackingUtilities;
+	private static MapContextMenu mapContextMenu = new MapContextMenu();
 
 	/**
 	 * Called when the activity is first created.
@@ -129,7 +130,6 @@ public class MapActivity extends AccessibleActivity {
 	private boolean intentLocation = false;
 
 	private DashboardOnMap dashboardOnMap = new DashboardOnMap(this);
-	private MapContextMenu contextMenuOnMap;
 	private FavoritePointEditor favoritePointEditor;
 	private AppInitializeListener initListener;
 	private IMapDownloaderCallback downloaderCallback;
@@ -161,8 +161,8 @@ public class MapActivity extends AccessibleActivity {
 		app = getMyApplication();
 		settings = app.getSettings();
 		app.applyTheme(this);
-		contextMenuOnMap = new MapContextMenu(this);
 		supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
+		mapContextMenu.setMapActivity(this);
 		super.onCreate(savedInstanceState);
 		// Full screen is not used here
 		// getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -529,9 +529,9 @@ public class MapActivity extends AccessibleActivity {
 				dashboardOnMap.hideDashboard();
 			}
 			if (mapLabelToShow != null) {
-				contextMenuOnMap.setMapCenter(latLonToShow);
-				contextMenuOnMap.setMapPosition(mapView.getMapPosition());
-				contextMenuOnMap.show(latLonToShow, mapLabelToShow, toShow);
+				mapContextMenu.setMapCenter(latLonToShow);
+				mapContextMenu.setMapPosition(mapView.getMapPosition());
+				mapContextMenu.show(latLonToShow, mapLabelToShow, toShow);
 			}
 			if (!latLonToShow.equals(cur)) {
 				mapView.getAnimatedDraggingThread().startMoving(latLonToShow.getLatitude(),
@@ -967,7 +967,7 @@ public class MapActivity extends AccessibleActivity {
 	}
 
 	public MapContextMenu getContextMenu() {
-		return contextMenuOnMap;
+		return mapContextMenu;
 	}
 
 	public FavoritePointEditor getFavoritePointEditor() {

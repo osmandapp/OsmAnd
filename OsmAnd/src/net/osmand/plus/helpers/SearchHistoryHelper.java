@@ -8,7 +8,6 @@ import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.util.Algorithms;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -51,7 +50,7 @@ public class SearchHistoryHelper {
 		}
 	};
 	
-	public static class HistoryEntry implements Serializable {
+	public static class HistoryEntry {
 		double lat;
 		double lon;
 		PointDescription name;

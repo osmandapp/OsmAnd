@@ -1,19 +1,6 @@
 package net.osmand.plus.development;
 
 
-import java.text.SimpleDateFormat;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
-
-import net.osmand.plus.ApplicationMode;
-import net.osmand.plus.OsmAndLocationSimulation;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.Version;
-import net.osmand.plus.activities.SettingsBaseActivity;
-import net.osmand.plus.activities.actions.AppModeDialog;
-import net.osmand.util.SunriseSunset;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -24,8 +11,23 @@ import android.os.Debug.MemoryInfo;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
+import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.view.View;
+
+import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.OsmAndLocationSimulation;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.Version;
+import net.osmand.plus.activities.SettingsBaseActivity;
+import net.osmand.plus.activities.actions.AppModeDialog;
+import net.osmand.util.SunriseSunset;
+
+import java.text.SimpleDateFormat;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
 
 //import net.osmand.plus.development.OsmandDevelopmentPlugin;
 
@@ -132,6 +134,10 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		});
 		cat.addPreference(pref);
 
+		PreferenceCategory info = new PreferenceCategory(this);
+		info.setTitle(R.string.info_button);
+		cat.addPreference(info);
+
 		pref = new Preference(this);
 		pref.setTitle(R.string.global_app_allocated_memory);
 
@@ -142,7 +148,7 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		pref.setSelectable(false);
 		//setEnabled(false) creates bad readability on some devices
 		//pref.setEnabled(false);
-		cat.addPreference(pref);
+		info.addPreference(pref);
 		
 //		ActivityManager activityManager = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
 //		ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
@@ -158,7 +164,7 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		pref.setSelectable(false);
 		//setEnabled(false) creates bad readability on some devices
 		//pref.setEnabled(false);
-		cat.addPreference(pref);
+		info.addPreference(pref);
 
 		final Preference agpspref = new Preference(this);
 		agpspref.setTitle(R.string.agps_info);
@@ -182,7 +188,7 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 			return true;
 			}
 		});
-		cat.addPreference(agpspref);
+		info.addPreference(agpspref);
 		
 		SunriseSunset sunriseSunset = getMyApplication().getDaynightHelper().getSunriseSunset();
 		pref = new Preference(this);
@@ -197,9 +203,9 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		pref.setSelectable(false);
 		//setEnabled(false) creates bad readability on some devices
 		//pref.setEnabled(false);
-		cat.addPreference(pref);
+		info.addPreference(pref);
 	}
-	
+
 	protected void availableProfileDialog() {
 		Builder b = new AlertDialog.Builder(this);
 		final List<ApplicationMode> modes = ApplicationMode.allPossibleValues();

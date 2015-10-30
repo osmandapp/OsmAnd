@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="rendering_attr_roadColors_description">Velg fargeskjema for veier:</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="rendering_attr_roadColors_description">Velg fargeskjema for veier:</string>
 	<string name="rendering_attr_roadColors_name">Veifargeskjema</string>
     <string name="map_widget_show_destination_arrow">Vis retning til målet</string>
     <string name="gps_not_available">Aktiver GPS i innstillingene</string>
@@ -272,7 +273,7 @@
 	<string name="favourites_edit_dialog_name">Navn</string>
 	<string name="favourites_edit_dialog_category">Kategori</string>
 	<string name="shared_string_no_thanks">Nei takk</string>
-	<string name="basemap_missing">Basis-verdenskart (som dekker hele verden ved lav zoom) mangler. Vurder å laste ned World_basemap_x.obf for et komplett miljø.</string>
+	<string name="basemap_missing">Basiskart verden (som dekker hele verden ved lav zoom) mangler. Vurder å laste ned World_basemap_x.obf for et komplett miljø.</string>
 	<string name="local_index_gpx_info_show">\n\nTrykk og hold for alternativer</string>
 	<string name="local_index_descr_title">Karthåndtering</string>
 	<string name="local_index_mi_restore">Aktiver</string>
@@ -648,7 +649,7 @@
 	<string name="auto_zoom_far">Middels hold</string>
 	<string name="auto_zoom_farthest">Langt hold</string>
 	<string name="map_magnifier">Kartforstørrelse</string>
-	<string name="base_world_map">Grunnkart verden</string>
+	<string name="base_world_map">Basiskart verden</string>
 	<string name="amenity_type_seamark">Sjømerke</string>
     <string name="app_modes_choose">Programprofiler</string>
 	<string name="map_widget_map_rendering">Kartopptegning</string>
@@ -1408,4 +1409,21 @@
     <string name="hillshade_layer_disabled">Relieffskyggelag deaktivert</string>
     <string name="share_menu_location">Del posisjon</string>
     <string name="shared_string_send">Send</string>
+    <string name="map_downloaded">Kart lastet ned</string>
+    <string name="map_downloaded_descr">Kart over %1$s har blitt lastet ned. Gå tilbake til kartet for å begynne å bruke det.</string>
+    <string name="go_to_map">Gå til kartet</string>
+    <string name="downloads">Nedlastinger</string>
+    <string name="value_downloaded_from_max">%1$.1f av %2$.1f MB</string>
+    <string name="file_size_in_mb">%.1f MB</string>
+    <string name="update_all">Oppdater alle (%1$s MB)</string>
+    <string name="free_downloads_used">Gratis nedlastinger brukt</string>
+    <string name="application_dir_description">Velg hvor du vil lagre kartfiler.</string>
+    <string name="enter_country_name">Oppfør navn på land</string>
+<string name="world_map_download_descr">Basiskart verden (som dekker hele verden ved lav zoom) mangler eller er utdatert. Vurder å laste ned Basiskart verden for et komplett miljø.</string>
+    <string name="shared_string_qr_code">QR-kode</string>
+    <string name="basemap_was_selected_to_download">Basiskart er nødvendig for at programmet skal fungere riktig og ble valgt for å laste ned.</string>
+	<string name="get_full_version">Fullversjon</string>
+    <string name="confirm_download_roadmaps">Er du sikker på at du vil laste ned veikart, selv om du har fullstendig kart?</string>
+    <string name="later">Senere</string>
+    <string name="activate_srtm_plugin">Aktiver programtillegg SRTM</string>
     </resources>

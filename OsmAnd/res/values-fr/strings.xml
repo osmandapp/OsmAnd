@@ -2076,4 +2076,5 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="map_downloaded_descr">La carte %1$s a été téléchargée. Allez à la carte pour l’utiliser.</string>
     <string name="shared_string_qr_code">QR-code</string>
     <string name="enter_country_name">Saisissez le pays</string>
-</resources>
+<string name="world_map_download_descr">La carte mondiale de base est manquante ou périmée. Merci de télécharger la carte mondiale de base afin que l\'application puisse fonctionner.</string>
+    </resources>

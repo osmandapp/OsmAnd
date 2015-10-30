@@ -1,13 +1,20 @@
 package net.osmand.plus.osmo;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.concurrent.ConcurrentLinkedQueue;
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Paint.Align;
+import android.graphics.Paint.Cap;
+import android.graphics.Paint.Join;
+import android.graphics.Paint.Style;
+import android.graphics.Path;
+import android.graphics.PointF;
+import android.os.Handler;
+import android.util.DisplayMetrics;
+import android.view.WindowManager;
 
 import net.osmand.Location;
-import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
@@ -25,20 +32,11 @@ import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
-import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Paint.Align;
-import android.graphics.Paint.Cap;
-import android.graphics.Paint.Join;
-import android.graphics.Paint.Style;
-import android.graphics.Path;
-import android.graphics.PointF;
-import android.os.Handler;
-import android.util.DisplayMetrics;
-import android.view.WindowManager;
-import android.widget.Toast;
+
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
  * Class represents a layer for osmo positions
@@ -349,7 +347,8 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 			ContextMenuLayer cl = map.getMapLayers().getContextMenuLayer();
 			final boolean sameObject;
 			if (map.getContextMenu().getObject() instanceof OsMoDevice && cl.isVisible()) {
-				sameObject = Algorithms.objectEquals(device.trackerId, ((OsMoDevice) map.getContextMenu().getObject()).trackerId);
+				sameObject = Algorithms.objectEquals(device.trackerId,
+						((OsMoDevice) map.getContextMenu().getObject()).trackerId);
 			} else {
 				sameObject = false;
 			}
@@ -374,13 +373,14 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 						schedule = false;
 						if (sameObject) {
 							Location l = device.getLastLocation();
-							map.getContextMenu().show(new LatLon(l.getLatitude(), l.getLongitude()), getObjectName(device), device);
-							//cl.setLocation(new LatLon(l.getLatitude(), l.getLongitude()), getObjectDescription(device));
-							//cl.setSelectedObject(device);
+							if (centered) {
+								map.getContextMenu().setMapCenter(loc);
+							}
+							map.getContextMenu().showOrUpdate(new LatLon(l.getLatitude(), l.getLongitude()),
+									getObjectName(device), device);
 						}
 						if (centered) {
-							map.getMapView().setLatLon(loc.getLatitude(),
-									loc.getLongitude());
+							map.getMapView().setLatLon(loc.getLatitude(), loc.getLongitude());
 						}
 						map.getMapView().refreshMap();
 					}

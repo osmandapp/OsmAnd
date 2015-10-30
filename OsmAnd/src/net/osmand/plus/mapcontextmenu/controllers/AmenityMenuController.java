@@ -1,6 +1,4 @@
-package net.osmand.plus.mapcontextmenu.details;
-
-import android.os.Bundle;
+package net.osmand.plus.mapcontextmenu.controllers;
 
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
@@ -11,6 +9,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.mapcontextmenu.builders.AmenityMenuBuilder;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.util.Algorithms;
 
@@ -21,11 +20,6 @@ public class AmenityMenuController extends MenuController {
 	public AmenityMenuController(OsmandApplication app, MapActivity mapActivity, final Amenity amenity) {
 		super(new AmenityMenuBuilder(app, amenity), mapActivity);
 		this.amenity = amenity;
-	}
-
-	@Override
-	protected int getInitialMenuStatePortrait() {
-		return MenuState.HEADER_ONLY;
 	}
 
 	@Override
@@ -85,10 +79,5 @@ public class AmenityMenuController extends MenuController {
 	@Override
 	public String getNameStr() {
 		return amenity.getName(getMapActivity().getMyApplication().getSettings().MAP_PREFERRED_LOCALE.get());
-	}
-
-	@Override
-	public void saveEntityState(Bundle bundle, String key) {
-		bundle.putSerializable(key, amenity);
 	}
 }

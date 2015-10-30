@@ -1,6 +1,5 @@
 package net.osmand.plus.mapcontextmenu;
 
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
@@ -10,13 +9,14 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.mapcontextmenu.MenuController.TitleButtonController;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.OsmandMapLayer;
 
 public class MapContextMenu extends MenuTitleController {
 
-	private final MapActivity mapActivity;
+	private MapActivity mapActivity;
 
 	private boolean active;
 	private LatLon latLon;
@@ -29,20 +29,18 @@ public class MapContextMenu extends MenuTitleController {
 
 	private int favActionIconId;
 
-	private static final String KEY_CTX_MENU_OBJECT = "key_ctx_menu_object";
-	private static final String KEY_CTX_MENU_ACTIVE = "key_ctx_menu_active";
-	private static final String KEY_CTX_MENU_LATLON = "key_ctx_menu_latlon";
-	private static final String KEY_CTX_MENU_POINT_DESC = "key_ctx_menu_point_desc";
-	private static final String KEY_CTX_MENU_NAME_STR = "key_ctx_menu_name_str";
-	private static final String KEY_CTX_MENU_TYPE_STR = "key_ctx_menu_type_str";
-	private static final String KEY_CTX_MENU_STREET_STR = "key_ctx_menu_street_str";
-	private static final String KEY_CTX_MENU_ADDR_UNKNOWN = "key_ctx_menu_addr_unknown";
-	private static final String KEY_CTX_MENU_MAP_CENTER = "key_ctx_menu_map_center";
-	private static final String KEY_CTX_MENU_MAP_POSITION = "key_ctx_menu_map_position";
-
 	@Override
 	public MapActivity getMapActivity() {
 		return mapActivity;
+	}
+
+	public void setMapActivity(MapActivity mapActivity) {
+		this.mapActivity = mapActivity;
+		if (active) {
+			acquireMenuController();
+		} else {
+			menuController = null;
+		}
 	}
 
 	public boolean isActive() {
@@ -89,16 +87,15 @@ public class MapContextMenu extends MenuTitleController {
 		return menuController;
 	}
 
-	public MapContextMenu(MapActivity mapActivity) {
-		this.mapActivity = mapActivity;
+	public MapContextMenu() {
 	}
 
 	public boolean init(LatLon latLon, PointDescription pointDescription, Object object) {
 		return init(latLon, pointDescription, object, false);
 	}
 
-	public boolean init(LatLon latLon, PointDescription pointDescription, Object object, boolean reload) {
-		if (!reload && isVisible()) {
+	public boolean init(LatLon latLon, PointDescription pointDescription, Object object, boolean update) {
+		if (!update && isVisible()) {
 			if (this.object == null || !this.object.equals(object)) {
 				hide();
 			} else {
@@ -109,6 +106,7 @@ public class MapContextMenu extends MenuTitleController {
 		if (this.object != null) {
 			clearSelectedObject(this.object);
 		}
+		setSelectedObject(object);
 
 		if (pointDescription == null) {
 			this.pointDescription = new PointDescription(latLon.getLatitude(), latLon.getLongitude());
@@ -149,11 +147,19 @@ public class MapContextMenu extends MenuTitleController {
 		}
 	}
 
-	public void refreshMenu(LatLon latLon, PointDescription pointDescription, Object object) {
+	public void update(LatLon latLon, PointDescription pointDescription, Object object) {
 		MapContextMenuFragment fragment = findMenuFragment();
 		if (fragment != null) {
 			init(latLon, pointDescription, object, true);
 			fragment.rebuildMenu();
+		}
+	}
+
+	public void showOrUpdate(LatLon latLon, PointDescription pointDescription, Object object) {
+		if (isVisible() && this.object != null && this.object.equals(object)) {
+			update(latLon, pointDescription, object);
+		} else {
+			show(latLon, pointDescription, object);
 		}
 	}
 
@@ -175,6 +181,21 @@ public class MapContextMenu extends MenuTitleController {
 	}
 
 	private void clearSelectedObject(Object object) {
+		if (object != null) {
+			for (OsmandMapLayer l : mapActivity.getMapView().getLayers()) {
+				if (l instanceof ContextMenuLayer.IContextMenuProvider) {
+					PointDescription pointDescription = ((ContextMenuLayer.IContextMenuProvider) l).getObjectName(object);
+					if (pointDescription != null) {
+						if (l instanceof ContextMenuLayer.IContextMenuProviderSelection) {
+							((ContextMenuLayer.IContextMenuProviderSelection) l).clearSelectedObject();
+						}
+					}
+				}
+			}
+		}
+	}
+
+	private void setSelectedObject(Object object) {
 		if (object != null) {
 			for (OsmandMapLayer l : mapActivity.getMapView().getLayers()) {
 				if (l instanceof ContextMenuLayer.IContextMenuProvider) {
@@ -267,56 +288,6 @@ public class MapContextMenu extends MenuTitleController {
 		mapActivity.getMapActions().contextMenuPoint(latLon.getLatitude(), latLon.getLongitude(), menuAdapter, object);
 	}
 
-	public void saveMenuState(Bundle bundle) {
-		if (menuController != null) {
-			menuController.saveEntityState(bundle, KEY_CTX_MENU_OBJECT);
-		}
-		bundle.putString(KEY_CTX_MENU_ACTIVE, Boolean.toString(active));
-		bundle.putSerializable(KEY_CTX_MENU_LATLON, latLon);
-		bundle.putSerializable(KEY_CTX_MENU_POINT_DESC, pointDescription);
-		bundle.putString(KEY_CTX_MENU_NAME_STR, nameStr);
-		bundle.putString(KEY_CTX_MENU_TYPE_STR, typeStr);
-		bundle.putString(KEY_CTX_MENU_STREET_STR, streetStr);
-		bundle.putString(KEY_CTX_MENU_ADDR_UNKNOWN, Boolean.toString(addressUnknown));
-		bundle.putSerializable(KEY_CTX_MENU_MAP_CENTER, mapCenter);
-		bundle.putInt(KEY_CTX_MENU_MAP_POSITION, mapPosition);
-	}
-
-	public void restoreMenuState(Bundle bundle) {
-		object = bundle.getSerializable(KEY_CTX_MENU_OBJECT);
-		Object pDescObj = bundle.getSerializable(KEY_CTX_MENU_POINT_DESC);
-		if (pDescObj != null) {
-			pointDescription = (PointDescription) pDescObj;
-		}
-
-		active = Boolean.parseBoolean(bundle.getString(KEY_CTX_MENU_ACTIVE));
-		Object latLonObj = bundle.getSerializable(KEY_CTX_MENU_LATLON);
-		if (latLonObj != null) {
-			latLon = (LatLon) latLonObj;
-		} else {
-			active = false;
-		}
-
-		acquireMenuController();
-
-		Object mapCenterObj = bundle.getSerializable(KEY_CTX_MENU_MAP_CENTER);
-		if (mapCenterObj != null) {
-			mapCenter = (LatLon) mapCenterObj;
-		}
-
-		nameStr = bundle.getString(KEY_CTX_MENU_NAME_STR);
-		typeStr = bundle.getString(KEY_CTX_MENU_TYPE_STR);
-		streetStr = bundle.getString(KEY_CTX_MENU_STREET_STR);
-		addressUnknown = Boolean.parseBoolean(bundle.getString(KEY_CTX_MENU_ADDR_UNKNOWN));
-		mapPosition = bundle.getInt(KEY_CTX_MENU_MAP_POSITION, 0);
-
-		acquireIcons();
-
-		if (menuController != null) {
-			menuController.addPlainMenuItems(typeStr, pointDescription, latLon);
-		}
-	}
-
 	public void setBaseFragmentVisibility(boolean visible) {
 		MapContextMenuFragment menuFragment = findMenuFragment();
 		if (menuFragment != null) {
@@ -382,21 +353,11 @@ public class MapContextMenu extends MenuTitleController {
 		}
 	}
 
-	public boolean hasTitleButton() {
-		return menuController != null && menuController.hasTitleButton();
-	}
-
-	public String getTitleButtonCaption() {
+	public TitleButtonController getTitleButtonController() {
 		if (menuController != null) {
-			return menuController.getTitleButtonCaption();
+			return menuController.getTitleButtonController();
 		} else {
-			return "";
-		}
-	}
-
-	public void titleButtonPressed() {
-		if (menuController != null) {
-			menuController.titleButtonPressed();
+			return null;
 		}
 	}
 }

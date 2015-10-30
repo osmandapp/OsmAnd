@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
   <string name="send_files_to_osm">GPX fájl küldése OSM-re?</string>
   <string name="gpx_visibility_txt">Láthatóság</string>
   <string name="gpx_tags_txt">Címkék</string>
@@ -240,7 +241,7 @@
   
   <string name="local_indexes_cat_backup">Deaktivált</string>
   <string name="local_indexes_cat_tts">Gépi hang (TTS)</string>
-  <string name="local_indexes_cat_voice">Beszédadat (felvett)</string>
+  <string name="local_indexes_cat_voice">Beszédhang (felvett)</string>
   
   <string name="local_indexes_cat_tile">Online és gyorsítótárazott térképcsempék</string>
   <string name="local_indexes_cat_map">Normál térképek (vektoros)</string>
@@ -1920,7 +1921,7 @@
 	<string name="saved_at_time">Sikeresen mentve ekkor: %1$s</string>
 <string name="regions">Régiók</string>
     
-    <string name="region_maps">Régiótérképek</string>
+    <string name="region_maps">Régiószintű térképek</string>
     <string name="world_maps">Világtérképek</string>
     
     <string name="hillshade_layer_disabled">Domborzatárnyékolás letiltva</string>
@@ -1979,9 +1980,17 @@
 <string name="update_all">Összes frissítése (%1$s MB)</string>
     <string name="free_downloads_used">Elhasznált ingyenes letöltés</string>
     <string name="free_downloads_used_description">Beállíthatod, mennyi ingyenes letöltést használtál</string>
-<string name="simulate_initial_startup_descr">Az első indítást jelző flag visszaállítása, a többi beállítás megmaradt</string>
+<string name="simulate_initial_startup_descr">Az első indítást jelző flag beállítása, a többi beállítás változatlan marad</string>
     <string name="simulate_initial_startup">Alkalmazás első indításának szimulálása</string>
     <string name="share_geo">geo:</string>
     <string name="share_menu_location">Pozíció megosztása</string>
     <string name="shared_string_send">Küldés</string>
-    </resources>
+    <string name="world_map_download_descr">A Föld alaptérképed (az egész Földet lefedi alacsony felbontással) hiányzik vagy elavult. A teljes funkcionalitáshoz javasoljuk a Föld alaptérkép letöltését.</string>
+    <string name="shared_string_qr_code">QR-kód</string>
+    <string name="map_downloaded">Térkép letöltve</string>
+    <string name="map_downloaded_descr">%1$s térképe letöltődött. A használatához menj vissza a térképre.</string>
+    <string name="go_to_map">Tovább a térképre</string>
+    <string name="application_dir_description">Válaszd ki, hova szeretnéd menteni a térképfájlokat.</string>
+    <string name="show_on_start_description">Kikapcsolva közvetlenül a térkép képernyőt indítja</string>
+    <string name="enter_country_name">Add meg az ország nevét</string>
+</resources>
