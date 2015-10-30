@@ -650,7 +650,7 @@
   <string name="map_online_plugin_is_not_installed">Aktywuj wtyczkę map online, aby wybrać inne źródła mapy</string>
   <string name="map_online_data">Mapy online i kafelki</string>
   <string name="map_online_data_descr">Używa map online (pobiera i przechowuje kafelki na karcie SD)</string>
-  <string name="online_map_settings">Mapy online</string>
+  <string name="shared_string_online_maps">Mapy online</string>
   <string name="online_map_settings_descr">Skonfiguruj źródła kafelków online i offline</string>
   
   
@@ -1195,7 +1195,7 @@
     <string name="local_index_tile_data_minzoom">Minimalne przybliżenie: %1$s</string>
     <string name="local_index_tile_data_name">Dane kafelkowe: %1$s</string>
     <string name="about_version">Wersja:</string>
-    <string name="about_settings">Informacje</string>
+    <string name="shared_string_about">Informacje</string>
     <string name="about_settings_descr">Wyświetla informacje o wersji, licencji, współtwórcach</string>
     
     

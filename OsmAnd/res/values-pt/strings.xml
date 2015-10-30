@@ -459,7 +459,7 @@
   <string name="map_online_plugin_is_not_installed">Activar plugin de mapas on-line para seleccionar diferentes fontes de mapas</string>
   <string name="map_online_data">Mapas Online e Mosaicos</string>
   <string name="map_online_data_descr">Usar mapas on-line (obter e armazenar mosaicos no cartão SD)</string>
-  <string name="online_map_settings">Mapas Online</string>
+  <string name="shared_string_online_maps">Mapas Online</string>
   <string name="online_map_settings_descr">Configurar fontes de mosaicos ou de mapas on-line</string>
   
   
@@ -1263,7 +1263,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 <string name="driving_region_canada">Canadá</string>
 	
 	<string name="about_version">Versão:</string>
-    <string name="about_settings">Sobre</string>
+    <string name="shared_string_about">Sobre</string>
     <string name="about_settings_descr">Versão, licenças, membros do projeto</string>
     
     <string name="local_index_tile_data_zooms">Zoom transferidas: %1$s</string>

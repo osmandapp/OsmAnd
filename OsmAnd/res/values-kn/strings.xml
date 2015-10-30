@@ -105,7 +105,7 @@
 	<string name="shared_string_audio">ಶ್ರಾವ್ಯ</string>
 	<string name="shared_string_video">ದೃಶ್ಯ</string>
 	<string name="shared_string_photo">ಛಾಯಾಚಿತ್ರ</string>
-	<string name="online_map_settings">ಮಿಂಬಲೆ ನಕ್ಷೆಗಳು</string>
+	<string name="shared_string_online_maps">ಮಿಂಬಲೆ ನಕ್ಷೆಗಳು</string>
 	<string name="record_plugin_name">ಪ್ರಯಾಣ ದಾಖಲಿಸಿಕೊಳ್ಳುವುದು</string>
 	<string name="osmo_plugin_name">ಒಸ್ಮೊ (ಒಎಸ್ಎಂ ಪರಿವೀಕ್ಷಿಸುವಿಕೆ)</string>
 	<string name="plugin_nautical_name">ಹಡಗಿನ ನಕ್ಷೆ ವೀಕ್ಷಣೆ</string>

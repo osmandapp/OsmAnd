@@ -18,7 +18,7 @@
 	<string name="shared_string_yes">Po</string>
 	
 	<string name="about_version">Versioni :</string>
-    <string name="about_settings">Rreth</string>
+    <string name="shared_string_about">Rreth</string>
     <string name="about_settings_descr">Informacion versioni, liçensat, anëtarët e projektit</string>
     <string name="local_index_tile_data_expire">Skadon (minuta): %1$s</string>
     <string name="local_index_tile_data_downloadable">E shkarkueshme: %1$s</string>

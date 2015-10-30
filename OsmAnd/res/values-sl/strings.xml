@@ -568,7 +568,7 @@
 	<string name="index_settings_descr">Prejemanje in upravljanje datotek zemljevidov, shranjenih na napravi</string>
 	<string name="map_online_plugin_is_not_installed">Omogočite vstavek spletnih zemljevidov za izbiro različnih virov zemljevidov</string>
 	<string name="map_online_data_descr">Uporabi spletne zemljevide (prejem in shranjevanje na kartici SD)</string>
-	<string name="online_map_settings">Spletni zemljevidi</string>
+	<string name="shared_string_online_maps">Spletni zemljevidi</string>
 	<string name="online_map_settings_descr">Nastavitev virov spletnih in shranjenih zemljevidov</string>
 	<string name="osmand_rastermaps_plugin_description">"Vstavek omogoča dostop do različnih vrst zemljevidov od vektorskih OpenStreetMap do satelitskih slik ter posebnih prekrivnih zemljevidov, kot so vremenski, klimatski, geološki in drugi zemljevidi. Vstavek omogoča tudi podporo za izrisovanje izohips, senčenje hribovitih predelov in podobno.\n\nVsi ti zemljevidi so lahko uporabljeni kot osnovni zemljevidi, ali pa so podloga oziroma prekrivni zemljevid drugim zemljevidom. V ta namen je treba vektorske zemljevide OsmAnd skriti oziroma narediti prosojne med \'Nastavitvami zemljevida\' v vsebinskem meniju.\n\nVektorske zemljevide je mogoče pridobiti preko spletnih virov, ali pa jih shraniti za delo brez povezave. Zemljevidi morajo biti shranjeni v osnovni mapi OsmAnd kot podatkovna zbirka SQLite. "</string>
 	<string name="osm_editing_plugin_description">Vstavek omogoča upravljanje nastavitev, ki so namenjene pošiljanju poročil, hroščev in odzivov na delovanje programa OsmAnd (posodabljanje podatkov točk POI, objavljanje sledi GPX (zahteva ustrezna poverila OSM) in drugo). OSM je javni odprtokodni projekt, katerega kakovost je odvisna tudi od vaše dejavnosti.</string>
@@ -1174,7 +1174,7 @@
 	<string name="driving_region_uk">Velika Britanija, Indija, Avstralija in drugo</string>
 	
 	<string name="about_version">Različica:</string>
-    <string name="about_settings">O programu</string>
+    <string name="shared_string_about">O programu</string>
     <string name="about_settings_descr">Podrobnosti o različici, dovoljenju, članih projekta in drugo</string>
     
     

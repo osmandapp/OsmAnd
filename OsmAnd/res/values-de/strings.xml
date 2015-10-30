@@ -160,7 +160,7 @@
 	<string name="map_online_plugin_is_not_installed">Aktivieren Sie das Online-Karten-Plugin, um andere Kartenquellen nutzen zu können</string>
 	<string name="map_online_data">Online- und Kachel-Karten</string>
 	<string name="map_online_data_descr">Online-Karten verwenden (Kacheln auf die SD-Karte herunterladen und zwischenspeichern)</string>
-	<string name="online_map_settings">Online-Karten</string>
+	<string name="shared_string_online_maps">Online-Karten</string>
 	<string name="online_map_settings_descr">Online- oder zwischengespeicherte Kachelkartenquellen konfigurieren</string>
 	
 	
@@ -1254,7 +1254,7 @@
 	<string name="announce_gpx_waypoints">GPX-Wegpunkte ansagen</string>
 	<string name="driving_region">Fahrgebiet</string>
 	<string name="about_version">Version :</string>
-	<string name="about_settings">Über</string>
+	<string name="shared_string_about">Über</string>
 	<string name="about_settings_descr">Versionsinfo, Lizenz, Projekt-Mitglieder</string>
 	<string name="local_index_tile_data_zooms">Zooms heruntergeladen: %1$s</string>
 	<string name="local_index_tile_data_expire">Gültigkeit endet in (Minuten): %1$s</string>

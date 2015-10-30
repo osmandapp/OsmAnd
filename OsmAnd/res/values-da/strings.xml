@@ -293,7 +293,7 @@
     <string name="map_online_plugin_is_not_installed">Aktiver onlinekort udvidelsen for at vælge andre kortkilder</string>
     <string name="map_online_data">Onlinekort og kortfliser</string>
     <string name="map_online_data_descr">Brug onlinekort (hent og gem midlertidig kortfliser på SD-kort)</string>
-    <string name="online_map_settings">Onlinekort</string>
+    <string name="shared_string_online_maps">Onlinekort</string>
     <string name="online_map_settings_descr">Konfigurer online- eller cachelagrede kilder til kortfliser</string>
 
 
@@ -1155,7 +1155,7 @@
     <string name="edit_tilesource_successfully">Kortflisekilden %1$s er gemt</string>
     
     <string name="about_version">Version:</string>
-    <string name="about_settings">Om</string>
+    <string name="shared_string_about">Om</string>
     <string name="about_settings_descr">Versioninformation, licenser, projektmedlemmer</string>
 
     

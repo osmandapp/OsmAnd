@@ -164,7 +164,7 @@
     <string name="base_world_map">Globalt grunnkart</string>
 	
 	<string name="about_version">Versjon:</string>
-    <string name="about_settings">Om</string>
+    <string name="shared_string_about">Om</string>
     
     <string name="edit_tilesource_maxzoom">Maksforstørring</string>
     <string name="edit_tilesource_minzoom">Minste forstørring</string>

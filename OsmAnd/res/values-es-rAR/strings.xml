@@ -125,7 +125,7 @@
 	<string name="route_points">Puntos de la ruta</string>
 	<string name="track_segments">Segmentos de la traza</string>
 	<string name="track_points">Puntos de la traza</string>
-	<string name="online_map_settings">Mapas en línea</string>
+	<string name="shared_string_online_maps">Mapas en línea</string>
 	<string name="record_plugin_name">Grabación de viaje</string>
 	<string name="osmo_plugin_name">OsMo (Rastreo OSM)</string>
 	<string name="plugin_touringview_name">Vista turística</string>
@@ -623,7 +623,7 @@
 	
 	
     <string name="about_version">Versión:</string>
-    <string name="about_settings">Acerca de</string>
+    <string name="shared_string_about">Acerca de</string>
     <string name="about_settings_descr">Información de la versión, licencias, miembros del proyecto</string>
 
     

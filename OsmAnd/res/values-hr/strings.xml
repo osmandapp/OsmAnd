@@ -186,7 +186,7 @@
 	<string name="left_side_navigation">Vožnja lijevom stranom</string>
 	<string name="left_side_navigation_descr">Označi za države s vožnjom na lijevoj strani</string>
 	<string name="local_indexes_cat_map">Offline karte (vektorske)</string>
-	<string name="online_map_settings">Online karte</string>
+	<string name="shared_string_online_maps">Online karte</string>
 	
 	
 	<string name="plugins_screen">Dodaci</string>

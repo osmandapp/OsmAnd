@@ -16,7 +16,7 @@ import android.webkit.WebViewClient;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.dialogs.HelpScreenDialogFragment;
+import net.osmand.plus.dialogs.helpscreen.HelpScreenDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 
 import java.io.BufferedReader;

@@ -197,7 +197,7 @@
 	<string name="map_online_plugin_is_not_installed">Activează plugin-ul pentru hărți online ca să beneficiezi și de alte surse de date</string>
 	<string name="map_online_data">Hărți online și în format raster</string>
 	<string name="map_online_data_descr">Folosește hărți online (descarcă și salvează porțiuni de hartă pe cardul SD)</string>
-	<string name="online_map_settings">Hărți online</string>
+	<string name="shared_string_online_maps">Hărți online</string>
 	<string name="online_map_settings_descr">Configurați sursele pentru hărțile online și raster</string>
 	
 	
@@ -1089,7 +1089,7 @@
 	<string name="base_world_map">Harta de bază a lumii</string>
 	
 	<string name="about_version">Versiune :</string>
-    <string name="about_settings">Despre</string>
+    <string name="shared_string_about">Despre</string>
     <string name="about_settings_descr">Informații versiune, licențe, membrii proiect</string>
     
     <string name="local_index_tile_data_expire">Expiră (minute): %1$s</string>

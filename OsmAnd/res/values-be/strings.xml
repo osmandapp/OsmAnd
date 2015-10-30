@@ -5,7 +5,7 @@
     <string name="map_magnifier">Лупа мапы</string>
     <string name="base_world_map">Асноўная мапа сьвету</string>
     <string name="about_version">Вэрсія:</string>
-    <string name="about_settings">Аб праграме</string>
+    <string name="shared_string_about">Аб праграме</string>
     <string name="about_settings_descr">Вэрсія, ліцэнзіі, удзельнікі праекту</string>
     
     
@@ -402,7 +402,7 @@
 	<string name="map_online_plugin_is_not_installed">Актывуйце модуль анлайн мапаў, каб выбіраць розныя крыніцы для мапаў</string>
 	<string name="map_online_data">Сеціўныя і растравыя мапы</string>
 	<string name="map_online_data_descr">Карыстацца сеціўнымі мапамі (cьцягнуць і захоўваць фрагмэнты на картцы SD)</string>
-	<string name="online_map_settings">Сеціўныя мапы</string>
+	<string name="shared_string_online_maps">Сеціўныя мапы</string>
 	<string name="online_map_settings_descr">Наладзьце крыніцы сеціўных або кэшаваных растравых мапаў</string>
 	
 	

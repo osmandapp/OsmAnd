@@ -126,7 +126,7 @@
 	<string name="shared_string_yes">Eja</string>
 	
     <string name="about_version">Versione:</string>
-    <string name="about_settings">Informatziones</string>
+    <string name="shared_string_about">Informatziones</string>
     <string name="about_settings_descr">Informatziones de sa versione, litzèntzias, membros de su progetu</string>
     
     
@@ -726,7 +726,7 @@
 	<string name="local_indexes_cat_map">Mapas regulares (vetoriales)</string>
 	<string name="map_online_data">Mapas in lìnia e a tasseddos</string>
 	<string name="map_online_data_descr">Imprea sas mapas in lìnia (iscàrriga e archìvia sos tasseddos in s’ischeda SD)</string>
-	<string name="online_map_settings">Mapas in lìnia</string>
+	<string name="shared_string_online_maps">Mapas in lìnia</string>
 	<string name="online_map_settings_descr">Cunfigura sas mitzas de sas mapas in lìnia o de sos tasseddos in cache</string>
 	
 	

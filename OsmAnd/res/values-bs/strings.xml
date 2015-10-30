@@ -36,7 +36,7 @@
   <string name="map_online_plugin_is_not_installed">Omogući nadogradnju za izbor drugačijih izvora javnih mapa</string>
   <string name="map_online_data">Javne mape (u sličicama)</string>
   <string name="map_online_data_descr">Koristi javne mape (preuzmi i keširaj sličice na memorijsku karticu)</string>
-  <string name="online_map_settings">Javne mape</string>
+  <string name="shared_string_online_maps">Javne mape</string>
   <string name="online_map_settings_descr">Podesi izvor sličica javnih ili keširanih mapa</string>
   
   

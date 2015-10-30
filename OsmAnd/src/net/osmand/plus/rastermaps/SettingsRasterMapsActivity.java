@@ -1,14 +1,6 @@
 package net.osmand.plus.rastermaps;
 
 
-import java.util.Map;
-
-import net.osmand.ResultMatcher;
-import net.osmand.map.TileSourceManager.TileSourceTemplate;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.SettingsBaseActivity;
-import net.osmand.plus.views.SeekBarPreference;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
@@ -16,6 +8,15 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
+
+import net.osmand.ResultMatcher;
+import net.osmand.map.TileSourceManager.TileSourceTemplate;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.SettingsBaseActivity;
+import net.osmand.plus.views.SeekBarPreference;
+
+import java.util.Map;
 
 public class SettingsRasterMapsActivity extends SettingsBaseActivity {
 
@@ -30,7 +31,7 @@ public class SettingsRasterMapsActivity extends SettingsBaseActivity {
     public void onCreate(Bundle savedInstanceState) {
 		((OsmandApplication) getApplication()).applyTheme(this);
 		super.onCreate(savedInstanceState);
-		getToolbar().setTitle(R.string.online_map_settings);
+		getToolbar().setTitle(R.string.shared_string_online_maps);
 		PreferenceScreen grp = getPreferenceScreen();
 		OnPreferenceChangeListener listener = createPreferenceListener();
 		

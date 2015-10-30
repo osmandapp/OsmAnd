@@ -138,7 +138,7 @@
 	<string name="shared_string_photo">Foto</string>
 	<string name="route_points">Pontos da rota</string>
 	<string name="track_segments">Segmentos do trajeto</string>
-	<string name="online_map_settings">Mapas on-line</string>
+	<string name="shared_string_online_maps">Mapas on-line</string>
 	<string name="osmand_rastermaps_plugin_description">"Com este complemento você pode acessar muitos tipos de mapas online (chamados de quadrícula ou ladrilho), tais como quadrículas predefinidas do OpenStreetMap (como Mapnik) para imagens de satélite e camadas especiais como mapas aquáticos, climáticos, geológicos, camadas de sombra de relevo, etc.\n\nQuaisquer desses mapas podem ser usados como mapa principal (base) para ser mostrado no OsmAnd ou como uma sobreposição ou subcamada para outro mapa base (como o mapa offline normal de OsmAnd). A fim de fazer qualquer subcamada do mapa mais visível, certos elementos do mapa vetorial do OsmAnd podem facilmente ser ocultados através do menu \'Configurar mapa\' conforme desejado.\n\nQuadrículas de mapas podem ser obtidas diretamente através de fontes on-line ou podem ser preparados para uso off-line (e copiadas manualmente para o diretório de dados do OsmAnd) como um banco de dados sqlite, que pode ser produzido por uma variedade de ferramentas de terceiros para preparação de mapas. "</string>
 	<string name="record_plugin_name">Gravação de viagem</string>
 	<string name="record_plugin_description">"Este complemento ativa a funcionalidade para gravar e salvar seus trajetos manualmente tocando o widget de registro de GPX na tela do mapa ou também fazendo automaticamente o registro de todas as suas rotas de navegação para um arquivo GPX.
@@ -622,7 +622,7 @@
 	
 	
     <string name="about_version">Versão:</string>
-    <string name="about_settings">Sobre</string>
+    <string name="shared_string_about">Sobre</string>
     <string name="about_settings_descr">Versão, licenças, membros do projeto</string>
 
     

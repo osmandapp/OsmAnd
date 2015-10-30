@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="about_version">Верзија:</string>
-    <string name="about_settings">Oko</string>
+    <string name="shared_string_about">Oko</string>
     <string name="about_settings_descr">Верзија инфо, лиценце, чланови пројекта</string>
     
     <string name="av_photo_play_sound_descr">Изаберите да ли да се чује звук приликом снимања фотографија</string>
