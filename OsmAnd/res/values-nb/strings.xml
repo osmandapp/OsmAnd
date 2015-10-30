@@ -1426,4 +1426,27 @@
     <string name="confirm_download_roadmaps">Er du sikker på at du vil laste ned veikart, selv om du har fullstendig kart?</string>
     <string name="later">Senere</string>
     <string name="activate_srtm_plugin">Aktiver programtillegg SRTM</string>
-    </resources>
+    <string name="opening_at">Åpner</string>
+	<string name="closing_at">Lukker</string>
+	<string name="tag_poi_amenity">fasilitet</string>
+	<string name="contact_info">Kontaktinformasjon</string>
+	<string name="recent_places">Nylige steder</string>
+	<string name="saved_at_time">Vellykket lagret: %1$s</string>
+	<string name="new_version">Ny versjon</string>
+    <string name="begin_with_osmand_menu_group">Begynn med OsmAnd</string>
+    <string name="features_menu_group">Funksjoner</string>
+    <string name="help_us_to_improve_menu_group">Hjelp oss å forbedre OsmAnd</string>
+    <string name="plugins_menu_group">Programtillegg</string>
+    <string name="first_usage_item">Første bruk</string>
+    <string name="first_usage_item_description">Hvordan laste ned kart, grunnleggende innstillinger</string>
+    <string name="faq_item_description">Hvordan bruke programtillegg</string>
+    <string name="map_viewing_item">Kartvisning</string>
+    <string name="search_on_the_map_item">Søk på kartet</string>
+    <string name="contour_lines_and_hillshade_maps_item">Kart med koter og relieffskygger</string>
+    <string name="osmand_ski_maps_item">OsmAnd skikart</string>
+    <string name="nautical_charts_item">Sjøkart</string>
+    <string name="audio_video_note_item">Audio/video-notater</string>
+    <string name="osm_editing_item">OSM-redigering</string>
+    <string name="versions_item">Versjoner</string>
+    <string name="contact_us">Kontakt oss</string>
+</resources>

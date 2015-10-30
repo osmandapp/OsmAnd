@@ -216,7 +216,7 @@
 	<string name="poi_city_wall">Městská hradba</string>
 	<string name="poi_lift_gate">Zvedací brána</string>
 	<string name="poi_traffic_calming_bump">Retardér</string>
-	<string name="poi_traffic_calming_hump">Retardér</string>
+	<string name="poi_traffic_calming_hump">Dlouhý retardér</string>
 	<string name="poi_vehicle_inspection">Kontrola vozidel</string>
 	<string name="poi_parking_entrance">Vjezd parkoviště</string>
 	<string name="poi_tram_stop">Zastávka tramvaje</string>
@@ -227,7 +227,7 @@
 	<string name="poi_tourism">Turistika</string>
 	<string name="poi_entertainment">Volný čas</string>
 	<string name="poi_sustenance">Občerstvení</string>
-	<string name="poi_osmwiki">Wikipedia</string>
+	<string name="poi_osmwiki">Wikipedie</string>
 	<string name="poi_user_defined_other">Uživatelsky definovaný</string>
 	
 	<string name="poi_wine">Vinotéka</string>
@@ -1278,4 +1278,11 @@
 	<string name="poi_denomination_protestant">Protestantské</string>
 	<string name="poi_denomination_methodist">Metodistické</string>
 	<string name="poi_tourism_yes">Turistický objekt</string>
+	<string name="poi_cairn">Mohyla</string>
+
+	<string name="poi_aeroway_fuel">Letecká čerpací stanice</string>
+	<string name="poi_escape_lane">Únikový pruh</string>
+
+	<string name="poi_motorcycle_repair">Motocyklová opravna</string>
+	<string name="poi_highway_steps">Schody</string>
 	</resources>
