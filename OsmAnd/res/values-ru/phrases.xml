@@ -2365,4 +2365,8 @@
 	<string name="poi_concentration_camp_nazism">Тип: нацистский</string>
 	<string name="poi_concentration_camp_gulag">Тип: гулаг</string>
 
+	<string name="poi_temperature">Температура</string>
+	<string name="poi_bathing_yes">Купание: да</string>
+	<string name="poi_bathing_no">Купание: нет</string>
+
 </resources>
