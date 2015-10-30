@@ -2395,4 +2395,14 @@
 
 <string name="poi_square">Torv</string>
 
+<string name="poi_building_type_church">Bygningstype: kirke</string>
+	<string name="poi_building_type_chapel">Bygningstype: kapel</string>
+	<string name="poi_building_type_mosque">Bygningstype: moské</string>
+	<string name="poi_building_type_temple">Bygningstype: tempel</string>
+	<string name="poi_building_type_cathedral">Bygningstype: katedral</string>
+	<string name="poi_building_type_monastery">Bygningstype: klostet</string>
+	<string name="poi_building_type_basilica">Bygningstype: basilika</string>
+	<string name="poi_building_type_synagogue">Bygningstype: synagoge</string>
+	<string name="poi_building_type_shrine">Bygningstype: shrine</string>
+
 </resources>
