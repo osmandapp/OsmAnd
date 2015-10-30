@@ -118,16 +118,12 @@ public class AudioVideoNoteMenuBuilder extends MenuBuilder {
 		LinearLayout.LayoutParams llILParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		llImage.setLayoutParams(llILParams);
 		llImage.setOrientation(LinearLayout.VERTICAL);
-		llImage.setPadding(dpToPx(10f), dpToPx(10f), dpToPx(10f), dpToPx(4f));
 		ll.addView(llImage);
 
 		ImageView imageView = new ImageView(view.getContext());
-		//imageView.setBackgroundResource(resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
-		LinearLayout.LayoutParams llImgParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dpToPx(194f));
+		LinearLayout.LayoutParams llImgParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dpToPx(208f));
 		imageView.setLayoutParams(llImgParams);
 		imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-		//imageView.setAdjustViewBounds(true);
-		//imageView.setMaxHeight(dpToPx(100f));
 		imageView.setImageBitmap(bitmap);
 
 		imageView.setOnClickListener(onClickListener);
