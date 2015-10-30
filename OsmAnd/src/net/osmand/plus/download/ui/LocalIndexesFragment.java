@@ -1031,6 +1031,9 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 					}
 				});
 				int colorId = filesToUpdate.containsKey(child.getFileName()) ? R.color.color_distance : R.color.color_ok;
+				if (child.isBackupedData()) {
+					colorId = R.color.color_unknown;
+				}
 				icon.setImageDrawable(getContentIcon(ctx, child.getType().getIconResource(), colorId));
 
 				nameTextView.setText(getNameToDisplay(child));
