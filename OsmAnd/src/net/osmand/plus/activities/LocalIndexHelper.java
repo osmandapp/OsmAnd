@@ -129,11 +129,11 @@ public class LocalIndexHelper {
 				if (voiceF.isDirectory() && MediaCommandPlayerImpl.isMyData(voiceF)) {
 					LocalIndexInfo info = null;
 					info = new LocalIndexInfo(LocalIndexType.VOICE_DATA, voiceF, backup);
-				}
-				if(info != null){
-					updateDescription(info);
-					result.add(info);
-					loadTask.loadFile(info);
+					if(info != null){
+						updateDescription(info);
+						result.add(info);
+						loadTask.loadFile(info);
+					}
 				}
 			}
 		}
