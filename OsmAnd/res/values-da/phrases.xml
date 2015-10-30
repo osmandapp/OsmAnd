@@ -2393,7 +2393,7 @@
 	<string name="poi_historic_gallows">Historisk galge</string>
 	<string name="poi_historic_railway">Historisk jernbane</string>
 
-<string name="poi_square">Torv</string>
+<string name="poi_square">Plads</string>
 
 <string name="poi_building_type_church">Bygningstype: kirke</string>
 	<string name="poi_building_type_chapel">Bygningstype: kapel</string>
@@ -2403,6 +2403,6 @@
 	<string name="poi_building_type_monastery">Bygningstype: kloster</string>
 	<string name="poi_building_type_basilica">Bygningstype: basilika</string>
 	<string name="poi_building_type_synagogue">Bygningstype: synagoge</string>
-	<string name="poi_building_type_shrine">Bygningstype: skrin</string>
+	<string name="poi_building_type_shrine">Bygningstype: helgenskrin</string>
 
 </resources>
