@@ -1,8 +1,19 @@
 package net.osmand.plus.mapcontextmenu.builders;
 
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.plus.OsmandApplication;
@@ -38,6 +49,31 @@ public class AudioVideoNoteMenuBuilder extends MenuBuilder {
 
 		File file = recording.getFile();
 		if (file != null) {
+
+			if (recording.isPhoto()) {
+				BitmapFactory.Options opts = new BitmapFactory.Options();
+				opts.inSampleSize = 4;
+				int rot = recording.getBitmapRotation();
+				Bitmap bmp = BitmapFactory.decodeFile(file.getAbsolutePath(), opts);
+				if (rot != 0) {
+					Matrix matrix = new Matrix();
+					matrix.postRotate(rot);
+					Bitmap resizedBitmap = Bitmap.createBitmap(bmp, 0, 0, bmp.getWidth(), bmp.getHeight(), matrix, true);
+					bmp.recycle();
+					bmp = resizedBitmap;
+				}
+
+				buildImageRow(view, bmp, new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						Intent vint = new Intent(Intent.ACTION_VIEW);
+						vint.setDataAndType(Uri.fromFile(recording.getFile()), "image/*");
+						vint.setFlags(0x10000000);
+						v.getContext().startActivity(vint);
+					}
+				});
+			}
+
 			DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(view.getContext());
 			DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(view.getContext());
 			Date date = new Date(recording.getFile().lastModified());
@@ -69,5 +105,36 @@ public class AudioVideoNoteMenuBuilder extends MenuBuilder {
 				bld.show();
 			}
 		});
+	}
+
+	protected void buildImageRow(final View view, Bitmap bitmap, OnClickListener onClickListener) {
+		LinearLayout ll = new LinearLayout(view.getContext());
+		ll.setOrientation(LinearLayout.HORIZONTAL);
+		LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		ll.setLayoutParams(llParams);
+
+		// Image
+		LinearLayout llImage = new LinearLayout(view.getContext());
+		LinearLayout.LayoutParams llILParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		llImage.setLayoutParams(llILParams);
+		llImage.setOrientation(LinearLayout.VERTICAL);
+		llImage.setPadding(dpToPx(10f), dpToPx(10f), dpToPx(10f), dpToPx(4f));
+		ll.addView(llImage);
+
+		ImageView imageView = new ImageView(view.getContext());
+		//imageView.setBackgroundResource(resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
+		LinearLayout.LayoutParams llImgParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dpToPx(194f));
+		imageView.setLayoutParams(llImgParams);
+		imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+		//imageView.setAdjustViewBounds(true);
+		//imageView.setMaxHeight(dpToPx(100f));
+		imageView.setImageBitmap(bitmap);
+
+		imageView.setOnClickListener(onClickListener);
+		llImage.addView(imageView);
+
+		((LinearLayout) view).addView(ll);
+
+		rowBuilt();
 	}
 }
