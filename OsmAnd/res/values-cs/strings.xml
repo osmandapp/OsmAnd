@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="switch_to_raster_map_to_see">Vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v Nastaveních (Spravovat mapové soubory), nebo se přepněte na online mapy.</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="switch_to_raster_map_to_see">Vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v Nastaveních (Spravovat mapové soubory), nebo se přepněte na online mapy.</string>
   
   <string name="send_files_to_osm">Nahrát GPX soubory do OSM?</string>
   <string name="gpx_visibility_txt">Viditelnost</string>
@@ -1985,4 +1986,38 @@
     <string name="confirm_download_roadmaps">Opravdu chcete stáhnout silniční mapu, když už máte podrobnou mapu?</string>
     <string name="application_dir_description">Zvolte kam chcete uložit mapové soubory.</string>
     <string name="show_on_start_description">\'Vypnuto\' spouští přímo mapovou obrazovku</string>
+<string name="world_map_download_descr">Základní mapa světa (pokrývající celý svět při malých detailech) chybí nebo je zastaralá. Prosím zvažte její stažení pro kompletní prostředí.</string>
+    <string name="shared_string_qr_code">QR kód</string>
+    <string name="map_downloaded">Mapa stažena</string>
+    <string name="map_downloaded_descr">Mapa %1$s byla stažena. Pro její použití se vraťte zpět na mapu.</string>
+    <string name="go_to_map">Přejít na mapu</string>
+    <string name="show_free_version_banner">Zobrazit banner volné verze</string>
+    <string name="show_free_version_banner_description">I když používáte placenou verzi, můžete vidět banner volné verze</string>
+    <string name="hello_blank_fragment">Prázdný fragment</string>
+    <string name="enter_country_name">Vložte název země</string>
+    <string name="new_version">Nová verze</string>
+    <string name="begin_with_osmand_menu_group">Začněte s OsmAnd</string>
+    <string name="features_menu_group">Vlastnosti</string>
+    <string name="help_us_to_improve_menu_group">Pomoz nám vylepšit OsmAnd</string>
+    <string name="other_menu_group">Další</string>
+    <string name="plugins_menu_group">Moduly</string>
+    <string name="first_usage_item">První použití</string>
+    <string name="first_usage_item_description">Jak stáhnout mapu, základní nastavení</string>
+    <string name="navigation_item_description">Nastavení navigace</string>
+    <string name="faq_item">Často kladené dotazy</string>
+    <string name="faq_item_description">Jak použít moduly</string>
+    <string name="map_viewing_item">Prohlížení mapy</string>
+    <string name="search_on_the_map_item">Hledání na mapě</string>
+    <string name="planning_trip_item">Plánování cest</string>
+    <string name="contour_lines_and_hillshade_maps_item">Vrstevnice a stínování kopců</string>
+    <string name="trip_recording_tool_item">Nástroj na záznam cest</string>
+    <string name="osmand_ski_maps_item">OsmAnd lyžařské mapy</string>
+    <string name="nautical_charts_item">Námořní mapy</string>
+    <string name="audio_video_note_item">Audio/video poznámky</string>
+    <string name="osm_editing_item">OSM editace</string>
+    <string name="instalation_troubleshooting_item">Instalace a řešení problémů</string>
+    <string name="techical_articles_item">Technické články</string>
+    <string name="versions_item">Verze</string>
+    <string name="poll">hlasování</string>
+    <string name="contact_us">Kontaktujte nás</string>
 </resources>
