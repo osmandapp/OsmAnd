@@ -1952,4 +1952,7 @@
     <string name="map_downloaded_descr">Karta över %1$s har hämtats. Gå tillbaka till kartan för att börja använda den.</string>
     <string name="go_to_map">Gå till kartan</string>
     <string name="shared_string_qr_code">QR-kod</string>
+    <string name="enter_country_name">Ange land</string>
+    <string name="new_version">Ny version</string>
+    <string name="begin_with_osmand_menu_group">Börja med OsmAnd</string>
     </resources>
