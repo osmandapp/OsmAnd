@@ -1998,4 +1998,6 @@
     <string name="versions_item">Versiones</string>
     <string name="poll">sondàggiu</string>
     <string name="contact_us">Cuntata·nos</string>
-</resources>
+<string name="osm_edit_created_poi">PDI de OSM creadu</string>
+    <string name="osm_edit_created_bug">Nota de OSM creada</string>
+    </resources>
