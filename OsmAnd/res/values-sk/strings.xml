@@ -2156,13 +2156,13 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="show_on_start_description">\'Vypnuté\' spustí priamo obrazovku mapy</string>
     <string name="enter_country_name">Zadajte názov krajiny</string>
     <string name="new_version">Nová verzia</string>
-    <string name="begin_with_osmand_menu_group">Začať s OsmAnd</string>
+    <string name="begin_with_osmand_menu_group">Prvé kroky s OsmAnd</string>
     <string name="features_menu_group">Funkcie</string>
     <string name="help_us_to_improve_menu_group">Pomôžte nám vylepšiť OsmAnd</string>
     <string name="other_menu_group">Iné</string>
     <string name="plugins_menu_group">Zásuvné moduly</string>
     <string name="first_usage_item">Prvé použitie</string>
-    <string name="first_usage_item_description">Ako stiahnuť mapu, základné nastavenia</string>
+    <string name="first_usage_item_description">Ako sťahovať mapy, urobiť základné nastavenia</string>
     <string name="navigation_item_description">Nastavenie navigácie</string>
     <string name="faq_item">Otázky</string>
     <string name="faq_item_description">Ako používať zásuvné moduly</string>
@@ -2178,6 +2178,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="instalation_troubleshooting_item">Inštalácia a riešenie problémov</string>
     <string name="techical_articles_item">Technické články</string>
     <string name="versions_item">Verzie</string>
-    <string name="poll">anketa</string>
+    <string name="poll">Anketa</string>
     <string name="contact_us">Kontaktujte nás</string>
 </resources>
