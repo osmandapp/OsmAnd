@@ -2084,12 +2084,12 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="other_menu_group">Divers</string>
     <string name="plugins_menu_group">Greffons</string>
     <string name="first_usage_item">Première utilisation</string>
-    <string name="first_usage_item_description">Comment télécharger des cartes et paramétrages de base</string>
+    <string name="first_usage_item_description">Comment télécharger des cartes et définir les paramètres de base</string>
     <string name="navigation_item_description">Configurer la navigation</string>
     <string name="faq_item">FAQ</string>
     <string name="faq_item_description">Comment utiliser les greffons</string>
     <string name="map_viewing_item">Affichage de la carte</string>
-    <string name="search_on_the_map_item">Rechercher dans la carte</string>
+    <string name="search_on_the_map_item">Rechercher de carte</string>
     <string name="planning_trip_item">Préparer un trajet</string>
     <string name="contour_lines_and_hillshade_maps_item">Cartes avec relief et courbes de niveau</string>
     <string name="trip_recording_tool_item">Outil d\'enregistrement d\'un trajet</string>
@@ -2099,7 +2099,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="instalation_troubleshooting_item">Installation et débogage</string>
     <string name="techical_articles_item">Articles techniques</string>
     <string name="versions_item">Versions</string>
-    <string name="poll">sondage</string>
+    <string name="poll">Sondage</string>
     <string name="contact_us">Nous contacter</string>
 <string name="audio_video_note_item">Notes audio / vidéo</string>
     <string name="osm_edit_created_poi">PI créés sur OSM</string>
