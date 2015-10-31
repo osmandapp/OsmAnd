@@ -344,21 +344,17 @@ public class HelpScreenDialogFragment extends DialogFragment implements Expandab
 		arrayList.add(new MyMenuItem(R.string.techical_articles_item));
 		arrayList.add(new MyMenuItem(R.string.versions_item));
 
-		//String version = Version.getBuildAppEdition(getOsmandApplication());
-		//if (TextUtils.isEmpty(version)) {
-		//	version = Version.getAppVersion(getOsmandApplication());
-		//}
-
-		String edition = "";
+		String releasedate = "";
 		if (!this.getString(R.string.app_edition).equals("")) {
-			edition = this.getString(R.string.shared_string_release) + " : \t" + this.getString(R.string.app_edition);
+			releasedate = this.getString(R.string.shared_string_release) + " : \t" + this.getString(R.string.app_edition);
 		}
-		String version = Version.getFullVersion(getOsmandApplication()) + "\n" + edition;
+		String version = Version.getFullVersion(getOsmandApplication()) + "\n" + releasedate;
 //			+ "\n\n" + this.getString(R.string.about_content);
 
 		MyMenuItem.Builder builder = new MyMenuItem.Builder()
 				.setTitle(R.string.shared_string_about)
 				.setDescription(version);
+
 		arrayList.add(builder.create());
 		return arrayList;
 	}
