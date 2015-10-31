@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
     <string name="recording_context_menu_show">Zobraziť</string>
     <string name="recording_photo_description">Fotografia %1$s %2$s</string>
@@ -2141,4 +2141,5 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="versions_item">Verzie</string>
     <string name="feedback">Anketa</string>
     <string name="contact_us">Kontaktujte nás</string>
+<string name="map_legend">Vysvetlivky k mape</string>
 </resources>
