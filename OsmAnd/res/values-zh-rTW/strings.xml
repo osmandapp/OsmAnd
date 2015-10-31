@@ -830,10 +830,10 @@
 	<string name="search_button">查詢</string>
 	<string name="search_activity">查詢</string>
 	<string name="searchpoi_activity">選取興趣點</string>
-	<string name="search_POI_level_btn">查尋更多</string>
+	<string name="search_POI_level_btn">尋找更多</string>
 	<string name="incremental_search_city">漸進式城市查尋</string>
-	<string name="incremental_search_street">漸進式查尋街道</string>
-	<string name="incremental_search_building">漸進式查尋建築物</string>
+	<string name="incremental_search_street">漸進式查詢街道</string>
+	<string name="incremental_search_building">漸進式查詢建築物</string>
 	<string name="choose_available_region">由列表選取區域</string>
 	<string name="choose_intersected_street">選擇交叉路口</string>
 	<string name="Closest_Amenities">最近的設施</string>
