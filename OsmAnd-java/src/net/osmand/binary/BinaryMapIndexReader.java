@@ -1,4 +1,4 @@
-﻿package net.osmand.binary;
+package net.osmand.binary;
 
 
 import gnu.trove.list.array.TIntArrayList;
