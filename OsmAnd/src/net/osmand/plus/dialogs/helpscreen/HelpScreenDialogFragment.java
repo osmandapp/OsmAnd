@@ -346,7 +346,7 @@ public class HelpScreenDialogFragment extends DialogFragment implements Expandab
 
 		String releasedate = "";
 		if (!this.getString(R.string.app_edition).equals("")) {
-			releasedate = this.getString(R.string.shared_string_release) + " : \t" + this.getString(R.string.app_edition);
+			releasedate = this.getString(R.string.shared_string_release) + ": \t" + this.getString(R.string.app_edition);
 		}
 		String version = Version.getFullVersion(getOsmandApplication()) + "\n" + releasedate;
 //			+ "\n\n" + this.getString(R.string.about_content);
