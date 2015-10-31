@@ -2008,12 +2008,12 @@
     <string name="other_menu_group">Andet</string>
     <string name="plugins_menu_group">Udvidelser</string>
     <string name="first_usage_item">Første anvendelse</string>
-    <string name="first_usage_item_description">Hvordan man henter kort og grundlæggende indstillinger</string>
+    <string name="first_usage_item_description">Sådan hentes kort og angives grundlæggende indstillinger</string>
     <string name="navigation_item_description">Opsætning af navigation</string>
     <string name="faq_item">Spørgsmål og svar</string>
     <string name="faq_item_description">Hvordan man bruger udvidelser</string>
     <string name="map_viewing_item">Kortvisning</string>
-    <string name="search_on_the_map_item">Søg på kortet</string>
+    <string name="search_on_the_map_item">Søgning på kortet</string>
     <string name="planning_trip_item">Turplanlægning</string>
     <string name="contour_lines_and_hillshade_maps_item">Højdekurver og reliefoverlejring</string>
     <string name="trip_recording_tool_item">Turoptagelse</string>
