@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="about_version">Верзија:</string>
     <string name="shared_string_about">Oko</string>
     <string name="about_settings_descr">Верзија инфо, лиценце, чланови пројекта</string>
@@ -8,7 +9,7 @@
 	<string name="av_camera_focus_macro">Макро режим фокуса</string>
 	<string name="av_camera_focus_auto">Ауто фокус</string>
 	<string name="shared_string_delete_all">Обриши све</string>
-    <string name="animate_routing_route_not_calculated">Прво израчунајте путању</string>
+    <string name="animate_routing_route_not_calculated">Најпре израчунајте путању</string>
     <string name="animate_routing_route">Симулација помоћу израчунате путање </string>
     <string name="animate_routing_gpx">Симулација помоћу GPX путање</string>
     <string name="shared_string_remember_my_choice">Запамти мој избор</string>
@@ -34,19 +35,19 @@
 	<string name="local_index_tile_data_minzoom">Минимални зум: %1$s</string>
     
     
-    <string name="announce_gpx_waypoints">Најави GPX waypoints</string>
+    <string name="announce_gpx_waypoints">GPX путне тачке</string>
     <string name="speak_title">Најави…</string>
 	<string name="speak_descr">Подешавање најаве назива улица, саобраћајних упозорења, ограничења брзине</string>
-	<string name="speak_street_names">Обавештење - назив улице</string>
-    <string name="speak_speed_limit">Обавештење - ограничење брзине</string>
-    <string name="speak_cameras">Обавештење - камера</string>
-	<string name="speak_traffic_warnings">Обавештење - упозорења у саобраћају</string>
+	<string name="speak_street_names">Називи улица (ТТС)</string>
+    <string name="speak_speed_limit">Ограничење брзине</string>
+    <string name="speak_cameras">Камере</string>
+	<string name="speak_traffic_warnings">Упозорења у саобраћају</string>
     <string name="osb_author_or_password_not_specified">Дефинишите ОСМ корисника и лозинку у подешавањима</string>
     <string name="clear_intermediate_points">Обриши међутачке</string>
     <string name="keep_intermediate_points">Сачувај међутачке</string>
     <string name="new_directions_point_dialog">Већ имате дефинисане међутачке.</string>
-    <string name="context_menu_item_directions_to">Упутство до</string>
-    <string name="context_menu_item_directions_from">Упутство од</string>
+    <string name="context_menu_item_directions_to">Упутства до</string>
+    <string name="context_menu_item_directions_from">Упутства од</string>
     <string name="route_descr_map_location">Карта : </string>
     <string name="route_descr_lat_lon">Шир %1$.3f, дуж %2$.3f</string>
     <string name="route_descr_current_location">Тренутна позиција</string>
@@ -67,7 +68,7 @@
     <string name="plugin_distance_point">Тачка</string>
     <string name="gpx_file_name">назив GPX фајла</string>
     <string name="gpx_saved_sucessfully">GPX датотека успешно сачувана на {0}</string>
-    <string name="osmand_distance_planning_plugin_name">Калкулатор растојања и Алат за планирање</string>
+    <string name="osmand_distance_planning_plugin_name">Калкулатор растојања и алат за планирање</string>
     <string name="shared_string_do_not_show_again">Не приказуј поново</string>
     <string name="distance_measurement_start_editing">Почните уређивање</string>
     <string name="distance_measurement_finish_editing">Заврши уређивање</string>
@@ -92,7 +93,7 @@
     <string name="layer_recordings">Слој за снимање</string>
     <string name="recording_context_menu_delete">Обриши запис</string>
     <string name="recording_context_menu_play">Репродукуј</string>
-    <string name="recording_default_name">снимање</string>
+    <string name="recording_default_name">Снимање</string>
     <string name="shared_string_control_start">Почни</string>
     <string name="map_widget_av_notes">Аудио/видео белешке</string>
     <string name="map_widget_distancemeasurement">Мерење удаљености</string>
@@ -163,10 +164,10 @@
 	<string name="download_type_to_filter">укуцајте за филтрирање</string>
 	<string name="use_high_res_maps">Екран високе резолуције</string>
 	
-	<string name="voice">глас</string>
+	<string name="voice">Снимљени глас</string>
 	<string name="no_vector_map_loaded">Векторске мапе нису учитане</string>
 	<string name="map_route_by_gpx">Навигација помоћу GPX</string>
-	<string name="gpx_files_not_found">GPX датотеке се не налазе у директоријуму</string>
+	<string name="gpx_files_not_found">Нема GPX фајлова у фасцикли стаза</string>
 	<string name="error_reading_gpx">Грешка при читању GPX података</string>
 	
 	<string name="osb_bug_name">Грешка</string>
@@ -202,7 +203,7 @@
 	<string name="show_route">Детаљи руте</string>
 	<string name="poi_namefinder_query_empty">Унети упит за претрагу POI</string>
 	<string name="layer_transport_route">Рута транспорта</string>
-	<string name="layer_osm_bugs">Дневник грешака ОСМ-а на мрежи</string>
+	<string name="layer_osm_bugs">Дневник ОСМ-а (на мрежи)</string>
 	<string name="layer_poi">POI…</string>
 	<string name="context_menu_item_search_poi">Претрага POI</string>
 	<string name="where_am_i">Где сам ја?</string>
@@ -216,7 +217,7 @@
     <string name="max_speed_none">ниједан</string>
     <string name="stop_routing_confirm">Да ли сте сигурни да желите да прекинете навигацију?</string>
     <string name="recording_context_menu_show">Прикажи</string>
-    <string name="recording_photo_description">Фотографија %1$s од %2$s</string>
+    <string name="recording_photo_description">Фотографија %1$s %2$s</string>
     <string name="av_def_action_picture">Сликај</string>
     <string name="recording_context_menu_precord">Сликај</string>
     <string name="dropbox_plugin_description">Dropbox додатак омогућава да синхронизујете путање и аудио/видео белешке са вашим Dropbox налогом.</string>
@@ -277,7 +278,7 @@
 	<string name="favourites_edit_dialog_category">Врста</string>
 	<string name="shared_string_no_thanks">Не, хвала</string>
 	<string name="basemap_missing">Основна мапа света (која покрива цео свет на малом увеличању) недостаје. Молим, преузмите World_basemap_x.obf ради целокупности средине.</string>
-	<string name="local_index_installed">Издање</string>
+	<string name="local_index_installed">Локално издање</string>
 	<string name="local_index_no_items_to_do">Нема ставки за %1$s</string>
 	<string name="local_index_descr_title">Управљајте датотекама мапа</string>
 	<string name="local_index_mi_restore">Покрени</string>
@@ -291,8 +292,8 @@
 	<string name="local_index_transport_data">Подаци јавног превоза</string>
 	<string name="local_index_map_data">Подаци мапе</string>
 	<string name="local_indexes_cat_backup">Искључено</string>
-	<string name="local_indexes_cat_tts">Гласовни подаци (ТТС)</string>
-	<string name="local_indexes_cat_voice">Гласовни подаци (снимци)</string>
+	<string name="local_indexes_cat_tts">Гласовне напомене (ТТС)</string>
+	<string name="local_indexes_cat_voice">Гласовне напомене (снимци)</string>
 	
 	<string name="local_indexes_cat_poi">Подаци ПОИ-а</string>
 	<string name="ttsvoice">Глас ТТС-а</string>
@@ -338,10 +339,10 @@
     <string name="text_size">Величина писма</string>
     <string name="traffic_warning_speed_limit">Ограничење брзине</string>
     <string name="traffic_warning_stop">Знак стоп</string>
-    <string name="speak_pedestrian">Најављуј прешачке прелазе</string>
+    <string name="speak_pedestrian">Пешачки прелази</string>
     <string name="rendering_attr_roadStyle_name">Врста пута</string>
     <string name="avoid_roads_msg">Можете да изаберете заменску путању избором путева за избегавање</string>
-    <string name="navigation_over_track">Да ли започети навођење по стази?</string>
+    <string name="navigation_over_track">Да започнем навођење дуж стазе?</string>
 	<string name="rendering_value_orange_name">Наранџаста</string>
     <string name="traffic_warning_railways">Пружни прелаз</string>
 	<string name="show_railway_warnings">Приказуј пружне прелазе</string>
