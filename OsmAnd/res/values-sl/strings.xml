@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
     <string name="search_button">Poišči</string>
     <string name="search_activity">Iskanje podatkov</string>
@@ -1980,4 +1980,5 @@
 
     <string name="trip_recording_tool_item">Orodje za beleženje poti</string>
 
+<string name="map_legend">Legenda zemljevida</string>
 </resources>
