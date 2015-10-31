@@ -1976,4 +1976,7 @@
     <string name="techical_articles_item">Tekniska artiklar</string>
     <string name="versions_item">Versioner</string>
     <string name="contact_us">Kontakta oss</string>
-</resources>
+<string name="osm_edit_created_poi">Skapat en OSM POI</string>
+    <string name="osm_edit_created_bug">Skapat en OSM-bugg</string>
+    <string name="world_map_download_descr">Baskarta över världen (täcker hela världen med låg zoomningsgrad) saknas eller är gammal. Hämta gärna denna karta till din enhet.</string>
+    </resources>
