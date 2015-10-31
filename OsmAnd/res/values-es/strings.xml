@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
 
     <string name="layer_map_appearance">Configurar pantalla</string>
@@ -2135,4 +2135,5 @@
     <string name="contact_us">Contáctenos</string>
     <string name="osm_edit_created_poi">PDI de OSM creado</string>
     <string name="osm_edit_created_bug">Nota de OSM creada</string>
+<string name="map_legend">Leyenda del mapa</string>
 </resources>
