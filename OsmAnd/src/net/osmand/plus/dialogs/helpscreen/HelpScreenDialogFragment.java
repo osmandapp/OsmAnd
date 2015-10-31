@@ -353,7 +353,7 @@ public class HelpScreenDialogFragment extends DialogFragment implements Expandab
 		if (!this.getString(R.string.app_edition).equals("")) {
 			edition = this.getString(R.string.shared_string_release) + " : \t" + this.getString(R.string.app_edition);
 		}
-		String version = Version.getFullVersion(getOsmandApplication()) + "\n" + edition
+		String version = Version.getFullVersion(getOsmandApplication()) + "\n" + edition;
 //			+ "\n\n" + this.getString(R.string.about_content);
 
 		MyMenuItem.Builder builder = new MyMenuItem.Builder()
