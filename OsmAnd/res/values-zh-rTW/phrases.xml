@@ -68,7 +68,7 @@
 	<string name="poi_baby_goods">嬰幼童商店</string>
 	<string name="poi_bag">包包店</string>
 	<string name="poi_bathroom_furnishing">浴室裝備</string>
-	<string name="poi_bed">臥室裝備</string>
+	<string name="poi_bed">寢具商店</string>
 	<string name="poi_boutique">時尚精品</string>
 	<string name="poi_carpet">地毯店</string>
 	<string name="poi_charity">慈善義賣店</string>
@@ -1509,7 +1509,7 @@
 	<string name="poi_payment_dogecoin_no">不接受多吉幣</string>
 	<string name="poi_inscription">碑文</string>
 
-<string name="poi_memorial_cross">十字架</string>
+<string name="poi_memorial_cross">十字形</string>
 	<string name="poi_memorial_vehicle">車輛</string>
 	<string name="poi_memorial_obelisk">方尖碑</string>
 
@@ -2040,4 +2040,54 @@
 
 	<string name="poi_crop_rice">作物：水稻</string>
 	<string name="poi_crop_grass">作物：牧草</string>
+	<string name="poi_crop_corn">作物：玉米</string>
+	<string name="poi_crop_cereal">作物：穀類</string>
+	<string name="poi_crop_sugarcane">作物：甘蔗</string>
+	<string name="poi_crop_wheat">作物：小麥</string>
+	<string name="poi_crop_soy">作物：大豆</string>
+	<string name="poi_crop_barley">作物：大麥</string>
+	<string name="poi_crop_vegetables">作物：蔬菜</string>
+	<string name="poi_crop_hop">作物：啤酒花</string>
+	<string name="poi_crop_rape">作物：油菜[</string>
+	<string name="poi_crop_beet">作物：甜菜</string>
+	<string name="poi_crop_lavender">作物：薰衣草</string>
+	<string name="poi_crop_tea">作物：茶</string>
+	<string name="poi_crop_coffee">作物：咖啡</string>
+	<string name="poi_crop_poultry">作物：家禽</string>
+	<string name="poi_crop_sunflower">作物：向日葵</string>
+	<string name="poi_crop_raspberry">作物：覆盆子</string>
+	<string name="poi_crop_tobacco">作物：煙草</string>
+	<string name="poi_crop_strawberry">作物：草莓</string>
+	<string name="poi_crop_vegetables_flowers">作物：蔬菜、花卉</string>
+	<string name="poi_crop_cassava">作物：樹薯</string>
+	<string name="poi_crop_cranberry">作物：蔓越莓</string>
+	<string name="poi_crop_asparagus">作物：蘆筍</string>
+	<string name="poi_crop_flowers">作物：花卉</string>
+
+	<string name="poi_surveillance_indoor">監視器：室內</string>
+	<string name="poi_surveillance_outdoor">監視器：戶外</string>
+	<string name="poi_surveillance_public">監視器：公共場所</string>
+
+	<string name="poi_clothes_women">女性衣物</string>
+	<string name="poi_clothes_underwear">內衣</string>
+	<string name="poi_clothes_men">男性服裝</string>
+	<string name="poi_clothes_wedding">婚紗禮服</string>
+	<string name="poi_clothes_sports">運動服</string>
+	<string name="poi_clothes_babies">嬰兒服</string>
+	<string name="poi_clothes_denim">牛仔服裝</string>
+	<string name="poi_clothes_workwear">工作服</string>
+	<string name="poi_clothes_hats">帽子</string>
+	<string name="poi_tourism_yes">觀光目的</string>
+	<string name="poi_clothes_fur">毛皮</string>
+	<string name="poi_clothes_leather">皮革</string>
+	<string name="poi_clothes_costumes">服裝</string>
+	<string name="poi_clothes_traditional">傳統服裝</string>
+	<string name="poi_clothes_suits">西裝</string>
+	<string name="poi_clothes_maternity">孕婦裝</string>
+	<string name="poi_clothes_vintage">典型服裝</string>
+	<string name="poi_clothes_oversize">特大服裝</string>
+	<string name="poi_clothes_schoolwear">校服</string>
+	<string name="poi_clothes_swimwear">泳裝</string>
+	<string name="poi_clothes_socks">襪子</string>
+	<string name="poi_clothes_shirts">襯衫</string>
 	</resources>
