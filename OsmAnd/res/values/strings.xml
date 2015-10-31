@@ -2042,13 +2042,13 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="other_menu_group">Other</string>
     <string name="plugins_menu_group">Plugins</string>
     <string name="first_usage_item">First usage</string>
-    <string name="first_usage_item_description">How to download map, basic settings</string>
+    <string name="first_usage_item_description">How to download maps, set basic settings</string>
     <string name="navigation_item_description">Setup navigation</string>
     <string name="faq_item">FAQ</string>
     <string name="faq_item_description">How to use plugins</string>
     <string name="map_viewing_item">Map viewing</string>
-    <string name="search_on_the_map_item">Search on the map</string>
-    <string name="planning_trip_item">Planning trip</string>
+    <string name="search_on_the_map_item">Map searching</string>
+    <string name="planning_trip_item">Planning a trip</string>
     <string name="contour_lines_and_hillshade_maps_item">Contour lines and hillshade maps</string>
     <string name="trip_recording_tool_item">Trip recording tool</string>
     <string name="osmand_ski_maps_item">OsmAnd Ski maps</string>
@@ -2058,6 +2058,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="instalation_troubleshooting_item">Installation and troubleshooting</string>
     <string name="techical_articles_item">Technical articles</string>
     <string name="versions_item">Versions</string>
-    <string name="poll">poll</string>
+    <string name="poll">Poll</string>
     <string name="contact_us">Contact us</string>
 </resources>
