@@ -827,8 +827,8 @@
 	<string name="show_gps_coordinates_text">在地圖上顯示 GPS 狀態</string>
 	<string name="use_internet_to_download_tile">使用網路下載缺失的地圖圖磚</string>
 	<string name="app_description">導航應用程式</string>
-	<string name="search_button">查尋</string>
-	<string name="search_activity">查尋</string>
+	<string name="search_button">查詢</string>
+	<string name="search_activity">查詢</string>
 	<string name="searchpoi_activity">選取興趣點</string>
 	<string name="search_POI_level_btn">查尋更多</string>
 	<string name="incremental_search_city">漸進式城市查尋</string>
@@ -1568,7 +1568,7 @@
 	<string name="osmo_use_https_descr">使用安全協定連線到伺服器</string>
     <string name="osmo_use_https">使用 HTTPS</string>
 	<string name="map_update">有 %1$s 個地圖可更新</string>
-	<string name="search_for">查尋</string>
+	<string name="search_for">查詢</string>
 	
 	<string name="coordinates">座標</string>
 	<string name="home_button">首頁</string>
@@ -1757,7 +1757,7 @@
 	<string name="shared_string_do_not_use">不使用</string>
 	<string name="shared_string_address">地址</string>
 	<string name="shared_string_show_description">顯示記述</string>
-	<string name="shared_string_search">搜尋</string>
+	<string name="shared_string_search">查詢</string>
 	<string name="shared_string_places">地點</string>
 	<string name="shared_string_open">開啓</string>
     <string name="rendering_attr_OSMMapperAssistant_name">OSM 製圖助手</string>
@@ -1982,13 +1982,13 @@
     <string name="other_menu_group">其它</string>
     <string name="plugins_menu_group">外掛元件</string>
     <string name="first_usage_item">首次使用</string>
-    <string name="first_usage_item_description">如何下載地圖、基本設定</string>
+    <string name="first_usage_item_description">如何下載地圖、設置基本設定</string>
     <string name="navigation_item_description">設置導航</string>
     <string name="faq_item">常見問題</string>
     <string name="faq_item_description">如何使用外掛元件</string>
     <string name="map_viewing_item">地圖檢視</string>
-    <string name="search_on_the_map_item">在地圖上查尋</string>
-    <string name="planning_trip_item">旅程規劃</string>
+    <string name="search_on_the_map_item">地圖查詢中</string>
+    <string name="planning_trip_item">規劃一次旅程</string>
     <string name="contour_lines_and_hillshade_maps_item">等高線和山體陰影地圖</string>
     <string name="trip_recording_tool_item">旅程記錄工具</string>
     <string name="osmand_ski_maps_item">OsmAnd 滑雪地圖</string>
