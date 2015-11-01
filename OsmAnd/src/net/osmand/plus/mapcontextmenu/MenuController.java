@@ -7,7 +7,6 @@ import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -16,6 +15,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
+import net.osmand.plus.mapcontextmenu.controllers.AudioVideoNoteMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.EditPOIMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.FavouritePointMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.HistoryMenuController;
@@ -23,7 +23,6 @@ import net.osmand.plus.mapcontextmenu.controllers.MyLocationMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.OsMoMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.ParkingPositionMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.PointDescriptionMenuController;
-import net.osmand.plus.mapcontextmenu.controllers.AudioVideoNoteMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.TargetPointMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.WptPtMenuController;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
@@ -38,8 +37,14 @@ public abstract class MenuController extends BaseMenuController {
 		public static final int FULL_SCREEN = 4;
 	}
 
+	public enum MenuType {
+		STANDARD,
+		MULTI_LINE
+	}
+
 	private MenuBuilder builder;
 	private int currentMenuState;
+	private MenuType menuType = MenuType.STANDARD;
 
 	protected TitleButtonController titleButtonController;
 
@@ -84,7 +89,7 @@ public abstract class MenuController extends BaseMenuController {
 	}
 
 	public static MenuController getMenuController(MapActivity mapActivity,
-												   PointDescription pointDescription, Object object) {
+												   PointDescription pointDescription, Object object, MenuType menuType) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		MenuController menuController = null;
 		if (object != null) {
@@ -113,6 +118,9 @@ public abstract class MenuController extends BaseMenuController {
 			}
 		} else {
 			menuController = new PointDescriptionMenuController(app, mapActivity, pointDescription);
+		}
+		if (menuController != null) {
+			menuController.menuType = menuType;
 		}
 		return menuController;
 	}
@@ -160,6 +168,10 @@ public abstract class MenuController extends BaseMenuController {
 		return currentMenuState;
 	}
 
+	public MenuType getMenuType() {
+		return menuType;
+	}
+
 	public boolean slideUp() {
 		int v = currentMenuState;
 		for (int i = 0; i < 2; i++) {
@@ -205,7 +217,7 @@ public abstract class MenuController extends BaseMenuController {
 	}
 
 	public boolean needTypeStr() {
-		return false;
+		return menuType != MenuType.STANDARD;
 	}
 
 	public boolean displayStreetNameinTitle() {

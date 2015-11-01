@@ -8,6 +8,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.BaseMenuController;
 import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.mapcontextmenu.MenuController.MenuType;
 import net.osmand.plus.mapcontextmenu.MenuTitleController;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
@@ -47,7 +48,7 @@ public class ObjectSelectionMenu extends BaseMenuController {
 		}
 
 		protected void init() {
-			controller = MenuController.getMenuController(mapActivity, pointDescription, object);
+			controller = MenuController.getMenuController(mapActivity, pointDescription, object, MenuType.MULTI_LINE);
 			initTitle();
 		}
 
