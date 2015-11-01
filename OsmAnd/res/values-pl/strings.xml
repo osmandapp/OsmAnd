@@ -261,7 +261,7 @@
   <string name="general_settings_descr">Konfiguruje wyświetlanie i ogólne ustawienia programu</string>
   <string name="general_settings">Główne</string>
   <string name="index_settings_descr">Pobiera i zarządza plikami map przechowywanymi na urządzeniu</string>
-  <string name="index_settings">Zarządzanie plikami map</string>
+  <string name="index_settings">Zarządzaj mapami</string>
   <string name="osmand_service">Tryb działania w tle</string>
   <string name="osmand_service_descr">Działanie aplikacji, gdy ekran jest wygaszony</string>
   <string name="fast_route_mode">Najszybsza trasa</string>
@@ -1369,7 +1369,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="auto_zoom_farthest">Widok szeroki</string>
 	<string name="shared_string_and">i</string>
     <string name="shared_string_or">lub</string>
-	<string name="shared_string_remember_my_choice">Zapamiętaj mój wybór</string>
+	<string name="shared_string_remember_my_choice">Zapamiętanie wyboru</string>
     
     <string name="animate_routing_route_not_calculated">Proszę najpierw przeliczyć trasę</string>
     <string name="animate_routing_route">Pokaż używając obliczonej trasy </string>
@@ -1409,9 +1409,9 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="routing_attr_prefer_motorway_description">Preferowanie autostrad</string>
 	<string name="routing_attr_short_way_name">Najkrótsza droga</string>
 	<string name="routing_attr_short_way_description">Używaj najkrótszej drogi</string>
-	<string name="routing_attr_avoid_toll_name">Unikaj dróg płatnych</string>
+	<string name="routing_attr_avoid_toll_name">Unikanie płatnych dróg</string>
 	<string name="routing_attr_avoid_toll_description">Unikaj płatnych dróg</string>
-	<string name="routing_attr_avoid_unpaved_name">Unikaj nieutwardzonych dróg</string>
+	<string name="routing_attr_avoid_unpaved_name">Unikanie nieutwardzonych dróg</string>
 	<string name="routing_attr_avoid_unpaved_description">Unikanie nieutwardzonych dróg</string>
 	<string name="routing_attr_avoid_ferries_name">Unikaj przepraw promowych</string>
 	<string name="routing_attr_avoid_ferries_description">Unikanie przepraw promowych</string>
@@ -1430,7 +1430,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="use_displayed_track_for_navigation">Wykorzystać wyświetlaną trasę do nawigacji?</string>
     
     <string name="calculate_osmand_route_without_internet">Wyznacz segment trasy OsmAnd offline</string>
-    <string name="gpx_option_calculate_first_last_segment">Przelicz trasę według OsmAnd dla pierwszego i ostatniego segmentu trasy</string>
+    <string name="gpx_option_calculate_first_last_segment">Wyznacza trasę usługi OsmAnd dla pierwszego i ostatniego segmentu</string>
     <string name="lang_en">Angielski</string>
 	<string name="lang_af">Afrykański</string>
 	<string name="lang_hy">Armeński</string>
@@ -1592,7 +1592,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     
     <string name="shared_string_my_tracks">Moje trasy</string>
     <string name="shared_string_my_favorites">Moje ulubione</string>
-    <string name="shared_string_my_places">Moje miejsca</string>
+    <string name="shared_string_my_places">Miejsca</string>
     
     <string name="gpx_info_subtracks">"Ślady podrzędne: %1$s "</string>
 	<string name="gpx_info_waypoints">Punkty trasy: %1$s </string>
@@ -1947,7 +1947,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="routing_attr_height_name">Limit wysokości</string>
 	<string name="routing_attr_height_description">Określa maksymalną, dozwoloną wysokość pojazdu</string>
     <string name="use_fast_recalculation">Inteligentne przeliczanie trasy</string>
-	<string name="use_fast_recalculation_desc">Przelicz tylko początkową część trasy dla długich podróży</string>
+	<string name="use_fast_recalculation_desc">Wyznacza ponownie tylko początkową część trasy dla długich podróży</string>
 <string name="shared_string_logoff">Wyloguj się</string>
     <string name="osmo_share_my_location">Udostępniaj moją lokalizację</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Kolorowanie wg zasad OSMC</string>
@@ -2078,7 +2078,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="favourites_context_menu_add">Dodaj do ulubionych</string>
 	<string name="roads">Drogi</string>
 <string name="favorite_category_add_new">Dodaj nową</string>
-    <string name="favorite_category_select">Wybierz kategorię</string>
+    <string name="favorite_category_select">Proszę wybrać kategorię</string>
     <string name="default_speed_system_descr">Zdefiniuj system miar prędkości</string>
     <string name="default_speed_system">System pomiaru prędkości</string>
     <string name="si_nm">Mile morskie</string>
@@ -2100,7 +2100,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	
 <string name="regions">Regiony</string>
     
-    <string name="region_maps">Mapy regionów</string>
+    <string name="region_maps">Mapy regionu</string>
     <string name="world_maps">Mapy świata</string>
     
     <string name="hillshade_layer_disabled">Wyłączona warstwa cieniowania wzgórz</string>
@@ -2126,5 +2126,9 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="application_dir_description">Proszę wybrać położenie zapisywania plików map.</string>
 <string name="value_downloaded_from_max">%1$.1f z %2$.1f MB</string>
     <string name="shared_string_qr_code">Kod QR</string>
-    <string name="enter_country_name">Wpisz nazwę kraju</string>
-</resources>
+    <string name="enter_country_name">Proszę wprowadzić nazwę kraju</string>
+<string name="map_downloaded_descr">Pobrano mapę regionu %1$s. Proszę powrócić do mapy, aby rozpocząć jej używanie.</string>
+    <string name="world_map_download_descr">Brak podstawowej mapy świata (pokrywającej cały glob w małych przybliżeniach) lub jest ona przestarzała. Proszę rozważyć pobranie mapy podstawowej, aby uzyskać kompletne środowisko.</string>
+    <string name="map_downloaded">Pobrano mapę</string>
+    <string name="go_to_map">Powróć do mapy</string>
+    </resources>
