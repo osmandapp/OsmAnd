@@ -23,6 +23,7 @@ import net.osmand.plus.mapcontextmenu.controllers.ParkingPositionMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.PointDescriptionMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.AudioVideoNoteMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.TargetPointMenuController;
+import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.osmedit.OsmPoint;
 import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
 
@@ -217,4 +218,8 @@ public abstract class MenuController extends BaseMenuController {
 	public String getTypeStr() { return ""; }
 
 	public String getNameStr() { return ""; }
+
+	public void share(LatLon latLon, String title) {
+		ShareMenu.show(latLon, title, getMapActivity());
+	}
 }
