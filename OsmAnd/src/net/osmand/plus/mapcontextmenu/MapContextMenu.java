@@ -274,7 +274,11 @@ public class MapContextMenu extends MenuTitleController {
 	}
 
 	public void buttonSharePressed() {
-		ShareMenu.show(latLon, nameStr, mapActivity);
+		if (menuController != null) {
+			menuController.share(latLon, nameStr);
+		} else {
+			ShareMenu.show(latLon, nameStr, mapActivity);
+		}
 	}
 
 	public void buttonMorePressed() {
