@@ -1051,7 +1051,7 @@
     <string name="srtm_paid_version_title">Wtyczka poziomic</string>
     <string name="recording_context_menu_arecord">Nagraj notatkę audio</string>
     <string name="recording_context_menu_vrecord">Nagraj notatkę wideo</string>
-    <string name="osmand_srtm_long_description_1000_chars">"Dostarcza poziomice i cieniowanie wzgórz wyświetlane na mapach offline w OsmAnd. Funkcja przydatna dla sportowców, turystów i osób zainteresowanych strukturą reliefową krajobrazu.\n\nŚwiatowe dane (między 70 stopniem szerokości północnej a 70 stopniem szerokości południowej) opierają się na pomiarach SRTM (Shuttle Radar Topography Mission) i ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), przyrządu na pokładzie Terra, flagowego satelity Systemu Obserwacji Ziemi NASA. ASTER jest wspólnym przedsięwzięciem NASA, japońskiego Ministerstwa Gospodarki, Handlu i Przemysłu (METI) i Japońskich Systemów Kosmicznych (J-spacesystems). "</string>
+    <string name="osmand_srtm_long_description_1000_chars">"Dostarcza warstwy poziomic i cieniowania rzeźby terenu wyświetlane na standardowych mapach OsmAnd. Funkcja przydatna dla sportowców, turystów i osób zainteresowanych strukturą reliefową krajobrazu.\n\nŚwiatowe dane (między 70 stopniem szerokości północnej a 70 stopniem szerokości południowej) opierają się na pomiarach SRTM (Shuttle Radar Topography Mission) i ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), przyrządu na pokładzie Terra, flagowego satelity Systemu Obserwacji Ziemi NASA. ASTER jest wspólnym przedsięwzięciem NASA, japońskiego Ministerstwa Gospodarki, Handlu i Przemysłu (METI) i Japońskich Systemów Kosmicznych (J-spacesystems). "</string>
     <string name="recording_context_menu_show">Wyświetlanie</string>
     <string name="recording_photo_description">Zdjęcie %1$s %2$s</string>
     <string name="av_def_action_picture">Zrób zdjęcie</string>
@@ -1359,7 +1359,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	
     
     
-    <string name="map_magnifier">Lupa mapy</string>
+    <string name="map_magnifier">Przybliżenie</string>
     
     
     <string name="route_is_too_long">Obliczanie trasy offline może zająć dłuższą chwilę (lub czasami nie działać) dla punktów, które dzieli więcej niż 200km. Można spróbować dodać punkty pośrednie w celu zwiększenia wydajności.</string>
@@ -1408,14 +1408,14 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="routing_attr_prefer_motorway_name">Preferowanie autostrad</string>
 	<string name="routing_attr_prefer_motorway_description">Preferowanie autostrad</string>
 	<string name="routing_attr_short_way_name">Najkrótsza droga</string>
-	<string name="routing_attr_short_way_description">Używaj najkrótszej drogi</string>
+	<string name="routing_attr_short_way_description">Używa najkrótszej drogi</string>
 	<string name="routing_attr_avoid_toll_name">Unikanie płatnych dróg</string>
-	<string name="routing_attr_avoid_toll_description">Unikaj płatnych dróg</string>
+	<string name="routing_attr_avoid_toll_description">Unikanie płatnych dróg</string>
 	<string name="routing_attr_avoid_unpaved_name">Unikanie nieutwardzonych dróg</string>
 	<string name="routing_attr_avoid_unpaved_description">Unikanie nieutwardzonych dróg</string>
-	<string name="routing_attr_avoid_ferries_name">Unikaj przepraw promowych</string>
+	<string name="routing_attr_avoid_ferries_name">Unikanie przepraw promowych</string>
 	<string name="routing_attr_avoid_ferries_description">Unikanie przepraw promowych</string>
-	<string name="routing_attr_avoid_motorway_name">Unikaj autostrad</string>
+	<string name="routing_attr_avoid_motorway_name">Unikanie autostrad</string>
 	<string name="routing_attr_avoid_motorway_description">Unikanie autostrad</string>
 	<string name="routing_attr_weight_name">Limit wagi</string>
 	<string name="routing_attr_weight_description">Określa maksymalną, dozwoloną masę pojazdu</string>
@@ -1760,7 +1760,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="map_widget_top">Pasek stanu</string>
 	<string name="map_widget_right">Prawy panel</string>
 	<string name="map_widget_left">Lewy panel</string>
-    <string name="shared_string_show">Wyświetl</string>
+    <string name="shared_string_show">Wyświetlanie</string>
 	<string name="configure_map">Skonfiguruj mapę</string>
     <string name="search_radius_proximity">W odległości</string>
     <string name="wake_on_voice">Włączanie ekranu</string>
@@ -1942,7 +1942,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="search_poi_category_hint">Wprowadź tekst, aby wyszukać dane</string>
     <string name="rendering_attr_hideHouseNumbers_name">Ukrywanie numerów budynków</string>
     <string name="storage_directory_multiuser">Pamięć użytkownika</string>
-    <string name="routing_attr_avoid_borders_name">Unikaj przekraczania granicy</string>
+    <string name="routing_attr_avoid_borders_name">Unikanie przekraczania granicy</string>
 	<string name="routing_attr_avoid_borders_description">Unika przekraczania granicy z innym państwem</string>
 	<string name="routing_attr_height_name">Limit wysokości</string>
 	<string name="routing_attr_height_description">Określa maksymalną, dozwoloną wysokość pojazdu</string>
@@ -2079,15 +2079,15 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="roads">Drogi</string>
 <string name="favorite_category_add_new">Dodaj nową</string>
     <string name="favorite_category_select">Proszę wybrać kategorię</string>
-    <string name="default_speed_system_descr">Zdefiniuj system miar prędkości</string>
-    <string name="default_speed_system">System pomiaru prędkości</string>
+    <string name="default_speed_system_descr">Definiuje jednostki pomiaru prędkości</string>
+    <string name="default_speed_system">Pomiar prędkości</string>
     <string name="si_nm">Mile morskie</string>
     <string name="nm">nm</string>
-    <string name="si_kmh">Kilometrów na godzinę</string>
-    <string name="si_mph">Mil na godzinę</string>
-    <string name="si_m_s">Metrów na sekundę</string>
-    <string name="si_min_km">Minut na kilometr</string>
-    <string name="si_min_m">Minut na milę</string>
+    <string name="si_kmh">Kilometry na godzinę</string>
+    <string name="si_mph">Mile na godzinę</string>
+    <string name="si_m_s">Metry na sekundę</string>
+    <string name="si_min_km">Minuty na kilometr</string>
+    <string name="si_min_m">Minuty na milę</string>
     <string name="si_nm_h">Mile morskie na godzinę (węzły)</string>
     <string name="nm_h">nmh</string>
     <string name="min_mile">min/m</string>
@@ -2131,4 +2131,5 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="world_map_download_descr">Brak podstawowej mapy świata (pokrywającej cały glob w małych przybliżeniach) lub jest ona przestarzała. Proszę rozważyć pobranie mapy podstawowej, aby uzyskać kompletne środowisko.</string>
     <string name="map_downloaded">Pobrano mapę</string>
     <string name="go_to_map">Powróć do mapy</string>
+    <string name="simulate_initial_startup">Symulowania pierwszego uruchomienia programu</string>
     </resources>
