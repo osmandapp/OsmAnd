@@ -2090,4 +2090,15 @@
 	<string name="poi_clothes_swimwear">泳裝</string>
 	<string name="poi_clothes_socks">襪子</string>
 	<string name="poi_clothes_shirts">襯衫</string>
+	<string name="poi_clothes_dance">跳舞服裝</string>
+	<string name="poi_clothes_military">軍服</string>
+
+	<string name="poi_historic_milestone">歷史事件里程碑</string>
+
+	<string name="poi_shoes_children">兒童鞋</string>
+	<string name="poi_shoes_women">女鞋</string>
+	<string name="poi_shoes_sport">運動鞋</string>
+	<string name="poi_shoes_men">男鞋</string>
+	<string name="poi_shoes_orthopedic">矯形鞋</string>
+
 	</resources>
