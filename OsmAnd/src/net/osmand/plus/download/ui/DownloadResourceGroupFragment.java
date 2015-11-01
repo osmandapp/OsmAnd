@@ -1,4 +1,4 @@
-package net.osmand.plus.download.ui.popups;
+package net.osmand.plus.download.ui;
 
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -31,8 +31,6 @@ import net.osmand.plus.download.DownloadResourceGroup;
 import net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.download.ui.ItemViewHolder;
-import net.osmand.plus.download.ui.SearchDialogFragment;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
