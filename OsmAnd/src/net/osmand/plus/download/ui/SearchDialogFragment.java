@@ -220,7 +220,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 		} else if (obj instanceof IndexItem) {
 			IndexItem indexItem = (IndexItem) obj;
 			ItemViewHolder vh = (ItemViewHolder) v.getTag();
-			View.OnClickListener ls = vh.getRightButtonAction(indexItem, vh.getClickAction(indexItem), null);
+			View.OnClickListener ls = vh.getRightButtonAction(indexItem, vh.getClickAction(indexItem));
 			ls.onClick(v);
 		}
 	}
@@ -290,7 +290,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 					convertView.setTag(viewHolder);
 				}
 				viewHolder.setShowTypeInDesc(true);
-				viewHolder.bindIndexItem(item, null);
+				viewHolder.bindIndexItem(item);
 			} else {
 				DownloadResourceGroup group = (DownloadResourceGroup) obj;
 				DownloadGroupViewHolder viewHolder;

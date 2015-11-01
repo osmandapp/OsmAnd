@@ -127,7 +127,7 @@ public class ItemViewHolder {
 		srtmNeedsInstallation = context.isSrtmNeedsInstallation();
 	}
 
-	public void bindIndexItem(final IndexItem indexItem, final DownloadResourceGroup parentOptional) {
+	public void bindIndexItem(final IndexItem indexItem) {
 		initAppStatusVariables();
 		boolean isDownloading = context.getDownloadThread().isDownloading(indexItem);
 		int progress = -1;
@@ -248,7 +248,7 @@ public class ItemViewHolder {
 	private boolean checkDisabledAndClickAction(final IndexItem item) {
 		RightButtonAction clickAction = getClickAction(item);
 		boolean disabled = clickAction != RightButtonAction.DOWNLOAD;
-		OnClickListener action = getRightButtonAction(item, clickAction, null);
+		OnClickListener action = getRightButtonAction(item, clickAction);
 		if (clickAction != RightButtonAction.DOWNLOAD) {
 			rightButton.setText(R.string.get_plugin);
 			rightButton.setVisibility(View.VISIBLE);
@@ -291,7 +291,7 @@ public class ItemViewHolder {
 		return clickAction;
 	}
 
-	public OnClickListener getRightButtonAction(final IndexItem item, final RightButtonAction clickAction, final DownloadResourceGroup parentOptional) {
+	public OnClickListener getRightButtonAction(final IndexItem item, final RightButtonAction clickAction) {
 		if (clickAction != RightButtonAction.DOWNLOAD) {
 			return new View.OnClickListener() {
 				@Override
@@ -335,9 +335,9 @@ public class ItemViewHolder {
 							context.makeSureUserCancelDownload(item);
 						}
 					} else if(item.isDownloaded() && !item.isOutdated()){
-						contextMenu(v, item, parentOptional);
+						contextMenu(v, item, item.getRelatedGroup());
 					} else {
-						download(item, parentOptional);
+						download(item, item.getRelatedGroup());
 					}
 				}
 			};
