@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
   <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per visualizzare tracce e percorsi</string>
   <string name="offline_edition">Modifiche offline</string>
   <string name="offline_edition_descr">Usa sempre la modifica offline</string>
@@ -147,11 +148,11 @@
   <string name="local_index_map_data">Dati mappa</string>
   
   <string name="local_indexes_cat_backup">Disattivato</string>
-  <string name="local_indexes_cat_tts">Voci (TTS)</string>
-  <string name="local_indexes_cat_voice">Voce (registrata)</string>
+  <string name="local_indexes_cat_tts">Annunci vocali (TTS)</string>
+  <string name="local_indexes_cat_voice">Annunci vocali (registrata)</string>
   
   <string name="local_indexes_cat_tile">Mappe online e a tasselli</string>
-  <string name="local_indexes_cat_map">Mappe offline (vettori)</string>
+  <string name="local_indexes_cat_map">Mappe standard (vettori)</string>
   <string name="local_indexes_cat_poi">Dati PDI</string>
   <string name="ttsvoice">Voce TTS</string>
   <string name="search_offline_clear_search">Nuova Ricerca</string>
@@ -982,8 +983,8 @@
 	<string name="rendering_attr_showRoadMaps_description">Seleziona quando visualizzare le mappe solo strade:</string>
 	<string name="rendering_attr_showRoadMaps_name">Mappe solo strade</string>
     <string name="download_roads_only_item">Solo strade</string>
-    <string name="download_regular_maps">Mappe normali</string>
-    <string name="download_roads_only_maps">Mappe solo strade</string>
+    <string name="download_regular_maps">Mappe standard</string>
+    <string name="download_roads_only_maps">Mappa solo strade</string>
     <string name="incomplete_locale">incompleto</string>
 	<string name="map_widget_max_speed">Limite di velocità</string>
     
@@ -998,7 +999,7 @@
     <string name="download_select_map_types">Altre mappe</string>
     <string name="download_srtm_maps">Linee isocline</string>
     <string name="srtm_plugin_name">Linee isocline</string>
-    <string name="srtm_plugin_description">"Questo plugin fornisce sia le curve di livello che lo strato ombreggiamento dei rilievi che possono essere visualizzati nelle mappe offline di OsmAnd. Questa funzionalità sarà molto apprezzata dagli atleti, dagli escursionisti, e tutti coloro che sono interessati all\'orografia e al paesaggio.\n\nI dati globali (fra i 70 gradi nord e 70 gradi sud) sono basati su misurazioni del SRTM (Shuttle Radar Topography Mission) e ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), lo strumento misuratore a bordo Terra, il satellite della NASA del sistema di osservazione della terra. ASTER è uno sforzo di cooperazione tra NASA, il Ministero dell\'Economia del Giappone, Commercio e Industria (METI) e sistema spaziale giapponese (J-spacesystems).
+    <string name="srtm_plugin_description">"Questo plugin fornisce sia le curve di livello che lo strato ombreggiamento dei rilievi che possono essere visualizzati sopra alle mappe standard di OsmAnd. Questa funzionalità sarà molto apprezzata dagli atleti, dagli escursionisti, e tutti coloro che sono interessati all\'orografia e al paesaggio.\n\nI dati globali (fra i 70 gradi nord e 70 gradi sud) sono basati su misurazioni del SRTM (Shuttle Radar Topography Mission) e ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), lo strumento misuratore a bordo Terra, il satellite della NASA del sistema di osservazione della terra. ASTER è uno sforzo di cooperazione tra NASA, il Ministero dell\'Economia del Giappone, Commercio e Industria (METI) e sistema spaziale giapponese (J-spacesystems).
 \n\n\nFacilita il download delle linee di elevazione e l\'ombreggiamento dei rilievi (Impostazioni → Gestione file mappe → Download → Seleziona il tipo di mappa desiderato). "</string>
     <string name="index_srtm_ele">Curve di livello</string>
     <string name="audionotes_plugin_description">Il componente aggiuntivo note Audio/video fornisce la funzionalità per prendere note audio/video/foto durante il viaggio, usando pulsante sulla schermata della mappa, oppure direttamente nel menù contestuale per ogni posizione sulla mappa.</string>
@@ -1008,7 +1009,7 @@
 <string name="audionotes_location_not_defined">La posizione da associare con la nota non è ancora definita. \"Usa posizione ...\" per assegnare una nota alla posizione specificata</string>
     
     <string name="osmand_srtm_short_description_80_chars">Plugin Osmand per le curve di livello offline</string>
-    <string name="osmand_srtm_long_description_1000_chars">"Questo plugin fornisce sia le curve di livello che lo strato ombreggiamento dei rilievi che possono essere visualizzate nelle mappe offline di OsmAnd. Questa funzionalità sarà molto apprezzata dagli atleti, dagli escursionisti, e tutti coloro che sono interessati all\'orografia e al paesaggio.\n\nI dati globali (fra i 70 gradi nord e 70 gradi sud) sono basati su misurazioni del SRTM (Shuttle Radar Topography Mission) e ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), lo strumento misuratore a bordo Terra, il satellite della NASA del sistema di osservazione della terra. ASTER è uno sforzo di cooperazione tra NASA, il Ministero dell\'Economia del Giappone, Commercio e Industria (METI) e sistema spaziale giapponese (J-spacesystems). "</string>
+    <string name="osmand_srtm_long_description_1000_chars">"Questo plugin fornisce sia le curve di livello che lo strato ombreggiamento dei rilievi che possono essere visualizzate nelle mappe normali di OsmAnd. Questa funzionalità sarà molto apprezzata dagli atleti, dagli escursionisti, e tutti coloro che sono interessati all\'orografia e al paesaggio.\n\nI dati globali (fra i 70 gradi nord e 70 gradi sud) sono basati su misurazioni del SRTM (Shuttle Radar Topography Mission) e ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), lo strumento misuratore a bordo Terra, il satellite della NASA del sistema di osservazione della terra. ASTER è uno sforzo di cooperazione tra NASA, il Ministero dell\'Economia del Giappone, Commercio e Industria (METI) e sistema spaziale giapponese (J-spacesystems). "</string>
     
     
     <string name="map_widget_distancemeasurement">Misurazione della distanza</string>
@@ -1058,7 +1059,7 @@
     <string name="local_indexes_cat_av">Dati audio/video</string>
     
     
-    <string name="download_hillshade_maps">Sovrapposizioni ombreggiamento rilievi</string>
+    <string name="download_hillshade_maps">Ombreggiamento rilievi</string>
     
     <string name="support_new_features_descr">Fai una donazione per avere nuove funzionalità implementate nell\'applicazione</string>
 	<string name="av_use_external_camera_descr">Usa l\'applicazione di sistema per le foto</string>
@@ -1104,7 +1105,7 @@
     <string name="install_paid">Versione completa</string>
     <string name="use_magnetic_sensor_descr">Utilizza il sensore magnetico per determinare il valore della bussola invece del sensore di orientamento</string>
     <string name="use_magnetic_sensor">Utilizza il sensore magnetico (bussola)</string>
-    <string name="local_indexes_cat_srtm">Dati isocline</string>
+    <string name="local_indexes_cat_srtm">Linee isocline</string>
     <string name="use_kalman_filter_compass_descr">Riduce il rumore delle letture della bussola ma introduce dell\'inerzia</string>
     <string name="use_kalman_filter_compass">Uso del filtro di Kalman</string>
     <string name="access_mark_final_location_first">Modalità di accesso facilitato: selezionare prima la destinazione</string> 
@@ -1428,7 +1429,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="osmo_show_group_notifications">Mostra le notifiche del gruppo</string>
     
     
-    <string name="osmo_show_group_notifications_descr">Mostra un messaggio popup quando l\'utente aderisce o lascia il gruppo</string>
+    <string name="osmo_show_group_notifications_descr">Mostra un messaggio di notifica quando l\'utente aderisce o lascia il gruppo</string>
     <string name="gpx_file_is_empty">La traccia GPX è vuota</string>
     <string name="gpx_info_start_time">Orario di partenza: %1$tF, %1$tT </string>
 	<string name="gpx_info_average_speed">Velocità media: %1$s </string>
@@ -1851,7 +1852,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 	<string name="routing_attr_height_description">Specifica l\'altezza del veicolo che deve essere permessa sui percorsi</string>
     <string name="use_fast_recalculation">Ricalcolo percorso intelligente</string>
 	<string name="use_fast_recalculation_desc">Ricalcola solo la prima parte del percorso per i viaggi lunghi</string>
-<string name="osmo_share_my_location">Condividi la posizione</string>
+<string name="osmo_share_my_location">Condividi la mia posizione</string>
     <string name="shared_string_logoff">Esci</string>
     <string name="rendering_value_disabled_name">Disabilitato</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Colorazione in base al tipo di percorso</string>
@@ -1984,7 +1985,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 <string name="shared_string_trip_recording">Registrazione viaggio</string>
     <string name="shared_string_navigation">Navigazione</string>
     <string name="osmand_running_in_background">Avviato in backgroung</string>
-    <string name="default_speed_system_descr">Definsci l\'unità di misura della velocità</string>
+    <string name="default_speed_system_descr">Specifica l\'unità di misura della velocità</string>
     <string name="default_speed_system">Misurazione della velocità</string>
     <string name="nm">nm</string>
     <string name="si_nm">Miglia nautiche</string>
@@ -2010,7 +2011,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="buy">ACQUISTA</string>
 <string name="activate_srtm_plugin">Attiva il componente aggiuntivo SRTM</string>
 <string name="later">In seguito</string>
-    <string name="get_full_version">Acquista la versione completa</string>
+    <string name="get_full_version">Versione completa</string>
 <string name="activate_seamarks_plugin">Attiva il componente aggiuntivo Boe di segnalazione</string>
     <string name="regions">Regioni</string>
     
@@ -2029,9 +2030,42 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="free_downloads_used_description">Puoi impostare quanti download gratuiti hai utilizzato</string>
 <string name="share_geo">geo:</string>
     <string name="shared_string_send">Invia</string>
-    <string name="simulate_initial_startup_descr">"Resetta  l\'indicatore del primo avvio, non modificare tutte le altre impostazioni"</string>
+    <string name="simulate_initial_startup_descr">Imposta l\'indicatore del primo avvio dell\'app, mantiene tutte le altre impostazioni inalterate</string>
     <string name="simulate_initial_startup">Simula il primo avvio dell\'app</string>
-    <string name="share_menu_location">Condivisi la posizione</string>
+    <string name="share_menu_location">Condividi la posizione</string>
     <string name="hello_blank_fragment">Pulisci il segmento</string>
 <string name="application_dir_description">Scegli dove vuoi salvare i file delle mappe.</string>
-</resources>
+<string name="osm_edit_created_poi">POI OSM creato</string>
+    <string name="osm_edit_created_bug">Errore OSM creato</string>
+    <string name="shared_string_qr_code">QR-code</string>
+    <string name="map_downloaded">Mappa scaricata</string>
+    <string name="map_downloaded_descr">Mappa di %1$s scaricata. Torna alla mappa per iniziare a utilizzarla.</string>
+    <string name="go_to_map">Vai alla mappa</string>
+    <string name="show_on_start_description">\'Spegni\' lancia direttamente la schermata della mappa</string>
+    <string name="enter_country_name">Immetti il nome della nazione</string>
+    <string name="new_version">Versione nuova</string>
+    <string name="begin_with_osmand_menu_group">Primi passi con OsmAnd</string>
+    <string name="features_menu_group">Caratteristiche</string>
+    <string name="help_us_to_improve_menu_group">Aiutaci a migliorare OsmAnd</string>
+    <string name="other_menu_group">Altro</string>
+    <string name="plugins_menu_group">Componenti aggiuntivi</string>
+    <string name="first_usage_item">Primo utilizzo</string>
+    <string name="first_usage_item_description">Come scaricare le mappe, imposta le impostazioni di baae</string>
+    <string name="navigation_item_description">Impostazioni di navigazione</string>
+    <string name="faq_item">FAQ</string>
+    <string name="faq_item_description">Come utilizzare i componenti aggiuntivi</string>
+    <string name="map_viewing_item">Visualizzazione mappa</string>
+    <string name="search_on_the_map_item">Ricerca sulla mappa</string>
+    <string name="planning_trip_item">Pianifica un viaggio</string>
+    <string name="contour_lines_and_hillshade_maps_item">Mappe linee di livello e ombreggiamento rilievi</string>
+    <string name="trip_recording_tool_item">Strumento registrazione viaggio</string>
+    <string name="osmand_ski_maps_item">Mappe sci OsmAnd</string>
+    <string name="nautical_charts_item">Carte nautiche</string>
+    <string name="audio_video_note_item">Note audio/video</string>
+    <string name="osm_editing_item">Modifiche OSM</string>
+    <string name="instalation_troubleshooting_item">Installazione e soluzione dei problemi</string>
+    <string name="techical_articles_item">Articoli tecnici</string>
+    <string name="versions_item">Versioni</string>
+    <string name="contact_us">Contattaci</string>
+<string name="world_map_download_descr">La mappa di base (copertura mondiale a piccoli livelli di zoom) è mancante o non aggiornata. Valutate di scaricare la mappa mondiale di base per un ambiente completo.</string>
+    </resources>
