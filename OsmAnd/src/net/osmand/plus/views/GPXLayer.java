@@ -12,6 +12,7 @@ import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffColorFilter;
+import android.support.annotation.NonNull;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -277,10 +278,8 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		if (tileBox.getZoom() >= startZoom) {
 			float iconSize = FavoriteImageDrawable.getOrCreate(view.getContext(), 0,
 					tileBox.getDensity()).getIntrinsicWidth() * 3 / 2.5f;
-			QuadRect bounds = new QuadRect(0, 0, tileBox.getPixWidth(), tileBox.getPixHeight());
-			bounds.inset(-bounds.width()/4, -bounds.height()/4);
-			QuadTree<QuadRect> boundIntersections = new QuadTree<>(bounds, 4, 0.6f);
-			List<QuadRect> result = new ArrayList<>();
+			QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
+
 			// request to load
 			final QuadRect latLonBounds = tileBox.getLatLonBounds();
 			for (SelectedGpxFile g : selectedGPXFiles) {
@@ -294,21 +293,9 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 						float x = tileBox.getPixXFromLatLon(o.lat, o.lon);
 						float y = tileBox.getPixYFromLatLon(o.lat, o.lon);
 
-						boolean intersects = false;
-						QuadRect visibleRect = calculateRect(x, y, iconSize, iconSize);
-						boundIntersections.queryInBox(new QuadRect(visibleRect.left, visibleRect.top, visibleRect.right, visibleRect.bottom), result);
-						for (QuadRect r : result) {
-							if (QuadRect.intersects(r, visibleRect)) {
-								intersects = true;
-								break;
-							}
-						}
-
-						if (intersects) {
+						if (intersects(boundIntersections, x, y, iconSize, iconSize)) {
 							canvas.drawBitmap(pointSmall, x - pointSmall.getWidth() / 2, y - pointSmall.getHeight() / 2, paintIcon);
 						} else {
-							boundIntersections.insert(visibleRect,
-									new QuadRect(visibleRect.left, visibleRect.top, visibleRect.right, visibleRect.bottom));
 							fullObjects.add(o);
 						}
 					}
