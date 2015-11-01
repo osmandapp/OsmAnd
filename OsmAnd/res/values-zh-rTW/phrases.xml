@@ -2101,4 +2101,16 @@
 	<string name="poi_shoes_men">男鞋</string>
 	<string name="poi_shoes_orthopedic">矯形鞋</string>
 
+	<string name="poi_historic_manor">歷史上著名宅邸</string>
+	<string name="poi_castle_type_stately">城堡類型：莊嚴</string>
+	<string name="poi_castle_type_defensive">城堡類型：防禦</string>
+	<string name="poi_castle_type_fortress">城堡類型：堡壘</string>
+	<string name="poi_castle_type_palace">城堡類型：宮殿</string>
+	<string name="poi_castle_type_kremlin">城堡類型：克里姆林宮</string>
+	<string name="poi_castle_type_defensive_stately">城堡類型：防禦、莊嚴</string>
+	<string name="poi_castle_type_castrum">城堡類型：古羅馬兵營</string>
+	<string name="poi_castle_type_shiro">城堡類型：城</string>
+
+	<string name="poi_massage_thai">按摩：泰式</string>
+	<string name="poi_massage_sexual">按摩：情趣</string>
 	</resources>
