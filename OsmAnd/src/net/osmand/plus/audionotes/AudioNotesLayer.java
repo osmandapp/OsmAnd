@@ -75,16 +75,6 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 		return (int) (r * tb.getDensity());
 	}
 
-	private QuadRect calculateRect(float x, float y, float width, float height) {
-		QuadRect rf;
-		double left = x - width / 2.0d;
-		double top = y - height / 2.0d;
-		double right = left + width;
-		double bottom = top + height;
-		rf = new QuadRect(left, top, right, bottom);
-		return rf;
-	}
-
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 	}
