@@ -254,7 +254,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		}
 
 		public boolean isAudio() {
-			return file.getName().endsWith(MPEG4_EXTENSION) || file.getName().endsWith(THREEGP_EXTENSION);
+			return file.getName().endsWith(THREEGP_EXTENSION);
 		}
 
 		private String convertDegToExifRational(double l) {
