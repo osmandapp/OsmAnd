@@ -239,7 +239,7 @@ public class PointDescription {
 	}
 
 	public static PointDescription deserializeFromString(String s, LatLon l) {
-		PointDescription pd = null;
+		PointDescription pd = null ;
 		if (s != null && s.length() > 0) {
 			int in = s.indexOf('#');
 			if (in >= 0) {
@@ -252,7 +252,10 @@ public class PointDescription {
 				}
 			}
 		}
-		if(pd != null && pd.isLocation() && l != null) {
+		if(pd == null) {
+			pd = new PointDescription(POINT_TYPE_LOCATION, "");
+		}
+		if(pd.isLocation() && l != null) {
 			pd.setLat(l.getLatitude());
 			pd.setLon(l.getLongitude());
 		}
