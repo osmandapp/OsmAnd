@@ -72,6 +72,9 @@ public class GoToMapFragment extends DialogFragment {
 		closeImageButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				if(getActivity() instanceof DownloadActivity) {
+					((DownloadActivity) getActivity()).setDownloadItem(null);
+				}
 				dismiss();
 			}
 		});
