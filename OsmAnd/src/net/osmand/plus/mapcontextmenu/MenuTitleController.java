@@ -121,7 +121,9 @@ public abstract class MenuTitleController {
 		if (Algorithms.isEmpty(nameStr)) {
 			if (!Algorithms.isEmpty(typeStr)) {
 				nameStr = typeStr;
-				typeStr = "";
+				if (menuController == null || menuController.getMenuType() == MenuController.MenuType.STANDARD) {
+					typeStr = "";
+				}
 			} else {
 				nameStr = getMapActivity().getString(R.string.address_unknown);
 				addressUnknown = true;

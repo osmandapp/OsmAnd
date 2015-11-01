@@ -235,6 +235,18 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			return "";
 		}
 
+		public String getType(Context ctx) {
+			if (this.isAudio()) {
+				return ctx.getResources().getString(R.string.shared_string_audio);
+			} else if (this.isVideo()) {
+				return ctx.getResources().getString(R.string.shared_string_video);
+			} else if (this.isPhoto()) {
+				return ctx.getResources().getString(R.string.shared_string_photo);
+			} else {
+				return "";
+			}
+		}
+
 		public String getSearchHistoryType() {
 			if (isPhoto()) {
 				return PointDescription.POINT_TYPE_PHOTO_NOTE;

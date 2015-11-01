@@ -67,12 +67,19 @@ public class AudioVideoNoteMenuController extends MenuController {
 	@Override
 	public String getNameStr() {
 		File file = recording.getFile();
-		if (file != null) {
+		String recType = recording.getType(getMapActivity());
+		String recName = recording.getName(getMapActivity());
+		if (file != null && recType.equals(recName)) {
 			Date date = new Date(recording.getFile().lastModified());
 			return dateFormat.format(date);
 		} else {
 			return recording.getName(getMapActivity());
 		}
+	}
+
+	@Override
+	public String getTypeStr() {
+		return recording.getType(getMapActivity());
 	}
 
 	@Override
