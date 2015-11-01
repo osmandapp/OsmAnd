@@ -246,12 +246,12 @@
   <string name="gps_status_app_not_found">Nie zainstalowano aplikacji GPS status. Wyszukać ją w Market?</string>
   <string name="voice_is_not_available_msg">Nawigacja głosowa jest niedostępna. Proszę przejść do „Ustawienia”→„Ogólne”→„Głos komunikatów”, wybrać zestaw komunikatów głosowych i zainstalować go.</string>
   <string name="voice_is_not_available_title">Nie wybrano nawigacji głosowej</string>
-  <string name="daynight_mode_day">Dzień</string>
-  <string name="daynight_mode_night">Noc</string>
+  <string name="daynight_mode_day">Dzienny</string>
+  <string name="daynight_mode_night">Nocny</string>
   <string name="daynight_mode_auto">Wschód/zachód Słońca</string>
   <string name="daynight_mode_sensor">Czujnik światła</string>
   <string name="daynight_descr">Zdefiniuj kryterium przełączania trybu dzień/noc</string>
-  <string name="daynight">Tryb dzień/noc</string>
+  <string name="daynight">Tryb dzienny/nocny</string>
   <string name="download_files_question">Pobrać {0} plik(ów) ({1} MB)?</string>
   <string name="items_were_selected">{0} element(ów) zaznaczono</string>
   <string name="filter_existing_indexes">Pobrane</string>
@@ -267,7 +267,7 @@
   <string name="fast_route_mode">Najszybsza trasa</string>
   <string name="fast_route_mode_descr">"Wyznacza najszybszą trasę zamiast najkrótszej "</string>
   <string name="tiles_to_download_estimated_size">Na poziomie {0} pobrano {1} kafelków ({2} MB)</string>
-  <string name="shared_string_download_map">Pobierz mapę</string>
+  <string name="shared_string_download_map">Pobieranie mapy</string>
   <string name="select_max_zoom_preload_area">Wybierz maksymalne przybliżenie do pobrania</string>
   <string name="maps_could_not_be_downloaded">Nie udało się pobrać tej mapy</string>
   <string name="continuous_rendering">Rysowanie ciągłe</string>
@@ -918,7 +918,7 @@
 <string name="snap_to_road">Przyciąganie do drogi</string>
 
 <string name="day_night_info">Informacja o dniu/nocy</string>
-<string name="map_widget_day_night">Mapa dzień/noc</string>
+<string name="map_widget_day_night">Tryb dzienny/nocny</string>
 <string name="map_widget_vector_attributes">Atrybuty renderowania</string>
 <string name="show_lanes">Pasy ruchu</string>
 
@@ -1001,7 +1001,7 @@
     <string name="download_srtm_maps">Poziomice</string>
     <string name="download_select_map_types">Inne mapy</string>
     <string name="srtm_plugin_name">Poziomice</string>
-    <string name="srtm_plugin_description">"Dostarcza poziomice i cieniowanie wzgórz wyświetlane na mapach offline w OsmAnd. Funkcja przydatna dla sportowców, turystów i osób zainteresowanych strukturą reliefową krajobrazu.\n\nŚwiatowe dane (między 70 stopniem szerokości północnej a 70 stopniem szerokości południowej) opierają się na pomiarach SRTM (Shuttle Radar Topography Mission) i ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), przyrządu na pokładzie Terra, flagowego satelity Systemu Obserwacji Ziemi NASA. ASTER jest wspólnym przedsięwzięciem NASA, japońskiego Ministerstwa Gospodarki, Handlu i Przemysłu (METI) i Japońskich Systemów Kosmicznych (J-spacesystems). "</string>
+    <string name="srtm_plugin_description">"Dostarcza warstwy poziomic i cieniowania rzeźby terenu wyświetlane na standardowych mapach OsmAnd. Funkcja przydatna dla sportowców, turystów i osób zainteresowanych strukturą reliefową krajobrazu.\n\nŚwiatowe dane (między 70 stopniem szerokości północnej a 70 stopniem szerokości południowej) opierają się na pomiarach SRTM (Shuttle Radar Topography Mission) i ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), przyrządu na pokładzie Terra, flagowego satelity Systemu Obserwacji Ziemi NASA. ASTER jest wspólnym przedsięwzięciem NASA, japońskiego Ministerstwa Gospodarki, Handlu i Przemysłu (METI) i Japońskich Systemów Kosmicznych (J-spacesystems). "</string>
     <string name="index_srtm_ele">Poziomice</string>
     <string name="index_srtm_parts">części</string>
     
@@ -1064,7 +1064,7 @@
     
     <string name="support_new_features_descr">Wesprzyj prace nad nowymi funkcjami przez przekazanie darowizny</string>
 	
-    <string name="download_hillshade_maps">Warstwy cieniujące</string>
+    <string name="download_hillshade_maps">Cieniowanie rzeźby terenu</string>
     
     <string name="av_use_external_camera_descr">Użyj aplikacji systemowej do robienia zdjęć</string>
     <string name="av_use_external_camera">Użyj aplikacji aparatu</string>
@@ -2067,7 +2067,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="saved_at_time">Zapisano o: %1$s</string>
 	<string name="poi_deleted_localy">POI zostanie usunięty gdy tylko wyślesz swoje zmiany</string>
 	<string name="show_gpx">Pokaż GPX</string>
-<string name="show_on_start">Wyświetlaj przy starcie</string>
+<string name="show_on_start">Wyświetlanie podczas uruchamiania</string>
 	<string name="count_of_lines">Liczba linii</string>
 <string name="address_unknown">Adres nie jest jeszcze znany</string>
     <string name="unsaved_changes_will_be_lost">Wszelkie niezapisane zmiany zostaną utracone. Kontynuować?</string>
@@ -2126,7 +2126,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="application_dir_description">Proszę wybrać położenie zapisywania plików map.</string>
 <string name="value_downloaded_from_max">%1$.1f z %2$.1f MB</string>
     <string name="shared_string_qr_code">Kod QR</string>
-    <string name="enter_country_name">Proszę wprowadzić nazwę kraju</string>
+    <string name="enter_country_name">Proszę wybrać kraj</string>
 <string name="map_downloaded_descr">Pobrano mapę regionu %1$s. Proszę powrócić do mapy, aby rozpocząć jej używanie.</string>
     <string name="world_map_download_descr">Brak podstawowej mapy świata (pokrywającej cały glob w małych przybliżeniach) lub jest ona przestarzała. Proszę rozważyć pobranie mapy podstawowej, aby uzyskać kompletne środowisko.</string>
     <string name="map_downloaded">Pobrano mapę</string>
