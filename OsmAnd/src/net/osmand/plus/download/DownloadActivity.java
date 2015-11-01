@@ -548,7 +548,11 @@ public class DownloadActivity extends ActionBarProgressActivity implements Downl
 	}
 	
 	public void setDownloadItem(WorldRegion region) {
-		downloadItem = region;
+		if(downloadItem == null) {
+			downloadItem = region;
+		} else if(region == null) {
+			downloadItem = null;
+		}
 	}
 	
 	private void showGoToMap(WorldRegion worldRegion) {
