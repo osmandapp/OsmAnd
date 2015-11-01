@@ -33,6 +33,7 @@ public class IndexItem implements Comparable<IndexItem> {
 	boolean outdated;
 	boolean downloaded;
 	long localTimestamp;
+	DownloadResourceGroup relatedGroup;
 
 
 	public IndexItem(String fileName, String description, long timestamp, String size, long contentSize,
@@ -48,6 +49,14 @@ public class IndexItem implements Comparable<IndexItem> {
 
 	public DownloadActivityType getType() {
 		return type;
+	}
+	
+	public void setRelatedGroup(DownloadResourceGroup relatedGroup) {
+		this.relatedGroup = relatedGroup;
+	}
+	
+	public DownloadResourceGroup getRelatedGroup() {
+		return relatedGroup;
 	}
 
 	public String getFileName() {
