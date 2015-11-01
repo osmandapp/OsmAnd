@@ -921,4 +921,26 @@
 	<string name="poi_religion_bahai">バハイ教(Bahaism)</string>
 	<string name="poi_religion_scientologist">サイエントロジー(Scientologism)</string>
 	<string name="poi_religion_pagan">ペイガン(Paganism)</string>
+	<string name="poi_religion_tenrikyo">天理教(Tenrikyo)</string>
+	<string name="poi_religion_zoroastrian">ゾロアスター教(Zoroastrism)</string>
+
+	<string name="poi_denomination_catholic">カトリック(Catholic)</string>
+	<string name="poi_denomination_baptist">バプテスト(Baptist)</string>
+	<string name="poi_denomination_roman_catholic">ローマカトリック(Roman catholic)</string>
+	<string name="poi_denomination_orthodox">正教(Orthodox)</string>
+	<string name="poi_denomination_lutheran">ルター派・ルーテル(Lutheran)</string>
+	<string name="poi_denomination_sunni">スンニ派(Sunni)</string>
+	<string name="poi_denomination_protestant">プロテスタント(Protestant)</string>
+	<string name="poi_denomination_methodist">メソジスト(Methodist)</string>
+	<string name="poi_denomination_anglican">聖公会(Anglican)</string>
+	<string name="poi_denomination_presbyterian">長老派(Presbyterian)</string>
+	<string name="poi_denomination_evangelical">福音派(Evangelical)</string>
+	<string name="poi_denomination_russian_orthodox">ロシア正教(Russian orthodox)</string>
+	<string name="poi_denomination_pentecostal">ペンテコステ派(Pentecostal)</string>
+	<string name="poi_denomination_mormon">モルモン教(Mormon)</string>
+	<string name="poi_denomination_jehovahs_witness">エホバの証人(Jehovahs witness)</string>
+	<string name="poi_denomination_greek_orthodox">ギリシャ正教(Greek orthodox)</string>
+	<string name="poi_denomination_reformed">改革派(Reformed)</string>
+	<string name="poi_denomination_seventh_day_adventist">セブンスデーアドベンチスト・安息日再臨派(Seventh day adventist)</string>
+	<string name="poi_denomination_new_apostolic">新使徒教会(New apostolic)</string>
 	</resources>
