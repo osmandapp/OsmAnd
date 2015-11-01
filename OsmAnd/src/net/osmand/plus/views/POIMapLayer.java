@@ -238,10 +238,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 				objects = data.getResults();
 				if (objects != null) {
 					float iconSize = poiBackground.getWidth() * 3 / 2;
-					QuadRect bounds = new QuadRect(0, 0, tileBox.getPixWidth(), tileBox.getPixHeight());
-					bounds.inset(-bounds.width()/4, -bounds.height()/4);
-					QuadTree<QuadRect> boundIntersections = new QuadTree<>(bounds, 4, 0.6f);
-					List<QuadRect> result = new ArrayList<>();
+					QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
 
 					for (Amenity o : objects) {
 						float x = tileBox.getPixXFromLatLon(o.getLocation().getLatitude(), o.getLocation()
@@ -249,21 +246,9 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 						float y = tileBox.getPixYFromLatLon(o.getLocation().getLatitude(), o.getLocation()
 								.getLongitude());
 
-						boolean intersects = false;
-						QuadRect visibleRect = calculateRect(x, y, iconSize, iconSize);
-						boundIntersections.queryInBox(new QuadRect(visibleRect.left, visibleRect.top, visibleRect.right, visibleRect.bottom), result);
-						for (QuadRect r : result) {
-							if (QuadRect.intersects(r, visibleRect)) {
-								intersects = true;
-								break;
-							}
-						}
-
-						if (intersects) {
+						if (intersects(boundIntersections, x, y, iconSize, iconSize)) {
 							canvas.drawBitmap(poiBackgroundSmall, x - poiBackgroundSmall.getWidth() / 2, y - poiBackgroundSmall.getHeight() / 2, paintIconBackground);
 						} else {
-							boundIntersections.insert(visibleRect,
-									new QuadRect(visibleRect.left, visibleRect.top, visibleRect.right, visibleRect.bottom));
 							fullObjects.add(o);
 						}
 					}
