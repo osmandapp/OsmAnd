@@ -2002,7 +2002,7 @@
     <string name="enter_country_name">Indtast landenavn</string>
 <string name="world_map_download_descr">Verdensgrundkort (dækker hele verden ved lave zoomniveauer) mangler eller er forældet. Hent verdensgrundkortet for et komplet miljø.</string>
     <string name="new_version">Ny version</string>
-    <string name="begin_with_osmand_menu_group">Første start med OsmAnd</string>
+    <string name="begin_with_osmand_menu_group">Kom godt i gang med OsmAnd</string>
     <string name="features_menu_group">Funktioner</string>
     <string name="help_us_to_improve_menu_group">Hjælp med at forbedre OsmAnd</string>
     <string name="other_menu_group">Andet</string>
