@@ -5,6 +5,7 @@ import gnu.trove.list.array.TIntArrayList;
 import java.util.List;
 import java.util.Map;
 
+import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.util.MapAlgorithms;
@@ -156,7 +157,16 @@ public abstract class OsmandMapLayer {
 		}
 		return cnt;
 	}
-	
+
+	public QuadRect calculateRect(float x, float y, float width, float height) {
+		QuadRect rf;
+		double left = x - width / 2.0d;
+		double top = y - height / 2.0d;
+		double right = left + width;
+		double bottom = top + height;
+		rf = new QuadRect(left, top, right, bottom);
+		return rf;
+	}
 
 	public abstract class MapLayerData<T> {
 		public int ZOOM_THRESHOLD = 1;

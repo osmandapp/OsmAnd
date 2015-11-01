@@ -70,6 +70,14 @@ public class FavoriteImageDrawable extends Drawable {
 		canvas.translate(-dx, -dy);
 	}
 
+	public void drawBitmapInCenter(Canvas canvas, float x, float y) {
+		float dx = x - getIntrinsicWidth() / 2f;
+		float dy = y - getIntrinsicHeight() / 2f;
+		canvas.translate(dx, dy);
+		draw(canvas);
+		canvas.translate(-dx, -dy);
+	}
+
 	@Override
 	public int getOpacity() {
 		return 0;
