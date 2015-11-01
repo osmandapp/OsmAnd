@@ -1,7 +1,5 @@
 package net.osmand.plus.audionotes;
 
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -9,16 +7,13 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.PointF;
-import android.widget.ArrayAdapter;
 
-import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.data.DataTileManager;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
+import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
@@ -26,6 +21,7 @@ import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvider {
@@ -40,6 +36,7 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 	private Bitmap audio;
 	private Bitmap video;
 	private Bitmap photo;
+	private Bitmap pointSmall;
 
 	public AudioNotesLayer(MapActivity activity, AudioVideoNotesPlugin plugin) {
 		this.activity = activity;
@@ -57,6 +54,8 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 		audio = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_note_audio);
 		video = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_note_video);
 		photo = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_note_photo);
+
+		pointSmall = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_note_small);
 
 		paintIcon = new Paint();
 
@@ -76,6 +75,16 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 		return (int) (r * tb.getDensity());
 	}
 
+	private QuadRect calculateRect(float x, float y, float width, float height) {
+		QuadRect rf;
+		double left = x - width / 2.0d;
+		double top = y - height / 2.0d;
+		double right = left + width;
+		double bottom = top + height;
+		rf = new QuadRect(left, top, right, bottom);
+		return rf;
+	}
+
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 	}
@@ -83,12 +92,41 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		if (tileBox.getZoom() >= startZoom) {
+			float iconSize = audio.getWidth() * 3 / 2.5f;
+			QuadRect bounds = new QuadRect(0, 0, tileBox.getPixWidth(), tileBox.getPixHeight());
+			bounds.inset(-bounds.width()/4, -bounds.height()/4);
+			QuadTree<QuadRect> boundIntersections = new QuadTree<>(bounds, 4, 0.6f);
+			List<QuadRect> result = new ArrayList<>();
+
 			DataTileManager<Recording> recs = plugin.getRecordings();
 			final QuadRect latlon = tileBox.getLatLonBounds();
-			List<Recording> objects = recs.getObjects(latlon. top, latlon.left, latlon.bottom, latlon.right);
+			List<Recording> objects = recs.getObjects(latlon.top, latlon.left, latlon.bottom, latlon.right);
+			List<Recording> fullObjects = new ArrayList<>();
 			for (Recording o : objects) {
-				int x = (int) tileBox.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
-				int y = (int) tileBox.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
+				float x = tileBox.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
+				float y = tileBox.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
+
+				boolean intersects = false;
+				QuadRect visibleRect = calculateRect(x, y, iconSize, iconSize);
+				boundIntersections.queryInBox(new QuadRect(visibleRect.left, visibleRect.top, visibleRect.right, visibleRect.bottom), result);
+				for (QuadRect r : result) {
+					if (QuadRect.intersects(r, visibleRect)) {
+						intersects = true;
+						break;
+					}
+				}
+
+				if (intersects) {
+					canvas.drawBitmap(pointSmall, x - pointSmall.getWidth() / 2, y - pointSmall.getHeight() / 2, paintIcon);
+				} else {
+					boundIntersections.insert(visibleRect,
+							new QuadRect(visibleRect.left, visibleRect.top, visibleRect.right, visibleRect.bottom));
+					fullObjects.add(o);
+				}
+			}
+			for (Recording o : fullObjects) {
+				float x = tileBox.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
+				float y = tileBox.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
 				Bitmap b;
 				if (o.isPhoto()) {
 					b = photo;
@@ -96,7 +134,6 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 					b = audio;
 				} else {
 					b = video;
-
 				}
 				canvas.drawBitmap(b, x - b.getWidth() / 2, y - b.getHeight() / 2, paintIcon);
 			}
