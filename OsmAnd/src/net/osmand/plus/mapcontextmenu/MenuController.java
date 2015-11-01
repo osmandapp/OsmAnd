@@ -7,6 +7,8 @@ import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
@@ -23,6 +25,7 @@ import net.osmand.plus.mapcontextmenu.controllers.ParkingPositionMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.PointDescriptionMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.AudioVideoNoteMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.TargetPointMenuController;
+import net.osmand.plus.mapcontextmenu.controllers.WptPtMenuController;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.osmedit.OsmPoint;
 import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
@@ -99,6 +102,8 @@ public abstract class MenuController extends BaseMenuController {
 				menuController = new AudioVideoNoteMenuController(app, mapActivity, (Recording) object);
 			} else if (object instanceof OsmPoint) {
 				menuController = new EditPOIMenuController(app, mapActivity, pointDescription, (OsmPoint) object);
+			} else if (object instanceof WptPt) {
+				menuController = new WptPtMenuController(app, mapActivity, (WptPt) object);
 			} else if (object instanceof LatLon) {
 				if (pointDescription.isParking()) {
 					menuController = new ParkingPositionMenuController(app, mapActivity, pointDescription);
