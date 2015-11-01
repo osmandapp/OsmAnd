@@ -33,7 +33,6 @@ import net.osmand.plus.download.DownloadResourceGroup;
 import net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.download.ui.popups.DownloadResourceGroupFragment;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
