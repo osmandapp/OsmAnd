@@ -2113,4 +2113,11 @@
 
 	<string name="poi_massage_thai">按摩：泰式</string>
 	<string name="poi_massage_sexual">按摩：情趣</string>
+	<string name="poi_massage_chinese">按摩：中式</string>
+	<string name="poi_massage_yes">按摩服務</string>
+	<string name="poi_massage_therapeutic">按摩：治療</string>
+
+	<string name="poi_sauna_yes">三溫暖服務</string>
+	<string name="poi_solarium_yes">日光浴服務</string>
+
 	</resources>
