@@ -2042,6 +2042,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="first_usage_item">First usage</string>
     <string name="first_usage_item_description">How to download maps, set basic settings</string>
     <string name="navigation_item_description">Setup navigation</string>
+    <string name="planning_trip_item">Planning a trip</string>
     <string name="faq_item">FAQ</string>
     <string name="faq_item_description">How to use plugins</string>
     <string name="map_viewing_item">Map viewing</string>

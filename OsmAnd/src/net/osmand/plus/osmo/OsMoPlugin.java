@@ -122,6 +122,11 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 		return R.drawable.ic_osmo_dark;
 	}
 
+
+	@Override
+	public String getHelpUrl() {
+		return "feature_articles/osmo-plugin.html";
+	}
 	
 	@Override
 	public void registerMapContextMenuActions(final MapActivity mapActivity, final double latitude, final double longitude,

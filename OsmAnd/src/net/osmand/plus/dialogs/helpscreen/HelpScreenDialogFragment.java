@@ -288,10 +288,19 @@ public class HelpScreenDialogFragment extends DialogFragment implements Expandab
 	private List<MyMenuItem> createPluginsItems() {
 		ArrayList<MyMenuItem> arrayList = new ArrayList<>();
 		MyMenuItem.Builder builder = new MyMenuItem.Builder();
-		for (OsmandPlugin osmandPlugin : OsmandPlugin.getAvailablePlugins()) {
+		for (final OsmandPlugin osmandPlugin : OsmandPlugin.getAvailablePlugins()) {
 			builder.reset();
 			builder.setTitle(osmandPlugin.getName())
 					.setIcon(osmandPlugin.getLogoResourceId());
+			if (osmandPlugin.getHelpUrl() != null) {
+				builder.setListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						HelpArticleDialogFragment.createInstance(osmandPlugin.getHelpUrl())
+								.show(getActivity().getSupportFragmentManager(), null);
+					}
+				});
+			}
 			arrayList.add(builder.create());
 		}
 //		.setListener(new View.OnClickListener() {
