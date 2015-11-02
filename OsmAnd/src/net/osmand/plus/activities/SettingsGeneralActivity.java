@@ -24,7 +24,6 @@ import android.preference.PreferenceScreen;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
@@ -622,4 +621,6 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 		}
 		return setFiles;
 	}
+	
+	
 }

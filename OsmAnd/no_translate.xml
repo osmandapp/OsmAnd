@@ -44,6 +44,7 @@
 	\n\tHarry van der Wolf - contributor (contribute to country boundaries + configuration file + address files and else), active forum participant.
     </string>
     <string name="app_edition"></string>
+    <string name="support_email">support@osmand.net</string>
     <string name="preferred_locale_no_translate">Display language</string>
     <string name="system_locale_no_translate">Device language</string>
 	<string name="osmo">OsMo</string>

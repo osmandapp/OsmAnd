@@ -1,5 +1,26 @@
 package net.osmand.plus.dashboard;
 
+import gnu.trove.list.array.TIntArrayList;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
+
+import net.osmand.IndexConstants;
+import net.osmand.ValueHolder;
+import net.osmand.access.AccessibleToast;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.ProgressImplementation;
+import net.osmand.plus.R;
+import net.osmand.util.Algorithms;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -24,48 +45,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import net.osmand.IndexConstants;
-import net.osmand.ValueHolder;
-import net.osmand.access.AccessibleToast;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.ProgressImplementation;
-import net.osmand.plus.R;
-import net.osmand.util.Algorithms;
+public class DashChooseAppDirFragment {
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
-
-import gnu.trove.list.array.TIntArrayList;
-
-public class DashChooseAppDirFragment extends DashBaseFragment {
-
-	public static final String TAG = "DASH_CHOOSE_APP_DIR_FRAGMENT";
-	private ChooseAppDirFragment fragment;
-	
-	@Override
-	public void onAttach(Activity activity) {
-		super.onAttach(activity);
-		fragment = new ChooseAppDirFragment(activity, this);
-	}
-	
-
-	@Override
-	public void onOpenDash() {
-	}
-
-	@Override
-	public View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		return fragment.initView(inflater, container, savedInstanceState);
-	}
 	
 	public static class ChooseAppDirFragment {
 		public static final int VERSION_DEFAULTLOCATION_CHANGED = 19;
