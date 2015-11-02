@@ -7,7 +7,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +17,7 @@ import android.widget.TextView;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -110,7 +110,7 @@ public class HelpScreenDialogFragment extends DialogFragment implements Expandab
 		@Override
 		public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild,
 								 View convertView, ViewGroup parent) {
-			if(categories[groupPosition] == MenuCategory.HELP_US_TO_IMPROVE) {
+			if (categories[groupPosition] == MenuCategory.HELP_US_TO_IMPROVE) {
 				convertView = LayoutInflater.from(parent.getContext()).inflate(
 						R.layout.help_to_improve_item, parent, false);
 				TextView pollButton = (TextView) convertView.findViewById(R.id.pollButton);
@@ -260,89 +260,56 @@ public class HelpScreenDialogFragment extends DialogFragment implements Expandab
 	}
 
 
-	private List<MyMenuItem> createBeginWithOsmandItems(){
+	private List<MyMenuItem> createBeginWithOsmandItems() {
 		ArrayList<MyMenuItem> arrayList = new ArrayList<>();
 		MyMenuItem.Builder builder = new MyMenuItem.Builder()
-				.setTitle(R.string.first_usage_item)
+				.setTitle(R.string.first_usage_item, getActivity())
 				.setDescription(R.string.first_usage_item_description, getActivity());
 		arrayList.add(builder.create());
 		builder = new MyMenuItem.Builder()
-				.setTitle(R.string.shared_string_navigation)
+				.setTitle(R.string.shared_string_navigation, getActivity())
 				.setDescription(R.string.navigation_item_description, getActivity());
 		arrayList.add(builder.create());
 		builder = new MyMenuItem.Builder()
-				.setTitle(R.string.faq_item)
+				.setTitle(R.string.faq_item, getActivity())
 				.setDescription(R.string.faq_item_description, getActivity());
 		arrayList.add(builder.create());
 		return arrayList;
 	}
 
-	private static List<MyMenuItem> createFeaturesItems() {
+	private List<MyMenuItem> createFeaturesItems() {
 		ArrayList<MyMenuItem> arrayList = new ArrayList<>();
-		arrayList.add(new MyMenuItem(R.string.map_viewing_item));
-		arrayList.add(new MyMenuItem(R.string.search_on_the_map_item));
-		arrayList.add(new MyMenuItem(R.string.planning_trip_item));
+		arrayList.add(new MyMenuItem(R.string.map_viewing_item, getActivity()));
+		arrayList.add(new MyMenuItem(R.string.search_on_the_map_item, getActivity()));
+		arrayList.add(new MyMenuItem(R.string.planning_trip_item, getActivity()));
 		return arrayList;
 	}
 
 	private List<MyMenuItem> createPluginsItems() {
 		ArrayList<MyMenuItem> arrayList = new ArrayList<>();
-		MyMenuItem.Builder builder = new MyMenuItem.Builder()
-				.setTitle(R.string.shared_string_online_maps)
-				.setIcon(R.drawable.ic_world_globe_dark)
-				.setListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						HelpArticleDialogFragment.createInstance(
-								"feature_articles/online-maps-plugin.html")
-						.show(getActivity().getSupportFragmentManager(), null);
-					}
-				});
-		arrayList.add(builder.create());
-		builder.reset()
-				.setTitle(R.string.contour_lines_and_hillshade_maps_item)
-				.setIcon(R.drawable.ic_plugin_srtm);
-		arrayList.add(builder.create());
-		builder.reset()
-				.setTitle(R.string.trip_recording_tool_item)
-				.setIcon(R.drawable.ic_action_polygom_dark);
-		arrayList.add(builder.create());
-		builder.reset()
-				.setTitle(R.string.osmand_ski_maps_item)
-				.setIcon(R.drawable.ic_plugin_skimaps);
-		arrayList.add(builder.create());
-		builder.reset()
-				.setTitle(R.string.nautical_charts_item)
-				.setIcon(R.drawable.ic_action_sail_boat_dark);
-		arrayList.add(builder.create());
-		builder.reset()
-				.setTitle(R.string.audio_video_note_item)
-				.setIcon(R.drawable.ic_action_micro_dark);
-		arrayList.add(builder.create());
-		builder.reset()
-				.setTitle(R.string.osm_editing_item)
-				.setIcon(R.drawable.ic_action_bug_dark);
-		arrayList.add(builder.create());
-		builder.reset()
-				.setTitle(R.string.osmand_distance_planning_plugin_name)
-				.setIcon(R.drawable.ic_action_ruler);
-		arrayList.add(builder.create());
-		builder.reset()
-				.setTitle(R.string.poi_filter_parking)
-				.setIcon(R.drawable.ic_action_parking_dark);
-		arrayList.add(builder.create());
-		builder.reset()
-				.setTitle(R.string.debugging_and_development)
-				.setIcon(R.drawable.ic_plugin_developer);
-		arrayList.add(builder.create());
+		MyMenuItem.Builder builder = new MyMenuItem.Builder();
+		for (OsmandPlugin osmandPlugin : OsmandPlugin.getAvailablePlugins()) {
+			builder.reset();
+			builder.setTitle(osmandPlugin.getName())
+					.setIcon(osmandPlugin.getLogoResourceId());
+			arrayList.add(builder.create());
+		}
+//		.setListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				HelpArticleDialogFragment.createInstance(
+//						"feature_articles/online-maps-plugin.html")
+//						.show(getActivity().getSupportFragmentManager(), null);
+//			}
+//		});
 		return arrayList;
 	}
 
 	private List<MyMenuItem> createOtherItems() {
 		ArrayList<MyMenuItem> arrayList = new ArrayList<>();
-		arrayList.add(new MyMenuItem(R.string.instalation_troubleshooting_item));
-		arrayList.add(new MyMenuItem(R.string.techical_articles_item));
-		arrayList.add(new MyMenuItem(R.string.versions_item));
+		arrayList.add(new MyMenuItem(R.string.instalation_troubleshooting_item, getActivity()));
+		arrayList.add(new MyMenuItem(R.string.techical_articles_item, getActivity()));
+		arrayList.add(new MyMenuItem(R.string.versions_item, getActivity()));
 
 		String releasedate = "";
 		if (!this.getString(R.string.app_edition).equals("")) {
@@ -352,7 +319,7 @@ public class HelpScreenDialogFragment extends DialogFragment implements Expandab
 //			+ "\n\n" + this.getString(R.string.about_content);
 
 		MyMenuItem.Builder builder = new MyMenuItem.Builder()
-				.setTitle(R.string.shared_string_about)
+				.setTitle(R.string.shared_string_about, getActivity())
 				.setDescription(version);
 
 		arrayList.add(builder.create());
