@@ -2,7 +2,6 @@ package net.osmand.plus.mapcontextmenu.controllers;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -11,9 +10,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.download.DownloadResourceGroup;
-import net.osmand.plus.download.DownloadResources;
-import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 

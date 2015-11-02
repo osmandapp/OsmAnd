@@ -1,24 +1,5 @@
 package net.osmand.plus.views;
 
-import java.io.IOException;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
-
-import net.osmand.IndexConstants;
-import net.osmand.binary.BinaryMapDataObject;
-import net.osmand.data.Amenity;
-import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
-import net.osmand.data.RotatedTileBox;
-import net.osmand.map.OsmandRegions;
-import net.osmand.map.WorldRegion;
-import net.osmand.plus.R;
-import net.osmand.plus.resources.ResourceManager;
-import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -32,13 +13,37 @@ import android.text.TextPaint;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
-public class DownloadedRegionsLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {
+import net.osmand.IndexConstants;
+import net.osmand.binary.BinaryMapDataObject;
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
+import net.osmand.data.RotatedTileBox;
+import net.osmand.map.OsmandRegions;
+import net.osmand.map.WorldRegion;
+import net.osmand.plus.R;
+import net.osmand.plus.resources.ResourceManager;
+import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
+import net.osmand.plus.views.ContextMenuLayer.IContextMenuProviderSelection;
+import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
+
+import java.io.IOException;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+
+public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMenuProvider, IContextMenuProviderSelection {
 
 	private static final int ZOOM_THRESHOLD = 2;
 
 	private OsmandMapTileView view;
 	private Paint paint;
+	private Paint paintSelected;
 	private Path path;
+	private Path pathSelected;
 	private OsmandRegions osmandRegions;
 
 	
@@ -46,7 +51,8 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements ContextMen
 	private ResourceManager rm;
 
 	private MapLayerData<List<BinaryMapDataObject>> data;
-	
+	private List<BinaryMapDataObject> selectedObjects;
+
 	private static int ZOOM_TO_SHOW_MAP_NAMES = 6;
 	private static int ZOOM_AFTER_BASEMAP = 12;
 
@@ -64,6 +70,14 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements ContextMen
 		paint.setStrokeCap(Cap.ROUND);
 		paint.setStrokeJoin(Join.ROUND);
 
+		paintSelected = new Paint();
+		paintSelected.setStyle(Style.FILL_AND_STROKE);
+		paintSelected.setStrokeWidth(1);
+		paintSelected.setColor(Color.argb(100, 255, 143, 0));
+		paintSelected.setAntiAlias(true);
+		paintSelected.setStrokeCap(Cap.ROUND);
+		paintSelected.setStrokeJoin(Join.ROUND);
+
 		textPaint = new TextPaint();
 		final WindowManager wmgr = (WindowManager) view.getApplication().getSystemService(Context.WINDOW_SERVICE);
 		DisplayMetrics dm = new DisplayMetrics();
@@ -73,6 +87,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements ContextMen
 		textPaint.setTextAlign(Paint.Align.CENTER);
 
 		path = new Path();
+		pathSelected = new Path();
 		data = new MapLayerData<List<BinaryMapDataObject>>() {
 			
 			@Override
@@ -117,25 +132,42 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements ContextMen
 		}
 		// draw objects
 		final List<BinaryMapDataObject> currentObjects = data.results;
+		final List<BinaryMapDataObject> selectedObjects = this.selectedObjects;
 		if (zoom >= ZOOM_TO_SHOW_BORDERS_ST && zoom < ZOOM_TO_SHOW_BORDERS && osmandRegions.isInitialized() &&
-				currentObjects != null) {
-			path.reset();
-			for (BinaryMapDataObject o : currentObjects) {
-				String downloadName = osmandRegions.getDownloadName(o);
-				boolean downloaded = checkIfObjectDownloaded(downloadName);
-				if (!downloaded) {
-					continue;
+				(currentObjects != null || selectedObjects != null)) {
+			if (currentObjects != null) {
+				path.reset();
+				for (BinaryMapDataObject o : currentObjects) {
+					String downloadName = osmandRegions.getDownloadName(o);
+					boolean downloaded = checkIfObjectDownloaded(downloadName);
+					if (!downloaded) {
+						continue;
+					}
+					double lat = MapUtils.get31LatitudeY(o.getPoint31YTile(0));
+					double lon = MapUtils.get31LongitudeX(o.getPoint31XTile(0));
+					path.moveTo(tileBox.getPixXFromLonNoRot(lon), tileBox.getPixYFromLatNoRot(lat));
+					for (int j = 1; j < o.getPointsLength(); j++) {
+						lat = MapUtils.get31LatitudeY(o.getPoint31YTile(j));
+						lon = MapUtils.get31LongitudeX(o.getPoint31XTile(j));
+						path.lineTo(tileBox.getPixXFromLonNoRot(lon), tileBox.getPixYFromLatNoRot(lat));
+					}
 				}
-				double lat = MapUtils.get31LatitudeY(o.getPoint31YTile(0));
-				double lon = MapUtils.get31LongitudeX(o.getPoint31XTile(0));
-				path.moveTo(tileBox.getPixXFromLonNoRot(lon), tileBox.getPixYFromLatNoRot(lat));
-				for (int j = 1; j < o.getPointsLength(); j++) {
-					lat = MapUtils.get31LatitudeY(o.getPoint31YTile(j));
-					lon = MapUtils.get31LongitudeX(o.getPoint31XTile(j));
-					path.lineTo(tileBox.getPixXFromLonNoRot(lon), tileBox.getPixYFromLatNoRot(lat));
-				}
+				canvas.drawPath(path, paint);
 			}
-			canvas.drawPath(path, paint);
+			if (selectedObjects != null) {
+				pathSelected.reset();
+				for (BinaryMapDataObject o : selectedObjects) {
+					double lat = MapUtils.get31LatitudeY(o.getPoint31YTile(0));
+					double lon = MapUtils.get31LongitudeX(o.getPoint31XTile(0));
+					pathSelected.moveTo(tileBox.getPixXFromLonNoRot(lon), tileBox.getPixYFromLatNoRot(lat));
+					for (int j = 1; j < o.getPointsLength(); j++) {
+						lat = MapUtils.get31LatitudeY(o.getPoint31YTile(j));
+						lon = MapUtils.get31LongitudeX(o.getPoint31XTile(j));
+						pathSelected.lineTo(tileBox.getPixXFromLonNoRot(lon), tileBox.getPixYFromLatNoRot(lat));
+					}
+				}
+				canvas.drawPath(pathSelected, paintSelected);
+			}
 		}
 	}
 
@@ -359,11 +391,22 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements ContextMen
 				}
 			}
 
-			if (result.size() > 0) {
-				String fullName = osmandRegions.getFullName(result.get(0));
+			selectedObjects = result;
+
+			for (BinaryMapDataObject o : result) {
+				String fullName = osmandRegions.getFullName(o);
 				WorldRegion region = osmandRegions.getRegionData(fullName);
 				regions.add(region);
 			}
 		}
+	}
+
+	@Override
+	public void setSelectedObject(Object o) {
+	}
+
+	@Override
+	public void clearSelectedObject() {
+		//selectedObjects = null;
 	}
 }

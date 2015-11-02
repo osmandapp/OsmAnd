@@ -104,9 +104,6 @@ public class MapContextMenu extends MenuTitleController {
 			}
 		}
 
-		if (this.object != null) {
-			clearSelectedObject(this.object);
-		}
 		setSelectedObject(object);
 
 		if (pointDescription == null) {
@@ -171,6 +168,9 @@ public class MapContextMenu extends MenuTitleController {
 	}
 
 	public void hide() {
+		if (this.object != null) {
+			clearSelectedObject(this.object);
+		}
 		if (mapPosition != 0) {
 			mapActivity.getMapView().setMapPosition(mapPosition);
 			mapPosition = 0;
