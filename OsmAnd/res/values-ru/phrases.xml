@@ -415,7 +415,7 @@
 	<string name="poi_croquet">Крокет</string>
 	<string name="poi_cycling">Велосипедный спорт</string>
 	<string name="poi_diving">Прыжки в воду</string>
-	<string name="poi_scuba_diving">Подводное плавание</string>
+	<string name="poi_scuba_diving">Плавание с аквалангом</string>
 	<string name="poi_dog_racing">Собачьи бега</string>
 	<string name="poi_equestrian">Верховая езда</string>
 	<string name="poi_golf">Гольф</string>
@@ -857,14 +857,14 @@
 	<string name="poi_landuse_railway">Территория железной дороги</string>
 	<string name="poi_basin">Искусственный водоём</string>
 
-	<string name="poi_storage_tank">Резервуар</string>
+	<string name="poi_storage_tank">Бак для жидкости</string>
 
 	<string name="poi_neighbourhood">Микрорайон</string>
 	<string name="poi_residential">Жилой район</string>
 	<string name="poi_religious">Религиозное землепользование</string>
 
 <!--	<string name="poi_general_tourist_attraction_yes">Достопримечательность (тип неизвестен)</string>-->
-	<string name="poi_attraction_amusement_ride">Парк атракционов</string>
+	<string name="poi_attraction_amusement_ride">Атракцион</string>
 	<string name="poi_wilderness_hut">Лесной домик</string>
 	<string name="poi_hunting_lodge">Охотничий домик</string>
 
