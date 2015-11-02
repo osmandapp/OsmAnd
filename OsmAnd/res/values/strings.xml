@@ -2046,13 +2046,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="faq_item_description">How to use plugins</string>
     <string name="map_viewing_item">Map viewing</string>
     <string name="search_on_the_map_item">Map searching</string>
-    <string name="planning_trip_item">Planning a trip</string>
-    <string name="contour_lines_and_hillshade_maps_item">Contour lines and hillshade maps</string>
-    <string name="trip_recording_tool_item">Trip recording tool</string>
-    <string name="osmand_ski_maps_item">OsmAnd Ski maps</string>
-    <string name="nautical_charts_item">Nautical charts</string>
-    <string name="audio_video_note_item">Audio/video notes</string>
-    <string name="osm_editing_item">OSM editing</string>
     <string name="instalation_troubleshooting_item">Installation and troubleshooting</string>
     <string name="techical_articles_item">Technical articles</string>
     <string name="versions_item">Versions</string>

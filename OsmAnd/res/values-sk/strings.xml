@@ -2167,13 +2167,13 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="faq_item_description">Ako používať zásuvné moduly</string>
     <string name="map_viewing_item">Prezeranie mapy</string>
     <string name="search_on_the_map_item">Hľadanie na mape</string>
-    <string name="planning_trip_item">Plánovanie výletu</string>
+    
     <string name="contour_lines_and_hillshade_maps_item">Mapy vrstevníc a tieňované svahy</string>
-    <string name="trip_recording_tool_item">Nástroj nahrávania výletov</string>
+    
     <string name="osmand_ski_maps_item">Lyžiarske mapy</string>
-    <string name="nautical_charts_item">Námorné mapy</string>
+    
     <string name="audio_video_note_item">Zvukové/video poznámky</string>
-    <string name="osm_editing_item">Úpravy OSM</string>
+    
     <string name="instalation_troubleshooting_item">Inštalácia a riešenie problémov</string>
     <string name="techical_articles_item">Technické články</string>
     <string name="versions_item">Verzie</string>

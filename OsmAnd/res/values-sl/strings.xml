@@ -1986,11 +1986,11 @@
     <string name="faq_item_description">Kako uporabljati vstavke</string>
     <string name="map_viewing_item">Pogled zemljevida</string>
     <string name="search_on_the_map_item">Iskanje po zemljevidu</string>
-    <string name="planning_trip_item">Planiranje potovanja</string>
+    
     <string name="osmand_ski_maps_item">Smučarski zemljevidi OsmAnd</string>
-    <string name="nautical_charts_item">Navtične karte</string>
+    
     <string name="audio_video_note_item">Zvočni in video zaznamki</string>
-    <string name="osm_editing_item">Urejanje OSM</string>
+    
     <string name="instalation_troubleshooting_item">Namestitev in odpravljanje napak</string>
     <string name="techical_articles_item">Tehnični članki</string>
     <string name="versions_item">Različice</string>
@@ -2000,7 +2000,7 @@
     <string name="simulate_initial_startup_descr">Nastavi zastavico, ki določa prvi zagon programa, ostale nastavitve pa ostanejo nespremenjene.</string>
     <string name="show_on_start_description">Možnost \'brez\' zažene v pogledu zemljevida</string>
     <string name="enter_country_name">Vpis imena države</string>
-    <string name="contour_lines_and_hillshade_maps_item">Izohipse in senčenje zemljevida</string>
+    
     <string name="trip_recording_tool_item">Orodje za beleženje poti</string>
     
     </resources>

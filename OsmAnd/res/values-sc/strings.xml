@@ -1985,13 +1985,13 @@
     <string name="faq_item_description">Comente usare sos plugins</string>
     <string name="map_viewing_item">Visione de sa mapa</string>
     <string name="search_on_the_map_item">Chircare in sa mapa</string>
-    <string name="planning_trip_item">Pranificare unu biàgiu</string>
+    
     <string name="contour_lines_and_hillshade_maps_item">Mapas de sas lìnias de livellu e de sas umbraduras de sos rilievos</string>
-    <string name="trip_recording_tool_item">Aina de registratzione biàgiu</string>
+    
     <string name="osmand_ski_maps_item">Mapas pro iscì OsmAnd</string>
-    <string name="nautical_charts_item">Cartas nàuticas</string>
+    
     <string name="audio_video_note_item">Notas àudio/vìdeu</string>
-    <string name="osm_editing_item">Modìficas OSM</string>
+    
     <string name="instalation_troubleshooting_item">Installatzione e solutziones a sos problemas</string>
     <string name="techical_articles_item">Artìculos tècnicos</string>
     <string name="versions_item">Versiones</string>

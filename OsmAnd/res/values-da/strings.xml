@@ -2013,13 +2013,13 @@
     <string name="faq_item_description">Hvordan man bruger udvidelser</string>
     <string name="map_viewing_item">Kortvisning</string>
     <string name="search_on_the_map_item">Søgning på kortet</string>
-    <string name="planning_trip_item">Turplanlægning</string>
+    
     <string name="contour_lines_and_hillshade_maps_item">Højdekurver og reliefoverlejring</string>
-    <string name="trip_recording_tool_item">Turoptagelse</string>
+    
     <string name="osmand_ski_maps_item">Skikort</string>
-    <string name="nautical_charts_item">Søkort</string>
+    
     <string name="audio_video_note_item">Audio-/videonoter</string>
-    <string name="osm_editing_item">OSM redigering</string>
+    
     <string name="instalation_troubleshooting_item">Installation og fejlfinding</string>
     <string name="techical_articles_item">Tekniske artikler</string>
     <string name="versions_item">Versioner</string>

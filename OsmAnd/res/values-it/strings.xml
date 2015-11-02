@@ -2055,13 +2055,13 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="faq_item_description">Come utilizzare i componenti aggiuntivi</string>
     <string name="map_viewing_item">Visualizzazione mappa</string>
     <string name="search_on_the_map_item">Ricerca sulla mappa</string>
-    <string name="planning_trip_item">Pianifica un viaggio</string>
+    
     <string name="contour_lines_and_hillshade_maps_item">Mappe linee di livello e ombreggiamento rilievi</string>
-    <string name="trip_recording_tool_item">Strumento registrazione viaggio</string>
+    
     <string name="osmand_ski_maps_item">Mappe sci OsmAnd</string>
-    <string name="nautical_charts_item">Carte nautiche</string>
+    
     <string name="audio_video_note_item">Note audio/video</string>
-    <string name="osm_editing_item">Modifiche OSM</string>
+    
     <string name="instalation_troubleshooting_item">Installazione e soluzione dei problemi</string>
     <string name="techical_articles_item">Articoli tecnici</string>
     <string name="versions_item">Versioni</string>

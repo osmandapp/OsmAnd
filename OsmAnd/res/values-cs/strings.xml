@@ -2007,13 +2007,13 @@
     <string name="faq_item_description">Jak použít moduly</string>
     <string name="map_viewing_item">Prohlížení mapy</string>
     <string name="search_on_the_map_item">Hledání na mapě</string>
-    <string name="planning_trip_item">Plánování cesty</string>
+    
     <string name="contour_lines_and_hillshade_maps_item">Vrstevnice a stínování kopců</string>
-    <string name="trip_recording_tool_item">Nástroj na záznam cest</string>
+    
     <string name="osmand_ski_maps_item">OsmAnd lyžařské mapy</string>
-    <string name="nautical_charts_item">Námořní mapy</string>
+    
     <string name="audio_video_note_item">Audio/video poznámky</string>
-    <string name="osm_editing_item">OSM editace</string>
+    
     <string name="instalation_troubleshooting_item">Instalace a řešení problémů</string>
     <string name="techical_articles_item">Technické články</string>
     <string name="versions_item">Verze</string>

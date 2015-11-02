@@ -2005,13 +2005,13 @@
     <string name="faq_item_description">Hogyan használd a bővítményeket</string>
     <string name="map_viewing_item">Térkép böngészése</string>
     <string name="search_on_the_map_item">Keresés a térképen</string>
-    <string name="planning_trip_item">Utazás tervezése</string>
+    
     <string name="contour_lines_and_hillshade_maps_item">Szintvonal és domborzatárnyékolás</string>
-    <string name="trip_recording_tool_item">Útvonalrögzítő eszköz</string>
+    
     <string name="osmand_ski_maps_item">OsmAnd sítérkép</string>
-    <string name="nautical_charts_item">Hajózási jelzések</string>
+    
     <string name="audio_video_note_item">Hang- és videójegyzetek</string>
-    <string name="osm_editing_item">OSM szerkesztés</string>
+    
     <string name="instalation_troubleshooting_item">Telepítés és hibaelhárítás</string>
     <string name="techical_articles_item">Technikai cikkek</string>
     <string name="versions_item">Verziók</string>

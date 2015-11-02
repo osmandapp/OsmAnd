@@ -1965,11 +1965,11 @@
     <string name="faq_item_description">Hur man använder insticksmoduler</string>
     <string name="map_viewing_item">Kartvisning</string>
     <string name="search_on_the_map_item">Söka på kartan</string>
-    <string name="planning_trip_item">Att planera en resa</string>
+    
     <string name="trip_recording_tool_item">Verktyg för inspelning av resa</string>
-    <string name="osmand_ski_maps_item">OsmAnd skidkartor</string>
+    
     <string name="nautical_charts_item">Sjökort</string>
-    <string name="audio_video_note_item">Ljud-/Videoanteckningar</string>
+    
     <string name="osm_editing_item">OSM-redigering</string>
     <string name="instalation_troubleshooting_item">Installation och problemlösning</string>
     <string name="techical_articles_item">Tekniska artiklar</string>

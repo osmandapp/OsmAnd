@@ -2152,13 +2152,13 @@
     <string name="faq_item_description">Cómo usar los complementos</string>
     <string name="map_viewing_item">Vista del mapa</string>
     <string name="search_on_the_map_item">Búsqueda en el mapa</string>
-    <string name="planning_trip_item">Planeando un viaje</string>
+    
     <string name="contour_lines_and_hillshade_maps_item">Mapas de curvas de nivel y sombreado</string>
-    <string name="trip_recording_tool_item">Herramienta de grabación de viaje</string>
+    
     <string name="osmand_ski_maps_item">Mapas de esquí de OsmAnd</string>
-    <string name="nautical_charts_item">Cartas náuticas</string>
+    
     <string name="audio_video_note_item">Notas multimedia</string>
-    <string name="osm_editing_item">Edición de OSM</string>
+    
     <string name="instalation_troubleshooting_item">Instalación y solución de problemas</string>
     <string name="techical_articles_item">Artículos técnicos</string>
     <string name="versions_item">Versiones</string>

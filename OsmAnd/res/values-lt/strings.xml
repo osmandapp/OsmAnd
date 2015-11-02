@@ -1990,9 +1990,9 @@
     <string name="plugins_menu_group">Įskiepiai</string>
     <string name="faq_item">DUK</string>
     <string name="search_on_the_map_item">Ieškoti žemėlapyje</string>
-    <string name="planning_trip_item">Kelionės planavimas</string>
+    
     <string name="trip_recording_tool_item">Kelionės įrašymo įrankis</string>
-    <string name="osmand_ski_maps_item">OsmAnd Slidinėjimo žemėlapiai</string>
+    
     <string name="osm_editing_item">OSM redagavimas</string>
     <string name="instalation_troubleshooting_item">Diegimas ir problemų sprendimas</string>
     <string name="versions_item">Versijos</string>
@@ -2008,7 +2008,7 @@
     <string name="features_menu_group">Galimybės</string>
     <string name="faq_item_description">Kaip naudotis įskiepiais</string>
     <string name="map_viewing_item">Žemėlapio peržiūra</string>
-    <string name="nautical_charts_item">Jūriniai žemėlapiai</string>
+    
     <string name="audio_video_note_item">Garso/vaizdo pastabos</string>
     <string name="techical_articles_item">Techniniai straipsniai</string>
     <string name="poll">apklausa</string>
