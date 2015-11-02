@@ -32,7 +32,7 @@
 	<string name="poi_baby_goods">Товары для детей</string>
 	<string name="poi_bag">Сумки, чемоданы</string>
 	<string name="poi_bathroom_furnishing">Сантехника, ванные</string>
-	<string name="poi_bed">Спальные принадлежности</string>
+	<string name="poi_bed">Магазин постельного белья</string>
 	<string name="poi_boutique">Бутик</string>
 	<string name="poi_carpet">Магазин ковров</string>
 	<string name="poi_charity">Благотворительный магазин</string>
@@ -848,11 +848,11 @@
 	<string name="poi_public_transport_stop_position">Остановка общественного транспорта</string>
 	<string name="poi_railway_buffer_stop">Железнодорожный буфер</string>
 	<string name="poi_junction">Перекрёсток</string>
-	<string name="poi_observation_tower">Смотровая башня</string>
+	<string name="poi_observation_tower">Наблюдательная башня</string>
 	<string name="poi_bell_tower">Колокольня</string>
-	<string name="poi_industrial">Промышленный район</string>
+	<string name="poi_industrial">Промышленная зона</string>
 	<string name="poi_allotments">Сады</string>
-	<string name="poi_farmyard">Сельскохозяйственный двор</string>
+	<string name="poi_farmyard">Фермерское хозяйство</string>
 	<string name="poi_meadow">Луг</string>
 	<string name="poi_landuse_railway">Территория железной дороги</string>
 	<string name="poi_basin">Искусственный водоём</string>
