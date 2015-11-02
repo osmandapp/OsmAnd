@@ -109,7 +109,7 @@
   <string name="use_short_object_names_descr">დათვალიერების რეჟიმში ობიექტების მოკლე დასახელებების გამოყენება</string>
   <string name="use_short_object_names">ობიექტების სახელების გამოყენება</string>
   <string name="accessibility_preferences_descr">წვდომადობის პარამეტრები</string>
-  <string name="accessibility_preferences">წვდომა</string>
+  <string name="shared_string_accessibility">წვდომა</string>
   <string name="rendering_out_of_memory">არასაკმარისი მეხსიერება არჩეული ადგილის საჩვენებლად</string>
   <string name="use_fluorescent_overlays">მანათობელი დაფარვები</string>
   <string name="use_fluorescent_overlays_descr">ბილიკებისა და გზების მანათობელი ფერებით ჩვენება</string>

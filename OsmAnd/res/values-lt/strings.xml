@@ -158,7 +158,7 @@
     <string name="use_short_object_names_descr">Rodyti trumpus objektų pavadinimus tyrinėjimo režime</string>
     <string name="use_short_object_names">Naudoti objektų pavadinimus</string>
     <string name="accessibility_preferences_descr">Su prieiga susiję nustatymai</string>
-    <string name="accessibility_preferences">Prieiga</string>
+    <string name="shared_string_accessibility">Prieiga</string>
     <string name="rendering_out_of_memory">Pasirinktos vietos atvaizdavimui nepakanka atminties</string>
     <string name="use_fluorescent_overlays">Fluorescentiniai viršutiniai sluoksniai</string>
     <string name="use_fluorescent_overlays_descr">Maršruto ir kelionės istorijos rodymui naudoti fluorescentines spalvas</string>

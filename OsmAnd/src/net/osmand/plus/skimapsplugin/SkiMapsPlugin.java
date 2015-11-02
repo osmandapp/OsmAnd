@@ -40,7 +40,7 @@ public class SkiMapsPlugin extends OsmandPlugin {
 
 
 	@Override
-	public String getHelpUrl() {
+	public String getHelpFileName() {
 		return "feature_articles/ski-plugin.html";
 	}
 

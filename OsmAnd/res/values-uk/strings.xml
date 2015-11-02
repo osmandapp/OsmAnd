@@ -130,7 +130,7 @@
   <string name="use_short_object_names_descr">Використовувати короткі назви для об’єктів при огляді мапи</string>
   <string name="use_short_object_names">Використовувати короткі назви для об’єктів</string>
   <string name="accessibility_preferences_descr">Налаштування для невізуального доступу</string>
-  <string name="accessibility_preferences">Спеціальні можливості</string>
+  <string name="shared_string_accessibility">Спеціальні можливості</string>
   <string name="rendering_out_of_memory">Недостатньо пам’яті для процесу показу мапи для виділеної ділянки</string>
   <string name="use_fluorescent_overlays">Флуоресцентні кольори</string>
   <string name="use_fluorescent_overlays_descr">Використовувати флуоресцентні кольори для відображення треків</string>

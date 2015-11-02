@@ -1,11 +1,15 @@
 package net.osmand.plus.dialogs.helpscreen;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -60,7 +64,7 @@ public class HelpScreenDialogFragment extends DialogFragment implements Expandab
 		MenuCategory.OTHER.initItems(createOtherItems());
 
 		ExpandableListView listView = (ExpandableListView) view.findViewById(android.R.id.list);
-		final HelpAdapter listAdapter = new HelpAdapter(getOsmandApplication());
+		final HelpAdapter listAdapter = new HelpAdapter(getActivity());
 		listView.setAdapter(listAdapter);
 		for (int i = 0; i < listAdapter.getGroupCount(); i++) {
 			listView.expandGroup(i);
@@ -76,8 +80,6 @@ public class HelpScreenDialogFragment extends DialogFragment implements Expandab
 	@Override
 	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition,
 								int childPosition, long id) {
-		LOG.debug("Chield=" + categories[groupPosition].getItem(childPosition) + "; clicker="
-				+ categories[groupPosition].getItem(childPosition).getOnClickListener());
 		if (categories[groupPosition] != MenuCategory.HELP_US_TO_IMPROVE &&
 				categories[groupPosition].getItem(childPosition).getOnClickListener() != null) {
 			LOG.debug("nice");
@@ -87,10 +89,12 @@ public class HelpScreenDialogFragment extends DialogFragment implements Expandab
 	}
 
 	public static class HelpAdapter extends OsmandBaseExpandableListAdapter {
-		private OsmandApplication ctx;
+		private final OsmandApplication ctx;
+		private final Activity activity;
 
-		public HelpAdapter(OsmandApplication ctx) {
-			this.ctx = ctx;
+		public HelpAdapter(Activity activity) {
+			this.ctx = (OsmandApplication) activity.getApplication();
+			this.activity = activity;
 		}
 
 		@Override
@@ -121,6 +125,18 @@ public class HelpScreenDialogFragment extends DialogFragment implements Expandab
 						ctx.getIconsCache().getContentIcon(R.drawable.ic_action_message);
 				contactUsButton.setCompoundDrawablesWithIntrinsicBounds(null, contactUsIcon, null,
 						null);
+				final String email = ctx.getString(R.string.support_email);
+				contactUsButton.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						Intent intent = new Intent(Intent.ACTION_SENDTO);
+						intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+						intent.putExtra(Intent.EXTRA_EMAIL, new String[]{email});
+						if (intent.resolveActivity(ctx.getPackageManager()) != null) {
+							activity.startActivity(intent);
+						}
+					}
+				});
 				return convertView;
 			} else {
 				final MyMenuItem child = getChild(groupPosition, childPosition);
@@ -262,26 +278,42 @@ public class HelpScreenDialogFragment extends DialogFragment implements Expandab
 
 	private List<MyMenuItem> createBeginWithOsmandItems() {
 		ArrayList<MyMenuItem> arrayList = new ArrayList<>();
+		ShowArticleOnTouchListener listener = null;
 		MyMenuItem.Builder builder = new MyMenuItem.Builder()
 				.setTitle(R.string.first_usage_item, getActivity())
-				.setDescription(R.string.first_usage_item_description, getActivity());
+				.setDescription(R.string.first_usage_item_description, getActivity())
+				.setListener(listener);
 		arrayList.add(builder.create());
+		listener = new ShowArticleOnTouchListener(
+				"feature_articles/navigation.html", getActivity());
 		builder = new MyMenuItem.Builder()
 				.setTitle(R.string.shared_string_navigation, getActivity())
-				.setDescription(R.string.navigation_item_description, getActivity());
+				.setDescription(R.string.navigation_item_description, getActivity())
+				.setListener(listener);
 		arrayList.add(builder.create());
+		listener = new ShowArticleOnTouchListener("feature_articles/faq.html", getActivity());
 		builder = new MyMenuItem.Builder()
 				.setTitle(R.string.faq_item, getActivity())
-				.setDescription(R.string.faq_item_description, getActivity());
+				.setDescription(R.string.faq_item_description, getActivity())
+				.setListener(listener);
 		arrayList.add(builder.create());
 		return arrayList;
 	}
 
 	private List<MyMenuItem> createFeaturesItems() {
 		ArrayList<MyMenuItem> arrayList = new ArrayList<>();
-		arrayList.add(new MyMenuItem(R.string.map_viewing_item, getActivity()));
-		arrayList.add(new MyMenuItem(R.string.search_on_the_map_item, getActivity()));
-		arrayList.add(new MyMenuItem(R.string.planning_trip_item, getActivity()));
+		String name = getActivity().getString(R.string.map_viewing_item);
+		ShowArticleOnTouchListener listener = new ShowArticleOnTouchListener(
+				"feature_articles/map-viewing.html", getActivity());
+		arrayList.add(new MyMenuItem(name, listener));
+		name = getActivity().getString(R.string.search_on_the_map_item);
+		listener = new ShowArticleOnTouchListener(
+				"feature_articles/find-something-on-map.html", getActivity());
+		arrayList.add(new MyMenuItem(name, listener));
+		name = getActivity().getString(R.string.planning_trip_item);
+		listener = new ShowArticleOnTouchListener(
+				"feature_articles/trip-planning.html", getActivity());
+		arrayList.add(new MyMenuItem(name, listener));
 		return arrayList;
 	}
 
@@ -292,46 +324,59 @@ public class HelpScreenDialogFragment extends DialogFragment implements Expandab
 			builder.reset();
 			builder.setTitle(osmandPlugin.getName())
 					.setIcon(osmandPlugin.getLogoResourceId());
-			if (osmandPlugin.getHelpUrl() != null) {
-				builder.setListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						HelpArticleDialogFragment.createInstance(osmandPlugin.getHelpUrl())
-								.show(getActivity().getSupportFragmentManager(), null);
-					}
-				});
+			final String helpFileName = osmandPlugin.getHelpFileName();
+			if (helpFileName != null) {
+				builder.setListener(new ShowArticleOnTouchListener(helpFileName, getActivity()));
 			}
 			arrayList.add(builder.create());
 		}
-//		.setListener(new View.OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//				HelpArticleDialogFragment.createInstance(
-//						"feature_articles/online-maps-plugin.html")
-//						.show(getActivity().getSupportFragmentManager(), null);
-//			}
-//		});
 		return arrayList;
 	}
 
 	private List<MyMenuItem> createOtherItems() {
 		ArrayList<MyMenuItem> arrayList = new ArrayList<>();
-		arrayList.add(new MyMenuItem(R.string.instalation_troubleshooting_item, getActivity()));
-		arrayList.add(new MyMenuItem(R.string.techical_articles_item, getActivity()));
-		arrayList.add(new MyMenuItem(R.string.versions_item, getActivity()));
+		String name = getActivity().getString(R.string.instalation_troubleshooting_item);
+		ShowArticleOnTouchListener listener = new ShowArticleOnTouchListener(
+				"feature_articles/installation-and-troubleshooting.html", getActivity());
+		arrayList.add(new MyMenuItem(name, listener));
+
+		name = getActivity().getString(R.string.techical_articles_item);
+		listener = null;
+		arrayList.add(new MyMenuItem(name, listener));
+		name = getActivity().getString(R.string.versions_item);
+		listener = new ShowArticleOnTouchListener(
+				"feature_articles/changes.html", getActivity());
+		arrayList.add(new MyMenuItem(name, listener));
 
 		String releasedate = "";
 		if (!this.getString(R.string.app_edition).equals("")) {
 			releasedate = this.getString(R.string.shared_string_release) + ": \t" + this.getString(R.string.app_edition);
 		}
-		String version = Version.getFullVersion(getOsmandApplication()) + "\n" + releasedate;
-//			+ "\n\n" + this.getString(R.string.about_content);
-
+		String version = Version.getFullVersion(getOsmandApplication()) + " " + releasedate;
+		listener = new ShowArticleOnTouchListener(
+				"feature_articles/changes-2.1.html", getActivity());
 		MyMenuItem.Builder builder = new MyMenuItem.Builder()
 				.setTitle(R.string.shared_string_about, getActivity())
-				.setDescription(version);
+				.setDescription(version)
+				.setListener(listener);
 
 		arrayList.add(builder.create());
 		return arrayList;
+	}
+
+	private static class ShowArticleOnTouchListener implements View.OnClickListener {
+		private final String filename;
+		private final FragmentActivity ctx;
+
+		private ShowArticleOnTouchListener(String filename, FragmentActivity ctx) {
+			this.filename = filename;
+			this.ctx = ctx;
+		}
+
+		@Override
+		public void onClick(View v) {
+			HelpArticleDialogFragment.createInstance(filename)
+					.show(ctx.getSupportFragmentManager(), null);
+		}
 	}
 }

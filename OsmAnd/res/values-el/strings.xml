@@ -255,7 +255,7 @@
 	<string name="use_short_object_names_descr">Χρήση μικρών ονομάτων αντικειμένων στη λειτουργία αφής εξερεύνησης</string>
 	<string name="use_short_object_names">Χρήση ονομάτων αντικειμένων</string>
 	<string name="accessibility_preferences_descr">Προτιμήσεις σχετικές με προσβασιμότητα</string>
-	<string name="accessibility_preferences">Προσβασιμότητα</string>
+	<string name="shared_string_accessibility">Προσβασιμότητα</string>
 	<string name="rendering_out_of_memory">Δεν υπάρχει αρκετή μνήμη για να εμφανιστεί η επιλεγμένη περιοχή</string>
 	<string name="use_fluorescent_overlays">Φωτεινές επικαλύψεις</string>
 	<string name="use_fluorescent_overlays_descr">Χρήση φωτεινών χρωμάτων για εμφάνιση ιχνών και διαδρομών</string>

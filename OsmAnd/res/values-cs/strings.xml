@@ -69,7 +69,7 @@
     <string name="use_short_object_names_descr">Použít krátká jména objektů</string>
     <string name="use_short_object_names">Krátká jména objektů</string>
     <string name="accessibility_preferences_descr">Konfigurace usnadnění pro uživatele s omezením zraku</string>
-    <string name="accessibility_preferences">Usnadnění</string>
+    <string name="shared_string_accessibility">Usnadnění</string>
     <string name="use_fluorescent_overlays">Fluorescentní barvy</string>
     <string name="use_fluorescent_overlays_descr">Použít fluorescentní barvy pro zobrazení cest a tras</string>
     <string name="offline_edition">Offline editace</string>

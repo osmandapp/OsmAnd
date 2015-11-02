@@ -163,6 +163,12 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	}
 
 	@Override
+	public String getHelpFileName() {
+		return "feature_articles/parking-plugin.html";
+	}
+
+
+	@Override
 	public void registerLayers(MapActivity activity) {
 		// remove old if existing after turn
 		if(parkingLayer != null) {

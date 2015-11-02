@@ -568,7 +568,7 @@
 	<string name="altitude">الارتفاع</string>
 	<string name="use_short_object_names">استخدام أسماء الكائنات</string>
 	<string name="accessibility_preferences_descr">التفضيلات المتعلقة بالإتاحة</string>
-	<string name="accessibility_preferences">الإتاحة</string>
+	<string name="shared_string_accessibility">الإتاحة</string>
 	<string name="rendering_out_of_memory">ذاكرة التشغيل غير كافية لعرض المنطقة المختارة</string>
 	<string name="offline_edition">التحرير دون اتصال</string>
 	<string name="offline_edition_descr">استخدام التحرير دون اتصال دائماً</string>

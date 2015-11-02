@@ -248,7 +248,7 @@
 	<string name="use_short_object_names_descr">Benutze kurze Objektnamen im Touch-Entdeckungsmodus</string>
 	<string name="use_short_object_names">Benutze Objektnamen</string>
 	<string name="accessibility_preferences_descr">Einstellungen zur Barrierefreiheit</string>
-	<string name="accessibility_preferences">Bedienungshilfen</string>
+	<string name="shared_string_accessibility">Bedienungshilfen</string>
 	<string name="rendering_out_of_memory">Zu wenig Prozess-Speicher zum Anzeigen des gewählten Gebietes</string>
 	<string name="use_fluorescent_overlays">Fluoreszierende Overlays</string>
 	<string name="use_fluorescent_overlays_descr">Fluoreszierende Anzeige von Tracks und Routen</string>

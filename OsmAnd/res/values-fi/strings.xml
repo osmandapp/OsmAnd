@@ -136,7 +136,7 @@
 	<string name="direction_style_clockwise">Myötäpäivään (12 sektoria)</string>
 	<string name="settings_direction_style">Suunnan tyyli</string>
 	<string name="i_am_here">Olen täällä</string>
-	<string name="accessibility_preferences">Esteettömyys</string>
+	<string name="shared_string_accessibility">Esteettömyys</string>
 	<string name="accessibility_preferences_descr">Esteettömyyteen liittyvät asetukset</string>
 	<string name="offline_edition">Yhteydetön editointi</string>
 	<string name="local_openstreetmap_uploading">Lähetetään…</string>

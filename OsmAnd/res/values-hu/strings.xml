@@ -67,7 +67,7 @@
     <string name="use_short_object_names_descr">Rövid objektumnevek használata felfedező módban</string>
     <string name="use_short_object_names">Objektumnevek használata</string>
     <string name="accessibility_preferences_descr">Akadálymentesítéssel kapcsolatos beállítások</string>
-    <string name="accessibility_preferences">Akadálymentesítés</string>
+    <string name="shared_string_accessibility">Akadálymentesítés</string>
     <string name="rendering_out_of_memory">Kevés a folyamatmemória a terület megjelenítéséhez</string>
     <string name="use_fluorescent_overlays">Fluoreszkáló színek</string>
     <string name="use_fluorescent_overlays_descr">Élénk színek használata az útvonalak megjelenítéséhez</string>

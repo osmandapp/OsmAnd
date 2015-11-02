@@ -852,7 +852,7 @@
 	<string name="show_current_gpx_title">Prikaži trenutni trag</string>
 	
 	<string name="offline_edition">Offline uređivanje</string>
-	<string name="accessibility_preferences">Pristupačnost</string>
+	<string name="shared_string_accessibility">Pristupačnost</string>
 	<string name="offline_edition_descr">Uvijek koristi offline uređivanje</string>
 	<string name="update_poi_does_not_change_indexes">POI promjene unutar aplikacije ne utječu na datoteke preuzete karte , promjene se pohranjuju u lokalnu datoteku.</string>
 	<string name="local_openstreetmap_delete">Izbriši promjene</string>

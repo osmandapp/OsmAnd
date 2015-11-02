@@ -553,7 +553,7 @@
   <string name="use_short_object_names_descr">Use nomes curtos de objetos em modo de exploração por toque</string>
   <string name="use_short_object_names">Usar nomes de objetos</string>
   <string name="accessibility_preferences_descr">Preferências relacionadas com a acessibilidade</string>
-  <string name="accessibility_preferences">Acessibilidade</string>
+  <string name="shared_string_accessibility">Acessibilidade</string>
   <string name="use_fluorescent_overlays">Sobreposições Fluorescentes</string>
   <string name="use_fluorescent_overlays_descr">Use cores fluorescentes para exibir faixas e rotas</string>
   <string name="offline_edition">Edição offline</string>

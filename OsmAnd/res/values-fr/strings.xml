@@ -769,7 +769,7 @@
     <string name="use_short_object_names_descr">Utiliser les noms d\'objets courts</string>
     <string name="use_short_object_names">Utiliser les noms d\'objets</string>
     <string name="accessibility_preferences_descr">Configurer les paramètres liés à l\'accessibilité</string>
-    <string name="accessibility_preferences">Accessibilité</string>
+    <string name="shared_string_accessibility">Accessibilité</string>
     <string name="use_fluorescent_overlays">Sur-couche fluorescente</string>
     <string name="use_fluorescent_overlays_descr">Utiliser les couleurs fluorescente pour les pistes et routes</string>
     <string name="favourites_edit_dialog_name">Nom</string>

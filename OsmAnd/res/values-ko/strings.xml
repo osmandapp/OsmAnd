@@ -46,7 +46,7 @@
 	<string name="use_short_object_names_descr">터치 탐색 모드에서 짧은 개체 이름을 사용합니다</string>
 	<string name="use_short_object_names">개체 이름 사용</string>
 	<string name="accessibility_preferences_descr">접근성(내게 필요한 옵션) 관련 선호도를 선택합니다</string>
-	<string name="accessibility_preferences">접근성</string>
+	<string name="shared_string_accessibility">접근성</string>
 	
 	<string name="rendering_out_of_memory">선택 영역을 표시할 충분한 프로세스 메모리가 없습니다</string>
 	<string name="use_fluorescent_overlays">형광색상 중첩(오버레이)</string>

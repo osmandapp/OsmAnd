@@ -133,7 +133,7 @@
 	<string name="plugin_ski_name">Vista invernal</string>
 	<string name="audionotes_plugin_name">Notas multimedia</string>
 	<string name="osmand_parking_plugin_name">Estacionamiento</string>
-	<string name="accessibility_preferences">Accesibilidad</string>
+	<string name="shared_string_accessibility">Accesibilidad</string>
 	<string name="osm_settings">Edición OSM</string>
 	<string name="debugging_and_development">Desarrollo de OsmAnd</string>
 	<string name="back_to_map">Volver al mapa</string>

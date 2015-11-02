@@ -778,7 +778,7 @@
     <string name="i_am_here">Deo so inoghe</string>
     <string name="use_short_object_names">Imprea sos nùmenes de sos ogetos</string>
     <string name="accessibility_preferences_descr">Preferèntzias ligadas a s’atzessibilidade</string>
-    <string name="accessibility_preferences">Atzessibilidade</string>
+    <string name="shared_string_accessibility">Atzessibilidade</string>
     <string name="local_openstreetmap_uploading">Carrigamentu …</string>
     <string name="local_openstreetmap_uploadall">Carriga totu</string>
 

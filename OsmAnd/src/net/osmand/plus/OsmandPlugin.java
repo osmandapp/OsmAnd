@@ -92,7 +92,7 @@ public abstract class OsmandPlugin {
 	public void disable(OsmandApplication app) {
 	}
 
-	public String getHelpUrl() {
+	public String getHelpFileName() {
 		return null;
 	}
 
