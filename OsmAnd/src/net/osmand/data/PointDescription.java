@@ -39,7 +39,8 @@ public class PointDescription {
 	public static final String POINT_TYPE_ALARM = "alarm";
 	public static final String POINT_TYPE_TARGET = "destination";
 	public static final String POINT_TYPE_OSM_BUG = "bug";
-	
+	public static final String POINT_TYPE_WORLD_REGION = "world_region";
+
 
 	public static final PointDescription LOCATION_POINT = new PointDescription(POINT_TYPE_LOCATION, "");
 

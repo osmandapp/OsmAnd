@@ -100,11 +100,6 @@ public class DownloadResourceGroup {
 		this.parentGroup = parentGroup;
 	}
 
-	public WorldRegion getIndexItemRegion(IndexItem item) {
-		DownloadResourceGroup group = getIndexItemGroup(item);
-		return getRegion(group);
-	}
-
 	public static WorldRegion getRegion(DownloadResourceGroup group) {
 		if (group != null) {
 			if (group.getRegion() != null) {
@@ -117,26 +112,6 @@ public class DownloadResourceGroup {
 		} else {
 			return null;
 		}
-	}
-
-	public DownloadResourceGroup getIndexItemGroup(IndexItem item) {
-		DownloadResourceGroup res = null;
-		for (DownloadResourceGroup group : getGroups()) {
-			if (group.getIndividualResources() != null) {
-				for (IndexItem i : group.getIndividualResources()) {
-					if (i == item) {
-						res = group;
-						break;
-					}
-				}
-			} else {
-				res = group.getIndexItemGroup(item);
-				if (res != null) {
-					break;
-				}
-			}
-		}
-		return res;
 	}
 
 	public void trimEmptyGroups() {
