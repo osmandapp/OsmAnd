@@ -1,4 +1,4 @@
-package net.osmand.plus.download.ui.popups;
+package net.osmand.plus.download.ui;
 
 import android.app.Activity;
 import android.app.Dialog;
