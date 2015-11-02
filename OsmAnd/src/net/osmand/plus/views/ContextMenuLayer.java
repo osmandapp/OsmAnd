@@ -39,6 +39,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	
 	public interface IContextMenuProviderSelection {
 
+		int getOrder(Object o);
 		void setSelectedObject(Object o);
 		void clearSelectedObject();
 	}
