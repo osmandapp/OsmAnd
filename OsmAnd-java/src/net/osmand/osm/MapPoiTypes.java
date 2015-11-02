@@ -168,7 +168,7 @@ public class MapPoiTypes {
 				addIf(tm, pt, matcher);
 			}
 			for (PoiType pt : pc.getPoiTypes()) {
-				if (pt.isReference() || pt.isNameOnly()) {
+				if (pt.isReference()){
 					continue;
 				}
 				addIf(tm, pt, matcher);
