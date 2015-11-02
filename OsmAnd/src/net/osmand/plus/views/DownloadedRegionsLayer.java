@@ -404,9 +404,24 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 	}
 
 	@Override
+	public int getOrder(Object o) {
+		if (o instanceof BinaryMapDataObject) {
+			String fullName = osmandRegions.getFullName((BinaryMapDataObject) o);
+			final WorldRegion region = osmandRegions.getRegionData(fullName);
+			if (region != null) {
+				return region.getLevel();
+			}
+		}
+		return 0;
+	}
+
+	@Override
 	public void setSelectedObject(Object o) {
 		if (o instanceof BinaryMapDataObject) {
 			List<BinaryMapDataObject> list = new LinkedList<>();
+			if (selectedObjects != null) {
+				list.addAll(selectedObjects);
+			}
 			list.add((BinaryMapDataObject) o);
 			selectedObjects = list;
 		}
