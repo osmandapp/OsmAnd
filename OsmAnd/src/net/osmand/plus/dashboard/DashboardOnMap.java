@@ -1,5 +1,34 @@
 package net.osmand.plus.dashboard;
 
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+
+import net.osmand.PlatformUtil;
+import net.osmand.data.LatLon;
+import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.ContextMenuAdapter.OnRowItemClick;
+import net.osmand.plus.IconsCache;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.IntermediatePointsDialog;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.dashboard.tools.DashFragmentData;
+import net.osmand.plus.dashboard.tools.DashboardSettingsDialogFragment;
+import net.osmand.plus.dashboard.tools.TransactionBuilder;
+import net.osmand.plus.dialogs.ConfigureMapMenu;
+import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.helpers.WaypointDialogHelper;
+import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
+import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.views.DownloadedRegionsLayer;
+import net.osmand.plus.views.OsmandMapTileView;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -31,36 +60,6 @@ import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
 import com.github.ksoichiro.android.observablescrollview.ScrollState;
 
-import net.osmand.PlatformUtil;
-import net.osmand.data.LatLon;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
-import net.osmand.plus.ContextMenuAdapter.OnRowItemClick;
-import net.osmand.plus.IconsCache;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.IntermediatePointsDialog;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.dashboard.tools.DashFragmentData;
-import net.osmand.plus.dashboard.tools.DashboardSettingsDialogFragment;
-import net.osmand.plus.dashboard.tools.TransactionBuilder;
-import net.osmand.plus.dialogs.ConfigureMapMenu;
-import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.WaypointDialogHelper;
-import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
-import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.views.DownloadedRegionsLayer;
-import net.osmand.plus.views.OsmandMapTileView;
-
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-
 /**
  */
 public class DashboardOnMap implements ObservableScrollViewCallbacks {
@@ -73,14 +72,10 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 
 	private static final DashFragmentData.ShouldShowFunction rateUsShouldShow = new DashRateUsFragment.RateUsShouldShow();
 	private static final DashFragmentData.ShouldShowFunction errorShouldShow = new ErrorShouldShow();
-	private static final DashFragmentData.ShouldShowFunction chooseAppDirShouldShow = new ChooseAppDirShouldShow();
 
 	private final DashFragmentData[] fragmentsData = new DashFragmentData[]{
 			new DashFragmentData(DashRateUsFragment.TAG, DashRateUsFragment.class,
 					rateUsShouldShow, 0, null),
-			DashFirstTimeFragment.FRAGMENT_DATA,
-			new DashFragmentData(DashChooseAppDirFragment.TAG, DashChooseAppDirFragment.class,
-					chooseAppDirShouldShow, 20, null),
 			new DashFragmentData(DashErrorFragment.TAG, DashErrorFragment.class,
 					errorShouldShow, 30, null),
 			new DashFragmentData(DashNavigationFragment.TAG, DashNavigationFragment.class,
@@ -930,19 +925,10 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 		return list;
 	}
 
-	public static class SettingsShouldShow extends DashFragmentData.ShouldShowFunction {
-		@Override
+	public static class DefaultShouldShow extends DashFragmentData.ShouldShowFunction {
+		
 		public boolean shouldShow(OsmandSettings settings, MapActivity activity, String tag) {
-			return settings.registerBooleanPreference(SHOULD_SHOW + tag, true)
-					.makeGlobal().get();
-		}
-	}
-
-	public static class DefaultShouldShow extends SettingsShouldShow {
-		@Override
-		public boolean shouldShow(OsmandSettings settings, MapActivity activity, String tag) {
-			return !activity.getMyApplication().getAppInitializer().isFirstTime(activity)
-					&& super.shouldShow(settings, activity, tag);
+			return settings.registerBooleanPreference(SHOULD_SHOW + tag, true).makeGlobal().get();
 		}
 	}
 
@@ -955,13 +941,5 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 		}
 	}
 
-	private static class ChooseAppDirShouldShow extends SettingsShouldShow {
-		public boolean shouldShow(OsmandSettings settings, MapActivity activity, String tag) {
-			if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
-				return false;
-			}
-			return !settings.isExternalStorageDirectorySpecifiedV19()
-					&& super.shouldShow(settings, activity, tag);
-		}
-	}
+	
 }
