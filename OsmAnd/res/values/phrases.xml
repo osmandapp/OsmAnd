@@ -2362,7 +2362,7 @@
 	<string name="poi_cross">Cross</string>
 	<string name="poi_summit_cross">Summit cross: yes</string>
 
-	<string name="poi_prison_camp">Prison camp</string>
+	<string name="poi_prison_camp">Former prison camp</string>
 	<string name="poi_concentration_camp">Type: concentration camp</string>
 	<string name="poi_pow_camp">Type: pow camp</string>
 	<string name="poi_labor_camp">Type: labor camp</string>
