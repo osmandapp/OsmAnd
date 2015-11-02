@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
     <string name="av_def_action_audio">Optag audio</string>
@@ -1992,7 +1991,7 @@
     <string name="simulate_initial_startup">Simuler første programstart</string>
     <string name="share_menu_location">Del placering</string>
     <string name="shared_string_send">Send</string>
-    <string name="hello_blank_fragment">Hej tomme fragment</string>
+    
 <string name="application_dir_description">Vælg hvor kortfilerne skal gemmes.</string>
 <string name="show_on_start_description">\'Fra\' starter direkte på kortet</string>
 <string name="map_downloaded">Kort hentet</string>

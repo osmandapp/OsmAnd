@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="rendering_attr_hideHouseNumbers_name">Ocultar números de casa</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="rendering_attr_hideHouseNumbers_name">Ocultar números de casa</string>
     <string name="copying_osmand_file_failed">Falló al copiar archivos</string>    
     <string name="storage_directory_external">Almacenamiento externo</string>
     <string name="storage_directory_multiuser">Almacenamiento multiusuario</string>
@@ -1984,7 +1983,7 @@
     <string name="share_menu_location">Compartir ubicación</string>
     <string name="shared_string_send">Enviar</string>
     <string name="application_dir_description">Elija donde guardar los archivos de los mapas.</string>
-<string name="hello_blank_fragment">Hola fragmento vacío</string>
+
     <string name="show_on_start_description">\'No\', inicia directamente la pantalla del mapa</string>
 <string name="map_downloaded">Mapa descargado</string>
     <string name="map_downloaded_descr">Se descargó el mapa de %1$s. Vuelve al mapa para empezar a usarlo.</string>

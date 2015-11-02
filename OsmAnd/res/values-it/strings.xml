@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
   <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per visualizzare tracce e percorsi</string>
   <string name="offline_edition">Modifiche offline</string>
   <string name="offline_edition_descr">Usa sempre la modifica offline</string>
@@ -2033,7 +2032,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="simulate_initial_startup_descr">Imposta l\'indicatore del primo avvio dell\'app, mantiene tutte le altre impostazioni inalterate</string>
     <string name="simulate_initial_startup">Simula il primo avvio dell\'app</string>
     <string name="share_menu_location">Condividi la posizione</string>
-    <string name="hello_blank_fragment">Pulisci il segmento</string>
+    
 <string name="application_dir_description">Scegli dove vuoi salvare i file delle mappe.</string>
 <string name="osm_edit_created_poi">POI OSM creato</string>
     <string name="osm_edit_created_bug">Errore OSM creato</string>

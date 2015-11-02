@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="switch_to_raster_map_to_see">Vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v Nastaveních (Spravovat mapové soubory), nebo se přepněte na online mapy.</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="switch_to_raster_map_to_see">Vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v Nastaveních (Spravovat mapové soubory), nebo se přepněte na online mapy.</string>
   
   <string name="send_files_to_osm">Nahrát GPX soubory do OSM?</string>
   <string name="gpx_visibility_txt">Viditelnost</string>
@@ -1993,7 +1992,7 @@
     <string name="go_to_map">Přejít na mapu</string>
     <string name="show_free_version_banner">Zobrazit banner volné verze</string>
     <string name="show_free_version_banner_description">I když používáte placenou verzi, můžete vidět banner volné verze</string>
-    <string name="hello_blank_fragment">Prázdný fragment</string>
+    
     <string name="enter_country_name">Vložte název země</string>
     <string name="new_version">Nová verze</string>
     <string name="begin_with_osmand_menu_group">První kroky s OsmAnd</string>

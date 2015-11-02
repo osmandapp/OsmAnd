@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="offline_edition">Modifications hors-ligne</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="offline_edition">Modifications hors-ligne</string>
   <string name="offline_edition_descr">Toujours utiliser l\'édition hors-ligne</string>
   
   <string name="update_poi_does_not_change_indexes">Les modifications de PI dans l\'application sont sans effet sur les cartes téléchargées, les modifications sont enregistrées dans un fichier.</string>
@@ -2069,7 +2068,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="application_dir_description">Sélectionnez l\'emplacement pour enregistrer les cartes.</string>
 <string name="simulate_initial_startup">Simuler un premier démarrage</string>
     <string name="simulate_initial_startup_descr">Efface le compteur de démarrages afin de simuler un premier démarrage (conserve tous les autres paramètres)</string>
-    <string name="hello_blank_fragment">Hello fragment vide</string>
+    
     <string name="show_on_start_description">Si inactif démarre l\'application en mode carte</string>
 <string name="map_downloaded">Carte téléchargée</string>
     <string name="go_to_map">Aller à la carte</string>

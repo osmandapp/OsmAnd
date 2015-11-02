@@ -2030,8 +2030,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="free_downloads_used">Free downloads used</string>
     <string name="free_downloads_used_description">You can set how many free downloads you have used</string>
 
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="application_dir_description">Choose where you want to save map files.</string>
     <string name="show_on_start_description">\'Off\' directly launches map screen</string>
     <string name="enter_country_name">Enter country name</string>

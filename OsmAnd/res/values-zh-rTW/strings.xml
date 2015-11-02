@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
 	<string name="rendering_attr_roadColors_name">道路的色彩調配</string>
     <string name="map_widget_show_destination_arrow">顯示目的地方向</string>
     <string name="enable_plugin_monitoring_services">啟用旅程錄製外掛元件，以使用位置日誌服務(GPX 記錄，線上追蹤)</string>
@@ -1966,7 +1965,7 @@
     <string name="share_geo">地理：</string>
     <string name="share_menu_location">分享位置</string>
     <string name="shared_string_send">發送</string>
-    <string name="hello_blank_fragment">哈囉，成空的片段</string>
+    
 <string name="application_dir_description">選擇您想要在何處儲存地圖檔案。</string>
 <string name="show_on_start_description">\'關閉\' 直接啟動地圖螢幕</string>
 <string name="map_downloaded">地圖已下載</string>

@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="recording_context_menu_show">Zobraziť</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="recording_context_menu_show">Zobraziť</string>
   <string name="recording_photo_description">Fotografia %1$s %2$s</string>
   <string name="av_def_action_picture">Zachytiť fotografiu</string>
   <string name="recording_context_menu_precord">Zachytiť fotografiu</string>
@@ -2144,7 +2143,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="share_geo">geo:</string>
     <string name="share_menu_location">Zdieľať polohu</string>
     <string name="shared_string_send">Odoslať</string>
-    <string name="hello_blank_fragment">Prázdny fragment</string>
+    
     <string name="application_dir_description">Zvoľte kam chcete uložiť súbory máp.</string>
 <string name="osm_edit_created_poi">Vytvorený OSM POI</string>
     <string name="osm_edit_created_bug">Vytvorená OSM chyba</string>

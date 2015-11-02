@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="search_button">Poišči</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="search_button">Poišči</string>
 	<string name="search_activity">Iskanje podatkov</string>
 	
 	
@@ -2003,5 +2002,5 @@
     <string name="enter_country_name">Vpis imena države</string>
     <string name="contour_lines_and_hillshade_maps_item">Izohipse in senčenje zemljevida</string>
     <string name="trip_recording_tool_item">Orodje za beleženje poti</string>
-    <string name="hello_blank_fragment">Prazno polje</string>
+    
     </resources>
