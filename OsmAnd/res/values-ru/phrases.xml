@@ -454,7 +454,7 @@
 	<string name="poi_attraction">Достопримечательность</string>
 	<string name="poi_memorial">Памятник, мемориал</string>
 	<string name="poi_artwork">Произведение искусства</string>
-	<string name="poi_archaeological_site">Раскопки</string>
+	<string name="poi_archaeological_site">Археологические раскопки</string>
 	<string name="poi_battlefield">Поле битвы</string>
 	<string name="poi_boundary_stone">Межевой камень</string>
 	<string name="poi_castle">Замок</string>
@@ -2358,7 +2358,7 @@
 	<string name="poi_cross">Крест</string>
 	<string name="poi_summit_cross">Крест на вершине: есть</string>
 
-	<string name="poi_prison_camp">Бывший лагерь военнопленных</string>
+	<string name="poi_prison_camp">Бывший тюремный лагерь</string>
 	<string name="poi_concentration_camp">Тип: концентрационный лагерь</string>
 	<string name="poi_pow_camp">Тип: для военнопленных</string>
 	<string name="poi_labor_camp">Тип: исправительно-трудовой</string>
