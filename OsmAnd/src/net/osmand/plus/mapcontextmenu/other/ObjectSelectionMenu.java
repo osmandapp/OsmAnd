@@ -155,13 +155,13 @@ public class ObjectSelectionMenu extends BaseMenuController {
 	}
 
 	public void onDismiss() {
-		clearSelectedObjects();
 	}
 
 	public void openContextMenu(MenuObject menuObject) {
 		if (selectedObjects.containsKey(menuObject.getObject())) {
 			selectedObjects.remove(menuObject.getObject());
 		}
+		clearSelectedObjects();
 		hide(getMapActivity());
 		getMapActivity().getContextMenu()
 				.show(menuObject.getLatLon(), menuObject.getPointDescription(), menuObject.getObject());

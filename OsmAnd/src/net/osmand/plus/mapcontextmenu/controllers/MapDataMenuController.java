@@ -2,26 +2,27 @@ package net.osmand.plus.mapcontextmenu.controllers;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 
+import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.download.DownloadResourceGroup;
-import net.osmand.plus.download.DownloadResources;
-import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 
-public class WorldRegionMenuController extends MenuController {
+public class MapDataMenuController extends MenuController {
 	private WorldRegion region;
 
-	public WorldRegionMenuController(OsmandApplication app, MapActivity mapActivity, final WorldRegion region) {
+	public MapDataMenuController(OsmandApplication app, MapActivity mapActivity, final BinaryMapDataObject dataObject) {
 		super(new MenuBuilder(app), mapActivity);
+		OsmandRegions osmandRegions = app.getRegions();
+		String fullName = osmandRegions.getFullName(dataObject);
+		final WorldRegion region = osmandRegions.getRegionData(fullName);
 		this.region = region;
 		titleButtonController = new TitleButtonController() {
 			@Override
