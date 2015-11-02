@@ -2422,4 +2422,7 @@
 	<string name="poi_bathing_yes">Badning: ja</string>
 	<string name="poi_bathing_no">Badning: nej</string>
 
+<string name="poi_wiki_link">Wiki</string>
+
+
 </resources>
