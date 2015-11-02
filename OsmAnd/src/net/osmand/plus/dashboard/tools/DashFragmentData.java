@@ -14,8 +14,7 @@ public final class DashFragmentData implements Comparable<DashFragmentData> {
 	public final String rowNumberTag;
 
 	public DashFragmentData(String tag, Class<? extends DashBaseFragment> fragmentClass,
-							ShouldShowFunction shouldShowFunction,
-							int position, String rowNumberTag) {
+			ShouldShowFunction shouldShowFunction, int position, String rowNumberTag) {
 		this.tag = tag;
 		this.fragmentClass = fragmentClass;
 		this.shouldShowFunction = shouldShowFunction;
@@ -31,11 +30,14 @@ public final class DashFragmentData implements Comparable<DashFragmentData> {
 	public boolean hasRows() {
 		return rowNumberTag != null;
 	}
+
 	public boolean canBeDisabled() {
 		return shouldShowFunction.getTitleId() != -1;
 	}
+
 	public static abstract class ShouldShowFunction {
 		public abstract boolean shouldShow(OsmandSettings settings, MapActivity activity, String tag);
+
 		public int getTitleId() {
 			return -1;
 		}

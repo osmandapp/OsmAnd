@@ -162,7 +162,8 @@ public class BinaryMapIndexReader {
 			switch (tag) {
 			case 0:
 				if(!initCorrectly){
-					throw new IOException("Corrupted file. It should be ended as it starts with version"); //$NON-NLS-1$
+					//throw new IOException("Corrupted file. It should be ended as it starts with version"); //$NON-NLS-1$
+					throw new IOException("Corrupt file, it should have ended as it starts with version: " + file.getName()); //$NON-NLS-1$
 				}
 				return;
 			case OsmandOdb.OsmAndStructure.VERSION_FIELD_NUMBER :

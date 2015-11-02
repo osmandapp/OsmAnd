@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
   
   <string name="use_transparent_map_theme">Przezroczysty styl</string>
   <string name="native_library_not_supported">To urządzenie nie obsługuje biblioteki renderowania natywnego.</string>
@@ -246,12 +245,12 @@
   <string name="gps_status_app_not_found">Nie zainstalowano aplikacji GPS status. Wyszukać ją w Market?</string>
   <string name="voice_is_not_available_msg">Nawigacja głosowa jest niedostępna. Proszę przejść do „Ustawienia”→„Ogólne”→„Głos komunikatów”, wybrać zestaw komunikatów głosowych i zainstalować go.</string>
   <string name="voice_is_not_available_title">Nie wybrano nawigacji głosowej</string>
-  <string name="daynight_mode_day">Dzień</string>
-  <string name="daynight_mode_night">Noc</string>
+  <string name="daynight_mode_day">Dzienny</string>
+  <string name="daynight_mode_night">Nocny</string>
   <string name="daynight_mode_auto">Wschód/zachód Słońca</string>
   <string name="daynight_mode_sensor">Czujnik światła</string>
   <string name="daynight_descr">Zdefiniuj kryterium przełączania trybu dzień/noc</string>
-  <string name="daynight">Tryb dzień/noc</string>
+  <string name="daynight">Tryb dzienny/nocny</string>
   <string name="download_files_question">Pobrać {0} plik(ów) ({1} MB)?</string>
   <string name="items_were_selected">{0} element(ów) zaznaczono</string>
   <string name="filter_existing_indexes">Pobrane</string>
@@ -261,13 +260,13 @@
   <string name="general_settings_descr">Konfiguruje wyświetlanie i ogólne ustawienia programu</string>
   <string name="general_settings">Główne</string>
   <string name="index_settings_descr">Pobiera i zarządza plikami map przechowywanymi na urządzeniu</string>
-  <string name="index_settings">Zarządzanie plikami map</string>
+  <string name="index_settings">Zarządzaj mapami</string>
   <string name="osmand_service">Tryb działania w tle</string>
   <string name="osmand_service_descr">Działanie aplikacji, gdy ekran jest wygaszony</string>
   <string name="fast_route_mode">Najszybsza trasa</string>
   <string name="fast_route_mode_descr">"Wyznacza najszybszą trasę zamiast najkrótszej "</string>
   <string name="tiles_to_download_estimated_size">Na poziomie {0} pobrano {1} kafelków ({2} MB)</string>
-  <string name="shared_string_download_map">Pobierz mapę</string>
+  <string name="shared_string_download_map">Pobieranie mapy</string>
   <string name="select_max_zoom_preload_area">Wybierz maksymalne przybliżenie do pobrania</string>
   <string name="maps_could_not_be_downloaded">Nie udało się pobrać tej mapy</string>
   <string name="continuous_rendering">Rysowanie ciągłe</string>
@@ -918,7 +917,7 @@
 <string name="snap_to_road">Przyciąganie do drogi</string>
 
 <string name="day_night_info">Informacja o dniu/nocy</string>
-<string name="map_widget_day_night">Mapa dzień/noc</string>
+<string name="map_widget_day_night">Tryb dzienny/nocny</string>
 <string name="map_widget_vector_attributes">Atrybuty renderowania</string>
 <string name="show_lanes">Pasy ruchu</string>
 
@@ -1001,7 +1000,7 @@
     <string name="download_srtm_maps">Poziomice</string>
     <string name="download_select_map_types">Inne mapy</string>
     <string name="srtm_plugin_name">Poziomice</string>
-    <string name="srtm_plugin_description">"Dostarcza poziomice i cieniowanie wzgórz wyświetlane na mapach offline w OsmAnd. Funkcja przydatna dla sportowców, turystów i osób zainteresowanych strukturą reliefową krajobrazu.\n\nŚwiatowe dane (między 70 stopniem szerokości północnej a 70 stopniem szerokości południowej) opierają się na pomiarach SRTM (Shuttle Radar Topography Mission) i ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), przyrządu na pokładzie Terra, flagowego satelity Systemu Obserwacji Ziemi NASA. ASTER jest wspólnym przedsięwzięciem NASA, japońskiego Ministerstwa Gospodarki, Handlu i Przemysłu (METI) i Japońskich Systemów Kosmicznych (J-spacesystems). "</string>
+    <string name="srtm_plugin_description">"Dostarcza warstwy poziomic i cieniowania rzeźby terenu wyświetlane na standardowych mapach OsmAnd. Funkcja przydatna dla sportowców, turystów i osób zainteresowanych strukturą reliefową krajobrazu.\n\nŚwiatowe dane (między 70 stopniem szerokości północnej a 70 stopniem szerokości południowej) opierają się na pomiarach SRTM (Shuttle Radar Topography Mission) i ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), przyrządu na pokładzie Terra, flagowego satelity Systemu Obserwacji Ziemi NASA. ASTER jest wspólnym przedsięwzięciem NASA, japońskiego Ministerstwa Gospodarki, Handlu i Przemysłu (METI) i Japońskich Systemów Kosmicznych (J-spacesystems). "</string>
     <string name="index_srtm_ele">Poziomice</string>
     <string name="index_srtm_parts">części</string>
     
@@ -1051,7 +1050,7 @@
     <string name="srtm_paid_version_title">Wtyczka poziomic</string>
     <string name="recording_context_menu_arecord">Nagraj notatkę audio</string>
     <string name="recording_context_menu_vrecord">Nagraj notatkę wideo</string>
-    <string name="osmand_srtm_long_description_1000_chars">"Dostarcza poziomice i cieniowanie wzgórz wyświetlane na mapach offline w OsmAnd. Funkcja przydatna dla sportowców, turystów i osób zainteresowanych strukturą reliefową krajobrazu.\n\nŚwiatowe dane (między 70 stopniem szerokości północnej a 70 stopniem szerokości południowej) opierają się na pomiarach SRTM (Shuttle Radar Topography Mission) i ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), przyrządu na pokładzie Terra, flagowego satelity Systemu Obserwacji Ziemi NASA. ASTER jest wspólnym przedsięwzięciem NASA, japońskiego Ministerstwa Gospodarki, Handlu i Przemysłu (METI) i Japońskich Systemów Kosmicznych (J-spacesystems). "</string>
+    <string name="osmand_srtm_long_description_1000_chars">"Dostarcza warstwy poziomic i cieniowania rzeźby terenu wyświetlane na standardowych mapach OsmAnd. Funkcja przydatna dla sportowców, turystów i osób zainteresowanych strukturą reliefową krajobrazu.\n\nŚwiatowe dane (między 70 stopniem szerokości północnej a 70 stopniem szerokości południowej) opierają się na pomiarach SRTM (Shuttle Radar Topography Mission) i ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), przyrządu na pokładzie Terra, flagowego satelity Systemu Obserwacji Ziemi NASA. ASTER jest wspólnym przedsięwzięciem NASA, japońskiego Ministerstwa Gospodarki, Handlu i Przemysłu (METI) i Japońskich Systemów Kosmicznych (J-spacesystems). "</string>
     <string name="recording_context_menu_show">Wyświetlanie</string>
     <string name="recording_photo_description">Zdjęcie %1$s %2$s</string>
     <string name="av_def_action_picture">Zrób zdjęcie</string>
@@ -1064,7 +1063,7 @@
     
     <string name="support_new_features_descr">Wesprzyj prace nad nowymi funkcjami przez przekazanie darowizny</string>
 	
-    <string name="download_hillshade_maps">Warstwy cieniujące</string>
+    <string name="download_hillshade_maps">Cieniowanie rzeźby terenu</string>
     
     <string name="av_use_external_camera_descr">Użyj aplikacji systemowej do robienia zdjęć</string>
     <string name="av_use_external_camera">Użyj aplikacji aparatu</string>
@@ -1359,7 +1358,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	
     
     
-    <string name="map_magnifier">Lupa mapy</string>
+    <string name="map_magnifier">Przybliżenie</string>
     
     
     <string name="route_is_too_long">Obliczanie trasy offline może zająć dłuższą chwilę (lub czasami nie działać) dla punktów, które dzieli więcej niż 200km. Można spróbować dodać punkty pośrednie w celu zwiększenia wydajności.</string>
@@ -1369,7 +1368,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="auto_zoom_farthest">Widok szeroki</string>
 	<string name="shared_string_and">i</string>
     <string name="shared_string_or">lub</string>
-	<string name="shared_string_remember_my_choice">Zapamiętaj mój wybór</string>
+	<string name="shared_string_remember_my_choice">Zapamiętanie wyboru</string>
     
     <string name="animate_routing_route_not_calculated">Proszę najpierw przeliczyć trasę</string>
     <string name="animate_routing_route">Pokaż używając obliczonej trasy </string>
@@ -1408,14 +1407,14 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="routing_attr_prefer_motorway_name">Preferowanie autostrad</string>
 	<string name="routing_attr_prefer_motorway_description">Preferowanie autostrad</string>
 	<string name="routing_attr_short_way_name">Najkrótsza droga</string>
-	<string name="routing_attr_short_way_description">Używaj najkrótszej drogi</string>
-	<string name="routing_attr_avoid_toll_name">Unikaj dróg płatnych</string>
-	<string name="routing_attr_avoid_toll_description">Unikaj płatnych dróg</string>
-	<string name="routing_attr_avoid_unpaved_name">Unikaj nieutwardzonych dróg</string>
+	<string name="routing_attr_short_way_description">Używa najkrótszej drogi</string>
+	<string name="routing_attr_avoid_toll_name">Unikanie płatnych dróg</string>
+	<string name="routing_attr_avoid_toll_description">Unikanie płatnych dróg</string>
+	<string name="routing_attr_avoid_unpaved_name">Unikanie nieutwardzonych dróg</string>
 	<string name="routing_attr_avoid_unpaved_description">Unikanie nieutwardzonych dróg</string>
-	<string name="routing_attr_avoid_ferries_name">Unikaj przepraw promowych</string>
+	<string name="routing_attr_avoid_ferries_name">Unikanie przepraw promowych</string>
 	<string name="routing_attr_avoid_ferries_description">Unikanie przepraw promowych</string>
-	<string name="routing_attr_avoid_motorway_name">Unikaj autostrad</string>
+	<string name="routing_attr_avoid_motorway_name">Unikanie autostrad</string>
 	<string name="routing_attr_avoid_motorway_description">Unikanie autostrad</string>
 	<string name="routing_attr_weight_name">Limit wagi</string>
 	<string name="routing_attr_weight_description">Określa maksymalną, dozwoloną masę pojazdu</string>
@@ -1430,7 +1429,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="use_displayed_track_for_navigation">Wykorzystać wyświetlaną trasę do nawigacji?</string>
     
     <string name="calculate_osmand_route_without_internet">Wyznacz segment trasy OsmAnd offline</string>
-    <string name="gpx_option_calculate_first_last_segment">Przelicz trasę według OsmAnd dla pierwszego i ostatniego segmentu trasy</string>
+    <string name="gpx_option_calculate_first_last_segment">Wyznacza trasę usługi OsmAnd dla pierwszego i ostatniego segmentu</string>
     <string name="lang_en">Angielski</string>
 	<string name="lang_af">Afrykański</string>
 	<string name="lang_hy">Armeński</string>
@@ -1592,7 +1591,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     
     <string name="shared_string_my_tracks">Moje trasy</string>
     <string name="shared_string_my_favorites">Moje ulubione</string>
-    <string name="shared_string_my_places">Moje miejsca</string>
+    <string name="shared_string_my_places">Miejsca</string>
     
     <string name="gpx_info_subtracks">"Ślady podrzędne: %1$s "</string>
 	<string name="gpx_info_waypoints">Punkty trasy: %1$s </string>
@@ -1760,7 +1759,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="map_widget_top">Pasek stanu</string>
 	<string name="map_widget_right">Prawy panel</string>
 	<string name="map_widget_left">Lewy panel</string>
-    <string name="shared_string_show">Wyświetl</string>
+    <string name="shared_string_show">Wyświetlanie</string>
 	<string name="configure_map">Skonfiguruj mapę</string>
     <string name="search_radius_proximity">W odległości</string>
     <string name="wake_on_voice">Włączanie ekranu</string>
@@ -1942,12 +1941,12 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="search_poi_category_hint">Wprowadź tekst, aby wyszukać dane</string>
     <string name="rendering_attr_hideHouseNumbers_name">Ukrywanie numerów budynków</string>
     <string name="storage_directory_multiuser">Pamięć użytkownika</string>
-    <string name="routing_attr_avoid_borders_name">Unikaj przekraczania granicy</string>
+    <string name="routing_attr_avoid_borders_name">Unikanie przekraczania granicy</string>
 	<string name="routing_attr_avoid_borders_description">Unika przekraczania granicy z innym państwem</string>
 	<string name="routing_attr_height_name">Limit wysokości</string>
 	<string name="routing_attr_height_description">Określa maksymalną, dozwoloną wysokość pojazdu</string>
     <string name="use_fast_recalculation">Inteligentne przeliczanie trasy</string>
-	<string name="use_fast_recalculation_desc">Przelicz tylko początkową część trasy dla długich podróży</string>
+	<string name="use_fast_recalculation_desc">Wyznacza ponownie tylko początkową część trasy dla długich podróży</string>
 <string name="shared_string_logoff">Wyloguj się</string>
     <string name="osmo_share_my_location">Udostępniaj moją lokalizację</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Kolorowanie wg zasad OSMC</string>
@@ -2067,7 +2066,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="saved_at_time">Zapisano o: %1$s</string>
 	<string name="poi_deleted_localy">POI zostanie usunięty gdy tylko wyślesz swoje zmiany</string>
 	<string name="show_gpx">Pokaż GPX</string>
-<string name="show_on_start">Wyświetlaj przy starcie</string>
+<string name="show_on_start">Wyświetlanie podczas uruchamiania</string>
 	<string name="count_of_lines">Liczba linii</string>
 <string name="address_unknown">Adres nie jest jeszcze znany</string>
     <string name="unsaved_changes_will_be_lost">Wszelkie niezapisane zmiany zostaną utracone. Kontynuować?</string>
@@ -2078,16 +2077,16 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="favourites_context_menu_add">Dodaj do ulubionych</string>
 	<string name="roads">Drogi</string>
 <string name="favorite_category_add_new">Dodaj nową</string>
-    <string name="favorite_category_select">Wybierz kategorię</string>
-    <string name="default_speed_system_descr">Zdefiniuj system miar prędkości</string>
-    <string name="default_speed_system">System pomiaru prędkości</string>
+    <string name="favorite_category_select">Proszę wybrać kategorię</string>
+    <string name="default_speed_system_descr">Definiuje jednostki pomiaru prędkości</string>
+    <string name="default_speed_system">Pomiar prędkości</string>
     <string name="si_nm">Mile morskie</string>
     <string name="nm">nm</string>
-    <string name="si_kmh">Kilometrów na godzinę</string>
-    <string name="si_mph">Mil na godzinę</string>
-    <string name="si_m_s">Metrów na sekundę</string>
-    <string name="si_min_km">Minut na kilometr</string>
-    <string name="si_min_m">Minut na milę</string>
+    <string name="si_kmh">Kilometry na godzinę</string>
+    <string name="si_mph">Mile na godzinę</string>
+    <string name="si_m_s">Metry na sekundę</string>
+    <string name="si_min_km">Minuty na kilometr</string>
+    <string name="si_min_m">Minuty na milę</string>
     <string name="si_nm_h">Mile morskie na godzinę (węzły)</string>
     <string name="nm_h">nmh</string>
     <string name="min_mile">min/m</string>
@@ -2100,7 +2099,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	
 <string name="regions">Regiony</string>
     
-    <string name="region_maps">Mapy regionów</string>
+    <string name="region_maps">Mapy regionu</string>
     <string name="world_maps">Mapy świata</string>
     
     <string name="hillshade_layer_disabled">Wyłączona warstwa cieniowania wzgórz</string>
@@ -2126,5 +2125,10 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="application_dir_description">Proszę wybrać położenie zapisywania plików map.</string>
 <string name="value_downloaded_from_max">%1$.1f z %2$.1f MB</string>
     <string name="shared_string_qr_code">Kod QR</string>
-    <string name="enter_country_name">Wpisz nazwę kraju</string>
-</resources>
+    <string name="enter_country_name">Proszę wybrać kraj</string>
+<string name="map_downloaded_descr">Pobrano mapę regionu %1$s. Proszę powrócić do mapy, aby rozpocząć jej używanie.</string>
+    <string name="world_map_download_descr">Brak podstawowej mapy świata (pokrywającej cały glob w małych przybliżeniach) lub jest ona przestarzała. Proszę rozważyć pobranie mapy podstawowej, aby uzyskać kompletne środowisko.</string>
+    <string name="map_downloaded">Pobrano mapę</string>
+    <string name="go_to_map">Powróć do mapy</string>
+    <string name="simulate_initial_startup">Symulowania pierwszego uruchomienia programu</string>
+    </resources>

@@ -1,39 +1,5 @@
 package net.osmand.plus.views;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
-
-import net.osmand.PlatformUtil;
-import net.osmand.ResultMatcher;
-import net.osmand.ValueHolder;
-import net.osmand.access.AccessibleToast;
-import net.osmand.data.Amenity;
-import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
-import net.osmand.data.QuadRect;
-import net.osmand.data.QuadTree;
-import net.osmand.data.RotatedTileBox;
-import net.osmand.osm.PoiType;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
-import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.FileNameTranslationHelper;
-import net.osmand.plus.poi.PoiFiltersHelper;
-import net.osmand.plus.poi.PoiUIFilter;
-import net.osmand.plus.render.RenderingIcons;
-import net.osmand.plus.resources.ResourceManager;
-import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.routing.RoutingHelper.IRouteInformationListener;
-import net.osmand.plus.views.MapTextLayer.MapTextProvider;
-import net.osmand.util.Algorithms;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
@@ -44,7 +10,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Paint.Style;
 import android.graphics.PointF;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
@@ -64,13 +29,43 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import net.osmand.PlatformUtil;
+import net.osmand.ResultMatcher;
+import net.osmand.ValueHolder;
+import net.osmand.data.Amenity;
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
+import net.osmand.data.QuadRect;
+import net.osmand.data.QuadTree;
+import net.osmand.data.RotatedTileBox;
+import net.osmand.osm.PoiType;
+import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.FileNameTranslationHelper;
+import net.osmand.plus.poi.PoiFiltersHelper;
+import net.osmand.plus.poi.PoiUIFilter;
+import net.osmand.plus.render.RenderingIcons;
+import net.osmand.plus.resources.ResourceManager;
+import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.routing.RoutingHelper.IRouteInformationListener;
+import net.osmand.plus.views.MapTextLayer.MapTextProvider;
+import net.osmand.util.Algorithms;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider,
 		MapTextProvider<Amenity>, IRouteInformationListener {
@@ -222,26 +217,6 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		return (int) (r * tb.getDensity());
 	}
 
-	private QuadRect calculateRect(int x, int y, int width, int height) {
-		QuadRect rf;
-		double left = x - width / 2;
-		double top = y - height / 2;
-		double right = left + width;
-		double bottom = top + height;
-		rf = new QuadRect(left, top, right, bottom);
-		return rf;
-	}
-
-	private QuadRect calculateRect(float x, float y, float width, float height) {
-		QuadRect rf;
-		double left = x - width / 2.0d;
-		double top = y - height / 2.0d;
-		double right = left + width;
-		double bottom = top + height;
-		rf = new QuadRect(left, top, right, bottom);
-		return rf;
-	}
-
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		if(!Algorithms.objectEquals(this.settings.SELECTED_POI_FILTER_FOR_MAP.get(), 
@@ -263,33 +238,17 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 				objects = data.getResults();
 				if (objects != null) {
 					float iconSize = poiBackground.getWidth() * 3 / 2;
-					QuadRect bounds = new QuadRect(0, 0, tileBox.getPixWidth(), tileBox.getPixHeight());
-					bounds.inset(-bounds.width()/4, -bounds.height()/4);
-					QuadTree<QuadRect> boundIntersections = new QuadTree<>(bounds, 4, 0.6f);
-					List<QuadRect> result = new ArrayList<>();
+					QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
 
 					for (Amenity o : objects) {
 						float x = tileBox.getPixXFromLatLon(o.getLocation().getLatitude(), o.getLocation()
 								.getLongitude());
 						float y = tileBox.getPixYFromLatLon(o.getLocation().getLatitude(), o.getLocation()
 								.getLongitude());
-						boolean intersects =false;
-						QuadRect visibleRect = calculateRect(x, y, iconSize, iconSize);
-						//canvas.drawRect(visibleRect, paintIcon);
 
-						boundIntersections.queryInBox(new QuadRect(visibleRect.left, visibleRect.top, visibleRect.right, visibleRect.bottom), result);
-						for (QuadRect r : result) {
-							if (QuadRect.intersects(r, visibleRect)) {
-								intersects = true;
-								break;
-							}
-						}
-
-						if (intersects) {
+						if (intersects(boundIntersections, x, y, iconSize, iconSize)) {
 							canvas.drawBitmap(poiBackgroundSmall, x - poiBackgroundSmall.getWidth() / 2, y - poiBackgroundSmall.getHeight() / 2, paintIconBackground);
 						} else {
-							boundIntersections.insert(visibleRect,
-									new QuadRect(visibleRect.left, visibleRect.top, visibleRect.right, visibleRect.bottom));
 							fullObjects.add(o);
 						}
 					}

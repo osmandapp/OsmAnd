@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="offline_edition">Modifications hors-ligne</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="offline_edition">Modifications hors-ligne</string>
   <string name="offline_edition_descr">Toujours utiliser l\'édition hors-ligne</string>
   
   <string name="update_poi_does_not_change_indexes">Les modifications de PI dans l\'application sont sans effet sur les cartes téléchargées, les modifications sont enregistrées dans un fichier.</string>
@@ -2069,7 +2068,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="application_dir_description">Sélectionnez l\'emplacement pour enregistrer les cartes.</string>
 <string name="simulate_initial_startup">Simuler un premier démarrage</string>
     <string name="simulate_initial_startup_descr">Efface le compteur de démarrages afin de simuler un premier démarrage (conserve tous les autres paramètres)</string>
-    <string name="hello_blank_fragment">Hello fragment vide</string>
+    
     <string name="show_on_start_description">Si inactif démarre l\'application en mode carte</string>
 <string name="map_downloaded">Carte téléchargée</string>
     <string name="go_to_map">Aller à la carte</string>
@@ -2078,18 +2077,18 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="enter_country_name">Saisissez le pays</string>
 <string name="world_map_download_descr">La carte mondiale de base est manquante ou périmée. Merci de télécharger la carte mondiale de base afin que l\'application puisse fonctionner.</string>
     <string name="new_version">Nouvelle version</string>
-    <string name="begin_with_osmand_menu_group">Débuter avec OsmAnd</string>
+    <string name="begin_with_osmand_menu_group">Premiers pas avec OsmAnd</string>
     <string name="features_menu_group">Fonctionnalités</string>
     <string name="help_us_to_improve_menu_group">Aidez-nous à améliorer OsmAnd</string>
     <string name="other_menu_group">Divers</string>
     <string name="plugins_menu_group">Greffons</string>
     <string name="first_usage_item">Première utilisation</string>
-    <string name="first_usage_item_description">Comment télécharger des cartes et paramétrages de base</string>
+    <string name="first_usage_item_description">Comment télécharger des cartes et définir les paramètres de base</string>
     <string name="navigation_item_description">Configurer la navigation</string>
     <string name="faq_item">FAQ</string>
     <string name="faq_item_description">Comment utiliser les greffons</string>
     <string name="map_viewing_item">Affichage de la carte</string>
-    <string name="search_on_the_map_item">Rechercher dans la carte</string>
+    <string name="search_on_the_map_item">Rechercher de carte</string>
     <string name="planning_trip_item">Préparer un trajet</string>
     <string name="contour_lines_and_hillshade_maps_item">Cartes avec relief et courbes de niveau</string>
     <string name="trip_recording_tool_item">Outil d\'enregistrement d\'un trajet</string>
@@ -2099,7 +2098,9 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="instalation_troubleshooting_item">Installation et débogage</string>
     <string name="techical_articles_item">Articles techniques</string>
     <string name="versions_item">Versions</string>
-    <string name="poll">sondage</string>
+    <string name="poll">Sondage</string>
     <string name="contact_us">Nous contacter</string>
 <string name="audio_video_note_item">Notes audio / vidéo</string>
+    <string name="osm_edit_created_poi">PI créés sur OSM</string>
+    <string name="osm_edit_created_bug">Bugs déclarés sur OSM</string>
     </resources>

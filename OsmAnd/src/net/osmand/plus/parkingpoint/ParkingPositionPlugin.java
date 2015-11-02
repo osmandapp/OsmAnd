@@ -261,6 +261,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 				}
 				addOrRemoveParkingEvent(false);
 				setParkingPosition(mapActivity, latitude, longitude, false);
+				showContextMenuIfNeeded(mapActivity);
 				mapActivity.getMapView().refreshMap();
 			}
 		});
@@ -268,7 +269,17 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		choose.show();
 
 	}
-	
+
+	private void showContextMenuIfNeeded(final MapActivity mapActivity) {
+		if (parkingLayer != null) {
+			MapContextMenu menu = mapActivity.getContextMenu();
+			if (menu.isVisible()) {
+				menu.show(new LatLon(parkingPosition.getLatitude(), parkingPosition.getLongitude()),
+						parkingLayer.getObjectName(parkingPosition), parkingPosition);
+			}
+		}
+	}
+
 	/**
 	 * Method creates confirmation dialog for deletion of a parking location.
 	 */
@@ -361,6 +372,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 				} else {
 					addOrRemoveParkingEvent(false);
 				}
+				showContextMenuIfNeeded(mapActivity);
 			}
 		});
 		setTime.create();
@@ -412,10 +424,6 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		setParkingType(isLimited);
 		setParkingStartTime(Calendar.getInstance().getTimeInMillis());
 		if (parkingLayer != null) {
-			MapContextMenu menu = mapActivity.getContextMenu();
-			if (menu.isVisible()) {
-				menu.show(new LatLon(latitude, longitude), parkingLayer.getObjectName(parkingPosition), parkingPosition);
-			}
 			parkingLayer.refresh();
 		}
 	}
@@ -543,7 +551,9 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 			timeStringBuilder.append(ctx.getString(R.string.osmand_parking_hour));
 		}
 
-		timeStringBuilder.append(" ");
+		if (timeStringBuilder.length() > 0) {
+			timeStringBuilder.append(" ");
+		}
 		timeStringBuilder.append(minutes);
 		timeStringBuilder.append(" ");
 		timeStringBuilder.append(ctx.getString(R.string.osmand_parking_minute));

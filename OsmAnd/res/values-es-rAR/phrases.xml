@@ -230,7 +230,7 @@
 	<string name="poi_lighthouse">Faro</string>
 
 	<string name="poi_bicycle_rental">Alquiler de bicicletas</string>
-	<string name="poi_bicycle_parking">Bicicletero / Guardería</string>
+	<string name="poi_bicycle_parking">Bicicletero/Guardería</string>
 
 	<string name="poi_aerialway_station">Estación de transporte elevado</string>
 	<string name="poi_aerialway_cable_car">Teleférico</string>
@@ -288,7 +288,7 @@
 	<string name="poi_quarry">Cantera</string>
 	<string name="poi_vineyard">Viñedo</string>
 	<string name="poi_orchard">Huerto</string>
-	<string name="poi_allotments">Parcelas</string>
+	<string name="poi_allotments">Huertos comunitarios</string>
 	<string name="poi_forest">Bosque forestal</string>
 	<string name="poi_farmyard">Granja</string>
 	<string name="poi_meadow">Prado</string>
@@ -345,7 +345,7 @@
 	<string name="poi_quarter">Distrito</string>
 	<string name="poi_neighbourhood">Vecindario</string>
 	<string name="poi_locality">Paraje</string>
-	<string name="poi_place_allotments">Parcelas</string>
+	<string name="poi_place_allotments">Huertos comunitarios</string>
 	<string name="poi_place_farm">Granja</string>
 	<string name="poi_residential">Área residencial</string>
 
@@ -608,7 +608,7 @@
 	<string name="poi_bench">"Banco (asiento) "</string>
 	<string name="poi_swimming_pool">Piscina</string>
 	<string name="poi_water_park">Parque acuático</string>
-	<string name="poi_park">Parque / Plaza</string>
+	<string name="poi_park">Parque/Plaza</string>
 	<string name="poi_recreation_ground">Zona recreativa</string>
 	<string name="poi_village_green">Zona verde</string>
 	<string name="poi_trail_riding_station">Estación de equitación</string>
@@ -1156,7 +1156,7 @@
 	<string name="poi_bunker_silo">Silo bunker</string>
 	<string name="poi_content_slurry">Contenido: Mezcla</string>
 	<string name="poi_brownfield">Suelo abandonado urbanizable</string>
-	<string name="poi_greenfield">Suelo urbanizable</string>
+	<string name="poi_greenfield">Suelo virgen urbanizable</string>
 	<string name="poi_wholesale">Venta mayorista</string>
 
 	<string name="poi_trade_building_supplies">Materiales de construcción</string>
@@ -1334,7 +1334,7 @@
 	<string name="poi_grassland">Pastizal</string>
 	<string name="poi_scrub">Maleza</string>
 	<string name="poi_farmland">Suelo de cultivo</string>
-	<string name="poi_logging">Inicio de sesión</string>
+	<string name="poi_logging">Tala de árboles</string>
 	<string name="poi_sand">Arena</string>
 
 	<string name="poi_dead_wood">Bosque muerto</string>
@@ -1703,7 +1703,7 @@
 	<string name="poi_memorial_stele">Estrella</string>
 	<string name="poi_memorial_bust">Busto</string>
 	<string name="poi_memorial_blue_plaque">Placa azul</string>
-	<string name="poi_memorial_cross">Cruz</string>
+	<string name="poi_memorial_cross">Crucero (monumento)</string>
 	<string name="poi_memorial_vehicle">Vehículo</string>
 	<string name="poi_memorial_obelisk">Obelisco</string>
 
@@ -2086,7 +2086,7 @@
 	<string name="poi_clothes_oversize">Ropa de grandes tamaños</string>
 	<string name="poi_clothes_schoolwear">Ropa escolar</string>
 	<string name="poi_clothes_swimwear">Trajes de baño</string>
-	<string name="poi_clothes_socks">Medias / Calcetines</string>
+	<string name="poi_clothes_socks">Medias/Calcetines</string>
 	<string name="poi_clothes_shirts">Camisas</string>
 	<string name="poi_clothes_dance">Ropa de baile</string>
 	<string name="poi_clothes_military">Ropa militar</string>
@@ -2381,5 +2381,22 @@
 	<string name="poi_building_type_basilica">Edificación: Basílica</string>
 	<string name="poi_building_type_synagogue">Edificación: Sinagoga</string>
 	<string name="poi_building_type_shrine">Edificación: Santuario</string>
+
+<string name="poi_artist_name">Artista</string>
+	<string name="poi_sculptor">Escultor</string>
+
+	<string name="poi_cross">Cruz</string>
+	<string name="poi_summit_cross">Cumbre a la cruz: Si</string>
+
+	<string name="poi_prison_camp">Campamento de prisioneros</string>
+	<string name="poi_concentration_camp">Tipo: Campo de concentración</string>
+	<string name="poi_pow_camp">Tipo: Prisioneros de guerra</string>
+	<string name="poi_labor_camp">Tipo: Trabajos forzados</string>
+	<string name="poi_concentration_camp_nazism">Tipo: Nazi</string>
+	<string name="poi_concentration_camp_gulag">Tipo: Gulag</string>
+
+	<string name="poi_temperature">Temperatura</string>
+	<string name="poi_bathing_yes">Permitido bañarse</string>
+	<string name="poi_bathing_no">Prohibido bañarse</string>
 
 </resources>

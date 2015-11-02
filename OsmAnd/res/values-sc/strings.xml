@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="always_center_position_on_map">Ammustra sa positzione semper a su tzentru</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="always_center_position_on_map">Ammustra sa positzione semper a su tzentru</string>
     <string name="voice_pref_title">Boghe</string>
     <string name="misc_pref_title">Mistura</string>
     <string name="localization_pref_title">Localizatzione</string>
@@ -1703,7 +1702,7 @@
 	<string name="back_to_map">Torra a sa mapa</string>
 	<string name="plugin_touringview_name">Vista mapa turìstica</string>
 
-	<string name="location_on_map">Assètiu/Collocassione:\n Lat %1$s\n Lon %2$s</string>
+	<string name="location_on_map">Positzione:\n Lat %1$s\n Lon %2$s</string>
 	<string name="rename_failed">Renumenatzione faddida.</string>
 <string name="shared_string_selected">Ischertadu</string>
 	<string name="track_segments">Segmentos de sa rasta</string>
@@ -1964,7 +1963,7 @@
     <string name="share_geo">geo:</string>
     <string name="share_menu_location">Cumpartzi sa positzione</string>
     <string name="shared_string_send">Imbia</string>
-    <string name="hello_blank_fragment">Sabuna/Inneta su segmentu</string>
+    
     <string name="application_dir_description">Issèbera in ue boles pònnere sos documentos de sas mapas.</string>
 <string name="map_downloaded">Mapa iscarrigada</string>
     <string name="map_downloaded_descr">Sa mapa de %1$s est istada iscarrigada. Torra a sa mapa pro incumintzare a l’impreare.</string>
@@ -1974,19 +1973,19 @@
 <string name="world_map_download_descr">Sa mapa mundiale de base (chi coberrit su mundu intreu a zooms bassos) fartat o est bècia. Pro praghere cunsìdera sa possibilidade de l’iscarrigare pro tènnere un’aplicatzione cumprida.</string>
     <string name="show_on_start_description">\"Istudadu\" mandat deretu a s’ischermu mapa</string>
     <string name="new_version">Versione noa</string>
-    <string name="begin_with_osmand_menu_group">Incumintza cun OsmAnd</string>
+    <string name="begin_with_osmand_menu_group">Primos passos cun OsmAnd</string>
     <string name="features_menu_group">Funtzionalidades</string>
     <string name="help_us_to_improve_menu_group">Agiuda·nos a megiorare OsmAnd</string>
     <string name="other_menu_group">Àteru</string>
     <string name="plugins_menu_group">Plugins (estensiones)</string>
     <string name="first_usage_item">Primu impreu</string>
-    <string name="first_usage_item_description">Comente iscarrigare sas mapas, e sas impostatziones de base</string>
+    <string name="first_usage_item_description">Comente iscarrigare sas mapas e definire sas impostatziones de base</string>
     <string name="navigation_item_description">Cunfigura su nàvigu</string>
     <string name="faq_item">Preguntas fitianas (FAQ)</string>
     <string name="faq_item_description">Comente usare sos plugins</string>
     <string name="map_viewing_item">Visione de sa mapa</string>
     <string name="search_on_the_map_item">Chircare in sa mapa</string>
-    <string name="planning_trip_item">Pranificatzione de unu biàgiu</string>
+    <string name="planning_trip_item">Pranificare unu biàgiu</string>
     <string name="contour_lines_and_hillshade_maps_item">Mapas de sas lìnias de livellu e de sas umbraduras de sos rilievos</string>
     <string name="trip_recording_tool_item">Aina de registratzione biàgiu</string>
     <string name="osmand_ski_maps_item">Mapas pro iscì OsmAnd</string>
@@ -1996,6 +1995,8 @@
     <string name="instalation_troubleshooting_item">Installatzione e solutziones a sos problemas</string>
     <string name="techical_articles_item">Artìculos tècnicos</string>
     <string name="versions_item">Versiones</string>
-    <string name="poll">sondàggiu</string>
+    <string name="poll">Sondàggiu</string>
     <string name="contact_us">Cuntata·nos</string>
-</resources>
+<string name="osm_edit_created_poi">PDI de OSM creadu</string>
+    <string name="osm_edit_created_bug">Nota de errore de OSM creada</string>
+    </resources>

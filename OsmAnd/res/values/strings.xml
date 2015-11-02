@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="osm_edit_created_poi">Created OSM POI</string>
+    <string name="osm_edit_created_bug">Created OSM bug</string>
     <string name="world_map_download_descr">World basemap (covering the whole world at small zooms) is missing or outdated. Please consider downloading World basemap for a complete environment.</string>
     <string name="shared_string_qr_code">QR-code</string>
     <string name="map_downloaded">Map downloaded</string>
@@ -2028,25 +2030,23 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="free_downloads_used">Free downloads used</string>
     <string name="free_downloads_used_description">You can set how many free downloads you have used</string>
 
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="application_dir_description">Choose where you want to save map files.</string>
     <string name="show_on_start_description">\'Off\' directly launches map screen</string>
     <string name="enter_country_name">Enter country name</string>
     <string name="new_version">New version</string>
-    <string name="begin_with_osmand_menu_group">Begin with OsmAnd</string>
+    <string name="begin_with_osmand_menu_group">First steps with OsmAnd</string>
     <string name="features_menu_group">Features</string>
     <string name="help_us_to_improve_menu_group">Help us to improve OsmAnd</string>
     <string name="other_menu_group">Other</string>
     <string name="plugins_menu_group">Plugins</string>
     <string name="first_usage_item">First usage</string>
-    <string name="first_usage_item_description">How to download map, basic settings</string>
+    <string name="first_usage_item_description">How to download maps, set basic settings</string>
     <string name="navigation_item_description">Setup navigation</string>
     <string name="faq_item">FAQ</string>
     <string name="faq_item_description">How to use plugins</string>
     <string name="map_viewing_item">Map viewing</string>
-    <string name="search_on_the_map_item">Search on the map</string>
-    <string name="planning_trip_item">Planning trip</string>
+    <string name="search_on_the_map_item">Map searching</string>
+    <string name="planning_trip_item">Planning a trip</string>
     <string name="contour_lines_and_hillshade_maps_item">Contour lines and hillshade maps</string>
     <string name="trip_recording_tool_item">Trip recording tool</string>
     <string name="osmand_ski_maps_item">OsmAnd Ski maps</string>
@@ -2056,6 +2056,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="instalation_troubleshooting_item">Installation and troubleshooting</string>
     <string name="techical_articles_item">Technical articles</string>
     <string name="versions_item">Versions</string>
-    <string name="poll">poll</string>
+    <string name="poll">Poll</string>
     <string name="contact_us">Contact us</string>
 </resources>

@@ -636,7 +636,7 @@
 		<string name="poi_communication">Comunicatzione</string>
 		<string name="poi_sightseeing">Vista turìstica</string>
 		<string name="poi_internet_access">Atzessu ìnternet</string>
-	<string name="poi_club">Tzirculu</string>
+	<string name="poi_club">Tzìrculu</string>
 	<string name="poi_cafe_and_restaurant">Cafeterias e ristorantes</string>
 	<string name="poi_shop_food">Butega alimentare</string>
 	<string name="poi_road_obstacle">Impèigu/ostàculu istradale</string>
@@ -1433,4 +1433,52 @@
 	<string name="poi_historic_era_chalcolithic">Època istòrica: calcolìticu (IV-III millènniu AC.)</string>
 
 	<string name="poi_historic_stone">Pedra istòrica</string>
+	<string name="poi_square">Pratza</string>
+
+	<string name="poi_building_type_church">Casta de edifìtziu: crèsia</string>
+	<string name="poi_building_type_chapel">Casta de edifìtziu: capella</string>
+	<string name="poi_building_type_mosque">Casta de edifìtziu: moschea</string>
+	<string name="poi_building_type_temple">Casta de edifìtziu: tèmpiu</string>
+	<string name="poi_building_type_cathedral">Casta de edifìtziu: Seu/Catedrale</string>
+	<string name="poi_building_type_monastery">Casta de edifìtziu: monastèriu/muristene</string>
+	<string name="poi_building_type_basilica">Casta de edifìtziu: basìlica</string>
+	<string name="poi_building_type_synagogue">Casta de edifìtziu: sinagoga</string>
+	<string name="poi_building_type_shrine">Casta de edifìtziu: sacràriu</string>
+
+<string name="poi_cross">Rughe</string>
+	<string name="poi_summit_cross">Rughe de cùcuru: eja</string>
+
+	<string name="poi_prison_camp">Campu de presonia</string>
+	<string name="poi_concentration_camp">Casta: campu de cuntzentramentu</string>
+	<string name="poi_pow_camp">Casta: campu pro presoneris de gherra</string>
+	<string name="poi_labor_camp">Casta: campu de traballu</string>
+	<string name="poi_concentration_camp_nazism">Casta: nazista</string>
+	<string name="poi_concentration_camp_gulag">Casta: gulag</string>
+
+	<string name="poi_temperature">Temperadura</string>
+	<string name="poi_artist_name">Artista</string>
+	<string name="poi_sculptor">Iscultura</string>
+
+	<string name="poi_fortification_type_hill_fort">Casta de fortificatzione: fortilesa de montigru</string>
+	<string name="poi_fortification_type_limes">Casta de fortificatzione: limes</string>
+	<string name="poi_fortification_type_sconce">Casta de fortificatzione: fortinu</string>
+	<string name="poi_fortification_type_ring_ditch">Casta de fortificatzione: fossa tzirculare</string>
+
+	<string name="poi_pa">Pa (aposentamentos fortificados maori)</string>
+
+	<string name="poi_historic_farm">Fatoria istòrica</string>
+	<string name="poi_historic_railway_station">Istatzione ferroviària istòrica</string>
+
+	<string name="poi_club_freemasonry">Lògia Massònica</string>
+	<string name="poi_club_sailing">Tzìrculu de vela</string>
+	<string name="poi_club_scout">Tzìrculu de scautismu (scouts)</string>
+
+	<string name="poi_historic_threshing_floor">Argiola istòrica</string>
+	<string name="poi_historic_gallows">Furca istòrica</string>
+	<string name="poi_tunnel_railway">Tunnel ferroviàriu</string>
+	<string name="poi_bridge_railway">Ponte ferroviàriu</string>
+	<string name="poi_historic_railway">Ferrovia istòrica</string>
+
+	<string name="poi_route_railway_ref">Àndala ferroviària</string>
+
 	</resources>

@@ -1,7 +1,10 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 
+import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -64,7 +67,9 @@ public class AudioVideoNoteMenuController extends MenuController {
 	@Override
 	public String getNameStr() {
 		File file = recording.getFile();
-		if (file != null) {
+		String recType = recording.getType(getMapActivity());
+		String recName = recording.getName(getMapActivity());
+		if (file != null && recType.equals(recName)) {
 			Date date = new Date(recording.getFile().lastModified());
 			return dateFormat.format(date);
 		} else {
@@ -73,7 +78,32 @@ public class AudioVideoNoteMenuController extends MenuController {
 	}
 
 	@Override
+	public String getTypeStr() {
+		return recording.getType(getMapActivity());
+	}
+
+	@Override
 	public boolean needStreetName() {
 		return false;
+	}
+
+	@Override
+	public void share(LatLon latLon, String title) {
+		Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+		if (recording.isPhoto()) {
+			Uri screenshotUri = Uri.parse(recording.getFile().getAbsolutePath());
+			sharingIntent.setType("image/*");
+			sharingIntent.putExtra(Intent.EXTRA_STREAM, screenshotUri);
+		} else if (recording.isAudio()) {
+			Uri audioUri = Uri.parse(recording.getFile().getAbsolutePath());
+			sharingIntent.setType("audio/*");
+			sharingIntent.putExtra(Intent.EXTRA_STREAM, audioUri);
+		} else if (recording.isVideo()) {
+			Uri videoUri = Uri.parse(recording.getFile().getAbsolutePath());
+			sharingIntent.setType("video/*");
+			sharingIntent.putExtra(Intent.EXTRA_STREAM, videoUri);
+		}
+		getMapActivity().getContextMenu().findMenuFragment()
+				.startActivity(Intent.createChooser(sharingIntent, getMapActivity().getString(R.string.share_note)));
 	}
 }

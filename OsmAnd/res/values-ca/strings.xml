@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="show_warnings_title">Mostra els missatges d\'avís…</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="show_warnings_title">Mostra els missatges d\'avís…</string>
 <string name="map_widget_fluorescent">Rutes amb fluorescència</string>
 <string name="map_widget_show_ruler">Mostra el regle</string>
 <string name="map_widget_transparent">Aparença amb transparència</string>
@@ -1979,7 +1978,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="share_geo">geo:</string>
     <string name="share_menu_location">Comparteix la posició</string>
     <string name="shared_string_send">Envia</string>
-    <string name="hello_blank_fragment">Hola fragment buit</string>
+    
     <string name="application_dir_description">Trieu on voleu desar els fitxers de mapes.</string>
 <string name="shared_string_qr_code">Codi QR</string>
     <string name="map_downloaded">Mapa baixat</string>

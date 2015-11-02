@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="rendering_attr_roadColors_description">Velg fargeskjema for veier:</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="rendering_attr_roadColors_description">Velg fargeskjema for veier:</string>
 	<string name="rendering_attr_roadColors_name">Veifargeskjema</string>
     <string name="map_widget_show_destination_arrow">Vis retning til målet</string>
     <string name="gps_not_available">Aktiver GPS i innstillingene</string>
@@ -1433,15 +1432,15 @@
 	<string name="recent_places">Nylige steder</string>
 	<string name="saved_at_time">Vellykket lagret: %1$s</string>
 	<string name="new_version">Ny versjon</string>
-    <string name="begin_with_osmand_menu_group">Begynn med OsmAnd</string>
+    <string name="begin_with_osmand_menu_group">Første steg med OsmAnd</string>
     <string name="features_menu_group">Funksjoner</string>
     <string name="help_us_to_improve_menu_group">Hjelp oss å forbedre OsmAnd</string>
     <string name="plugins_menu_group">Programtillegg</string>
     <string name="first_usage_item">Første bruk</string>
-    <string name="first_usage_item_description">Hvordan laste ned kart, grunnleggende innstillinger</string>
+    <string name="first_usage_item_description">Hvordan laste ned kart, angi grunnleggende innstillinger</string>
     <string name="faq_item_description">Hvordan bruke programtillegg</string>
     <string name="map_viewing_item">Kartvisning</string>
-    <string name="search_on_the_map_item">Søk på kartet</string>
+    <string name="search_on_the_map_item">Kartsøking</string>
     <string name="contour_lines_and_hillshade_maps_item">Kart med koter og relieffskygger</string>
     <string name="osmand_ski_maps_item">OsmAnd skikart</string>
     <string name="nautical_charts_item">Sjøkart</string>
@@ -1449,4 +1448,5 @@
     <string name="osm_editing_item">OSM-redigering</string>
     <string name="versions_item">Versjoner</string>
     <string name="contact_us">Kontakt oss</string>
-</resources>
+<string name="planning_trip_item">Planlegge en tur</string>
+    </resources>

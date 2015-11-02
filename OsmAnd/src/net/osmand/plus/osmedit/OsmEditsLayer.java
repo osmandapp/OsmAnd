@@ -162,28 +162,6 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 		}
 		return null;
 	}
-	
-	@Override
-	public void populateObjectContextMenu(Object o, ContextMenuAdapter adapter) {
-		if (o instanceof OsmPoint) {
-			final OsmPoint r = (OsmPoint) o;
-			adapter.item(R.string.osm_edit_context_menu_delete).iconColor(R.drawable.ic_action_delete_dark
-					).listen(new ContextMenuAdapter.OnContextMenuClick() {
-						@Override
-						public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-							if(r instanceof OsmNotesPoint) {
-								plugin.getDBBug().deleteAllBugModifications((OsmNotesPoint) r);
-							} else if(r instanceof OpenstreetmapPoint) {
-								plugin.getDBPOI().deletePOI((OpenstreetmapPoint) r);
-							}
-							view.refreshMap();
-							return true;
-						}
-
-
-					}).reg();
-		}
-	}
 
 	@Override
 	public String getObjectDescription(Object o) {

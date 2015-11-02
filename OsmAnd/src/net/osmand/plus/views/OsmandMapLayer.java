@@ -2,9 +2,12 @@ package net.osmand.plus.views;
 
 import gnu.trove.list.array.TIntArrayList;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import net.osmand.data.QuadRect;
+import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.util.MapAlgorithms;
@@ -12,6 +15,7 @@ import android.graphics.Canvas;
 import android.graphics.Path;
 import android.graphics.PointF;
 import android.os.AsyncTask;
+import android.support.annotation.NonNull;
 import android.view.MotionEvent;
 
 public abstract class OsmandMapLayer {
@@ -156,7 +160,37 @@ public abstract class OsmandMapLayer {
 		}
 		return cnt;
 	}
-	
+
+	@NonNull
+	public QuadTree<QuadRect> initBoundIntersections(RotatedTileBox tileBox) {
+		QuadRect bounds = new QuadRect(0, 0, tileBox.getPixWidth(), tileBox.getPixHeight());
+		bounds.inset(-bounds.width()/4, -bounds.height()/4);
+		return new QuadTree<>(bounds, 4, 0.6f);
+	}
+
+	public boolean intersects(QuadTree<QuadRect> boundIntersections, float x, float y, float width, float height) {
+		List<QuadRect> result = new ArrayList<>();
+		QuadRect visibleRect = calculateRect(x, y, width, height);
+		boundIntersections.queryInBox(new QuadRect(visibleRect.left, visibleRect.top, visibleRect.right, visibleRect.bottom), result);
+		for (QuadRect r : result) {
+			if (QuadRect.intersects(r, visibleRect)) {
+				return true;
+			}
+		}
+		boundIntersections.insert(visibleRect,
+				new QuadRect(visibleRect.left, visibleRect.top, visibleRect.right, visibleRect.bottom));
+		return false;
+	}
+
+	public QuadRect calculateRect(float x, float y, float width, float height) {
+		QuadRect rf;
+		double left = x - width / 2.0d;
+		double top = y - height / 2.0d;
+		double right = left + width;
+		double bottom = top + height;
+		rf = new QuadRect(left, top, right, bottom);
+		return rf;
+	}
 
 	public abstract class MapLayerData<T> {
 		public int ZOOM_THRESHOLD = 1;

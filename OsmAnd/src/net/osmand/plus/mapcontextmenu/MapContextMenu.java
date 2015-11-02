@@ -9,6 +9,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.mapcontextmenu.MenuController.MenuType;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleButtonController;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.views.ContextMenuLayer;
@@ -211,7 +212,7 @@ public class MapContextMenu extends MenuTitleController {
 	}
 
 	private void acquireMenuController() {
-		menuController = MenuController.getMenuController(mapActivity, pointDescription, object);
+		menuController = MenuController.getMenuController(mapActivity, pointDescription, object, MenuType.STANDARD);
 	}
 
 	public void onSingleTapOnMap() {
@@ -274,7 +275,11 @@ public class MapContextMenu extends MenuTitleController {
 	}
 
 	public void buttonSharePressed() {
-		ShareMenu.show(latLon, nameStr, mapActivity);
+		if (menuController != null) {
+			menuController.share(latLon, nameStr);
+		} else {
+			ShareMenu.show(latLon, nameStr, mapActivity);
+		}
 	}
 
 	public void buttonMorePressed() {

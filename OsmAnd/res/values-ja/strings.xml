@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="installing_new_resources">新しいデータを展開中…</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="installing_new_resources">新しいデータを展開中…</string>
      <string name="internet_connection_required_for_online_route">オンライン経路案内を使用しようとしていますが
 インターネット接続されていません。</string>
      <string name="tts_language_not_supported_title">未サポート言語</string>
@@ -2035,4 +2034,8 @@ POIの更新は利用できません</string>
     <string name="update_all">全て更新(%1$s MB)</string>
     <string name="free_downloads_used">使用済み無料ダウンロード枠</string>
     <string name="free_downloads_used_description">使用する無料ダウンロード枠を設定できます</string>
-</resources>
+<string name="world_map_download_descr">基本世界地図(ズーム最小時世界中をカバーする為の物)が見当たらないか古くなっています。使用環境に対応した基本世界地図を再度ダウンロードしてください。</string>
+    <string name="shared_string_qr_code">QRコード</string>
+    <string name="map_downloaded_descr">%1$sのマップはダウンロード済みです。対応した地点を参照することでマップを使用できます。</string>
+    <string name="go_to_map">マップに移動します</string>
+    </resources>

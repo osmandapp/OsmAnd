@@ -357,6 +357,9 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 					} else {
 						AccessibleToast.makeText(activity, R.string.osb_add_dialog_success, Toast.LENGTH_LONG).show();
 					}
+					List<OsmNotesPoint> points = plugin.getDBBug().getOsmbugsPoints();
+					OsmPoint point = points.get(points.size() - 1);
+					activity.getContextMenu().showOrUpdate(new LatLon(latitude, longitude), plugin.getOsmEditsLayer(activity).getObjectName(point), point);
 					refreshMap();
 				} else {
 					AccessibleToast.makeText(activity, activity.getResources().getString(R.string.osb_add_dialog_error) + "\n" + result,

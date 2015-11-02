@@ -46,6 +46,7 @@ import android.widget.Toast;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
+import net.osmand.data.LatLon;
 import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.EntityInfo;
 import net.osmand.osm.edit.Node;
@@ -66,6 +67,7 @@ import org.apache.commons.logging.Log;
 import java.io.Serializable;
 import java.text.MessageFormat;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class EditPoiDialogFragment extends DialogFragment {
@@ -327,6 +329,18 @@ public class EditPoiDialogFragment extends DialogFragment {
 													R.string.poi_action_succeded_template), message),
 									Toast.LENGTH_LONG).show();
 						}
+
+						OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
+						if (plugin != null) {
+							List<OpenstreetmapPoint> points = plugin.getDBPOI().getOpenstreetmapPoints();
+							OsmPoint point = points.get(points.size() - 1);
+							if (getActivity() instanceof MapActivity) {
+								MapActivity mapActivity = (MapActivity) getActivity();
+								mapActivity.getContextMenu().showOrUpdate(new LatLon(point.getLatitude(), point.getLongitude()),
+										plugin.getOsmEditsLayer(mapActivity).getObjectName(point), point);
+							}
+						}
+
 						if (getActivity() instanceof MapActivity) {
 							((MapActivity) getActivity()).getMapView().refreshMap(true);
 						}

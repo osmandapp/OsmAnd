@@ -231,6 +231,7 @@ public class DownloadResourceGroup {
 	}
 	
 	public void addItem(IndexItem i) {
+		i.setRelatedGroup(this);
 		individualResources.add(i);
 	}
 	

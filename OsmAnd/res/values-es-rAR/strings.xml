@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="rendering_attr_hideHouseNumbers_name">Ocultar números de casa</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="rendering_attr_hideHouseNumbers_name">Ocultar números de casa</string>
     <string name="copying_osmand_file_failed">Falló al copiar archivos</string>    
     <string name="storage_directory_external">Almacenamiento externo</string>
     <string name="storage_directory_multiuser">Almacenamiento multiusuario</string>
@@ -1984,7 +1983,7 @@
     <string name="share_menu_location">Compartir ubicación</string>
     <string name="shared_string_send">Enviar</string>
     <string name="application_dir_description">Elija donde guardar los archivos de los mapas.</string>
-<string name="hello_blank_fragment">Hola fragmento vacío</string>
+
     <string name="show_on_start_description">\'No\', inicia directamente la pantalla del mapa</string>
 <string name="map_downloaded">Mapa descargado</string>
     <string name="map_downloaded_descr">Se descargó el mapa de %1$s. Vuelve al mapa para empezar a usarlo.</string>
@@ -1993,18 +1992,18 @@
     <string name="enter_country_name">Escriba el nombre del país</string>
 <string name="world_map_download_descr">El mapa base mundial (abarca todo el mundo en acercamientos pequeños), falta o está desactualizado. Considere descargarlo para un entorno completo.</string>
     <string name="new_version">Nueva versión</string>
-    <string name="begin_with_osmand_menu_group">Iniciar con OsmAnd</string>
+    <string name="begin_with_osmand_menu_group">Primeros pasos con OsmAnd</string>
     <string name="features_menu_group">Características</string>
     <string name="help_us_to_improve_menu_group">Ayúdanos a mejorar OsmAnd</string>
     <string name="other_menu_group">Otros</string>
     <string name="plugins_menu_group">Complementos</string>
     <string name="first_usage_item">Primer uso</string>
-    <string name="first_usage_item_description">Cómo descargar el mapa, ajustes básicos</string>
+    <string name="first_usage_item_description">Cómo descargar mapas, configurar ajustes básicos</string>
     <string name="navigation_item_description">Configuración de navegación</string>
     <string name="faq_item">Preguntas Frecuentes</string>
     <string name="faq_item_description">Cómo usar los complementos</string>
     <string name="map_viewing_item">Vista del mapa</string>
-    <string name="search_on_the_map_item">Buscar en el Mapa</string>
+    <string name="search_on_the_map_item">Busqueda en el mapa</string>
     <string name="planning_trip_item">Planificación de viaje</string>
     <string name="contour_lines_and_hillshade_maps_item">Mapas de curvas de nivel y sombreado</string>
     <string name="trip_recording_tool_item">Herramienta de grabación de viaje</string>
@@ -2017,4 +2016,6 @@
     <string name="versions_item">Versiones</string>
     <string name="poll">Encuesta</string>
     <string name="contact_us">Contáctenos</string>
-</resources>
+<string name="osm_edit_created_poi">PDI de OSM creado</string>
+    <string name="osm_edit_created_bug">Reporte de OSM creado</string>
+    </resources>

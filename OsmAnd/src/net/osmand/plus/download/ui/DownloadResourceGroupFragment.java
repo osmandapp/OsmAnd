@@ -1,4 +1,4 @@
-package net.osmand.plus.download.ui.popups;
+package net.osmand.plus.download.ui;
 
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -31,8 +31,6 @@ import net.osmand.plus.download.DownloadResourceGroup;
 import net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.download.ui.ItemViewHolder;
-import net.osmand.plus.download.ui.SearchDialogFragment;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -186,9 +184,8 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 			return true;
 		} else if (child instanceof IndexItem) {
 			IndexItem indexItem = (IndexItem) child;
-			DownloadResourceGroup groupObj = listAdapter.getGroupObj(groupPosition);
 			ItemViewHolder vh = (ItemViewHolder) v.getTag();
-			OnClickListener ls = vh.getRightButtonAction(indexItem, vh.getClickAction(indexItem), groupObj);
+			OnClickListener ls = vh.getRightButtonAction(indexItem, vh.getClickAction(indexItem));
 			ls.onClick(v);
 			return true;
 		}
@@ -369,7 +366,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 				} else {
 					viewHolder.setShowTypeInDesc(true);
 				}
-				viewHolder.bindIndexItem(item, group);
+				viewHolder.bindIndexItem(item);
 			} else {
 				DownloadResourceGroup group = (DownloadResourceGroup) child;
 				DownloadGroupViewHolder viewHolder;

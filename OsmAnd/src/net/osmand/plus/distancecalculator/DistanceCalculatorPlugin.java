@@ -548,7 +548,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 								canvas.drawBitmap(distanceMeasurementMode == 1? originIcon : destinationIcon, 
 										locationX - marginX, locationY - marginY, bitmapPaint);
 								canvas.rotate(view.getRotate(), locationX, locationY);	
-							} else {
+							} else if(tileBox.getZoom() >= 16){
 								canvas.drawCircle(locationX, locationY, 10 * tileBox.getDensity(), paint2);
 							}
 						}

@@ -33,7 +33,6 @@ import net.osmand.plus.download.DownloadResourceGroup;
 import net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.download.ui.popups.DownloadResourceGroupFragment;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -220,7 +219,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 		} else if (obj instanceof IndexItem) {
 			IndexItem indexItem = (IndexItem) obj;
 			ItemViewHolder vh = (ItemViewHolder) v.getTag();
-			View.OnClickListener ls = vh.getRightButtonAction(indexItem, vh.getClickAction(indexItem), null);
+			View.OnClickListener ls = vh.getRightButtonAction(indexItem, vh.getClickAction(indexItem));
 			ls.onClick(v);
 		}
 	}
@@ -290,7 +289,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 					convertView.setTag(viewHolder);
 				}
 				viewHolder.setShowTypeInDesc(true);
-				viewHolder.bindIndexItem(item, null);
+				viewHolder.bindIndexItem(item);
 			} else {
 				DownloadResourceGroup group = (DownloadResourceGroup) obj;
 				DownloadGroupViewHolder viewHolder;

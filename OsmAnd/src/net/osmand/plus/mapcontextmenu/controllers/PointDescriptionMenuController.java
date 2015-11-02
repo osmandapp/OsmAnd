@@ -9,6 +9,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.search.SearchHistoryFragment;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.util.Algorithms;
 
 public class PointDescriptionMenuController extends MenuController {
 
@@ -27,7 +28,7 @@ public class PointDescriptionMenuController extends MenuController {
 	@Override
 	public boolean needTypeStr() {
 		String typeName = pointDescription.getTypeName();
-		return (typeName != null && !typeName.isEmpty());
+		return (typeName != null && !Algorithms.isEmpty(typeName));
 	}
 
 	@Override

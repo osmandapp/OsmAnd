@@ -9,6 +9,7 @@ import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.util.Algorithms;
 
 public class TargetPointMenuController extends MenuController {
 
@@ -61,16 +62,19 @@ public class TargetPointMenuController extends MenuController {
 
 	@Override
 	public String getNameStr() {
+		String name = "";
 		if (targetPoint.getOriginalPointDescription() != null) {
-			return targetPoint.getOriginalPointDescription().getSimpleName(getMapActivity(), false);
-		} else {
-			return targetPoint.getOnlyName();
+			name = targetPoint.getOriginalPointDescription().getSimpleName(getMapActivity(), false);
 		}
+		if (Algorithms.isEmpty(name)) {
+			name = getTypeStr();
+		}
+		return name;
 	}
 
 	@Override
 	public String getTypeStr() {
-		return targetPoint.getOnlyName();
+		return targetPoint.getPointDescription(getMapActivity()).getTypeName();
 	}
 
 	@Override
@@ -80,6 +84,6 @@ public class TargetPointMenuController extends MenuController {
 
 	@Override
 	public boolean needStreetName() {
-		return true;
+		return Algorithms.isEmpty(targetPoint.getOnlyName());
 	}
 }
