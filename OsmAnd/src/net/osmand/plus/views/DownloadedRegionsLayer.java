@@ -337,8 +337,12 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 
 	@Override
 	public LatLon getObjectLocation(Object o) {
-		if (o instanceof WorldRegion) {
-			return ((WorldRegion) o).getRegionCenter();
+		if (o instanceof BinaryMapDataObject) {
+			String fullName = osmandRegions.getFullName((BinaryMapDataObject) o);
+			final WorldRegion region = osmandRegions.getRegionData(fullName);
+			if (region != null) {
+				return region.getRegionCenter();
+			}
 		}
 		return null;
 	}
@@ -364,7 +368,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		return false;
 	}
 
-	private void getWorldRegionFromPoint(RotatedTileBox tb, PointF point, List<? super WorldRegion> regions) {
+	private void getWorldRegionFromPoint(RotatedTileBox tb, PointF point, List<? super BinaryMapDataObject> dataObjects) {
 		int zoom = tb.getZoom();
 		if (zoom >= ZOOM_TO_SHOW_BORDERS_ST && zoom < ZOOM_TO_SHOW_BORDERS && osmandRegions.isInitialized()) {
 			LatLon pointLatLon = tb.getLatLonFromPixel(point.x, point.y);
@@ -394,19 +398,22 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 			selectedObjects = result;
 
 			for (BinaryMapDataObject o : result) {
-				String fullName = osmandRegions.getFullName(o);
-				WorldRegion region = osmandRegions.getRegionData(fullName);
-				regions.add(region);
+				dataObjects.add(o);
 			}
 		}
 	}
 
 	@Override
 	public void setSelectedObject(Object o) {
+		if (o instanceof BinaryMapDataObject) {
+			List<BinaryMapDataObject> list = new LinkedList<>();
+			list.add((BinaryMapDataObject) o);
+			selectedObjects = list;
+		}
 	}
 
 	@Override
 	public void clearSelectedObject() {
-		//selectedObjects = null;
+		selectedObjects = null;
 	}
 }

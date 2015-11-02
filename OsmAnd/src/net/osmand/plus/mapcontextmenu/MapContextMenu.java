@@ -163,14 +163,14 @@ public class MapContextMenu extends MenuTitleController {
 
 	public void close() {
 		active = false;
+		if (this.object != null) {
+			clearSelectedObject(this.object);
+		}
 		hide();
 		mapActivity.getMapView().refreshMap();
 	}
 
 	public void hide() {
-		if (this.object != null) {
-			clearSelectedObject(this.object);
-		}
 		if (mapPosition != 0) {
 			mapActivity.getMapView().setMapPosition(mapPosition);
 			mapPosition = 0;

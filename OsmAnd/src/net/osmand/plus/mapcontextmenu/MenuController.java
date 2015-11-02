@@ -3,6 +3,7 @@ package net.osmand.plus.mapcontextmenu;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 
+import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -25,7 +26,7 @@ import net.osmand.plus.mapcontextmenu.controllers.OsMoMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.ParkingPositionMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.PointDescriptionMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.TargetPointMenuController;
-import net.osmand.plus.mapcontextmenu.controllers.WorldRegionMenuController;
+import net.osmand.plus.mapcontextmenu.controllers.MapDataMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.WptPtMenuController;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.osmedit.OsmPoint;
@@ -111,8 +112,8 @@ public abstract class MenuController extends BaseMenuController {
 				menuController = new EditPOIMenuController(app, mapActivity, pointDescription, (OsmPoint) object);
 			} else if (object instanceof WptPt) {
 				menuController = new WptPtMenuController(app, mapActivity, (WptPt) object);
-			} else if (object instanceof WorldRegion) {
-				menuController = new WorldRegionMenuController(app, mapActivity, (WorldRegion) object);
+			} else if (object instanceof BinaryMapDataObject) {
+				menuController = new MapDataMenuController(app, mapActivity, (BinaryMapDataObject) object);
 			} else if (object instanceof LatLon) {
 				if (pointDescription.isParking()) {
 					menuController = new ParkingPositionMenuController(app, mapActivity, pointDescription);
