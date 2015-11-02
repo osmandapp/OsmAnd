@@ -44,6 +44,11 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	}
 
 	@Override
+	public String getHelpUrl() {
+		return "feature_articles/development_plugin.html";
+	}
+
+	@Override
 	public void registerLayers(MapActivity activity) {
 		registerWidget(activity);
 	}

@@ -2004,13 +2004,10 @@
     <string name="faq_item_description">Cómo usar los complementos</string>
     <string name="map_viewing_item">Vista del mapa</string>
     <string name="search_on_the_map_item">Busqueda en el mapa</string>
-    
+	<string name="planning_trip_item">Planificación de viaje</string>
     <string name="contour_lines_and_hillshade_maps_item">Mapas de curvas de nivel y sombreado</string>
-    
     <string name="osmand_ski_maps_item">Mapas de esquí de OsmAnd</string>
-    
     <string name="audio_video_note_item">Notas multimedia</string>
-    
     <string name="instalation_troubleshooting_item">Instalación y solución de problemas</string>
     <string name="techical_articles_item">Artículos técnicos</string>
     <string name="versions_item">Versiones</string>

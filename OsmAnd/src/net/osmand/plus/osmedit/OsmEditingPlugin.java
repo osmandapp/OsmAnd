@@ -331,6 +331,12 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		return R.drawable.osm_editing;
 	}
 
+
+	@Override
+	public String getHelpUrl() {
+		return "feature_articles/osm-editing-plugin.html";
+	}
+
 	public static String getEditName(OsmPoint point) {
 		String prefix = getPrefix(point);
 		if (point.getGroup() == OsmPoint.Group.POI) {
