@@ -23,6 +23,7 @@ public class AudioVideoNoteMenuController extends MenuController {
 	private Recording recording;
 
 	private DateFormat dateFormat;
+	private DateFormat timeFormat;
 	private AudioVideoNotesPlugin plugin;
 
 	public AudioVideoNoteMenuController(OsmandApplication app, MapActivity mapActivity, final Recording recording) {
@@ -30,6 +31,7 @@ public class AudioVideoNoteMenuController extends MenuController {
 		this.recording = recording;
 		plugin = OsmandPlugin.getPlugin(AudioVideoNotesPlugin.class);
 		dateFormat = android.text.format.DateFormat.getMediumDateFormat(mapActivity);
+		timeFormat = android.text.format.DateFormat.getTimeFormat(mapActivity);
 
 		if (!recording.isPhoto()) {
 			titleButtonController = new TitleButtonController() {
@@ -71,7 +73,7 @@ public class AudioVideoNoteMenuController extends MenuController {
 		String recName = recording.getName(getMapActivity());
 		if (file != null && recType.equals(recName)) {
 			Date date = new Date(recording.getFile().lastModified());
-			return dateFormat.format(date);
+			return dateFormat.format(date) + " " + timeFormat.format(date);
 		} else {
 			return recording.getName(getMapActivity());
 		}
