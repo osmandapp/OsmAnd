@@ -617,7 +617,7 @@
     <string name="use_short_object_names_descr">Uporabi kratka imena predmetov v načinu raziskovanja dotika</string>
     <string name="use_short_object_names">Uporabi imena predmetov</string>
     <string name="accessibility_preferences_descr">Z dostopnostjo povezane možnosti</string>
-    <string name="accessibility_preferences">Dostopnost</string>
+    <string name="shared_string_accessibility">Dostopnost</string>
     <string name="rendering_out_of_memory">Ni dovolj pomnilnika za prikaz izbranega področja</string>
     <string name="use_fluorescent_overlays">Fluorescentno prekrivanje</string>
     <string name="use_fluorescent_overlays_descr">Uporabi fluorescentne barve za prikaz poti</string>

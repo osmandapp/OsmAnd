@@ -1,17 +1,18 @@
 package net.osmand.plus.openseamapsplugin;
 
-import net.osmand.IndexConstants;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.R;
-import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.render.RendererRegistry;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+
+import net.osmand.IndexConstants;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.R;
+import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.render.RendererRegistry;
 
 public class NauticalMapsPlugin extends OsmandPlugin {
 
@@ -43,6 +44,11 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 	@Override
 	public String getName() {
 		return app.getString(net.osmand.plus.R.string.plugin_nautical_name);
+	}
+
+	@Override
+	public String getHelpFileName() {
+		return "feature_articles/nautical-charts.html";
 	}
 
 	@Override

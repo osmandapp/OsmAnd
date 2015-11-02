@@ -272,7 +272,7 @@
     <string name="use_short_object_names_descr">在觸摸探索模式中用簡短的物件名稱</string>
     <string name="use_short_object_names">使用物件名稱</string>
     <string name="accessibility_preferences_descr">無障礙相關的偏好設定</string>
-    <string name="accessibility_preferences">無障礙</string>
+    <string name="shared_string_accessibility">無障礙</string>
     <string name="rendering_out_of_memory">處理記憶體不足，無法顯示已選取的區域</string>
     <string name="use_fluorescent_overlays">螢光層</string>
     <string name="use_fluorescent_overlays_descr">使用螢光色彩來顯示軌跡與導航路線</string>

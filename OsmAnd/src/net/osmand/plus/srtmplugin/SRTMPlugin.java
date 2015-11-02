@@ -55,7 +55,7 @@ public class SRTMPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public String getHelpUrl() {
+	public String getHelpFileName() {
 		return "feature_articles/contour-lines-plugin.html";
 	}
 	@Override

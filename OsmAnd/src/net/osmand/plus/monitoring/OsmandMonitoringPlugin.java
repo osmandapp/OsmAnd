@@ -92,7 +92,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 
 
 	@Override
-	public String getHelpUrl() {
+	public String getHelpFileName() {
 		return "feature_articles/trip-recording-plugin.html";
 	}
 

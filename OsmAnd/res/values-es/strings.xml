@@ -796,7 +796,7 @@
     <string name="use_short_object_names_descr">Usa nombres cortos de objetos en modo de exploración táctil</string>
     <string name="use_short_object_names">Utilizar nombre de objetos</string>
     <string name="accessibility_preferences_descr">Preferencias relativas a la accesibilidad</string>
-    <string name="accessibility_preferences">Accesibilidad</string>
+    <string name="shared_string_accessibility">Accesibilidad</string>
     <string name="local_index_routing_data">Datos de enrutamiento</string>
     <string name="navigate_point_format">Formato</string>
     <string name="poi_search_desc">Buscar PDI (punto de interés)</string>

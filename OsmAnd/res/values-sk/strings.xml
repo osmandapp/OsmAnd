@@ -171,7 +171,7 @@
     <string name="use_short_object_names_descr">Použiť skrátené názvy objektov v režime prezerania dotykom</string>
     <string name="use_short_object_names">Použiť názvy objektov</string>
     <string name="accessibility_preferences_descr">Predvoľby týkajúce sa uľahčenia prístupu</string>
-    <string name="accessibility_preferences">Uľahčenie prístupu</string>
+    <string name="shared_string_accessibility">Uľahčenie prístupu</string>
     <string name="rendering_out_of_memory">Nedostatok procesnej pamäte na zobrazenie zvolenej oblasti</string>
     <string name="use_fluorescent_overlays">Žiarivejšie prekrytia</string>
     <string name="use_fluorescent_overlays_descr">Použije žiarivejšie farby pre zobrazenie stôp a ciest</string>

@@ -452,7 +452,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public String getHelpUrl() {
+	public String getHelpFileName() {
 		return "feature_articles/audio-video-notes-plugin.html";
 	}
 	@Override

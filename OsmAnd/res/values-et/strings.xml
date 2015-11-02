@@ -71,7 +71,7 @@
 	<string name="osmo_plugin_name">OsMo (OSM Monitoorimine)</string>
 	<string name="plugin_nautical_name">Merendus kaardi vaade</string>
 	<string name="audionotes_plugin_name">Audio/video märkmed</string>
-	<string name="accessibility_preferences">Juurdepääs</string>
+	<string name="shared_string_accessibility">Juurdepääs</string>
 	<string name="debugging_and_development">OsmAnd arendus</string>
 	<string name="back_to_map">Tagasi kaardile</string>
 	<string name="share_note">Jaga märget</string>

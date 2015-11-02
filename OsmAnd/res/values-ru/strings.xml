@@ -817,7 +817,7 @@
   <string name="accessibility_extensions_descr">Дополнительные возможности невизуального доступа для старых версий Android</string>
   <string name="accessibility_extensions">Дополнительные возможности невизуального доступа</string>
   <string name="accessibility_preferences_descr">Настройки для невизуального доступа</string>
-  <string name="accessibility_preferences">Специальные возможности</string>
+  <string name="shared_string_accessibility">Специальные возможности</string>
   
   
   

@@ -494,7 +494,7 @@
   <string name="use_short_object_names_descr">Objektuen izen motzak erabili ukipen-esplorazio moduan</string>
   <string name="use_short_object_names">Objetuen izenak erabili</string>
   <string name="accessibility_preferences_descr">Erabilerraztasunari erlazionaturiko hobespenak</string>
-  <string name="accessibility_preferences">Erabilerraztasuna</string>
+  <string name="shared_string_accessibility">Erabilerraztasuna</string>
   <string name="rendering_out_of_memory">Aukeratutako area erakusteko ez dago memoria nahikorik</string>
   <string name="use_fluorescent_overlays">Gainazal fluoreszenteak</string>
   <string name="use_fluorescent_overlays_descr">Erabili kolore fluoreszenteak bideak eta ibilbideak azaltzeko</string>

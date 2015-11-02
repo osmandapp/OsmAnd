@@ -272,7 +272,7 @@
     <string name="use_short_object_names_descr">Använd korta objektnamn i \"touch exploration mode\"</string>
     <string name="use_short_object_names">Använd objektnamn</string>
     <string name="accessibility_preferences_descr">Tillgänglighetsrelaterade inställningar</string>
-    <string name="accessibility_preferences">Tillgänglighet</string>
+    <string name="shared_string_accessibility">Tillgänglighet</string>
     <string name="rendering_out_of_memory">Inte tillräckligt med processminne för att visa valt område</string>
     <string name="use_fluorescent_overlays">Fluorescerande överlägg</string>
     <string name="use_fluorescent_overlays_descr">Använd fluorescerande färger för att visa spår och rutter</string>

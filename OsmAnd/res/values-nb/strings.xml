@@ -182,7 +182,7 @@
     <string name="use_short_object_names_descr">Bruk korte objektnavn i berøringsmodus</string>
     <string name="use_short_object_names">Bruk objektnavn</string>
     <string name="accessibility_preferences_descr">Tilgjengelighetsrelaterte innstillinger</string>
-    <string name="accessibility_preferences">Tilgjengelighet</string>
+    <string name="shared_string_accessibility">Tilgjengelighet</string>
     <string name="rendering_out_of_memory">Ikke nok prosessminne til å vise valgt område</string>
     <string name="use_fluorescent_overlays">Fluorescerende overlegging</string>
     <string name="use_fluorescent_overlays_descr">Bruk fluorescerende farger til å vise spor og ruter</string>

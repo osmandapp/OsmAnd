@@ -77,6 +77,12 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	public String getName() {
 		return app.getString(R.string.shared_string_online_maps);
 	}
+
+	@Override
+	public String getHelpFileName() {
+		return "feature_articles/online-maps-plugin.html";
+	}
+
 	@Override
 	public void registerLayers(MapActivity activity) {
 		createLayers();

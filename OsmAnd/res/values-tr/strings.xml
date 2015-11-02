@@ -609,7 +609,7 @@
 	<string name="use_short_object_names_descr">Dokunarak keşfetme modunda kısa nesne adları kullan</string>
 	<string name="use_short_object_names">Nesne adları kullan</string>
 	<string name="accessibility_preferences_descr">Erişilebilirlik ile ilgili tercihler</string>
-	<string name="accessibility_preferences">Erişilebilirlik</string>
+	<string name="shared_string_accessibility">Erişilebilirlik</string>
 	<string name="rendering_out_of_memory">Seçilen alanı görüntülemek için işlem belleği yeterli değil</string>
 	<string name="use_fluorescent_overlays">Floresan bindirmeleri</string>
 	<string name="use_fluorescent_overlays_descr">Parkur ve güzergah görüntülemek için floresan renkler kullan</string>

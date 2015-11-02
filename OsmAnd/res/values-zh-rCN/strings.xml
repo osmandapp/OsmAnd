@@ -172,7 +172,7 @@
 	<string name="i_am_here">我在这里</string>
 	<string name="use_short_object_names">使用对象名</string>
 	<string name="accessibility_preferences_descr">无障碍相关的喜好</string>
-	<string name="accessibility_preferences">无障碍</string>
+	<string name="shared_string_accessibility">无障碍</string>
 	<string name="offline_edition">离线编辑</string>
 	<string name="offline_edition_descr">始终使用离线编辑</string>
 	<string name="local_openstreetmap_uploading">正在上传…</string>

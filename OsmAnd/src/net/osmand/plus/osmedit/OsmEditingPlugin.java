@@ -333,7 +333,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 
 
 	@Override
-	public String getHelpUrl() {
+	public String getHelpFileName() {
 		return "feature_articles/osm-editing-plugin.html";
 	}
 

@@ -490,7 +490,7 @@
 	<string name="use_short_object_names_descr">Ужываць кароткія назвы аб\'ектаў у рэжыме агляду</string>
 	<string name="use_short_object_names">Ужываць назвы аб\'ектаў</string>
 	<string name="accessibility_preferences_descr">Налады даступнасьці</string>
-	<string name="accessibility_preferences">Даступнасьць</string>
+	<string name="shared_string_accessibility">Даступнасьць</string>
 	<string name="rendering_out_of_memory">Недастаткова памяці каб паказаць абраную прастору</string>
 	<string name="use_fluorescent_overlays">Флюарэсцэнтныя пласты</string>
 	<string name="use_fluorescent_overlays_descr">Ужываць флюарэсцэнтныя колеры для трэкаў і шляхоў</string>

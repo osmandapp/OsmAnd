@@ -282,7 +282,7 @@
 	<string name="use_short_object_names_descr">שימוש בשמות קצרים לפריטים במצב חקירה במגע</string>
 	<string name="use_short_object_names">שימוש בשמות של פריטים</string>
 	<string name="accessibility_preferences_descr">העדפות הקשורות בנגישות</string>
-	<string name="accessibility_preferences">נגישות</string>
+	<string name="shared_string_accessibility">נגישות</string>
 	<string name="rendering_out_of_memory">אין די זיכרון לתהליך כדי להציג את האיזור הנבחר</string>
 	<string name="use_fluorescent_overlays">שכבות מוארות</string>
 	<string name="use_fluorescent_overlays_descr">ניתן להשתמש בצבעים מוארים כדי להציג דרכים ומסלולים</string>
