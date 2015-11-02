@@ -66,6 +66,7 @@ import net.osmand.plus.helpers.WakeLockHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
 import net.osmand.plus.mapcontextmenu.editors.PointEditor;
+import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RoutingHelper;
@@ -99,6 +100,7 @@ public class MapActivity extends AccessibleActivity {
 
 	private static MapViewTrackingUtilities mapViewTrackingUtilities;
 	private static MapContextMenu mapContextMenu = new MapContextMenu();
+	private static MapMultiSelectionMenu mapMultiSelectionMenu;
 
 	/**
 	 * Called when the activity is first created.
@@ -162,7 +164,14 @@ public class MapActivity extends AccessibleActivity {
 		settings = app.getSettings();
 		app.applyTheme(this);
 		supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
+
+		if (mapMultiSelectionMenu == null) {
+			mapMultiSelectionMenu = new MapMultiSelectionMenu(this);
+		} else {
+			mapMultiSelectionMenu.setMapActivity(this);
+		}
 		mapContextMenu.setMapActivity(this);
+
 		super.onCreate(savedInstanceState);
 		// Full screen is not used here
 		// getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -968,6 +977,10 @@ public class MapActivity extends AccessibleActivity {
 
 	public MapContextMenu getContextMenu() {
 		return mapContextMenu;
+	}
+
+	public MapMultiSelectionMenu getMultiSelectionMenu() {
+		return mapMultiSelectionMenu;
 	}
 
 	public FavoritePointEditor getFavoritePointEditor() {
