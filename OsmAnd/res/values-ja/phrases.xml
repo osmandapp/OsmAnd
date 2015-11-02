@@ -943,4 +943,11 @@
 	<string name="poi_denomination_reformed">改革派(Reformed)</string>
 	<string name="poi_denomination_seventh_day_adventist">セブンスデーアドベンチスト・安息日再臨派(Seventh day adventist)</string>
 	<string name="poi_denomination_new_apostolic">新使徒教会(New apostolic)</string>
+	<string name="poi_denomination_church_of_england">英国聖公会(Church of england)</string>
+	<string name="poi_denomination_episcopal">米国聖公会(Episcopal)</string>
+	<string name="poi_denomination_shia">シーア派(Shia)</string>
+	<string name="poi_denomination_united">カナダ連合教会(United)</string>
+	<string name="poi_denomination_greek_catholic">東方典礼カトリック教会(Greek catholic)</string>
+	<string name="poi_denomination_united_reformed">アメリカ・オランダ改革派(United reformed)</string>
+	<string name="poi_denomination_church_of_scotland">スコットランド国教会(Church of Scotland)</string>
 	</resources>

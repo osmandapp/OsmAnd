@@ -2120,4 +2120,22 @@
 	<string name="poi_sauna_yes">三溫暖服務</string>
 	<string name="poi_solarium_yes">日光浴服務</string>
 
+	<string name="poi_tents_yes">允許宿營</string>
+	<string name="poi_tents_no">不允許宿營</string>
+	<string name="poi_openfire_yes">允許用火</string>
+	<string name="poi_openfire_no">不允許用火</string>
+	<string name="poi_backcountry_yes">野外露營</string>
+	<string name="poi_backcountry_no">野外露營：否</string>
+	<string name="poi_scout_yes">偵察營：是</string>
+	<string name="poi_scout_no">偵察營：否</string>
+	<string name="poi_group_only_yes">只有群組：是</string>
+	<string name="poi_group_only_no">只有群組：否</string>
+	<string name="poi_washing_machine_yes">清洗機：有</string>
+	<string name="poi_washing_machine_no">清洗機：無</string>
+	<string name="poi_shower_yes">淋浴：有</string>
+	<string name="poi_shower_no">淋浴：無</string>
+	<string name="poi_shower_hot">淋浴：熱的</string>
+	<string name="poi_shower_outdoor">淋浴：戶外</string>
+	<string name="poi_shower_cold">淋浴：冷的</string>
+	<string name="poi_shower_indoor">淋浴：室內</string>
 	</resources>
