@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
     <string name="switch_to_raster_map_to_see">Vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v Nastaveních (Spravovat mapové soubory), nebo se přepněte na online mapy.</string>
 
@@ -1983,4 +1983,5 @@
     <string name="contact_us">Kontaktujte nás</string>
     <string name="osm_edit_created_poi">Vytvořen OSM POI</string>
     <string name="osm_edit_created_bug">Vytvořena OSM chyba</string>
+<string name="map_legend">Legenda mapy</string>
 </resources>
