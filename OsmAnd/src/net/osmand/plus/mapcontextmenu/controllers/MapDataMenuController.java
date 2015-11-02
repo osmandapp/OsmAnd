@@ -17,6 +17,7 @@ import net.osmand.plus.mapcontextmenu.MenuController;
 
 public class MapDataMenuController extends MenuController {
 	private WorldRegion region;
+	private String regionName;
 
 	public MapDataMenuController(OsmandApplication app, MapActivity mapActivity, final BinaryMapDataObject dataObject) {
 		super(new MenuBuilder(app), mapActivity);
@@ -24,6 +25,11 @@ public class MapDataMenuController extends MenuController {
 		String fullName = osmandRegions.getFullName(dataObject);
 		final WorldRegion region = osmandRegions.getRegionData(fullName);
 		this.region = region;
+		if (region != null) {
+			regionName = region.getLocaleName();
+		} else {
+			regionName = dataObject.getName();
+		}
 		titleButtonController = new TitleButtonController() {
 			@Override
 			public void buttonPressed() {
@@ -31,7 +37,7 @@ public class MapDataMenuController extends MenuController {
 
 				final Intent intent = new Intent(getMapActivity(), getMapActivity().getMyApplication()
 						.getAppCustomization().getDownloadIndexActivity());
-				intent.putExtra(DownloadActivity.FILTER_KEY, region.getLocaleName());
+				intent.putExtra(DownloadActivity.FILTER_KEY, regionName);
 				intent.putExtra(DownloadActivity.TAB_TO_OPEN, DownloadActivity.DOWNLOAD_TAB);
 				getMapActivity().startActivity(intent);
 			}
@@ -57,12 +63,12 @@ public class MapDataMenuController extends MenuController {
 
 	@Override
 	public String getNameStr() {
-		return region.getLocaleName();
+		return regionName;
 	}
 
 	@Override
 	public String getTypeStr() {
-		if (region.getSuperregion() != null) {
+		if (region != null && region.getSuperregion() != null) {
 			return region.getSuperregion().getLocaleName() + "\n";
 		} else {
 			return getMapActivity().getString(R.string.shared_string_map) + "\n";

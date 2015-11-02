@@ -103,11 +103,14 @@ public class ObjectSelectionMenu extends BaseMenuController {
 
 	private void createCollection(Map<Object, IContextMenuProvider> selectedObjects) {
 		this.selectedObjects.putAll(selectedObjects);
+		int order = Integer.MAX_VALUE;
+		MenuObject topObject = null;
 		for (Map.Entry<Object, IContextMenuProvider> e : selectedObjects.entrySet()) {
 			Object selectedObj = e.getKey();
 			IContextMenuProvider contextObject = selectedObjects.get(selectedObj);
 			LatLon ll = null;
 			PointDescription pointDescription = null;
+
 			if (contextObject != null) {
 				ll = contextObject.getObjectLocation(selectedObj);
 				pointDescription = contextObject.getObjectName(selectedObj);
@@ -121,13 +124,27 @@ public class ObjectSelectionMenu extends BaseMenuController {
 
 			MenuObject menuObject = new MenuObject(ll, pointDescription, selectedObj, getMapActivity());
 			objects.add(menuObject);
+
+			if (contextObject instanceof ContextMenuLayer.IContextMenuProviderSelection) {
+				int i = ((ContextMenuLayer.IContextMenuProviderSelection) contextObject).getOrder(selectedObj);
+				if (i < order) {
+					topObject = menuObject;
+					order = i;
+				}
+			}
 		}
+
 		Collections.sort(objects, new Comparator<MenuObject>() {
 			@Override
 			public int compare(MenuObject obj1, MenuObject obj2) {
 				return obj1.getTitleStr().compareToIgnoreCase(obj2.getTitleStr());
 			}
 		});
+
+		if (topObject != null) {
+			objects.remove(topObject);
+			objects.add(0, topObject);
+		}
 	}
 
 	public static void show(LatLon latLon, Map<Object, IContextMenuProvider> selectedObjects, MapActivity mapActivity) {
