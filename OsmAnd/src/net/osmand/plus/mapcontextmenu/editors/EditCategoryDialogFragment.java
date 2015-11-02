@@ -1,4 +1,4 @@
-package net.osmand.plus.mapcontextmenu.editors.dialogs;
+package net.osmand.plus.mapcontextmenu.editors;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -19,8 +18,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.ColorDialogs;
-import net.osmand.plus.mapcontextmenu.MapContextMenuFragment;
-import net.osmand.plus.mapcontextmenu.editors.PointEditor;
 import net.osmand.util.Algorithms;
 
 import gnu.trove.list.array.TIntArrayList;

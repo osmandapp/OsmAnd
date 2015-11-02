@@ -7,6 +7,7 @@ import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.map.WorldRegion;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -24,6 +25,7 @@ import net.osmand.plus.mapcontextmenu.controllers.OsMoMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.ParkingPositionMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.PointDescriptionMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.TargetPointMenuController;
+import net.osmand.plus.mapcontextmenu.controllers.WorldRegionMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.WptPtMenuController;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.osmedit.OsmPoint;
@@ -109,6 +111,8 @@ public abstract class MenuController extends BaseMenuController {
 				menuController = new EditPOIMenuController(app, mapActivity, pointDescription, (OsmPoint) object);
 			} else if (object instanceof WptPt) {
 				menuController = new WptPtMenuController(app, mapActivity, (WptPt) object);
+			} else if (object instanceof WorldRegion) {
+				menuController = new WorldRegionMenuController(app, mapActivity, (WorldRegion) object);
 			} else if (object instanceof LatLon) {
 				if (pointDescription.isParking()) {
 					menuController = new ParkingPositionMenuController(app, mapActivity, pointDescription);
@@ -204,7 +208,11 @@ public abstract class MenuController extends BaseMenuController {
 		return titleButtonController;
 	}
 
-	public boolean shouldShowButtons() {
+	public boolean fabVisible() {
+		return true;
+	}
+
+	public boolean buttonsVisible() {
 		return true;
 	}
 

@@ -9,7 +9,9 @@ import java.util.TreeSet;
 
 import net.osmand.IndexConstants;
 import net.osmand.binary.BinaryMapDataObject;
+import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
@@ -30,7 +32,7 @@ import android.text.TextPaint;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
-public class DownloadedRegionsLayer extends OsmandMapLayer {
+public class DownloadedRegionsLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {
 
 	private static final int ZOOM_THRESHOLD = 2;
 
@@ -278,10 +280,6 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 		return filter.toString();
 	}
 
-	
-
-
-
 	@Override
 	public boolean drawInScreenPixels() {
 		return false;
@@ -299,4 +297,73 @@ public class DownloadedRegionsLayer extends OsmandMapLayer {
 	}
 
 
+	// IContextMenuProvider
+	@Override
+	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> objects) {
+		getWorldRegionFromPoint(tileBox, point, objects);
+	}
+
+	@Override
+	public LatLon getObjectLocation(Object o) {
+		if (o instanceof WorldRegion) {
+			return ((WorldRegion) o).getRegionCenter();
+		}
+		return null;
+	}
+
+	@Override
+	public String getObjectDescription(Object o) {
+		return view.getContext().getString(R.string.shared_string_map);
+	}
+
+	@Override
+	public PointDescription getObjectName(Object o) {
+		return new PointDescription(PointDescription.POINT_TYPE_WORLD_REGION,
+				view.getContext().getString(R.string.shared_string_map), "");
+	}
+
+	@Override
+	public boolean disableSingleTap() {
+		return false;
+	}
+
+	@Override
+	public boolean disableLongPressOnMap() {
+		return false;
+	}
+
+	private void getWorldRegionFromPoint(RotatedTileBox tb, PointF point, List<? super WorldRegion> regions) {
+		int zoom = tb.getZoom();
+		if (zoom >= ZOOM_TO_SHOW_BORDERS_ST && zoom < ZOOM_TO_SHOW_BORDERS && osmandRegions.isInitialized()) {
+			LatLon pointLatLon = tb.getLatLonFromPixel(point.x, point.y);
+			int point31x = MapUtils.get31TileNumberX(pointLatLon.getLongitude());
+			int point31y = MapUtils.get31TileNumberY(pointLatLon.getLatitude());
+
+			int left = MapUtils.get31TileNumberX(tb.getLeftTopLatLon().getLongitude());
+			int right = MapUtils.get31TileNumberX(tb.getRightBottomLatLon().getLongitude());
+			int top = MapUtils.get31TileNumberY(tb.getLeftTopLatLon().getLatitude());
+			int bottom = MapUtils.get31TileNumberY(tb.getRightBottomLatLon().getLatitude());
+
+			List<BinaryMapDataObject> result;
+			try {
+				result = osmandRegions.queryBbox(left, right, top, bottom);
+			} catch (IOException e) {
+				return;
+			}
+
+			Iterator<BinaryMapDataObject> it = result.iterator();
+			while (it.hasNext()) {
+				BinaryMapDataObject o = it.next();
+				if (!osmandRegions.isDownloadOfType(o, OsmandRegions.MAP_TYPE) || !osmandRegions.contain(o, point31x, point31y)) {
+					it.remove();
+				}
+			}
+
+			if (result.size() > 0) {
+				String fullName = osmandRegions.getFullName(result.get(0));
+				WorldRegion region = osmandRegions.getRegionData(fullName);
+				regions.add(region);
+			}
+		}
+	}
 }

@@ -365,4 +365,12 @@ public class MapContextMenu extends MenuTitleController {
 			return null;
 		}
 	}
+
+	public boolean fabVisible() {
+		return menuController == null || menuController.fabVisible();
+	}
+
+	public boolean buttonsVisible() {
+		return menuController == null || menuController.buttonsVisible();
+	}
 }
