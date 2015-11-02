@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="osmo_use_https_descr">Использовать безопасное подключение к серверу</string>
     <string name="osmo_use_https">Использовать HTTPS</string>
     <string name="srtm_plugin_description">"Плагин обеспечивает наложение контурных линий и (рельефа) затемняющего слоя, которые будут отображаться поверх оффлайн карт OsmAnd. Эта функция высоко оценится спортсменами, туристами, путешественниками и всеми, кто заинтересован в рельефной структуре ландшафта.\n\nГлобальные данные (между 70 градусов на севере и 70 градусов на юге) основываются на измерениях SRTM (Shuttle Radar Topography Mission) и ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), инструментом визуализации Terra, флагманского спутника Земли системы наблюдения NASA. ASTER является результатом совместных усилий NASA, министерства экономики Японии, торговли и промышленности (METI), космических систем Японии (J-spacesystems). "</string>
@@ -1979,4 +1980,11 @@
     <string name="shared_string_send">Отправить</string>
     <string name="application_dir_description">Выберите место где вы хотите сохранить файлы карт.</string>
     <string name="show_on_start_description">Приложение будет запускаться с экрана карты</string>
-</resources>
+<string name="map_downloaded">Карта загружена</string>
+    <string name="shared_string_qr_code">QR-код</string>
+    <string name="go_to_map">Перейти к карте</string>
+    <string name="world_map_download_descr">Базовая карта мира (покрывающая весь мир при малом увеличении) отсутствует или устарела. Пожалуйста, загрузите базовую карту мира для полноты рабочего окружения.</string>
+    <string name="map_downloaded_descr">Карта %1$s загружена. Вернитесь к карте, чтобы начать её использовать.</string>
+    <string name="simulate_initial_startup">Имитировать первый запуск</string>
+    <string name="simulate_initial_startup_descr">Устанавливает признак первого запуска приложения, не изменяет других настроек</string>
+    </resources>
