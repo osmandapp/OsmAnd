@@ -2002,5 +2002,5 @@
     <string name="contact_us">Kontakt os</string>
     <string name="osm_edit_created_poi">Oprettede OSM IP</string>
     <string name="osm_edit_created_bug">Oprettede OSM fejlregistrering</string>
-<string name="map_legend">Kortforklaring</string>
+<string name="map_legend">Signaturforklaring</string>
 </resources>
