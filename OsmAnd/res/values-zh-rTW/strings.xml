@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
     <string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
     <string name="rendering_attr_roadColors_name">道路的色彩調配</string>
@@ -1960,4 +1960,5 @@
     <string name="contact_us">聯絡我們</string>
     <string name="osm_edit_created_poi">建立 OSM 的興趣點</string>
     <string name="osm_edit_created_bug">建立 OSM 的錯誤</string>
+<string name="map_legend">地圖圖例</string>
 </resources>

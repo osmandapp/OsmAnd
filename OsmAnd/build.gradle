@@ -199,17 +199,14 @@ task collectFonts(type: Copy) {
 }
 
 task collectHelpContentsAssets(type: Copy) {
-	from("assets/") {
-//		include "style.css"
-	}
 	from("../../help/help-online") {
 		include "TechnicalArticles.html"
-		include "about.html"
 	}
 	from("../../help/help") {
 		include "faq.html"
 		include "osmo-plugin.html"
 		include "changes.html"
+		include "about.html"
 	}
 	from("../../help/website/feature_articles"){
 		include "*.html"

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
     <string name="starting_point_too_far">Pradžios taškas yra per toli nuo artimiausio kelio.</string>
     <string name="shared_location">Bendrinta vieta</string>
@@ -1962,7 +1962,7 @@
     <string name="instalation_troubleshooting_item">Diegimas ir problemų sprendimas</string>
     <string name="versions_item">Versijos</string>
     <string name="contact_us">Susisiekti</string>
-    <string name="world_map_download_descr">Pasaulio žemėlapis (padengia visą pasauli stambiu masteliu) neįdiegtas arba pasenęs. Prašome atsisiųsti arba atnaujinti.</string>
+    <string name="world_map_download_descr">Pasaulio žemėlapis (padengiantis visą pasauli stambiu masteliu) neįdiegtas arba pasenęs. Prašome atsisiųsti arba atnaujinti.</string>
     <string name="share_geo">geo:</string>
     <string name="nm">nm</string>
     <string name="shared_string_trip_recording">Kelionės įrašymas</string>
@@ -1976,5 +1976,7 @@
 
     <string name="audio_video_note_item">Garso/vaizdo pastabos</string>
     <string name="techical_articles_item">Techniniai straipsniai</string>
-    <string name="feedback">apklausa</string>
+    <string name="poll">apklausa</string>
+    <string name="osm_edit_created_poi"/>
+    <string name="osm_edit_created_bug">Sukurtas OSM riktas</string>
 </resources>

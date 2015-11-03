@@ -61,11 +61,14 @@ public class HelpArticleDialogFragment extends DialogFragment {
 				webView.restoreState(savedInstanceState);
 			} else {
 				String fileContents = getAssetAsString(assetName, getActivity());
-//				fileContents = "<HTML><HEAD><LINK href=\"site.css\" " +
-//						"type=\"text/css\" rel=\"stylesheet\"/></HEAD><body>"
-//						+ fileContents;
 
-				webView.loadDataWithBaseURL("http://osmand.net", fileContents, null, "utf-8", null);
+				StringBuilder sb = new StringBuilder();
+				sb.append("<HTML><HEAD><LINK href=\"file:///android_asset/style.css\" " +
+						"type=\"text/css\" rel=\"stylesheet\"/></HEAD><body>");
+				sb.append(fileContents);
+				sb.append("</body></HTML>");
+
+				webView.loadDataWithBaseURL("http://osmand.net", sb.toString(), null, "utf-8", null);
 			}
 		} else if (url != null) {
 			if (savedInstanceState != null) {

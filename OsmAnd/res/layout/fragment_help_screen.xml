@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         app:title="@string/shared_string_help"
         app:navigationIcon="@drawable/abc_ic_ab_back_mtrl_am_alpha"
+        app:theme="?attr/toolbar_theme"
         android:background="?attr/pstsTabBackground"/>
 
     <ExpandableListView
