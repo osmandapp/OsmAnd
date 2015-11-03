@@ -211,6 +211,11 @@ task collectHelpContentsAssets(type: Sync) {
 	from "../../help/website/feature_articles"
 	into "assets/feature_articles"
 	include "*.html"
+
+	from "../../help/help_online"
+	into "assets/feature_articles"
+	include "TechnicalArticles.html"
+	include "about.html"
 }
 
 task collectRoutingResources(type: Sync) {

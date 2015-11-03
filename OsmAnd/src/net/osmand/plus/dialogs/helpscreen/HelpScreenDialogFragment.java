@@ -35,6 +35,8 @@ import java.util.List;
 public class HelpScreenDialogFragment extends DialogFragment implements ExpandableListView.OnChildClickListener {
 	private static final Log LOG = PlatformUtil.getLog(HelpScreenDialogFragment.class);
 	final static MenuCategory[] categories = MenuCategory.values();
+	public static final String OSMAND_POLL_HTML = "http://osmand.net/android-poll.html";
+	public static final String OSMAND_MAP_LEGEND = "http://osmand.net/help/map-legend_default.png";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -120,6 +122,14 @@ public class HelpScreenDialogFragment extends DialogFragment implements Expandab
 				TextView pollButton = (TextView) convertView.findViewById(R.id.pollButton);
 				Drawable pollIcon = ctx.getIconsCache().getContentIcon(R.drawable.ic_action_message);
 				pollButton.setCompoundDrawablesWithIntrinsicBounds(null, pollIcon, null, null);
+				pollButton.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						Intent i = new Intent(Intent.ACTION_VIEW);
+						i.setData(Uri.parse(OSMAND_POLL_HTML));
+						activity.startActivity(i);
+					}
+				});
 				TextView contactUsButton = (TextView) convertView.findViewById(R.id.contactUsButton);
 				Drawable contactUsIcon =
 						ctx.getIconsCache().getContentIcon(R.drawable.ic_action_message);
@@ -278,7 +288,8 @@ public class HelpScreenDialogFragment extends DialogFragment implements Expandab
 
 	private List<MyMenuItem> createBeginWithOsmandItems() {
 		ArrayList<MyMenuItem> arrayList = new ArrayList<>();
-		ShowArticleOnTouchListener listener = null;
+		ShowArticleOnTouchListener listener = new ShowArticleOnTouchListener(
+				"feature_articles/start.html", getActivity());
 		MyMenuItem.Builder builder = new MyMenuItem.Builder()
 				.setTitle(R.string.first_usage_item, getActivity())
 				.setDescription(R.string.first_usage_item_description, getActivity())
@@ -314,6 +325,16 @@ public class HelpScreenDialogFragment extends DialogFragment implements Expandab
 		listener = new ShowArticleOnTouchListener(
 				"feature_articles/trip-planning.html", getActivity());
 		arrayList.add(new MyMenuItem(name, listener));
+		name = getActivity().getString(R.string.map_legend);
+		View.OnClickListener onClickListener = new View.OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(Intent.ACTION_VIEW);
+				i.setData(Uri.parse(OSMAND_MAP_LEGEND));
+				getActivity().startActivity(i);
+			}
+		};
+		arrayList.add(new MyMenuItem(name, onClickListener));
 		return arrayList;
 	}
 
@@ -341,7 +362,8 @@ public class HelpScreenDialogFragment extends DialogFragment implements Expandab
 		arrayList.add(new MyMenuItem(name, listener));
 
 		name = getActivity().getString(R.string.techical_articles_item);
-		listener = null;
+		listener = new ShowArticleOnTouchListener(
+				"feature_articles/TechnicalArticles.html", getActivity());
 		arrayList.add(new MyMenuItem(name, listener));
 		name = getActivity().getString(R.string.versions_item);
 		listener = new ShowArticleOnTouchListener(
@@ -354,7 +376,7 @@ public class HelpScreenDialogFragment extends DialogFragment implements Expandab
 		}
 		String version = Version.getFullVersion(getOsmandApplication()) + " " + releasedate;
 		listener = new ShowArticleOnTouchListener(
-				"feature_articles/changes-2.1.html", getActivity());
+				"feature_articles/about.html", getActivity());
 		MyMenuItem.Builder builder = new MyMenuItem.Builder()
 				.setTitle(R.string.shared_string_about, getActivity())
 				.setDescription(version)
