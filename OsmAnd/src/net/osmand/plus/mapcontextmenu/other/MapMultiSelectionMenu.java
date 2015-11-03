@@ -11,7 +11,6 @@ import net.osmand.plus.mapcontextmenu.MenuController.MenuType;
 import net.osmand.plus.mapcontextmenu.MenuTitleController;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
-import net.osmand.plus.views.OsmandMapLayer;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -19,7 +18,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class MapMultiSelectionMenu extends BaseMenuController {
 
@@ -172,6 +170,7 @@ public class MapMultiSelectionMenu extends BaseMenuController {
 		this.latLon = latLon;
 		createCollection(selectedObjects);
 		MapMultiSelectionMenuFragment.showInstance(getMapActivity());
+		getMapActivity().refreshMap();
 	}
 
 	public boolean isVisible() {
