@@ -1961,4 +1961,5 @@
     <string name="osm_edit_created_poi">建立 OSM 的興趣點</string>
     <string name="osm_edit_created_bug">建立 OSM 的錯誤</string>
 <string name="map_legend">地圖圖例</string>
-</resources>
+<string name="shared_string_upload">上傳</string>
+    </resources>
