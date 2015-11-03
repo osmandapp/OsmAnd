@@ -8,12 +8,12 @@
               android:paddingBottom="16dp">
 
     <TextView
-        android:id="@+id/pollButton"
+        android:id="@+id/feedbackButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="@string/poll"
+        android:text="@string/feedback"
         tools:drawableTop="@drawable/ic_action_message"/>
 
     <View

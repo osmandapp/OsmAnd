@@ -2131,7 +2131,7 @@
     <string name="instalation_troubleshooting_item">Instalación y solución de problemas</string>
     <string name="techical_articles_item">Artículos técnicos</string>
     <string name="versions_item">Versiones</string>
-    <string name="poll">Encuesta</string>
+    <string name="feedback">Encuesta</string>
     <string name="contact_us">Contáctenos</string>
     <string name="osm_edit_created_poi">PDI de OSM creado</string>
     <string name="osm_edit_created_bug">Nota de OSM creada</string>

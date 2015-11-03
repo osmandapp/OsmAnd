@@ -1982,6 +1982,6 @@
     <string name="instalation_troubleshooting_item">Telepítés és hibaelhárítás</string>
     <string name="techical_articles_item">Technikai cikkek</string>
     <string name="versions_item">Verziók</string>
-    <string name="poll">szavazás</string>
+    <string name="feedback">szavazás</string>
     <string name="contact_us">Kapcsolat</string>
 </resources>

@@ -2071,7 +2071,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="instalation_troubleshooting_item">Installation et débogage</string>
     <string name="techical_articles_item">Articles techniques</string>
     <string name="versions_item">Versions</string>
-    <string name="poll">Sondage</string>
+    <string name="feedback">Sondage</string>
     <string name="contact_us">Nous contacter</string>
 
     <string name="osm_edit_created_poi">PI créés sur OSM</string>

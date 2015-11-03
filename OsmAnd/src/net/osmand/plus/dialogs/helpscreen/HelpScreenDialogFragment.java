@@ -1,6 +1,5 @@
 package net.osmand.plus.dialogs.helpscreen;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -92,15 +91,15 @@ public class HelpScreenDialogFragment extends DialogFragment implements Expandab
 
 	public static class HelpAdapter extends OsmandBaseExpandableListAdapter {
 		private final OsmandApplication ctx;
-		private final Activity activity;
+		private final FragmentActivity activity;
 
-		public HelpAdapter(Activity activity) {
+		public HelpAdapter(FragmentActivity activity) {
 			this.ctx = (OsmandApplication) activity.getApplication();
 			this.activity = activity;
 		}
 
 		@Override
-		public MyMenuItem getChild(int groupPosition, int childPosition) {
+		public HelpMenuItem getChild(int groupPosition, int childPosition) {
 			if (categories[groupPosition] != MenuCategory.HELP_US_TO_IMPROVE) {
 				return categories[groupPosition].getItem(childPosition);
 			} else {
@@ -119,15 +118,14 @@ public class HelpScreenDialogFragment extends DialogFragment implements Expandab
 			if (categories[groupPosition] == MenuCategory.HELP_US_TO_IMPROVE) {
 				convertView = LayoutInflater.from(parent.getContext()).inflate(
 						R.layout.help_to_improve_item, parent, false);
-				TextView pollButton = (TextView) convertView.findViewById(R.id.pollButton);
+				TextView feedbackButton = (TextView) convertView.findViewById(R.id.feedbackButton);
 				Drawable pollIcon = ctx.getIconsCache().getContentIcon(R.drawable.ic_action_message);
-				pollButton.setCompoundDrawablesWithIntrinsicBounds(null, pollIcon, null, null);
-				pollButton.setOnClickListener(new View.OnClickListener() {
+				feedbackButton.setCompoundDrawablesWithIntrinsicBounds(null, pollIcon, null, null);
+				feedbackButton.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						Intent i = new Intent(Intent.ACTION_VIEW);
-						i.setData(Uri.parse(OSMAND_POLL_HTML));
-						activity.startActivity(i);
+						HelpArticleDialogFragment.instantiateWithUrl(OSMAND_POLL_HTML)
+								.show(activity.getSupportFragmentManager(), null);
 					}
 				});
 				TextView contactUsButton = (TextView) convertView.findViewById(R.id.contactUsButton);
@@ -149,7 +147,7 @@ public class HelpScreenDialogFragment extends DialogFragment implements Expandab
 				});
 				return convertView;
 			} else {
-				final MyMenuItem child = getChild(groupPosition, childPosition);
+				final HelpMenuItem child = getChild(groupPosition, childPosition);
 				MenuItemViewHolder viewHolder;
 				if (convertView == null || convertView.getTag() == null) {
 					convertView = LayoutInflater.from(parent.getContext()).inflate(
@@ -235,7 +233,7 @@ public class HelpScreenDialogFragment extends DialogFragment implements Expandab
 			nameTextView = (TextView) view.findViewById(R.id.name);
 		}
 
-		public void bindMenuItem(MyMenuItem menuItem) {
+		public void bindMenuItem(HelpMenuItem menuItem) {
 			nameTextView.setText(menuItem.getTitle());
 			if (menuItem.getDesription() != null) {
 				descrTextView.setVisibility(View.VISIBLE);
@@ -260,7 +258,7 @@ public class HelpScreenDialogFragment extends DialogFragment implements Expandab
 		HELP_US_TO_IMPROVE(R.string.help_us_to_improve_menu_group),
 		OTHER(R.string.other_menu_group);
 
-		private List<MyMenuItem> items;
+		private List<HelpMenuItem> items;
 		@StringRes
 		private final int title;
 
@@ -276,34 +274,34 @@ public class HelpScreenDialogFragment extends DialogFragment implements Expandab
 			return items.size();
 		}
 
-		public MyMenuItem getItem(int position) {
+		public HelpMenuItem getItem(int position) {
 			return items.get(position);
 		}
 
-		public void initItems(List<MyMenuItem> items) {
+		public void initItems(List<HelpMenuItem> items) {
 			this.items = items;
 		}
 	}
 
 
-	private List<MyMenuItem> createBeginWithOsmandItems() {
-		ArrayList<MyMenuItem> arrayList = new ArrayList<>();
+	private List<HelpMenuItem> createBeginWithOsmandItems() {
+		ArrayList<HelpMenuItem> arrayList = new ArrayList<>();
 		ShowArticleOnTouchListener listener = new ShowArticleOnTouchListener(
 				"feature_articles/start.html", getActivity());
-		MyMenuItem.Builder builder = new MyMenuItem.Builder()
+		HelpMenuItem.Builder builder = new HelpMenuItem.Builder()
 				.setTitle(R.string.first_usage_item, getActivity())
 				.setDescription(R.string.first_usage_item_description, getActivity())
 				.setListener(listener);
 		arrayList.add(builder.create());
 		listener = new ShowArticleOnTouchListener(
 				"feature_articles/navigation.html", getActivity());
-		builder = new MyMenuItem.Builder()
+		builder = new HelpMenuItem.Builder()
 				.setTitle(R.string.shared_string_navigation, getActivity())
 				.setDescription(R.string.navigation_item_description, getActivity())
 				.setListener(listener);
 		arrayList.add(builder.create());
 		listener = new ShowArticleOnTouchListener("feature_articles/faq.html", getActivity());
-		builder = new MyMenuItem.Builder()
+		builder = new HelpMenuItem.Builder()
 				.setTitle(R.string.faq_item, getActivity())
 				.setDescription(R.string.faq_item_description, getActivity())
 				.setListener(listener);
@@ -311,36 +309,35 @@ public class HelpScreenDialogFragment extends DialogFragment implements Expandab
 		return arrayList;
 	}
 
-	private List<MyMenuItem> createFeaturesItems() {
-		ArrayList<MyMenuItem> arrayList = new ArrayList<>();
+	private List<HelpMenuItem> createFeaturesItems() {
+		ArrayList<HelpMenuItem> arrayList = new ArrayList<>();
 		String name = getActivity().getString(R.string.map_viewing_item);
 		ShowArticleOnTouchListener listener = new ShowArticleOnTouchListener(
 				"feature_articles/map-viewing.html", getActivity());
-		arrayList.add(new MyMenuItem(name, listener));
+		arrayList.add(new HelpMenuItem(name, listener));
 		name = getActivity().getString(R.string.search_on_the_map_item);
 		listener = new ShowArticleOnTouchListener(
 				"feature_articles/find-something-on-map.html", getActivity());
-		arrayList.add(new MyMenuItem(name, listener));
+		arrayList.add(new HelpMenuItem(name, listener));
 		name = getActivity().getString(R.string.planning_trip_item);
 		listener = new ShowArticleOnTouchListener(
 				"feature_articles/trip-planning.html", getActivity());
-		arrayList.add(new MyMenuItem(name, listener));
+		arrayList.add(new HelpMenuItem(name, listener));
 		name = getActivity().getString(R.string.map_legend);
-		View.OnClickListener onClickListener = new View.OnClickListener(){
+		View.OnClickListener onClickListener = new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent i = new Intent(Intent.ACTION_VIEW);
-				i.setData(Uri.parse(OSMAND_MAP_LEGEND));
-				getActivity().startActivity(i);
+				HelpArticleDialogFragment.instantiateWithUrl(OSMAND_MAP_LEGEND)
+						.show(getFragmentManager(), null);
 			}
 		};
-		arrayList.add(new MyMenuItem(name, onClickListener));
+		arrayList.add(new HelpMenuItem(name, onClickListener));
 		return arrayList;
 	}
 
-	private List<MyMenuItem> createPluginsItems() {
-		ArrayList<MyMenuItem> arrayList = new ArrayList<>();
-		MyMenuItem.Builder builder = new MyMenuItem.Builder();
+	private List<HelpMenuItem> createPluginsItems() {
+		ArrayList<HelpMenuItem> arrayList = new ArrayList<>();
+		HelpMenuItem.Builder builder = new HelpMenuItem.Builder();
 		for (final OsmandPlugin osmandPlugin : OsmandPlugin.getAvailablePlugins()) {
 			builder.reset();
 			builder.setTitle(osmandPlugin.getName())
@@ -354,21 +351,21 @@ public class HelpScreenDialogFragment extends DialogFragment implements Expandab
 		return arrayList;
 	}
 
-	private List<MyMenuItem> createOtherItems() {
-		ArrayList<MyMenuItem> arrayList = new ArrayList<>();
+	private List<HelpMenuItem> createOtherItems() {
+		ArrayList<HelpMenuItem> arrayList = new ArrayList<>();
 		String name = getActivity().getString(R.string.instalation_troubleshooting_item);
 		ShowArticleOnTouchListener listener = new ShowArticleOnTouchListener(
 				"feature_articles/installation-and-troubleshooting.html", getActivity());
-		arrayList.add(new MyMenuItem(name, listener));
+		arrayList.add(new HelpMenuItem(name, listener));
 
 		name = getActivity().getString(R.string.techical_articles_item);
 		listener = new ShowArticleOnTouchListener(
 				"feature_articles/TechnicalArticles.html", getActivity());
-		arrayList.add(new MyMenuItem(name, listener));
+		arrayList.add(new HelpMenuItem(name, listener));
 		name = getActivity().getString(R.string.versions_item);
 		listener = new ShowArticleOnTouchListener(
 				"feature_articles/changes.html", getActivity());
-		arrayList.add(new MyMenuItem(name, listener));
+		arrayList.add(new HelpMenuItem(name, listener));
 
 		String releasedate = "";
 		if (!this.getString(R.string.app_edition).equals("")) {
@@ -377,7 +374,7 @@ public class HelpScreenDialogFragment extends DialogFragment implements Expandab
 		String version = Version.getFullVersion(getOsmandApplication()) + " " + releasedate;
 		listener = new ShowArticleOnTouchListener(
 				"feature_articles/about.html", getActivity());
-		MyMenuItem.Builder builder = new MyMenuItem.Builder()
+		HelpMenuItem.Builder builder = new HelpMenuItem.Builder()
 				.setTitle(R.string.shared_string_about, getActivity())
 				.setDescription(version)
 				.setListener(listener);
@@ -397,7 +394,7 @@ public class HelpScreenDialogFragment extends DialogFragment implements Expandab
 
 		@Override
 		public void onClick(View v) {
-			HelpArticleDialogFragment.createInstance(filename)
+			HelpArticleDialogFragment.instantiateWithAsset(filename)
 					.show(ctx.getSupportFragmentManager(), null);
 		}
 	}

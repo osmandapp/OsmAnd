@@ -1971,7 +1971,7 @@
     <string name="instalation_troubleshooting_item">Namestitev in odpravljanje napak</string>
     <string name="techical_articles_item">Tehnični članki</string>
     <string name="versions_item">Različice</string>
-    <string name="poll">Anketa</string>
+    <string name="feedback">Anketa</string>
     <string name="contact_us">Stik z nami</string>
     <string name="world_map_download_descr">Osnovni svetovni zemljevid (zemljevid sveta pri oddaljenem pogledu) je zastarel, ali pa ni nameščen. Brez tega zemljevida prikaz ni popoln.</string>
     <string name="simulate_initial_startup_descr">Nastavi zastavico, ki določa prvi zagon programa, ostale nastavitve pa ostanejo nespremenjene.</string>

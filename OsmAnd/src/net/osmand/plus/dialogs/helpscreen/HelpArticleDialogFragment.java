@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -25,7 +26,8 @@ import java.io.InputStreamReader;
 public class HelpArticleDialogFragment extends DialogFragment {
 	private static final Log LOG = PlatformUtil.getLog(HelpArticleDialogFragment.class);
 
-	public static final String FILE_NAME = "url";
+	private static final String ASSET_NAME = "asset_name";
+	private static final String URL = "url";
 	private WebView webView;
 
 	@Override
@@ -51,12 +53,36 @@ public class HelpArticleDialogFragment extends DialogFragment {
 			}
 		});
 
-		String fileContents = getAssetAsString(getArguments().getString(FILE_NAME), getActivity());
+		String assetName = getArguments().getString(ASSET_NAME);
+		String url = getArguments().getString(URL);
 		webView = (WebView) view.findViewById(R.id.webView);
-		if (savedInstanceState != null) {
-			webView.restoreState(savedInstanceState);
+		if (assetName != null) {
+			if (savedInstanceState != null) {
+				webView.restoreState(savedInstanceState);
+			} else {
+				String fileContents = getAssetAsString(assetName, getActivity());
+//				fileContents = "<HTML><HEAD><LINK href=\"site.css\" " +
+//						"type=\"text/css\" rel=\"stylesheet\"/></HEAD><body>"
+//						+ fileContents;
+
+				webView.loadDataWithBaseURL("http://osmand.net", fileContents, null, "utf-8", null);
+			}
+		} else if (url != null) {
+			if (savedInstanceState != null) {
+				webView.restoreState(savedInstanceState);
+			} else {
+				webView.setWebViewClient(new WebViewClient() {
+					@Override
+					public boolean shouldOverrideUrlLoading(WebView view, String url) {
+						view.loadUrl(url);
+						return true;
+					}
+				});
+				webView.loadUrl(url);
+			}
 		} else {
-			webView.loadDataWithBaseURL("http://osmand.net", fileContents, null, "utf-8", null);
+			throw new IllegalArgumentException("HelpArticleDialogFragment should be " +
+					"instantiated either with ASSET_NAME or with URL");
 		}
 		return view;
 	}
@@ -70,9 +96,17 @@ public class HelpArticleDialogFragment extends DialogFragment {
 		return (OsmandApplication) getActivity().getApplication();
 	}
 
-	public static HelpArticleDialogFragment createInstance(String fileName) {
+	public static HelpArticleDialogFragment instantiateWithAsset(String assetName) {
 		Bundle args = new Bundle();
-		args.putString(FILE_NAME, fileName);
+		args.putString(ASSET_NAME, assetName);
+		final HelpArticleDialogFragment helpArticleDialogFragment = new HelpArticleDialogFragment();
+		helpArticleDialogFragment.setArguments(args);
+		return helpArticleDialogFragment;
+	}
+
+	public static HelpArticleDialogFragment instantiateWithUrl(String url) {
+		Bundle args = new Bundle();
+		args.putString(URL, url);
 		final HelpArticleDialogFragment helpArticleDialogFragment = new HelpArticleDialogFragment();
 		helpArticleDialogFragment.setArguments(args);
 		return helpArticleDialogFragment;

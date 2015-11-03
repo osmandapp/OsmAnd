@@ -1998,7 +1998,7 @@
     <string name="instalation_troubleshooting_item">Installation og fejlfinding</string>
     <string name="techical_articles_item">Tekniske artikler</string>
     <string name="versions_item">Versioner</string>
-    <string name="poll">Meningsmåling</string>
+    <string name="feedback">Meningsmåling</string>
     <string name="contact_us">Kontakt os</string>
     <string name="osm_edit_created_poi">Oprettede OSM IP</string>
     <string name="osm_edit_created_bug">Oprettede OSM fejlregistrering</string>

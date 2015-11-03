@@ -2050,7 +2050,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="instalation_troubleshooting_item">Installation and troubleshooting</string>
     <string name="techical_articles_item">Technical articles</string>
     <string name="versions_item">Versions</string>
-    <string name="poll">Poll</string>
+    <string name="feedback">Feedback</string>
     <string name="contact_us">Contact us</string>
     <string name="map_legend">Map legend</string>
 </resources>

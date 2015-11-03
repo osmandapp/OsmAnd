@@ -5,32 +5,32 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
 import android.view.View.OnClickListener;
 
-public class MyMenuItem {
+public class HelpMenuItem {
 	private final String title;
 	private final String desription;
 	@DrawableRes
 	private final int icon;
 	private final OnClickListener onClickListener;
 
-	public MyMenuItem(String title) {
+	public HelpMenuItem(String title) {
 		this(title, null);
 	}
 
-	public MyMenuItem(@StringRes int title, Context context) {
+	public HelpMenuItem(@StringRes int title, Context context) {
 		this(context.getString(title));
 	}
 
-	public MyMenuItem(String title, OnClickListener onClickListener) {
+	public HelpMenuItem(String title, OnClickListener onClickListener) {
 		this(title, null, -1, onClickListener);
 	}
 
-	private MyMenuItem(String title, @StringRes int desription, @DrawableRes int icon,
-					   Context context, OnClickListener onClickListener) {
+	private HelpMenuItem(String title, @StringRes int desription, @DrawableRes int icon,
+						 Context context, OnClickListener onClickListener) {
 		this(title, context.getString(desription), icon, onClickListener);
 	}
 
-	private MyMenuItem(String title, String desription, @DrawableRes int icon,
-					   OnClickListener onClickListener) {
+	private HelpMenuItem(String title, String desription, @DrawableRes int icon,
+						 OnClickListener onClickListener) {
 		this.title = title;
 		this.desription = desription;
 		this.icon = icon;
@@ -97,8 +97,8 @@ public class MyMenuItem {
 			return this;
 		}
 
-		public MyMenuItem create() {
-			return new MyMenuItem(title, description, icon, listener);
+		public HelpMenuItem create() {
+			return new HelpMenuItem(title, description, icon, listener);
 		}
 	}
 }

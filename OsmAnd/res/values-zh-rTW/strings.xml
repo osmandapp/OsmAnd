@@ -1956,7 +1956,7 @@
     <string name="instalation_troubleshooting_item">安裝和疑難排除</string>
     <string name="techical_articles_item">技術文章</string>
     <string name="versions_item">版本</string>
-    <string name="poll">投票</string>
+    <string name="feedback">投票</string>
     <string name="contact_us">聯絡我們</string>
     <string name="osm_edit_created_poi">建立 OSM 的興趣點</string>
     <string name="osm_edit_created_bug">建立 OSM 的錯誤</string>

@@ -140,15 +140,15 @@ android {
 
 	buildTypes {
 		debug {
-		    // proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
-		    // minifyEnabled true
-		    // proguardFiles 'proguard-project.txt'
+			// proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
+			// minifyEnabled true
+			// proguardFiles 'proguard-project.txt'
 			signingConfig signingConfigs.development
 		}
 		release {
-		    // proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
-		    // minifyEnabled true
-		    //proguardFiles 'proguard-project.txt'
+			// proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
+			// minifyEnabled true
+			//proguardFiles 'proguard-project.txt'
 			signingConfig signingConfigs.publishing
 		}
 	}
@@ -198,24 +198,24 @@ task collectFonts(type: Copy) {
 	include "*.ttf"
 }
 
-task collectHelpContentsAssets(type: Sync) {
-	from "../../help/help"
-	into "assets/help"
-	include "*.html"
-	include "images/**/*.png"
+task collectHelpContentsAssets(type: Copy) {
+	from("assets/") {
+//		include "style.css"
+	}
+	from("../../help/help-online") {
+		include "TechnicalArticles.html"
+		include "about.html"
+	}
+	from("../../help/help") {
+		include "faq.html"
+		include "osmo-plugin.html"
+		include "changes.html"
+	}
+	from("../../help/website/feature_articles"){
+		include "*.html"
+	}
 
-	from "assets/"
-	into "assets/help"
-	include "style.css"
-
-	from "../../help/website/feature_articles"
 	into "assets/feature_articles"
-	include "*.html"
-
-	from "../../help/help_online"
-	into "assets/feature_articles"
-	include "TechnicalArticles.html"
-	include "about.html"
 }
 
 task collectRoutingResources(type: Sync) {
@@ -225,13 +225,13 @@ task collectRoutingResources(type: Sync) {
 }
 
 task collectMiscResources(type: Copy) {
-    into "src/net/osmand/osm"
-    from("../../resources/obf_creation") {
-        include "rendering_types.xml"
-    }
-    from("../../resources/poi") {
-        include "poi_types.xml"
-    }
+	into "src/net/osmand/osm"
+	from("../../resources/obf_creation") {
+		include "rendering_types.xml"
+	}
+	from("../../resources/poi") {
+		include "poi_types.xml"
+	}
 }
 
 task collectRenderingStylesResources(type: Sync) {
@@ -302,7 +302,7 @@ tasks.withType(JavaCompile) {
 clean.dependsOn 'cleanNoTranslate'
 
 task cleanNoTranslate() {
-    delete ('res/values/no_translate.xml')
+	delete('res/values/no_translate.xml')
 }
 
 repositories {
