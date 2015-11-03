@@ -962,4 +962,10 @@
 	<string name="poi_denomination_adventist">アドベンチスト・安息日再臨派(Adventist)</string>
 	<string name="poi_denomination_nazarene">ナザレン教会(Nazarene)</string>
 	<string name="poi_denomination_united_methodist">統一メソジスト教会(United methodist)</string>
+	<string name="poi_denomination_congregational">会衆派教会(Congregational)</string>
+	<string name="poi_denomination_old_believers">古儀式派(Old believers)</string>
+	<string name="poi_denomination_serbian_orthodox">セルビア正教会(Serbian orthodox)</string>
+	<string name="poi_denomination_spiritist">心霊主義(Spiritist)</string>
+	<string name="poi_denomination_armenian_apostolic">アルメニア教会(Armenian apostolic)</string>
+	<string name="poi_denomination_dutch_reformed">オランダ改革派(Dutch reformed)</string>
 	</resources>
