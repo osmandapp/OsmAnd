@@ -1069,7 +1069,7 @@ POIの更新は利用できません</string>
 	<string name="use_short_object_names_descr">タッチで検索する場合に短いオブジェクト名を使用します</string>
 	<string name="use_short_object_names">オブジェクト名を使用</string>
 	<string name="accessibility_preferences_descr">アクセシビリティ関連の設定をします</string>
-	<string name="accessibility_preferences">アクセシビリティ</string>
+	<string name="shared_string_accessibility">アクセシビリティ</string>
 	<string name="use_fluorescent_overlays">蛍光色の重ね表示</string>
 	<string name="use_fluorescent_overlays_descr">経路とルートを表示する際に、蛍光色を使用します</string>
 	<string name="offline_edition">オフライン編集</string>

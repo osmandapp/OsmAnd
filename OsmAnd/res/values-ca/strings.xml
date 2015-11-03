@@ -155,7 +155,7 @@
 <string name="no_info">No hi ha informació</string>
 <string name="settings_direction_style">Estil de la direcció</string>
 <string name="i_am_here">Sóc aquí</string>
-<string name="accessibility_preferences">Accessibilitat</string>
+<string name="shared_string_accessibility">Accessibilitat</string>
 <string name="use_fluorescent_overlays_descr">Utilitza colors fluorescents per mostrar traces i rutes</string>
 <string name="local_openstreetmap_uploading">S\'està pujant…</string>
 <string name="show_warnings_descr">Mostra límits de velocitat, radars i bandes rugoses</string>

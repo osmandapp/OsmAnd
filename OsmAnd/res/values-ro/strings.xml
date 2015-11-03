@@ -287,7 +287,7 @@
 	<string name="use_short_object_names_descr">Folosește prescurtări ale denumirilor în modul explorare a hărții</string>
 	<string name="use_short_object_names">Folosește prescurtări</string>
 	<string name="accessibility_preferences_descr">Preferințe pentru accesibilitate</string>
-	<string name="accessibility_preferences">Accesibilitate</string>
+	<string name="shared_string_accessibility">Accesibilitate</string>
 	<string name="rendering_out_of_memory">Nu există suficientă memorie disponibilă pentru a afișa zona selectată</string>
 	<string name="use_fluorescent_overlays">Straturi fluorescente</string>
 	<string name="use_fluorescent_overlays_descr">Folosește culori fluorescente pentru reprezentarea rutelor și traseelor</string>

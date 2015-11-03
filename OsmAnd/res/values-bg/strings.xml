@@ -664,7 +664,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="use_short_object_names_descr">Кратки имена на обекти в режим разглеждане</string>
 	<string name="use_short_object_names">Използване на имена на обекти</string>
 	<string name="accessibility_preferences_descr">Настройки за достъпност</string>
-	<string name="accessibility_preferences">Достъпност</string>
+	<string name="shared_string_accessibility">Достъпност</string>
 	<string name="rendering_out_of_memory">Няма достатъчно памет за избрания район</string>
 	<string name="use_fluorescent_overlays">Светещ допълнителен слой</string>
 	<string name="use_fluorescent_overlays_descr">Използване на ярки цветове за осветяване на пътища и маршрути</string>

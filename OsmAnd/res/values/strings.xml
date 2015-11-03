@@ -314,7 +314,7 @@
 	\nBoth the location and time are visible on the OsmAnd dashboard as well as in widget on the map screen. An alarm can be added to the Android calendar as a reminder.</string>
 	<string name="osmand_distance_planning_plugin_name">Distance calculator &amp; planning tool</string>
 	<string name="osmand_distance_planning_plugin_description">This plugin provides a map screen widget allowing to create paths by tapping on the map, or use or modify existing GPX files, to plan a trip and measure the distance between points. The results can be saved as a GPX file, which can later be used for guidance.</string>
-	<string name="accessibility_preferences">Accessibility</string>
+	<string name="shared_string_accessibility">Accessibility</string>
 	<string name="osmand_accessibility_description">This plugin makes the device\'s accessibility features available directly in OsmAnd. It facilitates e.g. adjusting the speech rate for TTS voices, configuring directional-pad screen navigation, using a trackball for zoom control, or using text-to-speech feedback, like for auto announcing your position.</string>
 	<string name="osm_settings">OSM editing</string>
 	<string name="osm_editing_plugin_description">Via this plugin OsmAnd can be used to make OSM contributions like creating or modifying OSM POI objects, opening or commenting OSM bugs, and contributing recorded GPX files. OSM is a community driven, global public domain mapping project. For details please refer to http://openstreetmap.org. Active participation is appreciated, and contributions can be made directly from OsmAnd, if you specify your personal OSM credentials in the app.</string>
@@ -2042,17 +2042,11 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="first_usage_item">First usage</string>
     <string name="first_usage_item_description">How to download maps, set basic settings</string>
     <string name="navigation_item_description">Setup navigation</string>
+    <string name="planning_trip_item">Planning a trip</string>
     <string name="faq_item">FAQ</string>
     <string name="faq_item_description">How to use plugins</string>
     <string name="map_viewing_item">Map viewing</string>
     <string name="search_on_the_map_item">Map searching</string>
-    <string name="planning_trip_item">Planning a trip</string>
-    <string name="contour_lines_and_hillshade_maps_item">Contour lines and hillshade maps</string>
-    <string name="trip_recording_tool_item">Trip recording tool</string>
-    <string name="osmand_ski_maps_item">OsmAnd Ski maps</string>
-    <string name="nautical_charts_item">Nautical charts</string>
-    <string name="audio_video_note_item">Audio/video notes</string>
-    <string name="osm_editing_item">OSM editing</string>
     <string name="instalation_troubleshooting_item">Installation and troubleshooting</string>
     <string name="techical_articles_item">Technical articles</string>
     <string name="versions_item">Versions</string>

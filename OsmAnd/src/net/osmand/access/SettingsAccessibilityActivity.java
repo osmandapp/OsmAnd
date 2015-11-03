@@ -1,19 +1,20 @@
 package net.osmand.access;
 
 
+import android.os.Build;
+import android.os.Bundle;
+import android.preference.ListPreference;
+import android.preference.Preference;
+import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.PreferenceCategory;
+import android.preference.PreferenceGroup;
+import android.preference.PreferenceScreen;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.access.AccessibilityMode;
 import net.osmand.plus.access.RelativeDirectionStyle;
 import net.osmand.plus.activities.SettingsBaseActivity;
-import android.os.Build;
-import android.os.Bundle;
-import android.preference.ListPreference;
-import android.preference.Preference;
-import android.preference.PreferenceGroup;
-import android.preference.Preference.OnPreferenceChangeListener;
-import android.preference.PreferenceCategory;
-import android.preference.PreferenceScreen;
 
 public class SettingsAccessibilityActivity extends SettingsBaseActivity {
 
@@ -25,7 +26,7 @@ public class SettingsAccessibilityActivity extends SettingsBaseActivity {
     public void onCreate(Bundle savedInstanceState) {
 		((OsmandApplication) getApplication()).applyTheme(this);
 		super.onCreate(savedInstanceState);
-		getToolbar().setTitle(R.string.accessibility_preferences);
+		getToolbar().setTitle(R.string.shared_string_accessibility);
 		PreferenceScreen grp = getPreferenceScreen();
 
 		String[] entries = new String[AccessibilityMode.values().length];

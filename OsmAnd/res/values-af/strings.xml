@@ -170,7 +170,7 @@
   <string name="use_short_object_names_descr">Gebruik kort voorwerp name in aanraking ondersoek gebruikswyse</string>
   <string name="use_short_object_names">Gebruik voorwerp name</string>
   <string name="accessibility_preferences_descr">Toeganklikheid voorkeure</string>
-  <string name="accessibility_preferences">Toeganklikheid</string>
+  <string name="shared_string_accessibility">Toeganklikheid</string>
   <string name="rendering_out_of_memory">Nie genoeg proses geheue om geselekteerde area te vertoon nie</string>
   <string name="use_fluorescent_overlays">Helder oorleggings</string>
   <string name="use_fluorescent_overlays_descr">Gebruik helder kleure om paaie en roetes te vertoon</string>

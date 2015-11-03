@@ -112,7 +112,7 @@
 	<string name="plugin_ski_name">ಆಕಾಶ ನಕ್ಷೆ ವೀಕ್ಷಣೆ</string>
 	<string name="audionotes_plugin_name">ದೃಶ್ಯ / ಶ್ರಾವ್ಯ ಟಿಪ್ಪಣೆಗಳು</string>
 	<string name="osmand_parking_plugin_name">ನಿಲುಗಡೆ ಸ್ಥಾನ</string>
-	<string name="accessibility_preferences">ಲಭ್ಯಾರ್ಹತೆ</string>
+	<string name="shared_string_accessibility">ಲಭ್ಯಾರ್ಹತೆ</string>
 	<string name="osm_settings">ಒಎಸ್ಎಂ ಸಂಪಾದನೆ</string>
 	<string name="debugging_and_development">ಒಸ್ಮಾಂಡ್ ತಂತ್ರಾಶ ಅಭಿವೃದ್ಧಿ</string>
 	<string name="rename_failed">ಮರುನಾಮಕರಣ ವಿಫಲವಾಗಿದೆ</string>

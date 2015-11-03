@@ -157,5 +157,14 @@ public class WorldRegion {
 		subregions.add(rd);
 		rd.superregion = this;
 	}
-	
+
+	public int getLevel() {
+		int res = 0;
+		WorldRegion parent = superregion;
+		while (parent != null) {
+			parent = parent.superregion;
+			res++;
+		}
+		return res;
+	}
 }

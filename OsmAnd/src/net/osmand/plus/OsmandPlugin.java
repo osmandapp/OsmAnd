@@ -92,6 +92,10 @@ public abstract class OsmandPlugin {
 	public void disable(OsmandApplication app) {
 	}
 
+	public String getHelpFileName() {
+		return null;
+	}
+
 	public static void initPlugins(OsmandApplication app) {
 		OsmandSettings settings = app.getSettings();
 		Set<String> enabledPlugins = settings.getEnabledPlugins();

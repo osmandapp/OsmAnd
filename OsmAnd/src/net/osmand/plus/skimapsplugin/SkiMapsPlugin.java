@@ -1,10 +1,11 @@
 package net.osmand.plus.skimapsplugin;
 
+import android.app.Activity;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.render.RendererRegistry;
-import android.app.Activity;
 
 public class SkiMapsPlugin extends OsmandPlugin {
 
@@ -36,7 +37,13 @@ public class SkiMapsPlugin extends OsmandPlugin {
 	public int getAssetResourceName() {
 		return R.drawable.ski_map;
 	}
-	
+
+
+	@Override
+	public String getHelpFileName() {
+		return "feature_articles/ski-plugin.html";
+	}
+
 	@Override
 	public boolean init(final OsmandApplication app, final Activity activity) {
 		if(activity != null) {

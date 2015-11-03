@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="osmo_use_https_descr">Использовать безопасное подключение к серверу</string>
     <string name="osmo_use_https">Использовать HTTPS</string>
-    <string name="srtm_plugin_description">"Плагин обеспечивает наложение контурных линий и (рельефа) затемняющего слоя, которые будут отображаться поверх оффлайн карт OsmAnd. Эта функция высоко оценится спортсменами, туристами, путешественниками и всеми, кто заинтересован в рельефной структуре ландшафта.\n\nГлобальные данные (между 70 градусов на севере и 70 градусов на юге) основываются на измерениях SRTM (Shuttle Radar Topography Mission) и ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), инструментом визуализации Terra, флагманского спутника Земли системы наблюдения NASA. ASTER является результатом совместных усилий NASA, министерства экономики Японии, торговли и промышленности (METI), космических систем Японии (J-spacesystems). "</string>
+    <string name="srtm_plugin_description">"Этот плагин обеспечивает как наложение контурных линий, так и отображения затеняющего слоя рельефа поверх стандартных карт OsmAnd. Эта функция высоко оценится спортсменами, туристами, путешественниками и всеми, кто заинтересован в рельефной структуре ландшафта.\n\nГлобальные данные (между 70 градусами на севере и 70 градусами на юге) основываются на измерениях SRTM (Shuttle Radar Topography Mission) и ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer) — инструментом визуализации Terra, флагманского спутника Системы Наблюдения Земли NASA. ASTER является результатом совместных усилий NASA, министерства экономики Японии, торговли и промышленности (METI), а также Космических Систем Японии (J-spacesystems). "</string>
     <string name="srtm_paid_version_msg">Рассмотрите, пожалуйста, покупку плагина \"Линии высот\" в Google Play, чтобы поддержать последующую разработку.</string>
     <string name="srtm_paid_version_title">Линии высот</string>
     <string name="av_def_action_video">Запись видео</string>
@@ -88,8 +89,7 @@
   <string name="online_map_settings_descr">Настройки источников онлайн карт и слоёв</string>
   
   
-  <string name="osmand_rastermaps_plugin_description">"С помощью этого плагина вы можете получить доступ ко множеству видов интернет карт (тайловых или растровых), от предопределенных тайловых OpenStreetMap (Mapnik) до спутниковых изображений и специальных слоев назначения, таких как карты погоды, климатические карты, геологических карты, слои затемнения высот и т.д.
-\nЛюбая из этих карт может быть использована в качестве основной (базовой) карты для отображения на экране OsmAnd или в виде наложения/подложки к другой базовой карте (обычной оффлайн карте OsmAnd). Для того чтобы сделать любую подложку более видимой, некоторые элементы векторной карты OsmAnd могут быть по желанию легко скрыты через меню \"Настройка карты\".\nТайловые карты могут быть получены непосредственно с помощью онлайн-источников или могут быть подготовлены для использования в автономном режиме (и вручную скопированы в папку данных OsmAnd) в качестве базы данных SQLite, которая может быть получена с помощью различных инструментов подготовки карт сторонних производителей. "</string>
+  <string name="osmand_rastermaps_plugin_description">"С помощью этого плагина можно получить доступ ко множеству видов онлайн-карт (тайловых или растровых), от предопределенных тайловых OpenStreetMap (Mapnik) до спутниковых снимков и слоев специального назначения, таких как карты погоды, климатические карты, геологических карты, слои затемнения высот и т. д.\n\nЛюбая из этих карт может быть использована в качестве основной (базовой) карты для отображения на экране OsmAnd или в виде наложения или подложки к другой базовой карте (например стандартной офлайн-карте OsmAnd). Чтобы сделать какую-либо подложку лучше видимой, некоторые элементы векторной карты OsmAnd могут быть по желанию легко скрыты через меню «Настройка карты».\n\nТайловые карты можно получить непосредственно с помощью онлайн-источников или подготовить для использования в автономном режиме (и вручную скопировать в папку данных OsmAnd) в виде базы данных sqlite, которая может быть создана с помощью различных инструментов подготовки карт сторонних производителей. "</string>
   <string name="osmand_background_plugin_description">Этот плагин предоставляет навигацию и запись маршрутов в энергосберегающем режиме. Плагин работает в фоновом режиме и периодически активизирует GPS для записи маршрута или воспроизведения голосовых команд.</string>
   <string name="osmand_accessibility_description">"Плагин добавляет поддержку специальных возможностей устройства непосредственно в OsmAnd. Это облегчает, например, регулировку скорости речи для голоса TTS, настройку направленности  экрана навигации, управление масштабом при помощи трекбола или использование голосовых команд обратной связи для авто аннотации вашего местоположения."</string>
   
@@ -817,7 +817,7 @@
   <string name="accessibility_extensions_descr">Дополнительные возможности невизуального доступа для старых версий Android</string>
   <string name="accessibility_extensions">Дополнительные возможности невизуального доступа</string>
   <string name="accessibility_preferences_descr">Настройки для невизуального доступа</string>
-  <string name="accessibility_preferences">Специальные возможности</string>
+  <string name="shared_string_accessibility">Специальные возможности</string>
   
   
   
@@ -1044,7 +1044,7 @@
 	<string name="precise_routing_mode_descr">Включите, для расчёта точных маршрутов без затруднений. Всё ещё ограниченн расстоянием и медленный.</string>
     
     
-    <string name="download_hillshade_maps">Карты с рельефом местности</string>
+    <string name="download_hillshade_maps">Затемнение рельефа</string>
     <string name="av_use_external_camera_descr">Использовать системную программу для фото</string>
     <string name="av_use_external_camera">Использовать приложение Камера</string>
     <string name="index_name_openmaps">OpenMaps - Европа</string>
@@ -1358,7 +1358,7 @@
     <string name="osmo_group_name">Название группы</string>
     <string name="osmo_connect_to_group">Подключиться к группе</string>
     <string name="osmo_create_group">Создать группу</string>
-    <string name="osmo_enable_tracker">Отправить моё местоположение</string>
+    <string name="osmo_enable_tracker">Отправить мои местоположения</string>
     <string name="osmo_group_description">Описание</string>
     <string name="int_days">дней</string>
     <string name="osmo_track_interval">Интервал отправки</string>
@@ -1644,7 +1644,7 @@
     <string name="version_settings_descr">Скачать ночные сборки</string>
     <string name="version_settings">Сборки</string>
     
-    <string name="shared_string_my_location">Мое местоположение</string>
+    <string name="shared_string_my_location">Моё местоположение</string>
     <string name="gps_status">Статус GPS</string>
     <string name="points">Точки</string>
     <string name="parking_place">Место для парковки</string>
@@ -1923,7 +1923,7 @@
 	<string name="address_unknown">Адрес неизвестен</string>
     <string name="are_you_sure">Вы уверены?</string>
 	<string name="unsaved_changes_will_be_lost">Все несохраненные изменения будут потеряны. Продолжить?</string>
-	<string name="simulate_your_location_descr">Моделировать используя записанный GPX или рассчитанный маршрут</string>
+	<string name="simulate_your_location_descr">Моделировать, используя рассчитанный маршрут или записанный GPX</string>
     <string name="simulate_your_location_stop_descr">Остановить моделирование</string>
     <string name="favorite_category_add_new">Добавить новую</string>
     <string name="favorite_category_select">Выберите категорию</string>
@@ -1951,7 +1951,7 @@
     <string name="world_maps">Карты мира</string>
     
     <string name="favourites_context_menu_add">Добавить избранное</string>
-	<string name="region_maps">Карты региона</string>
+	<string name="region_maps">Региональные карты</string>
     <string name="favorite_category_dublicate_message">Категория с таким названием уже существует. Введите другое название.</string>
     <string name="favorite_category_name">Название категории</string>
     <string name="favorite_category_add_new_title">Добавить новую категорию</string>
@@ -1968,8 +1968,8 @@
     <string name="show_free_version_banner_description">Даже если у вас купленная версия вы еще можете увидеть баннер для бесплатной версии</string>
     <string name="confirm_download_roadmaps">Вы уверены, что хотите скачать карту автодорог, даже если у вас есть полная карта?</string>
     <string name="value_downloaded_from_max">%1$.1f из %2$.1f Мб</string>
-    <string name="file_size_in_mb">%.1f Мб</string>
-<string name="update_all">Обновить все (%1$s Мб)</string>
+    <string name="file_size_in_mb">%.1f МБ</string>
+<string name="update_all">Обновить все (%1$s МБ)</string>
 <string name="free_downloads_used">Использовано бесплатных загрузок</string>
     <string name="free_downloads_used_description">Вы можете посмотреть сколько бесплатных загрузок вы использовали</string>
 
@@ -1977,6 +1977,33 @@
     <string name="share_geo">гео:</string>
     <string name="share_menu_location">Поделиться местоположением</string>
     <string name="shared_string_send">Отправить</string>
-    <string name="application_dir_description">Выберите место где вы хотите сохранить файлы карт.</string>
+    <string name="application_dir_description">Выберите, где вы хотите сохранить файлы карт.</string>
     <string name="show_on_start_description">Приложение будет запускаться с экрана карты</string>
-</resources>
+<string name="map_downloaded">Карта загружена</string>
+    <string name="shared_string_qr_code">QR-код</string>
+    <string name="go_to_map">Перейти к карте</string>
+    <string name="world_map_download_descr">Базовая карта мира (покрывающая весь мир при малом увеличении) отсутствует или устарела. Пожалуйста, загрузите базовую карту мира для полноты рабочего окружения.</string>
+    <string name="map_downloaded_descr">Карта %1$s загружена. Вернитесь к карте, чтобы начать её использовать.</string>
+    <string name="simulate_initial_startup">Имитировать первый запуск</string>
+    <string name="simulate_initial_startup_descr">Устанавливает признак первого запуска приложения, не изменяет других настроек</string>
+    <string name="poll">Опрос</string>
+    <string name="contact_us">Связаться с нами</string>
+<string name="versions_item">Версии</string>
+    <string name="techical_articles_item">Технические статьи</string>
+    <string name="instalation_troubleshooting_item">Установка и решение проблем</string>
+    <string name="search_on_the_map_item">Поиск карты</string>
+    <string name="map_viewing_item">Обзор карты</string>
+    <string name="faq_item_description">Как пользоваться плагинами</string>
+    <string name="faq_item">ЧаВо</string>
+    <string name="first_usage_item">Первый запуск</string>
+    <string name="first_usage_item_description">Как загрузить карты, установить основные настройки</string>
+    <string name="navigation_item_description">Настройка навигации</string>
+    <string name="planning_trip_item">Планирование поездки</string>
+    <string name="enter_country_name">Введите название страны</string>
+    <string name="new_version">Новая версия</string>
+    <string name="begin_with_osmand_menu_group">Первые шаги с OsmAnd</string>
+    <string name="features_menu_group">Возможности</string>
+    <string name="help_us_to_improve_menu_group">Помогите улучшить OsmAnd</string>
+    <string name="other_menu_group">Прочее</string>
+    <string name="plugins_menu_group">Плагины</string>
+    </resources>

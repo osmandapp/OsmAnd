@@ -742,7 +742,7 @@
   <string name="use_short_object_names_descr">Używa krótkich nazw obiektów w trybie eksploracji dotykowej</string>
   <string name="use_short_object_names">Nazwy obiektów</string>
   <string name="accessibility_preferences_descr">Ustawienia ułatwień dostępu</string>
-  <string name="accessibility_preferences">Ułatwienia dostępu</string>
+  <string name="shared_string_accessibility">Ułatwienia dostępu</string>
   <string name="use_fluorescent_overlays">Odblaskowe nakładki</string>
   <string name="use_fluorescent_overlays_descr">Użyj odblaskowych kolorów do wyświetlania ścieżek i tras</string>
   <string name="offline_edition">Edycja w trybie offline</string>

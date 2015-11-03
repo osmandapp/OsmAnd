@@ -89,7 +89,7 @@
   <string name="use_short_object_names_descr">Gebruik korte objectnamen in aanraakmodus</string>
   <string name="use_short_object_names">Gebruik korte objectnamen</string>
   <string name="accessibility_preferences_descr">Toegankelijkheidsgerelateerde instellingen</string>
-  <string name="accessibility_preferences">Toegankelijkheid</string>
+  <string name="shared_string_accessibility">Toegankelijkheid</string>
   <string name="rendering_out_of_memory">Niet genoeg werkgeheugen voor weergave van het geselecteerde gebied</string>
   <string name="use_fluorescent_overlays">Fluorescerende overlays</string>
   <string name="use_fluorescent_overlays_descr">Gebruik fluorescerende kleuren voor de weergave van tracks and routes</string>

@@ -80,7 +80,7 @@
   <string name="use_short_object_names_descr">Lietot īsos objektu nosaukumus pieskārienu skata režīmā</string>
   <string name="use_short_object_names">Lietot objektu vārdus</string>
   <string name="accessibility_preferences_descr">Ar pieejamību saistītās izvēles</string>
-  <string name="accessibility_preferences">Pieejamība</string>
+  <string name="shared_string_accessibility">Pieejamība</string>
   <string name="rendering_out_of_memory">Nepietiek atmiņas, lai attēlotu izvēlēto apgabalu</string>
   <string name="use_fluorescent_overlays">Fluorescenti slāņi</string>
   <string name="use_fluorescent_overlays_descr">Lietot flurescentās krāsas, lai attēlotu maršruta ceļus</string>

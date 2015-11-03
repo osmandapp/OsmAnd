@@ -401,6 +401,11 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 	}
 
 	@Override
+	public int getOrder(Object o) {
+		return 0;
+	}
+
+	@Override
 	public void setSelectedObject(Object o) {
 		if(o instanceof OsMoDevice) {
 			followTrackerId = ((OsMoDevice) o).getTrackerId();

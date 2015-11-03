@@ -1,29 +1,5 @@
 package net.osmand.plus.monitoring;
 
-import gnu.trove.list.array.TIntArrayList;
-
-import java.util.List;
-
-import net.osmand.Location;
-import net.osmand.ValueHolder;
-import net.osmand.plus.ApplicationMode;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
-import net.osmand.plus.NavigationService;
-import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmAndTaskManager.OsmAndTaskRunnable;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.SavingTrackHelper;
-import net.osmand.plus.dashboard.DashboardOnMap;
-import net.osmand.plus.dashboard.tools.DashFragmentData;
-import net.osmand.plus.views.MapInfoLayer;
-import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -42,6 +18,30 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
+
+import net.osmand.Location;
+import net.osmand.ValueHolder;
+import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.NavigationService;
+import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmAndTaskManager.OsmAndTaskRunnable;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.SavingTrackHelper;
+import net.osmand.plus.dashboard.tools.DashFragmentData;
+import net.osmand.plus.views.MapInfoLayer;
+import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.mapwidgets.TextInfoWidget;
+
+import java.util.List;
+
+import gnu.trove.list.array.TIntArrayList;
 
 public class OsmandMonitoringPlugin extends OsmandPlugin {
 	private static final String ID = "osmand.monitoring";
@@ -88,6 +88,12 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	@Override
 	public String getName() {
 		return app.getString(R.string.record_plugin_name);
+	}
+
+
+	@Override
+	public String getHelpFileName() {
+		return "feature_articles/trip-recording-plugin.html";
 	}
 
 	@Override

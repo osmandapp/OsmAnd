@@ -188,7 +188,9 @@ public class FavoritesLayer  extends OsmandMapLayer implements ContextMenuLayer.
 
 	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> res) {
-		getFavoriteFromPoint(tileBox, point, res);
+		if (this.settings.SHOW_FAVORITES.get()) {
+			getFavoriteFromPoint(tileBox, point, res);
+		}
 	}
 
 	@Override

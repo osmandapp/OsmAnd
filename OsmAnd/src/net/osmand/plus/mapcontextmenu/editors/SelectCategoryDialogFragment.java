@@ -1,4 +1,4 @@
-package net.osmand.plus.mapcontextmenu.editors.dialogs;
+package net.osmand.plus.mapcontextmenu.editors;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -19,8 +19,6 @@ import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.mapcontextmenu.editors.PointEditor;
-import net.osmand.plus.mapcontextmenu.editors.PointEditorFragment;
 
 import java.util.List;
 

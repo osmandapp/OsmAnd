@@ -866,7 +866,7 @@
 	<string name="use_short_object_names_descr">Empregar os nomes curtos dos obxectos no modo de exploración con toques</string>
 	<string name="use_short_object_names">Empregar os nomes dos obxectos</string>
 	<string name="accessibility_preferences_descr">Preferencias relacionadas coa accesibilidade</string>
-	<string name="accessibility_preferences">Accesibilidade</string>
+	<string name="shared_string_accessibility">Accesibilidade</string>
     <string name="arrival_distance_factor_early">Cedo</string>
     <string name="arrival_distance_factor_normally">Normal</string>
     <string name="arrival_distance_factor_late">Tarde</string>

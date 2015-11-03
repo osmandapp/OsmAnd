@@ -345,12 +345,23 @@ public class MapContextMenuFragment extends Fragment {
 
 		// FAB
 		fabView = (ImageView)view.findViewById(R.id.context_menu_fab_view);
-		fabView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				menu.fabPressed();
-			}
-		});
+		if (menu.fabVisible()) {
+			fabView.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					menu.fabPressed();
+				}
+			});
+		} else {
+			fabView.setVisibility(View.GONE);
+		}
+
+		if (!menu.buttonsVisible()) {
+			View buttonsTopBorder = view.findViewById(R.id.buttons_top_border);
+			View buttons = view.findViewById(R.id.context_menu_buttons);
+			buttonsTopBorder.setVisibility(View.GONE);
+			buttons.setVisibility(View.GONE);
+		}
 
 		// Action buttons
 		final ImageButton buttonFavorite = (ImageButton) view.findViewById(R.id.context_menu_fav_button);

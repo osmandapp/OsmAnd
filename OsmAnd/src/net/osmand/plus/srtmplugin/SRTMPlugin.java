@@ -2,6 +2,7 @@ package net.osmand.plus.srtmplugin;
 
 import android.app.Activity;
 import android.widget.ArrayAdapter;
+
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
@@ -53,6 +54,10 @@ public class SRTMPlugin extends OsmandPlugin {
 		return app.getString(R.string.srtm_plugin_name);
 	}
 
+	@Override
+	public String getHelpFileName() {
+		return "feature_articles/contour-lines-plugin.html";
+	}
 	@Override
 	public boolean init(final OsmandApplication app, Activity activity) {
 		OsmandSettings settings = app.getSettings();

@@ -104,9 +104,6 @@ public class MapContextMenu extends MenuTitleController {
 			}
 		}
 
-		if (this.object != null) {
-			clearSelectedObject(this.object);
-		}
 		setSelectedObject(object);
 
 		if (pointDescription == null) {
@@ -166,6 +163,9 @@ public class MapContextMenu extends MenuTitleController {
 
 	public void close() {
 		active = false;
+		if (this.object != null) {
+			clearSelectedObject(this.object);
+		}
 		hide();
 		mapActivity.getMapView().refreshMap();
 	}
@@ -364,5 +364,13 @@ public class MapContextMenu extends MenuTitleController {
 		} else {
 			return null;
 		}
+	}
+
+	public boolean fabVisible() {
+		return menuController == null || menuController.fabVisible();
+	}
+
+	public boolean buttonsVisible() {
+		return menuController == null || menuController.buttonsVisible();
 	}
 }

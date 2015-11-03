@@ -167,7 +167,7 @@
 	<string name="osmand_parking_plugin_name">Posição de estacionamento</string>
 	<string name="osmand_distance_planning_plugin_name">Calculadora de distância e ferramenta de planeamento</string>
 	<string name="osmand_distance_planning_plugin_description">Este complemento fornece um widget da tela mapa permitindo criar caminhos tocando no mapa, ou usar ou modificar arquivos GPX existentes, para planejar uma viagem e medir a distância entre pontos. Os resultados podem ser salvos como um arquivo GPX, que mais tarde pode ser usado para orientação.</string>
-	<string name="accessibility_preferences">Acessibilidade</string>
+	<string name="shared_string_accessibility">Acessibilidade</string>
 	<string name="osmand_accessibility_description">Este complemento disponibiliza recursos de acessibilidade do dispositivo diretamente no OsmAnd. Facilita, por exemplo, o ajuste da velocidade para vozes TTS, configuração da navegação direcional na tela, uso do trackball para controle de zoom, ou retorno de texto para fala, como para anunciar automaticamente sua posição.</string>
 	<string name="osm_settings">Edição do OSM</string>
 	<string name="debugging_and_development">Desenvolvimento OsmAnd</string>

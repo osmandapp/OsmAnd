@@ -6,35 +6,30 @@ import android.support.annotation.StringRes;
 import android.view.View.OnClickListener;
 
 public class MyMenuItem {
-	private final int title;
+	private final String title;
 	private final String desription;
 	@DrawableRes
 	private final int icon;
 	private final OnClickListener onClickListener;
 
-	public MyMenuItem(@StringRes int title) {
-		this.title = title;
-		this.onClickListener = null;
-		desription = null;
-		icon = -1;
+	public MyMenuItem(String title) {
+		this(title, null);
 	}
 
-	public MyMenuItem(@StringRes int title, OnClickListener onClickListener) {
-		this.title = title;
-		this.onClickListener = onClickListener;
-		desription = null;
-		icon = -1;
+	public MyMenuItem(@StringRes int title, Context context) {
+		this(context.getString(title));
 	}
 
-	private MyMenuItem(@StringRes int title, @StringRes int desription, @DrawableRes int icon,
+	public MyMenuItem(String title, OnClickListener onClickListener) {
+		this(title, null, -1, onClickListener);
+	}
+
+	private MyMenuItem(String title, @StringRes int desription, @DrawableRes int icon,
 					   Context context, OnClickListener onClickListener) {
-		this.title = title;
-		this.onClickListener = onClickListener;
-		this.desription = context.getString(desription);
-		this.icon = icon;
+		this(title, context.getString(desription), icon, onClickListener);
 	}
 
-	private MyMenuItem(@StringRes int title, String desription, @DrawableRes int icon,
+	private MyMenuItem(String title, String desription, @DrawableRes int icon,
 					   OnClickListener onClickListener) {
 		this.title = title;
 		this.desription = desription;
@@ -42,7 +37,7 @@ public class MyMenuItem {
 		this.onClickListener = onClickListener;
 	}
 
-	public int getTitle() {
+	public String getTitle() {
 		return title;
 	}
 
@@ -59,13 +54,17 @@ public class MyMenuItem {
 	}
 
 	public static class Builder {
-		@StringRes
-		private int title = -1;
+		private String title = null;
 		private String description = null;
 		private int icon = -1;
 		private OnClickListener listener;
 
-		public Builder setTitle(@StringRes int title) {
+		public Builder setTitle(@StringRes int titleId, Context context) {
+			this.title = context.getString(titleId);
+			return this;
+		}
+
+		public Builder setTitle(String title) {
 			this.title = title;
 			return this;
 		}
@@ -91,7 +90,7 @@ public class MyMenuItem {
 		}
 
 		public Builder reset() {
-			title = -1;
+			title = null;
 			description = null;
 			icon = -1;
 			listener = null;

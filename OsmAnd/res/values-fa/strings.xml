@@ -1244,7 +1244,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
 	<string name="use_short_object_names_descr">استفاده از نام کوتاه شی در حالت اکتشاف لمسی</string>
 	<string name="use_short_object_names">استفاده از نام شی</string>
 	<string name="accessibility_preferences_descr">تنظیمات مربوط به دسترسی</string>
-	<string name="accessibility_preferences">دسترسی</string>
+	<string name="shared_string_accessibility">دسترسی</string>
 	
 	<string name="live_monitoring_url_descr">تعیین آدرس وب سایت با پارامترهای: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
 	<string name="live_monitoring_url">آدرس وبسایت ذخیره سازی آنلاین مسیر</string>

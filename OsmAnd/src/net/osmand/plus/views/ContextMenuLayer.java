@@ -16,7 +16,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
-import net.osmand.plus.mapcontextmenu.other.ObjectSelectionMenu;
+import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,6 +39,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	
 	public interface IContextMenuProviderSelection {
 
+		int getOrder(Object o);
 		void setSelectedObject(Object o);
 		void clearSelectedObject();
 	}
@@ -47,6 +48,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	private final MapActivity activity;
 	private MapContextMenu menu;
+	private MapMultiSelectionMenu multiSelectionMenu;
 	private CallbackWithObject<LatLon> selectOnMap = null;
 
 	private ImageView contextMarker;
@@ -56,6 +58,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	public ContextMenuLayer(MapActivity activity){
 		this.activity = activity;
 		menu = activity.getContextMenu();
+		multiSelectionMenu = activity.getMultiSelectionMenu();
 		movementListener = new GestureDetector(activity, new MenuLayerOnGestureListener());
 	}
 	
@@ -189,9 +192,9 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				l.collectObjectsFromPoint(point, tileBox, s);
 				for (Object o : s) {
 					selectedObjects.put(o, l);
-					if (l instanceof IContextMenuProviderSelection) {
-						((IContextMenuProviderSelection) l).setSelectedObject(o);
-					}
+//					if (l instanceof IContextMenuProviderSelection) {
+//						((IContextMenuProviderSelection) l).setSelectedObject(o);
+//					}
 				}
 			}
 		}
@@ -246,13 +249,13 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 
 	private void hideVisibleMenues() {
-		if (ObjectSelectionMenu.isVisible(activity)) {
-			ObjectSelectionMenu.hide(activity);
+		if (multiSelectionMenu.isVisible()) {
+			multiSelectionMenu.hide();
 		}
 	}
 
 	private void showContextMenuForSelectedObjects(final LatLon latLon, final Map<Object, IContextMenuProvider> selectedObjects) {
-		ObjectSelectionMenu.show(latLon, selectedObjects, activity);
+		multiSelectionMenu.show(latLon, selectedObjects);
 	}
 
 	@Override
@@ -262,8 +265,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			if (menu.isVisible()) {
 				menu.hide();
 			}
-			if (ObjectSelectionMenu.isVisible(activity)) {
-				ObjectSelectionMenu.hide(activity);
+			if (multiSelectionMenu.isVisible()) {
+				multiSelectionMenu.hide();
 			}
 		}
 
