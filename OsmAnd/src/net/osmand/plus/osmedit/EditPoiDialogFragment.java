@@ -42,6 +42,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
@@ -63,7 +64,6 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.io.Serializable;
-import java.text.MessageFormat;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -78,7 +78,6 @@ public class EditPoiDialogFragment extends DialogFragment {
 
 	private EditPoiData editPoiData;
 	private ViewPager viewPager;
-	private boolean isLocalEdit;
 	private AutoCompleteTextView poiTypeEditText;
 	private Node node;
 	private Map<String, PoiType> allTranslatedSubTypes;
@@ -96,7 +95,6 @@ public class EditPoiDialogFragment extends DialogFragment {
 		} else if (!settings.isInternetConnectionAvailable(true)) {
 			mOpenstreetmapUtil = new OpenstreetmapLocalUtil(plugin, activity);
 		} else {
-			isLocalEdit = false;
 			mOpenstreetmapUtil = new OpenstreetmapRemoteUtil(activity);
 		}
 
@@ -245,8 +243,7 @@ public class EditPoiDialogFragment extends DialogFragment {
 		poiTypeEditText.setOnEditorActionListener(mOnEditorActionListener);
 
 		Button saveButton = (Button) view.findViewById(R.id.saveButton);
-		int saveButtonTextId = isLocalEdit ? R.string.shared_string_save :
-				R.string.default_buttons_commit;
+		int saveButtonTextId = R.string.default_buttons_commit;
 		saveButton.setText(saveButtonTextId);
 		saveButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -310,24 +307,6 @@ public class EditPoiDialogFragment extends DialogFragment {
 				new Runnable() {
 					@Override
 					public void run() {
-						if (isLocalEdit) {
-							AccessibleToast.makeText(
-									getActivity(),
-									R.string.osm_changes_added_to_local_edits,
-									Toast.LENGTH_LONG).show();
-						} else {
-							final String message = node.getId() == -1 ?
-									getResources().getString(R.string.poi_action_add)
-									: getResources().getString(R.string.poi_action_change);
-
-							AccessibleToast.makeText(
-									getActivity(),
-									MessageFormat.format(
-											getResources().getString(
-													R.string.poi_action_succeded_template), message),
-									Toast.LENGTH_LONG).show();
-						}
-
 						OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
 						if (plugin != null) {
 							List<OpenstreetmapPoint> points = plugin.getDBPOI().getOpenstreetmapPoints();
@@ -354,16 +333,20 @@ public class EditPoiDialogFragment extends DialogFragment {
 			@Override
 			public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
 				if (keyCode == android.view.KeyEvent.KEYCODE_BACK) {
-					if (event.getAction() == KeyEvent.ACTION_DOWN) {
+					if (editPoiData.hasChangesBeenMade()) {
+						LOG.debug("onKey hasChangesBeenMade" + editPoiData.hasChangesBeenMade());
 						return true;
 					} else {
-						new AreYouSureDialogFrgament().show(getChildFragmentManager(),
-								"AreYouSureDialogFrgament");
+						if (editPoiData.hasChangesBeenMade()) {
+							new AreYouSureDialogFragment().show(getChildFragmentManager(),
+									"AreYouSureDialogFragment");
+						} else {
+							dismiss();
+						}
 						return true;
 					}
-				} else {
-					return false;
 				}
+				return false;
 			}
 		});
 	}
@@ -609,7 +592,7 @@ public class EditPoiDialogFragment extends DialogFragment {
 		}
 	}
 
-	public static class AreYouSureDialogFrgament extends DialogFragment {
+	public static class AreYouSureDialogFragment extends DialogFragment {
 		@NonNull
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState) {

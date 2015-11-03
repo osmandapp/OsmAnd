@@ -47,7 +47,6 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	private OsmandApplication app;
 	OpenstreetmapsDbHelper dbpoi;
 	OsmBugsDbHelper dbbug;
-	private EditingPOIDialogProvider poiActions;
 
 	@Override
 	public String getId() {
@@ -135,13 +134,6 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	@Override
 	public Class<? extends Activity> getSettingsActivity() {
 		return SettingsOsmEditingActivity.class;
-	}
-
-	public EditingPOIDialogProvider getPoiActions(MapActivity activity) {
-		if (poiActions == null) {
-			poiActions = new EditingPOIDialogProvider(activity, this);
-		}
-		return poiActions;
 	}
 
 	@Override

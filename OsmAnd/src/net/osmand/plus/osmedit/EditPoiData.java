@@ -18,7 +18,8 @@ public class EditPoiData {
 	private boolean isInEdit = false;
 	public final Amenity amenity;
 	public static final String POI_TYPE_TAG = "poi_type_tag";
-	
+	private boolean hasChangesBeenMade = false;
+
 	public EditPoiData(Amenity amenity, Node node, Map<String, PoiType> allTranslatedSubTypes) {
 		this.amenity = amenity;
 		initTags(node, allTranslatedSubTypes);
@@ -118,6 +119,9 @@ public class EditPoiData {
 	
 	
 	private void notifyDatasetChanged(String tag) {
+		if (mListeners.size() > 0) {
+			hasChangesBeenMade = true;
+		}
 		for (TagsChangedListener listener : mListeners) {
 			listener.onTagsChanged(tag);
 		}
@@ -135,5 +139,9 @@ public class EditPoiData {
 		
 		void onTagsChanged(String tag);
 		
+	}
+
+	public boolean hasChangesBeenMade() {
+		return hasChangesBeenMade;
 	}
 }
