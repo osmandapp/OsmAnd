@@ -19,6 +19,10 @@ public abstract class BaseMenuController {
 
 	public BaseMenuController(MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
+		init();
+	}
+
+	private void init() {
 		portraitMode = AndroidUiHelper.isOrientationPortrait(mapActivity);
 		largeDevice = AndroidUiHelper.isXLargeDevice(mapActivity);
 		light = mapActivity.getMyApplication().getSettings().isLightContent();
@@ -26,6 +30,11 @@ public abstract class BaseMenuController {
 
 	public MapActivity getMapActivity() {
 		return mapActivity;
+	}
+
+	public void setMapActivity(MapActivity mapActivity) {
+		this.mapActivity = mapActivity;
+		init();
 	}
 
 	public boolean isLight() {

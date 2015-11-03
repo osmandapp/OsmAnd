@@ -21,7 +21,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import net.osmand.PlatformUtil;
 import net.osmand.StringMatcher;
 import net.osmand.osm.AbstractPoiType;
@@ -32,7 +31,6 @@ import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.OSMSettings;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.osmedit.data.EditPoiData;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;

@@ -20,13 +20,11 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import net.osmand.PlatformUtil;
 import net.osmand.osm.edit.OSMSettings;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.osmedit.data.EditPoiData;
 import net.osmand.plus.osmedit.dialogs.OpeningHoursDaysDialogFragment;
 import net.osmand.plus.osmedit.dialogs.OpeningHoursHoursDialogFragment;
 import net.osmand.util.Algorithms;

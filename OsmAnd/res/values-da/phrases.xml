@@ -2411,7 +2411,7 @@
 	<string name="poi_cross">Kors</string>
 	<string name="poi_summit_cross">Topkors: ja</string>
 
-	<string name="poi_prison_camp">Fangelejr</string>
+	<string name="poi_prison_camp">Tidligere fangelejr</string>
 	<string name="poi_concentration_camp">Type: koncentrationslejr</string>
 	<string name="poi_pow_camp">Type: krigsfangelejr</string>
 	<string name="poi_labor_camp">Type: arbejdslejr</string>

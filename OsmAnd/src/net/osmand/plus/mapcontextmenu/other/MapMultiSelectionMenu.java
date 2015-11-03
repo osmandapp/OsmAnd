@@ -1,6 +1,5 @@
 package net.osmand.plus.mapcontextmenu.other;
 
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 import net.osmand.data.LatLon;
@@ -12,32 +11,30 @@ import net.osmand.plus.mapcontextmenu.MenuController.MenuType;
 import net.osmand.plus.mapcontextmenu.MenuTitleController;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
+import net.osmand.plus.views.OsmandMapLayer;
 
-import java.io.Serializable;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
-public class ObjectSelectionMenu extends BaseMenuController {
-
-	private static final String KEY_OBJ_SEL_MENU_LATLON = "key_obj_sel_menu_latlon";
-	private static final String KEY_OBJ_SEL_MENU_OBJECTS = "key_obj_sel_menu_objects";
+public class MapMultiSelectionMenu extends BaseMenuController {
 
 	private LatLon latLon;
 	private LinkedList<MenuObject> objects = new LinkedList<>();
 	private Map<Object, IContextMenuProvider> selectedObjects = new HashMap<>();
 
-	public static class MenuObject extends MenuTitleController implements Serializable {
+	public static class MenuObject extends MenuTitleController {
 
 		private LatLon latLon;
 		private PointDescription pointDescription;
 		private Object object;
 
-		private transient MapActivity mapActivity;
-		private transient MenuController controller;
+		private MapActivity mapActivity;
+		private MenuController controller;
 
 		public MenuObject(LatLon latLon, PointDescription pointDescription, Object object, MapActivity mapActivity) {
 			this.latLon = latLon;
@@ -87,9 +84,16 @@ public class ObjectSelectionMenu extends BaseMenuController {
 		}
 	}
 
-	private ObjectSelectionMenu(LatLon latLon, MapActivity mapActivity) {
+	public MapMultiSelectionMenu(MapActivity mapActivity) {
 		super(mapActivity);
-		this.latLon = latLon;
+	}
+
+	public void setMapActivity(MapActivity mapActivity) {
+		super.setMapActivity(mapActivity);
+		for (MenuObject o : objects) {
+			o.mapActivity = mapActivity;
+			o.init();
+		}
 	}
 
 	public List<MenuObject> getObjects() {
@@ -102,7 +106,9 @@ public class ObjectSelectionMenu extends BaseMenuController {
 	}
 
 	private void createCollection(Map<Object, IContextMenuProvider> selectedObjects) {
+		this.selectedObjects.clear();
 		this.selectedObjects.putAll(selectedObjects);
+		objects.clear();
 		int order = Integer.MAX_VALUE;
 		MenuObject topObject = null;
 		for (Map.Entry<Object, IContextMenuProvider> e : selectedObjects.entrySet()) {
@@ -147,39 +153,50 @@ public class ObjectSelectionMenu extends BaseMenuController {
 		}
 	}
 
-	public static void show(LatLon latLon, Map<Object, IContextMenuProvider> selectedObjects, MapActivity mapActivity) {
-
-		if (isVisible(mapActivity)) {
-			hide(mapActivity);
-		}
-
-		ObjectSelectionMenu menu = new ObjectSelectionMenu(latLon, mapActivity);
-		menu.createCollection(selectedObjects);
-		ObjectSelectionMenuFragment.showInstance(menu);
+	private void clearMenu() {
+		clearSelectedObjects();
+		objects.clear();
 	}
 
-	public static boolean isVisible(MapActivity mapActivity) {
-		Fragment fragment = mapActivity.getSupportFragmentManager().findFragmentByTag(ObjectSelectionMenuFragment.TAG);
+	public void show(LatLon latLon, Map<Object, IContextMenuProvider> selectedObjects) {
+		if (isVisible()) {
+			hide();
+		}
+
+		for (Map.Entry<Object, IContextMenuProvider> e : selectedObjects.entrySet()) {
+			if (e.getValue() instanceof ContextMenuLayer.IContextMenuProviderSelection) {
+				((ContextMenuLayer.IContextMenuProviderSelection) e.getValue()).setSelectedObject(e.getKey());
+			}
+		}
+
+		this.latLon = latLon;
+		createCollection(selectedObjects);
+		MapMultiSelectionMenuFragment.showInstance(getMapActivity());
+	}
+
+	public boolean isVisible() {
+		Fragment fragment = getMapActivity().getSupportFragmentManager().findFragmentByTag(MapMultiSelectionMenuFragment.TAG);
 		return fragment != null;
 	}
 
-	public static void hide(MapActivity mapActivity) {
-		Fragment fragment = mapActivity.getSupportFragmentManager().findFragmentByTag(ObjectSelectionMenuFragment.TAG);
+	public void hide() {
+		clearMenu();
+		Fragment fragment = getMapActivity().getSupportFragmentManager().findFragmentByTag(MapMultiSelectionMenuFragment.TAG);
 		if (fragment != null) {
-			ObjectSelectionMenuFragment menuFragment = (ObjectSelectionMenuFragment) fragment;
+			MapMultiSelectionMenuFragment menuFragment = (MapMultiSelectionMenuFragment) fragment;
 			menuFragment.dismissMenu();
 		}
 	}
 
-	public void onDismiss() {
+	public void onStop() {
+		clearSelectedObjects();
 	}
 
 	public void openContextMenu(MenuObject menuObject) {
 		if (selectedObjects.containsKey(menuObject.getObject())) {
 			selectedObjects.remove(menuObject.getObject());
 		}
-		clearSelectedObjects();
-		hide(getMapActivity());
+		hide();
 		getMapActivity().getContextMenu()
 				.show(menuObject.getLatLon(), menuObject.getPointDescription(), menuObject.getObject());
 	}
@@ -190,32 +207,6 @@ public class ObjectSelectionMenu extends BaseMenuController {
 				((ContextMenuLayer.IContextMenuProviderSelection) p).clearSelectedObject();
 			}
 		}
-	}
-
-	public void saveMenu(Bundle bundle) {
-		bundle.putSerializable(KEY_OBJ_SEL_MENU_LATLON, latLon);
-		bundle.putSerializable(KEY_OBJ_SEL_MENU_OBJECTS, objects);
-	}
-
-	@SuppressWarnings("unchecked")
-	public static ObjectSelectionMenu restoreMenu(Bundle bundle, MapActivity mapActivity) {
-
-		LatLon latLon = null;
-		Object latLonObj = bundle.getSerializable(KEY_OBJ_SEL_MENU_LATLON);
-		if (latLonObj != null) {
-			latLon = (LatLon) latLonObj;
-		}
-		Object objects = bundle.getSerializable(KEY_OBJ_SEL_MENU_OBJECTS);
-
-		ObjectSelectionMenu menu = new ObjectSelectionMenu(latLon, mapActivity);
-		if (objects != null) {
-			menu.objects = (LinkedList<MenuObject>) objects;
-			for (MenuObject menuObject : menu.objects) {
-				menuObject.mapActivity = mapActivity;
-				menuObject.init();
-			}
-		}
-
-		return menu;
+		selectedObjects.clear();
 	}
 }

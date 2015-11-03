@@ -123,51 +123,53 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 	}
 	private static int ZOOM_TO_SHOW_BORDERS_ST = 5;
 	private static int ZOOM_TO_SHOW_BORDERS = 7;
-	
+	private static int ZOOM_TO_SHOW_SELECTION_ST = 3;
+	private static int ZOOM_TO_SHOW_SELECTION = 10;
+
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		final int zoom = tileBox.getZoom();
-		if(zoom < ZOOM_TO_SHOW_BORDERS_ST) {
+		if(zoom < ZOOM_TO_SHOW_SELECTION_ST) {
 			return;
 		}
 		// draw objects
 		final List<BinaryMapDataObject> currentObjects = data.results;
-		final List<BinaryMapDataObject> selectedObjects = this.selectedObjects;
 		if (zoom >= ZOOM_TO_SHOW_BORDERS_ST && zoom < ZOOM_TO_SHOW_BORDERS && osmandRegions.isInitialized() &&
-				(currentObjects != null || selectedObjects != null)) {
-			if (currentObjects != null) {
-				path.reset();
-				for (BinaryMapDataObject o : currentObjects) {
-					String downloadName = osmandRegions.getDownloadName(o);
-					boolean downloaded = checkIfObjectDownloaded(downloadName);
-					if (!downloaded) {
-						continue;
-					}
-					double lat = MapUtils.get31LatitudeY(o.getPoint31YTile(0));
-					double lon = MapUtils.get31LongitudeX(o.getPoint31XTile(0));
-					path.moveTo(tileBox.getPixXFromLonNoRot(lon), tileBox.getPixYFromLatNoRot(lat));
-					for (int j = 1; j < o.getPointsLength(); j++) {
-						lat = MapUtils.get31LatitudeY(o.getPoint31YTile(j));
-						lon = MapUtils.get31LongitudeX(o.getPoint31XTile(j));
-						path.lineTo(tileBox.getPixXFromLonNoRot(lon), tileBox.getPixYFromLatNoRot(lat));
-					}
+				currentObjects != null) {
+			path.reset();
+			for (BinaryMapDataObject o : currentObjects) {
+				String downloadName = osmandRegions.getDownloadName(o);
+				boolean downloaded = checkIfObjectDownloaded(downloadName);
+				if (!downloaded) {
+					continue;
 				}
-				canvas.drawPath(path, paint);
-			}
-			if (selectedObjects != null) {
-				pathSelected.reset();
-				for (BinaryMapDataObject o : selectedObjects) {
-					double lat = MapUtils.get31LatitudeY(o.getPoint31YTile(0));
-					double lon = MapUtils.get31LongitudeX(o.getPoint31XTile(0));
-					pathSelected.moveTo(tileBox.getPixXFromLonNoRot(lon), tileBox.getPixYFromLatNoRot(lat));
-					for (int j = 1; j < o.getPointsLength(); j++) {
-						lat = MapUtils.get31LatitudeY(o.getPoint31YTile(j));
-						lon = MapUtils.get31LongitudeX(o.getPoint31XTile(j));
-						pathSelected.lineTo(tileBox.getPixXFromLonNoRot(lon), tileBox.getPixYFromLatNoRot(lat));
-					}
+				double lat = MapUtils.get31LatitudeY(o.getPoint31YTile(0));
+				double lon = MapUtils.get31LongitudeX(o.getPoint31XTile(0));
+				path.moveTo(tileBox.getPixXFromLonNoRot(lon), tileBox.getPixYFromLatNoRot(lat));
+				for (int j = 1; j < o.getPointsLength(); j++) {
+					lat = MapUtils.get31LatitudeY(o.getPoint31YTile(j));
+					lon = MapUtils.get31LongitudeX(o.getPoint31XTile(j));
+					path.lineTo(tileBox.getPixXFromLonNoRot(lon), tileBox.getPixYFromLatNoRot(lat));
 				}
-				canvas.drawPath(pathSelected, paintSelected);
 			}
+			canvas.drawPath(path, paint);
+		}
+
+		final List<BinaryMapDataObject> selectedObjects = this.selectedObjects;
+		if (zoom >= ZOOM_TO_SHOW_SELECTION_ST && zoom < ZOOM_TO_SHOW_SELECTION && osmandRegions.isInitialized() &&
+				selectedObjects != null) {
+			pathSelected.reset();
+			for (BinaryMapDataObject o : selectedObjects) {
+				double lat = MapUtils.get31LatitudeY(o.getPoint31YTile(0));
+				double lon = MapUtils.get31LongitudeX(o.getPoint31XTile(0));
+				pathSelected.moveTo(tileBox.getPixXFromLonNoRot(lon), tileBox.getPixYFromLatNoRot(lat));
+				for (int j = 1; j < o.getPointsLength(); j++) {
+					lat = MapUtils.get31LatitudeY(o.getPoint31YTile(j));
+					lon = MapUtils.get31LongitudeX(o.getPoint31XTile(j));
+					pathSelected.lineTo(tileBox.getPixXFromLonNoRot(lon), tileBox.getPixYFromLatNoRot(lat));
+				}
+			}
+			canvas.drawPath(pathSelected, paintSelected);
 		}
 	}
 
@@ -370,7 +372,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 
 	private void getWorldRegionFromPoint(RotatedTileBox tb, PointF point, List<? super BinaryMapDataObject> dataObjects) {
 		int zoom = tb.getZoom();
-		if (zoom >= ZOOM_TO_SHOW_BORDERS_ST && zoom < ZOOM_TO_SHOW_BORDERS && osmandRegions.isInitialized()) {
+		if (zoom >= ZOOM_TO_SHOW_SELECTION_ST && zoom < ZOOM_TO_SHOW_SELECTION && osmandRegions.isInitialized()) {
 			LatLon pointLatLon = tb.getLatLonFromPixel(point.x, point.y);
 			int point31x = MapUtils.get31TileNumberX(pointLatLon.getLongitude());
 			int point31y = MapUtils.get31TileNumberY(pointLatLon.getLatitude());

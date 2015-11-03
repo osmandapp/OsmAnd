@@ -950,4 +950,16 @@
 	<string name="poi_denomination_greek_catholic">東方典礼カトリック教会(Greek catholic)</string>
 	<string name="poi_denomination_united_reformed">アメリカ・オランダ改革派(United reformed)</string>
 	<string name="poi_denomination_church_of_scotland">スコットランド国教会(Church of Scotland)</string>
+	<string name="poi_denomination_tibetan">チベット仏教(Tibetan)</string>
+	<string name="poi_denomination_salvation_army">救世軍(Salvation army)</string>
+	<string name="poi_denomination_iglesia_ni_cristo">イグレシア・ニ・クリスト(Iglesia ni cristo)</string>
+	<string name="poi_denomination_uniting">オーストラリア連合教会(Uniting)</string>
+	<string name="poi_denomination_mennonite">メノナイト・メノー派(Mennonite)</string>
+	<string name="poi_denomination_quaker">クエーカー・キリスト友会(Quaker)</string>
+	<string name="poi_denomination_bulgarian_orthodox">ブルガリア正教会(Bulgarian orthodox)</string>
+	<string name="poi_denomination_assemblies_of_god">アッセンブリーズ・オブ・ゴッド教団(Assemblies of god)</string>
+	<string name="poi_denomination_nondenominational">無教会主義・特定の宗派に属さない教会(Nondenominational)</string>
+	<string name="poi_denomination_adventist">アドベンチスト・安息日再臨派(Adventist)</string>
+	<string name="poi_denomination_nazarene">ナザレン教会(Nazarene)</string>
+	<string name="poi_denomination_united_methodist">統一メソジスト教会(United methodist)</string>
 	</resources>

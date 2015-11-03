@@ -22,34 +22,27 @@ import android.widget.TextView;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.mapcontextmenu.other.ObjectSelectionMenu.MenuObject;
+import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu.MenuObject;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 
-public class ObjectSelectionMenuFragment extends Fragment implements AdapterView.OnItemClickListener {
-	public static final String TAG = "ObjectSelectionMenuFragment";
+public class MapMultiSelectionMenuFragment extends Fragment implements AdapterView.OnItemClickListener {
+	public static final String TAG = "MapMultiSelectionMenuFragment";
 
 	private View view;
 	private ArrayAdapter<MenuObject> listAdapter;
-	private ObjectSelectionMenu menu;
-
-	public ObjectSelectionMenu getMenu() {
-		return menu;
-	}
-
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		if (savedInstanceState != null && getActivity() instanceof MapActivity) {
-			menu = ObjectSelectionMenu.restoreMenu(savedInstanceState, (MapActivity) getActivity());
-		}
-	}
+	private MapMultiSelectionMenu menu;
+	private boolean dismissing = false;
 
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+		menu = ((MapActivity) getActivity()).getMultiSelectionMenu();
+
 		view = inflater.inflate(R.layout.menu_obj_selection_fragment, container, false);
 
 		ListView listView = (ListView) view.findViewById(R.id.list);
@@ -72,21 +65,19 @@ public class ObjectSelectionMenuFragment extends Fragment implements AdapterView
 	@Override
 	public void onStop() {
 		super.onStop();
-		menu.onDismiss();
+		if (!dismissing) {
+			menu.onStop();
+		}
 		menu.getMapActivity().getContextMenu().setBaseFragmentVisibility(true);
 	}
 
-	@Override
-	public void onSaveInstanceState(Bundle outState) {
-		menu.saveMenu(outState);
-	}
+	public static void showInstance(final MapActivity mapActivity) {
+		MapMultiSelectionMenu menu = mapActivity.getMultiSelectionMenu();
 
-	public static void showInstance(ObjectSelectionMenu menu) {
 		int slideInAnim = menu.getSlideInAnimation();
 		int slideOutAnim = menu.getSlideOutAnimation();
 
-		ObjectSelectionMenuFragment fragment = new ObjectSelectionMenuFragment();
-		fragment.menu = menu;
+		MapMultiSelectionMenuFragment fragment = new MapMultiSelectionMenuFragment();
 		menu.getMapActivity().getSupportFragmentManager().beginTransaction()
 				.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
 				.add(R.id.fragmentContainer, fragment, TAG)
@@ -122,7 +113,7 @@ public class ObjectSelectionMenuFragment extends Fragment implements AdapterView
 	}
 
 	private ArrayAdapter<MenuObject> createAdapter() {
-		final List<MenuObject> items = menu.getObjects();
+		final List<MenuObject> items = new LinkedList<>(menu.getObjects());
 		return new ArrayAdapter<MenuObject>(menu.getMapActivity(), R.layout.menu_obj_list_item, items) {
 
 			@SuppressLint("InflateParams")
@@ -175,6 +166,7 @@ public class ObjectSelectionMenuFragment extends Fragment implements AdapterView
 	}
 
 	public void dismissMenu() {
+		dismissing = true;
 		if (menu.getMapActivity().getContextMenu().isVisible()) {
 			menu.getMapActivity().getContextMenu().hide();
 		} else {

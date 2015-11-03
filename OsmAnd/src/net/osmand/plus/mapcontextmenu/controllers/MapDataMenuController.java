@@ -68,11 +68,16 @@ public class MapDataMenuController extends MenuController {
 
 	@Override
 	public String getTypeStr() {
+		String res;
 		if (region != null && region.getSuperregion() != null) {
-			return region.getSuperregion().getLocaleName() + "\n";
+			res = region.getSuperregion().getLocaleName();
 		} else {
-			return getMapActivity().getString(R.string.shared_string_map) + "\n";
+			res = getMapActivity().getString(R.string.shared_string_map);
 		}
+		if (getMenuType() == MenuType.STANDARD) {
+			res += "\n";
+		}
+		return res;
 	}
 
 	@Override
