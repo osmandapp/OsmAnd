@@ -135,7 +135,7 @@ public class EditPoiDialogFragment extends DialogFragment {
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				dismiss();
+				dismissCheckForChanges();
 			}
 		});
 
@@ -337,18 +337,22 @@ public class EditPoiDialogFragment extends DialogFragment {
 						LOG.debug("onKey hasChangesBeenMade" + editPoiData.hasChangesBeenMade());
 						return true;
 					} else {
-						if (editPoiData.hasChangesBeenMade()) {
-							new AreYouSureDialogFragment().show(getChildFragmentManager(),
-									"AreYouSureDialogFragment");
-						} else {
-							dismiss();
-						}
+						dismissCheckForChanges();
 						return true;
 					}
 				}
 				return false;
 			}
 		});
+	}
+
+	private void dismissCheckForChanges() {
+		if (editPoiData.hasChangesBeenMade()) {
+			new AreYouSureDialogFragment().show(getChildFragmentManager(),
+					"AreYouSureDialogFragment");
+		} else {
+			dismiss();
+		}
 	}
 
 	@Override
