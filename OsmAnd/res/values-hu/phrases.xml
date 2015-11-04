@@ -273,7 +273,7 @@
 
 	<string name="poi_bag">Táskabolt</string>
 	<string name="poi_bathroom_furnishing">Fürdőszoba bútor</string>
-	<string name="poi_bed">Hálószoba bútor</string>
+	<string name="poi_bed">Ágymatrac és -felszerelés bolt</string>
 	<string name="poi_boutique">Divatszaküzlet</string>
 	<string name="poi_camera">Fényképező, objektív</string>
 	<string name="poi_carpet">Szőnyegbolt</string>
@@ -613,4 +613,98 @@
 
 	<string name="poi_highway_crossing">Gyalogátkelő</string>
 
-</resources>
+<string name="poi_node_networks">Túra- és kerékpárhálózati csomópont</string>
+		<string name="poi_hiking_routes">Turistautak</string>
+		<string name="poi_traffic_enforcement">Forgalmi kényszerítés</string>
+	<string name="poi_user_defined_other">Felhasználó által definiált</string>
+
+	<string name="poi_cheese">Sajtbolt</string>
+	<string name="poi_chocolate">Csokoládébolt</string>
+	<string name="poi_coffee">Kávébolt</string>
+	<string name="poi_pasta">Tésztabolt</string>
+	<string name="poi_pastry">Sütemény bolt</string>
+	<string name="poi_art">Műalkotás bolt</string>
+	<string name="poi_baby_goods">Bababolt</string>
+	<string name="poi_clothes">Ruhabolt</string>
+	<string name="poi_clothes_children">Gyerekruhabolt</string>
+	<string name="poi_candles">Gyertyabolt</string>
+	<string name="poi_doors">Ajtók</string>
+	<string name="poi_erotic">Sex-Shop</string>
+	<string name="poi_fashion">Divatüzlet</string>
+	<string name="poi_furnace">Fűtéstechnikai szaküzlet</string>
+	<string name="poi_garden_furniture">Kerti bútor bolt</string>
+	<string name="poi_gas">Cseppfolyós gáz bolt</string>
+	<string name="poi_herbalist">Gyógynövénybolt</string>
+	<string name="poi_hifi">HiFi-bolt</string>
+	<string name="poi_newsagent">Újságos</string>
+	<string name="poi_organic">Biobolt</string>
+	<string name="poi_outdoor">Outdoor bolt</string>
+	<string name="poi_second_hand">Használt áruk boltja</string>
+	<string name="poi_scuba_diving_shop">Búvárfelszerelés bolt</string>
+	<string name="poi_stationery">Írószerbolt</string>
+	<string name="poi_tyres">Autógumis</string>
+	<string name="poi_ses_station">SES-állomás</string>
+	<string name="poi_emergency_access_point">Sürgősségi elérési pont</string>
+
+	<string name="poi_ford_stepping_stones">Lépőkő híd</string>
+	<string name="poi_vehicle_inspection">Műszaki vizsgahely</string>
+	<string name="poi_aerialway_pylon">Felvonó pilon</string>
+
+	<string name="poi_breakwater">Hullámtörő</string>
+	<string name="poi_power_cable_distribution_cabinet">Elosztó szekrény</string>
+	<string name="poi_power_tower">Távvezeték oszlop</string>
+	<string name="poi_power_pole">Villanypózna</string>
+
+	<string name="poi_cooling_tower">Hűtőtorony</string>
+	<string name="poi_lighting_tower">Reflektor torony</string>
+	<string name="poi_recycling_centre">Típus: hulladékközpont</string>
+	<string name="poi_recycling_container">Típus: konténer</string>
+	<string name="poi_recycling_glass">Üveg</string>
+	<string name="poi_recycling_paper">Papír</string>
+	<string name="poi_recycling_clothes">Ruha</string>
+	<string name="poi_recycling_cans">Fémdoboz</string>
+	<string name="poi_recycling_glass_bottles">Üvegpalack</string>
+	<string name="poi_recycling_plastic">Műanyag</string>
+	<string name="poi_recycling_scrap_metal">Fémhulladék</string>
+	<string name="poi_recycling_batteries">Akkumulátor</string>
+	<string name="poi_recycling_plastic_bottles">Műanyagpalack</string>
+	<string name="poi_recycling_green_waste">Zöldhulladék</string>
+	<string name="poi_recycling_waste">Hulladék (fekete zsák)</string>
+	<string name="poi_recycling_plastic_packaging">Műanyag csomagolás</string>
+	<string name="poi_recycling_newspaper">Újságpapír</string>
+	<string name="poi_recycling_cartons">Kartondoboz</string>
+	<string name="poi_recycling_cardboard">Kartonpapír</string>
+	<string name="poi_recycling_magazines">Színes újság</string>
+	<string name="poi_recycling_paper_packaging">Papír csomagolás</string>
+	<string name="poi_recycling_small_appliances">Kisgépek</string>
+	<string name="poi_recycling_wood">Fa</string>
+	<string name="poi_recycling_books">Könyv</string>
+	<string name="poi_recycling_shoes">Cipő</string>
+	<string name="poi_recycling_aluminium">Alumínium</string>
+	<string name="poi_recycling_organic">Komposzt</string>
+	<string name="poi_recycling_beverage_cartons">Italkarton</string>
+	<string name="poi_recycling_garden_waste">Kerti hulladék</string>
+	<string name="poi_recycling_low_energy_bulbs">Energiatakarékos izzó</string>
+	<string name="poi_recycling_fluorescent_tubes">Fénycső</string>
+	<string name="poi_recycling_metal">Fém</string>
+	<string name="poi_recycling_electrical_items">Elektronikai hulladék</string>
+	<string name="poi_recycling_white_goods">Háztartási gépek</string>
+	<string name="poi_recycling_cooking_oil">Sütőolaj</string>
+	<string name="poi_recycling_engine_oil">Motorolaj</string>
+	<string name="poi_recycling_plastic_bags">Műanyag szatyor</string>
+	<string name="poi_recycling_hazardous_waste">Veszélyes hulladék</string>
+	<string name="poi_recycling_mobile_phones">Mobiltelefon</string>
+	<string name="poi_recycling_hydrargyrum">Higany</string>
+	<string name="poi_recycling_computers">Számítógép</string>
+	<string name="poi_recycling_tyres">Autógumi</string>
+	<string name="poi_recycling_tv_monitor">TV, monitor</string>
+	<string name="poi_recycling_tetrapak">Tetrapak</string>
+	<string name="poi_recycling_rubble">Sitt</string>
+	<string name="poi_recycling_cds">CD</string>
+	<string name="poi_recycling_waste_oil">Fáradt olaj</string>
+	<string name="poi_recycling_bottles">Palack</string>
+	<string name="poi_recycling_cork">Parafa</string>
+	<string name="poi_recycling_printer_cartridges">Nyomtató festékkazetta</string>
+	<string name="poi_recycling_sheet_metal">Fémlemez</string>
+	<string name="poi_recycling_foil">Fólia</string>
+	</resources>

@@ -532,7 +532,7 @@
 	<string name="poi_motorcycle">Magasin de motos</string>
 	<string name="poi_frame">Magasin d\'encadrement</string>
 	<string name="poi_bathroom_furnishing">Magasin d\'équipement pour la salle de bain</string>
-	<string name="poi_bed">Magasin d\'équipement pour la chambre</string>
+	<string name="poi_bed">Magasin de literie</string>
 	<string name="poi_clothes_children">Vêtements pour enfants</string>
 	<string name="poi_curtain">Boutique de rideaux</string>
 	<string name="poi_dairy">Crèmerie</string>
@@ -719,7 +719,7 @@
 	<string name="poi_fuel_ethanol">Éthanol</string>
 	<string name="poi_fuel_methanol">Méthanol</string>
 	<string name="poi_fuel_e85">E85</string>
-	<string name="poi_fuel_biogas">E85</string>
+	<string name="poi_fuel_biogas">Biogaz</string>
 	<string name="poi_fuel_e20">E20</string>
 	<string name="poi_fuel_lh2">Hydrogène liquide</string>
 	<string name="poi_fuel_electricity">Électricité</string>
@@ -1227,7 +1227,7 @@
 
 <string name="poi_memorial_obelisk">Obélisque</string>
 
-	<string name="poi_memorial_cross">Carrefour</string>
+	<string name="poi_memorial_cross">Croix</string>
 	<string name="poi_memorial_vehicle">Véhicule</string>
 	<string name="poi_bicycle_parking_wall_loops">Boucles murales</string>
 	<string name="poi_species">Espèces</string>
@@ -1529,4 +1529,280 @@
 	<string name="poi_social_facility_for_child">Public ciblé : enfants</string>
 	<string name="poi_social_facility_for_orphan">Public ciblé : orphelins</string>
 	<string name="poi_social_facility_for_disabled">Public ciblé : handicapés</string>
+	<string name="poi_memorial_column">Colonne</string>
+	<string name="poi_historic_quarry">Carrière historique</string>
+
+	<string name="poi_resource_slate">Ardoise</string>
+	<string name="poi_surface_gravel">Surface : gravier</string>
+	<string name="poi_surface_fine_gravel">Surface : gravier fin</string>
+	<string name="poi_route_monorail_ref">Monorail</string>
+	<string name="poi_service_bicycle_retail_no">Vente de cycles : non</string>
+	<string name="poi_service_bicycle_repair_yes">Réparation de cycles : oui</string>
+	<string name="poi_service_bicycle_retail_yes">Vente de cycles : oui</string>
+	<string name="poi_service_bicycle_repair_no">Réparation de cycles : non</string>
+	<string name="poi_service_bicycle_rental_yes">Location de cycles : oui</string>
+	<string name="poi_service_bicycle_rental_no">Location de cycles : non</string>
+	<string name="poi_service_bicycle_pump_yes">Pompe à vélo : oui</string>
+	<string name="poi_service_bicycle_pump_no">Pompe à vélo : non</string>
+	<string name="poi_service_bicycle_diy_yes">Outils en libre service : oui</string>
+	<string name="poi_service_bicycle_diy_no">Outils en libre service : non</string>
+	<string name="poi_service_bicycle_cleaning_yes">Nettoyage de cycles : oui</string>
+	<string name="poi_service_bicycle_cleaning_no">Nettoyage de cycles : non</string>
+	<string name="poi_service_bicycle_chaintool_yes">Dérive chaine : oui</string>
+	<string name="poi_service_bicycle_chaintool_no">Dérive chaine : non</string>
+	<string name="poi_training_language">Enseignement : langue</string>
+	<string name="poi_training_music">Enseignement : musique</string>
+	<string name="poi_training_dance">Enseignement : danse</string>
+	<string name="poi_training_sport">Enseignement : sport</string>
+	<string name="poi_training_art">Enseignement : art</string>
+	<string name="poi_training_computer">Enseignement : informatique</string>
+	<string name="poi_training_yoga">Enseignement : yoga</string>
+	<string name="poi_training_cooking">Enseignement : cuisine</string>
+	<string name="poi_training_martial_art">Enseignement : arts martiaux</string>
+	<string name="poi_training_aviation">Enseignement : aviation</string>
+	<string name="poi_training_hairdressing">Enseignement : coiffure</string>
+
+	<string name="poi_monument_yes">Objet monumental</string>
+
+	<string name="poi_payment_cheque_yes">Chèques acceptés</string>
+	<string name="poi_payment_cheque_no">Chèques non acceptés</string>
+	<string name="poi_microbrewery_yes">Micro brasserie</string>
+	<string name="poi_microbrewery_no">Pas de micro brasserie</string>
+
+	<string name="poi_takeaway_no">Pas de vente à emporter</string>
+	<string name="poi_outdoor_seating_yes">Terrasse</string>
+	<string name="poi_outdoor_seating_no">Pas de terrasse</string>
+	<string name="poi_car_wash_no">Lavage auto : non</string>
+
+	<string name="poi_maxstay">Stationnement limité dans le temps</string>
+
+	<string name="poi_vending_parking_tickets">Tickets de stationnement</string>
+	<string name="poi_vending_sweets">Bonbons</string>
+	<string name="poi_vending_bicycle_tube">Chambres à air pour vélo</string>
+	<string name="poi_vending_drinks_sweets">Boissons et confiserie</string>
+	<string name="poi_clothes_maternity">Vêtements de grossesse</string>
+	<string name="poi_clothes_vintage">Vêtements vintage</string>
+	<string name="poi_clothes_traditional">Vêtements traditionnels</string>
+	<string name="poi_clothes_men">Vêtements pour homme</string>
+	<string name="poi_clothes_wedding">Robes de mariée</string>
+	<string name="poi_clothes_women">Vêtements pour femme</string>
+	<string name="poi_clothes_underwear">Sous-vêtements</string>
+	<string name="poi_clothes_babies">Vêtements de naissance</string>
+	<string name="poi_clothes_denim">Vêtements en jean</string>
+	<string name="poi_clothes_workwear">Vêtements de travail</string>
+	<string name="poi_clothes_hats">Chapeaux</string>
+	<string name="poi_clothes_leather">Cuir</string>
+	<string name="poi_clothes_costumes">Costumes</string>
+	<string name="poi_clothes_suits">Costumes</string>
+	<string name="poi_clothes_oversize">Vêtements de grandes tailles</string>
+	<string name="poi_clothes_swimwear">Tenue de natation</string>
+	<string name="poi_clothes_socks">Chaussettes</string>
+	<string name="poi_clothes_shirts">Chemises</string>
+	<string name="poi_clothes_dance">Vêtements de danse</string>
+	<string name="poi_shoes_men">Chaussures pour homme</string>
+	<string name="poi_tents_yes">Tentes autorisées</string>
+	<string name="poi_tents_no">Tentes interdites</string>
+	<string name="poi_openfire_yes">Feu autorisé</string>
+	<string name="poi_openfire_no">Feu interdit</string>
+	<string name="poi_scout_yes">Camp scout : oui</string>
+	<string name="poi_scout_no">Camp scout : non</string>
+	<string name="poi_group_only_yes">Groupe seulement : oui</string>
+	<string name="poi_group_only_no">Groupe seulement : non</string>
+	<string name="poi_washing_machine_yes">Machine à laver le linge : oui</string>
+	<string name="poi_washing_machine_no">Machine à laver le linge : non</string>
+	<string name="poi_shower_yes">Douche : oui</string>
+	<string name="poi_shower_no">Douche : non</string>
+	<string name="poi_shower_hot">Douche : chaude</string>
+	<string name="poi_shower_outdoor">Douche : extérieur</string>
+	<string name="poi_shower_cold">Douche : froide</string>
+	<string name="poi_shower_indoor">Douche : intérieur</string>
+	<string name="poi_caravans_yes">Caravanes: oui</string>
+	<string name="poi_caravans_no">Caravanes: non</string>
+	<string name="poi_power_supply_yes">Alimentation électrique : oui</string>
+	<string name="poi_power_supply_no">Alimentation électrique : non</string>
+	<string name="poi_capacity_tents">Nombre maximum de tentes</string>
+	<string name="poi_capacity_caravans">Nombre maximum de caravanes</string>
+	<string name="poi_dog_yes">Chiens autorisés</string>
+	<string name="poi_dog_no">Chiens interdits</string>
+
+	<string name="poi_theatre_genre_opera">Genre: opéra</string>
+	<string name="poi_theatre_genre_philharmonic">Genre : philharmonique</string>
+	<string name="poi_theatre_genre_musical">Genre : musical</string>
+	<string name="poi_theatre_genre_drama">Genre : drame</string>
+	<string name="poi_theatre_genre_cabaret">Genre : cabaret</string>
+	<string name="poi_theatre_genre_puppet">Genre : marionnettes</string>
+	<string name="poi_theatre_genre_comedy">Genre : comédie</string>
+	<string name="poi_theatre_genre_chamber_music">Genre : musique de chambre</string>
+	<string name="poi_theatre_genre_marionette">Genre: marionnettes</string>
+	<string name="poi_theatre_genre_ballet">Genre : ballet</string>
+	<string name="poi_theatre_genre_shadow_play">Genre : ombres chinoises</string>
+
+	<string name="poi_bandstand">Kiosque à musique</string>
+	<string name="poi_product_brick">Produit : brique</string>
+	<string name="poi_product_leather">Produit : cuir</string>
+	<string name="poi_product_lime">Produit : citron vert</string>
+	<string name="poi_product_beer">Produit : bière</string>
+	<string name="poi_product_meat">Produit : viande</string>
+
+	<string name="poi_wheelchair_description">Description pour les utilisateurs de chaises roulantes</string>
+	<string name="poi_blind_description">Description pour les aveugles</string>
+	<string name="poi_deaf_description">Description pour les sourds</string>
+
+	<string name="poi_highway_steps">Escaliers</string>
+	<string name="poi_handrail_yes">Rambarde : oui</string>
+	<string name="poi_handrail_no">Rambarde : non</string>
+	<string name="poi_ramp_yes">Plan incliné : oui</string>
+	<string name="poi_ramp_no">Plan incliné : non</string>
+	<string name="poi_ramp_wheelchair_yes">Rampe pour les chaises roulantes : oui</string>
+	<string name="poi_ramp_wheelchair_no">Rampe pour les chaises roulantes : non</string>
+	<string name="poi_ramp_stroller_yes">Rampe (poussette) : oui</string>
+	<string name="poi_ramp_stroller_no">Rampe (poussette) : non</string>
+	<string name="poi_ramp_bicycle_yes">Rampe pour vélo : oui</string>
+	<string name="poi_ramp_bicycle_no">Rampe pour vélo : non</string>
+	<string name="poi_ramp_luggage_yes">Rampe pour bagages : oui</string>
+	<string name="poi_ramp_luggage_no">Rampe pour bagages : non</string>
+	<string name="poi_cairn">Cairn</string>
+
+	<string name="poi_defibrillator">Défibrillateur</string>
+	<string name="poi_defibrillator_yes">Défibrillateur : oui</string>
+
+	<string name="poi_tomb_tumulus">Type : tumulus</string>
+	<string name="poi_tomb_columbarium">Type : columbarium</string>
+	<string name="poi_tomb_mausoleum">Type : mausolé</string>
+	<string name="poi_tomb_sarcophagus">Type : sarcophage</string>
+	<string name="poi_tomb_crypt">Type : crypte</string>
+	<string name="poi_tomb_pyramid">Type : pyramide</string>
+
+	<string name="poi_historic_civilization_celtic">Civilisation : celtique</string>
+	<string name="poi_historic_civilization_minoan">Civilisation : minoenne</string>
+	<string name="poi_horse_yes">Chevaux autorisés</string>
+	<string name="poi_horse_no">Chevaux interdits</string>
+	<string name="poi_animal_yes">Animaux autorisés</string>
+	<string name="poi_animal_no">Animaux interdits</string>
+
+	<string name="poi_historic_period_bronze_age">Période historique : âge de bronze</string>
+	<string name="poi_historic_period_iron_age">Période historique : âge de fer</string>
+	<string name="poi_historic_period_alexander_the_great">Période historique : Alexandre le Grand</string>
+	<string name="poi_historic_stone">Pierre historique</string>
+	<string name="poi_material_wood">Matière : bois</string>
+	<string name="poi_material_metal">Matière : métal</string>
+	<string name="poi_material_reinforced_concrete">Matière : béton armé</string>
+	<string name="poi_material_concrete">Matière : béton</string>
+	<string name="poi_material_steel">Matière : acier</string>
+	<string name="poi_material_stone">Matière : roche</string>
+	<string name="poi_material_masonry">Matière : maçonnerie</string>
+	<string name="poi_material_brick">Matière : brique</string>
+	<string name="poi_material_plastic">Matière : plastique</string>
+	<string name="poi_material_sandstone">Matière : grès</string>
+	<string name="poi_material_granite_stone">Matière : granite</string>
+	<string name="poi_material_metal_wood">Matière : métal, bois</string>
+	<string name="poi_material_glass">Matière : verre</string>
+	<string name="poi_material_bronze">Matière : bronze</string>
+	<string name="poi_material_composite">Matière : composite</string>
+	<string name="poi_material_limestone">Matière : calcaire</string>
+	<string name="poi_material_marble">Matière : marbre</string>
+	<string name="poi_material_aluminium">Matière : aluminium</string>
+
+	<string name="poi_site_type_megalith">Type : mégalithe</string>
+	<string name="poi_site_type_tumulus">Type : tumulus</string>
+	<string name="poi_site_type_fortification">Type : fortification</string>
+	<string name="poi_site_type_city">Type : ville</string>
+	<string name="poi_site_type_necropolis">Type : nécropole</string>
+	<string name="poi_megalith_type_menhir">Type de mégalithe : menhir</string>
+	<string name="poi_megalith_type_dolmen">Type de mégalithe : dolmen</string>
+	<string name="poi_historic_farm">Ferme historique</string>
+	<string name="poi_club_freemasonry">Loge maçonnique</string>
+	<string name="poi_club_sailing">Club nautique</string>
+	<string name="poi_club_scout">Club scout</string>
+
+	<string name="poi_historic_railway">Chemin de fer historique</string>
+
+	<string name="poi_artist_name">Artiste</string>
+	<string name="poi_sculptor">Sculpteur</string>
+
+	<string name="poi_building_type_church">Type de bâtiment : église</string>
+	<string name="poi_building_type_chapel">Type de bâtiment : chapelle</string>
+	<string name="poi_building_type_mosque">Type de bâtiment : mosquée</string>
+	<string name="poi_building_type_temple">Type de bâtiment : temple</string>
+	<string name="poi_building_type_cathedral">Type de bâtiment : cathédrale</string>
+	<string name="poi_building_type_monastery">Type de bâtiment : monastère</string>
+	<string name="poi_building_type_basilica">Type de bâtiment : basilique</string>
+	<string name="poi_building_type_synagogue">Type de bâtiment : synagogue</string>
+	<string name="poi_building_type_shrine">Type de bâtiment : tombeau</string>
+
+	<string name="poi_cross">Croix</string>
+	<string name="poi_concentration_camp">Type : camp de concentration</string>
+	<string name="poi_labor_camp">Type : camp de travail</string>
+	<string name="poi_concentration_camp_nazism">Type : nazi</string>
+	<string name="poi_concentration_camp_gulag">Type : goulag</string>
+
+	<string name="poi_temperature">Température</string>
+	<string name="poi_wiki_link">Wiki</string>
+
+
+<string name="poi_resource_gravel">Gravier</string>
+	<string name="poi_resource_opal">Opale</string>
+	<string name="poi_resource_ruby">Rubis</string>
+	<string name="poi_technical_monument">Monument technique</string>
+
+	<string name="poi_historic_aircraft">Avion historique</string>
+
+	<string name="poi_office_camping">Réception du camping</string>
+	<string name="poi_model_aerodrome">Aérodrome de modélisme</string>
+	<string name="poi_street_lamp">Lampadaire</string>
+
+	<string name="poi_escape_lane">Voie d\'échappement</string>
+
+	<string name="poi_crop_rice">Culture : riz</string>
+	<string name="poi_crop_cereal">Culture : céréales</string>
+	<string name="poi_crop_sugarcane">Culture : canne à sucre</string>
+	<string name="poi_crop_wheat">Culture : blé</string>
+	<string name="poi_crop_barley">Culture : orge</string>
+	<string name="poi_crop_vegetables">Culture : légumes</string>
+	<string name="poi_crop_beet">Culture : betterave</string>
+	<string name="poi_crop_lavender">Culture : lavande</string>
+	<string name="poi_crop_tea">Culture : thé</string>
+	<string name="poi_crop_coffee">Culture : café</string>
+	<string name="poi_crop_sunflower">Culture : tournesol</string>
+	<string name="poi_crop_raspberry">Culture : framboise</string>
+	<string name="poi_crop_tobacco">Culture : tabac</string>
+	<string name="poi_crop_strawberry">Culture : fraise</string>
+	<string name="poi_crop_vegetables_flowers">Culture : légumes, fleurs</string>
+	<string name="poi_crop_cassava">Culture : manioc</string>
+	<string name="poi_crop_asparagus">Culture : asperge</string>
+	<string name="poi_crop_flowers">Culture : fleurs</string>
+
+	<string name="poi_content_sewage">Contenu : eaux usées</string>
+	<string name="poi_content_crop">Contenu : récolte</string>
+	<string name="poi_content_fodder">Contenu : fourrage</string>
+	<string name="poi_wetland_marsh">Marais</string>
+	<string name="poi_wetland_saltmarsh">Marais salant</string>
+	<string name="poi_artwork_type_sculpture">Type d’œuvre : sculpture</string>
+	<string name="poi_artwork_type_statue">Type d’œuvre : statue</string>
+	<string name="poi_artwork_type_mural">Type d’œuvre : mural</string>
+	<string name="poi_artwork_type_architecture">Type d’œuvre : architecture</string>
+	<string name="poi_artwork_type_painting">Type d’œuvre : peinture</string>
+	<string name="poi_artwork_type_installation">Type d’œuvre : installation</string>
+	<string name="poi_artwork_type_mosaic">Type d’œuvre : mosaïque</string>
+	<string name="poi_artwork_type_graffiti">Type d’œuvre : graffiti</string>
+	<string name="poi_artwork_type_stele">Type d’œuvre : stèle</string>
+	<string name="poi_artwork_type_fountain">Type d’œuvre : fontaine</string>
+
+	<string name="poi_width">Largeur</string>
+
+	<string name="poi_architect_name">Architecte</string>
+
+	<string name="poi_architecture_modern">Architecture : moderne</string>
+	<string name="poi_architecture_eclectic">Architecture : éclectique</string>
+	<string name="poi_surveillance_outdoor">Surveillance : extérieur</string>
+	<string name="poi_surveillance_indoor">Surveillance : intérieur</string>
+	<string name="poi_clothes_sports">Vêtements de sport</string>
+	<string name="poi_massage_sexual">Massage : sexuel</string>
+	<string name="poi_massage_chinese">Massage : chinois</string>
+	<string name="poi_massage_yes">Massages</string>
+	<string name="poi_massage_therapeutic">Massage: thérapeutique</string>
+
+	<string name="poi_sauna_yes">Sauna</string>
+	<string name="poi_solarium_yes">Solarium</string>
+
 	</resources>
