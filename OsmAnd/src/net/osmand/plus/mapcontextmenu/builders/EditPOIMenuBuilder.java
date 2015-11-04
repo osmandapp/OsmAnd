@@ -2,7 +2,6 @@ package net.osmand.plus.mapcontextmenu.builders;
 
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
-import android.text.util.Linkify;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -11,10 +10,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import net.osmand.data.Amenity;
-import net.osmand.osm.AbstractPoiType;
-import net.osmand.osm.MapPoiTypes;
-import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -24,7 +19,6 @@ import net.osmand.plus.osmedit.OpenstreetmapPoint;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.osmedit.OsmNotesPoint;
 import net.osmand.plus.osmedit.OsmPoint;
-import net.osmand.util.Algorithms;
 
 import java.util.Map;
 
@@ -37,11 +31,11 @@ public class EditPOIMenuBuilder extends MenuBuilder {
 		this.osmPoint = osmPoint;
 	}
 
-	private void buildRow(View view, int iconId, String text, int textColor, boolean needLinks) {
-		buildRow(view, getRowIcon(iconId), text, textColor, needLinks);
+	private void buildRow(View view, int iconId, String text) {
+		buildRow(view, getRowIcon(iconId), text);
 	}
 
-	protected void buildRow(final View view, Drawable icon, String text, int textColor, boolean needLinks) {
+	protected void buildRow(final View view, Drawable icon, String text) {
 		boolean light = app.getSettings().isLightContent();
 
 		LinearLayout ll = new LinearLayout(view.getContext());
@@ -77,15 +71,8 @@ public class EditPOIMenuBuilder extends MenuBuilder {
 		textView.setTextSize(16);
 		textView.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_info_text_light : R.color.ctx_menu_info_text_dark));
 
-		if (needLinks) {
-			textView.setAutoLinkMask(Linkify.ALL);
-			textView.setLinksClickable(true);
-		}
 		textView.setEllipsize(TextUtils.TruncateAt.END);
 		textView.setText(text);
-		if (textColor > 0) {
-			textView.setTextColor(view.getResources().getColor(textColor));
-		}
 
 		LinearLayout.LayoutParams llTextViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		llTextViewParams.setMargins(0, 0, dpToPx(10f), 0);
@@ -114,59 +101,15 @@ public class EditPOIMenuBuilder extends MenuBuilder {
 		if (osmPoint instanceof OsmNotesPoint) {
 			OsmNotesPoint notes = (OsmNotesPoint) osmPoint;
 
-			buildRow(view, R.drawable.ic_action_note_dark, notes.getText(), 0, false);
-			buildRow(view, R.drawable.ic_group, notes.getAuthor(), 0, false);
+			buildRow(view, R.drawable.ic_action_note_dark, notes.getText());
+			buildRow(view, R.drawable.ic_group, notes.getAuthor());
 
 		} else if (osmPoint instanceof OpenstreetmapPoint) {
 			OpenstreetmapPoint point = (OpenstreetmapPoint) osmPoint;
 
-			MapPoiTypes poiTypes = app.getPoiTypes();
-
 			for (Map.Entry<String, String> e : point.getEntity().getTags().entrySet()) {
-				int iconId;
-				Drawable icon = null;
-				int textColor = 0;
-				String key = e.getKey();
-				String vl = e.getValue();
-
-				boolean needLinks = !"population".equals(key);
-
-				if (key.startsWith("name:")) {
-					continue;
-				} else if (Amenity.OPENING_HOURS.equals(key)) {
-					iconId = R.drawable.ic_action_time;
-				} else if (Amenity.PHONE.equals(key)) {
-					iconId = R.drawable.ic_action_call_dark;
-				} else if (Amenity.WEBSITE.equals(key)) {
-					iconId = R.drawable.ic_world_globe_dark;
-					vl = vl.replace(' ', '_');
-				} else {
-					if (Amenity.DESCRIPTION.equals(key)) {
-						iconId = R.drawable.ic_action_note_dark;
-					} else {
-						iconId = R.drawable.ic_action_info_dark;
-					}
-					AbstractPoiType pt = poiTypes.getAnyPoiAdditionalTypeByKey(key);
-					if (pt != null) {
-						PoiType pType = (PoiType) pt;
-						if (pType.getParentType() != null && pType.getParentType() instanceof PoiType) {
-							icon = getRowIcon(view.getContext(), ((PoiType) pType.getParentType()).getOsmTag() + "_" + pType.getOsmTag().replace(':', '_') + "_" + pType.getOsmValue());
-						}
-						if (!((PoiType) pt).isText()) {
-							vl = pt.getTranslation();
-						} else {
-							vl = pt.getTranslation() + ": " + e.getValue();
-						}
-					} else {
-						vl = Algorithms.capitalizeFirstLetterAndLowercase(e.getKey()) + ": " + e.getValue();
-					}
-				}
-
-				if (icon != null) {
-					buildRow(view, icon, vl, textColor, needLinks);
-				} else {
-					buildRow(view, iconId, vl, textColor, needLinks);
-				}
+				String text = e.getKey() + ": " + e.getValue();
+				buildRow(view, R.drawable.ic_action_info_dark, text);
 			}
 		}
 
