@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="rendering_attr_hideHouseNumbers_name">Ocultar números de casa</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="rendering_attr_hideHouseNumbers_name">Ocultar números de casa</string>
     <string name="copying_osmand_file_failed">Falló al copiar archivos</string>    
     <string name="storage_directory_external">Almacenamiento externo</string>
     <string name="storage_directory_multiuser">Almacenamiento multiusuario</string>
@@ -2014,5 +2015,6 @@
     <string name="feedback">Encuesta</string>
     <string name="contact_us">Contáctenos</string>
 <string name="osm_edit_created_poi">PDI de OSM creado</string>
-    <string name="osm_edit_created_bug">Reporte de OSM creado</string>
-    </resources>
+    <string name="osm_edit_created_bug">Nota OSM creada</string>
+    <string name="map_legend">Leyenda del mapa</string>
+</resources>

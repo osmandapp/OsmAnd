@@ -8,7 +8,6 @@ import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.map.WorldRegion;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -49,7 +48,9 @@ public abstract class MenuController extends BaseMenuController {
 	private int currentMenuState;
 	private MenuType menuType = MenuType.STANDARD;
 
-	protected TitleButtonController titleButtonController;
+	protected TitleButtonController leftTitleButtonController;
+	protected TitleButtonController rightTitleButtonController;
+	protected TitleButtonController topRightTitleButtonController;
 
 	public abstract class TitleButtonController {
 
@@ -205,8 +206,16 @@ public abstract class MenuController extends BaseMenuController {
 		this.currentMenuState = currentMenuState;
 	}
 
-	public TitleButtonController getTitleButtonController() {
-		return titleButtonController;
+	public TitleButtonController getLeftTitleButtonController() {
+		return leftTitleButtonController;
+	}
+
+	public TitleButtonController getRightTitleButtonController() {
+		return rightTitleButtonController;
+	}
+
+	public TitleButtonController getTopRightTitleButtonController() {
+		return topRightTitleButtonController;
 	}
 
 	public boolean fabVisible() {

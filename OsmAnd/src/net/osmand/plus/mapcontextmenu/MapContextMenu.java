@@ -358,9 +358,25 @@ public class MapContextMenu extends MenuTitleController {
 		}
 	}
 
-	public TitleButtonController getTitleButtonController() {
+	public TitleButtonController getLeftTitleButtonController() {
 		if (menuController != null) {
-			return menuController.getTitleButtonController();
+			return menuController.getLeftTitleButtonController();
+		} else {
+			return null;
+		}
+	}
+
+	public TitleButtonController getRightTitleButtonController() {
+		if (menuController != null) {
+			return menuController.getRightTitleButtonController();
+		} else {
+			return null;
+		}
+	}
+
+	public TitleButtonController getTopRightTitleButtonController() {
+		if (menuController != null) {
+			return menuController.getTopRightTitleButtonController();
 		} else {
 			return null;
 		}

@@ -85,9 +85,22 @@
 
                 <LinearLayout
                     android:id="@+id/context_menu_close_btn_layout"
-                    android:layout_width="66dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:minWidth="66dp"
                     android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/title_button_top_right"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="?android:selectableItemBackground"
+                        android:gravity="center"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="@string/shared_string_others"
+                        android:textColor="?attr/contextMenuButtonColor"
+                        android:textSize="@dimen/default_desc_text_size"/>
 
                 </LinearLayout>
 
@@ -101,6 +114,7 @@
                 android:layout_marginRight="2dp"
                 android:layout_marginTop="-16dp"
                 android:layout_marginBottom="4dp"
+                android:clickable="true"
                 android:orientation="horizontal">
 
                 <Button
@@ -111,7 +125,7 @@
                     android:gravity="left|center_vertical"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:text="@string/osmand_parking_delete"
+                    android:text="@string/recording_context_menu_play"
                     android:textColor="?attr/contextMenuButtonColor"
                     android:textSize="@dimen/default_desc_text_size"/>
 
@@ -125,6 +139,19 @@
                     android:textColor="?android:textColorSecondary"
                     android:textSize="@dimen/default_desc_text_size"
                     android:text="— 00:26"/>
+
+                <Button
+                    android:id="@+id/title_button_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?android:selectableItemBackground"
+                    android:gravity="center"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:drawableLeft="@drawable/ic_action_delete_dark"
+                    android:text="@string/shared_string_delete"
+                    android:textColor="?attr/contextMenuButtonColor"
+                    android:textSize="@dimen/default_desc_text_size"/>
 
             </LinearLayout>
 

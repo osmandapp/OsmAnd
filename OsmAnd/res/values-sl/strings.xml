@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
     <string name="search_button">Poišči</string>
     <string name="search_activity">Iskanje podatkov</string>
-
 
     <string name="choose_available_region">Izberi regijo s seznama</string>
     <string name="incremental_search_city">Sprotno iskanje mest</string>
@@ -1871,7 +1871,7 @@
     <string name="poi_action_delete">izbriši</string>
     <string name="tab_title_basic">Osnovno</string>
     <string name="tab_title_advanced">Napredno</string>
-    
+
     <string name="tag_poi_amenity">prednost</string>
     <string name="contact_info">Podatki stika</string>
     <string name="description">Opis</string>
@@ -1965,7 +1965,7 @@
     <string name="map_viewing_item">Pogled zemljevida</string>
     <string name="search_on_the_map_item">Iskanje po zemljevidu</string>
     <string name="planning_trip_item">Planiranje potovanja</string>
-    
+
     <string name="audio_video_note_item">Zvočni in video zaznamki</string>
     <string name="instalation_troubleshooting_item">Namestitev in odpravljanje napak</string>
     <string name="techical_articles_item">Tehnični članki</string>
@@ -1977,6 +1977,6 @@
     <string name="show_on_start_description">Možnost \'brez\' zažene v pogledu zemljevida</string>
     <string name="enter_country_name">Vpis imena države</string>
 
-    
 
+    <string name="map_legend">Legenda zemljevida</string>
 </resources>

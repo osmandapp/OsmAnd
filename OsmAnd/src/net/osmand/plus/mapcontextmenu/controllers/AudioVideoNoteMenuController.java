@@ -1,9 +1,11 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 
+import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -11,7 +13,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
-import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.builders.AudioVideoNoteMenuBuilder;
 
@@ -33,21 +34,46 @@ public class AudioVideoNoteMenuController extends MenuController {
 		dateFormat = android.text.format.DateFormat.getMediumDateFormat(mapActivity);
 		timeFormat = android.text.format.DateFormat.getTimeFormat(mapActivity);
 
-		if (!recording.isPhoto()) {
-			titleButtonController = new TitleButtonController() {
-				@Override
-				public void buttonPressed() {
-					if (plugin != null) {
-						plugin.playRecording(getMapActivity(), recording);
-					}
+		leftTitleButtonController = new TitleButtonController() {
+			@Override
+			public void buttonPressed() {
+				if (plugin != null) {
+					plugin.playRecording(getMapActivity(), recording);
 				}
-			};
-			titleButtonController.caption = getMapActivity().getString(R.string.recording_context_menu_play);
-			titleButtonController.leftIconId = R.drawable.ic_play_dark;
+			}
+		};
+		if (!recording.isPhoto()) {
+			leftTitleButtonController.caption = getMapActivity().getString(R.string.recording_context_menu_play);
+			leftTitleButtonController.leftIconId = R.drawable.ic_play_dark;
 			String durationStr = recording.getPlainDuration();
-			titleButtonController.needRightText = true;
-			titleButtonController.rightTextCaption = "— " + durationStr;
+			leftTitleButtonController.needRightText = true;
+			leftTitleButtonController.rightTextCaption = "— " + durationStr;
+		} else {
+			leftTitleButtonController.caption = getMapActivity().getString(R.string.recording_context_menu_show);
+			leftTitleButtonController.leftIconId = R.drawable.ic_action_view;
 		}
+
+		rightTitleButtonController = new TitleButtonController() {
+			@Override
+			public void buttonPressed() {
+				AccessibleAlertBuilder bld = new AccessibleAlertBuilder(getMapActivity());
+				bld.setMessage(R.string.recording_delete_confirm);
+				bld.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						if (plugin != null) {
+							plugin.deleteRecording(recording);
+							getMapActivity().getContextMenu().close();
+						}
+					}
+				});
+				bld.setNegativeButton(R.string.shared_string_no, null);
+				bld.show();
+			}
+		};
+		rightTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_delete);
+		rightTitleButtonController.leftIconId = R.drawable.ic_action_delete_dark;
 	}
 
 	@Override

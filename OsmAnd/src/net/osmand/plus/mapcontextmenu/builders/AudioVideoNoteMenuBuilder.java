@@ -1,29 +1,20 @@
 package net.osmand.plus.mapcontextmenu.builders;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
-import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.text.DateFormat;
@@ -50,6 +41,13 @@ public class AudioVideoNoteMenuBuilder extends MenuBuilder {
 		File file = recording.getFile();
 		if (file != null) {
 
+			DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(view.getContext());
+			DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(view.getContext());
+			Date date = new Date(recording.getFile().lastModified());
+			buildRow(view, R.drawable.ic_action_data, dateFormat.format(date) + " — " + timeFormat.format(date), 0);
+
+			buildPlainMenuItems(view);
+
 			if (recording.isPhoto()) {
 				BitmapFactory.Options opts = new BitmapFactory.Options();
 				opts.inSampleSize = 4;
@@ -73,38 +71,9 @@ public class AudioVideoNoteMenuBuilder extends MenuBuilder {
 					}
 				});
 			}
-
-			DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(view.getContext());
-			DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(view.getContext());
-			Date date = new Date(recording.getFile().lastModified());
-			buildRow(view, R.drawable.ic_action_data, dateFormat.format(date) + " — " + timeFormat.format(date), 0);
+		} else {
+			buildPlainMenuItems(view);
 		}
-
-		buildPlainMenuItems(view);
-
-		buildButtonRow(view, null, view.getResources().getString(R.string.recording_context_menu_delete), new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				AccessibleAlertBuilder bld = new AccessibleAlertBuilder(v.getContext());
-				bld.setMessage(R.string.recording_delete_confirm);
-				final View fView = v;
-				bld.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
-
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						AudioVideoNotesPlugin plugin = OsmandPlugin.getPlugin(AudioVideoNotesPlugin.class);
-						if (plugin != null) {
-							plugin.deleteRecording(recording);
-							if (fView.getContext() instanceof MapActivity) {
-								((MapActivity)fView.getContext()).getContextMenu().close();
-							}
-						}
-					}
-				});
-				bld.setNegativeButton(R.string.shared_string_no, null);
-				bld.show();
-			}
-		});
 	}
 
 	protected void buildImageRow(final View view, Bitmap bitmap, OnClickListener onClickListener) {

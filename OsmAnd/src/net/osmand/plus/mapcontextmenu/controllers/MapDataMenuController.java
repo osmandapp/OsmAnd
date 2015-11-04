@@ -30,7 +30,8 @@ public class MapDataMenuController extends MenuController {
 		} else {
 			regionName = dataObject.getName();
 		}
-		titleButtonController = new TitleButtonController() {
+
+		leftTitleButtonController = new TitleButtonController() {
 			@Override
 			public void buttonPressed() {
 				getMapActivity().getContextMenu().close();
@@ -42,8 +43,27 @@ public class MapDataMenuController extends MenuController {
 				getMapActivity().startActivity(intent);
 			}
 		};
-		titleButtonController.caption = getMapActivity().getString(R.string.shared_string_download_map);
-		titleButtonController.leftIconId = R.drawable.ic_action_import;
+		leftTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_download);
+		leftTitleButtonController.leftIconId = R.drawable.ic_action_import;
+
+		rightTitleButtonController = new TitleButtonController() {
+			@Override
+			public void buttonPressed() {
+				// todo delete
+				//getMapActivity().getContextMenu().close();
+			}
+		};
+		rightTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_delete);
+		rightTitleButtonController.leftIconId = R.drawable.ic_action_delete_dark;
+
+		topRightTitleButtonController = new TitleButtonController() {
+			@Override
+			public void buttonPressed() {
+				// todo other maps
+			}
+		};
+		topRightTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_others);
+
 	}
 
 	@Override
