@@ -30,7 +30,8 @@ public class TargetPointMenuController extends MenuController {
 				getMapActivity().getContextMenu().close();
 			}
 		};
-		leftTitleButtonController.caption = getMapActivity().getString(R.string.delete_target_point);
+		leftTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_delete);
+		leftTitleButtonController.leftIconId = R.drawable.ic_action_delete_dark;
 	}
 
 	@Override
