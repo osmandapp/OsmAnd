@@ -112,23 +112,5 @@ public class EditPOIMenuBuilder extends MenuBuilder {
 				buildRow(view, R.drawable.ic_action_info_dark, text);
 			}
 		}
-
-		buildButtonRow(view, null, view.getResources().getString(R.string.shared_string_delete), new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
-				if (plugin != null) {
-					boolean deleted = false;
-					if (osmPoint instanceof OsmNotesPoint) {
-						deleted = plugin.getDBBug().deleteAllBugModifications((OsmNotesPoint) osmPoint);
-					} else if (osmPoint instanceof OpenstreetmapPoint) {
-						deleted = plugin.getDBPOI().deletePOI((OpenstreetmapPoint) osmPoint);
-					}
-					if (deleted && v.getContext() instanceof MapActivity) {
-						((MapActivity)v.getContext()).getContextMenu().close();
-					}
-				}
-			}
-		});
 	}
 }

@@ -310,24 +310,6 @@ public class EditPoiDialogFragment extends DialogFragment {
 				new Runnable() {
 					@Override
 					public void run() {
-						if (isLocalEdit) {
-							AccessibleToast.makeText(
-									getActivity(),
-									R.string.osm_changes_added_to_local_edits,
-									Toast.LENGTH_LONG).show();
-						} else {
-							final String message = node.getId() == -1 ?
-									getResources().getString(R.string.poi_action_add)
-									: getResources().getString(R.string.poi_action_change);
-
-							AccessibleToast.makeText(
-									getActivity(),
-									MessageFormat.format(
-											getResources().getString(
-													R.string.poi_action_succeded_template), message),
-									Toast.LENGTH_LONG).show();
-						}
-
 						OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
 						if (plugin != null) {
 							List<OpenstreetmapPoint> points = plugin.getDBPOI().getOpenstreetmapPoints();

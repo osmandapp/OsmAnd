@@ -18,7 +18,7 @@ public class TargetPointMenuController extends MenuController {
 	public TargetPointMenuController(OsmandApplication app, MapActivity mapActivity, final TargetPoint targetPoint) {
 		super(new MenuBuilder(app), mapActivity);
 		this.targetPoint = targetPoint;
-		titleButtonController = new TitleButtonController() {
+		leftTitleButtonController = new TitleButtonController() {
 			@Override
 			public void buttonPressed() {
 				TargetPointsHelper targetPointsHelper = getMapActivity().getMyApplication().getTargetPointsHelper();
@@ -30,7 +30,7 @@ public class TargetPointMenuController extends MenuController {
 				getMapActivity().getContextMenu().close();
 			}
 		};
-		titleButtonController.caption = getMapActivity().getString(R.string.delete_target_point);
+		leftTitleButtonController.caption = getMapActivity().getString(R.string.delete_target_point);
 	}
 
 	@Override

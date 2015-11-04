@@ -58,7 +58,9 @@ public class MapContextMenuFragment extends Fragment {
 	ImageView fabView;
 
 	private MapContextMenu menu;
-	private TitleButtonController titleButtonController;
+	private TitleButtonController leftTitleButtonController;
+	private TitleButtonController rightTitleButtonController;
+	private TitleButtonController topRightTitleButtonController;
 
 	private int menuTopViewHeight;
 	private int menuTopShadowHeight;
@@ -123,7 +125,9 @@ public class MapContextMenuFragment extends Fragment {
 		markerPaddingXPx = dpToPx(MARKER_PADDING_X_DP);
 
 		menu = getMapActivity().getContextMenu();
-		titleButtonController = menu.getTitleButtonController();
+		leftTitleButtonController = menu.getLeftTitleButtonController();
+		rightTitleButtonController = menu.getRightTitleButtonController();
+		topRightTitleButtonController = menu.getTopRightTitleButtonController();
 
 		map = getMapActivity().getMapView();
 		RotatedTileBox box = map.getCurrentRotatedTileBox().copy();
@@ -144,35 +148,78 @@ public class MapContextMenuFragment extends Fragment {
 		view = inflater.inflate(R.layout.map_context_menu_fragment, container, false);
 		mainView = view.findViewById(R.id.context_menu_main);
 
-		// Title button
-		final View titleButtonContainer = view.findViewById(R.id.title_button_container);
-		if (titleButtonController != null) {
-			titleButtonContainer.setVisibility(View.VISIBLE);
+		// Title buttons
+		final View titleButtonsContainer = view.findViewById(R.id.title_button_container);
+		titleButtonsContainer.setVisibility(
+				leftTitleButtonController != null || rightTitleButtonController != null ? View.VISIBLE : View.GONE);
 
-			final Button titleButton = (Button) view.findViewById(R.id.title_button);
-			titleButton.setText(titleButtonController.getCaption());
+		// Left title button
+		final Button leftTitleButton = (Button) view.findViewById(R.id.title_button);
+		final TextView titleButtonRightText = (TextView) view.findViewById(R.id.title_button_right_text);
+		if (leftTitleButtonController != null) {
+			leftTitleButton.setText(leftTitleButtonController.getCaption());
 
-			Drawable leftIcon = titleButtonController.getLeftIcon();
+			Drawable leftIcon = leftTitleButtonController.getLeftIcon();
 			if (leftIcon != null) {
-				titleButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, null, null);
-				titleButton.setCompoundDrawablePadding(dpToPx(8f));
+				leftTitleButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, null, null);
+				leftTitleButton.setCompoundDrawablePadding(dpToPx(4f));
 			}
-			titleButton.setOnClickListener(new View.OnClickListener() {
+			leftTitleButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					titleButtonController.buttonPressed();
+					leftTitleButtonController.buttonPressed();
 				}
 			});
 
-			final TextView titleButtonRightText = (TextView) view.findViewById(R.id.title_button_right_text);
-			titleButtonRightText.setVisibility(titleButtonController.isNeedRightText() ? View.VISIBLE : View.GONE);
-			if (titleButtonController.isNeedRightText()) {
-				titleButtonRightText.setText(titleButtonController.getRightTextCaption());
+			if (leftTitleButtonController.isNeedRightText()) {
+				titleButtonRightText.setText(leftTitleButtonController.getRightTextCaption());
+			} else {
+				titleButtonRightText.setVisibility(View.GONE);
 			}
 		} else {
-			titleButtonContainer.setVisibility(View.GONE);
+			leftTitleButton.setVisibility(View.GONE);
+			titleButtonRightText.setVisibility(View.GONE);
 		}
 
+		// Right title button
+		final Button rightTitleButton = (Button) view.findViewById(R.id.title_button_right);
+		if (rightTitleButtonController != null) {
+			rightTitleButton.setText(rightTitleButtonController.getCaption());
+
+			Drawable leftIcon = rightTitleButtonController.getLeftIcon();
+			if (leftIcon != null) {
+				rightTitleButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, null, null);
+				rightTitleButton.setCompoundDrawablePadding(dpToPx(4f));
+			}
+			rightTitleButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					rightTitleButtonController.buttonPressed();
+				}
+			});
+		} else {
+			rightTitleButton.setVisibility(View.GONE);
+		}
+
+		// Top Right title button
+		final Button topRightTitleButton = (Button) view.findViewById(R.id.title_button_top_right);
+		if (topRightTitleButtonController != null) {
+			topRightTitleButton.setText(topRightTitleButtonController.getCaption());
+
+			Drawable leftIcon = topRightTitleButtonController.getLeftIcon();
+			if (leftIcon != null) {
+				topRightTitleButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, null, null);
+				topRightTitleButton.setCompoundDrawablePadding(dpToPx(4f));
+			}
+			topRightTitleButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					topRightTitleButtonController.buttonPressed();
+				}
+			});
+		} else {
+			topRightTitleButton.setVisibility(View.GONE);
+		}
 
 		if (menu.isLandscapeLayout()) {
 			mainView.setLayoutParams(new FrameLayout.LayoutParams(dpToPx(menu.getLandscapeWidthDp()),

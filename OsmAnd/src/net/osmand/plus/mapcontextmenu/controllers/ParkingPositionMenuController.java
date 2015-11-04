@@ -31,7 +31,7 @@ public class ParkingPositionMenuController extends MenuController {
 			}
 			parkingDescription = sb.toString();
 		}
-		titleButtonController = new TitleButtonController() {
+		leftTitleButtonController = new TitleButtonController() {
 			@Override
 			public void buttonPressed() {
 				if (plugin != null) {
@@ -39,7 +39,7 @@ public class ParkingPositionMenuController extends MenuController {
 				}
 			}
 		};
-		titleButtonController.caption = getMapActivity().getString(R.string.osmand_parking_delete);
+		leftTitleButtonController.caption = getMapActivity().getString(R.string.osmand_parking_delete);
 	}
 
 	@Override
