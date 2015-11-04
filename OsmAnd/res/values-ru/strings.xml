@@ -1978,7 +1978,7 @@
     <string name="share_menu_location">Поделиться местоположением</string>
     <string name="shared_string_send">Отправить</string>
     <string name="application_dir_description">Выберите, где вы хотите сохранить файлы карт.</string>
-    <string name="show_on_start_description">Приложение будет запускаться с экрана карты</string>
+    <string name="show_on_start_description">\"Отключено\" непосредственно запускает экран карты</string>
 <string name="map_downloaded">Карта загружена</string>
     <string name="shared_string_qr_code">QR-код</string>
     <string name="go_to_map">Перейти к карте</string>
@@ -2006,4 +2006,5 @@
     <string name="help_us_to_improve_menu_group">Помогите улучшить OsmAnd</string>
     <string name="other_menu_group">Прочее</string>
     <string name="plugins_menu_group">Плагины</string>
-    </resources>
+    <string name="map_legend">Легенда</string>
+</resources>
