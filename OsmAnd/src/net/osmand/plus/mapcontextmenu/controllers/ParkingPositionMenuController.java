@@ -39,7 +39,8 @@ public class ParkingPositionMenuController extends MenuController {
 				}
 			}
 		};
-		leftTitleButtonController.caption = getMapActivity().getString(R.string.osmand_parking_delete);
+		leftTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_delete);
+		leftTitleButtonController.leftIconId = R.drawable.ic_action_delete_dark;
 	}
 
 	@Override

@@ -298,10 +298,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				showDeleteEventWarning(activity);
-				if (parkingLayer != null) {
-					parkingLayer.refresh();
-				}
-				clearParkingPosition();
+				cancelParking();
 				if (activity instanceof MapActivity) {
 					((MapActivity) activity).getContextMenu().close();
 				}
@@ -323,7 +320,12 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		Builder setTime = new AlertDialog.Builder(mapActivity);
 		setTime.setView(setTimeParking);
 		setTime.setTitle(mapActivity.getString(R.string.osmand_parking_time_limit_title));
-		setTime.setNegativeButton(R.string.shared_string_cancel, null);
+		setTime.setNegativeButton(R.string.shared_string_cancel, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				cancelParking();
+			}
+		});
 		final TextView  textView = (TextView) setTimeParking.findViewById(R.id.parkTime);
 		final TimePicker timePicker = (TimePicker) setTimeParking.findViewById(R.id.parking_time_picker);
 
@@ -433,7 +435,14 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 			parkingLayer.refresh();
 		}
 	}
-	
+
+	private void cancelParking() {
+		if (parkingLayer != null) {
+			parkingLayer.refresh();
+		}
+		clearParkingPosition();
+	}
+
 	@Override
 	public void registerOptionsMenuItems(final MapActivity mapActivity, ContextMenuAdapter helper) {
     }
