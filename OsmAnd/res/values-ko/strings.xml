@@ -2149,7 +2149,7 @@
 	<string name="next_proceed">다음</string>
 	<string name="opening_at">~ 열기</string>
 	<string name="closing_at">에 닫기</string>
-	<string name="tag_poi_name">이름</string>
+	
 	<string name="tag_poi_amenity">시설</string>
 	<string name="contact_info">연락처 정보</string>
 	<string name="description">설명</string>

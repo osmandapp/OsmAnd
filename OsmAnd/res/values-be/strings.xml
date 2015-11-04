@@ -1887,7 +1887,7 @@
 	<string name="opening_at">Адчыняецца ў</string>
 	<string name="closing_at">Зачыняецца ў</string>
 <string name="tab_title_advanced">Пашыранае</string>
-	<string name="tag_poi_name">назва</string>
+	
 	<string name="contact_info">Кантакты</string>
 	<string name="description">Апісаньне</string>
 	<string name="add_opening_hours">Дадаць гадзіны працы</string>
@@ -1896,7 +1896,7 @@
 <string name="av_locations_descr">GPX-файл зь мецазнаходжаньнем заўваг</string>
     <string name="av_locations">Месцазнаходжаньні</string>
     <string name="number_of_rows_in_dash">Колькасьць радкоў на галоўным экране %1$s</string>
-	<string name="tag_poi_amenity">грамадзкі аб\'ект</string>
+	
 	<string name="poi_action_delete">выдаліць</string>
 	<string name="working_days">Працоўныя дні</string>
 	<string name="recent_places">Нядаўнія месцы</string>

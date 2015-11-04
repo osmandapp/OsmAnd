@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="recording_context_menu_show">Zobraziť</string>
     <string name="recording_photo_description">Fotografia %1$s %2$s</string>
     <string name="av_def_action_picture">Zachytiť fotografiu</string>
@@ -2031,7 +2030,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="next_proceed">Ďalší</string>
     <string name="opening_at">Otvára o</string>
     <string name="closing_at">Zatvára o</string>
-    <string name="tag_poi_name">názov</string>
+    
     <string name="tag_poi_amenity">občianska vybavenosť</string>
     <string name="contact_info">Kontaktné údaje</string>
     <string name="description">Popis</string>
@@ -2133,9 +2132,9 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="map_viewing_item">Prezeranie mapy</string>
     <string name="search_on_the_map_item">Hľadanie na mape</string>
     <string name="planning_trip_item">Plánovanie výletu</string>
-    <string name="contour_lines_and_hillshade_maps_item">Mapy vrstevníc a tieňované svahy</string>
+    
     <string name="osmand_ski_maps_item">Lyžiarske mapy</string>
-    <string name="audio_video_note_item">Zvukové/video poznámky</string>
+    
     <string name="instalation_troubleshooting_item">Inštalácia a riešenie problémov</string>
     <string name="techical_articles_item">Technické články</string>
     <string name="versions_item">Verzie</string>

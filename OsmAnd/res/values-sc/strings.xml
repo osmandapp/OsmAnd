@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="always_center_position_on_map">Ammustra sa positzione semper a su tzentru</string>
     <string name="voice_pref_title">Boghe</string>
     <string name="misc_pref_title">Mistura</string>
@@ -1864,12 +1863,12 @@
     <string name="closing_at">Serrat a sas</string>
     <string name="av_locations_descr">Documentu GPX cun notas locales</string>
     <string name="av_locations">Localidades</string>
-    <string name="tag_poi_name">nùmene</string>
+    
     <string name="contact_info">Informatziones de cuntatu</string>
     <string name="description">Descritzione</string>
     <string name="add_opening_hours">Annanghe s’oràriu de abertura</string>
     <string name="poi_dialog_poi_type">Casta de PDI</string>
-    <string name="tag_poi_amenity">atratzione</string>
+    
     <string name="please_specify_poi_type">Dislinda casta de PDI.</string>
     <string name="number_of_rows_in_dash">Nùmeru de rigas in su pannellu %1$s</string>
     <string name="poi_action_delete">burra</string>
@@ -1965,9 +1964,9 @@
     <string name="map_viewing_item">Visione de sa mapa</string>
     <string name="search_on_the_map_item">Chircare in sa mapa</string>
     <string name="planning_trip_item">Pranificare unu biàgiu</string>
-    <string name="contour_lines_and_hillshade_maps_item">Mapas de sas lìnias de livellu e de sas umbraduras de sos rilievos</string>
+    
     <string name="osmand_ski_maps_item">Mapas pro iscì OsmAnd</string>
-    <string name="audio_video_note_item">Notas àudio/vìdeu</string>
+    
     <string name="instalation_troubleshooting_item">Installatzione e solutziones a sos problemas</string>
     <string name="techical_articles_item">Artìculos tècnicos</string>
     <string name="versions_item">Versiones</string>

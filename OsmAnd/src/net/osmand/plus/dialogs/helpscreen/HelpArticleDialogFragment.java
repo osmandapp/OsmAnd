@@ -71,6 +71,8 @@ public class HelpArticleDialogFragment extends DialogFragment {
 				webView.loadDataWithBaseURL("http://osmand.net", sb.toString(), null, "utf-8", null);
 			}
 		} else if (url != null) {
+			webView.getSettings().setLoadWithOverviewMode(true);
+			webView.getSettings().setUseWideViewPort(true);
 			if (savedInstanceState != null) {
 				webView.restoreState(savedInstanceState);
 			} else {

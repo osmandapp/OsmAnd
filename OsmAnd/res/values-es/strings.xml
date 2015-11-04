@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
 
     <string name="layer_map_appearance">Configurar pantalla</string>
     <string name="show_lanes">Mostrar carriles</string>
@@ -2026,7 +2025,7 @@
     <string name="closing_at">Cierran a las</string>
     <string name="av_locations_descr">Archivo GPX con ubicaciones de nota</string>
     <string name="av_locations">Ubicaciones</string>
-    <string name="tag_poi_name">nombre</string>
+    
     <string name="tag_poi_amenity">servicio</string>
     <string name="contact_info">Información de contacto</string>
     <string name="description">Descripción</string>
@@ -2125,9 +2124,9 @@
     <string name="map_viewing_item">Vista del mapa</string>
     <string name="search_on_the_map_item">Búsqueda en el mapa</string>
     <string name="planning_trip_item">Planeando un viaje</string>
-    <string name="contour_lines_and_hillshade_maps_item">Mapas de curvas de nivel y sombreado</string>
+    
     <string name="osmand_ski_maps_item">Mapas de esquí de OsmAnd</string>
-    <string name="audio_video_note_item">Notas multimedia</string>
+    
     <string name="instalation_troubleshooting_item">Instalación y solución de problemas</string>
     <string name="techical_articles_item">Artículos técnicos</string>
     <string name="versions_item">Versiones</string>

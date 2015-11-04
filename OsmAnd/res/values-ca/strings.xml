@@ -1901,13 +1901,13 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
 	<string name="closing_at">Tanquen a les</string>
 <string name="av_locations">Ubicacions</string>
     <string name="av_locations_descr">Fitxer GPX amb posicions comentades</string>
-    <string name="tag_poi_name">nom</string>
+    
 	<string name="contact_info">Informació de contacte</string>
 	<string name="description">Descripció</string>
 	<string name="add_opening_hours">Afegeix l\'horari de servei</string>
 	<string name="poi_dialog_poi_type">Tipus de PDI</string>
 	<string name="please_specify_poi_type">Especifiqueu el tipus de PDI.</string>
-<string name="tag_poi_amenity">instal·lació comunitària</string>
+
 	<string name="number_of_rows_in_dash">Nombre de files al tauler %1$s</string>
 	<string name="poi_action_delete">Suprimeix</string>
 	<string name="working_days">Dies laborables</string>

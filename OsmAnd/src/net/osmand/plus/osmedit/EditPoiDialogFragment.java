@@ -241,6 +241,7 @@ public class EditPoiDialogFragment extends DialogFragment {
 		});
 		poiNameEditText.setOnEditorActionListener(mOnEditorActionListener);
 		poiTypeEditText.setOnEditorActionListener(mOnEditorActionListener);
+		poiTypeEditText.setText(editPoiData.amenity.getSubType());
 
 		Button saveButton = (Button) view.findViewById(R.id.saveButton);
 		int saveButtonTextId = R.string.default_buttons_commit;
@@ -332,9 +333,9 @@ public class EditPoiDialogFragment extends DialogFragment {
 		getDialog().setOnKeyListener(new DialogInterface.OnKeyListener() {
 			@Override
 			public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-				if (keyCode == android.view.KeyEvent.KEYCODE_BACK) {
-					if (editPoiData.hasChangesBeenMade()) {
-						LOG.debug("onKey hasChangesBeenMade" + editPoiData.hasChangesBeenMade());
+				if (keyCode == android.view.KeyEvent.KEYCODE_BACK
+						&& editPoiData.hasChangesBeenMade()) {
+					if (event.getAction() == KeyEvent.ACTION_DOWN) {
 						return true;
 					} else {
 						dismissCheckForChanges();
@@ -488,7 +489,9 @@ public class EditPoiDialogFragment extends DialogFragment {
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 				Object item = parent.getAdapter().getItem(position);
 				LOG.debug("item=" + item);
+				//noinspection SuspiciousMethodCalls
 				if (subCategories.containsKey(item)) {
+					//noinspection SuspiciousMethodCalls
 					String keyName = subCategories.get(item).getKeyName();
 					poiTypeEditText.setText(keyName);
 				}

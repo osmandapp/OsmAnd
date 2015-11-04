@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="send_files_to_osm">GPX fájl küldése OSM-re?</string>
     <string name="gpx_visibility_txt">Láthatóság</string>
     <string name="gpx_tags_txt">Címkék</string>
@@ -1876,7 +1875,7 @@
     <string name="building_number">Házszám</string>
     <string name="opening_at">Nyitás</string>
     <string name="closing_at">Zárás</string>
-    <string name="tag_poi_name">név</string>
+    
     <string name="tag_poi_amenity">szolgáltatás</string>
     <string name="contact_info">Elérhetőségek</string>
     <string name="description">Leírás</string>
@@ -1976,9 +1975,9 @@
     <string name="map_viewing_item">Térkép böngészése</string>
     <string name="search_on_the_map_item">Keresés a térképen</string>
     <string name="planning_trip_item">Utazás tervezése</string>
-    <string name="contour_lines_and_hillshade_maps_item">Szintvonal és domborzatárnyékolás</string>
+    
     <string name="osmand_ski_maps_item">OsmAnd sítérkép</string>
-    <string name="audio_video_note_item">Hang- és videójegyzetek</string>
+    
     <string name="instalation_troubleshooting_item">Telepítés és hibaelhárítás</string>
     <string name="techical_articles_item">Technikai cikkek</string>
     <string name="versions_item">Verziók</string>

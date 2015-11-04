@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
     <string name="av_def_action_audio">Optag audio</string>
@@ -1890,7 +1889,7 @@
     <string name="av_locations_descr">GPX-fil med placeringsnoter</string>
     <string name="av_locations">Placeringer</string>
     <string name="tab_title_basic">Grundlæggende</string>
-    <string name="tag_poi_name">navn</string>
+    
     <string name="tag_poi_amenity">facilitet</string>
     <string name="contact_info">Kontaktoplysninger</string>
     <string name="description">Beskrivelse</string>
@@ -1992,9 +1991,9 @@
     <string name="map_viewing_item">Kortvisning</string>
     <string name="search_on_the_map_item">Søgning på kortet</string>
     <string name="planning_trip_item">Turplanlægning</string>
-    <string name="contour_lines_and_hillshade_maps_item">Højdekurver og reliefoverlejring</string>
+    
     <string name="osmand_ski_maps_item">Skikort</string>
-    <string name="audio_video_note_item">Audio-/videonoter</string>
+    
     <string name="instalation_troubleshooting_item">Installation og fejlfinding</string>
     <string name="techical_articles_item">Tekniske artikler</string>
     <string name="versions_item">Versioner</string>

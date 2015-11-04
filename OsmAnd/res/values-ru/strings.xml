@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="osmo_use_https_descr">Использовать безопасное подключение к серверу</string>
     <string name="osmo_use_https">Использовать HTTPS</string>
     <string name="srtm_plugin_description">"Этот плагин обеспечивает как наложение контурных линий, так и отображения затеняющего слоя рельефа поверх стандартных карт OsmAnd. Эта функция высоко оценится спортсменами, туристами, путешественниками и всеми, кто заинтересован в рельефной структуре ландшафта.\n\nГлобальные данные (между 70 градусами на севере и 70 градусами на юге) основываются на измерениях SRTM (Shuttle Radar Topography Mission) и ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer) — инструментом визуализации Terra, флагманского спутника Системы Наблюдения Земли NASA. ASTER является результатом совместных усилий NASA, министерства экономики Японии, торговли и промышленности (METI), а также Космических Систем Японии (J-spacesystems). "</string>
@@ -1902,7 +1901,7 @@
 	<string name="next_proceed">Следующий</string>
 	<string name="opening_at">Открытие в</string>
 	<string name="closing_at">Закрытие в</string>
-	<string name="tag_poi_name">название</string>
+	
 	<string name="contact_info">Контактная информация</string>
 	<string name="description">Описание</string>
 	<string name="add_opening_hours">Добавить часы работы</string>
@@ -1916,7 +1915,7 @@
 <string name="poi_deleted_localy">POI будут удалены после того как вы загрузите ваши изменения</string>
 	<string name="show_gpx">Показать GPX</string>
 <string name="poi_action_delete">удалить</string>
-	<string name="tag_poi_amenity">инфраструктура</string>
+	
 	<string name="recent_places">Недавние места</string>
 	<string name="count_of_lines">Количество строк</string>
 <string name="show_on_start">Показывать при запуске</string>

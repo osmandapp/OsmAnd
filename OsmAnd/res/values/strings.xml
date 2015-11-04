@@ -1995,8 +1995,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="next_proceed">Next</string>
 	<string name="opening_at">Opening at</string>
 	<string name="closing_at">Closing at</string>
-	<string name="tag_poi_name">name</string>
-	<string name="tag_poi_amenity">amenity</string>
 	<string name="contact_info">Contact info</string>
 	<string name="description">Description</string>
 	<string name="add_opening_hours">Add opening hours</string>

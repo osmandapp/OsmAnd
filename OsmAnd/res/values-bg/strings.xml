@@ -1963,7 +1963,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="lang_zh_TW">традиционен китайски</string>
 	<string name="error_message_pattern">Грешка: {0}</string>
 	<string name="app_name_osmand">OsmAnd</string>
-	<string name="tag_poi_name">име</string>
+	
 	<string name="description">Описание</string>
 	<string name="poi_dialog_poi_type">Тип POI</string>
 	<string name="working_days">Работни дни</string>

@@ -1780,13 +1780,13 @@
 	<string name="closing_at">Fecha em</string>
 <string name="av_locations_descr">Arquivo GPX com notas de posição</string>
     <string name="av_locations">Posições</string>
-    <string name="tag_poi_name">nome</string>
+    
 	<string name="contact_info">Informações de contato</string>
 	<string name="description">Descrição</string>
 	<string name="add_opening_hours">Adicionar o horário de funcionamento</string>
 	<string name="poi_dialog_poi_type">Tipo de POI</string>
 	<string name="number_of_rows_in_dash">Número de linhas no traço de %1$s</string>
-<string name="tag_poi_amenity">facilidade</string>
+
 	<string name="please_specify_poi_type">Por favor, especifique tipo de POI.</string>
 <string name="working_days">Dias úteis</string>
 	<string name="recent_places">Locais recentes</string>
