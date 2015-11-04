@@ -108,7 +108,7 @@ public class EditPOIMenuBuilder extends MenuBuilder {
 			OpenstreetmapPoint point = (OpenstreetmapPoint) osmPoint;
 
 			for (Map.Entry<String, String> e : point.getEntity().getTags().entrySet()) {
-				String text = e.getKey() + ": " + e.getValue();
+				String text = e.getKey() + "=" + e.getValue();
 				buildRow(view, R.drawable.ic_action_info_dark, text);
 			}
 		}
