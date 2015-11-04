@@ -2033,5 +2033,5 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="world_map_download_descr">La mappa di base (copertura mondiale a piccoli livelli di zoom) è mancante o non aggiornata. Valutate di scaricare la mappa mondiale di base per un ambiente completo.</string>
 
     <string name="map_legend">Legenda della mappa</string>
-<string name="shared_string_upload">Invia</string>
+<string name="shared_string_upload">Carica</string>
     </resources>
