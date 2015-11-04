@@ -107,7 +107,7 @@ public class ColorDialogs {
         }
         if(selection == -1) {
         	colors.insert(0, selectedColor);
-        	colorNames.add(0, colorToString(selectedColor));
+        	colorNames.add(0, ((OsmandApplication)ctx.getApplicationContext()).accessibilityEnabled() ? ctx.getString(R.string.access_default_color) : colorToString(selectedColor));
         	selection = 0;
         }
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(ctx, android.R.layout.simple_spinner_item, colorNames) {
