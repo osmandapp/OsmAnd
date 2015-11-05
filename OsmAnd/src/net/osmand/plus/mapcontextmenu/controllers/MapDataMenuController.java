@@ -169,13 +169,19 @@ public class MapDataMenuController extends MenuController {
 		rightTitleButtonController.visible = indexItem != null && indexItem.isDownloaded();
 
 		boolean hasIndexes = downloadThread.getIndexes().isDownloadedFromInternet;
-		boolean isDownloading = indexItem != null && downloadThread.getCurrentDownloadingItem() == indexItem;
+		boolean isDownloading = indexItem != null && downloadThread.isDownloading(indexItem);
 		if (!hasIndexes) {
 			titleProgressController.setIndexesDownloadMode();
 			titleProgressController.visible = true;
 		} else if (isDownloading) {
 			titleProgressController.setMapDownloadMode();
-			titleProgressController.progress = downloadThread.getCurrentDownloadingItemProgress();
+			if (downloadThread.getCurrentDownloadingItem() == indexItem) {
+				titleProgressController.indeterminate = false;
+				titleProgressController.progress = downloadThread.getCurrentDownloadingItemProgress();
+			} else {
+				titleProgressController.indeterminate = true;
+				titleProgressController.progress = 0;
+			}
 			double mb = indexItem.getArchiveSizeMB();
 			String v ;
 			if (titleProgressController.progress != -1) {

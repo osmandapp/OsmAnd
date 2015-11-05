@@ -219,14 +219,17 @@ public class DownloadIndexesThread {
 		}
 		if (currentDownloadingItem == null) {
 			execute(new DownloadIndexesAsyncTask());
+		} else {
+			downloadInProgress();
 		}
 	}
 
 	public void cancelDownload(IndexItem item) {
 		if(currentDownloadingItem == item) {
-			downloadFileHelper.setInterruptDownloading(true);;
+			downloadFileHelper.setInterruptDownloading(true);
 		} else {
 			indexItemDownloading.remove(item);
+			downloadInProgress();
 		}
 	}
 
