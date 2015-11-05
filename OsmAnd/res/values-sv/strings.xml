@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
     <string name="ChooseCountry">Välj land</string>
     <string name="choose_city">Välj stad</string>
@@ -1961,4 +1962,6 @@
     <string name="osm_edit_created_poi">Skapat en OSM POI</string>
     <string name="osm_edit_created_bug">Skapat en OSM-bugg</string>
     <string name="world_map_download_descr">Baskarta över världen (täcker hela världen med låg zoomningsgrad) saknas eller är gammal. Hämta gärna denna karta till din enhet.</string>
+<string name="shared_string_upload">Skicka</string>
+    <string name="map_legend">Teckenförklaring</string>
 </resources>
