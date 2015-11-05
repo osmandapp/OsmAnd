@@ -88,6 +88,12 @@ public class DownloadIndexesThread {
 	public void setUiActivity(DownloadEvents uiActivity) {
 		this.uiActivity = uiActivity;
 	}
+
+	public void resetUiActivity(DownloadEvents uiActivity) {
+		if (this.uiActivity == uiActivity) {
+			this.uiActivity = null;
+		}
+	}
 	
 	@UiThread
 	protected void downloadInProgress() {

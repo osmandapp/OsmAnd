@@ -162,6 +162,8 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="54dp"
                 android:paddingRight="2dp"
+                android:minHeight="52dp"
+                android:gravity="center_vertical"
                 android:layout_marginTop="-16dp"
                 android:paddingBottom="4dp"
                 android:clickable="true"
@@ -182,30 +184,14 @@
                         android:orientation="vertical"
                         android:layout_marginRight="12dp">
 
-                        <LinearLayout
+                        <TextView
+                            android:id="@+id/progressTitle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:layout_gravity="center_vertical"
+                            android:visibility="visible"
+                            tools:text="@string/shared_string_downloading"/>
 
-                            <TextView
-                                android:id="@+id/progressTitle"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:layout_gravity="center_vertical"
-                                android:visibility="visible"
-                                tools:text="@string/shared_string_downloading"/>
-
-                            <TextView
-                                android:id="@+id/progressPercent"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginLeft="12dp"
-                                android:visibility="visible"
-                                tools:text="12%"/>
-
-                        </LinearLayout>
                         <ProgressBar
                             android:id="@+id/progressBar"
                             style="?android:attr/progressBarStyleHorizontal"
