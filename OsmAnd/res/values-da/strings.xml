@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
     <string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
@@ -2004,4 +2004,7 @@
     <string name="osm_edit_created_bug">Oprettede OSM fejlregistrering</string>
     <string name="map_legend">Signaturforklaring</string>
     <string name="shared_string_upload">Overfør</string>
-</resources>
+<string name="rec_photo_description">Foto %1$s</string>
+    <string name="rec_audio_description">Audio %1$s</string>
+    <string name="rec_video_description">Video %1$s</string>
+    </resources>
