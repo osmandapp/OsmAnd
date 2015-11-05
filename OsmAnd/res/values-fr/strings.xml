@@ -2081,4 +2081,5 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="rec_photo_description">Photo %1$s</string>
     <string name="rec_audio_description">Audio %1$s</string>
     <string name="rec_video_description">Vidéo %1$s</string>
+    <string name="shared_string_update">Mise à jour</string>
     </resources>
