@@ -43,14 +43,14 @@ public class FavoriteImageDrawable extends Drawable {
 		
 		
 		listDrawable = getResources().getDrawable(R.drawable.ic_action_fav_dark);
+		listDrawable.setColorFilter(new PorterDuffColorFilter(col, PorterDuff.Mode.SRC_IN));
 		paintOuter = new Paint();
 		paintOuter.setAntiAlias(true);
 		paintOuter.setStyle(Style.FILL_AND_STROKE);
 		paintInnerCircle = new Paint();
 		paintInnerCircle.setStyle(Style.FILL_AND_STROKE);
 		paintOuter.setColor(color == 0 || color == Color.BLACK ? 0x88555555 : color);
-		paintInnerCircle.setColor(color == 0 || color == Color.BLACK ? getResources().getColor(R.color.color_favorite)
-				: color);
+		paintInnerCircle.setColor(Color.WHITE);
 		paintInnerCircle.setAntiAlias(true);
 	}
 	
