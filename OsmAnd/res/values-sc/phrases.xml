@@ -26,7 +26,7 @@
 	<string name="poi_baby_goods">Butega pro pitzinnos</string>
 	<string name="poi_bag">Valigeria</string>
 	<string name="poi_bathroom_furnishing">Arredu bagnu</string>
-	<string name="poi_bed">Arredu aposentu de letu</string>
+	<string name="poi_bed">Butega arredu aposentu de letu</string>
 	<string name="poi_boutique">Butega de moda</string>
 	<string name="poi_carpet">Butega de tapetes</string>
 	<string name="poi_chemist">Potecaria</string>
@@ -1484,4 +1484,28 @@
 	<string name="poi_wiki_link">Wiki</string>
 
 
-</resources>
+<string name="poi_traffic_calming_island">Ìsula iscrobatràfficu</string>
+	<string name="poi_tourism_yes">Ogetu turìsticu</string>
+	<string name="poi_information_route_marker">Marcadore de àndala</string>
+	<string name="poi_board_type_notice">Betrinedda</string>
+	<string name="poi_garden">Giardinu</string>
+
+	<string name="poi_heath">Ghiddostraju</string>
+	<string name="poi_grass">Erba</string>
+	<string name="poi_grassland">Campura</string>
+	<string name="poi_scrub">Prunitzàrgiu</string>
+	<string name="poi_farmland">Terrinu agrìculu</string>
+	<string name="poi_logging">Àrea pro disboscamentu</string>
+	<string name="poi_windfall">Frutos rutos in terra</string>
+	<string name="poi_level">Livellu</string>
+	<string name="poi_rtsa_scale">Iscala RTSA</string>
+
+	<string name="poi_piste_difficulty_easy">Dificultade pista: fàtzile</string>
+	<string name="poi_piste_difficulty_intermediate">Dificultade pista: intermèdia</string>
+	<string name="poi_piste_difficulty_advanced">Dificultade pista: avantzada</string>
+	<string name="poi_piste_difficulty_novice">Dificultade pista: printzipiante</string>
+	<string name="poi_piste_difficulty_expert">Dificultade pista: espertu</string>
+	<string name="poi_piste_difficulty_freeride">Dificultade pista: movimentu lìberu (freeride)</string>
+	<string name="poi_garden_type_residential">Casta de giardinu: residentziale</string>
+	<string name="poi_garden_type_community">Casta de giardinu: comunitàriu</string>
+	</resources>
