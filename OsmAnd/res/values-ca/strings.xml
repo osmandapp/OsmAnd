@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="show_warnings_title">Mostra els missatges d\'avís…</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="show_warnings_title">Mostra els missatges d\'avís…</string>
 <string name="map_widget_fluorescent">Rutes amb fluorescència</string>
 <string name="map_widget_show_ruler">Mostra el regle</string>
 <string name="map_widget_transparent">Aparença amb transparència</string>
@@ -1987,4 +1988,30 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="world_map_download_descr">El mapa base mundial (que abasta el món sencer però amb poca ampliació) no es troba o està malmès. Considereu baixar-lo per una operació completa.</string>
     <string name="show_on_start_description">Si es desactiva s\'engega amb la pantalla del mapa</string>
     <string name="enter_country_name">Indiqueu el nom del país</string>
+<string name="rec_photo_description">Fotografia %1$s</string>
+    <string name="rec_audio_description">Àudio %1$s</string>
+    <string name="rec_video_description">Vídeo %1$s</string>
+    <string name="shared_string_upload">Pujada</string>
+    <string name="osm_edit_created_poi">S\'ha creat un PDI a OSM</string>
+    <string name="osm_edit_created_bug">S\'ha obert un nou error a OSM</string>
+    <string name="new_version">Versió nova</string>
+    <string name="begin_with_osmand_menu_group">Primeres passes a OsmAnd</string>
+    <string name="features_menu_group">Característiques</string>
+    <string name="help_us_to_improve_menu_group">Ajudeu-nos a millorar OsmAnd</string>
+    <string name="other_menu_group">Altres</string>
+    <string name="plugins_menu_group">Connectors</string>
+    <string name="first_usage_item">Primera utilització</string>
+    <string name="first_usage_item_description">Com baixar mapes, fixar la configuració bàsica</string>
+    <string name="navigation_item_description">confifuració de la navegació</string>
+    <string name="planning_trip_item">Planeja un viatge</string>
+    <string name="faq_item">PMF</string>
+    <string name="faq_item_description">Com utilitzar connectors</string>
+    <string name="map_viewing_item">Visualització del mapa</string>
+    <string name="search_on_the_map_item">Cerca al mapa</string>
+    <string name="instalation_troubleshooting_item">Instal·lació i solució de problemes</string>
+    <string name="techical_articles_item">Articles tècnics</string>
+    <string name="versions_item">Versions</string>
+    <string name="feedback">Comentaris</string>
+    <string name="contact_us">Contacteu-nos</string>
+    <string name="map_legend">Llegenda del mapa</string>
 </resources>
