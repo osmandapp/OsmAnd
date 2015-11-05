@@ -47,7 +47,7 @@
 	<string name="poi_baby_goods">Potreby pre bábätká</string>
 	<string name="poi_bag">Kabelky/Tašky</string>
 	<string name="poi_bathroom_furnishing">Vybavenie kúpeľňe</string>
-	<string name="poi_bed">Vybavenie spálne</string>
+	<string name="poi_bed">Posteľné vybavenie</string>
 	<string name="poi_boutique">Butik</string>
 	<string name="poi_carpet">Koberce</string>
 	<string name="poi_chemist">Drogéria</string>
@@ -578,7 +578,7 @@
 	<string name="poi_fuel_e10">E10</string>
 	<string name="poi_fuel_e20">E20</string>
 	<string name="poi_fuel_e85">E85</string>
-	<string name="poi_fuel_biogas">E85</string>
+	<string name="poi_fuel_biogas">Bioplyn</string>
 	<string name="poi_fuel_lh2">Tekutý vodík</string>
 	<string name="poi_fuel_electricity">Elektrina</string>
 	<string name="poi_junction">Križovatka</string>
@@ -839,7 +839,7 @@
 	<string name="poi_sally_port">Vstup do pevnosti</string>
 	<string name="poi_swing_gate">Otočná závora</string>
 	<string name="poi_turnstile">Turniket</string>
-	<string name="poi_barrier_entrance">Vstup</string>
+	<string name="poi_barrier_entrance">Priechod v stene alebo plote</string>
 	<string name="poi_entrance_main">Hlavný vchod</string>
 	<string name="poi_entrance">Vchod</string>
 	<string name="poi_entrance_exit">Východ</string>
@@ -990,11 +990,11 @@
 	<string name="poi_monitoring_station">Meracia stanica</string>
 	<string name="poi_capital">Hlavné mesto</string>
 	<string name="poi_shower">Sprcha</string>
-	<string name="poi_animal_shelter_bird">Prístrešok pre vtáky</string>
+	<string name="poi_animal_shelter_bird">Typ prístrešku: vtáky</string>
 
-<string name="poi_animal_shelter_dog">Prístrešok pre psy</string>
-	<string name="poi_animal_shelter_cat">Prístrešok pre mačky</string>
-	<string name="poi_animal_shelter_dog_cat">Prístrešok pre psy a mačky</string>
+<string name="poi_animal_shelter_dog">Typ prístrešku: psy</string>
+	<string name="poi_animal_shelter_cat">Typ prístrešku: mačky</string>
+	<string name="poi_animal_shelter_dog_cat">Typ prístrešku: psy a mačky</string>
 	<string name="poi_fee_no">Bez poplatku</string>
 	<string name="poi_drinking_water_yes">Pitná voda: áno</string>
 	<string name="poi_drinking_water_no">Pitná voda: nie</string>
@@ -1386,4 +1386,6 @@
 	<string name="poi_payment_telephone_cards_no">Neprijíma telefónne karty</string>
 	<string name="poi_payment_credit_cards_yes">Prijíma kreditné karty</string>
 	<string name="poi_payment_credit_cards_no">Neprijíma kreditné karty</string>
+	<string name="poi_traffic_calming_island">Ostrovček v ceste</string>
+	<string name="poi_tourism_yes">Turistický objekt</string>
 	</resources>
