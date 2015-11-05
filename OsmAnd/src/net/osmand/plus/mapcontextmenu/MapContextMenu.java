@@ -398,4 +398,10 @@ public class MapContextMenu extends MenuTitleController {
 	public boolean buttonsVisible() {
 		return menuController == null || menuController.buttonsVisible();
 	}
+
+	public void updateData() {
+		if (menuController != null) {
+			menuController.updateData();
+		}
+	}
 }

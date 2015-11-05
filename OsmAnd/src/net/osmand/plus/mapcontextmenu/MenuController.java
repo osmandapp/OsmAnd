@@ -240,6 +240,8 @@ public abstract class MenuController extends BaseMenuController {
 		ShareMenu.show(latLon, title, getMapActivity());
 	}
 
+	public void updateData() {
+	}
 
 	public abstract class TitleButtonController {
 		public String caption = "";
@@ -261,13 +263,12 @@ public abstract class MenuController extends BaseMenuController {
 
 	public abstract class TitleProgressController {
 		public String caption = "";
-		public int progress;
+		public int progress = 0;
 		public boolean indeterminate;
 		public boolean visible;
 		public boolean buttonVisible;
 
 		public void setIndexesDownloadMode() {
-			progress = 0;
 			caption = getMapActivity().getString(R.string.downloading_list_indexes);
 			indeterminate = true;
 			buttonVisible = false;

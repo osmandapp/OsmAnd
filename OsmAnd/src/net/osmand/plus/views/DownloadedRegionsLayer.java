@@ -356,6 +356,17 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 
 	@Override
 	public PointDescription getObjectName(Object o) {
+		if (o instanceof BinaryMapDataObject) {
+			String fullName = osmandRegions.getFullName((BinaryMapDataObject) o);
+			final WorldRegion region = osmandRegions.getRegionData(fullName);
+			if (region != null) {
+				return new PointDescription(PointDescription.POINT_TYPE_WORLD_REGION,
+						view.getContext().getString(R.string.shared_string_map), region.getLocaleName());
+			} else {
+				return new PointDescription(PointDescription.POINT_TYPE_WORLD_REGION,
+						view.getContext().getString(R.string.shared_string_map), ((BinaryMapDataObject) o).getName());
+			}
+		}
 		return new PointDescription(PointDescription.POINT_TYPE_WORLD_REGION,
 				view.getContext().getString(R.string.shared_string_map), "");
 	}
