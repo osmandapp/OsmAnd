@@ -51,11 +51,13 @@ public class FavoriteImageDrawable extends Drawable {
 		paintOuter.setStyle(Style.FILL_AND_STROKE);
 		paintInnerCircle = new Paint();
 		paintInnerCircle.setStyle(Style.FILL_AND_STROKE);
-		if(metrics != null) {
-			paintOuter.setStrokeWidth(metrics.density * 2);
+		if(metrics != null && metrics.density > 0) {
+			paintOuter.setStrokeWidth(metrics.density * 1);
+		} else {
+			paintOuter.setStrokeWidth(1);
 		}
 //		paintOuter.setColor(color == 0 || color == Color.BLACK ? 0x88555555 : color);
-		paintOuter.setColor(0xffccccc);
+		paintOuter.setColor(0xffbbbbbb);
 		paintInnerCircle.setColor(Color.WHITE);
 		paintInnerCircle.setAntiAlias(true);
 	}
@@ -98,7 +100,7 @@ public class FavoriteImageDrawable extends Drawable {
 			canvas.drawBitmap(favIcon, bs.exactCenterX() - favIcon.getWidth() / 2f, bs.exactCenterY() - favIcon.getHeight() / 2f, paintIcon);
 		} else {
 			int min = Math.min(bs.width(), bs.height());
-			int r = (int) (min / 4 * 3);
+			int r = (int) (min * 4 / 10);
 			int rs = (int) (r - 1);
 			canvas.drawCircle(min / 2, min / 2, r, paintOuter);
 			canvas.drawCircle(min / 2, min / 2, rs, paintInnerCircle);

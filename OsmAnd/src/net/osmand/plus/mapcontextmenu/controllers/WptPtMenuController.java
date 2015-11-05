@@ -50,7 +50,7 @@ public class WptPtMenuController extends MenuController {
 
 	@Override
 	public Drawable getLeftIcon() {
-		return FavoriteImageDrawable.getOrCreate(getMapActivity().getMyApplication(), wpt.getColor(), false);
+		return FavoriteImageDrawable.getOrCreate(getMapActivity().getMyApplication(), wpt.getColor(), true);
 	}
 
 	@Override
