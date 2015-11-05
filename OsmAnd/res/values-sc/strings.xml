@@ -1977,4 +1977,7 @@
     <string name="osm_edit_created_bug">Nota de errore de OSM creada</string>
 <string name="map_legend">Legenda de sa mapa</string>
 <string name="shared_string_upload">Càrriga</string>
+    <string name="rec_photo_description">Foto %1$s</string>
+    <string name="rec_audio_description">Àudio %1$s</string>
+    <string name="rec_video_description">Vìdeu %1$s</string>
     </resources>
