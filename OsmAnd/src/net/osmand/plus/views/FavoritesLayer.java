@@ -90,7 +90,7 @@ public class FavoritesLayer  extends OsmandMapLayer implements ContextMenuLayer.
 		if (this.settings.SHOW_FAVORITES.get()) {
 			if (tileBox.getZoom() >= startZoom) {
 				float iconSize = FavoriteImageDrawable.getOrCreate(view.getContext(), 0,
-						tileBox.getDensity()).getIntrinsicWidth() * 3 / 2.5f;
+						 true).getIntrinsicWidth() * 3 / 2.5f;
 				QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
 
 				// request to load
@@ -124,7 +124,7 @@ public class FavoritesLayer  extends OsmandMapLayer implements ContextMenuLayer.
 			cache.add(o);
 			int x = (int) tileBox.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
 			int y = (int) tileBox.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
-			FavoriteImageDrawable fid = FavoriteImageDrawable.getOrCreate(view.getContext(), o.getColor(), tileBox.getDensity());
+			FavoriteImageDrawable fid = FavoriteImageDrawable.getOrCreate(view.getContext(), o.getColor(), true);
 			fid.drawBitmapInCenter(canvas, x, y);
 //					canvas.drawBitmap(favoriteIcon, x - favoriteIcon.getWidth() / 2, 
 //							y - favoriteIcon.getHeight(), paint);

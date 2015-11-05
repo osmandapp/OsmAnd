@@ -210,7 +210,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		if (group != null) {
 			color = group.color;
 		}
-		return FavoriteImageDrawable.getOrCreate(getMapActivity(), color, getMapActivity().getMapView().getCurrentRotatedTileBox().getDensity());
+		return FavoriteImageDrawable.getOrCreate(getMapActivity(), color, false);
 	}
 
 	@Override
