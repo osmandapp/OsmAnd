@@ -334,7 +334,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 			private boolean mIgnoreEvent = false;
             private Calendar cal = Calendar.getInstance();
 
-			
+
 			@Override
 			public void onTimeChanged(TimePicker timePicker, int hourOfDay, int minute) {
                 if (mIgnoreEvent) {

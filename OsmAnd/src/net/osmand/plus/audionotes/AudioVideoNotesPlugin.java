@@ -226,11 +226,14 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			if (desc != null) {
 				return desc;
 			} else if (this.isAudio()) {
-				return ctx.getResources().getString(R.string.shared_string_audio);
+				String time = AndroidUtils.formatDateTime(ctx, file.lastModified());
+				return ctx.getString(R.string.rec_audio_description, time).trim();
 			} else if (this.isVideo()) {
-				return ctx.getResources().getString(R.string.shared_string_video);
+				String time = AndroidUtils.formatDateTime(ctx, file.lastModified());
+				return ctx.getString(R.string.rec_video_description, time).trim();
 			} else if (this.isPhoto()) {
-				return ctx.getResources().getString(R.string.shared_string_photo);
+				String time = AndroidUtils.formatDateTime(ctx, file.lastModified());
+				return ctx.getString(R.string.rec_photo_description, time).trim();
 			}
 			return "";
 		}

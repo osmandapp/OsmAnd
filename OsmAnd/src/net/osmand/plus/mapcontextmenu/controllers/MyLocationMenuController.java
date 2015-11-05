@@ -11,11 +11,8 @@ import net.osmand.plus.mapcontextmenu.MenuController;
 
 public class MyLocationMenuController  extends MenuController {
 
-	private PointDescription pointDescription;
-
-	public MyLocationMenuController(OsmandApplication app, MapActivity mapActivity, final PointDescription pointDescription) {
-		super(new MenuBuilder(app), mapActivity);
-		this.pointDescription = pointDescription;
+	public MyLocationMenuController(OsmandApplication app, MapActivity mapActivity, PointDescription pointDescription) {
+		super(new MenuBuilder(app), pointDescription, mapActivity);
 	}
 
 	@Override
@@ -31,6 +28,6 @@ public class MyLocationMenuController  extends MenuController {
 
 	@Override
 	public String getNameStr() {
-		return pointDescription.getTypeName();
+		return getPointDescription().getName();
 	}
 }

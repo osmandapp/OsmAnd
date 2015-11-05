@@ -26,6 +26,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import net.osmand.data.LatLon;
@@ -36,7 +37,9 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleButtonController;
+import net.osmand.plus.mapcontextmenu.MenuController.TitleProgressController;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
 
@@ -45,7 +48,7 @@ import static net.osmand.plus.mapcontextmenu.MenuBuilder.SHADOW_HEIGHT_BOTTOM_DP
 import static net.osmand.plus.mapcontextmenu.MenuBuilder.SHADOW_HEIGHT_TOP_DP;
 
 
-public class MapContextMenuFragment extends Fragment {
+public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 
 	public static final String TAG = "MapContextMenuFragment";
 
@@ -61,6 +64,7 @@ public class MapContextMenuFragment extends Fragment {
 	private TitleButtonController leftTitleButtonController;
 	private TitleButtonController rightTitleButtonController;
 	private TitleButtonController topRightTitleButtonController;
+	private TitleProgressController titleProgressController;
 
 	private int menuTopViewHeight;
 	private int menuTopShadowHeight;
@@ -128,6 +132,7 @@ public class MapContextMenuFragment extends Fragment {
 		leftTitleButtonController = menu.getLeftTitleButtonController();
 		rightTitleButtonController = menu.getRightTitleButtonController();
 		topRightTitleButtonController = menu.getTopRightTitleButtonController();
+		titleProgressController = menu.getTitleProgressController();
 
 		map = getMapActivity().getMapView();
 		RotatedTileBox box = map.getCurrentRotatedTileBox().copy();
@@ -145,19 +150,24 @@ public class MapContextMenuFragment extends Fragment {
 			origMarkerY = box.getCenterPixelY();
 		}
 
+		IconsCache iconsCache = getMyApplication().getIconsCache();
+		boolean light = getMyApplication().getSettings().isLightContent();
+
 		view = inflater.inflate(R.layout.map_context_menu_fragment, container, false);
 		mainView = view.findViewById(R.id.context_menu_main);
 
 		// Title buttons
+		boolean showButtonsContainer = (leftTitleButtonController != null || rightTitleButtonController != null)
+				&& (titleProgressController == null || !titleProgressController.visible);
 		final View titleButtonsContainer = view.findViewById(R.id.title_button_container);
-		titleButtonsContainer.setVisibility(
-				leftTitleButtonController != null || rightTitleButtonController != null ? View.VISIBLE : View.GONE);
+		titleButtonsContainer.setVisibility(showButtonsContainer ? View.VISIBLE : View.GONE);
 
 		// Left title button
 		final Button leftTitleButton = (Button) view.findViewById(R.id.title_button);
 		final TextView titleButtonRightText = (TextView) view.findViewById(R.id.title_button_right_text);
 		if (leftTitleButtonController != null) {
-			leftTitleButton.setText(leftTitleButtonController.getCaption());
+			leftTitleButton.setText(leftTitleButtonController.caption);
+			leftTitleButton.setVisibility(leftTitleButtonController.visible ? View.VISIBLE : View.INVISIBLE);
 
 			Drawable leftIcon = leftTitleButtonController.getLeftIcon();
 			if (leftIcon != null) {
@@ -171,8 +181,8 @@ public class MapContextMenuFragment extends Fragment {
 				}
 			});
 
-			if (leftTitleButtonController.isNeedRightText()) {
-				titleButtonRightText.setText(leftTitleButtonController.getRightTextCaption());
+			if (leftTitleButtonController.needRightText) {
+				titleButtonRightText.setText(leftTitleButtonController.rightTextCaption);
 			} else {
 				titleButtonRightText.setVisibility(View.GONE);
 			}
@@ -184,7 +194,8 @@ public class MapContextMenuFragment extends Fragment {
 		// Right title button
 		final Button rightTitleButton = (Button) view.findViewById(R.id.title_button_right);
 		if (rightTitleButtonController != null) {
-			rightTitleButton.setText(rightTitleButtonController.getCaption());
+			rightTitleButton.setText(rightTitleButtonController.caption);
+			rightTitleButton.setVisibility(rightTitleButtonController.visible ? View.VISIBLE : View.INVISIBLE);
 
 			Drawable leftIcon = rightTitleButtonController.getLeftIcon();
 			if (leftIcon != null) {
@@ -204,7 +215,8 @@ public class MapContextMenuFragment extends Fragment {
 		// Top Right title button
 		final Button topRightTitleButton = (Button) view.findViewById(R.id.title_button_top_right);
 		if (topRightTitleButtonController != null) {
-			topRightTitleButton.setText(topRightTitleButtonController.getCaption());
+			topRightTitleButton.setText(topRightTitleButtonController.caption);
+			topRightTitleButton.setVisibility(topRightTitleButtonController.visible ? View.VISIBLE : View.INVISIBLE);
 
 			Drawable leftIcon = topRightTitleButtonController.getLeftIcon();
 			if (leftIcon != null) {
@@ -219,6 +231,25 @@ public class MapContextMenuFragment extends Fragment {
 			});
 		} else {
 			topRightTitleButton.setVisibility(View.GONE);
+		}
+
+		// Progress bar
+		final View titleProgressContainer = view.findViewById(R.id.title_progress_container);
+		if (titleProgressController != null) {
+
+			updateProgress();
+
+			final ImageView progressButton = (ImageView) view.findViewById(R.id.progressButton);
+			progressButton.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_remove_dark,
+					light ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
+			progressButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					titleProgressController.buttonPressed();
+				}
+			});
+		} else {
+			titleProgressContainer.setVisibility(View.GONE);
 		}
 
 		if (menu.isLandscapeLayout()) {
@@ -387,9 +418,6 @@ public class MapContextMenuFragment extends Fragment {
 
 		buildHeader();
 
-		IconsCache iconsCache = getMyApplication().getIconsCache();
-		boolean light = getMyApplication().getSettings().isLightContent();
-
 		// FAB
 		fabView = (ImageView)view.findViewById(R.id.context_menu_fab_view);
 		if (menu.fabVisible()) {
@@ -460,6 +488,27 @@ public class MapContextMenuFragment extends Fragment {
 
 	private void recalculateFullHeightMax() {
 		menuFullHeightMax = menuTitleHeight + (menuBottomViewHeight > 0 ? menuBottomViewHeight : -dpToPx(SHADOW_HEIGHT_BOTTOM_DP));
+	}
+
+	private void updateProgress() {
+		final View titleProgressContainer = view.findViewById(R.id.title_progress_container);
+		titleProgressContainer.setVisibility(titleProgressController.visible ? View.VISIBLE : View.GONE);
+
+		final ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
+		final TextView progressTitle = (TextView) view.findViewById(R.id.progressTitle);
+		final TextView progressPercent = (TextView) view.findViewById(R.id.progressPercent);
+		progressTitle.setText(titleProgressController.caption);
+		if (titleProgressController.indeterminate) {
+			progressPercent.setVisibility(View.GONE);
+		} else {
+			progressPercent.setVisibility(View.VISIBLE);
+			progressPercent.setText(titleProgressController.progress + "%");
+		}
+		progressBar.setIndeterminate(titleProgressController.indeterminate);
+		progressBar.setProgress(titleProgressController.progress);
+
+		final ImageView progressButton = (ImageView) view.findViewById(R.id.progressButton);
+		progressButton.setVisibility(titleProgressController.buttonVisible ? View.VISIBLE : View.GONE);
 	}
 
 	private void buildHeader() {
@@ -770,6 +819,22 @@ public class MapContextMenuFragment extends Fragment {
 				.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
 				.add(R.id.fragmentContainer, fragment, TAG)
 				.addToBackStack(TAG).commit();
+	}
+
+	//DownloadEvents
+	@Override
+	public void newDownloadIndexes() {
+
+	}
+
+	@Override
+	public void downloadInProgress() {
+
+	}
+
+	@Override
+	public void downloadHasFinished() {
+
 	}
 
 	private MapActivity getMapActivity() {

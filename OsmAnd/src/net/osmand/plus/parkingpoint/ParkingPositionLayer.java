@@ -139,7 +139,7 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 	@Override
 	public PointDescription getObjectName(Object o) {
 		return new PointDescription(PointDescription.POINT_TYPE_PARKING_MARKER,
-				view.getContext().getString(R.string.osmand_parking_position_name), "");
+				view.getContext().getString(R.string.osmand_parking_position_name));
 	}
 	
 	public void refresh() {

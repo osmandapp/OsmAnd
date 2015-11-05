@@ -12,6 +12,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.download.DownloadIndexesThread;
+import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 
@@ -19,8 +21,8 @@ public class MapDataMenuController extends MenuController {
 	private WorldRegion region;
 	private String regionName;
 
-	public MapDataMenuController(OsmandApplication app, MapActivity mapActivity, final BinaryMapDataObject dataObject) {
-		super(new MenuBuilder(app), mapActivity);
+	public MapDataMenuController(OsmandApplication app, MapActivity mapActivity, PointDescription pointDescription, final BinaryMapDataObject dataObject) {
+		super(new MenuBuilder(app), pointDescription, mapActivity);
 		OsmandRegions osmandRegions = app.getRegions();
 		String fullName = osmandRegions.getFullName(dataObject);
 		final WorldRegion region = osmandRegions.getRegionData(fullName);
@@ -30,6 +32,9 @@ public class MapDataMenuController extends MenuController {
 		} else {
 			regionName = dataObject.getName();
 		}
+
+		boolean hasIndexes = app.getDownloadThread().getIndexes().isDownloadedFromInternet;
+		boolean isDownloading = false; //todo
 
 		leftTitleButtonController = new TitleButtonController() {
 			@Override
@@ -62,8 +67,26 @@ public class MapDataMenuController extends MenuController {
 				// todo other maps
 			}
 		};
-		topRightTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_others);
+		topRightTitleButtonController.caption = getMapActivity().getString(R.string.download_select_map_types);
+		topRightTitleButtonController.visible = hasIndexes && !isDownloading;
 
+		titleProgressController = new TitleProgressController() {
+			@Override
+			public void buttonPressed() {
+				// todo cancel download
+			}
+		};
+		if (!hasIndexes) {
+			titleProgressController.setIndexesDownloadMode();
+			titleProgressController.visible = true;
+			getMapActivity().getMyApplication().getDownloadThread().runReloadIndexFiles();
+		} else if (isDownloading) {
+			titleProgressController.setMapDownloadMode();
+			titleProgressController.caption = "Downloading..."; // todo
+			titleProgressController.visible = true;
+		} else {
+			titleProgressController.visible = false;
+		}
 	}
 
 	@Override

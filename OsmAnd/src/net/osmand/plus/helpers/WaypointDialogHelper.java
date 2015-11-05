@@ -29,6 +29,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.views.AnimateDraggingMapThread;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -89,7 +90,15 @@ public class WaypointDialogHelper {
 		} else {
 			textDist.setText("");
 		}
-		String descr = PointDescription.getSimpleName(point, app);
+
+		String descr;
+		PointDescription pd = point.getPointDescription(app);
+		if (Algorithms.isEmpty(pd.getName())) {
+			descr = pd.getTypeName();
+		} else {
+			descr = pd.getName();
+		}
+
 		if(textShadow != null) {
 			textShadow.setText(descr);
 		}

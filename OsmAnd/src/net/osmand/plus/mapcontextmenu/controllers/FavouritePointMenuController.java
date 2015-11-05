@@ -4,6 +4,7 @@ import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
 
 import net.osmand.data.FavouritePoint;
+import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -17,8 +18,8 @@ public class FavouritePointMenuController extends MenuController {
 
 	private FavouritePoint fav;
 
-	public FavouritePointMenuController(OsmandApplication app, MapActivity mapActivity, final FavouritePoint fav) {
-		super(new FavouritePointMenuBuilder(app, fav), mapActivity);
+	public FavouritePointMenuController(OsmandApplication app, MapActivity mapActivity, PointDescription pointDescription, final FavouritePoint fav) {
+		super(new FavouritePointMenuBuilder(app, fav), pointDescription, mapActivity);
 		this.fav = fav;
 	}
 
@@ -70,6 +71,6 @@ public class FavouritePointMenuController extends MenuController {
 
 	@Override
 	public String getNameStr() {
-		return fav.getName();
+		return getPointDescription().getName();
 	}
 }

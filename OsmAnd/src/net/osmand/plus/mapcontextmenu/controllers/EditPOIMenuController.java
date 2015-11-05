@@ -30,14 +30,12 @@ import java.util.Map;
 
 public class EditPOIMenuController extends MenuController {
 
-	private PointDescription pointDescription;
 	private OsmEditingPlugin plugin;
 	private String pointTypeStr;
 	private ProgressDialogPoiUploader poiUploader;
 
-	public EditPOIMenuController(OsmandApplication app, final MapActivity mapActivity, final PointDescription pointDescription, final OsmPoint osmPoint) {
-		super(new EditPOIMenuBuilder(app, osmPoint), mapActivity);
-		this.pointDescription = pointDescription;
+	public EditPOIMenuController(OsmandApplication app, final MapActivity mapActivity, PointDescription pointDescription, final OsmPoint osmPoint) {
+		super(new EditPOIMenuBuilder(app, osmPoint), pointDescription, mapActivity);
 		plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
 
 		poiUploader = new ProgressDialogPoiUploader() {
@@ -138,7 +136,7 @@ public class EditPOIMenuController extends MenuController {
 
 	@Override
 	public String getNameStr() {
-		return pointDescription.getSimpleName(getMapActivity(), false);
+		return getPointDescription().getName();
 	}
 
 	@Override

@@ -47,43 +47,17 @@ public abstract class MenuController extends BaseMenuController {
 	private MenuBuilder builder;
 	private int currentMenuState;
 	private MenuType menuType = MenuType.STANDARD;
+	private PointDescription pointDescription;
 
 	protected TitleButtonController leftTitleButtonController;
 	protected TitleButtonController rightTitleButtonController;
 	protected TitleButtonController topRightTitleButtonController;
 
-	public abstract class TitleButtonController {
+	protected TitleProgressController titleProgressController;
 
-		public String caption = "";
-		public int leftIconId = 0;
-		public boolean needRightText = false;
-		public String rightTextCaption = "";
-
-		public String getCaption() {
-			return caption;
-		}
-
-		public boolean isNeedRightText() {
-			return needRightText;
-		}
-
-		public String getRightTextCaption() {
-			return rightTextCaption;
-		}
-
-		public Drawable getLeftIcon() {
-			if (leftIconId != 0) {
-				return getIcon(leftIconId, getResIdFromAttribute(R.attr.contextMenuButtonColor));
-			} else {
-				return null;
-			}
-		}
-
-		public abstract void buttonPressed();
-	}
-
-	public MenuController(MenuBuilder builder, MapActivity mapActivity) {
+	public MenuController(MenuBuilder builder, PointDescription pointDescription, MapActivity mapActivity) {
 		super(mapActivity);
+		this.pointDescription = pointDescription;
 		this.builder = builder;
 		this.currentMenuState = getInitialMenuState();
 	}
@@ -98,23 +72,23 @@ public abstract class MenuController extends BaseMenuController {
 		MenuController menuController = null;
 		if (object != null) {
 			if (object instanceof Amenity) {
-				menuController = new AmenityMenuController(app, mapActivity, (Amenity) object);
+				menuController = new AmenityMenuController(app, mapActivity, pointDescription, (Amenity) object);
 			} else if (object instanceof FavouritePoint) {
-				menuController = new FavouritePointMenuController(app, mapActivity, (FavouritePoint) object);
+				menuController = new FavouritePointMenuController(app, mapActivity, pointDescription, (FavouritePoint) object);
 			} else if (object instanceof SearchHistoryHelper.HistoryEntry) {
-				menuController = new HistoryMenuController(app, mapActivity, (SearchHistoryHelper.HistoryEntry) object);
+				menuController = new HistoryMenuController(app, mapActivity, pointDescription, (SearchHistoryHelper.HistoryEntry) object);
 			} else if (object instanceof TargetPoint) {
-				menuController = new TargetPointMenuController(app, mapActivity, (TargetPoint) object);
+				menuController = new TargetPointMenuController(app, mapActivity, pointDescription, (TargetPoint) object);
 			} else if (object instanceof OsMoDevice) {
-				menuController = new OsMoMenuController(app, mapActivity, (OsMoDevice) object);
+				menuController = new OsMoMenuController(app, mapActivity, pointDescription, (OsMoDevice) object);
 			} else if (object instanceof Recording) {
-				menuController = new AudioVideoNoteMenuController(app, mapActivity, (Recording) object);
+				menuController = new AudioVideoNoteMenuController(app, mapActivity, pointDescription, (Recording) object);
 			} else if (object instanceof OsmPoint) {
 				menuController = new EditPOIMenuController(app, mapActivity, pointDescription, (OsmPoint) object);
 			} else if (object instanceof WptPt) {
-				menuController = new WptPtMenuController(app, mapActivity, (WptPt) object);
+				menuController = new WptPtMenuController(app, mapActivity, pointDescription, (WptPt) object);
 			} else if (object instanceof BinaryMapDataObject) {
-				menuController = new MapDataMenuController(app, mapActivity, (BinaryMapDataObject) object);
+				menuController = new MapDataMenuController(app, mapActivity, pointDescription, (BinaryMapDataObject) object);
 			} else if (object instanceof LatLon) {
 				if (pointDescription.isParking()) {
 					menuController = new ParkingPositionMenuController(app, mapActivity, pointDescription);
@@ -144,6 +118,10 @@ public abstract class MenuController extends BaseMenuController {
 			addPlainMenuItem(R.drawable.map_my_location, PointDescription.getLocationName(getMapActivity(),
 					latLon.getLatitude(), latLon.getLongitude(), true).replaceAll("\n", ""));
 		}
+	}
+
+	public PointDescription getPointDescription() {
+		return pointDescription;
 	}
 
 	public int getInitialMenuState() {
@@ -218,6 +196,10 @@ public abstract class MenuController extends BaseMenuController {
 		return topRightTitleButtonController;
 	}
 
+	public TitleProgressController getTitleProgressController() {
+		return titleProgressController;
+	}
+
 	public boolean fabVisible() {
 		return true;
 	}
@@ -256,5 +238,46 @@ public abstract class MenuController extends BaseMenuController {
 
 	public void share(LatLon latLon, String title) {
 		ShareMenu.show(latLon, title, getMapActivity());
+	}
+
+
+	public abstract class TitleButtonController {
+		public String caption = "";
+		public int leftIconId = 0;
+		public boolean needRightText = false;
+		public String rightTextCaption = "";
+		public boolean visible = true;
+
+		public Drawable getLeftIcon() {
+			if (leftIconId != 0) {
+				return getIcon(leftIconId, getResIdFromAttribute(R.attr.contextMenuButtonColor));
+			} else {
+				return null;
+			}
+		}
+
+		public abstract void buttonPressed();
+	}
+
+	public abstract class TitleProgressController {
+		public String caption = "";
+		public int progress;
+		public boolean indeterminate;
+		public boolean visible;
+		public boolean buttonVisible;
+
+		public void setIndexesDownloadMode() {
+			progress = 0;
+			caption = getMapActivity().getString(R.string.downloading_list_indexes);
+			indeterminate = true;
+			buttonVisible = false;
+		}
+
+		public void setMapDownloadMode() {
+			indeterminate = false;
+			buttonVisible = true;
+		}
+
+		public abstract void buttonPressed();
 	}
 }

@@ -11,6 +11,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuType;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleButtonController;
+import net.osmand.plus.mapcontextmenu.MenuController.TitleProgressController;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.OsmandMapLayer;
@@ -377,6 +378,14 @@ public class MapContextMenu extends MenuTitleController {
 	public TitleButtonController getTopRightTitleButtonController() {
 		if (menuController != null) {
 			return menuController.getTopRightTitleButtonController();
+		} else {
+			return null;
+		}
+	}
+
+	public TitleProgressController getTitleProgressController() {
+		if (menuController != null) {
+			return menuController.getTitleProgressController();
 		} else {
 			return null;
 		}
