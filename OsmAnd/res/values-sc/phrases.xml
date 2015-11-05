@@ -1508,4 +1508,43 @@
 	<string name="poi_piste_difficulty_freeride">Dificultade pista: movimentu lìberu (freeride)</string>
 	<string name="poi_garden_type_residential">Casta de giardinu: residentziale</string>
 	<string name="poi_garden_type_community">Casta de giardinu: comunitàriu</string>
+	<string name="poi_garden_type_private">Casta de giardinu: privadu</string>
+	<string name="poi_garden_type_botanical">Casta de giardinu: botànicu</string>
+
+	<string name="poi_garden_style_kitchen">Casta de giardinu: coghina</string>
+	<string name="poi_garden_style_rosarium">Casta de giardinu: rosedu</string>
+	<string name="poi_garden_style_french">Casta de giardinu: frantzesu</string>
+	<string name="poi_garden_style_english">Casta de giardinu: inglesu</string>
+	<string name="poi_garden_style_japanese">Casta de giardinu: giaponesu</string>
+
+	<string name="poi_capacity">Capatzidade</string>
+	<string name="poi_capacity_disabled_yes">Logu riservadu pro sos disàbiles</string>
+	<string name="poi_capacity_disabled_no">Perunu logu riservadu pro sos disàbiles</string>
+	<string name="poi_capacity_disabled">Logu riservadu pro sos disàbiles</string>
+	<string name="poi_capacity_women_yes">Logu riservadu pro sas fèminas</string>
+	<string name="poi_capacity_women_no">Perunu logu riservadu pro sas fèminas</string>
+	<string name="poi_capacity_women">Logu riservadu pro sas fèminas</string>
+	<string name="poi_capacity_pupils">Logu riservadu pro sos istudiantes</string>
+	<string name="poi_capacity_teachers">Logu riservadu pro sos insinnantes</string>
+	<string name="poi_capacity_parent_yes">Logu riservadu pro babbos e mammas</string>
+	<string name="poi_capacity_parent_no">Perunu logu riservadu pro babbos e mammas</string>
+	<string name="poi_capacity_parent">Logu riservadu pro babbos e mammas</string>
+
+	<string name="poi_aerialway_occupancy">Capatzidade cabina/cadira/màchina</string>
+	<string name="poi_aerialway_capacity">Capatzidade pro ora</string>
+	<string name="poi_aerialway_duration">Tempus de biàgiu mèdiu (minutos)</string>
+	<string name="poi_aerialway_bubble_yes">Tancadu</string>
+	<string name="poi_aerialway_bubble_no">Non tancadu</string>
+	<string name="poi_aerialway_heating_yes">Caentamentu</string>
+	<string name="poi_aerialway_heating_no">Chene caentamentu</string>
+	<string name="poi_aerialway_bicycle_yes">Bitzicletas: permitias</string>
+	<string name="poi_aerialway_bicycle_no">Bitzicletas: non permitias</string>
+	<string name="poi_aerialway_bicycle_summer">Bitzicletas: permitias in s\'istiu ebbia</string>
+	<string name="poi_aerialway_access_entry">Intrada ebbia</string>
+	<string name="poi_aerialway_access_exit">Essida ebbia</string>
+	<string name="poi_aerialway_access_both">Intrada e essida</string>
+	<string name="poi_aerialway_summer_access_entry">Atzessu in s\'istiu: intrada ebbia</string>
+	<string name="poi_aerialway_summer_access_exit">Atzessu in s\'istiu: essida ebbia</string>
+	<string name="poi_aerialway_summer_access_both">Atzessu in s\'istiu: intrada e essida</string>
+
 	</resources>
