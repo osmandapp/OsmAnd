@@ -8,11 +8,11 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.Paint;
+import android.graphics.Paint.Style;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-
 import net.osmand.plus.R;
 
 import java.util.TreeMap;
@@ -25,8 +25,13 @@ public class FavoriteImageDrawable extends Drawable {
 	private Bitmap favIcon;
 	private Bitmap favBackground;
 	private Resources resources;
+	private boolean withShadow;
+	private Paint paintOuter;
+	private Paint paintInnerCircle;
+	private Drawable listDrawable;
 
 	public FavoriteImageDrawable(Context ctx, int color, boolean withShadow) {
+		this.withShadow = withShadow;
 		this.resources = ctx.getResources();
 		this.color = color;
 		paintIcon = new Paint();
@@ -35,6 +40,30 @@ public class FavoriteImageDrawable extends Drawable {
 		paintBackground = new Paint();
 		favIcon = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.map_favorite);
 		favBackground = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.map_white_favorite_shield);
+		
+		
+		listDrawable = getResources().getDrawable(R.drawable.ic_action_fav_dark);
+		paintOuter = new Paint();
+		paintOuter.setAntiAlias(true);
+		paintOuter.setStyle(Style.FILL_AND_STROKE);
+		paintInnerCircle = new Paint();
+		paintInnerCircle.setStyle(Style.FILL_AND_STROKE);
+		paintOuter.setColor(color == 0 || color == Color.BLACK ? 0x88555555 : color);
+		paintInnerCircle.setColor(color == 0 || color == Color.BLACK ? getResources().getColor(R.color.color_favorite)
+				: color);
+		paintInnerCircle.setAntiAlias(true);
+	}
+	
+	@Override
+	protected void onBoundsChange(Rect bounds) {
+		super.onBoundsChange(bounds);
+		
+		if (!withShadow) {
+			Rect bs = new Rect(bounds);
+			// FIXME
+			// bs.inset((int) (4 * density), (int) (4 * density));
+			listDrawable.setBounds(bs);
+		}
 	}
 
 	@Override
@@ -58,8 +87,17 @@ public class FavoriteImageDrawable extends Drawable {
 	@Override
 	public void draw(Canvas canvas) {
 		Rect bs = getBounds();
-		canvas.drawBitmap(favBackground, bs.exactCenterX() - favBackground.getWidth() / 2f, bs.exactCenterY() - favBackground.getHeight() / 2f, paintBackground);
-		canvas.drawBitmap(favIcon, bs.exactCenterX() - favIcon.getWidth() / 2f, bs.exactCenterY() - favIcon.getHeight() / 2f, paintIcon);
+		if(withShadow) {
+			canvas.drawBitmap(favBackground, bs.exactCenterX() - favBackground.getWidth() / 2f, bs.exactCenterY() - favBackground.getHeight() / 2f, paintBackground);
+			canvas.drawBitmap(favIcon, bs.exactCenterX() - favIcon.getWidth() / 2f, bs.exactCenterY() - favIcon.getHeight() / 2f, paintIcon);
+		} else {
+			int min = Math.min(bs.width(), bs.height());
+			int r = (int) (min / 2);
+			int rs = (int) (min / 2 - 1);
+			canvas.drawCircle(min / 2, min / 2, r, paintOuter);
+			canvas.drawCircle(min / 2, min / 2, rs, paintInnerCircle);
+			listDrawable.draw(canvas);
+		}
 	}
 
 	public void drawBitmapInCenter(Canvas canvas, int x, int y) {
