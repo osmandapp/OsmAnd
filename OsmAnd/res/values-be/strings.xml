@@ -1966,7 +1966,7 @@
     <string name="application_dir_description">Выберыце, дзе вы хочаце захоўваць файлы мапаў.</string>
 <string name="share_menu_location">Падзяліцца месцазнаходжаньнем</string>
     <string name="share_geo">geo:</string>
-    <string name="show_on_start_description">OsmAnd будзе пачынацца экранам з мапай</string>
+    <string name="show_on_start_description">\"Адключана\" непасрэдна запускае экран мапы</string>
 <string name="simulate_initial_startup">Імітаваць першы старт праграмы</string>
     <string name="shared_string_qr_code">QR-код</string>
     <string name="map_downloaded">Мапа сьцягнутая</string>
@@ -1986,4 +1986,20 @@
     <string name="versions_item">Вэрсіі</string>
     <string name="contact_us">Напішыце нам</string>
     <string name="map_legend">Легенда мапы</string>
-</resources>
+<string name="shared_string_update">Абнавіць</string>
+    <string name="world_map_download_descr">Базавая мапа сьвету (якая пакрывае ўвесь сьвет пры малым павелічэньні) адсутнічае або састарэла. Калі ласка, загрузіце базавую мапу сьвету для паўнаты працоўнага асяродзьдзя.</string>
+    <string name="map_downloaded_descr">Мапа %1$s загружаная. Вярніцеся да мапы, каб пачаць яе выкарыстоўваць.</string>
+    <string name="simulate_initial_startup_descr">Усталёўвае прыкмету першага запуску праграмы, не зьмяняе іншых наладаў</string>
+    <string name="enter_country_name">Увядзіце назву краіны</string>
+    <string name="begin_with_osmand_menu_group">Першыя крокі з OsmAnd</string>
+    <string name="help_us_to_improve_menu_group">Дапамажыце палепшыць OsmAnd</string>
+    <string name="first_usage_item">Першы запуск</string>
+    <string name="first_usage_item_description">Як загрузіць мапы, усталяваць асноўныя налады</string>
+    <string name="navigation_item_description">Налада навігацыі</string>
+    <string name="planning_trip_item">Планаваньне паездкі</string>
+    <string name="faq_item_description">Як карыстацца модулямі</string>
+    <string name="map_viewing_item">Агляд мапы</string>
+    <string name="search_on_the_map_item">Пошук мапы</string>
+    <string name="instalation_troubleshooting_item">Усталёўка і вырашэньне праблемаў</string>
+    <string name="techical_articles_item">Тэхнічныя артыкулы</string>
+    </resources>
