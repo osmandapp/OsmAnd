@@ -216,7 +216,12 @@ public class EditPoiDialogFragment extends DialogFragment {
 			@Override
 			public void afterTextChanged(Editable s) {
 				if (!getEditPoiData().isInEdit()) {
-					getEditPoiData().putTag(OSMSettings.OSMTagKey.NAME.getValue(), s.toString());
+					if (!TextUtils.isEmpty(s)) {
+						getEditPoiData().putTag(OSMSettings.OSMTagKey.NAME.getValue(),
+								s.toString());
+					} else {
+						getEditPoiData().removeTag(OSMSettings.OSMTagKey.NAME.getValue());
+					}
 				}
 			}
 		});
@@ -244,8 +249,7 @@ public class EditPoiDialogFragment extends DialogFragment {
 		poiTypeEditText.setText(editPoiData.amenity.getSubType());
 
 		Button saveButton = (Button) view.findViewById(R.id.saveButton);
-		int saveButtonTextId = R.string.default_buttons_commit;
-		saveButton.setText(saveButtonTextId);
+		saveButton.setText(R.string.shared_string_save);
 		saveButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -333,8 +337,7 @@ public class EditPoiDialogFragment extends DialogFragment {
 		getDialog().setOnKeyListener(new DialogInterface.OnKeyListener() {
 			@Override
 			public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-				if (keyCode == android.view.KeyEvent.KEYCODE_BACK
-						&& editPoiData.hasChangesBeenMade()) {
+				if (keyCode == android.view.KeyEvent.KEYCODE_BACK) {
 					if (event.getAction() == KeyEvent.ACTION_DOWN) {
 						return true;
 					} else {

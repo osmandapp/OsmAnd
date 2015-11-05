@@ -20,6 +20,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import net.osmand.PlatformUtil;
 import net.osmand.osm.edit.OSMSettings;
 import net.osmand.plus.IconsCache;
@@ -229,8 +230,13 @@ public class BasicEditPoiFragment extends Fragment
 				linearLayout.addView(getView(i));
 			}
 			if (!data.isInEdit()) {
-				data.putTag(OSMSettings.OSMTagKey.OPENING_HOURS.getValue(),
-						openingHours.toStringNoMonths());
+				String openingHoursString = openingHours.toStringNoMonths();
+				if (!TextUtils.isEmpty(openingHoursString)) {
+					data.putTag(OSMSettings.OSMTagKey.OPENING_HOURS.getValue(),
+							openingHoursString);
+				} else {
+					data.removeTag(OSMSettings.OSMTagKey.OPENING_HOURS.getValue());
+				}
 			}
 		}
 
