@@ -2426,4 +2426,7 @@
 
 
 <string name="poi_traffic_calming_island">Trafikhelle</string>
-	</resources>
+	<string name="poi_boat_storage">Bådopbevaring</string>
+
+
+</resources>
