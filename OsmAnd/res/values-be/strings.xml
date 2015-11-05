@@ -1965,7 +1965,7 @@
 <string name="shared_string_send">Адаслаць</string>
     <string name="application_dir_description">Выберыце, дзе вы хочаце захоўваць файлы мапаў.</string>
 <string name="share_menu_location">Падзяліцца месцазнаходжаньнем</string>
-    <string name="share_geo">geo:</string>
+    <string name="share_geo">геа:</string>
     <string name="show_on_start_description">\"Адключана\" непасрэдна запускае экран мапы</string>
 <string name="simulate_initial_startup">Імітаваць першы старт праграмы</string>
     <string name="shared_string_qr_code">QR-код</string>
@@ -1982,7 +1982,7 @@
     <string name="features_menu_group">Адметнасьці</string>
     <string name="other_menu_group">Іншае</string>
     <string name="plugins_menu_group">Модулі</string>
-    <string name="faq_item">FAQ</string>
+    <string name="faq_item">Часта задаваныя пытаньні</string>
     <string name="versions_item">Вэрсіі</string>
     <string name="contact_us">Напішыце нам</string>
     <string name="map_legend">Легенда мапы</string>
