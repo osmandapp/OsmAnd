@@ -2371,4 +2371,6 @@
 
 	<string name="poi_traffic_calming_island">Островок (препятствие)</string>
 
+	<string name="poi_boat_storage">Место для хранения лодок</string>
+
 </resources>
