@@ -13,6 +13,7 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.util.DisplayMetrics;
 import net.osmand.plus.R;
 
 import java.util.TreeMap;
@@ -42,14 +43,19 @@ public class FavoriteImageDrawable extends Drawable {
 		favBackground = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.map_white_favorite_shield);
 		
 		
-		listDrawable = getResources().getDrawable(R.drawable.ic_action_fav_dark);
+		listDrawable = getResources().getDrawable(R.drawable.ic_action_fav_dark).mutate();
 		listDrawable.setColorFilter(new PorterDuffColorFilter(col, PorterDuff.Mode.SRC_IN));
+		DisplayMetrics metrics = getResources().getDisplayMetrics();
 		paintOuter = new Paint();
 		paintOuter.setAntiAlias(true);
 		paintOuter.setStyle(Style.FILL_AND_STROKE);
 		paintInnerCircle = new Paint();
 		paintInnerCircle.setStyle(Style.FILL_AND_STROKE);
-		paintOuter.setColor(color == 0 || color == Color.BLACK ? 0x88555555 : color);
+		if(metrics != null) {
+			paintOuter.setStrokeWidth(metrics.density * 2);
+		}
+//		paintOuter.setColor(color == 0 || color == Color.BLACK ? 0x88555555 : color);
+		paintOuter.setColor(0xffccccc);
 		paintInnerCircle.setColor(Color.WHITE);
 		paintInnerCircle.setAntiAlias(true);
 	}
@@ -92,8 +98,8 @@ public class FavoriteImageDrawable extends Drawable {
 			canvas.drawBitmap(favIcon, bs.exactCenterX() - favIcon.getWidth() / 2f, bs.exactCenterY() - favIcon.getHeight() / 2f, paintIcon);
 		} else {
 			int min = Math.min(bs.width(), bs.height());
-			int r = (int) (min / 2);
-			int rs = (int) (min / 2 - 1);
+			int r = (int) (min / 4 * 3);
+			int rs = (int) (r - 1);
 			canvas.drawCircle(min / 2, min / 2, r, paintOuter);
 			canvas.drawCircle(min / 2, min / 2, rs, paintInnerCircle);
 			listDrawable.draw(canvas);
