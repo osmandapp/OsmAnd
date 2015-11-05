@@ -277,7 +277,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		int visitedColor = view.getContext().getResources().getColor(R.color.color_ok);
 		if (tileBox.getZoom() >= startZoom) {
 			float iconSize = FavoriteImageDrawable.getOrCreate(view.getContext(), 0,
-					tileBox.getDensity()).getIntrinsicWidth() * 3 / 2.5f;
+					true).getIntrinsicWidth() * 3 / 2.5f;
 			QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
 
 			// request to load
@@ -305,8 +305,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 					float y = tileBox.getPixYFromLatLon(o.lat, o.lon);
 					boolean visit = isPointVisited(o);
 					int pointColor = visit ? visitedColor : o.getColor(fcolor);
-					FavoriteImageDrawable fid = FavoriteImageDrawable.getOrCreate(view.getContext(), pointColor,
-							tileBox.getDensity());
+					FavoriteImageDrawable fid = FavoriteImageDrawable.getOrCreate(view.getContext(), pointColor, true);
 					fid.drawBitmapInCenter(canvas, x, y);
 				}
 			}

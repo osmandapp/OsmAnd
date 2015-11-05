@@ -42,6 +42,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
@@ -63,7 +64,6 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.io.Serializable;
-import java.text.MessageFormat;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -78,7 +78,6 @@ public class EditPoiDialogFragment extends DialogFragment {
 
 	private EditPoiData editPoiData;
 	private ViewPager viewPager;
-	private boolean isLocalEdit;
 	private AutoCompleteTextView poiTypeEditText;
 	private Node node;
 	private Map<String, PoiType> allTranslatedSubTypes;
@@ -96,7 +95,6 @@ public class EditPoiDialogFragment extends DialogFragment {
 		} else if (!settings.isInternetConnectionAvailable(true)) {
 			mOpenstreetmapUtil = new OpenstreetmapLocalUtil(plugin, activity);
 		} else {
-			isLocalEdit = false;
 			mOpenstreetmapUtil = new OpenstreetmapRemoteUtil(activity);
 		}
 
@@ -137,7 +135,7 @@ public class EditPoiDialogFragment extends DialogFragment {
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				dismiss();
+				dismissCheckForChanges();
 			}
 		});
 
@@ -218,7 +216,12 @@ public class EditPoiDialogFragment extends DialogFragment {
 			@Override
 			public void afterTextChanged(Editable s) {
 				if (!getEditPoiData().isInEdit()) {
-					getEditPoiData().putTag(OSMSettings.OSMTagKey.NAME.getValue(), s.toString());
+					if (!TextUtils.isEmpty(s)) {
+						getEditPoiData().putTag(OSMSettings.OSMTagKey.NAME.getValue(),
+								s.toString());
+					} else {
+						getEditPoiData().removeTag(OSMSettings.OSMTagKey.NAME.getValue());
+					}
 				}
 			}
 		});
@@ -243,11 +246,10 @@ public class EditPoiDialogFragment extends DialogFragment {
 		});
 		poiNameEditText.setOnEditorActionListener(mOnEditorActionListener);
 		poiTypeEditText.setOnEditorActionListener(mOnEditorActionListener);
+		poiTypeEditText.setText(editPoiData.amenity.getSubType());
 
 		Button saveButton = (Button) view.findViewById(R.id.saveButton);
-		int saveButtonTextId = isLocalEdit ? R.string.shared_string_save :
-				R.string.default_buttons_commit;
-		saveButton.setText(saveButtonTextId);
+		saveButton.setText(R.string.shared_string_save);
 		saveButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -339,15 +341,22 @@ public class EditPoiDialogFragment extends DialogFragment {
 					if (event.getAction() == KeyEvent.ACTION_DOWN) {
 						return true;
 					} else {
-						new AreYouSureDialogFrgament().show(getChildFragmentManager(),
-								"AreYouSureDialogFrgament");
+						dismissCheckForChanges();
 						return true;
 					}
-				} else {
-					return false;
 				}
+				return false;
 			}
 		});
+	}
+
+	private void dismissCheckForChanges() {
+		if (editPoiData.hasChangesBeenMade()) {
+			new AreYouSureDialogFragment().show(getChildFragmentManager(),
+					"AreYouSureDialogFragment");
+		} else {
+			dismiss();
+		}
 	}
 
 	@Override
@@ -483,7 +492,9 @@ public class EditPoiDialogFragment extends DialogFragment {
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 				Object item = parent.getAdapter().getItem(position);
 				LOG.debug("item=" + item);
+				//noinspection SuspiciousMethodCalls
 				if (subCategories.containsKey(item)) {
+					//noinspection SuspiciousMethodCalls
 					String keyName = subCategories.get(item).getKeyName();
 					poiTypeEditText.setText(keyName);
 				}
@@ -591,7 +602,7 @@ public class EditPoiDialogFragment extends DialogFragment {
 		}
 	}
 
-	public static class AreYouSureDialogFrgament extends DialogFragment {
+	public static class AreYouSureDialogFragment extends DialogFragment {
 		@NonNull
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState) {

@@ -1956,7 +1956,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="next_proceed">Suivant</string>
     <string name="opening_at">Ouverture à</string>
     <string name="closing_at">Fermeture à</string>
-    <string name="tag_poi_name">nom</string>
+
     <string name="description">Description</string>
     <string name="add_opening_hours">Ajouter des heures d\'ouverture</string>
     <string name="poi_dialog_poi_type">Type de PI</string>
@@ -1978,7 +1978,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="shared_string_card_was_hidden">La carte a été masquée</string>
     <string name="routing_attr_avoid_shuttle_train_name">Éviter les trains-navettes</string>
     <string name="av_locations_descr">Fichier GPX avec notes</string>
-    <string name="tag_poi_amenity">aménité</string>
+
     <string name="simulate_your_location_stop_descr">Arrêter de simuler votre position</string>
     <string name="simulate_your_location_descr">Simuler à partir d\'un fichier GPX ou d\'une route calculée</string>
     <string name="are_you_sure">Etes-vous certain ?</string>
@@ -2065,9 +2065,9 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="map_viewing_item">Affichage de la carte</string>
     <string name="search_on_the_map_item">Rechercher de carte</string>
     <string name="planning_trip_item">Préparer un trajet</string>
-    <string name="contour_lines_and_hillshade_maps_item">Cartes avec relief et courbes de niveau</string>
+
     <string name="osmand_ski_maps_item">Cartes de ski OsmAnd</string>
-    <string name="osm_editing_item">Contribution OSM</string>
+
     <string name="instalation_troubleshooting_item">Installation et débogage</string>
     <string name="techical_articles_item">Articles techniques</string>
     <string name="versions_item">Versions</string>
@@ -2076,5 +2076,6 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 
     <string name="osm_edit_created_poi">PI créés sur OSM</string>
     <string name="osm_edit_created_bug">Bugs déclarés sur OSM</string>
-<string name="map_legend">Légende</string>
-</resources>
+    <string name="map_legend">Légende</string>
+<string name="shared_string_upload">Téléchargement</string>
+    </resources>

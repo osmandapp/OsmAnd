@@ -48,4 +48,7 @@
     <string name="preferred_locale_no_translate">Display language</string>
     <string name="system_locale_no_translate">Device language</string>
 	<string name="osmo">OsMo</string>
+    <string name="tag_poi_amenity">amenity</string>
+    <string name="tag_poi_name">name</string>
+
 </resources>

@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
     <string name="rendering_attr_roadColors_name">道路的色彩調配</string>
@@ -1850,7 +1850,7 @@
     <string name="next_proceed">下頁</string>
     <string name="av_locations_descr">GPX 檔案加上地點注解</string>
     <string name="av_locations">地點</string>
-    <string name="tag_poi_name">名稱</string>
+
     <string name="tag_poi_amenity">便利設施</string>
     <string name="contact_info">連絡資訊</string>
     <string name="description">記述</string>
@@ -1950,9 +1950,9 @@
     <string name="map_viewing_item">地圖檢視</string>
     <string name="search_on_the_map_item">地圖查詢中</string>
     <string name="planning_trip_item">規劃一次旅程</string>
-    <string name="contour_lines_and_hillshade_maps_item">等高線和山體陰影地圖</string>
+
     <string name="osmand_ski_maps_item">OsmAnd 滑雪地圖</string>
-    <string name="audio_video_note_item">音訊/視訊注解</string>
+
     <string name="instalation_troubleshooting_item">安裝和疑難排除</string>
     <string name="techical_articles_item">技術文章</string>
     <string name="versions_item">版本</string>
@@ -1960,5 +1960,6 @@
     <string name="contact_us">聯絡我們</string>
     <string name="osm_edit_created_poi">建立 OSM 的興趣點</string>
     <string name="osm_edit_created_bug">建立 OSM 的錯誤</string>
-<string name="map_legend">地圖圖例</string>
+    <string name="map_legend">地圖圖例</string>
+    <string name="shared_string_upload">上傳</string>
 </resources>

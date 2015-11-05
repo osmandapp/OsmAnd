@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="switch_to_raster_map_to_see">Vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v Nastaveních (Spravovat mapové soubory), nebo se přepněte na online mapy.</string>
 
@@ -1852,7 +1852,7 @@
     <string name="tab_title_advanced">Rozšířené</string>
     <string name="building_number">Číslo domu</string>
     <string name="next_proceed">Další</string>
-    <string name="tag_poi_name">název</string>
+
     <string name="poi_dialog_poi_type">Typ POI</string>
     <string name="number_of_rows_in_dash">Počet řádků v bloku %1$s</string>
     <string name="saved_at_time">Úspěšně uloženo na: %1$s</string>
@@ -1886,7 +1886,7 @@
     <string name="lang_gl">Galicijsky</string>
     <string name="lang_et">Estonsky</string>
     <string name="lang_ceb">Cebuansky</string>
-    <string name="tag_poi_amenity">občanská vybavenost</string>
+
     <string name="opening_at">Otevřeno od</string>
     <string name="closing_at">Otevřeno do</string>
     <string name="count_of_lines">Počet řádků</string>
@@ -1973,9 +1973,9 @@
     <string name="map_viewing_item">Prohlížení mapy</string>
     <string name="search_on_the_map_item">Hledání na mapě</string>
     <string name="planning_trip_item">Plánování cesty</string>
-    <string name="contour_lines_and_hillshade_maps_item">Vrstevnice a stínování kopců</string>
+
     <string name="osmand_ski_maps_item">OsmAnd lyžařské mapy</string>
-    <string name="audio_video_note_item">Audio/video poznámky</string>
+
     <string name="instalation_troubleshooting_item">Instalace a řešení problémů</string>
     <string name="techical_articles_item">Technické články</string>
     <string name="versions_item">Verze</string>
@@ -1983,5 +1983,5 @@
     <string name="contact_us">Kontaktujte nás</string>
     <string name="osm_edit_created_poi">Vytvořen OSM POI</string>
     <string name="osm_edit_created_bug">Vytvořena OSM chyba</string>
-<string name="map_legend">Legenda mapy</string>
+    <string name="map_legend">Legenda mapy</string>
 </resources>

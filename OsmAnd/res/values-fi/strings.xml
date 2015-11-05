@@ -867,7 +867,7 @@
     <string name="show_gpx">Näytä GPX</string>
 	<string name="favourites">Suosikit</string>
 	<string name="description">Kuvaus</string>
-	<string name="tag_poi_name">nimi</string>
+	
 	<string name="closing_at">Sulkeutuu</string>
 	<string name="opening_at">Avautuu</string>
 	<string name="address_unknown">Osoitetta ei tiedetä vielä</string>

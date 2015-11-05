@@ -8,11 +8,12 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.Paint;
+import android.graphics.Paint.Style;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-
+import android.util.DisplayMetrics;
 import net.osmand.plus.R;
 
 import java.util.TreeMap;
@@ -25,8 +26,13 @@ public class FavoriteImageDrawable extends Drawable {
 	private Bitmap favIcon;
 	private Bitmap favBackground;
 	private Resources resources;
+	private boolean withShadow;
+	private Paint paintOuter;
+	private Paint paintInnerCircle;
+	private Drawable listDrawable;
 
-	public FavoriteImageDrawable(Context ctx, int color) {
+	public FavoriteImageDrawable(Context ctx, int color, boolean withShadow) {
+		this.withShadow = withShadow;
 		this.resources = ctx.getResources();
 		this.color = color;
 		paintIcon = new Paint();
@@ -35,6 +41,37 @@ public class FavoriteImageDrawable extends Drawable {
 		paintBackground = new Paint();
 		favIcon = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.map_favorite);
 		favBackground = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.map_white_favorite_shield);
+		
+		
+		listDrawable = getResources().getDrawable(R.drawable.ic_action_fav_dark).mutate();
+		listDrawable.setColorFilter(new PorterDuffColorFilter(col, PorterDuff.Mode.SRC_IN));
+		DisplayMetrics metrics = getResources().getDisplayMetrics();
+		paintOuter = new Paint();
+		paintOuter.setAntiAlias(true);
+		paintOuter.setStyle(Style.FILL_AND_STROKE);
+		paintInnerCircle = new Paint();
+		paintInnerCircle.setStyle(Style.FILL_AND_STROKE);
+		if(metrics != null && metrics.density > 0) {
+			paintOuter.setStrokeWidth(metrics.density * 1);
+		} else {
+			paintOuter.setStrokeWidth(1);
+		}
+//		paintOuter.setColor(color == 0 || color == Color.BLACK ? 0x88555555 : color);
+		paintOuter.setColor(0xffbbbbbb);
+		paintInnerCircle.setColor(Color.WHITE);
+		paintInnerCircle.setAntiAlias(true);
+	}
+	
+	@Override
+	protected void onBoundsChange(Rect bounds) {
+		super.onBoundsChange(bounds);
+		
+		if (!withShadow) {
+			Rect bs = new Rect(bounds);
+			 //bs.inset((int) (4 * density), (int) (4 * density));
+			bs.inset(bs.width() / 4, (int) bs.height() / 4);
+			listDrawable.setBounds(bs);
+		}
 	}
 
 	@Override
@@ -58,8 +95,17 @@ public class FavoriteImageDrawable extends Drawable {
 	@Override
 	public void draw(Canvas canvas) {
 		Rect bs = getBounds();
-		canvas.drawBitmap(favBackground, bs.exactCenterX() - favBackground.getWidth() / 2f, bs.exactCenterY() - favBackground.getHeight() / 2f, paintBackground);
-		canvas.drawBitmap(favIcon, bs.exactCenterX() - favIcon.getWidth() / 2f, bs.exactCenterY() - favIcon.getHeight() / 2f, paintIcon);
+		if(withShadow) {
+			canvas.drawBitmap(favBackground, bs.exactCenterX() - favBackground.getWidth() / 2f, bs.exactCenterY() - favBackground.getHeight() / 2f, paintBackground);
+			canvas.drawBitmap(favIcon, bs.exactCenterX() - favIcon.getWidth() / 2f, bs.exactCenterY() - favIcon.getHeight() / 2f, paintIcon);
+		} else {
+			int min = Math.min(bs.width(), bs.height());
+			int r = (int) (min * 4 / 10);
+			int rs = (int) (r - 1);
+			canvas.drawCircle(min / 2, min / 2, r, paintOuter);
+			canvas.drawCircle(min / 2, min / 2, rs, paintInnerCircle);
+			listDrawable.draw(canvas);
+		}
 	}
 
 	public void drawBitmapInCenter(Canvas canvas, int x, int y) {
@@ -95,12 +141,12 @@ public class FavoriteImageDrawable extends Drawable {
 
 	private static TreeMap<Integer, FavoriteImageDrawable> cache = new TreeMap<>();
 
-	public static FavoriteImageDrawable getOrCreate(Context a, int color, float density) {
+	public static FavoriteImageDrawable getOrCreate(Context a, int color, boolean withShadow) {
 		color = color | 0xff000000;
-		int hash = (color << 2) + (int) (density * 6);
+		int hash = (color << 2) + (withShadow ? 1 : 0);
 		FavoriteImageDrawable drawable = cache.get(hash);
 		if (drawable == null) {
-			drawable = new FavoriteImageDrawable(a, color);
+			drawable = new FavoriteImageDrawable(a, color, withShadow);
 			drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
 			cache.put(hash, drawable);
 		}

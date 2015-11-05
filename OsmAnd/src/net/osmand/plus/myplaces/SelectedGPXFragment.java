@@ -459,7 +459,7 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 					if(groupColor == 0) {
 						groupColor = getMyActivity().getResources().getColor(R.color.gpx_track);
 					}
-					icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getMyActivity(),  groupColor, 0));
+					icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getMyActivity(),  groupColor, false));
 				}
 			}
 			row.setTag(child);

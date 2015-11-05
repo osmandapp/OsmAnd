@@ -1,10 +1,13 @@
 package net.osmand.plus.osmedit;
 
+import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.OSMSettings;
 import net.osmand.util.Algorithms;
+
+import org.apache.commons.logging.Log;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -13,12 +16,14 @@ import java.util.Map;
 import java.util.Set;
 
 public class EditPoiData {
+	private static final Log LOG = PlatformUtil.getLog(EditPoiData.class);
 	private Set<TagsChangedListener> mListeners = new HashSet<>();
 	private LinkedHashMap<String, String > tagValues = new LinkedHashMap<String, String>();
 	private boolean isInEdit = false;
 	public final Amenity amenity;
 	public static final String POI_TYPE_TAG = "poi_type_tag";
-	
+	private boolean hasChangesBeenMade = false;
+
 	public EditPoiData(Amenity amenity, Node node, Map<String, PoiType> allTranslatedSubTypes) {
 		this.amenity = amenity;
 		initTags(node, allTranslatedSubTypes);
@@ -45,8 +50,8 @@ public class EditPoiData {
 				amenity.getPhone());
 		tryAddTag(OSMSettings.OSMTagKey.WEBSITE.getValue(),
 				amenity.getSite());
-		for (String tag : node.getTagKeySet()) {
-			tryAddTag(tag, node.getTag(tag));
+		for (String tag : amenity.getAdditionalInfo().keySet()) {
+			tryAddTag(tag, amenity.getAdditionalInfo(tag));
 		}
 		String subType = amenity.getSubType();
 		String key;
@@ -118,6 +123,9 @@ public class EditPoiData {
 	
 	
 	private void notifyDatasetChanged(String tag) {
+		if (mListeners.size() > 0) {
+			hasChangesBeenMade = true;
+		}
 		for (TagsChangedListener listener : mListeners) {
 			listener.onTagsChanged(tag);
 		}
@@ -135,5 +143,9 @@ public class EditPoiData {
 		
 		void onTagsChanged(String tag);
 		
+	}
+
+	public boolean hasChangesBeenMade() {
+		return hasChangesBeenMade;
 	}
 }

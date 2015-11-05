@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="starting_point_too_far">Pradžios taškas yra per toli nuo artimiausio kelio.</string>
     <string name="shared_location">Bendrinta vieta</string>
     <string name="osmand_parking_warning">Dėmesio</string>
@@ -1877,7 +1876,7 @@
     <string name="av_locations">Vietovės</string>
     <string name="building_number">Pastato numeris</string>
     <string name="next_proceed">Toliau</string>
-    <string name="tag_poi_name">pavadinimas</string>
+    
     <string name="description">Aprašymas</string>
     <string name="add_opening_hours">Pridėti darbo valandas</string>
     <string name="poi_dialog_poi_type">LV tipas</string>
@@ -1957,7 +1956,7 @@
     <string name="faq_item">DUK</string>
     <string name="search_on_the_map_item">Ieškoti žemėlapyje</string>
     <string name="planning_trip_item">Kelionės planavimas</string>
-    <string name="trip_recording_tool_item">Kelionės įrašymo įrankis</string>
+    
     <string name="osm_editing_item">OSM redagavimas</string>
     <string name="instalation_troubleshooting_item">Diegimas ir problemų sprendimas</string>
     <string name="versions_item">Versijos</string>
@@ -1974,9 +1973,9 @@
     <string name="faq_item_description">Kaip naudotis įskiepiais</string>
     <string name="map_viewing_item">Žemėlapio peržiūra</string>
 
-    <string name="audio_video_note_item">Garso/vaizdo pastabos</string>
+    
     <string name="techical_articles_item">Techniniai straipsniai</string>
-    <string name="poll">apklausa</string>
+    
     <string name="osm_edit_created_poi"/>
     <string name="osm_edit_created_bug">Sukurtas OSM riktas</string>
 </resources>
