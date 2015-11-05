@@ -2077,4 +2077,5 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="osm_edit_created_poi">PI créés sur OSM</string>
     <string name="osm_edit_created_bug">Bugs déclarés sur OSM</string>
     <string name="map_legend">Légende</string>
-</resources>
+<string name="shared_string_upload">Téléchargement</string>
+    </resources>

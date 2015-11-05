@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="always_center_position_on_map">Ammustra sa positzione semper a su tzentru</string>
     <string name="voice_pref_title">Boghe</string>
     <string name="misc_pref_title">Mistura</string>
@@ -1975,4 +1976,5 @@
     <string name="osm_edit_created_poi">PDI de OSM creadu</string>
     <string name="osm_edit_created_bug">Nota de errore de OSM creada</string>
 <string name="map_legend">Legenda de sa mapa</string>
-</resources>
+<string name="shared_string_upload">Càrriga</string>
+    </resources>
