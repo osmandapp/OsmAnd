@@ -1929,7 +1929,7 @@
     <string name="share_geo">geo:</string>
 
     <string name="application_dir_description">Välj var du vill spara kartfilerna.</string>
-    <string name="share_menu_location">Dela plats</string>
+    <string name="share_menu_location">Dela platsen</string>
     <string name="shared_string_send">Sänd</string>
     <string name="hillshade_layer_disabled">Skuggad relief-lager inaktiverat</string>
     <string name="show_on_start_description">OsmAnd kommer att starta från kartskärmen</string>
@@ -1964,4 +1964,8 @@
     <string name="world_map_download_descr">Baskarta över världen (täcker hela världen med låg zoomningsgrad) saknas eller är gammal. Hämta gärna denna karta till din enhet.</string>
 <string name="shared_string_upload">Skicka</string>
     <string name="map_legend">Teckenförklaring</string>
-</resources>
+<string name="shared_string_update">Uppdatera</string>
+    <string name="rec_photo_description">Foto %1$s</string>
+    <string name="rec_audio_description">Ljud %1$s</string>
+    <string name="rec_video_description">Video %1$s</string>
+    </resources>
