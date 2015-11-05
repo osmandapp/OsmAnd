@@ -2147,4 +2147,5 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="rec_video_description">Video %1$s</string>
     <string name="shared_string_upload">Odoslať</string>
     <string name="shared_string_update">Aktualizovať</string>
+    <string name="rendering_attr_hideProposed_name">Skryť plánované objekty</string>
     </resources>
