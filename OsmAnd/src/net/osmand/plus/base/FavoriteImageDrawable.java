@@ -60,7 +60,6 @@ public class FavoriteImageDrawable extends Drawable {
 		
 		if (!withShadow) {
 			Rect bs = new Rect(bounds);
-			// FIXME
 			 //bs.inset((int) (4 * density), (int) (4 * density));
 			bs.inset(bs.width() / 4, (int) bs.height() / 4);
 			listDrawable.setBounds(bs);
