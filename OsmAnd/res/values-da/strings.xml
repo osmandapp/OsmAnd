@@ -1987,8 +1987,8 @@
     <string name="first_usage_item">Første anvendelse</string>
     <string name="first_usage_item_description">Sådan hentes kort og angives grundlæggende indstillinger</string>
     <string name="navigation_item_description">Opsætning af navigation</string>
-    <string name="faq_item">Spørgsmål og svar</string>
-    <string name="faq_item_description">Hvordan man bruger udvidelser</string>
+    <string name="faq_item">OSS</string>
+    <string name="faq_item_description">Ofte stillede spørgsmål</string>
     <string name="map_viewing_item">Kortvisning</string>
     <string name="search_on_the_map_item">Søgning på kortet</string>
     <string name="planning_trip_item">Turplanlægning</string>
