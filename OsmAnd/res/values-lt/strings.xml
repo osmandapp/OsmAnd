@@ -2001,4 +2001,5 @@
     <string name="navigation_item_description">Navigacijos nustatymas</string>
     <string name="feedback">Atsiliepimai</string>
     <string name="map_legend">Legenda</string>
-</resources>
+<string name="first_usage_item">Pirmasis paleidimas</string>
+    </resources>
