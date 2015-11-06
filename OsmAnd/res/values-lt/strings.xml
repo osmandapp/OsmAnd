@@ -1997,4 +1997,8 @@
 	<string name="show_free_version_banner">Rodyti nemokamos versijos pranešimą</string>
     <string name="show_free_version_banner_description">Net jei ir turite mokamą versiją vistiek galite matyti mokamos versijos pranešimą</string>
     <string name="activate_seamarks_plugin">Prašome aktyvuoti jūrlapių įskiepį</string>
-    </resources>
+    <string name="first_usage_item_description">Kaip atsisiųsti žemėlapius, parinkti pagrindinius nustatymus</string>
+    <string name="navigation_item_description">Navigacijos nustatymas</string>
+    <string name="feedback">Atsiliepimai</string>
+    <string name="map_legend">Legenda</string>
+</resources>
