@@ -75,6 +75,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
+import java.text.DateFormat;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
@@ -220,20 +221,23 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			}
 		}
 
+		private String formatDateTime(Context ctx, long dateTime) {
+			DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(ctx);
+			DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(ctx);
+			return dateFormat.format(dateTime) + " " + timeFormat.format(dateTime);
+		}
+
 		public String getName(Context ctx) {
 			String fileName = file.getName();
 			String desc = getDescriptionName(fileName);
 			if (desc != null) {
 				return desc;
 			} else if (this.isAudio()) {
-				String time = AndroidUtils.formatDateTime(ctx, file.lastModified());
-				return ctx.getString(R.string.rec_audio_description, time).trim();
+				return ctx.getString(R.string.rec_audio_description, formatDateTime(ctx, file.lastModified()));
 			} else if (this.isVideo()) {
-				String time = AndroidUtils.formatDateTime(ctx, file.lastModified());
-				return ctx.getString(R.string.rec_video_description, time).trim();
+				return ctx.getString(R.string.rec_video_description, formatDateTime(ctx, file.lastModified()));
 			} else if (this.isPhoto()) {
-				String time = AndroidUtils.formatDateTime(ctx, file.lastModified());
-				return ctx.getString(R.string.rec_photo_description, time).trim();
+				return ctx.getString(R.string.rec_photo_description, formatDateTime(ctx, file.lastModified()));
 			}
 			return "";
 		}
