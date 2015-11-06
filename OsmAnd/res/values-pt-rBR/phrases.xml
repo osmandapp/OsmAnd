@@ -65,7 +65,7 @@
 	<string name="poi_baby_goods">Produtos de bebê</string>
 	<string name="poi_bag">Loja de malas</string>
 	<string name="poi_bathroom_furnishing">Mobiliário de banheiro</string>
-	<string name="poi_bed">Mobiliário de dormitório</string>
+	<string name="poi_bed">Loja de roupa de cama</string>
 	<string name="poi_boutique">Butique</string>
 	<string name="poi_carpet">Loja de tapetes</string>
 	<string name="poi_charity">Brechó beneficente</string>
@@ -1286,11 +1286,11 @@
 	<string name="poi_information_tactile_model">Modelo tátil</string>
 	<string name="poi_information_tactile_map">Mapa tátil</string>
 	<string name="poi_board_type_notice">Quadro de avisos</string>
-	<string name="poi_board_type_plants">Informações sobre plantas</string>
-	<string name="poi_board_type_geology">Informações sobre geologia</string>
-	<string name="poi_board_type_public_transport">Informações sobre transporte público</string>
-	<string name="poi_board_type_technology">Informações sobre tecnologia</string>
-	<string name="poi_board_type_astronomy">Informações sobre astronomia</string>
+	<string name="poi_board_type_plants">Ponto de informação: plantas</string>
+	<string name="poi_board_type_geology">Ponto de informação: geologia</string>
+	<string name="poi_board_type_public_transport">Ponto de informação: transporte público</string>
+	<string name="poi_board_type_technology">Ponto de informação: tecnologia</string>
+	<string name="poi_board_type_astronomy">Ponto de informação: astronomia</string>
 
 <string name="poi_commercial">Área de negócios</string>
 	<string name="poi_retail">Área de vendas</string>
@@ -1298,26 +1298,26 @@
 	<string name="poi_fireplace_yes">Lareira de exterior</string>
 	<string name="poi_fireplace_no">Sem lareira</string>
 
-	<string name="poi_covered_yes">Com abrigo</string>
-	<string name="poi_covered_no">Sem abrigo</string>
+	<string name="poi_covered_yes">Coberto</string>
+	<string name="poi_covered_no">Descoberto</string>
 
 	<string name="poi_smoking_no">Proibido fumar</string>
-	<string name="poi_smoking_outside">É permitido fumar apenas do lado de fora</string>
-	<string name="poi_smoking_yes">É permitido fumar</string>
-	<string name="poi_smoking_separated">É permitido fumar em um ambiente sem efetiva separação</string>
-	<string name="poi_smoking_isolated">É permitido fumar em um ambiente com efetiva separação</string>
+	<string name="poi_smoking_outside">Permitido fumar apenas do lado de fora</string>
+	<string name="poi_smoking_yes">Permitido fumar</string>
+	<string name="poi_smoking_separated">Permitido fumar em uma sala separada</string>
+	<string name="poi_smoking_isolated">Permitido fumar em uma sala isolada</string>
 	<string name="poi_smoking_dedicated">Dedicado aos fumantes</string>
 
-	<string name="poi_toll_no">Não é cobrado pagamento de pedágio</string>
-	<string name="poi_toll_yes">Pagamento de pedágio é cobrado</string>
+	<string name="poi_toll_no">Sem pedágio</string>
+	<string name="poi_toll_yes">Pedágio</string>
 	<string name="poi_tactile_paving_yes">Com piso tátil</string>
 	<string name="poi_tactile_paving_no">Sem piso tátil</string>
 	<string name="poi_traffic_signals_sound_yes">Com aviso sonoro</string>
 	<string name="poi_traffic_signals_sound_no">Sem aviso sonoro</string>
-	<string name="poi_traffic_signals_sound_walk">Com aviso sonoro somente quando andar é permitido</string>
+	<string name="poi_traffic_signals_sound_walk">Com aviso sonoro quando permitido andar</string>
 
 <string name="poi_ford_stepping_stones">Pedra de passagem em rio</string>
-	<string name="poi_toll_hgv_yes">Pagamento de pedágio cobrado para veículos pesados</string>
+	<string name="poi_toll_hgv_yes">Pedágio para veículos pesados</string>
 	<string name="poi_rescue_station">Estação de resgate</string>
 
 <string name="poi_services">Área de serviço</string>
@@ -1356,4 +1356,16 @@
 	<string name="poi_debris">Escombros</string>
 	<string name="poi_jersey_barrier">Barreira de Nova Jersey</string>
 	<string name="poi_animal_shelter">Abrigo de animais</string>
+	<string name="poi_tourism_yes">Objeto turístico</string>
+	<string name="poi_rtsa_scale">Escala RTSA</string>
+
+	<string name="poi_piste_difficulty_easy">Dificuldade de pista: fácil</string>
+	<string name="poi_piste_difficulty_intermediate">Dificuldade de pista: intermediária</string>
+	<string name="poi_piste_difficulty_advanced">Dificuldade de pista: avançada</string>
+	<string name="poi_piste_difficulty_novice">Dificuldade de pista: novato</string>
+	<string name="poi_piste_difficulty_expert">Dificuldade de pista: perito</string>
+	<string name="poi_piste_difficulty_freeride">Dificuldade de pista: freeride</string>
+	<string name="poi_piste_grooming_classic">Pista de preparação: clássica</string>
+	<string name="poi_piste_grooming_classic_skating">Pista de preparação: clássica+patinagem</string>
+	<string name="poi_piste_grooming_backcountry">Pista de preparação: interior</string>
 	</resources>
