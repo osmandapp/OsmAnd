@@ -1428,4 +1428,15 @@
 	<string name="poi_toll_no">Sense peatge</string>
 	<string name="poi_toll_hgv_yes">Peatge de vehicles pesants</string>
 	<string name="poi_tactile_paving_yes">Amb paviment tàctil</string>
+	<string name="poi_content_crop">Contingut: collita</string>
+	<string name="poi_trade_building_supplies">Subministraments de construcció</string>
+	<string name="poi_trade_plumbing">Subministraments de fontaneria</string>
+	<string name="poi_trade_wood">Subministraments de fusteria</string>
+	<string name="poi_trade_agricultural_supplies">Subministraments agrícoles</string>
+	<string name="poi_trade_tile">Rajoles</string>
+
+	<string name="poi_trees_oil">Oli de palma</string>
+	<string name="poi_trees_meadow_orchard">Hort de prat</string>
+	<string name="poi_trees_rubber">Plantes de cautxú</string>
+	<string name="poi_information_nature">Indicador informatiu: natura</string>
 	</resources>
