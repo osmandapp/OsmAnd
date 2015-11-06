@@ -2152,4 +2152,10 @@
 	<string name="poi_dog_yes">允許狗入內</string>
 	<string name="poi_dog_no">不允許狗入內</string>
 
+	<string name="poi_traffic_calming_island">安全島</string>
+	<string name="poi_impromptu_yes">即興：是</string>
+	<string name="poi_impromptu_no">即興：否</string>
+	<string name="poi_refugee_yes">為難民的福利設施</string>
+	<string name="poi_refugee_no">難民：無</string>
+
 	</resources>
