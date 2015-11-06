@@ -2015,4 +2015,5 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="contact_us">Contacteu-nos</string>
     <string name="map_legend">Llegenda del mapa</string>
 <string name="shared_string_update">Actualitza</string>
+    <string name="rendering_attr_hideProposed_name">Amaga proposta d\'objectes</string>
     </resources>
