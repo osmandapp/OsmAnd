@@ -602,7 +602,7 @@ public class GeneralRouter implements VehicleRouter {
 		public boolean matches(BitSet types, ParameterContext paramContext) {
 			double f1 = calculateExprValue(0, types, paramContext);
 			double f2 = calculateExprValue(1, types, paramContext);
-			if(Double.isNaN(f1) ||Double.isNaN(f2)) {
+			if (Double.isNaN(f1) || Double.isNaN(f2)) {
 				return false;
 			}
 			if (expressionType == LESS_EXPRESSION) {
