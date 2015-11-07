@@ -25,6 +25,7 @@ public class HelpArticleDialogFragment extends DialogFragment {
 	private static final Log LOG = PlatformUtil.getLog(HelpArticleDialogFragment.class);
 
 	private static final String ASSET_NAME = "asset_name";
+	private static final String NAME = "name";
 	private static final String URL = "url";
 	private WebView webView;
 	private static String HEADER_INNER= "<html><head>\n"+
@@ -58,6 +59,10 @@ public class HelpArticleDialogFragment extends DialogFragment {
 				dismiss();
 			}
 		});
+		String name = getArguments().getString(NAME);
+		if(name != null) {
+			toolbar.setTitle(name);
+		}
 
 		String assetName = getArguments().getString(ASSET_NAME);
 		String url = getArguments().getString(URL);
@@ -108,17 +113,19 @@ public class HelpArticleDialogFragment extends DialogFragment {
 		return (OsmandApplication) getActivity().getApplication();
 	}
 
-	public static HelpArticleDialogFragment instantiateWithAsset(String assetName) {
+	public static HelpArticleDialogFragment instantiateWithAsset(String assetName, String name) {
 		Bundle args = new Bundle();
 		args.putString(ASSET_NAME, assetName);
+		args.putString(NAME, name);
 		final HelpArticleDialogFragment helpArticleDialogFragment = new HelpArticleDialogFragment();
 		helpArticleDialogFragment.setArguments(args);
 		return helpArticleDialogFragment;
 	}
 
-	public static HelpArticleDialogFragment instantiateWithUrl(String url) {
+	public static HelpArticleDialogFragment instantiateWithUrl(String url, String name) {
 		Bundle args = new Bundle();
 		args.putString(URL, url);
+		args.putString(NAME, name);
 		final HelpArticleDialogFragment helpArticleDialogFragment = new HelpArticleDialogFragment();
 		helpArticleDialogFragment.setArguments(args);
 		return helpArticleDialogFragment;
