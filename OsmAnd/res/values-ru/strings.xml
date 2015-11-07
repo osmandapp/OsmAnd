@@ -873,7 +873,7 @@
 
     <string name="osmand_parking_hours">Часов</string>
     <string name="osmand_parking_minutes">Минут</string>
-    <string name="osmand_parking_position_description_add_time">Припаркован в:</string>
+    <string name="osmand_parking_position_description_add_time">Машина припаркована в</string>
     <string name="use_compass_navigation_descr">Использовать навигацию по компасу, если направление не определено</string>
     <string name="use_compass_navigation">Использовать компас</string>
     <string name="route_updated_loc_found">Маршрут будет пересчитан после определения местоположения</string>
@@ -1927,8 +1927,8 @@
     <string name="later">Позже</string>
     <string name="get_full_version">Полная версия</string>
     <string name="downloads">Загрузки</string>
-    <string name="show_free_version_banner">Показать баннер бесплатная версия</string>
-    <string name="show_free_version_banner_description">Даже если у вас купленная версия вы еще можете увидеть баннер для бесплатной версии</string>
+    <string name="show_free_version_banner">Показывать баннер бесплатной версии</string>
+    <string name="show_free_version_banner_description">Даже если у вас купленная версия вы также можете видеть баннер для бесплатной версии</string>
     <string name="confirm_download_roadmaps">Вы уверены, что хотите скачать карту автодорог, даже если у вас есть полная карта?</string>
     <string name="value_downloaded_from_max">%1$.1f из %2$.1f Мб</string>
     <string name="file_size_in_mb">%.1f МБ</string>
@@ -1969,7 +1969,15 @@
     <string name="help_us_to_improve_menu_group">Помогите улучшить OsmAnd</string>
     <string name="other_menu_group">Прочее</string>
     <string name="plugins_menu_group">Плагины</string>
-    <string name="map_legend">Легенда</string>
+    <string name="map_legend">Условные обозначения</string>
 <string name="shared_string_update">Обновить</string>
     <string name="rec_photo_description">Фото %1$s</string>
+    <string name="rec_audio_description">Запись %1$s</string>
+    <string name="rec_video_description">Видео %1$s</string>
+    <string name="shared_string_upload">Отправить</string>
+    <string name="osm_edit_created_poi">Создана OSM POI</string>
+    <string name="osm_edit_created_bug">Создана заметка OSM</string>
+    <string name="osmand_running_in_background">Работает в фоновом режиме</string>
+    <string name="av_locations">Места</string>
+    <string name="downloading_number_of_files">Загрузка файла - %1$d</string>
     </resources>
