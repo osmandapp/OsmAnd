@@ -75,6 +75,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
+import java.text.DateFormat;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
@@ -220,17 +221,23 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			}
 		}
 
+		private String formatDateTime(Context ctx, long dateTime) {
+			DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(ctx);
+			DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(ctx);
+			return dateFormat.format(dateTime) + " " + timeFormat.format(dateTime);
+		}
+
 		public String getName(Context ctx) {
 			String fileName = file.getName();
 			String desc = getDescriptionName(fileName);
 			if (desc != null) {
 				return desc;
 			} else if (this.isAudio()) {
-				return ctx.getResources().getString(R.string.shared_string_audio);
+				return ctx.getString(R.string.rec_audio_description, formatDateTime(ctx, file.lastModified()));
 			} else if (this.isVideo()) {
-				return ctx.getResources().getString(R.string.shared_string_video);
+				return ctx.getString(R.string.rec_video_description, formatDateTime(ctx, file.lastModified()));
 			} else if (this.isPhoto()) {
-				return ctx.getResources().getString(R.string.shared_string_photo);
+				return ctx.getString(R.string.rec_photo_description, formatDateTime(ctx, file.lastModified()));
 			}
 			return "";
 		}

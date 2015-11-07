@@ -7,6 +7,7 @@ import android.net.Uri;
 
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -16,23 +17,15 @@ import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.builders.AudioVideoNoteMenuBuilder;
 
-import java.io.File;
-import java.text.DateFormat;
-import java.util.Date;
-
 public class AudioVideoNoteMenuController extends MenuController {
 	private Recording recording;
 
-	private DateFormat dateFormat;
-	private DateFormat timeFormat;
 	private AudioVideoNotesPlugin plugin;
 
-	public AudioVideoNoteMenuController(OsmandApplication app, MapActivity mapActivity, final Recording recording) {
-		super(new AudioVideoNoteMenuBuilder(app, recording), mapActivity);
+	public AudioVideoNoteMenuController(OsmandApplication app, MapActivity mapActivity, PointDescription pointDescription, final Recording recording) {
+		super(new AudioVideoNoteMenuBuilder(app, recording), pointDescription, mapActivity);
 		this.recording = recording;
 		plugin = OsmandPlugin.getPlugin(AudioVideoNotesPlugin.class);
-		dateFormat = android.text.format.DateFormat.getMediumDateFormat(mapActivity);
-		timeFormat = android.text.format.DateFormat.getTimeFormat(mapActivity);
 
 		leftTitleButtonController = new TitleButtonController() {
 			@Override
@@ -94,15 +87,7 @@ public class AudioVideoNoteMenuController extends MenuController {
 
 	@Override
 	public String getNameStr() {
-		File file = recording.getFile();
-		String recType = recording.getType(getMapActivity());
-		String recName = recording.getName(getMapActivity());
-		if (file != null && recType.equals(recName)) {
-			Date date = new Date(recording.getFile().lastModified());
-			return dateFormat.format(date) + " " + timeFormat.format(date);
-		} else {
-			return recording.getName(getMapActivity());
-		}
+		return getPointDescription().getName();
 	}
 
 	@Override

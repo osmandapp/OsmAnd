@@ -13,11 +13,8 @@ import net.osmand.util.Algorithms;
 
 public class PointDescriptionMenuController extends MenuController {
 
-	private PointDescription pointDescription;
-
 	public PointDescriptionMenuController(OsmandApplication app, MapActivity mapActivity, final PointDescription pointDescription) {
-		super(new MenuBuilder(app), mapActivity);
-		this.pointDescription = pointDescription;
+		super(new MenuBuilder(app), pointDescription, mapActivity);
 	}
 
 	@Override
@@ -27,7 +24,7 @@ public class PointDescriptionMenuController extends MenuController {
 
 	@Override
 	public boolean needTypeStr() {
-		String typeName = pointDescription.getTypeName();
+		String typeName = getPointDescription().getTypeName();
 		return (typeName != null && !Algorithms.isEmpty(typeName));
 	}
 
@@ -38,7 +35,7 @@ public class PointDescriptionMenuController extends MenuController {
 
 	@Override
 	public Drawable getLeftIcon() {
-		return getIcon(SearchHistoryFragment.getItemIcon(pointDescription));
+		return getIcon(SearchHistoryFragment.getItemIcon(getPointDescription()));
 	}
 
 	@Override
@@ -52,13 +49,13 @@ public class PointDescriptionMenuController extends MenuController {
 
 	@Override
 	public String getNameStr() {
-		return pointDescription.getSimpleName(getMapActivity(), false);
+		return getPointDescription().getName();
 	}
 
 	@Override
 	public String getTypeStr() {
 		if (needTypeStr()) {
-			return pointDescription.getTypeName();
+			return getPointDescription().getTypeName();
 		} else {
 			return "";
 		}
@@ -66,6 +63,6 @@ public class PointDescriptionMenuController extends MenuController {
 
 	@Override
 	public boolean needStreetName() {
-		return !pointDescription.isAddress();
+		return !getPointDescription().isAddress();
 	}
 }

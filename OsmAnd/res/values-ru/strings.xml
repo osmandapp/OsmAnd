@@ -708,11 +708,11 @@
     <string name="osb_close_dialog_error">Возникло исключение: ошибка не была закрыта</string>
     <string name="osb_comment_menu_item">Добавить комментарий</string>
     <string name="osb_close_menu_item">Закрыть ошибку</string>
-    <string name="osb_comment_dialog_message">Сообщение</string>
+    <string name="osb_comment_dialog_message">Комментарий</string>
     <string name="osb_comment_dialog_author">Автор</string>
     <string name="poi_edit_title">Редактирование POI</string>
     <string name="poi_create_title">Добавление POI</string>
-    <string name="poi_error_poi_not_found">POI не найдена или не является точкой</string>
+    <string name="poi_error_poi_not_found">POI не является точкой или не найдена</string>
     <string name="poi_remove_confirm_template">Вы действительно хотите удалить {0}?</string>
     <string name="poi_remove_title">Удаление POI</string>
     <string name="poi_remove_success">POI успешно удалена</string>
@@ -951,7 +951,7 @@
     <string name="context_menu_item_intermediate_point">Добавить промежуточную точку</string>
     <string name="map_widget_intermediate_distance">Промежуточная точка</string>
     <string name="ending_point_too_far">Начало маршрута слишком далеко от ближайшей дороги.</string>
-    <string name="add_tag">Добавить метку</string>
+    <string name="add_tag">Добавить тег</string>
     <string name="btn_advanced_mode">Расширенный режим…</string>
     <string name="poi_filter_parking">Парковки</string>
     <string name="poi_filter_emergency">Чрезвычайные обстоятельства</string>

@@ -88,6 +88,12 @@ public class DownloadIndexesThread {
 	public void setUiActivity(DownloadEvents uiActivity) {
 		this.uiActivity = uiActivity;
 	}
+
+	public void resetUiActivity(DownloadEvents uiActivity) {
+		if (this.uiActivity == uiActivity) {
+			this.uiActivity = null;
+		}
+	}
 	
 	@UiThread
 	protected void downloadInProgress() {
@@ -213,14 +219,17 @@ public class DownloadIndexesThread {
 		}
 		if (currentDownloadingItem == null) {
 			execute(new DownloadIndexesAsyncTask());
+		} else {
+			downloadInProgress();
 		}
 	}
 
 	public void cancelDownload(IndexItem item) {
 		if(currentDownloadingItem == item) {
-			downloadFileHelper.setInterruptDownloading(true);;
+			downloadFileHelper.setInterruptDownloading(true);
 		} else {
 			indexItemDownloading.remove(item);
+			downloadInProgress();
 		}
 	}
 

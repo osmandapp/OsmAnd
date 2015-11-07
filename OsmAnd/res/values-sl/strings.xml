@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
     <string name="search_button">Poišči</string>
     <string name="search_activity">Iskanje podatkov</string>
@@ -1979,4 +1979,9 @@
 
 
     <string name="map_legend">Legenda zemljevida</string>
-</resources>
+<string name="shared_string_update">Posodobitev</string>
+    <string name="rec_photo_description">Fotografija %1$s</string>
+    <string name="rec_audio_description">Zvočni posnetek %1$s</string>
+    <string name="rec_video_description">Video posnetek %1$s</string>
+    <string name="shared_string_upload">Pošlji</string>
+    </resources>

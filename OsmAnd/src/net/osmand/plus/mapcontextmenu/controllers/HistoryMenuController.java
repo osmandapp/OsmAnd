@@ -2,6 +2,7 @@ package net.osmand.plus.mapcontextmenu.controllers;
 
 import android.graphics.drawable.Drawable;
 
+import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -14,8 +15,8 @@ public class HistoryMenuController extends MenuController {
 
 	private HistoryEntry entry;
 
-	public HistoryMenuController(OsmandApplication app, MapActivity mapActivity, final HistoryEntry entry) {
-		super(new MenuBuilder(app), mapActivity);
+	public HistoryMenuController(OsmandApplication app, MapActivity mapActivity, PointDescription pointDescription, final HistoryEntry entry) {
+		super(new MenuBuilder(app), pointDescription, mapActivity);
 		this.entry = entry;
 	}
 
@@ -46,7 +47,7 @@ public class HistoryMenuController extends MenuController {
 
 	@Override
 	public String getNameStr() {
-		return entry.getName().getSimpleName(getMapActivity(), false);
+		return getPointDescription().getName();
 	}
 
 	@Override

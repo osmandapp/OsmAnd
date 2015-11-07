@@ -2017,4 +2017,9 @@
 <string name="osm_edit_created_poi">PDI de OSM creado</string>
     <string name="osm_edit_created_bug">Nota OSM creada</string>
     <string name="map_legend">Leyenda del mapa</string>
-</resources>
+<string name="shared_string_update">Actualizar</string>
+    <string name="rec_photo_description">Foto %1$s</string>
+    <string name="rec_audio_description">Audio %1$s</string>
+    <string name="rec_video_description">Video %1$s</string>
+    <string name="shared_string_upload">Subir</string>
+    </resources>

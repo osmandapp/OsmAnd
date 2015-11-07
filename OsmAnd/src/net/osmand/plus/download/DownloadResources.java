@@ -55,10 +55,26 @@ public class DownloadResources extends DownloadResourceGroup {
 
 	public IndexItem getIndexItem(String fileName) {
 		IndexItem res = null;
+		if (rawResources == null) {
+			return null;
+		}
 		for (IndexItem item : rawResources) {
 			if (fileName.equals(item.getFileName())) {
 				res = item;
 				break;
+			}
+		}
+		return res;
+	}
+
+	public List<IndexItem> getIndexItems(String fileNamePrefix) {
+		List<IndexItem> res = new LinkedList<>();
+		if (rawResources == null) {
+			return res;
+		}
+		for (IndexItem item : rawResources) {
+			if (item.getFileName().toLowerCase().startsWith(fileNamePrefix)) {
+				res.add(item);
 			}
 		}
 		return res;

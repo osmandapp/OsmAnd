@@ -14,13 +14,11 @@ import net.osmand.util.Algorithms;
 
 public class ParkingPositionMenuController extends MenuController {
 
-	private PointDescription pointDescription;
 	private ParkingPositionPlugin plugin;
 	private String parkingDescription = "";
 
 	public ParkingPositionMenuController(OsmandApplication app, MapActivity mapActivity, final PointDescription pointDescription) {
-		super(new MenuBuilder(app), mapActivity);
-		this.pointDescription = pointDescription;
+		super(new MenuBuilder(app), pointDescription, mapActivity);
 		plugin = OsmandPlugin.getPlugin(ParkingPositionPlugin.class);
 		if (plugin != null) {
 			StringBuilder sb = new StringBuilder();
@@ -60,7 +58,7 @@ public class ParkingPositionMenuController extends MenuController {
 
 	@Override
 	public String getNameStr() {
-		return pointDescription.getTypeName();
+		return getPointDescription().getName();
 	}
 
 	@Override

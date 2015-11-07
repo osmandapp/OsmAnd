@@ -241,11 +241,13 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 
 	@Override
 	public PointDescription getObjectName(Object o) {
-//		if(o instanceof OsMoDevice) {
-//			return map.getString(R.string.osmo_user_name) + " " + ((OsMoDevice) o).getVisibleName();
-//		}
-		String desc = getObjectDescription(o);
-		return desc == null ? null : new PointDescription(PointDescription.POINT_TYPE_MARKER, desc);
+		if(o instanceof OsMoDevice) {
+			return new PointDescription(PointDescription.POINT_TYPE_MARKER, map.getString(R.string.osmo_user_name) + " " + ((OsMoDevice) o).getVisibleName());
+		} else {
+			return null;
+		}
+		//String desc = getObjectDescription(o);
+		//return desc == null ? null : new PointDescription(PointDescription.POINT_TYPE_MARKER, desc);
 	}
 	
 	public void refresh() {

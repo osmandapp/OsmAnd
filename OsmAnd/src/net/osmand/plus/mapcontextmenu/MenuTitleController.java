@@ -151,6 +151,7 @@ public abstract class MenuTitleController {
 									nameStr = streetStr;
 									addressUnknown = false;
 									streetStr = "";
+									getPointDescription().setName(nameStr);
 								}
 								getMapActivity().runOnUiThread(new Runnable() {
 									public void run() {

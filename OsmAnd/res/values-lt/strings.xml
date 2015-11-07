@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="starting_point_too_far">Pradžios taškas yra per toli nuo artimiausio kelio.</string>
     <string name="shared_location">Bendrinta vieta</string>
     <string name="osmand_parking_warning">Dėmesio</string>
@@ -58,7 +59,7 @@
     <string name="first_time_msg">Ačiū kad naudojate OsmAnd. Pagrindinių programos funkcijų naudojimui įrenginyje turi būti regiono duomenys, kuriuos galite parsisiųsti \'Nustatymai\' → \'Valdyti žemėlapius\'. Tik po to galėsite ieškoti adreso, LV ar viešojo transporto.</string>
     <string name="basemap_was_selected_to_download">Programos funkcionavimui reikalingas bazinis žemėlapis. Jis buvo pažymėtas parsiuntimui.</string>
     <string name="select_index_file_to_download">Nieko nerasta. Jei nerandate savo regiono, jį galite pasigaminti patys (eikite į http://osmand.net).</string>
-    <string name="local_indexes_cat_tile">Žemėlapiai internete</string>
+    <string name="local_indexes_cat_tile">Žemėlapiai internete ir laikinai išsaugoti žemėlapiai</string>
     <string name="local_indexes_cat_map">Įprastiniai žemėlapiai (vektoriniai)</string>
 
     <string name="index_settings_descr">Parsisiųsti, peržiūrėti detalią informaciją ir valdyti parsiųstus žemėlapius</string>
@@ -1891,12 +1892,12 @@
     <string name="show_gpx">Rodyti GPX</string>
     <string name="recent_places">Vėliausios vietos</string>
     <string name="address_unknown">Adresas vis dar nežinomas</string>
-    <string name="routing_attr_avoid_shuttle_train_name">Vengti greitųjų traukinių</string>
+    <string name="routing_attr_avoid_shuttle_train_name">Vengti priemiestinių traukinių</string>
     <string name="routing_attr_avoid_shuttle_train_description">Vengti priemiestinių traukinių</string>
     <string name="dahboard_options_dialog_title">Duomenų skydelio nustatymai</string>
     <string name="show_on_start">Rodyti aktyvuojant</string>
-    <string name="offline_maps_and_navigation">Offline žemėlapiai\n&amp; navigacija</string>
-    <string name="commit_poi">Užfiksuoti LV</string>
+    <string name="offline_maps_and_navigation">Parsiųsti žemėlapiai\n&amp; navigacija</string>
+    <string name="commit_poi">Išsiųsti LV</string>
     <string name="count_of_lines">Eilučių kiekis</string>
     <string name="are_you_sure">Ar įsitikinę?</string>
     <string name="unsaved_changes_will_be_lost">Neišsaugoti duomenys bus prarasti. Ar norite tęsti?</string>
@@ -1917,7 +1918,7 @@
     <string name="si_min_km">Minutės per kilometrą</string>
     <string name="si_min_m">Minutės per mylią</string>
     <string name="si_nm_h">Jūrmylė per valandą (mazgas)</string>
-    <string name="nm_h">nmh</string>
+    <string name="nm_h">mzg</string>
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
@@ -1954,7 +1955,7 @@
     <string name="other_menu_group">Kita</string>
     <string name="plugins_menu_group">Įskiepiai</string>
     <string name="faq_item">DUK</string>
-    <string name="search_on_the_map_item">Ieškoti žemėlapyje</string>
+    <string name="search_on_the_map_item">Paieška žemėlapyje</string>
     <string name="planning_trip_item">Kelionės planavimas</string>
     
     <string name="osm_editing_item">OSM redagavimas</string>
@@ -1968,7 +1969,7 @@
     <string name="tab_title_basic">Pagrindinis</string>
     <string name="tab_title_advanced">Išplėstinis</string>
     <string name="activate_srtm_plugin">Prašom aktyvuoti SRTM įskiepį</string>
-    <string name="begin_with_osmand_menu_group">Darbo su OsmAnd pradžia</string>
+    <string name="begin_with_osmand_menu_group">Pirmi žngsniai su OsmAnd</string>
     <string name="features_menu_group">Galimybės</string>
     <string name="faq_item_description">Kaip naudotis įskiepiais</string>
     <string name="map_viewing_item">Žemėlapio peržiūra</string>
@@ -1976,6 +1977,28 @@
     
     <string name="techical_articles_item">Techniniai straipsniai</string>
     
-    <string name="osm_edit_created_poi"/>
+    <string name="osm_edit_created_poi">Sukurta OSM LV</string>
     <string name="osm_edit_created_bug">Sukurtas OSM riktas</string>
+<string name="rec_photo_description">Fotografijos %1$s</string>
+    <string name="rec_audio_description">Garsas %1$s</string>
+    <string name="rec_video_description">Vaizdas %1$s</string>
+    <string name="shared_string_upload">Išsiųsti</string>
+    <string name="shared_string_update">Atnaujinti</string>
+    <string name="simulate_initial_startup_descr">Nustato kad programa pasileistų kaip pirmą kartą, visi kiti nustatymai nepakitę</string>
+    <string name="simulate_initial_startup">Imituoti pirmą programos paleidimą</string>
+    <string name="hillshade_layer_disabled">Reljefo sluoksnis išjungtas</string>
+    <string name="favourites_edit_dialog_title">Įsimintos vietos informacija</string>
+    <string name="simulate_your_location_stop_descr">Išjungti mano pozicijos simuliavimą</string>
+    <string name="simulate_your_location_descr">Simuliuoti naudojant apskaičiuotą maršrutą ar įrašytą GPX</string>
+    <string name="av_locations_descr">GPX failas su užrašų vietomis</string>
+    <string name="favourites_context_menu_add">Pridėti įsimintą vietą</string>
+	<string name="number_of_rows_in_dash">Eilučių skaičius %1$s puslapyje</string>
+	<string name="favourites">Įsimintos vietos</string>
+	<string name="show_free_version_banner">Rodyti nemokamos versijos pranešimą</string>
+    <string name="show_free_version_banner_description">Net jei ir turite mokamą versiją vistiek galite matyti mokamos versijos pranešimą</string>
+    <string name="activate_seamarks_plugin">Prašome aktyvuoti jūrlapių įskiepį</string>
+    <string name="first_usage_item_description">Kaip atsisiųsti žemėlapius, parinkti pagrindinius nustatymus</string>
+    <string name="navigation_item_description">Navigacijos nustatymas</string>
+    <string name="feedback">Atsiliepimai</string>
+    <string name="map_legend">Legenda</string>
 </resources>

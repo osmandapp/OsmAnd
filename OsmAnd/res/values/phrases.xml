@@ -196,6 +196,7 @@
 	<string name="poi_traffic_calming_rumble_strip">Rumble strip</string>
 	<string name="poi_traffic_calming_table">Table</string>
 	<string name="poi_traffic_calming_choker">Choker</string>
+	<string name="poi_traffic_calming_island">Traffic island</string>
 	<string name="poi_traffic_signals">Stop light</string>
 
 	<string name="poi_car_repair">Car repair</string>
@@ -2373,6 +2374,7 @@
 	<string name="poi_bathing_yes">Bathing: yes</string>
 	<string name="poi_bathing_no">Bathing: no</string>
 
+	<string name="poi_boat_storage">Boat storage</string>
 
 
 </resources>

@@ -17,8 +17,8 @@ public class AmenityMenuController extends MenuController {
 
 	private final Amenity amenity;
 
-	public AmenityMenuController(OsmandApplication app, MapActivity mapActivity, final Amenity amenity) {
-		super(new AmenityMenuBuilder(app, amenity), mapActivity);
+	public AmenityMenuController(OsmandApplication app, MapActivity mapActivity, PointDescription pointDescription, final Amenity amenity) {
+		super(new AmenityMenuBuilder(app, amenity), pointDescription, mapActivity);
 		this.amenity = amenity;
 	}
 
@@ -78,6 +78,6 @@ public class AmenityMenuController extends MenuController {
 
 	@Override
 	public String getNameStr() {
-		return amenity.getName(getMapActivity().getMyApplication().getSettings().MAP_PREFERRED_LOCALE.get());
+		return getPointDescription().getName();
 	}
 }

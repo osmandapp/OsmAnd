@@ -224,7 +224,7 @@ public class DownloadActivity extends ActionBarProgressActivity implements Downl
 	public void onPause() {
 		super.onPause();
 		getMyApplication().getAppCustomization().pauseActivity(DownloadActivity.class);
-		downloadThread.setUiActivity(null);
+		downloadThread.resetUiActivity(this);
 	}
 
 	@Override
@@ -518,7 +518,7 @@ public class DownloadActivity extends ActionBarProgressActivity implements Downl
 		};
 		task.execute();
 	}
-	
+
 	private void initSettingsFirstMap(WorldRegion reg) {
 		getMyApplication().getSettings().FIRST_MAP_IS_DOWNLOADED.set(true);
 		DrivingRegion drg = null;
@@ -652,7 +652,7 @@ public class DownloadActivity extends ActionBarProgressActivity implements Downl
 		srtmNeedsInstallation = srtmPlugin == null || srtmPlugin.needsInstallation();
 
 	}
-	
+
 	public static class AskMapDownloadFragment extends BottomSheetDownloadFragment {
 		public static final String TAG = "AskMapDownloadFragment";
 

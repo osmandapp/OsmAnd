@@ -1,7 +1,9 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 
+import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
@@ -15,8 +17,8 @@ public class TargetPointMenuController extends MenuController {
 
 	private TargetPoint targetPoint;
 
-	public TargetPointMenuController(OsmandApplication app, MapActivity mapActivity, final TargetPoint targetPoint) {
-		super(new MenuBuilder(app), mapActivity);
+	public TargetPointMenuController(OsmandApplication app, MapActivity mapActivity, PointDescription pointDescription, final TargetPoint targetPoint) {
+		super(new MenuBuilder(app), pointDescription, mapActivity);
 		this.targetPoint = targetPoint;
 		leftTitleButtonController = new TitleButtonController() {
 			@Override
@@ -41,7 +43,7 @@ public class TargetPointMenuController extends MenuController {
 
 	@Override
 	public boolean needTypeStr() {
-		return true;
+		return !Algorithms.isEmpty(getNameStr());
 	}
 
 	@Override
@@ -63,14 +65,7 @@ public class TargetPointMenuController extends MenuController {
 
 	@Override
 	public String getNameStr() {
-		String name = "";
-		if (targetPoint.getOriginalPointDescription() != null) {
-			name = targetPoint.getOriginalPointDescription().getSimpleName(getMapActivity(), false);
-		}
-		if (Algorithms.isEmpty(name)) {
-			name = getTypeStr();
-		}
-		return name;
+		return getPointDescription().getName();
 	}
 
 	@Override
@@ -79,12 +74,7 @@ public class TargetPointMenuController extends MenuController {
 	}
 
 	@Override
-	public boolean displayStreetNameinTitle() {
-		return true;
-	}
-
-	@Override
 	public boolean needStreetName() {
-		return Algorithms.isEmpty(targetPoint.getOnlyName());
+		return !needTypeStr();
 	}
 }

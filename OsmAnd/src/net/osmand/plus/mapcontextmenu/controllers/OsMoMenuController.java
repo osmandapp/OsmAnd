@@ -3,6 +3,7 @@ package net.osmand.plus.mapcontextmenu.controllers;
 import android.graphics.drawable.Drawable;
 
 import net.osmand.Location;
+import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -15,8 +16,8 @@ public class OsMoMenuController extends MenuController {
 
 	private OsMoDevice device;
 
-	public OsMoMenuController(OsmandApplication app, MapActivity mapActivity, final OsMoDevice device) {
-		super(new MenuBuilder(app), mapActivity);
+	public OsMoMenuController(OsmandApplication app, MapActivity mapActivity, PointDescription pointDescription, final OsMoDevice device) {
+		super(new MenuBuilder(app), pointDescription, mapActivity);
 		this.device = device;
 	}
 
@@ -41,7 +42,7 @@ public class OsMoMenuController extends MenuController {
 
 	@Override
 	public String getNameStr() {
-		return device.getVisibleName();
+		return getPointDescription().getName();
 	}
 
 	@Override
