@@ -15,7 +15,9 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+
 import org.apache.commons.logging.Log;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -38,7 +40,6 @@ public class HelpArticleDialogFragment extends DialogFragment {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-	    setRetainInstance(true);
 		super.onCreate(savedInstanceState);
 		boolean isLightTheme = (getOsmandApplication())
 				.getSettings().OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME;
@@ -82,6 +83,18 @@ public class HelpArticleDialogFragment extends DialogFragment {
 
 				webView.loadDataWithBaseURL("http://osmand.net", sb.toString(), null, "utf-8", null);
 			}
+			webView.setWebViewClient(new WebViewClient() {
+				@Override
+				public boolean shouldOverrideUrlLoading(WebView view, String url) {
+					if (url.startsWith("http://osmand.net/features?id=")) {
+						String id = url.substring("http://osmand.net/features?id=".length());
+						dismiss();
+						instantiateWithAsset(id, getString(R.string.shared_string_help)).show(
+								getActivity().getSupportFragmentManager(), "DIALOG_HELP_ARTICLE");
+					}
+					return false;
+				}
+			});
 		} else if (url != null) {
 			
 			webView.getSettings().setLoadWithOverviewMode(true);
