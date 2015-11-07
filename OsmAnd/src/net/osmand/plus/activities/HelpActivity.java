@@ -29,6 +29,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -60,10 +61,21 @@ public class HelpActivity extends OsmandActionBarActivity {
 			ft.add(DIALOG, newFragment).commit();
 		}
 		setTitle(R.string.shared_string_help);
+		setupHomeButton();
 		// if (getSupportFragmentManager().findFragmentByTag(DIALOG) == null) {
 		// new HelpScreenDialogFragment().show(getSupportFragmentManager(), DIALOG);
 		// }
 	}
+	
+	@Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+        case android.R.id.home:
+            this.finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 	
 	public static class HelpScreenDialogFragment extends Fragment implements ExpandableListView.OnChildClickListener {
 		private static final Log LOG = PlatformUtil.getLog(HelpScreenDialogFragment.class);
