@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
     <string name="rendering_attr_hideProposed_name">Скрыть планируемые объекты</string>
     <string name="osmo_use_https_descr">Использовать безопасное подключение к серверу</string>
@@ -1970,4 +1970,6 @@
     <string name="other_menu_group">Прочее</string>
     <string name="plugins_menu_group">Плагины</string>
     <string name="map_legend">Легенда</string>
-</resources>
+<string name="shared_string_update">Обновить</string>
+    <string name="rec_photo_description">Фото %1$s</string>
+    </resources>
