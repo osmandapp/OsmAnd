@@ -1302,4 +1302,35 @@
 	<string name="poi_traffic_calming_island">Dopravní ostrůvek</string>
 	<string name="poi_denomination_evangelical">Evangelický</string>
 	<string name="poi_denomination_russian_orthodox">Ruský pravoslavný</string>
+	<string name="poi_denomination_mormon">Mormonský</string>
+	<string name="poi_denomination_jehovahs_witness">Svědků Jehovových</string>
+	<string name="poi_denomination_greek_orthodox">Řecký pravoslavný</string>
+	<string name="poi_denomination_reformed">Kalvinistický</string>
+	<string name="poi_denomination_seventh_day_adventist">Adventistů sedmého dne</string>
+	<string name="poi_denomination_new_apostolic">Novoapoštolský</string>
+	<string name="poi_denomination_church_of_england">Anglikánská církev</string>
+	<string name="poi_denomination_greek_catholic">Řeckokatolický</string>
+	<string name="poi_denomination_tibetan">Tibetský</string>
+	<string name="poi_denomination_salvation_army">Armáda spásy</string>
+	<string name="poi_denomination_quaker">Kvakerský</string>
+	<string name="poi_denomination_bulgarian_orthodox">Buhlharský pravoslavný</string>
+	<string name="poi_denomination_adventist">Adventistický</string>
+	<string name="poi_denomination_nazarene">Nazaretánský</string>
+	<string name="poi_denomination_serbian_orthodox">Srbský pravoslavný</string>
+	<string name="poi_denomination_armenian_apostolic">Arménský apoštolský</string>
+	<string name="poi_denomination_dutch_reformed">Holanský kalvinistický</string>
+	<string name="poi_denomination_apostolic">Apoštolský</string>
+	<string name="poi_denomination_latter_day_saints">Ježíše Krista Svatých posledních dnů</string>
+	<string name="poi_denomination_church_of_christ">Církev Ježíše Krista</string>
+	<string name="poi_denomination_romanian_orthodox">Římský pravoslavný</string>
+	<string name="poi_denomination_coptic_orthodox">Koptský pravoslavný</string>
+	<string name="poi_internet_access_no">Přístup k internetu: ne</string>
+
+	<string name="poi_kent_carriage_gap">Kent carriage gap (překážka bránící vjezdu automobilů)</string>
+	<string name="poi_route_hiking_ref_poi">Rozcestník turistických tras</string>
+
+	<string name="poi_wheelchair_no">Kolečkové křeslo: není dovoleno</string>
+	<string name="poi_wheelchair_limited">Kolečkové křeslo: s omezením</string>
+	<string name="poi_content_slurry">Obsah: blátovitý</string>
+	<string name="poi_bicycle_parking_anchors">Kotvy pro bicykly</string>
 	</resources>
