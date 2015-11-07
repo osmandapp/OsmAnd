@@ -232,6 +232,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			String desc = getDescriptionName(fileName);
 			if (desc != null) {
 				return desc;
+			} else if (this.isAudio()) {
 				return formatDateTime(ctx, file.lastModified());
 			} else if (this.isVideo()) {
 				return formatDateTime(ctx, file.lastModified());
