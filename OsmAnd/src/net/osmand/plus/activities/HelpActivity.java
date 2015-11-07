@@ -47,6 +47,7 @@ public class HelpActivity extends OsmandActionBarActivity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		((OsmandApplication) getApplication()).applyTheme(this);
 		super.onCreate(savedInstanceState);
 		FrameLayout frame = new FrameLayout(this);
 		frame.setId(DIALOG);
@@ -81,9 +82,6 @@ public class HelpActivity extends OsmandActionBarActivity {
 		@Override
 		public void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
-			boolean isLightTheme = (getOsmandApplication())
-					.getSettings().OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME;
-			int themeId = isLightTheme ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
 		}
 
 		@NonNull
@@ -335,7 +333,7 @@ public class HelpActivity extends OsmandActionBarActivity {
 		@Override
 		public void onClick(View v) {
 			HelpArticleDialogFragment.instantiateWithAsset(filename, name)
-					.show(ctx.getSupportFragmentManager(), null);
+					.show(ctx.getSupportFragmentManager(), "DIALOG_HELP_ARTICLE");
 		}
 	}
 

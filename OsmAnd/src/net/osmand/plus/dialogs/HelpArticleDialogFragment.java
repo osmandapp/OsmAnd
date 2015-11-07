@@ -38,6 +38,7 @@ public class HelpArticleDialogFragment extends DialogFragment {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+	    setRetainInstance(true);
 		super.onCreate(savedInstanceState);
 		boolean isLightTheme = (getOsmandApplication())
 				.getSettings().OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME;
