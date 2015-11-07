@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="offline_edition">Modifications hors-ligne</string>
     <string name="offline_edition_descr">Toujours utiliser l\'édition hors-ligne</string>
 
@@ -2081,4 +2082,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     
     
     <string name="shared_string_update">Mise à jour</string>
+    <string name="read_more">Lire plus</string>
+    <string name="whats_new">Quoi de neuf dans</string>
+    <string name="rendering_attr_hideProposed_name">Masquer les objets proposés</string>
     </resources>
