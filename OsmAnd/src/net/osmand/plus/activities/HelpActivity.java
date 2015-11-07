@@ -59,12 +59,13 @@ public class HelpActivity extends OsmandActionBarActivity {
 			FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 			ft.add(DIALOG, newFragment).commit();
 		}
+		setTitle(R.string.shared_string_help);
 		// if (getSupportFragmentManager().findFragmentByTag(DIALOG) == null) {
 		// new HelpScreenDialogFragment().show(getSupportFragmentManager(), DIALOG);
 		// }
 	}
 	
-	public static class HelpScreenDialogFragment extends DialogFragment implements ExpandableListView.OnChildClickListener {
+	public static class HelpScreenDialogFragment extends Fragment implements ExpandableListView.OnChildClickListener {
 		private static final Log LOG = PlatformUtil.getLog(HelpScreenDialogFragment.class);
 		
 
@@ -74,21 +75,12 @@ public class HelpActivity extends OsmandActionBarActivity {
 			boolean isLightTheme = (getOsmandApplication())
 					.getSettings().OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME;
 			int themeId = isLightTheme ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
-			setStyle(STYLE_NO_FRAME, themeId);
 		}
 
 		@NonNull
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 			final View view = inflater.inflate(R.layout.fragment_help_screen, container, false);
-
-			Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-			toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					dismiss();
-				}
-			});
 
 			HelpMenuCategory.BEGIN_WITH_OSMAND.initItems(createBeginWithOsmandItems());
 			HelpMenuCategory.FEATURES.initItems(createFeaturesItems());
