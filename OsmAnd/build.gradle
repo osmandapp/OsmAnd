@@ -198,15 +198,20 @@ task collectFonts(type: Copy) {
 	include "*.ttf"
 }
 
-task collectHelpContentsAssets(type: Copy) {
-	from("../../help/help-online") {
-		include "TechnicalArticles.html"
+task collectHelpContentsStyle(type: Copy) {
+	from("../../help/help/") {
+		include "style.css"
 	}
-	from("../../help/help") {
-		include "faq.html"
-		include "osmo-plugin.html"
-		include "changes.html"
+	into "assets"
+}
+
+
+task collectHelpContentsAssets(type: Copy) {
+	from("../../help/website/help") {
 		include "about.html"
+		include "changes.html"
+		include "faq.html"
+		include "technical-articles.html"
 	}
 	from("../../help/website/feature_articles"){
 		include "*.html"
@@ -253,6 +258,7 @@ task collectExternalResources << {}
 collectExternalResources.dependsOn collectVoiceAssets,
 		collectFonts,
 		collectHelpContentsAssets,
+		collectHelpContentsStyle,
 		collectRoutingResources,
 		collectRenderingStylesResources,
 		collectRegionsInfoResources,
