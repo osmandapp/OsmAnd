@@ -71,7 +71,7 @@ public class AmenityMenuController extends MenuController {
 	@Override
 	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, LatLon latLon) {
 		if (!Algorithms.isEmpty(typeStr)) {
-			addPlainMenuItem(R.drawable.ic_action_info_dark, typeStr);
+			addPlainMenuItem(R.drawable.ic_action_info_dark, typeStr, false);
 		}
 		addMyLocationToPlainItems(pointDescription, amenity.getLocation());
 	}

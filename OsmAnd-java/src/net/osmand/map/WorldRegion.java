@@ -41,6 +41,7 @@ public class WorldRegion {
 		protected String regionLang;
 		protected String regionMetric;
 		protected String regionRoadSigns;
+		protected String wikiLink;
 
 		public String getRegionLeftHandDriving() {
 			return regionLeftHandDriving;
@@ -56,6 +57,10 @@ public class WorldRegion {
 
 		public String getRegionRoadSigns() {
 			return regionRoadSigns;
+		}
+
+		public String getWikiLink() {
+			return wikiLink;
 		}
 	}
 

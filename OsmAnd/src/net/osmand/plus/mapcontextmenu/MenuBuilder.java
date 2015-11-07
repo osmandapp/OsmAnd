@@ -38,10 +38,12 @@ public class MenuBuilder {
 	public class PlainMenuItem {
 		private int iconId;
 		private String text;
+		private boolean needLinks;
 
-		public PlainMenuItem(int iconId, String text) {
+		public PlainMenuItem(int iconId, String text, boolean needLinks) {
 			this.iconId = iconId;
 			this.text = text;
+			this.needLinks = needLinks;
 		}
 
 		public int getIconId() {
@@ -50,6 +52,10 @@ public class MenuBuilder {
 
 		public String getText() {
 			return text;
+		}
+
+		public boolean isNeedLinks() {
+			return needLinks;
 		}
 	}
 
@@ -68,7 +74,7 @@ public class MenuBuilder {
 
 	protected void buildPlainMenuItems(View view) {
 		for (PlainMenuItem item : plainMenuItems) {
-			buildRow(view, item.getIconId(), item.getText(), 0);
+			buildRow(view, item.getIconId(), item.getText(), 0, item.isNeedLinks());
 		}
 	}
 
@@ -84,11 +90,11 @@ public class MenuBuilder {
 		firstRow = false;
 	}
 
-	protected void buildRow(View view, int iconId, String text, int textColor) {
-		buildRow(view, getRowIcon(iconId), text, textColor);
+	protected void buildRow(View view, int iconId, String text, int textColor, boolean needLinks) {
+		buildRow(view, getRowIcon(iconId), text, textColor, needLinks);
 	}
 
-	protected void buildRow(final View view, Drawable icon, String text, int textColor) {
+	protected void buildRow(final View view, Drawable icon, String text, int textColor, boolean needLinks) {
 		LinearLayout ll = new LinearLayout(view.getContext());
 		ll.setOrientation(LinearLayout.HORIZONTAL);
 		LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -122,8 +128,10 @@ public class MenuBuilder {
 		textView.setTextSize(16);
 		textView.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_info_text_light : R.color.ctx_menu_info_text_dark));
 
-		textView.setAutoLinkMask(Linkify.ALL);
-		textView.setLinksClickable(true);
+		if (needLinks) {
+			textView.setAutoLinkMask(Linkify.ALL);
+			textView.setLinksClickable(true);
+		}
 		textView.setText(text);
 		if (textColor > 0) {
 			textView.setTextColor(view.getResources().getColor(textColor));
@@ -191,8 +199,8 @@ public class MenuBuilder {
 		rowBuilt();
 	}
 
-	public void addPlainMenuItem(int iconId, String text) {
-		plainMenuItems.add(new PlainMenuItem(iconId, text));
+	public void addPlainMenuItem(int iconId, String text, boolean needLinks) {
+		plainMenuItems.add(new PlainMenuItem(iconId, text, needLinks));
 	}
 
 	public Drawable getRowIcon(int iconId) {
