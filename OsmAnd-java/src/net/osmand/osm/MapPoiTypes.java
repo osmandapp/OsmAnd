@@ -545,8 +545,6 @@ public class MapPoiTypes {
 	
 	
 	public Amenity parseAmenity(String tag, String val, boolean relation, Map<String, String> otherTags) {
-		
-		
 		initPoiTypesByTag();
 		PoiType pt = poiTypesByTag.get(tag+"/"+val);
 		if(pt == null) {
@@ -586,7 +584,7 @@ public class MapPoiTypes {
 		while(it.hasNext()) {
 			Entry<String, String> e = it.next();
 			String otag = e.getKey();
-			if(!otag.equals(tag)) {
+			if(!otag.equals(tag) && !otag.equals("name")) {
 				PoiType pat = poiTypesByTag.get(otag+"/"+e.getValue());
 				if(pat == null) {
 					 pat = poiTypesByTag.get(otag);
