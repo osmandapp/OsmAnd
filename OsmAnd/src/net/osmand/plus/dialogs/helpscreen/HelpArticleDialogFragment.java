@@ -29,6 +29,13 @@ public class HelpArticleDialogFragment extends DialogFragment {
 	private static final String ASSET_NAME = "asset_name";
 	private static final String URL = "url";
 	private WebView webView;
+	private static String HEADER_INNER= "<html><head>\n"+
+			"<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, maximum-scale=1\" />\n" +
+			"<meta http-equiv=\"cleartype\" content=\"on\" />\n" +
+			"<link href=\"file:///android_asset/style.css\" type=\"text/css\" rel=\"stylesheet\"/>\n" +
+			"</head><body>\n" +
+			"<div class=\"main\">\n";
+	private static String FOOTER_INNER= "</div></body></html>"; 
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -63,10 +70,9 @@ public class HelpArticleDialogFragment extends DialogFragment {
 				String fileContents = getAssetAsString(assetName, getActivity());
 
 				StringBuilder sb = new StringBuilder();
-				sb.append("<HTML><HEAD><LINK href=\"file:///android_asset/style.css\" " +
-						"type=\"text/css\" rel=\"stylesheet\"/></HEAD><body>");
+				sb.append(HEADER_INNER);
 				sb.append(fileContents);
-				sb.append("</body></HTML>");
+				sb.append(FOOTER_INNER);
 
 				webView.loadDataWithBaseURL("http://osmand.net", sb.toString(), null, "utf-8", null);
 			}
