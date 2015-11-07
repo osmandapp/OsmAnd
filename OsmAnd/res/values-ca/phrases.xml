@@ -1578,4 +1578,22 @@
 	<string name="poi_payment_coins_0.5">S\'accepten monedes de 0,5$</string>
 	<string name="poi_payment_coins_50c12">S\'accepten monedes de 50c, 1€, i 2€</string>
 	<string name="poi_payment_telephone_cards_yes">S\'accepten targes de telèfon</string>
+	<string name="poi_payment_telephone_cards_no">No s\'accepten targes de telèfon</string>
+	<string name="poi_payment_credit_cards_yes">S\'accepten targes de crèdit</string>
+	<string name="poi_payment_credit_cards_no">No s\'accepten targes de crèdit</string>
+	<string name="poi_payment_notes_yes">S\'accepten bitllets</string>
+	<string name="poi_payment_notes_no">No s\'accepten bitllets</string>
+	<string name="poi_payment_electronic_purses_yes">S\'accepta moneda electrònica</string>
+	<string name="poi_payment_electronic_purses_no">No s\'accepta moneda electrònica</string>
+	<string name="poi_payment_cash_yes">S\'accepta efectiu</string>
+	<string name="poi_payment_cash_no">No s\'accepta efectiu</string>
+	<string name="poi_payment_debit_cards_yes">S\'accepten targes de dèbit</string>
+	<string name="poi_payment_debit_cards_no">No s\'accepten targes de dèbit</string>
+	<string name="poi_payment_bitcoin_yes">S\'accepten bitcoins</string>
+	<string name="poi_payment_bitcoin_no">No s\'accepten bitcoins</string>
+	<string name="poi_payment_visa_yes">S\'accepta tarja Visa</string>
+	<string name="poi_payment_visa_no">No s\'accepta tarja Visa</string>
+	<string name="poi_payment_mastercard_yes">S\'accepta Mastercard</string>
+	<string name="poi_payment_mastercard_no">No s\'accepta Mastercard</string>
+	<string name="poi_payment_none">Sense cost</string>
 	</resources>
