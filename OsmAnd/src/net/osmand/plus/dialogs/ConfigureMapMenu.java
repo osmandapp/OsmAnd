@@ -407,8 +407,7 @@ public class ConfigureMapMenu {
 		}
 	}
 	
-	public static String[] mapNamesIds = new String[] { "", "en", "ar", "be", "bg", "ca", "ceb", "cs", "da", "de", "el", "et", "es", "fi", "fr", "gl", "he", "hi",
-			"hr", "ht", "hu", "id", "it", "ja", "ko", "lt", "lv", "ms", "new", "nl", "nn", "no", "pl", "pt", "ro", "ru", "sk", "sl", "sr", "sv", "sw", "te", "th", "tr", "uk", "vi", "vo", "zh" };
+	public static String[] mapNamesIds = new String[] { "", "en", "als", "af", "ar", "az", "be", "bg", "bn", "bpy", "br", "bs", "ca", "ceb", "cs", "cy", "da", "de", "el", "et", "es", "eu", "fa", "fi", "fr", "fy", "ga", "gl", "he", "hi", "hr", "ht", "hu", "hy", "id", "is", "it", "ja", "ka", "ko", "ku", "la", "lb", "lt", "lv", "mk", "ml", "mr", "ms", "nds", "new", "nl", "nn", "no", "nv", "os", "pl", "pms", "pt", "ro", "ru", "sh", "sc", "sk", "sl", "sq", "sr", "sv", "sw", "ta", "te", "th", "tl", "tr", "uk", "vi", "vo", "zh" };
 
 	public static String[] getMapNamesValues(Context ctx) {
 		return new String[] { ctx.getString(R.string.local_map_names), ctx.getString(R.string.lang_en),

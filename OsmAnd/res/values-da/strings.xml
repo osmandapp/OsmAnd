@@ -2008,4 +2008,5 @@
     <string name="rec_audio_description">Audio %1$s</string>
     <string name="rec_video_description">Video %1$s</string>
     <string name="shared_string_update">Opdatering</string>
+    <string name="rendering_attr_hideProposed_name">Skjul foreslåede objekter</string>
     </resources>
