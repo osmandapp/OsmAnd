@@ -2072,4 +2072,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="show_free_version_banner_description">Auch bei der bezahlten Version ist das Banner der kostenlosen Version sichtbar.</string>
 <string name="rendering_attr_hideProposed_name">Vorgeschlagene Objekte ausblenden</string>
     <string name="shared_string_update">Aktualisieren</string>
+    <string name="rec_photo_description">Foto %1$s</string>
+    <string name="rec_video_description">Video %1$s</string>
+    <string name="shared_string_upload">Hochladen</string>
     </resources>
