@@ -1439,4 +1439,11 @@
 	<string name="poi_trees_meadow_orchard">Hort de prat</string>
 	<string name="poi_trees_rubber">Plantes de cautxú</string>
 	<string name="poi_information_nature">Indicador informatiu: natura</string>
+	<string name="poi_boat_storage">Varador</string>
+
+
+<string name="poi_temperature">Temperatura</string>
+	<string name="poi_bathing_yes">Bany: Sí</string>
+	<string name="poi_bathing_no">Bany: no</string>
+
 	</resources>
