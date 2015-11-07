@@ -551,18 +551,6 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	}
 
 	@Override
-	public void onResume() {
-		super.onResume();
-		getMyApplication().getDownloadThread().setUiActivity(this);
-	}
-
-	@Override
-	public void onPause() {
-		super.onPause();
-		getMyApplication().getDownloadThread().resetUiActivity(this);
-	}
-
-	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
 		map.setLatLon(mapCenter.getLatitude(), mapCenter.getLongitude());

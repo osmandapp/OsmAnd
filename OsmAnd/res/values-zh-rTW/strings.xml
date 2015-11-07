@@ -1965,4 +1965,5 @@
     
     
     <string name="shared_string_update">更新</string>
-    </resources>
+    <string name="rendering_attr_hideProposed_name">隱藏已提出的物件</string>
+</resources>

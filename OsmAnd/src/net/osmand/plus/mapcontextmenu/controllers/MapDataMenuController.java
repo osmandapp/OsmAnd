@@ -23,6 +23,8 @@ import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 public class MapDataMenuController extends MenuController {
@@ -146,11 +148,13 @@ public class MapDataMenuController extends MenuController {
 	@Override
 	public void updateData() {
 		if (indexItem == null) {
-			otherIndexItems = downloadThread.getIndexes().getIndexItems(region.getRegionDownloadNameLC());
-			for (IndexItem i : otherIndexItems) {
+			otherIndexItems = new LinkedList<>(downloadThread.getIndexes().getIndexItems(region));
+			Iterator<IndexItem> it = otherIndexItems.iterator();
+			while (it.hasNext()) {
+				IndexItem i = it.next();
 				if (i.getType() == DownloadActivityType.NORMAL_FILE) {
 					indexItem = i;
-					otherIndexItems.remove(i);
+					it.remove();
 					break;
 				}
 			}
@@ -226,6 +230,7 @@ public class MapDataMenuController extends MenuController {
 						}
 
 						protected void onPostExecute(Void result) {
+							getMapActivity().getMapLayers().getDownloadedRegionsLayer().updateObjects();
 							getMapActivity().refreshMap();
 						}
 

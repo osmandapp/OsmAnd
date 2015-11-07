@@ -24,6 +24,7 @@ public class DownloadResources extends DownloadResourceGroup {
 	private Map<String, String> indexFileNames = new LinkedHashMap<>();
 	private Map<String, String> indexActivatedFileNames = new LinkedHashMap<>();
 	private List<IndexItem> rawResources;
+	private Map<WorldRegion, List<IndexItem> > groupByRegion;
 	private List<IndexItem> itemsToUpdate = new ArrayList<>();
 	public static final String WORLD_SEAMARKS_KEY = "world_seamarks_basemap";
 	
@@ -67,17 +68,14 @@ public class DownloadResources extends DownloadResourceGroup {
 		return res;
 	}
 
-	public List<IndexItem> getIndexItems(String fileNamePrefix) {
-		List<IndexItem> res = new LinkedList<>();
-		if (rawResources == null) {
-			return res;
-		}
-		for (IndexItem item : rawResources) {
-			if (item.getFileName().toLowerCase().startsWith(fileNamePrefix)) {
-				res.add(item);
+	public List<IndexItem> getIndexItems(WorldRegion region) {
+		if (groupByRegion != null) {
+			List<IndexItem> res = groupByRegion.get(region);
+			if (res != null) {
+				return res;
 			}
 		}
-		return res;
+		return new LinkedList<>();
 	}
 
 	public void updateLoadedFiles() {
@@ -276,6 +274,8 @@ public class DownloadResources extends DownloadResourceGroup {
 				}
 			}
 		}
+		this.groupByRegion = groupByRegion;
+
 		LinkedList<WorldRegion> queue = new LinkedList<WorldRegion>();
 		LinkedList<DownloadResourceGroup> parent = new LinkedList<DownloadResourceGroup>();
 		DownloadResourceGroup worldSubregions = new DownloadResourceGroup(this, DownloadResourceGroupType.SUBREGIONS);
