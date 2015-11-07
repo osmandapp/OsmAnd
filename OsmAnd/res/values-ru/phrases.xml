@@ -1064,15 +1064,15 @@
 	<string name="poi_information_terminal">Информационный терминал</string>
 	<string name="poi_information_route_marker">Метка маршрута</string>
 	<string name="poi_information_hikingmap">Карта для пешего туризма</string>
-	<string name="poi_information_nature">Информация о природе</string>
-	<string name="poi_information_wildlife">Информация о дикой природе</string>
-	<string name="poi_information_history">Историческая информация</string>
+	<string name="poi_information_nature">Информация: о природе</string>
+	<string name="poi_information_wildlife">Информация: о дикой природе</string>
+	<string name="poi_information_history">Информация: историческая</string>
 	<string name="poi_information_sign">Знак</string>
 	<string name="poi_information_audioguide">Аудиогид</string>
 	<string name="poi_information_bicyclemap">Карта для велосипедистов</string>
 	<string name="poi_information_tactile_model">Тактильная модель</string>
 	<string name="poi_information_tactile_map">Тактильная карта</string>
-	<string name="poi_board_type_notice">Доска с объявлениями</string>
+	<string name="poi_board_type_notice">Доска объявлений</string>
 	<string name="poi_board_type_plants">Информация о растениях</string>
 	<string name="poi_board_type_geology">Информация о геологии</string>
 	<string name="poi_board_type_public_transport">Расписание общественного транспорта</string>
@@ -1154,11 +1154,11 @@
 	<string name="poi_traffic_enforcement">Контроль ПДД</string>
 
 	<string name="poi_enforcement_traffic_signals">Контроль проезда на красный сигнал светофора</string>
-	<string name="poi_enforcement_maxspeed">Контроль максимальной скорости</string>
-	<string name="poi_enforcement_maxheight">Контроль максимальной высоты</string>
-	<string name="poi_enforcement_mindistance">Контроль минимальной дистанции между автомобилями</string>
-	<string name="poi_enforcement_access">Контроль доступа</string>
-	<string name="poi_enforcement_toll">Контроль оплаты</string>
+	<string name="poi_enforcement_maxspeed">Контроль: максимальная скорость</string>
+	<string name="poi_enforcement_maxheight">Контроль: максимальная высота</string>
+	<string name="poi_enforcement_mindistance">Контроль: минимальная дистанция между автомобилями</string>
+	<string name="poi_enforcement_access">Контроль: доступ</string>
+	<string name="poi_enforcement_toll">Контроль: оплата</string>
 
 	<string name="poi_icn_ref">Узел международной велосипедной сети</string>
 	<string name="poi_ncn_ref">Узел национальной велосипедной сети</string>
