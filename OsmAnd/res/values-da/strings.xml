@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
     <string name="av_def_action_audio">Optag audio</string>
@@ -2008,4 +2009,6 @@
     
     <string name="shared_string_update">Opdatering</string>
     <string name="rendering_attr_hideProposed_name">Skjul foreslåede objekter</string>
+    <string name="read_more">Læs mere</string>
+    <string name="whats_new">Hvad er nyt i</string>
     </resources>
