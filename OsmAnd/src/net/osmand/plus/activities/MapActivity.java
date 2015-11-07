@@ -847,7 +847,8 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents {
 				mapActions.contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
 			}
 			return true;
-		} else if (keyCode == KeyEvent.KEYCODE_MENU && event.getRepeatCount() == 0) {
+		} else if (keyCode == KeyEvent.KEYCODE_MENU /*&& event.getRepeatCount() == 0*/) {
+			// repeat count 0 doesn't work for samsung, 1 doesn't work for lg
 			toggleDrawer();
 			return true;
 		} else if (settings.ZOOM_BY_TRACKBALL.get()) {
