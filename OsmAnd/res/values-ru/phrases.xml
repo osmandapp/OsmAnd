@@ -1408,7 +1408,7 @@
 	<string name="poi_description_payment">Описание способа оплаты</string>
 
 	<string name="poi_internet_access_fee_yes">Доступ в Интернет - взимается плата</string>
-	<string name="poi_internet_access_fee_no">Плата за интернет не взимается</string>
+	<string name="poi_internet_access_fee_no">Доступ в Интернет - бесплатно</string>
 
 	<string name="poi_events_venue">Место проведения мероприятий</string>
 
