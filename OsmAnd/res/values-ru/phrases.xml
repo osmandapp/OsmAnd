@@ -896,8 +896,8 @@
 	<string name="poi_brand">Торговая марка</string>
 	<string name="poi_fee_yes">Взимается оплата</string>
 	<string name="poi_fee_no">Оплата не взимается</string>
-	<string name="poi_drinking_water_yes">Питьевая вода</string>
-	<string name="poi_drinking_water_no">Непригодная для питья вода</string>
+	<string name="poi_drinking_water_yes">Питьевая вода: да</string>
+	<string name="poi_drinking_water_no">Питьевая вода: нет</string>
 	<string name="poi_supervised_yes">Контролируемый объект</string>
 	<string name="poi_supervised_no">Неконтролируемый объект</string>
 	<string name="poi_seasonal_yes">Сезонный объект</string>
@@ -934,7 +934,7 @@
 	<string name="poi_access_no">Нет доступа</string>
 	<string name="poi_access_destination">Доступ: пункт назначения</string>
 	<string name="poi_access_permissive">Доступ разрешен владельцем</string>
-	<string name="poi_access_customers">Доступ только для посетителей</string>
+	<string name="poi_access_customers">Доступ для клиентов</string>
 	<string name="poi_access_delivery">Доступ только для доставки</string>
 	<string name="poi_access_agricultural">Доступ только для с/х техники</string>
 
@@ -1170,7 +1170,7 @@
 	<string name="poi_lwn_ref">Узел местной сети пешего туризма</string>
 
 	<string name="poi_route_hiking_iwn_poi">Международный маршрут пешего туризма</string>
-	<string name="poi_route_hiking_nwn_poi">Маршрут национальной сети пешего туризма</string>
+	<string name="poi_route_hiking_nwn_poi">Национальный маршрут пешего туризма</string>
 	<string name="poi_route_hiking_rwn_poi">Маршрут региональной сети пешего туризма</string>
 	<string name="poi_route_hiking_lwn_poi">Маршрут местной сети пешего туризма</string>
 	<string name="poi_route_hiking_ref_poi">Обозначение маршрута пешего туризма</string>
@@ -2374,4 +2374,7 @@
 	<string name="poi_boat_storage">Место для хранения лодок</string>
 
 <string name="poi_kissing_gate">Калитка</string>
+	<string name="poi_facebook">Фейсбук</string>
+	<string name="poi_twitter">Твиттер</string>
+	<string name="poi_skype">Скайп</string>
 	</resources>
