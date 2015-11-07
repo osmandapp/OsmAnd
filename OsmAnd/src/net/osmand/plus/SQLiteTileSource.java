@@ -82,13 +82,11 @@ public class SQLiteTileSource implements ITileSource {
 
 	@Override
 	public int getMaximumZoomSupported() {
-		getDatabase();
 		return base != null ? base.getMaximumZoomSupported() : maxZoom;
 	}
 
 	@Override
 	public int getMinimumZoomSupported() {
-		getDatabase();
 		return base != null ? base.getMinimumZoomSupported() : minZoom;
 	}
 
@@ -275,7 +273,6 @@ public class SQLiteTileSource implements ITileSource {
 		if (db == null) {
 			return false;
 		}
-		long time = System.currentTimeMillis();
 		try {
 			int z = getFileZoom(zoom);
 			SQLiteCursor cursor = db.rawQuery(
@@ -283,13 +280,13 @@ public class SQLiteTileSource implements ITileSource {
 			try {
 				boolean e = cursor.moveToFirst();
 				cursor.close();
-
 				return e;
 			} catch (SQLiteDiskIOException e) {
 				return false;
 			}
 		} finally {
 			if (LOG.isDebugEnabled()) {
+				long time = System.currentTimeMillis();
 				LOG.debug("Checking tile existance x = " + x + " y = " + y + " z = " + zoom + " for " + (System.currentTimeMillis() - time)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 			}
 		}
