@@ -22,8 +22,11 @@ import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.mapcontextmenu.MapContextMenu;
+import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProviderSelection;
@@ -65,7 +68,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 	private static int ZOOM_TO_SHOW_MAP_NAMES = 6;
 	private static int ZOOM_AFTER_BASEMAP = 12;
 
-	private static int ZOOM_TO_SHOW_BORDERS_ST = 5;
+	private static int ZOOM_TO_SHOW_BORDERS_ST = 4;
 	private static int ZOOM_TO_SHOW_BORDERS = 7;
 	private static int ZOOM_TO_SHOW_SELECTION_ST = 3;
 	private static int ZOOM_TO_SHOW_SELECTION = 10;
@@ -207,7 +210,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 	private boolean checkIfObjectDownloaded(String downloadName) {
 		final String regionName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName)
 				+ IndexConstants.BINARY_MAP_INDEX_EXT;
-		final String roadsRegionName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName) + "-roads"
+		final String roadsRegionName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName) + ".road"
 				+ IndexConstants.BINARY_MAP_INDEX_EXT;
 		return rm.getIndexFileNames().containsKey(regionName) || rm.getIndexFileNames().containsKey(roadsRegionName);
 	}
@@ -404,7 +407,16 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 	// IContextMenuProvider
 	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> objects) {
-		getWorldRegionFromPoint(tileBox, point, objects);
+		boolean isMenuVisible = false;
+		if (view.getContext() instanceof MapActivity) {
+			MapActivity mapActivity = (MapActivity) view.getContext();
+			MapContextMenu menu = mapActivity.getContextMenu();
+			MapMultiSelectionMenu multiMenu = mapActivity.getMultiSelectionMenu();
+			isMenuVisible = menu.isVisible() || multiMenu.isVisible();
+		}
+		if (!isMenuVisible) {
+			getWorldRegionFromPoint(tileBox, point, objects);
+		}
 	}
 
 	@Override
