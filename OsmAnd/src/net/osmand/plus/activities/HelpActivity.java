@@ -13,7 +13,6 @@ import net.osmand.plus.dialogs.HelpArticleDialogFragment;
 
 import org.apache.commons.logging.Log;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -22,11 +21,9 @@ import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -128,43 +125,23 @@ public class HelpActivity extends OsmandActionBarActivity {
 
 		private List<HelpMenuItem> createBeginWithOsmandItems() {
 			ArrayList<HelpMenuItem> arrayList = new ArrayList<>();
-			ShowArticleOnTouchListener listener = new ShowArticleOnTouchListener(
-					"feature_articles/start.html", getActivity(), getString(R.string.first_usage_item));
-			HelpMenuItem.Builder builder = new HelpMenuItem.Builder()
-					.setTitle(R.string.first_usage_item, getActivity())
-					.setDescription(R.string.first_usage_item_description, getActivity())
-					.setListener(listener);
-			arrayList.add(builder.create());
-			listener = new ShowArticleOnTouchListener(
-					"feature_articles/navigation.html", getActivity(), getString(R.string.shared_string_navigation));
-			builder = new HelpMenuItem.Builder()
-					.setTitle(R.string.shared_string_navigation, getActivity())
-					.setDescription(R.string.navigation_item_description, getActivity())
-					.setListener(listener);
-			arrayList.add(builder.create());
-			listener = new ShowArticleOnTouchListener("feature_articles/faq.html", getActivity(), getString(R.string.faq_item));
-			builder = new HelpMenuItem.Builder()
-					.setTitle(R.string.faq_item, getActivity())
-					.setDescription(R.string.faq_item_description, getActivity())
-					.setListener(listener);
-			arrayList.add(builder.create());
+			arrayList.add(new HelpMenuItem(R.string.first_usage_item, R.string.first_usage_item_description, -1,
+					"feature_articles/start.html", getActivity()));
+			arrayList.add(new HelpMenuItem(R.string.shared_string_navigation, R.string.navigation_item_description, -1,
+					"feature_articles/navigation.html", getActivity()));
+			arrayList.add(new HelpMenuItem(R.string.faq_item, R.string.faq_item_description, -1,
+					"feature_articles/faq.html", getActivity()));
 			return arrayList;
 		}
 
 		private List<HelpMenuItem> createFeaturesItems() {
 			ArrayList<HelpMenuItem> arrayList = new ArrayList<>();
-			String name = getActivity().getString(R.string.map_viewing_item);
-			ShowArticleOnTouchListener listener = new ShowArticleOnTouchListener(
-					"feature_articles/map-viewing.html", getActivity(), name);
-			arrayList.add(new HelpMenuItem(name, listener));
-			name = getActivity().getString(R.string.search_on_the_map_item);
-			listener = new ShowArticleOnTouchListener(
-					"feature_articles/find-something-on-map.html", getActivity(), name);
-			arrayList.add(new HelpMenuItem(name, listener));
-			name = getActivity().getString(R.string.planning_trip_item);
-			listener = new ShowArticleOnTouchListener(
-					"feature_articles/trip-planning.html", getActivity(), name);
-			arrayList.add(new HelpMenuItem(name, listener));
+			arrayList.add(new HelpMenuItem(R.string.map_viewing_item, -1, -1,
+					"feature_articles/map-viewing.html", getActivity()));
+			arrayList.add(new HelpMenuItem(R.string.search_on_the_map_item, -1, -1,
+					"feature_articles/find-something-on-map.html", getActivity()));
+			arrayList.add(new HelpMenuItem(R.string.planning_trip_item, -1, -1,
+					"feature_articles/trip-planning.html", getActivity()));
 			final String legendName = getActivity().getString(R.string.map_legend);
 			View.OnClickListener onClickListener = new View.OnClickListener() {
 				@Override
@@ -173,22 +150,18 @@ public class HelpActivity extends OsmandActionBarActivity {
 							.show(getFragmentManager(), null);
 				}
 			};
-			arrayList.add(new HelpMenuItem(legendName, onClickListener));
+			arrayList.add(new HelpMenuItem(legendName, null, onClickListener));
 			return arrayList;
 		}
 
 		private List<HelpMenuItem> createPluginsItems() {
 			ArrayList<HelpMenuItem> arrayList = new ArrayList<>();
-			HelpMenuItem.Builder builder = new HelpMenuItem.Builder();
 			for (final OsmandPlugin osmandPlugin : OsmandPlugin.getAvailablePlugins()) {
-				builder.reset();
-				builder.setTitle(osmandPlugin.getName())
-						.setIcon(osmandPlugin.getLogoResourceId());
 				final String helpFileName = osmandPlugin.getHelpFileName();
 				if (helpFileName != null) {
-					builder.setListener(new ShowArticleOnTouchListener(helpFileName, getActivity(), osmandPlugin.getName()));
+					arrayList.add(new HelpMenuItem(osmandPlugin.getName(), null, osmandPlugin.getLogoResourceId(), 
+							helpFileName, getActivity()));
 				}
-				arrayList.add(builder.create());
 			}
 			return arrayList;
 		}
@@ -196,32 +169,22 @@ public class HelpActivity extends OsmandActionBarActivity {
 		private List<HelpMenuItem> createOtherItems() {
 			ArrayList<HelpMenuItem> arrayList = new ArrayList<>();
 			String name = getActivity().getString(R.string.instalation_troubleshooting_item);
-			ShowArticleOnTouchListener listener = new ShowArticleOnTouchListener(
-					"feature_articles/installation-and-troubleshooting.html", getActivity(), name);
-			arrayList.add(new HelpMenuItem(name, listener));
-
-			name = getActivity().getString(R.string.techical_articles_item);
-			listener = new ShowArticleOnTouchListener(
-					"feature_articles/technical-articles.html", getActivity(), name);
-			arrayList.add(new HelpMenuItem(name, listener));
-			name = getActivity().getString(R.string.versions_item);
-			listener = new ShowArticleOnTouchListener(
-					"feature_articles/changes.html", getActivity(), name);
-			arrayList.add(new HelpMenuItem(name, listener));
+			arrayList.add(new HelpMenuItem(R.string.instalation_troubleshooting_item, -1, -1, 
+					"feature_articles/installation-and-troubleshooting.html", getActivity()));
+			arrayList.add(new HelpMenuItem(R.string.techical_articles_item, -1, -1, 
+					"feature_articles/technical-articles.html", getActivity()));
+			arrayList.add(new HelpMenuItem(R.string.versions_item, -1, -1, 
+					"feature_articles/changes.html", getActivity()));
 
 			String releasedate = "";
 			if (!this.getString(R.string.app_edition).equals("")) {
 				releasedate = this.getString(R.string.shared_string_release) + ": \t" + this.getString(R.string.app_edition);
 			}
 			String version = Version.getFullVersion(getOsmandApplication()) + " " + releasedate;
-			listener = new ShowArticleOnTouchListener(
+			ShowArticleOnTouchListener listener = new ShowArticleOnTouchListener(
 					"feature_articles/about.html", getActivity(), name);
-			HelpMenuItem.Builder builder = new HelpMenuItem.Builder()
-					.setTitle(R.string.shared_string_about, getActivity())
-					.setDescription(version)
-					.setListener(listener);
 
-			arrayList.add(builder.create());
+			arrayList.add(new HelpMenuItem(getActivity().getString(R.string.shared_string_about), version, listener));
 			return arrayList;
 		}
 
@@ -441,28 +404,32 @@ public class HelpActivity extends OsmandActionBarActivity {
 	
 	public static class HelpMenuItem {
 		private final String title;
-		private final String desription;
+		private final String description;
 		@DrawableRes
 		private final int icon;
 		private final OnClickListener onClickListener;
 
-		public HelpMenuItem(String title) {
-			this(title, null);
-		}
 
-		public HelpMenuItem(@StringRes int title, Context context) {
-			this(context.getString(title));
-		}
-
-		public HelpMenuItem(String title, OnClickListener onClickListener) {
-			this(title, null, -1, onClickListener);
-		}
-
-		private HelpMenuItem(String title, String desription, @DrawableRes int icon,
-							 OnClickListener onClickListener) {
-			this.title = title;
-			this.desription = desription;
+		public HelpMenuItem(String name, String description, int icon, String helpFileName,
+				FragmentActivity activity) {
 			this.icon = icon;
+			this.title = name;
+			this.description = description;
+			this.onClickListener = new ShowArticleOnTouchListener(name, activity, helpFileName);
+		}
+		
+		public HelpMenuItem(int name, int description, int icon, String helpFileName,
+				FragmentActivity activity) {
+			this.title = activity.getString(name);
+			this.description = description == -1 ? null : activity.getString(description);
+			this.icon = icon;
+			this.onClickListener = new ShowArticleOnTouchListener(title, activity, helpFileName);
+		}
+
+		public HelpMenuItem(String name, String description, OnClickListener onClickListener) {
+			this.title = name;
+			this.description = description;
+			this.icon = -1;
 			this.onClickListener = onClickListener;
 		}
 
@@ -471,7 +438,7 @@ public class HelpActivity extends OsmandActionBarActivity {
 		}
 
 		public String getDesription() {
-			return desription;
+			return description;
 		}
 
 		public int getIcon() {
@@ -482,53 +449,5 @@ public class HelpActivity extends OsmandActionBarActivity {
 			return onClickListener;
 		}
 
-		public static class Builder {
-			private String title = null;
-			private String description = null;
-			private int icon = -1;
-			private OnClickListener listener;
-
-			public Builder setTitle(@StringRes int titleId, Context context) {
-				this.title = context.getString(titleId);
-				return this;
-			}
-
-			public Builder setTitle(String title) {
-				this.title = title;
-				return this;
-			}
-
-			public Builder setDescription(@StringRes int desriptionId, Context context) {
-				this.description = context.getString(desriptionId);
-				return this;
-			}
-
-			public Builder setDescription(String description) {
-				this.description = description;
-				return this;
-			}
-
-			public Builder setIcon(@DrawableRes int icon) {
-				this.icon = icon;
-				return this;
-			}
-
-			public Builder setListener(OnClickListener listener) {
-				this.listener = listener;
-				return this;
-			}
-
-			public Builder reset() {
-				title = null;
-				description = null;
-				icon = -1;
-				listener = null;
-				return this;
-			}
-
-			public HelpMenuItem create() {
-				return new HelpMenuItem(title, description, icon, listener);
-			}
-		}
 	}
 }
