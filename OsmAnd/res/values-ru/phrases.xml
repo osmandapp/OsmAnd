@@ -1073,11 +1073,11 @@
 	<string name="poi_information_tactile_model">Тактильная модель</string>
 	<string name="poi_information_tactile_map">Тактильная карта</string>
 	<string name="poi_board_type_notice">Доска объявлений</string>
-	<string name="poi_board_type_plants">Информация о растениях</string>
-	<string name="poi_board_type_geology">Информация о геологии</string>
-	<string name="poi_board_type_public_transport">Расписание общественного транспорта</string>
-	<string name="poi_board_type_technology">Информация о технологии</string>
-	<string name="poi_board_type_astronomy">Информация об астрономии</string>
+	<string name="poi_board_type_plants">Информация: о растениях</string>
+	<string name="poi_board_type_geology">Информация: о геологии</string>
+	<string name="poi_board_type_public_transport">Информация: расписание общественного транспорта</string>
+	<string name="poi_board_type_technology">Информация: о технологии</string>
+	<string name="poi_board_type_astronomy">Информация: об астрономии</string>
 
 	<string name="poi_tourism_attraction">Достопримечательность</string>
 
