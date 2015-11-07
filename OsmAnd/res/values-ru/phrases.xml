@@ -1169,7 +1169,7 @@
 	<string name="poi_rwn_ref">Узел региональной сети пешего туризма</string>
 	<string name="poi_lwn_ref">Узел местной сети пешего туризма</string>
 
-	<string name="poi_route_hiking_iwn_poi">Маршрут международной сети пешего туризма</string>
+	<string name="poi_route_hiking_iwn_poi">Международный маршрут пешего туризма</string>
 	<string name="poi_route_hiking_nwn_poi">Маршрут национальной сети пешего туризма</string>
 	<string name="poi_route_hiking_rwn_poi">Маршрут региональной сети пешего туризма</string>
 	<string name="poi_route_hiking_lwn_poi">Маршрут местной сети пешего туризма</string>
@@ -2373,4 +2373,5 @@
 
 	<string name="poi_boat_storage">Место для хранения лодок</string>
 
-</resources>
+<string name="poi_kissing_gate">Калитка</string>
+	</resources>
