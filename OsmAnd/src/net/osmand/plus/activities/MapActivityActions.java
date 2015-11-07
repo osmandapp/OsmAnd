@@ -746,17 +746,6 @@ public class MapActivityActions implements DialogProvider {
 			@Override
 			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 				mapActivity.startActivity(new Intent(mapActivity, HelpActivity.class));
-				// FIXME show ABOUT!
-//				showAboutDialog(getMyApplication());
-//				String version = Version.getFullVersion(app);
-//				String vt = this.getString(R.string.about_version) + "\t";
-//				String edition = "";
-//				if (!this.getString(R.string.app_edition).equals("")) {
-//					edition = this.getString(R.string.shared_string_release) + " : \t" + this.getString(R.string.app_edition);
-//				}
-//				tv.setText(vt + version + "\n" +
-//						edition + "\n\n" +
-//						this.getString(R.string.about_content));
 				return true;
 			}
 		}).reg();

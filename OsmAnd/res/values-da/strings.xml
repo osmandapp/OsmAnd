@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
     <string name="av_def_action_audio">Optag audio</string>
@@ -1891,7 +1890,7 @@
     <string name="av_locations">Placeringer</string>
     <string name="tab_title_basic">Grundlæggende</string>
 
-    <string name="tag_poi_amenity">facilitet</string>
+    
     <string name="contact_info">Kontaktoplysninger</string>
     <string name="description">Beskrivelse</string>
     <string name="add_opening_hours">Tilføj åbningstider</string>
@@ -1993,7 +1992,7 @@
     <string name="search_on_the_map_item">Søgning på kortet</string>
     <string name="planning_trip_item">Turplanlægning</string>
 
-    <string name="osmand_ski_maps_item">Skikort</string>
+    
 
     <string name="instalation_troubleshooting_item">Installation og fejlfinding</string>
     <string name="techical_articles_item">Tekniske artikler</string>
@@ -2004,9 +2003,9 @@
     <string name="osm_edit_created_bug">Oprettede OSM fejlregistrering</string>
     <string name="map_legend">Signaturforklaring</string>
     <string name="shared_string_upload">Overfør</string>
-<string name="rec_photo_description">Foto %1$s</string>
-    <string name="rec_audio_description">Audio %1$s</string>
-    <string name="rec_video_description">Video %1$s</string>
+
+    
+    
     <string name="shared_string_update">Opdatering</string>
     <string name="rendering_attr_hideProposed_name">Skjul foreslåede objekter</string>
     </resources>

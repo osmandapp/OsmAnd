@@ -1320,7 +1320,7 @@ public class OsmandSettings {
 		} else {
 			File[] externals = ctx.getExternalFilesDirs(null);
 			for (File file : externals) {
-				if (!file.getAbsolutePath().contains("emulated")) {
+				if (file != null && !file.getAbsolutePath().contains("emulated")) {
 					return file;
 				}
 			}

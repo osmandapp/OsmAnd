@@ -26,19 +26,20 @@ public class WhatsNewDialogFragment extends DialogFragment {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		final OsmandApplication osmandApplication = (OsmandApplication) getActivity().getApplication();
 		final String appVersion = Version.getAppVersion(osmandApplication);
-		builder.setTitle("What's new in " + appVersion)
-				.setMessage(getString(R.string.last_release))
+		builder.setTitle(getString(R.string.whats_new) + " " + appVersion)
+				.setMessage(getString(R.string.release_2_3))
 				.setNegativeButton(R.string.shared_string_close, null);
-		// TODO: 10/28/15 Implement
-		builder.setPositiveButton("Read more", new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				Intent i = new Intent(Intent.ACTION_VIEW);
-				i.setData(Uri.parse(AppInitializer.LATEST_CHANGES_URL));
-				startActivity(i);
-				dismiss();
-			}
-		});
+		if (AppInitializer.LATEST_CHANGES_URL != null) {
+			builder.setPositiveButton(R.string.read_more, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					Intent i = new Intent(Intent.ACTION_VIEW);
+					i.setData(Uri.parse(AppInitializer.LATEST_CHANGES_URL));
+					startActivity(i);
+					dismiss();
+				}
+			});
+		}
 		return builder.create();
 	}
 }

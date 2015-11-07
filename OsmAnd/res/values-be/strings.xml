@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="auto_zoom_none">Без аўтаматычнага маштабаваньня</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="auto_zoom_none">Без аўтаматычнага маштабаваньня</string>
     <string name="auto_zoom_close">Буйней</string>
     <string name="auto_zoom_far">Для сярэдняга маштаба</string>
     <string name="auto_zoom_farthest">Драбней</string>
@@ -1971,13 +1970,13 @@
     <string name="shared_string_qr_code">QR-код</string>
     <string name="map_downloaded">Мапа сьцягнутая</string>
     <string name="feedback">галасаваньне</string>
-    <string name="rec_photo_description">Фота %1$s</string>
+    
     <string name="shared_string_upload">Адаслаць</string>
     <string name="osm_edit_created_poi">Створана OSM POI</string>
     <string name="osm_edit_created_bug">Створана OSM памылка</string>
     <string name="go_to_map">Перайсьці да мапы</string>
-    <string name="rec_audio_description">Аўдыё %1$s</string>
-    <string name="rec_video_description">Відэа %1$s</string>
+    
+    
     <string name="new_version">Новая вэрсія</string>
     <string name="features_menu_group">Адметнасьці</string>
     <string name="other_menu_group">Іншае</string>

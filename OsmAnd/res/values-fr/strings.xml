@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="offline_edition">Modifications hors-ligne</string>
     <string name="offline_edition_descr">Toujours utiliser l\'édition hors-ligne</string>
 
@@ -2066,7 +2065,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="search_on_the_map_item">Rechercher de carte</string>
     <string name="planning_trip_item">Préparer un trajet</string>
 
-    <string name="osmand_ski_maps_item">Cartes de ski OsmAnd</string>
+    
 
     <string name="instalation_troubleshooting_item">Installation et débogage</string>
     <string name="techical_articles_item">Articles techniques</string>
@@ -2078,8 +2077,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="osm_edit_created_bug">Bugs déclarés sur OSM</string>
     <string name="map_legend">Légende</string>
 <string name="shared_string_upload">Téléchargement</string>
-    <string name="rec_photo_description">Photo %1$s</string>
-    <string name="rec_audio_description">Audio %1$s</string>
-    <string name="rec_video_description">Vidéo %1$s</string>
+    
+    
+    
     <string name="shared_string_update">Mise à jour</string>
     </resources>

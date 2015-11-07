@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
   
   <string name="layer_map_appearance">Configureer scherm</string>
   <string name="show_lanes">Toon rijstroken</string>
@@ -2113,9 +2112,9 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="go_to_map">Ga naar de kaart</string>
     <string name="world_map_download_descr">De basis-wereldkaart ontbreekt of is verouderd. Download deze om OsmAnd goed te laten functioneren.</string>
     <string name="shared_string_update">Updaten</string>
-    <string name="rec_photo_description">Foto %1$s</string>
-    <string name="rec_audio_description">Audio %1$s</string>
-    <string name="rec_video_description">Video %1$s</string>
+    
+    
+    
     <string name="shared_string_upload">Upload</string>
     <string name="osm_edit_created_poi">POI in OSM gemaakt</string>
     <string name="osm_edit_created_bug">Bug in OSM gemaakt</string>
