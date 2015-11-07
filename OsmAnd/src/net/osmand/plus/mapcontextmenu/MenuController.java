@@ -105,8 +105,8 @@ public abstract class MenuController extends BaseMenuController {
 		return menuController;
 	}
 
-	public void addPlainMenuItem(int iconId, String text) {
-		builder.addPlainMenuItem(iconId, text);
+	public void addPlainMenuItem(int iconId, String text, boolean needLinks) {
+		builder.addPlainMenuItem(iconId, text, needLinks);
 	}
 
 	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, LatLon latLon) {
@@ -116,7 +116,7 @@ public abstract class MenuController extends BaseMenuController {
 	protected void addMyLocationToPlainItems(PointDescription pointDescription, LatLon latLon) {
 		if (pointDescription != null) {
 			addPlainMenuItem(R.drawable.map_my_location, PointDescription.getLocationName(getMapActivity(),
-					latLon.getLatitude(), latLon.getLongitude(), true).replaceAll("\n", ""));
+					latLon.getLatitude(), latLon.getLongitude(), true).replaceAll("\n", ""), false);
 		}
 	}
 

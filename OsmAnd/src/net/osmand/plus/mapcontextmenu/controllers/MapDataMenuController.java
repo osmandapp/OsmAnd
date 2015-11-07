@@ -23,6 +23,7 @@ import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
+import java.text.DateFormat;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -94,7 +95,7 @@ public class MapDataMenuController extends MenuController {
 
 	@Override
 	protected int getSupportedMenuStatesPortrait() {
-		return MenuState.HEADER_ONLY;
+		return MenuState.HEADER_ONLY | MenuState.HALF_SCREEN;
 	}
 
 	@Override
@@ -133,6 +134,16 @@ public class MapDataMenuController extends MenuController {
 
 	@Override
 	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, LatLon latLon) {
+		if (indexItem != null) {
+			addPlainMenuItem(R.drawable.ic_action_info_dark, indexItem.getSizeDescription(getMapActivity()), false);
+		}
+		if (region != null && !Algorithms.isEmpty(region.getParams().getWikiLink())) {
+			addPlainMenuItem(R.drawable.ic_action_wikipedia, region.getParams().getWikiLink(), true);
+		}
+		if (indexItem != null) {
+			DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(getMapActivity());
+			addPlainMenuItem(R.drawable.ic_action_data, indexItem.getRemoteDate(dateFormat), false);
+		}
 	}
 
 	@Override
@@ -163,11 +174,9 @@ public class MapDataMenuController extends MenuController {
 		topRightTitleButtonController.visible = otherIndexItems.size() > 0;
 		if (indexItem != null) {
 			if (indexItem.isOutdated()) {
-				leftTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_update)
-						+ " (" + indexItem.getSizeDescription(getMapActivity()) + ")";
+				leftTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_update);
 			} else {
-				leftTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_download)
-						+ " (" + indexItem.getSizeDescription(getMapActivity()) + ")";
+				leftTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_download);
 			}
 		}
 		rightTitleButtonController.visible = indexItem != null && indexItem.isDownloaded();

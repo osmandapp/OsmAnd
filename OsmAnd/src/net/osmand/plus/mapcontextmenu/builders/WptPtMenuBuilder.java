@@ -27,7 +27,7 @@ public class WptPtMenuBuilder extends MenuBuilder {
 		super.build(view);
 
 		if (!Algorithms.isEmpty(wpt.desc)) {
-			buildRow(view, R.drawable.ic_action_note_dark, wpt.desc, 0);
+			buildRow(view, R.drawable.ic_action_note_dark, wpt.desc, 0, true);
 		}
 
 		buildPlainMenuItems(view);
