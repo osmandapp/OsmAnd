@@ -13,6 +13,7 @@ public class PoiType extends AbstractPoiType {
 	private String osmValue;
 	private String osmValue2;
 	
+	private String nameTag;
 	private boolean text;
 	private boolean nameOnly;
 	private boolean relation;
@@ -118,6 +119,14 @@ public class PoiType extends AbstractPoiType {
     public void setText(boolean text) {
     	this.text = text;
     }
+    
+    public String getNameTag() {
+		return nameTag;
+	}
+    
+    public void setNameTag(String nameTag) {
+		this.nameTag = nameTag;
+	}
 
 	public boolean isNameOnly() {
 		return nameOnly;
