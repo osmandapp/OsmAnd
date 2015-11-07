@@ -1495,5 +1495,87 @@
 
 	<string name="poi_services">Àrea de servei</string>
 	<string name="poi_mini_roundabout">Rotonda petita</string>
-	<string name="poi_railway_crossing">Pas a nivell</string>
+	<string name="poi_railway_crossing">Pas de vies</string>
+	<string name="poi_railway_level_crossing">Pas a nivell</string>
+	<string name="poi_bird_hide">Lloc per observar aus</string>
+	<string name="poi_leisure_common">Àrea de lleure comuna</string>
+	<string name="poi_garden">Jardí</string>
+
+	<string name="poi_heath">Prat</string>
+	<string name="poi_grass">Gespa</string>
+	<string name="poi_grassland">Camp de gespa</string>
+	<string name="poi_scrub">Matollar</string>
+	<string name="poi_farmland">Terres de conreu</string>
+	<string name="poi_sand">Sorra</string>
+
+	<string name="poi_dead_wood">Arbres morts</string>
+
+	<string name="poi_passing_place">Lloc de pas</string>
+	<string name="poi_level">Nivell</string>
+	<string name="poi_piste_difficulty_easy">Dificultat de pista: fàcil</string>
+	<string name="poi_piste_difficulty_intermediate">Dificultat de pista: intermèdia</string>
+	<string name="poi_piste_difficulty_advanced">Dificultat de pista: avançada</string>
+	<string name="poi_piste_difficulty_novice">Dificultat de pista: principiant</string>
+	<string name="poi_piste_difficulty_expert">Dificultat de pista: expert</string>
+	<string name="poi_piste_difficulty_freeride">Dificultat de pista: lliure</string>
+	<string name="poi_garden_type_residential">Tipus de jardí: residencial</string>
+	<string name="poi_garden_type_community">Tipus de jardí: comunitari</string>
+	<string name="poi_garden_type_private">Tipus de jardí: privat</string>
+	<string name="poi_garden_type_botanical">Tipus de jardí: botànic</string>
+
+	<string name="poi_garden_style_kitchen">Estil de jardí: gastronòmic</string>
+	<string name="poi_garden_style_rosarium">Estil de jardí: roser</string>
+	<string name="poi_garden_style_french">Estil de jardí: francès</string>
+	<string name="poi_garden_style_english">Estil de jardí: anglès</string>
+	<string name="poi_garden_style_japanese">Estil de jardí: japonès</string>
+
+	<string name="poi_capacity">Capacitat</string>
+	<string name="poi_capacity_disabled_yes">Llocs reservats a persones amb discapacitat</string>
+	<string name="poi_capacity_disabled_no">Sense llocs reservats a persones amb discapacitat</string>
+	<string name="poi_capacity_disabled">Llocs reservats a persones amb discapacitat</string>
+	<string name="poi_capacity_women_yes">Llocs reservats per a dones</string>
+	<string name="poi_capacity_women_no">Sense llocs reservats per a dones</string>
+	<string name="poi_capacity_women">Llocs reservats per a dones</string>
+	<string name="poi_capacity_pupils">Llocs reservats per a estudiants</string>
+	<string name="poi_capacity_teachers">Llocs reservats a professors</string>
+	<string name="poi_capacity_parent_yes">Llocs reservats per a pares</string>
+	<string name="poi_capacity_parent_no">Sense llocs reservats a pares</string>
+	<string name="poi_capacity_parent">Llocs reservats per a pares</string>
+
+	<string name="poi_aerialway_occupancy">Capacitat de cabina/cadira/cotxe</string>
+	<string name="poi_aerialway_capacity">Capacitat per hora</string>
+	<string name="poi_aerialway_duration">Temps de viatge de mitjana, minuts</string>
+	<string name="poi_aerialway_heating_yes">Amb calefacció</string>
+	<string name="poi_aerialway_heating_no">Sense calefacció</string>
+	<string name="poi_aerialway_bicycle_yes">Bicicletes: permeses</string>
+	<string name="poi_aerialway_bicycle_no">Bicicletes: no es permeten</string>
+	<string name="poi_aerialway_bicycle_summer">Bicicleta: permesses només a l\'estiu</string>
+	<string name="poi_aerialway_access_entry">Només entrada</string>
+	<string name="poi_aerialway_access_exit">Només sortida</string>
+	<string name="poi_aerialway_access_both">Entrada i sortida</string>
+	<string name="poi_aerialway_summer_access_entry">Accés d\'estiu: només entrada</string>
+	<string name="poi_aerialway_summer_access_exit">Accés d\'estiu: només sortida</string>
+	<string name="poi_aerialway_summer_access_both">Accés d\'estiu: entrada i sortida</string>
+
+	<string name="poi_stars_1">Estrelles: 1 (Turista)</string>
+	<string name="poi_stars_1s">Estrelles: 1S (Turista superior)</string>
+	<string name="poi_stars_2">Estrelles: 2 (estàndard)</string>
+	<string name="poi_stars_2s">Estrelles: 2S (Estàndard superior)</string>
+	<string name="poi_stars_3">Estrelles: 3 (Confort)</string>
+	<string name="poi_stars_3s">Estrelles: 3S (Confort superior)</string>
+	<string name="poi_stars_4">Estrelles: 4 (Primera classe)</string>
+	<string name="poi_stars_4s">Estrelles: 4S (Primera classe superior)</string>
+	<string name="poi_stars_5">Estrelles: 5 (Luxe)</string>
+	<string name="poi_stars_5s">Estrelles: 5S (Luxe superior)</string>
+	<string name="poi_stars_6">Estrelles: 6</string>
+	<string name="poi_stars_7">Estrelles: 7</string>
+	<string name="poi_rooms">Habitacions</string>
+
+	<string name="poi_love_hotel">Hotel per parelles</string>
+
+	<string name="poi_payment_coins_yes">S\'accepten monedes</string>
+	<string name="poi_payment_coins_no">No s\'accepten monedes</string>
+	<string name="poi_payment_coins_0.5">S\'accepten monedes de 0,5$</string>
+	<string name="poi_payment_coins_50c12">S\'accepten monedes de 50c, 1€, i 2€</string>
+	<string name="poi_payment_telephone_cards_yes">S\'accepten targes de telèfon</string>
 	</resources>
