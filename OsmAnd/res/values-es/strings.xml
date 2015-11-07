@@ -1940,7 +1940,7 @@
     <string name="first_usage_item_description">Cómo descargar mapas, configurar ajustes básicos</string>
     <string name="navigation_item_description">Configuración de navegación</string>
     <string name="faq_item">Preguntas Frecuentes</string>
-    <string name="faq_item_description">Cómo usar los complementos</string>
+    <string name="faq_item_description">Preguntas Frecuentes</string>
     <string name="map_viewing_item">Vista del mapa</string>
     <string name="search_on_the_map_item">Búsqueda en el mapa</string>
     <string name="planning_trip_item">Planeando un viaje</string>
