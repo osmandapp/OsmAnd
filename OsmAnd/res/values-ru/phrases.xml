@@ -896,8 +896,8 @@
 	<string name="poi_brand">Торговая марка</string>
 	<string name="poi_fee_yes">Взимается оплата</string>
 	<string name="poi_fee_no">Оплата не взимается</string>
-	<string name="poi_drinking_water_yes">Питьевая вода</string>
-	<string name="poi_drinking_water_no">Непригодная для питья вода</string>
+	<string name="poi_drinking_water_yes">Питьевая вода: да</string>
+	<string name="poi_drinking_water_no">Питьевая вода: нет</string>
 	<string name="poi_supervised_yes">Контролируемый объект</string>
 	<string name="poi_supervised_no">Неконтролируемый объект</string>
 	<string name="poi_seasonal_yes">Сезонный объект</string>
@@ -934,7 +934,7 @@
 	<string name="poi_access_no">Нет доступа</string>
 	<string name="poi_access_destination">Доступ: пункт назначения</string>
 	<string name="poi_access_permissive">Доступ разрешен владельцем</string>
-	<string name="poi_access_customers">Доступ только для посетителей</string>
+	<string name="poi_access_customers">Доступ для клиентов</string>
 	<string name="poi_access_delivery">Доступ только для доставки</string>
 	<string name="poi_access_agricultural">Доступ только для с/х техники</string>
 
@@ -1064,20 +1064,20 @@
 	<string name="poi_information_terminal">Информационный терминал</string>
 	<string name="poi_information_route_marker">Метка маршрута</string>
 	<string name="poi_information_hikingmap">Карта для пешего туризма</string>
-	<string name="poi_information_nature">Информация о природе</string>
-	<string name="poi_information_wildlife">Информация о дикой природе</string>
-	<string name="poi_information_history">Историческая информация</string>
+	<string name="poi_information_nature">Информация: о природе</string>
+	<string name="poi_information_wildlife">Информация: о дикой природе</string>
+	<string name="poi_information_history">Информация: историческая</string>
 	<string name="poi_information_sign">Знак</string>
 	<string name="poi_information_audioguide">Аудиогид</string>
 	<string name="poi_information_bicyclemap">Карта для велосипедистов</string>
 	<string name="poi_information_tactile_model">Тактильная модель</string>
 	<string name="poi_information_tactile_map">Тактильная карта</string>
-	<string name="poi_board_type_notice">Доска с объявлениями</string>
-	<string name="poi_board_type_plants">Информация о растениях</string>
-	<string name="poi_board_type_geology">Информация о геологии</string>
-	<string name="poi_board_type_public_transport">Расписание общественного транспорта</string>
-	<string name="poi_board_type_technology">Информация о технологии</string>
-	<string name="poi_board_type_astronomy">Информация об астрономии</string>
+	<string name="poi_board_type_notice">Доска объявлений</string>
+	<string name="poi_board_type_plants">Информация: о растениях</string>
+	<string name="poi_board_type_geology">Информация: о геологии</string>
+	<string name="poi_board_type_public_transport">Информация: расписание общественного транспорта</string>
+	<string name="poi_board_type_technology">Информация: о технологии</string>
+	<string name="poi_board_type_astronomy">Информация: об астрономии</string>
 
 	<string name="poi_tourism_attraction">Достопримечательность</string>
 
@@ -1092,18 +1092,18 @@
 	<string name="poi_smoking_no">Курение запрещено</string>
 	<string name="poi_smoking_outside">Курение разрешено только снаружи</string>
 	<string name="poi_smoking_yes">Курение разрешено</string>
-	<string name="poi_smoking_separated">Курение разрешено в отдельном помещении без эффективного отделения</string>
-	<string name="poi_smoking_isolated">Курение разрешено в отдельном помещении с эффективым отделением</string>
+	<string name="poi_smoking_separated">Курение разрешено в отдельном помещении</string>
+	<string name="poi_smoking_isolated">Курение разрешено в специальной комнате</string>
 	<string name="poi_smoking_dedicated">Специализированное заведение для курящих</string>
 
-	<string name="poi_toll_yes">Оплата за проезд взимается</string>
-	<string name="poi_toll_no">Оплата за проезд не взимается</string>
-	<string name="poi_toll_hgv_yes">Оплата за проезд взимается для грузовых автомобилей</string>
+	<string name="poi_toll_yes">Платно</string>
+	<string name="poi_toll_no">Бесплатно</string>
+	<string name="poi_toll_hgv_yes">Платно для грузовых автомобилей</string>
 	<string name="poi_tactile_paving_yes">С тактильным покрытием</string>
 	<string name="poi_tactile_paving_no">Без тактильного покрытия</string>
 	<string name="poi_traffic_signals_sound_yes">Со звуковым сигналом</string>
 	<string name="poi_traffic_signals_sound_no">Без звукового сигнала</string>
-	<string name="poi_traffic_signals_sound_walk">Со звуковым сигналом только когда переход разрешён</string>
+	<string name="poi_traffic_signals_sound_walk">Со звуковым сигналом, когда переход разрешён</string>
 
 	<string name="poi_rescue_station">Спасательная станция</string>
 
@@ -1111,7 +1111,7 @@
 	<string name="poi_mini_roundabout">Мини круговое движение</string>
 	<string name="poi_railway_crossing">Железнодорожный переход</string>
 	<string name="poi_railway_level_crossing">Железнодорожный переезд</string>
-	<string name="poi_bird_hide">Укрытие для наблюдения за птицами</string>
+	<string name="poi_bird_hide">Место для наблюдения за птицами</string>
 	<string name="poi_leisure_common">Общедоступная площадка для отдыха</string>
 	<string name="poi_garden">Сад</string>
 
@@ -1153,12 +1153,12 @@
 
 	<string name="poi_traffic_enforcement">Контроль ПДД</string>
 
-	<string name="poi_enforcement_traffic_signals">Контроль проезда на красный сигнал светофора</string>
-	<string name="poi_enforcement_maxspeed">Контроль максимальной скорости</string>
-	<string name="poi_enforcement_maxheight">Контроль максимальной высоты</string>
-	<string name="poi_enforcement_mindistance">Контроль минимальной дистанции между автомобилями</string>
-	<string name="poi_enforcement_access">Контроль доступа</string>
-	<string name="poi_enforcement_toll">Контроль оплаты</string>
+	<string name="poi_enforcement_traffic_signals">Контроль: проезд на красный сигнал светофора</string>
+	<string name="poi_enforcement_maxspeed">Контроль: максимальная скорость</string>
+	<string name="poi_enforcement_maxheight">Контроль: максимальная высота</string>
+	<string name="poi_enforcement_mindistance">Контроль: минимальная дистанция между автомобилями</string>
+	<string name="poi_enforcement_access">Контроль: доступ</string>
+	<string name="poi_enforcement_toll">Контроль: оплата</string>
 
 	<string name="poi_icn_ref">Узел международной велосипедной сети</string>
 	<string name="poi_ncn_ref">Узел национальной велосипедной сети</string>
@@ -1169,8 +1169,8 @@
 	<string name="poi_rwn_ref">Узел региональной сети пешего туризма</string>
 	<string name="poi_lwn_ref">Узел местной сети пешего туризма</string>
 
-	<string name="poi_route_hiking_iwn_poi">Маршрут международной сети пешего туризма</string>
-	<string name="poi_route_hiking_nwn_poi">Маршрут национальной сети пешего туризма</string>
+	<string name="poi_route_hiking_iwn_poi">Международный маршрут пешего туризма</string>
+	<string name="poi_route_hiking_nwn_poi">Национальный маршрут пешего туризма</string>
 	<string name="poi_route_hiking_rwn_poi">Маршрут региональной сети пешего туризма</string>
 	<string name="poi_route_hiking_lwn_poi">Маршрут местной сети пешего туризма</string>
 	<string name="poi_route_hiking_ref_poi">Обозначение маршрута пешего туризма</string>
@@ -1226,7 +1226,7 @@
 	<string name="poi_capacity_women_yes">Места для женщин</string>
 	<string name="poi_capacity_women_no">Нет выделенных мест для женщин</string>
 	<string name="poi_capacity_women">Места для женщин</string>
-	<string name="poi_capacity_pupils">Места для учеников</string>
+	<string name="poi_capacity_pupils">Места для студентов</string>
 	<string name="poi_capacity_teachers">Места для учителей</string>
 	<string name="poi_capacity_parent_yes">Места для родителей с детьми</string>
 	<string name="poi_capacity_parent_no">Нет выделенных мест для родителей с детьми</string>
@@ -1349,8 +1349,8 @@
 	<string name="poi_payment_cibus_no">Карты Cibus не принимаются</string>
 	<string name="poi_payment_wire_transfer_yes">Принимаются денежные переводы</string>
 	<string name="poi_payment_wire_transfer_no">Денежные переводы не принимаются</string>
-	<string name="poi_payment_ep_cash_yes">Принимаются Cash (Geldkarte)</string>
-	<string name="poi_payment_ep_cash_no">Cash (Geldkarte) не принимаются</string>
+	<string name="poi_payment_ep_cash_yes">Принимаются карты Cash (Geldkarte)</string>
+	<string name="poi_payment_ep_cash_no">Cash (Geldkarte) карты не принимаются</string>
 	<string name="poi_payment_ep_proton_yes">Принимаются карты Proton</string>
 	<string name="poi_payment_ep_proton_no">Карты Proton не принимаются</string>
 	<string name="poi_payment_ep_avant_yes">Принимаются AvantCard</string>
@@ -1407,8 +1407,8 @@
 	<string name="poi_payment_yandexmoney_no">Оплата через Яндекс.Деньги не принимается</string>
 	<string name="poi_description_payment">Описание способа оплаты</string>
 
-	<string name="poi_internet_access_fee_yes">Взимается плата за интернет</string>
-	<string name="poi_internet_access_fee_no">Плата за интернет не взимается</string>
+	<string name="poi_internet_access_fee_yes">Доступ в Интернет - взимается плата</string>
+	<string name="poi_internet_access_fee_no">Доступ в Интернет - бесплатно</string>
 
 	<string name="poi_events_venue">Место проведения мероприятий</string>
 
@@ -2373,4 +2373,12 @@
 
 	<string name="poi_boat_storage">Место для хранения лодок</string>
 
-</resources>
+<string name="poi_kissing_gate">Калитка</string>
+	<string name="poi_facebook">Фейсбук</string>
+	<string name="poi_twitter">Твиттер</string>
+	<string name="poi_skype">Скайп</string>
+	<string name="poi_garden_style_kitchen">Стиль сада: кухня</string>
+	<string name="poi_toilets_access_community">Туалет: общественный</string>
+	<string name="poi_internet_access_type_terminal">Тип доступа к Интернет: терминал</string>
+	<string name="poi_historic_period_dominate">Исторический период: доминантный</string>
+	</resources>
