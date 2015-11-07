@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
 
     <string name="layer_map_appearance">Configurar pantalla</string>
@@ -1956,4 +1956,6 @@
     <string name="shared_string_upload">Subir</string>
     <string name="rendering_attr_hideProposed_name">Ocultar objetos propuestos</string>
 
-</resources>
+<string name="read_more">Leer más</string>
+    <string name="whats_new">Novedades en</string>
+    </resources>
