@@ -1596,4 +1596,14 @@
 	<string name="poi_payment_mastercard_yes">S\'accepta Mastercard</string>
 	<string name="poi_payment_mastercard_no">No s\'accepta Mastercard</string>
 	<string name="poi_payment_none">Sense cost</string>
+	<string name="poi_payment_maestro_yes">S\'accepta tarja Maestro</string>
+	<string name="poi_payment_maestro_no">No s\'accepta tarja Maestro</string>
+	<string name="poi_payment_american_express_yes">S\'accepta tarja American Express (AMEX)</string>
+	<string name="poi_payment_american_express_no">No s\'accepta tarja American Express (AMEX)</string>
+	<string name="poi_payment_diners_club_yes">S\'accepta tarja Dinners Club</string>
+	<string name="poi_payment_diners_club_no">No s\'accepta tarja Dinners Club</string>
+	<string name="poi_payment_dkv_yes">Accepta DKV</string>
+	<string name="poi_payment_dkv_no">No s\'accepta DKV</string>
+	<string name="poi_payment_uta_yes">S\'accepten targes UTA</string>
+	<string name="poi_payment_uta_no">No s\'accepten targes UTA</string>
 	</resources>
