@@ -23,7 +23,9 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -31,13 +33,16 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
+import android.widget.FrameLayout;
+import android.widget.FrameLayout.LayoutParams;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 
 public class HelpActivity extends OsmandActionBarActivity {
 
-	public static final String DIALOG = "dialog";
+//	public static final String DIALOG = "dialog";
+	public static final int DIALOG = 5;
 	final static HelpMenuCategory[] categories = HelpMenuCategory.values();
 	public static final String OSMAND_POLL_HTML = "http://osmand.net/android-poll.html";
 	public static final String OSMAND_MAP_LEGEND = "http://osmand.net/help/map-legend_default.png";
@@ -45,9 +50,18 @@ public class HelpActivity extends OsmandActionBarActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		if (getSupportFragmentManager().findFragmentByTag(DIALOG) == null) {
-			new HelpScreenDialogFragment().show(getSupportFragmentManager(), DIALOG);
+		FrameLayout frame = new FrameLayout(this);
+		frame.setId(DIALOG);
+		setContentView(frame, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+
+		if (savedInstanceState == null) {
+			Fragment newFragment = new HelpScreenDialogFragment();
+			FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+			ft.add(DIALOG, newFragment).commit();
 		}
+		// if (getSupportFragmentManager().findFragmentByTag(DIALOG) == null) {
+		// new HelpScreenDialogFragment().show(getSupportFragmentManager(), DIALOG);
+		// }
 	}
 	
 	public static class HelpScreenDialogFragment extends DialogFragment implements ExpandableListView.OnChildClickListener {
