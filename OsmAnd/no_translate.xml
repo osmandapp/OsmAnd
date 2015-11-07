@@ -11,7 +11,7 @@
     -->
 
     <!-- Not translatable -->
-    <string name="last_release">
+    <string name="release_2_2">
         \u2022 Reworked context-sensitive UI for tapping locations on the map and handling location items on other screens\n\n
         \u2022 Chose if primary app control should be Dashboard or Menu based\n\n
         \u2022 New Wikipedia data, now downloads per country, and with much more complete data\n\n

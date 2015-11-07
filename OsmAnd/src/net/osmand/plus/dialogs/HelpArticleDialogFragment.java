@@ -1,4 +1,4 @@
-package net.osmand.plus.dialogs.helpscreen;
+package net.osmand.plus.dialogs;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
