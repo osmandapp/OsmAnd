@@ -10,8 +10,6 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.dialogs.HelpArticleDialogFragment;
-import net.osmand.plus.dialogs.helpscreen.HelpMenuItem;
-import net.osmand.plus.dialogs.helpscreen.HelpMenuItem.Builder;
 
 import org.apache.commons.logging.Log;
 
@@ -30,8 +28,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.TextView;
