@@ -1,5 +1,6 @@
 package net.osmand.plus.dialogs.helpscreen;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,14 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-
 import org.apache.commons.logging.Log;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -46,6 +44,7 @@ public class HelpArticleDialogFragment extends DialogFragment {
 		setStyle(STYLE_NO_FRAME, themeId);
 	}
 
+	@SuppressLint("SetJavaScriptEnabled")
 	@NonNull
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -63,6 +62,7 @@ public class HelpArticleDialogFragment extends DialogFragment {
 		String assetName = getArguments().getString(ASSET_NAME);
 		String url = getArguments().getString(URL);
 		webView = (WebView) view.findViewById(R.id.webView);
+		webView.getSettings().setJavaScriptEnabled(true);
 		if (assetName != null) {
 			if (savedInstanceState != null) {
 				webView.restoreState(savedInstanceState);
@@ -77,6 +77,7 @@ public class HelpArticleDialogFragment extends DialogFragment {
 				webView.loadDataWithBaseURL("http://osmand.net", sb.toString(), null, "utf-8", null);
 			}
 		} else if (url != null) {
+			
 			webView.getSettings().setLoadWithOverviewMode(true);
 			webView.getSettings().setUseWideViewPort(true);
 			if (savedInstanceState != null) {

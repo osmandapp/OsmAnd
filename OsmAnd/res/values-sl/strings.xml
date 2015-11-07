@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="search_button">Poišči</string>
     <string name="search_activity">Iskanje podatkov</string>
 
@@ -1872,7 +1871,7 @@
     <string name="tab_title_basic">Osnovno</string>
     <string name="tab_title_advanced">Napredno</string>
 
-    <string name="tag_poi_amenity">prednost</string>
+    
     <string name="contact_info">Podatki stika</string>
     <string name="description">Opis</string>
     <string name="add_opening_hours">Dodaj odpiralni čas</string>
@@ -1966,7 +1965,7 @@
     <string name="search_on_the_map_item">Iskanje po zemljevidu</string>
     <string name="planning_trip_item">Planiranje potovanja</string>
 
-    <string name="audio_video_note_item">Zvočni in video zaznamki</string>
+    
     <string name="instalation_troubleshooting_item">Namestitev in odpravljanje napak</string>
     <string name="techical_articles_item">Tehnični članki</string>
     <string name="versions_item">Različice</string>
@@ -1980,8 +1979,8 @@
 
     <string name="map_legend">Legenda zemljevida</string>
 <string name="shared_string_update">Posodobitev</string>
-    <string name="rec_photo_description">Fotografija %1$s</string>
-    <string name="rec_audio_description">Zvočni posnetek %1$s</string>
-    <string name="rec_video_description">Video posnetek %1$s</string>
+    
+    
+    
     <string name="shared_string_upload">Pošlji</string>
     </resources>

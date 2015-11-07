@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="show_warnings_title">Mostra els missatges d\'avís…</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="show_warnings_title">Mostra els missatges d\'avís…</string>
 <string name="map_widget_fluorescent">Rutes amb fluorescència</string>
 <string name="map_widget_show_ruler">Mostra el regle</string>
 <string name="map_widget_transparent">Aparença amb transparència</string>
@@ -1988,9 +1987,9 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="world_map_download_descr">El mapa base mundial (que abasta el món sencer però amb poca ampliació) no es troba o està malmès. Considereu baixar-lo per una operació completa.</string>
     <string name="show_on_start_description">Si es desactiva s\'engega amb la pantalla del mapa</string>
     <string name="enter_country_name">Indiqueu el nom del país</string>
-<string name="rec_photo_description">Fotografia %1$s</string>
-    <string name="rec_audio_description">Àudio %1$s</string>
-    <string name="rec_video_description">Vídeo %1$s</string>
+
+    
+    
     <string name="shared_string_upload">Pujada</string>
     <string name="osm_edit_created_poi">S\'ha creat un PDI a OSM</string>
     <string name="osm_edit_created_bug">S\'ha obert un nou error a OSM</string>

@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="layer_map_appearance">Configurar pantalla</string>
     <string name="show_lanes">Mostrar carriles</string>
     <string name="avoid_unpaved">Evitar carreteras no pavimentadas</string>
@@ -2026,7 +2025,7 @@
     <string name="av_locations_descr">Archivo GPX con ubicaciones de nota</string>
     <string name="av_locations">Ubicaciones</string>
 
-    <string name="tag_poi_amenity">servicio</string>
+    
     <string name="contact_info">Información de contacto</string>
     <string name="description">Descripción</string>
     <string name="add_opening_hours">Añadir horario de atención</string>
@@ -2125,7 +2124,7 @@
     <string name="search_on_the_map_item">Búsqueda en el mapa</string>
     <string name="planning_trip_item">Planeando un viaje</string>
 
-    <string name="osmand_ski_maps_item">Mapas de esquí de OsmAnd</string>
+    
 
     <string name="instalation_troubleshooting_item">Instalación y solución de problemas</string>
     <string name="techical_articles_item">Artículos técnicos</string>
@@ -2136,8 +2135,8 @@
     <string name="osm_edit_created_bug">Nota OSM creada</string>
     <string name="map_legend">Leyenda del mapa</string>
 <string name="shared_string_update">Actualizar</string>
-    <string name="rec_photo_description">Foto %1$s</string>
-    <string name="rec_audio_description">Audio %1$s</string>
-    <string name="rec_video_description">Video %1$s</string>
+    
+    
+    
     <string name="shared_string_upload">Subir</string>
     </resources>

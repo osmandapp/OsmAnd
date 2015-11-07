@@ -176,7 +176,6 @@ public class HelpScreenDialogFragment extends DialogFragment implements Expandab
 			nameView.setText(titleId);
 			v.setOnClickListener(null);
 			TypedValue typedValue = new TypedValue();
-			// TODO optimize
 			Resources.Theme theme = ctx.getTheme();
 			theme.resolveAttribute(R.attr.ctx_menu_info_view_bg, typedValue, true);
 			v.setBackgroundColor(typedValue.data);

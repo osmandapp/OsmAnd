@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="always_center_position_on_map">Ammustra sa positzione semper a su tzentru</string>
     <string name="voice_pref_title">Boghe</string>
     <string name="misc_pref_title">Mistura</string>
@@ -1966,7 +1965,7 @@
     <string name="search_on_the_map_item">Chircare in sa mapa</string>
     <string name="planning_trip_item">Pranificare unu biàgiu</string>
     
-    <string name="osmand_ski_maps_item">Mapas pro iscì OsmAnd</string>
+    
     
     <string name="instalation_troubleshooting_item">Installatzione e solutziones a sos problemas</string>
     <string name="techical_articles_item">Artìculos tècnicos</string>
@@ -1977,8 +1976,8 @@
     <string name="osm_edit_created_bug">Nota de errore de OSM creada</string>
 <string name="map_legend">Legenda de sa mapa</string>
 <string name="shared_string_upload">Càrriga</string>
-    <string name="rec_photo_description">Foto %1$s</string>
-    <string name="rec_audio_description">Àudio %1$s</string>
-    <string name="rec_video_description">Vìdeu %1$s</string>
+    
+    
+    
     <string name="shared_string_update">Agiorna</string>
     </resources>

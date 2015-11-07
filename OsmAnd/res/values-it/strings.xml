@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
     <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per visualizzare tracce e percorsi</string>
     <string name="offline_edition">Modifiche offline</string>
@@ -1923,7 +1922,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="av_locations_descr">File GPX con note locali</string>
     <string name="av_locations">Località</string>
     
-    <string name="tag_poi_amenity">amenità</string>
+    
     <string name="contact_info">Informazioni di contatto</string>
     <string name="description">Descrizione</string>
     <string name="add_opening_hours">Aggiungi orari di apertura</string>
@@ -2024,7 +2023,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="search_on_the_map_item">Ricerca sulla mappa</string>
     <string name="planning_trip_item">Pianifica un viaggio</string>
     
-    <string name="osmand_ski_maps_item">Mappe sci OsmAnd</string>
+    
     
     <string name="instalation_troubleshooting_item">Installazione e soluzione dei problemi</string>
     <string name="techical_articles_item">Articoli tecnici</string>
@@ -2036,7 +2035,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 <string name="shared_string_upload">Carica</string>
     <string name="feedback">Feedback</string>
     <string name="shared_string_update">Aggiorna</string>
-    <string name="rec_photo_description">Foto %1$s</string>
-    <string name="rec_audio_description">Audio %1$s</string>
-    <string name="rec_video_description">Video %1$s</string>
+    
+    
+    
     </resources>

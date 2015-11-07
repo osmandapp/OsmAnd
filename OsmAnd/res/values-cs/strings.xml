@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="switch_to_raster_map_to_see">Vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v Nastaveních (Spravovat mapové soubory), nebo se přepněte na online mapy.</string>
 
     <string name="send_files_to_osm">Nahrát GPX soubory do OSM?</string>
@@ -1974,7 +1973,7 @@
     <string name="search_on_the_map_item">Hledání na mapě</string>
     <string name="planning_trip_item">Plánování cesty</string>
 
-    <string name="osmand_ski_maps_item">OsmAnd lyžařské mapy</string>
+    
 
     <string name="instalation_troubleshooting_item">Instalace a řešení problémů</string>
     <string name="techical_articles_item">Technické články</string>
@@ -1985,8 +1984,8 @@
     <string name="osm_edit_created_bug">Vytvořena OSM chyba</string>
     <string name="map_legend">Legenda mapy</string>
 <string name="shared_string_update">Aktualizovat</string>
-    <string name="rec_photo_description">Foto %1$s</string>
-    <string name="rec_audio_description">Zvuk %1$s</string>
-    <string name="rec_video_description">Video %1$s</string>
+    
+    
+    
     <string name="shared_string_upload">Odeslat</string>
     </resources>
