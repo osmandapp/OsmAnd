@@ -2075,4 +2075,8 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="rec_photo_description">Foto %1$s</string>
     <string name="rec_video_description">Video %1$s</string>
     <string name="shared_string_upload">Hochladen</string>
+    <string name="shared_string_qr_code">QR-Code</string>
+    <string name="map_downloaded">Karte heruntergeladen</string>
+    <string name="map_downloaded_descr">Karte von %1$s wurde heruntergeladen. Gehen Sie zur Karte, um sie zu benutzen.</string>
+    <string name="go_to_map">Zur Karte gehen</string>
     </resources>
