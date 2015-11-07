@@ -1407,7 +1407,7 @@
 	<string name="poi_payment_yandexmoney_no">Оплата через Яндекс.Деньги не принимается</string>
 	<string name="poi_description_payment">Описание способа оплаты</string>
 
-	<string name="poi_internet_access_fee_yes">Взимается плата за интернет</string>
+	<string name="poi_internet_access_fee_yes">Доступ в Интернет - взимается плата</string>
 	<string name="poi_internet_access_fee_no">Плата за интернет не взимается</string>
 
 	<string name="poi_events_venue">Место проведения мероприятий</string>
