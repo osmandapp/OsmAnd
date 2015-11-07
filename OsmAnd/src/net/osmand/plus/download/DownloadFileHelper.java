@@ -313,15 +313,18 @@ public class DownloadFileHelper {
 			throws IOException {
 		targetFile.getParentFile().mkdirs();
 		FileOutputStream out = new FileOutputStream(targetFile);
-		int read;
-		byte[] buffer = new byte[BUFFER_SIZE];
-		int remaining = length;
-		while ((read = toRead.read(buffer)) != -1) {
-			out.write(buffer, 0, read);
-			remaining -= countIS.getAndClearReadCount();
-			progress.remaining(remaining / 1024);
+		try {
+			int read;
+			byte[] buffer = new byte[BUFFER_SIZE];
+			int remaining = length;
+			while ((read = toRead.read(buffer)) != -1) {
+				out.write(buffer, 0, read);
+				remaining -= countIS.getAndClearReadCount();
+				progress.remaining(remaining / 1024);
+			}
+		} finally {
+			out.close();
 		}
-		out.close();
 		targetFile.setLastModified(de.dateModified);
 	}
 	
