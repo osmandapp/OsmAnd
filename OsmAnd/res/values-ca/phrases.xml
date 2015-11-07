@@ -1487,4 +1487,13 @@
 	<string name="poi_fireplace_no">Sense llar de foc</string>
 
 	<string name="poi_tactile_paving_no">Sense pavimentació tàctil</string>
+	<string name="poi_traffic_signals_sound_yes">Amb so</string>
+	<string name="poi_traffic_signals_sound_no">Sense so</string>
+	<string name="poi_traffic_signals_sound_walk">Indicació acústica quan es pot caminar</string>
+
+	<string name="poi_rescue_station">Estació de rescat</string>
+
+	<string name="poi_services">Àrea de servei</string>
+	<string name="poi_mini_roundabout">Rotonda petita</string>
+	<string name="poi_railway_crossing">Pas a nivell</string>
 	</resources>
