@@ -1474,4 +1474,16 @@
 
 	<string name="poi_content_manure">Contingut: fems</string>
 	<string name="poi_information_history">Indicador informatiu: història</string>
+	<string name="poi_board_type_plants">Indicador informatiu: botànica</string>
+	<string name="poi_board_type_geology">Indicador informatiu: geologia</string>
+	<string name="poi_board_type_public_transport">Indicador informatiu: transport públic</string>
+	<string name="poi_board_type_technology">Indicador informatiu: tecnologia</string>
+	<string name="poi_board_type_astronomy">Indicador informatiu: astronomia</string>
+
+	<string name="poi_commercial">Zona comercial</string>
+	<string name="poi_retail">Zona de botigues</string>
+
+	<string name="poi_fireplace_yes">Llar de foc</string>
+	<string name="poi_fireplace_no">Sense llar de foc</string>
+
 	</resources>
