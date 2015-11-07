@@ -166,7 +166,7 @@ public class HelpActivity extends OsmandActionBarActivity {
 
 		private List<HelpMenuItem> createOtherItems() {
 			ArrayList<HelpMenuItem> arrayList = new ArrayList<>();
-			String name = getActivity().getString(R.string.instalation_troubleshooting_item);
+			//String name = getActivity().getString(R.string.instalation_troubleshooting_item);
 			arrayList.add(new HelpMenuItem(R.string.instalation_troubleshooting_item, -1, -1, 
 					"feature_articles/installation-and-troubleshooting.html", getActivity()));
 			arrayList.add(new HelpMenuItem(R.string.techical_articles_item, -1, -1, 
