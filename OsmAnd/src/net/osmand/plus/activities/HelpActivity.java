@@ -415,7 +415,7 @@ public class HelpActivity extends OsmandActionBarActivity {
 			this.icon = icon;
 			this.title = name;
 			this.description = description;
-			this.onClickListener = new ShowArticleOnTouchListener(name, activity, helpFileName);
+			this.onClickListener = new ShowArticleOnTouchListener(helpFileName, activity, title);
 		}
 		
 		public HelpMenuItem(int name, int description, int icon, String helpFileName,
@@ -423,7 +423,7 @@ public class HelpActivity extends OsmandActionBarActivity {
 			this.title = activity.getString(name);
 			this.description = description == -1 ? null : activity.getString(description);
 			this.icon = icon;
-			this.onClickListener = new ShowArticleOnTouchListener(title, activity, helpFileName);
+			this.onClickListener = new ShowArticleOnTouchListener(helpFileName,  activity, title);
 		}
 
 		public HelpMenuItem(String name, String description, OnClickListener onClickListener) {
