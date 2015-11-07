@@ -199,7 +199,7 @@ task collectFonts(type: Copy) {
 }
 
 task collectHelpContentsStyle(type: Copy) {
-	from("../../help/help/") {
+	from("../../help/website/help/") {
 		include "style.css"
 	}
 	into "assets"
