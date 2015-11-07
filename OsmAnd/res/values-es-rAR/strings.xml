@@ -431,7 +431,7 @@
     <string name="lang_mr">Marathi</string>
     <string name="osmand_srtm_short_description_80_chars">Complemento OsmAnd para curvas de nivel sin conexión</string>
     <string name="srtm_plugin_name">Curvas de nivel</string>
-    <string name="osmand_distance_planning_plugin_name">Calculador de distancias y herramienta de planificación</string>
+    <string name="osmand_distance_planning_plugin_name">Distancias y planificación</string>
     <string name="rename_failed">Falló el renombrado.</string>
     <string name="days_behind">días atrás</string>
     <string name="free">"Libre %1$s "</string>
