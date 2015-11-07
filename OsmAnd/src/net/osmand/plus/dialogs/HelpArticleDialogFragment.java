@@ -89,14 +89,13 @@ public class HelpArticleDialogFragment extends DialogFragment {
 					if (url.startsWith("http://osmand.net/features?id=")) {
 						String id = url.substring("http://osmand.net/features?id=".length());
 						dismiss();
-						instantiateWithAsset(id, getString(R.string.shared_string_help)).show(
+						instantiateWithAsset("feature_articles/"+id+".html", getString(R.string.shared_string_help)).show(
 								getActivity().getSupportFragmentManager(), "DIALOG_HELP_ARTICLE");
 					}
 					return false;
 				}
 			});
 		} else if (url != null) {
-			
 			webView.getSettings().setLoadWithOverviewMode(true);
 			webView.getSettings().setUseWideViewPort(true);
 			if (savedInstanceState != null) {
