@@ -71,26 +71,22 @@ public class HelpArticleDialogFragment extends DialogFragment {
 		webView = (WebView) view.findViewById(R.id.webView);
 		webView.getSettings().setJavaScriptEnabled(true);
 		if (assetName != null) {
-			if (savedInstanceState != null) {
-				webView.restoreState(savedInstanceState);
-			} else {
-				String fileContents = getAssetAsString(assetName, getActivity());
+			String fileContents = getAssetAsString(assetName, getActivity());
 
-				StringBuilder sb = new StringBuilder();
-				sb.append(HEADER_INNER);
-				sb.append(fileContents);
-				sb.append(FOOTER_INNER);
+			StringBuilder sb = new StringBuilder();
+			sb.append(HEADER_INNER);
+			sb.append(fileContents);
+			sb.append(FOOTER_INNER);
 
-				webView.loadDataWithBaseURL("http://osmand.net", sb.toString(), null, "utf-8", null);
-			}
+			webView.loadDataWithBaseURL("http://osmand.net", sb.toString(), null, "utf-8", null);
 			webView.setWebViewClient(new WebViewClient() {
 				@Override
 				public boolean shouldOverrideUrlLoading(WebView view, String url) {
 					if (url.startsWith("http://osmand.net/features?id=")) {
 						String id = url.substring("http://osmand.net/features?id=".length());
 						dismiss();
-						instantiateWithAsset("feature_articles/"+id+".html", getString(R.string.shared_string_help)).show(
-								getActivity().getSupportFragmentManager(), "DIALOG_HELP_ARTICLE");
+						instantiateWithAsset("feature_articles/" + id + ".html", getString(R.string.shared_string_help))
+								.show(getActivity().getSupportFragmentManager(), "DIALOG_HELP_ARTICLE");
 					}
 					return false;
 				}
@@ -115,11 +111,6 @@ public class HelpArticleDialogFragment extends DialogFragment {
 					"instantiated either with ASSET_NAME or with URL");
 		}
 		return view;
-	}
-
-	@Override
-	public void onSaveInstanceState(Bundle outState) {
-		webView.saveState(outState);
 	}
 
 	private OsmandApplication getOsmandApplication() {
