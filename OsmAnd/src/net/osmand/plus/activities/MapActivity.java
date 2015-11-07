@@ -61,9 +61,11 @@ import net.osmand.plus.base.FailSafeFuntions;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dialogs.WhatsNewDialogFragment;
+import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.helpers.GpxImportHelper;
 import net.osmand.plus.helpers.WakeLockHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
+import net.osmand.plus.mapcontextmenu.MapContextMenuFragment;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
 import net.osmand.plus.mapcontextmenu.editors.PointEditor;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
@@ -91,7 +93,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class MapActivity extends AccessibleActivity {
+public class MapActivity extends AccessibleActivity implements DownloadEvents {
 	private static final int SHOW_POSITION_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 1;
 	private static final int LONG_KEYPRESS_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 2;
 	private static final int LONG_KEYPRESS_DELAY = 500;
@@ -480,11 +482,16 @@ public class MapActivity extends AccessibleActivity {
 			app.getResourceManager().setBusyIndicator(new BusyIndicator(this, progress));
 		}
 
+		getMapLayers().getDownloadedRegionsLayer().updateObjects();
+
 		OsmandPlugin.onMapActivityResume(this);
 		mapView.refreshMap(true);
 		if (atlasMapRendererView != null) {
 			atlasMapRendererView.handleOnResume();
 		}
+
+		app.getDownloadThread().setUiActivity(this);
+
 		getMyApplication().getAppCustomization().resumeActivity(MapActivity.class, this);
 		if (System.currentTimeMillis() - tm > 50) {
 			System.err.println("OnCreate for MapActivity took " + (System.currentTimeMillis() - tm) + " ms");
@@ -710,6 +717,7 @@ public class MapActivity extends AccessibleActivity {
 
 	@Override
 	protected void onPause() {
+		app.getDownloadThread().resetUiActivity(this);
 		if (atlasMapRendererView != null) {
 			atlasMapRendererView.handleOnPause();
 		}
@@ -1019,6 +1027,40 @@ public class MapActivity extends AccessibleActivity {
 			closeDrawer();
 		} else {
 			openDrawer();
+		}
+	}
+
+	// DownloadEvents
+	@Override
+	public void newDownloadIndexes() {
+		MapContextMenuFragment contextMenuFragment = getContextMenu().findMenuFragment();
+		if (contextMenuFragment != null) {
+			contextMenuFragment.newDownloadIndexes();
+		}
+		if (getMapLayers().getDownloadedRegionsLayer().updateObjects()) {
+			refreshMap();
+		}
+	}
+
+	@Override
+	public void downloadInProgress() {
+		MapContextMenuFragment contextMenuFragment = getContextMenu().findMenuFragment();
+		if (contextMenuFragment != null) {
+			contextMenuFragment.downloadInProgress();
+		}
+		if (getMapLayers().getDownloadedRegionsLayer().updateObjects()) {
+			refreshMap();
+		}
+	}
+
+	@Override
+	public void downloadHasFinished() {
+		MapContextMenuFragment contextMenuFragment = getContextMenu().findMenuFragment();
+		if (contextMenuFragment != null) {
+			contextMenuFragment.downloadHasFinished();
+		}
+		if (getMapLayers().getDownloadedRegionsLayer().updateObjects()) {
+			refreshMap();
 		}
 	}
 }

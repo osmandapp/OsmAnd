@@ -233,11 +233,11 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			if (desc != null) {
 				return desc;
 			} else if (this.isAudio()) {
-				return ctx.getString(R.string.rec_audio_description, formatDateTime(ctx, file.lastModified()));
+				return formatDateTime(ctx, file.lastModified());
 			} else if (this.isVideo()) {
-				return ctx.getString(R.string.rec_video_description, formatDateTime(ctx, file.lastModified()));
+				return formatDateTime(ctx, file.lastModified());
 			} else if (this.isPhoto()) {
-				return ctx.getString(R.string.rec_photo_description, formatDateTime(ctx, file.lastModified()));
+				return formatDateTime(ctx, file.lastModified());
 			}
 			return "";
 		}

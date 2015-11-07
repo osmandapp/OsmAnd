@@ -466,5 +466,8 @@ public class MapActivityLayers {
 	public TransportInfoLayer getTransportInfoLayer() {
 		return transportInfoLayer;
 	}
-	
+
+	public DownloadedRegionsLayer getDownloadedRegionsLayer() {
+		return downloadedRegionsLayer;
+	}
 }
