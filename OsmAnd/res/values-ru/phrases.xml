@@ -1153,7 +1153,7 @@
 
 	<string name="poi_traffic_enforcement">Контроль ПДД</string>
 
-	<string name="poi_enforcement_traffic_signals">Контроль проезда на красный сигнал светофора</string>
+	<string name="poi_enforcement_traffic_signals">Контроль: проезд на красный сигнал светофора</string>
 	<string name="poi_enforcement_maxspeed">Контроль: максимальная скорость</string>
 	<string name="poi_enforcement_maxheight">Контроль: максимальная высота</string>
 	<string name="poi_enforcement_mindistance">Контроль: минимальная дистанция между автомобилями</string>
@@ -1349,8 +1349,8 @@
 	<string name="poi_payment_cibus_no">Карты Cibus не принимаются</string>
 	<string name="poi_payment_wire_transfer_yes">Принимаются денежные переводы</string>
 	<string name="poi_payment_wire_transfer_no">Денежные переводы не принимаются</string>
-	<string name="poi_payment_ep_cash_yes">Принимаются Cash (Geldkarte)</string>
-	<string name="poi_payment_ep_cash_no">Cash (Geldkarte) не принимаются</string>
+	<string name="poi_payment_ep_cash_yes">Принимаются карты Cash (Geldkarte)</string>
+	<string name="poi_payment_ep_cash_no">Cash (Geldkarte) карты не принимаются</string>
 	<string name="poi_payment_ep_proton_yes">Принимаются карты Proton</string>
 	<string name="poi_payment_ep_proton_no">Карты Proton не принимаются</string>
 	<string name="poi_payment_ep_avant_yes">Принимаются AvantCard</string>
