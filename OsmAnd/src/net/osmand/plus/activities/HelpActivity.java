@@ -184,7 +184,7 @@ public class HelpActivity extends OsmandActionBarActivity {
 
 			name = getActivity().getString(R.string.techical_articles_item);
 			listener = new ShowArticleOnTouchListener(
-					"feature_articles/TechnicalArticles.html", getActivity(), name);
+					"feature_articles/technical-articles.html", getActivity(), name);
 			arrayList.add(new HelpMenuItem(name, listener));
 			name = getActivity().getString(R.string.versions_item);
 			listener = new ShowArticleOnTouchListener(
