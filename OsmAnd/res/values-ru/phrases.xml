@@ -1092,18 +1092,18 @@
 	<string name="poi_smoking_no">Курение запрещено</string>
 	<string name="poi_smoking_outside">Курение разрешено только снаружи</string>
 	<string name="poi_smoking_yes">Курение разрешено</string>
-	<string name="poi_smoking_separated">Курение разрешено в отдельном помещении без эффективного отделения</string>
-	<string name="poi_smoking_isolated">Курение разрешено в отдельном помещении с эффективым отделением</string>
+	<string name="poi_smoking_separated">Курение разрешено в отдельном помещении</string>
+	<string name="poi_smoking_isolated">Курение разрешено в специальной комнате</string>
 	<string name="poi_smoking_dedicated">Специализированное заведение для курящих</string>
 
-	<string name="poi_toll_yes">Оплата за проезд взимается</string>
-	<string name="poi_toll_no">Оплата за проезд не взимается</string>
-	<string name="poi_toll_hgv_yes">Оплата за проезд взимается для грузовых автомобилей</string>
+	<string name="poi_toll_yes">Платно</string>
+	<string name="poi_toll_no">Бесплатно</string>
+	<string name="poi_toll_hgv_yes">Платно для грузовых автомобилей</string>
 	<string name="poi_tactile_paving_yes">С тактильным покрытием</string>
 	<string name="poi_tactile_paving_no">Без тактильного покрытия</string>
 	<string name="poi_traffic_signals_sound_yes">Со звуковым сигналом</string>
 	<string name="poi_traffic_signals_sound_no">Без звукового сигнала</string>
-	<string name="poi_traffic_signals_sound_walk">Со звуковым сигналом только когда переход разрешён</string>
+	<string name="poi_traffic_signals_sound_walk">Со звуковым сигналом, когда переход разрешён</string>
 
 	<string name="poi_rescue_station">Спасательная станция</string>
 
@@ -1111,7 +1111,7 @@
 	<string name="poi_mini_roundabout">Мини круговое движение</string>
 	<string name="poi_railway_crossing">Железнодорожный переход</string>
 	<string name="poi_railway_level_crossing">Железнодорожный переезд</string>
-	<string name="poi_bird_hide">Укрытие для наблюдения за птицами</string>
+	<string name="poi_bird_hide">Место для наблюдения за птицами</string>
 	<string name="poi_leisure_common">Общедоступная площадка для отдыха</string>
 	<string name="poi_garden">Сад</string>
 
@@ -1226,7 +1226,7 @@
 	<string name="poi_capacity_women_yes">Места для женщин</string>
 	<string name="poi_capacity_women_no">Нет выделенных мест для женщин</string>
 	<string name="poi_capacity_women">Места для женщин</string>
-	<string name="poi_capacity_pupils">Места для учеников</string>
+	<string name="poi_capacity_pupils">Места для студентов</string>
 	<string name="poi_capacity_teachers">Места для учителей</string>
 	<string name="poi_capacity_parent_yes">Места для родителей с детьми</string>
 	<string name="poi_capacity_parent_no">Нет выделенных мест для родителей с детьми</string>
@@ -2377,4 +2377,5 @@
 	<string name="poi_facebook">Фейсбук</string>
 	<string name="poi_twitter">Твиттер</string>
 	<string name="poi_skype">Скайп</string>
+	<string name="poi_garden_style_kitchen">Стиль сада: кухня</string>
 	</resources>
