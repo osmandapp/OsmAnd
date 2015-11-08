@@ -1607,4 +1607,37 @@
 	<string name="poi_payment_uta_yes">S\'accepten targes UTA</string>
 	<string name="poi_payment_uta_no">No s\'accepten targes UTA</string>
 	<string name="poi_tourism_yes">Element turístic</string>
+	<string name="poi_water_point">Proveïment d\'aigua</string>
+
+	<string name="poi_information_wildlife">Indicador informatiu: vida en llibertat</string>
+	<string name="poi_information_sign">Signe</string>
+	<string name="poi_piste_grooming_classic">Pista condicionada: clàssica</string>
+	<string name="poi_piste_grooming_classic_skating">Pista condicionada: clàssica i patinatge</string>
+	<string name="poi_piste_grooming_backcountry">Pista condicionada: fora de pistes</string>
+	<string name="poi_piste_grooming_scooter">Pista condicionada: clàssica però estreta</string>
+	<string name="poi_piste_grooming_skating">Pista condicionada: patinatge</string>
+	<string name="poi_piste_grooming_no">Pista condicionada: no</string>
+	<string name="poi_piste_grooming_mogul">Pista condicionada: esquí acrobàtic</string>
+
+	<string name="poi_payment_girocard_yes">S\'accepten targes Girocard</string>
+	<string name="poi_payment_girocard_no">No s\'accepten targes Girocard</string>
+	<string name="poi_payment_discover_card_yes">S\'accepten targes Discover</string>
+	<string name="poi_payment_discover_card_no">No s\'accepten targes Discover</string>
+	<string name="poi_payment_visa_electron_yes">S\'accepten targes Visa Electron</string>
+	<string name="poi_payment_visa_electron_no">No s\'accepten targes Visa Electron</string>
+	<string name="poi_payment_litecoin_yes">S\'accepta Litecoin</string>
+	<string name="poi_payment_litecoin_no">No s\'accepta Litecoin</string>
+	<string name="poi_payment_cheque_yes">S\'accepten xecs</string>
+	<string name="poi_payment_cheque_no">No s\'accepten xecs</string>
+	<string name="poi_payment_pikepass_yes">S\'accepta PIKEPASS</string>
+	<string name="poi_payment_pikepass_no">No s\'accepta PIKEPASS</string>
+	<string name="poi_payment_visa_debit_yes">S\'accepten targes Visa Debit</string>
+	<string name="poi_payment_visa_debit_no">No s\'accepten targes Visa Debit</string>
+	<string name="poi_payment_others_yes">S\'accepten altres sistemes de pagament</string>
+	<string name="poi_payment_others_no">No s\'accepten altres sistemes de pagament</string>
+	<string name="poi_payment_routex_yes">S\'accepten targes de carburant Routex</string>
+	<string name="poi_payment_routex_no">No s\'accepten targes de carburant Routex</string>
+	<string name="poi_payment_bancomat_yes">S\'accepten targes Bancomat</string>
+	<string name="poi_payment_bancomat_no">No s\'accepten targes Bancomat</string>
+	<string name="poi_payment_prepaid_ticket_yes">S\'accepten tiquets de prepagament</string>
 	</resources>
