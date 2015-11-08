@@ -1313,7 +1313,7 @@
     <string name="choose_audio_stream_descr">Elige el canal para reproducir indicaciones por voz (dependiente del sistema)</string>
     <string name="voice_stream_voice_call">Audio de llamada de voz</string>
     <string name="voice_stream_notification">Notificación auditiva</string>
-    <string name="voice_stream_music">Audio de Media/música</string>
+    <string name="voice_stream_music">Audio de multimedia</string>
     <string name="warning_tile_layer_not_downloadable">La aplicación no puede descargar la capa %1$s del mapa, intente reinstalando.</string>
     <string name="overlay_transparency_descr">Modifica la transparencia de la capa superpuesta</string>
     <string name="overlay_transparency">Transparencia de superposición</string>
