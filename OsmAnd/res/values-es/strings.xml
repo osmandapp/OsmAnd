@@ -179,7 +179,7 @@
     <string name="choose_audio_stream_descr">Elige el canal para reproducir los avisos de voz (dependiente del sistema)</string>
     <string name="voice_stream_voice_call">Audio de llamada de voz</string>
     <string name="voice_stream_notification">Notificación auditiva</string>
-    <string name="voice_stream_music">Audio de Media/música</string>
+    <string name="voice_stream_music">Audio de multimedia</string>
     <string name="warning_tile_layer_not_downloadable">La aplicación no puede descargar la capa %1$s del mapa, intente reinstalar.</string>
     <string name="overlay_transparency_descr">Modifica la transparencia de la capa superpuesta</string>
     <string name="overlay_transparency">Transparencia de superpuesto</string>
@@ -1764,7 +1764,7 @@
     <string name="gps_network_not_enabled">El servicio de ubicación no está activado. ¿Quiere activarlo?</string>
     <string name="disable_recording_once_app_killed">Evita el registro autónomo</string>
     <string name="disable_recording_once_app_killed_descrp">Se pausará el registro GPX cuando se cierre la aplicación (a través de aplicaciones recientes). (La indicación de fondo de OsmAnd desaparecerá de la barra de notificaciones de Android.)</string>
-    <string name="light_theme">Luminoso</string>
+    <string name="light_theme">Claro</string>
     <string name="dark_theme">Oscuro</string>
     <string name="lang_pms">Piamontés</string>
     <string name="lang_bn">Bengalí</string>
