@@ -16,7 +16,9 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.AutoZoomMap;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashboardOnMap;
+import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.IRouteInformationListener;
 import net.osmand.plus.views.AnimateDraggingMapThread;
@@ -32,6 +34,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	private boolean sensorRegistered = false;
 	private OsmandMapTileView mapView;
 	private DashboardOnMap dashboard;
+	private MapContextMenu contextMenu;
 	private OsmandSettings settings;
 	private OsmandApplication app;
 	private boolean isMapLinkedToLocation = true;
@@ -85,12 +88,19 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		if(dashboard != null) {
 			dashboard.updateCompassValue(val);
 		}
+		if(contextMenu != null) {
+			contextMenu.updateCompassValue(val);
+		}
 	}
 	
 	public void setDashboard(DashboardOnMap dashboard) {
 		this.dashboard = dashboard;
 	}
-	
+
+	public void setContextMenu(MapContextMenu contextMenu) {
+		this.contextMenu = contextMenu;
+	}
+
 	@Override
 	public void updateLocation(Location location) {
 		showViewAngle = false;
@@ -130,9 +140,12 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 			// When location is changed we need to refresh map in order to show movement!
 			mapView.refreshMap();
 		}
-		
+
 		if(dashboard != null) {
 			dashboard.updateMyLocation(location);
+		}
+		if(contextMenu != null) {
+			contextMenu.updateMyLocation(location);
 		}
 	}
 
@@ -170,8 +183,9 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	}
 	
 	private void registerUnregisterSensor(net.osmand.Location location) {
+
 		int currentMapRotation = settings.ROTATE_MAP.get();
-		boolean registerCompassListener = (showViewAngle && location != null)
+		boolean registerCompassListener = ((showViewAngle || contextMenu != null) && location != null)
 				|| (currentMapRotation == OsmandSettings.ROTATE_MAP_COMPASS && !routePlanningMode);
 		// show point view only if gps enabled
 		if(sensorRegistered != registerCompassListener) {
