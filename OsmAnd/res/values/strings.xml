@@ -2056,4 +2056,5 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="feedback">Feedback</string>
     <string name="contact_us">Contact us</string>
     <string name="map_legend">Map legend</string>
+    <!-- string name="map_legend_item_description">Legend for OsmAnd default map style, Internet connectivity needed to display</string -->
 </resources>

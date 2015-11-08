@@ -2,6 +2,7 @@ package net.osmand.plus.mapcontextmenu.controllers;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 
@@ -13,8 +14,10 @@ import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
+import net.osmand.plus.download.DownloadResourceGroup;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
@@ -72,7 +75,16 @@ public class MapDataMenuController extends MenuController {
 		topRightTitleButtonController = new TitleButtonController() {
 			@Override
 			public void buttonPressed() {
-				// todo other maps
+				getMapActivity().getContextMenu().close();
+
+				DownloadResourceGroup group = downloadThread.getIndexes().getRegionGroup(region);
+				if (group != null) {
+					final Intent intent = new Intent(getMapActivity(), getMapActivity().getMyApplication()
+							.getAppCustomization().getDownloadIndexActivity());
+					intent.putExtra(DownloadActivity.FILTER_GROUP, group.getUniqueId());
+					intent.putExtra(DownloadActivity.TAB_TO_OPEN, DownloadActivity.DOWNLOAD_TAB);
+					getMapActivity().startActivity(intent);
+				}
 			}
 		};
 		topRightTitleButtonController.caption = getMapActivity().getString(R.string.download_select_map_types);
@@ -138,7 +150,14 @@ public class MapDataMenuController extends MenuController {
 			addPlainMenuItem(R.drawable.ic_action_info_dark, indexItem.getSizeDescription(getMapActivity()), false);
 		}
 		if (region != null && !Algorithms.isEmpty(region.getParams().getWikiLink())) {
-			addPlainMenuItem(R.drawable.ic_action_wikipedia, region.getParams().getWikiLink(), true);
+			String[] items = region.getParams().getWikiLink().split(":");
+			String url;
+			if (items.length > 1) {
+				url = "https://" + items[0] + ".wikipedia.org/wiki/" + items[1];
+			} else {
+				url = "https://wikipedia.org/wiki/" + items[0];
+			}
+			addPlainMenuItem(R.drawable.ic_world_globe_dark, url, true);
 		}
 		if (indexItem != null) {
 			DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(getMapActivity());

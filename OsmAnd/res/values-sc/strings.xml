@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="always_center_position_on_map">Ammustra sa positzione semper a su tzentru</string>
     <string name="voice_pref_title">Boghe</string>
     <string name="misc_pref_title">Mistura</string>
@@ -1960,7 +1961,7 @@
     <string name="first_usage_item_description">Comente iscarrigare sas mapas e definire sas impostatziones de base</string>
     <string name="navigation_item_description">Cunfigura su nàvigu</string>
     <string name="faq_item">Preguntas fitianas (FAQ)</string>
-    <string name="faq_item_description">Comente usare sas estensiones</string>
+    <string name="faq_item_description">Dimandas fitianas</string>
     <string name="map_viewing_item">Visione de sa mapa</string>
     <string name="search_on_the_map_item">Chircare in sa mapa</string>
     <string name="planning_trip_item">Pranificare unu biàgiu</string>
@@ -1980,4 +1981,7 @@
     
     
     <string name="shared_string_update">Agiorna</string>
+    <string name="read_more">Leghe àteru</string>
+    <string name="whats_new">Ite b\'est de nou in</string>
+    <string name="rendering_attr_hideProposed_name">Cua sos ogetos propostos</string>
     </resources>

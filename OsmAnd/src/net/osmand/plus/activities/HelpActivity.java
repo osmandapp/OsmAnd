@@ -43,7 +43,7 @@ public class HelpActivity extends OsmandActionBarActivity {
 	public static final int DIALOG = 5;
 	final static HelpMenuCategory[] categories = HelpMenuCategory.values();
 	public static final String OSMAND_POLL_HTML = "http://osmand.net/android-poll.html";
-	public static final String OSMAND_MAP_LEGEND = "http://osmand.net/help/map-legend_default.png";
+	//public static final String OSMAND_MAP_LEGEND = "http://osmand.net/help/map-legend_default.png";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -140,15 +140,17 @@ public class HelpActivity extends OsmandActionBarActivity {
 					"feature_articles/find-something-on-map.html", getActivity()));
 			arrayList.add(new HelpMenuItem(R.string.planning_trip_item, -1, -1,
 					"feature_articles/trip-planning.html", getActivity()));
-			final String legendName = getActivity().getString(R.string.map_legend);
-			View.OnClickListener onClickListener = new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					HelpArticleDialogFragment.instantiateWithUrl(OSMAND_MAP_LEGEND, legendName)
-							.show(getFragmentManager(), null);
-				}
-			};
-			arrayList.add(new HelpMenuItem(legendName, null, onClickListener));
+			//final String legendName = getActivity().getString(R.string.map_legend);
+			//View.OnClickListener onClickListener = new View.OnClickListener() {
+			//	@Override
+			//	public void onClick(View v) {
+			//		HelpArticleDialogFragment.instantiateWithUrl(OSMAND_MAP_LEGEND, legendName)
+			//				.show(getFragmentManager(), null);
+			//	}
+			//};
+			//arrayList.add(new HelpMenuItem(legendName, getActivity().getString(R.string.map_legend_item_description), onClickListener));
+			arrayList.add(new HelpMenuItem(R.string.map_legend, -1, -1,
+					"feature_articles/map-legend.html", getActivity()));
 			return arrayList;
 		}
 
@@ -176,7 +178,7 @@ public class HelpActivity extends OsmandActionBarActivity {
 
 			String releasedate = "";
 			if (!this.getString(R.string.app_edition).equals("")) {
-				releasedate = ", " + this.getString(R.string.shared_string_release).toLowercase() + ": " + this.getString(R.string.app_edition);
+				releasedate = ", " + this.getString(R.string.shared_string_release).toLowerCase() + ": " + this.getString(R.string.app_edition);
 			}
 			String version = Version.getFullVersion(getOsmandApplication()) + " " + releasedate;
 			ShowArticleOnTouchListener listener = new ShowArticleOnTouchListener(
