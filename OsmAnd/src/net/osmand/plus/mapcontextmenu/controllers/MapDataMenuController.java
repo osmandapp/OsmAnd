@@ -150,7 +150,14 @@ public class MapDataMenuController extends MenuController {
 			addPlainMenuItem(R.drawable.ic_action_info_dark, indexItem.getSizeDescription(getMapActivity()), false);
 		}
 		if (region != null && !Algorithms.isEmpty(region.getParams().getWikiLink())) {
-			addPlainMenuItem(R.drawable.ic_action_wikipedia, region.getParams().getWikiLink(), true);
+			String[] items = region.getParams().getWikiLink().split(":");
+			String url;
+			if (items.length > 1) {
+				url = "https://" + items[0] + ".wikipedia.org/wiki/" + items[1];
+			} else {
+				url = "https://wikipedia.org/wiki/" + items[0];
+			}
+			addPlainMenuItem(R.drawable.ic_world_globe_dark, url, true);
 		}
 		if (indexItem != null) {
 			DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(getMapActivity());
