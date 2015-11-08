@@ -399,6 +399,10 @@ public class MapContextMenu extends MenuTitleController {
 		return menuController == null || menuController.buttonsVisible();
 	}
 
+	public boolean displayDistanceDirection() {
+		return menuController != null && menuController.displayDistanceDirection();
+	}
+
 	public void updateData() {
 		if (menuController != null) {
 			menuController.updateData();

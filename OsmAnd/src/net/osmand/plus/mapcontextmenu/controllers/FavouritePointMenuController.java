@@ -49,6 +49,11 @@ public class FavouritePointMenuController extends MenuController {
 	}
 
 	@Override
+	public boolean displayDistanceDirection() {
+		return true;
+	}
+
+	@Override
 	public Drawable getLeftIcon() {
 		return FavoriteImageDrawable.getOrCreate(getMapActivity().getMyApplication(), fav.getColor(), true);
 	}

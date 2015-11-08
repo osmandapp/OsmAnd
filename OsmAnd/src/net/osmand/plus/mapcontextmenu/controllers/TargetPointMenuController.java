@@ -47,6 +47,11 @@ public class TargetPointMenuController extends MenuController {
 	}
 
 	@Override
+	public boolean displayDistanceDirection() {
+		return true;
+	}
+
+	@Override
 	public Drawable getLeftIcon() {
 		if (!targetPoint.intermediate) {
 			if (isLight()) {
