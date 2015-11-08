@@ -148,7 +148,7 @@ public class HelpActivity extends OsmandActionBarActivity {
 							.show(getFragmentManager(), null);
 				}
 			};
-			arrayList.add(new HelpMenuItem(legendName, null, onClickListener));
+			arrayList.add(new HelpMenuItem(legendName, getActivity().getString(R.string.map_legend_item_description), onClickListener));
 			return arrayList;
 		}
 
