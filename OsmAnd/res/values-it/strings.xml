@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
     <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per visualizzare tracce e percorsi</string>
     <string name="offline_edition">Modifiche offline</string>
@@ -2018,7 +2019,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="first_usage_item_description">Come scaricare le mappe, imposta le impostazioni di baae</string>
     <string name="navigation_item_description">Impostazioni di navigazione</string>
     <string name="faq_item">FAQ</string>
-    <string name="faq_item_description">Come utilizzare i componenti aggiuntivi</string>
+    <string name="faq_item_description">Domande frequenti</string>
     <string name="map_viewing_item">Visualizzazione mappa</string>
     <string name="search_on_the_map_item">Ricerca sulla mappa</string>
     <string name="planning_trip_item">Pianifica un viaggio</string>
@@ -2038,4 +2039,5 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     
     
     
+    <string name="rendering_attr_hideProposed_name">Nascondi gli oggetti proposti</string>
     </resources>
