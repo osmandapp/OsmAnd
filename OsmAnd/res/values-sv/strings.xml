@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
     <string name="ChooseCountry">Välj land</string>
     <string name="choose_city">Välj stad</string>
@@ -1947,7 +1948,7 @@
     <string name="first_usage_item_description">Hur man hämtar kartor och gör grundinställningar</string>
     <string name="navigation_item_description">Ställa in navigering</string>
     <string name="faq_item">Frågor och svar</string>
-    <string name="faq_item_description">Hur man använder insticksmoduler</string>
+    <string name="faq_item_description">Frågor och svar</string>
     <string name="map_viewing_item">Kartvisning</string>
     <string name="search_on_the_map_item">Söka på kartan</string>
     <string name="planning_trip_item">Att planera en resa</string>
@@ -1968,4 +1969,6 @@
     
     
     <string name="feedback">Återkoppling</string>
+    <string name="read_more">Läs mer</string>
+    <string name="whats_new">Nyheter</string>
     </resources>

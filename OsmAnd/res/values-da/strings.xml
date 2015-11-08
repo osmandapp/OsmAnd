@@ -2011,5 +2011,5 @@
     <string name="rendering_attr_hideProposed_name">Skjul foreslåede objekter</string>
     <string name="read_more">Læs mere</string>
     <string name="whats_new">Hvad er nyt i</string>
-    <string name="map_legend_item_description">Signaturforklaring til OsmAnd standard kortformat, internetforbindelse er nødvendig</string>
+    <!-- string name="map_legend_item_description">Signaturforklaring til OsmAnd standard kortformat, internetforbindelse er nødvendig</string -->
 </resources>
