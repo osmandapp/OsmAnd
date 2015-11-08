@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
 
     <string name="show_warnings_title">Mostra els missatges d\'avís…</string>
@@ -1803,7 +1803,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="navigation_item_description">confifuració de la navegació</string>
     <string name="planning_trip_item">Planeja un viatge</string>
     <string name="faq_item">PMF</string>
-    <string name="faq_item_description">Com utilitzar connectors</string>
+    <string name="faq_item_description">Preguntes més freqüents</string>
     <string name="map_viewing_item">Visualització del mapa</string>
     <string name="search_on_the_map_item">Cerca al mapa</string>
     <string name="instalation_troubleshooting_item">Instal·lació i solució de problemes</string>
@@ -1815,4 +1815,6 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="shared_string_update">Actualitza</string>
     <string name="rendering_attr_hideProposed_name">Amaga proposta d\'objectes</string>
 
-</resources>
+<string name="read_more">Llegiu-ne més</string>
+    <string name="whats_new">Què hi ha de nou a</string>
+    </resources>
