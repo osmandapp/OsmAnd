@@ -29,26 +29,31 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.IconsCache;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleButtonController;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleProgressController;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.util.MapUtils;
 
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 import static net.osmand.plus.mapcontextmenu.MenuBuilder.SHADOW_HEIGHT_BOTTOM_DP;
 import static net.osmand.plus.mapcontextmenu.MenuBuilder.SHADOW_HEIGHT_TOP_DP;
 
 
-public class MapContextMenuFragment extends Fragment implements DownloadEvents {
+public class MapContextMenuFragment extends Fragment implements DownloadEvents, OsmAndLocationListener, OsmAndCompassListener {
 
 	public static final String TAG = "MapContextMenuFragment";
 
@@ -83,6 +88,10 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	private int origMarkerX;
 	private int origMarkerY;
 	private boolean customMapCenter;
+
+	private LatLon location;
+	private Float heading;
+	private int screenOrientation;
 
 	private class SingleTapConfirm implements OnGestureListener {
 
@@ -551,6 +560,26 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	}
 
 	@Override
+	public void onResume() {
+		super.onResume();
+		screenOrientation = DashLocationFragment.getScreenOrientation(getActivity());
+		if (menu.displayDistanceDirection()) {
+			if (location == null) {
+				location = getMyApplication().getSettings().getLastKnownMapLocation();
+			}
+			getMyApplication().getLocationProvider().addLocationListener(this);
+			getMyApplication().getLocationProvider().addCompassListener(this);
+		}
+	}
+
+	@Override
+	public void onPause() {
+		getMyApplication().getLocationProvider().removeLocationListener(this);
+		getMyApplication().getLocationProvider().removeCompassListener(this);
+		super.onPause();
+	}
+
+	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
 		map.setLatLon(mapCenter.getLatitude(), mapCenter.getLongitude());
@@ -641,6 +670,15 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		line1.setText(menu.getTitleStr());
 
 		// Text line 2
+		TextView distanceText = (TextView) view.findViewById(R.id.distance);
+		ImageView direction = (ImageView) view.findViewById(R.id.direction);
+		if (menu.displayDistanceDirection()) {
+			updateDistanceDirection();
+		} else {
+			direction.setVisibility(View.GONE);
+			distanceText.setVisibility(View.GONE);
+		}
+
 		TextView line2 = (TextView) view.findViewById(R.id.context_menu_line2);
 		line2.setText(menu.getLocationStr());
 		Drawable icon = menu.getSecondLineIcon();
@@ -648,6 +686,14 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 			line2.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
 			line2.setCompoundDrawablePadding(dpToPx(5f));
 		}
+	}
+
+	private void updateDistanceDirection() {
+		TextView distanceText = (TextView) view.findViewById(R.id.distance);
+		ImageView direction = (ImageView) view.findViewById(R.id.direction);
+		boolean mapLinked = getMapActivity().getMapViewTrackingUtilities().isMapLinkedToLocation() && location != null;
+		DashLocationFragment.updateLocationView(!mapLinked, location, heading, direction, distanceText,
+				menu.getLatLon().getLatitude(), menu.getLatLon().getLongitude(), screenOrientation, getMyApplication(), getActivity());
 	}
 
 	private int getPosY() {
@@ -869,6 +915,27 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		DisplayMetrics dm = new DisplayMetrics();
 		getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
 		return dm.heightPixels;
+	}
+
+	@Override
+	public void updateLocation(Location location) {
+		if (location != null) {
+			this.location = new LatLon(location.getLatitude(), location.getLongitude());
+			updateDistanceDirection();
+		}
+;	}
+
+	@Override
+	public void updateCompassValue(float value) {
+		// 99 in next line used to one-time initalize arrows (with reference vs. fixed-north direction) on non-compass
+		// devices
+		float lastHeading = heading != null ? heading : 99;
+		heading = value;
+		if (Math.abs(MapUtils.degreesDiff(lastHeading, heading)) > 5) {
+			updateDistanceDirection();
+		} else {
+			heading = lastHeading;
+		}
 	}
 }
 

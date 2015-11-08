@@ -32,6 +32,11 @@ public class HistoryMenuController extends MenuController {
 	}
 
 	@Override
+	public boolean displayDistanceDirection() {
+		return true;
+	}
+
+	@Override
 	public Drawable getLeftIcon() {
 		return getIcon(SearchHistoryFragment.getItemIcon(entry.getName()));
 	}

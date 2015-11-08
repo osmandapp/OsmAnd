@@ -33,13 +33,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:baselineAligned="false"
+                android:layout_marginBottom="16dp"
                 android:orientation="horizontal">
 
                 <LinearLayout
                     android:id="@+id/context_menu_icon_layout"
                     android:layout_width="42dp"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
+                    android:layout_height="match_parent">
 
                     <ImageView
                         android:id="@+id/context_menu_icon_view"
@@ -54,54 +54,88 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_weight="1"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/context_menu_line1"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="12dp"
-                        android:layout_marginRight="12dp"
-                        android:text="@string/search_address_building"
-                        android:textColor="?android:textColorPrimary"
-                        android:textSize="@dimen/default_list_text_size_large"/>
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/context_menu_line2"
-                        android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:id="@+id/context_menu_line1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/search_address_building"
+                                android:textColor="?android:textColorPrimary"
+                                android:textSize="@dimen/default_list_text_size_large"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/context_menu_close_btn_layout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:minWidth="66dp"
+                            android:orientation="horizontal">
+
+                            <Button
+                                android:id="@+id/title_button_top_right"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="?android:selectableItemBackground"
+                                android:gravity="center"
+                                android:paddingLeft="10dp"
+                                android:paddingRight="10dp"
+                                android:text="@string/shared_string_others"
+                                android:textColor="?attr/contextMenuButtonColor"
+                                android:textSize="@dimen/default_desc_text_size"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="12dp"
-                        android:layout_marginRight="12dp"
-                        android:layout_marginTop="4dp"
-                        android:text="@string/other_location"
-                        android:textColor="?android:textColorSecondary"
-                        android:textSize="@dimen/default_desc_text_size"/>
+                        android:layout_marginTop="4dp">
 
-                </LinearLayout>
+                        <ImageView
+                            android:id="@+id/direction"
+                            android:layout_width="@dimen/dashFavDirectionSize"
+                            android:layout_height="@dimen/dashFavDirectionSize"
+                            android:layout_gravity="center_vertical" />
 
-                <LinearLayout
-                    android:id="@+id/context_menu_close_btn_layout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:minWidth="66dp"
-                    android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/distance"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="2dp"
+                            android:layout_marginRight="4dp"
+                            android:layout_gravity="center_vertical"
+                            android:textColor="?android:textColorSecondary"
+                            android:textSize="@dimen/default_desc_text_size"
+                            tools:text="100500 km" />
 
-                    <Button
-                        android:id="@+id/title_button_top_right"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="?android:selectableItemBackground"
-                        android:gravity="center"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:text="@string/shared_string_others"
-                        android:textColor="?attr/contextMenuButtonColor"
-                        android:textSize="@dimen/default_desc_text_size"/>
+                        <TextView
+                            android:id="@+id/context_menu_line2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="@string/other_location"
+                            android:textColor="?android:textColorSecondary"
+                            android:textSize="@dimen/default_desc_text_size"/>
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -116,7 +150,9 @@
                 android:layout_marginTop="-16dp"
                 android:paddingBottom="4dp"
                 android:clickable="true"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                tools:visibility="visible"
+                android:visibility="gone">
 
                 <Button
                     android:id="@+id/title_button"
@@ -133,7 +169,7 @@
                 <TextView
                     android:id="@+id/title_button_right_text"
                     android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:clickable="true"
                     android:layout_marginLeft="-4dp"

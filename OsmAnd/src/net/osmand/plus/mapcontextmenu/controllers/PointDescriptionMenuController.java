@@ -29,7 +29,12 @@ public class PointDescriptionMenuController extends MenuController {
 	}
 
 	@Override
-	public boolean displayStreetNameinTitle() {
+	public boolean displayStreetNameInTitle() {
+		return true;
+	}
+
+	@Override
+	public boolean displayDistanceDirection() {
 		return true;
 	}
 
