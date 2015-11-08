@@ -153,9 +153,9 @@ public class MapDataMenuController extends MenuController {
 			String[] items = region.getParams().getWikiLink().split(":");
 			String url;
 			if (items.length > 1) {
-				url = "https://" + items[0] + ".wikipedia.org/wiki/" + items[1];
+				url = "https://" + items[0] + ".wikipedia.org/wiki/" + items[1].replace(' ', '_');
 			} else {
-				url = "https://wikipedia.org/wiki/" + items[0];
+				url = "https://wikipedia.org/wiki/" + items[0].replace(' ', '_');
 			}
 			addPlainMenuItem(R.drawable.ic_world_globe_dark, url, true);
 		}

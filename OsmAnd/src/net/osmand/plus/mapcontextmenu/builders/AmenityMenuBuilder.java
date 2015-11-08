@@ -34,11 +34,11 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		this.amenity = amenity;
 	}
 
-	private void buildRow(View view, int iconId, String text, int textColor, boolean isWiki, boolean needLinks) {
-		buildRow(view, getRowIcon(iconId), text, textColor, isWiki, needLinks);
+	private void buildRow(View view, int iconId, String text, String textPrefix, int textColor, boolean isWiki, boolean isText, boolean needLinks) {
+		buildRow(view, getRowIcon(iconId), text, textPrefix, textColor, isWiki, isText, needLinks);
 	}
 
-	protected void buildRow(final View view, Drawable icon, String text, int textColor, boolean isWiki, boolean needLinks) {
+	protected void buildRow(final View view, Drawable icon, final String text, final String textPrefix, int textColor, boolean isWiki, boolean isText, boolean needLinks) {
 		boolean light = app.getSettings().isLightContent();
 
 		LinearLayout ll = new LinearLayout(view.getContext());
@@ -82,8 +82,15 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		if (isWiki) {
 			textView.setMinLines(1);
 			textView.setMaxLines(15);
+		} else if (isText) {
+			textView.setMinLines(1);
+			textView.setMaxLines(10);
 		}
-		textView.setText(text);
+		if (!Algorithms.isEmpty(textPrefix)) {
+			textView.setText(textPrefix + ": " + text);
+		} else {
+			textView.setText(text);
+		}
 		if (textColor > 0) {
 			textView.setTextColor(view.getResources().getColor(textColor));
 		}
@@ -91,7 +98,14 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			textView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					POIMapLayer.showDescriptionDialog(view.getContext(), app, amenity);
+					POIMapLayer.showWikipediaDialog(view.getContext(), app, amenity);
+				}
+			});
+		} else if (isText) {
+			textView.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					POIMapLayer.showDescriptionDialog(view.getContext(), app, text, textPrefix);
 				}
 			});
 		}
@@ -129,7 +143,9 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			String key = e.getKey();
 			String vl = e.getValue();
 
+			String textPrefix = "";
 			boolean isWiki = false;
+			boolean isText = false;
 			boolean needLinks = !"population".equals(key);
 
 			if (amenity.getType().isWiki()) {
@@ -189,21 +205,24 @@ public class AmenityMenuBuilder extends MenuBuilder {
 					if (pType.getParentType() != null && pType.getParentType() instanceof PoiType) {
 						icon = getRowIcon(view.getContext(), ((PoiType) pType.getParentType()).getOsmTag() + "_" + pType.getOsmTag().replace(':', '_') + "_" + pType.getOsmValue());
 					}
-					if (pt instanceof PoiType && !((PoiType) pt).isText()) {
-						vl = pt.getTranslation();
+					if (!pType.isText()) {
+						vl = pType.getTranslation();
 					} else {
-						vl = pt.getTranslation() + ": " + amenity.unzipContent(e.getValue());
+						isText = true;
+						iconId = R.drawable.ic_action_note_dark;
+						textPrefix = pType.getTranslation();
+						vl = amenity.unzipContent(e.getValue());
 					}
 				} else {
-					vl = Algorithms.capitalizeFirstLetterAndLowercase(e.getKey()) +
-							": " + amenity.unzipContent(e.getValue());
+					textPrefix = Algorithms.capitalizeFirstLetterAndLowercase(e.getKey());
+					vl = amenity.unzipContent(e.getValue());
 				}
 			}
 
 			if (icon != null) {
-				buildRow(view, icon, vl, textColor, isWiki, needLinks);
+				buildRow(view, icon, vl, textPrefix, textColor, isWiki, isText, needLinks);
 			} else {
-				buildRow(view, iconId, vl, textColor, isWiki, needLinks);
+				buildRow(view, iconId, vl, textPrefix, textColor, isWiki, isText, needLinks);
 			}
 		}
 	}
