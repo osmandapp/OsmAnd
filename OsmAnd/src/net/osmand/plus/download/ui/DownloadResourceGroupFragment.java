@@ -112,6 +112,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		reloadData();
 		String filter = getDownloadActivity().getFilterAndClear();
 		String filterCat = getDownloadActivity().getFilterCatAndClear();
+		String filterGroup = getDownloadActivity().getFilterGroupAndClear();
 		if (filter != null) {
 			getDownloadActivity().showDialog(getActivity(),
 					SearchDialogFragment.createInstance(filter));
@@ -122,6 +123,10 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 						.createInstance(uniqueId);
 				((DownloadActivity) getActivity()).showDialog(getActivity(), regionDialogFragment);
 			}
+		} else if (filterGroup != null) {
+			final DownloadResourceGroupFragment regionDialogFragment = DownloadResourceGroupFragment
+					.createInstance(filterGroup);
+			((DownloadActivity) getActivity()).showDialog(getActivity(), regionDialogFragment);
 		}
 	}
 

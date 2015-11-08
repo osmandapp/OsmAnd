@@ -114,6 +114,26 @@ public class DownloadResourceGroup {
 		}
 	}
 
+	public DownloadResourceGroup getRegionGroup(WorldRegion region) {
+		DownloadResourceGroup res = null;
+		if (this.region == region) {
+			res = this;
+		} else if (groups != null) {
+			for (DownloadResourceGroup group : groups) {
+				if (group.region == region) {
+					res = group;
+					break;
+				} else {
+					res = group.getRegionGroup(region);
+					if (res != null) {
+						break;
+					}
+				}
+			}
+		}
+		return res;
+	}
+
 	public void trimEmptyGroups() {
 		if(groups != null) {
 			for(DownloadResourceGroup gr : groups) {
