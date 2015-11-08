@@ -140,15 +140,17 @@ public class HelpActivity extends OsmandActionBarActivity {
 					"feature_articles/find-something-on-map.html", getActivity()));
 			arrayList.add(new HelpMenuItem(R.string.planning_trip_item, -1, -1,
 					"feature_articles/trip-planning.html", getActivity()));
-			final String legendName = getActivity().getString(R.string.map_legend);
-			View.OnClickListener onClickListener = new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					HelpArticleDialogFragment.instantiateWithUrl(OSMAND_MAP_LEGEND, legendName)
-							.show(getFragmentManager(), null);
-				}
-			};
-			arrayList.add(new HelpMenuItem(legendName, getActivity().getString(R.string.map_legend_item_description), onClickListener));
+			//final String legendName = getActivity().getString(R.string.map_legend);
+			//View.OnClickListener onClickListener = new View.OnClickListener() {
+			//	@Override
+			//	public void onClick(View v) {
+			//		HelpArticleDialogFragment.instantiateWithUrl(OSMAND_MAP_LEGEND, legendName)
+			//				.show(getFragmentManager(), null);
+			//	}
+			//};
+			//arrayList.add(new HelpMenuItem(legendName, getActivity().getString(R.string.map_legend_item_description), onClickListener));
+			arrayList.add(new HelpMenuItem(R.string.map_legend, -1, -1,
+					"feature_articles/map-legend.html", getActivity()));
 			return arrayList;
 		}
 
