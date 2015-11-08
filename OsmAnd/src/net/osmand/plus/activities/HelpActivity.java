@@ -43,7 +43,7 @@ public class HelpActivity extends OsmandActionBarActivity {
 	public static final int DIALOG = 5;
 	final static HelpMenuCategory[] categories = HelpMenuCategory.values();
 	public static final String OSMAND_POLL_HTML = "http://osmand.net/android-poll.html";
-	public static final String OSMAND_MAP_LEGEND = "http://osmand.net/help/map-legend_default.png";
+	//public static final String OSMAND_MAP_LEGEND = "http://osmand.net/help/map-legend_default.png";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
