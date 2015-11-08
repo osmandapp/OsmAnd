@@ -59,8 +59,7 @@ public abstract class MenuTitleController {
 			return typeStr;
 		} else {
 			if (Algorithms.isEmpty(streetStr)) {
-				return "";//PointDescription.getLocationName(getMapActivity(),
-						//getLatLon().getLatitude(), getLatLon().getLongitude(), true).replaceAll("\n", "");
+				return typeStr;
 			} else {
 				return streetStr;
 			}
