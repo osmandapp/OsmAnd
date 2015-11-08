@@ -1969,4 +1969,5 @@
     <string name="rendering_attr_hideProposed_name">隱藏已提出的物件</string>
 <string name="read_more">讀取更多</string>
     <string name="whats_new">有什麼新的在</string>
-    </resources>
+    <string name="map_legend_item_description">圖例為 OsmAnd 預設的地圖樣式，網路需連接以去顯示</string>
+</resources>
