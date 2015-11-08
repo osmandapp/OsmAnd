@@ -12,11 +12,29 @@ public abstract class AbstractPoiType {
 	protected final MapPoiTypes registry;
 	private List<PoiType> poiAdditionals = null;
 	private boolean topVisible;
+	private String lang;
+	private AbstractPoiType baseLangType;
 
 	
 	public AbstractPoiType(String keyName, MapPoiTypes registry) {
 		this.keyName = keyName;
 		this.registry = registry;
+	}
+	
+	public void setBaseLangType(AbstractPoiType baseLangType) {
+		this.baseLangType = baseLangType;
+	}
+	
+	public AbstractPoiType getBaseLangType() {
+		return baseLangType;
+	}
+	
+	public void setLang(String lang) {
+		this.lang = lang;
+	}
+	
+	public String getLang() {
+		return lang;
 	}
 
 	public String getKeyName() {
