@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
 
     <string name="recording_context_menu_show">Zobraziť</string>
@@ -1941,7 +1941,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="first_usage_item_description">Ako sťahovať mapy, urobiť základné nastavenia</string>
     <string name="navigation_item_description">Nastavenie navigácie</string>
     <string name="faq_item">Otázky</string>
-    <string name="faq_item_description">Ako používať zásuvné moduly</string>
+    <string name="faq_item_description">Často kladené otázky</string>
     <string name="map_viewing_item">Prezeranie mapy</string>
     <string name="search_on_the_map_item">Hľadanie na mape</string>
     <string name="planning_trip_item">Plánovanie výletu</string>
@@ -1955,4 +1955,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="shared_string_update">Aktualizovať</string>
     <string name="rendering_attr_hideProposed_name">Skryť plánované objekty</string>
 
+<string name="read_more">Prečítať viac</string>
+    <string name="whats_new">Čo je nové v</string>
+    <string name="map_legend_item_description">Vysvetlivky k základnému mapovému štýlu v OsmAnd. Pre ich zobrazenie je potrebné pripojenie na Internet</string>
 </resources>
