@@ -1548,4 +1548,42 @@
 	<string name="poi_aerialway_summer_access_both">Atzessu in s\'istiu: intrada e essida</string>
 
 	<string name="poi_railway_crossing">Coladòrgiu a livellu</string>
+	<string name="poi_historic_yes">Ogetu istòricu</string>
+	<string name="poi_surveillance_yes">Bardiamentu: eja</string>
+	<string name="poi_shop_yes">Cun butega</string>
+
+	<string name="poi_service_bicycle_retail_yes">Bèndida de bitzicletas: eja</string>
+	<string name="poi_service_bicycle_retail_no">Bèndida de bitzicletas: nono</string>
+	<string name="poi_service_bicycle_repair_yes">Acontzu de bitzicletas: eja</string>
+	<string name="poi_service_bicycle_repair_no">Acontzu de bitzicletas: nono</string>
+	<string name="poi_service_bicycle_rental_yes">Nolu de bitzicletas: eja</string>
+	<string name="poi_service_bicycle_rental_no">Nolu de bitzicletas: nono</string>
+	<string name="poi_service_bicycle_pump_yes">Pompa pro bitzicletas: eja</string>
+	<string name="poi_service_bicycle_pump_no">Pompa pro bitzicletas: nono</string>
+	<string name="poi_service_bicycle_diy_yes">Ainas pro s’acontzu a sa sola de bitzicletas: eja</string>
+	<string name="poi_service_bicycle_diy_no">Ainas pro s’acontzu a sa sola de bitzicletas: nono</string>
+	<string name="poi_service_bicycle_cleaning_yes">Innetadura de bitzicletas: eja</string>
+	<string name="poi_service_bicycle_cleaning_no">Innetadura de bitzicletas: nono</string>
+	<string name="poi_service_bicycle_chaintool_yes">Trunca-cadenas pro bitzicletas: eja</string>
+	<string name="poi_service_bicycle_chaintool_no">Trunca-cadenas pro bitzicletas: nono</string>
+	<string name="poi_service_bicycle_second_hand_yes">Bèndida de bitzicletas de segunda manu: eja</string>
+	<string name="poi_service_bicycle_second_hand_no">Bèndida de bitzicletas de segunda manu: nono</string>
+
+	<string name="poi_wildlife_hide">Logu pro abbaidare sa natura</string>
+
+	<string name="poi_training_language">Annestru: limba</string>
+	<string name="poi_training_music">Annestru: mùsica</string>
+	<string name="poi_training_dance">Annestru: dantza</string>
+	<string name="poi_training_sport">Annestru: isport</string>
+	<string name="poi_training_art">Annestru: arte</string>
+	<string name="poi_training_cooking">Annestru: coghina</string>
+	<string name="poi_training_computer">Annestru: informàtica</string>
+	<string name="poi_training_yoga">Annestru: yoga</string>
+	<string name="poi_training_martial_art">Annestru: artes martziales</string>
+	<string name="poi_training_aviation">Annestru: aviatzione</string>
+	<string name="poi_training_hairdressing">Annestru: pilucheria</string>
+
+	<string name="poi_monument_yes">Ogetu monumentale</string>
+
+	<string name="poi_note">Nota</string>
 	</resources>
