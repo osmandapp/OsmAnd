@@ -154,6 +154,7 @@ public class MapMultiSelectionMenu extends BaseMenuController {
 	private void clearMenu() {
 		clearSelectedObjects();
 		objects.clear();
+		getMapActivity().refreshMap();
 	}
 
 	public void show(LatLon latLon, Map<Object, IContextMenuProvider> selectedObjects) {
