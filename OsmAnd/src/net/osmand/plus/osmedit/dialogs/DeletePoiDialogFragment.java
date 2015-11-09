@@ -22,12 +22,17 @@ import net.osmand.plus.osmedit.OsmPoint;
 
 public class DeletePoiDialogFragment extends DialogFragment {
 	private static final String KEY_AMENITY_NODE = "amenity_node";
+	Activity activity;
+
+	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+		this.activity = activity;
+	}
 
 	@NonNull
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		final Activity activity = getActivity();
-
 		OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
 		final OpenstreetmapUtil mOpenstreetmapUtil;
 		mOpenstreetmapUtil = new OpenstreetmapLocalUtil(plugin, activity);

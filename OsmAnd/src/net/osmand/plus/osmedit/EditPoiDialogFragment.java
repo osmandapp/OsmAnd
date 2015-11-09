@@ -254,7 +254,6 @@ public class EditPoiDialogFragment extends DialogFragment {
 			@Override
 			public void onClick(View v) {
 				save();
-
 			}
 		});
 		Button cancelButton = (Button) view.findViewById(R.id.cancelButton);
@@ -570,7 +569,6 @@ public class EditPoiDialogFragment extends DialogFragment {
 		}
 	}
 
-	// TODO: 8/28/15 Move to helper
 	public static class ShowDeleteDialogAsyncTask extends AsyncTask<Amenity, Void, Node> {
 		private final OpenstreetmapUtil openstreetmapUtil;
 		private final AppCompatActivity activity;
