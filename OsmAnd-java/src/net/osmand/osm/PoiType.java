@@ -12,6 +12,7 @@ public class PoiType extends AbstractPoiType {
 	private String osmTag2;
 	private String osmValue;
 	private String osmValue2;
+	private boolean notEditableOsm;
 	
 	private String nameTag;
 	private boolean text;
@@ -142,6 +143,14 @@ public class PoiType extends AbstractPoiType {
 
 	public void setRelation(boolean relation) {
 		this.relation = relation;
+	}
+
+	public boolean isNotEditableOsm() {
+		return notEditableOsm;
+	}
+
+	public void setNotEditableOsm(boolean notEditableOsm) {
+		this.notEditableOsm = notEditableOsm;
 	}
 
 	@Override

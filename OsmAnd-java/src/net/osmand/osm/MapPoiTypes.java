@@ -1,5 +1,14 @@
 package net.osmand.osm;
 
+import net.osmand.PlatformUtil;
+import net.osmand.StringMatcher;
+import net.osmand.data.Amenity;
+import net.osmand.util.Algorithms;
+
+import org.apache.commons.logging.Log;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,15 +24,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeMap;
-
-import net.osmand.PlatformUtil;
-import net.osmand.StringMatcher;
-import net.osmand.data.Amenity;
-import net.osmand.util.Algorithms;
-
-import org.apache.commons.logging.Log;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 
 public class MapPoiTypes {
@@ -398,6 +398,7 @@ public class MapPoiTypes {
 		tp.setNameOnly("true".equals(parser.getAttributeValue("", "name_only")));
 		tp.setNameTag(parser.getAttributeValue("", "name_tag"));
 		tp.setRelation("true".equals(parser.getAttributeValue("", "relation")));
+		tp.setNotEditableOsm("true".equals(parser.getAttributeValue("", "no_edit")));
 		if (lastFilter != null) {
 			lastFilter.addPoiType(tp);
 		}
