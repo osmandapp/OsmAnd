@@ -1932,7 +1932,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="routing_attr_height_description">Transportlīdzekļa maksimālais atļautais augstums maršrutos</string>
     <string name="routing_attr_height_name">Augstuma limits</string>
 	<string name="routing_attr_avoid_borders_description">Neiebraukt citas valsts teritorijā</string>
-	<string name="routing_attr_avoid_borders_name">Izvairīties no robežu šķēršošanas</string>
+	
 	<string name="archive_wikipedia_data">Lejupielādēti veci nederīgi vikipēdijas dati. Vai arhivēt tos?</string>
     <string name="download_wikipedia_files">Vai lejupielādēt papildus vikipēdijas datus (%1$s MB) ?</string>
     <string name="gps_network_not_enabled">GPS ir izslēgts. Vai ieslēgt to tagad?</string>

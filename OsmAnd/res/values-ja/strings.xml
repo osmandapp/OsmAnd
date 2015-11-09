@@ -1857,7 +1857,7 @@ POIの更新は利用できません</string>
     <string name="rendering_value_disabled_name">無効</string>
     <string name="osmo_share_my_location">現在地の共有</string>
     <string name="shared_string_logoff">ログオフ</string>
-    <string name="routing_attr_avoid_borders_name">国境越えを回避する</string>
+    
 	<string name="routing_attr_avoid_borders_description">国境越えを避ける</string>
 	<string name="routing_attr_height_name">高さ制限</string>
 	<string name="routing_attr_height_description">ルート上で通行可能な車両の高さを指定します</string>

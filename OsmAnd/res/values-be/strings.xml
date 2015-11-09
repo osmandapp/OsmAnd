@@ -1779,7 +1779,7 @@
     <string name="storage_directory_multiuser">Агульнае сховішча</string>
     <string name="application_dir_change_warning3">Вы хочаце, каб OsmAnd таксама скапіяваў свае файлы дадзеных у новае месца прызначэньня?</string>
     <string name="rendering_attr_hideHouseNumbers_name">Схаваць нумары дамоў</string>
-    <string name="routing_attr_avoid_borders_name">Пазьбягаць перасячэньне мяжы</string>
+    
 	<string name="routing_attr_avoid_borders_description">Пазьбягаць перасячэньня мяжы іншай краіны</string>
 	<string name="routing_attr_height_name">Абмежаваньне па вышыні</string>
 	<string name="routing_attr_height_description">Пазначце вышыню транспартнага сродку для разьліку маршруту</string>

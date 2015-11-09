@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.plus.ContextMenuAdapter;
@@ -36,6 +37,8 @@ import net.osmand.render.RenderingRuleStorageProperties;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -45,6 +48,7 @@ import java.util.List;
 import gnu.trove.list.array.TIntArrayList;
 
 public class ConfigureMapMenu {
+	private static final Log LOG = PlatformUtil.getLog(ConfigureMapMenu.class);
 
 	public interface OnClickListener{
 		public void onClick(boolean result);
@@ -126,10 +130,12 @@ public class ConfigureMapMenu {
 					ma.getMyApplication().getSelectedGpxHelper().clearAllGpxFileToShow();
 				} else {
 					AlertDialog dialog = ma.getMapLayers().showGPXFileLayer(getAlreadySelectedGpx(), ma.getMapView());
-					dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+					dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
 						@Override
-						public void onCancel(DialogInterface dialogInterface) {
-							cm.setSelection(pos, 0);
+						public void onDismiss(DialogInterface dialog) {
+							boolean areAnyGpxTracksVisible =
+									ma.getMyApplication().getSelectedGpxHelper().isShowingAnyGpxFiles();
+							cm.setSelection(pos, areAnyGpxTracksVisible ? 1 : 0);
 							adapter.notifyDataSetChanged();
 						}
 					});

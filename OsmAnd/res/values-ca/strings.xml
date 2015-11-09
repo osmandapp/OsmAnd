@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
 
     <string name="show_warnings_title">Mostra els missatges d\'avís…</string>
     <string name="map_widget_fluorescent">Rutes amb fluorescència</string>
@@ -1601,7 +1600,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="storage_directory">Emmagatzematge de mapes</string>
     <string name="shared_string_copy">Copia</string>
     <string name="rendering_attr_hideHouseNumbers_name">Amaga la numeració de finques</string>
-    <string name="routing_attr_avoid_borders_name">Evita creuar fronteres</string>
+    
     <string name="routing_attr_avoid_borders_description">Evita creuar la frontera a un altre pais</string>
     <string name="routing_attr_height_name">Límit d\'alçada</string>
     <string name="routing_attr_height_description">Indiqueu l\'alçada del vehicle que les rutes han d\'admetre</string>

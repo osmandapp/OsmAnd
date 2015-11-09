@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
     <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per visualizzare tracce e percorsi</string>
     <string name="offline_edition">Modifiche offline</string>
@@ -1812,7 +1811,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="rendering_value_highContrastRoads_name">Strade ad alto contrasto</string>
     <string name="storage_directory_multiuser">Memorizzazione multiutente</string>
     <string name="rendering_attr_hideHouseNumbers_name">Nascondi i numeri civici</string>
-    <string name="routing_attr_avoid_borders_name">Evita attraversamenti di frontiera</string>
+    
     <string name="routing_attr_avoid_borders_description">Evita l\'attraversamento di una frontiera verso un\'altra nazione</string>
     <string name="routing_attr_height_name">Limite di altezza</string>
     <string name="routing_attr_height_description">Specifica l\'altezza del veicolo che deve essere permessa sui percorsi</string>
