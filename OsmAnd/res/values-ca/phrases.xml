@@ -1714,4 +1714,10 @@
 	<string name="poi_diet_vegetarian_yes">Dieta vegetariana</string>
 	<string name="poi_diet_vegetarian_no">Dieta vegetariana: no</string>
 	<string name="poi_diet_vegetarian_few">Dieta vegetariana: algun plat</string>
+	<string name="poi_diet_vegan_only">Només dieta vegana</string>
+	<string name="poi_diet_vegan_yes">Dieta vegana</string>
+	<string name="poi_diet_vegan_no">Dieta vegana: no</string>
+	<string name="poi_diet_gluten_free_only">Només dieta per celíacs</string>
+	<string name="poi_diet_gluten_free_yes">Dieta per celíacs</string>
+	<string name="poi_diet_gluten_free_no">Dieta per celíacs:no</string>
 	</resources>
