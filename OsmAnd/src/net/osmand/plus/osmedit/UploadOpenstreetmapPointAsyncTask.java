@@ -45,6 +45,7 @@ public class UploadOpenstreetmapPointAsyncTask
 	protected Map<OsmPoint, String> doInBackground(OsmPoint... points) {
 		Map<OsmPoint, String> loadErrorsMap = new HashMap<>();
 
+		boolean uploaded = false;
 		for (OsmPoint point : points) {
 			if (interruptUploading)
 				break;
@@ -56,8 +57,9 @@ public class UploadOpenstreetmapPointAsyncTask
 					entityInfo = remotepoi.loadNode(p.getEntity());
 				}
 				Node n = remotepoi.commitNodeImpl(p.getAction(), p.getEntity(), entityInfo,
-						p.getComment(), closeChangeSet);
+						p.getComment(), false);
 				if (n != null) {
+					uploaded = true;
 					plugin.getDBPOI().deletePOI(p);
 					publishProgress(p);
 				}
@@ -78,6 +80,9 @@ public class UploadOpenstreetmapPointAsyncTask
 				}
 				loadErrorsMap.put(point, errorMessage);
 			}
+		}
+		if(uploaded) {
+			remotepoi.closeChangeSet();
 		}
 
 		return loadErrorsMap;
