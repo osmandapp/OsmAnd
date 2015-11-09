@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
     <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per visualizzare tracce e percorsi</string>
     <string name="offline_edition">Modifiche offline</string>
@@ -2039,4 +2040,5 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     
     
     <string name="rendering_attr_hideProposed_name">Nascondi gli oggetti proposti</string>
+    <string name="read_more">Leggi di più</string>
     </resources>
