@@ -1971,4 +1971,5 @@
     <string name="feedback">Återkoppling</string>
     <string name="read_more">Läs mer</string>
     <string name="whats_new">Nyheter</string>
+    <string name="rendering_attr_hideProposed_name">Dölj föreslagna objekt</string>
     </resources>
