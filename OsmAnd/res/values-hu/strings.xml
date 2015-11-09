@@ -1991,5 +1991,6 @@
     <string name="shared_string_upload">Feltöltés</string>
     <string name="osm_edit_created_poi">Létrehozott OSM POI</string>
     <string name="osm_edit_created_bug">Létrehozott OSM bug</string>
-    <string name="map_legend">Térkép jekulcs</string>
+    <string name="map_legend">Térkép jelkulcs</string>
+    <string name="favourites_edit_dialog_title">Kedvenc információk</string>
     </resources>
