@@ -23,11 +23,14 @@ import net.osmand.plus.mapcontextmenu.controllers.HistoryMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.MapDataMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.MyLocationMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.OsMoMenuController;
+import net.osmand.plus.mapcontextmenu.controllers.OsmBugMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.ParkingPositionMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.PointDescriptionMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.TargetPointMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.WptPtMenuController;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
+import net.osmand.plus.osmedit.OsmBugsLayer;
+import net.osmand.plus.osmedit.OsmBugsLayer.OpenStreetNote;
 import net.osmand.plus.osmedit.OsmPoint;
 import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
 
@@ -89,6 +92,8 @@ public abstract class MenuController extends BaseMenuController {
 				menuController = new WptPtMenuController(app, mapActivity, pointDescription, (WptPt) object);
 			} else if (object instanceof BinaryMapDataObject) {
 				menuController = new MapDataMenuController(app, mapActivity, pointDescription, (BinaryMapDataObject) object);
+			} else if (object instanceof OpenStreetNote) {
+				menuController = new OsmBugMenuController(app, mapActivity, pointDescription, (OpenStreetNote) object);
 			} else if (object instanceof LatLon) {
 				if (pointDescription.isParking()) {
 					menuController = new ParkingPositionMenuController(app, mapActivity, pointDescription);
@@ -213,11 +218,11 @@ public abstract class MenuController extends BaseMenuController {
 	}
 
 	public boolean needStreetName() {
-		return true;
+		return !displayDistanceDirection();
 	}
 
 	public boolean needTypeStr() {
-		return menuType != MenuType.STANDARD;
+		return true;
 	}
 
 	public boolean displayStreetNameInTitle() {
@@ -238,7 +243,7 @@ public abstract class MenuController extends BaseMenuController {
 
 	public String getTypeStr() { return ""; }
 
-	public String getNameStr() { return ""; }
+	public String getNameStr() { return pointDescription.getName(); }
 
 	public void share(LatLon latLon, String title) {
 		ShareMenu.show(latLon, title, getMapActivity());

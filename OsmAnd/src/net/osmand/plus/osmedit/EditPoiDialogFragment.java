@@ -621,7 +621,7 @@ public class EditPoiDialogFragment extends DialogFragment {
 				public void onClick(DialogInterface dialog, int which) {
 					String c = comment == null ? null : comment.getText().toString();
 					boolean closeChangeSet = closeChangesetCheckBox != null
-							&& closeChangesetCheckBox.isSelected();
+							&& closeChangesetCheckBox.isChecked();
 					commitNode(OsmPoint.Action.DELETE, n, openstreetmapUtil.getEntityInfo(), c,
 							closeChangeSet, new Runnable() {
 								@Override

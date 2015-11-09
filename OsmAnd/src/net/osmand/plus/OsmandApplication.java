@@ -715,4 +715,16 @@ public class OsmandApplication extends Application {
 	}
 
 
+	public String getLangTranslation(String l) {
+		try {
+			java.lang.reflect.Field f = R.string.class.getField("lang_"+l);
+			if (f != null) {
+				Integer in = (Integer) f.get(null);
+				return getString(in);
+			}
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return l;
+	}
 }
