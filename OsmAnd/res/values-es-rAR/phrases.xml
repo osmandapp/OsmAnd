@@ -2414,6 +2414,6 @@
 	<string name="poi_cargo_vehicle">Cargamento: Vehículos</string>
 	<string name="poi_cargo_bicycle">Cargamento: Bicicletas</string>
 	<string name="poi_cargo_container">Cargamento: Contenedores</string>
-	<string name="poi_cargo_hgv">Cargamento: Transporte pesado</string>
+	<string name="poi_cargo_hgv">Cargamento: Vehículos pesados</string>
 
 </resources>
