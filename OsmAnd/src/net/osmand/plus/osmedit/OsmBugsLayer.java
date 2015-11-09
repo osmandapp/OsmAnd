@@ -46,6 +46,7 @@ import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider, DialogProvider {
@@ -412,14 +413,17 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		builder.setView(view);
 		((EditText)view.findViewById(R.id.userNameEditText)).setText(getUserName());
 		((EditText)view.findViewById(R.id.passwordEditText)).setText(((OsmandApplication) activity.getApplication()).getSettings().USER_PASSWORD.get());
-		AndroidUtils.softKeyboardDelayed((EditText)view.findViewById(R.id.messageEditText));
+		AndroidUtils.softKeyboardDelayed((EditText) view.findViewById(R.id.messageEditText));
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
 		builder.setPositiveButton(R.string.osb_comment_dialog_add_button, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				OpenStreetNote bug = (OpenStreetNote) args.getSerializable(KEY_BUG);
-				String text = getTextAndUpdateUserPwd(view);
-				addingCommentAsync(bug, text, getUserName());
+				if (bug != null) {
+					String text = getTextAndUpdateUserPwd(view);
+					addingCommentAsync(bug, text, getUserName());
+					activity.getContextMenu().close();
+				}
 			}
 		});
 		return builder.create();
@@ -459,11 +463,12 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 				OpenStreetNote bug = (OpenStreetNote) args.getSerializable(KEY_BUG);
 				String us = activity.getMyApplication().getSettings().USER_NAME.get();
 				String pwd = activity.getMyApplication().getSettings().USER_PASSWORD.get();
-				if(us.length() == 0 || pwd.length() == 0) {
+				if (us.length() == 0 || pwd.length() == 0) {
 					AccessibleToast.makeText(activity, activity.getString(R.string.osb_author_or_password_not_specified),
 							Toast.LENGTH_SHORT).show();
 				}
 				closingAsync(bug, "");
+				activity.getContextMenu().close();
 			}
 		});
 		return builder.create();
@@ -498,31 +503,6 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	}
 	
 	@Override
-	public void populateObjectContextMenu(Object o, ContextMenuAdapter adapter) {
-		if(o instanceof OpenStreetNote) {
-			final OpenStreetNote bug = (OpenStreetNote) o;
-			OnContextMenuClick listener = new OnContextMenuClick() {
-				
-				@Override
-				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-					if (itemId == R.string.osb_comment_menu_item) {
-						commentBug(bug);
-					} else if (itemId == R.string.osb_close_menu_item) {
-						closeBug(bug);
-					}
-					return true;
-				}
-			};
-			adapter.item(R.string.osb_comment_menu_item).iconColor(
-					R.drawable.ic_action_note_dark
-					).listen(listener).reg();
-			adapter.item(R.string.osb_close_menu_item).iconColor(
-					R.drawable.ic_action_remove_dark
-					).listen(listener).reg();
-		}
-	}
-	
-	@Override
 	public String getObjectDescription(Object o) {
 		if(o instanceof OpenStreetNote){
 			return activity.getString(R.string.osb_bug_name) + " : " + ((OpenStreetNote)o).getCommentDescription(); //$NON-NLS-1$
@@ -533,7 +513,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	@Override
 	public PointDescription getObjectName(Object o) {
 		if(o instanceof OpenStreetNote){
-			return new PointDescription(PointDescription.POINT_TYPE_OSM_NOTE, ((OpenStreetNote)o).getCommentDescription()); 
+			return new PointDescription(PointDescription.POINT_TYPE_OSM_NOTE, activity.getString(R.string.osb_bug_name), "");
 		}
 		return null;
 	}
@@ -605,19 +585,38 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		public void setLongitude(double longitude) {
 			this.longitude = longitude;
 		}
-		
+
 		public String getCommentDescription() {
 			StringBuilder sb = new StringBuilder();
-			for (int i = 0; i < comments.size(); i++) {
-				if (i < dates.size()) {
-					sb.append(dates.get(i)).append(" ");
+			for (String s : getCommentDescriptionList()) {
+				if (sb.length() > 0) {
+					sb.append("\n");
 				}
-				if (i < users.size()) {
-					sb.append(users.get(i)).append(" : ");
-				}
-				sb.append(comments.get(i)).append("\n");
+				sb.append(s);
 			}
 			return sb.toString();
+		}
+
+		public List<String> getCommentDescriptionList() {
+			List<String> res = new ArrayList<>(comments.size());
+			for (int i = 0; i < comments.size(); i++) {
+				StringBuilder sb = new StringBuilder();
+				boolean needLineFeed = false;
+				if (i < dates.size()) {
+					sb.append(dates.get(i)).append(" ");
+					needLineFeed = true;
+				}
+				if (i < users.size()) {
+					sb.append(users.get(i)).append(":");
+					needLineFeed = true;
+				}
+				if (needLineFeed) {
+					sb.append("\n");
+				}
+				sb.append(comments.get(i));
+				res.add(sb.toString());
+			}
+			return res;
 		}
 		
 		public long getId() {

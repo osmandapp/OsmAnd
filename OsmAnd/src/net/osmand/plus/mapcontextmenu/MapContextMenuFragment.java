@@ -680,11 +680,8 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		TextView distanceText = (TextView) view.findViewById(R.id.distance);
 		ImageView direction = (ImageView) view.findViewById(R.id.direction);
 
-		boolean mapLinked = getMapActivity().getMapViewTrackingUtilities().isMapLinkedToLocation() && menu.getMyLocation() != null;
 		float myHeading = menu.getHeading() == null ? 0f : menu.getHeading();
-		float h = !mapLinked ? -getMapActivity().getMapRotate() : myHeading;
-
-		DashLocationFragment.updateLocationView(!mapLinked, menu.getMyLocation(), h, direction, distanceText,
+		DashLocationFragment.updateLocationView(false, menu.getMyLocation(), myHeading, direction, distanceText,
 				menu.getLatLon().getLatitude(), menu.getLatLon().getLongitude(), screenOrientation, getMyApplication(), getActivity());
 	}
 
@@ -910,10 +907,6 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	}
 
 	public void updateLocation(boolean centerChanged, boolean locationChanged, boolean compassChanged) {
-		boolean mapLinkedToLocation = getMapActivity().getMapViewTrackingUtilities().isMapLinkedToLocation();
-		if (compassChanged && !mapLinkedToLocation) {
-			return;
-		}
 		updateDistanceDirection();
 	}
 }
