@@ -92,8 +92,6 @@ public class EditPoiDialogFragment extends DialogFragment {
 		OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
 		if (settings.OFFLINE_EDITION.get() || !settings.isInternetConnectionAvailable(true)) {
 			mOpenstreetmapUtil = new OpenstreetmapLocalUtil(plugin, activity);
-		} else if (!settings.isInternetConnectionAvailable(true)) {
-			mOpenstreetmapUtil = new OpenstreetmapLocalUtil(plugin, activity);
 		} else {
 			mOpenstreetmapUtil = new OpenstreetmapRemoteUtil(activity);
 		}
@@ -249,7 +247,8 @@ public class EditPoiDialogFragment extends DialogFragment {
 		poiTypeEditText.setText(editPoiData.amenity.getSubType());
 
 		Button saveButton = (Button) view.findViewById(R.id.saveButton);
-		saveButton.setText(R.string.shared_string_save);
+		saveButton.setText(mOpenstreetmapUtil instanceof OpenstreetmapRemoteUtil?  R.string.shared_string_upload : 
+			R.string.shared_string_save);
 		saveButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -516,11 +515,10 @@ public class EditPoiDialogFragment extends DialogFragment {
 		final OsmandSettings settings = ((OsmandApplication) activity.getApplication())
 				.getSettings();
 		final OpenstreetmapUtil openstreetmapUtilToLoad;
-		if (settings.OFFLINE_EDITION.get() || !settings.isInternetConnectionAvailable(true)) {
+		if (//settings.OFFLINE_EDITION.get() ||
+				!settings.isInternetConnectionAvailable(true)) {
 			OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
 			openstreetmapUtilToLoad = new OpenstreetmapLocalUtil(plugin, activity);
-		} else if (!settings.isInternetConnectionAvailable(true)) {
-			openstreetmapUtilToLoad = new OpenstreetmapRemoteUtil(activity);
 		} else {
 			openstreetmapUtilToLoad = new OpenstreetmapRemoteUtil(activity);
 		}
@@ -596,6 +594,7 @@ public class EditPoiDialogFragment extends DialogFragment {
 				AccessibleToast.makeText(activity, activity.getResources().getString(R.string.poi_error_poi_not_found), Toast.LENGTH_LONG).show();
 				return;
 			}
+			// FIXME give back alert dialog and use openstreetmapUtil field!
 			DeletePoiDialogFragment.createInstance(n).show(activity.getSupportFragmentManager(),
 					"DeletePoiDialogFragment");
 		}
