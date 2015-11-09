@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
     <string name="ChooseCountry">Välj land</string>
     <string name="choose_city">Välj stad</string>
@@ -1752,7 +1751,7 @@
     <string name="routing_attr_height_name">Höjdgräns</string>
     <string name="use_fast_recalculation">Smart omräkning av rutt</string>
     <string name="use_fast_recalculation_desc">Räkna om endast början av rutten för långa resor</string>
-    <string name="routing_attr_avoid_borders_name">Undvik gränsövergångar</string>
+    
     <string name="routing_attr_height_description">Ange tillåten fordonshöjd på rutter</string>
     <string name="osmo_share_my_location">Dela ut min position</string>
     <string name="shared_string_logoff">Logga ut</string>

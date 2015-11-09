@@ -1941,7 +1941,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="search_poi_category_hint">Wprowadź tekst, aby wyszukać dane</string>
     <string name="rendering_attr_hideHouseNumbers_name">Ukrywanie numerów budynków</string>
     <string name="storage_directory_multiuser">Pamięć użytkownika</string>
-    <string name="routing_attr_avoid_borders_name">Unikanie przekraczania granicy</string>
+    
 	<string name="routing_attr_avoid_borders_description">Unika przekraczania granicy z innym państwem</string>
 	<string name="routing_attr_height_name">Limit wysokości</string>
 	<string name="routing_attr_height_description">Określa maksymalną, dozwoloną wysokość pojazdu</string>

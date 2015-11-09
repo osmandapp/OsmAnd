@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="offline_edition">Modifications hors-ligne</string>
     <string name="offline_edition_descr">Toujours utiliser l\'édition hors-ligne</string>
 
@@ -1851,7 +1850,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="shared_string_copy">Copier</string>
     <string name="application_dir_change_warning3">Souhaitez-vous aussi qu\'OsmAnd copie ses fichiers de données vers la nouvelle destination ?</string>
     <string name="rendering_attr_hideHouseNumbers_name">Masquer les numéros dans les rues</string>
-    <string name="routing_attr_avoid_borders_name">Ne pas franchir les frontières</string>
+    
     <string name="routing_attr_avoid_borders_description">Éviter de franchir les frontières entre pays</string>
     <string name="routing_attr_height_name">Limite de hauteur</string>
     <string name="routing_attr_height_description">Précisez la hauteur du véhicule qui doit être respectée sur les routes empruntées</string>

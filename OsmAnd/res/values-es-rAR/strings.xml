@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
 
     <string name="rendering_attr_hideHouseNumbers_name">Ocultar números de casa</string>
     <string name="copying_osmand_file_failed">Falló al copiar archivos</string>
@@ -1729,7 +1728,7 @@
     <string name="plugin_description_title">Descripción</string>
     <string name="plugin_install_needs_network">Necesitas una conexión a Internet para instalar este complemento.</string>
     <string name="get_plugin">Obtener</string>
-    <string name="routing_attr_avoid_borders_name">Evitar cruzar fronteras</string>
+    
     <string name="routing_attr_avoid_borders_description">Evite cruzar fronteras con otro país</string>
     <string name="routing_attr_height_name">Límite de altura</string>
     <string name="routing_attr_height_description">Indica la altura permitida del vehículo en rutas</string>

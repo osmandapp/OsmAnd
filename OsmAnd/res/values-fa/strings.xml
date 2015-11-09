@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="local_osm_changes_backup_failed">پشتیبان‌گیری از تغییرات OsmAnd ناموفق بود</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="local_osm_changes_backup_failed">پشتیبان‌گیری از تغییرات OsmAnd ناموفق بود</string>
     <string name="plugin_distance_point_time">زمان</string>
     <string name="plugin_distance_point_hdop">دقت</string>
     <string name="plugin_distance_point_speed">سرعت</string>
@@ -868,7 +867,7 @@
     
     <string name="download_hillshade_maps">لایه تپه سایه</string>
     
-    <string name="osmand_srtm_long_description_1000_chars">"این افزونه، منحنی‌های هم‌تراز را که در نقشه‌های آفلاین OsmAnd نمایش داده میشوند فراهم میکند. داده‌های جهانی (بین 70 درجه شمالی و 70 درجه جنوبی) در این زمینه براساس اندازه گیری‌های SRTM (مأموریت توپوگرافی رادار شاتل) و ASTER (رادیومتر انعکاسی و پرتویی حرارتی هوایی پیشرفته)، یک ابزار تصویربرداری پردازنده ترا و ماهواره فوق پیشرفته سیستم نظارتی زمین ناسا مییباشند. ASTER محصول تلاش مشترک میان ناسا، وزارت اقتصاد ژاپن، صنعت و تجارت (متی)، و سیستم های فضایی ژاپن (جی-اسپیس سیستم) است. "</string>
+    <string name="osmand_srtm_long_description_1000_chars">"این افزونه، منحنی‌های هم‌تراز را که در نقشه‌&#157;های آفلاین OsmAnd نمایش داده میشوند فراهم میکند. داده‌های جهانی (بین 70 درجه شمالی و 70 درجه جنوبی) در این زمینه براساس اندازه گیری‌های SRTM (مأموریت توپوگرافی رادار شاتل) و ASTER (رادیومتر انعکاسی و پرتویی حرارتی هوایی پیشرفته)، یک ابزار تصویربرداری پردازنده ترا و ماهواره فوق پیشرفته سیستم نظارتی زمین ناسا مییباشند. ASTER محصول تلاش مشترک میان ناسا، وزارت اقتصاد ژاپن، صنعت و تجارت (متی)، و سیستم های فضایی ژاپن (جی-اسپیس سیستم) است. "</string>
     <string name="srtm_plugin_description">تسهیل دانلود خطوط هم‌تراز و سایه تپه (\'تنظیمات\'-&gt;\'مدیریت نقشه ها\'-&gt;\'دانلود\'-&gt;\'انتخاب نوع نقشه\'  مورد نظر).</string>
     <string name="monitoring_control_start">جی پی ایکس</string>
     <string name="rendering_attr_noPolygons_description">محو کردن همه عوارض زمین روی نقشه</string>

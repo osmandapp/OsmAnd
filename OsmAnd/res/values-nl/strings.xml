@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
   
   <string name="layer_map_appearance">Configureer scherm</string>
   <string name="show_lanes">Toon rijstroken</string>
@@ -1975,7 +1974,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="rendering_value__name">Standaard</string>
     <string name="rendering_value_highContrastRoads_name">Wegen met hoog contrast</string>
 	<string name="index_name_netherlands">Europa - Nederland</string>
-	<string name="routing_attr_avoid_borders_name">Vermijd grensovergangen</string>
+	
 	<string name="routing_attr_avoid_borders_description">Vermijd het oversteken van landsgrenzen</string>
 	<string name="routing_attr_height_name">Hoogtelimiet</string>
 	<string name="routing_attr_height_description">Geef de massa van het voertuig dat toegestaan moet zijn op de routes</string>

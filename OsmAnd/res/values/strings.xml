@@ -728,7 +728,6 @@
 	<string name="routing_attr_avoid_ferries_description">Avoid ferries</string>
 	<string name="routing_attr_avoid_motorway_name">Avoid motorways</string>
 	<string name="routing_attr_avoid_motorway_description">Avoid motorways</string>
-	<string name="routing_attr_avoid_borders_name">Avoid border crossing</string>
 	<string name="routing_attr_avoid_borders_description">Avoid crossing a border into another country</string>
 	<string name="routing_attr_weight_name">Weight limit</string>
 	<string name="routing_attr_weight_description">Specify vehicle weight to be permitted on routes</string>

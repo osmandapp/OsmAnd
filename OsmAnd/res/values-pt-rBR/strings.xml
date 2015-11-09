@@ -1672,7 +1672,7 @@
 	
 	<string name="osmo_share_my_location">Compartilhar a minha posição</string>
     <string name="shared_string_logoff">Desconectar</string>
-    <string name="routing_attr_avoid_borders_name">Evitar atravessar fronteiras</string>
+    
 	<string name="routing_attr_avoid_borders_description">Evitar atravessar fronteiras com outro país</string>
 	<string name="routing_attr_height_name">Limite de altura</string>
 	<string name="routing_attr_height_description">Especificar a altura do veículo para ser permitida nas rotas</string>

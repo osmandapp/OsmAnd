@@ -1948,7 +1948,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="rendering_value__name">За замовчуванням</string>
     <string name="rendering_value_highContrastRoads_name">Контрастні дороги</string>
 	<string name="index_name_netherlands">Європа - Нідерланди</string>
-	<string name="routing_attr_avoid_borders_name">Уникати перетину кордону</string>
+	
 	<string name="routing_attr_avoid_borders_description">Уникати перетину кордону з іншою країною</string>
 	<string name="routing_attr_height_name">Обмеження висоти</string>
 	<string name="routing_attr_height_description">Вкажіть висоту автівки, щоб враховувати її під час прокладання маршрутів</string>

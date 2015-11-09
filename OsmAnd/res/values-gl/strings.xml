@@ -1761,7 +1761,7 @@
 	<string name="proxy_host_descr">Configurar o nome de servidor do proxy (p.ex. 127.0.0.1)</string>
 	<string name="proxy_port_title">Porto do proxy</string>
 	<string name="proxy_port_descr">Configure o número de porto do proxy (p.ex. 8118)</string>
-	<string name="routing_attr_avoid_borders_name">Evitar cruzar fronteiras</string>
+	
 	<string name="routing_attr_avoid_borders_description">Evitar cruzar unha fronteira con outro país</string>
 	<string name="routing_attr_height_name">Gálibo</string>
 	<string name="routing_attr_height_description">Indique a altura dos vehículos permitida nas rutas</string>
