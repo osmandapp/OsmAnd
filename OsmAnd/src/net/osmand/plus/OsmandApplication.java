@@ -717,7 +717,7 @@ public class OsmandApplication extends Application {
 
 	public String getLangTranslation(String l) {
 		try {
-			Field f = R.string.class.getField("lang_"+l);
+			java.lang.reflect.Field f = R.string.class.getField("lang_"+l);
 			if (f != null) {
 				Integer in = (Integer) f.get(null);
 				return getString(in);
