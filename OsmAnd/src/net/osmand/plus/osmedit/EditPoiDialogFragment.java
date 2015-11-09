@@ -38,8 +38,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,7 +58,6 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.osmedit.dialogs.DeletePoiDialogFragment;
 import net.osmand.plus.osmedit.dialogs.PoiSubTypeDialogFragment;
 import net.osmand.plus.osmedit.dialogs.PoiTypeDialogFragment;
 import net.osmand.util.Algorithms;
@@ -247,13 +248,12 @@ public class EditPoiDialogFragment extends DialogFragment {
 		poiTypeEditText.setText(editPoiData.amenity.getSubType());
 
 		Button saveButton = (Button) view.findViewById(R.id.saveButton);
-		saveButton.setText(mOpenstreetmapUtil instanceof OpenstreetmapRemoteUtil?  R.string.shared_string_upload : 
-			R.string.shared_string_save);
+		saveButton.setText(mOpenstreetmapUtil instanceof OpenstreetmapRemoteUtil
+				? R.string.shared_string_upload : R.string.shared_string_save);
 		saveButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				save();
-
 			}
 		});
 		Button cancelButton = (Button) view.findViewById(R.id.cancelButton);
@@ -589,14 +589,58 @@ public class EditPoiDialogFragment extends DialogFragment {
 			return openstreetmapUtil.loadNode(params[0]);
 		}
 
-		protected void onPostExecute(Node n) {
+		protected void onPostExecute(final Node n) {
 			if (n == null) {
 				AccessibleToast.makeText(activity, activity.getResources().getString(R.string.poi_error_poi_not_found), Toast.LENGTH_LONG).show();
 				return;
 			}
 			// FIXME give back alert dialog and use openstreetmapUtil field!
-			DeletePoiDialogFragment.createInstance(n).show(activity.getSupportFragmentManager(),
-					"DeletePoiDialogFragment");
+			AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+			builder.setTitle(R.string.poi_remove_title);
+			final EditText comment;
+			final CheckBox closeChangesetCheckBox;
+			final boolean isLocalEdit = openstreetmapUtil instanceof OpenstreetmapLocalUtil;
+			if (isLocalEdit) {
+				closeChangesetCheckBox = null;
+				comment = null;
+			} else {
+				LinearLayout ll = new LinearLayout(activity);
+				ll.setPadding(16, 2, 16, 0);
+				ll.setOrientation(LinearLayout.VERTICAL);
+				closeChangesetCheckBox = new CheckBox(activity);
+				closeChangesetCheckBox.setText(R.string.close_changeset);
+				ll.addView(closeChangesetCheckBox);
+				comment = new EditText(activity);
+				comment.setText(R.string.poi_remove_title);
+				ll.addView(comment);
+				builder.setView(ll);
+			}
+			builder.setNegativeButton(R.string.shared_string_cancel, null);
+			builder.setPositiveButton(R.string.shared_string_delete, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					String c = comment == null ? null : comment.getText().toString();
+					boolean closeChangeSet = closeChangesetCheckBox != null
+							&& closeChangesetCheckBox.isSelected();
+					commitNode(OsmPoint.Action.DELETE, n, openstreetmapUtil.getEntityInfo(), c,
+							closeChangeSet, new Runnable() {
+								@Override
+								public void run() {
+									if (isLocalEdit) {
+										AccessibleToast.makeText(
+												activity, R.string.osm_changes_added_to_local_edits,
+												Toast.LENGTH_LONG).show();
+									} else {
+										AccessibleToast.makeText(activity, R.string.poi_remove_success, Toast.LENGTH_LONG).show();
+									}
+									if (activity instanceof MapActivity) {
+										((MapActivity) activity).getMapView().refreshMap(true);
+									}
+								}
+							}, activity, openstreetmapUtil);
+				}
+			});
+			builder.create().show();
 		}
 	}
 
