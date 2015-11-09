@@ -35,7 +35,6 @@ public class MapDataMenuController extends MenuController {
 	private WorldRegion region;
 	private IndexItem indexItem;
 	private List<IndexItem> otherIndexItems;
-	private String name;
 
 	private DownloadValidationManager downloadValidationManager;
 	private DownloadIndexesThread downloadThread;
@@ -45,7 +44,6 @@ public class MapDataMenuController extends MenuController {
 		OsmandRegions osmandRegions = app.getRegions();
 		String fullName = osmandRegions.getFullName(dataObject);
 		this.region = osmandRegions.getRegionData(fullName);
-		name = getPointDescription().getName();
 		downloadValidationManager = new DownloadValidationManager(app);
 		downloadThread = app.getDownloadThread();
 
@@ -118,11 +116,6 @@ public class MapDataMenuController extends MenuController {
 	@Override
 	public Drawable getLeftIcon() {
 		return getIcon(R.drawable.ic_map, R.color.osmand_orange_dark, R.color.osmand_orange);
-	}
-
-	@Override
-	public String getNameStr() {
-		return name;
 	}
 
 	@Override

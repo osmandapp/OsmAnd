@@ -51,11 +51,6 @@ public class HistoryMenuController extends MenuController {
 	}
 
 	@Override
-	public String getNameStr() {
-		return getPointDescription().getName();
-	}
-
-	@Override
 	public String getTypeStr() {
 		if (needTypeStr()) {
 			return entry.getName().getTypeName();

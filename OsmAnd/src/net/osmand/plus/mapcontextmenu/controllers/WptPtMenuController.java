@@ -70,9 +70,4 @@ public class WptPtMenuController extends MenuController {
 	public String getTypeStr() {
 		return wpt.category != null ? wpt.category : getMapActivity().getString(R.string.shared_string_none);
 	}
-
-	@Override
-	public String getNameStr() {
-		return getPointDescription().getName();
-	}
 }

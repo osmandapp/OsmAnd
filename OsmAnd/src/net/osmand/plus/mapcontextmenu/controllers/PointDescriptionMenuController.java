@@ -53,11 +53,6 @@ public class PointDescriptionMenuController extends MenuController {
 	}
 
 	@Override
-	public String getNameStr() {
-		return getPointDescription().getName();
-	}
-
-	@Override
 	public String getTypeStr() {
 		if (needTypeStr()) {
 			return getPointDescription().getTypeName();

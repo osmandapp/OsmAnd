@@ -62,11 +62,6 @@ public class ParkingPositionMenuController extends MenuController {
 	}
 
 	@Override
-	public String getNameStr() {
-		return getPointDescription().getName();
-	}
-
-	@Override
 	public String getTypeStr() {
 		return parkingDescription;
 	}

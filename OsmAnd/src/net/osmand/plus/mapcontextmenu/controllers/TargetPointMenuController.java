@@ -69,11 +69,6 @@ public class TargetPointMenuController extends MenuController {
 	}
 
 	@Override
-	public String getNameStr() {
-		return getPointDescription().getName();
-	}
-
-	@Override
 	public String getTypeStr() {
 		return targetPoint.getPointDescription(getMapActivity()).getTypeName();
 	}
