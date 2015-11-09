@@ -720,7 +720,7 @@ public class OsmandApplication extends Application {
 			Field f = R.string.class.getField("lang_"+l);
 			if (f != null) {
 				Integer in = (Integer) f.get(null);
-				return app.getString(in);
+				return getString(in);
 			}
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
