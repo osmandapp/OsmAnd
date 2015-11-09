@@ -413,7 +413,7 @@ public class ConfigureMapMenu {
 		String[] translates = new String[mapNamesIds.length];
 		translates[0] = ctx.getString(R.string.local_map_names);
 		for(int i = 1; i < translates.length; i++) {
-			translates[i] = ((OsmandApplication)ctx.getApplication()).getLangTranslate(mapNamesIds[i]);
+			translates[i] = ((OsmandApplication)ctx.getApplication()).getLangTranslation(mapNamesIds[i]);
 		}
 		
 		return translates;
