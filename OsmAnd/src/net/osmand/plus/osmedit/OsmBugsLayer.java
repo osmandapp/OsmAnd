@@ -279,6 +279,9 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 				}
 			}
 			reader.close();
+			for (OpenStreetNote note : bugs) {
+				note.acquireDescriptionAndType();
+			}
 		} catch (IOException e) {
 			log.warn("Error loading bugs", e); //$NON-NLS-1$
 		} catch (NumberFormatException e) {
@@ -513,7 +516,10 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	@Override
 	public PointDescription getObjectName(Object o) {
 		if(o instanceof OpenStreetNote){
-			return new PointDescription(PointDescription.POINT_TYPE_OSM_NOTE, activity.getString(R.string.osb_bug_name), "");
+			OpenStreetNote bug = (OpenStreetNote) o;
+			String name = bug.description != null ? bug.description : "";
+			String typeName = bug.typeName != null ? bug.typeName : activity.getString(R.string.osb_bug_name);
+			return new PointDescription(PointDescription.POINT_TYPE_OSM_NOTE, typeName, name);
 		}
 		return null;
 	}
@@ -567,23 +573,62 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		private static final long serialVersionUID = -7848941747811172615L;
 		private double latitude;
 		private double longitude;
-		private String name;
+		private String description;
+		private String typeName;
 		private List<String> dates = new ArrayList<String>();
 		private List<String> comments = new ArrayList<String>();
 		private List<String> users = new ArrayList<String>();
 		private long id;
 		private boolean opened;
+
+		private void acquireDescriptionAndType() {
+			for (int i = 0; i < comments.size(); i++) {
+				StringBuilder sb = new StringBuilder();
+				if (i < dates.size()) {
+					sb.append(dates.get(i)).append(" ");
+				}
+				if (i < users.size()) {
+					sb.append(users.get(i));
+				}
+				description = comments.get(i);
+				typeName = sb.toString();
+				break;
+			}
+			if (description != null) {
+				if (comments.size() > 0) {
+					comments.remove(0);
+				}
+				if (dates.size() > 0) {
+					dates.remove(0);
+				}
+				if (users.size() > 0) {
+					users.remove(0);
+				}
+			}
+		}
+
 		public double getLatitude() {
 			return latitude;
 		}
+
 		public void setLatitude(double latitude) {
 			this.latitude = latitude;
 		}
+
 		public double getLongitude() {
 			return longitude;
 		}
+
 		public void setLongitude(double longitude) {
 			this.longitude = longitude;
+		}
+
+		public String getDescription() {
+			return description;
+		}
+
+		public String getTypeName() {
+			return typeName;
 		}
 
 		public String getCommentDescription() {
