@@ -180,7 +180,7 @@ public class HelpActivity extends OsmandActionBarActivity {
 			if (!this.getString(R.string.app_edition).equals("")) {
 				releasedate = ", " + this.getString(R.string.shared_string_release).toLowerCase() + ": " + this.getString(R.string.app_edition);
 			}
-			String version = Version.getFullVersion(getOsmandApplication()) + " " + releasedate;
+			String version = Version.getFullVersion(getOsmandApplication()) + releasedate;
 			ShowArticleOnTouchListener listener = new ShowArticleOnTouchListener(
 					"feature_articles/about.html", getActivity(), version);
 
