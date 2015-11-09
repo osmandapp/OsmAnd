@@ -43,12 +43,11 @@
 
                     <ImageView
                         android:id="@+id/context_menu_icon_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="12dp"
+                        android:layout_width="@dimen/standard_icon_size"
+                        android:layout_height="@dimen/standard_icon_size"
+                        android:layout_marginLeft="16dp"
                         android:layout_marginStart="12dp"
                         android:layout_marginTop="18dp"
-                        android:scaleType="center"
                         android:src="@drawable/ic_action_building_number"/>
 
                 </LinearLayout>

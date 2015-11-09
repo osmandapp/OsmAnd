@@ -41,11 +41,6 @@ public class OsMoMenuController extends MenuController {
 	}
 
 	@Override
-	public String getNameStr() {
-		return getPointDescription().getName();
-	}
-
-	@Override
 	public String getTypeStr() {
 		OsmandApplication app = getMapActivity().getMyApplication();
 		StringBuilder sb = new StringBuilder();

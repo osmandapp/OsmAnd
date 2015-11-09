@@ -75,9 +75,4 @@ public class AmenityMenuController extends MenuController {
 		}
 		addMyLocationToPlainItems(pointDescription, amenity.getLocation());
 	}
-
-	@Override
-	public String getNameStr() {
-		return getPointDescription().getName();
-	}
 }

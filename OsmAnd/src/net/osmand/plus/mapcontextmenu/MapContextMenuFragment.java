@@ -531,7 +531,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 			iconLayout.setVisibility(View.VISIBLE);
 		} else if (iconId != 0) {
 			iconView.setImageDrawable(iconsCache.getIcon(iconId,
-					light ? R.color.osmand_orange : R.color.osmand_orange_dark, 0.75f));
+					light ? R.color.osmand_orange : R.color.osmand_orange_dark));
 			iconLayout.setVisibility(View.VISIBLE);
 		} else {
 			iconLayout.setVisibility(View.GONE);
