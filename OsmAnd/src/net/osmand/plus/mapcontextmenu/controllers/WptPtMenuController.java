@@ -48,6 +48,11 @@ public class WptPtMenuController extends MenuController {
 	}
 
 	@Override
+	public boolean displayDistanceDirection() {
+		return true;
+	}
+
+	@Override
 	public Drawable getLeftIcon() {
 		return FavoriteImageDrawable.getOrCreate(getMapActivity().getMyApplication(), wpt.getColor(), true);
 	}
@@ -64,10 +69,5 @@ public class WptPtMenuController extends MenuController {
 	@Override
 	public String getTypeStr() {
 		return wpt.category != null ? wpt.category : getMapActivity().getString(R.string.shared_string_none);
-	}
-
-	@Override
-	public String getNameStr() {
-		return getPointDescription().getName();
 	}
 }

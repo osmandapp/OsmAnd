@@ -32,6 +32,11 @@ public class HistoryMenuController extends MenuController {
 	}
 
 	@Override
+	public boolean displayDistanceDirection() {
+		return true;
+	}
+
+	@Override
 	public Drawable getLeftIcon() {
 		return getIcon(SearchHistoryFragment.getItemIcon(entry.getName()));
 	}
@@ -43,11 +48,6 @@ public class HistoryMenuController extends MenuController {
 		} else {
 			return null;
 		}
-	}
-
-	@Override
-	public String getNameStr() {
-		return getPointDescription().getName();
 	}
 
 	@Override

@@ -1737,8 +1737,8 @@
     <string name="si_kmh">Kilometry za hodinu</string>
     <string name="si_mph">Míle za hodinu</string>
     <string name="si_m_s">Metrů za sekundu</string>
-    <string name="si_min_km">Minut za kilometr</string>
-    <string name="si_min_m">Minut za míli</string>
+    <string name="si_min_km">Minut na kilometr</string>
+    <string name="si_min_m">Minut na míli</string>
     <string name="si_nm_h">Námořní míle za hodinu (uzly)</string>
     <string name="nm_h">nm/h</string>
     <string name="min_mile">min/m</string>
@@ -1759,7 +1759,7 @@
     <string name="regions">Regiony</string>
     <string name="region_maps">Mapy regionů</string>
     <string name="world_maps">Světové mapy</string>
-    <string name="favorite_category_dublicate_message">Zadané jméno kategorie již existuje. Prosím určete jiný název.</string>
+    <string name="favorite_category_dublicate_message">Zadaný název kategorie již existuje. Zvolte prosím jiný název.</string>
     <string name="favorite_category_name">Název kategorie</string>
     <string name="favorite_category_add_new_title">Přidat novou kategorii</string>
     <string name="activate_seamarks_plugin">Prosím aktivujte modul Námořní značky</string>
@@ -1778,9 +1778,9 @@
     <string name="shared_string_send">Odeslat</string>
     <string name="simulate_initial_startup_descr">Nastavit příznak označující první start aplikace, ostatní nastavení ponechat nezměněné</string>
     <string name="confirm_download_roadmaps">Opravdu chcete stáhnout silniční mapu, když už máte podrobnou mapu?</string>
-    <string name="application_dir_description">Zvolte kam chcete uložit mapové soubory.</string>
+    <string name="application_dir_description">Zvolte, kam chcete uložit mapové soubory.</string>
     <string name="show_on_start_description">\'Vypnuto\' spouští přímo mapovou obrazovku</string>
-    <string name="world_map_download_descr">Základní mapa světa (pokrývající celý svět při malých detailech) chybí nebo je zastaralá. Prosím zvažte její stažení pro kompletní prostředí.</string>
+    <string name="world_map_download_descr">Základní mapa světa (pokrývající celý svět při malých detailech) chybí nebo je zastaralá. Prosím zvažte její stažení, aby vaše prostředí bylo kompletní.</string>
     <string name="shared_string_qr_code">QR kód</string>
     <string name="map_downloaded">Mapa stažena</string>
     <string name="map_downloaded_descr">Mapa %1$s byla stažena. Pro její použití se vraťte zpět na mapu.</string>
@@ -1791,7 +1791,7 @@
     <string name="new_version">Nová verze</string>
     <string name="begin_with_osmand_menu_group">První kroky s OsmAnd</string>
     <string name="features_menu_group">Vlastnosti</string>
-    <string name="help_us_to_improve_menu_group">Pomoz nám vylepšit OsmAnd</string>
+    <string name="help_us_to_improve_menu_group">Pomozte nám vylepšit OsmAnd</string>
     <string name="other_menu_group">Další</string>
     <string name="plugins_menu_group">Moduly</string>
     <string name="first_usage_item">První použití</string>

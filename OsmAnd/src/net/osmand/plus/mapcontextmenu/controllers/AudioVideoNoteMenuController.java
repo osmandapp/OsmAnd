@@ -86,11 +86,6 @@ public class AudioVideoNoteMenuController extends MenuController {
 	}
 
 	@Override
-	public String getNameStr() {
-		return getPointDescription().getName();
-	}
-
-	@Override
 	public String getTypeStr() {
 		return recording.getType(getMapActivity());
 	}

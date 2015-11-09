@@ -47,6 +47,11 @@ public class TargetPointMenuController extends MenuController {
 	}
 
 	@Override
+	public boolean displayDistanceDirection() {
+		return true;
+	}
+
+	@Override
 	public Drawable getLeftIcon() {
 		if (!targetPoint.intermediate) {
 			if (isLight()) {
@@ -61,11 +66,6 @@ public class TargetPointMenuController extends MenuController {
 				return getIconOrig(R.drawable.widget_intermediate_night);
 			}
 		}
-	}
-
-	@Override
-	public String getNameStr() {
-		return getPointDescription().getName();
 	}
 
 	@Override

@@ -35,7 +35,6 @@ public class MapDataMenuController extends MenuController {
 	private WorldRegion region;
 	private IndexItem indexItem;
 	private List<IndexItem> otherIndexItems;
-	private String name;
 
 	private DownloadValidationManager downloadValidationManager;
 	private DownloadIndexesThread downloadThread;
@@ -45,7 +44,6 @@ public class MapDataMenuController extends MenuController {
 		OsmandRegions osmandRegions = app.getRegions();
 		String fullName = osmandRegions.getFullName(dataObject);
 		this.region = osmandRegions.getRegionData(fullName);
-		name = getPointDescription().getName();
 		downloadValidationManager = new DownloadValidationManager(app);
 		downloadThread = app.getDownloadThread();
 
@@ -121,11 +119,6 @@ public class MapDataMenuController extends MenuController {
 	}
 
 	@Override
-	public String getNameStr() {
-		return name;
-	}
-
-	@Override
 	public String getTypeStr() {
 		String res;
 		if (region != null && region.getSuperregion() != null) {
@@ -153,9 +146,9 @@ public class MapDataMenuController extends MenuController {
 			String[] items = region.getParams().getWikiLink().split(":");
 			String url;
 			if (items.length > 1) {
-				url = "https://" + items[0] + ".wikipedia.org/wiki/" + items[1];
+				url = "https://" + items[0] + ".wikipedia.org/wiki/" + items[1].replace(' ', '_');
 			} else {
-				url = "https://wikipedia.org/wiki/" + items[0];
+				url = "https://wikipedia.org/wiki/" + items[0].replace(' ', '_');
 			}
 			addPlainMenuItem(R.drawable.ic_world_globe_dark, url, true);
 		}

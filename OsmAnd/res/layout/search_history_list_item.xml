@@ -61,6 +61,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="2dp"
+                    android:layout_gravity="center_vertical"
                     android:textColor="?android:textColorSecondary"
                     android:textSize="@dimen/default_sub_text_size"
                     tools:text="100500 km" />

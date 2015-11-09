@@ -52,13 +52,13 @@ public class ParkingPositionMenuController extends MenuController {
 	}
 
 	@Override
-	public Drawable getLeftIcon() {
-		return getIcon(R.drawable.ic_action_parking_dark, R.color.map_widget_blue, R.color.osmand_orange);
+	public boolean displayDistanceDirection() {
+		return true;
 	}
 
 	@Override
-	public String getNameStr() {
-		return getPointDescription().getName();
+	public Drawable getLeftIcon() {
+		return getIcon(R.drawable.ic_action_parking_dark, R.color.map_widget_blue, R.color.osmand_orange);
 	}
 
 	@Override

@@ -220,7 +220,11 @@ public abstract class MenuController extends BaseMenuController {
 		return menuType != MenuType.STANDARD;
 	}
 
-	public boolean displayStreetNameinTitle() {
+	public boolean displayStreetNameInTitle() {
+		return false;
+	}
+
+	public boolean displayDistanceDirection() {
 		return false;
 	}
 

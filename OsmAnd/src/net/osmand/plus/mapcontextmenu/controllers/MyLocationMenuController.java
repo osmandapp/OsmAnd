@@ -25,9 +25,4 @@ public class MyLocationMenuController  extends MenuController {
 		ApplicationMode appMode = getMapActivity().getMyApplication().getSettings().getApplicationMode();
 		return getMapActivity().getResources().getDrawable(appMode.getResourceLocation());
 	}
-
-	@Override
-	public String getNameStr() {
-		return getPointDescription().getName();
-	}
 }

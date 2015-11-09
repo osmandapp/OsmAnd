@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="send_files_to_osm">GPX fájl küldése OSM-re?</string>
     <string name="gpx_visibility_txt">Láthatóság</string>
     <string name="gpx_tags_txt">Címkék</string>
@@ -1968,10 +1969,10 @@
     <string name="other_menu_group">Egyebek</string>
     <string name="plugins_menu_group">Bővítmények</string>
     <string name="first_usage_item">Első használat</string>
-    <string name="first_usage_item_description">Hogyan tölts le térképet, alap beállítások</string>
+    <string name="first_usage_item_description">Hogyan tölts le térképeket, alap beállítások</string>
     <string name="navigation_item_description">Navigáció beállítása</string>
     <string name="faq_item">GYIK</string>
-    <string name="faq_item_description">Hogyan használd a bővítményeket</string>
+    <string name="faq_item_description">Gyakran ismételt kérdések</string>
     <string name="map_viewing_item">Térkép böngészése</string>
     <string name="search_on_the_map_item">Keresés a térképen</string>
     <string name="planning_trip_item">Utazás tervezése</string>
@@ -1983,4 +1984,13 @@
     <string name="versions_item">Verziók</string>
     <string name="feedback">szavazás</string>
     <string name="contact_us">Kapcsolat</string>
-</resources>
+<string name="read_more">Bővebben</string>
+    <string name="whats_new">Újdonságok</string>
+    <string name="rendering_attr_hideProposed_name">Tervezett objektumok elrejtése</string>
+    <string name="shared_string_update">Frissítés</string>
+    <string name="shared_string_upload">Feltöltés</string>
+    <string name="osm_edit_created_poi">Létrehozott OSM POI</string>
+    <string name="osm_edit_created_bug">Létrehozott OSM bug</string>
+    <string name="map_legend">Térkép jelkulcs</string>
+    <string name="favourites_edit_dialog_title">Kedvenc információk</string>
+    </resources>

@@ -142,7 +142,7 @@ public class MapMultiSelectionMenuFragment extends Fragment implements AdapterVi
 			iconLayout.setVisibility(View.VISIBLE);
 		} else if (iconId != 0) {
 			iconView.setImageDrawable(iconsCache.getIcon(iconId,
-					menu.isLight() ? R.color.osmand_orange : R.color.osmand_orange_dark, 0.75f));
+					menu.isLight() ? R.color.osmand_orange : R.color.osmand_orange_dark));
 			iconLayout.setVisibility(View.VISIBLE);
 		} else {
 			iconLayout.setVisibility(View.GONE);

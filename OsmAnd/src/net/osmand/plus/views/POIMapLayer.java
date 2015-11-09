@@ -1,10 +1,9 @@
 package net.osmand.plus.views;
 
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -18,8 +17,6 @@ import android.net.Uri;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.Toolbar;
-import android.text.SpannableString;
-import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -27,6 +24,7 @@ import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Button;
@@ -67,6 +65,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import static android.util.TypedValue.COMPLEX_UNIT_DIP;
+
 public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider,
 		MapTextProvider<Amenity>, IRouteInformationListener {
 	private static final int startZoom = 9;
@@ -86,7 +86,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	private RoutingHelper routingHelper;
 	private PoiUIFilter filter;
 	private MapTextLayer mapTextLayer;
-	
+
 	/// cache for displayed POI
 	// Work with cache (for map copied from AmenityIndexRepositoryOdb)
 	private MapLayerData<List<Amenity>> data;
@@ -105,17 +105,17 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 			{
 				ZOOM_THRESHOLD = 0;
 			}
-			
+
 			@Override
 			public boolean isInterrupted() {
 				return super.isInterrupted();
 			}
-			
+
 			@Override
 			public void layerOnPostExecute() {
 				activity.getMapView().refreshMap();
 			}
-			
+
 			@Override
 			protected List<Amenity> calculateResult(RotatedTileBox tileBox) {
 				QuadRect latLonBounds = tileBox.getLatLonBounds();
@@ -125,18 +125,18 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 				int z = (int) Math.floor(tileBox.getZoom() + Math.log(view.getSettings().MAP_DENSITY.get()) / Math.log(2));
 
 				List<Amenity> res = filter.searchAmenities(latLonBounds.top, latLonBounds.left,
-						latLonBounds.bottom, latLonBounds.right, z , new ResultMatcher<Amenity>() {
+						latLonBounds.bottom, latLonBounds.right, z, new ResultMatcher<Amenity>() {
 
-					@Override
-					public boolean publish(Amenity object) {
-						return true;
-					}
+							@Override
+							public boolean publish(Amenity object) {
+								return true;
+							}
 
-					@Override
-					public boolean isCancelled() {
-						return isInterrupted();
-					}
-				});
+							@Override
+							public boolean isCancelled() {
+								return isInterrupted();
+							}
+						});
 
 				Collections.sort(res, new Comparator<Amenity>() {
 					@Override
@@ -219,9 +219,9 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
-		if(!Algorithms.objectEquals(this.settings.SELECTED_POI_FILTER_FOR_MAP.get(), 
+		if (!Algorithms.objectEquals(this.settings.SELECTED_POI_FILTER_FOR_MAP.get(),
 				filter == null ? null : filter.getFilterId())) {
-			if(this.settings.SELECTED_POI_FILTER_FOR_MAP.get() == null) {
+			if (this.settings.SELECTED_POI_FILTER_FOR_MAP.get() == null) {
 				this.filter = null;
 			} else {
 				PoiFiltersHelper pfh = app.getPoiFilters();
@@ -294,29 +294,19 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		return true;
 	}
 
-	public static void showDescriptionDialog(Context ctx, OsmandApplication app, Amenity a) {
+	public static void showWikipediaDialog(Context ctx, OsmandApplication app, Amenity a) {
 		String lang = app.getSettings().MAP_PREFERRED_LOCALE.get();
 		if (a.getType().isWiki()) {
 			String preferredLang = lang;
-			if(Algorithms.isEmpty(preferredLang)) {
+			if (Algorithms.isEmpty(preferredLang)) {
 				preferredLang = app.getLanguage();
 			}
 			showWiki(ctx, app, a, preferredLang);
-		} else {
-			String d = OsmAndFormatter.getAmenityDescriptionContent(app, a, false);
-			SpannableString spannable = new SpannableString(d);
-			Linkify.addLinks(spannable, Linkify.ALL);
-			
-			Builder bs = new AlertDialog.Builder(ctx);
-			bs.setTitle(OsmAndFormatter.getPoiStringWithoutType(a, lang));
-			bs.setMessage(spannable);
-			bs.setPositiveButton(R.string.shared_string_ok, null);
-			AlertDialog dialog = bs.show();
-			// Make links clickable
-			TextView textView = (TextView) dialog.findViewById(android.R.id.message);
-			textView.setMovementMethod(LinkMovementMethod.getInstance());
-			textView.setLinksClickable(true);
 		}
+	}
+
+	public static void showDescriptionDialog(Context ctx, OsmandApplication app, String text, String textPrefix) {
+		showText(ctx, app, text, textPrefix);
 	}
 
 	static int getResIdFromAttribute(final Context ctx, final int attr) {
@@ -326,16 +316,16 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		ctx.getTheme().resolveAttribute(attr, typedvalueattr, true);
 		return typedvalueattr.resourceId;
 	}
-	
-	private static void showWiki(final Context ctx,final OsmandApplication app, final Amenity a, final String lang ) {
-		final Dialog dialog = new Dialog(ctx, 
+
+	private static void showWiki(final Context ctx, final OsmandApplication app, final Amenity a, final String lang) {
+		final Dialog dialog = new Dialog(ctx,
 				app.getSettings().isLightContent() ?
-						R.style.OsmandLightTheme:
-							R.style.OsmandDarkTheme);
+						R.style.OsmandLightTheme :
+						R.style.OsmandDarkTheme);
 		final String title = a.getName(lang);
 		LinearLayout ll = new LinearLayout(ctx);
 		ll.setOrientation(LinearLayout.VERTICAL);
-		
+
 		final Toolbar topBar = new Toolbar(ctx);
 		topBar.setClickable(true);
 		Drawable back = app.getIconsCache().getIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
@@ -345,7 +335,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		topBar.setTitleTextColor(ctx.getResources().getColor(getResIdFromAttribute(ctx, R.attr.pstsTextColor)));
 
 		String lng = a.getContentSelected("content", lang, "en");
-		if(Algorithms.isEmpty(lng)) {
+		if (Algorithms.isEmpty(lng)) {
 			lng = "en";
 		}
 
@@ -356,13 +346,13 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		bottomBar.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				String article = "http://"+langSelected.toLowerCase()+".wikipedia.org/wiki/" + title.replace(' ', '_');
+				String article = "https://" + langSelected.toLowerCase() + ".wikipedia.org/wiki/" + title.replace(' ', '_');
 				Intent i = new Intent(Intent.ACTION_VIEW);
 				i.setData(Uri.parse(article));
 				ctx.startActivity(i);
 			}
 		});
-		MenuItem mi = topBar.getMenu().add(langSelected.toUpperCase()).setOnMenuItemClickListener(new OnMenuItemClickListener()  {
+		MenuItem mi = topBar.getMenu().add(langSelected.toUpperCase()).setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(final MenuItem item) {
 				showPopupLangMenu(ctx, topBar, app, a, dialog);
@@ -390,36 +380,79 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		scrollView.addView(wv);
 		dialog.setContentView(ll);
 		wv.setFocusable(true);
-        wv.setFocusableInTouchMode(true);
+		wv.setFocusableInTouchMode(true);
 		wv.requestFocus(View.FOCUS_DOWN);
 		wv.setOnTouchListener(new View.OnTouchListener() {
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				switch (event.getAction()) {
-				case MotionEvent.ACTION_DOWN:
-				case MotionEvent.ACTION_UP:
-					if (!v.hasFocus()) {
-						v.requestFocus();
-					}
-					break;
+					case MotionEvent.ACTION_DOWN:
+					case MotionEvent.ACTION_UP:
+						if (!v.hasFocus()) {
+							v.requestFocus();
+						}
+						break;
 				}
 				return false;
 			}
 		});
-		
+
 		dialog.setCancelable(true);
-		dialog.show();		
-//		wv.setWebViewClient();		
+		dialog.show();
 	}
 
+	private static void showText(final Context ctx, final OsmandApplication app, final String text,String textPrefix) {
+		final Dialog dialog = new Dialog(ctx,
+				app.getSettings().isLightContent() ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme);
 
-	protected static void showPopupLangMenu(final Context ctx, Toolbar tb, 
-			final OsmandApplication app, final Amenity a, final Dialog dialog) {
+		LinearLayout ll = new LinearLayout(ctx);
+		ll.setOrientation(LinearLayout.VERTICAL);
+
+		final Toolbar topBar = new Toolbar(ctx);
+		topBar.setClickable(true);
+		Drawable back = app.getIconsCache().getIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+		topBar.setNavigationIcon(back);
+		topBar.setTitle(textPrefix);
+		topBar.setBackgroundColor(ctx.getResources().getColor(getResIdFromAttribute(ctx, R.attr.pstsTabBackground)));
+		topBar.setTitleTextColor(ctx.getResources().getColor(getResIdFromAttribute(ctx, R.attr.pstsTextColor)));
+		topBar.setNavigationOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(final View v) {
+				dialog.dismiss();
+			}
+		});
+
+		final TextView textView = new TextView(ctx);
+		LinearLayout.LayoutParams llTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		int textMargin = dpToPx(app, 10f);
+		boolean light = app.getSettings().isLightContent();
+		textView.setLayoutParams(llTextParams);
+		textView.setPadding(textMargin, textMargin, textMargin, textMargin);
+		textView.setTextSize(16);
+		textView.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_info_text_light : R.color.ctx_menu_info_text_dark));
+		textView.setAutoLinkMask(Linkify.ALL);
+		textView.setLinksClickable(true);
+		textView.setText(text);
+
+		ScrollView scrollView = new ScrollView(ctx);
+		ll.addView(topBar);
+		LayoutParams lp = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, 0);
+		lp.weight = 1;
+		ll.addView(scrollView, lp);
+		scrollView.addView(textView);
+
+		dialog.setContentView(ll);
+		dialog.setCancelable(true);
+		dialog.show();
+	}
+
+	protected static void showPopupLangMenu(final Context ctx, Toolbar tb,
+											final OsmandApplication app, final Amenity a, final Dialog dialog) {
 		final PopupMenu optionsMenu = new PopupMenu(ctx, tb, Gravity.RIGHT);
-		Set<String> names = new TreeSet<String>(); 
+		Set<String> names = new TreeSet<String>();
 		names.addAll(a.getNames("content", "en"));
 		names.addAll(a.getNames("description", "en"));
-		
+
 		for (final String n : names) {
 			String vn = FileNameTranslationHelper.getVoiceName(ctx, n);
 			MenuItem item = optionsMenu.getMenu().add(vn);
@@ -433,7 +466,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 			});
 		}
 		optionsMenu.show();
-		
+
 	}
 
 
@@ -449,7 +482,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	public PointDescription getObjectName(Object o) {
 		if (o instanceof Amenity) {
 			return new PointDescription(PointDescription.POINT_TYPE_POI, ((Amenity) o).getName(
-					view.getSettings().MAP_PREFERRED_LOCALE.get())); 
+					view.getSettings().MAP_PREFERRED_LOCALE.get()));
 		}
 		return null;
 	}
@@ -476,7 +509,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		}
 		return null;
 	}
-	
+
 	@Override
 	public LatLon getTextLocation(Amenity o) {
 		return o.getLocation();
@@ -500,5 +533,12 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	public void routeWasCancelled() {
 	}
 
-
+	public static int dpToPx(Context ctx, float dp) {
+		Resources r = ctx.getResources();
+		return (int) TypedValue.applyDimension(
+				COMPLEX_UNIT_DIP,
+				dp,
+				r.getDisplayMetrics()
+		);
+	}
 }

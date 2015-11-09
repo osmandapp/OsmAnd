@@ -15,6 +15,7 @@ import net.osmand.plus.mapcontextmenu.MenuController.TitleProgressController;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.OsmandMapLayer;
+import net.osmand.util.MapUtils;
 
 public class MapContextMenu extends MenuTitleController {
 
@@ -28,6 +29,10 @@ public class MapContextMenu extends MenuTitleController {
 
 	private LatLon mapCenter;
 	private int mapPosition = 0;
+
+	private LatLon myLocation;
+	private Float heading;
+	private boolean inLocationUpdate = false;
 
 	private int favActionIconId;
 
@@ -97,6 +102,11 @@ public class MapContextMenu extends MenuTitleController {
 	}
 
 	public boolean init(LatLon latLon, PointDescription pointDescription, Object object, boolean update) {
+
+		if (myLocation == null) {
+			myLocation = getMapActivity().getMyApplication().getSettings().getLastKnownMapLocation();
+		}
+
 		if (!update && isVisible()) {
 			if (this.object == null || !this.object.equals(object)) {
 				hide();
@@ -399,9 +409,59 @@ public class MapContextMenu extends MenuTitleController {
 		return menuController == null || menuController.buttonsVisible();
 	}
 
+	public boolean displayDistanceDirection() {
+		return menuController != null && menuController.displayDistanceDirection();
+	}
+
 	public void updateData() {
 		if (menuController != null) {
 			menuController.updateData();
 		}
 	}
+
+	public LatLon getMyLocation() {
+		return myLocation;
+	}
+
+	public Float getHeading() {
+		return heading;
+	}
+
+	public void updateMyLocation(net.osmand.Location location) {
+		if (location != null) {
+			myLocation = new LatLon(location.getLatitude(), location.getLongitude());
+			updateLocation(false, true, false);
+		}
+	}
+
+	public void updateCompassValue(float value) {
+		// 99 in next line used to one-time initialize arrows (with reference vs. fixed-north direction)
+		// on non-compass devices
+		float lastHeading = heading != null ? heading : 99;
+		heading = value;
+		if (Math.abs(MapUtils.degreesDiff(lastHeading, heading)) > 5) {
+			updateLocation(false, false, true);
+		} else {
+			heading = lastHeading;
+		}
+	}
+
+	public void updateLocation(final boolean centerChanged, final boolean locationChanged,
+							   final boolean compassChanged) {
+		if (inLocationUpdate) {
+			return;
+		}
+		inLocationUpdate = true;
+		mapActivity.runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				inLocationUpdate = false;
+				MapContextMenuFragment menuFragment = findMenuFragment();
+				if (menuFragment != null) {
+					menuFragment.updateLocation(centerChanged, locationChanged, compassChanged);
+				}
+			}
+		});
+	}
+
 }

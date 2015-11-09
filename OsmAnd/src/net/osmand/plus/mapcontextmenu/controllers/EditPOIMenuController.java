@@ -135,11 +135,6 @@ public class EditPOIMenuController extends MenuController {
 	}
 
 	@Override
-	public String getNameStr() {
-		return getPointDescription().getName();
-	}
-
-	@Override
 	public String getTypeStr() {
 		return pointTypeStr;
 	}

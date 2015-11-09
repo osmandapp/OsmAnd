@@ -49,8 +49,13 @@ public class FavouritePointMenuController extends MenuController {
 	}
 
 	@Override
+	public boolean displayDistanceDirection() {
+		return true;
+	}
+
+	@Override
 	public Drawable getLeftIcon() {
-		return FavoriteImageDrawable.getOrCreate(getMapActivity().getMyApplication(), fav.getColor(), true);
+		return FavoriteImageDrawable.getOrCreate(getMapActivity().getMyApplication(), fav.getColor(), false);
 	}
 
 	@Override
@@ -67,10 +72,5 @@ public class FavouritePointMenuController extends MenuController {
 	public String getTypeStr() {
 		return fav.getCategory().length() == 0 ?
 				getMapActivity().getString(R.string.shared_string_favorites) : fav.getCategory();
-	}
-
-	@Override
-	public String getNameStr() {
-		return getPointDescription().getName();
 	}
 }

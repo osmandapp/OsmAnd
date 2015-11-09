@@ -37,6 +37,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleButtonController;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleProgressController;
@@ -49,7 +50,6 @@ import static net.osmand.plus.mapcontextmenu.MenuBuilder.SHADOW_HEIGHT_TOP_DP;
 
 
 public class MapContextMenuFragment extends Fragment implements DownloadEvents {
-
 	public static final String TAG = "MapContextMenuFragment";
 
 	public static final float FAB_PADDING_TOP_DP = 4f;
@@ -83,6 +83,8 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	private int origMarkerX;
 	private int origMarkerY;
 	private boolean customMapCenter;
+
+	private int screenOrientation;
 
 	private class SingleTapConfirm implements OnGestureListener {
 
@@ -529,7 +531,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 			iconLayout.setVisibility(View.VISIBLE);
 		} else if (iconId != 0) {
 			iconView.setImageDrawable(iconsCache.getIcon(iconId,
-					light ? R.color.osmand_orange : R.color.osmand_orange_dark, 0.75f));
+					light ? R.color.osmand_orange : R.color.osmand_orange_dark));
 			iconLayout.setVisibility(View.VISIBLE);
 		} else {
 			iconLayout.setVisibility(View.GONE);
@@ -548,6 +550,21 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 			});
 			menu.build(bottomView);
 		}
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		screenOrientation = DashLocationFragment.getScreenOrientation(getActivity());
+		if (menu.displayDistanceDirection()) {
+			getMapActivity().getMapViewTrackingUtilities().setContextMenu(menu);
+		}
+	}
+
+	@Override
+	public void onPause() {
+		getMapActivity().getMapViewTrackingUtilities().setContextMenu(null);
+		super.onPause();
 	}
 
 	@Override
@@ -641,6 +658,15 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		line1.setText(menu.getTitleStr());
 
 		// Text line 2
+		TextView distanceText = (TextView) view.findViewById(R.id.distance);
+		ImageView direction = (ImageView) view.findViewById(R.id.direction);
+		if (menu.displayDistanceDirection()) {
+			updateDistanceDirection();
+		} else {
+			direction.setVisibility(View.GONE);
+			distanceText.setVisibility(View.GONE);
+		}
+
 		TextView line2 = (TextView) view.findViewById(R.id.context_menu_line2);
 		line2.setText(menu.getLocationStr());
 		Drawable icon = menu.getSecondLineIcon();
@@ -648,6 +674,18 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 			line2.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
 			line2.setCompoundDrawablePadding(dpToPx(5f));
 		}
+	}
+
+	private void updateDistanceDirection() {
+		TextView distanceText = (TextView) view.findViewById(R.id.distance);
+		ImageView direction = (ImageView) view.findViewById(R.id.direction);
+
+		boolean mapLinked = getMapActivity().getMapViewTrackingUtilities().isMapLinkedToLocation() && menu.getMyLocation() != null;
+		float myHeading = menu.getHeading() == null ? 0f : menu.getHeading();
+		float h = !mapLinked ? -getMapActivity().getMapRotate() : myHeading;
+
+		DashLocationFragment.updateLocationView(!mapLinked, menu.getMyLocation(), h, direction, distanceText,
+				menu.getLatLon().getLatitude(), menu.getLatLon().getLongitude(), screenOrientation, getMyApplication(), getActivity());
 	}
 
 	private int getPosY() {
@@ -869,6 +907,14 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		DisplayMetrics dm = new DisplayMetrics();
 		getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
 		return dm.heightPixels;
+	}
+
+	public void updateLocation(boolean centerChanged, boolean locationChanged, boolean compassChanged) {
+		boolean mapLinkedToLocation = getMapActivity().getMapViewTrackingUtilities().isMapLinkedToLocation();
+		if (compassChanged && !mapLinkedToLocation) {
+			return;
+		}
+		updateDistanceDirection();
 	}
 }
 

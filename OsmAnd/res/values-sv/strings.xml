@@ -1932,7 +1932,7 @@
     <string name="share_menu_location">Dela platsen</string>
     <string name="shared_string_send">Sänd</string>
     <string name="hillshade_layer_disabled">Skuggad relief-lager inaktiverat</string>
-    <string name="show_on_start_description">OsmAnd kommer att starta från kartskärmen</string>
+    <string name="show_on_start_description">\'Av\' startar kartskärmen direkt</string>
     <string name="map_downloaded">Karta hämtad</string>
     <string name="map_downloaded_descr">Karta över %1$s har hämtats. Gå tillbaka till kartan för att börja använda den.</string>
     <string name="go_to_map">Gå till kartan</string>
