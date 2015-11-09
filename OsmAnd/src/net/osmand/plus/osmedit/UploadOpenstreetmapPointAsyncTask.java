@@ -81,7 +81,7 @@ public class UploadOpenstreetmapPointAsyncTask
 				loadErrorsMap.put(point, errorMessage);
 			}
 		}
-		if(uploaded) {
+		if(uploaded && closeChangeSet) {
 			remotepoi.closeChangeSet();
 		}
 
