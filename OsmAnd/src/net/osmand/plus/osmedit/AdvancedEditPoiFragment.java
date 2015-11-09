@@ -21,6 +21,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import net.osmand.PlatformUtil;
 import net.osmand.StringMatcher;
 import net.osmand.osm.AbstractPoiType;
@@ -176,12 +177,6 @@ public class AdvancedEditPoiFragment extends Fragment
 		}
 
 		public void addTagView(String tg, String vl) {
-			View view = getView(tg, vl);
-			LOG.debug("tg=" + tg + "; view=" + view);
-			linearLayout.addView(view);
-		}
-
-		private View getView(String tg, String vl) {
 			View convertView = LayoutInflater.from(linearLayout.getContext())
 					.inflate(R.layout.poi_tag_list_item, null, false);
 			final AutoCompleteTextView tagEditText =
@@ -277,7 +272,8 @@ public class AdvancedEditPoiFragment extends Fragment
 				}
 			});
 
-			return convertView;
+			linearLayout.addView(convertView);
+			tagEditText.requestFocus();
 		}
 
 		public void setTagData(String[] tags) {
