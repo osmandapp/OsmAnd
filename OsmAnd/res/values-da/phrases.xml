@@ -2432,4 +2432,9 @@
 <string name="poi_conveying_yes">Flytning: ja</string>
 
 
+<string name="poi_bridge_ref">Bro ref</string>
+	<string name="poi_tunnel_ref">Tunnel ref</string>
+
+	<string name="poi_ref">Ref</string>
+
 </resources>
