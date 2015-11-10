@@ -105,7 +105,7 @@ public class AdvancedEditPoiFragment extends Fragment
 			@Override
 			public void onTagsChanged(String anyTag) {
 				LOG.debug("onTagsChanged(" + "anyTag=" + anyTag + ")");
-				final String value = getData().getTagValues().get(anyTag);
+				String value = getData().getTagValues().get(anyTag);
 				if (Algorithms.objectEquals(anyTag, OSMSettings.OSMTagKey.NAME.getValue())) {
 					nameTextView.setText(value);
 				}

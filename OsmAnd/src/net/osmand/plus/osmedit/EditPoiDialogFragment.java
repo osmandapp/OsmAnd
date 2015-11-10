@@ -76,6 +76,7 @@ public class EditPoiDialogFragment extends DialogFragment {
 	private static final String KEY_AMENITY_NODE = "key_amenity_node";
 	private static final String KEY_AMENITY = "key_amenity";
 	private static final String TAGS_LIST = "tags_list";
+	private static final String IS_ADDING_POI = "is_adding_poi";
 
 	private EditPoiData editPoiData;
 	private ViewPager viewPager;
@@ -124,12 +125,15 @@ public class EditPoiDialogFragment extends DialogFragment {
 		boolean isLightTheme = settings.OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME;
 
 		if (savedInstanceState != null) {
+			@SuppressWarnings("unchecked")
 			Map<String, String> mp = (Map<String, String>) savedInstanceState.getSerializable(TAGS_LIST);
 			editPoiData.updateTags(mp);
 		}
 
+		boolean isAddingPoi = getArguments().getBoolean(IS_ADDING_POI);
+
 		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-		toolbar.setTitle(R.string.poi_create_title);
+		toolbar.setTitle(isAddingPoi ? R.string.poi_create_title : R.string.poi_edit_title);
 		toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
@@ -364,27 +368,6 @@ public class EditPoiDialogFragment extends DialogFragment {
 		super.onSaveInstanceState(outState);
 	}
 
-
-	public static EditPoiDialogFragment createAddPoiInstance(double latitude, double longitude,
-															 OsmandApplication application) {
-		Node node = new Node(latitude, longitude, -1);
-		Amenity amenity;
-		amenity = new Amenity();
-		amenity.setType(application.getPoiTypes().getOtherPoiCategory());
-		amenity.setSubType("");
-		amenity.setAdditionalInfo(OSMSettings.OSMTagKey.OPENING_HOURS.getValue(), "");
-		return createInstance(node, amenity);
-	}
-
-	public static EditPoiDialogFragment createInstance(Node node, Amenity amenity) {
-		EditPoiDialogFragment editPoiDialogFragment = new EditPoiDialogFragment();
-		Bundle args = new Bundle();
-		args.putSerializable(KEY_AMENITY_NODE, node);
-		args.putSerializable(KEY_AMENITY, amenity);
-		editPoiDialogFragment.setArguments(args);
-		return editPoiDialogFragment;
-	}
-
 	public EditPoiData getEditPoiData() {
 		return editPoiData;
 	}
@@ -510,6 +493,28 @@ public class EditPoiDialogFragment extends DialogFragment {
 		return (OsmandApplication) getActivity().getApplication();
 	}
 
+	public static EditPoiDialogFragment createAddPoiInstance(double latitude, double longitude,
+															 OsmandApplication application) {
+		Node node = new Node(latitude, longitude, -1);
+		Amenity amenity;
+		amenity = new Amenity();
+		amenity.setType(application.getPoiTypes().getOtherPoiCategory());
+		amenity.setSubType("");
+		amenity.setAdditionalInfo(OSMSettings.OSMTagKey.OPENING_HOURS.getValue(), "");
+		return createInstance(node, amenity, true);
+	}
+
+	public static EditPoiDialogFragment createInstance(Node node, Amenity amenity,
+													   boolean isAddingPoi) {
+		EditPoiDialogFragment editPoiDialogFragment = new EditPoiDialogFragment();
+		Bundle args = new Bundle();
+		args.putSerializable(KEY_AMENITY_NODE, node);
+		args.putSerializable(KEY_AMENITY, amenity);
+		args.putBoolean(IS_ADDING_POI, isAddingPoi);
+		editPoiDialogFragment.setArguments(args);
+		return editPoiDialogFragment;
+	}
+
 	public static void showEditInstance(final Amenity amenity,
 										final AppCompatActivity activity) {
 		final OsmandSettings settings = ((OsmandApplication) activity.getApplication())
@@ -531,7 +536,7 @@ public class EditPoiDialogFragment extends DialogFragment {
 			protected void onPostExecute(Node n) {
 				if (n != null) {
 					EditPoiDialogFragment fragment =
-							EditPoiDialogFragment.createInstance(n, amenity);
+							EditPoiDialogFragment.createInstance(n, amenity, false);
 					fragment.show(activity.getSupportFragmentManager(), TAG);
 				} else {
 					AccessibleToast.makeText(activity,
