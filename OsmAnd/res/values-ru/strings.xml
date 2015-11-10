@@ -559,7 +559,7 @@
     <string name="reload_tile">Обновить часть карты</string>
     <string name="user_name_descr">Укажите имя пользователя (требуется для работы с OSM)</string>
     <string name="user_name">Имя пользователя</string>
-    <string name="mark_point">Точка</string>
+    <string name="mark_point">Цель</string>
     <string name="use_english_names_descr">Использовать английские названия вместо местных</string>
     <string name="use_english_names">Использовать английские названия</string>
     <string name="app_settings">Настройки приложения</string>
