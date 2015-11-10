@@ -18,6 +18,7 @@ import android.widget.Toast;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
+import net.osmand.osm.PoiType;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.OsmandApplication;
@@ -166,7 +167,14 @@ public class OsmEditingPlugin extends OsmandPlugin {
 				return true;
 			}
 		};
-		if (selectedObj instanceof Amenity && !((Amenity) selectedObj).getType().isWiki()) {
+		boolean isEditable = false;
+		if (selectedObj instanceof Amenity) {
+			Amenity amenity = (Amenity) selectedObj;
+			final PoiType poiType = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
+			isEditable = !(amenity.getType().isWiki() ||
+					poiType.isNotEditableOsm());
+		}
+		if (isEditable) {
 			adapter.item(R.string.poi_context_menu_modify).iconColor(R.drawable.ic_action_edit_dark).listen(listener).position(1).reg();
 			adapter.item(R.string.poi_context_menu_delete).iconColor(R.drawable.ic_action_delete_dark).listen(listener).position(2).reg();
 		} else {
