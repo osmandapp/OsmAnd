@@ -285,9 +285,10 @@ public class MapContextMenu extends MenuTitleController {
 	}
 
 	public void fabPressed() {
-		mapActivity.getMapActions().directionTo(latLon.getLatitude(), latLon.getLongitude());
+		mapActivity.getMapActions().showNavigationContextMenuPoint(latLon.getLatitude(), latLon.getLongitude());
+		//mapActivity.getMapActions().directionTo(latLon.getLatitude(), latLon.getLongitude());
 		hide();
-		mapActivity.getMapLayers().getMapControlsLayer().showRouteInfoControlDialog();
+		//mapActivity.getMapLayers().getMapControlsLayer().showRouteInfoControlDialog();
 	}
 
 	public void buttonWaypointPressed() {
