@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="search_button">Poišči</string>
     <string name="search_activity">Iskanje podatkov</string>
 
@@ -1960,7 +1961,7 @@
     <string name="first_usage_item_description">Kako prejeti zemljevide in prikrojiti osnovne nastavitve</string>
     <string name="navigation_item_description">Nastavitve navigacije</string>
     <string name="faq_item">Pogosta vprašanja</string>
-    <string name="faq_item_description">Kako uporabljati vstavke</string>
+    <string name="faq_item_description">Pogosto zastavljena vprašanja</string>
     <string name="map_viewing_item">Pogled zemljevida</string>
     <string name="search_on_the_map_item">Iskanje po zemljevidu</string>
     <string name="planning_trip_item">Planiranje potovanja</string>
@@ -1983,4 +1984,7 @@
     
     
     <string name="shared_string_upload">Pošlji</string>
+    <string name="read_more">Preberite več</string>
+    <string name="whats_new">Kaj je novega v</string>
+    <string name="rendering_attr_hideProposed_name">Skrij predlagane predmete</string>
     </resources>
