@@ -135,7 +135,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	private Map<String, Recording> recordingByFileName = new LinkedHashMap<>();
 	private AudioNotesLayer audioNotesLayer;
 	private MapActivity activity;
-	private MediaRecorder mediaRec;
+	private static File mediaRecFile;
+	private static MediaRecorder mediaRec;
 	private File lastTakingPhoto;
 
 	private final static char SPLIT_DESC = ' ';
@@ -590,8 +591,12 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();
 		if (mapInfoLayer != null) {
 			recordControl = new TextInfoWidget(activity);
-			recordControl.setImageDrawable(activity.getResources().getDrawable(R.drawable.monitoring_rec_inactive));
-			setRecordListener(recordControl, activity);
+			if (mediaRec != null && mediaRecFile != null) {
+				updateRecordControl(activity, mediaRecFile);
+			} else {
+				recordControl.setImageDrawable(activity.getResources().getDrawable(R.drawable.monitoring_rec_inactive));
+				setRecordListener(recordControl, activity);
+			}
 			mapInfoLayer.registerSideWidget(recordControl, R.drawable.ic_action_micro_dark,
 					R.string.map_widget_av_notes, "audionotes", false, 22);
 			mapInfoLayer.recreateControls();
@@ -705,8 +710,9 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		mapActivity.startActivityForResult(intent, 205);
 	}
 
+
 	@Override
-	public void mapActivityPause(MapActivity activity) {
+	public void mapActivityScreenOff(MapActivity activity) {
 		stopRecording(activity);
 	}
 
@@ -814,6 +820,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			mediaRec.stop();
 			mediaRec.release();
 			mediaRec = null;
+			indexFile(true, mediaRecFile);
+			mediaRecFile = null;
 		}
 		if (recordControl != null) {
 			setRecordListener(recordControl, mapActivity);
@@ -1020,6 +1028,12 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		mr.prepare();
 		mr.start();
 		mediaRec = mr;
+		mediaRecFile = f;
+
+		updateRecordControl(mapActivity, f);
+	}
+
+	private void updateRecordControl(final MapActivity mapActivity, final File f) {
 		recordControl.setText(app.getString(R.string.shared_string_control_stop), "");
 		recordControl.setImageDrawable(activity.getResources().getDrawable(R.drawable.widget_icon_av_active));
 		final MapInfoLayer mil = mapActivity.getMapLayers().getMapInfoLayer();
@@ -1039,7 +1053,6 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				}
 				stopRecording(mapActivity);
 				SHOW_RECORDINGS.set(true);
-				indexFile(true, f);
 				mapActivity.getMapView().refreshMap();
 				updateWidgetIcon(recordControl);
 			}

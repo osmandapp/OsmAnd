@@ -45,6 +45,9 @@ public class MapContextMenu extends MenuTitleController {
 		this.mapActivity = mapActivity;
 		if (active) {
 			acquireMenuController();
+			if (menuController != null) {
+				menuController.addPlainMenuItems(typeStr, this.pointDescription, this.latLon);
+			}
 		} else {
 			menuController = null;
 		}

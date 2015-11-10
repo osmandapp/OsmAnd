@@ -12,14 +12,13 @@ import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.osmedit.OsmBugsLayer.OpenStreetNote;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
-import net.osmand.util.Algorithms;
 
 public class OsmBugMenuController extends MenuController {
 
 	private OsmEditingPlugin plugin;
 	private OpenStreetNote bug;
 
-	public OsmBugMenuController(OsmandApplication app, final MapActivity mapActivity, PointDescription pointDescription, final OpenStreetNote bug) {
+	public OsmBugMenuController(OsmandApplication app, MapActivity mapActivity, PointDescription pointDescription, final OpenStreetNote bug) {
 		super(new MenuBuilder(app), pointDescription, mapActivity);
 		plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
 		this.bug = bug;

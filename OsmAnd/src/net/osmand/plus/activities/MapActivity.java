@@ -4,8 +4,10 @@ import android.app.Dialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -103,6 +105,8 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents {
 	private static MapViewTrackingUtilities mapViewTrackingUtilities;
 	private static MapContextMenu mapContextMenu = new MapContextMenu();
 	private static MapMultiSelectionMenu mapMultiSelectionMenu;
+
+	private BroadcastReceiver screenOffReceiver;
 
 	/**
 	 * Called when the activity is first created.
@@ -250,6 +254,10 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents {
 		}
 		mapActions.updateDrawerMenu();
 		drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+		IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_OFF);
+		screenOffReceiver = new ScreenOffReceiver();
+		registerReceiver(screenOffReceiver, filter);
 	}
 
 
@@ -671,6 +679,7 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
+		unregisterReceiver(screenOffReceiver);
 		FailSafeFuntions.quitRouteRestoreDialog();
 		OsmandPlugin.onMapActivityDestroy(this);
 		getMyApplication().unsubscribeInitListener(initListener);
@@ -1063,5 +1072,14 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents {
 		if (getMapLayers().getDownloadedRegionsLayer().updateObjects()) {
 			refreshMap();
 		}
+	}
+
+	private class ScreenOffReceiver extends BroadcastReceiver {
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			OsmandPlugin.onMapActivityScreenOff(MapActivity.this);
+		}
+
 	}
 }
