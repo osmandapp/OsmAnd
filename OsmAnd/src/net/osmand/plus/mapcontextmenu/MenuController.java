@@ -113,6 +113,10 @@ public abstract class MenuController extends BaseMenuController {
 		builder.addPlainMenuItem(iconId, text, needLinks);
 	}
 
+	public void clearPlainMenuItems() {
+		builder.clearPlainMenuItems();
+	}
+
 	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, LatLon latLon) {
 		addMyLocationToPlainItems(pointDescription, latLon);
 	}

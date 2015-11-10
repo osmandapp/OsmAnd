@@ -1,7 +1,6 @@
 package net.osmand.plus.osmo;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -12,7 +11,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import net.osmand.Location;
 import net.osmand.data.LatLon;
@@ -274,32 +272,15 @@ public class DashOsMoFragment extends DashLocationFragment implements OsMoGroups
 	}
 
 	private void setupDeviceViews(LinearLayout contentList, List<OsMoGroupsStorage.OsMoDevice> devices) {
-		Drawable markerIcon = getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_marker_dark);
 		LayoutInflater inflater = getActivity().getLayoutInflater();
 		List<DashLocationFragment.DashLocationView> distances = new ArrayList<DashLocationFragment.DashLocationView>();
 		for (final OsMoGroupsStorage.OsMoDevice device : devices) {
 			View v = inflater.inflate(R.layout.dash_osmo_item, null, false);
 			v.findViewById(R.id.people_icon).setVisibility(View.GONE);
 			v.findViewById(R.id.people_count).setVisibility(View.GONE);
-			final ImageButton showOnMap = (ImageButton) v.findViewById(R.id.show_on_map);
-			showOnMap.setImageDrawable(markerIcon);
+			v.findViewById(R.id.show_on_map).setVisibility(View.GONE);
 			final String name = device.getVisibleName();
 			final Location loc = device.getLastLocation();
-			showOnMap.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-
-					if (loc == null) {
-						Toast.makeText(getActivity(), R.string.osmo_device_not_found, Toast.LENGTH_SHORT).show();
-						return;
-					}
-					getMyApplication().getSettings().setMapLocationToShow(loc.getLatitude(),
-							loc.getLongitude(), 15,
-							new PointDescription(PointDescription.POINT_TYPE_MARKER, name),
-							false, device); //$NON-NLS-1$
-					MapActivity.launchMapActivityMoveToTop(getActivity());
-				}
-			});
 
 			ImageView direction = (ImageView) v.findViewById(R.id.direction_icon);
 			direction.setVisibility(View.VISIBLE);
@@ -315,7 +296,6 @@ public class DashOsMoFragment extends DashLocationFragment implements OsMoGroups
 				icon.setImageDrawable(getMyApplication().getIconsCache().
 						getPaintedContentIcon(R.drawable.ic_person, device.getColor()));
 			} else {
-				showOnMap.setVisibility(View.GONE);
 				icon.setImageDrawable(getMyApplication().getIconsCache().
 						getContentIcon(R.drawable.ic_person));
 			}
@@ -324,7 +304,16 @@ public class DashOsMoFragment extends DashLocationFragment implements OsMoGroups
 			v.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					launchOsMoGroupsActivity();
+					if (loc == null || !device.isEnabled()) {
+						launchOsMoGroupsActivity();
+					} else {
+						MapActivity.getSingleMapViewTrackingUtilities().setMapLinkedToLocation(false);
+						getMyApplication().getSettings().setMapLocationToShow(loc.getLatitude(), loc.getLongitude(), getMyApplication().getSettings().getLastKnownMapZoom(),
+								new PointDescription(PointDescription.POINT_TYPE_MARKER, device.getVisibleName()), false,
+								device);
+						OsMoPositionLayer.setFollowTrackerId(device, loc);
+						MapActivity.launchMapActivityMoveToTop(getActivity());
+					}
 				}
 			});
 			contentList.addView(v);

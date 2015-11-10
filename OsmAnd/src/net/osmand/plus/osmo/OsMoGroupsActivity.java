@@ -111,12 +111,9 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 	public static final int CREATE_GROUP = 3;
 	protected static final int ON_OFF_ACTION_ID = 4;
 	protected static final int SHARE_ID = 5;
-	protected static final int SHOW_ON_MAP_ID = 6;
 	public static final int SHARE_SESSION = 7;
 	public static final int GROUP_INFO = 8;
 	protected static final int SETTINGS_ID = 9;
-	protected static final int SETTINGS_DEV_ID = 10;
-	protected static final int TRACK_DEV_ID = 11;
 	protected static final int LOGIN_ID = 12;
 	public static final int LIST_REFRESH_MSG_ID = OsmAndConstants.UI_HANDLER_SEARCH + 30;
 	public static final long RECENT_THRESHOLD = 60000;
@@ -184,11 +181,14 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 			@Override
 			public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-				OsMoDevice model = adapter.getChild(groupPosition, childPosition);
-				if (model != selectedObject) {
-					enterSelectionMode(model);
-				} else {
-					quitSelectionMode();
+				OsMoDevice device = adapter.getChild(groupPosition, childPosition);
+				if (device != null) {
+					Location location = device.getLastLocation();
+					if (location != null) {
+						showDeviceOnMap(device);
+					} else {
+						showSettingsDialog(OsMoGroupsActivity.this, osMoPlugin, device);
+					}
 				}
 				return true;
 			}
@@ -431,13 +431,30 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		osMoPlugin.getGroups().removeUiListener(this);
 		osMoPlugin.setGroupsActivity(null);
 	}
-	
+
+	private void showDeviceOnMap(final Object o) {
+		if(!checkOperationIsNotRunning()) {
+			return;
+		}
+		OsMoDevice device = (OsMoDevice) (o instanceof OsMoDevice ? o : null);
+		if (device != null) {
+			Location location = device.getLastLocation();
+			MapActivity.getSingleMapViewTrackingUtilities().setMapLinkedToLocation(false);
+			if (location != null) {
+				app.getSettings().setMapLocationToShow(location.getLatitude(), location.getLongitude(), app.getSettings().getLastKnownMapZoom(),
+						new PointDescription(PointDescription.POINT_TYPE_MARKER, device.getVisibleName()), false,
+						device);
+			}
+			OsMoPositionLayer.setFollowTrackerId(device, location);
+			MapActivity.launchMapActivityMoveToTop(OsMoGroupsActivity.this);
+		}
+	}
+
 	private void enterSelectionMode(final Object o) {
 		if(!checkOperationIsNotRunning()) {
 			return;
 		}
 		actionMode = startSupportActionMode(new ActionMode.Callback() {
-			private OsMoDevice device;
 			private OsMoGroup group;
 			private Menu menu;
 
@@ -464,30 +481,8 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 					getClearToolbar(false);
 				}
 				this.menu = menu;
-				device = (OsMoDevice) (o instanceof OsMoDevice ? o : null);
 				group = (OsMoGroup) (o instanceof OsMoGroup ? o : null);
 				MenuItem mi = null;
-				if (device != null) {
-//					mi = createActionModeMenuItem(actionMode, menu, ON_OFF_ACTION_ID, R.string.shared_string_ok, 0,
-//							MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-					mode.setTitle(device.getVisibleName());
-					if (device.getLastLocation() != null) {
-						createActionModeMenuItem(actionMode, menu, SHOW_ON_MAP_ID, R.string.shared_string_show_on_map,
-								R.drawable.ic_action_marker_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-						MenuItem menuItem = createActionModeMenuItem(actionMode, menu, TRACK_DEV_ID,
-								R.string.osmo_set_moving_target, R.drawable.ic_action_flage_dark,
-//								// there is a bug in Android 4.2 layout
-//								device.getLastLocation() != null ? MenuItemCompat.SHOW_AS_ACTION_NEVER :
-									 MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-						menuItem.setTitleCondensed(getString(R.string.osmo_follow));
-					}
-					createActionModeMenuItem(actionMode, menu, SETTINGS_DEV_ID, R.string.shared_string_settings,
-							R.drawable.ic_action_settings,
-//							// there is a bug in Android 4.2 layout
-//							device.getLastLocation() != null ? MenuItemCompat.SHOW_AS_ACTION_NEVER :
-								MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-
-				}
 				if (group != null) {
 					createActionModeMenuItem(actionMode, menu, SHARE_ID, R.string.shared_string_share, R.drawable.ic_action_gshare_dark,
 							MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
@@ -505,7 +500,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 					FrameLayout l = new FrameLayout(OsMoGroupsActivity.this);
 					View view = inflater.inflate(R.layout.check_item_rel, l);
 					final CompoundButton check = (CompoundButton) view.findViewById(R.id.check_item);
-					check.setChecked((device != null && device.isActive() && device.isEnabled()) || (group != null && group.isActive() && group.isEnabled()));
+					check.setChecked(group != null && group.isActive() && group.isEnabled());
 					check.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
 						@Override
@@ -534,17 +529,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 
 			@Override
 			public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-				if (item.getItemId() == TRACK_DEV_ID) {
-					if (device != null && device.getLastLocation() != null) {
-						TargetPointsHelper targets = getMyApplication().getTargetPointsHelper();
-						targets.navigateToPoint(new LatLon(device.getLastLocation().getLatitude(), device
-								.getLastLocation().getLongitude()), true, -1);
-						OsMoPositionLayer.setFollowDestination(device);
-						MapActivity.launchMapActivityMoveToTop(OsMoGroupsActivity.this);
-					}
-				} else if (item.getItemId() == SETTINGS_DEV_ID) {
-					showSettingsDialog(device);
-				} else if (item.getItemId() == DELETE_ACTION_ID) {
+				if (item.getItemId() == DELETE_ACTION_ID) {
 					Builder bld = new AlertDialog.Builder(OsMoGroupsActivity.this);
 					String name = ((OsMoGroup) selectedObject).getVisibleName(OsMoGroupsActivity.this);
 					bld.setTitle(getString(R.string.osmo_leave_confirmation_msg, name));
@@ -563,18 +548,6 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 					showGroupInfo(group);
 				} else if (item.getItemId() == SHARE_ID) {
 					shareOsMoGroup(group.getVisibleName(app), group.getGroupId());
-				} else if (item.getItemId() == SHOW_ON_MAP_ID) {
-					if (device != null) {
-						Location location = device.getLastLocation();
-						MapActivity.getSingleMapViewTrackingUtilities().setMapLinkedToLocation(false);
-						if (location != null) {
-							app.getSettings().setMapLocationToShow(location.getLatitude(), location.getLongitude(), app.getSettings().getLastKnownMapZoom(),
-									new PointDescription(PointDescription.POINT_TYPE_MARKER, device.getVisibleName()), false,
-									device);
-						}
-						OsMoPositionLayer.setFollowTrackerId(device, location);
-						MapActivity.launchMapActivityMoveToTop(OsMoGroupsActivity.this);
-					}
 				} else if (item.getItemId() == ON_OFF_ACTION_ID) {
 					CompoundButton bt = ((CompoundButton) MenuItemCompat.getActionView(item).findViewById(R.id.check_item));
 					onOffAction(bt);
@@ -596,7 +569,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		});
 		refreshList();
 	}
-	
+
 	private StringBuilder setFields(StringBuilder bld, int field, String value) {
 		bld.append(getString(field)).append(": ").append(value).append("\n");
 		return bld;
@@ -1294,14 +1267,10 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			}
 			final OsMoDevice model = getChild(groupPosition, childPosition);
 			row.setTag(model);
-			if(selectedObject == model) {
-				row.setBackgroundColor(getResources().getColor(R.color.row_selection_color));
+			if (app.getSettings().isLightContent()) {
+				row.setBackgroundResource(R.drawable.expandable_list_item_background_light);
 			} else {
-				if (app.getSettings().isLightContent()){
-					row.setBackgroundResource(R.drawable.expandable_list_item_background_light);
-				} else {
-					row.setBackgroundResource(R.drawable.expandable_list_item_background_dark);
-				}
+				row.setBackgroundResource(R.drawable.expandable_list_item_background_dark);
 			}
 			TextView label = (TextView) row.findViewById(R.id.osmo_label);
 			TextView labelTime = (TextView) row.findViewById(R.id.osmo_label_time);
@@ -1432,14 +1401,14 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 	}
 	
 
-	private void showSettingsDialog(final OsMoDevice device) {
-		Builder bld = new AlertDialog.Builder(OsMoGroupsActivity.this);
+	public static void showSettingsDialog(Context ctx, final OsMoPlugin plugin, final OsMoDevice device) {
+		Builder bld = new AlertDialog.Builder(ctx);
 		bld.setTitle(R.string.osmo_edit_device);
-		final LayoutInflater inflater = LayoutInflater.from(this);
+		final LayoutInflater inflater = LayoutInflater.from(ctx);
         View view = inflater.inflate(R.layout.osmo_edit_device, null);
         final EditText name = (EditText) view.findViewById(R.id.Name);
         if(device.getColor() == 0) {
-        	osMoPlugin.getGroups().setDeviceProperties(device, device.getVisibleName(), 
+			plugin.getGroups().setDeviceProperties(device, device.getVisibleName(),
         			ColorDialogs.getRandomColor());	
         }
         int devColor = device.getColor();        
@@ -1448,13 +1417,13 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
         
         final Spinner colorSpinner = (Spinner) view.findViewById(R.id.ColorSpinner);
         final TIntArrayList list = new TIntArrayList();
-        ColorDialogs.setupColorSpinner(this, devColor, colorSpinner, list);
+        ColorDialogs.setupColorSpinner(ctx, devColor, colorSpinner, list);
 		
 		bld.setPositiveButton(R.string .shared_string_yes, new DialogInterface.OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				osMoPlugin.getGroups().setDeviceProperties(device, 
+				plugin.getGroups().setDeviceProperties(device,
 						name.getText().toString(), list.get(colorSpinner.getSelectedItemPosition()));
 			}
 		});

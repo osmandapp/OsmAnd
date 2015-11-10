@@ -88,6 +88,7 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -1043,9 +1044,9 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents {
 	// DownloadEvents
 	@Override
 	public void newDownloadIndexes() {
-		MapContextMenuFragment contextMenuFragment = getContextMenu().findMenuFragment();
-		if (contextMenuFragment != null) {
-			contextMenuFragment.newDownloadIndexes();
+		WeakReference<MapContextMenuFragment> fragmentRef = getContextMenu().findMenuFragment();
+		if (fragmentRef != null) {
+			fragmentRef.get().newDownloadIndexes();
 		}
 		if (getMapLayers().getDownloadedRegionsLayer().updateObjects()) {
 			refreshMap();
@@ -1054,9 +1055,9 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents {
 
 	@Override
 	public void downloadInProgress() {
-		MapContextMenuFragment contextMenuFragment = getContextMenu().findMenuFragment();
-		if (contextMenuFragment != null) {
-			contextMenuFragment.downloadInProgress();
+		WeakReference<MapContextMenuFragment> fragmentRef = getContextMenu().findMenuFragment();
+		if (fragmentRef != null) {
+			fragmentRef.get().downloadInProgress();
 		}
 		if (getMapLayers().getDownloadedRegionsLayer().updateObjects()) {
 			refreshMap();
@@ -1065,9 +1066,9 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents {
 
 	@Override
 	public void downloadHasFinished() {
-		MapContextMenuFragment contextMenuFragment = getContextMenu().findMenuFragment();
-		if (contextMenuFragment != null) {
-			contextMenuFragment.downloadHasFinished();
+		WeakReference<MapContextMenuFragment> fragmentRef = getContextMenu().findMenuFragment();
+		if (fragmentRef != null) {
+			fragmentRef.get().downloadHasFinished();
 		}
 		if (getMapLayers().getDownloadedRegionsLayer().updateObjects()) {
 			refreshMap();
