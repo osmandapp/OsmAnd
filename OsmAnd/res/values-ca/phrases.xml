@@ -1720,4 +1720,17 @@
 	<string name="poi_diet_gluten_free_only">Només dieta per celíacs</string>
 	<string name="poi_diet_gluten_free_yes">Dieta per celíacs</string>
 	<string name="poi_diet_gluten_free_no">Dieta per celíacs:no</string>
+	<string name="poi_payment_icsf_yes">S\'accepten targes IC Stored Fare</string>
+	<string name="poi_payment_icsf_no">No s\'accepten targes IC Stored Fare</string>
+	<string name="poi_diet_kosher_only">Només dieta kosher</string>
+	<string name="poi_diet_kosher_yes">Dieta kosher</string>
+	<string name="poi_diet_kosher_no">Dieta kosher: no</string>
+	<string name="poi_diet_halal_only">Només dieta halal</string>
+	<string name="poi_diet_halal_yes">Dieta halal</string>
+	<string name="poi_diet_halal_no">Dieta halal: no</string>
+	<string name="poi_diet_lactose_free_only">Només dieta sense lactosa</string>
+	<string name="poi_diet_lactose_free_yes">Dieta sense lactosa</string>
+	<string name="poi_diet_lactose_free_no">Dieta sense lactosa: no</string>
+	<string name="poi_drive_in_yes"/>
+	<string name="poi_drive_in_no"></string>
 	</resources>
