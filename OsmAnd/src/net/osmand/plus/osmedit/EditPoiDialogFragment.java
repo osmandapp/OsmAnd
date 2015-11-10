@@ -65,6 +65,7 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.io.Serializable;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -467,6 +468,12 @@ public class EditPoiDialogFragment extends DialogFragment {
 				}
 			};
 		}
+		adapter.sort(new Comparator<Object>() {
+			@Override
+			public int compare(Object lhs, Object rhs) {
+				return lhs.toString().compareTo(rhs.toString());
+			}
+		});
 		poiTypeEditText.setAdapter(adapter);
 		poiTypeEditText.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
