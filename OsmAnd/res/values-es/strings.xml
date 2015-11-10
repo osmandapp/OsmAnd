@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
 
     <string name="layer_map_appearance">Configurar pantalla</string>
     <string name="show_lanes">Mostrar carriles</string>
@@ -1499,7 +1500,7 @@
     <string name="arrival_distance_factor_normally">Normal</string>
     <string name="arrival_distance_factor_late">Tarde</string>
     <string name="arrival_distance_factor_at_last">En los últimos metros</string>
-    <string name="rendering_attr_coloredBuildings_name">Edificios por código de color según el tipo</string>
+    <string name="rendering_attr_coloredBuildings_name">Colorear edificios, según el tipo</string>
     <string name="av_camera_pic_size">Tamaño de foto</string>
     <string name="av_camera_pic_size_descr">Selecciona el tamaño interno de la foto</string>
     <string name="rendering_value_browse_map_name">Explorar mapa</string>
