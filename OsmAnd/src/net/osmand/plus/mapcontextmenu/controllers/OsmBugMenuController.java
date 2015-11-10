@@ -12,7 +12,6 @@ import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.osmedit.OsmBugsLayer.OpenStreetNote;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
-import net.osmand.util.Algorithms;
 
 public class OsmBugMenuController extends MenuController {
 
