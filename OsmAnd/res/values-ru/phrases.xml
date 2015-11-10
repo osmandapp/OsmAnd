@@ -857,7 +857,7 @@
 	<string name="poi_landuse_railway">Территория железной дороги</string>
 	<string name="poi_basin">Искусственный водоём</string>
 
-	<string name="poi_storage_tank">Бак для жидкости</string>
+	<string name="poi_storage_tank">Контейнер для хранения</string>
 
 	<string name="poi_neighbourhood">Микрорайон</string>
 	<string name="poi_residential">Жилой район</string>
