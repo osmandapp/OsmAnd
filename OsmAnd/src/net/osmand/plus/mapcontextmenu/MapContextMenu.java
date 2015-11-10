@@ -17,6 +17,8 @@ import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.util.MapUtils;
 
+import java.lang.ref.WeakReference;
+
 public class MapContextMenu extends MenuTitleController {
 
 	private MapActivity mapActivity;
@@ -72,6 +74,13 @@ public class MapContextMenu extends MenuTitleController {
 
 	public void setMapCenter(LatLon mapCenter) {
 		this.mapCenter = mapCenter;
+	}
+
+	public void updateMapCenter(LatLon mapCenter) {
+		WeakReference<MapContextMenuFragment> fragmentRef = findMenuFragment();
+		if (fragmentRef != null) {
+			fragmentRef.get().updateMapCenter(mapCenter);
+		}
 	}
 
 	public void setMapPosition(int mapPosition) {
@@ -131,10 +140,13 @@ public class MapContextMenu extends MenuTitleController {
 
 		active = true;
 
-		acquireMenuController();
+		if (menuController == null || !update) {
+			acquireMenuController();
+		}
 		initTitle();
 
 		if (menuController != null) {
+			menuController.clearPlainMenuItems();
 			menuController.addPlainMenuItems(typeStr, this.pointDescription, this.latLon);
 		}
 
@@ -160,10 +172,10 @@ public class MapContextMenu extends MenuTitleController {
 	}
 
 	public void update(LatLon latLon, PointDescription pointDescription, Object object) {
-		MapContextMenuFragment fragment = findMenuFragment();
-		if (fragment != null) {
-			init(latLon, pointDescription, object, true);
-			fragment.rebuildMenu();
+		WeakReference<MapContextMenuFragment> fragmentRef = findMenuFragment();
+		init(latLon, pointDescription, object, true);
+		if (fragmentRef != null) {
+			fragmentRef.get().rebuildMenu();
 		}
 	}
 
@@ -189,9 +201,16 @@ public class MapContextMenu extends MenuTitleController {
 			mapActivity.getMapView().setMapPosition(mapPosition);
 			mapPosition = 0;
 		}
-		MapContextMenuFragment fragment = findMenuFragment();
-		if (fragment != null) {
-			fragment.dismissMenu();
+		WeakReference<MapContextMenuFragment> fragmentRef = findMenuFragment();
+		if (fragmentRef != null) {
+			fragmentRef.get().dismissMenu();
+		}
+	}
+
+	public void updateMenuUI() {
+		WeakReference<MapContextMenuFragment> fragmentRef = findMenuFragment();
+		if (fragmentRef != null) {
+			fragmentRef.get().updateMenu();
 		}
 	}
 
@@ -237,15 +256,15 @@ public class MapContextMenu extends MenuTitleController {
 
 	@Override
 	public void refreshMenuTitle() {
-		MapContextMenuFragment fragment = findMenuFragment();
-		if (fragment != null)
-			fragment.refreshTitle();
+		WeakReference<MapContextMenuFragment> fragmentRef = findMenuFragment();
+		if (fragmentRef != null)
+			fragmentRef.get().refreshTitle();
 	}
 
-	public MapContextMenuFragment findMenuFragment() {
+	public WeakReference<MapContextMenuFragment> findMenuFragment() {
 		Fragment fragment = mapActivity.getSupportFragmentManager().findFragmentByTag(MapContextMenuFragment.TAG);
-		if (fragment != null) {
-			return (MapContextMenuFragment) fragment;
+		if (fragment != null && !fragment.isDetached()) {
+			return new WeakReference<>((MapContextMenuFragment) fragment);
 		} else {
 			return null;
 		}
@@ -308,9 +327,9 @@ public class MapContextMenu extends MenuTitleController {
 	}
 
 	public void setBaseFragmentVisibility(boolean visible) {
-		MapContextMenuFragment menuFragment = findMenuFragment();
-		if (menuFragment != null) {
-			menuFragment.setFragmentVisibility(visible);
+		WeakReference<MapContextMenuFragment> fragmentRef = findMenuFragment();
+		if (fragmentRef != null) {
+			fragmentRef.get().setFragmentVisibility(visible);
 		}
 	}
 
@@ -459,9 +478,9 @@ public class MapContextMenu extends MenuTitleController {
 			@Override
 			public void run() {
 				inLocationUpdate = false;
-				MapContextMenuFragment menuFragment = findMenuFragment();
-				if (menuFragment != null) {
-					menuFragment.updateLocation(centerChanged, locationChanged, compassChanged);
+				WeakReference<MapContextMenuFragment> fragmentRef = findMenuFragment();
+				if (fragmentRef != null) {
+					fragmentRef.get().updateLocation(centerChanged, locationChanged, compassChanged);
 				}
 			}
 		});

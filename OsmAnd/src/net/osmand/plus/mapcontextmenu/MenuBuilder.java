@@ -203,6 +203,10 @@ public class MenuBuilder {
 		plainMenuItems.add(new PlainMenuItem(iconId, text, needLinks));
 	}
 
+	public void clearPlainMenuItems() {
+		plainMenuItems.clear();
+	}
+
 	public Drawable getRowIcon(int iconId) {
 		IconsCache iconsCache = app.getIconsCache();
 		boolean light = app.getSettings().isLightContent();
