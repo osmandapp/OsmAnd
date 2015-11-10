@@ -36,15 +36,13 @@ public class MapDataMenuController extends MenuController {
 	private IndexItem indexItem;
 	private List<IndexItem> otherIndexItems;
 
-	private DownloadValidationManager downloadValidationManager;
 	private DownloadIndexesThread downloadThread;
 
-	public MapDataMenuController(final OsmandApplication app, final MapActivity mapActivity, PointDescription pointDescription, final BinaryMapDataObject dataObject) {
+	public MapDataMenuController(OsmandApplication app, MapActivity mapActivity, PointDescription pointDescription, final BinaryMapDataObject dataObject) {
 		super(new MenuBuilder(app), pointDescription, mapActivity);
 		OsmandRegions osmandRegions = app.getRegions();
 		String fullName = osmandRegions.getFullName(dataObject);
 		this.region = osmandRegions.getRegionData(fullName);
-		downloadValidationManager = new DownloadValidationManager(app);
 		downloadThread = app.getDownloadThread();
 
 		mapActivity.getSupportFragmentManager();
@@ -52,7 +50,8 @@ public class MapDataMenuController extends MenuController {
 			@Override
 			public void buttonPressed() {
 				if (indexItem != null) {
-					downloadValidationManager.startDownload(mapActivity, indexItem);
+					new DownloadValidationManager(getMapActivity().getMyApplication())
+							.startDownload(getMapActivity(), indexItem);
 				}
 			}
 		};

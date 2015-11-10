@@ -18,7 +18,7 @@ public class OsmBugMenuController extends MenuController {
 	private OsmEditingPlugin plugin;
 	private OpenStreetNote bug;
 
-	public OsmBugMenuController(OsmandApplication app, final MapActivity mapActivity, PointDescription pointDescription, final OpenStreetNote bug) {
+	public OsmBugMenuController(OsmandApplication app, MapActivity mapActivity, PointDescription pointDescription, final OpenStreetNote bug) {
 		super(new MenuBuilder(app), pointDescription, mapActivity);
 		plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
 		this.bug = bug;
