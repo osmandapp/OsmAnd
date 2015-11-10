@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.plus.ContextMenuAdapter;
@@ -36,6 +37,8 @@ import net.osmand.render.RenderingRuleStorageProperties;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -45,6 +48,7 @@ import java.util.List;
 import gnu.trove.list.array.TIntArrayList;
 
 public class ConfigureMapMenu {
+	private static final Log LOG = PlatformUtil.getLog(ConfigureMapMenu.class);
 
 	public interface OnClickListener{
 		public void onClick(boolean result);
@@ -126,10 +130,12 @@ public class ConfigureMapMenu {
 					ma.getMyApplication().getSelectedGpxHelper().clearAllGpxFileToShow();
 				} else {
 					AlertDialog dialog = ma.getMapLayers().showGPXFileLayer(getAlreadySelectedGpx(), ma.getMapView());
-					dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+					dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
 						@Override
-						public void onCancel(DialogInterface dialogInterface) {
-							cm.setSelection(pos, 0);
+						public void onDismiss(DialogInterface dialog) {
+							boolean areAnyGpxTracksVisible =
+									ma.getMyApplication().getSelectedGpxHelper().isShowingAnyGpxFiles();
+							cm.setSelection(pos, areAnyGpxTracksVisible ? 1 : 0);
 							adapter.notifyDataSetChanged();
 						}
 					});
@@ -410,20 +416,13 @@ public class ConfigureMapMenu {
 	public static String[] mapNamesIds = new String[] { "", "en", "als", "af", "ar", "az", "be", "bg", "bn", "bpy", "br", "bs", "ca", "ceb", "cs", "cy", "da", "de", "el", "et", "es", "eu", "fa", "fi", "fr", "fy", "ga", "gl", "he", "hi", "hr", "ht", "hu", "hy", "id", "is", "it", "ja", "ka", "ko", "ku", "la", "lb", "lt", "lv", "mk", "ml", "mr", "ms", "nds", "new", "nl", "nn", "no", "nv", "os", "pl", "pms", "pt", "ro", "ru", "sh", "sc", "sk", "sl", "sq", "sr", "sv", "sw", "ta", "te", "th", "tl", "tr", "uk", "vi", "vo", "zh" };
 
 	public static String[] getMapNamesValues(Context ctx) {
-		return new String[] { ctx.getString(R.string.local_map_names), ctx.getString(R.string.lang_en),
-				ctx.getString(R.string.lang_ar),
-				ctx.getString(R.string.lang_be), ctx.getString(R.string.lang_bg), ctx.getString(R.string.lang_ca), ctx.getString(R.string.lang_ceb), ctx.getString(R.string.lang_cs),
-				ctx.getString(R.string.lang_da), ctx.getString(R.string.lang_de), ctx.getString(R.string.lang_el), ctx.getString(R.string.lang_et),
-				ctx.getString(R.string.lang_es), ctx.getString(R.string.lang_fi), ctx.getString(R.string.lang_fr), ctx.getString(R.string.lang_gl),
-				ctx.getString(R.string.lang_he), ctx.getString(R.string.lang_hi), ctx.getString(R.string.lang_hr),
-				ctx.getString(R.string.lang_ht), ctx.getString(R.string.lang_hu), ctx.getString(R.string.lang_id), ctx.getString(R.string.lang_it), ctx.getString(R.string.lang_ja),
-				ctx.getString(R.string.lang_ko), ctx.getString(R.string.lang_lt),
-				ctx.getString(R.string.lang_lv), ctx.getString(R.string.lang_ms), ctx.getString(R.string.lang_new), ctx.getString(R.string.lang_nl), ctx.getString(R.string.lang_nn),
-				ctx.getString(R.string.lang_no),
-				ctx.getString(R.string.lang_pl), ctx.getString(R.string.lang_pt), ctx.getString(R.string.lang_ro), ctx.getString(R.string.lang_ru),
-				ctx.getString(R.string.lang_sk), ctx.getString(R.string.lang_sl), ctx.getString(R.string.lang_sr), ctx.getString(R.string.lang_sv),
-				ctx.getString(R.string.lang_sw), ctx.getString(R.string.lang_te), ctx.getString(R.string.lang_th), ctx.getString(R.string.lang_tr), ctx.getString(R.string.lang_uk),
-				ctx.getString(R.string.lang_vi), ctx.getString(R.string.lang_vo), ctx.getString(R.string.lang_zh) };
+		String[] translates = new String[mapNamesIds.length];
+		translates[0] = ctx.getString(R.string.local_map_names);
+		for(int i = 1; i < translates.length; i++) {
+			translates[i] = ((OsmandApplication)ctx.getApplicationContext()).getLangTranslation(mapNamesIds[i]);
+		}
+		
+		return translates;
 	}
 
 	private void createProperties(List<RenderingRuleProperty> customRules, final int strId, String cat, 

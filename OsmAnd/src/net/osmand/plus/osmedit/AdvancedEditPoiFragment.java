@@ -105,7 +105,7 @@ public class AdvancedEditPoiFragment extends Fragment
 			@Override
 			public void onTagsChanged(String anyTag) {
 				LOG.debug("onTagsChanged(" + "anyTag=" + anyTag + ")");
-				final String value = getData().getTagValues().get(anyTag);
+				String value = getData().getTagValues().get(anyTag);
 				if (Algorithms.objectEquals(anyTag, OSMSettings.OSMTagKey.NAME.getValue())) {
 					nameTextView.setText(value);
 				}
@@ -279,12 +279,14 @@ public class AdvancedEditPoiFragment extends Fragment
 		public void setTagData(String[] tags) {
 			tagAdapter.clear();
 			tagAdapter.addAll(tags);
+			tagAdapter.sort(String.CASE_INSENSITIVE_ORDER);
 			tagAdapter.notifyDataSetChanged();
 		}
 
 		public void setValueData(String[] values) {
 			valueAdapter.clear();
 			valueAdapter.addAll(values);
+			valueAdapter.sort(String.CASE_INSENSITIVE_ORDER);
 			valueAdapter.notifyDataSetChanged();
 		}
 	}

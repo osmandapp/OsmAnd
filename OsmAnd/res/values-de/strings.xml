@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
 	<string name="regions">Regionen</string>
 	<string name="region_maps">Regionsweite Karten</string>
 	<string name="world_maps">Weltweite Karten</string>
@@ -1949,7 +1948,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="shared_string_logoff">Abmelden</string>
     <string name="osmo_share_my_location">Teile meine Position</string>
     <string name="rendering_value_disabled_name">Deaktiviert</string>
-    <string name="routing_attr_avoid_borders_name">Grenzübergänge vermeiden</string>
+    
 	<string name="routing_attr_height_name">Höhenbeschränkung</string>
 	<string name="read_full_article">Vollständigen Artikel lesen (online)</string>
     <string name="shared_string_wikipedia">Wikipedia</string>
@@ -2072,7 +2071,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="show_free_version_banner_description">Auch bei der bezahlten Version ist das Banner der kostenlosen Version sichtbar.</string>
 <string name="rendering_attr_hideProposed_name">Vorgeschlagene Objekte ausblenden</string>
     <string name="shared_string_update">Aktualisieren</string>
-    <string name="rec_photo_description">Foto %1$s</string>
+    
     <string name="rec_video_description">Video %1$s</string>
     <string name="shared_string_upload">Hochladen</string>
     <string name="shared_string_qr_code">QR-Code</string>

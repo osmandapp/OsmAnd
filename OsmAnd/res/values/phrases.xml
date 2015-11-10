@@ -2378,5 +2378,15 @@
 
 	<string name="poi_conveying_yes">Conveying: yes</string>
 
+	<string name="poi_bridge_ref">Bridge ref</string>
+	<string name="poi_tunnel_ref">Tunnel ref</string>
+
+	<string name="poi_ref">Ref</string>
+
+	<string name="poi_cargo_passengers">Cargo: passengers</string>
+	<string name="poi_cargo_vehicle">Cargo: vehicle</string>
+	<string name="poi_cargo_bicycle">Cargo: bicycle</string>
+	<string name="poi_cargo_container">Cargo: container</string>
+	<string name="poi_cargo_hgv">Cargo: hgv</string>
 
 </resources>

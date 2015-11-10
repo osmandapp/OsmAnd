@@ -1,12 +1,30 @@
 package net.osmand.plus;
 
-import java.io.BufferedWriter;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.PrintStream;
-import java.lang.Thread.UncaughtExceptionHandler;
-import java.util.Locale;
+import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.app.Application;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.Configuration;
+import android.os.AsyncTask;
+import android.os.Build;
+import android.os.Handler;
+import android.os.Message;
+import android.text.format.DateFormat;
+import android.util.TypedValue;
+import android.view.View;
+import android.view.accessibility.AccessibilityManager;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityPlugin;
@@ -34,31 +52,15 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.util.Algorithms;
-import android.app.Activity;
-import android.app.AlarmManager;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.app.Application;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager.NameNotFoundException;
-import android.content.res.Configuration;
-import android.os.AsyncTask;
-import android.os.Build;
-import android.os.Handler;
-import android.os.Message;
-import android.text.format.DateFormat;
-import android.util.TypedValue;
-import android.view.View;
-import android.view.accessibility.AccessibilityManager;
-import android.widget.CheckBox;
-import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
-import android.widget.TextView;
-import android.widget.Toast;
+
+import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintStream;
+import java.lang.Thread.UncaughtExceptionHandler;
+import java.util.Locale;
+
 import btools.routingapp.BRouterServiceConnection;
 import btools.routingapp.IBRouterService;
 
@@ -715,4 +717,16 @@ public class OsmandApplication extends Application {
 	}
 
 
+	public String getLangTranslation(String l) {
+		try {
+			java.lang.reflect.Field f = R.string.class.getField("lang_"+l);
+			if (f != null) {
+				Integer in = (Integer) f.get(null);
+				return getString(in);
+			}
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return l;
+	}
 }

@@ -1495,7 +1495,7 @@
 	<string name="use_displayed_track_for_navigation">Želite li koristiti prikazan zapis za vašu navigaciju?</string>
     <string name="route_preferences">Postavke rute</string>
     <string name="route_info">Informacije o ruti</string>
-    <string name="routing_attr_avoid_borders_name">Izbjegavajt granične prijelaze</string>
+    
 	<string name="routing_attr_avoid_borders_description">Izbjegavajte prelazak granice u drugu zemlju</string>
 	<string name="routing_attr_height_name">Ograničenje visine</string>
 	<string name="routing_attr_height_description">Odredite visinu vozila da biste znali kojim putevima vam je dopušteno voziti</string>

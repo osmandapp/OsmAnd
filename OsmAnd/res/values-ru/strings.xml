@@ -1602,7 +1602,7 @@
     <string name="application_dir_change_warning3">Переместить также файлы данных OsmAnd в новое место назначения?</string>
     <string name="search_poi_category_hint">Напечатайте для поиска</string>
     <string name="rendering_attr_hideHouseNumbers_name">Скрыть номера домов</string>
-    <string name="routing_attr_avoid_borders_name">Избегать пересечение границы</string>
+    
     <string name="routing_attr_avoid_borders_description">Избегать пересечение границы с другой страной</string>
     <string name="routing_attr_height_name">Ограничение высоты</string>
     <string name="routing_attr_height_description">Укажите высоту автомобиля для учёта при построении маршрута</string>
@@ -1813,4 +1813,6 @@
     <string name="av_locations">Места</string>
     <string name="downloading_number_of_files">Загрузка файла - %1$d</string>
 
-</resources>
+<string name="read_more">Подробнее</string>
+    <string name="whats_new">Что нового в</string>
+    </resources>

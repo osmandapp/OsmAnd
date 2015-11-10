@@ -1812,7 +1812,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="rendering_value_highContrastRoads_name">Strade ad alto contrasto</string>
     <string name="storage_directory_multiuser">Memorizzazione multiutente</string>
     <string name="rendering_attr_hideHouseNumbers_name">Nascondi i numeri civici</string>
-    <string name="routing_attr_avoid_borders_name">Evita attraversamenti di frontiera</string>
+    
     <string name="routing_attr_avoid_borders_description">Evita l\'attraversamento di una frontiera verso un\'altra nazione</string>
     <string name="routing_attr_height_name">Limite di altezza</string>
     <string name="routing_attr_height_description">Specifica l\'altezza del veicolo che deve essere permessa sui percorsi</string>
@@ -1921,7 +1921,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="opening_at">Apre alle</string>
     <string name="closing_at">Chiude alle</string>
     <string name="av_locations_descr">File GPX con note locali</string>
-    <string name="av_locations">Località</string>
+    <string name="av_locations">Posizioni</string>
     
     
     <string name="contact_info">Informazioni di contatto</string>
@@ -2040,4 +2040,6 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     
     
     <string name="rendering_attr_hideProposed_name">Nascondi gli oggetti proposti</string>
+    <string name="read_more">Leggi di più</string>
+    <string name="whats_new">Novità nella versione</string>
     </resources>

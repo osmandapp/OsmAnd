@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -265,23 +266,11 @@ public class AppInitializer implements IProgress {
 		}
 		app.poiTypes.setPoiTranslator(new MapPoiTypes.PoiTranslator() {
 			
-			public String getLangTranslation(String l) {
-				try {
-					Field f = R.string.class.getField("lang_"+l);
-					if (f != null) {
-						Integer in = (Integer) f.get(null);
-						return app.getString(in);
-					}
-				} catch (Exception e) {
-					System.err.println(e.getMessage());
-				}
-				return l;
-			}
 			
 			@Override
 			public String getTranslation(AbstractPoiType type) {
 				if(type.getBaseLangType() != null) {
-					return getTranslation(type.getBaseLangType()) +  " (" + getLangTranslation(type.getLang()).toLowerCase() +")";
+					return getTranslation(type.getBaseLangType()) +  " (" + app.getLangTranslation(type.getLang()).toLowerCase() +")";
 				}
 				try {
 					Field f = R.string.class.getField("poi_" + type.getIconKeyName());

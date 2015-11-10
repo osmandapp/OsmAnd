@@ -2042,7 +2042,7 @@
     <string name="rendering_value_walkingRoutesOSMC_name">OSMC에 따라 색상변경</string>
     <string name="osmo_share_my_location">내 위치를 공유</string>
     <string name="shared_string_logoff">로그 오프</string>
-    <string name="routing_attr_avoid_borders_name">국경 횡단 방지</string>
+    
 	<string name="routing_attr_avoid_borders_description">타국의 국경 횡단 방지</string>
 	<string name="routing_attr_height_name">높이 제한</string>
 	<string name="routing_attr_height_description">도로에 통행가능한 차량중량을 지정</string>

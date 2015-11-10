@@ -2,7 +2,8 @@
 <LinearLayout
     android:id="@+id/LinearLayout1"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
@@ -13,7 +14,8 @@
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="24dp"
         android:gravity="center"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        tools:visibility="visible"/>
 
     <TextView
         android:id="@+id/title"
@@ -27,26 +29,21 @@
         android:text="@string/layer_poi"
         android:textSize="@dimen/default_list_text_size"/>
 
-    <LinearLayout
+    <ImageView
+        android:id="@+id/icon_settings"
         android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
-        android:gravity="center_vertical">
+        android:layout_height="match_parent"
+        android:focusable="false"
+        android:gravity="center_vertical"
+        android:visibility="gone"
+        tools:visibility="visible"/>
 
-        <ImageView
-            android:id="@+id/icon_settings"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:focusable="false"
-            android:gravity="center_vertical"
-            android:visibility="gone"/>
-
-        <!-- android:button="@drawable/ic_btn_wocheckbox" -->
-        <CheckBox
-            android:id="@+id/check_item"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="24dp"
-            android:focusable="false"/>
-    </LinearLayout>
+    <!-- android:button="@drawable/ic_btn_wocheckbox" -->
+    <CheckBox
+        android:id="@+id/check_item"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginRight="24dp"
+        android:focusable="false"/>
 
 </LinearLayout>

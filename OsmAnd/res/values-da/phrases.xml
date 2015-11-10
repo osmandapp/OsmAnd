@@ -2403,7 +2403,7 @@
 	<string name="poi_building_type_monastery">Bygningstype: kloster</string>
 	<string name="poi_building_type_basilica">Bygningstype: basilika</string>
 	<string name="poi_building_type_synagogue">Bygningstype: synagoge</string>
-	<string name="poi_building_type_shrine">Bygningstype: helgenskrin</string>
+	<string name="poi_building_type_shrine">Bygningstype: helligdom</string>
 
 <string name="poi_artist_name">Kunstner</string>
 	<string name="poi_sculptor">Billedhugger</string>
@@ -2431,5 +2431,16 @@
 
 <string name="poi_conveying_yes">Flytning: ja</string>
 
+
+<string name="poi_bridge_ref">Bro ref</string>
+	<string name="poi_tunnel_ref">Tunnel ref</string>
+
+	<string name="poi_ref">Ref</string>
+
+<string name="poi_cargo_passengers">Fragt: passagerer</string>
+	<string name="poi_cargo_vehicle">Fragt: køretøj</string>
+	<string name="poi_cargo_bicycle">Fragt: cykel</string>
+	<string name="poi_cargo_container">Fragt: container</string>
+	<string name="poi_cargo_hgv">Fragt: modulvogntog</string>
 
 </resources>

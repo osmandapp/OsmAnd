@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="auto_zoom_none">Без аўтаматычнага маштабаваньня</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="auto_zoom_none">Без аўтаматычнага маштабаваньня</string>
     <string name="auto_zoom_close">Буйней</string>
     <string name="auto_zoom_far">Для сярэдняга маштаба</string>
     <string name="auto_zoom_farthest">Драбней</string>
@@ -1779,7 +1780,7 @@
     <string name="storage_directory_multiuser">Агульнае сховішча</string>
     <string name="application_dir_change_warning3">Вы хочаце, каб OsmAnd таксама скапіяваў свае файлы дадзеных у новае месца прызначэньня?</string>
     <string name="rendering_attr_hideHouseNumbers_name">Схаваць нумары дамоў</string>
-    <string name="routing_attr_avoid_borders_name">Пазьбягаць перасячэньне мяжы</string>
+    
 	<string name="routing_attr_avoid_borders_description">Пазьбягаць перасячэньня мяжы іншай краіны</string>
 	<string name="routing_attr_height_name">Абмежаваньне па вышыні</string>
 	<string name="routing_attr_height_description">Пазначце вышыню транспартнага сродку для разьліку маршруту</string>
@@ -1996,9 +1997,12 @@
     <string name="first_usage_item_description">Як загрузіць мапы, усталяваць асноўныя налады</string>
     <string name="navigation_item_description">Налада навігацыі</string>
     <string name="planning_trip_item">Планаваньне паездкі</string>
-    <string name="faq_item_description">Як карыстацца модулямі</string>
+    <string name="faq_item_description">Часта задаваныя пытаньні</string>
     <string name="map_viewing_item">Агляд мапы</string>
     <string name="search_on_the_map_item">Пошук мапы</string>
     <string name="instalation_troubleshooting_item">Усталёўка і вырашэньне праблемаў</string>
     <string name="techical_articles_item">Тэхнічныя артыкулы</string>
+    <string name="read_more">Падрабязьней</string>
+    <string name="whats_new">Што новага ў</string>
+    <string name="rendering_attr_hideProposed_name">Схаваць плануемыя аб\'екты</string>
     </resources>

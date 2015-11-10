@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="send_files_to_osm">GPX fájl küldése OSM-re?</string>
     <string name="gpx_visibility_txt">Láthatóság</string>
     <string name="gpx_tags_txt">Címkék</string>
@@ -1770,7 +1769,7 @@
     <string name="index_name_netherlands">Európa - Hollandia</string>
     <string name="application_dir_change_warning3">Szeretnéd, hogy az OsmAnd az adatfájljaidat is az új helyre másolja?</string>
     <string name="rendering_attr_hideHouseNumbers_name">Házszámok elrejtése</string>
-    <string name="routing_attr_avoid_borders_name">Határátlépések elkerülése</string>
+    
     <string name="routing_attr_avoid_borders_description">A határ átlépésének elkerülése egy másik országba</string>
     <string name="routing_attr_height_name">Magasságkorlát</string>
     <string name="routing_attr_height_description">Az utakon engedélyezett járműmagasság megadása</string>

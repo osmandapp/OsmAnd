@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
     <string name="ChooseCountry">Välj land</string>
@@ -1752,7 +1752,7 @@
     <string name="routing_attr_height_name">Höjdgräns</string>
     <string name="use_fast_recalculation">Smart omräkning av rutt</string>
     <string name="use_fast_recalculation_desc">Räkna om endast början av rutten för långa resor</string>
-    <string name="routing_attr_avoid_borders_name">Undvik gränsövergångar</string>
+
     <string name="routing_attr_height_description">Ange tillåten fordonshöjd på rutter</string>
     <string name="osmo_share_my_location">Dela ut min position</string>
     <string name="shared_string_logoff">Logga ut</string>
@@ -1860,8 +1860,8 @@
     <string name="contact_info">Kontaktinformation</string>
     <string name="dahboard_options_dialog_title">Konfigurera panelen</string>
     <string name="commit_poi">Skicka in POI</string>
-    
-    
+
+
     <string name="number_of_rows_in_dash">Antal rader i panelen: %1$s</string>
     <string name="please_specify_poi_type">Ange typ av POI.</string>
     <string name="favourites">Favoriter</string>
@@ -1952,9 +1952,8 @@
     <string name="map_viewing_item">Kartvisning</string>
     <string name="search_on_the_map_item">Söka på kartan</string>
     <string name="planning_trip_item">Att planera en resa</string>
-    
-    
-    
+
+
     <string name="instalation_troubleshooting_item">Installation och problemlösning</string>
     <string name="techical_articles_item">Tekniska artiklar</string>
     <string name="versions_item">Versioner</string>
@@ -1962,14 +1961,12 @@
     <string name="osm_edit_created_poi">Skapat en OSM POI</string>
     <string name="osm_edit_created_bug">Skapat en OSM-bugg</string>
     <string name="world_map_download_descr">Baskarta över världen (täcker hela världen med låg zoomningsgrad) saknas eller är gammal. Hämta gärna denna karta till din enhet.</string>
-<string name="shared_string_upload">Skicka</string>
+    <string name="shared_string_upload">Skicka</string>
     <string name="map_legend">Teckenförklaring</string>
-<string name="shared_string_update">Uppdatera</string>
-    
-    
-    
+    <string name="shared_string_update">Uppdatera</string>
+
     <string name="feedback">Återkoppling</string>
     <string name="read_more">Läs mer</string>
     <string name="whats_new">Nyheter</string>
     <string name="rendering_attr_hideProposed_name">Dölj föreslagna objekt</string>
-    </resources>
+</resources>

@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="starting_point_too_far">Pradžios taškas yra per toli nuo artimiausio kelio.</string>
     <string name="shared_location">Bendrinta vieta</string>
     <string name="osmand_parking_warning">Dėmesio</string>
@@ -1770,7 +1769,7 @@
     <string name="osmand_parking_overdue">pradelsta</string>
     <string name="shared_string_currently_recording_track">Šiuo metu įrašomas maršrutas</string>
     <string name="plugin_touringview_descr">"Aktyvus šį rodinį pasikeis OsmAnd\'s žemėlapių stilius į \"Touring view\", kuris yra detalus duomenų rodinys turistas ir profesionaliems vairuotojams. "</string>
-    <string name="routing_attr_avoid_borders_name">Vengti kirsti sieną</string>
+    
     <string name="routing_attr_avoid_borders_description">Vengti kirsti sieną išvažiuojant užsienio šalin</string>
     <string name="routing_attr_height_name">Aukščio ribojimas</string>
     <string name="use_fast_recalculation">Išmanusis maršruto perskaičiavimas</string>
