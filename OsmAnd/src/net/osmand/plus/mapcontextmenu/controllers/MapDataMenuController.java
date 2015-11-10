@@ -45,7 +45,6 @@ public class MapDataMenuController extends MenuController {
 		this.region = osmandRegions.getRegionData(fullName);
 		downloadThread = app.getDownloadThread();
 
-		mapActivity.getSupportFragmentManager();
 		leftTitleButtonController = new TitleButtonController() {
 			@Override
 			public void buttonPressed() {

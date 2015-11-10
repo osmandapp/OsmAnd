@@ -129,52 +129,6 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 	}
 	
 	@Override
-	public void registerMapContextMenuActions(final MapActivity mapActivity, final double latitude, final double longitude,
-			ContextMenuAdapter adapter, final Object selectedObj) {
-		if(selectedObj instanceof OsMoDevice) {
-			adapter.item(R.string.osmo_center_location).iconColor(R.drawable.ic_action_gloc_dark).listen(new OnContextMenuClick() {
-						
-						@Override
-						public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-							OsMoDevice o = (OsMoDevice) selectedObj;
-							Location loc = o.getLastLocation();
-							double lat = loc == null ? latitude : loc.getLatitude();
-							double lon = loc == null ? longitude : loc.getLongitude();
-							mapActivity.getMapView().setLatLon(lat, lon);
-							MapActivity.getSingleMapViewTrackingUtilities().setMapLinkedToLocation(false);
-							OsMoPositionLayer.setFollowTrackerId(o, loc);
-							return true;
-						}
-					}).position(0).reg();
-			if(OsMoPositionLayer.getFollowDestinationId() != null) {
-				adapter.item(R.string.osmo_cancel_moving_target).iconColor(R.drawable.ic_action_remove_dark).listen(new OnContextMenuClick() {
-
-							@Override
-							public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-								OsMoPositionLayer.setFollowDestination(null);
-								return true;
-							}
-							
-						}).position(0).reg();
-			}
-			adapter.item(R.string.osmo_set_moving_target).iconColor(R.drawable.ic_action_flag_dark).listen(new OnContextMenuClick() {
-						
-						@Override
-						public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-							OsMoDevice o = (OsMoDevice) selectedObj;
-							if(o.getLastLocation() != null) {
-								TargetPointsHelper targets = mapActivity.getMyApplication().getTargetPointsHelper();
-								targets.navigateToPoint(new LatLon(o.getLastLocation().getLatitude(), o.getLastLocation().getLongitude()), true, -1);
-							}
-							OsMoPositionLayer.setFollowDestination(o);
-							return true;
-						}
-					}).position(1).reg();
-		}
-		super.registerMapContextMenuActions(mapActivity, latitude, longitude, adapter, selectedObj);
-	}
-	
-	@Override
 	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
 		if(isActive()) {
 			if(olayer == null) {
