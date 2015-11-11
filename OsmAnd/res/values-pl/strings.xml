@@ -2071,7 +2071,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="osm_edit_created_poi">Utwórz punkt orientacyjny OSM</string>
     <string name="osm_edit_created_bug">Utworzono błąd OSM</string>
     <string name="simulate_initial_startup_descr">Ustaw flagę wskazującą pierwsze uruchomienie aplikacji, utrzymuje wszystkie inne ustawienia bez zmian</string>
-    <string name="share_geo">geo:</string>
+    <string name="share_geo">wsp:</string>
     <string name="confirm_download_roadmaps">Czy na pewno chcesz pobrać mapę dróg, nawet jeśli masz pełną wersję mapy?</string>
     <string name="free_downloads_used_description">Możesz ustawić ile razy pobrań użyłeś</string>
 
