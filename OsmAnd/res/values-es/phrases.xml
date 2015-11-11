@@ -2420,4 +2420,8 @@
 	<string name="poi_cargo_container">Cargamento: Contenedores</string>
 	<string name="poi_cargo_hgv">Cargamento: Vehículos pesados</string>
 
+<string name="poi_fitness_station">Gimnasio exterior</string>
+
+	<string name="poi_hackerspace">Encuentro de hackers</string>
+
 </resources>
