@@ -1989,4 +1989,5 @@
     <string name="lang_fy">Frisone otzidentale</string>
     <string name="lang_als">Albanesu (Tosk)</string>
     <string name="share_osm_edits_subject">Modìficas Osm cumpartzidas pro mèdiu de OsmAnd</string>
+    <string name="save_poi_without_poi_type_message">Boles sarbare su PDI chene dislindare sa casta sua?</string>
     </resources>
