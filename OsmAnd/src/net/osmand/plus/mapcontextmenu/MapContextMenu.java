@@ -7,7 +7,6 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -520,21 +519,23 @@ public class MapContextMenu extends MenuTitleController {
 	}
 
 	public void updateMyLocation(net.osmand.Location location) {
-		if (location != null) {
+		if (location != null && active && displayDistanceDirection()) {
 			myLocation = new LatLon(location.getLatitude(), location.getLongitude());
 			updateLocation(false, true, false);
 		}
 	}
 
 	public void updateCompassValue(float value) {
-		// 99 in next line used to one-time initialize arrows (with reference vs. fixed-north direction)
-		// on non-compass devices
-		float lastHeading = heading != null ? heading : 99;
-		heading = value;
-		if (Math.abs(MapUtils.degreesDiff(lastHeading, heading)) > 5) {
-			updateLocation(false, false, true);
-		} else {
-			heading = lastHeading;
+		if (active && displayDistanceDirection()) {
+			// 99 in next line used to one-time initialize arrows (with reference vs. fixed-north direction)
+			// on non-compass devices
+			float lastHeading = heading != null ? heading : 99;
+			heading = value;
+			if (Math.abs(MapUtils.degreesDiff(lastHeading, heading)) > 5) {
+				updateLocation(false, false, true);
+			} else {
+				heading = lastHeading;
+			}
 		}
 	}
 
