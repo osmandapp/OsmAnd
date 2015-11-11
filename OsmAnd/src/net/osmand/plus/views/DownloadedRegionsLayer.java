@@ -411,7 +411,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		if (view.getContext() instanceof MapActivity) {
 			MapActivity mapActivity = (MapActivity) view.getContext();
 			MapContextMenu menu = mapActivity.getContextMenu();
-			MapMultiSelectionMenu multiMenu = mapActivity.getMultiSelectionMenu();
+			MapMultiSelectionMenu multiMenu = menu.getMultiSelectionMenu();
 			isMenuVisible = menu.isVisible() || multiMenu.isVisible();
 		}
 		if (!isMenuVisible) {

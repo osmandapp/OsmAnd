@@ -132,7 +132,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 			@Override
 			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int resId, int pos, boolean isChecked) {
 				if (resId == R.string.context_menu_item_add_waypoint) {
-					mapActivity.getMapActions().addWaypoint(latitude, longitude);
+					mapActivity.getContextMenu().addWptPt();
 				}
 				return true;
 			}

@@ -33,7 +33,7 @@ import android.text.format.DateFormat;
 public class SavingTrackHelper extends SQLiteOpenHelper {
 	
 	public final static String DATABASE_NAME = "tracks"; //$NON-NLS-1$
-	public final static int DATABASE_VERSION = 3;
+	public final static int DATABASE_VERSION = 4;
 	
 	public final static String TRACK_NAME = "track"; //$NON-NLS-1$
 	public final static String TRACK_COL_DATE = "date"; //$NON-NLS-1$
@@ -47,8 +47,10 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	public final static String POINT_COL_DATE = "date"; //$NON-NLS-1$
 	public final static String POINT_COL_LAT = "lat"; //$NON-NLS-1$
 	public final static String POINT_COL_LON = "lon"; //$NON-NLS-1$
+	public final static String POINT_COL_NAME = "pname"; //$NON-NLS-1$
+	public final static String POINT_COL_CATEGORY = "category"; //$NON-NLS-1$
 	public final static String POINT_COL_DESCRIPTION = "description"; //$NON-NLS-1$
-	
+
 	public final static Log log = PlatformUtil.getLog(SavingTrackHelper.class);
 
 	private String updateScript;
@@ -74,7 +76,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		updateScript = "INSERT INTO " + TRACK_NAME + " (" + TRACK_COL_LAT + ", " + TRACK_COL_LON + ", "
 				+ TRACK_COL_ALTITUDE + ", " + TRACK_COL_SPEED + ", " + TRACK_COL_HDOP + ", " + TRACK_COL_DATE + ")"
 				+ " VALUES (?, ?, ?, ?, ?, ?)"; //$NON-NLS-1$ //$NON-NLS-2$
-		updatePointsScript = "INSERT INTO " + POINT_NAME + " VALUES (?, ?, ?, ?)"; //$NON-NLS-1$ //$NON-NLS-2$
+		updatePointsScript = "INSERT INTO " + POINT_NAME + " VALUES (?, ?, ?, ?, ?, ?)"; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	@Override
@@ -91,8 +93,8 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	
 	private void createTableForPoints(SQLiteDatabase db){
 		try {
-			db.execSQL("CREATE TABLE " + POINT_NAME+ " ("+POINT_COL_LAT +" double, " + POINT_COL_LON+" double, " //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$  
-					+ POINT_COL_DATE+" long, " + POINT_COL_DESCRIPTION+" text)" ); //$NON-NLS-1$ //$NON-NLS-2$
+			db.execSQL("CREATE TABLE " + POINT_NAME + " (" + POINT_COL_LAT + " double, " + POINT_COL_LON + " double, " //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+					+ POINT_COL_DATE + " long, " + POINT_COL_DESCRIPTION + " text, " + POINT_COL_NAME + " text, " + POINT_COL_CATEGORY + " text" + ")"); //$NON-NLS-1$ //$NON-NLS-2$
 		} catch (RuntimeException e) {
 			// ignore if already exists
 		}
@@ -104,7 +106,11 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 			createTableForPoints(db);
 		}
 		if(oldVersion < 3){
-			db.execSQL("ALTER TABLE " + TRACK_NAME +  " ADD " + TRACK_COL_HDOP + " double");
+			db.execSQL("ALTER TABLE " + TRACK_NAME + " ADD " + TRACK_COL_HDOP + " double");
+		}
+		if(oldVersion < 4){
+			db.execSQL("ALTER TABLE " + POINT_NAME +  " ADD " + POINT_COL_NAME + " text");
+			db.execSQL("ALTER TABLE " + POINT_NAME +  " ADD " + POINT_COL_CATEGORY + " text");
 		}
 	}
 	
@@ -237,7 +243,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 
 	private void collectDBPoints(SQLiteDatabase db, Map<String, GPXFile> dataTracks) {
 		Cursor query = db.rawQuery("SELECT " + POINT_COL_LAT + "," + POINT_COL_LON + "," + POINT_COL_DATE + "," //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-				+ POINT_COL_DESCRIPTION + " FROM " + POINT_NAME+" ORDER BY " + POINT_COL_DATE +" ASC", null); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ 
+				+ POINT_COL_DESCRIPTION + "," + POINT_COL_NAME + "," + POINT_COL_CATEGORY + " FROM " + POINT_NAME+" ORDER BY " + POINT_COL_DATE +" ASC", null); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		if (query.moveToFirst()) {
 			do {
 				WptPt pt = new WptPt();
@@ -245,7 +251,10 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 				pt.lon = query.getDouble(1);
 				long time = query.getLong(2);
 				pt.time = time;
-				pt.name = query.getString(3);
+				pt.desc = query.getString(3);
+				pt.name = query.getString(4);
+				pt.category = query.getString(5);
+
 				// check if name is extension (needed for audio/video plugin & josm integration)
 				if(pt.name != null && pt.name.length() > 4 && pt.name.charAt(pt.name.length() - 4) == '.') {
 					pt.link = pt.name;
@@ -394,13 +403,15 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		currentTrack.getModifiableGpxFile().modifiedTime = time;
 	}
 	
-	public void insertPointData(double lat, double lon, long time, String description) {
+	public void insertPointData(double lat, double lon, long time, String description, String name, String category) {
 		final WptPt pt = new WptPt(lat, lon, time, Double.NaN, 0, Double.NaN);
-		pt.name = description;
+		pt.name = name;
+		pt.category = category;
+		pt.desc = description;
 		currentTrack.getModifiableGpxFile().points.add(pt);
 		currentTrack.getModifiableGpxFile().modifiedTime = time;
 		points++;
-		execWithClose(updatePointsScript, new Object[] { lat, lon, time, description });
+		execWithClose(updatePointsScript, new Object[] { lat, lon, time, description, name, category });
 	}
 	
 	private synchronized void execWithClose(String script, Object[] objects) {

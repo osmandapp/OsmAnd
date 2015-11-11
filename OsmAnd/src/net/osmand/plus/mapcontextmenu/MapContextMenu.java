@@ -7,11 +7,17 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuType;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleButtonController;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleProgressController;
+import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
+import net.osmand.plus.mapcontextmenu.editors.PointEditor;
+import net.osmand.plus.mapcontextmenu.editors.WptPtEditor;
+import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.OsmandMapLayer;
@@ -22,6 +28,10 @@ import java.lang.ref.WeakReference;
 public class MapContextMenu extends MenuTitleController {
 
 	private MapActivity mapActivity;
+	private MapMultiSelectionMenu mapMultiSelectionMenu;
+
+	private FavoritePointEditor favoritePointEditor;
+	private WptPtEditor wptPtEditor;
 
 	private boolean active;
 	private LatLon latLon;
@@ -45,6 +55,20 @@ public class MapContextMenu extends MenuTitleController {
 
 	public void setMapActivity(MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
+
+		if (mapMultiSelectionMenu == null) {
+			mapMultiSelectionMenu = new MapMultiSelectionMenu(mapActivity);
+		} else {
+			mapMultiSelectionMenu.setMapActivity(mapActivity);
+		}
+
+		if (favoritePointEditor != null) {
+			favoritePointEditor.setMapActivity(mapActivity);
+		}
+		if (wptPtEditor != null) {
+			wptPtEditor.setMapActivity(mapActivity);
+		}
+
 		if (active) {
 			acquireMenuController();
 			if (menuController != null) {
@@ -55,12 +79,39 @@ public class MapContextMenu extends MenuTitleController {
 		}
 	}
 
+	public MapMultiSelectionMenu getMultiSelectionMenu() {
+		return mapMultiSelectionMenu;
+	}
+
 	public boolean isActive() {
 		return active;
 	}
 
 	public boolean isVisible() {
 		return findMenuFragment() != null;
+	}
+
+	public FavoritePointEditor getFavoritePointEditor() {
+		if (favoritePointEditor == null) {
+			favoritePointEditor = new FavoritePointEditor(mapActivity);
+		}
+		return favoritePointEditor;
+	}
+
+	public WptPtEditor getWptPtPointEditor() {
+		if (wptPtEditor == null) {
+			wptPtEditor = new WptPtEditor(mapActivity);
+		}
+		return wptPtEditor;
+	}
+
+	public PointEditor getPointEditor(String tag) {
+		if (favoritePointEditor != null && favoritePointEditor.getFragmentTag().equals(tag)) {
+			return favoritePointEditor;
+		} else if (wptPtEditor != null && wptPtEditor.getFragmentTag().equals(tag)) {
+			return wptPtEditor;
+		}
+		return null;
 	}
 
 	@Override
@@ -135,12 +186,18 @@ public class MapContextMenu extends MenuTitleController {
 			this.pointDescription = pointDescription;
 		}
 
+		boolean needAcquireMenuController = menuController == null
+				|| !update
+				|| this.object == null && object != null
+				|| this.object != null && object == null
+				|| (this.object != null && object != null && !this.object.getClass().equals(object.getClass()));
+
 		this.latLon = latLon;
 		this.object = object;
 
 		active = true;
 
-		if (menuController == null || !update) {
+		if (needAcquireMenuController) {
 			acquireMenuController();
 		}
 		initTitle();
@@ -302,9 +359,9 @@ public class MapContextMenu extends MenuTitleController {
 
 	public void buttonFavoritePressed() {
 		if (object != null && object instanceof FavouritePoint) {
-			mapActivity.getFavoritePointEditor().edit((FavouritePoint) object);
+			getFavoritePointEditor().edit((FavouritePoint) object);
 		} else {
-			mapActivity.getFavoritePointEditor().add(latLon, getTitleStr());
+			getFavoritePointEditor().add(latLon, getTitleStr());
 		}
 	}
 
@@ -325,6 +382,18 @@ public class MapContextMenu extends MenuTitleController {
 		}
 
 		mapActivity.getMapActions().contextMenuPoint(latLon.getLatitude(), latLon.getLongitude(), menuAdapter, object);
+	}
+
+	public void addWptPt() {
+		if (object == null || !(object instanceof WptPt)) {
+			getWptPtPointEditor().add(latLon, getTitleStr());
+		}
+	}
+
+	public void editWptPt() {
+		if (object != null && object instanceof WptPt) {
+			getWptPtPointEditor().edit((WptPt) object);
+		}
 	}
 
 	public void setBaseFragmentVisibility(boolean visible) {

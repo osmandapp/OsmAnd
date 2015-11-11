@@ -7,23 +7,26 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.widgets.AutoCompleteTextViewEx;
 
 public abstract class PointEditor {
 
 	protected OsmandApplication app;
-	protected final MapActivity mapActivity;
+	protected MapActivity mapActivity;
 
 	protected boolean isNew;
 
 	private boolean portraitMode;
 	private boolean largeDevice;
 
-	public PointEditor(OsmandApplication app, MapActivity mapActivity) {
-		this.app = app;
+	public PointEditor(MapActivity mapActivity) {
+		this.app = mapActivity.getMyApplication();
 		this.mapActivity = mapActivity;
 		portraitMode = AndroidUiHelper.isOrientationPortrait(mapActivity);
 		largeDevice = AndroidUiHelper.isXLargeDevice(mapActivity);
+	}
+
+	public void setMapActivity(MapActivity mapActivity) {
+		this.mapActivity = mapActivity;
 	}
 
 	public boolean isNew() {
@@ -49,9 +52,6 @@ public abstract class PointEditor {
 			return R.anim.slide_out_bottom;
 		}
 	}
-
-	public abstract void saveState(Bundle bundle);
-	public abstract void restoreState(Bundle bundle);
 
 	public abstract String getFragmentTag();
 

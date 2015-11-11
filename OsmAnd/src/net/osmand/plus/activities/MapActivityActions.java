@@ -206,7 +206,7 @@ public class MapActivityActions implements DialogProvider {
 				double longitude = args.getDouble(KEY_LONGITUDE);
 				String name = editText.getText().toString();
 				SavingTrackHelper savingTrackHelper = mapActivity.getMyApplication().getSavingTrackHelper();
-				savingTrackHelper.insertPointData(latitude, longitude, System.currentTimeMillis(), name);
+				savingTrackHelper.insertPointData(latitude, longitude, System.currentTimeMillis(), null, name, null);
 				AccessibleToast.makeText(mapActivity, MessageFormat.format(getString(R.string.add_waypoint_dialog_added), name), Toast.LENGTH_SHORT)
 						.show();
 				dialog.dismiss();
