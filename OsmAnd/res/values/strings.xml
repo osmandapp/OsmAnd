@@ -9,6 +9,10 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="lang_nds">Low German</string>
+    <string name="lang_mk">Macedonian</string>
+    <string name="lang_fy">Frysk</string>
+    <string name="lang_als">Albanian (Tosk)</string>
     <string name="read_more">Read more</string>
     <string name="whats_new">What\'s new in</string>
     <string name="rendering_attr_hideProposed_name">Hide proposed objects</string>
