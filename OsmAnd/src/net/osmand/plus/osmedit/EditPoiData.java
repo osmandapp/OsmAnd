@@ -42,29 +42,27 @@ public class EditPoiData {
 	
 	private void initTags(Node node, Map<String, PoiType> allTranslatedSubTypes) {
 		checkNotInEdit();
-		tryAddTag(OSMSettings.OSMTagKey.ADDR_STREET.getValue(),
-				node.getTag(OSMSettings.OSMTagKey.ADDR_STREET));
-		tryAddTag(OSMSettings.OSMTagKey.ADDR_HOUSE_NUMBER.getValue(),
-				node.getTag(OSMSettings.OSMTagKey.ADDR_HOUSE_NUMBER));
-		tryAddTag(OSMSettings.OSMTagKey.PHONE.getValue(),
-				amenity.getPhone());
-		tryAddTag(OSMSettings.OSMTagKey.WEBSITE.getValue(),
-				amenity.getSite());
-		for (String tag : amenity.getAdditionalInfo().keySet()) {
-			tryAddTag(tag, amenity.getAdditionalInfo(tag));
+//		tryAddTag(OSMSettings.OSMTagKey.ADDR_STREET.getValue(),
+//				node.getTag(OSMSettings.OSMTagKey.ADDR_STREET));
+//		tryAddTag(OSMSettings.OSMTagKey.ADDR_HOUSE_NUMBER.getValue(),
+//				node.getTag(OSMSettings.OSMTagKey.ADDR_HOUSE_NUMBER));
+		// should not be used here should be done in  public Node loadNode(Amenity n) {
+//		tryAddTag(OSMSettings.OSMTagKey.PHONE.getValue(),
+//				amenity.getPhone());
+//		tryAddTag(OSMSettings.OSMTagKey.WEBSITE.getValue(),
+//				amenity.getSite());
+//		for (String tag : amenity.getAdditionalInfo().keySet()) {
+//			tryAddTag(tag, amenity.getAdditionalInfo(tag));
+//		}
+		for (String s : node.getTagKeySet()) {
+			tryAddTag(s, node.getTag(s));
 		}
 		String subType = amenity.getSubType();
-		String key;
-		String value;
-		if (allTranslatedSubTypes.get(subType) != null) {
-			PoiType pt = allTranslatedSubTypes.get(subType);
-			key = pt.getOsmTag();
-			value = pt.getOsmValue();
-		} else {
-			key = amenity.getType().getDefaultTag();
-			value = subType;
+		String value ="";
+		PoiType pt = amenity.getType().getPoiTypeByKeyName(subType);
+		if (pt != null) {
+			value = pt.getTranslation();
 		}
-		tagValues.remove(key);
 		tagValues.put(POI_TYPE_TAG, value);		
 	}
 
