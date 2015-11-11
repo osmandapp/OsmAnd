@@ -26,7 +26,6 @@ public class PoiSubTypeDialogFragment extends DialogFragment {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		final Amenity a = (Amenity) getArguments().getSerializable(KEY_AMENITY);
 		final Map<String, PoiType> allTranslatedNames = poiTypes.getAllTranslatedNames(a.getType(), true);
-		// (=^.^=)
 		Set<String> strings = allTranslatedNames.keySet();
 		final String[] subCats = strings.toArray(new String[strings.size()]);
 		builder.setItems(subCats, new DialogInterface.OnClickListener() {

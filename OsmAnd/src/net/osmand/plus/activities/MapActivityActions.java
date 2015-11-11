@@ -144,20 +144,27 @@ public class MapActivityActions implements DialogProvider {
 		builder.create().show();
 	}
 
-	public void directionTo(double latitude, double longitude) {
+	public void directionTo(double latitude, double longitude, PointDescription pd) {
 		final TargetPointsHelper targets = getMyApplication().getTargetPointsHelper();
-		targets.navigateToPoint(new LatLon(latitude, longitude), true, -1, null);
+		targets.navigateToPoint(new LatLon(latitude, longitude), true, -1, pd);
 		enterRoutePlanningMode(null, null, false);
 	}
 
-	public void addAsWaypoint(double latitude, double longitude) {
+	public void addAsWaypoint(double latitude, double longitude, PointDescription pd) {
 		TargetPointsHelper targets = getMyApplication().getTargetPointsHelper();
 		boolean destination = (targets.getPointToNavigate() == null);
 
 		targets.navigateToPoint(new LatLon(latitude, longitude), true,
 				destination ? -1 : targets.getIntermediatePoints().size(),
-				mapActivity.getContextMenu().getPointDescription());
+				pd);
 
+		openIntermediateEditPointsDialog();
+	}
+	
+	public void addAsTarget(double latitude, double longitude, PointDescription pd) {
+		TargetPointsHelper targets = getMyApplication().getTargetPointsHelper();
+		targets.navigateToPoint(new LatLon(latitude, longitude), true, -1,
+				pd);
 		openIntermediateEditPointsDialog();
 	}
 
