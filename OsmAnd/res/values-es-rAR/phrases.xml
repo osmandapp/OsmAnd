@@ -2420,4 +2420,68 @@
 
 	<string name="poi_hackerspace">Encuentro de hackers</string>
 
+<string name="poi_wiki_lang_af">Wiki Afrikáans</string>
+	<string name="poi_wiki_lang_als">Wiki alsaciana</string>
+	<string name="poi_wiki_lang_az">Wiki azerí</string>
+	<string name="poi_wiki_lang_bn">Wiki bengalí</string>
+	<string name="poi_wiki_lang_bpy">Wiki bishnupriya</string>
+	<string name="poi_wiki_lang_br">Wiki bretona</string>
+	<string name="poi_wiki_lang_bs">Wiki bosnia</string>
+	<string name="poi_wiki_lang_cy">Wiki galés</string>
+	<string name="poi_wiki_lang_eo">Wiki esperanto</string>
+	<string name="poi_wiki_lang_eu">Wiki vasca</string>
+	<string name="poi_wiki_lang_fa">Wiki persa</string>
+	<string name="poi_wiki_lang_fy">Wiki frisona</string>
+	<string name="poi_wiki_lang_ga">Wiki irlandesa</string>
+	<string name="poi_wiki_lang_hy">Wiki armenia</string>
+	<string name="poi_wiki_lang_is">Wiki islandesa</string>
+	<string name="poi_wiki_lang_ka">Wiki georgiana</string>
+	<string name="poi_wiki_lang_ku">Wiki kurda</string>
+	<string name="poi_wiki_lang_la">Wiki latina</string>
+	<string name="poi_wiki_lang_lb">Wiki luxemburguesa</string>
+	<string name="poi_wiki_lang_mk">Wiki macedonia</string>
+	<string name="poi_wiki_lang_ml">Wiki malabari</string>
+	<string name="poi_wiki_lang_mr">Wiki maratí</string>
+	<string name="poi_wiki_lang_nds">Wiki baja sajona</string>
+	<string name="poi_wiki_lang_nv">Wiki navaja</string>
+	<string name="poi_wiki_lang_os">Wiki osetiana</string>
+	<string name="poi_wiki_lang_pms">Wiki piamontesa</string>
+	<string name="poi_wiki_lang_sc">Wiki sarda</string>
+	<string name="poi_wiki_lang_sh">Wiki serbio-croata</string>
+	<string name="poi_wiki_lang_sq">Wiki albana</string>
+	<string name="poi_wiki_lang_ta">Wiki tamilesa</string>
+	<string name="poi_wiki_lang_tl">Wiki filipina</string>
+
+	<string name="poi_wiki_lang_war">Wiki samareña</string>
+	<string name="poi_wiki_lang_min">Wiki minangkabau</string>
+	<string name="poi_wiki_lang_kk">Wiki kazaja</string>
+	<string name="poi_wiki_lang_uz">Wiki uzbeka</string>
+	<string name="poi_wiki_lang_ce">Wiki chechena</string>
+	<string name="poi_wiki_lang_ur">Wiki urdu</string>
+	<string name="poi_wiki_lang_oc">Wiki occitana</string>
+	<string name="poi_wiki_lang_zhminnan">Wiki Min del sur</string>
+	<string name="poi_wiki_lang_mg">Wiki malagache</string>
+	<string name="poi_wiki_lang_tt">Wiki tártara</string>
+	<string name="poi_wiki_lang_jv">Wiki javanesa</string>
+	<string name="poi_wiki_lang_ky">Wiki kirguistán</string>
+	<string name="poi_wiki_lang_zhyue">Wiki cantonesa</string>
+	<string name="poi_wiki_lang_ast">Wiki Astur-Leonesa</string>
+	<string name="poi_wiki_lang_tg">Wiki tajik</string>
+	<string name="poi_wiki_lang_ba">Wiki baskir</string>
+	<string name="poi_wiki_lang_sco">Wiki escocesa</string>
+	<string name="poi_wiki_lang_pnb">Wiki punyabí</string>
+	<string name="poi_wiki_lang_cv">Wiki Chuvasia</string>
+	<string name="poi_wiki_lang_lmo">Wiki lombard</string>
+	<string name="poi_wiki_lang_my">Wiki birmana</string>
+	<string name="poi_wiki_lang_yo">Wiki yoruba</string>
+	<string name="poi_wiki_lang_an">Wiki aragonesa</string>
+	<string name="poi_wiki_lang_ne">Wiki nepalí</string>
+	<string name="poi_wiki_lang_gu">Wiki guyaratí</string>
+	<string name="poi_wiki_lang_scn">Wiki siciliana</string>
+	<string name="poi_wiki_lang_bar">Wiki bávara</string>
+	<string name="poi_wiki_lang_mn">Wiki mongol</string>
+	<string name="poi_wiki_lang_nap">Wiki napolitana</string>
+
+	<string name="poi_craft_electronics">Reparación de electrodomésticos</string>
+
 </resources>
