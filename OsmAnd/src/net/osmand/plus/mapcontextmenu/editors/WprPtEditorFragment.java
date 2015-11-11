@@ -8,7 +8,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -37,8 +36,7 @@ public class WprPtEditorFragment extends PointEditorFragment {
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		boolean light = getMyApplication().getSettings().isLightContent();
-		defaultColor = light ? R.color.icon_color : R.color.icon_color_light;
+		defaultColor = getResources().getColor(R.color.gpx_color_point);
 
 		wpt = editor.getWptPt();
 	}
@@ -151,7 +149,7 @@ public class WprPtEditorFragment extends PointEditorFragment {
 
 	@Override
 	public Drawable getCategoryIcon() {
-		int color = defaultColor;
+		int color = wpt.getColor(defaultColor);
 		return getIcon(R.drawable.ic_action_folder_stroke, color);
 	}
 
