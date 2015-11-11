@@ -1,9 +1,14 @@
 package net.osmand.plus.views;
 
-import java.util.ArrayList;
-import java.util.List;
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.PointF;
+import android.support.v7.app.AlertDialog;
+import android.util.DisplayMetrics;
+import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 
-import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
@@ -13,16 +18,9 @@ import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.R;
 import net.osmand.plus.resources.TransportIndexRepository;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.PointF;
-import android.util.DisplayMetrics;
-import android.view.WindowManager;
-import android.widget.ArrayAdapter;
-import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {
 	private static final int startZoom = 12;
@@ -164,7 +162,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 	}
 	
 	private void showDescriptionDialog(TransportStop a) {
-		Builder bs = new AlertDialog.Builder(view.getContext());
+		AlertDialog.Builder bs = new AlertDialog.Builder(view.getContext());
 		bs.setTitle(a.getName(view.getSettings().MAP_PREFERRED_LOCALE.get()));
 		bs.setMessage(getStopDescription(a, true));
 		bs.show();

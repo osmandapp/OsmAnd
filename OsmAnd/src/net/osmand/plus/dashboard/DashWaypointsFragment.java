@@ -1,10 +1,9 @@
 package net.osmand.plus.dashboard;
 
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.PopupMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -195,7 +194,7 @@ public class DashWaypointsFragment extends DashLocationFragment {
 	
 	protected void deletePointConfirm(final TargetPoint point, View view) {
 		final boolean target = point == getMyApplication().getTargetPointsHelper().getPointToNavigate();
-		Builder builder = new AlertDialog.Builder(view.getContext());
+		AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
 		// Stop the navigation
 		builder.setTitle(getString(R.string.delete_target_point));
 		builder.setMessage(PointDescription.getSimpleName(point, getActivity()));

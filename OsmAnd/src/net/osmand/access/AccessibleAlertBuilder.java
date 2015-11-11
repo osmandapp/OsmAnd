@@ -1,9 +1,10 @@
 package net.osmand.access;
 
+import android.content.Context;
+import android.support.v7.app.AlertDialog;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import android.app.AlertDialog.Builder;
-import android.content.Context;
 
 // Since usual message in an AlertDialog that is set by
 // AlertDialog.Builder.setMessage() is spoken only once
@@ -17,7 +18,7 @@ import android.content.Context;
 // or system accessibility service is turned off this class
 // acts just identical to it's direct parent.
 //
-public class AccessibleAlertBuilder extends Builder {
+public class AccessibleAlertBuilder extends AlertDialog.Builder {
 
     // The method getContext() is only available
     // starting from API level 11, so store it here.
@@ -33,14 +34,14 @@ public class AccessibleAlertBuilder extends Builder {
     // Provided setMessage() alternatives.
 
     @Override
-    public Builder setMessage(CharSequence msg) {
+    public AlertDialog.Builder setMessage(CharSequence msg) {
         if (((OsmandApplication) context.getApplicationContext()).accessibilityExtensions())
             return setView(TextMessage.makeView(context, msg, R.layout.alert));
         return super.setMessage(msg);
     }
 
     @Override
-    public Builder setMessage(int msgid) {
+    public AlertDialog.Builder setMessage(int msgid) {
         if (((OsmandApplication) context.getApplicationContext()).accessibilityExtensions())
             return setView(TextMessage.makeView(context, msgid, R.layout.alert));
         return super.setMessage(msgid);

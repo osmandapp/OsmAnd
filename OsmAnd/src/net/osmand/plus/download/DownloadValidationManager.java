@@ -1,19 +1,5 @@
 package net.osmand.plus.download;
 
-import java.lang.ref.WeakReference;
-import java.text.MessageFormat;
-import java.util.HashSet;
-import java.util.Set;
-
-import net.osmand.access.AccessibleToast;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.Version;
-import net.osmand.plus.activities.ActionBarProgressActivity;
-import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -22,11 +8,19 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.UiThread;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
+
+import net.osmand.access.AccessibleToast;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.Version;
+import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
+
+import java.text.MessageFormat;
 
 public class DownloadValidationManager {
 	public static final int MAXIMUM_AVAILABLE_FREE_DOWNLOADS = 5;
@@ -40,11 +34,11 @@ public class DownloadValidationManager {
 		downloadThread = app.getDownloadThread();
 	}
 
-	
+
 	public DownloadIndexesThread getDownloadThread() {
 		return downloadThread;
 	}
-	
+
 	public void startDownload(FragmentActivity activity, IndexItem... items) {
 		downloadFilesWithAllChecks(activity, items);
 	}
@@ -82,16 +76,15 @@ public class DownloadValidationManager {
 			downloadFileCheck_Final_Run(activity, items);
 		}
 	}
-	
+
 	private void downloadFileCheck_Final_Run(FragmentActivity activity, IndexItem[] items) {
 		downloadThread.runDownloadFiles(items);
-		if(activity instanceof DownloadEvents) {
+		if (activity instanceof DownloadEvents) {
 			((DownloadEvents) activity).downloadInProgress();
 		}
 	}
-	
-	
-	
+
+
 	protected void downloadFilesWithAllChecks(FragmentActivity activity, IndexItem[] items) {
 		downloadFilesCheck_1_FreeVersion(activity, items);
 	}
@@ -131,7 +124,6 @@ public class DownloadValidationManager {
 		}
 	}
 
-	
 
 	public void makeSureUserCancelDownload(Context ctx, final IndexItem item) {
 		AlertDialog.Builder bld = new AlertDialog.Builder(ctx);
@@ -147,9 +139,10 @@ public class DownloadValidationManager {
 		bld.setNegativeButton(R.string.shared_string_no, null);
 		bld.show();
 	}
-	
+
 	public static class InstallPaidVersionDialogFragment extends DialogFragment {
 		public static final String TAG = "InstallPaidVersionDialogFragment";
+
 		@NonNull
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState) {

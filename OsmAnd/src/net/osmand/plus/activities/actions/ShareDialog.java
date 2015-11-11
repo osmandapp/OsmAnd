@@ -1,15 +1,6 @@
 package net.osmand.plus.activities.actions;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import net.osmand.access.AccessibleAlertBuilder;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.Version;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -18,9 +9,18 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.text.ClipboardManager;
 import android.text.Html;
 import android.widget.Toast;
+
+import net.osmand.access.AccessibleAlertBuilder;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.Version;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ShareDialog {
 
@@ -113,7 +113,7 @@ public class ShareDialog {
 			if(type == ACTION) {
 				runnable.run();
 			} else if(type == VIEW) {
-				Builder bld = new AlertDialog.Builder(a);
+				AlertDialog.Builder bld = new AlertDialog.Builder(a);
 				bld.setTitle(title);
 				bld.setMessage(content);
 				bld.show();
@@ -131,7 +131,7 @@ public class ShareDialog {
 	}
 	
 	public void showDialog() {
-		AlertDialog.Builder builder = new Builder(a);
+		AlertDialog.Builder builder = new AlertDialog.Builder(a);
 		builder.setTitle(title);
 		String[] shareStrings = new String[share.size()];
 		for(int i = 0; i < shareStrings.length; i++) {

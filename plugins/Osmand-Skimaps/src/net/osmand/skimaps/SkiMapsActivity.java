@@ -2,7 +2,7 @@ package net.osmand.skimaps;
 
 import net.osmand.skimapsPlugin.R;
 import android.app.Activity;
-import android.app.AlertDialog;
+import android.support.v7.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.DialogInterface;

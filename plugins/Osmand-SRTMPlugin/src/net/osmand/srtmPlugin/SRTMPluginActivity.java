@@ -1,8 +1,6 @@
 package net.osmand.srtmPlugin;
 
-import net.osmand.srtmPlugin.paid.R;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.DialogInterface;
@@ -11,6 +9,9 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
+
+import net.osmand.srtmPlugin.paid.R;
 
 public class SRTMPluginActivity extends Activity {
 	private static final String OSMAND_COMPONENT = "net.osmand"; //$NON-NLS-1$

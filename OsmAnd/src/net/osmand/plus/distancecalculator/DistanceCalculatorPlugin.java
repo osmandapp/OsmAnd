@@ -1,8 +1,6 @@
 package net.osmand.plus.distancecalculator;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -17,6 +15,7 @@ import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.PointF;
 import android.os.AsyncTask;
+import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -170,7 +169,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 		}
 	}
 	private void showDialog(final MapActivity activity) {
-		Builder bld = new AlertDialog.Builder(activity);
+		AlertDialog.Builder bld = new AlertDialog.Builder(activity);
 		final TIntArrayList  list = new TIntArrayList();
 		if(distanceMeasurementMode == 0) {
 			list.add(R.string.distance_measurement_start_editing);
@@ -257,7 +256,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 	}
 
 	protected void saveGpx(final MapActivity activity) {
-		Builder b = new AlertDialog.Builder(activity);
+		AlertDialog.Builder b = new AlertDialog.Builder(activity);
 		final File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
 		LinearLayout ll = new LinearLayout(activity);
 		ll.setOrientation(LinearLayout.VERTICAL);
@@ -393,7 +392,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 		final CommonPreference<Boolean> pref = app.getSettings().registerBooleanPreference("show_measurement_help_first_time", true);
 		pref.makeGlobal();
 		if(pref.get()) {
-			Builder builder = new AlertDialog.Builder(ctx);
+			AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
 			builder.setMessage(R.string.use_distance_measurement_help);
 			builder.setNegativeButton(R.string.shared_string_do_not_show_again, new OnClickListener() {
 				

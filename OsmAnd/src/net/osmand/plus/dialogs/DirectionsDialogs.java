@@ -1,9 +1,8 @@
 package net.osmand.plus.dialogs;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.PopupMenu;
 
 import net.osmand.data.LatLon;
@@ -23,7 +22,7 @@ public class DirectionsDialogs {
 		final OsmandApplication ctx = (OsmandApplication) act.getApplication();
 		final TargetPointsHelper targetPointsHelper = ctx.getTargetPointsHelper();
 		if (targetPointsHelper.getIntermediatePoints().size() > 0) {
-			Builder builder = new AlertDialog.Builder(act);
+			AlertDialog.Builder builder = new AlertDialog.Builder(act);
 			builder.setTitle(R.string.new_directions_point_dialog);
 			builder.setItems(
 					new String[] { act.getString(R.string.keep_intermediate_points),
@@ -51,7 +50,7 @@ public class DirectionsDialogs {
 		final OsmandApplication ctx = (OsmandApplication) act.getApplication();
 		final TargetPointsHelper targetPointsHelper = ctx.getTargetPointsHelper();
 		if (targetPointsHelper.getPointToNavigate() != null) {
-			Builder builder = new AlertDialog.Builder(act);
+			AlertDialog.Builder builder = new AlertDialog.Builder(act);
 			builder.setTitle(R.string.new_destination_point_dialog);
 			builder.setItems(
 					new String[] { act.getString(R.string.replace_destination_point),

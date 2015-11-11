@@ -1,13 +1,21 @@
 package net.osmand.plus.osmo;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.ConcurrentLinkedQueue;
+import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.AsyncTask;
+import android.os.Build;
+import android.provider.Settings.Secure;
+import android.support.v4.app.NotificationCompat;
+import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -27,23 +35,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.os.AsyncTask;
-import android.os.Build;
-import android.provider.Settings.Secure;
-import android.support.v4.app.NotificationCompat;
-import android.text.TextUtils;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class OsMoService implements OsMoReactor {
 	private static final String HTTP_API_PREPARE = "http://api.osmo.mobi/prepare";
@@ -362,7 +361,7 @@ public class OsMoService implements OsMoReactor {
 	
 
 	protected void showRegisterAgain(Activity ga, String msg) {
-		Builder bld = new AlertDialog.Builder(ga);
+		AlertDialog.Builder bld = new AlertDialog.Builder(ga);
 		bld.setMessage(msg);
 		bld.setPositiveButton(R.string.shared_string_ok, new OnClickListener() {
 			

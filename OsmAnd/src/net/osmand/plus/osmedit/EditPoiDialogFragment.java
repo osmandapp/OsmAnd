@@ -265,9 +265,7 @@ public class EditPoiDialogFragment extends DialogFragment {
 		cancelButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-				fragmentManager.beginTransaction().remove(EditPoiDialogFragment.this).commit();
-				fragmentManager.popBackStack();
+				dismissCheckForChanges();
 			}
 		});
 		setAdapterForPoiTypeEditText();

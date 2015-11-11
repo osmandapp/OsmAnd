@@ -1,20 +1,40 @@
 package net.osmand.plus.download.ui;
 
-import java.io.File;
-import java.text.Collator;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import android.app.Activity;
+import android.content.DialogInterface;
+import android.content.res.Resources;
+import android.content.res.TypedArray;
+import android.graphics.PorterDuff;
+import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.view.ActionMode;
+import android.support.v7.widget.PopupMenu;
+import android.util.TypedValue;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.SubMenu;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.ExpandableListView;
+import android.widget.ExpandableListView.ExpandableListContextMenuInfo;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import net.osmand.IndexConstants;
-import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
@@ -38,42 +58,18 @@ import net.osmand.plus.resources.IncrementalChangesManager.IncrementalUpdate;
 import net.osmand.plus.resources.IncrementalChangesManager.IncrementalUpdateList;
 import net.osmand.util.Algorithms;
 
-import org.apache.commons.logging.Log;
-
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.content.DialogInterface;
-import android.content.res.Resources;
-import android.content.res.TypedArray;
-import android.graphics.PorterDuff;
-import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.ActionBar;
-import android.support.v7.view.ActionMode;
-import android.support.v7.widget.PopupMenu;
-import android.util.TypedValue;
-import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.SubMenu;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.ExpandableListView;
-import android.widget.ExpandableListView.ExpandableListContextMenuInfo;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
+import java.io.File;
+import java.text.Collator;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 
 public class LocalIndexesFragment extends OsmandExpandableListFragment implements DownloadEvents {
@@ -170,7 +166,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 	}
 
 	private void showContextMenu(final LocalIndexInfo info) {
-		Builder builder = new AlertDialog.Builder(getActivity());
+		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		final ContextMenuAdapter adapter = new ContextMenuAdapter(getActivity());
 		basicFileOperation(info, adapter);
 		OsmandPlugin.onContextMenuActivity(getActivity(), null, info, adapter);
@@ -224,7 +220,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		} else if (resId == R.string.local_index_mi_restore) {
 			new LocalIndexOperationTask(getDownloadActivity(), listAdapter, LocalIndexOperationTask.RESTORE_OPERATION).execute(info);
 		} else if (resId == R.string.shared_string_delete) {
-			Builder confirm = new Builder(getActivity());
+			AlertDialog.Builder confirm = new AlertDialog.Builder(getActivity());
 			confirm.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
@@ -244,7 +240,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 	}
 
 	public static void renameFile(final Activity a, final File f, final Runnable callback) {
-		Builder b = new AlertDialog.Builder(a);
+		AlertDialog.Builder b = new AlertDialog.Builder(a);
 		if (f.exists()) {
 			int xt = f.getName().lastIndexOf('.');
 			final String ext = xt == -1 ? "" : f.getName().substring(xt);
@@ -679,7 +675,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 					return true;
 				}
 
-				Builder builder = new AlertDialog.Builder(getDownloadActivity());
+				AlertDialog.Builder builder = new AlertDialog.Builder(getDownloadActivity());
 				builder.setMessage(getString(R.string.local_index_action_do, actionButton.toLowerCase(), selectedItems.size()));
 				builder.setPositiveButton(actionButton, listener);
 				builder.setNegativeButton(R.string.shared_string_cancel, null);

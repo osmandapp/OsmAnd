@@ -3,48 +3,8 @@
  */
 package net.osmand.plus.osmo;
 
-import gnu.trove.list.array.TIntArrayList;
-
-import java.text.Collator;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
-import net.osmand.AndroidUtils;
-import net.osmand.Location;
-import net.osmand.StateChangedListener;
-import net.osmand.access.AccessibleToast;
-import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
-import net.osmand.plus.NavigationService;
-import net.osmand.plus.OsmAndConstants;
-import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
-import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
-import net.osmand.plus.activities.OsmandExpandableListActivity;
-import net.osmand.plus.activities.actions.ShareDialog;
-import net.osmand.plus.base.MapViewTrackingUtilities;
-import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.ColorDialogs;
-import net.osmand.plus.osmo.OsMoGroups.OsMoGroupsUIListener;
-import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
-import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoGroup;
-import net.osmand.plus.osmo.OsMoService.SessionInfo;
-import net.osmand.util.MapUtils;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -67,6 +27,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
@@ -99,6 +60,44 @@ import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import net.osmand.AndroidUtils;
+import net.osmand.Location;
+import net.osmand.StateChangedListener;
+import net.osmand.access.AccessibleToast;
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
+import net.osmand.plus.NavigationService;
+import net.osmand.plus.OsmAndConstants;
+import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
+import net.osmand.plus.activities.OsmandExpandableListActivity;
+import net.osmand.plus.activities.actions.ShareDialog;
+import net.osmand.plus.base.MapViewTrackingUtilities;
+import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.helpers.ColorDialogs;
+import net.osmand.plus.osmo.OsMoGroups.OsMoGroupsUIListener;
+import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
+import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoGroup;
+import net.osmand.plus.osmo.OsMoService.SessionInfo;
+import net.osmand.util.MapUtils;
+
+import java.text.Collator;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import gnu.trove.list.array.TIntArrayList;
 
 /**
  *
@@ -530,7 +529,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			@Override
 			public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
 				if (item.getItemId() == DELETE_ACTION_ID) {
-					Builder bld = new AlertDialog.Builder(OsMoGroupsActivity.this);
+					AlertDialog.Builder bld = new AlertDialog.Builder(OsMoGroupsActivity.this);
 					String name = ((OsMoGroup) selectedObject).getVisibleName(OsMoGroupsActivity.this);
 					bld.setTitle(getString(R.string.osmo_leave_confirmation_msg, name));
 					bld.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
@@ -578,7 +577,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 	
 
 	protected void showGroupInfo(final OsMoGroup group) {
-		Builder bld = new AlertDialog.Builder(this);
+		AlertDialog.Builder bld = new AlertDialog.Builder(this);
 		bld.setTitle(R.string.osmo_group);
 		StringBuilder sb = new StringBuilder();
 		if (group != null){
@@ -658,7 +657,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			setSupportProgressBarIndeterminateVisibility(true);
 			signinPost(false);
 		} else {
-			Builder bld = new AlertDialog.Builder(this);
+			AlertDialog.Builder bld = new AlertDialog.Builder(this);
 			String text = getString(R.string.logged_as, app.getSettings().OSMO_USER_NAME.get());
 			bld.setMessage(text);
 			bld.setPositiveButton(R.string.shared_string_ok, null);
@@ -822,7 +821,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 	}
 	
 	protected void signin() {
-		Builder builder = new AlertDialog.Builder(this);
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle(R.string.osmo_sign_in);
 		String message = "";
 		if(app.getSettings().OSMO_USER_PWD.get() != null) {
@@ -850,7 +849,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 			signin();
 			return;
 		}
-		final Builder builder = new AlertDialog.Builder(this);
+		final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle(R.string.osmo_create_group);
 		final View v = getLayoutInflater().inflate(R.layout.osmo_create_group, getExpandableListView(), false);
 		final EditText policy = (EditText) v.findViewById(R.id.Policy);
@@ -918,7 +917,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 	}
 
 	private void connectToDevice() {
-		Builder builder = new AlertDialog.Builder(this);
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		final View v = getLayoutInflater().inflate(R.layout.osmo_connect_to_device, getExpandableListView(), false);
 		final TextView labelTracker = (TextView ) v.findViewById(R.id.LabelTrackerId);
 		final TextView labelName = (TextView ) v.findViewById(R.id.LabelName);
@@ -1402,7 +1401,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 	
 
 	public static void showSettingsDialog(Context ctx, final OsMoPlugin plugin, final OsMoDevice device) {
-		Builder bld = new AlertDialog.Builder(ctx);
+		AlertDialog.Builder bld = new AlertDialog.Builder(ctx);
 		bld.setTitle(R.string.osmo_edit_device);
 		final LayoutInflater inflater = LayoutInflater.from(ctx);
         View view = inflater.inflate(R.layout.osmo_edit_device, null);
@@ -1526,7 +1525,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 	}
 	
 	private void showHint() {
-		Builder builder = new AlertDialog.Builder(this);
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle(R.string.anonymous_user);
 		String message = getString(R.string.anonymous_user_hint);
 		builder.setMessage(message);

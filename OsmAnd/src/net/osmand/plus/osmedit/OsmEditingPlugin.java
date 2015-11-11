@@ -1,13 +1,12 @@
 package net.osmand.plus.osmedit;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -285,7 +284,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 			AccessibleToast.makeText(la, R.string.validate_gpx_upload_name_pwd, Toast.LENGTH_LONG).show();
 			return false;
 		}
-		Builder bldr = new AlertDialog.Builder(la);
+		AlertDialog.Builder bldr = new AlertDialog.Builder(la);
 		LayoutInflater inflater = (LayoutInflater) la.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		final View view = inflater.inflate(R.layout.send_gpx_osm, null);
 		final EditText descr = (EditText) view.findViewById(R.id.memory_size);

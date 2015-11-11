@@ -1,8 +1,6 @@
 package net.osmand.plus.dialogs;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -10,6 +8,7 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -98,7 +97,7 @@ public class FavoriteDialogs {
 	}
 	
 	public  static Dialog createAddFavouriteDialog(final Activity activity, final Bundle args) {
-    	Builder builder = new AlertDialog.Builder(activity);
+    	AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 		builder.setTitle(R.string.favourites_context_menu_edit);
 		final View v = activity.getLayoutInflater().inflate(R.layout.favorite_edit_dialog, null, false);
 		final FavouritesDbHelper helper = ((OsmandApplication) activity.getApplication()).getFavorites();
@@ -138,7 +137,7 @@ public class FavoriteDialogs {
 				point.setName(editText.getText().toString().trim());
 				point.setDescription(description.getText().toString().trim());
 				point.setCategory(categoryStr);
-				Builder bld = FavouritesDbHelper.checkDuplicates(point, helper, activity);
+				AlertDialog.Builder bld = FavouritesDbHelper.checkDuplicates(point, helper, activity);
 				if(bld != null) {
 					bld.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 						@Override
@@ -172,7 +171,7 @@ public class FavoriteDialogs {
 			final FavouritesAdapter favouritesAdapter, final OnItemClickListener click,
 			final OnDismissListener dismissListener, final Dialog[] dialogHolder, final boolean sortByDist) {
 		ListView listView = new ListView(uiContext);
-		Builder bld = new AlertDialog.Builder(uiContext);
+		AlertDialog.Builder bld = new AlertDialog.Builder(uiContext);
 		final Collator inst = Collator.getInstance();
 		favouritesAdapter.sort(new Comparator<FavouritePoint>() {
 

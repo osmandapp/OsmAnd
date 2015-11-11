@@ -1,15 +1,15 @@
 package net.osmand.plus.voice;
 
-import java.io.File;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import android.app.Activity;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
+import android.speech.tts.TextToSpeech;
+import android.speech.tts.TextToSpeech.OnInitListener;
+import android.speech.tts.TextToSpeech.OnUtteranceCompletedListener;
+import android.support.v7.app.AlertDialog;
 
-import android.app.Notification;
-import android.app.PendingIntent;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -21,16 +21,11 @@ import org.apache.commons.logging.Log;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.net.Uri;
-import android.speech.tts.TextToSpeech;
-import android.speech.tts.TextToSpeech.OnInitListener;
-import android.speech.tts.TextToSpeech.OnUtteranceCompletedListener;
+import java.io.File;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 
 public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
@@ -161,7 +156,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 						{
 							case TextToSpeech.LANG_MISSING_DATA:
 								if (isSettingsActivity(act)) {
-									Builder builder = createAlertDialog(
+									AlertDialog.Builder builder = createAlertDialog(
 										R.string.tts_missing_language_data_title,
 										R.string.tts_missing_language_data,
 										new IntentStarter(
@@ -183,7 +178,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 								//maybe weird, but I didn't want to introduce parameter in around 5 methods just to do
 								//this if condition
 								if (isSettingsActivity(act)) {
-									Builder builder = createAlertDialog(
+									AlertDialog.Builder builder = createAlertDialog(
 											R.string.tts_language_not_supported_title,
 											R.string.tts_language_not_supported,
 											new IntentStarter(
@@ -214,9 +209,9 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 		}
 	}
 	
-	private Builder createAlertDialog(int titleResID, int messageResID,
+	private AlertDialog.Builder createAlertDialog(int titleResID, int messageResID,
 			IntentStarter intentStarter, final Activity ctx) {
-		Builder builder = new AlertDialog.Builder(ctx);
+		AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
 		builder.setCancelable(true);
 		builder.setNegativeButton(R.string.shared_string_no, null);
 		builder.setPositiveButton(R.string.shared_string_yes, intentStarter);
