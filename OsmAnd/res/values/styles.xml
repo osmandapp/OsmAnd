@@ -119,6 +119,11 @@
 
     </style>
 
+    <style name="OsmandLightTheme.NoActionbar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
     <style name="OsmandLightTheme.DarkActionbar">
         <item name="android:textColorPrimary">@color/color_white</item>
         <item name="android:textColorSecondary">@color/inactive_item_orange</item>
@@ -154,6 +159,11 @@
         <item name="android:windowBackground">@color/color_transparent</item>
         <item name="android:backgroundDimAmount">0.3</item>
         <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+    <style name="OsmandDarkTheme.NoActionbar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
     <style name="OsmandDarkTheme" parent="Theme.AppCompat">
