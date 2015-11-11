@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
     <string name="av_def_action_audio">Optag audio</string>
@@ -2011,4 +2012,8 @@
     <string name="read_more">Læs mere</string>
     <string name="whats_new">Hvad er nyt i</string>
     <!-- string name="map_legend_item_description">Signaturforklaring til OsmAnd standard kortformat, internetforbindelse er nødvendig</string -->
-</resources>
+<string name="lang_nds">Plattysk</string>
+    <string name="lang_mk">Makedonisk</string>
+    <string name="lang_fy">Vestfrisisk</string>
+    <string name="lang_als">Albansk (Tosk)</string>
+    </resources>

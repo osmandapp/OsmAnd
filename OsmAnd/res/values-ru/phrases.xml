@@ -857,7 +857,7 @@
 	<string name="poi_landuse_railway">Территория железной дороги</string>
 	<string name="poi_basin">Искусственный водоём</string>
 
-	<string name="poi_storage_tank">Бак для жидкости</string>
+	<string name="poi_storage_tank">Контейнер для хранения</string>
 
 	<string name="poi_neighbourhood">Микрорайон</string>
 	<string name="poi_residential">Жилой район</string>
@@ -2388,5 +2388,15 @@
 	<string name="poi_tunnel_ref">Метка туннеля</string>
 
 	<string name="poi_ref">Метка</string>
+
+	<string name="poi_cargo_passengers">Груз: пассажиры</string>
+	<string name="poi_cargo_vehicle">Груз: автомобили</string>
+	<string name="poi_cargo_bicycle">Груз: велосипеды</string>
+	<string name="poi_cargo_container">Груз: контейнеры</string>
+	<string name="poi_cargo_hgv">Груз: грузовики</string>
+
+	<string name="poi_fitness_station">Фитнесс-станция</string>
+
+	<string name="poi_hackerspace">Хакерспейс</string>
 
 	</resources>

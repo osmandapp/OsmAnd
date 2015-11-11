@@ -94,21 +94,6 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		if (textColor > 0) {
 			textView.setTextColor(view.getResources().getColor(textColor));
 		}
-		if (isWiki) {
-			textView.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					POIMapLayer.showWikipediaDialog(view.getContext(), app, amenity);
-				}
-			});
-		} else if (isText) {
-			textView.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					POIMapLayer.showDescriptionDialog(view.getContext(), app, text, textPrefix);
-				}
-			});
-		}
 
 		LinearLayout.LayoutParams llTextViewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		llTextViewParams.setMargins(0, 0, dpToPx(10f), 0);
@@ -126,6 +111,22 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		horizontalLine.setBackgroundColor(app.getResources().getColor(light ? R.color.ctx_menu_info_divider_light : R.color.ctx_menu_info_divider_dark));
 
 		((LinearLayout) view).addView(horizontalLine);
+
+		if (isWiki) {
+			ll.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					POIMapLayer.showWikipediaDialog(view.getContext(), app, amenity);
+				}
+			});
+		} else if (isText) {
+			ll.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					POIMapLayer.showDescriptionDialog(view.getContext(), app, text, textPrefix);
+				}
+			});
+		}
 
 		rowBuilt();
 	}

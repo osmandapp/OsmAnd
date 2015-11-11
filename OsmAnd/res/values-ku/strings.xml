@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>    
+<?xml version='1.0' encoding='utf-8'?>
+<resources>    
 	
     <string name="local_indexes_cat_av">زانیاری دەنگ/ڤیدیۆ</string>
     <string name="stop_routing_confirm">دڵنیای له وەی که ئه ته وێت ناڤیگێشن راگریت</string>
@@ -14,4 +15,6 @@
     <string name="si_nm">Milla Bahre</string>
     <string name="shared_string_trip_recording">Tomarkerê Ger</string>
     <string name="favourites_edit_dialog_title">Agahdarî En Qu Mın</string>
+    <string name="shared_string_upload">Barkiri</string>
+    <string name="go_to_map">Here Nexşe</string>
     </resources>

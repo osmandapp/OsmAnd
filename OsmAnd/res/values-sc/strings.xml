@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="always_center_position_on_map">Ammustra sa positzione semper a su tzentru</string>
     <string name="voice_pref_title">Boghe</string>
     <string name="misc_pref_title">Mistura</string>
@@ -1983,4 +1984,8 @@
     <string name="read_more">Leghe àteru</string>
     <string name="whats_new">Ite b\'est de nou in</string>
     <string name="rendering_attr_hideProposed_name">Cua sos ogetos propostos</string>
+    <string name="lang_nds">Bassu-tedescu</string>
+    <string name="lang_mk">Matzèdone</string>
+    <string name="lang_fy">Frisone otzidentale</string>
+    <string name="lang_als">Albanesu (Tosk)</string>
     </resources>

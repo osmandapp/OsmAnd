@@ -376,9 +376,9 @@ public class OsMoPositionLayer extends OsmandMapLayer implements ContextMenuLaye
 						if (sameObject) {
 							Location l = device.getLastLocation();
 							if (centered) {
-								map.getContextMenu().setMapCenter(loc);
+								map.getContextMenu().updateMapCenter(loc);
 							}
-							map.getContextMenu().showOrUpdate(new LatLon(l.getLatitude(), l.getLongitude()),
+							map.getContextMenu().update(new LatLon(l.getLatitude(), l.getLongitude()),
 									getObjectName(device), device);
 						}
 						if (centered) {

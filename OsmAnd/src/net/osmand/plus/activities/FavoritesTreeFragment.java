@@ -1,16 +1,39 @@
 package net.osmand.plus.activities;
 
-import gnu.trove.list.array.TIntArrayList;
-
-import java.io.File;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import android.app.Activity;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.PorterDuff;
+import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.view.ActionMode;
+import android.support.v7.widget.SearchView;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.ExpandableListView;
+import android.widget.Filter;
+import android.widget.Filterable;
+import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.FavouritePoint;
@@ -32,41 +55,18 @@ import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.PorterDuff;
-import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.os.Handler;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.view.ActionMode;
-import android.support.v7.widget.SearchView;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.ExpandableListView;
-import android.widget.Filter;
-import android.widget.Filterable;
-import android.widget.ImageView;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
+
+import java.io.File;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import gnu.trove.list.array.TIntArrayList;
 
 
 public class FavoritesTreeFragment extends OsmandExpandableListFragment {
@@ -188,7 +188,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 
 	public static boolean editPoint(final Context ctx, final FavouritePoint point, final Runnable callback) {
 		OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
-		final Builder builder = new AlertDialog.Builder(ctx);
+		final AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
 		builder.setTitle(R.string.favourites_context_menu_edit);
 		final View v = LayoutInflater.from(ctx).inflate(R.layout.favorite_edit_dialog,
 				null, false);
@@ -247,7 +247,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 
 	private boolean deletePoint(final FavouritePoint point) {
 		final Resources resources = this.getResources();
-		Builder builder = new AlertDialog.Builder(getActivity());
+		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		builder.setMessage(getString(R.string.favourites_remove_dialog_msg, point.getName()));
 		builder.setNegativeButton(R.string.shared_string_no, null);
 		builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
@@ -295,7 +295,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		final TargetPointsHelper targetPointsHelper = getMyApplication().getTargetPointsHelper();
 		if (targetPointsHelper.getIntermediatePoints().size() > 0) {
 			final FragmentActivity act = getActivity();
-			Builder builder = new AlertDialog.Builder(act);
+			AlertDialog.Builder builder = new AlertDialog.Builder(act);
 			builder.setTitle(R.string.new_directions_point_dialog);
 			builder.setItems(
 					new String[] { act.getString(R.string.keep_intermediate_points),
@@ -491,7 +491,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 	}
 
 	protected void openChangeGroupDialog(final FavoriteGroup group) {
-		Builder builder = new AlertDialog.Builder(getActivity());
+		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		View view = getActivity().getLayoutInflater().inflate(R.layout.fav_group_edit, null);
 
 		final EditText nameEditText = (EditText) view.findViewById(R.id.nameEditText);
@@ -532,7 +532,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 	private void deleteFavoritesAction() {
 		if (groupsToDelete.size() + favoritesSelected.size() > 0) {
 
-			Builder b = new AlertDialog.Builder(getActivity());
+			AlertDialog.Builder b = new AlertDialog.Builder(getActivity());
 			b.setMessage(getString(R.string.favorite_delete_multiple, favoritesSelected.size(), groupsToDelete.size()));
 			b.setPositiveButton(R.string.shared_string_delete, new DialogInterface.OnClickListener() {
 				@Override
@@ -615,7 +615,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			};
 
 			if (tosave.exists()) {
-				Builder bld = new AlertDialog.Builder(getActivity());
+				AlertDialog.Builder bld = new AlertDialog.Builder(getActivity());
 				bld.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {

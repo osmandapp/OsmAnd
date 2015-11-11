@@ -1,21 +1,22 @@
 package net.osmand.plus.download.ui;
 
-import java.util.ArrayList;
-import java.util.List;
+import android.app.Dialog;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AlertDialog;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 
 import net.osmand.plus.R;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.IndexItem;
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ActiveDownloadsDialogFragment extends DialogFragment implements DownloadEvents {
 

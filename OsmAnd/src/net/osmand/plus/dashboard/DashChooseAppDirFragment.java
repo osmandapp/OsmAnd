@@ -1,6 +1,37 @@
 package net.osmand.plus.dashboard;
 
-import gnu.trove.list.array.TIntArrayList;
+import android.annotation.TargetApi;
+import android.app.Activity;
+import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.os.AsyncTask;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.StatFs;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AlertDialog;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import net.osmand.IndexConstants;
+import net.osmand.ValueHolder;
+import net.osmand.access.AccessibleToast;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.ProgressImplementation;
+import net.osmand.plus.R;
+import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,37 +44,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 
-import net.osmand.IndexConstants;
-import net.osmand.ValueHolder;
-import net.osmand.access.AccessibleToast;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.ProgressImplementation;
-import net.osmand.plus.R;
-import net.osmand.util.Algorithms;
-import android.annotation.TargetApi;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.os.AsyncTask;
-import android.os.Build;
-import android.os.Bundle;
-import android.os.StatFs;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
+import gnu.trove.list.array.TIntArrayList;
 
 public class DashChooseAppDirFragment {
 

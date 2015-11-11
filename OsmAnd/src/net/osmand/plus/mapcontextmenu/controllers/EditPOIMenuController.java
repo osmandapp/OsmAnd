@@ -34,7 +34,7 @@ public class EditPOIMenuController extends MenuController {
 	private String pointTypeStr;
 	private ProgressDialogPoiUploader poiUploader;
 
-	public EditPOIMenuController(OsmandApplication app, final MapActivity mapActivity, PointDescription pointDescription, final OsmPoint osmPoint) {
+	public EditPOIMenuController(OsmandApplication app, MapActivity mapActivity, PointDescription pointDescription, final OsmPoint osmPoint) {
 		super(new EditPOIMenuBuilder(app, osmPoint), pointDescription, mapActivity);
 		plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
 
@@ -74,7 +74,7 @@ public class EditPOIMenuController extends MenuController {
 				if (plugin != null) {
 					SendPoiDialogFragment sendPoiDialogFragment = SendPoiDialogFragment.createInstance(new OsmPoint[]{osmPoint});
 					sendPoiDialogFragment.setPoiUploader(poiUploader);
-					sendPoiDialogFragment.show(mapActivity.getSupportFragmentManager(), SendPoiDialogFragment.TAG);
+					sendPoiDialogFragment.show(getMapActivity().getSupportFragmentManager(), SendPoiDialogFragment.TAG);
 				}
 			}
 		};

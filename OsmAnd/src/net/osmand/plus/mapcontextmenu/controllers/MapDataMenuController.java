@@ -1,10 +1,10 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.support.v7.app.AlertDialog;
 
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.data.LatLon;
@@ -36,23 +36,21 @@ public class MapDataMenuController extends MenuController {
 	private IndexItem indexItem;
 	private List<IndexItem> otherIndexItems;
 
-	private DownloadValidationManager downloadValidationManager;
 	private DownloadIndexesThread downloadThread;
 
-	public MapDataMenuController(final OsmandApplication app, final MapActivity mapActivity, PointDescription pointDescription, final BinaryMapDataObject dataObject) {
+	public MapDataMenuController(OsmandApplication app, MapActivity mapActivity, PointDescription pointDescription, final BinaryMapDataObject dataObject) {
 		super(new MenuBuilder(app), pointDescription, mapActivity);
 		OsmandRegions osmandRegions = app.getRegions();
 		String fullName = osmandRegions.getFullName(dataObject);
 		this.region = osmandRegions.getRegionData(fullName);
-		downloadValidationManager = new DownloadValidationManager(app);
 		downloadThread = app.getDownloadThread();
 
-		mapActivity.getSupportFragmentManager();
 		leftTitleButtonController = new TitleButtonController() {
 			@Override
 			public void buttonPressed() {
 				if (indexItem != null) {
-					downloadValidationManager.startDownload(mapActivity, indexItem);
+					new DownloadValidationManager(getMapActivity().getMyApplication())
+							.startDownload(getMapActivity(), indexItem);
 				}
 			}
 		};

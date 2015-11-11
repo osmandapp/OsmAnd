@@ -798,4 +798,8 @@
 
 	<string name="poi_picnic_table">Mesa de pícnic</string>
 	<string name="poi_marina">Porto deportivo</string>
+	<string name="poi_craft_carpet_layer">Moqueta</string>
+	<string name="poi_aeroway_terminal">Terminal aeroportuaria</string>
+	<string name="poi_water_works">Obras hidráulicas</string>
+	<string name="poi_cooling_tower">Torre de refrixeración</string>
 	</resources>

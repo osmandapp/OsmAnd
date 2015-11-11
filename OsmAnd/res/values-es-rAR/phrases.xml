@@ -2403,4 +2403,17 @@
 	<string name="poi_boat_storage">Almacén de botes (marina)</string>
 
 
+<string name="poi_conveying_yes">Transportadora: Si</string>
+
+	<string name="poi_bridge_ref">Referencia del puente</string>
+	<string name="poi_tunnel_ref">Referencia del túnel</string>
+
+	<string name="poi_ref">Referencia</string>
+
+	<string name="poi_cargo_passengers">Cargamento: Pasajeros</string>
+	<string name="poi_cargo_vehicle">Cargamento: Vehículos</string>
+	<string name="poi_cargo_bicycle">Cargamento: Bicicletas</string>
+	<string name="poi_cargo_container">Cargamento: Contenedores</string>
+	<string name="poi_cargo_hgv">Cargamento: Vehículos pesados</string>
+
 </resources>

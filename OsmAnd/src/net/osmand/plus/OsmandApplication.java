@@ -1,12 +1,29 @@
 package net.osmand.plus;
 
-import java.io.BufferedWriter;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.PrintStream;
-import java.lang.Thread.UncaughtExceptionHandler;
-import java.util.Locale;
+import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.Application;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.Configuration;
+import android.os.AsyncTask;
+import android.os.Build;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v7.app.AlertDialog;
+import android.text.format.DateFormat;
+import android.util.TypedValue;
+import android.view.View;
+import android.view.accessibility.AccessibilityManager;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityPlugin;
@@ -34,31 +51,15 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.util.Algorithms;
-import android.app.Activity;
-import android.app.AlarmManager;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.app.Application;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager.NameNotFoundException;
-import android.content.res.Configuration;
-import android.os.AsyncTask;
-import android.os.Build;
-import android.os.Handler;
-import android.os.Message;
-import android.text.format.DateFormat;
-import android.util.TypedValue;
-import android.view.View;
-import android.view.accessibility.AccessibilityManager;
-import android.widget.CheckBox;
-import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
-import android.widget.TextView;
-import android.widget.Toast;
+
+import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintStream;
+import java.lang.Thread.UncaughtExceptionHandler;
+import java.util.Locale;
+
 import btools.routingapp.BRouterServiceConnection;
 import btools.routingapp.IBRouterService;
 
@@ -340,7 +341,7 @@ public class OsmandApplication extends Application {
 		String voiceProvider = osmandSettings.VOICE_PROVIDER.get();
 		if (voiceProvider == null || OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
 			if (warningNoneProvider && voiceProvider == null) {
-				Builder builder = new AccessibleAlertBuilder(uiContext);
+				AlertDialog.Builder builder = new AccessibleAlertBuilder(uiContext);
 				LinearLayout ll = new LinearLayout(uiContext);
 				ll.setOrientation(LinearLayout.VERTICAL);
 				final TextView tv = new TextView(uiContext);
@@ -406,7 +407,7 @@ public class OsmandApplication extends Application {
 
 	public synchronized void closeApplication(final Activity activity) {
 		if (getNavigationService() != null) {
-			Builder bld = new AlertDialog.Builder(activity);
+			AlertDialog.Builder bld = new AlertDialog.Builder(activity);
 			bld.setMessage(R.string.background_service_is_enabled_question);
 			bld.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 				@Override

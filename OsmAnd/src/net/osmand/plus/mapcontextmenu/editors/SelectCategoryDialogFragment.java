@@ -1,7 +1,6 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.res.Resources;
 import android.graphics.PorterDuff;
@@ -9,6 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AlertDialog;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
@@ -56,7 +56,7 @@ public class SelectCategoryDialogFragment extends DialogFragment {
 			if (category.color != 0) {
 				button.setCompoundDrawablesWithIntrinsicBounds(getIcon(getActivity(), R.drawable.ic_action_folder, category.color), null, null, null);
 			} else {
-				button.setCompoundDrawablesWithIntrinsicBounds(getIcon(getActivity(), R.drawable.ic_action_folder), null, null, null);
+				button.setCompoundDrawablesWithIntrinsicBounds(getIcon(getActivity(), R.drawable.ic_action_folder, getResources().getColor(R.color.color_favorite)), null, null, null);
 			}
 			button.setCompoundDrawablePadding(dpToPx(15f));
 			String name = category.name.length() == 0 ? getString(R.string.shared_string_favorites) : category.name;
@@ -64,7 +64,7 @@ public class SelectCategoryDialogFragment extends DialogFragment {
 			button.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					PointEditor editor = ((MapActivity) getActivity()).getPointEditor(editorTag);
+					PointEditor editor = ((MapActivity) getActivity()).getContextMenu().getPointEditor(editorTag);
 					if (editor != null) {
 						editor.setCategory(category.name);
 					}

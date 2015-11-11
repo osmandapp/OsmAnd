@@ -14,8 +14,11 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
+import net.osmand.plus.mapcontextmenu.MapContextMenuFragment;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.builders.AudioVideoNoteMenuBuilder;
+
+import java.lang.ref.WeakReference;
 
 public class AudioVideoNoteMenuController extends MenuController {
 	private Recording recording;
@@ -111,7 +114,9 @@ public class AudioVideoNoteMenuController extends MenuController {
 			sharingIntent.setType("video/*");
 			sharingIntent.putExtra(Intent.EXTRA_STREAM, videoUri);
 		}
-		getMapActivity().getContextMenu().findMenuFragment()
-				.startActivity(Intent.createChooser(sharingIntent, getMapActivity().getString(R.string.share_note)));
+		WeakReference<MapContextMenuFragment> fragmentRef = getMapActivity().getContextMenu().findMenuFragment();
+		if (fragmentRef != null) {
+			fragmentRef.get().startActivity(Intent.createChooser(sharingIntent, getMapActivity().getString(R.string.share_note)));
+		}
 	}
 }

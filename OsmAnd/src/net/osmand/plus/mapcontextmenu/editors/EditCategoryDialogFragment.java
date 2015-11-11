@@ -1,11 +1,11 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -103,7 +103,7 @@ public class EditCategoryDialogFragment extends DialogFragment {
 					name = nameEdit.getText().toString().trim();
 					if (!helper.groupExists(name)) {
 						helper.addEmptyCategory(name, color);
-						PointEditor editor = ((MapActivity) getActivity()).getPointEditor(editorTag);
+						PointEditor editor = ((MapActivity) getActivity()).getContextMenu().getPointEditor(editorTag);
 						if (editor != null) {
 							editor.setCategory(name);
 						}

@@ -1,11 +1,10 @@
 package net.osmand.plus.openseamapsplugin;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
@@ -59,7 +58,7 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 			app.getSettings().RENDERER.set(RendererRegistry.NAUTICAL_RENDER);
 			if(!app.getResourceManager().getIndexFileNames().containsKey("World_seamarks"+
 					 IndexConstants.BINARY_MAP_INDEX_EXT)){
-				Builder dlg = new AlertDialog.Builder(activity);
+				AlertDialog.Builder dlg = new AlertDialog.Builder(activity);
 				dlg.setMessage(net.osmand.plus.R.string.nautical_maps_missing);
 				dlg.setPositiveButton(R.string.shared_string_ok, new OnClickListener() {
 					

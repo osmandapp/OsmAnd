@@ -1720,4 +1720,53 @@
 	<string name="poi_diet_gluten_free_only">Només dieta per celíacs</string>
 	<string name="poi_diet_gluten_free_yes">Dieta per celíacs</string>
 	<string name="poi_diet_gluten_free_no">Dieta per celíacs:no</string>
+	<string name="poi_payment_icsf_yes">S\'accepten targes IC Stored Fare</string>
+	<string name="poi_payment_icsf_no">No s\'accepten targes IC Stored Fare</string>
+	<string name="poi_diet_kosher_only">Només dieta kosher</string>
+	<string name="poi_diet_kosher_yes">Dieta kosher</string>
+	<string name="poi_diet_kosher_no">Dieta kosher: no</string>
+	<string name="poi_diet_halal_only">Només dieta halal</string>
+	<string name="poi_diet_halal_yes">Dieta halal</string>
+	<string name="poi_diet_halal_no">Dieta halal: no</string>
+	<string name="poi_diet_lactose_free_only">Només dieta sense lactosa</string>
+	<string name="poi_diet_lactose_free_yes">Dieta sense lactosa</string>
+	<string name="poi_diet_lactose_free_no">Dieta sense lactosa: no</string>
+	<string name="poi_drive_in_yes">Servei dins el vehicle: sí</string>
+	<string name="poi_drive_in_no">Servei dins el vehicle: no</string>
+	<string name="poi_drive_through_yes">Cua per vehicles: sí</string>
+	<string name="poi_drive_through_no">Cua per vehicles: sí</string>
+
+	<string name="poi_takeaway_yes">Per emportar-se</string>
+	<string name="poi_takeaway_no">No es pot emportar</string>
+	<string name="poi_takeaway_only">Només per emportar-se</string>
+
+	<string name="poi_delivery_yes">Lliurament a domicili</string>
+	<string name="poi_delivery_no">Sense lliurament a domicili</string>
+	<string name="poi_delivery_only">Només per lliurament a domicili</string>
+
+	<string name="poi_outdoor_seating_yes">Seients exteriors</string>
+	<string name="poi_outdoor_seating_no">Sense seients exteriors</string>
+	<string name="poi_outdoor_seating_terrace">Seients exteriors: terrassa</string>
+	<string name="poi_outdoor_seating_sidewalk">Seients exteriors: vorera</string>
+	<string name="poi_outdoor_seating_pedestrian_zone">Seients exteriors: zona de vianants</string>
+	<string name="poi_outdoor_seating_garden">Seients exteriors: jardí</string>
+	<string name="poi_outdoor_seating_patio">Seients exteriors: pati</string>
+
+	<string name="poi_cocktails_yes">Còctels</string>
+
+	<string name="poi_second_hand_yes">Articles de segona mà</string>
+	<string name="poi_second_hand_no">Cap article de segona mà</string>
+	<string name="poi_second_hand_only">Només articles de segona mà</string>
+
+	<string name="poi_service_parts">Recanvis</string>
+	<string name="poi_service_dealer">Venda</string>
+	<string name="poi_service_repair">Reparació</string>
+	<string name="poi_service_repair_no">No es fan reparacions</string>
+	<string name="poi_service_electrical">Reparació de vehicles elèctrics</string>
+	<string name="poi_motorcycle_repair">Reparació de motos</string>
+	<string name="poi_self_service_yes">Autoservei</string>
+	<string name="poi_self_service_no">No hi ha autoservei</string>
+	<string name="poi_automated_yes">Automatitzat</string>
+	<string name="poi_automated_no">No automatitzat</string>
+	<string name="poi_full_service_yes">Servei integral</string>
 	</resources>

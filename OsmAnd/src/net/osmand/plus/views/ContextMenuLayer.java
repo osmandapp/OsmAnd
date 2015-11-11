@@ -58,7 +58,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	public ContextMenuLayer(MapActivity activity){
 		this.activity = activity;
 		menu = activity.getContextMenu();
-		multiSelectionMenu = activity.getMultiSelectionMenu();
+		multiSelectionMenu = menu.getMultiSelectionMenu();
 		movementListener = new GestureDetector(activity, new MenuLayerOnGestureListener());
 	}
 	

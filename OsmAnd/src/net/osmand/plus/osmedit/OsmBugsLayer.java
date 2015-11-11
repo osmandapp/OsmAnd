@@ -1,8 +1,6 @@
 package net.osmand.plus.osmedit;
 
 
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.graphics.Canvas;
@@ -10,9 +8,9 @@ import android.graphics.Paint;
 import android.graphics.PointF;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.util.Xml;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -24,8 +22,6 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.osm.io.NetworkUtils;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -46,7 +42,6 @@ import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.net.URLConnection;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider, DialogProvider {
@@ -324,7 +319,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	
 	private Dialog createOpenBugDialog(final Bundle args) {
 		final View openBug = activity.getLayoutInflater().inflate(R.layout.open_bug, null);
-		Builder builder = new AlertDialog.Builder(activity);
+		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 		builder.setTitle(R.string.osb_add_dialog_title);
 		builder.setView(openBug);
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
@@ -410,7 +405,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	}
 	
 	private Dialog createCommentBugDialog(final Bundle args) {
-		Builder builder = new AlertDialog.Builder(activity);
+		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 		builder.setTitle(R.string.osb_comment_dialog_title);
 		final View view = activity.getLayoutInflater().inflate(R.layout.open_bug, null);
 		builder.setView(view);
@@ -457,7 +452,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	}
 	
 	private Dialog createCloseBugDialog(final Bundle args) {
-		Builder builder = new AlertDialog.Builder(activity);
+		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 		builder.setTitle(R.string.osb_close_dialog_title);
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
 		builder.setPositiveButton(R.string.osb_close_dialog_close_button, new DialogInterface.OnClickListener() {

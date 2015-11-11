@@ -1,10 +1,9 @@
 package net.osmand.plus.rastermaps;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -150,7 +149,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		final MapActivityLayers layers = activity.getMapLayers();
 		Map<String, String> entriesMap = settings.getTileSourceEntries();
 		final ArrayList<String> keys = new ArrayList<String>(entriesMap.keySet());
-		Builder builder = new AlertDialog.Builder(activity);
+		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 		final String[] items = new String[entriesMap.size() + 1];
 		int i = 0;
 		for(String it : entriesMap.values()){
@@ -285,7 +284,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 					AccessibleToast.makeText(activity, R.string.shared_string_io_error, Toast.LENGTH_SHORT).show();
 					return;
 				}
-				Builder builder = new AlertDialog.Builder(activity);
+				AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 				String[] names = new String[downloaded.size()];
 				for (int i = 0; i < names.length; i++) {
 					names[i] = downloaded.get(i).getName();
@@ -339,7 +338,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		TileSourceTemplate ts = new TileSourceTemplate("NewMapnik","http://mapnik.osmand.net/{0}/{1}/{2}.png", 
 				"png", 17, 5, 256, 16, 32000);
 		final TileSourceTemplate[] result = new TileSourceTemplate[] { ts };
-		Builder bld = new AlertDialog.Builder(activity);
+		AlertDialog.Builder bld = new AlertDialog.Builder(activity);
 		View view = activity.getLayoutInflater().inflate(R.layout.editing_tile_source, null);
 		final EditText name = (EditText) view.findViewById(R.id.Name);
 		final Spinner existing = (Spinner) view.findViewById(R.id.TileSourceSpinner);

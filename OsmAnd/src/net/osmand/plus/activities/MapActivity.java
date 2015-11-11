@@ -4,8 +4,10 @@ import android.app.Dialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -66,9 +68,6 @@ import net.osmand.plus.helpers.GpxImportHelper;
 import net.osmand.plus.helpers.WakeLockHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.MapContextMenuFragment;
-import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
-import net.osmand.plus.mapcontextmenu.editors.PointEditor;
-import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RoutingHelper;
@@ -86,6 +85,7 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -102,7 +102,8 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents {
 
 	private static MapViewTrackingUtilities mapViewTrackingUtilities;
 	private static MapContextMenu mapContextMenu = new MapContextMenu();
-	private static MapMultiSelectionMenu mapMultiSelectionMenu;
+
+	private BroadcastReceiver screenOffReceiver;
 
 	/**
 	 * Called when the activity is first created.
@@ -134,7 +135,6 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents {
 	private boolean intentLocation = false;
 
 	private DashboardOnMap dashboardOnMap = new DashboardOnMap(this);
-	private FavoritePointEditor favoritePointEditor;
 	private AppInitializeListener initListener;
 	private IMapDownloaderCallback downloaderCallback;
 	private DrawerLayout drawerLayout;
@@ -167,11 +167,6 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents {
 		app.applyTheme(this);
 		supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
 
-		if (mapMultiSelectionMenu == null) {
-			mapMultiSelectionMenu = new MapMultiSelectionMenu(this);
-		} else {
-			mapMultiSelectionMenu.setMapActivity(this);
-		}
 		mapContextMenu.setMapActivity(this);
 
 		super.onCreate(savedInstanceState);
@@ -250,6 +245,10 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents {
 		}
 		mapActions.updateDrawerMenu();
 		drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+		IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_OFF);
+		screenOffReceiver = new ScreenOffReceiver();
+		registerReceiver(screenOffReceiver, filter);
 	}
 
 
@@ -671,6 +670,7 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
+		unregisterReceiver(screenOffReceiver);
 		FailSafeFuntions.quitRouteRestoreDialog();
 		OsmandPlugin.onMapActivityDestroy(this);
 		getMyApplication().unsubscribeInitListener(initListener);
@@ -988,24 +988,6 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents {
 		return mapContextMenu;
 	}
 
-	public MapMultiSelectionMenu getMultiSelectionMenu() {
-		return mapMultiSelectionMenu;
-	}
-
-	public FavoritePointEditor getFavoritePointEditor() {
-		if (favoritePointEditor == null) {
-			favoritePointEditor = new FavoritePointEditor(app, this);
-		}
-		return favoritePointEditor;
-	}
-
-	public PointEditor getPointEditor(String tag) {
-		if (favoritePointEditor != null && favoritePointEditor.getFragmentTag().equals(tag)) {
-			return favoritePointEditor;
-		}
-		return null;
-	}
-
 	public void openDrawer() {
 		mapActions.updateDrawerMenu();
 		drawerLayout.openDrawer(Gravity.LEFT);
@@ -1034,9 +1016,9 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents {
 	// DownloadEvents
 	@Override
 	public void newDownloadIndexes() {
-		MapContextMenuFragment contextMenuFragment = getContextMenu().findMenuFragment();
-		if (contextMenuFragment != null) {
-			contextMenuFragment.newDownloadIndexes();
+		WeakReference<MapContextMenuFragment> fragmentRef = getContextMenu().findMenuFragment();
+		if (fragmentRef != null) {
+			fragmentRef.get().newDownloadIndexes();
 		}
 		if (getMapLayers().getDownloadedRegionsLayer().updateObjects()) {
 			refreshMap();
@@ -1045,9 +1027,9 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents {
 
 	@Override
 	public void downloadInProgress() {
-		MapContextMenuFragment contextMenuFragment = getContextMenu().findMenuFragment();
-		if (contextMenuFragment != null) {
-			contextMenuFragment.downloadInProgress();
+		WeakReference<MapContextMenuFragment> fragmentRef = getContextMenu().findMenuFragment();
+		if (fragmentRef != null) {
+			fragmentRef.get().downloadInProgress();
 		}
 		if (getMapLayers().getDownloadedRegionsLayer().updateObjects()) {
 			refreshMap();
@@ -1056,12 +1038,21 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents {
 
 	@Override
 	public void downloadHasFinished() {
-		MapContextMenuFragment contextMenuFragment = getContextMenu().findMenuFragment();
-		if (contextMenuFragment != null) {
-			contextMenuFragment.downloadHasFinished();
+		WeakReference<MapContextMenuFragment> fragmentRef = getContextMenu().findMenuFragment();
+		if (fragmentRef != null) {
+			fragmentRef.get().downloadHasFinished();
 		}
 		if (getMapLayers().getDownloadedRegionsLayer().updateObjects()) {
 			refreshMap();
 		}
+	}
+
+	private class ScreenOffReceiver extends BroadcastReceiver {
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			OsmandPlugin.onMapActivityScreenOff(MapActivity.this);
+		}
+
 	}
 }

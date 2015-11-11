@@ -7,19 +7,31 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuType;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleButtonController;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleProgressController;
+import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
+import net.osmand.plus.mapcontextmenu.editors.PointEditor;
+import net.osmand.plus.mapcontextmenu.editors.WptPtEditor;
+import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.util.MapUtils;
 
+import java.lang.ref.WeakReference;
+
 public class MapContextMenu extends MenuTitleController {
 
 	private MapActivity mapActivity;
+	private MapMultiSelectionMenu mapMultiSelectionMenu;
+
+	private FavoritePointEditor favoritePointEditor;
+	private WptPtEditor wptPtEditor;
 
 	private boolean active;
 	private LatLon latLon;
@@ -43,11 +55,32 @@ public class MapContextMenu extends MenuTitleController {
 
 	public void setMapActivity(MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
+
+		if (mapMultiSelectionMenu == null) {
+			mapMultiSelectionMenu = new MapMultiSelectionMenu(mapActivity);
+		} else {
+			mapMultiSelectionMenu.setMapActivity(mapActivity);
+		}
+
+		if (favoritePointEditor != null) {
+			favoritePointEditor.setMapActivity(mapActivity);
+		}
+		if (wptPtEditor != null) {
+			wptPtEditor.setMapActivity(mapActivity);
+		}
+
 		if (active) {
 			acquireMenuController();
+			if (menuController != null) {
+				menuController.addPlainMenuItems(typeStr, this.pointDescription, this.latLon);
+			}
 		} else {
 			menuController = null;
 		}
+	}
+
+	public MapMultiSelectionMenu getMultiSelectionMenu() {
+		return mapMultiSelectionMenu;
 	}
 
 	public boolean isActive() {
@@ -56,6 +89,29 @@ public class MapContextMenu extends MenuTitleController {
 
 	public boolean isVisible() {
 		return findMenuFragment() != null;
+	}
+
+	public FavoritePointEditor getFavoritePointEditor() {
+		if (favoritePointEditor == null) {
+			favoritePointEditor = new FavoritePointEditor(mapActivity);
+		}
+		return favoritePointEditor;
+	}
+
+	public WptPtEditor getWptPtPointEditor() {
+		if (wptPtEditor == null) {
+			wptPtEditor = new WptPtEditor(mapActivity);
+		}
+		return wptPtEditor;
+	}
+
+	public PointEditor getPointEditor(String tag) {
+		if (favoritePointEditor != null && favoritePointEditor.getFragmentTag().equals(tag)) {
+			return favoritePointEditor;
+		} else if (wptPtEditor != null && wptPtEditor.getFragmentTag().equals(tag)) {
+			return wptPtEditor;
+		}
+		return null;
 	}
 
 	@Override
@@ -69,6 +125,13 @@ public class MapContextMenu extends MenuTitleController {
 
 	public void setMapCenter(LatLon mapCenter) {
 		this.mapCenter = mapCenter;
+	}
+
+	public void updateMapCenter(LatLon mapCenter) {
+		WeakReference<MapContextMenuFragment> fragmentRef = findMenuFragment();
+		if (fragmentRef != null) {
+			fragmentRef.get().updateMapCenter(mapCenter);
+		}
 	}
 
 	public void setMapPosition(int mapPosition) {
@@ -123,15 +186,24 @@ public class MapContextMenu extends MenuTitleController {
 			this.pointDescription = pointDescription;
 		}
 
+		boolean needAcquireMenuController = menuController == null
+				|| !update
+				|| this.object == null && object != null
+				|| this.object != null && object == null
+				|| (this.object != null && object != null && !this.object.getClass().equals(object.getClass()));
+
 		this.latLon = latLon;
 		this.object = object;
 
 		active = true;
 
-		acquireMenuController();
+		if (needAcquireMenuController) {
+			acquireMenuController();
+		}
 		initTitle();
 
 		if (menuController != null) {
+			menuController.clearPlainMenuItems();
 			menuController.addPlainMenuItems(typeStr, this.pointDescription, this.latLon);
 		}
 
@@ -157,10 +229,10 @@ public class MapContextMenu extends MenuTitleController {
 	}
 
 	public void update(LatLon latLon, PointDescription pointDescription, Object object) {
-		MapContextMenuFragment fragment = findMenuFragment();
-		if (fragment != null) {
-			init(latLon, pointDescription, object, true);
-			fragment.rebuildMenu();
+		WeakReference<MapContextMenuFragment> fragmentRef = findMenuFragment();
+		init(latLon, pointDescription, object, true);
+		if (fragmentRef != null) {
+			fragmentRef.get().rebuildMenu();
 		}
 	}
 
@@ -186,9 +258,16 @@ public class MapContextMenu extends MenuTitleController {
 			mapActivity.getMapView().setMapPosition(mapPosition);
 			mapPosition = 0;
 		}
-		MapContextMenuFragment fragment = findMenuFragment();
-		if (fragment != null) {
-			fragment.dismissMenu();
+		WeakReference<MapContextMenuFragment> fragmentRef = findMenuFragment();
+		if (fragmentRef != null) {
+			fragmentRef.get().dismissMenu();
+		}
+	}
+
+	public void updateMenuUI() {
+		WeakReference<MapContextMenuFragment> fragmentRef = findMenuFragment();
+		if (fragmentRef != null) {
+			fragmentRef.get().updateMenu();
 		}
 	}
 
@@ -234,15 +313,15 @@ public class MapContextMenu extends MenuTitleController {
 
 	@Override
 	public void refreshMenuTitle() {
-		MapContextMenuFragment fragment = findMenuFragment();
-		if (fragment != null)
-			fragment.refreshTitle();
+		WeakReference<MapContextMenuFragment> fragmentRef = findMenuFragment();
+		if (fragmentRef != null)
+			fragmentRef.get().refreshTitle();
 	}
 
-	public MapContextMenuFragment findMenuFragment() {
+	public WeakReference<MapContextMenuFragment> findMenuFragment() {
 		Fragment fragment = mapActivity.getSupportFragmentManager().findFragmentByTag(MapContextMenuFragment.TAG);
-		if (fragment != null) {
-			return (MapContextMenuFragment) fragment;
+		if (fragment != null && !fragment.isDetached()) {
+			return new WeakReference<>((MapContextMenuFragment) fragment);
 		} else {
 			return null;
 		}
@@ -263,9 +342,10 @@ public class MapContextMenu extends MenuTitleController {
 	}
 
 	public void fabPressed() {
-		mapActivity.getMapActions().directionTo(latLon.getLatitude(), latLon.getLongitude());
+		mapActivity.getMapActions().showNavigationContextMenuPoint(latLon.getLatitude(), latLon.getLongitude());
+		//mapActivity.getMapActions().directionTo(latLon.getLatitude(), latLon.getLongitude());
 		hide();
-		mapActivity.getMapLayers().getMapControlsLayer().showRouteInfoControlDialog();
+		//mapActivity.getMapLayers().getMapControlsLayer().showRouteInfoControlDialog();
 	}
 
 	public void buttonWaypointPressed() {
@@ -279,9 +359,9 @@ public class MapContextMenu extends MenuTitleController {
 
 	public void buttonFavoritePressed() {
 		if (object != null && object instanceof FavouritePoint) {
-			mapActivity.getFavoritePointEditor().edit((FavouritePoint) object);
+			getFavoritePointEditor().edit((FavouritePoint) object);
 		} else {
-			mapActivity.getFavoritePointEditor().add(latLon, getTitleStr());
+			getFavoritePointEditor().add(latLon, getTitleStr());
 		}
 	}
 
@@ -304,10 +384,22 @@ public class MapContextMenu extends MenuTitleController {
 		mapActivity.getMapActions().contextMenuPoint(latLon.getLatitude(), latLon.getLongitude(), menuAdapter, object);
 	}
 
+	public void addWptPt() {
+		if (object == null || !(object instanceof WptPt)) {
+			getWptPtPointEditor().add(latLon, getTitleStr());
+		}
+	}
+
+	public void editWptPt() {
+		if (object != null && object instanceof WptPt) {
+			getWptPtPointEditor().edit((WptPt) object);
+		}
+	}
+
 	public void setBaseFragmentVisibility(boolean visible) {
-		MapContextMenuFragment menuFragment = findMenuFragment();
-		if (menuFragment != null) {
-			menuFragment.setFragmentVisibility(visible);
+		WeakReference<MapContextMenuFragment> fragmentRef = findMenuFragment();
+		if (fragmentRef != null) {
+			fragmentRef.get().setFragmentVisibility(visible);
 		}
 	}
 
@@ -456,9 +548,9 @@ public class MapContextMenu extends MenuTitleController {
 			@Override
 			public void run() {
 				inLocationUpdate = false;
-				MapContextMenuFragment menuFragment = findMenuFragment();
-				if (menuFragment != null) {
-					menuFragment.updateLocation(centerChanged, locationChanged, compassChanged);
+				WeakReference<MapContextMenuFragment> fragmentRef = findMenuFragment();
+				if (fragmentRef != null) {
+					fragmentRef.get().updateLocation(centerChanged, locationChanged, compassChanged);
 				}
 			}
 		});

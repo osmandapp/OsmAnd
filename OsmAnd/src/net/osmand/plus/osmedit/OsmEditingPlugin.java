@@ -1,13 +1,12 @@
 package net.osmand.plus.osmedit;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -18,6 +17,7 @@ import android.widget.Toast;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
+import net.osmand.osm.PoiType;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.OsmandApplication;
@@ -166,7 +166,14 @@ public class OsmEditingPlugin extends OsmandPlugin {
 				return true;
 			}
 		};
-		if (selectedObj instanceof Amenity && !((Amenity) selectedObj).getType().isWiki()) {
+		boolean isEditable = false;
+		if (selectedObj instanceof Amenity) {
+			Amenity amenity = (Amenity) selectedObj;
+			final PoiType poiType = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
+			isEditable = !(amenity.getType().isWiki() ||
+					poiType.isNotEditableOsm());
+		}
+		if (isEditable) {
 			adapter.item(R.string.poi_context_menu_modify).iconColor(R.drawable.ic_action_edit_dark).listen(listener).position(1).reg();
 			adapter.item(R.string.poi_context_menu_delete).iconColor(R.drawable.ic_action_delete_dark).listen(listener).position(2).reg();
 		} else {
@@ -277,7 +284,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 			AccessibleToast.makeText(la, R.string.validate_gpx_upload_name_pwd, Toast.LENGTH_LONG).show();
 			return false;
 		}
-		Builder bldr = new AlertDialog.Builder(la);
+		AlertDialog.Builder bldr = new AlertDialog.Builder(la);
 		LayoutInflater inflater = (LayoutInflater) la.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		final View view = inflater.inflate(R.layout.send_gpx_osm, null);
 		final EditText descr = (EditText) view.findViewById(R.id.memory_size);

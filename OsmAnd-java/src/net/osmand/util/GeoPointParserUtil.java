@@ -397,6 +397,15 @@ public class GeoPointParserUtil {
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
 
+		// TODO this URL does not work, where is it used?
+		// whatsapp
+		// https://maps.google.com/maps?q=loc:34.99393,-106.61568 (You)
+		z = GeoParsedPoint.NO_ZOOM;
+		url = "https://maps.google.com/maps?q=loc:" + dlat + "," + dlon + " (You)";
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
+
 		// http://www.google.com/maps/search/food/34,-106,14z
 		url = "http://www.google.com/maps/search/food/" + ilat + "," + ilon + "," + z + "z";
 		System.out.println("url: " + url);
@@ -933,7 +942,16 @@ public class GeoPointParserUtil {
 					} else if (params.containsKey("saddr")) {
 						return parseGoogleMapsPath(params.get("saddr"), params);
 					} else if (params.containsKey("q")) {
-						return parseGoogleMapsPath(params.get("q"), params);
+						String opath = params.get("q");
+						final String pref = "loc:";
+						if(opath.contains(pref)) {
+							opath = opath.substring(opath.lastIndexOf(pref) + pref.length());
+						}
+						final String postf = " (You)";
+						if (opath.contains(postf)) {
+							opath = opath.substring(0, opath.indexOf(postf));
+						}
+						return parseGoogleMapsPath(opath, params);
 					}
 					if (fragment != null) {
 						Pattern p = Pattern.compile(".*[!&]q=([^&!]+).*");
@@ -947,8 +965,7 @@ public class GeoPointParserUtil {
 							"loc:", "/"};
 					for (String pref : pathPrefixes) {
 						if (path.contains(pref)) {
-							path = path.substring(path.lastIndexOf(pref)
-									+ pref.length());
+							path = path.substring(path.lastIndexOf(pref) + pref.length());
 							return parseGoogleMapsPath(path, params);
 						}
 					}

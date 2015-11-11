@@ -2,8 +2,6 @@ package net.osmand.plus.development;
 
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Debug;
@@ -13,6 +11,7 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 
 import net.osmand.plus.ApplicationMode;
@@ -207,7 +206,7 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 	}
 
 	protected void availableProfileDialog() {
-		Builder b = new AlertDialog.Builder(this);
+		AlertDialog.Builder b = new AlertDialog.Builder(this);
 		final List<ApplicationMode> modes = ApplicationMode.allPossibleValues();
 		modes.remove(ApplicationMode.DEFAULT);
 		final Set<ApplicationMode> selected = new LinkedHashSet<ApplicationMode>(ApplicationMode.values(settings));

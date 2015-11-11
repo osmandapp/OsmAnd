@@ -1,5 +1,10 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
 
+    <string name="lang_nds">Нижненемецкий</string>
+    <string name="lang_mk">Македонский</string>
+    <string name="lang_fy">Западнофризский</string>
+    <string name="lang_als">Албанский (тоскский)</string>
     <string name="rendering_attr_hideProposed_name">Скрыть планируемые объекты</string>
     <string name="osmo_use_https_descr">Использовать безопасное подключение к серверу</string>
     <string name="osmo_use_https">Использовать HTTPS</string>
@@ -558,7 +563,7 @@
     <string name="reload_tile">Обновить часть карты</string>
     <string name="user_name_descr">Укажите имя пользователя (требуется для работы с OSM)</string>
     <string name="user_name">Имя пользователя</string>
-    <string name="mark_point">Точка</string>
+    <string name="mark_point">Цель</string>
     <string name="use_english_names_descr">Использовать английские названия вместо местных</string>
     <string name="use_english_names">Использовать английские названия</string>
     <string name="app_settings">Настройки приложения</string>
@@ -1812,4 +1817,6 @@
     <string name="av_locations">Места</string>
     <string name="downloading_number_of_files">Загрузка файла - %1$d</string>
 
-</resources>
+<string name="read_more">Подробнее</string>
+    <string name="whats_new">Что нового в</string>
+    </resources>

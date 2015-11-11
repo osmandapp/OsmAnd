@@ -1,6 +1,5 @@
 package net.osmand.plus.helpers;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -9,7 +8,9 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.ParcelFileDescriptor;
 import android.provider.OpenableColumns;
+import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
+
 import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.FavouritePoint;

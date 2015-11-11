@@ -204,6 +204,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 			});
 		}
 
+		menu.updateData();
 		updateButtonsAndProgress();
 
 		if (menu.isLandscapeLayout()) {
@@ -440,6 +441,15 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		return view;
 	}
 
+	public void updateMapCenter(LatLon mapCenter) {
+		customMapCenter = true;
+		menu.setMapCenter(mapCenter);
+		this.mapCenter = mapCenter;
+		RotatedTileBox box = map.getCurrentRotatedTileBox().copy();
+		origMarkerX = box.getCenterPixelX();
+		origMarkerY = box.getCenterPixelY();
+	}
+
 	private void updateButtonsAndProgress() {
 		// Title buttons
 		boolean showButtonsContainer = (leftTitleButtonController != null || rightTitleButtonController != null)
@@ -592,6 +602,17 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 			@Override
 			public void onGlobalLayout() {
 
+				ViewTreeObserver obs = view.getViewTreeObserver();
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+					obs.removeOnGlobalLayoutListener(this);
+				} else {
+					obs.removeGlobalOnLayoutListener(this);
+				}
+
+				if (getActivity() == null) {
+					return;
+				}
+
 				int newMenuTopViewHeight = view.findViewById(R.id.context_menu_top_view).getHeight();
 				menuTopShadowHeight = view.findViewById(R.id.context_menu_top_shadow).getHeight();
 				menuTopShadowAllHeight = view.findViewById(R.id.context_menu_top_shadow_all).getHeight();
@@ -606,14 +627,6 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 				menuBottomViewHeight = view.findViewById(R.id.context_menu_bottom_view).getHeight();
 
 				menuFullHeightMax = menuTitleHeight + (menuBottomViewHeight > 0 ? menuBottomViewHeight : -dpToPx(SHADOW_HEIGHT_BOTTOM_DP));
-
-				ViewTreeObserver obs = view.getViewTreeObserver();
-
-				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-					obs.removeOnGlobalLayoutListener(this);
-				} else {
-					obs.removeGlobalOnLayoutListener(this);
-				}
 
 				if (origMarkerX == 0 && origMarkerY == 0) {
 					origMarkerX = view.getWidth() / 2;
@@ -885,6 +898,12 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		if (wasProgressVisible != progressVisible) {
 			runLayoutListener();
 		}
+	}
+
+	public void updateMenu() {
+		menu.updateData();
+		updateButtonsAndProgress();
+		runLayoutListener();
 	}
 
 	private MapActivity getMapActivity() {
