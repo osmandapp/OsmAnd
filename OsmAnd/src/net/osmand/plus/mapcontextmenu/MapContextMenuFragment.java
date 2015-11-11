@@ -74,6 +74,9 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	private int menuFullHeight;
 	private int menuFullHeightMax;
 
+	private int screenHeight;
+	private int viewHeight;
+
 	private int fabPaddingTopPx;
 	private int markerPaddingPx;
 	private int markerPaddingXPx;
@@ -125,6 +128,9 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
+
+		screenHeight = getScreenHeight();
+		viewHeight = screenHeight - getStatusBarHeight();
 
 		fabPaddingTopPx = dpToPx(FAB_PADDING_TOP_DP);
 		markerPaddingPx = dpToPx(MARKER_PADDING_DP);
@@ -704,26 +710,26 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 
 	private int getPosY(boolean needCloseMenu) {
 		if (needCloseMenu) {
-			return getScreenHeight();
+			return screenHeight;
 		}
 
 		int destinationState;
 		int minHalfY;
 		if (menu.isExtended()) {
 			destinationState = menu.getCurrentMenuState();
-			minHalfY = view.getHeight() - (int)(view.getHeight() * menu.getHalfScreenMaxHeightKoef());
+			minHalfY = viewHeight - (int)(viewHeight * menu.getHalfScreenMaxHeightKoef());
 		} else {
 			destinationState = MenuController.MenuState.HEADER_ONLY;
-			minHalfY = view.getHeight();
+			minHalfY = viewHeight;
 		}
 
 		int posY = 0;
 		switch (destinationState) {
 			case MenuController.MenuState.HEADER_ONLY:
-				posY = view.getHeight() - (menuTitleHeight - dpToPx(SHADOW_HEIGHT_BOTTOM_DP));
+				posY = viewHeight - (menuTitleHeight - dpToPx(SHADOW_HEIGHT_BOTTOM_DP));
 				break;
 			case MenuController.MenuState.HALF_SCREEN:
-				posY = view.getHeight() - menuFullHeightMax;
+				posY = viewHeight - menuFullHeightMax;
 				posY = Math.max(posY, minHalfY);
 				break;
 			case MenuController.MenuState.FULL_SCREEN:
@@ -923,6 +929,15 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		DisplayMetrics dm = new DisplayMetrics();
 		getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
 		return dm.heightPixels;
+	}
+
+	public int getStatusBarHeight() {
+		int result = 0;
+		int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+		if (resourceId > 0) {
+			result = getResources().getDimensionPixelSize(resourceId);
+		}
+		return result;
 	}
 
 	public void updateLocation(boolean centerChanged, boolean locationChanged, boolean compassChanged) {
