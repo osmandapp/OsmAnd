@@ -10,6 +10,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.builders.WptPtMenuBuilder;
+import net.osmand.util.Algorithms;
 
 public class WptPtMenuController extends MenuController {
 
@@ -44,7 +45,7 @@ public class WptPtMenuController extends MenuController {
 
 	@Override
 	public boolean needTypeStr() {
-		return wpt.category != null;
+		return true;
 	}
 
 	@Override
@@ -54,20 +55,21 @@ public class WptPtMenuController extends MenuController {
 
 	@Override
 	public Drawable getLeftIcon() {
-		return FavoriteImageDrawable.getOrCreate(getMapActivity().getMyApplication(), wpt.getColor(), true);
+		return FavoriteImageDrawable.getOrCreate(getMapActivity().getMyApplication(),
+				wpt.getColor(getMapActivity().getResources().getColor(R.color.gpx_color_point)), false);
 	}
 
 	@Override
 	public Drawable getSecondLineIcon() {
-		if (wpt.category != null) {
-			return getIcon(R.drawable.ic_small_group);
-		} else {
+		if (Algorithms.isEmpty(getTypeStr())) {
 			return null;
+		} else {
+			return getIcon(R.drawable.ic_small_group);
 		}
 	}
 
 	@Override
 	public String getTypeStr() {
-		return wpt.category != null ? wpt.category : getMapActivity().getString(R.string.shared_string_none);
+		return wpt.category != null ? wpt.category : "";
 	}
 }

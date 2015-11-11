@@ -74,7 +74,7 @@ public class MenuBuilder {
 
 	protected void buildPlainMenuItems(View view) {
 		for (PlainMenuItem item : plainMenuItems) {
-			buildRow(view, item.getIconId(), item.getText(), 0, item.isNeedLinks());
+			buildRow(view, item.getIconId(), item.getText(), 0, item.isNeedLinks(), 0);
 		}
 	}
 
@@ -90,11 +90,11 @@ public class MenuBuilder {
 		firstRow = false;
 	}
 
-	protected void buildRow(View view, int iconId, String text, int textColor, boolean needLinks) {
-		buildRow(view, getRowIcon(iconId), text, textColor, needLinks);
+	protected View buildRow(View view, int iconId, String text, int textColor, boolean needLinks, int textLinesLimit) {
+		return buildRow(view, getRowIcon(iconId), text, textColor, needLinks, textLinesLimit);
 	}
 
-	protected void buildRow(final View view, Drawable icon, String text, int textColor, boolean needLinks) {
+	protected View buildRow(final View view, Drawable icon, String text, int textColor, boolean needLinks, int textLinesLimit) {
 		LinearLayout ll = new LinearLayout(view.getContext());
 		ll.setOrientation(LinearLayout.HORIZONTAL);
 		LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -132,6 +132,10 @@ public class MenuBuilder {
 			textView.setAutoLinkMask(Linkify.ALL);
 			textView.setLinksClickable(true);
 		}
+		if (textLinesLimit > 0) {
+			textView.setMinLines(1);
+			textView.setMaxLines(textLinesLimit);
+		}
 		textView.setText(text);
 		if (textColor > 0) {
 			textView.setTextColor(view.getResources().getColor(textColor));
@@ -155,6 +159,8 @@ public class MenuBuilder {
 		((LinearLayout) view).addView(horizontalLine);
 
 		rowBuilt();
+
+		return ll;
 	}
 
 	protected void buildButtonRow(final View view, Drawable buttonIcon, String text, OnClickListener onClickListener) {

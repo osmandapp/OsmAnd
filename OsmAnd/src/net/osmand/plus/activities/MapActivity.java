@@ -68,9 +68,6 @@ import net.osmand.plus.helpers.GpxImportHelper;
 import net.osmand.plus.helpers.WakeLockHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.MapContextMenuFragment;
-import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
-import net.osmand.plus.mapcontextmenu.editors.PointEditor;
-import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RoutingHelper;
@@ -105,7 +102,6 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents {
 
 	private static MapViewTrackingUtilities mapViewTrackingUtilities;
 	private static MapContextMenu mapContextMenu = new MapContextMenu();
-	private static MapMultiSelectionMenu mapMultiSelectionMenu;
 
 	private BroadcastReceiver screenOffReceiver;
 
@@ -139,7 +135,6 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents {
 	private boolean intentLocation = false;
 
 	private DashboardOnMap dashboardOnMap = new DashboardOnMap(this);
-	private FavoritePointEditor favoritePointEditor;
 	private AppInitializeListener initListener;
 	private IMapDownloaderCallback downloaderCallback;
 	private DrawerLayout drawerLayout;
@@ -172,11 +167,6 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents {
 		app.applyTheme(this);
 		supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
 
-		if (mapMultiSelectionMenu == null) {
-			mapMultiSelectionMenu = new MapMultiSelectionMenu(this);
-		} else {
-			mapMultiSelectionMenu.setMapActivity(this);
-		}
 		mapContextMenu.setMapActivity(this);
 
 		super.onCreate(savedInstanceState);
@@ -996,24 +986,6 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents {
 
 	public MapContextMenu getContextMenu() {
 		return mapContextMenu;
-	}
-
-	public MapMultiSelectionMenu getMultiSelectionMenu() {
-		return mapMultiSelectionMenu;
-	}
-
-	public FavoritePointEditor getFavoritePointEditor() {
-		if (favoritePointEditor == null) {
-			favoritePointEditor = new FavoritePointEditor(app, this);
-		}
-		return favoritePointEditor;
-	}
-
-	public PointEditor getPointEditor(String tag) {
-		if (favoritePointEditor != null && favoritePointEditor.getFragmentTag().equals(tag)) {
-			return favoritePointEditor;
-		}
-		return null;
 	}
 
 	public void openDrawer() {

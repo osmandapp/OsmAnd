@@ -41,7 +41,7 @@ public class MapMultiSelectionMenuFragment extends Fragment implements AdapterVi
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-		menu = ((MapActivity) getActivity()).getMultiSelectionMenu();
+		menu = ((MapActivity) getActivity()).getContextMenu().getMultiSelectionMenu();
 
 		view = inflater.inflate(R.layout.menu_obj_selection_fragment, container, false);
 
@@ -72,7 +72,7 @@ public class MapMultiSelectionMenuFragment extends Fragment implements AdapterVi
 	}
 
 	public static void showInstance(final MapActivity mapActivity) {
-		MapMultiSelectionMenu menu = mapActivity.getMultiSelectionMenu();
+		MapMultiSelectionMenu menu = mapActivity.getContextMenu().getMultiSelectionMenu();
 
 		int slideInAnim = menu.getSlideInAnimation();
 		int slideOutAnim = menu.getSlideOutAnimation();
