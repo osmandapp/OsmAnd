@@ -1,9 +1,18 @@
 package net.osmand.plus.activities;
 
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import android.app.admin.DevicePolicyManager;
+import android.content.ComponentName;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnMultiChoiceClickListener;
+import android.content.Intent;
+import android.os.Bundle;
+import android.preference.CheckBoxPreference;
+import android.preference.ListPreference;
+import android.preference.Preference;
+import android.preference.PreferenceCategory;
+import android.preference.PreferenceScreen;
+import android.support.v7.app.AlertDialog;
 
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.DeviceAdminRecv;
@@ -18,19 +27,10 @@ import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.GeneralRouter.RoutingParameterType;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.app.admin.DevicePolicyManager;
-import android.content.ComponentName;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnMultiChoiceClickListener;
-import android.content.Intent;
-import android.os.Bundle;
-import android.preference.CheckBoxPreference;
-import android.preference.ListPreference;
-import android.preference.Preference;
-import android.preference.PreferenceCategory;
-import android.preference.PreferenceScreen;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class SettingsNavigationActivity extends SettingsBaseActivity {
 
@@ -391,7 +391,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 	}
 	
 	private void confirmSpeedCamerasDlg() {
-		Builder bld = new AlertDialog.Builder(this);
+		AlertDialog.Builder bld = new AlertDialog.Builder(this);
 		bld.setMessage(R.string.confirm_usage_speed_cameras);
 		bld.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 			
@@ -405,7 +405,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 	}
 
 	public AlertDialog showBooleanSettings(String[] vals, final OsmandPreference<Boolean>[] prefs, final CharSequence title) {
-		Builder bld = new AlertDialog.Builder(this);
+		AlertDialog.Builder bld = new AlertDialog.Builder(this);
 		boolean[] checkedItems = new boolean[prefs.length];
 		for (int i = 0; i < prefs.length; i++) {
 			checkedItems[i] = prefs[i].get();

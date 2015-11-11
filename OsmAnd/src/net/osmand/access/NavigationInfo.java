@@ -1,8 +1,10 @@
 package net.osmand.access;
 
 
-import java.util.ArrayList;
-import java.util.List;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.os.SystemClock;
+import android.support.v7.app.AlertDialog;
 
 import net.osmand.Location;
 import net.osmand.data.LatLon;
@@ -12,10 +14,9 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.access.RelativeDirectionStyle;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.os.SystemClock;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class NavigationInfo {
 
@@ -26,14 +27,14 @@ public class NavigationInfo {
 
 		private static final int UNKNOWN = -1;
 
-		private final int[] direction = { R.string.front,
-				R.string.front_right, 
-				R.string.right, 
-				R.string.back_right, 
+		private final int[] direction = {R.string.front,
+				R.string.front_right,
+				R.string.right,
+				R.string.back_right,
 				R.string.back,
-				R.string.back_left, 
-				R.string.left, 
-				R.string.front_left };
+				R.string.back_left,
+				R.string.left,
+				R.string.front_left};
 
 		private RelativeDirectionStyle style;
 		private int value;
@@ -107,22 +108,22 @@ public class NavigationInfo {
 
 	}
 
-	private final int[] cardinal = { R.string.north, 
+	private final int[] cardinal = {R.string.north,
 			R.string.north_north_east,
-			R.string.north_east, 
+			R.string.north_east,
 			R.string.east_north_east,
-			R.string.east, 
-			R.string.east_south_east, 
+			R.string.east,
+			R.string.east_south_east,
 			R.string.south_east,
 			R.string.south_south_east,
 			R.string.south,
 			R.string.south_south_west,
-			R.string.south_west, 
-			R.string.west_south_west, 
-			R.string.west, 
+			R.string.south_west,
+			R.string.west_south_west,
+			R.string.west,
 			R.string.west_north_west,
-			R.string.north_west, 
-			R.string.north_north_west };
+			R.string.north_west,
+			R.string.north_north_west};
 
 	private final OsmandApplication context;
 	private final OsmandSettings settings;

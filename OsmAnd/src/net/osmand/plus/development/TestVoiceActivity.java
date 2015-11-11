@@ -1,12 +1,11 @@
 package net.osmand.plus.development;
 
 import android.app.ActionBar;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -106,7 +105,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 			}
 			k++;
 		}
-		Builder bld = new AlertDialog.Builder(this);
+		AlertDialog.Builder bld = new AlertDialog.Builder(this);
 		bld.setSingleChoiceItems(entrieValues, selected, new DialogInterface.OnClickListener() {
 			
 			@Override

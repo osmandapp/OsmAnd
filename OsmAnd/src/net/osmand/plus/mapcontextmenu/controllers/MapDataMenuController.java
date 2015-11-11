@@ -1,10 +1,10 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.support.v7.app.AlertDialog;
 
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.data.LatLon;

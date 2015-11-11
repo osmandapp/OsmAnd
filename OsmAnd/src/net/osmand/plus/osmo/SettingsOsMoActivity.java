@@ -1,8 +1,6 @@
 package net.osmand.plus.osmo;
 
 
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
@@ -11,6 +9,7 @@ import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
+import android.support.v7.app.AlertDialog;
 import android.text.method.LinkMovementMethod;
 import android.util.TypedValue;
 import android.widget.ScrollView;
@@ -119,7 +118,7 @@ public class SettingsOsMoActivity extends SettingsBaseActivity {
 		final OsMoPlugin plugin = OsMoPlugin.getEnabledPlugin(OsMoPlugin.class);
 		if (preference == debugPref) {
 			updateDebugPref();
-			Builder bld = new AlertDialog.Builder(this);
+			AlertDialog.Builder bld = new AlertDialog.Builder(this);
 			StringBuilder bs = new StringBuilder();
 			List<String> hs = plugin.getService().getHistoryOfCommands();
 			if(hs != null) {
@@ -173,7 +172,7 @@ public class SettingsOsMoActivity extends SettingsBaseActivity {
 			
 			@Override
 			public void run() {
-				Builder bld = new AlertDialog.Builder(SettingsOsMoActivity.this);
+				AlertDialog.Builder bld = new AlertDialog.Builder(SettingsOsMoActivity.this);
 				bld.setMessage(R.string.osmo_regenerate_login_ids_confirm);
 				bld.setPositiveButton(R.string.shared_string_yes, new OnClickListener() {
 					

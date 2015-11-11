@@ -1,7 +1,6 @@
 package net.osmand.plus.download.ui;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -369,7 +368,7 @@ public class ItemViewHolder {
 								: LocalIndexType.VOICE_DATA;
 					}
 					final LocalIndexInfo info = new LocalIndexInfo(tp, fl, false);
-					Builder confirm = new Builder(context);
+					AlertDialog.Builder confirm = new AlertDialog.Builder(context);
 					confirm.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {

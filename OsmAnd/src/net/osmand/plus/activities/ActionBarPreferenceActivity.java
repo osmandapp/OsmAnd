@@ -1,13 +1,9 @@
 package net.osmand.plus.activities;
 
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
 import android.app.Activity;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
@@ -15,7 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Spinner;
 
-public abstract class ActionBarPreferenceActivity extends PreferenceActivity {
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+
+public abstract class ActionBarPreferenceActivity extends AppCompatPreferenceActivity {
 	private Toolbar tb;
 	private View shadowView;
 
@@ -26,7 +26,7 @@ public abstract class ActionBarPreferenceActivity extends PreferenceActivity {
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		//settings needed it's own theme because of check boxes not styled properly
-		OsmandSettings settings = ((OsmandApplication)getApplication()).getSettings();
+		OsmandSettings settings = ((OsmandApplication) getApplication()).getSettings();
 		int t = R.style.OsmandLightTheme;
 		if (settings.OSMAND_THEME.get() == OsmandSettings.OSMAND_DARK_THEME) {
 			t = R.style.OsmandDarkTheme;
@@ -44,7 +44,7 @@ public abstract class ActionBarPreferenceActivity extends PreferenceActivity {
 			shadowView = null;
 		}
 		tb.setClickable(true);
-		tb.setNavigationIcon(((OsmandApplication)getApplication()).getIconsCache().getIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha));
+		tb.setNavigationIcon(((OsmandApplication) getApplication()).getIconsCache().getIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha));
 		tb.setBackgroundColor(getResources().getColor(getResIdFromAttribute(this, R.attr.pstsTabBackground)));
 		tb.setTitleTextColor(getResources().getColor(getResIdFromAttribute(this, R.attr.pstsTextColor)));
 		tb.setNavigationOnClickListener(new View.OnClickListener() {

@@ -1,8 +1,7 @@
 package net.osmand.plus.helpers;
 
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -103,7 +102,7 @@ public class AvoidSpecificRoads {
 	}
 
 	public void showDialog(final MapActivity mapActivity) {
-		Builder bld = new AlertDialog.Builder(mapActivity);
+		AlertDialog.Builder bld = new AlertDialog.Builder(mapActivity);
 		bld.setTitle(R.string.impassable_road);
 		if (getMissingRoads().size() == 0){
 			bld.setMessage(R.string.avoid_roads_msg);

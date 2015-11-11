@@ -1,12 +1,11 @@
 package net.osmand.plus.activities.search;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.PopupMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -36,7 +35,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmAndListFragment;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
 import net.osmand.plus.dashboard.DashLocationFragment;
-import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.util.MapUtils;
@@ -80,7 +78,7 @@ public class SearchHistoryFragment extends OsmAndListFragment implements SearchA
 	}
 	
 	private void clearWithConfirmation() {
-		Builder bld = new AlertDialog.Builder(getActivity());
+		AlertDialog.Builder bld = new AlertDialog.Builder(getActivity());
 		bld.setMessage(R.string.confirmation_to_clear_history);
 		bld.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 

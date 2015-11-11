@@ -1,14 +1,13 @@
 package net.osmand.plus.activities;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -20,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import net.londatiga.android.ActionItem;
 import net.londatiga.android.QuickAction;
 import net.osmand.IndexConstants;
@@ -69,23 +69,23 @@ public class MapActivityActions implements DialogProvider {
 	public static final String KEY_LONGITUDE = "longitude";
 	public static final String KEY_LATITUDE = "latitude";
 	public static final String KEY_NAME = "name";
-	
+
 	public static final String KEY_ZOOM = "zoom";
 
 	private static final int DIALOG_ADD_FAVORITE = 100;
 	private static final int DIALOG_REPLACE_FAVORITE = 101;
 	private static final int DIALOG_ADD_WAYPOINT = 102;
 	private static final int DIALOG_RELOAD_TITLE = 103;
-	
+
 	private static final int DIALOG_SAVE_DIRECTIONS = 106;
 	// make static
 	private static Bundle dialogBundle = new Bundle();
-	
+
 	private final MapActivity mapActivity;
 	private OsmandSettings settings;
 	private RoutingHelper routingHelper;
 
-	public MapActivityActions(MapActivity mapActivity){
+	public MapActivityActions(MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
 		settings = mapActivity.getMyApplication().getSettings();
 		routingHelper = mapActivity.getMyApplication().getRoutingHelper();
@@ -94,14 +94,14 @@ public class MapActivityActions implements DialogProvider {
 	public void showNavigationContextMenuPoint(final double latitude, final double longitude) {
 		final ContextMenuAdapter adapter = new ContextMenuAdapter(mapActivity);
 
-		if(!mapActivity.getRoutingHelper().isFollowingMode() && !mapActivity.getRoutingHelper().isRoutePlanningMode()) {
+		if (!mapActivity.getRoutingHelper().isFollowingMode() && !mapActivity.getRoutingHelper().isRoutePlanningMode()) {
 			adapter.item(R.string.context_menu_item_directions_to).iconColor(
 					R.drawable.ic_action_gdirections_dark).reg();
 			adapter.item(R.string.context_menu_item_directions_from).iconColor(
 					R.drawable.ic_action_gdirections_dark).reg();
 		}
 		final TargetPointsHelper targets = getMyApplication().getTargetPointsHelper();
-		if(targets.getPointToNavigate() != null) {
+		if (targets.getPointToNavigate() != null) {
 			adapter.item(R.string.context_menu_item_destination_point).iconColor(R.drawable.ic_action_flag_dark).reg();
 			adapter.item(R.string.context_menu_item_intermediate_point).iconColor(R.drawable.ic_action_flage_dark).reg();
 			// For button-less search UI
@@ -111,9 +111,9 @@ public class MapActivityActions implements DialogProvider {
 
 		getMyApplication().getAppCustomization().prepareLocationMenu(mapActivity, adapter);
 
-		final Builder builder = new AlertDialog.Builder(mapActivity);
+		final AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
 		builder.setTitle(R.string.get_directions);
-		final ArrayAdapter<?>  listAdapter =
+		final ArrayAdapter<?> listAdapter =
 				adapter.createListAdapter(mapActivity, getMyApplication().getSettings().isLightContent());
 		builder.setAdapter(listAdapter, new DialogInterface.OnClickListener() {
 
@@ -152,7 +152,7 @@ public class MapActivityActions implements DialogProvider {
 
 	public void addAsWaypoint(double latitude, double longitude) {
 		TargetPointsHelper targets = getMyApplication().getTargetPointsHelper();
-		boolean destination =  (targets.getPointToNavigate() == null);
+		boolean destination = (targets.getPointToNavigate() == null);
 
 		targets.navigateToPoint(new LatLon(latitude, longitude), true,
 				destination ? -1 : targets.getIntermediatePoints().size(),
@@ -171,7 +171,7 @@ public class MapActivityActions implements DialogProvider {
 		aBundle.putString(KEY_NAME, name);
 		return aBundle;
 	}
-	
+
 	private Bundle enhance(Bundle bundle, double latitude, double longitude, final int zoom) {
 		bundle.putDouble(KEY_LATITUDE, latitude);
 		bundle.putDouble(KEY_LONGITUDE, longitude);
@@ -180,7 +180,7 @@ public class MapActivityActions implements DialogProvider {
 	}
 
 
-    public void addWaypoint(final double latitude, final double longitude) {
+	public void addWaypoint(final double latitude, final double longitude) {
 		String name;
 		PointDescription pointDescription = mapActivity.getContextMenu().getPointDescription();
 		if (!pointDescription.isWpt() && !mapActivity.getContextMenu().isAddressUnknown()) {
@@ -188,12 +188,12 @@ public class MapActivityActions implements DialogProvider {
 		} else {
 			name = "";
 		}
-    	enhance(dialogBundle,latitude,longitude, name);
-    	mapActivity.showDialog(DIALOG_ADD_WAYPOINT);
-    }
+		enhance(dialogBundle, latitude, longitude, name);
+		mapActivity.showDialog(DIALOG_ADD_WAYPOINT);
+	}
 
-    private Dialog createAddWaypointDialog(final Bundle args) {
-    	Builder builder = new AlertDialog.Builder(mapActivity);
+	private Dialog createAddWaypointDialog(final Bundle args) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
 		builder.setTitle(R.string.add_waypoint_dialog_title);
 		View view = mapActivity.getLayoutInflater().inflate(R.layout.add_gpx_point_dialog, null);
 		final EditText editText = (EditText) view.findViewById(android.R.id.edit);
@@ -222,60 +222,60 @@ public class MapActivityActions implements DialogProvider {
 			}
 		});
 		return alertDialog;
-    }
-    
-    public void reloadTile(final int zoom, final double latitude, final double longitude){
-    	enhance(dialogBundle,latitude,longitude,zoom);
-    	mapActivity.showDialog(DIALOG_RELOAD_TITLE);
-    }
+	}
 
-    protected String getString(int res){
-    	return mapActivity.getString(res);
-    }
-    
-    protected void showToast(final String msg){
-    	mapActivity.runOnUiThread(new Runnable() {
+	public void reloadTile(final int zoom, final double latitude, final double longitude) {
+		enhance(dialogBundle, latitude, longitude, zoom);
+		mapActivity.showDialog(DIALOG_RELOAD_TITLE);
+	}
+
+	protected String getString(int res) {
+		return mapActivity.getString(res);
+	}
+
+	protected void showToast(final String msg) {
+		mapActivity.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
 				AccessibleToast.makeText(mapActivity, msg, Toast.LENGTH_LONG).show();
 			}
 		});
-    }
-    
-        
-    public void aboutRoute() {
-    	Intent intent = new Intent(mapActivity, ShowRouteInfoActivity.class);
+	}
+
+
+	public void aboutRoute() {
+		Intent intent = new Intent(mapActivity, ShowRouteInfoActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		mapActivity.startActivity(intent);
-    }
-	
-    protected Location getLastKnownLocation() {
+	}
+
+	protected Location getLastKnownLocation() {
 		return getMyApplication().getLocationProvider().getLastKnownLocation();
 	}
 
 	protected OsmandApplication getMyApplication() {
 		return mapActivity.getMyApplication();
 	}
-    
+
 	public void saveDirections() {
 		mapActivity.showDialog(DIALOG_SAVE_DIRECTIONS);
 	}
-	
-	public static  Dialog createSaveDirections(Activity activity, RoutingHelper routingHelper) {
+
+	public static Dialog createSaveDirections(Activity activity, RoutingHelper routingHelper) {
 		final OsmandApplication app = ((OsmandApplication) activity.getApplication());
 		final File fileDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
 		final Dialog dlg = new Dialog(activity);
 		dlg.setTitle(R.string.shared_string_save_as_gpx);
 		dlg.setContentView(R.layout.save_directions_dialog);
 		final EditText edit = (EditText) dlg.findViewById(R.id.FileNameEdit);
-		
-        final GPXRouteParamsBuilder rp = routingHelper.getCurrentGPXRoute();
-        final String editText;
-        if (rp == null || rp.getFile() == null || rp.getFile().path == null) {
-            editText = "_" + MessageFormat.format("{0,date,yyyy-MM-dd}", new Date()) + "_";
-        } else {
-            editText = new File(rp.getFile().path).getName();
-        }
+
+		final GPXRouteParamsBuilder rp = routingHelper.getCurrentGPXRoute();
+		final String editText;
+		if (rp == null || rp.getFile() == null || rp.getFile().path == null) {
+			editText = "_" + MessageFormat.format("{0,date,yyyy-MM-dd}", new Date()) + "_";
+		} else {
+			editText = new File(rp.getFile().path).getName();
+		}
 		edit.setText(editText);
 
 		((Button) dlg.findViewById(R.id.Save)).setOnClickListener(new View.OnClickListener() {
@@ -298,20 +298,20 @@ public class MapActivityActions implements DialogProvider {
 				}
 			}
 		});
-		
+
 		((Button) dlg.findViewById(R.id.Cancel)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				dlg.dismiss();
 			}
 		});
-		
-		
+
+
 		return dlg;
 	}
 
 	private static class SaveDirectionsAsyncTask extends AsyncTask<File, Void, String> {
-		
+
 		private final OsmandApplication app;
 
 		public SaveDirectionsAsyncTask(OsmandApplication app) {
@@ -328,14 +328,14 @@ public class MapActivityActions implements DialogProvider {
 			}
 			return null;
 		}
-		
+
 		@Override
 		protected void onPostExecute(String result) {
-			if(result != null){
+			if (result != null) {
 				AccessibleToast.makeText(app, result, Toast.LENGTH_LONG).show();
 			}
 		}
-		
+
 	}
 
 	public void contextMenuPoint(final double latitude, final double longitude, final ContextMenuAdapter iadapter, Object selectedObj) {
@@ -343,9 +343,9 @@ public class MapActivityActions implements DialogProvider {
 		adapter.item(R.string.context_menu_item_search).iconColor(R.drawable.ic_action_search_dark).reg();
 		OsmandPlugin.registerMapContextMenu(mapActivity, latitude, longitude, adapter, selectedObj);
 		getMyApplication().getAppCustomization().prepareLocationMenu(mapActivity, adapter);
-		
-		final Builder builder = new AlertDialog.Builder(mapActivity);
-		final ArrayAdapter<?>  listAdapter =
+
+		final AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
+		final ArrayAdapter<?> listAdapter =
 				adapter.createListAdapter(mapActivity, getMyApplication().getSettings().isLightContent());
 		builder.setAdapter(listAdapter, new DialogInterface.OnClickListener() {
 
@@ -368,9 +368,9 @@ public class MapActivityActions implements DialogProvider {
 	}
 
 	public void setGPXRouteParams(GPXFile result) {
-		if(result == null) {
+		if (result == null) {
 			mapActivity.getRoutingHelper().setGpxParams(null);
-			settings.FOLLOW_THE_GPX_ROUTE.set(null);	
+			settings.FOLLOW_THE_GPX_ROUTE.set(null);
 		} else {
 			GPXRouteParamsBuilder params = new GPXRouteParamsBuilder(result, mapActivity.getMyApplication()
 					.getSettings());
@@ -396,7 +396,7 @@ public class MapActivityActions implements DialogProvider {
 			}
 		}
 	}
-	
+
 	public void enterRoutePlanningMode(final LatLon from, final PointDescription fromName, boolean useCurrentGPX) {
 		List<SelectedGpxFile> selectedGPXFiles = mapActivity.getMyApplication().getSelectedGpxHelper()
 				.getSelectedGPXFiles();
@@ -410,8 +410,8 @@ public class MapActivityActions implements DialogProvider {
 		}
 
 		if (gpxFiles.size() > 0 && !useCurrentGPX) {
-			Builder bld = new AlertDialog.Builder(mapActivity);
-			if (gpxFiles.size() == 1){
+			AlertDialog.Builder bld = new AlertDialog.Builder(mapActivity);
+			if (gpxFiles.size() == 1) {
 				bld.setMessage(R.string.use_displayed_track_for_navigation);
 				bld.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 					@Override
@@ -421,15 +421,15 @@ public class MapActivityActions implements DialogProvider {
 				});
 			} else {
 				bld.setTitle(R.string.navigation_over_track);
-				ArrayAdapter<GPXFile> adapter =new ArrayAdapter<GPXFile>(mapActivity, R.layout.drawer_list_item, gpxFiles){
+				ArrayAdapter<GPXFile> adapter = new ArrayAdapter<GPXFile>(mapActivity, R.layout.drawer_list_item, gpxFiles) {
 					@Override
 					public View getView(int position, View convertView, ViewGroup parent) {
-						if (convertView == null){
+						if (convertView == null) {
 							convertView = mapActivity.getLayoutInflater().inflate(R.layout.drawer_list_item, null);
 						}
 						String path = getItem(position).path;
-						String name = path.substring(path.lastIndexOf("/") + 1,path.length());
-						((TextView)convertView.findViewById(R.id.title)).setText(name);
+						String name = path.substring(path.lastIndexOf("/") + 1, path.length());
+						((TextView) convertView.findViewById(R.id.title)).setText(name);
 						convertView.findViewById(R.id.icon).setVisibility(View.GONE);
 						convertView.findViewById(R.id.check_item).setVisibility(View.GONE);
 						return convertView;
@@ -454,7 +454,7 @@ public class MapActivityActions implements DialogProvider {
 			enterRoutePlanningModeImpl(useCurrentGPX ? gpxFiles.get(0) : null, from, fromName);
 		}
 	}
-	
+
 	private void enterRoutePlanningModeImpl(GPXFile gpxFile, LatLon from, PointDescription fromName) {
 
 		OsmandApplication app = mapActivity.getMyApplication();
@@ -474,11 +474,11 @@ public class MapActivityActions implements DialogProvider {
 		setGPXRouteParams(gpxFile);
 		// then update start and destination point  
 		targets.updateRouteAndReferesh(true);
-		
+
 		mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
 		mapActivity.getMapView().refreshMap(true);
 		mapActivity.getMapLayers().getMapControlsLayer().showDialog();
-		if(targets.hasTooLongDistanceToNavigate()) {
+		if (targets.hasTooLongDistanceToNavigate()) {
 			app.showToastMessage(R.string.route_is_too_long);
 		}
 	}
@@ -494,39 +494,39 @@ public class MapActivityActions implements DialogProvider {
 				from = new LatLon(ll.getLatitude(), ll.getLongitude());
 			}
 		}
-		if( selected != ApplicationMode.DEFAULT) {
+		if (selected != ApplicationMode.DEFAULT) {
 			mode = selected;
 		} else if (mode == ApplicationMode.DEFAULT) {
 			mode = ApplicationMode.CAR;
-			if(settings.LAST_ROUTING_APPLICATION_MODE != null &&
+			if (settings.LAST_ROUTING_APPLICATION_MODE != null &&
 					settings.LAST_ROUTING_APPLICATION_MODE != ApplicationMode.DEFAULT) {
 				mode = settings.LAST_ROUTING_APPLICATION_MODE;
 			}
-			if(from != null && targets.getPointToNavigate() != null) {
+			if (from != null && targets.getPointToNavigate() != null) {
 				double dist = MapUtils.getDistance(from, targets.getPointToNavigate().getLatitude(),
 						targets.getPointToNavigate().getLongitude());
-				if(dist >= 50000 && mode.isDerivedRoutingFrom(ApplicationMode.PEDESTRIAN)) {
-					mode = ApplicationMode.CAR ;
-				} else if(dist >= 300000 && mode.isDerivedRoutingFrom(ApplicationMode.BICYCLE)) {
-					mode = ApplicationMode.CAR ;
-				} else if(dist < 2000 && mode.isDerivedRoutingFrom(ApplicationMode.CAR)) {
-					mode = ApplicationMode.PEDESTRIAN ;
+				if (dist >= 50000 && mode.isDerivedRoutingFrom(ApplicationMode.PEDESTRIAN)) {
+					mode = ApplicationMode.CAR;
+				} else if (dist >= 300000 && mode.isDerivedRoutingFrom(ApplicationMode.BICYCLE)) {
+					mode = ApplicationMode.CAR;
+				} else if (dist < 2000 && mode.isDerivedRoutingFrom(ApplicationMode.CAR)) {
+					mode = ApplicationMode.PEDESTRIAN;
 				}
 			}
 		}
 		return mode;
 	}
 
-	public void contextMenuPoint(final double latitude, final double longitude){
+	public void contextMenuPoint(final double latitude, final double longitude) {
 		contextMenuPoint(latitude, longitude, null, null);
 	}
-	
+
 	private Dialog createReloadTitleDialog(final Bundle args) {
-    	Builder builder = new AccessibleAlertBuilder(mapActivity);
-    	builder.setMessage(R.string.context_menu_item_update_map_confirm);
-    	builder.setNegativeButton(R.string.shared_string_cancel, null);
-    	final OsmandMapTileView mapView = mapActivity.getMapView();
-    	builder.setPositiveButton(R.string.context_menu_item_update_map, new DialogInterface.OnClickListener() {
+		AlertDialog.Builder builder = new AccessibleAlertBuilder(mapActivity);
+		builder.setMessage(R.string.context_menu_item_update_map_confirm);
+		builder.setNegativeButton(R.string.shared_string_cancel, null);
+		final OsmandMapTileView mapView = mapActivity.getMapView();
+		builder.setPositiveButton(R.string.context_menu_item_update_map, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				int zoom = args.getInt(KEY_ZOOM);
@@ -558,9 +558,8 @@ public class MapActivityActions implements DialogProvider {
 			}
 		});
 		return builder.create();
-    }
-	
-	
+	}
+
 
 	@Override
 	public Dialog onCreateDialog(int id) {
@@ -584,21 +583,21 @@ public class MapActivityActions implements DialogProvider {
 	public void onPrepareDialog(int id, Dialog dialog) {
 		Bundle args = dialogBundle;
 		switch (id) {
-		case DIALOG_ADD_FAVORITE:
-			FavoriteDialogs.prepareAddFavouriteDialog(mapActivity, dialog, args,
-					args.getDouble(KEY_LATITUDE), args.getDouble(KEY_LONGITUDE),
-					new PointDescription(PointDescription.POINT_TYPE_FAVORITE, args.getString(KEY_NAME)));
-			break;
-		case DIALOG_ADD_WAYPOINT:
-			EditText v = (EditText) dialog.getWindow().findViewById(android.R.id.edit);
-			v.setPadding(5, 0, 5, 0);
-			if(args.getString(KEY_NAME) != null) {
-				v.setText(args.getString(KEY_NAME));
-				v.selectAll();
-			} else {
-				v.setText("");
-			}
-			break;
+			case DIALOG_ADD_FAVORITE:
+				FavoriteDialogs.prepareAddFavouriteDialog(mapActivity, dialog, args,
+						args.getDouble(KEY_LATITUDE), args.getDouble(KEY_LONGITUDE),
+						new PointDescription(PointDescription.POINT_TYPE_FAVORITE, args.getString(KEY_NAME)));
+				break;
+			case DIALOG_ADD_WAYPOINT:
+				EditText v = (EditText) dialog.getWindow().findViewById(android.R.id.edit);
+				v.setPadding(5, 0, 5, 0);
+				if (args.getString(KEY_NAME) != null) {
+					v.setText(args.getString(KEY_NAME));
+					v.selectAll();
+				} else {
+					v.setText("");
+				}
+				break;
 		}
 	}
 
@@ -650,7 +649,7 @@ public class MapActivityActions implements DialogProvider {
 						LatLon loc = mapActivity.getMapLocation();
 						newIntent.putExtra(SearchActivity.SEARCH_LAT, loc.getLatitude());
 						newIntent.putExtra(SearchActivity.SEARCH_LON, loc.getLongitude());
-						if(mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation()) {
+						if (mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation()) {
 							newIntent.putExtra(SearchActivity.SEARCH_NEARBY, true);
 						}
 						newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -670,7 +669,7 @@ public class MapActivityActions implements DialogProvider {
 						return true;
 					}
 				}).reg();
-		
+
 
 		optionsMenuHelper.item(R.string.show_point_options).iconColor(R.drawable.ic_action_marker_dark)
 				.listen(new OnContextMenuClick() {
@@ -699,10 +698,10 @@ public class MapActivityActions implements DialogProvider {
 					}
 				}).reg();
 		String d = getString(R.string.index_settings);
-		if(app.getDownloadThread().getIndexes().isDownloadedFromInternet) {
+		if (app.getDownloadThread().getIndexes().isDownloadedFromInternet) {
 			List<IndexItem> updt = app.getDownloadThread().getIndexes().getItemsToUpdate();
-			if(updt != null && updt.size() > 0) {
-				d += " ("+updt.size()+")";
+			if (updt != null && updt.size() > 0) {
+				d += " (" + updt.size() + ")";
 			}
 		}
 		optionsMenuHelper.item(R.string.index_settings).name(d).iconColor(R.drawable.ic_type_archive)
@@ -716,7 +715,7 @@ public class MapActivityActions implements DialogProvider {
 						return true;
 					}
 				}).reg();
-		
+
 
 		optionsMenuHelper.item(R.string.prefs_plugins).iconColor(R.drawable.ic_extension_dark)
 				.listen(new OnContextMenuClick() {
@@ -729,7 +728,7 @@ public class MapActivityActions implements DialogProvider {
 						return true;
 					}
 				}).reg();
-		
+
 
 		optionsMenuHelper.item(R.string.shared_string_settings).iconColor(R.drawable.ic_action_settings)
 				.listen(new OnContextMenuClick() {
@@ -742,17 +741,17 @@ public class MapActivityActions implements DialogProvider {
 					}
 				}).reg();
 		optionsMenuHelper.item(R.string.shared_string_help).iconColor(R.drawable.ic_action_help)
-		.listen(new OnContextMenuClick() {
-			@Override
-			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-				mapActivity.startActivity(new Intent(mapActivity, HelpActivity.class));
-				return true;
-			}
-		}).reg();
+				.listen(new OnContextMenuClick() {
+					@Override
+					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+						mapActivity.startActivity(new Intent(mapActivity, HelpActivity.class));
+						return true;
+					}
+				}).reg();
 
 		//////////// Others
 		OsmandPlugin.registerOptionsMenu(mapActivity, optionsMenuHelper);
-		
+
 //		optionsMenuHelper.item(R.string.shared_string_exit).iconColor(R.drawable.ic_action_quit_dark )
 //					.listen(new OnContextMenuClick() {
 //			@Override
@@ -773,21 +772,21 @@ public class MapActivityActions implements DialogProvider {
 		return optionsMenuHelper;
 	}
 
-	
-	public void openIntermediatePointsDialog(){
+
+	public void openIntermediatePointsDialog() {
 		mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.WAYPOINTS);
 	}
 
-	public void openIntermediateEditPointsDialog(){
+	public void openIntermediateEditPointsDialog() {
 		mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.WAYPOINTS);
 	}
 
 	private TargetPointsHelper getTargets() {
 		return mapActivity.getMyApplication().getTargetPointsHelper();
 	}
-	
+
 	public void stopNavigationWithoutConfirm() {
-		if(getMyApplication().getLocationProvider().getLocationSimulation().isRouteAnimating()) {
+		if (getMyApplication().getLocationProvider().getLocationSimulation().isRouteAnimating()) {
 			getMyApplication().getLocationProvider().getLocationSimulation().startStopRouteAnimation(mapActivity);
 		}
 		routingHelper.getVoiceRouter().interruptRouteCommands();
@@ -797,9 +796,9 @@ public class MapActivityActions implements DialogProvider {
 		settings.APPLICATION_MODE.set(settings.DEFAULT_APPLICATION_MODE.get());
 		mapActivity.updateApplicationModeSettings();
 	}
-	
+
 	public AlertDialog stopNavigationActionConfirm() {
-		Builder builder = new AlertDialog.Builder(mapActivity);
+		AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
 		// Stop the navigation
 		builder.setTitle(getString(R.string.cancel_route));
 		builder.setMessage(getString(R.string.stop_routing_confirm));
@@ -812,9 +811,8 @@ public class MapActivityActions implements DialogProvider {
 		builder.setNegativeButton(R.string.shared_string_no, null);
 		return builder.show();
 	}
-	
 
-	
+
 	public void whereAmIDialog() {
 		final List<String> items = new ArrayList<String>();
 		items.add(getString(R.string.show_location));
@@ -825,30 +823,27 @@ public class MapActivityActions implements DialogProvider {
 			public void onClick(DialogInterface dialog, int item) {
 				dialog.dismiss();
 				switch (item) {
-				case 0:
-					mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
-					break;
-				case 1:
-					OsmAndLocationProvider locationProvider = getMyApplication().getLocationProvider();
-					locationProvider.showNavigationInfo(mapActivity.getPointToNavigate(), mapActivity);
-					break;
-				default:
-					break;
+					case 0:
+						mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
+						break;
+					case 1:
+						OsmAndLocationProvider locationProvider = getMyApplication().getLocationProvider();
+						locationProvider.showNavigationInfo(mapActivity.getPointToNavigate(), mapActivity);
+						break;
+					default:
+						break;
 				}
 			}
 		});
 		menu.show();
 	}
-	
-	
-    
-    
+
 
 	public static void showObjectContextMenu(final ContextMenuAdapter qa, final Activity activity,
-			final OnClickListener onShow) {
+											 final OnClickListener onShow) {
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
-		if(app.accessibilityEnabled()) {
-			Builder builder = new AlertDialog.Builder(activity);
+		if (app.accessibilityEnabled()) {
+			AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 			String[] values = qa.getItemNames();
 			builder.setItems(values, new DialogInterface.OnClickListener() {
 				@Override
@@ -910,5 +905,5 @@ public class MapActivityActions implements DialogProvider {
 			}
 		});
 	}
-    
+
 }

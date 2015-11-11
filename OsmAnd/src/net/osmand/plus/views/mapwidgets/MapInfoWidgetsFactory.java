@@ -1,5 +1,16 @@
 package net.osmand.plus.views.mapwidgets;
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.support.v7.app.AlertDialog;
+import android.util.DisplayMetrics;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
 import net.osmand.Location;
 import net.osmand.ValueHolder;
 import net.osmand.binary.RouteDataObject;
@@ -25,17 +36,6 @@ import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.controls.MapRouteInfoControl;
 import net.osmand.plus.views.mapwidgets.NextTurnInfoWidget.TurnDrawable;
 import net.osmand.router.TurnType;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.util.DisplayMetrics;
-import android.view.View;
-import android.view.WindowManager;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 public class MapInfoWidgetsFactory {
 	
@@ -125,7 +125,7 @@ public class MapInfoWidgetsFactory {
 					final ValueHolder<Integer> vs = new ValueHolder<Integer>();
 					vs.value = app.getSettings().SERVICE_OFF_INTERVAL.get();
 					final AlertDialog[] dlgshow = new AlertDialog[1]; 
-					Builder dlg = new AlertDialog.Builder(map);
+					AlertDialog.Builder dlg = new AlertDialog.Builder(map);
 					dlg.setTitle(app.getString(R.string.enable_sleep_mode));
 					WindowManager mgr = (WindowManager) map.getSystemService(Context.WINDOW_SERVICE);
 					DisplayMetrics dm = new DisplayMetrics();

@@ -1,24 +1,5 @@
 package net.osmand.plus;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-
-import net.osmand.GeoidAltitudeCorrection;
-import net.osmand.PlatformUtil;
-import net.osmand.ResultMatcher;
-import net.osmand.access.NavigationInfo;
-import net.osmand.binary.RouteDataObject;
-import net.osmand.data.LatLon;
-import net.osmand.data.QuadPoint;
-import net.osmand.plus.OsmandSettings.OsmandPreference;
-import net.osmand.plus.TargetPointsHelper.TargetPoint;
-import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.router.RouteSegmentResult;
-import net.osmand.util.MapUtils;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -36,7 +17,27 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
+
+import net.osmand.GeoidAltitudeCorrection;
+import net.osmand.PlatformUtil;
+import net.osmand.ResultMatcher;
+import net.osmand.access.NavigationInfo;
+import net.osmand.binary.RouteDataObject;
+import net.osmand.data.LatLon;
+import net.osmand.data.QuadPoint;
+import net.osmand.plus.OsmandSettings.OsmandPreference;
+import net.osmand.plus.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.router.RouteSegmentResult;
+import net.osmand.util.MapUtils;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 public class OsmAndLocationProvider implements SensorEventListener {
 	
