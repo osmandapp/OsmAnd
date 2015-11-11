@@ -1844,7 +1844,7 @@
     <string name="routing_attr_avoid_shuttle_train_description">Evite tomar trenes de enlace</string>
     <string name="plugin_settings">Complementos</string>
     <string name="tab_title_basic">Básico</string>
-    <string name="tab_title_advanced">Extendido</string>
+    <string name="tab_title_advanced">Avanzado</string>
     <string name="building_number">Número de edificio</string>
     <string name="next_proceed">Siguiente</string>
     <string name="opening_at">Abren a las</string>
@@ -1962,4 +1962,5 @@
     <string name="lang_mk">Macedonio</string>
     <string name="lang_fy">Frisón</string>
     <string name="lang_als">Albano (Tosk)</string>
+    <string name="share_osm_edits_subject">Ediciones OSM compartidas vía OsmAnd</string>
     </resources>
