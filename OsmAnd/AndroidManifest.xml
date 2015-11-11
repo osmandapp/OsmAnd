@@ -178,6 +178,13 @@
                 <category android:name="android.intent.category.DESK_DOCK" />
             </intent-filter>
 
+            <!-- needed to match Android Download Manager requests -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="content" android:host="*" android:mimeType="text/xml"/>
+            </intent-filter>
+
             <!-- android matches non-greedy : http://stackoverflow.com/questions/3400072/pathpattern-to-match-file-extension-does-not-work-if-a-period-exists-elsewhere-i -->
             <!-- mimeType&host are both needed or you will either have unwanted matching or no match when needed -->
             <intent-filter>
@@ -429,11 +436,11 @@
             </intent-filter>
             <!-- requires read permission -->
             <!--
-			<intent-filter android:label="OsmAnd">
-			<action android:name="android.intent.action.VIEW" />
-				<category android:name="android.intent.category.DEFAULT" />
-				<data android:mimeType="vnd.android.cursor.item/postal-address_v2" />
-			</intent-filter>
+            <intent-filter android:label="OsmAnd">
+            <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="vnd.android.cursor.item/postal-address_v2" />
+            </intent-filter>
             -->
         </activity>
         <activity android:name=".development.TestVoiceActivity" />
