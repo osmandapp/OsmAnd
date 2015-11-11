@@ -353,6 +353,8 @@ public class AdvancedEditPoiFragment extends Fragment
 			HashSet<String> tagKeys = new HashSet<>();
 			HashSet<String> valueKeys = new HashSet<>();
 			for (AbstractPoiType abstractPoiType : result.values()) {
+				if (abstractPoiType instanceof PoiType &&
+						((PoiType) abstractPoiType).isNotEditableOsm()) continue;
 				addPoiToStringSet(abstractPoiType, tagKeys, valueKeys);
 			}
 			addPoiToStringSet(mapPoiTypes.getOtherMapCategory(), tagKeys, valueKeys);
