@@ -297,6 +297,9 @@ public class AdvancedEditPoiFragment extends Fragment
 										  Set<String> values) {
 		if (abstractPoiType instanceof PoiType) {
 			PoiType poiType = (PoiType) abstractPoiType;
+			if (poiType.isNotEditableOsm()) {
+				return;
+			}
 			if (poiType.getOsmTag() != null &&
 					!poiType.getOsmTag().equals(OSMSettings.OSMTagKey.NAME.getValue())) {
 				stringSet.add(poiType.getOsmTag());
@@ -355,10 +358,6 @@ public class AdvancedEditPoiFragment extends Fragment
 			HashSet<String> tagKeys = new HashSet<>();
 			HashSet<String> valueKeys = new HashSet<>();
 			for (AbstractPoiType abstractPoiType : result.values()) {
-				if (abstractPoiType instanceof PoiType &&
-						((PoiType) abstractPoiType).isNotEditableOsm()) {
-					continue;
-				}
 				addPoiToStringSet(abstractPoiType, tagKeys, valueKeys);
 			}
 			addPoiToStringSet(mapPoiTypes.getOtherMapCategory(), tagKeys, valueKeys);
