@@ -626,7 +626,7 @@ public class OsmEditsFragment extends OsmAndListFragment
 			} else {
 				final Intent sendIntent = new Intent();
 				sendIntent.setAction(Intent.ACTION_SEND);
-				sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_fav_subject));
+				sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_osm_edits_subject));
 				sendIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(osmchange));
 				sendIntent.setType("text/plain");
 				startActivity(sendIntent);
