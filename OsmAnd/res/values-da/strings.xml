@@ -2016,4 +2016,5 @@
     <string name="lang_mk">Makedonisk</string>
     <string name="lang_fy">Vestfrisisk</string>
     <string name="lang_als">Albansk (Tosk)</string>
+    <string name="share_osm_edits_subject">OSM redigeringer deles via OsmAnd</string>
     </resources>
