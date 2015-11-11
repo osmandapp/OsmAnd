@@ -375,7 +375,7 @@ public class AdvancedEditPoiFragment extends Fragment
 
 		@Override
 		protected Map<String, PoiType> doInBackground(Void... params) {
-			return mapPoiTypes.getAllTranslatedNames();
+			return mapPoiTypes.getAllTranslatedNames(true);
 		}
 
 		@Override

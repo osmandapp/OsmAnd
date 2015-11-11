@@ -100,7 +100,7 @@ public class EditPoiDialogFragment extends DialogFragment {
 		}
 
 		node = (Node) getArguments().getSerializable(KEY_AMENITY_NODE);
-		allTranslatedSubTypes = getMyApplication().getPoiTypes().getAllTranslatedNames();
+		allTranslatedSubTypes = getMyApplication().getPoiTypes().getAllTranslatedNames(true);
 
 		Amenity amenity = (Amenity) getArguments().getSerializable(KEY_AMENITY);
 		editPoiData = new EditPoiData(amenity, node, allTranslatedSubTypes);
