@@ -1958,4 +1958,8 @@
 
 <string name="read_more">Leer más</string>
     <string name="whats_new">Novedades en</string>
+    <string name="lang_nds">Bajo Alemán</string>
+    <string name="lang_mk">Macedonio</string>
+    <string name="lang_fy">Frisón</string>
+    <string name="lang_als">Albano (Tosk)</string>
     </resources>
