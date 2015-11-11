@@ -84,7 +84,7 @@ public class AdvancedEditPoiFragment extends Fragment
 		// TODO: 10/27/15 Probably use executor so loading would be paralleled.
 		new InitTranslatedTypesTask(mapPoiTypes).execute();
 		mAdapter = new TagAdapterLinearLayoutHack(editTagsLineaLayout, getData());
-		// TODO do not restart initialization every time, and probably move initialization to appInit
+		// It is possible to not restart initialization every time, and probably move initialization to appInit
 		new InitTagsAndValuesAutocompleteTask(mapPoiTypes).execute();
 //		setListViewHeightBasedOnChildren(editTagsLineaLayout);
 		Button addTagButton = (Button) view.findViewById(R.id.addTagButton);
@@ -146,7 +146,9 @@ public class AdvancedEditPoiFragment extends Fragment
 
 	@Override
 	public void onFragmentActivated() {
-		mAdapter.updateViews();
+		if(mAdapter != null) {
+			mAdapter.updateViews();
+		}
 	}
 
 	public class TagAdapterLinearLayoutHack {
