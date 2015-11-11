@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
 	<string name="regions">Regionen</string>
 	<string name="region_maps">Regionsweite Karten</string>
 	<string name="world_maps">Weltweite Karten</string>
@@ -684,7 +685,7 @@
 	<string name="gps_provider">GPS</string>
 	<string name="int_seconds">Sekunden</string>
 	<string name="int_min">Min.</string>
-	<string name="background_service_provider_descr">Art der Hintergrund-Standortbestimmung</string>
+	<string name="background_service_provider_descr">Art der Standortbestimmung beim Hintergrunddienst</string>
 	<string name="background_service_provider">Standortbestimmung</string>
 	<string name="off_router_service_no_gps_available">Die Hintergrundnavigation erfordert aktiviertes GPS.</string>
 	<string name="hide_poi_filter">Filter verstecken</string>
@@ -2078,4 +2079,60 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="map_downloaded">Karte heruntergeladen</string>
     <string name="map_downloaded_descr">Karte von %1$s wurde heruntergeladen. Gehen Sie zur Karte, um sie zu benutzen.</string>
     <string name="go_to_map">Zur Karte gehen</string>
+    <string name="lang_nds">Plattdeutsch</string>
+    <string name="lang_mk">Mazedonisch</string>
+    <string name="read_more">Weiter lesen</string>
+    <string name="whats_new">Neuerungen in</string>
+    <string name="osm_edit_created_poi">OSM POI erstellt</string>
+    <string name="osm_edit_created_bug">OSM Note erstellt</string>
+    <string name="world_map_download_descr">Die Basis-Weltkarte (Abdeckung für den ganzen Planeten bei kleinen Zoomstufen) ist nicht vorhanden oder veraltet. Für eine korrekte Darstellung sollte die Basis-Weltkarte heruntergeladen werden.</string>
+    <string name="simulate_initial_startup_descr">Setzt das Flag zum erstmaligen App-Start. Alle anderen Einstellungen bleiben unverändert.</string>
+    <string name="simulate_initial_startup">Simuliere den ersten App-Start</string>
+    <string name="share_geo">geo:</string>
+    <string name="share_menu_location">Position teilen</string>
+    <string name="shared_string_send">Senden</string>
+    <string name="favorite_category_dublicate_message">Der eingegebene Kategorie-Name existiert bereits. Bitte einen anderen Namen eingeben.</string>
+    <string name="favorite_category_name">Kategorie-Name</string>
+    <string name="favorite_category_add_new_title">Neue Kategorie hinzufügen</string>
+    <string name="srtm_plugin_disabled">Höhenlinien deaktiviert</string>
+    <string name="favorite_category_select">Kategorie auswählen</string>
+    <string name="default_speed_system_descr">System zur Geschwindigkeitsmessung eingeben</string>
+    <string name="default_speed_system">Geschwindigkeitsmessung</string>
+    <string name="nm">nm</string>
+    <string name="nm_h">nmh</string>
+    <string name="min_mile">min/m</string>
+    <string name="min_km">min/km</string>
+    <string name="m_s">m/s</string>
+    <string name="shared_string_trip_recording">Streckenaufzeichnung</string>
+    <string name="osmand_running_in_background">Hintergrundbetrieb</string>
+    <string name="favourites_edit_dialog_title">Favoriten-Information</string>
+    <string name="simulate_your_location_stop_descr">Stoppen der Positions-Simulation</string>
+    <string name="simulate_your_location_descr">Simulieren durch eine berechnete Route oder einer aufgezeichneten GPX-Spur</string>
+    <string name="recent_places">Letzte Orte</string>
+	<string name="saved_at_time">Erfolgreich gespeichert unter: %1$s</string>
+	<string name="count_of_lines">Anzahl der Reihen</string>
+	<string name="buy">ERWERBEN</string>
+    <string name="later">Später</string>
+    <string name="downloads">Downloads</string>
+    <string name="application_dir_description">Bitte den Speicherort für heruntergeladene Karten wählen.</string>
+    <string name="new_version">Neue Version</string>
+    <string name="begin_with_osmand_menu_group">Erste Schritte in Osmand</string>
+    <string name="features_menu_group">Merkmale</string>
+    <string name="help_us_to_improve_menu_group">Hilf uns, Osmand weiter zu verbessern</string>
+    <string name="other_menu_group">Weitere</string>
+    <string name="plugins_menu_group">Plugins</string>
+    <string name="first_usage_item">Erste Benutzung</string>
+    <string name="first_usage_item_description">Wie Karten heruntergeladen und erste Einstellungen gewählt werden</string>
+    <string name="navigation_item_description">Navigation einstellen</string>
+    <string name="planning_trip_item">Eine Reise planen</string>
+    <string name="faq_item">FAQ</string>
+    <string name="faq_item_description">Häufige Fragen</string>
+    <string name="map_viewing_item">Kartenansicht</string>
+    <string name="search_on_the_map_item">Karten-Suche</string>
+    <string name="instalation_troubleshooting_item">Installation und Problembehebung</string>
+    <string name="techical_articles_item">Technische Themen</string>
+    <string name="versions_item">Versionen</string>
+    <string name="feedback">Feedback</string>
+    <string name="contact_us">Kontakt</string>
+    <string name="map_legend">Kartenlegende</string>
     </resources>
