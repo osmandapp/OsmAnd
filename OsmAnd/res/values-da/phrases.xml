@@ -2447,4 +2447,36 @@
 
 <string name="poi_hackerspace">Hacklab</string>
 
-</resources>
+<string name="poi_wiki_lang_af">Afrikaans wiki</string>
+	<string name="poi_wiki_lang_als">Alsace wiki</string>
+	<string name="poi_wiki_lang_az">Aserbajdsjanske wiki</string>
+	<string name="poi_wiki_lang_bn">Bengalsk wiki</string>
+	<string name="poi_wiki_lang_bpy">Bishnupriya wiki</string>
+	<string name="poi_wiki_lang_br">Bretagnes wiki</string>
+	<string name="poi_wiki_lang_cy">Walisisk wiki</string>
+	<string name="poi_wiki_lang_eo">Esperanto wiki</string>
+	<string name="poi_wiki_lang_eu">Baskiske wiki</string>
+	<string name="poi_wiki_lang_fa">Farsi wiki</string>
+	<string name="poi_wiki_lang_fy">Vestfrisisk</string>
+	<string name="poi_wiki_lang_hy">Armenske wiki</string>
+	<string name="poi_wiki_lang_is">Islandsk wiki</string>
+	<string name="poi_wiki_lang_ka">Georgiske wiki</string>
+	<string name="poi_wiki_lang_ku">Kurdiske wiki</string>
+	<string name="poi_wiki_lang_la">Latin wiki</string>
+	<string name="poi_wiki_lang_lb">Luxembourgsk wiki</string>
+	<string name="poi_wiki_lang_mk">Makedonsk-wiki</string>
+	<string name="poi_wiki_lang_ml">Malayalam wiki</string>
+	<string name="poi_wiki_lang_mr">Marathi wiki</string>
+	<string name="poi_wiki_lang_nds">Plattysk wiki</string>
+	<string name="poi_wiki_lang_nv">Navajo wiki</string>
+	<string name="poi_wiki_lang_os">Ossetiske wiki</string>
+	<string name="poi_wiki_lang_pms">Piemontesiske wiki</string>
+	<string name="poi_wiki_lang_sc">Sardiske wiki</string>
+	<string name="poi_wiki_lang_sh">Serbokroatisk wiki</string>
+	<string name="poi_wiki_lang_sq">Albansk-wiki</string>
+	<string name="poi_wiki_lang_ta">Tamil wiki</string>
+	<string name="poi_wiki_lang_tl">Filippinsk-wiki</string>
+
+<string name="poi_wiki_lang_bs">Bosnisk wiki</string>
+	<string name="poi_wiki_lang_ga">Irske wiki</string>
+	</resources>
