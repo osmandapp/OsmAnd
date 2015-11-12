@@ -2011,4 +2011,14 @@ OsmAnd е с отворен код и активно да се развива. �
     <string name="si_nm_h">Морски мили в час (възли)</string>
     <string name="nm_h">nmh</string>
     <string name="min_mile">мин/м</string>
+    <string name="map_legend">Легенда на картата</string>
+    <string name="contact_us">Свържете се с нас</string>
+    <string name="share_osm_edits_subject">OSM редакции, споделени чрез OsmAnd</string>
+    <string name="lang_nds">Долногермански езици</string>
+    <string name="min_km">мин/км</string>
+    <string name="m_s">м/сек</string>
+    <string name="shared_string_trip_recording">Записване на изминатия път</string>
+    <string name="shared_string_navigation">Навигация</string>
+    <string name="osmand_running_in_background">Работи във фонов режим</string>
+    <string name="favourites_edit_dialog_title">Предпочитана информация</string>
     </resources>
