@@ -44,6 +44,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
@@ -493,7 +494,6 @@ public class EditPoiDialogFragment extends DialogFragment {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 				Object item = parent.getAdapter().getItem(position);
-				LOG.debug("item=" + item);
 				//noinspection SuspiciousMethodCalls
 				if (subCategories.containsKey(item)) {
 					//noinspection SuspiciousMethodCalls

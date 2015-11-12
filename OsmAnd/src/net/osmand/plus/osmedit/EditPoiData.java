@@ -1,11 +1,5 @@
 package net.osmand.plus.osmedit;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Set;
-
 import net.osmand.PlatformUtil;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
@@ -14,6 +8,12 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
+
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Set;
 
 public class EditPoiData {
 	private static final Log LOG = PlatformUtil.getLog(EditPoiData.class);
@@ -52,7 +52,7 @@ public class EditPoiData {
 	}
 	
 	public PoiType getPoiTypeDefined() {
-		return allTranslatedSubTypes.get(getPoiTypeString());
+		return allTranslatedSubTypes.get(getPoiTypeString().toLowerCase());
 	}
 	
 	public String getPoiTypeString() {
@@ -188,8 +188,6 @@ public class EditPoiData {
 			tagValues.remove(pt.getOsmTag());
 			tagValues.remove(pt.getOsmTag2());
 		}
+		notifyDatasetChanged(POI_TYPE_TAG);
 	}
-
-	
-	
 }

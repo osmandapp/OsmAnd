@@ -100,7 +100,6 @@ public class AdvancedEditPoiFragment extends Fragment
 		mTagsChangedListener = new EditPoiData.TagsChangedListener() {
 			@Override
 			public void onTagsChanged(String anyTag) {
-				LOG.debug("onTagsChanged(" + "anyTag=" + anyTag + ")");
 				String value = getData().getTagValues().get(anyTag);
 				if (Algorithms.objectEquals(anyTag, OSMSettings.OSMTagKey.NAME.getValue())) {
 					nameTextView.setText(value);
