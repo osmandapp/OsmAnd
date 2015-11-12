@@ -66,6 +66,7 @@ import org.apache.commons.logging.Log;
 
 import java.io.Serializable;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -78,6 +79,17 @@ public class EditPoiDialogFragment extends DialogFragment {
 	private static final String KEY_AMENITY = "key_amenity";
 	private static final String TAGS_LIST = "tags_list";
 	private static final String IS_ADDING_POI = "is_adding_poi";
+
+	private static final HashSet<String> BASIC_TAGS = new HashSet<String>() {
+		{
+			add(OSMSettings.OSMTagKey.NAME.getValue());
+			add(OSMSettings.OSMTagKey.ADDR_STREET.getValue());
+			add(OSMSettings.OSMTagKey.ADDR_HOUSE_NUMBER.getValue());
+			add(OSMSettings.OSMTagKey.PHONE.getValue());
+			add(OSMSettings.OSMTagKey.WEBSITE.getValue());
+			add(OSMSettings.OSMTagKey.OPENING_HOURS.getValue());
+		}
+	};
 
 	private EditPoiData editPoiData;
 	private ViewPager viewPager;
@@ -258,7 +270,7 @@ public class EditPoiDialogFragment extends DialogFragment {
 		saveButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				save();
+				trySave();
 			}
 		});
 		Button cancelButton = (Button) view.findViewById(R.id.cancelButton);
@@ -281,11 +293,22 @@ public class EditPoiDialogFragment extends DialogFragment {
 		return dialog;
 	}
 
-	private void save() {
+	private void trySave() {
 		if (TextUtils.isEmpty(poiTypeEditText.getText())) {
-			poiTypeEditText.setError(getResources().getString(R.string.please_specify_poi_type));
+			HashSet<String> tagsCopy = new HashSet<>();
+			tagsCopy.addAll(editPoiData.getTagValues().keySet());
+			tagsCopy.removeAll(BASIC_TAGS);
+			if (tagsCopy.isEmpty()) {
+				poiTypeEditText.setError(getResources().getString(R.string.please_specify_poi_type));
+			} else {
+				new SaveWithAdvancedTagsDialogFragment().show(getChildFragmentManager(), "dialog");
+			}
 			return;
 		}
+		save();
+	}
+
+	private void save() {
 		OsmPoint.Action action = node.getId() == -1 ? OsmPoint.Action.CREATE : OsmPoint.Action.MODIFY;
 		for (Map.Entry<String, String> tag : editPoiData.getTagValues().entrySet()) {
 			if (tag.getKey().equals(EditPoiData.POI_TYPE_TAG)) {
@@ -654,13 +677,31 @@ public class EditPoiDialogFragment extends DialogFragment {
 		}
 	}
 
+	public static class SaveWithAdvancedTagsDialogFragment extends DialogFragment {
+		@NonNull
+		@Override
+		public Dialog onCreateDialog(Bundle savedInstanceState) {
+			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+			builder.setTitle(getResources().getString(R.string.are_you_sure))
+					.setMessage(getString(R.string.save_poi_without_poi_type_message))
+					.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							((EditPoiDialogFragment) getParentFragment()).save();
+						}
+					})
+					.setNegativeButton(R.string.shared_string_cancel, null);
+			return builder.create();
+		}
+	}
+
 	public static class AreYouSureDialogFragment extends DialogFragment {
 		@NonNull
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			builder.setTitle(getResources().getString(R.string.are_you_sure))
-					.setMessage(getResources().getString(R.string.unsaved_changes_will_be_lost))
+					.setMessage(getString(R.string.unsaved_changes_will_be_lost))
 					.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
@@ -678,7 +719,7 @@ public class EditPoiDialogFragment extends DialogFragment {
 				public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
 					boolean handled = false;
 					if (actionId == EditorInfo.IME_ACTION_SEND) {
-						save();
+						trySave();
 						handled = true;
 					}
 					return handled;
