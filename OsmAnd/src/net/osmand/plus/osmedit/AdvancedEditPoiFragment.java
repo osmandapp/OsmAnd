@@ -52,7 +52,6 @@ public class AdvancedEditPoiFragment extends Fragment
 	private TextView nameTextView;
 	private TextView amenityTagTextView;
 	private TextView amenityTextView;
-	private Map<String, PoiType> allTranslatedSubTypes;
 
 	@Override
 	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -81,12 +80,9 @@ public class AdvancedEditPoiFragment extends Fragment
 				(LinearLayout) view.findViewById(R.id.editTagsList);
 
 		final MapPoiTypes mapPoiTypes = ((OsmandApplication) getActivity().getApplication()).getPoiTypes();
-		// TODO: 10/27/15 Probably use executor so loading would be paralleled.
-		new InitTranslatedTypesTask(mapPoiTypes).execute();
 		mAdapter = new TagAdapterLinearLayoutHack(editTagsLineaLayout, getData());
 		// It is possible to not restart initialization every time, and probably move initialization to appInit
 		new InitTagsAndValuesAutocompleteTask(mapPoiTypes).execute();
-//		setListViewHeightBasedOnChildren(editTagsLineaLayout);
 		Button addTagButton = (Button) view.findViewById(R.id.addTagButton);
 		addTagButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -357,24 +353,5 @@ public class AdvancedEditPoiFragment extends Fragment
 			mAdapter.setTagData(tagKeys.toArray(new String[tagKeys.size()]));
 			mAdapter.setValueData(valueKeys.toArray(new String[valueKeys.size()]));
 		}
-	}
-
-	class InitTranslatedTypesTask extends AsyncTask<Void, Void, Map<String, PoiType>> {
-		private final MapPoiTypes mapPoiTypes;
-
-		public InitTranslatedTypesTask(MapPoiTypes mapPoiTypes) {
-			this.mapPoiTypes = mapPoiTypes;
-		}
-
-		@Override
-		protected Map<String, PoiType> doInBackground(Void... params) {
-			return mapPoiTypes.getAllTranslatedNames(true);
-		}
-
-		@Override
-		protected void onPostExecute(Map<String, PoiType> result) {
-			allTranslatedSubTypes = result;
-		}
-
 	}
 }
