@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="send_files_to_osm">GPX fájl küldése OSM-re?</string>
     <string name="gpx_visibility_txt">Láthatóság</string>
     <string name="gpx_tags_txt">Címkék</string>
@@ -1992,4 +1993,9 @@
     <string name="osm_edit_created_bug">Létrehozott OSM bug</string>
     <string name="map_legend">Térkép jelkulcs</string>
     <string name="favourites_edit_dialog_title">Kedvenc információk</string>
+    <string name="share_osm_edits_subject">OSM szerkesztés OsmAndból megosztva</string>
+    <string name="lang_nds">Alnémet</string>
+    <string name="lang_mk">Macedón</string>
+    <string name="lang_fy">Fríz</string>
+    <string name="lang_als">Albán (toszk)</string>
     </resources>

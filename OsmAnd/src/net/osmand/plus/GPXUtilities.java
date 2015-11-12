@@ -1,6 +1,8 @@
 
 package net.osmand.plus;
 
+import gnu.trove.list.array.TIntArrayList;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -553,6 +555,7 @@ public class GPXUtilities {
 		public List<Track> tracks = new ArrayList<Track>();
 		public List<WptPt> points = new ArrayList<WptPt>();
 		public List<Route> routes = new ArrayList<Route>();
+		
 		public String warning = null;
 		public String path = "";
 		public boolean showCurrentTrack;

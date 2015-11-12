@@ -100,9 +100,8 @@
 			</fileset>
 		</copy>
 		<sync todir="assets/help/">
-			<fileset dir="../../help/help">
+			<fileset dir="../../help/website/help">
 				<include name="*.html" />
-				<include name="images/**/*.png" />
 			</fileset>
 		</sync>
 		<copy todir="assets/help">

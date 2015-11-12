@@ -351,7 +351,8 @@ public class MapContextMenu extends MenuTitleController {
 		if (pointDescription.isDestination()) {
 			mapActivity.getMapActions().editWaypoints();
 		} else {
-			mapActivity.getMapActions().addAsWaypoint(latLon.getLatitude(), latLon.getLongitude());
+			mapActivity.getMapActions().addAsTarget(latLon.getLatitude(), latLon.getLongitude(),
+					pointDescription);
 		}
 		close();
 	}
