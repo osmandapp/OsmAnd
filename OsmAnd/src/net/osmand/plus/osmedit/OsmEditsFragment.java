@@ -54,10 +54,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by Denis
- * on 06.03.2015.
- */
 public class OsmEditsFragment extends OsmAndListFragment
 		implements SendPoiDialogFragment.ProgressDialogPoiUploader {
 	OsmEditingPlugin plugin;

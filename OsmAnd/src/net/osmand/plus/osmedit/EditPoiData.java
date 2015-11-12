@@ -1,18 +1,19 @@
 package net.osmand.plus.osmedit;
 
-import net.osmand.PlatformUtil;
-import net.osmand.data.Amenity;
-import net.osmand.osm.PoiType;
-import net.osmand.osm.edit.Node;
-import net.osmand.util.Algorithms;
-
-import org.apache.commons.logging.Log;
-
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
+
+import net.osmand.PlatformUtil;
+import net.osmand.osm.PoiCategory;
+import net.osmand.osm.PoiType;
+import net.osmand.osm.edit.Node;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.util.Algorithms;
+
+import org.apache.commons.logging.Log;
 
 public class EditPoiData {
 	private static final Log LOG = PlatformUtil.getLog(EditPoiData.class);
@@ -20,16 +21,44 @@ public class EditPoiData {
 	private LinkedHashMap<String, String > tagValues = new LinkedHashMap<String, String>();
 	private boolean isInEdit = false;
 	private Node entity;
-	public final Amenity amenity;
+	
 	public static final String POI_TYPE_TAG = "poi_type_tag";
 	private boolean hasChangesBeenMade = false;
-
-	public EditPoiData(Amenity amenity, Node node, Map<String, PoiType> allTranslatedSubTypes) {
-		this.amenity = amenity;
+	private Map<String, PoiType> allTranslatedSubTypes;
+	private PoiCategory category;
+	private String subtype;
+	
+	public EditPoiData(Node node, OsmandApplication app) {
+		allTranslatedSubTypes = app.getPoiTypes().getAllTranslatedNames(true);
+		category = app.getPoiTypes().getOtherPoiCategory();
+		subtype = "";
 		entity = node;
-		initTags(node, allTranslatedSubTypes);
+		initTags(node);
 	}
 	
+	public Map<String, PoiType> getAllTranslatedSubTypes() {
+		return allTranslatedSubTypes;
+	}
+	
+	public void updateType(PoiCategory type) {
+		if(type != null && type != category) {
+			category = type;
+			subtype = "";
+		}
+	}
+	
+	
+	public PoiCategory getPoiCategory() {
+		return category;
+	}
+	
+	public PoiType getPoiTypeDefined() {
+		return allTranslatedSubTypes.get(getPoiTypeString());
+	}
+	
+	public String getPoiTypeString() {
+		return subtype;
+	}
 
 	public Node getEntity() {
 		return entity;
@@ -40,8 +69,10 @@ public class EditPoiData {
 	}
 	
 	public void updateTags(Map<String, String> mp) {
+		checkNotInEdit();
 		this.tagValues.clear();
 		this.tagValues.putAll(mp);
+		retrieveType();
 	}
 	
 	private void tryAddTag(String key, String value) {
@@ -50,18 +81,23 @@ public class EditPoiData {
 		}
 	}
 	
-	private void initTags(Node node, Map<String, PoiType> allTranslatedSubTypes) {
+	private void initTags(Node node) {
 		checkNotInEdit();
 		for (String s : node.getTagKeySet()) {
 			tryAddTag(s, node.getTag(s));
 		}
-		String subType = amenity.getSubType();
-		String value ="";
-		PoiType pt = amenity.getType().getPoiTypeByKeyName(subType);
-		if (pt != null) {
-			value = pt.getTranslation();
+		retrieveType();
+	}
+
+	private void retrieveType() {
+		String tp = tagValues.get(POI_TYPE_TAG);
+		if(tp != null) {
+			PoiType pt = allTranslatedSubTypes.get(tp);
+			if (pt != null) {
+				subtype = tp;
+				category = pt.getCategory();
+			}
 		}
-		tagValues.put(POI_TYPE_TAG, value);		
 	}
 
 
@@ -144,5 +180,7 @@ public class EditPoiData {
 	public boolean hasChangesBeenMade() {
 		return hasChangesBeenMade;
 	}
+
+	
 	
 }

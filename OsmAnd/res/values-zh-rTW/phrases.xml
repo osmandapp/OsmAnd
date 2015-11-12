@@ -322,7 +322,7 @@
 	<string name="poi_training">培訓設施</string>
 	<string name="poi_university">大學</string>
 
-	<string name="poi_social_facility">公共設施</string>
+	<string name="poi_social_facility">社會設施</string>
 	<string name="poi_courthouse">法院</string>
 	<string name="poi_prison">監獄</string>
 	<string name="poi_register_office">民事登記處</string>
@@ -2157,5 +2157,17 @@
 	<string name="poi_impromptu_no">即興：否</string>
 	<string name="poi_refugee_yes">為難民的福利設施</string>
 	<string name="poi_refugee_no">難民：無</string>
+
+	<string name="poi_sanitary_dump_station_yes">衛生轉儲站：有</string>
+	<string name="poi_sanitary_dump_station_no">衛生轉儲站：無</string>
+	<string name="poi_sanitary_dump_station_customers">衛生轉儲站：僅客戶</string>
+	<string name="poi_social_facility_group_home">社會設施：團體家屋</string>
+	<string name="poi_social_facility_assisted_living">社會設施：輔助生活</string>
+	<string name="poi_social_facility_outreach">社會設施：推廣</string>
+	<string name="poi_social_facility_food_bank">社會設施：食物銀行</string>
+	<string name="poi_social_facility_shelter">社會設施：收容所</string>
+	<string name="poi_social_facility_ambulatory_care">社會設施：門診</string>
+	<string name="poi_social_facility_workshop">社會設施：工場</string>
+	<string name="poi_social_facility_day_care">社會設施：日間護理</string>
 
 	</resources>
