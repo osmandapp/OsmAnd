@@ -44,11 +44,11 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
+import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.EntityInfo;
 import net.osmand.osm.edit.Node;
@@ -75,7 +75,6 @@ public class EditPoiDialogFragment extends DialogFragment {
 	private static final Log LOG = PlatformUtil.getLog(EditPoiDialogFragment.class);
 
 	private static final String KEY_AMENITY_NODE = "key_amenity_node";
-	private static final String KEY_AMENITY = "key_amenity";
 	private static final String TAGS_LIST = "tags_list";
 	private static final String IS_ADDING_POI = "is_adding_poi";
 
@@ -99,10 +98,7 @@ public class EditPoiDialogFragment extends DialogFragment {
 		}
 
 		Node node = (Node) getArguments().getSerializable(KEY_AMENITY_NODE);
-		allTranslatedSubTypes = getMyApplication().getPoiTypes().getAllTranslatedNames(true);
-
-		Amenity amenity = (Amenity) getArguments().getSerializable(KEY_AMENITY);
-		editPoiData = new EditPoiData(amenity, node, allTranslatedSubTypes);
+		editPoiData = new EditPoiData(node, getMyApplication());
 	}
 
 	@Override
@@ -201,7 +197,7 @@ public class EditPoiDialogFragment extends DialogFragment {
 		poiTypeButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				DialogFragment fragment = PoiTypeDialogFragment.createInstance(editPoiData.amenity);
+				DialogFragment fragment = PoiTypeDialogFragment.createInstance();
 				fragment.show(getChildFragmentManager(), "PoiTypeDialogFragment");
 			}
 		});
@@ -249,7 +245,7 @@ public class EditPoiDialogFragment extends DialogFragment {
 		});
 		poiNameEditText.setOnEditorActionListener(mOnEditorActionListener);
 		poiTypeEditText.setOnEditorActionListener(mOnEditorActionListener);
-		poiTypeEditText.setText(editPoiData.amenity.getSubType());
+		poiTypeEditText.setText(editPoiData.getPoiTypeString());
 
 		Button saveButton = (Button) view.findViewById(R.id.saveButton);
 		saveButton.setText(mOpenstreetmapUtil instanceof OpenstreetmapRemoteUtil
@@ -297,7 +293,7 @@ public class EditPoiDialogFragment extends DialogFragment {
 						node.putTag(poiType.getOsmTag2(), poiType.getOsmValue2());
 					}
 				} else {
-					node.putTag(editPoiData.amenity.getType().getDefaultTag(), tag.getValue());
+					node.putTag(editPoiData.getPoiCategory().getDefaultTag(), tag.getValue());
 
 				}
 			} else if (!Algorithms.isEmpty(tag.getKey()) && !Algorithms.isEmpty(tag.getValue())) {
@@ -306,15 +302,15 @@ public class EditPoiDialogFragment extends DialogFragment {
 		}
 		commitNode(action, node, mOpenstreetmapUtil.getEntityInfo(),
 				"",
-				false,//closeChange.isSelected(),
+				false,
 				new Runnable() {
 					@Override
 					public void run() {
 						OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
-						if (plugin != null) {
+						if (plugin != null && mOpenstreetmapUtil instanceof OpenstreetmapLocalUtil) {
 							List<OpenstreetmapPoint> points = plugin.getDBPOI().getOpenstreetmapPoints();
-							OsmPoint point = points.get(points.size() - 1);
-							if (getActivity() instanceof MapActivity) {
+							if (getActivity() instanceof MapActivity && points.size() > 0) {
+								OsmPoint point = points.get(points.size() - 1);
 								MapActivity mapActivity = (MapActivity) getActivity();
 								mapActivity.getContextMenu().showOrUpdate(new LatLon(point.getLatitude(), point.getLongitude()),
 										plugin.getOsmEditsLayer(mapActivity).getObjectName(point), point);
@@ -408,9 +404,10 @@ public class EditPoiDialogFragment extends DialogFragment {
 		}.execute();
 	}
 
-	public void updateType(Amenity amenity) {
-		poiTypeEditText.setText(amenity.getSubType());
-		poiTypeTextInputLayout.setHint(amenity.getType().getTranslation());
+	public void updateType(PoiCategory type) {
+		editPoiData.updateType(type);
+		poiTypeEditText.setText(editPoiData.getPoiTypeString());
+		poiTypeTextInputLayout.setHint(editPoiData.getPoiCategory().getTranslation());
 		setAdapterForPoiTypeEditText();
 		poiTypeEditText.setOnTouchListener(new View.OnTouchListener() {
 			@Override
@@ -421,9 +418,9 @@ public class EditPoiDialogFragment extends DialogFragment {
 					if (event.getX() >= (editText.getRight()
 							- editText.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width()
 							- editText.getPaddingRight())) {
-						if (editPoiData.amenity.getType() != null) {
+						if (editPoiData.getPoiCategory() != null) {
 							DialogFragment dialogFragment =
-									PoiSubTypeDialogFragment.createInstance(editPoiData.amenity);
+									PoiSubTypeDialogFragment.createInstance(editPoiData.getPoiCategory());
 							dialogFragment.show(getChildFragmentManager(), "PoiSubTypeDialogFragment");
 						}
 
@@ -497,20 +494,13 @@ public class EditPoiDialogFragment extends DialogFragment {
 	public static EditPoiDialogFragment createAddPoiInstance(double latitude, double longitude,
 															 OsmandApplication application) {
 		Node node = new Node(latitude, longitude, -1);
-		Amenity amenity;
-		amenity = new Amenity();
-		amenity.setType(application.getPoiTypes().getOtherPoiCategory());
-		amenity.setSubType("");
-		amenity.setAdditionalInfo(OSMSettings.OSMTagKey.OPENING_HOURS.getValue(), "");
-		return createInstance(node, amenity, true);
+		return createInstance(node, true);
 	}
 
-	public static EditPoiDialogFragment createInstance(Node node, Amenity amenity,
-													   boolean isAddingPoi) {
+	public static EditPoiDialogFragment createInstance(Node node, boolean isAddingPoi) {
 		EditPoiDialogFragment editPoiDialogFragment = new EditPoiDialogFragment();
 		Bundle args = new Bundle();
 		args.putSerializable(KEY_AMENITY_NODE, node);
-		args.putSerializable(KEY_AMENITY, amenity);
 		args.putBoolean(IS_ADDING_POI, isAddingPoi);
 		editPoiDialogFragment.setArguments(args);
 		return editPoiDialogFragment;
@@ -537,7 +527,7 @@ public class EditPoiDialogFragment extends DialogFragment {
 			protected void onPostExecute(Node n) {
 				if (n != null) {
 					EditPoiDialogFragment fragment =
-							EditPoiDialogFragment.createInstance(n, amenity, false);
+							EditPoiDialogFragment.createInstance(n, false);
 					fragment.show(activity.getSupportFragmentManager(), TAG);
 				} else {
 					AccessibleToast.makeText(activity,

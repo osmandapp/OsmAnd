@@ -14,7 +14,7 @@ public abstract class AbstractPoiType {
 	private boolean topVisible;
 	private String lang;
 	private AbstractPoiType baseLangType;
-
+	private boolean notEditableOsm;
 	
 	public AbstractPoiType(String keyName, MapPoiTypes registry) {
 		this.keyName = keyName;
@@ -74,6 +74,14 @@ public abstract class AbstractPoiType {
 			return Collections.emptyList();
 		}
 		return poiAdditionals;
+	}
+
+	public boolean isNotEditableOsm() {
+		return notEditableOsm;
+	}
+
+	public void setNotEditableOsm(boolean notEditableOsm) {
+		this.notEditableOsm = notEditableOsm;
 	}
 
 	public abstract Map<PoiCategory, LinkedHashSet<String>> putTypes(Map<PoiCategory, LinkedHashSet<String>> acceptedTypes);

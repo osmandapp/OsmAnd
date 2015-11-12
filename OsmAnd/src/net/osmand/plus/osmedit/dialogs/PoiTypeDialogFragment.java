@@ -17,21 +17,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PoiTypeDialogFragment extends DialogFragment {
-	private static final String KEY_AMENITY = "amenity";
 
 	@NonNull
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		MapPoiTypes poiTypes = ((OsmandApplication) getActivity().getApplication()).getPoiTypes();
-		final Amenity amenity = (Amenity) getArguments().getSerializable(KEY_AMENITY);
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		final List<PoiCategory> categories = poiTypes.getCategories(false);
 		ArrayList<String> vals = new ArrayList<>(categories.size());
 		ArrayList<PoiCategory> toDelete = new ArrayList<>();
-		// TODO replace with constants
 		for (PoiCategory category : categories) {
-			if (category.getKeyName().equals("user_defined_other")
-					|| category.getKeyName().equals("osmwiki")) {
+			if (!category.isNotEditableOsm()) {
 				toDelete.add(category);
 			} else {
 				vals.add(category.getTranslation());
@@ -42,21 +38,16 @@ public class PoiTypeDialogFragment extends DialogFragment {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				PoiCategory aType = categories.get(which);
-				if (aType != amenity.getType()) {
-					amenity.setType(aType);
-					amenity.setSubType(""); //$NON-NLS-1$
-					((EditPoiDialogFragment) getParentFragment()).updateType(amenity);
-				}
+				((EditPoiDialogFragment) getParentFragment()).updateType(aType);
 				dismiss();
 			}
 		});
 		return builder.create();
 	}
 
-	public static PoiTypeDialogFragment createInstance(Amenity amenity) {
+	public static PoiTypeDialogFragment createInstance() {
 		PoiTypeDialogFragment poiTypeDialogFragment = new PoiTypeDialogFragment();
 		Bundle args = new Bundle();
-		args.putSerializable(KEY_AMENITY, amenity);
 		poiTypeDialogFragment.setArguments(args);
 		return poiTypeDialogFragment;
 	}

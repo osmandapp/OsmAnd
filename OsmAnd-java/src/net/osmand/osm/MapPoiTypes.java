@@ -274,6 +274,7 @@ public class MapPoiTypes {
 					if (name.equals("poi_category")) {
 						lastCategory = new PoiCategory(this, parser.getAttributeValue("", "name"), categories.size());
 						lastCategory.setTopVisible(Boolean.parseBoolean(parser.getAttributeValue("", "top")));
+						lastCategory.setNotEditableOsm("true".equals(parser.getAttributeValue("", "no_edit")));
 						categories.add(lastCategory);
 					} else if (name.equals("poi_filter")) {
 						PoiFilter tp = new PoiFilter(this, lastCategory, parser.getAttributeValue("", "name"));

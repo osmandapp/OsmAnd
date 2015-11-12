@@ -110,14 +110,13 @@ public class AdvancedEditPoiFragment extends Fragment
 					nameTextView.setText(value);
 				}
 				if (Algorithms.objectEquals(anyTag, EditPoiData.POI_TYPE_TAG)) {
-					String subType = value == null ? "" : value.trim().toLowerCase();
-					if (allTranslatedSubTypes.get(subType) != null) {
-						PoiType pt = allTranslatedSubTypes.get(subType);
+					PoiType pt = getData().getPoiTypeDefined();
+					if (pt != null) {
 						amenityTagTextView.setText(pt.getOsmTag());
 						amenityTextView.setText(pt.getOsmValue());
 					} else {
-						amenityTagTextView.setText(getData().amenity.getType().getDefaultTag());
-						amenityTextView.setText(subType);
+						amenityTagTextView.setText(getData().getPoiCategory().getDefaultTag());
+						amenityTextView.setText(getData().getPoiTypeString());
 					}
 				}
 			}
