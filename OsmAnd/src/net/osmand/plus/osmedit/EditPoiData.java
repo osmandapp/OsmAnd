@@ -4,8 +4,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.Node;
-import net.osmand.osm.edit.OSMSettings;
-import net.osmand.osm.edit.OSMSettings.OSMTagKey;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;

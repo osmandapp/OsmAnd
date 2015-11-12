@@ -1,7 +1,19 @@
 
 package net.osmand.plus;
 
-import gnu.trove.list.array.TIntArrayList;
+import android.content.Context;
+import android.graphics.Color;
+
+import net.osmand.Location;
+import net.osmand.PlatformUtil;
+import net.osmand.data.LocationPoint;
+import net.osmand.data.PointDescription;
+import net.osmand.util.Algorithms;
+
+import org.apache.commons.logging.Log;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlSerializer;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -29,20 +41,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Stack;
 import java.util.TimeZone;
-
-import net.osmand.Location;
-import net.osmand.PlatformUtil;
-import net.osmand.data.LocationPoint;
-import net.osmand.data.PointDescription;
-import net.osmand.util.Algorithms;
-
-import org.apache.commons.logging.Log;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlSerializer;
-
-import android.content.Context;
-import android.graphics.Color;
 
 public class GPXUtilities {
 	public final static Log log = PlatformUtil.getLog(GPXUtilities.class);
