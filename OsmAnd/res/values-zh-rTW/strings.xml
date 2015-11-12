@@ -1974,4 +1974,5 @@
     <string name="lang_mk">馬其頓</string>
     <string name="lang_fy">菲士蘭</string>
     <string name="lang_als">阿爾巴尼亞 (Tosk)</string>
+    <string name="share_osm_edits_subject">透過 OsmAnd 共用編輯 Osm</string>
     </resources>
