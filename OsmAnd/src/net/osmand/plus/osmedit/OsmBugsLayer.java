@@ -98,8 +98,8 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		paintIcon = new Paint();
 		resolvedNote = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_osm_resolved);
 		unresolvedNote = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_osm_unresolved);
-		resolvedNoteSmall = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_white_shield_small);
-		unresolvedNoteSmall = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_white_shield_small);
+		resolvedNoteSmall = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_osm_resolved_small);
+		unresolvedNoteSmall = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_osm_unresolved_small);
 
 		data = new OsmandMapLayer.MapLayerData<List<OpenStreetNote>>() {
 
