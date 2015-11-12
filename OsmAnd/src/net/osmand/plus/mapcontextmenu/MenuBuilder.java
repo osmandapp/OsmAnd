@@ -70,6 +70,8 @@ public class MenuBuilder {
 		if (needBuildPlainMenuItems()) {
 			buildPlainMenuItems(view);
 		}
+		buildInternal(view);
+		buildAfter(view);
 	}
 
 	protected void buildPlainMenuItems(View view) {
@@ -80,6 +82,13 @@ public class MenuBuilder {
 
 	protected boolean needBuildPlainMenuItems() {
 		return true;
+	}
+
+	protected void buildInternal(View view) {
+	}
+
+	protected void buildAfter(View view) {
+		buildRowDivider(view, false);
 	}
 
 	protected boolean isFirstRow() {
@@ -95,6 +104,11 @@ public class MenuBuilder {
 	}
 
 	protected View buildRow(final View view, Drawable icon, String text, int textColor, boolean needLinks, int textLinesLimit) {
+
+		if (!isFirstRow()) {
+			buildRowDivider(view, false);
+		}
+
 		LinearLayout ll = new LinearLayout(view.getContext());
 		ll.setOrientation(LinearLayout.HORIZONTAL);
 		LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -149,15 +163,6 @@ public class MenuBuilder {
 
 		((LinearLayout) view).addView(ll);
 
-		View horizontalLine = new View(view.getContext());
-		LinearLayout.LayoutParams llHorLineParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dpToPx(1f));
-		llHorLineParams.gravity = Gravity.BOTTOM;
-		horizontalLine.setLayoutParams(llHorLineParams);
-
-		horizontalLine.setBackgroundColor(app.getResources().getColor(light ? R.color.ctx_menu_info_divider_light : R.color.ctx_menu_info_divider_dark));
-
-		((LinearLayout) view).addView(horizontalLine);
-
 		rowBuilt();
 
 		return ll;
@@ -168,6 +173,7 @@ public class MenuBuilder {
 		ll.setOrientation(LinearLayout.HORIZONTAL);
 		LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		ll.setLayoutParams(llParams);
+		ll.setBackgroundResource(resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
 
 		// Empty
 		LinearLayout llIcon = new LinearLayout(view.getContext());
@@ -183,7 +189,6 @@ public class MenuBuilder {
 		ll.addView(llButton);
 
 		Button buttonView = new Button(view.getContext());
-		buttonView.setBackgroundResource(resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
 		LinearLayout.LayoutParams llBtnParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		buttonView.setLayoutParams(llBtnParams);
 		buttonView.setPadding(dpToPx(10f), 0, dpToPx(10f), 0);
@@ -196,13 +201,25 @@ public class MenuBuilder {
 			buttonView.setCompoundDrawablesWithIntrinsicBounds(buttonIcon, null, null, null);
 			buttonView.setCompoundDrawablePadding(dpToPx(8f));
 		}
-
-		buttonView.setOnClickListener(onClickListener);
 		llButton.addView(buttonView);
 
 		((LinearLayout) view).addView(ll);
 
+		ll.setOnClickListener(onClickListener);
+
 		rowBuilt();
+	}
+
+	protected void buildRowDivider(View view, boolean matchWidth) {
+		View horizontalLine = new View(view.getContext());
+		LinearLayout.LayoutParams llHorLineParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dpToPx(1f));
+		llHorLineParams.gravity = Gravity.BOTTOM;
+		if (!matchWidth) {
+			llHorLineParams.setMargins(dpToPx(72f), 0, 0, 0);
+		}
+		horizontalLine.setLayoutParams(llHorLineParams);
+		horizontalLine.setBackgroundColor(app.getResources().getColor(light ? R.color.ctx_menu_info_divider_light : R.color.ctx_menu_info_divider_dark));
+		((LinearLayout) view).addView(horizontalLine);
 	}
 
 	public void addPlainMenuItem(int iconId, String text, boolean needLinks) {

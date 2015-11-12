@@ -337,4 +337,8 @@ public abstract class PointEditorFragment extends Fragment {
 		);
 	}
 
+	protected Drawable getPaintedIcon(int iconId, int color) {
+		IconsCache iconsCache = getMapActivity().getMyApplication().getIconsCache();
+		return iconsCache.getPaintedContentIcon(iconId, color);
+	}
 }

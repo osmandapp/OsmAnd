@@ -41,6 +41,10 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	protected void buildRow(final View view, Drawable icon, final String text, final String textPrefix, int textColor, boolean isWiki, boolean isText, boolean needLinks) {
 		boolean light = app.getSettings().isLightContent();
 
+		if (!isFirstRow()) {
+			buildRowDivider(view, false);
+		}
+
 		LinearLayout ll = new LinearLayout(view.getContext());
 		ll.setOrientation(LinearLayout.HORIZONTAL);
 		LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -103,15 +107,6 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 		((LinearLayout) view).addView(ll);
 
-		View horizontalLine = new View(view.getContext());
-		LinearLayout.LayoutParams llHorLineParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dpToPx(1f));
-		llHorLineParams.gravity = Gravity.BOTTOM;
-		horizontalLine.setLayoutParams(llHorLineParams);
-
-		horizontalLine.setBackgroundColor(app.getResources().getColor(light ? R.color.ctx_menu_info_divider_light : R.color.ctx_menu_info_divider_dark));
-
-		((LinearLayout) view).addView(horizontalLine);
-
 		if (isWiki) {
 			ll.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -132,9 +127,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	}
 
 	@Override
-	public void build(View view) {
-		super.build(view);
-
+	public void buildInternal(View view) {
 		boolean hasWiki = false;
 		MapPoiTypes poiTypes = app.getPoiTypes();
 		for (Map.Entry<String, String> e : amenity.getAdditionalInfo().entrySet()) {
