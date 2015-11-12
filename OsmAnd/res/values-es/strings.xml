@@ -126,7 +126,7 @@
     <string name="show_more_map_detail">Mostrar más detalle en el mapa</string>
     <string name="show_more_map_detail_descr">Muestra detalles del mapa vectorial (carreteras, etc.) a niveles inferiores de acercamiento</string>
     <string name="favourites_delete_multiple_succesful">Punto(s) favorito(s) correctamente borrado(s).</string>
-    <string name="favorite_delete_multiple">Va a borrar %1$d favorito(s) y %2$d grupo(s) de favoritos. ¿Está seguro?</string>
+    <string name="favorite_delete_multiple">Borrará %1$d favorito(s) y %2$d grupo(s) de favoritos. ¿Está seguro?</string>
     <string name="favorite_home_category">Inicio</string>
     <string name="favorite_friends_category">Amigos</string>
     <string name="favorite_places_category">Lugares</string>
@@ -533,7 +533,7 @@
     <string name="map_tile_source">Fuente de teselas del mapa</string>
     <string name="map_source">Fuente de mapa</string>
     <string name="use_internet">Utilizar Internet</string>
-    <string name="show_location">Mostrar tu posición</string>
+    <string name="show_location">Mostrar su posición</string>
     <string name="show_gps_coordinates_text">Mostrar coordenadas GPS en el mapa</string>
     <string name="use_internet_to_download_tile">Utilizar Internet para descargar las teselas que falten</string>
     <string name="app_description">Aplicación de navegación</string>
@@ -743,7 +743,7 @@
     <string name="gpxup_private">Privado</string>
     <string name="osmand_parking_event">Recoger el automóvil del aparcamiento</string>
     <string name="osmand_parking_warning">Advertencia</string>
-    <string name="osmand_parking_warning_text">La notificación para recoger tu automóvil fue previamente añadida a su calendario. Permanecerá allí hasta que la borre manualmente.</string>
+    <string name="osmand_parking_warning_text">La notificación para recoger su automóvil, fue previamente añadida a su calendario. Permanecerá allí hasta que la borre manualmente.</string>
     <string name="osmand_parking_time_limit_title">Establecer el límite de tiempo del aparacamiento</string>
     <string name="osmand_parking_delete_confirm">¿Quiere eliminar la ubicación del automóvil aparcado?</string>
     <string name="osmand_parking_delete">Eliminar un marcador de aparcamiento</string>
@@ -845,7 +845,7 @@
     <string name="target_point">Punto de ruta %1$s</string>
     <string name="target_points">Puntos de ruta</string>
     <string name="intermediate_point_too_far">Punto de ruta %1$s demasiado lejos de la carretera más cercana.</string>
-    <string name="arrived_at_intermediate_point">Has llegado a tu punto de ruta</string>
+    <string name="arrived_at_intermediate_point">Llegó a su punto de ruta</string>
     <string name="context_menu_item_intermediate_point">Añadir como punto de ruta</string>
     <string name="map_widget_intermediate_distance">Punto de ruta</string>
     <string name="ending_point_too_far">Punto final demasiado lejos de la carretera más cercana.</string>
@@ -1202,7 +1202,7 @@
     <string name="app_mode_motorcycle">Moto</string>
     <string name="app_mode_boat">Barco</string>
     <string name="app_mode_aircraft">Avión</string>
-    <string name="local_osm_changes_delete_all_confirm">Va a borrar %1$d cambios OSM. ¿Está seguro?</string>
+    <string name="local_osm_changes_delete_all_confirm">Borrará %1$d cambio(s) de OSM. ¿Está seguro?</string>
     <string name="shared_string_delete_all">Borrar todo</string>
     <string name="amenity_type_seamark">Náutica</string>
     <string name="app_modes_choose">Perfiles de aplicación</string>
@@ -1621,8 +1621,8 @@
     <string name="enable_proxy_descr">Configura Proxy HTTP para todas las peticiones de red</string>
     <string name="proxy_host_title">Servidor proxy</string>
     <string name="proxy_port_title">Puerto del proxy</string>
-    <string name="proxy_port_descr">Configura el número de puerto de tu proxy (p.e. 8118)</string>
-    <string name="proxy_host_descr">Configura el nombre de tu proxy (p.e. 127.0.0.1)</string>
+    <string name="proxy_port_descr">Configure el número de puerto de su proxy (p.e. 8118)</string>
+    <string name="proxy_host_descr">Configure el nombre de su proxy (p.e. 127.0.0.1)</string>
     <string name="version_settings_descr">Descarga versiones nocturnas</string>
     <string name="version_settings">Compilaciones</string>
     <string name="gps_status">GPS status</string>
@@ -1683,7 +1683,7 @@
     <string name="your_edits">Tus ediciones</string>
     <string name="waypoint_visit_after">Visitar después</string>
     <string name="waypoint_visit_before">Visitar antes</string>
-    <string name="simulate_your_location">Simular tu ubicación</string>
+    <string name="simulate_your_location">Simule su ubicación</string>
     <string name="drawer">Lista plana</string>
     <string name="short_location_on_map">Lat %1$s\nLon %2$s</string>
     <string name="tips_and_tricks_descr">Preguntas frecuentes, cambios recientes y otros</string>
@@ -1703,7 +1703,7 @@
     <string name="delay_to_start_navigation">Iniciar navegación giro-a-giro después de…</string>
     <string name="shared_string_go">Ir</string>
     <string name="delay_to_start_navigation_descr">Especifica el tiempo de espera para permanecer en la pantalla de planificación de ruta</string>
-    <string name="local_osm_changes_upload_all_confirm">Va a subir %1$d cambios a OSM. ¿Está seguro?</string>
+    <string name="local_osm_changes_upload_all_confirm">Subirá %1$d cambio(s) a OSM. ¿Está seguro?</string>
     <string name="confirmation_to_clear_history">¿Quiere limpiar el historial?</string>
     <string name="osmo_grop_name_length_alert">¡El nombre del grupo debe tener al menos una longitud de 3 caracteres!</string>
     <string name="osm_changes_added_to_local_edits">Cambios OSM añadidos al conjunto de cambios locales</string>
@@ -1759,7 +1759,7 @@
     <string name="shared_string_wikipedia">Wikipedia</string>
     <string name="local_indexes_cat_wiki">Wikipedia</string>
     <string name="shared_string_show_details">Mostrar detalles</string>
-    <string name="local_recordings_delete_all_confirm">Va a borrar %1$d notas. ¿Está seguro?</string>
+    <string name="local_recordings_delete_all_confirm">Borrará %1$d nota(s). ¿Está seguro?</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="gps_network_not_enabled">El servicio de ubicación no está activado. ¿Quiere activarlo?</string>
     <string name="disable_recording_once_app_killed">Evita el registro autónomo</string>
@@ -1925,11 +1925,11 @@
     <string name="application_dir_description">Elige donde guardar los archivos de los mapas.</string>
     <string name="show_on_start_description">\'No\', inicia directamente en la pantalla del mapa</string>
     <string name="map_downloaded">Mapa descargado</string>
-    <string name="map_downloaded_descr">Se descargó el mapa de %1$ s. Vuelve al mapa para empezar a usarlo.</string>
+    <string name="map_downloaded_descr">Se descargó el mapa de %1$s. Vuelve al mapa para empezar a usarlo.</string>
     <string name="go_to_map">Ir al mapa</string>
     <string name="shared_string_qr_code">Código QR</string>
     <string name="enter_country_name">Ingrese nombre del país</string>
-    <string name="world_map_download_descr">El mapa base mundial (abarca todo el mundo en acercamientos pequeños), falta o está desactualizado. Considere descargarlo para un entorno completo.</string>
+    <string name="world_map_download_descr">Falta o está desactualizado, el mapa base mundial (abarca todo el mundo en acercamientos pequeños). Considere descargarlo para un entorno completo.</string>
     <string name="new_version">Nueva versión</string>
     <string name="begin_with_osmand_menu_group">Primeros pasos con OsmAnd</string>
     <string name="features_menu_group">Características</string>
