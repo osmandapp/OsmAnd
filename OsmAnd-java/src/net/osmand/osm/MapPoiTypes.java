@@ -150,7 +150,10 @@ public class MapPoiTypes {
 				if(pt.isReference() ) {
 					continue;
 				}
-				if(skipNonEditable || pt.isNotEditableOsm()) {
+				if(pt.getBaseLangType() != null) {
+					continue;
+				}
+				if(skipNonEditable && pt.isNotEditableOsm()) {
 					continue;
 				}
 				translation.put(pt.getKeyName().replace('_', ' ').toLowerCase(), pt);
