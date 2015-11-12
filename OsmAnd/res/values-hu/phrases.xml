@@ -948,4 +948,76 @@
 	<string name="poi_wiki_lang_vo">Volapük wiki</string>
 	<string name="poi_wiki_lang_zh">Kínai wiki</string>
 
+	<string name="poi_icn_ref">Nemzetközi kerékpáros hálózati csomópont</string>
+	<string name="poi_ncn_ref">Országos kerékpáros hálózati csomópont</string>
+	<string name="poi_rcn_ref">Regionális kerékpáros hálózati csomópont</string>
+	<string name="poi_lcn_ref">Helyi kerékpáros hálózati csomópont</string>
+	<string name="poi_iwn_ref">Nemzetközi turistaút-hálózati csomópont</string>
+	<string name="poi_nwn_ref">Országos turistaút-hálózati csomópont</string>
+	<string name="poi_rwn_ref">Regionális turistaút-hálózati csomópont</string>
+	<string name="poi_lwn_ref">Helyi turistaút-hálózati csomópont</string>
+
+	<string name="poi_route_hiking_iwn_poi">Nemzetközi turistaút</string>
+	<string name="poi_route_hiking_nwn_poi">Országos turistaút</string>
+	<string name="poi_route_hiking_rwn_poi">Regionális turistaút</string>
+	<string name="poi_route_hiking_lwn_poi">Helyi turistaút</string>
+	<string name="poi_route_hiking_ref_poi">Turistaút azonosító</string>
+
+	<string name="poi_opening_hours">Nyitvatartás</string>
+	<string name="poi_collection_times">Ürítési idő</string>
+	<string name="poi_description">Leírás</string>
+	<string name="poi_phone">Telefon</string>
+	<string name="poi_website">Weboldal</string>
+	<string name="poi_email">Email</string>
+	<string name="poi_fax">Fax</string>
+	<string name="poi_facebook">Facebook</string>
+	<string name="poi_twitter">Twitter</string>
+	<string name="poi_skype">Skype</string>
+	<string name="poi_youtube">YouTube</string>
+	<string name="poi_instagram">Instagram</string>
+	<string name="poi_vk">VKontakte</string>
+	<string name="poi_google_plus">Google+</string>
+	<string name="poi_mobile">Mobiltelefon</string>
+	<string name="poi_service_times">Szolgáltatási idő</string>
+	<string name="poi_maxheight">Maximális magasság</string>
+	<string name="poi_maxweight">Maximális súly</string>
+	<string name="poi_height">Magasság</string>
+	<string name="poi_ele">Tengerszint feletti magasság</string>
+	<string name="poi_abandoned">Elhagyott</string>
+	<string name="poi_abandoned_poi">Elhagyott objektum</string>
+	<string name="poi_disused">Használaton kívüli</string>
+
+	<string name="poi_operator">Üzemeltető</string>
+	<string name="poi_brand">Márka</string>
+	<string name="poi_fee_yes">Fizetős</string>
+	<string name="poi_fee_no">Ingyenes</string>
+	<string name="poi_drinking_water_yes">Ivóvíz</string>
+	<string name="poi_drinking_water_no">Nem ivóvíz</string>
+	<string name="poi_supervised_yes">Felügyelt</string>
+	<string name="poi_supervised_no">Felügyelet nélküli</string>
+	<string name="poi_seasonal_yes">Időszakos</string>
+	<string name="poi_seasonal_no">Állandó</string>
+	<string name="poi_seasonal_dry_season">Száraz évszak</string>
+	<string name="poi_seasonal_wet_season">Nedves évszak</string>
+	<string name="poi_seasonal_spring">forrás</string>
+	<string name="poi_seasonal_summer">nyár</string>
+	<string name="poi_seasonal_autumn">eső</string>
+	<string name="poi_seasonal_winter">tél</string>
+	<string name="poi_crossing_traffic_signals">Jelzőlámpás</string>
+	<string name="poi_crossing_uncontrolled">Szabályozatlan</string>
+	<string name="poi_crossing_unmarked">Jelzetlen</string>
+	<string name="poi_start_date">Kezdő dátum</string>
+	<string name="poi_wheelchair">Kerekesszék</string>
+	<string name="poi_wheelchair_no">Kerekesszék: nem lehetséges</string>
+	<string name="poi_wheelchair_limited">Kerekesszék: korlátozott</string>
+	<string name="poi_wholesale">Nagykereskedés</string>
+
+	<string name="poi_access_private">Privát bemenet</string>
+	<string name="poi_access_no">Bemenni tilos</string>
+	<string name="poi_access_destination">Célforgalom</string>
+	<string name="poi_access_permissive">Engedélyköteles bemenet</string>
+	<string name="poi_access_customers">Vásárlók mehetnek be</string>
+	<string name="poi_access_delivery">Áruszállításra használható</string>
+	<string name="poi_access_agricultural">Mezőgazdasági bemenet</string>
+
 	</resources>
