@@ -250,7 +250,7 @@ public class EditPoiDialogFragment extends DialogFragment {
 			@Override
 			public void afterTextChanged(Editable s) {
 				if (!getEditPoiData().isInEdit()) {
-					getEditPoiData().putTag(EditPoiData.POI_TYPE_TAG, s.toString());
+					getEditPoiData().updateTypeTag(s.toString());
 				}
 			}
 		});
@@ -314,7 +314,7 @@ public class EditPoiDialogFragment extends DialogFragment {
 					if (poiType.getOsmTag2() != null) {
 						node.putTag(poiType.getOsmTag2(), poiType.getOsmValue2());
 					}
-				} else {
+				} else if (!Algorithms.isEmpty(tag.getValue())) {
 					node.putTag(editPoiData.getPoiCategory().getDefaultTag(), tag.getValue());
 
 				}

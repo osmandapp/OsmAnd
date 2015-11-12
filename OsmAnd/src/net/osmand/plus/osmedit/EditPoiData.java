@@ -26,14 +26,13 @@ public class EditPoiData {
 	private boolean hasChangesBeenMade = false;
 	private Map<String, PoiType> allTranslatedSubTypes;
 	private PoiCategory category;
-	private String subtype;
 	
 	public EditPoiData(Node node, OsmandApplication app) {
 		allTranslatedSubTypes = app.getPoiTypes().getAllTranslatedNames(true);
 		category = app.getPoiTypes().getOtherPoiCategory();
-		subtype = "";
 		entity = node;
 		initTags(node);
+		updateTypeTag(getPoiTypeString());
 	}
 	
 	public Map<String, PoiType> getAllTranslatedSubTypes() {
@@ -43,7 +42,7 @@ public class EditPoiData {
 	public void updateType(PoiCategory type) {
 		if(type != null && type != category) {
 			category = type;
-			subtype = "";
+			tagValues.put(POI_TYPE_TAG, "");
 		}
 	}
 	
@@ -57,7 +56,8 @@ public class EditPoiData {
 	}
 	
 	public String getPoiTypeString() {
-		return subtype;
+		String s = tagValues.get(POI_TYPE_TAG) ;
+		return s == null ? "" : s;
 	}
 
 	public Node getEntity() {
@@ -94,7 +94,6 @@ public class EditPoiData {
 		if(tp != null) {
 			PoiType pt = allTranslatedSubTypes.get(tp);
 			if (pt != null) {
-				subtype = tp;
 				category = pt.getCategory();
 			}
 		}
@@ -179,6 +178,16 @@ public class EditPoiData {
 
 	public boolean hasChangesBeenMade() {
 		return hasChangesBeenMade;
+	}
+
+	public void updateTypeTag(String string) {
+		tagValues.put(POI_TYPE_TAG, string);
+		retrieveType();
+		PoiType pt = getPoiTypeDefined();
+		if(pt != null) {
+			tagValues.remove(pt.getOsmTag());
+			tagValues.remove(pt.getOsmTag2());
+		}
 	}
 
 	
