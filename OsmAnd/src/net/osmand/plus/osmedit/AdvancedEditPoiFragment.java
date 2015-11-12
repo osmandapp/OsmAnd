@@ -1,24 +1,5 @@
 package net.osmand.plus.osmedit;
 
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import net.osmand.PlatformUtil;
-import net.osmand.StringMatcher;
-import net.osmand.osm.AbstractPoiType;
-import net.osmand.osm.MapPoiTypes;
-import net.osmand.osm.PoiCategory;
-import net.osmand.osm.PoiFilter;
-import net.osmand.osm.PoiType;
-import net.osmand.osm.edit.OSMSettings;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.util.Algorithms;
-
-import org.apache.commons.logging.Log;
-
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.graphics.Point;
@@ -40,6 +21,25 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import net.osmand.PlatformUtil;
+import net.osmand.StringMatcher;
+import net.osmand.osm.AbstractPoiType;
+import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiCategory;
+import net.osmand.osm.PoiFilter;
+import net.osmand.osm.PoiType;
+import net.osmand.osm.edit.OSMSettings;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.util.Algorithms;
+
+import org.apache.commons.logging.Log;
+
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 public class AdvancedEditPoiFragment extends Fragment
 		implements EditPoiDialogFragment.OnFragmentActivatedListener {
@@ -217,25 +217,7 @@ public class AdvancedEditPoiFragment extends Fragment
 					}
 				}
 			});
-
-			tagEditText.setAdapter(tagAdapter);
-			tagEditText.setThreshold(1);
-			tagEditText.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-					builder.setAdapter(tagAdapter, new Dialog.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							tagAdapter.getItem(which);
-						}
-
-					});
-					builder.create();
-					builder.show();
-				}
-			});
-
+			initAutocompleteTextView(tagEditText, tagAdapter);
 
 			valueEditText.setText(vl);
 			valueEditText.addTextChangedListener(new TextWatcher() {
@@ -255,23 +237,7 @@ public class AdvancedEditPoiFragment extends Fragment
 				}
 			});
 
-			valueEditText.setAdapter(valueAdapter);
-			valueEditText.setThreshold(1);
-			valueEditText.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-					builder.setAdapter(valueAdapter, new Dialog.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							valueAdapter.getItem(which);
-						}
-
-					});
-					builder.create();
-					builder.show();
-				}
-			});
+			initAutocompleteTextView(valueEditText, valueAdapter);
 
 			linearLayout.addView(convertView);
 			tagEditText.requestFocus();
@@ -290,6 +256,34 @@ public class AdvancedEditPoiFragment extends Fragment
 			valueAdapter.sort(String.CASE_INSENSITIVE_ORDER);
 			valueAdapter.notifyDataSetChanged();
 		}
+	}
+
+	private static void initAutocompleteTextView(final AutoCompleteTextView textView,
+												 final ArrayAdapter<String> adapter) {
+		textView.setAdapter(adapter);
+		textView.setThreshold(1);
+		textView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+				builder.setAdapter(adapter, new Dialog.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						textView.setText(adapter.getItem(which));
+					}
+
+				});
+				builder.create().show();
+			}
+		});
+		textView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				if (hasFocus) {
+					adapter.getFilter().filter(textView.getText());
+				}
+			}
+		});
 	}
 
 	private static void addPoiToStringSet(AbstractPoiType abstractPoiType, Set<String> stringSet,
