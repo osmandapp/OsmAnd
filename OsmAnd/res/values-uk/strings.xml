@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
   <string name="asap">Швидко</string>
   
   <string name="route_roundabout">Круговий рух : %1$d з’їзд</string>
@@ -2024,4 +2025,5 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="rendering_value_default13_name">Типово (13)</string>
 	<string name="rendering_value_defaultTranslucentCyan_name">Типово (напівпрозорий балкитний)</string>
     <string name="rendering_value_translucent_orange_name">Напівпрозорий помаранчевий</string>
+    <string name="shared_string_update">Оновити</string>
     </resources>
