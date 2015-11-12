@@ -3,6 +3,8 @@ package net.osmand.plus.osmedit;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
@@ -20,6 +22,7 @@ import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
+import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
@@ -27,7 +30,6 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.DialogProvider;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.osmedit.OsmPoint.Action;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -51,11 +53,13 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	private final OsmEditingPlugin plugin;
 
 	private OsmandMapTileView view;
-	
-	private Paint pointClosedUI;
-	private Paint pointOpenedUI;
-	private Paint pointNotSubmitedUI;
-	
+
+	private Paint paintIcon;
+	private Bitmap unresolvedNote;
+	private Bitmap resolvedNote;
+	private Bitmap unresolvedNoteSmall;
+	private Bitmap resolvedNoteSmall;
+
 	private final MapActivity activity;
 
 	private static final String KEY_AUTHOR = "author";
@@ -90,16 +94,13 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
-		pointOpenedUI = new Paint();
-		pointOpenedUI.setColor(activity.getResources().getColor(R.color.osmbug_opened));
-		pointOpenedUI.setAntiAlias(true);
-		pointNotSubmitedUI = new Paint();
-		pointNotSubmitedUI.setColor(activity.getResources().getColor(R.color.osmbug_not_submitted));
-		pointNotSubmitedUI.setAntiAlias(true);
-		pointClosedUI = new Paint();
-		pointClosedUI.setColor(activity.getResources().getColor(R.color.osmbug_closed));
-		pointClosedUI.setAntiAlias(true);
-		
+
+		paintIcon = new Paint();
+		resolvedNote = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_osm_resolved);
+		unresolvedNote = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_osm_unresolved);
+		resolvedNoteSmall = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_white_shield_small);
+		unresolvedNoteSmall = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_white_shield_small);
+
 		data = new OsmandMapLayer.MapLayerData<List<OpenStreetNote>>() {
 
 			{
@@ -120,7 +121,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 
 	@Override
 	public boolean drawInScreenPixels() {
-		return false;
+		return true;
 	}
 
 	@Override
@@ -129,12 +130,37 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 			// request to load
 			data.queryNewData(tileBox);
 			List<OpenStreetNote> objects = data.getResults();
+
 			if (objects != null) {
+				float iconSize = resolvedNote.getWidth() * 3 / 2.5f;
+				QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
+				List<OpenStreetNote> fullObjects = new ArrayList<>();
 				for (OpenStreetNote o : objects) {
-					int x = tileBox.getPixXFromLonNoRot(o.getLongitude());
-					int y = tileBox.getPixYFromLatNoRot(o.getLatitude());
-					canvas.drawCircle(x, y, getRadiusBug(tileBox), o.isLocal() ? pointNotSubmitedUI
-							: (o.isOpened() ? pointOpenedUI : pointClosedUI));
+					float x = tileBox.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
+					float y = tileBox.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
+
+					if (intersects(boundIntersections, x, y, iconSize, iconSize)) {
+						Bitmap b;
+						if (o.isOpened()) {
+							b = unresolvedNoteSmall;
+						} else {
+							b = resolvedNoteSmall;
+						}
+						canvas.drawBitmap(b, x - b.getWidth() / 2, y - b.getHeight() / 2, paintIcon);
+					} else {
+						fullObjects.add(o);
+					}
+				}
+				for (OpenStreetNote o : fullObjects) {
+					float x = tileBox.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
+					float y = tileBox.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
+					Bitmap b;
+					if (o.isOpened()) {
+						b = unresolvedNote;
+					} else {
+						b = resolvedNote;
+					}
+					canvas.drawBitmap(b, x - b.getWidth() / 2, y - b.getHeight() / 2, paintIcon);
 				}
 			}
 		}
@@ -286,20 +312,6 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		} catch (XmlPullParserException e) {
 			log.warn("Error loading bugs", e); //$NON-NLS-1$
 		} 
-		for(OsmNotesPoint p : local.getOsmbugsPoints() ) {
-			if(p.getId() < 0 ) {
-				OpenStreetNote bug = new OpenStreetNote();
-				bug.setId(p.getId());
-				bug.setLongitude(p.getLongitude());
-				bug.setLatitude(p.getLatitude());
-				bug.dates.add("");
-				bug.users.add(activity.getMyApplication().getSettings().USER_NAME.get());
-				bug.comments.add(p.getText()); 
-				bug.setOpened(p.getAction() == Action.CREATE || p.getAction() == Action.MODIFY);
-				bug.setLocal(true);
-				bugs.add(bug);
-			}
-		}
 		return bugs;
 	}
 	
@@ -311,12 +323,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		dialogBundle.putString(KEY_AUTHOR, settings.USER_NAME.get());
 		createOpenBugDialog(dialogBundle).show();
 	}
-	
-	private void prepareOpenBugDialog(Dialog dlg, Bundle args) {
-		((EditText)dlg.findViewById(R.id.messageEditText)).setText(args.getString(KEY_MESSAGE));
-		((EditText)dlg.findViewById(R.id.userNameEditText)).setText(args.getString(KEY_AUTHOR));
-	}
-	
+
 	private Dialog createOpenBugDialog(final Bundle args) {
 		final View openBug = activity.getLayoutInflater().inflate(R.layout.open_bug, null);
 		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
@@ -365,7 +372,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 							Toast.LENGTH_LONG).show();
 					openBugAlertDialog(latitude, longitude, text);
 				}
-			};
+			}
 		};
 		executeTaskInBackground(task);
 	}
@@ -389,7 +396,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 				} else {
 					AccessibleToast.makeText(activity, activity.getResources().getString(R.string.osb_comment_dialog_error) + "\n" + warn, Toast.LENGTH_LONG).show();
 				}
-			};
+			}
 		};
 		executeTaskInBackground(task);
 	}
@@ -495,7 +502,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 					AccessibleToast.makeText(activity, activity.getString(R.string.osb_close_dialog_error) + "\n" + closed,
 							Toast.LENGTH_LONG).show();
 				}
-			};
+			}
 		};
 		executeTaskInBackground(task);
 	}
@@ -577,17 +584,16 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		private boolean opened;
 
 		private void acquireDescriptionAndType() {
-			for (int i = 0; i < comments.size(); i++) {
+			if (comments.size() > 0) {
 				StringBuilder sb = new StringBuilder();
-				if (i < dates.size()) {
-					sb.append(dates.get(i)).append(" ");
+				if (dates.size() > 0) {
+					sb.append(dates.get(0)).append(" ");
 				}
-				if (i < users.size()) {
-					sb.append(users.get(i));
+				if (users.size() > 0) {
+					sb.append(users.get(0));
 				}
-				description = comments.get(i);
+				description = comments.get(0);
 				typeName = sb.toString();
-				break;
 			}
 			if (description != null) {
 				if (comments.size() > 0) {
