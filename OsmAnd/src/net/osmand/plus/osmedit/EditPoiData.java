@@ -5,6 +5,7 @@ import net.osmand.data.Amenity;
 import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.OSMSettings;
+import net.osmand.osm.edit.OSMSettings.OSMTagKey;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -20,20 +21,31 @@ public class EditPoiData {
 	private Set<TagsChangedListener> mListeners = new HashSet<>();
 	private LinkedHashMap<String, String > tagValues = new LinkedHashMap<String, String>();
 	private boolean isInEdit = false;
+	private Node entity;
 	public final Amenity amenity;
 	public static final String POI_TYPE_TAG = "poi_type_tag";
 	private boolean hasChangesBeenMade = false;
 
 	public EditPoiData(Amenity amenity, Node node, Map<String, PoiType> allTranslatedSubTypes) {
 		this.amenity = amenity;
+		entity = node;
 		initTags(node, allTranslatedSubTypes);
 	}
+	
 
+	public Node getEntity() {
+		return entity;
+	}
+	
+	public String getTag(String key) {
+		return tagValues.get(key);
+	}
 	
 	public void updateTags(Map<String, String> mp) {
 		this.tagValues.clear();
 		this.tagValues.putAll(mp);
 	}
+	
 	private void tryAddTag(String key, String value) {
 		if (!Algorithms.isEmpty(value)) {
 			tagValues.put(key, value);
@@ -42,18 +54,6 @@ public class EditPoiData {
 	
 	private void initTags(Node node, Map<String, PoiType> allTranslatedSubTypes) {
 		checkNotInEdit();
-//		tryAddTag(OSMSettings.OSMTagKey.ADDR_STREET.getValue(),
-//				node.getTag(OSMSettings.OSMTagKey.ADDR_STREET));
-//		tryAddTag(OSMSettings.OSMTagKey.ADDR_HOUSE_NUMBER.getValue(),
-//				node.getTag(OSMSettings.OSMTagKey.ADDR_HOUSE_NUMBER));
-		// should not be used here should be done in  public Node loadNode(Amenity n) {
-//		tryAddTag(OSMSettings.OSMTagKey.PHONE.getValue(),
-//				amenity.getPhone());
-//		tryAddTag(OSMSettings.OSMTagKey.WEBSITE.getValue(),
-//				amenity.getSite());
-//		for (String tag : amenity.getAdditionalInfo().keySet()) {
-//			tryAddTag(tag, amenity.getAdditionalInfo(tag));
-//		}
 		for (String s : node.getTagKeySet()) {
 			tryAddTag(s, node.getTag(s));
 		}
@@ -146,4 +146,5 @@ public class EditPoiData {
 	public boolean hasChangesBeenMade() {
 		return hasChangesBeenMade;
 	}
+	
 }

@@ -82,7 +82,6 @@ public class EditPoiDialogFragment extends DialogFragment {
 	private EditPoiData editPoiData;
 	private ViewPager viewPager;
 	private AutoCompleteTextView poiTypeEditText;
-	private Node node;
 	private Map<String, PoiType> allTranslatedSubTypes;
 
 	private OpenstreetmapUtil mOpenstreetmapUtil;
@@ -99,7 +98,7 @@ public class EditPoiDialogFragment extends DialogFragment {
 			mOpenstreetmapUtil = new OpenstreetmapRemoteUtil(activity);
 		}
 
-		node = (Node) getArguments().getSerializable(KEY_AMENITY_NODE);
+		Node node = (Node) getArguments().getSerializable(KEY_AMENITY_NODE);
 		allTranslatedSubTypes = getMyApplication().getPoiTypes().getAllTranslatedNames(true);
 
 		Amenity amenity = (Amenity) getArguments().getSerializable(KEY_AMENITY);
@@ -229,7 +228,7 @@ public class EditPoiDialogFragment extends DialogFragment {
 				}
 			}
 		});
-		poiNameEditText.setText(node.getTag(OSMSettings.OSMTagKey.NAME));
+		poiNameEditText.setText(editPoiData.getTag(OSMSettings.OSMTagKey.NAME.getValue()));
 		poiTypeTextInputLayout = (TextInputLayout) view.findViewById(R.id.poiTypeTextInputLayout);
 		poiTypeEditText = (AutoCompleteTextView) view.findViewById(R.id.poiTypeEditText);
 		poiTypeEditText.addTextChangedListener(new TextWatcher() {
@@ -286,6 +285,8 @@ public class EditPoiDialogFragment extends DialogFragment {
 			poiTypeEditText.setError(getResources().getString(R.string.please_specify_poi_type));
 			return;
 		}
+		Node original = editPoiData.getEntity();
+		Node node = new Node(original.getLatitude(), original.getLongitude(), original.getId());
 		OsmPoint.Action action = node.getId() == -1 ? OsmPoint.Action.CREATE : OsmPoint.Action.MODIFY;
 		for (Map.Entry<String, String> tag : editPoiData.getTagValues().entrySet()) {
 			if (tag.getKey().equals(EditPoiData.POI_TYPE_TAG)) {
@@ -297,15 +298,10 @@ public class EditPoiDialogFragment extends DialogFragment {
 					}
 				} else {
 					node.putTag(editPoiData.amenity.getType().getDefaultTag(), tag.getValue());
+
 				}
-//					} else if (tag.tag.equals(OSMSettings.OSMTagKey.DESCRIPTION.getValue())) {
-//						description = tag.value;
-			} else {
-				if (tag.getKey().length() > 0) {
-					node.putTag(tag.getKey(), tag.getValue());
-				} else {
-					node.removeTag(tag.getKey());
-				}
+			} else if (!Algorithms.isEmpty(tag.getKey()) && !Algorithms.isEmpty(tag.getValue())) {
+				node.putTag(tag.getKey(), tag.getValue());
 			}
 		}
 		commitNode(action, node, mOpenstreetmapUtil.getEntityInfo(),
