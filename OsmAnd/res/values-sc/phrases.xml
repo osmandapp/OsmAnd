@@ -1586,4 +1586,8 @@
 	<string name="poi_monument_yes">Ogetu monumentale</string>
 
 	<string name="poi_note">Nota</string>
+	<string name="poi_wiki_lang_af">Wiki in africaans</string>
+	<string name="poi_wiki_lang_als">Wiki in alsazianu</string>
+	<string name="poi_wiki_lang_az">Wiki in azeri</string>
+	<string name="poi_wiki_lang_bn">Wiki in bengali</string>
 	</resources>
