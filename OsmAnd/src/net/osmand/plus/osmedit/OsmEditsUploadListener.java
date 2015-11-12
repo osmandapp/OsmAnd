@@ -7,6 +7,8 @@ import java.util.Map;
  * on 11.03.2015.
  */
 public interface OsmEditsUploadListener {
+	
 	void uploadUpdated(OsmPoint point);
+	
 	void uploadEnded(Map<OsmPoint, String> loadErrorsMap);
 }

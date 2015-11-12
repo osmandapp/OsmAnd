@@ -369,6 +369,7 @@ public class MapPoiTypes {
 		tp.setTopVisible(Boolean.parseBoolean(parser.getAttributeValue("", "top")));
 		tp.setText("text".equals(parser.getAttributeValue("", "type")));
 		tp.setOsmTag(otag);
+		tp.setNotEditableOsm("true".equals(parser.getAttributeValue("", "no_edit")));
 		tp.setOsmValue(parser.getAttributeValue("", "value"));
 		tp.setOsmTag2(parser.getAttributeValue("", "tag2"));
 		tp.setOsmValue2(parser.getAttributeValue("", "value2"));

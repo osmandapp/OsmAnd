@@ -600,7 +600,6 @@ public class EditPoiDialogFragment extends DialogFragment {
 				AccessibleToast.makeText(activity, activity.getResources().getString(R.string.poi_error_poi_not_found), Toast.LENGTH_LONG).show();
 				return;
 			}
-			// FIXME give back alert dialog and use openstreetmapUtil field!
 			AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 			builder.setTitle(R.string.poi_remove_title);
 			final EditText comment;
