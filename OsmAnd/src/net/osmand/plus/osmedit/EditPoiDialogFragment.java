@@ -93,7 +93,6 @@ public class EditPoiDialogFragment extends DialogFragment {
 	private EditPoiData editPoiData;
 	private ViewPager viewPager;
 	private AutoCompleteTextView poiTypeEditText;
-	private Map<String, PoiType> allTranslatedSubTypes;
 
 	private OpenstreetmapUtil mOpenstreetmapUtil;
 	private TextInputLayout poiTypeTextInputLayout;
@@ -309,7 +308,7 @@ public class EditPoiDialogFragment extends DialogFragment {
 		OsmPoint.Action action = node.getId() == -1 ? OsmPoint.Action.CREATE : OsmPoint.Action.MODIFY;
 		for (Map.Entry<String, String> tag : editPoiData.getTagValues().entrySet()) {
 			if (tag.getKey().equals(EditPoiData.POI_TYPE_TAG)) {
-				final PoiType poiType = allTranslatedSubTypes.get(tag.getValue().trim().toLowerCase());
+				final PoiType poiType = editPoiData.getAllTranslatedSubTypes().get(tag.getValue().trim().toLowerCase());
 				if (poiType != null) {
 					node.putTag(poiType.getOsmTag(), poiType.getOsmValue());
 					if (poiType.getOsmTag2() != null) {
@@ -457,7 +456,7 @@ public class EditPoiDialogFragment extends DialogFragment {
 
 	private void setAdapterForPoiTypeEditText() {
 		final Map<String, PoiType> subCategories = new LinkedHashMap<>();
-		for (Map.Entry<String, PoiType> s : allTranslatedSubTypes.entrySet()) {
+		for (Map.Entry<String, PoiType> s : editPoiData.getAllTranslatedSubTypes().entrySet()) {
 			if (!subCategories.containsKey(s.getKey())) {
 				subCategories.put(Algorithms.capitalizeFirstLetterAndLowercase(s.getKey()), s.getValue());
 			}
