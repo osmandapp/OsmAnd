@@ -216,7 +216,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 
 		for (String k : n.getTagKeySet()) {
 			String val = n.getTag(k);
-			if (val.length() == 0)
+			if (val.length() == 0 || k.length() == 0 || "poi_type_tag".equals(k))
 				continue;
 			ser.startTag(null, "tag"); //$NON-NLS-1$
 			ser.attribute(null, "k", k); //$NON-NLS-1$
