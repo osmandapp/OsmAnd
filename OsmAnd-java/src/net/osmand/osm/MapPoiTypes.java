@@ -147,7 +147,13 @@ public class MapPoiTypes {
 		Map<String, PoiType> translation = new HashMap<String, PoiType>();
 		for(PoiCategory pc : categories) {
 			for(PoiType pt :  pc.getPoiTypes()) {
-				if(pt.isReference() || pt.isNotEditableOsm()) {
+				if(pt.isReference() ) {
+					continue;
+				}
+				if(pt.getBaseLangType() != null) {
+					continue;
+				}
+				if(skipNonEditable && pt.isNotEditableOsm()) {
 					continue;
 				}
 				translation.put(pt.getKeyName().replace('_', ' ').toLowerCase(), pt);
