@@ -3,17 +3,14 @@ package net.osmand.plus.mapcontextmenu.editors;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import net.osmand.data.LatLon;
 import net.osmand.plus.GPXUtilities.WptPt;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
-import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.util.Algorithms;
 
@@ -144,20 +141,12 @@ public class WprPtEditorFragment extends PointEditorFragment {
 	@Override
 	public Drawable getNameIcon() {
 		int color = wpt.getColor(defaultColor);
-		return FavoriteImageDrawable.getOrCreate(getMapActivity(), color, false);
+		return getPaintedIcon(R.drawable.ic_action_fav_dark, color);
 	}
 
 	@Override
 	public Drawable getCategoryIcon() {
 		int color = wpt.getColor(defaultColor);
-		return getIcon(R.drawable.ic_action_folder_stroke, color);
-	}
-
-	public Drawable getIcon(int resId, int color) {
-		OsmandApplication app = getMyApplication();
-		Drawable d = app.getResources().getDrawable(resId).mutate();
-		d.clearColorFilter();
-		d.setColorFilter(color, PorterDuff.Mode.SRC_IN);
-		return d;
+		return getPaintedIcon(R.drawable.ic_action_folder_stroke, color);
 	}
 }
