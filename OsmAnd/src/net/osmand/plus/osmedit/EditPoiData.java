@@ -1,22 +1,19 @@
 package net.osmand.plus.osmedit;
 
-import net.osmand.PlatformUtil;
-import net.osmand.data.Amenity;
-import net.osmand.osm.PoiCategory;
-import net.osmand.osm.PoiType;
-import net.osmand.osm.edit.Node;
-import net.osmand.osm.edit.OSMSettings;
-import net.osmand.osm.edit.OSMSettings.OSMTagKey;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.util.Algorithms;
-
-import org.apache.commons.logging.Log;
-
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
+
+import net.osmand.PlatformUtil;
+import net.osmand.osm.PoiCategory;
+import net.osmand.osm.PoiType;
+import net.osmand.osm.edit.Node;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.util.Algorithms;
+
+import org.apache.commons.logging.Log;
 
 public class EditPoiData {
 	private static final Log LOG = PlatformUtil.getLog(EditPoiData.class);
@@ -34,7 +31,7 @@ public class EditPoiData {
 	public EditPoiData(Node node, OsmandApplication app) {
 		allTranslatedSubTypes = app.getPoiTypes().getAllTranslatedNames(true);
 		category = app.getPoiTypes().getOtherPoiCategory();
-		this.subtype = "";
+		subtype = "";
 		entity = node;
 		initTags(node);
 	}
@@ -44,8 +41,10 @@ public class EditPoiData {
 	}
 	
 	public void updateType(PoiCategory type) {
-		category = type;
-		subtype = "";
+		if(type != null && type != category) {
+			category = type;
+			subtype = "";
+		}
 	}
 	
 	
