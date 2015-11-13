@@ -34,6 +34,10 @@ public class EditPOIMenuBuilder extends MenuBuilder {
 	protected void buildRow(final View view, Drawable icon, String text) {
 		boolean light = app.getSettings().isLightContent();
 
+		if (!isFirstRow()) {
+			buildRowDivider(view, false);
+		}
+
 		LinearLayout ll = new LinearLayout(view.getContext());
 		ll.setOrientation(LinearLayout.HORIZONTAL);
 		LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -78,22 +82,11 @@ public class EditPOIMenuBuilder extends MenuBuilder {
 
 		((LinearLayout) view).addView(ll);
 
-		View horizontalLine = new View(view.getContext());
-		LinearLayout.LayoutParams llHorLineParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dpToPx(1f));
-		llHorLineParams.gravity = Gravity.BOTTOM;
-		horizontalLine.setLayoutParams(llHorLineParams);
-
-		horizontalLine.setBackgroundColor(app.getResources().getColor(light ? R.color.ctx_menu_info_divider_light : R.color.ctx_menu_info_divider_dark));
-
-		((LinearLayout) view).addView(horizontalLine);
-
 		rowBuilt();
 	}
 
 	@Override
-	public void build(View view) {
-		super.build(view);
-
+	public void buildInternal(View view) {
 		if (osmPoint instanceof OsmNotesPoint) {
 			OsmNotesPoint notes = (OsmNotesPoint) osmPoint;
 

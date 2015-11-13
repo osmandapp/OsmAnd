@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -55,7 +56,7 @@ public class FavouritePointMenuController extends MenuController {
 
 	@Override
 	public Drawable getLeftIcon() {
-		return FavoriteImageDrawable.getOrCreate(getMapActivity().getMyApplication(), fav.getColor(), false);
+		return getPaintedIcon(R.drawable.ic_action_fav_dark, fav.getColor());
 	}
 
 	@Override

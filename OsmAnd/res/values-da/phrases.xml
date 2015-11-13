@@ -2479,4 +2479,34 @@
 
 <string name="poi_wiki_lang_bs">Bosnisk wiki</string>
 	<string name="poi_wiki_lang_ga">Irske wiki</string>
-	</resources>
+	<string name="poi_wiki_lang_war">Waray wiki</string>
+	<string name="poi_wiki_lang_min">Minangkabau wiki</string>
+	<string name="poi_wiki_lang_kk">Kasakhisk wiki</string>
+	<string name="poi_wiki_lang_uz">Usbekisk</string>
+	<string name="poi_wiki_lang_ce">Tjetjenske wiki</string>
+	<string name="poi_wiki_lang_ur">Urdu wiki</string>
+	<string name="poi_wiki_lang_oc">Occitansk wiki</string>
+	<string name="poi_wiki_lang_zhminnan">Sydlige Min wiki</string>
+	<string name="poi_wiki_lang_mg">Madagaskiske wiki</string>
+	<string name="poi_wiki_lang_tt">Tatarisk wiki</string>
+	<string name="poi_wiki_lang_jv">Javanesisk wiki</string>
+	<string name="poi_wiki_lang_ky">Kirgisiske wiki</string>
+	<string name="poi_wiki_lang_zhyue">Kantonesisk wiki</string>
+	<string name="poi_wiki_lang_ast">Astur-Leonese wiki</string>
+	<string name="poi_wiki_lang_tg">Tadsjikiske wiki</string>
+	<string name="poi_wiki_lang_ba">Bashkir</string>
+	<string name="poi_wiki_lang_sco">Skotsk wiki</string>
+	<string name="poi_wiki_lang_pnb">Punjabi wiki</string>
+	<string name="poi_wiki_lang_cv">Chuvashisk wiki</string>
+	<string name="poi_wiki_lang_lmo">Lombard wiki</string>
+	<string name="poi_wiki_lang_my">Burmesiske wiki</string>
+	<string name="poi_wiki_lang_yo">Yoruba wiki</string>
+	<string name="poi_wiki_lang_an">Aragoniens wiki</string>
+	<string name="poi_wiki_lang_ne">Nepalesisk wiki</string>
+	<string name="poi_wiki_lang_gu">Gujarati wiki</string>
+	<string name="poi_wiki_lang_scn">Sicilianske wiki</string>
+	<string name="poi_wiki_lang_bar">Bayerske wiki</string>
+	<string name="poi_wiki_lang_mn">Mongolske wiki</string>
+	<string name="poi_wiki_lang_nap">Napolitanske wiki</string>
+
+</resources>

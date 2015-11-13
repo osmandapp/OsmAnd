@@ -35,9 +35,7 @@ public class AudioVideoNoteMenuBuilder extends MenuBuilder {
 	}
 
 	@Override
-	public void build(View view) {
-		super.build(view);
-
+	public void buildInternal(View view) {
 		File file = recording.getFile();
 		if (file != null) {
 

@@ -1586,4 +1586,76 @@
 	<string name="poi_monument_yes">Ogetu monumentale</string>
 
 	<string name="poi_note">Nota</string>
-	</resources>
+	<string name="poi_wiki_lang_af">Wiki in africaans</string>
+	<string name="poi_wiki_lang_als">Wiki in alsazianu</string>
+	<string name="poi_wiki_lang_az">Wiki in azeri</string>
+	<string name="poi_wiki_lang_bn">Wiki in bengali</string>
+	<string name="poi_wiki_lang_bpy">Wiki in bishnupriya</string>
+	<string name="poi_wiki_lang_br">Wiki in bretonu</string>
+	<string name="poi_wiki_lang_bs">Wiki in bosniacu</string>
+	<string name="poi_wiki_lang_cy">Wiki in gallesu</string>
+	<string name="poi_wiki_lang_eo">Wiki in esperanto</string>
+	<string name="poi_wiki_lang_eu">Wiki in bascu</string>
+	<string name="poi_wiki_lang_fa">Wiki in persianu</string>
+	<string name="poi_wiki_lang_fy">Wiki in frisonu otzidentale</string>
+	<string name="poi_wiki_lang_ga">Wiki in irlandesu</string>
+	<string name="poi_wiki_lang_hy">Wiki in armenu</string>
+	<string name="poi_wiki_lang_is">Wiki in islandesu</string>
+	<string name="poi_wiki_lang_ka">Wiki in georgianu</string>
+	<string name="poi_wiki_lang_ku">Wiki in curdu</string>
+	<string name="poi_wiki_lang_la">Wiki in latinu</string>
+	<string name="poi_wiki_lang_lb">Wiki in lussemburghesu</string>
+	<string name="poi_wiki_lang_mk">Wiki in matzèdone</string>
+	<string name="poi_wiki_lang_ml">Wiki in malayam</string>
+	<string name="poi_wiki_lang_mr">Wiki in marathi</string>
+	<string name="poi_wiki_lang_nds">Wiki in bassu-sassone</string>
+	<string name="poi_wiki_lang_nv">Wiki in Navajo</string>
+	<string name="poi_wiki_lang_os">Wiki in ossetiu</string>
+	<string name="poi_wiki_lang_pms">Wiki in piemontesu</string>
+	<string name="poi_wiki_lang_sc">Wiki in sardu</string>
+	<string name="poi_wiki_lang_sh">Wiki in serbo-croatu</string>
+	<string name="poi_wiki_lang_sq">Wiki in albanesu</string>
+	<string name="poi_wiki_lang_ta">Wiki in tamil</string>
+	<string name="poi_wiki_lang_tl">Wiki in filipinu</string>
+
+<string name="poi_route_bus_ref">Postale</string>
+	<string name="poi_route_share_taxi_ref">Taxi cumpartzidu</string>
+	<string name="poi_route_trolleybus_ref">Filubus</string>
+	<string name="poi_route_tram_ref">Tram</string>
+	<string name="poi_route_train_ref">Trenu</string>
+	<string name="poi_route_light_rail_ref">Trenu lèbiu/metropolitana lèbia</string>
+	<string name="poi_route_monorail_ref">Monorotàia</string>
+	<string name="poi_route_funicular_ref">Funiculare</string>
+	<string name="poi_route_ferry_ref">Navile</string>
+
+	<string name="poi_wiki_lang_war">Wiki in Waray</string>
+	<string name="poi_wiki_lang_min">Wiki in minangkabau</string>
+	<string name="poi_wiki_lang_kk">Wiki in kazacu</string>
+	<string name="poi_wiki_lang_uz">Wiki in uzbecu</string>
+	<string name="poi_wiki_lang_ce">Wiki in cecenu</string>
+	<string name="poi_wiki_lang_ur">Wiki in urdu</string>
+	<string name="poi_wiki_lang_oc">Wiki in occitanu</string>
+	<string name="poi_wiki_lang_zhminnan">Wiki in min nan</string>
+	<string name="poi_wiki_lang_mg">Wiki in malgàsciu</string>
+	<string name="poi_wiki_lang_tt">Wiki in tàtaru</string>
+	<string name="poi_wiki_lang_jv">Wiki in giavanesu</string>
+	<string name="poi_wiki_lang_ky">Wiki in chirghisu</string>
+	<string name="poi_wiki_lang_zhyue">Wiki in cantonesu</string>
+	<string name="poi_wiki_lang_ast">Wiki in asturiano-leonesu</string>
+	<string name="poi_wiki_lang_tg">Wiki in tagicu</string>
+	<string name="poi_wiki_lang_ba">Wiki in baschiru</string>
+	<string name="poi_wiki_lang_sco">Wiki in scots</string>
+	<string name="poi_wiki_lang_pnb">Wiki in punjabi</string>
+	<string name="poi_wiki_lang_cv">Wiki in ciuvasciu</string>
+	<string name="poi_wiki_lang_lmo">Wiki in lombardu</string>
+	<string name="poi_wiki_lang_my">Wiki in birmanu</string>
+	<string name="poi_wiki_lang_yo">Wiki in yoruba</string>
+	<string name="poi_wiki_lang_an">Wiki in aragonesu</string>
+	<string name="poi_wiki_lang_ne">Wiki in nepalesu</string>
+	<string name="poi_wiki_lang_gu">Wiki in gujarati</string>
+	<string name="poi_wiki_lang_scn">Wiki in sitzilianu</string>
+	<string name="poi_wiki_lang_bar">Wiki in bavaresu</string>
+	<string name="poi_wiki_lang_mn">Wiki in mòngolu</string>
+	<string name="poi_wiki_lang_nap">Wiki in napoletanu</string>
+
+</resources>

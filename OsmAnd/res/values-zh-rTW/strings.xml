@@ -1975,5 +1975,5 @@
     <string name="lang_fy">菲士蘭</string>
     <string name="lang_als">阿爾巴尼亞 (Tosk)</string>
     <string name="share_osm_edits_subject">透過 OsmAnd 共用編輯 Osm</string>
-    <string name="save_poi_without_poi_type_message">您真的想要儲存興趣點成沒有類型的興趣點嗎？</string>
+    <string name="save_poi_without_poi_type_message">您真的想要儲存興趣點成為沒有類型的興趣點嗎？</string>
     </resources>

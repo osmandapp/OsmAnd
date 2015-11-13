@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
 
     <string name="show_warnings_title">Mostra els missatges d\'avís…</string>
     <string name="map_widget_fluorescent">Rutes amb fluorescència</string>
@@ -1816,4 +1817,10 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
 
 <string name="read_more">Llegiu-ne més</string>
     <string name="whats_new">Què hi ha de nou a</string>
+    <string name="share_osm_edits_subject">Edicions OSM compartides via OsmAnd</string>
+    <string name="lang_nds">Baix alemany</string>
+    <string name="lang_mk">Macedònic</string>
+    <string name="lang_fy">Frisó</string>
+    <string name="lang_als">Albanès (Tosc)</string>
+    <string name="save_poi_without_poi_type_message">Confirmeu desar el PDI sense indicar el tipus?</string>
     </resources>

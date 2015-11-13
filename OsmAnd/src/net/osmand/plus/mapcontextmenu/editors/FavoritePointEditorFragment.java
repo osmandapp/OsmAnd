@@ -2,7 +2,6 @@ package net.osmand.plus.mapcontextmenu.editors;
 
 import android.app.Activity;
 import android.content.DialogInterface;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -15,10 +14,8 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.dialogs.FavoriteDialogs;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.util.Algorithms;
@@ -210,7 +207,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		if (group != null) {
 			color = group.color;
 		}
-		return FavoriteImageDrawable.getOrCreate(getMapActivity(), color, false);
+		return getPaintedIcon(R.drawable.ic_action_fav_dark, color);
 	}
 
 	@Override
@@ -222,14 +219,6 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		if (color == 0) {
 			color = defaultColor;
 		}
-		return getIcon(R.drawable.ic_action_folder_stroke, color);
-	}
-
-	public Drawable getIcon(int resId, int color) {
-		OsmandApplication app = getMyApplication();
-		Drawable d = app.getResources().getDrawable(resId).mutate();
-		d.clearColorFilter();
-		d.setColorFilter(color, PorterDuff.Mode.SRC_IN);
-		return d;
+		return getPaintedIcon(R.drawable.ic_action_folder_stroke, color);
 	}
 }

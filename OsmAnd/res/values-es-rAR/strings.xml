@@ -1951,4 +1951,5 @@
     <string name="lang_mk">Macedonio</string>
     <string name="lang_fy">Frisón</string>
     <string name="lang_als">Albano (Tosk)</string>
+    <string name="save_poi_without_poi_type_message">¿Quiere guardar el punto de interés sin especificar el tipo?</string>
     </resources>

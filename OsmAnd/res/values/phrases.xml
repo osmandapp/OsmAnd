@@ -2425,4 +2425,34 @@
 	<string name="poi_wiki_lang_ta">Tamil wiki</string>
 	<string name="poi_wiki_lang_tl">Filipino wiki</string>
 
+	<string name="poi_wiki_lang_war">Waray wiki</string>
+	<string name="poi_wiki_lang_min">Minangkabau wiki</string>
+	<string name="poi_wiki_lang_kk">Kazakh wiki</string>
+	<string name="poi_wiki_lang_uz">Uzbek wiki</string>
+	<string name="poi_wiki_lang_ce">Chechen wiki</string>
+	<string name="poi_wiki_lang_ur">Urdu wiki</string>
+	<string name="poi_wiki_lang_oc">Occitan wiki</string>
+	<string name="poi_wiki_lang_zhminnan">Southern Min wiki</string>
+	<string name="poi_wiki_lang_mg">Malagasy wiki</string>
+	<string name="poi_wiki_lang_tt">Tatar wiki</string>
+	<string name="poi_wiki_lang_jv">Javanese wiki</string>
+	<string name="poi_wiki_lang_ky">Kyrgyz wiki</string>
+	<string name="poi_wiki_lang_zhyue">Cantonese wiki</string>
+	<string name="poi_wiki_lang_ast">Astur-Leonese wiki</string>
+	<string name="poi_wiki_lang_tg">Tajik wiki</string>
+	<string name="poi_wiki_lang_ba">Bashkir wiki</string>
+	<string name="poi_wiki_lang_sco">Scots wiki</string>
+	<string name="poi_wiki_lang_pnb">Punjabi wiki</string>
+	<string name="poi_wiki_lang_cv">Chuvash wiki</string>
+	<string name="poi_wiki_lang_lmo">Lombard wiki</string>
+	<string name="poi_wiki_lang_my">Burmese wiki</string>
+	<string name="poi_wiki_lang_yo">Yoruba wiki</string>
+	<string name="poi_wiki_lang_an">Aragonese wiki</string>
+	<string name="poi_wiki_lang_ne">Nepali wiki</string>
+	<string name="poi_wiki_lang_gu">Gujarati wiki</string>
+	<string name="poi_wiki_lang_scn">Sicilian wiki</string>
+	<string name="poi_wiki_lang_bar">Bavarian wiki</string>
+	<string name="poi_wiki_lang_mn">Mongolian wiki</string>
+	<string name="poi_wiki_lang_nap">Neapolitan wiki</string>
+
 </resources>
