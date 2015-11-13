@@ -1769,4 +1769,23 @@
 	<string name="poi_automated_yes">Automatitzat</string>
 	<string name="poi_automated_no">No automatitzat</string>
 	<string name="poi_full_service_yes">Servei integral</string>
+	<string name="poi_brushless_yes">Rentacotxes de raspall</string>
+	<string name="poi_brushless_no">Rentacotxes de raspall: no</string>
+	<string name="poi_car_wash_no">Rentacotxes: no</string>
+
+	<string name="poi_male_yes">Homes</string>
+	<string name="poi_male_no">Prohibit pels homes</string>
+	<string name="poi_female_yes">Dones</string>
+	<string name="poi_female_no">Prohibit per dones</string>
+	<string name="poi_public_bath">Bany públic</string>
+
+	<string name="poi_indoor_yes">Cobert</string>
+	<string name="poi_indoor_no">Exterior</string>
+	<string name="poi_toilets_yes">Amb lavabos</string>
+	<string name="poi_toilets_no">Sense lavabos</string>
+	<string name="poi_toilets_wheelchair_yes">Accés al bany per cadira de rodes: sí</string>
+	<string name="poi_toilets_wheelchair_no">Accés al bany per cadira de rodes: no</string>
+	<string name="poi_toilets_access_customers">Accés al lavabo: clients</string>
+	<string name="poi_toilets_access_permissive">Accés al lavabo: tolerant</string>
+	<string name="poi_toilets_access_community">Accés al lavabo: públic</string>
 	</resources>
