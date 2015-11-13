@@ -162,15 +162,11 @@ public class OsmEditingPlugin extends OsmandPlugin {
 					new EditPoiDialogFragment.ShowDeleteDialogAsyncTask(mapActivity)
 							.execute((Amenity) selectedObj);
 				} else if (resId == R.string.poi_context_menu_modify) {
-					if (selectedObj instanceof Amenity) {
-						EditPoiDialogFragment.showEditInstance((Amenity) selectedObj, mapActivity);
-					} else if (selectedObj instanceof OpenstreetmapPoint) {
-						final Node entity = ((OpenstreetmapPoint) selectedObj).getEntity();
-						EditPoiDialogFragment.createInstance(entity, false)
-								.show(mapActivity.getSupportFragmentManager(), "edit_poi");
-					} else {
-						throw new IllegalArgumentException("Selected object is not editable");
-					}
+					EditPoiDialogFragment.showEditInstance((Amenity) selectedObj, mapActivity);
+				} else if (resId == R.string.poi_context_menu_modify_osm_change) {
+					final Node entity = ((OpenstreetmapPoint) selectedObj).getEntity();
+					EditPoiDialogFragment.createInstance(entity, false)
+							.show(mapActivity.getSupportFragmentManager(), "edit_poi");
 				}
 				return true;
 			}
@@ -180,12 +176,13 @@ public class OsmEditingPlugin extends OsmandPlugin {
 			Amenity amenity = (Amenity) selectedObj;
 			final PoiType poiType = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
 			isEditable = !amenity.getType().isWiki() && !poiType.isNotEditableOsm();
-		} else if (selectedObj instanceof OpenstreetmapPoint) {
-			isEditable = true;
 		}
 		if (isEditable) {
 			adapter.item(R.string.poi_context_menu_modify).iconColor(R.drawable.ic_action_edit_dark).listen(listener).position(1).reg();
 			adapter.item(R.string.poi_context_menu_delete).iconColor(R.drawable.ic_action_delete_dark).listen(listener).position(2).reg();
+		} else if (selectedObj instanceof OpenstreetmapPoint) {
+			adapter.item(R.string.poi_context_menu_modify_osm_change)
+					.iconColor(R.drawable.ic_action_edit_dark).listen(listener).position(1).reg();
 		} else {
 			adapter.item(R.string.context_menu_item_create_poi).iconColor(R.drawable.ic_action_plus_dark).listen(listener).position(-1).reg();
 		}
