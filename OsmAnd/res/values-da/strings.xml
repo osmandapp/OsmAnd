@@ -2018,4 +2018,5 @@
     <string name="lang_als">Albansk (Tosk)</string>
     <string name="share_osm_edits_subject">OSM redigeringer deles via OsmAnd</string>
     <string name="save_poi_without_poi_type_message">Gem IP uden at angive type?</string>
+    <string name="poi_context_menu_modify_osm_change">Rediger OSM ændring</string>
     </resources>
