@@ -1108,4 +1108,69 @@
 
 	<string name="poi_smoking_no">Nemdohányzó</string>
 	<string name="poi_capacity">Kapacitás</string>
+	<string name="poi_enforcement_traffic_signals">Forgalomellenőrzés: jelzőlámpa</string>
+	<string name="poi_enforcement_maxspeed">Forgalomellenőrzés: sebességkorlát</string>
+	<string name="poi_enforcement_maxheight">Forgalomellenőrzés: megengedett magasság</string>
+	<string name="poi_enforcement_mindistance">Forgalomellenőrzés: követési távolság</string>
+	<string name="poi_enforcement_check">Forgalomellenőrzés: ellenőrzőhely</string>
+	<string name="poi_enforcement_access">Forgalomellenőrzés: behajtás</string>
+	<string name="poi_enforcement_toll">Forgalomellenőrzés: útdíj</string>
+
+	<string name="poi_animal_shelter">Állatmenhely</string>
+	<string name="poi_animal_shelter_dog">Menhelytípus: kutya</string>
+	<string name="poi_animal_shelter_cat">Menhelytípus: macska</string>
+	<string name="poi_animal_shelter_dog_cat">Menhelytípus: kutya, macska</string>
+	<string name="poi_animal_shelter_bird">Menhelytípus: madár</string>
+
+	<string name="poi_seats">Helyek</string>
+	<string name="poi_backrest_yes">Háttámla: van</string>
+	<string name="poi_backrest_no">Háttámla: nincs</string>
+
+	<string name="poi_intermittent">Időszakos</string>
+
+	<string name="poi_building">Épület</string>
+	<string name="poi_generator_source_coal">Energiaforrás: szén</string>
+	<string name="poi_generator_source_gas">Energiaforrás: gáz</string>
+	<string name="poi_generator_source_nuclear">Energiaforrás: nukleáris</string>
+	<string name="poi_generator_source_solar">Energiaforrás: nap</string>
+	<string name="poi_generator_source_hydro">Energiaforrás: víz</string>
+	<string name="poi_generator_source_wind">Energiaforrás: szél</string>
+	<string name="poi_generator_source_geothermal">Energiaforrás: geotermikus</string>
+	<string name="poi_generator_source_oil">Energiaforrás: olaj</string>
+	<string name="poi_generator_source_diesel">Energiaforrás: dízel</string>
+
+	<string name="poi_pump_manual">Kézipumpa</string>
+	<string name="poi_pump_powered">Szivattyú</string>
+	<string name="poi_pump_no">Pumpa nélkül</string>
+	<string name="poi_pump">Pumpa</string>
+
+	<string name="poi_water_characteristic_mineral">Víz jelleg: ásványvíz</string>
+	<string name="poi_water_characteristic_mud">Víz jelleg: iszapos</string>
+	<string name="poi_water_characteristic_sulfuric">Víz jelleg: kénes</string>
+
+	<string name="poi_water_point">Vízvevőhely</string>
+
+	<string name="poi_information_guidepost">Útirányjelző tábla</string>
+	<string name="poi_information_board">Információs tábla</string>
+	<string name="poi_information_map">Térkép</string>
+	<string name="poi_information_office">Információs iroda</string>
+	<string name="poi_information_trail_blaze">Turistajelzés</string>
+	<string name="poi_information_terminal">Információs terminál</string>
+	<string name="poi_information_route_marker">Útjelzés</string>
+	<string name="poi_information_hikingmap">Turistatérkép</string>
+	<string name="poi_information_nature">Információ: természet</string>
+	<string name="poi_information_wildlife">Információ: vadvilág</string>
+	<string name="poi_information_history">Információ: történelem</string>
+	<string name="poi_information_sign">Jelzés</string>
+	<string name="poi_information_audioguide">Audioguide</string>
+	<string name="poi_information_bicyclemap">Kerékpártérkép</string>
+	<string name="poi_board_type_plants">Információ: növények</string>
+	<string name="poi_board_type_geology">Információ: földrajz</string>
+	<string name="poi_board_type_public_transport">Információ: tömegközlekedés</string>
+	<string name="poi_board_type_technology">Információ: technológia</string>
+	<string name="poi_board_type_astronomy">Információ: csillagászat</string>
+
+	<string name="poi_information_tactile_model">Tapintható model</string>
+	<string name="poi_information_tactile_map">Tapintható térkép</string>
+	<string name="poi_board_type_notice">Értesítő tábla</string>
 	</resources>
