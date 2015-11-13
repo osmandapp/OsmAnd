@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:maxLines="2"
-                android:textColor="?android:textColorSecondary"
+                android:textColor="?android:textColorPrimary"
                 android:textSize="@dimen/default_desc_text_size"
                 tools:text="@string/lorem_ipsum" />
         </FrameLayout>
@@ -54,7 +54,8 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:layout_marginTop="5dp"
-        android:textColor="?android:textColorSecondary"
-        android:textSize="@dimen/default_desc_text_size" />
+        android:textColor="?android:textColorPrimary"
+        android:textSize="@dimen/default_desc_text_size"
+        tools:text="Hellow world"/>
 
 </LinearLayout>
