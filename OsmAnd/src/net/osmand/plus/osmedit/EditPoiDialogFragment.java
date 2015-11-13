@@ -257,7 +257,7 @@ public class EditPoiDialogFragment extends DialogFragment {
 		});
 		poiNameEditText.setOnEditorActionListener(mOnEditorActionListener);
 		poiTypeEditText.setOnEditorActionListener(mOnEditorActionListener);
-		poiTypeEditText.setText(editPoiData.getPoiTypeString());
+		poiTypeEditText.setText(editPoiData.getPoiTypeDefined().getTranslation());
 
 		Button saveButton = (Button) view.findViewById(R.id.saveButton);
 		saveButton.setText(mOpenstreetmapUtil instanceof OpenstreetmapRemoteUtil

@@ -16,7 +16,7 @@ public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 	
 	private final Context ctx;
 
-	public final static Log log = PlatformUtil.getLog(OpenstreetmapLocalUtil.class);
+	public final static Log LOG = PlatformUtil.getLog(OpenstreetmapLocalUtil.class);
 
 	private OsmEditingPlugin plugin;
 
@@ -61,14 +61,14 @@ public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 		Node entity = new Node(n.getLocation().getLatitude(),
 							   n.getLocation().getLongitude(),
 							   nodeId);
-		entity.putTag(poiType.getOsmTag(), poiType.getOsmValue());
+		entity.putTag(EditPoiData.POI_TYPE_TAG, poiType.getOsmValue());
 		if(poiType.getOsmTag2() != null) {
 			entity.putTag(poiType.getOsmTag2(), poiType.getOsmValue2());
 		}
 		entity.putTag(OSMTagKey.NAME.getValue(), n.getName());
 		entity.putTag(OSMTagKey.OPENING_HOURS.getValue(), n.getOpeningHours());
- 
-		// check whether this is node (because id of node could be the same as relation) 
+
+		// check whether this is node (because id of node could be the same as relation)
 		if(entity != null && MapUtils.getDistance(entity.getLatLon(), n.getLocation()) < 50){
 			return entity;
 		}

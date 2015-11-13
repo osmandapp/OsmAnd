@@ -97,22 +97,16 @@ public class AdvancedEditPoiFragment extends Fragment
 	public void onResume() {
 		super.onResume();
 		mAdapter.updateViews();
+		updateName();
+		updatePoiType();
 		mTagsChangedListener = new EditPoiData.TagsChangedListener() {
 			@Override
 			public void onTagsChanged(String anyTag) {
-				String value = getData().getTagValues().get(anyTag);
 				if (Algorithms.objectEquals(anyTag, OSMSettings.OSMTagKey.NAME.getValue())) {
-					nameTextView.setText(value);
+					updateName();
 				}
 				if (Algorithms.objectEquals(anyTag, EditPoiData.POI_TYPE_TAG)) {
-					PoiType pt = getData().getPoiTypeDefined();
-					if (pt != null) {
-						amenityTagTextView.setText(pt.getOsmTag());
-						amenityTextView.setText(pt.getOsmValue());
-					} else {
-						amenityTagTextView.setText(getData().getPoiCategory().getDefaultTag());
-						amenityTextView.setText(getData().getPoiTypeString());
-					}
+					updatePoiType();
 				}
 			}
 		};
@@ -142,6 +136,21 @@ public class AdvancedEditPoiFragment extends Fragment
 	public void onFragmentActivated() {
 		if(mAdapter != null) {
 			mAdapter.updateViews();
+		}
+	}
+
+	private void updateName() {
+		nameTextView.setText(getData().getTag(OSMSettings.OSMTagKey.NAME.getValue()));
+	}
+
+	private void updatePoiType() {
+		PoiType pt = getData().getPoiTypeDefined();
+		if (pt != null) {
+			amenityTagTextView.setText(pt.getOsmTag());
+			amenityTextView.setText(pt.getOsmValue());
+		} else {
+			amenityTagTextView.setText(getData().getPoiCategory().getDefaultTag());
+			amenityTextView.setText(getData().getPoiTypeString());
 		}
 	}
 

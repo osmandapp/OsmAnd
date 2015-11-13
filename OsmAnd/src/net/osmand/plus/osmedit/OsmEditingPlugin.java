@@ -18,6 +18,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
 import net.osmand.osm.PoiType;
+import net.osmand.osm.edit.Node;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.OsmandApplication;
@@ -162,6 +163,10 @@ public class OsmEditingPlugin extends OsmandPlugin {
 							.execute((Amenity) selectedObj);
 				} else if (resId == R.string.poi_context_menu_modify) {
 					EditPoiDialogFragment.showEditInstance((Amenity) selectedObj, mapActivity);
+				} else if (resId == R.string.poi_context_menu_modify_osm_change) {
+					final Node entity = ((OpenstreetmapPoint) selectedObj).getEntity();
+					EditPoiDialogFragment.createInstance(entity, false)
+							.show(mapActivity.getSupportFragmentManager(), "edit_poi");
 				}
 				return true;
 			}
@@ -175,6 +180,9 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		if (isEditable) {
 			adapter.item(R.string.poi_context_menu_modify).iconColor(R.drawable.ic_action_edit_dark).listen(listener).position(1).reg();
 			adapter.item(R.string.poi_context_menu_delete).iconColor(R.drawable.ic_action_delete_dark).listen(listener).position(2).reg();
+		} else if (selectedObj instanceof OpenstreetmapPoint) {
+			adapter.item(R.string.poi_context_menu_modify_osm_change)
+					.iconColor(R.drawable.ic_action_edit_dark).listen(listener).position(1).reg();
 		} else {
 			adapter.item(R.string.context_menu_item_create_poi).iconColor(R.drawable.ic_action_plus_dark).listen(listener).position(-1).reg();
 		}

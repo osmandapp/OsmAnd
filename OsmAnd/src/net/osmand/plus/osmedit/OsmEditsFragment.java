@@ -30,6 +30,7 @@ import android.widget.Toast;
 
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.PointDescription;
+import net.osmand.osm.edit.Node;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -464,6 +465,19 @@ public class OsmEditsFragment extends OsmAndListFragment
 				return true;
 			}
 		});
+		if (info instanceof OpenstreetmapPoint) {
+			item = optionsMenu.getMenu().add(R.string.poi_context_menu_modify_osm_change)
+					.setIcon(app.getIconsCache().getContentIcon(R.drawable.ic_action_edit_dark));
+			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+				@Override
+				public boolean onMenuItemClick(MenuItem item) {
+					final Node entity = ((OpenstreetmapPoint) info).getEntity();
+					EditPoiDialogFragment.createInstance(entity, false)
+							.show(getActivity().getSupportFragmentManager(), "edit_poi");
+					return true;
+				}
+			});
+		}
 		item = optionsMenu.getMenu().add(R.string.shared_string_delete).
 				setIcon(app.getIconsCache().getContentIcon(R.drawable.ic_action_delete_dark));
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
