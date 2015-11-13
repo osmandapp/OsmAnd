@@ -18,6 +18,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
 import net.osmand.osm.PoiType;
+import net.osmand.osm.edit.Node;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.OsmandApplication;
@@ -161,7 +162,15 @@ public class OsmEditingPlugin extends OsmandPlugin {
 					new EditPoiDialogFragment.ShowDeleteDialogAsyncTask(mapActivity)
 							.execute((Amenity) selectedObj);
 				} else if (resId == R.string.poi_context_menu_modify) {
-					EditPoiDialogFragment.showEditInstance((Amenity) selectedObj, mapActivity);
+					if (selectedObj instanceof Amenity) {
+						EditPoiDialogFragment.showEditInstance((Amenity) selectedObj, mapActivity);
+					} else if (selectedObj instanceof OpenstreetmapPoint) {
+						final Node entity = ((OpenstreetmapPoint) selectedObj).getEntity();
+						EditPoiDialogFragment.createInstance(entity, false)
+								.show(mapActivity.getSupportFragmentManager(), "edit_poi");
+					} else {
+						throw new IllegalArgumentException("Selected object is not editable");
+					}
 				}
 				return true;
 			}
@@ -171,6 +180,8 @@ public class OsmEditingPlugin extends OsmandPlugin {
 			Amenity amenity = (Amenity) selectedObj;
 			final PoiType poiType = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
 			isEditable = !amenity.getType().isWiki() && !poiType.isNotEditableOsm();
+		} else if (selectedObj instanceof OpenstreetmapPoint) {
+			isEditable = true;
 		}
 		if (isEditable) {
 			adapter.item(R.string.poi_context_menu_modify).iconColor(R.drawable.ic_action_edit_dark).listen(listener).position(1).reg();
