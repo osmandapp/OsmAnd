@@ -35,7 +35,7 @@
 	<string name="poi_gift">Падарункі, сувеніры</string>
 	<string name="poi_baby_goods">Тавары для дзяцей</string>
 	<string name="poi_bathroom_furnishing">Сантэхніка, ванныя</string>
-	<string name="poi_bed">Усё для спальні</string>
+	<string name="poi_bed">Крама пасьцельнай бялізны</string>
 	<string name="poi_boutique">Буцік</string>
 	<string name="poi_chemist">Аптэка</string>
 	<string name="poi_clothes">Крама адзеньня</string>
@@ -750,7 +750,7 @@
 	<string name="poi_fuel_e10">E10</string>
 	<string name="poi_fuel_e20">E20</string>
 	<string name="poi_fuel_e85">E85</string>
-	<string name="poi_fuel_biogas">E85</string>
+	<string name="poi_fuel_biogas">Біягаз</string>
 	<string name="poi_fuel_lh2">Вадкі вадарод</string>
 	<string name="poi_fuel_electricity">Электрычнасьць</string>
 	<string name="poi_farmyard">Падворак</string>
@@ -838,7 +838,7 @@
 	<string name="poi_wiki_lang_uk">Украінская Вікі</string>
 	<string name="poi_wiki_lang_vi">В\'етнамская Вікі</string>
 	<string name="poi_wiki_lang_sw">Суахільская Вікі</string>
-	<string name="poi_barrier_entrance">Уваход</string>
+	<string name="poi_barrier_entrance">Праход у сьцяне ці плоце</string>
 	<string name="poi_entrance_main">Асноўны ўваход</string>
 	<string name="poi_entrance">Уваход</string>
 	<string name="poi_entrance_exit">Выхад</string>
@@ -1039,8 +1039,8 @@
 	<string name="poi_recycling_cars">Аўтамабілі</string>
 	<string name="poi_recycling_bicycles">Ровары</string>
 
-	<string name="poi_drinking_water_yes">Пітная вада</string>
-	<string name="poi_drinking_water_no">Непрыдатная для піцьця вада</string>
+	<string name="poi_drinking_water_yes">Пітная вада: так</string>
+	<string name="poi_drinking_water_no">Пітная вада: не</string>
 	<string name="poi_supervised_yes">Кантралюемы аб\'ект</string>
 	<string name="poi_supervised_no">Некантралюемы аб\'ект</string>
 	<string name="poi_seasonal_yes">Сэзонны аб\'ект</string>
@@ -1369,4 +1369,67 @@
 	<string name="poi_wheelchair_limited">Інвалідныя крэслы: абмежавана</string>
 	<string name="poi_wholesale">Опт</string>
 
-	</resources>
+	<string name="poi_traffic_calming_island">Астравок (перашкода)</string>
+	<string name="poi_tourism_yes">Турыстычны аб\'ект</string>
+	<string name="poi_religion_unitarian_universalist">Унітарны ўніверсалізм</string>
+	<string name="poi_religion_multifaith">Шматканфесійнасьць</string>
+	<string name="poi_religion_jain">Джайнізм</string>
+	<string name="poi_religion_scientologist">Саенталёгія</string>
+	<string name="poi_denomination_jehovahs_witness">Сьведкі Іеговы</string>
+	<string name="poi_denomination_united_reformed">Аб\'яднаная рэфармаваная царква</string>
+	<string name="poi_denomination_mennonite">Мэнаніцтва</string>
+	<string name="poi_denomination_assemblies_of_god">Асамблеі Бога</string>
+	<string name="poi_denomination_nazarene">Назаране</string>
+	<string name="poi_denomination_united_methodist">Аб\'яднаная метадысцкая царква</string>
+	<string name="poi_denomination_congregational">Кангрэгацыйная царква</string>
+	<string name="poi_denomination_dutch_reformed">Нідэрляндзкая рэфармацкая царква</string>
+	<string name="poi_denomination_apostolic">Апостальская царква</string>
+	<string name="poi_denomination_latter_day_saints">Рух сьвятых апошніх дзён</string>
+	<string name="poi_denomination_scientist">Саентызм</string>
+	<string name="poi_denomination_ethiopian_orthodox_tewahedo">Эфіёпская (абісінская) праваслаўная царква</string>
+	<string name="poi_denomination_unitarian">Унітарыянства</string>
+	<string name="poi_denomination_wesleyan">Вэсліянская царква</string>
+	<string name="poi_denomination_shaktism">Шактызм</string>
+	<string name="poi_denomination_shingon_shu">Сінгон</string>
+	<string name="poi_denomination_maronite">Мараніцкая каталіцкая царква</string>
+	<string name="poi_denomination_mahayana">Махаяна</string>
+
+	<string name="poi_debris">Рэшткі</string>
+	<string name="poi_jersey_barrier">Бар\'ерная агароджа</string>
+	<string name="poi_artwork_type_installation">Тып: інсталяцыя</string>
+	<string name="poi_artwork_type_mosaic">Тып: мазайка</string>
+	<string name="poi_artwork_type_relief">Тып: барэльеф</string>
+	<string name="poi_artwork_type_graffiti">Тып: графіці</string>
+	<string name="poi_artwork_type_stele">Тып: стэла</string>
+	<string name="poi_artwork_type_fountain">Тып: фантан</string>
+
+	<string name="poi_width">Шырыня</string>
+
+	<string name="poi_architect_name">Архітэктар</string>
+
+	<string name="poi_architecture_modern">Архітэктурны стыль: мадэрнізм</string>
+	<string name="poi_architecture_stalinist_neoclassicism">Архітэктурны стыль: сталінскі нэаклясіцызм</string>
+	<string name="poi_architecture_eclectic">Архітэктурны стыль: эклектыка</string>
+	<string name="poi_architecture_new_objectivity">Архітэктурны стыль: новая рэчыўнасць</string>
+	<string name="poi_architecture_contemporary">Архітэктурны стыль: сучасны</string>
+	<string name="poi_architecture_constructivism">Архітэктурны стыль: канструктывізм</string>
+	<string name="poi_architecture_timber_frame">Архітэктурны стыль: фахвэрк</string>
+	<string name="poi_architecture_art_nouveau">Архітэктурны стыль: мадэрн</string>
+	<string name="poi_architecture_neoclassicism">Архітэктурны стыль: нэаклясіцызм</string>
+	<string name="poi_architecture_victorian">Архітэктурны стыль: віктарыянскі</string>
+	<string name="poi_architecture_brutalism">Архітэктурны стыль: бруталізм</string>
+	<string name="poi_architecture_classicism">Архітэктурны стыль: клясіцызм</string>
+	<string name="poi_architecture_gothic">Архітэктурны стыль: готыка</string>
+	<string name="poi_architecture_oldrussian">Архітэктурны стыль: рускі (сярэднія вякі)</string>
+	<string name="poi_architecture_baroque">Архітэктурны стыль: барока</string>
+	<string name="poi_architecture_renaissance">Архітэктурны стыль: рэнесанс</string>
+	<string name="poi_architecture_romanesque">Архітэктурны стыль: раманскі</string>
+
+	<string name="poi_tunnel_waterway">Водны тунэль</string>
+	<string name="poi_tunnel_car">Тунэль для аўтамабіляў</string>
+	<string name="poi_tunnel_pedestrian">Тунэль для пешаходаў</string>
+	<string name="poi_tunnel_railway">Чыгуначны тунэль</string>
+	<string name="poi_bridge_car">Аўтамабільны мост</string>
+	<string name="poi_craft_electronics">Рамонт электронікі</string>
+
+</resources>
