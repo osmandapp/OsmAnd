@@ -62,6 +62,7 @@ import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.base.FailSafeFuntions;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.dashboard.DashboardOnMap;
+import net.osmand.plus.dialogs.ErrorBottomSheetDialog;
 import net.osmand.plus.dialogs.WhatsNewDialogFragment;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.helpers.GpxImportHelper;
@@ -394,8 +395,13 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents {
 			if (!dashboardOnMap.isVisible()) {
 				final OsmandSettings.CommonPreference<Boolean> shouldShowDashboardOnStart =
 						settings.registerBooleanPreference(MapActivity.SHOULD_SHOW_DASHBOARD_ON_START, true);
-				if (shouldShowDashboardOnStart.get() || dashboardOnMap.hasCriticalMessages())
+				if (shouldShowDashboardOnStart.get() || dashboardOnMap.hasCriticalMessages()) {
 					dashboardOnMap.setDashboardVisibility(true, DashboardOnMap.staticVisibleType);
+				} else {
+					if (ErrorBottomSheetDialog.shouldShow(settings, this)) {
+						new ErrorBottomSheetDialog().show(getFragmentManager(), "dialog");
+					}
+				}
 			}
 		}
 		dashboardOnMap.updateLocation(true, true, false);

@@ -907,8 +907,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 	// TODO: 11/13/15 Remove
 	public boolean hasCriticalMessages() {
 		final OsmandSettings settings = getMyApplication().getSettings();
-		return rateUsShouldShow.shouldShow(settings, mapActivity, DashRateUsFragment.TAG)
-				|| errorShouldShow.shouldShow(null, mapActivity, null);
+		return rateUsShouldShow.shouldShow(settings, mapActivity, DashRateUsFragment.TAG);
 	}
 
 	View getParentView() {
