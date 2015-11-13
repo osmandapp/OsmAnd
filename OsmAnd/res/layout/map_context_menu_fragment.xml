@@ -284,7 +284,7 @@
                     android:layout_weight="1"
                     android:background="?attr/dashboard_button"
                     android:scaleType="center"
-                    android:src="@drawable/map_action_waypoints"/>
+                    android:src="@drawable/ic_action_flag_dark"/>
 
                 <View
                     android:layout_width="1dp"

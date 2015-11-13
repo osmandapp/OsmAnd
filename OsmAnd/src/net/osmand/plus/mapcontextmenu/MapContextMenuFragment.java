@@ -411,7 +411,8 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		});
 
 		final ImageButton buttonWaypoint = (ImageButton) view.findViewById(R.id.context_menu_route_button);
-		buttonWaypoint.setImageDrawable(iconsCache.getIcon(R.drawable.map_action_waypoints,
+		//buttonWaypoint.setImageDrawable(iconsCache.getIcon(R.drawable.map_action_waypoints,
+		buttonWaypoint.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_flag_dark,
 				light ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
 		buttonWaypoint.setOnClickListener(new View.OnClickListener() {
 			@Override
