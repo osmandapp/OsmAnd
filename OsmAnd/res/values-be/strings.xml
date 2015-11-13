@@ -2006,4 +2006,9 @@
     <string name="whats_new">Што новага ў</string>
     <string name="rendering_attr_hideProposed_name">Схаваць плануемыя аб\'екты</string>
     <string name="lang_mk">македонская</string>
+    <string name="lang_nds">ніжненямецкая</string>
+    <string name="lang_fy">заходнефрыская</string>
+    <string name="lang_als">альбанская (тоская)</string>
+    <string name="save_poi_without_poi_type_message">Вы сапраўды хочаце захаваць POI бяз тыпу?</string>
+    <string name="share_osm_edits_subject">Рэдагаваньні OSM апублікаваныя праз OsmAnd</string>
     </resources>
