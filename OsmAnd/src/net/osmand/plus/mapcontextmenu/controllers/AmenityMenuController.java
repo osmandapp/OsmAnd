@@ -15,11 +15,18 @@ import net.osmand.util.Algorithms;
 
 public class AmenityMenuController extends MenuController {
 
-	private final Amenity amenity;
+	private Amenity amenity;
 
-	public AmenityMenuController(OsmandApplication app, MapActivity mapActivity, PointDescription pointDescription, final Amenity amenity) {
+	public AmenityMenuController(OsmandApplication app, MapActivity mapActivity, PointDescription pointDescription, Amenity amenity) {
 		super(new AmenityMenuBuilder(app, amenity), pointDescription, mapActivity);
 		this.amenity = amenity;
+	}
+
+	@Override
+	protected void setObject(Object object) {
+		if (object instanceof Amenity) {
+			this.amenity = (Amenity) object;
+		}
 	}
 
 	@Override
@@ -66,6 +73,12 @@ public class AmenityMenuController extends MenuController {
 			typeStr = Algorithms.capitalizeFirstLetterAndLowercase(typeStr.replace('_', ' '));
 		}
 		return typeStr;
+	}
+
+	@Override
+	public String getCommonTypeStr() {
+		PoiCategory pc = amenity.getType();
+		return pc.getTranslation();
 	}
 
 	@Override

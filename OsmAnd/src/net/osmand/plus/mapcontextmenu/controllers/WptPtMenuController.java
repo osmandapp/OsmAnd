@@ -16,9 +16,16 @@ public class WptPtMenuController extends MenuController {
 
 	private WptPt wpt;
 
-	public WptPtMenuController(OsmandApplication app, MapActivity mapActivity, PointDescription pointDescription, final WptPt wpt) {
+	public WptPtMenuController(OsmandApplication app, MapActivity mapActivity, PointDescription pointDescription, WptPt wpt) {
 		super(new WptPtMenuBuilder(app, wpt), pointDescription, mapActivity);
 		this.wpt = wpt;
+	}
+
+	@Override
+	protected void setObject(Object object) {
+		if (object instanceof WptPt) {
+			this.wpt = (WptPt) object;
+		}
 	}
 
 	@Override
@@ -44,23 +51,18 @@ public class WptPtMenuController extends MenuController {
 	}
 
 	@Override
-	public boolean needTypeStr() {
-		return true;
-	}
-
-	@Override
 	public boolean displayDistanceDirection() {
 		return true;
 	}
 
 	@Override
 	public Drawable getLeftIcon() {
-		return getPaintedIcon(R.drawable.ic_action_fav_dark,
-				wpt.getColor(getMapActivity().getResources().getColor(R.color.gpx_color_point)));
+		return FavoriteImageDrawable.getOrCreate(getMapActivity().getMyApplication(),
+				wpt.getColor(getMapActivity().getResources().getColor(R.color.gpx_color_point)), false);
 	}
 
 	@Override
-	public Drawable getSecondLineIcon() {
+	public Drawable getSecondLineTypeIcon() {
 		if (Algorithms.isEmpty(getTypeStr())) {
 			return null;
 		} else {
@@ -71,5 +73,10 @@ public class WptPtMenuController extends MenuController {
 	@Override
 	public String getTypeStr() {
 		return wpt.category != null ? wpt.category : "";
+	}
+
+	@Override
+	public String getCommonTypeStr() {
+		return getMapActivity().getString(R.string.gpx_wpt);
 	}
 }

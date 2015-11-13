@@ -17,17 +17,11 @@ public class ParkingPositionMenuController extends MenuController {
 	private ParkingPositionPlugin plugin;
 	private String parkingDescription = "";
 
-	public ParkingPositionMenuController(OsmandApplication app, MapActivity mapActivity, final PointDescription pointDescription) {
+	public ParkingPositionMenuController(OsmandApplication app, MapActivity mapActivity, PointDescription pointDescription) {
 		super(new MenuBuilder(app), pointDescription, mapActivity);
 		plugin = OsmandPlugin.getPlugin(ParkingPositionPlugin.class);
 		if (plugin != null) {
-			StringBuilder sb = new StringBuilder();
-			sb.append(plugin.getParkingStartDesc(mapActivity));
-			String leftDesc = plugin.getParkingLeftDesc(mapActivity);
-			if (!Algorithms.isEmpty(leftDesc)) {
-				sb.append("\n").append(leftDesc);
-			}
-			parkingDescription = sb.toString();
+			buildParkingDescription(mapActivity);
 		}
 		leftTitleButtonController = new TitleButtonController() {
 			@Override
@@ -39,6 +33,23 @@ public class ParkingPositionMenuController extends MenuController {
 		};
 		leftTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_delete);
 		leftTitleButtonController.leftIconId = R.drawable.ic_action_delete_dark;
+	}
+
+	private void buildParkingDescription(MapActivity mapActivity) {
+		StringBuilder sb = new StringBuilder();
+		sb.append(plugin.getParkingStartDesc(mapActivity));
+		String leftDesc = plugin.getParkingLeftDesc(mapActivity);
+		if (!Algorithms.isEmpty(leftDesc)) {
+			sb.append("\n").append(leftDesc);
+		}
+		parkingDescription = sb.toString();
+	}
+
+	@Override
+	protected void setObject(Object object) {
+		if (plugin != null) {
+			buildParkingDescription(getMapActivity());
+		}
 	}
 
 	@Override
@@ -58,7 +69,7 @@ public class ParkingPositionMenuController extends MenuController {
 
 	@Override
 	public Drawable getLeftIcon() {
-		return getIcon(R.drawable.ic_action_parking_dark, R.color.map_widget_blue, R.color.osmand_orange);
+		return getIcon(R.drawable.ic_action_parking_dark, R.color.map_widget_blue);
 	}
 
 	@Override

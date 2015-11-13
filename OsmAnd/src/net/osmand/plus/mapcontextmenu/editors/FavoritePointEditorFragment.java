@@ -16,6 +16,7 @@ import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.dialogs.FavoriteDialogs;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.util.Algorithms;
@@ -207,7 +208,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		if (group != null) {
 			color = group.color;
 		}
-		return getPaintedIcon(R.drawable.ic_action_fav_dark, color);
+		return FavoriteImageDrawable.getOrCreate(getMapActivity(), color, false);
 	}
 
 	@Override

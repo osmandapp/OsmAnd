@@ -263,6 +263,8 @@ public abstract class PointEditorFragment extends Fragment {
 		categoryEdit.setText(n);
 		ImageView categoryImage = (ImageView) view.findViewById(R.id.category_image);
 		categoryImage.setImageDrawable(getCategoryIcon());
+		ImageView nameImage = (ImageView) view.findViewById(R.id.name_image);
+		nameImage.setImageDrawable(getNameIcon());
 	}
 
 	protected String getDefaultCategoryName() {

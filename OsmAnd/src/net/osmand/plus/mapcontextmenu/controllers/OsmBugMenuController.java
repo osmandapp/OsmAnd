@@ -18,7 +18,7 @@ public class OsmBugMenuController extends MenuController {
 	private OsmEditingPlugin plugin;
 	private OpenStreetNote bug;
 
-	public OsmBugMenuController(OsmandApplication app, MapActivity mapActivity, PointDescription pointDescription, final OpenStreetNote bug) {
+	public OsmBugMenuController(OsmandApplication app, MapActivity mapActivity, PointDescription pointDescription, OpenStreetNote bug) {
 		super(new MenuBuilder(app), pointDescription, mapActivity);
 		plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
 		this.bug = bug;
@@ -27,7 +27,7 @@ public class OsmBugMenuController extends MenuController {
 			@Override
 			public void buttonPressed() {
 				if (plugin != null) {
-					plugin.getBugsLayer(getMapActivity()).commentBug(bug);
+					plugin.getBugsLayer(getMapActivity()).commentBug(getBug());
 				}
 			}
 		};
@@ -38,12 +38,26 @@ public class OsmBugMenuController extends MenuController {
 			@Override
 			public void buttonPressed() {
 				if (plugin != null) {
-					plugin.getBugsLayer(getMapActivity()).closeBug(bug);
+					plugin.getBugsLayer(getMapActivity()).closeBug(getBug());
 				}
 			}
 		};
 		rightTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_close);
 		rightTitleButtonController.leftIconId = R.drawable.ic_action_remove_dark;
+
+		updateData();
+	}
+
+	@Override
+	protected void setObject(Object object) {
+		if (object instanceof OpenStreetNote) {
+			this.bug = (OpenStreetNote) object;
+			updateData();
+		}
+	}
+
+	public OpenStreetNote getBug() {
+		return bug;
 	}
 
 	@Override
@@ -53,7 +67,11 @@ public class OsmBugMenuController extends MenuController {
 
 	@Override
 	public Drawable getLeftIcon() {
-		return getIcon(R.drawable.ic_action_gabout_dark, R.color.osmand_orange_dark, R.color.osmand_orange);
+		if (bug.isOpened()) {
+			return getIcon(R.drawable.ic_action_gabout_dark, R.color.osm_bug_unresolved_icon_color);
+		} else {
+			return getIcon(R.drawable.ic_action_gabout_dark, R.color.osm_bug_resolved_icon_color);
+		}
 	}
 
 	@Override
@@ -62,10 +80,20 @@ public class OsmBugMenuController extends MenuController {
 	}
 
 	@Override
+	public boolean needStreetName() {
+		return false;
+	}
+
+	@Override
 	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, LatLon latLon) {
 		super.addPlainMenuItems(typeStr, pointDescription, latLon);
 		for (String description : bug.getCommentDescriptionList()) {
 			addPlainMenuItem(R.drawable.ic_action_note_dark, description, true);
 		}
+	}
+
+	@Override
+	public void updateData() {
+		rightTitleButtonController.visible = bug.isOpened();
 	}
 }

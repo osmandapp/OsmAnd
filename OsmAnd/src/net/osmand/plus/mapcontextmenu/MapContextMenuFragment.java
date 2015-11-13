@@ -43,6 +43,7 @@ import net.osmand.plus.mapcontextmenu.MenuController.TitleButtonController;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleProgressController;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.util.Algorithms;
 
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 import static net.osmand.plus.mapcontextmenu.MenuBuilder.SHADOW_HEIGHT_BOTTOM_DP;
@@ -478,6 +479,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 
 			if (leftTitleButtonController.needRightText) {
 				titleButtonRightText.setText(leftTitleButtonController.rightTextCaption);
+				titleButtonRightText.setVisibility(View.VISIBLE);
 			} else {
 				titleButtonRightText.setVisibility(View.GONE);
 			}
@@ -592,6 +594,12 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	}
 
 	public void rebuildMenu() {
+		IconsCache iconsCache = getMyApplication().getIconsCache();
+		boolean light = getMyApplication().getSettings().isLightContent();
+		final ImageButton buttonFavorite = (ImageButton) view.findViewById(R.id.context_menu_fav_button);
+		buttonFavorite.setImageDrawable(iconsCache.getIcon(menu.getFavActionIconId(),
+				light ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
+
 		buildHeader();
 
 		LinearLayout bottomLayout = (LinearLayout)view.findViewById(R.id.context_menu_bottom_view);
@@ -677,21 +685,30 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		line1.setText(menu.getTitleStr());
 
 		// Text line 2
-		TextView distanceText = (TextView) view.findViewById(R.id.distance);
-		ImageView direction = (ImageView) view.findViewById(R.id.direction);
-		if (menu.displayDistanceDirection()) {
-			updateDistanceDirection();
-		} else {
-			direction.setVisibility(View.GONE);
-			distanceText.setVisibility(View.GONE);
-		}
-
 		TextView line2 = (TextView) view.findViewById(R.id.context_menu_line2);
-		line2.setText(menu.getLocationStr());
-		Drawable icon = menu.getSecondLineIcon();
-		if (icon != null) {
+		String typeStr = menu.getTypeStr();
+		String streetStr = menu.getStreetStr();
+		StringBuilder line2Str = new StringBuilder();
+		if (!Algorithms.isEmpty(typeStr)) {
+			line2Str.append(typeStr);
+			Drawable icon = menu.getTypeIcon();
 			line2.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
 			line2.setCompoundDrawablePadding(dpToPx(5f));
+		}
+		if (!Algorithms.isEmpty(streetStr) && !menu.displayStreetNameInTitle()) {
+			if (line2Str.length() > 0) {
+				line2Str.append(", ");
+			}
+			line2Str.append(streetStr);
+		}
+		line2.setText(line2Str.toString());
+
+		View compassView = view.findViewById(R.id.compass_layout);
+		if (menu.displayDistanceDirection()) {
+			updateDistanceDirection();
+			compassView.setVisibility(View.VISIBLE);
+		} else {
+			compassView.setVisibility(View.GONE);
 		}
 	}
 

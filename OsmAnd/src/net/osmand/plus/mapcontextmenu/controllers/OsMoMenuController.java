@@ -22,7 +22,7 @@ public class OsMoMenuController extends MenuController {
 
 	private OsMoDevice device;
 
-	public OsMoMenuController(OsmandApplication app, MapActivity mapActivity, PointDescription pointDescription, final OsMoDevice device) {
+	public OsMoMenuController(OsmandApplication app, MapActivity mapActivity, PointDescription pointDescription, OsMoDevice device) {
 		super(new MenuBuilder(app), pointDescription, mapActivity);
 		this.device = device;
 
@@ -32,11 +32,12 @@ public class OsMoMenuController extends MenuController {
 				if (OsMoPositionLayer.getFollowDestinationId() != null) {
 					OsMoPositionLayer.setFollowDestination(null);
 				} else {
-					if(device.getLastLocation() != null) {
+					OsMoDevice dev = getDevice();
+					if(dev.getLastLocation() != null) {
 						TargetPointsHelper targets = getMapActivity().getMyApplication().getTargetPointsHelper();
-						targets.navigateToPoint(new LatLon(device.getLastLocation().getLatitude(), device.getLastLocation().getLongitude()), true, -1);
+						targets.navigateToPoint(new LatLon(dev.getLastLocation().getLatitude(), dev.getLastLocation().getLongitude()), true, -1);
 					}
-					OsMoPositionLayer.setFollowDestination(device);
+					OsMoPositionLayer.setFollowDestination(dev);
 				}
 				getMapActivity().getContextMenu().updateMenuUI();
 			}
@@ -47,7 +48,7 @@ public class OsMoMenuController extends MenuController {
 			public void buttonPressed() {
 				OsMoPlugin osMoPlugin = OsmandPlugin.getEnabledPlugin(OsMoPlugin.class);
 				if (osMoPlugin != null) {
-					OsMoGroupsActivity.showSettingsDialog(getMapActivity(), osMoPlugin, device);
+					OsMoGroupsActivity.showSettingsDialog(getMapActivity(), osMoPlugin, getDevice());
 				}
 			}
 		};
@@ -55,6 +56,18 @@ public class OsMoMenuController extends MenuController {
 		rightTitleButtonController.leftIconId = R.drawable.ic_action_settings;
 
 		updateData();
+	}
+
+	@Override
+	protected void setObject(Object object) {
+		if (object instanceof OsMoDevice) {
+			this.device = (OsMoDevice) object;
+			updateData();
+		}
+	}
+
+	public OsMoDevice getDevice() {
+		return device;
 	}
 
 	@Override

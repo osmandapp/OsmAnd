@@ -30,12 +30,14 @@ import java.util.Map;
 
 public class EditPOIMenuController extends MenuController {
 
+	private OsmPoint osmPoint;
 	private OsmEditingPlugin plugin;
 	private String pointTypeStr;
 	private ProgressDialogPoiUploader poiUploader;
 
-	public EditPOIMenuController(OsmandApplication app, MapActivity mapActivity, PointDescription pointDescription, final OsmPoint osmPoint) {
+	public EditPOIMenuController(OsmandApplication app, MapActivity mapActivity, PointDescription pointDescription, OsmPoint osmPoint) {
 		super(new EditPOIMenuBuilder(app, osmPoint), pointDescription, mapActivity);
+		this.osmPoint = osmPoint;
 		plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
 
 		poiUploader = new ProgressDialogPoiUploader() {
@@ -72,7 +74,7 @@ public class EditPOIMenuController extends MenuController {
 			@Override
 			public void buttonPressed() {
 				if (plugin != null) {
-					SendPoiDialogFragment sendPoiDialogFragment = SendPoiDialogFragment.createInstance(new OsmPoint[]{osmPoint});
+					SendPoiDialogFragment sendPoiDialogFragment = SendPoiDialogFragment.createInstance(new OsmPoint[]{getOsmPoint()});
 					sendPoiDialogFragment.setPoiUploader(poiUploader);
 					sendPoiDialogFragment.show(getMapActivity().getSupportFragmentManager(), SendPoiDialogFragment.TAG);
 				}
@@ -92,10 +94,11 @@ public class EditPOIMenuController extends MenuController {
 					public void onClick(DialogInterface dialog, int which) {
 						if (plugin != null) {
 							boolean deleted = false;
-							if (osmPoint instanceof OsmNotesPoint) {
-								deleted = plugin.getDBBug().deleteAllBugModifications((OsmNotesPoint) osmPoint);
-							} else if (osmPoint instanceof OpenstreetmapPoint) {
-								deleted = plugin.getDBPOI().deletePOI((OpenstreetmapPoint) osmPoint);
+							OsmPoint point = getOsmPoint();
+							if (point instanceof OsmNotesPoint) {
+								deleted = plugin.getDBBug().deleteAllBugModifications((OsmNotesPoint) point);
+							} else if (point instanceof OpenstreetmapPoint) {
+								deleted = plugin.getDBPOI().deletePOI((OpenstreetmapPoint) point);
 							}
 							if (deleted) {
 								getMapActivity().getContextMenu().close();
@@ -120,6 +123,17 @@ public class EditPOIMenuController extends MenuController {
 	}
 
 	@Override
+	protected void setObject(Object object) {
+		if (object instanceof OsmPoint) {
+			this.osmPoint = (OsmPoint) object;
+		}
+	}
+
+	public OsmPoint getOsmPoint() {
+		return osmPoint;
+	}
+
+	@Override
 	protected int getSupportedMenuStatesPortrait() {
 		return MenuState.HEADER_ONLY | MenuState.HALF_SCREEN | MenuState.FULL_SCREEN;
 	}
@@ -131,7 +145,7 @@ public class EditPOIMenuController extends MenuController {
 
 	@Override
 	public Drawable getLeftIcon() {
-		return getIcon(R.drawable.ic_action_gabout_dark, R.color.osmand_orange_dark, R.color.osmand_orange);
+		return getIcon(R.drawable.ic_action_gabout_dark, R.color.created_poi_icon_color);
 	}
 
 	@Override

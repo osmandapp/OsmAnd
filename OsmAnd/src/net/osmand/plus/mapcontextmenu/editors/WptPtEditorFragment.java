@@ -11,10 +11,11 @@ import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
+import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.util.Algorithms;
 
-public class WprPtEditorFragment extends PointEditorFragment {
+public class WptPtEditorFragment extends PointEditorFragment {
 	private WptPtEditor editor;
 	private WptPt wpt;
 	private SavingTrackHelper helper;
@@ -57,7 +58,7 @@ public class WprPtEditorFragment extends PointEditorFragment {
 		//int slideInAnim = editor.getSlideInAnimation();
 		//int slideOutAnim = editor.getSlideOutAnimation();
 
-		WprPtEditorFragment fragment = new WprPtEditorFragment();
+		WptPtEditorFragment fragment = new WptPtEditorFragment();
 		mapActivity.getSupportFragmentManager().beginTransaction()
 				//.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
 				.add(R.id.fragmentContainer, fragment, editor.getFragmentTag())
@@ -141,7 +142,7 @@ public class WprPtEditorFragment extends PointEditorFragment {
 	@Override
 	public Drawable getNameIcon() {
 		int color = wpt.getColor(defaultColor);
-		return getPaintedIcon(R.drawable.ic_action_fav_dark, color);
+		return FavoriteImageDrawable.getOrCreate(getMapActivity(), color, false);
 	}
 
 	@Override

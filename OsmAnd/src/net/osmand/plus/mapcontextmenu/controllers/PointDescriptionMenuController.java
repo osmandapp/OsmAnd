@@ -13,19 +13,25 @@ import net.osmand.util.Algorithms;
 
 public class PointDescriptionMenuController extends MenuController {
 
+	private boolean hasTypeInDescription;
+
 	public PointDescriptionMenuController(OsmandApplication app, MapActivity mapActivity, final PointDescription pointDescription) {
 		super(new MenuBuilder(app), pointDescription, mapActivity);
+		initData();
+	}
+
+	private void initData() {
+		hasTypeInDescription = !Algorithms.isEmpty(getPointDescription().getTypeName());
+	}
+
+	@Override
+	protected void setObject(Object object) {
+		initData();
 	}
 
 	@Override
 	protected int getSupportedMenuStatesPortrait() {
 		return MenuState.HEADER_ONLY | MenuState.HALF_SCREEN | MenuState.FULL_SCREEN;
-	}
-
-	@Override
-	public boolean needTypeStr() {
-		String typeName = getPointDescription().getTypeName();
-		return (typeName != null && !Algorithms.isEmpty(typeName));
 	}
 
 	@Override
@@ -44,8 +50,8 @@ public class PointDescriptionMenuController extends MenuController {
 	}
 
 	@Override
-	public Drawable getSecondLineIcon() {
-		if (needTypeStr()) {
+	public Drawable getSecondLineTypeIcon() {
+		if (hasTypeInDescription) {
 			return getIcon(R.drawable.ic_small_group);
 		} else {
 			return null;
@@ -54,11 +60,16 @@ public class PointDescriptionMenuController extends MenuController {
 
 	@Override
 	public String getTypeStr() {
-		if (needTypeStr()) {
+		if (hasTypeInDescription) {
 			return getPointDescription().getTypeName();
 		} else {
 			return "";
 		}
+	}
+
+	@Override
+	public String getCommonTypeStr() {
+		return getMapActivity().getString(R.string.shared_string_location);
 	}
 
 	@Override

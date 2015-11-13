@@ -100,14 +100,24 @@ public abstract class MenuController extends BaseMenuController {
 					menuController = new MyLocationMenuController(app, mapActivity, pointDescription);
 				}
 			}
-		} else {
+		}
+		if (menuController == null) {
 			menuController = new PointDescriptionMenuController(app, mapActivity, pointDescription);
 		}
-		if (menuController != null) {
-			menuController.menuType = menuType;
-		}
+		menuController.menuType = menuType;
 		return menuController;
 	}
+
+	public void update(PointDescription pointDescription, Object object) {
+		setPointDescription(pointDescription);
+		setObject(object);
+	}
+
+	protected void setPointDescription(PointDescription pointDescription) {
+		this.pointDescription = pointDescription;
+	}
+
+	protected abstract void setObject(Object object);
 
 	public void addPlainMenuItem(int iconId, String text, boolean needLinks) {
 		builder.addPlainMenuItem(iconId, text, needLinks);
@@ -240,11 +250,13 @@ public abstract class MenuController extends BaseMenuController {
 
 	public Drawable getLeftIcon() { return null; }
 
-	public Drawable getSecondLineIcon() { return null; }
+	public Drawable getSecondLineTypeIcon() { return null; }
 
 	public int getFavActionIconId() { return R.drawable.ic_action_fav_dark; }
 
 	public String getTypeStr() { return ""; }
+
+	public String getCommonTypeStr() { return ""; }
 
 	public String getNameStr() { return pointDescription.getName(); }
 

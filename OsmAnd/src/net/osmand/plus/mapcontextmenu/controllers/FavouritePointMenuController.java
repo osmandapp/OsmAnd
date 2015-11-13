@@ -5,7 +5,6 @@ import android.support.v4.app.Fragment;
 
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -22,6 +21,13 @@ public class FavouritePointMenuController extends MenuController {
 	public FavouritePointMenuController(OsmandApplication app, MapActivity mapActivity, PointDescription pointDescription, final FavouritePoint fav) {
 		super(new FavouritePointMenuBuilder(app, fav), pointDescription, mapActivity);
 		this.fav = fav;
+	}
+
+	@Override
+	protected void setObject(Object object) {
+		if (object instanceof FavouritePoint) {
+			this.fav = (FavouritePoint) object;
+		}
 	}
 
 	@Override
@@ -56,11 +62,11 @@ public class FavouritePointMenuController extends MenuController {
 
 	@Override
 	public Drawable getLeftIcon() {
-		return getPaintedIcon(R.drawable.ic_action_fav_dark, fav.getColor());
+		return FavoriteImageDrawable.getOrCreate(getMapActivity().getMyApplication(), fav.getColor(), false);
 	}
 
 	@Override
-	public Drawable getSecondLineIcon() {
+	public Drawable getSecondLineTypeIcon() {
 		return getIcon(R.drawable.ic_small_group);
 	}
 

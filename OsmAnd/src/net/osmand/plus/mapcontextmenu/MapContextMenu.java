@@ -198,6 +198,8 @@ public class MapContextMenu extends MenuTitleController {
 
 		if (needAcquireMenuController) {
 			acquireMenuController();
+		} else {
+			menuController.update(pointDescription, object);
 		}
 		initTitle();
 
@@ -361,7 +363,11 @@ public class MapContextMenu extends MenuTitleController {
 		if (object != null && object instanceof FavouritePoint) {
 			getFavoritePointEditor().edit((FavouritePoint) object);
 		} else {
-			getFavoritePointEditor().add(latLon, getTitleStr());
+			String title = getTitleStr();
+			if (pointDescription.isFavorite() || title.equals(addressNotKnownStr)) {
+				title = "";
+			}
+			getFavoritePointEditor().add(latLon, title);
 		}
 	}
 
@@ -385,8 +391,12 @@ public class MapContextMenu extends MenuTitleController {
 	}
 
 	public void addWptPt() {
-		if (object == null || !(object instanceof WptPt)) {
-			getWptPtPointEditor().add(latLon, getTitleStr());
+		if (object == null) {
+			String title = getTitleStr();
+			if (pointDescription.isWpt() || title.equals(addressNotKnownStr)) {
+				title = "";
+			}
+			getWptPtPointEditor().add(latLon, title);
 		}
 	}
 
@@ -503,6 +513,10 @@ public class MapContextMenu extends MenuTitleController {
 
 	public boolean displayDistanceDirection() {
 		return menuController != null && menuController.displayDistanceDirection();
+	}
+
+	public boolean displayStreetNameInTitle() {
+		return menuController != null && menuController.displayStreetNameInTitle();
 	}
 
 	public void updateData() {

@@ -34,7 +34,7 @@ public class AudioVideoNoteMenuController extends MenuController {
 			@Override
 			public void buttonPressed() {
 				if (plugin != null) {
-					plugin.playRecording(getMapActivity(), recording);
+					plugin.playRecording(getMapActivity(), getRecording());
 				}
 			}
 		};
@@ -59,7 +59,7 @@ public class AudioVideoNoteMenuController extends MenuController {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						if (plugin != null) {
-							plugin.deleteRecording(recording);
+							plugin.deleteRecording(getRecording());
 							getMapActivity().getContextMenu().close();
 						}
 					}
@@ -73,6 +73,17 @@ public class AudioVideoNoteMenuController extends MenuController {
 	}
 
 	@Override
+	protected void setObject(Object object) {
+		if (object instanceof Recording) {
+			this.recording = (Recording) object;
+		}
+	}
+
+	public Recording getRecording() {
+		return recording;
+	}
+
+	@Override
 	protected int getSupportedMenuStatesPortrait() {
 		return MenuState.HEADER_ONLY | MenuState.HALF_SCREEN | MenuState.FULL_SCREEN;
 	}
@@ -80,17 +91,27 @@ public class AudioVideoNoteMenuController extends MenuController {
 	@Override
 	public Drawable getLeftIcon() {
 		if (recording.isPhoto()) {
-			return getIcon(R.drawable.ic_action_photo_dark, R.color.osmand_orange_dark, R.color.osmand_orange);
+			return getIcon(R.drawable.ic_action_photo_dark, R.color.audio_video_icon_color);
 		} else if (recording.isAudio()) {
-			return getIcon(R.drawable.ic_action_micro_dark, R.color.osmand_orange_dark, R.color.osmand_orange);
+			return getIcon(R.drawable.ic_action_micro_dark, R.color.audio_video_icon_color);
 		} else {
-			return getIcon(R.drawable.ic_action_video_dark, R.color.osmand_orange_dark, R.color.osmand_orange);
+			return getIcon(R.drawable.ic_action_video_dark, R.color.audio_video_icon_color);
 		}
+	}
+
+	@Override
+	public String getNameStr() {
+		return recording.getName(getMapActivity(), false);
 	}
 
 	@Override
 	public String getTypeStr() {
 		return recording.getType(getMapActivity());
+	}
+
+	@Override
+	public String getCommonTypeStr() {
+		return getMapActivity().getString(R.string.audionotes_plugin_name);
 	}
 
 	@Override

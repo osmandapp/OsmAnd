@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+	<color name="audio_video_icon_color">#128a89</color>
+    <color name="created_poi_icon_color">#4caf50</color>
+    <color name="osm_bug_unresolved_icon_color">#d44a4a</color>
+    <color name="osm_bug_resolved_icon_color">#4caf50</color>
+
 	<color name="osmand_orange">#ff8f00</color>
 	<color name="app_mode_icon_color">#33B4E4</color>
 	<color name="recording_color">#F44336</color>

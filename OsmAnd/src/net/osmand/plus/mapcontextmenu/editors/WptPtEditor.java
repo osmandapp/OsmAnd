@@ -29,17 +29,10 @@ public class WptPtEditor extends PointEditor {
 			return;
 		}
 		isNew = true;
-		String name;
-		PointDescription pointDescription = mapActivity.getContextMenu().getPointDescription();
-		if (!pointDescription.isWpt() && !mapActivity.getContextMenu().isAddressUnknown()) {
-			name = title;
-		} else {
-			name = "";
-		}
 		wpt = new WptPt(latLon.getLatitude(), latLon.getLongitude(),
 				System.currentTimeMillis(), Double.NaN, 0, Double.NaN);
-		wpt.name = name;
-		WprPtEditorFragment.showInstance(mapActivity);
+		wpt.name = title;
+		WptPtEditorFragment.showInstance(mapActivity);
 	}
 
 	public void edit(WptPt wpt) {
@@ -48,6 +41,6 @@ public class WptPtEditor extends PointEditor {
 		}
 		isNew = false;
 		this.wpt = wpt;
-		WprPtEditorFragment.showInstance(mapActivity);
+		WptPtEditorFragment.showInstance(mapActivity);
 	}
 }
