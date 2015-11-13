@@ -153,7 +153,7 @@ public class MapRouteInfoControl implements IRouteInformationListener {
 	private void updateWptBtn(final View parentView) {
 		ImageView wptBtn = (ImageView) parentView.findViewById(R.id.waypoints);
 		wptBtn.setImageDrawable(mapActivity.getMyApplication().getIconsCache()
-				.getContentIcon(R.drawable.ic_action_flag_dark));
+				.getContentIcon(R.drawable.map_action_waypoints));
 		wptBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
