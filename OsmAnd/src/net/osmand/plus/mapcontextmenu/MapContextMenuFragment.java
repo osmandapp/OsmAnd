@@ -56,6 +56,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	public static final float FAB_PADDING_TOP_DP = 4f;
 	public static final float MARKER_PADDING_DP = 20f;
 	public static final float MARKER_PADDING_X_DP = 50f;
+	public static final float SKIP_HALF_SCREEN_STATE_KOEF = .21f;
 
 	private View view;
 	private View mainView;
@@ -87,6 +88,8 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	private int origMarkerX;
 	private int origMarkerY;
 	private boolean customMapCenter;
+
+	private float skipHalfScreenStateLimit;
 
 	private int screenOrientation;
 
@@ -131,6 +134,8 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 							 Bundle savedInstanceState) {
 
 		screenHeight = getScreenHeight();
+		skipHalfScreenStateLimit = screenHeight * SKIP_HALF_SCREEN_STATE_KOEF;
+
 		viewHeight = screenHeight - getStatusBarHeight();
 
 		fabPaddingTopPx = dpToPx(FAB_PADDING_TOP_DP);
@@ -290,19 +295,26 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 					case MotionEvent.ACTION_UP:
 					case MotionEvent.ACTION_CANCEL:
 						int currentY = getViewY();
-
+						
 						slidingUp = Math.abs(maxVelocityY) > 500 && (currentY - dyMain) < -50;
 						slidingDown = Math.abs(maxVelocityY) > 500 && (currentY - dyMain) > 50;
 
 						velocity.recycle();
 
+						boolean skipHalfScreenState = Math.abs(currentY - dyMain) > skipHalfScreenStateLimit;
 						boolean needCloseMenu = false;
 
 						int oldMenuState = menu.getCurrentMenuState();
 						if (menuBottomViewHeight > 0 && slidingUp) {
 							menu.slideUp();
+							if (skipHalfScreenState) {
+								menu.slideUp();
+							}
 						} else if (slidingDown) {
 							needCloseMenu = !menu.slideDown();
+							if (!needCloseMenu && skipHalfScreenState) {
+								menu.slideDown();
+							}
 						}
 						int newMenuState = menu.getCurrentMenuState();
 						boolean needMapAdjust = oldMenuState != newMenuState && newMenuState != MenuController.MenuState.FULL_SCREEN;
