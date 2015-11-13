@@ -2061,5 +2061,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="contact_us">Contact us</string>
     <string name="map_legend">Map legend</string>
     <string name="save_poi_without_poi_type_message">Do you really want to save poi without POI type?</string>
+    <string name="poi_context_menu_modify_osm_change">Modify OSM change</string>
     <!-- string name="map_legend_item_description">Legend for OsmAnd default map style, Internet connectivity needed to display</string -->
 </resources>
