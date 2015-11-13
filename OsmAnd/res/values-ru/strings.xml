@@ -1819,4 +1819,5 @@
 
 <string name="read_more">Подробнее</string>
     <string name="whats_new">Что нового в</string>
+    <string name="save_poi_without_poi_type_message">Вы действительно хотите сохранить POI без указания типа?</string>
     </resources>
