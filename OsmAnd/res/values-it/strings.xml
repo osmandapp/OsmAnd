@@ -2042,4 +2042,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="rendering_attr_hideProposed_name">Nascondi gli oggetti proposti</string>
     <string name="read_more">Leggi di più</string>
     <string name="whats_new">Novità nella versione</string>
+    <string name="share_osm_edits_subject">Modifiche Osm condivise tramite OsmAnd</string>
+    <string name="lang_nds">Bassa Germania</string>
+    <string name="lang_mk">Macedone</string>
     </resources>
