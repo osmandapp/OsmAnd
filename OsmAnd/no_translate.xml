@@ -13,6 +13,7 @@
     <!-- Not translatable -->
     <string name="release_2_2">
         \u2022 New context-sensitive UI for tapping locations on the map and on other screens\n\n
+        \u2022 Map screen is now launched directly, unless \'Show Dashboard on app start\' is selected\n\n
         \u2022 Choice between Dashboard or Menu as primary app control\n\n
         \u2022 New Wikipedia data, now downloads per country, and with much more complete data\n\n
         \u2022 Better route recalculation (after repeated attempts engine now suggests a different route)\n\n
