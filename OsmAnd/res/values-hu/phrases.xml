@@ -1020,4 +1020,92 @@
 	<string name="poi_access_delivery">Áruszállításra használható</string>
 	<string name="poi_access_agricultural">Mezőgazdasági bemenet</string>
 
+	<string name="poi_content_silage">Tartalom: silótakarmány</string>
+	<string name="poi_content_water">Tartalom: víz</string>
+	<string name="poi_content_slurry">Tartalom: cementlé</string>
+	<string name="poi_content_oil">Tartalom: olaj</string>
+	<string name="poi_content_fuel">Tartalom: üzemanyag</string>
+	<string name="poi_content_manure">Tartalom: trágya</string>
+	<string name="poi_content_wine">Tartalom: bor</string>
+	<string name="poi_content_sewage">Tartalom: ürülék</string>
+	<string name="poi_content_gas">Tartalom: gáz</string>
+	<string name="poi_content_biomass">Tartalom: biomassza</string>
+	<string name="poi_content_wastewater">Tartalom: szennyvíz</string>
+	<string name="poi_content_crop">Tartalom: termény</string>
+	<string name="poi_content_fodder">Tartalom: takarmány</string>
+	<string name="poi_content_beer">Tartalom: sör</string>
+	<string name="poi_content_salt">Tartalom: só</string>
+	<string name="poi_content_grain">Tartalom: gabona</string>
+
+	<string name="poi_nudism_yes">Nudizmus: nem engedélyezett</string>
+	<string name="poi_nudism_no">Nudizmus: tiltott</string>
+	<string name="poi_nudism_obligatory">Nudizmus: kötelező</string>
+	<string name="poi_nudism_customary">Nudizmus: megszokott</string>
+	<string name="poi_nudism_permissive">Nudizmus: engedélyköteles</string>
+
+	<string name="poi_trade_building_supplies">Építőanyag</string>
+	<string name="poi_trade_plumbing">Vízvezeték szerelési anyagok</string>
+	<string name="poi_trade_wood">Faanyag</string>
+	<string name="poi_trade_agricultural_supplies">Mezőgazdasági anyagok</string>
+	<string name="poi_trade_tile">Burkolóanyagok</string>
+
+	<string name="poi_population">Lakosság</string>
+	<string name="poi_parking_underground">Földalatti</string>
+	<string name="poi_parking_multi_storey">Többszintes</string>
+
+	<string name="poi_bicycle_parking_anchors">Horgony</string>
+	<string name="poi_bicycle_parking_stands">Korlát</string>
+	<string name="poi_bicycle_parking_wall_loops">Kerékbefogó hurok</string>
+	<string name="poi_bicycle_parking_rack">Keret</string>
+	<string name="poi_bicycle_parking_building">Speciális épület</string>
+	<string name="poi_bicycle_parking_shed">Fészer</string>
+	<string name="poi_bicycle_parking_bollard">Oszlop</string>
+	<string name="poi_bicycle_parking_informal">Nem hivatalos</string>
+
+	<string name="poi_leaf_type_broadleaved">Lombos</string>
+	<string name="poi_leaf_type_needleleaved">Tűlevelű</string>
+	<string name="poi_leaf_type_mixed">Vegyes</string>
+	<string name="poi_leaf_type_leafless">Levéltelen</string>
+	<string name="poi_species">Fajok</string>
+	<string name="poi_genus">Nemzetség</string>
+	<string name="poi_taxon">Taxon</string>
+
+	<string name="poi_trees_olive">Oliva</string>
+	<string name="poi_trees_apple">Alma</string>
+	<string name="poi_trees_oil">Olajpálma</string>
+	<string name="poi_trees_orange">Narancs</string>
+	<string name="poi_trees_almond">Mandula</string>
+	<string name="poi_trees_banana">Banán</string>
+	<string name="poi_trees_hazel">Mogyoró</string>
+	<string name="poi_trees_coconut">Kókusz</string>
+	<string name="poi_trees_persimmon">Datolyaszilva</string>
+	<string name="poi_trees_cherry">Cseresznye</string>
+	<string name="poi_trees_walnut">Dió</string>
+	<string name="poi_trees_plum">Szilva</string>
+	<string name="poi_trees_peach">Barack</string>
+	<string name="poi_trees_tea">Tea</string>
+	<string name="poi_trees_coca">Kokacserje</string>
+	<string name="poi_trees_kiwi">Kivi</string>
+	<string name="poi_trees_nectorine">Nektarin</string>
+	<string name="poi_trees_mango">Mangó</string>
+	<string name="poi_trees_rubber">Gumi</string>
+	<string name="poi_trees_meadow_orchard">Gyümölcsös</string>
+	<string name="poi_trees_date">Datolyapálma</string>
+	<string name="poi_trees_coffea">Kávé</string>
+	<string name="poi_trees_pomegranate">Gránátalma</string>
+
+	<string name="poi_urban">Városi</string>
+	<string name="poi_rural">Vidéki</string>
+
+	<string name="poi_int_name">Nemzetközi név</string>
+	<string name="poi_nat_name">Nemzeti név</string>
+	<string name="poi_reg_name">Regionális név</string>
+	<string name="poi_loc_name">Helyi név</string>
+	<string name="poi_old_name">Korábbi név</string>
+	<string name="poi_alt_name">Alternatív név</string>
+
+	<string name="poi_cuisine">Konyha</string>
+
+	<string name="poi_smoking_no">Nemdohányzó</string>
+	<string name="poi_capacity">Kapacitás</string>
 	</resources>

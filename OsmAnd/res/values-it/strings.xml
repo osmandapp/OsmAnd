@@ -119,7 +119,7 @@
     <string name="favorite_home_category">Casa</string>
     <string name="favorite_friends_category">Amici</string>
     <string name="favorite_places_category">Luoghi</string>
-    <string name="shared_string_others">Altro</string>
+    <string name="shared_string_others">Ancora</string>
     <string name="shared_string_no_thanks">No, grazie</string>
     <string name="basemap_missing">La mappa di base del mondo (ricopre l\'intero mondo per zoom bassi) è mancante. Puoi scaricare World_basemap_x.obf per un sistema completo.</string>
     <string name="vector_data_missing">Mancano i dati (\'offline\') nella scheda SD. Ti consigliamo di scaricarli per poter usare le mappe offline.</string>
@@ -2040,9 +2040,10 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     
     
     <string name="rendering_attr_hideProposed_name">Nascondi gli oggetti proposti</string>
-    <string name="read_more">Leggi di più</string>
+    <string name="read_more">Ancora</string>
     <string name="whats_new">Novità nella versione</string>
     <string name="share_osm_edits_subject">Modifiche Osm condivise tramite OsmAnd</string>
     <string name="lang_nds">Bassa Germania</string>
     <string name="lang_mk">Macedone</string>
+    <string name="save_poi_without_poi_type_message">Vuoi davvero salvare il PDI senza specificarne il tipo?</string>
     </resources>
