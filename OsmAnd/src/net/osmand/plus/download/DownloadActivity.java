@@ -1,45 +1,5 @@
 package net.osmand.plus.download;
 
-import java.io.File;
-import java.lang.ref.WeakReference;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Set;
-
-import net.osmand.IProgress;
-import net.osmand.PlatformUtil;
-import net.osmand.access.AccessibleToast;
-import net.osmand.data.LatLon;
-import net.osmand.map.WorldRegion;
-import net.osmand.map.WorldRegion.RegionParams;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.OsmandSettings.DrivingRegion;
-import net.osmand.plus.OsmandSettings.MetricsConstants;
-import net.osmand.plus.R;
-import net.osmand.plus.Version;
-import net.osmand.plus.activities.ActionBarProgressActivity;
-import net.osmand.plus.activities.LocalIndexInfo;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.TabActivity;
-import net.osmand.plus.base.BasicProgressAsyncTask;
-import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
-import net.osmand.plus.download.ui.ActiveDownloadsDialogFragment;
-import net.osmand.plus.download.ui.BottomSheetDownloadFragment;
-import net.osmand.plus.download.ui.DataStoragePlaceDialogFragment;
-import net.osmand.plus.download.ui.DownloadResourceGroupFragment;
-import net.osmand.plus.download.ui.LocalIndexesFragment;
-import net.osmand.plus.download.ui.UpdatesIndexFragment;
-import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
-import net.osmand.plus.srtmplugin.SRTMPlugin;
-import net.osmand.plus.views.controls.PagerSlidingTabStrip;
-
-import org.apache.commons.logging.Log;
-
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
@@ -64,6 +24,46 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import net.osmand.IProgress;
+import net.osmand.PlatformUtil;
+import net.osmand.access.AccessibleToast;
+import net.osmand.data.LatLon;
+import net.osmand.map.WorldRegion;
+import net.osmand.map.WorldRegion.RegionParams;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.DrivingRegion;
+import net.osmand.plus.OsmandSettings.MetricsConstants;
+import net.osmand.plus.R;
+import net.osmand.plus.Version;
+import net.osmand.plus.activities.ActionBarProgressActivity;
+import net.osmand.plus.activities.LocalIndexInfo;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.TabActivity;
+import net.osmand.plus.base.BasicProgressAsyncTask;
+import net.osmand.plus.base.BottomSheetDialogFragment;
+import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
+import net.osmand.plus.download.ui.ActiveDownloadsDialogFragment;
+import net.osmand.plus.download.ui.DataStoragePlaceDialogFragment;
+import net.osmand.plus.download.ui.DownloadResourceGroupFragment;
+import net.osmand.plus.download.ui.LocalIndexesFragment;
+import net.osmand.plus.download.ui.UpdatesIndexFragment;
+import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
+import net.osmand.plus.srtmplugin.SRTMPlugin;
+import net.osmand.plus.views.controls.PagerSlidingTabStrip;
+
+import org.apache.commons.logging.Log;
+
+import java.io.File;
+import java.lang.ref.WeakReference;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.Set;
 
 public class DownloadActivity extends ActionBarProgressActivity implements DownloadEvents {
 	private static final Log LOG = PlatformUtil.getLog(DownloadActivity.class);
@@ -662,7 +662,7 @@ public class DownloadActivity extends ActionBarProgressActivity implements Downl
 
 	}
 
-	public static class AskMapDownloadFragment extends BottomSheetDownloadFragment {
+	public static class AskMapDownloadFragment extends BottomSheetDialogFragment {
 		public static final String TAG = "AskMapDownloadFragment";
 
 		private static final String KEY_ASK_MAP_DOWNLOAD_ITEM_FILENAME = "key_ask_map_download_item_filename";
@@ -745,7 +745,7 @@ public class DownloadActivity extends ActionBarProgressActivity implements Downl
 		
 	}
 	
-	public static class GoToMapFragment extends BottomSheetDownloadFragment {
+	public static class GoToMapFragment extends BottomSheetDialogFragment {
 		public static final String TAG = "GoToMapFragment";
 
 		private static final String KEY_GOTO_MAP_REGION_CENTER = "key_goto_map_region_center";

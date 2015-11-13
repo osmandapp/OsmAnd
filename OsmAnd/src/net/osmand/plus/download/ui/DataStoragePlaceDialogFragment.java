@@ -1,13 +1,8 @@
 package net.osmand.plus.download.ui;
 
 import android.app.Activity;
-import android.app.Dialog;
-import android.app.DialogFragment;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.StatFs;
-import android.support.annotation.ColorRes;
-import android.support.annotation.DrawableRes;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,26 +18,16 @@ import net.osmand.access.AccessibleToast;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.download.DownloadActivity;
 
 import java.io.File;
 
-public class DataStoragePlaceDialogFragment extends DialogFragment {
+public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 
 	private File internalStorage;
 	private File externalStorage;
 	public static boolean isInterestedInFirstTime = true;
-
-	@Override
-	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		boolean isLightTheme = ((OsmandApplication) getActivity().getApplication())
-				.getSettings().OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME;
-		int themeId = isLightTheme ? R.style.OsmandLightTheme_BottomSheet
-				: R.style.OsmandDarkTheme_BottomSheet;
-		final Dialog dialog = new Dialog(getActivity(), themeId);
-		dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-		return dialog;
-	}
 
 	@Override
 	public void onStart() {
@@ -104,19 +89,6 @@ public class DataStoragePlaceDialogFragment extends DialogFragment {
 	public static File getInternalStorageDirectory(Activity activity) {
 		return ((OsmandApplication) activity.getApplication()).getSettings()
 				.getDefaultInternalStorage();
-	}
-
-	private OsmandApplication getMyApplication() {
-		return (OsmandApplication) getActivity().getApplication();
-	}
-
-	private Drawable getContentIcon(@DrawableRes int drawableRes) {
-		return getMyApplication().getIconsCache().getContentIcon(drawableRes);
-	}
-
-
-	private Drawable getIcon(@DrawableRes int drawableRes, @ColorRes int color) {
-		return getMyApplication().getIconsCache().getIcon(drawableRes, color);
 	}
 
 	private String getFreeSpace(File dir) {
