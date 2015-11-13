@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
 
     <string name="switch_to_raster_map_to_see">Vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v Nastaveních (Spravovat mapové soubory), nebo se přepněte na online mapy.</string>
     <string name="send_files_to_osm">Nahrát GPX soubory do OSM?</string>
@@ -1797,7 +1798,7 @@
     <string name="first_usage_item_description">Jak stahovat mapy, provést základní nastavení</string>
     <string name="navigation_item_description">Nastavení navigace</string>
     <string name="faq_item">Často kladené dotazy</string>
-    <string name="faq_item_description">Jak použít moduly</string>
+    <string name="faq_item_description">Často kladené otázky</string>
     <string name="map_viewing_item">Prohlížení mapy</string>
     <string name="search_on_the_map_item">Hledání na mapě</string>
     <string name="planning_trip_item">Plánování cesty</string>
@@ -1814,4 +1815,11 @@
     <string name="rendering_attr_hideProposed_name">Skrýt plánované objekty</string>
 
 <string name="whats_new">Novinky ve</string>
+    <string name="share_osm_edits_subject">Úpravy OSM sdílené přes OsmAnd</string>
+    <string name="lang_nds">Dolní němčina</string>
+    <string name="lang_mk">Makedónsky</string>
+    <string name="lang_fy">Frínsky</string>
+    <string name="lang_als">Albánsky (Tosk)</string>
+    <string name="read_more">Číst více</string>
+    <string name="save_poi_without_poi_type_message">Opravdu chcete uložit bod POI bez uvedení typu?</string>
     </resources>
