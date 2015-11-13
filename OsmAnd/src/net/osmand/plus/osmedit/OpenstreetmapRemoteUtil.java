@@ -7,6 +7,7 @@ import android.widget.Toast;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
+import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.Entity.EntityId;
 import net.osmand.osm.edit.Entity.EntityType;
@@ -361,6 +362,9 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 				entityInfo = st.getRegisteredEntityInfo().get(id);
 				// check whether this is node (because id of node could be the same as relation)
 				if (entity != null && MapUtils.getDistance(entity.getLatLon(), n.getLocation()) < 50) {
+					PoiType poiType = n.getType().getPoiTypeByKeyName(n.getSubType());
+					entity.removeTag(poiType.getOsmTag());
+					entity.putTag(EditPoiData.POI_TYPE_TAG, poiType.getOsmValue());
 					return entity;
 				}
 				return null;
