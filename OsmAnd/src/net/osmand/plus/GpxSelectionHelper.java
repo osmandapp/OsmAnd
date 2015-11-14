@@ -52,7 +52,19 @@ public class GpxSelectionHelper {
 	public List<SelectedGpxFile> getSelectedGPXFiles() {
 		return selectedGPXFiles;
 	}
-	
+
+	public SelectedGpxFile getSelectedGPXFile(WptPt point) {
+		for (SelectedGpxFile g : selectedGPXFiles) {
+			List<WptPt> pts = g.getGpxFile().points;
+			for (WptPt n : pts) {
+				if (n == point) {
+					return g;
+				}
+			}
+		}
+		return null;
+	}
+
 	public final String getString(int resId, Object... formatArgs) {
 		return app.getString(resId, formatArgs);
 	}

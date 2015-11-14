@@ -1168,7 +1168,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 						&& OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null) {
 					String name = f.getName();
 					SavingTrackHelper savingTrackHelper = app.getSavingTrackHelper();
-					savingTrackHelper.insertPointData(rec.lat, rec.lon, System.currentTimeMillis(), null, name, null);
+					savingTrackHelper.insertPointData(rec.lat, rec.lon, System.currentTimeMillis(), null, name, null, 0);
 				}
 			}
 

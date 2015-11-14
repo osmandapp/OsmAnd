@@ -6,6 +6,7 @@ import android.graphics.Color;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
+import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.PointDescription;
 import net.osmand.util.Algorithms;
@@ -581,7 +582,7 @@ public class GPXUtilities {
 			return g ;
 		}
 
-		
+
 		public boolean hasRtePt() {
 			for(Route r : routes) {
 				if(r.points.size() > 0) {
@@ -605,7 +606,23 @@ public class GPXUtilities {
 			}
 			return false;
 		}
-		
+
+		public void updateWptPt(WptPt pt, double lat, double lon, long time, String description, String name, String category, int color) {
+			pt.lat = lat;
+			pt.lon = lon;
+			pt.time = time;
+			pt.desc = description;
+			pt.name = name;
+			pt.category = category;
+			if (color != 0) {
+				pt.setColor(color);
+			}
+		}
+
+		public boolean deleteWptPt(WptPt pt) {
+			return points.remove(pt);
+		}
+
 		public List<TrkSegment> processRoutePoints() {
 			List<TrkSegment> tpoints = new ArrayList<TrkSegment>();
 			if (routes.size() > 0) {

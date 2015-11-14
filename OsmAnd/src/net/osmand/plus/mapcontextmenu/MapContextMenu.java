@@ -212,7 +212,7 @@ public class MapContextMenu extends MenuTitleController {
 			mapActivity.getMapView().setMapPosition(0);
 		}
 
-		mapActivity.getMapView().refreshMap();
+		mapActivity.refreshMap();
 
 		return true;
 	}
@@ -251,7 +251,7 @@ public class MapContextMenu extends MenuTitleController {
 			clearSelectedObject(this.object);
 		}
 		hide();
-		mapActivity.getMapView().refreshMap();
+		mapActivity.refreshMap();
 	}
 
 	public void hide() {

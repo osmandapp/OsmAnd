@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="context_menu_item_delete_waypoint">Delete GPX waypoint?</string>
+    <string name="context_menu_item_edit_waypoint">Edit GPX waypoint</string>
     <string name="shared_string_location">Location</string>
     <string name="share_osm_edits_subject">Osm Edits shared via OsmAnd</string>
     <string name="lang_nds">Low German</string>
