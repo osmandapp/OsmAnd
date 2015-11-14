@@ -2092,4 +2092,6 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="share_osm_edits_subject">Éditions OSM partagées grâce à OsmAnd</string>
     <string name="save_poi_without_poi_type_message">Souhaitez-vous enregistrer ce point d\'intérêt sans définir son type ?</string>
     <string name="shared_string_location">Localisation</string>
+    <string name="context_menu_item_delete_waypoint">Supprimer le point de passage GPX ?</string>
+    <string name="context_menu_item_edit_waypoint">Modifier le point de passage GPX</string>
     </resources>
