@@ -2011,4 +2011,5 @@
     <string name="lang_als">альбанская (тоская)</string>
     <string name="save_poi_without_poi_type_message">Вы сапраўды хочаце захаваць POI бяз тыпу?</string>
     <string name="share_osm_edits_subject">Рэдагаваньні OSM апублікаваныя праз OsmAnd</string>
+    <string name="shared_string_location">Месцазнаходжаньне</string>
     </resources>
