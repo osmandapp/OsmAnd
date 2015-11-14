@@ -74,6 +74,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/search_address_building"
+                                android:maxLines="8"
+                                android:ellipsize="end"
                                 android:textColor="?android:textColorPrimary"
                                 android:textSize="@dimen/default_list_text_size_large"/>
 
