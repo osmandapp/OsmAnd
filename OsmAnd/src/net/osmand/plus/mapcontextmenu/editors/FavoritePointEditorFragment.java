@@ -145,7 +145,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		} else {
 			helper.editFavouriteName(favorite, name, category, description);
 		}
-		getMapActivity().getMapView().refreshMap(true);
+		getMapActivity().refreshMap();
 		if (needDismiss) {
 			dismiss(false);
 		}
@@ -173,10 +173,12 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				helper.deleteFavourite(favorite);
+				saved = true;
 				if (needDismiss) {
 					dismiss(true);
+				} else {
+					getMapActivity().refreshMap();
 				}
-				getMapActivity().getMapView().refreshMap(true);
 			}
 		});
 		builder.create().show();

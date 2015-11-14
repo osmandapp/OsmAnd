@@ -212,7 +212,7 @@ public class MapContextMenu extends MenuTitleController {
 			mapActivity.getMapView().setMapPosition(0);
 		}
 
-		mapActivity.getMapView().refreshMap();
+		mapActivity.refreshMap();
 
 		return true;
 	}
@@ -246,12 +246,14 @@ public class MapContextMenu extends MenuTitleController {
 	}
 
 	public void close() {
-		active = false;
-		if (this.object != null) {
-			clearSelectedObject(this.object);
+		if (active) {
+			active = false;
+			if (this.object != null) {
+				clearSelectedObject(this.object);
+			}
+			hide();
+			mapActivity.refreshMap();
 		}
-		hide();
-		mapActivity.getMapView().refreshMap();
 	}
 
 	public void hide() {

@@ -2020,4 +2020,6 @@
     <string name="save_poi_without_poi_type_message">Gem IP uden at angive type?</string>
     <string name="poi_context_menu_modify_osm_change">Rediger OSM ændring</string>
     <string name="shared_string_location">Placering</string>
+    <string name="context_menu_item_delete_waypoint">Slet GPX-rutepunkt?</string>
+    <string name="context_menu_item_edit_waypoint">Rediger GPX-rutepunkt</string>
     </resources>
