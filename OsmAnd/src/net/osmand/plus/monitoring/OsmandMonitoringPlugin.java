@@ -23,7 +23,6 @@ import net.osmand.ValueHolder;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
-import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmAndFormatter;
@@ -144,8 +143,11 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		adapter.item(R.string.context_menu_item_add_waypoint).iconColor(R.drawable.ic_action_gnew_label_dark)
 				.listen(listener).reg();
 		if (selectedObj instanceof WptPt) {
-			adapter.item(R.string.context_menu_item_edit_waypoint).iconColor(R.drawable.ic_action_edit_dark)
-					.listen(listener).reg();
+			WptPt pt = (WptPt) selectedObj;
+			if (app.getSelectedGpxHelper().getSelectedGPXFile(pt) != null) {
+				adapter.item(R.string.context_menu_item_edit_waypoint).iconColor(R.drawable.ic_action_edit_dark)
+						.listen(listener).reg();
+			}
 		}
 	}
 	

@@ -246,12 +246,14 @@ public class MapContextMenu extends MenuTitleController {
 	}
 
 	public void close() {
-		active = false;
-		if (this.object != null) {
-			clearSelectedObject(this.object);
+		if (active) {
+			active = false;
+			if (this.object != null) {
+				clearSelectedObject(this.object);
+			}
+			hide();
+			mapActivity.refreshMap();
 		}
-		hide();
-		mapActivity.refreshMap();
 	}
 
 	public void hide() {
