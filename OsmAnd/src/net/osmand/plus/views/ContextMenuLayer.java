@@ -83,18 +83,22 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	public boolean isVisible() {
 		return menu.isActive();
 	}
-	
+
 	@Override
-	public void onDraw(Canvas canvas, RotatedTileBox box, DrawSettings nightMode) {
-		if(menu.isActive()) {
+	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
+		if (menu.isActive()) {
 			LatLon latLon = menu.getLatLon();
-			int x = (int) box.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
-			int y = (int) box.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
+			int x = (int) tileBox.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
+			int y = (int) tileBox.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
 			canvas.translate(x - contextMarker.getWidth() / 2, y - contextMarker.getHeight());
 			contextMarker.draw(canvas);
 		}
 	}
-	
+
+	@Override
+	public void onDraw(Canvas canvas, RotatedTileBox box, DrawSettings nightMode) {
+	}
+
 	
 	public void setSelectOnMap(CallbackWithObject<LatLon> selectOnMap) {
 		this.selectOnMap = selectOnMap;

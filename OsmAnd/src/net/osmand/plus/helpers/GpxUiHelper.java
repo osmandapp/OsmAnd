@@ -240,7 +240,10 @@ public class GpxUiHelper {
 			@Override
 			public View getView(final int position, View convertView, ViewGroup parent) {
 				// User super class to create the View
-				View v = activity.getLayoutInflater().inflate(layout, null);
+				View v = convertView;
+				if (v == null) {
+					v = activity.getLayoutInflater().inflate(layout, null);
+				}
 				ImageView icon = (ImageView) v.findViewById(R.id.icon);
 				icon.setImageDrawable(adapter.getImage(app, position, light));
 				final ArrayAdapter<String> arrayAdapter = this;
