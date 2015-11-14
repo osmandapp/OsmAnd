@@ -76,11 +76,11 @@
     <string name="use_transparent_map_theme">Tema transparente</string>
     <string name="native_library_not_supported">La biblioteca nativa no está soportada en este dispositivo.</string>
     <string name="init_native_library">Inicializando biblioteca nativa…</string>
-    <string name="choose_auto_follow_route">Auto-centrar vista de mapa</string>
+    <string name="choose_auto_follow_route">Auto-centrar vista del mapa</string>
     <string name="choose_auto_follow_route_descr">Tiempo hasta que la vista del mapa vuelve a sincronizarse con la posición actual</string>
     <string name="auto_follow_route_never">Nunca (pulse \'Ir\' para iniciar manualmente el guiado)</string>
-    <string name="auto_follow_route_navigation">Auto-centrar sólo nav</string>
-    <string name="auto_follow_route_navigation_descr">Auto-centra la vista del mapa sólo durante la navegación.</string>
+    <string name="auto_follow_route_navigation">Auto-centrar sólo navegación</string>
+    <string name="auto_follow_route_navigation_descr">Auto-centrar vista del mapa, sólo durante la navegación.</string>
     <string name="auto_follow_location_enabled">Auto-centrar vista del mapa activado.</string>
     <string name="pref_vector_rendering">Opciones específicas de renderizado vectorial</string>
     <string name="pref_overlay">Superpuesta / subyacente</string>
@@ -162,7 +162,7 @@
     <string name="search_offline_clear_search">Nueva búsqueda</string>
     <string name="map_text_size_descr">Selecciona el tamaño del texto para los nombres en el mapa</string>
     <string name="map_text_size">Tamaño de texto</string>
-    <string name="trace_rendering">Info depuración renderizado</string>
+    <string name="trace_rendering">Información de renderizado</string>
     <string name="trace_rendering_descr">Muestra el rendimiento de visualización</string>
     <string name="installing_new_resources">Desempaquetando nuevos datos…</string>
     <string name="internet_connection_required_for_online_route">Se seleccionó un servicio de navegación en línea, pero no hay conexión a Internet.</string>
@@ -219,7 +219,7 @@
     <string name="mile">milla</string>
     <string name="send_location_way_choose_title">Compartir ubicación utilizando</string>
     <string name="send_location_sms_pattern">Ubicación: %1$s\n%2$s</string>
-    <string name="send_location_email_pattern">Para ver la ubicación sigue el enlace del navegador %1$s o el enlace interno de android %2$s</string>
+    <string name="send_location_email_pattern">Para ver la ubicación sigue el enlace del navegador %1$s o el enlace interno de Android %2$s</string>
     <string name="send_location">Enviar ubicación</string>
     <string name="context_menu_item_share_location">Compartir ubicación</string>
     <string name="add_waypoint_dialog_added">El punto de ruta GPX «{0}» fue añadido correctamente</string>
@@ -231,7 +231,7 @@
     <string name="amenity_type_emergency">Emergencia</string>
     <string name="amenity_type_entertainment">Entretenimiento</string>
     <string name="amenity_type_finance">Financiero</string>
-    <string name="amenity_type_geocache">Geocache</string>
+    <string name="amenity_type_geocache">Geo-caché</string>
     <string name="amenity_type_healthcare">Salud</string>
     <string name="amenity_type_historic">Histórico</string>
     <string name="amenity_type_landuse">Uso de Suelo</string>
@@ -759,8 +759,7 @@
     <string name="osmand_parking_pm">PM</string>
     <string name="osmand_parking_am">AM</string>
     <string name="osmand_parking_position_name">Punto de aparcamiento</string>
-    <string name="osmand_parking_plugin_description">Este complemento de posición de aparcamiento le deja memorizar fácilmente cuándo se aparcó el automóvil y cuánto tiempo queda si el estacionamiento está limitado por tiempo. Puede encontrar su lugar y el tiempo de estacionamiento en la tarjeta del tablero de instrumentos y en el control del mapa.
-\n\nAñada una notificación al calendario en el caso de que desee tener un recordatorio al respecto.</string>
+    <string name="osmand_parking_plugin_description">Este complemento, le deja memorizar fácilmente cuándo se aparcó el automóvil y cuánto tiempo queda (si el estacionamiento está limitado por tiempo).\n\nPuede encontrar su lugar y el tiempo de estacionamiento, en la tarjeta del tablero de instrumentos y en el control del mapa. Añada una notificación al calendario, en el caso de que desee tener un recordatorio al respecto.</string>
     <string name="osmand_parking_plugin_name">Aparcamiento</string>
     <string name="context_menu_item_add_parking_point">Marcar como posición de aparcamiento</string>
     <string name="context_menu_item_delete_parking_point">Eliminar un marcador de aparcamiento</string>
@@ -1128,7 +1127,7 @@
     <string name="edit_tilesource_choose_existing">Elegir existente…</string>
     <string name="local_index_tile_data_zooms">Acercamientos descargados: %1$s</string>
     <string name="edit_tilesource_elliptic_tile">Mercator elíptica</string>
-    <string name="map_widget_fps_info">Info depuración de FPS</string>
+    <string name="map_widget_fps_info">Información de FPS</string>
     <string name="base_world_map">Mapa base mundial</string>
     <string name="osmand_plus_extended_description_4000_chars">" OsmAnd (OSM Automated Navigation Directions, o traducido al español, Guía de navegación automatizada OSM) es un mapa y una aplicación de navegación con acceso a datos de todo el mundo, de alta calidad y gratuitos de OpenStreetMap (OSM). Todos los datos de los mapas se pueden almacenar en la tarjeta de memoria del dispositivo para su uso fuera de línea. A través del GPS de su dispositivo, OsmAnd ofrece avisos de navegación, visuales y de voz, para el automóvil, bicicleta y el peatón. Todas las funciones principales funcionan tanto en línea como fuera de línea (no necesita Internet).
 \n\nOsmAnd+ es la versión de pago de la aplicación. Comprándola da soporte al proyecto, financia el desarrollo de nueva características y obtiene las últimas actualizaciones. Puede probar la aplicación antes de comprarla instalando la versión libre llamada OsmAnd.
