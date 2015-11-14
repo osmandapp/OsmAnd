@@ -1976,4 +1976,5 @@
     <string name="share_osm_edits_subject">Osm-redigeringar delade via OsmAnd</string>
     <string name="save_poi_without_poi_type_message">Vill du verkligen spara denna POI utan att ange typ?</string>
     <string name="shared_string_location">Plats</string>
+    <string name="poi_context_menu_modify_osm_change">Modifiera OSM-ändring</string>
     </resources>
