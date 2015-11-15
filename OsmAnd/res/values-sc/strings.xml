@@ -1334,7 +1334,7 @@
     <string name="opening_hours">Oràrios pro abèrrere</string>
     <string name="opening_changeset">Abertura modìficas…</string>
     <string name="closing_changeset">Serradura modìficas…</string>
-    <string name="commiting_node">Sutaponende su nodu…</string>
+    <string name="commiting_node">Imbiande su nodu…</string>
     <string name="converting_names">Cunversione nùmenes locales/nùmenes inglesos…</string>
     <string name="loading_streets_buildings">Carrigamentu istradas/edifìtzios…</string>
     <string name="loading_postcodes">Carrigamentu CAP…</string>
@@ -1470,7 +1470,7 @@
     <string name="shared_string_delete">Burra</string>
     <string name="poi_remove_success">PDI burradu curretamente</string>
     <string name="poi_error_unexpected_template">Errore ispessadu durante s’esecutzione de s’atzione {0}.</string>
-    <string name="default_buttons_commit">Esegui</string>
+    <string name="default_buttons_commit">Imbia</string>
     <string name="shared_string_clear">Burra</string>
     <string name="edit_filter_delete_dialog_title">Burrare su filtru ischertadu?</string>
     <string name="edit_filter_delete_message">Su filtru {0} est istadu burradu</string>
