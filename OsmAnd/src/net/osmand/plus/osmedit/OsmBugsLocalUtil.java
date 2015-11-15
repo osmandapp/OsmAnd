@@ -32,7 +32,7 @@ public class OsmBugsLocalUtil implements OsmBugsUtil {
 		OsmBugResult s = new OsmBugResult();
 		s.local = p;
 		s.warning = success ? null : "";
-		return null;
+		return s;
 	}
 
 	@Override

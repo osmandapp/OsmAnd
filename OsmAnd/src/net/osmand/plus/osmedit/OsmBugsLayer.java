@@ -456,13 +456,10 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	
 	private Dialog createBugDialog(final Bundle args) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-		
-		builder.setTitle("");
+		builder.setTitle(R.string.shared_string_commit);
 		final View view = activity.getLayoutInflater().inflate(R.layout.open_bug, null);
 		view.setId(R.id.layout);
 		builder.setView(view);
-		
-
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
 		builder.setPositiveButton(R.string.shared_string_commit, null);
 		return builder.create();
