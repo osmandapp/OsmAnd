@@ -360,7 +360,7 @@
 	<string name="poi_physiotherapist">Physiotherapeut</string>
 	<string name="poi_picnic_site">Picknick</string>
 	<string name="poi_pier">Pier</string>
-	<string name="poi_pitch">Stellplatz</string>
+	<string name="poi_pitch">Sportplatz</string>
 	<string name="poi_place_allotments">Kleingartensiedlung</string>
 	<string name="poi_place_farm">Farm</string>
 	<string name="poi_place_of_worship">Kultstätte</string>
@@ -585,7 +585,7 @@
 	<string name="poi_windmill">Windmühle</string>
 	<string name="poi_window_blind">Rollvorhang</string>
 	<string name="poi_craft_window_construction">Fensterbau</string>
-	<string name="poi_works">Anlage</string>
+	<string name="poi_works">Produktionsstätte</string>
 	<string name="poi_wreck">Schiffswrack</string>
 	<string name="poi_zoo">Zoo</string>
 	<string name="poi_american_football">Amerik. Football</string>
@@ -1027,4 +1027,6 @@
 
 <string name="poi_office_religion">Büro einer Glaubensgemeinschaft</string>
 	<string name="poi_financial">Finanzverwaltung</string>
+	<string name="poi_highway_steps">Treppe</string>
+	<string name="poi_historic_milestone">Meilenstein</string>
 	</resources>
