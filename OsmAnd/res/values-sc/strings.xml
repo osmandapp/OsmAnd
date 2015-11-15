@@ -116,7 +116,7 @@
 
     <string name="shared_string_and">e</string>
     <string name="shared_string_or">o</string>
-    <string name="route_is_too_long">Su càlculu de s’àndala de OsmAnd chene impreare internet diat pòtere dimandare meda tempus (o a bortas non funtzionare) pro distantzias prus longas de 200 km. Si cussigiat de annànghere unu o prus puntos intermedios pro megiorare sas prestatziones.</string>
+    <string name="route_is_too_long">Su càlculu de s’àndala de OsmAnd chene impreare internet diat pòtere dimandare meda tempus (o a bortas non funtzionare) pro distantzias prus longas de 200 km. Si cussigiat de annànghere unu o prus puntos de coladòrgiu pro megiorare sas prestatziones.</string>
     <string name="auto_zoom_none">No zoom automàticu</string>
     <string name="auto_zoom_close">Zoom automàticu mannu</string>
     <string name="auto_zoom_far">Zoom automàticu mesanu</string>
@@ -187,7 +187,7 @@
     <string name="please_select_address">Issèbera in antis sa citade o s’istrada</string>
 
     <string name="search_street_in_neighborhood_cities">Chirca sas istradas in sas tzitades prus a curtzu</string>
-    <string name="intermediate_items_sort_return">Puntos mesanos cussertaos pro perfetzionare s’andala dae sa positzione atuale a sa destinatzione.</string>
+    <string name="intermediate_items_sort_return">Puntos de coladòrgiu cussertaos pro perfetzionare s’andala dae sa positzione atuale a sa destinatzione.</string>
     <string name="intermediate_items_sort_by_distance">Cusserta (ghenna a ghenna)</string>
     <string name="local_osm_changes_backup_successful">Creatzione documentu de muda OSM %1$s acabada</string>
     <string name="local_osm_changes_backup_failed">Creatzione de sa còpia locale de seguràntzia (backup) de sas modìficas faddida</string>
@@ -273,7 +273,7 @@
     <string name="local_indexes_cat_srtm">Lìnias de livellu</string>
     <string name="local_indexes_cat_av">Datos àudio/vìdeo</string>
     <string name="stop_routing_confirm">Ses seguru de bòlere firmare su nàvigu?</string>
-    <string name="clear_dest_confirm">Ses seguru de bòlere burrare sa destinatzione (e sos puntos mesanos)?</string>
+    <string name="clear_dest_confirm">Ses seguru de bòlere burrare sa destinatzione (e sos puntos de coladòrgiu)?</string>
     <string name="precise_routing_mode_descr">Abìlita pro calculare àndalas pretzisas chene atopos. Est lentu e limitadu in sa distàntzia.</string>
     <string name="precise_routing_mode">Calculu pretzisu de s’àndala (alfa)</string>
     <string name="recording_context_menu_show">Ammustra</string>
@@ -368,8 +368,8 @@
 
     <string name="map_widget_monitoring_services">Servitzios de registratzione</string>
     <string name="no_route">Peruna àndala</string>
-    <string name="delete_target_point">Burra puntu mesanu</string>
-    <string name="target_point">Puntu mesanu %1$s</string>
+    <string name="delete_target_point">Burra puntu de coladòrgiu</string>
+    <string name="target_point">Puntu de coladòrgiu %1$s</string>
     <string name="intermediate_point">Puntu mesanu %1$s</string>
     <string name="context_menu_item_last_intermediate_point">Annanghelu comente ùrtimu puntu</string>
     <string name="context_menu_item_first_intermediate_point">Annanghelu comente primu puntu mesanu</string>
@@ -482,13 +482,13 @@
     <string name="layer_amenity_label">Etichetas de sos puntos</string>
     <string name="loading_smth">Carrigamentu de %1$s…</string>
     <string name="map_widget_plain_time">Oràriu atuale</string>
-    <string name="gpx_wpt">Tapa</string>
+    <string name="gpx_wpt">Puntu de coladòrgiu</string>
     <string name="selected_gpx_info_show">\n\nTene carcau pro lu bìere in sa mapa</string>
     <string name="delay_navigation_start">Inghitza su nàvigu passu pro passu automaticamente</string>
     <string name="shared_string_selected_lowercase">ischertau</string>
     <string name="local_index_gpx_info_show">\n\ntene carcau pro sas optziones</string>
     <string name="gpx_info_subtracks">"Suta-rastas: %1$s "</string>
-    <string name="gpx_info_waypoints">"Tapas de s’àndala: %1$s "</string>
+    <string name="gpx_info_waypoints">"Puntu de coladòrgiu: %1$s "</string>
     <string name="gpx_info_distance">"Distàntzia: %1$s (%2$s points) "</string>
     <string name="gpx_info_start_time">"Oràriu de tzuccada: %1$tF, %1$tT "</string>
     <string name="gpx_info_end_time">"Oràriu de lòmpida: %1$tF, %1$tT "</string>
@@ -1500,7 +1500,7 @@
     <string name="off_router_service_no_gps_available">Su servìtziu de nàvigu de isfundu de OsmAnd netzèssitat de su sistema de positzionamentu ativadu.</string>
 
 
-    <string name="waypoints">Puntos mesanos</string>
+    <string name="waypoints">Puntos de coladòrgiu</string>
     <string name="targets">Destinatziones</string>
     <string name="way_alarms">Avisos de tràficu</string>
     <string name="speak_favorites">Preferidos a curtzu</string>
@@ -1990,4 +1990,8 @@
     <string name="lang_als">Albanesu (Tosk)</string>
     <string name="share_osm_edits_subject">Modìficas Osm cumpartzidas pro mèdiu de OsmAnd</string>
     <string name="save_poi_without_poi_type_message">Boles sarbare su PDI chene dislindare sa casta sua?</string>
+    <string name="shared_string_location">Positzione</string>
+    <string name="context_menu_item_delete_waypoint">Burrare su puntu de coladòrgiu GPX?</string>
+    <string name="context_menu_item_edit_waypoint">Modìfica su puntu de coladòrgiu GPX</string>
+    <string name="poi_context_menu_modify_osm_change">Modìfica càmbiu OSM</string>
     </resources>
