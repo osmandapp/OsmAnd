@@ -1970,4 +1970,9 @@
 	<string name="shared_string_commit">Confirmar</string>
 	
     <string name="poi_dialog_reopen">Reabrir</string>
-	</resources>
+	<string name="osm_edit_modified_poi">PDI de OSM modificado</string>
+    <string name="osm_edit_deleted_poi">PDI de OSM borrado</string>
+    <string name="rendering_attr_currentTrackColor_description">Color del GPX</string>
+    <string name="rendering_attr_currentTrackWidth_description">Ancho del GPX</string>
+    <string name="rendering_attr_roadStyle_description">Estilo de carretera</string>
+    </resources>
