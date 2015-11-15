@@ -62,16 +62,7 @@ public class UploadOpenstreetmapPointAsyncTask
 				loadErrorsMap.put(point, n != null ? null : "Unknown problem");
 			} else if (point.getGroup() == OsmPoint.Group.BUG) {
 				OsmNotesPoint p = (OsmNotesPoint) point;
-				String errorMessage = null;
-				if (p.getAction() == OsmPoint.Action.CREATE) {
-					errorMessage = remotebug.createNewBug(p.getLatitude(), p.getLongitude(), p.getText()).warning;
-				} else if (p.getAction() == OsmPoint.Action.MODIFY) {
-					errorMessage = remotebug.addingComment(p.getLatitude(), p.getLongitude(), p.getId(), p.getText()).warning;
-				} else if (p.getAction() == OsmPoint.Action.REOPEN) {
-					errorMessage = remotebug.reopenBug(p.getLatitude(), p.getLongitude(), p.getId(), p.getText()).warning;
-				} else if (p.getAction() == OsmPoint.Action.DELETE) {
-					errorMessage = remotebug.closingBug(p.getLatitude(), p.getLongitude(), p.getId(), p.getText()).warning;
-				}
+				String errorMessage = remotebug.commit(p, p.getText(), p.getAction()).warning;
 				if (errorMessage == null) {
 					plugin.getDBBug().deleteAllBugModifications(p);
 					publishProgress(p);

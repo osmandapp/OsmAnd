@@ -29,9 +29,9 @@ public class OsmBugMenuController extends MenuController {
 				if (plugin != null) {
 					OpenStreetNote bg = getBug();
 					if(bg.isOpened()) {
-						plugin.getBugsLayer(getMapActivity()).commentBug(bg);
+						plugin.getBugsLayer(getMapActivity()).commentBug(bg, "");
 					} else {
-						plugin.getBugsLayer(getMapActivity()).reopenBug(bg);
+						plugin.getBugsLayer(getMapActivity()).reopenBug(bg, "");
 					}
 				}
 			}
@@ -47,7 +47,7 @@ public class OsmBugMenuController extends MenuController {
 			@Override
 			public void buttonPressed() {
 				if (plugin != null) {
-					plugin.getBugsLayer(getMapActivity()).closeBug(getBug());
+					plugin.getBugsLayer(getMapActivity()).closeBug(getBug(), "");
 				}
 			}
 		};

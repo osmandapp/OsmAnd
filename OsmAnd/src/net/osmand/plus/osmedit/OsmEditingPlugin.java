@@ -1,18 +1,7 @@
 package net.osmand.plus.osmedit;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
-import android.content.Intent;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.Toast;
+import java.util.List;
+
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
@@ -38,7 +27,19 @@ import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
-import java.util.List;
+import android.app.Activity;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 
 public class OsmEditingPlugin extends OsmandPlugin {
@@ -50,7 +51,8 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	OsmBugsDbHelper dbbug;
 	OpenstreetmapLocalUtil localUtil;
 	OpenstreetmapRemoteUtil remoteUtil;
-	private OsmBugsRemoteUtil remoteNotesUtil;
+	OsmBugsRemoteUtil remoteNotesUtil;
+	OsmBugsLocalUtil localNotesUtil;
 	
 	public OsmEditingPlugin(OsmandApplication app) {
 		this.app = app;
@@ -88,6 +90,13 @@ public class OsmEditingPlugin extends OsmandPlugin {
 			remoteNotesUtil = new OsmBugsRemoteUtil(app);
 		}
 		return remoteNotesUtil;
+	}
+	
+	public OsmBugsLocalUtil getOsmNotesLocalUtil() {
+		if(localNotesUtil == null) {
+			localNotesUtil = new OsmBugsLocalUtil(app, dbbug);
+		}
+		return localNotesUtil;
 	}
 	
 	
