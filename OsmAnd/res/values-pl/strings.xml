@@ -22,7 +22,7 @@
   <string name="city_type_city">Miasto</string>
   
   <string name="animate_route_off">Zatrzymaj symulację</string>
-  <string name="animate_route">Uruchom symulację</string>
+  <string name="animate_route">Rozpocznij symulację</string>
   
   <string name="file_can_not_be_renamed">Nie można zmienić nazwy pliku.</string>
   <string name="file_with_name_already_exists">Plik o takiej nazwie już istnieje.</string>
@@ -655,7 +655,7 @@
   <string name="online_map_settings_descr">Skonfiguruj źródła kafelków online i offline</string>
   
   
-  <string name="osmand_rastermaps_plugin_description">"Z tej wtyczki można uzyskać dostęp do wielu rodzajów map online (tzw płytki lub raster), od gotowych płytek OpenStreetMap (jak Mapnik) do zdjęć satelitarnych i specjalnych warstw map pogodowych uniwersalnych, map klimatycznych, map geologicznych, warstw cieniujących wzgórza itp.\n\nKażda z tych map może być wykorzystana jako główna (podstawa) mapa wyświetlana na ekranie mapy OsmAnd lub jako nakładka lub podkładka do innej mapy bazowej (jak standardowe mapy offline OsmAnd). W celu zwiększenia widoczności mapy bazowej, niektóre elementy map wektorowych OsmAnd można łatwo ukryć poprzez menu \"Konfiguracja mapy\" zgodnie z zapotrzebowaniem.\n\nMapy kafelkowe można uzyskać bezpośrednio poprzez źródła online, jak i przygotować je do użytku w trybie offline (i ręcznie skopiować do folderu danych OsmAnd) jako bazy danych sqlite, które mogą być przygotowane przez niezależnych dostawców map. "</string>
+  <string name="osmand_rastermaps_plugin_description">"Umożliwia uzyskanie dostępu do wielu rodzajów map online (tzw kafelki lub raster), od gotowych kafelków OpenStreetMap (jak Mapnik) do zdjęć satelitarnych i specjalnych warstw map pogodowych uniwersalnych, map klimatycznych, map geologicznych, warstw cieniowania rzeźby terenu itp.\n\nKażda z tych map może być wykorzystana jako główna (podstawa) mapa wyświetlana na ekranie mapy OsmAnd lub jako nakładka lub podkład do innej mapy bazowej (jak zwykłe mapy offline OsmAnd). W celu zwiększenia widoczności mapy bazowej, niektóre elementy map wektorowych OsmAnd można łatwo ukryć poprzez menu „Konfiguracja mapy” zgodnie z zapotrzebowaniem.\n\nMapy kafelkowe można uzyskać bezpośrednio z zasobów sieciowych, jak i przygotować je do użytku w trybie offline (i ręcznie skopiować do katalogu danych OsmAnd) jako bazy danych sqlite, które mogą być przygotowane przez niezależnych dostawców map. "</string>
   <string name="osmand_background_plugin_description">Wyświetla ustawienia umożliwiające włączenie śledzenia i nawigacji w tle (wyłączony ekran) poprzez okresowe wybudzanie urządzenia GPS.</string>
   <string name="osmand_accessibility_description">Umożliwia korzystanie ze specjalnych ułatwień dostępu urządzenia bezpośrednio w OsmAnd. Wykorzystuje np. dostosowanie szybkości mowy głosów TTS, konfigurowanie poruszania się po ekranie za pomocą pada kierunkowego, użycie trackballa do zmiany powiększenia lub wsparcie TTS, jak choćby automatyczne podawanie pozycji.</string>
   
@@ -925,9 +925,9 @@
     <string name="gps_not_available">Włącz w ustawieniach odbiornik GPS</string>
     <string name="map_widget_monitoring_services">Usługi rejestrowania</string>
 	<string name="no_route">Brak trasy</string>
-	<string name="delete_target_point">Usuń punkt pośredni</string>
-	<string name="target_point">Punkt pośredni %1$s</string>
-    <string name="intermediate_point">Punkt pośredni %1$s</string>
+	<string name="delete_target_point">Usuwanie punktu nawigacyjnego</string>
+	<string name="target_point">Punkt nawigacyjny %1$s</string>
+    <string name="intermediate_point">Punkt nawigacyjny %1$s</string>
     <string name="context_menu_item_last_intermediate_point">Dodaj jako ostatni punkt pośredni</string>
     <string name="context_menu_item_first_intermediate_point">Dodaj jako pierwszy punkt pośredni</string>
     <string name="add_as_last_destination_point">Dodaj jako ostatni punkt pośredni</string>
@@ -938,7 +938,7 @@
     <string name="intermediate_point_too_far">Punkt pośredni %1$s jest zbyt daleko od najbliższej ulicy.</string>
     <string name="arrived_at_intermediate_point">Dotarłeś do punktu pośredniego</string>
     <string name="context_menu_item_intermediate_point">Dodaj jako punkt pośredni</string>
-    <string name="map_widget_intermediate_distance">Punkt pośredni</string>
+    <string name="map_widget_intermediate_distance">Punkt nawigacyjny</string>
     <string name="ending_point_too_far">Punkt końcowy jest zbyt daleko od najbliższej ulicy.</string>
     <string name="add_tag">Dodaj znacznik</string>
     <string name="btn_advanced_mode">Tryb zaawansowany…</string>
@@ -988,7 +988,7 @@
     <string name="close_changeset">Zamknij zestaw zmian</string>
 	<string name="zxing_barcode_scanner_not_found">Skaner kodów kreskowych ZXing nie jest zainstalowany. Poszukać w Market?</string>
 	<string name="incomplete_locale">niekompletne</string>
-	<string name="download_regular_maps">Map standardowa</string>
+	<string name="download_regular_maps">Mapa zwykła</string>
     <string name="rendering_attr_noAdminboundaries_name">Ukrywanie granic</string>
 	<string name="rendering_attr_noAdminboundaries_description">Wyłącz wyświetlanie granic regionalnych (poziomy administracyjne 5-9)</string>
     
@@ -1001,7 +1001,7 @@
     <string name="download_srtm_maps">Poziomice</string>
     <string name="download_select_map_types">Inne mapy</string>
     <string name="srtm_plugin_name">Poziomice</string>
-    <string name="srtm_plugin_description">"Dostarcza warstwy poziomic i cieniowania rzeźby terenu wyświetlane na standardowych mapach OsmAnd. Funkcja przydatna dla sportowców, turystów i osób zainteresowanych strukturą reliefową krajobrazu.\n\nŚwiatowe dane (między 70 stopniem szerokości północnej a 70 stopniem szerokości południowej) opierają się na pomiarach SRTM (Shuttle Radar Topography Mission) i ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), przyrządu na pokładzie Terra, flagowego satelity Systemu Obserwacji Ziemi NASA. ASTER jest wspólnym przedsięwzięciem NASA, japońskiego Ministerstwa Gospodarki, Handlu i Przemysłu (METI) i Japońskich Systemów Kosmicznych (J-spacesystems). "</string>
+    <string name="srtm_plugin_description">"Dostarcza warstwy poziomic i cieniowania rzeźby terenu wyświetlanych na standardowych mapach OsmAnd. Funkcja przydatna dla sportowców, turystów i osób zainteresowanych strukturą reliefową krajobrazu.\n\nŚwiatowe dane (między 70 stopniem szerokości północnej a 70 stopniem szerokości południowej) opierają się na pomiarach SRTM (Shuttle Radar Topography Mission) i ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), przyrządu na pokładzie Terra, flagowego satelity Systemu Obserwacji Ziemi NASA. ASTER jest wspólnym przedsięwzięciem NASA, japońskiego Ministerstwa Gospodarki, Handlu i Przemysłu (METI) i Japońskich Systemów Kosmicznych (J-spacesystems). "</string>
     <string name="index_srtm_ele">Poziomice</string>
     <string name="index_srtm_parts">części</string>
     
@@ -1037,7 +1037,7 @@
     <string name="recording_description">Nagranie %1$s %3$s %2$s</string>
     <string name="recording_default_name">Nagranie</string>
     <string name="shared_string_control_stop">Stop</string>
-    <string name="shared_string_control_start">Start</string>
+    <string name="shared_string_control_start">Rozpocznij</string>
     <string name="map_widget_av_notes">Notatki audio/video</string>
     <string name="osmand_srtm_short_description_80_chars">Wtyczka OsmAnd do rysowania poziomic offline</string>
     
@@ -1051,7 +1051,7 @@
     <string name="srtm_paid_version_title">Wtyczka poziomic</string>
     <string name="recording_context_menu_arecord">Nagraj notatkę audio</string>
     <string name="recording_context_menu_vrecord">Nagraj notatkę wideo</string>
-    <string name="osmand_srtm_long_description_1000_chars">"Dostarcza warstwy poziomic i cieniowania rzeźby terenu wyświetlane na standardowych mapach OsmAnd. Funkcja przydatna dla sportowców, turystów i osób zainteresowanych strukturą reliefową krajobrazu.\n\nŚwiatowe dane (między 70 stopniem szerokości północnej a 70 stopniem szerokości południowej) opierają się na pomiarach SRTM (Shuttle Radar Topography Mission) i ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), przyrządu na pokładzie Terra, flagowego satelity Systemu Obserwacji Ziemi NASA. ASTER jest wspólnym przedsięwzięciem NASA, japońskiego Ministerstwa Gospodarki, Handlu i Przemysłu (METI) i Japońskich Systemów Kosmicznych (J-spacesystems). "</string>
+    <string name="osmand_srtm_long_description_1000_chars">"Dostarcza warstwy poziomic i cieniowania rzeźby terenu wyświetlanych na standardowych mapach OsmAnd. Funkcja przydatna dla sportowców, turystów i osób zainteresowanych strukturą reliefową krajobrazu.\n\nŚwiatowe dane (między 70 stopniem szerokości północnej a 70 stopniem szerokości południowej) opierają się na pomiarach SRTM (Shuttle Radar Topography Mission) i ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), przyrządu na pokładzie Terra, flagowego satelity Systemu Obserwacji Ziemi NASA. ASTER jest wspólnym przedsięwzięciem NASA, japońskiego Ministerstwa Gospodarki, Handlu i Przemysłu (METI) i Japońskich Systemów Kosmicznych (J-spacesystems). "</string>
     <string name="recording_context_menu_show">Wyświetlanie</string>
     <string name="recording_photo_description">Zdjęcie %1$s %2$s</string>
     <string name="av_def_action_picture">Zrób zdjęcie</string>
@@ -1080,7 +1080,7 @@
     <string name="av_def_action_choose">Wybierz na żądanie</string>
     <string name="access_arrival_time">Czas przybycia</string>
     <string name="map_widget_gps_info">Dane GPS</string>
-    <string name="layer_hillshade">Warstwa cieniująca</string>
+    <string name="layer_hillshade">Warstwa cieniowania rzeźby terenu</string>
     <string name="osmand_play_title_30_chars">Mapy i nawigacja OsmAnd</string>
 	
     
@@ -1207,7 +1207,7 @@
     <string name="edit_tilesource_choose_existing">Zdefiniowane…</string>
     <string name="edit_tilesource_name">Nazwa</string>
     <string name="maps_define_edit">Zdefiniuj/Edytuj…</string>
-	<string name="osmand_extended_description_4000_chars">" OsmAnd (OSM Automated Navigation Directions) to darmowa aplikacja z dostępem do wysokiej jakości darmowych map OpenStreetMap (OSM) o zasięgu światowym. Wszystkie mapy mogą być przechowywane na karcie pamięci urządzenia (urządzeń). Poprzez urządzenie GPS, OsmAnd oferuje wyznaczanie trasy, prezentując trasę graficznie oraz oferując zapowiedzi słowne, dla samochodu, roweru oraz ruchu pieszego. Wszystkie główne funkcje działają zarówno w trybie online, jak i offline (nie wymagają połączenia z Internetem). Niektóre z głównych cech: Nawigacja - pracuje online (szybko) lub offline (bez generowania kosztów podczas pobytu przebywania poza granicami kraju) - Podpowiedzi głosowe krok po kroku (w wersji nagranej lub poprzez syntezę głosu) - opcje: asystent pasa ruchu, wyświetlanie nazw ulic oraz przewidywanego czasu przybycia - obsługa punktów pośrednich trasy - automatyczne przelicznie trasy po zjechaniu z wyznaczonej trasy - wyszukiwanie miejsc poprzez podanie: adresu, typu (n.p.: restauracja, hotel, stacja benzynowa, muzeum), lub przez podanie współrzędnych Przeglądanie Map - wyświetla pozycję i orientację na mapie - opcjonalnie ustawia mapę zgodnie z kompasem lub zgodnie z kierunkiem ruchu - zapisywanie najważniejszych miejsc jako Ulubione - wyświetlanie punktów POI (punkty zainteresowania) wokół Ciebie - pozwala wyświetlić wyspecjalizowane map internetowe - pozwala wyświetlić widok satelitarny (z portalu Bing) - pozwala wyświetlić różne warstwy jak turystyczne, ślady z plików GPX i innych map z ustawieniem poziomu przeźroczystości - opcjonalne wyświetlanie nazw po angielsku, w jeżyku lokalnym lub w zapisie fonetycznym Używanie map OpenStreetMap i danych systemu Wikipedia: - najwyższej jakości informacje z dobrze współpracujących projektów - globalne mapy z OpenStreetMap, dostępne dla danego kraju lub regionu - Wikipedia POI, świetna do zwiedzania (nie dostępna w wersji darmowej) - nieograniczona ilość pobrań bezpośrednio do aplikacji(limit pobrań w darmowej wersji - 16 map) - zawsze aktualne mapy (aktualizowane co najmniej raz w miesiącu) - kompaktowe mapy wektorowe offline - wybór pomiędzy kompletną mapą a mapą zawierającą tylko drogi (np. pełna mapa Japonii to 700 MB, natomiast mapa zawierająca tylko informacje o drogach 200 MB.) - obsługuje również przechowywanie fragmentów pobranych map on-line Funkcje bezpieczeństwa - opcjonalny przełącznik widoku dzień/noc - opcjonalne wyświetlanie ograniczeń prędkości z opcją powiadamiania o przekroczeniu prędkości - opcjonalne powiększanie map w zależności od prędkości - możliwość dzielenia się swoją lokalizacją ze znajomymi Funkcja dla pieszych i rowerzystów - mapy zawierają informacje dla pieszych i rowerzystów - specjalne trasy oraz tryby wyświetlania dla pieszych i rowerzystów - opcja wyświetlania przystanków transportu publicznego (autobusy, tramwaje, pociągi) łącznie z nazwą linii - opcjonalne nagrywanie tras podróży do plików GPX lub w serwisach online - opcjonalne wyświetlanie prędkości i wysokości - wyświetlanie linii konturów i cieniowania (poprzez dodatkowe wtyczki) Bezpośredni wkład w OpenStreetMap - raportowanie błędów mapy - przesyłanie tras w postaci plików GPX do OSM bezpośrednio z aplikacji - dodawanie POI i bezpośrednie wysyłanie ich do OSM (lub też późniejsze ) - opcja nagrywania tras podróży w tle (również gdy urządzenie jest w trybie uśpienia) OsmAnd jest udostępniane na darmowej licencji open source i jest aktywnie rozwijany. Każdy może przyczynić się do rozwoju aplikacji poprzez zgłaszanie błędów, poprawianiu tłumaczeń, lub dodawania nowych funkcjonalności. Projekt jest w stanie gwałtownego i ciągłego rozwoju i doskonalenia przez w programistów i aktywnych użytkowników. Postęp rozwoju opiera się również na wkładzie finansowym przeznaczonym na rozwój, kodowanie i testowanie nowych funkcjonalności. Kupując OsmAnd+ pomagasz powodujesz że staje się ona bardziej niesamowita! Możliwe jest również finansowanie konkretnych nowych funkcji lub wykonywanie wpłat na ogólny rozwój osmand.net. Orientacyjny zasięg map i ich jakość: - Europa Zachodnia: **** - Europa Wschodnia: *** - Rosja: *** - Ameryka Północna: *** - Ameryka Południowa: ** - Asia: ** - Japonia i Korea: *** - Bliski Wschód: ** - Afryka: ** - Antarktyka: * Lista krajów obsługiwanych (w zasadzie na cały świat!) Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Antigua i Barbuda, Antyle Holenderskie, Arabia Saudyjska, Argentyna, Armenia, Aruba, Australia, Austria, Azerbejdżan, Bahamy, Bahrajn, Bangladesz, Barbados, Belgia, Belize, Benin, Bermudy, Bhutan, Białoruś, Boliwia, Bonaire, Bośnia i Hercegowina, Botswana, Brazylia, Brunei, Brytyjskie Wyspy Dziewicze, Bułgaria, Burkina Faso, Burundi, Chile, Chiny, Chorwacja, Curaçao, Cypr, Czad, Czarnogóra, Czechy, Dania, Dominika, Dominikana, Dżibuti, Egipt, Ekwador, Erytrea, Estonia, Etiopia, Fidżi, Filipiny, Finlandia, Francja, Gabon, Gambia, Georgia Południowa, Ghana, Gibraltar, Grecja, Grenada, Grenlandia, Gruzja, Guam, Guernsey, Gujana Francuska, Gujana, Gwadelupa, Gwatemala, Gwinea Bissau, Gwinea Równikowa, Gwinea, Haiti, Hiszpania, Holandia, Honduras, Hong Kong, Indie, Indonezja, Irak, Iran, Irlandia, Islandia, Izrael, Jamajka, Japonia, Jemen, Jersey, Jordania, Kambodża, Kamerun, Kanada, Katar, Kazachstan, Kenia, Kirgistan, Kiribati, Kolumbia, Komory, Kongo, Korea Północna i Korea Południowa, Kostaryka , Kuba, Kuwejt, Laos, Lesotho, Liban, Liberia , Libia, Liechtenstein, Litwa, Luksemburg, Łotwa, Macedonia, Madagaskar, Majotta, Makao, Malawi, Malediwy, Malezja, Mali, Malta, Maroko, Martynika, Mauretania, Mauritius, Meksyk, Mikronezja, Mołdawia, Monako, Mongolia, Montserrat, Mozambik , Myanmar, Namibia, Nauru, Nepal, Niemcy, Niger, Nigeria, Nikaragua, Norwegia, Nowa Kaledonia, Nowa Zelandia, Oman, Pakistan, Palau, Palestyna, Panama, Papua Nowa Gwinea, Paragwaj, Peru, Polinezja Francuska, Polska, Południowy Sudan, Portugalia, Puerto Rico, Republika Środkowoafrykańska, Republika Vanuatu, Republika Zielonego Przylądka, Rosja, Rumunia, Rwanda, Sahara Zachodnia, Saint Helena, Saint Kitts i Nevis, Saint Lucia, Saint Martin, Saint Vincent i Grenadyny, Saint-Barthélemy, Saint-Pierre i Miquelon, Salwador, Samoa, San Marino, Senegal, Serbia, Seszele, Sierra Leone, Singapur, Słowacja, Słowenia, Somalia, Sri Lanka, Stany Zjednoczone Ameryki (USA), Suazi, Sudan, Surinam, Syria, Szwajcaria, Szwecja, Tadżykistan, Tajlandia , Tajwan, Tanzania, Timor Wschodni, Togo, Tokelau, Tonga, Trynidad i Tobago, Tunezja, Turcja, Turkmenistan, Tuvalu, Uganda, Ukraina, Urugwaj, Uzbekistan, Wallis i Futuna, Watykan, Wenezuela, Węgry, Wielka Brytania (UK), Wietnam, Włochy, Wybrzeże Kości Słoniowej, Wyspa Man, Zambia, Zimbabwe, Zjednoczone Emiraty Arabskie. "</string>
+	<string name="osmand_extended_description_4000_chars">" OsmAnd (OSM Automated Navigation Directions) to darmowa aplikacja z dostępem do wysokiej jakości darmowych map OpenStreetMap (OSM) o zasięgu światowym. Wszystkie mapy mogą być przechowywane na karcie pamięci urządzenia (urządzeń). Poprzez urządzenie GPS, OsmAnd oferuje wyznaczanie trasy, prezentując trasę graficznie oraz oferując zapowiedzi słowne, dla samochodu, roweru oraz ruchu pieszego. Wszystkie główne funkcje działają zarówno w trybie online, jak i offline (nie wymagają połączenia z Internetem). Niektóre z głównych cech: Nawigacja - pracuje online (szybko) lub offline (bez generowania kosztów podczas pobytu przebywania poza granicami kraju) - Podpowiedzi głosowe krok po kroku (w wersji nagranej lub poprzez syntezę głosu) - opcje: asystent pasa ruchu, wyświetlanie nazw ulic oraz przewidywanego czasu przybycia - obsługa punktów pośrednich trasy - automatyczne przelicznie trasy po zjechaniu z wyznaczonej trasy - wyszukiwanie miejsc poprzez podanie: adresu, typu (n.p.: restauracja, hotel, stacja benzynowa, muzeum), lub przez podanie współrzędnych Przeglądanie Map - wyświetla pozycję i orientację na mapie - opcjonalnie ustawia mapę zgodnie z kompasem lub zgodnie z kierunkiem ruchu - zapisywanie najważniejszych miejsc jako Ulubione - wyświetlanie punktów POI (punkty zainteresowania) wokół Ciebie - pozwala wyświetlić wyspecjalizowane map internetowe - pozwala wyświetlić widok satelitarny (z portalu Bing) - pozwala wyświetlić różne warstwy jak turystyczne, ślady z plików GPX i innych map z ustawieniem poziomu przeźroczystości - opcjonalne wyświetlanie nazw po angielsku, w jeżyku lokalnym lub w zapisie fonetycznym Używanie map OpenStreetMap i danych systemu Wikipedia: - najwyższej jakości informacje z dobrze współpracujących projektów - globalne mapy z OpenStreetMap, dostępne dla danego kraju lub regionu - Wikipedia POI, świetna do zwiedzania (nie dostępna w wersji darmowej) - nieograniczona ilość pobrań bezpośrednio do aplikacji(limit pobrań w darmowej wersji - 16 map) - zawsze aktualne mapy (aktualizowane co najmniej raz w miesiącu) - kompaktowe mapy wektorowe offline - wybór pomiędzy kompletną mapą a mapą zawierającą tylko drogi (np. pełna mapa Japonii to 700 MB, natomiast mapa zawierająca tylko informacje o drogach 200 MB.) - obsługuje również przechowywanie fragmentów pobranych map on-line Funkcje bezpieczeństwa - opcjonalny przełącznik widoku dzień/noc - opcjonalne wyświetlanie ograniczeń prędkości z opcją powiadamiania o przekroczeniu prędkości - opcjonalne powiększanie map w zależności od prędkości - możliwość dzielenia się swoją lokalizacją ze znajomymi Funkcja dla pieszych i rowerzystów - mapy zawierają informacje dla pieszych i rowerzystów - specjalne trasy oraz tryby wyświetlania dla pieszych i rowerzystów - opcja wyświetlania przystanków transportu publicznego (autobusy, tramwaje, pociągi) łącznie z nazwą linii - opcjonalne nagrywanie tras podróży do plików GPX lub w serwisach online - opcjonalne wyświetlanie prędkości i wysokości - wyświetlanie poziomic i cieniowania rzeźby terenu (poprzez dodatkowe wtyczki) Bezpośredni wkład w OpenStreetMap - raportowanie błędów mapy - przesyłanie tras w postaci plików GPX do OSM bezpośrednio z aplikacji - dodawanie POI i bezpośrednie wysyłanie ich do OSM (lub też późniejsze ) - opcja nagrywania tras podróży w tle (również gdy urządzenie jest w trybie uśpienia) OsmAnd jest udostępniane na darmowej licencji open source i jest aktywnie rozwijany. Każdy może przyczynić się do rozwoju aplikacji poprzez zgłaszanie błędów, poprawianiu tłumaczeń, lub dodawania nowych funkcjonalności. Projekt jest w stanie gwałtownego i ciągłego rozwoju i doskonalenia przez w programistów i aktywnych użytkowników. Postęp rozwoju opiera się również na wkładzie finansowym przeznaczonym na rozwój, kodowanie i testowanie nowych funkcjonalności. Kupując OsmAnd+ pomagasz powodujesz że staje się ona bardziej niesamowita! Możliwe jest również finansowanie konkretnych nowych funkcji lub wykonywanie wpłat na ogólny rozwój osmand.net. Orientacyjny zasięg map i ich jakość: - Europa Zachodnia: **** - Europa Wschodnia: *** - Rosja: *** - Ameryka Północna: *** - Ameryka Południowa: ** - Asia: ** - Japonia i Korea: *** - Bliski Wschód: ** - Afryka: ** - Antarktyka: * Lista krajów obsługiwanych (w zasadzie na cały świat!) Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Antigua i Barbuda, Antyle Holenderskie, Arabia Saudyjska, Argentyna, Armenia, Aruba, Australia, Austria, Azerbejdżan, Bahamy, Bahrajn, Bangladesz, Barbados, Belgia, Belize, Benin, Bermudy, Bhutan, Białoruś, Boliwia, Bonaire, Bośnia i Hercegowina, Botswana, Brazylia, Brunei, Brytyjskie Wyspy Dziewicze, Bułgaria, Burkina Faso, Burundi, Chile, Chiny, Chorwacja, Curaçao, Cypr, Czad, Czarnogóra, Czechy, Dania, Dominika, Dominikana, Dżibuti, Egipt, Ekwador, Erytrea, Estonia, Etiopia, Fidżi, Filipiny, Finlandia, Francja, Gabon, Gambia, Georgia Południowa, Ghana, Gibraltar, Grecja, Grenada, Grenlandia, Gruzja, Guam, Guernsey, Gujana Francuska, Gujana, Gwadelupa, Gwatemala, Gwinea Bissau, Gwinea Równikowa, Gwinea, Haiti, Hiszpania, Holandia, Honduras, Hong Kong, Indie, Indonezja, Irak, Iran, Irlandia, Islandia, Izrael, Jamajka, Japonia, Jemen, Jersey, Jordania, Kambodża, Kamerun, Kanada, Katar, Kazachstan, Kenia, Kirgistan, Kiribati, Kolumbia, Komory, Kongo, Korea Północna i Korea Południowa, Kostaryka , Kuba, Kuwejt, Laos, Lesotho, Liban, Liberia , Libia, Liechtenstein, Litwa, Luksemburg, Łotwa, Macedonia, Madagaskar, Majotta, Makao, Malawi, Malediwy, Malezja, Mali, Malta, Maroko, Martynika, Mauretania, Mauritius, Meksyk, Mikronezja, Mołdawia, Monako, Mongolia, Montserrat, Mozambik , Myanmar, Namibia, Nauru, Nepal, Niemcy, Niger, Nigeria, Nikaragua, Norwegia, Nowa Kaledonia, Nowa Zelandia, Oman, Pakistan, Palau, Palestyna, Panama, Papua Nowa Gwinea, Paragwaj, Peru, Polinezja Francuska, Polska, Południowy Sudan, Portugalia, Puerto Rico, Republika Środkowoafrykańska, Republika Vanuatu, Republika Zielonego Przylądka, Rosja, Rumunia, Rwanda, Sahara Zachodnia, Saint Helena, Saint Kitts i Nevis, Saint Lucia, Saint Martin, Saint Vincent i Grenadyny, Saint-Barthélemy, Saint-Pierre i Miquelon, Salwador, Samoa, San Marino, Senegal, Serbia, Seszele, Sierra Leone, Singapur, Słowacja, Słowenia, Somalia, Sri Lanka, Stany Zjednoczone Ameryki (USA), Suazi, Sudan, Surinam, Syria, Szwajcaria, Szwecja, Tadżykistan, Tajlandia , Tajwan, Tanzania, Timor Wschodni, Togo, Tokelau, Tonga, Trynidad i Tobago, Tunezja, Turcja, Turkmenistan, Tuvalu, Uganda, Ukraina, Urugwaj, Uzbekistan, Wallis i Futuna, Watykan, Wenezuela, Węgry, Wielka Brytania (UK), Wietnam, Włochy, Wybrzeże Kości Słoniowej, Wyspa Man, Zambia, Zimbabwe, Zjednoczone Emiraty Arabskie. "</string>
 	
     
     <string name="edit_tilesource_successfully">Zapisano zasób danych kafelkowych %1$s</string>
@@ -1522,7 +1522,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="gpx_file_is_empty">Plik GPX jest pusty</string>
     
     <string name="shared_string_my_tracks">Moje trasy</string>
-    <string name="shared_string_my_favorites">Moje ulubione</string>
+    <string name="shared_string_my_favorites">Ulubione</string>
     <string name="shared_string_my_places">Miejsca</string>
     
     <string name="gpx_info_subtracks">"Ślady podrzędne: %1$s "</string>
@@ -1552,7 +1552,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="gpx_split_interval">Interwał podziału</string>
     <string name="loading_smth">Wczytywanie %1$s…</string>
     <string name="map_widget_plain_time">Aktualny czas</string>
-    <string name="gpx_wpt">Punkt trasy</string>
+    <string name="gpx_wpt">Punkt nawigacyjny</string>
     <string name="save_as_favorites_points">Zapisz jako grupę ulubionych</string>
     <string name="select_destination_and_intermediate_points">Wybierz punkty</string>
     <string name="layer_amenity_label">Etykiety punktów</string>
@@ -1787,7 +1787,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="your_edits">Twoje zmiany</string>
     <string name="waypoint_visit_after">Odwiedź później</string>
     <string name="waypoint_visit_before">Odwiedź wcześniej</string>
-    <string name="simulate_your_location">Symuluj lokalizację</string>
+    <string name="simulate_your_location">Symulowanie lokalizacji</string>
     <string name="short_location_on_map">Szer %1$s↵\nDług %2$s</string>
     <string name="tips_and_tricks_descr">Wyświetla najczęściej zadawane pytania, ostatnie zmiany i inne</string>
     <string name="routing_settings_2">Ustawienia nawigacji</string>
@@ -2025,7 +2025,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
     
-    <string name="shared_string_trip_recording">Zapis podróży</string>
+    <string name="shared_string_trip_recording">Nagrywanie trasy</string>
     <string name="simulate_your_location_descr">Symuluj używając wyliczonej trasy lub nagranej trasy GPX</string>
     <string name="downloads_left_template">%1$s pozostało do pobrania</string>
 	
@@ -2034,7 +2034,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="region_maps">Mapy regionu</string>
     <string name="world_maps">Mapy świata</string>
     
-    <string name="hillshade_layer_disabled">Wyłączona warstwa cieniowania wzgórz</string>
+    <string name="hillshade_layer_disabled">Wyłączona warstwa cieniowania rzeźby terenu</string>
     <string name="srtm_plugin_disabled">Wyłączone poziomice</string>
     <string name="favourites_edit_dialog_title">Informacje ulubione</string>
     <string name="downloading_number_of_files">Pobieranie - %1$d plik</string>
@@ -2059,13 +2059,13 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="shared_string_qr_code">Kod QR</string>
     <string name="enter_country_name">Proszę wybrać kraj</string>
 <string name="map_downloaded_descr">Mapa %1$s została pobrana. Proszę powrócić do mapy, aby rozpocząć jej używanie.</string>
-    <string name="world_map_download_descr">Podstawowa mapa świat (obejmujące cały świat w małych powiększeniach) jest brakująca lub jest przestarzała. Proszę wziąć pod uwagę pobranie podstawowej mapy świata aby uzyskać kompletne środowisko.</string>
+    <string name="world_map_download_descr">Brak podstawowej mapy świata (pokrywającej cały glob w małych przybliżeniach) lub jest ona przestarzała. Proszę rozważyć pobranie mapy podstawowej, aby uzyskać kompletne środowisko.</string>
     <string name="map_downloaded">Pobrano mapę</string>
     <string name="go_to_map">Powróć do mapy</string>
     <string name="simulate_initial_startup">Symulowania pierwszego uruchomienia programu</string>
     <string name="read_more">Czytaj dalej</string>
     <string name="whats_new">Co nowego w</string>
-    <string name="rendering_attr_hideProposed_name">Ukryj proponowane obiekty</string>
+    <string name="rendering_attr_hideProposed_name">Ukrywanie proponowanych obiektów</string>
     <string name="shared_string_update">Aktualizuj</string>
     <string name="shared_string_upload">Prześlij</string>
     <string name="osm_edit_created_poi">Utwórz punkt orientacyjny OSM</string>
@@ -2079,7 +2079,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="new_version">Nowa wersja</string>
     <string name="begin_with_osmand_menu_group">Pierwsze kroki z OsmAnd</string>
     <string name="features_menu_group">Funkcje</string>
-    <string name="help_us_to_improve_menu_group">Pomóż nam udoskonalić OsmAnd</string>
+    <string name="help_us_to_improve_menu_group">Pomóż udoskonalić OsmAnd</string>
     <string name="other_menu_group">Inne</string>
     <string name="plugins_menu_group">Wtyczki</string>
     <string name="first_usage_item">Pierwsze użycie</string>
