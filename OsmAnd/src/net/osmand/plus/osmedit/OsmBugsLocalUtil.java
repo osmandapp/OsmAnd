@@ -32,13 +32,13 @@ public class OsmBugsLocalUtil implements OsmBugsUtil {
 		OsmBugResult s = new OsmBugResult();
 		s.local = p;
 		s.warning = success ? null : "";
-		return null;
+		return s;
 	}
 
 	@Override
 	public OsmBugResult reopenBug(double latitude, double longitude, long id, String text){
 		OsmNotesPoint p = new OsmNotesPoint();
-		p.setId(Math.min(-2, db.getMinID() -1));
+		p.setId(id);
 		p.setText(text);
 		p.setLatitude(latitude);
 		p.setLongitude(longitude);
