@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
   
   <string name="layer_map_appearance">Configureer scherm</string>
   <string name="show_lanes">Toon rijstroken</string>
@@ -2199,4 +2200,20 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="lang_fy">Fries</string>
     <string name="lang_als">Toskisch (Albanees)</string>
     <string name="shared_string_location">Locatie</string>
-    </resources>
+    <string name="osm_edit_modified_poi">Gewijzigde OSM POI</string>
+    <string name="osm_edit_deleted_poi">Gewiste OSM POI</string>
+    <string name="context_menu_item_open_note">Open OSM-opmerking</string>
+    <string name="osm_edit_reopened_note">Heropende OSM-opmerking</string>
+    <string name="osm_edit_commented_note">OSM-opmerking met commentaar</string>
+    <string name="osm_edit_removed_note">OSM-opmerking gewist</string>
+	<string name="osm_edit_created_note">OSM-opmerking gemaakt</string>
+	<string name="osn_bug_name">OSM-opmerking</string>
+	<string name="osn_add_dialog_title">Maak opmerking</string>
+	<string name="osn_comment_dialog_title">Voeg commentaar toe</string>
+	<string name="osn_reopen_dialog_title">Heropen notitie</string>
+	<string name="osn_close_dialog_title">Sluit notitie</string>
+	<string name="osn_add_dialog_success">Notitie aangemaakt</string>
+	<string name="osn_add_dialog_error">Er was een probleem: notitie niet aangemaakt</string>
+	<string name="osn_close_dialog_success">Bug is gesloten</string>
+	<string name="osn_close_dialog_error">Er was een probleem: notitie is niet afgesloten</string>
+	</resources>

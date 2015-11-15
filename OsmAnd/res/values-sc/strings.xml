@@ -165,7 +165,7 @@
     <string name="speak_cameras">Autovelox</string>
     <string name="speak_traffic_warnings">Avisos de tràfficu</string>
 
-    <string name="osb_author_or_password_not_specified">Pro piaghere dislinda su nùmene impitadore OSM e sa crae (password) in sas Impostaduras</string>
+    <string name="osb_author_or_password_not_specified">Pro piaghere dislinda su nùmene impitadore OSM e sa crae (password) in sas Impostatziones</string>
     <string name="clear_intermediate_points">Burra sos puntos mesanos</string>
     <string name="keep_intermediate_points">Mantènne sos puntos mesanos</string>
     <string name="new_directions_point_dialog">Tenes giai puntos mesanos impostaos.</string>
@@ -181,7 +181,7 @@
 
     <string name="app_mode_default">Predefinidu</string>
     <string name="settings_preset">Profilu predefinidu</string>
-    <string name="settings_preset_descr">Issèbera unu profilu de impreu cun impostaduras pessonalizadas pro sa mapa e su nàvigu.</string>
+    <string name="settings_preset_descr">Issèbera unu profilu de impreu cun impostatziones pessonalizadas pro sa mapa e su nàvigu.</string>
     <string name="destination_point">Destinatzione %1$s</string>
     <string name="context_menu_item_destination_point">Imposta comente destinatzione</string>
     <string name="please_select_address">Issèbera in antis sa citade o s’istrada</string>
@@ -235,15 +235,15 @@
     <string name="monitoring_settings">Registratzione biàgios</string>
     <string name="monitoring_settings_descr">Cunfigura comente registrare sos biàgios tuos</string>
     <string name="osmo_settings_uuid">ID ùnicu de su dispositivu</string>
-    <string name="osmo_settings_descr">Cunfigura sas impostaduras de compidada de su dispositivu e imposta su canale de compidada pessonale</string>
+    <string name="osmo_settings_descr">Cunfigura sas impostatziones de compidada de su dispositivu e imposta su canale de compidada pessonale</string>
     <string name="osmo_plugin_description">"Custa estensione frunit sas funtzionalidades pro impreare sa compidada avantzada in dereta OsMo, bie http://osmo.mobi.
-\n\nSighi totu sos dispositivos de unu grupu in ue e comùnica cun sos àteros. Sunt disponìbiles meda impostaduras pro s’arrastamentu, pro sa sessione in cursu o permanentes.
+\n\nSighi totu sos dispositivos de unu grupu in ue e comùnica cun sos àteros. Sunt disponìbiles meda impostatziones pro s’arrastamentu, pro sa sessione in cursu o permanentes.
 \n\nSos grupos anònimos podent èssere creados pro su nùmeru pretzisu de dies e bi sunt lìmites pro calicuna de sas funtziones, es. non b’est su controllu remotu e nemmancu s’amministradore de su grupu. Grupos cun totu sas funtzionalidades podent èssere creados in su giassu e petzi sos impitadores registrados podent atzèdere. "</string>
     <string name="osmo_plugin_name">OsMo (Compidada OSM)</string>
     <string name="osmo_settings">OsMo</string>
 
 
-    <string name="osmand_background_plugin_description">Ammustrat sas impostaduras pro abilitare s’arrastamentu e su nàvigu in modalidade de isfundu (ischermu istudadu) pro mèdiu de ischidaduras periòdicas de su GPS.</string>
+    <string name="osmand_background_plugin_description">Ammustrat sas impostatziones pro abilitare s’arrastamentu e su nàvigu in modalidade de isfundu (ischermu istudadu) pro mèdiu de ischidaduras periòdicas de su GPS.</string>
     <string name="contribution_activity">Installa sa versione</string>
     <string name="choose_osmand_theme_descr">Issèbera su tema de s’aplicu</string>
     <string name="choose_osmand_theme">Tema de s’aplicu</string>
@@ -296,8 +296,8 @@
     <string name="av_use_external_recorder_descr">Imprea su registratore de sistema pro sos videos</string>
     <string name="av_use_external_recorder">Imprea su registratore de sistema</string>
     <string name="av_use_external_camera">Imprea s’app fotocàmera</string>
-    <string name="av_settings_descr">Cunfigura sas impostaduras àudio e vìdeo</string>
-    <string name="av_settings">Impostaduras àudio/vìdeo </string>
+    <string name="av_settings_descr">Cunfigura sas impostatziones àudio e vìdeo</string>
+    <string name="av_settings">"Impostatziones àudio/vìdeo "</string>
     <string name="recording_error">Errore durante sa registratzione </string>
     <string name="recording_camera_not_available">Sa fotocamera non est disponibile</string>
     <string name="recording_is_recorded">S’àudio/vìdeo istat pro èssere registrau. Pro lu firmare carca su widget AV.</string>
@@ -353,7 +353,7 @@
     <string name="rendering_attr_showRoadMaps_name">Mapas cun petzi istradas</string>
     <string name="safe_mode_description">Avia s’aplicu in modalidade segura (impreande Android, prus lentu, imbetzes de su còdighe nativu).</string>
     <string name="safe_mode">Modalidade segura</string>
-    <string name="native_library_not_running">S’aplicu est traballande in modalidade segura (la podes disabilitare in sas Impostaduras).</string>
+    <string name="native_library_not_running">S’aplicu est traballande in modalidade segura (la podes disabilitare in sas Impostatziones).</string>
     <string name="background_service_is_enabled_question">Su servitziu OsmAnd de isfundu est galu in esecutzione. Lu boles firmare?</string>
 
 
@@ -364,7 +364,7 @@
     <string name="map_widget_show_destination_arrow">Ammustra sa diretzione de sa destinatzione</string>
     <string name="enable_plugin_monitoring_services">"Abìlita s’estensione de registratzione biàgios pro impreare sos servìtzios de registratzione de sa positzione (registratzione GPX,  arrastamentu in lìnia)"</string>
     <string name="non_optimal_route_calculation">Càlcula un’àndala, s’in casu mai fintzas non primorosa, pro sas distantzias longas</string>
-    <string name="gps_not_available">Ativa su GPS in sas impostaduras</string>
+    <string name="gps_not_available">Allue su GPS in sas impostatziones</string>
 
     <string name="map_widget_monitoring_services">Servitzios de registratzione</string>
     <string name="no_route">Peruna àndala</string>
@@ -729,7 +729,7 @@
 
     <string name="plugins_screen">Estensiones</string>
 
-    <string name="prefs_plugins_descr">Sas estensiones abìlitant funtzionalidades agiuntivas e impostaduras avantzadas</string>
+    <string name="prefs_plugins_descr">Sas estensiones abìlitant funtzionalidades agiuntivas e impostatziones avantzadas</string>
     <string name="prefs_plugins">Estensiones</string>
     <string name="debugging_and_development">Isvilupu de OsmAnd</string>
     <string name="native_rendering">Disinnu nativu</string>
@@ -798,13 +798,13 @@
     <string name="index_name_oceania">Austràlia e Otzeània</string>
     <string name="index_name_other">Mapas mundiales e de base</string>
     <string name="amenity_type_osmwiki">Wikipedia (non in lìnia)</string>
-    <string name="profile_settings">Impostaduras dislindadas de su profilu</string>
+    <string name="profile_settings">Impostatziones dislindadas de su profilu</string>
     <string name="routing_settings">Nàvigu</string>
     <string name="routing_settings_descr">Dislinda sas optziones de nàvigu</string>
-    <string name="global_settings">Impostaduras globales</string>
-    <string name="general_settings">Impostaduras generales</string>
-    <string name="general_settings_descr">Cunfigura sas impostaduras globales</string>
-    <string name="global_app_settings">Impostaduras globales de s’aplicu</string>
+    <string name="global_settings">Impostatziones globales</string>
+    <string name="general_settings">Impostatziones generales</string>
+    <string name="general_settings_descr">Cunfigura sas impostatziones globales</string>
+    <string name="global_app_settings">Impostatziones globales de s’aplicu</string>
     <string name="user_name">Nùmene impitadore in OSM</string>
     <string name="user_password">Crae (password) in OSM</string>
 
@@ -812,8 +812,8 @@
     <string name="auto_follow_route_never">Mai (carca \'Bae\' pro aviare manualmente sa ghia)</string>
     <string name="keep_informing_never">Manualmente ebbia (carca sa fritza)</string>
     <string name="keep_informing">Torra a repìtere sas istrutziones de nàvigu</string>
-    <string name="pref_raster_map">Impostaduras de sa mitza de sa mapa</string>
-    <string name="pref_vector_map">Impostaduras de sa mapa vetoriale</string>
+    <string name="pref_raster_map">Impostatziones de sa mitza de sa mapa</string>
+    <string name="pref_vector_map">Impostatziones de sa mapa vetoriale</string>
     <string name="city_type_hamlet">Bidda</string>
     <string name="city_type_village">Bidditzolu</string>
     <string name="city_type_town">Tzidadina</string>
@@ -872,10 +872,10 @@
     <string name="poi_error_info_not_loaded">Informatziones relatas a su nodu non carrigadas</string>
     <string name="poi_error_io_error_template">Errore de I/O durante s’esecutzione de s’atzione {0}.</string>
     <string name="poi_action_succeded_template">Atzione {0} reseddida cumpridamente.</string>
-    <string name="first_time_msg">Gratzias pro s’impreu de OsmAnd. Pro meda de sas caraterìsticas de s’àplicu tènes bisongiu de datos locales chene lìnia, chi podent èssere icarrigadas dae \'Impostaduras\'→\'Amministra sos documentos de sas mapas\'. A pustis at a èssere possìbile ammustrare mapas, chircare indirìtzos, PDI, e agatare trasportos pùblicos.</string>
+    <string name="first_time_msg">Gratzias pro s’impreu de OsmAnd. Pro meda de sas caraterìsticas de s’àplicu tènes bisongiu de datos locales chene lìnia, chi podent èssere icarrigadas dae \'Impostatziones\'→\'Amministra sos documentos de sas mapas\'. A pustis at a èssere possìbile ammustrare mapas, chircare indirìtzos, PDI, e agatare trasportos pùblicos.</string>
     <string name="basemap_was_selected_to_download">Sa mapa de base est netzessària pro su funtzionamentu curretu de s’àplicu e est istada ischertada pro s’iscarrigamentu.</string>
 
-    <string name="osmand_development_plugin_description">Custa estensione ammustrat sas impostaduras pro funtzionalidades pro isvilupu e debug comente sa simulatzione de su nàvigu, sa visualizatzione de sa prestatzione de su rèndering, o s\'interfàtzia vocale. Custas impostaduras sunt pensadas pro sos isvilupadores e non sunt netzessàrias pro sos àteros impitadores.</string>
+    <string name="osmand_development_plugin_description">Custa estensione ammustrat sas impostatziones pro funtzionalidades pro isvilupu e debug comente sa simulatzione de su nàvigu, sa visualizatzione de sa prestatzione de su rèndering, o s\'interfàtzia vocale. Custas impostatziones sunt pensadas pro sos isvilupadores e non sunt netzessàrias pro sos àteros impitadores.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Sas mapas vetoriales diat dèpere apàrrere in manera prus lestra. In carchi dispositivu diat podere funtzionare male.</string>
     <string name="osmand_parking_warning_text">Pretzdentemente est istada annangada a su tzeravallu/calendàriu tuo sa notìfica pro recuperare sa màchina. At a abarrare finas a cando non l\'as a burrare manualmente.</string>
     <string name="rendering_attr_noPolygons_description">Faghe divènnere transparentes totu sas caraterìsticas de sas àreas de su terrinu</string>
@@ -888,12 +888,12 @@
     <string name="osm_editing_plugin_description">Custa estensione permitit de cuntribuire ad OSM creande e modificande sos PDI de OSM, aberinde e cummentande errores de OSM e imbiande documentos GPX registrados. OSM est unu progetu pùblicu de mapadura fatu dae una comunidade globale. Pro àteras informatziones: http://openstreetmap.org. Sa partetzipatzione est apretziada, e sas cuntributziones podent èssere fatas deretamente dae OsmAnd insertande in intro de s\'aplicu sas credentziales de atzessu.</string>
     <string name="play_commands_of_currently_selected_voice">Riprodui sos cumandos de sa boghe ischertada</string>
     <string name="test_voice_prompts">Proa sos cumandos vocales</string>
-    <string name="switch_to_raster_map_to_see">Peruna mapa vetoriale est disponìbile pro custa positzione. Ne podes iscarrigare una in Impostaduras (Amministra sos documentos de sas mapas), o colare a sas mapas in lìnia (abìlita sas mapas in lìnia pro lu fàghere).</string>
+    <string name="switch_to_raster_map_to_see">Peruna mapa vetoriale est disponìbile pro custa positzione. Ne podes iscarrigare una in Impostatziones (Amministra sos documentos de sas mapas), o colare a sas mapas in lìnia (abìlita sas mapas in lìnia pro lu fàghere).</string>
 
     <string name="support_new_features_descr">Faghe una donatzione pro tènnere funtzionalidades noas implementadas in s’àplicu</string>
     <string name="accessibility_extensions_descr">Estensiones pro s’atzessibilidade pro versiones betzas de Android</string>
     <string name="accessibility_extensions">Estensiones pro s’atzessibilidade</string>
-    <string name="accessibility_default">Basada in supra de sas impostaduras globales de sistema</string>
+    <string name="accessibility_default">Basada in supra de sas impostatziones globales de sistema</string>
     <string name="zoomOut">Zoom in segus</string>
     <string name="zoomIn">Zoom in antis</string>
     <string name="front">in antis</string>
@@ -933,7 +933,7 @@
     <string name="live_monitoring_interval">Intervallu de s’arrastamentu in dereta (in lìnia)</string>
     <string name="live_monitoring_url_descr">Dislinda s’indiritzu ìnternet cun sa sintassi de sos paràmetros: lat={0}, lon={1}, data/ora={2}, hdop={3}, artària={4}, lestresa={5}, àngulu={6}</string>
     <string name="live_monitoring_url">Indiritzu ìnternet pro s’arrastamentu in dereta</string>
-    <string name="gpx_monitoring_disabled_warn">Registra sa rasta impreande su widget GPX o sas impostaduras \'Registratzione biàgios\'.</string>
+    <string name="gpx_monitoring_disabled_warn">Registra sa rasta impreande su widget GPX o sas impostatziones \'Registratzione biàgios\'.</string>
 
     <string name="free_version_message">Custa versione de badas de OsmAnd est limitada a %1$s iscarrigamentos e non suportat sos artìculos non in lìnia de Wikipedia.</string>
     <string name="index_name_voice">Indicatziones vocales (registradas, funtzionalidades limitadas)</string>
@@ -1049,7 +1049,7 @@
     <string name="shared_string_none">Perunu</string>
     <string name="map_overlay">Mapa subraposta</string>
     <string name="map_overlay_descr">Issèbera mapa de subrapositzione</string>
-    <string name="tile_source_already_installed">Sa mapa est giai installata, sas impostaduras ant a èssere agiornadas</string>
+    <string name="tile_source_already_installed">Sa mapa est giai installata, sas impostatziones ant a èssere agiornadas</string>
     <string name="select_tile_source_to_install">Issèbera sas mapas (tasseddos) da installare o agiornare</string>
     <string name="internet_not_available">Una connessione ìnternet est netzessària pro custa operatzione, ma no nde bi sunt disponìbiles</string>
     <string name="install_more">Installa àteru…</string>
@@ -1221,7 +1221,7 @@
     <string name="osmand_routing_experimental">Su nàvigu chene lìnia de OsmAnd est isperimentale e non funtzionat pro distàntzias prus mannas de 20 km.\n\nSu servìtziu de nàvigu benit frunidu intertantu pro mèdiu de CloudMade in lìnia.</string>
     <string name="osmand_net_previously_installed">B’est installada una versione prus betza de OsmAnd. Totu sos datos ant a èssere suportados dae s’aplicatzione noa. Sos preferidos depent èssere esportados dae s’aplicatzione betza e importados a manuda in sa noa.</string>
     <string name="gps_status_app_not_found">Aplicu istadu GPS no installadu. Lu boles chircare in su Market?</string>
-    <string name="voice_is_not_available_msg">Boghe de ghia non disponìbile. Intra in \'Impostaduras\' → \'Impostaduras generales\' → \'Ghia vocale\', issèbera su pachete preferidu e/o iscàrrigalu.</string>
+    <string name="voice_is_not_available_msg">Boghe de ghia non disponìbile. Intra in \'Impostatziones\' → \'Impostatziones generales\' → \'Ghia vocale\', issèbera su pachete preferidu e/o iscàrrigalu.</string>
     <string name="daynight_descr">Issèbera sas règulas pro sa muda de sa modalidade die/note</string>
     <string name="download_files_question">Iscarrigare {0} documentu/os ({1} MB)?</string>
     <string name="shared_string_refresh">Torra a carrigare</string>
@@ -1358,13 +1358,13 @@
 
     <string name="use_online_routing_descr">Imprea ìnternet pro calculare s’àndala</string>
     <string name="use_online_routing">Imprea s’ingendradore de àndalas in lìnia</string>
-    <string name="osm_settings_descr">Dislinda sas impostaduras Openstreetmap.org (OSM) netzessàrias pro contribuire a OSM</string>
+    <string name="osm_settings_descr">Dislinda sas impostatziones Openstreetmap.org (OSM) netzessàrias pro contribuire a OSM</string>
     <string name="data_settings_descr">Dislinda sa limba, iscàrriga/torra a carrigare sos datos</string>
     <string name="data_settings">Datos</string>
 
     <string name="osm_settings">Modìficas OSM</string>
-    <string name="additional_settings">Impostaduras annativas</string>
-    <string name="shared_string_settings">Impostaduras</string>
+    <string name="additional_settings">Impostatziones agiuntivas</string>
+    <string name="shared_string_settings">Impostatziones</string>
     <string name="save_current_track_descr">Sarba como sa rasta currente in s’ischeda SD</string>
     <string name="save_current_track">Sarba sa rasta currente</string>
     <string name="save_track_interval">Intervallu de sarbamentu durante su nàvigu</string>
@@ -1379,7 +1379,7 @@
     <string name="shared_string_add_to_favorites">Annanghe a sos Preferidos</string>
     <string name="use_english_names_descr">Ischerta s’impreu de nùmenes locales o inglesos</string>
     <string name="use_english_names">Imprea nùmenes inglesos in sas mapas</string>
-    <string name="app_settings">Impostaduras aplicu</string>
+    <string name="app_settings">Impostatziones aplicu</string>
     <string name="search_address">Chirca indiritzu</string>
     <string name="choose_building">Issèbera nùmeru tzìvicu</string>
     <string name="choose_street">Issèbera s’istrada</string>
@@ -1507,8 +1507,8 @@
     <string name="speak_poi">PDI a curtzu</string>
     <string name="shared_string_all">Totus</string>
     <string name="index_tours">Itineràrios</string>
-    <string name="record_plugin_description">"Custa estensione ativat sa funtzionalidade de registratzione de sas rastas tuas carcande su pursante in s’ischermu de sa mapa e ammustrat sas impostaduras pro sa registratzione de sos biàgios tuos in documentos GPX localmente o in lìnia impreande unu servìtziu web.
-\n\nSas rastas registradas podent èssere cumpartzida cun sos amigos tuos o èssere impreadas pro cuntribuire a OSM. Sos atletas podent impreare sas rastas pro compidare sos allenamentos issoro. Carchi anàlisi de base podet èssere fata deretamente in OsmAnd, comente tempus de giru, lestresa mèdia etc., e sas rastas podent, est craru, èssere analizadas fintzas prus a tardu cun ainas estèrnas de anàlisi. "</string>
+    <string name="record_plugin_description">"Custa estensione ativat sa funtzionalidade de registratzione de sas rastas tuas carcande su pursante in s’ischermu de sa mapa e ammustrat sas impostatziones pro sa registratzione de sos biàgios tuos in documentos GPX localmente o in lìnia impreande unu servìtziu web.
+\n\nSas rastas registradas podent èssere cumpartzidas cun sos amigos tuos o èssere impreadas pro cuntribuire a OSM. Sos atletas podent impreare sas rastas pro compidare sos allenamentos issoro. Carchi anàlisi de base podet èssere fata deretamente in OsmAnd, comente tempus de giru, lestresa mèdia etc., e sas rastas podent, est craru, èssere analizadas fintzas prus a tardu cun ainas estèrnas de anàlisi. "</string>
     <string name="record_plugin_name">Registratzione biàgios</string>
     <string name="int_hour">h</string>
     <string name="duration">Durada</string>
@@ -1541,7 +1541,7 @@
     <string name="osmo_device_not_found">Dispositivu no agatau</string>
     <string name="anonymous_user">Impitadore anònimu</string>
     <string name="logged_as">Identificadu comente %1$s</string>
-    <string name="osmo_no_connection_msg">Su servìtziu OsMo no est disponìbile:\n- compida sa connessione;\n- compida sas impostaduras;\n- abbàida su Twitter nostru: https://twitter.com/OsMomobi</string>
+    <string name="osmo_no_connection_msg">Su servìtziu OsMo no est disponìbile:\n- còmpida sa connessione;\n- còmpida sas impostatziones;\n- abbàida su Twitter nostru: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user_hint">Un\'impitadore anònimu non podet:\n- creare grupos;\n- sincronizare grupos e dispositivos cun su server;\n- gestire grupos e dispositivos in un\'ufìtziu privadu.</string>
     <string name="rendering_category_details">Minujas</string>
     <string name="configure_map">Cunfigura sa mapa</string>
@@ -1698,8 +1698,8 @@
     <string name="drawer">Lista ebbia</string>
     <string name="short_location_on_map">Lat %1$s\n Lon %2$s</string>
     <string name="tips_and_tricks_descr">Dimandas fitianas, ùrtimas modìficas e àteru</string>
-    <string name="routing_settings_2">Impostaduras de nàvigu</string>
-    <string name="general_settings_2">Impostaduras generales</string>
+    <string name="routing_settings_2">Impostatziones de nàvigu</string>
+    <string name="general_settings_2">Impostatziones generales</string>
     <string name="shared_string_ellipsis">…</string>
     <string name="shared_string_deselect">De-ischerta</string>
     <string name="shared_string_deselect_all">De-ischerta totu</string>
@@ -2011,4 +2011,6 @@
 	<string name="poi_dialog_reopen">Torra a abèrrere</string>
 	<string name="shared_string_commit">Imbia</string>
 	
+    <string name="osm_edit_modified_poi">PDI OSM modificadu</string>
+    <string name="osm_edit_deleted_poi">PDI OSM burradu</string>
     </resources>

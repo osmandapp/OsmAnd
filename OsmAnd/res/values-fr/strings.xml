@@ -2111,4 +2111,6 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	
     <string name="poi_dialog_reopen">Ré-ouvrir</string>
 	<string name="osm_edit_commented_note">Note OSM commentée</string>
+    <string name="osm_edit_modified_poi">PI OSM modifié</string>
+    <string name="osm_edit_deleted_poi">PI OSM supprimé</string>
     </resources>

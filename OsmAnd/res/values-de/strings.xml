@@ -1800,6 +1800,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="dash_download_new_one">Neue Karte herunterladen</string>
     <string name="dash_download_manage">Karten verwalten</string>
     <string name="rendering_attr_roadStyle_name">Straßendarstellung</string>
+    <string name="rendering_attr_roadStyle_description">Straßendarstellung</string>
     <string name="rendering_value__name">Standard</string>
     <string name="rendering_value_default_name">Standard</string>
     <string name="rendering_value_orange_name">Orange</string>
@@ -1991,7 +1992,9 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="rendering_value_default13_name">Standard (13)</string>
 	<string name="rendering_value_defaultTranslucentCyan_name">Standard (transparentes Cyan)</string>
     <string name="rendering_attr_currentTrackColor_name">GPX-Farbe</string>
+    <string name="rendering_attr_currentTrackColor_description">GPX-Farbe</string>
     <string name="rendering_attr_currentTrackWidth_name">GPX-Breite</string>
+    <string name="rendering_attr_currentTrackWidth_description">GPX-Breite</string>
     <string name="rendering_value_red_name">Rot</string>
     <string name="rendering_value_translucent_red_name">Transparentes Rot</string>
     <string name="rendering_value_translucent_orange_name">Transparentes Orange</string>
