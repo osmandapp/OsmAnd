@@ -1966,4 +1966,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="save_poi_without_poi_type_message">Naozaj chcete uložiť bod bez uvedenia typu?</string>
     <string name="shared_string_location">Poloha</string>
     <string name="poi_context_menu_modify_osm_change">Upraviť zmenu OSM</string>
+    <string name="context_menu_item_delete_waypoint">Odstrániť bod GPX?</string>
+    <string name="context_menu_item_edit_waypoint">Upraviť bod GPX</string>
     </resources>
