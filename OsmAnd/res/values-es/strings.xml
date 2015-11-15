@@ -290,7 +290,7 @@
     <string name="download_files_question">¿Descargar {0} archivo(s) ({1} MB)?</string>
     <string name="items_were_selected">{0} elemento(s) seleccionado(s)</string>
     <string name="filter_existing_indexes">Descargados</string>
-    <string name="shared_string_select_all">Seleccionar todo</string>
+    <string name="shared_string_select_all">Marcar todo</string>
     <string name="shared_string_refresh">Actualizar</string>
     <string name="fast_route_mode">Ruta más rápida</string>
     <string name="fast_route_mode_descr">"Habilitar para calcular la ruta más rápida o deshabilitar para la ruta más corta "</string>
@@ -377,8 +377,8 @@
     <string name="hide_poi_filter">Ocultar filtro</string>
     <string name="show_poi_filter">Mostrar filtro</string>
     <string name="search_poi_filter">Filtro</string>
-    <string name="menu_mute_off">Sonido on</string>
-    <string name="menu_mute_on">Sonido off</string>
+    <string name="menu_mute_off">Sonido activado</string>
+    <string name="menu_mute_on">Sonido desactivado</string>
     <string name="voice_provider_descr">Selecciona el aviso de voz para la navegación</string>
     <string name="voice_provider">Avisos de voz</string>
     <string name="voice_data_initializing">Inicializando datos de voz…</string>
@@ -661,7 +661,7 @@
     <string name="default_buttons_support">Soporte</string>
     <string name="support_new_features">Soporte de nuevas características</string>
     <string name="show_ruler_level">Mostrar escala</string>
-    <string name="info_button">Info</string>
+    <string name="info_button">Información</string>
     <string name="back_to_location">Volver a la posición</string>
     <string name="shared_string_help">Ayuda</string>
     <string name="accessibility_extensions_descr">Extensión de accesibilidad para versiones viejas de Android</string>
@@ -719,7 +719,7 @@
     <string name="use_short_object_names">Utilizar nombre de objetos</string>
     <string name="accessibility_preferences_descr">Preferencias relativas a la accesibilidad</string>
     <string name="shared_string_accessibility">Accesibilidad</string>
-    <string name="local_index_routing_data">Datos de enrutamiento</string>
+    <string name="local_index_routing_data">Datos de la navegación</string>
     <string name="navigate_point_format">Formato</string>
     <string name="poi_search_desc">Buscar PDI (punto de interés)</string>
     <string name="address_search_desc">Buscar dirección</string>
@@ -745,7 +745,7 @@
     <string name="osmand_parking_event">Recoger el automóvil del aparcamiento</string>
     <string name="osmand_parking_warning">Advertencia</string>
     <string name="osmand_parking_warning_text">La notificación para recoger su automóvil, fue previamente añadida a su calendario. Permanecerá allí hasta que la borre manualmente.</string>
-    <string name="osmand_parking_time_limit_title">Establecer el límite de tiempo del aparacamiento</string>
+    <string name="osmand_parking_time_limit_title">Establecer el límite de tiempo del aparcamiento</string>
     <string name="osmand_parking_delete_confirm">¿Quiere eliminar la ubicación del automóvil aparcado?</string>
     <string name="osmand_parking_delete">Eliminar un marcador de aparcamiento</string>
     <string name="osmand_parking_choose_type">Elija el tipo de aparcamiento</string>
@@ -943,7 +943,7 @@
     <string name="stop_routing_confirm">¿Está seguro que quiere parar la navegación?</string>
     <string name="clear_dest_confirm">¿Seguro que quiere borrar su punto de destino (y puntos de ruta)?</string>
     <string name="precise_routing_mode_descr">Habilitar para calcular rutas precisas sin interferencias. Aún está limitado por la distancia y es lento.</string>
-    <string name="precise_routing_mode">Enrutado preciso (alfa)</string>
+    <string name="precise_routing_mode">Navegación precisa (alfa)</string>
     <string name="local_indexes_cat_av">Datos multimedia</string>
     <string name="support_new_features_descr">Dona para ver nuevas características implementadas en la aplicación</string>
     <string name="download_hillshade_maps">Sombreado</string>
@@ -1015,7 +1015,7 @@
 \n- África: **
 \n- Antártida: *
 \n\nLa lista de países incluidos (¡prácticamente todo el mundo!):
-\n\nAfganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Antillas Holandesas, Arabia Saudita, Argelia, Argentina, Armenia, Aruba, Australia, Austria, Azerbaiyán, Bahamas, Bahrein, Bangladesh, Barbados, Bélgica, Belice, Benín, Bermuda, Bielorrusia, Bolivia, Bonaire, Bosnia y Herzegovina, Botswana, Brasil, Brunei, Bulgaria, Burkina Faso, Burundi, Bután, Cabo Verde, Camboya, Camerún, Canadá, Chad, Chile, China, Chipre, Colombia, Comoras, Congo, Corea del Norte, Corea del Sur, Costa de Marfil, Costa Rica, Croacia, Cuba, Curazao, Dinamarca, Djibouti, Dominica, Ecuador, Egipto, El Salvador, El Vaticano, Emiratos Árabes Unidos, Eritrea, Eslovaquia, Eslovenia, España, Estados Unidos de América, Estonia, Etiopía, Fiji, Filipinas, Finlandia, Francia, Gabón, Gambia, Georgia, Georgia del Sur, Ghana, Gibraltar, Granada, Grecia, Groenlandia, Guadalupe, Guam, Guatemala, Guayana Francesa, Guernsey, Guinea, Guinea-Bissau, Guinea Ecuatorial, Guyana, Haití, Honduras, Hong Kong, Hungría, India, Indonesia, Irán, Iraq, Irlanda, Isla de Man, Islandia, Islas Vírgenes Británicas, Israel, Italia, Jamaica, Japón, Jersey, Jordania, Kazajstán, Kenya, Kirguistán, Kiribati, Kuwait, Laos, Lesotho, Letonia, Líbano, Liberia, Libia, Liechtenstein, Lituania, Luxemburgo, Macao, Macedonia, Madagascar, Malasia, Malawi, Maldivas, Malí, Malta, Marruecos, Martinica, Mauricio, Mauritania, Mayotte, México, Micronesia, Moldavia, Mónaco, Mongolia, Montenegro, Montserrat, Mozambique, Myanmar, Namibia, Nauru, Nepal, Nicaragua, Níger, Nigeria, Noruega, Nueva Caledonia, Nueva Zelanda, Omán, Países Bajos, Pakistán, Palau, Panamá, Papúa Nueva Guinea, Paraguay, Perú, Polinesia Francesa, Polonia, Portugal, Puerto Rico, Qatar, Reino Unido, República Centroafricana, República Checa, República Dominicana, Ruanda, Rumanía, Rusia, Sahara Occidental, Saint-Barthelemy, Saint Helena, Saint Kitts y Nevis, Samoa, San Marino, San Martin, San Pedro y Miquelón, Santa Lucía, San Vicente y las Granadinas, Senegal, Serbia, Seychelles, Sierra Leona, Singapur, Siria, Somalia, Sri Lanka, Sudáfrica, Sudán, Sudán del Sur, Suecia, Suiza, Suriname, Swazilandia, Tailandia, Taiwán, Tanzania, Tayikistán, Territorio Palestino, Timor Oriental, Togo, Tokelau, Tonga, Trinidad y Tobago, Túnez, Turkmenistán, Turquía, Tuvalu, Ucrania, Uganda, Uruguay, Uzbekistán, Vanuatu, Venezuela, Vietnam, Wallis y Futuna, Yemen, Zambia, Zimbabwe. "</string>
+\n\nAfganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Antillas Holandesas, Arabia Saudita, Argelia, Argentina, Armenia, Aruba, Australia, Austria, Azerbaiyán, Bahamas, Bahrein, Bangladesh, Barbados, Bélgica, Belice, Benín, Bermuda, Bielorrusia, Bolivia, Bonaire, Bosnia y Herzegovina, Botsuana, Brasil, Brunei, Bulgaria, Burkina Faso, Burundi, Bután, Cabo Verde, Camboya, Camerún, Canadá, Chad, Chile, China, Chipre, Colombia, Comoras, Congo, Corea del Norte, Corea del Sur, Costa de Marfil, Costa Rica, Croacia, Cuba, Curazao, Dinamarca, Djibouti, Dominica, Ecuador, Egipto, El Salvador, El Vaticano, Emiratos Árabes Unidos, Eritrea, Eslovaquia, Eslovenia, España, Estados Unidos de América, Estonia, Etiopía, Fiji, Filipinas, Finlandia, Francia, Gabón, Gambia, Georgia, Georgia del Sur, Ghana, Gibraltar, Granada, Grecia, Groenlandia, Guadalupe, Guam, Guatemala, Guayana Francesa, Guernsey, Guinea, Guinea-Bissau, Guinea Ecuatorial, Guyana, Haití, Honduras, Hong Kong, Hungría, India, Indonesia, Irán, Iraq, Irlanda, Isla de Man, Islandia, Islas Vírgenes Británicas, Israel, Italia, Jamaica, Japón, Jersey, Jordania, Kazajstán, Kenya, Kirguistán, Kiribati, Kuwait, Laos, Lesotho, Letonia, Líbano, Liberia, Libia, Liechtenstein, Lituania, Luxemburgo, Macao, Macedonia, Madagascar, Malasia, Malawi, Maldivas, Malí, Malta, Marruecos, Martinica, Mauricio, Mauritania, Mayotte, México, Micronesia, Moldavia, Mónaco, Mongolia, Montenegro, Montserrat, Mozambique, Myanmar, Namibia, Nauru, Nepal, Nicaragua, Níger, Nigeria, Noruega, Nueva Caledonia, Nueva Zelanda, Omán, Países Bajos, Pakistán, Palau, Panamá, Papúa Nueva Guinea, Paraguay, Perú, Polinesia Francesa, Polonia, Portugal, Puerto Rico, Qatar, Reino Unido, República Centroafricana, República Checa, República Dominicana, Ruanda, Rumanía, Rusia, Sahara Occidental, Saint-Barthelemy, Saint Helena, Saint Kitts y Nevis, Samoa, San Marino, San Martin, San Pedro y Miquelón, Santa Lucía, San Vicente y las Granadinas, Senegal, Serbia, Seychelles, Sierra Leona, Singapur, Siria, Somalia, Sri Lanka, Sudáfrica, Sudán, Sudán del Sur, Suecia, Suiza, Suriname, Swazilandia, Tailandia, Taiwán, Tanzania, Tayikistán, Territorio Palestino, Timor Oriental, Togo, Tokelau, Tonga, Trinidad y Tobago, Túnez, Turkmenistán, Turquía, Tuvalu, Ucrania, Uganda, Uruguay, Uzbekistán, Vanuatu, Venezuela, Vietnam, Wallis y Futuna, Yemen, Zambia, Zimbabwe. "</string>
     <string name="layer_hillshade">Capa de sombreado</string>
     <string name="map_widget_gps_info">Información GPS</string>
     <string name="osmand_play_title_30_chars">Navegación y Mapas OsmAnd</string>
@@ -1082,8 +1082,8 @@
     <string name="av_camera_focus_infinity">Enfocado al infinito</string>
     <string name="av_camera_focus_macro">Modo de enfoque macro (close-up)</string>
     <string name="av_camera_focus_continuous">La camera intenta enfocar continuamente</string>
-    <string name="av_photo_play_sound">Sonido al hacer fotos</string>
-    <string name="av_photo_play_sound_descr">Elige si reproducir un sonido al hacer fotos</string>
+    <string name="av_photo_play_sound">Sonido al fotografiar</string>
+    <string name="av_photo_play_sound_descr">Elige si reproducir un sonido al fotografiar</string>
     <string name="context_menu_item_directions_from">Ir desde aquí</string>
     <string name="route_via">Vía:</string>
     <string name="route_from">Desde:</string>
@@ -1185,7 +1185,7 @@
 \n- África: **
 \n- Antártida: *
 \n\nLa lista de países incluidos (¡prácticamente todo el mundo!):
-\n\nAfganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Antillas Holandesas, Arabia Saudita, Argelia, Argentina, Armenia, Aruba, Australia, Austria, Azerbaiyán, Bahamas, Bahrein, Bangladesh, Barbados, Bélgica, Belice, Benín, Bermuda, Bielorrusia, Bolivia, Bonaire, Bosnia y Herzegovina, Botswana, Brasil, Brunei, Bulgaria, Burkina Faso, Burundi, Bután, Cabo Verde, Camboya, Camerún, Canadá, Chad, Chile, China, Chipre, Colombia, Comoras, Congo, Corea del Norte, Corea del Sur, Costa de Marfil, Costa Rica, Croacia, Cuba, Curazao, Dinamarca, Djibouti, Dominica, Ecuador, Egipto, El Salvador, El Vaticano, Emiratos Árabes Unidos, Eritrea, Eslovaquia, Eslovenia, España, Estados Unidos de América, Estonia, Etiopía, Fiji, Filipinas, Finlandia, Francia, Gabón, Gambia, Georgia, Georgia del Sur, Ghana, Gibraltar, Granada, Grecia, Groenlandia, Guadalupe, Guam, Guatemala, Guayana Francesa, Guernsey, Guinea, Guinea-Bissau, Guinea Ecuatorial, Guyana, Haití, Honduras, Hong Kong, Hungría, India, Indonesia, Irán, Iraq, Irlanda, Isla de Man, Islandia, Islas Vírgenes Británicas, Israel, Italia, Jamaica, Japón, Jersey, Jordania, Kazajstán, Kenya, Kirguistán, Kiribati, Kuwait, Laos, Lesotho, Letonia, Líbano, Liberia, Libia, Liechtenstein, Lituania, Luxemburgo, Macao, Macedonia, Madagascar, Malasia, Malawi, Maldivas, Malí, Malta, Marruecos, Martinica, Mauricio, Mauritania, Mayotte, México, Micronesia, Moldavia, Mónaco, Mongolia, Montenegro, Montserrat, Mozambique, Myanmar, Namibia, Nauru, Nepal, Nicaragua, Níger, Nigeria, Noruega, Nueva Caledonia, Nueva Zelanda, Omán, Países Bajos, Pakistán, Palau, Panamá, Papúa Nueva Guinea, Paraguay, Perú, Polinesia Francesa, Polonia, Portugal, Puerto Rico, Qatar, Reino Unido, República Centroafricana, República Checa, República Dominicana, Ruanda, Rumanía, Rusia, Sahara Occidental, Saint-Barthelemy, Saint Helena, Saint Kitts y Nevis, Samoa, San Marino, San Martin, San Pedro y Miquelón, Santa Lucía, San Vicente y las Granadinas, Senegal, Serbia, Seychelles, Sierra Leona, Singapur, Siria, Somalia, Sri Lanka, Sudáfrica, Sudán, Sudán del Sur, Suecia, Suiza, Suriname, Swazilandia, Tailandia, Taiwán, Tanzania, Tayikistán, Territorio Palestino, Timor Oriental, Togo, Tokelau, Tonga, Trinidad y Tobago, Túnez, Turkmenistán, Turquía, Tuvalu, Ucrania, Uganda, Uruguay, Uzbekistán, Vanuatu, Venezuela, Vietnam, Wallis y Futuna, Yemen, Zambia, Zimbabwe. "</string>
+\n\nAfganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Antillas Holandesas, Arabia Saudita, Argelia, Argentina, Armenia, Aruba, Australia, Austria, Azerbaiyán, Bahamas, Bahrein, Bangladesh, Barbados, Bélgica, Belice, Benín, Bermuda, Bielorrusia, Bolivia, Bonaire, Bosnia y Herzegovina, Botsuana, Brasil, Brunei, Bulgaria, Burkina Faso, Burundi, Bután, Cabo Verde, Camboya, Camerún, Canadá, Chad, Chile, China, Chipre, Colombia, Comoras, Congo, Corea del Norte, Corea del Sur, Costa de Marfil, Costa Rica, Croacia, Cuba, Curazao, Dinamarca, Djibouti, Dominica, Ecuador, Egipto, El Salvador, El Vaticano, Emiratos Árabes Unidos, Eritrea, Eslovaquia, Eslovenia, España, Estados Unidos de América, Estonia, Etiopía, Fiji, Filipinas, Finlandia, Francia, Gabón, Gambia, Georgia, Georgia del Sur, Ghana, Gibraltar, Granada, Grecia, Groenlandia, Guadalupe, Guam, Guatemala, Guayana Francesa, Guernsey, Guinea, Guinea-Bissau, Guinea Ecuatorial, Guyana, Haití, Honduras, Hong Kong, Hungría, India, Indonesia, Irán, Iraq, Irlanda, Isla de Man, Islandia, Islas Vírgenes Británicas, Israel, Italia, Jamaica, Japón, Jersey, Jordania, Kazajstán, Kenya, Kirguistán, Kiribati, Kuwait, Laos, Lesotho, Letonia, Líbano, Liberia, Libia, Liechtenstein, Lituania, Luxemburgo, Macao, Macedonia, Madagascar, Malasia, Malawi, Maldivas, Malí, Malta, Marruecos, Martinica, Mauricio, Mauritania, Mayotte, México, Micronesia, Moldavia, Mónaco, Mongolia, Montenegro, Montserrat, Mozambique, Myanmar, Namibia, Nauru, Nepal, Nicaragua, Níger, Nigeria, Noruega, Nueva Caledonia, Nueva Zelanda, Omán, Países Bajos, Pakistán, Palau, Panamá, Papúa Nueva Guinea, Paraguay, Perú, Polinesia Francesa, Polonia, Portugal, Puerto Rico, Qatar, Reino Unido, República Centroafricana, República Checa, República Dominicana, Ruanda, Rumanía, Rusia, Sahara Occidental, Saint-Barthelemy, Saint Helena, Saint Kitts y Nevis, Samoa, San Marino, San Martin, San Pedro y Miquelón, Santa Lucía, San Vicente y las Granadinas, Senegal, Serbia, Seychelles, Sierra Leona, Singapur, Siria, Somalia, Sri Lanka, Sudáfrica, Sudán, Sudán del Sur, Suecia, Suiza, Suriname, Swazilandia, Tailandia, Taiwán, Tanzania, Tayikistán, Territorio Palestino, Timor Oriental, Togo, Tokelau, Tonga, Trinidad y Tobago, Túnez, Turkmenistán, Turquía, Tuvalu, Ucrania, Uganda, Uruguay, Uzbekistán, Vanuatu, Venezuela, Vietnam, Wallis y Futuna, Yemen, Zambia, Zimbabwe. "</string>
     <string name="map_magnifier">Ampliar el mapa</string>
     <string name="route_is_too_long">El cálculo de la ruta de OsmAnd sin conexión, puede tardar mucho tiempo (o a veces no funcionar) para puntos separados a más de 200km. Tal vez quiera añadir puntos de ruta intermedios para un mejor rendimiento.</string>
     <string name="auto_zoom_none">Sin acercamiento automático</string>
@@ -1239,9 +1239,9 @@
 \n Nota 2: En la nueva ubicación de almacenamiento no será posible compartir archivos entre OsmAnd y OsmAnd+.</string>
     <string name="use_displayed_track_for_navigation">¿Quiere utilizar la traza mostrada para la navegación?</string>
     <string name="keep_and_add_destination_point">Añadir como punto de destino</string>
-    <string name="select_gpx">Seleccionar GPX…</string>
+    <string name="select_gpx">Marcar GPX…</string>
     <string name="route_descr_select_destination">Seleccionar destino</string>
-    <string name="shared_string_select_on_map">Seleccionar en el mapa</string>
+    <string name="shared_string_select_on_map">Marcar en el mapa</string>
     <string name="shared_string_favorite">Favorito</string>
     <string name="route_preferences">Preferencias de la ruta</string>
     <string name="route_info">Información de la ruta</string>
@@ -1331,7 +1331,7 @@
     <string name="osmo_locations_sent">"Ubicaciones enviadas %1$d (en buffer %2$d) "</string>
     <string name="osmo_conn_successfull">Conexión establecida: %1$s </string>
     <string name="osmo_groups">Grupos/Dispositivos OsMo</string>
-    <string name="osmo_group_info">Info</string>
+    <string name="osmo_group_info">Información</string>
     <string name="color_red">rojo</string>
     <string name="color_pink">rosa</string>
     <string name="color_orange">anaranjado</string>
@@ -1425,7 +1425,7 @@
     <string name="gpx_info_asc_altitude">Descenso/ascenso: %1$s</string>
     <string name="map_widget_plain_time">Tiempo actual</string>
     <string name="gpx_wpt">Punto de ruta</string>
-    <string name="select_destination_and_intermediate_points">Seleccionar puntos de ruta</string>
+    <string name="select_destination_and_intermediate_points">Marcar puntos de ruta</string>
     <string name="layer_amenity_label">Etiquetas de los puntos</string>
     <string name="save_as_favorites_points">Guardar como grupo de favoritos</string>
     <string name="show_zoom_buttons_navigation_descr">Muestra los botones de acercamiento durante la navegación</string>
@@ -1434,7 +1434,7 @@
     <string name="sort_by_distance">Ordenar por distancia</string>
     <string name="sort_by_name">Ordenar por nombre</string>
     <string name="none_selected_gpx">No hay archivos GPX seleccionados. Para seleccionar presione y mantenga presionado en la traza disponible.</string>
-    <string name="local_index_select_gpx_file">Seleccionar para mostrar</string>
+    <string name="local_index_select_gpx_file">Marcar para mostrar</string>
     <string name="no_index_file_to_download">No se encontraron descargas, compruebe su conexión a Internet.</string>
     <string name="rendering_attr_hideBuildings_name">Ocultar edificios</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Ocultar vías no aptas para vehículos</string>
@@ -1690,8 +1690,8 @@
     <string name="routing_settings_2">Ajustes de navegación</string>
     <string name="general_settings_2">Ajustes generales</string>
     <string name="shared_string_ellipsis">…</string>
-    <string name="shared_string_deselect">Deseleccionar</string>
-    <string name="shared_string_deselect_all">Deseleccionar todo</string>
+    <string name="shared_string_deselect">Desmarcar</string>
+    <string name="shared_string_deselect_all">Desmarcar todo</string>
     <string name="shared_string_unexpected_error">Se produjo un error inesperado</string>
     <string name="shared_string_action_template">Acción {0}</string>
     <string name="shared_string_collapse">Contraer</string>
