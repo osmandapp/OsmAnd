@@ -416,7 +416,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		} else {
 			title = R.string.osn_add_dialog_title;
 		}		
-		AlertDialog dlg = (AlertDialog) dialog;
+		final AlertDialog dlg = (AlertDialog) dialog;
 		dlg.setTitle(title);
 		final View view = dlg.findViewById(R.id.layout);
 		Button btn = dlg.getButton(DialogInterface.BUTTON_POSITIVE);
@@ -447,8 +447,9 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 //						AccessibleToast.makeText(activity, activity.getString(R.string.osb_author_or_password_not_specified),
 //								Toast.LENGTH_SHORT).show();
 //					}
-					asyncActionTask(bug, text, action);
 					activity.getContextMenu().close();
+					asyncActionTask(bug, text, action);
+					dlg.dismiss();
 				}
 			}
 		});
