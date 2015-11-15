@@ -2011,4 +2011,6 @@
 	<string name="poi_dialog_reopen">Torra a abèrrere</string>
 	<string name="shared_string_commit">Imbia</string>
 	
+    <string name="osm_edit_modified_poi">PDI OSM modificadu</string>
+    <string name="osm_edit_deleted_poi">PDI OSM burradu</string>
     </resources>
