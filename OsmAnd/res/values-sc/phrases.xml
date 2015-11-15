@@ -1676,4 +1676,17 @@
 	<string name="poi_industrial_water_purification">Casta: purificatzione de s’abba</string>
 	<string name="poi_industrial_port">Casta: portu</string>
 	<string name="poi_watering_place">Abbadòrgiu</string>
+	<string name="poi_animal_boarding">Posada pro animales</string>
+	<string name="poi_animal_boarding_dog">Casta de posada: pro canes</string>
+	<string name="poi_animal_boarding_cat">Casta de posada: pro gatos</string>
+	<string name="poi_animal_boarding_dog_cat">Casta de posada: pro canes e gatos</string>
+	<string name="poi_animal_boarding_horse">Casta de posada: pro caddos</string>
+
+	<string name="poi_historic_aircraft">Aèreu istòricu</string>
+
+	<string name="poi_honey">Butega de mele</string>
+
+	<string name="poi_elevator_yes">Cun ascensore</string>
+	<string name="poi_elevator_no">Chene ascensore</string>
+
 	</resources>
