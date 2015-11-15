@@ -11,8 +11,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by Denis
- * on 11.03.2015.
  */
 public class UploadOpenstreetmapPointAsyncTask
 		extends AsyncTask<OsmPoint, OsmPoint, Map<OsmPoint, String>> {
@@ -68,11 +66,11 @@ public class UploadOpenstreetmapPointAsyncTask
 				OsmNotesPoint p = (OsmNotesPoint) point;
 				String errorMessage = null;
 				if (p.getAction() == OsmPoint.Action.CREATE) {
-					errorMessage = remotebug.createNewBug(p.getLatitude(), p.getLongitude(), p.getText(), p.getAuthor());
+					errorMessage = remotebug.createNewBug(p.getLatitude(), p.getLongitude(), p.getText());
 				} else if (p.getAction() == OsmPoint.Action.MODIFY) {
-					errorMessage = remotebug.addingComment(p.getId(), p.getText(), p.getAuthor());
+					errorMessage = remotebug.addingComment(p.getLatitude(), p.getLongitude(), p.getId(), p.getText());
 				} else if (p.getAction() == OsmPoint.Action.DELETE) {
-					errorMessage = remotebug.closingBug(p.getId(), p.getText(), p.getAuthor());
+					errorMessage = remotebug.closingBug(p.getLatitude(), p.getLongitude(), p.getId(), p.getText());
 				}
 				if (errorMessage == null) {
 					plugin.getDBBug().deleteAllBugModifications(p);

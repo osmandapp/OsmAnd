@@ -169,7 +169,7 @@
 	<string name="gpx_files_not_found">Нема GPX фајлова у фасцикли стаза</string>
 	<string name="error_reading_gpx">Грешка при читању GPX података</string>
 	
-	<string name="osb_bug_name">Грешка</string>
+	
 	<string name="poi_context_menu_modify">Измена POI</string>
 	<string name="poi_context_menu_delete">Брисање POI</string>
 	<string name="rotate_map_none_opt">Без ротације (север је горе)</string>

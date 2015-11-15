@@ -646,7 +646,7 @@
 	<string name="vector_data">Hărți vectoriale offline</string>
 	<string name="transport_context_menu">Căutare transport la destinație</string>
 	
-	<string name="osb_bug_name">Bug</string>
+	
 	<string name="poi_context_menu_modify">Modifică POI</string>
 	<string name="poi_context_menu_delete">Șterge POI</string>
 	<string name="rotate_map_compass_opt">Către direcție busolă</string>
@@ -909,7 +909,7 @@
 	<string name="search_tabs_location">Poziție</string>
 	
 	<string name="context_menu_item_update_map">Actualizează hartă</string>
-	<string name="context_menu_item_open_bug">Deschide un Bug OSM</string>
+	
 	<string name="context_menu_item_create_poi">Creează POI</string>
 	<string name="shared_string_yes">Da</string>
 	<string name="shared_string_cancel">Anulează</string>
@@ -923,21 +923,21 @@
 	<string name="favourites_context_menu_delete">Șterge punctul favorit</string>
 	<string name="favourites_remove_dialog_msg">Ștergeți punctul favorit \'%s\'?</string>
 	<string name="favourites_remove_dialog_success">Punctul favorit {0} a fost șters.</string>
-	<string name="osb_add_dialog_title">Introduceți textul Bug-ului</string>
-	<string name="osb_add_dialog_success">Bug creat cu succes</string>
-	<string name="osb_add_dialog_error">A intervenit o eroare: bug-ul nu a fost creat</string>
-	<string name="osb_comment_menu_item">Adaugă comentariu</string>
+	
+	
+	
+	
 	<string name="osb_comment_dialog_message">Mesaj</string>
 	<string name="osb_comment_dialog_author">Nume autor</string>
-	<string name="osb_comment_dialog_title">Adăugare comentariu la un Bug</string>
-	<string name="osb_comment_dialog_add_button">Adaugă comentariu</string>
+	
+	
 	<string name="osb_comment_dialog_success">comentariul a fost adăugat cu succes</string>
 	<string name="osb_comment_dialog_error">Eroare: comentariul nu a fost adăugat</string>
-	<string name="osb_close_menu_item">Închidere Bug</string>
-	<string name="osb_close_dialog_title">Se închide Bug-ul</string>
-	<string name="osb_close_dialog_close_button">Închide bug</string>
-	<string name="osb_close_dialog_success">Bug-ul a fost închis cu succes</string>
-	<string name="osb_close_dialog_error">Eroare: bug-ul nu a fost închis</string>
+	
+	
+	
+	
+	
 	<string name="poi_edit_title">Editare POI</string>
 	<string name="poi_create_title">Creează POI</string>
 	<string name="poi_error_poi_not_found">POI-ul nu poate fi găsit sau punctul de interes nu este singular</string>

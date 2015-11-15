@@ -232,16 +232,16 @@
 	<string name="poi_error_unexpected_template">خطای غیرمنتظره در حین {0} اتفاق افتاد.</string>
 	<string name="poi_error_io_error_template">خطای I/O در حین انجام {0} اتفاق افتاد.</string>
 	<string name="poi_error_info_not_loaded">اطلاعات نقطه بارگذاری نشد</string>
-	<string name="osb_comment_menu_item">افزودن توضیح</string>
+	
 	<string name="osb_comment_dialog_message">پیام</string>
 	<string name="osb_comment_dialog_author">نام نویسنده</string>
-	<string name="osb_comment_dialog_title">افزودن توضیح به اشکال</string>
-	<string name="osb_comment_dialog_add_button">افزودن توضیح</string>
+	
+	
 	<string name="osb_comment_dialog_success">توضیح اضافه شد</string>
-	<string name="osb_close_menu_item">بستن اشکال</string>
-	<string name="osb_close_dialog_title">درحال بستن اشکال</string>
-	<string name="osb_close_dialog_close_button">بستن اشکال</string>
-	<string name="osb_close_dialog_success">اشکال بسته شد</string>
+	
+	
+	
+	
 	<string name="poi_edit_title">ویرایش POI</string>
 	<string name="shared_string_show_on_map">روی نقشه نشان بده</string>
 	
@@ -255,7 +255,7 @@
 	<string name="search_tabs_location">محل</string>
 	
 	<string name="context_menu_item_update_map">به روز رسانی نقشه</string>
-	<string name="context_menu_item_open_bug">بازکردن اشکال OSM</string>
+	
 	<string name="context_menu_item_create_poi">ایجاد POI</string>
 	<string name="shared_string_yes">بله</string>
 	<string name="shared_string_cancel">لغو</string>
@@ -269,9 +269,9 @@
 	<string name="favourites_context_menu_delete">حذف علاقمندی</string>
 	<string name="favourites_remove_dialog_msg">آیا نقطه برگزیده \'%s\' حذف شود؟</string>
 	<string name="favourites_remove_dialog_success">علاقمندی {0} حذف شد.</string>
-	<string name="osb_add_dialog_title">شرح اشکال را وارد کنید</string>
-	<string name="osb_add_dialog_success">اشکال با موفقیت ایجاد شد</string>
-	<string name="osb_add_dialog_error">خطایی روی داد: اشکال ایجاد نشد</string>
+	
+	
+	
 	<string name="search_address">جستجوی آدرس</string>
 	<string name="shared_string_add_to_favorites">افزودن به علاقمندیها</string>
 	<string name="use_english_names_descr">انتخاب بین نامهای بومی یا انگلیسی</string>
@@ -312,7 +312,7 @@
 	<string name="navigate_point_longitude">طول جغرافیایی</string>
 	<string name="poi_remove_confirm_template">{0} حذف شود(توضیح دهید)؟</string>
 	<string name="osb_comment_dialog_error">خطایی رخ داد: توضیح افزوده نشد</string>
-	<string name="osb_close_dialog_error">خطایی رخ داد: اشکال بسته نشد</string>
+	
 	<string name="Closest_Amenities">نزدیکترین امکانات رفاهی</string>
 	<string name="map_tile_source_descr">منبع نقشه آنلاین یا ذخیره شده را انتخاب کنید</string>
 	<string name="error_calculating_route_occured">درحین محاسبه مسیر خطایی رخ داد</string>
@@ -1005,7 +1005,7 @@
 	<string name="layer_gpx_layer">مسیر GPX…</string>
 	<string name="error_reading_gpx">خطا هنگام خواندن داده GPX</string>
 	<string name="vector_data">نقشه های بُرداری آفلاین</string>
-	<string name="osb_bug_name">اشکال</string>
+	
 	
 	<string name="downloading_build">درحال دانلود ساخت…</string>
 	<string name="reading_cached_tiles">درحال خواندن کاشی های ذخیره شده…</string>

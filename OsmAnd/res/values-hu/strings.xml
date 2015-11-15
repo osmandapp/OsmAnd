@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="send_files_to_osm">GPX fájl küldése OSM-re?</string>
     <string name="gpx_visibility_txt">Láthatóság</string>
     <string name="gpx_tags_txt">Címkék</string>
@@ -421,7 +420,7 @@
     <string name="vector_data">Vektoros OSM térkép</string>
     <string name="transport_context_menu">Közlekedés keresése a célnál</string>
 
-    <string name="osb_bug_name">Hiba</string>
+    
     <string name="poi_context_menu_modify">POI módosítás</string>
     <string name="poi_context_menu_delete">POI törlés</string>
     <string name="rotate_map_compass_opt">Iránytű alapján</string>
@@ -686,7 +685,7 @@
     <string name="search_tabs_location">Koordináta</string>
 
     <string name="context_menu_item_update_map">Térkép frissítése</string>
-    <string name="context_menu_item_open_bug">OSM Bug nyitása</string>
+    
     <string name="context_menu_item_create_poi">POI készítés</string>
     <string name="shared_string_yes">Igen</string>
     <string name="shared_string_cancel">Mégsem</string>
@@ -700,21 +699,21 @@
     <string name="favourites_context_menu_delete">Kedvenc törlése</string>
     <string name="favourites_remove_dialog_msg">Törlöd a(z) \'%s\' kedvenc pontot?</string>
     <string name="favourites_remove_dialog_success">{0} kedvenc pont sikeresen törölve.</string>
-    <string name="osb_add_dialog_title">Hiba leírása</string>
-    <string name="osb_add_dialog_success">Sikeresen elkészített hibajelentés</string>
-    <string name="osb_add_dialog_error">Hiba történt a hibajelentés elkészítésénél</string>
-    <string name="osb_comment_menu_item">Megjegyzés hozzáfűzése</string>
+    
+    
+    
+    
     <string name="osb_comment_dialog_message">Üzenet</string>
     <string name="osb_comment_dialog_author">Bejelentő neve</string>
-    <string name="osb_comment_dialog_title">Megjegyzés hozzáadása a hibához</string>
-    <string name="osb_comment_dialog_add_button">Megjegyzés hozzáadása</string>
+    
+    
     <string name="osb_comment_dialog_success">Megjegyzés sikeresen hozzáadva</string>
     <string name="osb_comment_dialog_error">Hiba történt a megjegyzés hozzáadásánál</string>
-    <string name="osb_close_menu_item">Hiba lezárás</string>
-    <string name="osb_close_dialog_title">Hiba lezárása</string>
-    <string name="osb_close_dialog_close_button">Hiba lezárás</string>
-    <string name="osb_close_dialog_success">Hiba sikeresen lezárva</string>
-    <string name="osb_close_dialog_error">Hiba történt a hibajegy lezárásakor</string>
+    
+    
+    
+    
+    
     <string name="poi_edit_title">POI szerkesztése</string>
     <string name="poi_create_title">POI létrehozása</string>
     <string name="poi_error_poi_not_found">A pont nem található, vagy a POI nem egy önálló pont</string>
@@ -1990,7 +1989,7 @@
     <string name="shared_string_update">Frissítés</string>
     <string name="shared_string_upload">Feltöltés</string>
     <string name="osm_edit_created_poi">Létrehozott OSM POI</string>
-    <string name="osm_edit_created_bug">Létrehozott OSM bug</string>
+    
     <string name="map_legend">Térkép jelkulcs</string>
     <string name="favourites_edit_dialog_title">Kedvenc információk</string>
     <string name="share_osm_edits_subject">OSM szerkesztés OsmAndból megosztva</string>

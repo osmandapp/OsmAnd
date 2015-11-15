@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="osb_author_or_password_not_specified">Моля, въведете потребителско име и парола за сайта на OSM</string>
     <string name="clear_intermediate_points">Изчистване на междинните точки</string>
     <string name="keep_intermediate_points">Запази междинните точки</string>
@@ -1019,7 +1018,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="vector_data">Офлайн векторни карти</string>
 	<string name="transport_context_menu">Търсене за общ. транспорт на тази спирка</string>
 	
-	<string name="osb_bug_name">Неточност (bug)</string>
+	
 	<string name="poi_context_menu_modify">Промяна на POI</string>
 	<string name="poi_context_menu_delete">Изтриване на POI</string>
 	<string name="rotate_map_compass_opt">По компаса</string>
@@ -1279,7 +1278,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="search_tabs_location">Коорд.</string>
 	
 	<string name="context_menu_item_update_map">Обнови картата</string>
-	<string name="context_menu_item_open_bug">Докладвай за неточност в OSM</string>
+	
 	<string name="context_menu_item_create_poi">Създай POI</string>
 	<string name="shared_string_yes">Да</string>
 	<string name="shared_string_cancel">Откажи</string>
@@ -1293,21 +1292,21 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="favourites_context_menu_delete">Изтриване от любими</string>
 	<string name="favourites_remove_dialog_msg">Да се изтрие ли \'%s\' от любими места?</string>
 	<string name="favourites_remove_dialog_success">Точката {0} беше успешно изтрита от любими места.</string>
-	<string name="osb_add_dialog_title">Въведете описание на проблема</string>
-	<string name="osb_add_dialog_success">Успешно беше създаден доклад за проблема</string>
-	<string name="osb_add_dialog_error">Възникна грешка: доклад за проблема не беше създаден</string>
-	<string name="osb_comment_menu_item">Добавяне на коментар</string>
+	
+	
+	
+	
 	<string name="osb_comment_dialog_message">Съобщение</string>
 	<string name="osb_comment_dialog_author">Име на автора</string>
-	<string name="osb_comment_dialog_title">Добавяне на коментар към проблема</string>
-	<string name="osb_comment_dialog_add_button">Добави коментар</string>
+	
+	
 	<string name="osb_comment_dialog_success">Коментарът беше успешно добавен</string>
 	<string name="osb_comment_dialog_error">Възникна грешка: коментарът не е записан</string>
-	<string name="osb_close_menu_item">Затвори неточността</string>
-	<string name="osb_close_dialog_title">Затваряне на доклада</string>
-	<string name="osb_close_dialog_close_button">Затвори</string>
-	<string name="osb_close_dialog_success">Докладът беше успешно затворен</string>
-	<string name="osb_close_dialog_error">Възникна грешка: докладът за неточност не беше затворен успешно</string>
+	
+	
+	
+	
+	
 	<string name="poi_edit_title">Редактиране на POI</string>
 	<string name="poi_create_title">Създай POI</string>
 	<string name="poi_error_poi_not_found">Точката не може да бъде намерена или избраното съдържа повече от една точка</string>
@@ -1978,7 +1977,7 @@ OsmAnd е с отворен код и активно да се развива. �
     <string name="shared_string_update">Актуализация</string>
     <string name="shared_string_upload">Качване</string>
     <string name="osm_edit_created_poi">Създаден OSM POI</string>
-    <string name="osm_edit_created_bug">Създаден OSM бъг</string>
+    
     <string name="world_map_download_descr">Световната базова карта (покриваща целия свят в при малък мащаб) липсва или е остаряла. Моля, помислите за изтеглянето й .</string>
     <string name="shared_string_qr_code">QR код</string>
     <string name="map_downloaded">Картата е изтеглена</string>

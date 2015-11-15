@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="always_center_position_on_map">Ammustra sa positzione semper a su tzentru</string>
     <string name="voice_pref_title">Boghe</string>
     <string name="misc_pref_title">Mistura</string>
@@ -1169,7 +1168,7 @@
     <string name="error_reading_gpx">Errore leghidura datos GPX</string>
     <string name="transport_context_menu">Chirca unu trasportu pùblicu a sa firmada</string>
 
-    <string name="osb_bug_name">Errore</string>
+    
     <string name="poi_context_menu_delete">Burra PDI</string>
     <string name="rotate_map_compass_opt">Cun bùssola</string>
     <string name="rotate_map_none_opt">Peruna rotatzione (nord in artu)</string>
@@ -1434,7 +1433,7 @@
     <string name="search_tabs_location">Positzione</string>
 
     <string name="context_menu_item_update_map">Agiorna sa mapa</string>
-    <string name="context_menu_item_open_bug">Sinnala un\'errore OSM</string>
+    
     <string name="context_menu_item_create_poi">Crea PDI</string>
     <string name="shared_string_cancel">Burra</string>
     <string name="shared_string_apply">Aplica</string>
@@ -1446,22 +1445,22 @@
     <string name="favourites_context_menu_delete">Burra preferidu</string>
     <string name="favourites_remove_dialog_msg">Burrare su puntu preferidu \'%s\'?</string>
     <string name="favourites_remove_dialog_success">Su puntu preferidu {0} est istadu burradu.</string>
-    <string name="osb_add_dialog_title">Inserta sa descritzione de s’errore</string>
-    <string name="osb_add_dialog_success">S’errore est istadu creadu</string>
-    <string name="osb_add_dialog_error">S’est verificadu un’afrancu: su bug no est istadu creadu</string>
+    
+    
+    
     <string name="osb_author_dialog_password">Crae (passw) OSM (optzionale)</string>
-    <string name="osb_comment_menu_item">Annanghe unu cummentu</string>
+    
     <string name="osb_comment_dialog_message">Messàgiu</string>
     <string name="osb_comment_dialog_author">Nùmene autore</string>
-    <string name="osb_comment_dialog_title">Annanghe unu cummentu a s’errore</string>
-    <string name="osb_comment_dialog_add_button">Annanghe cummentu</string>
+    
+    
     <string name="osb_comment_dialog_success">Su cummentu est istadu annantu curretamente</string>
     <string name="osb_comment_dialog_error">S’est verificadu un’afrancu: su cummentu no est istadu annantu</string>
-    <string name="osb_close_menu_item">Serra s’errore</string>
-    <string name="osb_close_dialog_title">Serradura errore</string>
-    <string name="osb_close_dialog_close_button">Serra s’errore</string>
-    <string name="osb_close_dialog_success">S’errore est istadu serradu curretamente</string>
-    <string name="osb_close_dialog_error">S’est verificadu un afrancu: s’errore no est istadu serradu</string>
+    
+    
+    
+    
+    
     <string name="poi_edit_title">Muda PDI</string>
     <string name="poi_create_title">Crea PDI</string>
     <string name="poi_error_poi_not_found">Su nodu no est istadu agatadu o s’amenidade no est unu nodu sìngulu</string>
@@ -1974,7 +1973,7 @@
     <string name="feedback">Sondàggiu</string>
     <string name="contact_us">Cuntata·nos</string>
     <string name="osm_edit_created_poi">PDI de OSM creadu</string>
-    <string name="osm_edit_created_bug">Nota de errore de OSM creada</string>
+    
 <string name="map_legend">Legenda de sa mapa</string>
 <string name="shared_string_upload">Càrriga</string>
     

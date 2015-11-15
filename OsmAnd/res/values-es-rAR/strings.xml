@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
 
     <string name="rendering_attr_hideHouseNumbers_name">Ocultar números de casa</string>
     <string name="copying_osmand_file_failed">Falló al copiar archivos</string>
@@ -1446,7 +1445,7 @@
     <string name="error_reading_gpx">Error leyendo datos GPX</string>
     <string name="vector_data">Mapas vectoriales descargados</string>
     <string name="transport_context_menu">Buscar transporte en parada</string>
-    <string name="osb_bug_name">Fallo</string>
+    
     <string name="poi_context_menu_modify">Modificar PDI</string>
     <string name="poi_context_menu_delete">Borrar PDI</string>
     <string name="rotate_map_compass_opt">A la brújula</string>
@@ -1664,7 +1663,7 @@
     <string name="search_address_street_option">Intersección de calle</string>
     <string name="search_tabs_location">Ubicación</string>
     <string name="context_menu_item_update_map">Actualizar mapa</string>
-    <string name="context_menu_item_open_bug">Crear nota de OSM</string>
+    
     <string name="context_menu_item_create_poi">Crear PDI</string>
     <string name="add_favorite_dialog_top_text">Ingrese nombre de favorito</string>
     <string name="add_favorite_dialog_default_favourite_name">Favorito</string>
@@ -1673,22 +1672,22 @@
     <string name="favourites_context_menu_delete">Borrar favorito</string>
     <string name="favourites_remove_dialog_msg">¿Quitar el favorito \'%s\'?</string>
     <string name="favourites_remove_dialog_success">El punto favorito {0} se borró correctamente.</string>
-    <string name="osb_add_dialog_title">Ingrese texto del fallo</string>
-    <string name="osb_add_dialog_success">Fallo creado correctamente</string>
-    <string name="osb_add_dialog_error">Error: No se creó el fallo</string>
+    
+    
+    
     <string name="osb_author_dialog_password">Contraseña de OSM (opcional)</string>
-    <string name="osb_comment_menu_item">Añadir comentario</string>
+    
     <string name="osb_comment_dialog_message">Mensaje</string>
     <string name="osb_comment_dialog_author">Nombre del autor</string>
-    <string name="osb_comment_dialog_title">Añadiendo comentario al fallo</string>
-    <string name="osb_comment_dialog_add_button">Añadir comentario</string>
+    
+    
     <string name="osb_comment_dialog_success">Comentario añadido correctamente</string>
     <string name="osb_comment_dialog_error">Error: No se añadió el comentario</string>
-    <string name="osb_close_menu_item">Cerrar fallo</string>
-    <string name="osb_close_dialog_title">Cerrando fallo</string>
-    <string name="osb_close_dialog_close_button">Cerrar fallo</string>
-    <string name="osb_close_dialog_success">Fallo cerrado correctamente</string>
-    <string name="osb_close_dialog_error">Error: No se cerró el fallo</string>
+    
+    
+    
+    
+    
     <string name="poi_edit_title">Editar PDI</string>
     <string name="poi_create_title">Crear PDI</string>
     <string name="poi_error_poi_not_found">No se encontró el nodo o la instalación se compone de varios nodos</string>
@@ -1938,7 +1937,7 @@
     <string name="feedback">Encuesta</string>
     <string name="contact_us">Contáctenos</string>
     <string name="osm_edit_created_poi">PDI de OSM creado</string>
-    <string name="osm_edit_created_bug">Nota OSM creada</string>
+    
     <string name="map_legend">Leyenda del mapa</string>
     <string name="shared_string_update">Actualizar</string>
     <string name="shared_string_upload">Subir</string>

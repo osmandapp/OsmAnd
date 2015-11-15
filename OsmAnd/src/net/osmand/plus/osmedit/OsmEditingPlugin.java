@@ -153,11 +153,11 @@ public class OsmEditingPlugin extends OsmandPlugin {
 									mapActivity.getMyApplication());
 					editPoiDialogFragment.show(mapActivity.getSupportFragmentManager(),
 							EditPoiDialogFragment.TAG);
-				} else if (resId == R.string.context_menu_item_open_bug) {
+				} else if (resId == R.string.context_menu_item_open_note) {
 					if (osmBugsLayer == null) {
 						registerLayers(mapActivity);
 					}
-					osmBugsLayer.openBug(latitude, longitude);
+					osmBugsLayer.openBug(latitude, longitude, "");
 				} else if (resId == R.string.poi_context_menu_delete) {
 					new EditPoiDialogFragment.ShowDeleteDialogAsyncTask(mapActivity)
 							.execute((Amenity) selectedObj);
@@ -186,7 +186,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		} else {
 			adapter.item(R.string.context_menu_item_create_poi).iconColor(R.drawable.ic_action_plus_dark).listen(listener).position(-1).reg();
 		}
-		adapter.item(R.string.context_menu_item_open_bug).iconColor(R.drawable.ic_action_bug_dark).listen(listener).reg();
+		adapter.item(R.string.context_menu_item_open_note).iconColor(R.drawable.ic_action_bug_dark).listen(listener).reg();
 	}
 
 	@Override

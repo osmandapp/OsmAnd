@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
     <string name="rendering_attr_roadColors_name">道路的色彩調配</string>
     <string name="map_widget_show_destination_arrow">顯示目的地方向</string>
@@ -593,7 +592,7 @@
     <string name="vector_data">離線向量地圖</string>
     <string name="transport_context_menu">查尋公車站牌</string>
 
-    <string name="osb_bug_name">程式臭蟲</string>
+    
     <string name="poi_context_menu_modify">修改興趣點</string>
     <string name="poi_context_menu_delete">刪除興趣點</string>
     <string name="rotate_map_compass_opt">依羅盤旋轉</string>
@@ -837,7 +836,7 @@
     <string name="search_tabs_location">位置</string>
 
     <string name="context_menu_item_update_map">更新地圖</string>
-    <string name="context_menu_item_open_bug">開啟 OSM 錯誤</string>
+    
     <string name="context_menu_item_create_poi">建立興趣點</string>
     <string name="shared_string_yes">是</string>
     <string name="shared_string_cancel">取消</string>
@@ -849,21 +848,21 @@
     <string name="favourites_context_menu_delete">刪除我的最愛</string>
     <string name="favourites_remove_dialog_msg">移除我的最愛標點 \'%s\'？</string>
     <string name="favourites_remove_dialog_success">我的最愛標點 {0} 刪除成功。</string>
-    <string name="osb_add_dialog_title">輸入錯誤說明</string>
-    <string name="osb_add_dialog_success">錯誤回報成功建立</string>
-    <string name="osb_add_dialog_error">發生的異常：錯誤回報未建立</string>
-    <string name="osb_comment_menu_item">增加評論</string>
+    
+    
+    
+    
     <string name="osb_comment_dialog_message">訊息</string>
     <string name="osb_comment_dialog_author">編輯者姓名</string>
-    <string name="osb_comment_dialog_title">為錯誤回報加入評論</string>
-    <string name="osb_comment_dialog_add_button">加入評論</string>
+    
+    
     <string name="osb_comment_dialog_success">評論已成功加入</string>
     <string name="osb_comment_dialog_error">發生異常：評論未建立</string>
-    <string name="osb_close_menu_item">關閉錯誤回報</string>
-    <string name="osb_close_dialog_title">錯誤回報關閉中</string>
-    <string name="osb_close_dialog_close_button">關閉錯誤回報</string>
-    <string name="osb_close_dialog_success">錯誤回報已成功關閉</string>
-    <string name="osb_close_dialog_error">發生異常：評論未關閉</string>
+    
+    
+    
+    
+    
     <string name="poi_edit_title">編輯興趣點</string>
     <string name="poi_create_title">建立興趣點</string>
     <string name="poi_error_poi_not_found">找不到節點或者便利設施不是單一的節點</string>
@@ -1959,7 +1958,7 @@
     <string name="feedback">投票</string>
     <string name="contact_us">聯絡我們</string>
     <string name="osm_edit_created_poi">建立 OSM 的興趣點</string>
-    <string name="osm_edit_created_bug">建立 OSM 的錯誤</string>
+    
     <string name="map_legend">地圖圖例</string>
     <string name="shared_string_upload">上傳</string>
 

@@ -3,7 +3,6 @@ package net.osmand.plus.mapcontextmenu.controllers;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
-
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
@@ -21,6 +20,7 @@ import net.osmand.plus.osmedit.OsmEditsUploadListener;
 import net.osmand.plus.osmedit.OsmEditsUploadListenerHelper;
 import net.osmand.plus.osmedit.OsmNotesPoint;
 import net.osmand.plus.osmedit.OsmPoint;
+import net.osmand.plus.osmedit.OsmPoint.Action;
 import net.osmand.plus.osmedit.UploadOpenstreetmapPointAsyncTask;
 import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment;
 import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment.ProgressDialogPoiUploader;
@@ -116,7 +116,15 @@ public class EditPOIMenuController extends MenuController {
 		if (osmPoint.getGroup() == OsmPoint.Group.POI) {
 			pointTypeStr = getMapActivity().getString(R.string.osm_edit_created_poi);
 		} else if (osmPoint.getGroup() == OsmPoint.Group.BUG) {
-			pointTypeStr = getMapActivity().getString(R.string.osm_edit_created_bug);
+			if(osmPoint.getAction() == Action.DELETE) {
+				pointTypeStr = getMapActivity().getString(R.string.osm_edit_removed_note);
+			} else if(osmPoint.getAction() == Action.MODIFY) {
+				pointTypeStr = getMapActivity().getString(R.string.osm_edit_commented_note);
+			} else if(osmPoint.getAction() == Action.REOPEN) {
+				pointTypeStr = getMapActivity().getString(R.string.osm_edit_reopened_note);
+			} else/* if(osmPoint.getAction() == Action.CREATE) */{
+				pointTypeStr = getMapActivity().getString(R.string.osm_edit_created_note);
+			}
 		} else {
 			pointTypeStr = "";
 		}

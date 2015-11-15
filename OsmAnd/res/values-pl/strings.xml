@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
   
   <string name="use_transparent_map_theme">Przezroczysty styl</string>
   <string name="native_library_not_supported">To urządzenie nie obsługuje biblioteki renderowania natywnego.</string>
@@ -303,7 +302,7 @@
   <string name="vector_data">Wektorowe mapy offline</string>
   <string name="transport_context_menu">Wyszukaj komunikację na przystanku</string>
   
-  <string name="osb_bug_name">Błąd</string>
+  
   <string name="poi_context_menu_modify">Modyfikuj POI</string>
   <string name="poi_context_menu_delete">Usuń POI</string>
   <string name="rotate_map_compass_opt">Względem kompasu</string>
@@ -584,7 +583,7 @@
   <string name="search_tabs_location">Lokalizacja</string>
   
   <string name="context_menu_item_update_map">Uaktualnij mapę</string>
-  <string name="context_menu_item_open_bug">Zgłoś błąd do OSM</string>
+  
   <string name="context_menu_item_create_poi">Utwórz POI</string>
   <string name="shared_string_yes">Tak</string>
   <string name="shared_string_cancel">Anuluj</string>
@@ -598,21 +597,21 @@
   <string name="favourites_context_menu_delete">Usuń</string>
   <string name="favourites_remove_dialog_msg">Usunąć ulubiony punkt „%s”?</string>
   <string name="favourites_remove_dialog_success">Usunięto ulubiony punkt {0}.</string>
-  <string name="osb_add_dialog_title">Proszę wprowadzić opis błędu</string>
-  <string name="osb_add_dialog_success">Zgłoszono błąd</string>
-  <string name="osb_add_dialog_error">Wystąpił błąd: nie zgłoszono błędu</string>
-  <string name="osb_comment_menu_item">Dodaj komentarz</string>
+  
+  
+  
+  
   <string name="osb_comment_dialog_message">Wiadomość</string>
   <string name="osb_comment_dialog_author">Nazwa autora</string>
-  <string name="osb_comment_dialog_title">Dodawanie komentarza do błędu</string>
-  <string name="osb_comment_dialog_add_button">Dodaj komentarz</string>
+  
+  
   <string name="osb_comment_dialog_success">Dodano komentarz</string>
   <string name="osb_comment_dialog_error">Wystąpił błąd: nie dodano komentarza</string>
-  <string name="osb_close_menu_item">Rozwiąż błąd</string>
-  <string name="osb_close_dialog_title">Rozwiązywanie błędu</string>
-  <string name="osb_close_dialog_close_button">Rozwiąż błąd</string>
-  <string name="osb_close_dialog_success">Rozwiązano błąd</string>
-  <string name="osb_close_dialog_error">Wystąpił problem: nie rozwiązano błędu</string>
+  
+  
+  
+  
+  
   <string name="poi_edit_title">Edytuj POI</string>
   <string name="poi_create_title">Dodaj POI</string>
   <string name="poi_error_poi_not_found">Nie można odnaleźć węzła albo udogodnienie (amenity) nie jest pojedynczym węzłem</string>
@@ -2069,7 +2068,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="shared_string_update">Aktualizuj</string>
     <string name="shared_string_upload">Prześlij</string>
     <string name="osm_edit_created_poi">Utwórz punkt orientacyjny OSM</string>
-    <string name="osm_edit_created_bug">Utworzono błąd OSM</string>
+    
     <string name="simulate_initial_startup_descr">Ustaw flagę wskazującą pierwsze uruchomienie aplikacji, utrzymuje wszystkie inne ustawienia bez zmian</string>
     <string name="share_geo">wsp:</string>
     <string name="confirm_download_roadmaps">Czy na pewno chcesz pobrać mapę dróg, nawet jeśli masz pełną wersję mapy?</string>

@@ -40,7 +40,7 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 	}
 
 	@Override
-	public String createNewBug(double latitude, double longitude, String text, String author) {
+	public String createNewBug(double latitude, double longitude, String text) {
 		StringBuilder b = new StringBuilder();
 		b.append(getNotesApi()).append("?"); //$NON-NLS-1$
 		b.append("lat=").append(latitude); //$NON-NLS-1$
@@ -50,16 +50,26 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 	}
 
 	@Override
-	public String addingComment(long id, String text, String author) {
+	public String addingComment(double latitude, double longitude, long id, String text) {
 		StringBuilder b = new StringBuilder();
 		b.append(getNotesApi()).append("/");
 		b.append(id); //$NON-NLS-1$
 		b.append("/comment?text=").append(URLEncoder.encode(text)); //$NON-NLS-1$
 		return editingPOI(b.toString(), "POST", "adding comment"); //$NON-NLS-1$
 	}
+	
+	@Override
+	public String reopenBug(double latitude, double longitude, long id, String text){
+		StringBuilder b = new StringBuilder();
+		b.append(getNotesApi()).append("?"); //$NON-NLS-1$
+		b.append(id); //$NON-NLS-1$
+		b.append("/reopen?text=").append(URLEncoder.encode(text)); //$NON-NLS-1$
+		return editingPOI(b.toString(), "POST", "reopen bug"); //$NON-NLS-1$
+	}
+
 
 	@Override
-	public String closingBug(long id, String text, String author) {
+	public String closingBug(double latitude, double longitude, long id, String text) {
 		StringBuilder b = new StringBuilder();
 		b.append(getNotesApi()).append("/");
 		b.append(id); //$NON-NLS-1$

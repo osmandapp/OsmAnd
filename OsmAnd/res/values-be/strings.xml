@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="auto_zoom_none">Без аўтаматычнага маштабаваньня</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="auto_zoom_none">Без аўтаматычнага маштабаваньня</string>
     <string name="auto_zoom_close">Буйней</string>
     <string name="auto_zoom_far">Для сярэдняга маштаба</string>
     <string name="auto_zoom_farthest">Драбней</string>
@@ -825,7 +824,7 @@
 	<string name="vector_data">Лакальныя вектарныя мапы</string>
 	<string name="transport_context_menu">Шукаць транспарт на прыпынку</string>
 	
-	<string name="osb_bug_name">Памылка</string>
+	
 	<string name="poi_context_menu_modify">Правіць POI</string>
 	<string name="poi_context_menu_delete">Выдаліць POI</string>
 	<string name="rotate_map_compass_opt">Па компасе</string>
@@ -1072,7 +1071,7 @@
 	<string name="search_tabs_location">Каардынаты</string>
 	
 	<string name="context_menu_item_update_map">Абнавіць мапу</string>
-	<string name="context_menu_item_open_bug">Паведаміць пра памылку на мапе</string>
+	
 	<string name="context_menu_item_create_poi">Стварыць POI</string>
 	<string name="add_favorite_dialog_top_text">Калі ласка, увядзіце імя пункту</string>
 	<string name="add_favorite_dialog_default_favourite_name">Упадабанае</string>
@@ -1081,22 +1080,22 @@
 	<string name="favourites_context_menu_delete">Выдаліць упадабанае</string>
 	<string name="favourites_remove_dialog_msg">Вы сапраўды хочаце выдаліць кропку \'%s\' з закладак?</string>
 	<string name="favourites_remove_dialog_success">Кропка {0} была паспяхова выдаленая з закладак.</string>
-	<string name="osb_add_dialog_title">Увядзіце тэкст памылкі</string>
-	<string name="osb_add_dialog_success">Памылка пасьпяхова створана</string>
-	<string name="osb_add_dialog_error">Выключная сітуацыя: заўвага не была створана</string>
+	
+	
+	
 	<string name="osb_author_dialog_password">OSM пароль (неабавязковы)</string>
-	<string name="osb_comment_menu_item">Дадаць камэнтар</string>
+	
 	<string name="osb_comment_dialog_message">Паведамленьне</string>
 	<string name="osb_comment_dialog_author">Імя аўтара</string>
-	<string name="osb_comment_dialog_title">Даданьне каментара да памылкі</string>
-	<string name="osb_comment_dialog_add_button">Дадаць камэнтар</string>
+	
+	
 	<string name="osb_comment_dialog_success">Гэты камэнтар быў пасьпяхова дададзены</string>
 	<string name="osb_comment_dialog_error">Выключная сітуацыя: каментар не быў дададзены</string>
-	<string name="osb_close_menu_item">Зачыніць памылку</string>
-	<string name="osb_close_dialog_title">Закрыцьцё памылкі</string>
-	<string name="osb_close_dialog_close_button">Зачыніць памылку</string>
-	<string name="osb_close_dialog_success">Памылка была пасьпяхова зачынена</string>
-	<string name="osb_close_dialog_error">Выключная сітуацыя: памылка не была зачынена</string>
+	
+	
+	
+	
+	
 	<string name="poi_edit_title">Правіць POI</string>
 	<string name="poi_create_title">Стварыць POI</string>
 	<string name="poi_error_poi_not_found">POI не знойдзена або не зьяўляецца кропкай</string>
@@ -1974,7 +1973,7 @@
     
     <string name="shared_string_upload">Адаслаць</string>
     <string name="osm_edit_created_poi">Створана OSM POI</string>
-    <string name="osm_edit_created_bug">Створана OSM памылка</string>
+    
     <string name="go_to_map">Перайсьці да мапы</string>
     
     

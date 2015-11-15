@@ -214,7 +214,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		} else {
 			r = 18;
 		}
-		return (int) (r * tb.getDensity());
+		return (int) (r * view.getScaleCoefficient());
 	}
 
 	@Override

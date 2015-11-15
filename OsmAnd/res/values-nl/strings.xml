@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
   
   <string name="layer_map_appearance">Configureer scherm</string>
   <string name="show_lanes">Toon rijstroken</string>
@@ -444,7 +443,7 @@
   <string name="vector_data">Offline vectorkaarten</string>
   <string name="transport_context_menu">Zoek openbaar vervoer op halte</string>
   
-  <string name="osb_bug_name">Bug</string>
+  
   <string name="poi_context_menu_modify">Wijzig interessepunt</string>
   <string name="poi_context_menu_delete">Verwijder interessepunt</string>
   <string name="rotate_map_compass_opt">Volgens kompas</string>
@@ -705,7 +704,7 @@
   
   
   <string name="context_menu_item_update_map">Kaart bijwerken</string>
-  <string name="context_menu_item_open_bug">Meld fout in OpenStreetMap</string>
+  
   <string name="context_menu_item_create_poi">Maak interessepunt in OSM</string>
   <string name="add_favorite_dialog_top_text">Geef de favoriet een naam</string>
   <string name="add_favorite_dialog_default_favourite_name">Favoriet</string>
@@ -714,21 +713,21 @@
   <string name="favourites_context_menu_delete">Verwijder favoriet</string>
   <string name="favourites_remove_dialog_msg">Verwijder favoriet \'%s\'?</string>
   <string name="favourites_remove_dialog_success">Favoriet {0} is verwijderd.</string>
-  <string name="osb_add_dialog_title">Geef bug tekst in</string>
-  <string name="osb_add_dialog_success">Bug is aangemaakt</string>
-  <string name="osb_add_dialog_error">Fout opgetreden: bug is niet aangemaakt</string>
-  <string name="osb_comment_menu_item">Voeg commentaar toe</string>
+  
+  
+  
+  
   <string name="osb_comment_dialog_message">Bericht</string>
   <string name="osb_comment_dialog_author">Naam auteur</string>
-  <string name="osb_comment_dialog_title">Commentaar wordt aan bug toegevoegd</string>
-  <string name="osb_comment_dialog_add_button">Commentaar toevoegen</string>
+  
+  
   <string name="osb_comment_dialog_success">Commentaar is toegevoegd</string>
   <string name="osb_comment_dialog_error">Fout opgetreden: commentaar is niet toegevoegd</string>
-  <string name="osb_close_menu_item">Sluit bug</string>
-  <string name="osb_close_dialog_title">Bug wordt afgesloten</string>
-  <string name="osb_close_dialog_close_button">Sluit bug</string>
-  <string name="osb_close_dialog_success">Bug is afgesloten</string>
-  <string name="osb_close_dialog_error">Fout opgetreden: bug is niet gesloten</string>
+  
+  
+  
+  
+  
   <string name="poi_edit_title">Bewerk interessepunt</string>
   <string name="poi_create_title">Maak interessepunt</string>
   <string name="poi_error_poi_not_found">Punt niet gevonden of voorziening is niet een enkel punt</string>
@@ -2118,7 +2117,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     
     <string name="shared_string_upload">Upload</string>
     <string name="osm_edit_created_poi">POI in OSM gemaakt</string>
-    <string name="osm_edit_created_bug">Bug in OSM gemaakt</string>
+    
     <string name="simulate_initial_startup_descr">Laat de app de volgende keer starten alsof deze net is geïnstalleerd. De instellingen blijven wel behouden.</string>
     <string name="simulate_initial_startup">Simuleer eerste start van de app</string>
     <string name="shared_string_others">Overige</string>

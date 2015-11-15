@@ -27,11 +27,20 @@ public class OsmBugMenuController extends MenuController {
 			@Override
 			public void buttonPressed() {
 				if (plugin != null) {
-					plugin.getBugsLayer(getMapActivity()).commentBug(getBug());
+					OpenStreetNote bg = getBug();
+					if(bg.isOpened()) {
+						plugin.getBugsLayer(getMapActivity()).commentBug(bg);
+					} else {
+						plugin.getBugsLayer(getMapActivity()).reopenBug(bg);
+					}
 				}
 			}
 		};
-		leftTitleButtonController.caption = getMapActivity().getString(R.string.poi_dialog_comment);
+		if(bug.isOpened()) {
+			leftTitleButtonController.caption = getMapActivity().getString(R.string.poi_dialog_comment);
+		} else {
+			leftTitleButtonController.caption = getMapActivity().getString(R.string.poi_dialog_reopen);
+		}
 		leftTitleButtonController.leftIconId = R.drawable.ic_action_note_dark;
 
 		rightTitleButtonController = new TitleButtonController() {

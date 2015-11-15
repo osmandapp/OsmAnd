@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="offline_edition">Modifications hors-ligne</string>
     <string name="offline_edition_descr">Toujours utiliser l\'édition hors-ligne</string>
 
@@ -349,7 +348,7 @@
     <string name="vector_data">Cartes vectorielles OSM</string>
     <string name="transport_context_menu">Transport en commun</string>
 
-    <string name="osb_bug_name">Bogue</string>
+    
     <string name="poi_context_menu_modify">Modifier PI</string>
     <string name="poi_context_menu_delete">Supprimer PI</string>
     <string name="rotate_map_compass_opt">D\'après la boussole</string>
@@ -611,7 +610,7 @@
     <string name="search_tabs_location">Position</string>
 
     <string name="context_menu_item_update_map">Mettre à jour la carte</string>
-    <string name="context_menu_item_open_bug">Ouvrir un bogue OSM</string>
+    
     <string name="context_menu_item_create_poi">Créer un point d\'intérêt</string>
     <string name="shared_string_yes">Oui</string>
     <string name="shared_string_cancel">Annuler</string>
@@ -625,21 +624,21 @@
     <string name="favourites_context_menu_delete">Supprimer le favori</string>
     <string name="favourites_remove_dialog_msg">Voulez-vous vraiment supprimer le favori \'%s\' ?</string>
     <string name="favourites_remove_dialog_success">Suppression du favori \'{0}\' réussie.</string>
-    <string name="osb_add_dialog_title">Description du bogue</string>
-    <string name="osb_add_dialog_success">Le bogue a bien été créé</string>
-    <string name="osb_add_dialog_error">Erreur : le bogue n\'a pas été créé</string>
-    <string name="osb_comment_menu_item">Ajouter commentaire</string>
+    
+    
+    
+    
     <string name="osb_comment_dialog_message">Message</string>
     <string name="osb_comment_dialog_author">Nom de l\'auteur</string>
-    <string name="osb_comment_dialog_title">Ajout d\'un commentaire au bogue</string>
-    <string name="osb_comment_dialog_add_button">Ajouter commentaire</string>
+    
+    
     <string name="osb_comment_dialog_success">Ajout du commentaire réussi</string>
     <string name="osb_comment_dialog_error">Erreur : le commentaire n\'a pas été ajouté</string>
-    <string name="osb_close_menu_item">Fermer le bogue</string>
-    <string name="osb_close_dialog_title">Fermeture du bogue</string>
-    <string name="osb_close_dialog_close_button">Fermer bogue</string>
-    <string name="osb_close_dialog_success">Bogue ajouté avec succès</string>
-    <string name="osb_close_dialog_error">Erreur : le bogue n\'a pas été fermé</string>
+    
+    
+    
+    
+    
     <string name="poi_edit_title">Éditer PI</string>
     <string name="poi_create_title">Créer un point d\'intérêt (PI)</string>
     <string name="poi_error_poi_not_found">Objet introuvable ou l\'équipement n\'est pas un composé d\'un seul objet</string>
@@ -2075,7 +2074,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="contact_us">Nous contacter</string>
 
     <string name="osm_edit_created_poi">PI créés sur OSM</string>
-    <string name="osm_edit_created_bug">Bugs déclarés sur OSM</string>
+    
     <string name="map_legend">Légende</string>
 <string name="shared_string_upload">Téléchargement</string>
     

@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
     <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per visualizzare tracce e percorsi</string>
     <string name="offline_edition">Modifiche offline</string>
@@ -324,7 +323,7 @@
     <string name="vector_data">Mappe vettoriali offline</string>
     <string name="transport_context_menu">Cerca un trasporto pubblico alla fermata</string>
 
-    <string name="osb_bug_name">Errore</string>
+    
     <string name="poi_context_menu_modify">Modifica PDI</string>
     <string name="poi_context_menu_delete">Elimina PDI</string>
     <string name="rotate_map_compass_opt">Con bussola</string>
@@ -580,7 +579,7 @@
     <string name="search_tabs_location">Posizione</string>
 
     <string name="context_menu_item_update_map">Aggiorna la mappa</string>
-    <string name="context_menu_item_open_bug">Segnala un errore OSM</string>
+    
     <string name="context_menu_item_create_poi">Crea PDI</string>
     <string name="add_favorite_dialog_top_text">Inserisci il nome del preferito</string>
     <string name="add_favorite_dialog_default_favourite_name">Preferito</string>
@@ -589,21 +588,21 @@
     <string name="favourites_context_menu_delete">Elimina preferito</string>
     <string name="favourites_remove_dialog_msg">Eliminare il punto preferito \'%s\'?</string>
     <string name="favourites_remove_dialog_success">Il punto preferito {0} è stato eliminato.</string>
-    <string name="osb_add_dialog_title">Inserisci la descrizione dell\'errore</string>
-    <string name="osb_add_dialog_success">L\'errore è stato creato</string>
-    <string name="osb_add_dialog_error">Si è verificata un\'eccezione: il bug non è stato creato</string>
-    <string name="osb_comment_menu_item">Aggiungere commento</string>
+    
+    
+    
+    
     <string name="osb_comment_dialog_message">Messaggio</string>
     <string name="osb_comment_dialog_author">Nome autore</string>
-    <string name="osb_comment_dialog_title">Aggiungi un commento all\'errore</string>
-    <string name="osb_comment_dialog_add_button">Aggiungi commento</string>
+    
+    
     <string name="osb_comment_dialog_success">Il commento è stato aggiunto correttamente</string>
     <string name="osb_comment_dialog_error">Si è verificata un\'eccezione: il commento non è stato aggiunto</string>
-    <string name="osb_close_menu_item">Chiudi errore</string>
-    <string name="osb_close_dialog_title">Chiusura errore</string>
-    <string name="osb_close_dialog_close_button">Chiudi errore</string>
-    <string name="osb_close_dialog_success">L\'errore è stato chiuso correttamente</string>
-    <string name="osb_close_dialog_error">Si è verificata un\'eccezione: l\'errore non è stato chiuso</string>
+    
+    
+    
+    
+    
     <string name="poi_edit_title">Modifica PDI</string>
     <string name="poi_create_title">Crea PDI</string>
     <string name="poi_error_poi_not_found">Il nodo non è stato trovato o l\'amenità non è un nodo singolo</string>
@@ -2002,7 +2001,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 
     <string name="application_dir_description">Scegli dove vuoi salvare i file delle mappe.</string>
     <string name="osm_edit_created_poi">POI OSM creato</string>
-    <string name="osm_edit_created_bug">Errore OSM creato</string>
+    
     <string name="shared_string_qr_code">QR-code</string>
     <string name="map_downloaded">Mappa scaricata</string>
     <string name="map_downloaded_descr">Mappa di %1$s scaricata. Torna alla mappa per iniziare a utilizzarla.</string>
