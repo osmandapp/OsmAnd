@@ -55,7 +55,7 @@
   
   <string name="search_street_in_neighborhood_cities">Bilatu kalea inguruko herrietan</string>
   <string name="intermediate_items_sort_return">Erdibideko bide-puntuak bidea hobetzeko berantolatuak izan dira.</string>
-  <string name="intermediate_items_sort_by_distance">Ordenatu (door-to-door)</string>
+  <string name="intermediate_items_sort_by_distance">Ordenatu door-to-door</string>
   <string name="local_osm_changes_backup_successful">OSM aldaketa arrakastaz sortu da %1$s</string>
   <string name="local_osm_changes_backup_failed">OSMren aldaketen backupak huts egin du</string>
   <string name="local_osm_changes_backup">OSMren aldaketa bezala backupa egin</string>

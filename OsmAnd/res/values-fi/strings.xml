@@ -661,7 +661,7 @@
     <string name="context_menu_item_destination_point">Valitse määränpääksi</string>
     <string name="please_select_address">Valitse kaupunki tai katu ensin</string>
     <string name="search_street_in_neighborhood_cities">Etsi katua lähikaupungeista</string>
-    <string name="intermediate_items_sort_by_distance">Lajittele (ovelta ovelle)</string>
+    <string name="intermediate_items_sort_by_distance">Lajittele ovelta ovelle</string>
     <string name="local_osm_changes_backup_successful">OSM muutostiedosto luotiin onnistuneesti %1$s</string>
     <string name="delete_point">Poista piste</string>
     <string name="plugin_distance_point_time">aika</string>

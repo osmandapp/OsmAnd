@@ -1127,7 +1127,7 @@
     <string name="local_osm_changes_backup">גיבוי כשינוי ב־OSM</string>
     <string name="search_street_in_neighborhood_cities">חיפוש רחוב בערים סמוכות</string>
     <string name="intermediate_items_sort_return">נקודות הביניים שבדרך סודרו מחדש באופן המיטבי בדרך אל היעד.</string>
-    <string name="intermediate_items_sort_by_distance">סידור (דלת לדלת)</string>
+    <string name="intermediate_items_sort_by_distance">סידור דלת לדלת</string>
     
     <string name="please_select_address">נא לבחור בעיר או ברחוב תחילה</string>
     <string name="context_menu_item_destination_point">הגדרה כיעד</string>

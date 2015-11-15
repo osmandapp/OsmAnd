@@ -680,7 +680,7 @@ POIの更新は利用できません</string>
     <string name="please_select_address">最初に都市か通りを選択してください</string>
     <string name="search_street_in_neighborhood_cities">近くの都市の通りを探す</string>
     <string name="intermediate_items_sort_return">中間経由地点は現在地から目的地へのルート最適化のために順序が変更されました。</string>
-    <string name="intermediate_items_sort_by_distance">ソート(ドア・ツー・ドア)</string>
+    <string name="intermediate_items_sort_by_distance">ソートドア・ツー・ドア</string>
     <string name="local_osm_changes_backup_successful">OSMの変更ファイルが正常に生成されました %1$s</string>
     <string name="local_osm_changes_backup_failed">OSMの変更のバックアップに失敗しました</string>
     <string name="local_osm_changes_backup">OSMの変更としてバックアップ</string>

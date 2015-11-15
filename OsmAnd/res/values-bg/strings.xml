@@ -26,7 +26,7 @@
     
     <string name="search_street_in_neighborhood_cities">Търси улицата в съседни градове</string>
     <string name="intermediate_items_sort_return">Междинните точки са подредени с цел оптимизиране на пътя до крайната цел.</string>
-    <string name="intermediate_items_sort_by_distance">Сортиране (врата-до-врата)</string>
+    <string name="intermediate_items_sort_by_distance">Сортиране врата-до-врата</string>
     <string name="local_osm_changes_backup_successful">Успешно създаден OSM файл с промени %1$s</string>
     <string name="local_osm_changes_backup_failed">Бекъп на промените в OSM не беше успешен</string>
     <string name="local_osm_changes_backup">Запишете като промени в OSM</string>

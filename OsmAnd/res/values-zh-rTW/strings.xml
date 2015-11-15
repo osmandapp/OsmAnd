@@ -891,7 +891,7 @@
 
     <string name="email">電子郵件</string>
     <string name="recording_context_menu_vrecord">拍攝視訊注解</string>
-    <string name="intermediate_items_sort_by_distance">排序(送貨到門)</string>
+    <string name="intermediate_items_sort_by_distance">排序送貨到門</string>
     <string name="plugin_distance_point_time">時間</string>
     <string name="plugin_distance_point_speed">速度</string>
     <string name="plugin_distance_point_ele">海拔</string>

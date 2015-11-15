@@ -1057,7 +1057,7 @@
     <string name="please_select_address">Vispirms atzīmēt pilsētu vai ielu</string>
     <string name="search_street_in_neighborhood_cities">Meklēt ielu nosaukumus blakus pilsētās</string>
     <string name="intermediate_items_sort_return">Ceļapunkti tika pārkārtoti, lai optimizētu maršrutu no pašreizējās pozīcijas līdz galamērķim.</string>
-    <string name="intermediate_items_sort_by_distance">Kārtot (pēc attāluma)</string>
+    <string name="intermediate_items_sort_by_distance">Kārtot pēc attāluma</string>
     <string name="local_osm_changes_backup_successful">OSM izmaiņu fails veiksmīgi izveidots %1$s</string>
     <string name="local_osm_changes_backup_failed">OSM izmaiņu fails netika izveidots</string>
     <string name="local_osm_changes_backup">Izveidot OSM izmaiņu failu</string>

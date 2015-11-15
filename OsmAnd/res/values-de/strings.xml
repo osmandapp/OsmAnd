@@ -1210,7 +1210,7 @@
 	
 	<string name="distance_measurement_load_gpx">Vorhandene GPX-Datei öffnen</string>
 	<string name="search_street_in_neighborhood_cities">Straßenname in weiteren Orten suchen</string>
-	<string name="intermediate_items_sort_by_distance">Sortieren (Tür-zu-Tür)</string>
+	<string name="intermediate_items_sort_by_distance">Tür-zu-Tür sortieren</string>
 	<string name="use_distance_measurement_help">* Tippen, um einen Punkt zu setzen.\n * Lange auf die Karte tippen, um einen vorigen Punkt zu löschen.\n * Lange auf einen Punkt tippen, um eine Beschreibung zu lesen oder hinzuzufügen.\n * Mehr Aktionen durch Tippen auf das Entfernungsmesser-Widget.</string>
 	<string name="distance_measurement_start_editing">Messung beginnen</string>
 	<string name="distance_measurement_finish_editing">Messung beenden</string>

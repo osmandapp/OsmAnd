@@ -945,7 +945,7 @@
     
     <string name="search_street_in_neighborhood_cities">인근 도시에서 거리 검색</string>
     <string name="intermediate_items_sort_return">경유지는 현재 위치에서 도착지까지 가는 길에 경유지의 순서를 최적화하기 위해 재 정렬됩니다.</string>
-    <string name="intermediate_items_sort_by_distance">정렬 (도어 투 도어)</string>
+    <string name="intermediate_items_sort_by_distance">정렬 도어 투 도어</string>
     <string name="local_osm_changes_backup_successful">OSM 변경 파일이 성공적으로 생성되었습니다 %1$s</string>
     <string name="local_osm_changes_backup_failed">백업 OSM 변경 실패</string>
     <string name="local_osm_changes_backup">OSM 변화에 따라 백업</string>

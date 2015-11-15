@@ -661,7 +661,7 @@
     <string name="please_select_address">Elige primero la ciudad o calle</string>
     <string name="search_street_in_neighborhood_cities">Buscar la calle en ciudades vecinas</string>
     <string name="intermediate_items_sort_return">Puntos de ruta intermedios reordenados para optimizar su recorrido en el camino desde la ubicación actual hasta el destino.</string>
-    <string name="intermediate_items_sort_by_distance">Ordenar (puerta a puerta)</string>
+    <string name="intermediate_items_sort_by_distance">Ordenar puerta a puerta</string>
     <string name="local_osm_changes_backup_successful">Archivo de cambios OSM generado con éxito %1$s</string>
     <string name="local_osm_changes_backup_failed">Falló la copia local de cambios OSM</string>
     <string name="local_osm_changes_backup">Copiar como cambio OSM</string>

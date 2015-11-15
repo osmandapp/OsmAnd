@@ -1084,7 +1084,7 @@
     <string name="local_osm_changes_backup">Varnostna kopija sprememb za OSM</string>
     <string name="destination_point">Cilj %1$s</string>
 
-    <string name="intermediate_items_sort_by_distance">Razvrsti (od vrat do vrat)</string>
+    <string name="intermediate_items_sort_by_distance">Razvrsti od vrat do vrat</string>
     <string name="osmand_distance_planning_plugin_description">Vstavek omogoča načrtovanje poti (ali uporabo/spreminjanje obstoječih datotek GPX) in merjenje razdalj med točkami na sledi. Podatke je mogoče shraniti kot poti GPX in jih kasneje uporabiti tudi na poti.</string>
     <string name="osmand_distance_planning_plugin_name">Orodje za načrtovanje poti</string>
     <string name="distance_measurement_finish_subtrack">Začni z novo podrejeno sledjo</string>

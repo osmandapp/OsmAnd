@@ -1066,7 +1066,7 @@
     <string name="local_osm_changes_backup_failed">Sikkerhedskopiering af OSM-data ændringer mislykkedes</string>
     <string name="local_osm_changes_backup_successful">OSM-data ændringsfilen %1$s genereret</string>
     <string name="local_osm_changes_backup">Sikkerhedskopiering efterhånden som OSM-data ændres</string>
-    <string name="intermediate_items_sort_by_distance">Sorter (fra dør til dør)</string>
+    <string name="intermediate_items_sort_by_distance">Sorter fra dør til dør</string>
     <string name="search_street_in_neighborhood_cities">Søg efter gade i nabolagets byer</string>
 
     <string name="intermediate_items_sort_return">Mellemliggende rutepunkter gensorteret for optimere rækkefølgen fra nuværende position til destination.</string>
