@@ -36,6 +36,7 @@ import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
@@ -424,9 +425,13 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		});
 
 		final ImageButton buttonWaypoint = (ImageButton) view.findViewById(R.id.context_menu_route_button);
-		//buttonWaypoint.setImageDrawable(iconsCache.getIcon(R.drawable.map_action_waypoints,
-		buttonWaypoint.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_flag_dark,
+		if (getMyApplication().getTargetPointsHelper().getPointToNavigate() == null) {
+			buttonWaypoint.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_flag_dark,
 				light ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
+		} else {
+			buttonWaypoint.setImageDrawable(iconsCache.getIcon(R.drawable.map_action_waypoints,
+				light ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
+		}
 		buttonWaypoint.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
