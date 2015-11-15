@@ -23,7 +23,6 @@ import android.widget.Toast;
 
 public class MapTileLayer extends BaseMapLayer {
 
-	
 	protected static final int emptyTileDivisor = 16;
 	public static final int OVERZOOM_IN = 2;
 	
@@ -42,7 +41,7 @@ public class MapTileLayer extends BaseMapLayer {
 	private boolean visible = true;
 
 	
-	public MapTileLayer(boolean mainMap){
+	public MapTileLayer(boolean mainMap) {
 		this.mainMap = mainMap;
 	}
 	
@@ -61,7 +60,7 @@ public class MapTileLayer extends BaseMapLayer {
 		paintBitmap.setFilterBitmap(true);
 		paintBitmap.setAlpha(getAlpha());
 		
-		if(mapTileAdapter != null && view != null){
+		if (mapTileAdapter != null && view != null) {
 			mapTileAdapter.initLayerAdapter(this, view);
 		}
 	}
@@ -75,29 +74,29 @@ public class MapTileLayer extends BaseMapLayer {
 	}
 	
 	public void setMapTileAdapter(MapTileAdapter mapTileAdapter) {
-		if(this.mapTileAdapter == mapTileAdapter){
+		if (this.mapTileAdapter == mapTileAdapter) {
 			return;
 		}
-		if(this.mapTileAdapter != null){
+		if (this.mapTileAdapter != null) {
 			this.mapTileAdapter.onClear();
 		}
 		this.mapTileAdapter = mapTileAdapter;
-		if(mapTileAdapter != null && view != null){
+		if (mapTileAdapter != null && view != null) {
 			mapTileAdapter.initLayerAdapter(this, view);
 			mapTileAdapter.onInit();
 		}
 	}
 	
 	public void setMapForMapTileAdapter(ITileSource map, MapTileAdapter mapTileAdapter) {
-		if(mapTileAdapter == this.mapTileAdapter){
+		if (mapTileAdapter == this.mapTileAdapter) {
 			this.map = map;
 		}
 	}
 	
 	public void setMap(ITileSource map) {
 		MapTileAdapter target = null;
-		if(map instanceof TileSourceTemplate){
-			if(TileSourceManager.RULE_YANDEX_TRAFFIC.equals(((TileSourceTemplate) map).getRule())){
+		if (map instanceof TileSourceTemplate) {
+			if (TileSourceManager.RULE_YANDEX_TRAFFIC.equals(((TileSourceTemplate) map).getRule())) {
 				map = null;
 				target = new YandexTrafficAdapter();
 			}
@@ -118,7 +117,7 @@ public class MapTileLayer extends BaseMapLayer {
 		if ((map == null && mapTileAdapter == null) || !visible) {
 			return;
 		}
-		if(mapTileAdapter != null){
+		if (mapTileAdapter != null) {
 			mapTileAdapter.onDraw(canvas, tileBox, drawSettings);
 		}
 		drawTileMap(canvas, tileBox);
@@ -131,7 +130,7 @@ public class MapTileLayer extends BaseMapLayer {
 
 	public void drawTileMap(Canvas canvas, RotatedTileBox tileBox) {
 		ITileSource map = this.map; 
-		if(map == null){
+		if (map == null) {
 			return;
 		}
 		ResourceManager mgr = resourceManager;
@@ -164,8 +163,8 @@ public class MapTileLayer extends BaseMapLayer {
 				int x1 = tileBox.getPixXFromTileXNoRot(leftPlusI);
 				int x2 = tileBox.getPixXFromTileXNoRot(leftPlusI + 1);
 
-				int y1 = tileBox.getPixYFromTileYNoRot(topPlusJ -  ellipticTileCorrection);
-				int y2 = tileBox.getPixYFromTileYNoRot(topPlusJ + 1 -  ellipticTileCorrection);
+				int y1 = tileBox.getPixYFromTileYNoRot(topPlusJ - ellipticTileCorrection);
+				int y2 = tileBox.getPixYFromTileYNoRot(topPlusJ + 1 - ellipticTileCorrection);
 				bitmapToDraw.set(x1, y1, x2 , y2);
 				
 				final int tileX = leftPlusI;
@@ -213,15 +212,15 @@ public class MapTileLayer extends BaseMapLayer {
 								Math.max(yZoom - margin , 0), 
 								Math.min(margin + xZoom + tileSize / div, tileSize), 
 								Math.min(margin + yZoom + tileSize / div, tileSize));
-						if(!useSampling) {
+						if (!useSampling) {
 							canvas.drawBitmap(bmp, bitmapToZoom, bitmapToDraw, paintBitmap);
 						} else {
 							int scaledSize = tileSize / div;
 							RectF src = new RectF(0.5f, 0.5f,
 									scaledSize + 2 * margin - 0.5f, scaledSize + 2 * margin - 0.5f);
 							RectF dest = new RectF(0, 0, tileSize, tileSize);
-			                Matrix m = new Matrix();
-			                m.setRectToRect(src, dest, Matrix.ScaleToFit.FILL);
+							Matrix m = new Matrix();
+							m.setRectToRect(src, dest, Matrix.ScaleToFit.FILL);
 							Bitmap sampled = Bitmap.createBitmap(bmp, bitmapToZoom.left, bitmapToZoom.top, 
 									scaledSize + 2 * margin - 1, scaledSize + 2 * margin - 1, m, true);
 							bitmapToZoom.set(0, 0, tileSize, tileSize);
@@ -234,15 +233,14 @@ public class MapTileLayer extends BaseMapLayer {
 					bitmapToZoom.set(0, 0, tileSize, tileSize);
 					canvas.drawBitmap(bmp, bitmapToZoom, bitmapToDraw, paintBitmap);
 				}
-				if(bmp != null) {
+				if (bmp != null) {
 					oneTileShown = true;
 				}
-				
 			}
 		}
 		
-		if(mainMap && !oneTileShown && !useInternet && warningToSwitchMapShown < 3){
-			if(resourceManager.getRenderer().containsLatLonMapData(view.getLatitude(), view.getLongitude(), nzoom)){
+		if (mainMap && !oneTileShown && !useInternet && warningToSwitchMapShown < 3) {
+			if (resourceManager.getRenderer().containsLatLonMapData(view.getLatitude(), view.getLongitude(), nzoom)) {
 				AccessibleToast.makeText(view.getContext(), R.string.switch_to_vector_map_to_see, Toast.LENGTH_LONG).show();
 				warningToSwitchMapShown++;
 			}
@@ -255,21 +253,13 @@ public class MapTileLayer extends BaseMapLayer {
 	
 	
 	@Override
-	public int getMaximumShownMapZoom(){
-		if(map == null){
-			return 20;
-		} else {
-			return map.getMaximumZoomSupported() + OVERZOOM_IN;
-		}
+	public int getMaximumShownMapZoom() {
+		return map == null ? 20 : map.getMaximumZoomSupported() + OVERZOOM_IN;
 	}
 	
 	@Override
-	public int getMinimumShownMapZoom(){
-		if(map == null){
-			return 1;
-		} else {
-			return map.getMinimumZoomSupported();
-		}
+	public int getMinimumShownMapZoom() {
+		return map == null ? 1 : map.getMinimumZoomSupported();
 	}
 		
 	@Override
@@ -288,6 +278,5 @@ public class MapTileLayer extends BaseMapLayer {
 	public ITileSource getMap() {
 		return map;
 	}
-	
 
 }
