@@ -12,9 +12,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.builders.EditPOIMenuBuilder;
 import net.osmand.plus.osmedit.OpenstreetmapPoint;
-import net.osmand.plus.osmedit.OpenstreetmapRemoteUtil;
 import net.osmand.plus.osmedit.OsmBugsLayer;
-import net.osmand.plus.osmedit.OsmBugsRemoteUtil;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.osmedit.OsmEditsUploadListener;
 import net.osmand.plus.osmedit.OsmEditsUploadListenerHelper;
@@ -62,10 +60,8 @@ public class EditPOIMenuController extends MenuController {
 						}
 					}
 				};
-				OpenstreetmapRemoteUtil remotepoi = new OpenstreetmapRemoteUtil(getMapActivity());
-				OsmBugsRemoteUtil remotebug = new OsmBugsRemoteUtil(getMapActivity().getMyApplication());
 				UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask(
-						dialog, listener, plugin, remotepoi, remotebug, points.length, closeChangeSet);
+						dialog, listener, plugin, points.length, closeChangeSet);
 				uploadTask.execute(points);
 
 				dialog.show();

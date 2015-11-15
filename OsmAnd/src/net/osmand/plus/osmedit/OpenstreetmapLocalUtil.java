@@ -1,6 +1,5 @@
 package net.osmand.plus.osmedit;
 
-import android.content.Context;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.osm.PoiType;
@@ -13,21 +12,18 @@ import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 
 public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
-	
-	private final Context ctx;
 
 	public final static Log LOG = PlatformUtil.getLog(OpenstreetmapLocalUtil.class);
 
 	private OsmEditingPlugin plugin;
 
-	public OpenstreetmapLocalUtil(OsmEditingPlugin plugin, Context uiContext) {
+	public OpenstreetmapLocalUtil(OsmEditingPlugin plugin) {
 		this.plugin = plugin;
-		this.ctx = uiContext;
 	}
 
 	@Override
-	public EntityInfo getEntityInfo() {
-		return new EntityInfo();
+	public EntityInfo getEntityInfo(long id) {
+		return null;
 	}
 	
 	@Override

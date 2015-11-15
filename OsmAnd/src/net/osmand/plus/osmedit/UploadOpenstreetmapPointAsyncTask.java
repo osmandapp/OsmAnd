@@ -26,14 +26,12 @@ public class UploadOpenstreetmapPointAsyncTask
 	public UploadOpenstreetmapPointAsyncTask(ProgressDialog progress,
 											 OsmEditsUploadListener listener,
 											 OsmEditingPlugin plugin,
-											 OpenstreetmapRemoteUtil remotepoi,
-											 OsmBugsRemoteUtil remotebug,
 											 int listSize,
 											 boolean closeChangeSet) {
 		this.progress = progress;
 		this.plugin = plugin;
-		this.remotepoi = remotepoi;
-		this.remotebug = remotebug;
+		this.remotepoi = plugin.getPoiModificationRemoteUtil();
+		this.remotebug = plugin.getOsmNotesRemoteUtil();
 		this.listSize = listSize;
 		this.listener = listener;
 		this.closeChangeSet = closeChangeSet;

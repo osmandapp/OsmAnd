@@ -13,7 +13,6 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
@@ -33,6 +32,7 @@ import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.myplaces.AvailableGPXFragment;
 import net.osmand.plus.myplaces.AvailableGPXFragment.GpxInfo;
 import net.osmand.plus.myplaces.FavoritesActivity;
+import net.osmand.plus.osmedit.OsmPoint.Action;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.Algorithms;
 
@@ -48,6 +48,14 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	private OsmandApplication app;
 	OpenstreetmapsDbHelper dbpoi;
 	OsmBugsDbHelper dbbug;
+	OpenstreetmapLocalUtil localUtil;
+	OpenstreetmapRemoteUtil remoteUtil;
+	private OsmBugsRemoteUtil remoteNotesUtil;
+	
+	public OsmEditingPlugin(OsmandApplication app) {
+		this.app = app;
+		settings = app.getSettings();
+	}
 
 	@Override
 	public String getId() {
@@ -60,6 +68,30 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		}
 		return dbpoi;
 	}
+	
+	public OpenstreetmapLocalUtil getPoiModificationLocalUtil() {
+		if(localUtil == null) {
+			localUtil = new OpenstreetmapLocalUtil(this);
+		}
+		return localUtil;
+	}
+	
+	public OpenstreetmapRemoteUtil getPoiModificationRemoteUtil() {
+		if(remoteUtil == null) {
+			remoteUtil = new OpenstreetmapRemoteUtil(app);
+		}
+		return remoteUtil;
+	}
+	
+	public OsmBugsRemoteUtil getOsmNotesRemoteUtil() {
+		if(remoteNotesUtil == null) {
+			remoteNotesUtil = new OsmBugsRemoteUtil(app);
+		}
+		return remoteNotesUtil;
+	}
+	
+	
+	
 
 	public OsmBugsDbHelper getDBBug() {
 		if (dbbug == null) {
@@ -68,10 +100,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		return dbbug;
 	}
 
-	public OsmEditingPlugin(OsmandApplication app) {
-		this.app = app;
-		settings = app.getSettings();
-	}
+	
 
 	private OsmBugsLayer osmBugsLayer;
 	private OsmEditsLayer osmEditsLayer;
@@ -180,7 +209,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		if (isEditable) {
 			adapter.item(R.string.poi_context_menu_modify).iconColor(R.drawable.ic_action_edit_dark).listen(listener).position(1).reg();
 			adapter.item(R.string.poi_context_menu_delete).iconColor(R.drawable.ic_action_delete_dark).listen(listener).position(2).reg();
-		} else if (selectedObj instanceof OpenstreetmapPoint) {
+		} else if (selectedObj instanceof OpenstreetmapPoint && ((OpenstreetmapPoint) selectedObj).getAction() != Action.DELETE) {
 			adapter.item(R.string.poi_context_menu_modify_osm_change)
 					.iconColor(R.drawable.ic_action_edit_dark).listen(listener).position(1).reg();
 		} else {
