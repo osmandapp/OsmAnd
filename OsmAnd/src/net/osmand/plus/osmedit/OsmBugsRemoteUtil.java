@@ -61,7 +61,7 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 	@Override
 	public OsmBugResult reopenBug(double latitude, double longitude, long id, String text){
 		StringBuilder b = new StringBuilder();
-		b.append(getNotesApi()).append("?"); //$NON-NLS-1$
+		b.append(getNotesApi()).append("/"); //$NON-NLS-1$
 		b.append(id); //$NON-NLS-1$
 		b.append("/reopen?text=").append(URLEncoder.encode(text)); //$NON-NLS-1$
 		return editingPOI(b.toString(), "POST", "reopen bug"); //$NON-NLS-1$

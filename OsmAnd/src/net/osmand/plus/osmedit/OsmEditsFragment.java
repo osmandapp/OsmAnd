@@ -352,6 +352,8 @@ public class OsmEditsFragment extends OsmAndListFragment
 			descr.setText(R.string.action_modify);
 		} else if (child.getAction() == OsmPoint.Action.DELETE) {
 			descr.setText(R.string.action_delete);
+		} else if (child.getAction() == OsmPoint.Action.REOPEN) {
+			descr.setText(R.string.action_modify);
 		}
 	}
 
