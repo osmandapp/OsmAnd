@@ -402,7 +402,7 @@ public class EditPoiDialogFragment extends DialogFragment {
 								  final Runnable successAction,
 								  final Activity activity,
 								  final OpenstreetmapUtil openstreetmapUtil) {
-		if (info == null && OsmPoint.Action.CREATE != action) {
+		if (info == null && OsmPoint.Action.CREATE != action && openstreetmapUtil instanceof OpenstreetmapRemoteUtil) {
 			AccessibleToast.makeText(activity, activity.getResources().getString(R.string.poi_error_info_not_loaded), Toast.LENGTH_LONG).show();
 			return;
 		}

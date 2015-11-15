@@ -69,6 +69,8 @@ public class OpenstreetmapsDbHelper extends SQLiteOpenHelper {
 					tags.append("$$$");
 				}
 			}
+			db.execSQL("DELETE FROM " + OPENSTREETMAP_TABLE_NAME +
+					" WHERE " + OPENSTREETMAP_COL_ID + " = ?", new Object[] { p.getId() }); //$NON-NLS-1$ //$NON-NLS-2$
 			db.execSQL("INSERT INTO " + OPENSTREETMAP_TABLE_NAME +
 					" (" + OPENSTREETMAP_COL_ID + ", " + OPENSTREETMAP_COL_LAT + ", " + OPENSTREETMAP_COL_LON + ", " + OPENSTREETMAP_COL_TAGS + ", " + OPENSTREETMAP_COL_ACTION + "," + OPENSTREETMAP_COL_COMMENT + ")" +
 					   " VALUES (?, ?, ?, ?, ?, ?)",
