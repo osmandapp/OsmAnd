@@ -1823,4 +1823,8 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="lang_fy">Frisó</string>
     <string name="lang_als">Albanès (Tosc)</string>
     <string name="save_poi_without_poi_type_message">Confirmeu desar el PDI sense indicar el tipus?</string>
+    <string name="context_menu_item_delete_waypoint">Voleu suprimir la fita GPX?</string>
+    <string name="context_menu_item_edit_waypoint">Edita la fita GPX</string>
+    <string name="shared_string_location">Localització</string>
+    <string name="poi_context_menu_modify_osm_change">Modifica el canvi OSM</string>
     </resources>
