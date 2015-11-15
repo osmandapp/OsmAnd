@@ -152,9 +152,7 @@ public class DashOsmEditsFragment extends DashBaseFragment
 	}
 
 	public void showProgressDialog(OsmPoint[] points, boolean closeChangeSet) {
-		OpenstreetmapRemoteUtil remotepoi = new OpenstreetmapRemoteUtil(getActivity());
 		OsmPoint[] toUpload = points;
-		OsmBugsRemoteUtil remotebug = new OsmBugsRemoteUtil(getMyApplication());
 		ProgressDialog dialog = ProgressImplementation.createProgressDialog(getActivity(),
 				getString(R.string.uploading), getString(R.string.local_openstreetmap_uploading),
 				ProgressDialog.STYLE_HORIZONTAL).getDialog();
@@ -177,7 +175,7 @@ public class DashOsmEditsFragment extends DashBaseFragment
 			}
 		};
 		UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask(dialog,
-				listener, plugin, remotepoi, remotebug, toUpload.length, closeChangeSet);
+				listener, plugin, toUpload.length, closeChangeSet);
 		uploadTask.execute(toUpload);
 		dialog.show();
 	}

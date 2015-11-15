@@ -6,7 +6,7 @@ import net.osmand.osm.edit.Node;
 
 public interface OpenstreetmapUtil {
 	
-	public EntityInfo getEntityInfo();
+	public EntityInfo getEntityInfo(long id);
 	
 	public Node commitNodeImpl(OsmPoint.Action action, Node n, EntityInfo info, String comment, boolean closeChangeSet);
 	

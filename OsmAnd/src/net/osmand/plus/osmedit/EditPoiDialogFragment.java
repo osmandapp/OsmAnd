@@ -104,9 +104,9 @@ public class EditPoiDialogFragment extends DialogFragment {
 		OsmandSettings settings = getMyApplication().getSettings();
 		OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
 		if (settings.OFFLINE_EDITION.get() || !settings.isInternetConnectionAvailable(true)) {
-			mOpenstreetmapUtil = new OpenstreetmapLocalUtil(plugin, activity);
+			mOpenstreetmapUtil = plugin.getPoiModificationLocalUtil();
 		} else {
-			mOpenstreetmapUtil = new OpenstreetmapRemoteUtil(activity);
+			mOpenstreetmapUtil = plugin.getPoiModificationRemoteUtil();
 		}
 
 		Node node = (Node) getArguments().getSerializable(KEY_AMENITY_NODE);
@@ -327,7 +327,7 @@ public class EditPoiDialogFragment extends DialogFragment {
 				node.putTag(tag.getKey(), tag.getValue());
 			}
 		}
-		commitNode(action, node, mOpenstreetmapUtil.getEntityInfo(),
+		commitNode(action, node, mOpenstreetmapUtil.getEntityInfo(node.getId()),
 				"",
 				false,
 				new Runnable() {
@@ -403,7 +403,6 @@ public class EditPoiDialogFragment extends DialogFragment {
 								  final Activity activity,
 								  final OpenstreetmapUtil openstreetmapUtil) {
 		if (info == null && OsmPoint.Action.CREATE != action) {
-
 			AccessibleToast.makeText(activity, activity.getResources().getString(R.string.poi_error_info_not_loaded), Toast.LENGTH_LONG).show();
 			return;
 		}
@@ -537,12 +536,12 @@ public class EditPoiDialogFragment extends DialogFragment {
 		final OsmandSettings settings = ((OsmandApplication) activity.getApplication())
 				.getSettings();
 		final OpenstreetmapUtil openstreetmapUtilToLoad;
+		OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
 		if (//settings.OFFLINE_EDITION.get() ||
 				!settings.isInternetConnectionAvailable(true)) {
-			OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
-			openstreetmapUtilToLoad = new OpenstreetmapLocalUtil(plugin, activity);
+			openstreetmapUtilToLoad = plugin.getPoiModificationLocalUtil();
 		} else {
-			openstreetmapUtilToLoad = new OpenstreetmapRemoteUtil(activity);
+			openstreetmapUtilToLoad = plugin.getPoiModificationRemoteUtil();
 		}
 		new AsyncTask<Void, Void, Node>() {
 			@Override
@@ -599,11 +598,9 @@ public class EditPoiDialogFragment extends DialogFragment {
 			OsmandSettings settings = ((OsmandApplication) activity.getApplication()).getSettings();
 			OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
 			if (settings.OFFLINE_EDITION.get() || !settings.isInternetConnectionAvailable(true)) {
-				openstreetmapUtil = new OpenstreetmapLocalUtil(plugin, activity);
-			} else if (!settings.isInternetConnectionAvailable(true)) {
-				openstreetmapUtil = new OpenstreetmapLocalUtil(plugin, activity);
+				openstreetmapUtil = plugin.getPoiModificationLocalUtil();
 			} else {
-				openstreetmapUtil = new OpenstreetmapRemoteUtil(activity);
+				openstreetmapUtil = plugin.getPoiModificationRemoteUtil();
 			}
 		}
 
@@ -643,7 +640,7 @@ public class EditPoiDialogFragment extends DialogFragment {
 					String c = comment == null ? null : comment.getText().toString();
 					boolean closeChangeSet = closeChangesetCheckBox != null
 							&& closeChangesetCheckBox.isChecked();
-					commitNode(OsmPoint.Action.DELETE, n, openstreetmapUtil.getEntityInfo(), c,
+					commitNode(OsmPoint.Action.DELETE, n, openstreetmapUtil.getEntityInfo(n.getId()), c,
 							closeChangeSet, new Runnable() {
 								@Override
 								public void run() {

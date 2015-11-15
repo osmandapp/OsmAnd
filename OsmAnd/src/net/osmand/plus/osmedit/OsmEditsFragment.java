@@ -63,8 +63,6 @@ public class OsmEditsFragment extends OsmAndListFragment
 
 	private boolean selectionMode = false;
 
-	private OpenstreetmapRemoteUtil remotepoi;
-	private OsmBugsRemoteUtil remotebug;
 
 	private final static int MODE_DELETE = 100;
 	private final static int MODE_UPLOAD = 101;
@@ -80,9 +78,6 @@ public class OsmEditsFragment extends OsmAndListFragment
 		plugin = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class);
 		View view = getActivity().getLayoutInflater().inflate(R.layout.update_index, container, false);
 		((TextView) view.findViewById(R.id.header)).setText(R.string.your_edits);
-
-		remotepoi = new OpenstreetmapRemoteUtil(getActivity());
-		remotebug = new OsmBugsRemoteUtil(getMyApplication());
 
 		final CheckBox selectAll = (CheckBox) view.findViewById(R.id.select_all);
 		selectAll.setVisibility(View.GONE);
@@ -535,7 +530,7 @@ public class OsmEditsFragment extends OsmAndListFragment
 			}
 		};
 		UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask(
-				dialog, listener, plugin, remotepoi, remotebug, points.length, closeChangeSet);
+				dialog, listener, plugin, points.length, closeChangeSet);
 		uploadTask.execute(points);
 
 		dialog.show();

@@ -69,14 +69,12 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	private static final int DIALOG_BUG = 305;
 	private static Bundle dialogBundle = new Bundle();
 	private OsmBugsLocalUtil local;
-	private OsmBugsRemoteUtil remote;
 	private MapLayerData<List<OpenStreetNote>> data;
 	
 	public OsmBugsLayer(MapActivity activity, OsmEditingPlugin plugin){
 		this.activity = activity;
 		this.plugin = plugin;
 		local = new OsmBugsLocalUtil(activity, plugin.getDBBug());
-		remote = new OsmBugsRemoteUtil(activity.getMyApplication());
 	}
 	
 	public OsmBugsUtil getOsmbugsUtil(OpenStreetNote bug) {
@@ -85,7 +83,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 				|| !settings.isInternetConnectionAvailable(true)) {
 			return local;
 		} else {
-			return remote;
+			return plugin.getOsmNotesRemoteUtil();
 		}
 	}
 	

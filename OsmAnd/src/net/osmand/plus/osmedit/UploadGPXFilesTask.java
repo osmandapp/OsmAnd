@@ -3,6 +3,7 @@ package net.osmand.plus.osmedit;
 import java.io.File;
 
 import net.osmand.access.AccessibleToast;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.myplaces.AvailableGPXFragment.GpxInfo;
 import net.osmand.plus.osmedit.OsmEditingPlugin.UploadVisibility;
@@ -34,7 +35,7 @@ public class UploadGPXFilesTask extends AsyncTask<GpxInfo, String, String> {
 			if (!isCancelled() && info.file != null) {
 				String warning = null;
 				File file = info.file;
-				warning = new OpenstreetmapRemoteUtil(la).uploadGPXFile(tagstring, description, visibility,
+				warning = new OpenstreetmapRemoteUtil((OsmandApplication) la.getApplication()).uploadGPXFile(tagstring, description, visibility,
 						file);
 				total++;
 				if (warning == null) {
