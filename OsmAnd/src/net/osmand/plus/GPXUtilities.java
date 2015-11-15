@@ -6,7 +6,6 @@ import android.graphics.Color;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
-import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.PointDescription;
 import net.osmand.util.Algorithms;
@@ -137,6 +136,31 @@ public class GPXUtilities {
 			return true;
 		}
 
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + ((name == null) ? 0 : name.hashCode());
+			result = prime * result + ((category == null) ? 0 : category.hashCode());
+			result = prime * result + ((desc == null) ? 0 : desc.hashCode());
+			result = prime * result + ((lat == 0) ? 0 : Double.valueOf(lat).hashCode());
+			result = prime * result + ((lon == 0) ? 0 : Double.valueOf(lon).hashCode());
+			return result;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null || getClass() != obj.getClass())
+				return false;
+			WptPt other = (WptPt) obj;
+			return Algorithms.objectEquals(other.name, name)
+					&& Algorithms.objectEquals(other.category, category)
+					&& Algorithms.objectEquals(other.lat, lat)
+					&& Algorithms.objectEquals(other.lon, lon)
+					&& Algorithms.objectEquals(other.desc, desc);
+		}
 	}
 
 	public static class TrkSegment extends GPXExtensions {
@@ -608,6 +632,8 @@ public class GPXUtilities {
 		}
 
 		public void updateWptPt(WptPt pt, double lat, double lon, long time, String description, String name, String category, int color) {
+			int index = points.indexOf(pt);
+
 			pt.lat = lat;
 			pt.lon = lon;
 			pt.time = time;
@@ -616,6 +642,10 @@ public class GPXUtilities {
 			pt.category = category;
 			if (color != 0) {
 				pt.setColor(color);
+			}
+
+			if (index != -1) {
+				points.set(index, pt);
 			}
 		}
 

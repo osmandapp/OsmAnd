@@ -104,6 +104,12 @@ public class WptPtEditorFragment extends PointEditorFragment {
 			menu.update(latLon, wpt.getPointDescription(getMapActivity()), wpt);
 		}
 
+		if (editor.isNew() && selectedGpxFile == null) {
+			selectedGpxHelper.setGpxFileToDisplay(savingTrackHelper.getCurrentGpx());
+		} else if (selectedGpxFile != null) {
+			selectedGpxHelper.setGpxFileToDisplay(selectedGpxFile.getGpxFile());
+		}
+
 		saved = true;
 	}
 

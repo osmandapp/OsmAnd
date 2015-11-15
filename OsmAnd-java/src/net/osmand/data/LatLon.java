@@ -1,5 +1,7 @@
 package net.osmand.data;
 
+import net.osmand.FloatMath;
+
 import java.io.Serializable;
 
 public class LatLon implements Serializable {
@@ -32,10 +34,17 @@ public class LatLon implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		LatLon other = (LatLon) obj;
+
+		if (Float.floatToIntBits((float) latitude) != Float.floatToIntBits((float) other.latitude))
+			return false;
+		if (Float.floatToIntBits((float) longitude) != Float.floatToIntBits((float) other.longitude))
+			return false;
+/*
 		if (Double.doubleToLongBits(latitude) != Double.doubleToLongBits(other.latitude))
 			return false;
 		if (Double.doubleToLongBits(longitude) != Double.doubleToLongBits(other.longitude))
 			return false;
+*/
 		return true;
 	}
 
