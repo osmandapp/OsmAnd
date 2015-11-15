@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="always_center_position_on_map">Ammustra sa positzione semper a su tzentru</string>
     <string name="voice_pref_title">Boghe</string>
     <string name="misc_pref_title">Mistura</string>
@@ -1993,4 +1994,6 @@
     <string name="context_menu_item_delete_waypoint">Burrare su puntu de coladòrgiu GPX?</string>
     <string name="context_menu_item_edit_waypoint">Modìfica su puntu de coladòrgiu GPX</string>
     <string name="poi_context_menu_modify_osm_change">Modìfica càmbiu OSM</string>
+    <string name="context_menu_item_open_note">Nota OSM aberta</string>
+    <string name="osm_edit_reopened_note">Nota OSM torrada a abèrrere</string>
     </resources>
