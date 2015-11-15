@@ -480,14 +480,26 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 
 		GpxDisplayItem child = adapter.getItem(position);
 
+		if (child.group.getGpx() != null) {
+			app.getSelectedGpxHelper().setGpxFileToDisplay(child.group.getGpx());
+		}
+
 		final OsmandSettings settings = app.getSettings();
 		LatLon location = new LatLon(child.locationStart.lat, child.locationStart.lon);
 
-		settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
-				settings.getLastKnownMapZoom(),
-				new PointDescription(PointDescription.POINT_TYPE_FAVORITE, Html.fromHtml(child.name).toString()),
-				false,
-				child.locationStart); //$NON-NLS-1$
+		if (child.group.getType() == GpxDisplayItemType.TRACK_POINTS) {
+			settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
+					settings.getLastKnownMapZoom(),
+					new PointDescription(PointDescription.POINT_TYPE_WPT, child.locationStart.name),
+					false,
+					child.locationStart);
+		} else {
+			settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
+					settings.getLastKnownMapZoom(),
+					new PointDescription(PointDescription.POINT_TYPE_GPX_ITEM, child.name),
+					false,
+					child);
+		}
 		MapActivity.launchMapActivityMoveToTop(getActivity());
 /*
 //		if(child.group.getType() == GpxDisplayItemType.TRACK_POINTS ||

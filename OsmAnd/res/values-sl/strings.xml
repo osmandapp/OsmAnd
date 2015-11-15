@@ -1992,4 +1992,8 @@
     <string name="lang_fy">Frizijščina</string>
     <string name="lang_als">Toskovska albanščina</string>
     <string name="save_poi_without_poi_type_message">Ali res želite shraniti točko POI brez ustreznega določila vrste?</string>
-    </resources>
+    <string name="context_menu_item_delete_waypoint">Ali želite izbrisati vmesno točko GPX?</string>
+    <string name="context_menu_item_edit_waypoint">Uredi vmesno točko GPX</string>
+    <string name="shared_string_location">Mesto</string>
+    <string name="poi_context_menu_modify_osm_change">Popravi spremembo OSM</string>
+</resources>
