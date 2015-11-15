@@ -570,6 +570,8 @@ public class OsmEditsFragment extends OsmAndListFragment
 				sz.endTag("", "create");
 				sz.startTag("", "modify");
 				writeContent(sz, points, OsmPoint.Action.MODIFY);
+				writeContent(sz, points, OsmPoint.Action.REOPEN);
+
 				sz.endTag("", "modify");
 				sz.startTag("", "delete");
 				writeContent(sz, points, OsmPoint.Action.DELETE);
@@ -601,6 +603,9 @@ public class OsmEditsFragment extends OsmAndListFragment
 						sz.attribute("", "version", "1");
 						for (String tag : p.getEntity().getTagKeySet()) {
 							String val = p.getEntity().getTag(tag);
+							if (val == null || val.length() == 0 || tag.length() == 0 || "poi_type_tag".equals(tag)) {
+								continue;
+							}
 							sz.startTag("", "tag");
 							sz.attribute("", "k", tag);
 							sz.attribute("", "v", val);

@@ -305,6 +305,7 @@ public class EditPoiDialogFragment extends DialogFragment {
 
 	private void save() {
 		Node original = editPoiData.getEntity();
+		final boolean offlineEdit = mOpenstreetmapUtil instanceof OpenstreetmapLocalUtil;
 		Node node = new Node(original.getLatitude(), original.getLongitude(), original.getId());
 		OsmPoint.Action action = node.getId() == -1 ? OsmPoint.Action.CREATE : OsmPoint.Action.MODIFY;
 		for (Map.Entry<String, String> tag : editPoiData.getTagValues().entrySet()) {
@@ -319,6 +320,9 @@ public class EditPoiDialogFragment extends DialogFragment {
 					node.putTag(editPoiData.getPoiCategory().getDefaultTag(), tag.getValue());
 
 				}
+				if(offlineEdit && !Algorithms.isEmpty(tag.getValue())) {
+					node.putTag(tag.getKey(), tag.getValue());
+				}
 			} else if (!Algorithms.isEmpty(tag.getKey()) && !Algorithms.isEmpty(tag.getValue())) {
 				node.putTag(tag.getKey(), tag.getValue());
 			}
@@ -330,7 +334,7 @@ public class EditPoiDialogFragment extends DialogFragment {
 					@Override
 					public void run() {
 						OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
-						if (plugin != null && mOpenstreetmapUtil instanceof OpenstreetmapLocalUtil) {
+						if (plugin != null && offlineEdit) {
 							List<OpenstreetmapPoint> points = plugin.getDBPOI().getOpenstreetmapPoints();
 							if (getActivity() instanceof MapActivity && points.size() > 0) {
 								OsmPoint point = points.get(points.size() - 1);

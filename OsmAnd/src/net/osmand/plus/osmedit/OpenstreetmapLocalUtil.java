@@ -61,7 +61,7 @@ public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 		Node entity = new Node(n.getLocation().getLatitude(),
 							   n.getLocation().getLongitude(),
 							   nodeId);
-		entity.putTag(EditPoiData.POI_TYPE_TAG, poiType.getOsmValue());
+		entity.putTag(EditPoiData.POI_TYPE_TAG, poiType.getTranslation());
 		if(poiType.getOsmTag2() != null) {
 			entity.putTag(poiType.getOsmTag2(), poiType.getOsmValue2());
 		}
