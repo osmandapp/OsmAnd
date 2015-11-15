@@ -53,11 +53,7 @@ public class EditPOIMenuController extends MenuController {
 					@Override
 					public void uploadEnded(Map<OsmPoint, String> loadErrorsMap) {
 						super.uploadEnded(loadErrorsMap);
-						for (OsmPoint osmPoint : loadErrorsMap.keySet()) {
-							if (loadErrorsMap.get(osmPoint) == null) {
-								getMapActivity().getContextMenu().close();
-							}
-						}
+						getMapActivity().getContextMenu().close();
 					}
 				};
 				OpenstreetmapRemoteUtil remotepoi = new OpenstreetmapRemoteUtil(getMapActivity());

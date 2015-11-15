@@ -28,7 +28,7 @@
 	<string name="osb_comment_dialog_author">Author name</string>
 	<string name="osb_comment_dialog_error">Exception occurred: comment was not added</string>
 	<string name="osb_comment_dialog_success">Comment was successfully added</string>
-	
+	<string name="shared_string_commit">Commit</string>
 	
     <string name="context_menu_item_delete_waypoint">Delete GPX waypoint?</string>
     <string name="context_menu_item_edit_waypoint">Edit GPX waypoint</string>
