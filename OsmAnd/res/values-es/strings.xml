@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
 
     <string name="layer_map_appearance">Configurar pantalla</string>
     <string name="show_lanes">Mostrar carriles</string>
@@ -1952,4 +1953,21 @@
     <string name="context_menu_item_delete_waypoint">¿Borrar punto de ruta GPX?</string>
     <string name="context_menu_item_edit_waypoint">Editar punto de ruta GPX</string>
 
-</resources>
+<string name="context_menu_item_open_note">Nota OSM abierta</string>
+    <string name="osm_edit_reopened_note">Nota OSM reabierta</string>
+    <string name="osm_edit_commented_note">Nota OSM comentada</string>
+    <string name="osm_edit_removed_note">Nota OSM borrada</string>
+	<string name="osm_edit_created_note">Nota OSM creada</string>
+	<string name="osn_bug_name">Nota OSM</string>
+	<string name="osn_add_dialog_title">Crear nota</string>
+	<string name="osn_comment_dialog_title">Añadir comentario</string>
+	<string name="osn_reopen_dialog_title">Reabrir nota</string>
+	<string name="osn_close_dialog_title">Cerrar nota</string>
+	<string name="osn_add_dialog_success">Nota creada exitosamente</string>
+	<string name="osn_add_dialog_error">Error: la nota no se creó</string>
+	<string name="osn_close_dialog_success">El error se cerró exitosamente</string>
+	<string name="osn_close_dialog_error">Error: no se cerró la nota</string>
+	<string name="shared_string_commit">Confirmar</string>
+	
+    <string name="poi_dialog_reopen">Reabrir</string>
+	</resources>
