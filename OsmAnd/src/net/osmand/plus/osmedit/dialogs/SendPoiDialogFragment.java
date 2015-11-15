@@ -32,7 +32,7 @@ public class SendPoiDialogFragment extends DialogFragment {
 		final OsmPoint[] poi = (OsmPoint[]) getArguments().getSerializable(OPENSTREETMAP_POINT);
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		View view = getActivity().getLayoutInflater().inflate(R.layout.send_poi_dialog, null);
-		final View messageEditTextLabel = (EditText) view.findViewById(R.id.messageEditTextLabel);
+		final View messageEditTextLabel = view.findViewById(R.id.messageEditTextLabel);
 		final EditText messageEditText = (EditText) view.findViewById(R.id.messageEditText);
 		final EditText userNameEditText = (EditText) view.findViewById(R.id.userNameEditText);
 		final EditText passwordEditText = (EditText) view.findViewById(R.id.passwordEditText);
