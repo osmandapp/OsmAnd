@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
     <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per visualizzare tracce e percorsi</string>
     <string name="offline_edition">Modifiche offline</string>
@@ -210,7 +211,7 @@
     <string name="yard">iarda</string>
     <string name="foot">piedi</string>
     <string name="mile_per_hour">mph</string>
-    <string name="mile">miglio</string>
+    <string name="mile">miglia</string>
     <string name="send_location_way_choose_title">Condividi la posizione usando</string>
     <string name="send_location_sms_pattern">Posizione: %1$s\n%2$s</string>
     <string name="send_location_email_pattern">Per vedere la posizione segui il collegamento web %1$s o il collegamento %2$s</string>

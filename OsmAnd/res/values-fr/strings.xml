@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="offline_edition">Modifications hors-ligne</string>
     <string name="offline_edition_descr">Toujours utiliser l\'édition hors-ligne</string>
 
@@ -2093,4 +2094,21 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="shared_string_location">Localisation</string>
     <string name="context_menu_item_delete_waypoint">Supprimer le point de passage GPX ?</string>
     <string name="context_menu_item_edit_waypoint">Modifier le point de passage GPX</string>
+    <string name="context_menu_item_open_note">Ouvrir la note OSM</string>
+    <string name="osm_edit_reopened_note">Ré-ouvrir la note OSM</string>
+    <string name="osm_edit_removed_note">Note OSM supprimée</string>
+	<string name="osm_edit_created_note">Note OSM créée</string>
+	<string name="osn_bug_name">Note OSM</string>
+	<string name="osn_add_dialog_title">Créer une note</string>
+	<string name="osn_comment_dialog_title">Ajouter un commentaire</string>
+	<string name="osn_reopen_dialog_title">Ré-ouvrir la note</string>
+	<string name="osn_close_dialog_title">Fermer la note</string>
+	<string name="osn_add_dialog_success">Note créée avec succès</string>
+	<string name="osn_add_dialog_error">Une erreur s\'est produite : la note n\'a pas pu être créée</string>
+	<string name="osn_close_dialog_success">Le bug a été soumis avec succès</string>
+	<string name="osn_close_dialog_error">Une erreur s\'est produite : la note ne peut pas être fermée</string>
+	<string name="shared_string_commit">Soumettre</string>
+	
+    <string name="poi_dialog_reopen">Ré-ouvrir</string>
+	<string name="osm_edit_commented_note">Note OSM commentée</string>
     </resources>
