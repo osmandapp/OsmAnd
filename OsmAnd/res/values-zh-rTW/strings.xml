@@ -1978,4 +1978,6 @@
     <string name="save_poi_without_poi_type_message">您真的想要儲存興趣點成為沒有類型的興趣點嗎？</string>
     <string name="shared_string_location">位置</string>
     <string name="poi_context_menu_modify_osm_change">修改 OSM 的變更</string>
+    <string name="context_menu_item_delete_waypoint">要刪除 GPX 的航點嗎？</string>
+    <string name="context_menu_item_edit_waypoint">編輯 GPX 的航點</string>
     </resources>
