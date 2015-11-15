@@ -9,6 +9,8 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.GpxSelectionHelper;
+import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
@@ -19,6 +21,7 @@ import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.AudioVideoNoteMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.EditPOIMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.FavouritePointMenuController;
+import net.osmand.plus.mapcontextmenu.controllers.GpxItemMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.HistoryMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.MapDataMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.MyLocationMenuController;
@@ -93,6 +96,8 @@ public abstract class MenuController extends BaseMenuController {
 				menuController = new MapDataMenuController(app, mapActivity, pointDescription, (BinaryMapDataObject) object);
 			} else if (object instanceof OpenStreetNote) {
 				menuController = new OsmBugMenuController(app, mapActivity, pointDescription, (OpenStreetNote) object);
+			} else if (object instanceof GpxDisplayItem) {
+				menuController = new GpxItemMenuController(app, mapActivity, pointDescription, (GpxDisplayItem) object);
 			} else if (object instanceof LatLon) {
 				if (pointDescription.isParking()) {
 					menuController = new ParkingPositionMenuController(app, mapActivity, pointDescription);
