@@ -27,7 +27,6 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.edit.Node;
@@ -43,6 +42,7 @@ import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.FavoritesActivity;
+import net.osmand.plus.osmedit.OsmPoint.Action;
 import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment;
 
 import org.xmlpull.v1.XmlSerializer;
@@ -467,7 +467,7 @@ public class OsmEditsFragment extends OsmAndListFragment
 				return true;
 			}
 		});
-		if (info instanceof OpenstreetmapPoint) {
+		if (info instanceof OpenstreetmapPoint && info.getAction() != Action.DELETE) {
 			item = optionsMenu.getMenu().add(R.string.poi_context_menu_modify_osm_change)
 					.setIcon(app.getIconsCache().getContentIcon(R.drawable.ic_action_edit_dark));
 			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {

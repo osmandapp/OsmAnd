@@ -116,7 +116,14 @@ public class EditPOIMenuController extends MenuController {
 		rightTitleButtonController.leftIconId = R.drawable.ic_action_delete_dark;
 
 		if (osmPoint.getGroup() == OsmPoint.Group.POI) {
-			pointTypeStr = getMapActivity().getString(R.string.osm_edit_created_poi);
+			if(osmPoint.getAction() == Action.DELETE) {
+				pointTypeStr = getMapActivity().getString(R.string.osm_edit_deleted_poi);
+			} else if(osmPoint.getAction() == Action.MODIFY) {
+				pointTypeStr = getMapActivity().getString(R.string.osm_edit_modified_poi);
+			} else/* if(osmPoint.getAction() == Action.CREATE) */{
+				pointTypeStr = getMapActivity().getString(R.string.osm_edit_created_poi);
+			}
+			
 		} else if (osmPoint.getGroup() == OsmPoint.Group.BUG) {
 			if(osmPoint.getAction() == Action.DELETE) {
 				pointTypeStr = getMapActivity().getString(R.string.osm_edit_removed_note);

@@ -633,7 +633,7 @@ public class EditPoiDialogFragment extends DialogFragment {
 				builder.setView(ll);
 			}
 			builder.setNegativeButton(R.string.shared_string_cancel, null);
-			builder.setPositiveButton(R.string.shared_string_delete, new DialogInterface.OnClickListener() {
+			builder.setPositiveButton(isLocalEdit ? R.string.shared_string_save : R.string.shared_string_delete, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					String c = comment == null ? null : comment.getText().toString();

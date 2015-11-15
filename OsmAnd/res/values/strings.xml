@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="osm_edit_modified_poi">Modified OSM POI</string>
+    <string name="osm_edit_deleted_poi">Deleted OSM POI</string>
     <string name="context_menu_item_open_note">Open OSM Note</string>
     <string name="osm_edit_reopened_note">Reopened OSM Note</string>
     <string name="osm_edit_commented_note">Commented OSM Note</string>

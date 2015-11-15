@@ -45,7 +45,7 @@ public class SendPoiDialogFragment extends DialogFragment {
 		passwordEditText.setText(settings.USER_PASSWORD.get());
 		boolean hasOsmPOI = false;
 		for(OsmPoint p : poi) {
-			if(p instanceof OpenstreetmapPoint) {
+			if (p.getGroup() == OsmPoint.Group.POI) {
 				hasOsmPOI = true;
 				break;
 			}
