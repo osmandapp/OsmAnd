@@ -1,8 +1,7 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
-import android.graphics.drawable.Drawable;
+import java.util.Map;
+
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
@@ -14,6 +13,7 @@ import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.builders.EditPOIMenuBuilder;
 import net.osmand.plus.osmedit.OpenstreetmapPoint;
 import net.osmand.plus.osmedit.OpenstreetmapRemoteUtil;
+import net.osmand.plus.osmedit.OsmBugsLayer;
 import net.osmand.plus.osmedit.OsmBugsRemoteUtil;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.osmedit.OsmEditsUploadListener;
@@ -25,8 +25,9 @@ import net.osmand.plus.osmedit.UploadOpenstreetmapPointAsyncTask;
 import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment;
 import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment.ProgressDialogPoiUploader;
 import net.osmand.util.Algorithms;
-
-import java.util.Map;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.graphics.drawable.Drawable;
 
 public class EditPOIMenuController extends MenuController {
 
@@ -54,6 +55,11 @@ public class EditPOIMenuController extends MenuController {
 					public void uploadEnded(Map<OsmPoint, String> loadErrorsMap) {
 						super.uploadEnded(loadErrorsMap);
 						getMapActivity().getContextMenu().close();
+						OsmBugsLayer l = getMapActivity().getMapView().getLayerByClass(OsmBugsLayer.class);
+						if(l != null) {
+							l.clearCache();
+							getMapActivity().refreshMap();
+						}
 					}
 				};
 				OpenstreetmapRemoteUtil remotepoi = new OpenstreetmapRemoteUtil(getMapActivity());

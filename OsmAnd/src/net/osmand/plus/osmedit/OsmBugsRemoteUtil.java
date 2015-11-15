@@ -40,7 +40,7 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 	}
 
 	@Override
-	public String createNewBug(double latitude, double longitude, String text) {
+	public OsmBugResult createNewBug(double latitude, double longitude, String text) {
 		StringBuilder b = new StringBuilder();
 		b.append(getNotesApi()).append("?"); //$NON-NLS-1$
 		b.append("lat=").append(latitude); //$NON-NLS-1$
@@ -50,7 +50,7 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 	}
 
 	@Override
-	public String addingComment(double latitude, double longitude, long id, String text) {
+	public OsmBugResult addingComment(double latitude, double longitude, long id, String text) {
 		StringBuilder b = new StringBuilder();
 		b.append(getNotesApi()).append("/");
 		b.append(id); //$NON-NLS-1$
@@ -59,7 +59,7 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 	}
 	
 	@Override
-	public String reopenBug(double latitude, double longitude, long id, String text){
+	public OsmBugResult reopenBug(double latitude, double longitude, long id, String text){
 		StringBuilder b = new StringBuilder();
 		b.append(getNotesApi()).append("?"); //$NON-NLS-1$
 		b.append(id); //$NON-NLS-1$
@@ -69,7 +69,7 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 
 
 	@Override
-	public String closingBug(double latitude, double longitude, long id, String text) {
+	public OsmBugResult closingBug(double latitude, double longitude, long id, String text) {
 		StringBuilder b = new StringBuilder();
 		b.append(getNotesApi()).append("/");
 		b.append(id); //$NON-NLS-1$
@@ -77,7 +77,8 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 		return editingPOI(b.toString(), "POST", "close bug"); //$NON-NLS-1$
 	}
 
-	private String editingPOI(String url, String requestMethod, String userOperation) {
+	private OsmBugResult editingPOI(String url, String requestMethod, String userOperation) {
+		OsmBugResult r = new OsmBugResult();
 		try {
 			HttpURLConnection connection = NetworkUtils.getHttpURLConnection(url);
 			log.info("Editing poi " + url);
@@ -111,21 +112,21 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 			log.info("Response : " + responseBody); //$NON-NLS-1$
 			connection.disconnect();
 			if (!ok) {
-				return msg + "\n" + responseBody;
+				r.warning =  msg + "\n" + responseBody;
 			}
 		} catch (NullPointerException e) {
 			// that's tricky case why NPE is thrown to fix that problem httpClient could be used
 			String msg = app.getString(R.string.auth_failed);
 			log.error(msg, e);
-			return app.getString(R.string.auth_failed) + "";
+			r.warning =  app.getString(R.string.auth_failed) + "";
 		} catch (MalformedURLException e) {
 			log.error(userOperation + " " + app.getString(R.string.failed_op), e); //$NON-NLS-1$
-			return e.getMessage() + "";
+			r.warning = e.getMessage() + "";
 		} catch (IOException e) {
 			log.error(userOperation + " " + app.getString(R.string.failed_op), e); //$NON-NLS-1$
-			return e.getMessage() + " link unavailable";
+			r.warning = e.getMessage() + " link unavailable";
 		}
-		return null;
+		return r;
 	}
 
 }

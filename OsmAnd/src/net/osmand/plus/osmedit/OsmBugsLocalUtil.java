@@ -18,25 +18,32 @@ public class OsmBugsLocalUtil implements OsmBugsUtil {
 	}
 
 	@Override
-	public String createNewBug(double latitude, double longitude, String text){
+	public OsmBugResult createNewBug(double latitude, double longitude, String text){
 		OsmNotesPoint p = new OsmNotesPoint();
 		p.setId(Math.min(-2, db.getMinID() -1));
 		p.setText(text);
 		p.setLatitude(latitude);
 		p.setLongitude(longitude);
 		p.setAction(OsmPoint.Action.CREATE);
-		return db.addOsmbugs(p) ? null : "";
+		return wrap(p, db.addOsmbugs(p));
 	}
 	
+	private OsmBugResult wrap(OsmNotesPoint p, boolean success) {
+		OsmBugResult s = new OsmBugResult();
+		s.local = p;
+		s.warning = success ? null : "";
+		return null;
+	}
+
 	@Override
-	public String reopenBug(double latitude, double longitude, long id, String text){
+	public OsmBugResult reopenBug(double latitude, double longitude, long id, String text){
 		OsmNotesPoint p = new OsmNotesPoint();
 		p.setId(Math.min(-2, db.getMinID() -1));
 		p.setText(text);
 		p.setLatitude(latitude);
 		p.setLongitude(longitude);
 		p.setAction(OsmPoint.Action.REOPEN);
-		return db.addOsmbugs(p) ? null : "";
+		return wrap(p, db.addOsmbugs(p));
 	}
 	
 	public List<OsmNotesPoint> getOsmbugsPoints() {
@@ -44,25 +51,25 @@ public class OsmBugsLocalUtil implements OsmBugsUtil {
 	}
 
 	@Override
-	public String addingComment(double latitude, double longitude, long id, String text){
+	public OsmBugResult addingComment(double latitude, double longitude, long id, String text){
 		OsmNotesPoint p = new OsmNotesPoint();
 		p.setId(id);
 		p.setText(text);
 		p.setLatitude(latitude);
 		p.setLongitude(longitude);
 		p.setAction(OsmPoint.Action.MODIFY);
-		return db.addOsmbugs(p) ? null : "";
+		return wrap(p, db.addOsmbugs(p));
 	}
 
 	@Override
-	public String closingBug(double latitude, double longitude, long id, String text){
+	public OsmBugResult closingBug(double latitude, double longitude, long id, String text){
 		OsmNotesPoint p = new OsmNotesPoint();
 		p.setId(id);
 		p.setText(text);
 		p.setLatitude(latitude);
 		p.setLongitude(longitude);
 		p.setAction(OsmPoint.Action.DELETE);
-		return db.addOsmbugs(p) ? null : "";
+		return wrap(p, db.addOsmbugs(p));
 	}
 
 }

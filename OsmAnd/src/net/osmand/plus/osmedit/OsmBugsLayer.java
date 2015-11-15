@@ -24,6 +24,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.DialogProvider;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.osmedit.OsmBugsUtil.Action;
+import net.osmand.plus.osmedit.OsmBugsUtil.OsmBugResult;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -44,6 +45,7 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.util.Xml;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -313,82 +315,55 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	
 
 	
-	private void createNewBugAsync(final double latitude, final double longitude, final String text) {
-		AsyncTask<Void, Void, String> task = new AsyncTask<Void, Void, String>() {
+	
+	private void asyncActionTask(final OpenStreetNote bug, final String text, final Action action) {
+		AsyncTask<Void, Void, OsmBugResult> task = new AsyncTask<Void, Void, OsmBugResult>() {
 			private OsmBugsUtil osmbugsUtil;
-
 			@Override
-			protected String doInBackground(Void... params) {
-				osmbugsUtil = getOsmbugsUtil(null);
-				return osmbugsUtil.createNewBug(latitude, longitude, text);
+			protected OsmBugResult doInBackground(Void... params) {
+				osmbugsUtil = getOsmbugsUtil(bug);
+				if(action == Action.REOPEN) {
+					return osmbugsUtil.reopenBug(bug.getLatitude(), bug.getLongitude(), bug.getId(), text);
+				} else if(action == Action.MODIFY) {
+					return osmbugsUtil.addingComment(bug.getLatitude(), bug.getLongitude(), bug.getId(), text);
+				} else if(action == Action.CLOSE) {
+					return osmbugsUtil.closingBug(bug.getLatitude(), bug.getLongitude(), bug.getId(), text);
+				} else if(action == Action.CREATE) {
+					return osmbugsUtil.createNewBug(bug.getLatitude(), bug.getLongitude(), text);
+				}
+				return null;
 			}
-
-			protected void onPostExecute(String result) {
-				if (result == null) {
+			protected void onPostExecute(OsmBugResult obj) {
+				if (obj != null && obj.warning == null) {
 					if(local == osmbugsUtil) { 
 						AccessibleToast.makeText(activity, R.string.osm_changes_added_to_local_edits, Toast.LENGTH_LONG).show();
-						List<OsmNotesPoint> points = plugin.getDBBug().getOsmbugsPoints();
-						if(points.size() > 0) {
-							OsmPoint point = points.get(points.size() - 1);
-							activity.getContextMenu().showOrUpdate(new LatLon(latitude, longitude), plugin.getOsmEditsLayer(activity).getObjectName(point), point);
+						if(obj.local != null) {
+							PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_OSM_BUG, obj.local.getText());
+							activity.getContextMenu().show(new LatLon(obj.local.getLatitude(), obj.local.getLongitude()), pd, obj.local);
 						}
 					} else {
-						AccessibleToast.makeText(activity, R.string.osn_add_dialog_success, Toast.LENGTH_LONG).show();
-						activity.getContextMenu().close();
-					}
-					refreshMap();
-				} else {
-					AccessibleToast.makeText(activity, activity.getResources().getString(R.string.osn_add_dialog_error) + "\n" + result,
-							Toast.LENGTH_LONG).show();
-					openBug(latitude, longitude, text);
-				}
-			}
-		};
-		executeTaskInBackground(task);
-	}
-	
-	private void addingCommentAsync(final OpenStreetNote bug, final String text) {
-		AsyncTask<Void,Void,String> task = new AsyncTask<Void, Void, String>() {
-			private OsmBugsUtil osmbugsUtil;
-			@Override
-			protected String doInBackground(Void... params) {
-				osmbugsUtil = getOsmbugsUtil(bug);
-				return osmbugsUtil.addingComment(bug.getLatitude(), bug.getLongitude(), bug.getId(), text);
-			}
-			protected void onPostExecute(String warn) {
-				if (warn == null) {
-					if(local == osmbugsUtil) { 
-						AccessibleToast.makeText(activity, R.string.osm_changes_added_to_local_edits, Toast.LENGTH_LONG).show();
-					} else {
-						AccessibleToast.makeText(activity, R.string.osb_comment_dialog_success, Toast.LENGTH_LONG).show();
+						if(action == Action.REOPEN) {
+							AccessibleToast.makeText(activity, R.string.osn_add_dialog_success, Toast.LENGTH_LONG).show();
+						} else if(action == Action.MODIFY) {
+							AccessibleToast.makeText(activity, R.string.osb_comment_dialog_success, Toast.LENGTH_LONG).show();
+						} else if(action == Action.CLOSE) {
+							AccessibleToast.makeText(activity, R.string.osn_close_dialog_success, Toast.LENGTH_LONG).show();
+						} else if(action == Action.CREATE) {
+							AccessibleToast.makeText(activity, R.string.osn_add_dialog_success, Toast.LENGTH_LONG).show();
+						}
+						
 					}
 					clearCache();
 				} else {
-					AccessibleToast.makeText(activity, activity.getResources().getString(R.string.osb_comment_dialog_error) + "\n" + warn, Toast.LENGTH_LONG).show();
-				}
-			}
-		};
-		executeTaskInBackground(task);
-	}
-	
-	private void reopeningtAsync(final OpenStreetNote bug, final String text) {
-		AsyncTask<Void,Void,String> task = new AsyncTask<Void, Void, String>() {
-			private OsmBugsUtil osmbugsUtil;
-			@Override
-			protected String doInBackground(Void... params) {
-				osmbugsUtil = getOsmbugsUtil(bug);
-				return osmbugsUtil.reopenBug(bug.getLatitude(), bug.getLongitude(), bug.getId(), text);
-			}
-			protected void onPostExecute(String warn) {
-				if (warn == null) {
-					if(local == osmbugsUtil) { 
-						AccessibleToast.makeText(activity, R.string.osm_changes_added_to_local_edits, Toast.LENGTH_LONG).show();
-					} else {
-						AccessibleToast.makeText(activity, R.string.osb_comment_dialog_success, Toast.LENGTH_LONG).show();
+					int r = R.string.osb_comment_dialog_error;
+					if(action == Action.REOPEN) {
+						r = R.string.osn_add_dialog_error;
+					} else if(action == Action.CLOSE) {
+						r = R.string.osn_close_dialog_error;
+					} else if(action == Action.CREATE) {
+						r = R.string.osn_add_dialog_error;
 					}
-					clearCache();
-				} else {
-					AccessibleToast.makeText(activity, activity.getResources().getString(R.string.osb_comment_dialog_error) + "\n" + warn, Toast.LENGTH_LONG).show();
+					AccessibleToast.makeText(activity, activity.getResources().getString(r) + "\n" + obj, Toast.LENGTH_LONG).show();
 				}
 			}
 		};
@@ -428,10 +403,9 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		activity.showDialog(DIALOG_BUG);
 	}
 	
-	private Dialog createBugDialog(final Bundle args) {
+	private void prepareBugDialog(Bundle args, Dialog dialog) {
 		final OpenStreetNote bug = (OpenStreetNote) args.getSerializable(KEY_BUG);
 		final Action action = OsmBugsUtil.Action.valueOf((String) args.getSerializable(KEY_ACTION));
-		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 		int title ;
 		if(action == Action.CLOSE) {
 			title = R.string.osn_close_dialog_title;
@@ -441,14 +415,13 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 			title = R.string.osn_reopen_dialog_title;
 		} else {
 			title = R.string.osn_add_dialog_title;
-		}
-		builder.setTitle(title);
-		final View view = activity.getLayoutInflater().inflate(R.layout.open_bug, null);
-		builder.setView(view);
-		
-		if(action == Action.CREATE && bug.comments.size() > 0) {
-			((EditText)view.findViewById(R.id.messageEditText)).setText(bug.comments.get(0));
-		}
+		}		
+		AlertDialog dlg = (AlertDialog) dialog;
+		dlg.setTitle(title);
+		final View view = dlg.findViewById(R.id.layout);
+		Button btn = dlg.getButton(DialogInterface.BUTTON_POSITIVE);
+		btn.setText(title);
+
 		OsmBugsUtil util = getOsmbugsUtil(bug);
 		final boolean offline =  util instanceof OsmBugsLocalUtil;
 		if(offline) {
@@ -460,11 +433,13 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 			((EditText)view.findViewById(R.id.userNameEditText)).setText(getUserName());
 			((EditText)view.findViewById(R.id.passwordEditText)).setText(((OsmandApplication) activity.getApplication()).getSettings().USER_PASSWORD.get());
 		}
+		if(action == Action.CREATE && bug.comments.size() > 0) {
+			((EditText)view.findViewById(R.id.messageEditText)).setText(bug.comments.get(0));
+		}
 		AndroidUtils.softKeyboardDelayed((EditText) view.findViewById(R.id.messageEditText));
-		builder.setNegativeButton(R.string.shared_string_cancel, null);
-		builder.setPositiveButton(title, new DialogInterface.OnClickListener() {
+		btn.setOnClickListener(new View.OnClickListener() {
 			@Override
-			public void onClick(DialogInterface dialog, int which) {
+			public void onClick(View dialog) {
 				if (bug != null) {
 					String text = offline ? getMessageText(view) : getTextAndUpdateUserPwd(view);
 					// server validation will handle it
@@ -472,20 +447,24 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 //						AccessibleToast.makeText(activity, activity.getString(R.string.osb_author_or_password_not_specified),
 //								Toast.LENGTH_SHORT).show();
 //					}
-					if(action == Action.CLOSE) {
-						closingAsync(bug, text);
-					} else if(action == Action.MODIFY) {
-						addingCommentAsync(bug, text);
-					} else if(action == Action.REOPEN) {
-						reopeningtAsync(bug, text);
-					} else {
-						createNewBugAsync(bug.getLatitude(), bug.getLongitude(), text);
-					}
-					
+					asyncActionTask(bug, text, action);
 					activity.getContextMenu().close();
 				}
 			}
 		});
+	}
+	
+	private Dialog createBugDialog(final Bundle args) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+		
+		builder.setTitle("");
+		final View view = activity.getLayoutInflater().inflate(R.layout.open_bug, null);
+		view.setId(R.id.layout);
+		builder.setView(view);
+		
+
+		builder.setNegativeButton(R.string.shared_string_cancel, null);
+		builder.setPositiveButton(R.string.shared_string_commit, null);
 		return builder.create();
 	}
 
@@ -513,33 +492,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	}
 	
 	
-	private void closingAsync(final OpenStreetNote bug, final String text) {
-		AsyncTask<Void, Void, String> task = new AsyncTask<Void, Void, String>() {
-			private OsmBugsUtil osmbugsUtil;
-
-			@Override
-			protected String doInBackground(Void... params) {
-				osmbugsUtil = getOsmbugsUtil(bug);
-				return osmbugsUtil.closingBug(bug.getLatitude(), bug.getLongitude(), bug.getId(), text);
-			}
-
-			protected void onPostExecute(String closed) {
-				if (closed == null) {
-					if(local == osmbugsUtil) { 
-						AccessibleToast.makeText(activity, R.string.osm_changes_added_to_local_edits, Toast.LENGTH_LONG).show();
-					} else {
-						AccessibleToast.makeText(activity, R.string.osn_close_dialog_success, Toast.LENGTH_LONG).show();
-					}
-					clearCache();
-					refreshMap();
-				} else {
-					AccessibleToast.makeText(activity, activity.getString(R.string.osn_close_dialog_error) + "\n" + closed,
-							Toast.LENGTH_LONG).show();
-				}
-			}
-		};
-		executeTaskInBackground(task);
-	}
+	
 	
 	@Override
 	public String getObjectDescription(Object o) {
@@ -597,11 +550,14 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	public void onPrepareDialog(int id, Dialog dialog) {
 		switch (id) {
 			case DIALOG_BUG:
-//				((EditText)dialog.findViewById(R.id.messageEditText)).setText("");
+				prepareBugDialog(dialogBundle, dialog);
+				((EditText)dialog.findViewById(R.id.messageEditText)).setText("");
 				break;
 		}
 	}
 	
+	
+
 	public static class OpenStreetNote implements Serializable {
 		private boolean local;
 		private static final long serialVersionUID = -7848941747811172615L;

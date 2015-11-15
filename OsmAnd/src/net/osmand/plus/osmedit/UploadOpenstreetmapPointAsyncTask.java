@@ -66,11 +66,13 @@ public class UploadOpenstreetmapPointAsyncTask
 				OsmNotesPoint p = (OsmNotesPoint) point;
 				String errorMessage = null;
 				if (p.getAction() == OsmPoint.Action.CREATE) {
-					errorMessage = remotebug.createNewBug(p.getLatitude(), p.getLongitude(), p.getText());
+					errorMessage = remotebug.createNewBug(p.getLatitude(), p.getLongitude(), p.getText()).warning;
 				} else if (p.getAction() == OsmPoint.Action.MODIFY) {
-					errorMessage = remotebug.addingComment(p.getLatitude(), p.getLongitude(), p.getId(), p.getText());
+					errorMessage = remotebug.addingComment(p.getLatitude(), p.getLongitude(), p.getId(), p.getText()).warning;
+				} else if (p.getAction() == OsmPoint.Action.REOPEN) {
+					errorMessage = remotebug.reopenBug(p.getLatitude(), p.getLongitude(), p.getId(), p.getText()).warning;
 				} else if (p.getAction() == OsmPoint.Action.DELETE) {
-					errorMessage = remotebug.closingBug(p.getLatitude(), p.getLongitude(), p.getId(), p.getText());
+					errorMessage = remotebug.closingBug(p.getLatitude(), p.getLongitude(), p.getId(), p.getText()).warning;
 				}
 				if (errorMessage == null) {
 					plugin.getDBBug().deleteAllBugModifications(p);
