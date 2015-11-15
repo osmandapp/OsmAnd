@@ -461,7 +461,7 @@
     <string name="downloading_list_indexes">Descargando lista de regiones disponibles…</string>
     <string name="list_index_files_was_not_loaded">La lista de regiones no fue recuperada desde osmand.net.</string>
     <string name="select_index_file_to_download">No se encontró nada. Si no encuentra su región, puede hacer el archivo usted mismo (vea http://osmand.net).</string>
-    <string name="fav_points_edited">Se editó el punto favorito</string>
+    <string name="fav_points_edited">Se editó el favorito</string>
     <string name="fav_points_not_exist">No hay puntos favoritos</string>
     <string name="update_existing">Reemplazar</string>
     <string name="only_show">Mostrar ruta</string>
@@ -579,11 +579,11 @@
     <string name="shared_string_no">No</string>
     <string name="add_favorite_dialog_top_text">Introduzca nombre de favorito</string>
     <string name="add_favorite_dialog_default_favourite_name">Favorito</string>
-    <string name="add_favorite_dialog_favourite_added_template">El punto favorito \'\'{0}\'\' se añadió correctamente.</string>
+    <string name="add_favorite_dialog_favourite_added_template">El favorito \'\'{0}\'\' se añadió correctamente.</string>
     <string name="favourites_context_menu_edit">Editar favorito</string>
     <string name="favourites_context_menu_delete">Borrar favorito</string>
-    <string name="favourites_remove_dialog_msg">¿Borrar el punto favorito \'%s\'?</string>
-    <string name="favourites_remove_dialog_success">El punto favorito {0} se borró correctamente.</string>
+    <string name="favourites_remove_dialog_msg">¿Quitar el favorito \'%s\'?</string>
+    <string name="favourites_remove_dialog_success">El favorito {0} se borró correctamente.</string>
     <string name="osb_add_dialog_title">Introduzca texto de la nota</string>
     <string name="osb_add_dialog_success">La nota fue creada correctamente</string>
     <string name="osb_add_dialog_error">Se produjo un error: la nota no fue creada</string>
@@ -627,7 +627,7 @@
     <string name="offline_navigation_not_available">La navegación desconectada de OsmAnd, no está disponible temporalmente.</string>
     <string name="left_side_navigation">Conducción por la izquierda</string>
     <string name="left_side_navigation_descr">Seleccione en países con tráfico por la izquierda</string>
-    <string name="unknown_from_location">El punto de partida todavía no ha sido determinado</string>
+    <string name="unknown_from_location">Todavía no se determinó el punto de partida</string>
     <string name="confirm_interrupt_download">¿Quiere interrumpir la descarga de archivos?</string>
     <string name="basemap_was_selected_to_download">El Mapa Base (World Basemap) se necesita para el correcto funcionamiento de la aplicación y se seleccionó para su descarga.</string>
     <string name="map_online_plugin_is_not_installed">Habilita el complemento mapas en línea para seleccionar diferentes fuentes de mapas</string>
@@ -887,7 +887,7 @@
     <string name="map_widget_max_speed">Límite de velocidad</string>
     <string name="monitoring_control_start">GPX</string>
     <string name="rendering_attr_noAdminboundaries_name">Ocultar fronteras</string>
-    <string name="rendering_attr_noAdminboundaries_description">Evita mostrar las fronteras regionales (niveles administrativos 5-9)</string>
+    <string name="rendering_attr_noAdminboundaries_description">Ocultar fronteras regionales (niveles administrativos 5-9)</string>
     <string name="index_srtm_parts">piezas</string>
     <string name="index_srtm_ele">Curvas de nivel</string>
     <string name="srtm_plugin_description">"Este complemento proporciona tanto una capa superpuesta de curvas de nivel y una capa (de relieve) sombreada que se pueden visualizar sobre los mapas descargados de OsmAnd. Esta funcionalidad será muy apreciada por atletas, caminantes, excursionistas, y cualquiera interesado en la estructura de relieve de un paisaje.
@@ -1119,7 +1119,7 @@
     <string name="driving_region">Región de conducción</string>
     <string name="edit_tilesource_minzoom">Acercamiento mínimo</string>
     <string name="edit_tilesource_expiration_time">Expirar (minutos)</string>
-    <string name="edit_tilesource_successfully">Fuente de teselas %1$s ha sido guardada correctamente</string>
+    <string name="edit_tilesource_successfully">La fuente de teselas %1$s, se guardó correctamente</string>
     <string name="local_index_tile_data_name">Datos de teselas: %1$s</string>
     <string name="local_index_tile_data_expire">Expirar (minutos): %1$s</string>
     <string name="shared_string_about">Acerca de</string>
@@ -1539,10 +1539,10 @@
     <string name="traffic_warning">Aviso de tráfico</string>
     <string name="text_size_descr">Establece el tamaño del texto en el mapa.</string>
     <string name="text_size">Tamaño de texto</string>
-    <string name="fav_point_dublicate">Nombre de punto favorito duplicado</string>
+    <string name="fav_point_dublicate">Nombre del favorito duplicado</string>
     <string name="fav_point_dublicate_message">El nombre del favorito especificado está en uso, fue cambiado a %1$s para evitar duplicados.</string>
     <string name="print_route">Imprimir ruta</string>
-    <string name="fav_point_emoticons_message">El nombre de punto favorito ha sido cambiado a %1$s para facilitar el guardado de la cadena con emoticonos a un archivo.</string>
+    <string name="fav_point_emoticons_message">Se cambió el nombre del favorito a %1$s, para facilitar el guardado de la cadena con emoticonos a un archivo.</string>
     <string name="speed_limit_exceed">Tolerancia de límite de velocidad</string>
     <string name="speed_limit_exceed_message">Seleccione el margen de tolerancia sobre el límite de velocidad con el cual recibirá un aviso de voz.</string>
     <string name="osmo_device_not_found">Dispositivo no encontrado</string>
@@ -1966,4 +1966,6 @@
     <string name="save_poi_without_poi_type_message">¿Quiere guardar el punto de interés sin especificar el tipo?</string>
     <string name="shared_string_location">Ubicación</string>
     <string name="poi_context_menu_modify_osm_change">Modificar cambio OSM</string>
+    <string name="context_menu_item_delete_waypoint">¿Borrar punto de ruta GPX?</string>
+    <string name="context_menu_item_edit_waypoint">Editar punto de ruta GPX</string>
     </resources>
