@@ -336,7 +336,7 @@
     <string name="route_descr_map_location">الخريطة: </string>
     <string name="destination_point">الوجهة %1$s</string>
     <string name="search_street_in_neighborhood_cities">البحث عن الشارع في المدن المجاورة</string>
-    <string name="intermediate_items_sort_by_distance">فرز (باب لـ باب )</string>
+    <string name="intermediate_items_sort_by_distance">فرز باب لـ باب </string>
     <string name="wait_current_task_finished">الرجاء الانتظار حتى انتهاء المهمة الحالية</string>
     <string name="available_downloads_left">توفر %1$d ملفات للتنزيل</string>
     <string name="cancel_route">ألغ المسار</string>

@@ -1151,7 +1151,7 @@
     
     <string name="search_street_in_neighborhood_cities">Procurar rua na vizinhança</string>
     <string name="intermediate_items_sort_return">Pontos intermédios organizados para otimizar a ordem até ao destino.</string>
-    <string name="intermediate_items_sort_by_distance">Ordem (porta a porta)</string>
+    <string name="intermediate_items_sort_by_distance">Ordem porta a porta</string>
     <string name="use_distance_measurement_help">Toque para marcar um pont.\n
 Pressione e segure no mapa para apagar pontos anteriores.\n
 Pressione e segure no ponto para ver e anexar descrição.\n

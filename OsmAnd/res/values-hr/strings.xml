@@ -972,7 +972,7 @@
     <string name="speak_street_names">Najavi imena ulica (TTS)</string>
     <string name="osb_author_or_password_not_specified">Molimo vas da u postavkama navedete OSM korisničko ime i lozinku</string>
     <string name="search_street_in_neighborhood_cities">Traži ulicu u susjedstvu</string>
-    <string name="intermediate_items_sort_by_distance">Poredaj (od vrata do vrata)</string>
+    <string name="intermediate_items_sort_by_distance">Poredaj od vrata do vrata</string>
     <string name="local_osm_changes_backup_successful">Datoteka OSM izmjena je uspješno generirana %1$s</string>
     <string name="local_osm_changes_backup_failed">Sigurnosna kopija OSM izmjena nije uspjela</string>
     <string name="local_osm_changes_backup">Sigurnosna kopija kao OSM izmjena</string>

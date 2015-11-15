@@ -777,7 +777,7 @@
     <string name="context_menu_item_destination_point">Hedef olarak belirle</string>
     <string name="please_select_address">Önce şehir ya da sokak seç</string>
     <string name="search_street_in_neighborhood_cities">Yakın şehirlerde sokak ara</string>
-    <string name="intermediate_items_sort_by_distance">Sırala (kapıdan kapıya)</string>
+    <string name="intermediate_items_sort_by_distance">Sırala kapıdan kapıya</string>
     <string name="local_osm_changes_backup_successful">OSM değişiklik dosyası başarıyla oluşturuldu</string>
     <string name="local_osm_changes_backup_failed">OSM değişikliklerinin yedeklemesi başarısız</string>
     <string name="delete_point">Mevkiyi sil</string>

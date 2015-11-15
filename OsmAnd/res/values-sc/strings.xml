@@ -188,7 +188,7 @@
 
     <string name="search_street_in_neighborhood_cities">Chirca sas istradas in sas tzitades prus a curtzu</string>
     <string name="intermediate_items_sort_return">Puntos de coladòrgiu cussertaos pro perfetzionare s’andala dae sa positzione atuale a sa destinatzione.</string>
-    <string name="intermediate_items_sort_by_distance">Cusserta (ghenna a ghenna)</string>
+    <string name="intermediate_items_sort_by_distance">Cusserta ghenna a ghenna</string>
     <string name="local_osm_changes_backup_successful">Creatzione documentu de muda OSM %1$s acabada</string>
     <string name="local_osm_changes_backup_failed">Creatzione de sa còpia locale de seguràntzia (backup) de sas modìficas faddida</string>
     <string name="local_osm_changes_backup">Crea una còpia de seguràntzia comente muda OSM</string>

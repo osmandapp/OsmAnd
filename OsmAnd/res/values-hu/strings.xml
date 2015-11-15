@@ -1107,7 +1107,7 @@
     <string name="delete_point">Pont törlése</string>
 
     <string name="intermediate_items_sort_return">Célpontok optimális sorrendbe rendezése a pillanatnyi pozíciódtól a célpont felé.</string>
-    <string name="intermediate_items_sort_by_distance">Rendezés (háztól-házig)</string>
+    <string name="intermediate_items_sort_by_distance">Rendezés háztól-házig</string>
 
     <string name="osb_author_or_password_not_specified">Kérlek adj meg OSM felhasználónevet és jelszót a Beállításokban</string>
     <string name="clear_intermediate_points">Köztes pontok törlése</string>

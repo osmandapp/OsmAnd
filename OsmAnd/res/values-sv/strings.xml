@@ -1036,7 +1036,7 @@
 
     <string name="search_street_in_neighborhood_cities">Sök gator i grannstäder</string>
     <string name="intermediate_items_sort_return">Mellanliggande waypoints ordnade för att optimera deras ordning från aktuell position till destinationen.</string>
-    <string name="intermediate_items_sort_by_distance">Sortera (dörr-till-dörr)</string>
+    <string name="intermediate_items_sort_by_distance">Sortera dörr-till-dörr</string>
     <string name="local_osm_changes_backup_failed">Säkerhetskopieringen av OSM-ändringar misslyckades</string>
     <string name="local_osm_changes_backup">Säkerhetskopiera som OSM-förändring</string>
     <string name="delete_point">Ta bort punkt</string>

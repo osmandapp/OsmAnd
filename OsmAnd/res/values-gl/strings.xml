@@ -430,7 +430,7 @@
     
     <string name="search_street_in_neighborhood_cities">Buscar a rúa nas poboacións viciñas</string>
     <string name="intermediate_items_sort_return">Os puntos de pasaxe intermedios foron reordenados para optimizar a ordenación de camiño ao destino.</string>
-    <string name="intermediate_items_sort_by_distance">Ordenar (porta a porta)</string>
+    <string name="intermediate_items_sort_by_distance">Ordenar porta a porta</string>
     <string name="local_osm_changes_backup_successful">O ficheiro de cambios de OSM foi xerado correctamente %1$s</string>
     <string name="local_osm_changes_backup_failed">Fallou a creación da copia de seguranza dos cambios de OSM</string>
     <string name="local_osm_changes_backup">Crear unha copia de seguranza como cambio de OSM</string>

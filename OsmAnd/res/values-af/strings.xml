@@ -1133,7 +1133,7 @@ OsmAnd (OSM Automated Navigation Directions) is \\\'n kaart en navigasie toepass
     <string name="please_select_address">Kies eers die stad of straat</string>
     <string name="search_street_in_neighborhood_cities">Soek straat in nabygeleë stede</string>
     <string name="intermediate_items_sort_return">Tussen-punte is hergesorteer om die volgorde op pad na die bestemming te optimaliseer.</string>
-    <string name="intermediate_items_sort_by_distance">Sorteer (deur-tot-deur)</string>
+    <string name="intermediate_items_sort_by_distance">Sorteer deur-tot-deur</string>
     <string name="local_osm_changes_backup_failed">Berg van OSM veranderings het gefaal</string>
     <string name="local_osm_changes_backup">Berg as OSM verandering</string>
     <string name="use_distance_measurement_help">* Tik om punt te merk.\n * Tik en hou op die kaart om vorige punt te verwyder.\n * Tik en hou op punt om beskrywing te sien of verander.\n * Tik op meting widget om meer aksies te sien.</string>

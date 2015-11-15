@@ -994,7 +994,7 @@
     <string name="please_select_address">Zvolte nejprve město nebo ulici</string>
     <string name="search_street_in_neighborhood_cities">Hledat ulice v okolních obcích</string>
     <string name="intermediate_items_sort_return">Pořadí mezicílů bylo utříděno, aby měly optimální pořadí na cestě z aktuálního místa do místa určení .</string>
-    <string name="intermediate_items_sort_by_distance">Utřídit (ode dveří ke dveřím)</string>
+    <string name="intermediate_items_sort_by_distance">Utřídit ode dveří ke dveřím</string>
     <string name="osb_author_or_password_not_specified">Prosím zadejte v Nastaveních uživatelské jméno a heslo pro vstup do OSM</string>
     <string name="clear_intermediate_points">Smazat cíle</string>
     <string name="keep_intermediate_points">Zachovat cíle</string>

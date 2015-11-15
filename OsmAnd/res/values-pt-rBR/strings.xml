@@ -686,7 +686,7 @@
     
     <string name="search_street_in_neighborhood_cities">Pesquisar rua na vizinhança</string>
     <string name="intermediate_items_sort_return">Paradas intermediárias reordenadas para otimizar o caminho do local atual até o destino.</string>
-    <string name="intermediate_items_sort_by_distance">Ordem (porta a porta)</string>
+    <string name="intermediate_items_sort_by_distance">Ordem porta a porta</string>
     <string name="local_osm_changes_backup_successful">Arquivo de alterações do OSM gerado com sucesso %1$s</string>
     <string name="local_osm_changes_backup_failed">Falha ao copiar as alterações no OSM</string>
     <string name="local_osm_changes_backup">Copiar como alteração no OSM</string>

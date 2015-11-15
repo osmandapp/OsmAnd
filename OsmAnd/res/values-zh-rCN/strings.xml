@@ -928,7 +928,7 @@
     
 	
 	<string name="settings_preset_descr">每种使用场景的地图和导航设置是相互独立的。在这里设置您的缺省使用场景。</string>
-    <string name="intermediate_items_sort_by_distance">排序 (门到门)</string>
+    <string name="intermediate_items_sort_by_distance">排序 门到门</string>
     <string name="plugin_distance_point_ele">海拔</string>
     <string name="use_kalman_filter_compass_descr">使用卡尔曼滤波避免罗盘误差</string>
     <string name="use_kalman_filter_compass">使用卡尔曼滤波</string>

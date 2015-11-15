@@ -1084,7 +1084,7 @@
     <string name="destination_point">Προορισμός %1$s</string>
     <string name="context_menu_item_destination_point">Ορισμός ως προορισμός</string>
     <string name="please_select_address">Επιλέξτε πόλη ή οδό πρώτα</string>
-    <string name="intermediate_items_sort_by_distance">Ταξινόμηση (πόρτα-πόρτα)</string>
+    <string name="intermediate_items_sort_by_distance">Ταξινόμηση πόρτα-πόρτα</string>
     <string name="local_osm_changes_backup_failed">Η δημιουργία αντιγράφου ασφαλείας αλλαγών OSM απέτυχε</string>
     <string name="local_osm_changes_backup">Δημιουργία αντιγράφου ασφαλείας αλλαγών OSM</string>
     <string name="layer_hillshade">Στρώση σκίασης αναγλύφου</string>
