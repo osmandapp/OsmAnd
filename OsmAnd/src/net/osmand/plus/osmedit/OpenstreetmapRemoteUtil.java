@@ -364,7 +364,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 				if (entity != null && MapUtils.getDistance(entity.getLatLon(), n.getLocation()) < 50) {
 					PoiType poiType = n.getType().getPoiTypeByKeyName(n.getSubType());
 					entity.removeTag(poiType.getOsmTag());
-					entity.putTag(EditPoiData.POI_TYPE_TAG, poiType.getOsmValue());
+					entity.putTag(EditPoiData.POI_TYPE_TAG, poiType.getTranslation());
 					return entity;
 				}
 				return null;

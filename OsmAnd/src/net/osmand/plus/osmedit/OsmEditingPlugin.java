@@ -346,9 +346,13 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	public static String getEditName(OsmPoint point) {
 		String prefix = getPrefix(point);
 		if (point.getGroup() == OsmPoint.Group.POI) {
-			return prefix + " (" + ((OpenstreetmapPoint) point).getSubtype() + ") " + ((OpenstreetmapPoint) point).getName();
+			String subtype = "";
+			if (!Algorithms.isEmpty(((OpenstreetmapPoint) point).getSubtype())) {
+				subtype = " (" + ((OpenstreetmapPoint) point).getSubtype() + ") ";
+			}
+			return prefix + subtype + ((OpenstreetmapPoint) point).getName();
 		} else if (point.getGroup() == OsmPoint.Group.BUG) {
-			return prefix + " (" + ((OsmNotesPoint) point).getAuthor() + ") " + ((OsmNotesPoint) point).getText();
+			return prefix  + ((OsmNotesPoint) point).getText();
 		} else {
 			return prefix;
 		}

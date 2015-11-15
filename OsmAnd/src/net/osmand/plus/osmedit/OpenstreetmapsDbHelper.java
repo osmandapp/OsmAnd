@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import net.osmand.osm.edit.Node;
+import net.osmand.util.Algorithms;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -60,6 +61,9 @@ public class OpenstreetmapsDbHelper extends SQLiteOpenHelper {
 			Iterator<Entry<String, String>> eit = p.getEntity().getTags().entrySet().iterator();
 			while(eit.hasNext()) {
 				Entry<String, String> e = eit.next();
+				if(Algorithms.isEmpty(e.getKey()) || Algorithms.isEmpty(e.getValue())) {
+					continue;
+				}
 				tags.append(e.getKey()).append("$$$").append(e.getValue());
 				if(eit.hasNext()) {
 					tags.append("$$$");

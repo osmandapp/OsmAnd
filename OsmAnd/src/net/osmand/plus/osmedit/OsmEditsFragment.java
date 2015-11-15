@@ -27,7 +27,6 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.edit.Node;
@@ -43,6 +42,7 @@ import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.FavoritesActivity;
+import net.osmand.plus.osmedit.OsmPoint.Action;
 import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment;
 
 import org.xmlpull.v1.XmlSerializer;
@@ -352,6 +352,8 @@ public class OsmEditsFragment extends OsmAndListFragment
 			descr.setText(R.string.action_modify);
 		} else if (child.getAction() == OsmPoint.Action.DELETE) {
 			descr.setText(R.string.action_delete);
+		} else if (child.getAction() == OsmPoint.Action.REOPEN) {
+			descr.setText(R.string.action_modify);
 		}
 	}
 
@@ -465,7 +467,7 @@ public class OsmEditsFragment extends OsmAndListFragment
 				return true;
 			}
 		});
-		if (info instanceof OpenstreetmapPoint) {
+		if (info instanceof OpenstreetmapPoint && info.getAction() != Action.DELETE) {
 			item = optionsMenu.getMenu().add(R.string.poi_context_menu_modify_osm_change)
 					.setIcon(app.getIconsCache().getContentIcon(R.drawable.ic_action_edit_dark));
 			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
@@ -568,6 +570,8 @@ public class OsmEditsFragment extends OsmAndListFragment
 				sz.endTag("", "create");
 				sz.startTag("", "modify");
 				writeContent(sz, points, OsmPoint.Action.MODIFY);
+				writeContent(sz, points, OsmPoint.Action.REOPEN);
+
 				sz.endTag("", "modify");
 				sz.startTag("", "delete");
 				writeContent(sz, points, OsmPoint.Action.DELETE);
@@ -599,6 +603,9 @@ public class OsmEditsFragment extends OsmAndListFragment
 						sz.attribute("", "version", "1");
 						for (String tag : p.getEntity().getTagKeySet()) {
 							String val = p.getEntity().getTag(tag);
+							if (val == null || val.length() == 0 || tag.length() == 0 || "poi_type_tag".equals(tag)) {
+								continue;
+							}
 							sz.startTag("", "tag");
 							sz.attribute("", "k", tag);
 							sz.attribute("", "v", val);

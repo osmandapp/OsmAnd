@@ -305,6 +305,7 @@ public class EditPoiDialogFragment extends DialogFragment {
 
 	private void save() {
 		Node original = editPoiData.getEntity();
+		final boolean offlineEdit = mOpenstreetmapUtil instanceof OpenstreetmapLocalUtil;
 		Node node = new Node(original.getLatitude(), original.getLongitude(), original.getId());
 		OsmPoint.Action action = node.getId() == -1 ? OsmPoint.Action.CREATE : OsmPoint.Action.MODIFY;
 		for (Map.Entry<String, String> tag : editPoiData.getTagValues().entrySet()) {
@@ -319,6 +320,9 @@ public class EditPoiDialogFragment extends DialogFragment {
 					node.putTag(editPoiData.getPoiCategory().getDefaultTag(), tag.getValue());
 
 				}
+				if(offlineEdit && !Algorithms.isEmpty(tag.getValue())) {
+					node.putTag(tag.getKey(), tag.getValue());
+				}
 			} else if (!Algorithms.isEmpty(tag.getKey()) && !Algorithms.isEmpty(tag.getValue())) {
 				node.putTag(tag.getKey(), tag.getValue());
 			}
@@ -330,7 +334,7 @@ public class EditPoiDialogFragment extends DialogFragment {
 					@Override
 					public void run() {
 						OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
-						if (plugin != null && mOpenstreetmapUtil instanceof OpenstreetmapLocalUtil) {
+						if (plugin != null && offlineEdit) {
 							List<OpenstreetmapPoint> points = plugin.getDBPOI().getOpenstreetmapPoints();
 							if (getActivity() instanceof MapActivity && points.size() > 0) {
 								OsmPoint point = points.get(points.size() - 1);
@@ -633,7 +637,7 @@ public class EditPoiDialogFragment extends DialogFragment {
 				builder.setView(ll);
 			}
 			builder.setNegativeButton(R.string.shared_string_cancel, null);
-			builder.setPositiveButton(R.string.shared_string_delete, new DialogInterface.OnClickListener() {
+			builder.setPositiveButton(isLocalEdit ? R.string.shared_string_save : R.string.shared_string_delete, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					String c = comment == null ? null : comment.getText().toString();
