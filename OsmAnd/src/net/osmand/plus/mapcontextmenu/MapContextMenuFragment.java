@@ -303,94 +303,12 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 						velocity.recycle();
 
 						boolean skipHalfScreenState = Math.abs(currentY - dyMain) > skipHalfScreenStateLimit;
-						boolean needCloseMenu = false;
-
-						int oldMenuState = menu.getCurrentMenuState();
-						if (menuBottomViewHeight > 0 && slidingUp) {
-							menu.slideUp();
-							if (skipHalfScreenState) {
-								menu.slideUp();
-							}
-						} else if (slidingDown) {
-							needCloseMenu = !menu.slideDown();
-							if (!needCloseMenu && skipHalfScreenState) {
-								menu.slideDown();
-							}
-						}
-						int newMenuState = menu.getCurrentMenuState();
-						boolean needMapAdjust = oldMenuState != newMenuState && newMenuState != MenuState.FULL_SCREEN;
-
-						if (newMenuState != oldMenuState) {
-							doBeforeMenuStateChange(oldMenuState, newMenuState);
-						}
-
-						applyPosY(currentY, needCloseMenu, needMapAdjust, oldMenuState, newMenuState);
+						changeMenuState(currentY, skipHalfScreenState, slidingUp, slidingDown);
 
 						break;
 
 				}
 				return true;
-			}
-
-			private void applyPosY(final int currentY, final boolean needCloseMenu, boolean needMapAdjust,
-								   final int previousMenuState, final int newMenuState) {
-				final int posY = getPosY(needCloseMenu);
-				if (currentY != posY) {
-					if (posY < currentY) {
-						updateMainViewLayout(posY);
-					}
-
-					if (!oldAndroid()) {
-						mainView.animate().y(posY)
-								.setDuration(200)
-								.setInterpolator(new DecelerateInterpolator())
-								.setListener(new AnimatorListenerAdapter() {
-									@Override
-									public void onAnimationCancel(Animator animation) {
-										if (needCloseMenu) {
-											menu.close();
-										} else {
-											updateMainViewLayout(posY);
-											if (previousMenuState != 0 && newMenuState != 0 && previousMenuState != newMenuState) {
-												doAfterMenuStateChange(previousMenuState, newMenuState);
-											}
-										}
-									}
-
-									@Override
-									public void onAnimationEnd(Animator animation) {
-										if (needCloseMenu) {
-											menu.close();
-										} else {
-											updateMainViewLayout(posY);
-											if (previousMenuState != 0 && newMenuState != 0 && previousMenuState != newMenuState) {
-												doAfterMenuStateChange(previousMenuState, newMenuState);
-											}
-										}
-									}
-								})
-								.start();
-
-						fabView.animate().y(getFabY(posY))
-								.setDuration(200)
-								.setInterpolator(new DecelerateInterpolator())
-								.start();
-
-						if (needMapAdjust) {
-							adjustMapPosition(posY, true);
-						}
-					} else {
-						setViewY(posY, false, needMapAdjust);
-						if (needCloseMenu) {
-							menu.close();
-						} else {
-							updateMainViewLayout(posY);
-							if (previousMenuState != 0 && newMenuState != 0 && previousMenuState != newMenuState) {
-								doAfterMenuStateChange(previousMenuState, newMenuState);
-							}
-						}
-					}
-				}
 			}
 		};
 
@@ -482,6 +400,97 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		getMapActivity().getMapLayers().getMapControlsLayer().setControlsClickable(false);
 
 		return view;
+	}
+
+	public void openMenuFullScreen() {
+		changeMenuState(getViewY(), true, true, false);
+	}
+
+	private void changeMenuState(int currentY, boolean skipHalfScreenState,
+								boolean slidingUp, boolean slidingDown) {
+		boolean needCloseMenu = false;
+
+		int oldMenuState = menu.getCurrentMenuState();
+		if (menuBottomViewHeight > 0 && slidingUp) {
+			menu.slideUp();
+			if (skipHalfScreenState) {
+				menu.slideUp();
+			}
+		} else if (slidingDown) {
+			needCloseMenu = !menu.slideDown();
+			if (!needCloseMenu && skipHalfScreenState) {
+				menu.slideDown();
+			}
+		}
+		int newMenuState = menu.getCurrentMenuState();
+		boolean needMapAdjust = oldMenuState != newMenuState && newMenuState != MenuState.FULL_SCREEN;
+
+		if (newMenuState != oldMenuState) {
+			doBeforeMenuStateChange(oldMenuState, newMenuState);
+		}
+
+		applyPosY(currentY, needCloseMenu, needMapAdjust, oldMenuState, newMenuState);
+	}
+
+	private void applyPosY(final int currentY, final boolean needCloseMenu, boolean needMapAdjust,
+						   final int previousMenuState, final int newMenuState) {
+		final int posY = getPosY(needCloseMenu);
+		if (currentY != posY) {
+			if (posY < currentY) {
+				updateMainViewLayout(posY);
+			}
+
+			if (!oldAndroid()) {
+				mainView.animate().y(posY)
+						.setDuration(200)
+						.setInterpolator(new DecelerateInterpolator())
+						.setListener(new AnimatorListenerAdapter() {
+							@Override
+							public void onAnimationCancel(Animator animation) {
+								if (needCloseMenu) {
+									menu.close();
+								} else {
+									updateMainViewLayout(posY);
+									if (previousMenuState != 0 && newMenuState != 0 && previousMenuState != newMenuState) {
+										doAfterMenuStateChange(previousMenuState, newMenuState);
+									}
+								}
+							}
+
+							@Override
+							public void onAnimationEnd(Animator animation) {
+								if (needCloseMenu) {
+									menu.close();
+								} else {
+									updateMainViewLayout(posY);
+									if (previousMenuState != 0 && newMenuState != 0 && previousMenuState != newMenuState) {
+										doAfterMenuStateChange(previousMenuState, newMenuState);
+									}
+								}
+							}
+						})
+						.start();
+
+				fabView.animate().y(getFabY(posY))
+						.setDuration(200)
+						.setInterpolator(new DecelerateInterpolator())
+						.start();
+
+				if (needMapAdjust) {
+					adjustMapPosition(posY, true);
+				}
+			} else {
+				setViewY(posY, false, needMapAdjust);
+				if (needCloseMenu) {
+					menu.close();
+				} else {
+					updateMainViewLayout(posY);
+					if (previousMenuState != 0 && newMenuState != 0 && previousMenuState != newMenuState) {
+						doAfterMenuStateChange(previousMenuState, newMenuState);
+					}
+				}
+			}
+		}
 	}
 
 	public void updateMapCenter(LatLon mapCenter) {

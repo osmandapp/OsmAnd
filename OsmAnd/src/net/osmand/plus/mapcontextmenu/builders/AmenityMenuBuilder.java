@@ -45,21 +45,36 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			buildRowDivider(view, false);
 		}
 
+		final String txt;
+		if (!Algorithms.isEmpty(textPrefix)) {
+			txt = textPrefix + ": " + text;
+		} else {
+			txt = text;
+		}
+
 		LinearLayout ll = new LinearLayout(view.getContext());
 		ll.setOrientation(LinearLayout.HORIZONTAL);
 		LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		ll.setLayoutParams(llParams);
+		ll.setBackgroundResource(resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
+		ll.setOnLongClickListener(new View.OnLongClickListener() {
+			@Override
+			public boolean onLongClick(View v) {
+				copyToClipboard(txt, view.getContext());
+				return true;
+			}
+		});
 
 		// Icon
 		LinearLayout llIcon = new LinearLayout(view.getContext());
 		llIcon.setOrientation(LinearLayout.HORIZONTAL);
-		llIcon.setLayoutParams(new LinearLayout.LayoutParams(dpToPx(72f), isFirstRow() ? dpToPx(48f) - dpToPx(SHADOW_HEIGHT_BOTTOM_DP) : dpToPx(48f)));
+		llIcon.setLayoutParams(new LinearLayout.LayoutParams(dpToPx(72f), dpToPx(48f)));
 		llIcon.setGravity(Gravity.CENTER_VERTICAL);
 		ll.addView(llIcon);
 
 		ImageView iconView = new ImageView(view.getContext());
 		LinearLayout.LayoutParams llIconParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-		llIconParams.setMargins(dpToPx(16f), isFirstRow() ? dpToPx(12f) - dpToPx(SHADOW_HEIGHT_BOTTOM_DP / 2f) : dpToPx(12f), dpToPx(32f), dpToPx(12f));
+		llIconParams.setMargins(dpToPx(16f), dpToPx(12f), dpToPx(32f), dpToPx(12f));
 		llIconParams.gravity = Gravity.CENTER_VERTICAL;
 		iconView.setLayoutParams(llIconParams);
 		iconView.setScaleType(ImageView.ScaleType.CENTER);
@@ -73,7 +88,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 		TextView textView = new TextView(view.getContext());
 		LinearLayout.LayoutParams llTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-		llTextParams.setMargins(0, isFirstRow() ? dpToPx(8f) - dpToPx(SHADOW_HEIGHT_BOTTOM_DP) : dpToPx(8f), 0, dpToPx(8f));
+		llTextParams.setMargins(0, dpToPx(8f), 0, dpToPx(8f));
 		textView.setLayoutParams(llTextParams);
 		textView.setTextSize(16);
 		textView.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_info_text_light : R.color.ctx_menu_info_text_dark));
@@ -90,11 +105,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			textView.setMinLines(1);
 			textView.setMaxLines(10);
 		}
-		if (!Algorithms.isEmpty(textPrefix)) {
-			textView.setText(textPrefix + ": " + text);
-		} else {
-			textView.setText(text);
-		}
+		textView.setText(txt);
 		if (textColor > 0) {
 			textView.setTextColor(view.getResources().getColor(textColor));
 		}
@@ -114,7 +125,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 					POIMapLayer.showWikipediaDialog(view.getContext(), app, amenity);
 				}
 			});
-		} else if (isText) {
+		} else if (isText && text.length() > 200) {
 			ll.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {

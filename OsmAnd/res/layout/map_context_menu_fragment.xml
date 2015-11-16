@@ -85,7 +85,7 @@
                             android:id="@+id/context_menu_close_btn_layout"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:minWidth="66dp"
+                            android:minWidth="76dp"
                             android:orientation="horizontal">
 
                             <Button
@@ -136,7 +136,7 @@
                                 android:id="@+id/compass_layout"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:minWidth="66dp"
+                                android:minWidth="76dp"
                                 android:orientation="horizontal">
 
                                 <ImageView

@@ -427,6 +427,12 @@ public class MapContextMenu extends MenuTitleController {
 		}
 	}
 
+	public void openMenuFullScreen() {
+		WeakReference<MapContextMenuFragment> fragmentRef = findMenuFragment();
+		if (fragmentRef != null)
+			fragmentRef.get().openMenuFullScreen();
+	}
+
 	public boolean slideUp() {
 		return menuController != null && menuController.slideUp();
 	}
@@ -535,6 +541,10 @@ public class MapContextMenu extends MenuTitleController {
 		if (menuController != null) {
 			menuController.buildCustomAddressLine(ll);
 		}
+	}
+
+	public boolean hasHiddenBottomInfo() {
+		return getCurrentMenuState() == MenuState.HEADER_ONLY;
 	}
 
 	public LatLon getMyLocation() {

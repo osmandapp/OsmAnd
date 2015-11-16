@@ -1,10 +1,12 @@
 package net.osmand.plus.mapcontextmenu;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.text.ClipboardManager;
 import android.text.util.Linkify;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -15,6 +17,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
@@ -103,7 +106,7 @@ public class MenuBuilder {
 		return buildRow(view, getRowIcon(iconId), text, textColor, needLinks, textLinesLimit);
 	}
 
-	protected View buildRow(final View view, Drawable icon, String text, int textColor, boolean needLinks, int textLinesLimit) {
+	protected View buildRow(final View view, Drawable icon, final String text, int textColor, boolean needLinks, int textLinesLimit) {
 
 		if (!isFirstRow()) {
 			buildRowDivider(view, false);
@@ -113,17 +116,25 @@ public class MenuBuilder {
 		ll.setOrientation(LinearLayout.HORIZONTAL);
 		LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		ll.setLayoutParams(llParams);
+		ll.setBackgroundResource(resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
+		ll.setOnLongClickListener(new View.OnLongClickListener() {
+			@Override
+			public boolean onLongClick(View v) {
+				copyToClipboard(text, view.getContext());
+				return true;
+			}
+		});
 
 		// Icon
 		LinearLayout llIcon = new LinearLayout(view.getContext());
 		llIcon.setOrientation(LinearLayout.HORIZONTAL);
-		llIcon.setLayoutParams(new LinearLayout.LayoutParams(dpToPx(72f), isFirstRow() ? dpToPx(48f) - dpToPx(SHADOW_HEIGHT_BOTTOM_DP) : dpToPx(48f)));
+		llIcon.setLayoutParams(new LinearLayout.LayoutParams(dpToPx(72f), dpToPx(48f)));
 		llIcon.setGravity(Gravity.CENTER_VERTICAL);
 		ll.addView(llIcon);
 
 		ImageView iconView = new ImageView(view.getContext());
 		LinearLayout.LayoutParams llIconParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-		llIconParams.setMargins(dpToPx(16f), isFirstRow() ? dpToPx(12f) - dpToPx(SHADOW_HEIGHT_BOTTOM_DP / 2f) : dpToPx(12f), dpToPx(32f), dpToPx(12f));
+		llIconParams.setMargins(dpToPx(16f), dpToPx(12f), dpToPx(32f), dpToPx(12f));
 		llIconParams.gravity = Gravity.CENTER_VERTICAL;
 		iconView.setLayoutParams(llIconParams);
 		iconView.setScaleType(ImageView.ScaleType.CENTER);
@@ -137,7 +148,7 @@ public class MenuBuilder {
 
 		TextView textView = new TextView(view.getContext());
 		LinearLayout.LayoutParams llTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-		llTextParams.setMargins(0, isFirstRow() ? dpToPx(8f) - dpToPx(SHADOW_HEIGHT_BOTTOM_DP) : dpToPx(8f), 0, dpToPx(8f));
+		llTextParams.setMargins(0, dpToPx(8f), 0, dpToPx(8f));
 		textView.setLayoutParams(llTextParams);
 		textView.setTextSize(16);
 		textView.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_info_text_light : R.color.ctx_menu_info_text_dark));
@@ -168,6 +179,13 @@ public class MenuBuilder {
 		return ll;
 	}
 
+	protected void copyToClipboard(String text, Context ctx) {
+		((ClipboardManager) app.getSystemService(Activity.CLIPBOARD_SERVICE)).setText(text);
+		Toast.makeText(ctx,
+				ctx.getResources().getString(R.string.copied_to_clipboard) + ":\n" + text,
+				Toast.LENGTH_SHORT).show();
+	}
+
 	protected void buildButtonRow(final View view, Drawable buttonIcon, String text, OnClickListener onClickListener) {
 		LinearLayout ll = new LinearLayout(view.getContext());
 		ll.setOrientation(LinearLayout.HORIZONTAL);
@@ -178,7 +196,7 @@ public class MenuBuilder {
 		// Empty
 		LinearLayout llIcon = new LinearLayout(view.getContext());
 		llIcon.setOrientation(LinearLayout.HORIZONTAL);
-		llIcon.setLayoutParams(new LinearLayout.LayoutParams(dpToPx(62f), isFirstRow() ? dpToPx(58f) - dpToPx(SHADOW_HEIGHT_BOTTOM_DP) : dpToPx(58f)));
+		llIcon.setLayoutParams(new LinearLayout.LayoutParams(dpToPx(62f), dpToPx(58f)));
 		llIcon.setGravity(Gravity.CENTER_VERTICAL);
 		ll.addView(llIcon);
 
