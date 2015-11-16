@@ -146,7 +146,7 @@ public class MapActivityActions implements DialogProvider {
 
 	public void directionTo(double latitude, double longitude, PointDescription pd) {
 		final TargetPointsHelper targets = getMyApplication().getTargetPointsHelper();
-		targets.navigateToPoint(new LatLon(latitude, longitude), true, -1, pd);
+		targets.navigateToPoint(new LatLon(latitude, longitude), true, targets.getIntermediatePoints().size() + 1, pd);
 		enterRoutePlanningMode(null, null, false);
 	}
 

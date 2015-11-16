@@ -21,7 +21,6 @@ public class DashDashboardOrDrawerFragment extends DashBaseFragment {
 					return settings.SHOW_CARD_TO_CHOOSE_DRAWER.get();
 				}
 			};
-	private DismissListener dismissCallback;
 
 	@Override
 	public View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
