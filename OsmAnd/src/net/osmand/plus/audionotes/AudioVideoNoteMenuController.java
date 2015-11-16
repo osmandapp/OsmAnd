@@ -1,4 +1,4 @@
-package net.osmand.plus.mapcontextmenu.controllers;
+package net.osmand.plus.audionotes;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,11 +12,9 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.mapcontextmenu.MapContextMenuFragment;
 import net.osmand.plus.mapcontextmenu.MenuController;
-import net.osmand.plus.mapcontextmenu.builders.AudioVideoNoteMenuBuilder;
 
 import java.lang.ref.WeakReference;
 

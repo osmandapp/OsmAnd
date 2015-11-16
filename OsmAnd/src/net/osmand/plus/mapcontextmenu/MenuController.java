@@ -9,7 +9,6 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.GPXUtilities.WptPt;
-import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -18,16 +17,16 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
-import net.osmand.plus.mapcontextmenu.controllers.AudioVideoNoteMenuController;
-import net.osmand.plus.mapcontextmenu.controllers.EditPOIMenuController;
+import net.osmand.plus.audionotes.AudioVideoNoteMenuController;
+import net.osmand.plus.osmedit.EditPOIMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.FavouritePointMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.GpxItemMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.HistoryMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.MapDataMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.MyLocationMenuController;
-import net.osmand.plus.mapcontextmenu.controllers.OsMoMenuController;
-import net.osmand.plus.mapcontextmenu.controllers.OsmBugMenuController;
-import net.osmand.plus.mapcontextmenu.controllers.ParkingPositionMenuController;
+import net.osmand.plus.osmo.OsMoMenuController;
+import net.osmand.plus.osmedit.OsmBugMenuController;
+import net.osmand.plus.parkingpoint.ParkingPositionMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.PointDescriptionMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.TargetPointMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.WptPtMenuController;
@@ -38,7 +37,7 @@ import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
 
 public abstract class MenuController extends BaseMenuController {
 
-	public class MenuState {
+	public static class MenuState {
 		public static final int HEADER_ONLY = 1;
 		public static final int HALF_SCREEN = 2;
 		public static final int FULL_SCREEN = 4;

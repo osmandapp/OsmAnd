@@ -10,6 +10,7 @@ import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuType;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleButtonController;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleProgressController;
@@ -443,7 +444,7 @@ public class MapContextMenu extends MenuTitleController {
 		if (menuController != null) {
 			return menuController.getCurrentMenuState();
 		} else {
-			return MenuController.MenuState.HEADER_ONLY;
+			return MenuState.HEADER_ONLY;
 		}
 	}
 

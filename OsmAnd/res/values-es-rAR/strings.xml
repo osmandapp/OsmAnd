@@ -1956,7 +1956,7 @@
     <string name="poi_context_menu_modify_osm_change">Modificar cambio OSM</string>
     <string name="osm_edit_modified_poi">PDI de OSM modificado</string>
     <string name="osm_edit_deleted_poi">PDI de OSM borrado</string>
-    <string name="context_menu_item_open_note">Nota OSM abierta</string>
+    <string name="context_menu_item_open_note">Abrir nota OSM</string>
     <string name="osm_edit_reopened_note">Nota OSM reabierta</string>
     <string name="osm_edit_commented_note">Nota OSM comentada</string>
     <string name="osm_edit_removed_note">Nota OSM borrada</string>
@@ -1979,4 +1979,5 @@
     <string name="rendering_attr_roadStyle_description">Estilo de carretera</string>
     <string name="poi_dialog_reopen">Reabrir</string>
 	<string name="osm_save_offline">Guardar sin conexión</string>
+    <string name="release_2_2">" • Nueva interfaz de usuario sensible al contexto para aprovechar lugares en el mapa y en otra pantallas\n\n• La pantalla del mapa, ahora se inicia directamente, a menos que \'Mostrar panel de control en el arranque de la aplicación\' este seleccionado\n\n• El tablero de instrumentos, posee el opción de que tarjetas se visualizarán\n\n• Los mapas, pueden seleccionarse directamente y descargar el mapa mundial\n\n• Mejor recálculo de la ruta (después de reiterados intentos, el motor ahora sugiere una ruta diferente)\n\n• La búsqueda de PDI, ahora soporta consultas más específicas\n\n• Mejoras en PDI y funcionalidad de edición OSM\n\n• Se rediseñó la estructura e interfaz de los datos de mapas\n\n y más... "</string>
     </resources>
