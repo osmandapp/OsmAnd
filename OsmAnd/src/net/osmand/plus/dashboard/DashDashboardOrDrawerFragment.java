@@ -43,6 +43,7 @@ public class DashDashboardOrDrawerFragment extends DashBaseFragment {
 				settings.SHOW_DASHBOARD_ON_MAP_SCREEN.set(false);
 				settings.SHOW_CARD_TO_CHOOSE_DRAWER.set(false);
 				dashboard.hideFragmentByTag(TAG);
+				dashboard.hideDashboard();
 			}
 		});
 		return view;
