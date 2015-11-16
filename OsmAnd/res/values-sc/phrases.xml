@@ -1689,4 +1689,10 @@
 	<string name="poi_elevator_yes">Cun ascensore</string>
 	<string name="poi_elevator_no">Chene ascensore</string>
 
+	<string name="poi_technical_monument">Monumentu tècnicu</string>
+
+	<string name="poi_office_camping">Ufìtziu de su campègiu</string>
+	<string name="poi_model_aerodrome">Aeròdromu pro modellinos</string>
+	<string name="poi_street_lamp">Lampione</string>
+
 	</resources>
