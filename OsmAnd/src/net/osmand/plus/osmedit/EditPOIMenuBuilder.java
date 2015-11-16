@@ -1,4 +1,4 @@
-package net.osmand.plus.mapcontextmenu.builders;
+package net.osmand.plus.osmedit;
 
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
@@ -12,9 +12,6 @@ import android.widget.TextView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
-import net.osmand.plus.osmedit.OpenstreetmapPoint;
-import net.osmand.plus.osmedit.OsmNotesPoint;
-import net.osmand.plus.osmedit.OsmPoint;
 
 import java.util.Map;
 
