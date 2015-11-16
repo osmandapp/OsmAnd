@@ -1809,4 +1809,64 @@
 	<string name="poi_resource_coal">Carbó</string>
 	<string name="poi_resource_copper">Coure</string>
 	<string name="poi_resource_diamond">Diamants</string>
+	<string name="poi_wetland_mud">Fangar</string>
+
+	<string name="poi_beach_sand">Tipus de platja: sorra</string>
+	<string name="poi_beach_shingle">Tipus de platja: còdols</string>
+	<string name="poi_beach_rocky">Tipus de platja: roques</string>
+
+	<string name="poi_chimney">Xemeneia</string>
+	<string name="poi_palm">Palmera</string>
+	<string name="poi_cypress">Xiprer</string>
+	<string name="poi_flagpole">Asta</string>
+
+	<string name="poi_bench_yes">Amb seients</string>
+	<string name="poi_bench_no">Sense seients</string>
+	<string name="poi_waste_basket_yes">Amb cossi de la brossa</string>
+	<string name="poi_waste_basket_no">Sense cossi de la brossa</string>
+
+	<string name="poi_shelter_type_public_transport">Tipus de refugi: transport públic</string>
+	<string name="poi_shelter_type_picnic_shelter">Tipus de refugi: glorieta</string>
+	<string name="poi_shelter_type_weather_shelter">Tipus de refugi: refugi meteorològic</string>
+	<string name="poi_shelter_type_basic_hut">Tipus de refugi: cabana bàsica</string>
+	<string name="poi_shelter_type_building">Tipus de refugi: edifici</string>
+	<string name="poi_shelter_type_rock_shelter">Tipus de refugi: refugi de roca</string>
+	<string name="poi_shelter_type_sun_shelter">Tipus de refugi: refugi solar</string>
+	<string name="poi_shelter_type_tent">Tipus de refugi: tenda</string>
+	<string name="poi_shelter_type_abandoned">Tipus de refugi: abandonat</string>
+
+	<string name="poi_internet_access_type_wlan">Tipus d\'accés d\'Internet: wlan</string>
+	<string name="poi_internet_access_type_terminal">Tipus d\'accés d\'Internet: terminal</string>
+	<string name="poi_internet_access_type_wired">Tipus d\'accés d\'Internet: per cable</string>
+	<string name="poi_internet_access_type_public">Tipus d\'accés d\'Internet: públic</string>
+	<string name="poi_internet_access_type_service">Tipus d\'accés d\'Internet: servei</string>
+	<string name="poi_internet_access_type_no">Tipus d\'accés d\'Internet: cap</string>
+
+	<string name="poi_maxwidth">Amplada màxima</string>
+	<string name="poi_iata">Codi IATA</string>
+	<string name="poi_icao">Codi ICAO</string>
+	<string name="poi_faa">Codi FAA</string>
+	
+	<string name="poi_artwork_type_sculpture">Tipus d\'obra artística: escultura</string>
+	<string name="poi_artwork_type_statue">Tipus d\'obra artística: estàtua</string>
+	<string name="poi_artwork_type_mural">Tipus d\'obra artística: mural</string>
+	<string name="poi_artwork_type_architecture">Tipus d\'obra artística: arquitectura</string>
+	<string name="poi_artwork_type_painting">Tipus d\'obra artística: pintura</string>
+	<string name="poi_artwork_type_stone">Tipus d\'obra artística: pedra</string>
+	<string name="poi_artwork_type_bust">Tipus d\'obra artística: bust</string>
+	<string name="poi_artwork_type_installation">Tipus d\'obra artística: instal·lació</string>
+	<string name="poi_artwork_type_mosaic">Tipus d\'obra artística: mosaic</string>
+	<string name="poi_artwork_type_relief">Tipus d\'obra artística: relleu</string>
+	<string name="poi_artwork_type_graffiti">Tipus d\'obra artística: grafit</string>
+	<string name="poi_artwork_type_stele">Tipus d\'obra artística: estela</string>
+	<string name="poi_artwork_type_fountain">Tipus d\'obra artística: font</string>
+
+	<string name="poi_width">Amplada</string>
+
+	<string name="poi_architect_name">Arquitecte</string>
+
+	<string name="poi_architecture_modern">Arquitectura: moderna</string>
+	<string name="poi_architecture_stalinist_neoclassicism">Arquitectura: neoclàssica estalinista</string>
+	<string name="poi_architecture_eclectic">Arquitectura: eclèctica</string>
+	<string name="poi_architecture_contemporary">Arquitectura: contemporània</string>
 	</resources>
