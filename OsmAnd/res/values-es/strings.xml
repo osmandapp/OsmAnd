@@ -1975,4 +1975,5 @@
     <string name="rendering_attr_currentTrackColor_description">Color del GPX</string>
     <string name="rendering_attr_currentTrackWidth_description">Ancho del GPX</string>
     <string name="rendering_attr_roadStyle_description">Estilo de carretera</string>
+    <string name="osm_save_offline">Guardar sin conexión</string>
     </resources>
