@@ -3,7 +3,9 @@ package net.osmand.plus.download.ui;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v7.internal.view.ContextThemeWrapper;
 import android.support.v7.widget.Toolbar;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +51,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 	private SearchListAdapter listAdapter;
 	private BannerAndDownloadFreeVersion banner;
 	private String searchText;
-	private SearchView search;
+	private SearchView searchView;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -100,17 +102,19 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 		listView.setOnItemClickListener(this);
 		listView.setAdapter(listAdapter);
 
-		search = new SearchView(getActivity());
+		TypedValue typedValue = new TypedValue();
+		getActivity().getTheme().resolveAttribute(R.attr.toolbar_theme, typedValue, true);
+		searchView = new SearchView(new ContextThemeWrapper(getActivity(), typedValue.data));
 		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
 				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		params.setMargins(0, 0, 0, 0);
-		search.setLayoutParams(params);
-		toolbar.addView(search);
+		searchView.setLayoutParams(params);
+		toolbar.addView(searchView);
 
-		search.setOnCloseListener(new SearchView.OnCloseListener() {
+		searchView.setOnCloseListener(new SearchView.OnCloseListener() {
 			@Override
 			public boolean onClose() {
-				if (search.getQuery().length() == 0) {
+				if (searchView.getQuery().length() == 0) {
 					dismiss();
 					return true;
 				}
@@ -118,13 +122,13 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 			}
 		});
 		
-		search.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
+		searchView.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
 			@Override
 			public void onFocusChange(View v, boolean hasFocus) {
 			}
 		});
 
-		search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+		searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 			@Override
 			public boolean onQueryTextSubmit(String query) {
 				return false;
@@ -181,9 +185,9 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 	@Override
 	public void onResume() {
 		super.onResume();
-		search.setIconified(false);
+		searchView.setIconified(false);
 		if (!Algorithms.isEmpty(searchText)) {
-			search.setQuery(searchText, true);
+			searchView.setQuery(searchText, true);
 		}
 	}
 
