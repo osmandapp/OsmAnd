@@ -1956,7 +1956,7 @@
     <string name="poi_context_menu_modify_osm_change">Modificar cambio OSM</string>
     <string name="osm_edit_modified_poi">PDI de OSM modificado</string>
     <string name="osm_edit_deleted_poi">PDI de OSM borrado</string>
-    <string name="context_menu_item_open_note">Nota OSM abierta</string>
+    <string name="context_menu_item_open_note">Abrir nota OSM</string>
     <string name="osm_edit_reopened_note">Nota OSM reabierta</string>
     <string name="osm_edit_commented_note">Nota OSM comentada</string>
     <string name="osm_edit_removed_note">Nota OSM borrada</string>
