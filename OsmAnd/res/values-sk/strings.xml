@@ -1926,7 +1926,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="rendering_attr_roadStyle_description">Štýl cesty</string>
     <string name="poi_dialog_reopen">Znovuotvoriť</string>
 	<string name="use_dashboard">Použiť úvodný panel</string>
-    <string name="use_drawer">Použiť zásuvku</string>
+    <string name="use_drawer">Použiť výsuvné menu</string>
     <string name="dashboard_or_drawer_title">Nové menu</string>
     <string name="dashboard_or_drawer_description">Môžete zvoliť čo chcete používať - úvodný panel alebo výsuvné menu. Toto nastavenie môžte neskôr zmeniť v nastaveniach.</string>
     </resources>
