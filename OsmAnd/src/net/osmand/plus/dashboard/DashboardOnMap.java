@@ -904,12 +904,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 		transaction.show(frag).commit();
 	}
 
-	// TODO: 11/13/15 Remove
-	public boolean hasCriticalMessages() {
-		final OsmandSettings settings = getMyApplication().getSettings();
-		return rateUsShouldShow.shouldShow(settings, mapActivity, DashRateUsFragment.TAG);
-	}
-
 	View getParentView() {
 		return dashboardView;
 	}
