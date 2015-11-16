@@ -2046,4 +2046,9 @@
     <string name="rendering_attr_currentTrackColor_description">GPX-farve</string>
     <string name="rendering_attr_currentTrackWidth_description">GPX-bredde</string>
     <string name="rendering_attr_roadStyle_description">Vejformat</string>
+    <string name="copied_to_clipboard">Kopieret til udklipsholder</string>
+    <string name="use_dashboard">Brug oversigt</string>
+    <string name="use_drawer">Brug skuffe</string>
+    <string name="dashboard_or_drawer_title">Ny menu</string>
+    <string name="dashboard_or_drawer_description">Vælg hvad man skal bruge, oversigt eller skuffen menuen. Kan senerre ændres i indstillinger.</string>
     </resources>
