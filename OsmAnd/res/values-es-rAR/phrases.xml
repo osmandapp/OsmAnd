@@ -2372,15 +2372,15 @@
 
 <string name="poi_square">Plaza</string>
 
-	<string name="poi_building_type_church">Edificación: Iglesia</string>
-	<string name="poi_building_type_chapel">Edificación: Capilla</string>
-	<string name="poi_building_type_mosque">Edificación: Mezquita</string>
-	<string name="poi_building_type_temple">Edificación: Templo</string>
-	<string name="poi_building_type_cathedral">Edificación: Catedral</string>
-	<string name="poi_building_type_monastery">Edificación: Monasterio</string>
-	<string name="poi_building_type_basilica">Edificación: Basílica</string>
-	<string name="poi_building_type_synagogue">Edificación: Sinagoga</string>
-	<string name="poi_building_type_shrine">Edificación: Santuario</string>
+	<string name="poi_building_type_church">Iglesia</string>
+	<string name="poi_building_type_chapel">Capilla</string>
+	<string name="poi_building_type_mosque">Mezquita</string>
+	<string name="poi_building_type_temple">Templo</string>
+	<string name="poi_building_type_cathedral">Catedral</string>
+	<string name="poi_building_type_monastery">Monasterio</string>
+	<string name="poi_building_type_basilica">Basílica</string>
+	<string name="poi_building_type_synagogue">Sinagoga</string>
+	<string name="poi_building_type_shrine">Santuario</string>
 
 <string name="poi_artist_name">Artista</string>
 	<string name="poi_sculptor">Escultor</string>
@@ -2484,6 +2484,6 @@
 
 	<string name="poi_craft_electronics">Reparación de electrodomésticos</string>
 
-<string name="poi_fireworks">Pirotecnia</string>
+<string name="poi_fireworks">Artificios pirotécnicos</string>
 
 </resources>
