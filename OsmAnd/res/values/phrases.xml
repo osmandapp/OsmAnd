@@ -1581,15 +1581,15 @@
 	<string name="poi_drive_in_yes">Drive-in: yes</string>
 	<string name="poi_drive_in_no">Drive-in: no</string>
 	<string name="poi_drive_through_yes">Drive-through: yes</string>
-	<string name="poi_drive_through_no">Drive-through: yes</string>
+	<string name="poi_drive_through_no">Drive-through: no</string>
 
 	<string name="poi_brewery_additional">Brewery name</string>
 	<string name="poi_microbrewery_yes">Microbrewery</string>
 	<string name="poi_microbrewery_no">No microbrewery</string>
 
-	<string name="poi_takeaway_yes">Takeway</string>
-	<string name="poi_takeaway_no">No takeway</string>
-	<string name="poi_takeaway_only">Takeway only</string>
+	<string name="poi_takeaway_yes">Takeaway</string>
+	<string name="poi_takeaway_no">No takeaway</string>
+	<string name="poi_takeaway_only">Takeaway only</string>
 
 	<string name="poi_delivery_yes">Delivery</string>
 	<string name="poi_delivery_no">No delivery</string>
