@@ -9,6 +9,17 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="release_2_2">
+        \u2022 New context-sensitive UI for tapping locations on the map and on other screens\n\n
+        \u2022 Map screen is now launched directly unless \'Show Dashboard on app start\' is selected\n\n
+        \u2022 Dashboard has configuration how cards could be displayed\n\n
+        \u2022 Maps could be directly selected and download on worldwide map \n\n
+        \u2022 Better route recalculation (after repeated attempts engine now suggests a different route)\n\n
+        \u2022 POI Search now supports more specific queries\n\n
+		\u2022 Imporoved POI and OSM Editing functionality\n\n
+        \u2022 Map data download structure and interface reworked\n\n
+        and more...
+        </string>
     <string name="osm_save_offline">Save offline</string>
     <string name="osm_edit_modified_poi">Modified OSM POI</string>
     <string name="osm_edit_deleted_poi">Deleted OSM POI</string>

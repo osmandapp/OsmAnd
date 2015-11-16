@@ -359,10 +359,10 @@ public class MapActivityActions implements DialogProvider {
 					intent.putExtra(SearchActivity.SEARCH_LON, longitude);
 					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					mapActivity.startActivity(intent);
-				} else if (standardId == R.string.context_menu_item_directions_to) {
-					final TargetPointsHelper targets = getMyApplication().getTargetPointsHelper();
-					targets.navigateToPoint(new LatLon(latitude, longitude), true, -1, null);
-					enterRoutePlanningMode(null, null, false);
+				} else if (standardId == R.string.context_menu_item_directions_from) {
+					mapActivity.getContextMenu().hide();
+					enterRoutePlanningMode(new LatLon(latitude, longitude),
+							mapActivity.getContextMenu().getPointDescription(), false);
 				}
 			}
 		});
