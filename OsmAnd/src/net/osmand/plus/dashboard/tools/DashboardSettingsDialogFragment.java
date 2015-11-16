@@ -73,8 +73,8 @@ public class DashboardSettingsDialogFragment extends DialogFragment
 		textView.setText(R.string.show_on_start);
 		final CompoundButton compoundButton = (CompoundButton) view.findViewById(R.id.check_item);
 		// FIXME Yura add settings.SHOW_DASHBOARD_ON_MAP_SCREEN
-		compoundButton.setChecked(settings.SHOW_DASHBOARD_ON_MAP_SCREEN.get());
-		textView.setTextColor(settings.SHOW_DASHBOARD_ON_MAP_SCREEN.get() ? textColorPrimary
+		compoundButton.setChecked(settings.SHOW_DASHBOARD_ON_START.get());
+		textView.setTextColor(settings.SHOW_DASHBOARD_ON_START.get() ? textColorPrimary
 				: textColorSecondary);
 		compoundButton.setOnCheckedChangeListener(
 				new CompoundButton.OnCheckedChangeListener() {
@@ -110,7 +110,7 @@ public class DashboardSettingsDialogFragment extends DialogFragment
 							}
 						}
 						mapActivity.getDashboard().refreshDashboardFragments();
-						settings.SHOW_DASHBOARD_ON_MAP_SCREEN.set(compoundButton.isChecked());
+						settings.SHOW_DASHBOARD_ON_START.set(compoundButton.isChecked());
 					}
 				})
 				.setNegativeButton(R.string.shared_string_cancel, null);
