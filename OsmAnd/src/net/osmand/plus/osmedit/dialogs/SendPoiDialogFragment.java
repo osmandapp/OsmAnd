@@ -94,6 +94,8 @@ public class SendPoiDialogFragment extends DialogFragment {
 	}
 
 	public interface ProgressDialogPoiUploader {
+		
 		void showProgressDialog(OsmPoint[] points, boolean closeChangeSet);
+		
 	}
 }
