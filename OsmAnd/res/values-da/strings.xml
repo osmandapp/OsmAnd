@@ -2041,4 +2041,9 @@
 	<string name="osn_close_dialog_success">Fejl lukket</string>
 	<string name="osm_edit_modified_poi">Redigeret OSM IP</string>
     <string name="osm_edit_deleted_poi">Slettet OSM IP</string>
+    <string name="release_2_2">" • Ny kontekstafhængig UI til aflytning steder på kort og på andre skærme\n\n  • Kort skærmen er nu lanceret direkte, medmindre \"Vis Dashboard på app start \'er valgt\n\n  • Dashboard har konfiguration hvordan kort kunne blive vist\n\n  • Kort kunne vælges direkte og download på verdensplan kort\n\n  • Bedre rutegenberegning (efter gentagen motor forsøg tyder nu en anden vej)\n\n  • POI søgning understøtter nu mere specifikke forespørgsler\n\n  • Imporoved POI og OSM redigering funktionalitet\n\n  • Kort dataoverførsel struktur og grænseflade omarbejdet\n\n  og mere... "</string>
+    <string name="osm_save_offline">Gem offline</string>
+    <string name="rendering_attr_currentTrackColor_description">GPX-farve</string>
+    <string name="rendering_attr_currentTrackWidth_description">GPX-bredde</string>
+    <string name="rendering_attr_roadStyle_description">Vejformat</string>
     </resources>
