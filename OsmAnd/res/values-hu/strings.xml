@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="send_files_to_osm">GPX fájl küldése OSM-re?</string>
     <string name="gpx_visibility_txt">Láthatóság</string>
     <string name="gpx_tags_txt">Címkék</string>
@@ -1997,4 +1998,34 @@
     <string name="lang_mk">Macedón</string>
     <string name="lang_fy">Fríz</string>
     <string name="lang_als">Albán (toszk)</string>
-    </resources>
+    <string name="osm_save_offline">Mentés offline</string>
+    <string name="osm_edit_modified_poi">Módosított OSM POI</string>
+    <string name="osm_edit_deleted_poi">Törölt OSM POI</string>
+    <string name="context_menu_item_open_note">OSM Jegyzet nyitása</string>
+    <string name="osm_edit_reopened_note">Újranyitott OSM Jegyzet</string>
+    <string name="osm_edit_commented_note">Kommentált OSM Jegyzet</string>
+    <string name="osm_edit_removed_note">Törölt OSM Jegyzet</string>
+	<string name="osm_edit_created_note">Létrehozott OSM Jegyzet</string>
+	<string name="osn_bug_name">OSM Jegyzet</string>
+	<string name="osn_add_dialog_title">Jegyzet létrehozása</string>
+	<string name="osn_comment_dialog_title">Megjegyzés hozzáfűzése</string>
+	<string name="osn_reopen_dialog_title">Jegyzet újranyitása</string>
+	<string name="osn_close_dialog_title">Jegyzet lezárása</string>
+	<string name="osn_add_dialog_success">Jegyzet sikeresen létre lett hozva</string>
+	<string name="osn_add_dialog_error">Kivétel történt: a jegyzet nem lett létrehozva</string>
+	<string name="osn_close_dialog_success">Jegyzet sikeresen le lett zárva</string>
+	<string name="osn_close_dialog_error">Kivétel történt: a jegyzet nem lett lezárva</string>
+	<string name="shared_string_commit">Beküldés</string>
+	
+    <string name="context_menu_item_delete_waypoint">Törlöd a GPX útpontot?</string>
+    <string name="context_menu_item_edit_waypoint">GPX útpont szerkesztése</string>
+    <string name="shared_string_location">Cím</string>
+    <string name="rendering_attr_currentTrackColor_description">GPX szín</string>
+    <string name="rendering_attr_currentTrackWidth_description">GPX vastagság</string>
+    <string name="rendering_attr_roadStyle_description">Útstílus</string>
+    <string name="poi_dialog_reopen">Újranyitás</string>
+	<string name="save_poi_without_poi_type_message">Biztosan elmented a POI-t típus nélkül?</string>
+    <string name="poi_context_menu_modify_osm_change">OSM szerkesztés módosítása</string>
+    <string name="release_2_2">" • Új környezetérzékeny felhasználói felület térképre tapintáskor\n\n • Az alkalmazás már közvetlenül a térkép képernyővel indul a Műszerfal helyett\n\n • A Műszerfal kártyái elrejthetőek, testre szabhatóak\n\n • Térkép letöltéséhez elég a világtérkép régióira tapintani\n\n • A POI kereső már sokkal speciálisabb kérdéseket is megért\n\n • Továbbfejlesztett OSM POI szerkesztés\n\n • A térképletöltő felület felépítése és kezelőfelülete át lett dolgozva\n\n és sok egyéb fejlesztés… "</string>
+    <string name="shared_string_card_was_hidden">Kártya el volt rejtve</string>
+	</resources>
