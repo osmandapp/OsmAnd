@@ -170,6 +170,7 @@ public class TargetPointsHelper {
 		pointToNavigate = intermediatePoints.remove(index);
 		settings.setPointToNavigate(pointToNavigate.getLatitude(), pointToNavigate.getLongitude(),
 				pointToNavigate.pointDescription);
+		pointToNavigate.intermediate = false;
 		settings.deleteIntermediatePoint(index);
 		updateRouteAndReferesh(updateRoute);
 	}

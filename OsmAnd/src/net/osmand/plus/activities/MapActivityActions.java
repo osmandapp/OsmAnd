@@ -780,7 +780,7 @@ public class MapActivityActions implements DialogProvider {
 	}
 
 	public void openIntermediateEditPointsDialog() {
-		mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.WAYPOINTS);
+		mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.WAYPOINTS_EDIT);
 	}
 
 	private TargetPointsHelper getTargets() {

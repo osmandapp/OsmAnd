@@ -504,7 +504,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 	}
 
 	public void refreshContent(boolean force) {
-		if (visibleType == DashboardType.WAYPOINTS || force) {
+		if (visibleType == DashboardType.WAYPOINTS || visibleType == DashboardType.WAYPOINTS_EDIT  || force) {
 			updateListAdapter();
 		} else {
 			listAdapter.notifyDataSetChanged();
