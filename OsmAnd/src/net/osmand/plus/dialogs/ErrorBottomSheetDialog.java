@@ -28,9 +28,6 @@ import net.osmand.plus.helpers.FontCache;
 import java.io.File;
 import java.text.MessageFormat;
 
-/**
- * Created by GaidamakUA on 11/13/15.
- */
 public class ErrorBottomSheetDialog extends BottomSheetDialogFragment {
 	@Nullable
 	@Override

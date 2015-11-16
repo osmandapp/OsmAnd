@@ -72,13 +72,12 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 	public static final String SHOULD_SHOW = "should_show";
 
 	private static final DashFragmentData.ShouldShowFunction rateUsShouldShow = new DashRateUsFragment.RateUsShouldShow();
-	private static final DashFragmentData.ShouldShowFunction errorShouldShow = new ErrorShouldShow();
 
 	private final DashFragmentData[] fragmentsData = new DashFragmentData[]{
 			new DashFragmentData(DashRateUsFragment.TAG, DashRateUsFragment.class,
 					rateUsShouldShow, 0, null),
 			new DashFragmentData(DashErrorFragment.TAG, DashErrorFragment.class,
-					errorShouldShow, 30, null),
+					DashErrorFragment.SHOULD_SHOW_FUNCTION, 30, null),
 			new DashFragmentData(DashNavigationFragment.TAG, DashNavigationFragment.class,
 					DashNavigationFragment.SHOULD_SHOW_FUNCTION, 40, null),
 			new DashFragmentData(DashWaypointsFragment.TAG, DashWaypointsFragment.class,
@@ -932,15 +931,4 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 			return settings.registerBooleanPreference(SHOULD_SHOW + tag, true).makeGlobal().get();
 		}
 	}
-
-	private static class ErrorShouldShow extends DashFragmentData.ShouldShowFunction {
-		// If settings null. No changes in setting will be made.
-		@Override
-		public boolean shouldShow(OsmandSettings settings, MapActivity activity, String tag) {
-			return activity.getMyApplication().getAppInitializer()
-					.checkPreviousRunsForExceptions(activity, settings != null);
-		}
-	}
-
-	
 }

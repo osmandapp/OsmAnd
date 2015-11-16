@@ -18,9 +18,13 @@ import android.widget.TextView;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
+import net.osmand.plus.dashboard.tools.DashFragmentData;
+import net.osmand.plus.dialogs.ErrorBottomSheetDialog;
 import net.osmand.plus.helpers.FontCache;
 
 import java.io.File;
@@ -33,7 +37,14 @@ import java.text.MessageFormat;
 public class DashErrorFragment extends DashBaseFragment {
 
 	public static final String TAG = "DASH_ERROR_FRAGMENT";
-
+	public static final DashFragmentData.ShouldShowFunction SHOULD_SHOW_FUNCTION =
+			new DashFragmentData.ShouldShowFunction() {
+				// If settings null. No changes in setting will be made.
+				@Override
+				public boolean shouldShow(OsmandSettings settings, MapActivity activity, String tag) {
+					return ErrorBottomSheetDialog.shouldShow(settings, activity);
+				}
+			};
 	private DismissListener dismissCallback;
 
 	@Override
