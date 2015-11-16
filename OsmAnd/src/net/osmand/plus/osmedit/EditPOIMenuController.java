@@ -1,6 +1,8 @@
-package net.osmand.plus.mapcontextmenu.controllers;
+package net.osmand.plus.osmedit;
 
-import java.util.Map;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.graphics.drawable.Drawable;
 
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.data.PointDescription;
@@ -10,22 +12,12 @@ import net.osmand.plus.ProgressImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuController;
-import net.osmand.plus.mapcontextmenu.builders.EditPOIMenuBuilder;
-import net.osmand.plus.osmedit.OpenstreetmapPoint;
-import net.osmand.plus.osmedit.OsmBugsLayer;
-import net.osmand.plus.osmedit.OsmEditingPlugin;
-import net.osmand.plus.osmedit.OsmEditsUploadListener;
-import net.osmand.plus.osmedit.OsmEditsUploadListenerHelper;
-import net.osmand.plus.osmedit.OsmNotesPoint;
-import net.osmand.plus.osmedit.OsmPoint;
 import net.osmand.plus.osmedit.OsmPoint.Action;
-import net.osmand.plus.osmedit.UploadOpenstreetmapPointAsyncTask;
 import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment;
 import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment.ProgressDialogPoiUploader;
 import net.osmand.util.Algorithms;
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
-import android.graphics.drawable.Drawable;
+
+import java.util.Map;
 
 public class EditPOIMenuController extends MenuController {
 

@@ -1,4 +1,4 @@
-package net.osmand.plus.mapcontextmenu.controllers;
+package net.osmand.plus.osmo;
 
 import android.graphics.drawable.Drawable;
 
@@ -13,10 +13,7 @@ import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
-import net.osmand.plus.osmo.OsMoGroupsActivity;
 import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
-import net.osmand.plus.osmo.OsMoPlugin;
-import net.osmand.plus.osmo.OsMoPositionLayer;
 
 public class OsMoMenuController extends MenuController {
 

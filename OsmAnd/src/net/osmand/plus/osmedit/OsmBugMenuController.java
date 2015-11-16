@@ -1,4 +1,4 @@
-package net.osmand.plus.mapcontextmenu.controllers;
+package net.osmand.plus.osmedit;
 
 import android.graphics.drawable.Drawable;
 
@@ -11,7 +11,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.osmedit.OsmBugsLayer.OpenStreetNote;
-import net.osmand.plus.osmedit.OsmEditingPlugin;
 
 public class OsmBugMenuController extends MenuController {
 

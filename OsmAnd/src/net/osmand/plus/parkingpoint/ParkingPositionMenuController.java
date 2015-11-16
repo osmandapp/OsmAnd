@@ -1,4 +1,4 @@
-package net.osmand.plus.mapcontextmenu.controllers;
+package net.osmand.plus.parkingpoint;
 
 import android.graphics.drawable.Drawable;
 
@@ -9,7 +9,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
-import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 import net.osmand.util.Algorithms;
 
 public class ParkingPositionMenuController extends MenuController {
