@@ -44,7 +44,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
@@ -97,6 +97,7 @@ public class EditPoiDialogFragment extends DialogFragment {
 
 	private OpenstreetmapUtil mOpenstreetmapUtil;
 	private TextInputLayout poiTypeTextInputLayout;
+	private View view;
 
 	@Override
 	public void onAttach(Activity activity) {
@@ -128,7 +129,7 @@ public class EditPoiDialogFragment extends DialogFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
-		final View view = inflater.inflate(R.layout.fragment_edit_poi, container, false);
+		view = inflater.inflate(R.layout.fragment_edit_poi, container, false);
 		final OsmandSettings settings = getMyApplication().getSettings();
 		boolean isLightTheme = settings.OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME;
 
@@ -327,27 +328,37 @@ public class EditPoiDialogFragment extends DialogFragment {
 				node.putTag(tag.getKey(), tag.getValue());
 			}
 		}
-		commitNode(action, node, mOpenstreetmapUtil.getEntityInfo(node.getId()),
-				"",
-				false,
-				new Runnable() {
+		commitNode(action, node, mOpenstreetmapUtil.getEntityInfo(node.getId()), "", false,
+				new CallbackWithObject<Node>() {
+
 					@Override
-					public void run() {
-						OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
-						if (plugin != null && offlineEdit) {
-							List<OpenstreetmapPoint> points = plugin.getDBPOI().getOpenstreetmapPoints();
-							if (getActivity() instanceof MapActivity && points.size() > 0) {
-								OsmPoint point = points.get(points.size() - 1);
-								MapActivity mapActivity = (MapActivity) getActivity();
-								mapActivity.getContextMenu().showOrUpdate(new LatLon(point.getLatitude(), point.getLongitude()),
-										plugin.getOsmEditsLayer(mapActivity).getObjectName(point), point);
+					public boolean processResult(Node result) {
+						if (result != null) {
+							OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
+							if (plugin != null && offlineEdit) {
+								List<OpenstreetmapPoint> points = plugin.getDBPOI().getOpenstreetmapPoints();
+								if (getActivity() instanceof MapActivity && points.size() > 0) {
+									OsmPoint point = points.get(points.size() - 1);
+									MapActivity mapActivity = (MapActivity) getActivity();
+									mapActivity.getContextMenu().showOrUpdate(
+											new LatLon(point.getLatitude(), point.getLongitude()),
+											plugin.getOsmEditsLayer(mapActivity).getObjectName(point), point);
+								}
 							}
+
+							if (getActivity() instanceof MapActivity) {
+								((MapActivity) getActivity()).getMapView().refreshMap(true);
+							}
+							dismiss();
+						} else {
+							OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
+							mOpenstreetmapUtil = plugin.getPoiModificationLocalUtil();
+							Button saveButton = (Button) view.findViewById(R.id.saveButton);
+							saveButton.setText(mOpenstreetmapUtil instanceof OpenstreetmapRemoteUtil
+									? R.string.shared_string_upload : R.string.shared_string_save);
 						}
 
-						if (getActivity() instanceof MapActivity) {
-							((MapActivity) getActivity()).getMapView().refreshMap(true);
-						}
-						dismiss();
+						return false;
 					}
 				}, getActivity(), mOpenstreetmapUtil);
 	}
@@ -399,7 +410,7 @@ public class EditPoiDialogFragment extends DialogFragment {
 								  final EntityInfo info,
 								  final String comment,
 								  final boolean closeChangeSet,
-								  final Runnable successAction,
+								  final CallbackWithObject<Node> postExecute,
 								  final Activity activity,
 								  final OpenstreetmapUtil openstreetmapUtil) {
 		if (info == null && OsmPoint.Action.CREATE != action && openstreetmapUtil instanceof OpenstreetmapRemoteUtil) {
@@ -423,8 +434,8 @@ public class EditPoiDialogFragment extends DialogFragment {
 			@Override
 			protected void onPostExecute(Node result) {
 				progress.dismiss();
-				if (result != null) {
-					successAction.run();
+				if(postExecute != null) {
+					postExecute.processResult(result);
 				}
 			}
 		}.execute();
@@ -640,25 +651,36 @@ public class EditPoiDialogFragment extends DialogFragment {
 					String c = comment == null ? null : comment.getText().toString();
 					boolean closeChangeSet = closeChangesetCheckBox != null
 							&& closeChangesetCheckBox.isChecked();
-					commitNode(OsmPoint.Action.DELETE, n, openstreetmapUtil.getEntityInfo(n.getId()), c,
-							closeChangeSet, new Runnable() {
-								@Override
-								public void run() {
-									if (isLocalEdit) {
-										AccessibleToast.makeText(
-												activity, R.string.osm_changes_added_to_local_edits,
-												Toast.LENGTH_LONG).show();
-									} else {
-										AccessibleToast.makeText(activity, R.string.poi_remove_success, Toast.LENGTH_LONG).show();
-									}
-									if (activity instanceof MapActivity) {
-										((MapActivity) activity).getMapView().refreshMap(true);
-									}
-								}
-							}, activity, openstreetmapUtil);
+					deleteNode(n, c, closeChangeSet);
 				}
+
+				
 			});
 			builder.create().show();
+		}
+		
+		private void deleteNode(final Node n, final String c, final boolean closeChangeSet) {
+			final boolean isLocalEdit = openstreetmapUtil instanceof OpenstreetmapLocalUtil;
+			commitNode(OsmPoint.Action.DELETE, n, openstreetmapUtil.getEntityInfo(n.getId()), c, closeChangeSet,
+					new CallbackWithObject<Node>() {
+
+						@Override
+						public boolean processResult(Node result) {
+							if (result != null) {
+								if (isLocalEdit) {
+									AccessibleToast.makeText(activity, R.string.osm_changes_added_to_local_edits,
+											Toast.LENGTH_LONG).show();
+								} else {
+									AccessibleToast.makeText(activity, R.string.poi_remove_success, Toast.LENGTH_LONG)
+											.show();
+								}
+								if (activity instanceof MapActivity) {
+									((MapActivity) activity).getMapView().refreshMap(true);
+								}
+							}
+							return false;
+						}
+					}, activity, openstreetmapUtil);
 		}
 	}
 

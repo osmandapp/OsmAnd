@@ -94,7 +94,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	
 	public OsmBugsLocalUtil getOsmNotesLocalUtil() {
 		if(localNotesUtil == null) {
-			localNotesUtil = new OsmBugsLocalUtil(app, dbbug);
+			localNotesUtil = new OsmBugsLocalUtil(app, getDBBug());
 		}
 		return localNotesUtil;
 	}
