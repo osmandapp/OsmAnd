@@ -14,7 +14,6 @@
         \u2022 Map screen is now launched directly unless \'Show Dashboard on app start\' is selected\n\n
         \u2022 Dashboard has configuration how cards could be displayed\n\n
         \u2022 Maps could be directly selected and download on worldwide map \n\n
-        \u2022 Better route recalculation (after repeated attempts engine now suggests a different route)\n\n
         \u2022 POI Search now supports more specific queries\n\n
 		\u2022 Imporoved POI and OSM Editing functionality\n\n
         \u2022 Map data download structure and interface reworked\n\n
