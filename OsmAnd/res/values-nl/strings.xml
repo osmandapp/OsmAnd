@@ -20,7 +20,7 @@
   <string name="int_continuosly">continu</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Vectorkaarten worden vaak sneller weergegeven. Werkt niet op sommige apparaten.</string>
   
-  <string name="play_commands_of_currently_selected_voice">Luister naar de instructies van de gekozen stem</string>
+  <string name="play_commands_of_currently_selected_voice">Luister naar de teksten van de gekozen stem</string>
   <string name="debugging_and_development">OsmAnd fout-opsporing en ontwikkeling</string>
   <string name="native_rendering">Interne kaartgeneratie</string>
   
@@ -1471,7 +1471,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="navigation_intent_invalid">Ongeldig formaat: %s</string>
 <string name="osmo_settings_uuid">Uniek device-ID</string>
     <string name="osmo_settings_descr">Configureer monitor instellingen en maak een persoonlijk monitor-kanaal</string>
-    <string name="osmo_plugin_description">"Gebruik de functionaliteit voor OsMo geavanceerde live monitoring, zie http://osmo.mobi.\n\n Je kunt andere toestellen volgen en gevolgd worden. Maak spontane anonieme groepen, deel elkaars positie. Er zijn verschillende instellingen voor het permanent of tijdelijk volgen.\n\nAnonieme groepen kunnen maar een beperkt aantal dagen gebruikt worden en zijn beperkt in de mogelijkheden, zoals het ontbreken van beheer op afstand en een groepsbeheerder. Volledig functionele groepen moeten worden aangemaakt op de website en alleen geregistreerde leden kunnen ze gebruiken. "</string>
+    <string name="osmo_plugin_description">"Deze plugin is voor de \"OsMo geavanceerde live monitoring\", zie http://osmo.mobi.\n\n Je kunt alle toestellen van een groep deelnemers volgen en met elkaar communiceren. Er zijn mogelijkheden voor het permanent of tijdelijk volgen.\n\nAnonieme groepen kunnen makkelijk gemaakt worden, bestaan maar een beperkt aantal dagen en zijn beperkt in de mogelijkheden, zoals het ontbreken van beheer op afstand en een groepsbeheerder. Volledig functionele groepen moeten worden aangemaakt op de website en alleen geregistreerde leden kunnen ze gebruiken. "</string>
     <string name="osmo_plugin_name">OsMo (OSM monitoring)</string>
     <string name="osmo_settings">OsMo</string>
    	<string name="keep_informing_never">Alleen handmatig (druk op de pijl)</string>
@@ -2111,7 +2111,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="map_downloaded">Kaart gedownload</string>
     <string name="map_downloaded_descr">De kaart van %1$s is gedownload en kan nu worden gebruikt.</string>
     <string name="go_to_map">Ga naar de kaart</string>
-    <string name="world_map_download_descr">De basis-wereldkaart ontbreekt of is verouderd. Download deze om OsmAnd goed te laten functioneren.</string>
+    <string name="world_map_download_descr">De basis-wereldkaart ontbreekt of is verouderd. Download hem om OsmAnd goed te laten functioneren.</string>
     <string name="shared_string_update">Updaten</string>
     
     
