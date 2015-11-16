@@ -37,7 +37,7 @@ import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
 
 public abstract class MenuController extends BaseMenuController {
 
-	public class MenuState {
+	public static class MenuState {
 		public static final int HEADER_ONLY = 1;
 		public static final int HALF_SCREEN = 2;
 		public static final int FULL_SCREEN = 4;
