@@ -1375,4 +1375,17 @@
 	<string name="poi_wetland_saltmarsh">Sós mocsár</string>
 	<string name="poi_wetland_saltern">Sótelep</string>
 	<string name="poi_wetland_mangrove">Mangrove mocsár</string>
+	<string name="poi_wetland_fen">Síkláp</string>
+	<string name="poi_wetland_mud">Sár</string>
+
+	<string name="poi_chimney">Kémény</string>
+	<string name="poi_palm">Pálma</string>
+	<string name="poi_cypress">Ciprus</string>
+	<string name="poi_flagpole">Zászlórúd</string>
+
+	<string name="poi_bench_yes">Paddal</string>
+	<string name="poi_bench_no">Pad nélkül</string>
+	<string name="poi_waste_basket_yes">Szemetessel</string>
+	<string name="poi_waste_basket_no">Szemetes nélkül</string>
+
 	</resources>
