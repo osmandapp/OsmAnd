@@ -2,6 +2,7 @@ package net.osmand.plus.mapcontextmenu;
 
 import android.graphics.drawable.Drawable;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.data.Amenity;
@@ -269,6 +270,14 @@ public abstract class MenuController extends BaseMenuController {
 	}
 
 	public void updateData() {
+	}
+
+	public boolean hasCustomAddressLine() {
+		return builder.hasCustomAddressLine();
+	}
+
+	public void buildCustomAddressLine(LinearLayout ll) {
+		builder.buildCustomAddressLine(ll);
 	}
 
 	public abstract class TitleButtonController {

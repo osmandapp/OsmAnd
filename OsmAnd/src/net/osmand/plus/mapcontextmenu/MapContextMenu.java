@@ -2,6 +2,7 @@ package net.osmand.plus.mapcontextmenu;
 
 import android.support.v4.app.Fragment;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -523,6 +524,16 @@ public class MapContextMenu extends MenuTitleController {
 	public void updateData() {
 		if (menuController != null) {
 			menuController.updateData();
+		}
+	}
+
+	public boolean hasCustomAddressLine() {
+		return menuController != null && menuController.hasCustomAddressLine();
+	}
+
+	public void buildCustomAddressLine(LinearLayout ll) {
+		if (menuController != null) {
+			menuController.buildCustomAddressLine(ll);
 		}
 	}
 

@@ -3,19 +3,18 @@ package net.osmand.plus.mapcontextmenu.controllers;
 import android.graphics.drawable.Drawable;
 
 import net.osmand.data.PointDescription;
-import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.mapcontextmenu.builders.GpxItemMenuBuilder;
 
 public class GpxItemMenuController extends MenuController {
 	private GpxDisplayItem item;
 
 	public GpxItemMenuController(OsmandApplication app, MapActivity mapActivity, PointDescription pointDescription, GpxDisplayItem item) {
-		super(new MenuBuilder(app), pointDescription, mapActivity);
+		super(new GpxItemMenuBuilder(app, item), pointDescription, mapActivity);
 		this.item = item;
 	}
 
