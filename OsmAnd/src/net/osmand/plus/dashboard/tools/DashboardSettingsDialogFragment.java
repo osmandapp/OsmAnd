@@ -71,11 +71,10 @@ public class DashboardSettingsDialogFragment extends DialogFragment
 				R.layout.show_dashboard_on_start_dialog_item, null, false);
 		final TextView textView = (TextView) view.findViewById(R.id.text);
 		textView.setText(R.string.show_on_start);
-		final OsmandSettings.CommonPreference<Boolean> shouldShowDashboardOnStart =
-				settings.registerBooleanPreference(MapActivity.SHOULD_SHOW_DASHBOARD_ON_START, true);
 		final CompoundButton compoundButton = (CompoundButton) view.findViewById(R.id.check_item);
-		compoundButton.setChecked(shouldShowDashboardOnStart.get());
-		textView.setTextColor(shouldShowDashboardOnStart.get() ? textColorPrimary
+		// FIXME Yura add settings.SHOW_DASHBOARD_ON_MAP_SCREEN
+		compoundButton.setChecked(settings.SHOW_DASHBOARD_ON_MAP_SCREEN.get());
+		textView.setTextColor(settings.SHOW_DASHBOARD_ON_MAP_SCREEN.get() ? textColorPrimary
 				: textColorSecondary);
 		compoundButton.setOnCheckedChangeListener(
 				new CompoundButton.OnCheckedChangeListener() {
@@ -111,7 +110,7 @@ public class DashboardSettingsDialogFragment extends DialogFragment
 							}
 						}
 						mapActivity.getDashboard().refreshDashboardFragments();
-						shouldShowDashboardOnStart.set(compoundButton.isChecked());
+						settings.SHOW_DASHBOARD_ON_MAP_SCREEN.set(compoundButton.isChecked());
 					}
 				})
 				.setNegativeButton(R.string.shared_string_cancel, null);

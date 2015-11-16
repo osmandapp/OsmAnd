@@ -141,8 +141,6 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents {
 	private IMapDownloaderCallback downloaderCallback;
 	private DrawerLayout drawerLayout;
 
-	public static final String SHOULD_SHOW_DASHBOARD_ON_START = "should_show_dashboard_on_start";
-
 	private Notification getNotification() {
 		Intent notificationIndent = new Intent(this, getMyApplication().getAppCustomization().getMapActivity());
 		notificationIndent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -393,21 +391,14 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents {
 		super.onResume();
 		long tm = System.currentTimeMillis();
 
-		LOG.debug("onResume()");
 		if (app.isApplicationInitializing() || DashboardOnMap.staticVisible) {
-			LOG.debug("dashboars stuff");
 			if (!dashboardOnMap.isVisible()) {
-				LOG.debug("dashboars is not visible");
-				final OsmandSettings.CommonPreference<Boolean> shouldShowDashboardOnStart =
-						settings.registerBooleanPreference(MapActivity.SHOULD_SHOW_DASHBOARD_ON_START, true);
-				if (shouldShowDashboardOnStart.get()) {
+				if (settings.SHOW_DASHBOARD_ON_START.get()) {
 					dashboardOnMap.setDashboardVisibility(true, DashboardOnMap.staticVisibleType);
 				} else {
-					LOG.debug("Dashboard should not be shown");
 					if (ErrorBottomSheetDialog.shouldShow(settings, this)) {
 						new ErrorBottomSheetDialog().show(getFragmentManager(), "dialog");
 					} else if (RateUsBottomSheetDialog.shouldShow(settings)) {
-						LOG.debug("Rate us should show");
 						new RateUsBottomSheetDialog().show(getFragmentManager(), "dialog");
 					}
 				}
