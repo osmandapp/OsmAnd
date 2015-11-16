@@ -1,8 +1,6 @@
 package net.osmand.plus;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
+import android.graphics.Bitmap;
 
 import net.osmand.IProgress;
 import net.osmand.plus.GPXUtilities.GPXFile;
@@ -11,7 +9,6 @@ import net.osmand.plus.GPXUtilities.Route;
 import net.osmand.plus.GPXUtilities.Track;
 import net.osmand.plus.GPXUtilities.TrkSegment;
 import net.osmand.plus.GPXUtilities.WptPt;
-import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
@@ -21,7 +18,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.graphics.Bitmap;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GpxSelectionHelper {
 
@@ -52,7 +51,16 @@ public class GpxSelectionHelper {
 	public List<SelectedGpxFile> getSelectedGPXFiles() {
 		return selectedGPXFiles;
 	}
-	
+
+	public SelectedGpxFile getSelectedGPXFile(WptPt point) {
+		for (SelectedGpxFile g : selectedGPXFiles) {
+			if (g.getGpxFile().points.contains(point)) {
+				return g;
+			}
+		}
+		return null;
+	}
+
 	public final String getString(int resId, Object... formatArgs) {
 		return app.getString(resId, formatArgs);
 	}
@@ -187,6 +195,7 @@ public class GpxSelectionHelper {
 				
 				item.description = GpxUiHelper.getDescription(app, analysis, true);
 				item.analysis = analysis;
+				/*
 				String name = "";
 //				if(group.track.segments.size() > 1) {
 //					name += t++ + ". ";
@@ -229,7 +238,8 @@ public class GpxSelectionHelper {
 								OsmAndFormatter.getFormattedAlt(analysis.diffElevationUp, app));
 					}
 				}
-				item.name = name;
+				*/
+				item.name = group.getName();//.replace("\n", "");
 				item.locationStart = analysis.locationStart;
 				item.locationEnd = analysis.locationEnd;
 				list.add(item);

@@ -1,4 +1,4 @@
-package net.osmand.plus.mapcontextmenu.builders;
+package net.osmand.plus.audionotes;
 
 import android.content.Intent;
 import android.graphics.Bitmap;

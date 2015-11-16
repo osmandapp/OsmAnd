@@ -661,7 +661,7 @@
     <string name="please_select_address">Elige primero la ciudad o calle</string>
     <string name="search_street_in_neighborhood_cities">Buscar la calle en ciudades vecinas</string>
     <string name="intermediate_items_sort_return">Puntos de ruta intermedios reordenados para optimizar su recorrido en el camino desde la ubicación actual hasta el destino.</string>
-    <string name="intermediate_items_sort_by_distance">Ordenar (puerta a puerta)</string>
+    <string name="intermediate_items_sort_by_distance">Ordenar puerta a puerta</string>
     <string name="local_osm_changes_backup_successful">Archivo de cambios OSM generado con éxito %1$s</string>
     <string name="local_osm_changes_backup_failed">Falló la copia local de cambios OSM</string>
     <string name="local_osm_changes_backup">Copiar como cambio OSM</string>
@@ -774,7 +774,7 @@
     <string name="rendering_attr_hikingRoutesOSMC_name">Superponer símbolo de senderismo</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Dibujar senderos según trazas OSMC</string>
     <string name="rendering_attr_noAdminboundaries_name">Ocultar fronteras</string>
-    <string name="rendering_attr_noAdminboundaries_description">Evitar mostrar fronteras regionales (niveles administrativos 5-9)</string>
+    <string name="rendering_attr_noAdminboundaries_description">Ocultar fronteras regionales (niveles administrativos 5-9)</string>
     <string name="map_widget_max_speed">Límite de velocidad</string>
     <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">No se encontró edificios.</string>
@@ -1446,7 +1446,7 @@
     <string name="error_reading_gpx">Error leyendo datos GPX</string>
     <string name="vector_data">Mapas vectoriales descargados</string>
     <string name="transport_context_menu">Buscar transporte en parada</string>
-    <string name="osb_bug_name">Fallo</string>
+    
     <string name="poi_context_menu_modify">Modificar PDI</string>
     <string name="poi_context_menu_delete">Borrar PDI</string>
     <string name="rotate_map_compass_opt">A la brújula</string>
@@ -1664,7 +1664,7 @@
     <string name="search_address_street_option">Intersección de calle</string>
     <string name="search_tabs_location">Ubicación</string>
     <string name="context_menu_item_update_map">Actualizar mapa</string>
-    <string name="context_menu_item_open_bug">Crear nota de OSM</string>
+    
     <string name="context_menu_item_create_poi">Crear PDI</string>
     <string name="add_favorite_dialog_top_text">Ingrese nombre de favorito</string>
     <string name="add_favorite_dialog_default_favourite_name">Favorito</string>
@@ -1673,22 +1673,22 @@
     <string name="favourites_context_menu_delete">Borrar favorito</string>
     <string name="favourites_remove_dialog_msg">¿Quitar el favorito \'%s\'?</string>
     <string name="favourites_remove_dialog_success">El punto favorito {0} se borró correctamente.</string>
-    <string name="osb_add_dialog_title">Ingrese texto del fallo</string>
-    <string name="osb_add_dialog_success">Fallo creado correctamente</string>
-    <string name="osb_add_dialog_error">Error: No se creó el fallo</string>
+    
+    
+    
     <string name="osb_author_dialog_password">Contraseña de OSM (opcional)</string>
-    <string name="osb_comment_menu_item">Añadir comentario</string>
+    
     <string name="osb_comment_dialog_message">Mensaje</string>
     <string name="osb_comment_dialog_author">Nombre del autor</string>
-    <string name="osb_comment_dialog_title">Añadiendo comentario al fallo</string>
-    <string name="osb_comment_dialog_add_button">Añadir comentario</string>
+    
+    
     <string name="osb_comment_dialog_success">Comentario añadido correctamente</string>
     <string name="osb_comment_dialog_error">Error: No se añadió el comentario</string>
-    <string name="osb_close_menu_item">Cerrar fallo</string>
-    <string name="osb_close_dialog_title">Cerrando fallo</string>
-    <string name="osb_close_dialog_close_button">Cerrar fallo</string>
-    <string name="osb_close_dialog_success">Fallo cerrado correctamente</string>
-    <string name="osb_close_dialog_error">Error: No se cerró el fallo</string>
+    
+    
+    
+    
+    
     <string name="poi_edit_title">Editar PDI</string>
     <string name="poi_create_title">Crear PDI</string>
     <string name="poi_error_poi_not_found">No se encontró el nodo o la instalación se compone de varios nodos</string>
@@ -1938,7 +1938,7 @@
     <string name="feedback">Encuesta</string>
     <string name="contact_us">Contáctenos</string>
     <string name="osm_edit_created_poi">PDI de OSM creado</string>
-    <string name="osm_edit_created_bug">Nota OSM creada</string>
+    
     <string name="map_legend">Leyenda del mapa</string>
     <string name="shared_string_update">Actualizar</string>
     <string name="shared_string_upload">Subir</string>
@@ -1952,4 +1952,32 @@
     <string name="lang_fy">Frisón</string>
     <string name="lang_als">Albano (Tosk)</string>
     <string name="save_poi_without_poi_type_message">¿Quiere guardar el punto de interés sin especificar el tipo?</string>
+    <string name="shared_string_location">Ubicación</string>
+    <string name="poi_context_menu_modify_osm_change">Modificar cambio OSM</string>
+    <string name="osm_edit_modified_poi">PDI de OSM modificado</string>
+    <string name="osm_edit_deleted_poi">PDI de OSM borrado</string>
+    <string name="context_menu_item_open_note">Abrir nota OSM</string>
+    <string name="osm_edit_reopened_note">Nota OSM reabierta</string>
+    <string name="osm_edit_commented_note">Nota OSM comentada</string>
+    <string name="osm_edit_removed_note">Nota OSM borrada</string>
+	<string name="osm_edit_created_note">Nota OSM creada</string>
+	<string name="osn_bug_name">Nota OSM</string>
+	<string name="osn_add_dialog_title">Crear nota</string>
+	<string name="osn_comment_dialog_title">Añadir comentario</string>
+	<string name="osn_reopen_dialog_title">Reabrir nota</string>
+	<string name="osn_close_dialog_title">Cerrar nota</string>
+	<string name="osn_add_dialog_success">Nota creada exitosamente</string>
+	<string name="osn_add_dialog_error">Error: la nota no se creó</string>
+	<string name="osn_close_dialog_success">El error se cerró exitosamente</string>
+	<string name="osn_close_dialog_error">Error: no se cerró la nota</string>
+	<string name="shared_string_commit">Confirmar</string>
+	
+    <string name="context_menu_item_delete_waypoint">¿Borrar punto de ruta GPX?</string>
+    <string name="context_menu_item_edit_waypoint">Editar punto de ruta GPX</string>
+    <string name="rendering_attr_currentTrackColor_description">Color del GPX</string>
+    <string name="rendering_attr_currentTrackWidth_description">Ancho del GPX</string>
+    <string name="rendering_attr_roadStyle_description">Estilo de carretera</string>
+    <string name="poi_dialog_reopen">Reabrir</string>
+	<string name="osm_save_offline">Guardar sin conexión</string>
+    <string name="release_2_2">" • Nueva interfaz de usuario sensible al contexto para aprovechar lugares en el mapa y en otra pantallas\n\n• La pantalla del mapa, ahora se inicia directamente, a menos que \'Mostrar panel de control en el arranque de la aplicación\' este seleccionado\n\n• El tablero de instrumentos, posee el opción de que tarjetas se visualizarán\n\n• Los mapas, pueden seleccionarse directamente y descargar el mapa mundial\n\n• Mejor recálculo de la ruta (después de reiterados intentos, el motor ahora sugiere una ruta diferente)\n\n• La búsqueda de PDI, ahora soporta consultas más específicas\n\n• Mejoras en PDI y funcionalidad de edición OSM\n\n• Se rediseñó la estructura e interfaz de los datos de mapas\n\n y más... "</string>
     </resources>

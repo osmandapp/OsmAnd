@@ -22,6 +22,8 @@
 
     <TextView
         android:layout_marginLeft="5dp"
+       	android:id="@+id/userNameEditTextLabel"
+        
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:text="@string/osb_comment_dialog_author" />
@@ -38,6 +40,7 @@
     <TextView
         android:layout_marginLeft="5dp"
         android:layout_height="wrap_content"
+        android:id="@+id/passwordEditTextLabel"
         android:layout_width="wrap_content"
         android:text="@string/osb_author_dialog_password" />
 

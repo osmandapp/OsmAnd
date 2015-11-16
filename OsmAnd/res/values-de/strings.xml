@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
 	<string name="regions">Regionen</string>
 	<string name="region_maps">Regionsweite Karten</string>
 	<string name="world_maps">Weltweite Karten</string>
@@ -641,7 +640,7 @@
 	<string name="vector_data">Offline-Vektor-Karten</string>
 	<string name="transport_context_menu">Suche nach Verbindung an Haltestelle</string>
 	
-	<string name="osb_bug_name">OSM-Fehler</string>
+	
 	<string name="poi_context_menu_modify">Bearbeite POI</string>
 	<string name="poi_context_menu_delete">Lösche POI</string>
 	<string name="rotate_map_compass_opt">Nach Kompass</string>
@@ -899,7 +898,7 @@
 	<string name="search_tabs_location">Position</string>
 	
 	<string name="context_menu_item_update_map">Karte aktualisieren</string>
-	<string name="context_menu_item_open_bug">OSM Fehlerbericht einsenden</string>
+	
 	<string name="context_menu_item_create_poi">POI einsenden</string>
 	<string name="shared_string_yes">Ja</string>
 	<string name="shared_string_cancel">Abbrechen</string>
@@ -913,21 +912,21 @@
 	<string name="favourites_context_menu_delete">Favorit löschen</string>
 	<string name="favourites_remove_dialog_msg">Wollen Sie den Punkt \'%s\' wirklich löschen?</string>
 	<string name="favourites_remove_dialog_success">Der Punkt {0} wurde erfolgreich gelöscht.</string>
-	<string name="osb_add_dialog_title">Eingabetext des Fehlers</string>
-	<string name="osb_add_dialog_success">OSM-Fehlerbericht erfolgreich erstellt</string>
-	<string name="osb_add_dialog_error">Fehler: Fehlerbericht wurde nicht erstellt</string>
-	<string name="osb_comment_menu_item">Kommentar hinzufügen</string>
+	
+	
+	
+	
 	<string name="osb_comment_dialog_message">Nachricht</string>
 	<string name="osb_comment_dialog_author">Autor</string>
-	<string name="osb_comment_dialog_title">Kommentar dem OSM-Fehlerbericht hinzufügen</string>
-	<string name="osb_comment_dialog_add_button">Kommentar hinzufügen</string>
+	
+	
 	<string name="osb_comment_dialog_success">Kommentar wurde erfolgreich hinzugefügt</string>
 	<string name="osb_comment_dialog_error">Fehler: Kommentar wurde nicht hinzugefügt</string>
-	<string name="osb_close_menu_item">OSM-Fehlerbericht schließen</string>
-	<string name="osb_close_dialog_title">OSM-Fehlerbericht schließen</string>
-	<string name="osb_close_dialog_close_button">Schließen</string>
-	<string name="osb_close_dialog_success">OSM-Fehlerbericht wurde hinzugefügt</string>
-	<string name="osb_close_dialog_error">Fehler: OSM-Fehlerbericht wurde nicht erstellt</string>
+	
+	
+	
+	
+	
 	<string name="poi_edit_title">POI bearbeiten</string>
 	<string name="poi_create_title">POI erstellen</string>
 	<string name="poi_error_poi_not_found">POI wurde nicht gefunden oder die Einrichtung ist kein einzelner Knoten</string>
@@ -1210,7 +1209,7 @@
 	
 	<string name="distance_measurement_load_gpx">Vorhandene GPX-Datei öffnen</string>
 	<string name="search_street_in_neighborhood_cities">Straßenname in weiteren Orten suchen</string>
-	<string name="intermediate_items_sort_by_distance">Sortieren (Tür-zu-Tür)</string>
+	<string name="intermediate_items_sort_by_distance">Tür-zu-Tür sortieren</string>
 	<string name="use_distance_measurement_help">* Tippen, um einen Punkt zu setzen.\n * Lange auf die Karte tippen, um einen vorigen Punkt zu löschen.\n * Lange auf einen Punkt tippen, um eine Beschreibung zu lesen oder hinzuzufügen.\n * Mehr Aktionen durch Tippen auf das Entfernungsmesser-Widget.</string>
 	<string name="distance_measurement_start_editing">Messung beginnen</string>
 	<string name="distance_measurement_finish_editing">Messung beenden</string>
@@ -1801,6 +1800,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="dash_download_new_one">Neue Karte herunterladen</string>
     <string name="dash_download_manage">Karten verwalten</string>
     <string name="rendering_attr_roadStyle_name">Straßendarstellung</string>
+    <string name="rendering_attr_roadStyle_description">Straßendarstellung</string>
     <string name="rendering_value__name">Standard</string>
     <string name="rendering_value_default_name">Standard</string>
     <string name="rendering_value_orange_name">Orange</string>
@@ -1992,7 +1992,9 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="rendering_value_default13_name">Standard (13)</string>
 	<string name="rendering_value_defaultTranslucentCyan_name">Standard (transparentes Cyan)</string>
     <string name="rendering_attr_currentTrackColor_name">GPX-Farbe</string>
+    <string name="rendering_attr_currentTrackColor_description">GPX-Farbe</string>
     <string name="rendering_attr_currentTrackWidth_name">GPX-Breite</string>
+    <string name="rendering_attr_currentTrackWidth_description">GPX-Breite</string>
     <string name="rendering_value_red_name">Rot</string>
     <string name="rendering_value_translucent_red_name">Transparentes Rot</string>
     <string name="rendering_value_translucent_orange_name">Transparentes Orange</string>
@@ -2073,7 +2075,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 <string name="rendering_attr_hideProposed_name">Vorgeschlagene Objekte ausblenden</string>
     <string name="shared_string_update">Aktualisieren</string>
     
-    <string name="rec_video_description">Video %1$s</string>
+    
     <string name="shared_string_upload">Hochladen</string>
     <string name="shared_string_qr_code">QR-Code</string>
     <string name="map_downloaded">Karte heruntergeladen</string>
@@ -2084,7 +2086,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="read_more">Weiter lesen</string>
     <string name="whats_new">Neuerungen in</string>
     <string name="osm_edit_created_poi">OSM POI erstellt</string>
-    <string name="osm_edit_created_bug">OSM Note erstellt</string>
+    
     <string name="world_map_download_descr">Die Basis-Weltkarte (Abdeckung für den ganzen Planeten bei kleinen Zoomstufen) ist nicht vorhanden oder veraltet. Für eine korrekte Darstellung sollte die Basis-Weltkarte heruntergeladen werden.</string>
     <string name="simulate_initial_startup_descr">Setzt das Flag zum erstmaligen App-Start. Alle anderen Einstellungen bleiben unverändert.</string>
     <string name="simulate_initial_startup">Simuliere den ersten App-Start</string>

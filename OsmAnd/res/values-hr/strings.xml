@@ -286,17 +286,17 @@
 	<string name="poi_action_succeded_template">Radnja {0} je uspješno završena.</string>
 	<string name="poi_edit_title">Uredi POI</string>
 	<string name="poi_create_title">Stvori POI</string>
-	<string name="osb_close_dialog_close_button">Zatvori bug</string>
-	<string name="osb_close_dialog_success">Bug je uspješno zatvoren</string>
-	<string name="osb_close_menu_item">Zatvori bug</string>
-	<string name="osb_close_dialog_title">Zatvaranje bug-a</string>
-	<string name="osb_comment_dialog_add_button">Dodaj komentar</string>
+	
+	
+	
+	
+	
 	<string name="osb_comment_dialog_success">Komentar je uspješno dodan</string>
 	<string name="osb_comment_dialog_error">Dogodila se greška: komentar nije dodan</string>
 	<string name="osb_comment_dialog_author">Ime autora</string>
-	<string name="osb_comment_dialog_title">Dodaj komentar na bug</string>
+	
 	<string name="osb_comment_dialog_message">Poruka</string>
-	<string name="osb_comment_menu_item">Dodaj komentar</string>
+	
 	<string name="favourites_context_menu_edit">Uredi favorite</string>
 	<string name="favourites_context_menu_delete">Brisanje favorita</string>
 	<string name="shared_string_cancel">Zatvori</string>
@@ -641,15 +641,15 @@
 	<string name="app_description">Navigacijska aplikacija</string>
 	<string name="search_POI_level_btn">Više rezultata</string>
 	<string name="poi_remove_confirm_template">Izbriši {0} (unesite komentar)?</string>
-	<string name="osb_close_dialog_error">Došlo je do pogreške: bug nije zatvoren</string>
+	
 	<string name="favourites_remove_dialog_msg">Ukloniti \'%s\' točku favorita?</string>
 	<string name="favourites_remove_dialog_success">Točka favorita {0} je uspješno izbrisana.</string>
-	<string name="osb_add_dialog_title">Unesite tekst bug-a</string>
-	<string name="osb_add_dialog_success">Bug je uspješno stvoren</string>
-	<string name="osb_add_dialog_error">Dogodila se greška: bug nije stvoren</string>
+	
+	
+	
 	<string name="add_favorite_dialog_default_favourite_name">Favorit</string>
 	<string name="add_favorite_dialog_favourite_added_template">Točka favorita \'\'{0}\'\' je uspješno dodana.</string>
-	<string name="context_menu_item_open_bug">Prijavi OSM bug</string>
+	
 	<string name="search_address_street_option">Križanje cesta</string>
 	<string name="navigate_point_top_text">Unesite širinu i dužinu u odabranom formatu (D - stupnjeva, M - minuta, S - sekundi)</string>
 	<string name="Closest_Amenities">Najbliže usluge</string>
@@ -972,7 +972,7 @@
     <string name="speak_street_names">Najavi imena ulica (TTS)</string>
     <string name="osb_author_or_password_not_specified">Molimo vas da u postavkama navedete OSM korisničko ime i lozinku</string>
     <string name="search_street_in_neighborhood_cities">Traži ulicu u susjedstvu</string>
-    <string name="intermediate_items_sort_by_distance">Poredaj (od vrata do vrata)</string>
+    <string name="intermediate_items_sort_by_distance">Poredaj od vrata do vrata</string>
     <string name="local_osm_changes_backup_successful">Datoteka OSM izmjena je uspješno generirana %1$s</string>
     <string name="local_osm_changes_backup_failed">Sigurnosna kopija OSM izmjena nije uspjela</string>
     <string name="local_osm_changes_backup">Sigurnosna kopija kao OSM izmjena</string>

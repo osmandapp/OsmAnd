@@ -22,13 +22,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.ProgressImplementation;
 import net.osmand.plus.R;
+import net.osmand.plus.osmedit.OsmPoint.Action;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -81,9 +81,6 @@ public class OsmEditsUploadListenerHelper implements OsmEditsUploadListener {
 	private static void showUploadItemsProgressDialog(Fragment fragment, OsmPoint[] toUpload) {
 		FragmentActivity activity = fragment.getActivity();
 		OsmEditingPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class);
-		OpenstreetmapRemoteUtil remotepoi = new OpenstreetmapRemoteUtil(activity);
-		OsmBugsRemoteUtil remotebug = new OsmBugsRemoteUtil((OsmandApplication) activity.getApplication());
-
 		OsmEditsUploadListenerHelper helper = new OsmEditsUploadListenerHelper(activity,
 				activity.getResources().getString(R.string.local_openstreetmap_were_uploaded));
 
@@ -94,7 +91,7 @@ public class OsmEditsUploadListenerHelper implements OsmEditsUploadListener {
 				resources.getString(R.string.local_openstreetmap_uploading),
 				ProgressDialog.STYLE_HORIZONTAL).getDialog();
 		UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask(
-				dialog, helper, plugin, remotepoi, remotebug, toUpload.length, false);
+				dialog, helper, plugin, toUpload.length, false);
 		uploadTask.execute(toUpload);
 
 		dialog.show();
@@ -114,8 +111,8 @@ public class OsmEditsUploadListenerHelper implements OsmEditsUploadListener {
 			builder.setTitle(getResources().getString(R.string.failed_to_upload))
 					.setMessage(MessageFormat.format(
 							getResources().getString(R.string.error_message_pattern), errorMessage))
-					.setPositiveButton(R.string.shared_string_ok, null)
-					.setNeutralButton(getResources().getString(R.string.delete_change),
+					.setPositiveButton(R.string.shared_string_ok, null);
+			builder.setNeutralButton(getResources().getString(R.string.delete_change),
 							new DialogInterface.OnClickListener() {
 								public void onClick(@Nullable DialogInterface dialog, int id) {
 									OsmEditingPlugin plugin =

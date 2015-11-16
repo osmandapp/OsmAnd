@@ -1020,4 +1020,216 @@
 	<string name="poi_access_delivery">Áruszállításra használható</string>
 	<string name="poi_access_agricultural">Mezőgazdasági bemenet</string>
 
+	<string name="poi_content_silage">Tartalom: silótakarmány</string>
+	<string name="poi_content_water">Tartalom: víz</string>
+	<string name="poi_content_slurry">Tartalom: cementlé</string>
+	<string name="poi_content_oil">Tartalom: olaj</string>
+	<string name="poi_content_fuel">Tartalom: üzemanyag</string>
+	<string name="poi_content_manure">Tartalom: trágya</string>
+	<string name="poi_content_wine">Tartalom: bor</string>
+	<string name="poi_content_sewage">Tartalom: ürülék</string>
+	<string name="poi_content_gas">Tartalom: gáz</string>
+	<string name="poi_content_biomass">Tartalom: biomassza</string>
+	<string name="poi_content_wastewater">Tartalom: szennyvíz</string>
+	<string name="poi_content_crop">Tartalom: termény</string>
+	<string name="poi_content_fodder">Tartalom: takarmány</string>
+	<string name="poi_content_beer">Tartalom: sör</string>
+	<string name="poi_content_salt">Tartalom: só</string>
+	<string name="poi_content_grain">Tartalom: gabona</string>
+
+	<string name="poi_nudism_yes">Nudizmus: nem engedélyezett</string>
+	<string name="poi_nudism_no">Nudizmus: tiltott</string>
+	<string name="poi_nudism_obligatory">Nudizmus: kötelező</string>
+	<string name="poi_nudism_customary">Nudizmus: megszokott</string>
+	<string name="poi_nudism_permissive">Nudizmus: engedélyköteles</string>
+
+	<string name="poi_trade_building_supplies">Építőanyag</string>
+	<string name="poi_trade_plumbing">Vízvezeték szerelési anyagok</string>
+	<string name="poi_trade_wood">Faanyag</string>
+	<string name="poi_trade_agricultural_supplies">Mezőgazdasági anyagok</string>
+	<string name="poi_trade_tile">Burkolóanyagok</string>
+
+	<string name="poi_population">Lakosság</string>
+	<string name="poi_parking_underground">Földalatti</string>
+	<string name="poi_parking_multi_storey">Többszintes</string>
+
+	<string name="poi_bicycle_parking_anchors">Horgony</string>
+	<string name="poi_bicycle_parking_stands">Korlát</string>
+	<string name="poi_bicycle_parking_wall_loops">Kerékbefogó hurok</string>
+	<string name="poi_bicycle_parking_rack">Keret</string>
+	<string name="poi_bicycle_parking_building">Speciális épület</string>
+	<string name="poi_bicycle_parking_shed">Fészer</string>
+	<string name="poi_bicycle_parking_bollard">Oszlop</string>
+	<string name="poi_bicycle_parking_informal">Nem hivatalos</string>
+
+	<string name="poi_leaf_type_broadleaved">Lombos</string>
+	<string name="poi_leaf_type_needleleaved">Tűlevelű</string>
+	<string name="poi_leaf_type_mixed">Vegyes</string>
+	<string name="poi_leaf_type_leafless">Levéltelen</string>
+	<string name="poi_species">Fajok</string>
+	<string name="poi_genus">Nemzetség</string>
+	<string name="poi_taxon">Taxon</string>
+
+	<string name="poi_trees_olive">Oliva</string>
+	<string name="poi_trees_apple">Alma</string>
+	<string name="poi_trees_oil">Olajpálma</string>
+	<string name="poi_trees_orange">Narancs</string>
+	<string name="poi_trees_almond">Mandula</string>
+	<string name="poi_trees_banana">Banán</string>
+	<string name="poi_trees_hazel">Mogyoró</string>
+	<string name="poi_trees_coconut">Kókusz</string>
+	<string name="poi_trees_persimmon">Datolyaszilva</string>
+	<string name="poi_trees_cherry">Cseresznye</string>
+	<string name="poi_trees_walnut">Dió</string>
+	<string name="poi_trees_plum">Szilva</string>
+	<string name="poi_trees_peach">Barack</string>
+	<string name="poi_trees_tea">Tea</string>
+	<string name="poi_trees_coca">Kokacserje</string>
+	<string name="poi_trees_kiwi">Kivi</string>
+	<string name="poi_trees_nectorine">Nektarin</string>
+	<string name="poi_trees_mango">Mangó</string>
+	<string name="poi_trees_rubber">Gumi</string>
+	<string name="poi_trees_meadow_orchard">Gyümölcsös</string>
+	<string name="poi_trees_date">Datolyapálma</string>
+	<string name="poi_trees_coffea">Kávé</string>
+	<string name="poi_trees_pomegranate">Gránátalma</string>
+
+	<string name="poi_urban">Városi</string>
+	<string name="poi_rural">Vidéki</string>
+
+	<string name="poi_int_name">Nemzetközi név</string>
+	<string name="poi_nat_name">Nemzeti név</string>
+	<string name="poi_reg_name">Regionális név</string>
+	<string name="poi_loc_name">Helyi név</string>
+	<string name="poi_old_name">Korábbi név</string>
+	<string name="poi_alt_name">Alternatív név</string>
+
+	<string name="poi_cuisine">Konyha</string>
+
+	<string name="poi_smoking_no">Nemdohányzó</string>
+	<string name="poi_capacity">Kapacitás</string>
+	<string name="poi_enforcement_traffic_signals">Forgalomellenőrzés: jelzőlámpa</string>
+	<string name="poi_enforcement_maxspeed">Forgalomellenőrzés: sebességkorlát</string>
+	<string name="poi_enforcement_maxheight">Forgalomellenőrzés: megengedett magasság</string>
+	<string name="poi_enforcement_mindistance">Forgalomellenőrzés: követési távolság</string>
+	<string name="poi_enforcement_check">Forgalomellenőrzés: ellenőrzőhely</string>
+	<string name="poi_enforcement_access">Forgalomellenőrzés: behajtás</string>
+	<string name="poi_enforcement_toll">Forgalomellenőrzés: útdíj</string>
+
+	<string name="poi_animal_shelter">Állatmenhely</string>
+	<string name="poi_animal_shelter_dog">Menhelytípus: kutya</string>
+	<string name="poi_animal_shelter_cat">Menhelytípus: macska</string>
+	<string name="poi_animal_shelter_dog_cat">Menhelytípus: kutya, macska</string>
+	<string name="poi_animal_shelter_bird">Menhelytípus: madár</string>
+
+	<string name="poi_seats">Helyek</string>
+	<string name="poi_backrest_yes">Háttámla: van</string>
+	<string name="poi_backrest_no">Háttámla: nincs</string>
+
+	<string name="poi_intermittent">Időszakos</string>
+
+	<string name="poi_building">Épület</string>
+	<string name="poi_generator_source_coal">Energiaforrás: szén</string>
+	<string name="poi_generator_source_gas">Energiaforrás: gáz</string>
+	<string name="poi_generator_source_nuclear">Energiaforrás: nukleáris</string>
+	<string name="poi_generator_source_solar">Energiaforrás: nap</string>
+	<string name="poi_generator_source_hydro">Energiaforrás: víz</string>
+	<string name="poi_generator_source_wind">Energiaforrás: szél</string>
+	<string name="poi_generator_source_geothermal">Energiaforrás: geotermikus</string>
+	<string name="poi_generator_source_oil">Energiaforrás: olaj</string>
+	<string name="poi_generator_source_diesel">Energiaforrás: dízel</string>
+
+	<string name="poi_pump_manual">Kézipumpa</string>
+	<string name="poi_pump_powered">Szivattyú</string>
+	<string name="poi_pump_no">Pumpa nélkül</string>
+	<string name="poi_pump">Pumpa</string>
+
+	<string name="poi_water_characteristic_mineral">Víz jelleg: ásványvíz</string>
+	<string name="poi_water_characteristic_mud">Víz jelleg: iszapos</string>
+	<string name="poi_water_characteristic_sulfuric">Víz jelleg: kénes</string>
+
+	<string name="poi_water_point">Vízvevőhely</string>
+
+	<string name="poi_information_guidepost">Útirányjelző tábla</string>
+	<string name="poi_information_board">Információs tábla</string>
+	<string name="poi_information_map">Térkép</string>
+	<string name="poi_information_office">Információs iroda</string>
+	<string name="poi_information_trail_blaze">Turistajelzés</string>
+	<string name="poi_information_terminal">Információs terminál</string>
+	<string name="poi_information_route_marker">Útjelzés</string>
+	<string name="poi_information_hikingmap">Turistatérkép</string>
+	<string name="poi_information_nature">Információ: természet</string>
+	<string name="poi_information_wildlife">Információ: vadvilág</string>
+	<string name="poi_information_history">Információ: történelem</string>
+	<string name="poi_information_sign">Jelzés</string>
+	<string name="poi_information_audioguide">Audioguide</string>
+	<string name="poi_information_bicyclemap">Kerékpártérkép</string>
+	<string name="poi_board_type_plants">Információ: növények</string>
+	<string name="poi_board_type_geology">Információ: földrajz</string>
+	<string name="poi_board_type_public_transport">Információ: tömegközlekedés</string>
+	<string name="poi_board_type_technology">Információ: technológia</string>
+	<string name="poi_board_type_astronomy">Információ: csillagászat</string>
+
+	<string name="poi_information_tactile_model">Tapintható model</string>
+	<string name="poi_information_tactile_map">Tapintható térkép</string>
+	<string name="poi_board_type_notice">Értesítő tábla</string>
+	<string name="poi_commercial">Üzleti terület</string>
+	<string name="poi_retail">Kiskereskedelmi terület</string>
+
+	<string name="poi_fireplace_yes">Tűzrakóhely</string>
+	<string name="poi_fireplace_no">Nincs tűzrakóhely</string>
+
+	<string name="poi_covered_yes">Fedett</string>
+	<string name="poi_covered_no">Fedetlen</string>
+
+	<string name="poi_smoking_outside">Dohányzás csak kültéren</string>
+	<string name="poi_smoking_yes">Dohányzás engedélyezett</string>
+	<string name="poi_smoking_separated">Dohányzás leválasztott szobában engedélyezet</string>
+	<string name="poi_smoking_isolated">Dohányzás elkülönített szobában engedélyezet</string>
+	<string name="poi_smoking_dedicated">Dohányzásra kijelölt</string>
+
+	<string name="poi_toll_yes">Fizetős</string>
+	<string name="poi_toll_no">Nem fizetős</string>
+	<string name="poi_toll_hgv_yes">Tehergépjárműnek fizetős</string>
+	<string name="poi_tactile_paving_yes">Van vakvezető sáv</string>
+	<string name="poi_tactile_paving_no">Nincs vakvezető sáv</string>
+	<string name="poi_traffic_signals_sound_yes">Van hangjelzés</string>
+	<string name="poi_traffic_signals_sound_no">Nincs hangjelzés</string>
+	<string name="poi_traffic_signals_sound_walk">Hangjelzés, amikor lehet menni</string>
+
+	<string name="poi_services">Pihenőhely</string>
+	<string name="poi_mini_roundabout">Mini körforgalom</string>
+	<string name="poi_railway_crossing">Vasúti kereszteződés</string>
+	<string name="poi_railway_level_crossing">Vasúti gyalogátjáró</string>
+	<string name="poi_bird_hide">Madármegfigyelő hely</string>
+	<string name="poi_horse_riding">Lovaglás</string>
+	<string name="poi_houseware">Háztartási bolt</string>
+	<string name="poi_occupational_therapist">Foglalkozás-terapeuta</string>
+	<string name="poi_racquet">Raketball</string>
+	<string name="poi_artist_name">Művész</string>
+	<string name="poi_sculptor">Szobrász</string>
+
+	<string name="poi_building_type_church">Épülettípus: templom</string>
+	<string name="poi_building_type_chapel">Épülettípus: kápolna</string>
+	<string name="poi_building_type_mosque">Épülettípus: mecset</string>
+	<string name="poi_building_type_temple">Épülettípus: templom</string>
+	<string name="poi_building_type_cathedral">Épülettípus: katedrális</string>
+	<string name="poi_building_type_monastery">Épülettípus: kolostor</string>
+	<string name="poi_building_type_basilica">Épülettípus: bazilika</string>
+	<string name="poi_building_type_synagogue">Épülettípus: zsinagóga</string>
+	<string name="poi_building_type_shrine">Épülettípus: kegyhely</string>
+
+	<string name="poi_cross">Kereszt</string>
+	<string name="poi_summit_cross">Csúcskereszt: van</string>
+
+	<string name="poi_temperature">Hőfok</string>
+	<string name="poi_bathing_yes">Fürdő: van</string>
+	<string name="poi_bathing_no">Fürdő: nincs</string>
+
+	<string name="poi_cargo_passengers">Rakomány: utas</string>
+	<string name="poi_cargo_vehicle">Rakomány: jármű</string>
+	<string name="poi_cargo_bicycle">Rakomány: kerékpár</string>
+	<string name="poi_cargo_container">Rakomány: konténer</string>
+	<string name="poi_cargo_hgv">Rakomány: tehergépjármű</string>
+
 	</resources>

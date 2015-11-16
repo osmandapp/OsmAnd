@@ -604,7 +604,7 @@
 	<string name="vector_data">Offline διανυσματικοί χάρτες</string>
 	<string name="transport_context_menu">Αναζήτηση μέσου μεταφοράς στη στάση</string>
 	
-	<string name="osb_bug_name">Σφάλμα</string>
+	
 	<string name="poi_context_menu_modify">Τροποποίηση ΣΕ</string>
 	<string name="poi_context_menu_delete">Διαγραφή ΣΕ</string>
 	<string name="rotate_map_compass_opt">Πυξίδα</string>
@@ -848,7 +848,7 @@
 	<string name="search_tabs_location">Τοποθεσία</string>
 	
 	<string name="context_menu_item_update_map">Ενημέρωση χάρτη</string>
-	<string name="context_menu_item_open_bug">Άνοιγμα σφάλματος OSM</string>
+	
 	<string name="context_menu_item_create_poi">Δημιουργία ΣΕ</string>
 	<string name="shared_string_yes">Ναι</string>
 	<string name="shared_string_cancel">Ακύρωση</string>
@@ -861,21 +861,21 @@
 	<string name="favourites_context_menu_delete">Διαγραφή αγαπημένου</string>
 	<string name="favourites_remove_dialog_msg">Αφαίρεση αγαπημένου σημείου \'%s\'?</string>
 	<string name="favourites_remove_dialog_success">Το αγαπημένο σημείο {0} διαγράφηκε με επιτυχία.</string>
-	<string name="osb_add_dialog_title">Εισαγωγή κειμένου σφάλματος</string>
-	<string name="osb_add_dialog_success">Το σφάλμα δημιουργήθηκε επιτυχώς</string>
-	<string name="osb_add_dialog_error">Προέκυψε εξαίρεση: το σφάλμα δεν δημιουργήθηκε</string>
-	<string name="osb_comment_menu_item">Προσθήκη σχολίου</string>
+	
+	
+	
+	
 	<string name="osb_comment_dialog_message">Μήνυμα</string>
 	<string name="osb_comment_dialog_author">Όνομα συγγραφέα</string>
-	<string name="osb_comment_dialog_title">Προσθήκη σχολίου στο σφάλμα</string>
-	<string name="osb_comment_dialog_add_button">Προσθήκη σχολίου</string>
+	
+	
 	<string name="osb_comment_dialog_success">Το σχόλιο προστέθηκε με επιτυχία</string>
 	<string name="osb_comment_dialog_error">Προέκυψε εξαίρεση: το σχόλιο δεν προστέθηκε</string>
-	<string name="osb_close_menu_item">Κλείσιμο σφάλματος</string>
-	<string name="osb_close_dialog_title">Κλείσιμο σφάλματος</string>
-	<string name="osb_close_dialog_close_button">Κλείσιμο σφάλματος</string>
-	<string name="osb_close_dialog_success">Το σφάλμα έκλεισε με επιτυχία</string>
-	<string name="osb_close_dialog_error">Προέκυψε εξαίρεση: το σφάλμα δεν ήταν κλειστό</string>
+	
+	
+	
+	
+	
 	<string name="poi_edit_title">Επεξεργασία ΣΕ</string>
 	<string name="poi_create_title">Δημιουργία ΣΕ</string>
 	<string name="poi_error_poi_not_found">Ο κόμβος δεν μπορεί να βρεθεί ή η υποδομή δεν είναι απλός κόμβος</string>
@@ -1084,7 +1084,7 @@
     <string name="destination_point">Προορισμός %1$s</string>
     <string name="context_menu_item_destination_point">Ορισμός ως προορισμός</string>
     <string name="please_select_address">Επιλέξτε πόλη ή οδό πρώτα</string>
-    <string name="intermediate_items_sort_by_distance">Ταξινόμηση (πόρτα-πόρτα)</string>
+    <string name="intermediate_items_sort_by_distance">Ταξινόμηση πόρτα-πόρτα</string>
     <string name="local_osm_changes_backup_failed">Η δημιουργία αντιγράφου ασφαλείας αλλαγών OSM απέτυχε</string>
     <string name="local_osm_changes_backup">Δημιουργία αντιγράφου ασφαλείας αλλαγών OSM</string>
     <string name="layer_hillshade">Στρώση σκίασης αναγλύφου</string>

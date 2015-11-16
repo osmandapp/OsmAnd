@@ -378,13 +378,13 @@
     <string name="poi_action_add">afegeix</string>
     <string name="poi_action_change">canvia</string>
     <string name="shared_string_delete">Suprimeix</string>
-    <string name="osb_close_dialog_close_button">Tanca l\'error</string>
-    <string name="osb_close_dialog_title">S\'està tancant l\'error</string>
-    <string name="osb_comment_dialog_add_button">Afegeix un comentari</string>
+    
+    
+    
     <string name="osb_comment_dialog_message">Missatge</string>
-    <string name="osb_close_menu_item">Tanca l\'error</string>
+    
     <string name="osb_comment_dialog_author">Nom de l\'autor</string>
-    <string name="osb_add_dialog_success">L\'error s\'ha creat amb èxit</string>
+    
     <string name="shared_string_yes">Sí</string>
     <string name="shared_string_no">No</string>
     <string name="shared_string_add">Afegeix</string>
@@ -459,7 +459,7 @@
     <string name="download_type_to_filter">Tipus de filtre</string>
     <string name="website">Lloc web</string>
     <string name="poi_context_menu_call">Mostra el telèfon del PDI</string>
-    <string name="osb_bug_name">Error</string>
+    
     <string name="rotate_map_to_bearing">Orientació del mapa</string>
     <string name="shared_string_import">Importa</string>
     <string name="any_poi">Algun</string>
@@ -600,9 +600,9 @@
     <string name="search_address_top_text">Selecció de l\'adreça</string>
     <string name="favourites_context_menu_edit">Edita el preferit</string>
     <string name="favourites_context_menu_delete">Elimina el preferit</string>
-    <string name="osb_add_dialog_title">Entra un text d\'error</string>
-    <string name="osb_close_dialog_success">L\'error s\'ha tancat correctament</string>
-    <string name="osb_comment_dialog_title">S\'està afegint el comentari a l\'error</string>
+    
+    
+    
     <string name="poi_edit_title">Edita el PDI</string>
     <string name="poi_remove_title">Elimina el PDI</string>
     <string name="poi_create_title">Crea un PDI</string>
@@ -688,7 +688,7 @@
     <string name="osmand_rastermaps_plugin_description">"Amb aquest connector podeu accedir a diferents tipus de mapa (anomenats mosaic o ràster), des de les tessel·les predefinides d\'OpenStreetMap (com Mapnik) a imatges de satèl·lit i capes específiques com mapes meteorològics, climàtics, geològics, de relleu, etc.\n\nQualsevol d\'aquests mapes es pot utilitzar sigui com principal (base) per veure\'s a la vista del mapa de l\'OsmAnd, o com una superposició o sots-posició d\'un altre mapa base (com els mapes  d\'OsmAnd habituals en desconnexió). Per fer més visible qualsevol mapa en sots-posició, es pot amagar fàcilment determinats elements dels mapes vectorials de l\'OsmAnd via el menú «Configuració del mapa» a voluntat.\n\nEls mapes de tessel·les es poden obtenir directament de proveïdors en línia, o es poden preparar per un ús fora de línia (cal copiar-los manualment al directori de l\'OsmAnd) com una base de dades sqlite construïda per diferents eines de preparació de mapes de tercers. "</string>
     <string name="choose_audio_stream_descr">Escolliu el canal per reproduir el guiat per veu (depenent del sistema)</string>
     <string name="renderers">Renderització dels vectors</string>
-    <string name="context_menu_item_open_bug">Obre un error d\'OSM</string>
+    
     <string name="add_tag">Afegeix una etiqueta</string>
     <string name="poi_filter_entertainment">Entreteniment</string>
     <string name="context_menu_item_first_intermediate_point">Defineix el primer punt objectiu</string>
@@ -775,7 +775,7 @@
     <string name="add_favorite_dialog_top_text">Introducció del nom del preferit</string>
     <string name="add_favorite_dialog_default_favourite_name">Preferit</string>
     <string name="add_favorite_dialog_favourite_added_template">El punt preferit «{0}» s\'ha afegit correctament.</string>
-    <string name="osb_comment_menu_item">Afegeix un comentari</string>
+    
     <string name="osb_comment_dialog_success">El comentari s\'ha afegit correctament</string>
     <string name="poi_remove_success">El PDI s\'ha eliminat correctament</string>
     <string name="shared_string_clear">Neteja</string>
@@ -901,7 +901,7 @@
     <string name="sd_dir_not_accessible">La carpeta d\'emmagatzematge a la targeta SD no és accessible!</string>
     <string name="please_select_address">Seleccioneu primer un municipi o carrer</string>
     <string name="search_street_in_neighborhood_cities">Cerca el carrer en els municipis propers</string>
-    <string name="intermediate_items_sort_by_distance">Ordre (porta a porta)</string>
+    <string name="intermediate_items_sort_by_distance">Ordre porta a porta</string>
     <string name="delete_point">Suprimeix el punt</string>
     <string name="plugin_distance_point_time">hora</string>
     <string name="plugin_distance_point_hdop">precisió</string>
@@ -974,7 +974,7 @@
     <string name="incremental_search_building">Cerca progressiva d\'edificis</string>
     <string name="Closest_Amenities">Instal·lacions més properes</string>
     <string name="position_on_map_bottom">Part inferior</string>
-    <string name="osb_add_dialog_error">S\'ha produït una excepció: no s\'ha creat l\'error</string>
+    
     <string name="poi_error_poi_not_found">No s\'ha trobat el node o la instal·lació no és un node únic</string>
     <string name="poi_error_io_error_template">S\'ha produït un error d\'E/S durant l\'acció {0}.</string>
     <string name="announce_gpx_waypoints">Fites GPX</string>
@@ -1092,7 +1092,7 @@
     <string name="av_camera_focus_descr">Trieu el tipus d\'enfocament de la càmera</string>
     <string name="av_camera_focus">Tipus d\'enfocament</string>
     <string name="poi_error_unexpected_template">S\'ha produït un error inesperat en fer l\'acció {0}.</string>
-    <string name="osb_close_dialog_error">S\'ha produït una excepció: no s\'ha tancat l\'error</string>
+    
     <string name="map_tile_source_descr">Trieu l\'origen de les tessel·les, en línia o de la memòria cau</string>
     <string name="previous_run_crashed">La darrera execució de l\'OsmAnd ha fallat. El fitxer log és a {0}. Si us plau informeu del problema i adjunteu el fitxer log.</string>
     <string name="transport_stop_to_go_out">Trieu aturada per sortir</string>
@@ -1790,7 +1790,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="enter_country_name">Indiqueu el nom del país</string>
     <string name="shared_string_upload">Pujada</string>
     <string name="osm_edit_created_poi">S\'ha creat un PDI a OSM</string>
-    <string name="osm_edit_created_bug">S\'ha obert un nou error a OSM</string>
+    
     <string name="new_version">Versió nova</string>
     <string name="begin_with_osmand_menu_group">Primeres passes a OsmAnd</string>
     <string name="features_menu_group">Característiques</string>
@@ -1816,4 +1816,14 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
 
 <string name="read_more">Llegiu-ne més</string>
     <string name="whats_new">Què hi ha de nou a</string>
+    <string name="share_osm_edits_subject">Edicions OSM compartides via OsmAnd</string>
+    <string name="lang_nds">Baix alemany</string>
+    <string name="lang_mk">Macedònic</string>
+    <string name="lang_fy">Frisó</string>
+    <string name="lang_als">Albanès (Tosc)</string>
+    <string name="save_poi_without_poi_type_message">Confirmeu desar el PDI sense indicar el tipus?</string>
+    <string name="context_menu_item_delete_waypoint">Voleu suprimir la fita GPX?</string>
+    <string name="context_menu_item_edit_waypoint">Edita la fita GPX</string>
+    <string name="shared_string_location">Localització</string>
+    <string name="poi_context_menu_modify_osm_change">Modifica el canvi OSM</string>
     </resources>

@@ -453,7 +453,7 @@
   <string name="vector_data">Bezsaistes vektoru kartes</string>
   <string name="transport_context_menu">Meklēt transportu pieturas vietā</string>
   
-  <string name="osb_bug_name">Kļūda</string>
+  
   <string name="poi_context_menu_modify">Labot POI</string>
   <string name="poi_context_menu_delete">Dzēst POI</string>
   <string name="rotate_map_compass_opt">Pēc kompasa</string>
@@ -724,7 +724,7 @@
   <string name="search_tabs_location">Atrašanās vieta</string>
   
   <string name="context_menu_item_update_map">Atjaunot karti</string>
-  <string name="context_menu_item_open_bug">Atvērt OSM bug</string>
+  
   <string name="context_menu_item_create_poi">Izveidot POI</string>
   <string name="shared_string_yes">Jā</string>
   <string name="shared_string_cancel">Atcelt</string>
@@ -738,21 +738,21 @@
   <string name="favourites_context_menu_delete">Dzēst izlasi</string>
   <string name="favourites_remove_dialog_msg">Dzēst izlases punktu \'%s\'?</string>
   <string name="favourites_remove_dialog_success">Izlases punkts {0} veiksmīgi dzēsts.</string>
-  <string name="osb_add_dialog_title">Ievadiet kļūdas tekstu</string>
-  <string name="osb_add_dialog_success">Kļūdas pieteikums veiksmīgi izveidots</string>
-  <string name="osb_add_dialog_error">Kļūda:pieteikums netika pievienots</string>
-  <string name="osb_comment_menu_item">Pievienot komentāru</string>
+  
+  
+  
+  
   <string name="osb_comment_dialog_message">Ziņa</string>
   <string name="osb_comment_dialog_author">Autora vārds</string>
-  <string name="osb_comment_dialog_title">Pievieno komentāru kļūdas pieteikumam</string>
-  <string name="osb_comment_dialog_add_button">Pievienot komentāru</string>
+  
+  
   <string name="osb_comment_dialog_success">Komentārs veiksmīgi pievienots</string>
   <string name="osb_comment_dialog_error">Kļūda:komentārs netika pievienots</string>
-  <string name="osb_close_menu_item">Aizvērt kļūdas pieteikumu</string>
-  <string name="osb_close_dialog_title">Aizver kļūdas pieteikumu</string>
-  <string name="osb_close_dialog_close_button">Aizvērt kļūdas pieteikumu</string>
-  <string name="osb_close_dialog_success">Kļūdas pieteikums veiksmīgi aizvērts</string>
-  <string name="osb_close_dialog_error">Kļūda: kļūdas pieteikums netika aizvērts</string>
+  
+  
+  
+  
+  
   <string name="poi_edit_title">Labot POI</string>
   <string name="poi_create_title">Izveidot POI</string>
   <string name="poi_error_poi_not_found">Nevar atrast nodi, vai arī serviss nav atzīmēts kā viena node</string>
@@ -1057,7 +1057,7 @@
     <string name="please_select_address">Vispirms atzīmēt pilsētu vai ielu</string>
     <string name="search_street_in_neighborhood_cities">Meklēt ielu nosaukumus blakus pilsētās</string>
     <string name="intermediate_items_sort_return">Ceļapunkti tika pārkārtoti, lai optimizētu maršrutu no pašreizējās pozīcijas līdz galamērķim.</string>
-    <string name="intermediate_items_sort_by_distance">Kārtot (pēc attāluma)</string>
+    <string name="intermediate_items_sort_by_distance">Kārtot pēc attāluma</string>
     <string name="local_osm_changes_backup_successful">OSM izmaiņu fails veiksmīgi izveidots %1$s</string>
     <string name="local_osm_changes_backup_failed">OSM izmaiņu fails netika izveidots</string>
     <string name="local_osm_changes_backup">Izveidot OSM izmaiņu failu</string>

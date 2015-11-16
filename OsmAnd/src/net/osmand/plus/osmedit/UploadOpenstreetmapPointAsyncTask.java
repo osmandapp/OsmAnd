@@ -11,8 +11,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by Denis
- * on 11.03.2015.
  */
 public class UploadOpenstreetmapPointAsyncTask
 		extends AsyncTask<OsmPoint, OsmPoint, Map<OsmPoint, String>> {
@@ -28,14 +26,12 @@ public class UploadOpenstreetmapPointAsyncTask
 	public UploadOpenstreetmapPointAsyncTask(ProgressDialog progress,
 											 OsmEditsUploadListener listener,
 											 OsmEditingPlugin plugin,
-											 OpenstreetmapRemoteUtil remotepoi,
-											 OsmBugsRemoteUtil remotebug,
 											 int listSize,
 											 boolean closeChangeSet) {
 		this.progress = progress;
 		this.plugin = plugin;
-		this.remotepoi = remotepoi;
-		this.remotebug = remotebug;
+		this.remotepoi = plugin.getPoiModificationRemoteUtil();
+		this.remotebug = plugin.getOsmNotesRemoteUtil();
 		this.listSize = listSize;
 		this.listener = listener;
 		this.closeChangeSet = closeChangeSet;
@@ -66,14 +62,7 @@ public class UploadOpenstreetmapPointAsyncTask
 				loadErrorsMap.put(point, n != null ? null : "Unknown problem");
 			} else if (point.getGroup() == OsmPoint.Group.BUG) {
 				OsmNotesPoint p = (OsmNotesPoint) point;
-				String errorMessage = null;
-				if (p.getAction() == OsmPoint.Action.CREATE) {
-					errorMessage = remotebug.createNewBug(p.getLatitude(), p.getLongitude(), p.getText(), p.getAuthor());
-				} else if (p.getAction() == OsmPoint.Action.MODIFY) {
-					errorMessage = remotebug.addingComment(p.getId(), p.getText(), p.getAuthor());
-				} else if (p.getAction() == OsmPoint.Action.DELETE) {
-					errorMessage = remotebug.closingBug(p.getId(), p.getText(), p.getAuthor());
-				}
+				String errorMessage = remotebug.commit(p, p.getText(), p.getAction()).warning;
 				if (errorMessage == null) {
 					plugin.getDBBug().deleteAllBugModifications(p);
 					publishProgress(p);

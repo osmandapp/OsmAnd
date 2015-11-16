@@ -444,7 +444,7 @@
   <string name="vector_data">Offline vectorkaarten</string>
   <string name="transport_context_menu">Zoek openbaar vervoer op halte</string>
   
-  <string name="osb_bug_name">Bug</string>
+  
   <string name="poi_context_menu_modify">Wijzig interessepunt</string>
   <string name="poi_context_menu_delete">Verwijder interessepunt</string>
   <string name="rotate_map_compass_opt">Volgens kompas</string>
@@ -705,7 +705,7 @@
   
   
   <string name="context_menu_item_update_map">Kaart bijwerken</string>
-  <string name="context_menu_item_open_bug">Meld fout in OpenStreetMap</string>
+  
   <string name="context_menu_item_create_poi">Maak interessepunt in OSM</string>
   <string name="add_favorite_dialog_top_text">Geef de favoriet een naam</string>
   <string name="add_favorite_dialog_default_favourite_name">Favoriet</string>
@@ -714,21 +714,21 @@
   <string name="favourites_context_menu_delete">Verwijder favoriet</string>
   <string name="favourites_remove_dialog_msg">Verwijder favoriet \'%s\'?</string>
   <string name="favourites_remove_dialog_success">Favoriet {0} is verwijderd.</string>
-  <string name="osb_add_dialog_title">Geef bug tekst in</string>
-  <string name="osb_add_dialog_success">Bug is aangemaakt</string>
-  <string name="osb_add_dialog_error">Fout opgetreden: bug is niet aangemaakt</string>
-  <string name="osb_comment_menu_item">Voeg commentaar toe</string>
+  
+  
+  
+  
   <string name="osb_comment_dialog_message">Bericht</string>
   <string name="osb_comment_dialog_author">Naam auteur</string>
-  <string name="osb_comment_dialog_title">Commentaar wordt aan bug toegevoegd</string>
-  <string name="osb_comment_dialog_add_button">Commentaar toevoegen</string>
+  
+  
   <string name="osb_comment_dialog_success">Commentaar is toegevoegd</string>
   <string name="osb_comment_dialog_error">Fout opgetreden: commentaar is niet toegevoegd</string>
-  <string name="osb_close_menu_item">Sluit bug</string>
-  <string name="osb_close_dialog_title">Bug wordt afgesloten</string>
-  <string name="osb_close_dialog_close_button">Sluit bug</string>
-  <string name="osb_close_dialog_success">Bug is afgesloten</string>
-  <string name="osb_close_dialog_error">Fout opgetreden: bug is niet gesloten</string>
+  
+  
+  
+  
+  
   <string name="poi_edit_title">Bewerk interessepunt</string>
   <string name="poi_create_title">Maak interessepunt</string>
   <string name="poi_error_poi_not_found">Punt niet gevonden of voorziening is niet een enkel punt</string>
@@ -1277,7 +1277,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     
     <string name="search_street_in_neighborhood_cities">Zoek straat in nabijgelegen plaatsen</string>
     <string name="intermediate_items_sort_return">De tussenliggende routepunten zijn opnieuw gesorteerd voor een optimale volgorde op de route van uw huidige positie naar uw bestemming.</string>
-    <string name="intermediate_items_sort_by_distance">Sorteer (kortste afstand)</string>
+    <string name="intermediate_items_sort_by_distance">Sorteer kortste afstand</string>
     <string name="please_select_address">Kies eerst een stad of straat</string>
     <string name="context_menu_item_destination_point">Als bestemming\ninstellen</string>
     <string name="destination_point">Bestemming %1$s</string>
@@ -2013,7 +2013,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="archive_wikipedia_data">Er zijn al (verouderde en incompatibele) Wikipedia-gegevens gedownload. Wilt u deze bewaren?</string>
     <string name="download_wikipedia_files">Wilt u Wikipedia-artikelen downloaden (%1$s MB) ?</string>
     <string name="disable_recording_once_app_killed">Voorkom loggen als app wordt gesloten</string>
-    <string name="disable_recording_once_app_killed_descrp">Stopt het opnemen van een GPX-spoor als de app wordt gesloten in de applicatielijst. (De OsmAnd achtergrondindicatie verdwijnt dan ook.)</string>
+    <string name="disable_recording_once_app_killed_descrp">Stopt het opnemen van een GPX-spoor als de app wordt afgesloten met Recente Applicaties</string>
     <string name="shared_string_import2osmand">Importeren in OsmAnd</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="rendering_value_default13_name">Standaard (13)</string>
@@ -2118,7 +2118,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     
     <string name="shared_string_upload">Upload</string>
     <string name="osm_edit_created_poi">POI in OSM gemaakt</string>
-    <string name="osm_edit_created_bug">Bug in OSM gemaakt</string>
+    
     <string name="simulate_initial_startup_descr">Laat de app de volgende keer starten alsof deze net is geïnstalleerd. De instellingen blijven wel behouden.</string>
     <string name="simulate_initial_startup">Simuleer eerste start van de app</string>
     <string name="shared_string_others">Overige</string>
@@ -2199,4 +2199,21 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="lang_mk">Macedonisch</string>
     <string name="lang_fy">Fries</string>
     <string name="lang_als">Toskisch (Albanees)</string>
-    </resources>
+    <string name="shared_string_location">Locatie</string>
+    <string name="osm_edit_modified_poi">Gewijzigde OSM POI</string>
+    <string name="osm_edit_deleted_poi">Gewiste OSM POI</string>
+    <string name="context_menu_item_open_note">Open OSM-opmerking</string>
+    <string name="osm_edit_reopened_note">Heropende OSM-opmerking</string>
+    <string name="osm_edit_commented_note">OSM-opmerking met commentaar</string>
+    <string name="osm_edit_removed_note">OSM-opmerking gewist</string>
+	<string name="osm_edit_created_note">OSM-opmerking gemaakt</string>
+	<string name="osn_bug_name">OSM-opmerking</string>
+	<string name="osn_add_dialog_title">Maak opmerking</string>
+	<string name="osn_comment_dialog_title">Voeg commentaar toe</string>
+	<string name="osn_reopen_dialog_title">Heropen notitie</string>
+	<string name="osn_close_dialog_title">Sluit notitie</string>
+	<string name="osn_add_dialog_success">Notitie aangemaakt</string>
+	<string name="osn_add_dialog_error">Er was een probleem: notitie niet aangemaakt</string>
+	<string name="osn_close_dialog_success">Bug is gesloten</string>
+	<string name="osn_close_dialog_error">Er was een probleem: notitie is niet afgesloten</string>
+	</resources>

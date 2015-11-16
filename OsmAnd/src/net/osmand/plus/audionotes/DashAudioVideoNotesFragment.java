@@ -106,7 +106,7 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 				public void onClick(View v) {
 					getMyApplication().getSettings().setMapLocationToShow(recording.getLatitude(),
 							recording.getLongitude(), 15,
-							new PointDescription(recording.getSearchHistoryType(), recording.getName(getActivity())),
+							new PointDescription(recording.getSearchHistoryType(), recording.getName(getActivity(), true)),
 							true, recording); //$NON-NLS-1$
 					MapActivity.launchMapActivityMoveToTop(getActivity());
 				}
@@ -117,7 +117,7 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 
 	public static Drawable getNoteView(final AudioVideoNotesPlugin.Recording recording, View view,
 									   final OsmandApplication ctx) {
-		String name = recording.getName(ctx);
+		String name = recording.getName(ctx, true);
 		TextView nameText = ((TextView) view.findViewById(R.id.name));
 		nameText.setText(name);
 		((TextView) view.findViewById(R.id.description)).setText(recording.getSmallDescription(ctx));

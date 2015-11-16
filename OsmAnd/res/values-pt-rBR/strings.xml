@@ -686,7 +686,7 @@
     
     <string name="search_street_in_neighborhood_cities">Pesquisar rua na vizinhança</string>
     <string name="intermediate_items_sort_return">Paradas intermediárias reordenadas para otimizar o caminho do local atual até o destino.</string>
-    <string name="intermediate_items_sort_by_distance">Ordem (porta a porta)</string>
+    <string name="intermediate_items_sort_by_distance">Ordem porta a porta</string>
     <string name="local_osm_changes_backup_successful">Arquivo de alterações do OSM gerado com sucesso %1$s</string>
     <string name="local_osm_changes_backup_failed">Falha ao copiar as alterações no OSM</string>
     <string name="local_osm_changes_backup">Copiar como alteração no OSM</string>
@@ -1203,7 +1203,7 @@
 	<string name="use_english_names">Usar nomes em inglês nos mapas</string>
 	<string name="show_poi_over_map_description">Mostrar POI no mapa (usar o último filtro)</string>
 	<string name="show_poi_over_map">Mostrar POI</string>
-	<string name="context_menu_item_open_bug">Relatar erro no OSM</string>
+	
 	<string name="poi_edit_title">Modificar POI</string>
 	<string name="city_type_suburb">Subúrbio</string>
 	<string name="city_type_hamlet">Lugarejo</string>
@@ -1420,7 +1420,7 @@
 	<string name="error_reading_gpx">Erro na leitura de dados GPX</string>
 	<string name="vector_data">Mapas vetoriais off-line</string>
 	<string name="transport_context_menu">Pesquisar transporte na parada</string>
-	<string name="osb_bug_name">Erro</string>
+	
 	<string name="poi_context_menu_modify">Modificar POI</string>
 	<string name="poi_context_menu_delete">Apagar POI</string>
 	<string name="rotate_map_compass_opt">Na direção da bússola</string>
@@ -1612,22 +1612,22 @@
 	<string name="favourites_context_menu_delete">Apagar favorito</string>
 	<string name="favourites_remove_dialog_msg">Apagar ponto favorito \'%s\'?</string>
 	<string name="favourites_remove_dialog_success">Ponto favorito {0} apagado.</string>
-	<string name="osb_add_dialog_title">Descrição do erro</string>
-	<string name="osb_add_dialog_success">Alerta de erro criado</string>
-	<string name="osb_add_dialog_error">Erro: o alerta de erro não foi criado</string>
+	
+	
+	
 	<string name="osb_author_dialog_password">Senha do OSM (opcional)</string>
-	<string name="osb_comment_menu_item">Adicionar comentário</string>
+	
 	<string name="osb_comment_dialog_message">Mensagem</string>
 	<string name="osb_comment_dialog_author">Autor</string>
-	<string name="osb_comment_dialog_title">Adicionando comentário ao erro</string>
-	<string name="osb_comment_dialog_add_button">Adicionar comentário</string>
+	
+	
 	<string name="osb_comment_dialog_success">Comentário adicionado</string>
 	<string name="osb_comment_dialog_error">Erro: o comentário não foi adicionado</string>
-	<string name="osb_close_menu_item">Fechar o erro</string>
-	<string name="osb_close_dialog_title">Fechando o erro</string>
-	<string name="osb_close_dialog_close_button">Fechar o erro</string>
-	<string name="osb_close_dialog_success">Erro fechado</string>
-	<string name="osb_close_dialog_error">Erro: o alerta de erro não foi fechado</string>
+	
+	
+	
+	
+	
 	<string name="poi_create_title">Criar POI</string>
 	<string name="poi_error_poi_not_found">Nó não pode ser encontrado ou POI não é um único nó</string>
 	<string name="poi_remove_confirm_template">Apagar {0} (enter comment)?</string>
@@ -1806,7 +1806,7 @@
     
     <string name="shared_string_upload">Enviar</string>
     <string name="osm_edit_created_poi">POI OSM criado</string>
-    <string name="osm_edit_created_bug">Erro no OSM criado</string>
+    
     <string name="shared_string_qr_code">QR-code</string>
     <string name="map_downloaded">Mapa baixado</string>
     </resources>

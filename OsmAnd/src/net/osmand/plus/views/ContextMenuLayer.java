@@ -78,12 +78,11 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		int minh = contextMarker.getDrawable().getMinimumHeight();
 		contextMarker.layout(0, 0, minw, minh);
 	}
-	
 
 	public boolean isVisible() {
 		return menu.isActive();
 	}
-	
+
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox box, DrawSettings nightMode) {
 		if(menu.isActive()) {
@@ -94,8 +93,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			contextMarker.draw(canvas);
 		}
 	}
-	
-	
+
 	public void setSelectOnMap(CallbackWithObject<LatLon> selectOnMap) {
 		this.selectOnMap = selectOnMap;
 	}

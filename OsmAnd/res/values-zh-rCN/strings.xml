@@ -294,7 +294,7 @@
 	<string name="gpx_files_not_found">GPX文件中找不到/曲目目录</string>
 	<string name="layer_gpx_layer">GPX轨迹…</string>
 	<string name="error_reading_gpx">GPX数据读取错误</string>
-	<string name="osb_bug_name">问题</string>
+	
 	<string name="error_occurred_loading_gpx">时发生错误加载GPX</string>
 	<string name="shared_string_import">导入</string>
 	
@@ -880,7 +880,7 @@
 	<string name="shared_string_show_on_map">在地图上显示</string>
 	
 	<string name="context_menu_item_update_map">更新地图</string>
-	<string name="context_menu_item_open_bug">打开 OSM bug</string>
+	
 	<string name="context_menu_item_create_poi">创建POI</string>
 	<string name="add_favorite_dialog_top_text">输入收藏点名称</string>
 	<string name="add_favorite_dialog_default_favourite_name">收藏夹</string>
@@ -889,22 +889,22 @@
 	<string name="favourites_context_menu_delete">删除收藏</string>
 	<string name="favourites_remove_dialog_msg">是否删除收藏点 \'%s\'？</string>
 	<string name="favourites_remove_dialog_success">收藏点 {0} 已被成功删除。</string>
-	<string name="osb_add_dialog_title">输出 Bug 文本</string>
-	<string name="osb_add_dialog_success">Bug 已成功创建</string>
-	<string name="osb_add_dialog_error">发生异常：Bug 未能创建</string>
+	
+	
+	
 	<string name="osb_author_dialog_password">OSM 密码(可选)</string>
-	<string name="osb_comment_menu_item">添加备注</string>
+	
 	<string name="osb_comment_dialog_message">消息</string>
 	<string name="osb_comment_dialog_author">作者名称</string>
-	<string name="osb_comment_dialog_title">向 Bug 添加备注</string>
-	<string name="osb_comment_dialog_add_button">添加备注</string>
+	
+	
 	<string name="osb_comment_dialog_success">备注已成功添加</string>
 	<string name="osb_comment_dialog_error">发生异常：备注未能添加</string>
-	<string name="osb_close_menu_item">关闭 Bug</string>
-	<string name="osb_close_dialog_title">正在关闭 Bug</string>
-	<string name="osb_close_dialog_close_button">关闭 Bug</string>
-	<string name="osb_close_dialog_success">Bug 已被成功关闭</string>
-	<string name="osb_close_dialog_error">发生异常：Bug 未能关闭</string>
+	
+	
+	
+	
+	
 	<string name="poi_edit_title">编辑 POI</string>
 	<string name="poi_create_title">创建 POI</string>
 	<string name="poi_error_poi_not_found">节点未找到，或者设施不是单个节点</string>
@@ -928,7 +928,7 @@
     
 	
 	<string name="settings_preset_descr">每种使用场景的地图和导航设置是相互独立的。在这里设置您的缺省使用场景。</string>
-    <string name="intermediate_items_sort_by_distance">排序 (门到门)</string>
+    <string name="intermediate_items_sort_by_distance">排序 门到门</string>
     <string name="plugin_distance_point_ele">海拔</string>
     <string name="use_kalman_filter_compass_descr">使用卡尔曼滤波避免罗盘误差</string>
     <string name="use_kalman_filter_compass">使用卡尔曼滤波</string>

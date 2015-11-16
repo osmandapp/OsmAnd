@@ -10,6 +10,7 @@ import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuType;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleButtonController;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleProgressController;
@@ -198,6 +199,8 @@ public class MapContextMenu extends MenuTitleController {
 
 		if (needAcquireMenuController) {
 			acquireMenuController();
+		} else {
+			menuController.update(pointDescription, object);
 		}
 		initTitle();
 
@@ -210,7 +213,7 @@ public class MapContextMenu extends MenuTitleController {
 			mapActivity.getMapView().setMapPosition(0);
 		}
 
-		mapActivity.getMapView().refreshMap();
+		mapActivity.refreshMap();
 
 		return true;
 	}
@@ -244,12 +247,14 @@ public class MapContextMenu extends MenuTitleController {
 	}
 
 	public void close() {
-		active = false;
-		if (this.object != null) {
-			clearSelectedObject(this.object);
+		if (active) {
+			active = false;
+			if (this.object != null) {
+				clearSelectedObject(this.object);
+			}
+			hide();
+			mapActivity.refreshMap();
 		}
-		hide();
-		mapActivity.getMapView().refreshMap();
 	}
 
 	public void hide() {
@@ -332,7 +337,6 @@ public class MapContextMenu extends MenuTitleController {
 
 	protected void acquireIcons() {
 		super.acquireIcons();
-
 		if (menuController != null) {
 			favActionIconId = menuController.getFavActionIconId();
 		} else {
@@ -341,10 +345,9 @@ public class MapContextMenu extends MenuTitleController {
 	}
 
 	public void fabPressed() {
-		mapActivity.getMapActions().showNavigationContextMenuPoint(latLon.getLatitude(), latLon.getLongitude());
-		//mapActivity.getMapActions().directionTo(latLon.getLatitude(), latLon.getLongitude());
+		mapActivity.getMapActions().directionTo(latLon.getLatitude(), latLon.getLongitude(), getPointDescription());
 		hide();
-		//mapActivity.getMapLayers().getMapControlsLayer().showRouteInfoControlDialog();
+		mapActivity.getMapLayers().getMapControlsLayer().showRouteInfoControlDialog();
 	}
 
 	public void buttonWaypointPressed() {
@@ -361,7 +364,11 @@ public class MapContextMenu extends MenuTitleController {
 		if (object != null && object instanceof FavouritePoint) {
 			getFavoritePointEditor().edit((FavouritePoint) object);
 		} else {
-			getFavoritePointEditor().add(latLon, getTitleStr());
+			String title = getTitleStr();
+			if (pointDescription.isFavorite() || title.equals(addressNotKnownStr)) {
+				title = "";
+			}
+			getFavoritePointEditor().add(latLon, title);
 		}
 	}
 
@@ -385,8 +392,12 @@ public class MapContextMenu extends MenuTitleController {
 	}
 
 	public void addWptPt() {
-		if (object == null || !(object instanceof WptPt)) {
-			getWptPtPointEditor().add(latLon, getTitleStr());
+		if (object == null) {
+			String title = getTitleStr();
+			if (pointDescription.isWpt() || title.equals(addressNotKnownStr)) {
+				title = "";
+			}
+			getWptPtPointEditor().add(latLon, title);
 		}
 	}
 
@@ -433,7 +444,7 @@ public class MapContextMenu extends MenuTitleController {
 		if (menuController != null) {
 			return menuController.getCurrentMenuState();
 		} else {
-			return MenuController.MenuState.HEADER_ONLY;
+			return MenuState.HEADER_ONLY;
 		}
 	}
 
@@ -503,6 +514,10 @@ public class MapContextMenu extends MenuTitleController {
 
 	public boolean displayDistanceDirection() {
 		return menuController != null && menuController.displayDistanceDirection();
+	}
+
+	public boolean displayStreetNameInTitle() {
+		return menuController != null && menuController.displayStreetNameInTitle();
 	}
 
 	public void updateData() {

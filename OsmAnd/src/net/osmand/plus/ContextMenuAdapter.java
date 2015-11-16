@@ -343,7 +343,7 @@ public class ContextMenuAdapter {
 					}
 				});
 			}
-			if (convertView == null || (convertView.getTag() != lid)) {
+			if (convertView == null || (!lid.equals(convertView.getTag()))) {
 				convertView = activity.getLayoutInflater().inflate(lid, parent, false);
 				convertView.setTag(lid);
 			}

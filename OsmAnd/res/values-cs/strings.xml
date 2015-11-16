@@ -374,7 +374,7 @@
     <string name="error_reading_gpx">Chyba při načítání dat GPX</string>
     <string name="vector_data">Vektorové mapy OSM</string>
     <string name="transport_context_menu">Hledat dopravu ze zastávky</string>
-    <string name="osb_bug_name">Chyba</string>
+    
     <string name="poi_context_menu_modify">Upravit POI</string>
     <string name="poi_context_menu_delete">Smazat POI</string>
     <string name="rotate_map_compass_opt">Podle kompasu</string>
@@ -614,7 +614,7 @@
     <string name="search_address_street_option">Protínající ulice</string>
     <string name="search_tabs_location">Poloha</string>
     <string name="context_menu_item_update_map">Aktualizovat mapu</string>
-    <string name="context_menu_item_open_bug">Otevřít chybu OSM</string>
+    
     <string name="context_menu_item_create_poi">Vytvořit POI</string>
     <string name="shared_string_yes">Ano</string>
     <string name="shared_string_cancel">Zrušit</string>
@@ -628,21 +628,21 @@
     <string name="favourites_context_menu_delete">Smazat oblíbené</string>
     <string name="favourites_remove_dialog_msg">Opravdu chcete odstranit oblíbené místo \'%s\'?</string>
     <string name="favourites_remove_dialog_success">Oblíbené místo {0} bylo vymazáno.</string>
-    <string name="osb_add_dialog_title">Vložte text chyby</string>
-    <string name="osb_add_dialog_success">Chyba úspěšně vytvořena</string>
-    <string name="osb_add_dialog_error">Došlo k výjimce: chyba nebyla vytvořena</string>
-    <string name="osb_comment_menu_item">Přidat komentář</string>
+    
+    
+    
+    
     <string name="osb_comment_dialog_message">Hlášení</string>
     <string name="osb_comment_dialog_author">Jméno autora</string>
-    <string name="osb_comment_dialog_title">Přidat komentář k chybě</string>
-    <string name="osb_comment_dialog_add_button">Přidat komentář</string>
+    
+    
     <string name="osb_comment_dialog_success">Komentář byl úspěšně přidán</string>
     <string name="osb_comment_dialog_error">Došlo k výjimce: komentář nebyl přidán</string>
-    <string name="osb_close_menu_item">Uzavřít chybu</string>
-    <string name="osb_close_dialog_title">Uzavírám chybu</string>
-    <string name="osb_close_dialog_close_button">Uzavřít chybu</string>
-    <string name="osb_close_dialog_success">Chyba byla úspěšně uzavřena</string>
-    <string name="osb_close_dialog_error">Došlo k výjimce: Chyba nebyla uzavřena</string>
+    
+    
+    
+    
+    
     <string name="poi_edit_title">Upravit POI</string>
     <string name="poi_create_title">Vytvořit POI</string>
     <string name="poi_error_poi_not_found">Bod nelze najít nebo hledaný objekt není samostatným bodem</string>
@@ -993,7 +993,7 @@
     <string name="please_select_address">Zvolte nejprve město nebo ulici</string>
     <string name="search_street_in_neighborhood_cities">Hledat ulice v okolních obcích</string>
     <string name="intermediate_items_sort_return">Pořadí mezicílů bylo utříděno, aby měly optimální pořadí na cestě z aktuálního místa do místa určení .</string>
-    <string name="intermediate_items_sort_by_distance">Utřídit (ode dveří ke dveřím)</string>
+    <string name="intermediate_items_sort_by_distance">Utřídit ode dveří ke dveřím</string>
     <string name="osb_author_or_password_not_specified">Prosím zadejte v Nastaveních uživatelské jméno a heslo pro vstup do OSM</string>
     <string name="clear_intermediate_points">Smazat cíle</string>
     <string name="keep_intermediate_points">Zachovat cíle</string>
@@ -1797,7 +1797,7 @@
     <string name="first_usage_item_description">Jak stahovat mapy, provést základní nastavení</string>
     <string name="navigation_item_description">Nastavení navigace</string>
     <string name="faq_item">Často kladené dotazy</string>
-    <string name="faq_item_description">Jak použít moduly</string>
+    <string name="faq_item_description">Často kladené otázky</string>
     <string name="map_viewing_item">Prohlížení mapy</string>
     <string name="search_on_the_map_item">Hledání na mapě</string>
     <string name="planning_trip_item">Plánování cesty</string>
@@ -1807,11 +1807,18 @@
     <string name="feedback">Anketa</string>
     <string name="contact_us">Kontaktujte nás</string>
     <string name="osm_edit_created_poi">Vytvořen OSM POI</string>
-    <string name="osm_edit_created_bug">Vytvořena OSM chyba</string>
+    
     <string name="map_legend">Legenda mapy</string>
     <string name="shared_string_update">Aktualizovat</string>
     <string name="shared_string_upload">Odeslat</string>
     <string name="rendering_attr_hideProposed_name">Skrýt plánované objekty</string>
 
 <string name="whats_new">Novinky ve</string>
+    <string name="share_osm_edits_subject">Úpravy OSM sdílené přes OsmAnd</string>
+    <string name="lang_nds">Dolní němčina</string>
+    <string name="lang_mk">Makedónsky</string>
+    <string name="lang_fy">Frínsky</string>
+    <string name="lang_als">Albánsky (Tosk)</string>
+    <string name="read_more">Číst více</string>
+    <string name="save_poi_without_poi_type_message">Opravdu chcete uložit bod POI bez uvedení typu?</string>
     </resources>

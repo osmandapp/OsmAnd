@@ -19,7 +19,7 @@
             android:layout_height="@dimen/standard_icon_size"
             android:layout_marginLeft="16dp"
             android:layout_marginStart="12dp"
-            android:layout_marginTop="18dp"
+            android:layout_marginTop="17dp"
             android:src="@drawable/ic_action_building_number"/>
 
     </LinearLayout>
@@ -28,7 +28,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="14dp"
         android:layout_weight="1"
         android:orientation="vertical">
 
@@ -39,6 +39,8 @@
             android:layout_marginLeft="12dp"
             android:layout_marginRight="12dp"
             android:text="@string/search_address_building"
+            android:maxLines="3"
+            android:ellipsize="end"
             android:textColor="?android:textColorPrimary"
             android:textSize="@dimen/default_list_text_size_large"/>
 

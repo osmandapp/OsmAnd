@@ -9,6 +9,43 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="release_2_2">
+        \u2022 New context-sensitive UI for tapping locations on the map and on other screens\n\n
+        \u2022 Map screen is now launched directly unless \'Show Dashboard on app start\' is selected\n\n
+        \u2022 Configure which and how cards are displayed on the Dashboard\n\n
+        \u2022 To download maps, regions can be directly selected by tapping on the world map\n\n
+        \u2022 POI Search now supports more specific queries\n\n
+	\u2022 Imporoved POI and OSM Editing functionality\n\n
+        \u2022 Map data download structure and interface reworked\n\n
+        and more...
+        </string>
+    <string name="osm_save_offline">Save offline</string>
+    <string name="osm_edit_modified_poi">Modified OSM POI</string>
+    <string name="osm_edit_deleted_poi">Deleted OSM POI</string>
+    <string name="context_menu_item_open_note">Open OSM Note</string>
+    <string name="osm_edit_reopened_note">Reopened OSM Note</string>
+    <string name="osm_edit_commented_note">Commented OSM Note</string>
+    <string name="osm_edit_removed_note">Deleted OSM Note</string>
+	<string name="osm_edit_created_note">Created OSM Note</string>
+	<string name="osn_bug_name">Osm Note</string>
+	<string name="osn_add_dialog_title">Create note</string>
+	<string name="osn_comment_dialog_title">Add comment</string>
+	<string name="osn_reopen_dialog_title">Reopen note</string>
+	<string name="osn_close_dialog_title">Close note</string>
+	<string name="osn_add_dialog_success">Note successfully created</string>
+	<string name="osn_add_dialog_error">Exception occurred: note was not created</string>
+	<string name="osn_close_dialog_success">Bug was successfully closed</string>
+	<string name="osn_close_dialog_error">Exception occurred: note was not closed</string>
+	<string name="osb_author_dialog_password">OSM password (optional)</string>
+	<string name="osb_comment_dialog_message">Message</string>
+	<string name="osb_comment_dialog_author">Author name</string>
+	<string name="osb_comment_dialog_error">Exception occurred: comment was not added</string>
+	<string name="osb_comment_dialog_success">Comment was successfully added</string>
+	<string name="shared_string_commit">Commit</string>
+	
+    <string name="context_menu_item_delete_waypoint">Delete GPX waypoint?</string>
+    <string name="context_menu_item_edit_waypoint">Edit GPX waypoint</string>
+    <string name="shared_string_location">Location</string>
     <string name="share_osm_edits_subject">Osm Edits shared via OsmAnd</string>
     <string name="lang_nds">Low German</string>
     <string name="lang_mk">Macedonian</string>
@@ -20,7 +57,7 @@
     <string name="shared_string_update">Update</string>
     <string name="shared_string_upload">Upload</string>
     <string name="osm_edit_created_poi">Created OSM POI</string>
-    <string name="osm_edit_created_bug">Created OSM bug</string>
+    
     <string name="world_map_download_descr">World basemap (covering the whole world at small zooms) is missing or outdated. Please consider downloading World basemap for a complete environment.</string>
     <string name="shared_string_qr_code">QR-code</string>
     <string name="map_downloaded">Map downloaded</string>
@@ -75,7 +112,9 @@
 	<string name="rendering_value_default13_name">Default (13)</string>
 	<string name="rendering_value_defaultTranslucentCyan_name">Default (translucent cyan)</string>
     <string name="rendering_attr_currentTrackColor_name">GPX color</string>
+    <string name="rendering_attr_currentTrackColor_description">GPX color</string>
     <string name="rendering_attr_currentTrackWidth_name">GPX width</string>
+    <string name="rendering_attr_currentTrackWidth_description">GPX width</string>
     <string name="rendering_value_red_name">Red</string>
     <string name="rendering_value_translucent_red_name">Translucent red</string>
     <string name="rendering_value_orange_name">Orange</string>
@@ -360,6 +399,7 @@
 	<string name="avoid_roads_msg">You can trigger an alternative route by selecting roads to avoid</string>
 	<string name="speak_pedestrian">Pedestrian crosswalks</string>
     <string name="rendering_attr_roadStyle_name">Road style</string>
+    <string name="rendering_attr_roadStyle_description">Road style</string>
     <string name="rendering_value__name">Default</string>
     <string name="rendering_value_default_name">Default</string>
     <string name="rendering_value_germanRoadAtlas_name">German road atlas</string>
@@ -826,7 +866,7 @@
     <string name="please_select_address">Select city or street first</string>
     <string name="search_street_in_neighborhood_cities">Search street in neighborhood cities</string>
     <string name="intermediate_items_sort_return">Intermediate waypoints resorted to optimize their order on the way from current location to the destination.</string>
-    <string name="intermediate_items_sort_by_distance">Sort (door-to-door)</string>
+    <string name="intermediate_items_sort_by_distance">Sort door-to-door</string>
     <string name="local_osm_changes_backup_successful">OSM change file successfully generated %1$s</string>
     <string name="local_osm_changes_backup_failed">Backup OSM changes failed</string>
     <string name="local_osm_changes_backup">Backup as OSM change</string>
@@ -1079,12 +1119,12 @@ Bicycle and Pedestrian Features
  - Display of contour lines and hillshades (via additional plugin)
 
 Directly Contribute to OpenStreetMap
- - Report map bugs
+ - Report map notes
  - Upload GPX tracks to OSM directly from the app
  - Add POIs and directly upload them to OSM (or later if offline)
  - Optional trip recording also in background mode (while device is in sleep mode)
 
-OsmAnd is open source and actively being developed. Everyone can contribute to the application by reporting bugs, improving translations, or coding new features. The project is in a lively state of continuous improvement by all these forms of developer and user interaction. The project progress also relies on financial contributions to fund the development, coding, and testing of new functionalities. By buying OsmAnd+ you help the application to be even more awesome! It is also possible to fund specific new features, or to make a general donation on osmand.net.
+OsmAnd is open source and actively being developed. Everyone can contribute to the application by reporting notes, improving translations, or coding new features. The project is in a lively state of continuous improvement by all these forms of developer and user interaction. The project progress also relies on financial contributions to fund the development, coding, and testing of new functionalities. By buying OsmAnd+ you help the application to be even more awesome! It is also possible to fund specific new features, or to make a general donation on osmand.net.
 
 
 Approximate map coverage and quality:
@@ -1693,7 +1733,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="error_reading_gpx">Error reading GPX data</string>
 	<string name="vector_data">Offline vector maps</string>
 	<string name="transport_context_menu">Search transport at stop</string>
-	<string name="osb_bug_name">Bug</string>
 	<string name="poi_context_menu_modify">Modify POI</string>
 	<string name="poi_context_menu_delete">Delete POI</string>
 	<string name="rotate_map_compass_opt">To compass</string>
@@ -1910,7 +1949,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="search_address_street_option">Intersecting street</string>
 	<string name="search_tabs_location">Location</string>
 	<string name="context_menu_item_update_map">Update map</string>
-	<string name="context_menu_item_open_bug">Open OSM bug</string>
+	
 	<string name="context_menu_item_create_poi">Create POI</string>
 	<string name="add_favorite_dialog_top_text">Enter favorite name</string>
 	<string name="add_favorite_dialog_default_favourite_name">Favorite</string>
@@ -1920,22 +1959,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="favourites_context_menu_delete">Delete favorite</string>
 	<string name="favourites_remove_dialog_msg">Remove favorite point \'%s\'?</string>
 	<string name="favourites_remove_dialog_success">Favorite point {0} was successfully deleted.</string>
-	<string name="osb_add_dialog_title">Enter bug text</string>
-	<string name="osb_add_dialog_success">Bug successfully created</string>
-	<string name="osb_add_dialog_error">Exception occurred: bug was not created</string>
-	<string name="osb_author_dialog_password">OSM password (optional)</string>
-	<string name="osb_comment_menu_item">Add comment</string>
-	<string name="osb_comment_dialog_message">Message</string>
-	<string name="osb_comment_dialog_author">Author name</string>
-	<string name="osb_comment_dialog_title">Adding comment to bug</string>
-	<string name="osb_comment_dialog_add_button">Add comment</string>
-	<string name="osb_comment_dialog_success">Comment was successfully added</string>
-	<string name="osb_comment_dialog_error">Exception occurred: comment was not added</string>
-	<string name="osb_close_menu_item">Close bug</string>
-	<string name="osb_close_dialog_title">Closing bug</string>
-	<string name="osb_close_dialog_close_button">Close bug</string>
-	<string name="osb_close_dialog_success">Bug was successfully closed</string>
-	<string name="osb_close_dialog_error">Exception occurred: bug was not closed</string>
 	<string name="poi_edit_title">Edit POI</string>
 	<string name="poi_create_title">Create POI</string>
 	<string name="poi_error_poi_not_found">Node cannot be found or amenity is not a single node</string>
@@ -1952,6 +1975,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="poi_dialog_name">Name</string>
 	<string name="poi_dialog_opening_hours">Open</string>
 	<string name="poi_dialog_comment">Comment</string>
+	<string name="poi_dialog_reopen">Reopen</string>
 	<string name="poi_dialog_comment_default">POI changing</string>
 	<string name="poi_dialog_other_tags_message">All other tags are preserved</string>
 	<string name="default_buttons_commit">Commit</string>
@@ -2061,5 +2085,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="contact_us">Contact us</string>
     <string name="map_legend">Map legend</string>
     <string name="save_poi_without_poi_type_message">Do you really want to save poi without POI type?</string>
+    <string name="poi_context_menu_modify_osm_change">Modify OSM change</string>
     <!-- string name="map_legend_item_description">Legend for OsmAnd default map style, Internet connectivity needed to display</string -->
 </resources>

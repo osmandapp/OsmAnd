@@ -9,6 +9,7 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
@@ -16,15 +17,16 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
-import net.osmand.plus.mapcontextmenu.controllers.AudioVideoNoteMenuController;
-import net.osmand.plus.mapcontextmenu.controllers.EditPOIMenuController;
+import net.osmand.plus.audionotes.AudioVideoNoteMenuController;
+import net.osmand.plus.osmedit.EditPOIMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.FavouritePointMenuController;
+import net.osmand.plus.mapcontextmenu.controllers.GpxItemMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.HistoryMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.MapDataMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.MyLocationMenuController;
-import net.osmand.plus.mapcontextmenu.controllers.OsMoMenuController;
-import net.osmand.plus.mapcontextmenu.controllers.OsmBugMenuController;
-import net.osmand.plus.mapcontextmenu.controllers.ParkingPositionMenuController;
+import net.osmand.plus.osmo.OsMoMenuController;
+import net.osmand.plus.osmedit.OsmBugMenuController;
+import net.osmand.plus.parkingpoint.ParkingPositionMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.PointDescriptionMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.TargetPointMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.WptPtMenuController;
@@ -35,7 +37,7 @@ import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
 
 public abstract class MenuController extends BaseMenuController {
 
-	public class MenuState {
+	public static class MenuState {
 		public static final int HEADER_ONLY = 1;
 		public static final int HALF_SCREEN = 2;
 		public static final int FULL_SCREEN = 4;
@@ -93,6 +95,8 @@ public abstract class MenuController extends BaseMenuController {
 				menuController = new MapDataMenuController(app, mapActivity, pointDescription, (BinaryMapDataObject) object);
 			} else if (object instanceof OpenStreetNote) {
 				menuController = new OsmBugMenuController(app, mapActivity, pointDescription, (OpenStreetNote) object);
+			} else if (object instanceof GpxDisplayItem) {
+				menuController = new GpxItemMenuController(app, mapActivity, pointDescription, (GpxDisplayItem) object);
 			} else if (object instanceof LatLon) {
 				if (pointDescription.isParking()) {
 					menuController = new ParkingPositionMenuController(app, mapActivity, pointDescription);
@@ -100,14 +104,24 @@ public abstract class MenuController extends BaseMenuController {
 					menuController = new MyLocationMenuController(app, mapActivity, pointDescription);
 				}
 			}
-		} else {
+		}
+		if (menuController == null) {
 			menuController = new PointDescriptionMenuController(app, mapActivity, pointDescription);
 		}
-		if (menuController != null) {
-			menuController.menuType = menuType;
-		}
+		menuController.menuType = menuType;
 		return menuController;
 	}
+
+	public void update(PointDescription pointDescription, Object object) {
+		setPointDescription(pointDescription);
+		setObject(object);
+	}
+
+	protected void setPointDescription(PointDescription pointDescription) {
+		this.pointDescription = pointDescription;
+	}
+
+	protected abstract void setObject(Object object);
 
 	public void addPlainMenuItem(int iconId, String text, boolean needLinks) {
 		builder.addPlainMenuItem(iconId, text, needLinks);
@@ -240,11 +254,13 @@ public abstract class MenuController extends BaseMenuController {
 
 	public Drawable getLeftIcon() { return null; }
 
-	public Drawable getSecondLineIcon() { return null; }
+	public Drawable getSecondLineTypeIcon() { return null; }
 
 	public int getFavActionIconId() { return R.drawable.ic_action_fav_dark; }
 
 	public String getTypeStr() { return ""; }
+
+	public String getCommonTypeStr() { return ""; }
 
 	public String getNameStr() { return pointDescription.getName(); }
 

@@ -451,7 +451,7 @@
 	<string name="vector_data">오프라인 벡터 맵</string>
 	<string name="transport_context_menu">대중교통 정류소 검색</string>
 	
-	<string name="osb_bug_name">버그</string>
+	
 	<string name="poi_context_menu_modify">POI 수정</string>
 	<string name="poi_context_menu_delete">POI 삭제</string>
 	<string name="rotate_map_compass_opt">나침반 방향</string>
@@ -716,7 +716,7 @@
 <string name="search_tabs_location">좌표</string>
 
 <string name="context_menu_item_update_map">지도 업데이트</string>
-<string name="context_menu_item_open_bug">OSM 버그 열기</string>
+
 <string name="context_menu_item_create_poi">POI 생성</string>
 <string name="add_favorite_dialog_top_text">즐겨찾기 이름 입력</string>
 <string name="add_favorite_dialog_default_favourite_name">즐겨찾기</string>
@@ -728,23 +728,23 @@
 
 <string name="favourites_remove_dialog_success">즐겨찾기 포인트 {0} 가 성공적으로 삭제되었습니다.</string>
 
-<string name="osb_add_dialog_title">버그 텍스트 입력</string>
-<string name="osb_add_dialog_success">버그가 성공적으로 생성되었습니다</string>
-<string name="osb_add_dialog_error">예외발생: 버그가 생성되지 않았습니다</string>
 
-<string name="osb_comment_menu_item">설명 추가</string>
+
+
+
+
 <string name="osb_comment_dialog_message">메세지</string>
 <string name="osb_comment_dialog_author">작성자 이름</string>
-<string name="osb_comment_dialog_title">버그에 설명 추가 중</string>
-<string name="osb_comment_dialog_add_button">설명 추가</string>
+
+
 <string name="osb_comment_dialog_success">설명이 성공적으로 추가되었습니다</string>
 <string name="osb_comment_dialog_error">예외발생: 설명이 추가되지 않았습니다</string>
 
-<string name="osb_close_menu_item">버그 닫기</string>
-<string name="osb_close_dialog_title">버그 닫는 중</string>
-<string name="osb_close_dialog_close_button">버그 닫기</string>
-<string name="osb_close_dialog_success">버그가 성공적으로 닫혔습니다</string>
-<string name="osb_close_dialog_error">예외발생: 버그가 닫히지 않았습니다</string>
+
+
+
+
+
 
 <string name="poi_edit_title">POI 편집</string>
 <string name="poi_create_title">POI 생성</string>
@@ -945,7 +945,7 @@
     
     <string name="search_street_in_neighborhood_cities">인근 도시에서 거리 검색</string>
     <string name="intermediate_items_sort_return">경유지는 현재 위치에서 도착지까지 가는 길에 경유지의 순서를 최적화하기 위해 재 정렬됩니다.</string>
-    <string name="intermediate_items_sort_by_distance">정렬 (도어 투 도어)</string>
+    <string name="intermediate_items_sort_by_distance">정렬 도어 투 도어</string>
     <string name="local_osm_changes_backup_successful">OSM 변경 파일이 성공적으로 생성되었습니다 %1$s</string>
     <string name="local_osm_changes_backup_failed">백업 OSM 변경 실패</string>
     <string name="local_osm_changes_backup">OSM 변화에 따라 백업</string>

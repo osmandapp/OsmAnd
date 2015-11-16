@@ -27,9 +27,9 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.PointDescription;
+import net.osmand.osm.edit.Node;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -42,6 +42,7 @@ import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.FavoritesActivity;
+import net.osmand.plus.osmedit.OsmPoint.Action;
 import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment;
 
 import org.xmlpull.v1.XmlSerializer;
@@ -62,14 +63,12 @@ public class OsmEditsFragment extends OsmAndListFragment
 
 	private boolean selectionMode = false;
 
-	private OpenstreetmapRemoteUtil remotepoi;
-	private OsmBugsRemoteUtil remotebug;
 
 	private final static int MODE_DELETE = 100;
 	private final static int MODE_UPLOAD = 101;
 
 	private ActionMode actionMode;
-
+	private long refreshId;
 	private ArrayList<OsmPoint> osmEditsSelected = new ArrayList<>();
 
 
@@ -79,9 +78,6 @@ public class OsmEditsFragment extends OsmAndListFragment
 		plugin = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class);
 		View view = getActivity().getLayoutInflater().inflate(R.layout.update_index, container, false);
 		((TextView) view.findViewById(R.id.header)).setText(R.string.your_edits);
-
-		remotepoi = new OpenstreetmapRemoteUtil(getActivity());
-		remotebug = new OsmBugsRemoteUtil(getMyApplication());
 
 		final CheckBox selectAll = (CheckBox) view.findViewById(R.id.select_all);
 		selectAll.setVisibility(View.GONE);
@@ -351,6 +347,8 @@ public class OsmEditsFragment extends OsmAndListFragment
 			descr.setText(R.string.action_modify);
 		} else if (child.getAction() == OsmPoint.Action.DELETE) {
 			descr.setText(R.string.action_delete);
+		} else if (child.getAction() == OsmPoint.Action.REOPEN) {
+			descr.setText(R.string.action_modify);
 		}
 	}
 
@@ -464,6 +462,23 @@ public class OsmEditsFragment extends OsmAndListFragment
 				return true;
 			}
 		});
+		if (info instanceof OpenstreetmapPoint && info.getAction() != Action.DELETE) {
+			item = optionsMenu.getMenu().add(R.string.poi_context_menu_modify_osm_change)
+					.setIcon(app.getIconsCache().getContentIcon(R.drawable.ic_action_edit_dark));
+			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+				
+
+				@Override
+				public boolean onMenuItemClick(MenuItem item) {
+					OpenstreetmapPoint i = (OpenstreetmapPoint) getPointAfterModify(info);
+					final Node entity = i.getEntity();
+					refreshId = entity.getId();
+					EditPoiDialogFragment.createInstance(entity, false)
+							.show(getActivity().getSupportFragmentManager(), "edit_poi");
+					return true;
+				}
+			});
+		}
 		item = optionsMenu.getMenu().add(R.string.shared_string_delete).
 				setIcon(app.getIconsCache().getContentIcon(R.drawable.ic_action_delete_dark));
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
@@ -481,12 +496,24 @@ public class OsmEditsFragment extends OsmAndListFragment
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
-				uploadItems(new OsmPoint[]{info});
+				uploadItems(new OsmPoint[]{getPointAfterModify(info)});
 				return true;
 			}
 		});
 		optionsMenu.show();
 	}
+
+	protected OsmPoint getPointAfterModify(OsmPoint info) {
+		if(info instanceof OpenstreetmapPoint && info.getId() == refreshId) {
+			for(OpenstreetmapPoint p : plugin.getDBPOI().getOpenstreetmapPoints()) {
+				if(p.getId() == info.getId()) {
+					return p;
+				}
+			}
+		}
+		return info;
+	}
+
 
 	public OsmandApplication getMyApplication() {
 		return (OsmandApplication) getActivity().getApplication();
@@ -519,7 +546,7 @@ public class OsmEditsFragment extends OsmAndListFragment
 			}
 		};
 		UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask(
-				dialog, listener, plugin, remotepoi, remotebug, points.length, closeChangeSet);
+				dialog, listener, plugin, points.length, closeChangeSet);
 		uploadTask.execute(points);
 
 		dialog.show();
@@ -554,6 +581,8 @@ public class OsmEditsFragment extends OsmAndListFragment
 				sz.endTag("", "create");
 				sz.startTag("", "modify");
 				writeContent(sz, points, OsmPoint.Action.MODIFY);
+				writeContent(sz, points, OsmPoint.Action.REOPEN);
+
 				sz.endTag("", "modify");
 				sz.startTag("", "delete");
 				writeContent(sz, points, OsmPoint.Action.DELETE);
@@ -585,6 +614,9 @@ public class OsmEditsFragment extends OsmAndListFragment
 						sz.attribute("", "version", "1");
 						for (String tag : p.getEntity().getTagKeySet()) {
 							String val = p.getEntity().getTag(tag);
+							if (val == null || val.length() == 0 || tag.length() == 0 || "poi_type_tag".equals(tag)) {
+								continue;
+							}
 							sz.startTag("", "tag");
 							sz.attribute("", "k", tag);
 							sz.attribute("", "v", val);
@@ -694,36 +726,4 @@ public class OsmEditsFragment extends OsmAndListFragment
 		}
 	}
 
-//	public static class UploadOsmEditsConfirmDialogFragment extends DialogFragment {
-//		public static final String TAG = "UploadOsmEditsConfirmDialogFragment";
-//		private static final String POINTS_ARRAY = "points_list";
-//
-//		@NonNull
-//		@Override
-//		public Dialog onCreateDialog(Bundle savedInstanceState) {
-//			final OsmPoint[] points = (OsmPoint[]) getArguments().getSerializable(POINTS_ARRAY);
-//			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-//			builder.setMessage(
-//					getString(R.string.local_osm_changes_upload_all_confirm, points.length));
-//			builder.setPositiveButton(R.string.shared_string_yes,
-//					new DialogInterface.OnClickListener() {
-//						@Override
-//						public void onClick(DialogInterface dialog, int which) {
-//							((OsmEditsFragment) getParentFragment())
-//									.showUploadItemsProgressDialog(points);
-//						}
-//					});
-//			builder.setNegativeButton(R.string.shared_string_cancel, null);
-//			return builder.create();
-//		}
-//
-//		public static UploadOsmEditsConfirmDialogFragment createInstance(OsmPoint[] points) {
-//			UploadOsmEditsConfirmDialogFragment fragment =
-//					new UploadOsmEditsConfirmDialogFragment();
-//			Bundle args = new Bundle();
-//			args.putSerializable(POINTS_ARRAY, points);
-//			fragment.setArguments(args);
-//			return fragment;
-//		}
-//	}
 }

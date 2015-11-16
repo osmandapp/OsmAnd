@@ -19,9 +19,10 @@ public abstract class MenuTitleController {
 	protected Drawable leftIcon;
 	protected String nameStr = "";
 	protected String typeStr = "";
-	protected Drawable secondLineIcon;
+	protected String commonTypeStr = "";
+	protected Drawable secondLineTypeIcon;
 	protected String streetStr = "";
-	protected boolean addressUnknown = false;
+	protected String addressNotKnownStr;
 
 	public abstract MapActivity getMapActivity();
 
@@ -37,10 +38,6 @@ public abstract class MenuTitleController {
 		return nameStr;
 	}
 
-	public boolean isAddressUnknown() {
-		return addressUnknown;
-	}
-
 	public int getLeftIconId() {
 		return leftIconId;
 	}
@@ -49,24 +46,34 @@ public abstract class MenuTitleController {
 		return leftIcon;
 	}
 
-	public Drawable getSecondLineIcon() {
-		return secondLineIcon;
+	public Drawable getTypeIcon() {
+		return secondLineTypeIcon;
 	}
 
-	public String getLocationStr() {
+	public String getTypeStr() {
 		MenuController menuController = getMenuController();
 		if (menuController != null && menuController.needTypeStr()) {
 			return typeStr;
 		} else {
-			if (Algorithms.isEmpty(streetStr)) {
-				return typeStr;
-			} else {
-				return streetStr;
-			}
+			return "";
+		}
+	}
+
+	public String getCommonTypeStr() {
+		return commonTypeStr;
+	}
+
+	public String getStreetStr() {
+		MenuController menuController = getMenuController();
+		if (menuController != null && menuController.needStreetName()) {
+			return streetStr;
+		} else {
+			return "";
 		}
 	}
 
 	protected void initTitle() {
+		addressNotKnownStr = getMapActivity().getString(R.string.address_unknown);
 		acquireIcons();
 		acquireNameAndType();
 		if (needStreetName()) {
@@ -88,45 +95,38 @@ public abstract class MenuTitleController {
 
 		leftIconId = 0;
 		leftIcon = null;
-		secondLineIcon = null;
+		secondLineTypeIcon = null;
 
 		if (menuController != null) {
 			leftIconId = menuController.getLeftIconId();
 			leftIcon = menuController.getLeftIcon();
-			secondLineIcon = menuController.getSecondLineIcon();
+			secondLineTypeIcon = menuController.getSecondLineTypeIcon();
 		}
 	}
 
 	protected void acquireNameAndType() {
 		nameStr = "";
 		typeStr = "";
+		commonTypeStr = "";
 		streetStr = "";
-		addressUnknown = false;
 
 		MenuController menuController = getMenuController();
-		PointDescription pointDescription = getPointDescription();
 		if (menuController != null) {
 			nameStr = menuController.getNameStr();
 			typeStr = menuController.getTypeStr();
-		}
-
-		if (Algorithms.isEmpty(nameStr)) {
-			nameStr = pointDescription.getName();
-		}
-		if (Algorithms.isEmpty(typeStr)) {
-			typeStr = pointDescription.getTypeName();
+			commonTypeStr = menuController.getCommonTypeStr();
 		}
 
 		if (Algorithms.isEmpty(nameStr)) {
 			if (!Algorithms.isEmpty(typeStr)) {
 				nameStr = typeStr;
-				if (menuController == null || menuController.getMenuType() == MenuController.MenuType.STANDARD) {
-					typeStr = "";
-				}
+				typeStr = commonTypeStr;
 			} else {
-				nameStr = getMapActivity().getString(R.string.address_unknown);
-				addressUnknown = true;
+				nameStr = addressNotKnownStr;
+				typeStr = commonTypeStr;
 			}
+		} else if (Algorithms.isEmpty(typeStr)) {
+			typeStr = commonTypeStr;
 		}
 	}
 
@@ -148,8 +148,6 @@ public abstract class MenuTitleController {
 								MenuController menuController = getMenuController();
 								if (menuController == null || menuController.displayStreetNameInTitle()) {
 									nameStr = streetStr;
-									addressUnknown = false;
-									streetStr = "";
 									getPointDescription().setName(nameStr);
 								}
 								getMapActivity().runOnUiThread(new Runnable() {
@@ -158,8 +156,6 @@ public abstract class MenuTitleController {
 									}
 								});
 							}
-						} else {
-							streetStr = "";
 						}
 						return true;
 					}

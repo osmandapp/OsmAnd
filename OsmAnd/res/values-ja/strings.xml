@@ -244,7 +244,7 @@ MB)をダウンロードしますか?</string>
      <string name="vector_data">オフラインベクターマップ</string>
      <string name="transport_context_menu">交通機関の乗降場を検索</string>
      
-     <string name="osb_bug_name">バグ</string>
+     
      <string name="poi_context_menu_modify">POIを変更</string>
      <string name="poi_context_menu_delete">POIを削除</string>
      <string name="rotate_map_compass_opt">コンパスに従う</string>
@@ -545,7 +545,7 @@ POIの更新は利用できません</string>
 <string name="search_tabs_location">位置</string>
 
 <string name="context_menu_item_update_map">マップを更新</string>
-<string name="context_menu_item_open_bug">OSM バグをオープン</string>
+
 <string name="context_menu_item_create_poi">POIを作成</string>
 
 <string name="shared_string_yes">はい</string>
@@ -565,23 +565,23 @@ POIの更新は利用できません</string>
 <string name="favourites_remove_dialog_success">お気に入り地点 {0}
 は削除されました。</string>
 
-<string name="osb_add_dialog_title">バグのテキストを入力</string>
-<string name="osb_add_dialog_success">バグ報告が作成されました</string>
-<string name="osb_add_dialog_error">例外発生: バグ報告は作成されませんでした</string>
 
-<string name="osb_comment_menu_item">コメントを追加</string>
+
+
+
+
 <string name="osb_comment_dialog_message">メッセージ</string>
 <string name="osb_comment_dialog_author">作成者名</string>
-<string name="osb_comment_dialog_title">バグにコメント追加中</string>
-<string name="osb_comment_dialog_add_button">コメントを追加</string>
+
+
 <string name="osb_comment_dialog_success">コメントが追加されました</string>
 <string name="osb_comment_dialog_error">例外発生: コメントは追加されませんでした</string>
 
-<string name="osb_close_menu_item">バグをクローズ</string>
-<string name="osb_close_dialog_title">バグをクローズ中</string>
-<string name="osb_close_dialog_close_button">バグをクローズ</string>
-<string name="osb_close_dialog_success">バグがクローズされました</string>
-<string name="osb_close_dialog_error">例外発生: バグはクローズされませんでした</string>
+
+
+
+
+
 
 <string name="poi_edit_title">POIの編集</string>
 <string name="poi_create_title">POIを作成</string>
@@ -680,7 +680,7 @@ POIの更新は利用できません</string>
     <string name="please_select_address">最初に都市か通りを選択してください</string>
     <string name="search_street_in_neighborhood_cities">近くの都市の通りを探す</string>
     <string name="intermediate_items_sort_return">中間経由地点は現在地から目的地へのルート最適化のために順序が変更されました。</string>
-    <string name="intermediate_items_sort_by_distance">ソート(ドア・ツー・ドア)</string>
+    <string name="intermediate_items_sort_by_distance">ソートドア・ツー・ドア</string>
     <string name="local_osm_changes_backup_successful">OSMの変更ファイルが正常に生成されました %1$s</string>
     <string name="local_osm_changes_backup_failed">OSMの変更のバックアップに失敗しました</string>
     <string name="local_osm_changes_backup">OSMの変更としてバックアップ</string>

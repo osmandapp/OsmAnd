@@ -55,7 +55,7 @@
   
   <string name="search_street_in_neighborhood_cities">Bilatu kalea inguruko herrietan</string>
   <string name="intermediate_items_sort_return">Erdibideko bide-puntuak bidea hobetzeko berantolatuak izan dira.</string>
-  <string name="intermediate_items_sort_by_distance">Ordenatu (door-to-door)</string>
+  <string name="intermediate_items_sort_by_distance">Ordenatu door-to-door</string>
   <string name="local_osm_changes_backup_successful">OSM aldaketa arrakastaz sortu da %1$s</string>
   <string name="local_osm_changes_backup_failed">OSMren aldaketen backupak huts egin du</string>
   <string name="local_osm_changes_backup">OSMren aldaketa bezala backupa egin</string>
@@ -845,7 +845,7 @@
   <string name="vector_data">Lineaz kanpoko bektore mapak</string>
   <string name="transport_context_menu">Bilatu garraioa geldiunean</string>
   
-  <string name="osb_bug_name">Akatsa</string>
+  
   <string name="poi_context_menu_modify">POIa eraldatu</string>
   <string name="poi_context_menu_delete">POIa ezabatu</string>
   <string name="rotate_map_compass_opt">Konpaseruntz</string>
@@ -1104,7 +1104,7 @@
   <string name="search_tabs_location">Kokapena</string>
   
   <string name="context_menu_item_update_map">Mapa eguneratu</string>
-  <string name="context_menu_item_open_bug">Ireki OSM akats jakinarazpena</string>
+  
   <string name="context_menu_item_create_poi">POIa sortu</string>
   <string name="shared_string_yes">Bai</string>
   <string name="shared_string_cancel">Ezeztatu</string>
@@ -1118,22 +1118,22 @@
   <string name="favourites_context_menu_delete">Gogokoena ezabatu</string>
   <string name="favourites_remove_dialog_msg">Ezabatu \'%s\' gogokoen puntua?</string>
   <string name="favourites_remove_dialog_success">{0} punto gogokoena arrakastaz ezabatu da.</string>
-  <string name="osb_add_dialog_title">Sartu akatsaren testua</string>
-  <string name="osb_add_dialog_success">Akats jakinarazpena arrakastaz sortu da</string>
-  <string name="osb_add_dialog_error">Salbuespena: akats jakinarazpena ez da sortu</string>
+  
+  
+  
   <string name="osb_author_dialog_password">OSMeko pasahitza (aukerazkoa)</string>
-  <string name="osb_comment_menu_item">Iruzkina gehitu</string>
+  
   <string name="osb_comment_dialog_message">Mezua</string>
   <string name="osb_comment_dialog_author">Autorearen izena</string>
-  <string name="osb_comment_dialog_title">Akatsera iruzkin bat gehitzen</string>
-  <string name="osb_comment_dialog_add_button">Iruzkina gehitu</string>
+  
+  
   <string name="osb_comment_dialog_success">Iruzkina arrakastaz gehitu da</string>
   <string name="osb_comment_dialog_error">Salbuespena: ez da iruzkina gehitu</string>
-  <string name="osb_close_menu_item">Akatsa itxi</string>
-  <string name="osb_close_dialog_title">Akatsa ixten</string>
-  <string name="osb_close_dialog_close_button">Akatxa itxi</string>
-  <string name="osb_close_dialog_success">Akatxa arrakastaz itxi da</string>
-  <string name="osb_close_dialog_error">Salbuespena: akats jakinarazpena ez da itxi</string>
+  
+  
+  
+  
+  
   <string name="poi_edit_title">POIa editatu</string>
   <string name="poi_create_title">POIa sortu</string>
   <string name="poi_error_poi_not_found">Ezin da nodoa aurkitu edo erosotasuna ez da puntu bakar bat</string>

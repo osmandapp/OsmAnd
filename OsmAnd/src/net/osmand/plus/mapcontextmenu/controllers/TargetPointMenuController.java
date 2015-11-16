@@ -16,15 +16,16 @@ public class TargetPointMenuController extends MenuController {
 
 	private TargetPoint targetPoint;
 
-	public TargetPointMenuController(OsmandApplication app, MapActivity mapActivity, PointDescription pointDescription, final TargetPoint targetPoint) {
+	public TargetPointMenuController(OsmandApplication app, MapActivity mapActivity, PointDescription pointDescription, TargetPoint targetPoint) {
 		super(new MenuBuilder(app), pointDescription, mapActivity);
 		this.targetPoint = targetPoint;
 		leftTitleButtonController = new TitleButtonController() {
 			@Override
 			public void buttonPressed() {
 				TargetPointsHelper targetPointsHelper = getMapActivity().getMyApplication().getTargetPointsHelper();
-				if(targetPoint.intermediate) {
-					targetPointsHelper.removeWayPoint(true, targetPoint.index);
+				TargetPoint tp = getTargetPoint();
+				if(tp.intermediate) {
+					targetPointsHelper.removeWayPoint(true, tp.index);
 				} else {
 					targetPointsHelper.removeWayPoint(true, -1);
 				}
@@ -33,6 +34,17 @@ public class TargetPointMenuController extends MenuController {
 		};
 		leftTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_delete);
 		leftTitleButtonController.leftIconId = R.drawable.ic_action_delete_dark;
+	}
+
+	@Override
+	protected void setObject(Object object) {
+		if (object instanceof TargetPoint) {
+			this.targetPoint = (TargetPoint) object;
+		}
+	}
+
+	public TargetPoint getTargetPoint() {
+		return targetPoint;
 	}
 
 	@Override

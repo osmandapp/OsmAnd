@@ -1,5 +1,6 @@
 package net.osmand.plus.osmedit;
 
+
 import net.osmand.PlatformUtil;
 import net.osmand.osm.io.Base64;
 import net.osmand.osm.io.NetworkUtils;
@@ -7,6 +8,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.osmedit.OsmPoint.Action;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -38,36 +40,37 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 		this.app = app;
 		settings = app.getSettings();
 	}
-
+	
 	@Override
-	public String createNewBug(double latitude, double longitude, String text, String author) {
+	public OsmBugResult commit(OsmNotesPoint point, String text, Action action) {
 		StringBuilder b = new StringBuilder();
-		b.append(getNotesApi()).append("?"); //$NON-NLS-1$
-		b.append("lat=").append(latitude); //$NON-NLS-1$
-		b.append("&lon=").append(longitude); //$NON-NLS-1$
-		b.append("&text=").append(URLEncoder.encode(text)); //$NON-NLS-1$
-		return editingPOI(b.toString(), "POST", "creating bug"); //$NON-NLS-1$
+		String msg = "";
+		if(action == OsmPoint.Action.CREATE) {
+			b.append(getNotesApi()).append("?"); //$NON-NLS-1$
+			b.append("lat=").append(point.getLatitude()); //$NON-NLS-1$
+			b.append("&lon=").append(point.getLongitude()); //$NON-NLS-1$
+			b.append("&text=").append(URLEncoder.encode(text)); //$NON-NLS-1$
+			msg = "creating bug";
+		} else {
+			b.append(getNotesApi()).append("/");
+			b.append(point.getId()); //$NON-NLS-1$
+			if(action == OsmPoint.Action.REOPEN) {
+				b.append("/reopen");
+				msg = "reopen note";
+			} else if(action == OsmPoint.Action.MODIFY) {
+				b.append("/comment");
+				msg = "adding comment";
+			} else if(action == OsmPoint.Action.DELETE) {
+				b.append("/close");
+				msg = "close note";
+			}
+			b.append("?text=").append(URLEncoder.encode(text)); //$NON-NLS-1$
+		}
+		return editingPOI(b.toString(), "POST", msg); 
 	}
 
-	@Override
-	public String addingComment(long id, String text, String author) {
-		StringBuilder b = new StringBuilder();
-		b.append(getNotesApi()).append("/");
-		b.append(id); //$NON-NLS-1$
-		b.append("/comment?text=").append(URLEncoder.encode(text)); //$NON-NLS-1$
-		return editingPOI(b.toString(), "POST", "adding comment"); //$NON-NLS-1$
-	}
-
-	@Override
-	public String closingBug(long id, String text, String author) {
-		StringBuilder b = new StringBuilder();
-		b.append(getNotesApi()).append("/");
-		b.append(id); //$NON-NLS-1$
-		b.append("/close?text=").append(URLEncoder.encode(text)); //$NON-NLS-1$
-		return editingPOI(b.toString(), "POST", "close bug"); //$NON-NLS-1$
-	}
-
-	private String editingPOI(String url, String requestMethod, String userOperation) {
+	private OsmBugResult editingPOI(String url, String requestMethod, String userOperation) {
+		OsmBugResult r = new OsmBugResult();
 		try {
 			HttpURLConnection connection = NetworkUtils.getHttpURLConnection(url);
 			log.info("Editing poi " + url);
@@ -101,21 +104,21 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 			log.info("Response : " + responseBody); //$NON-NLS-1$
 			connection.disconnect();
 			if (!ok) {
-				return msg + "\n" + responseBody;
+				r.warning =  msg + "\n" + responseBody;
 			}
 		} catch (NullPointerException e) {
 			// that's tricky case why NPE is thrown to fix that problem httpClient could be used
 			String msg = app.getString(R.string.auth_failed);
 			log.error(msg, e);
-			return app.getString(R.string.auth_failed) + "";
+			r.warning =  app.getString(R.string.auth_failed) + "";
 		} catch (MalformedURLException e) {
 			log.error(userOperation + " " + app.getString(R.string.failed_op), e); //$NON-NLS-1$
-			return e.getMessage() + "";
+			r.warning = e.getMessage() + "";
 		} catch (IOException e) {
 			log.error(userOperation + " " + app.getString(R.string.failed_op), e); //$NON-NLS-1$
-			return e.getMessage() + " link unavailable";
+			r.warning = e.getMessage() + " link unavailable";
 		}
-		return null;
+		return r;
 	}
 
 }

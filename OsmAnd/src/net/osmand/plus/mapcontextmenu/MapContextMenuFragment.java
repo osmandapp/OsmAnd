@@ -39,10 +39,12 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
+import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleButtonController;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleProgressController;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.util.Algorithms;
 
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 import static net.osmand.plus.mapcontextmenu.MenuBuilder.SHADOW_HEIGHT_BOTTOM_DP;
@@ -55,6 +57,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	public static final float FAB_PADDING_TOP_DP = 4f;
 	public static final float MARKER_PADDING_DP = 20f;
 	public static final float MARKER_PADDING_X_DP = 50f;
+	public static final float SKIP_HALF_SCREEN_STATE_KOEF = .21f;
 
 	private View view;
 	private View mainView;
@@ -86,6 +89,8 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	private int origMarkerX;
 	private int origMarkerY;
 	private boolean customMapCenter;
+
+	private float skipHalfScreenStateLimit;
 
 	private int screenOrientation;
 
@@ -130,6 +135,8 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 							 Bundle savedInstanceState) {
 
 		screenHeight = getScreenHeight();
+		skipHalfScreenStateLimit = screenHeight * SKIP_HALF_SCREEN_STATE_KOEF;
+
 		viewHeight = screenHeight - getStatusBarHeight();
 
 		fabPaddingTopPx = dpToPx(FAB_PADDING_TOP_DP);
@@ -244,7 +251,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 					showOnMap(menu.getLatLon(), true, false);
 
 					if (hasMoved) {
-						applyPosY(getViewY(), false, false);
+						applyPosY(getViewY(), false, false, 0, 0);
 					}
 					return true;
 				}
@@ -289,24 +296,35 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 					case MotionEvent.ACTION_UP:
 					case MotionEvent.ACTION_CANCEL:
 						int currentY = getViewY();
-
+						
 						slidingUp = Math.abs(maxVelocityY) > 500 && (currentY - dyMain) < -50;
 						slidingDown = Math.abs(maxVelocityY) > 500 && (currentY - dyMain) > 50;
 
 						velocity.recycle();
 
+						boolean skipHalfScreenState = Math.abs(currentY - dyMain) > skipHalfScreenStateLimit;
 						boolean needCloseMenu = false;
 
 						int oldMenuState = menu.getCurrentMenuState();
 						if (menuBottomViewHeight > 0 && slidingUp) {
 							menu.slideUp();
+							if (skipHalfScreenState) {
+								menu.slideUp();
+							}
 						} else if (slidingDown) {
 							needCloseMenu = !menu.slideDown();
+							if (!needCloseMenu && skipHalfScreenState) {
+								menu.slideDown();
+							}
 						}
 						int newMenuState = menu.getCurrentMenuState();
-						boolean needMapAdjust = oldMenuState != newMenuState && newMenuState != MenuController.MenuState.FULL_SCREEN;
+						boolean needMapAdjust = oldMenuState != newMenuState && newMenuState != MenuState.FULL_SCREEN;
 
-						applyPosY(currentY, needCloseMenu, needMapAdjust);
+						if (newMenuState != oldMenuState) {
+							doBeforeMenuStateChange(oldMenuState, newMenuState);
+						}
+
+						applyPosY(currentY, needCloseMenu, needMapAdjust, oldMenuState, newMenuState);
 
 						break;
 
@@ -314,7 +332,8 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 				return true;
 			}
 
-			private void applyPosY(final int currentY, final boolean needCloseMenu, boolean needMapAdjust) {
+			private void applyPosY(final int currentY, final boolean needCloseMenu, boolean needMapAdjust,
+								   final int previousMenuState, final int newMenuState) {
 				final int posY = getPosY(needCloseMenu);
 				if (currentY != posY) {
 					if (posY < currentY) {
@@ -332,6 +351,9 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 											menu.close();
 										} else {
 											updateMainViewLayout(posY);
+											if (previousMenuState != 0 && newMenuState != 0 && previousMenuState != newMenuState) {
+												doAfterMenuStateChange(previousMenuState, newMenuState);
+											}
 										}
 									}
 
@@ -341,6 +363,9 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 											menu.close();
 										} else {
 											updateMainViewLayout(posY);
+											if (previousMenuState != 0 && newMenuState != 0 && previousMenuState != newMenuState) {
+												doAfterMenuStateChange(previousMenuState, newMenuState);
+											}
 										}
 									}
 								})
@@ -356,7 +381,14 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 						}
 					} else {
 						setViewY(posY, false, needMapAdjust);
-						updateMainViewLayout(posY);
+						if (needCloseMenu) {
+							menu.close();
+						} else {
+							updateMainViewLayout(posY);
+							if (previousMenuState != 0 && newMenuState != 0 && previousMenuState != newMenuState) {
+								doAfterMenuStateChange(previousMenuState, newMenuState);
+							}
+						}
 					}
 				}
 			}
@@ -411,8 +443,13 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		});
 
 		final ImageButton buttonWaypoint = (ImageButton) view.findViewById(R.id.context_menu_route_button);
-		buttonWaypoint.setImageDrawable(iconsCache.getIcon(R.drawable.map_action_waypoints,
+		if (getMyApplication().getTargetPointsHelper().getPointToNavigate() == null) {
+			buttonWaypoint.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_flag_dark,
 				light ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
+		} else {
+			buttonWaypoint.setImageDrawable(iconsCache.getIcon(R.drawable.map_action_waypoints,
+				light ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
+		}
 		buttonWaypoint.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -478,6 +515,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 
 			if (leftTitleButtonController.needRightText) {
 				titleButtonRightText.setText(leftTitleButtonController.rightTextCaption);
+				titleButtonRightText.setVisibility(View.VISIBLE);
 			} else {
 				titleButtonRightText.setVisibility(View.GONE);
 			}
@@ -592,6 +630,12 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	}
 
 	public void rebuildMenu() {
+		IconsCache iconsCache = getMyApplication().getIconsCache();
+		boolean light = getMyApplication().getSettings().isLightContent();
+		final ImageButton buttonFavorite = (ImageButton) view.findViewById(R.id.context_menu_fav_button);
+		buttonFavorite.setImageDrawable(iconsCache.getIcon(menu.getFavActionIconId(),
+				light ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
+
 		buildHeader();
 
 		LinearLayout bottomLayout = (LinearLayout)view.findViewById(R.id.context_menu_bottom_view);
@@ -677,21 +721,38 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		line1.setText(menu.getTitleStr());
 
 		// Text line 2
-		TextView distanceText = (TextView) view.findViewById(R.id.distance);
-		ImageView direction = (ImageView) view.findViewById(R.id.direction);
-		if (menu.displayDistanceDirection()) {
-			updateDistanceDirection();
-		} else {
-			direction.setVisibility(View.GONE);
-			distanceText.setVisibility(View.GONE);
-		}
-
 		TextView line2 = (TextView) view.findViewById(R.id.context_menu_line2);
-		line2.setText(menu.getLocationStr());
-		Drawable icon = menu.getSecondLineIcon();
-		if (icon != null) {
+		String typeStr = menu.getTypeStr();
+		String streetStr = menu.getStreetStr();
+		StringBuilder line2Str = new StringBuilder();
+		if (!Algorithms.isEmpty(typeStr)) {
+			line2Str.append(typeStr);
+			Drawable icon = menu.getTypeIcon();
 			line2.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
 			line2.setCompoundDrawablePadding(dpToPx(5f));
+		}
+		if (!Algorithms.isEmpty(streetStr) && !menu.displayStreetNameInTitle()) {
+			if (line2Str.length() > 0) {
+				line2Str.append(", ");
+			}
+			line2Str.append(streetStr);
+		}
+		line2.setText(line2Str.toString());
+
+		updateCompassVisibility();
+	}
+
+	private void updateCompassVisibility() {
+		View compassView = view.findViewById(R.id.compass_layout);
+		if (menu.displayDistanceDirection() && menu.getCurrentMenuState() != MenuState.FULL_SCREEN) {
+			updateDistanceDirection();
+			compassView.setVisibility(View.VISIBLE);
+		} else {
+			if (!menu.displayDistanceDirection()) {
+				compassView.setVisibility(View.GONE);
+			} else {
+				compassView.setVisibility(View.INVISIBLE);
+			}
 		}
 	}
 
@@ -719,20 +780,20 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 			destinationState = menu.getCurrentMenuState();
 			minHalfY = viewHeight - (int)(viewHeight * menu.getHalfScreenMaxHeightKoef());
 		} else {
-			destinationState = MenuController.MenuState.HEADER_ONLY;
+			destinationState = MenuState.HEADER_ONLY;
 			minHalfY = viewHeight;
 		}
 
 		int posY = 0;
 		switch (destinationState) {
-			case MenuController.MenuState.HEADER_ONLY:
+			case MenuState.HEADER_ONLY:
 				posY = viewHeight - (menuTitleHeight - dpToPx(SHADOW_HEIGHT_BOTTOM_DP));
 				break;
-			case MenuController.MenuState.HALF_SCREEN:
+			case MenuState.HALF_SCREEN:
 				posY = viewHeight - menuFullHeightMax;
 				posY = Math.max(posY, minHalfY);
 				break;
-			case MenuController.MenuState.FULL_SCREEN:
+			case MenuState.FULL_SCREEN:
 				posY = -menuTopShadowHeight - dpToPx(SHADOW_HEIGHT_TOP_DP);
 				break;
 			default:
@@ -942,6 +1003,13 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 
 	public void updateLocation(boolean centerChanged, boolean locationChanged, boolean compassChanged) {
 		updateDistanceDirection();
+	}
+
+	private void doBeforeMenuStateChange(int previousState, int newState) {
+	}
+
+	private void doAfterMenuStateChange(int previousState, int newState) {
+		updateCompassVisibility();
 	}
 }
 

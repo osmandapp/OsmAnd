@@ -154,8 +154,8 @@ public class MapMultiSelectionMenuFragment extends Fragment implements AdapterVi
 
 		// Text line 2
 		TextView line2 = (TextView) view.findViewById(R.id.context_menu_line2);
-		line2.setText(item.getLocationStr());
-		Drawable slIcon = item.getSecondLineIcon();
+		line2.setText(item.getTypeStr());
+		Drawable slIcon = item.getTypeIcon();
 		line2.setCompoundDrawablesWithIntrinsicBounds(slIcon, null, null, null);
 		line2.setCompoundDrawablePadding(dpToPx(5f));
 	}

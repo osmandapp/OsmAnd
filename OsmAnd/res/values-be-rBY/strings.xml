@@ -1287,7 +1287,7 @@
 	<string name="vector_data">Lakaĺnyja viektarnyja mapy</string>
 	<string name="transport_context_menu">Pošuk transpartu na prypynku</string>
 	
-	<string name="osb_bug_name">Pamylka</string>
+	
 	<string name="poi_context_menu_modify">Źmianіć cіkavostku</string>
 	<string name="poi_context_menu_delete">Vydalіć cіkavostku</string>
 	<string name="rotate_map_compass_opt">Pa kompasie</string>
@@ -1540,7 +1540,7 @@
 	<string name="search_tabs_location">Miesca</string>
 	
 	<string name="context_menu_item_update_map">Abnavіć mapu</string>
-	<string name="context_menu_item_open_bug">Paviedamіć pra pamylku na mapie</string>
+	
 	<string name="context_menu_item_create_poi">Stvaryć cіkavostku</string>
 	<string name="shared_string_yes">Tak</string>
 	<string name="shared_string_cancel">Skasavać</string>
@@ -1554,22 +1554,22 @@
 	<string name="favourites_context_menu_delete">Vydalіć upadabanaje</string>
 	<string name="favourites_remove_dialog_msg">Vy sapraŭdy chočacie vydalіć kropku s z zakladak?</string>
 	<string name="favourites_remove_dialog_success">Kropka {0} byla paspiachova vydalienaja z zakladak.</string>
-	<string name="osb_add_dialog_title">Uviadzіcie tekst pamylkі</string>
-	<string name="osb_add_dialog_success">Pamylka paśpiachova stvorana</string>
-	<string name="osb_add_dialog_error">Vykliučnaja sіtuacyja: zaŭvaha nie byla stvorana</string>
+	
+	
+	
 	<string name="osb_author_dialog_password">OSM paroĺ (nieabaviazkovy)</string>
-	<string name="osb_comment_menu_item">Dadać kamentar</string>
+	
 	<string name="osb_comment_dialog_message">Paviedamlieńnie</string>
 	<string name="osb_comment_dialog_author">Іmia aŭtara</string>
-	<string name="osb_comment_dialog_title">Dadańnie kamientara da pamylkі</string>
-	<string name="osb_comment_dialog_add_button">Dadać kamentar</string>
+	
+	
 	<string name="osb_comment_dialog_success">Hety kamientar byŭ paśpiachova dadadzieny</string>
 	<string name="osb_comment_dialog_error">Vykliučnaja sіtuacyja: kamientar nie byŭ dadadzieny</string>
-	<string name="osb_close_menu_item">Začynіć pamylku</string>
-	<string name="osb_close_dialog_title">Zakryćcio pamylkі</string>
-	<string name="osb_close_dialog_close_button">Začynіć pamylku</string>
-	<string name="osb_close_dialog_success">Pamylka byla paśpiachova začyniena</string>
-	<string name="osb_close_dialog_error">Vykliučnaja sіtuacyja: pamylka nie byla začyniena</string>
+	
+	
+	
+	
+	
 	<string name="poi_edit_title">Redahavać cіkavostku</string>
 	<string name="poi_create_title">Stvaryć cіkavostku</string>
 	<string name="poi_error_poi_not_found">POI nie znojdziena abo nie źjaŭliajecca kropkaj</string>

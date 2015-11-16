@@ -358,6 +358,12 @@ public class GeoPointParserUtil {
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
+		
+		// http://www.google.com/maps/?q=loc:34.99393,-106.61568&z=11
+		url = "http://www.google.com/maps/?q=loc:" + dlat + "," + dlon + " (" + name +") ";
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, name));
 
 		// https://www.google.com/maps/preview#!q=paris&data=!4m15!2m14!1m13!1s0x47e66e1f06e2b70f%3A0x40b82c3688c9460!3m8!1m3!1d24383582!2d-95.677068!3d37.0625!3m2!1i1222!2i718!4f13.1!4m2!3d48.856614!4d2.3522219
 		url = "https://www.google.com/maps/preview#!q=paris&data=!4m15!2m14!1m13!1s0x47e66e1f06e2b70f%3A0x40b82c3688c9460!3m8!1m3!1d24383582!2d-95.677068!3d37.0625!3m2!1i1222!2i718!4f13.1!4m2!3d48.856614!4d2.3522219";
@@ -397,11 +403,18 @@ public class GeoPointParserUtil {
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
 
-		// TODO this URL does not work, where is it used?
 		// whatsapp
 		// https://maps.google.com/maps?q=loc:34.99393,-106.61568 (You)
 		z = GeoParsedPoint.NO_ZOOM;
 		url = "https://maps.google.com/maps?q=loc:" + dlat + "," + dlon + " (You)";
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
+
+		// whatsapp
+		// https://maps.google.com/maps?q=loc:34.99393,-106.61568 (USERNAME)
+		z = GeoParsedPoint.NO_ZOOM;
+		url = "https://maps.google.com/maps?q=loc:" + dlat + "," + dlon + " (USER NAME)";
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
@@ -947,10 +960,9 @@ public class GeoPointParserUtil {
 						if(opath.contains(pref)) {
 							opath = opath.substring(opath.lastIndexOf(pref) + pref.length());
 						}
-						final String postf = " (You)";
-						if (opath.contains(postf)) {
-							opath = opath.substring(0, opath.indexOf(postf));
-						}
+						final String postf = "\\s\\((\\p{IsAlphabetic}|\\s)*\\)$";
+						opath = opath.replaceAll(postf, "");
+						System.out.println("opath=" + opath);
 						return parseGoogleMapsPath(opath, params);
 					}
 					if (fragment != null) {

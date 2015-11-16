@@ -62,6 +62,7 @@ import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.base.FailSafeFuntions;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.dashboard.DashboardOnMap;
+import net.osmand.plus.dialogs.ErrorBottomSheetDialog;
 import net.osmand.plus.dialogs.WhatsNewDialogFragment;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.helpers.GpxImportHelper;
@@ -138,8 +139,6 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents {
 	private AppInitializeListener initListener;
 	private IMapDownloaderCallback downloaderCallback;
 	private DrawerLayout drawerLayout;
-
-	public static final String SHOULD_SHOW_DASHBOARD_ON_START = "should_show_dashboard_on_start";
 
 	private Notification getNotification() {
 		Intent notificationIndent = new Intent(this, getMyApplication().getAppCustomization().getMapActivity());
@@ -392,10 +391,13 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents {
 		long tm = System.currentTimeMillis();
 		if (app.isApplicationInitializing() || DashboardOnMap.staticVisible) {
 			if (!dashboardOnMap.isVisible()) {
-				final OsmandSettings.CommonPreference<Boolean> shouldShowDashboardOnStart =
-						settings.registerBooleanPreference(MapActivity.SHOULD_SHOW_DASHBOARD_ON_START, true);
-				if (shouldShowDashboardOnStart.get() || dashboardOnMap.hasCriticalMessages())
+				if (settings.SHOW_DASHBOARD_ON_START.get()) {
 					dashboardOnMap.setDashboardVisibility(true, DashboardOnMap.staticVisibleType);
+				} else {
+					if (ErrorBottomSheetDialog.shouldShow(settings, this)) {
+						new ErrorBottomSheetDialog().show(getFragmentManager(), "dialog");
+					}
+				}
 			}
 		}
 		dashboardOnMap.updateLocation(true, true, false);

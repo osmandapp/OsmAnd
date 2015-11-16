@@ -1,24 +1,10 @@
 package net.osmand.plus.activities;
 
-import android.app.Activity;
-import android.app.Dialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
+import java.io.File;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import net.londatiga.android.ActionItem;
 import net.londatiga.android.QuickAction;
@@ -58,11 +44,25 @@ import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
-import java.io.File;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import android.app.Activity;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class MapActivityActions implements DialogProvider {
 	private static final Log LOG = PlatformUtil.getLog(MapActivityActions.class);
@@ -163,7 +163,7 @@ public class MapActivityActions implements DialogProvider {
 	
 	public void addAsTarget(double latitude, double longitude, PointDescription pd) {
 		TargetPointsHelper targets = getMyApplication().getTargetPointsHelper();
-		targets.navigateToPoint(new LatLon(latitude, longitude), true, -1,
+		targets.navigateToPoint(new LatLon(latitude, longitude), true, targets.getIntermediatePoints().size() + 1,
 				pd);
 		openIntermediateEditPointsDialog();
 	}
@@ -186,19 +186,6 @@ public class MapActivityActions implements DialogProvider {
 		return bundle;
 	}
 
-
-	public void addWaypoint(final double latitude, final double longitude) {
-		String name;
-		PointDescription pointDescription = mapActivity.getContextMenu().getPointDescription();
-		if (!pointDescription.isWpt() && !mapActivity.getContextMenu().isAddressUnknown()) {
-			name = mapActivity.getContextMenu().getTitleStr();
-		} else {
-			name = "";
-		}
-		enhance(dialogBundle, latitude, longitude, name);
-		mapActivity.showDialog(DIALOG_ADD_WAYPOINT);
-	}
-
 	private Dialog createAddWaypointDialog(final Bundle args) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
 		builder.setTitle(R.string.add_waypoint_dialog_title);
@@ -213,7 +200,7 @@ public class MapActivityActions implements DialogProvider {
 				double longitude = args.getDouble(KEY_LONGITUDE);
 				String name = editText.getText().toString();
 				SavingTrackHelper savingTrackHelper = mapActivity.getMyApplication().getSavingTrackHelper();
-				savingTrackHelper.insertPointData(latitude, longitude, System.currentTimeMillis(), null, name, null);
+				savingTrackHelper.insertPointData(latitude, longitude, System.currentTimeMillis(), null, name, null, 0);
 				AccessibleToast.makeText(mapActivity, MessageFormat.format(getString(R.string.add_waypoint_dialog_added), name), Toast.LENGTH_SHORT)
 						.show();
 				dialog.dismiss();
@@ -348,6 +335,10 @@ public class MapActivityActions implements DialogProvider {
 	public void contextMenuPoint(final double latitude, final double longitude, final ContextMenuAdapter iadapter, Object selectedObj) {
 		final ContextMenuAdapter adapter = iadapter == null ? new ContextMenuAdapter(mapActivity) : iadapter;
 		adapter.item(R.string.context_menu_item_search).iconColor(R.drawable.ic_action_search_dark).reg();
+		if (!mapActivity.getRoutingHelper().isFollowingMode() && !mapActivity.getRoutingHelper().isRoutePlanningMode()) {
+			adapter.item(R.string.context_menu_item_directions_from).iconColor(
+					R.drawable.ic_action_gdirections_dark).reg();
+		}
 		OsmandPlugin.registerMapContextMenu(mapActivity, latitude, longitude, adapter, selectedObj);
 		getMyApplication().getAppCustomization().prepareLocationMenu(mapActivity, adapter);
 
@@ -368,6 +359,10 @@ public class MapActivityActions implements DialogProvider {
 					intent.putExtra(SearchActivity.SEARCH_LON, longitude);
 					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					mapActivity.startActivity(intent);
+				} else if (standardId == R.string.context_menu_item_directions_from) {
+					mapActivity.getContextMenu().hide();
+					enterRoutePlanningMode(new LatLon(latitude, longitude),
+							mapActivity.getContextMenu().getPointDescription(), false);
 				}
 			}
 		});
@@ -785,7 +780,7 @@ public class MapActivityActions implements DialogProvider {
 	}
 
 	public void openIntermediateEditPointsDialog() {
-		mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.WAYPOINTS);
+		mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.WAYPOINTS_EDIT);
 	}
 
 	private TargetPointsHelper getTargets() {

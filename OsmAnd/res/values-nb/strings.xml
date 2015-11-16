@@ -377,7 +377,7 @@
     <string name="map_route_by_gpx">Naviger ved bruk av GPX</string>
     <string name="vector_data">Offline vektorkart</string>
 
-    <string name="osb_bug_name">Feil</string>
+    
     <string name="poi_context_menu_modify">Endre interessepunkt</string>
     <string name="poi_context_menu_delete">Slett interessepunkt</string>
     <string name="rotate_map_compass_opt">Ifølge kompass</string>
@@ -536,7 +536,7 @@
     <string name="search_tabs_location">Sted</string>
 
     <string name="context_menu_item_update_map">Oppdater kart</string>
-    <string name="context_menu_item_open_bug">Åpne OSM-feil</string>
+    
     <string name="context_menu_item_create_poi">Opprett interessepunkt</string>
     <string name="shared_string_yes">Ja</string>
     <string name="shared_string_cancel">Avbryt</string>
@@ -548,7 +548,7 @@
     <string name="favourites_context_menu_delete">Slett favoritt</string>
     <string name="favourites_remove_dialog_msg">Fjerne favorittpunkt \'%s\'?</string>
     <string name="favourites_remove_dialog_success">Favorittpunkt {0} ble vellykket slettet.</string>
-    <string name="osb_comment_menu_item">Legg til kommentar</string>
+    
     <string name="osb_comment_dialog_message">Melding</string>
     <string name="poi_edit_title">Rediger interessepunkt</string>
     <string name="poi_create_title">Opprett interessepunkt</string>
@@ -881,7 +881,7 @@
     <string name="loading_cities">Laster byer…</string>
     <string name="invalid_locations">Koordinater er ugyldige!</string>
     <string name="go_back_to_osmand">Tilbake til OsmAnd-kart</string>
-    <string name="osb_comment_dialog_add_button">Legg til kommentar</string>
+    
     <string name="osb_comment_dialog_success">Kommentar ble vellykket lagt til</string>
     <string name="no_buildings_found">Ingen bygninger funnet.</string>
     <string name="loading_streets_buildings">Laster gater/bygninger…</string>

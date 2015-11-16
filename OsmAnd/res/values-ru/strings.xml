@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
 
     <string name="lang_nds">Нижненемецкий</string>
     <string name="lang_mk">Македонский</string>
@@ -376,7 +375,7 @@
     <string name="layer_gpx_layer">Трек GPX…</string>
     <string name="error_reading_gpx">Ошибка чтения данных GPX</string>
     <string name="vector_data">Локальные векторные карты</string>
-    <string name="osb_bug_name">Ошибка</string>
+    
     <string name="poi_context_menu_modify">Редактировать POI</string>
     <string name="poi_context_menu_delete">Удалить POI</string>
     <string name="rotate_map_compass_opt">По направлению компаса</string>
@@ -615,7 +614,7 @@
     <string name="search_address_street_option">Пересечение улиц</string>
     <string name="search_tabs_location">Координаты</string>
     <string name="context_menu_item_update_map">Обновить карту</string>
-    <string name="context_menu_item_open_bug">Сообщить об ошибке на карте</string>
+    
     <string name="context_menu_item_create_poi">Добавить POI</string>
     <string name="shared_string_yes">Да</string>
     <string name="shared_string_cancel">Отмена</string>
@@ -627,19 +626,19 @@
     <string name="favourites_context_menu_delete">Удалить точку</string>
     <string name="favourites_remove_dialog_msg">Вы действительно хотите удалить точку \"%s\" из Избранных?</string>
     <string name="favourites_remove_dialog_success">Точка {0} была успешно удалена из Избранных.</string>
-    <string name="osb_add_dialog_title">Подробно опишите ошибку</string>
-    <string name="osb_add_dialog_success">Спасибо, ваше замечание добавлено в базу</string>
-    <string name="osb_add_dialog_error">Возникло исключение: сообщение об ошибке не создано</string>
-    <string name="osb_comment_dialog_title">Добавление комментария к ошибке</string>
-    <string name="osb_comment_dialog_add_button">Добавить комментарий</string>
+    
+    
+    
+    
+    
     <string name="osb_comment_dialog_success">Комментарий был успешно добавлен</string>
     <string name="osb_comment_dialog_error">Возникло исключение: комментарий не добавлен</string>
-    <string name="osb_close_dialog_title">Закрываю ошибку</string>
-    <string name="osb_close_dialog_close_button">Закрыть ошибку</string>
-    <string name="osb_close_dialog_success">Ошибка была успешно закрыта</string>
-    <string name="osb_close_dialog_error">Возникло исключение: ошибка не была закрыта</string>
-    <string name="osb_comment_menu_item">Добавить комментарий</string>
-    <string name="osb_close_menu_item">Закрыть ошибку</string>
+    
+    
+    
+    
+    
+    
     <string name="osb_comment_dialog_message">Комментарий</string>
     <string name="osb_comment_dialog_author">Автор</string>
     <string name="poi_edit_title">Редактирование POI</string>
@@ -1812,11 +1811,12 @@
     <string name="shared_string_update">Обновить</string>
     <string name="shared_string_upload">Отправить</string>
     <string name="osm_edit_created_poi">Создана OSM POI</string>
-    <string name="osm_edit_created_bug">Создана заметка OSM</string>
+    
     <string name="osmand_running_in_background">Работает в фоновом режиме</string>
     <string name="av_locations">Места</string>
     <string name="downloading_number_of_files">Загрузка файла - %1$d</string>
 
 <string name="read_more">Подробнее</string>
     <string name="whats_new">Что нового в</string>
+    <string name="save_poi_without_poi_type_message">Вы действительно хотите сохранить POI без указания типа?</string>
     </resources>

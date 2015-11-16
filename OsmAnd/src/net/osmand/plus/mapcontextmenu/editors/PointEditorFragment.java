@@ -263,6 +263,8 @@ public abstract class PointEditorFragment extends Fragment {
 		categoryEdit.setText(n);
 		ImageView categoryImage = (ImageView) view.findViewById(R.id.category_image);
 		categoryImage.setImageDrawable(getCategoryIcon());
+		ImageView nameImage = (ImageView) view.findViewById(R.id.name_image);
+		nameImage.setImageDrawable(getNameIcon());
 	}
 
 	protected String getDefaultCategoryName() {
@@ -286,7 +288,6 @@ public abstract class PointEditorFragment extends Fragment {
 
 	public void dismiss(boolean includingMenu) {
 		if (includingMenu) {
-			//getMapActivity().getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 			getMapActivity().getSupportFragmentManager().popBackStack();
 			getMapActivity().getContextMenu().close();
 		} else {
@@ -318,7 +319,7 @@ public abstract class PointEditorFragment extends Fragment {
 	public String getCategoryTextValue() {
 		AutoCompleteTextViewEx categoryEdit = (AutoCompleteTextViewEx) view.findViewById(R.id.category_edit);
 		String name = categoryEdit.getText().toString().trim();
-		return name.equals(getString(R.string.shared_string_favorites)) ? "" : name;
+		return name.equals(getDefaultCategoryName()) ? "" : name;
 	}
 
 	public String getDescriptionTextValue() {

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import net.osmand.osm.edit.Node;
+import net.osmand.util.Algorithms;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -60,11 +61,16 @@ public class OpenstreetmapsDbHelper extends SQLiteOpenHelper {
 			Iterator<Entry<String, String>> eit = p.getEntity().getTags().entrySet().iterator();
 			while(eit.hasNext()) {
 				Entry<String, String> e = eit.next();
+				if(Algorithms.isEmpty(e.getKey()) || Algorithms.isEmpty(e.getValue())) {
+					continue;
+				}
 				tags.append(e.getKey()).append("$$$").append(e.getValue());
 				if(eit.hasNext()) {
 					tags.append("$$$");
 				}
 			}
+			db.execSQL("DELETE FROM " + OPENSTREETMAP_TABLE_NAME +
+					" WHERE " + OPENSTREETMAP_COL_ID + " = ?", new Object[] { p.getId() }); //$NON-NLS-1$ //$NON-NLS-2$
 			db.execSQL("INSERT INTO " + OPENSTREETMAP_TABLE_NAME +
 					" (" + OPENSTREETMAP_COL_ID + ", " + OPENSTREETMAP_COL_LAT + ", " + OPENSTREETMAP_COL_LON + ", " + OPENSTREETMAP_COL_TAGS + ", " + OPENSTREETMAP_COL_ACTION + "," + OPENSTREETMAP_COL_COMMENT + ")" +
 					   " VALUES (?, ?, ?, ?, ?, ?)",

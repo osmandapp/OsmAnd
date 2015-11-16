@@ -203,6 +203,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 					originalGPX = null;
 					measurementPoints.clear();
 					calculateDistance();
+					activity.getContextMenu().close();
 				} else if (id == R.string.shared_string_save_as_gpx) {
 					saveGpx(activity);
 				} else if (id == R.string.distance_measurement_load_gpx) {
@@ -637,25 +638,40 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 		public void populateObjectContextMenu(Object o, ContextMenuAdapter adapter) {
 			if(o instanceof WptPt) {
 				final WptPt p = (WptPt) o;
-				OnContextMenuClick listener = new OnContextMenuClick() {
-					
-					@Override
-					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
-						if (itemId == R.string.delete_point) {
-							for (int i = 0; i < measurementPoints.size(); i++) {
-								Iterator<WptPt> it = measurementPoints.get(i).iterator();
-								while (it.hasNext()) {
-									if (it.next() == p) {
-										it.remove();
+				boolean containsPoint = false;
+				for (int i = 0; i < measurementPoints.size(); i++) {
+					Iterator<WptPt> it = measurementPoints.get(i).iterator();
+					while (it.hasNext()) {
+						if (it.next() == p) {
+							containsPoint = true;
+							break;
+						}
+					}
+				}
+				if (containsPoint) {
+					OnContextMenuClick listener = new OnContextMenuClick() {
+
+						@Override
+						public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+							if (itemId == R.string.delete_point) {
+								for (int i = 0; i < measurementPoints.size(); i++) {
+									Iterator<WptPt> it = measurementPoints.get(i).iterator();
+									while (it.hasNext()) {
+										if (it.next() == p) {
+											it.remove();
+										}
 									}
 								}
+								calculateDistance();
+								if (adapter.getContext() instanceof MapActivity) {
+									((MapActivity)adapter.getContext()).getContextMenu().close();
+								}
 							}
-							calculateDistance();
+							return true;
 						}
-						return true;
-					}
-				};
-				adapter.item(R.string.delete_point).iconColor(R.drawable.ic_action_delete_dark).listen(listener).reg();
+					};
+					adapter.item(R.string.delete_point).iconColor(R.drawable.ic_action_delete_dark).listen(listener).reg();
+				}
 			}
 		}
 

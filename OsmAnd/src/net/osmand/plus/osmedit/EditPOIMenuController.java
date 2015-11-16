@@ -1,4 +1,4 @@
-package net.osmand.plus.mapcontextmenu.controllers;
+package net.osmand.plus.osmedit;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -12,16 +12,7 @@ import net.osmand.plus.ProgressImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuController;
-import net.osmand.plus.mapcontextmenu.builders.EditPOIMenuBuilder;
-import net.osmand.plus.osmedit.OpenstreetmapPoint;
-import net.osmand.plus.osmedit.OpenstreetmapRemoteUtil;
-import net.osmand.plus.osmedit.OsmBugsRemoteUtil;
-import net.osmand.plus.osmedit.OsmEditingPlugin;
-import net.osmand.plus.osmedit.OsmEditsUploadListener;
-import net.osmand.plus.osmedit.OsmEditsUploadListenerHelper;
-import net.osmand.plus.osmedit.OsmNotesPoint;
-import net.osmand.plus.osmedit.OsmPoint;
-import net.osmand.plus.osmedit.UploadOpenstreetmapPointAsyncTask;
+import net.osmand.plus.osmedit.OsmPoint.Action;
 import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment;
 import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment.ProgressDialogPoiUploader;
 import net.osmand.util.Algorithms;
@@ -30,12 +21,14 @@ import java.util.Map;
 
 public class EditPOIMenuController extends MenuController {
 
+	private OsmPoint osmPoint;
 	private OsmEditingPlugin plugin;
 	private String pointTypeStr;
 	private ProgressDialogPoiUploader poiUploader;
 
-	public EditPOIMenuController(OsmandApplication app, MapActivity mapActivity, PointDescription pointDescription, final OsmPoint osmPoint) {
+	public EditPOIMenuController(OsmandApplication app, MapActivity mapActivity, PointDescription pointDescription, OsmPoint osmPoint) {
 		super(new EditPOIMenuBuilder(app, osmPoint), pointDescription, mapActivity);
+		this.osmPoint = osmPoint;
 		plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
 
 		poiUploader = new ProgressDialogPoiUploader() {
@@ -51,17 +44,16 @@ public class EditPOIMenuController extends MenuController {
 					@Override
 					public void uploadEnded(Map<OsmPoint, String> loadErrorsMap) {
 						super.uploadEnded(loadErrorsMap);
-						for (OsmPoint osmPoint : loadErrorsMap.keySet()) {
-							if (loadErrorsMap.get(osmPoint) == null) {
-								getMapActivity().getContextMenu().close();
-							}
+						getMapActivity().getContextMenu().close();
+						OsmBugsLayer l = getMapActivity().getMapView().getLayerByClass(OsmBugsLayer.class);
+						if(l != null) {
+							l.clearCache();
+							getMapActivity().refreshMap();
 						}
 					}
 				};
-				OpenstreetmapRemoteUtil remotepoi = new OpenstreetmapRemoteUtil(getMapActivity());
-				OsmBugsRemoteUtil remotebug = new OsmBugsRemoteUtil(getMapActivity().getMyApplication());
 				UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask(
-						dialog, listener, plugin, remotepoi, remotebug, points.length, closeChangeSet);
+						dialog, listener, plugin, points.length, closeChangeSet);
 				uploadTask.execute(points);
 
 				dialog.show();
@@ -72,7 +64,7 @@ public class EditPOIMenuController extends MenuController {
 			@Override
 			public void buttonPressed() {
 				if (plugin != null) {
-					SendPoiDialogFragment sendPoiDialogFragment = SendPoiDialogFragment.createInstance(new OsmPoint[]{osmPoint});
+					SendPoiDialogFragment sendPoiDialogFragment = SendPoiDialogFragment.createInstance(new OsmPoint[]{getOsmPoint()});
 					sendPoiDialogFragment.setPoiUploader(poiUploader);
 					sendPoiDialogFragment.show(getMapActivity().getSupportFragmentManager(), SendPoiDialogFragment.TAG);
 				}
@@ -92,10 +84,11 @@ public class EditPOIMenuController extends MenuController {
 					public void onClick(DialogInterface dialog, int which) {
 						if (plugin != null) {
 							boolean deleted = false;
-							if (osmPoint instanceof OsmNotesPoint) {
-								deleted = plugin.getDBBug().deleteAllBugModifications((OsmNotesPoint) osmPoint);
-							} else if (osmPoint instanceof OpenstreetmapPoint) {
-								deleted = plugin.getDBPOI().deletePOI((OpenstreetmapPoint) osmPoint);
+							OsmPoint point = getOsmPoint();
+							if (point instanceof OsmNotesPoint) {
+								deleted = plugin.getDBBug().deleteAllBugModifications((OsmNotesPoint) point);
+							} else if (point instanceof OpenstreetmapPoint) {
+								deleted = plugin.getDBPOI().deletePOI((OpenstreetmapPoint) point);
 							}
 							if (deleted) {
 								getMapActivity().getContextMenu().close();
@@ -111,12 +104,38 @@ public class EditPOIMenuController extends MenuController {
 		rightTitleButtonController.leftIconId = R.drawable.ic_action_delete_dark;
 
 		if (osmPoint.getGroup() == OsmPoint.Group.POI) {
-			pointTypeStr = getMapActivity().getString(R.string.osm_edit_created_poi);
+			if(osmPoint.getAction() == Action.DELETE) {
+				pointTypeStr = getMapActivity().getString(R.string.osm_edit_deleted_poi);
+			} else if(osmPoint.getAction() == Action.MODIFY) {
+				pointTypeStr = getMapActivity().getString(R.string.osm_edit_modified_poi);
+			} else/* if(osmPoint.getAction() == Action.CREATE) */{
+				pointTypeStr = getMapActivity().getString(R.string.osm_edit_created_poi);
+			}
+			
 		} else if (osmPoint.getGroup() == OsmPoint.Group.BUG) {
-			pointTypeStr = getMapActivity().getString(R.string.osm_edit_created_bug);
+			if(osmPoint.getAction() == Action.DELETE) {
+				pointTypeStr = getMapActivity().getString(R.string.osm_edit_removed_note);
+			} else if(osmPoint.getAction() == Action.MODIFY) {
+				pointTypeStr = getMapActivity().getString(R.string.osm_edit_commented_note);
+			} else if(osmPoint.getAction() == Action.REOPEN) {
+				pointTypeStr = getMapActivity().getString(R.string.osm_edit_reopened_note);
+			} else/* if(osmPoint.getAction() == Action.CREATE) */{
+				pointTypeStr = getMapActivity().getString(R.string.osm_edit_created_note);
+			}
 		} else {
 			pointTypeStr = "";
 		}
+	}
+
+	@Override
+	protected void setObject(Object object) {
+		if (object instanceof OsmPoint) {
+			this.osmPoint = (OsmPoint) object;
+		}
+	}
+
+	public OsmPoint getOsmPoint() {
+		return osmPoint;
 	}
 
 	@Override
@@ -131,7 +150,7 @@ public class EditPOIMenuController extends MenuController {
 
 	@Override
 	public Drawable getLeftIcon() {
-		return getIcon(R.drawable.ic_action_gabout_dark, R.color.osmand_orange_dark, R.color.osmand_orange);
+		return getIcon(R.drawable.ic_action_gabout_dark, R.color.created_poi_icon_color);
 	}
 
 	@Override

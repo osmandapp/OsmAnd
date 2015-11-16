@@ -8,6 +8,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
+        android:id="@+id/messageEditTextLabel"
         android:text="@string/osb_comment_dialog_message"/>
 
     <EditText
