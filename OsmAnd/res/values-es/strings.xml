@@ -1953,7 +1953,7 @@
     <string name="context_menu_item_delete_waypoint">¿Borrar punto de ruta GPX?</string>
     <string name="context_menu_item_edit_waypoint">Editar punto de ruta GPX</string>
 
-<string name="context_menu_item_open_note">Nota OSM abierta</string>
+<string name="context_menu_item_open_note">Abrir nota OSM</string>
     <string name="osm_edit_reopened_note">Nota OSM reabierta</string>
     <string name="osm_edit_commented_note">Nota OSM comentada</string>
     <string name="osm_edit_removed_note">Nota OSM borrada</string>
