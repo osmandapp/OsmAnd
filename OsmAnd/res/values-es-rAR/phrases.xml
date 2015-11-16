@@ -1597,16 +1597,16 @@
 
 	<string name="poi_drive_in_yes">Conducir dentro: Si</string>
 	<string name="poi_drive_in_no">Conducir dentro: No</string>
-	<string name="poi_drive_through_yes">Autoservicio: Si</string>
-	<string name="poi_drive_through_no">Autoservicio: No</string>
+	<string name="poi_drive_through_yes">Con servicio dentro del coche</string>
+	<string name="poi_drive_through_no">Sin servicio dentro del coche</string>
 
 	<string name="poi_brewery_additional">Nombre de cervecería</string>
 	<string name="poi_microbrewery_yes">Micro-cervecería</string>
 	<string name="poi_microbrewery_no">Sin micro-cervecería</string>
 
-	<string name="poi_takeaway_yes">Servicio de comida para llevar</string>
-	<string name="poi_takeaway_no">Sin servicio de comida para llevar</string>
-	<string name="poi_takeaway_only">Sólo servicio de comida para llevar</string>
+	<string name="poi_takeaway_yes">Comidas para llevar: Si</string>
+	<string name="poi_takeaway_no">Comidas para llevar: No</string>
+	<string name="poi_takeaway_only">Sólo comidas para llevar</string>
 
 	<string name="poi_delivery_no">Sin servicio a domicilio</string>
 	<string name="poi_delivery_yes">Con servicio a domicilio</string>
