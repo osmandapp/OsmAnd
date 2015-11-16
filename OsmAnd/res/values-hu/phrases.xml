@@ -1232,4 +1232,147 @@
 	<string name="poi_cargo_container">Rakomány: konténer</string>
 	<string name="poi_cargo_hgv">Rakomány: tehergépjármű</string>
 
+	<string name="poi_internet_access_fee_yes">Internetelérés - fizetős</string>
+	<string name="poi_internet_access_fee_no">Internetelérés - ingyenes</string>
+
+	<string name="poi_events_venue">Rendezvényközpont</string>
+
+	<string name="poi_diet_vegetarian_only">Csak vegetáriánus ételek</string>
+	<string name="poi_diet_vegetarian_yes">Vegetáriánus ételek</string>
+	<string name="poi_diet_vegetarian_no">Nincs vegetáriánus étel</string>
+	<string name="poi_diet_vegetarian_few">Néhány vegetáriánus étel</string>
+	<string name="poi_diet_vegan_only">Csak vegán ételek</string>
+	<string name="poi_diet_vegan_yes">Vegán ételek</string>
+	<string name="poi_diet_vegan_no">Nincs vegán étel</string>
+	<string name="poi_diet_gluten_free_only">Csak gluténmentes ételek</string>
+	<string name="poi_diet_gluten_free_yes">Gluténmentes ételek</string>
+	<string name="poi_diet_gluten_free_no">Nincs gluténmentes étel</string>
+	<string name="poi_diet_kosher_only">Csak kóser ételek</string>
+	<string name="poi_diet_kosher_yes">Kóser ételek</string>
+	<string name="poi_diet_kosher_no">Nincs kóser étel</string>
+	<string name="poi_diet_halal_only">Csak halal ételek</string>
+	<string name="poi_diet_halal_yes">Halal ételek</string>
+	<string name="poi_diet_halal_no">Nincs halal étel</string>
+	<string name="poi_diet_lactose_free_only">Csak laktózmentes ételek</string>
+	<string name="poi_diet_lactose_free_yes">Laktózmentes ételek</string>
+	<string name="poi_diet_lactose_free_no">Nincs laktózmentes étel</string>
+	<string name="poi_diet_pescetarian_yes">Peszko-vegetáriánus ételek</string>
+
+	<string name="poi_brewery_additional">Sörfőzde név</string>
+	<string name="poi_microbrewery_yes">Házi sörfőzde</string>
+	<string name="poi_microbrewery_no">Nincs házi sörfőzde</string>
+
+	<string name="poi_takeaway_yes">Elvitelre</string>
+	<string name="poi_takeaway_no">Nincs elvitel</string>
+	<string name="poi_takeaway_only">Csak elvitelre</string>
+
+	<string name="poi_delivery_yes">Házhoz szállítás</string>
+	<string name="poi_delivery_no">Nincs házhoz szállítás</string>
+	<string name="poi_delivery_only">Csak házhoz szállítás</string>
+
+	<string name="poi_outdoor_seating_yes">Kiülős helyek</string>
+	<string name="poi_outdoor_seating_no">Nem kiülős</string>
+	<string name="poi_outdoor_seating_terrace">Kiülős hely: terasz</string>
+	<string name="poi_outdoor_seating_sidewalk">Kiülős hely: járda</string>
+	<string name="poi_outdoor_seating_pedestrian_zone">Kiülős hely: sétálóutca</string>
+	<string name="poi_outdoor_seating_garden">Kiülős hely: kert</string>
+	<string name="poi_outdoor_seating_patio">Kiülős hely: belső udvar</string>
+
+	<string name="poi_cocktails_yes">Koktélok</string>
+
+	<string name="poi_second_hand_yes">Használt áruk</string>
+	<string name="poi_second_hand_no">Nincs használt áru</string>
+	<string name="poi_second_hand_only">Csak használt áruk</string>
+
+	<string name="poi_service_parts">Alkatrész</string>
+	<string name="poi_service_dealer">Kereskedés</string>
+	<string name="poi_service_repair">Szerviz</string>
+	<string name="poi_service_repair_no">Nincs szerviz</string>
+	<string name="poi_service_electrical">Elektromos autó szerviz</string>
+	<string name="poi_motorcycle_repair">Motorkerékpár szerviz</string>
+	<string name="poi_self_service_yes">Önkiszolgáló</string>
+	<string name="poi_self_service_no">Nem önkiszolgáló</string>
+	<string name="poi_automated_yes">Automatizált</string>
+	<string name="poi_automated_no">Nem automata</string>
+	<string name="poi_full_service_yes">Teljes kiszolgálás</string>
+	<string name="poi_brushless_yes">Kefe nélküli</string>
+	<string name="poi_brushless_no">Kefés</string>
+	<string name="poi_car_wash_no">Nincs autómosó</string>
+
+	<string name="poi_aeroway_fuel">Repülőgép üzemanyagtöltő állomás</string>
+	<string name="poi_public_bath">Közfürdő</string>
+
+	<string name="poi_male_yes">Férfi</string>
+	<string name="poi_male_no">Férfiaknak tilos</string>
+	<string name="poi_female_yes">Női</string>
+	<string name="poi_female_no">Nőknek tilos</string>
+	<string name="poi_indoor_yes">Beltéri</string>
+	<string name="poi_indoor_no">Kültéri</string>
+	<string name="poi_toilets_yes">WC van</string>
+	<string name="poi_toilets_no">WC nincs</string>
+	<string name="poi_toilets_wheelchair_yes">Akadálymentes WC</string>
+	<string name="poi_toilets_wheelchair_no">Nincs akadálymentes WC</string>
+	<string name="poi_toilets_access_customers">WC használat: vendégeknek</string>
+	<string name="poi_toilets_access_permissive">WC használat: megengedett</string>
+	<string name="poi_toilets_access_community">WC használat: közösség</string>
+	<string name="poi_toilets_access_public">WC használat: nyilvános</string>
+
+	<string name="poi_diaper_yes">Pelenkázó asztal</string>
+	<string name="poi_diaper_no">Nincs pelenkázó asztal</string>
+	<string name="poi_diaper_room">Pelenkázó szoba</string>
+
+	<string name="poi_maxstay">Parkolási időkorlát</string>
+
+	<string name="poi_vending_parking_tickets">Parkolójegy</string>
+	<string name="poi_vending_cigarettes">Cigaretta</string>
+	<string name="poi_vending_excrement_bags">Ürülék felszedő zacskó</string>
+	<string name="poi_vending_public_transport_tickets">Tömegközlekedési jegy</string>
+	<string name="poi_vending_drinks">Ital</string>
+	<string name="poi_vending_sweets">Édesség</string>
+	<string name="poi_vending_condoms">Óvszer</string>
+	<string name="poi_vending_stamps">Bélyeg</string>
+	<string name="poi_vending_bicycle_tube">Kerékpár gumibelső</string>
+	<string name="poi_vending_food">Étel</string>
+	<string name="poi_vending_drinks_food">Étel és ital</string>
+	<string name="poi_vending_fuel">Üzemanyag automata</string>
+	<string name="poi_vending_milk">Tej</string>
+	<string name="poi_vending_elongated_coin">Emlék érme</string>
+	<string name="poi_vending_bread">Kenyér</string>
+	<string name="poi_vending_chewing_gums">Rágógumi</string>
+	<string name="poi_vending_parking_tickets_public_transport_tickets">Parkolójegy; tömegközlekedési jegy</string>
+	<string name="poi_vending_coffee">Kávé</string>
+	<string name="poi_vending_toll">Fizetőautomata</string>
+	<string name="poi_vending_tickets">Jegyautomata</string>
+	<string name="poi_vending_water">Ivóvíz</string>
+	<string name="poi_vending_telephone_vouchers">Telefonkártya</string>
+	<string name="poi_vending_animal_food">Állateledel</string>
+	<string name="poi_vending_public_transport_plans">Tömegközlekedési térkép</string>
+	<string name="poi_vending_drinks_sweets">Ital és édesség</string>
+	<string name="poi_vending_dvd">DVD</string>
+	<string name="poi_vending_candles">Gyertya</string>
+	<string name="poi_vending_toys">Játék</string>
+	<string name="poi_vending_ice_cream">Jégkrém</string>
+	<string name="poi_vending_sim_cards">SIM-kártya</string>
+
+	<string name="poi_memorial_war">Háborús emlékmű</string>
+	<string name="poi_memorial_plaque">Emléktábla</string>
+	<string name="poi_memorial_statue">Szobor</string>
+	<string name="poi_memorial_stone">Kő</string>
+	<string name="poi_memorial_stele">Sztélé</string>
+	<string name="poi_memorial_bust">Mellszobor</string>
+	<string name="poi_memorial_vehicle">Jármű</string>
+	<string name="poi_memorial_obelisk">Obeliszk</string>
+	<string name="poi_memorial_column">Oszlop</string>
+	<string name="poi_memorial_stupa">Sztúpa</string>
+	<string name="poi_historic_quarry">Felhagyott kőfejtő</string>
+
+	<string name="poi_wetland_wet_meadow">Láprét</string>
+	<string name="poi_wetland_swamp">Ingovány</string>
+	<string name="poi_wetland_bog">Láp</string>
+	<string name="poi_wetland_marsh">Mocsár</string>
+	<string name="poi_wetland_reedbed">Nádas</string>
+	<string name="poi_wetland_tidalflat">Árapálysíkság</string>
+	<string name="poi_wetland_saltmarsh">Sós mocsár</string>
+	<string name="poi_wetland_saltern">Sótelep</string>
+	<string name="poi_wetland_mangrove">Mangrove mocsár</string>
 	</resources>
