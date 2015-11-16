@@ -336,7 +336,6 @@ public class MapContextMenu extends MenuTitleController {
 
 	protected void acquireIcons() {
 		super.acquireIcons();
-
 		if (menuController != null) {
 			favActionIconId = menuController.getFavActionIconId();
 		} else {
@@ -345,10 +344,9 @@ public class MapContextMenu extends MenuTitleController {
 	}
 
 	public void fabPressed() {
-		mapActivity.getMapActions().showNavigationContextMenuPoint(latLon.getLatitude(), latLon.getLongitude());
-		//mapActivity.getMapActions().directionTo(latLon.getLatitude(), latLon.getLongitude());
+		mapActivity.getMapActions().directionTo(latLon.getLatitude(), latLon.getLongitude(), getPointDescription());
 		hide();
-		//mapActivity.getMapLayers().getMapControlsLayer().showRouteInfoControlDialog();
+		mapActivity.getMapLayers().getMapControlsLayer().showRouteInfoControlDialog();
 	}
 
 	public void buttonWaypointPressed() {
