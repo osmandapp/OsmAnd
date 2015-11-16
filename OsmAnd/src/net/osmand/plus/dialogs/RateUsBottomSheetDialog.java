@@ -1,4 +1,4 @@
-package net.osmand.plus.dashboard;
+package net.osmand.plus.dialogs;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
@@ -13,32 +13,15 @@ import android.widget.TextView;
 
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.dashboard.tools.DashFragmentData;
-import net.osmand.plus.dialogs.RateUsBottomSheetDialog;
+import net.osmand.plus.base.BottomSheetDialogFragment;
 
-public class DashRateUsFragment extends DashBaseFragment {
-	public static final String TAG = "DASH_RATE_US_FRAGMENT";
+import java.util.Calendar;
 
-	public static final DashFragmentData.ShouldShowFunction SHOULD_SHOW_FUNCTION =
-			new DashboardOnMap.DefaultShouldShow() {
-				@Override
-				public boolean shouldShow(OsmandSettings settings, MapActivity activity, String tag) {
-					return RateUsBottomSheetDialog.shouldShow(settings)
-							&& super.shouldShow(settings, activity, tag);
-				}
-			};
-
+public class RateUsBottomSheetDialog extends BottomSheetDialogFragment {
 	private RateUsBottomSheetDialog.FragmentState state = RateUsBottomSheetDialog.FragmentState.INITIAL_STATE;
-	private RateUsDismissListener mRateUsDismissListener;
-
+	@Nullable
 	@Override
-	public void onOpenDash() {
-
-	}
-
-	@Override
-	public View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_rate_us_fragment, container, false);
 		TextView header = (TextView) view.findViewById(R.id.header);
 		TextView subheader = (TextView) view.findViewById(R.id.subheader);
@@ -48,14 +31,55 @@ public class DashRateUsFragment extends DashBaseFragment {
 				new PositiveButtonListener(header, subheader, positiveButton, negativeButton));
 		negativeButton.setOnClickListener(
 				new NegativeButtonListener(header, subheader, positiveButton, negativeButton));
-		OsmandSettings settings = getMyApplication().getSettings();
-		mRateUsDismissListener = new RateUsDismissListener(dashboard, settings);
 		return view;
 	}
 
-	@Override
-	public DismissListener getDismissCallback() {
-		return mRateUsDismissListener;
+	public static boolean shouldShow(OsmandSettings settings) {
+		if(!settings.LAST_DISPLAY_TIME.isSet()) {
+			settings.LAST_DISPLAY_TIME.set(System.currentTimeMillis());
+		}
+		long lastDisplayTimeInMillis = settings.LAST_DISPLAY_TIME.get();
+		int numberOfApplicationRuns = settings.NUMBER_OF_APPLICATION_STARTS.get();
+		RateUsState state = settings.RATE_US_STATE.get();
+
+		Calendar modifiedTime = Calendar.getInstance();
+		Calendar lastDisplayTime = Calendar.getInstance();
+		lastDisplayTime.setTimeInMillis(lastDisplayTimeInMillis);
+
+		int bannerFreeRuns = 0;
+
+		switch (state) {
+			case LIKED:
+				return false;
+			case INITIAL_STATE:
+				break;
+			case IGNORED:
+				modifiedTime.add(Calendar.WEEK_OF_YEAR, -1);
+				bannerFreeRuns = 5;
+				break;
+			case DISLIKED_WITH_MESSAGE:
+				modifiedTime.add(Calendar.MONTH, -3);
+				bannerFreeRuns = 3;
+				break;
+			case DISLIKED_WITHOUT_MESSAGE:
+				modifiedTime.add(Calendar.MONTH, -2);
+				break;
+			default:
+				throw new IllegalStateException("Unexpected state:" + state);
+		}
+
+		if (state != RateUsState.INITIAL_STATE) {
+			if (modifiedTime.after(lastDisplayTime) && numberOfApplicationRuns >= bannerFreeRuns) {
+				settings.RATE_US_STATE.set(RateUsState.INITIAL_STATE);
+				modifiedTime = Calendar.getInstance();
+			} else {
+				return false;
+			}
+		}
+		// Initial state now
+		modifiedTime.add(Calendar.HOUR, -72);
+		bannerFreeRuns = 3;
+		return modifiedTime.after(lastDisplayTime) && numberOfApplicationRuns >= bannerFreeRuns;
 	}
 
 	public class PositiveButtonListener implements View.OnClickListener {
@@ -109,7 +133,7 @@ public class DashRateUsFragment extends DashBaseFragment {
 					startActivity(sendEmail);
 					break;
 			}
-			dashboard.refreshDashboardFragments();
+			dismiss();
 		}
 	}
 
@@ -148,25 +172,21 @@ public class DashRateUsFragment extends DashBaseFragment {
 			}
 			settings.NUMBER_OF_APPLICATION_STARTS.set(0);
 			settings.LAST_DISPLAY_TIME.set(System.currentTimeMillis());
-			dashboard.refreshDashboardFragments();
+			dismiss();
 		}
 	}
 
-	private static class RateUsDismissListener implements DismissListener {
-		private DashboardOnMap dashboardOnMap;
-		private OsmandSettings settings;
+	public enum FragmentState {
+		INITIAL_STATE,
+		USER_LIKES_APP,
+		USER_DISLIKES_APP
+	}
 
-		public RateUsDismissListener(DashboardOnMap dashboardOnMap, OsmandSettings settings) {
-			this.dashboardOnMap = dashboardOnMap;
-			this.settings = settings;
-		}
-
-		@Override
-		public void onDismiss() {
-			settings.RATE_US_STATE.set(RateUsBottomSheetDialog.RateUsState.IGNORED);
-			settings.NUMBER_OF_APPLICATION_STARTS.set(0);
-			settings.LAST_DISPLAY_TIME.set(System.currentTimeMillis());
-			dashboardOnMap.refreshDashboardFragments();
-		}
+	public enum RateUsState {
+		INITIAL_STATE,
+		IGNORED,
+		LIKED,
+		DISLIKED_WITH_MESSAGE,
+		DISLIKED_WITHOUT_MESSAGE
 	}
 }

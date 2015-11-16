@@ -70,6 +70,7 @@ public class ErrorBottomSheetDialog extends BottomSheetDialogFragment {
 				}
 				intent.putExtra(Intent.EXTRA_TEXT, text.toString());
 				startActivity(Intent.createChooser(intent, getString(R.string.send_report)));
+				dismiss();
 			}
 		});
 

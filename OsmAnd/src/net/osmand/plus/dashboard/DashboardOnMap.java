@@ -71,11 +71,10 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 	public static DashboardType staticVisibleType = DashboardType.DASHBOARD;
 	public static final String SHOULD_SHOW = "should_show";
 
-	private static final DashFragmentData.ShouldShowFunction rateUsShouldShow = new DashRateUsFragment.RateUsShouldShow();
 
 	private final DashFragmentData[] fragmentsData = new DashFragmentData[]{
 			new DashFragmentData(DashRateUsFragment.TAG, DashRateUsFragment.class,
-					rateUsShouldShow, 0, null),
+					DashRateUsFragment.SHOULD_SHOW_FUNCTION, 0, null),
 			new DashFragmentData(DashErrorFragment.TAG, DashErrorFragment.class,
 					DashErrorFragment.SHOULD_SHOW_FUNCTION, 30, null),
 			new DashFragmentData(DashNavigationFragment.TAG, DashNavigationFragment.class,
@@ -901,12 +900,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 		FragmentTransaction transaction = manager.beginTransaction();
 		Fragment frag = manager.findFragmentByTag(tag);
 		transaction.show(frag).commit();
-	}
-
-	// TODO: 11/13/15 Remove
-	public boolean hasCriticalMessages() {
-		final OsmandSettings settings = getMyApplication().getSettings();
-		return rateUsShouldShow.shouldShow(settings, mapActivity, DashRateUsFragment.TAG);
 	}
 
 	View getParentView() {

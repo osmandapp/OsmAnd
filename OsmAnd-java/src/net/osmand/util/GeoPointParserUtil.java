@@ -359,11 +359,11 @@ public class GeoPointParserUtil {
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
 		
-		// http://www.google.com/maps/?q=loc:34.99393,-106.61568&z=11
-		url = "http://www.google.com/maps/?q=loc:" + dlat + "," + dlon + " (" + name +") ";
-		System.out.println("url: " + url);
-		actual = GeoPointParserUtil.parse(url);
-		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, name));
+		// http://www.google.com/maps/?q=loc:34.99393,-106.61568&z=11 (Treasure Island)
+//		url = "http://www.google.com/maps/?q=loc:" + dlat + "," + dlon + " (" + name +") ";
+//		System.out.println("url: " + url);
+//		actual = GeoPointParserUtil.parse(url);
+//		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, name));
 
 		// https://www.google.com/maps/preview#!q=paris&data=!4m15!2m14!1m13!1s0x47e66e1f06e2b70f%3A0x40b82c3688c9460!3m8!1m3!1d24383582!2d-95.677068!3d37.0625!3m2!1i1222!2i718!4f13.1!4m2!3d48.856614!4d2.3522219
 		url = "https://www.google.com/maps/preview#!q=paris&data=!4m15!2m14!1m13!1s0x47e66e1f06e2b70f%3A0x40b82c3688c9460!3m8!1m3!1d24383582!2d-95.677068!3d37.0625!3m2!1i1222!2i718!4f13.1!4m2!3d48.856614!4d2.3522219";
@@ -412,12 +412,20 @@ public class GeoPointParserUtil {
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
 
 		// whatsapp
-		// https://maps.google.com/maps?q=loc:34.99393,-106.61568 (USERNAME)
+		// https://maps.google.com/maps?q=loc:34.99393,-106.61568 (USER NAME)
 		z = GeoParsedPoint.NO_ZOOM;
 		url = "https://maps.google.com/maps?q=loc:" + dlat + "," + dlon + " (USER NAME)";
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
+
+		// whatsapp
+		// https://maps.google.com/maps?q=loc:34.99393,-106.61568 (LG Brainz)
+		z = GeoParsedPoint.NO_ZOOM;
+		url = "https://maps.google.com/maps?q=loc:" + dlon + "," + dlon + " (LG Brainz)";
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		assertGeoPoint(actual, new GeoParsedPoint(dlon + 1, dlon, z));
 
 		// http://www.google.com/maps/search/food/34,-106,14z
 		url = "http://www.google.com/maps/search/food/" + ilat + "," + ilon + "," + z + "z";

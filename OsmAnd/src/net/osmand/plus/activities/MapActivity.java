@@ -63,6 +63,7 @@ import net.osmand.plus.base.FailSafeFuntions;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dialogs.ErrorBottomSheetDialog;
+import net.osmand.plus.dialogs.RateUsBottomSheetDialog;
 import net.osmand.plus.dialogs.WhatsNewDialogFragment;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.helpers.GpxImportHelper;
@@ -391,15 +392,23 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents {
 	protected void onResume() {
 		super.onResume();
 		long tm = System.currentTimeMillis();
+
+		LOG.debug("onResume()");
 		if (app.isApplicationInitializing() || DashboardOnMap.staticVisible) {
+			LOG.debug("dashboars stuff");
 			if (!dashboardOnMap.isVisible()) {
+				LOG.debug("dashboars is not visible");
 				final OsmandSettings.CommonPreference<Boolean> shouldShowDashboardOnStart =
 						settings.registerBooleanPreference(MapActivity.SHOULD_SHOW_DASHBOARD_ON_START, true);
-				if (shouldShowDashboardOnStart.get() || dashboardOnMap.hasCriticalMessages()) {
+				if (shouldShowDashboardOnStart.get()) {
 					dashboardOnMap.setDashboardVisibility(true, DashboardOnMap.staticVisibleType);
 				} else {
+					LOG.debug("Dashboard should not be shown");
 					if (ErrorBottomSheetDialog.shouldShow(settings, this)) {
 						new ErrorBottomSheetDialog().show(getFragmentManager(), "dialog");
+					} else if (RateUsBottomSheetDialog.shouldShow(settings)) {
+						LOG.debug("Rate us should show");
+						new RateUsBottomSheetDialog().show(getFragmentManager(), "dialog");
 					}
 				}
 			}
