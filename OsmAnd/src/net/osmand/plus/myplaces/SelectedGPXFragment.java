@@ -344,20 +344,32 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 							: null);
 				}
 				if(vis.isChecked() && sf.getGpxFile() != null) {
-					WptPt wpt = sf.getGpxFile().findPointToShow();
-					if (wpt != null) {
-						app.getSettings().setMapLocationToShow(wpt.getLatitude(), wpt.getLongitude(), 15, null, false,
-								false); //$NON-NLS-1$
-						MapActivity.launchMapActivityMoveToTop(activity);
+					if (groups.size() > 0 && groups.get(0).getModifiableList().size() > 0) {
+						GpxDisplayItem item = groups.get(0).getModifiableList().get(0);
+						app.getSettings().setMapLocationToShow(item.locationStart.lat, item.locationStart.lon,
+								15,
+								new PointDescription(PointDescription.POINT_TYPE_GPX_ITEM, item.group.getGpxName()),
+								false,
+								item); //$NON-NLS-1$
+					} else {
+						WptPt wpt = sf.getGpxFile().findPointToShow();
+						if (wpt != null) {
+							app.getSettings().setMapLocationToShow(wpt.getLatitude(), wpt.getLongitude(),
+									15,
+									new PointDescription(PointDescription.POINT_TYPE_WPT, wpt.name),
+									false,
+									wpt); //$NON-NLS-1$
+						}
 					}
+					MapActivity.launchMapActivityMoveToTop(activity);
 				}
 			}
 		});
-		
+
 		bld.show();
-		
+
 	}
-	
+
 	private void updateSplit(final List<GpxDisplayGroup> groups, final List<Double> distanceSplit,
 			final TIntArrayList timeSplit, final int which, final SelectedGpxFile sf) {
 		new AsyncTask<Void, Void, Void>() {
@@ -496,7 +508,7 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 		} else {
 			settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
 					settings.getLastKnownMapZoom(),
-					new PointDescription(PointDescription.POINT_TYPE_GPX_ITEM, child.name),
+					new PointDescription(PointDescription.POINT_TYPE_GPX_ITEM, child.group.getGpxName()),
 					false,
 					child);
 		}

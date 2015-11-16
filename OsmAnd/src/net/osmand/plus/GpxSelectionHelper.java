@@ -88,6 +88,7 @@ public class GpxSelectionHelper {
 			int k = 1;
 			for (Track t : g.tracks) {
 				GpxDisplayGroup group = new GpxDisplayGroup(g);
+				group.gpxName = name;
 				group.color = t.getColor(g.getColor(0));
 				group.setType(GpxDisplayItemType.TRACK_SEGMENT);
 				group.setTrack(t);
@@ -106,6 +107,7 @@ public class GpxSelectionHelper {
 			int k = 0;
 			for (Route route : g.routes) {
 				GpxDisplayGroup group = new GpxDisplayGroup(g);
+				group.gpxName = name;
 				group.setType(GpxDisplayItemType.TRACK_ROUTE_POINTS);
 				String d = getString(R.string.gpx_selection_number_of_points, name, route.points.size());
 				if(route.name != null && route.name.length() > 0) {
@@ -136,6 +138,7 @@ public class GpxSelectionHelper {
 		
 		if (g.points.size() > 0) {
 			GpxDisplayGroup group = new GpxDisplayGroup(g);
+			group.gpxName = name;
 			group.setType(GpxDisplayItemType.TRACK_POINTS);
 			group.setDescription(getString(R.string.gpx_selection_number_of_points, g.points.size()));
 			group.setName(getString(R.string.gpx_selection_points, name));
@@ -195,7 +198,6 @@ public class GpxSelectionHelper {
 				
 				item.description = GpxUiHelper.getDescription(app, analysis, true);
 				item.analysis = analysis;
-				/*
 				String name = "";
 //				if(group.track.segments.size() > 1) {
 //					name += t++ + ". ";
@@ -238,8 +240,7 @@ public class GpxSelectionHelper {
 								OsmAndFormatter.getFormattedAlt(analysis.diffElevationUp, app));
 					}
 				}
-				*/
-				item.name = group.getName();//.replace("\n", "");
+				item.name = name;
 				item.locationStart = analysis.locationStart;
 				item.locationEnd = analysis.locationEnd;
 				list.add(item);
@@ -513,6 +514,7 @@ public class GpxSelectionHelper {
 		private GpxDisplayItemType type = GpxDisplayItemType.TRACK_SEGMENT;
 		private List<GpxDisplayItem> list = new ArrayList<GpxDisplayItem>();
 		private GPXFile gpx;
+		private String gpxName;
 		private String name;
 		private String description;
 		private Track track;
@@ -557,7 +559,11 @@ public class GpxSelectionHelper {
 		public void setName(String name) {
 			this.name = name;
 		}
-		
+
+		public String getGpxName() {
+			return gpxName;
+		}
+
 		public String getName() {
 			return name;
 		}

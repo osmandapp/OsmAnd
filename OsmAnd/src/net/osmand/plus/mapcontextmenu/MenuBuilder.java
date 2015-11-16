@@ -222,6 +222,13 @@ public class MenuBuilder {
 		((LinearLayout) view).addView(horizontalLine);
 	}
 
+	public boolean hasCustomAddressLine() {
+		return false;
+	}
+
+	public void buildCustomAddressLine(LinearLayout ll) {
+	}
+
 	public void addPlainMenuItem(int iconId, String text, boolean needLinks) {
 		plainMenuItems.add(new PlainMenuItem(iconId, text, needLinks));
 	}

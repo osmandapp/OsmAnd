@@ -721,23 +721,29 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		line1.setText(menu.getTitleStr());
 
 		// Text line 2
+		LinearLayout line2layout = (LinearLayout) view.findViewById(R.id.context_menu_line2_layout);
 		TextView line2 = (TextView) view.findViewById(R.id.context_menu_line2);
-		String typeStr = menu.getTypeStr();
-		String streetStr = menu.getStreetStr();
-		StringBuilder line2Str = new StringBuilder();
-		if (!Algorithms.isEmpty(typeStr)) {
-			line2Str.append(typeStr);
-			Drawable icon = menu.getTypeIcon();
-			line2.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
-			line2.setCompoundDrawablePadding(dpToPx(5f));
-		}
-		if (!Algorithms.isEmpty(streetStr) && !menu.displayStreetNameInTitle()) {
-			if (line2Str.length() > 0) {
-				line2Str.append(", ");
+		if (menu.hasCustomAddressLine()) {
+			line2layout.removeAllViews();
+			menu.buildCustomAddressLine(line2layout);
+		} else {
+			String typeStr = menu.getTypeStr();
+			String streetStr = menu.getStreetStr();
+			StringBuilder line2Str = new StringBuilder();
+			if (!Algorithms.isEmpty(typeStr)) {
+				line2Str.append(typeStr);
+				Drawable icon = menu.getTypeIcon();
+				line2.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
+				line2.setCompoundDrawablePadding(dpToPx(5f));
 			}
-			line2Str.append(streetStr);
+			if (!Algorithms.isEmpty(streetStr) && !menu.displayStreetNameInTitle()) {
+				if (line2Str.length() > 0) {
+					line2Str.append(", ");
+				}
+				line2Str.append(streetStr);
+			}
+			line2.setText(line2Str.toString());
 		}
-		line2.setText(line2Str.toString());
 
 		updateCompassVisibility();
 	}
