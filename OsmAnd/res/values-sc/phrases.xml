@@ -1695,4 +1695,14 @@
 	<string name="poi_model_aerodrome">Aeròdromu pro modellinos</string>
 	<string name="poi_street_lamp">Lampione</string>
 
+	<string name="poi_toilets_yes">Cun bagnos</string>
+	<string name="poi_toilets_no">Chene bagnos</string>
+	<string name="poi_toilets_wheelchair_yes">Atzessu a sos bagnos pro cadiras a rodas: eja</string>
+	<string name="poi_toilets_wheelchair_no">Atzessu a sos bagnos pro cadiras a rodas: nono</string>
+	<string name="poi_toilets_access_customers">Atzessu a sos bagnos: clientes</string>
+	<string name="poi_toilets_access_permissive">Atzessu a sos bagnos: permissivu</string>
+	<string name="poi_toilets_access_community">Atzessu a sos bagnos: comunidade</string>
+	<string name="poi_toilets_access_public">Atzessu a sos bagnos: pùblicu</string>
+
+	<string name="poi_vending_cigarettes">Sigaretas</string>
 	</resources>
