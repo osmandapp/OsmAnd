@@ -1946,7 +1946,7 @@
 
 <string name="read_more">Leer más</string>
     <string name="whats_new">Novedades en</string>
-    <string name="share_osm_edits_subject">Compartir ediciones OSM mediante OsmAnd</string>
+    <string name="share_osm_edits_subject">Compartir ediciones OSM via OsmAnd</string>
     <string name="lang_nds">Bajo Alemán</string>
     <string name="lang_mk">Macedonio</string>
     <string name="lang_fy">Frisón</string>
@@ -1968,7 +1968,7 @@
 	<string name="osn_close_dialog_title">Cerrar nota</string>
 	<string name="osn_add_dialog_success">Nota creada exitosamente</string>
 	<string name="osn_add_dialog_error">Error: la nota no se creó</string>
-	<string name="osn_close_dialog_success">El error se cerró exitosamente</string>
+	<string name="osn_close_dialog_success">La nota se cerró exitosamente</string>
 	<string name="osn_close_dialog_error">Error: no se cerró la nota</string>
 	<string name="shared_string_commit">Confirmar</string>
 	
