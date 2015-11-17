@@ -67,12 +67,12 @@ public class FavouritePointMenuController extends MenuController {
 
 	@Override
 	public Drawable getSecondLineTypeIcon() {
-		return getIcon(R.drawable.ic_small_group);
+		return getIcon(R.drawable.map_small_group);
 	}
 
 	@Override
 	public int getFavActionIconId() {
-		return R.drawable.ic_action_edit_dark;
+		return R.drawable.map_action_edit_dark;
 	}
 
 	@Override

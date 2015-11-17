@@ -101,7 +101,23 @@
 	<dimen name="dash_margin">2dp</dimen>
 	<dimen name="dash_margin_h">6dp</dimen>
 
+
+	<!-- ContextMenu -->
+	<dimen name="context_menu_top_shadow_h">20dp</dimen>
+    <dimen name="context_menu_icon_top_padding">17dp</dimen>
+    <dimen name="context_menu_first_line_top_margin">14dp</dimen>
+    <dimen name="context_menu_first_line_bottom_margin">16dp</dimen>
+    <dimen name="context_menu_second_line_top_margin">4dp</dimen>
+    <dimen name="context_menu_top_right_button_min_width">76dp</dimen>
+    <dimen name="context_menu_button_padding_x">10dp</dimen>
+    <dimen name="context_menu_buttons_top_margin">-16dp</dimen>
+    <dimen name="context_menu_buttons_padding_bottom">4dp</dimen>
+    <dimen name="context_menu_progress_min_height">52dp</dimen>
+    <dimen name="context_menu_progress_cancel_button_size">44dp</dimen>
+    <dimen name="context_menu_action_buttons_h">54dp</dimen>
+
 	<dimen name="fab_size_with_shadow">62dp</dimen>
+    <dimen name="fab_margin_right">12dp</dimen>
 
     <!-- TextSizes -->
     <dimen name="default_list_text_size_large">19sp</dimen>

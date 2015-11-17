@@ -161,9 +161,9 @@ public abstract class PointEditorFragment extends Fragment {
 
 	@Override
 	public void onDestroyView() {
-//		if (!wasSaved() && !getEditor().isNew()) {
-//			save(false);
-//		}
+		if (!wasSaved() && !getEditor().isNew()) {
+			save(false);
+		}
 		super.onDestroyView();
 		getActivity().findViewById(R.id.MapHudButtonsOverlay).setVisibility(View.VISIBLE);
 	}

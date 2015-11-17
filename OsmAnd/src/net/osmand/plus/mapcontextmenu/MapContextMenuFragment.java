@@ -360,13 +360,8 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		});
 
 		final ImageButton buttonWaypoint = (ImageButton) view.findViewById(R.id.context_menu_route_button);
-		if (getMyApplication().getTargetPointsHelper().getPointToNavigate() == null) {
-			buttonWaypoint.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_flag_dark,
+		buttonWaypoint.setImageDrawable(iconsCache.getIcon(R.drawable.map_action_flag_dark,
 				light ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
-		} else {
-			buttonWaypoint.setImageDrawable(iconsCache.getIcon(R.drawable.map_action_waypoints,
-				light ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
-		}
 		buttonWaypoint.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -375,7 +370,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		});
 
 		final ImageButton buttonShare = (ImageButton) view.findViewById(R.id.context_menu_share_button);
-		buttonShare.setImageDrawable(iconsCache.getIcon(R.drawable.abc_ic_menu_share_mtrl_alpha,
+		buttonShare.setImageDrawable(iconsCache.getIcon(R.drawable.map_action_gshare_dark,
 				light ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
 		buttonShare.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -385,7 +380,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		});
 
 		final ImageButton buttonMore = (ImageButton) view.findViewById(R.id.context_menu_more_button);
-		buttonMore.setImageDrawable(iconsCache.getIcon(R.drawable.ic_overflow_menu_white,
+		buttonMore.setImageDrawable(iconsCache.getIcon(R.drawable.map_overflow_menu_white,
 				light ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
 		buttonMore.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -758,7 +753,8 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 
 	private void updateCompassVisibility() {
 		View compassView = view.findViewById(R.id.compass_layout);
-		if (menu.displayDistanceDirection() && menu.getCurrentMenuState() != MenuState.FULL_SCREEN) {
+		boolean gpsFixed = getMyApplication().getLocationProvider().getGPSInfo().fixed;
+		if (gpsFixed && menu.displayDistanceDirection() && menu.getCurrentMenuState() != MenuState.FULL_SCREEN) {
 			updateDistanceDirection();
 			compassView.setVisibility(View.VISIBLE);
 		} else {
