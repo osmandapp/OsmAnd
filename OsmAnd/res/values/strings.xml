@@ -8,7 +8,7 @@
          If you are making/correcting English translations make sure:
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
-    -->
+    --> 
     <string name="access_from_map_description">Opens dashboard directly from map</string>
     <string name="access_from_map">Access from map</string>
     <string name="show_on_start_description">\'Off\' directly launches map screen</string>

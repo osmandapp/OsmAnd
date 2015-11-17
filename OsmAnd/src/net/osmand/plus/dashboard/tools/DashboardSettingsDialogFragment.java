@@ -69,7 +69,7 @@ public class DashboardSettingsDialogFragment extends DialogFragment
 		final View showDashboardOnStart = createCheckboxItem(settings.SHOW_DASHBOARD_ON_START, 
 				R.string.show_on_start , R.string.show_on_start_description);
 		final View accessFromMap = createCheckboxItem(settings.SHOW_DASHBOARD_ON_MAP_SCREEN, 
-				R.string.access_from_map, R.string.access_from_map_description);
+				R.string.access_from_map, R.string.access_from_map_description); 
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		if (savedInstanceState != null && savedInstanceState.containsKey(CHECKED_ITEMS)) {
