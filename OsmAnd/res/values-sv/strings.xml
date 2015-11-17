@@ -2000,4 +2000,5 @@
     <string name="access_from_map">Tillgång från kartan</string>
     <string name="rendering_attr_currentTrackColor_description">GPX-färg</string>
     <string name="rendering_attr_currentTrackWidth_description">GPX-bredd</string>
+    <string name="release_2_2">" • Nytt kontextkänsligt gränssnitt för att peta på platser på kartan och på andra skärmar\n\n • Kartskärmen startar nu automatiskt om inte \'Visa panel vid appstart\' är vald\n\n • Konfigurera vilka kort och hur kort visas i panelen\n\n • För att hämta kartor kan regioner väljas direkt genom att peta på världskartan\n\n • Sökning efter intressepunkter (POI) understöder nu mer specifika frågor\n\n • Förbättrad funktion för POI- och OSM-redigering\n\n • Strukturen för hämtning av kartdata och gränssnittet har omarbetats\n\n och mer ... "</string>
     </resources>
