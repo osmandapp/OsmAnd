@@ -120,7 +120,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 				Algorithms.stringsEqual(favorite.getDescription(), point.getDescription())) {
 
 			if (needDismiss) {
-				dismiss(true);
+				dismiss(false);
 			}
 			return;
 		}

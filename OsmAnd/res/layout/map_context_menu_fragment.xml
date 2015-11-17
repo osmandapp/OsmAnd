@@ -16,7 +16,7 @@
         <LinearLayout
             android:id="@+id/context_menu_top_shadow"
             android:layout_width="match_parent"
-            android:layout_height="20dp"
+            android:layout_height="@dimen/context_menu_top_shadow_h"
             android:orientation="horizontal">
 
         </LinearLayout>
@@ -32,22 +32,22 @@
                 android:id="@+id/context_menu_top_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="@dimen/context_menu_first_line_bottom_margin"
                 android:baselineAligned="false"
                 android:orientation="horizontal">
 
                 <LinearLayout
                     android:id="@+id/context_menu_icon_layout"
-                    android:layout_width="42dp"
+                    android:layout_width="52dp"
                     android:layout_height="match_parent">
 
                     <ImageView
                         android:id="@+id/context_menu_icon_view"
-                        android:layout_width="@dimen/standard_icon_size"
-                        android:layout_height="@dimen/standard_icon_size"
+                        android:layout_width="@dimen/map_widget_icon"
+                        android:layout_height="@dimen/map_widget_icon"
                         android:layout_marginLeft="16dp"
                         android:layout_marginStart="12dp"
-                        android:layout_marginTop="17dp"
+                        android:layout_marginTop="@dimen/context_menu_icon_top_padding"
                         android:src="@drawable/ic_action_building_number"/>
 
                 </LinearLayout>
@@ -60,13 +60,13 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="30dp"
+                        android:layout_marginLeft="20dp"
                         android:orientation="horizontal">
 
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="14dp"
+                            android:layout_marginTop="@dimen/context_menu_first_line_top_margin"
                             android:layout_weight="1">
 
                             <TextView
@@ -85,7 +85,7 @@
                             android:id="@+id/context_menu_close_btn_layout"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:minWidth="76dp"
+                            android:minWidth="@dimen/context_menu_top_right_button_min_width"
                             android:orientation="horizontal">
 
                             <Button
@@ -94,8 +94,8 @@
                                 android:layout_height="wrap_content"
                                 android:background="?android:selectableItemBackground"
                                 android:gravity="center"
-                                android:paddingLeft="10dp"
-                                android:paddingRight="10dp"
+                                android:paddingLeft="@dimen/context_menu_button_padding_x"
+                                android:paddingRight="@dimen/context_menu_button_padding_x"
                                 android:text="@string/shared_string_others"
                                 android:textColor="?attr/contextMenuButtonColor"
                                 android:textSize="@dimen/default_desc_text_size"/>
@@ -107,8 +107,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="@dimen/context_menu_second_line_top_margin"
                         android:orientation="horizontal">
 
                         <LinearLayout
@@ -136,7 +136,7 @@
                                 android:id="@+id/compass_layout"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:minWidth="76dp"
+                                android:minWidth="@dimen/context_menu_top_right_button_min_width"
                                 android:orientation="horizontal">
 
                                 <ImageView
@@ -170,10 +170,10 @@
                 android:id="@+id/title_button_container"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="-16dp"
+                android:layout_marginTop="@dimen/context_menu_buttons_top_margin"
                 android:clickable="true"
                 android:orientation="horizontal"
-                android:paddingBottom="4dp"
+                android:paddingBottom="@dimen/context_menu_buttons_padding_bottom"
                 android:paddingLeft="62dp"
                 android:paddingRight="2dp"
                 android:visibility="gone"
@@ -185,8 +185,8 @@
                     android:layout_height="wrap_content"
                     android:background="?android:selectableItemBackground"
                     android:gravity="left|center_vertical"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
+                    android:paddingLeft="@dimen/context_menu_button_padding_x"
+                    android:paddingRight="@dimen/context_menu_button_padding_x"
                     android:text="@string/recording_context_menu_play"
                     android:textColor="?attr/contextMenuButtonColor"
                     android:textSize="@dimen/default_desc_text_size"/>
@@ -209,8 +209,8 @@
                     android:background="?android:selectableItemBackground"
                     android:drawableLeft="@drawable/ic_action_delete_dark"
                     android:gravity="center"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
+                    android:paddingLeft="@dimen/context_menu_button_padding_x"
+                    android:paddingRight="@dimen/context_menu_button_padding_x"
                     android:text="@string/shared_string_delete"
                     android:textColor="?attr/contextMenuButtonColor"
                     android:textSize="@dimen/default_desc_text_size"/>
@@ -221,12 +221,12 @@
                 android:id="@+id/title_progress_container"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="-16dp"
+                android:layout_marginTop="@dimen/context_menu_buttons_top_margin"
                 android:clickable="true"
                 android:gravity="center_vertical"
-                android:minHeight="52dp"
+                android:minHeight="@dimen/context_menu_progress_min_height"
                 android:orientation="horizontal"
-                android:paddingBottom="4dp"
+                android:paddingBottom="@dimen/context_menu_buttons_padding_bottom"
                 android:paddingLeft="72dp"
                 android:paddingRight="2dp"
                 android:visibility="gone"
@@ -264,12 +264,12 @@
 
                     <ImageView
                         android:id="@+id/progressButton"
-                        android:layout_width="44dp"
-                        android:layout_height="44dp"
+                        android:layout_width="@dimen/context_menu_progress_cancel_button_size"
+                        android:layout_height="@dimen/context_menu_progress_cancel_button_size"
                         android:layout_gravity="center_vertical"
                         android:background="?android:selectableItemBackground"
                         android:scaleType="center"
-                        tools:src="@drawable/ic_action_remove_dark"/>
+                        tools:src="@drawable/map_action_cancel"/>
 
                 </LinearLayout>
 
@@ -285,7 +285,7 @@
                 android:id="@+id/context_menu_buttons"
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="54dp">
+                android:layout_height="@dimen/context_menu_action_buttons_h">
 
                 <ImageButton
                     android:id="@+id/context_menu_fav_button"
@@ -295,7 +295,7 @@
                     android:layout_weight="1"
                     android:background="?attr/dashboard_button"
                     android:scaleType="center"
-                    android:src="@drawable/ic_action_fav_dark"/>
+                    android:src="@drawable/map_action_fav_dark"/>
 
                 <View
                     android:layout_width="1dp"
@@ -310,7 +310,7 @@
                     android:layout_weight="1"
                     android:background="?attr/dashboard_button"
                     android:scaleType="center"
-                    android:src="@drawable/map_action_waypoints"/>
+                    android:src="@drawable/map_action_flag_dark"/>
 
                 <View
                     android:layout_width="1dp"
@@ -325,7 +325,7 @@
                     android:layout_weight="1"
                     android:background="?attr/dashboard_button"
                     android:scaleType="center"
-                    android:src="@drawable/abc_ic_menu_share_mtrl_alpha"/>
+                    android:src="@drawable/map_action_gshare_dark"/>
 
                 <View
                     android:layout_width="1dp"
@@ -340,7 +340,7 @@
                     android:layout_weight="1"
                     android:background="?attr/dashboard_button"
                     android:scaleType="center"
-                    android:src="@drawable/ic_overflow_menu_white"/>
+                    android:src="@drawable/map_overflow_menu_white"/>
 
             </LinearLayout>
 
@@ -382,7 +382,7 @@
             android:layout_width="@dimen/fab_size_with_shadow"
             android:layout_height="@dimen/fab_size_with_shadow"
             android:layout_gravity="right"
-            android:layout_marginRight="12dp"
+            android:layout_marginRight="@dimen/fab_margin_right"
             android:background="@drawable/fab_background_style"
             android:scaleType="center"
             android:src="@drawable/map_directions"/>
