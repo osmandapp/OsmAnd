@@ -107,6 +107,7 @@ public class DashboardSettingsDialogFragment extends DialogFragment
 		final AlertDialog dialog = builder.create();
 
 		ListView listView = dialog.getListView();
+		listView.addHeaderView(showDashboardOnStart);
 		listView.addHeaderView(accessFromMap);
 		return dialog;
 	}
