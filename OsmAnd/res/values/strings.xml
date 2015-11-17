@@ -20,7 +20,7 @@
         \u2022 Configure which and how cards are displayed on the dashboard\n\n
         \u2022 To download maps, regions can be directly selected by tapping on the world map\n\n
         \u2022 POI Search now supports more specific queries\n\n
-	\u2022 Imporoved POI and OSM Editing functionality\n\n
+	\u2022 Improved POI and OSM editing functionality\n\n
         \u2022 Map data download structure and interface reworked\n\n
         and more...
         </string>
@@ -32,14 +32,14 @@
     <string name="osm_edit_commented_note">Commented OSM Note</string>
     <string name="osm_edit_removed_note">Deleted OSM Note</string>
 	<string name="osm_edit_created_note">Created OSM Note</string>
-	<string name="osn_bug_name">Osm Note</string>
+	<string name="osn_bug_name">OSM Note</string>
 	<string name="osn_add_dialog_title">Create note</string>
 	<string name="osn_comment_dialog_title">Add comment</string>
 	<string name="osn_reopen_dialog_title">Reopen note</string>
 	<string name="osn_close_dialog_title">Close note</string>
 	<string name="osn_add_dialog_success">Note successfully created</string>
 	<string name="osn_add_dialog_error">Exception occurred: note was not created</string>
-	<string name="osn_close_dialog_success">Bug was successfully closed</string>
+	<string name="osn_close_dialog_success">Note was successfully closed</string>
 	<string name="osn_close_dialog_error">Exception occurred: note was not closed</string>
 	<string name="osb_author_dialog_password">OSM password (optional)</string>
 	<string name="osb_comment_dialog_message">Message</string>
@@ -51,7 +51,7 @@
     <string name="context_menu_item_delete_waypoint">Delete GPX waypoint?</string>
     <string name="context_menu_item_edit_waypoint">Edit GPX waypoint</string>
     <string name="shared_string_location">Location</string>
-    <string name="share_osm_edits_subject">Osm Edits shared via OsmAnd</string>
+    <string name="share_osm_edits_subject">OSM Edits shared via OsmAnd</string>
     <string name="lang_nds">Low German</string>
     <string name="lang_mk">Macedonian</string>
     <string name="lang_fy">Frysk</string>
