@@ -99,7 +99,7 @@
     <string name="gpx_navigation">Ruta GPX</string>
     <string name="poi_query_by_name_matches_categories">Encontradas varias categorías PDI que responden a la consulta:</string>
     <string name="data_to_search_poi_not_available">Los datos locales para buscar PDI no están presentes.</string>
-    <string name="poi_filter_by_name">Búsqueda por nombre</string>
+    <string name="poi_filter_by_name">Buscar por nombre</string>
     <string name="old_poi_file_should_be_deleted">El archivo de datos del PDI \'%1$s\' es redundante y puede ser borrado.</string>
     <string name="update_poi_file_not_found">El archivo local para guardar cambios de PDIs no fue encontrado ni pudo ser creado.</string>
     <string name="button_upgrade_osmandplus">Actualizar a OsmAnd+</string>
@@ -724,7 +724,7 @@
     <string name="route_roundabout">Rotonda: Tome la %1$dª salida hacia</string>
     <string name="route_kl">Manténgase a la izquierda y continúe</string>
     <string name="route_kr">Manténgase a la derecha y continúe</string>
-    <string name="asap">ASAP</string>
+    <string name="asap">Lo antes posible</string>
     <string name="gpxup_public">Público</string>
     <string name="gpxup_identifiable">Identificable</string>
     <string name="gpxup_trackable">Trazable</string>
@@ -1564,7 +1564,7 @@
     <string name="osmo_use_https">Utilizar HTTPS</string>
     <string name="home_button">Inicio</string>
     <string name="map_update">Actualizaciones disponibles para %1$s mapa(s)</string>
-    <string name="search_for">Búsqueda por</string>
+    <string name="search_for">Buscar por</string>
     <string name="shared_string_show_all">Mostrar todo</string>
     <string name="coordinates">Coordenadas</string>
     <string name="use_opengl_render">Utilizar renderizado OpenGL</string>
