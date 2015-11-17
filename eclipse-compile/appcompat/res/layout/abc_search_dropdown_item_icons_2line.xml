@@ -24,7 +24,7 @@
 
     <!-- Icons come first in the layout, since their placement doesn't depend on
          the placement of the text views. -->
-    <android.support.v7.internal.widget.TintImageView
+    <ImageView
                android:id="@android:id/icon1"
                android:layout_width="@dimen/abc_dropdownitem_icon_width"
                android:layout_height="48dip"
@@ -34,7 +34,7 @@
                android:visibility="invisible"
                style="@style/RtlOverlay.Widget.AppCompat.Search.DropDown.Icon1" />
 
-    <android.support.v7.internal.widget.TintImageView
+    <ImageView
                android:id="@+id/edit_query"
                android:layout_width="48dip"
                android:layout_height="48dip"
@@ -45,7 +45,7 @@
                android:visibility="gone"
                style="@style/RtlOverlay.Widget.AppCompat.Search.DropDown.Query" />
 
-    <android.support.v7.internal.widget.TintImageView
+    <ImageView
                android:id="@id/android:icon2"
                android:layout_width="48dip"
                android:layout_height="48dip"

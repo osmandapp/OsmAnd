@@ -6,16 +6,13 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.os.Build;
-import android.support.v7.internal.text.AllCapsTransformationMethod;
+import android.support.v7.text.AllCapsTransformationMethod;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.FontCache;
 
-/**
- * Created by Alexey Pelykh on 30.01.2015.
- */
 public class TextViewEx extends TextView {
 	public TextViewEx(Context context) {
 		super(context);

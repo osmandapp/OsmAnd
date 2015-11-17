@@ -35,12 +35,10 @@
     </style>
 
     <style name="TextAppearance.AppCompat.Widget.ActionBar.Title"
-           parent="Base.TextAppearance.AppCompat.Widget.ActionBar.Title">
-    </style>
+           parent="Base.TextAppearance.AppCompat.Widget.ActionBar.Title" />
 
     <style name="TextAppearance.AppCompat.Widget.ActionBar.Subtitle"
-           parent="Base.TextAppearance.AppCompat.Widget.ActionBar.Subtitle">
-    </style>
+           parent="Base.TextAppearance.AppCompat.Widget.ActionBar.Subtitle" />
 
     <style name="TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse"
            parent="Base.TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse">
@@ -62,8 +60,7 @@
 
     <style name="Widget.AppCompat.ActionButton.CloseMode" parent="Base.Widget.AppCompat.ActionButton.CloseMode" />
 
-    <style name="Widget.AppCompat.ActionButton.Overflow"
-           parent="RtlOverlay.Widget.AppCompat.ActionButton.Overflow" />
+    <style name="Widget.AppCompat.ActionButton.Overflow" parent="Base.Widget.AppCompat.ActionButton.Overflow" />
 
     <style name="Widget.AppCompat.ActionBar.TabBar"
            parent="Base.Widget.AppCompat.ActionBar.TabBar">
@@ -123,7 +120,7 @@
 
     <style name="Widget.AppCompat.Spinner.DropDown" />
 
-    <style name="Widget.AppCompat.Spinner.DropDown.ActionBar" parent="Base.Widget.AppCompat.Spinner.DropDown.ActionBar" />
+    <style name="Widget.AppCompat.Spinner.DropDown.ActionBar" />
 
     <!-- This style has an extra indirection to properly set RTL attributes. See styles_rtl.xml -->
     <style name="Widget.AppCompat.DropDownItem.Spinner" parent="RtlOverlay.Widget.AppCompat.Search.DropDown.Text" />
@@ -214,9 +211,13 @@
 
     <style name="Widget.AppCompat.Button.ButtonBar.AlertDialog" parent="Base.Widget.AppCompat.Button.ButtonBar.AlertDialog" />
 
+    <style name="Widget.AppCompat.Button.Colored" parent="Base.Widget.AppCompat.Button.Colored" />
+
     <style name="Widget.AppCompat.ButtonBar" parent="Base.Widget.AppCompat.ButtonBar" />
 
     <style name="Widget.AppCompat.ButtonBar.AlertDialog" parent="Base.Widget.AppCompat.ButtonBar.AlertDialog" />
+
+    <style name="Widget.AppCompat.ImageButton" parent="Base.Widget.AppCompat.ImageButton" />
 
     <style name="Widget.AppCompat.TextView.SpinnerItem" parent="Base.Widget.AppCompat.TextView.SpinnerItem" />
 
@@ -224,12 +225,14 @@
 
     <style name="AlertDialog.AppCompat.Light" parent="Base.AlertDialog.AppCompat.Light" />
 
+    <style name="Widget.AppCompat.SeekBar" parent="Base.Widget.AppCompat.SeekBar" />
+
     <!-- Toolbar -->
 
     <style name="Widget.AppCompat.Toolbar" parent="Base.Widget.AppCompat.Toolbar" />
 
     <style name="Widget.AppCompat.Toolbar.Button.Navigation"
-           parent="RtlOverlay.Widget.AppCompat.Toolbar.Button.Navigation" />
+           parent="Base.Widget.AppCompat.Toolbar.Button.Navigation" />
 
     <style name="TextAppearance.Widget.AppCompat.Toolbar.Title"
            parent="Base.TextAppearance.Widget.AppCompat.Toolbar.Title">
@@ -292,6 +295,10 @@
     <style name="TextAppearance.AppCompat.Small.Inverse" parent="Base.TextAppearance.AppCompat.Small.Inverse" />
 
     <style name="TextAppearance.AppCompat.Button" parent="Base.TextAppearance.AppCompat.Button" />
+
+    <style name="TextAppearance.AppCompat.Widget.Button" parent="Base.TextAppearance.AppCompat.Widget.Button" />
+
+    <style name="TextAppearance.AppCompat.Widget.Button.Inverse" parent="Base.TextAppearance.AppCompat.Widget.Button.Inverse" />
 
     <style name="TextAppearance.AppCompat.Widget.Switch" parent="Base.TextAppearance.AppCompat.Widget.Switch" />
 

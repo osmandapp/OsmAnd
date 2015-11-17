@@ -14,7 +14,7 @@
      limitations under the License.
 -->
 
-<android.support.v7.internal.view.menu.ListMenuItemView
+<android.support.v7.view.menu.ListMenuItemView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="?attr/listPreferredItemHeightSmall">
@@ -57,4 +57,4 @@
 
     <!-- Checkbox, and/or radio button will be inserted here. -->
 
-</android.support.v7.internal.view.menu.ListMenuItemView>
+</android.support.v7.view.menu.ListMenuItemView>

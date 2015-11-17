@@ -66,7 +66,7 @@
     </style>
 
     <style name="Base.TextAppearance.AppCompat.Subhead.Inverse">
-        <item name="android:textColor">?android:attr/textColorSecondaryInverse</item>
+        <item name="android:textColor">?android:attr/textColorPrimaryInverse</item>
         <item name="android:textColorHint">?android:attr/textColorHintInverse</item>
     </style>
 
@@ -94,6 +94,12 @@
         <item name="android:textSize">@dimen/abc_text_size_button_material</item>
         <item name="textAllCaps">true</item>
         <item name="android:textColor">?android:textColorPrimary</item>
+    </style>
+
+    <style name="Base.TextAppearance.AppCompat.Widget.Button" parent="TextAppearance.AppCompat.Button" />
+
+    <style name="Base.TextAppearance.AppCompat.Widget.Button.Inverse" parent="TextAppearance.AppCompat.Button">
+        <item name="android:textColor">?android:textColorPrimaryInverse</item>
     </style>
 
     <!-- Deprecated text styles -->

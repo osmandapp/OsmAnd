@@ -18,7 +18,7 @@ apply plugin: 'com.android.application'
 // Less important
 
 android {
-	compileSdkVersion 21
+	compileSdkVersion 23
 	buildToolsVersion "23.0.1"
 
 	signingConfigs {
@@ -39,8 +39,8 @@ android {
 
 	defaultConfig {
 		minSdkVersion System.getenv("MIN_SDK_VERSION") ? System.getenv("MIN_SDK_VERSION").toInteger() : 14
-		targetSdkVersion 21
-
+		targetSdkVersion 23
+		multiDexEnabled true
 		versionCode System.getenv("APK_NUMBER_VERSION") ? System.getenv("APK_NUMBER_VERSION").toInteger() : versionCode
 		//versionName already assigned in code
 		//versionName System.getenv("APK_VERSION")? System.getenv("APK_VERSION").toString(): versionName
@@ -60,6 +60,8 @@ android {
 
 	dexOptions {
 		jumboMode = true
+		incremental true
+		javaMaxHeapSize "4g"
 	}
 
 	sourceSets {
@@ -342,5 +344,5 @@ dependencies {
 	qtcoredebugCompile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"
 	qtcoreCompile "net.osmand:OsmAndCore_androidNativeRelease:0.1-SNAPSHOT@aar"
 	qtcoreCompile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"
-
+	compile 'com.android.support:multidex:1.0.0'
 }
