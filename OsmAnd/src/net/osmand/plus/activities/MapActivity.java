@@ -355,6 +355,7 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents {
 	public Object getLastNonConfigurationInstanceByKey(String key) {
 		Object k = super.getLastNonConfigurationInstance();
 		if (k instanceof Map) {
+
 			return ((Map) k).get(key);
 		}
 		return null;
