@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
   
   <string name="use_transparent_map_theme">Przezroczysty styl</string>
   <string name="native_library_not_supported">To urządzenie nie obsługuje biblioteki renderowania natywnego.</string>
@@ -2019,7 +2020,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="si_min_km">Minuty na kilometr</string>
     <string name="si_min_m">Minuty na milę</string>
     <string name="si_nm_h">Mile morskie na godzinę (węzły)</string>
-    <string name="nm_h">nmh</string>
+    <string name="nm_h">węzłów</string>
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
@@ -2096,4 +2097,25 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="contact_us">Kontakt z nami</string>
     <string name="map_legend">Legenda mapy</string>
     <string name="save_poi_without_poi_type_message">Zapisać POI bez określonego rodzaju?</string>
+    <string name="access_from_map_description">Uruchamia pulpit bezpośrednio z mapy</string>
+    <string name="access_from_map">Dostęp z mapy</string>
+    <string name="copied_to_clipboard">Skopiowane do schowka</string>
+    <string name="release_2_2">" • Nowe menu kontekstowe, przystosowane do wybierania lokacji na mapie oraz na innych wyświetlaczach\n\n• Mapa jest teraz wyświetlana bezpośrednio, o ile nie wybrano opcji \'Pokaż pulpit podczas startu aplikacji\'\n\n• Można skonfigurować które zakładki oraz jak będą wyświetlane na pulpicie\n\n• W celu pobrania map, interesujące nas regiony można wybrać bezpośrednio na mapie świata\n\n• Wyszukiwarka POI wspiera teraz bardziej precyzyjne zapytania\n\n• Poprawiona funkcjonalność POI oraz edytora OSM\n\n• Struktura oraz interfejs menu pobierania map zostały ulepszone\n\ni więcej ... "</string>
+    <string name="context_menu_item_open_note">Otwórz notatkę OSM</string>
+    <string name="osn_bug_name">Notatka OSM</string>
+	<string name="osn_comment_dialog_title">Dodaj komentarz</string>
+	<string name="osn_reopen_dialog_title">Otwórz notatkę ponownie</string>
+	<string name="osn_close_dialog_title">Zamknij notatkę</string>
+	<string name="osn_add_dialog_success">Notatka utworzona poprawnie</string>
+	<string name="context_menu_item_delete_waypoint">Usunąć punkt GPX?</string>
+    <string name="shared_string_location">Lokacja</string>
+    <string name="share_osm_edits_subject">Edycje udostępnione przez OsmAnd</string>
+    <string name="lang_fy">Fryzyjski</string>
+    <string name="rendering_attr_currentTrackColor_description">kolor śladu GPX</string>
+    <string name="rendering_attr_currentTrackWidth_description">grubość śladu GPX</string>
+    <string name="poi_dialog_reopen">Otwórz ponownie</string>
+	<string name="use_dashboard_btn">Zachowaj aktywne ustawienia</string>
+    <string name="use_drawer_btn">Pokaż mapę przy starcie</string>
+    <string name="dashboard_or_drawer_description">Możesz wybrać sposób, w jakim aplikacja wystartuje: mapa lub pulpit. Możesz to zmienić później w ustawieniach.</string>
+    <string name="osm_save_offline">Zapisz lokalnie</string>
     </resources>
