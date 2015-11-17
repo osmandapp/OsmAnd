@@ -51,7 +51,7 @@
     <string name="context_menu_item_delete_waypoint">Delete GPX waypoint?</string>
     <string name="context_menu_item_edit_waypoint">Edit GPX waypoint</string>
     <string name="shared_string_location">Location</string>
-    <string name="share_osm_edits_subject">OSM Edits shared via OsmAnd</string>
+    <string name="share_osm_edits_subject">OSM edits shared via OsmAnd</string>
     <string name="lang_nds">Low German</string>
     <string name="lang_mk">Macedonian</string>
     <string name="lang_fy">Frysk</string>
@@ -179,7 +179,7 @@
     <string name="shared_string_wikipedia">Wikipedia</string>
     <string name="local_indexes_cat_wiki">Wikipedia</string>
     <string name="shared_string_show_details">Show details</string>
-    <string name="osm_edit_context_menu_delete">Delete OSM Edit</string>
+    <string name="osm_edit_context_menu_delete">Delete OSM edit</string>
     <string name="rendering_value_disabled_name">Disabled</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Coloring according to route scope</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Coloring according to OSMC</string>
