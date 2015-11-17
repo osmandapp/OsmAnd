@@ -1869,4 +1869,22 @@
 	<string name="poi_architecture_stalinist_neoclassicism">Arquitectura: neoclàssica estalinista</string>
 	<string name="poi_architecture_eclectic">Arquitectura: eclèctica</string>
 	<string name="poi_architecture_contemporary">Arquitectura: contemporània</string>
+	<string name="poi_architecture_constructivism">Arquitectura: constructivisme</string>
+	<string name="poi_architecture_neoclassicism">Arquitectura: neoclàssica</string>
+	<string name="poi_architecture_victorian">Arquitectura: victoriana</string>
+	<string name="poi_architecture_classicism">Arquitectura: classicisme</string>
+	<string name="poi_architecture_gothic">Arquitectura: gòtic</string>
+	<string name="poi_architecture_baroque">Arquitectura: barroc</string>
+	<string name="poi_tunnel_railway">Túnel ferroviari</string>
+	<string name="poi_bridge_structure_beam">Estructura del pont: bigues</string>
+	<string name="poi_bridge_structure_simple_suspension">Estructura del pont: suspensió simple</string>
+	<string name="poi_bridge_structure_suspension">Estructura del pont: suspensió</string>
+	<string name="poi_bridge_structure_arch">Estructura del pont: arc</string>
+	<string name="poi_bridge_structure_truss">Estructura del pont: gelosia</string>
+	<string name="poi_bridge_structure_floating">Estructura del pont: flotant</string>
+	<string name="poi_bridge_structure_cable_stayed">Estructura del pont: atirantat</string>
+	<string name="poi_bridge_structure_boardwalk">Estructura del pont: passarel·la</string>
+	<string name="poi_bridge_structure_simple_wooden">Estructura del pont: fusta senzilla</string>
+	<string name="poi_bridge_structure_viaduct">Estructura del pont: viaducte</string>
+	<string name="poi_bridge_structure_aqueduct">Estructura del pont: aqüeducte</string>
 	</resources>
