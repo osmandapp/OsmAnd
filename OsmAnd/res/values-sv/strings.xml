@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
     <string name="ChooseCountry">Välj land</string>
     <string name="choose_city">Välj stad</string>
@@ -1995,4 +1996,9 @@
 	<string name="osn_close_dialog_error">Ett undantag uppstod: anteckningen stängdes inte</string>
 	<string name="context_menu_item_delete_waypoint">Ta bort GPX-waypoint?</string>
     <string name="context_menu_item_edit_waypoint">Redigera GPX-waypoint</string>
+    <string name="access_from_map_description">Placerar en panelknapp på kartskärmen</string>
+    <string name="access_from_map">Tillgång från kartan</string>
+    <string name="rendering_attr_currentTrackColor_description">GPX-färg</string>
+    <string name="rendering_attr_currentTrackWidth_description">GPX-bredd</string>
+    <string name="release_2_2">" • Nytt kontextkänsligt gränssnitt för att peta på platser på kartan och på andra skärmar\n\n • Kartskärmen startar nu automatiskt om inte \'Visa panel vid appstart\' är vald\n\n • Konfigurera vilka kort och hur kort visas i panelen\n\n • För att hämta kartor kan regioner väljas direkt genom att peta på världskartan\n\n • Sökning efter intressepunkter (POI) understöder nu mer specifika frågor\n\n • Förbättrad funktion för POI- och OSM-redigering\n\n • Strukturen för hämtning av kartdata och gränssnittet har omarbetats\n\n och mer ... "</string>
     </resources>

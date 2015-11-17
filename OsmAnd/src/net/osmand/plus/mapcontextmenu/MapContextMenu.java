@@ -1,16 +1,21 @@
 package net.osmand.plus.mapcontextmenu;
 
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import net.osmand.CallbackWithObject;
+import net.osmand.IndexConstants;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuType;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleButtonController;
@@ -24,7 +29,9 @@ import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.util.MapUtils;
 
+import java.io.File;
 import java.lang.ref.WeakReference;
+import java.util.List;
 
 public class MapContextMenu extends MenuTitleController {
 
@@ -398,7 +405,15 @@ public class MapContextMenu extends MenuTitleController {
 			if (pointDescription.isWpt() || title.equals(addressNotKnownStr)) {
 				title = "";
 			}
-			getWptPtPointEditor().add(latLon, title);
+
+			final File dir = mapActivity.getMyApplication().getAppPath(IndexConstants.GPX_INDEX_DIR);
+			final List<String> list = GpxUiHelper.getSortedGPXFilenames(dir, false);
+			if (list.isEmpty()) {
+				GPXFile gpxFile = mapActivity.getMyApplication().getSavingTrackHelper().getCurrentGpx();
+				getWptPtPointEditor().add(gpxFile, latLon, title);
+			} else {
+				addNewWptToGPXFile(title);
+			}
 		}
 	}
 
@@ -406,6 +421,24 @@ public class MapContextMenu extends MenuTitleController {
 		if (object != null && object instanceof WptPt) {
 			getWptPtPointEditor().edit((WptPt) object);
 		}
+	}
+
+	public AlertDialog addNewWptToGPXFile(final String title) {
+		CallbackWithObject<GPXFile[]> callbackWithObject = new CallbackWithObject<GPXFile[]>() {
+			@Override
+			public boolean processResult(GPXFile[] result) {
+				GPXFile gpxFile;
+				if (result != null && result.length > 0) {
+					gpxFile = result[0];
+				} else {
+					gpxFile = mapActivity.getMyApplication().getSavingTrackHelper().getCurrentGpx();
+				}
+				getWptPtPointEditor().add(gpxFile, latLon, title);
+				return true;
+			}
+		};
+
+		return GpxUiHelper.selectSingleGPXFile(mapActivity, true, callbackWithObject);
 	}
 
 	public void setBaseFragmentVisibility(boolean visible) {
