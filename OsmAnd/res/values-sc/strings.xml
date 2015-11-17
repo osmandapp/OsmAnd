@@ -1988,7 +1988,7 @@
     <string name="lang_mk">Matzèdone</string>
     <string name="lang_fy">Frisonu otzidentale</string>
     <string name="lang_als">Albanesu (Tosk)</string>
-    <string name="share_osm_edits_subject">Modìficas Osm cumpartzidas pro mèdiu de OsmAnd</string>
+    <string name="share_osm_edits_subject">Modìficas OSM cumpartzidas pro mèdiu de OsmAnd</string>
     <string name="save_poi_without_poi_type_message">Boles sarbare su PDI chene dislindare sa casta sua?</string>
     <string name="shared_string_location">Positzione</string>
     <string name="context_menu_item_delete_waypoint">Burrare su puntu de coladòrgiu GPX?</string>
@@ -2006,7 +2006,7 @@
 	<string name="osn_close_dialog_title">Serra sa nota</string>
 	<string name="osn_add_dialog_success">Nota creada</string>
 	<string name="osn_add_dialog_error">B\'est istadu unu problema: sa nota no est istada creada</string>
-	<string name="osn_close_dialog_success">S\'errore est istadu serradu curretamente</string>
+	<string name="osn_close_dialog_success">Sa nota est istada serrada curretamente</string>
 	<string name="osn_close_dialog_error">B\'est istadu unu problema: sa nota no est istada serrada</string>
 	<string name="poi_dialog_reopen">Torra a abèrrere</string>
 	<string name="shared_string_commit">Imbia</string>
@@ -2024,4 +2024,5 @@
     <string name="use_drawer_btn">Ammustra semper sa mapa</string>
     <string name="access_from_map_description">Pone unu butone pro su pannellu de controllu in s’ischermu de sa mapa</string>
     <string name="access_from_map">Intra dae sa mapa</string>
+    <string name="release_2_2">" • Interfache impitadore noa pro incarcare positziones in sa mapa e in àteros ischermos\n\n • S\'ischermu de sa mapa est como postu come prima cosa a s’allumìngiu de s’aplicatzione, semper chi \'Ammustra pannellu de controllu in s\'allumìngiu\' no siet ischertadu\n\n • Configure which and how cards are displayed on the dashboard\n\n • Pro iscarrigare mapas, sas regiones podent èssere ischertadas deretamente incarcande in sa mapa generale de su mundu\n\n • Sa chirca de PDI como suportat chircas prus dislindadas\n\n • Megioradas sas funtzionalidades de modìficas de PDI e OSM\n\n • S\'istrutura e s\'interfache de iscarrigamentu datos mapas torrada a fàghere\n\n e àteru... "</string>
     </resources>
