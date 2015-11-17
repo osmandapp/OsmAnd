@@ -19,8 +19,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
+
 import net.londatiga.android.ActionItem;
 import net.londatiga.android.QuickAction;
+import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
@@ -38,11 +40,16 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.controls.MapRouteInfoControl;
 import net.osmand.plus.views.controls.MapRoutePreferencesControl;
 import net.osmand.plus.views.corenative.NativeCoreContext;
+
+import org.apache.commons.logging.Log;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import gnu.trove.list.array.TIntArrayList;
 
 public class MapControlsLayer extends OsmandMapLayer {
+	private static final Log LOG = PlatformUtil.getLog(MapControlsLayer.class);
 
 	private static final int TIMEOUT_TO_SHOW_BUTTONS = 7000;
 	public static final int REQUEST_ADDRESS_SELECT = 2;
@@ -865,7 +872,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			nightMode = night; 
 			if (bgDark != 0 && bgLight != 0) {
 				if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-					iv.setBackgroundDrawable(ctx.getResources().getDrawable(night ? bgDark : bgLight,
+					iv.setBackground(ctx.getResources().getDrawable(night ? bgDark : bgLight,
 							mapActivity.getTheme()));
 				} else {
 					iv.setBackgroundDrawable(ctx.getResources().getDrawable(night ? bgDark : bgLight));
