@@ -1965,7 +1965,7 @@
 	<string name="osn_close_dialog_title">Cerrar nota</string>
 	<string name="osn_add_dialog_success">Nota creada exitosamente</string>
 	<string name="osn_add_dialog_error">Error: la nota no se creó</string>
-	<string name="osn_close_dialog_success">El error se cerró exitosamente</string>
+	<string name="osn_close_dialog_success">La nota se cerró exitosamente</string>
 	<string name="osn_close_dialog_error">Error: no se cerró la nota</string>
 	<string name="shared_string_commit">Confirmar</string>
 	
