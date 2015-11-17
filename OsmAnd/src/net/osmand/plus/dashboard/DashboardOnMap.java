@@ -122,7 +122,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 
 	private WaypointDialogHelper waypointDialogHelper;
 	private final int[] running = new int[]{-1};
-	private List<LocationPointWrapper> deletedPoints = new ArrayList<LocationPointWrapper>();
+	private List<LocationPointWrapper> deletedPoints = new ArrayList<>();
 	private Drawable gradientToolbar;
 
 	public DashFragmentData[] getFragmentsData() {
@@ -504,7 +504,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 	}
 
 	public void refreshContent(boolean force) {
-		if (visibleType == DashboardType.WAYPOINTS || visibleType == DashboardType.WAYPOINTS_EDIT  || force) {
+		if (visibleType == DashboardType.WAYPOINTS || visibleType == DashboardType.WAYPOINTS_EDIT
+				|| visibleType == DashboardType.CONFIGURE_MAP || force) {
 			updateListAdapter();
 		} else {
 			listAdapter.notifyDataSetChanged();
@@ -792,7 +793,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 
 			int alpha = (int) (t * 255);
 			// in order to have proper fast scroll down
-			int malpha = t == 1 ? alpha = 0 : alpha;
+			int malpha = t == 1 ? 0 : alpha;
 			setAlpha(paddingView, malpha, baseColor);
 			setAlpha(dashboardView.findViewById(R.id.map_part_dashboard), malpha, baseColor);
 			gradientToolbar.setAlpha((int) ((1 - t) * 255));
@@ -843,7 +844,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 //		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
 //			v.setAlpha(alpha/255.f);
 //		} else {
-		int colr = (((int) alpha) << 24) | clr;
+		int colr = (alpha << 24) | clr;
 		v.setBackgroundColor(colr);
 //		}
 	}
@@ -872,6 +873,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 		for (WeakReference<DashBaseFragment> f : fragList) {
 			DashBaseFragment b = f.get();
 			if (b != null && !b.isDetached() && class1.isInstance(b)) {
+				//noinspection unchecked
 				return (T) b;
 			}
 		}
