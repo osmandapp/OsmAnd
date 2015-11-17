@@ -9,6 +9,10 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="access_from_map_description">Opens dashboard directly from map</string>
+    <string name="access_from_map">Access from map</string>
+    <string name="show_on_start_description">\'Off\' directly launches map screen</string>
+    <string name="show_on_start">Show on start</string>
     <string name="copied_to_clipboard">Copied to clipboard</string>
     <string name="release_2_2">
         \u2022 New context-sensitive UI for tapping locations on the map and on other screens\n\n
@@ -2016,7 +2020,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="try_again">Try again</string>
 	<string name="error_message_pattern">Error: {0}</string>
 	<string name="dahboard_options_dialog_title">Configure dashboard</string>
-	<string name="show_on_start">Show on start</string>
+	
 	<string name="shared_string_card_was_hidden">Card was hidden</string>
 	<string name="shared_string_undo">UNDO</string>
 	<string name="shared_string_skip">Skip</string>
@@ -2063,7 +2067,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="free_downloads_used_description">You can set how many free downloads you have used</string>
 
     <string name="application_dir_description">Choose where you want to save map files.</string>
-    <string name="show_on_start_description">\'Off\' directly launches map screen</string>
+    
     <string name="enter_country_name">Enter country name</string>
     <string name="new_version">New version</string>
     <string name="begin_with_osmand_menu_group">First steps with OsmAnd</string>

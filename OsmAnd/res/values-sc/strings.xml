@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="always_center_position_on_map">Ammustra sa positzione semper a su tzentru</string>
     <string name="voice_pref_title">Boghe</string>
     <string name="misc_pref_title">Mistura</string>
@@ -2018,8 +2017,8 @@
     <string name="rendering_attr_currentTrackColor_description">Colore GPX</string>
     <string name="rendering_attr_currentTrackWidth_description">Largària GPX</string>
     <string name="rendering_attr_roadStyle_description">Istile pro sas istradas</string>
-    <string name="use_dashboard">Imprea su pannellu de controllu</string>
-    <string name="use_drawer">Imprea su disinnatore</string>
+    
+    
     <string name="dashboard_or_drawer_title">Menù nou</string>
     <string name="dashboard_or_drawer_description">Podes isseberare ite impreare, su pannellu de controllu o su menù de disinnu. As a pòdere cambiare idea prus a tardu.</string>
     </resources>

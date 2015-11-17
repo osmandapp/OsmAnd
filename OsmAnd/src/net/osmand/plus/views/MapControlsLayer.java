@@ -1,5 +1,6 @@
 package net.osmand.plus.views;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Canvas;
@@ -18,7 +19,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
-
 import net.londatiga.android.ActionItem;
 import net.londatiga.android.QuickAction;
 import net.osmand.core.android.MapRendererContext;
@@ -38,10 +38,8 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.controls.MapRouteInfoControl;
 import net.osmand.plus.views.controls.MapRoutePreferencesControl;
 import net.osmand.plus.views.corenative.NativeCoreContext;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import gnu.trove.list.array.TIntArrayList;
 
 public class MapControlsLayer extends OsmandMapLayer {
@@ -210,14 +208,20 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private void initRouteControls() {
 		routePreparationLayout = mapActivity.findViewById(R.id.map_route_preparation_layout);
 		View dashRouteButton = mapActivity.findViewById(R.id.map_dashboard_route_button);
-		mapDashControl = createHudButton((ImageView) dashRouteButton, R.drawable.map_dashboard).setBg(
+		final boolean dash = settings.SHOW_DASHBOARD_ON_MAP_SCREEN.get();
+		mapDashControl = createHudButton((ImageView) dashRouteButton, 
+				dash ? R.drawable.map_dashboard : R.drawable.map_drawer).setBg(
 				R.drawable.btn_flat, R.drawable.btn_flat_night);
 		controls.add(mapDashControl);
 
 		dashRouteButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.DASHBOARD);
+				if(dash) {
+					mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.DASHBOARD);	
+				} else {
+					mapActivity.openDrawer();
+				}
 			}
 
 			
@@ -395,8 +399,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 				R.drawable.btn_round_trans, R.drawable.btn_round_transparent));
 		View backToMenuButton = mapActivity.findViewById(R.id.map_menu_button);
 		
-		
-		menuControl = createHudButton((ImageView) backToMenuButton, R.drawable.ic_navigation_drawer).setBg(
+		final boolean dash = settings.SHOW_DASHBOARD_ON_MAP_SCREEN.get();
+		menuControl = createHudButton((ImageView) backToMenuButton,
+				!dash ? R.drawable.map_drawer : R.drawable.map_dashboard).setBg(
 				R.drawable.btn_round, R.drawable.btn_round_night);
 		controls.add(menuControl);
 		backToMenuButton.setOnClickListener(new View.OnClickListener() {
@@ -406,8 +411,11 @@ public class MapControlsLayer extends OsmandMapLayer {
 				// double lon = activity.getMapView().getLongitude();
 				// MainMenuActivity.backToMainMenuDialog(activity, new LatLon(lat, lon));
 				notifyClicked();
-				mapActivity.openDrawer();
-//				mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.DASHBOARD);
+				if(dash) {
+					mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.DASHBOARD);	
+				} else {
+					mapActivity.openDrawer();
+				}
 			}
 		});
 		mapAppModeShadow = mapActivity.findViewById(R.id.map_app_mode_shadow);
@@ -848,6 +856,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			return this;
 		}
 
+		@SuppressLint("NewApi")
 		public void update(OsmandApplication ctx, boolean night) {
 			if (nightMode == night && !f) {
 				return;

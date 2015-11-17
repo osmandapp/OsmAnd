@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
 
     <string name="show_warnings_title">Mostra els missatges d\'avís…</string>
     <string name="map_widget_fluorescent">Rutes amb fluorescència</string>
@@ -1852,8 +1851,8 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="rendering_attr_currentTrackWidth_description">Amplada traça GPX</string>
     <string name="rendering_attr_roadStyle_description">Estil de via</string>
     <string name="poi_dialog_reopen">Reobre</string>
-	<string name="use_dashboard">Utilitza el tauler</string>
-    <string name="use_drawer">Utilitza el calaix</string>
+	
+    
     <string name="dashboard_or_drawer_title">Nou menú</string>
     <string name="dashboard_or_drawer_description">Podeu escollir utilitzar el menú del tauler o el del calaix. Ho podreu modificar després a configuració.</string>
     </resources>
