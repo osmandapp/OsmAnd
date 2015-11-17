@@ -2105,7 +2105,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="osn_close_dialog_title">Fermer la note</string>
 	<string name="osn_add_dialog_success">Note créée avec succès</string>
 	<string name="osn_add_dialog_error">Une erreur s\'est produite : la note n\'a pas pu être créée</string>
-	<string name="osn_close_dialog_success">Le bug a été soumis avec succès</string>
+	<string name="osn_close_dialog_success">La note a été fermée</string>
 	<string name="osn_close_dialog_error">Une erreur s\'est produite : la note ne peut pas être fermée</string>
 	<string name="shared_string_commit">Soumettre</string>
 	
@@ -2122,4 +2122,6 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="use_drawer_btn">Toujours démarrer avec la carte</string>
     <string name="dashboard_or_drawer_title">Nouvelle option de démarrage</string>
     <string name="dashboard_or_drawer_description">Définissez comment démarrer l\'application : avec la carte ou avec le tableau de bord ? Ce paramètre peut être modifié par la suite.</string>
+    <string name="access_from_map_description">Afficher le bouton d\'accès au tableau de bord sur la carte</string>
+    <string name="access_from_map">Accès depuis la carte</string>
     </resources>
