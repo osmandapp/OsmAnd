@@ -27,6 +27,8 @@ import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.GPXUtilities.TrkSegment;
+import net.osmand.plus.GpxSelectionHelper;
+import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -165,6 +167,23 @@ public class GpxUiHelper {
 			final ContextMenuAdapter adapter = createGpxContextMenuAdapter(activity, list, null, multipleChoice,
 					showCurrentGpx);
 			return createDialog(activity, showCurrentGpx, multipleChoice, callbackWithObject, list, adapter);
+		}
+		return null;
+	}
+
+	public static AlertDialog selectSingleGPXFile(final Activity activity,
+											final boolean showCurrentGpx, final CallbackWithObject<GPXFile[]> callbackWithObject) {
+		OsmandApplication app = (OsmandApplication) activity.getApplication();
+		final File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
+		final List<String> list = getSortedGPXFilenames(dir, false);
+		if (!list.isEmpty() || showCurrentGpx) {
+			if (showCurrentGpx) {
+				list.add(0, activity.getString(R.string.shared_string_currently_recording_track));
+			}
+
+			final ContextMenuAdapter adapter = createGpxContextMenuAdapter(activity, list, null, false,
+					showCurrentGpx);
+			return createDialog(activity, showCurrentGpx, false, callbackWithObject, list, adapter);
 		}
 		return null;
 	}
@@ -342,7 +361,14 @@ public class GpxUiHelper {
 					if (showCurrentGpx && position == 0) {
 						callbackWithObject.processResult(null);
 					} else {
-						loadGPXFileInDifferentThread(activity, callbackWithObject, dir, null, list.get(position));
+						String fileName = list.get(position);
+						SelectedGpxFile selectedGpxFile =
+								app.getSelectedGpxHelper().getSelectedFileByName(fileName);
+						if (selectedGpxFile != null) {
+							callbackWithObject.processResult(new GPXFile[]{selectedGpxFile.getGpxFile()});
+						} else {
+							loadGPXFileInDifferentThread(activity, callbackWithObject, dir, null, fileName);
+						}
 					}
 				}
 			}

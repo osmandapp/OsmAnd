@@ -65,7 +65,7 @@ public abstract class PointEditorFragment extends Fragment {
 			}
 		});
 
-		Button saveButton = (Button)toolbar.findViewById(R.id.save_button);
+		Button saveButton = (Button) toolbar.findViewById(R.id.save_button);
 		saveButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -73,7 +73,15 @@ public abstract class PointEditorFragment extends Fragment {
 			}
 		});
 
-		ImageButton deleteButton = (ImageButton)toolbar.findViewById(R.id.delete_button);
+		ImageButton okButton = (ImageButton) toolbar.findViewById(R.id.ok_button);
+		okButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				savePressed();
+			}
+		});
+
+		ImageButton deleteButton = (ImageButton) toolbar.findViewById(R.id.delete_button);
 		deleteButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -82,6 +90,7 @@ public abstract class PointEditorFragment extends Fragment {
 		});
 
 		if (getEditor().isNew()) {
+			okButton.setVisibility(View.GONE);
 			deleteButton.setVisibility(View.GONE);
 		} else {
 			saveButton.setVisibility(View.GONE);
@@ -152,11 +161,10 @@ public abstract class PointEditorFragment extends Fragment {
 
 	@Override
 	public void onDestroyView() {
-		if (!wasSaved() && !getEditor().isNew()) {
-			save(false);
-		}
+//		if (!wasSaved() && !getEditor().isNew()) {
+//			save(false);
+//		}
 		super.onDestroyView();
-
 		getActivity().findViewById(R.id.MapHudButtonsOverlay).setVisibility(View.VISIBLE);
 	}
 
