@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
     <string name="av_def_action_audio">Optag audio</string>
@@ -2107,4 +2108,6 @@
     <string name="dashboard_or_drawer_description">Vælg om det foretrækkes at starte med en oversigt eller menuen. Kan senere ændres i indstillinger.</string>
     <string name="use_dashboard_btn">Behold nuværende opsætning</string>
     <string name="use_drawer_btn">Vis kort ved start</string>
+    <string name="access_from_map_description">Åbner oversigt direkte fra kort</string>
+    <string name="access_from_map">Adgang fra kort</string>
     </resources>
