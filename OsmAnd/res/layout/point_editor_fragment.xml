@@ -24,6 +24,14 @@
             android:background="@android:color/transparent"
             android:src="@drawable/ic_action_delete_dark"/>
 
+        <ImageButton
+            android:id="@+id/ok_button"
+            android:layout_width="?attr/actionBarSize"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_action_done"/>
+
         <Button
             android:id="@+id/save_button"
             android:layout_width="wrap_content"
@@ -34,6 +42,7 @@
             android:paddingRight="10dp"
             android:background="@android:color/transparent"
             android:text="@string/shared_string_save"/>
+
 
         </android.support.v7.widget.Toolbar>
 

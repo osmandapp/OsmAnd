@@ -13,7 +13,6 @@ import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper;
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -29,7 +28,6 @@ public class WptPtEditorFragment extends PointEditorFragment {
 	private WptPt wpt;
 	private SavingTrackHelper savingTrackHelper;
 	private GpxSelectionHelper selectedGpxHelper;
-	private SelectedGpxFile selectedGpxFile;
 
 	private boolean saved;
 	private int color;
@@ -47,7 +45,6 @@ public class WptPtEditorFragment extends PointEditorFragment {
 		super.onCreate(savedInstanceState);
 
 		wpt = editor.getWptPt();
-		selectedGpxFile = selectedGpxHelper.getSelectedGPXFile(wpt);
 		int defaultColor = getResources().getColor(R.color.gpx_color_point);
 		color = wpt.getColor(defaultColor);
 	}
@@ -104,12 +101,6 @@ public class WptPtEditorFragment extends PointEditorFragment {
 			menu.update(latLon, wpt.getPointDescription(getMapActivity()), wpt);
 		}
 
-		if (editor.isNew() && selectedGpxFile == null) {
-			selectedGpxHelper.setGpxFileToDisplay(savingTrackHelper.getCurrentGpx());
-		} else if (selectedGpxFile != null) {
-			selectedGpxHelper.setGpxFileToDisplay(selectedGpxFile.getGpxFile());
-		}
-
 		saved = true;
 	}
 
@@ -120,22 +111,37 @@ public class WptPtEditorFragment extends PointEditorFragment {
 		if (color != 0) {
 			wpt.setColor(color);
 		}
-		wpt = savingTrackHelper.insertPointData(wpt.getLatitude(), wpt.getLongitude(), System.currentTimeMillis(), description, name, category, color);
-	}
 
-	private boolean isCurrentTrack() {
-		return selectedGpxFile != null && selectedGpxFile.isShowCurrentTrack();
+		GPXFile gpx = editor.getGpxFile();
+		if (gpx != null) {
+			if (gpx.showCurrentTrack) {
+				wpt = savingTrackHelper.insertPointData(wpt.getLatitude(), wpt.getLongitude(),
+						System.currentTimeMillis(), description, name, category, color);
+				if (!editor.isGpxSelected()) {
+					selectedGpxHelper.setGpxFileToDisplay(gpx);
+				}
+			} else {
+				wpt = gpx.addWptPt(wpt.getLatitude(), wpt.getLongitude(),
+						System.currentTimeMillis(), description, name, category, color);
+				new SaveGpxAsyncTask(getMyApplication(), gpx, editor.isGpxSelected()).execute();
+			}
+		}
 	}
 
 	private void doUpdateWpt(String name, String category, String description) {
-		if (isCurrentTrack()) {
-			savingTrackHelper.updatePointData(wpt, wpt.getLatitude(), wpt.getLongitude(),
-					System.currentTimeMillis(), description, name, category, color);
-		} else if (selectedGpxFile != null) {
-			GPXFile gpx = selectedGpxFile.getModifiableGpxFile();
-			gpx.updateWptPt(wpt, wpt.getLatitude(), wpt.getLongitude(),
-					System.currentTimeMillis(), description, name, category, color);
-			new SaveGpxAsyncTask(getMyApplication(), gpx).execute();
+		GPXFile gpx = editor.getGpxFile();
+		if (gpx != null) {
+			if (gpx.showCurrentTrack) {
+				savingTrackHelper.updatePointData(wpt, wpt.getLatitude(), wpt.getLongitude(),
+						System.currentTimeMillis(), description, name, category, color);
+				if (!editor.isGpxSelected()) {
+					selectedGpxHelper.setGpxFileToDisplay(gpx);
+				}
+			} else {
+				gpx.updateWptPt(wpt, wpt.getLatitude(), wpt.getLongitude(),
+						System.currentTimeMillis(), description, name, category, color);
+				new SaveGpxAsyncTask(getMyApplication(), gpx, editor.isGpxSelected()).execute();
+			}
 		}
 	}
 
@@ -148,12 +154,14 @@ public class WptPtEditorFragment extends PointEditorFragment {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 
-				if (isCurrentTrack()) {
-					savingTrackHelper.deletePointData(wpt);
-				} else {
-					GPXFile gpx = selectedGpxFile.getModifiableGpxFile();
-					gpx.deleteWptPt(wpt);
-					new SaveGpxAsyncTask(getMyApplication(), gpx).execute();
+				GPXFile gpx = editor.getGpxFile();
+				if (gpx != null) {
+					if (gpx.showCurrentTrack) {
+						savingTrackHelper.deletePointData(wpt);
+					} else {
+						gpx.deleteWptPt(wpt);
+						new SaveGpxAsyncTask(getMyApplication(), gpx, editor.isGpxSelected()).execute();
+					}
 				}
 				saved = true;
 
@@ -212,19 +220,27 @@ public class WptPtEditorFragment extends PointEditorFragment {
 	}
 
 	private static class SaveGpxAsyncTask extends AsyncTask<Void, Void, Void> {
-
 		private final OsmandApplication app;
 		private final GPXFile gpx;
+		private final boolean gpxSelected;
 
-		public SaveGpxAsyncTask(OsmandApplication app, GPXFile gpx) {
+		public SaveGpxAsyncTask(OsmandApplication app, GPXFile gpx, boolean gpxSelected) {
 			this.app = app;
 			this.gpx = gpx;
+			this.gpxSelected = gpxSelected;
 		}
 
 		@Override
 		protected Void doInBackground(Void... params) {
 			GPXUtilities.writeGpxFile(new File(gpx.path), gpx, app);
 			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void aVoid) {
+			if (!gpxSelected) {
+				app.getSelectedGpxHelper().setGpxFileToDisplay(gpx);
+			}
 		}
 	}
 }

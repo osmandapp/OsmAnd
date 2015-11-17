@@ -47,7 +47,6 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.Algorithms;
 
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
-import static net.osmand.plus.mapcontextmenu.MenuBuilder.SHADOW_HEIGHT_BOTTOM_DP;
 import static net.osmand.plus.mapcontextmenu.MenuBuilder.SHADOW_HEIGHT_TOP_DP;
 
 
@@ -685,7 +684,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 				menuTitleHeight = menuTopShadowHeight + menuTopShadowAllHeight + dy;
 				menuBottomViewHeight = view.findViewById(R.id.context_menu_bottom_view).getHeight();
 
-				menuFullHeightMax = menuTitleHeight + (menuBottomViewHeight > 0 ? menuBottomViewHeight : -dpToPx(SHADOW_HEIGHT_BOTTOM_DP));
+				menuFullHeightMax = menuTitleHeight + menuBottomViewHeight;
 
 				if (origMarkerX == 0 && origMarkerY == 0) {
 					origMarkerX = view.getWidth() / 2;
@@ -802,7 +801,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		int posY = 0;
 		switch (destinationState) {
 			case MenuState.HEADER_ONLY:
-				posY = viewHeight - (menuTitleHeight - dpToPx(SHADOW_HEIGHT_BOTTOM_DP));
+				posY = viewHeight - menuTitleHeight;
 				break;
 			case MenuState.HALF_SCREEN:
 				posY = viewHeight - menuFullHeightMax;

@@ -631,11 +631,31 @@ public class GPXUtilities {
 			return false;
 		}
 
+		public WptPt addWptPt(double lat, double lon, long time, String description, String name, String category, int color) {
+			double latAdjusted = Double.parseDouble(latLonFormat.format(lat));
+			double lonAdjusted = Double.parseDouble(latLonFormat.format(lon));
+			final WptPt pt = new WptPt(latAdjusted, lonAdjusted, time, Double.NaN, 0, Double.NaN);
+			pt.name = name;
+			pt.category = category;
+			pt.desc = description;
+			if (color != 0) {
+				pt.setColor(color);
+			}
+
+			points.add(pt);
+			modifiedTime = System.currentTimeMillis();
+
+			return pt;
+		}
+
 		public void updateWptPt(WptPt pt, double lat, double lon, long time, String description, String name, String category, int color) {
 			int index = points.indexOf(pt);
 
-			pt.lat = lat;
-			pt.lon = lon;
+			double latAdjusted = Double.parseDouble(latLonFormat.format(lat));
+			double lonAdjusted = Double.parseDouble(latLonFormat.format(lon));
+
+			pt.lat = latAdjusted;
+			pt.lon = lonAdjusted;
 			pt.time = time;
 			pt.desc = description;
 			pt.name = name;
@@ -647,9 +667,11 @@ public class GPXUtilities {
 			if (index != -1) {
 				points.set(index, pt);
 			}
+			modifiedTime = System.currentTimeMillis();
 		}
 
 		public boolean deleteWptPt(WptPt pt) {
+			modifiedTime = System.currentTimeMillis();
 			return points.remove(pt);
 		}
 
