@@ -138,7 +138,7 @@ public abstract class MenuController extends BaseMenuController {
 
 	protected void addMyLocationToPlainItems(PointDescription pointDescription, LatLon latLon) {
 		if (pointDescription != null) {
-			addPlainMenuItem(R.drawable.map_my_location, PointDescription.getLocationName(getMapActivity(),
+			addPlainMenuItem(R.drawable.ic_action_get_my_location, PointDescription.getLocationName(getMapActivity(),
 					latLon.getLatitude(), latLon.getLongitude(), true).replaceAll("\n", ""), false);
 		}
 	}

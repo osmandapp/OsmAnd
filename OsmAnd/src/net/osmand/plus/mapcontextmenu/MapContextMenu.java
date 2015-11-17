@@ -53,6 +53,7 @@ public class MapContextMenu extends MenuTitleController {
 	private LatLon myLocation;
 	private Float heading;
 	private boolean inLocationUpdate = false;
+	private long locationUpdateTime;
 
 	private int favActionIconId;
 
@@ -348,7 +349,7 @@ public class MapContextMenu extends MenuTitleController {
 		if (menuController != null) {
 			favActionIconId = menuController.getFavActionIconId();
 		} else {
-			favActionIconId = R.drawable.ic_action_fav_dark;
+			favActionIconId = R.drawable.map_action_fav_dark;
 		}
 	}
 
