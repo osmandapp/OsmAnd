@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="plugins_screen">Spraudņu pārvaldnieks</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="plugins_screen">Spraudņu pārvaldnieks</string>
   
   <string name="prefs_plugins_descr">Spraudņi papildina aplikācijas iespējas un dod papildus funkcionalitāti</string>
   <string name="prefs_plugins">Spraudņi</string>
@@ -1023,7 +1024,7 @@
     <string name="edit_tilesource_name">Vārds</string>
     <string name="maps_define_edit">Definēt/labot…</string>
 	<string name="map_widget_fps_info">FPS atkļūdošana</string>
-	<string name="driving_region_descr">Atzīmējiet braukšanas reģionu: ASV, Eiropa, Apvienotā Karaliste, Āzija u.c.</string>
+	<string name="driving_region_descr">Atzīmējiet braukšanas reģionu: ASV, Eiropa, Apvienotā Karaliste, Āzija u.c</string>
 	<string name="driving_region">Braukšanas reģions</string>
 	<string name="driving_region_japan">Japāna</string>
 	<string name="driving_region_us">ASV</string>
@@ -1788,7 +1789,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="welmode_download_maps">Lejupielādēt kartes</string>
 	<string name="welcome_select_region">Lai korekti atspoguļotu ātruma ierobežojumus un ceļa zīmes, lūdzu izvēlieties reģionu:</string>
 	<string name="welcome_text">OsmAnd ļauj izmantot kartes un navigēt bez interneta pieslēguma!</string>
-	<string name="welcome_header">Esiet sveicināts!</string>
+	<string name="welcome_header">Esiet sveicināts</string>
     <string name="current_route">Pašreizējais maršruts</string>
     <string name="osm_changes_added_to_local_edits">OSM izmaiņas pievienotas lokālām izmaiņām</string>
    	<string name="mark_to_delete">Atzīmēt dzēšanai</string>
