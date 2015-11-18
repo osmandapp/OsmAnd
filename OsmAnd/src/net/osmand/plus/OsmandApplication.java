@@ -2,6 +2,7 @@ package net.osmand.plus;
 
 import android.app.Activity;
 import android.app.AlarmManager;
+import android.app.Application;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -13,7 +14,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
-import android.support.multidex.MultiDexApplication;
 import android.support.v7.app.AlertDialog;
 import android.text.format.DateFormat;
 import android.util.TypedValue;
@@ -65,7 +65,7 @@ import btools.routingapp.IBRouterService;
 
 
 
-public class OsmandApplication extends MultiDexApplication {
+public class OsmandApplication extends Application {
 	public static final String EXCEPTION_PATH = "exception.log"; //$NON-NLS-1$
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(OsmandApplication.class);
 

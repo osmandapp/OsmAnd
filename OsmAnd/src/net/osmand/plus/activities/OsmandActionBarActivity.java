@@ -1,14 +1,12 @@
 package net.osmand.plus.activities;
 
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
-
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
 
 /**
  * Created by Denis
@@ -22,12 +20,9 @@ public class OsmandActionBarActivity extends AppCompatActivity {
     protected void setupHomeButton(){
         Drawable back = ((OsmandApplication)getApplication()).getIconsCache().getIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
         back.setColorFilter(getResources().getColor(R.color.color_white), PorterDuff.Mode.MULTIPLY);
-        final ActionBar supportActionBar = getSupportActionBar();
-        if (supportActionBar != null) {
-            supportActionBar.setHomeButtonEnabled(true);
-            supportActionBar.setDisplayHomeAsUpEnabled(true);
-            supportActionBar.setHomeAsUpIndicator(back);
-        }
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(back);
     }
 
     @Override
