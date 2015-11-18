@@ -36,7 +36,7 @@ public class PoiTypeDialogFragment extends DialogFragment {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				PoiCategory aType = categories.get(which);
-				((EditPoiDialogFragment) getParentFragment()).updateType(aType);
+				((EditPoiDialogFragment) getParentFragment()).setPoiCategory(aType);
 				dismiss();
 			}
 		});
