@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
 
+    <string name="rendering_attr_roadStyle_description">Стиль отображения дорог</string>
     <string name="lang_nds">Нижненемецкий</string>
     <string name="lang_mk">Македонский</string>
     <string name="lang_fy">Западнофризский</string>
