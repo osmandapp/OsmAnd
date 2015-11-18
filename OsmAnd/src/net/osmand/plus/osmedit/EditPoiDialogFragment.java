@@ -252,6 +252,10 @@ public class EditPoiDialogFragment extends DialogFragment {
 			@Override
 			public void afterTextChanged(Editable s) {
 				if (!getEditPoiData().isInEdit()) {
+					PoiType pt = getEditPoiData().getAllTranslatedSubTypes().get(s.toString());
+					if(pt != null) {
+						poiTypeTextInputLayout.setHint(pt.getCategory().getTranslation());
+					}
 					getEditPoiData().updateTypeTag(s.toString());
 				}
 			}
@@ -513,9 +517,7 @@ public class EditPoiDialogFragment extends DialogFragment {
 					//noinspection SuspiciousMethodCalls
 					PoiType pt = subCategories.get(item);
 					String keyName = pt.getKeyName();
-					if(pt != null) {
-						poiTypeTextInputLayout.setHint(pt.getCategory().getTranslation());
-					}
+					poiTypeTextInputLayout.setHint(pt.getCategory().getTranslation());
 					poiTypeEditText.setText(keyName);
 				}
 			}
