@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
 
+    <string name="rendering_attr_currentTrackColor_description">Цвет трека GPX</string>
+    <string name="rendering_attr_currentTrackWidth_description">Толщина трека GPX</string>
     <string name="copied_to_clipboard">Скопировано в буфер обмена</string>
     <string name="rendering_attr_roadStyle_description">Стиль отображения дорог</string>
     <string name="lang_nds">Нижненемецкий</string>
