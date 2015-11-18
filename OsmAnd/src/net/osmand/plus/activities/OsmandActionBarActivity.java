@@ -2,6 +2,7 @@ package net.osmand.plus.activities;
 
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -21,7 +22,7 @@ public class OsmandActionBarActivity extends AppCompatActivity {
     //should be called after set content view
     protected void setupHomeButton(){
         Drawable back = ((OsmandApplication)getApplication()).getIconsCache().getIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
-        back.setColorFilter(getResources().getColor(R.color.color_white), PorterDuff.Mode.MULTIPLY);
+        back.setColorFilter(ContextCompat.getColor(this, R.color.color_white), PorterDuff.Mode.MULTIPLY);
         final ActionBar supportActionBar = getSupportActionBar();
         if (supportActionBar != null) {
             supportActionBar.setHomeButtonEnabled(true);
