@@ -1931,6 +1931,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="dashboard_or_drawer_description">Teraz si môžete zvoliť či aplikácia po štarte spustí obrazovku mapy alebo úvodný panel. Toto nastavenie môžete neskôr zmeniť v nastaveniach panela.</string>
     <string name="access_from_map_description">Umiestni na obrazovku mapy tlačidlo úvodného panela</string>
     <string name="access_from_map">Prístup z mapy</string>
-    <string name="use_dashboard_btn">Vždy spustiť úvodný panel</string>
-    <string name="use_drawer_btn">Vždy spustiť mapu</string>
+    <string name="use_dashboard_btn">Spustiť úvodný panel</string>
+    <string name="use_drawer_btn">Spustiť mapu</string>
     </resources>
