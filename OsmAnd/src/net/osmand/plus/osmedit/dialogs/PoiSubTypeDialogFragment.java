@@ -1,7 +1,9 @@
 package net.osmand.plus.osmedit.dialogs;
 
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
@@ -24,8 +26,12 @@ public class PoiSubTypeDialogFragment extends DialogFragment {
 		MapPoiTypes poiTypes = ((OsmandApplication) getActivity().getApplication()).getPoiTypes();
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		final PoiCategory a = poiTypes.getPoiCategoryByName((String) getArguments().getSerializable(KEY_POI_CATEGORY));
-		final Map<String, PoiType> allTranslatedNames = poiTypes.getAllTranslatedNames(a, true);
-		Set<String> strings = allTranslatedNames.keySet();
+		Set<String> strings = new TreeSet<>();
+		for (PoiType s : a.getPoiTypes()) {
+			if (!s.isReference() && !s.isNotEditableOsm() && s.getBaseLangType() == null) {
+				strings.add(s.getTranslation());
+			}
+		}
 		final String[] subCats = strings.toArray(new String[strings.size()]);
 		builder.setItems(subCats, new DialogInterface.OnClickListener() {
 			@Override

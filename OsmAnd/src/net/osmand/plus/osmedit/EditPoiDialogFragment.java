@@ -44,7 +44,6 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
@@ -253,17 +252,35 @@ public class EditPoiDialogFragment extends DialogFragment {
 			@Override
 			public void afterTextChanged(Editable s) {
 				if (!getEditPoiData().isInEdit()) {
-					PoiType pt = getEditPoiData().getAllTranslatedSubTypes().get(s.toString().toLowerCase());
-					if(pt != null) {
-						poiTypeTextInputLayout.setHint(pt.getCategory().getTranslation());
-					}
 					getEditPoiData().updateTypeTag(s.toString());
+					poiTypeTextInputLayout.setHint(editPoiData.getPoiCategory().getTranslation());
 				}
 			}
 		});
 		poiNameEditText.setOnEditorActionListener(mOnEditorActionListener);
 		poiTypeEditText.setOnEditorActionListener(mOnEditorActionListener);
 		poiTypeEditText.setText(editPoiData.getPoiTypeString());
+		poiTypeEditText.setOnTouchListener(new View.OnTouchListener() {
+			@Override
+			public boolean onTouch(final View v, MotionEvent event) {
+				final EditText editText = (EditText) v;
+				final int DRAWABLE_RIGHT = 2;
+				if (event.getAction() == MotionEvent.ACTION_UP) {
+					if (event.getX() >= (editText.getRight()
+							- editText.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width()
+							- editText.getPaddingRight())) {
+						if (editPoiData.getPoiCategory() != null) {
+							DialogFragment dialogFragment =
+									PoiSubTypeDialogFragment.createInstance(editPoiData.getPoiCategory());
+							dialogFragment.show(getChildFragmentManager(), "PoiSubTypeDialogFragment");
+						}
+
+						return true;
+					}
+				}
+				return false;
+			}
+		});
 
 		Button saveButton = (Button) view.findViewById(R.id.saveButton);
 		saveButton.setText(mOpenstreetmapUtil instanceof OpenstreetmapRemoteUtil
@@ -299,7 +316,7 @@ public class EditPoiDialogFragment extends DialogFragment {
 			HashSet<String> tagsCopy = new HashSet<>();
 			tagsCopy.addAll(editPoiData.getTagValues().keySet());
 			tagsCopy.removeAll(BASIC_TAGS);
-			if (tagsCopy.isEmpty()) {
+			if (tagsCopy.isEmpty() || editPoiData.getPoiCategory() == getMyApplication().getPoiTypes().getOtherPoiCategory()) {
 				poiTypeEditText.setError(getResources().getString(R.string.please_specify_poi_type));
 			} else {
 				new SaveWithAdvancedTagsDialogFragment().show(getChildFragmentManager(), "dialog");
@@ -446,40 +463,25 @@ public class EditPoiDialogFragment extends DialogFragment {
 		}.execute();
 	}
 
-	public void updateType(PoiCategory type) {
+	public void setPoiCategory(PoiCategory type) {
 		editPoiData.updateType(type);
 		poiTypeEditText.setText(editPoiData.getPoiTypeString());
-		poiTypeTextInputLayout.setHint(editPoiData.getPoiCategory().getTranslation());
 		setAdapterForPoiTypeEditText();
-		poiTypeEditText.setOnTouchListener(new View.OnTouchListener() {
-			@Override
-			public boolean onTouch(final View v, MotionEvent event) {
-				final EditText editText = (EditText) v;
-				final int DRAWABLE_RIGHT = 2;
-				if (event.getAction() == MotionEvent.ACTION_UP) {
-					if (event.getX() >= (editText.getRight()
-							- editText.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width()
-							- editText.getPaddingRight())) {
-						if (editPoiData.getPoiCategory() != null) {
-							DialogFragment dialogFragment =
-									PoiSubTypeDialogFragment.createInstance(editPoiData.getPoiCategory());
-							dialogFragment.show(getChildFragmentManager(), "PoiSubTypeDialogFragment");
-						}
-
-						return true;
-					}
-				}
-				return false;
-			}
-		});
 	}
 
 	private void setAdapterForPoiTypeEditText() {
 		final Map<String, PoiType> subCategories = new LinkedHashMap<>();
-		for (Map.Entry<String, PoiType> s : editPoiData.getAllTranslatedSubTypes().entrySet()) {
-			if (!subCategories.containsKey(s.getKey())) {
-				subCategories.put(Algorithms.capitalizeFirstLetterAndLowercase(s.getKey()), s.getValue());
+		PoiCategory ct = editPoiData.getPoiCategory();
+		if(ct != null) {
+			for (PoiType s : ct.getPoiTypes()) {
+				if(!s.isReference() && !s.isNotEditableOsm() && s.getBaseLangType() == null) {
+					addMapEntryAdapter(subCategories, s.getTranslation(), s);
+					addMapEntryAdapter(subCategories, s.getKeyName().replace('_', ' '), s);
+				}
 			}
+		}
+		for (Map.Entry<String, PoiType> s : editPoiData.getAllTranslatedSubTypes().entrySet()) {
+			addMapEntryAdapter(subCategories, s.getKey(), s.getValue());
 		}
 		final ArrayAdapter<Object> adapter;
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -513,14 +515,8 @@ public class EditPoiDialogFragment extends DialogFragment {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 				Object item = parent.getAdapter().getItem(position);
-				//noinspection SuspiciousMethodCalls
-				if (subCategories.containsKey(item.toString().toLowerCase())) {
-					//noinspection SuspiciousMethodCalls
-					PoiType pt = subCategories.get(item);
-					String keyName = pt.getKeyName();
-					poiTypeTextInputLayout.setHint(pt.getCategory().getTranslation());
-					poiTypeEditText.setText(keyName);
-				}
+				poiTypeEditText.setText(item.toString());
+				setAdapterForPoiTypeEditText();
 			}
 
 			@Override
@@ -528,6 +524,12 @@ public class EditPoiDialogFragment extends DialogFragment {
 			}
 		});
 
+	}
+
+	private void addMapEntryAdapter(final Map<String, PoiType> subCategories, String key, PoiType v) {
+		if (!subCategories.containsKey(key.toLowerCase())) {
+			subCategories.put(Algorithms.capitalizeFirstLetterAndLowercase(key), v);
+		}
 	}
 
 	private OsmandApplication getMyApplication() {
