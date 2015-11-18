@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import net.londatiga.android.ActionItem;
-import net.londatiga.android.QuickAction;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
@@ -48,12 +46,10 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -841,51 +837,6 @@ public class MapActivityActions implements DialogProvider {
 	}
 
 
-	public static void showObjectContextMenu(final ContextMenuAdapter qa, final Activity activity,
-											 final OnClickListener onShow) {
-		OsmandApplication app = (OsmandApplication) activity.getApplication();
-		if (app.accessibilityEnabled()) {
-			AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-			String[] values = qa.getItemNames();
-			builder.setItems(values, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					OnContextMenuClick clk = qa.getClickAdapter(which);
-					if (clk != null) {
-						clk.onContextMenuClick(null, qa.getElementId(which), which, false);
-					}
-				}
-
-			});
-			builder.show();
-		} else {
-			final QuickAction view = new QuickAction(qa.getAnchor());
-			for (int i = 0; i < qa.length(); i++) {
-
-				ActionItem ai = new ActionItem();
-				Drawable id = qa.getImage(app, i, true);
-				if (id != null) {
-					ai.setIcon(id);
-				}
-				final int ki = i;
-				ai.setTitle(qa.getItemName(i));
-				ai.setOnClickListener(new OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-						if (onShow != null) {
-							onShow.onClick(v);
-						}
-						view.dismiss();
-						qa.getClickAdapter(ki).onContextMenuClick(null, qa.getElementId(ki), ki, false);
-
-					}
-				});
-				view.addActionItem(ai);
-			}
-			view.show();
-		}
-	}
 
 	protected void updateDrawerMenu() {
 		final ListView menuItemsListView = (ListView) mapActivity.findViewById(R.id.menuItems);
