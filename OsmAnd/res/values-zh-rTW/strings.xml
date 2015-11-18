@@ -2011,6 +2011,6 @@
     <string name="dashboard_or_drawer_description">您現在可以選擇，如果應用程式直接啟動在地圖螢幕或是永遠先顯示儀表板。您稍後也可以在設定中更改。</string>
     <string name="access_from_map_description">將儀表板按鈕放置在地圖螢幕上</string>
     <string name="access_from_map">從地圖進入</string>
-    <string name="use_dashboard_btn">總是啟動儀表板</string>
-    <string name="use_drawer_btn">總是啟動地圖</string>
+    <string name="use_dashboard_btn">開始儀表板</string>
+    <string name="use_drawer_btn">開始地圖</string>
     </resources>
