@@ -2092,7 +2092,7 @@
 	<string name="shared_string_commit">Udfør</string>
 	
     <string name="poi_dialog_reopen">Genåbn</string>
-	<string name="osn_close_dialog_success">Fejl lukket</string>
+	<string name="osn_close_dialog_success">Note lukket</string>
 	<string name="osm_edit_modified_poi">Ændret OSM IP</string>
     <string name="osm_edit_deleted_poi">Slettet OSM IP</string>
     <string name="release_2_2">" • Ny kontekstafhængig brugergrænseflade når der vælges lokationer på kortet og på andre skærme\n\n • Kortskærmen vises direkte, medmindre \'Vis oversigtpanel ved start\' er valgt\n\n • Konfigurer hvordan og hvilket indhold der vises på oversigtspanelet\n\n • Hent kort, regioner ved at trykke direkte på verdenskortet\n\n • IP søgning understøtter nu mere specifikke forespørgsler\n\n • Forbedret IP og OSM redigeringsfunktionalitet\n\n • Administration af kortfiler struktur og grænseflade er omarbejdet\n\n og mere... "</string>
