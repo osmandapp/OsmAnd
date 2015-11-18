@@ -125,7 +125,7 @@
                         android:layout_height="fill_parent"
                         android:layout_gravity="bottom"
                         android:gravity="center_horizontal"
-                        android:text="100 m"
+                        android:text="200 m"
                         android:textSize="@dimen/map_widget_text_size_small" />
                     
                     <TextView
@@ -134,7 +134,7 @@
                         android:layout_height="fill_parent"
                         android:layout_gravity="bottom"
                         android:gravity="center_horizontal"
-                        android:text="100 m"
+                        android:text="200 m"
                         android:textSize="@dimen/map_widget_text_size_small" />
 
                 </FrameLayout>
