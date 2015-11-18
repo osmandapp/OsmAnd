@@ -21,17 +21,14 @@ public class PoiTypeDialogFragment extends DialogFragment {
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		MapPoiTypes poiTypes = ((OsmandApplication) getActivity().getApplication()).getPoiTypes();
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		final List<PoiCategory> categories = poiTypes.getCategories(false);
-		ArrayList<String> vals = new ArrayList<>(categories.size());
-		ArrayList<PoiCategory> toDelete = new ArrayList<>();
-		for (PoiCategory category : categories) {
-			if (category.isNotEditableOsm()) {
-				toDelete.add(category);
-			} else {
+		final List<PoiCategory> categories = new ArrayList<PoiCategory>();
+		ArrayList<String> vals = new ArrayList<>();
+		for (PoiCategory category : poiTypes.getCategories(false)) {
+			if (!category.isNotEditableOsm()) {
 				vals.add(category.getTranslation());
+				categories.add(category);
 			}
 		}
-		categories.removeAll(toDelete);
 		builder.setItems(vals.toArray(new String[vals.size()]), new Dialog.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
