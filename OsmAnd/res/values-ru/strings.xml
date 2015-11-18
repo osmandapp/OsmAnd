@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
 
+    <string name="osm_edit_reopened_note">Заметка OSM открыта снова</string>
+    <string name="osm_edit_commented_note">К заметке OSM добавлен комментарий</string>
+    <string name="osm_edit_removed_note">Заметка OSM удалена</string>
+	<string name="osm_edit_created_note">Заметка OSM создана</string>
+	<string name="osn_bug_name">Заметка OSM</string>
+	<string name="osn_add_dialog_title">Создание заметки</string>
+	<string name="osn_comment_dialog_title">Добавление комментария</string>
+	<string name="osn_reopen_dialog_title">Повторное открытие заметки</string>
+	<string name="osn_close_dialog_title">Закрытие заметки</string>
+	<string name="osn_add_dialog_success">Заметка успешно создана</string>
+	<string name="osn_add_dialog_error">Ошибка: заметка не была создана</string>
+	<string name="osn_close_dialog_success">Заметка было успешно закрыта</string>
+	<string name="osn_close_dialog_error">Ошибка: заметка не была закрыта</string>
+   <string name="osm_edit_deleted_poi">OSM POI удалена</string>
+    <string name="osm_edit_modified_poi">OSM POI отредактирована</string>
+    <string name="osm_save_offline">Сохранить локально</string>
+    <string name="context_menu_item_open_note">Добавить заметку OSM</string>
     <string name="rendering_attr_currentTrackColor_description">Цвет трека GPX</string>
     <string name="rendering_attr_currentTrackWidth_description">Толщина трека GPX</string>
     <string name="copied_to_clipboard">Скопировано в буфер обмена</string>
