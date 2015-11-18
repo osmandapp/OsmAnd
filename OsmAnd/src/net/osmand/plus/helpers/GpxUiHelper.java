@@ -182,7 +182,9 @@ public class GpxUiHelper {
 			}
 
 			for (SelectedGpxFile selectedGpx : selectedGpxFiles) {
-				list.add(selectedGpx.getGpxFile().path.substring(gpxDirLength + 1));
+				if (!selectedGpx.getGpxFile().showCurrentTrack) {
+					list.add(selectedGpx.getGpxFile().path.substring(gpxDirLength + 1));
+				}
 			}
 
 			final ContextMenuAdapter adapter = createGpxContextMenuAdapter(activity, list, null, false,

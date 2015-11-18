@@ -59,6 +59,7 @@ public class MapMultiSelectionMenuFragment extends Fragment implements AdapterVi
 	@Override
 	public void onStart() {
 		super.onStart();
+		menu.getMapActivity().getMapLayers().getMapControlsLayer().setControlsClickable(false);
 		menu.getMapActivity().getContextMenu().setBaseFragmentVisibility(false);
 	}
 
@@ -69,6 +70,7 @@ public class MapMultiSelectionMenuFragment extends Fragment implements AdapterVi
 			menu.onStop();
 		}
 		menu.getMapActivity().getContextMenu().setBaseFragmentVisibility(true);
+		menu.getMapActivity().getMapLayers().getMapControlsLayer().setControlsClickable(true);
 	}
 
 	public static void showInstance(final MapActivity mapActivity) {
