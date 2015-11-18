@@ -515,14 +515,8 @@ public class EditPoiDialogFragment extends DialogFragment {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 				Object item = parent.getAdapter().getItem(position);
-				//noinspection SuspiciousMethodCalls
-				if (subCategories.containsKey(item.toString().toLowerCase())) {
-					//noinspection SuspiciousMethodCalls
-					PoiType pt = subCategories.get(item);
-					String keyName = pt.getKeyName();
-					setAdapterForPoiTypeEditText();
-					poiTypeEditText.setText(keyName);
-				}
+				poiTypeEditText.setText(item.toString());
+				setAdapterForPoiTypeEditText();
 			}
 
 			@Override
