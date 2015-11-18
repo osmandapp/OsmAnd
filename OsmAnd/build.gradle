@@ -40,7 +40,6 @@ android {
 	defaultConfig {
 		minSdkVersion System.getenv("MIN_SDK_VERSION") ? System.getenv("MIN_SDK_VERSION").toInteger() : 14
 		targetSdkVersion 23
-		multiDexEnabled true
 		versionCode System.getenv("APK_NUMBER_VERSION") ? System.getenv("APK_NUMBER_VERSION").toInteger() : versionCode
 		//versionName already assigned in code
 		//versionName System.getenv("APK_VERSION")? System.getenv("APK_VERSION").toString(): versionName
@@ -323,10 +322,10 @@ repositories {
 }
 
 dependencies {
-	compile project(path: ":OsmAnd-java", configuration: "android")
-	compile project(":eclipse-compile:design")
-	compile project(":eclipse-compile:cardview")
-//	compile project(":eclipse-compile:recyclerview")
+	compile project(path: ':OsmAnd-java', configuration: 'android')
+	compile project(':eclipse-compile:design')
+	compile project(':eclipse-compile:cardview')
+	//	compile project(":eclipse-compile:recyclerview")
 	compile fileTree(
 			dir: "libs",
 			include: ["*.jar"],
@@ -344,5 +343,5 @@ dependencies {
 	qtcoredebugCompile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"
 	qtcoreCompile "net.osmand:OsmAndCore_androidNativeRelease:0.1-SNAPSHOT@aar"
 	qtcoreCompile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"
-	compile 'com.android.support:multidex:1.0.0'
+	compile files('libs/android-support-multidex.jar')
 }
