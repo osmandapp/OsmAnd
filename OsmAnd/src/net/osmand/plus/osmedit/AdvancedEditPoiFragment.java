@@ -339,27 +339,5 @@ public class AdvancedEditPoiFragment extends Fragment
 					+ abstractPoiType.getClass());
 		}
 	}
-
-	class InitTagsAndValuesAutocompleteTask extends AsyncTask<Void, Void, Map<String, AbstractPoiType>> {
-		private final MapPoiTypes mapPoiTypes;
-
-		public InitTagsAndValuesAutocompleteTask(MapPoiTypes mapPoiTypes) {
-			this.mapPoiTypes = mapPoiTypes;
-		}
-
-		@Override
-		protected Map<String, AbstractPoiType> doInBackground(Void... params) {
-			return mapPoiTypes.getAllTypesTranslatedNames(new StringMatcher() {
-				@Override
-				public boolean matches(String name) {
-					return true;
-				}
-			});
-		}
-
-		@Override
-		protected void onPostExecute(Map<String, AbstractPoiType> result) {
-			
-		}
-	}
+	
 }
