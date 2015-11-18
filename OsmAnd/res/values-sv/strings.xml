@@ -1973,7 +1973,7 @@
     <string name="lang_mk">Makedonska</string>
     <string name="lang_fy">Frisiska</string>
     <string name="lang_als">Albanska (Toskiska)</string>
-    <string name="share_osm_edits_subject">Osm-redigeringar delade via OsmAnd</string>
+    <string name="share_osm_edits_subject">OSM-redigeringar delade via OsmAnd</string>
     <string name="save_poi_without_poi_type_message">Vill du verkligen spara denna POI utan att ange typ?</string>
     <string name="shared_string_location">Plats</string>
     <string name="poi_context_menu_modify_osm_change">Modifiera OSM-ändring</string>
@@ -1992,7 +1992,7 @@
 	<string name="osn_close_dialog_title">Stäng anteckning</string>
 	<string name="osn_add_dialog_success">En anteckning har skapats utan problem</string>
 	<string name="osn_add_dialog_error">Ett undantag uppstod: anteckningen skapades inte</string>
-	<string name="osn_close_dialog_success">Buggen stängdes utan problem</string>
+	<string name="osn_close_dialog_success">Anteckningen stängdes utan problem</string>
 	<string name="osn_close_dialog_error">Ett undantag uppstod: anteckningen stängdes inte</string>
 	<string name="context_menu_item_delete_waypoint">Ta bort GPX-waypoint?</string>
     <string name="context_menu_item_edit_waypoint">Redigera GPX-waypoint</string>
@@ -2000,9 +2000,12 @@
     <string name="access_from_map">Tillgång från kartan</string>
     <string name="rendering_attr_currentTrackColor_description">GPX-färg</string>
     <string name="rendering_attr_currentTrackWidth_description">GPX-bredd</string>
-    <string name="release_2_2">" • Nytt kontextkänsligt gränssnitt för att peta på platser på kartan och på andra skärmar\n\n • Kartskärmen startar nu automatiskt om inte \'Visa panel vid appstart\' är vald\n\n • Konfigurera vilka kort och hur kort visas i panelen\n\n • För att hämta kartor kan regioner väljas direkt genom att peta på världskartan\n\n • Sökning efter intressepunkter (POI) understöder nu mer specifika frågor\n\n • Förbättrad funktion för POI- och OSM-redigering\n\n • Strukturen för hämtning av kartdata och gränssnittet har omarbetats\n\n och mer ... "</string>
+    <string name="release_2_2">" • Nytt kontextkänsligt gränssnitt för att peta på platser på kartan och på andra skärmar\n\n • Kartskärmen startar nu automatiskt om inte \'Visa panelen vid appstart\' är vald\n\n • Konfigurera vilka kort och hur de ska visas i panelen\n\n • För att hämta kartor kan regioner väljas direkt genom att peta på världskartan\n\n • Sökning efter intressepunkter (POI) understöder nu mer specifika frågor\n\n • Förbättrad funktion för POI- och OSM-redigering\n\n • Strukturen för hämtning av kartdata och gränssnittet har omarbetats\n\n och mer ... "</string>
     <string name="dashboard_or_drawer_description">Du kan nu välja om appen ska starta direkt med kartskärmen eller alltid visa panelen först. Detta val kan du alltid ändra på under inställningarna i panelen.</string>
 <string name="use_dashboard_btn">Starta alltid med panelen</string>
     <string name="use_drawer_btn">Starta alltid med kartan</string>
     <string name="dashboard_or_drawer_title">Nytt val för uppstarten</string>
+    <string name="poi_dialog_reopen">Öppna igen</string>
+	<string name="shared_string_commit">Skicka in</string>
+	
     </resources>
