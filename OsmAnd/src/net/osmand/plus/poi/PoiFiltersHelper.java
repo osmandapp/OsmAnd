@@ -99,7 +99,7 @@ public class PoiFiltersHelper {
 			if (place != null && !Algorithms.isEmpty(application.getLanguage())) {
 				PoiUIFilter filter = new PoiUIFilter(place, application, " " + 
 						application.getLangTranslation(application.getLanguage())); //$NON-NLS-1$
-				filter.setFilterByName("wiki:lang:"+application.getLanguage());
+				filter.setSavedFilterByName("wiki:lang:"+application.getLanguage());
 				filter.setStandardFilter(true);
 				localWikiPoiFilter = filter;
 			}
