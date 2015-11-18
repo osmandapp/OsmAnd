@@ -22,13 +22,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.ProgressImplementation;
 import net.osmand.plus.R;
-import net.osmand.plus.osmedit.OsmPoint.Action;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
