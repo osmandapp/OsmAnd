@@ -137,7 +137,7 @@ public abstract class MenuTitleController {
 		getMapActivity().getMyApplication().getLocationProvider()
 				.getRouteSegment(ll, new ResultMatcher<RouteDataObject>() {
 
-					@Override
+					@Override	
 					public boolean publish(RouteDataObject object) {
 						if (object != null) {
 							OsmandSettings settings = getMapActivity().getMyApplication().getSettings();
