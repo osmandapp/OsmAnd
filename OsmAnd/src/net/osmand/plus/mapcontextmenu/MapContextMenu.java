@@ -406,7 +406,7 @@ public class MapContextMenu extends MenuTitleController {
 
 		final List<SelectedGpxFile> list
 				= mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedGPXFiles();
-		if (list.isEmpty()) {
+		if (list.isEmpty() || (list.size() == 1 && list.get(0).getGpxFile().showCurrentTrack)) {
 			GPXFile gpxFile = mapActivity.getMyApplication().getSavingTrackHelper().getCurrentGpx();
 			getWptPtPointEditor().add(gpxFile, latLon, title);
 		} else {
