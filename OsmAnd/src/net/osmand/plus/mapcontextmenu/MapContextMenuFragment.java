@@ -28,7 +28,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
+import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
@@ -45,7 +45,6 @@ import net.osmand.plus.mapcontextmenu.MenuController.TitleProgressController;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.Algorithms;
-
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 import static net.osmand.plus.mapcontextmenu.MenuBuilder.SHADOW_HEIGHT_TOP_DP;
 
@@ -753,7 +752,8 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 
 	private void updateCompassVisibility() {
 		View compassView = view.findViewById(R.id.compass_layout);
-		boolean gpsFixed = getMyApplication().getLocationProvider().getGPSInfo().fixed;
+		Location ll = getMyApplication().getLocationProvider().getLastKnownLocation();
+		boolean gpsFixed = ll != null && System.currentTimeMillis() - ll.getTime() < 1000 * 60 * 60 * 20;
 		if (gpsFixed && menu.displayDistanceDirection() && menu.getCurrentMenuState() != MenuState.FULL_SCREEN) {
 			updateDistanceDirection();
 			compassView.setVisibility(View.VISIBLE);
