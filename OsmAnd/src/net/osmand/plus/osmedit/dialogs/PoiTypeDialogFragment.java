@@ -27,7 +27,7 @@ public class PoiTypeDialogFragment extends DialogFragment {
 		ArrayList<String> vals = new ArrayList<>(categories.size());
 		ArrayList<PoiCategory> toDelete = new ArrayList<>();
 		for (PoiCategory category : categories) {
-			if (!category.isNotEditableOsm()) {
+			if (category.isNotEditableOsm()) {
 				toDelete.add(category);
 			} else {
 				vals.add(category.getTranslation());
