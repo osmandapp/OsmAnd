@@ -268,8 +268,8 @@ public class SearchPoiFilterFragment extends OsmAndListFragment implements Searc
 			String name;
 			if (item instanceof PoiUIFilter) {
 				final PoiUIFilter model = (PoiUIFilter) item;
-				if (RenderingIcons.containsBigIcon(model.getSimplifiedId())) {
-					icon.setImageDrawable(RenderingIcons.getBigIcon(getActivity(), model.getSimplifiedId()));
+				if (RenderingIcons.containsBigIcon(model.getIconId())) {
+					icon.setImageDrawable(RenderingIcons.getBigIcon(getActivity(), model.getIconId()));
 				} else if(PoiUIFilter.BY_NAME_FILTER_ID.equals(model.getFilterId()) || 
 						model instanceof NominatimPoiFilter){
 					icon.setImageResource(R.drawable.mx_name_finder);
