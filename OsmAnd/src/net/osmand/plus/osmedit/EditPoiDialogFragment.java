@@ -477,7 +477,7 @@ public class EditPoiDialogFragment extends DialogFragment {
 	private void setAdapterForPoiTypeEditText() {
 		final Map<String, PoiType> subCategories = new LinkedHashMap<>();
 		for (Map.Entry<String, PoiType> s : editPoiData.getAllTranslatedSubTypes().entrySet()) {
-			if (!subCategories.containsKey(s.getKey()) && !s.getValue().isNotEditableOsm()) {
+			if (!subCategories.containsKey(s.getKey())) {
 				subCategories.put(Algorithms.capitalizeFirstLetterAndLowercase(s.getKey()), s.getValue());
 			}
 		}

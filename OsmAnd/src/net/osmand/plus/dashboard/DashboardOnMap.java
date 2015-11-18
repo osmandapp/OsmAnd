@@ -439,7 +439,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 					onScrollChanged(listView.getScrollY(), false, false);
 				}
 				if (refresh) {
-					refreshContent(visibleType == DashboardType.CONFIGURE_MAP);
+					refreshContent(false);
 				} else {
 					updateListAdapter();
 					updateListBackgroundHeight();
