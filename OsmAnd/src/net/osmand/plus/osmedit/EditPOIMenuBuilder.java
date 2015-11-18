@@ -29,7 +29,12 @@ public class EditPOIMenuBuilder extends MenuBuilder {
 			OpenstreetmapPoint point = (OpenstreetmapPoint) osmPoint;
 
 			for (Map.Entry<String, String> e : point.getEntity().getTags().entrySet()) {
-				String text = e.getKey() + "=" + e.getValue();
+				String text;
+				if (EditPoiData.POI_TYPE_TAG.equals(e.getKey())) {
+					text = e.getValue();
+				} else {
+					text = e.getKey() + "=" + e.getValue();
+				}
 				buildRow(view, R.drawable.ic_action_info_dark, text, 0, false, 0);
 			}
 		}
