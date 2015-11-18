@@ -191,10 +191,8 @@ public class PoiFiltersHelper {
 			cacheTopStandardFilters = top;
 		}
 		List<PoiUIFilter> result = new ArrayList<PoiUIFilter>();
-		if(OsmandPlugin.getEnabledPlugin(AccessibilityPlugin.class) != null) {
-			result.add(getShowAllPOIFilter());
-		}
 		result.addAll(cacheTopStandardFilters);
+		result.add(getShowAllPOIFilter());
 		return result;
 	}
 	

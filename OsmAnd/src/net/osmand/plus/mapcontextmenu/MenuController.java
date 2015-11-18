@@ -257,7 +257,7 @@ public abstract class MenuController extends BaseMenuController {
 
 	public Drawable getSecondLineTypeIcon() { return null; }
 
-	public int getFavActionIconId() { return R.drawable.ic_action_fav_dark; }
+	public int getFavActionIconId() { return R.drawable.map_action_fav_dark; }
 
 	public String getTypeStr() { return ""; }
 

@@ -91,6 +91,7 @@ public class Amenity extends MapObject  {
 					while ((s = br.readLine()) != null) {
 						bld.append(s);
 					}
+					br.close();
 					str = bld.toString();
 				} catch (IOException e) {
 					e.printStackTrace();

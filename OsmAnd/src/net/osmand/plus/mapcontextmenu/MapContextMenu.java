@@ -6,13 +6,13 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.IndexConstants;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
@@ -29,7 +29,6 @@ import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.util.MapUtils;
 
-import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
@@ -53,7 +52,6 @@ public class MapContextMenu extends MenuTitleController {
 	private LatLon myLocation;
 	private Float heading;
 	private boolean inLocationUpdate = false;
-	private long locationUpdateTime;
 
 	private int favActionIconId;
 
@@ -401,20 +399,18 @@ public class MapContextMenu extends MenuTitleController {
 	}
 
 	public void addWptPt() {
-		if (object == null) {
-			String title = getTitleStr();
-			if (pointDescription.isWpt() || title.equals(addressNotKnownStr)) {
-				title = "";
-			}
+		String title = getTitleStr();
+		if (pointDescription.isWpt() || title.equals(addressNotKnownStr)) {
+			title = "";
+		}
 
-			final File dir = mapActivity.getMyApplication().getAppPath(IndexConstants.GPX_INDEX_DIR);
-			final List<String> list = GpxUiHelper.getSortedGPXFilenames(dir, false);
-			if (list.isEmpty()) {
-				GPXFile gpxFile = mapActivity.getMyApplication().getSavingTrackHelper().getCurrentGpx();
-				getWptPtPointEditor().add(gpxFile, latLon, title);
-			} else {
-				addNewWptToGPXFile(title);
-			}
+		final List<SelectedGpxFile> list
+				= mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedGPXFiles();
+		if (list.isEmpty()) {
+			GPXFile gpxFile = mapActivity.getMyApplication().getSavingTrackHelper().getCurrentGpx();
+			getWptPtPointEditor().add(gpxFile, latLon, title);
+		} else {
+			addNewWptToGPXFile(title);
 		}
 	}
 

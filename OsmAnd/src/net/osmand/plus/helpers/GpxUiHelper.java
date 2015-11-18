@@ -27,7 +27,6 @@ import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.GPXUtilities.TrkSegment;
-import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -174,11 +173,16 @@ public class GpxUiHelper {
 	public static AlertDialog selectSingleGPXFile(final Activity activity,
 											final boolean showCurrentGpx, final CallbackWithObject<GPXFile[]> callbackWithObject) {
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
-		final File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
-		final List<String> list = getSortedGPXFilenames(dir, false);
-		if (!list.isEmpty() || showCurrentGpx) {
+		int gpxDirLength = app.getAppPath(IndexConstants.GPX_INDEX_DIR).getAbsolutePath().length();
+		List<SelectedGpxFile> selectedGpxFiles = app.getSelectedGpxHelper().getSelectedGPXFiles();
+		final List<String> list = new ArrayList<>(selectedGpxFiles.size() + 1);
+		if (!selectedGpxFiles.isEmpty() || showCurrentGpx) {
 			if (showCurrentGpx) {
-				list.add(0, activity.getString(R.string.shared_string_currently_recording_track));
+				list.add(activity.getString(R.string.shared_string_currently_recording_track));
+			}
+
+			for (SelectedGpxFile selectedGpx : selectedGpxFiles) {
+				list.add(selectedGpx.getGpxFile().path.substring(gpxDirLength + 1));
 			}
 
 			final ContextMenuAdapter adapter = createGpxContextMenuAdapter(activity, list, null, false,
