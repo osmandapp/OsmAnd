@@ -1,7 +1,5 @@
 package net.osmand.plus.osmedit.dialogs;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -27,10 +25,14 @@ public class PoiSubTypeDialogFragment extends DialogFragment {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		final PoiCategory a = poiTypes.getPoiCategoryByName((String) getArguments().getSerializable(KEY_POI_CATEGORY));
 		Set<String> strings = new TreeSet<>();
-		for (PoiType s : a.getPoiTypes()) {
-			if (!s.isReference() && !s.isNotEditableOsm() && s.getBaseLangType() == null) {
-				strings.add(s.getTranslation());
+		if(a == poiTypes.getOtherPoiCategory()) {
+			for (PoiCategory category : poiTypes.getCategories(false)) {
+				if (!category.isNotEditableOsm()) {
+					addCategory(category, strings);
+				}
 			}
+		} else {
+			addCategory(a, strings);
 		}
 		final String[] subCats = strings.toArray(new String[strings.size()]);
 		builder.setItems(subCats, new DialogInterface.OnClickListener() {
@@ -41,6 +43,14 @@ public class PoiSubTypeDialogFragment extends DialogFragment {
 			}
 		});
 		return builder.create();
+	}
+
+	private void addCategory(final PoiCategory a, Set<String> strings) {
+		for (PoiType s : a.getPoiTypes()) {
+			if (!s.isReference() && !s.isNotEditableOsm() && s.getBaseLangType() == null) {
+				strings.add(s.getTranslation());
+			}
+		}
 	}
 
 	public static PoiSubTypeDialogFragment createInstance(PoiCategory cat) {

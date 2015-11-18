@@ -316,14 +316,16 @@ public class EditPoiDialogFragment extends DialogFragment {
 			HashSet<String> tagsCopy = new HashSet<>();
 			tagsCopy.addAll(editPoiData.getTagValues().keySet());
 			tagsCopy.removeAll(BASIC_TAGS);
-			if (tagsCopy.isEmpty() || editPoiData.getPoiCategory() == getMyApplication().getPoiTypes().getOtherPoiCategory()) {
+			if (tagsCopy.isEmpty()) {
 				poiTypeEditText.setError(getResources().getString(R.string.please_specify_poi_type));
 			} else {
 				new SaveWithAdvancedTagsDialogFragment().show(getChildFragmentManager(), "dialog");
 			}
-			return;
+		} else if(editPoiData.getPoiCategory() == getMyApplication().getPoiTypes().getOtherPoiCategory()) {
+			poiTypeEditText.setError(getResources().getString(R.string.please_specify_poi_type));
+		} else {
+			save();
 		}
-		save();
 	}
 
 	private void save() {
