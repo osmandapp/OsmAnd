@@ -21,7 +21,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import net.osmand.PlatformUtil;
 import net.osmand.StringMatcher;
 import net.osmand.osm.AbstractPoiType;
@@ -82,7 +81,15 @@ public class AdvancedEditPoiFragment extends Fragment
 		final MapPoiTypes mapPoiTypes = ((OsmandApplication) getActivity().getApplication()).getPoiTypes();
 		mAdapter = new TagAdapterLinearLayoutHack(editTagsLineaLayout, getData());
 		// It is possible to not restart initialization every time, and probably move initialization to appInit
-		new InitTagsAndValuesAutocompleteTask(mapPoiTypes).execute();
+		Map<String, PoiType> translatedTypes = getData().getAllTranslatedSubTypes();
+		HashSet<String> tagKeys = new HashSet<>();
+		HashSet<String> valueKeys = new HashSet<>();
+		for (AbstractPoiType abstractPoiType : translatedTypes.values()) {
+			addPoiToStringSet(abstractPoiType, tagKeys, valueKeys);
+		}
+		addPoiToStringSet(mapPoiTypes.getOtherMapCategory(), tagKeys, valueKeys);
+		mAdapter.setTagData(tagKeys.toArray(new String[tagKeys.size()]));
+		mAdapter.setValueData(valueKeys.toArray(new String[valueKeys.size()]));
 		Button addTagButton = (Button) view.findViewById(R.id.addTagButton);
 		addTagButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -294,7 +301,7 @@ public class AdvancedEditPoiFragment extends Fragment
 										  Set<String> values) {
 		if (abstractPoiType instanceof PoiType) {
 			PoiType poiType = (PoiType) abstractPoiType;
-			if (poiType.isNotEditableOsm()) {
+			if (poiType.isNotEditableOsm() || poiType.getBaseLangType() != null) {
 				return;
 			}
 			if (poiType.getOsmTag() != null &&
@@ -352,14 +359,7 @@ public class AdvancedEditPoiFragment extends Fragment
 
 		@Override
 		protected void onPostExecute(Map<String, AbstractPoiType> result) {
-			HashSet<String> tagKeys = new HashSet<>();
-			HashSet<String> valueKeys = new HashSet<>();
-			for (AbstractPoiType abstractPoiType : result.values()) {
-				addPoiToStringSet(abstractPoiType, tagKeys, valueKeys);
-			}
-			addPoiToStringSet(mapPoiTypes.getOtherMapCategory(), tagKeys, valueKeys);
-			mAdapter.setTagData(tagKeys.toArray(new String[tagKeys.size()]));
-			mAdapter.setValueData(valueKeys.toArray(new String[valueKeys.size()]));
+			
 		}
 	}
 }

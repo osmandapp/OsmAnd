@@ -511,7 +511,11 @@ public class EditPoiDialogFragment extends DialogFragment {
 				//noinspection SuspiciousMethodCalls
 				if (subCategories.containsKey(item)) {
 					//noinspection SuspiciousMethodCalls
-					String keyName = subCategories.get(item).getKeyName();
+					PoiType pt = subCategories.get(item);
+					String keyName = pt.getKeyName();
+					if(pt != null) {
+						poiTypeTextInputLayout.setHint(pt.getCategory().getTranslation());
+					}
 					poiTypeEditText.setText(keyName);
 				}
 			}
