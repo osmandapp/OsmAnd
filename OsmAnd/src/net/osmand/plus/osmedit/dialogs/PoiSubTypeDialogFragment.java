@@ -1,20 +1,19 @@
 package net.osmand.plus.osmedit.dialogs;
 
+import java.util.Map;
+import java.util.Set;
+
+import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiCategory;
+import net.osmand.osm.PoiType;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.osmedit.EditPoiDialogFragment;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
-import net.osmand.data.Amenity;
-import net.osmand.osm.MapPoiTypes;
-import net.osmand.osm.PoiCategory;
-import net.osmand.osm.PoiType;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.osmedit.EditPoiDialogFragment;
-
-import java.util.Map;
-import java.util.Set;
 
 public class PoiSubTypeDialogFragment extends DialogFragment {
 	private static final String KEY_POI_CATEGORY = "amenity";

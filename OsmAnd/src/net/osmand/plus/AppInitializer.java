@@ -55,7 +55,8 @@ import btools.routingapp.BRouterServiceConnection;
  */
 public class AppInitializer implements IProgress {
 	// 22 - 2.2
-	private static final int CURRENT_VERSION_FOR_UGPRADE = 22;
+	private static final int VERSION_2_2 = 22;
+	private static final int CURRENT_VERSION_FOR_UGPRADE = VERSION_2_2;
 
 	
 	public static final boolean TIPS_AND_TRICKS = false;
@@ -132,13 +133,13 @@ public class AppInitializer implements IProgress {
 			firstTime = true;
 			startPrefs.edit().putBoolean(FIRST_TIME_APP_RUN, true).commit();
 			startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
-			startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, CURRENT_VERSION_FOR_UGPRADE).commit();
+			startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_2_2).commit();
 		} else if (!Version.getFullVersion(app).equals(startPrefs.getString(VERSION_INSTALLED, ""))) {
-			if(startPrefs.getInt(VERSION_INSTALLED_NUMBER, 0) < 22) {
+			if(startPrefs.getInt(VERSION_INSTALLED_NUMBER, 0) < VERSION_2_2) {
 				app.getSettings().SHOW_DASHBOARD_ON_START.set(true);
 				app.getSettings().SHOW_DASHBOARD_ON_MAP_SCREEN.set(true);
 				app.getSettings().SHOW_CARD_TO_CHOOSE_DRAWER.set(true);
-				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, CURRENT_VERSION_FOR_UGPRADE).commit();
+				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_2_2).commit();
 			}
 			startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
 			appVersionChanged = true;
