@@ -138,6 +138,7 @@ public class AppInitializer implements IProgress {
 				app.getSettings().SHOW_DASHBOARD_ON_START.set(true);
 				app.getSettings().SHOW_DASHBOARD_ON_MAP_SCREEN.set(true);
 				app.getSettings().SHOW_CARD_TO_CHOOSE_DRAWER.set(true);
+				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, CURRENT_VERSION_FOR_UGPRADE).commit();
 			}
 			startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
 			appVersionChanged = true;
