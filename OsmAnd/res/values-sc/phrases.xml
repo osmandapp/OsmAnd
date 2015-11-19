@@ -527,7 +527,7 @@
 	<string name="poi_cape">Ispuntone/promontòriu</string>
 	<string name="poi_reef">Costera</string>
 	<string name="poi_anchorage">Ancoràggiu</string>
-	<string name="poi_beacon">Faru/fogu de sinnalatzione</string>
+	<string name="poi_beacon">Sinnale marinu</string>
 	<string name="poi_berth">Atracu</string>
 	<string name="poi_dyke">Àrgine</string>
 	<string name="poi_floating_dock">Pontinu gallegiante</string>
@@ -921,7 +921,7 @@
 
 	<string name="poi_landfill_waste_nuclear">Arga nucleare</string>
 	<string name="poi_allotments">Giardinos familiares</string>
-	<string name="poi_basin">Bacinu</string>
+	<string name="poi_basin">Batzinu</string>
 	<string name="poi_monitoring_station">Istatzione de cuntrollu</string>
 	<string name="poi_brownfield">Terrinu abbandonadu</string>
 	<string name="poi_greenfield">Terrinu egadu</string>
@@ -1090,7 +1090,7 @@
 	<string name="poi_internet_access_yes">Atzessu a ìnternet: eja</string>
 	<string name="poi_internet_access_no">Atzessu a ìnternet: nono</string>
 
-	<string name="poi_seamark_building">Edifìtziu nàutico</string>
+	<string name="poi_seamark_building">Edifìtziu nàuticu</string>
 	<string name="poi_seamark_bridge">Ponte nàuticu</string>
 	<string name="poi_highway_crossing">Coladòrgiu pedonale</string>
 
@@ -1708,4 +1708,31 @@
 	<string name="poi_fireworks">Butega de fogos de artifìtziu</string>
 
 <string name="poi_craft_electronics">Acontzadura de eletrodomèsticos</string>
+	<string name="poi_sewing">Mertzeria</string>
+	<string name="poi_craft_carpenter">Mastru de carros (carpentiere)</string>
+	<string name="poi_funeral_directors">Pompas fùnebres</string>
+	<string name="poi_dock">Dársena</string>
+	<string name="poi_rapids">Tràinos</string>
+	<string name="poi_strait">Astrintura</string>
+	<string name="poi_anchor_berth">Logu de ancoràgiu</string>
+	<string name="poi_beacon_cardinal">Sinnale cardinale</string>
+	<string name="poi_beacon_lateral">Sinnale laterale</string>
+	<string name="poi_beacon_safe_water">Sinnale de abbas seguras</string>
+	<string name="poi_beacon_special_purpose">Sinnale ispetziale</string>
+	<string name="poi_buoy_cardinal">Boa cardinale</string>
+	<string name="poi_buoy_installation">Boa de càrrigu e iscàrrigu</string>
+	<string name="poi_buoy_isolated_danger">Boa de perìgulu isuladu</string>
+	<string name="poi_buoy_lateral">Boa laterale</string>
+	<string name="poi_buoy_safe_water">Boa de abbas seguras</string>
+	<string name="poi_buoy_special_purpose">Boa ispetziale</string>
+	<string name="poi_daymark">Sinnale diurnu</string>
+	<string name="poi_distance_mark">Sinnale de distàntzia</string>
+	<string name="poi_dry_dock">Batzinu de carenàgiu</string>
+	<string name="poi_harbour_basin">Batzinu portuale</string>
+	<string name="poi_full_height_turnstile">Tornellu a tota artària</string>
+	<string name="poi_bump_gate">Cantzellu a corfu</string>
+	<string name="poi_stile">Iscalita</string>
+	<string name="poi_debris">Carràrgiu</string>
+	<string name="poi_jersey_barrier">Blocos prefabricados (jersey barrier)</string>
+	<string name="poi_horse_stile">Iscalita pro caddos</string>
 	</resources>
