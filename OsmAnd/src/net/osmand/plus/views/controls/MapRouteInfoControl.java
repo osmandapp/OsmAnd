@@ -92,9 +92,9 @@ public class MapRouteInfoControl implements IRouteInformationListener {
 	public void setVisible(boolean visible) {
 		if(visible) {
 			if (showDialog){
-				if (getTargets().getPointToNavigate() == null){
+				//if (getTargets().getPointToNavigate() == null){
 					showDialog();
-				}
+				//}
 				showDialog = false;
 			}
 			controlVisible = true;

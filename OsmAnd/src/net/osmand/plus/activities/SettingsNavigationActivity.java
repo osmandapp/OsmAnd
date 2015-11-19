@@ -199,17 +199,18 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		if (!mode.isDerivedRoutingFrom(ApplicationMode.CAR)) {
 			category.removePreference(speedLimitExceed);
 		}
-		
-		Integer[] delayIntervals = new Integer[] { -1, 3, 5, 7, 10, 15, 20 };
-		String[] delayIntervalNames = new String[delayIntervals.length];
-		for (int i = 0; i < delayIntervals.length; i++) {
-			if (i == 0) {
-				delayIntervalNames[i] = getString(R.string.auto_follow_route_never);
-			} else {
-				delayIntervalNames[i] = delayIntervals[i] + " " + getString(R.string.int_seconds);
-			}
-		}
-		registerListPreference(settings.DELAY_TO_START_NAVIGATION, screen, delayIntervalNames, delayIntervals);
+
+		// deprecated 2.2
+//		Integer[] delayIntervals = new Integer[] { -1, 3, 5, 7, 10, 15, 20 };
+//		String[] delayIntervalNames = new String[delayIntervals.length];
+//		for (int i = 0; i < delayIntervals.length; i++) {
+//			if (i == 0) {
+//				delayIntervalNames[i] = getString(R.string.auto_follow_route_never);
+//			} else {
+//				delayIntervalNames[i] = delayIntervals[i] + " " + getString(R.string.int_seconds);
+//			}
+//		}
+		// registerListPreference(settings.DELAY_TO_START_NAVIGATION, screen, delayIntervalNames, delayIntervals);
 
 
 		if(getIntent() != null && getIntent().hasExtra(INTENT_SKIP_DIALOG)) {

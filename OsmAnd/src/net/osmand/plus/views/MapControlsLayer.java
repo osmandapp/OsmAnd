@@ -374,12 +374,13 @@ public class MapControlsLayer extends OsmandMapLayer {
 		notifyClicked();
 		mapRouteInfoControlDialog.hideDialog();
 		optionsRouteControlDialog.hideDialog();
-		RoutingHelper routingHelper = mapActivity.getMyApplication().getRoutingHelper();
-		if (!routingHelper.isFollowingMode() && !routingHelper.isRoutePlanningMode()) {
-			mapActivity.getMapActions().enterRoutePlanningMode(null, null, false);
-		} else {
+//		RoutingHelper routingHelper = mapActivity.getMyApplication().getRoutingHelper();
+//		if (!routingHelper.isFollowingMode() && !routingHelper.isRoutePlanningMode()) {
+			// never possible
+//			mapActivity.getMapActions().enterRoutePlanningMode(null, null, false);
+//		} else {
 			startNavigation();
-		}
+//		}
 	}
 
 	public void showRouteInfoControlDialog() {
@@ -446,13 +447,11 @@ public class MapControlsLayer extends OsmandMapLayer {
 				notifyClicked();
 				RoutingHelper routingHelper = mapActivity.getRoutingHelper();
 				if (!routingHelper.isFollowingMode() && !routingHelper.isRoutePlanningMode()) {
-					mapActivity.getMapActions().enterRoutePlanningMode(null, null, false);
+					mapActivity.getMapActions().enterRoutePlanningMode(null, null);
 				} else {
 					switchToRoutePlanningLayout();
 				}
 			}
-
-			
 		});
 	}
 	
@@ -537,9 +536,10 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	}
 
+	@Deprecated
 	public void startCounter() {
 		OsmandSettings settings = mapActivity.getMyApplication().getSettings();
-		int del = settings.DELAY_TO_START_NAVIGATION.get();
+		int del = 0; // settings.DELAY_TO_START_NAVIGATION.get();
 		if (del <= 0) {
 			return;
 		}

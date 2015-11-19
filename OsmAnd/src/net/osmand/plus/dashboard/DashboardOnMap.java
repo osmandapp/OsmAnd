@@ -597,7 +597,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 	public void navigationAction() {
 		RoutingHelper routingHelper = mapActivity.getRoutingHelper();
 		if (!routingHelper.isFollowingMode() && !routingHelper.isRoutePlanningMode()) {
-			mapActivity.getMapActions().enterRoutePlanningMode(null, null, false);
+			mapActivity.getMapActions().enterRoutePlanningMode(null, null);
 		} else {
 			mapActivity.getRoutingHelper().setRoutePlanningMode(true);
 			mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();

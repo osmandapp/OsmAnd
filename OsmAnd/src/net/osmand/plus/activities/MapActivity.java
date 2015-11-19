@@ -516,7 +516,7 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents {
 
 				getMyApplication().getTargetPointsHelper().navigateToPoint(new LatLon(lat, lon), false,
 						-1);
-				getMapActions().enterRoutePlanningMode(null, null, false);
+				getMapActions().enterRoutePlanningModeGivenGpx(null, null, null);
 			} catch (NumberFormatException e) {
 				AccessibleToast.makeText(this,
 						getString(R.string.navigation_intent_invalid, schemeSpecificPart),
@@ -541,7 +541,7 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents {
 			Location loc = new Location("map");
 			loc.setLatitude(mapView.getLatitude());
 			loc.setLongitude(mapView.getLongitude());
-			getMapActions().enterRoutePlanningMode(null, null, status == OsmandSettings.NAVIGATE_CURRENT_GPX);
+			getMapActions().enterRoutePlanningModeGivenGpx(null, null, null);
 			if (dashboardOnMap.isVisible()) {
 				dashboardOnMap.hideDashboard();
 			}
