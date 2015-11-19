@@ -214,9 +214,6 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				l.collectObjectsFromPoint(point, tileBox, s);
 				for (Object o : s) {
 					selectedObjects.put(o, l);
-//					if (l instanceof IContextMenuProviderSelection) {
-//						((IContextMenuProviderSelection) l).setSelectedObject(o);
-//					}
 				}
 			}
 		}

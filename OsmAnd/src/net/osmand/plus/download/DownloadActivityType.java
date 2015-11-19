@@ -62,6 +62,7 @@ public class DownloadActivityType {
 	public DownloadActivityType(int stringResource, String tag, int orderIndex) {
 		this.stringResource = stringResource;
 		this.tag = tag;
+		this.orderIndex = orderIndex;
 		byTag.put(tag, this);
 		iconResource = R.drawable.ic_map;
 	}
