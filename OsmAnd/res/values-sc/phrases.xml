@@ -1735,4 +1735,8 @@
 	<string name="poi_debris">Carràrgiu</string>
 	<string name="poi_jersey_barrier">Blocos prefabricados (jersey barrier)</string>
 	<string name="poi_horse_stile">Iscalita pro caddos</string>
+	<string name="poi_kissing_gate">Cantzellu \"a zigzag\" o \"a V\"</string>
+	<string name="poi_sally_port">Barriera coberta cun ghenna dòpia</string>
+	<string name="poi_swing_gate">Cantzellu girèvole</string>
+	<string name="poi_kent_carriage_gap">Coladòrgiu pro carros a caddu</string>
 	</resources>
