@@ -19,8 +19,8 @@
 	<string name="traffic_warning_calming">Verkehrsberuhigung</string>
 	<string name="traffic_warning_speed_camera">Geschwindigkeitskontrolle</string>
 	<string name="traffic_warning">Verkehrswarnung</string>
-	<string name="speak_favorites">Nahegelegene Favoriten ankündigen</string>
-	<string name="speak_poi">Nahegelegene POI ankündigen</string>
+	<string name="speak_favorites">Nahegelegene Favoriten</string>
+	<string name="speak_poi">Nahegelegene POI</string>
 	
 	
 	
@@ -286,10 +286,10 @@
 	<string name="index_name_europe">Europa</string>
 	<string name="index_name_france">Europa - Frankreich</string>
 	<string name="index_name_germany">Europa - Deutschland</string>
-	<string name="index_name_russia">Europa/Asien - Russland</string>
+	<string name="index_name_russia">Russland</string>
 	<string name="index_name_africa">Afrika</string>
 	<string name="index_name_asia">Asien</string>
-	<string name="index_name_oceania">Ozeanien</string>
+	<string name="index_name_oceania">Australien und Ozeanien</string>
 	<string name="index_name_other">Weltweite und thematische Karten</string>
 	<string name="index_name_wiki">Weltweite Wikipedia POIs</string>
 	<string name="index_name_voice">Sprachpakete (Aufnahmen - begrenzte Funktionalität)</string>
@@ -328,7 +328,7 @@
 	<string name="user_password">OSM-Kennwort</string>
 	<string name="user_password_descr">Nötig für openstreetmap.org-Beiträge</string>
 	<string name="osmand_service">Hintergrunddienst</string>
-	<string name="osmand_service_descr">Für Verwendung von OsmAnd bei ausgeschalteter Anzeige</string>
+	<string name="osmand_service_descr">OsmAnd läuft bei ausgeschalteter Anzeige im Hintergrund</string>
 	
 	
 	
@@ -687,7 +687,7 @@
 	<string name="int_min">Min.</string>
 	<string name="background_service_provider_descr">Art der Standortbestimmung beim Hintergrunddienst</string>
 	<string name="background_service_provider">Standortbestimmung</string>
-	<string name="off_router_service_no_gps_available">Die Hintergrundnavigation erfordert aktiviertes GPS.</string>
+	<string name="off_router_service_no_gps_available">Die Hintergrundnavigation erfordert aktivierte Standortdienste.</string>
 	<string name="hide_poi_filter">Filter verstecken</string>
 	<string name="show_poi_filter">Filter zeigen</string>
 	<string name="search_poi_filter">Filter</string>
@@ -1166,7 +1166,7 @@
 	<string name="access_arrival_time">Ankunftszeit</string>
 	<string name="map_widget_gps_info">GPS-Info</string>
 
-	<string name="street_name">Straße</string>
+	<string name="street_name">Straßenname</string>
 	<string name="hno">Hausnummer</string>
 	
 	
@@ -1225,9 +1225,9 @@
 	<string name="av_photo_play_sound">Ton bei Auslösung abspielen</string>
 	<string name="av_photo_play_sound_descr">Auswählen, ob beim Aufnehmen eines Fotos ein Ton abgespielt werden soll</string>
 	
-	<string name="speak_speed_limit">Höchstgeschwindigkeit ansagen</string>
-	<string name="speak_cameras">Blitzer ansagen</string>
-	<string name="speak_traffic_warnings">Verkehrswarnungen ansagen</string>
+	<string name="speak_speed_limit">Tempolimit</string>
+	<string name="speak_cameras">Blitzer</string>
+	<string name="speak_traffic_warnings">Verkehrswarnungen</string>
 	<string name="osb_author_or_password_not_specified">Bitte OSM-Nutzername und Passwort in den Einstellungen eingeben</string>
 	<string name="clear_intermediate_points">Zwischenziele löschen</string>
 	<string name="keep_intermediate_points">Zwischenziele behalten</string>
@@ -1252,7 +1252,7 @@
 	<string name="driving_region_canada">Kanada</string>
 	<string name="driving_region_europe_asia">Europa und Asien</string>
 	<string name="driving_region_uk">GB, Indien, Australien u.a.</string>
-	<string name="announce_gpx_waypoints">GPX-Wegpunkte ansagen</string>
+	<string name="announce_gpx_waypoints">GPX-Wegpunkte</string>
 	<string name="driving_region">Fahrgebiet</string>
 	<string name="about_version">Version :</string>
 	<string name="shared_string_about">Über</string>
@@ -1721,7 +1721,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 <string name="download_additional_maps">Fehlende Karten herunterladen: %1$s (%2$d MB)?</string>
     <string name="shared_string_more">Mehr…</string>
     <string name="osmo_specify_tracker_id">Bitte ID eingeben</string>
-    <string name="home">Übersicht</string>
+    <string name="home">Dashboard</string>
     <string name="rendering_attr_publicTransportMode_name">Bus-, Oberleitungsbus-, Sammeltaxi-Linien</string>
 	<string name="record_plugin_name">Streckenaufzeichnung</string>
     <string name="int_hour">h</string>
@@ -1814,7 +1814,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="rendering_value_americanRoadAtlas_name">Amerikanischer Straßenatlas</string>
     <string name="routing_attr_no_new_routing_name">Routing-Regeln v1.9 nicht verwenden</string>
     <string name="routing_attr_no_new_routing_description">Neuen Routenalgorithmus nicht verwenden</string>
-    <string name="speak_pedestrian">Fußgängerübergänge ankündigen</string>
+    <string name="speak_pedestrian">Fußgängerübergänge</string>
     
     <string name="parking_place">Parkplätze</string>
     <string name="remove_the_tag">TAG ENTFERNEN</string>
@@ -2034,7 +2034,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="successfully_uploaded_pattern">Erfolgreich hochgeladen {0}/{1}</string>
 	<string name="try_again">Erneut versuchen</string>
 	<string name="error_message_pattern">Fehler: {0}</string>
-	<string name="dahboard_options_dialog_title">Übersicht konfigurieren</string>
+	<string name="dahboard_options_dialog_title">Dashboard konfigurieren</string>
 	<string name="shared_string_undo">Rückgängig machen</string>
 	<string name="shared_string_skip">Überspringen</string>
 	<string name="app_name_osmand">OsmAnd</string>
@@ -2047,7 +2047,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 <string name="routing_attr_avoid_shuttle_train_name">Pendelzug vermeiden</string>
 	<string name="routing_attr_avoid_shuttle_train_description">Pendelzug vermeiden</string>
     <string name="plugin_settings">Plugins</string>
-	<string name="building_number">Gebäude-Nummer</string>
+	<string name="building_number">Hausnummer</string>
 	<string name="opening_at">geöffnet ab</string>
 	<string name="closing_at">geschlossen ab</string>
 <string name="si_nm">Nautische Meilen</string>
@@ -2138,14 +2138,14 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="feedback">Feedback</string>
     <string name="contact_us">Kontakt</string>
     <string name="map_legend">Kartenlegende</string>
-    <string name="access_from_map_description">Plaziert einen Dashboard-Knopf auf dem Bildschirm</string>
+    <string name="access_from_map_description">Menü-Knopf zeigt Dashboard, nicht Menü</string>
     <string name="show_on_start_description">\"Aus\" startet direkt die Kartenansicht.</string>
     <string name="copied_to_clipboard">in die Zwischenablage kopiert</string>
-    <string name="release_2_2">" • Neue Kontext-bezogene Benutzeroberfläche bei Auswahl von Orten auf der Karte und anderen Ansichten\n\n • Kartenansicht wird nun direkt gestartet, außer bei Auswahl von \'Zeige Dashboard bei App-Start\'\n\n • Auswahl der anzuzeigenden Elemente im Dashboard möglich\n\n • Zum Herunterladen von Kartendateien können nun Regionen direkt durch Tippen auf der Weltkarte ausgewählt werden\n\n • Die POI-Suche ermöglicht nun speziellere Abfragen\n\n • Verbesserungen beim Editieren von POI- und OSM-Objekten\n\n • Oberfläche und Struktur zum Herunterladen der Karten wurden überarbeitet\n\n und mehr ... "</string>
+    <string name="release_2_2">" • Neue Kontext-bezogene Benutzeroberfläche bei Auswahl von Orten auf der Karte und anderen Ansichten\n\n • Kartenansicht wird nun direkt gestartet, außer bei Auswahl von \'Zeige Dashboard bei App-Start\'\n\n • Auswahl der anzuzeigenden Elemente im Dashboard möglich\n\n • Dashboard kann umgangen werden, falls menü-basierte App-Steuerung gewünscht ist\n\n • Zum Herunterladen von Kartendateien können nun Regionen direkt durch Tippen auf der Weltkarte ausgewählt werden\n\n • Die POI-Suche ermöglicht nun speziellere Abfragen\n\n • Verbesserungen beim Editieren von POI- und OSM-Objekten\n\n • Oberfläche und Struktur zum Herunterladen der Karten wurden überarbeitet\n\n und mehr ... "</string>
     <string name="osm_save_offline">offline speichern</string>
     <string name="osm_edit_modified_poi">geänderter OSM-POI</string>
     <string name="osm_edit_deleted_poi">OSM-POI löschen</string>
-    <string name="context_menu_item_open_note">Offene OSM-Notiz</string>
+    <string name="context_menu_item_open_note">OSM-Notiz erstellen</string>
     <string name="osm_edit_reopened_note">Wiedereröffnete OSM-Notiz</string>
     <string name="osm_edit_commented_note">Kommentierte OSM-Notiz</string>
     <string name="osm_edit_removed_note">Gelöschte OSM-Notiz</string>
@@ -2182,8 +2182,12 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="enter_country_name">Name des Landes eingeben</string>
     <string name="save_poi_without_poi_type_message">Soll der POI wirklich ohne Art des POI gespeichert werden?</string>
     <string name="poi_context_menu_modify_osm_change">OSM-Änderung bearbeiten</string>
-    <string name="use_dashboard_btn">Dashboard immer starten</string>
-    <string name="use_drawer_btn">Kartenansicht immer starten</string>
-    <string name="dashboard_or_drawer_title">Neue Auswahl des Startvorgangs</string>
-    <string name="dashboard_or_drawer_description">Es ist nun auswählbar, ob beim Start der App gleich die Kartenansicht oder das Dashboard angezeigt wird. (Jederzeit in den Dashboard-Einstellungen änderbar)</string>
-</resources>
+    <string name="use_dashboard_btn">Dashboard verwenden</string>
+    <string name="use_drawer_btn">Menü verwenden</string>
+    <string name="dashboard_or_drawer_title">Auswahl der App-Bedienung</string>
+    <string name="dashboard_or_drawer_description">Es ist nun auswählbar, ob die App primär über das flexible Dashboard oder über ein statisches Menü bedient werden soll. (Jederzeit in den Dashboard-Einstellungen änderbar)</string>
+    <string name="access_from_map">Aufruf von der Karte aus</string>
+    <string name="favorite_category_add_new">neu erstellen</string>
+    <string name="next_proceed">Weiter</string>
+	<string name="file_size_in_mb">%.1f MB</string>
+    </resources>

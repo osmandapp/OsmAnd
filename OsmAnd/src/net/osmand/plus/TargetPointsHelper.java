@@ -123,13 +123,31 @@ public class TargetPointsHelper {
 		return intermediatePoints;
 	}
 	
+	public List<TargetPoint> getIntermediatePointsNavigation() {
+		List<TargetPoint> intermediatePoints = new ArrayList<>();
+		if (settings.USE_INTERMEDIATE_POINTS_NAVIGATION.get()) {
+			for (TargetPoint t : intermediatePoints) {
+				intermediatePoints.add(t);
+			}
+		}
+		return intermediatePoints;
+	}
+	
 	public List<LatLon> getIntermediatePointsLatLon() {
 		List<LatLon> intermediatePointsLatLon = new ArrayList<LatLon>();
-		
 		for (TargetPoint t : intermediatePoints) {
 			intermediatePointsLatLon.add(t.point);
 		}
-		
+		return intermediatePointsLatLon;
+	}
+	
+	public List<LatLon> getIntermediatePointsLatLonNavigation() {
+		List<LatLon> intermediatePointsLatLon = new ArrayList<LatLon>();
+		if (settings.USE_INTERMEDIATE_POINTS_NAVIGATION.get()) {
+			for (TargetPoint t : intermediatePoints) {
+				intermediatePointsLatLon.add(t.point);
+			}
+		}
 		return intermediatePointsLatLon;
 	}
 
@@ -209,13 +227,14 @@ public class TargetPointsHelper {
 	private void updateRoutingHelper() {
 		LatLon start = settings.getPointToStart();
 		Location lastKnownLocation = ctx.getLocationProvider().getLastKnownLocation();
+		List<LatLon> is = getIntermediatePointsLatLonNavigation();
 		if((routingHelper.isFollowingMode() && lastKnownLocation != null) || start == null) {
 			routingHelper.setFinalAndCurrentLocation(settings.getPointToNavigate(),
-				settings.getIntermediatePoints(), lastKnownLocation);
+					is, lastKnownLocation);
 		} else {
 			Location loc = wrap(start);
 			routingHelper.setFinalAndCurrentLocation(settings.getPointToNavigate(),
-					settings.getIntermediatePoints(), loc);
+					is, loc);
 		}
 	}
 

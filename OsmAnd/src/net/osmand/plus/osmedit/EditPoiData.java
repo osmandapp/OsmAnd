@@ -187,6 +187,7 @@ public class EditPoiData {
 		if(pt != null) {
 			tagValues.remove(pt.getOsmTag());
 			tagValues.remove(pt.getOsmTag2());
+			category = pt.getCategory();
 		}
 		notifyDatasetChanged(POI_TYPE_TAG);
 	}

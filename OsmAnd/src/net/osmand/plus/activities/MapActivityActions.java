@@ -87,64 +87,6 @@ public class MapActivityActions implements DialogProvider {
 		routingHelper = mapActivity.getMyApplication().getRoutingHelper();
 	}
 
-	public void showNavigationContextMenuPoint(final double latitude, final double longitude) {
-		final ContextMenuAdapter adapter = new ContextMenuAdapter(mapActivity);
-
-		if (!mapActivity.getRoutingHelper().isFollowingMode() && !mapActivity.getRoutingHelper().isRoutePlanningMode()) {
-			adapter.item(R.string.context_menu_item_directions_to).iconColor(
-					R.drawable.ic_action_gdirections_dark).reg();
-			adapter.item(R.string.context_menu_item_directions_from).iconColor(
-					R.drawable.ic_action_gdirections_dark).reg();
-		}
-		final TargetPointsHelper targets = getMyApplication().getTargetPointsHelper();
-		if (targets.getPointToNavigate() != null) {
-			adapter.item(R.string.context_menu_item_destination_point).iconColor(R.drawable.ic_action_flag_dark).reg();
-			adapter.item(R.string.context_menu_item_intermediate_point).iconColor(R.drawable.ic_action_flage_dark).reg();
-			// For button-less search UI
-		} else {
-			adapter.item(R.string.context_menu_item_destination_point).iconColor(R.drawable.ic_action_flag_dark).reg();
-		}
-
-		getMyApplication().getAppCustomization().prepareLocationMenu(mapActivity, adapter);
-
-		final AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
-		builder.setTitle(R.string.get_directions);
-		final ArrayAdapter<?> listAdapter =
-				adapter.createListAdapter(mapActivity, getMyApplication().getSettings().isLightContent());
-		builder.setAdapter(listAdapter, new DialogInterface.OnClickListener() {
-
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				int standardId = adapter.getElementId(which);
-				OnContextMenuClick click = adapter.getClickAdapter(which);
-				if (click != null) {
-					click.onContextMenuClick(listAdapter, standardId, which, false);
-				} else if (standardId == R.string.context_menu_item_directions_to) {
-					targets.navigateToPoint(new LatLon(latitude, longitude), true, -1, null);
-					enterRoutePlanningMode(null, null, false);
-				} else if (standardId == R.string.context_menu_item_directions_from) {
-					enterRoutePlanningMode(new LatLon(latitude, longitude),
-							mapActivity.getContextMenu().getPointDescription(), false);
-				} else if (standardId == R.string.context_menu_item_intermediate_point ||
-						standardId == R.string.context_menu_item_destination_point) {
-					boolean dest = standardId == R.string.context_menu_item_destination_point;
-					targets.navigateToPoint(new LatLon(latitude, longitude), true,
-							dest ? -1 : targets.getIntermediatePoints().size(),
-							mapActivity.getContextMenu().getPointDescription());
-					if (targets.getIntermediatePoints().size() > 0) {
-						openIntermediatePointsDialog();
-					}
-				}
-			}
-		});
-		builder.create().show();
-	}
-
-	public void directionTo(double latitude, double longitude, PointDescription pd) {
-		final TargetPointsHelper targets = getMyApplication().getTargetPointsHelper();
-		targets.navigateToPoint(new LatLon(latitude, longitude), true, targets.getIntermediatePoints().size() + 1, pd);
-		enterRoutePlanningMode(null, null, false);
-	}
 
 	public void addAsWaypoint(double latitude, double longitude, PointDescription pd) {
 		TargetPointsHelper targets = getMyApplication().getTargetPointsHelper();
@@ -336,7 +278,6 @@ public class MapActivityActions implements DialogProvider {
 					R.drawable.ic_action_gdirections_dark).reg();
 		}
 		OsmandPlugin.registerMapContextMenu(mapActivity, latitude, longitude, adapter, selectedObj);
-		getMyApplication().getAppCustomization().prepareLocationMenu(mapActivity, adapter);
 
 		final AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
 		final ArrayAdapter<?> listAdapter =
@@ -358,7 +299,7 @@ public class MapActivityActions implements DialogProvider {
 				} else if (standardId == R.string.context_menu_item_directions_from) {
 					mapActivity.getContextMenu().hide();
 					enterRoutePlanningMode(new LatLon(latitude, longitude),
-							mapActivity.getContextMenu().getPointDescription(), false);
+							mapActivity.getContextMenu().getPointDescription());
 				}
 			}
 		});
@@ -395,7 +336,8 @@ public class MapActivityActions implements DialogProvider {
 		}
 	}
 
-	public void enterRoutePlanningMode(final LatLon from, final PointDescription fromName, boolean useCurrentGPX) {
+	public void enterRoutePlanningMode(final LatLon from, final PointDescription fromName) {
+		final boolean useIntermediatePointsByDefault = true;
 		List<SelectedGpxFile> selectedGPXFiles = mapActivity.getMyApplication().getSelectedGpxHelper()
 				.getSelectedGPXFiles();
 		final List<GPXFile> gpxFiles = new ArrayList<GPXFile>();
@@ -407,14 +349,14 @@ public class MapActivityActions implements DialogProvider {
 			}
 		}
 
-		if (gpxFiles.size() > 0 && !useCurrentGPX) {
+		if (gpxFiles.size() > 0) {
 			AlertDialog.Builder bld = new AlertDialog.Builder(mapActivity);
 			if (gpxFiles.size() == 1) {
 				bld.setMessage(R.string.use_displayed_track_for_navigation);
 				bld.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						enterRoutePlanningModeImpl(gpxFiles.get(0), from, fromName);
+						enterRoutePlanningModeGivenGpx(gpxFiles.get(0), from, fromName, useIntermediatePointsByDefault);
 					}
 				});
 			} else {
@@ -436,7 +378,7 @@ public class MapActivityActions implements DialogProvider {
 				bld.setAdapter(adapter, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialogInterface, int i) {
-						enterRoutePlanningModeImpl(gpxFiles.get(i), from, fromName);
+						enterRoutePlanningModeGivenGpx(gpxFiles.get(i), from, fromName, useIntermediatePointsByDefault);
 					}
 				});
 			}
@@ -444,17 +386,17 @@ public class MapActivityActions implements DialogProvider {
 			bld.setNegativeButton(R.string.shared_string_no, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					enterRoutePlanningModeImpl(null, from, fromName);
+					enterRoutePlanningModeGivenGpx(null, from, fromName, useIntermediatePointsByDefault);
 				}
 			});
 			bld.show();
 		} else {
-			enterRoutePlanningModeImpl(useCurrentGPX ? gpxFiles.get(0) : null, from, fromName);
+			enterRoutePlanningModeGivenGpx(null, from, fromName, useIntermediatePointsByDefault);
 		}
 	}
 
-	private void enterRoutePlanningModeImpl(GPXFile gpxFile, LatLon from, PointDescription fromName) {
-
+	public void enterRoutePlanningModeGivenGpx(GPXFile gpxFile, LatLon from, PointDescription fromName, boolean useIntermediatePointsByDefault) {
+		settings.USE_INTERMEDIATE_POINTS_NAVIGATION.set(useIntermediatePointsByDefault);
 		OsmandApplication app = mapActivity.getMyApplication();
 		TargetPointsHelper targets = app.getTargetPointsHelper();
 
@@ -627,7 +569,7 @@ public class MapActivityActions implements DialogProvider {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
 						if (!routingHelper.isFollowingMode() && !routingHelper.isRoutePlanningMode()) {
-							enterRoutePlanningMode(null, null, false);
+							enterRoutePlanningMode(null, null);
 						} else {
 							mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
 							mapActivity.refreshMap();

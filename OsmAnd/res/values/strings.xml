@@ -8,21 +8,22 @@
          If you are making/correcting English translations make sure:
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
-    --> 
-    <string name="access_from_map_description">Places a dashboard button on the map screen</string>
+    -->
+    <string name="access_from_map_description">Menu button launches dashboard, not menu</string>
     <string name="access_from_map">Access from map</string>
     <string name="show_on_start_description">\'Off\' directly launches the map screen</string>
     <string name="show_on_start">Show on start</string>
     <string name="copied_to_clipboard">Copied to clipboard</string>
     <string name="release_2_2">
-        \u2022 New context-sensitive UI for tapping locations on the map and on other screens\n\n
-        \u2022 Map screen is now launched directly unless \'Show dashboard on app start\' is selected\n\n
-        \u2022 Configure which and how cards are displayed on the dashboard\n\n
-        \u2022 To download maps, regions can be directly selected by tapping on the world map\n\n
-        \u2022 POI Search now supports more specific queries\n\n
+	\u2022 New context-sensitive UI for tapping locations on the map and on other screens\n\n
+	\u2022 Map screen is now launched directly unless \'Show dashboard on app start\' is selected\n\n
+	\u2022 Configure which and how cards are displayed on the dashboard\n\n
+	\u2022 Bypass the dashboard if you like menu-based app control\n\n
+	\u2022 To download maps, regions can be directly selected by tapping on the world map\n\n
+	\u2022 POI Search now supports more specific queries\n\n
 	\u2022 Improved POI and OSM editing functionality\n\n
-        \u2022 Map data download structure and interface reworked\n\n
-        and more...
+	\u2022 Map data download structure and interface reworked\n\n
+	and more...
         </string>
     <string name="osm_save_offline">Save offline</string>
     <string name="osm_edit_modified_poi">Modified OSM POI</string>
@@ -2091,8 +2092,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="map_legend">Map legend</string>
     <string name="save_poi_without_poi_type_message">Do you really want to save poi without POI type?</string>
     <string name="poi_context_menu_modify_osm_change">Modify OSM change</string>
-    <string name="use_dashboard_btn">Launch dashboard</string>
-    <string name="use_drawer_btn">Launch map</string>
-    <string name="dashboard_or_drawer_title">New startup choice</string>
-    <string name="dashboard_or_drawer_description">You can now select if the app directly launches the map screen or always displays the dashboard first. Your choice can always be changed in the dashboard settings.</string>
+    <string name="use_dashboard_btn">Use dashboard</string>
+    <string name="use_drawer_btn">Use menu</string>
+    <string name="dashboard_or_drawer_title">Dashboard or menu control</string>
+    <string name="dashboard_or_drawer_description">There is a new choice to primarily control the app via the flexible dashboard or a static menu. Your choice can always be changed in the dashboard settings.</string>
 </resources>

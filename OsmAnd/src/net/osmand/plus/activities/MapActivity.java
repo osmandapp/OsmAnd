@@ -442,7 +442,7 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents {
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		if (routingHelper.isFollowingMode()
 				&& (!Algorithms.objectEquals(targets.getPointToNavigate().point, routingHelper.getFinalLocation()) || !Algorithms
-				.objectEquals(targets.getIntermediatePointsLatLon(), routingHelper.getIntermediatePoints()))) {
+				.objectEquals(targets.getIntermediatePointsLatLonNavigation(), routingHelper.getIntermediatePoints()))) {
 			targets.updateRouteAndReferesh(true);
 		}
 		app.getLocationProvider().resumeAllUpdates();
@@ -516,7 +516,7 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents {
 
 				getMyApplication().getTargetPointsHelper().navigateToPoint(new LatLon(lat, lon), false,
 						-1);
-				getMapActions().enterRoutePlanningMode(null, null, false);
+				getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, false);
 			} catch (NumberFormatException e) {
 				AccessibleToast.makeText(this,
 						getString(R.string.navigation_intent_invalid, schemeSpecificPart),
@@ -541,7 +541,7 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents {
 			Location loc = new Location("map");
 			loc.setLatitude(mapView.getLatitude());
 			loc.setLongitude(mapView.getLongitude());
-			getMapActions().enterRoutePlanningMode(null, null, status == OsmandSettings.NAVIGATE_CURRENT_GPX);
+			getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true);
 			if (dashboardOnMap.isVisible()) {
 				dashboardOnMap.hideDashboard();
 			}
@@ -550,7 +550,7 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents {
 			if (dashboardOnMap.isVisible()) {
 				dashboardOnMap.hideDashboard();
 			}
-			if (mapLabelToShow != null) {
+			if (mapLabelToShow != null && !mapLabelToShow.contextMenuDisabled()) {
 				mapContextMenu.setMapCenter(latLonToShow);
 				mapContextMenu.setMapPosition(mapView.getMapPosition());
 				mapContextMenu.show(latLonToShow, mapLabelToShow, toShow);

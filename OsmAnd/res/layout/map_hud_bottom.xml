@@ -125,6 +125,7 @@
                         android:layout_height="fill_parent"
                         android:layout_gravity="bottom"
                         android:gravity="center_horizontal"
+                        android:lineSpacingMultiplier="0.9"
                         android:text="100 m"
                         android:textSize="@dimen/map_widget_text_size_small" />
                     
@@ -134,6 +135,7 @@
                         android:layout_height="fill_parent"
                         android:layout_gravity="bottom"
                         android:gravity="center_horizontal"
+                        android:lineSpacingMultiplier="0.9"
                         android:text="100 m"
                         android:textSize="@dimen/map_widget_text_size_small" />
 

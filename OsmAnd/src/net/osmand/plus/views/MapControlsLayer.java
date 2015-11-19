@@ -95,6 +95,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private MapHudButton mapZoomIn;
 	private MapHudButton layersHud;
 	private MapHudButton mapDashControl;
+	private long lastZoom;
 
 	public MapControlsLayer(MapActivity activity) {
 		this.mapActivity = activity;
@@ -374,12 +375,13 @@ public class MapControlsLayer extends OsmandMapLayer {
 		notifyClicked();
 		mapRouteInfoControlDialog.hideDialog();
 		optionsRouteControlDialog.hideDialog();
-		RoutingHelper routingHelper = mapActivity.getMyApplication().getRoutingHelper();
-		if (!routingHelper.isFollowingMode() && !routingHelper.isRoutePlanningMode()) {
-			mapActivity.getMapActions().enterRoutePlanningMode(null, null, false);
-		} else {
+//		RoutingHelper routingHelper = mapActivity.getMyApplication().getRoutingHelper();
+//		if (!routingHelper.isFollowingMode() && !routingHelper.isRoutePlanningMode()) {
+			// never possible
+//			mapActivity.getMapActions().enterRoutePlanningMode(null, null, false);
+//		} else {
 			startNavigation();
-		}
+//		}
 	}
 
 	public void showRouteInfoControlDialog() {
@@ -446,13 +448,11 @@ public class MapControlsLayer extends OsmandMapLayer {
 				notifyClicked();
 				RoutingHelper routingHelper = mapActivity.getRoutingHelper();
 				if (!routingHelper.isFollowingMode() && !routingHelper.isRoutePlanningMode()) {
-					mapActivity.getMapActions().enterRoutePlanningMode(null, null, false);
+					mapActivity.getMapActions().enterRoutePlanningMode(null, null);
 				} else {
 					switchToRoutePlanningLayout();
 				}
 			}
-
-			
 		});
 	}
 	
@@ -537,9 +537,10 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	}
 
+	@Deprecated
 	public void startCounter() {
 		OsmandSettings settings = mapActivity.getMyApplication().getSettings();
-		int del = settings.DELAY_TO_START_NAVIGATION.get();
+		int del = 0; // settings.DELAY_TO_START_NAVIGATION.get();
 		if (del <= 0) {
 			return;
 		}
@@ -619,16 +620,20 @@ public class MapControlsLayer extends OsmandMapLayer {
 		if(routeFollowingMode || routePlanningMode) {
 			mapAppModeShadow.setVisibility(View.GONE);
 		} else {
+			if (mapView.isZooming()) {
+				lastZoom = System.currentTimeMillis();
+			}
 			mapAppModeShadow.setVisibility(View.VISIBLE);
-			if (!mapView.isZooming() || !OsmandPlugin.isDevelopment()) {
+			//if (!mapView.isZooming() || !OsmandPlugin.isDevelopment()) {
+			if ((System.currentTimeMillis()-lastZoom > 1000) || !OsmandPlugin.isDevelopment()) {
 				zoomText.setVisibility(View.GONE);
 				appModeIcon.setVisibility(View.VISIBLE);
 				appModeIcon.setImageDrawable(
 						app.getIconsCache().getIcon(
 								settings.getApplicationMode().getSmallIconDark(), !isNight));
 			} else {
-				zoomText.setVisibility(View.VISIBLE);
 				appModeIcon.setVisibility(View.GONE);
+				zoomText.setVisibility(View.VISIBLE);
 				zoomText.setText(getZoomLevel(tileBox));
 			}
 		}

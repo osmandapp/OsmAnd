@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="osb_author_or_password_not_specified">Моля, въведете потребителско име и парола за сайта на OSM</string>
     <string name="clear_intermediate_points">Изчистване на междинните точки</string>
     <string name="keep_intermediate_points">Запази междинните точки</string>
@@ -2020,4 +2021,11 @@ OsmAnd е с отворен код и активно да се развива. �
     <string name="shared_string_navigation">Навигация</string>
     <string name="osmand_running_in_background">Работи във фонов режим</string>
     <string name="favourites_edit_dialog_title">Предпочитана информация</string>
+    <string name="show_on_start">Да се показва при стартиране</string>
+    <string name="copied_to_clipboard">Копирано</string>
+    <string name="release_2_2">" • Нов контекстно-ориентиран интерфейс\n\n • При стартиране на приложението се извежда картата, освен ако не е избрано  \'Показване на таблото при стартиране\'\n\n • Настройване на контролите върху таблото за управление\n\n • Пропускане на таблото, ако предпочитате приложение с меню\n\n • To download maps, regions can be directly selected by tapping on the world map\n\n • POI Search now supports more specific queries\n\n • Improved POI and OSM editing functionality\n\n • Map data download structure and interface reworked\n\n и още... "</string>
+    <string name="osm_save_offline">Запази офлайн</string>
+    <string name="osm_edit_modified_poi">Модифицирани OSM POI</string>
+    <string name="osm_edit_deleted_poi">Изтрити OSM POI</string>
+    <string name="context_menu_item_open_note">Отвори OSM бележка</string>
     </resources>
