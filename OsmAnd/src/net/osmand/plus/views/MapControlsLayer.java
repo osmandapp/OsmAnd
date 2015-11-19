@@ -625,7 +625,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			}
 			mapAppModeShadow.setVisibility(View.VISIBLE);
 			//if (!mapView.isZooming() || !OsmandPlugin.isDevelopment()) {
-			//if ((System.currentTimeMillis()-lastZoom > 1000) || !OsmandPlugin.isDevelopment()) {
+			if ((System.currentTimeMillis()-lastZoom > 1000) || !OsmandPlugin.isDevelopment()) {
 				zoomText.setVisibility(View.GONE);
 				appModeIcon.setVisibility(View.VISIBLE);
 				appModeIcon.setImageDrawable(
