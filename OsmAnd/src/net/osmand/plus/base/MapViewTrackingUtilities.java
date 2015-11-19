@@ -336,11 +336,11 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 				RotatedTileBox tb = new RotatedTileBox(rt);
 				
 				tb.setPixelDimensions(4 * tb.getPixWidth() / 5, 4 * tb.getPixHeight() / 5);
-				double clat = bottom + top / 5;
+				double clat = 5 * bottom / 4 - top / 4;
 				double clon = left / 2 + right / 2;
 				// TODO for landscape menu
 //				double clat = bottom / 2 + top / 2;
-//				double clon = left + right / 5;
+//				double clon = 5 * left / 4 - right / 4;
 				tb.setLatLonCenter(clat, clon);
 				while(tb.getZoom() >= 7 && (!tb.containsLatLon(top, left) || !tb.containsLatLon(bottom, right))) {
 					tb.setZoom(tb.getZoom() - 1);
