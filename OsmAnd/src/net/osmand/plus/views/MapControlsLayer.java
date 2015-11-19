@@ -95,6 +95,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private MapHudButton mapZoomIn;
 	private MapHudButton layersHud;
 	private MapHudButton mapDashControl;
+	private long lastZoom;
 
 	public MapControlsLayer(MapActivity activity) {
 		this.mapActivity = activity;
@@ -619,16 +620,20 @@ public class MapControlsLayer extends OsmandMapLayer {
 		if(routeFollowingMode || routePlanningMode) {
 			mapAppModeShadow.setVisibility(View.GONE);
 		} else {
+			if (mapView.isZooming()) {
+				lastZoom = System.currentTimeMillis();
+			}
 			mapAppModeShadow.setVisibility(View.VISIBLE);
-			if (!mapView.isZooming() || !OsmandPlugin.isDevelopment()) {
+			//if (!mapView.isZooming() || !OsmandPlugin.isDevelopment()) {
+			//if ((System.currentTimeMillis()-lastZoom > 1000) || !OsmandPlugin.isDevelopment()) {
 				zoomText.setVisibility(View.GONE);
 				appModeIcon.setVisibility(View.VISIBLE);
 				appModeIcon.setImageDrawable(
 						app.getIconsCache().getIcon(
 								settings.getApplicationMode().getSmallIconDark(), !isNight));
 			} else {
-				zoomText.setVisibility(View.VISIBLE);
 				appModeIcon.setVisibility(View.GONE);
+				zoomText.setVisibility(View.VISIBLE);
 				zoomText.setText(getZoomLevel(tileBox));
 			}
 		}
