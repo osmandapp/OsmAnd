@@ -1,7 +1,9 @@
 package net.osmand.osm;
 
+import net.osmand.CollatorStringMatcher;
 import net.osmand.PlatformUtil;
 import net.osmand.StringMatcher;
+import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.data.Amenity;
 import net.osmand.util.Algorithms;
 
@@ -166,8 +168,8 @@ public class MapPoiTypes {
 		return translation;
 	}
 	
-	public Map<String, AbstractPoiType> getAllTypesTranslatedNames(StringMatcher matcher) {
-		Map<String, AbstractPoiType> tm = new TreeMap<String, AbstractPoiType>(Collator.getInstance());
+	public List<AbstractPoiType> getAllTypesTranslatedNames(StringMatcher matcher) {
+		List<AbstractPoiType> tm = new ArrayList<AbstractPoiType>(); 
 		for (PoiCategory pc : categories) {
 			if(pc == otherMapCategory) {
 				continue;
@@ -187,9 +189,9 @@ public class MapPoiTypes {
 		return tm;
 	}
 	
-	private void addIf(Map<String, AbstractPoiType> tm, AbstractPoiType pc, StringMatcher matcher) {
+	private void addIf(List<AbstractPoiType> tm, AbstractPoiType pc, StringMatcher matcher) {
 		if(matcher.matches(pc.getTranslation()) || matcher.matches(pc.getKeyName().replace('_', ' '))) {
-			tm.put(pc.getTranslation(), pc);
+			tm.add(pc);
 		}
 		List<PoiType> additionals = pc.getPoiAdditionals();
 		if (additionals != null) {
@@ -502,10 +504,10 @@ public class MapPoiTypes {
 		List<PoiFilter> lf = DEFAULT_INSTANCE.getTopVisibleFilters();
 		for(PoiFilter l : lf) {
 			System.out.println("----------------- " + l.getKeyName());
-			print("", l);
+//			print("", l);
 			Map<PoiCategory, LinkedHashSet<String>> m = 
 					l.putTypes(new LinkedHashMap<PoiCategory, LinkedHashSet<String>>());
-			System.out.println(m);
+//			System.out.println(m);
 		}
 		
 	}
