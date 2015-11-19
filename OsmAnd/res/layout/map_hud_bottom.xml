@@ -58,7 +58,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="top|center"
                 android:gravity="center_horizontal"
-                <!-- android:layout_marginTop="3dp" -->
                 android:textSize="@dimen/map_button_text_size" />
         </FrameLayout>
 
