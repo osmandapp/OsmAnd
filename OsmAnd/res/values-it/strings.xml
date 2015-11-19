@@ -2050,7 +2050,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="context_menu_item_edit_waypoint">Modifica i waypoint del GPX</string>
     <string name="shared_string_location">Localizzazione</string>
     <string name="poi_context_menu_modify_osm_change">Modifica gli edit OSM</string>
-    <string name="access_from_map_description">"Metti il pulsante  del pannello di controllo nello schermo della mappa"</string>
+    <string name="access_from_map_description">"Il pulsante  del menu apre il pannello di controllo non il menu"</string>
     <string name="access_from_map">Accedi dalla mappa</string>
     <string name="copied_to_clipboard">Copiato negli appunti</string>
     <string name="osm_save_offline">Salva offline</string>
