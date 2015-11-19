@@ -2138,7 +2138,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="feedback">Feedback</string>
     <string name="contact_us">Kontakt</string>
     <string name="map_legend">Kartenlegende</string>
-    <string name="access_from_map_description">Plaziert einen Dashboard-Knopf auf dem Bildschirm</string>
+    <string name="access_from_map_description">Menü-Knopf zeigt Dashboard, nicht Menü</string>
     <string name="show_on_start_description">\"Aus\" startet direkt die Kartenansicht.</string>
     <string name="copied_to_clipboard">in die Zwischenablage kopiert</string>
     <string name="release_2_2">" • Neue Kontext-bezogene Benutzeroberfläche bei Auswahl von Orten auf der Karte und anderen Ansichten\n\n • Kartenansicht wird nun direkt gestartet, außer bei Auswahl von \'Zeige Dashboard bei App-Start\'\n\n • Auswahl der anzuzeigenden Elemente im Dashboard möglich\n\n • Zum Herunterladen von Kartendateien können nun Regionen direkt durch Tippen auf der Weltkarte ausgewählt werden\n\n • Die POI-Suche ermöglicht nun speziellere Abfragen\n\n • Verbesserungen beim Editieren von POI- und OSM-Objekten\n\n • Oberfläche und Struktur zum Herunterladen der Karten wurden überarbeitet\n\n und mehr ... "</string>
@@ -2186,7 +2186,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="use_drawer_btn">Kartenansicht starten</string>
     <string name="dashboard_or_drawer_title">Neue Auswahl des Startvorgangs</string>
     <string name="dashboard_or_drawer_description">Es ist nun auswählbar, ob beim Start der App gleich die Kartenansicht oder das Dashboard angezeigt wird. (Jederzeit in den Dashboard-Einstellungen änderbar)</string>
-<string name="access_from_map">Aufruf von der Karte aus</string>
+    <string name="access_from_map">Aufruf von der Karte aus</string>
     <string name="favorite_category_add_new">neu erstellen</string>
     <string name="next_proceed">Weiter</string>
 	<string name="file_size_in_mb">%.1f MB</string>
