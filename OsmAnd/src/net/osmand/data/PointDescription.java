@@ -41,6 +41,7 @@ public class PointDescription {
 	public static final String POINT_TYPE_OSM_BUG = "bug";
 	public static final String POINT_TYPE_WORLD_REGION = "world_region";
 	public static final String POINT_TYPE_GPX_ITEM = "gpx_item";
+	public static final String POINT_TYPE_WORLD_REGION_SHOW_ON_MAP = "world_region_show_on_map";
 
 
 	public static final PointDescription LOCATION_POINT = new PointDescription(POINT_TYPE_LOCATION, "");
@@ -147,6 +148,10 @@ public class PointDescription {
 				return ctx.getString(sh ? R.string.short_location_on_map : R.string.location_on_map, 0, 0); 
 			}
 		}
+	}
+
+	public boolean contextMenuDisabled() {
+		return POINT_TYPE_WORLD_REGION_SHOW_ON_MAP.equals(type);
 	}
 
 	public boolean isLocation() {

@@ -550,7 +550,7 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents {
 			if (dashboardOnMap.isVisible()) {
 				dashboardOnMap.hideDashboard();
 			}
-			if (mapLabelToShow != null) {
+			if (mapLabelToShow != null && !mapLabelToShow.contextMenuDisabled()) {
 				mapContextMenu.setMapCenter(latLonToShow);
 				mapContextMenu.setMapPosition(mapView.getMapPosition());
 				mapContextMenu.show(latLonToShow, mapLabelToShow, toShow);
