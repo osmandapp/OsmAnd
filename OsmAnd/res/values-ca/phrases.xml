@@ -1887,4 +1887,21 @@
 	<string name="poi_bridge_structure_simple_wooden">Estructura del pont: fusta senzilla</string>
 	<string name="poi_bridge_structure_viaduct">Estructura del pont: viaducte</string>
 	<string name="poi_bridge_structure_aqueduct">Estructura del pont: aqüeducte</string>
+	<string name="poi_service_bicycle_chaintool_yes">Eines per la cadena de la bicicleta: sí</string>
+	<string name="poi_service_bicycle_chaintool_no">Eines per la cadena de la bicicleta: no</string>
+	<string name="poi_service_bicycle_second_hand_yes">Venda al detall de bicicletes de segona mà: sí</string>
+	<string name="poi_service_bicycle_second_hand_no">Venda al detall de bicicletes de segona mà: no</string>
+
+	<string name="poi_training_language">Formació: idioma</string>
+	<string name="poi_training_music">Formació: música</string>
+	<string name="poi_training_dance">Formació: dansa</string>
+	<string name="poi_training_sport">Formació: esport</string>
+	<string name="poi_training_art">Formació: art</string>
+	<string name="poi_training_cooking">Formació: cuina</string>
+	<string name="poi_training_computer">Formació: informàtica</string>
+	<string name="poi_training_yoga">Formació: ioga</string>
+	<string name="poi_training_martial_art">Formació: arts marcials</string>
+	<string name="poi_training_aviation">Formació: aviació</string>
+	<string name="poi_training_hairdressing">Formació: perruqueria</string>
+
 	</resources>
