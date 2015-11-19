@@ -948,7 +948,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		mapActivity.getSupportFragmentManager().beginTransaction()
 				.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
 				.add(R.id.fragmentContainer, fragment, TAG)
-				.addToBackStack(TAG).commit();
+				.addToBackStack(TAG).commitAllowingStateLoss();
 	}
 
 	//DownloadEvents
