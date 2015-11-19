@@ -1823,7 +1823,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="rendering_value_disabled_name">Disabilitato</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Colorazione in base al tipo di percorso</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Colorazione in base a OSMC</string>
-    <string name="osm_edit_context_menu_delete">Cancella le modifiche OSM</string>
+    <string name="osm_edit_context_menu_delete">Cancella modifica OSM</string>
     <string name="archive_wikipedia_data">Ci sono dati Wikipedia scaricati desueti e incompatibili. Vuoi archiviarli?</string>
     <string name="download_wikipedia_files">Vuoi scaricare i dati aggiuntivi di Wikipedia (%1$s MB) ?</string>
     <string name="gps_network_not_enabled">Il servizio di localizzazione non è attivo. Vuoi avviarlo?</string>
