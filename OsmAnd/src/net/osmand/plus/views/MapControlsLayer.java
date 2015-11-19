@@ -634,6 +634,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			} else {
 				appModeIcon.setVisibility(View.GONE);
 				zoomText.setVisibility(View.VISIBLE);
+				zoomText.setTextColor(textColor);
 				zoomText.setText(getZoomLevel(tileBox));
 			}
 		}
