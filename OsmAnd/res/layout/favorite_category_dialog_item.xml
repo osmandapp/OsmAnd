@@ -11,7 +11,7 @@
         android:drawableLeft="@drawable/ic_action_folder"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:background="?android:selectableItemBackground"
+        android:background="?attr/selectableItemBackground"
         android:text="Restaurant"
         android:gravity="left|center_vertical"
         android:textSize="@dimen/default_list_text_size"
