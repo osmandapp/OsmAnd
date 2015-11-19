@@ -507,6 +507,12 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 		if (visibleType == DashboardType.WAYPOINTS || visibleType == DashboardType.WAYPOINTS_EDIT
 				|| force) {
 			updateListAdapter();
+		} else if (visibleType == DashboardType.CONFIGURE_MAP) {
+			int index = listView.getFirstVisiblePosition();
+			View v = listView.getChildAt(0);
+			int top = (v == null) ? 0 : (v.getTop() - listView.getPaddingTop());
+			updateListAdapter();
+			listView.setSelectionFromTop(index, top);
 		} else {
 			listAdapter.notifyDataSetChanged();
 		}
