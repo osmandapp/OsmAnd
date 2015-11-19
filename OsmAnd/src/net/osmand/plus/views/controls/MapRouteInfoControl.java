@@ -441,7 +441,7 @@ public class MapRouteInfoControl implements IRouteInformationListener {
 	public String generateViaDescription() {
 		TargetPointsHelper targets = getTargets();
 		String via = "";
-		List<TargetPoint> points = targets.getIntermediatePoints();
+		List<TargetPoint> points = targets.getIntermediatePointsNavigation();
 		if (points.size() == 0) {
 			return via;
 		}

@@ -355,7 +355,7 @@ public class MapContextMenu extends MenuTitleController {
 		hide();
 		final TargetPointsHelper targets = mapActivity.getMyApplication().getTargetPointsHelper();
 		targets.navigateToPoint(latLon, true, targets.getIntermediatePoints().size() + 1, getPointDescription());
-		mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null);
+		mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, false);
 //		mapActivity.getMapLayers().getMapControlsLayer().showRouteInfoControlDialog();
 	}
 

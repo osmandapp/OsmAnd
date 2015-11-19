@@ -442,7 +442,7 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents {
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		if (routingHelper.isFollowingMode()
 				&& (!Algorithms.objectEquals(targets.getPointToNavigate().point, routingHelper.getFinalLocation()) || !Algorithms
-				.objectEquals(targets.getIntermediatePointsLatLon(), routingHelper.getIntermediatePoints()))) {
+				.objectEquals(targets.getIntermediatePointsLatLonNavigation(), routingHelper.getIntermediatePoints()))) {
 			targets.updateRouteAndReferesh(true);
 		}
 		app.getLocationProvider().resumeAllUpdates();
@@ -516,7 +516,7 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents {
 
 				getMyApplication().getTargetPointsHelper().navigateToPoint(new LatLon(lat, lon), false,
 						-1);
-				getMapActions().enterRoutePlanningModeGivenGpx(null, null, null);
+				getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, false);
 			} catch (NumberFormatException e) {
 				AccessibleToast.makeText(this,
 						getString(R.string.navigation_intent_invalid, schemeSpecificPart),
@@ -541,7 +541,7 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents {
 			Location loc = new Location("map");
 			loc.setLatitude(mapView.getLatitude());
 			loc.setLongitude(mapView.getLongitude());
-			getMapActions().enterRoutePlanningModeGivenGpx(null, null, null);
+			getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true);
 			if (dashboardOnMap.isVisible()) {
 				dashboardOnMap.hideDashboard();
 			}

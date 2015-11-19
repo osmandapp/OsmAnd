@@ -337,6 +337,7 @@ public class MapActivityActions implements DialogProvider {
 	}
 
 	public void enterRoutePlanningMode(final LatLon from, final PointDescription fromName) {
+		final boolean useIntermediatePointsByDefault = true;
 		List<SelectedGpxFile> selectedGPXFiles = mapActivity.getMyApplication().getSelectedGpxHelper()
 				.getSelectedGPXFiles();
 		final List<GPXFile> gpxFiles = new ArrayList<GPXFile>();
@@ -355,7 +356,7 @@ public class MapActivityActions implements DialogProvider {
 				bld.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						enterRoutePlanningModeGivenGpx(gpxFiles.get(0), from, fromName);
+						enterRoutePlanningModeGivenGpx(gpxFiles.get(0), from, fromName, useIntermediatePointsByDefault);
 					}
 				});
 			} else {
@@ -377,7 +378,7 @@ public class MapActivityActions implements DialogProvider {
 				bld.setAdapter(adapter, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialogInterface, int i) {
-						enterRoutePlanningModeGivenGpx(gpxFiles.get(i), from, fromName);
+						enterRoutePlanningModeGivenGpx(gpxFiles.get(i), from, fromName, useIntermediatePointsByDefault);
 					}
 				});
 			}
@@ -385,17 +386,17 @@ public class MapActivityActions implements DialogProvider {
 			bld.setNegativeButton(R.string.shared_string_no, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					enterRoutePlanningModeGivenGpx(null, from, fromName);
+					enterRoutePlanningModeGivenGpx(null, from, fromName, useIntermediatePointsByDefault);
 				}
 			});
 			bld.show();
 		} else {
-			enterRoutePlanningModeGivenGpx(null, from, fromName);
+			enterRoutePlanningModeGivenGpx(null, from, fromName, useIntermediatePointsByDefault);
 		}
 	}
 
-	public void enterRoutePlanningModeGivenGpx(GPXFile gpxFile, LatLon from, PointDescription fromName) {
-
+	public void enterRoutePlanningModeGivenGpx(GPXFile gpxFile, LatLon from, PointDescription fromName, boolean useIntermediatePointsByDefault) {
+		settings.USE_INTERMEDIATE_POINTS_NAVIGATION.set(useIntermediatePointsByDefault);
 		OsmandApplication app = mapActivity.getMyApplication();
 		TargetPointsHelper targets = app.getTargetPointsHelper();
 

@@ -1500,6 +1500,9 @@ public class OsmandSettings {
 		return settingsAPI.edit(globalPreferences).remove(INTERMEDIATE_POINTS).remove(INTERMEDIATE_POINTS_DESCRIPTION).commit();
 	}
 	
+	public final CommonPreference<Boolean> USE_INTERMEDIATE_POINTS_NAVIGATION = 
+			new BooleanPreference("use_intermediate_points_navigation", false).makeGlobal().cache();
+	
 	public List<String> getIntermediatePointDescriptions(int sz) {
 		List<String> list = new ArrayList<String>();
 		String ip = settingsAPI.getString(globalPreferences,INTERMEDIATE_POINTS_DESCRIPTION, "");
