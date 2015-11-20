@@ -10,7 +10,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 
 public abstract class BaseMenuController {
 
-	public final static float LANDSCAPE_WIDTH_DP = 350f;
+	public final static float LANDSCAPE_WIDTH_DP = 366f;
 
 	private MapActivity mapActivity;
 	private boolean portraitMode;
