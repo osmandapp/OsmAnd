@@ -3,7 +3,10 @@
  */
 package net.osmand.plus.activities.search;
 
+import java.text.Collator;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -139,9 +142,17 @@ public class SearchPoiFilterFragment extends OsmAndListFragment implements Searc
 					filters.add(pf);
 				}
 			}
-			Map<String, AbstractPoiType> res = 
+			List<AbstractPoiType> res = 
 					app.getPoiTypes().getAllTypesTranslatedNames(new CollatorStringMatcher(s, StringMatcherMode.CHECK_STARTS_FROM_SPACE));
-			for(AbstractPoiType p : res.values()) {
+			final Collator inst = Collator.getInstance();
+			Collections.sort(res, new Comparator<AbstractPoiType>() {
+				@Override
+				public int compare(AbstractPoiType lhs, AbstractPoiType rhs) {
+					return inst.compare(lhs.getTranslation(), rhs.getTranslation());
+				}
+				
+			});
+			for(AbstractPoiType p : res) {
 				filters.add(p);
 			}
 			filters.add(poiFilters.getSearchByNamePOIFilter());

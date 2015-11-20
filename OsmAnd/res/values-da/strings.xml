@@ -2109,4 +2109,5 @@
     <string name="use_drawer_btn">Brug menuen</string>
     <string name="access_from_map_description">Menuknappen viser betjeningspanel, ikke menuen</string>
     <string name="access_from_map">Adgang fra kort</string>
+    <string name="please_specify_poi_type_only_from_list">"Angiv korrekt IP type eller spring over. "</string>
     </resources>

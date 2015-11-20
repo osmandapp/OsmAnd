@@ -1904,4 +1904,34 @@
 	<string name="poi_training_aviation">Formació: aviació</string>
 	<string name="poi_training_hairdressing">Formació: perruqueria</string>
 
+	<string name="poi_escape_lane">Zona de frenada d\'emergència</string>
+
+	<string name="poi_crop_rice">Cultiu: arròs</string>
+	<string name="poi_crop_grass">Cultiu: gespa</string>
+	<string name="poi_crop_corn">Cultiu: moresc</string>
+	<string name="poi_crop_cereal">Cultiu: cereals</string>
+	<string name="poi_crop_sugarcane">Cultiu: canya de sucre</string>
+	<string name="poi_crop_wheat">Cultiu: blat</string>
+	<string name="poi_crop_soy">Cultiu: soja</string>
+	<string name="poi_crop_barley">Cultiu: ordi</string>
+	<string name="poi_crop_vegetables">Cultiu: verdures</string>
+	<string name="poi_crop_hop">Cultiu: llúpol</string>
+	<string name="poi_crop_rape">Cultiu: colza</string>
+	<string name="poi_crop_beet">Cultiu: remolatxa</string>
+	<string name="poi_crop_lavender">Cultiu: espígol</string>
+	<string name="poi_crop_tea">Cultiu: te</string>
+	<string name="poi_crop_coffee">Cultiu: cafè</string>
+	<string name="poi_crop_poultry">Producció: aviram</string>
+	<string name="poi_crop_sunflower">Cultiu: gira-sol</string>
+	<string name="poi_crop_raspberry">Cultiu: gerd</string>
+	<string name="poi_crop_tobacco">Cultiu: tabac</string>
+	<string name="poi_crop_strawberry">Cultiu: maduixa</string>
+	<string name="poi_crop_vegetables_flowers">Cultiu: verdures i flors</string>
+	<string name="poi_crop_cassava">Cultiu: mandioca</string>
+	<string name="poi_crop_cranberry">Cultiu: nabiu de grua</string>
+	<string name="poi_crop_asparagus">Cultiu: espàrrecs</string>
+	<string name="poi_crop_flowers">Cultiu: flors</string>
+
+	<string name="poi_surveillance_indoor">Vigilància: interior</string>
+	<string name="poi_surveillance_outdoor">Vigilància: exterior</string>
 	</resources>
