@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
 
+    <string name="poi_context_menu_modify_osm_change">Редактировать POI</string>
     <string name="osm_edit_reopened_note">Заметка OSM открыта снова</string>
     <string name="osm_edit_commented_note">К заметке OSM добавлен комментарий</string>
     <string name="osm_edit_removed_note">Заметка OSM удалена</string>
