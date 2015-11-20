@@ -89,16 +89,10 @@ public class AmenityMenuController extends MenuController {
 	@Override
 	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, LatLon latLon) {
 		if (!Algorithms.isEmpty(typeStr)) {
-			int resId = 0;
 			PoiCategory pc = amenity.getType();
-			if (!Algorithms.isEmpty(getNameStr())) {
-				resId = getLeftIconId();
-			}
+			int resId = getLeftIconId();
 			if (resId == 0) {
 				resId = RenderingIcons.getBigIconResourceId(pc.getIconKeyName());
-			}
-			if (resId == 0) {
-				resId = getLeftIconId();
 			}
 			if (resId == 0) {
 				resId = R.drawable.ic_action_folder_stroke;
