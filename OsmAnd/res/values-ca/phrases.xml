@@ -123,7 +123,7 @@
 	<string name="poi_railway_station">Estació de tren</string>
 	<string name="poi_railway_platform">Andana</string>
 	<string name="poi_halt">Parada de tren (obsolet)</string>
-	<string name="poi_railway_subway_entrance">Entrada de metro</string>
+	<string name="poi_subway_entrance">Entrada de metro</string>
 	<string name="poi_subway_station">Estació de metro</string>
 	<string name="poi_taxi">Parada de taxis</string>
 

@@ -508,7 +508,7 @@
 	<string name="poi_stripclub">Stripclub</string>
 	<string name="poi_studio">Studio</string>
 	<string name="poi_suburb">Stadtteil</string>
-	<string name="poi_railway_subway_entrance">U-Bahnhofeingang</string>
+	<string name="poi_subway_entrance">U-Bahnhofeingang</string>
 	<string name="poi_subway_station">U-Bahnhof</string>
 	<string name="poi_craft_sun_protection">Lichtschutz</string>
 	<string name="poi_supermarket">Supermarkt</string>
