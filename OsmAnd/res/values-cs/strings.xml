@@ -1826,7 +1826,7 @@
     <string name="access_from_map_description">Tlačítko menu spustí domovskou obrazovku, ne menu</string>
     <string name="access_from_map">Přístup z mapy</string>
     <string name="copied_to_clipboard">Zkopírované do schránky</string>
-    <string name="release_2_2">" • Nové kontextově závislé rozhraní pro označení umístění na mapě a ostatních obrazovkách\n\n • Obrazovka mapy je přímo zpouštěná pokud není zvoleno \'Zobrazit domovskou obrazovku po startu\'\n\n • Konfigurace karet, zobrazovaných na domovské obrazovce\n\n • Domovskou obrazovku je možné obejít, pokud preferujete ovládání aplikace přes menu\n\n • Pro stáhnutí mapy je možné přímo označit oblast na mapě světa\n\n • Vyhledávání POI nyní umožňuje přesnější dotazy\n\n • Vylepšené POI a funkcionalita editace OSM\n\n • Přepracované rozhraní stahování map\n\n a další... "</string>
+    <string name="release_2_2">" • nové kontextově závislé rozhraní pro označení umístění na mapě a ostatních obrazovkách\n\n • obrazovka mapy je nyní spouštěná přímo, pokud není zvoleno \'Zobrazit domovskou obrazovku po startu\'\n\n • konfigurace karet zobrazovaných na domovské obrazovce\n\n • domovskou obrazovku je možné obejít, pokud preferujete ovládání aplikace přes menu\n\n • regiony, pro něž chcete stáhnout mapu, je nyní možné vybrat přímo na mapě světa\n\n • vyhledávání POI nyní umožňuje přesnější dotazy\n\n • vylepšená editace POI a OSM\n\n • přepracované rozhraní stahování map\n\n a další... "</string>
     <string name="osm_save_offline">Uložit offline</string>
     <string name="osm_edit_modified_poi">Upravený OSM POI</string>
     <string name="osm_edit_deleted_poi">Smazaný OSM POI</string>
