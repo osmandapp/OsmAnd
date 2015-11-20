@@ -242,7 +242,7 @@
 	<string name="poi_railway_station">Tren İstasyonu</string>
 	<string name="poi_railway_platform">Demiryolu Platformu</string>
 	<string name="poi_halt">Tren durağı</string>
-	<string name="poi_railway_subway_entrance">Metro giriş</string>
+	<string name="poi_subway_entrance">Metro giriş</string>
 	<string name="poi_subway_station">Metro İstasyonu</string>
 	<string name="poi_railway_buffer_stop">Demir yolu tampon durağı</string>
 	<string name="poi_taxi">Taksi durağı</string>
