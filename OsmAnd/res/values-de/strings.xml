@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="regions">Regionen</string>
 	<string name="region_maps">Regionsweite Karten</string>
@@ -2175,7 +2175,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="activate_seamarks_plugin">Bitte das Seezeichen-Plugin aktivieren</string>
     <string name="activate_srtm_plugin">Bitte das SRTM-Plugin aktivieren</string>
     <string name="get_full_version">Vollversion</string>
-    <string name="confirm_download_roadmaps">Soll die reine Straßenkarte wirklich heruntergeladen werden, obwohl die vollständige Karte vorhanden ist?</string>
+    <string name="confirm_download_roadmaps">Soll wirklich die reine Straßenkarte heruntergeladen werden, obwohl bereits die vollständige Standardkarte vorhanden ist?</string>
     <string name="value_downloaded_from_max">%1$.1f von %2$.1f MB</string>
     <string name="update_all">Alles aktualisieren (%1$s MB)</string>
     <string name="free_downloads_used">Verbrauchte freie Downloads</string>

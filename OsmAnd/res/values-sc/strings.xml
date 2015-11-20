@@ -1930,7 +1930,7 @@
     <string name="favorite_category_dublicate_message">Su nùmene dislindadu pro sa categoria esistit giai. Pro praghere dislinda-ne unu diferente.</string>
     <string name="favorite_category_name">Nùmene de sa categoria</string>
     <string name="favorite_category_add_new_title">Annanghe una categoria noa</string>
-    <string name="confirm_download_roadmaps">Seguru ses de bòlere iscarrigare mapas petzi istadales, fintzas si tenes giai cussas cumpridas?</string>
+    <string name="confirm_download_roadmaps">Seguru ses de bòlere iscarrigare sa mapa cun petzi sas istradas, fintzas si tenes giai cussa cumprida?</string>
     <string name="value_downloaded_from_max">%1$.1f dae %2$.1f MB</string>
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">Agiorna totu (%1$s MB)</string>
@@ -2024,4 +2024,5 @@
     <string name="access_from_map_description">Su butone de su menù alluet su pannellu de controllu, imbetzes de su menù</string>
     <string name="access_from_map">Intra dae sa mapa</string>
     <string name="release_2_2">" • Interfache impitadore noa pro incarcare positziones in sa mapa e in àteros ischermos\n\n • S\'ischermu de sa mapa est como postu come prima cosa a s’allumìngiu de s’aplicatzione, semper chi \'Ammustra pannellu de controllu in s\'allumìngiu\' no siet ischertadu\n\n • Como podes cunfigurare sas impostatziones pro isseberare cales sunt sas ischedas chi diant dèper’èssere ammustradas in su pannellu e comente\n\n • Brinca su pannellu de controllu, si preferis a impreare su menù pro sa gestione de s’aplicatzione\n\n • Pro iscarrigare mapas, sas regiones podent èssere ischertadas deretamente incarchende in sa mapa generale de su mundu\n\n • Sa chirca de PDI como suportat chircas prus dislindadas\n\n • Megioradas sas funtzionalidades de modìficas de PDI e OSM\n\n • Istrutura e s\'interfache de iscarrigamentu datos mapas torrada a fàghere\n\n e àteru... "</string>
+    <string name="please_specify_poi_type_only_from_list">"Dislinda sa casta curreta de PDI o brinca custa parte. "</string>
     </resources>

@@ -408,7 +408,7 @@
     <string name="local_index_items_backuped">%2$d 項中的 %1$d 項已順利停用。</string>
     <string name="local_index_items_deleted">%2$d 項中的 %1$d 項已順利刪除。</string>
     <string name="local_index_items_restored">%2$d 項中的 %1$d 項已順利啟動。</string>
-    <string name="local_index_action_do">您即將要 %2$s %1$s 個項目，要繼續嗎？</string>
+    <string name="local_index_action_do">您即將要 %1$s %2$s 個項目，要繼續嗎？</string>
     <string name="local_index_descr_title">管理地圖檔案</string>
     <string name="local_index_mi_restore">啟用</string>
     <string name="local_index_mi_backup">停用</string>
@@ -2013,4 +2013,5 @@
     <string name="access_from_map">從地圖進入</string>
     <string name="use_dashboard_btn">使用儀表板</string>
     <string name="use_drawer_btn">使用地圖</string>
+    <string name="please_specify_poi_type_only_from_list">"請指定正確的興趣點類型或跳過它。 "</string>
     </resources>

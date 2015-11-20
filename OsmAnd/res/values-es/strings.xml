@@ -1986,4 +1986,5 @@
     <string name="use_drawer_btn">Usar menú</string>
     <string name="access_from_map_description">El botón del menú, muestra el panel de control, en lugar del menú</string>
     <string name="access_from_map">Acceso desde el mapa</string>
+    <string name="please_specify_poi_type_only_from_list">"Especifique el tipo de PDI correcto u omítelo. "</string>
     </resources>
