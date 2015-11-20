@@ -1,0 +1,20 @@
+apply plugin: 'com.android.library'
+apply plugin: 'findbugs'
+apply plugin: 'maven'
+
+dependencies {
+    compile project(":spackleLib")
+
+}
+
+android {
+    compileSdkVersion 21
+    buildToolsVersion "23.0.1"
+
+    defaultConfig {
+        minSdkVersion System.getenv("MIN_SDK_VERSION") ? System.getenv("MIN_SDK_VERSION").toInteger() : 14
+        targetSdkVersion 21
+
+        consumerProguardFiles 'proguard-consumer.txt'
+    }
+}

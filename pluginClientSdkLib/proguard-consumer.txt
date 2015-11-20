@@ -1,0 +1,7 @@
+# If the client of this library doesn't use support-v4, warnings should be suppressed.
+-dontwarn com.twofortyfouram.locale.sdk.client.ui.activity.AbstractFragmentPluginActivity
+-dontwarn com.twofortyfouram.locale.sdk.client.ui.activity.AbstractLocaleFragmentPluginActivity
+
+# If the client of this library doesn't use support-v4 & appCompat-v4, warnings should be suppressed.
+-dontwarn com.twofortyfouram.locale.sdk.client.ui.activity.AbstractActionBarPluginActivity
+-dontwarn com.twofortyfouram.locale.sdk.client.ui.activity.AbstractLocaleActionBarPluginActivity

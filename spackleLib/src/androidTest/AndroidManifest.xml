@@ -1,0 +1,12 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.twofortyfouram.spackle">
+
+    <!-- Required for testing PartialWakeLock. -->
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+
+    <!-- Used by PermissionCompatTest. -->
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+
+    <application />
+
+</manifest>

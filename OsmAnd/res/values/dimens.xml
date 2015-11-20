@@ -5,4 +5,7 @@
   <dimen name="app_minimumsize_h">200dip</dimen>
   <dimen name="first_usage_title_margin">87dp</dimen>
   <dimen name="first_usage_title_text_size">35sp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
 </resources>

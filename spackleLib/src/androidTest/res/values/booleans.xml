@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Suppress lint warnings, since this is the correct prefix. -->
+    <eat-comment />
+    <!-- Enables debug logging. -->
+    <item name="com_twofortyfouram_log_is_debug" type="bool" tools:ignore="ResourceName">true</item>
+
+</resources>

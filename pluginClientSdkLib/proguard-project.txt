@@ -1,0 +1,20 @@
+# This improves obfuscation and moves non-public classes to their own namespace.
+-repackageclasses 'com.twofortyfouram.locale.sdk.client.internal'
+
+# Workaround for https://code.google.com/p/android/issues/detail?id=67587
+-keeppackagenames !**
+
+# This makes it easier to autocomplete methods in an IDE using this obfuscated library.
+-keepparameternames
+
+# ProGuard manual recommends keeping these attributes for libraries.
+-keepattributes EnclosingMethod,InnerClasses,Exceptions,Signature
+
+# Ensure that stacktraces are reversible.
+-renamesourcefileattribute SourceFile
+-keepattributes SourceFile,LineNumberTable
+
+# Keep the public interface of the library.
+-keep public class com.twofortyfouram.locale.sdk.client.BuildConfig { public protected *; }
+-keep public class com.twofortyfouram.locale.sdk.client.receiver.* { public protected *; }
+-keep public class com.twofortyfouram.locale.sdk.client.ui.activity.* { public protected *; }

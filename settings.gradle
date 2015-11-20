@@ -1,4 +1,4 @@
-include ':OsmAnd-java'
+include ':OsmAnd-java', ':pluginClientSdkLib', ':pluginApiLib', ':spackleLib'
 include ':eclipse-compile:cardview'
 include ':eclipse-compile:design'
 include ':eclipse-compile:appcompat'

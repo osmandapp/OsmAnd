@@ -324,6 +324,8 @@ dependencies {
 	compile project(path: ":OsmAnd-java", configuration: "android")
 	compile project(":eclipse-compile:design")
 	compile project(":eclipse-compile:cardview")
+	compile project(":pluginClientSdkLib")
+
 //	compile project(":eclipse-compile:recyclerview")
 	compile fileTree(
 			dir: "libs",

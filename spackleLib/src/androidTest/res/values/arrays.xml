@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="com_twofortyfouram_spackle_test_array">
+        <item>@string/com_twofortyfouram_spackle_test_string_key_1</item>
+        <item>@string/com_twofortyfouram_spackle_test_string_key_2</item>
+        <item>@string/com_twofortyfouram_spackle_test_string_key_3</item>
+    </string-array>
+
+</resources>

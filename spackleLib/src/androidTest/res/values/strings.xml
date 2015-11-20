@@ -1,0 +1,7 @@
+<resources>
+
+    <string name="com_twofortyfouram_spackle_test_string_key_1">test_string_value_1</string>
+    <string name="com_twofortyfouram_spackle_test_string_key_2">test_string_value_2</string>
+    <string name="com_twofortyfouram_spackle_test_string_key_3">test_string_value_3</string>
+
+</resources>

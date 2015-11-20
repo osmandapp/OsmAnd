@@ -1,0 +1,23 @@
+apply plugin: 'com.android.library'
+apply plugin: 'maven'
+apply plugin: 'findbugs'
+
+dependencies {
+    compile project(":eclipse-compile:appcompat")
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+}
+
+android {
+    compileSdkVersion 21
+    buildToolsVersion "23.0.1"
+
+    resourcePrefix 'com_twofortyfouram_spackle_'
+
+    defaultConfig {
+        minSdkVersion System.getenv("MIN_SDK_VERSION") ? System.getenv("MIN_SDK_VERSION").toInteger() : 14
+        targetSdkVersion 21
+
+        testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
+        consumerProguardFiles 'proguard-consumer.txt'
+    }
+}

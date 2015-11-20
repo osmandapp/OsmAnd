@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Suppress lint warnings, since this is the correct prefix. -->
+    <eat-comment />
+    <!-- Placeholder log tag; should be overridden via a resource overlay. -->
+    <string name="com_twofortyfouram_log_tag" tools:ignore="ResourceName"></string>
+
+</resources>
