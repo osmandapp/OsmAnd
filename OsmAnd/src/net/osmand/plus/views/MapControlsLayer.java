@@ -10,6 +10,7 @@ import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.view.MotionEvent;
 import android.view.View;
@@ -115,9 +116,13 @@ public class MapControlsLayer extends OsmandMapLayer {
 		initTopControls();
 		initTransparencyBar();
 		initZooms();
+		initDasboardRelatedControls();
+		updateControls(view.getCurrentRotatedTileBox(), null);
+	}
+
+	public void initDasboardRelatedControls() {
 		initControls();
 		initRouteControls();
-		updateControls(view.getCurrentRotatedTileBox(), null);
 	}
 
 	private class CompassDrawable extends Drawable {
@@ -194,7 +199,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			@Override
 			public void onClick(View v) {
 				notifyClicked();
-				mapActivity.getDashboard().setDashboardVisibility(true,	DashboardType.CONFIGURE_MAP);
+				mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.CONFIGURE_MAP);
 			}
 		});
 
@@ -581,7 +586,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	
 	
 
-	private void updateControls(RotatedTileBox tileBox, DrawSettings nightMode) {
+	private void updateControls(@NonNull RotatedTileBox tileBox, DrawSettings nightMode) {
 		boolean isNight = nightMode != null && nightMode.isNightMode();
 		int shadw = isNight ? Color.TRANSPARENT : Color.WHITE;
 		int textColor = isNight ? mapActivity.getResources().getColor(R.color.widgettext_night) : Color.BLACK;
@@ -936,7 +941,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		mQuickAction.show();
 	}
 
-	private String getZoomLevel(RotatedTileBox tb) {
+	private String getZoomLevel(@NonNull RotatedTileBox tb) {
 		String zoomText = tb.getZoom() + "";
 		double frac = tb.getMapDensity();
 		if (frac != 0) {

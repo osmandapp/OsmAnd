@@ -17,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -101,6 +102,7 @@ public class DashboardSettingsDialogFragment extends DialogFragment
 								((CompoundButton) showDashboardOnStart.findViewById(R.id.check_item)).isChecked());
 						settings.SHOW_DASHBOARD_ON_MAP_SCREEN.set(
 								((CompoundButton) accessFromMap.findViewById(R.id.check_item)).isChecked());
+						mapActivity.getMapLayers().getMapControlsLayer().initDasboardRelatedControls();
 					}
 				})
 				.setNegativeButton(R.string.shared_string_cancel, null);
