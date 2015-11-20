@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="auto_zoom_none">Без аўтаматычнага маштабаваньня</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="auto_zoom_none">Без аўтаматычнага маштабаваньня</string>
     <string name="auto_zoom_close">Буйней</string>
     <string name="auto_zoom_far">Для сярэдняга маштаба</string>
     <string name="auto_zoom_farthest">Драбней</string>
@@ -1790,7 +1791,7 @@
     <string name="rendering_value_disabled_name">Адключана</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Афарбоўка згодна OSMC</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Афарбоўка згодна з праглядам маршруту</string>
-    <string name="osm_edit_context_menu_delete">Выдаліць праўкі OSM</string>    
+    <string name="osm_edit_context_menu_delete">Выдаліць праўку OSM</string>    
     <string name="read_full_article">Чытаць артыкул цалкам (анлайн)</string>
     
     <string name="local_indexes_cat_wiki">Вікіпэдыя</string>
@@ -2011,4 +2012,26 @@
     <string name="save_poi_without_poi_type_message">Вы сапраўды хочаце захаваць POI бяз тыпу?</string>
     <string name="share_osm_edits_subject">Рэдагаваньні OSM апублікаваныя праз OsmAnd</string>
     <string name="shared_string_location">Месцазнаходжаньне</string>
+    <string name="copied_to_clipboard">Скапіявана ў буфер абмену</string>
+    <string name="osm_save_offline">Захаваць лякальна</string>
+    <string name="osm_edit_modified_poi">OSM POI адрэдагавана</string>
+    <string name="osm_edit_deleted_poi">OSM POI выдаленая</string>
+    <string name="context_menu_item_open_note">Дадаць нататку OSM</string>
+    <string name="osm_edit_reopened_note">Нататка OSM адкрыта зноў</string>
+    <string name="osm_edit_commented_note">Да нататкі OSM дададзены камэнтар</string>
+    <string name="osm_edit_removed_note">Нататка OSM выдаленая</string>
+	<string name="osm_edit_created_note">Нататка OSM створана</string>
+	<string name="osn_bug_name">Нататка OSM</string>
+	<string name="osn_add_dialog_title">Стварыць нататку</string>
+	<string name="osn_comment_dialog_title">Дадаць камэнтар</string>
+	<string name="osn_reopen_dialog_title">Паўторна адкрыць нататку</string>
+	<string name="osn_close_dialog_title">Закрыць нататку</string>
+	<string name="osn_add_dialog_success">Нататка пасьпяхова створана</string>
+	<string name="osn_add_dialog_error">Памылка: нататка не была створана</string>
+	<string name="osn_close_dialog_success">Нататка была пасьпяхова зачынена</string>
+	<string name="osn_close_dialog_error">Памылка: нататка ня была зачынена</string>
+	<string name="shared_string_commit">Адаслаць</string>
+	
+    <string name="rendering_attr_roadStyle_description">Стыль адлюстраваньня дарог</string>
+    <string name="poi_context_menu_modify_osm_change">Рэдагаваць POI</string>
     </resources>
