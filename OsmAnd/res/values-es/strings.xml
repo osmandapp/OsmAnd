@@ -34,7 +34,7 @@
     <string name="show_current_gpx_title">Mostrar traza actual</string>
     <string name="free_version_message">Esta versión libre de OsmAnd está limitada a %1$s descargas y no soporta artículos de Wikipedia sin conexión.</string>
     <string name="free_version_title">Versión libre</string>
-    <string name="poi_context_menu_showdescription">Mostrar descripción</string>
+    <string name="poi_context_menu_showdescription">Ver información del PDI</string>
     <string name="index_name_north_america">Norteamérica</string>
     <string name="index_name_us">Norteamérica - Estados Unidos</string>
     <string name="index_name_central_america">Centroamérica</string>
@@ -1183,7 +1183,7 @@
     <string name="auto_zoom_far">Para mediano alcance</string>
     <string name="auto_zoom_farthest">Para largo alcance</string>
     <string name="animate_routing_route_not_calculated">Primero calcule la ruta</string>
-    <string name="animate_routing_route">"Simular utilizando la ruta calculada "</string>
+    <string name="animate_routing_route">"Simular, utilizando la ruta calculada "</string>
     <string name="animate_routing_gpx">Simula utilizando traza GPX</string>
     <string name="app_mode_hiking">Senderismo</string>
     <string name="app_mode_motorcycle">Moto</string>
@@ -1670,7 +1670,7 @@
     <string name="your_edits">Tus ediciones</string>
     <string name="waypoint_visit_after">Visitar después</string>
     <string name="waypoint_visit_before">Visitar antes</string>
-    <string name="simulate_your_location">Simule su ubicación</string>
+    <string name="simulate_your_location">Simular su ubicación</string>
     <string name="drawer">Lista plana</string>
     <string name="short_location_on_map">Lat %1$s\nLon %2$s</string>
     <string name="tips_and_tricks_descr">Preguntas frecuentes, cambios recientes y otros</string>
@@ -1706,7 +1706,7 @@
     <string name="agps_data_last_downloaded">Últimos datos A-GPS descargados: %1$s</string>
     <string name="shared_string_do_not_use">No utilizar</string>
     <string name="shared_string_address">Dirección</string>
-    <string name="shared_string_show_description">Mostrar descripción</string>
+    <string name="shared_string_show_description">Mostrar información</string>
     <string name="shared_string_open">Abierto</string>
     <string name="rendering_attr_OSMMapperAssistant_name">Asistente mapeador OSM</string>
     <string name="shared_string_manage">Gestionar</string>
@@ -1856,7 +1856,7 @@
     <string name="are_you_sure">¿Está seguro?</string>
     <string name="unsaved_changes_will_be_lost">Se perderán los cambios no guardados. ¿Continuar?</string>
     <string name="simulate_your_location_stop_descr">Parar simulación de posición</string>
-    <string name="simulate_your_location_descr">Simular utilizando una ruta calculada o una grabación GPX</string>
+    <string name="simulate_your_location_descr">Simule su ubicación, utilizando una ruta calculada o una grabación GPX</string>
     <string name="downloads_left_template">Quedan %1$s descargas</string>
     <string name="default_speed_system_descr">Define el sistema de medición de velocidad</string>
     <string name="default_speed_system">Medición de la velocidad</string>
@@ -1897,7 +1897,7 @@
     <string name="favorite_category_dublicate_message">El nombre de categoría, ya existe. Defina otro nombre.</string>
     <string name="favorite_category_name">Nombre de categoría</string>
     <string name="favorite_category_add_new_title">Añadir nueva categoría</string>
-    <string name="confirm_download_roadmaps">¿Desea descargar el mapa vial, aunque tenga el mapa completo?</string>
+    <string name="confirm_download_roadmaps">¿Desea descargar el mapa de sólo carreteras, aunque ya tenga el mapa estándar (completo)?</string>
     <string name="value_downloaded_from_max">%1$.1f de %2$.1f MB</string>
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">Actualizar todo (%1$s MB)</string>
