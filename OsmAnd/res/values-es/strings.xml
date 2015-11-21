@@ -1184,7 +1184,7 @@
     <string name="auto_zoom_farthest">Para largo alcance</string>
     <string name="animate_routing_route_not_calculated">Primero calcule la ruta</string>
     <string name="animate_routing_route">"Simular, utilizando la ruta calculada "</string>
-    <string name="animate_routing_gpx">Simula utilizando traza GPX</string>
+    <string name="animate_routing_gpx">Simular utilizando traza GPX</string>
     <string name="app_mode_hiking">Senderismo</string>
     <string name="app_mode_motorcycle">Moto</string>
     <string name="app_mode_boat">Barco</string>
@@ -1250,7 +1250,7 @@
     <string name="lang_ka">Georgiano</string>
     <string name="lang_de">Alemán</string>
     <string name="lang_el">Griego</string>
-    <string name="lang_iw">Hebreo</string>
+    <string name="lang_iw">Hebreo (antiguo)</string>
     <string name="lang_hi">Hindi</string>
     <string name="lang_hu">Húngaro</string>
     <string name="lang_id">Indonesio</string>
