@@ -44,7 +44,7 @@
     <string name="lang_pt">Portughesu</string>
     <string name="lang_ro">Rumenu</string>
     <string name="lang_ru">Russu</string>
-    <string name="lang_sk">Slovaccu</string>
+    <string name="lang_sk">Islovacu</string>
     <string name="lang_sl">Islovenu</string>
     <string name="lang_es">Ispagnolu/Ispanniolu</string>
     <string name="lang_sv">Isvedesu</string>
@@ -979,7 +979,7 @@
     <string name="old_poi_file_should_be_deleted">Su documentu de datos PDI \'%1$s\' est bundajolu e podet èssere burrau.</string>
     <string name="update_poi_file_not_found">Su documentu pro registrare sas modìficas de sos PDI no est istadu ne agatadu nen creadu.</string>
     <string name="map_version_changed_info">In su server bi sunt documentos de mapas non compatìbiles cun sa versione atuale de su programma. Pro los iscarrigare e impreare agiorna s’aplicu a s\'ùritma versione.</string>
-    <string name="shared_string_rename">Torra a numenare</string>
+    <string name="shared_string_rename">Càmbia su nùmene</string>
     <string name="search_position_undefined">Non dessinidu</string>
 
     <string name="search_position_current_location">Positzione currente…</string>
