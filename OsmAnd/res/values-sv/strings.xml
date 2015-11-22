@@ -2009,4 +2009,5 @@
 	<string name="shared_string_commit">Skicka in</string>
 	
     <string name="please_specify_poi_type_only_from_list">"Ange rätt POI-typ eller hoppa över det. "</string>
+    <string name="rendering_attr_roadStyle_description">Vägtyp</string>
     </resources>

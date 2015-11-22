@@ -2028,4 +2028,18 @@ OsmAnd е с отворен код и активно да се развива. �
     <string name="osm_edit_modified_poi">Модифицирани OSM POI</string>
     <string name="osm_edit_deleted_poi">Изтрити OSM POI</string>
     <string name="context_menu_item_open_note">Отвори OSM бележка</string>
-    </resources>
+    <string name="please_specify_poi_type_only_from_list">"Моля, задайте правилния тип POI или пропуснете. "</string>
+    <string name="access_from_map_description">Бутонът \'Меню\' стартира таблото за управление</string>
+    <string name="access_from_map">Достъп от картата</string>
+    <string name="show_on_start_description">Ако е изключено се стартира с екрана на картата</string>
+    <string name="osm_edit_reopened_note">Отворена отново бележка на OSM</string>
+    <string name="osm_edit_commented_note">Бележка на OSM с коментар</string>
+    <string name="osm_edit_removed_note">Изтрита бележка на OSM</string>
+	<string name="osm_edit_created_note">Създадена бележка на OSM</string>
+	<string name="osn_bug_name">Бележка на OSM</string>
+	<string name="osn_add_dialog_title">Създайте Бележка</string>
+	<string name="osn_comment_dialog_title">Добавяне на коментар</string>
+	<string name="osn_reopen_dialog_title">Отворете наново</string>
+	<string name="osn_close_dialog_title">Затворете бележката</string>
+	<string name="osn_add_dialog_success">Бележката беше успешно създадена</string>
+	</resources>

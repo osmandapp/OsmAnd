@@ -747,7 +747,7 @@
   <string name="use_fluorescent_overlays">Odblaskowe nakładki</string>
   <string name="use_fluorescent_overlays_descr">Użyj odblaskowych kolorów do wyświetlania ścieżek i tras</string>
   <string name="offline_edition">Edycja w trybie offline</string>
-  <string name="offline_edition_descr">Zawsze edytuj w trybie offline</string>
+  <string name="offline_edition_descr">Zawsze wprowadza modyfikacje w trybie offline</string>
   
   <string name="local_openstreetmap_uploading">Wysyłanie…</string>
   <string name="local_openstreetmap_were_uploaded">Wysłano {0} POI/notatek</string>
@@ -934,7 +934,7 @@
     <string name="add_as_first_destination_point">Dodaj jako pierwszy punkt pośredni</string>
     <string name="replace_destination_point">Zamień punkt docelowy</string>
     <string name="new_destination_point_dialog">Już wybrałeś punkt docelowy.</string>
-    <string name="target_points">Punkty pośrednie</string>
+    <string name="target_points">Punkty trasy</string>
     <string name="intermediate_point_too_far">Punkt pośredni %1$s jest zbyt daleko od najbliższej ulicy.</string>
     <string name="arrived_at_intermediate_point">Dotarłeś do punktu pośredniego</string>
     <string name="context_menu_item_intermediate_point">Dodaj jako punkt pośredni</string>
@@ -1057,7 +1057,7 @@
     <string name="av_def_action_picture">Zrób zdjęcie</string>
     <string name="recording_context_menu_precord">Zrób zdjęcie</string>
     <string name="stop_routing_confirm">Czy na pewno chcesz zatrzymać nawigację?</string>
-    <string name="clear_dest_confirm">Czy na pewno chcesz usunąć punkt docelowy (oraz punkty pośrednie)?</string>
+    <string name="clear_dest_confirm">Usunąć cel podróży (oraz punkty trasy)?</string>
     <string name="precise_routing_mode">Precyzyjne trasy (alpha)</string>
     <string name="precise_routing_mode_descr">Włącz obliczanie precyzyjnych tras w nawigacji. Funkcja dość powolna, nadal jest ograniczona odległością.</string>
     <string name="local_indexes_cat_av">Dane audio/video</string>
@@ -1997,7 +1997,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="favourites">Ulubione</string>
 	<string name="saved_at_time">Zapisano o: %1$s</string>
 	<string name="poi_deleted_localy">POI zostanie usunięty gdy tylko wyślesz swoje zmiany</string>
-	<string name="show_gpx">Pokaż GPX</string>
+	<string name="show_gpx">Wyświetlanie GPX</string>
 <string name="show_on_start">Wyświetlanie podczas uruchamiania</string>
 	<string name="count_of_lines">Liczba linii</string>
 <string name="address_unknown">Adres nie jest jeszcze znany</string>
@@ -2072,7 +2072,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     
     <string name="simulate_initial_startup_descr">Ustaw flagę wskazującą pierwsze uruchomienie aplikacji, utrzymuje wszystkie inne ustawienia bez zmian</string>
     <string name="share_geo">wsp:</string>
-    <string name="confirm_download_roadmaps">Czy na pewno chcesz pobrać mapę dróg, nawet jeśli masz pełną wersję mapy?</string>
+    <string name="confirm_download_roadmaps">Pobrać mapę samochodową, nawet jeśli pobrano już zwykłą mapę?</string>
     <string name="free_downloads_used_description">Możesz ustawić ile razy pobrań użyłeś</string>
 
     <string name="show_on_start_description">\'Wyłącz\' bezpośrednio uruchamia ekran mapy</string>
@@ -2097,7 +2097,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="contact_us">Kontakt z nami</string>
     <string name="map_legend">Legenda mapy</string>
     <string name="save_poi_without_poi_type_message">Zapisać POI bez określonego rodzaju?</string>
-    <string name="access_from_map_description">Uruchamia pulpit bezpośrednio z mapy</string>
+    <string name="access_from_map_description">Wyświetla kokpit zamiast menu</string>
     <string name="access_from_map">Dostęp z mapy</string>
     <string name="copied_to_clipboard">Skopiowane do schowka</string>
     <string name="release_2_2">" • Nowe menu kontekstowe, przystosowane do wybierania lokacji na mapie oraz na innych wyświetlaczach\n\n• Mapa jest teraz wyświetlana bezpośrednio, o ile nie wybrano opcji \'Pokaż pulpit podczas startu aplikacji\'\n\n• Można skonfigurować które zakładki oraz jak będą wyświetlane na pulpicie\n\n• W celu pobrania map, interesujące nas regiony można wybrać bezpośrednio na mapie świata\n\n• Wyszukiwarka POI wspiera teraz bardziej precyzyjne zapytania\n\n• Poprawiona funkcjonalność POI oraz edytora OSM\n\n• Struktura oraz interfejs menu pobierania map zostały ulepszone\n\ni więcej ... "</string>
@@ -2118,4 +2118,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="use_drawer_btn">Pokaż mapę przy starcie</string>
     <string name="dashboard_or_drawer_description">Możesz wybrać sposób, w jakim aplikacja wystartuje: mapa lub pulpit. Możesz to zmienić później w ustawieniach.</string>
     <string name="osm_save_offline">Zapisz lokalnie</string>
+    <string name="please_specify_poi_type_only_from_list">"Proszę określić rodzaj POI lub pominąć go. "</string>
+    <string name="osm_edit_modified_poi">Zmodyfikowano POI OSM</string>
+    <string name="osm_edit_deleted_poi">Usunięto POI OSM</string>
     </resources>
