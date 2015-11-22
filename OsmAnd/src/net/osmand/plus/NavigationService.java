@@ -19,6 +19,7 @@ import android.os.IBinder;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.os.SystemClock;
+import android.support.v4.app.NotificationCompat.Builder;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -32,6 +33,7 @@ public class NavigationService extends Service implements LocationListener {
 	public static int USED_BY_NAVIGATION = 1;
 	public static int USED_BY_GPX = 2;
 	public static int USED_BY_LIVE = 4;
+	public static int USED_BY_WAKE_UP = 8;
 	public final static String USAGE_INTENT = "SERVICE_USED_BY";
 
 	private NavigationServiceBinder binder = new NavigationServiceBinder();
@@ -154,8 +156,10 @@ public class NavigationService extends Service implements LocationListener {
 
 		// registering icon at top level
 		// Leave icon visible even for navigation for proper display
-		startForeground(NotificationHelper.NOTIFICATION_SERVICE_ID, 
-				app.getNotificationHelper().buildNotificationInStatusBar().build());
+		Builder ntf = app.getNotificationHelper().buildNotificationInStatusBar();
+		if (ntf != null) {
+			startForeground(NotificationHelper.NOTIFICATION_SERVICE_ID, ntf.build());
+		}
 		return START_REDELIVER_INTENT;
 	}
 	
