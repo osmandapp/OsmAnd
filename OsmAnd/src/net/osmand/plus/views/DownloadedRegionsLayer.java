@@ -497,18 +497,15 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 			Iterator<BinaryMapDataObject> it = result.iterator();
 			while (it.hasNext()) {
 				BinaryMapDataObject o = it.next();
-				if (!osmandRegions.isDownloadOfType(o, OsmandRegions.MAP_TYPE) || !osmandRegions.contain(o, point31x, point31y)) {
+				if (!osmandRegions.contain(o, point31x, point31y) ) {
 					it.remove();
 				}
 			}
-
-			selectedObjects = result;
-
 			OsmandRegions osmandRegions = app.getRegions();
 			for (BinaryMapDataObject o : result) {
 				String fullName = osmandRegions.getFullName(o);
 				WorldRegion region = osmandRegions.getRegionData(fullName);
-				if (region != null) {
+				if (region != null && region.isRegionMapDownload()) {
 					List<IndexItem> indexItems = app.getDownloadThread().getIndexes().getIndexItems(region);
 					List<IndexItem> dataItems = new LinkedList<>();
 					IndexItem regularMapItem = null;
@@ -554,9 +551,6 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		if (o instanceof DownloadMapObject) {
 			DownloadMapObject mapObject = ((DownloadMapObject) o);
 			List<BinaryMapDataObject> list = new LinkedList<>();
-			if (selectedObjects. size() > 0) {
-				list.addAll(selectedObjects);
-			}
 			list.add(mapObject.dataObject);
 			selectedObjects = list;
 		}
