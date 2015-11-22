@@ -2010,4 +2010,5 @@
 	
     <string name="please_specify_poi_type_only_from_list">"Ange rätt POI-typ eller hoppa över det. "</string>
     <string name="rendering_attr_roadStyle_description">Vägtyp</string>
+    <string name="osm_edit_reopened_note">Öppnat OSM-anteckning igen</string>
     </resources>
