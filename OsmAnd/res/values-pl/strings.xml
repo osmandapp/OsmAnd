@@ -765,7 +765,7 @@
   <string name="live_monitoring_url_descr">Określa adres usługi internetowej przy użyciu następujących parametrów: szerokość={0}, długość={1}, znacznik czasu={2}, hdop={3}, wysokość={4}, prędkość={5}, kierunek={6}</string>
   <string name="live_monitoring_url">Adres usługi śledzenia</string>
   <string name="gpx_monitoring_disabled_warn">Zapisuj trasę używając widżetu GPX lub ustawienia „Nagrywanie trasy”.</string>
-  <string name="show_current_gpx_title">Wyświetlanie aktualnego śladu</string>
+  <string name="show_current_gpx_title">Aktualny ślad</string>
   
   <string name="free_version_message">Ta darmowa wersja OsmAnd jest ograniczona do %1$s pobrań i nie obsługuje artykułów Wikipedii w trybie offline.</string>
   <string name="free_version_title">Wersja darmowa</string>
@@ -926,8 +926,8 @@
     <string name="map_widget_monitoring_services">Usługi rejestrowania</string>
 	<string name="no_route">Brak trasy</string>
 	<string name="delete_target_point">Usuwanie punktu nawigacyjnego</string>
-	<string name="target_point">Punkt nawigacyjny %1$s</string>
-    <string name="intermediate_point">Punkt nawigacyjny %1$s</string>
+	<string name="target_point">Punkt trasy %1$s</string>
+    <string name="intermediate_point">Punkt trasy %1$s</string>
     <string name="context_menu_item_last_intermediate_point">Dodaj jako ostatni punkt pośredni</string>
     <string name="context_menu_item_first_intermediate_point">Dodaj jako pierwszy punkt pośredni</string>
     <string name="add_as_last_destination_point">Dodaj jako ostatni punkt pośredni</string>
@@ -938,7 +938,7 @@
     <string name="intermediate_point_too_far">Punkt pośredni %1$s jest zbyt daleko od najbliższej ulicy.</string>
     <string name="arrived_at_intermediate_point">Dotarłeś do punktu pośredniego</string>
     <string name="context_menu_item_intermediate_point">Dodaj jako punkt pośredni</string>
-    <string name="map_widget_intermediate_distance">Punkt nawigacyjny</string>
+    <string name="map_widget_intermediate_distance">Punkt trasy</string>
     <string name="ending_point_too_far">Punkt końcowy jest zbyt daleko od najbliższej ulicy.</string>
     <string name="add_tag">Dodaj znacznik</string>
     <string name="btn_advanced_mode">Tryb zaawansowany…</string>
@@ -1552,7 +1552,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="gpx_split_interval">Interwał podziału</string>
     <string name="loading_smth">Wczytywanie %1$s…</string>
     <string name="map_widget_plain_time">Aktualny czas</string>
-    <string name="gpx_wpt">Punkt nawigacyjny</string>
+    <string name="gpx_wpt">Punkt trasy</string>
     <string name="save_as_favorites_points">Zapisz jako grupę ulubionych</string>
     <string name="select_destination_and_intermediate_points">Wybierz punkty</string>
     <string name="layer_amenity_label">Etykiety punktów</string>
