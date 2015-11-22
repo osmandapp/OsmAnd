@@ -23,7 +23,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.Space;
+import android.support.v4.widget.Space;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +31,7 @@ import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.map.WorldRegion;
 import net.osmand.map.WorldRegion.RegionParams;
 import net.osmand.plus.OsmandApplication;
@@ -793,7 +794,12 @@ public class DownloadActivity extends ActionBarProgressActivity implements Downl
 						@Override
 						public void onClick(View v) {
 							OsmandApplication app = (OsmandApplication) getActivity().getApplication();
-							app.getSettings().setMapLocationToShow(regionCenter.getLatitude(), regionCenter.getLongitude(), 5, null);
+							app.getSettings().setMapLocationToShow(
+									regionCenter.getLatitude(),
+									regionCenter.getLongitude(),
+									5,
+									new PointDescription(PointDescription.POINT_TYPE_WORLD_REGION_SHOW_ON_MAP, ""));
+							
 							dismiss();
 							MapActivity.launchMapActivityMoveToTop(getActivity());
 						}

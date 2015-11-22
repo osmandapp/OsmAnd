@@ -132,11 +132,11 @@ public class MenuBuilder {
 		ll.addView(llIcon);
 
 		ImageView iconView = new ImageView(view.getContext());
-		LinearLayout.LayoutParams llIconParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+		LinearLayout.LayoutParams llIconParams = new LinearLayout.LayoutParams(dpToPx(24f), dpToPx(24f));
 		llIconParams.setMargins(dpToPx(16f), dpToPx(12f), dpToPx(32f), dpToPx(12f));
 		llIconParams.gravity = Gravity.CENTER_VERTICAL;
 		iconView.setLayoutParams(llIconParams);
-		iconView.setScaleType(ImageView.ScaleType.CENTER);
+		iconView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
 		iconView.setImageDrawable(icon);
 		llIcon.addView(iconView);
 

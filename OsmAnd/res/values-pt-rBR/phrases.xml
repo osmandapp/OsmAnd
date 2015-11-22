@@ -219,7 +219,7 @@
 	<string name="poi_railway_station">Estação ferroviária</string>
 	<string name="poi_railway_platform">Plataforma ferroviária</string>
 	<string name="poi_halt">Parada ferroviária</string>
-	<string name="poi_railway_subway_entrance">Entrada do metrô</string>
+	<string name="poi_subway_entrance">Entrada do metrô</string>
 	<string name="poi_subway_station">Estação de metrô</string>
 	<string name="poi_vacuum_cleaner">Loja de aspiradores de pó</string>
 	<string name="poi_variety_store">Loja de variedades</string>

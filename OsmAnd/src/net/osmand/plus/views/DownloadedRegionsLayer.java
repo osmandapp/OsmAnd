@@ -73,6 +73,30 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 	private static int ZOOM_TO_SHOW_SELECTION_ST = 3;
 	private static int ZOOM_TO_SHOW_SELECTION = 10;
 
+	public static class DownloadMapObject {
+		private BinaryMapDataObject dataObject;
+		private WorldRegion worldRegion;
+		private IndexItem indexItem;
+
+		public BinaryMapDataObject getDataObject() {
+			return dataObject;
+		}
+
+		public WorldRegion getWorldRegion() {
+			return worldRegion;
+		}
+
+		public IndexItem getIndexItem() {
+			return indexItem;
+		}
+
+		public DownloadMapObject(BinaryMapDataObject dataObject, WorldRegion worldRegion, IndexItem indexItem) {
+			this.dataObject = dataObject;
+			this.worldRegion = worldRegion;
+			this.indexItem = indexItem;
+		}
+	}
+
 	@Override
 	public void initLayer(final OsmandMapTileView view) {
 		this.view = view;
@@ -277,7 +301,11 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 			if (region != null && region.getRegionDownloadName() != null) {
 				List<IndexItem> indexItems = app.getDownloadThread().getIndexes().getIndexItems(region);
 				for (IndexItem item : indexItems) {
-					if (item.getType() == DownloadActivityType.NORMAL_FILE) {
+					if (item.getType() == DownloadActivityType.NORMAL_FILE
+							|| item.getType() == DownloadActivityType.ROADS_FILE
+							|| item.getType() == DownloadActivityType.SRTM_COUNTRY_FILE
+							|| item.getType() == DownloadActivityType.HILLSHADE_FILE
+							|| item.getType() == DownloadActivityType.WIKIPEDIA_FILE) {
 						if (app.getDownloadThread().isDownloading(item)) {
 							downloadingObjects.add(o);
 						} else if (item.isOutdated()) {
@@ -421,12 +449,9 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 
 	@Override
 	public LatLon getObjectLocation(Object o) {
-		if (o instanceof BinaryMapDataObject) {
-			String fullName = osmandRegions.getFullName((BinaryMapDataObject) o);
-			final WorldRegion region = osmandRegions.getRegionData(fullName);
-			if (region != null) {
-				return region.getRegionCenter();
-			}
+		if (o instanceof DownloadMapObject) {
+			DownloadMapObject mapObject = ((DownloadMapObject) o);
+			return mapObject.worldRegion.getRegionCenter();
 		}
 		return null;
 	}
@@ -438,16 +463,10 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 
 	@Override
 	public PointDescription getObjectName(Object o) {
-		if (o instanceof BinaryMapDataObject) {
-			String fullName = osmandRegions.getFullName((BinaryMapDataObject) o);
-			final WorldRegion region = osmandRegions.getRegionData(fullName);
-			if (region != null) {
-				return new PointDescription(PointDescription.POINT_TYPE_WORLD_REGION,
-						view.getContext().getString(R.string.shared_string_map), region.getLocaleName());
-			} else {
-				return new PointDescription(PointDescription.POINT_TYPE_WORLD_REGION,
-						view.getContext().getString(R.string.shared_string_map), ((BinaryMapDataObject) o).getName());
-			}
+		if (o instanceof DownloadMapObject) {
+			DownloadMapObject mapObject = ((DownloadMapObject) o);
+			return new PointDescription(PointDescription.POINT_TYPE_WORLD_REGION,
+					view.getContext().getString(R.string.shared_string_map), mapObject.worldRegion.getLocaleName());
 		}
 		return new PointDescription(PointDescription.POINT_TYPE_WORLD_REGION,
 				view.getContext().getString(R.string.shared_string_map), "");
@@ -463,7 +482,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		return false;
 	}
 
-	private void getWorldRegionFromPoint(RotatedTileBox tb, PointF point, List<? super BinaryMapDataObject> dataObjects) {
+	private void getWorldRegionFromPoint(RotatedTileBox tb, PointF point, List<? super DownloadMapObject> dataObjects) {
 		int zoom = tb.getZoom();
 		if (zoom >= ZOOM_TO_SHOW_SELECTION_ST && zoom < ZOOM_TO_SHOW_SELECTION && osmandRegions.isInitialized()) {
 			LatLon pointLatLon = tb.getLatLonFromPixel(point.x, point.y);
@@ -481,32 +500,60 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 
 			selectedObjects = result;
 
+			OsmandRegions osmandRegions = app.getRegions();
 			for (BinaryMapDataObject o : result) {
-				dataObjects.add(o);
+				String fullName = osmandRegions.getFullName(o);
+				WorldRegion region = osmandRegions.getRegionData(fullName);
+				if (region != null) {
+					List<IndexItem> indexItems = app.getDownloadThread().getIndexes().getIndexItems(region);
+					List<IndexItem> dataItems = new LinkedList<>();
+					IndexItem regularMapItem = null;
+					for (IndexItem item : indexItems) {
+						if (item.isDownloaded() || app.getDownloadThread().isDownloading(item)) {
+							dataItems.add(item);
+							if (item.getType() == DownloadActivityType.NORMAL_FILE) {
+								regularMapItem = item;
+							}
+						}
+					}
+					if (dataItems.isEmpty() && regularMapItem != null) {
+						dataItems.add(regularMapItem);
+					}
+
+					if (!dataItems.isEmpty()) {
+						for (IndexItem item : dataItems) {
+							dataObjects.add(new DownloadMapObject(o, region, item));
+						}
+					} else {
+						dataObjects.add(new DownloadMapObject(o, region, null));
+					}
+				}
 			}
 		}
 	}
 
 	@Override
 	public int getOrder(Object o) {
-		if (o instanceof BinaryMapDataObject) {
-			String fullName = osmandRegions.getFullName((BinaryMapDataObject) o);
-			final WorldRegion region = osmandRegions.getRegionData(fullName);
-			if (region != null) {
-				return region.getLevel() - 1000;
+		int order = 0;
+		if (o instanceof DownloadMapObject) {
+			DownloadMapObject mapObject = ((DownloadMapObject) o);
+			order = mapObject.worldRegion.getLevel() * 1000 - 100000;
+			if (mapObject.indexItem != null) {
+				order += mapObject.indexItem.getType().getOrderIndex();
 			}
 		}
-		return 0;
+		return order;
 	}
 
 	@Override
 	public void setSelectedObject(Object o) {
-		if (o instanceof BinaryMapDataObject) {
+		if (o instanceof DownloadMapObject) {
+			DownloadMapObject mapObject = ((DownloadMapObject) o);
 			List<BinaryMapDataObject> list = new LinkedList<>();
 			if (selectedObjects. size() > 0) {
 				list.addAll(selectedObjects);
 			}
-			list.add((BinaryMapDataObject) o);
+			list.add(mapObject.dataObject);
 			selectedObjects = list;
 		}
 	}

@@ -148,7 +148,7 @@ public class MapInfoWidgetsFactory {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							app.getSettings().SERVICE_OFF_INTERVAL.set(vs.value);
-							app.startNavigationService(NavigationService.USED_BY_GPX);
+							app.startNavigationService(NavigationService.USED_BY_WAKE_UP);
 						}
 					});
 					dlg.setNegativeButton(R.string.shared_string_cancel, null);

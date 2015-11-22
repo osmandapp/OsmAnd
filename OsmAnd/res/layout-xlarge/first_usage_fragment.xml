@@ -9,10 +9,11 @@
     android:theme="@style/OsmandLightTheme">
 
     <ImageView
+        android:id="@+id/background_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:src="@drawable/bg_first_usage"/>
+        android:background="@color/osmand_orange"/>
 
     <LinearLayout
         android:layout_width="wrap_content"

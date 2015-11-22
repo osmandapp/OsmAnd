@@ -80,7 +80,7 @@
                     android:id="@+id/button_replace"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="?android:selectableItemBackground"
+                    android:background="?attr/selectableItemBackground"
                     android:textColor="?attr/contextMenuButtonColor"
                     android:text="@string/update_existing"
                     android:visibility="gone"/>

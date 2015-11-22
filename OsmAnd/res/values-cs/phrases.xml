@@ -352,7 +352,7 @@
 	<string name="poi_railway_station">Železniční stanice</string>
 	<string name="poi_railway_platform">Železniční nástupiště</string>
 	<string name="poi_halt">Železniční zastávka</string>
-	<string name="poi_railway_subway_entrance">Vchod do metra</string>
+	<string name="poi_subway_entrance">Vchod do metra</string>
 	<string name="poi_subway_station">Stanice metra</string>
 	<string name="poi_railway_buffer_stop">Železniční zarážka</string>
 	<string name="poi_taxi">Stanoviště taxi</string>

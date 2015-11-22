@@ -23,6 +23,8 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
 
 import java.util.Calendar;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 public class AmenityMenuBuilder extends MenuBuilder {
@@ -73,11 +75,11 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		ll.addView(llIcon);
 
 		ImageView iconView = new ImageView(view.getContext());
-		LinearLayout.LayoutParams llIconParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+		LinearLayout.LayoutParams llIconParams = new LinearLayout.LayoutParams(dpToPx(24f), dpToPx(24f));
 		llIconParams.setMargins(dpToPx(16f), dpToPx(12f), dpToPx(32f), dpToPx(12f));
 		llIconParams.gravity = Gravity.CENTER_VERTICAL;
 		iconView.setLayoutParams(llIconParams);
-		iconView.setScaleType(ImageView.ScaleType.CENTER);
+		iconView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
 		iconView.setImageDrawable(icon);
 		llIcon.addView(iconView);
 
@@ -141,6 +143,12 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	public void buildInternal(View view) {
 		boolean hasWiki = false;
 		MapPoiTypes poiTypes = app.getPoiTypes();
+		String preferredLang = app.getSettings().MAP_PREFERRED_LOCALE.get();
+		if (Algorithms.isEmpty(preferredLang)) {
+			preferredLang = app.getLanguage();
+		}
+		List<AmenityDescription> descriptions = new LinkedList<>();
+
 		for (Map.Entry<String, String> e : amenity.getAdditionalInfo().entrySet()) {
 			int iconId;
 			Drawable icon = null;
@@ -156,10 +164,6 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			if (amenity.getType().isWiki()) {
 				if (!hasWiki) {
 					iconId = R.drawable.ic_action_note_dark;
-					String preferredLang = app.getSettings().MAP_PREFERRED_LOCALE.get();
-					if (Algorithms.isEmpty(preferredLang)) {
-						preferredLang = app.getLanguage();
-					}
 					String lng = amenity.getContentSelected("content", preferredLang, "en");
 					if (Algorithms.isEmpty(lng)) {
 						lng = "en";
@@ -224,11 +228,43 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				}
 			}
 
-			if (icon != null) {
+			if (isText && iconId == R.drawable.ic_action_note_dark) {
+				descriptions.add(new AmenityDescription(key, textPrefix, vl));
+			} else if (icon != null) {
 				buildRow(view, icon, vl, textPrefix, textColor, isWiki, isText, needLinks);
 			} else {
 				buildRow(view, iconId, vl, textPrefix, textColor, isWiki, isText, needLinks);
 			}
+		}
+
+		String langSuffix = ":" + preferredLang;
+		AmenityDescription descInPrefLang = null;
+		for (AmenityDescription desc : descriptions) {
+			if (desc.key.length() > langSuffix.length()
+					&& desc.key.substring(desc.key.length() - langSuffix.length(), desc.key.length()).equals(langSuffix)) {
+				descInPrefLang = desc;
+				break;
+			}
+		}
+		if (descInPrefLang != null) {
+			descriptions.remove(descInPrefLang);
+			descriptions.add(0, descInPrefLang);
+		}
+
+		for (AmenityDescription desc : descriptions) {
+			buildRow(view, R.drawable.ic_action_note_dark, desc.text, desc.textPrefix, 0, false, true, true);
+		}
+	}
+
+	private static class AmenityDescription {
+		private String key;
+		private String textPrefix;
+		private String text;
+
+		public AmenityDescription(String key, String textPrefix, String text) {
+			this.key = key;
+			this.textPrefix = textPrefix;
+			this.text = text;
 		}
 	}
 }
