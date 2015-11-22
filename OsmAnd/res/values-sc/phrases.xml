@@ -1547,7 +1547,7 @@
 	<string name="poi_aerialway_summer_access_exit">Atzessu in s\'istiu: essida ebbia</string>
 	<string name="poi_aerialway_summer_access_both">Atzessu in s\'istiu: intrada e essida</string>
 
-	<string name="poi_railway_crossing">Coladòrgiu a livellu</string>
+	<string name="poi_railway_crossing">Coladòrgiu pedonale a livellu</string>
 	<string name="poi_historic_yes">Ogetu istòricu</string>
 	<string name="poi_surveillance_yes">Bardiamentu: eja</string>
 	<string name="poi_shop_yes">Cun butega</string>
@@ -1739,4 +1739,49 @@
 	<string name="poi_sally_port">Barriera coberta cun ghenna dòpia</string>
 	<string name="poi_swing_gate">Cantzellu girèvole</string>
 	<string name="poi_kent_carriage_gap">Coladòrgiu pro carros a caddu</string>
+	<string name="poi_commercial">Àrea de ufìtzios cummertziales</string>
+	<string name="poi_retail">Àrea de cummèrtziu</string>
+
+	<string name="poi_rescue_station">Istatzione de sarvamentu</string>
+
+	<string name="poi_mini_roundabout">Mini rutunda</string>
+	<string name="poi_railway_level_crossing">Coladòrgiu a livellu</string>
+	<string name="poi_bird_hide">Logu pro abbaidare pugiones</string>
+	<string name="poi_horse_riding">Ecuitatzione</string>
+	<string name="poi_leisure_common">Logu comune pro su tempus lìberu</string>
+	<string name="poi_passing_place">Logu de coladòrgiu</string>
+	<string name="poi_dead_wood">Linna morta</string>
+
+	<string name="poi_stars_1s">Isteddas: 1S (turista superiore)</string>
+	<string name="poi_stars_2">Isteddas: 2 (istandard)</string>
+	<string name="poi_stars_2s">Isteddas: 2S (istandard superiore)</string>
+	<string name="poi_stars_3">Isteddas: 3 (discansosu)</string>
+	<string name="poi_stars_3s">Isteddas: 3S (discansu superiore)</string>
+	<string name="poi_stars_4">Isteddas: 4 (prima classe)</string>
+	<string name="poi_stars_4s">Isteddas: 4S (prima classe superiore)</string>
+	<string name="poi_stars_5">Isteddas: 5 (lussu)</string>
+	<string name="poi_stars_5s">Isteddas: 5S (lussu superiore)</string>
+	<string name="poi_stars_6">Isteddas: 6</string>
+	<string name="poi_stars_7">Isteddas: 7</string>
+	<string name="poi_rooms">Aposentos</string>
+
+	<string name="poi_love_hotel">Albergu de s’amore</string>
+
+	<string name="poi_payment_coins_yes">Atzetat monedas</string>
+	<string name="poi_payment_coins_no">No atzetat monedas</string>
+	<string name="poi_payment_coins_0.5">Atzetat monedas de $0.5</string>
+	<string name="poi_payment_coins_50c12">Atzetat monedas de 50 cent, 1€ e 2€</string>
+	<string name="poi_payment_telephone_cards_yes">Atzetat cartas telefònicas</string>
+	<string name="poi_payment_telephone_cards_no">No atzetat cartas telefònicas</string>
+	<string name="poi_payment_credit_cards_yes">Atzetat cartas de crèditu</string>
+	<string name="poi_payment_credit_cards_no">No atzetat cartas de crèditu</string>
+	<string name="poi_payment_notes_yes">Atzetat banconotas</string>
+	<string name="poi_payment_notes_no">No atzetat banconotas</string>
+	<string name="poi_payment_bitcoin_yes">Atzetat Bitcoin</string>
+	<string name="poi_payment_bitcoin_no">No atzetat Bitcoin</string>
+	<string name="poi_payment_visa_yes">Atzetat cartas Visa</string>
+	<string name="poi_payment_visa_no">No atzetat cartas Visa</string>
+	<string name="poi_payment_mastercard_yes">Atzetat cartas MasterCard</string>
+	<string name="poi_payment_mastercard_no">No atzetat cartas MasterCard</string>
+	<string name="poi_payment_none">De badas</string>
 	</resources>
