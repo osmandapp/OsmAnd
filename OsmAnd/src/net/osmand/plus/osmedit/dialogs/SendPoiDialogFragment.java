@@ -32,6 +32,7 @@ public class SendPoiDialogFragment extends DialogFragment {
 		final OsmPoint[] poi = (OsmPoint[]) getArguments().getSerializable(OPENSTREETMAP_POINT);
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		View view = getActivity().getLayoutInflater().inflate(R.layout.send_poi_dialog, null);
+		final View messageEditTextLabel = view.findViewById(R.id.messageEditTextLabel);
 		final EditText messageEditText = (EditText) view.findViewById(R.id.messageEditText);
 		final EditText userNameEditText = (EditText) view.findViewById(R.id.userNameEditText);
 		final EditText passwordEditText = (EditText) view.findViewById(R.id.passwordEditText);
@@ -42,6 +43,16 @@ public class SendPoiDialogFragment extends DialogFragment {
 				.getSettings();
 		userNameEditText.setText(settings.USER_NAME.get());
 		passwordEditText.setText(settings.USER_PASSWORD.get());
+		boolean hasOsmPOI = false;
+		for(OsmPoint p : poi) {
+			if (p.getGroup() == OsmPoint.Group.POI) {
+				hasOsmPOI = true;
+				break;
+			}
+		}
+		messageEditTextLabel.setVisibility(hasOsmPOI ? View.VISIBLE :View.GONE);
+		messageEditText.setVisibility(hasOsmPOI ? View.VISIBLE :View.GONE);
+		closeChangeSetCheckBox.setVisibility(hasOsmPOI ? View.VISIBLE :View.GONE);
 
 		final ProgressDialogPoiUploader progressDialogPoiUploader;
 		if (poiUploader != null) {
@@ -50,7 +61,7 @@ public class SendPoiDialogFragment extends DialogFragment {
 			progressDialogPoiUploader = (ProgressDialogPoiUploader) getParentFragment();
 		}
 
-		builder.setTitle(R.string.commit_poi)
+		builder.setTitle(R.string.shared_string_commit)
 				.setView(view)
 				.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 					@Override
@@ -58,11 +69,12 @@ public class SendPoiDialogFragment extends DialogFragment {
 						comment = messageEditText.getText().toString();
 						settings.USER_NAME.set(userNameEditText.getText().toString());
 						settings.USER_PASSWORD.set(passwordEditText.getText().toString());
-						for (OsmPoint osmPoint : poi) {
-							if (osmPoint.getGroup() == OsmPoint.Group.POI) {
-								((OpenstreetmapPoint) osmPoint)
-										.setComment(comment);
-								break;
+						if (comment.length() > 0) {
+							for (OsmPoint osmPoint : poi) {
+								if (osmPoint.getGroup() == OsmPoint.Group.POI) {
+									((OpenstreetmapPoint) osmPoint).setComment(comment);
+									break;
+								}
 							}
 						}
 						progressDialogPoiUploader.showProgressDialog(poi,
@@ -82,6 +94,8 @@ public class SendPoiDialogFragment extends DialogFragment {
 	}
 
 	public interface ProgressDialogPoiUploader {
+		
 		void showProgressDialog(OsmPoint[] points, boolean closeChangeSet);
+		
 	}
 }

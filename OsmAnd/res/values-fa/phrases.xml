@@ -147,7 +147,7 @@
 <string name="poi_railway_station">ایستگاه راه آهن (منسوخ)</string>
 <string name="poi_railway_platform">پلت فرم راه آهن (منسوخ)</string>
 <string name="poi_halt">ایستگاه راه آهن (منسوخ)</string>
-<string name="poi_railway_subway_entrance">ورودی مترو</string>
+<string name="poi_subway_entrance">ورودی مترو</string>
 <string name="poi_subway_station">ایستگاه مترو</string>
 <string name="poi_taxi">ایستگاه تاکسی</string>
 

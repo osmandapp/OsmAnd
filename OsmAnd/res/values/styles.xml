@@ -114,9 +114,18 @@
         <item name="appbar_layout_theme">@style/OsmandLightTheme.DarkActionbar</item>
         <item name="toolbar_theme">@style/OsmandLightTheme.Toolbar</item>
         <item name="new_app_theme">@style/OsmandLightTheme.NewAppTheme</item>
-        <item name="android:textColorSecondary">@color/dashboard_black</item>
+        <item name="android:textColorSecondary">@color/icon_color</item>
         <item name="contextMenuButtonColor">@color/map_widget_blue</item>
 
+    </style>
+
+    <style name="OsmandLightTheme.NoActionbar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="OsmandLightTheme.NoActionbar.Preferences">
+        <item name="android:textColorSecondary">@color/color_black</item>
     </style>
 
     <style name="OsmandLightTheme.DarkActionbar">
@@ -154,6 +163,15 @@
         <item name="android:windowBackground">@color/color_transparent</item>
         <item name="android:backgroundDimAmount">0.3</item>
         <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+    <style name="OsmandDarkTheme.NoActionbar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="OsmandDarkTheme.NoActionbar.Preferences">
+        <item name="android:textColorSecondary">@color/color_white</item>
     </style>
 
     <style name="OsmandDarkTheme" parent="Theme.AppCompat">
@@ -207,7 +225,7 @@
         <item name="appbar_layout_theme">@style/OsmandDarkTheme.DarkActionbar</item>
         <item name="toolbar_theme">@style/OsmandDarkTheme</item>
         <item name="new_app_theme">@style/OsmandDarkTheme</item>
-        <item name="android:textColorSecondary">@color/map_widget_light</item>
+        <item name="android:textColorSecondary">@color/dash_search_icon_dark</item>
 
         <item name="contextMenuButtonColor">@color/osmand_orange</item>
     </style>

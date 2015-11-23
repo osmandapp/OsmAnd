@@ -10,25 +10,34 @@ import net.osmand.plus.activities.search.SearchHistoryFragment;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.util.Algorithms;
 
 public class HistoryMenuController extends MenuController {
 
 	private HistoryEntry entry;
+	private boolean hasTypeInDescription;
 
 	public HistoryMenuController(OsmandApplication app, MapActivity mapActivity, PointDescription pointDescription, final HistoryEntry entry) {
 		super(new MenuBuilder(app), pointDescription, mapActivity);
 		this.entry = entry;
+		initData();
+	}
+
+	private void initData() {
+		hasTypeInDescription = !Algorithms.isEmpty(entry.getName().getTypeName());
+	}
+
+	@Override
+	protected void setObject(Object object) {
+		if (object instanceof HistoryEntry) {
+			this.entry = (HistoryEntry) object;
+			initData();
+		}
 	}
 
 	@Override
 	protected int getSupportedMenuStatesPortrait() {
 		return MenuState.HEADER_ONLY | MenuState.HALF_SCREEN;
-	}
-
-	@Override
-	public boolean needTypeStr() {
-		String typeName = entry.getName().getTypeName();
-		return (typeName != null && !typeName.isEmpty());
 	}
 
 	@Override
@@ -42,8 +51,8 @@ public class HistoryMenuController extends MenuController {
 	}
 
 	@Override
-	public Drawable getSecondLineIcon() {
-		if (needTypeStr()) {
+	public Drawable getSecondLineTypeIcon() {
+		if (hasTypeInDescription) {
 			return getIcon(R.drawable.ic_small_group);
 		} else {
 			return null;
@@ -52,11 +61,16 @@ public class HistoryMenuController extends MenuController {
 
 	@Override
 	public String getTypeStr() {
-		if (needTypeStr()) {
+		if (hasTypeInDescription) {
 			return entry.getName().getTypeName();
 		} else {
 			return "";
 		}
+	}
+
+	@Override
+	public String getCommonTypeStr() {
+		return getMapActivity().getString(R.string.shared_string_history);
 	}
 
 	@Override

@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
 
     <string name="recording_context_menu_show">Zobraziť</string>
     <string name="recording_photo_description">Fotografia %1$s %2$s</string>
@@ -440,7 +441,7 @@
     <string name="error_reading_gpx">Chyba pri načítavaní GPX údajov</string>
     <string name="vector_data">Vektorové OSM mapy</string>
     <string name="transport_context_menu">Hľadať prepravu na zastávke</string>
-    <string name="osb_bug_name">Chyba</string>
+    
     <string name="poi_context_menu_modify">Upraviť bod záujmu (POI)</string>
     <string name="poi_context_menu_delete">Vymazať bod záujmu (POI)</string>
     <string name="rotate_map_compass_opt">Podľa kompasu</string>
@@ -677,7 +678,7 @@
     <string name="search_address_street_option">Pretínajúca ulica</string>
     <string name="search_tabs_location">Pozícia</string>
     <string name="context_menu_item_update_map">Aktualizovať mapu</string>
-    <string name="context_menu_item_open_bug">Otvoriť OSM chybu</string>
+    
     <string name="context_menu_item_create_poi">Vytvoriť POI</string>
     <string name="add_favorite_dialog_top_text">Zadajte meno obľúbeného bodu</string>
     <string name="add_favorite_dialog_default_favourite_name">Obľúbený bod</string>
@@ -686,21 +687,21 @@
     <string name="favourites_context_menu_delete">Vymazať obľúbený bod</string>
     <string name="favourites_remove_dialog_msg">Odstrániť obľúbený bod "%s"?</string>
     <string name="favourites_remove_dialog_success">Obľúbený bod {0} bol úspešne zmazaný.</string>
-    <string name="osb_add_dialog_title">Zadajte popis k chybe</string>
-    <string name="osb_add_dialog_success">Chyba úspešne pridaná</string>
-    <string name="osb_add_dialog_error">Vyskytla sa výnimka: chybové hlásenie nebolo vytvorené</string>
-    <string name="osb_comment_menu_item">Pridať komentár</string>
+    
+    
+    
+    
     <string name="osb_comment_dialog_message">Správa</string>
     <string name="osb_comment_dialog_author">Meno autora</string>
-    <string name="osb_comment_dialog_title">Pridáva sa komentár k chybe</string>
-    <string name="osb_comment_dialog_add_button">Pridať komentár</string>
+    
+    
     <string name="osb_comment_dialog_success">Komentár bol úspešne pridaný</string>
     <string name="osb_comment_dialog_error">Vyskytla sa výnimka: komentár nebol pridaný</string>
-    <string name="osb_close_menu_item">Zavrieť chybu</string>
-    <string name="osb_close_dialog_title">Zatvorenie chyby</string>
-    <string name="osb_close_dialog_close_button">Zavrieť chybu</string>
-    <string name="osb_close_dialog_success">Chyba bola úspešne uzavretá</string>
-    <string name="osb_close_dialog_error">Vyskytla sa výnimka: chybové hlásenie nebolo uzavreté</string>
+    
+    
+    
+    
+    
     <string name="poi_edit_title">Upravenie bodu záujmu (POI)</string>
     <string name="poi_create_title">Vytvorenie bodu záujmu (POI)</string>
     <string name="poi_error_poi_not_found">Uzol sa nedá nájsť alebo bod záujmu nie je samostatný uzol</string>
@@ -945,7 +946,7 @@
     <string name="context_menu_item_destination_point">Určiť ako cieľ</string>
     <string name="destination_point">Cieľ %1$s</string>
     <string name="intermediate_items_sort_return">Priechodné body cesty boli usporiadané do optimálneho poradia na ceste z vašej terajšej pozície do cieľa.</string>
-    <string name="intermediate_items_sort_by_distance">Zoptimalizuj</string>
+    <string name="intermediate_items_sort_by_distance">Zoptimalizuj od dverí k dverám</string>
     <string name="osmand_distance_planning_plugin_description">Tento modul poskytuje nástroj umožňujúci vytvorenie cesty kliknutím na mapu alebo použiť/upraviť existujúce GPX súbory na naplánovanie cesty a na meranie vzdialenosti medzi bodmi. Výsledok je možné uložiť ako GPX, čo možno použiť neskôr ako pomôcku.</string>
     <string name="osmand_distance_planning_plugin_name">Kalkulačka vzdialenosti a plánovač cesty</string>
     <string name="use_distance_measurement_help">* Kliknutím označiť miesto.\n
@@ -1019,75 +1020,7 @@
     <string name="auto_zoom_close">Veľké priblíženie</string>
     <string name="auto_zoom_far">Stredné priblíženie</string>
     <string name="auto_zoom_farthest">Malé priblíženie</string>
-    <string name="osmand_extended_description_4000_chars">OsmAnd (OSM Automated Navigation Directions - Automatizované navigačné pokyny) je mapová a navigačná aplikácia s prístupom ku kvalitným celosvetovým údajom z OpenStreetMap (OSM). Všetky údaje máp môžu byť uložené na pamäťovej karte vo vašom zariadení pre použitie bez prístupu na Internet (offline). Pomocou GPS vo vašom zariadení môže OsmAnd ponúknuť navigovanie vizuálnymi a hlasovými usmerneniami pre automobil, bicykel a chodca. Všetky hlavné funkcie pracujú online aj offline (bez nutnosti prístupu na Internet).
-
-Niektoré hlavné funkcie:
-
-Navigácia:
- - Funguje online (rýchla) alebo offline (bez poplatkov za roaming v zahraničí)
- - Hlasové navádzanie po jednotlivých zákrutách (nahraté aj syntetizované hlasy)
- - Voliteľné navádzanie v jazdných pruhoch, zobrazenie názvov ulíc a odhadovaný čas do cieľa
- - Umožňuje zadať prechodné body trasy
- - Automatické prepočítanie trasy ak sa odchýlite z trasy
- - Vyhľadávanie miest podľa adresy, typu (napr.: reštaurácie, hotely, čerpacie stanice, múzeá) alebo zemepisných súradníc
-
-Zobrazenie mapy:
- - Zobrazovanie vašej pozície a orientácie na mape
- - Možnosť zobrazenia mapy v smere pohybu podľa kompasu
- - Uloženie obľúbených miest
- - Zobrazenie POI (bodov záujmu) v okolí
- - Možnosť zobraziť špecializované podkladové mapy z Internetu
- - Možnosť zobraziť satelitné snímky (z Bing)
- - Možnosť zobraziť rôzne prekryvné vrstvy ako turistické/navigačné GPX stopy a ďalšie mapy s nastaviteľnou priehľadnosťou
- - Voliteľne môže zobraziť názvy v angličtine, lokálnom jazyku alebo foneticky
-
-Využíva údaje z OpenStreetMap a Wikipedia:
- - Informácie vysokej kvality z najlepších projektov sveta
- - Globálne mapy z OpenStreetMap dostupné podľa krajiny alebo regiónu
- - Body záujmu z Wikipedia, vhodné pre návštevu zaujímavostí (nedostupné vo verzii zdarma)
- - Neobmedzené sťahovanie, priamo z aplikácie (vo verzii zdarma je limit 10 mapových súborov)
- - Vždy aktuálne mapy (aktualizované najmenej raz za mesiac)
- - Kompaktné vektorové offline mapy
- - Možnosť voľby medzi kompletnými mapami alebo cestnou sieťou (napr. celé Japonsko má 700 MB, cestná sieť iba 200 MB)
- - Podporuje aj podkladové dlaždice z Internetu
-
-Bezpečnostné funkcie:
- - Voliteľné automatické prepínanie medzi denným a nočným režimom
- - Voliteľné zobrazenie povolenej rýchlosti s upozornením na jej prekročenie
- - Voliteľné približovanie mapy podľa rýchlosti
- - Zdieľajte vašu polohu s priateľmi, aby vás mohli nájsť
-
-Funkcie pre cyklistov a chodcov:
- - Mapy obsahujú aj cesty pre chodcov, turistov a cyklistov - vhodné pre aktivity v prírode
- - Špeciálne režimy zobrazenia a navigácie pre chodcov a cyklistov
- - Voliteľné zobrazenie zastávok hromadnej dopravy (autobus, električka, vlak) vrátane názvov liniek
- - Voliteľné nahrávanie výletu do GPX súboru (lokálneho alebo online služby)
- - Voliteľné zobrazenie rýchlosti a nadmorskej výšky
- - Zobrazenie vrstevníc a tieňovania svahov (s doplnkovými modulmi)
-
-Priamo prispievajte do OpenStreetMap:
- - Nahlásenie chýb v mape
- - Odoslanie GPX stôp do OSM priamo z aplikácie
- - Pridanie POI a priame odoslanie do OSM (alebo neskôr, ak ste offline)
- - Voliteľné nahrávanie výletu na pozadí (keď je zariadenie v režime spánku)
-
-OsmAnd je slobodný a aktívne vyvíjaný softvér. Každý môže prispieť do aplikácie hlásením chýb, vylepšením prekladu alebo programovaním nových funkcií. Projekt je v stave sústavného vylepšovania vďaka spolupráci vývojárov a používateľov. Pokrok projektu tiež závisí od finančných príspevkov na vývoj, programovanie a testovanie nových funkcií. Kúpením OsmAnd+ (platená verzia) pomôžete aplikácii byť ešte lepšiou! Na osmand.net môžete prispieť všeobecne alebo na vývoj konkrétnej funkcie.
-
-
-Približná kvalita pokrytia:
- - Západná Európa: ****
- - Východná Európa: ***
- - Rusko: ***
- - Severná Amerika: ***
- - Južná Amerika: **
- - Ázia: **
- - Japonsko a Kórea: ***
- - Blízky Východ: **
- - Afrika: **
- - Antarktída: *
-
-Zoznam obsiahnutých krajín (prakticky celý svet!):
-Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, Argentína, Arménsko, Aruba, Austrália, Azerbajdžan, Bahamy, Bahrajn, Bangladéš, Barbados, Belgicko, Belize, Benin, Bermudy, Bhután, Bielorusko, Bolívia, Bonaire, Bosna a Hercegovina, Botswana, Brazília, Britské Panenské Ostrovy, Brunei, Bulharsko, Burkina Faso, Burundi, Curaçao, Cyprus, Čad, Česká Republika, Čierna hora, Čile, Čína, Dánsko, Dominika, Dominikánska Republika, Džibuti, Egypt, Ekvádor, El Salvador, Eritrea, Estónsko, Etiópia, Fiji, Filipíny, Fínsko, Francúzska Guiana, Francúzska Polynézia, Francúzsko, Gabon, Gambia, Ghana, Gibraltar, Grécko, Grenada, Grónsko, Gruzínsko, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Holandské Antily, Holandsko, Honduras, Hong Kong, Chorvátsko, India, Indonézia, Irak, Irán, Írsko, Island, Izrael, Jamajka, Japonsko, Jemen, Jersey, Jordánsko, Južná Afrika, Južný Sudán, Kambodža, Kamerun, Kanada, Kapverdy, Katar, Kazachstan, Keňa, Kiribati, Kolumbia, Komory, Kongo, Kostarika, Kuba, Kuvajt, Kyrgyzsko, Laos, Lesotho, Libanon, Libéria, Líbya, Lichtenštajnsko, Litva, Lotyšsko, Luxembursko, Macao, Macedónsko, Madagaskar, Maďarsko, Malajzia, Malawi, Maledivy, Mali, Malta, Maroko, Martinik, Mauretánia, Maurícius, Mayotte, Mexiko, Mikronézia, Mjanmarsko, Moldavsko, Monako, Mongolsko, Montserrat, Mozambik, Namíbia, Nauru, Nemecko, Nepál, Niger, Nigéria, Nikaragua, Nórsko, Nová Kaledónia, Nový Zéland, Omán, Ostrov Man, Pakistan, Palau, Palestínske územie, Panama, Papua Nová Guinea, Paraguaj, Peru, Pobrežie Slonoviny, Poľsko, Portoriko, Portugalsko, Rakúsko, Rovníková Guinea, Rumunsko, Rusko, Rwanda, Sadská Arábia, Saint Barthelemy, Saint Helena, Saint Kitts and Nevis, Saint Lucia, Saint Martin, Saint Pierre and Miquelon, Saint Vincent and the Grenadines, Samoa, San Marino, Senegal, Severná a Južná Kórea, Seychely, Sierra Leone, Singapur, Slovensko, Slovinsko, Somálsko, South Georgia, Spojené Arabské Emiráty, Spojené Kráľovstvo (UK), Spojené Štáty Americké (USA), Srbsko, Srí Lanka, Stredoafrická republika, Sudán, Surinam, Swazijsko, Sýria, Španielsko, Švajčiarsko, Švédsko, Tadžikistan, Taiwan, Taliansko, Tanzánia, Thajsko, Togo, Tokelau, Tonga, Trinidad a Tobago, Tunisko, Turecko, Turkmenistan, Tuvalu, Uganda, Ukrajina, Uruguaj, Uzbekistan, Vanuatu, Vatikán, Venezuela, Vietnam, Východný Timor, Wallis a Futuna, Zambia, Západná Sahara</string>
+    <string name="osmand_extended_description_4000_chars">" OsmAnd (OSM Automated Navigation Directions - Automatizované navigačné pokyny) je mapová a navigačná aplikácia s prístupom ku kvalitným celosvetovým údajom z OpenStreetMap (OSM). Všetky údaje máp môžu byť uložené na pamäťovej karte vo vašom zariadení pre použitie bez prístupu na Internet (offline). Pomocou GPS vo vašom zariadení môže OsmAnd ponúknuť navigovanie vizuálnymi a hlasovými usmerneniami pre automobil, bicykel a chodca. Všetky hlavné funkcie pracujú online aj offline (bez nutnosti prístupu na Internet). Niektoré hlavné funkcie: Navigácia: - Funguje online (rýchla) alebo offline (bez poplatkov za roaming v zahraničí) - Hlasové navádzanie po jednotlivých zákrutách (nahraté aj syntetizované hlasy) - Voliteľné navádzanie v jazdných pruhoch, zobrazenie názvov ulíc a odhadovaný čas do cieľa - Umožňuje zadať prechodné body trasy - Automatické prepočítanie trasy ak sa odchýlite z trasy - Vyhľadávanie miest podľa adresy, typu (napr.: reštaurácie, hotely, čerpacie stanice, múzeá) alebo zemepisných súradníc Zobrazenie mapy: - Zobrazovanie vašej pozície a orientácie na mape - Možnosť zobrazenia mapy v smere pohybu podľa kompasu - Uloženie obľúbených miest - Zobrazenie POI (bodov záujmu) v okolí - Možnosť zobraziť špecializované podkladové mapy z Internetu - Možnosť zobraziť satelitné snímky (z Bing) - Možnosť zobraziť rôzne prekryvné vrstvy ako turistické/navigačné GPX stopy a ďalšie mapy s nastaviteľnou priehľadnosťou - Voliteľne môže zobraziť názvy v angličtine, lokálnom jazyku alebo foneticky Využíva údaje z OpenStreetMap a Wikipedia: - Informácie vysokej kvality z najlepších projektov sveta - Globálne mapy z OpenStreetMap dostupné podľa krajiny alebo regiónu - Body záujmu z Wikipedia, vhodné pre návštevu zaujímavostí (nedostupné vo verzii zdarma) - Neobmedzené sťahovanie, priamo z aplikácie (vo verzii zdarma je limit 10 mapových súborov) - Vždy aktuálne mapy (aktualizované najmenej raz za mesiac) - Kompaktné vektorové offline mapy - Možnosť voľby medzi kompletnými mapami alebo cestnou sieťou (napr. celé Japonsko má 700 MB, cestná sieť iba 200 MB) - Podporuje aj podkladové dlaždice z Internetu Bezpečnostné funkcie: - Voliteľné automatické prepínanie medzi denným a nočným režimom - Voliteľné zobrazenie povolenej rýchlosti s upozornením na jej prekročenie - Voliteľné približovanie mapy podľa rýchlosti - Zdieľajte vašu polohu s priateľmi, aby vás mohli nájsť Funkcie pre cyklistov a chodcov: - Mapy obsahujú aj cesty pre chodcov, turistov a cyklistov - vhodné pre aktivity v prírode - Špeciálne režimy zobrazenia a navigácie pre chodcov a cyklistov - Voliteľné zobrazenie zastávok hromadnej dopravy (autobus, električka, vlak) vrátane názvov liniek - Voliteľné nahrávanie výletu do GPX súboru (lokálneho alebo online služby) - Voliteľné zobrazenie rýchlosti a nadmorskej výšky - Zobrazenie vrstevníc a tieňovania svahov (s doplnkovými modulmi) Priamo prispievajte do OpenStreetMap: - Nahlásenie poznámok k mape - Odoslanie GPX stôp do OSM priamo z aplikácie - Pridanie POI a priame odoslanie do OSM (alebo neskôr, ak ste offline) - Voliteľné nahrávanie výletu na pozadí (keď je zariadenie v režime spánku) OsmAnd je slobodný a aktívne vyvíjaný softvér. Každý môže prispieť do aplikácie hlásením poznámok, vylepšením prekladu alebo programovaním nových funkcií. Projekt je v stave sústavného vylepšovania vďaka spolupráci vývojárov a používateľov. Pokrok projektu tiež závisí od finančných príspevkov na vývoj, programovanie a testovanie nových funkcií. Kúpením OsmAnd+ (platená verzia) pomôžete aplikácii byť ešte lepšiou! Na osmand.net môžete prispieť všeobecne alebo na vývoj konkrétnej funkcie. Približná kvalita pokrytia: - Západná Európa: **** - Východná Európa: *** - Rusko: *** - Severná Amerika: *** - Južná Amerika: ** - Ázia: ** - Japonsko a Kórea: *** - Blízky Východ: ** - Afrika: ** - Antarktída: * Zoznam obsiahnutých krajín (prakticky celý svet!): Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, Argentína, Arménsko, Aruba, Austrália, Azerbajdžan, Bahamy, Bahrajn, Bangladéš, Barbados, Belgicko, Belize, Benin, Bermudy, Bhután, Bielorusko, Bolívia, Bonaire, Bosna a Hercegovina, Botswana, Brazília, Britské Panenské Ostrovy, Brunei, Bulharsko, Burkina Faso, Burundi, Curaçao, Cyprus, Čad, Česká Republika, Čierna hora, Čile, Čína, Dánsko, Dominika, Dominikánska Republika, Džibuti, Egypt, Ekvádor, El Salvador, Eritrea, Estónsko, Etiópia, Fiji, Filipíny, Fínsko, Francúzska Guiana, Francúzska Polynézia, Francúzsko, Gabon, Gambia, Ghana, Gibraltar, Grécko, Grenada, Grónsko, Gruzínsko, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Holandské Antily, Holandsko, Honduras, Hong Kong, Chorvátsko, India, Indonézia, Irak, Irán, Írsko, Island, Izrael, Jamajka, Japonsko, Jemen, Jersey, Jordánsko, Južná Afrika, Južný Sudán, Kambodža, Kamerun, Kanada, Kapverdy, Katar, Kazachstan, Keňa, Kiribati, Kolumbia, Komory, Kongo, Kostarika, Kuba, Kuvajt, Kyrgyzsko, Laos, Lesotho, Libanon, Libéria, Líbya, Lichtenštajnsko, Litva, Lotyšsko, Luxembursko, Macao, Macedónsko, Madagaskar, Maďarsko, Malajzia, Malawi, Maledivy, Mali, Malta, Maroko, Martinik, Mauretánia, Maurícius, Mayotte, Mexiko, Mikronézia, Mjanmarsko, Moldavsko, Monako, Mongolsko, Montserrat, Mozambik, Namíbia, Nauru, Nemecko, Nepál, Niger, Nigéria, Nikaragua, Nórsko, Nová Kaledónia, Nový Zéland, Omán, Ostrov Man, Pakistan, Palau, Palestínske územie, Panama, Papua Nová Guinea, Paraguaj, Peru, Pobrežie Slonoviny, Poľsko, Portoriko, Portugalsko, Rakúsko, Rovníková Guinea, Rumunsko, Rusko, Rwanda, Sadská Arábia, Saint Barthelemy, Saint Helena, Saint Kitts and Nevis, Saint Lucia, Saint Martin, Saint Pierre and Miquelon, Saint Vincent and the Grenadines, Samoa, San Marino, Senegal, Severná a Južná Kórea, Seychely, Sierra Leone, Singapur, Slovensko, Slovinsko, Somálsko, South Georgia, Spojené Arabské Emiráty, Spojené Kráľovstvo (UK), Spojené Štáty Americké (USA), Srbsko, Srí Lanka, Stredoafrická republika, Sudán, Surinam, Swazijsko, Sýria, Španielsko, Švajčiarsko, Švédsko, Tadžikistan, Taiwan, Taliansko, Tanzánia, Thajsko, Togo, Tokelau, Tonga, Trinidad a Tobago, Tunisko, Turecko, Turkmenistan, Tuvalu, Uganda, Ukrajina, Uruguaj, Uzbekistan, Vanuatu, Vatikán, Venezuela, Vietnam, Východný Timor, Wallis a Futuna, Zambia, Západná Sahara "</string>
     <string name="osmand_plus_extended_description_4000_chars">OsmAnd (OSM Automated Navigation Directions - Automatizované navigačné pokyny) je mapová a navigačná aplikácia s prístupom ku kvalitným celosvetovým údajom z OpenStreetMap (OSM). Všetky údaje máp môžu byť uložené na pamäťovej karte vo vašom zariadení pre použitie bez prístupu na Internet (offline). Pomocou GPS vo vašom zariadení môže OsmAnd ponúknuť navigovanie vizuálnymi a hlasovými usmerneniami pre automobil, bicykel a chodca. Všetky hlavné funkcie pracujú online aj offline (bez nutnosti prístupu na Internet).
 
 OsmAnd+ je platená verzia aplikácie. Jej zakúpením podporíte projekt, nové funkcie a získate najnovšie aktualizácie máp. Aplikáciu si môžete pred zakúpením vyskúšať nainštalovaním verzie zdarma nazvanej OsmAnd.
@@ -1909,7 +1842,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="favorite_category_dublicate_message">Zadaný názov kategórie už existuje. Prosím zadajte iný názov.</string>
     <string name="favorite_category_name">Názov kategórie</string>
     <string name="favorite_category_add_new_title">Pridať novú kategóriu</string>
-    <string name="confirm_download_roadmaps">Naozaj chcete stiahnuť mapu ciest, keď už máte plnú mapu?</string>
+    <string name="confirm_download_roadmaps">Naozaj chcete stiahnuť mapu obsahujúcu iba cesty, keď už máte štandardnú (plnú) mapu?</string>
     <string name="value_downloaded_from_max">%1$.1f z %2$.1f MB</string>
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">Aktualizovať všetko (%1$s MB)</string>
@@ -1922,7 +1855,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="shared_string_send">Odoslať</string>
     <string name="application_dir_description">Zvoľte kam chcete uložiť súbory máp.</string>
     <string name="osm_edit_created_poi">Vytvorený OSM POI</string>
-    <string name="osm_edit_created_bug">Vytvorená OSM chyba</string>
+    
     <string name="world_map_download_descr">Svetová základná mapa (pokrývajúca celý svet pri malom priblížení) chýba alebo je zastaralá. Prosím zvážte stiahnutie Svetovej základnej mapy, aby ste mali kompletné prostredie.</string>
     <string name="shared_string_qr_code">QR kód</string>
     <string name="map_downloaded">Mapa stiahnutá</string>
@@ -1957,4 +1890,48 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
 <string name="read_more">Prečítať viac</string>
     <string name="whats_new">Čo je nové v</string>
     <!-- string name="map_legend_item_description">Vysvetlivky k základnému mapovému štýlu v OsmAnd. Pre ich zobrazenie je potrebné pripojenie na Internet</string -->
-</resources>
+<string name="share_osm_edits_subject">Úpravy OSM zdieľané cez OsmAnd</string>
+    <string name="lang_nds">Dolná nemčina</string>
+    <string name="lang_mk">Macedónsky</string>
+    <string name="lang_fy">Frízsky</string>
+    <string name="lang_als">Albánsky (Tosk)</string>
+    <string name="save_poi_without_poi_type_message">Naozaj chcete uložiť bod bez uvedenia typu?</string>
+    <string name="shared_string_location">Poloha</string>
+    <string name="poi_context_menu_modify_osm_change">Upraviť zmenu OSM</string>
+    <string name="context_menu_item_delete_waypoint">Odstrániť bod GPX?</string>
+    <string name="context_menu_item_edit_waypoint">Upraviť bod GPX</string>
+    <string name="copied_to_clipboard">Skopírované do schránky</string>
+    <string name="release_2_2">" • Nové kontextovo závislé rozhranie pre označenie umiestnení na mape a iných obrazovkách\n\n • Obrazovka mapy je priamo spustená ak nie je zvolené \'Zobraziť úvodný panel pri štarte\'\n\n • Je možné nastaviť ktoré karty sú zobrazené na úvodnom paneli\n\n • Úvodný panel je možné obísť, ak preferujete ovládanie aplikácie cez menu\n\n • Pre stiahnutie máp je možne priamo označiť oblasť na mape sveta\n\n • Hľadanie bodov záujmu (POI) umožňuje presnejšie špecifikácie\n\n • Vylepšené možnosti úpravy POI a OSM poznámok\n\n • Prepracované rozhranie sťahovania máp\n\n a ďalšie vylepšenia... "</string>
+    <string name="osm_save_offline">Uložiť offline</string>
+    <string name="osm_edit_modified_poi">Upravený OSM POI</string>
+    <string name="osm_edit_deleted_poi">Odstránený OSM POI</string>
+    <string name="context_menu_item_open_note">Otvoriť OSM poznámku</string>
+    <string name="osm_edit_reopened_note">Znovuotvorená OSM poznámka</string>
+    <string name="osm_edit_commented_note">Pridaný komentár k OSM poznámke</string>
+    <string name="osm_edit_removed_note">Odstránená OSM poznámka</string>
+	<string name="osm_edit_created_note">Vytvorená OSM poznámka</string>
+	<string name="osn_bug_name">OSM poznámka</string>
+	<string name="osn_add_dialog_title">Vytvoriť poznámku</string>
+	<string name="osn_comment_dialog_title">Pridať komentár</string>
+	<string name="osn_reopen_dialog_title">Znovuotvoriť poznámku</string>
+	<string name="osn_close_dialog_title">Uzavrieť poznámku</string>
+	<string name="osn_add_dialog_success">Poznámka úspešne vytvorená</string>
+	<string name="osn_add_dialog_error">Vznikla výnimka: poznámka nebola vytvorená</string>
+	<string name="osn_close_dialog_success">Poznámka bola úspešne uzavretá</string>
+	<string name="osn_close_dialog_error">Vznikal výnimka: poznámka nebola uzavretá</string>
+	<string name="shared_string_commit">Odoslať</string>
+	
+    <string name="rendering_attr_currentTrackColor_description">Farba GPX</string>
+    <string name="rendering_attr_currentTrackWidth_description">Šírka GPX</string>
+    <string name="rendering_attr_roadStyle_description">Štýl cesty</string>
+    <string name="poi_dialog_reopen">Znovuotvoriť</string>
+	
+    
+    <string name="dashboard_or_drawer_title">Úvodný panel alebo menu</string>
+    <string name="dashboard_or_drawer_description">Nová voľba umožňuje ovládať aplikáciu pomocou úvodného panelu alebo statické menu. Toto nastavenie môžete neskôr zmeniť v nastaveniach panela.</string>
+    <string name="access_from_map_description">Tlačidlo menu spustí úvodný panel, nie menu</string>
+    <string name="access_from_map">Prístup z mapy</string>
+    <string name="use_dashboard_btn">Použiť úvodný panel</string>
+    <string name="use_drawer_btn">Použiť menu</string>
+    <string name="please_specify_poi_type_only_from_list">"Prosím zadajte správny typ POI alebo ho preskočte. "</string>
+    </resources>

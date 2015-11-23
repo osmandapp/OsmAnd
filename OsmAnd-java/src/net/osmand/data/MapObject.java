@@ -18,7 +18,7 @@ import net.osmand.util.Algorithms;
 import net.sf.junidecode.Junidecode;
 
 
-public abstract class MapObject implements Comparable<MapObject>, Serializable {
+public abstract class MapObject implements Comparable<MapObject> {
 	protected String name = null;
 	protected String enName = null;
 	protected Map<String, String> names = null;

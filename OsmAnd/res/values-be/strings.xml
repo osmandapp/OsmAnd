@@ -825,7 +825,7 @@
 	<string name="vector_data">Лакальныя вектарныя мапы</string>
 	<string name="transport_context_menu">Шукаць транспарт на прыпынку</string>
 	
-	<string name="osb_bug_name">Памылка</string>
+	
 	<string name="poi_context_menu_modify">Правіць POI</string>
 	<string name="poi_context_menu_delete">Выдаліць POI</string>
 	<string name="rotate_map_compass_opt">Па компасе</string>
@@ -1072,7 +1072,7 @@
 	<string name="search_tabs_location">Каардынаты</string>
 	
 	<string name="context_menu_item_update_map">Абнавіць мапу</string>
-	<string name="context_menu_item_open_bug">Паведаміць пра памылку на мапе</string>
+	
 	<string name="context_menu_item_create_poi">Стварыць POI</string>
 	<string name="add_favorite_dialog_top_text">Калі ласка, увядзіце імя пункту</string>
 	<string name="add_favorite_dialog_default_favourite_name">Упадабанае</string>
@@ -1081,22 +1081,22 @@
 	<string name="favourites_context_menu_delete">Выдаліць упадабанае</string>
 	<string name="favourites_remove_dialog_msg">Вы сапраўды хочаце выдаліць кропку \'%s\' з закладак?</string>
 	<string name="favourites_remove_dialog_success">Кропка {0} была паспяхова выдаленая з закладак.</string>
-	<string name="osb_add_dialog_title">Увядзіце тэкст памылкі</string>
-	<string name="osb_add_dialog_success">Памылка пасьпяхова створана</string>
-	<string name="osb_add_dialog_error">Выключная сітуацыя: заўвага не была створана</string>
+	
+	
+	
 	<string name="osb_author_dialog_password">OSM пароль (неабавязковы)</string>
-	<string name="osb_comment_menu_item">Дадаць камэнтар</string>
+	
 	<string name="osb_comment_dialog_message">Паведамленьне</string>
 	<string name="osb_comment_dialog_author">Імя аўтара</string>
-	<string name="osb_comment_dialog_title">Даданьне каментара да памылкі</string>
-	<string name="osb_comment_dialog_add_button">Дадаць камэнтар</string>
+	
+	
 	<string name="osb_comment_dialog_success">Гэты камэнтар быў пасьпяхова дададзены</string>
 	<string name="osb_comment_dialog_error">Выключная сітуацыя: каментар не быў дададзены</string>
-	<string name="osb_close_menu_item">Зачыніць памылку</string>
-	<string name="osb_close_dialog_title">Закрыцьцё памылкі</string>
-	<string name="osb_close_dialog_close_button">Зачыніць памылку</string>
-	<string name="osb_close_dialog_success">Памылка была пасьпяхова зачынена</string>
-	<string name="osb_close_dialog_error">Выключная сітуацыя: памылка не была зачынена</string>
+	
+	
+	
+	
+	
 	<string name="poi_edit_title">Правіць POI</string>
 	<string name="poi_create_title">Стварыць POI</string>
 	<string name="poi_error_poi_not_found">POI не знойдзена або не зьяўляецца кропкай</string>
@@ -1791,7 +1791,7 @@
     <string name="rendering_value_disabled_name">Адключана</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Афарбоўка згодна OSMC</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Афарбоўка згодна з праглядам маршруту</string>
-    <string name="osm_edit_context_menu_delete">Выдаліць праўкі OSM</string>    
+    <string name="osm_edit_context_menu_delete">Выдаліць праўку OSM</string>    
     <string name="read_full_article">Чытаць артыкул цалкам (анлайн)</string>
     
     <string name="local_indexes_cat_wiki">Вікіпэдыя</string>
@@ -1974,7 +1974,7 @@
     
     <string name="shared_string_upload">Адаслаць</string>
     <string name="osm_edit_created_poi">Створана OSM POI</string>
-    <string name="osm_edit_created_bug">Створана OSM памылка</string>
+    
     <string name="go_to_map">Перайсьці да мапы</string>
     
     
@@ -2005,4 +2005,33 @@
     <string name="read_more">Падрабязьней</string>
     <string name="whats_new">Што новага ў</string>
     <string name="rendering_attr_hideProposed_name">Схаваць плануемыя аб\'екты</string>
+    <string name="lang_mk">македонская</string>
+    <string name="lang_nds">ніжненямецкая</string>
+    <string name="lang_fy">заходнефрыская</string>
+    <string name="lang_als">альбанская (тоская)</string>
+    <string name="save_poi_without_poi_type_message">Вы сапраўды хочаце захаваць POI бяз тыпу?</string>
+    <string name="share_osm_edits_subject">Рэдагаваньні OSM апублікаваныя праз OsmAnd</string>
+    <string name="shared_string_location">Месцазнаходжаньне</string>
+    <string name="copied_to_clipboard">Скапіявана ў буфер абмену</string>
+    <string name="osm_save_offline">Захаваць лякальна</string>
+    <string name="osm_edit_modified_poi">OSM POI адрэдагавана</string>
+    <string name="osm_edit_deleted_poi">OSM POI выдаленая</string>
+    <string name="context_menu_item_open_note">Дадаць нататку OSM</string>
+    <string name="osm_edit_reopened_note">Нататка OSM адкрыта зноў</string>
+    <string name="osm_edit_commented_note">Да нататкі OSM дададзены камэнтар</string>
+    <string name="osm_edit_removed_note">Нататка OSM выдаленая</string>
+	<string name="osm_edit_created_note">Нататка OSM створана</string>
+	<string name="osn_bug_name">Нататка OSM</string>
+	<string name="osn_add_dialog_title">Стварыць нататку</string>
+	<string name="osn_comment_dialog_title">Дадаць камэнтар</string>
+	<string name="osn_reopen_dialog_title">Паўторна адкрыць нататку</string>
+	<string name="osn_close_dialog_title">Закрыць нататку</string>
+	<string name="osn_add_dialog_success">Нататка пасьпяхова створана</string>
+	<string name="osn_add_dialog_error">Памылка: нататка не была створана</string>
+	<string name="osn_close_dialog_success">Нататка была пасьпяхова зачынена</string>
+	<string name="osn_close_dialog_error">Памылка: нататка ня была зачынена</string>
+	<string name="shared_string_commit">Адаслаць</string>
+	
+    <string name="rendering_attr_roadStyle_description">Стыль адлюстраваньня дарог</string>
+    <string name="poi_context_menu_modify_osm_change">Рэдагаваць POI</string>
     </resources>

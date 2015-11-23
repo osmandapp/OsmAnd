@@ -247,7 +247,7 @@
 	<string name="poi_railway_station">Railway station</string>
 	<string name="poi_railway_platform">Railway platform</string>
 	<string name="poi_halt">Railway stop</string>
-	<string name="poi_railway_subway_entrance">Subway entrance</string>
+	<string name="poi_subway_entrance">Subway entrance</string>
 	<string name="poi_subway_station">Subway station</string>
 	<string name="poi_railway_buffer_stop">Railway buffer stop</string>
 	<string name="poi_taxi">Taxi stand</string>
@@ -1581,15 +1581,15 @@
 	<string name="poi_drive_in_yes">Drive-in: yes</string>
 	<string name="poi_drive_in_no">Drive-in: no</string>
 	<string name="poi_drive_through_yes">Drive-through: yes</string>
-	<string name="poi_drive_through_no">Drive-through: yes</string>
+	<string name="poi_drive_through_no">Drive-through: no</string>
 
 	<string name="poi_brewery_additional">Brewery name</string>
 	<string name="poi_microbrewery_yes">Microbrewery</string>
 	<string name="poi_microbrewery_no">No microbrewery</string>
 
-	<string name="poi_takeaway_yes">Takeway</string>
-	<string name="poi_takeaway_no">No takeway</string>
-	<string name="poi_takeaway_only">Takeway only</string>
+	<string name="poi_takeaway_yes">Takeaway</string>
+	<string name="poi_takeaway_no">No takeaway</string>
+	<string name="poi_takeaway_only">Takeaway only</string>
 
 	<string name="poi_delivery_yes">Delivery</string>
 	<string name="poi_delivery_no">No delivery</string>
@@ -2004,8 +2004,8 @@
 
 	<string name="poi_fuel_91ul">91UL fuel</string>
 	<string name="poi_fuel_100ll">100LL fuel</string>
-	<string name="poi_autogas">Autogas</string>
-	<string name="poi_jeta1">Jet A-1 fuel</string>
+	<string name="poi_fuel_autogas">Autogas</string>
+	<string name="poi_fuel_jeta1">Jet A-1 fuel</string>
 	<string name="poi_fuel_adblue">AdBlue fuel</string>
 
 	<string name="poi_fuel_wood">Fuel: wood</string>
@@ -2392,5 +2392,70 @@
 	<string name="poi_fitness_station">Fitness station</string>
 
 	<string name="poi_hackerspace">Hackerspace</string>
+
+	<string name="poi_wiki_lang_af">Africaans wiki</string>
+	<string name="poi_wiki_lang_als">Alsatian wiki</string>
+	<string name="poi_wiki_lang_az">Azeri wiki</string>
+	<string name="poi_wiki_lang_bn">Bengali wiki</string>
+	<string name="poi_wiki_lang_bpy">Bishnupriya wiki</string>
+	<string name="poi_wiki_lang_br">Breton wiki</string>
+	<string name="poi_wiki_lang_bs">Bosnian wiki</string>
+	<string name="poi_wiki_lang_cy">Welsh wiki</string>
+	<string name="poi_wiki_lang_eo">Esperanto wiki</string>
+	<string name="poi_wiki_lang_eu">Basque wiki</string>
+	<string name="poi_wiki_lang_fa">Farsi wiki</string>
+	<string name="poi_wiki_lang_fy">Frysk wiki</string>
+	<string name="poi_wiki_lang_ga">Irish wiki</string>
+	<string name="poi_wiki_lang_hy">Armenian wiki</string>
+	<string name="poi_wiki_lang_is">Icelandic wiki</string>
+	<string name="poi_wiki_lang_ka">Georgian wiki</string>
+	<string name="poi_wiki_lang_ku">Kurdish wiki</string>
+	<string name="poi_wiki_lang_la">Latin wiki</string>
+	<string name="poi_wiki_lang_lb">Luxembourgish wiki</string>
+	<string name="poi_wiki_lang_mk">Macedonian wiki</string>
+	<string name="poi_wiki_lang_ml">Malayalam wiki</string>
+	<string name="poi_wiki_lang_mr">Marathi wiki</string>
+	<string name="poi_wiki_lang_nds">Low Saxon wiki</string>
+	<string name="poi_wiki_lang_nv">Navajo wiki</string>
+	<string name="poi_wiki_lang_os">Ossetian wiki</string>
+	<string name="poi_wiki_lang_pms">Piedmontese wiki</string>
+	<string name="poi_wiki_lang_sc">Sardinian wiki</string>
+	<string name="poi_wiki_lang_sh">Serbo-Croatian wiki</string>
+	<string name="poi_wiki_lang_sq">Albanian wiki</string>
+	<string name="poi_wiki_lang_ta">Tamil wiki</string>
+	<string name="poi_wiki_lang_tl">Filipino wiki</string>
+
+	<string name="poi_wiki_lang_war">Waray wiki</string>
+	<string name="poi_wiki_lang_min">Minangkabau wiki</string>
+	<string name="poi_wiki_lang_kk">Kazakh wiki</string>
+	<string name="poi_wiki_lang_uz">Uzbek wiki</string>
+	<string name="poi_wiki_lang_ce">Chechen wiki</string>
+	<string name="poi_wiki_lang_ur">Urdu wiki</string>
+	<string name="poi_wiki_lang_oc">Occitan wiki</string>
+	<string name="poi_wiki_lang_zhminnan">Southern Min wiki</string>
+	<string name="poi_wiki_lang_mg">Malagasy wiki</string>
+	<string name="poi_wiki_lang_tt">Tatar wiki</string>
+	<string name="poi_wiki_lang_jv">Javanese wiki</string>
+	<string name="poi_wiki_lang_ky">Kyrgyz wiki</string>
+	<string name="poi_wiki_lang_zhyue">Cantonese wiki</string>
+	<string name="poi_wiki_lang_ast">Astur-Leonese wiki</string>
+	<string name="poi_wiki_lang_tg">Tajik wiki</string>
+	<string name="poi_wiki_lang_ba">Bashkir wiki</string>
+	<string name="poi_wiki_lang_sco">Scots wiki</string>
+	<string name="poi_wiki_lang_pnb">Punjabi wiki</string>
+	<string name="poi_wiki_lang_cv">Chuvash wiki</string>
+	<string name="poi_wiki_lang_lmo">Lombard wiki</string>
+	<string name="poi_wiki_lang_my">Burmese wiki</string>
+	<string name="poi_wiki_lang_yo">Yoruba wiki</string>
+	<string name="poi_wiki_lang_an">Aragonese wiki</string>
+	<string name="poi_wiki_lang_ne">Nepali wiki</string>
+	<string name="poi_wiki_lang_gu">Gujarati wiki</string>
+	<string name="poi_wiki_lang_scn">Sicilian wiki</string>
+	<string name="poi_wiki_lang_bar">Bavarian wiki</string>
+	<string name="poi_wiki_lang_mn">Mongolian wiki</string>
+	<string name="poi_wiki_lang_nap">Neapolitan wiki</string>
+
+	<string name="poi_craft_electronics">Electronics repair</string>
+	<string name="poi_fireworks">Fireworks store</string>
 
 </resources>

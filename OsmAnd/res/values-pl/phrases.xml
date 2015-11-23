@@ -142,7 +142,7 @@
 	<string name="poi_bus_station">Dworzec autobusowy</string>
 	<string name="poi_railway_station">Stacja kolejowa</string>
 	<string name="poi_railway_platform">Peron kolejowy</string>
-	<string name="poi_railway_subway_entrance">Metro - wejście</string>
+	<string name="poi_subway_entrance">Metro - wejście</string>
 	<string name="poi_subway_station">Stacja metra</string>
 	<string name="poi_taxi">Postój TAXI</string>
 
@@ -895,11 +895,11 @@
 	<string name="poi_cutline">Tablica wyjaśniająca</string>
 	<string name="poi_tree">Drzewo</string>
 	<string name="poi_kent_carriage_gap">Bramka (szerokość powozu)</string>
-	<string name="poi_icn_ref">Międzynarodowa trasa rowerowa</string>
-	<string name="poi_ncn_ref">Krajowa trasa rowerowa</string>
-	<string name="poi_rcn_ref">Regionalna trasa rowerowa</string>
-	<string name="poi_lcn_ref">Lokalna trasa rowerowa</string>
-	<string name="poi_iwn_ref">Sieć węzłów międzynarodowej sieci pieszej</string>
+	<string name="poi_icn_ref">Punkt międzynarodowej trasy rowerowej</string>
+	<string name="poi_ncn_ref">Punkt krajowej trasy rowerowej</string>
+	<string name="poi_rcn_ref">Punkt regionalnej trasy rowerowej</string>
+	<string name="poi_lcn_ref">Punkt lokalnej trasy rowerowej</string>
+	<string name="poi_iwn_ref">Punkt sieci węzłów międzynarodowej sieci pieszej</string>
 	<string name="poi_nwn_ref">Sieć węzłów krajowej sieci pieszej</string>
 	<string name="poi_rwn_ref">Sieć węzłów regionalnej sieci pieszej</string>
 	<string name="poi_lwn_ref">Sieć węzłów lokalnej sieci pieszej</string>
@@ -937,7 +937,7 @@
 <string name="poi_doors">Drzwi</string>
 	<string name="poi_perfumery">Perfumeria</string>
 
-	<string name="poi_recycling_centre">Centrum</string>
+	<string name="poi_recycling_centre">Centrum recyklingu</string>
 	<string name="poi_recycling_container">Pojemnik</string>
 	<string name="poi_recycling_glass">Szkło</string>
 	<string name="poi_recycling_paper">Papier</string>
@@ -1156,4 +1156,8 @@
 
 	<string name="poi_lit_yes">Oświetlenie: tak</string>
 	<string name="poi_cross">Krzyż</string>
+	<string name="poi_ford_stepping_stones">Przejście przez bród po przygotowanych kamieniach</string>
+	<string name="poi_traffic_calming_island">Wysepka spowalniająca</string>
+	<string name="poi_power_tower">Wieża trakcji elektrycznej</string>
+	<string name="poi_denomination_greek_catholic">Grekokatolicki</string>
 	</resources>

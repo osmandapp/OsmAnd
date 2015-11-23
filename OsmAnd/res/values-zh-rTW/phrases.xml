@@ -215,7 +215,7 @@
 	<string name="poi_railway_station">火車站</string>
 	<string name="poi_railway_platform">鐵路月台</string>
 	<string name="poi_halt">火車站</string>
-	<string name="poi_railway_subway_entrance">捷運入口</string>
+	<string name="poi_subway_entrance">捷運入口</string>
 	<string name="poi_subway_station">捷運車站</string>
 	<string name="poi_railway_buffer_stop">鐵路止衝擋</string>
 	<string name="poi_taxi">計程車站</string>
@@ -322,7 +322,7 @@
 	<string name="poi_training">培訓設施</string>
 	<string name="poi_university">大學</string>
 
-	<string name="poi_social_facility">公共設施</string>
+	<string name="poi_social_facility">社會設施</string>
 	<string name="poi_courthouse">法院</string>
 	<string name="poi_prison">監獄</string>
 	<string name="poi_register_office">民事登記處</string>
@@ -2026,8 +2026,8 @@
 
 	<string name="poi_fuel_91ul">91UL 燃料</string>
 	<string name="poi_fuel_100ll">100LL 燃料</string>
-	<string name="poi_autogas">液化石油氣</string>
-	<string name="poi_jeta1">Jet A-1 燃料</string>
+	<string name="poi_fuel_autogas">液化石油氣</string>
+	<string name="poi_fuel_jeta1">Jet A-1 燃料</string>
 	<string name="poi_fuel_adblue">AdBlue 燃料</string>
 
 	<string name="poi_fuel_wood">燃料：木材</string>
@@ -2157,5 +2157,31 @@
 	<string name="poi_impromptu_no">即興：否</string>
 	<string name="poi_refugee_yes">為難民的福利設施</string>
 	<string name="poi_refugee_no">難民：無</string>
+
+	<string name="poi_sanitary_dump_station_yes">衛生轉儲站：有</string>
+	<string name="poi_sanitary_dump_station_no">衛生轉儲站：無</string>
+	<string name="poi_sanitary_dump_station_customers">衛生轉儲站：僅客戶</string>
+	<string name="poi_social_facility_group_home">社會設施：團體家屋</string>
+	<string name="poi_social_facility_assisted_living">社會設施：輔助生活</string>
+	<string name="poi_social_facility_outreach">社會設施：推廣</string>
+	<string name="poi_social_facility_food_bank">社會設施：食物銀行</string>
+	<string name="poi_social_facility_shelter">社會設施：收容所</string>
+	<string name="poi_social_facility_ambulatory_care">社會設施：門診</string>
+	<string name="poi_social_facility_workshop">社會設施：工場</string>
+	<string name="poi_social_facility_day_care">社會設施：日間護理</string>
+
+	<string name="poi_social_facility_for_senior">目標社群：老年人</string>
+	<string name="poi_social_facility_for_child">目標社群：兒童</string>
+	<string name="poi_social_facility_for_orphan">目標社群：孤兒</string>
+	<string name="poi_social_facility_for_disabled">目標社群：身心障礙者</string>
+	<string name="poi_social_facility_for_mental_health">目標社群：精神疾病患者</string>
+	<string name="poi_social_facility_for_juvenile">目標社群：青少年</string>
+	<string name="poi_social_facility_for_homeless">目標社群：無家可歸者</string>
+	<string name="poi_social_facility_for_migrant">目標社群：移民</string>
+	<string name="poi_social_facility_for_underprivileged">目標社群：貧困者</string>
+	<string name="poi_social_facility_for_drug_addicted">目標社群：吸毒成癮者</string>
+	<string name="poi_social_facility_for_unemployed">目標社群：失業者</string>
+	<string name="poi_social_facility_for_diseased">目標社群：病患者</string>
+	<string name="poi_social_facility_for_child_juvenile">目標社群：兒童；青少年</string>
 
 	</resources>

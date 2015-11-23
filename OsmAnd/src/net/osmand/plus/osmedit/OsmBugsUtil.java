@@ -1,12 +1,14 @@
 package net.osmand.plus.osmedit;
 
+import net.osmand.plus.osmedit.OsmPoint.Action;
+
 public interface OsmBugsUtil {
 
-	public static enum Action {CREATE, MODIFY, CLOSE};
-
-	public String createNewBug(double latitude, double longitude, String text, String author);
-
-	public String addingComment(long id, String text, String author);
-
-	public String closingBug(long id, String text, String author);
+	public static class OsmBugResult {
+		OsmNotesPoint local;
+		String warning;
+	}
+	
+	public OsmBugResult commit(OsmNotesPoint bug, String text, Action action);
+	
 }

@@ -15,11 +15,18 @@ import net.osmand.util.Algorithms;
 
 public class AmenityMenuController extends MenuController {
 
-	private final Amenity amenity;
+	private Amenity amenity;
 
-	public AmenityMenuController(OsmandApplication app, MapActivity mapActivity, PointDescription pointDescription, final Amenity amenity) {
+	public AmenityMenuController(OsmandApplication app, MapActivity mapActivity, PointDescription pointDescription, Amenity amenity) {
 		super(new AmenityMenuBuilder(app, amenity), pointDescription, mapActivity);
 		this.amenity = amenity;
+	}
+
+	@Override
+	protected void setObject(Object object) {
+		if (object instanceof Amenity) {
+			this.amenity = (Amenity) object;
+		}
 	}
 
 	@Override
@@ -56,6 +63,11 @@ public class AmenityMenuController extends MenuController {
 	}
 
 	@Override
+	public boolean displayDistanceDirection() {
+		return true;
+	}
+
+	@Override
 	public String getTypeStr() {
 		PoiCategory pc = amenity.getType();
 		PoiType pt = pc.getPoiTypeByKeyName(amenity.getSubType());
@@ -69,9 +81,23 @@ public class AmenityMenuController extends MenuController {
 	}
 
 	@Override
+	public String getCommonTypeStr() {
+		PoiCategory pc = amenity.getType();
+		return pc.getTranslation();
+	}
+
+	@Override
 	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, LatLon latLon) {
 		if (!Algorithms.isEmpty(typeStr)) {
-			addPlainMenuItem(R.drawable.ic_action_info_dark, typeStr, false);
+			int resId = getLeftIconId();
+			if (resId == 0) {
+				PoiCategory pc = amenity.getType();
+				resId = RenderingIcons.getBigIconResourceId(pc.getIconKeyName());
+			}
+			if (resId == 0) {
+				resId = R.drawable.ic_action_folder_stroke;
+			}
+			addPlainMenuItem(resId, typeStr, false);
 		}
 		addMyLocationToPlainItems(pointDescription, amenity.getLocation());
 	}

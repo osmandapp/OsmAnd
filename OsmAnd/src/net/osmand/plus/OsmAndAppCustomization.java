@@ -96,8 +96,6 @@ public class OsmAndAppCustomization {
 	public void prepareOptionsMenu(MapActivity mapActivity, ContextMenuAdapter optionsMenuHelper) {
 	}
 
-	public void prepareLocationMenu(MapActivity mapActivity, ContextMenuAdapter adapter) {
-	}
 
 	public String getIndexesUrl() {
 		return "http://"+IndexConstants.INDEX_DOWNLOAD_DOMAIN+"/get_indexes?gzip&" + Version.getVersionAsURLParam(app); //$NON-NLS-1$;

@@ -316,7 +316,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com --><resources>
 	<string name="vector_data">Bản đồ vector Offline</string>
 	<string name="transport_context_menu">Search transport at stop</string>
 	
-	<string name="osb_bug_name">Bug</string>
+	
 	<string name="poi_context_menu_modify">Sửa địa điểm</string>
 	<string name="poi_context_menu_delete">Xóa địa điểm</string>
 	<string name="rotate_map_compass_opt">Theo la bàn</string>
@@ -590,7 +590,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com --><resources>
 <string name="search_tabs_location">Khu vực</string>
 
 <string name="context_menu_item_update_map">Cập nhật bản đồ</string>
-<string name="context_menu_item_open_bug">Mở OSM bug</string>
+
 <string name="context_menu_item_create_poi">Tạo địa điểm</string>
 
 <string name="shared_string_yes">OK</string>
@@ -608,23 +608,23 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com --><resources>
 <string name="favourites_remove_dialog_msg">Bạn có muốn xóa điểm ưa thích \'%s\'?</string>
 <string name="favourites_remove_dialog_success">Điểm Ưa thích {0} đã xóa thành công.</string>
 
-<string name="osb_add_dialog_title">Nhập thông tin bug</string>
-<string name="osb_add_dialog_success">Bug được tạo thành công</string>
-<string name="osb_add_dialog_error">Exception occured: bug was not created</string>
 
-<string name="osb_comment_menu_item">Thêm bình luận</string>
+
+
+
+
 <string name="osb_comment_dialog_message">Nội dung</string>
 <string name="osb_comment_dialog_author">Tên tác giả</string>
-<string name="osb_comment_dialog_title">Thêm bình luận cho lỗi</string>
-<string name="osb_comment_dialog_add_button">Thêm bình luận</string>
+
+
 <string name="osb_comment_dialog_success">Bình luận được thêm thành công</string>
 <string name="osb_comment_dialog_error">Ngoại lệ xảy ra: Bình luận không được thêm</string>
 
-<string name="osb_close_menu_item">Đóng bug</string>
-<string name="osb_close_dialog_title">Đang đóng bug</string>
-<string name="osb_close_dialog_close_button">Đóng bug</string>
-<string name="osb_close_dialog_success">Bug đã được đóng thành công</string>
-<string name="osb_close_dialog_error">Biệt lệ xảy ra: bug không được đóng</string>
+
+
+
+
+
 
 <string name="poi_edit_title">Sửa địa điểm</string>
 <string name="poi_create_title">Tạo địa điểm</string>

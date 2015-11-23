@@ -24,6 +24,13 @@ public class FavouritePointMenuController extends MenuController {
 	}
 
 	@Override
+	protected void setObject(Object object) {
+		if (object instanceof FavouritePoint) {
+			this.fav = (FavouritePoint) object;
+		}
+	}
+
+	@Override
 	protected int getSupportedMenuStatesPortrait() {
 		return MenuState.HEADER_ONLY | MenuState.HALF_SCREEN | MenuState.FULL_SCREEN;
 	}
@@ -59,13 +66,13 @@ public class FavouritePointMenuController extends MenuController {
 	}
 
 	@Override
-	public Drawable getSecondLineIcon() {
-		return getIcon(R.drawable.ic_small_group);
+	public Drawable getSecondLineTypeIcon() {
+		return getIcon(R.drawable.map_small_group);
 	}
 
 	@Override
 	public int getFavActionIconId() {
-		return R.drawable.ic_action_edit_dark;
+		return R.drawable.map_action_edit_dark;
 	}
 
 	@Override

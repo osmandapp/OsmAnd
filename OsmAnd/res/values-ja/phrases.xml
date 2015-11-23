@@ -207,7 +207,7 @@
 	<string name="poi_railway_station">鉄道駅(Railway station)</string>
 	<string name="poi_railway_platform">鉄道プラットホーム(Railway platform)</string>
 	<string name="poi_halt">鉄道停車位置(Railway stop)</string>
-	<string name="poi_railway_subway_entrance">地下鉄入り口(Subway entrance)</string>
+	<string name="poi_subway_entrance">地下鉄入り口(Subway entrance)</string>
 	<string name="poi_subway_station">地下鉄駅(Subway station)</string>
 	<string name="poi_railway_buffer_stop">鉄道用車止め(Railway buffer stop)</string>
 	<string name="poi_helipad">ヘリポート(Helipad)</string>

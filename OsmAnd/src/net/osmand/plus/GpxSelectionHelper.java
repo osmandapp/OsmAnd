@@ -1,8 +1,6 @@
 package net.osmand.plus;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
+import android.graphics.Bitmap;
 
 import net.osmand.IProgress;
 import net.osmand.plus.GPXUtilities.GPXFile;
@@ -11,7 +9,6 @@ import net.osmand.plus.GPXUtilities.Route;
 import net.osmand.plus.GPXUtilities.Track;
 import net.osmand.plus.GPXUtilities.TrkSegment;
 import net.osmand.plus.GPXUtilities.WptPt;
-import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
@@ -21,7 +18,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.graphics.Bitmap;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GpxSelectionHelper {
 
@@ -52,7 +51,16 @@ public class GpxSelectionHelper {
 	public List<SelectedGpxFile> getSelectedGPXFiles() {
 		return selectedGPXFiles;
 	}
-	
+
+	public SelectedGpxFile getSelectedGPXFile(WptPt point) {
+		for (SelectedGpxFile g : selectedGPXFiles) {
+			if (g.getGpxFile().points.contains(point)) {
+				return g;
+			}
+		}
+		return null;
+	}
+
 	public final String getString(int resId, Object... formatArgs) {
 		return app.getString(resId, formatArgs);
 	}
@@ -80,6 +88,7 @@ public class GpxSelectionHelper {
 			int k = 1;
 			for (Track t : g.tracks) {
 				GpxDisplayGroup group = new GpxDisplayGroup(g);
+				group.gpxName = name;
 				group.color = t.getColor(g.getColor(0));
 				group.setType(GpxDisplayItemType.TRACK_SEGMENT);
 				group.setTrack(t);
@@ -98,6 +107,7 @@ public class GpxSelectionHelper {
 			int k = 0;
 			for (Route route : g.routes) {
 				GpxDisplayGroup group = new GpxDisplayGroup(g);
+				group.gpxName = name;
 				group.setType(GpxDisplayItemType.TRACK_ROUTE_POINTS);
 				String d = getString(R.string.gpx_selection_number_of_points, name, route.points.size());
 				if(route.name != null && route.name.length() > 0) {
@@ -128,6 +138,7 @@ public class GpxSelectionHelper {
 		
 		if (g.points.size() > 0) {
 			GpxDisplayGroup group = new GpxDisplayGroup(g);
+			group.gpxName = name;
 			group.setType(GpxDisplayItemType.TRACK_POINTS);
 			group.setDescription(getString(R.string.gpx_selection_number_of_points, g.points.size()));
 			group.setName(getString(R.string.gpx_selection_points, name));
@@ -503,6 +514,7 @@ public class GpxSelectionHelper {
 		private GpxDisplayItemType type = GpxDisplayItemType.TRACK_SEGMENT;
 		private List<GpxDisplayItem> list = new ArrayList<GpxDisplayItem>();
 		private GPXFile gpx;
+		private String gpxName;
 		private String name;
 		private String description;
 		private Track track;
@@ -547,7 +559,11 @@ public class GpxSelectionHelper {
 		public void setName(String name) {
 			this.name = name;
 		}
-		
+
+		public String getGpxName() {
+			return gpxName;
+		}
+
 		public String getName() {
 			return name;
 		}

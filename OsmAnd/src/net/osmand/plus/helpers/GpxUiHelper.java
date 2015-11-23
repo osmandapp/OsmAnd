@@ -27,6 +27,7 @@ import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.GPXUtilities.TrkSegment;
+import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -169,6 +170,30 @@ public class GpxUiHelper {
 		return null;
 	}
 
+	public static AlertDialog selectSingleGPXFile(final Activity activity,
+											final boolean showCurrentGpx, final CallbackWithObject<GPXFile[]> callbackWithObject) {
+		OsmandApplication app = (OsmandApplication) activity.getApplication();
+		int gpxDirLength = app.getAppPath(IndexConstants.GPX_INDEX_DIR).getAbsolutePath().length();
+		List<SelectedGpxFile> selectedGpxFiles = app.getSelectedGpxHelper().getSelectedGPXFiles();
+		final List<String> list = new ArrayList<>(selectedGpxFiles.size() + 1);
+		if (!selectedGpxFiles.isEmpty() || showCurrentGpx) {
+			if (showCurrentGpx) {
+				list.add(activity.getString(R.string.shared_string_currently_recording_track));
+			}
+
+			for (SelectedGpxFile selectedGpx : selectedGpxFiles) {
+				if (!selectedGpx.getGpxFile().showCurrentTrack) {
+					list.add(selectedGpx.getGpxFile().path.substring(gpxDirLength + 1));
+				}
+			}
+
+			final ContextMenuAdapter adapter = createGpxContextMenuAdapter(activity, list, null, false,
+					showCurrentGpx);
+			return createDialog(activity, showCurrentGpx, false, callbackWithObject, list, adapter);
+		}
+		return null;
+	}
+
 	private static ContextMenuAdapter createGpxContextMenuAdapter(Activity activity, List<String> allGpxList,
 																  List<String> selectedGpxList, boolean multipleChoice,
 																  boolean showCurrentTrack) {
@@ -240,7 +265,10 @@ public class GpxUiHelper {
 			@Override
 			public View getView(final int position, View convertView, ViewGroup parent) {
 				// User super class to create the View
-				View v = activity.getLayoutInflater().inflate(layout, null);
+				View v = convertView;
+				if (v == null) {
+					v = activity.getLayoutInflater().inflate(layout, null);
+				}
 				ImageView icon = (ImageView) v.findViewById(R.id.icon);
 				icon.setImageDrawable(adapter.getImage(app, position, light));
 				final ArrayAdapter<String> arrayAdapter = this;
@@ -339,7 +367,14 @@ public class GpxUiHelper {
 					if (showCurrentGpx && position == 0) {
 						callbackWithObject.processResult(null);
 					} else {
-						loadGPXFileInDifferentThread(activity, callbackWithObject, dir, null, list.get(position));
+						String fileName = list.get(position);
+						SelectedGpxFile selectedGpxFile =
+								app.getSelectedGpxHelper().getSelectedFileByName(fileName);
+						if (selectedGpxFile != null) {
+							callbackWithObject.processResult(new GPXFile[]{selectedGpxFile.getGpxFile()});
+						} else {
+							loadGPXFileInDifferentThread(activity, callbackWithObject, dir, null, fileName);
+						}
 					}
 				}
 			}

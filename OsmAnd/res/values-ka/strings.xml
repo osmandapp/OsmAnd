@@ -477,7 +477,7 @@
   <string name="vector_data">გათიშული ვექტორული რუკები</string>
   <string name="transport_context_menu">გაჩერებაზე ტრანსპორტის ძებნა</string>
   
-  <string name="osb_bug_name">ხოჭო</string>
+  
   <string name="poi_context_menu_modify">POI-ის ჩასწორება</string>
   <string name="poi_context_menu_delete">POI-ს წაშლა</string>
   <string name="rotate_map_compass_opt">კომპასისაკენ</string>
@@ -746,7 +746,7 @@
   <string name="search_tabs_location">მდებარეობა</string>
   
   <string name="context_menu_item_update_map">რუკის განახლება</string>
-  <string name="context_menu_item_open_bug">OSM-ის შეცდომის რეპორტი</string>
+  
   <string name="context_menu_item_create_poi">POI-ის შექმნა</string>
   <string name="shared_string_yes">დიახ</string>
   <string name="shared_string_cancel">გაუქმება</string>
@@ -760,21 +760,21 @@
   <string name="favourites_context_menu_delete">რჩეულის წაშლა</string>
   <string name="favourites_remove_dialog_msg">გნებავთ რჩეული წერტილის \'%s\' წაშლა?</string>
   <string name="favourites_remove_dialog_success">რჩეული წერტილი {0} წარმატებით წაიშალა.</string>
-  <string name="osb_add_dialog_title">შეცდომის ტექსტი</string>
-  <string name="osb_add_dialog_success">ხოჭოს რეპორტი წარმატებულად შეიქმნა</string>
-  <string name="osb_add_dialog_error">მოხდა შეცდომა: ხოჭოს რეპორტი არ შეიქმნა</string>
-  <string name="osb_comment_menu_item">კომენტარის დამატება</string>
+  
+  
+  
+  
   <string name="osb_comment_dialog_message">შეტყობინება</string>
   <string name="osb_comment_dialog_author">ავტორი</string>
-  <string name="osb_comment_dialog_title">ხოჭოსათვის კომენტარის დამატება</string>
-  <string name="osb_comment_dialog_add_button">კომენტარის დამატება</string>
+  
+  
   <string name="osb_comment_dialog_success">კომენტარი დამატებულია</string>
   <string name="osb_comment_dialog_error">მოხდა შეცდომა: კომენტარი არ დაემატა</string>
-  <string name="osb_close_menu_item">ხოჭოს რეპორტის დახურვა</string>
-  <string name="osb_close_dialog_title">მიმდინარეობს ხოჭოს რეპორტის დახურვა</string>
-  <string name="osb_close_dialog_close_button">ხოჭოს რეპორტის დახურვა</string>
-  <string name="osb_close_dialog_success">ხოჭოს რეპორტი წარმატებით დაიხურა</string>
-  <string name="osb_close_dialog_error">მოხდა შეცდომა: ხოჭოს რეპორტი არ დაიხურა</string>
+  
+  
+  
+  
+  
   <string name="poi_edit_title">POI-ის ჩასწორება</string>
   <string name="poi_create_title">POI-ის შექმნა</string>
   <string name="poi_error_poi_not_found">POI ვერ მოიძებნა</string>

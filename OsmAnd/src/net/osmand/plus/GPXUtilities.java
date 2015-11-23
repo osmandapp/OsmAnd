@@ -1,6 +1,20 @@
 
 package net.osmand.plus;
 
+import android.content.Context;
+import android.graphics.Color;
+
+import net.osmand.Location;
+import net.osmand.PlatformUtil;
+import net.osmand.data.LocationPoint;
+import net.osmand.data.PointDescription;
+import net.osmand.util.Algorithms;
+
+import org.apache.commons.logging.Log;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlSerializer;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -27,20 +41,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Stack;
 import java.util.TimeZone;
-
-import net.osmand.Location;
-import net.osmand.PlatformUtil;
-import net.osmand.data.LocationPoint;
-import net.osmand.data.PointDescription;
-import net.osmand.util.Algorithms;
-
-import org.apache.commons.logging.Log;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlSerializer;
-
-import android.content.Context;
-import android.graphics.Color;
 
 public class GPXUtilities {
 	public final static Log log = PlatformUtil.getLog(GPXUtilities.class);
@@ -136,6 +136,31 @@ public class GPXUtilities {
 			return true;
 		}
 
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + ((name == null) ? 0 : name.hashCode());
+			result = prime * result + ((category == null) ? 0 : category.hashCode());
+			result = prime * result + ((desc == null) ? 0 : desc.hashCode());
+			result = prime * result + ((lat == 0) ? 0 : Double.valueOf(lat).hashCode());
+			result = prime * result + ((lon == 0) ? 0 : Double.valueOf(lon).hashCode());
+			return result;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null || getClass() != obj.getClass())
+				return false;
+			WptPt other = (WptPt) obj;
+			return Algorithms.objectEquals(other.name, name)
+					&& Algorithms.objectEquals(other.category, category)
+					&& Algorithms.objectEquals(other.lat, lat)
+					&& Algorithms.objectEquals(other.lon, lon)
+					&& Algorithms.objectEquals(other.desc, desc);
+		}
 	}
 
 	public static class TrkSegment extends GPXExtensions {
@@ -553,6 +578,7 @@ public class GPXUtilities {
 		public List<Track> tracks = new ArrayList<Track>();
 		public List<WptPt> points = new ArrayList<WptPt>();
 		public List<Route> routes = new ArrayList<Route>();
+		
 		public String warning = null;
 		public String path = "";
 		public boolean showCurrentTrack;
@@ -580,7 +606,7 @@ public class GPXUtilities {
 			return g ;
 		}
 
-		
+
 		public boolean hasRtePt() {
 			for(Route r : routes) {
 				if(r.points.size() > 0) {
@@ -604,7 +630,51 @@ public class GPXUtilities {
 			}
 			return false;
 		}
-		
+
+		public WptPt addWptPt(double lat, double lon, long time, String description, String name, String category, int color) {
+			double latAdjusted = Double.parseDouble(latLonFormat.format(lat));
+			double lonAdjusted = Double.parseDouble(latLonFormat.format(lon));
+			final WptPt pt = new WptPt(latAdjusted, lonAdjusted, time, Double.NaN, 0, Double.NaN);
+			pt.name = name;
+			pt.category = category;
+			pt.desc = description;
+			if (color != 0) {
+				pt.setColor(color);
+			}
+
+			points.add(pt);
+			modifiedTime = System.currentTimeMillis();
+
+			return pt;
+		}
+
+		public void updateWptPt(WptPt pt, double lat, double lon, long time, String description, String name, String category, int color) {
+			int index = points.indexOf(pt);
+
+			double latAdjusted = Double.parseDouble(latLonFormat.format(lat));
+			double lonAdjusted = Double.parseDouble(latLonFormat.format(lon));
+
+			pt.lat = latAdjusted;
+			pt.lon = lonAdjusted;
+			pt.time = time;
+			pt.desc = description;
+			pt.name = name;
+			pt.category = category;
+			if (color != 0) {
+				pt.setColor(color);
+			}
+
+			if (index != -1) {
+				points.set(index, pt);
+			}
+			modifiedTime = System.currentTimeMillis();
+		}
+
+		public boolean deleteWptPt(WptPt pt) {
+			modifiedTime = System.currentTimeMillis();
+			return points.remove(pt);
+		}
+
 		public List<TrkSegment> processRoutePoints() {
 			List<TrkSegment> tpoints = new ArrayList<TrkSegment>();
 			if (routes.size() > 0) {

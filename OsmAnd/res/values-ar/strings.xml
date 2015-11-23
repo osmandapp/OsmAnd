@@ -21,7 +21,7 @@
 	<string name="shared_string_delete">حذف</string>
 	<string name="poi_remove_title">حذف POI</string>
 	<string name="poi_create_title">إنشاء POI</string>
-	<string name="osb_close_dialog_success">تم إغلاق بنجاح الشوائب</string>
+	
 	<string name="osb_comment_dialog_message">رسالة</string>
 	<string name="map_widget_gps_info">معلومات GPS</string>
     <string name="access_arrival_time">وقت الوصول</string>
@@ -260,12 +260,12 @@
 	<string name="poi_dialog_comment">تعليق</string>
 	<string name="poi_action_change">تغيير</string>
 	<string name="osb_comment_dialog_author">اسم الكاتب</string>
-	<string name="osb_comment_dialog_add_button">إضافة تعليق</string>
-	<string name="osb_comment_dialog_title">إضافة تعليق على علة</string>
-	<string name="osb_comment_menu_item">إضافة تعليق</string>
-	<string name="osb_add_dialog_title">إدخال نص علة</string>
-	<string name="osb_add_dialog_success">علة خلق بنجاح</string>
-	<string name="osb_add_dialog_error">حدث استثناء: لم يتم إنشاء خطأ</string>
+	
+	
+	
+	
+	
+	
 	<string name="osb_author_dialog_password">OSM كلمة المرور (اختياري)</string>
 	<string name="add_favorite_dialog_default_favourite_name">مفضلة</string>
 	<string name="shared_string_apply">تطبق</string>
@@ -284,7 +284,7 @@
 	<string name="search_address_street_option">المتقاطعة الشارع</string>
 	<string name="search_tabs_location">موقع</string>
 	
-	<string name="context_menu_item_open_bug">فتح OSM علة</string>
+	
 	<string name="context_menu_item_create_poi">إنشاء POI</string>
 	<string name="shared_string_show_on_map">عرض على الخريطة</string>
 	<string name="navigate_point_latitude">خط العرض</string>
@@ -336,7 +336,7 @@
     <string name="route_descr_map_location">الخريطة: </string>
     <string name="destination_point">الوجهة %1$s</string>
     <string name="search_street_in_neighborhood_cities">البحث عن الشارع في المدن المجاورة</string>
-    <string name="intermediate_items_sort_by_distance">فرز (باب لـ باب )</string>
+    <string name="intermediate_items_sort_by_distance">فرز باب لـ باب </string>
     <string name="wait_current_task_finished">الرجاء الانتظار حتى انتهاء المهمة الحالية</string>
     <string name="available_downloads_left">توفر %1$d ملفات للتنزيل</string>
     <string name="cancel_route">ألغ المسار</string>

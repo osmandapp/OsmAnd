@@ -1,27 +1,46 @@
 package net.osmand.plus.mapcontextmenu;
 
+import android.content.DialogInterface;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AlertDialog.Builder;
 import android.view.View;
-
+import android.widget.LinearLayout;
+import net.osmand.CallbackWithObject;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.TargetPointsHelper;
+import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuType;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleButtonController;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleProgressController;
+import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
+import net.osmand.plus.mapcontextmenu.editors.PointEditor;
+import net.osmand.plus.mapcontextmenu.editors.WptPtEditor;
+import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.util.MapUtils;
 
 import java.lang.ref.WeakReference;
+import java.util.List;
 
 public class MapContextMenu extends MenuTitleController {
 
 	private MapActivity mapActivity;
+	private MapMultiSelectionMenu mapMultiSelectionMenu;
+
+	private FavoritePointEditor favoritePointEditor;
+	private WptPtEditor wptPtEditor;
 
 	private boolean active;
 	private LatLon latLon;
@@ -45,6 +64,20 @@ public class MapContextMenu extends MenuTitleController {
 
 	public void setMapActivity(MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
+
+		if (mapMultiSelectionMenu == null) {
+			mapMultiSelectionMenu = new MapMultiSelectionMenu(mapActivity);
+		} else {
+			mapMultiSelectionMenu.setMapActivity(mapActivity);
+		}
+
+		if (favoritePointEditor != null) {
+			favoritePointEditor.setMapActivity(mapActivity);
+		}
+		if (wptPtEditor != null) {
+			wptPtEditor.setMapActivity(mapActivity);
+		}
+
 		if (active) {
 			acquireMenuController();
 			if (menuController != null) {
@@ -55,12 +88,39 @@ public class MapContextMenu extends MenuTitleController {
 		}
 	}
 
+	public MapMultiSelectionMenu getMultiSelectionMenu() {
+		return mapMultiSelectionMenu;
+	}
+
 	public boolean isActive() {
 		return active;
 	}
 
 	public boolean isVisible() {
 		return findMenuFragment() != null;
+	}
+
+	public FavoritePointEditor getFavoritePointEditor() {
+		if (favoritePointEditor == null) {
+			favoritePointEditor = new FavoritePointEditor(mapActivity);
+		}
+		return favoritePointEditor;
+	}
+
+	public WptPtEditor getWptPtPointEditor() {
+		if (wptPtEditor == null) {
+			wptPtEditor = new WptPtEditor(mapActivity);
+		}
+		return wptPtEditor;
+	}
+
+	public PointEditor getPointEditor(String tag) {
+		if (favoritePointEditor != null && favoritePointEditor.getFragmentTag().equals(tag)) {
+			return favoritePointEditor;
+		} else if (wptPtEditor != null && wptPtEditor.getFragmentTag().equals(tag)) {
+			return wptPtEditor;
+		}
+		return null;
 	}
 
 	@Override
@@ -135,13 +195,21 @@ public class MapContextMenu extends MenuTitleController {
 			this.pointDescription = pointDescription;
 		}
 
+		boolean needAcquireMenuController = menuController == null
+				|| !update
+				|| this.object == null && object != null
+				|| this.object != null && object == null
+				|| (this.object != null && object != null && !this.object.getClass().equals(object.getClass()));
+
 		this.latLon = latLon;
 		this.object = object;
 
 		active = true;
 
-		if (menuController == null || !update) {
+		if (needAcquireMenuController) {
 			acquireMenuController();
+		} else {
+			menuController.update(pointDescription, object);
 		}
 		initTitle();
 
@@ -154,7 +222,7 @@ public class MapContextMenu extends MenuTitleController {
 			mapActivity.getMapView().setMapPosition(0);
 		}
 
-		mapActivity.getMapView().refreshMap();
+		mapActivity.refreshMap();
 
 		return true;
 	}
@@ -188,12 +256,14 @@ public class MapContextMenu extends MenuTitleController {
 	}
 
 	public void close() {
-		active = false;
-		if (this.object != null) {
-			clearSelectedObject(this.object);
+		if (active) {
+			active = false;
+			if (this.object != null) {
+				clearSelectedObject(this.object);
+			}
+			hide();
+			mapActivity.refreshMap();
 		}
-		hide();
-		mapActivity.getMapView().refreshMap();
 	}
 
 	public void hide() {
@@ -276,35 +346,73 @@ public class MapContextMenu extends MenuTitleController {
 
 	protected void acquireIcons() {
 		super.acquireIcons();
-
 		if (menuController != null) {
 			favActionIconId = menuController.getFavActionIconId();
 		} else {
-			favActionIconId = R.drawable.ic_action_fav_dark;
+			favActionIconId = R.drawable.map_action_fav_dark;
 		}
 	}
 
 	public void fabPressed() {
-		mapActivity.getMapActions().showNavigationContextMenuPoint(latLon.getLatitude(), latLon.getLongitude());
-		//mapActivity.getMapActions().directionTo(latLon.getLatitude(), latLon.getLongitude());
 		hide();
-		//mapActivity.getMapLayers().getMapControlsLayer().showRouteInfoControlDialog();
+		final TargetPointsHelper targets = mapActivity.getMyApplication().getTargetPointsHelper();
+		if(targets.getIntermediatePoints().isEmpty()) {
+			targets.navigateToPoint(latLon, true, -1, getPointDescription());
+			mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true);
+		} else {
+			Builder bld = new AlertDialog.Builder(mapActivity);
+			bld.setTitle(R.string.new_directions_point_dialog);
+			final int[] defaultVls = new int[] {0};
+			bld.setSingleChoiceItems(new String[]{
+					mapActivity.getString(R.string.clear_intermediate_points),
+					mapActivity.getString(R.string.keep_intermediate_points)
+//					mapActivity.getString(R.string.keep_and_add_destination_point)
+			}, 0, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					defaultVls[0] = which;
+				}
+			});
+			bld.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					if(defaultVls[0] == 0) {
+						targets.removeAllWayPoints(false);
+						targets.navigateToPoint(latLon, true, -1, getPointDescription());
+						mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true);
+					} else {
+						//targets.navigateToPoint(latLon, true, targets.getIntermediatePoints().size() + 1, getPointDescription());
+						targets.navigateToPoint(latLon, true, -1, getPointDescription());
+						mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true);
+					}
+				}
+			});
+			bld.setNegativeButton(R.string.shared_string_cancel,null);
+			bld.show();
+		}
+//		mapActivity.getMapLayers().getMapControlsLayer().showRouteInfoControlDialog();
 	}
 
 	public void buttonWaypointPressed() {
 		if (pointDescription.isDestination()) {
 			mapActivity.getMapActions().editWaypoints();
 		} else {
-			mapActivity.getMapActions().addAsWaypoint(latLon.getLatitude(), latLon.getLongitude());
+			mapActivity.getMapActions().addAsTarget(latLon.getLatitude(), latLon.getLongitude(),
+					pointDescription);
 		}
 		close();
 	}
 
 	public void buttonFavoritePressed() {
 		if (object != null && object instanceof FavouritePoint) {
-			mapActivity.getFavoritePointEditor().edit((FavouritePoint) object);
+			getFavoritePointEditor().edit((FavouritePoint) object);
 		} else {
-			mapActivity.getFavoritePointEditor().add(latLon, getTitleStr());
+			String title = getTitleStr();
+			if (pointDescription.isFavorite() || title.equals(addressNotKnownStr)) {
+				title = "";
+			}
+			getFavoritePointEditor().add(latLon, title);
 		}
 	}
 
@@ -327,6 +435,46 @@ public class MapContextMenu extends MenuTitleController {
 		mapActivity.getMapActions().contextMenuPoint(latLon.getLatitude(), latLon.getLongitude(), menuAdapter, object);
 	}
 
+	public void addWptPt() {
+		String title = getTitleStr();
+		if (pointDescription.isWpt() || title.equals(addressNotKnownStr)) {
+			title = "";
+		}
+
+		final List<SelectedGpxFile> list
+				= mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedGPXFiles();
+		if (list.isEmpty() || (list.size() == 1 && list.get(0).getGpxFile().showCurrentTrack)) {
+			GPXFile gpxFile = mapActivity.getMyApplication().getSavingTrackHelper().getCurrentGpx();
+			getWptPtPointEditor().add(gpxFile, latLon, title);
+		} else {
+			addNewWptToGPXFile(title);
+		}
+	}
+
+	public void editWptPt() {
+		if (object != null && object instanceof WptPt) {
+			getWptPtPointEditor().edit((WptPt) object);
+		}
+	}
+
+	public AlertDialog addNewWptToGPXFile(final String title) {
+		CallbackWithObject<GPXFile[]> callbackWithObject = new CallbackWithObject<GPXFile[]>() {
+			@Override
+			public boolean processResult(GPXFile[] result) {
+				GPXFile gpxFile;
+				if (result != null && result.length > 0) {
+					gpxFile = result[0];
+				} else {
+					gpxFile = mapActivity.getMyApplication().getSavingTrackHelper().getCurrentGpx();
+				}
+				getWptPtPointEditor().add(gpxFile, latLon, title);
+				return true;
+			}
+		};
+
+		return GpxUiHelper.selectSingleGPXFile(mapActivity, true, callbackWithObject);
+	}
+
 	public void setBaseFragmentVisibility(boolean visible) {
 		WeakReference<MapContextMenuFragment> fragmentRef = findMenuFragment();
 		if (fragmentRef != null) {
@@ -344,6 +492,12 @@ public class MapContextMenu extends MenuTitleController {
 		} else {
 			return 0f;
 		}
+	}
+
+	public void openMenuFullScreen() {
+		WeakReference<MapContextMenuFragment> fragmentRef = findMenuFragment();
+		if (fragmentRef != null)
+			fragmentRef.get().openMenuFullScreen();
 	}
 
 	public boolean slideUp() {
@@ -364,7 +518,7 @@ public class MapContextMenu extends MenuTitleController {
 		if (menuController != null) {
 			return menuController.getCurrentMenuState();
 		} else {
-			return MenuController.MenuState.HEADER_ONLY;
+			return MenuState.HEADER_ONLY;
 		}
 	}
 
@@ -436,10 +590,28 @@ public class MapContextMenu extends MenuTitleController {
 		return menuController != null && menuController.displayDistanceDirection();
 	}
 
+	public boolean displayStreetNameInTitle() {
+		return menuController != null && menuController.displayStreetNameInTitle();
+	}
+
 	public void updateData() {
 		if (menuController != null) {
 			menuController.updateData();
 		}
+	}
+
+	public boolean hasCustomAddressLine() {
+		return menuController != null && menuController.hasCustomAddressLine();
+	}
+
+	public void buildCustomAddressLine(LinearLayout ll) {
+		if (menuController != null) {
+			menuController.buildCustomAddressLine(ll);
+		}
+	}
+
+	public boolean hasHiddenBottomInfo() {
+		return getCurrentMenuState() == MenuState.HEADER_ONLY;
 	}
 
 	public LatLon getMyLocation() {
@@ -451,21 +623,23 @@ public class MapContextMenu extends MenuTitleController {
 	}
 
 	public void updateMyLocation(net.osmand.Location location) {
-		if (location != null) {
+		if (location != null && active && displayDistanceDirection()) {
 			myLocation = new LatLon(location.getLatitude(), location.getLongitude());
 			updateLocation(false, true, false);
 		}
 	}
 
 	public void updateCompassValue(float value) {
-		// 99 in next line used to one-time initialize arrows (with reference vs. fixed-north direction)
-		// on non-compass devices
-		float lastHeading = heading != null ? heading : 99;
-		heading = value;
-		if (Math.abs(MapUtils.degreesDiff(lastHeading, heading)) > 5) {
-			updateLocation(false, false, true);
-		} else {
-			heading = lastHeading;
+		if (active && displayDistanceDirection()) {
+			// 99 in next line used to one-time initialize arrows (with reference vs. fixed-north direction)
+			// on non-compass devices
+			float lastHeading = heading != null ? heading : 99;
+			heading = value;
+			if (Math.abs(MapUtils.degreesDiff(lastHeading, heading)) > 5) {
+				updateLocation(false, false, true);
+			} else {
+				heading = lastHeading;
+			}
 		}
 	}
 
@@ -486,5 +660,4 @@ public class MapContextMenu extends MenuTitleController {
 			}
 		});
 	}
-
 }

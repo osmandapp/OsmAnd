@@ -12,6 +12,7 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Environment;
 import android.support.annotation.Nullable;
+
 import net.osmand.IndexConstants;
 import net.osmand.StateChangedListener;
 import net.osmand.ValueHolder;
@@ -24,11 +25,12 @@ import net.osmand.plus.access.AccessibilityMode;
 import net.osmand.plus.access.RelativeDirectionStyle;
 import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.api.SettingsAPI.SettingsEditor;
-import net.osmand.plus.dashboard.DashRateUsFragment;
+import net.osmand.plus.dialogs.RateUsBottomSheetDialog;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.render.RenderingRulesStorage;
+
 import java.io.File;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
@@ -632,6 +634,10 @@ public class OsmandSettings {
 		return p;
 	}
 	public final CommonPreference<Boolean> USE_FAST_RECALCULATION = new BooleanPreference("use_fast_recalculation", true).makeGlobal().cache();
+	
+	public final CommonPreference<Boolean> SHOW_CARD_TO_CHOOSE_DRAWER = new BooleanPreference("show_card_to_choose_drawer", false).makeGlobal();
+	public final CommonPreference<Boolean> SHOW_DASHBOARD_ON_START = new BooleanPreference("should_show_dashboard_on_start", false).makeGlobal();
+	public final CommonPreference<Boolean> SHOW_DASHBOARD_ON_MAP_SCREEN = new BooleanPreference("show_dashboard_on_map_screen", false).makeGlobal();
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<Boolean> USE_INTERNET_TO_DOWNLOAD_TILES = new BooleanPreference("use_internet_to_download_tiles", true).makeGlobal().cache();
@@ -1443,7 +1449,6 @@ public class OsmandSettings {
 	public final static String POINT_NAVIGATE_LAT = "point_navigate_lat"; //$NON-NLS-1$
 	public final static String POINT_NAVIGATE_LON = "point_navigate_lon"; //$NON-NLS-1$
 	public final static String POINT_NAVIGATE_ROUTE = "point_navigate_route_integer"; //$NON-NLS-1$
-	public final static int NAVIGATE_CURRENT_GPX = 2;
 	public final static int NAVIGATE = 1;
 	public final static String POINT_NAVIGATE_DESCRIPTION = "point_navigate_description"; //$NON-NLS-1$
 	public final static String START_POINT_LAT = "start_point_lat"; //$NON-NLS-1$
@@ -1494,6 +1499,9 @@ public class OsmandSettings {
 	public boolean clearIntermediatePoints() {
 		return settingsAPI.edit(globalPreferences).remove(INTERMEDIATE_POINTS).remove(INTERMEDIATE_POINTS_DESCRIPTION).commit();
 	}
+	
+	public final CommonPreference<Boolean> USE_INTERMEDIATE_POINTS_NAVIGATION = 
+			new BooleanPreference("use_intermediate_points_navigation", false).makeGlobal().cache();
 	
 	public List<String> getIntermediatePointDescriptions(int sz) {
 		List<String> list = new ArrayList<String>();
@@ -1598,11 +1606,7 @@ public class OsmandSettings {
 	}
 	
 	public boolean navigateDialog() {
-		return navigateDialog(false);
-	}
-	
-	public boolean navigateDialog(boolean gpx) {
-		return settingsAPI.edit(globalPreferences).putInt(POINT_NAVIGATE_ROUTE, gpx ? NAVIGATE_CURRENT_GPX : NAVIGATE).commit();
+		return settingsAPI.edit(globalPreferences).putInt(POINT_NAVIGATE_ROUTE, NAVIGATE).commit();
 	}
 	
 
@@ -1914,9 +1918,9 @@ public class OsmandSettings {
 	public final OsmandPreference<Integer> NUMBER_OF_APPLICATION_STARTS =
 			new IntPreference("number_of_app_starts", 0).makeGlobal().cache();
 	
-	public final OsmandPreference<DashRateUsFragment.RateUsState> RATE_US_STATE =
+	public final OsmandPreference<RateUsBottomSheetDialog.RateUsState> RATE_US_STATE =
             new EnumIntPreference<>("rate_us_state",
-                    DashRateUsFragment.RateUsState.INITIAL_STATE, DashRateUsFragment.RateUsState.values())
+					RateUsBottomSheetDialog.RateUsState.INITIAL_STATE, RateUsBottomSheetDialog.RateUsState.values())
                     .makeGlobal();
 
 

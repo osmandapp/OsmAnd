@@ -214,7 +214,7 @@
 	<string name="poi_railway_station">Estación de tren</string>
 	<string name="poi_railway_platform">Andén de tren</string>
 	<string name="poi_halt">Parada de tren</string>
-	<string name="poi_railway_subway_entrance">Entrada de subte</string>
+	<string name="poi_subway_entrance">Entrada de subte</string>
 	<string name="poi_subway_station">Estación de subte</string>
 	<string name="poi_railway_buffer_stop">Fin de vía</string>
 	<string name="poi_taxi">Parada de taxi</string>
@@ -1597,16 +1597,16 @@
 
 	<string name="poi_drive_in_yes">Conducir dentro: Si</string>
 	<string name="poi_drive_in_no">Conducir dentro: No</string>
-	<string name="poi_drive_through_yes">Autoservicio: Si</string>
-	<string name="poi_drive_through_no">Autoservicio: No</string>
+	<string name="poi_drive_through_yes">Con servicio dentro del coche</string>
+	<string name="poi_drive_through_no">Sin servicio dentro del coche</string>
 
 	<string name="poi_brewery_additional">Nombre de cervecería</string>
 	<string name="poi_microbrewery_yes">Micro-cervecería</string>
 	<string name="poi_microbrewery_no">Sin micro-cervecería</string>
 
-	<string name="poi_takeaway_yes">Servicio de comida para llevar</string>
-	<string name="poi_takeaway_no">Sin servicio de comida para llevar</string>
-	<string name="poi_takeaway_only">Sólo servicio de comida para llevar</string>
+	<string name="poi_takeaway_yes">Comidas para llevar: Si</string>
+	<string name="poi_takeaway_no">Comidas para llevar: No</string>
+	<string name="poi_takeaway_only">Sólo comidas para llevar</string>
 
 	<string name="poi_delivery_no">Sin servicio a domicilio</string>
 	<string name="poi_delivery_yes">Con servicio a domicilio</string>
@@ -2025,8 +2025,8 @@
 	<string name="poi_wetland_palsa_bog">Palsa (humedal)</string>
 	<string name="poi_fuel_91ul">91UL (sin plomo, para aviones)</string>
 	<string name="poi_fuel_100ll">100LL (con plomo, para aviones)</string>
-	<string name="poi_autogas">Autogas (Etanol libre de plomo)</string>
-	<string name="poi_jeta1">Jet A-1 (diésel)</string>
+	<string name="poi_fuel_autogas">Autogas (Etanol libre de plomo)</string>
+	<string name="poi_fuel_jeta1">Jet A-1 (diésel)</string>
 	<string name="poi_fuel_adblue">AdBlue</string>
 
 	<string name="poi_fuel_wood">Combustible: Madera</string>
@@ -2372,15 +2372,15 @@
 
 <string name="poi_square">Plaza</string>
 
-	<string name="poi_building_type_church">Edificación: Iglesia</string>
-	<string name="poi_building_type_chapel">Edificación: Capilla</string>
-	<string name="poi_building_type_mosque">Edificación: Mezquita</string>
-	<string name="poi_building_type_temple">Edificación: Templo</string>
-	<string name="poi_building_type_cathedral">Edificación: Catedral</string>
-	<string name="poi_building_type_monastery">Edificación: Monasterio</string>
-	<string name="poi_building_type_basilica">Edificación: Basílica</string>
-	<string name="poi_building_type_synagogue">Edificación: Sinagoga</string>
-	<string name="poi_building_type_shrine">Edificación: Santuario</string>
+	<string name="poi_building_type_church">Iglesia</string>
+	<string name="poi_building_type_chapel">Capilla</string>
+	<string name="poi_building_type_mosque">Mezquita</string>
+	<string name="poi_building_type_temple">Templo</string>
+	<string name="poi_building_type_cathedral">Catedral</string>
+	<string name="poi_building_type_monastery">Monasterio</string>
+	<string name="poi_building_type_basilica">Basílica</string>
+	<string name="poi_building_type_synagogue">Sinagoga</string>
+	<string name="poi_building_type_shrine">Santuario</string>
 
 <string name="poi_artist_name">Artista</string>
 	<string name="poi_sculptor">Escultor</string>
@@ -2399,7 +2399,7 @@
 	<string name="poi_bathing_yes">Permitido bañarse</string>
 	<string name="poi_bathing_no">Prohibido bañarse</string>
 
-<string name="poi_traffic_calming_island">Mediana</string>
+<string name="poi_traffic_calming_island">Mediana (tráfico)</string>
 	<string name="poi_boat_storage">Almacén de botes (marina)</string>
 
 
@@ -2415,5 +2415,75 @@
 	<string name="poi_cargo_bicycle">Cargamento: Bicicletas</string>
 	<string name="poi_cargo_container">Cargamento: Contenedores</string>
 	<string name="poi_cargo_hgv">Cargamento: Vehículos pesados</string>
+
+<string name="poi_fitness_station">Gimnasio exterior</string>
+
+	<string name="poi_hackerspace">Encuentro de hackers</string>
+
+<string name="poi_wiki_lang_af">Wiki Afrikáans</string>
+	<string name="poi_wiki_lang_als">Wiki alsaciana</string>
+	<string name="poi_wiki_lang_az">Wiki azerí</string>
+	<string name="poi_wiki_lang_bn">Wiki bengalí</string>
+	<string name="poi_wiki_lang_bpy">Wiki bishnupriya</string>
+	<string name="poi_wiki_lang_br">Wiki bretona</string>
+	<string name="poi_wiki_lang_bs">Wiki bosnia</string>
+	<string name="poi_wiki_lang_cy">Wiki galés</string>
+	<string name="poi_wiki_lang_eo">Wiki esperanto</string>
+	<string name="poi_wiki_lang_eu">Wiki vasca</string>
+	<string name="poi_wiki_lang_fa">Wiki persa</string>
+	<string name="poi_wiki_lang_fy">Wiki frisona</string>
+	<string name="poi_wiki_lang_ga">Wiki irlandesa</string>
+	<string name="poi_wiki_lang_hy">Wiki armenia</string>
+	<string name="poi_wiki_lang_is">Wiki islandesa</string>
+	<string name="poi_wiki_lang_ka">Wiki georgiana</string>
+	<string name="poi_wiki_lang_ku">Wiki kurda</string>
+	<string name="poi_wiki_lang_la">Wiki latina</string>
+	<string name="poi_wiki_lang_lb">Wiki luxemburguesa</string>
+	<string name="poi_wiki_lang_mk">Wiki macedonia</string>
+	<string name="poi_wiki_lang_ml">Wiki malabari</string>
+	<string name="poi_wiki_lang_mr">Wiki maratí</string>
+	<string name="poi_wiki_lang_nds">Wiki baja sajona</string>
+	<string name="poi_wiki_lang_nv">Wiki navaja</string>
+	<string name="poi_wiki_lang_os">Wiki osetiana</string>
+	<string name="poi_wiki_lang_pms">Wiki piamontesa</string>
+	<string name="poi_wiki_lang_sc">Wiki sarda</string>
+	<string name="poi_wiki_lang_sh">Wiki serbio-croata</string>
+	<string name="poi_wiki_lang_sq">Wiki albana</string>
+	<string name="poi_wiki_lang_ta">Wiki tamilesa</string>
+	<string name="poi_wiki_lang_tl">Wiki filipina</string>
+
+	<string name="poi_wiki_lang_war">Wiki samareña</string>
+	<string name="poi_wiki_lang_min">Wiki minangkabau</string>
+	<string name="poi_wiki_lang_kk">Wiki kazaja</string>
+	<string name="poi_wiki_lang_uz">Wiki uzbeka</string>
+	<string name="poi_wiki_lang_ce">Wiki chechena</string>
+	<string name="poi_wiki_lang_ur">Wiki urdu</string>
+	<string name="poi_wiki_lang_oc">Wiki occitana</string>
+	<string name="poi_wiki_lang_zhminnan">Wiki Min del sur</string>
+	<string name="poi_wiki_lang_mg">Wiki malagache</string>
+	<string name="poi_wiki_lang_tt">Wiki tártara</string>
+	<string name="poi_wiki_lang_jv">Wiki javanesa</string>
+	<string name="poi_wiki_lang_ky">Wiki kirguistán</string>
+	<string name="poi_wiki_lang_zhyue">Wiki cantonesa</string>
+	<string name="poi_wiki_lang_ast">Wiki Astur-Leonesa</string>
+	<string name="poi_wiki_lang_tg">Wiki tajik</string>
+	<string name="poi_wiki_lang_ba">Wiki baskir</string>
+	<string name="poi_wiki_lang_sco">Wiki escocesa</string>
+	<string name="poi_wiki_lang_pnb">Wiki punyabí</string>
+	<string name="poi_wiki_lang_cv">Wiki Chuvasia</string>
+	<string name="poi_wiki_lang_lmo">Wiki lombard</string>
+	<string name="poi_wiki_lang_my">Wiki birmana</string>
+	<string name="poi_wiki_lang_yo">Wiki yoruba</string>
+	<string name="poi_wiki_lang_an">Wiki aragonesa</string>
+	<string name="poi_wiki_lang_ne">Wiki nepalí</string>
+	<string name="poi_wiki_lang_gu">Wiki guyaratí</string>
+	<string name="poi_wiki_lang_scn">Wiki siciliana</string>
+	<string name="poi_wiki_lang_bar">Wiki bávara</string>
+	<string name="poi_wiki_lang_mn">Wiki mongol</string>
+	<string name="poi_wiki_lang_nap">Wiki napolitana</string>
+
+	<string name="poi_craft_electronics">Reparación de electrodomésticos</string>
+
+<string name="poi_fireworks">Artificios pirotécnicos</string>
 
 </resources>

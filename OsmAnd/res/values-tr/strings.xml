@@ -362,7 +362,7 @@
 	<string name="voice">Ses</string>
 	<string name="no_vector_map_loaded">Vektör haritalar yüklenmedi</string>
 	<string name="vector_data">Çevrimdışı vektör haritaları</string>
-	<string name="osb_bug_name">Hata</string>
+	
 	<string name="poi_context_menu_delete">POI sil</string>
 	<string name="fav_saved_sucessfully">Favoriler şuraya başarıyla kaydedildi: {0}</string>
 	<string name="no_fav_to_save">Kaydedecek favori noktalar yok</string>
@@ -462,14 +462,14 @@
 	<string name="shared_string_no">Hayır</string>
 	<string name="add_favorite_dialog_default_favourite_name">Favori</string>
 	<string name="favourites_context_menu_delete">Favoriyi sil</string>
-	<string name="osb_add_dialog_error">İstisnai durum oluştu: Hata oluşturulamadı</string>
-	<string name="osb_comment_menu_item">Yorum ekle</string>
+	
+	
 	<string name="osb_comment_dialog_message">Mesaj</string>
 	<string name="osb_comment_dialog_author">Yazar adı</string>
-	<string name="osb_comment_dialog_add_button">Yorum ekle</string>
+	
 	<string name="osb_comment_dialog_success">Yorum başarıyla eklendi</string>
 	<string name="osb_comment_dialog_error">İstisnai durum oluştu: yorum eklenemedi</string>
-	<string name="osb_close_dialog_success">Hata başarıyla kapatıldı</string>
+	
 	<string name="poi_edit_title">POI düzenle</string>
 	<string name="poi_create_title">POI oluştur</string>
 	<string name="poi_remove_title">POI sil</string>
@@ -777,7 +777,7 @@
     <string name="context_menu_item_destination_point">Hedef olarak belirle</string>
     <string name="please_select_address">Önce şehir ya da sokak seç</string>
     <string name="search_street_in_neighborhood_cities">Yakın şehirlerde sokak ara</string>
-    <string name="intermediate_items_sort_by_distance">Sırala (kapıdan kapıya)</string>
+    <string name="intermediate_items_sort_by_distance">Sırala kapıdan kapıya</string>
     <string name="local_osm_changes_backup_successful">OSM değişiklik dosyası başarıyla oluşturuldu</string>
     <string name="local_osm_changes_backup_failed">OSM değişikliklerinin yedeklemesi başarısız</string>
     <string name="delete_point">Mevkiyi sil</string>

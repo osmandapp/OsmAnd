@@ -424,7 +424,7 @@ public class NotesFragment extends OsmAndListFragment {
 
 	private void showOnMap(Recording recording) {
 		getMyApplication().getSettings().setMapLocationToShow(recording.getLatitude(), recording.getLongitude(), 15,
-				new PointDescription(recording.getSearchHistoryType(), recording.getName(getActivity())), true,
+				new PointDescription(recording.getSearchHistoryType(), recording.getName(getActivity(), true)), true,
 				recording); //$NON-NLS-1$
 		MapActivity.launchMapActivityMoveToTop(getActivity());
 	}
@@ -523,7 +523,7 @@ public class NotesFragment extends OsmAndListFragment {
 		final View v = getActivity().getLayoutInflater().inflate(R.layout.note_edit_dialog, getListView(), false);
 		final EditText editText = (EditText) v.findViewById(R.id.name);
 		builder.setView(v);
-		editText.setText(recording.getName(getActivity()));
+		editText.setText(recording.getName(getActivity(), true));
 		InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 		imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
 		builder.setNegativeButton(R.string.shared_string_cancel, null);

@@ -6,6 +6,7 @@ import android.graphics.Rect;
 import android.support.annotation.NonNull;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.widget.ArrayAdapter;
 import android.widget.FrameLayout.LayoutParams;
 import android.widget.ImageView;
 
@@ -13,8 +14,10 @@ import net.osmand.CallbackWithObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 
@@ -58,7 +61,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	public ContextMenuLayer(MapActivity activity){
 		this.activity = activity;
 		menu = activity.getContextMenu();
-		multiSelectionMenu = activity.getMultiSelectionMenu();
+		multiSelectionMenu = menu.getMultiSelectionMenu();
 		movementListener = new GestureDetector(activity, new MenuLayerOnGestureListener());
 	}
 	
@@ -78,12 +81,11 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		int minh = contextMarker.getDrawable().getMinimumHeight();
 		contextMarker.layout(0, 0, minw, minh);
 	}
-	
 
 	public boolean isVisible() {
 		return menu.isActive();
 	}
-	
+
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox box, DrawSettings nightMode) {
 		if(menu.isActive()) {
@@ -94,10 +96,27 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			contextMarker.draw(canvas);
 		}
 	}
-	
-	
+
 	public void setSelectOnMap(CallbackWithObject<LatLon> selectOnMap) {
 		this.selectOnMap = selectOnMap;
+	}
+
+	@Override
+	public void populateObjectContextMenu(Object o, ContextMenuAdapter adapter) {
+		if (menu.hasHiddenBottomInfo()) {
+			ContextMenuAdapter.OnContextMenuClick listener = new ContextMenuAdapter.OnContextMenuClick() {
+				@Override
+				public boolean onContextMenuClick(ArrayAdapter<?> adapter, int itemId, int pos, boolean isChecked) {
+					if (itemId == R.string.shared_string_show_description) {
+						menu.openMenuFullScreen();
+					}
+					return true;
+				}
+			};
+			adapter.item(R.string.shared_string_show_description)
+					.iconColor(R.drawable.ic_action_note_dark).listen(listener)
+					.reg();
+		}
 	}
 
 	@Override
@@ -132,6 +151,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				latLon = getLatLon(point, tileBox);
 			}
 			hideVisibleMenues();
+			activity.getMapViewTrackingUtilities().locationChanged(latLon.getLatitude(), latLon.getLongitude(), this);
 			menu.show(latLon, pointDescription, selectedObj);
 			return true;
 
@@ -141,7 +161,9 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 		} else if (showUnknownLocation) {
 			hideVisibleMenues();
-			menu.show(getLatLon(point, tileBox), null, null);
+			LatLon latLon = getLatLon(point, tileBox);
+			activity.getMapViewTrackingUtilities().locationChanged(latLon.getLatitude(), latLon.getLongitude(), this);
+			menu.show(latLon, null, null);
 			return true;
 		}
 		return false;
@@ -192,9 +214,6 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				l.collectObjectsFromPoint(point, tileBox, s);
 				for (Object o : s) {
 					selectedObjects.put(o, l);
-//					if (l instanceof IContextMenuProviderSelection) {
-//						((IContextMenuProviderSelection) l).setSelectedObject(o);
-//					}
 				}
 			}
 		}

@@ -2,7 +2,6 @@ package net.osmand.plus.mapcontextmenu.editors;
 
 import android.app.Activity;
 import android.content.DialogInterface;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -13,10 +12,8 @@ import android.widget.Button;
 
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
@@ -38,15 +35,14 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 		helper = getMyApplication().getFavorites();
-		editor = getMapActivity().getFavoritePointEditor();
+		editor = getMapActivity().getContextMenu().getFavoritePointEditor();
 	}
 
 	@Override
 	public void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		boolean light = getMyApplication().getSettings().isLightContent();
-		defaultColor = light ? R.color.icon_color : R.color.icon_color_light;
+		defaultColor = getResources().getColor(R.color.color_favorite);
 
 		favorite = editor.getFavorite();
 		group = helper.getGroup(favorite);
@@ -90,8 +86,13 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		super.setCategory(name);
 	}
 
+	@Override
+	protected String getDefaultCategoryName() {
+		return getString(R.string.shared_string_favorites);
+	}
+
 	public static void showInstance(final MapActivity mapActivity) {
-		FavoritePointEditor editor = mapActivity.getFavoritePointEditor();
+		FavoritePointEditor editor = mapActivity.getContextMenu().getFavoritePointEditor();
 		//int slideInAnim = editor.getSlideInAnimation();
 		//int slideOutAnim = editor.getSlideOutAnimation();
 
@@ -119,7 +120,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 				Algorithms.stringsEqual(favorite.getDescription(), point.getDescription())) {
 
 			if (needDismiss) {
-				dismiss(true);
+				dismiss(false);
 			}
 			return;
 		}
@@ -144,7 +145,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		} else {
 			helper.editFavouriteName(favorite, name, category, description);
 		}
-		getMapActivity().getMapView().refreshMap(true);
+		getMapActivity().refreshMap();
 		if (needDismiss) {
 			dismiss(false);
 		}
@@ -152,10 +153,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		MapContextMenu menu = getMapActivity().getContextMenu();
 		LatLon latLon = new LatLon(favorite.getLatitude(), favorite.getLongitude());
 		if (menu.getLatLon().equals(latLon)) {
-			PointDescription pointDescription = favorite.getPointDescription();
-			pointDescription.setLat(favorite.getLatitude());
-			pointDescription.setLon(favorite.getLongitude());
-			menu.update(latLon, pointDescription, favorite);
+			menu.update(latLon, favorite.getPointDescription(), favorite);
 		}
 	}
 
@@ -175,10 +173,12 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				helper.deleteFavourite(favorite);
+				saved = true;
 				if (needDismiss) {
 					dismiss(true);
+				} else {
+					getMapActivity().refreshMap();
 				}
-				getMapActivity().getMapView().refreshMap(true);
 			}
 		});
 		builder.create().show();
@@ -196,7 +196,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 
 	@Override
 	public String getCategoryInitValue() {
-		return favorite.getCategory().length() == 0 ? getString(R.string.shared_string_favorites) : favorite.getCategory();
+		return favorite.getCategory().length() == 0 ? getDefaultCategoryName() : favorite.getCategory();
 	}
 
 	@Override
@@ -215,18 +215,13 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 
 	@Override
 	public Drawable getCategoryIcon() {
-		int color = defaultColor;
+		int color = 0;
 		if (group != null) {
 			color = group.color;
 		}
-		return getIcon(R.drawable.ic_action_folder_stroke, color);
-	}
-
-	public Drawable getIcon(int resId, int color) {
-		OsmandApplication app = getMyApplication();
-		Drawable d = app.getResources().getDrawable(resId).mutate();
-		d.clearColorFilter();
-		d.setColorFilter(color, PorterDuff.Mode.SRC_IN);
-		return d;
+		if (color == 0) {
+			color = defaultColor;
+		}
+		return getPaintedIcon(R.drawable.ic_action_folder_stroke, color);
 	}
 }

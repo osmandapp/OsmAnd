@@ -299,6 +299,7 @@ public class DownloadIndexesThread {
 			currentRunningTask.add(this);
 			super.onPreExecute();
 			this.message = ctx.getString(R.string.downloading_list_indexes);
+			indexes.downloadFromInternetFailed = false;
 		}
 
 		@Override
@@ -323,10 +324,9 @@ public class DownloadIndexesThread {
 
 		protected void onPostExecute(DownloadResources result) {
 			indexes = result;
+			result.downloadFromInternetFailed = !result.isDownloadedFromInternet;
 			if (result.mapVersionIsIncreased) {
 				showWarnDialog();
-			} else if (!result.isDownloadedFromInternet) {
-				AccessibleToast.makeText(ctx, R.string.list_index_files_was_not_loaded, Toast.LENGTH_LONG).show();
 			}
 			currentRunningTask.remove(this);
 			newDownloadIndexes();

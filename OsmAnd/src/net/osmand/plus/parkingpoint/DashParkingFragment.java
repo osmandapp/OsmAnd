@@ -68,7 +68,7 @@ public class DashParkingFragment extends DashLocationFragment {
 			public void onClick(View v) {
 				LatLon point = plugin.getParkingPosition();
 				getMyApplication().getSettings().setMapLocationToShow(point.getLatitude(), point.getLongitude(),
-						15, new PointDescription(PointDescription.POINT_TYPE_FAVORITE, plugin.getParkingDescription(getActivity())), false,
+						15, new PointDescription(PointDescription.POINT_TYPE_PARKING_MARKER, getString(R.string.osmand_parking_position_name)), false,
 						point); //$NON-NLS-1$
 				MapActivity.launchMapActivityMoveToTop(getActivity());
 			}

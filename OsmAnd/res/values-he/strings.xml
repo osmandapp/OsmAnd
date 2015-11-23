@@ -643,7 +643,7 @@
 	<string name="vector_data">מפות וקטוריות בלתי מקוונות</string>
 	<string name="transport_context_menu">חיפוש תחבורה בתחנה</string>
 	
-	<string name="osb_bug_name">תקלה</string>
+	
 	<string name="poi_context_menu_modify">שינוי נ״ע</string>
 	<string name="poi_context_menu_delete">מחיקת נ״ע</string>
 	<string name="rotate_map_compass_opt">למצפן</string>
@@ -905,7 +905,7 @@
 	<string name="search_tabs_location">מיקום</string>
 	
 	<string name="context_menu_item_update_map">עדכון המפה</string>
-	<string name="context_menu_item_open_bug">פתיחת תקלה ב־OSM</string>
+	
 	<string name="context_menu_item_create_poi">יצירת נ״ע</string>
 	<string name="shared_string_cancel">ביטול</string>
 	<string name="shared_string_apply">החלה</string>
@@ -917,21 +917,21 @@
 	<string name="favourites_context_menu_delete">מחיקת המועדף</string>
 	<string name="favourites_remove_dialog_msg">האם להסיר את הנקודה המועדפת ‚%s‘?</string>
 	<string name="favourites_remove_dialog_success">הנקודה המועדפת {0} הוסרה בהצלחה.</string>
-	<string name="osb_add_dialog_title">נא להזין טקסט לדיווח התקלה</string>
-	<string name="osb_add_dialog_success">דיווח התקלה נוצר בהצלחה</string>
-	<string name="osb_add_dialog_error">אירעה חריגה: לא נוצר דיווח תקלה</string>
-	<string name="osb_comment_menu_item">הוספת הערה</string>
+	
+	
+	
+	
 	<string name="osb_comment_dialog_message">הודעה</string>
 	<string name="osb_comment_dialog_author">שם היוצר</string>
-	<string name="osb_comment_dialog_title">הוספת הערה לדיווח תקלה</string>
-	<string name="osb_comment_dialog_add_button">הוספת הערה</string>
+	
+	
 	<string name="osb_comment_dialog_success">ההערה נוספה בהצלחה</string>
 	<string name="osb_comment_dialog_error">אירעה חריגה: לא נוספה הערה</string>
-	<string name="osb_close_menu_item">סגירת דיווח תקלה</string>
-	<string name="osb_close_dialog_title">סגירת דיווח תקלה</string>
-	<string name="osb_close_dialog_close_button">סגירת דיווח תקלה</string>
-	<string name="osb_close_dialog_success">דיווח התקלה נסגר בהצלחה</string>
-	<string name="osb_close_dialog_error">אירעה חריגה: דיווח התקלה לא נסגר</string>
+	
+	
+	
+	
+	
 	<string name="poi_edit_title">עריכת נ״ע</string>
 	<string name="poi_create_title">יצירת נ״ע</string>
 	<string name="poi_error_poi_not_found">לא ניתן למצוא את המפרק או שנותן השירות מפוזר על פני מספר מפרקים</string>
@@ -1127,7 +1127,7 @@
     <string name="local_osm_changes_backup">גיבוי כשינוי ב־OSM</string>
     <string name="search_street_in_neighborhood_cities">חיפוש רחוב בערים סמוכות</string>
     <string name="intermediate_items_sort_return">נקודות הביניים שבדרך סודרו מחדש באופן המיטבי בדרך אל היעד.</string>
-    <string name="intermediate_items_sort_by_distance">סידור (דלת לדלת)</string>
+    <string name="intermediate_items_sort_by_distance">סידור דלת לדלת</string>
     
     <string name="please_select_address">נא לבחור בעיר או ברחוב תחילה</string>
     <string name="context_menu_item_destination_point">הגדרה כיעד</string>

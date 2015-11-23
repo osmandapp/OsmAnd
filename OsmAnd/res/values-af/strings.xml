@@ -527,7 +527,7 @@
   <string name="vector_data">Aflyn vektor kaarte</string>
   <string name="transport_context_menu">Soek vervoer by stop</string>
   
-  <string name="osb_bug_name">Programfout</string>
+  
   <string name="poi_context_menu_modify">verander interessante plek</string>
   <string name="poi_context_menu_delete">verwyder interessante plek</string>
   <string name="rotate_map_compass_opt">Volgens kompas</string>
@@ -796,7 +796,7 @@
   <string name="search_tabs_location">Ligging</string>
   
   <string name="context_menu_item_update_map">opgradeer kaart</string>
-  <string name="context_menu_item_open_bug">Open OSM fout</string>
+  
   <string name="context_menu_item_create_poi">skep interessante plek</string>
   <string name="shared_string_yes">Ja</string>
   <string name="shared_string_cancel">Kanseleer</string>
@@ -810,21 +810,21 @@
   <string name="favourites_context_menu_delete">verwyder gunsteling</string>
   <string name="favourites_remove_dialog_msg">Verwyder gunsteling punt \'%s\'?</string>
   <string name="favourites_remove_dialog_success">Gunsteling punt {0} is suksesvol verwyder.</string>
-  <string name="osb_add_dialog_title">Tik fout teks in</string>
-  <string name="osb_add_dialog_success">fout suksesvol geskep</string>
-  <string name="osb_add_dialog_error">Uitsondering voorgekom: fout is nie geskep nie</string>
-  <string name="osb_comment_menu_item">voeg kommentaar by</string>
+  
+  
+  
+  
   <string name="osb_comment_dialog_message">Boodskap</string>
   <string name="osb_comment_dialog_author">naam van die skrywer</string>
-  <string name="osb_comment_dialog_title">Om kommentaar tot fout te voeg</string>
-  <string name="osb_comment_dialog_add_button">voeg kommentaar by</string>
+  
+  
   <string name="osb_comment_dialog_success">Kommentaar is bygevoeg</string>
   <string name="osb_comment_dialog_error">Uitsondering voorgekom: kommentaar is nie bygevoeg nie</string>
-  <string name="osb_close_menu_item">Sluit fout</string>
-  <string name="osb_close_dialog_title">sluiting van fout</string>
-  <string name="osb_close_dialog_close_button">Sluit fout</string>
-  <string name="osb_close_dialog_success">Probleem is suksesvol gesluit</string>
-  <string name="osb_close_dialog_error">Uitsondering voorgekom: fout is nie gesluit nie</string>
+  
+  
+  
+  
+  
   <string name="poi_edit_title">Verander interessante plek</string>
   <string name="poi_create_title">skep interessante plek</string>
   <string name="poi_error_poi_not_found">Node kan nie gevind word nie of gerief is nie \'n enkele node</string>
@@ -1133,7 +1133,7 @@ OsmAnd (OSM Automated Navigation Directions) is \\\'n kaart en navigasie toepass
     <string name="please_select_address">Kies eers die stad of straat</string>
     <string name="search_street_in_neighborhood_cities">Soek straat in nabygeleë stede</string>
     <string name="intermediate_items_sort_return">Tussen-punte is hergesorteer om die volgorde op pad na die bestemming te optimaliseer.</string>
-    <string name="intermediate_items_sort_by_distance">Sorteer (deur-tot-deur)</string>
+    <string name="intermediate_items_sort_by_distance">Sorteer deur-tot-deur</string>
     <string name="local_osm_changes_backup_failed">Berg van OSM veranderings het gefaal</string>
     <string name="local_osm_changes_backup">Berg as OSM verandering</string>
     <string name="use_distance_measurement_help">* Tik om punt te merk.\n * Tik en hou op die kaart om vorige punt te verwyder.\n * Tik en hou op punt om beskrywing te sien of verander.\n * Tik op meting widget om meer aksies te sien.</string>

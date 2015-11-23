@@ -92,9 +92,9 @@ public class MapRouteInfoControl implements IRouteInformationListener {
 	public void setVisible(boolean visible) {
 		if(visible) {
 			if (showDialog){
-				if (getTargets().getPointToNavigate() == null){
+				//if (getTargets().getPointToNavigate() == null){
 					showDialog();
-				}
+				//}
 				showDialog = false;
 			}
 			controlVisible = true;
@@ -153,7 +153,7 @@ public class MapRouteInfoControl implements IRouteInformationListener {
 	private void updateWptBtn(final View parentView) {
 		ImageView wptBtn = (ImageView) parentView.findViewById(R.id.waypoints);
 		wptBtn.setImageDrawable(mapActivity.getMyApplication().getIconsCache()
-				.getContentIcon(R.drawable.ic_action_flag_dark));
+				.getContentIcon(R.drawable.map_action_waypoints));
 		wptBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -441,7 +441,7 @@ public class MapRouteInfoControl implements IRouteInformationListener {
 	public String generateViaDescription() {
 		TargetPointsHelper targets = getTargets();
 		String via = "";
-		List<TargetPoint> points = targets.getIntermediatePoints();
+		List<TargetPoint> points = targets.getIntermediatePointsNavigation();
 		if (points.size() == 0) {
 			return via;
 		}

@@ -20,7 +20,7 @@
   <string name="int_continuosly">continu</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Vectorkaarten worden vaak sneller weergegeven. Werkt niet op sommige apparaten.</string>
   
-  <string name="play_commands_of_currently_selected_voice">Luister naar de instructies van de gekozen stem</string>
+  <string name="play_commands_of_currently_selected_voice">Luister naar de teksten van de gekozen stem</string>
   <string name="debugging_and_development">OsmAnd fout-opsporing en ontwikkeling</string>
   <string name="native_rendering">Interne kaartgeneratie</string>
   
@@ -444,7 +444,7 @@
   <string name="vector_data">Offline vectorkaarten</string>
   <string name="transport_context_menu">Zoek openbaar vervoer op halte</string>
   
-  <string name="osb_bug_name">Bug</string>
+  
   <string name="poi_context_menu_modify">Wijzig interessepunt</string>
   <string name="poi_context_menu_delete">Verwijder interessepunt</string>
   <string name="rotate_map_compass_opt">Volgens kompas</string>
@@ -705,7 +705,7 @@
   
   
   <string name="context_menu_item_update_map">Kaart bijwerken</string>
-  <string name="context_menu_item_open_bug">Meld fout in OpenStreetMap</string>
+  
   <string name="context_menu_item_create_poi">Maak interessepunt in OSM</string>
   <string name="add_favorite_dialog_top_text">Geef de favoriet een naam</string>
   <string name="add_favorite_dialog_default_favourite_name">Favoriet</string>
@@ -714,21 +714,21 @@
   <string name="favourites_context_menu_delete">Verwijder favoriet</string>
   <string name="favourites_remove_dialog_msg">Verwijder favoriet \'%s\'?</string>
   <string name="favourites_remove_dialog_success">Favoriet {0} is verwijderd.</string>
-  <string name="osb_add_dialog_title">Geef bug tekst in</string>
-  <string name="osb_add_dialog_success">Bug is aangemaakt</string>
-  <string name="osb_add_dialog_error">Fout opgetreden: bug is niet aangemaakt</string>
-  <string name="osb_comment_menu_item">Voeg commentaar toe</string>
+  
+  
+  
+  
   <string name="osb_comment_dialog_message">Bericht</string>
   <string name="osb_comment_dialog_author">Naam auteur</string>
-  <string name="osb_comment_dialog_title">Commentaar wordt aan bug toegevoegd</string>
-  <string name="osb_comment_dialog_add_button">Commentaar toevoegen</string>
+  
+  
   <string name="osb_comment_dialog_success">Commentaar is toegevoegd</string>
   <string name="osb_comment_dialog_error">Fout opgetreden: commentaar is niet toegevoegd</string>
-  <string name="osb_close_menu_item">Sluit bug</string>
-  <string name="osb_close_dialog_title">Bug wordt afgesloten</string>
-  <string name="osb_close_dialog_close_button">Sluit bug</string>
-  <string name="osb_close_dialog_success">Bug is afgesloten</string>
-  <string name="osb_close_dialog_error">Fout opgetreden: bug is niet gesloten</string>
+  
+  
+  
+  
+  
   <string name="poi_edit_title">Bewerk interessepunt</string>
   <string name="poi_create_title">Maak interessepunt</string>
   <string name="poi_error_poi_not_found">Punt niet gevonden of voorziening is niet een enkel punt</string>
@@ -832,7 +832,7 @@
   <string name="osmand_parking_pm">\'s-middags</string>
   <string name="osmand_parking_am">\'s-ochtends</string>
   <string name="osmand_parking_position_name">Parkeerplek</string>
-  <string name="osmand_parking_plugin_description">De parkeerplaats-plugin bewaatt de locatie waar de auto geparkeerd staat en de gekozen parkeertijd. U kunt uw parkeerplaats en resterende parkeertijd vinden op het Osmand dashboarfd en op de kaart zelf.\nKan ter herinnering ook een afspraak in uw agenda zetten.</string>
+  <string name="osmand_parking_plugin_description">De parkeerplaats-plugin bewaatt de locatie waar de auto geparkeerd staat en de gekozen parkeertijd. U kunt uw parkeerplaats en resterende parkeertijd vinden op het Osmand dashboard en op de kaart zelf.\nKan ter herinnering ook een afspraak in uw agenda zetten.</string>
   <string name="osmand_parking_plugin_name">Parkeerplaats</string>
   <string name="context_menu_item_add_parking_point">Markeer als parkeerpositie</string>
   <string name="context_menu_item_delete_parking_point">Verwijder de parkeerpositie</string>
@@ -1277,7 +1277,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     
     <string name="search_street_in_neighborhood_cities">Zoek straat in nabijgelegen plaatsen</string>
     <string name="intermediate_items_sort_return">De tussenliggende routepunten zijn opnieuw gesorteerd voor een optimale volgorde op de route van uw huidige positie naar uw bestemming.</string>
-    <string name="intermediate_items_sort_by_distance">Sorteer (kortste afstand)</string>
+    <string name="intermediate_items_sort_by_distance">Sorteer kortste afstand</string>
     <string name="please_select_address">Kies eerst een stad of straat</string>
     <string name="context_menu_item_destination_point">Als bestemming\ninstellen</string>
     <string name="destination_point">Bestemming %1$s</string>
@@ -1471,7 +1471,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="navigation_intent_invalid">Ongeldig formaat: %s</string>
 <string name="osmo_settings_uuid">Uniek device-ID</string>
     <string name="osmo_settings_descr">Configureer monitor instellingen en maak een persoonlijk monitor-kanaal</string>
-    <string name="osmo_plugin_description">"Gebruik de functionaliteit voor OsMo geavanceerde live monitoring, zie http://osmo.mobi.\n\n Je kunt andere toestellen volgen en gevolgd worden. Maak spontane anonieme groepen, deel elkaars positie. Er zijn verschillende instellingen voor het permanent of tijdelijk volgen.\n\nAnonieme groepen kunnen maar een beperkt aantal dagen gebruikt worden en zijn beperkt in de mogelijkheden, zoals het ontbreken van beheer op afstand en een groepsbeheerder. Volledig functionele groepen moeten worden aangemaakt op de website en alleen geregistreerde leden kunnen ze gebruiken. "</string>
+    <string name="osmo_plugin_description">"Deze plugin is voor de \"OsMo geavanceerde live monitoring\", zie http://osmo.mobi.\n\n Je kunt alle toestellen van een groep deelnemers volgen en met elkaar communiceren. Er zijn mogelijkheden voor het permanent of tijdelijk volgen.\n\nAnonieme groepen kunnen makkelijk gemaakt worden, bestaan maar een beperkt aantal dagen en zijn beperkt in de mogelijkheden, zoals het ontbreken van beheer op afstand en een groepsbeheerder. Volledig functionele groepen moeten worden aangemaakt op de website en alleen geregistreerde leden kunnen ze gebruiken. "</string>
     <string name="osmo_plugin_name">OsMo (OSM monitoring)</string>
     <string name="osmo_settings">OsMo</string>
    	<string name="keep_informing_never">Alleen handmatig (druk op de pijl)</string>
@@ -2013,7 +2013,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="archive_wikipedia_data">Er zijn al (verouderde en incompatibele) Wikipedia-gegevens gedownload. Wilt u deze bewaren?</string>
     <string name="download_wikipedia_files">Wilt u Wikipedia-artikelen downloaden (%1$s MB) ?</string>
     <string name="disable_recording_once_app_killed">Voorkom loggen als app wordt gesloten</string>
-    <string name="disable_recording_once_app_killed_descrp">Stopt het opnemen van een GPX-spoor als de app wordt gesloten in de applicatielijst. (De OsmAnd achtergrondindicatie verdwijnt dan ook.)</string>
+    <string name="disable_recording_once_app_killed_descrp">Stopt het opnemen van een GPX-spoor als de app wordt afgesloten met Recente Applicaties</string>
     <string name="shared_string_import2osmand">Importeren in OsmAnd</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="rendering_value_default13_name">Standaard (13)</string>
@@ -2111,14 +2111,14 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="map_downloaded">Kaart gedownload</string>
     <string name="map_downloaded_descr">De kaart van %1$s is gedownload en kan nu worden gebruikt.</string>
     <string name="go_to_map">Ga naar de kaart</string>
-    <string name="world_map_download_descr">De basis-wereldkaart ontbreekt of is verouderd. Download deze om OsmAnd goed te laten functioneren.</string>
+    <string name="world_map_download_descr">De basis-wereldkaart ontbreekt of is verouderd. Download hem om OsmAnd goed te laten functioneren.</string>
     <string name="shared_string_update">Updaten</string>
     
     
     
     <string name="shared_string_upload">Upload</string>
     <string name="osm_edit_created_poi">POI in OSM gemaakt</string>
-    <string name="osm_edit_created_bug">Bug in OSM gemaakt</string>
+    
     <string name="simulate_initial_startup_descr">Laat de app de volgende keer starten alsof deze net is geïnstalleerd. De instellingen blijven wel behouden.</string>
     <string name="simulate_initial_startup">Simuleer eerste start van de app</string>
     <string name="shared_string_others">Overige</string>
@@ -2182,7 +2182,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="navigation_item_description">Navigatie instellen</string>
     <string name="planning_trip_item">Een reis plannen</string>
     <string name="faq_item">FAQ</string>
-    <string name="faq_item_description">Hoe plugins te gebruiken</string>
+    <string name="faq_item_description">Veel gestelde vragen</string>
     <string name="map_viewing_item">De kaart bekijken</string>
     <string name="search_on_the_map_item">Zoeken op de kaart</string>
     <string name="instalation_troubleshooting_item">Installeren en foutoplossen</string>
@@ -2194,4 +2194,51 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 <string name="read_more">Meer lezen</string>
     <string name="whats_new">Wat is nieuw in</string>
     <string name="rendering_attr_hideProposed_name">Verberg voorgestelde objecten</string>
+    <string name="share_osm_edits_subject">Via OsmAnd gedeelde OSM-bewerkingen</string>
+    <string name="lang_nds">Nederduits</string>
+    <string name="lang_mk">Macedonisch</string>
+    <string name="lang_fy">Fries</string>
+    <string name="lang_als">Toskisch (Albanees)</string>
+    <string name="shared_string_location">Locatie</string>
+    <string name="osm_edit_modified_poi">Gewijzigde OSM POI</string>
+    <string name="osm_edit_deleted_poi">Gewiste OSM POI</string>
+    <string name="context_menu_item_open_note">Open OSM-opmerking</string>
+    <string name="osm_edit_reopened_note">Heropende OSM-opmerking</string>
+    <string name="osm_edit_commented_note">OSM-opmerking met commentaar</string>
+    <string name="osm_edit_removed_note">OSM-opmerking gewist</string>
+	<string name="osm_edit_created_note">OSM-opmerking gemaakt</string>
+	<string name="osn_bug_name">OSM-opmerking</string>
+	<string name="osn_add_dialog_title">Maak opmerking</string>
+	<string name="osn_comment_dialog_title">Voeg commentaar toe</string>
+	<string name="osn_reopen_dialog_title">Heropen notitie</string>
+	<string name="osn_close_dialog_title">Sluit notitie</string>
+	<string name="osn_add_dialog_success">Notitie aangemaakt</string>
+	<string name="osn_add_dialog_error">Er was een probleem: notitie niet aangemaakt</string>
+	<string name="osn_close_dialog_success">Notitie is gesloten</string>
+	<string name="osn_close_dialog_error">Er was een probleem: notitie is niet afgesloten</string>
+	<string name="osm_save_offline">Bewaar voor off-line gebruik</string>
+    
+    <string name="dashboard_or_drawer_description">Kies tussen het flexibele dashboard of een vast menu. Dit is altijd te wijzigen via de dashboard-instellingen.</string>
+    <string name="copied_to_clipboard">Gekopieerd naar klembord</string>
+    <string name="release_2_2">" • Nieuw contextmenu bij het aantikken van plekken op de kaart en op andere schermen\n\n • De kaart wordt direct getoond, tenzij \'Toon dashboard bij starten van de app\' is gekozen\n\n • Kies welke kaarten worden getoond op het dashboard\n\n • Mogelijkheid menu te grbuiken in plaats van het dashboard\n\n • Kaarten downloaden door op de wereldkaart te tikken\n\n • Fijnmaziger zoeken van POI\n\n • Betere bewerkingsmogelijkheden van POI en OSM\n\n • Kaarten downloaden is makkelijker en overzichtelijker\n\n en meer... "</string>
+    <string name="shared_string_commit">Verstuur</string>
+	
+    <string name="context_menu_item_delete_waypoint">GPX routepunt wissen?</string>
+    <string name="context_menu_item_edit_waypoint">GPX routepunt bewerken</string>
+    <string name="rendering_attr_currentTrackColor_description">GPX-kleur</string>
+    <string name="rendering_attr_currentTrackWidth_description">GPX breedte</string>
+    <string name="rendering_attr_roadStyle_description">Stijl van wegen</string>
+    <string name="poi_dialog_reopen">Heropenen</string>
+	<string name="activate_seamarks_plugin">Activeer de Zeebakens-plugin</string>
+    <string name="activate_srtm_plugin">Activeer de SRTM-plugin</string>
+    <string name="get_full_version">Volledige versie</string>
+    <string name="save_poi_without_poi_type_message">Deze POI echt bewaren zonder het type aan te geven?</string>
+    <string name="poi_context_menu_modify_osm_change">Verander OSM-wijziging</string>
+    
+    <string name="dashboard_or_drawer_title">Kies tussen dashboard of menu</string>
+    <string name="please_specify_poi_type_only_from_list">"Geef een correct type POI of sla dit over "</string>
+    <string name="access_from_map_description">Menu-knop toont dashboard in plaats van menu</string>
+    <string name="access_from_map">Toegang vanaf kaart</string>
+    <string name="use_dashboard_btn">Gebruik dashboard</string>
+    <string name="use_drawer_btn">Gebruik menu</string>
     </resources>

@@ -39,7 +39,7 @@
                     android:layout_height="@dimen/list_item_height"
                     android:background="?attr/dashboard_button"
                     android:scaleType="center"
-                    android:src="@drawable/ic_action_flag_dark" />
+                    android:src="@drawable/map_action_waypoints" />
             </LinearLayout>
         </LinearLayout>
 

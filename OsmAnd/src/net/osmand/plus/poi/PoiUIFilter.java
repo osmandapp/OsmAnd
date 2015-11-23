@@ -46,6 +46,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter {
 	private Map<String, PoiType> poiAdditionals = new HashMap<String, PoiType>();
 
 	protected String filterId;
+	protected String standardIconId = "";
 	protected String name;
 	protected boolean isStandardFilter;
 	
@@ -62,12 +63,14 @@ public class PoiUIFilter implements SearchPoiTypeFilter {
 	protected List<Amenity> currentSearchResult = null;
 	
 	// constructor for standard filters
-	public PoiUIFilter(AbstractPoiType type, OsmandApplication application) {
+	public PoiUIFilter(AbstractPoiType type, OsmandApplication application, String idSuffix) {
 		this.app = application;
 		isStandardFilter = true;
-		filterId = STD_PREFIX + (type == null ? null : type.getKeyName());
+		standardIconId = (type == null ? null : type.getKeyName());
+		filterId = STD_PREFIX + standardIconId + idSuffix;
+		
 		poiTypes = application.getPoiTypes();
-		name = type == null ? application.getString(R.string.poi_filter_closest_poi) : type.getTranslation(); //$NON-NLS-1$
+		name = type == null ? application.getString(R.string.poi_filter_closest_poi) : (type.getTranslation() + idSuffix); //$NON-NLS-1$
 		if (type == null) {
 			initSearchAll();
 			updatePoiAdditionals();
@@ -78,6 +81,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter {
 			updateTypesToAccept(type);
 		}
 	}
+	
 	
 	// search by name standard
 	protected PoiUIFilter(OsmandApplication application) {
@@ -520,9 +524,9 @@ public class PoiUIFilter implements SearchPoiTypeFilter {
 		return poiAdditionals;
 	}
 	
-	public String getSimplifiedId(){
+	public String getIconId(){
 		if(filterId.startsWith(STD_PREFIX)) {
-			return filterId.substring(STD_PREFIX.length()).toLowerCase();
+			return standardIconId;
 		} else if(filterId.startsWith(USER_PREFIX)) {
 			return filterId.substring(USER_PREFIX.length()).toLowerCase();
 		}

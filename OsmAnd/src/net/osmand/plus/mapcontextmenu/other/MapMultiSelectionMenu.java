@@ -30,6 +30,7 @@ public class MapMultiSelectionMenu extends BaseMenuController {
 		private LatLon latLon;
 		private PointDescription pointDescription;
 		private Object object;
+		private int order;
 
 		private MapActivity mapActivity;
 		private MenuController controller;
@@ -107,8 +108,6 @@ public class MapMultiSelectionMenu extends BaseMenuController {
 		this.selectedObjects.clear();
 		this.selectedObjects.putAll(selectedObjects);
 		objects.clear();
-		int order = Integer.MAX_VALUE;
-		MenuObject topObject = null;
 		for (Map.Entry<Object, IContextMenuProvider> e : selectedObjects.entrySet()) {
 			Object selectedObj = e.getKey();
 			IContextMenuProvider contextObject = selectedObjects.get(selectedObj);
@@ -130,25 +129,20 @@ public class MapMultiSelectionMenu extends BaseMenuController {
 			objects.add(menuObject);
 
 			if (contextObject instanceof ContextMenuLayer.IContextMenuProviderSelection) {
-				int i = ((ContextMenuLayer.IContextMenuProviderSelection) contextObject).getOrder(selectedObj);
-				if (i < order) {
-					topObject = menuObject;
-					order = i;
-				}
+				menuObject.order = ((ContextMenuLayer.IContextMenuProviderSelection) contextObject).getOrder(selectedObj);
 			}
 		}
 
 		Collections.sort(objects, new Comparator<MenuObject>() {
 			@Override
 			public int compare(MenuObject obj1, MenuObject obj2) {
-				return obj1.getTitleStr().compareToIgnoreCase(obj2.getTitleStr());
+				if (obj1.order == obj2.order) {
+					return obj1.getTitleStr().compareToIgnoreCase(obj2.getTitleStr());
+				} else {
+					return obj1.order - obj2.order;
+				}
 			}
 		});
-
-		if (topObject != null) {
-			objects.remove(topObject);
-			objects.add(0, topObject);
-		}
 	}
 
 	private void clearMenu() {
@@ -162,11 +156,13 @@ public class MapMultiSelectionMenu extends BaseMenuController {
 			hide();
 		}
 
+/*
 		for (Map.Entry<Object, IContextMenuProvider> e : selectedObjects.entrySet()) {
 			if (e.getValue() instanceof ContextMenuLayer.IContextMenuProviderSelection) {
 				((ContextMenuLayer.IContextMenuProviderSelection) e.getValue()).setSelectedObject(e.getKey());
 			}
 		}
+*/
 
 		this.latLon = latLon;
 		createCollection(selectedObjects);
@@ -197,6 +193,8 @@ public class MapMultiSelectionMenu extends BaseMenuController {
 			selectedObjects.remove(menuObject.getObject());
 		}
 		hide();
+		getMapActivity().getMapViewTrackingUtilities().locationChanged(menuObject.getLatLon().getLatitude(),
+				menuObject.getLatLon().getLongitude(), this);
 		getMapActivity().getContextMenu()
 				.show(menuObject.getLatLon(), menuObject.getPointDescription(), menuObject.getObject());
 	}

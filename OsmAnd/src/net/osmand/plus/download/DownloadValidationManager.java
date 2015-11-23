@@ -23,7 +23,7 @@ import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import java.text.MessageFormat;
 
 public class DownloadValidationManager {
-	public static final int MAXIMUM_AVAILABLE_FREE_DOWNLOADS = 5;
+	public static final int MAXIMUM_AVAILABLE_FREE_DOWNLOADS = 7;
 	protected OsmandSettings settings;
 	private OsmandApplication app;
 	private DownloadIndexesThread downloadThread;

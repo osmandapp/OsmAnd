@@ -1,10 +1,12 @@
 package net.osmand.plus.mapcontextmenu;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.text.ClipboardManager;
 import android.text.util.Linkify;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -15,6 +17,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
@@ -28,7 +31,6 @@ import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 public class MenuBuilder {
 
 	public static final float SHADOW_HEIGHT_TOP_DP = 16f;
-	public static final float SHADOW_HEIGHT_BOTTOM_DP = 6f;
 
 	protected OsmandApplication app;
 	protected LinkedList<PlainMenuItem> plainMenuItems;
@@ -70,16 +72,25 @@ public class MenuBuilder {
 		if (needBuildPlainMenuItems()) {
 			buildPlainMenuItems(view);
 		}
+		buildInternal(view);
+		buildAfter(view);
 	}
 
 	protected void buildPlainMenuItems(View view) {
 		for (PlainMenuItem item : plainMenuItems) {
-			buildRow(view, item.getIconId(), item.getText(), 0, item.isNeedLinks());
+			buildRow(view, item.getIconId(), item.getText(), 0, item.isNeedLinks(), 0);
 		}
 	}
 
 	protected boolean needBuildPlainMenuItems() {
 		return true;
+	}
+
+	protected void buildInternal(View view) {
+	}
+
+	protected void buildAfter(View view) {
+		buildRowDivider(view, false);
 	}
 
 	protected boolean isFirstRow() {
@@ -90,29 +101,42 @@ public class MenuBuilder {
 		firstRow = false;
 	}
 
-	protected void buildRow(View view, int iconId, String text, int textColor, boolean needLinks) {
-		buildRow(view, getRowIcon(iconId), text, textColor, needLinks);
+	protected View buildRow(View view, int iconId, String text, int textColor, boolean needLinks, int textLinesLimit) {
+		return buildRow(view, getRowIcon(iconId), text, textColor, needLinks, textLinesLimit);
 	}
 
-	protected void buildRow(final View view, Drawable icon, String text, int textColor, boolean needLinks) {
+	protected View buildRow(final View view, Drawable icon, final String text, int textColor, boolean needLinks, int textLinesLimit) {
+
+		if (!isFirstRow()) {
+			buildRowDivider(view, false);
+		}
+
 		LinearLayout ll = new LinearLayout(view.getContext());
 		ll.setOrientation(LinearLayout.HORIZONTAL);
 		LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		ll.setLayoutParams(llParams);
+		ll.setBackgroundResource(resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
+		ll.setOnLongClickListener(new View.OnLongClickListener() {
+			@Override
+			public boolean onLongClick(View v) {
+				copyToClipboard(text, view.getContext());
+				return true;
+			}
+		});
 
 		// Icon
 		LinearLayout llIcon = new LinearLayout(view.getContext());
 		llIcon.setOrientation(LinearLayout.HORIZONTAL);
-		llIcon.setLayoutParams(new LinearLayout.LayoutParams(dpToPx(72f), isFirstRow() ? dpToPx(48f) - dpToPx(SHADOW_HEIGHT_BOTTOM_DP) : dpToPx(48f)));
+		llIcon.setLayoutParams(new LinearLayout.LayoutParams(dpToPx(72f), dpToPx(48f)));
 		llIcon.setGravity(Gravity.CENTER_VERTICAL);
 		ll.addView(llIcon);
 
 		ImageView iconView = new ImageView(view.getContext());
-		LinearLayout.LayoutParams llIconParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-		llIconParams.setMargins(dpToPx(16f), isFirstRow() ? dpToPx(12f) - dpToPx(SHADOW_HEIGHT_BOTTOM_DP / 2f) : dpToPx(12f), dpToPx(32f), dpToPx(12f));
+		LinearLayout.LayoutParams llIconParams = new LinearLayout.LayoutParams(dpToPx(24f), dpToPx(24f));
+		llIconParams.setMargins(dpToPx(16f), dpToPx(12f), dpToPx(32f), dpToPx(12f));
 		llIconParams.gravity = Gravity.CENTER_VERTICAL;
 		iconView.setLayoutParams(llIconParams);
-		iconView.setScaleType(ImageView.ScaleType.CENTER);
+		iconView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
 		iconView.setImageDrawable(icon);
 		llIcon.addView(iconView);
 
@@ -123,7 +147,7 @@ public class MenuBuilder {
 
 		TextView textView = new TextView(view.getContext());
 		LinearLayout.LayoutParams llTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-		llTextParams.setMargins(0, isFirstRow() ? dpToPx(8f) - dpToPx(SHADOW_HEIGHT_BOTTOM_DP) : dpToPx(8f), 0, dpToPx(8f));
+		llTextParams.setMargins(0, dpToPx(8f), 0, dpToPx(8f));
 		textView.setLayoutParams(llTextParams);
 		textView.setTextSize(16);
 		textView.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_info_text_light : R.color.ctx_menu_info_text_dark));
@@ -131,6 +155,10 @@ public class MenuBuilder {
 		if (needLinks) {
 			textView.setAutoLinkMask(Linkify.ALL);
 			textView.setLinksClickable(true);
+		}
+		if (textLinesLimit > 0) {
+			textView.setMinLines(1);
+			textView.setMaxLines(textLinesLimit);
 		}
 		textView.setText(text);
 		if (textColor > 0) {
@@ -145,16 +173,16 @@ public class MenuBuilder {
 
 		((LinearLayout) view).addView(ll);
 
-		View horizontalLine = new View(view.getContext());
-		LinearLayout.LayoutParams llHorLineParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dpToPx(1f));
-		llHorLineParams.gravity = Gravity.BOTTOM;
-		horizontalLine.setLayoutParams(llHorLineParams);
-
-		horizontalLine.setBackgroundColor(app.getResources().getColor(light ? R.color.ctx_menu_info_divider_light : R.color.ctx_menu_info_divider_dark));
-
-		((LinearLayout) view).addView(horizontalLine);
-
 		rowBuilt();
+
+		return ll;
+	}
+
+	protected void copyToClipboard(String text, Context ctx) {
+		((ClipboardManager) app.getSystemService(Activity.CLIPBOARD_SERVICE)).setText(text);
+		Toast.makeText(ctx,
+				ctx.getResources().getString(R.string.copied_to_clipboard) + ":\n" + text,
+				Toast.LENGTH_SHORT).show();
 	}
 
 	protected void buildButtonRow(final View view, Drawable buttonIcon, String text, OnClickListener onClickListener) {
@@ -162,11 +190,12 @@ public class MenuBuilder {
 		ll.setOrientation(LinearLayout.HORIZONTAL);
 		LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		ll.setLayoutParams(llParams);
+		ll.setBackgroundResource(resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
 
 		// Empty
 		LinearLayout llIcon = new LinearLayout(view.getContext());
 		llIcon.setOrientation(LinearLayout.HORIZONTAL);
-		llIcon.setLayoutParams(new LinearLayout.LayoutParams(dpToPx(62f), isFirstRow() ? dpToPx(58f) - dpToPx(SHADOW_HEIGHT_BOTTOM_DP) : dpToPx(58f)));
+		llIcon.setLayoutParams(new LinearLayout.LayoutParams(dpToPx(62f), dpToPx(58f)));
 		llIcon.setGravity(Gravity.CENTER_VERTICAL);
 		ll.addView(llIcon);
 
@@ -177,7 +206,6 @@ public class MenuBuilder {
 		ll.addView(llButton);
 
 		Button buttonView = new Button(view.getContext());
-		buttonView.setBackgroundResource(resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
 		LinearLayout.LayoutParams llBtnParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		buttonView.setLayoutParams(llBtnParams);
 		buttonView.setPadding(dpToPx(10f), 0, dpToPx(10f), 0);
@@ -190,13 +218,32 @@ public class MenuBuilder {
 			buttonView.setCompoundDrawablesWithIntrinsicBounds(buttonIcon, null, null, null);
 			buttonView.setCompoundDrawablePadding(dpToPx(8f));
 		}
-
-		buttonView.setOnClickListener(onClickListener);
 		llButton.addView(buttonView);
 
 		((LinearLayout) view).addView(ll);
 
+		ll.setOnClickListener(onClickListener);
+
 		rowBuilt();
+	}
+
+	protected void buildRowDivider(View view, boolean matchWidth) {
+		View horizontalLine = new View(view.getContext());
+		LinearLayout.LayoutParams llHorLineParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dpToPx(1f));
+		llHorLineParams.gravity = Gravity.BOTTOM;
+		if (!matchWidth) {
+			llHorLineParams.setMargins(dpToPx(72f), 0, 0, 0);
+		}
+		horizontalLine.setLayoutParams(llHorLineParams);
+		horizontalLine.setBackgroundColor(app.getResources().getColor(light ? R.color.ctx_menu_info_divider_light : R.color.ctx_menu_info_divider_dark));
+		((LinearLayout) view).addView(horizontalLine);
+	}
+
+	public boolean hasCustomAddressLine() {
+		return false;
+	}
+
+	public void buildCustomAddressLine(LinearLayout ll) {
 	}
 
 	public void addPlainMenuItem(int iconId, String text, boolean needLinks) {

@@ -39,7 +39,7 @@ import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.api.SQLiteAPI;
 import net.osmand.plus.api.SQLiteAPIImpl;
-import net.osmand.plus.dashboard.DashRateUsFragment;
+import net.osmand.plus.dialogs.RateUsBottomSheetDialog;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.WaypointHelper;
@@ -172,8 +172,8 @@ public class OsmandApplication extends Application {
 		if (routingHelper != null) {
 			routingHelper.getVoiceRouter().onApplicationTerminate();
 		}
-        if(DashRateUsFragment.shouldShow(osmandSettings)) {
-            osmandSettings.RATE_US_STATE.set(DashRateUsFragment.RateUsState.IGNORED);
+        if(RateUsBottomSheetDialog.shouldShow(osmandSettings)) {
+            osmandSettings.RATE_US_STATE.set(RateUsBottomSheetDialog.RateUsState.IGNORED);
         }
         getNotificationHelper().removeServiceNotification();
 	}

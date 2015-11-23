@@ -214,7 +214,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		} else {
 			r = 18;
 		}
-		return (int) (r * tb.getDensity());
+		return (int) (r * view.getScaleCoefficient());
 	}
 
 	@Override
@@ -305,8 +305,8 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		}
 	}
 
-	public static void showDescriptionDialog(Context ctx, OsmandApplication app, String text, String textPrefix) {
-		showText(ctx, app, text, textPrefix);
+	public static void showDescriptionDialog(Context ctx, OsmandApplication app, String text, String title) {
+		showText(ctx, app, text, title);
 	}
 
 	static int getResIdFromAttribute(final Context ctx, final int attr) {
@@ -401,7 +401,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		dialog.show();
 	}
 
-	private static void showText(final Context ctx, final OsmandApplication app, final String text,String textPrefix) {
+	private static void showText(final Context ctx, final OsmandApplication app, final String text, String title) {
 		final Dialog dialog = new Dialog(ctx,
 				app.getSettings().isLightContent() ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme);
 
@@ -412,7 +412,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		topBar.setClickable(true);
 		Drawable back = app.getIconsCache().getIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
 		topBar.setNavigationIcon(back);
-		topBar.setTitle(textPrefix);
+		topBar.setTitle(title);
 		topBar.setBackgroundColor(ctx.getResources().getColor(getResIdFromAttribute(ctx, R.attr.pstsTabBackground)));
 		topBar.setTitleTextColor(ctx.getResources().getColor(getResIdFromAttribute(ctx, R.attr.pstsTextColor)));
 		topBar.setNavigationOnClickListener(new View.OnClickListener() {

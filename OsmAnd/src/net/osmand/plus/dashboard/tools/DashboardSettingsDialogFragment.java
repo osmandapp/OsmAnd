@@ -21,6 +21,7 @@ import android.widget.TextView;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashboardOnMap;
@@ -66,24 +67,10 @@ public class DashboardSettingsDialogFragment extends DialogFragment
 		textColorSecondary = typedValue.data;
 
 		final OsmandSettings settings = mapActivity.getMyApplication().getSettings();
-
-		View view = LayoutInflater.from(getActivity()).inflate(
-				R.layout.show_dashboard_on_start_dialog_item, null, false);
-		final TextView textView = (TextView) view.findViewById(R.id.text);
-		textView.setText(R.string.show_on_start);
-		final OsmandSettings.CommonPreference<Boolean> shouldShowDashboardOnStart =
-				settings.registerBooleanPreference(MapActivity.SHOULD_SHOW_DASHBOARD_ON_START, true);
-		final CompoundButton compoundButton = (CompoundButton) view.findViewById(R.id.check_item);
-		compoundButton.setChecked(shouldShowDashboardOnStart.get());
-		textView.setTextColor(shouldShowDashboardOnStart.get() ? textColorPrimary
-				: textColorSecondary);
-		compoundButton.setOnCheckedChangeListener(
-				new CompoundButton.OnCheckedChangeListener() {
-					@Override
-					public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-						textView.setTextColor(b ? textColorPrimary : textColorSecondary);
-					}
-				});
+		final View showDashboardOnStart = createCheckboxItem(settings.SHOW_DASHBOARD_ON_START, 
+				R.string.show_on_start , R.string.show_on_start_description);
+		final View accessFromMap = createCheckboxItem(settings.SHOW_DASHBOARD_ON_MAP_SCREEN, 
+				R.string.access_from_map, R.string.access_from_map_description); 
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		if (savedInstanceState != null && savedInstanceState.containsKey(CHECKED_ITEMS)) {
@@ -111,15 +98,41 @@ public class DashboardSettingsDialogFragment extends DialogFragment
 							}
 						}
 						mapActivity.getDashboard().refreshDashboardFragments();
-						shouldShowDashboardOnStart.set(compoundButton.isChecked());
+						settings.SHOW_DASHBOARD_ON_START.set(
+								((CompoundButton) showDashboardOnStart.findViewById(R.id.check_item)).isChecked());
+						settings.SHOW_DASHBOARD_ON_MAP_SCREEN.set(
+								((CompoundButton) accessFromMap.findViewById(R.id.check_item)).isChecked());
+						mapActivity.getMapLayers().getMapControlsLayer().initDasboardRelatedControls();
 					}
 				})
 				.setNegativeButton(R.string.shared_string_cancel, null);
 		final AlertDialog dialog = builder.create();
 
 		ListView listView = dialog.getListView();
-		listView.addHeaderView(view);
+		listView.addHeaderView(showDashboardOnStart);
+		listView.addHeaderView(accessFromMap);
 		return dialog;
+	}
+
+	private View createCheckboxItem(final CommonPreference<Boolean> pref, int text, int description) {
+		final View view = LayoutInflater.from(getActivity()).inflate(
+				R.layout.show_dashboard_on_start_dialog_item, null, false);
+		final TextView textView = (TextView) view.findViewById(R.id.text);
+		final TextView subtextView = (TextView) view.findViewById(R.id.subtext);
+		textView.setText(text);
+		subtextView.setText(description);
+		final CompoundButton compoundButton = (CompoundButton) view.findViewById(R.id.check_item);
+		compoundButton.setChecked(pref.get());
+		textView.setTextColor(pref.get() ? textColorPrimary
+				: textColorSecondary);
+		compoundButton.setOnCheckedChangeListener(
+				new CompoundButton.OnCheckedChangeListener() {
+					@Override
+					public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+						textView.setTextColor(b ? textColorPrimary : textColorSecondary);
+					}
+				});
+		return view;
 	}
 
 	@Override

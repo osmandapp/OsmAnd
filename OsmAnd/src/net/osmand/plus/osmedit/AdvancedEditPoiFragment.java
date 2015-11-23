@@ -21,7 +21,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import net.osmand.PlatformUtil;
 import net.osmand.StringMatcher;
 import net.osmand.osm.AbstractPoiType;
@@ -52,7 +51,6 @@ public class AdvancedEditPoiFragment extends Fragment
 	private TextView nameTextView;
 	private TextView amenityTagTextView;
 	private TextView amenityTextView;
-	private Map<String, PoiType> allTranslatedSubTypes;
 
 	@Override
 	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -81,12 +79,17 @@ public class AdvancedEditPoiFragment extends Fragment
 				(LinearLayout) view.findViewById(R.id.editTagsList);
 
 		final MapPoiTypes mapPoiTypes = ((OsmandApplication) getActivity().getApplication()).getPoiTypes();
-		// TODO: 10/27/15 Probably use executor so loading would be paralleled.
-		new InitTranslatedTypesTask(mapPoiTypes).execute();
 		mAdapter = new TagAdapterLinearLayoutHack(editTagsLineaLayout, getData());
-		// TODO do not restart initialization every time, and probably move initialization to appInit
-		new InitTagsAndValuesAutocompleteTask(mapPoiTypes).execute();
-//		setListViewHeightBasedOnChildren(editTagsLineaLayout);
+		// It is possible to not restart initialization every time, and probably move initialization to appInit
+		Map<String, PoiType> translatedTypes = getData().getAllTranslatedSubTypes();
+		HashSet<String> tagKeys = new HashSet<>();
+		HashSet<String> valueKeys = new HashSet<>();
+		for (AbstractPoiType abstractPoiType : translatedTypes.values()) {
+			addPoiToStringSet(abstractPoiType, tagKeys, valueKeys);
+		}
+		addPoiToStringSet(mapPoiTypes.getOtherMapCategory(), tagKeys, valueKeys);
+		mAdapter.setTagData(tagKeys.toArray(new String[tagKeys.size()]));
+		mAdapter.setValueData(valueKeys.toArray(new String[valueKeys.size()]));
 		Button addTagButton = (Button) view.findViewById(R.id.addTagButton);
 		addTagButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -101,24 +104,16 @@ public class AdvancedEditPoiFragment extends Fragment
 	public void onResume() {
 		super.onResume();
 		mAdapter.updateViews();
+		updateName();
+		updatePoiType();
 		mTagsChangedListener = new EditPoiData.TagsChangedListener() {
 			@Override
 			public void onTagsChanged(String anyTag) {
-				LOG.debug("onTagsChanged(" + "anyTag=" + anyTag + ")");
-				String value = getData().getTagValues().get(anyTag);
 				if (Algorithms.objectEquals(anyTag, OSMSettings.OSMTagKey.NAME.getValue())) {
-					nameTextView.setText(value);
+					updateName();
 				}
 				if (Algorithms.objectEquals(anyTag, EditPoiData.POI_TYPE_TAG)) {
-					String subType = value == null ? "" : value.trim().toLowerCase();
-					if (allTranslatedSubTypes.get(subType) != null) {
-						PoiType pt = allTranslatedSubTypes.get(subType);
-						amenityTagTextView.setText(pt.getOsmTag());
-						amenityTextView.setText(pt.getOsmValue());
-					} else {
-						amenityTagTextView.setText(getData().amenity.getType().getDefaultTag());
-						amenityTextView.setText(subType);
-					}
+					updatePoiType();
 				}
 			}
 		};
@@ -146,7 +141,24 @@ public class AdvancedEditPoiFragment extends Fragment
 
 	@Override
 	public void onFragmentActivated() {
-		mAdapter.updateViews();
+		if(mAdapter != null) {
+			mAdapter.updateViews();
+		}
+	}
+
+	private void updateName() {
+		nameTextView.setText(getData().getTag(OSMSettings.OSMTagKey.NAME.getValue()));
+	}
+
+	private void updatePoiType() {
+		PoiType pt = getData().getPoiTypeDefined();
+		if (pt != null) {
+			amenityTagTextView.setText(pt.getOsmTag());
+			amenityTextView.setText(pt.getOsmValue());
+		} else {
+			amenityTagTextView.setText(getData().getPoiCategory().getDefaultTag());
+			amenityTextView.setText(getData().getPoiTypeString());
+		}
 	}
 
 	public class TagAdapterLinearLayoutHack {
@@ -216,25 +228,7 @@ public class AdvancedEditPoiFragment extends Fragment
 					}
 				}
 			});
-
-			tagEditText.setAdapter(tagAdapter);
-			tagEditText.setThreshold(1);
-			tagEditText.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-					builder.setAdapter(tagAdapter, new Dialog.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							tagAdapter.getItem(which);
-						}
-
-					});
-					builder.create();
-					builder.show();
-				}
-			});
-
+			initAutocompleteTextView(tagEditText, tagAdapter);
 
 			valueEditText.setText(vl);
 			valueEditText.addTextChangedListener(new TextWatcher() {
@@ -254,23 +248,7 @@ public class AdvancedEditPoiFragment extends Fragment
 				}
 			});
 
-			valueEditText.setAdapter(valueAdapter);
-			valueEditText.setThreshold(1);
-			valueEditText.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-					builder.setAdapter(valueAdapter, new Dialog.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							valueAdapter.getItem(which);
-						}
-
-					});
-					builder.create();
-					builder.show();
-				}
-			});
+			initAutocompleteTextView(valueEditText, valueAdapter);
 
 			linearLayout.addView(convertView);
 			tagEditText.requestFocus();
@@ -291,10 +269,41 @@ public class AdvancedEditPoiFragment extends Fragment
 		}
 	}
 
+	private static void initAutocompleteTextView(final AutoCompleteTextView textView,
+												 final ArrayAdapter<String> adapter) {
+		textView.setAdapter(adapter);
+		textView.setThreshold(1);
+		textView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+				builder.setAdapter(adapter, new Dialog.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						textView.setText(adapter.getItem(which));
+					}
+
+				});
+				builder.create().show();
+			}
+		});
+		textView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				if (hasFocus) {
+					adapter.getFilter().filter(textView.getText());
+				}
+			}
+		});
+	}
+
 	private static void addPoiToStringSet(AbstractPoiType abstractPoiType, Set<String> stringSet,
 										  Set<String> values) {
 		if (abstractPoiType instanceof PoiType) {
 			PoiType poiType = (PoiType) abstractPoiType;
+			if (poiType.isNotEditableOsm() || poiType.getBaseLangType() != null) {
+				return;
+			}
 			if (poiType.getOsmTag() != null &&
 					!poiType.getOsmTag().equals(OSMSettings.OSMTagKey.NAME.getValue())) {
 				stringSet.add(poiType.getOsmTag());
@@ -330,57 +339,5 @@ public class AdvancedEditPoiFragment extends Fragment
 					+ abstractPoiType.getClass());
 		}
 	}
-
-	class InitTagsAndValuesAutocompleteTask extends AsyncTask<Void, Void, Map<String, AbstractPoiType>> {
-		private final MapPoiTypes mapPoiTypes;
-
-		public InitTagsAndValuesAutocompleteTask(MapPoiTypes mapPoiTypes) {
-			this.mapPoiTypes = mapPoiTypes;
-		}
-
-		@Override
-		protected Map<String, AbstractPoiType> doInBackground(Void... params) {
-			return mapPoiTypes.getAllTypesTranslatedNames(new StringMatcher() {
-				@Override
-				public boolean matches(String name) {
-					return true;
-				}
-			});
-		}
-
-		@Override
-		protected void onPostExecute(Map<String, AbstractPoiType> result) {
-			HashSet<String> tagKeys = new HashSet<>();
-			HashSet<String> valueKeys = new HashSet<>();
-			for (AbstractPoiType abstractPoiType : result.values()) {
-				if (abstractPoiType instanceof PoiType &&
-						((PoiType) abstractPoiType).isNotEditableOsm()) {
-					continue;
-				}
-				addPoiToStringSet(abstractPoiType, tagKeys, valueKeys);
-			}
-			addPoiToStringSet(mapPoiTypes.getOtherMapCategory(), tagKeys, valueKeys);
-			mAdapter.setTagData(tagKeys.toArray(new String[tagKeys.size()]));
-			mAdapter.setValueData(valueKeys.toArray(new String[valueKeys.size()]));
-		}
-	}
-
-	class InitTranslatedTypesTask extends AsyncTask<Void, Void, Map<String, PoiType>> {
-		private final MapPoiTypes mapPoiTypes;
-
-		public InitTranslatedTypesTask(MapPoiTypes mapPoiTypes) {
-			this.mapPoiTypes = mapPoiTypes;
-		}
-
-		@Override
-		protected Map<String, PoiType> doInBackground(Void... params) {
-			return mapPoiTypes.getAllTranslatedNames();
-		}
-
-		@Override
-		protected void onPostExecute(Map<String, PoiType> result) {
-			allTranslatedSubTypes = result;
-		}
-
-	}
+	
 }

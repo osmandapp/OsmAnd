@@ -101,7 +101,7 @@
   <string name="vector_data">Mapas vetoriais offline</string>
   <string name="transport_context_menu">Procurar transporte na parada</string>
   
-  <string name="osb_bug_name">Erro</string>
+  
   <string name="poi_context_menu_modify">Modificar POI</string>
   <string name="poi_context_menu_delete">Apagar POI</string>
   <string name="rotate_map_compass_opt">Na direção da bússola</string>
@@ -381,7 +381,7 @@
   <string name="search_tabs_location">Localização</string>
   
   <string name="context_menu_item_update_map">Atualizar mapa</string>
-  <string name="context_menu_item_open_bug">Reportar problema OSM</string>
+  
   <string name="context_menu_item_create_poi">Criar ponto de interesse</string>
   <string name="shared_string_yes">Sim</string>
   <string name="shared_string_cancel">Cancelar</string>
@@ -395,21 +395,21 @@
   <string name="favourites_context_menu_delete">Apagar favorito</string>
   <string name="favourites_remove_dialog_msg">Você quer mesmo apagar este favorito \'%s\'?</string>
   <string name="favourites_remove_dialog_success">Ponto favorito {0} apagado com sucesso.</string>
-  <string name="osb_add_dialog_title">Descrição do problema</string>
-  <string name="osb_add_dialog_success">O bug foi criado</string>
-  <string name="osb_add_dialog_error">Erro: bug não foi criado</string>
-  <string name="osb_comment_menu_item">Adicionar comentário</string>
+  
+  
+  
+  
   <string name="osb_comment_dialog_message">Mensagem</string>
   <string name="osb_comment_dialog_author">Autor</string>
-  <string name="osb_comment_dialog_title">Adicionando comentário ao bug</string>
-  <string name="osb_comment_dialog_add_button">Adicionar comentário</string>
+  
+  
   <string name="osb_comment_dialog_success">Comentário adicionado</string>
   <string name="osb_comment_dialog_error">Erro: o comentário não foi adicionado</string>
-  <string name="osb_close_menu_item">Fechar o bug</string>
-  <string name="osb_close_dialog_title">Fechando o bug</string>
-  <string name="osb_close_dialog_close_button">Fechar o bug</string>
-  <string name="osb_close_dialog_success">Bug fechado com sucesso</string>
-  <string name="osb_close_dialog_error">Erro: bug não foi fechado</string>
+  
+  
+  
+  
+  
   <string name="poi_edit_title">Editar POI</string>
   <string name="poi_create_title">Criar POI</string>
   <string name="poi_error_poi_not_found">Nó não pode ser encontrado ou POI não é um único nó</string>
@@ -1150,7 +1150,7 @@
     
     <string name="search_street_in_neighborhood_cities">Procurar rua na vizinhança</string>
     <string name="intermediate_items_sort_return">Pontos intermédios organizados para otimizar a ordem até ao destino.</string>
-    <string name="intermediate_items_sort_by_distance">Ordem (porta a porta)</string>
+    <string name="intermediate_items_sort_by_distance">Ordem porta a porta</string>
     <string name="use_distance_measurement_help">Toque para marcar um pont.\n
 Pressione e segure no mapa para apagar pontos anteriores.\n
 Pressione e segure no ponto para ver e anexar descrição.\n
@@ -1816,4 +1816,5 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="shared_string_trip_recording">Gravar Viagem</string>
     <string name="shared_string_navigation">Navegação</string>
     <string name="nm">mn</string>
+    <string name="shared_string_update">Atualizar</string>
     </resources>

@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="offline_edition">Modifications hors-ligne</string>
     <string name="offline_edition_descr">Toujours utiliser l\'édition hors-ligne</string>
 
@@ -348,7 +349,7 @@
     <string name="vector_data">Cartes vectorielles OSM</string>
     <string name="transport_context_menu">Transport en commun</string>
 
-    <string name="osb_bug_name">Bogue</string>
+    
     <string name="poi_context_menu_modify">Modifier PI</string>
     <string name="poi_context_menu_delete">Supprimer PI</string>
     <string name="rotate_map_compass_opt">D\'après la boussole</string>
@@ -610,7 +611,7 @@
     <string name="search_tabs_location">Position</string>
 
     <string name="context_menu_item_update_map">Mettre à jour la carte</string>
-    <string name="context_menu_item_open_bug">Ouvrir un bogue OSM</string>
+    
     <string name="context_menu_item_create_poi">Créer un point d\'intérêt</string>
     <string name="shared_string_yes">Oui</string>
     <string name="shared_string_cancel">Annuler</string>
@@ -624,21 +625,21 @@
     <string name="favourites_context_menu_delete">Supprimer le favori</string>
     <string name="favourites_remove_dialog_msg">Voulez-vous vraiment supprimer le favori \'%s\' ?</string>
     <string name="favourites_remove_dialog_success">Suppression du favori \'{0}\' réussie.</string>
-    <string name="osb_add_dialog_title">Description du bogue</string>
-    <string name="osb_add_dialog_success">Le bogue a bien été créé</string>
-    <string name="osb_add_dialog_error">Erreur : le bogue n\'a pas été créé</string>
-    <string name="osb_comment_menu_item">Ajouter commentaire</string>
+    
+    
+    
+    
     <string name="osb_comment_dialog_message">Message</string>
     <string name="osb_comment_dialog_author">Nom de l\'auteur</string>
-    <string name="osb_comment_dialog_title">Ajout d\'un commentaire au bogue</string>
-    <string name="osb_comment_dialog_add_button">Ajouter commentaire</string>
+    
+    
     <string name="osb_comment_dialog_success">Ajout du commentaire réussi</string>
     <string name="osb_comment_dialog_error">Erreur : le commentaire n\'a pas été ajouté</string>
-    <string name="osb_close_menu_item">Fermer le bogue</string>
-    <string name="osb_close_dialog_title">Fermeture du bogue</string>
-    <string name="osb_close_dialog_close_button">Fermer bogue</string>
-    <string name="osb_close_dialog_success">Bogue ajouté avec succès</string>
-    <string name="osb_close_dialog_error">Erreur : le bogue n\'a pas été fermé</string>
+    
+    
+    
+    
+    
     <string name="poi_edit_title">Éditer PI</string>
     <string name="poi_create_title">Créer un point d\'intérêt (PI)</string>
     <string name="poi_error_poi_not_found">Objet introuvable ou l\'équipement n\'est pas un composé d\'un seul objet</string>
@@ -1222,7 +1223,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="local_index_tile_data_name">Données de tuile : %1$s</string>
     <string name="edit_tilesource_successfully">Le fournisseur de tuiles %1$s a été enregistré avec succès.</string>
     <string name="edit_tilesource_elliptic_tile">Mercator elliptique</string>
-    <string name="edit_tilesource_choose_existing">Choisir un fournisseur de tuiles existant…</string>
+    <string name="edit_tilesource_choose_existing">Sélectionner existant…</string>
     <string name="maps_define_edit">Définir/Éditer…</string>
     <string name="announce_gpx_waypoints">Points de passage GPX</string>
     <string name="speak_descr">Annoncer les noms de rue, les avertissements (stops, ralentisseurs, radars), les limitations de vitesse</string>
@@ -2026,7 +2027,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="favorite_category_name">Nom de la catégorie</string>
     <string name="favorite_category_add_new_title">Ajouter une catégorie</string>
     <string name="favorite_category_dublicate_message">Cette catégorie existe déjà. Merci d\'indiquer un autre nom.</string>
-    <string name="confirm_download_roadmaps">Êtes-vous certains de vouloir télécharger les routes alors que vous disposez d\'une carte complète ?</string>
+    <string name="confirm_download_roadmaps">Êtes-vous certain de vouloir télécharger la carte des routes alors que vous disposez déjà d\'une carte complète ?</string>
     <string name="value_downloaded_from_max">%1$.1f de %2$.1f MB</string>
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">Tout mettre à jour (%1$s MB)</string>
@@ -2043,7 +2044,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="simulate_initial_startup">Simuler un premier démarrage</string>
     <string name="simulate_initial_startup_descr">Efface le compteur de démarrages afin de simuler un premier démarrage (conserve tous les autres paramètres)</string>
 
-    <string name="show_on_start_description">Si inactif démarre l\'application en mode carte</string>
+    <string name="show_on_start_description">Si Inactif démarre l\'application en affichant la carte</string>
     <string name="map_downloaded">Carte téléchargée</string>
     <string name="go_to_map">Aller à la carte</string>
     <string name="map_downloaded_descr">La carte %1$s a été téléchargée. Allez à la carte pour l’utiliser.</string>
@@ -2074,7 +2075,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="contact_us">Nous contacter</string>
 
     <string name="osm_edit_created_poi">PI créés sur OSM</string>
-    <string name="osm_edit_created_bug">Bugs déclarés sur OSM</string>
+    
     <string name="map_legend">Légende</string>
 <string name="shared_string_upload">Téléchargement</string>
     
@@ -2084,4 +2085,44 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="read_more">Lire plus</string>
     <string name="whats_new">Quoi de neuf dans</string>
     <string name="rendering_attr_hideProposed_name">Masquer les objets proposés</string>
+    <string name="lang_mk">Macédonien</string>
+    <string name="lang_fy">Frison occidental</string>
+    <string name="lang_als">Tosque</string>
+    <string name="lang_nds">Bas allemand</string>
+    <string name="share_osm_edits_subject">Éditions OSM partagées grâce à OsmAnd</string>
+    <string name="save_poi_without_poi_type_message">Souhaitez-vous enregistrer ce point d\'intérêt sans définir son type ?</string>
+    <string name="shared_string_location">Localisation</string>
+    <string name="context_menu_item_delete_waypoint">Supprimer le point de passage GPX ?</string>
+    <string name="context_menu_item_edit_waypoint">Modifier le point de passage GPX</string>
+    <string name="context_menu_item_open_note">Ouvrir la note OSM</string>
+    <string name="osm_edit_reopened_note">Ré-ouvrir la note OSM</string>
+    <string name="osm_edit_removed_note">Note OSM supprimée</string>
+	<string name="osm_edit_created_note">Note OSM créée</string>
+	<string name="osn_bug_name">Note OSM</string>
+	<string name="osn_add_dialog_title">Créer une note</string>
+	<string name="osn_comment_dialog_title">Ajouter un commentaire</string>
+	<string name="osn_reopen_dialog_title">Ré-ouvrir la note</string>
+	<string name="osn_close_dialog_title">Fermer la note</string>
+	<string name="osn_add_dialog_success">Note créée avec succès</string>
+	<string name="osn_add_dialog_error">Une erreur s\'est produite : la note n\'a pas pu être créée</string>
+	<string name="osn_close_dialog_success">La note a été fermée</string>
+	<string name="osn_close_dialog_error">Une erreur s\'est produite : la note ne peut pas être fermée</string>
+	<string name="shared_string_commit">Soumettre</string>
+	
+    <string name="poi_dialog_reopen">Ré-ouvrir</string>
+	<string name="osm_edit_commented_note">Note OSM commentée</string>
+    <string name="osm_edit_modified_poi">PI OSM modifié</string>
+    <string name="osm_edit_deleted_poi">PI OSM supprimé</string>
+    <string name="osm_save_offline">Enregistrer pour utiliser hors-ligne</string>
+    <string name="rendering_attr_currentTrackColor_description">Couleur GPX</string>
+    <string name="rendering_attr_currentTrackWidth_description">Largeur GPX</string>
+    <string name="rendering_attr_roadStyle_description">Style pour les routes</string>
+    <string name="copied_to_clipboard">Copié dans le presse-papier</string>
+    <string name="use_dashboard_btn">Utiliser le tableau de bord</string>
+    <string name="use_drawer_btn">Utiliser le menu</string>
+    <string name="dashboard_or_drawer_title">Lancement du Tableau de bord ou du Menu</string>
+    <string name="dashboard_or_drawer_description">Nouvelle option permettant de définir le comportement du bouton Menu : lancement du Tableau de bord ou du Menu statique ? Ce paramètre peut être modifié par la suite dans les préférences.</string>
+    <string name="access_from_map_description">Le bouton Menu lance le tableau de bord (plutôt que le Menu)</string>
+    <string name="access_from_map">Accès depuis la carte</string>
+    <string name="please_specify_poi_type_only_from_list">"Merci d\'indiquer un type pour ce PI ou d\'ignorer. "</string>
     </resources>

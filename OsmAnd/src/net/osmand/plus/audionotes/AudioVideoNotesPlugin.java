@@ -228,17 +228,17 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			return dateFormat.format(dateTime) + " " + timeFormat.format(dateTime);
 		}
 
-		public String getName(Context ctx) {
+		public String getName(Context ctx, boolean includingType) {
 			String fileName = file.getName();
 			String desc = getDescriptionName(fileName);
 			if (desc != null) {
 				return desc;
-			} else if (this.isAudio()) {
-				return formatDateTime(ctx, file.lastModified());
-			} else if (this.isVideo()) {
-				return formatDateTime(ctx, file.lastModified());
-			} else if (this.isPhoto()) {
-				return formatDateTime(ctx, file.lastModified());
+			} else if (this.isAudio() || this.isVideo() || this.isPhoto()) {
+				if (includingType) {
+					return getType(ctx) + " " + formatDateTime(ctx, file.lastModified());
+				} else {
+					return formatDateTime(ctx, file.lastModified());
+				}
 			}
 			return "";
 		}
@@ -1168,7 +1168,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 						&& OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null) {
 					String name = f.getName();
 					SavingTrackHelper savingTrackHelper = app.getSavingTrackHelper();
-					savingTrackHelper.insertPointData(rec.lat, rec.lon, System.currentTimeMillis(), name);
+					savingTrackHelper.insertPointData(rec.lat, rec.lon, System.currentTimeMillis(), null, name, null, 0);
 				}
 			}
 

@@ -4,53 +4,44 @@ package net.osmand.plus.osmedit;
 
 import java.util.List;
 
-import android.content.Context;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.osmedit.OsmPoint.Action;
 
 public class OsmBugsLocalUtil implements OsmBugsUtil {
 
-
-	private final Context ctx;
 	private final OsmBugsDbHelper db;
 
-	public OsmBugsLocalUtil(Context uiContext, OsmBugsDbHelper db) {
-		this.ctx = uiContext;
+	public OsmBugsLocalUtil(OsmandApplication app, OsmBugsDbHelper db) {
 		this.db = db;
 	}
-
+	
 	@Override
-	public String createNewBug(double latitude, double longitude, String text, String author){
-		OsmNotesPoint p = new OsmNotesPoint();
-		p.setId(Math.min(-2, db.getMinID() -1));
-		p.setText(text);
-		p.setLatitude(latitude);
-		p.setLongitude(longitude);
-		p.setAuthor(author);
-		p.setAction(OsmPoint.Action.CREATE);
-		return db.addOsmbugs(p) ? null : "";
+	public OsmBugResult commit(OsmNotesPoint point, String text, Action action) {
+		if(action == OsmPoint.Action.CREATE) {
+			point.setId(Math.min(-2, db.getMinID() -1));
+			point.setText(text);
+			point.setAction(action);
+		} else {
+			OsmNotesPoint pnt = new OsmNotesPoint();
+			pnt.setId(point.getId());
+			pnt.setLatitude(point.getLatitude());
+			pnt.setLongitude(point.getLongitude());
+			pnt.setAction(action);
+			pnt.setText(text);
+			point = pnt;
+		}
+		return wrap(point, db.addOsmbugs(point));
 	}
 	
+	private OsmBugResult wrap(OsmNotesPoint p, boolean success) {
+		OsmBugResult s = new OsmBugResult();
+		s.local = p;
+		s.warning = success ? null : "";
+		return s;
+	}
+
 	public List<OsmNotesPoint> getOsmbugsPoints() {
 		return db.getOsmbugsPoints();
 	}
-
-	@Override
-	public String addingComment(long id, String text, String author){
-		OsmNotesPoint p = new OsmNotesPoint();
-		p.setId(id);
-		p.setText(text);
-		p.setAuthor(author);
-		p.setAction(OsmPoint.Action.MODIFY);
-		return db.addOsmbugs(p) ? null : "";
-	}
-
-	@Override
-	public String closingBug(long id, String text, String author){
-		OsmNotesPoint p = new OsmNotesPoint();
-		p.setId(id);
-		p.setText(text);
-		p.setAuthor(author);
-		p.setAction(OsmPoint.Action.DELETE);
-		return db.addOsmbugs(p) ? null : "";
-	}
-
+	
 }

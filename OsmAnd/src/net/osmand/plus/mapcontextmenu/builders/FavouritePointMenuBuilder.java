@@ -23,11 +23,9 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	}
 
 	@Override
-	public void build(View view) {
-		super.build(view);
-
+	public void buildInternal(View view) {
 		if (!Algorithms.isEmpty(fav.getDescription())) {
-			buildRow(view, R.drawable.ic_action_note_dark, fav.getDescription(), 0, true);
+			buildRow(view, R.drawable.ic_action_note_dark, fav.getDescription(), 0, true, 0);
 		}
 
 		buildPlainMenuItems(view);

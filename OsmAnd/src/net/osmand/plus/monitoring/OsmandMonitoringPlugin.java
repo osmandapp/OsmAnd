@@ -23,6 +23,7 @@ import net.osmand.ValueHolder;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndTaskManager.OsmAndTaskRunnable;
@@ -132,13 +133,22 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 			@Override
 			public boolean onContextMenuClick(ArrayAdapter<?> adapter, int resId, int pos, boolean isChecked) {
 				if (resId == R.string.context_menu_item_add_waypoint) {
-					mapActivity.getMapActions().addWaypoint(latitude, longitude);
+					mapActivity.getContextMenu().addWptPt();
+				} else if (resId == R.string.context_menu_item_edit_waypoint) {
+					mapActivity.getContextMenu().editWptPt();
 				}
 				return true;
 			}
 		};
 		adapter.item(R.string.context_menu_item_add_waypoint).iconColor(R.drawable.ic_action_gnew_label_dark)
-		.listen(listener).reg();
+				.listen(listener).reg();
+		if (selectedObj instanceof WptPt) {
+			WptPt pt = (WptPt) selectedObj;
+			if (app.getSelectedGpxHelper().getSelectedGPXFile(pt) != null) {
+				adapter.item(R.string.context_menu_item_edit_waypoint).iconColor(R.drawable.ic_action_edit_dark)
+						.listen(listener).reg();
+			}
+		}
 	}
 	
 	public static final int[] SECONDS = new int[] {0, 1, 2, 3, 5, 10, 15, 30, 60, 90};

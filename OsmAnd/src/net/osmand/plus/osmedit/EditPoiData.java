@@ -1,10 +1,10 @@
 package net.osmand.plus.osmedit;
 
 import net.osmand.PlatformUtil;
-import net.osmand.data.Amenity;
+import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.Node;
-import net.osmand.osm.edit.OSMSettings;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -20,52 +20,83 @@ public class EditPoiData {
 	private Set<TagsChangedListener> mListeners = new HashSet<>();
 	private LinkedHashMap<String, String > tagValues = new LinkedHashMap<String, String>();
 	private boolean isInEdit = false;
-	public final Amenity amenity;
+	private Node entity;
+	
 	public static final String POI_TYPE_TAG = "poi_type_tag";
 	private boolean hasChangesBeenMade = false;
-
-	public EditPoiData(Amenity amenity, Node node, Map<String, PoiType> allTranslatedSubTypes) {
-		this.amenity = amenity;
-		initTags(node, allTranslatedSubTypes);
+	private Map<String, PoiType> allTranslatedSubTypes;
+	private PoiCategory category;
+	
+	public EditPoiData(Node node, OsmandApplication app) {
+		allTranslatedSubTypes = app.getPoiTypes().getAllTranslatedNames(true);
+		category = app.getPoiTypes().getOtherPoiCategory();
+		entity = node;
+		initTags(node);
+		updateTypeTag(getPoiTypeString());
+	}
+	
+	public Map<String, PoiType> getAllTranslatedSubTypes() {
+		return allTranslatedSubTypes;
+	}
+	
+	public void updateType(PoiCategory type) {
+		if(type != null && type != category) {
+			category = type;
+			tagValues.put(POI_TYPE_TAG, "");
+		}
+	}
+	
+	
+	public PoiCategory getPoiCategory() {
+		return category;
+	}
+	
+	public PoiType getPoiTypeDefined() {
+		return allTranslatedSubTypes.get(getPoiTypeString().toLowerCase());
+	}
+	
+	public String getPoiTypeString() {
+		String s = tagValues.get(POI_TYPE_TAG) ;
+		return s == null ? "" : s;
 	}
 
+	public Node getEntity() {
+		return entity;
+	}
+	
+	public String getTag(String key) {
+		return tagValues.get(key);
+	}
 	
 	public void updateTags(Map<String, String> mp) {
+		checkNotInEdit();
 		this.tagValues.clear();
 		this.tagValues.putAll(mp);
+		retrieveType();
 	}
+	
 	private void tryAddTag(String key, String value) {
 		if (!Algorithms.isEmpty(value)) {
 			tagValues.put(key, value);
 		}
 	}
 	
-	private void initTags(Node node, Map<String, PoiType> allTranslatedSubTypes) {
+	private void initTags(Node node) {
 		checkNotInEdit();
-		tryAddTag(OSMSettings.OSMTagKey.ADDR_STREET.getValue(),
-				node.getTag(OSMSettings.OSMTagKey.ADDR_STREET));
-		tryAddTag(OSMSettings.OSMTagKey.ADDR_HOUSE_NUMBER.getValue(),
-				node.getTag(OSMSettings.OSMTagKey.ADDR_HOUSE_NUMBER));
-		tryAddTag(OSMSettings.OSMTagKey.PHONE.getValue(),
-				amenity.getPhone());
-		tryAddTag(OSMSettings.OSMTagKey.WEBSITE.getValue(),
-				amenity.getSite());
-		for (String tag : amenity.getAdditionalInfo().keySet()) {
-			tryAddTag(tag, amenity.getAdditionalInfo(tag));
+		for (String s : node.getTagKeySet()) {
+			tryAddTag(s, node.getTag(s));
 		}
-		String subType = amenity.getSubType();
-		String key;
-		String value;
-		if (allTranslatedSubTypes.get(subType) != null) {
-			PoiType pt = allTranslatedSubTypes.get(subType);
-			key = pt.getOsmTag();
-			value = pt.getOsmValue();
-		} else {
-			key = amenity.getType().getDefaultTag();
-			value = subType;
+		retrieveType();
+	}
+
+	private void retrieveType() {
+		String tp = tagValues.get(POI_TYPE_TAG);
+		if(tp != null) {
+			PoiType pt = allTranslatedSubTypes.get(tp);
+			if (pt != null) {
+				category = pt.getCategory();
+			}
 		}
-		tagValues.remove(key);
-		tagValues.put(POI_TYPE_TAG, value);		
 	}
 
 
@@ -147,5 +178,17 @@ public class EditPoiData {
 
 	public boolean hasChangesBeenMade() {
 		return hasChangesBeenMade;
+	}
+
+	public void updateTypeTag(String string) {
+		tagValues.put(POI_TYPE_TAG, string);
+		retrieveType();
+		PoiType pt = getPoiTypeDefined();
+		if(pt != null) {
+			tagValues.remove(pt.getOsmTag());
+			tagValues.remove(pt.getOsmTag2());
+			category = pt.getCategory();
+		}
+		notifyDatasetChanged(POI_TYPE_TAG);
 	}
 }

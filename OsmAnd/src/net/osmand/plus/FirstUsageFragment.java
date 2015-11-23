@@ -14,6 +14,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.download.DownloadActivity;
@@ -24,6 +25,12 @@ public class FirstUsageFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.first_usage_fragment, container, false);
+		ImageView backgroundImage = (ImageView) view.findViewById(R.id.background_image);
+		if (Build.VERSION.SDK_INT >= 14) {
+			backgroundImage.setImageResource(R.drawable.bg_first_usage);
+		} else {
+			backgroundImage.setImageDrawable(null);
+		}
 		final EditText editText = (EditText) view.findViewById(R.id.searchEditText);
 		Drawable searchIcon = ((MapActivity) getActivity()).getMyApplication().getIconsCache()
 				.getIcon(R.drawable.ic_action_search_dark, true);

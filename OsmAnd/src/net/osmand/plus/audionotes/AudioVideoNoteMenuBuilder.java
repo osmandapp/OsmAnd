@@ -1,4 +1,4 @@
-package net.osmand.plus.mapcontextmenu.builders;
+package net.osmand.plus.audionotes;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -35,16 +35,14 @@ public class AudioVideoNoteMenuBuilder extends MenuBuilder {
 	}
 
 	@Override
-	public void build(View view) {
-		super.build(view);
-
+	public void buildInternal(View view) {
 		File file = recording.getFile();
 		if (file != null) {
 
 			DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(view.getContext());
 			DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(view.getContext());
 			Date date = new Date(recording.getFile().lastModified());
-			buildRow(view, R.drawable.ic_action_data, dateFormat.format(date) + " — " + timeFormat.format(date), 0, false);
+			buildRow(view, R.drawable.ic_action_data, dateFormat.format(date) + " — " + timeFormat.format(date), 0, false, 0);
 
 			buildPlainMenuItems(view);
 

@@ -20,6 +20,7 @@ import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -136,10 +137,11 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 	public PointDescription getObjectName(Object o) {
 		if(o instanceof Recording){
 			Recording rec = (Recording) o;
-			if(rec.getName(activity).isEmpty()) {
+			String recName = rec.getName(activity, true);
+			if(Algorithms.isEmpty(recName)) {
 				return new PointDescription(rec.getSearchHistoryType(), view.getResources().getString(R.string.recording_default_name));
 			}
-			return new PointDescription(rec.getSearchHistoryType(), ((Recording)o).getName(activity));
+			return new PointDescription(rec.getSearchHistoryType(), recName);
 		}
 		return null;
 	}

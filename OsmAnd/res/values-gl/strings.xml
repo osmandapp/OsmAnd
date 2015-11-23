@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="fav_point_dublicate_message">O nome do punto favorito xa está usado; foi cambiado a %1$s para evitar os duplicados.</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="fav_point_dublicate_message">O nome do punto favorito xa está usado; foi cambiado a %1$s para evitar os duplicados.</string>
     <string name="text_size_descr">Configurar o tamaño da letra no mapa.</string>
     <string name="text_size">Tamaño da letra</string>
     <string name="traffic_warning_speed_limit">Límite de velocidade</string>
@@ -430,7 +429,7 @@
     
     <string name="search_street_in_neighborhood_cities">Buscar a rúa nas poboacións viciñas</string>
     <string name="intermediate_items_sort_return">Os puntos de pasaxe intermedios foron reordenados para optimizar a ordenación de camiño ao destino.</string>
-    <string name="intermediate_items_sort_by_distance">Ordenar (porta a porta)</string>
+    <string name="intermediate_items_sort_by_distance">Ordenar porta a porta</string>
     <string name="local_osm_changes_backup_successful">O ficheiro de cambios de OSM foi xerado correctamente %1$s</string>
     <string name="local_osm_changes_backup_failed">Fallou a creación da copia de seguranza dos cambios de OSM</string>
     <string name="local_osm_changes_backup">Crear unha copia de seguranza como cambio de OSM</string>
@@ -1215,7 +1214,7 @@
 	<string name="vector_data">Mapas vectoriais sen conexión</string>
 	<string name="transport_context_menu">Buscar transporte na paraxe</string>
 	
-	<string name="osb_bug_name">Fallo</string>
+	
 	<string name="poi_context_menu_modify">Modificar o PDI</string>
 	<string name="poi_context_menu_delete">Eliminar o POI</string>
 	<string name="rotate_map_compass_opt">Co compás</string>
@@ -1468,7 +1467,7 @@
 	<string name="search_tabs_location">Situación</string>
 	
 	<string name="context_menu_item_update_map">Actualizar o mapa</string>
-	<string name="context_menu_item_open_bug">Abrir un informe de fallos de OSM</string>
+	
 	<string name="context_menu_item_create_poi">Crear un PDI</string>
 	<string name="shared_string_yes">Si</string>
 	<string name="shared_string_cancel">Cancelar</string>
@@ -1482,22 +1481,22 @@
 	<string name="favourites_context_menu_delete">Eliminar o favorito</string>
 	<string name="favourites_remove_dialog_msg">Retirar o punto favorito «%s»?</string>
 	<string name="favourites_remove_dialog_success">O punto favorito {0} foi eliminado correctamente.</string>
-	<string name="osb_add_dialog_title">Introduza o texto do informe de fallo</string>
-	<string name="osb_add_dialog_success">O informe de fallo foi creado correctamente</string>
-	<string name="osb_add_dialog_error">Produciuse unha excepción: o fallo non foi creado</string>
+	
+	
+	
 	<string name="osb_author_dialog_password">Contrasinal de OSM (opcional)</string>
-	<string name="osb_comment_menu_item">Engadir un comentario</string>
+	
 	<string name="osb_comment_dialog_message">Mensaxe</string>
 	<string name="osb_comment_dialog_author">Nome do autor</string>
-	<string name="osb_comment_dialog_title">Engadir un comentario ao informe de fallo</string>
-	<string name="osb_comment_dialog_add_button">Engadir un comentario</string>
+	
+	
 	<string name="osb_comment_dialog_success">O comentario foi engadido correctamente</string>
 	<string name="osb_comment_dialog_error">Produciuse unha excecpción: o comentario non foi engadido</string>
-	<string name="osb_close_menu_item">Fechar o informe de fallo</string>
-	<string name="osb_close_dialog_title">A fechar o informe de fallo</string>
-	<string name="osb_close_dialog_close_button">Fechar o informe de fallo</string>
-	<string name="osb_close_dialog_success">O informe de fallo foi fechado correctamente</string>
-	<string name="osb_close_dialog_error">Produciuse unha excepcións: o informe de fallo non foi fechado</string>
+	
+	
+	
+	
+	
 	<string name="poi_edit_title">Editar o PDI</string>
 	<string name="poi_create_title">Crear un PDI</string>
 	<string name="poi_error_poi_not_found">Non é posíbel atopar o nodo ou esta instalación non é un nodo único</string>
@@ -1873,7 +1872,7 @@
     <string name="shared_string_update">Actualizar</string>
     <string name="shared_string_upload">Enviar</string>
     <string name="osm_edit_created_poi">Crear un PDI de OSM</string>
-    <string name="osm_edit_created_bug">Creouse un fallo de OSM</string>
+    
     <string name="shared_string_qr_code">Código QR</string>
     <string name="map_downloaded">Mapa descargado</string>
     <string name="map_downloaded_descr">Descargouse o mapa de %1$s. Volva ao mapa para comezalo a usar.</string>

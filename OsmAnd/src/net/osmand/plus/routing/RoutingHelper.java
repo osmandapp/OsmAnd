@@ -458,21 +458,27 @@ public class RoutingHelper {
 		if(route.getIntermediatePointsToPass()  > 0 && route.getDistanceToNextIntermediate(lastFixedLocation) < POSITION_TOLERANCE * 2) {
 			showMessage(app.getString(R.string.arrived_at_intermediate_point));
 			route.passIntermediatePoint();
-			
 			TargetPointsHelper targets = app.getTargetPointsHelper();
-			List<TargetPoint> ns = targets.getIntermediatePoints();
-			int toDel = targets.getIntermediatePoints().size() - route.getIntermediatePointsToPass();
-			int currentIndex = toDel - 1; 
-			String name = currentIndex  < 0 || currentIndex  >= ns.size() || 
-					ns.get(currentIndex ) == null ? "" : ns.get(currentIndex ).getOnlyName();
+			String name = "";
+			if(intermediatePoints != null ) {
+				LatLon rm = intermediatePoints.remove(0);
+				List<TargetPoint> ll = targets.getIntermediatePointsNavigation();
+				int ind = -1;
+				for(int i = 0; i < ll.size(); i++) {
+					if(ll.get(i).point != null && MapUtils.getDistance(ll.get(i).point, rm) < 5) {
+						name = ll.get(i).getOnlyName();
+						ind = i;
+						break;
+					}
+				}
+				if(ind >= 0) {
+					targets.removeWayPoint(false, ind);
+				}
+			}
 			if(isFollowingMode) {
 				voiceRouter.arrivedIntermediatePoint(name);
 			}
-			while(toDel > 0) {
-				targets.removeWayPoint(false, 0);
-				toDel--;
-			}
-			
+			// double check
 			while(intermediatePoints != null  && route.getIntermediatePointsToPass() < intermediatePoints.size()) {
 				intermediatePoints.remove(0);
 			}

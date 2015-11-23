@@ -230,7 +230,7 @@
 	<string name="poi_fuel_biogas">E85</string>
 	<string name="poi_vehicle_ramp">Рампа за МПС</string>
 	<string name="poi_parking_entrance">Вход към паркинг</string>
-	<string name="poi_railway_subway_entrance">Вход към метро</string>
+	<string name="poi_subway_entrance">Вход към метро</string>
 	<string name="poi_bicycle_parking">Паркинг за велосипеди</string>
 
 	<string name="poi_aerialway_gondola">Гондола</string>

@@ -490,7 +490,7 @@
   <string name="vector_data">Оффлайн векторні мапи</string>
   <string name="transport_context_menu">Шукати транспорт на зупинці</string>
   
-  <string name="osb_bug_name">Помилка</string>
+  
   <string name="poi_context_menu_modify">Редагувати POI</string>
   <string name="poi_context_menu_delete">Вилучити POI</string>
   <string name="rotate_map_compass_opt">За напрямком компаса</string>
@@ -759,7 +759,7 @@
   <string name="search_tabs_location">Координати</string>
   
   <string name="context_menu_item_update_map">Оновити мапу</string>
-  <string name="context_menu_item_open_bug">Повідомити про помилку на мапі</string>
+  
   <string name="context_menu_item_create_poi">Додати POI</string>
   <string name="shared_string_yes">Так</string>
   <string name="shared_string_cancel">Скасувати</string>
@@ -773,21 +773,21 @@
   <string name="favourites_context_menu_delete">Вилучити точку</string>
   <string name="favourites_remove_dialog_msg">Ви дійсно хочете вилучити точку \'%s\' з Закладок?</string>
   <string name="favourites_remove_dialog_success">Точка {0} була успішно вилучена з Закладок.</string>
-  <string name="osb_add_dialog_title">Опишіть детально помилку</string>
-  <string name="osb_add_dialog_success">Дякую, ваше повідомлення було відіслано</string>
-  <string name="osb_add_dialog_error">Виникла помилка при створенні повідомлення</string>
-  <string name="osb_comment_menu_item">Додати коментар</string>
+  
+  
+  
+  
   <string name="osb_comment_dialog_message">Повідомлення</string>
   <string name="osb_comment_dialog_author">Автор</string>
-  <string name="osb_comment_dialog_title">Додати коментар в Open Street Bug</string>
-  <string name="osb_comment_dialog_add_button">Додати</string>
+  
+  
   <string name="osb_comment_dialog_success">Коментар успішно додано</string>
   <string name="osb_comment_dialog_error">Помилка: коментар не додано</string>
-  <string name="osb_close_menu_item">Закрити Open Street Bug</string>
-  <string name="osb_close_dialog_title">Закрити баг</string>
-  <string name="osb_close_dialog_close_button">Закрити баг</string>
-  <string name="osb_close_dialog_success">Open Street Bug успішно закрито</string>
-  <string name="osb_close_dialog_error">Виникла помилка при закритті Open Street Bug</string>
+  
+  
+  
+  
+  
   <string name="poi_edit_title">Редагування POI</string>
   <string name="poi_create_title">Створити POI</string>
   <string name="poi_error_poi_not_found">POI не знайдена або не є точкою</string>
@@ -2024,4 +2024,5 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="rendering_value_default13_name">Типово (13)</string>
 	<string name="rendering_value_defaultTranslucentCyan_name">Типово (напівпрозорий балкитний)</string>
     <string name="rendering_value_translucent_orange_name">Напівпрозорий помаранчевий</string>
+    <string name="shared_string_update">Оновити</string>
     </resources>

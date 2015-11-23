@@ -57,7 +57,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top|center"
-                android:layout_marginTop="3dp"
+                android:gravity="center_horizontal"
                 android:textSize="@dimen/map_button_text_size" />
         </FrameLayout>
 
@@ -125,6 +125,7 @@
                         android:layout_height="fill_parent"
                         android:layout_gravity="bottom"
                         android:gravity="center_horizontal"
+                        android:lineSpacingMultiplier="0.9"
                         android:text="100 m"
                         android:textSize="@dimen/map_widget_text_size_small" />
                     
@@ -134,6 +135,7 @@
                         android:layout_height="fill_parent"
                         android:layout_gravity="bottom"
                         android:gravity="center_horizontal"
+                        android:lineSpacingMultiplier="0.9"
                         android:text="100 m"
                         android:textSize="@dimen/map_widget_text_size_small" />
 

@@ -1,16 +1,5 @@
 package net.osmand.plus.download.ui;
 
-import java.util.Comparator;
-import java.util.List;
-
-import net.osmand.map.OsmandRegions;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.OsmAndListFragment;
-import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
-import net.osmand.plus.download.DownloadResources;
-import net.osmand.plus.download.IndexItem;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -26,6 +15,18 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import net.osmand.map.OsmandRegions;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.OsmAndListFragment;
+import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
+import net.osmand.plus.download.DownloadResources;
+import net.osmand.plus.download.IndexItem;
+
+import java.util.Comparator;
+import java.util.List;
 
 public class UpdatesIndexFragment extends OsmAndListFragment implements DownloadEvents {
 	private static final int RELOAD_ID = 5;
@@ -210,5 +211,4 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 			return v;
 		}
 	}
-
 }

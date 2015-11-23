@@ -1,12 +1,25 @@
 package net.osmand.plus.osmedit;
 
-import android.content.Context;
-import android.util.Xml;
-import android.widget.Toast;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.StringWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.text.MessageFormat;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
+import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.Entity.EntityId;
 import net.osmand.osm.edit.Entity.EntityType;
@@ -25,21 +38,8 @@ import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlSerializer;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.StringWriter;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.text.MessageFormat;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import android.util.Xml;
+import android.widget.Toast;
 
 public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 
@@ -47,6 +47,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 
 	private final OsmandApplication ctx;
 	private EntityInfo entityInfo;
+	private EntityId entityInfoId;
 
 	// reuse changeset
 	private long changeSetId = NO_CHANGESET_ID;
@@ -56,14 +57,18 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 
 	private OsmandSettings settings;
 
-	public OpenstreetmapRemoteUtil(Context uiContext) {
-		this.ctx = ((OsmandApplication) uiContext.getApplicationContext());
+
+	public OpenstreetmapRemoteUtil(OsmandApplication app) {
+		this.ctx = app;
 		settings = ctx.getSettings();
 	}
 
 	@Override
-	public EntityInfo getEntityInfo() {
-		return entityInfo;
+	public EntityInfo getEntityInfo(long id) {
+		if(entityInfoId != null && entityInfoId.getId().longValue() == id) {
+			return entityInfo;
+		}
+		return null;
 	}
 
 	private static String getSiteApi() {
@@ -216,7 +221,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 
 		for (String k : n.getTagKeySet()) {
 			String val = n.getTag(k);
-			if (val.length() == 0)
+			if (val.length() == 0 || k.length() == 0 || "poi_type_tag".equals(k))
 				continue;
 			ser.startTag(null, "tag"); //$NON-NLS-1$
 			ser.attribute(null, "k", k); //$NON-NLS-1$
@@ -332,6 +337,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 					n.setLongitude(entity.getLongitude());
 				}
 				entityInfo = st.getRegisteredEntityInfo().get(id);
+				entityInfoId = id;
 				return entityInfo;
 			}
 
@@ -359,8 +365,16 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 				EntityId id = new Entity.EntityId(EntityType.NODE, nodeId);
 				Node entity = (Node) st.getRegisteredEntities().get(id);
 				entityInfo = st.getRegisteredEntityInfo().get(id);
+				entityInfoId = id;
 				// check whether this is node (because id of node could be the same as relation)
 				if (entity != null && MapUtils.getDistance(entity.getLatLon(), n.getLocation()) < 50) {
+					PoiType poiType = n.getType().getPoiTypeByKeyName(n.getSubType());
+					if(poiType.getOsmValue().equals(entity.getTag(poiType.getOsmTag()))) {
+						entity.removeTag(poiType.getOsmTag());
+						entity.putTag(EditPoiData.POI_TYPE_TAG, poiType.getTranslation());
+					} else {
+						// later we could try to determine tags
+					}
 					return entity;
 				}
 				return null;

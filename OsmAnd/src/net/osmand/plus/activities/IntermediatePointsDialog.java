@@ -296,10 +296,6 @@ public class IntermediatePointsDialog {
 						app.getTargetPointsHelper().removeWayPoint(cnt == 0, i);
 					}
 				}
-				// FIXME delete location when point is removed
-				// if(mapActivity instanceof MapActivity) {
-				// ((MapActivity) mapActivity).getMapLayers().getContextMenuLayer().setLocation(null, "");
-				// }
 			}
 		}
 	}

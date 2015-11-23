@@ -1,34 +1,5 @@
 package net.osmand.plus.dashboard;
 
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-
-import net.osmand.PlatformUtil;
-import net.osmand.data.LatLon;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
-import net.osmand.plus.ContextMenuAdapter.OnRowItemClick;
-import net.osmand.plus.IconsCache;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.IntermediatePointsDialog;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.dashboard.tools.DashFragmentData;
-import net.osmand.plus.dashboard.tools.DashboardSettingsDialogFragment;
-import net.osmand.plus.dashboard.tools.TransactionBuilder;
-import net.osmand.plus.dialogs.ConfigureMapMenu;
-import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.WaypointDialogHelper;
-import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
-import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.views.DownloadedRegionsLayer;
-import net.osmand.plus.views.OsmandMapTileView;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -60,6 +31,36 @@ import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
 import com.github.ksoichiro.android.observablescrollview.ScrollState;
 
+import net.osmand.PlatformUtil;
+import net.osmand.data.LatLon;
+import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.ContextMenuAdapter.OnRowItemClick;
+import net.osmand.plus.IconsCache;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.IntermediatePointsDialog;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.dashboard.tools.DashFragmentData;
+import net.osmand.plus.dashboard.tools.DashboardSettingsDialogFragment;
+import net.osmand.plus.dashboard.tools.TransactionBuilder;
+import net.osmand.plus.dialogs.ConfigureMapMenu;
+import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.helpers.WaypointDialogHelper;
+import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
+import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.views.DownloadedRegionsLayer;
+import net.osmand.plus.views.OsmandMapTileView;
+
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  */
 public class DashboardOnMap implements ObservableScrollViewCallbacks {
@@ -70,14 +71,14 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 	public static DashboardType staticVisibleType = DashboardType.DASHBOARD;
 	public static final String SHOULD_SHOW = "should_show";
 
-	private static final DashFragmentData.ShouldShowFunction rateUsShouldShow = new DashRateUsFragment.RateUsShouldShow();
-	private static final DashFragmentData.ShouldShowFunction errorShouldShow = new ErrorShouldShow();
 
 	private final DashFragmentData[] fragmentsData = new DashFragmentData[]{
 			new DashFragmentData(DashRateUsFragment.TAG, DashRateUsFragment.class,
-					rateUsShouldShow, 0, null),
+					DashRateUsFragment.SHOULD_SHOW_FUNCTION, 0, null),
+			new DashFragmentData(DashDashboardOrDrawerFragment.TAG, DashDashboardOrDrawerFragment.class,
+					DashDashboardOrDrawerFragment.SHOULD_SHOW_FUNCTION, 5, null),
 			new DashFragmentData(DashErrorFragment.TAG, DashErrorFragment.class,
-					errorShouldShow, 30, null),
+					DashErrorFragment.SHOULD_SHOW_FUNCTION, 30, null),
 			new DashFragmentData(DashNavigationFragment.TAG, DashNavigationFragment.class,
 					DashNavigationFragment.SHOULD_SHOW_FUNCTION, 40, null),
 			new DashFragmentData(DashWaypointsFragment.TAG, DashWaypointsFragment.class,
@@ -121,7 +122,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 
 	private WaypointDialogHelper waypointDialogHelper;
 	private final int[] running = new int[]{-1};
-	private List<LocationPointWrapper> deletedPoints = new ArrayList<LocationPointWrapper>();
+	private List<LocationPointWrapper> deletedPoints = new ArrayList<>();
 	private Drawable gradientToolbar;
 
 	public DashFragmentData[] getFragmentsData() {
@@ -503,8 +504,15 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 	}
 
 	public void refreshContent(boolean force) {
-		if (visibleType == DashboardType.WAYPOINTS || force) {
+		if (visibleType == DashboardType.WAYPOINTS || visibleType == DashboardType.WAYPOINTS_EDIT
+				|| force) {
 			updateListAdapter();
+		} else if (visibleType == DashboardType.CONFIGURE_MAP) {
+			int index = listView.getFirstVisiblePosition();
+			View v = listView.getChildAt(0);
+			int top = (v == null) ? 0 : (v.getTop() - listView.getPaddingTop());
+			updateListAdapter();
+			listView.setSelectionFromTop(index, top);
 		} else {
 			listAdapter.notifyDataSetChanged();
 		}
@@ -595,7 +603,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 	public void navigationAction() {
 		RoutingHelper routingHelper = mapActivity.getRoutingHelper();
 		if (!routingHelper.isFollowingMode() && !routingHelper.isRoutePlanningMode()) {
-			mapActivity.getMapActions().enterRoutePlanningMode(null, null, false);
+			mapActivity.getMapActions().enterRoutePlanningMode(null, null);
 		} else {
 			mapActivity.getRoutingHelper().setRoutePlanningMode(true);
 			mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
@@ -791,7 +799,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 
 			int alpha = (int) (t * 255);
 			// in order to have proper fast scroll down
-			int malpha = t == 1 ? alpha = 0 : alpha;
+			int malpha = t == 1 ? 0 : alpha;
 			setAlpha(paddingView, malpha, baseColor);
 			setAlpha(dashboardView.findViewById(R.id.map_part_dashboard), malpha, baseColor);
 			gradientToolbar.setAlpha((int) ((1 - t) * 255));
@@ -842,7 +850,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 //		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
 //			v.setAlpha(alpha/255.f);
 //		} else {
-		int colr = (((int) alpha) << 24) | clr;
+		int colr = (alpha << 24) | clr;
 		v.setBackgroundColor(colr);
 //		}
 	}
@@ -871,6 +879,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 		for (WeakReference<DashBaseFragment> f : fragList) {
 			DashBaseFragment b = f.get();
 			if (b != null && !b.isDetached() && class1.isInstance(b)) {
+				//noinspection unchecked
 				return (T) b;
 			}
 		}
@@ -903,12 +912,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 		transaction.show(frag).commit();
 	}
 
-	public boolean hasCriticalMessages() {
-		final OsmandSettings settings = getMyApplication().getSettings();
-		return rateUsShouldShow.shouldShow(settings, mapActivity, DashRateUsFragment.TAG)
-				|| errorShouldShow.shouldShow(null, mapActivity, null);
-	}
-
 	View getParentView() {
 		return dashboardView;
 	}
@@ -926,20 +929,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks {
 	}
 
 	public static class DefaultShouldShow extends DashFragmentData.ShouldShowFunction {
-		
+
 		public boolean shouldShow(OsmandSettings settings, MapActivity activity, String tag) {
 			return settings.registerBooleanPreference(SHOULD_SHOW + tag, true).makeGlobal().get();
 		}
 	}
-
-	private static class ErrorShouldShow extends DashFragmentData.ShouldShowFunction {
-		// If settings null. No changes in setting will be made.
-		@Override
-		public boolean shouldShow(OsmandSettings settings, MapActivity activity, String tag) {
-			return activity.getMyApplication().getAppInitializer()
-					.checkPreviousRunsForExceptions(activity, settings != null);
-		}
-	}
-
-	
 }

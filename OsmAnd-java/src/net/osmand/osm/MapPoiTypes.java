@@ -1,7 +1,9 @@
 package net.osmand.osm;
 
+import net.osmand.CollatorStringMatcher;
 import net.osmand.PlatformUtil;
 import net.osmand.StringMatcher;
+import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.data.Amenity;
 import net.osmand.util.Algorithms;
 
@@ -143,11 +145,20 @@ public class MapPoiTypes {
 		return null;
 	}
 	
-	public Map<String, PoiType> getAllTranslatedNames() {
+	public Map<String, PoiType> getAllTranslatedNames(boolean skipNonEditable) {
 		Map<String, PoiType> translation = new HashMap<String, PoiType>();
 		for(PoiCategory pc : categories) {
+			if(skipNonEditable && pc.isNotEditableOsm()) {
+				continue;
+			}
 			for(PoiType pt :  pc.getPoiTypes()) {
-				if(pt.isReference()) {
+				if(pt.isReference() ) {
+					continue;
+				}
+				if(pt.getBaseLangType() != null) {
+					continue;
+				}
+				if(skipNonEditable && pt.isNotEditableOsm()) {
 					continue;
 				}
 				translation.put(pt.getKeyName().replace('_', ' ').toLowerCase(), pt);
@@ -157,8 +168,8 @@ public class MapPoiTypes {
 		return translation;
 	}
 	
-	public Map<String, AbstractPoiType> getAllTypesTranslatedNames(StringMatcher matcher) {
-		Map<String, AbstractPoiType> tm = new TreeMap<String, AbstractPoiType>(Collator.getInstance());
+	public List<AbstractPoiType> getAllTypesTranslatedNames(StringMatcher matcher) {
+		List<AbstractPoiType> tm = new ArrayList<AbstractPoiType>(); 
 		for (PoiCategory pc : categories) {
 			if(pc == otherMapCategory) {
 				continue;
@@ -178,9 +189,9 @@ public class MapPoiTypes {
 		return tm;
 	}
 	
-	private void addIf(Map<String, AbstractPoiType> tm, AbstractPoiType pc, StringMatcher matcher) {
+	private void addIf(List<AbstractPoiType> tm, AbstractPoiType pc, StringMatcher matcher) {
 		if(matcher.matches(pc.getTranslation()) || matcher.matches(pc.getKeyName().replace('_', ' '))) {
-			tm.put(pc.getTranslation(), pc);
+			tm.add(pc);
 		}
 		List<PoiType> additionals = pc.getPoiAdditionals();
 		if (additionals != null) {
@@ -268,6 +279,8 @@ public class MapPoiTypes {
 					if (name.equals("poi_category")) {
 						lastCategory = new PoiCategory(this, parser.getAttributeValue("", "name"), categories.size());
 						lastCategory.setTopVisible(Boolean.parseBoolean(parser.getAttributeValue("", "top")));
+						lastCategory.setNotEditableOsm("true".equals(parser.getAttributeValue("", "no_edit")));
+						lastCategory.setDefaultTag(parser.getAttributeValue("", "default_tag"));
 						categories.add(lastCategory);
 					} else if (name.equals("poi_filter")) {
 						PoiFilter tp = new PoiFilter(this, lastCategory, parser.getAttributeValue("", "name"));
@@ -363,6 +376,7 @@ public class MapPoiTypes {
 		tp.setTopVisible(Boolean.parseBoolean(parser.getAttributeValue("", "top")));
 		tp.setText("text".equals(parser.getAttributeValue("", "type")));
 		tp.setOsmTag(otag);
+		tp.setNotEditableOsm("true".equals(parser.getAttributeValue("", "no_edit")));
 		tp.setOsmValue(parser.getAttributeValue("", "value"));
 		tp.setOsmTag2(parser.getAttributeValue("", "tag2"));
 		tp.setOsmValue2(parser.getAttributeValue("", "value2"));
@@ -491,10 +505,10 @@ public class MapPoiTypes {
 		List<PoiFilter> lf = DEFAULT_INSTANCE.getTopVisibleFilters();
 		for(PoiFilter l : lf) {
 			System.out.println("----------------- " + l.getKeyName());
-			print("", l);
+//			print("", l);
 			Map<PoiCategory, LinkedHashSet<String>> m = 
 					l.putTypes(new LinkedHashMap<PoiCategory, LinkedHashSet<String>>());
-			System.out.println(m);
+//			System.out.println(m);
 		}
 		
 	}

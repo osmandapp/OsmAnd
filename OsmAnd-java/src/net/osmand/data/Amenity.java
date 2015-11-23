@@ -28,7 +28,7 @@ public class Amenity extends MapObject  {
 	
 	private static final long serialVersionUID = 132083949926339552L;
 	private String subType;
-	private transient PoiCategory type;
+	private PoiCategory type;
 	// duplicate for fast access
 	private String openingHours;
 	private Map<String, String> additionalInfo;
@@ -91,6 +91,7 @@ public class Amenity extends MapObject  {
 					while ((s = br.readLine()) != null) {
 						bld.append(s);
 					}
+					br.close();
 					str = bld.toString();
 				} catch (IOException e) {
 					e.printStackTrace();

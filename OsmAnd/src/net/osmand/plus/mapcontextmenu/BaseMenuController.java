@@ -10,7 +10,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 
 public abstract class BaseMenuController {
 
-	public final static float LANDSCAPE_WIDTH_DP = 350f;
+	public final static float LANDSCAPE_WIDTH_DP = 366f;
 
 	private MapActivity mapActivity;
 	private boolean portraitMode;
@@ -81,6 +81,11 @@ public abstract class BaseMenuController {
 	protected Drawable getIcon(int iconId, int colorId) {
 		IconsCache iconsCache = getMapActivity().getMyApplication().getIconsCache();
 		return iconsCache.getIcon(iconId, colorId);
+	}
+
+	protected Drawable getPaintedIcon(int iconId, int color) {
+		IconsCache iconsCache = getMapActivity().getMyApplication().getIconsCache();
+		return iconsCache.getPaintedContentIcon(iconId, color);
 	}
 
 	protected Drawable getIcon(int iconId, int colorLightId, int colorDarkId) {

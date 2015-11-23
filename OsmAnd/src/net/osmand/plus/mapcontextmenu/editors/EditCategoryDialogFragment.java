@@ -103,7 +103,7 @@ public class EditCategoryDialogFragment extends DialogFragment {
 					name = nameEdit.getText().toString().trim();
 					if (!helper.groupExists(name)) {
 						helper.addEmptyCategory(name, color);
-						PointEditor editor = ((MapActivity) getActivity()).getPointEditor(editorTag);
+						PointEditor editor = ((MapActivity) getActivity()).getContextMenu().getPointEditor(editorTag);
 						if (editor != null) {
 							editor.setCategory(name);
 						}
