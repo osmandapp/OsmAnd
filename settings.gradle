@@ -7,3 +7,5 @@ include ':plugins:OsmAnd-AddressPlugin'
 include ':plugins:Osmand-ParkingPlugin'
 include ':plugins:Osmand-Sherpafy'
 include ':plugins:Osmand-SRTMPlugin'
+include ':navigationmessagingapi'
+project(':navigationmessagingapi').projectDir = new File(settingsDir, '../../SmartNaviWatch/navigationmessagingapi')

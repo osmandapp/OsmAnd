@@ -62,10 +62,11 @@ import java.util.Locale;
 
 import btools.routingapp.BRouterServiceConnection;
 import btools.routingapp.IBRouterService;
+import android.support.multidex.MultiDexApplication;
 
 
 
-public class OsmandApplication extends Application {
+public class OsmandApplication extends MultiDexApplication {
 	public static final String EXCEPTION_PATH = "exception.log"; //$NON-NLS-1$
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(OsmandApplication.class);
 

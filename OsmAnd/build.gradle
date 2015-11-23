@@ -19,7 +19,7 @@ apply plugin: 'com.android.application'
 
 android {
 	compileSdkVersion 21
-	buildToolsVersion "23.0.1"
+	buildToolsVersion "21.1.2"
 
 	signingConfigs {
 		development {
@@ -38,12 +38,14 @@ android {
 	}
 
 	defaultConfig {
-		minSdkVersion System.getenv("MIN_SDK_VERSION") ? System.getenv("MIN_SDK_VERSION").toInteger() : 14
+		minSdkVersion System.getenv("MIN_SDK_VERSION") ? System.getenv("MIN_SDK_VERSION").toInteger() : 19
 		targetSdkVersion 21
+		multiDexEnabled true
 
 		versionCode System.getenv("APK_NUMBER_VERSION") ? System.getenv("APK_NUMBER_VERSION").toInteger() : versionCode
 		//versionName already assigned in code
 		//versionName System.getenv("APK_VERSION")? System.getenv("APK_VERSION").toString(): versionName
+
 	}
 
 	lintOptions {
@@ -59,7 +61,8 @@ android {
 	}
 
 	dexOptions {
-		jumboMode = true
+		incremental true
+		javaMaxHeapSize "4g"
 	}
 
 	sourceSets {
@@ -320,6 +323,10 @@ repositories {
 	// mavenCentral()
 }
 
+configurations {
+	all*.exclude group: 'com.android.support', module: 'support-v4'
+}
+
 dependencies {
 	compile project(path: ":OsmAnd-java", configuration: "android")
 	compile project(":eclipse-compile:design")
@@ -342,5 +349,7 @@ dependencies {
 	qtcoredebugCompile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"
 	qtcoreCompile "net.osmand:OsmAndCore_androidNativeRelease:0.1-SNAPSHOT@aar"
 	qtcoreCompile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"
+	compile project(':navigationmessagingapi')
+	compile 'com.android.support:multidex:1.0.0'
 
 }
