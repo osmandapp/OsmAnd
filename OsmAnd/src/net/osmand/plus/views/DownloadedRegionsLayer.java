@@ -2,7 +2,6 @@ package net.osmand.plus.views;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Cap;
 import android.graphics.Paint.Join;
@@ -188,19 +187,19 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 			final List<BinaryMapDataObject> selectedObjects = new LinkedList<>(this.selectedObjects);
 
 			if (selectedObjects.size() > 0) {
-				currentObjects.removeAll(selectedObjects);
+				removeObjectsFromList(currentObjects, selectedObjects);
 				drawBorders(canvas, tileBox, selectedObjects, pathSelected, paintSelected);
 			}
 
 			if (zoom >= ZOOM_TO_SHOW_BORDERS_ST && zoom < ZOOM_TO_SHOW_BORDERS) {
 				downloadingObjects.removeAll(selectedObjects);
 				if (downloadingObjects.size() > 0) {
-					currentObjects.removeAll(downloadingObjects);
+					removeObjectsFromList(currentObjects, downloadingObjects);
 					drawBorders(canvas, tileBox, downloadingObjects, pathDownloading, paintDownloading);
 				}
 				outdatedObjects.removeAll(selectedObjects);
 				if (outdatedObjects.size() > 0) {
-					currentObjects.removeAll(outdatedObjects);
+					removeObjectsFromList(currentObjects, outdatedObjects);
 					drawBorders(canvas, tileBox, outdatedObjects, pathOutdated, paintOutdated);
 				}
 				if (currentObjects.size() > 0) {
@@ -215,6 +214,19 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 					if (currentObjects.size() > 0) {
 						drawBorders(canvas, tileBox, currentObjects, pathDownloaded, paintDownloaded);
 					}
+				}
+			}
+		}
+	}
+
+	private void removeObjectsFromList(List<BinaryMapDataObject> list, List<BinaryMapDataObject> objects) {
+		Iterator<BinaryMapDataObject> it = list.iterator();
+		while (it.hasNext()) {
+			BinaryMapDataObject o = it.next();
+			for (BinaryMapDataObject obj : objects) {
+				if (o.getId() == obj.getId()) {
+					it.remove();
+					break;
 				}
 			}
 		}
