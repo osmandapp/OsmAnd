@@ -43,12 +43,14 @@ public class DownloadResources extends DownloadResourceGroup {
 	public IndexItem getWorldBaseMapItem() {
 		DownloadResourceGroup worldMaps = getSubGroupById(DownloadResourceGroupType.WORLD_MAPS.getDefaultId());
 		IndexItem worldMap = null;
-		List<IndexItem> list = worldMaps.getIndividualResources();
-		if(list != null) {
-			for(IndexItem ii  : list) {
-				if(ii.getBasename().equalsIgnoreCase(WorldRegion.WORLD_BASEMAP)) {
-					worldMap = ii;
-					break;
+		if (worldMaps != null) {
+			List<IndexItem> list = worldMaps.getIndividualResources();
+			if (list != null) {
+				for (IndexItem ii : list) {
+					if (ii.getBasename().equalsIgnoreCase(WorldRegion.WORLD_BASEMAP)) {
+						worldMap = ii;
+						break;
+					}
 				}
 			}
 		}
