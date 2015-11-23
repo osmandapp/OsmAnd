@@ -245,12 +245,10 @@ public class MapDataMenuController extends MenuController {
 		rightTitleButtonController.visible = indexItem != null && indexItem.isDownloaded();
 		topRightTitleButtonController.visible = otherIndexItems.size() > 0;
 
-		boolean hasIndexes = downloadThread.getIndexes().isDownloadedFromInternet;
+		boolean downloadIndexes = !downloadThread.getIndexes().isDownloadedFromInternet
+				&& !downloadThread.getIndexes().downloadFromInternetFailed;
 		boolean isDownloading = indexItem != null && downloadThread.isDownloading(indexItem);
-		if (!hasIndexes) {
-			titleProgressController.setIndexesDownloadMode();
-			titleProgressController.visible = true;
-		} else if (isDownloading) {
+		if (isDownloading) {
 			titleProgressController.setMapDownloadMode();
 			if (downloadThread.getCurrentDownloadingItem() == indexItem) {
 				titleProgressController.indeterminate = false;
@@ -271,6 +269,9 @@ public class MapDataMenuController extends MenuController {
 			} else {
 				titleProgressController.caption = v;
 			}
+			titleProgressController.visible = true;
+		} else if (downloadIndexes) {
+			titleProgressController.setIndexesDownloadMode();
 			titleProgressController.visible = true;
 		} else {
 			titleProgressController.visible = false;

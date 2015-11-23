@@ -19,6 +19,7 @@ import java.util.Map;
 
 public class DownloadResources extends DownloadResourceGroup {
 	public boolean isDownloadedFromInternet = false;
+	public boolean downloadFromInternetFailed = false;
 	public boolean mapVersionIsIncreased = false;
 	public OsmandApplication app;
 	private Map<String, String> indexFileNames = new LinkedHashMap<>();
