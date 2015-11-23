@@ -483,7 +483,7 @@
             android:targetActivity=".tasker.TaskerPluginEditActivity" >
             <intent-filter>
                 <!-- For a plug-in setting, use EDIT_SETTING instead. -->
-                <action android:name="com.twofortyfouram.locale.intent.action.EDIT_SETTING" />
+                <action android:name="com.twofortyfouram.locale.intent.action.EDIT_CONDITION" />
             </intent-filter>
         </activity-alias>
 
