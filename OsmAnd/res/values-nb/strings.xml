@@ -1401,7 +1401,7 @@
     <string name="map_downloaded_descr">Kart over %1$s har blitt lastet ned. Gå tilbake til kartet for å begynne å bruke det.</string>
     <string name="go_to_map">Gå til kartet</string>
     <string name="downloads">Nedlastinger</string>
-    <string name="value_downloaded_from_max">%1$.1f av %2$.1f MB</string>
+    <string name="value_downloaded_of_max">%1$.1f av %2$.1f MB</string>
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">Oppdater alle (%1$s MB)</string>
     <string name="free_downloads_used">Gratis nedlastinger brukt</string>
