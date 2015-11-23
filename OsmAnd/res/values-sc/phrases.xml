@@ -1837,4 +1837,22 @@
 	<string name="poi_payment_visa_debit_no">No atzetat cartas Visa Debit</string>
 	<string name="poi_payment_cryptocurrencies_no">No atzetat criptomonedas</string>
 	<string name="poi_payment_others_yes">Atzetat àteras maneras de pagamentu</string>
+	<string name="poi_payment_others_no">No atzetat àteras maneras de pagamentu</string>
+	<string name="poi_payment_routex_yes">Atzetat cartas Routex pro su combustìbile</string>
+	<string name="poi_payment_routex_no">No atzetat cartas Routex pro su combustìbile</string>
+	<string name="poi_payment_bancomat_yes">Atzetat cartas Bàncomat</string>
+	<string name="poi_payment_bancomat_no">No atzetat cartas Bàncomat</string>
+	<string name="poi_payment_dogecoin_yes">Atzetat Dogecoins</string>
+	<string name="poi_payment_dogecoin_no">No atzetat Dogecoins</string>
+	<string name="poi_payment_paypal_yes">Atzetat PayPal</string>
+	<string name="poi_payment_paypal_no">No atzetat PayPal</string>
+	<string name="poi_payment_yandexmoney_yes">Atzetat Yandex.Money</string>
+	<string name="poi_payment_yandexmoney_no">No atzetat Yandex.Money</string>
+	<string name="poi_description_payment">Informatziones de pagamentu</string>
+
+	<string name="poi_internet_access_fee_yes">Atzessu a ìnternet - a pagamentu</string>
+	<string name="poi_internet_access_fee_no">Atzessu a ìnternet - de badas</string>
+
+	<string name="poi_payment_laser_yes">Atzetat cartas Laser</string>
+	<string name="poi_payment_laser_no">No atzetat cartas Laser</string>
 	</resources>
