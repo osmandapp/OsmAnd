@@ -3,25 +3,28 @@ package net.osmand.plus.tasker;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.widget.Toast;
 
-import com.twofortyfouram.locale.sdk.client.receiver.AbstractPluginConditionReceiver;
+import com.twofortyfouram.locale.sdk.client.receiver.AbstractPluginSettingReceiver;
 
-public class TaskerPluginReceiver extends AbstractPluginConditionReceiver {
+public class TaskerPluginReceiver extends AbstractPluginSettingReceiver {
 	public TaskerPluginReceiver() {
 	}
 
 	@Override
 	protected boolean isBundleValid(@NonNull Bundle bundle) {
-		return false;
+		return PluginBundleValues.isBundleValid(bundle);
 	}
 
 	@Override
 	protected boolean isAsync() {
-		return true;
+		return false;
 	}
 
 	@Override
-	protected int getPluginConditionResult(@NonNull Context context, @NonNull Bundle bundle) {
-		return com.twofortyfouram.locale.api.Intent.RESULT_CONDITION_UNKNOWN;
+	protected void firePluginSetting(@NonNull Context context, @NonNull Bundle bundle) {
+		Toast.makeText(context,
+				"All good value=" + bundle.getBoolean(PluginBundleValues.BUNDLE_EXTRA_BOOLEAN_TEST),
+				Toast.LENGTH_LONG).show();
 	}
 }

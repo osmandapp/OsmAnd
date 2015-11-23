@@ -483,16 +483,17 @@
             android:targetActivity=".tasker.TaskerPluginEditActivity" >
             <intent-filter>
                 <!-- For a plug-in setting, use EDIT_SETTING instead. -->
-                <action android:name="com.twofortyfouram.locale.intent.action.EDIT_CONDITION" />
+                <action android:name="com.twofortyfouram.locale.intent.action.EDIT_SETTING" />
             </intent-filter>
         </activity-alias>
 
         <receiver
             android:name=".tasker.TaskerPluginReceiver"
             android:enabled="true"
-            android:exported="true" >
+            android:exported="true"
+            android:process=":background" >
             <intent-filter>
-                <action android:name="com.twofortyfouram.locale.intent.action.QUERY_CONDITION"/>
+                <action android:name="com.twofortyfouram.locale.sdk.client.ui.activity.InfoActivity"/>
             </intent-filter>
         </receiver>
     </application>

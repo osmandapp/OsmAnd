@@ -1,5 +1,6 @@
 package net.osmand.plus.tasker;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -8,8 +9,17 @@ import com.twofortyfouram.locale.sdk.client.ui.activity.AbstractAppCompatPluginA
 
 import net.osmand.plus.R;
 
+import java.util.Random;
+
 public class TaskerPluginEditActivity extends AbstractAppCompatPluginActivity {
 
+	@NonNull
+	public static final Intent INTENT_REQUEST_REQUERY = new Intent(
+			com.twofortyfouram.locale.api.Intent.ACTION_REQUEST_QUERY).putExtra(
+			com.twofortyfouram.locale.api.Intent.EXTRA_STRING_ACTIVITY_CLASS_NAME,
+			TaskerPluginEditActivity.class.getName());
+
+	private Random random = new Random();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -19,23 +29,22 @@ public class TaskerPluginEditActivity extends AbstractAppCompatPluginActivity {
 
 	@Override
 	public boolean isBundleValid(@NonNull Bundle bundle) {
-		return false;
+		return PluginBundleValues.isBundleValid(bundle);
 	}
 
 	@Override
 	public void onPostCreateWithPreviousResult(@NonNull Bundle previousBundle, @NonNull String previousBlurb) {
-
 	}
 
 	@Nullable
 	@Override
 	public Bundle getResultBundle() {
-		return null;
+		return PluginBundleValues.generateBundle(random.nextBoolean());
 	}
 
 	@NonNull
 	@Override
 	public String getResultBlurb(@NonNull Bundle bundle) {
-		return "Empty implementation";
+		return "testValue=" + bundle.getBoolean(PluginBundleValues.BUNDLE_EXTRA_BOOLEAN_TEST);
 	}
 }
