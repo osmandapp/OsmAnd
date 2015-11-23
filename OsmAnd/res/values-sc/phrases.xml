@@ -1784,4 +1784,15 @@
 	<string name="poi_payment_mastercard_yes">Atzetat cartas MasterCard</string>
 	<string name="poi_payment_mastercard_no">No atzetat cartas MasterCard</string>
 	<string name="poi_payment_none">De badas</string>
+	<string name="poi_seats">Banchinas</string>
+	<string name="poi_backrest_yes">Ischinale: eja</string>
+	<string name="poi_backrest_no">Ischinale: nono</string>
+
+	<string name="poi_intermittent">Intermittente</string>
+
+	<string name="poi_deadlock">Puntu mortu (deadlock)</string>
+
+	<string name="poi_information_trail_blaze">Marcadura de sas camineras</string>
+	<string name="poi_piste_grooming_classic">Ammaniamentu pista: clàssicu</string>
+	<string name="poi_piste_grooming_classic_skating">Ammaniamentu pista: clàssicu + patinàgiu</string>
 	</resources>
