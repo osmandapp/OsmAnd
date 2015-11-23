@@ -174,8 +174,8 @@
 	<color name="dialog_inactive_text_color_dark">#78909c</color>
 
 	<!-- DownloadedRegionsLayer -->
-	<color name="region_uptodate">#5532C832</color>
-	<color name="region_updateable">#55FF8F00</color>
-	<color name="region_selected">#55FFFF00</color>
+	<color name="region_uptodate">#6632C832</color>
+	<color name="region_updateable">#66FF8F00</color>
+	<color name="region_selected">#66FFFF00</color>
 	<color name="region_downloading">#2Acd2c33</color>
 </resources>
