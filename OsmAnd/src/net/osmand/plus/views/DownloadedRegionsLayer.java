@@ -192,12 +192,12 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 			}
 
 			if (zoom >= ZOOM_TO_SHOW_BORDERS_ST && zoom < ZOOM_TO_SHOW_BORDERS) {
-				downloadingObjects.removeAll(selectedObjects);
+				removeObjectsFromList(downloadingObjects, selectedObjects);
 				if (downloadingObjects.size() > 0) {
 					removeObjectsFromList(currentObjects, downloadingObjects);
 					drawBorders(canvas, tileBox, downloadingObjects, pathDownloading, paintDownloading);
 				}
-				outdatedObjects.removeAll(selectedObjects);
+				removeObjectsFromList(outdatedObjects, selectedObjects);
 				if (outdatedObjects.size() > 0) {
 					removeObjectsFromList(currentObjects, outdatedObjects);
 					drawBorders(canvas, tileBox, outdatedObjects, pathOutdated, paintOutdated);
