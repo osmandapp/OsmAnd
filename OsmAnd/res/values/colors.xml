@@ -172,4 +172,9 @@
 
 	<color name="color_dialog_buttons">#2f7af5</color>
 	<color name="dialog_inactive_text_color_dark">#78909c</color>
+
+	<!-- DownloadedRegionsLayer -->
+	<color name="region_uptodate">#6632C832</color>
+	<color name="region_updateable">#66FF8F00</color>
+	<color name="region_selected">#66FFFF00</color>
 </resources>
