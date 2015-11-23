@@ -1351,7 +1351,7 @@
 	<string name="poi_windfall">Fruto caído</string>
 	<string name="poi_rtsa_scale">Escala RTSA</string>
 
-<string name="poi_pump">Bomba</string>
+<string name="poi_pump_yes">Bomba</string>
 
 	<string name="poi_piste_difficulty_easy">Dificultad de la pista: Fácil</string>
 	<string name="poi_piste_difficulty_intermediate">Dificultad de la pista: Intermedia</string>
