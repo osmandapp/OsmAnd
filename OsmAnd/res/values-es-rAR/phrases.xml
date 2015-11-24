@@ -97,7 +97,7 @@
 	<string name="poi_hearing_aids">Audífonos</string>
 	<string name="poi_herbalist">Herboristería</string>
 	<string name="poi_hifi">Equipos de audio</string>
-	<string name="poi_houseware">Artículos del hogar</string>
+	<string name="poi_houseware">Bazar del hogar</string>
 	<string name="poi_hunting">Equipo de caza</string>
 	<string name="poi_interior_decoration">Decoración de interiores</string>
 	<string name="poi_jewelry">Joyería</string>
@@ -1293,7 +1293,7 @@
 	<string name="poi_fireplace_no">Sin chimenea</string>
 
 	<string name="poi_covered_yes">Cubierto</string>
-	<string name="poi_covered_no">Sin cobertura</string>
+	<string name="poi_covered_no">Descubierto</string>
 
 	<string name="poi_smoking_no">No fumar</string>
 	<string name="poi_smoking_outside">Permitido fumar afuera</string>

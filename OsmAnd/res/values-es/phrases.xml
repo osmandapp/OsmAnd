@@ -1299,7 +1299,7 @@
 	<string name="poi_fireplace_no">Sin chimenea</string>
 
 	<string name="poi_covered_yes">Cubierto</string>
-	<string name="poi_covered_no">No cubierto</string>
+	<string name="poi_covered_no">Descubierto</string>
 
 	<string name="poi_smoking_no">No fumar</string>
 	<string name="poi_smoking_outside">Sólo permitido fumar afuera</string>
