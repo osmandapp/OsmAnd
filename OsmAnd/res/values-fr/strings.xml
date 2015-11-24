@@ -2125,4 +2125,6 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="access_from_map_description">Le bouton Menu lance le tableau de bord (plutôt que le Menu)</string>
     <string name="access_from_map">Accès depuis la carte</string>
     <string name="please_specify_poi_type_only_from_list">"Merci d\'indiquer un type pour ce PI ou d\'ignorer. "</string>
-    </resources>
+    <string name="routing_attr_avoid_stairs_name">Éviter les escaliers</string>
+	<string name="routing_attr_avoid_borders_name">Éviter le franchissement de frontières</string>
+	</resources>
