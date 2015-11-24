@@ -1956,6 +1956,9 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="shared_string_wikipedia">Wikipedia</string>
     <string name="local_indexes_cat_wiki">Wikipedia</string>
     <string name="shared_string_show_details">Details anzeigen</string>
+    <string name="routing_attr_avoid_stairs_name">Treppen vermeiden</string>
+    <string name="routing_attr_avoid_stairs_description">Treppen vermeiden</string>
+    <string name="routing_attr_avoid_borders_name">Grenzübertritt vermeiden</string>
     <string name="routing_attr_avoid_borders_description">Überqueren einer Staatsgrenze vermeiden</string>
 	<string name="routing_attr_height_description">Höhe des Fahrzeugs für Streckenberechnung angeben</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
