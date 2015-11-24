@@ -105,8 +105,8 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		osmandRegions = rm.getOsmandRegions();
 
 		paintDownloaded = getPaint(view.getResources().getColor(R.color.region_uptodate));
-		paintSelected = getPaint(view.getResources().getColor(R.color.region_selected);
-		paintDownloading = getPaint(Color.argb(40, 50, 200, 50));
+		paintSelected = getPaint(view.getResources().getColor(R.color.region_selected));
+		paintDownloading = getPaint(view.getResources().getColor(R.color.region_downloading));
 		paintOutdated = getPaint(view.getResources().getColor(R.color.region_updateable));
 
 		textPaint = new TextPaint();
