@@ -247,10 +247,10 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 
 				if (singleTapDetector.onTouchEvent(event)) {
 					showOnMap(menu.getLatLon(), true, false);
-
 					if (hasMoved) {
 						applyPosY(getViewY(), false, false, 0, 0);
 					}
+					openMenuHalfScreen();
 					return true;
 				}
 
@@ -397,6 +397,15 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 
 	public void openMenuFullScreen() {
 		changeMenuState(getViewY(), true, true, false);
+	}
+	
+	public void openMenuHalfScreen() {
+		int oldMenuState = menu.getCurrentMenuState();
+		if(oldMenuState == MenuState.HEADER_ONLY) {
+			changeMenuState(getViewY(), false, true, false);
+		} else if(oldMenuState == MenuState.FULL_SCREEN && !menu.isLandscapeLayout()) {
+			changeMenuState(getViewY(), false, false, true);
+		}
 	}
 
 	private void changeMenuState(int currentY, boolean skipHalfScreenState,
@@ -647,6 +656,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		runLayoutListener();
 	}
 
+	@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 	private void runLayoutListener() {
 		ViewTreeObserver vto = view.getViewTreeObserver();
 		vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
