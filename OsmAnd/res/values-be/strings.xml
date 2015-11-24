@@ -2034,4 +2034,8 @@
 	
     <string name="rendering_attr_roadStyle_description">Стыль адлюстраваньня дарог</string>
     <string name="poi_context_menu_modify_osm_change">Рэдагаваць POI</string>
+    <string name="rendering_attr_currentTrackWidth_description">Шырыня сьледу GPX</string>
+    <string name="rendering_attr_currentTrackColor_description">Колер сьледу GPX</string>
+    <string name="poi_dialog_reopen">Пераадкрыць</string>
+	<string name="use_drawer_btn">Выкарыстоўваць мэню</string>
     </resources>
