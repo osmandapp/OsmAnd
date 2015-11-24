@@ -576,8 +576,8 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="online_map_settings_descr">Настройване на източниците за онлайн карти</string>
 	
 	
-	<string name="osmand_rastermaps_plugin_description">"С този плъгин можете да получите достъп до много типове онлайн (растерни) карти, от предварително създадени Openstreetmap растерни изображения (като Mapnik) до сателитни снимки и слоеве със специално предназначение като карти за времето, карти на климата, геоложки карти, географски терен и др.
-\n\nНякои от тези карти може да бъде използвана като основна (базова) карта на екрана на OsmAnd или като подложка на друга базова карта (като на OsmAnd стандартната офлайн карта). За да се направи всяка подложка по-видима, някои елементи на OsmAnd картата могат лесно да бъдат скрити чрез менюто \"Настройки на  картата\".
+	<string name="osmand_rastermaps_plugin_description">"С този плъгин можете да получите достъп до много типове онлайн (или растерни) карти, достъп до предварително създадени Openstreetmap растерни изображения (като Mapnik), до сателитни снимки и до слоеве със специално предназначение, като карти за времето, карти на климата, геоложки карти, географски терен и др.
+\n\nНякои от тези карти могат да бъдат използвани като основна (базова) карта на екрана на OsmAnd или като подложка на друга базова карта (като на OsmAnd стандартната офлайн карта). За да се направи всяка подложка по-видима, някои елементи на OsmAnd картата могат лесно да бъдат скрити чрез менюто \"Настройки на  картата\".
 \n\nРастерните карти могат да бъдат получени директно чрез онлайн източници, или могат да бъдат подготвени за офлайн употреба (и ръчно копирани в папката за данни OsmAnd) под формата на sqlite база данни от друго приложение. "</string>
 	
 	<string name="osmand_accessibility_description">Настройки на специалните функции за достъпност. Настройване скоростта на гласовите напътствия и допълнителни настройки за хора със специални потребности.</string>
@@ -1622,7 +1622,7 @@ OsmAnd е с отворен код и активно да се развива. �
     <string name="rendering_attr_roadStyle_name">Оцветяване на пътищата</string>
     <string name="rendering_value_germanRoadAtlas_name">Германски стил</string>
     <string name="rendering_value_americanRoadAtlas_name">Американски стил</string>
-    <string name="rendering_value_orange_name">В жълто и оранжево</string>
+    <string name="rendering_value_orange_name">Оранжево</string>
     <string name="color_orange">оранжево</string>
 	
     <string name="rendering_attr_transportStops_name">Гари и спирки</string>
@@ -1856,7 +1856,7 @@ OsmAnd е с отворен код и активно да се развива. �
     <string name="shared_string_show_details">Покажи подробни данни</string>
     <string name="gps_network_not_enabled">Услугата за местоположение не е разрешена. Искате ли да я включите?</string>
     <string name="disable_recording_once_app_killed">Предотвратяване на самостоятелно записване</string>
-    <string name="disable_recording_once_app_killed_descrp">Спира на пауза записа на GPX, когато приложението е затворено. (Индикаторът за OsmAnd Sleep режим изчезва зоната за уведомяване на Андроид.)</string>
+    <string name="disable_recording_once_app_killed_descrp">Спира на пауза записа на GPX, когато приложението е затворено (от последни приложения). (Иконата на OsmAnd изчезва от лентата за уведомяване на Андроид.)</string>
 	<string name="shared_string_import2osmand">Импортиране към OsmAnd</string>
     <string name="read_full_article">Прочетете пълната статия (онлайн)</string>
     <string name="local_recordings_delete_all_confirm">Възнамерявате да изтриете %1$d бележки. Сигурни ли сте?</string>
@@ -1867,26 +1867,26 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="keep_informing_descr">Повтаряне на гласовите напътствия през определено време</string>
     <string name="keep_informing_never">Само ръчно (докосване на стрелката)</string>
     <string name="index_name_netherlands">Европа - Холандия</string>
-	<string name="light_theme">Светла</string>
-    <string name="dark_theme">Тъмна</string>
-    <string name="lang_pms">пиемонтски</string>
-    <string name="lang_bn">бенгалски</string>
-    <string name="lang_tl">тагалог (филипински)</string>
-    <string name="lang_sh">сърбо-хърватски</string>
-    <string name="lang_az">азерски</string>
-    <string name="lang_br">бретонски</string>
-    <string name="lang_sq">албански</string>
-    <string name="lang_is">исландски</string>
-    <string name="lang_bpy">Bishnupriya</string>
-    <string name="lang_nv">навахо</string>
-    <string name="lang_ga">ирландски</string>
-    <string name="lang_la">латински</string>
-    <string name="lang_ku">кюрдски</string>
-    <string name="lang_ta">тамилски</string>
+	<string name="light_theme">Светла тема</string>
+    <string name="dark_theme">Тъмна тема</string>
+    <string name="lang_pms">Пиемонтски</string>
+    <string name="lang_bn">Бенгалски</string>
+    <string name="lang_tl">Тагалог (филипински)</string>
+    <string name="lang_sh">Сърбо-хърватски</string>
+    <string name="lang_az">Азерски</string>
+    <string name="lang_br">Бретонски</string>
+    <string name="lang_sq">Албански</string>
+    <string name="lang_is">Исландски</string>
+    <string name="lang_bpy">Бишнуприя-манипури</string>
+    <string name="lang_nv">Навахо</string>
+    <string name="lang_ga">Ирландски</string>
+    <string name="lang_la">Латински</string>
+    <string name="lang_ku">Кюрдски</string>
+    <string name="lang_ta">Тамилски</string>
     <string name="lang_ml">Малаялам</string>
-    <string name="lang_lb">люксембургски</string>
-    <string name="lang_eo">есперанто</string>
-    <string name="lang_et">естонски</string>
+    <string name="lang_lb">Люксембургски</string>
+    <string name="lang_eo">Есперанто</string>
+    <string name="lang_et">Естонски</string>
     <string name="lang_os">Осетински</string>
     <string name="lang_es_ar">Аржентински испански</string>
     <string name="lang_nb">Норвежки (Букмол)</string>
@@ -2042,4 +2042,44 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="osn_reopen_dialog_title">Отворете наново</string>
 	<string name="osn_close_dialog_title">Затворете бележката</string>
 	<string name="osn_add_dialog_success">Бележката беше успешно създадена</string>
-	</resources>
+	<string name="osn_add_dialog_error">Възникна грешка: Бележката не беше създадена</string>
+	<string name="osn_close_dialog_success">Бележката беше успешно затворена</string>
+	<string name="osn_close_dialog_error">Възникна грешка: Бележката не беше затворена успешно</string>
+	<string name="shared_string_commit">Запиши</string>
+	
+    <string name="context_menu_item_delete_waypoint">Изтриване на GPX точка?</string>
+    <string name="context_menu_item_edit_waypoint">Редактиране на GPX точка</string>
+    <string name="shared_string_location">Местоположение</string>
+    <string name="simulate_your_location_stop_descr">Спиране на симулацията на място</string>
+    <string name="simulate_your_location_descr">Симулира с помощта на изчисления маршрут или записана GPX следа</string>
+    <string name="address_unknown">Адресът още не е известен</string>
+    <string name="av_locations_descr">GPX файл с бележки</string>
+    <string name="av_locations">Места</string>
+    <string name="routing_attr_avoid_shuttle_train_name">Избягване на трансферен влак</string>
+	<string name="routing_attr_avoid_shuttle_train_description">Избягване на трансферен влак</string>
+    <string name="traffic_warning_hazard">Опасност</string>
+    <string name="rendering_value_boldOutline_name">Получер контур</string>
+    <string name="download_live_updates">Актуализации на живо</string>
+	<string name="rendering_value_default13_name">По подразбиране (13)</string>
+	<string name="rendering_value_defaultTranslucentCyan_name">По подразбиране (полупрозрачно синьо)</string>
+    <string name="rendering_attr_currentTrackColor_description">GPX цвят</string>
+    <string name="rendering_attr_currentTrackWidth_description">GPX ширина</string>
+    <string name="rendering_value_red_name">Червено</string>
+    <string name="rendering_value_translucent_red_name">Полупрозрачно червено</string>
+    <string name="rendering_value_translucent_orange_name">Полупрозрачно оранжево</string>
+    <string name="rendering_value_yellow_name">Жълто</string>
+    <string name="rendering_value_translucent_yellow_name">Полупрозрачно жълто</string>
+    <string name="rendering_value_lightgreen_name">Светло-зелено</string>
+    <string name="rendering_value_translucent_lightgreen_name">Полупрозрачно светло-зелено</string>
+    <string name="rendering_value_green_name">Зелено</string>
+    <string name="rendering_value_translucent_green_name">Полупрозрачно зелено</string>
+    <string name="rendering_value_lightblue_name">Свелто-синьо</string>
+    <string name="rendering_value_translucent_lightblue_name">Полупрозрачно свелто-синьо</string>
+    <string name="rendering_value_blue_name">Синьо</string>
+    <string name="rendering_value_translucent_blue_name">Полупрозрачно светло-синьо</string>
+    <string name="rendering_value_purple_name">Лилаво</string>
+    <string name="rendering_value_translucent_purple_name">Полупрозрачно лилаво</string>
+    <string name="lang_te">Телугу</string>
+    <string name="lang_new">Непал Бхаса</string>
+    <string name="lang_gl">Галски</string>
+    </resources>
