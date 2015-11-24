@@ -1347,7 +1347,7 @@
 	<string name="poi_windfall">Fruto caído</string>
 	<string name="poi_rtsa_scale">Escala RTSA</string>
 
-<string name="poi_pump">Bomba</string>
+<string name="poi_pump_yes">Bomba</string>
 
 	<string name="poi_piste_difficulty_easy">Dificultad de la pista: Fácil</string>
 	<string name="poi_piste_difficulty_intermediate">Dificultad de la pista: Intermedia</string>
@@ -2400,7 +2400,7 @@
 	<string name="poi_bathing_no">Prohibido bañarse</string>
 
 <string name="poi_traffic_calming_island">Mediana (tráfico)</string>
-	<string name="poi_boat_storage">Almacén de botes (marina)</string>
+	<string name="poi_boat_storage">Guardería náutica</string>
 
 
 <string name="poi_conveying_yes">Transportadora: Si</string>
