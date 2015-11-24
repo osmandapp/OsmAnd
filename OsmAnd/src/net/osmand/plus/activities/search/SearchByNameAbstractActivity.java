@@ -511,9 +511,9 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 				if(cintent.hasExtra(SearchActivity.SEARCH_LAT) && cintent.hasExtra(SearchActivity.SEARCH_LON)){
 					intent.putExtra(SearchActivity.SEARCH_LAT, cintent.getDoubleExtra(SearchActivity.SEARCH_LAT, 0));
 					intent.putExtra(SearchActivity.SEARCH_LON, cintent.getDoubleExtra(SearchActivity.SEARCH_LON, 0));
-					intent.putExtra(SELECT_ADDRESS, selectAddress);
 				}
 			}
+			intent.putExtra(SELECT_ADDRESS, selectAddress);
 			startActivity(intent);
 		}
 	}
