@@ -71,7 +71,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	
 	protected static final int MESSAGE_CLEAR_LIST = OsmAndConstants.UI_HANDLER_SEARCH + 2;
 	protected static final int MESSAGE_ADD_ENTITY = OsmAndConstants.UI_HANDLER_SEARCH + 3;
-	protected static final String SEQUENTIAL_SEARCH = "SEQUENTIAL_SEARCH";
+	protected static final String SELECT_ADDRESS = "SEQUENTIAL_SEARCH";
 	
 	protected ProgressBar progress;
 	protected LatLon locationToSearch;
@@ -167,6 +167,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 			}
 			
 		});
+		selectAddress = getIntent() != null && getIntent().hasExtra(SELECT_ADDRESS);
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 		if(initializeTask != null){
 			initializeTask.execute();
@@ -214,7 +215,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	
 	
 	private int MAX_VISIBLE_NAME = 18;
-	private boolean sequentialSearch;
+	private boolean selectAddress;
 	
 	public String getCurrentFilter() {
 		return currentFilter;
@@ -244,6 +245,10 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 		}
 		previousSpan = prevState.getParcelable("PREVIOUS_SPAN"); 
 		super.onRestoreInstanceState(prevState);
+	}
+	
+	protected boolean isSelectAddres() {
+		return selectAddress;
 	}
 	
 	private void querySearch(final String filter) {
@@ -332,6 +337,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	@Override
 	protected void onResume() {
 		super.onResume();
+		selectAddress = getIntent() != null && getIntent().getBooleanExtra(SELECT_ADDRESS, false);
 		setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -340,14 +346,12 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 			}
 		});
 		Intent intent = getIntent();
-		sequentialSearch = false;
 		if(intent != null){
 			if(intent.hasExtra(SearchActivity.SEARCH_LAT) && intent.hasExtra(SearchActivity.SEARCH_LON)){
 				double lat = intent.getDoubleExtra(SearchActivity.SEARCH_LAT, 0);
 				double lon = intent.getDoubleExtra(SearchActivity.SEARCH_LON, 0);
 				locationToSearch = new LatLon(lat, lon); 
 			}
-			sequentialSearch = intent.hasExtra(SEQUENTIAL_SEARCH) && getAddressInformation() != null;
 		}
 		if(locationToSearch == null){
 			locationToSearch = settings.getLastKnownMapLocation();
@@ -507,7 +511,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 				if(cintent.hasExtra(SearchActivity.SEARCH_LAT) && cintent.hasExtra(SearchActivity.SEARCH_LON)){
 					intent.putExtra(SearchActivity.SEARCH_LAT, cintent.getDoubleExtra(SearchActivity.SEARCH_LAT, 0));
 					intent.putExtra(SearchActivity.SEARCH_LON, cintent.getDoubleExtra(SearchActivity.SEARCH_LON, 0));
-					intent.putExtra(SEQUENTIAL_SEARCH, true);
+					intent.putExtra(SELECT_ADDRESS, selectAddress);
 				}
 			}
 			startActivity(intent);
@@ -528,9 +532,9 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		if (sequentialSearch) {
+		if (!selectAddress && getAddressInformation() != null) {
 			createMenuItem(menu, SHOW_ON_MAP, R.string.shared_string_show_on_map,
-					R.drawable.ic_action_done, MenuItem.SHOW_AS_ACTION_ALWAYS);
+					R.drawable.ic_action_marker_dark, MenuItem.SHOW_AS_ACTION_ALWAYS);
 		} else {
 			createMenuItem(menu, 1, R.string.shared_string_ok,
 					R.drawable.ic_action_done, MenuItem.SHOW_AS_ACTION_ALWAYS);

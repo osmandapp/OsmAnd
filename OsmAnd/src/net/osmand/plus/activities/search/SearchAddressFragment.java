@@ -192,6 +192,10 @@ public class SearchAddressFragment extends Fragment {
 			newIntent.putExtra(SearchActivity.SEARCH_LAT, location.getLatitude());
 			newIntent.putExtra(SearchActivity.SEARCH_LON, location.getLongitude());
 		}
+		
+		if(intent != null && getActivity() instanceof SearchAddressActivity) {
+			newIntent.putExtra(SearchByNameAbstractActivity.SELECT_ADDRESS, true);
+		}
 		return newIntent;
 	}
 	
