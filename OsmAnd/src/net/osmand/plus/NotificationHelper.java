@@ -102,6 +102,8 @@ public class NotificationHelper {
 			} else {
 				notificationText = notificationText + Integer.toString(soi / 1000 / 60) + " " + app.getString(R.string.int_min);
 			}
+		} else if(monitoringPlugin == null) {
+			return null;
 		} else {
 			notificationText =	app.getString(R.string.shared_string_trip_recording);
 			float dst = app.getSavingTrackHelper().getDistance();
