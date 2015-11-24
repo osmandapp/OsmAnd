@@ -483,7 +483,7 @@
             android:targetActivity=".tasker.TaskerPluginEditActivity" >
             <intent-filter>
                 <!-- For a plug-in setting, use EDIT_SETTING instead. -->
-                <action android:name="com.twofortyfouram.locale.intent.action.EDIT_CONDITION" />
+                <action android:name="net.dinglisch.android.tasker.ACTION_EDIT_EVENT" />
             </intent-filter>
         </activity-alias>
 
@@ -493,7 +493,7 @@
             android:exported="true"
             android:process=":background" >
             <intent-filter>
-                <action android:name="com.twofortyfouram.locale.sdk.client.ui.activity.InfoActivity"/>
+                <action android:name="com.twofortyfouram.locale.intent.action.QUERY_CONDITION"/>
             </intent-filter>
         </receiver>
     </application>
