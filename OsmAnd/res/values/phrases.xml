@@ -2458,4 +2458,6 @@
 	<string name="poi_craft_electronics">Electronics repair</string>
 	<string name="poi_fireworks">Fireworks store</string>
 
+	<string name="poi_aerialway_length">Length</string>
+
 </resources>
