@@ -2488,4 +2488,6 @@
 
 <string name="poi_aerialway_length">Longitud</string>
 
-</resources>
+<string name="poi_internet_access_type_yes">Con acceso a Internet</string>
+
+	</resources>
