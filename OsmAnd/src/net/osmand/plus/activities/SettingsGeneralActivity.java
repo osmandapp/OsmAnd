@@ -23,7 +23,6 @@ import android.support.v7.app.AlertDialog;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
@@ -255,7 +254,8 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 			((ListPreference) screen.findPreference(settings.PREFERRED_LOCALE.getId())).setTitle(getString(R.string.preferred_locale) + " (" + getString(R.string.preferred_locale_no_translate) + ")");
 		}
 
-		registerListPreference(settings.MAP_PREFERRED_LOCALE, screen, ConfigureMapMenu.getMapNamesValues(this), ConfigureMapMenu.mapNamesIds);
+		String[] ids = ConfigureMapMenu.getSortedMapNamesIds(this);
+		registerListPreference(settings.MAP_PREFERRED_LOCALE, screen, ConfigureMapMenu.getMapNamesValues(this, ids), ids);
 	}
 
 
