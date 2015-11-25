@@ -241,14 +241,20 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 			private float maxVelocityY;
 
 			private boolean hasMoved;
+			private boolean centered;
 
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 
 				if (singleTapDetector.onTouchEvent(event)) {
-					showOnMap(menu.getLatLon(), true, false);
+					int posY = getViewY();
+					if (!centered) {
+						showOnMap(menu.getLatLon(), true, false,
+								map.getCurrentRotatedTileBox().getPixHeight() / 2 < posY - markerPaddingPx);
+						centered = true;
+					}
 					if (hasMoved) {
-						applyPosY(getViewY(), false, false, 0, 0);
+						applyPosY(posY, false, false, 0, 0);
 					}
 					openMenuHalfScreen();
 					return true;
@@ -701,7 +707,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		});
 	}
 
-	private void showOnMap(LatLon latLon, boolean updateCoords, boolean ignoreCoef) {
+	private void showOnMap(LatLon latLon, boolean updateCoords, boolean ignoreCoef, boolean needMove) {
 		AnimateDraggingMapThread thread = map.getAnimatedDraggingThread();
 		int fZoom = map.getZoom();
 		double flat = latLon.getLatitude();
@@ -724,7 +730,9 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 			origMarkerY = cp.getCenterPixelY();
 		}
 
-		thread.startMoving(flat, flon, fZoom, true);
+		if (needMove) {
+			thread.startMoving(flat, flon, fZoom, true);
+		}
 	}
 
 	private void setAddressLocation() {
@@ -891,7 +899,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		}
 
 		if (animated) {
-			showOnMap(latlon, false, true);
+			showOnMap(latlon, false, true, true);
 		} else {
 			map.setLatLon(latlon.getLatitude(), latlon.getLongitude());
 		}
