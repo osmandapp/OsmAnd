@@ -277,6 +277,11 @@ public class MapActivityActions implements DialogProvider {
 			adapter.item(R.string.context_menu_item_directions_from).iconColor(
 					R.drawable.ic_action_gdirections_dark).reg();
 		}
+		if (getMyApplication().getTargetPointsHelper().getPointToNavigate() != null && 
+				(mapActivity.getRoutingHelper().isFollowingMode() || mapActivity.getRoutingHelper().isRoutePlanningMode())) {
+			adapter.item(R.string.context_menu_item_last_intermediate_point).iconColor(
+					R.drawable.ic_action_flage_dark).reg();
+		}
 		OsmandPlugin.registerMapContextMenu(mapActivity, latitude, longitude, adapter, selectedObj);
 
 		final AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
@@ -290,6 +295,10 @@ public class MapActivityActions implements DialogProvider {
 				OnContextMenuClick click = adapter.getClickAdapter(which);
 				if (click != null) {
 					click.onContextMenuClick(listAdapter, standardId, which, false);
+				} else if (standardId == R.string.context_menu_item_last_intermediate_point) {
+					getMyApplication().getTargetPointsHelper().navigateToPoint(new LatLon(latitude, longitude), 
+							true, getMyApplication().getTargetPointsHelper().getIntermediatePoints().size(),
+							mapActivity.getContextMenu().getPointDescription());
 				} else if (standardId == R.string.context_menu_item_search) {
 					Intent intent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization().getSearchActivity());
 					intent.putExtra(SearchActivity.SEARCH_LAT, latitude);

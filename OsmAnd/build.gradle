@@ -184,6 +184,22 @@ task updateNoTranslate(type: Copy) {
 	into 'res/values/'
 }
 
+task validateTranslate {
+	new java.io.File("res").eachFileRecurse groovy.io.FileType.FILES, {
+		if(it.name == "strings.xml" || it.name == "phrases.xml") {
+			it.eachLine { line ->
+    			if( line.contains("\$ s") || line.contains("\$ d") || line.contains("\$ f") || 
+    				line.contains(" \$s") || line.contains(" \$d") || line.contains(" \$f") ||  
+    				line.contains("1\$ ") || line.contains("2\$ ") || line.contains("3\$ ") ||
+    				(line.contains("% \$") || line.contains("% 1") ||
+    				line.contains("% 2") || line.contains("% 3")  )) {
+    				throw new GradleException("Incorrect translation " + it.getAbsolutePath() + " " + line);
+				}
+			}
+		}
+	}
+}
+
 task collectVoiceAssets(type: Sync) {
 	from "../../resources/voice"
 	into "assets/voice"
@@ -265,7 +281,8 @@ collectExternalResources.dependsOn collectVoiceAssets,
 		collectRegionsInfoResources,
 		collectMiscResources,
 		copyStyleIcons,
-		updateNoTranslate
+		updateNoTranslate,
+		validateTranslate
 // tasks.whenTaskAdded { task ->
 //	if (task.name.startsWith("generate") && task.name.endsWith("Resources")) {
 //		task.dependsOn collectExternalResources
