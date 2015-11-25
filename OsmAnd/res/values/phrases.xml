@@ -1804,7 +1804,8 @@
 	<string name="poi_internet_access_type_wired">Internet access type: wired</string>
 	<string name="poi_internet_access_type_public">Internet access type: public</string>
 	<string name="poi_internet_access_type_service">Internet access type: service</string>
-	<string name="poi_internet_access_type_no">Internet access type: no</string>
+	<string name="poi_internet_access_type_no">No Internet access</string>
+	<string name="poi_internet_access_type_yes">With Internet access</string>
 
 	<string name="poi_maxwidth">Maximum width</string>
 	<string name="poi_iata">IATA code</string>
