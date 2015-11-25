@@ -1988,4 +1988,7 @@
     <string name="access_from_map_description">El botón del menú, muestra el panel de control, en lugar del menú</string>
     <string name="access_from_map">Acceso desde el mapa</string>
     <string name="please_specify_poi_type_only_from_list">"Especifique el tipo de PDI correcto u omítelo. "</string>
-    </resources>
+    <string name="routing_attr_avoid_stairs_name">Evitar escaleras</string>
+	<string name="routing_attr_avoid_stairs_description">Evitar pasar por escaleras</string>
+	<string name="routing_attr_avoid_borders_name">Evitar cruces fronterizos</string>
+	</resources>
