@@ -1,7 +1,6 @@
 package net.osmand.plus.mapcontextmenu;
 
 import android.graphics.drawable.Drawable;
-
 import net.osmand.Location;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.RouteDataObject;
@@ -141,9 +140,15 @@ public abstract class MenuTitleController {
 					public boolean publish(RouteDataObject object) {
 						if (object != null) {
 							OsmandSettings settings = getMapActivity().getMyApplication().getSettings();
-							streetStr = RoutingHelper.formatStreetName(object.getName(settings.MAP_PREFERRED_LOCALE.get()),
-									object.getRef(), object.getDestinationName(settings.MAP_PREFERRED_LOCALE.get()));
-
+							String streetName = object.getName(settings.MAP_PREFERRED_LOCALE.get());
+							String ref = object.getRef();
+							if(Algorithms.isEmpty(streetName)) {
+								streetName = "";
+							}
+							if(Algorithms.isEmpty(ref)) {
+								streetName += ", "+ ref;
+							}
+							streetStr = streetName;
 							if (!Algorithms.isEmpty(streetStr)) {
 								MenuController menuController = getMenuController();
 								if (menuController == null || menuController.displayStreetNameInTitle()) {
