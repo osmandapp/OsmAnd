@@ -179,10 +179,8 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 	}
 
 	public static void updateCurrentTrack(View v, final Activity ctx, final OsmandApplication app) {
-		if (OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) == null) {
-			return;
-		}
-		if (v == null || ctx == null || app == null) {
+		final OsmandMonitoringPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class);
+		if (v == null || ctx == null || app == null || plugin == null) {
 			return;
 		}
 		final boolean isRecording = app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get();
@@ -195,10 +193,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		stop.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				final OsmandMonitoringPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class);
 				if (isRecording) {
 					plugin.stopRecording();
-				} else {
+				} else if(plugin != null){
 					if (app.getLocationProvider().checkGPSEnabled(ctx)) {
 						plugin.startGPXMonitoring(ctx);
 					}
