@@ -156,11 +156,13 @@ public class MapMultiSelectionMenu extends BaseMenuController {
 			hide();
 		}
 
+/*
 		for (Map.Entry<Object, IContextMenuProvider> e : selectedObjects.entrySet()) {
 			if (e.getValue() instanceof ContextMenuLayer.IContextMenuProviderSelection) {
 				((ContextMenuLayer.IContextMenuProviderSelection) e.getValue()).setSelectedObject(e.getKey());
 			}
 		}
+*/
 
 		this.latLon = latLon;
 		createCollection(selectedObjects);
