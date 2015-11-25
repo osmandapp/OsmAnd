@@ -1921,7 +1921,7 @@
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">全部更新 (%1$s MB)</string>
     <string name="free_downloads_used">免費下載使用</string>
-    <string name="free_downloads_used_description">您可以設置，您有使用多少免費下載</string>
+    <string name="free_downloads_used_description">顯示已使用的免費下載</string>
     <string name="simulate_initial_startup_descr">設定標誌指示第一次應用程式啟動，而保持著所有其它設定不變</string>
     <string name="simulate_initial_startup">模擬第一次應用程式啟動</string>
     <string name="share_geo">地理：</string>
