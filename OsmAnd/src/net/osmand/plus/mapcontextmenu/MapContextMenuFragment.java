@@ -943,22 +943,32 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		return (OsmandApplication) getActivity().getApplication();
 	}
 
-	public static void showInstance(final MapActivity mapActivity) {
+	public static boolean showInstance(final MapContextMenu menu, final MapActivity mapActivity) {
+		try {
 
-		int slideInAnim = R.anim.slide_in_bottom;
-		int slideOutAnim = R.anim.slide_out_bottom;
+			if (menu.getLatLon() == null) {
+				return false;
+			}
 
-		MapContextMenu menu = mapActivity.getContextMenu();
-		if (menu.isExtended()) {
-			slideInAnim = menu.getSlideInAnimation();
-			slideOutAnim = menu.getSlideOutAnimation();
+			int slideInAnim = R.anim.slide_in_bottom;
+			int slideOutAnim = R.anim.slide_out_bottom;
+
+			if (menu.isExtended()) {
+				slideInAnim = menu.getSlideInAnimation();
+				slideOutAnim = menu.getSlideOutAnimation();
+			}
+
+			MapContextMenuFragment fragment = new MapContextMenuFragment();
+			mapActivity.getSupportFragmentManager().beginTransaction()
+					.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
+					.add(R.id.fragmentContainer, fragment, TAG)
+					.addToBackStack(TAG).commitAllowingStateLoss();
+
+			return true;
+
+		} catch (RuntimeException e) {
+			return false;
 		}
-
-		MapContextMenuFragment fragment = new MapContextMenuFragment();
-		mapActivity.getSupportFragmentManager().beginTransaction()
-				.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
-				.add(R.id.fragmentContainer, fragment, TAG)
-				.addToBackStack(TAG).commitAllowingStateLoss();
 	}
 
 	//DownloadEvents

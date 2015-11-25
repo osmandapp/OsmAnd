@@ -229,13 +229,17 @@ public class MapContextMenu extends MenuTitleController {
 
 	public void show() {
 		if (!isVisible()) {
-			MapContextMenuFragment.showInstance(mapActivity);
+			if (!MapContextMenuFragment.showInstance(this, mapActivity)) {
+				active = false;
+			}
 		}
 	}
 
 	public void show(LatLon latLon, PointDescription pointDescription, Object object) {
 		if (init(latLon, pointDescription, object)) {
-			MapContextMenuFragment.showInstance(mapActivity);
+			if (!MapContextMenuFragment.showInstance(this, mapActivity)) {
+				active = false;
+			}
 		}
 	}
 
