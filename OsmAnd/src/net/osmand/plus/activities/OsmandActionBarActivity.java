@@ -5,7 +5,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;

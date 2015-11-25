@@ -184,6 +184,8 @@ task updateNoTranslate(type: Copy) {
 }
 
 task validateTranslate {
+    println "Validating translations"
+
 	new java.io.File("res").eachFileRecurse groovy.io.FileType.FILES, {
 		if(it.name == "strings.xml" || it.name == "phrases.xml") {
 			it.eachLine { line ->
