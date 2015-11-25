@@ -2014,7 +2014,7 @@
     <string name="value_downloaded_of_max">%1$.1f af %2$.1f MB</string>
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">Opdater alle (%1$s MB)</string>
-    <string name="free_downloads_used_description">Indstil hvormange gratis filhentninger der er brugt</string>
+    <string name="free_downloads_used_description">Viser de anvendte gratis filhentninger</string>
     <string name="free_downloads_used">Gratis filhentninger brugt</string>
 
     <string name="share_geo">geo:</string>
