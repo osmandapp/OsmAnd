@@ -1655,8 +1655,9 @@
 
 	<string name="poi_internet_access_type_wlan">Беспроводной интернет</string>
 	<string name="poi_internet_access_type_wired">Интернет через кабель</string>
-	<string name="poi_internet_access_type_public">Общедоступный доступ в интернет</string>
+	<string name="poi_internet_access_type_public">Публичный доступ в интернет</string>
 	<string name="poi_internet_access_type_no">Без доступа в интернет</string>
+	<string name="poi_internet_access_type_yes">C доступом в интернет</string>
 
 	<string name="poi_maxwidth">Максимальная ширина</string>
 
