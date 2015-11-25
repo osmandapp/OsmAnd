@@ -146,7 +146,10 @@ public abstract class MenuTitleController {
 								streetName = "";
 							}
 							if(!Algorithms.isEmpty(ref)) {
-								streetName += ", "+ ref;
+								if(!Algorithms.isEmpty(streetName)) {
+									streetName += ", ";
+								}
+								streetName += ref;
 							}
 							streetStr = streetName;
 							if (!Algorithms.isEmpty(streetStr)) {
