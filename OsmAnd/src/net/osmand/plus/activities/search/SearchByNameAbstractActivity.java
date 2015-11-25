@@ -1,34 +1,6 @@
 package net.osmand.plus.activities.search;
 
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import net.osmand.Collator;
-import net.osmand.CollatorStringMatcher;
-import net.osmand.CollatorStringMatcher.StringMatcherMode;
-import net.osmand.OsmAndCollator;
-import net.osmand.PlatformUtil;
-import net.osmand.data.LatLon;
-import net.osmand.data.MapObject;
-import net.osmand.data.PointDescription;
-import net.osmand.plus.OsmAndConstants;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.OsmandListActivity;
-import net.osmand.plus.activities.search.SearchAddressFragment.AddressInformation;
-import net.osmand.plus.dialogs.DirectionsDialogs;
-import net.osmand.plus.dialogs.FavoriteDialogs;
-
-import org.apache.commons.logging.Log;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
@@ -62,10 +34,39 @@ import android.widget.TextView;
 import android.widget.TextView.BufferType;
 import android.widget.TextView.OnEditorActionListener;
 
+import net.osmand.Collator;
+import net.osmand.CollatorStringMatcher;
+import net.osmand.CollatorStringMatcher.StringMatcherMode;
+import net.osmand.OsmAndCollator;
+import net.osmand.PlatformUtil;
+import net.osmand.data.LatLon;
+import net.osmand.data.MapObject;
+import net.osmand.data.PointDescription;
+import net.osmand.plus.OsmAndConstants;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.OsmandListActivity;
+import net.osmand.plus.activities.search.SearchAddressFragment.AddressInformation;
+import net.osmand.plus.dialogs.DirectionsDialogs;
+import net.osmand.plus.dialogs.FavoriteDialogs;
+
+import org.apache.commons.logging.Log;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 
 @SuppressLint("NewApi")
 public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity {
 
+	private static final String ENDING_TEXT = "ending_text";
 	private EditText searchText;
 	private AsyncTask<Object, ?, ?> initializeTask;
 	
@@ -76,7 +77,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	protected ProgressBar progress;
 	protected LatLon locationToSearch;
 	protected OsmandSettings settings;
-	protected List<T> initialListToFilter = new ArrayList<T>();
+	protected List<T> initialListToFilter = new ArrayList<>();
 	protected Handler uiHandler;
 	protected Collator collator;
 	protected NamesFilter namesFilter;
@@ -84,7 +85,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	private boolean initFilter = false;
 	private String endingText = "";
 	private T endingObject;
-	private StyleSpan previousSpan;
+	private StyleSpan previousSpan = new StyleSpan(Typeface.BOLD_ITALIC);
 	private static final Log log = PlatformUtil.getLog(SearchByNameAbstractActivity.class);
 	
 	private static final int NAVIGATE_TO = 3;
@@ -233,17 +234,15 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		outState.putString("ENDING_TEXT", endingText);
-		outState.putParcelable("PREVIOUS_SPAN", this.previousSpan);
+		outState.putString(ENDING_TEXT, endingText);
 	}
 	
 	@Override
 	protected void onRestoreInstanceState(Bundle prevState) {
-		endingText = prevState.getString("ENDING_TEXT");
+		endingText = prevState.getString(ENDING_TEXT);
 		if(endingText == null) {
 			endingText = "";
 		}
-		previousSpan = prevState.getParcelable("PREVIOUS_SPAN"); 
 		super.onRestoreInstanceState(prevState);
 	}
 	
@@ -268,12 +267,9 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 		if(updateText) {
 			searchText.getText().replace(currentFilter.length(), currentFilter.length() + prevEndtext.length(), locEndingText);
 		}
-		if (previousSpan != null) {
-			searchText.getText().removeSpan(previousSpan);
-			previousSpan = null;
-		}
+
+		searchText.getText().removeSpan(previousSpan);
 		if (locEndingText.length() > 0) {
-			previousSpan = new StyleSpan(Typeface.BOLD_ITALIC);
 			searchText.getText().setSpan(previousSpan, currentFilter.length(), currentFilter.length() + locEndingText.length(),
 					Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 			if (searchText.getSelectionEnd() > currentFilter.length()) {
@@ -384,7 +380,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	
 	
 	class UIUpdateHandler extends Handler {
-		private Map<String, Integer> endingMap = new HashMap<String, Integer>();
+		private Map<String, Integer> endingMap = new HashMap<>();
 		private int minimalIndex = Integer.MAX_VALUE;
 		private String minimalText = null;
 		
