@@ -48,10 +48,7 @@ public class NavigatePointFragment extends Fragment implements SearchActivityChi
 	private static final String SELECTION = "SELECTION";
 	
 
-	private static final int NAVIGATE_TO = 1;
-	private static final int ADD_WAYPOINT = 2;
 	private static final int SHOW_ON_MAP = 3;
-	private static final int ADD_TO_FAVORITE = 4;
 
 	private View view;
 	private LatLon location;
@@ -114,43 +111,10 @@ public class NavigatePointFragment extends Fragment implements SearchActivityChi
 		boolean light = app.getSettings().isLightActionBar();
 		Menu menu = onCreate;
 		if(getActivity() instanceof SearchActivity) {
-			if (portrait) {
-				menu = ((SearchActivity) getActivity()).getClearToolbar(true).getMenu();
-			} else {
-				((SearchActivity) getActivity()).getClearToolbar(false);
-			}
+			((SearchActivity) getActivity()).getClearToolbar(false);
 			light = false;
 		}
-		MenuItem menuItem = menu.add(0, NAVIGATE_TO, 0, R.string.context_menu_item_directions_to);
-		MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-		menuItem = menuItem.setIcon(app.getIconsCache().getIcon(R.drawable.ic_action_gdirections_dark, light));
-		menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-
-			@Override
-			public boolean onMenuItemClick(MenuItem item) {
-				select(NAVIGATE_TO);
-				return true;
-			}
-		});
-		TargetPointsHelper targets = app.getTargetPointsHelper();
-		if (targets.getPointToNavigate() != null) {
-			menuItem = menu.add(0, ADD_WAYPOINT, 0, R.string.context_menu_item_intermediate_point);
-			MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-			menuItem = menuItem.setIcon(app.getIconsCache().getIcon(R.drawable.ic_action_flage_dark, light));
-		} else {
-			menuItem = menu.add(0, ADD_WAYPOINT, 0, R.string.context_menu_item_destination_point);
-			MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-			menuItem = menuItem.setIcon(app.getIconsCache().getIcon(R.drawable.ic_action_flag_dark, light));
-		}
-			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-				@Override
-				public boolean onMenuItemClick(MenuItem item) {
-					select(ADD_WAYPOINT);
-					return true;
-				}
-			});
-		//}
-		menuItem = menu.add(0, SHOW_ON_MAP, 0, R.string.shared_string_show_on_map);
+		MenuItem menuItem = menu.add(0, SHOW_ON_MAP, 0, R.string.shared_string_show_on_map);
 		MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		menuItem = menuItem.setIcon(app.getIconsCache().getIcon(R.drawable.ic_action_marker_dark, light));
 
@@ -162,17 +126,6 @@ public class NavigatePointFragment extends Fragment implements SearchActivityChi
 			}
 		});
 		
-		menuItem = menu.add(0, ADD_TO_FAVORITE, 0, R.string.shared_string_add_to_favorites);
-		MenuItemCompat.setShowAsAction(menuItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-		menuItem = menuItem.setIcon(app.getIconsCache().getIcon(R.drawable.ic_action_fav_dark, light));
-
-		menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-			@Override
-			public boolean onMenuItemClick(MenuItem item) {
-				select(ADD_TO_FAVORITE);
-				return true;
-			}
-		});
 	}
 	
 	@Override
@@ -380,16 +333,7 @@ public class NavigatePointFragment extends Fragment implements SearchActivityChi
 			double lat = loc.getLatitude();
 			double lon = loc.getLongitude();
 			PointDescription pd = new PointDescription(lat, lon);
-			if(mode == ADD_TO_FAVORITE) {
-				Bundle b = new Bundle();
-				Dialog dlg = FavoriteDialogs.createAddFavouriteDialog(getActivity(), b);
-				dlg.show();
-				FavoriteDialogs.prepareAddFavouriteDialog(getActivity(), dlg, b, lat, lon, pd);
-			} else if (mode == NAVIGATE_TO) {
-				DirectionsDialogs.directionsToDialogAndLaunchMap(getActivity(), lat, lon, pd);
-			} else if (mode == ADD_WAYPOINT) {
-				DirectionsDialogs.addWaypointDialogAndLaunchMap(getActivity(), lat, lon, pd);
-			} else if (mode == SHOW_ON_MAP){
+			if (mode == SHOW_ON_MAP){
 				OsmandApplication app = (OsmandApplication) getActivity().getApplication();
 				app.getSettings().setMapLocationToShow(lat, lon, Math.max(12, app.getSettings().getLastKnownMapZoom()),
 						pd);

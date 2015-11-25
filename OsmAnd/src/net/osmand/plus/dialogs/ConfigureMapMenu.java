@@ -8,7 +8,6 @@ import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
-
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.core.android.MapRendererContext;
@@ -39,11 +38,16 @@ import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
+import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import gnu.trove.list.array.TIntArrayList;
 
@@ -369,21 +373,21 @@ public class ConfigureMapMenu {
 				AlertDialog.Builder b = new AlertDialog.Builder(view.getContext());
 				// test old descr as title
 				b.setTitle(R.string.map_preferred_locale);
-				final String[] txtValues = mapNamesIds;
-				final String[] txtNames = getMapNamesValues(activity);
+				final String[] txtIds = getSortedMapNamesIds(activity);
+				final String[] txtValues = getMapNamesValues(activity, txtIds);
 				int selected = -1;
-				for (int i = 0; i < txtValues.length; i++) {
-					if(view.getSettings().MAP_PREFERRED_LOCALE.get().equals(txtValues[i])) {
+				for (int i = 0; i < txtIds.length; i++) {
+					if(view.getSettings().MAP_PREFERRED_LOCALE.get().equals(txtIds[i])) {
 						selected = i;
 						break;
 					}
 				}
-				b.setSingleChoiceItems(txtNames, selected, new DialogInterface.OnClickListener() {
+				b.setSingleChoiceItems(txtValues, selected, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						view.getSettings().MAP_PREFERRED_LOCALE.set(txtValues[which]);
+						view.getSettings().MAP_PREFERRED_LOCALE.set(txtIds[which]);
 						refreshMapComplete(activity);
-						adapter.setItemDescription(pos, txtValues[which]);
+						adapter.setItemDescription(pos, txtIds[which]);
 						ad.notifyDataSetInvalidated();
 						dialog.dismiss();
 					}
@@ -415,11 +419,36 @@ public class ConfigureMapMenu {
 	
 	public static String[] mapNamesIds = new String[] { "", "en", "als", "af", "ar", "az", "be", "bg", "bn", "bpy", "br", "bs", "ca", "ceb", "cs", "cy", "da", "de", "el", "et", "es", "eu", "fa", "fi", "fr", "fy", "ga", "gl", "he", "hi", "hr", "ht", "hu", "hy", "id", "is", "it", "ja", "ka", "ko", "ku", "la", "lb", "lt", "lv", "mk", "ml", "mr", "ms", "nds", "new", "nl", "nn", "no", "nv", "os", "pl", "pms", "pt", "ro", "ru", "sh", "sc", "sk", "sl", "sq", "sr", "sv", "sw", "ta", "te", "th", "tl", "tr", "uk", "vi", "vo", "zh" };
 
-	public static String[] getMapNamesValues(Context ctx) {
-		String[] translates = new String[mapNamesIds.length];
-		translates[0] = ctx.getString(R.string.local_map_names);
-		for(int i = 1; i < translates.length; i++) {
-			translates[i] = ((OsmandApplication)ctx.getApplicationContext()).getLangTranslation(mapNamesIds[i]);
+	
+	public static String[] getSortedMapNamesIds(Context ctx) {
+		String[] vls = getMapNamesValues(ctx, mapNamesIds);
+		final Map<String, String> mp = new HashMap<String, String>();
+		for(int i = 0; i < mapNamesIds.length; i++) {
+			mp.put(mapNamesIds[i], vls[i]);
+		}
+		ArrayList<String> lst = new ArrayList<String>(mp.keySet());
+		Collections.sort(lst, new Comparator<String>() {
+			@Override
+			public int compare(String lhs, String rhs) {
+				int i1 = Algorithms.isEmpty(lhs)? 0 : (lhs.equals("en") ? 1 : 2);
+				int i2 = Algorithms.isEmpty(rhs)? 0 : (rhs.equals("en") ? 1 : 2);
+				if(i1 != i2) {
+					return i1 < i2 ? -1 : 1;
+				}
+				return mp.get(lhs).compareTo(mp.get(rhs));
+			}
+		});
+		return lst.toArray(new String[lst.size()]);
+	}
+	
+	public static String[] getMapNamesValues(Context ctx, String[] ids) {
+		String[] translates = new String[ids.length];
+		for(int i = 0; i < translates.length; i++) {
+			if(Algorithms.isEmpty(ids[i])) {
+				translates[i] = ctx.getString(R.string.local_map_names);		
+			} else {
+				translates[i] = ((OsmandApplication)ctx.getApplicationContext()).getLangTranslation(ids[i]);
+			}
 		}
 		
 		return translates;
