@@ -213,7 +213,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		if (selectedObj instanceof Amenity) {
 			Amenity amenity = (Amenity) selectedObj;
 			final PoiType poiType = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
-			isEditable = !amenity.getType().isWiki() && !poiType.isNotEditableOsm();
+			isEditable = poiType != null && !amenity.getType().isWiki() && !poiType.isNotEditableOsm();
 		}
 		if (isEditable) {
 			adapter.item(R.string.poi_context_menu_modify).iconColor(R.drawable.ic_action_edit_dark).listen(listener).position(1).reg();
