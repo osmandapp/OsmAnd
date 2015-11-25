@@ -545,7 +545,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	protected void select(int mode) {
 		LatLon searchPoint = settings.getLastSearchedPoint();
 		AddressInformation ai = getAddressInformation();
-		if (ai != null) {
+		if (ai != null && searchPoint != null) {
 			if (mode == ADD_TO_FAVORITE) {
 				Bundle b = new Bundle();
 				Dialog dlg = FavoriteDialogs.createAddFavouriteDialog(getActivity(), b);

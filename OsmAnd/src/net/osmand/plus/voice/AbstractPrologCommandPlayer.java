@@ -117,11 +117,13 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 
 	@Override
 	public void stateChanged(ApplicationMode change) {
-		prologSystem.getTheoryManager().retract(new Struct("appMode", new Var()));
-		prologSystem.getTheoryManager()
+		if(prologSystem != null) {
+			prologSystem.getTheoryManager().retract(new Struct("appMode", new Var()));
+			prologSystem.getTheoryManager()
 				.assertA(
 						new Struct("appMode", new Struct(ctx.getSettings().APPLICATION_MODE.get().getStringKey()
 								.toLowerCase())), true, "", true);
+		}
 	}
 	
 	private void init(String voiceProvider, OsmandSettings settings, String configFile) throws CommandPlayerException {
@@ -256,6 +258,9 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 
 	@Override
 	public void clear() {
+		if(ctx != null && ctx.getSettings() != null) {
+			ctx.getSettings().APPLICATION_MODE.removeListener(this);
+		}
 		ctx = null;
 		prologSystem = null;
 	}
