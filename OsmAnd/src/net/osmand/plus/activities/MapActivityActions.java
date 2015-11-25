@@ -451,17 +451,18 @@ public class MapActivityActions implements DialogProvider {
 					settings.LAST_ROUTING_APPLICATION_MODE != ApplicationMode.DEFAULT) {
 				mode = settings.LAST_ROUTING_APPLICATION_MODE;
 			}
-			if (from != null && targets.getPointToNavigate() != null) {
-				double dist = MapUtils.getDistance(from, targets.getPointToNavigate().getLatitude(),
-						targets.getPointToNavigate().getLongitude());
-				if (dist >= 50000 && mode.isDerivedRoutingFrom(ApplicationMode.PEDESTRIAN)) {
-					mode = ApplicationMode.CAR;
-				} else if (dist >= 300000 && mode.isDerivedRoutingFrom(ApplicationMode.BICYCLE)) {
-					mode = ApplicationMode.CAR;
-				} else if (dist < 2000 && mode.isDerivedRoutingFrom(ApplicationMode.CAR)) {
-					mode = ApplicationMode.PEDESTRIAN;
-				}
-			}
+			// didn't provide good results
+//			if (from != null && targets.getPointToNavigate() != null) {
+//				double dist = MapUtils.getDistance(from, targets.getPointToNavigate().getLatitude(),
+//						targets.getPointToNavigate().getLongitude());
+//				if (dist >= 50000 && mode.isDerivedRoutingFrom(ApplicationMode.PEDESTRIAN)) {
+//					mode = ApplicationMode.CAR;
+//				} else if (dist >= 300000 && mode.isDerivedRoutingFrom(ApplicationMode.BICYCLE)) {
+//					mode = ApplicationMode.CAR;
+//				} else if (dist < 2000 && mode.isDerivedRoutingFrom(ApplicationMode.CAR)) {
+//					mode = ApplicationMode.PEDESTRIAN;
+//				}
+//			}
 		}
 		return mode;
 	}
