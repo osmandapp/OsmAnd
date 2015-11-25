@@ -26,7 +26,6 @@ public class Amenity extends MapObject  {
 	public static final String OPENING_HOURS = "opening_hours";
 	public static final String CONTENT = "content";
 	
-	private static final long serialVersionUID = 132083949926339552L;
 	private String subType;
 	private PoiCategory type;
 	// duplicate for fast access
