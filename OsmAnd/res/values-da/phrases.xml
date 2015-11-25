@@ -1840,7 +1840,7 @@
 	<string name="poi_internet_access_type_wired">Internet adgangstype: kablet</string>
 	<string name="poi_internet_access_type_public">Internetadgang: offentlig</string>
 	<string name="poi_internet_access_type_service">Internetadgang: tjeneste</string>
-	<string name="poi_internet_access_type_no">Internetadgang: ingen</string>
+	<string name="poi_internet_access_type_no">Ingen internetadgang</string>
 
 <string name="poi_maxwidth">Max. bredde</string>
 	<string name="poi_iata">IATA kode</string>
@@ -2515,4 +2515,6 @@
 
 <string name="poi_aerialway_length">Længde</string>
 
-</resources>
+<string name="poi_internet_access_type_yes">Med internetadgang</string>
+
+	</resources>
