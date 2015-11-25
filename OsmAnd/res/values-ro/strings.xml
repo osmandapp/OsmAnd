@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="background_service_is_enabled_question">Serviciul sleep încă rulează în background. Doriți să-l opriți?</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="background_service_is_enabled_question">Serviciul sleep încă rulează în background. Doriți să-l opriți?</string>
     
 	
     <string name="close_changeset">Închide setul de modificări</string>
@@ -1567,4 +1568,11 @@
     <string name="archive_wikipedia_data">Aveți descărcate informații vechi din Wikipedia, incompatibile. Doriți să le arhivați?</string>
     <string name="download_wikipedia_files">Doriți să descărcați informații adiționale din Wikipedia (%1$s MB) ?</string>
     <string name="gps_network_not_enabled">Serviciul de localizare este oprit. Doriți să îl activați?</string>
+    <string name="access_from_map">Alegeti de pe harta</string>
+    <string name="show_on_start">Arata la pornire</string>
+    <string name="osm_save_offline">Salvati offline</string>
+    <string name="osm_edit_modified_poi">OSM POI modificat</string>
+    <string name="osm_edit_deleted_poi">OSM POI sters</string>
+    <string name="context_menu_item_open_note">Deschideti OSM Notite</string>
+    <string name="osm_edit_reopened_note">OSM Notite redeschis</string>
     </resources>
