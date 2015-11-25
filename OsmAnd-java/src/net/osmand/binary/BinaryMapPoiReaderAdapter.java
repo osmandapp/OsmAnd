@@ -9,9 +9,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import net.osmand.Collator;
@@ -26,9 +26,7 @@ import net.osmand.data.Amenity.AmenityRoutePoint;
 import net.osmand.data.LatLon;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
-import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
-import net.sf.junidecode.Junidecode;
 
 import org.apache.commons.logging.Log;
 
@@ -550,6 +548,13 @@ public class BinaryMapPoiReaderAdapter {
 						for(String s : am.getAllNames()) {
 							matches = matcher.matches(s.toLowerCase());
 							if(matches) {
+								break;
+							}
+						}
+						Map<String, String> lt = am.getAdditionalInfo();
+						for (Entry<String, String> e : lt.entrySet()) {
+							matches = matcher.matches(e.getValue());
+							if (matches) {
 								break;
 							}
 						}
