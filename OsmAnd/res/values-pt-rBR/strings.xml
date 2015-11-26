@@ -1908,7 +1908,7 @@
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">Atualizar tudo (%1$s MB)</string>
     <string name="free_downloads_used">Transferências gratuitas usadas</string>
-    <string name="free_downloads_used_description">Você pode definir quantas transferências gratuitas você usou</string>
+    <string name="free_downloads_used_description">Exibe as transferências gratuitas usadas</string>
 
     <string name="application_dir_description">Escolha onde deseja salvar os arquivos de mapa.</string>
     
