@@ -324,9 +324,8 @@ dependencies {
 	compile project(path: ":OsmAnd-java", configuration: "android")
 	compile project(":eclipse-compile:design")
 	compile project(":eclipse-compile:cardview")
-	compile project(":pluginClientSdkLib")
+	compile project(":eclipse-compile:pluginClientSdkLib")
 
-//	compile project(":eclipse-compile:recyclerview")
 	compile fileTree(
 			dir: "libs",
 			include: ["*.jar"],
@@ -335,10 +334,6 @@ dependencies {
 					"QtAndroidAccessibility-bundled.jar",
 					"OsmAndCore_android.jar",
 					"OsmAndCore_wrapper.jar"])
-	// compile "com.github.ksoichiro:android-observablescrollview:1.5.0"
-	//	 compile "com.android.support:appcompat-v7:22.2.1"
-	// compile "com.github.shell-software:fab:1.0.5"
-	//	compile 'com.android.support:design:22.2.1'
 	legacyCompile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@jar"
 	qtcoredebugCompile "net.osmand:OsmAndCore_androidNativeDebug:0.1-SNAPSHOT@aar"
 	qtcoredebugCompile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"

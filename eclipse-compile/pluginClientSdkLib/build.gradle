@@ -7,18 +7,19 @@ dependencies {
     // This should be 'provided' scope, however there is a bug with the Android Gradle
     // plugin so instead the dependency is filtered out from the POM
     // https://code.google.com/p/android/issues/detail?id=68316
-    compile project(":pluginApiLib")
+    compile project(':eclipse-compile:appcompat')
+    compile project(':eclipse-compile:pluginApiLib')
 }
 
 android {
-    compileSdkVersion 21
+    compileSdkVersion 23
     buildToolsVersion "23.0.1"
 
     resourcePrefix 'com_twofortyfouram_locale_sdk_client_'
 
     defaultConfig {
         minSdkVersion System.getenv("MIN_SDK_VERSION") ? System.getenv("MIN_SDK_VERSION").toInteger() : 14
-        targetSdkVersion 21
+        targetSdkVersion 23
 
         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
         consumerProguardFiles 'proguard-consumer.txt'
