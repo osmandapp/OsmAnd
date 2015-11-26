@@ -10,7 +10,7 @@
     <string name="first_time_msg">Obrigado por usar OsmAnd. Para usufruir de todos os recursos do aplicativo, você precisa de alguns dados regionais off-line, que você pode baixar em \'Configurações\' → \'Gerenciar mapas\'. Depois, você poderá procurar por um endereço, um Ponto de Interesse (POI) ou um meio de transporte público.</string>    
 	<string name="favorite_home_category">Casa</string>
 	<string name="local_index_action_do">Você está prestes a %1$s %2$s item(s). Continuar?</string>
-	<string name="rendering_attr_hideHouseNumbers_name">Ocultar números de porta</string>
+	<string name="rendering_attr_hideHouseNumbers_name">Números de porta</string>
     <string name="application_dir_change_warning3">Você quer que o OsmAnd também copie seus arquivos de dados para o novo destino?</string>
     <string name="specified_directiory_not_writeable">Mapas não podem ser criados no diretório especificado</string>
 	<string name="copying_osmand_file_failed">A cópia de arquivos falhou</string>    
@@ -170,7 +170,7 @@
 	<string name="osmand_distance_planning_plugin_description">Este complemento fornece um widget da tela mapa permitindo criar caminhos tocando no mapa, ou usar ou modificar arquivos GPX existentes, para planejar uma viagem e medir a distância entre pontos. Os resultados podem ser salvos como um arquivo GPX, que mais tarde pode ser usado para orientação.</string>
 	<string name="shared_string_accessibility">Acessibilidade</string>
 	<string name="osmand_accessibility_description">Este complemento disponibiliza recursos de acessibilidade do dispositivo diretamente no OsmAnd. Facilita, por exemplo, o ajuste da velocidade para vozes TTS, configuração da navegação direcional na tela, uso do trackball para controle de zoom, ou retorno de texto para fala, como para anunciar automaticamente sua posição.</string>
-	<string name="osm_settings">Edição do OSM</string>
+	<string name="osm_settings">Edição no OSM</string>
 	<string name="debugging_and_development">Desenvolvimento OsmAnd</string>
 	<string name="rename_failed">Falha ao renomear.</string>
 	<string name="back_to_map">Voltar ao mapa</string>
@@ -648,7 +648,7 @@
 	<string name="driving_region_canada">Canadá</string>
 	<string name="driving_region_europe_asia">Europa e Ásia</string>
 	<string name="driving_region_uk">Reino Unido, Índia, Austrália e outras</string>
-    <string name="speak_descr">Configurar para anunciar nomes de ruas, moderadores de tráfego (paradas obrigatórias, lombadas), de radar, limites de velocidade</string>
+    <string name="speak_descr">Configurar para anunciar nomes de ruas, moderadores de tráfego (paradas obrigatórias, lombadas), radares, limites de velocidade</string>
 	<string name="speak_street_names">Nome das ruas (TTS)</string>
     <string name="speak_speed_limit">Limite de velocidade</string>
     <string name="speak_cameras">Radares</string>
@@ -799,7 +799,7 @@
     <string name="rendering_attr_hikingRoutesOSMC_name">Sobreposição de símbolo de montanhismo</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Renderizar caminhos de acordo com traços OSMC</string>
     
-	<string name="rendering_attr_noAdminboundaries_name">Limites</string>
+	<string name="rendering_attr_noAdminboundaries_name">Fronteiras</string>
 	<string name="rendering_attr_noAdminboundaries_description">Esconder limites regionais (níveis administrativos 5-9)</string>
 	
 	<string name="target_point">Ponto de parada %1$s</string>
@@ -824,7 +824,7 @@
 	<string name="map_widget_day_night">Modo dia/noite</string>
 	<string name="map_widget_renderer">Estilo do mapa</string>
 	<string name="layer_map_appearance">Configurar tela</string>
-	<string name="show_lanes">Mostrar faixas</string>
+	<string name="show_lanes">Mostrar faixas de rolamento</string>
 	<string name="avoid_ferries">Evitar balsas</string>
 	<string name="avoid_in_routing_title">Evitar…</string>
 	<string name="map_widget_fluorescent">Rotas fluorescentes</string>
@@ -919,7 +919,7 @@
     <string name="replace_destination_point">Substituir o destino</string>
     <string name="new_destination_point_dialog">Você já tem o destino definido.</string>
     <string name="target_points">Pontos de parada</string>
-    <string name="show_warnings_descr">Configurar moderadores de tráfego (limites de velocidade, paradas obrigatórias, lombadas), de radar e informações de faixa</string>
+    <string name="show_warnings_descr">Configurar para mostrar moderadores de tráfego (limites de velocidade, paradas obrigatórias, lombadas), radares e faixas de rolamento</string>
 	<string name="intermediate_point_too_far">Ponto de parada %1$s muito longe da via mais próxima.</string>
     <string name="arrived_at_intermediate_point">Você chegou na sua parada</string>
     <string name="context_menu_item_intermediate_point">Adicionar como ponto de parada</string>
@@ -937,7 +937,7 @@
 	<string name="poi_filter_food_shop">Mercearia</string>
 	<string name="poi_filter_for_tourists">Para turistas</string>
 	<string name="poi_filter_fuel">Combustível</string>
-	<string name="show_warnings_title">Mostrar alarmes…</string>
+	<string name="show_warnings_title">Mostrar alertas…</string>
 	<string name="use_compass_navigation_descr">Usar a bússola quando nenhuma direção é detectada</string>
 	
 	<string name="select_animate_speedup">Selecionar velocidade de simulação da rota</string>
@@ -1173,7 +1173,7 @@
 	<string name="voice_is_not_available_title">Nenhuma orientação por voz selecionada</string>
 	<string name="fav_saved_sucessfully">Favoritos salvos em {0}</string>
 	<string name="no_fav_to_save">Nenhum favorito para salvar</string>
-	<string name="layer_osm_bugs">Notas do OSM (on-line)</string>
+	<string name="layer_osm_bugs">Notas no OSM (online)</string>
 	<string name="context_menu_item_search_poi">Pesquisar POI</string>
 	
 	<string name="where_am_i">Onde estou?</string>
@@ -1817,14 +1817,14 @@
     <string name="release_2_2">" • Nova interface do usuário sensível ao contexto, ao tocar locais no mapa ou em outras telas\n\n • Tela do mapa é agora lançada diretamente, a menos que \'Mostrar painel de controle no início\' esteja selecionado\n\n • Configure quais e de que forma os cartões são exibidos no painel de controle\n\n • Desative o painel de controle, se preferir um controle baseado em menus\n\n • Para baixar mapas, as regiões podem ser selecionadas diretamente, tocando no mapa do mundo\n\n • Pesquisa por \'Pontos de interesse\' agora oferece suporte a consultas mais específicas\n\n • Melhoria nos \'Pontos de interesse\' e funcionalidades de edição OSM\n\n • Reformulação de estrutura e de interface para baixa dados de mapa.\n\n e mais... "</string>
     <string name="access_from_map_description">O botão menu lança o painel de controle, não o menu</string>
     <string name="osm_save_offline">Salvar offline</string>
-    <string name="osm_edit_modified_poi">POI do OSM modificado</string>
-    <string name="osm_edit_deleted_poi">POI do OSM apagado</string>
+    <string name="osm_edit_modified_poi">POI no OSM modificado</string>
+    <string name="osm_edit_deleted_poi">POI no OSM apagado</string>
     <string name="context_menu_item_open_note">Abrir nota no OSM</string>
-    <string name="osm_edit_reopened_note">Nota do OSM reaberta</string>
-    <string name="osm_edit_commented_note">Nota do OSM comentada</string>
-    <string name="osm_edit_removed_note">Nota do OSM apagada</string>
-	<string name="osm_edit_created_note">Nota do OSM criada</string>
-	<string name="osn_bug_name">Nota do OSM</string>
+    <string name="osm_edit_reopened_note">Nota no OSM reaberta</string>
+    <string name="osm_edit_commented_note">Nota no OSM comentada</string>
+    <string name="osm_edit_removed_note">Nota no OSM apagada</string>
+	<string name="osm_edit_created_note">Nota no OSM criada</string>
+	<string name="osn_bug_name">Nota no OSM</string>
 	<string name="osn_add_dialog_title">Nota criada</string>
 	<string name="osn_comment_dialog_title">Adicionar comentário</string>
 	<string name="osn_reopen_dialog_title">Reabrir nota</string>
@@ -1844,7 +1844,7 @@
     <string name="lang_als">Albanês (Tosco)</string>
     <string name="read_more">Ler mais</string>
     <string name="whats_new">O que há de novo</string>
-    <string name="rendering_attr_hideProposed_name">Ocultar objetos propostos</string>
+    <string name="rendering_attr_hideProposed_name">Objetos propostos</string>
     <string name="world_map_download_descr">Mapa-base mundial (que abrange o mundo inteiro em pequenos zooms) está faltando ou desatualizado. Por favor, considere baixar o mapa-base mundial para um ambiente completo.</string>
     <string name="map_downloaded_descr">Mapa de %1$s foi baixado. Volte para o mapa para começar a usá-lo.</string>
     <string name="go_to_map">Ir para o mapa</string>
