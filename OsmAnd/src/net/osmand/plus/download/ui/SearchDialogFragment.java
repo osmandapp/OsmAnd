@@ -3,6 +3,7 @@ package net.osmand.plus.download.ui;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
@@ -148,8 +149,9 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		setShowsDialog(true);
-		listView.setBackgroundColor(getResources().getColor(
-				getMyApplication().getSettings().isLightContent() ? R.color.bg_color_light : R.color.bg_color_dark));
+		final boolean isLightContent = getMyApplication().getSettings().isLightContent();
+		final int colorId = isLightContent ? R.color.bg_color_light : R.color.bg_color_dark;
+		listView.setBackgroundColor(ContextCompat.getColor(getActivity(), colorId));
 	}
 
 	@Override
