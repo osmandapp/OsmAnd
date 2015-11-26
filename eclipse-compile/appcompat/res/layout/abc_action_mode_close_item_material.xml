@@ -14,13 +14,13 @@
      limitations under the License.
 -->
 
-<android.support.v7.internal.widget.TintImageView
-             xmlns:android="http://schemas.android.com/apk/res/android"
-             android:id="@+id/action_mode_close_button"
-             android:contentDescription="@string/abc_action_mode_done"
-             android:focusable="true"
-             android:clickable="true"
-             android:src="?attr/actionModeCloseDrawable"
-             style="?attr/actionModeCloseButtonStyle"
-             android:layout_width="wrap_content"
-             android:layout_height="match_parent" />
+<ImageView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/action_mode_close_button"
+        android:contentDescription="@string/abc_action_mode_done"
+        android:focusable="true"
+        android:clickable="true"
+        android:src="?attr/actionModeCloseDrawable"
+        style="?attr/actionModeCloseButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"/>

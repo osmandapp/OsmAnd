@@ -59,6 +59,8 @@
 
     <style name="Base.TextAppearance.AppCompat.Button" parent="android:TextAppearance.Material.Button" />
 
+    <style name="Base.TextAppearance.AppCompat.Widget.Button" parent="android:TextAppearance.Material.Widget.Button" />
+
     <style name="Base.TextAppearance.AppCompat.Widget.Switch" parent="android:TextAppearance.Material.Button" />
 
 </resources>

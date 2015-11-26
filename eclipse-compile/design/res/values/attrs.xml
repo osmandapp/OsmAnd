@@ -18,7 +18,6 @@
 
     <declare-styleable name="FloatingActionButton">
         <!-- Background for the FloatingActionButton -->
-        <attr name="android:background"/>
         <attr name="backgroundTint"/>
         <attr name="backgroundTintMode"/>
 
@@ -51,8 +50,15 @@
         <attr name="itemIconTint" format="color"/>
         <attr name="itemTextColor" format="color"/>
         <attr name="itemBackground" format="reference"/>
+        <attr name="itemTextAppearance" format="reference"/>
         <!-- Layout resource to inflate as the header -->
         <attr name="headerLayout" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="ForegroundLinearLayout">
+        <attr name="android:foreground" />
+        <attr name="android:foregroundGravity" />
+        <attr name="foregroundInsidePadding" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="TabLayout">
@@ -160,6 +166,17 @@
         <attr name="errorEnabled" format="boolean"/>
         <!-- TextAppearance of any error message displayed -->
         <attr name="errorTextAppearance" format="reference"/>
+        <!-- Whether the layout is laid out as if the character counter will be displayed -->
+        <attr name="counterEnabled" format="boolean"/>
+        <!-- The max length to display in the character counter -->
+        <attr name="counterMaxLength" format="integer" />
+        <!-- TextAppearance of the character counter -->
+        <attr name="counterTextAppearance" format="reference"/>
+        <!-- TextAppearance of the character counter when the text is longer than the max -->
+        <attr name="counterOverflowTextAppearance" format="reference"/>
+        <attr name="android:textColorHint"/>
+        <!-- Whether to animate hint state changes. -->
+        <attr name="hintAnimationEnabled" format="boolean"/>
     </declare-styleable>
 
     <declare-styleable name="SnackbarLayout">
@@ -171,6 +188,9 @@
     <declare-styleable name="AppBarLayout">
         <attr name="elevation" />
         <attr name="android:background" />
+        <!-- The initial expanded state for the AppBarLayout. This only takes effect when this
+             view is a direct child of a CoordinatorLayout. -->
+        <attr name="expanded" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="AppBarLayout_LayoutParams">
@@ -194,6 +214,10 @@
                  reached the end of it's scroll range, the remainder of this view will be scrolled
                  into view. -->
             <flag name="enterAlwaysCollapsed" value="0x8"/>
+
+            <!-- Upon a scroll ending, if the view is only partially visible then it will be
+                 snapped and scrolled to it's closest edge. -->
+            <flag name="snap" value="0x10"/>
         </attr>
 
         <!-- An interpolator to use when scrolling this View. Only takes effect when View
@@ -238,6 +262,59 @@
         <!-- The id of the primary Toolbar child that you wish to use for the purpose of collapsing.
              If you do not set this then the first Toolbar child found will be used. -->
         <attr name="toolbarId" format="reference"/>
+
+        <!-- Specifies how the title should be positioned when collapsed. -->
+        <attr name="collapsedTitleGravity">
+            <!-- Push title to the top of its container, not changing its size. -->
+            <flag name="top" value="0x30"/>
+            <!-- Push title to the bottom of its container, not changing its size. -->
+            <flag name="bottom" value="0x50"/>
+            <!-- Push title to the left of its container, not changing its size. -->
+            <flag name="left" value="0x03"/>
+            <!-- Push title to the right of its container, not changing its size. -->
+            <flag name="right" value="0x05"/>
+            <!-- Place title in the vertical center of its container, not changing its size. -->
+            <flag name="center_vertical" value="0x10"/>
+            <!-- Grow the vertical size of the title if needed so it completely fills its container. -->
+            <flag name="fill_vertical" value="0x70"/>
+            <!-- Place title in the horizontal center of its container, not changing its size. -->
+            <flag name="center_horizontal" value="0x01"/>
+            <!-- Place the title in the center of its container in both the vertical and horizontal axis, not changing its size. -->
+            <flag name="center" value="0x11"/>
+            <!-- Push title to the beginning of its container, not changing its size. -->
+            <flag name="start" value="0x00800003"/>
+            <!-- Push title to the end of its container, not changing its size. -->
+            <flag name="end" value="0x00800005"/>
+        </attr>
+
+        <!-- Specifies how the title should be positioned when expanded. -->
+        <attr name="expandedTitleGravity">
+            <!-- Push title to the top of its container, not changing its size. -->
+            <flag name="top" value="0x30"/>
+            <!-- Push title to the bottom of its container, not changing its size. -->
+            <flag name="bottom" value="0x50"/>
+            <!-- Push title to the left of its container, not changing its size. -->
+            <flag name="left" value="0x03"/>
+            <!-- Push title to the right of its container, not changing its size. -->
+            <flag name="right" value="0x05"/>
+            <!-- Place title in the vertical center of its container, not changing its size. -->
+            <flag name="center_vertical" value="0x10"/>
+            <!-- Grow the vertical size of the title if needed so it completely fills its container. -->
+            <flag name="fill_vertical" value="0x70"/>
+            <!-- Place title in the horizontal center of its container, not changing its size. -->
+            <flag name="center_horizontal" value="0x01"/>
+            <!-- Place the title in the center of its container in both the vertical and horizontal axis, not changing its size. -->
+            <flag name="center" value="0x11"/>
+            <!-- Push title to the beginning of its container, not changing its size. -->
+            <flag name="start" value="0x00800003"/>
+            <!-- Push title to the end of its container, not changing its size. -->
+            <flag name="end" value="0x00800005"/>
+        </attr>
+
+        <!-- Whether the CollapsingToolbarLayout should draw its own shrinking/growing title. -->
+        <attr name="titleEnabled" format="boolean"/>
+        <!-- The title to show when titleEnabled is set to true. -->
+        <attr name="title"/>
     </declare-styleable>
 
     <declare-styleable name="CollapsingAppBarLayout_LayoutParams">

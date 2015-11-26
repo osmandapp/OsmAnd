@@ -17,17 +17,22 @@
 
 <!-- Colors specific to Material themes. -->
 <resources>
-    <color name="background_material_dark">#ff303030</color>
-    <color name="background_material_light">#ffeeeeee</color>
-    <color name="background_floating_material_dark">#ff424242</color>
-    <color name="background_floating_material_light">#ffeeeeee</color>
+    <color name="foreground_material_dark">@android:color/white</color>
+    <color name="foreground_material_light">@android:color/black</color>
 
-    <color name="primary_material_dark">#ff212121</color>
-    <color name="primary_material_light">#ffefefef</color>
-    <color name="primary_dark_material_dark">#ff000000</color>
-    <color name="primary_dark_material_light">#ff757575</color>
+    <color name="background_material_dark">@color/material_grey_850</color>
+    <color name="background_material_light">@color/material_grey_50</color>
+    <color name="background_floating_material_dark">@color/material_grey_800</color>
+    <color name="background_floating_material_light">@android:color/white</color>
 
-    <color name="ripple_material_dark">#4dffffff</color>
+    <color name="primary_material_dark">@color/material_grey_900</color>
+    <color name="primary_material_light">@color/material_grey_100</color>
+    <color name="primary_dark_material_dark">@android:color/black</color>
+    <color name="primary_dark_material_light">@color/material_grey_600</color>
+
+    <!-- 20% white (foreground) -->
+    <color name="ripple_material_dark">#33ffffff</color>
+    <!-- 12% black (foreground) -->
     <color name="ripple_material_light">#1f000000</color>
 
     <color name="accent_material_light">@color/material_deep_teal_500</color>
@@ -63,20 +68,25 @@
     <!-- TODO: This is 40% alpha on the default accent color. -->
     <color name="highlighted_text_material_light">#66009688</color>
 
-    <color name="link_text_material_dark">@color/material_deep_teal_200</color>
-    <color name="link_text_material_light">@color/material_deep_teal_500</color>
-
     <!-- Text & foreground colors -->
     <eat-comment />
 
+    <!-- 87% black -->
     <color name="primary_text_default_material_light">#de000000</color>
+    <!-- 54% black -->
     <color name="secondary_text_default_material_light">#8a000000</color>
 
+    <!-- 100% white -->
     <color name="primary_text_default_material_dark">#ffffffff</color>
+    <!-- 70% white -->
     <color name="secondary_text_default_material_dark">#b3ffffff</color>
 
     <item name="disabled_alpha_material_light" format="float" type="dimen">0.26</item>
     <item name="disabled_alpha_material_dark" format="float" type="dimen">0.30</item>
+
+    <item name="highlight_alpha_material_light" format="float" type="dimen">0.12</item>
+    <item name="highlight_alpha_material_dark" format="float" type="dimen">0.20</item>
+    <item name="highlight_alpha_material_colored" format="float" type="dimen">0.26</item>
 
     <!-- 26% of default values -->
     <color name="primary_text_disabled_material_light">#39000000</color>
@@ -88,6 +98,14 @@
 
     <!-- Primary & accent colors -->
     <eat-comment />
+
+    <color name="material_grey_900">#ff212121</color>
+    <color name="material_grey_850">#ff303030</color>
+    <color name="material_grey_800">#ff424242</color>
+    <color name="material_grey_600">#ff757575</color>
+    <color name="material_grey_300">#ffe0e0e0</color>
+    <color name="material_grey_100">#fff5f5f5</color>
+    <color name="material_grey_50">#fffafafa</color>
 
     <color name="material_deep_teal_200">#ff80cbc4</color>
     <color name="material_deep_teal_500">#ff009688</color>

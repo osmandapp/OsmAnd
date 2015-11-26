@@ -20,7 +20,7 @@ This is an optimized layout for a screen, with the minimum set of features
 enabled.
 -->
 
-<android.support.v7.internal.widget.FitWindowsFrameLayout
+<android.support.v7.widget.FitWindowsFrameLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/action_bar_root"
         android:layout_width="match_parent"
@@ -29,11 +29,11 @@ enabled.
 
     <include layout="@layout/abc_screen_content_include" />
 
-    <android.support.v7.internal.widget.ViewStubCompat
+    <android.support.v7.widget.ViewStubCompat
             android:id="@+id/action_mode_bar_stub"
             android:inflatedId="@+id/action_mode_bar"
             android:layout="@layout/abc_action_mode_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-</android.support.v7.internal.widget.FitWindowsFrameLayout>
+</android.support.v7.widget.FitWindowsFrameLayout>
