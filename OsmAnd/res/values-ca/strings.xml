@@ -1775,7 +1775,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">Actualitzeu tot (%1$s MB)</string>
     <string name="free_downloads_used">Baixades gratuïtes realitzades</string>
-    <string name="free_downloads_used_description">Podeu veure quantes baixades gratuïtes heu fet</string>
+    <string name="free_downloads_used_description">Mostra les baixades gratuïtes que ja heu fet</string>
     <string name="simulate_initial_startup_descr">Configura el senyalitzador de primera engegada de l\'aplicació, mantenint la resta de paràmetres sense canvis</string>
     <string name="simulate_initial_startup">Simula l\'engegada inicial de l\'aplicació</string>
     <string name="share_geo">geo:</string>
