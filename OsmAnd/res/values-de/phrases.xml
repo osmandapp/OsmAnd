@@ -319,7 +319,7 @@
 	<string name="poi_motorcycle_parking">Motorradparkplatz</string>
 	<string name="poi_motorcycle">Motorradgeschäft</string>
 	<string name="poi_motorway_junction">Autobahnkreuz</string>
-	<string name="poi_mountain_pass_yes">Passstraße</string>
+	<string name="poi_mountain_pass">Passstraße</string>
 	<string name="poi_sport_multi">Multi-Sport</string>
 	<string name="poi_museum">Museum</string>
 	<string name="poi_musical_instrument">Musikgeschäft</string>
@@ -1029,4 +1029,31 @@
 	<string name="poi_financial">Finanzverwaltung</string>
 	<string name="poi_highway_steps">Treppe</string>
 	<string name="poi_historic_milestone">Meilenstein</string>
+	<string name="poi_doors">Türen</string>
+	<string name="poi_traffic_calming_island">Verkehrsinsel</string>
+	<string name="poi_cooling_tower">Kühlturm</string>
+	<string name="poi_lighting_tower">Leuchtturm</string>
+	<string name="poi_recycling_small_appliances">kleine Geräte</string>
+	<string name="poi_landfill_waste_nuclear">Atommüll</string>
+	<string name="poi_bunker_silo">Silo</string>
+	<string name="poi_paediatrics">Pädiatrie</string>
+
+	<string name="poi_tourism_yes">Tourismus</string>
+	<string name="poi_religion_voodoo">Voodoo Kultstätte</string>
+	<string name="poi_denomination_catholic">katholisch</string>
+	<string name="poi_denomination_baptist">baptistisch</string>
+	<string name="poi_denomination_roman_catholic">Römisch-Katholisch</string>
+	<string name="poi_denomination_orthodox">Orthodox</string>
+	<string name="poi_denomination_lutheran">Lutherrisch</string>
+	<string name="poi_denomination_protestant">Protestantisch</string>
+	<string name="poi_denomination_methodist">Methodistisch</string>
+	<string name="poi_denomination_russian_orthodox">Russisch-Orthodox</string>
+	<string name="poi_denomination_greek_orthodox">Griechisch-Orthodox</string>
+	<string name="poi_denomination_reformed">Reformiert</string>
+	<string name="poi_denomination_seventh_day_adventist">Siebenten-Tags-Adventisten</string>
+	<string name="poi_denomination_new_apostolic">Neuapostolisch</string>
+	<string name="poi_internet_access_yes">Internetzugang: Ja</string>
+	<string name="poi_internet_access_no">Internetzugang: Nein</string>
+
+	<string name="poi_debris">Trümmer</string>
 	</resources>
