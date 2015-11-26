@@ -212,4 +212,6 @@
 
 <string name="poi_temperature">Temperatur</string>
 	<string name="poi_bathing_yes">Bading: ja</string>
-	</resources>
+	<string name="poi_aerialway_length">Lengde</string>
+
+</resources>
