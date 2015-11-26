@@ -14,7 +14,7 @@
      limitations under the License.
 -->
 
-<android.support.v7.internal.view.menu.ExpandedMenuView
+<android.support.v7.view.menu.ExpandedMenuView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/expanded_menu"
         android:layout_width="?attr/panelMenuListWidth"

@@ -1,14 +1,14 @@
 package net.osmand.plus.activities;
 
-
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
+
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 
 public class OsmandActionBarActivity extends AppCompatActivity {
 

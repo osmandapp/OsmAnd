@@ -45,7 +45,7 @@
                     android:src="@null"
                     style="@style/RtlOverlay.Widget.AppCompat.DialogTitle.Icon"/>
 
-            <android.support.v7.internal.widget.DialogTitle
+            <android.support.v7.widget.DialogTitle
                     android:id="@+id/alertTitle"
                     style="?attr/android:windowTitleStyle"
                     android:singleLine="true"
@@ -65,7 +65,14 @@
             android:layout_weight="1"
             android:minHeight="48dp">
 
-        <ScrollView
+        <View android:id="@+id/scrollIndicatorUp"
+              android:visibility="gone"
+              android:layout_width="match_parent"
+              android:layout_height="1dp"
+              android:layout_gravity="top"
+              android:background="?attr/colorControlHighlight"/>
+
+        <android.support.v4.widget.NestedScrollView
                 android:id="@+id/scrollView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -91,7 +98,14 @@
                         android:layout_width="0dp"
                         android:layout_height="@dimen/abc_dialog_padding_top_material"/>
             </LinearLayout>
-        </ScrollView>
+        </android.support.v4.widget.NestedScrollView>
+
+        <View android:id="@+id/scrollIndicatorDown"
+              android:visibility="gone"
+              android:layout_width="match_parent"
+              android:layout_height="1dp"
+              android:layout_gravity="bottom"
+              android:background="?attr/colorControlHighlight"/>
 
     </FrameLayout>
 
@@ -108,41 +122,6 @@
                 android:layout_height="wrap_content"/>
     </FrameLayout>
 
-    <LinearLayout
-            android:id="@+id/buttonPanel"
-            style="?attr/buttonBarStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layoutDirection="locale"
-            android:orientation="horizontal"
-            android:paddingLeft="12dp"
-            android:paddingRight="12dp"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
-            android:gravity="bottom">
+    <include layout="@layout/abc_alert_dialog_button_bar_material" />
 
-        <Button
-                android:id="@android:id/button3"
-                style="?attr/buttonBarNeutralButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-        <android.support.v4.widget.Space
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:visibility="invisible"/>
-
-        <Button
-                android:id="@android:id/button2"
-                style="?attr/buttonBarNegativeButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-        <Button
-                android:id="@android:id/button1"
-                style="?attr/buttonBarPositiveButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-    </LinearLayout>
 </LinearLayout>

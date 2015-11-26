@@ -21,4 +21,8 @@
     <bool name="abc_action_bar_expanded_action_views_exclusive">true</bool>
 
     <bool name="abc_config_showMenuShortcutsWhenKeyboardPresent">false</bool>
+
+    <!-- Whether to allow vertically stacked button bars. This is disabled for
+         configurations with a small (e.g. less than 320dp) screen height. -->
+    <bool name="abc_allow_stacked_button_bar">false</bool>
 </resources>
