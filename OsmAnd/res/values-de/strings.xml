@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="regions">Regionen</string>
 	<string name="region_maps">Regionsweite Karten</string>
@@ -2195,8 +2195,8 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="file_size_in_mb">%.1f MB</string>
     <string name="please_specify_poi_type_only_from_list">"Bitte eine gültige POI-Art auswählen oder überspringen. "</string>
     <string name="share_osm_edits_subject">OSM Bearbeitung mit OsmAnd geteilt</string>
-    <string name="av_locations_descr">GPX Datei mit Positionsknoten</string>
-    <string name="free_downloads_used_description">Du kannst sehen, wie viele freie Downloads du genutzt hast</string>
+    <string name="av_locations_descr">GPX Datei mit Audio/Video-Daten</string>
+    <string name="free_downloads_used_description">Anzeige der genutzten freien Downloads</string>
 
     <string name="shared_string_location">Position</string>
     <string name="hillshade_layer_disabled">Relief deaktiviert</string>
