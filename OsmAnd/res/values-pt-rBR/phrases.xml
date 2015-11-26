@@ -159,7 +159,7 @@
 	<string name="poi_emergency_access_point">Ponto de resgate emergencial</string>
 
 	<string name="poi_ford">Vau</string>
-	<string name="poi_mountain_pass_yes">Passo de montanha</string>
+	<string name="poi_mountain_pass">Passo de montanha</string>
 	<string name="poi_gate">Portão</string>
 	<string name="poi_city_wall">Muralha</string>
 	<string name="poi_lift_gate">Cancela elevatória</string>
@@ -219,7 +219,7 @@
 	<string name="poi_railway_station">Estação ferroviária</string>
 	<string name="poi_railway_platform">Plataforma ferroviária</string>
 	<string name="poi_halt">Parada ferroviária</string>
-	<string name="poi_railway_subway_entrance">Entrada do metrô</string>
+	<string name="poi_subway_entrance">Entrada do metrô</string>
 	<string name="poi_subway_station">Estação de metrô</string>
 	<string name="poi_vacuum_cleaner">Loja de aspiradores de pó</string>
 	<string name="poi_variety_store">Loja de variedades</string>
@@ -1351,7 +1351,7 @@
 
 	<string name="poi_wheelchair_no">Cadeira de rodas: não permitido</string>
 	<string name="poi_wheelchair_limited">Cadeira de rodas: limitado</string>
-	<string name="poi_pump">Bomba</string>
+	<string name="poi_pump_yes">Bomba</string>
 
 	<string name="poi_debris">Escombros</string>
 	<string name="poi_jersey_barrier">Barreira de Nova Jersey</string>

@@ -398,9 +398,9 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents {
 					dashboardOnMap.setDashboardVisibility(true, DashboardOnMap.staticVisibleType);
 				} else {
 					if (ErrorBottomSheetDialog.shouldShow(settings, this)) {
-						new ErrorBottomSheetDialog().show(getFragmentManager(), "dialog");
+						new ErrorBottomSheetDialog().show(getSupportFragmentManager(), "dialog");
 					} else if (RateUsBottomSheetDialog.shouldShow(settings)) {
-						new RateUsBottomSheetDialog().show(getFragmentManager(), "dialog");
+						new RateUsBottomSheetDialog().show(getSupportFragmentManager(), "dialog");
 					}
 				}
 			}

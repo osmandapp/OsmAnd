@@ -14,7 +14,7 @@
      limitations under the License.
 -->
 
-<android.support.v7.internal.widget.ActionBarOverlayLayout
+<android.support.v7.widget.ActionBarOverlayLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/decor_content_parent"
@@ -24,7 +24,7 @@
 
     <include layout="@layout/abc_screen_content_include"/>
 
-    <android.support.v7.internal.widget.ActionBarContainer
+    <android.support.v7.widget.ActionBarContainer
             android:id="@+id/action_bar_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
                 app:navigationContentDescription="@string/abc_action_bar_up_description"
                 style="?attr/toolbarStyle"/>
 
-        <android.support.v7.internal.widget.ActionBarContextView
+        <android.support.v7.widget.ActionBarContextView
                 android:id="@+id/action_context_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -48,6 +48,6 @@
                 android:theme="?attr/actionBarTheme"
                 style="?attr/actionModeStyle"/>
 
-    </android.support.v7.internal.widget.ActionBarContainer>
+    </android.support.v7.widget.ActionBarContainer>
 
-</android.support.v7.internal.widget.ActionBarOverlayLayout>
+</android.support.v7.widget.ActionBarOverlayLayout>

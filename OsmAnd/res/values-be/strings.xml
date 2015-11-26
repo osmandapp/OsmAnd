@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="auto_zoom_none">Без аўтаматычнага маштабаваньня</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="auto_zoom_none">Без аўтаматычнага маштабаваньня</string>
     <string name="auto_zoom_close">Буйней</string>
     <string name="auto_zoom_far">Для сярэдняга маштаба</string>
     <string name="auto_zoom_farthest">Драбней</string>
@@ -65,7 +66,7 @@
     
     <string name="search_street_in_neighborhood_cities">Пошук вуліцы ў суседніх гарадах</string>
     <string name="intermediate_items_sort_return">Прамежкавыя пункты шляху адсартаваныя аптымальным чынам ад бягучага становішча да месца прызначэньня.</string>
-    <string name="intermediate_items_sort_by_distance">Упарадкаваць па адлегласьці</string>
+    <string name="intermediate_items_sort_by_distance">Упарадкаваць ад дзьвярэй да дзьвярэй</string>
     <string name="local_osm_changes_backup_successful">Файл зьмен OSM пасьпяхова створаны ў %1$s</string>
     <string name="local_osm_changes_backup_failed">Збой рэзервовага капіяваньня файлу зьмен OSM</string>
     <string name="local_osm_changes_backup">Рэзервовае капіяваньне файлу зьмен OSM</string>
@@ -1790,7 +1791,7 @@
     <string name="rendering_value_disabled_name">Адключана</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Афарбоўка згодна OSMC</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Афарбоўка згодна з праглядам маршруту</string>
-    <string name="osm_edit_context_menu_delete">Выдаліць праўкі OSM</string>    
+    <string name="osm_edit_context_menu_delete">Выдаліць праўку OSM</string>    
     <string name="read_full_article">Чытаць артыкул цалкам (анлайн)</string>
     
     <string name="local_indexes_cat_wiki">Вікіпэдыя</string>
@@ -1956,7 +1957,7 @@
     <string name="favorite_category_add_new_title">Дадаць новую катэгорыю</string>
     <string name="favorite_category_dublicate_message">Катэгорыя з пазначанай назвай ужо існуе. Калі ласка, падайце іншую назву.</string>
     <string name="confirm_download_roadmaps">Вы ўпэўненыя, што хочаце сьцягнуць мапу аўтадарог, нават калі ў вас ёсць поўная мапа?</string>
-    <string name="value_downloaded_from_max">%1$.1f з %2$.1f Мб</string>
+    <string name="value_downloaded_of_max">%1$.1f з %2$.1f Мб</string>
     <string name="file_size_in_mb">%.1f Мб</string>
     <string name="update_all">Абнавіць усе (%1$s МБ)</string>
     <string name="free_downloads_used">Выкарыстана бясплатных загрузак</string>
@@ -2011,4 +2012,39 @@
     <string name="save_poi_without_poi_type_message">Вы сапраўды хочаце захаваць POI бяз тыпу?</string>
     <string name="share_osm_edits_subject">Рэдагаваньні OSM апублікаваныя праз OsmAnd</string>
     <string name="shared_string_location">Месцазнаходжаньне</string>
+    <string name="copied_to_clipboard">Скапіявана ў буфер абмену</string>
+    <string name="osm_save_offline">Захаваць лякальна</string>
+    <string name="osm_edit_modified_poi">OSM POI адрэдагавана</string>
+    <string name="osm_edit_deleted_poi">OSM POI выдаленая</string>
+    <string name="context_menu_item_open_note">Дадаць нататку OSM</string>
+    <string name="osm_edit_reopened_note">Нататка OSM адкрыта зноў</string>
+    <string name="osm_edit_commented_note">Да нататкі OSM дададзены камэнтар</string>
+    <string name="osm_edit_removed_note">Нататка OSM выдаленая</string>
+	<string name="osm_edit_created_note">Нататка OSM створана</string>
+	<string name="osn_bug_name">Нататка OSM</string>
+	<string name="osn_add_dialog_title">Стварыць нататку</string>
+	<string name="osn_comment_dialog_title">Дадаць камэнтар</string>
+	<string name="osn_reopen_dialog_title">Паўторна адкрыць нататку</string>
+	<string name="osn_close_dialog_title">Закрыць нататку</string>
+	<string name="osn_add_dialog_success">Нататка пасьпяхова створана</string>
+	<string name="osn_add_dialog_error">Памылка: нататка не была створана</string>
+	<string name="osn_close_dialog_success">Нататка была пасьпяхова зачынена</string>
+	<string name="osn_close_dialog_error">Памылка: нататка ня была зачынена</string>
+	<string name="shared_string_commit">Адаслаць</string>
+	
+    <string name="rendering_attr_roadStyle_description">Стыль адлюстраваньня дарог</string>
+    <string name="poi_context_menu_modify_osm_change">Рэдагаваць POI</string>
+    <string name="rendering_attr_currentTrackWidth_description">Шырыня сьледу GPX</string>
+    <string name="rendering_attr_currentTrackColor_description">Колер сьледу GPX</string>
+    <string name="poi_dialog_reopen">Пераадкрыць</string>
+	<string name="use_drawer_btn">Выкарыстоўваць мэню</string>
+    <string name="access_from_map_description">Кнопка Мэню паказвае панэль кіраваньня, а не мэню</string>
+    <string name="access_from_map">Доступ з мапы</string>
+    <string name="context_menu_item_delete_waypoint">Выдаліць шляхавую кропку GPX?</string>
+    <string name="context_menu_item_edit_waypoint">Правіць кропку шляху GPX</string>
+    <string name="routing_attr_avoid_stairs_name">Пазьбягаць лесьвіц</string>
+	<string name="routing_attr_avoid_stairs_description">Пазьбягаць лесьвіц</string>
+	<string name="routing_attr_avoid_borders_name">Пазьбягаць перасячэньня мяжы</string>
+	<string name="use_dashboard_btn">Выкарыстоўваць панэль кіраваньня</string>
+    <string name="dashboard_or_drawer_title">Панэль кіраваньня ці мэню</string>
     </resources>

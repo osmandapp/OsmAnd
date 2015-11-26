@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
   
   <string name="layer_map_appearance">Configureer scherm</string>
   <string name="show_lanes">Toon rijstroken</string>
@@ -2161,7 +2162,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="later">Later</string>
     <string name="downloads">Downloads</string>
     <string name="confirm_download_roadmaps">U heeft de volledige kaart al. Wilt u echt de kaart met alleen wegen downloaden?</string>
-    <string name="value_downloaded_from_max">%1$.1f van %2$.1f MB</string>
+    <string name="value_downloaded_of_max">%1$.1f van %2$.1f MB</string>
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">Alles updaten (%1$s MB)</string>
     <string name="free_downloads_used">Gebruikte gratis downloads</string>
@@ -2213,13 +2214,13 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="osn_close_dialog_title">Sluit notitie</string>
 	<string name="osn_add_dialog_success">Notitie aangemaakt</string>
 	<string name="osn_add_dialog_error">Er was een probleem: notitie niet aangemaakt</string>
-	<string name="osn_close_dialog_success">Bug is gesloten</string>
+	<string name="osn_close_dialog_success">Notitie is gesloten</string>
 	<string name="osn_close_dialog_error">Er was een probleem: notitie is niet afgesloten</string>
 	<string name="osm_save_offline">Bewaar voor off-line gebruik</string>
     
-    <string name="dashboard_or_drawer_description">U kunt kiezen tussen het dashboard of het uitklapmenu. Via de instellingen kunt u dit altijd wijzigen.</string>
+    <string name="dashboard_or_drawer_description">Kies tussen het flexibele dashboard of een vast menu. Dit is altijd te wijzigen via de dashboard-instellingen.</string>
     <string name="copied_to_clipboard">Gekopieerd naar klembord</string>
-    <string name="release_2_2">" • Nieuw contextmenu bij het aantikken van plekken op de kaart en op andere schermen\n\n • De kaart wordt direct getoond, tenzij \'Toon dashboard bij starten van de app\' is gekozen\n\n • Kies welke kaarten worden getoond op het dashboard\n\n • Kaarten downloaden door op de wereldkaart te tikken\n\n • Fijnmaziger zoeken van POI\n\n • Betere bewerkingsmogelijkheden van POI en OSM\n\n • Kaarten downloaden is makkelijker en overzichtelijker\n\n en meer... "</string>
+    <string name="release_2_2">" • Nieuw contextmenu bij het aantikken van plekken op de kaart en op andere schermen\n\n • De kaart wordt direct getoond, tenzij \'Toon dashboard bij starten van de app\' is gekozen\n\n • Kies welke kaarten worden getoond op het dashboard\n\n • Mogelijkheid menu te grbuiken in plaats van het dashboard\n\n • Kaarten downloaden door op de wereldkaart te tikken\n\n • Fijnmaziger zoeken van POI\n\n • Betere bewerkingsmogelijkheden van POI en OSM\n\n • Kaarten downloaden is makkelijker en overzichtelijker\n\n en meer... "</string>
     <string name="shared_string_commit">Verstuur</string>
 	
     <string name="context_menu_item_delete_waypoint">GPX routepunt wissen?</string>
@@ -2234,5 +2235,10 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="save_poi_without_poi_type_message">Deze POI echt bewaren zonder het type aan te geven?</string>
     <string name="poi_context_menu_modify_osm_change">Verander OSM-wijziging</string>
     
-    <string name="dashboard_or_drawer_title">Nieuw menu</string>
+    <string name="dashboard_or_drawer_title">Kies tussen dashboard of menu</string>
+    <string name="please_specify_poi_type_only_from_list">"Geef een correct type POI of sla dit over "</string>
+    <string name="access_from_map_description">Menu-knop toont dashboard in plaats van menu</string>
+    <string name="access_from_map">Toegang vanaf kaart</string>
+    <string name="use_dashboard_btn">Gebruik dashboard</string>
+    <string name="use_drawer_btn">Gebruik menu</string>
     </resources>

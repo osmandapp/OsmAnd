@@ -108,7 +108,7 @@
 <string name="poi_emergency_access_point">نقطه دسترسی اضطراری</string>
 
 <string name="poi_ford">فورد</string>
-<string name="poi_mountain_pass_yes">ایستگاه کوهستانی</string>
+<string name="poi_mountain_pass">ایستگاه کوهستانی</string>
 <string name="poi_gate">دروازه</string>
 <string name="poi_city_wall">دیوار شهرستان</string>
 <string name="poi_lift_gate">دروازه آسانسور</string>
@@ -147,7 +147,7 @@
 <string name="poi_railway_station">ایستگاه راه آهن (منسوخ)</string>
 <string name="poi_railway_platform">پلت فرم راه آهن (منسوخ)</string>
 <string name="poi_halt">ایستگاه راه آهن (منسوخ)</string>
-<string name="poi_railway_subway_entrance">ورودی مترو</string>
+<string name="poi_subway_entrance">ورودی مترو</string>
 <string name="poi_subway_station">ایستگاه مترو</string>
 <string name="poi_taxi">ایستگاه تاکسی</string>
 

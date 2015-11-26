@@ -81,7 +81,6 @@ public class RouteDataObject {
 						return names.get(k);
 					}
 				}
- 				
 			}
 			return names.get(region.nameTypeRule);
 		}

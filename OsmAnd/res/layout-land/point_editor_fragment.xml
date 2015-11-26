@@ -2,9 +2,9 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
              xmlns:app="http://schemas.android.com/apk/res-auto"
              android:id="@+id/point_edit_layout"
-             android:layout_width="350dp"
+             android:layout_width="366dp"
              android:layout_height="match_parent"
-             android:background="@android:color/transparent">
+             android:background="?attr/left_menu_view_bg">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -29,6 +29,14 @@
                 android:layout_gravity="right"
                 android:background="@android:color/transparent"
                 android:src="@drawable/ic_action_delete_dark"/>
+
+            <ImageButton
+                android:id="@+id/ok_button"
+                android:layout_width="?attr/actionBarSize"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_action_done"/>
 
             <Button
                 android:id="@+id/save_button"
@@ -78,7 +86,7 @@
                             android:id="@+id/button_replace"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="?android:selectableItemBackground"
+                            android:background="?attr/selectableItemBackground"
                             android:textColor="?attr/contextMenuButtonColor"
                             android:text="@string/update_existing"
                             android:visibility="gone"/>

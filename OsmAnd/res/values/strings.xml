@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    
+    <string name="please_specify_poi_type_only_from_list">Please specify correct POI type or skip it. </string>
     <string name="access_from_map_description">Menu button launches dashboard, not menu</string>
     <string name="access_from_map">Access from map</string>
     <string name="show_on_start_description">\'Off\' directly launches the map screen</string>
@@ -779,6 +781,9 @@
 	<string name="routing_attr_avoid_ferries_description">Avoid ferries</string>
 	<string name="routing_attr_avoid_motorway_name">Avoid motorways</string>
 	<string name="routing_attr_avoid_motorway_description">Avoid motorways</string>
+	<string name="routing_attr_avoid_stairs_name">Avoid stairs</string>
+	<string name="routing_attr_avoid_stairs_description">Avoid stairs</string>
+	<string name="routing_attr_avoid_borders_name">Avoid border crossing</string>
 	<string name="routing_attr_avoid_borders_description">Avoid crossing a border into another country</string>
 	<string name="routing_attr_weight_name">Weight limit</string>
 	<string name="routing_attr_weight_description">Specify vehicle weight to be permitted on routes</string>
@@ -1691,7 +1696,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="osmand_net_previously_installed">A previous OsmAnd version is installed. All offline data will be supported by the new application. But Favorite points should be exported in the old application and later imported by the new one.</string>
 	<string name="build_installed">Build {0} successfully installed ({1}).</string>
 	<string name="downloading_build">Downloading build…</string>
-	<string name="install_selected_build">Do you want to install OsmAnd - {0} from {1} {2} MB ?</string>
+	<string name="install_selected_build">Do you want to install OsmAnd - {0} of {1} {2} MB ?</string>
 	<string name="loading_builds_failed">Retrieving the list of OsmAnd builds failed</string>
 	<string name="loading_builds">Loading OsmAnd builds…</string>
 	<string name="select_build_to_install">Select an OsmAnd build to install</string>
@@ -2060,8 +2065,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="later">Later</string>
     <string name="get_full_version">Full version</string>
     <string name="downloads">Downloads</string>
-    <string name="confirm_download_roadmaps">Are you sure you want to download map of roads, even though you have full map?</string>
-    <string name="value_downloaded_from_max">%1$.1f from %2$.1f MB</string>
+    <string name="confirm_download_roadmaps">Are you sure you want to download the roads-only map, even though you already have the standard (full) map?</string>
+    <string name="value_downloaded_of_max">%1$.1f of %2$.1f MB</string>
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">Update all (%1$s MB)</string>
     <string name="free_downloads_used">Free downloads used</string>

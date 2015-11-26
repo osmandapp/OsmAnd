@@ -92,7 +92,7 @@
 	<string name="poi_emergency_access_point">Logu de intrada de emergèntzia</string>
 
 	<string name="poi_ford">Badu</string>
-	<string name="poi_mountain_pass_yes">Coladòrgiu montanu</string>
+	<string name="poi_mountain_pass">Coladòrgiu montanu</string>
 	<string name="poi_gate">Ponte</string>
 	<string name="poi_city_wall">Murallas de sa tzitade</string>
 	<string name="poi_lift_gate">Ponte levatòiu</string>
@@ -120,7 +120,7 @@
 	<string name="poi_bus_station">Istatzione bus</string>
 	<string name="poi_railway_station">Istatzione de sos trenos</string>
 	<string name="poi_railway_platform">Piattaredda ferroviària</string>
-	<string name="poi_railway_subway_entrance">Intrada de sa metropolitana</string>
+	<string name="poi_subway_entrance">Intrada de sa metropolitana</string>
 	<string name="poi_subway_station">Istatzione de sa metropolitana</string>
 	<string name="poi_taxi">Postèggiu de sos taxi</string>
 
@@ -527,7 +527,7 @@
 	<string name="poi_cape">Ispuntone/promontòriu</string>
 	<string name="poi_reef">Costera</string>
 	<string name="poi_anchorage">Ancoràggiu</string>
-	<string name="poi_beacon">Faru/fogu de sinnalatzione</string>
+	<string name="poi_beacon">Sinnale marinu</string>
 	<string name="poi_berth">Atracu</string>
 	<string name="poi_dyke">Àrgine</string>
 	<string name="poi_floating_dock">Pontinu gallegiante</string>
@@ -921,7 +921,7 @@
 
 	<string name="poi_landfill_waste_nuclear">Arga nucleare</string>
 	<string name="poi_allotments">Giardinos familiares</string>
-	<string name="poi_basin">Bacinu</string>
+	<string name="poi_basin">Batzinu</string>
 	<string name="poi_monitoring_station">Istatzione de cuntrollu</string>
 	<string name="poi_brownfield">Terrinu abbandonadu</string>
 	<string name="poi_greenfield">Terrinu egadu</string>
@@ -1090,7 +1090,7 @@
 	<string name="poi_internet_access_yes">Atzessu a ìnternet: eja</string>
 	<string name="poi_internet_access_no">Atzessu a ìnternet: nono</string>
 
-	<string name="poi_seamark_building">Edifìtziu nàutico</string>
+	<string name="poi_seamark_building">Edifìtziu nàuticu</string>
 	<string name="poi_seamark_bridge">Ponte nàuticu</string>
 	<string name="poi_highway_crossing">Coladòrgiu pedonale</string>
 
@@ -1296,7 +1296,7 @@
 	<string name="poi_pump_manual">Pompa manuale</string>
 	<string name="poi_pump_powered">Pompa automàtica</string>
 	<string name="poi_pump_no">Chene pompa</string>
-	<string name="poi_pump">Pompa</string>
+	<string name="poi_pump_yes">Pompa</string>
 
 	<string name="poi_building">Edifìtziu</string>
 	<string name="poi_information_guidepost">Indicadore istradale</string>
@@ -1547,7 +1547,7 @@
 	<string name="poi_aerialway_summer_access_exit">Atzessu in s\'istiu: essida ebbia</string>
 	<string name="poi_aerialway_summer_access_both">Atzessu in s\'istiu: intrada e essida</string>
 
-	<string name="poi_railway_crossing">Coladòrgiu a livellu</string>
+	<string name="poi_railway_crossing">Coladòrgiu pedonale a livellu</string>
 	<string name="poi_historic_yes">Ogetu istòricu</string>
 	<string name="poi_surveillance_yes">Bardiamentu: eja</string>
 	<string name="poi_shop_yes">Cun butega</string>
@@ -1708,4 +1708,151 @@
 	<string name="poi_fireworks">Butega de fogos de artifìtziu</string>
 
 <string name="poi_craft_electronics">Acontzadura de eletrodomèsticos</string>
+	<string name="poi_sewing">Mertzeria</string>
+	<string name="poi_craft_carpenter">Mastru de carros (carpentiere)</string>
+	<string name="poi_funeral_directors">Pompas fùnebres</string>
+	<string name="poi_dock">Dársena</string>
+	<string name="poi_rapids">Tràinos</string>
+	<string name="poi_strait">Astrintura</string>
+	<string name="poi_anchor_berth">Logu de ancoràgiu</string>
+	<string name="poi_beacon_cardinal">Sinnale cardinale</string>
+	<string name="poi_beacon_lateral">Sinnale laterale</string>
+	<string name="poi_beacon_safe_water">Sinnale de abbas seguras</string>
+	<string name="poi_beacon_special_purpose">Sinnale ispetziale</string>
+	<string name="poi_buoy_cardinal">Boa cardinale</string>
+	<string name="poi_buoy_installation">Boa de càrrigu e iscàrrigu</string>
+	<string name="poi_buoy_isolated_danger">Boa de perìgulu isuladu</string>
+	<string name="poi_buoy_lateral">Boa laterale</string>
+	<string name="poi_buoy_safe_water">Boa de abbas seguras</string>
+	<string name="poi_buoy_special_purpose">Boa ispetziale</string>
+	<string name="poi_daymark">Sinnale diurnu</string>
+	<string name="poi_distance_mark">Sinnale de distàntzia</string>
+	<string name="poi_dry_dock">Batzinu de carenàgiu</string>
+	<string name="poi_harbour_basin">Batzinu portuale</string>
+	<string name="poi_full_height_turnstile">Tornellu a tota artària</string>
+	<string name="poi_bump_gate">Cantzellu a corfu</string>
+	<string name="poi_stile">Iscalita</string>
+	<string name="poi_debris">Carràrgiu</string>
+	<string name="poi_jersey_barrier">Blocos prefabricados (jersey barrier)</string>
+	<string name="poi_horse_stile">Iscalita pro caddos</string>
+	<string name="poi_kissing_gate">Cantzellu \"a zigzag\" o \"a V\"</string>
+	<string name="poi_sally_port">Barriera coberta cun ghenna dòpia</string>
+	<string name="poi_swing_gate">Cantzellu girèvole</string>
+	<string name="poi_kent_carriage_gap">Coladòrgiu pro carros a caddu</string>
+	<string name="poi_commercial">Àrea de ufìtzios cummertziales</string>
+	<string name="poi_retail">Àrea de cummèrtziu</string>
+
+	<string name="poi_rescue_station">Istatzione de sarvamentu</string>
+
+	<string name="poi_mini_roundabout">Mini rutunda</string>
+	<string name="poi_railway_level_crossing">Coladòrgiu a livellu</string>
+	<string name="poi_bird_hide">Logu pro abbaidare pugiones</string>
+	<string name="poi_horse_riding">Ecuitatzione</string>
+	<string name="poi_leisure_common">Logu comune pro su tempus lìberu</string>
+	<string name="poi_passing_place">Logu de coladòrgiu</string>
+	<string name="poi_dead_wood">Linna morta</string>
+
+	<string name="poi_stars_1s">Isteddas: 1S (turista superiore)</string>
+	<string name="poi_stars_2">Isteddas: 2 (istandard)</string>
+	<string name="poi_stars_2s">Isteddas: 2S (istandard superiore)</string>
+	<string name="poi_stars_3">Isteddas: 3 (discansosu)</string>
+	<string name="poi_stars_3s">Isteddas: 3S (discansu superiore)</string>
+	<string name="poi_stars_4">Isteddas: 4 (prima classe)</string>
+	<string name="poi_stars_4s">Isteddas: 4S (prima classe superiore)</string>
+	<string name="poi_stars_5">Isteddas: 5 (lussu)</string>
+	<string name="poi_stars_5s">Isteddas: 5S (lussu superiore)</string>
+	<string name="poi_stars_6">Isteddas: 6</string>
+	<string name="poi_stars_7">Isteddas: 7</string>
+	<string name="poi_rooms">Aposentos</string>
+
+	<string name="poi_love_hotel">Albergu de s’amore</string>
+
+	<string name="poi_payment_coins_yes">Atzetat monedas</string>
+	<string name="poi_payment_coins_no">No atzetat monedas</string>
+	<string name="poi_payment_coins_0.5">Atzetat monedas de $0.5</string>
+	<string name="poi_payment_coins_50c12">Atzetat monedas de 50 cent, 1€ e 2€</string>
+	<string name="poi_payment_telephone_cards_yes">Atzetat cartas telefònicas</string>
+	<string name="poi_payment_telephone_cards_no">No atzetat cartas telefònicas</string>
+	<string name="poi_payment_credit_cards_yes">Atzetat cartas de crèditu</string>
+	<string name="poi_payment_credit_cards_no">No atzetat cartas de crèditu</string>
+	<string name="poi_payment_notes_yes">Atzetat banconotas</string>
+	<string name="poi_payment_notes_no">No atzetat banconotas</string>
+	<string name="poi_payment_bitcoin_yes">Atzetat Bitcoin</string>
+	<string name="poi_payment_bitcoin_no">No atzetat Bitcoin</string>
+	<string name="poi_payment_visa_yes">Atzetat cartas Visa</string>
+	<string name="poi_payment_visa_no">No atzetat cartas Visa</string>
+	<string name="poi_payment_mastercard_yes">Atzetat cartas MasterCard</string>
+	<string name="poi_payment_mastercard_no">No atzetat cartas MasterCard</string>
+	<string name="poi_payment_none">De badas</string>
+	<string name="poi_seats">Banchinas</string>
+	<string name="poi_backrest_yes">Ischinale: eja</string>
+	<string name="poi_backrest_no">Ischinale: nono</string>
+
+	<string name="poi_intermittent">Intermittente</string>
+
+	<string name="poi_deadlock">Puntu mortu (deadlock)</string>
+
+	<string name="poi_information_trail_blaze">Marcadura de sas camineras</string>
+	<string name="poi_piste_grooming_classic">Ammaniamentu pista: clàssicu</string>
+	<string name="poi_piste_grooming_classic_skating">Ammaniamentu pista: clàssicu + patinàgiu</string>
+	<string name="poi_piste_grooming_backcountry">Ammaniamentu pista: fora de pista</string>
+	<string name="poi_piste_grooming_scooter">Ammaniamentu pista: motoreta (scooter)</string>
+	<string name="poi_piste_grooming_skating">Ammaniamentu pista: patinàgiu</string>
+	<string name="poi_piste_grooming_no">Ammaniamentu pista: perunu</string>
+	<string name="poi_piste_grooming_mogul">Ammaniamentu pista: tzumbas/gobbas</string>
+
+	<string name="poi_stars_1">Isteddas: 1 (turista)</string>
+	<string name="poi_payment_cash_yes">Atzetat dinare contante</string>
+	<string name="poi_payment_cash_no">No atzetat dinare contante</string>
+	<string name="poi_payment_debit_cards_yes">Atzetat cartas de dèpidu</string>
+	<string name="poi_payment_debit_cards_no">No atzetat cartas de dèpidu</string>
+	<string name="poi_payment_account_cards_yes">Atzetat cartas de contu</string>
+	<string name="poi_payment_account_cards_no">No atzetat cartas de contu</string>
+	<string name="poi_payment_maestro_yes">Atzetat cartas Maestro</string>
+	<string name="poi_payment_maestro_no">No atzetat cartas Maestro</string>
+	<string name="poi_payment_american_express_yes">Atzetat cartas American Express (AMEX)</string>
+	<string name="poi_payment_american_express_no">No atzetat cartas American Express (AMEX)</string>
+	<string name="poi_payment_diners_club_yes">Atzetat cartas Diners Club</string>
+	<string name="poi_payment_diners_club_no">No atzetat cartas Diners Club</string>
+	<string name="poi_payment_dkv_yes">Atzetat cartas DKV</string>
+	<string name="poi_payment_dkv_no">No atzetat cartas DKV</string>
+	<string name="poi_payment_uta_yes">Atzetat cartas UTA</string>
+	<string name="poi_payment_uta_no">No atzetat cartas UTA</string>
+	<string name="poi_payment_efectivo_yes">Atzetat \"efectivo\"</string>
+	<string name="poi_payment_efectivo_no">No atzetat \"efectivo\"</string>
+	<string name="poi_payment_girocard_yes">Atzetat cartas Girocard</string>
+	<string name="poi_payment_girocard_no">No atzetat cartas Girocard</string>
+	<string name="poi_payment_discover_card_yes">Atzetat cartas Discover Card</string>
+	<string name="poi_payment_discover_card_no">No atzetat cartas Discover Card</string>
+	<string name="poi_payment_visa_electron_yes">Atzetat cartas Visa Electron</string>
+	<string name="poi_payment_visa_electron_no">No atzetat cartas Visa Electron</string>
+	<string name="poi_payment_litecoin_yes">Atzetat Litecoin</string>
+	<string name="poi_payment_litecoin_no">No atzetat Litecoin</string>
+	<string name="poi_payment_cheque_yes">Atzetat assegnos</string>
+	<string name="poi_payment_cheque_no">No atzetat assegnos</string>
+	<string name="poi_payment_pikepass_yes">Atzetat PIKEPASS</string>
+	<string name="poi_payment_pikepass_no">No atzetat PIKEPASS</string>
+	<string name="poi_payment_pikepass_designated">Atzetat PIKEPASS (desinnadu)</string>
+	<string name="poi_payment_visa_debit_yes">Atzetat cartas Visa Debit</string>
+	<string name="poi_payment_visa_debit_no">No atzetat cartas Visa Debit</string>
+	<string name="poi_payment_cryptocurrencies_no">No atzetat criptomonedas</string>
+	<string name="poi_payment_others_yes">Atzetat àteras maneras de pagamentu</string>
+	<string name="poi_payment_others_no">No atzetat àteras maneras de pagamentu</string>
+	<string name="poi_payment_routex_yes">Atzetat cartas Routex pro su combustìbile</string>
+	<string name="poi_payment_routex_no">No atzetat cartas Routex pro su combustìbile</string>
+	<string name="poi_payment_bancomat_yes">Atzetat cartas Bàncomat</string>
+	<string name="poi_payment_bancomat_no">No atzetat cartas Bàncomat</string>
+	<string name="poi_payment_dogecoin_yes">Atzetat Dogecoins</string>
+	<string name="poi_payment_dogecoin_no">No atzetat Dogecoins</string>
+	<string name="poi_payment_paypal_yes">Atzetat PayPal</string>
+	<string name="poi_payment_paypal_no">No atzetat PayPal</string>
+	<string name="poi_payment_yandexmoney_yes">Atzetat Yandex.Money</string>
+	<string name="poi_payment_yandexmoney_no">No atzetat Yandex.Money</string>
+	<string name="poi_description_payment">Informatziones de pagamentu</string>
+
+	<string name="poi_internet_access_fee_yes">Atzessu a ìnternet - a pagamentu</string>
+	<string name="poi_internet_access_fee_no">Atzessu a ìnternet - de badas</string>
+
+	<string name="poi_payment_laser_yes">Atzetat cartas Laser</string>
+	<string name="poi_payment_laser_no">No atzetat cartas Laser</string>
 	</resources>

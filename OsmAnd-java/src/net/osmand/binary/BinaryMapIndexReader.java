@@ -1950,7 +1950,7 @@ public class BinaryMapIndexReader {
 
 	
 	private static boolean testMapSearch = false;
-	private static boolean testAddressSearch = true;
+	private static boolean testAddressSearch = false;
 	private static boolean testPoiSearch = true;
 	private static boolean testPoiSearchOnPath = false;
 	private static boolean testTransportSearch = false;
@@ -1965,7 +1965,7 @@ public class BinaryMapIndexReader {
 	}
 	
 	public static void main(String[] args) throws IOException {
-		File fl = new File("/Users/victorshcherb/osmand/osm-gen/map.obf");
+		File fl = new File("/Users/victorshcherb/osmand/maps/Synthetic_test_rendering.obf");
 		RandomAccessFile raf = new RandomAccessFile(fl, "r");
 		
 		BinaryMapIndexReader reader = new BinaryMapIndexReader(raf, fl);
@@ -2109,7 +2109,7 @@ public class BinaryMapIndexReader {
 
 	private static void testPoiSearchByName(BinaryMapIndexReader reader) throws IOException {
 		println("Searching by name...");
-		SearchRequest<Amenity> req = buildSearchPoiRequest(0, 0, "кие",  
+		SearchRequest<Amenity> req = buildSearchPoiRequest(0, 0, "aBS",  
 				0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, null);
 		reader.searchPoiByName(req);
 		for (Amenity a : req.getSearchResults()) {

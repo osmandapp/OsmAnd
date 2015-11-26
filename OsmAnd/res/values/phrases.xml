@@ -183,7 +183,7 @@
 
 	<string name="poi_ford">Ford</string>
 	<string name="poi_ford_stepping_stones">Step-stone bridge</string>
-	<string name="poi_mountain_pass_yes">Mountain pass</string>
+	<string name="poi_mountain_pass">Mountain pass</string>
 	<string name="poi_gate">Gate</string>
 	<string name="poi_city_wall">City wall</string>
 	<string name="poi_lift_gate">Lift gate</string>
@@ -247,7 +247,7 @@
 	<string name="poi_railway_station">Railway station</string>
 	<string name="poi_railway_platform">Railway platform</string>
 	<string name="poi_halt">Railway stop</string>
-	<string name="poi_railway_subway_entrance">Subway entrance</string>
+	<string name="poi_subway_entrance">Subway entrance</string>
 	<string name="poi_subway_station">Subway station</string>
 	<string name="poi_railway_buffer_stop">Railway buffer stop</string>
 	<string name="poi_taxi">Taxi stand</string>
@@ -1253,7 +1253,7 @@
 	<string name="poi_pump_manual">Manual pump</string>
 	<string name="poi_pump_powered">Powered pump</string>
 	<string name="poi_pump_no">No pump</string>
-	<string name="poi_pump">Pump</string>
+	<string name="poi_pump_yes">Pump</string>
 
 	<string name="poi_water_characteristic_mineral">Water characteristic: mineral</string>
 	<string name="poi_water_characteristic_mud">Water characteristic: mud</string>
@@ -1804,7 +1804,8 @@
 	<string name="poi_internet_access_type_wired">Internet access type: wired</string>
 	<string name="poi_internet_access_type_public">Internet access type: public</string>
 	<string name="poi_internet_access_type_service">Internet access type: service</string>
-	<string name="poi_internet_access_type_no">Internet access type: no</string>
+	<string name="poi_internet_access_type_no">No Internet access</string>
+	<string name="poi_internet_access_type_yes">With Internet access</string>
 
 	<string name="poi_maxwidth">Maximum width</string>
 	<string name="poi_iata">IATA code</string>
@@ -2004,8 +2005,8 @@
 
 	<string name="poi_fuel_91ul">91UL fuel</string>
 	<string name="poi_fuel_100ll">100LL fuel</string>
-	<string name="poi_autogas">Autogas</string>
-	<string name="poi_jeta1">Jet A-1 fuel</string>
+	<string name="poi_fuel_autogas">Autogas</string>
+	<string name="poi_fuel_jeta1">Jet A-1 fuel</string>
 	<string name="poi_fuel_adblue">AdBlue fuel</string>
 
 	<string name="poi_fuel_wood">Fuel: wood</string>
@@ -2457,5 +2458,7 @@
 
 	<string name="poi_craft_electronics">Electronics repair</string>
 	<string name="poi_fireworks">Fireworks store</string>
+
+	<string name="poi_aerialway_length">Length</string>
 
 </resources>

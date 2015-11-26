@@ -239,6 +239,9 @@
         <!-- EditText background drawable. -->
         <attr name="editTextBackground" format="reference" />
 
+        <!-- ImageButton background drawable. -->
+        <attr name="imageButtonStyle" format="reference" />
+
         <!-- ============================ -->
         <!-- SearchView styles and assets -->
         <!-- ============================ -->
@@ -325,6 +328,9 @@
         <!-- The color applied to framework switch thumbs in their normal state. -->
         <attr name="colorSwitchThumbNormal" format="color" />
 
+        <!-- The background used by framework controls. -->
+        <attr name="controlBackground" format="reference" />
+
         <!-- ============ -->
         <!-- Alert Dialog styles -->
         <!-- ============ -->
@@ -368,6 +374,8 @@
         <attr name="radioButtonStyle" format="reference" />
         <!-- Default RatingBar style. -->
         <attr name="ratingBarStyle" format="reference" />
+        <!-- Default SeekBar style. -->
+        <attr name="seekBarStyle" format="reference" />
         <!-- Default Spinner style. -->
         <attr name="spinnerStyle" format="reference" />
         <!-- Default style for the Switch widget. -->
@@ -492,7 +500,6 @@
         <attr name="paddingStart" format="dimension"/>
         <!-- Sets the padding, in pixels, of the end edge; see {@link android.R.attr#padding}. -->
         <attr name="paddingEnd" format="dimension"/>
-
         <!-- Boolean that controls whether a view can take focus.  By default the user can not
              move focus to a view; by setting this attribute to true the view is
              allowed to take focus.  This value does not impact the behavior of
@@ -500,15 +507,16 @@
              always request focus regardless of this view.  It only impacts where
              focus navigation will try to move focus. -->
         <attr name="android:focusable" />
-
         <!-- Deprecated. -->
         <attr name="theme" format="reference" />
-
         <!-- Specifies a theme override for a view. When a theme override is set, the
              view will be inflated using a {@link android.content.Context} themed with
              the specified resource. -->
         <attr name="android:theme" />
+    </declare-styleable>
 
+    <declare-styleable name="ViewBackgroundHelper">
+        <attr name="android:background" />
         <!-- Tint to apply to the background. -->
         <attr name="backgroundTint" format="color" />
 
@@ -671,37 +679,13 @@
 
     <declare-styleable name="Spinner">
         <!-- The prompt to display when the spinner's dialog is shown. -->
-        <attr name="prompt" format="reference" />
-        <!-- Display mode for spinner options. -->
-        <attr name="spinnerMode" format="enum">
-            <!-- Spinner options will be presented to the user as a dialog window. -->
-            <enum name="dialog" value="0" />
-            <!-- Spinner options will be presented to the user as an inline dropdown
-                 anchored to the spinner widget itself. -->
-            <enum name="dropdown" value="1" />
-        </attr>
-        <!-- List selector to use for spinnerMode="dropdown" display. -->
-        <attr name="android:dropDownSelector" />
+        <attr name="android:prompt" />
+        <!-- Theme to use for the drop-down or dialog popup window. -->
+        <attr name="popupTheme" />
         <!-- Background drawable to use for the dropdown in spinnerMode="dropdown". -->
         <attr name="android:popupBackground" />
-        <!-- Vertical offset from the spinner widget for positioning the dropdown in
-             spinnerMode="dropdown". -->
-        <attr name="android:dropDownVerticalOffset" />
-        <!-- Horizontal offset from the spinner widget for positioning the dropdown
-             in spinnerMode="dropdown". -->
-        <attr name="android:dropDownHorizontalOffset" />
         <!-- Width of the dropdown in spinnerMode="dropdown". -->
         <attr name="android:dropDownWidth" />
-        <!-- Reference to a layout to use for displaying a prompt in the dropdown for
-             spinnerMode="dropdown". This layout must contain a TextView with the id
-             {@code @android:id/text1} to be populated with the prompt text. -->
-        <attr name="popupPromptView" format="reference" />
-        <!-- Gravity setting for positioning the currently selected item. -->
-        <attr name="android:gravity" />
-        <!-- Whether this spinner should mark child views as enabled/disabled when
-             the spinner itself is enabled/disabled. -->
-        <attr name="disableChildrenWhenDisabled" format="boolean" />
-        <attr name="android:background" />
     </declare-styleable>
 
     <declare-styleable name="SearchView">
@@ -837,6 +821,17 @@
 
         <!-- Allows us to read in the minHeight attr pre-v16 -->
         <attr name="android:minHeight" />
+
+        <!-- Drawable to set as the logo that appears at the starting side of
+             the Toolbar, just after the navigation button. -->
+        <attr name="logo" />
+        <!-- A content description string to describe the appearance of the
+             associated logo image. -->
+        <attr name="logoDescription" format="string" />
+        <!-- A color to apply to the title string. -->
+        <attr name="titleTextColor" format="color" />
+        <!-- A color to apply to the subtitle string. -->
+        <attr name="subtitleTextColor" format="color" />
     </declare-styleable>
 
     <declare-styleable name="PopupWindowBackgroundState">
@@ -866,12 +861,12 @@
         <attr name="drawableSize" format="dimension"/>
         <!-- The max gap between the bars when they are parallel to each other -->
         <attr name="gapBetweenBars" format="dimension"/>
-        <!-- The size of the top and bottom bars when they merge to the middle bar to form an arrow -->
-        <attr name="topBottomBarArrowSize" format="dimension"/>
-        <!-- The size of the middle bar when top and bottom bars merge into middle bar to form an arrow -->
-        <attr name="middleBarArrowSize" format="dimension"/>
-        <!-- The size of the bars when they are parallel to each other -->
-        <attr name="barSize" format="dimension"/>
+        <!-- The length of the arrow head when formed to make an arrow -->
+        <attr name="arrowHeadLength" format="dimension"/>
+        <!-- The length of the shaft when formed to make an arrow -->
+        <attr name="arrowShaftLength" format="dimension"/>
+        <!-- The length of the bars when they are parallel to each other -->
+        <attr name="barLength" format="dimension"/>
         <!-- The thickness (stroke size) for the bar paint -->
         <attr name="thickness" format="dimension"/>
     </declare-styleable>
@@ -886,6 +881,30 @@
         <!-- Overrides the id of the inflated View with this value. -->
         <attr name="android:inflatedId" />
         <attr name="android:id" />
+    </declare-styleable>
+
+    <declare-styleable name="CompoundButton">
+        <attr name="android:button"/>
+        <!-- Tint to apply to the button drawable. -->
+        <attr name="buttonTint" format="color" />
+
+        <!-- Blending mode used to apply the button tint. -->
+        <attr name="buttonTintMode">
+            <!-- The tint is drawn on top of the drawable.
+                 [Sa + (1 - Sa)*Da, Rc = Sc + (1 - Sa)*Dc] -->
+            <enum name="src_over" value="3" />
+            <!-- The tint is masked by the alpha channel of the drawable. The drawable’s
+                 color channels are thrown out. [Sa * Da, Sc * Da] -->
+            <enum name="src_in" value="5" />
+            <!-- The tint is drawn above the drawable, but with the drawable’s alpha
+                 channel masking the result. [Da, Sc * Da + (1 - Sa) * Dc] -->
+            <enum name="src_atop" value="9" />
+            <!-- Multiplies the color and alpha channels of the drawable with those of
+                 the tint. [Sa * Da, Sc * Dc] -->
+            <enum name="multiply" value="14" />
+            <!-- [Sa + Da - Sa * Da, Sc + Dc - Sc * Dc] -->
+            <enum name="screen" value="15" />
+        </attr>
     </declare-styleable>
 
     <declare-styleable name="SwitchCompat">
@@ -917,6 +936,10 @@
         <attr name="android:textStyle" />
         <attr name="android:typeface" />
         <attr name="textAllCaps" />
+        <attr name="android:shadowColor"/>
+        <attr name="android:shadowDy"/>
+        <attr name="android:shadowDx"/>
+        <attr name="android:shadowRadius"/>
     </declare-styleable>
 
     <!-- The set of attributes that describe a AlertDialog's theme. -->
@@ -927,6 +950,13 @@
         <attr name="multiChoiceItemLayout" format="reference" />
         <attr name="singleChoiceItemLayout" format="reference" />
         <attr name="listItemLayout" format="reference" />
+    </declare-styleable>
+
+    <!-- @hide -->
+    <declare-styleable name="ButtonBarLayout">
+        <!-- Whether to automatically stack the buttons when there is not
+             enough space to lay them out side-by-side. -->
+        <attr name="allowStacking" format="boolean" />
     </declare-styleable>
 
 </resources>

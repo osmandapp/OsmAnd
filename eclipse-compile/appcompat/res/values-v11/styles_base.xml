@@ -21,11 +21,7 @@
      variants are for direct use or use as parent styles by the app. -->
     <eat-comment/>
 
-    <style name="Base.Widget.AppCompat.Spinner" parent="android:Widget.Holo.Spinner">
-        <item name="android:background">@drawable/abc_spinner_mtrl_am_alpha</item>
-        <item name="android:dropDownSelector">?attr/listChoiceBackgroundIndicator</item>
-        <item name="android:popupBackground">@drawable/abc_popup_background_mtrl_mult</item>
-    </style>
+    <style name="Platform.Widget.AppCompat.Spinner" parent="android:Widget.Holo.Spinner" />
 
     <!-- Progress Bar -->
 

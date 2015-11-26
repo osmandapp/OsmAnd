@@ -125,7 +125,7 @@
 	<string name="poi_fire_hose">Пожарен шланг</string>
 	<string name="poi_ambulance_station">Спешна медицинска помощ</string>
 	<string name="poi_ford">Брод</string>
-	<string name="poi_mountain_pass_yes">Планински проход</string>
+	<string name="poi_mountain_pass">Планински проход</string>
 	<string name="poi_gate">Порта</string>
 	<string name="poi_city_wall">Градска стена</string>
 	<string name="poi_lift_gate">Вдигаща се врата</string>
@@ -230,7 +230,7 @@
 	<string name="poi_fuel_biogas">E85</string>
 	<string name="poi_vehicle_ramp">Рампа за МПС</string>
 	<string name="poi_parking_entrance">Вход към паркинг</string>
-	<string name="poi_railway_subway_entrance">Вход към метро</string>
+	<string name="poi_subway_entrance">Вход към метро</string>
 	<string name="poi_bicycle_parking">Паркинг за велосипеди</string>
 
 	<string name="poi_aerialway_gondola">Гондола</string>

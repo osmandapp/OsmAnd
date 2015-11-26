@@ -179,7 +179,7 @@
 	<string name="poi_emergency_access_point">Acil erişim noktası</string>
 
 	<string name="poi_ford">Geçit</string>
-	<string name="poi_mountain_pass_yes">Dağ geçidi</string>
+	<string name="poi_mountain_pass">Dağ geçidi</string>
 	<string name="poi_gate">Kapı</string>
 	<string name="poi_city_wall">Şehir duvarı</string>
 	<string name="poi_lift_gate">Asansör kapısı</string>
@@ -242,7 +242,7 @@
 	<string name="poi_railway_station">Tren İstasyonu</string>
 	<string name="poi_railway_platform">Demiryolu Platformu</string>
 	<string name="poi_halt">Tren durağı</string>
-	<string name="poi_railway_subway_entrance">Metro giriş</string>
+	<string name="poi_subway_entrance">Metro giriş</string>
 	<string name="poi_subway_station">Metro İstasyonu</string>
 	<string name="poi_railway_buffer_stop">Demir yolu tampon durağı</string>
 	<string name="poi_taxi">Taksi durağı</string>

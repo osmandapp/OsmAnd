@@ -102,7 +102,7 @@
 	<string name="poi_emergency_access_point">긴급 액세스 포인트</string>
 
 	<string name="poi_ford">포드</string>
-	<string name="poi_mountain_pass_yes">마운틴 패스</string>
+	<string name="poi_mountain_pass">마운틴 패스</string>
 	<string name="poi_gate">게이트</string>
 	<string name="poi_city_wall">도시 벽</string>
 	<string name="poi_lift_gate">리프트 게이트</string>
@@ -141,7 +141,7 @@
 	<string name="poi_bus_station">버스 정류장</string>
 	<string name="poi_railway_station">기차역</string>
 	<string name="poi_railway_platform">철도 플랫폼</string>
-	<string name="poi_railway_subway_entrance">지하철 입구</string>
+	<string name="poi_subway_entrance">지하철 입구</string>
 	<string name="poi_subway_station">지하철 역</string>
 	<string name="poi_taxi">택시 승차장</string>
 

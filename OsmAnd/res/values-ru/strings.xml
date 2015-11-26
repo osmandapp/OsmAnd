@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
 
+    <string name="poi_context_menu_modify_osm_change">Редактировать POI</string>
     <string name="osm_edit_reopened_note">Заметка OSM открыта снова</string>
     <string name="osm_edit_commented_note">К заметке OSM добавлен комментарий</string>
     <string name="osm_edit_removed_note">Заметка OSM удалена</string>
 	<string name="osm_edit_created_note">Заметка OSM создана</string>
 	<string name="osn_bug_name">Заметка OSM</string>
-	<string name="osn_add_dialog_title">Создание заметки</string>
-	<string name="osn_comment_dialog_title">Добавление комментария</string>
-	<string name="osn_reopen_dialog_title">Повторное открытие заметки</string>
-	<string name="osn_close_dialog_title">Закрытие заметки</string>
+	<string name="osn_add_dialog_title">Создать заметку</string>
+	<string name="osn_comment_dialog_title">Добавить комментарий</string>
+	<string name="osn_reopen_dialog_title">Повторное открыть заметку</string>
+	<string name="osn_close_dialog_title">Закрыть заметку</string>
 	<string name="osn_add_dialog_success">Заметка успешно создана</string>
 	<string name="osn_add_dialog_error">Ошибка: заметка не была создана</string>
 	<string name="osn_close_dialog_success">Заметка было успешно закрыта</string>
@@ -1791,7 +1792,7 @@
     <string name="show_free_version_banner">Показывать баннер бесплатной версии</string>
     <string name="show_free_version_banner_description">Даже если у вас купленная версия вы также можете видеть баннер для бесплатной версии</string>
     <string name="confirm_download_roadmaps">Вы уверены, что хотите скачать карту автодорог, даже если у вас есть полная карта?</string>
-    <string name="value_downloaded_from_max">%1$.1f из %2$.1f Мб</string>
+    <string name="value_downloaded_of_max">%1$.1f из %2$.1f Мб</string>
     <string name="file_size_in_mb">%.1f МБ</string>
     <string name="update_all">Обновить все (%1$s МБ)</string>
     <string name="free_downloads_used">Использовано бесплатных загрузок</string>

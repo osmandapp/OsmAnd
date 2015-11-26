@@ -1,7 +1,9 @@
 package net.osmand.plus.mapcontextmenu;
 
+import android.content.DialogInterface;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AlertDialog.Builder;
 import android.view.View;
 import android.widget.LinearLayout;
 import net.osmand.CallbackWithObject;
@@ -354,8 +356,41 @@ public class MapContextMenu extends MenuTitleController {
 	public void fabPressed() {
 		hide();
 		final TargetPointsHelper targets = mapActivity.getMyApplication().getTargetPointsHelper();
-		targets.navigateToPoint(latLon, true, targets.getIntermediatePoints().size() + 1, getPointDescription());
-		mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, false);
+		if(targets.getIntermediatePoints().isEmpty()) {
+			targets.navigateToPoint(latLon, true, -1, getPointDescription());
+			mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true);
+		} else {
+			Builder bld = new AlertDialog.Builder(mapActivity);
+			bld.setTitle(R.string.new_directions_point_dialog);
+			final int[] defaultVls = new int[] {0};
+			bld.setSingleChoiceItems(new String[]{
+					mapActivity.getString(R.string.clear_intermediate_points),
+					mapActivity.getString(R.string.keep_intermediate_points)
+//					mapActivity.getString(R.string.keep_and_add_destination_point)
+			}, 0, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					defaultVls[0] = which;
+				}
+			});
+			bld.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					if(defaultVls[0] == 0) {
+						targets.removeAllWayPoints(false);
+						targets.navigateToPoint(latLon, true, -1, getPointDescription());
+						mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true);
+					} else {
+						//targets.navigateToPoint(latLon, true, targets.getIntermediatePoints().size() + 1, getPointDescription());
+						targets.navigateToPoint(latLon, true, -1, getPointDescription());
+						mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true);
+					}
+				}
+			});
+			bld.setNegativeButton(R.string.shared_string_cancel,null);
+			bld.show();
+		}
 //		mapActivity.getMapLayers().getMapControlsLayer().showRouteInfoControlDialog();
 	}
 
@@ -625,5 +660,4 @@ public class MapContextMenu extends MenuTitleController {
 			}
 		});
 	}
-
 }

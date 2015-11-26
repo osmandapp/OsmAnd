@@ -44,7 +44,7 @@
 	<string name="poi_fire_hydrant">Tűzcsap</string>
 	<string name="poi_ambulance_station">Mentőállomás</string>
 	<string name="poi_ford">Gázló</string>
-	<string name="poi_mountain_pass_yes">Hágó</string>
+	<string name="poi_mountain_pass">Hágó</string>
 	<string name="poi_gate">Kapu</string>
 	<string name="poi_city_wall">Városfal</string>
 	<string name="poi_lift_gate">Sorompó</string>
@@ -67,7 +67,7 @@
 	<string name="poi_public_transport_platform_bus">Buszmegálló</string>
 	<string name="poi_public_transport_platform_trolleybus">Trolimegálló</string>
 	<string name="poi_public_transport_platform_tram">Villamosmegálló</string>
-	<string name="poi_railway_subway_entrance">Metró lejárat</string>
+	<string name="poi_subway_entrance">Metró lejárat</string>
 	<string name="poi_subway_station">Metrómegálló</string>
 	<string name="poi_taxi">Taxidroszt</string>
 
@@ -1142,7 +1142,7 @@
 	<string name="poi_pump_manual">Kézipumpa</string>
 	<string name="poi_pump_powered">Szivattyú</string>
 	<string name="poi_pump_no">Pumpa nélkül</string>
-	<string name="poi_pump">Pumpa</string>
+	<string name="poi_pump_yes">Pumpa</string>
 
 	<string name="poi_water_characteristic_mineral">Víz jelleg: ásványvíz</string>
 	<string name="poi_water_characteristic_mud">Víz jelleg: iszapos</string>
@@ -1387,5 +1387,61 @@
 	<string name="poi_bench_no">Pad nélkül</string>
 	<string name="poi_waste_basket_yes">Szemetessel</string>
 	<string name="poi_waste_basket_no">Szemetes nélkül</string>
+
+	<string name="poi_resource_antimony">Antimon</string>
+	<string name="poi_resource_asbestos">Azbeszt</string>
+	<string name="poi_resource_barite">Barit</string>
+	<string name="poi_resource_basalt">Bazalt</string>
+	<string name="poi_resource_bauxite">Bauxit</string>
+	<string name="poi_resource_beryl">Berill</string>
+	<string name="poi_resource_bismuth">Bizmut</string>
+	<string name="poi_resource_cereal">Gabona</string>
+	<string name="poi_resource_chromite">Kromit</string>
+	<string name="poi_resource_clay">Agyag</string>
+	<string name="poi_resource_coal">Szén</string>
+	<string name="poi_resource_copper">Réz</string>
+	<string name="poi_resource_diamond">Gyémánt</string>
+	<string name="poi_resource_dimension_stone">Vágott kő</string>
+	<string name="poi_resource_dolomite">Dolomit</string>
+	<string name="poi_resource_gas">Gáz</string>
+	<string name="poi_resource_gold">Arany</string>
+	<string name="poi_resource_graphite">Grafit</string>
+	<string name="poi_resource_gravel">Kavics</string>
+	<string name="poi_resource_gypsum">Gipsz</string>
+	<string name="poi_resource_iron_ore">Vasérc</string>
+	<string name="poi_resource_lead">Ólom</string>
+	<string name="poi_resource_lignite">Lignit</string>
+	<string name="poi_resource_limestone">Mészkő</string>
+	<string name="poi_resource_marble">Márvány</string>
+	<string name="poi_resource_mercury">Higany</string>
+	<string name="poi_resource_mica">Csillám</string>
+	<string name="poi_resource_mineral_oil">Ásványolaj</string>
+	<string name="poi_resource_nickel">Nikkel</string>
+	<string name="poi_resource_oil">Olaj</string>
+	<string name="poi_resource_opal">Opál</string>
+	<string name="poi_resource_peat">Tőzeg</string>
+	<string name="poi_resource_platinum">Platina</string>
+	<string name="poi_resource_radium">Rádium</string>
+	<string name="poi_resource_ruby">Rubin</string>
+	<string name="poi_resource_rutile">Rutil</string>
+	<string name="poi_resource_salt">Só</string>
+	<string name="poi_resource_sand">Homok</string>
+	<string name="poi_resource_sandstone">Homokkő</string>
+	<string name="poi_resource_silica">Kova</string>
+	<string name="poi_resource_silver">Ezüst</string>
+	<string name="poi_resource_slate_iron_ore_copper">Pala; vasérc; réz</string>
+	<string name="poi_resource_slate">Pala</string>
+	<string name="poi_resource_stone">Kő</string>
+	<string name="poi_resource_tin">Ón</string>
+	<string name="poi_resource_tuff">Tufa</string>
+	<string name="poi_resource_uranium">Uránium</string>
+	<string name="poi_resource_vanadium">Vanádium</string>
+	<string name="poi_resource_water">Víz</string>
+	<string name="poi_resource_zinc">Cink</string>
+	<string name="poi_resource_zircon">Cirkon</string>
+
+	<string name="poi_beach_sand">Part típus: homokos</string>
+	<string name="poi_beach_shingle">Part típus: kavicsos</string>
+	<string name="poi_beach_rocky">Part típus: köves</string>
 
 	</resources>

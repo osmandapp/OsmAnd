@@ -123,7 +123,11 @@ public class SearchBuildingByNameActivity extends SearchByNameAbstractActivity<B
 			text = hno;
 		}
 		settings.setLastSearchedBuilding(text, loc);
-		showOnMap(loc, AddressInformation.buildBuilding(this, settings));
+		if(isSelectAddres()) {
+			finish();
+		} else {
+			showOnMap(loc, AddressInformation.buildBuilding(this, settings));
+		}
 	}
 	
 	@Override

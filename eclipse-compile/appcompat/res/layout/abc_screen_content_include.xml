@@ -16,7 +16,7 @@
 
 <merge xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <android.support.v7.internal.widget.ContentFrameLayout
+    <android.support.v7.widget.ContentFrameLayout
             android:id="@id/action_bar_activity_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

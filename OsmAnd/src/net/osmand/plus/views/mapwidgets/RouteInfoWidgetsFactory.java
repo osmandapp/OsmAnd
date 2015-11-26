@@ -849,6 +849,7 @@ public class RouteInfoWidgetsFactory {
 						}
 					} else if(alarm.getType() == AlarmInfoType.TOLL_BOOTH) {
 						//image done by drawing red ring
+						text = "$";
 					} else if(alarm.getType() == AlarmInfoType.TRAFFIC_CALMING) {
 						if(settings.DRIVING_REGION.get().americanSigns){
 							locimgId = R.drawable.warnings_traffic_calming_us;

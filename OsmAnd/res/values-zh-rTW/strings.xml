@@ -408,7 +408,7 @@
     <string name="local_index_items_backuped">%2$d 項中的 %1$d 項已順利停用。</string>
     <string name="local_index_items_deleted">%2$d 項中的 %1$d 項已順利刪除。</string>
     <string name="local_index_items_restored">%2$d 項中的 %1$d 項已順利啟動。</string>
-    <string name="local_index_action_do">您即將要 %2$s %1$s 個項目，要繼續嗎？</string>
+    <string name="local_index_action_do">您即將要 %1$s %2$s 個項目，要繼續嗎？</string>
     <string name="local_index_descr_title">管理地圖檔案</string>
     <string name="local_index_mi_restore">啟用</string>
     <string name="local_index_mi_backup">停用</string>
@@ -537,7 +537,7 @@
     <string name="osmand_net_previously_installed">有前一版的 OsmAnd 存在，所有的離線資料將被新版引用。但我的最愛內的標點須以舊版程式匯出後再用新版程式匯入。</string>
     <string name="build_installed">編譯 {0} 成功安裝({1})。</string>
     <string name="downloading_build">正在下載編譯…</string>
-    <string name="install_selected_build">您要安裝 OsmAnd - {0} 由{1} {2} MB ?</string>
+    <string name="install_selected_build">您要安裝 OsmAnd - {0} 的 {1} {2} MB ?</string>
     <string name="loading_builds_failed">檢索 OsmAnd 編譯列表失敗</string>
     <string name="loading_builds">正在載入 OsmAnd 編譯…</string>
     <string name="select_build_to_install">選擇 OsmAnd 編譯安裝</string>
@@ -1916,8 +1916,8 @@
     <string name="favorite_category_dublicate_message">已有指定的類別名稱。請定義其它名稱。</string>
     <string name="favorite_category_name">類別名稱</string>
     <string name="favorite_category_add_new_title">增加新的類別</string>
-    <string name="confirm_download_roadmaps">您確定要下載地圖的道路，即使您已擁有完整的地圖？</string>
-    <string name="value_downloaded_from_max">%1$.1f 從 %2$.1f MB</string>
+    <string name="confirm_download_roadmaps">您確定要下載只有道路的地圖，即使您已經擁有標準(完整的)地圖？</string>
+    <string name="value_downloaded_of_max">%1$.1f 從 %2$.1f MB</string>
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">全部更新 (%1$s MB)</string>
     <string name="free_downloads_used">免費下載使用</string>
@@ -2013,4 +2013,8 @@
     <string name="access_from_map">從地圖進入</string>
     <string name="use_dashboard_btn">使用儀表板</string>
     <string name="use_drawer_btn">使用地圖</string>
-    </resources>
+    <string name="please_specify_poi_type_only_from_list">"請指定正確的興趣點類型或跳過它。 "</string>
+    <string name="routing_attr_avoid_stairs_name">避開樓梯</string>
+	<string name="routing_attr_avoid_stairs_description">避開樓梯</string>
+	<string name="routing_attr_avoid_borders_name">避開跨越邊界</string>
+	</resources>

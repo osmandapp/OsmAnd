@@ -18,7 +18,7 @@ apply plugin: 'com.android.application'
 // Less important
 
 android {
-	compileSdkVersion 21
+	compileSdkVersion 23
 	buildToolsVersion "23.0.1"
 
 	signingConfigs {
@@ -39,9 +39,9 @@ android {
 
 	defaultConfig {
 		minSdkVersion System.getenv("MIN_SDK_VERSION") ? System.getenv("MIN_SDK_VERSION").toInteger() : 14
-		targetSdkVersion 21
-
+		targetSdkVersion 23
 		versionCode System.getenv("APK_NUMBER_VERSION") ? System.getenv("APK_NUMBER_VERSION").toInteger() : versionCode
+		multiDexEnabled true
 		//versionName already assigned in code
 		//versionName System.getenv("APK_VERSION")? System.getenv("APK_VERSION").toString(): versionName
 	}
@@ -60,6 +60,8 @@ android {
 
 	dexOptions {
 		jumboMode = true
+		incremental true
+		javaMaxHeapSize "4g"
 	}
 
 	sourceSets {
@@ -184,6 +186,24 @@ task updateNoTranslate(type: Copy) {
 	into 'res/values/'
 }
 
+task validateTranslate {
+	println "Validating translations"
+
+	new java.io.File("OsmAnd/res").eachFileRecurse groovy.io.FileType.FILES, {
+		if (it.name == "strings.xml" || it.name == "phrases.xml") {
+			it.eachLine { line ->
+				if (line.contains("\$ s") || line.contains("\$ d") || line.contains("\$ f") ||
+						line.contains(" \$s") || line.contains(" \$d") || line.contains(" \$f") ||
+						line.contains("1\$ ") || line.contains("2\$ ") || line.contains("3\$ ") ||
+						(line.contains("% \$") || line.contains("% 1") ||
+								line.contains("% 2") || line.contains("% 3"))) {
+					throw new GradleException("Incorrect translation " + it.getAbsolutePath() + " " + line);
+				}
+			}
+		}
+	}
+}
+
 task collectVoiceAssets(type: Sync) {
 	from "../../resources/voice"
 	into "assets/voice"
@@ -214,7 +234,7 @@ task collectHelpContentsAssets(type: Copy) {
 		include "technical-articles.html"
 		include "map-legend.html"
 	}
-	from("../../help/website/feature_articles"){
+	from("../../help/website/feature_articles") {
 		include "*.html"
 	}
 
@@ -265,7 +285,8 @@ collectExternalResources.dependsOn collectVoiceAssets,
 		collectRegionsInfoResources,
 		collectMiscResources,
 		copyStyleIcons,
-		updateNoTranslate
+		updateNoTranslate,
+		validateTranslate
 // tasks.whenTaskAdded { task ->
 //	if (task.name.startsWith("generate") && task.name.endsWith("Resources")) {
 //		task.dependsOn collectExternalResources
@@ -321,11 +342,18 @@ repositories {
 }
 
 dependencies {
+<<<<<<< HEAD
 	compile project(path: ":OsmAnd-java", configuration: "android")
 	compile project(":eclipse-compile:design")
 	compile project(":eclipse-compile:cardview")
 	compile project(":eclipse-compile:pluginClientSdkLib")
 
+=======
+	compile project(path: ':OsmAnd-java', configuration: 'android')
+	compile project(':eclipse-compile:design')
+	compile project(':eclipse-compile:cardview')
+	//	compile project(":eclipse-compile:recyclerview")
+>>>>>>> 9df89506a88e110a9fb960f90867a2fe383745fe
 	compile fileTree(
 			dir: "libs",
 			include: ["*.jar"],
@@ -333,11 +361,19 @@ dependencies {
 					"QtAndroid-bundled.jar",
 					"QtAndroidAccessibility-bundled.jar",
 					"OsmAndCore_android.jar",
+<<<<<<< HEAD
 					"OsmAndCore_wrapper.jar"])
+=======
+					"OsmAndCore_wrapper.jar",
+					"android-support-multidex.jar"])
+	// compile "com.github.ksoichiro:android-observablescrollview:1.5.0"
+	//	 compile "com.android.support:appcompat-v7:22.2.1"
+	// compile "com.github.shell-software:fab:1.0.5"
+	//	compile 'com.android.support:design:22.2.1'
+>>>>>>> 9df89506a88e110a9fb960f90867a2fe383745fe
 	legacyCompile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@jar"
 	qtcoredebugCompile "net.osmand:OsmAndCore_androidNativeDebug:0.1-SNAPSHOT@aar"
 	qtcoredebugCompile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"
 	qtcoreCompile "net.osmand:OsmAndCore_androidNativeRelease:0.1-SNAPSHOT@aar"
 	qtcoreCompile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"
-
 }

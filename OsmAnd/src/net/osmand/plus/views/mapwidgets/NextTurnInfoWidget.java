@@ -50,8 +50,8 @@ public class NextTurnInfoWidget extends TextInfoWidget {
 	}
 	
 	public void setTurnType(TurnType turnType) {
-		updateVisibility(turnType != null);
-		if (turnDrawable.setTurnType(turnType)) {
+		boolean vis = updateVisibility(turnType != null);
+		if (turnDrawable.setTurnType(turnType) || vis) {
 			if(horisontalMini) {
 				setImageDrawable(turnDrawable, false);
 			} else {

@@ -167,7 +167,7 @@
 	<string name="poi_emergency_access_point">森林内番地札(Emergency access point)</string>
 
 	<string name="poi_ford">道路上水没地点(Ford)</string>
-	<string name="poi_mountain_pass_yes">峠(Mountain pass)</string>
+	<string name="poi_mountain_pass">峠(Mountain pass)</string>
 	<string name="poi_gate">門(Gate)</string>
 	<string name="poi_city_wall">市壁・城壁(City wall)</string>
 	<string name="poi_lift_gate">遮断機(Lift gate)</string>
@@ -207,7 +207,7 @@
 	<string name="poi_railway_station">鉄道駅(Railway station)</string>
 	<string name="poi_railway_platform">鉄道プラットホーム(Railway platform)</string>
 	<string name="poi_halt">鉄道停車位置(Railway stop)</string>
-	<string name="poi_railway_subway_entrance">地下鉄入り口(Subway entrance)</string>
+	<string name="poi_subway_entrance">地下鉄入り口(Subway entrance)</string>
 	<string name="poi_subway_station">地下鉄駅(Subway station)</string>
 	<string name="poi_railway_buffer_stop">鉄道用車止め(Railway buffer stop)</string>
 	<string name="poi_helipad">ヘリポート(Helipad)</string>
@@ -566,14 +566,14 @@
 	<string name="poi_club_tourism">旅行同好会(Tourism club)</string>
 	<string name="poi_club_charity">慈善団体・ボランティア団体(Charity club)</string>
 
-	<string name="poi_piste_downhill">ダウンヒル(Downhill)</string>
-	<string name="poi_piste_nordic">ノルディック・クロスカントリー(Nordic)</string>
-	<string name="poi_piste_skitour">登山スキー(Skitour)</string>
-	<string name="poi_piste_hike">ハイキング(Hike)</string>
-	<string name="poi_piste_sleigh">中型～大型ソリ(Sleigh)</string>
-	<string name="poi_piste_sled">小型ソリ(Sled)</string>
+	<string name="poi_piste_downhill">ダウンヒルゲレンデ(Downhill piste)</string>
+	<string name="poi_piste_nordic">ノルディック・クロスカントリーゲレンデ(Nordic piste)</string>
+	<string name="poi_piste_skitour">登山スキーゲレンデ(Skitour piste)</string>
+	<string name="poi_piste_hike">ハイキングゲレンデ(Hike piste)</string>
+	<string name="poi_piste_sleigh">中型～大型ソリゲレンデ(Sleigh piste)</string>
+	<string name="poi_piste_sled">小型ソリゲレンデ(Sled piste)</string>
 	<string name="poi_piste_snow_park">スノーパーク・雪中公園(Snow park)</string>
-	<string name="poi_piste_playground">雪遊び場・キッズゲレンデ(Playground)</string>
+	<string name="poi_piste_playground">雪遊び場・キッズゲレンデ(Playground piste)</string>
 	<string name="poi_piste_ice_skate">アイススケート(Ice skate)</string>
 
 	<string name="poi_arts_centre">アート公演・制作所(Arts centre)</string>
@@ -968,4 +968,25 @@
 	<string name="poi_denomination_spiritist">心霊主義(Spiritist)</string>
 	<string name="poi_denomination_armenian_apostolic">アルメニア教会(Armenian apostolic)</string>
 	<string name="poi_denomination_dutch_reformed">オランダ改革派(Dutch reformed)</string>
+	<string name="poi_traffic_calming_island">交通島・歩行者安全地帯(Traffic island)</string>
+	<string name="poi_denomination_apostolic">ペンテコステ派(Apostolic)</string>
+	<string name="poi_denomination_latter_day_saints">モルモン教会／末日聖徒イエス・キリスト教会(Latter day saints)</string>
+	<string name="poi_denomination_church_of_christ">キリストの教会-無楽器派(Church of christ)</string>
+	<string name="poi_denomination_united_church_of_christ">キリスト連合教会(United church of christ)</string>
+	<string name="poi_denomination_georgian_orthodox">グルジア正教会(Georgian orthodox)</string>
+	<string name="poi_denomination_romanian_orthodox">ルーマニア正教会(Romanian orthodox)</string>
+	<string name="poi_denomination_ethiopian_orthodox_tewahedo">エチオピア正教会(Ethiopian orthodox tewahedo)</string>
+	<string name="poi_denomination_unitarian">ユニテリアン主義(Unitarian)</string>
+	<string name="poi_denomination_coptic_orthodox">コプト正教会(Coptic orthodox)</string>
+	<string name="poi_denomination_shaktism">シャクティズム(Shaktism)</string>
+	<string name="poi_denomination_shingon_shu">真言宗(Shingon shu)</string>
+	<string name="poi_denomination_maronite">マロン教会(Maronite)</string>
+	<string name="poi_denomination_mahayana">大乗仏教(Mahayana)</string>
+
+	<string name="poi_internet_access_yes">インターネット有り・種別不明(Internet access: yes)</string>
+	<string name="poi_internet_access_no">インターネットなし(Internet access: no)</string>
+
+	<string name="poi_religious">宗教関係エリア(Religious area)</string>
+	<string name="poi_cutline">森林の切れ目(Cutline)</string>
+	<string name="poi_shower">シャワー(Shower)</string>
 	</resources>

@@ -123,7 +123,7 @@
 	<string name="poi_emergency_access_point">Bod príchodu záchrany</string>
 
 	<string name="poi_ford">Brod</string>
-	<string name="poi_mountain_pass_yes">Horský priesmyk</string>
+	<string name="poi_mountain_pass">Horský priesmyk</string>
 	<string name="poi_gate">Brána</string>
 	<string name="poi_city_wall">Mestské hradby</string>
 	<string name="poi_lift_gate">Závora</string>
@@ -158,7 +158,7 @@
 	<string name="poi_railway_platform">Železničné nástupište</string>
 	<string name="poi_halt">Železničná zastávka</string>
 	<string name="poi_bus_station">Autobusová stanica</string>
-	<string name="poi_railway_subway_entrance">Vchod do metra</string>
+	<string name="poi_subway_entrance">Vchod do metra</string>
 	<string name="poi_subway_station">Stanica metra</string>
 	<string name="poi_railway_buffer_stop">Železničná zarážka</string>
 	<string name="poi_taxi">Stanovište taxíkov</string>
@@ -1319,7 +1319,7 @@
 
 	<string name="poi_wheelchair_no">Invalidný vozík: nepovolený</string>
 	<string name="poi_wheelchair_limited">Invalidný vozík: obmedzene</string>
-	<string name="poi_pump">Čerpadlo</string>
+	<string name="poi_pump_yes">Čerpadlo</string>
 
 	<string name="poi_garden_type_residential">Typ záhrady: v obytnej oblasti</string>
 	<string name="poi_garden_type_community">Typ záhrady: spoločenstvo</string>

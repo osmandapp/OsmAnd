@@ -19,7 +19,7 @@ This is an optimized layout for a screen, with the minimum set of features
 enabled.
 -->
 
-<android.support.v7.internal.widget.FitWindowsLinearLayout
+<android.support.v7.widget.FitWindowsLinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
@@ -44,4 +44,4 @@ enabled.
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
 
-</android.support.v7.internal.widget.FitWindowsLinearLayout>
+</android.support.v7.widget.FitWindowsLinearLayout>

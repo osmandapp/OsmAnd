@@ -13,6 +13,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.Space;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -23,7 +24,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.Space;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -577,7 +577,7 @@ public class DownloadActivity extends ActionBarProgressActivity implements Downl
 		GoToMapFragment fragment = new GoToMapFragment();
 		fragment.regionCenter = region.getRegionCenter();
 		fragment.regionName = region.getLocaleName();
-		fragment.show(getFragmentManager(), GoToMapFragment.TAG);
+		fragment.show(getSupportFragmentManager(), GoToMapFragment.TAG);
 	}
 
 	private void showDownloadWorldMapIfNeeded() {
@@ -590,7 +590,7 @@ public class DownloadActivity extends ActionBarProgressActivity implements Downl
 			SUGGESTED_TO_DOWNLOAD_BASEMAP = true;
 			AskMapDownloadFragment fragment = new AskMapDownloadFragment();
 			fragment.indexItem = worldMap;
-			fragment.show(getFragmentManager(), AskMapDownloadFragment.TAG);
+			fragment.show(getSupportFragmentManager(), AskMapDownloadFragment.TAG);
 		}
 	}
 
@@ -599,7 +599,7 @@ public class DownloadActivity extends ActionBarProgressActivity implements Downl
 		final boolean externalExists =
 				getMyApplication().getSettings().getSecondaryStorage() != null;
 		if (firstTime && externalExists && DataStoragePlaceDialogFragment.isInterestedInFirstTime) {
-			new DataStoragePlaceDialogFragment().show(getFragmentManager(), null);
+			new DataStoragePlaceDialogFragment().show(getSupportFragmentManager(), null);
 		}
 	}
 
@@ -762,7 +762,8 @@ public class DownloadActivity extends ActionBarProgressActivity implements Downl
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 			if (savedInstanceState != null) {
-				regionName = savedInstanceState.getString(KEY_GOTO_MAP_REGION_NAME, "");
+				regionName = savedInstanceState.getString(KEY_GOTO_MAP_REGION_NAME);
+				regionName = regionName == null ? "" : regionName;
 				Object rCenterObj = savedInstanceState.getSerializable(KEY_GOTO_MAP_REGION_CENTER);
 				if (rCenterObj != null) {
 					regionCenter = (LatLon) rCenterObj;

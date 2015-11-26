@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="amenity_type_administrative">Administrativo</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="amenity_type_administrative">Administrativo</string>
   <string name="amenity_type_barrier">Barreira</string>
   <string name="amenity_type_education">Educação</string>
   <string name="amenity_type_emergency">Emergência</string>
@@ -463,7 +464,7 @@
   <string name="online_map_settings_descr">Configurar fontes de mosaicos ou de mapas on-line</string>
   
   
-  <string name="osmand_rastermaps_plugin_description">"Com este plugin você pode acessar muitos tipos de mapas online (também chamada de quadrícula ou ladrilho), de quadrículas pré-definidas do OpenStreetMap (como Mapnik) para imagens de satélite e camadas especiais como mapas aquáticos, climáticos, geológicos, camadas de sombra de relevo, etc.\n\nQuaisquer desses mapas podem ser usados como mapa principal (base) para ser mostrado no OsmAnd ou como uma sobreposição ou subcamada para outro mapa base (como o mapa offline normal de OsmAnd). A fim de fazer qualquer subcamada do mapa mais visível, certos elementos do mapa vetorial do OsmAnd podem facilmente ser ocultados através do menu \'Configurar mapa\' conforme desejado.
+  <string name="osmand_rastermaps_plugin_description">"Com este plugin, pode ter acesso a muitos tipos de mapas on-line (também chamada de quadrícula ou ladrilho), de quadrículas pré-definidas do OpenStreetMap (como Mapnik) para imagens de satélite e camadas especiais, como mapas aquáticos, climáticos, geológicos, camadas de sombra de relevo, etc.\n\nQuaisquer desses mapas podem ser usados como mapa principal (base) para ser mostrado no OsmAnd, ou como uma sobreposição, ou sub-camada para outro mapa base (como o mapa off-line normal de OsmAnd). Para fazer qualquer sub-camada do mapa mais visível, certos elementos do mapa vetorial do OsmAnd podem facilmente ser ocultados através do menu \'Configurar mapa\'.
 \n\nQuadrículas de mapas podem ser obtidas diretamente através de fontes on-line ou podem ser preparados para uso off-line (e copiadas manualmente para o diretório de dados do OsmAnd) como um banco de dados sqlite, que pode ser produzido por uma variedade de ferramentas de terceiros para preparação de mapas. "</string>
   <string name="osmand_background_plugin_description">This plugin allows tracking or navigation in sleep (screen off) mode by periodically waking up the GPS device.</string>
   <string name="osmand_accessibility_description">Mostrar configurações de características especiais de acessibilidade.</string>
@@ -1055,9 +1056,11 @@
     
     <string name="recording_photo_description">Foto %1$s de %2$s</string>
     <string name="av_def_action_picture">Capture uma foto</string>
-    <string name="osmand_srtm_long_description_1000_chars">Esse plugin disponibiliza curvas de nível que podem ser mostradas nos mapas offline do OsmAnd. Os dados globais (entre as latitudes 70° norte e 70° sul) são baseados nas medições do SRTM (Shuttle Radar Topography Mission) e do ASTER (Advanced Spaceborn Thermal Emission and Reflection Radiometer), um instrumento de imagens no Terra, o satélite principal do Sistema de Observação da Terra da NASA. O ASTER é um esforço conjunto da NASA, do Ministério da Economia, Comércio e Indústria do Japão e do Sistema Espacial Japonês (J-spacesystems).</string>
-    <string name="srtm_plugin_description">Facilita o download de curvas de nível e relevo sombreado (Configurações -&gt; Dados offline -&gt; Baixar -&gt; Selecciona o tipo de mapa).</string>
-    <string name="srtm_plugin_name">Plugin de curvas de nível</string>
+    <string name="osmand_srtm_long_description_1000_chars">"Este plugin disponibiliza \'Curvas de Nível\' e \'Sombras de Relevo\', que podem ser aplicadas nos mapas standard do OsmAnd.
+\nEstas funcionalidades podem ser apreciadas por atletas, caminhantes, e qualquer pessoa interessada na informação de relevo de uma paisagem.\n\nOs dados globais (entre as latitudes 70° norte e 70° sul) são baseados nas medições do SRTM (Shuttle Radar Topography Mission) e do ASTER (Advanced Spaceborn Thermal Emission and Reflection Radiometer), um instrumento de imagens no \'Terra\', o satélite principal do Sistema de Observação da Terra da NASA. O ASTER é um esforço conjunto da NASA, do Ministério da Economia, Comércio e Indústria do Japão e do Sistema Espacial Japonês (J-spacesystems). "</string>
+    <string name="srtm_plugin_description">"Este plugin disponibiliza \'Curvas de Nível\' e \'Sombras de Relevo\', que podem ser aplicadas nos mapas standard do OsmAnd.
+\nEstas funcionalidades podem ser apreciadas por atletas, caminhantes, e qualquer pessoa interessada na informação de relevo de uma paisagem.\n\nOs dados globais (entre as latitudes 70° norte e 70° sul) são baseados nas medições do SRTM (Shuttle Radar Topography Mission) e do ASTER (Advanced Spaceborn Thermal Emission and Reflection Radiometer), um instrumento de imagens no \'Terra\', o satélite principal do Sistema de Observação da Terra da NASA. O ASTER é um esforço conjunto da NASA, do Ministério da Economia, Comércio e Indústria do Japão e do Sistema Espacial Japonês (J-spacesystems). "</string>
+    <string name="srtm_plugin_name">Curvas de Nível</string>
     <string name="download_select_map_types">Outros mapas</string>
     <string name="download_srtm_maps">Curvas de nível</string>
     <string name="rendering_attr_noAdminboundaries_name">Ocultar limites</string>
@@ -1425,8 +1428,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="osmo_settings_descr">Configurar as definições de monitoramento e configuração do canal de monitoração pessoal</string>
     <string name="osmo_settings">OsMo OpenStreetMap Monitorização (beta)</string>
     <string name="osmo_plugin_description">"Este plugin fornece a funcionalidade para OsMo (monitoramento avançado ao vivo), veja mais em http://osmo.mobi.
-\n\nVocê pode rastrear outros dispositivos e ser rastreado. Você espontaneamente pode criar grupos anônimos, compartilhar localização e se comunicar. Vem com várias opções para o controle de sessão ou acompanhamento permanente.
-\n\nGrupos anônimos são criados para um número especificado de dias e limitados a recursos definidos, ou seja, não há nenhum controle remoto e nenhum administrador de grupo. Grupos totalmente funcionais, por outro lado, podem ser criados no site e só usuários cadastrados têm acesso a eles. "</string>
+\n\nVocê pode rastrear todos os dispositivos de um grupo em que participe, em tempo real, e comunicarem entre si. Tem várias opções para o rastreamento de sessão ou permanente.\n\nGrupos anónimos podem ser criados espontaneamente por um número específico de dias, e tem recursos limitados definidos, ou seja, não há controle remoto nem administrador de grupo. Por outro lado, grupos totalmente funcionais podem ser criados no website, aos quais apenas utilizadores registados podem ter acesso. "</string>
     <string name="osmo_plugin_name">OsMO (rastreamento avançado ao vivo)</string>
    	<string name="always_center_position_on_map">Centrar sempre a posição no mapa</string>
     <string name="voice_pref_title">Voz</string>
@@ -1600,8 +1602,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="save_track_to_gpx_globally_descr">Posição geral de log para um arquivo GPX pode ser ativada ou desativado usando o GPX gravação widget na tela do mapa</string>
 	<string name="save_track_interval_globally">Intervalo de log</string>
 	<string name="rendering_attr_publicTransportMode_name">Rotas de ônibus, trólebus</string>
-	<string name="record_plugin_description">"Este plugin ativa a funcionalidade para gravar e salvar seus trajetos manualmente tocando o widget de gravação GPX na tela do mapa, ou também fazendo automaticamente o registro de todas as suas rotas de navegação para um arquivo GPX.
-\n\nTrajetos gravados podem ser compartilhadas com seus amigos ou serem usados para contribuições ao OSM. Atletas podem usar trajetos gravados para monitorar seus treinamentos. Algumas análises básicas do trajeto podem ser feitas diretamente no OsmAnd, como tempos de volta, velocidade média, etc. E, claro, trajetos também podem ser analisados mais tarde em ferramentas de terceiros. "</string>
+	<string name="record_plugin_description">"Este plugin ativa a funcionalidade para gravar e salvar os seus trajetos manualmente, tocando o widget de gravação GPX na tela do mapa, ou também fazendo automaticamente o registro de todas as suas rotas de navegação para um arquivo GPX.
+\n\nTrajetos gravados podem ser compartilhadas com os seus amigos, ou serem usados para contribuições ao OSM. Atletas podem usar trajetos gravados para controlar os seus treinos. Algumas análises básicas do trajeto podem ser feitas diretamente no OsmAnd, como tempos de volta, velocidade média, etc. E, claro, trajetos também podem ser analisados mais tarde em ferramentas de terceiros. "</string>
     <string name="record_plugin_name">Gravação de viagem</string>
     <string name="int_hour">h</string>
     <string name="duration">Duração</string>
@@ -1817,4 +1819,14 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="shared_string_navigation">Navegação</string>
     <string name="nm">mn</string>
     <string name="shared_string_update">Atualizar</string>
+    <string name="please_specify_poi_type_only_from_list">"Escolha o tipo correcto de POI (ou ignore). "</string>
+    <string name="access_from_map_description">O botão de Menu lança o Dashboard, em vez do Menu</string>
+    <string name="access_from_map">Aceder a partir do mapa</string>
+    <string name="show_on_start_description">\'Desligado\' lança directamente para a vista do mapa</string>
+    <string name="show_on_start">Mostrar no arranque</string>
+    <string name="copied_to_clipboard">Copiado para a Área de Transferências</string>
+    <string name="release_2_2">" • Novo interface do utilizador sensível ao contexto, ao tocar locais no mapa, ou em outras telas\n\n• Tela do Mapa é agora lançada diretamente, a menos que \'Mostrar Painel de instrumentos no arranque\' seja selecionado\n\n• Configure quais e de que forma os cartões são exibidos no Painel de instrumentos\n\n• Desactivar o Painel, se preferir um controle baseado em menus\n\n• Para fazer download de mapas, as regiões podem ser seleccionadas directamente, tocando no mapa do mundo\n\n• Busca por \'Pontos de Interesse\' agora oferece suporte a consultas mais específicas\n\n• Melhoria nos \'Pontos de Interesse\' e funcionalidades de edição OSM\n\n• Reformulação de estrutura e de interface para download de mapas de dados 
+\n\ne mais... "</string>
+    <string name="osm_save_offline">Guardar off-line</string>
+    <string name="osm_edit_modified_poi">Ponto de Interesse OSM modificado</string>
     </resources>

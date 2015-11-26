@@ -36,8 +36,8 @@
         <item name="selectableItemBackground">?android:attr/selectableItemBackground</item>
 
         <!-- Window colors -->
-        <item name="android:colorForeground">@color/bright_foreground_material_dark</item>
-        <item name="android:colorForegroundInverse">@color/bright_foreground_material_light</item>
+        <item name="android:colorForeground">@color/foreground_material_dark</item>
+        <item name="android:colorForegroundInverse">@color/foreground_material_light</item>
         <item name="android:colorBackground">@color/background_material_dark</item>
         <item name="android:colorBackgroundCacheHint">@color/abc_background_cache_hint_selector_material_dark</item>
         <item name="android:disabledAlpha">@dimen/abc_disabled_alpha_material_dark</item>
@@ -56,8 +56,8 @@
         <item name="android:textColorHintInverse">@color/hint_foreground_material_light</item>
         <item name="android:textColorHighlight">@color/highlighted_text_material_dark</item>
         <item name="android:textColorHighlightInverse">@color/highlighted_text_material_light</item>
-        <item name="android:textColorLink">@color/link_text_material_dark</item>
-        <item name="android:textColorLinkInverse">@color/link_text_material_light</item>
+        <item name="android:textColorLink">?attr/colorAccent</item>
+        <item name="android:textColorLinkInverse">?attr/colorAccent</item>
         <item name="android:textColorAlertDialogListItem">@color/abc_primary_text_material_dark</item>
 
         <!-- Text styles -->
@@ -88,8 +88,8 @@
         <item name="selectableItemBackground">?android:attr/selectableItemBackground</item>
 
         <!-- Window colors -->
-        <item name="android:colorForeground">@color/bright_foreground_material_light</item>
-        <item name="android:colorForegroundInverse">@color/bright_foreground_material_dark</item>
+        <item name="android:colorForeground">@color/foreground_material_light</item>
+        <item name="android:colorForegroundInverse">@color/foreground_material_dark</item>
         <item name="android:colorBackground">@color/background_material_light</item>
         <item name="android:colorBackgroundCacheHint">@color/abc_background_cache_hint_selector_material_light</item>
         <item name="android:disabledAlpha">@dimen/abc_disabled_alpha_material_light</item>
@@ -109,8 +109,8 @@
         <item name="android:textColorHintInverse">@color/hint_foreground_material_dark</item>
         <item name="android:textColorHighlight">@color/highlighted_text_material_light</item>
         <item name="android:textColorHighlightInverse">@color/highlighted_text_material_dark</item>
-        <item name="android:textColorLink">@color/link_text_material_light</item>
-        <item name="android:textColorLinkInverse">@color/link_text_material_dark</item>
+        <item name="android:textColorLink">?attr/colorAccent</item>
+        <item name="android:textColorLinkInverse">?attr/colorAccent</item>
         <item name="android:textColorAlertDialogListItem">@color/abc_primary_text_material_light</item>
 
         <!-- Text styles -->

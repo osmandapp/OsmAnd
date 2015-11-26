@@ -133,7 +133,7 @@
 
 	<string name="poi_ford">Брод</string>
 	<string name="poi_ford_stepping_stones">Рудиментарный мост из камней</string>
-	<string name="poi_mountain_pass_yes">Перевал</string>
+	<string name="poi_mountain_pass">Перевал</string>
 	<string name="poi_gate">Ворота</string>
 	<string name="poi_city_wall">Городская стена</string>
 	<string name="poi_lift_gate">Шлагбаум</string>
@@ -171,7 +171,7 @@
 	<string name="poi_bus_station">Автобусная станция</string>
 	<string name="poi_railway_station">Железнодорожная станция</string>
 	<string name="poi_railway_platform">Железнодорожная платформа</string>
-	<string name="poi_railway_subway_entrance">Вход в метро</string>
+	<string name="poi_subway_entrance">Вход в метро</string>
 	<string name="poi_subway_station">Станция метро</string>
 	<string name="poi_taxi">Стоянка такси</string>
 
@@ -780,8 +780,8 @@
 	<string name="poi_internet_access_terminal">Доступ в Интернет: терминал</string>
 	<string name="poi_internet_access_wired">Доступ в Интернет: проводное подключение</string>
 	<string name="poi_internet_access_public">Доступ в Интернет: общедоступный</string>
-	<string name="poi_internet_access_yes">Доступ в Интернет</string>
-	<string name="poi_internet_access_no">Нет доступа в Интернет</string>
+	<string name="poi_internet_access_yes">Доступ в Интернет: есть</string>
+	<string name="poi_internet_access_no">Доступ в Интернет: отсутствует</string>
 
 	<string name="poi_farm">Фермерский магазин</string>
 	<string name="poi_personal_transport">Личный транспорт</string>
@@ -1044,7 +1044,7 @@
 	<string name="poi_pump_manual">Ручной насос</string>
 	<string name="poi_pump_powered">Автоматический насос</string>
 	<string name="poi_pump_no">Без насоса</string>
-	<string name="poi_pump">Насос</string>
+	<string name="poi_pump_yes">Насос</string>
 
 	<string name="poi_water_characteristic_mineral">Характеристика воды: минеральная</string>
 	<string name="poi_water_characteristic_mud">Характеристика воды: грязь</string>
@@ -1471,7 +1471,7 @@
 	<string name="poi_service_electrical">Ремонт электротранспорта</string>
 	<string name="poi_motorcycle_repair">Ремонт мотоциклов</string>
 	<string name="poi_self_service_yes">Самообслуживание</string>
-	<string name="poi_self_service_no">Самообслуживание: нет</string>
+	<string name="poi_self_service_no">Самообслуживание: отсутствует</string>
 	<string name="poi_automated_yes">Автоматизация</string>
 	<string name="poi_automated_no">Без автоматизации</string>
 	<string name="poi_full_service_yes">Полный комплекс услуг</string>
@@ -1655,8 +1655,9 @@
 
 	<string name="poi_internet_access_type_wlan">Беспроводной интернет</string>
 	<string name="poi_internet_access_type_wired">Интернет через кабель</string>
-	<string name="poi_internet_access_type_public">Общедоступный доступ в интернет</string>
+	<string name="poi_internet_access_type_public">Публичный доступ в интернет</string>
 	<string name="poi_internet_access_type_no">Без доступа в интернет</string>
+	<string name="poi_internet_access_type_yes">C доступом в интернет</string>
 
 	<string name="poi_maxwidth">Максимальная ширина</string>
 
@@ -1777,21 +1778,21 @@
 	<string name="poi_shop_yes">С магазином</string>
 
 	<string name="poi_service_bicycle_retail_yes">Продажа велосипедов: да</string>
-	<string name="poi_service_bicycle_retail_no">Продажа велосипедов: нет</string>
+	<string name="poi_service_bicycle_retail_no">Продажа велосипедов: отсутствует</string>
 	<string name="poi_service_bicycle_repair_yes">Ремонт велосипедов: да</string>
-	<string name="poi_service_bicycle_repair_no">Ремонт велосипедов: нет</string>
+	<string name="poi_service_bicycle_repair_no">Ремонт велосипедов: отсутствует</string>
 	<string name="poi_service_bicycle_rental_yes">Прокат велосипедов: да</string>
-	<string name="poi_service_bicycle_rental_no">Прокат велосипедов: нет</string>
+	<string name="poi_service_bicycle_rental_no">Прокат велосипедов: отсутствует</string>
 	<string name="poi_service_bicycle_pump_yes">Подкачка велосипедных шин: да</string>
-	<string name="poi_service_bicycle_pump_no">Подкачка велосипедных шин: нет</string>
+	<string name="poi_service_bicycle_pump_no">Подкачка велосипедных шин: отсутствует</string>
 	<string name="poi_service_bicycle_diy_yes">Инструменты для самостоятельного ремонта велосипеда: да</string>
 	<string name="poi_service_bicycle_diy_no">Инструменты для самостоятельного ремонта велосипеда: нет</string>
 	<string name="poi_service_bicycle_cleaning_yes">Мойка велосипедов: да</string>
-	<string name="poi_service_bicycle_cleaning_no">Мойка велосипедов: нет</string>
+	<string name="poi_service_bicycle_cleaning_no">Мойка велосипедов: отсутствует</string>
 	<string name="poi_service_bicycle_chaintool_yes">Выжимка цепи для велосипедов: да</string>
-	<string name="poi_service_bicycle_chaintool_no">Выжимка цепи для велосипедов: нет</string>
+	<string name="poi_service_bicycle_chaintool_no">Выжимка цепи для велосипедов: отсутствует</string>
 	<string name="poi_service_bicycle_second_hand_yes">Продажа подержанных велосипедов: да</string>
-	<string name="poi_service_bicycle_second_hand_no">Продажа подержанных велосипедов: нет</string>
+	<string name="poi_service_bicycle_second_hand_no">Продажа подержанных велосипедов: отсутствует</string>
 
 	<string name="poi_wildlife_hide">Укрытие для наблюдения за дикой природой</string>
 
@@ -1862,7 +1863,7 @@
 	<string name="poi_aeroway_fuel">Авиационная заправка</string>
 	<string name="poi_fuel_91ul">Топливо 91UL</string>
 	<string name="poi_fuel_100ll">Топливо 100LL</string>
-	<string name="poi_jeta1">Топливо Jet A-1</string>
+	<string name="poi_fuel_jeta1">Топливо Jet A-1</string>
 	<string name="poi_fuel_adblue">Топливо AdBlue</string>
 	<string name="poi_fuel_wood">Топливо: дрова</string>
 	<string name="poi_fuel_charcoal">Топливо: древесный уголь</string>
@@ -2103,9 +2104,9 @@
 	<string name="poi_group_only_yes">Доступно только для групп: да</string>
 	<string name="poi_group_only_no">Доступно только для групп: нет</string>
 	<string name="poi_washing_machine_yes">Стиральная машина: есть</string>
-	<string name="poi_washing_machine_no">Стиральная машина: нет</string>
+	<string name="poi_washing_machine_no">Стиральная машина: отсутствует</string>
 	<string name="poi_shower_yes">Душ: есть</string>
-	<string name="poi_shower_no">Душ: нет</string>
+	<string name="poi_shower_no">Душ: отсутствует</string>
 	<string name="poi_shower_hot">Душ: горячий</string>
 	<string name="poi_shower_outdoor">Душ: снаружи</string>
 	<string name="poi_shower_cold">Душ: холодный</string>
@@ -2115,10 +2116,10 @@
 	<string name="poi_impromptu_yes">Импровизированный: да</string>
 	<string name="poi_impromptu_no">Импровизированный: нет</string>
 	<string name="poi_sanitary_dump_station_yes">Ассенизационная сливная станция: есть</string>
-	<string name="poi_sanitary_dump_station_no">Ассенизационная сливная станция: нет</string>
+	<string name="poi_sanitary_dump_station_no">Ассенизационная сливная станция: отсутствует</string>
 	<string name="poi_sanitary_dump_station_customers">Ассенизационная сливная станция: только для посетителей</string>
 	<string name="poi_power_supply_yes">Источник питания: есть</string>
-	<string name="poi_power_supply_no">Источник питания: нет</string>
+	<string name="poi_power_supply_no">Источник питания: отсутствует</string>
 	<string name="poi_power_supply_cee_17_blue">Источник питания (разъём): CEE 17 blue</string>
 	<string name="poi_power_supply_cee_7_4">Источник питания (разъём): CEE 7/4</string>
 	<string name="poi_power_supply_cee_7_5">Источник питания (разъём): CEE 7/5</string>
@@ -2183,17 +2184,17 @@
 
 	<string name="poi_highway_steps">Лестница</string>
 	<string name="poi_handrail_yes">Поручень: есть</string>
-	<string name="poi_handrail_no">Поручень: нет</string>
+	<string name="poi_handrail_no">Поручень: отсутствует</string>
 	<string name="poi_ramp_yes">Скат: есть</string>
-	<string name="poi_ramp_no">Скат: нет</string>
+	<string name="poi_ramp_no">Скат: отсутствует</string>
 	<string name="poi_ramp_wheelchair_yes">Скат для инвалидных колясок: есть</string>
-	<string name="poi_ramp_wheelchair_no">Скат для инвалидных колясок: нет</string>
+	<string name="poi_ramp_wheelchair_no">Скат для инвалидных колясок: отсутствует</string>
 	<string name="poi_ramp_stroller_yes">Скат (двойной): есть</string>
-	<string name="poi_ramp_stroller_no">Скат (двойной): нет</string>
+	<string name="poi_ramp_stroller_no">Скат (двойной): отсутствует</string>
 	<string name="poi_ramp_bicycle_yes">Скат для велосипедов: есть</string>
-	<string name="poi_ramp_bicycle_no">Скат для велосипедов: нет</string>
+	<string name="poi_ramp_bicycle_no">Скат для велосипедов: отсутствует</string>
 	<string name="poi_ramp_luggage_yes">Скат для багажа: есть</string>
-	<string name="poi_ramp_luggage_no">Скат для багажа: нет</string>
+	<string name="poi_ramp_luggage_no">Скат для багажа: отсутствует</string>
 	<string name="poi_step_count">Количество ступеней</string>
 	<string name="poi_step_condition_even">Состояние ступеней: хорошее</string>
 	<string name="poi_step_condition_uneven">Состояние ступеней: среднее</string>
@@ -2463,4 +2464,6 @@
 
 	<string name="poi_craft_electronics">Ремонт электроники</string>
 	<string name="poi_fireworks">Магазин фейерверков</string>
+
+	<string name="poi_aerialway_length">Протяжённость</string>
 </resources>

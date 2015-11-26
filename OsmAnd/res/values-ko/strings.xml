@@ -1825,7 +1825,7 @@
     <string name="rendering_attr_transportStops_name">대중교통 정류소</string>
     <string name="voices">음성 안내</string>
 	<string name="dash_download_msg_none">오프라인 지도를 다운로드 하시겠습니까?</string>
-    <string name="dash_download_msg">%1 $s 지도 다운로드됨</string>
+    <string name="dash_download_msg">%1$s 지도 다운로드됨</string>
     <string name="dash_download_new_one">새로운 지도 다운로드</string>
     <string name="dash_download_manage">관리</string>
     <string name="rendering_attr_roadStyle_name">도로 스타일</string>
@@ -2200,7 +2200,7 @@
     <string name="favourites_context_menu_add">즐겨찾기 추가</string>
 	<string name="are_you_sure">확실한가요?</string>
 	<string name="unsaved_changes_will_be_lost">저장되지 않은 변경 내용이 손실 됩니다. 계속 하시겠습니까?</string>
-	<string name="downloads_left_template">%1$ 다운로드 남았습니다</string>
+	<string name="downloads_left_template">%1$s 다운로드 남았습니다</string>
 	<string name="roads">경로</string>
     <string name="downloading_number_of_files">다운로드중-%1$d 파일</string>
     <string name="show_free_version_banner">무료 버전 배너를 표시</string>
@@ -2213,5 +2213,5 @@
     <string name="downloads">다운로드</string>
     <string name="confirm_download_roadmaps">모든 지도를 가지고 있더러도 지도를 다운로드 하시겠습니까?</string>
     <string name="file_size_in_mb">%.1f MB</string>
-<string name="value_downloaded_from_max">%2$.1f MB 에서 %1$.1f</string>
+<string name="value_downloaded_of_max">%2$.1f MB 에서 %1$.1f</string>
     </resources>

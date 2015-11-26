@@ -1,11 +1,11 @@
 package net.osmand;
 
+import android.util.Xml;
+
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlSerializer;
-
-import android.util.Xml;
 
 /**
  * That class is replacing of standard LogFactory due to 
@@ -111,27 +111,8 @@ public class PlatformUtil {
 		}
 
 		@Override
-		public boolean isTraceEnabled() {
-			return android.util.Log.isLoggable(TAG, android.util.Log.DEBUG);
-		}
-
-		@Override
 		public boolean isWarnEnabled() {
 			return android.util.Log.isLoggable(TAG, android.util.Log.WARN);
-		}
-
-		@Override
-		public void trace(Object message) {
-			if(isTraceEnabled()){
-				android.util.Log.d(TAG, name + " " + message); //$NON-NLS-1$
-			}
-		}
-
-		@Override
-		public void trace(Object message, Throwable t) {
-			if(isTraceEnabled()){
-				android.util.Log.d(TAG, name + " " + message, t); //$NON-NLS-1$
-			}	
 		}
 
 		@Override

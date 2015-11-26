@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="rendering_attr_roadColors_description">Velg fargeskjema for veier:</string>
     <string name="rendering_attr_roadColors_name">Veifargeskjema</string>
     <string name="map_widget_show_destination_arrow">Vis retning til målet</string>
@@ -1400,7 +1401,7 @@
     <string name="map_downloaded_descr">Kart over %1$s har blitt lastet ned. Gå tilbake til kartet for å begynne å bruke det.</string>
     <string name="go_to_map">Gå til kartet</string>
     <string name="downloads">Nedlastinger</string>
-    <string name="value_downloaded_from_max">%1$.1f av %2$.1f MB</string>
+    <string name="value_downloaded_of_max">%1$.1f av %2$.1f MB</string>
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">Oppdater alle (%1$s MB)</string>
     <string name="free_downloads_used">Gratis nedlastinger brukt</string>
@@ -1410,7 +1411,7 @@
     <string name="shared_string_qr_code">QR-kode</string>
     <string name="basemap_was_selected_to_download">Basiskart er nødvendig for at programmet skal fungere riktig og ble valgt for å laste ned.</string>
     <string name="get_full_version">Fullversjon</string>
-    <string name="confirm_download_roadmaps">Er du sikker på at du vil laste ned veikart, selv om du har fullstendig kart?</string>
+    <string name="confirm_download_roadmaps">Er du sikker på at du vil laste ned et rent veikart, selv om du allerede har det fullstendige standardkartet?</string>
     <string name="later">Senere</string>
     <string name="activate_srtm_plugin">Aktiver programtillegg SRTM</string>
     <string name="opening_at">Åpner</string>
@@ -1439,4 +1440,18 @@
     <string name="techical_articles_item">Tekniske artikler</string>
     <string name="feedback">Tilbakemelding</string>
     <string name="map_legend">Kartforklaring</string>
+    <string name="please_specify_poi_type_only_from_list">"Spesifiser korrekt interessepunkttype eller hopp over. "</string>
+    <string name="access_from_map_description">Menyknapp viser dashbord, ikke meny</string>
+    <string name="access_from_map">Tilgang fra kart</string>
+    <string name="show_on_start">Vis ved start</string>
+    <string name="copied_to_clipboard">Kopiert til utklippstavle</string>
+    <string name="context_menu_item_delete_waypoint">Slette GPX-rutepunkt?</string>
+    <string name="context_menu_item_edit_waypoint">Rediger GPX-rutepunkt</string>
+    <string name="lang_nds">Lavtysk</string>
+    <string name="lang_mk">Makedonsk</string>
+    <string name="lang_fy">Frisisk</string>
+    <string name="lang_als">Albansk (Toskisk)</string>
+    <string name="use_dashboard_btn">Bruk dashbord</string>
+    <string name="use_drawer_btn">Bruk meny</string>
+    <string name="dashboard_or_drawer_title">Dashbord eller menystyring</string>
     </resources>

@@ -4,7 +4,6 @@ import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -15,26 +14,27 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.audionotes.AudioVideoNoteMenuController;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
-import net.osmand.plus.audionotes.AudioVideoNoteMenuController;
-import net.osmand.plus.osmedit.EditPOIMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.FavouritePointMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.GpxItemMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.HistoryMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.MapDataMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.MyLocationMenuController;
-import net.osmand.plus.osmo.OsMoMenuController;
-import net.osmand.plus.osmedit.OsmBugMenuController;
-import net.osmand.plus.parkingpoint.ParkingPositionMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.PointDescriptionMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.TargetPointMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.WptPtMenuController;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
+import net.osmand.plus.osmedit.EditPOIMenuController;
+import net.osmand.plus.osmedit.OsmBugMenuController;
 import net.osmand.plus.osmedit.OsmBugsLayer.OpenStreetNote;
 import net.osmand.plus.osmedit.OsmPoint;
 import net.osmand.plus.osmo.OsMoGroupsStorage.OsMoDevice;
+import net.osmand.plus.osmo.OsMoMenuController;
+import net.osmand.plus.parkingpoint.ParkingPositionMenuController;
+import net.osmand.plus.views.DownloadedRegionsLayer.DownloadMapObject;
 
 public abstract class MenuController extends BaseMenuController {
 
@@ -92,8 +92,8 @@ public abstract class MenuController extends BaseMenuController {
 				menuController = new EditPOIMenuController(app, mapActivity, pointDescription, (OsmPoint) object);
 			} else if (object instanceof WptPt) {
 				menuController = new WptPtMenuController(app, mapActivity, pointDescription, (WptPt) object);
-			} else if (object instanceof BinaryMapDataObject) {
-				menuController = new MapDataMenuController(app, mapActivity, pointDescription, (BinaryMapDataObject) object);
+			} else if (object instanceof DownloadMapObject) {
+				menuController = new MapDataMenuController(app, mapActivity, pointDescription, (DownloadMapObject) object);
 			} else if (object instanceof OpenStreetNote) {
 				menuController = new OsmBugMenuController(app, mapActivity, pointDescription, (OpenStreetNote) object);
 			} else if (object instanceof GpxDisplayItem) {

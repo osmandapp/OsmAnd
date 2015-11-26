@@ -219,6 +219,9 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		updateButtonsAndProgress();
 
 		if (menu.isLandscapeLayout()) {
+			final TypedValue typedValueAttr = new TypedValue();
+			getMapActivity().getTheme().resolveAttribute(R.attr.left_menu_view_bg, typedValueAttr, true);
+			mainView.setBackgroundResource(typedValueAttr.resourceId);
 			mainView.setLayoutParams(new FrameLayout.LayoutParams(dpToPx(menu.getLandscapeWidthDp()),
 					ViewGroup.LayoutParams.MATCH_PARENT));
 			View fabContainer = view.findViewById(R.id.context_menu_fab_container);
@@ -247,10 +250,10 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 
 				if (singleTapDetector.onTouchEvent(event)) {
 					showOnMap(menu.getLatLon(), true, false);
-
 					if (hasMoved) {
 						applyPosY(getViewY(), false, false, 0, 0);
 					}
+					openMenuHalfScreen();
 					return true;
 				}
 
@@ -330,6 +333,11 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		// FAB
 		fabView = (ImageView)view.findViewById(R.id.context_menu_fab_view);
 		if (menu.fabVisible()) {
+			if (menu.isLandscapeLayout()) {
+				FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) fabView.getLayoutParams();
+				params.setMargins(0, 0, dpToPx(28f), 0);
+				fabView.setLayoutParams(params);
+			}
 			fabView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -397,6 +405,15 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 
 	public void openMenuFullScreen() {
 		changeMenuState(getViewY(), true, true, false);
+	}
+	
+	public void openMenuHalfScreen() {
+		int oldMenuState = menu.getCurrentMenuState();
+		if(oldMenuState == MenuState.HEADER_ONLY) {
+			changeMenuState(getViewY(), false, true, false);
+		} else if(oldMenuState == MenuState.FULL_SCREEN && !menu.isLandscapeLayout()) {
+			changeMenuState(getViewY(), false, false, true);
+		}
 	}
 
 	private void changeMenuState(int currentY, boolean skipHalfScreenState,
@@ -647,6 +664,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		runLayoutListener();
 	}
 
+	@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 	private void runLayoutListener() {
 		ViewTreeObserver vto = view.getViewTreeObserver();
 		vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -948,7 +966,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		mapActivity.getSupportFragmentManager().beginTransaction()
 				.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
 				.add(R.id.fragmentContainer, fragment, TAG)
-				.addToBackStack(TAG).commit();
+				.addToBackStack(TAG).commitAllowingStateLoss();
 	}
 
 	//DownloadEvents

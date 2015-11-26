@@ -152,7 +152,7 @@
 	<string name="poi_emergency_access_point">森林緊急利用點</string>
 
 	<string name="poi_ford">低窪路段</string>
-	<string name="poi_mountain_pass_yes">隘口</string>
+	<string name="poi_mountain_pass">隘口</string>
 	<string name="poi_gate">門</string>
 	<string name="poi_city_wall">城牆</string>
 	<string name="poi_lift_gate">電動柵欄</string>
@@ -215,7 +215,7 @@
 	<string name="poi_railway_station">火車站</string>
 	<string name="poi_railway_platform">鐵路月台</string>
 	<string name="poi_halt">火車站</string>
-	<string name="poi_railway_subway_entrance">捷運入口</string>
+	<string name="poi_subway_entrance">捷運入口</string>
 	<string name="poi_subway_station">捷運車站</string>
 	<string name="poi_railway_buffer_stop">鐵路止衝擋</string>
 	<string name="poi_taxi">計程車站</string>
@@ -1347,7 +1347,7 @@
 
 <string name="poi_rtsa_scale">RTSA 的難度</string>
 
-<string name="poi_pump">泵浦</string>
+<string name="poi_pump_yes">泵浦</string>
 
 	<string name="poi_piste_difficulty_easy">滑雪道難度：容易</string>
 	<string name="poi_piste_difficulty_intermediate">滑雪道難度：中等</string>
@@ -1610,9 +1610,9 @@
 	<string name="poi_microbrewery_yes">自釀酒廠</string>
 	<string name="poi_microbrewery_no">無自釀酒廠</string>
 
-	<string name="poi_takeaway_yes">腳架</string>
-	<string name="poi_takeaway_no">無腳架</string>
-	<string name="poi_takeaway_only">只有腳架</string>
+	<string name="poi_takeaway_yes">外帶</string>
+	<string name="poi_takeaway_no">無外帶</string>
+	<string name="poi_takeaway_only">只有外帶</string>
 
 	<string name="poi_delivery_yes">外送</string>
 	<string name="poi_delivery_no">沒外送</string>
@@ -1826,7 +1826,7 @@
 	<string name="poi_internet_access_type_wired">網際網路存取類型：有線網路</string>
 	<string name="poi_internet_access_type_public">網際網路存取類型：公共網路</string>
 	<string name="poi_internet_access_type_service">網際網路存取類型：網路服務</string>
-	<string name="poi_internet_access_type_no">網際網路存取類型：無</string>
+	<string name="poi_internet_access_type_no">無網際網路存取</string>
 
 	<string name="poi_maxwidth">最大寬度</string>
 	<string name="poi_iata">IATA 編碼</string>
@@ -2026,8 +2026,8 @@
 
 	<string name="poi_fuel_91ul">91UL 燃料</string>
 	<string name="poi_fuel_100ll">100LL 燃料</string>
-	<string name="poi_autogas">液化石油氣</string>
-	<string name="poi_jeta1">Jet A-1 燃料</string>
+	<string name="poi_fuel_autogas">液化石油氣</string>
+	<string name="poi_fuel_jeta1">Jet A-1 燃料</string>
 	<string name="poi_fuel_adblue">AdBlue 燃料</string>
 
 	<string name="poi_fuel_wood">燃料：木材</string>
@@ -2184,4 +2184,78 @@
 	<string name="poi_social_facility_for_diseased">目標社群：病患者</string>
 	<string name="poi_social_facility_for_child_juvenile">目標社群：兒童；青少年</string>
 
+	<string name="poi_internet_access_type_yes">有網際網路存取</string>
+
+	<string name="poi_theatre_genre_philharmonic">文藝類型：愛樂團體</string>
+	<string name="poi_theatre_genre_musical">文藝類型：音樂</string>
+	<string name="poi_theatre_genre_drama">文藝類型：戲劇</string>
+	<string name="poi_theatre_genre_opera">文藝類型：歌劇</string>
+	<string name="poi_theatre_genre_cabaret">文藝類型：歌舞</string>
+	<string name="poi_theatre_genre_puppet">文藝類型：木偶</string>
+	<string name="poi_theatre_genre_comedy">文藝類型：喜劇</string>
+	<string name="poi_theatre_genre_chamber_music">文藝類型：室內樂</string>
+	<string name="poi_theatre_genre_marionette">文藝類型：線木偶</string>
+	<string name="poi_theatre_genre_ballet">文藝類型：芭蕾舞</string>
+	<string name="poi_theatre_genre_shadow_play">文藝類型：皮影戲</string>
+
+	<string name="poi_bandstand">演奏台</string>
+	<string name="poi_kiln">窯</string>
+	<string name="poi_product_brick">產品：磚</string>
+	<string name="poi_product_quicklime">產品：生石灰</string>
+	<string name="poi_product_leather">產品：皮革</string>
+	<string name="poi_product_lime">產品：石灰</string>
+	<string name="poi_product_beer">產品：啤酒</string>
+	<string name="poi_product_charcoal">產品：木炭</string>
+	<string name="poi_product_meat">產品：肉品</string>
+
+	<string name="poi_wheelchair_description">輪椅使用者說明</string>
+	<string name="poi_blind_description">爲盲人的說明</string>
+	<string name="poi_deaf_description">爲聾人的說明</string>
+
+	<string name="poi_highway_steps">樓梯</string>
+	<string name="poi_handrail_yes">扶手：有</string>
+	<string name="poi_handrail_no">扶手：無</string>
+	<string name="poi_ramp_yes">斜坡道：有</string>
+	<string name="poi_ramp_no">斜坡道：無</string>
+	<string name="poi_ramp_wheelchair_yes">供輪椅的斜坡道：有</string>
+	<string name="poi_ramp_wheelchair_no">供輪椅的斜坡道：無</string>
+	<string name="poi_ramp_stroller_yes">斜坡道(折疊式)：有</string>
+	<string name="poi_ramp_stroller_no">斜坡道(折疊式)：無</string>
+	<string name="poi_ramp_bicycle_yes">供自行車的斜坡道：有</string>
+	<string name="poi_ramp_bicycle_no">供自行車的斜坡道：無</string>
+	<string name="poi_ramp_luggage_yes">供行李的斜坡道：有</string>
+	<string name="poi_ramp_luggage_no">供行李的斜坡道：無</string>
+	<string name="poi_step_count">步行計數</string>
+	<string name="poi_step_condition_even">步行條件：平坦</string>
+	<string name="poi_step_condition_uneven">步行條件：不平坦</string>
+	<string name="poi_step_condition_rough">步行條件：高低不平</string>
+
+	<string name="poi_cairn">錐形石堆</string>
+
+	<string name="poi_memorial_fassade_decoration">立面裝飾</string>
+	<string name="poi_defibrillator">電擊器</string>
+	<string name="poi_defibrillator_yes">電擊器：有</string>
+
+	<string name="poi_tomb_tumulus">類型：古墳</string>
+	<string name="poi_tomb_war_grave">類型：戰爭墳墓</string>
+	<string name="poi_tomb_rock_cut">類型：岩石切割</string>
+	<string name="poi_tomb_hypogeum">類型：地下墓室</string>
+	<string name="poi_tomb_vault">類型：墓穴</string>
+	<string name="poi_tomb_columbarium">類型：靈骨塔</string>
+	<string name="poi_tomb_mausoleum">類型：陵墓</string>
+	<string name="poi_tomb_sarcophagus">類型：石棺</string>
+	<string name="poi_tomb_crypt">類型：地穴</string>
+	<string name="poi_tomb_pyramid">類型：金字塔</string>
+
+	<string name="poi_historic_civilization_ancient_roman">文明：古羅馬 (西元前 753 年 - 西元 284 年)</string>
+	<string name="poi_historic_civilization_nuragic">文明：nuragic (西元前18世紀 – 西元前2世紀)</string>
+	<string name="poi_historic_civilization_etruscan">文明：伊特魯里亞 (西元前12世紀 - 西元前6世紀)</string>
+	<string name="poi_historic_civilization_prehistoric">文明：史前的</string>
+	<string name="poi_historic_civilization_ancient_greek">文明：古希臘</string>
+	<string name="poi_historic_civilization_roman">文明：羅馬</string>
+	<string name="poi_historic_civilization_byzantine">文明：拜占庭 (西元285年 - 西元1453 年)</string>
+	<string name="poi_historic_civilization_imperial_chinese">文明：中國皇朝 (西元前221年 - 西元1911年)</string>
+	<string name="poi_historic_civilization_ancient_egyptian">文明：古埃及 (到西元前332年爲止)</string>
+	<string name="poi_historic_civilization_celtic">文明：凱爾特</string>
+	<string name="poi_historic_civilization_western_roman">文明：西方羅馬 (西元285年 – 西元476年)</string>
 	</resources>

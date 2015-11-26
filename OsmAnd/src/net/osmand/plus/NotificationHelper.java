@@ -69,10 +69,7 @@ public class NotificationHelper {
 		String notificationText ;
 		int icon = R.drawable.bgs_icon;
 		OsmandMonitoringPlugin monitoringPlugin = OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class);
-		if(monitoringPlugin == null && service == null) {
-			return null;
-		}
-		if (service != null && service.getUsedBy() != NavigationService.USED_BY_GPX) {
+		if (service != null) {
 			int soi = service.getServiceOffInterval();
 			notificationText = app.getString(R.string.osmand_running_in_background);
 			String s = "";
@@ -94,7 +91,9 @@ public class NotificationHelper {
 				}
 				s += app.getString(R.string.osmo);
 			}
-			notificationText += " (" + s + "). ";
+			if(s.length() > 0) {
+				notificationText += " (" + s + "). ";
+			}
 			notificationText += app.getString(R.string.gps_wake_up_timer) + ": ";
 			if (soi == 0) {
 				notificationText = notificationText + app.getString(R.string.int_continuosly);
@@ -103,6 +102,8 @@ public class NotificationHelper {
 			} else {
 				notificationText = notificationText + Integer.toString(soi / 1000 / 60) + " " + app.getString(R.string.int_min);
 			}
+		} else if(monitoringPlugin == null) {
+			return null;
 		} else {
 			notificationText =	app.getString(R.string.shared_string_trip_recording);
 			float dst = app.getSavingTrackHelper().getDistance();

@@ -104,7 +104,7 @@
         <string name="poi_emergency_access_point">Nødstilfælde punkt</string>
 
         <string name="poi_ford">Vadested</string>
-        <string name="poi_mountain_pass_yes">Bjergpas</string>
+        <string name="poi_mountain_pass">Bjergpas</string>
         <string name="poi_gate">Port</string>
         <string name="poi_city_wall">Bymur</string>
         <string name="poi_lift_gate">Vippebom</string>
@@ -142,7 +142,7 @@
         <string name="poi_bus_station">Busstation</string>
         <string name="poi_railway_station">Banegård</string>
         <string name="poi_railway_platform">Perron</string>
-        <string name="poi_railway_subway_entrance">Metroindgang</string>
+        <string name="poi_subway_entrance">Metroindgang</string>
         <string name="poi_subway_station">Metrostation</string>
         <string name="poi_taxi">Taxaholdeplads</string>
 
@@ -1368,7 +1368,7 @@
 
 <string name="poi_rtsa_scale">RTSA skala</string>
 
-<string name="poi_pump">Pumpe</string>
+<string name="poi_pump_yes">Pumpe</string>
 
 	<string name="poi_piste_difficulty_easy">Pistesværhedsgrad: let</string>
 	<string name="poi_piste_difficulty_intermediate">Pistesværhedsgrad: medium</string>
@@ -1840,7 +1840,7 @@
 	<string name="poi_internet_access_type_wired">Internet adgangstype: kablet</string>
 	<string name="poi_internet_access_type_public">Internetadgang: offentlig</string>
 	<string name="poi_internet_access_type_service">Internetadgang: tjeneste</string>
-	<string name="poi_internet_access_type_no">Internetadgang: ingen</string>
+	<string name="poi_internet_access_type_no">Ingen internetadgang</string>
 
 <string name="poi_maxwidth">Max. bredde</string>
 	<string name="poi_iata">IATA kode</string>
@@ -2048,8 +2048,8 @@
 	<string name="poi_jersey_barrier">Jersey barriere</string>
 	<string name="poi_fuel_91ul">91UL brændstof</string>
 	<string name="poi_fuel_100ll">100LL brændstof</string>
-	<string name="poi_autogas">Autogas</string>
-	<string name="poi_jeta1">Jet A-1 brændstof</string>
+	<string name="poi_fuel_autogas">Autogas</string>
+	<string name="poi_fuel_jeta1">Jet A-1 brændstof</string>
 	<string name="poi_fuel_adblue">AdBlue brændstof</string>
 
 	<string name="poi_fuel_wood">Brændstof: træ</string>
@@ -2513,4 +2513,8 @@
 
 <string name="poi_fireworks">Fyrværkeri butik</string>
 
-</resources>
+<string name="poi_aerialway_length">Længde</string>
+
+<string name="poi_internet_access_type_yes">Med internetadgang</string>
+
+	</resources>

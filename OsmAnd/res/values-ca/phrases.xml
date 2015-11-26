@@ -63,7 +63,7 @@
 	<string name="poi_fire_extinguisher">Extintor</string>
 	<string name="poi_fire_hose">Mànega d\'incendis</string>
 	<string name="poi_ambulance_station">Parc d\'ambulàncies</string>
-	<string name="poi_mountain_pass_yes">Coll</string>
+	<string name="poi_mountain_pass">Coll</string>
 	<string name="poi_city_wall">Muralla</string>
 	<string name="poi_vehicle_inspection">Inspecció de vehicles</string>
 	<string name="poi_military_nuclear_explosion_site">Lloc d\'explosió nuclear</string>
@@ -123,7 +123,7 @@
 	<string name="poi_railway_station">Estació de tren</string>
 	<string name="poi_railway_platform">Andana</string>
 	<string name="poi_halt">Parada de tren (obsolet)</string>
-	<string name="poi_railway_subway_entrance">Entrada de metro</string>
+	<string name="poi_subway_entrance">Entrada de metro</string>
 	<string name="poi_subway_station">Estació de metro</string>
 	<string name="poi_taxi">Parada de taxis</string>
 
@@ -1263,7 +1263,7 @@
 	<string name="poi_pump_manual">Bomba manual</string>
 	<string name="poi_pump_powered">Bomba motoritzada</string>
 	<string name="poi_pump_no">Sense bomba</string>
-	<string name="poi_pump">Bomba</string>
+	<string name="poi_pump_yes">Bomba</string>
 
 	<string name="poi_water_characteristic_mineral">Característica de l\'aigua: mineral</string>
 	<string name="poi_water_characteristic_mud">Característica de l\'aigua: argilosa</string>
@@ -1887,4 +1887,116 @@
 	<string name="poi_bridge_structure_simple_wooden">Estructura del pont: fusta senzilla</string>
 	<string name="poi_bridge_structure_viaduct">Estructura del pont: viaducte</string>
 	<string name="poi_bridge_structure_aqueduct">Estructura del pont: aqüeducte</string>
+	<string name="poi_service_bicycle_chaintool_yes">Eines per la cadena de la bicicleta: sí</string>
+	<string name="poi_service_bicycle_chaintool_no">Eines per la cadena de la bicicleta: no</string>
+	<string name="poi_service_bicycle_second_hand_yes">Venda al detall de bicicletes de segona mà: sí</string>
+	<string name="poi_service_bicycle_second_hand_no">Venda al detall de bicicletes de segona mà: no</string>
+
+	<string name="poi_training_language">Formació: idioma</string>
+	<string name="poi_training_music">Formació: música</string>
+	<string name="poi_training_dance">Formació: dansa</string>
+	<string name="poi_training_sport">Formació: esport</string>
+	<string name="poi_training_art">Formació: art</string>
+	<string name="poi_training_cooking">Formació: cuina</string>
+	<string name="poi_training_computer">Formació: informàtica</string>
+	<string name="poi_training_yoga">Formació: ioga</string>
+	<string name="poi_training_martial_art">Formació: arts marcials</string>
+	<string name="poi_training_aviation">Formació: aviació</string>
+	<string name="poi_training_hairdressing">Formació: perruqueria</string>
+
+	<string name="poi_escape_lane">Zona de frenada d\'emergència</string>
+
+	<string name="poi_crop_rice">Cultiu: arròs</string>
+	<string name="poi_crop_grass">Cultiu: gespa</string>
+	<string name="poi_crop_corn">Cultiu: moresc</string>
+	<string name="poi_crop_cereal">Cultiu: cereals</string>
+	<string name="poi_crop_sugarcane">Cultiu: canya de sucre</string>
+	<string name="poi_crop_wheat">Cultiu: blat</string>
+	<string name="poi_crop_soy">Cultiu: soja</string>
+	<string name="poi_crop_barley">Cultiu: ordi</string>
+	<string name="poi_crop_vegetables">Cultiu: verdures</string>
+	<string name="poi_crop_hop">Cultiu: llúpol</string>
+	<string name="poi_crop_rape">Cultiu: colza</string>
+	<string name="poi_crop_beet">Cultiu: remolatxa</string>
+	<string name="poi_crop_lavender">Cultiu: espígol</string>
+	<string name="poi_crop_tea">Cultiu: te</string>
+	<string name="poi_crop_coffee">Cultiu: cafè</string>
+	<string name="poi_crop_poultry">Producció: aviram</string>
+	<string name="poi_crop_sunflower">Cultiu: gira-sol</string>
+	<string name="poi_crop_raspberry">Cultiu: gerd</string>
+	<string name="poi_crop_tobacco">Cultiu: tabac</string>
+	<string name="poi_crop_strawberry">Cultiu: maduixa</string>
+	<string name="poi_crop_vegetables_flowers">Cultiu: verdures i flors</string>
+	<string name="poi_crop_cassava">Cultiu: mandioca</string>
+	<string name="poi_crop_cranberry">Cultiu: nabiu de grua</string>
+	<string name="poi_crop_asparagus">Cultiu: espàrrecs</string>
+	<string name="poi_crop_flowers">Cultiu: flors</string>
+
+	<string name="poi_surveillance_indoor">Vigilància: interior</string>
+	<string name="poi_surveillance_outdoor">Vigilància: exterior</string>
+	<string name="poi_clothes_hats">Barrets</string>
+	<string name="poi_clothes_sports">Roba esportiva</string>
+	<string name="poi_clothes_babies">Roba de nadons</string>
+	<string name="poi_clothes_denim">Roba texana</string>
+	<string name="poi_clothes_workwear">Roba de treball</string>
+	<string name="poi_clothes_fur">Pelleteria</string>
+	<string name="poi_clothes_leather">Roba de cuir</string>
+	<string name="poi_clothes_traditional">Roba tradicional</string>
+	<string name="poi_shoes_women">Sabates de dona</string>
+	<string name="poi_castle_type_stately">Tipus de castell: residencial</string>
+	<string name="poi_castle_type_defensive">Tipus de castell: defensiu</string>
+	<string name="poi_castle_type_fortress">Tipus de castell: fortalesa</string>
+	<string name="poi_castle_type_palace">Tipus de castell: palau</string>
+	<string name="poi_castle_type_kremlin">Tipus de castell: fortificació russa</string>
+	<string name="poi_castle_type_defensive_stately">Tipus de castell: residencial, defensiu</string>
+	<string name="poi_castle_type_castrum">Tipus de castell: romà</string>
+	<string name="poi_castle_type_shiro">Tipus de castell: japonès</string>
+
+	<string name="poi_massage_thai">Massatge: tailandès</string>
+	<string name="poi_massage_sexual">Massatge: sexual</string>
+	<string name="poi_massage_chinese">Massatge: xinès</string>
+	<string name="poi_massage_yes">Serveis de massatge</string>
+	<string name="poi_massage_therapeutic">Massatge: terapèutic</string>
+
+	<string name="poi_sauna_yes">Serveis de sauna</string>
+	<string name="poi_solarium_yes">Serveis de solàrium</string>
+
+	<string name="poi_tents_yes">Es permet l\'acampada</string>
+	<string name="poi_tents_no">No es permet l\'acampada</string>
+	<string name="poi_scout_yes">Camp escolta: sí</string>
+	<string name="poi_scout_no">Camp escolta: no</string>
+	<string name="poi_group_only_yes">Només per grups: sí</string>
+	<string name="poi_group_only_no">Només per grups: no</string>
+	<string name="poi_washing_machine_yes">Rentadora: sí</string>
+	<string name="poi_washing_machine_no">Rentadora: no</string>
+	<string name="poi_shower_yes">Dutxa: sí</string>
+	<string name="poi_shower_no">Dutxa: no</string>
+	<string name="poi_shower_hot">Dutxa: aigua calenta</string>
+	<string name="poi_shower_outdoor">Dutxa: exterior</string>
+	<string name="poi_shower_cold">Dutxa: aigua freda</string>
+	<string name="poi_shower_indoor">Dutxa: coberta</string>
+	<string name="poi_caravans_yes">Caravanes: sí</string>
+	<string name="poi_caravans_no">Caravanes: no</string>
+	<string name="poi_impromptu_yes">Acampada lliure: sí</string>
+	<string name="poi_impromptu_no">Acampada lliure: no</string>
+	<string name="poi_sanitary_dump_station_yes">Estació de buidatge sanitari: sí</string>
+	<string name="poi_sanitary_dump_station_no">Estació de buidatge sanitari: no</string>
+	<string name="poi_sanitary_dump_station_customers">Estació de buidatge sanitari: només clients</string>
+	<string name="poi_power_supply_yes">Subministrament elèctric: sí</string>
+	<string name="poi_power_supply_no">Subministrament elèctric: no</string>
+	<string name="poi_power_supply_cee_17_blue">Subministrament elèctric (endoll): CEE 17 blau</string>
+	<string name="poi_power_supply_cee_7_4">Subministrament elèctric (endoll): CEE 7/4</string>
+	<string name="poi_power_supply_cee_7_5">Subministrament elèctric (endoll): CEE 7/5</string>
+	<string name="poi_power_supply_nema_5_15">Subministrament elèctric (endoll): NEMA 5-15</string>
+
+	<string name="poi_capacity_tents">Capacitat de tendes</string>
+	<string name="poi_capacity_caravans">Capacitat de caravanes</string>
+	<string name="poi_dog_yes">Es permeten els gossos</string>
+	<string name="poi_dog_no">No es permeten els gossos</string>
+
+	<string name="poi_clothes_military">Roba militar</string>
+
+	<string name="poi_historic_period_old_kingdom">Període històric: antic regnat (2686-2181 aC)</string>
+	<string name="poi_historic_period_first_intermediate_period">Període històric: primer període intermedi (2181-2055 aC)</string>
+	<string name="poi_historic_period_second_intermediate_period">Període històric: segon període intermedi (1650 – 1550 aC)</string>
 	</resources>

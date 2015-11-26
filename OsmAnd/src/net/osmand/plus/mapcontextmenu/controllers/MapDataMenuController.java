@@ -3,52 +3,85 @@ package net.osmand.plus.mapcontextmenu.controllers;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
+import android.widget.Toast;
 
-import net.osmand.binary.BinaryMapDataObject;
+import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.map.OsmandRegions;
-import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
-import net.osmand.plus.download.DownloadResourceGroup;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.srtmplugin.SRTMPlugin;
+import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
+import net.osmand.plus.views.DownloadedRegionsLayer.DownloadMapObject;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.text.DateFormat;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class MapDataMenuController extends MenuController {
-	private WorldRegion region;
+	private DownloadMapObject mapObject;
 	private IndexItem indexItem;
 	private List<IndexItem> otherIndexItems;
+	private boolean srtmDisabled;
+	private boolean srtmNeedsInstallation;
 
 	private DownloadIndexesThread downloadThread;
 
-	public MapDataMenuController(OsmandApplication app, MapActivity mapActivity, PointDescription pointDescription, BinaryMapDataObject dataObject) {
+	public MapDataMenuController(OsmandApplication app, final MapActivity mapActivity, PointDescription pointDescription, final DownloadMapObject mapObject) {
 		super(new MenuBuilder(app), pointDescription, mapActivity);
-		initData(app, dataObject);
+		this.mapObject = mapObject;
+		indexItem = mapObject.getIndexItem();
 		downloadThread = app.getDownloadThread();
+		if (indexItem != null) {
+			otherIndexItems = new LinkedList<>(downloadThread.getIndexes().getIndexItems(mapObject.getWorldRegion()));
+			otherIndexItems.remove(indexItem);
+		}
+
+		srtmDisabled = OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) == null;
+		OsmandPlugin srtmPlugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
+		srtmNeedsInstallation = srtmPlugin == null || srtmPlugin.needsInstallation();
 
 		leftTitleButtonController = new TitleButtonController() {
 			@Override
 			public void buttonPressed() {
 				if (indexItem != null) {
-					new DownloadValidationManager(getMapActivity().getMyApplication())
-							.startDownload(getMapActivity(), indexItem);
+					if ((indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE
+							|| indexItem.getType() == DownloadActivityType.HILLSHADE_FILE)
+							&& srtmDisabled) {
+						getMapActivity().getContextMenu().close();
+
+						if (srtmNeedsInstallation) {
+							OsmandPlugin plugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
+							if (plugin != null) {
+								mapActivity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL())));
+							}
+						} else {
+							mapActivity.startActivity(new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization()
+									.getPluginsActivity()));
+							AccessibleToast.makeText(mapActivity, mapActivity.getString(R.string.activate_srtm_plugin),
+									Toast.LENGTH_SHORT).show();
+						}
+					} else {
+						new DownloadValidationManager(getMapActivity().getMyApplication())
+								.startDownload(getMapActivity(), indexItem);
+					}
 				}
 			}
 		};
@@ -71,14 +104,15 @@ public class MapDataMenuController extends MenuController {
 			public void buttonPressed() {
 				getMapActivity().getContextMenu().close();
 
-				DownloadResourceGroup group = downloadThread.getIndexes().getRegionGroup(region);
-				if (group != null) {
-					final Intent intent = new Intent(getMapActivity(), getMapActivity().getMyApplication()
-							.getAppCustomization().getDownloadIndexActivity());
-					intent.putExtra(DownloadActivity.FILTER_GROUP, group.getUniqueId());
-					intent.putExtra(DownloadActivity.TAB_TO_OPEN, DownloadActivity.DOWNLOAD_TAB);
-					getMapActivity().startActivity(intent);
+				Map<Object, IContextMenuProvider> selectedObjects = new HashMap<>();
+				IContextMenuProvider provider = mapActivity.getMapLayers().getDownloadedRegionsLayer();
+				for (IndexItem item : otherIndexItems) {
+					selectedObjects.put(
+							new DownloadMapObject(mapObject.getDataObject(), mapObject.getWorldRegion(), item),
+							provider);
 				}
+				mapActivity.getContextMenu().getMultiSelectionMenu().show(
+						mapActivity.getContextMenu().getLatLon(), selectedObjects);
 			}
 		};
 		topRightTitleButtonController.caption = getMapActivity().getString(R.string.download_select_map_types);
@@ -99,16 +133,10 @@ public class MapDataMenuController extends MenuController {
 		updateData();
 	}
 
-	private void initData(OsmandApplication app, BinaryMapDataObject dataObject) {
-		OsmandRegions osmandRegions = app.getRegions();
-		String fullName = osmandRegions.getFullName(dataObject);
-		this.region = osmandRegions.getRegionData(fullName);
-	}
-
 	@Override
 	protected void setObject(Object object) {
-		if (object instanceof BinaryMapDataObject) {
-			initData(getMapActivity().getMyApplication(), (BinaryMapDataObject) object);
+		if (object instanceof DownloadMapObject) {
+			this.mapObject = (DownloadMapObject) object;
 			updateData();
 		}
 	}
@@ -125,14 +153,20 @@ public class MapDataMenuController extends MenuController {
 
 	@Override
 	public Drawable getLeftIcon() {
-		return getIcon(R.drawable.ic_map, R.color.osmand_orange);
+		int iconResId;
+		if (indexItem != null) {
+			iconResId = indexItem.getType().getIconResource();
+		} else {
+			iconResId = R.drawable.ic_map;
+		}
+		return getIcon(iconResId, R.color.osmand_orange);
 	}
 
 	@Override
 	public String getTypeStr() {
 		String res;
-		if (region != null && region.getSuperregion() != null) {
-			res = region.getSuperregion().getLocaleName();
+		if (mapObject.getWorldRegion().getSuperregion() != null) {
+			res = mapObject.getWorldRegion().getSuperregion().getLocaleName();
 		} else {
 			res = getMapActivity().getString(R.string.shared_string_map);
 		}
@@ -150,10 +184,11 @@ public class MapDataMenuController extends MenuController {
 	@Override
 	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, LatLon latLon) {
 		if (indexItem != null) {
+			addPlainMenuItem(R.drawable.ic_action_info_dark, indexItem.getType().getString(getMapActivity()), false);
 			addPlainMenuItem(R.drawable.ic_action_info_dark, indexItem.getSizeDescription(getMapActivity()), false);
 		}
-		if (region != null && !Algorithms.isEmpty(region.getParams().getWikiLink())) {
-			String[] items = region.getParams().getWikiLink().split(":");
+		if (!Algorithms.isEmpty(mapObject.getWorldRegion().getParams().getWikiLink())) {
+			String[] items = mapObject.getWorldRegion().getParams().getWikiLink().split(":");
 			String url;
 			if (items.length > 1) {
 				url = "https://" + items[0] + ".wikipedia.org/wiki/" + items[1].replace(' ', '_');
@@ -181,7 +216,7 @@ public class MapDataMenuController extends MenuController {
 	@Override
 	public void updateData() {
 		if (indexItem == null) {
-			otherIndexItems = new LinkedList<>(downloadThread.getIndexes().getIndexItems(region));
+			otherIndexItems = new LinkedList<>(downloadThread.getIndexes().getIndexItems(mapObject.getWorldRegion()));
 			Iterator<IndexItem> it = otherIndexItems.iterator();
 			while (it.hasNext()) {
 				IndexItem i = it.next();
@@ -193,22 +228,27 @@ public class MapDataMenuController extends MenuController {
 			}
 		}
 
-		topRightTitleButtonController.visible = otherIndexItems.size() > 0;
+		leftTitleButtonController.leftIconId = R.drawable.ic_action_import;
 		if (indexItem != null) {
-			if (indexItem.isOutdated()) {
+			if ((indexItem.getType() == DownloadActivityType.SRTM_COUNTRY_FILE
+					|| indexItem.getType() == DownloadActivityType.HILLSHADE_FILE)
+					&& srtmDisabled) {
+				leftTitleButtonController.caption = getMapActivity().getString(R.string.get_plugin);
+				leftTitleButtonController.leftIconId = 0;
+			} else if (indexItem.isOutdated()) {
 				leftTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_update);
 			} else {
 				leftTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_download);
 			}
 		}
-		rightTitleButtonController.visible = indexItem != null && indexItem.isDownloaded();
 
-		boolean hasIndexes = downloadThread.getIndexes().isDownloadedFromInternet;
+		rightTitleButtonController.visible = indexItem != null && indexItem.isDownloaded();
+		topRightTitleButtonController.visible = otherIndexItems.size() > 0;
+
+		boolean downloadIndexes = !downloadThread.getIndexes().isDownloadedFromInternet
+				&& !downloadThread.getIndexes().downloadFromInternetFailed;
 		boolean isDownloading = indexItem != null && downloadThread.isDownloading(indexItem);
-		if (!hasIndexes) {
-			titleProgressController.setIndexesDownloadMode();
-			titleProgressController.visible = true;
-		} else if (isDownloading) {
+		if (isDownloading) {
 			titleProgressController.setMapDownloadMode();
 			if (downloadThread.getCurrentDownloadingItem() == indexItem) {
 				titleProgressController.indeterminate = false;
@@ -220,7 +260,7 @@ public class MapDataMenuController extends MenuController {
 			double mb = indexItem.getArchiveSizeMB();
 			String v ;
 			if (titleProgressController.progress != -1) {
-				v = getMapActivity().getString(R.string.value_downloaded_from_max, mb * titleProgressController.progress / 100, mb);
+				v = getMapActivity().getString(R.string.value_downloaded_of_max, mb * titleProgressController.progress / 100, mb);
 			} else {
 				v = getMapActivity().getString(R.string.file_size_in_mb, mb);
 			}
@@ -229,6 +269,9 @@ public class MapDataMenuController extends MenuController {
 			} else {
 				titleProgressController.caption = v;
 			}
+			titleProgressController.visible = true;
+		} else if (downloadIndexes) {
+			titleProgressController.setIndexesDownloadMode();
 			titleProgressController.visible = true;
 		} else {
 			titleProgressController.visible = false;
