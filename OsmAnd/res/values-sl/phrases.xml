@@ -69,7 +69,7 @@
 	<string name="poi_fire_hydrant">Hidrant</string>
 	<string name="poi_fire_extinguisher">Gasilni aparat</string>
 	<string name="poi_ambulance_station">Reševalna postaja</string>
-	<string name="poi_mountain_pass_yes">Gorski prelaz</string>
+	<string name="poi_mountain_pass">Gorski prelaz</string>
 	<string name="poi_city_wall">Mestno obzidje</string>
 	<string name="poi_car_wash">Avtopralnica</string>
 	<string name="poi_fuel">Bencinski servis</string>

@@ -152,7 +152,7 @@
 	<string name="poi_emergency_access_point">森林緊急利用點</string>
 
 	<string name="poi_ford">低窪路段</string>
-	<string name="poi_mountain_pass_yes">隘口</string>
+	<string name="poi_mountain_pass">隘口</string>
 	<string name="poi_gate">門</string>
 	<string name="poi_city_wall">城牆</string>
 	<string name="poi_lift_gate">電動柵欄</string>
