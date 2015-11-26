@@ -1847,7 +1847,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">Aktualizovať všetko (%1$s MB)</string>
     <string name="free_downloads_used">Počet použitých voľných stiahnutí</string>
-    <string name="free_downloads_used_description">Môžete nastaviť, koľko voľných stiahnutí ste už použili</string>
+    <string name="free_downloads_used_description">Zobrazuje počet využitých stiahnutí</string>
     <string name="simulate_initial_startup_descr">Nastaví príznak indikujúci prvý štart aplikácie, ostatné nastavenia ponechá nezmenené</string>
     <string name="simulate_initial_startup">Simulovať prvé spustenie aplikácie</string>
     <string name="share_geo">geo:</string>
