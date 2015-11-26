@@ -2115,4 +2115,7 @@ POIの更新は利用できません</string>
     <string name="use_drawer_btn">メニューを使用</string>
     <string name="dashboard_or_drawer_title">ダッシュ ボードまたはメニュー</string>
     <string name="dashboard_or_drawer_description">よく扱う項目を簡単に呼び出せるダッシュボード、または従来のメニューの好きな方を優先設定できます。どちらを優先させるかはダッシュボード設定からいつでも変更できます。</string>
-</resources>
+<string name="routing_attr_avoid_stairs_name">階段を避ける</string>
+	<string name="routing_attr_avoid_stairs_description">階段を避ける</string>
+	<string name="routing_attr_avoid_borders_name">国境越えを回避する</string>
+	</resources>
