@@ -1935,7 +1935,7 @@
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">Agiorna totu (%1$s MB)</string>
     <string name="free_downloads_used">Iscarrigamentos gratùitos impreados</string>
-    <string name="free_downloads_used_description">Podes impostare cantos iscarrigamentos gratùitos as impreadu</string>
+    <string name="free_downloads_used_description">Ammustra sos iscarrigamentos gratùitos impreados</string>
     <string name="simulate_initial_startup_descr">Imposta sa bandera chi indicat sa prima allumingiadura de s\'aplicatzione, mantène totu sas àteras impostaziones comente sunt</string>
     <string name="simulate_initial_startup">Sìmula sa prima allumingiadura de s’aplicatzione</string>
     <string name="share_geo">geo:</string>
