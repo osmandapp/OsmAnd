@@ -1,23 +1,23 @@
 package net.osmand.plus.activities.search;
 
-import java.util.Comparator;
-import java.util.List;
-
+import android.os.AsyncTask;
+import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Toast;
+
 import net.osmand.ResultMatcher;
 import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.LatLon;
 import net.osmand.data.Street;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.search.SearchAddressFragment.AddressInformation;
 import net.osmand.plus.resources.RegionAddressRepository;
 import net.osmand.util.Algorithms;
-import android.os.AsyncTask;
-import android.view.View;
-import android.widget.Toast;
+
+import java.util.Comparator;
+import java.util.List;
 
 public class SearchBuildingByNameActivity extends SearchByNameAbstractActivity<Building> {
 	private RegionAddressRepository region;

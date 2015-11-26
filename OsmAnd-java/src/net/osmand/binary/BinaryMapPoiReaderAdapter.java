@@ -1,18 +1,8 @@
 package net.osmand.binary;
 
 
-import gnu.trove.list.array.TIntArrayList;
-import gnu.trove.map.hash.TIntLongHashMap;
-import gnu.trove.set.hash.TLongHashSet;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
+import com.google.protobuf.CodedInputStream;
+import com.google.protobuf.WireFormat;
 
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
@@ -30,8 +20,18 @@ import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
-import com.google.protobuf.CodedInputStream;
-import com.google.protobuf.WireFormat;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.map.hash.TIntLongHashMap;
+import gnu.trove.set.hash.TLongHashSet;
 
 public class BinaryMapPoiReaderAdapter {
 	private static final Log LOG = PlatformUtil.getLog(BinaryMapPoiReaderAdapter.class);

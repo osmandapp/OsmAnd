@@ -1,19 +1,5 @@
 package net.osmand.plus.activities;
 
-import net.osmand.PlatformUtil;
-import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper;
-import net.osmand.plus.activities.search.SearchActivity;
-import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
-import net.osmand.plus.dialogs.DirectionsDialogs;
-import net.osmand.plus.dialogs.FavoriteDialogs;
-import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
-import android.app.Dialog;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
@@ -36,6 +22,17 @@ import android.widget.TextView;
 
 import com.jwetherell.openmap.common.LatLonPoint;
 import com.jwetherell.openmap.common.UTMPoint;
+
+import net.osmand.PlatformUtil;
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.search.SearchActivity;
+import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
+import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 public class NavigatePointFragment extends Fragment implements SearchActivityChild {
 	int currentFormat = Location.FORMAT_DEGREES;

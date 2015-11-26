@@ -1,9 +1,7 @@
 package net.osmand.osm;
 
-import net.osmand.CollatorStringMatcher;
 import net.osmand.PlatformUtil;
 import net.osmand.StringMatcher;
-import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.data.Amenity;
 import net.osmand.util.Algorithms;
 

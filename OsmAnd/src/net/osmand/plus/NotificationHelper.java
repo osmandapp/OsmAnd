@@ -1,7 +1,5 @@
 package net.osmand.plus;
 
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -10,6 +8,9 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.v4.app.NotificationCompat.Builder;
 import android.support.v7.app.NotificationCompat;
+
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 
 public class NotificationHelper {
 	public final static int NOTIFICATION_SERVICE_ID = 5;

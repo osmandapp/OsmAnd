@@ -1,11 +1,10 @@
 package net.osmand.plus.srtmplugin;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.os.AsyncTask;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -20,11 +19,12 @@ import net.osmand.plus.views.MapTileLayer;
 
 import org.apache.commons.logging.Log;
 
-import android.content.ContentValues;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
-import android.os.AsyncTask;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 public class HillshadeLayer extends MapTileLayer {
 
