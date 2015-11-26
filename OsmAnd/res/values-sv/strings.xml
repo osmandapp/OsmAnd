@@ -2014,4 +2014,8 @@
     <string name="routing_attr_avoid_stairs_name">Undvik trappor</string>
 	<string name="routing_attr_avoid_stairs_description">Undvik trappor</string>
 	<string name="routing_attr_avoid_borders_name">Undvik gränsövergång</string>
+	<string name="simulate_initial_startup">Simulera första appstarten</string>
+    <string name="action_create">Åtgärd skapa</string>
+	<string name="action_modify">Åtgärd ändra</string>
+	<string name="action_delete">Åtgärd ta bort</string>
 	</resources>
