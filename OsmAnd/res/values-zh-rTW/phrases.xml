@@ -2258,4 +2258,14 @@
 	<string name="poi_historic_civilization_ancient_egyptian">文明：古埃及 (到西元前332年爲止)</string>
 	<string name="poi_historic_civilization_celtic">文明：凱爾特</string>
 	<string name="poi_historic_civilization_western_roman">文明：西方羅馬 (西元285年 – 西元476年)</string>
+	<string name="poi_historic_civilization_mycenaean">文明：美錫尼</string>
+	<string name="poi_historic_civilization_dacian">文明：達基亞</string>
+	<string name="poi_historic_civilization_hernici">文明：hernici</string>
+	<string name="poi_historic_civilization_greek_egyptian">文明：希臘埃及 (西元前332年 – 西元前30年)</string>
+	<string name="poi_historic_civilization_roman_and_byzantine_egyptian">文明：羅馬和拜占庭、埃及</string>
+	<string name="poi_historic_civilization_helladic">文明：希臘青銅期</string>
+	<string name="poi_historic_civilization_cycladic">文明：基克拉澤斯</string>
+	<string name="poi_historic_civilization_minoan">文明：米諾</string>
+	<string name="poi_historic_civilization_tiahuanacota">文明：蒂亞瓦納科</string>
+
 	</resources>
