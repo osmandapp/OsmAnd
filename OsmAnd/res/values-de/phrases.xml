@@ -865,7 +865,7 @@
 	<string name="poi_full_height_turnstile">Personendrehkreuz</string>
 	<string name="poi_bump_gate">Schwingtor</string>
 	<string name="poi_general_barrier">Barriere</string>
-	<string name="poi_height_restrictor">Höhenbegrenzung</string>
+	<string name="poi_height_restrictor">Höhendurchfahrtbegrenzung</string>
 	<string name="poi_sally_port">Ausfalltor</string>
 	<string name="poi_turnstile">Drehkreuz</string>
 	<string name="poi_kent_carriage_gap">Kutschendurchlass</string>
