@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="search_button">Poišči</string>
     <string name="search_activity">Iskanje podatkov</string>
 
@@ -1996,7 +1997,7 @@
     <string name="context_menu_item_edit_waypoint">Uredi vmesno točko GPX</string>
     <string name="shared_string_location">Mesto</string>
     <string name="poi_context_menu_modify_osm_change">Popravi spremembo OSM</string>
-<string name="please_specify_poi_type_only_from_list">"Določiti je treba ustrezno vrsto točke POI ali pa jo preskočiti. "</string>
+<string name="please_specify_poi_type_only_from_list">"Določiti je treba ustrezno vrsto točke POI ali pa podatek preskočiti. "</string>
     <string name="access_from_map_description">Menijski gumb zažene nadzorno ploščo in ne menija</string>
     <string name="access_from_map">Dostop prek zemljevida</string>
     <string name="copied_to_clipboard">Vsebina je kopirana v odložišče</string>
