@@ -1580,4 +1580,29 @@
 	<string name="poi_denomination_united_church_of_christ">Vereinigte Kirche Christi</string>
 	<string name="poi_denomination_scientist">Wissenschaftler</string>
 	<string name="poi_denomination_romanian_orthodox">Rumänisch-orthodox</string>
+	<string name="poi_stone_type_coat_of_arms">Typ: Wappen</string>
+
+	<string name="poi_material_reinforced_concrete">Material: Stahlbeton</string>
+	<string name="poi_material_concrete">Material: Beton</string>
+	<string name="poi_material_masonry">Material: Mauerwerk</string>
+	<string name="poi_material_brick">Martial: Ziegel</string>
+	<string name="poi_material_composite">Material: zusammengesetzte</string>
+	<string name="poi_material_limestone">Material: Kalkstein</string>
+	<string name="poi_material_marble">Material: Marmor</string>
+	<string name="poi_site_type_megalith">Typ: Magalith</string>
+	<string name="poi_site_type_tumulus">Typ: Grabhügel</string>
+	<string name="poi_site_type_fortification">Typ: Befestigung</string>
+	<string name="poi_site_type_settlement">Typ: Siedlung</string>
+	<string name="poi_site_type_city">Typ: Stadt</string>
+	<string name="poi_site_type_necropolis">Typ: Nekropole</string>
+	<string name="poi_site_type_earthwork">Typ: Erdarbeiten</string>
+	<string name="poi_megalith_type_menhir">Megalith-Typ: Menhir</string>
+	<string name="poi_megalith_type_dolmen">Megalith-Typ: Dolmen</string>
+	<string name="poi_fortification_type_hill_fort">Befestigungstyp: Höhenburg</string>
+	<string name="poi_fortification_type_limes">Befestigungstyp: Limes</string>
+	<string name="poi_fortification_type_sconce">Befestigungstyp: Leuchter</string>
+	<string name="poi_fortification_type_ring_ditch">Befestigungstyp: Ringgraben</string>
+
+	<string name="poi_pa">Pa (befestigte Siedlung der Maori)</string>
+
 	</resources>
