@@ -31,7 +31,6 @@ import android.util.Log;
 import com.twofortyfouram.spackle.AndroidSdkVersion;
 import com.twofortyfouram.spackle.AppBuildInfo;
 import com.twofortyfouram.spackle.ContextUtil;
-import com.twofortyfouram.spackle.R;
 import com.twofortyfouram.spackle.StrictModeCompat;
 import com.twofortyfouram.spackle.bundle.BundlePrinter;
 import com.twofortyfouram.spackle.internal.Reflector;
@@ -124,7 +123,7 @@ public final class Lumberjack {
      * Flag indicating whether extra debug options are enabled.
      */
     @SuppressWarnings("StaticNonFinalField")
-    private static volatile boolean sIsDebuggable = false;
+    private static volatile boolean sIsDebuggable = true;
 
     /**
      * Initializes logging.
@@ -140,7 +139,6 @@ public final class Lumberjack {
         final Context ctx = ContextUtil.cleanContext(context);
 
         sLogTag = getLogTag(ctx);
-        sIsDebuggable = ctx.getResources().getBoolean(R.bool.com_twofortyfouram_log_is_debug);
         if (sIsDebuggable) {
             StrictModeCompat.setStrictMode(true);
 
@@ -394,7 +392,7 @@ public final class Lumberjack {
      */
     @NonNull
     private static String getLogTag(@NonNull final Context context) {
-        final String logTag = context.getString(R.string.com_twofortyfouram_log_tag);
+        final String logTag = "";
 
         if (0 == logTag.length()) {
             return getApplicationName(context);

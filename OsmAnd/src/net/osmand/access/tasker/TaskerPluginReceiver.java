@@ -1,4 +1,4 @@
-package net.osmand.plus.tasker;
+package net.osmand.access.tasker;
 
 import android.content.Context;
 import android.os.Bundle;

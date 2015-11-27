@@ -1,4 +1,4 @@
-package net.osmand.plus.tasker;
+package net.osmand.access.tasker;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,7 +11,7 @@ public final class PluginBundleValues {
 
 	@NonNull
 	public static final String BUNDLE_EXTRA_BOOLEAN_TEST
-			= "net.osmand.plus.tasker.extra.BUNDLE_EXTRA_BOOLEAN_TEST"; //$NON-NLS-1$
+			= "net.osmand.access.tasker.extra.BUNDLE_EXTRA_BOOLEAN_TEST"; //$NON-NLS-1$
 
 	public static boolean isBundleValid(@Nullable final Bundle bundle) {
 		if (null == bundle) {

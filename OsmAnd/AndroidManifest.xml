@@ -472,7 +472,7 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".tasker.TaskerPluginEditActivity" >
+        <activity android:name="net.osmand.access.tasker.TaskerPluginEditActivity" >
         </activity>
 
         <activity-alias
@@ -480,7 +480,7 @@
             android:exported="true"
             android:icon="@drawable/icon"
             android:label="@string/app_name"
-            android:targetActivity=".tasker.TaskerPluginEditActivity" >
+            android:targetActivity="net.osmand.access.tasker.TaskerPluginEditActivity" >
             <intent-filter>
                 <!-- For a plug-in setting, use EDIT_SETTING instead. -->
                 <action android:name="net.dinglisch.android.tasker.ACTION_EDIT_EVENT" />
@@ -488,7 +488,7 @@
         </activity-alias>
 
         <receiver
-            android:name=".tasker.TaskerPluginReceiver"
+            android:name="net.osmand.access.tasker.TaskerPluginReceiver"
             android:enabled="true"
             android:exported="true"
             android:process=":background" >

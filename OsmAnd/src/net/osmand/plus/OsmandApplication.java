@@ -26,6 +26,8 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.twofortyfouram.log.Lumberjack;
+
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityPlugin;
 import net.osmand.access.AccessibleAlertBuilder;
@@ -138,6 +140,7 @@ public class OsmandApplication extends MultiDexApplication {
 		timeToStart = System.currentTimeMillis();
 		OsmandPlugin.initPlugins(this);
 		System.out.println("Time to init plugins " + (System.currentTimeMillis() - timeToStart) + " ms. Should be less < 800 ms");
+		Lumberjack.init(getApplicationContext());
 	}
 
 	@Override

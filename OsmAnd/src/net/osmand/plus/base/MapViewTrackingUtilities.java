@@ -4,8 +4,11 @@ import android.content.Context;
 import android.view.WindowManager;
 
 import net.osmand.Location;
+import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.ValueHolder;
+import net.osmand.access.tasker.TaskerPlugin;
+import net.osmand.access.tasker.TaskerPluginEditActivity;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.IMapLocationListener;
 import net.osmand.plus.OsmAndConstants;
@@ -21,16 +24,18 @@ import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.IRouteInformationListener;
-import net.osmand.plus.tasker.TaskerPluginEditActivity;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.MapUtils;
 
+import org.apache.commons.logging.Log;
+
 import java.util.List;
 
 public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLocationListener, OsmAndCompassListener, IRouteInformationListener {
-	private static final int AUTO_FOLLOW_MSG_ID = OsmAndConstants.UI_HANDLER_LOCATION_SERVICE + 4; 
-	
+	private static final int AUTO_FOLLOW_MSG_ID = OsmAndConstants.UI_HANDLER_LOCATION_SERVICE + 4;
+	private static final Log LOG = PlatformUtil.getLog(MapViewTrackingUtilities.class);
+
 	private long lastTimeAutoZooming = 0;
 	private boolean sensorRegistered = false;
 	private OsmandMapTileView mapView;
@@ -148,6 +153,8 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		if(contextMenu != null) {
 			contextMenu.updateMyLocation(location);
 		}
+		LOG.debug("INTENT_REQUEST_REQUERY");
+		TaskerPlugin.Event.addPassThroughMessageID(TaskerPluginEditActivity.INTENT_REQUEST_REQUERY);
 		app.sendBroadcast(TaskerPluginEditActivity.INTENT_REQUEST_REQUERY);
 	}
 

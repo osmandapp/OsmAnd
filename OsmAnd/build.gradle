@@ -342,23 +342,15 @@ repositories {
 }
 
 dependencies {
-	compile project(path: ":OsmAnd-java", configuration: "android")
-	compile project(":eclipse-compile:design")
-	compile project(":eclipse-compile:cardview")
-	compile project(":eclipse-compile:pluginClientSdkLib")
-
-	compile fileTree(
-			dir: "libs",
-			include: ["*.jar"],
-			exclude: [
-					"QtAndroid-bundled.jar",
-					"QtAndroidAccessibility-bundled.jar",
-					"OsmAndCore_android.jar",
-					"OsmAndCore_wrapper.jar",
-					"android-support-multidex.jar"])
+	compile project(path: ':OsmAnd-java', configuration: 'android')
+	compile project(':eclipse-compile:design')
+	compile project(':eclipse-compile:cardview')
+	compile project(':eclipse-compile:pluginClientSdkLib')
+	compile fileTree(include: ['*.jar'], exclude: ['QtAndroid-bundled.jar', 'QtAndroidAccessibility-bundled.jar', 'OsmAndCore_android.jar', 'OsmAndCore_wrapper.jar', 'android-support-multidex.jar'], dir: 'libs')
 	legacyCompile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@jar"
 	qtcoredebugCompile "net.osmand:OsmAndCore_androidNativeDebug:0.1-SNAPSHOT@aar"
 	qtcoredebugCompile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"
 	qtcoreCompile "net.osmand:OsmAndCore_androidNativeRelease:0.1-SNAPSHOT@aar"
 	qtcoreCompile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"
+	compile project(':eclipse-compile:pluginApiLib')
 }

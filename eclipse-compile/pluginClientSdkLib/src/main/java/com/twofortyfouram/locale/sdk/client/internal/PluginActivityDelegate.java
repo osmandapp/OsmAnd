@@ -26,6 +26,7 @@ import net.jcip.annotations.Immutable;
  */
 @Immutable
 public final class PluginActivityDelegate<T extends Activity & IPluginActivity> {
+    public static final String TAG = "TaskerPluginEditActivit";
     /**
      * @param intent Intent to check.
      * @return True if intent is a Locale plug-in edit Intent.
@@ -34,7 +35,8 @@ public final class PluginActivityDelegate<T extends Activity & IPluginActivity> 
         final String action = intent.getAction();
 
         return com.twofortyfouram.locale.api.Intent.ACTION_EDIT_CONDITION.equals(action)
-                || com.twofortyfouram.locale.api.Intent.ACTION_EDIT_SETTING.equals(action);
+                || com.twofortyfouram.locale.api.Intent.ACTION_EDIT_SETTING.equals(action)
+                || "net.dinglisch.android.tasker.ACTION_EDIT_EVENT".equals(action);
     }
 
     public void onCreate(@NonNull final T activity, @Nullable final Bundle savedInstanceState) {
@@ -72,7 +74,6 @@ public final class PluginActivityDelegate<T extends Activity & IPluginActivity> 
         if (PluginActivityDelegate.isLocalePluginIntent(activity.getIntent())) {
             if (!isCancelled) {
                 final Bundle resultBundle = activity.getResultBundle();
-
                 if (null != resultBundle) {
                     final String blurb = activity.getResultBlurb(resultBundle);
                     if (!BundleComparer.areBundlesEqual(resultBundle, activity.getPreviousBundle())

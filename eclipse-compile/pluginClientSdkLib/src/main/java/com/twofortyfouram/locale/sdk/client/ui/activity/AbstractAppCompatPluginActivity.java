@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.twofortyfouram.locale.sdk.client.internal.PluginActivityDelegate;
 
@@ -79,7 +80,7 @@ public abstract class AbstractAppCompatPluginActivity extends AppCompatActivity 
      * There is no need to save/restore this field's state.
      */
     protected boolean mIsCancelled = false;
-
+    public static final String TAG = "TaskerPluginEditActivit";
     @NonNull
     private final PluginActivityDelegate<AbstractAppCompatPluginActivity> mPluginActivityDelegate = new PluginActivityDelegate<>();
 
@@ -99,6 +100,7 @@ public abstract class AbstractAppCompatPluginActivity extends AppCompatActivity 
 
     @Override
     public void finish() {
+        Log.d(TAG, "finish() mIsCancelled=" + mIsCancelled);
         mPluginActivityDelegate.finish(this, mIsCancelled);
 
         /*

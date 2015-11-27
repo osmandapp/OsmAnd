@@ -22,8 +22,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
-import com.twofortyfouram.log.Lumberjack;
 import com.twofortyfouram.spackle.AndroidSdkVersion;
 import com.twofortyfouram.spackle.bundle.BundleScrubber;
 
@@ -63,27 +63,28 @@ import java.lang.annotation.RetentionPolicy;
  * </p>
  */
 public abstract class AbstractPluginConditionReceiver extends AbstractAsyncReceiver {
+    private static final String TAG = "AbstractPluginCondition";
 
     /*
-     * The multiple return statements in this method are a little gross, but the
-     * alternative of nested if statements is even worse :/
-     */
+		 * The multiple return statements in this method are a little gross, but the
+		 * alternative of nested if statements is even worse :/
+		 */
     @Override
     public final void onReceive(final Context context, final Intent intent) {
-        if (BundleScrubber.scrub(intent)) {
-            return;
-        }
+//        if (BundleScrubber.scrub(intent)) {
+//            return;
+//        }
 
-        Lumberjack.v("Received %s", intent); //$NON-NLS-1$
+        Log.v(TAG, "Received " + intent); //$NON-NLS-1$
 
         if (!isOrderedBroadcast()) {
-            Lumberjack.e("Broadcast is not ordered"); //$NON-NLS-1$
+            Log.e(TAG, "Broadcast is not ordered"); //$NON-NLS-1$
             return;
         }
 
         if (!com.twofortyfouram.locale.api.Intent.ACTION_QUERY_CONDITION.equals(intent
                 .getAction())) {
-            Lumberjack
+            Log
                     .e("Intent action is not %s",
                             com.twofortyfouram.locale.api.Intent.ACTION_QUERY_CONDITION); //$NON-NLS-1$
             setResultCode(com.twofortyfouram.locale.api.Intent.RESULT_CONDITION_UNKNOWN);
@@ -96,7 +97,7 @@ public abstract class AbstractPluginConditionReceiver extends AbstractAsyncRecei
          */
         if (!new ComponentName(context, this.getClass().getName()).equals(intent
                 .getComponent())) {
-            Lumberjack.e("Intent is not explicit"); //$NON-NLS-1$
+            Log.e(TAG, "Intent is not explicit"); //$NON-NLS-1$
             setResultCode(com.twofortyfouram.locale.api.Intent.RESULT_CONDITION_UNKNOWN);
             abortBroadcast();
             return;
@@ -109,15 +110,13 @@ public abstract class AbstractPluginConditionReceiver extends AbstractAsyncRecei
         }
 
         if (null == bundle) {
-            Lumberjack.e("%s is missing",
-                    com.twofortyfouram.locale.api.Intent.EXTRA_BUNDLE); //$NON-NLS-1$
+            Log.e(TAG, com.twofortyfouram.locale.api.Intent.EXTRA_BUNDLE + " is missing"); //$NON-NLS-1$
             setResultCode(com.twofortyfouram.locale.api.Intent.RESULT_CONDITION_UNKNOWN);
             return;
         }
 
         if (!isBundleValid(bundle)) {
-            Lumberjack.e("%s is invalid",
-                    com.twofortyfouram.locale.api.Intent.EXTRA_BUNDLE); //$NON-NLS-1$
+            Log.e(TAG, com.twofortyfouram.locale.api.Intent.EXTRA_BUNDLE + " is invalid"); //$NON-NLS-1$
             setResultCode(com.twofortyfouram.locale.api.Intent.RESULT_CONDITION_UNKNOWN);
             return;
         }
@@ -157,13 +156,13 @@ public abstract class AbstractPluginConditionReceiver extends AbstractAsyncRecei
                 && com.twofortyfouram.locale.api.Intent.RESULT_CONDITION_UNSATISFIED != result
                 && com.twofortyfouram.locale.api.Intent.RESULT_CONDITION_UNKNOWN != result) {
             throw new AssertionError(
-                    Lumberjack
-                            .formatMessage(
+                    Log.v(TAG,
+                            String.format(
                                     "result=%d is not one of [%d, %d, %d]", result, //$NON-NLS-1$
                                     com.twofortyfouram.locale.api.Intent.RESULT_CONDITION_SATISFIED,
                                     com.twofortyfouram.locale.api.Intent.RESULT_CONDITION_UNSATISFIED,
-                                    com.twofortyfouram.locale.api.Intent.RESULT_CONDITION_UNKNOWN)
-            );
+                                    com.twofortyfouram.locale.api.Intent.RESULT_CONDITION_UNKNOWN))
+                    );
         }
     }
 
