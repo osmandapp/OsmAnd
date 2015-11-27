@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="regions">Regionen</string>
 	<string name="region_maps">Regionsweite Karten</string>
@@ -80,7 +80,7 @@
 	<string name="context_menu_item_destination_point">Als Ziel wählen</string>
 	<string name="layer_hillshade">Relief Overlay</string>
 	
-	<string name="download_hillshade_maps">Relief-Overlays</string>
+	<string name="download_hillshade_maps">Reliefkarte</string>
 	
 	<string name="rendering_attr_noAdminboundaries_name">Grenzen ausblenden</string>
 	<string name="rendering_attr_noAdminboundaries_description">Unterdrückt die Anzeige regionaler Grenzverläufe</string>
@@ -1006,7 +1006,7 @@
 	<string name="select_animate_speedup">Geschwindigkeit für Routen-Simulation wählen</string>
 	<string name="osmand_parking_hours">Stunde(n)</string>
 	<string name="osmand_parking_minutes">Minuten</string>
-	<string name="osmand_parking_position_description_add_time">Das Auto wurde hier geparkt:</string>
+	<string name="osmand_parking_position_description_add_time">Das Auto wurde geparkt um</string>
 	<string name="route_updated_loc_found">Route wird neu berechnet sobald Standort ermittelt</string>
 	<string name="continue_follow_previous_route_auto">Vorherige Navigation wurde nicht beendet. Der Route weiter folgen? (%1$s Sekunden)</string>
 
@@ -2142,7 +2142,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="contact_us">Kontakt</string>
     <string name="map_legend">Kartenlegende</string>
     <string name="access_from_map_description">Menü-Knopf zeigt Dashboard, nicht Menü</string>
-    <string name="show_on_start_description">\"Aus\" startet direkt die Kartenansicht.</string>
+    <string name="show_on_start_description">\"Aus\" startet direkt die Kartenansicht</string>
     <string name="copied_to_clipboard">In die Zwischenablage kopiert</string>
     <string name="release_2_2">" • Neue Kontext-bezogene Benutzeroberfläche bei Auswahl von Orten auf der Karte und anderen Ansichten\n\n • Kartenansicht wird nun direkt gestartet, außer bei Auswahl von \'Zeige Dashboard bei App-Start\'\n\n • Auswahl der anzuzeigenden Elemente im Dashboard möglich\n\n • Dashboard kann umgangen werden, falls menü-basierte App-Steuerung gewünscht ist\n\n • Zum Herunterladen von Kartendateien können nun Regionen direkt durch Tippen auf der Weltkarte ausgewählt werden\n\n • Die POI-Suche ermöglicht nun speziellere Abfragen\n\n • Verbesserungen beim Editieren von POI- und OSM-Objekten\n\n • Oberfläche und Struktur zum Herunterladen der Karten wurden überarbeitet\n\n und mehr ... "</string>
     <string name="osm_save_offline">offline speichern</string>
@@ -2200,4 +2200,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 
     <string name="shared_string_location">Position</string>
     <string name="hillshade_layer_disabled">Relief deaktiviert</string>
+    <string name="shared_string_commit">Freigeben</string>
+	
+    <string name="av_locations">Positionen</string>
     </resources>
