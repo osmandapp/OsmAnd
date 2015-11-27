@@ -18,6 +18,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentPoint;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -54,7 +55,7 @@ public class RoutePlannerFrontEnd {
 		return dx * dx + dy * dy;
 	}
 	
-	public RouteSegmentPoint findRouteSegment(double lat, double lon, RoutingContext ctx) throws IOException {
+	public RouteSegmentPoint findRouteSegment(double lat, double lon, boolean searchWithName, RoutingContext ctx) throws IOException {
 		int px = MapUtils.get31TileNumberX(lon);
 		int py = MapUtils.get31TileNumberY(lat);
 		ArrayList<RouteDataObject> dataObjects = new ArrayList<RouteDataObject>();
@@ -64,6 +65,10 @@ public class RoutePlannerFrontEnd {
 		}
 		List<RouteSegmentPoint> list = new ArrayList<BinaryRoutePlanner.RouteSegmentPoint>();
 		for (RouteDataObject r : dataObjects) {
+			boolean emptyName = Algorithms.isEmpty(r.getName()) && Algorithms.isEmpty(r.getRef()) ;
+			if(searchWithName && emptyName) {
+				continue;
+			}
 			if (r.getPointsLength() > 1) {
 				RouteSegmentPoint road = null;
 				for (int j = 1; j < r.getPointsLength(); j++) {
@@ -279,7 +284,7 @@ public class RoutePlannerFrontEnd {
 	}
 
 	private boolean addSegment(LatLon s, RoutingContext ctx, int indexNotFound, List<RouteSegmentPoint> res) throws IOException {
-		RouteSegmentPoint f = findRouteSegment(s.getLatitude(), s.getLongitude(), ctx);
+		RouteSegmentPoint f = findRouteSegment(s.getLatitude(), s.getLongitude(), false, ctx);
 		if(f == null){
 			ctx.calculationProgress.segmentNotFound = indexNotFound;
 			return false;
