@@ -371,7 +371,7 @@
 	<string name="poi_religion_muslim">Muslimische Kultstätte</string>
 	<string name="poi_religion_shinto">Shintoistische Kultstätte</string>
 	<string name="poi_religion_sikh">Sikh Kultstätte</string>
-	<string name="poi_religion_taoist">Taoistische Kultstätte</string>
+	<string name="poi_religion_taoist">Taoismus</string>
 	<string name="poi_craft_plasterer">Stuckateur</string>
 	<string name="poi_playground">Spielplatz</string>
 	<string name="poi_craft_plumber">Installateur</string>
@@ -1703,4 +1703,18 @@
 	<string name="poi_wetland_bog">Moor</string>
 	<string name="poi_wetland_marsh">Sumpf</string>
 	<string name="poi_wetland_reedbed">Schilf</string>
+	<string name="poi_recycling_hardcore">(Bau)Schutt</string>
+	<string name="poi_brownfield">Bauland</string>
+	<string name="poi_religion_unitarian_universalist">Unitarischer Universalismus</string>
+	<string name="poi_religion_multifaith">Mehrfachgläubig</string>
+	<string name="poi_religion_scientologist">Scientology</string>
+	<string name="poi_denomination_uniting">Vereinigung</string>
+	<string name="poi_denomination_congregational">Congregational</string>
+	<string name="poi_denomination_ethiopian_orthodox_tewahedo">Äthiopisch-orthodoxe tewahedo-Kirche</string>
+	<string name="poi_denomination_unitarian">Unitarisch</string>
+	<string name="poi_denomination_wesleyan">Wesleyan</string>
+	<string name="poi_denomination_shingon_shu">Schule des wahren Wortes</string>
+	<string name="poi_denomination_mahayana">Mahayana</string>
+
+	<string name="poi_jersey_barrier">Jersey Barriere</string>
 	</resources>
