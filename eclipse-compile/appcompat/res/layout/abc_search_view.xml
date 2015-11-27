@@ -35,7 +35,7 @@
             android:textColor="?android:attr/textColorPrimary"
             android:visibility="gone" />
 
-    <android.support.v7.internal.widget.TintImageView
+    <ImageView
             android:id="@+id/search_button"
             style="?attr/actionButtonStyle"
             android:layout_width="wrap_content"
@@ -57,7 +57,7 @@
             android:orientation="horizontal"
             android:layoutDirection="locale">
 
-        <android.support.v7.internal.widget.TintImageView
+        <ImageView
                 android:id="@+id/search_mag_icon"
                 android:layout_width="@dimen/abc_dropdownitem_icon_width"
                 android:layout_height="wrap_content"
@@ -94,7 +94,7 @@
                   android:dropDownVerticalOffset="0dip"
                   android:dropDownHorizontalOffset="0dip" />
 
-            <android.support.v7.internal.widget.TintImageView
+            <ImageView
                     android:id="@+id/search_close_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -113,7 +113,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent">
 
-            <android.support.v7.internal.widget.TintImageView
+            <ImageView
                     android:id="@+id/search_go_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -125,7 +125,7 @@
                     android:focusable="true"
                     android:contentDescription="@string/abc_searchview_description_submit" />
 
-            <android.support.v7.internal.widget.TintImageView
+            <ImageView
                     android:id="@+id/search_voice_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"

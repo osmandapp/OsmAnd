@@ -167,7 +167,7 @@
 	<string name="poi_emergency_access_point">森林内番地札(Emergency access point)</string>
 
 	<string name="poi_ford">道路上水没地点(Ford)</string>
-	<string name="poi_mountain_pass_yes">峠(Mountain pass)</string>
+	<string name="poi_mountain_pass">峠(Mountain pass)</string>
 	<string name="poi_gate">門(Gate)</string>
 	<string name="poi_city_wall">市壁・城壁(City wall)</string>
 	<string name="poi_lift_gate">遮断機(Lift gate)</string>
@@ -573,7 +573,7 @@
 	<string name="poi_piste_sleigh">中型～大型ソリゲレンデ(Sleigh piste)</string>
 	<string name="poi_piste_sled">小型ソリゲレンデ(Sled piste)</string>
 	<string name="poi_piste_snow_park">スノーパーク・雪中公園(Snow park)</string>
-	<string name="poi_piste_playground">雪遊び場・キッズゲレンデ(Playground)</string>
+	<string name="poi_piste_playground">雪遊び場・キッズゲレンデ(Playground piste)</string>
 	<string name="poi_piste_ice_skate">アイススケート(Ice skate)</string>
 
 	<string name="poi_arts_centre">アート公演・制作所(Arts centre)</string>
@@ -987,4 +987,52 @@
 	<string name="poi_internet_access_no">インターネットなし(Internet access: no)</string>
 
 	<string name="poi_religious">宗教関係エリア(Religious area)</string>
+	<string name="poi_cutline">森林の切れ目(Cutline)</string>
+	<string name="poi_shower">シャワー(Shower)</string>
+	<string name="poi_tree">樹木(Tree)</string>
+	<string name="poi_military_office">軍事事務所(Military office)</string>
+	<string name="poi_wiki_place">ウィキペディア(Wikipedia)</string>
+	<string name="poi_wiki_lang_en">英語 wiki(English wiki)</string>
+	<string name="poi_wiki_lang_ar">アラビア語 wiki(Arabic wiki)</string>
+	<string name="poi_wiki_lang_be">ベラルーシ語 wiki(Belarusian wiki)</string>
+	<string name="poi_wiki_lang_bg">ブルガリア語 wiki(Bulgarian wiki)</string>
+	<string name="poi_wiki_lang_ca">カタロニア語 wiki(Catalan wiki)</string>
+	<string name="poi_wiki_lang_ceb">セブアノ語 wiki(Cebuano wiki)</string>
+	<string name="poi_wiki_lang_cs">チェコ語 wiki(Czech wiki)</string>
+	<string name="poi_wiki_lang_da">デンマーク語 wiki(Danish wiki)</string>
+	<string name="poi_wiki_lang_de">ドイツ語 wiki(German wiki)</string>
+	<string name="poi_wiki_lang_el">ギリシャ語 wiki(Greek wiki)</string>
+	<string name="poi_wiki_lang_et">エストニア語 wiki(Estonian wiki)</string>
+	<string name="poi_wiki_lang_es">スペイン wiki(Spanish wiki)</string>
+	<string name="poi_wiki_lang_fi">フィンランド語 wiki(Finnish wiki)</string>
+	<string name="poi_wiki_lang_fr">フランス語 wiki(French wiki)</string>
+	<string name="poi_wiki_lang_gl">ガリシア語 wiki(Galician wiki)</string>
+	<string name="poi_wiki_lang_he">ヘブライ語 wiki(Hebrew wiki)</string>
+	<string name="poi_wiki_lang_hi">ヒンディー語 wiki(Hindi wiki)</string>
+	<string name="poi_wiki_lang_hr">クロアチア語 wiki(Croatian wiki)</string>
+	<string name="poi_wiki_lang_ht">ハイチ語 wiki(Haitian wiki)</string>
+	<string name="poi_wiki_lang_hu">ハンガリー語 wiki(Hungarian wiki)</string>
+	<string name="poi_wiki_lang_id">インドネシア語 wiki(Indonesian wiki)</string>
+	<string name="poi_wiki_lang_it">イタリア語 wiki(Italian wiki)</string>
+	<string name="poi_wiki_lang_ja">日本語 wiki(Japanese wiki)</string>
+	<string name="poi_wiki_lang_ko">韓国語 wiki(Korean wiki)</string>
+	<string name="poi_wiki_lang_lt">リトアニア語 wiki(Lithuanian wiki)</string>
+	<string name="poi_wiki_lang_lv">ラトビア語 wiki(Latvian wiki)</string>
+	<string name="poi_wiki_lang_ms">マレー語 wiki(Malay wiki)</string>
+	<string name="poi_wiki_lang_new">ネワール語 wiki(Newar wiki)</string>
+	<string name="poi_wiki_lang_nl">オランダ語 wiki(Dutch wiki)</string>
+	<string name="poi_wiki_lang_nn">ノルウェー語 (ニーノシク) wiki(Norwegian Nynorsk wiki)</string>
+	<string name="poi_wiki_lang_no">ノルウェー語 wiki(Norwegian wiki)</string>
+	<string name="poi_wiki_lang_pl">ポーランド語 wiki(Polish wiki)</string>
+	<string name="poi_wiki_lang_pt">ポルトガル語 wiki(Portuguese wiki)</string>
+	<string name="poi_wiki_lang_ro">ルーマニア語 wiki(Romanian wiki)</string>
+	<string name="poi_wiki_lang_ru">ロシア語 wiki(Russian wiki)</string>
+	<string name="poi_wiki_lang_sk">スロバキア語 wiki(Slovak wiki)</string>
+	<string name="poi_wiki_lang_sl">スロベニア語 wiki(Slovene wiki)</string>
+	<string name="poi_wiki_lang_sr">セルビア語 wiki(Serbian wiki)</string>
+	<string name="poi_denomination_wesleyan">ウェズリアン(Wesleyan)</string>
+	<string name="poi_wiki_lang_sv">スウェーデン語 wiki(Swedish wiki)</string>
+	<string name="poi_wiki_lang_sw">スワヒリ語 wiki(Swahili wiki)</string>
+	<string name="poi_wiki_lang_te">テルグ語 wiki(Telugu wiki)</string>
+	<string name="poi_wiki_lang_th">タイ語 wiki(Thai wiki)</string>
 	</resources>

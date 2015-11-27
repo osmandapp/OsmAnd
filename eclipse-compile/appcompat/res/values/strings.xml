@@ -68,4 +68,9 @@
          for most appropriate textual indicator of "more than X".
          [CHAR LIMIT=4] -->
     <string name="status_bar_notification_info_overflow">999+</string>
+
+    <!-- Default text for a button that can be toggled on and off. -->
+    <string name="abc_capital_on">ON</string>
+    <!-- Default text for a button that can be toggled on and off. -->
+    <string name="abc_capital_off">OFF</string>
 </resources>

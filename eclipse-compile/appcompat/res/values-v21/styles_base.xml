@@ -113,13 +113,7 @@
 
     <style name="Base.Widget.AppCompat.Spinner" parent="android:Widget.Material.Spinner" />
 
-    <style name="Base.Widget.AppCompat.Spinner.Underlined" parent="android:Widget.Material.Spinner.Underlined" />
-
-    <style name="Base.Widget.AppCompat.Spinner.DropDown.ActionBar" parent="android:Widget.Material.Spinner">
-        <item name="spinnerMode">dropdown</item>
-        <item name="disableChildrenWhenDisabled">true</item>
-        <item name="popupPromptView">@layout/abc_simple_dropdown_hint</item>
-    </style>
+    <!-- Base.Widget.AppCompat.Spinner.Underlined is overridden in ldltr-v21 and v23 -->
 
     <style name="Base.Widget.AppCompat.ListView" parent="android:Widget.Material.ListView" />
     <style name="Base.Widget.AppCompat.ListView.Menu" />
@@ -172,11 +166,17 @@
            parent="android:TextAppearance.Material.SearchResult.Subtitle">
     </style>
 
-    <style name="Base.Widget.AppCompat.AutoCompleteTextView" parent="android:Widget.Material.AutoCompleteTextView" />
+    <style name="Base.Widget.AppCompat.AutoCompleteTextView" parent="android:Widget.Material.AutoCompleteTextView">
+        <item name="android:background">?attr/editTextBackground</item>
+    </style>
 
-    <style name="Base.Widget.AppCompat.EditText" parent="android:Widget.Material.EditText" />
+    <style name="Base.Widget.AppCompat.EditText" parent="android:Widget.Material.EditText">
+        <item name="android:background">?attr/editTextBackground</item>
+    </style>
 
     <style name="Base.Widget.AppCompat.RatingBar" parent="android:Widget.Material.RatingBar" />
+
+    <style name="Base.Widget.AppCompat.SeekBar" parent="android:Widget.Material.SeekBar" />
 
     <style name="Base.Widget.AppCompat.Button" parent="android:Widget.Material.Button" />
 
@@ -191,6 +191,8 @@
     <style name="Base.Widget.AppCompat.CompoundButton.CheckBox" parent="android:Widget.Material.CompoundButton.CheckBox" />
 
     <style name="Base.Widget.AppCompat.CompoundButton.RadioButton" parent="android:Widget.Material.CompoundButton.RadioButton" />
+
+    <style name="Base.Widget.AppCompat.ImageButton" parent="android:Widget.Material.ImageButton" />
 
     <!-- Progress Bar -->
 

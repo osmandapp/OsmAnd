@@ -1939,7 +1939,7 @@
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">Posodobi vse (%1$s MB)</string>
     <string name="free_downloads_used">Omejitev brezplačnih prejemov je dosežena.</string>
-    <string name="free_downloads_used_description">Videti je mogoče, koliko brezplačnih prejemov je že bilo izvedenih.</string>
+    <string name="free_downloads_used_description">Prikazuje število izvedenih brezplačnih prejemov</string>
     <string name="osm_edit_created_poi">Ustvarjena točka POI</string>
     
     <string name="shared_string_qr_code">Koda QR</string>
@@ -2029,4 +2029,7 @@
     <string name="dashboard_or_drawer_description">Ob meniju je po novem na voljo možnost upravljanja s programom preko prilagodljive nadzorne plošče. Možnost je mogoče spremeniti med nastavitvami.</string>
 <string name="osm_edit_commented_note">Opomba OSM z dodatnimi zapisi</string>
     <string name="release_2_2">" • Prenovljen in posodobljen vmesnik, ki omogoča izbiranje mest na zemljevidu in prek drugih pogledov\n\n • Pogled zemljevida se zažene neposredno, če ni izbrana možnost \"Pokaži nadzorno ploščo ob zagonu programa\"\n\n • Možnost nastavitve prikazanih ikon v nadzorni plošči\n\n • Možnost zamenjave nadzorne plošče z menijem\n\n • Prejemanje zemljevidov je sedaj na voljo z enostavnim klikom na državo ali regijo na svetovnem zemljevidu\n\n • Iskanje točk POI podpira tudi podrobnejše poizvedbe\n\n • Izboljšane možnosti urejanja točk POI in OSM\n\n • Vmesnik za prejem zemljevidov je poenostavljen\n\n in še veliko več ... "</string>
-    </resources>
+    <string name="routing_attr_avoid_stairs_name">Izogni se stopnicam</string>
+	<string name="routing_attr_avoid_stairs_description">Izogni se stopnicam</string>
+	<string name="routing_attr_avoid_borders_name">Izogni se mejnim prehodom</string>
+	</resources>

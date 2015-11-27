@@ -159,7 +159,7 @@
 	<string name="poi_emergency_access_point">Ponto de resgate emergencial</string>
 
 	<string name="poi_ford">Vau</string>
-	<string name="poi_mountain_pass_yes">Passo de montanha</string>
+	<string name="poi_mountain_pass">Passo de montanha</string>
 	<string name="poi_gate">Portão</string>
 	<string name="poi_city_wall">Muralha</string>
 	<string name="poi_lift_gate">Cancela elevatória</string>
@@ -1051,7 +1051,7 @@
 	<string name="poi_google_plus">Google+</string>
 	<string name="poi_perfumery">Perfumaria</string>
 
-	<string name="poi_building">Número</string>
+	<string name="poi_building">Edifício</string>
 
 <string name="poi_military_office">Área militar</string>
 	<string name="poi_office_religion">Área religiosa</string>
@@ -1368,4 +1368,35 @@
 	<string name="poi_piste_grooming_classic">Pista de preparação: clássica</string>
 	<string name="poi_piste_grooming_classic_skating">Pista de preparação: clássica+patinagem</string>
 	<string name="poi_piste_grooming_backcountry">Pista de preparação: interior</string>
+	<string name="poi_route_train_ref">Trem</string>
+	<string name="poi_garden_type_residential">Jardim residencial</string>
+	<string name="poi_garden_type_community">Jardim comunitário</string>
+	<string name="poi_garden_type_private">Jardim privado</string>
+	<string name="poi_garden_type_botanical">Jardim botânico</string>
+
+	<string name="poi_garden_style_kitchen">Jardim horta</string>
+	<string name="poi_garden_style_rosarium">Jardim de rosas</string>
+	<string name="poi_garden_style_french">Jardim francês</string>
+	<string name="poi_garden_style_english">Jardim inglês</string>
+	<string name="poi_garden_style_japanese">Jardim japonês</string>
+
+	<string name="poi_capacity">Capacidade</string>
+	<string name="poi_capacity_disabled_yes">Lugares reservados para pessoas com deficiência</string>
+	<string name="poi_capacity_disabled_no">Não há lugares reservados para pessoas com deficiência</string>
+	<string name="poi_capacity_disabled">Lugares reservados para pessoas com deficiência</string>
+	<string name="poi_capacity_women_yes">Lugares reservados para mulheres</string>
+	<string name="poi_capacity_women_no">Não há lugares reservados para mulheres</string>
+	<string name="poi_capacity_women">Lugares reservados para mulheres</string>
+	<string name="poi_capacity_pupils">Lugares reservados para estudantes</string>
+	<string name="poi_capacity_teachers">Lugares reservados para professores</string>
+	<string name="poi_capacity_parent_yes">Lugares reservados para pais</string>
+	<string name="poi_capacity_parent_no">Não há lugares reservados para pais</string>
+	<string name="poi_capacity_parent">Lugares reservados para pais</string>
+
+	<string name="poi_aerialway_occupancy">Capacidade de cabine/cadeira/carro</string>
+	<string name="poi_aerialway_capacity">Capacidade por hora</string>
+	<string name="poi_aerialway_duration">Tempo de viagem médio, minutos</string>
+	<string name="poi_aerialway_heating_yes">Calefação</string>
+	<string name="poi_aerialway_heating_no">Sem calefação</string>
+	<string name="poi_aerialway_bicycle_yes">Bicicleta: permitido</string>
 	</resources>

@@ -2101,4 +2101,26 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="routing_attr_avoid_stairs_description">Избягване на стълби</string>
 	<string name="routing_attr_avoid_borders_name">Избягване на КПП</string>
 	<string name="routing_attr_avoid_borders_description">Избягване пресичането на граници и преминаването в друга държава</string>
-	</resources>
+	<string name="dashboard_or_drawer_title">Табло за управление или меню</string>
+    <string name="use_dashboard_btn">Използване на таблото</string>
+    <string name="use_drawer_btn">Използване на менюто</string>
+    <string name="save_poi_without_poi_type_message">Наистина ли ще запазите POI без да укажете типа му?</string>
+    <string name="feedback">Обратна връзка</string>
+    <string name="versions_item">Версии</string>
+    <string name="techical_articles_item">Технически статии</string>
+    <string name="instalation_troubleshooting_item">Инсталиране и отстраняване на неизправности</string>
+    <string name="search_on_the_map_item">Търсене по картата</string>
+    <string name="map_viewing_item">Преглед на картата</string>
+    <string name="faq_item_description">Често задавани въпроси</string>
+    <string name="faq_item">ЧЗВ</string>
+    <string name="planning_trip_item">Планиране на пътуване</string>
+    <string name="navigation_item_description">Настройка на навигация</string>
+    <string name="first_usage_item_description">Как да изтеглите картите, задаване на основните настройки</string>
+    <string name="first_usage_item">Първо ползване</string>
+    <string name="plugins_menu_group">Добавки</string>
+    <string name="other_menu_group">Друго</string>
+    <string name="help_us_to_improve_menu_group">Помогнете ни да подобрим OsmAnd</string>
+    <string name="features_menu_group">Функции</string>
+    <string name="osmo_session_id_share">URL сесия за проследяване на устройството (%1$s)</string>
+    <string name="osmo_auto_send_locations">Автоматично стартиране на трекер сесия</string>
+    </resources>

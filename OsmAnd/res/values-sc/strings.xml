@@ -1935,7 +1935,7 @@
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">Agiorna totu (%1$s MB)</string>
     <string name="free_downloads_used">Iscarrigamentos gratùitos impreados</string>
-    <string name="free_downloads_used_description">Podes impostare cantos iscarrigamentos gratùitos as impreadu</string>
+    <string name="free_downloads_used_description">Ammustra sos iscarrigamentos de badas impreados</string>
     <string name="simulate_initial_startup_descr">Imposta sa bandera chi indicat sa prima allumingiadura de s\'aplicatzione, mantène totu sas àteras impostaziones comente sunt</string>
     <string name="simulate_initial_startup">Sìmula sa prima allumingiadura de s’aplicatzione</string>
     <string name="share_geo">geo:</string>
@@ -2025,4 +2025,7 @@
     <string name="access_from_map">Intra dae sa mapa</string>
     <string name="release_2_2">" • Interfache impitadore noa pro incarcare positziones in sa mapa e in àteros ischermos\n\n • S\'ischermu de sa mapa est como postu come prima cosa a s’allumìngiu de s’aplicatzione, semper chi \'Ammustra pannellu de controllu in s\'allumìngiu\' no siet ischertadu\n\n • Como podes cunfigurare sas impostatziones pro isseberare cales sunt sas ischedas chi diant dèper’èssere ammustradas in su pannellu e comente\n\n • Brinca su pannellu de controllu, si preferis a impreare su menù pro sa gestione de s’aplicatzione\n\n • Pro iscarrigare mapas, sas regiones podent èssere ischertadas deretamente incarchende in sa mapa generale de su mundu\n\n • Sa chirca de PDI como suportat chircas prus dislindadas\n\n • Megioradas sas funtzionalidades de modìficas de PDI e OSM\n\n • Istrutura e s\'interfache de iscarrigamentu datos mapas torrada a fàghere\n\n e àteru... "</string>
     <string name="please_specify_poi_type_only_from_list">"Dislinda sa casta curreta de PDI o brinca custa parte. "</string>
-    </resources>
+    <string name="routing_attr_avoid_stairs_name">Istransi sas iscalas</string>
+	<string name="routing_attr_avoid_stairs_description">Istransi sas iscalas</string>
+	<string name="routing_attr_avoid_borders_name">Istransi sa rugradura de sas fronteras</string>
+	</resources>

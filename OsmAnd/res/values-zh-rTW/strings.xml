@@ -1241,7 +1241,7 @@
     <string name="index_name_canada">北美洲 - 加拿大</string>
     <string name="always_center_position_on_map">位置顯示始終處於中心</string>
     <string name="voice_pref_title">聲音</string>
-    <string name="localization_pref_title">定位</string>
+    <string name="localization_pref_title">所在地</string>
     <string name="interrupt_music_descr">當語音預告時中斷音樂</string>
     <string name="interrupt_music">中斷音樂</string>
     <string name="misc_pref_title">雜項</string>
@@ -1921,7 +1921,7 @@
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">全部更新 (%1$s MB)</string>
     <string name="free_downloads_used">免費下載使用</string>
-    <string name="free_downloads_used_description">您可以設置，您有使用多少免費下載</string>
+    <string name="free_downloads_used_description">顯示已使用的免費下載</string>
     <string name="simulate_initial_startup_descr">設定標誌指示第一次應用程式啟動，而保持著所有其它設定不變</string>
     <string name="simulate_initial_startup">模擬第一次應用程式啟動</string>
     <string name="share_geo">地理：</string>

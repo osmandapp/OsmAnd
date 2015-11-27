@@ -549,7 +549,7 @@
     <string name="poi_filter_food_shop">Alimentació</string>
     <string name="use_osmand_routing_service">Navegacio d\'OsmAnd&gt;20Km</string>
     <string name="osmand_net_previously_installed">Ja hi ha una versió prèvia d\'OsmAnd instal·lada. Totes les dades locals es mantindran en la nova aplicació excepte els punts preferits, que s\'han d\'exportar des la versió vella i després importar-los a la nova.</string>
-    <string name="install_selected_build">Vols instal·lar OsmAnd - {0} de {1} {2} MB ?</string>
+    <string name="install_selected_build">Voleu instal·lar OsmAnd - {0} de {1} {2} MB ?</string>
     <string name="gps_status_app_not_found">L\'aplicació GPS status no està instal·lada. Voleu cercar-la al Market?</string>
     <string name="filter_existing_indexes">Filtre baixat</string>
     <string name="continuous_rendering">Dibuixat continu</string>
@@ -1513,7 +1513,7 @@
     <string name="notes">Notes</string>
     <string name="online_map">Mapa en línia</string>
     <string name="roads_only">Només carreteres</string>
-    <string name="days_behind">dies de retard</string>
+    <string name="days_behind">dies desfasat</string>
     <string name="track_segments">Segments de traça</string>
     <string name="track_points">Punts de traça</string>
     <string name="plugin_touringview_name">Vista turística del mapa</string>
@@ -1749,7 +1749,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="si_min_km">Minuts per quilòmetre</string>
     <string name="si_min_m">Minuts per milla</string>
     <string name="si_nm_h">Millesmarines per hora (nusos)</string>
-    <string name="nm_h">mmh</string>
+    <string name="nm_h">nusos</string>
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
@@ -1775,7 +1775,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">Actualitzeu tot (%1$s MB)</string>
     <string name="free_downloads_used">Baixades gratuïtes realitzades</string>
-    <string name="free_downloads_used_description">Podeu veure quantes baixades gratuïtes heu fet</string>
+    <string name="free_downloads_used_description">Mostra les baixades gratuïtes que ja heu fet</string>
     <string name="simulate_initial_startup_descr">Configura el senyalitzador de primera engegada de l\'aplicació, mantenint la resta de paràmetres sense canvis</string>
     <string name="simulate_initial_startup">Simula l\'engegada inicial de l\'aplicació</string>
     <string name="share_geo">geo:</string>
@@ -1861,4 +1861,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="use_dashboard_btn">Utilitza el tauler</string>
     <string name="use_drawer_btn">Utilitza el menú</string>
     <string name="please_specify_poi_type_only_from_list">"Especifiqueu el tipus de PDI adient o deixeu-ho buit. "</string>
-    </resources>
+    <string name="routing_attr_avoid_stairs_name">Evita les escales</string>
+	<string name="routing_attr_avoid_stairs_description">Evita les escales</string>
+	<string name="routing_attr_avoid_borders_name">Evita els pasos fronterers</string>
+	</resources>
