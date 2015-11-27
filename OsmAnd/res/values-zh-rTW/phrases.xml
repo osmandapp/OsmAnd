@@ -1376,7 +1376,7 @@
 
 <string name="poi_capacity">容量</string>
 	<string name="poi_capacity_disabled_yes">身障人士專用場所</string>
-	<string name="poi_capacity_disabled_no">無身障人士專用場所</string>
+	<string name="poi_capacity_disabled_no">非身障人士專用場所</string>
 	<string name="poi_capacity_disabled">身障人士專用場所</string>
 	<string name="poi_capacity_women_yes">婦女專用場所</string>
 	<string name="poi_capacity_women_no">無婦女專用場所</string>
