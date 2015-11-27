@@ -534,7 +534,7 @@
     <string name="search_address_building">Bygning</string>
     <string name="search_address_building_option">Bygning</string>
     <string name="search_address_street_option">Kryssende gate</string>
-    <string name="search_tabs_location">Sted</string>
+    <string name="search_tabs_location">Posisjon</string>
 
     <string name="context_menu_item_update_map">Oppdater kart</string>
     
@@ -821,7 +821,7 @@
     <string name="distance_measurement_clear_route">Slett alle punkter</string>
     <string name="use_kalman_filter_compass_descr">Reduserer støy i kompassavlesninger, men legger til treghet</string>
     <string name="use_kalman_filter_compass">Bruk Kalmanfilter</string>
-    <string name="other_location">Annen</string>
+    <string name="other_location">Andre</string>
     <string name="available_downloads_left">Er tilgjengelig %1$d filer til nedlasting</string>
     <string name="install_paid">Fullversjon</string>
     <string name="clear_destination">Slett reisemål</string>
@@ -1434,7 +1434,7 @@
     
     <string name="versions_item">Versjoner</string>
     <string name="contact_us">Kontakt oss</string>
-    <string name="planning_trip_item">Planlegge en tur</string>
+    <string name="planning_trip_item">Turplanlegging</string>
 <string name="read_more">Les mer</string>
     <string name="rendering_attr_hideProposed_name">Skjul foreslåtte objekter</string>
     <string name="techical_articles_item">Tekniske artikler</string>
@@ -1457,4 +1457,22 @@
     <string name="show_on_start_description">\'Av\' starter direkte med kartskjermen</string>
     <string name="tab_title_basic">Grunnleggende</string>
 	<string name="tab_title_advanced">Avansert</string>
-	</resources>
+	<string name="shared_string_location">Posisjon</string>
+    <string name="default_speed_system_descr">Bestem system for hastighetsmåling</string>
+    <string name="default_speed_system">Hastighetsmåling</string>
+    <string name="si_kmh">Kilometer i timen</string>
+    <string name="si_m_s">Meter per sekund</string>
+    <string name="si_min_km">Minutter per kilometer</string>
+    <string name="av_locations">Posisjoner</string>
+    <string name="plugin_settings">Programtillegg</string>
+	<string name="rendering_value_boldOutline_name">Tykke omriss</string>
+    <string name="rendering_attr_roadStyle_description">Veistil</string>
+    <string name="routing_attr_avoid_borders_name">Unngå grensepassering</string>
+	<string name="routing_attr_height_name">Høydegrense</string>
+	<string name="routing_attr_height_description">Spesifiser kjøretøyhøyde som tillates på ruter</string>
+    <string name="rendering_attr_alpineHiking_name">Alpin vandringsskala (SAC)</string>
+    <string name="voices">Talemeldinger</string>
+	<string name="downloads_left_template">%1$s nedlastinger igjen</string>
+	<string name="other_menu_group">Annet</string>
+    <string name="instalation_troubleshooting_item">Installering og problemløsing</string>
+    </resources>
