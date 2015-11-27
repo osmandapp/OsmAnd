@@ -1399,4 +1399,6 @@
 	<string name="poi_aerialway_heating_yes">Calefação</string>
 	<string name="poi_aerialway_heating_no">Sem calefação</string>
 	<string name="poi_aerialway_bicycle_yes">Bicicleta: permitido</string>
+	<string name="poi_aerialway_bicycle_no">Bicicleta: proibido</string>
+	<string name="poi_aerialway_bicycle_summer">Bicicleta: permitido somente no verão</string>
 	</resources>
