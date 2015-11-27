@@ -1513,7 +1513,7 @@
     <string name="notes">Notes</string>
     <string name="online_map">Mapa en línia</string>
     <string name="roads_only">Només carreteres</string>
-    <string name="days_behind">dies de retard</string>
+    <string name="days_behind">dies desfasat</string>
     <string name="track_segments">Segments de traça</string>
     <string name="track_points">Punts de traça</string>
     <string name="plugin_touringview_name">Vista turística del mapa</string>
@@ -1749,7 +1749,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="si_min_km">Minuts per quilòmetre</string>
     <string name="si_min_m">Minuts per milla</string>
     <string name="si_nm_h">Millesmarines per hora (nusos)</string>
-    <string name="nm_h">mmh</string>
+    <string name="nm_h">nusos</string>
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
