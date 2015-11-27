@@ -1547,4 +1547,37 @@
 	<string name="poi_female_no">Für Frauen verboten</string>
 	<string name="poi_toilets_yes">Mit Toiletten</string>
 	<string name="poi_toilets_no">Keine Toiletten</string>
+	<string name="poi_religion_bahai">Bahaitum</string>
+	<string name="poi_religion_pagan">Heidentum</string>
+	<string name="poi_religion_tenrikyo">Tenrikyō</string>
+	<string name="poi_religion_zoroastrian">Zoroastrismus</string>
+
+	<string name="poi_denomination_sunni">sunnitische</string>
+	<string name="poi_denomination_anglican">anglikanisch</string>
+	<string name="poi_denomination_presbyterian">presbyterianisch</string>
+	<string name="poi_denomination_pentecostal">Pfingstler</string>
+	<string name="poi_denomination_church_of_england">Kirche von England</string>
+	<string name="poi_denomination_episcopal">Episkopalkirche</string>
+	<string name="poi_denomination_shia">Schia</string>
+	<string name="poi_denomination_united">Vereinigten</string>
+	<string name="poi_denomination_tibetan">tibetanisch</string>
+	<string name="poi_denomination_united_reformed">vereinigt reformiert</string>
+	<string name="poi_denomination_church_of_scotland">Kirche von Schottland</string>
+	<string name="poi_denomination_salvation_army">Heilsarmee</string>
+	<string name="poi_denomination_iglesia_ni_cristo">Iglesia ni Cristo</string>
+	<string name="poi_denomination_mennonite">Mennoniten</string>
+	<string name="poi_denomination_quaker">Quaker</string>
+	<string name="poi_denomination_assemblies_of_god">Assemblies of god</string>
+	<string name="poi_denomination_nondenominational">bekenntnisfrei</string>
+	<string name="poi_denomination_nazarene">Nazaräer</string>
+	<string name="poi_denomination_united_methodist">vereinigte Methodisten</string>
+	<string name="poi_denomination_old_believers">Altgläubige</string>
+	<string name="poi_denomination_spiritist">Spiritist</string>
+	<string name="poi_denomination_armenian_apostolic">Armenische-apostolisch</string>
+	<string name="poi_denomination_dutch_reformed">niederländisch-reformiert</string>
+	<string name="poi_denomination_latter_day_saints">Heiligen der Letzten Tage</string>
+	<string name="poi_denomination_church_of_christ">Kirche Christi</string>
+	<string name="poi_denomination_united_church_of_christ">Vereinigte Kirche Christi</string>
+	<string name="poi_denomination_scientist">Wissenschaftler</string>
+	<string name="poi_denomination_romanian_orthodox">Rumänisch-orthodox</string>
 	</resources>
