@@ -220,7 +220,7 @@
     <string name="local_index_items_restored">%1$d из %2$d объектов успешно активированы.</string>
     <string name="local_index_no_items_to_do">Нет объектов, чтобы %1$s</string>
     <string name="local_index_action_do">Вы собираетесь %1$s %2$s объектов. Вы уверены?</string>
-    <string name="local_index_descr_title">Загрузить карты</string>
+    <string name="local_index_descr_title">Управление картами</string>
     <string name="local_index_mi_restore">Активировать</string>
     <string name="local_index_mi_backup">Архивировать</string>
     <string name="local_index_mi_reload">Перечитать с SD-накопителя</string>
