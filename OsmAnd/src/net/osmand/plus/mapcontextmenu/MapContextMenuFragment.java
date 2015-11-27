@@ -142,6 +142,12 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		markerPaddingXPx = dpToPx(MARKER_PADDING_X_DP);
 
 		menu = getMapActivity().getContextMenu();
+		view = inflater.inflate(R.layout.map_context_menu_fragment, container, false);
+		if (!menu.isActive()) {
+			return view;
+		}
+		mainView = view.findViewById(R.id.context_menu_main);
+
 		leftTitleButtonController = menu.getLeftTitleButtonController();
 		rightTitleButtonController = menu.getRightTitleButtonController();
 		topRightTitleButtonController = menu.getTopRightTitleButtonController();
@@ -165,9 +171,6 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 
 		IconsCache iconsCache = getMyApplication().getIconsCache();
 		boolean light = getMyApplication().getSettings().isLightContent();
-
-		view = inflater.inflate(R.layout.map_context_menu_fragment, container, false);
-		mainView = view.findViewById(R.id.context_menu_main);
 
 		// Left title button
 		final Button leftTitleButton = (Button) view.findViewById(R.id.title_button);
@@ -453,26 +456,24 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 						.setDuration(200)
 						.setInterpolator(new DecelerateInterpolator())
 						.setListener(new AnimatorListenerAdapter() {
+
+							boolean canceled = false;
+
 							@Override
 							public void onAnimationCancel(Animator animation) {
-								if (needCloseMenu) {
-									menu.close();
-								} else {
-									updateMainViewLayout(posY);
-									if (previousMenuState != 0 && newMenuState != 0 && previousMenuState != newMenuState) {
-										doAfterMenuStateChange(previousMenuState, newMenuState);
-									}
-								}
+								canceled = true;
 							}
 
 							@Override
 							public void onAnimationEnd(Animator animation) {
-								if (needCloseMenu) {
-									menu.close();
-								} else {
-									updateMainViewLayout(posY);
-									if (previousMenuState != 0 && newMenuState != 0 && previousMenuState != newMenuState) {
-										doAfterMenuStateChange(previousMenuState, newMenuState);
+								if (!canceled) {
+									if (needCloseMenu) {
+										menu.close();
+									} else {
+										updateMainViewLayout(posY);
+										if (previousMenuState != 0 && newMenuState != 0 && previousMenuState != newMenuState) {
+											doAfterMenuStateChange(previousMenuState, newMenuState);
+										}
 									}
 								}
 							}
@@ -626,6 +627,10 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	@Override
 	public void onResume() {
 		super.onResume();
+		if (!menu.isActive()) {
+			dismissMenu();
+			return;
+		}
 		screenOrientation = DashLocationFragment.getScreenOrientation(getActivity());
 		if (menu.displayDistanceDirection()) {
 			getMapActivity().getMapViewTrackingUtilities().setContextMenu(menu);
@@ -641,7 +646,9 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
-		map.setLatLon(mapCenter.getLatitude(), mapCenter.getLongitude());
+		if (mapCenter != null) {
+			map.setLatLon(mapCenter.getLatitude(), mapCenter.getLongitude());
+		}
 		menu.setMapCenter(null);
 		getMapActivity().getMapLayers().getMapControlsLayer().setControlsClickable(true);
 	}
