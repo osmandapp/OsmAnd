@@ -2268,4 +2268,30 @@
 	<string name="poi_historic_civilization_minoan">文明：米諾</string>
 	<string name="poi_historic_civilization_tiahuanacota">文明：蒂亞瓦納科</string>
 
+	<string name="poi_animal_training">動物訓練</string>
+	<string name="poi_animal_training_dog">訓狗</string>
+	<string name="poi_animal_training_horse">訓馬</string>
+
+	<string name="poi_horse_yes">准許馬進出</string>
+	<string name="poi_horse_no">不准許馬進出</string>
+	<string name="poi_animal_yes">准許動物進出</string>
+	<string name="poi_animal_no">不准許動物進出</string>
+
+	<string name="poi_stone_type_conciliation_cross">類型：和解十字架</string>
+	<string name="poi_stone_type_coat_of_arms">類型：紋章</string>
+
+	<string name="poi_material_wood">原材料：木頭</string>
+	<string name="poi_material_metal">原材料：金屬</string>
+	<string name="poi_material_reinforced_concrete">原材料：鋼筋混凝土</string>
+	<string name="poi_material_concrete">原材料：混凝土</string>
+	<string name="poi_material_steel">原材料：鋼鐵</string>
+	<string name="poi_material_stone">原材料：石頭</string>
+	<string name="poi_material_masonry">原材料：磚石</string>
+	<string name="poi_material_brick">原材料：磚</string>
+	<string name="poi_material_plastic">原材料：塑膠</string>
+	<string name="poi_material_sandstone">原材料：砂岩</string>
+	<string name="poi_material_granite_stone">原材料：花崗石</string>
+	<string name="poi_material_metal_wood">原材料：金屬、木頭</string>
+	<string name="poi_material_glass">原材料：玻璃</string>
+	<string name="poi_material_bronze">原材料：青銅</string>
 	</resources>
