@@ -1030,4 +1030,9 @@
 	<string name="poi_wiki_lang_sk">スロバキア語 wiki(Slovak wiki)</string>
 	<string name="poi_wiki_lang_sl">スロベニア語 wiki(Slovene wiki)</string>
 	<string name="poi_wiki_lang_sr">セルビア語 wiki(Serbian wiki)</string>
+	<string name="poi_denomination_wesleyan">ウェズリアン(Wesleyan)</string>
+	<string name="poi_wiki_lang_sv">スウェーデン語 wiki(Swedish wiki)</string>
+	<string name="poi_wiki_lang_sw">スワヒリ語 wiki(Swahili wiki)</string>
+	<string name="poi_wiki_lang_te">テルグ語 wiki(Telugu wiki)</string>
+	<string name="poi_wiki_lang_th">タイ語 wiki(Thai wiki)</string>
 	</resources>
