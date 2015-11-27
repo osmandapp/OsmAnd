@@ -1605,4 +1605,60 @@
 
 	<string name="poi_pa">Pa (befestigte Siedlung der Maori)</string>
 
+	<string name="poi_historic_farm">Historischer Bauernhof</string>
+	<string name="poi_club_freemasonry">Freimaurerloge</string>
+	<string name="poi_club_scout">Scout-Club</string>
+
+	<string name="poi_historic_threshing_floor">Historische Tenne</string>
+	<string name="poi_historic_gallows">Historischer Galgen</string>
+	<string name="poi_square">Quadrat</string>
+	<string name="poi_sculptor">Bildhauer</string>
+
+	<string name="poi_building_type_monastery">Gebäudeart: Kloster</string>
+	<string name="poi_prison_camp">Ehemaliges Kriegsgefangenenlager</string>
+	<string name="poi_concentration_camp">Typ: Konzentrationslager</string>
+	<string name="poi_pow_camp">Typ: Kriegsgefangenenlager</string>
+	<string name="poi_labor_camp">Typ: Arbeitslager</string>
+	<string name="poi_concentration_camp_nazism">Typ: Nazi</string>
+	<string name="poi_concentration_camp_gulag">Typ: Gulag</string>
+
+	<string name="poi_bathing_yes">Baden: Ja</string>
+	<string name="poi_bathing_no">Baden: Nein</string>
+
+	<string name="poi_boat_storage">Bootslager</string>
+
+	<string name="poi_bridge_ref">Brücken ref</string>
+	<string name="poi_tunnel_ref">Tunnel ref</string>
+
+	<string name="poi_ref">Ref</string>
+
+	<string name="poi_cargo_passengers">Fracht: Passagiere</string>
+	<string name="poi_cargo_vehicle">Fracht: Fahrzeuge</string>
+	<string name="poi_cargo_bicycle">Fracht: Fahrräder</string>
+	<string name="poi_cargo_container">Fracht: Container</string>
+	<string name="poi_cargo_hgv">Fracht: LKW</string>
+
+	<string name="poi_fitness_station">Fitness Station</string>
+
+	<string name="poi_hackerspace">Hackerspace</string>
+
+	<string name="poi_wiki_lang_als">elsässisches Wiki</string>
+	<string name="poi_wiki_lang_bs">Bosnisches Wiki</string>
+	<string name="poi_wiki_lang_fy">Friesisches Wiki</string>
+	<string name="poi_wiki_lang_hy">Armenisches Wiki</string>
+	<string name="poi_wiki_lang_nds">Niedersächsisches Wiki</string>
+	<string name="poi_wiki_lang_os">Ossetisches Wiki</string>
+	<string name="poi_wiki_lang_pms">Piemontesisches Wiki</string>
+	<string name="poi_wiki_lang_sc">Sardisches Wiki</string>
+	<string name="poi_wiki_lang_sh">Serbokroatisches Wiki</string>
+	<string name="poi_wiki_lang_ta">Tamilisches Wiki</string>
+	<string name="poi_wiki_lang_kk">Kasachisches Wiki</string>
+	<string name="poi_wiki_lang_uz">Usbekische Wiki</string>
+	<string name="poi_wiki_lang_ce">Tschetschenisches Wiki</string>
+	<string name="poi_wiki_lang_ur">Urduisches Wiki</string>
+	<string name="poi_wiki_lang_oc">Okzitanisch Wiki</string>
+	<string name="poi_wiki_lang_jv">Javanisches Wiki</string>
+	<string name="poi_wiki_lang_zhyue">Kantonesisches Wiki</string>
+	<string name="poi_wiki_lang_ast">Astur-leonisches Wiki</string>
+	<string name="poi_wiki_lang_lmo">Lombardisches Wiki</string>
 	</resources>
