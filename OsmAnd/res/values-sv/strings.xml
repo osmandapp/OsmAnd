@@ -1923,7 +1923,7 @@
     <string name="value_downloaded_of_max">%1$.1f av %2$.1f MB</string>
     <string name="update_all">Uppdatera alla (%1$s MB)</string>
     <string name="free_downloads_used">Gratis nedladdningar hämtade</string>
-    <string name="free_downloads_used_description">Du kan ange hur många gratis nedladdningar som du har gjort</string>
+    <string name="free_downloads_used_description">Visar antalet gratisnedladdningar du gjort</string>
     <string name="downloading_number_of_files">Hämtar - %1$d fil(er)</string>
 
     <string name="share_geo">geo:</string>
