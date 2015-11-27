@@ -123,12 +123,12 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		pathOutdated = new Path();
 
 		data = new MapLayerData<List<BinaryMapDataObject>>() {
-			
+
 			@Override
 			public void layerOnPostExecute() {
 				view.refreshMap();
 			}
-			
+
 			public boolean queriedBoxContains(final RotatedTileBox queriedData, final RotatedTileBox newBox) {
 				if (newBox.getZoom() < ZOOM_TO_SHOW_SELECTION) {
 					if (queriedData != null && queriedData.getZoom() < ZOOM_TO_SHOW_SELECTION) {
@@ -139,19 +139,19 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 				}
 				List<BinaryMapDataObject> queriedResults = getResults();
 				if(queriedData != null && queriedData.containsTileBox(newBox) && queriedData.getZoom() >= ZOOM_TO_SHOW_MAP_NAMES) {
-					if(queriedResults != null && ( queriedResults.isEmpty() || 
+					if(queriedResults != null && ( queriedResults.isEmpty() ||
 							Math.abs(queriedData.getZoom() - newBox.getZoom()) <= 1)) {
 						return true;
 					}
 				}
 				return false;
 			}
-			
+
 			@Override
 			protected List<BinaryMapDataObject> calculateResult(RotatedTileBox tileBox) {
 				return queryData(tileBox);
 			}
-			
+
 		};
 
 	}
@@ -184,19 +184,19 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 			final List<BinaryMapDataObject> selectedObjects = new LinkedList<>(this.selectedObjects);
 
 			if (selectedObjects.size() > 0) {
-				currentObjects.removeAll(selectedObjects);
+				removeObjectsFromList(currentObjects, selectedObjects);
 				drawBorders(canvas, tileBox, selectedObjects, pathSelected, paintSelected);
 			}
 
 			if (zoom >= ZOOM_TO_SHOW_BORDERS_ST && zoom < ZOOM_TO_SHOW_BORDERS) {
-				downloadingObjects.removeAll(selectedObjects);
+				removeObjectsFromList(downloadingObjects, selectedObjects);
 				if (downloadingObjects.size() > 0) {
-					currentObjects.removeAll(downloadingObjects);
+					removeObjectsFromList(currentObjects, downloadingObjects);
 					drawBorders(canvas, tileBox, downloadingObjects, pathDownloading, paintDownloading);
 				}
-				outdatedObjects.removeAll(selectedObjects);
+				removeObjectsFromList(outdatedObjects, selectedObjects);
 				if (outdatedObjects.size() > 0) {
-					currentObjects.removeAll(outdatedObjects);
+					removeObjectsFromList(currentObjects, outdatedObjects);
 					drawBorders(canvas, tileBox, outdatedObjects, pathOutdated, paintOutdated);
 				}
 				if (currentObjects.size() > 0) {
@@ -211,6 +211,19 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 					if (currentObjects.size() > 0) {
 						drawBorders(canvas, tileBox, currentObjects, pathDownloaded, paintDownloaded);
 					}
+				}
+			}
+		}
+	}
+
+	private void removeObjectsFromList(List<BinaryMapDataObject> list, List<BinaryMapDataObject> objects) {
+		Iterator<BinaryMapDataObject> it = list.iterator();
+		while (it.hasNext()) {
+			BinaryMapDataObject o = it.next();
+			for (BinaryMapDataObject obj : objects) {
+				if (o.getId() == obj.getId()) {
+					it.remove();
+					break;
 				}
 			}
 		}
@@ -240,11 +253,11 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 	}
 
 
-	
+
 	private List<BinaryMapDataObject> queryData(RotatedTileBox tileBox) {
 		if (tileBox.getZoom() >= ZOOM_AFTER_BASEMAP) {
 			if(!checkIfMapEmpty(tileBox)) {
-				return Collections.emptyList();	
+				return Collections.emptyList();
 			}
 		}
 		LatLon lt = tileBox.getLeftTopLatLon();
@@ -252,7 +265,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 //		if (tileBox.getZoom() >= ZOOM_TO_SHOW_MAP_NAMES) {
 //			lt = rb = tileBox.getCenterLatLon();
 //		}
-		
+
 		List<BinaryMapDataObject> result = null;
 		int left = MapUtils.get31TileNumberX(lt.getLongitude());
 		int right = MapUtils.get31TileNumberX(rb.getLongitude());
