@@ -1661,4 +1661,46 @@
 	<string name="poi_wiki_lang_zhyue">Kantonesisches Wiki</string>
 	<string name="poi_wiki_lang_ast">Astur-leonisches Wiki</string>
 	<string name="poi_wiki_lang_lmo">Lombardisches Wiki</string>
+	<string name="poi_wiki_lang_ne">Nepalisches Wiki</string>
+	<string name="poi_wiki_lang_scn">sizilianisches Wiki</string>
+	<string name="poi_wiki_lang_bar">Bayrisches Wiki</string>
+	<string name="poi_wiki_lang_mn">Mongolisches Wiki</string>
+	<string name="poi_wiki_lang_nap">Neapolitanisches Wiki</string>
+
+	<string name="poi_fireworks">Feuerwerksladen</string>
+
+	<string name="poi_denomination_shaktism">Shaktismus</string>
+	<string name="poi_denomination_maronite">Maroniten</string>
+	<string name="poi_bicycle_parking_rack">Gestell</string>
+	<string name="poi_bicycle_parking_building">Spezialgebäude</string>
+	<string name="poi_bicycle_parking_shed">Schuppen</string>
+	<string name="poi_bicycle_parking_bollard">Poller</string>
+	<string name="poi_bicycle_parking_informal">Informell</string>
+
+	<string name="poi_taxon">Taxon</string>
+
+	<string name="poi_urban">Städtisch</string>
+	<string name="poi_pump_powered">Angetriebene Pumpe</string>
+	<string name="poi_water_characteristic_mineral">Wassercharakteristik: mineralisch</string>
+	<string name="poi_water_characteristic_mud">Wassercharakteristik: schlammig</string>
+	<string name="poi_water_characteristic_sulfuric">Wassercharakteristik: schwefelig</string>
+
+	<string name="poi_water_point">Wasseranschluss</string>
+
+	<string name="poi_payment_electronic_purses_no">Elektrische Zahlungsmittel nicht akzeptiert</string>
+	<string name="poi_resource_ruby">Rubin</string>
+	<string name="poi_resource_rutile">Rutil</string>
+	<string name="poi_resource_slate_iron_ore_copper">Schiefer; Eisenerz; Kupfer</string>
+	<string name="poi_resource_slate">Schiefer</string>
+	<string name="poi_resource_tin">Zinn</string>
+	<string name="poi_resource_tuff">Tuff</string>
+	<string name="poi_resource_uranium">Uran</string>
+	<string name="poi_resource_vanadium">Vanadium</string>
+	<string name="poi_resource_zinc">Zink</string>
+	<string name="poi_resource_zircon">Zirkon</string>
+
+	<string name="poi_wetland_wet_meadow">Feuchtwiese</string>
+	<string name="poi_wetland_bog">Moor</string>
+	<string name="poi_wetland_marsh">Sumpf</string>
+	<string name="poi_wetland_reedbed">Schilf</string>
 	</resources>
