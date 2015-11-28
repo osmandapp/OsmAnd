@@ -1842,12 +1842,12 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="favorite_category_dublicate_message">Zadaný názov kategórie už existuje. Prosím zadajte iný názov.</string>
     <string name="favorite_category_name">Názov kategórie</string>
     <string name="favorite_category_add_new_title">Pridať novú kategóriu</string>
-    <string name="confirm_download_roadmaps">Naozaj chcete stiahnuť mapu ciest, keď už máte plnú mapu?</string>
-    <string name="value_downloaded_from_max">%1$.1f z %2$.1f MB</string>
+    <string name="confirm_download_roadmaps">Naozaj chcete stiahnuť mapu obsahujúcu iba cesty, keď už máte štandardnú (plnú) mapu?</string>
+    <string name="value_downloaded_of_max">%1$.1f z %2$.1f MB</string>
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">Aktualizovať všetko (%1$s MB)</string>
     <string name="free_downloads_used">Počet použitých voľných stiahnutí</string>
-    <string name="free_downloads_used_description">Môžete nastaviť, koľko voľných stiahnutí ste už použili</string>
+    <string name="free_downloads_used_description">Zobrazuje počet využitých stiahnutí</string>
     <string name="simulate_initial_startup_descr">Nastaví príznak indikujúci prvý štart aplikácie, ostatné nastavenia ponechá nezmenené</string>
     <string name="simulate_initial_startup">Simulovať prvé spustenie aplikácie</string>
     <string name="share_geo">geo:</string>
@@ -1934,4 +1934,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="use_dashboard_btn">Použiť úvodný panel</string>
     <string name="use_drawer_btn">Použiť menu</string>
     <string name="please_specify_poi_type_only_from_list">"Prosím zadajte správny typ POI alebo ho preskočte. "</string>
-    </resources>
+    <string name="routing_attr_avoid_stairs_name">Vyhnúť sa schodom</string>
+	<string name="routing_attr_avoid_stairs_description">Vyhnúť sa schodom</string>
+	<string name="routing_attr_avoid_borders_name">Vyhnúť sa hraničným priechodom</string>
+	</resources>

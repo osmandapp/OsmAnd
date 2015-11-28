@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="regions">Regionen</string>
 	<string name="region_maps">Regionsweite Karten</string>
@@ -80,7 +80,7 @@
 	<string name="context_menu_item_destination_point">Als Ziel wählen</string>
 	<string name="layer_hillshade">Relief Overlay</string>
 	
-	<string name="download_hillshade_maps">Relief-Overlays</string>
+	<string name="download_hillshade_maps">Reliefkarte</string>
 	
 	<string name="rendering_attr_noAdminboundaries_name">Grenzen ausblenden</string>
 	<string name="rendering_attr_noAdminboundaries_description">Unterdrückt die Anzeige regionaler Grenzverläufe</string>
@@ -1006,7 +1006,7 @@
 	<string name="select_animate_speedup">Geschwindigkeit für Routen-Simulation wählen</string>
 	<string name="osmand_parking_hours">Stunde(n)</string>
 	<string name="osmand_parking_minutes">Minuten</string>
-	<string name="osmand_parking_position_description_add_time">Das Auto wurde hier geparkt:</string>
+	<string name="osmand_parking_position_description_add_time">Das Auto wurde geparkt um</string>
 	<string name="route_updated_loc_found">Route wird neu berechnet sobald Standort ermittelt</string>
 	<string name="continue_follow_previous_route_auto">Vorherige Navigation wurde nicht beendet. Der Route weiter folgen? (%1$s Sekunden)</string>
 
@@ -1956,6 +1956,9 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="shared_string_wikipedia">Wikipedia</string>
     <string name="local_indexes_cat_wiki">Wikipedia</string>
     <string name="shared_string_show_details">Details anzeigen</string>
+    <string name="routing_attr_avoid_stairs_name">Treppen vermeiden</string>
+    <string name="routing_attr_avoid_stairs_description">Treppen vermeiden</string>
+    <string name="routing_attr_avoid_borders_name">Grenzübertritt vermeiden</string>
     <string name="routing_attr_avoid_borders_description">Überqueren einer Staatsgrenze vermeiden</string>
 	<string name="routing_attr_height_description">Höhe des Fahrzeugs für Streckenberechnung angeben</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
@@ -2139,8 +2142,8 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="contact_us">Kontakt</string>
     <string name="map_legend">Kartenlegende</string>
     <string name="access_from_map_description">Menü-Knopf zeigt Dashboard, nicht Menü</string>
-    <string name="show_on_start_description">\"Aus\" startet direkt die Kartenansicht.</string>
-    <string name="copied_to_clipboard">in die Zwischenablage kopiert</string>
+    <string name="show_on_start_description">\"Aus\" startet direkt die Kartenansicht</string>
+    <string name="copied_to_clipboard">In die Zwischenablage kopiert</string>
     <string name="release_2_2">" • Neue Kontext-bezogene Benutzeroberfläche bei Auswahl von Orten auf der Karte und anderen Ansichten\n\n • Kartenansicht wird nun direkt gestartet, außer bei Auswahl von \'Zeige Dashboard bei App-Start\'\n\n • Auswahl der anzuzeigenden Elemente im Dashboard möglich\n\n • Dashboard kann umgangen werden, falls menü-basierte App-Steuerung gewünscht ist\n\n • Zum Herunterladen von Kartendateien können nun Regionen direkt durch Tippen auf der Weltkarte ausgewählt werden\n\n • Die POI-Suche ermöglicht nun speziellere Abfragen\n\n • Verbesserungen beim Editieren von POI- und OSM-Objekten\n\n • Oberfläche und Struktur zum Herunterladen der Karten wurden überarbeitet\n\n und mehr ... "</string>
     <string name="osm_save_offline">offline speichern</string>
     <string name="osm_edit_modified_poi">geänderter OSM-POI</string>
@@ -2161,7 +2164,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="osn_close_dialog_error">Fehler aufgetreten: Notiz wurde nicht geschlossen</string>
 	<string name="context_menu_item_delete_waypoint">GPX-Wegpunkt löschen?</string>
     <string name="context_menu_item_edit_waypoint">GPX-Wegpunkt bearbeiten</string>
-    <string name="lang_fy">Friesisch</string>
+    <string name="lang_fy">Westfriesisch</string>
     <string name="lang_als">Albanisch (Tosk)</string>
     <string name="poi_dialog_reopen">Wieder öffnen</string>
 	<string name="tab_title_basic">Basis</string>
@@ -2176,7 +2179,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="activate_srtm_plugin">Bitte das SRTM-Plugin aktivieren</string>
     <string name="get_full_version">Vollversion</string>
     <string name="confirm_download_roadmaps">Soll wirklich die reine Straßenkarte heruntergeladen werden, obwohl bereits die vollständige Standardkarte vorhanden ist?</string>
-    <string name="value_downloaded_from_max">%1$.1f von %2$.1f MB</string>
+    <string name="value_downloaded_of_max">%1$.1f von %2$.1f MB</string>
     <string name="update_all">Alles aktualisieren (%1$s MB)</string>
     <string name="free_downloads_used">Verbrauchte freie Downloads</string>
     <string name="enter_country_name">Name des Landes eingeben</string>
@@ -2190,4 +2193,14 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="favorite_category_add_new">neu erstellen</string>
     <string name="next_proceed">Weiter</string>
 	<string name="file_size_in_mb">%.1f MB</string>
+    <string name="please_specify_poi_type_only_from_list">"Bitte eine gültige POI-Art auswählen oder überspringen. "</string>
+    <string name="share_osm_edits_subject">OSM Bearbeitung mit OsmAnd geteilt</string>
+    <string name="av_locations_descr">GPX Datei mit Audio/Video-Daten</string>
+    <string name="free_downloads_used_description">Anzeige der genutzten freien Downloads</string>
+
+    <string name="shared_string_location">Position</string>
+    <string name="hillshade_layer_disabled">Relief deaktiviert</string>
+    <string name="shared_string_commit">Freigeben</string>
+	
+    <string name="av_locations">Positionen</string>
     </resources>

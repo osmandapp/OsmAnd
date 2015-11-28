@@ -12,9 +12,9 @@
     <string name="route_from">От:</string>
     
 	
-    <string name="speak_speed_limit">Обявяване на ограничения за скоростта</string>
-    <string name="speak_cameras">Обявяване на камери за скорост</string>
-	<string name="speak_traffic_warnings">Обявяване на предупреждения за трафика</string>
+    <string name="speak_speed_limit">Ограничения на скоростта</string>
+    <string name="speak_cameras">Камери за скорост</string>
+	<string name="speak_traffic_warnings">Предупреждения за трафика</string>
 	
 	
 	<string name="app_mode_default">Разглеждане на картата</string>
@@ -150,7 +150,7 @@
     <string name="shared_string_control_start">Старт</string>
     <string name="map_widget_av_notes">Аудио/видео бележки</string>
     <string name="osmand_srtm_short_description_80_chars">Добавка на OsmAnd за офлайн контурни линии</string>
-    <string name="osmand_srtm_long_description_1000_chars">Тази добавка изчертава контурни линии в офлайн картите на OsmAnd. Глобалната карта (между 70 градуса северна ширина и 70 градуса южна ширина) се базира на измервания от SRTM (Shuttle Radar Topography Mission) и ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), устройство за изображения на борда на Terra, най-добрият спътник на програмата на NASA Earth Observing System. ASTER е съвместен проект на NASA, Японското правителсто и японската компания Japan Space Systems (J-spacesystems).</string>
+    <string name="osmand_srtm_long_description_1000_chars">"Тази добавка изчертава линии на релефа върху основните карти на OsmAnd. Това е особено полезно за туристи и хора интересуващи се от релефа на местността.\n\nГлобалната карта (между 70 градуса северна ширина и 70 градуса южна ширина) се базира на измервания от SRTM (Shuttle Radar Topography Mission) и ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), устройство за изображения на борда на Terra, най-добрият спътник на програмата на NASA Earth Observing System. ASTER е съвместен проект на NASA, Японското правителсто и японската компания Japan Space Systems (J-spacesystems). "</string>
     <string name="map_widget_distancemeasurement">Измерване на дистанции</string>
     <string name="audionotes_location_not_defined">Няма определена позиция за тази бележка. Използвайте контекстното меню за да изберете място и да направите бележка</string>
     
@@ -159,7 +159,7 @@
     <string name="audionotes_plugin_name">Аудио/видео бележки</string>
     <string name="index_srtm_parts">части</string>
     <string name="index_srtm_ele">Контури</string>
-    <string name="srtm_plugin_description">"Тази добавка осигурява показване на релефни контури върху офлайн картите на OsmAnd. Тази функционалност е много оценявана от спортисти, туристи, всички които се интересуват от ландшафта. 
+    <string name="srtm_plugin_description">"Тази добавка осигурява показване на релефни контури върху офлайн картите на OsmAnd. Тази функционалност е много оценявана от спортисти, туристи, всички които се интересуват от ландшафта.
 \n\nГлобалните данни (между 70 градуса северна ширина и 70 градуса южна ширина) се основават на измервания от SRTM  и ASTER - радари намиращи се на борда на Terra - сателит на НАСА за наблюдение на НАСА. ASTER е съвместен проект между НАСА и Япония. "</string>
     <string name="srtm_plugin_name">Контурни линии</string>
     <string name="download_select_map_types">Други карти</string>
@@ -576,8 +576,8 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="online_map_settings_descr">Настройване на източниците за онлайн карти</string>
 	
 	
-	<string name="osmand_rastermaps_plugin_description">"С този плъгин можете да получите достъп до много типове онлайн (растерни) карти, от предварително създадени Openstreetmap растерни изображения (като Mapnik) до сателитни снимки и слоеве със специално предназначение като карти за времето, карти на климата, геоложки карти, географски терен и др.
-\n\nНякои от тези карти може да бъде използвана като основна (базова) карта на екрана на OsmAnd или като подложка на друга базова карта (като на OsmAnd стандартната офлайн карта). За да се направи всяка подложка по-видима, някои елементи на OsmAnd картата могат лесно да бъдат скрити чрез менюто \"Настройки на  картата\".
+	<string name="osmand_rastermaps_plugin_description">"С този плъгин можете да получите достъп до много типове онлайн (или растерни) карти, достъп до предварително създадени Openstreetmap растерни изображения (като Mapnik), до сателитни снимки и до слоеве със специално предназначение, като карти за времето, карти на климата, геоложки карти, географски терен и др.
+\n\nНякои от тези карти могат да бъдат използвани като основна (базова) карта на екрана на OsmAnd или като подложка на друга базова карта (като на OsmAnd стандартната офлайн карта). За да се направи всяка подложка по-видима, някои елементи на OsmAnd картата могат лесно да бъдат скрити чрез менюто \"Настройки на  картата\".
 \n\nРастерните карти могат да бъдат получени директно чрез онлайн източници, или могат да бъдат подготвени за офлайн употреба (и ръчно копирани в папката за данни OsmAnd) под формата на sqlite база данни от друго приложение. "</string>
 	
 	<string name="osmand_accessibility_description">Настройки на специалните функции за достъпност. Настройване скоростта на гласовите напътствия и допълнителни настройки за хора със специални потребности.</string>
@@ -1346,9 +1346,9 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="av_camera_focus_continuous">Камерата се опитва да фокусира</string>
 	<string name="av_photo_play_sound">Мелодия при снимане</string>
 	<string name="av_photo_play_sound_descr">Възпроизвеждане на звук или мелодия при снимане</string>
-<string name="announce_gpx_waypoints">Обявяване на точките от GPX файла</string>
+<string name="announce_gpx_waypoints">GPX точки</string>
     <string name="speak_title">Обявяване…</string>
-	<string name="speak_street_names">Обявяване на имена на улици (синтезиран глас)</string>
+	<string name="speak_street_names">Имена на улици (синтезиран глас)</string>
         
     
     <string name="use_kalman_filter_compass">Използване на филтър на Kalman</string>
@@ -1436,7 +1436,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="routing_attr_prefer_motorway_description">Магистрали</string>
 	<string name="routing_attr_short_way_name">Кратък маршрут</string>
 	<string name="routing_attr_short_way_description">Използване на кратък маршрут</string>
-	<string name="routing_attr_avoid_toll_name">Избягване на платени пътища</string>
+	<string name="routing_attr_avoid_toll_name">Избягване на пътни такси</string>
 	<string name="routing_attr_avoid_toll_description">Избягване на платени пътища</string>
 	<string name="routing_attr_avoid_unpaved_name">Избягване на черни пътища</string>
 	<string name="routing_attr_avoid_unpaved_description">Избягване на черни (неасфалтирани) пътища</string>
@@ -1458,8 +1458,8 @@ OsmAnd е с отворен код и активно да се развива. �
     <string name="waypoints">Точки</string>
     <string name="targets">Дестинации</string>
     <string name="way_alarms">Предупреждения</string>
-    <string name="speak_favorites">Обявяване на запазените места, които са наблизо</string>
-    <string name="speak_poi">Обявяване на близките POI</string>
+    <string name="speak_favorites">Записани места</string>
+    <string name="speak_poi">POI наблизо</string>
     <string name="download_additional_maps">Сваляне на липсващите карти %1$s (%2$d MB)?</string>
     <string name="shared_string_more">Още…</string>
     <string name="rendering_value_browse_map_name">Карта</string>  
@@ -1479,9 +1479,9 @@ OsmAnd е с отворен код и активно да се развива. �
     <string name="lang_sw">Суахили</string>
     <string name="lang_he">Иврит</string>
     <string name="forward">Напред</string>
-    <string name="home">У дома</string>
+    <string name="home">Табло за управление</string>
     <string name="gpx_monitoring_start">Старт на записа в GPX</string>
-	<string name="gpx_monitoring_stop">Край на записа GPX</string>
+	<string name="gpx_monitoring_stop">Край на GPX записа</string>
     <string name="gpx_start_new_segment">Започни нов сегмент</string>
     <string name="rendering_attr_hideBuildings_name">Скрий сградите</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Скрий пътищата, които не са за автомобили</string>
@@ -1491,7 +1491,7 @@ OsmAnd е с отворен код и активно да се развива. �
     <string name="rendering_attr_moreDetailed_name">С повече детайли</string>
     <string name="rendering_attr_lessDetailed_name">С по-малко детайли</string>
     <string name="confirm_every_run">Винаги питай</string>
-	<string name="enable_sleep_mode">Разрешаване на GPS спящ режим</string>
+	<string name="enable_sleep_mode">Поставяне на GPS във фонов режим</string>
 	<string name="sleep_mode_stop_dialog">Прекъсване на фоновия режим GPS?</string>
 	<string name="save_track_to_gpx_globally">Записване на следата в GPX файл</string>
 	<string name="save_track_interval_globally">Интервал за запис</string>
@@ -1501,7 +1501,7 @@ OsmAnd е с отворен код и активно да се развива. �
     <string name="live_monitoring_m">Онлайн следа (изисква се GPX)</string>
     <string name="shared_string_my_places">Моите места</string>
     
-    <string name="live_monitoring_m_descr">Изпращане на следата онлайн до определен уеб адрес, при условие, че записът в GPX е включен.</string>
+    <string name="live_monitoring_m_descr">Изпращане на изминатия път по Интернет, при условие, че записът в GPX е включен.</string>
 	<string name="live_monitoring_start">Старт на онлайн следата</string>
 	<string name="live_monitoring_stop">Стоп на онлайн следата</string>
 	<string name="rendering_attr_hideAccess_name">Скриване на ограниченията за достъп</string>
@@ -1622,7 +1622,7 @@ OsmAnd е с отворен код и активно да се развива. �
     <string name="rendering_attr_roadStyle_name">Оцветяване на пътищата</string>
     <string name="rendering_value_germanRoadAtlas_name">Германски стил</string>
     <string name="rendering_value_americanRoadAtlas_name">Американски стил</string>
-    <string name="rendering_value_orange_name">В жълто и оранжево</string>
+    <string name="rendering_value_orange_name">Оранжево</string>
     <string name="color_orange">оранжево</string>
 	
     <string name="rendering_attr_transportStops_name">Гари и спирки</string>
@@ -1720,7 +1720,7 @@ OsmAnd е с отворен код и активно да се развива. �
     <string name="gpx_info_subtracks">"Части: %1$s "</string>
 	<string name="gpx_selection_track">%1$s
 \nСледа %2$s</string>
-    <string name="gpx_file_is_empty">GPX следата е празна</string>
+    <string name="gpx_file_is_empty">Празен GPX файл</string>
     <string name="osmo_connect_to_device_tracker_id">Tracker id</string>
     <string name="osmo_plugin_name">OsMo (OsMo наблюдение)</string>
 	<string name="get_plugin">Вземи</string>
@@ -1732,7 +1732,7 @@ OsmAnd е с отворен код и активно да се развива. �
     <string name="world_ski_missing">Трябва да изтеглите специалната карта за скиори за правилното изобразяване на ски писти и други подробности</string>
     <string name="nautical_maps_missing">За правилното изобразяване на морските навигационни ориентири трябва да изтеглите специална карта за тях</string>
 	<string name="edit_group">Редактиране на група</string>
-    <string name="speak_pedestrian">Обявяване на пешеходни пътеки</string>
+    <string name="speak_pedestrian">Пешеходни пътеки</string>
     <string name="rendering_value__name">По подразбиране</string>
     <string name="rendering_value_default_name">По подразбиране</string>
     <string name="rendering_value_highContrastRoads_name">Контрастни пътища</string>
@@ -1856,7 +1856,7 @@ OsmAnd е с отворен код и активно да се развива. �
     <string name="shared_string_show_details">Покажи подробни данни</string>
     <string name="gps_network_not_enabled">Услугата за местоположение не е разрешена. Искате ли да я включите?</string>
     <string name="disable_recording_once_app_killed">Предотвратяване на самостоятелно записване</string>
-    <string name="disable_recording_once_app_killed_descrp">Спира на пауза записа на GPX, когато приложението е затворено. (Индикаторът за OsmAnd Sleep режим изчезва зоната за уведомяване на Андроид.)</string>
+    <string name="disable_recording_once_app_killed_descrp">Спира на пауза записа на GPX, когато приложението е затворено (от последни приложения). (Иконата на OsmAnd изчезва от лентата за уведомяване на Андроид.)</string>
 	<string name="shared_string_import2osmand">Импортиране към OsmAnd</string>
     <string name="read_full_article">Прочетете пълната статия (онлайн)</string>
     <string name="local_recordings_delete_all_confirm">Възнамерявате да изтриете %1$d бележки. Сигурни ли сте?</string>
@@ -1867,26 +1867,26 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="keep_informing_descr">Повтаряне на гласовите напътствия през определено време</string>
     <string name="keep_informing_never">Само ръчно (докосване на стрелката)</string>
     <string name="index_name_netherlands">Европа - Холандия</string>
-	<string name="light_theme">Светла</string>
-    <string name="dark_theme">Тъмна</string>
-    <string name="lang_pms">пиемонтски</string>
-    <string name="lang_bn">бенгалски</string>
-    <string name="lang_tl">тагалог (филипински)</string>
-    <string name="lang_sh">сърбо-хърватски</string>
-    <string name="lang_az">азерски</string>
-    <string name="lang_br">бретонски</string>
-    <string name="lang_sq">албански</string>
-    <string name="lang_is">исландски</string>
-    <string name="lang_bpy">Bishnupriya</string>
-    <string name="lang_nv">навахо</string>
-    <string name="lang_ga">ирландски</string>
-    <string name="lang_la">латински</string>
-    <string name="lang_ku">кюрдски</string>
-    <string name="lang_ta">тамилски</string>
+	<string name="light_theme">Светла тема</string>
+    <string name="dark_theme">Тъмна тема</string>
+    <string name="lang_pms">Пиемонтски</string>
+    <string name="lang_bn">Бенгалски</string>
+    <string name="lang_tl">Тагалог (филипински)</string>
+    <string name="lang_sh">Сърбо-хърватски</string>
+    <string name="lang_az">Азерски</string>
+    <string name="lang_br">Бретонски</string>
+    <string name="lang_sq">Албански</string>
+    <string name="lang_is">Исландски</string>
+    <string name="lang_bpy">Бишнуприя-манипури</string>
+    <string name="lang_nv">Навахо</string>
+    <string name="lang_ga">Ирландски</string>
+    <string name="lang_la">Латински</string>
+    <string name="lang_ku">Кюрдски</string>
+    <string name="lang_ta">Тамилски</string>
     <string name="lang_ml">Малаялам</string>
-    <string name="lang_lb">люксембургски</string>
-    <string name="lang_eo">есперанто</string>
-    <string name="lang_et">естонски</string>
+    <string name="lang_lb">Люксембургски</string>
+    <string name="lang_eo">Есперанто</string>
+    <string name="lang_et">Естонски</string>
     <string name="lang_os">Осетински</string>
     <string name="lang_es_ar">Аржентински испански</string>
     <string name="lang_nb">Норвежки (Букмол)</string>
@@ -2028,4 +2028,132 @@ OsmAnd е с отворен код и активно да се развива. �
     <string name="osm_edit_modified_poi">Модифицирани OSM POI</string>
     <string name="osm_edit_deleted_poi">Изтрити OSM POI</string>
     <string name="context_menu_item_open_note">Отвори OSM бележка</string>
+    <string name="please_specify_poi_type_only_from_list">"Моля, задайте правилния тип POI или пропуснете. "</string>
+    <string name="access_from_map_description">Бутонът \'Меню\' стартира таблото за управление</string>
+    <string name="access_from_map">Достъп от картата</string>
+    <string name="show_on_start_description">Ако е изключено се стартира с екрана на картата</string>
+    <string name="osm_edit_reopened_note">Отворена отново бележка на OSM</string>
+    <string name="osm_edit_commented_note">Бележка на OSM с коментар</string>
+    <string name="osm_edit_removed_note">Изтрита бележка на OSM</string>
+	<string name="osm_edit_created_note">Създадена бележка на OSM</string>
+	<string name="osn_bug_name">Бележка на OSM</string>
+	<string name="osn_add_dialog_title">Създайте Бележка</string>
+	<string name="osn_comment_dialog_title">Добавяне на коментар</string>
+	<string name="osn_reopen_dialog_title">Отворете наново</string>
+	<string name="osn_close_dialog_title">Затворете бележката</string>
+	<string name="osn_add_dialog_success">Бележката беше успешно създадена</string>
+	<string name="osn_add_dialog_error">Възникна грешка: Бележката не беше създадена</string>
+	<string name="osn_close_dialog_success">Бележката беше успешно затворена</string>
+	<string name="osn_close_dialog_error">Възникна грешка: Бележката не беше затворена успешно</string>
+	<string name="shared_string_commit">Запиши</string>
+	
+    <string name="context_menu_item_delete_waypoint">Изтриване на GPX точка?</string>
+    <string name="context_menu_item_edit_waypoint">Редактиране на GPX точка</string>
+    <string name="shared_string_location">Местоположение</string>
+    <string name="simulate_your_location_stop_descr">Спиране на симулацията на място</string>
+    <string name="simulate_your_location_descr">Симулира с помощта на изчисления маршрут или записана GPX следа</string>
+    <string name="address_unknown">Адресът още не е известен</string>
+    <string name="av_locations_descr">GPX файл с бележки</string>
+    <string name="av_locations">Места</string>
+    <string name="routing_attr_avoid_shuttle_train_name">Избягване на трансферен влак</string>
+	<string name="routing_attr_avoid_shuttle_train_description">Избягване на трансферен влак</string>
+    <string name="traffic_warning_hazard">Опасност</string>
+    <string name="rendering_value_boldOutline_name">Получер контур</string>
+    <string name="download_live_updates">Актуализации на живо</string>
+	<string name="rendering_value_default13_name">По подразбиране (13)</string>
+	<string name="rendering_value_defaultTranslucentCyan_name">По подразбиране (полупрозрачно синьо)</string>
+    <string name="rendering_attr_currentTrackColor_description">GPX цвят</string>
+    <string name="rendering_attr_currentTrackWidth_description">GPX ширина</string>
+    <string name="rendering_value_red_name">Червено</string>
+    <string name="rendering_value_translucent_red_name">Полупрозрачно червено</string>
+    <string name="rendering_value_translucent_orange_name">Полупрозрачно оранжево</string>
+    <string name="rendering_value_yellow_name">Жълто</string>
+    <string name="rendering_value_translucent_yellow_name">Полупрозрачно жълто</string>
+    <string name="rendering_value_lightgreen_name">Светло-зелено</string>
+    <string name="rendering_value_translucent_lightgreen_name">Полупрозрачно светло-зелено</string>
+    <string name="rendering_value_green_name">Зелено</string>
+    <string name="rendering_value_translucent_green_name">Полупрозрачно зелено</string>
+    <string name="rendering_value_lightblue_name">Свелто-синьо</string>
+    <string name="rendering_value_translucent_lightblue_name">Полупрозрачно свелто-синьо</string>
+    <string name="rendering_value_blue_name">Синьо</string>
+    <string name="rendering_value_translucent_blue_name">Полупрозрачно светло-синьо</string>
+    <string name="rendering_value_purple_name">Лилаво</string>
+    <string name="rendering_value_translucent_purple_name">Полупрозрачно лилаво</string>
+    <string name="lang_te">Телугу</string>
+    <string name="lang_new">Непал Бхаса</string>
+    <string name="lang_gl">Галски</string>
+    <string name="rendering_attr_roadStyle_description">Оцветяване на пътищата</string>
+    <string name="osmo_tracker_id">Личен ID на трекера</string>
+    <string name="misc_pref_title">Разни</string>
+    <string name="localization_pref_title">Локализация</string>
+    <string name="index_item_nation_addresses">адреси в цялата страна</string>
+	<string name="index_item_world_altitude_correction">Корекция на надморската височина</string>
+	<string name="index_item_world_seamarks">Морски карти</string>
+	<string name="index_item_world_bitcoin_payments">Плащане с bitcoin</string>
+	<string name="index_item_world_basemap">Световна карта</string>
+    <string name="index_item_world_ski">Световната ски карта</string>
+    <string name="lang_vi">Виетнамски</string>
+	<string name="lang_cy">Уелски</string>
+	<string name="index_name_canada">Северна Америка - Канада</string>
+    <string name="index_name_italy">Европа - Италия</string>
+    <string name="index_name_gb">Европа - Великобритания</string>
+    <string name="routing_attr_avoid_stairs_name">Избягване на стълби</string>
+	<string name="routing_attr_avoid_stairs_description">Избягване на стълби</string>
+	<string name="routing_attr_avoid_borders_name">Избягване на КПП</string>
+	<string name="routing_attr_avoid_borders_description">Избягване пресичането на граници и преминаването в друга държава</string>
+	<string name="dashboard_or_drawer_title">Табло за управление или меню</string>
+    <string name="use_dashboard_btn">Използване на таблото</string>
+    <string name="use_drawer_btn">Използване на менюто</string>
+    <string name="save_poi_without_poi_type_message">Наистина ли ще запазите POI без да укажете типа му?</string>
+    <string name="feedback">Обратна връзка</string>
+    <string name="versions_item">Версии</string>
+    <string name="techical_articles_item">Технически статии</string>
+    <string name="instalation_troubleshooting_item">Инсталиране и отстраняване на неизправности</string>
+    <string name="search_on_the_map_item">Търсене по картата</string>
+    <string name="map_viewing_item">Преглед на картата</string>
+    <string name="faq_item_description">Често задавани въпроси</string>
+    <string name="faq_item">ЧЗВ</string>
+    <string name="planning_trip_item">Планиране на пътуване</string>
+    <string name="navigation_item_description">Настройка на навигация</string>
+    <string name="first_usage_item_description">Как да изтеглите картите, задаване на основните настройки</string>
+    <string name="first_usage_item">Първо ползване</string>
+    <string name="plugins_menu_group">Добавки</string>
+    <string name="other_menu_group">Друго</string>
+    <string name="help_us_to_improve_menu_group">Помогнете ни да подобрим OsmAnd</string>
+    <string name="features_menu_group">Функции</string>
+    <string name="osmo_session_id_share">URL сесия за проследяване на устройството (%1$s)</string>
+    <string name="osmo_auto_send_locations">Автоматично стартиране на трекер сесия</string>
+    <string name="later">По-късно</string>
+    <string name="begin_with_osmand_menu_group">Първи стъпки с OsmAnd</string>
+    <string name="new_version">Нова версия</string>
+    <string name="enter_country_name">Въведете име на държава</string>
+    <string name="application_dir_description">Изберете къде искате да запазите файловете с карти.</string>
+    
+    <string name="update_all">Актуализиране на всички (%1$s МБ)</string>
+    <string name="free_downloads_used">Използвани безплатни сваляния</string>
+    <string name="file_size_in_mb">%.1f МБ</string>
+    <string name="value_downloaded_of_max">%1$.1f от %2$.1f МБ</string>
+    <string name="confirm_download_roadmaps">Сигурни ли сте, че искате да изтеглите карта само с пътища, въпреки че вече имате стандартната карта?</string>
+    <string name="downloads">Изтегляния</string>
+    <string name="get_full_version">Пълна версия</string>
+    <string name="activate_srtm_plugin">Моля, активирайте добавката SRTM</string>
+    <string name="activate_seamarks_plugin">Моля, активирайте добавката за морски карти</string>
+    <string name="buy">Купи</string>
+    <string name="downloading_number_of_files">Изтегляне - %1$d файла</string>
+    <string name="roads">Пътища</string>
+    <string name="downloads_left_template">Остават %1$s изтегляния</string>
+	<string name="are_you_sure">Сигурни ли сте?</string>
+	<string name="count_of_lines">Брой редове</string>
+	<string name="show_gpx">Покажи GPX</string>
+	<string name="saved_at_time">Успешно записано в: %1$s</string>
+	<string name="please_specify_poi_type">Задайте тип на POI.</string>
+	<string name="recent_places">Последни места</string>
+	<string name="osmo_conn_successfull">"Установена връзка: %1$s "</string>
+    <string name="osmo_io_error">"Проблем с връзката към OsMo: "</string>
+    <string name="osmo_settings_uuid">Уникално ID на устройство</string>
+    <string name="use_points_as_intermediates">Изчисляване на маршрут между точки</string>
+    <string name="osmo_mode_restart">Рестартиране на OsMo сесия</string>
+    <string name="osmo_mode_on">Спиране на OsMo сесия</string>
+    <string name="osmo_mode_off">Стартиране на OsMo сесия</string>
+    <string name="route_descr_destination">Крайна цел</string>
     </resources>
