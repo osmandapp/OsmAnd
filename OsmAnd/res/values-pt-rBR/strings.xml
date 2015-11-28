@@ -790,7 +790,7 @@
     <string name="map_widget_distancemeasurement">Medição de distância</string>
     <string name="audionotes_location_not_defined">Local para associar com a nota ainda não está definido. \"Usar posição...\" para atribuir uma nota para o local especificado</string>
     <string name="map_widget_audionotes">Notas de áudio</string>
-    <string name="index_srtm_parts">partes</string>
+    <string name="index_srtm_parts">peças</string>
     <string name="download_select_map_types">Outros mapas</string>
     <string name="download_roads_only_item">Apenas estradas</string>
     <string name="download_regular_maps">Mapa padrão</string>
@@ -975,7 +975,7 @@
 	<string name="route_kl">Mantenha à esquerda e siga</string>
 	<string name="route_kr">Mantenha à direita e siga</string>
 	<string name="rendering_attr_noPolygons_description">Tornar transparente todas as características de terra no mapa</string>
-	<string name="rendering_attr_noPolygons_name">Polígonos</string>
+	<string name="rendering_attr_noPolygons_name">Polígonos de áreas</string>
 	<string name="rendering_attr_appMode_name">Modo de renderização</string>
 	<string name="rendering_attr_appMode_description">Otimizar o mapa para</string>
 	<string name="rendering_attr_contourLines_description">Exibir a partir do nível de zoom (requer dados de contorno):</string>
@@ -1699,7 +1699,7 @@
     <string name="lang_th">Tailandês</string>
     <string name="lang_te">Telugu</string>
     <string name="lang_nn">Norueguês (Nynorsk)</string>
-    <string name="lang_new">Newar / Nepal Bhasa</string>
+    <string name="lang_new">Neuari / Nepalbhasa</string>
     <string name="lang_ms">Malásio</string>
     <string name="lang_ht">Haitiano</string>
     <string name="lang_gl">Galego</string>
@@ -1880,7 +1880,7 @@
     <string name="shared_string_trip_recording">Gravação de viagem</string>
     <string name="shared_string_navigation">Navegação</string>
     <string name="osmand_running_in_background">Rodando em segundo plano</string>
-    <string name="lang_fy">Frysk</string>
+    <string name="lang_fy">Frisão</string>
     <string name="favourites_edit_dialog_title">Informação do favorito</string>
     <string name="simulate_your_location_stop_descr">Parar simulação de rota</string>
     <string name="simulate_your_location_descr">Simular usando a rota calculada ou um GPX gravado</string>
