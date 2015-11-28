@@ -2294,4 +2294,15 @@
 	<string name="poi_material_metal_wood">原材料：金屬、木頭</string>
 	<string name="poi_material_glass">原材料：玻璃</string>
 	<string name="poi_material_bronze">原材料：青銅</string>
+	<string name="poi_material_earth">原材料：土</string>
+	<string name="poi_material_composite">原材料：合成物</string>
+	<string name="poi_material_limestone">原材料：石灰石</string>
+	<string name="poi_material_marble">原材料：大理石</string>
+	<string name="poi_material_aluminium">原材料：鋁</string>
+
+	<string name="poi_site_type_megalith">類型：巨石</string>
+	<string name="poi_site_type_tumulus">類型：古墳</string>
+	<string name="poi_site_type_fortification">類型：防禦</string>
+	<string name="poi_site_type_settlement">類型：居地</string>
+	<string name="poi_site_type_city">類型：城市</string>
 	</resources>
