@@ -1,0 +1,17 @@
+# This improves obfuscation and moves non-public classes to their own namespace.
+-repackageclasses 'com.twofortyfouram.spackle.internal'
+
+# Workaround for https://code.google.com/p/android/issues/detail?id=67587
+-keeppackagenames !**
+
+# This makes it easier to autocomplete methods in an IDE using this obfuscated library.
+-keepparameternames
+
+# Keep attributes necessary for a distributed API library.
+-keepattributes EnclosingMethod,InnerClasses,Signature,Exceptions,*Annotation*
+
+# Keep the public classes of the library.
+-keep public class com.twofortyfouram.log.Lumberjack { public protected *; }
+-keep public class com.twofortyfouram.spackle.power.* { public protected *; }
+-keep public class com.twofortyfouram.spackle.bundle.* { public protected *; }
+-keep public class com.twofortyfouram.spackle.* { public protected *; }

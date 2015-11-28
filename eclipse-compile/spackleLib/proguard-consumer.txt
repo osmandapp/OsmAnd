@@ -1,0 +1,8 @@
+# Strip out log messages, except for always.
+-assumenosideeffects public class com.twofortyfouram.log.Lumberjack {
+    public static *** v(...);
+    public static *** d(...);
+    public static *** i(...);
+    public static *** w(...);
+    public static *** e(...);
+}

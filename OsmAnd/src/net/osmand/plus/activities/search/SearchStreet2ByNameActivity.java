@@ -1,7 +1,7 @@
 package net.osmand.plus.activities.search;
 
-import java.util.Comparator;
-import java.util.List;
+import android.os.AsyncTask;
+import android.view.View;
 
 import net.osmand.data.City;
 import net.osmand.data.MapObject.MapObjectComparator;
@@ -11,8 +11,9 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.search.SearchAddressFragment.AddressInformation;
 import net.osmand.plus.resources.RegionAddressRepository;
-import android.os.AsyncTask;
-import android.view.View;
+
+import java.util.Comparator;
+import java.util.List;
 
 public class SearchStreet2ByNameActivity extends SearchByNameAbstractActivity<Street> {
 	private RegionAddressRepository region;

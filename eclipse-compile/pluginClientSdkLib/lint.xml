@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <!-- Explicitly allowing backup for a library doesn't make sense. -->
+    <issue id="AllowBackup" severity="ignore"/>
+</lint>

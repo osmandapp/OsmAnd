@@ -1,9 +1,5 @@
 package net.osmand.plus;
 
-import net.osmand.PlatformUtil;
-import net.osmand.access.AccessibleToast;
-import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
-import net.osmand.plus.osmo.OsMoPlugin;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -22,6 +18,11 @@ import android.os.SystemClock;
 import android.support.v4.app.NotificationCompat.Builder;
 import android.util.Log;
 import android.widget.Toast;
+
+import net.osmand.PlatformUtil;
+import net.osmand.access.AccessibleToast;
+import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.osmo.OsMoPlugin;
 
 public class NavigationService extends Service implements LocationListener {
 

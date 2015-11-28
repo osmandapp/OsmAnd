@@ -17,7 +17,6 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 

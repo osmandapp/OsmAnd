@@ -1,34 +1,9 @@
 package net.osmand.binary;
 
 
-import gnu.trove.list.array.TIntArrayList;
-import gnu.trove.map.TIntObjectMap;
-import gnu.trove.map.hash.TIntObjectHashMap;
-import gnu.trove.map.hash.TLongObjectHashMap;
-import gnu.trove.set.hash.TIntHashSet;
-
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.RandomAccessFile;
-import java.io.Reader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
+import com.google.protobuf.CodedInputStream;
+import com.google.protobuf.CodedOutputStream;
+import com.google.protobuf.WireFormat;
 
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
@@ -69,9 +44,34 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import com.google.protobuf.CodedInputStream;
-import com.google.protobuf.CodedOutputStream;
-import com.google.protobuf.WireFormat;
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.RandomAccessFile;
+import java.io.Reader;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.map.TIntObjectMap;
+import gnu.trove.map.hash.TIntObjectHashMap;
+import gnu.trove.map.hash.TLongObjectHashMap;
+import gnu.trove.set.hash.TIntHashSet;
 
 public class BinaryMapIndexReader {
 	

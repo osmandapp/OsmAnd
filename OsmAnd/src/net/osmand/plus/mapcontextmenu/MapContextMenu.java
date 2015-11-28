@@ -6,16 +6,17 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AlertDialog.Builder;
 import android.view.View;
 import android.widget.LinearLayout;
+
 import net.osmand.CallbackWithObject;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.R;
+import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuState;

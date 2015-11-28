@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- URL to search for the host on the app store.  By default, this is for Google Play. -->
+    <string name="com_twofortyfouram_locale_sdk_client_app_store_deep_link_format" translatable="false" tools:ignore="UnusedResources">market://details?id=%1$s&#038;referrer=utm_source=%2$s&#038;utm_medium=app&#038;utm_campaign=plugin</string>
+
+</resources>

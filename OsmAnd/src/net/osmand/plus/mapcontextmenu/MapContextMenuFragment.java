@@ -28,6 +28,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
@@ -45,6 +46,7 @@ import net.osmand.plus.mapcontextmenu.MenuController.TitleProgressController;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.Algorithms;
+
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 import static net.osmand.plus.mapcontextmenu.MenuBuilder.SHADOW_HEIGHT_TOP_DP;
 

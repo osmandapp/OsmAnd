@@ -1,13 +1,13 @@
 package net.osmand.binary;
 
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
-import java.text.MessageFormat;
-
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.util.Algorithms;
+
+import java.text.MessageFormat;
+
+import gnu.trove.map.hash.TIntObjectHashMap;
 
 public class RouteDataObject {
 	/*private */static final int RESTRICTION_SHIFT = 3;

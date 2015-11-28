@@ -1,6 +1,11 @@
 package net.osmand.data;
 
 
+import net.osmand.Collator;
+import net.osmand.OsmAndCollator;
+import net.osmand.util.Algorithms;
+import net.sf.junidecode.Junidecode;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -9,11 +14,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import net.osmand.Collator;
-import net.osmand.OsmAndCollator;
-import net.osmand.util.Algorithms;
-import net.sf.junidecode.Junidecode;
 
 
 public abstract class MapObject implements Comparable<MapObject> {

@@ -1,0 +1,23 @@
+apply plugin: 'com.android.library'
+apply plugin: 'maven'
+apply plugin: 'findbugs'
+
+dependencies {
+    compile project(':eclipse-compile:appcompat')
+    compile files('libs/jcip-annotations-1.0.jar')
+}
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.1"
+
+    resourcePrefix 'com_twofortyfouram_spackle_'
+
+    defaultConfig {
+        minSdkVersion System.getenv("MIN_SDK_VERSION") ? System.getenv("MIN_SDK_VERSION").toInteger() : 14
+        targetSdkVersion 23
+
+        testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
+        consumerProguardFiles 'proguard-consumer.txt'
+    }
+}

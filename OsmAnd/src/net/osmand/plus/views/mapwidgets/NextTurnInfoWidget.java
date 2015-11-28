@@ -1,11 +1,5 @@
 package net.osmand.plus.views.mapwidgets;
 
-import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.views.TurnPathHelper;
-import net.osmand.router.TurnType;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -17,6 +11,13 @@ import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+
+import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.TurnPathHelper;
+import net.osmand.router.TurnType;
 
 
 

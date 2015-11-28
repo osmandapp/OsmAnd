@@ -44,6 +44,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
