@@ -1771,7 +1771,7 @@
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">Aktualizovat vše (%1$s MB)</string>
     <string name="free_downloads_used">Použito volných stáhnutí</string>
-    <string name="free_downloads_used_description">Můžete nastavit, kolik volných stáhnutí jste použili</string>
+    <string name="free_downloads_used_description">Zobrazuje počet využitých volných stáhnutí</string>
     <string name="simulate_initial_startup">Simulovat první start aplikace</string>
     <string name="share_geo">geo:</string>
     <string name="share_menu_location">Sdílet polohu</string>
@@ -1858,4 +1858,7 @@
     <string name="use_drawer_btn">Použít menu</string>
     <string name="dashboard_or_drawer_title">Domovská obrazovka nebo menu</string>
     <string name="dashboard_or_drawer_description">Je zde nová možnost výběru ovládání aplikace přes flexibilní domovskou obrazovku nebo statické menu. Váš výběr může být vždy změněn v nastavení domovské obrazovky.</string>
-</resources>
+<string name="routing_attr_avoid_stairs_name">Vyhnout se schodům</string>
+	<string name="routing_attr_avoid_stairs_description">Vyhnout se schodům</string>
+	<string name="routing_attr_avoid_borders_name">Vyhnout se hraničním přechodům</string>
+	</resources>
