@@ -360,7 +360,7 @@
     <string name="filter_existing_indexes">Загруженные</string>
     <string name="general_settings_descr">Настройки экрана, локализации, единиц измерения и другие</string>
     <string name="general_settings">Общие</string>
-    <string name="index_settings">Загрузить карты</string>
+    <string name="index_settings">Управление картами</string>
     <string name="osmand_service">Фоновый режим</string>
     <string name="osmand_service_descr">Запустить OsmAnd в фоновом режиме для записи трека и навигации</string>
     <string name="fast_route_mode">Скоростной маршрут</string>
