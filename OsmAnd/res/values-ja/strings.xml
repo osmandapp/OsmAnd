@@ -2045,7 +2045,7 @@ POIの更新は利用できません</string>
     <string name="show_on_start_description">OFFの場合、起動時マップのみ表示します</string>
     <string name="copied_to_clipboard">クリップボードにコピーしました</string>
     <string name="release_2_2">" • マップ画面や他の画面で項目をタップした場合のコンテキストメニューの刷新\n\n • ダッシュボード設定で\'起動時に表示\'をOFFにすることで今まで通りにマップ画面が直接表示出来る様に、選択式に変更\n\n • ダッシュボード設定で任意の項目だけ表示できる様に変更可能\n\n • ダッシュボード設定で今まで通りメニューボタンでメニューが開ける様に設定可能\n\n • マップ画面で世界地図表示状態から任意の地点のマップデータをダウンロード可能に\n\n • POI検索時より具体的に検索できる様に変更\n\n • POIやOSMの項目編集機能を改善\n\n • マップやその他データのダウンロード構造とUIを刷新\n\n他多数... "</string>
-    <string name="osm_save_offline">オフラインで保存</string>
+    <string name="osm_save_offline">ｵﾌﾗｲﾝで保存</string>
     <string name="osm_edit_modified_poi">OSMのPOIが変更されました</string>
     <string name="osm_edit_deleted_poi">OSMのPOIが削除されました</string>
     <string name="context_menu_item_open_note">OSMでの注釈を開く</string>
@@ -2062,7 +2062,7 @@ POIの更新は利用できません</string>
 	<string name="osn_add_dialog_error">例外事項の発生:メモは作成されませんでした</string>
 	<string name="osn_close_dialog_success">注釈は正常に閉じられました</string>
 	<string name="osn_close_dialog_error">例外事項の発生:注釈は閉じられませんでした</string>
-	<string name="shared_string_commit">コミット</string>
+	<string name="shared_string_commit">ｺﾐｯﾄ</string>
 	
     <string name="context_menu_item_delete_waypoint">GPX経由地点を削除しますか？</string>
     <string name="context_menu_item_edit_waypoint">GPX経由地点の編集</string>
