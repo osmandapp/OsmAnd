@@ -198,7 +198,7 @@
 	<string name="poi_fast_food">Fast Food</string>
 	<string name="poi_ferry_terminal">Fährhafen</string>
 	<string name="poi_fire_extinguisher">Feuerlöscher</string>
-	<string name="poi_fire_flapper">Feuerklatsche</string>
+	<string name="poi_fire_flapper">Feuerklappe</string>
 	<string name="poi_fire_hose">Löschschlauch</string>
 	<string name="poi_fire_hydrant">Hydrant</string>
 	<string name="poi_fire_station">Feuerwehr</string>
@@ -358,7 +358,7 @@
 	<string name="poi_craft_photographer">Fotograf</string>
 	<string name="poi_craft_photographic_laboratory">Fotolabor</string>
 	<string name="poi_physiotherapist">Physiotherapeut</string>
-	<string name="poi_picnic_site">Picknick</string>
+	<string name="poi_picnic_site">Picknickplatz</string>
 	<string name="poi_pier">Pier</string>
 	<string name="poi_pitch">Sportplatz</string>
 	<string name="poi_place_allotments">Kleingartensiedlung</string>
@@ -532,7 +532,7 @@
 	<string name="poi_ticket">Ticket-Shop</string>
 	<string name="poi_craft_tiler">Dachdecker</string>
 	<string name="poi_craft_tinsmith">Klempner</string>
-	<string name="poi_tobacco">Trafik</string>
+	<string name="poi_tobacco">Tabakwarengeschäft</string>
 	<string name="poi_toboggan">Rodelschlitten</string>
 	<string name="poi_toilets">Toilette</string>
 	<string name="poi_toll_booth">Mautstelle</string>
@@ -637,7 +637,7 @@
 	<string name="poi_sustenance">Gastronomie</string>
 	<string name="poi_cafe_and_restaurant">Cafe und Restaurant</string>
 	<string name="poi_transportation">Transport</string>
-		<string name="poi_personal_transport">Individualverkehr</string>
+		<string name="poi_personal_transport">Personentransport</string>
 		<string name="poi_air_transport">Lufttransport</string>
 		<string name="poi_water_transport">Wassertransport</string>
 		<string name="poi_bicycle_transport">Fahrradtransport</string>
@@ -1089,11 +1089,11 @@
 
 	<string name="poi_trade_building_supplies">Baubedarf</string>
 	<string name="poi_trade_plumbing">Klempnerbedarf</string>
-	<string name="poi_trade_wood">Holzbedarf</string>
+	<string name="poi_trade_wood">Holzhandel</string>
 	<string name="poi_trade_agricultural_supplies">Agrarbedarf</string>
 	<string name="poi_trade_tile">Fliesenbedarf</string>
 
-	<string name="poi_population">Bevölkerung</string>
+	<string name="poi_population">Einwohnerzahl</string>
 	<string name="poi_parking_underground">Tiefgarage</string>
 	<string name="poi_parking_multi_storey">Parkhaus</string>
 
@@ -1102,9 +1102,9 @@
 	<string name="poi_leaf_type_leafless">Blattlos</string>
 	<string name="poi_species">Spezies</string>
 	<string name="poi_genus">Gattung</string>
-	<string name="poi_trees_olive">Olive</string>
-	<string name="poi_trees_apple">Apfel</string>
-	<string name="poi_trees_oil">Palmöl</string>
+	<string name="poi_trees_olive">Olivenbaum</string>
+	<string name="poi_trees_apple">Apfelbaum</string>
+	<string name="poi_trees_oil">Palmölbaum</string>
 	<string name="poi_trees_orange">Orange</string>
 	<string name="poi_trees_almond">Mandel</string>
 	<string name="poi_trees_banana">Banane</string>
@@ -1395,14 +1395,14 @@
 	<string name="poi_board_type_technology">Informationspunkt: Technik</string>
 	<string name="poi_board_type_astronomy">Informationspunkt: Astronomie</string>
 
-	<string name="poi_commercial"/>
+	<string name="poi_commercial">Gewerbegebiet</string>
 	<string name="poi_fireplace_yes">Feuerstelle</string>
 	<string name="poi_fireplace_no">Keine Feuerstelle</string>
 
 	<string name="poi_covered_yes">überdacht</string>
 	<string name="poi_covered_no">offen</string>
 
-	<string name="poi_smoking_no">Nichtraucher</string>
+	<string name="poi_smoking_no">Rauchen verboten</string>
 	<string name="poi_smoking_outside">Rauchen nur draussen erlaubt</string>
 	<string name="poi_smoking_yes">Rauchen erlaubt</string>
 	<string name="poi_smoking_separated">Rauchen im Raucherzimmer</string>
@@ -1410,13 +1410,13 @@
 	<string name="poi_traffic_signals_sound_no">ohne Ton</string>
 	<string name="poi_rescue_station">Rettungsstation</string>
 
-	<string name="poi_mini_roundabout">Minikreisverkehr</string>
+	<string name="poi_mini_roundabout">Mini-Kreisverkehr</string>
 	<string name="poi_railway_crossing">Bahnübergang</string>
 	<string name="poi_bird_hide">Vögelbeobachtungspunkt</string>
 	<string name="poi_garden">Garten</string>
 
 	<string name="poi_heath">Heide</string>
-	<string name="poi_grass">Gras</string>
+	<string name="poi_grass">Grass</string>
 	<string name="poi_grassland">Grasland</string>
 	<string name="poi_scrub">Gestrüpp</string>
 	<string name="poi_logging">Holzfällen</string>
@@ -1717,4 +1717,62 @@
 	<string name="poi_denomination_mahayana">Mahayana</string>
 
 	<string name="poi_jersey_barrier">Jersey Barriere</string>
+	<string name="poi_leaf_type_needleleaved">Nadelwald</string>
+	<string name="poi_cuisine">Küche</string>
+
+	<string name="poi_information_guidepost">Wegweiser</string>
+	<string name="poi_information_trail_blaze">Wegmarkierung</string>
+	<string name="poi_information_terminal">Informationsterminal</string>
+	<string name="poi_information_tactile_model">Tastbares Modell</string>
+	<string name="poi_information_tactile_map">Tastbare Karte</string>
+	<string name="poi_retail">Einzelhandelgebiet</string>
+
+	<string name="poi_smoking_isolated">Rauchen nur in einem separaten Raum erlaubt</string>
+	<string name="poi_smoking_dedicated">Nur für Raucher</string>
+
+	<string name="poi_toll_yes">Maut</string>
+	<string name="poi_toll_no">keine Maut</string>
+	<string name="poi_toll_hgv_yes">LKW Maut</string>
+	<string name="poi_tactile_paving_yes">Mit Blindenleitsystem</string>
+	<string name="poi_tactile_paving_no">Ohne Blindenleitsystem</string>
+	<string name="poi_traffic_signals_sound_walk">Ton signalisiert sicheres weitergehen</string>
+
+	<string name="poi_services">Raststätte</string>
+	<string name="poi_railway_level_crossing">Bahnübergang</string>
+	<string name="poi_horse_riding">Reiten</string>
+	<string name="poi_leisure_common">allgemeiner Freizeitbereich</string>
+	<string name="poi_farmland">Ackerland</string>
+	<string name="poi_passing_place">Ausweichstelle</string>
+	<string name="poi_piste_difficulty_intermediate">Pistenschwierigkeitsgrad: mittel</string>
+	<string name="poi_piste_difficulty_novice">Pistenschwierigkeitsgrad: Anfänger</string>
+	<string name="poi_piste_difficulty_freeride">Pistenschwierigkeit: Freeride</string>
+	<string name="poi_piste_grooming_classic">Pistenbeschaffenheit: klassische</string>
+	<string name="poi_piste_grooming_classic_skating">Pistenbeschaffenheit: klassisch und skating</string>
+	<string name="poi_piste_grooming_backcountry">Pistenbeschaffenheit: backcountry</string>
+	<string name="poi_piste_grooming_scooter">Pistenbeschaffenheit: Roller</string>
+	<string name="poi_piste_grooming_skating">Pistenbeschaffenheit: skating</string>
+	<string name="poi_piste_grooming_no">Pistenbeschaffenheit: nein</string>
+	<string name="poi_piste_grooming_mogul">Pistenbeschaffenheit: Mogul</string>
+
+	<string name="poi_garden_type_residential">Garten-Typ: Wohngebiet</string>
+	<string name="poi_garden_type_community">Garten-Typ: Gemeinschaft</string>
+	<string name="poi_garden_type_private">Garten-Typ: privat</string>
+	<string name="poi_garden_type_botanical">Garten-Typ: botanisch</string>
+
+	<string name="poi_garden_style_kitchen">Garten-Typ: Küche</string>
+	<string name="poi_garden_style_rosarium">Garten-Typ: Rosengarten</string>
+	<string name="poi_garden_style_french">Garten-Typ: französisch</string>
+	<string name="poi_love_hotel">Liebeshotel</string>
+
+	<string name="poi_payment_electronic_purses_yes">Elektronische Geldbörsen akzeptiert</string>
+	<string name="poi_payment_uta_yes">UTA Karten akzeptiert</string>
+	<string name="poi_payment_uta_no">UTA Karten nicht akzeptiert</string>
+	<string name="poi_payment_efectivo_yes">Nachnahme akzeptiert</string>
+	<string name="poi_payment_efectivo_no">Nachnahme nicht akzeptiert</string>
+	<string name="poi_payment_girocard_yes">Girokarte akzeptiert</string>
+	<string name="poi_payment_girocard_no">Girokarte nicht akzeptiert</string>
+	<string name="poi_payment_discover_card_yes">Discover Karte akzeptiert</string>
+	<string name="poi_payment_discover_card_no">Discover Karte nicht akzeptiert</string>
+	<string name="poi_brushless_yes">Bürstenlos</string>
+	<string name="poi_parish">Gemeindebüro</string>
 	</resources>
