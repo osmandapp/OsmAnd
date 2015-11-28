@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="poi_10pin">Bowling</string>
 	<string name="poi_9pin">Kegeln</string>
@@ -198,7 +198,7 @@
 	<string name="poi_fast_food">Fast Food</string>
 	<string name="poi_ferry_terminal">Fährhafen</string>
 	<string name="poi_fire_extinguisher">Feuerlöscher</string>
-	<string name="poi_fire_flapper">Feuerklappe</string>
+	<string name="poi_fire_flapper">Feuerpatsche</string>
 	<string name="poi_fire_hose">Löschschlauch</string>
 	<string name="poi_fire_hydrant">Hydrant</string>
 	<string name="poi_fire_station">Feuerwehr</string>
@@ -1416,7 +1416,7 @@
 	<string name="poi_garden">Garten</string>
 
 	<string name="poi_heath">Heide</string>
-	<string name="poi_grass">Grass</string>
+	<string name="poi_grass">Gras</string>
 	<string name="poi_grassland">Grasland</string>
 	<string name="poi_scrub">Gestrüpp</string>
 	<string name="poi_logging">Holzfällen</string>
@@ -1725,7 +1725,7 @@
 	<string name="poi_information_terminal">Informationsterminal</string>
 	<string name="poi_information_tactile_model">Tastbares Modell</string>
 	<string name="poi_information_tactile_map">Tastbare Karte</string>
-	<string name="poi_retail">Einzelhandelgebiet</string>
+	<string name="poi_retail">Einzelhandel</string>
 
 	<string name="poi_smoking_isolated">Rauchen nur in einem separaten Raum erlaubt</string>
 	<string name="poi_smoking_dedicated">Nur für Raucher</string>
@@ -1740,26 +1740,26 @@
 	<string name="poi_services">Raststätte</string>
 	<string name="poi_railway_level_crossing">Bahnübergang</string>
 	<string name="poi_horse_riding">Reiten</string>
-	<string name="poi_leisure_common">allgemeiner Freizeitbereich</string>
+	<string name="poi_leisure_common">Allgemeiner Freizeitbereich</string>
 	<string name="poi_farmland">Ackerland</string>
 	<string name="poi_passing_place">Ausweichstelle</string>
 	<string name="poi_piste_difficulty_intermediate">Pistenschwierigkeitsgrad: mittel</string>
 	<string name="poi_piste_difficulty_novice">Pistenschwierigkeitsgrad: Anfänger</string>
 	<string name="poi_piste_difficulty_freeride">Pistenschwierigkeit: Freeride</string>
-	<string name="poi_piste_grooming_classic">Pistenbeschaffenheit: klassische</string>
-	<string name="poi_piste_grooming_classic_skating">Pistenbeschaffenheit: klassisch und skating</string>
-	<string name="poi_piste_grooming_backcountry">Pistenbeschaffenheit: backcountry</string>
-	<string name="poi_piste_grooming_scooter">Pistenbeschaffenheit: Roller</string>
-	<string name="poi_piste_grooming_skating">Pistenbeschaffenheit: skating</string>
-	<string name="poi_piste_grooming_no">Pistenbeschaffenheit: nein</string>
-	<string name="poi_piste_grooming_mogul">Pistenbeschaffenheit: Mogul</string>
+	<string name="poi_piste_grooming_classic">Pistenpflege: klassisch</string>
+	<string name="poi_piste_grooming_classic_skating">Pistenpflege: klassisch und Skating</string>
+	<string name="poi_piste_grooming_backcountry">Pistenpflege: Tourenskilauf</string>
+	<string name="poi_piste_grooming_scooter">Pistenpflege: Schneemobil</string>
+	<string name="poi_piste_grooming_skating">Pistenpflege: Skating</string>
+	<string name="poi_piste_grooming_no">Pistenpflege: nein</string>
+	<string name="poi_piste_grooming_mogul">Pistenpflege: Buckel</string>
 
-	<string name="poi_garden_type_residential">Garten-Typ: Wohngebiet</string>
-	<string name="poi_garden_type_community">Garten-Typ: Gemeinschaft</string>
+	<string name="poi_garden_type_residential">Garten-Typ: Wohnhausgarten</string>
+	<string name="poi_garden_type_community">Garten-Typ: Gemeinschaftsgarten</string>
 	<string name="poi_garden_type_private">Garten-Typ: privat</string>
 	<string name="poi_garden_type_botanical">Garten-Typ: botanisch</string>
 
-	<string name="poi_garden_style_kitchen">Garten-Typ: Küche</string>
+	<string name="poi_garden_style_kitchen">Garten-Typ: Küchengarten</string>
 	<string name="poi_garden_style_rosarium">Garten-Typ: Rosengarten</string>
 	<string name="poi_garden_style_french">Garten-Typ: französisch</string>
 	<string name="poi_love_hotel">Liebeshotel</string>
