@@ -1739,4 +1739,17 @@
 	<string name="poi_resource_gas">Gás</string>
 	<string name="poi_resource_gold">Ouro</string>
 	<string name="poi_resource_graphite">Grafite</string>
+	<string name="poi_resource_gravel">Brita</string>
+	<string name="poi_resource_gypsum">Gesso</string>
+	<string name="poi_resource_iron_ore">Minério de ferro</string>
+	<string name="poi_resource_lead">Chumbo</string>
+	<string name="poi_resource_lignite">Linhite</string>
+	<string name="poi_resource_limestone">Pedra calcária</string>
+	<string name="poi_resource_marble">Mármore</string>
+	<string name="poi_resource_mercury"/>
+	<string name="poi_resource_mica">Mica</string>
+	<string name="poi_resource_mineral_oil">Óleo mineral</string>
+	<string name="poi_resource_nickel">Níquel</string>
+	<string name="poi_resource_oil">Petróleo</string>
+	<string name="poi_resource_opal">Opala</string>
 	</resources>
