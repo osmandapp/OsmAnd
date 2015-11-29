@@ -70,6 +70,21 @@ public class MapUtils {
 		return new LatLon(prlat, prlon);
 	}
 	
+	public static double getProjectionCoeff(double lat, double lon, double fromLat, double fromLon, double toLat, double toLon) {
+		// not very accurate computation on sphere but for distances < 1000m it is ok
+		double mDist = (fromLat - toLat) * (fromLat - toLat) + (fromLon - toLon) * (fromLon - toLon);
+		double projection = scalarMultiplication(fromLat, fromLon, toLat, toLon, lat, lon);
+		double prlat;
+		double prlon;
+		if (projection < 0) {
+			return 0;
+		} else if (projection >= mDist) {
+			return 1;
+		} else {
+			return (projection / mDist);
+		}
+	}
+	
 	private static double toRadians(double angdeg) {
 //		return Math.toRadians(angdeg);
 		return angdeg / 180.0 * Math.PI;
