@@ -2128,4 +2128,6 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="routing_attr_avoid_stairs_name">Éviter les escaliers</string>
 	<string name="routing_attr_avoid_borders_name">Éviter le franchissement de frontières</string>
 	<string name="routing_attr_avoid_stairs_description">Éviter les escaliers</string>
-	</resources>
+	<string name="release_2_2">" • Nouveaux menus contextuels sur un point de la carte\n\n • Choix de l\'affichage au démarrage (tableau de bord ou carte)\n\n • Personnalisation du contenu du tableau de bord\n\n • Possibilité d\'ignorer le tableau de bord et de n\'utiliser que les menus\n\n • Téléchargement des cartes des régions en appuyant directement sur la carte mondiale\n\n • Amélioration de la recherche des PI (Point d\'Intérêt)\n\n • Amélioration des PI (Point d\'Intérêt) et des contributions OSM (Open Street Map)\n\n • Refonte du téléchargement des cartes\n\n et bien plus encore ... "</string>
+    <string name="poi_context_menu_modify_osm_change">Modifier la contribution OSM</string>
+    </resources>
