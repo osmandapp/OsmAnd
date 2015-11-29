@@ -28,16 +28,16 @@ import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 
 public class ColorDialogs {
 	public static int[] paletteColors = new int[] {
-			R.string.color_red,
-			R.string.color_orange,
-			R.string.color_yellow,
-			R.string.color_lightgreen,
-			R.string.color_green,
-			R.string.color_lightblue,
-			R.string.color_blue,
-			R.string.color_purple,
-			R.string.color_pink,
-			R.string.color_brown
+			R.string.rendering_value_red_name,
+			R.string.rendering_value_orange_name,
+			R.string.rendering_value_yellow_name,
+			R.string.rendering_value_lightgreen_name,
+			R.string.rendering_value_green_name,
+			R.string.rendering_value_lightblue_name,
+			R.string.rendering_value_blue_name,
+			R.string.rendering_value_purple_name,
+			R.string.rendering_value_pink_name,
+			R.string.rendering_value_brown_name
 	};
 	
 	public static int[] pallette = new int[] {
