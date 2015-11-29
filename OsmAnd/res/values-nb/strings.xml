@@ -1476,4 +1476,5 @@
 	<string name="other_menu_group">Annet</string>
     <string name="instalation_troubleshooting_item">Installering og problemløsing</string>
     <string name="osn_comment_dialog_title">Legg til kommentar</string>
-	</resources>
+	<string name="navigation_item_description">Still inn navigering</string>
+    </resources>
