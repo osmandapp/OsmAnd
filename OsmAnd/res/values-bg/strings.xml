@@ -724,7 +724,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="user_name">Вашето потребителско име в OSM</string>
 	<string name="user_name_descr">Необходимо за изпращане към openstreetmap.org</string>
 	<string name="user_password">Вашата парола в OSM</string>
-	<string name="user_password_descr">Необходими за изпращане към openstreetmap.org</string>
+	<string name="user_password_descr">Необходима за изпращане на данни към openstreetmap.org</string>
 	<string name="osmand_service">Фонов режим</string>
 	<string name="osmand_service_descr">OsmAnd работи във фонов режим, докато на екранът е изключен</string>
 	
