@@ -918,11 +918,11 @@
 	
 	
 	<string name="osb_comment_dialog_message">Nachricht</string>
-	<string name="osb_comment_dialog_author">Autor</string>
+	<string name="osb_comment_dialog_author">Author</string>
 	
 	
 	<string name="osb_comment_dialog_success">Kommentar wurde erfolgreich hinzugefügt</string>
-	<string name="osb_comment_dialog_error">Fehler: Kommentar wurde nicht hinzugefügt</string>
+	<string name="osb_comment_dialog_error">Fehler aufgetreten: Kommentar wurde nicht hinzugefügt</string>
 	
 	
 	
@@ -2091,7 +2091,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="share_menu_location">Position teilen</string>
     <string name="shared_string_send">Senden</string>
     <string name="favorite_category_dublicate_message">Der eingegebene Kategorie-Name existiert bereits. Bitte einen anderen Namen eingeben.</string>
-    <string name="favorite_category_name">Kategorie-Name</string>
+    <string name="favorite_category_name">Kategoriename</string>
     <string name="favorite_category_add_new_title">Neue Kategorie hinzufügen</string>
     <string name="srtm_plugin_disabled">Höhenlinien deaktiviert</string>
     <string name="favorite_category_select">Kategorie auswählen</string>
@@ -2146,7 +2146,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="osm_edit_commented_note">Kommentierte OSM-Notiz</string>
     <string name="osm_edit_removed_note">Gelöschte OSM-Notiz</string>
 	<string name="osm_edit_created_note">Erstellte OSM-Notiz</string>
-	<string name="osn_bug_name">OSM-Notiz (Note)</string>
+	<string name="osn_bug_name">OSM-Notiz</string>
 	<string name="osn_add_dialog_title">Notiz erstellen</string>
 	<string name="osn_comment_dialog_title">Kommentar hinzufügen</string>
 	<string name="osn_reopen_dialog_title">Notiz wieder öffnen</string>
