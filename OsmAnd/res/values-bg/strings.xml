@@ -543,7 +543,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="rendering_attr_noPolygons_name">Скрий полигоните</string>
 	<string name="rendering_attr_appMode_name">Режим на показване</string>
 	<string name="rendering_attr_appMode_description">Оптимизирай картата за</string>
-	<string name="rendering_attr_contourLines_description">Изобразяване от ниво на увеличение (изисква контурни данни):</string>
+	<string name="rendering_attr_contourLines_description">Показване след ниво увеличение (при вкл. добавка):</string>
 	<string name="rendering_attr_contourLines_name">Показвай контури</string>
 	<string name="rendering_attr_hmRendered_description">Увеличаване на детайлността на картата</string>
 	<string name="rendering_attr_hmRendered_name">Показвай повече детайли на картата</string>
@@ -1674,7 +1674,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="shared_string_collapse">Свий</string>
 	<string name="shared_string_address">Адрес</string>
 	<string name="shared_string_my_location">Моето местоположение</string>
-	<string name="shared_string_my_favorites">Моите любими</string>
+	<string name="shared_string_my_favorites">Моите места</string>
 	<string name="shared_string_my_tracks">Моите следи</string>
 	<string name="shared_string_currently_recording_track">Текуща следа</string>
 	<string name="shared_string_audio">Аудио</string>
