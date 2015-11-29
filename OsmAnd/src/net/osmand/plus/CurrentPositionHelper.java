@@ -124,19 +124,14 @@ public class CurrentPositionHelper {
 			}
 		}
 		Collections.sort(complete, GeocodingUtilities.DISTANCE_COMPARATOR);
-		for(final GeocodingResult r : complete) {
-			if(r.building != null && 
-					r.getDistance() > minBuildingDistance * GeocodingUtilities.THRESHOLD_MULTIPLIER_SKIP_BUILDINGS_AFTER) {
-				continue;
-			}
+		if(complete.size() > 0) {
+			final GeocodingResult rts = complete.get(0);
 			app.runInUIThread(new Runnable() {
 				public void run() {
-					result.publish(r);
+					result.publish(rts);
 				}
-			});	
-			break;
+			});
 		}
-		
 	}
 
 	private static double getOrthogonalDistance(RouteDataObject r, Location loc){
