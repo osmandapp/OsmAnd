@@ -2305,4 +2305,53 @@
 	<string name="poi_site_type_fortification">類型：防禦</string>
 	<string name="poi_site_type_settlement">類型：居地</string>
 	<string name="poi_site_type_city">類型：城市</string>
-	</resources>
+	<string name="poi_wiki_lang_af">南非文維基</string>
+	<string name="poi_wiki_lang_als">阿爾薩斯文維基</string>
+	<string name="poi_wiki_lang_az">亞塞拜然文維基</string>
+	<string name="poi_wiki_lang_bn">孟加拉文維基</string>
+	<string name="poi_wiki_lang_bpy">比什奴普萊利亞文維基</string>
+	<string name="poi_wiki_lang_br">布列塔尼文維基</string>
+	<string name="poi_wiki_lang_bs">波士尼亞文維基</string>
+	<string name="poi_wiki_lang_cy">威爾斯文維基</string>
+	<string name="poi_wiki_lang_eo">世界語維基</string>
+	<string name="poi_wiki_lang_eu">巴斯克文維基</string>
+	<string name="poi_wiki_lang_fa">波斯文維基</string>
+	<string name="poi_wiki_lang_fy">菲士蘭文維基</string>
+	<string name="poi_wiki_lang_ga">愛爾蘭文維基</string>
+	<string name="poi_wiki_lang_hy">亞美尼亞文維基</string>
+	<string name="poi_wiki_lang_is">冰島文維基</string>
+	<string name="poi_wiki_lang_ka">喬治亞文維基</string>
+	<string name="poi_wiki_lang_ku">庫德文維基</string>
+	<string name="poi_wiki_lang_la">拉丁文維基</string>
+	<string name="poi_wiki_lang_lb">盧森堡文維基</string>
+	<string name="poi_wiki_lang_mk">馬其頓文維基</string>
+	<string name="poi_wiki_lang_ml">馬拉雅拉姆文維基</string>
+	<string name="poi_wiki_lang_mr">馬拉地文維基</string>
+	<string name="poi_wiki_lang_nds">下撒克遜文維基</string>
+	<string name="poi_wiki_lang_nv">納瓦荷文維基</string>
+	<string name="poi_wiki_lang_os">奧塞提亞文維基</string>
+	<string name="poi_wiki_lang_pms">皮埃蒙特文維基</string>
+	<string name="poi_wiki_lang_sc">薩丁尼亞島文維基</string>
+	<string name="poi_wiki_lang_sh">塞爾維亞-克羅埃西亞文維基</string>
+	<string name="poi_wiki_lang_sq">阿爾巴尼亞文維基</string>
+	<string name="poi_wiki_lang_ta">坦米爾文維基</string>
+	<string name="poi_wiki_lang_tl">菲律賓語維基</string>
+
+	<string name="poi_wiki_lang_war">瓦瑞語維基</string>
+	<string name="poi_wiki_lang_min">米南佳保語維基</string>
+	<string name="poi_wiki_lang_kk">哈薩克文維基</string>
+	<string name="poi_wiki_lang_uz">烏茲別克文維基</string>
+	<string name="poi_wiki_lang_ce">車臣語維基</string>
+	<string name="poi_wiki_lang_ur">烏爾都語維基</string>
+	<string name="poi_wiki_lang_oc">奧克語維基</string>
+	<string name="poi_wiki_lang_zhminnan">閩南語維基</string>
+	<string name="poi_wiki_lang_mg">馬拉加斯語維基</string>
+	<string name="poi_wiki_lang_tt">韃靼語維基</string>
+	<string name="poi_wiki_lang_jv">爪哇語維基</string>
+	<string name="poi_wiki_lang_ky">吉爾吉斯語維基</string>
+	<string name="poi_wiki_lang_zhyue">粵語維基</string>
+	<string name="poi_fireworks">煙火商店</string>
+
+	<string name="poi_aerialway_length">長度</string>
+
+</resources>
