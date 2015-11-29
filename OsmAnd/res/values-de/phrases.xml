@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="poi_10pin">Bowling</string>
 	<string name="poi_9pin">Kegeln</string>
@@ -37,7 +37,7 @@
 	<string name="poi_athletics">Sport</string>
 	<string name="poi_atm">Geldautomat</string>
 	<string name="poi_attraction">Attraktion</string>
-	<string name="poi_atv">Quad-Store</string>
+	<string name="poi_atv">Quad-Geschäft</string>
 	<string name="poi_audiologist">Gehörspezialist</string>
 	<string name="poi_australian_football">Australischer Fußball</string>
 	<string name="poi_baby_goods">Babyartikel</string>
@@ -186,10 +186,10 @@
 	<string name="poi_dry_cleaning">Chemische Reinigung</string>
 	<string name="poi_educational_institution">Bildungseinrichtung</string>
 	<string name="poi_craft_electrician">Elektriker</string>
-	<string name="poi_electronics">Elektronik-Geschäft</string>
+	<string name="poi_electronics">Elektronikgeschäft</string>
 	<string name="poi_embassy">Botschaft</string>
 	<string name="poi_emergency_access_point">Rettungspunkt</string>
-	<string name="poi_emergency_phone">Notfall-Telefon</string>
+	<string name="poi_emergency_phone">Notfalltelefon</string>
 	<string name="poi_employment_agency">Arbeitsamt</string>
 	<string name="poi_equestrian">Reiter</string>
 	<string name="poi_erotic">Sex-Shop</string>
@@ -483,7 +483,7 @@
 	<string name="poi_shoes">Schuhgeschäft</string>
 	<string name="poi_shooting">Schießbude</string>
 	<string name="poi_farm">Landwirtschaft</string>
-	<string name="poi_tea">Tee-Haus</string>
+	<string name="poi_tea">Teehaus</string>
 	<string name="poi_sinkhole">Senkgrube</string>
 	<string name="poi_skateboard">Skateboard</string>
 	<string name="poi_skating">Eislaufbahn</string>
@@ -583,7 +583,7 @@
 	<string name="poi_weir">Wehr</string>
 	<string name="poi_wetland">Aue</string>
 	<string name="poi_windmill">Windmühle</string>
-	<string name="poi_window_blind">Rollvorhang</string>
+	<string name="poi_window_blind">Rollladengeschäft</string>
 	<string name="poi_craft_window_construction">Fensterbau</string>
 	<string name="poi_works">Produktionsstätte</string>
 	<string name="poi_wreck">Schiffswrack</string>
@@ -621,8 +621,8 @@
 		<string name="poi_man_made">von Menschenhand</string>
 		<string name="poi_water_supply">Wasserversorgung</string>
 		<string name="poi_communication">Kommunikation</string>
-		<string name="poi_trash_disposal">Entsorgung</string>
-		<string name="poi_landuse">Landnutzung</string>
+		<string name="poi_trash_disposal">Müllentsorgung</string>
+		<string name="poi_landuse">Landnutzung o</string>
 	<string name="poi_education">Bildung</string>
 	<string name="poi_administrative">Verwaltung</string>
 	<string name="poi_healthcare">Gesundheitssektor</string>
@@ -631,7 +631,7 @@
 	<string name="poi_tourism">Tourismus</string>
 		<string name="poi_sightseeing">Sehenswürdigkeiten</string>
 		<string name="poi_accomodation">Unterkunft</string>
-		<string name="poi_internet_access">Internet-Zugang</string>
+		<string name="poi_internet_access">Internetzugang</string>
 	<string name="poi_entertainment">Freizeit</string>
 		<string name="poi_club">Club</string>
 	<string name="poi_sustenance">Gastronomie</string>
