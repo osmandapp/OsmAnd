@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="regions">Regionen</string>
 	<string name="region_maps">Regionsweite Karten</string>
@@ -1776,7 +1776,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="shared_string_show_all">ALLE ZEIGEN</string>
     <string name="coordinates">Koordinaten</string>
     <string name="error_avoid_specific_road">Es konnte keine alternative Streckenführung gefunden werden</string>
-    <string name="shared_string_dismiss">Ablehnen</string>
+    <string name="shared_string_dismiss">Verwerfen</string>
     <string name="everything_up_to_date">Alle Daten aktuell</string>
     <string name="use_opengl_render">OpenGL-Rendering verwenden</string>
     <string name="use_opengl_render_descr">Hardware beschleunigtes OpenGL-Rendering verwenden (Funktioniert nicht auf allen Geräten)</string>
@@ -2018,10 +2018,10 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Einfärbung gemäß Routenbereich</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Routenfarbe gemäß OSMC</string>
     <string name="do_you_like_osmand">Gefällt Ihnen OsmAnd?</string>
-	<string name="rate_this_app">Bewerten Sie diese App</string>
-	<string name="rate_this_app_long">Bitte bewerten Sie OsmAnd auf Google Play</string>
-	<string name="user_hates_app_get_feedback">Sagen Sie uns warum.</string>
-	<string name="user_hates_app_get_feedback_long">Bitte teilen Sie uns mit, was Sie an dieser App ändern würden.</string>
+	<string name="rate_this_app">Bewerte diese App</string>
+	<string name="rate_this_app_long">Bitte gib OsmAnd eine Bewertung auf Google Play</string>
+	<string name="user_hates_app_get_feedback">Erzähle uns warum.</string>
+	<string name="user_hates_app_get_feedback_long">Bitte erzähle uns, was du gerne an dieser App ändern würdest.</string>
 
 	<string name="no_updates_available">Keine Aktualisierungen verfügbar</string>
     <string name="download_live_updates">Live-Aktualisierungen</string>
@@ -2104,11 +2104,11 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="m_s">m/s</string>
     <string name="shared_string_trip_recording">Streckenaufzeichnung</string>
     <string name="osmand_running_in_background">Hintergrundbetrieb</string>
-    <string name="favourites_edit_dialog_title">Favoriten-Information</string>
+    <string name="favourites_edit_dialog_title">Favoriten Informationen</string>
     <string name="simulate_your_location_stop_descr">Stoppen der Positions-Simulation</string>
     <string name="simulate_your_location_descr">Simulieren durch eine berechnete Route oder einer aufgezeichneten GPX-Spur</string>
     <string name="recent_places">Letzte Orte</string>
-	<string name="saved_at_time">Erfolgreich gespeichert unter: %1$s</string>
+	<string name="saved_at_time">Erfolgreich gespeichert um: %1$s</string>
 	<string name="count_of_lines">Anzahl der Reihen</string>
 	<string name="buy">ERWERBEN</string>
     <string name="later">Später</string>
@@ -2163,7 +2163,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="tab_title_basic">Basis</string>
 	<string name="tab_title_advanced">Fortgeschritten</string>
 	<string name="contact_info">Kontakt-Informationen</string>
-	<string name="poi_dialog_poi_type">Art-des POI</string>
+	<string name="poi_dialog_poi_type">Art des POI</string>
 	<string name="number_of_rows_in_dash">Anzahl der Zeilen im Dashboard %1$s</string>
 	<string name="downloads_left_template">%1$s Downloads übrig</string>
 	<string name="downloading_number_of_files">Herunterladen - %1$d Datei</string>
