@@ -1680,4 +1680,34 @@
 	<string name="poi_vending_drinks_food">Bebidas e comida</string>
 	<string name="poi_vending_fuel">Venda de combustível</string>
 	<string name="poi_vending_parcel_pickup">Retirada de encomenda</string>
+	<string name="poi_vending_parcel_mail_in">Estação de correios</string>
+	<string name="poi_vending_milk">Leite</string>
+	<string name="poi_vending_elongated_coin">Moeda alongada</string>
+	<string name="poi_vending_bread">Pão</string>
+	<string name="poi_vending_chewing_gums">Gomas de mascar</string>
+	<string name="poi_vending_parking_tickets_public_transport_tickets">Bilhetes de estacionamento; bilhetes de transportes públicos</string>
+	<string name="poi_vending_coffee">Café</string>
+	<string name="poi_vending_toll">Bilhete de pedágio</string>
+	<string name="poi_vending_tickets">Venda de bilhetes</string>
+	<string name="poi_vending_water">Venda de água</string>
+	<string name="poi_vending_telephone_vouchers">Cartão telefônico</string>
+	<string name="poi_vending_animal_food">Comida para animais</string>
+	<string name="poi_vending_public_transport_plans">Plano de transporte público</string>
+	<string name="poi_vending_drinks_sweets">Bebidas e doces</string>
+	<string name="poi_vending_vouchers">Comprovante</string>
+	<string name="poi_vending_dvd">DVD</string>
+	<string name="poi_vending_candles">Velas</string>
+	<string name="poi_vending_toys">Brinquedos</string>
+	<string name="poi_vending_ice_cream">Sorvete</string>
+	<string name="poi_vending_sim_cards">Cartão SIM</string>
+
+	<string name="poi_memorial_war">Memorial de guerra</string>
+	<string name="poi_memorial_plaque">Placa ornamental</string>
+	<string name="poi_memorial_statue">Estátua</string>
+	<string name="poi_memorial_stone">Pedra</string>
+	<string name="poi_memorial_stele">Estela</string>
+	<string name="poi_memorial_bust">Busto</string>
+	<string name="poi_memorial_koshinto">Koshinto</string>
+	<string name="poi_memorial_blue_plaque">Placa azul</string>
+	<string name="poi_memorial_jizo">Jizo</string>
 	</resources>
