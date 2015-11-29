@@ -1710,4 +1710,33 @@
 	<string name="poi_memorial_koshinto">Koshinto</string>
 	<string name="poi_memorial_blue_plaque">Placa azul</string>
 	<string name="poi_memorial_jizo">Jizo</string>
+	<string name="poi_memorial_vehicle">Veículo</string>
+	<string name="poi_memorial_stolperstein">Stolpersteine</string>
+	<string name="poi_memorial_obelisk">Obelisco</string>
+	<string name="poi_memorial_column">Coluna</string>
+	<string name="poi_memorial_stupa">Estupa</string>
+	<string name="poi_memorial_prasat">Prasat</string>
+
+	<string name="poi_inscription">Inscrição</string>
+	<string name="poi_historic_quarry">Pedreira histórica</string>
+
+	<string name="poi_resource_aggregate">Agregado</string>
+	<string name="poi_resource_antimony">Antimônio</string>
+	<string name="poi_resource_asbestos">Amianto</string>
+	<string name="poi_resource_barite">Barita</string>
+	<string name="poi_resource_basalt">Basalto</string>
+	<string name="poi_resource_bauxite">Bauxita</string>
+	<string name="poi_resource_beryl">Berilo</string>
+	<string name="poi_resource_bismuth">Bismuto</string>
+	<string name="poi_resource_cereal">Cereal</string>
+	<string name="poi_resource_chromite">Cromita</string>
+	<string name="poi_resource_clay">Argila</string>
+	<string name="poi_resource_coal">Carvão</string>
+	<string name="poi_resource_copper">Cobre</string>
+	<string name="poi_resource_diamond">Diamante</string>
+	<string name="poi_resource_dimension_stone">Rocha ornamental</string>
+	<string name="poi_resource_dolomite">Dolomita</string>
+	<string name="poi_resource_gas">Gás</string>
+	<string name="poi_resource_gold">Ouro</string>
+	<string name="poi_resource_graphite">Grafite</string>
 	</resources>
