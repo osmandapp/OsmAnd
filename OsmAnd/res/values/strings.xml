@@ -638,13 +638,15 @@
     <string name="osmo_connect_to_my_nickname">My nickname</string>
     <string name="osmo_user_name">User</string>
 	<string name="color_red">red</string>
-	<string name="color_pink">pink</string>
 	<string name="color_orange">orange</string>
-	<string name="color_brown">brown</string>
 	<string name="color_yellow">yellow</string>
+	<string name="color_lightgreen">light green</string>
+	<string name="color_green">green</string>
 	<string name="color_lightblue">light blue</string>
 	<string name="color_blue">blue</string>
-	<string name="color_green">green</string>
+	<string name="color_purple">purple</string>
+	<string name="color_pink">pink</string>
+	<string name="color_brown">brown</string>
 
     <string name="osmo_edit_device">Change user properties</string>
     <string name="osmo_edit_color">Display color</string>
