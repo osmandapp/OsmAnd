@@ -173,7 +173,7 @@ public class GeocodingUtilities {
 						GeocodingResult rs = new GeocodingResult(r);
 						rs.street = (Street) object;
 						rs.city = rs.street.getCity();
-						if(d > THRESHOLD_STREET_CHANGE_CONNECTION_POINT) {
+						if(d < THRESHOLD_STREET_CHANGE_CONNECTION_POINT) {
 							rs.connectionPoint = rs.street.getLocation();
 						}
 						streetsList.add(rs);
@@ -192,35 +192,40 @@ public class GeocodingUtilities {
 		
 		final List<GeocodingResult> res = new ArrayList<GeocodingResult>();
 		// FIXME interpolation
-		for(GeocodingResult s : streetsList) {
-			final List<GeocodingResult> streetBuildings = new ArrayList<GeocodingResult>();
-			reader.preloadBuildings(s.street, null);
-			log.info("Preload buildings " + s.street.getName() + " " + s.city.getName() + " " + s.street.getId());
-			for(Building b : s.street.getBuildings()) {
-				if(MapUtils.getDistance(b.getLocation(), r.searchPoint) < DISTANCE_BULDING_PROXIMITY) {
-					GeocodingResult bld = new GeocodingResult(s);
-					bld.building = b;
-					bld.connectionPoint = b.getLocation();
-					streetBuildings.add(bld);
-				}
-			}
-			Collections.sort(streetBuildings, DISTANCE_COMPARATOR);
-			if(streetBuildings.size() > 0) {
-				Iterator<GeocodingResult> it = streetBuildings.iterator();
-				if(knownMinBuidlingDistance == 0) {
-					GeocodingResult firstBld = it.next();
-					knownMinBuidlingDistance = firstBld.getDistance();
-					res.add(firstBld);	
-				}
-				while(it.hasNext()) {
-					GeocodingResult nextBld = it.next();
-					if(nextBld.getDistance() > knownMinBuidlingDistance * THRESHOLD_MULTIPLIER_SKIP_BUILDINGS_AFTER) {
-						break;
+		if(streetsList.size() == 0) {
+			res.add(r);
+		} else {
+			for (GeocodingResult s : streetsList) {
+				final List<GeocodingResult> streetBuildings = new ArrayList<GeocodingResult>();
+				reader.preloadBuildings(s.street, null);
+				log.info("Preload buildings " + s.street.getName() + " " + s.city.getName() + " " + s.street.getId());
+				for (Building b : s.street.getBuildings()) {
+					if (MapUtils.getDistance(b.getLocation(), r.searchPoint) < DISTANCE_BULDING_PROXIMITY) {
+						GeocodingResult bld = new GeocodingResult(s);
+						bld.building = b;
+						bld.connectionPoint = b.getLocation();
+						streetBuildings.add(bld);
 					}
-					res.add(nextBld);
 				}
+				Collections.sort(streetBuildings, DISTANCE_COMPARATOR);
+				if (streetBuildings.size() > 0) {
+					Iterator<GeocodingResult> it = streetBuildings.iterator();
+					if (knownMinBuidlingDistance == 0) {
+						GeocodingResult firstBld = it.next();
+						knownMinBuidlingDistance = firstBld.getDistance();
+						res.add(firstBld);
+					}
+					while (it.hasNext()) {
+						GeocodingResult nextBld = it.next();
+						if (nextBld.getDistance() > knownMinBuidlingDistance
+								* THRESHOLD_MULTIPLIER_SKIP_BUILDINGS_AFTER) {
+							break;
+						}
+						res.add(nextBld);
+					}
+				}
+				res.add(s);
 			}
-			res.add(s);
 		}
 		Collections.sort(res, DISTANCE_COMPARATOR);
 		return res;
