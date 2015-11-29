@@ -335,7 +335,7 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 			public void onClick(DialogInterface dialog, int which) {
 				SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(getGpx(), vis.isChecked(), false);
 				int clr = list.get(colorSpinner.getSelectedItemPosition());
-				if(clr != null && clr != 0 && sf.getModifiableGpxFile() != null) {
+				if(clr != 0 && sf.getModifiableGpxFile() != null) {
 					sf.getModifiableGpxFile().setColor(clr);
 					sf.processPoints();
 				}
