@@ -1332,9 +1332,9 @@
     <string name="osmo_session_not_available">Сэсыя не даступная, калі ласка, пераканайцеся, што пункт \'Адсылаць месцазнаходжаньне\' уключаны.</string>
     <string name="osmo_tracker_id_share">Каб падключыцца да патрэбнага прыстасаваньня %2$s націсьніце на спасылку %3$s альбо задайце ідэнтыфікатар трэкеру (%1$s)</string>
     <string name="color_red">чырвоны</string>
-	<string name="color_pink">ружовы</string>
+	<string name="rendering_value_pink_name">ружовы</string>
 	<string name="color_orange">аранжавы</string>
-	<string name="color_brown">карычневы</string>
+	<string name="rendering_value_brown_name">карычневы</string>
 	<string name="color_yellow">жоўты</string>
 	<string name="color_lightblue">блакітны</string>
 	<string name="color_blue">сіні</string>

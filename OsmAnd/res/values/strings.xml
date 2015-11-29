@@ -639,17 +639,6 @@
     <string name="osmo_use_server_name">Registered name</string>
     <string name="osmo_connect_to_my_nickname">My nickname</string>
     <string name="osmo_user_name">User</string>
-	<!-- string name="color_red">Red</string>
-	<string name="color_orange">Orange</string>
-	<string name="color_yellow">Yellow</string>
-	<string name="color_lightgreen">Light green</string>
-	<string name="color_green">Green</string>
-	<string name="color_lightblue">Light blue</string>
-	<string name="color_blue">Blue</string>
-	<string name="color_purple">Purple</string>
-	<string name="color_pink">Pink</string>
-	<string name="color_brown">Brown</string -->
-
     <string name="osmo_edit_device">Change user properties</string>
     <string name="osmo_edit_color">Display color</string>
     <string name="osmo_group_info">Info</string>

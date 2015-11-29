@@ -1393,9 +1393,9 @@
     <string name="osmo_connect_to_my_nickname">Mano slapyvardis</string>
     <string name="osmo_user_name">Vartotojas</string>
     <string name="color_red">raudona</string>
-    <string name="color_pink">rožinė</string>
+    <string name="rendering_value_pink_name">rožinė</string>
     <string name="color_orange">oranžinė</string>
-    <string name="color_brown">ruda</string>
+    <string name="rendering_value_brown_name">ruda</string>
     <string name="color_yellow">geltona</string>
     <string name="color_lightblue">žydra</string>
     <string name="color_blue">mėlyna</string>

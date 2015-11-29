@@ -1320,9 +1320,9 @@
     <string name="osmo_groups">Grupos/Dispositivos OsMo</string>
     <string name="osmo_group_info">Información</string>
     <string name="color_red">rojo</string>
-    <string name="color_pink">rosa</string>
+    <string name="rendering_value_pink_name">rosa</string>
     <string name="color_orange">anaranjado</string>
-    <string name="color_brown">marrón</string>
+    <string name="rendering_value_brown_name">marrón</string>
     <string name="color_yellow">amarillo</string>
     <string name="color_lightblue">azul claro</string>
     <string name="color_blue">azul</string>

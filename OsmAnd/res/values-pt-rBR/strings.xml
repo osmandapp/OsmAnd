@@ -462,9 +462,9 @@
     <string name="osmo_connect_to_my_nickname">Meu apelido</string>
     <string name="osmo_user_name">Usuário</string>
 	<string name="color_red">vermelho</string>
-	<string name="color_pink">rosa</string>
+	<string name="rendering_value_pink_name">rosa</string>
 	<string name="color_orange">laranja</string>
-	<string name="color_brown">marrom</string>
+	<string name="rendering_value_brown_name">marrom</string>
 	<string name="color_yellow">amarelo</string>
 	<string name="color_lightblue">azul claro</string>
 	<string name="color_blue">azul</string>

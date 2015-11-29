@@ -1175,9 +1175,9 @@
     <string name="use_points_as_intermediates">Vypočítat trasu mezi body</string>
     <string name="osmo_plugin_description">"Tento modul poskytuje funkcionalitu pro takzvané OsMo pokročilé živé sledování, podívejte se na http://osmo.mobi.\n\nMůžete sledovat všechna zařízení spolupracující skupiny v reálném čase a vzájemně spolu komunikovat. Jsou dostupné různé možnosti nastavení krátkodobého nebo trvalého sledování.\n\nAnonymní skupiny lze vytvářet spontáně na určený počet dní a jsou omezené na vybrané funkce, nemají například dálkové ovládání a skupinového správce. Plně funkční skupiny se vytvářejí na webové stránce a jsou přístupné pouze pro registrované uživatele. "</string>
     <string name="color_red">červená</string>
-    <string name="color_pink">růžová</string>
+    <string name="rendering_value_pink_name">růžová</string>
     <string name="color_orange">oranžová</string>
-    <string name="color_brown">hnědá</string>
+    <string name="rendering_value_brown_name">hnědá</string>
     <string name="color_yellow">žlutá</string>
     <string name="color_lightblue">světle modrá</string>
     <string name="color_blue">modrá</string>

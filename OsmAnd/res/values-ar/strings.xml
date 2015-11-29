@@ -1144,9 +1144,9 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="loading_smth">جاري التحميل %1$s …</string>
     <string name="selected_gpx_info_show">\n\nاضغط باستمرار للرؤية على الخريطة</string>
     <string name="color_red">أحمر</string>
-	<string name="color_pink">وردي</string>
+	<string name="rendering_value_pink_name">وردي</string>
 	<string name="color_orange">برتقالي</string>
-	<string name="color_brown">بني</string>
+	<string name="rendering_value_brown_name">بني</string>
 	<string name="color_yellow">أصفر</string>
 	<string name="color_lightblue">أزرق فاتح</string>
 	<string name="color_blue">أزرق</string>

@@ -1591,8 +1591,8 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	<string name="color_lightblue">Hellblau</string>
 	<string name="color_blue">Blau</string>
 	<string name="color_purple">Lila</string>
-	<string name="color_pink">Pink</string>
-	<string name="color_brown">Braun</string>
+	<string name="rendering_value_pink_name">Pink</string>
+	<string name="rendering_value_brown_name">Braun</string>
 
 	<string name="osmo_settings_uuid">Geräte-ID</string>
 	<string name="osmo_settings_descr">Konfigurieren der Überwachungs-Einstellungen und des persönlichen Überwachungs-Kanals</string>

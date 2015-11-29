@@ -1247,9 +1247,9 @@
     <string name="osmo_connect_to_my_nickname">El vostre àlies</string>
     <string name="osmo_user_name">Usuari</string>
     <string name="color_red">vermell</string>
-    <string name="color_pink">rosa</string>
+    <string name="rendering_value_pink_name">rosa</string>
     <string name="color_orange">taronja</string>
-    <string name="color_brown">marró</string>
+    <string name="rendering_value_brown_name">marró</string>
     <string name="color_yellow">groc</string>
     <string name="color_lightblue">blau clar</string>
     <string name="color_blue">blau</string>

@@ -1236,9 +1236,9 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="osmo_settings_debug">Informácie pre ladenie</string>
     <string name="import_file_favourites">Uložiť body ako súbor GPX alebo ich importovať do obľúbených?</string>
     <string name="color_red">červená</string>
-    <string name="color_pink">ružová</string>
+    <string name="rendering_value_pink_name">ružová</string>
     <string name="color_orange">oranžová</string>
-    <string name="color_brown">hnedá</string>
+    <string name="rendering_value_brown_name">hnedá</string>
     <string name="color_yellow">žltá</string>
     <string name="color_lightblue">svetlomodrá</string>
     <string name="color_blue">modrá</string>

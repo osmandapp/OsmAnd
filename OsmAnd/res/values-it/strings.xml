@@ -1364,9 +1364,9 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="import_file_favourites">Salvare i punti come file GPX o importarli nei favoriti?</string>
 
     <string name="color_red">rosso</string>
-    <string name="color_pink">rosa</string>
+    <string name="rendering_value_pink_name">rosa</string>
     <string name="color_orange">arancione</string>
-    <string name="color_brown">marrone</string>
+    <string name="rendering_value_brown_name">marrone</string>
     <string name="color_yellow">giallo</string>
     <string name="color_lightblue">blu chiaro</string>
     <string name="color_blue">blu</string>

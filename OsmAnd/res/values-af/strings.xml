@@ -1278,9 +1278,9 @@ OsmAnd (OSM Automated Navigation Directions) is \\\'n kaart en navigasie toepass
 	<string name="lang_hy">Armeens</string>
 	<string name="lang_eu">Baskies</string>
 	<string name="color_red">rooi</string>
-	<string name="color_pink">pienk</string>
+	<string name="rendering_value_pink_name">pienk</string>
 	<string name="color_orange">oranje</string>
-	<string name="color_brown">bruin</string>
+	<string name="rendering_value_brown_name">bruin</string>
 	<string name="color_yellow">geel</string>
 	<string name="color_lightblue">ligblou</string>
 	<string name="color_blue">blou</string>

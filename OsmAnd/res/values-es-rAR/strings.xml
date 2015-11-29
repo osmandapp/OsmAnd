@@ -316,9 +316,9 @@
     <string name="color_blue">azul</string>
     <string name="color_lightblue">azul claro</string>
     <string name="color_yellow">amarillo</string>
-    <string name="color_brown">marrón</string>
+    <string name="rendering_value_brown_name">marrón</string>
     <string name="color_orange">anaranjado</string>
-    <string name="color_pink">rosa</string>
+    <string name="rendering_value_pink_name">rosa</string>
     <string name="color_red">rojo</string>
     <string name="osmo_user_name">Usuario</string>
     <string name="osmo_connect_to_my_nickname">Mi apodo</string>

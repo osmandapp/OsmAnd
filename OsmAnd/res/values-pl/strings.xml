@@ -1463,9 +1463,9 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	Używając identyfikatora trackera podłączone urządzenia będą mogły śledzić każdy ruch tego urządzenia! Aby się rozłączyć, wybierz opcję: Generuj ponownie.</string>
     <string name="osmo_locations_sent">Położenie wysłane %1$d (w buforze %2$d) </string>
     <string name="color_red">czerwony</string>
-	<string name="color_pink">różowy</string>
+	<string name="rendering_value_pink_name">różowy</string>
 	<string name="color_orange">pomarańczowy</string>
-	<string name="color_brown">brązowy</string>
+	<string name="rendering_value_brown_name">brązowy</string>
 	<string name="color_yellow">żółty</string>
 	<string name="color_lightblue">jasnoniebieski</string>
 	<string name="color_blue">niebieski</string>

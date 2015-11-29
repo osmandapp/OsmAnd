@@ -1401,9 +1401,9 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="osmo_connect_to_my_nickname">Моє призьвісько</string>
     <string name="osmo_user_name">Користувач</string>
 	<string name="color_red">червоний</string>
-	<string name="color_pink">рожевий</string>
+	<string name="rendering_value_pink_name">рожевий</string>
 	<string name="color_orange">помаранчевий</string>
-	<string name="color_brown">коричневий</string>
+	<string name="rendering_value_brown_name">коричневий</string>
 	<string name="color_yellow">жовтий</string>
 	<string name="color_lightblue">блакитний</string>
 	<string name="color_blue">синій</string>

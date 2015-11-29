@@ -1561,9 +1561,9 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	
 	<string name="seconds_ago">sekundes atpakaļ</string>
     <string name="color_red">sarkans</string>
-	<string name="color_pink">rozā</string>
+	<string name="rendering_value_pink_name">rozā</string>
 	<string name="color_orange">oranžs</string>
-	<string name="color_brown">brūns</string>
+	<string name="rendering_value_brown_name">brūns</string>
 	<string name="color_yellow">dzeltens</string>
 	<string name="color_lightblue">gaiši zils</string>
 	<string name="color_blue">zils</string>

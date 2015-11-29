@@ -1768,7 +1768,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="import_file_favourites">Запис като GPX файл или внасяне в \'Любими места\'?</string>
 	<string name="voices">Гласови напътствия</string>
 	<string name="color_red">червен</string>
-	<string name="color_pink">розов</string>
+	<string name="rendering_value_pink_name">розов</string>
 	<string name="speed_limit_exceed">Толеранс за скоростта</string>
 	<string name="delay_navigation_start">Автоматично стартиране на напътствията</string>
     <string name="gpx_info_waypoints">"Точки: %1$s "</string>
@@ -1803,7 +1803,7 @@ OsmAnd е с отворен код и активно да се развива. �
     <string name="osmo_use_server_name">Регистрирано име</string>
     <string name="osmo_connect_to_my_nickname">Моят псевдоним</string>
     <string name="osmo_user_name">Потребител</string>
-	<string name="color_brown">кафяв</string>
+	<string name="rendering_value_brown_name">кафяв</string>
 	<string name="color_yellow">жълт</string>
 	<string name="color_lightblue">светло синьо</string>
 	<string name="color_blue">синьо</string>

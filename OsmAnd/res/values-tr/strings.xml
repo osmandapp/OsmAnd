@@ -1305,9 +1305,9 @@
 	<string name="gpx_info_maximum_speed">"Maksimum hız: %1$s "</string>
 	<string name="gpx_info_avg_altitude">Ortalama yükseklik: %1$s</string>
 	<string name="color_red">kırmızı</string>
-	<string name="color_pink">pembe</string>
+	<string name="rendering_value_pink_name">pembe</string>
 	<string name="color_orange">turuncu</string>
-	<string name="color_brown">kahverengi</string>
+	<string name="rendering_value_brown_name">kahverengi</string>
 	<string name="color_yellow">sarı</string>
 	<string name="color_lightblue">açık mavi</string>
 	<string name="color_blue">mavi</string>

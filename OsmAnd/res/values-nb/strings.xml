@@ -891,9 +891,9 @@
     <string name="gpx_selection_point">Punkt %1$s</string>
     <string name="osmo_center_location">Sentrer på skjermen</string>
     <string name="color_red">rød</string>
-    <string name="color_pink">rosa</string>
+    <string name="rendering_value_pink_name">rosa</string>
     <string name="color_orange">orange</string>
-    <string name="color_brown">brun</string>
+    <string name="rendering_value_brown_name">brun</string>
     <string name="color_yellow">gul</string>
     <string name="color_lightblue">lyseblå</string>
     <string name="color_blue">blå</string>

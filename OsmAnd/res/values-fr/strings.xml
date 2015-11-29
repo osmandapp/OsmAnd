@@ -1452,9 +1452,9 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="import_file_favourites">Enregistrer les points comme fichier GPX ou les transformer en favoris ?</string>
 
     <string name="color_red">Rouge</string>
-    <string name="color_pink">Rose</string>
+    <string name="rendering_value_pink_name">Rose</string>
     <string name="color_orange">Orange</string>
-    <string name="color_brown">Brun</string>
+    <string name="rendering_value_brown_name">Brun</string>
     <string name="color_yellow">Jaune</string>
     <string name="color_lightblue">Bleu clair</string>
     <string name="color_blue">Bleu</string>
