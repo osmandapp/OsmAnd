@@ -1477,4 +1477,6 @@
     <string name="instalation_troubleshooting_item">Installering og problemløsing</string>
     <string name="osn_comment_dialog_title">Legg til kommentar</string>
 	<string name="navigation_item_description">Still inn navigering</string>
+    <string name="free_downloads_used_description">Viser de benyttede gratis nedlastingene</string>
+
     </resources>
