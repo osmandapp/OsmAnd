@@ -19,11 +19,11 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
-
 import net.osmand.GeoidAltitudeCorrection;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.access.NavigationInfo;
+import net.osmand.binary.GeocodingUtilities.GeocodingResult;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
@@ -847,6 +847,10 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	
 	public void getRouteSegment(net.osmand.Location loc, ResultMatcher<RouteDataObject> result) {
 		currentPositionHelper.getRouteSegment(loc, result);
+	}
+	
+	public void getGeocodingResult(net.osmand.Location loc, ResultMatcher<GeocodingResult> result) {
+		currentPositionHelper.getGeocodingResult(loc, result);
 	}
 
 	public net.osmand.Location getLastKnownLocation() {

@@ -21,10 +21,12 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.TreeMap;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -1951,7 +1953,8 @@ public class BinaryMapIndexReader {
 	
 	private static boolean testMapSearch = false;
 	private static boolean testAddressSearch = false;
-	private static boolean testPoiSearch = true;
+	private static boolean testAddressJustifySearch = true;
+	private static boolean testPoiSearch = false;
 	private static boolean testPoiSearchOnPath = false;
 	private static boolean testTransportSearch = false;
 	private static int sleft = MapUtils.get31TileNumberX(6.3);
@@ -1965,7 +1968,8 @@ public class BinaryMapIndexReader {
 	}
 	
 	public static void main(String[] args) throws IOException {
-		File fl = new File("/Users/victorshcherb/osmand/maps/Synthetic_test_rendering.obf");
+//		File fl = new File("/Users/victorshcherb/osmand/maps/Synthetic_test_rendering.obf");
+		File fl = new File("/Users/victorshcherb/osmand/maps/Netherlands_europe_2.road.obf");
 		RandomAccessFile raf = new RandomAccessFile(fl, "r");
 		
 		BinaryMapIndexReader reader = new BinaryMapIndexReader(raf, fl);
@@ -1978,6 +1982,9 @@ public class BinaryMapIndexReader {
 		if(testAddressSearch) {
 			testAddressSearchByName(reader);
 			testAddressSearch(reader);
+		}
+		if(testAddressJustifySearch) {
+			testAddressJustifySearch(reader);
 		}
 		if(testTransportSearch) {
 			testTransportSearch(reader);
@@ -2257,6 +2264,71 @@ public class BinaryMapIndexReader {
 			}
 		}, "кие");
 		reader.searchAddressDataByName(req);
+	}
+	
+	/**
+	 * @param reader
+	 * @throws IOException
+	 */
+	/**
+	 * @param reader
+	 * @throws IOException
+	 */
+	private static void testAddressJustifySearch(BinaryMapIndexReader reader) throws IOException {
+		final String streetName = "Logger";
+		final double lat = 52.28212d;
+		final double lon = 4.86269d;
+		// test address index search
+		final List<Street> streetsList = new ArrayList<Street>();
+		SearchRequest<MapObject> req = buildAddressByNameRequest(new ResultMatcher<MapObject>() {
+			@Override
+			public boolean publish(MapObject object) {
+				if(object instanceof Street && object.getName().equalsIgnoreCase(streetName)) {
+					if(MapUtils.getDistance(object.getLocation(), lat, lon) < 20000) {
+						streetsList.add((Street) object);
+						return true;
+					}
+					return false;
+				}
+				return false;
+			}
+			@Override
+			public boolean isCancelled() {
+				return false;
+			}
+		}, streetName);
+		reader.searchAddressDataByName(req);
+		TreeMap<MapObject, Street> resMap = new TreeMap<MapObject, Street>(new Comparator<MapObject>() {
+
+			@Override
+			public int compare(MapObject o1, MapObject o2) {
+				LatLon l1 = o1.getLocation();
+				LatLon l2 = o2.getLocation();
+				if(l1 == null || l2 == null){
+					return l2 == l1 ? 0 : (l1 == null ? -1 : 1);
+				}
+				return Double.compare(MapUtils.getDistance(l1, lat, lon), MapUtils.getDistance(l2, lat, lon));
+			}
+		});
+		for(Street s : streetsList) {
+			resMap.put(s, s);
+			reader.preloadBuildings(s, null);
+			for(Building b : s.getBuildings()) {
+				if(MapUtils.getDistance(b.getLocation(), lat, lon) < 100) {
+					resMap.put(b, s);
+				}
+			}
+		}
+		for(MapObject e : resMap.keySet()) {
+			Street s = resMap.get(e);
+			if(e instanceof Building && MapUtils.getDistance(e.getLocation(), lat, lon) < 40) {
+				Building b = (Building) e;
+				System.out.println(b.getName() + "   " + s);
+			} else if(e instanceof Street){
+				System.out.println(s + "   " + ((Street) s).getCity());
+			}
+		}
+		
 	}
 	
 	private static void testAddressSearch(BinaryMapIndexReader reader) throws IOException {

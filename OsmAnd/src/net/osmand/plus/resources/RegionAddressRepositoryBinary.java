@@ -4,6 +4,7 @@ package net.osmand.plus.resources;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +19,8 @@ import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapAddressReaderAdapter;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
+import net.osmand.binary.GeocodingUtilities;
+import net.osmand.binary.GeocodingUtilities.GeocodingResult;
 import net.osmand.data.Building;
 import net.osmand.data.City;
 import net.osmand.data.LatLon;
@@ -58,6 +61,21 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	@Override
 	public void close(){
 		this.file = null;
+	}
+	
+	@Override
+	public BinaryMapIndexReader getFile() {
+		return file;
+	}
+	
+	@Override
+	public synchronized List<GeocodingResult> justifyReverseGeocodingSearch(GeocodingResult r, double minBuildingDistance) {
+		try {
+			return new GeocodingUtilities().justifyReverseGeocodingSearch(r, file, minBuildingDistance);
+		} catch(IOException e) {
+			log.error("Disk operation failed", e); //$NON-NLS-1$
+		}
+		return Collections.emptyList();
 	}
 
 	

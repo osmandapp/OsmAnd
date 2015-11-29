@@ -594,6 +594,7 @@ public class BinaryMapAddressReaderAdapter {
 								int old = codedIS.pushLimit(len);
 								LatLon l = obj.getLocation();
 								Street s = new Street(obj);
+								s.setFileOffset(list.get(j));
 								readStreet(s, null, false, MapUtils.get31TileNumberX(l.getLongitude()) >> 7,
 										MapUtils.get31TileNumberY(l.getLatitude()) >> 7, obj.isPostcode() ? obj.getName() : null,
 												reg.attributeTagsTable);
