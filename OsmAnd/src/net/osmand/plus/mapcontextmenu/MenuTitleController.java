@@ -144,7 +144,12 @@ public abstract class MenuTitleController {
 							String lang = settings.MAP_PREFERRED_LOCALE.get();
 							String geocodingResult = "";
 							if(object.building != null) {
-								geocodingResult = object.street.getName(lang) + ", " + object.building.getName(lang)+ ", " + object.city.getName(lang);
+								String bldName = object.building.getName(lang);
+								if(!Algorithms.isEmpty(object.buildingInterpolation)) {
+									bldName = object.buildingInterpolation;
+								}
+								geocodingResult = object.street.getName(lang) + " " + bldName + ", "
+										+ object.city.getName(lang);
 							} else if(object.street != null) {
 								geocodingResult = object.street.getName(lang) + ", " + object.city.getName(lang);
 							} else if(object.city != null) {
