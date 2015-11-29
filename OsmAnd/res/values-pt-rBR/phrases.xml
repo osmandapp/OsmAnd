@@ -1638,4 +1638,46 @@
 	<string name="poi_self_service_no">Sem autoatendimento</string>
 	<string name="poi_automated_yes">Automatizado</string>
 	<string name="poi_automated_no">Não automatizado</string>
+	<string name="poi_full_service_yes">Serviço completo</string>
+	<string name="poi_car_wash_no">Lavação de carro: não</string>
+
+	<string name="poi_aeroway_fuel">Estação de combustível de aeronaves</string>
+	<string name="poi_public_bath">Banho público</string>
+
+	<string name="poi_male_yes">Masculino</string>
+	<string name="poi_male_no">Proibido para homens</string>
+	<string name="poi_female_yes">Feminino</string>
+	<string name="poi_female_no">Proibido para mulheres</string>
+	<string name="poi_brushless_yes">Sem escova</string>
+	<string name="poi_brushless_no">Sem escova: não</string>
+	<string name="poi_indoor_yes">Interno</string>
+	<string name="poi_indoor_no">Ao ar livre</string>
+	<string name="poi_toilets_yes">Com banheiros</string>
+	<string name="poi_toilets_no">Sem banheiros</string>
+	<string name="poi_toilets_wheelchair_yes">Acesso aos banheiros para cadeirantes: sim</string>
+	<string name="poi_toilets_wheelchair_no">Acesso aos banheiros para cadeirantes: não</string>
+	<string name="poi_toilets_access_customers">Acesso aos banheiros: clientes</string>
+	<string name="poi_toilets_access_permissive">Acesso aos banheiros: permitido</string>
+	<string name="poi_toilets_access_community">Acesso aos banheiros: comunidade</string>
+	<string name="poi_toilets_access_public">Acesso aos banheiros: público</string>
+
+	<string name="poi_diaper_yes">Trocador de fralda</string>
+	<string name="poi_diaper_no">Sem trocador de fralda</string>
+	<string name="poi_diaper_room">Sala para trocar fralda</string>
+
+	<string name="poi_maxstay">Limite de tempo de estacionamento</string>
+
+	<string name="poi_vending_parking_tickets">Bilhetes de estacionamento</string>
+	<string name="poi_vending_cigarettes">Cigarros</string>
+	<string name="poi_vending_excrement_bags">Sacos para excremento</string>
+	<string name="poi_vending_public_transport_tickets">Bilhetes de transporte público</string>
+	<string name="poi_vending_drinks">Bebidas</string>
+	<string name="poi_vending_sweets">Doces</string>
+	<string name="poi_vending_parcel_pickup_mail_in">Retirada de encomenda e correspondência</string>
+	<string name="poi_vending_condoms">Preservativos</string>
+	<string name="poi_vending_stamps">Selos</string>
+	<string name="poi_vending_food">Comida</string>
+	<string name="poi_vending_drinks_food">Bebidas e comida</string>
+	<string name="poi_vending_fuel">Venda de combustível</string>
+	<string name="poi_vending_parcel_pickup">Retirada de encomenda</string>
 	</resources>
