@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
 
+    <string name="shared_string_location">Местоположение</string>
     <string name="poi_context_menu_modify_osm_change">Редактировать POI</string>
     <string name="osm_edit_reopened_note">Заметка OSM открыта снова</string>
     <string name="osm_edit_commented_note">К заметке OSM добавлен комментарий</string>
@@ -53,7 +54,7 @@
     <string name="layer_recordings">Слой аудиозаписей</string>
     <string name="recording_can_not_be_played">Запись не может быть воспроизведена</string>
     <string name="recording_context_menu_delete">Удалить запись</string>
-    <string name="recording_context_menu_play">Воспроизвести</string>
+    <string name="recording_context_menu_play">Проиграть</string>
     <string name="recording_description">Запись %1$s %3$s %2$s</string>
     <string name="recording_default_name">Запись</string>
     <string name="map_widget_av_notes">Аудио заметки</string>
