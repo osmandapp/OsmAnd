@@ -1311,9 +1311,9 @@
     <string name="osmo_mode_restart">Starta om OsMo-session</string>
     <string name="osmo_settings_debug">Felsökningsinformation</string>
     <string name="color_red">röd</string>
-    <string name="color_pink">skär</string>
+    <string name="rendering_value_pink_name">skär</string>
     <string name="color_orange">brandgul</string>
-    <string name="color_brown">brun</string>
+    <string name="rendering_value_brown_name">brun</string>
     <string name="color_yellow">gul</string>
     <string name="color_lightblue">ljusblå</string>
     <string name="color_blue">blå</string>

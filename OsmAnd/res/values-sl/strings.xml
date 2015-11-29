@@ -1324,9 +1324,9 @@
     <string name="osmo_connect_to_my_nickname">Vzdevek</string>
     <string name="osmo_user_name">Uporabnik</string>
     <string name="color_red">rdeča</string>
-    <string name="color_pink">rožnata</string>
+    <string name="rendering_value_pink_name">rožnata</string>
     <string name="color_orange">oranžna</string>
-    <string name="color_brown">rjava</string>
+    <string name="rendering_value_brown_name">rjava</string>
     <string name="color_yellow">rumena</string>
     <string name="color_lightblue">svetlo modra</string>
     <string name="color_blue">modra</string>

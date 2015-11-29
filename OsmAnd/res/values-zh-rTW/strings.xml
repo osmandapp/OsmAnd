@@ -1241,7 +1241,7 @@
     <string name="index_name_canada">北美洲 - 加拿大</string>
     <string name="always_center_position_on_map">位置顯示始終處於中心</string>
     <string name="voice_pref_title">聲音</string>
-    <string name="localization_pref_title">所在地</string>
+    <string name="localization_pref_title">在地化</string>
     <string name="interrupt_music_descr">當語音預告時中斷音樂</string>
     <string name="interrupt_music">中斷音樂</string>
     <string name="misc_pref_title">雜項</string>
@@ -1313,9 +1313,9 @@
     <string name="import_file_favourites">儲存標點為 GPX 檔案或把它匯入到我的最愛？</string>
 
     <string name="color_red">紅色</string>
-    <string name="color_pink">粉紅色</string>
+    <string name="rendering_value_pink_name">粉紅色</string>
     <string name="color_orange">橙色</string>
-    <string name="color_brown">棕色</string>
+    <string name="rendering_value_brown_name">棕色</string>
     <string name="color_yellow">黃色</string>
     <string name="color_lightblue">淺藍色</string>
     <string name="color_blue">藍色</string>

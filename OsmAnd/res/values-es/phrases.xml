@@ -114,7 +114,7 @@
 	<string name="poi_lift_gate">Barrera levadiza</string>
 	<string name="poi_toll_booth">Peaje</string>
 	<string name="poi_border_control">Control fronterizo</string>
-	<string name="poi_traffic_calming_bump">Protuberancia</string>
+	<string name="poi_traffic_calming_bump">Resalto (chico)</string>
 	<string name="poi_traffic_signals">Semáforo</string>
 
 	<string name="poi_car_repair">Taller mecánico</string>
@@ -447,7 +447,7 @@
 	<string name="poi_fire_flapper">Aleta de fuego</string>
 	<string name="poi_fire_water_pond">Estanque de agua contra incendios</string>
 	<string name="poi_ford">Vado</string>
-	<string name="poi_traffic_calming_hump">Tope</string>
+	<string name="poi_traffic_calming_hump">Resalto (grande)</string>
 	<string name="poi_traffic_calming_chicane">Chicana</string>
 	<string name="poi_traffic_calming_table">Peatonal elevada</string>
 	<string name="poi_fuel_hgv_diesel">Diésel de vehículos pesados</string>

@@ -1554,9 +1554,9 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="osmo_connect_to_my_nickname">نام مستعار</string>
     <string name="osmo_user_name">کاربر</string>
 	<string name="color_red">قرمز</string>
-	<string name="color_pink">صورتی</string>
+	<string name="rendering_value_pink_name">صورتی</string>
 	<string name="color_orange">نارنجی</string>
-	<string name="color_brown">قهوه ای</string>
+	<string name="rendering_value_brown_name">قهوه ای</string>
 	<string name="color_yellow">زرد</string>
 	<string name="color_lightblue">آبی روشن</string>
 	<string name="color_blue">آبی</string>

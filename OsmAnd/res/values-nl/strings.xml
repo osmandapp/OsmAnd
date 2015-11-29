@@ -1536,9 +1536,9 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="import_file_favourites">Punten bewaren als GPX-bestand of importeren in favorieten?</string>
 	
 	<string name="color_red">rood</string>
-	<string name="color_pink">roze</string>
+	<string name="rendering_value_pink_name">roze</string>
 	<string name="color_orange">oranje</string>
-	<string name="color_brown">bruin</string>
+	<string name="rendering_value_brown_name">bruin</string>
 	<string name="color_yellow">geel</string>
 	<string name="color_lightblue">lichtblauw</string>
 	<string name="color_blue">blauw</string>
@@ -2166,7 +2166,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">Alles updaten (%1$s MB)</string>
     <string name="free_downloads_used">Gebruikte gratis downloads</string>
-    <string name="free_downloads_used_description">Bekijk hoeveel gratis downloads er zijn gebruikt</string>
+    <string name="free_downloads_used_description">Bekijk hoeveel gratis downloads er al gebruikt zijn</string>
 
     <string name="application_dir_description">Kies waar kaartbestanden bewaard worden.</string>
     <string name="show_on_start_description">\'Uit\' toont direct de kaart</string>
@@ -2241,4 +2241,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="access_from_map">Toegang vanaf kaart</string>
     <string name="use_dashboard_btn">Gebruik dashboard</string>
     <string name="use_drawer_btn">Gebruik menu</string>
-    </resources>
+    <string name="routing_attr_avoid_stairs_name">Vermijd trappen</string>
+	<string name="routing_attr_avoid_stairs_description">Vermijd trappen</string>
+	<string name="routing_attr_avoid_borders_name">Vermijd grensovergangen</string>
+	</resources>

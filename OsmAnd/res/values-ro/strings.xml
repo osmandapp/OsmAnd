@@ -1329,9 +1329,9 @@
     <string name="osmo_connect_to_my_nickname">Porecla mea</string>
     <string name="osmo_user_name">Utilizator</string>
 	<string name="color_red">roșu</string>
-	<string name="color_pink">roz</string>
+	<string name="rendering_value_pink_name">roz</string>
 	<string name="color_orange">portocaliu</string>
-	<string name="color_brown">maro</string>
+	<string name="rendering_value_brown_name">maro</string>
 	<string name="color_yellow">galben</string>
 	<string name="color_lightblue">albastru deschis</string>
 	<string name="color_blue">albastru</string>

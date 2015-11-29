@@ -10,7 +10,7 @@
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
     
-    <string name="please_specify_poi_type_only_from_list">Please specify correct POI type or skip it. </string>
+    <string name="please_specify_poi_type_only_from_list">Please specify the correct POI type or skip it. </string>
     <string name="access_from_map_description">Menu button launches dashboard, not menu</string>
     <string name="access_from_map">Access from map</string>
     <string name="show_on_start_description">\'Off\' directly launches the map screen</string>
@@ -138,6 +138,8 @@
     <string name="rendering_value_blue_name">Blue</string>
     <string name="rendering_value_translucent_blue_name">Translucent blue</string>
     <string name="rendering_value_purple_name">Purple</string>
+    <string name="rendering_value_pink_name">Pink</string>
+    <string name="rendering_value_brown_name">Brown</string>
     <string name="rendering_value_translucent_purple_name">Translucent purple</string>
     <string name="restart_is_required">In order to fully apply the changes, a manual application restart is required.</string>
     <string name="light_theme">Light</string>
@@ -637,15 +639,6 @@
     <string name="osmo_use_server_name">Registered name</string>
     <string name="osmo_connect_to_my_nickname">My nickname</string>
     <string name="osmo_user_name">User</string>
-	<string name="color_red">red</string>
-	<string name="color_pink">pink</string>
-	<string name="color_orange">orange</string>
-	<string name="color_brown">brown</string>
-	<string name="color_yellow">yellow</string>
-	<string name="color_lightblue">light blue</string>
-	<string name="color_blue">blue</string>
-	<string name="color_green">green</string>
-
     <string name="osmo_edit_device">Change user properties</string>
     <string name="osmo_edit_color">Display color</string>
     <string name="osmo_group_info">Info</string>

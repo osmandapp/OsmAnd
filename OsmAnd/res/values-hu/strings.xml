@@ -1320,9 +1320,9 @@
     <string name="keep_informing">Navigációs utasítások ismétlése</string>
     <string name="navigation_intent_invalid">Érvénytelen formátum: %s</string>
     <string name="color_red">piros</string>
-    <string name="color_pink">rózsaszín</string>
+    <string name="rendering_value_pink_name">rózsaszín</string>
     <string name="color_orange">narancs</string>
-    <string name="color_brown">barna</string>
+    <string name="rendering_value_brown_name">barna</string>
     <string name="color_yellow">sárga</string>
     <string name="color_lightblue">világoskék</string>
     <string name="color_blue">kék</string>

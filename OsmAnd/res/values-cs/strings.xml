@@ -1175,9 +1175,9 @@
     <string name="use_points_as_intermediates">Vypočítat trasu mezi body</string>
     <string name="osmo_plugin_description">"Tento modul poskytuje funkcionalitu pro takzvané OsMo pokročilé živé sledování, podívejte se na http://osmo.mobi.\n\nMůžete sledovat všechna zařízení spolupracující skupiny v reálném čase a vzájemně spolu komunikovat. Jsou dostupné různé možnosti nastavení krátkodobého nebo trvalého sledování.\n\nAnonymní skupiny lze vytvářet spontáně na určený počet dní a jsou omezené na vybrané funkce, nemají například dálkové ovládání a skupinového správce. Plně funkční skupiny se vytvářejí na webové stránce a jsou přístupné pouze pro registrované uživatele. "</string>
     <string name="color_red">červená</string>
-    <string name="color_pink">růžová</string>
+    <string name="rendering_value_pink_name">růžová</string>
     <string name="color_orange">oranžová</string>
-    <string name="color_brown">hnědá</string>
+    <string name="rendering_value_brown_name">hnědá</string>
     <string name="color_yellow">žlutá</string>
     <string name="color_lightblue">světle modrá</string>
     <string name="color_blue">modrá</string>
@@ -1771,7 +1771,7 @@
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">Aktualizovat vše (%1$s MB)</string>
     <string name="free_downloads_used">Použito volných stáhnutí</string>
-    <string name="free_downloads_used_description">Můžete nastavit, kolik volných stáhnutí jste použili</string>
+    <string name="free_downloads_used_description">Zobrazuje počet využitých volných stáhnutí</string>
     <string name="simulate_initial_startup">Simulovat první start aplikace</string>
     <string name="share_geo">geo:</string>
     <string name="share_menu_location">Sdílet polohu</string>
@@ -1858,4 +1858,7 @@
     <string name="use_drawer_btn">Použít menu</string>
     <string name="dashboard_or_drawer_title">Domovská obrazovka nebo menu</string>
     <string name="dashboard_or_drawer_description">Je zde nová možnost výběru ovládání aplikace přes flexibilní domovskou obrazovku nebo statické menu. Váš výběr může být vždy změněn v nastavení domovské obrazovky.</string>
-</resources>
+<string name="routing_attr_avoid_stairs_name">Vyhnout se schodům</string>
+	<string name="routing_attr_avoid_stairs_description">Vyhnout se schodům</string>
+	<string name="routing_attr_avoid_borders_name">Vyhnout se hraničním přechodům</string>
+	</resources>

@@ -220,7 +220,7 @@
     <string name="local_index_items_restored">%1$d из %2$d объектов успешно активированы.</string>
     <string name="local_index_no_items_to_do">Нет объектов, чтобы %1$s</string>
     <string name="local_index_action_do">Вы собираетесь %1$s %2$s объектов. Вы уверены?</string>
-    <string name="local_index_descr_title">Загрузить карты</string>
+    <string name="local_index_descr_title">Управление картами</string>
     <string name="local_index_mi_restore">Активировать</string>
     <string name="local_index_mi_backup">Архивировать</string>
     <string name="local_index_mi_reload">Перечитать с SD-накопителя</string>
@@ -360,7 +360,7 @@
     <string name="filter_existing_indexes">Загруженные</string>
     <string name="general_settings_descr">Настройки экрана, локализации, единиц измерения и другие</string>
     <string name="general_settings">Общие</string>
-    <string name="index_settings">Загрузить карты</string>
+    <string name="index_settings">Управление картами</string>
     <string name="osmand_service">Фоновый режим</string>
     <string name="osmand_service_descr">Запустить OsmAnd в фоновом режиме для записи трека и навигации</string>
     <string name="fast_route_mode">Скоростной маршрут</string>
@@ -1230,9 +1230,9 @@
     <string name="osmo_server_operation_failed">OsMo: не удалось правильно обработать команду</string>
     <string name="import_file_favourites">Сохранить точки как файл GPX или импортировать их в избранное?</string>
     <string name="color_red">красный</string>
-    <string name="color_pink">розовый</string>
+    <string name="rendering_value_pink_name">розовый</string>
     <string name="color_orange">оранжевый</string>
-    <string name="color_brown">коричневый</string>
+    <string name="rendering_value_brown_name">коричневый</string>
     <string name="color_yellow">жёлтый</string>
     <string name="color_lightblue">голубой</string>
     <string name="color_blue">синий</string>

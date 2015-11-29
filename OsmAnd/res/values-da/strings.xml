@@ -1386,13 +1386,13 @@
 
     <string name="import_file_favourites">Gem punkter som en GPX-fil eller importer dem til favoritter?</string>
 
-    <string name="color_red">rød</string>
-    <string name="color_pink">lyserød</string>
-    <string name="color_orange">orange</string>
-    <string name="color_brown">brun</string>
-    <string name="color_yellow">gul</string>
-    <string name="color_lightblue">lyseblå</string>
-    <string name="color_blue">blå</string>
+    <string name="color_red">Rød</string>
+    <string name="rendering_value_pink_name">Lyserød</string>
+    <string name="color_orange">Orange</string>
+    <string name="rendering_value_brown_name">Brun</string>
+    <string name="color_yellow">Gul</string>
+    <string name="color_lightblue">Lyseblå</string>
+    <string name="color_blue">Blå</string>
 
 
     <string name="osmo_edit_device">Ændre brugeregenskaber</string>
@@ -1408,7 +1408,7 @@
     <string name="osmo_use_server_name">Registreret navn</string>
     <string name="osmo_connect_to_my_nickname">Kaldenavn</string>
     <string name="osmo_user_name">Bruger</string>
-    <string name="color_green">grøn</string>
+    <string name="color_green">Grøn</string>
 
     <string name="osmo_follow">Følg</string>
     <string name="osmo_show_group_notifications">Vis gruppemeddelelser</string>
@@ -2109,8 +2109,10 @@
     <string name="use_drawer_btn">Brug menuen</string>
     <string name="access_from_map_description">Menuknappen viser betjeningspanel, ikke menuen</string>
     <string name="access_from_map">Adgang fra kort</string>
-    <string name="please_specify_poi_type_only_from_list">"Angiv korrekt IP type eller spring over. "</string>
+    <string name="please_specify_poi_type_only_from_list">"Angiv en korrekt IP type eller spring over. "</string>
     <string name="routing_attr_avoid_stairs_name">Undgå trapper</string>
 	<string name="routing_attr_avoid_stairs_description">Undgå trapper</string>
 	<string name="routing_attr_avoid_borders_name">Undgå grænseovergang</string>
+	<string name="color_lightgreen">Lysegrøn</string>
+	<string name="color_purple">Lilla</string>
 	</resources>

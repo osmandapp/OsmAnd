@@ -209,7 +209,7 @@
     <string name="shared_string_next">Siguiente</string>
     <string name="shared_string_previous">Anterior</string>
     <string name="unit_of_length_descr">Cambia las unidades de longitud y velocidad</string>
-    <string name="unit_of_length">Unidad de longitud</string>
+    <string name="unit_of_length">Unidad de medida</string>
     <string name="si_mi_foots">Millas/pies</string>
     <string name="si_mi_yard">Millas/yardas</string>
     <string name="si_km_m">Kilómetros/metros</string>
@@ -293,7 +293,7 @@
     <string name="shared_string_select_all">Marcar todo</string>
     <string name="shared_string_refresh">Actualizar</string>
     <string name="fast_route_mode">Ruta más rápida</string>
-    <string name="fast_route_mode_descr">"Habilitar para calcular la ruta más rápida o deshabilitar para la ruta más corta "</string>
+    <string name="fast_route_mode_descr">"Activar, para calcular la ruta más rápida o desactivar, para la ruta más corta "</string>
     <string name="tiles_to_download_estimated_size">En acercamiento {0} descarga {1} teselas ({2} MB)</string>
     <string name="shared_string_download_map">Descargar mapa</string>
     <string name="select_max_zoom_preload_area">Seleccione el acercamiento máximo para precargar</string>
@@ -524,7 +524,7 @@
     <string name="choose_city">Elija la ciudad</string>
     <string name="ChooseCountry">Elija el país</string>
     <string name="show_view_angle">Mostrar dirección de la vista</string>
-    <string name="map_view_3d_descr">Habilita visión 3D del mapa</string>
+    <string name="map_view_3d_descr">Activa la vista 3D del mapa</string>
     <string name="map_view_3d">Visión 3D del mapa</string>
     <string name="show_poi_over_map_description">Muestra el PDI sobre el mapa (utilizando el último filtro seleccionado)</string>
     <string name="show_poi_over_map">Mostrar PDI</string>
@@ -617,7 +617,7 @@
     <string name="unknown_from_location">Todavía no se determinó el punto de partida</string>
     <string name="confirm_interrupt_download">¿Quiere interrumpir la descarga de archivos?</string>
     <string name="basemap_was_selected_to_download">El Mapa Base (World Basemap) se necesita para el correcto funcionamiento de la aplicación y se seleccionó para su descarga.</string>
-    <string name="map_online_plugin_is_not_installed">Habilita el complemento mapas en línea para seleccionar diferentes fuentes de mapas</string>
+    <string name="map_online_plugin_is_not_installed">Activa el complemento «Mapas en línea», para seleccionar diferentes fuentes de mapas</string>
     <string name="map_online_data">Mapas en línea y teselas</string>
     <string name="map_online_data_descr">Usa mapas en línea (teselas descargadas y almacenadas localmente en la tarjeta SD)</string>
     <string name="shared_string_online_maps">Mapas en línea</string>
@@ -625,8 +625,8 @@
     <string name="osmand_rastermaps_plugin_description">"Con este complemento puede acceder a muchos tipos de mapas en línea (llamados de teselas o ráster), desde teselas de OpenStreetMap predefinidas (como Mapnik) a imágenes de satélite y capas de propósito especial como mapas del tiempo, mapas del clima, mapas geológicos, capas de sombreado, etc.
 \n\nCualquiera de estos mapas se puede utilizar como el mapa (base) principal, que se mostrará en la pantalla del mapa de OsmAnd, o como una superposición o subyacente de otro mapa base (como los mapas estándares en línea de OsmAnd). Para hacer cualquier mapa subyacente más visible, ciertos elementos de los mapas vectoriales de OsmAnd, se pueden ocultar fácilmente a través del menú \'Configurar mapa\' cuando desee.
 \n\nLas teselas de mapas, se pueden obtener directamente a través de fuentes en línea o pueden prepararse para su uso sin conexión (y copiarse manualmente en la carpeta de datos de OsmAnd) como una base de datos SQLite, que puede ser producida por una variedad de herramientas de preparación de mapas de terceros. "</string>
-    <string name="osmand_background_plugin_description">Muestra los ajustes para habilitar el seguimiento y la navegación en segundo plano (pantalla apagada) activando periódicamente el dispositivo GPS.</string>
-    <string name="osmand_accessibility_description">Este complemento habilita las características de accesibilidad del dispositivo directamente en OsmAnd.
+    <string name="osmand_background_plugin_description">Muestra los ajustes para activar el seguimiento y la navegación en segundo plano (pantalla apagada) activando periódicamente el dispositivo GPS.</string>
+    <string name="osmand_accessibility_description">Este complemento activa las características de accesibilidad del dispositivo directamente en OsmAnd.
 \n\nFacilita, por ejemplo, el ajuste de la velocidad de la voz para voces TTS, la configuración de navegación de pantalla con el panel direccional, utilizando la bola de desplazamiento para el control del acercamiento, el uso de comentarios para la conversión de texto a voz, o para el anuncio automático de su posición.</string>
     <string name="osmand_development_plugin_description">Este complemento muestra los ajustes de características de desarrollo y depuración para probar la simulación de rutas, el rendimiento del renderizado en pantalla, o los avisos de voz.
 \n\nEstos ajustes están destinados para los desarrolladores y no son necesarios para el usuario general.</string>
@@ -849,9 +849,9 @@
     <string name="no_route">Sin ruta</string>
     <string name="delete_target_point">Quitar punto de ruta</string>
     <string name="intermediate_point">Punto de ruta %1$s</string>
-    <string name="gps_not_available">Habilite el GPS en los ajustes</string>
+    <string name="gps_not_available">Active el GPS en los ajustes</string>
     <string name="map_widget_show_destination_arrow">Mostrar dirección de destino</string>
-    <string name="enable_plugin_monitoring_services">Habilita el complemento de grabación de viajes para que use el servicio de registro de posición (registro GPX, seguimiento en línea)</string>
+    <string name="enable_plugin_monitoring_services">Activa el complemento de grabación de viajes, para que use el servicio de registro de posición (registro GPX, seguimiento en línea)</string>
     <string name="non_optimal_route_calculation">Calcular una ruta posiblemente no óptima en largas distancias</string>
     <string name="rendering_attr_roadColors_description">Seleccione un esquema de color de carreteras:</string>
     <string name="rendering_attr_roadColors_name">Esquema de color de carreteras</string>
@@ -929,7 +929,7 @@
     <string name="recording_context_menu_precord">Tomar una foto</string>
     <string name="stop_routing_confirm">¿Está seguro que quiere parar la navegación?</string>
     <string name="clear_dest_confirm">¿Seguro que quiere borrar su punto de destino (y puntos de ruta)?</string>
-    <string name="precise_routing_mode_descr">Habilitar para calcular rutas precisas sin interferencias. Aún está limitado por la distancia y es lento.</string>
+    <string name="precise_routing_mode_descr">Activar para calcular rutas precisas sin interferencias. Aún está limitado por la distancia y es lento.</string>
     <string name="precise_routing_mode">Navegación precisa (alfa)</string>
     <string name="local_indexes_cat_av">Datos multimedia</string>
     <string name="support_new_features_descr">Dona para ver nuevas características implementadas en la aplicación</string>
@@ -1184,7 +1184,7 @@
     <string name="auto_zoom_farthest">Para largo alcance</string>
     <string name="animate_routing_route_not_calculated">Primero calcule la ruta</string>
     <string name="animate_routing_route">"Simular, utilizando la ruta calculada "</string>
-    <string name="animate_routing_gpx">Simular utilizando traza GPX</string>
+    <string name="animate_routing_gpx">Simular, utilizando la traza GPX</string>
     <string name="app_mode_hiking">Senderismo</string>
     <string name="app_mode_motorcycle">Moto</string>
     <string name="app_mode_boat">Barco</string>
@@ -1204,8 +1204,8 @@
     <string name="copying_osmand_files">Copiando archivos de datos de OsmAnd…</string>
     <string name="app_mode_truck">Camión</string>
     <string name="complex_route_calculation_failed">Fallo en el cálculo rápido de la ruta (%s), regresando a cálculo lento.</string>
-    <string name="disable_complex_routing_descr">Deshabilitar la planificación de ruta de dos fases para la navegación con automóvil</string>
-    <string name="disable_complex_routing">Deshabilitar navegación compleja</string>
+    <string name="disable_complex_routing_descr">Desactivar la planificación de ruta de dos fases, para la navegación en automóvil</string>
+    <string name="disable_complex_routing">Desactivar navegación compleja</string>
     <string name="calculate_osmand_route_gpx">Calcular la ruta OsmAnd sin conexión</string>
     <string name="routing_attr_prefer_motorway_name">Preferir autopistas</string>
     <string name="routing_attr_prefer_motorway_description">Preferir autopistas</string>
@@ -1320,9 +1320,9 @@
     <string name="osmo_groups">Grupos/Dispositivos OsMo</string>
     <string name="osmo_group_info">Información</string>
     <string name="color_red">rojo</string>
-    <string name="color_pink">rosa</string>
+    <string name="rendering_value_pink_name">rosa</string>
     <string name="color_orange">anaranjado</string>
-    <string name="color_brown">marrón</string>
+    <string name="rendering_value_brown_name">marrón</string>
     <string name="color_yellow">amarillo</string>
     <string name="color_lightblue">azul claro</string>
     <string name="color_blue">azul</string>
@@ -1449,8 +1449,8 @@
     <string name="osmo_gpx_track_downloaded">Traza OsMo %1$s descargada.</string>
     <string name="keep_navigation_service">Mantener</string>
     <string name="stop_navigation_service">Interrumpir</string>
-    <string name="enable_sleep_mode">Habilita el modo de fondo del GPS</string>
-    <string name="gps_wake_up_timer">Intervalo para despertar GPS</string>
+    <string name="enable_sleep_mode">Activa el modo de fondo del GPS</string>
+    <string name="gps_wake_up_timer">Intervalo de activación del GPS</string>
     <string name="sleep_mode_stop_dialog">¿Interrumpir el modo de fondo del GPS?</string>
     <string name="map_preferred_locale_descr">Idioma preferido para las etiquetas en el mapa (si no está disponible se cambiará a inglés o a nombres locales)</string>
     <string name="map_preferred_locale">Idioma preferido del mapa</string>
@@ -1459,7 +1459,7 @@
     <string name="lang_he">Hebreo</string>
     <string name="forward">Siguiente</string>
     <string name="home">Panel de control</string>
-    <string name="live_monitoring_m_descr">Envía los datos de seguimiento a un servicio web específico si el registro GPX está habilitada.</string>
+    <string name="live_monitoring_m_descr">Envía los datos de seguimiento a un servicio web específico si el registro GPX está activado.</string>
     <string name="live_monitoring_m">Seguimiento en línea (requiere GPX)</string>
     <string name="live_monitoring_start">Iniciar seguimiento en línea</string>
     <string name="live_monitoring_stop">Parar seguimiento en línea</string>
@@ -1514,7 +1514,7 @@
     <string name="save_track_interval_globally">Intervalo de registro</string>
     <string name="save_track_to_gpx_globally_descr">Registra la posición general en un archivo GPX pudiendo activar o desactivar utilizando el control de registro GPX en la pantalla del mapa</string>
     <string name="confirm_every_run">Preguntar siempre</string>
-    <string name="save_global_track_interval_descr">Elegir el intervalo de registro para la grabación de trazas en general (habilitar a través del control de registro GPX en el mapa)</string>
+    <string name="save_global_track_interval_descr">Elegir el intervalo de registro para la grabación de trazas en general (activado a través del control de registro GPX en el mapa)</string>
     <string name="save_global_track_interval">Intervalo de registro general</string>
     <string name="traffic_warning_speed_limit">Límite de velocidad</string>
     <string name="traffic_warning_border_control">Control fronterizo</string>
@@ -1902,7 +1902,7 @@
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">Actualizar todo (%1$s MB)</string>
     <string name="free_downloads_used">Descargas gratis usadas</string>
-    <string name="free_downloads_used_description">Puedes configurar cuántas descargas gratis ha usado</string>
+    <string name="free_downloads_used_description">Muestra las descargas libres utilizadas</string>
     <string name="simulate_initial_startup_descr">Muestra la pantalla del primer arranque y mantiene los demás ajustes sin cambios</string>
     <string name="simulate_initial_startup">Simular arranque inicial</string>
     <string name="share_geo">geo:</string>

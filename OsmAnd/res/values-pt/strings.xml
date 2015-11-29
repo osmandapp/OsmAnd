@@ -1360,9 +1360,9 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="osmo_connect_to_my_nickname">Minha alcunha</string>
     <string name="osmo_user_name">Utilizador</string>
 	<string name="color_red">vermelho</string>
-	<string name="color_pink">rosa</string>
+	<string name="rendering_value_pink_name">rosa</string>
 	<string name="color_orange">laranja</string>
-	<string name="color_brown">castanho</string>
+	<string name="rendering_value_brown_name">castanho</string>
 	<string name="color_yellow">amarelo</string>
 	<string name="color_lightblue">azul claro</string>
 	<string name="color_blue">azul</string>
