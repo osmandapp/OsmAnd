@@ -1937,4 +1937,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="routing_attr_avoid_stairs_name">Vyhnúť sa schodom</string>
 	<string name="routing_attr_avoid_stairs_description">Vyhnúť sa schodom</string>
 	<string name="routing_attr_avoid_borders_name">Vyhnúť sa hraničným priechodom</string>
+	<string name="color_lightgreen">svetlozelená</string>
+	<string name="color_purple">fialová</string>
 	</resources>
