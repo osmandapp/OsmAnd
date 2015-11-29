@@ -3,6 +3,7 @@ package net.osmand.plus.mapcontextmenu;
 import android.graphics.drawable.Drawable;
 import net.osmand.Location;
 import net.osmand.ResultMatcher;
+import net.osmand.binary.GeocodingUtilities.GeocodingResult;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -134,24 +135,37 @@ public abstract class MenuTitleController {
 		ll.setLatitude(getLatLon().getLatitude());
 		ll.setLongitude(getLatLon().getLongitude());
 		getMapActivity().getMyApplication().getLocationProvider()
-				.getRouteSegment(ll, new ResultMatcher<RouteDataObject>() {
+				.getGeocodingResult(ll, new ResultMatcher<GeocodingResult>() {
 
 					@Override	
-					public boolean publish(RouteDataObject object) {
+					public boolean publish(GeocodingResult object) {
 						if (object != null) {
 							OsmandSettings settings = getMapActivity().getMyApplication().getSettings();
-							String streetName = object.getName(settings.MAP_PREFERRED_LOCALE.get());
-							String ref = object.getRef();
-							if(Algorithms.isEmpty(streetName)) {
-								streetName = "";
-							}
-							if(!Algorithms.isEmpty(ref)) {
-								if(!Algorithms.isEmpty(streetName)) {
-									streetName += ", ";
+							String lang = settings.MAP_PREFERRED_LOCALE.get();
+							String geocodingResult = "";
+							if(object.building != null) {
+								geocodingResult = object.street.getName(lang) + ", " + object.building.getName(lang)+ ", " + object.city.getName(lang);
+							} else if(object.street != null) {
+								geocodingResult = object.street.getName(lang) + ", " + object.city.getName(lang);
+							} else if(object.city != null) {
+								geocodingResult = object.city.getName(lang);
+							} else if(object.point != null) {
+								RouteDataObject rd = object.point.getRoad();
+								String sname = rd.getName(lang);
+								if(Algorithms.isEmpty(sname)) {
+									sname = "";
 								}
-								streetName += ref;
+								String ref = rd.getRef();
+								if(!Algorithms.isEmpty(ref)) {
+									if(!Algorithms.isEmpty(sname)) {
+										sname += ", ";
+									}
+									sname += ref;
+								}
+								geocodingResult = sname;
 							}
-							streetStr = streetName;
+							
+							streetStr = geocodingResult;
 							if (!Algorithms.isEmpty(streetStr)) {
 								MenuController menuController = getMenuController();
 								if (menuController == null || menuController.displayStreetNameInTitle()) {

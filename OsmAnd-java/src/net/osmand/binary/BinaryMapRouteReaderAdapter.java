@@ -215,6 +215,7 @@ public class BinaryMapRouteReaderAdapter {
 		int destinationTypeRule = -1;
 		int destinationRefTypeRule = -1;
 		
+		
 		public RouteTypeRule quickGetEncodingRule(int id) {
 			return routeEncodingRules.get(id);
 		}
