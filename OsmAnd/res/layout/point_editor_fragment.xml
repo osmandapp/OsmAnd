@@ -137,6 +137,7 @@
                         android:textColor="?android:textColorPrimary"
                         android:textColorHint="?android:textColorSecondary"
                         android:text="Name"
+                        android:imeOptions="actionDone"
                         android:inputType="text"/>
 
 
