@@ -24,6 +24,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
@@ -44,6 +45,7 @@ public abstract class PointEditorFragment extends Fragment {
 
 	private View view;
 	private int mainViewHeight;
+	private EditText nameEdit;
 
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	@Override
@@ -103,7 +105,7 @@ public abstract class PointEditorFragment extends Fragment {
 		TextView categoryCaption = (TextView) view.findViewById(R.id.category_caption);
 		categoryCaption.setText(getCategoryCaption());
 
-		EditText nameEdit = (EditText) view.findViewById(R.id.name_edit);
+		nameEdit = (EditText) view.findViewById(R.id.name_edit);
 		nameEdit.setText(getNameInitValue());
 		AutoCompleteTextViewEx categoryEdit = (AutoCompleteTextViewEx) view.findViewById(R.id.category_edit);
 		categoryEdit.setText(getCategoryInitValue());
@@ -150,6 +152,16 @@ public abstract class PointEditorFragment extends Fragment {
 	public void onStart() {
 		super.onStart();
 		getMapActivity().getContextMenu().setBaseFragmentVisibility(false);
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		if (getEditor().isNew()) {
+			nameEdit.selectAll();
+			nameEdit.requestFocus();
+			AndroidUtils.softKeyboardDelayed(nameEdit);
+		}
 	}
 
 	@Override
@@ -233,11 +245,13 @@ public abstract class PointEditorFragment extends Fragment {
 
 	private void hideKeyboard() {
 		InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
-		View currentFocus =  getActivity().getCurrentFocus();
-		if (currentFocus != null) {
-			IBinder windowToken = currentFocus.getWindowToken();
-			if (windowToken != null) {
-				inputMethodManager.hideSoftInputFromWindow(windowToken, 0);
+		if (inputMethodManager != null) {
+			View currentFocus = getActivity().getCurrentFocus();
+			if (currentFocus != null) {
+				IBinder windowToken = currentFocus.getWindowToken();
+				if (windowToken != null) {
+					inputMethodManager.hideSoftInputFromWindow(windowToken, 0);
+				}
 			}
 		}
 	}

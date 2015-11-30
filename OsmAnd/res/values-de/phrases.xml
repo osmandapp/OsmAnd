@@ -1709,10 +1709,10 @@
 	<string name="poi_religion_multifaith">Mehrfachgläubig</string>
 	<string name="poi_religion_scientologist">Scientology</string>
 	<string name="poi_denomination_uniting">Vereinigung</string>
-	<string name="poi_denomination_congregational">Congregational</string>
+	<string name="poi_denomination_congregational">Kongregationalismus</string>
 	<string name="poi_denomination_ethiopian_orthodox_tewahedo">Äthiopisch-orthodoxe tewahedo-Kirche</string>
 	<string name="poi_denomination_unitarian">Unitarisch</string>
-	<string name="poi_denomination_wesleyan">Wesleyan</string>
+	<string name="poi_denomination_wesleyan">Wesleyaner</string>
 	<string name="poi_denomination_shingon_shu">Schule des wahren Wortes</string>
 	<string name="poi_denomination_mahayana">Mahayana</string>
 
@@ -2393,4 +2393,55 @@
 	<string name="poi_historic_period_roman_greece">Historisches Zeitalter: Römisch-griechisch (146 v. Chr - 330 n. Chr.)</string>
 	<string name="poi_historic_period_roman_kingdom">Historisches Zeitalter: Römische Königszeit (756 - 509 v. Chr.)</string>
 	<string name="poi_historic_period_dominate">Historisches Zeitalter: Dominat (285 - 476 n. Chr.)</string>
+	<string name="poi_historic_period_ptolemaic_egypt">Historisches Zeitalter: Ptolemäisches Königreich (305 - 30 v. Chr.)</string>
+	<string name="poi_historic_period_villager">Historisches Zeitalter: Spiedler (Epoche I, II, 1580 v. Chr. - 133 n. Chr.)</string>
+	<string name="poi_historic_period_urban">Historisches Zeitalter: städtisch (Epoche III, 133 - 374 n. Chr.)</string>
+	<string name="poi_historic_period_classical">Historisches Zeitalter: Klassik (Epache IV, 374 - 900 n. Chr.)</string>
+	<string name="poi_historic_period_imperial">"Historisches Zeitalter: Imperialismus  (Epoch V, 900 - 1200 n. Chr.)"</string>
+
+	<string name="poi_historic_era_paleolithic">Historische Epoche: Altsteinzeit (2,6 millionen Jahre - 10000 BP (vor heute))</string>
+	<string name="poi_historic_era_mesolithic">Historische Epoche: Mittelsteinzeit</string>
+	<string name="poi_historic_era_neolithic">Historische Epoche: Jungsteinzeit</string>
+	<string name="poi_historic_era_chalcolithic">Historische Epoche: Kupfersteinzeit (IV-III Jahrtausend v.Chr.)</string>
+
+	<string name="poi_stone_type_conciliation_cross">Typ: Steinkreuz</string>
+	<string name="poi_site_type_hut_circle">Typ: Hüttenkreis</string>
+	<string name="poi_site_type_petroglyph">Typ: Petroglyphe</string>
+	<string name="poi_megalith_type_nuraghe">Megalith-Typ: Nuraghe</string>
+	<string name="poi_megalith_type_stone_circle">Megalith-Typ: Steinkreis</string>
+	<string name="poi_megalith_type_passage_grave">Megalith-Typ: Ganggrab</string>
+	<string name="poi_summit_cross">Gipfelkreuz: Ja</string>
+
+	<string name="poi_conveying_yes">Vermittlung: Ja</string>
+
+	<string name="poi_wiki_lang_af">Afrikanisches Wiki</string>
+	<string name="poi_wiki_lang_az">Aserbaidschanisches Wiki</string>
+	<string name="poi_wiki_lang_bn">Bengalisches Wiki</string>
+	<string name="poi_wiki_lang_bpy">Bishnupriyaisches Wiki</string>
+	<string name="poi_wiki_lang_br">Bretonisches Wiki</string>
+	<string name="poi_wiki_lang_cy">Walisisches Wiki</string>
+	<string name="poi_wiki_lang_eo">Esperantoisches Wiki</string>
+	<string name="poi_wiki_lang_eu">baskisches Wiki</string>
+	<string name="poi_wiki_lang_fa">Farsisches Wiki</string>
+	<string name="poi_wiki_lang_ml">Malayalamisches Wiki</string>
+	<string name="poi_wiki_lang_mr">Marathisches Wiki</string>
+	<string name="poi_wiki_lang_nv">Navajoisches Wiki</string>
+	<string name="poi_wiki_lang_war">Warayisches Wiki</string>
+	<string name="poi_wiki_lang_min">Minangkabauisches Wiki</string>
+	<string name="poi_wiki_lang_zhminnan">Minnanisches Wiki</string>
+	<string name="poi_wiki_lang_mg">Malagasisches Wiki</string>
+	<string name="poi_wiki_lang_tt">Tatarisches Wiki</string>
+	<string name="poi_wiki_lang_ky">kirgisisches Wiki</string>
+	<string name="poi_wiki_lang_tg">Tadschikisches Wiki</string>
+	<string name="poi_wiki_lang_ba">baschkirisches Wiki</string>
+	<string name="poi_wiki_lang_sco">Schottisches Wiki</string>
+	<string name="poi_wiki_lang_pnb">Panjabisches Wiki</string>
+	<string name="poi_wiki_lang_cv">Tschuwaschisches Wiki</string>
+	<string name="poi_wiki_lang_my">Burmesisches Wiki</string>
+	<string name="poi_wiki_lang_yo">Yorubaisches Wiki</string>
+	<string name="poi_wiki_lang_an">Aragonesisches Wiki</string>
+	<string name="poi_wiki_lang_gu">Gujaratisches Wiki</string>
+	<string name="poi_wetland_palsa_bog">Palsamoor</string>
+	<string name="poi_payment_icsf_yes">IC gespeicherte Fährfahrkarten akzeptiert</string>
+	<string name="poi_payment_icsf_no">IC gespeicherte Fährfahrkarten nicht akzeptiert</string>
 	</resources>
