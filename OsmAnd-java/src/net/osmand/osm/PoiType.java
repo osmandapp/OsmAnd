@@ -18,7 +18,7 @@ public class PoiType extends AbstractPoiType {
 	private boolean text;
 	private boolean nameOnly;
 	private boolean relation;
-	private int order;
+	private int order = 90;
 
 
 	public PoiType(MapPoiTypes poiTypes, PoiCategory category, String name) {

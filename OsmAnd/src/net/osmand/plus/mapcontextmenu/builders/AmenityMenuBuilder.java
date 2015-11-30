@@ -23,7 +23,6 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
 
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
@@ -164,7 +163,8 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			boolean isWiki = false;
 			boolean isText = false;
 			boolean needLinks = !"population".equals(key);
-			int order = 0;
+			int poiTypeOrder = 0;
+			String poiTypeKeyName = "";
 
 			if (amenity.getType().isWiki()) {
 				if (!hasWiki) {
@@ -216,7 +216,8 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				AbstractPoiType pt = poiTypes.getAnyPoiAdditionalTypeByKey(key);
 				if (pt != null) {
 					PoiType pType = (PoiType) pt;
-					order = pType.getOrder();
+					poiTypeOrder = pType.getOrder();
+					poiTypeKeyName = pType.getKeyName();
 					if (pType.getParentType() != null && pType.getParentType() instanceof PoiType) {
 						icon = getRowIcon(view.getContext(), ((PoiType) pType.getParentType()).getOsmTag() + "_" + pType.getOsmTag().replace(':', '_') + "_" + pType.getOsmValue());
 					}
@@ -235,18 +236,27 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			}
 
 			if (isText && iconId == R.drawable.ic_action_note_dark) {
-				descriptions.add(new AmenityInfoRow(key, R.drawable.ic_action_note_dark, textPrefix, vl, 0, false, true, true, 0));
+				descriptions.add(new AmenityInfoRow(key, R.drawable.ic_action_note_dark, textPrefix,
+						vl, 0, false, true, true, 0, ""));
 			} else if (icon != null) {
-				infoRows.add(new AmenityInfoRow(key, icon, textPrefix, vl, textColor, isWiki, isText, needLinks, order));
+				infoRows.add(new AmenityInfoRow(key, icon, textPrefix, vl, textColor, isWiki, isText,
+						needLinks, poiTypeOrder, poiTypeKeyName));
 			} else {
-				infoRows.add(new AmenityInfoRow(key, iconId, textPrefix, vl, textColor, isWiki, isText, needLinks, order));
+				infoRows.add(new AmenityInfoRow(key, iconId, textPrefix, vl, textColor, isWiki, isText,
+						needLinks, poiTypeOrder, poiTypeKeyName));
 			}
 		}
 
 		Collections.sort(infoRows, new Comparator<AmenityInfoRow>() {
 			@Override
 			public int compare(AmenityInfoRow row1, AmenityInfoRow row2) {
-				return row1.order < row2.order ? -1 : (row1.order == row2.order ? 0 : 1);
+				if (row1.order < row2.order) {
+					return -1;
+				} else if (row1.order == row2.order) {
+					return row1.name.compareTo(row2.name);
+				} else {
+					return 1;
+				}
 			}
 		});
 
@@ -291,10 +301,12 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		private boolean isWiki;
 		private boolean isText;
 		private boolean needLinks;
-		private  int order;
+		private int order;
+		private String name;
 
 		public AmenityInfoRow(String key, Drawable icon, String textPrefix, String text,
-							  int textColor, boolean isWiki, boolean isText, boolean needLinks, int order) {
+							  int textColor, boolean isWiki, boolean isText, boolean needLinks,
+							  int order, String name) {
 			this.key = key;
 			this.icon = icon;
 			this.textPrefix = textPrefix;
@@ -304,10 +316,12 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			this.isText = isText;
 			this.needLinks = needLinks;
 			this.order = order;
+			this.name = name;
 		}
 
 		public AmenityInfoRow(String key, int iconId, String textPrefix, String text,
-							  int textColor, boolean isWiki, boolean isText, boolean needLinks, int order) {
+							  int textColor, boolean isWiki, boolean isText, boolean needLinks,
+							  int order, String name) {
 			this.key = key;
 			this.iconId = iconId;
 			this.textPrefix = textPrefix;
@@ -317,6 +331,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			this.isText = isText;
 			this.needLinks = needLinks;
 			this.order = order;
+			this.name = name;
 		}
 	}
 }
