@@ -702,7 +702,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 				menuFullHeight = view.findViewById(R.id.context_menu_main).getHeight();
 
 				int dy = 0;
-				if (!menu.isLandscapeLayout() && menuTopViewHeight != 0) {
+				if (!menu.isLandscapeLayout() && menuTopViewHeight != 0 && menu.getCurrentMenuState() == MenuState.HEADER_ONLY) {
 					dy = Math.max(0, newMenuTopViewHeight - menuTopViewHeight);
 				}
 				menuTopViewHeight = newMenuTopViewHeight;
