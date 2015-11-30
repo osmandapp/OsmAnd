@@ -1871,4 +1871,6 @@
 	<string name="poi_architecture_classicism">Arquitetura: classicismo</string>
 	<string name="poi_architecture_gothic">Arquitetura: gótica</string>
 	<string name="poi_architecture_oldrussian">Arquitetura: russa antiga</string>
+	<string name="poi_architecture_baroque">Arquitetura: barroca</string>
+	<string name="poi_architecture_postconstructivism">Arquitetura: pós-construtivismo</string>
 	</resources>
