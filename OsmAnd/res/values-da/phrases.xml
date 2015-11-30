@@ -2517,4 +2517,26 @@
 
 <string name="poi_internet_access_type_yes">Med internetadgang</string>
 
+	<string name="poi_health_specialty_general_yes">Sundhedsspeciale: alment praktiserende læge</string>
+	<string name="poi_health_specialty_ophthalmology_yes">Sundhedsspeciale: oftalmologi</string>
+	<string name="poi_health_specialty_gynaecology_yes">Sundhedsspeciale: gynækologi</string>
+	<string name="poi_health_specialty_internal_medicine_yes">Sundhedsspeciale: intern medicin</string>
+	<string name="poi_health_specialty_orthopaedics_yes">Sundhedsspeciale: ortopædi</string>
+	<string name="poi_health_specialty_otolaryngology_yes">oto-rhino-laryngolog: oto-rhino-laryngolog</string>
+	<string name="poi_health_specialty_paediatrics_yes">Sundhedsspeciale: Pædiatri</string>
+	<string name="poi_health_specialty_paediatrics_no">Sundhedsspeciale: pædiatri: nej</string>
+	<string name="poi_health_specialty_dermatology_yes">Sundhedsspeciale: dermatologi</string>
+	<string name="poi_health_specialty_urology_yes">Sundhedsspeciale: Urologi</string>
+	<string name="poi_health_specialty_surgery_yes">Sundhedsspeciale: almen kirurgi</string>
+	<string name="poi_health_specialty_radiology_yes">Sundhedsspeciale: radiologi</string>
+	<string name="poi_health_specialty_psychiatry_yes">Sundhedsspeciale: psykiatri</string>
+	<string name="poi_health_specialty_neurology_yes">Sundhedsspeciale: neurologi</string>
+	<string name="poi_health_specialty_dermatovenereology_yes">Sundhedsspeciale: dermato-venerologi</string>
+	<string name="poi_health_specialty_cardiology_yes">Sundhedsspeciale: kardiologi</string>
+	<string name="poi_health_specialty_trauma_yes">Sundhedsspeciale: traumatologi</string>
+	<string name="poi_health_specialty_biology_yes">Sundhedsspeciale: klinisk biologi</string>
+	<string name="poi_health_specialty_osteopathy_yes">Sundhedsspeciale: osteopati</string>
+	<string name="poi_health_specialty_anaesthetics_yes">Sundhedsspeciale: anæstetika</string>
+	<string name="poi_health_specialty_pulmonology_yes">Sundhedsspeciale: respiratory medicine</string>
+	<string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Sundhedsspeciale: tand-, mund- og kæbe ansigtskirurgi</string>
 	</resources>
