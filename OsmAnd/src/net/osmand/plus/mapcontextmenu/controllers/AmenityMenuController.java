@@ -99,6 +99,5 @@ public class AmenityMenuController extends MenuController {
 			}
 			addPlainMenuItem(resId, typeStr, false);
 		}
-		addMyLocationToPlainItems(pointDescription, amenity.getLocation());
 	}
 }

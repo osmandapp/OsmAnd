@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.osmand.data.Amenity;
+import net.osmand.data.PointDescription;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiType;
@@ -281,6 +282,10 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		for (AmenityInfoRow info : descriptions) {
 			buildAmenityRow(view, info);
 		}
+
+		buildRow(view, R.drawable.ic_action_get_my_location, PointDescription.getLocationName(app,
+				amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(), true)
+				.replaceAll("\n", ""), 0, false, 0);
 	}
 
 	public void buildAmenityRow(View view, AmenityInfoRow info) {
