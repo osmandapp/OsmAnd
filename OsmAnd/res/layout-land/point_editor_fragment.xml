@@ -142,6 +142,7 @@
                                 android:layout_marginLeft="8dp"
                                 android:textColor="?android:textColorPrimary"
                                 android:textColorHint="?android:textColorSecondary"
+                                android:imeOptions="actionDone"
                                 android:inputType="text"/>
 
 
