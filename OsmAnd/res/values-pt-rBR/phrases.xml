@@ -526,7 +526,7 @@
 	<string name="poi_religion_shinto">Xintoísmo</string>
 	<string name="poi_religion_taoist">Taoísmo</string>
 
-	<string name="poi_internet_access_wlan">Acesso à Internet: wlan</string>
+	<string name="poi_internet_access_wlan">Acesso à Internet: wifi</string>
 	<string name="poi_internet_access_terminal">Acesso à Internet: terminal</string>
 	<string name="poi_internet_access_wired">Acesso à Internet: com fio</string>
 	<string name="poi_internet_access_public">Acesso à Internet: público</string>
@@ -1746,7 +1746,7 @@
 	<string name="poi_resource_lignite">Linhite</string>
 	<string name="poi_resource_limestone">Pedra calcária</string>
 	<string name="poi_resource_marble">Mármore</string>
-	<string name="poi_resource_mercury"/>
+	<string name="poi_resource_mercury">Mercúrio</string>
 	<string name="poi_resource_mica">Mica</string>
 	<string name="poi_resource_mineral_oil">Óleo mineral</string>
 	<string name="poi_resource_nickel">Níquel</string>
@@ -1790,4 +1790,87 @@
 	<string name="poi_shelter_type_public_transport">Tipo de abrigo: transporte público</string>
 	<string name="poi_shelter_type_picnic_shelter">Tipo de abrigo: abrigo de piquenique</string>
 	<string name="poi_shelter_type_weather_shelter">Tipo de abrigo: abrigo do tempo</string>
+	<string name="poi_piste_grooming_scooter">Pista de preparação: scooter</string>
+	<string name="poi_piste_grooming_skating">Pista de preparação: skating</string>
+	<string name="poi_piste_grooming_no">Pista de preparação: não</string>
+	<string name="poi_piste_grooming_mogul">Pista de preparação: mogul</string>
+
+	<string name="poi_aerialway_bubble_yes">Bolha</string>
+	<string name="poi_aerialway_bubble_no">Sem bolha</string>
+	<string name="poi_vending_bicycle_tube">Tubos para bicicletas</string>
+	<string name="poi_branch">Seção</string>
+
+	<string name="poi_memorial_cross">Cruzeiro</string>
+	<string name="poi_wetland_tidalflat">Planície de maré</string>
+	<string name="poi_wetland_saltmarsh">Pântano salgado</string>
+	<string name="poi_wetland_mangrove">Mangue</string>
+	<string name="poi_wetland_string_bog">Cadeia de pântanos</string>
+	<string name="poi_wetland_fen">Pântano subeterrâneo</string>
+	<string name="poi_wetland_palsa_bog">Pântano palsa</string>
+	<string name="poi_wetland_mud">Lama</string>
+
+	<string name="poi_beach_sand">Tipo de praia: areia</string>
+	<string name="poi_beach_shingle">Tipo de praia: cascalho</string>
+	<string name="poi_beach_rocky">Tipo de praia: rocha</string>
+
+	<string name="poi_flagpole">Mastro de bandeira</string>
+
+	<string name="poi_shelter_type_lean_to">Tipo de abrigo: alpendre</string>
+	<string name="poi_shelter_type_basic_hut">Tipo de abrigo: cabana básica</string>
+	<string name="poi_shelter_type_building">Tipo de abrigo: edifício</string>
+	<string name="poi_shelter_type_wildlife_hide">Tipo de abrigo: esconderijo para animais selvagens</string>
+	<string name="poi_shelter_type_rock_shelter">Tipo de abrigo: rocha</string>
+	<string name="poi_shelter_type_sun_shelter">Tipo de abrigo: abrigo do sol</string>
+	<string name="poi_shelter_type_field_shelter">Tipo de abrigo: abrigo de campo</string>
+	<string name="poi_shelter_type_tent">Tipo de abrigo: tenda</string>
+	<string name="poi_shelter_type_abandoned">Tipo de abrigo: abandonado</string>
+
+	<string name="poi_internet_access_type_wlan">Tipo de acesso à Internet: wifi</string>
+	<string name="poi_internet_access_type_terminal">Tipo de acesso à Internet: terminal</string>
+	<string name="poi_internet_access_type_wired">Tipo de acesso à Internet: cabo</string>
+	<string name="poi_internet_access_type_public">Tipo de acesso à Internet: público</string>
+	<string name="poi_internet_access_type_service">Tipo de acesso à Internet: serviço</string>
+	<string name="poi_internet_access_type_no">Sem acesso à Internet</string>
+	<string name="poi_internet_access_type_yes">Com acesso à Internet</string>
+
+	<string name="poi_maxwidth">Largura máxima</string>
+	<string name="poi_iata">Código IATA</string>
+	<string name="poi_icao">Código ICAO</string>
+	<string name="poi_faa">Código FAA</string>
+	
+	<string name="poi_artwork_type_sculpture">Tipo de obra de arte: escultura</string>
+	<string name="poi_artwork_type_statue">Tipo de obra de arte: estátua</string>
+	<string name="poi_artwork_type_mural">Tipo de obra de arte: mural</string>
+	<string name="poi_artwork_type_architecture">Tipo de obra de arte: arquitetura</string>
+	<string name="poi_artwork_type_painting">Tipo de obra de arte: pintura</string>
+	<string name="poi_artwork_type_stone">Tipo de obra de arte: pedra</string>
+	<string name="poi_artwork_type_bust">Tipo de obra de arte: busto</string>
+	<string name="poi_artwork_type_installation">Tipo de obra de arte: instalação</string>
+	<string name="poi_artwork_type_mosaic">Tipo de obra de arte: mosaico</string>
+	<string name="poi_artwork_type_relief">Tipo de obra de arte: relevo</string>
+	<string name="poi_artwork_type_graffiti">Tipo de obra de arte: grafite</string>
+	<string name="poi_artwork_type_stele">Tipo de obra de arte: estela</string>
+	<string name="poi_artwork_type_fountain">Tipo de obra de arte: fonte</string>
+
+	<string name="poi_width">Largura</string>
+
+	<string name="poi_architect_name">Arquiteto</string>
+
+	<string name="poi_architecture_modern">Arquitetura: moderna</string>
+	<string name="poi_architecture_stalinist_neoclassicism">Arquitetura: neoclassicismo stalinista</string>
+	<string name="poi_architecture_eclectic">Arquitetura: eclética</string>
+	<string name="poi_architecture_new_objectivity">Arquitetura: nova objetividade</string>
+	<string name="poi_architecture_contemporary">Arquitetura: contemporâneo</string>
+	<string name="poi_architecture_constructivism">Arquitetura: construtivismo</string>
+	<string name="poi_architecture_umgebinde">Arquitetura: umgebinde</string>
+	<string name="poi_architecture_timber_frame">Arquitetura: enxaimel</string>
+	<string name="poi_architecture_art_nouveau">Arquitetura: art nouveau</string>
+	<string name="poi_architecture_neoclassicism">Arquitetura: neoclassicismo</string>
+	<string name="poi_architecture_victorian">Arquitetura: vitoriana</string>
+	<string name="poi_architecture_brutalism">Arquitetura: brutalista</string>
+	<string name="poi_architecture_classicism">Arquitetura: classicismo</string>
+	<string name="poi_architecture_gothic">Arquitetura: gótica</string>
+	<string name="poi_architecture_oldrussian">Arquitetura: russa antiga</string>
+	<string name="poi_architecture_baroque">Arquitetura: barroca</string>
+	<string name="poi_architecture_postconstructivism">Arquitetura: pós-construtivismo</string>
 	</resources>
