@@ -10,9 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 
 import java.util.Calendar;
@@ -34,7 +35,11 @@ public class RateUsBottomSheetDialog extends BottomSheetDialogFragment {
 		return view;
 	}
 
-	public static boolean shouldShow(OsmandSettings settings) {
+	public static boolean shouldShow(OsmandApplication app) {
+		if(!Version.isMarketEnabled(app)) {
+			return false;
+		}
+		OsmandSettings settings = app.getSettings();
 		if(!settings.LAST_DISPLAY_TIME.isSet()) {
 			settings.LAST_DISPLAY_TIME.set(System.currentTimeMillis());
 		}
