@@ -88,12 +88,6 @@ android {
 	flavorDimensions "version", "coreversion", "abi"
 	productFlavors {
 		// ABI
-		armv8 {
-			flavorDimension "abi"
-			ndk {
-				abiFilter "arm64-v8a"
-			}
-		}
 		armv7 {
 			flavorDimension "abi"
 			ndk {
@@ -110,12 +104,6 @@ android {
 			flavorDimension "abi"
 			ndk {
 				abiFilter "x86"
-			}
-		}
-		x64 {
-			flavorDimension "abi"
-			ndk {
-				abiFilter "x86_64"
 			}
 		}
 		mips {

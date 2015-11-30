@@ -13,23 +13,16 @@ endif
 
 APP_ABI :=
 ifneq ($(filter x86,$(OSMAND_ARCHITECTURES_SET)),)
-    APP_ABI += x86 x86_64
-else
-    ifneq ($(filter x64,$(OSMAND_ARCHITECTURES_SET)),)
-        APP_ABI += x86_64
-    endif
+    APP_ABI += x86
 endif
 ifneq ($(filter mips,$(OSMAND_ARCHITECTURES_SET)),)
     APP_ABI += mips
 endif
 ifneq ($(filter arm,$(OSMAND_ARCHITECTURES_SET)),)
-    APP_ABI += armeabi armeabi-v7a arm64-v8a
+    APP_ABI += armeabi armeabi-v7a
 else
     ifneq ($(filter armv7,$(OSMAND_ARCHITECTURES_SET)),)
         APP_ABI += armeabi-v7a
-    endif
-    ifneq ($(filter armv8,$(OSMAND_ARCHITECTURES_SET)),)
-        APP_ABI += arm64-v8a
     endif
 endif
     
