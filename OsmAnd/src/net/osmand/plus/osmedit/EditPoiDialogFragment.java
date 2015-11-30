@@ -334,7 +334,7 @@ public class EditPoiDialogFragment extends DialogFragment {
 		Node original = editPoiData.getEntity();
 		final boolean offlineEdit = mOpenstreetmapUtil instanceof OpenstreetmapLocalUtil;
 		Node node = new Node(original.getLatitude(), original.getLongitude(), original.getId());
-		OsmPoint.Action action = node.getId() == -1 ? OsmPoint.Action.CREATE : OsmPoint.Action.MODIFY;
+		OsmPoint.Action action = node.getId() < 0 ? OsmPoint.Action.CREATE : OsmPoint.Action.MODIFY;
 		for (Map.Entry<String, String> tag : editPoiData.getTagValues().entrySet()) {
 			if (tag.getKey().equals(EditPoiData.POI_TYPE_TAG)) {
 				final PoiType poiType = editPoiData.getAllTranslatedSubTypes().get(tag.getValue().trim().toLowerCase());
