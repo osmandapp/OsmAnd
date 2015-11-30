@@ -1,6 +1,5 @@
 package net.osmand.plus.dialogs;
 
-import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,8 +10,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 
 import java.util.Calendar;
@@ -34,7 +35,11 @@ public class RateUsBottomSheetDialog extends BottomSheetDialogFragment {
 		return view;
 	}
 
-	public static boolean shouldShow(OsmandSettings settings) {
+	public static boolean shouldShow(OsmandApplication application) {
+		if (Version.isMarketEnabled(application)) {
+			return false;
+		}
+		OsmandSettings settings = application.getSettings();
 		if(!settings.LAST_DISPLAY_TIME.isSet()) {
 			settings.LAST_DISPLAY_TIME.set(System.currentTimeMillis());
 		}
@@ -110,16 +115,9 @@ public class RateUsBottomSheetDialog extends BottomSheetDialogFragment {
 					return;
 				case USER_LIKES_APP:
 					settings.RATE_US_STATE.set(RateUsBottomSheetDialog.RateUsState.LIKED);
-					// Assuming GooglePlay
-					Uri uri = Uri.parse("market://details?id=" + getActivity().getPackageName());
+					Uri uri = Uri.parse(Version.marketPrefix(getMyApplication()) + getActivity().getPackageName());
 					Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
-					try {
-						startActivity(goToMarket);
-					} catch (ActivityNotFoundException e) {
-						startActivity(new Intent(Intent.ACTION_VIEW,
-								Uri.parse("http://play.google.com/store/apps/details?id="
-										+ getActivity().getPackageName())));
-					}
+					startActivity(goToMarket);
 					break;
 				case USER_DISLIKES_APP:
 					String email = getString(R.string.support_email);

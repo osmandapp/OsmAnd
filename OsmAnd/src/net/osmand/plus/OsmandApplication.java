@@ -177,7 +177,7 @@ public class OsmandApplication extends MultiDexApplication {
 		if (routingHelper != null) {
 			routingHelper.getVoiceRouter().onApplicationTerminate();
 		}
-        if(RateUsBottomSheetDialog.shouldShow(osmandSettings)) {
+        if(RateUsBottomSheetDialog.shouldShow(this)) {
             osmandSettings.RATE_US_STATE.set(RateUsBottomSheetDialog.RateUsState.IGNORED);
         }
         getNotificationHelper().removeServiceNotification();
