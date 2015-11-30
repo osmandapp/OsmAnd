@@ -133,14 +133,12 @@ public abstract class MenuController extends BaseMenuController {
 	}
 
 	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, LatLon latLon) {
-		addMyLocationToPlainItems(pointDescription, latLon);
+		addMyLocationToPlainItems(latLon);
 	}
 
-	protected void addMyLocationToPlainItems(PointDescription pointDescription, LatLon latLon) {
-		if (pointDescription != null) {
-			addPlainMenuItem(R.drawable.ic_action_get_my_location, PointDescription.getLocationName(getMapActivity(),
-					latLon.getLatitude(), latLon.getLongitude(), true).replaceAll("\n", ""), false);
-		}
+	protected void addMyLocationToPlainItems(LatLon latLon) {
+		addPlainMenuItem(R.drawable.ic_action_get_my_location, PointDescription.getLocationName(getMapActivity(),
+				latLon.getLatitude(), latLon.getLongitude(), true).replaceAll("\n", ""), false);
 	}
 
 	public PointDescription getPointDescription() {
