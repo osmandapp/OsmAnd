@@ -1752,4 +1752,42 @@
 	<string name="poi_resource_nickel">Níquel</string>
 	<string name="poi_resource_oil">Petróleo</string>
 	<string name="poi_resource_opal">Opala</string>
+	<string name="poi_resource_peat">Turfa</string>
+	<string name="poi_resource_platinum">Platina</string>
+	<string name="poi_resource_radium">Rádio</string>
+	<string name="poi_resource_ruby">Rubi</string>
+	<string name="poi_resource_rutile">Rutilo</string>
+	<string name="poi_resource_salt">Sal</string>
+	<string name="poi_resource_sand">Areia</string>
+	<string name="poi_resource_sandstone">Arenito</string>
+	<string name="poi_resource_silica">Sílica</string>
+	<string name="poi_resource_silver">Prata</string>
+	<string name="poi_resource_slate_iron_ore_copper">Ardósia; minério de ferro; cobre</string>
+	<string name="poi_resource_slate">Ardósia</string>
+	<string name="poi_resource_stone">Pedra</string>
+	<string name="poi_resource_tin">Estanho</string>
+	<string name="poi_resource_tuff">Tufa</string>
+	<string name="poi_resource_uranium">Urânio</string>
+	<string name="poi_resource_vanadium">Vanádio</string>
+	<string name="poi_resource_water">Água</string>
+	<string name="poi_resource_zinc">Zinco</string>
+	<string name="poi_resource_zircon">Zircão</string>
+
+	<string name="poi_wetland_wet_meadow">Prado úmido</string>
+	<string name="poi_wetland_bog">Pântano</string>
+	<string name="poi_wetland_marsh">Charco</string>
+	<string name="poi_wetland_reedbed">Canavial</string>
+	<string name="poi_wetland_swamp">Brejo</string>
+	<string name="poi_wetland_saltern">Salina</string>
+	<string name="poi_chimney">Chaminé</string>
+	<string name="poi_palm">Palmeira</string>
+	<string name="poi_cypress">Cipreste</string>
+	<string name="poi_bench_yes">Com assento</string>
+	<string name="poi_bench_no">Sem assento</string>
+	<string name="poi_waste_basket_yes">Com lixeira</string>
+	<string name="poi_waste_basket_no">Sem lixeira</string>
+
+	<string name="poi_shelter_type_public_transport">Tipo de abrigo: transporte público</string>
+	<string name="poi_shelter_type_picnic_shelter">Tipo de abrigo: abrigo de piquenique</string>
+	<string name="poi_shelter_type_weather_shelter">Tipo de abrigo: abrigo do tempo</string>
 	</resources>
