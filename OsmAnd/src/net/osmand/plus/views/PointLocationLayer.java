@@ -1,7 +1,13 @@
 package net.osmand.plus.views;
 
 
-import java.util.List;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Paint.Style;
+import android.graphics.PointF;
+import android.graphics.RectF;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
@@ -15,13 +21,7 @@ import net.osmand.plus.base.MapViewTrackingUtilities;
 
 import org.apache.commons.logging.Log;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.Paint.Style;
-import android.graphics.PointF;
-import android.graphics.RectF;
+import java.util.List;
 
 public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {
 	private static final Log LOG = PlatformUtil.getLog(PointLocationLayer.class);
