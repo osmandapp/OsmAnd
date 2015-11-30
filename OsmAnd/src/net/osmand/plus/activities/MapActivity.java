@@ -399,7 +399,7 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents {
 				} else {
 					if (ErrorBottomSheetDialog.shouldShow(settings, this)) {
 						new ErrorBottomSheetDialog().show(getSupportFragmentManager(), "dialog");
-					} else if (RateUsBottomSheetDialog.shouldShow(settings)) {
+					} else if (RateUsBottomSheetDialog.shouldShow(app)) {
 						new RateUsBottomSheetDialog().show(getSupportFragmentManager(), "dialog");
 					}
 				}

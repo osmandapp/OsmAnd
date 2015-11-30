@@ -1873,4 +1873,67 @@
 	<string name="poi_architecture_oldrussian">Arquitetura: russa antiga</string>
 	<string name="poi_architecture_baroque">Arquitetura: barroca</string>
 	<string name="poi_architecture_postconstructivism">Arquitetura: pós-construtivismo</string>
+	<string name="poi_architecture_wilhelminian_style">Arquitetura: estilo guilhermina</string>
+	<string name="poi_architecture_renaissance">Arquitetura: renascentista</string>
+	<string name="poi_architecture_romanesque">Arquitetura: românica</string>
+
+	<string name="poi_tunnel_waterway">Túnel fluvial</string>
+	<string name="poi_tunnel_car">Túnel rodoviário</string>
+	<string name="poi_tunnel_pedestrian">Túnel para pedestre</string>
+	<string name="poi_tunnel_railway">Túnel ferroviário</string>
+	<string name="poi_bridge_car">Ponte rodoviária</string>
+	<string name="poi_bridge_pedestrian">Ponte para pedestre</string>
+	<string name="poi_bridge_bicycle">Ponte para ciclista</string>
+	<string name="poi_bridge_railway">Ponte ferroviária</string>
+	<string name="poi_bridge_waterway">Ponte fluvial</string>
+	<string name="poi_bridge_structure_beam">Estrutura de ponte: viga</string>
+	<string name="poi_bridge_structure_simple_suspension">Estrutura de ponte: suspensão simples</string>
+	<string name="poi_bridge_structure_suspension">Estrutura de ponte: suspensão</string>
+	<string name="poi_bridge_structure_arch">Estrutura de ponte: arco</string>
+	<string name="poi_bridge_structure_truss">Estrutura de ponte: treliça</string>
+	<string name="poi_bridge_structure_floating">Estrutura de ponte: flutuante</string>
+	<string name="poi_bridge_structure_humpback">Estrutura de ponte: corcunda</string>
+	<string name="poi_bridge_structure_cable_stayed">Estrutura de ponte: estaiada</string>
+	<string name="poi_bridge_structure_boardwalk">Estrutura de ponte: passarela</string>
+	<string name="poi_bridge_structure_simple_wooden">Estrutura de ponte: madeira simples</string>
+	<string name="poi_bridge_structure_viaduct">Estrutura de ponte: viaduto</string>
+	<string name="poi_bridge_structure_aqueduct">Estrutura de ponte: aqueduto</string>
+	<string name="poi_bridge_structure_log">Estrutura de ponte: tronco</string>
+	<string name="poi_bridge_type_movable">Tipo de ponte: móvel</string>
+	<string name="poi_bridge_movable_bascule">Tipo de ponte móvel: basculante</string>
+	<string name="poi_bridge_movable_swing">Tipo de ponte móvel: giratória</string>
+	<string name="poi_bridge_movable_lift">Tipo de ponte móvel: elevatória</string>
+	<string name="poi_bridge_movable_drawbridge">Tipo de ponte móvel: ponte levadiça</string>
+	<string name="poi_bridge_movable_submersible">Tipo de ponte móvel: submersível</string>
+	<string name="poi_bridge_movable_transporter">Tipo de ponte móvel: transportadora</string>
+	<string name="poi_bridge_movable_retractable">Tipo de ponte móvel: retrátil</string>
+
+	<string name="poi_lit_yes">Iluminado: sim</string>
+	<string name="poi_lit_no">Iluminado: não</string>
+
+	<string name="poi_surface_unpaved">Superfície: não pavimentada</string>
+	<string name="poi_surface_paved">Superfície: pavimentada</string>
+	<string name="poi_surface_asphalt">Superfície: asfalto</string>
+	<string name="poi_surface_concrete">Superfície: concreto</string>
+	<string name="poi_surface_sett">Superfície: paralelepípedo</string>
+	<string name="poi_surface_cobblestone">Superfície: piso de seixos</string>
+	<string name="poi_surface_paving_stones">Superfície: piso intertravado</string>
+	<string name="poi_surface_pebblestone">Superfície: cascalho</string>
+	<string name="poi_surface_stone">Superfície: pedra</string>
+	<string name="poi_surface_metal">Superfície: metal</string>
+	<string name="poi_surface_wood">Superfície: madeira</string>
+	<string name="poi_surface_gravel">Superfície: brita</string>
+	<string name="poi_surface_fine_gravel">Superfície: brita fina</string>
+	<string name="poi_surface_compacted">Superfície: solo compactado</string>
+	<string name="poi_surface_sand">Superfície: areia</string>
+	<string name="poi_surface_grass">Superfície: grama</string>
+	<string name="poi_surface_grass_paver">Superfície: piso grama</string>
+	<string name="poi_surface_ground">Superfície: chão</string>
+	<string name="poi_surface_dirt">Superfície: solo</string>
+	<string name="poi_surface_mud">Superfície: lama</string>
+	<string name="poi_surface_ice">Superfície: gelo</string>
+	<string name="poi_surface_salt">Superfície: sal</string>
+	<string name="poi_surface_snow">Superfície: neve</string>
+
+	<string name="poi_route_bus_ref">Ônibus</string>
 	</resources>
