@@ -2409,7 +2409,7 @@
 	<string name="poi_sculptor">Billedhugger</string>
 
 	<string name="poi_cross">Kors</string>
-	<string name="poi_summit_cross">Topkors: ja</string>
+	<string name="poi_summit_cross">Kors på toppen: ja</string>
 
 	<string name="poi_prison_camp">Tidligere fangelejr</string>
 	<string name="poi_concentration_camp">Type: koncentrationslejr</string>
@@ -2429,7 +2429,7 @@
 	<string name="poi_boat_storage">Bådopbevaring</string>
 
 
-<string name="poi_conveying_yes">Flytning: ja</string>
+<string name="poi_conveying_yes">Transportør: ja</string>
 
 
 <string name="poi_bridge_ref">Bro ref</string>
@@ -2523,10 +2523,10 @@
 	<string name="poi_health_specialty_internal_medicine_yes">Sundhedsspeciale: intern medicin</string>
 	<string name="poi_health_specialty_orthopaedics_yes">Sundhedsspeciale: ortopædi</string>
 	<string name="poi_health_specialty_otolaryngology_yes">oto-rhino-laryngolog: oto-rhino-laryngolog</string>
-	<string name="poi_health_specialty_paediatrics_yes">Sundhedsspeciale: Pædiatri</string>
+	<string name="poi_health_specialty_paediatrics_yes">Sundhedsspeciale: pædiatri</string>
 	<string name="poi_health_specialty_paediatrics_no">Sundhedsspeciale: pædiatri: nej</string>
 	<string name="poi_health_specialty_dermatology_yes">Sundhedsspeciale: dermatologi</string>
-	<string name="poi_health_specialty_urology_yes">Sundhedsspeciale: Urologi</string>
+	<string name="poi_health_specialty_urology_yes">Sundhedsspeciale: urologi</string>
 	<string name="poi_health_specialty_surgery_yes">Sundhedsspeciale: almen kirurgi</string>
 	<string name="poi_health_specialty_radiology_yes">Sundhedsspeciale: radiologi</string>
 	<string name="poi_health_specialty_psychiatry_yes">Sundhedsspeciale: psykiatri</string>
@@ -2543,7 +2543,7 @@
 	<string name="poi_health_specialty_emergency_medicine_yes">Sundhedsspeciale: ulykkes- og katastrofemedicin</string>
 	<string name="poi_health_specialty_emergency_medicine_no">Sundhedsspeciale: ulykkes- og katastrofemedicin: nej</string>
 	<string name="poi_health_specialty_plastic_surgery_yes">Sundhedsspeciale: plastikkirurgi</string>
-	<string name="poi_health_specialty_orthodontics_yes">Sundhedsspeciale: Ortodonti</string>
+	<string name="poi_health_specialty_orthodontics_yes">Sundhedsspeciale: ortodonti</string>
 	<string name="poi_health_specialty_physiotherapy_yes">Sundhedsspeciale: fysioterapi</string>
 	<string name="poi_health_specialty_biochemistry_yes">Sundhedsspeciale: biokemi</string>
 	<string name="poi_health_specialty_occupational_yes">Sundhedsspeciale: ergoterapi</string>
