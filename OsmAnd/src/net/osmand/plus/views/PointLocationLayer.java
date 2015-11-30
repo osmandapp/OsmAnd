@@ -1,13 +1,7 @@
 package net.osmand.plus.views;
 
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.Paint.Style;
-import android.graphics.PointF;
-import android.graphics.RectF;
+import java.util.List;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
@@ -21,7 +15,13 @@ import net.osmand.plus.base.MapViewTrackingUtilities;
 
 import org.apache.commons.logging.Log;
 
-import java.util.List;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Paint.Style;
+import android.graphics.PointF;
+import android.graphics.RectF;
 
 public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {
 	private static final Log LOG = PlatformUtil.getLog(PointLocationLayer.class);
@@ -68,7 +68,7 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 		headingPaint.setAntiAlias(true);
 		headingPaint.setStyle(Style.FILL);
 		
-		checkAppMode(view.getSettings().getApplicationMode(), false, false);
+		updateIcons(view.getSettings().getApplicationMode(), false);
 		locationProvider = view.getApplication().getLocationProvider();
 	}
 	
@@ -92,14 +92,7 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 		}
 		// draw
 		boolean nm = nightMode != null && nightMode.isNightMode();
-		boolean shouldForceUpdate = false;
-		if(nm != this.nm) {
-			this.nm = nm;
-			area.setColor(view.getResources().getColor(!nm?R.color.pos_area : R.color.pos_area_night));
-			headingPaint.setColor(view.getResources().getColor(!nm?R.color.pos_heading :R.color.pos_heading_night));
-			shouldForceUpdate = true;
-		}
-		checkAppMode(view.getSettings().getApplicationMode(), nm, shouldForceUpdate);
+		updateIcons(view.getSettings().getApplicationMode(), nm);
 		Location lastKnownLocation = locationProvider.getLastKnownLocation();
 		if(lastKnownLocation == null || view == null){
 			return;
@@ -146,10 +139,10 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 	public void destroyLayer() {
 		
 	}
-	public void checkAppMode(ApplicationMode appMode, boolean nighMode, boolean force) {
-		if (appMode != this.appMode || force) {
+	public void updateIcons(ApplicationMode appMode, boolean nighMode) {
+		if (appMode != this.appMode || this.nm != nighMode) {
 			this.appMode = appMode;
-
+			this.nm = nighMode;
 			final int resourceBearingDay = appMode.getResourceBearingDay();
 			final int resourceBearingNight = appMode.getResourceBearingNight();
 			final int resourceBearing = nighMode ? resourceBearingNight : resourceBearingDay;
@@ -159,6 +152,8 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 			final int resourceLocationNight = appMode.getResourceLocationNight();
 			final int resourceLocation = nighMode ? resourceLocationNight : resourceLocationDay;
 			locationIcon = BitmapFactory.decodeResource(view.getResources(), resourceLocation);
+			area.setColor(view.getResources().getColor(!nm ? R.color.pos_area : R.color.pos_area_night));
+			headingPaint.setColor(view.getResources().getColor(!nm ? R.color.pos_heading : R.color.pos_heading_night));
 		}
 		
 	}
