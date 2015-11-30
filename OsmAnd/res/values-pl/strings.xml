@@ -747,7 +747,7 @@
   <string name="use_fluorescent_overlays">Odblaskowe nakładki</string>
   <string name="use_fluorescent_overlays_descr">Użyj odblaskowych kolorów do wyświetlania ścieżek i tras</string>
   <string name="offline_edition">Edycja w trybie offline</string>
-  <string name="offline_edition_descr">Zawsze edytuj w trybie offline</string>
+  <string name="offline_edition_descr">Zawsze wprowadza modyfikacje w trybie offline</string>
   
   <string name="local_openstreetmap_uploading">Wysyłanie…</string>
   <string name="local_openstreetmap_were_uploaded">Wysłano {0} POI/notatek</string>
@@ -765,7 +765,7 @@
   <string name="live_monitoring_url_descr">Określa adres usługi internetowej przy użyciu następujących parametrów: szerokość={0}, długość={1}, znacznik czasu={2}, hdop={3}, wysokość={4}, prędkość={5}, kierunek={6}</string>
   <string name="live_monitoring_url">Adres usługi śledzenia</string>
   <string name="gpx_monitoring_disabled_warn">Zapisuj trasę używając widżetu GPX lub ustawienia „Nagrywanie trasy”.</string>
-  <string name="show_current_gpx_title">Wyświetlanie aktualnego śladu</string>
+  <string name="show_current_gpx_title">Aktualny ślad</string>
   
   <string name="free_version_message">Ta darmowa wersja OsmAnd jest ograniczona do %1$s pobrań i nie obsługuje artykułów Wikipedii w trybie offline.</string>
   <string name="free_version_title">Wersja darmowa</string>
@@ -926,19 +926,19 @@
     <string name="map_widget_monitoring_services">Usługi rejestrowania</string>
 	<string name="no_route">Brak trasy</string>
 	<string name="delete_target_point">Usuwanie punktu nawigacyjnego</string>
-	<string name="target_point">Punkt nawigacyjny %1$s</string>
-    <string name="intermediate_point">Punkt nawigacyjny %1$s</string>
+	<string name="target_point">Punkt trasy %1$s</string>
+    <string name="intermediate_point">Punkt trasy %1$s</string>
     <string name="context_menu_item_last_intermediate_point">Dodaj jako ostatni punkt pośredni</string>
     <string name="context_menu_item_first_intermediate_point">Dodaj jako pierwszy punkt pośredni</string>
     <string name="add_as_last_destination_point">Dodaj jako ostatni punkt pośredni</string>
     <string name="add_as_first_destination_point">Dodaj jako pierwszy punkt pośredni</string>
     <string name="replace_destination_point">Zamień punkt docelowy</string>
     <string name="new_destination_point_dialog">Już wybrałeś punkt docelowy.</string>
-    <string name="target_points">Punkty pośrednie</string>
+    <string name="target_points">Punkty trasy</string>
     <string name="intermediate_point_too_far">Punkt pośredni %1$s jest zbyt daleko od najbliższej ulicy.</string>
     <string name="arrived_at_intermediate_point">Dotarłeś do punktu pośredniego</string>
     <string name="context_menu_item_intermediate_point">Dodaj jako punkt pośredni</string>
-    <string name="map_widget_intermediate_distance">Punkt nawigacyjny</string>
+    <string name="map_widget_intermediate_distance">Punkt trasy</string>
     <string name="ending_point_too_far">Punkt końcowy jest zbyt daleko od najbliższej ulicy.</string>
     <string name="add_tag">Dodaj znacznik</string>
     <string name="btn_advanced_mode">Tryb zaawansowany…</string>
@@ -1057,7 +1057,7 @@
     <string name="av_def_action_picture">Zrób zdjęcie</string>
     <string name="recording_context_menu_precord">Zrób zdjęcie</string>
     <string name="stop_routing_confirm">Czy na pewno chcesz zatrzymać nawigację?</string>
-    <string name="clear_dest_confirm">Czy na pewno chcesz usunąć punkt docelowy (oraz punkty pośrednie)?</string>
+    <string name="clear_dest_confirm">Usunąć cel podróży (oraz punkty trasy)?</string>
     <string name="precise_routing_mode">Precyzyjne trasy (alpha)</string>
     <string name="precise_routing_mode_descr">Włącz obliczanie precyzyjnych tras w nawigacji. Funkcja dość powolna, nadal jest ograniczona odległością.</string>
     <string name="local_indexes_cat_av">Dane audio/video</string>
@@ -1207,7 +1207,7 @@
     <string name="edit_tilesource_choose_existing">Zdefiniowane…</string>
     <string name="edit_tilesource_name">Nazwa</string>
     <string name="maps_define_edit">Zdefiniuj/Edytuj…</string>
-	<string name="osmand_extended_description_4000_chars">" OsmAnd (OSM Automated Navigation Directions) to darmowa aplikacja z dostępem do wysokiej jakości darmowych map OpenStreetMap (OSM) o zasięgu światowym. Wszystkie mapy mogą być przechowywane na karcie pamięci urządzenia (urządzeń). Poprzez urządzenie GPS, OsmAnd oferuje wyznaczanie trasy, prezentując trasę graficznie oraz oferując zapowiedzi słowne, dla samochodu, roweru oraz ruchu pieszego. Wszystkie główne funkcje działają zarówno w trybie online, jak i offline (nie wymagają połączenia z Internetem). Niektóre z głównych cech: Nawigacja - pracuje online (szybko) lub offline (bez generowania kosztów podczas pobytu przebywania poza granicami kraju) - Podpowiedzi głosowe krok po kroku (w wersji nagranej lub poprzez syntezę głosu) - opcje: asystent pasa ruchu, wyświetlanie nazw ulic oraz przewidywanego czasu przybycia - obsługa punktów pośrednich trasy - automatyczne przelicznie trasy po zjechaniu z wyznaczonej trasy - wyszukiwanie miejsc poprzez podanie: adresu, typu (n.p.: restauracja, hotel, stacja benzynowa, muzeum), lub przez podanie współrzędnych Przeglądanie Map - wyświetla pozycję i orientację na mapie - opcjonalnie ustawia mapę zgodnie z kompasem lub zgodnie z kierunkiem ruchu - zapisywanie najważniejszych miejsc jako Ulubione - wyświetlanie punktów POI (punkty zainteresowania) wokół Ciebie - pozwala wyświetlić wyspecjalizowane map internetowe - pozwala wyświetlić widok satelitarny (z portalu Bing) - pozwala wyświetlić różne warstwy jak turystyczne, ślady z plików GPX i innych map z ustawieniem poziomu przeźroczystości - opcjonalne wyświetlanie nazw po angielsku, w jeżyku lokalnym lub w zapisie fonetycznym Używanie map OpenStreetMap i danych systemu Wikipedia: - najwyższej jakości informacje z dobrze współpracujących projektów - globalne mapy z OpenStreetMap, dostępne dla danego kraju lub regionu - Wikipedia POI, świetna do zwiedzania (nie dostępna w wersji darmowej) - nieograniczona ilość pobrań bezpośrednio do aplikacji(limit pobrań w darmowej wersji - 16 map) - zawsze aktualne mapy (aktualizowane co najmniej raz w miesiącu) - kompaktowe mapy wektorowe offline - wybór pomiędzy kompletną mapą a mapą zawierającą tylko drogi (np. pełna mapa Japonii to 700 MB, natomiast mapa zawierająca tylko informacje o drogach 200 MB.) - obsługuje również przechowywanie fragmentów pobranych map on-line Funkcje bezpieczeństwa - opcjonalny przełącznik widoku dzień/noc - opcjonalne wyświetlanie ograniczeń prędkości z opcją powiadamiania o przekroczeniu prędkości - opcjonalne powiększanie map w zależności od prędkości - możliwość dzielenia się swoją lokalizacją ze znajomymi Funkcja dla pieszych i rowerzystów - mapy zawierają informacje dla pieszych i rowerzystów - specjalne trasy oraz tryby wyświetlania dla pieszych i rowerzystów - opcja wyświetlania przystanków transportu publicznego (autobusy, tramwaje, pociągi) łącznie z nazwą linii - opcjonalne nagrywanie tras podróży do plików GPX lub w serwisach online - opcjonalne wyświetlanie prędkości i wysokości - wyświetlanie poziomic i cieniowania rzeźby terenu (poprzez dodatkowe wtyczki) Bezpośredni wkład w OpenStreetMap - raportowanie błędów mapy - przesyłanie tras w postaci plików GPX do OSM bezpośrednio z aplikacji - dodawanie POI i bezpośrednie wysyłanie ich do OSM (lub też późniejsze ) - opcja nagrywania tras podróży w tle (również gdy urządzenie jest w trybie uśpienia) OsmAnd jest udostępniane na darmowej licencji open source i jest aktywnie rozwijany. Każdy może przyczynić się do rozwoju aplikacji poprzez zgłaszanie błędów, poprawianiu tłumaczeń, lub dodawania nowych funkcjonalności. Projekt jest w stanie gwałtownego i ciągłego rozwoju i doskonalenia przez w programistów i aktywnych użytkowników. Postęp rozwoju opiera się również na wkładzie finansowym przeznaczonym na rozwój, kodowanie i testowanie nowych funkcjonalności. Kupując OsmAnd+ pomagasz powodujesz że staje się ona bardziej niesamowita! Możliwe jest również finansowanie konkretnych nowych funkcji lub wykonywanie wpłat na ogólny rozwój osmand.net. Orientacyjny zasięg map i ich jakość: - Europa Zachodnia: **** - Europa Wschodnia: *** - Rosja: *** - Ameryka Północna: *** - Ameryka Południowa: ** - Asia: ** - Japonia i Korea: *** - Bliski Wschód: ** - Afryka: ** - Antarktyka: * Lista krajów obsługiwanych (w zasadzie na cały świat!) Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Antigua i Barbuda, Antyle Holenderskie, Arabia Saudyjska, Argentyna, Armenia, Aruba, Australia, Austria, Azerbejdżan, Bahamy, Bahrajn, Bangladesz, Barbados, Belgia, Belize, Benin, Bermudy, Bhutan, Białoruś, Boliwia, Bonaire, Bośnia i Hercegowina, Botswana, Brazylia, Brunei, Brytyjskie Wyspy Dziewicze, Bułgaria, Burkina Faso, Burundi, Chile, Chiny, Chorwacja, Curaçao, Cypr, Czad, Czarnogóra, Czechy, Dania, Dominika, Dominikana, Dżibuti, Egipt, Ekwador, Erytrea, Estonia, Etiopia, Fidżi, Filipiny, Finlandia, Francja, Gabon, Gambia, Georgia Południowa, Ghana, Gibraltar, Grecja, Grenada, Grenlandia, Gruzja, Guam, Guernsey, Gujana Francuska, Gujana, Gwadelupa, Gwatemala, Gwinea Bissau, Gwinea Równikowa, Gwinea, Haiti, Hiszpania, Holandia, Honduras, Hong Kong, Indie, Indonezja, Irak, Iran, Irlandia, Islandia, Izrael, Jamajka, Japonia, Jemen, Jersey, Jordania, Kambodża, Kamerun, Kanada, Katar, Kazachstan, Kenia, Kirgistan, Kiribati, Kolumbia, Komory, Kongo, Korea Północna i Korea Południowa, Kostaryka , Kuba, Kuwejt, Laos, Lesotho, Liban, Liberia , Libia, Liechtenstein, Litwa, Luksemburg, Łotwa, Macedonia, Madagaskar, Majotta, Makao, Malawi, Malediwy, Malezja, Mali, Malta, Maroko, Martynika, Mauretania, Mauritius, Meksyk, Mikronezja, Mołdawia, Monako, Mongolia, Montserrat, Mozambik , Myanmar, Namibia, Nauru, Nepal, Niemcy, Niger, Nigeria, Nikaragua, Norwegia, Nowa Kaledonia, Nowa Zelandia, Oman, Pakistan, Palau, Palestyna, Panama, Papua Nowa Gwinea, Paragwaj, Peru, Polinezja Francuska, Polska, Południowy Sudan, Portugalia, Puerto Rico, Republika Środkowoafrykańska, Republika Vanuatu, Republika Zielonego Przylądka, Rosja, Rumunia, Rwanda, Sahara Zachodnia, Saint Helena, Saint Kitts i Nevis, Saint Lucia, Saint Martin, Saint Vincent i Grenadyny, Saint-Barthélemy, Saint-Pierre i Miquelon, Salwador, Samoa, San Marino, Senegal, Serbia, Seszele, Sierra Leone, Singapur, Słowacja, Słowenia, Somalia, Sri Lanka, Stany Zjednoczone Ameryki (USA), Suazi, Sudan, Surinam, Syria, Szwajcaria, Szwecja, Tadżykistan, Tajlandia , Tajwan, Tanzania, Timor Wschodni, Togo, Tokelau, Tonga, Trynidad i Tobago, Tunezja, Turcja, Turkmenistan, Tuvalu, Uganda, Ukraina, Urugwaj, Uzbekistan, Wallis i Futuna, Watykan, Wenezuela, Węgry, Wielka Brytania (UK), Wietnam, Włochy, Wybrzeże Kości Słoniowej, Wyspa Man, Zambia, Zimbabwe, Zjednoczone Emiraty Arabskie. "</string>
+	<string name="osmand_extended_description_4000_chars">" OsmAnd (OSM Automated Navigation Directions) to darmowa aplikacja z dostępem do wysokiej jakości darmowych map OpenStreetMap (OSM) o zasięgu światowym. Wszystkie mapy mogą być przechowywane na karcie pamięci urządzenia (urządzeń). Poprzez urządzenie GPS, OsmAnd oferuje wyznaczanie trasy, prezentując trasę graficznie oraz oferując zapowiedzi słowne, dla samochodu, roweru oraz ruchu pieszego. Wszystkie główne funkcje działają zarówno w trybie online, jak i offline (nie wymagają połączenia z Internetem). Niektóre z głównych cech: Nawigacja - pracuje online (szybko) lub offline (bez generowania kosztów podczas pobytu przebywania poza granicami kraju) - Podpowiedzi głosowe krok po kroku (w wersji nagranej lub poprzez syntezę głosu) - opcje: asystent pasa ruchu, wyświetlanie nazw ulic oraz przewidywanego czasu przybycia - obsługa punktów pośrednich trasy - automatyczne przelicznie trasy po zjechaniu z wyznaczonej trasy - wyszukiwanie miejsc poprzez podanie: adresu, typu (n.p.: restauracja, hotel, stacja benzynowa, muzeum), lub przez podanie współrzędnych Przeglądanie Map - wyświetla pozycję i orientację na mapie - opcjonalnie ustawia mapę zgodnie z kompasem lub zgodnie z kierunkiem ruchu - zapisywanie najważniejszych miejsc jako Ulubione - wyświetlanie punktów POI (punkty zainteresowania) wokół Ciebie - pozwala wyświetlić wyspecjalizowane map internetowe - pozwala wyświetlić widok satelitarny (z portalu Bing) - pozwala wyświetlić różne warstwy jak turystyczne, ślady z plików GPX i innych map z ustawieniem poziomu przeźroczystości - opcjonalne wyświetlanie nazw po angielsku, w jeżyku lokalnym lub w zapisie fonetycznym Używanie map OpenStreetMap i danych systemu Wikipedia: - najwyższej jakości informacje z dobrze współpracujących projektów - globalne mapy z OpenStreetMap, dostępne dla danego kraju lub regionu - Wikipedia POI, świetna do zwiedzania (nie dostępna w wersji darmowej) - nieograniczona ilość pobrań bezpośrednio do aplikacji(limit pobrań w darmowej wersji - 16 map) - zawsze aktualne mapy (aktualizowane co najmniej raz w miesiącu) - kompaktowe mapy wektorowe offline - wybór pomiędzy kompletną mapą a mapą zawierającą tylko drogi (np. pełna mapa Japonii to 700 MB, natomiast mapa zawierająca tylko informacje o drogach 200 MB.) - obsługuje również przechowywanie fragmentów pobranych map on-line Funkcje bezpieczeństwa - opcjonalny przełącznik widoku dzień/noc - opcjonalne wyświetlanie ograniczeń prędkości z opcją powiadamiania o przekroczeniu prędkości - opcjonalne powiększanie map w zależności od prędkości - możliwość dzielenia się swoją lokalizacją ze znajomymi Funkcja dla pieszych i rowerzystów - mapy zawierają informacje dla pieszych i rowerzystów - specjalne trasy oraz tryby wyświetlania dla pieszych i rowerzystów - opcja wyświetlania przystanków transportu publicznego (autobusy, tramwaje, pociągi) łącznie z nazwą linii - opcjonalne nagrywanie tras podróży do plików GPX lub w serwisach online - opcjonalne wyświetlanie prędkości i wysokości - wyświetlanie poziomic i cieniowania rzeźby terenu (poprzez dodatkowe wtyczki) Bezpośredni wkład w OpenStreetMap - raportowanie błędów mapy - przesyłanie tras w postaci plików GPX do OSM bezpośrednio z aplikacji - dodawanie POI i bezpośrednie wysyłanie ich do OSM (lub też późniejsze ) - opcja nagrywania tras podróży w tle (również gdy urządzenie jest w trybie uśpienia) OsmAnd jest udostępniane na darmowej licencji open source i jest aktywnie rozwijany. Każdy może przyczynić się do rozwoju aplikacji poprzez zgłaszanie uwag, poprawianiu tłumaczeń, lub dodawania nowych funkcjonalności. Projekt jest w stanie gwałtownego i ciągłego rozwoju i doskonalenia przez w programistów i aktywnych użytkowników. Postęp rozwoju opiera się również na wkładzie finansowym przeznaczonym na rozwój, kodowanie i testowanie nowych funkcjonalności. Kupując OsmAnd+ pomagasz powodujesz że staje się ona bardziej niesamowita! Możliwe jest również finansowanie konkretnych nowych funkcji lub wykonywanie wpłat na ogólny rozwój osmand.net. Orientacyjny zasięg map i ich jakość: - Europa Zachodnia: **** - Europa Wschodnia: *** - Rosja: *** - Ameryka Północna: *** - Ameryka Południowa: ** - Asia: ** - Japonia i Korea: *** - Bliski Wschód: ** - Afryka: ** - Antarktyka: * Lista krajów obsługiwanych (w zasadzie na cały świat!) Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Antigua i Barbuda, Antyle Holenderskie, Arabia Saudyjska, Argentyna, Armenia, Aruba, Australia, Austria, Azerbejdżan, Bahamy, Bahrajn, Bangladesz, Barbados, Belgia, Belize, Benin, Bermudy, Bhutan, Białoruś, Boliwia, Bonaire, Bośnia i Hercegowina, Botswana, Brazylia, Brunei, Brytyjskie Wyspy Dziewicze, Bułgaria, Burkina Faso, Burundi, Chile, Chiny, Chorwacja, Curaçao, Cypr, Czad, Czarnogóra, Czechy, Dania, Dominika, Dominikana, Dżibuti, Egipt, Ekwador, Erytrea, Estonia, Etiopia, Fidżi, Filipiny, Finlandia, Francja, Gabon, Gambia, Georgia Południowa, Ghana, Gibraltar, Grecja, Grenada, Grenlandia, Gruzja, Guam, Guernsey, Gujana Francuska, Gujana, Gwadelupa, Gwatemala, Gwinea Bissau, Gwinea Równikowa, Gwinea, Haiti, Hiszpania, Holandia, Honduras, Hong Kong, Indie, Indonezja, Irak, Iran, Irlandia, Islandia, Izrael, Jamajka, Japonia, Jemen, Jersey, Jordania, Kambodża, Kamerun, Kanada, Katar, Kazachstan, Kenia, Kirgistan, Kiribati, Kolumbia, Komory, Kongo, Korea Północna i Korea Południowa, Kostaryka , Kuba, Kuwejt, Laos, Lesotho, Liban, Liberia , Libia, Liechtenstein, Litwa, Luksemburg, Łotwa, Macedonia, Madagaskar, Majotta, Makao, Malawi, Malediwy, Malezja, Mali, Malta, Maroko, Martynika, Mauretania, Mauritius, Meksyk, Mikronezja, Mołdawia, Monako, Mongolia, Montserrat, Mozambik , Myanmar, Namibia, Nauru, Nepal, Niemcy, Niger, Nigeria, Nikaragua, Norwegia, Nowa Kaledonia, Nowa Zelandia, Oman, Pakistan, Palau, Palestyna, Panama, Papua Nowa Gwinea, Paragwaj, Peru, Polinezja Francuska, Polska, Południowy Sudan, Portugalia, Puerto Rico, Republika Środkowoafrykańska, Republika Vanuatu, Republika Zielonego Przylądka, Rosja, Rumunia, Rwanda, Sahara Zachodnia, Saint Helena, Saint Kitts i Nevis, Saint Lucia, Saint Martin, Saint Vincent i Grenadyny, Saint-Barthélemy, Saint-Pierre i Miquelon, Salwador, Samoa, San Marino, Senegal, Serbia, Seszele, Sierra Leone, Singapur, Słowacja, Słowenia, Somalia, Sri Lanka, Stany Zjednoczone Ameryki (USA), Suazi, Sudan, Surinam, Syria, Szwajcaria, Szwecja, Tadżykistan, Tajlandia , Tajwan, Tanzania, Timor Wschodni, Togo, Tokelau, Tonga, Trynidad i Tobago, Tunezja, Turcja, Turkmenistan, Tuvalu, Uganda, Ukraina, Urugwaj, Uzbekistan, Wallis i Futuna, Watykan, Wenezuela, Węgry, Wielka Brytania (UK), Wietnam, Włochy, Wybrzeże Kości Słoniowej, Wyspa Man, Zambia, Zimbabwe, Zjednoczone Emiraty Arabskie. "</string>
 	
     
     <string name="edit_tilesource_successfully">Zapisano zasób danych kafelkowych %1$s</string>
@@ -1552,7 +1552,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="gpx_split_interval">Interwał podziału</string>
     <string name="loading_smth">Wczytywanie %1$s…</string>
     <string name="map_widget_plain_time">Aktualny czas</string>
-    <string name="gpx_wpt">Punkt nawigacyjny</string>
+    <string name="gpx_wpt">Punkt trasy</string>
     <string name="save_as_favorites_points">Zapisz jako grupę ulubionych</string>
     <string name="select_destination_and_intermediate_points">Wybierz punkty</string>
     <string name="layer_amenity_label">Etykiety punktów</string>
@@ -1884,7 +1884,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="rendering_value_walkingRoutesOSMC_name">Kolorowanie wg zasad OSMC</string>
     <string name="rendering_value_disabled_name">Wyłączony</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Kolorowanie wg przeznaczenia trasy</string>
-    <string name="osm_edit_context_menu_delete">Usuń w Edytorze OSM</string>
+    <string name="osm_edit_context_menu_delete">Usuń edycje OSM</string>
     <string name="lang_th">tajski</string>
     <string name="lang_nn">norweski</string>
     <string name="lang_ms">malezyjski</string>
@@ -1997,7 +1997,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="favourites">Ulubione</string>
 	<string name="saved_at_time">Zapisano o: %1$s</string>
 	<string name="poi_deleted_localy">POI zostanie usunięty gdy tylko wyślesz swoje zmiany</string>
-	<string name="show_gpx">Pokaż GPX</string>
+	<string name="show_gpx">Wyświetlanie GPX</string>
 <string name="show_on_start">Wyświetlanie podczas uruchamiania</string>
 	<string name="count_of_lines">Liczba linii</string>
 <string name="address_unknown">Adres nie jest jeszcze znany</string>
@@ -2055,7 +2055,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="update_all">Uaktualnij wszystko (%1$s MB)</string>
     <string name="free_downloads_used">Wykorzystano darmowe pobrania</string>
     <string name="application_dir_description">Proszę wybrać położenie zapisywania plików map.</string>
-<string name="value_downloaded_from_max">%1$.1f z %2$.1f MB</string>
+<string name="value_downloaded_of_max">%1$.1f z %2$.1f MB</string>
     <string name="shared_string_qr_code">Kod QR</string>
     <string name="enter_country_name">Proszę wybrać kraj</string>
 <string name="map_downloaded_descr">Mapa %1$s została pobrana. Proszę powrócić do mapy, aby rozpocząć jej używanie.</string>
@@ -2072,7 +2072,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     
     <string name="simulate_initial_startup_descr">Ustaw flagę wskazującą pierwsze uruchomienie aplikacji, utrzymuje wszystkie inne ustawienia bez zmian</string>
     <string name="share_geo">wsp:</string>
-    <string name="confirm_download_roadmaps">Czy na pewno chcesz pobrać mapę dróg, nawet jeśli masz pełną wersję mapy?</string>
+    <string name="confirm_download_roadmaps">Pobrać mapę samochodową, nawet jeśli pobrano już zwykłą mapę?</string>
     <string name="free_downloads_used_description">Możesz ustawić ile razy pobrań użyłeś</string>
 
     <string name="show_on_start_description">\'Wyłącz\' bezpośrednio uruchamia ekran mapy</string>
@@ -2097,10 +2097,10 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="contact_us">Kontakt z nami</string>
     <string name="map_legend">Legenda mapy</string>
     <string name="save_poi_without_poi_type_message">Zapisać POI bez określonego rodzaju?</string>
-    <string name="access_from_map_description">Uruchamia pulpit bezpośrednio z mapy</string>
+    <string name="access_from_map_description">Wyświetla kokpit zamiast menu</string>
     <string name="access_from_map">Dostęp z mapy</string>
     <string name="copied_to_clipboard">Skopiowane do schowka</string>
-    <string name="release_2_2">" • Nowe menu kontekstowe, przystosowane do wybierania lokacji na mapie oraz na innych wyświetlaczach\n\n• Mapa jest teraz wyświetlana bezpośrednio, o ile nie wybrano opcji \'Pokaż pulpit podczas startu aplikacji\'\n\n• Można skonfigurować które zakładki oraz jak będą wyświetlane na pulpicie\n\n• W celu pobrania map, interesujące nas regiony można wybrać bezpośrednio na mapie świata\n\n• Wyszukiwarka POI wspiera teraz bardziej precyzyjne zapytania\n\n• Poprawiona funkcjonalność POI oraz edytora OSM\n\n• Struktura oraz interfejs menu pobierania map zostały ulepszone\n\ni więcej ... "</string>
+    <string name="release_2_2">" • Nowe menu kontekstowe, przystosowane do wybierania lokacji na mapie oraz na innych wyświetlaczach\n\n• Mapa jest teraz wyświetlana bezpośrednio, o ile nie wybrano opcji \'Pokaż pulpit podczas startu aplikacji\'\n\n• Można skonfigurować które zakładki oraz jak będą wyświetlane na pulpicie\n\n• Pomiń panel jeżeli chcesz kontrolować aplikacją poprzez menu\n\n• W celu pobrania map, interesujące nas regiony można wybrać bezpośrednio na mapie świata\n\n• Wyszukiwarka POI wspiera teraz bardziej precyzyjne zapytania\n\n• Poprawiona funkcjonalność POI oraz edytora OSM\n\n• Struktura oraz interfejs menu pobierania map zostały ulepszone\n\ni więcej ... "</string>
     <string name="context_menu_item_open_note">Otwórz notatkę OSM</string>
     <string name="osn_bug_name">Notatka OSM</string>
 	<string name="osn_comment_dialog_title">Dodaj komentarz</string>
@@ -2109,13 +2109,33 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 	<string name="osn_add_dialog_success">Notatka utworzona poprawnie</string>
 	<string name="context_menu_item_delete_waypoint">Usunąć punkt GPX?</string>
     <string name="shared_string_location">Lokacja</string>
-    <string name="share_osm_edits_subject">Edycje udostępnione przez OsmAnd</string>
+    <string name="share_osm_edits_subject">Edycje OSM udostępnione przez OsmAnd</string>
     <string name="lang_fy">Fryzyjski</string>
     <string name="rendering_attr_currentTrackColor_description">kolor śladu GPX</string>
     <string name="rendering_attr_currentTrackWidth_description">grubość śladu GPX</string>
     <string name="poi_dialog_reopen">Otwórz ponownie</string>
-	<string name="use_dashboard_btn">Zachowaj aktywne ustawienia</string>
-    <string name="use_drawer_btn">Pokaż mapę przy starcie</string>
-    <string name="dashboard_or_drawer_description">Możesz wybrać sposób, w jakim aplikacja wystartuje: mapa lub pulpit. Możesz to zmienić później w ustawieniach.</string>
+	<string name="use_dashboard_btn">Używaj panelu</string>
+    <string name="use_drawer_btn">Używaj menu</string>
+    <string name="dashboard_or_drawer_description">To jest nowy wybór podstawowej kontroli aplikacja za pomocą konfigurowalnego panelu lub statycznego menu. Wybór zawsze można zmienić w ustawieniach panelu.</string>
     <string name="osm_save_offline">Zapisz lokalnie</string>
+    <string name="please_specify_poi_type_only_from_list">"Proszę określić rodzaj POI lub pominąć go. "</string>
+    <string name="osm_edit_modified_poi">Zmodyfikowano POI OSM</string>
+    <string name="osm_edit_deleted_poi">Usunięto POI OSM</string>
+    <string name="osm_edit_reopened_note">Otwarto ponownie notatkę OSM</string>
+    <string name="osm_edit_commented_note">Skomentowano notatkę OSM</string>
+    <string name="osm_edit_removed_note">Skasowano notatkę OSM</string>
+	<string name="osm_edit_created_note">Utworzono notatkę OSM</string>
+	<string name="osn_add_dialog_title">Twórz notatkę</string>
+	<string name="osn_add_dialog_error">Wyjątek: notatka nie została stworzona</string>
+	<string name="osn_close_dialog_success">Notatka została pomyślnie zamknięta</string>
+	<string name="osn_close_dialog_error">Wyjątek: notatka nie została zamknięta</string>
+	<string name="shared_string_commit">Zatwierdź</string>
+	
+    <string name="context_menu_item_edit_waypoint">Edytuj punktu trasy GPX</string>
+    <string name="lang_nds">Dolno Saksoński</string>
+    <string name="lang_mk">Macedoński</string>
+    <string name="lang_als">Albański (Tosk)</string>
+    <string name="rendering_attr_roadStyle_description">Styl drogowy</string>
+    <string name="poi_context_menu_modify_osm_change">Modyfikacja zmian OSM</string>
+    <string name="dashboard_or_drawer_title">Panel lub menu</string>
     </resources>

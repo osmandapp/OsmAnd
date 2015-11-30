@@ -561,7 +561,7 @@
     <string name="osmand_net_previously_installed">En tidigare OsmAnd-version är installerad. Alla offline-data kommer att stödjas av den nya appen. Men favoritpunkter bör exporteras från den gamla appen och senare importeras i den nya.</string>
     <string name="build_installed">Bygge {0} installerades korrekt ({1}).</string>
     <string name="downloading_build">Laddar ner kompilering …</string>
-    <string name="install_selected_build">Vill du installera OsmAnd - {0} från {1}{2} MB?</string>
+    <string name="install_selected_build">Vill du installera OsmAnd - {0} av {1}{2} MB?</string>
     <string name="loading_builds_failed">Hämtar en lista över misslyckade OsmAnd-byggen</string>
     <string name="loading_builds">Laddar OsmAnd-kompileringar …</string>
     <string name="select_build_to_install">Välj en OsmAnd-kompilering att installera</string>
@@ -1920,10 +1920,10 @@
     <string name="favorite_category_add_new_title">Lägg till en ny kategori</string>
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="confirm_download_roadmaps">Är du säker på att du vill hämta kartan med enbart vägar trots att du redan har den fullständiga kartan?</string>
-    <string name="value_downloaded_from_max">%1$.1f av %2$.1f MB</string>
+    <string name="value_downloaded_of_max">%1$.1f av %2$.1f MB</string>
     <string name="update_all">Uppdatera alla (%1$s MB)</string>
     <string name="free_downloads_used">Gratis nedladdningar hämtade</string>
-    <string name="free_downloads_used_description">Du kan ange hur många gratis nedladdningar som du har gjort</string>
+    <string name="free_downloads_used_description">Visar antalet gratisnedladdningar du gjort</string>
     <string name="downloading_number_of_files">Hämtar - %1$d fil(er)</string>
 
     <string name="share_geo">geo:</string>
@@ -2009,4 +2009,13 @@
 	<string name="shared_string_commit">Skicka in</string>
 	
     <string name="please_specify_poi_type_only_from_list">"Ange rätt POI-typ eller hoppa över det. "</string>
-    </resources>
+    <string name="rendering_attr_roadStyle_description">Vägtyp</string>
+    <string name="osm_edit_reopened_note">Öppnat OSM-anteckning igen</string>
+    <string name="routing_attr_avoid_stairs_name">Undvik trappor</string>
+	<string name="routing_attr_avoid_stairs_description">Undvik trappor</string>
+	<string name="routing_attr_avoid_borders_name">Undvik gränsövergång</string>
+	<string name="simulate_initial_startup">Simulera första appstarten</string>
+    <string name="action_create">Åtgärd skapa</string>
+	<string name="action_modify">Åtgärd ändra</string>
+	<string name="action_delete">Åtgärd ta bort</string>
+	</resources>

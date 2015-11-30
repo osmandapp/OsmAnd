@@ -1905,7 +1905,7 @@
     <string name="get_full_version">Versión completa</string>
     <string name="downloads">Descargas</string>
     <string name="confirm_download_roadmaps">Confirma que desexa descargar un mapa de estradas, aínda que ten o mapa completo?</string>
-    <string name="value_downloaded_from_max">%1$.1f de %2$.1f MB</string>
+    <string name="value_downloaded_of_max">%1$.1f de %2$.1f MB</string>
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">Actualizar todo (%1$s MB)</string>
     <string name="free_downloads_used">Descargas gratuítas empregadas</string>

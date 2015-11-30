@@ -198,7 +198,7 @@
 	<string name="poi_fast_food">Fast Food</string>
 	<string name="poi_ferry_terminal">Fährhafen</string>
 	<string name="poi_fire_extinguisher">Feuerlöscher</string>
-	<string name="poi_fire_flapper">Feuerklatsche</string>
+	<string name="poi_fire_flapper">Feuerklappe</string>
 	<string name="poi_fire_hose">Löschschlauch</string>
 	<string name="poi_fire_hydrant">Hydrant</string>
 	<string name="poi_fire_station">Feuerwehr</string>
@@ -319,7 +319,7 @@
 	<string name="poi_motorcycle_parking">Motorradparkplatz</string>
 	<string name="poi_motorcycle">Motorradgeschäft</string>
 	<string name="poi_motorway_junction">Autobahnkreuz</string>
-	<string name="poi_mountain_pass_yes">Passstraße</string>
+	<string name="poi_mountain_pass">Passstraße</string>
 	<string name="poi_sport_multi">Multi-Sport</string>
 	<string name="poi_museum">Museum</string>
 	<string name="poi_musical_instrument">Musikgeschäft</string>
@@ -358,7 +358,7 @@
 	<string name="poi_craft_photographer">Fotograf</string>
 	<string name="poi_craft_photographic_laboratory">Fotolabor</string>
 	<string name="poi_physiotherapist">Physiotherapeut</string>
-	<string name="poi_picnic_site">Picknick</string>
+	<string name="poi_picnic_site">Picknickplatz</string>
 	<string name="poi_pier">Pier</string>
 	<string name="poi_pitch">Sportplatz</string>
 	<string name="poi_place_allotments">Kleingartensiedlung</string>
@@ -371,7 +371,7 @@
 	<string name="poi_religion_muslim">Muslimische Kultstätte</string>
 	<string name="poi_religion_shinto">Shintoistische Kultstätte</string>
 	<string name="poi_religion_sikh">Sikh Kultstätte</string>
-	<string name="poi_religion_taoist">Taoistische Kultstätte</string>
+	<string name="poi_religion_taoist">Taoismus</string>
 	<string name="poi_craft_plasterer">Stuckateur</string>
 	<string name="poi_playground">Spielplatz</string>
 	<string name="poi_craft_plumber">Installateur</string>
@@ -433,7 +433,7 @@
 	<string name="poi_seafood">Meeresfrüchte</string>
 	<string name="poi_anchor_berth">Ankerplatz</string>
 	<string name="poi_anchorage">Ankerplatz</string>
-	<string name="poi_beacon">Leuchtturm</string>
+	<string name="poi_beacon">Leuchtfeuer</string>
 	<string name="poi_beacon_cardinal">Hauptleuchtturm</string>
 	<string name="poi_beacon_lateral">Nebenleuchtturm</string>
 	<string name="poi_beacon_safe_water">Sicheres Gewässer-Leuchtturm</string>
@@ -532,7 +532,7 @@
 	<string name="poi_ticket">Ticket-Shop</string>
 	<string name="poi_craft_tiler">Dachdecker</string>
 	<string name="poi_craft_tinsmith">Klempner</string>
-	<string name="poi_tobacco">Trafik</string>
+	<string name="poi_tobacco">Tabakwarengeschäft</string>
 	<string name="poi_toboggan">Rodelschlitten</string>
 	<string name="poi_toilets">Toilette</string>
 	<string name="poi_toll_booth">Mautstelle</string>
@@ -637,7 +637,7 @@
 	<string name="poi_sustenance">Gastronomie</string>
 	<string name="poi_cafe_and_restaurant">Cafe und Restaurant</string>
 	<string name="poi_transportation">Transport</string>
-		<string name="poi_personal_transport">Individualverkehr</string>
+		<string name="poi_personal_transport">Personentransport</string>
 		<string name="poi_air_transport">Lufttransport</string>
 		<string name="poi_water_transport">Wassertransport</string>
 		<string name="poi_bicycle_transport">Fahrradtransport</string>
@@ -647,7 +647,7 @@
 	<string name="poi_osmwiki">Wikipedia</string>
 	<string name="poi_user_defined_other">Benutzerdefiniert</string>
 	
-	<string name="poi_aerialway_transport">Luftseilbahntransport</string>
+	<string name="poi_aerialway_transport">Seilbahntransport</string>
 	<string name="poi_wine">Weinhandlung</string>
 
 	<string name="poi_medical_supply">Medizinische Versorgung</string>
@@ -671,7 +671,7 @@
 	<string name="poi_fuel_e10">E10</string>
 	<string name="poi_fuel_e20">E20</string>
 	<string name="poi_fuel_e85">E85</string>
-	<string name="poi_fuel_biogas">E85</string>
+	<string name="poi_fuel_biogas">Biogas</string>
 	<string name="poi_fuel_lh2">Flüssigwasserstoff</string>
 	<string name="poi_fuel_electricity">Strom</string>
 	<string name="poi_public_transport_stop_position">ÖPNV-Halteposition</string>
@@ -732,7 +732,7 @@
 	<string name="poi_piste_ice_skate">Eislaufen</string>
 	<string name="poi_payment_terminal">Bezahl-Terminal</string>
 	<string name="poi_transport_construction">Transportkonstruktion</string>
-		<string name="poi_natural">Natürlich</string>
+		<string name="poi_natural">Natur</string>
 	<string name="poi_camera">Kameras und Objektive</string>
 	<string name="poi_charity">Sozialkaufhaus</string>
 	<string name="poi_cabin">Hütte</string>
@@ -865,20 +865,20 @@
 	<string name="poi_full_height_turnstile">Personendrehkreuz</string>
 	<string name="poi_bump_gate">Schwingtor</string>
 	<string name="poi_general_barrier">Barriere</string>
-	<string name="poi_height_restrictor">Höhenbegrenzung</string>
+	<string name="poi_height_restrictor">Höhendurchfahrtbegrenzung</string>
 	<string name="poi_sally_port">Ausfalltor</string>
 	<string name="poi_turnstile">Drehkreuz</string>
 	<string name="poi_kent_carriage_gap">Kutschendurchlass</string>
 	<string name="poi_highway_crossing">Kreuzung</string>
 
-	<string name="poi_icn_ref">Internationales Fahrradknotenpunktnetzwerk</string>
-	<string name="poi_ncn_ref">Nationale Radroute</string>
-	<string name="poi_rcn_ref">Regionales Fahrradknotenpunktnetzwerk</string>
-	<string name="poi_lcn_ref">Lokales Fahrradknotenpunktnetzwerk</string>
-	<string name="poi_iwn_ref">Internationales Wanderknotenpunktnetzwerk</string>
-	<string name="poi_nwn_ref">Nationale Wanderroute</string>
-	<string name="poi_rwn_ref">Regionales Wanderknotenpunktnetzwerk</string>
-	<string name="poi_lwn_ref">Lokales Wanderknotenpunktnetzwerk</string>
+	<string name="poi_icn_ref">Knotenpunkt Internationales Fahrradnetzwerk</string>
+	<string name="poi_ncn_ref">Knotenpunkt Nationale Radroute</string>
+	<string name="poi_rcn_ref">Knotenpunkt Regionales Fahrradnetzwerk</string>
+	<string name="poi_lcn_ref">Knotenpunkt Lokales Fahrradnetzwerk</string>
+	<string name="poi_iwn_ref">Knotenpunkt Internationales Wandernetzwerk</string>
+	<string name="poi_nwn_ref">Knotenpunkt Nationale Wanderroute</string>
+	<string name="poi_rwn_ref">Knotenpunkt Regionales Wandernetzwerk</string>
+	<string name="poi_lwn_ref">Knotenpunkt Lokales Wandernetzwerk</string>
 
 	<string name="poi_route_hiking_iwn_poi">Internationaler Wanderweg</string>
 	<string name="poi_route_hiking_nwn_poi">Nationaler Wanderweg</string>
@@ -893,8 +893,8 @@
 	<string name="poi_enforcement_maxspeed">Geschwindigkeitskontrolle</string>
 	<string name="poi_enforcement_maxheight">Höhenkontrolle</string>
 	<string name="poi_enforcement_mindistance">Abstandskontrolle</string>
-	<string name="poi_enforcement_check">Durchführung:Kontrolle</string>
-	<string name="poi_enforcement_access">Kontrolle Berechtigung</string>
+	<string name="poi_enforcement_check">Kontrollpunkt</string>
+	<string name="poi_enforcement_access">Berechtigungskontrolle</string>
 	<string name="poi_enforcement_toll">Mautkontrolle</string>
 
 <string name="poi_free_flying">Freeflying Zubehörgeschäft</string>
@@ -936,7 +936,7 @@
 	<string name="poi_recycling_computers">Computer</string>
 	<string name="poi_recycling_tyres">Reifen</string>
 	<string name="poi_recycling_tv_monitor">TV und Monitore</string>
-	<string name="poi_recycling_bottles">Pfandflaschen</string>
+	<string name="poi_recycling_bottles">Flaschen</string>
 	<string name="poi_recycling_cork">Korken</string>
 	<string name="poi_recycling_printer_cartridges">Druckerpatronen</string>
 	<string name="poi_recycling_paint">Farben</string>
@@ -991,7 +991,7 @@
 	<string name="poi_seasonal_no">Nicht saisonal</string>
 	<string name="poi_seasonal_dry_season">Trockenzeit</string>
 	<string name="poi_seasonal_wet_season">Regenzeit</string>
-	<string name="poi_recycling_container">Behälter</string>
+	<string name="poi_recycling_container">Container</string>
 	<string name="poi_seasonal_spring">Frühling</string>
 	<string name="poi_seasonal_summer">Sommer</string>
 	<string name="poi_seasonal_autumn">Herbst</string>
@@ -1029,4 +1029,750 @@
 	<string name="poi_financial">Finanzverwaltung</string>
 	<string name="poi_highway_steps">Treppe</string>
 	<string name="poi_historic_milestone">Meilenstein</string>
+	<string name="poi_doors">Türen</string>
+	<string name="poi_traffic_calming_island">Verkehrsinsel</string>
+	<string name="poi_cooling_tower">Kühlturm</string>
+	<string name="poi_lighting_tower">Leuchtturm</string>
+	<string name="poi_recycling_small_appliances">kleine Geräte</string>
+	<string name="poi_landfill_waste_nuclear">Atommüll</string>
+	<string name="poi_bunker_silo">Silo</string>
+	<string name="poi_paediatrics">Pädiatrie</string>
+
+	<string name="poi_tourism_yes">Tourismus</string>
+	<string name="poi_religion_voodoo">Voodoo Kultstätte</string>
+	<string name="poi_denomination_catholic">katholisch</string>
+	<string name="poi_denomination_baptist">baptistisch</string>
+	<string name="poi_denomination_roman_catholic">Römisch-Katholisch</string>
+	<string name="poi_denomination_orthodox">Orthodox</string>
+	<string name="poi_denomination_lutheran">Lutherrisch</string>
+	<string name="poi_denomination_protestant">Protestantisch</string>
+	<string name="poi_denomination_methodist">Methodistisch</string>
+	<string name="poi_denomination_russian_orthodox">Russisch-Orthodox</string>
+	<string name="poi_denomination_greek_orthodox">Griechisch-Orthodox</string>
+	<string name="poi_denomination_reformed">Reformiert</string>
+	<string name="poi_denomination_seventh_day_adventist">Siebenten-Tags-Adventisten</string>
+	<string name="poi_denomination_new_apostolic">Neuapostolisch</string>
+	<string name="poi_internet_access_yes">Internetzugang: Ja</string>
+	<string name="poi_internet_access_no">Internetzugang: Nein</string>
+
+	<string name="poi_debris">Trümmer</string>
+	<string name="poi_height">Höhe</string>
+	<string name="poi_ele">Höhe über dem Meer</string>
+	<string name="poi_start_date">Anfangsdatum</string>
+	<string name="poi_wheelchair">Rollstuhl</string>
+	<string name="poi_wheelchair_no">Rollstuhlzugang: nicht möglich</string>
+	<string name="poi_wheelchair_limited">Rollstuhlzugang: eingeschränkt möglich</string>
+	<string name="poi_wholesale">Großhandel</string>
+
+	<string name="poi_content_silage">Inhalt: Silage</string>
+	<string name="poi_content_water">Inhalt: Wasser</string>
+	<string name="poi_content_slurry">Inhalt: Gülle</string>
+	<string name="poi_content_oil">Inhalt: Öl</string>
+	<string name="poi_content_fuel">Inhalt: Kraftstoff</string>
+	<string name="poi_content_manure">Inhalt: Dung</string>
+	<string name="poi_content_wine">Inhalt: Wein</string>
+	<string name="poi_content_sewage">Inhalt: Abwasser</string>
+	<string name="poi_content_gas">Inhalt: Gas</string>
+	<string name="poi_content_biomass">Inhalt: Biomasse</string>
+	<string name="poi_content_wastewater">Inhalt: Abwasser</string>
+	<string name="poi_content_crop">Inhalt: Ernte</string>
+	<string name="poi_content_fodder">Inhalt: Futter</string>
+	<string name="poi_content_beer">Inhalt: Bier</string>
+	<string name="poi_content_salt">Inhalt: Salz</string>
+	<string name="poi_content_grain">Inhalt: Getreide</string>
+
+	<string name="poi_nudism_yes">Freikörperkultur: erlaubt</string>
+	<string name="poi_nudism_no">Freikörperkultur: verboten</string>
+	<string name="poi_nudism_obligatory">Freikörperkultur: obligatorisch</string>
+	<string name="poi_nudism_customary">Freikörperkultur: Gewohnheits</string>
+	<string name="poi_nudism_permissive">Freikörperkultur: freizügig</string>
+
+	<string name="poi_trade_building_supplies">Baubedarf</string>
+	<string name="poi_trade_plumbing">Klempnerbedarf</string>
+	<string name="poi_trade_wood">Holzhandel</string>
+	<string name="poi_trade_agricultural_supplies">Agrarbedarf</string>
+	<string name="poi_trade_tile">Fliesenbedarf</string>
+
+	<string name="poi_population">Einwohnerzahl</string>
+	<string name="poi_parking_underground">Tiefgarage</string>
+	<string name="poi_parking_multi_storey">Parkhaus</string>
+
+	<string name="poi_bicycle_parking_anchors">Anker</string>
+	<string name="poi_leaf_type_broadleaved">Laub</string>
+	<string name="poi_leaf_type_leafless">Blattlos</string>
+	<string name="poi_species">Spezies</string>
+	<string name="poi_genus">Gattung</string>
+	<string name="poi_trees_olive">Olivenbaum</string>
+	<string name="poi_trees_apple">Apfelbaum</string>
+	<string name="poi_trees_oil">Palmölbaum</string>
+	<string name="poi_trees_orange">Orange</string>
+	<string name="poi_trees_almond">Mandel</string>
+	<string name="poi_trees_banana">Banane</string>
+	<string name="poi_trees_hazel">Haselnuss</string>
+	<string name="poi_trees_coconut">Kokusnuss</string>
+	<string name="poi_trees_cherry">Kirsche</string>
+	<string name="poi_trees_walnut">Walnuss</string>
+	<string name="poi_trees_plum">Pflaume</string>
+	<string name="poi_trees_peach">Pfirsich</string>
+	<string name="poi_trees_tea">Tee</string>
+	<string name="poi_trees_coca">Koka</string>
+	<string name="poi_trees_kiwi">Kiwi</string>
+	<string name="poi_trees_meadow_orchard">Streuobstwiese</string>
+	<string name="poi_trees_nectorine">Nektarine</string>
+	<string name="poi_trees_mango">Mango</string>
+	<string name="poi_trees_rubber">Gummi</string>
+	<string name="poi_trees_date">Dattel</string>
+	<string name="poi_trees_coffea">Kaffee</string>
+	<string name="poi_trees_pomegranate">Granatapfel</string>
+
+	<string name="poi_rural">ländlich</string>
+
+	<string name="poi_animal_shelter">Tierheim</string>
+	<string name="poi_seats">Sitze</string>
+	<string name="poi_backrest_yes">Rückenlehne: Ja</string>
+	<string name="poi_backrest_no">Rückenlehne: Nein</string>
+
+	<string name="poi_intermittent">wechselnd</string>
+
+	<string name="poi_deadlock">toter Punkt</string>
+
+	<string name="poi_aerialway_length">Länge</string>
+
+<string name="poi_craft_electronics">Elektriker</string>
+	<string name="poi_aerialway_pylon">Seilbahnpfeiler</string>
+
+	<string name="poi_memorial_war">Kriegsdenkmal</string>
+	<string name="poi_memorial_statue">Statue</string>
+	<string name="poi_memorial_stone">Stein</string>
+	<string name="poi_resource_aggregate">Generator</string>
+	<string name="poi_resource_dolomite">Dolomit</string>
+	<string name="poi_resource_gas">Gas</string>
+	<string name="poi_resource_gold">Gold</string>
+	<string name="poi_resource_graphite">Grafit</string>
+	<string name="poi_resource_mineral_oil">Mineralöl</string>
+	<string name="poi_resource_oil">Erdöl</string>
+	<string name="poi_resource_salt">Salz</string>
+	<string name="poi_resource_sand">Sand</string>
+	<string name="poi_resource_sandstone">Sandstein</string>
+	<string name="poi_resource_silica">Silizium</string>
+	<string name="poi_resource_silver">Silber</string>
+	<string name="poi_resource_stone">Stein</string>
+	<string name="poi_resource_water">Wasser</string>
+	<string name="poi_wetland_swamp">Sumpf</string>
+	<string name="poi_beach_sand">Sandstrand</string>
+	<string name="poi_beach_rocky">Felsstrand</string>
+
+	<string name="poi_cypress">Zypresse</string>
+	<string name="poi_bench_yes">mit Sitzbank</string>
+	<string name="poi_bench_no">Ohne Sitzbank</string>
+	<string name="poi_waste_basket_yes">mit Abfalleimer</string>
+	<string name="poi_waste_basket_no">ohne Abfalleimer</string>
+
+	<string name="poi_internet_access_type_wlan">Internetzugang: WLAN</string>
+	<string name="poi_internet_access_type_terminal">Internetzugang: Arbeitsplatz</string>
+	<string name="poi_internet_access_type_wired">Internetzugang: kabelgebunden</string>
+	<string name="poi_internet_access_type_public">Internetzugang: offen</string>
+	<string name="poi_internet_access_type_service">Internetzugang: Service</string>
+	<string name="poi_internet_access_type_no">Kein Internetzugang</string>
+	<string name="poi_internet_access_type_yes">Mit Internetzugang</string>
+
+	<string name="poi_maxwidth">Maximalbreite</string>
+	<string name="poi_iata">IATA Code</string>
+	<string name="poi_icao">ICAO Code</string>
+	<string name="poi_faa">FAA Code</string>
+	
+	<string name="poi_width">Weite</string>
+
+	<string name="poi_architect_name">Architekt</string>
+
+	<string name="poi_architecture_modern">Architektur: modern</string>
+	<string name="poi_tunnel_car">Strassentunnel</string>
+	<string name="poi_tunnel_pedestrian">Fußgängertunnel</string>
+	<string name="poi_tunnel_railway">Eisenbahntunnel</string>
+	<string name="poi_bridge_car">Straßenbrücke</string>
+	<string name="poi_bridge_pedestrian">Fußgängerbrücke</string>
+	<string name="poi_bridge_bicycle">Fahrradbrücke</string>
+	<string name="poi_bridge_railway">Eisenbahnbrücke</string>
+	<string name="poi_note">Notiz</string>
+	<string name="poi_historic_aircraft">Historisches Flugzeug</string>
+
+	<string name="poi_elevator_yes">Mit Aufzug</string>
+	<string name="poi_elevator_no">Ohne Aufzug</string>
+
+	<string name="poi_fuel_91ul">91UL Kraftstoff</string>
+	<string name="poi_fuel_100ll">100LL Kraftstoff</string>
+	<string name="poi_fuel_autogas">Autogas</string>
+	<string name="poi_fuel_jeta1">Flugzeug A-1 Kraftstoff</string>
+	<string name="poi_fuel_adblue">AdBlue Kraftstoff</string>
+
+	<string name="poi_fuel_wood">Kraftstoff: Holz</string>
+	<string name="poi_street_lamp">Strassenlaterne</string>
+
+	<string name="poi_clothes_women">Frauenkleidung</string>
+	<string name="poi_clothes_underwear">Unterwäsche</string>
+	<string name="poi_clothes_men">Herrenkleidung</string>
+	<string name="poi_clothes_wedding">Hochzeitskleidung</string>
+	<string name="poi_clothes_sports">Sportkleidung</string>
+	<string name="poi_clothes_babies">Kinderkleidung</string>
+	<string name="poi_clothes_workwear">Arbeitskleidung</string>
+	<string name="poi_clothes_hats">Hüte</string>
+	<string name="poi_clothes_leather">Leder</string>
+	<string name="poi_clothes_costumes">Kostüme</string>
+	<string name="poi_clothes_traditional">Traditionelle Kleidung</string>
+	<string name="poi_clothes_suits">Anzüge</string>
+	<string name="poi_clothes_oversize">Übergrößen</string>
+	<string name="poi_clothes_schoolwear">Schulkleidung</string>
+	<string name="poi_clothes_swimwear">Schwimmkleidung</string>
+	<string name="poi_clothes_socks">Socken</string>
+	<string name="poi_clothes_dance">Tanzkleidung</string>
+	<string name="poi_clothes_military">Militärkleidung</string>
+
+	<string name="poi_shoes_children">Kinderschuhe</string>
+	<string name="poi_shoes_women">Frauenschuhe</string>
+	<string name="poi_shoes_sport">Sportschuhe</string>
+	<string name="poi_shoes_men">Männerschuhe</string>
+	<string name="poi_shoes_orthopedic">Orthopädische Schuhe</string>
+
+	<string name="poi_openfire_yes">Offenes Feuer erlaubt</string>
+	<string name="poi_openfire_no">Offenes Feuer verboten</string>
+	<string name="poi_washing_machine_yes">Waschmaschine: Ja</string>
+	<string name="poi_washing_machine_no">Waschmaschine: Nein</string>
+	<string name="poi_shower_yes">Dusche: Ja</string>
+	<string name="poi_shower_no">Dusche: Nein</string>
+	<string name="poi_shower_hot">Dusche: warm</string>
+	<string name="poi_shower_outdoor">Dusche: draussen</string>
+	<string name="poi_shower_cold">Dusche: kalt</string>
+	<string name="poi_shower_indoor">Dusche: drinnen</string>
+	<string name="poi_caravans_yes">Wohnwagen: Ja</string>
+	<string name="poi_caravans_no">Wohnwagen: Nein</string>
+	<string name="poi_power_supply_yes">Stromanschluss: Ja</string>
+	<string name="poi_power_supply_no">Stromanschluss: Nein</string>
+	<string name="poi_power_supply_cee_17_blue">Stromanschluss: CEE 17 blau</string>
+	<string name="poi_power_supply_cee_7_4">Stromanschluss: CEE 7/4</string>
+	<string name="poi_power_supply_cee_7_5">Stromanschluss: CEE 7/5</string>
+	<string name="poi_power_supply_nema_5_15">Stromanschluss: NEMA 5-15</string>
+
+	<string name="poi_capacity_tents">Maximale Zeltplätze</string>
+	<string name="poi_capacity_caravans">Maximum Wohnwagen</string>
+	<string name="poi_dog_yes">Hunde erlaubt</string>
+	<string name="poi_dog_no">Hunde nicht erlaubt</string>
+
+	<string name="poi_refugee_no">Flüchtlinge: Nein</string>
+
+	<string name="poi_social_facility_day_care">Sozialeinrichtung: Tagespflege</string>
+
+	<string name="poi_social_facility_for_senior">Zielgruppe: Senioren</string>
+	<string name="poi_social_facility_for_child">Zielgruppe: Kinder</string>
+	<string name="poi_social_facility_for_disabled">Zielgruppe: Behinderte</string>
+	<string name="poi_social_facility_for_mental_health">Zielgruppe: mental beeinträchtigte Menschen</string>
+	<string name="poi_social_facility_for_homeless">Zielgruppe: Obdachlose</string>
+	<string name="poi_social_facility_for_migrant">Zielgruppe: Migranten</string>
+	<string name="poi_social_facility_for_unemployed">Zielgruppe: Arbeitslose</string>
+	<string name="poi_theatre_genre_musical">Genre: Musik</string>
+	<string name="poi_theatre_genre_drama">Genre: Drama</string>
+	<string name="poi_theatre_genre_opera">Genre: Oper</string>
+	<string name="poi_theatre_genre_cabaret">Genre: Kabarett</string>
+	<string name="poi_theatre_genre_comedy">Genre: Comedy</string>
+	<string name="poi_theatre_genre_marionette">Genre: Puppenspiel</string>
+	<string name="poi_theatre_genre_ballet">Genre: Ballet</string>
+	<string name="poi_theatre_genre_shadow_play">Genre: Schattenspiel</string>
+
+	<string name="poi_product_leather">Produkt: Leder</string>
+	<string name="poi_product_beer">Produkt: Bier</string>
+	<string name="poi_product_meat">Produkt: Fleisch</string>
+
+	<string name="poi_wheelchair_description">Beschreibung für Rollstuhlnutzer</string>
+	<string name="poi_blind_description">Beschreibung für Blinde</string>
+	<string name="poi_handrail_yes">Handgelender: Ja</string>
+	<string name="poi_handrail_no">Handgelender: Nein</string>
+	<string name="poi_ramp_yes">Rampe: Ja</string>
+	<string name="poi_ramp_no">Rampe: Nein</string>
+	<string name="poi_ramp_wheelchair_yes">Rampe für Rollstuhl: Ja</string>
+	<string name="poi_ramp_wheelchair_no">Rampe für Rollstuhl: Nein</string>
+	<string name="poi_ramp_bicycle_yes">Rampe für Fahrräder: Ja</string>
+	<string name="poi_ramp_bicycle_no">Rampe für Fahrräder: Nein</string>
+	<string name="poi_step_count">Anzahl Stufen</string>
+	<string name="poi_defibrillator">Defibrillator</string>
+	<string name="poi_defibrillator_yes">Defibrillator: Ja</string>
+
+	<string name="poi_horse_yes">Pferde erlaubt</string>
+	<string name="poi_horse_no">Pferde nicht erlaubt</string>
+	<string name="poi_animal_yes">Tiere erlaubt</string>
+	<string name="poi_animal_no">Tiere nicht erlaubt</string>
+
+	<string name="poi_historic_stone">Historischer Stein</string>
+	<string name="poi_material_wood">Martial: Holz</string>
+	<string name="poi_material_metal">Material: Metall</string>
+	<string name="poi_material_steel">Material: Stahl</string>
+	<string name="poi_material_stone">Material: Stein</string>
+	<string name="poi_material_plastic">Martial: Plastik</string>
+	<string name="poi_material_sandstone">Material: Sandstein</string>
+	<string name="poi_material_granite_stone">Material: Granit</string>
+	<string name="poi_material_metal_wood">Material: Metal; Holz</string>
+	<string name="poi_material_glass">Material: Glas</string>
+	<string name="poi_material_bronze">Material: Bronze</string>
+	<string name="poi_material_earth">Material: Erde</string>
+	<string name="poi_material_aluminium">Material: Aluminium</string>
+
+	<string name="poi_historic_railway_station">Historische Eisenbahnstation</string>
+
+	<string name="poi_club_sailing">Segelclub</string>
+	<string name="poi_historic_railway">Historische Eisenbahn</string>
+
+	<string name="poi_artist_name">Künstler</string>
+	<string name="poi_building_type_church">Gebäudeart: Kirche</string>
+	<string name="poi_building_type_chapel">Gebäudeart: Kapelle</string>
+	<string name="poi_building_type_mosque">Gebäudeart: Moschee</string>
+	<string name="poi_building_type_temple">Gebäudeart: Tempel</string>
+	<string name="poi_building_type_cathedral">Gebäudeart: Kathedrale</string>
+	<string name="poi_building_type_basilica">Gebäudeart: Basilika</string>
+	<string name="poi_building_type_synagogue">Gebäudeart: Synagoge</string>
+	<string name="poi_building_type_shrine">Gebäudeart: Schrein</string>
+
+	<string name="poi_cross">Kreuz</string>
+	<string name="poi_temperature">Temperatur</string>
+	<string name="poi_wiki_lang_ga">Irisches Wiki</string>
+	<string name="poi_wiki_lang_is">Isländisches Wiki</string>
+	<string name="poi_wiki_lang_ka">Georgisches Wiki</string>
+	<string name="poi_wiki_lang_ku">Kurdisches Wiki</string>
+	<string name="poi_wiki_lang_la">Lateinisches Wiki</string>
+	<string name="poi_wiki_lang_lb">Luxemburgisches Wiki</string>
+	<string name="poi_wiki_lang_mk">Mazedonisches Wiki</string>
+	<string name="poi_wiki_lang_sq">Albanisches Wiki</string>
+	<string name="poi_wiki_lang_tl">Philippinisches Wiki</string>
+
+	<string name="poi_religion_spiritualist">Spiritalismus</string>
+	<string name="poi_denomination_evangelical">Evangelikal</string>
+	<string name="poi_denomination_mormon">Mormonen</string>
+	<string name="poi_denomination_jehovahs_witness">Jehovas Zeugen</string>
+	<string name="poi_denomination_greek_catholic">Griechisch-katholisch</string>
+	<string name="poi_denomination_bulgarian_orthodox">Bulgarisch-orthodox</string>
+	<string name="poi_denomination_adventist">Adventisten</string>
+	<string name="poi_denomination_serbian_orthodox">Serbisch-orthodox</string>
+	<string name="poi_denomination_apostolic">Apostolisch</string>
+	<string name="poi_denomination_reform">Reformierte</string>
+	<string name="poi_denomination_georgian_orthodox">Georgisch-orthodox</string>
+	<string name="poi_denomination_coptic_orthodox">Kopitsch-orthodox</string>
+	<string name="poi_bicycle_parking_stands">Fahrradständer</string>
+	<string name="poi_bicycle_parking_wall_loops">Fahrrad Wandhalter</string>
+	<string name="poi_leaf_type_mixed">Gemischt</string>
+	<string name="poi_trees_persimmon">Persimmon</string>
+	<string name="poi_generator_source_coal">Energiequelle: Kohle</string>
+	<string name="poi_generator_source_gas">Energiequelle: Gas</string>
+	<string name="poi_generator_source_nuclear">Energiequelle: nuklear</string>
+	<string name="poi_generator_source_solar">Energiequelle: solar</string>
+	<string name="poi_generator_source_hydro">Energiequelle: hydro</string>
+	<string name="poi_generator_source_wind">Energiequelle: Wind</string>
+	<string name="poi_generator_source_geothermal">Energiequelle: Geothermie</string>
+	<string name="poi_generator_source_oil">Energiequelle: Öl</string>
+	<string name="poi_generator_source_diesel">Energiequelle: Diesel</string>
+
+	<string name="poi_int_name">Internationale Bezeichnung</string>
+	<string name="poi_nat_name">Nationale Bezeichnung</string>
+	<string name="poi_reg_name">Regionale Bezeichnung</string>
+	<string name="poi_loc_name">Lokale Bezeichnung</string>
+	<string name="poi_old_name">Alte Bezeichnung</string>
+	<string name="poi_alt_name">Alternative Bezeichnung</string>
+
+	<string name="poi_pump_manual">Handpumpe</string>
+	<string name="poi_pump_no">Keine Pumpe</string>
+	<string name="poi_pump_yes">Pumpe</string>
+
+	<string name="poi_information_board">Informationstafel</string>
+	<string name="poi_information_map">Karte</string>
+	<string name="poi_information_office">Informationsbüro</string>
+	<string name="poi_information_route_marker">Streckenmarkierung</string>
+	<string name="poi_information_hikingmap">Wanderkarte</string>
+	<string name="poi_information_nature">Informationspunkt: Natur</string>
+	<string name="poi_information_wildlife">Informationspunkt: Wildleben</string>
+	<string name="poi_information_history">Informationspunkt: Historie</string>
+	<string name="poi_information_sign">Schild</string>
+	<string name="poi_information_audioguide">Audioerklärung</string>
+	<string name="poi_information_bicyclemap">Fahrradkarte</string>
+	<string name="poi_board_type_plants">Informationspunkt: Pflanzen</string>
+	<string name="poi_board_type_geology">Informationspunkt: geologisch</string>
+	<string name="poi_board_type_public_transport">Informationspunkt: öffentlicher Nahverkehr</string>
+	<string name="poi_board_type_technology">Informationspunkt: Technik</string>
+	<string name="poi_board_type_astronomy">Informationspunkt: Astronomie</string>
+
+	<string name="poi_commercial">Gewerbegebiet</string>
+	<string name="poi_fireplace_yes">Feuerstelle</string>
+	<string name="poi_fireplace_no">Keine Feuerstelle</string>
+
+	<string name="poi_covered_yes">überdacht</string>
+	<string name="poi_covered_no">offen</string>
+
+	<string name="poi_smoking_no">Rauchen verboten</string>
+	<string name="poi_smoking_outside">Rauchen nur draussen erlaubt</string>
+	<string name="poi_smoking_yes">Rauchen erlaubt</string>
+	<string name="poi_smoking_separated">Rauchen im Raucherzimmer</string>
+	<string name="poi_traffic_signals_sound_yes">mit Ton</string>
+	<string name="poi_traffic_signals_sound_no">ohne Ton</string>
+	<string name="poi_rescue_station">Rettungsstation</string>
+
+	<string name="poi_mini_roundabout">Mini-Kreisverkehr</string>
+	<string name="poi_railway_crossing">Bahnübergang</string>
+	<string name="poi_bird_hide">Vögelbeobachtungspunkt</string>
+	<string name="poi_garden">Garten</string>
+
+	<string name="poi_heath">Heide</string>
+	<string name="poi_grass">Grass</string>
+	<string name="poi_grassland">Grasland</string>
+	<string name="poi_scrub">Gestrüpp</string>
+	<string name="poi_logging">Holzfällen</string>
+	<string name="poi_sand">Sand</string>
+
+	<string name="poi_windfall">Fallobst</string>
+	<string name="poi_dead_wood">Todwald</string>
+
+	<string name="poi_level">Ebene</string>
+	<string name="poi_rtsa_scale">RTSA Skala</string>
+
+	<string name="poi_piste_difficulty_easy">Pistengrad: leicht</string>
+	<string name="poi_piste_difficulty_advanced">Pistengrad: Fortgeschrittene</string>
+	<string name="poi_piste_difficulty_expert">Pistengrad: Experte</string>
+	<string name="poi_power_pole">Strommast</string>
+
+	<string name="poi_power_tower">Strommast</string>
+	<string name="poi_ford_stepping_stones">Trittsteinbrücke</string>
+	<string name="poi_greenfield">Bauland</string>
+	<string name="poi_religion_jain">Jainismus</string>
+	<string name="poi_board_type_notice">schwarzes Brett</string>
+	<string name="poi_garden_style_english">Gartenstil: Englisch</string>
+	<string name="poi_garden_style_japanese">Gartenstil: Japanisch</string>
+
+	<string name="poi_capacity">Kapazität</string>
+	<string name="poi_capacity_disabled_yes">reservierte Plätze für Behinderte</string>
+	<string name="poi_capacity_disabled_no">keine reservierten Plätze für Behinderte</string>
+	<string name="poi_capacity_disabled">reservierte Plätze Behinderte</string>
+	<string name="poi_capacity_women_yes">reservierte Plätze für Frauen</string>
+	<string name="poi_capacity_women_no">keine reservierten Plätze für Frauen</string>
+	<string name="poi_capacity_women">reservierte Plätze für Frauen</string>
+	<string name="poi_capacity_pupils">reservierte Plätze für Studenten</string>
+	<string name="poi_capacity_teachers">reservierte Plätze für Lehrer</string>
+	<string name="poi_capacity_parent_yes">reservierte Plätze für Eltern</string>
+	<string name="poi_capacity_parent_no">keine reservierten Plätze für Eltern</string>
+	<string name="poi_capacity_parent">reservierte Plätze für Eltern</string>
+
+	<string name="poi_aerialway_occupancy">"Campingplatz-, Stuhl-,  Autokapazität"</string>
+	<string name="poi_aerialway_capacity">Kapazität pro Stunde</string>
+	<string name="poi_aerialway_duration">durchschnittliche Fahrzeit, Minuten</string>
+	<string name="poi_aerialway_bubble_yes">Blase</string>
+	<string name="poi_aerialway_bubble_no">Keine Blase</string>
+	<string name="poi_aerialway_heating_yes">Heizung</string>
+	<string name="poi_aerialway_heating_no">keine Heizung</string>
+	<string name="poi_aerialway_bicycle_yes">Fahrrad: erlaubt</string>
+	<string name="poi_aerialway_bicycle_no">Fahrrad: nicht erlaubt</string>
+	<string name="poi_aerialway_bicycle_summer">Fahrrad: nur im Sommer erlaubt</string>
+	<string name="poi_aerialway_access_entry">nur Eingang</string>
+	<string name="poi_aerialway_access_exit">nur Ausgang</string>
+	<string name="poi_aerialway_access_both">Eingang und Ausgang</string>
+	<string name="poi_aerialway_summer_access_entry">Sommereingang</string>
+	<string name="poi_aerialway_summer_access_exit">Sommerausgang</string>
+	<string name="poi_aerialway_summer_access_both">Sommerein- und ausgang</string>
+
+	<string name="poi_stars_1">Sterne: 1 (Tourist)</string>
+	<string name="poi_stars_1s">Sterne: 1S (gehobener Tourist)</string>
+	<string name="poi_stars_2">Sterne: 2 (Standard)</string>
+	<string name="poi_stars_2s">Sterne: 2S (gehobener Standard)</string>
+	<string name="poi_stars_3">Sterne: 3 (Komfort)</string>
+	<string name="poi_stars_3s">Sterne: 3S (gehobener Komfort)</string>
+	<string name="poi_stars_4">Sterne: 4 (Erste Klasse)</string>
+	<string name="poi_stars_4s">Steren: 4S (gehobene Erste Klasse)</string>
+	<string name="poi_stars_5">Sterne: 5 (De Luxe)</string>
+	<string name="poi_stars_5s">Sterne: 5S (gehobenes De Luxe)</string>
+	<string name="poi_stars_6">Sterne: 6</string>
+	<string name="poi_stars_7">Sterne: 7</string>
+	<string name="poi_rooms">Zimmer</string>
+
+	<string name="poi_payment_coins_yes">Münzen akzeptiert</string>
+	<string name="poi_payment_coins_no">Münzen nicht akzeptiert</string>
+	<string name="poi_payment_coins_0.5">$0.5 Münzen akzeptiert</string>
+	<string name="poi_payment_coins_50c12">50ct, 1€ und 2€ Münzen akzeptiert</string>
+	<string name="poi_payment_telephone_cards_yes">Telefonkarten akzeptiert</string>
+	<string name="poi_payment_telephone_cards_no">Telefonkarten nicht akzeptiert</string>
+	<string name="poi_payment_credit_cards_yes">Kreditkarten akzeptiert</string>
+	<string name="poi_payment_credit_cards_no">Kreditkarten nicht akzeptiert</string>
+	<string name="poi_payment_notes_yes">Banknoten akzeptiert</string>
+	<string name="poi_payment_notes_no">Banknoten nicht akzeptiert</string>
+	<string name="poi_payment_cash_yes">Bargeld akzeptiert</string>
+	<string name="poi_payment_cash_no">Bargeld nicht akzeptiert</string>
+	<string name="poi_payment_debit_cards_yes">Debit Karte akzeptiert</string>
+	<string name="poi_payment_debit_cards_no">Debit Karte nicht akzeptiert</string>
+	<string name="poi_payment_bitcoin_yes">Bitcoin akzeptiert</string>
+	<string name="poi_payment_bitcoin_no">Bitcoin nicht akzeptiert</string>
+	<string name="poi_payment_visa_yes">Visa Karte akzeptiert</string>
+	<string name="poi_payment_visa_no">Visa Karte nicht akzeptiert</string>
+	<string name="poi_payment_mastercard_yes">Mastercard akzeptiert</string>
+	<string name="poi_payment_mastercard_no">Mastercard nicht akzeptiert</string>
+	<string name="poi_payment_none">Kostenlos</string>
+	<string name="poi_payment_maestro_yes">Maestro Karte akzeptiert</string>
+	<string name="poi_payment_maestro_no">Maestro Karte nicht akzeptiert</string>
+	<string name="poi_payment_american_express_yes">American Express (AMEX) Karte akzeptiert</string>
+	<string name="poi_payment_american_express_no">American Express (AMEX) Karte nicht akzeptiert</string>
+	<string name="poi_payment_diners_club_yes">Diners Club Karte akzeptiert</string>
+	<string name="poi_payment_diners_club_no">Diners Club Karte nicht akzeptiert</string>
+	<string name="poi_payment_dkv_yes">DKV akzeptiert</string>
+	<string name="poi_payment_dkv_no">DKV nicht akzeptiert</string>
+	<string name="poi_drive_in_yes">Autoschalter: Ja</string>
+	<string name="poi_drive_in_no">Autoschalter: Nein</string>
+	<string name="poi_drive_through_yes">Durchfahrt: Ja</string>
+	<string name="poi_drive_through_no">Durchfahrt: Nein</string>
+
+	<string name="poi_brewery_additional">Brauereiname</string>
+	<string name="poi_microbrewery_yes">Minibrauereien</string>
+	<string name="poi_microbrewery_no">Keine Minibrauereien</string>
+
+	<string name="poi_takeaway_yes">zum Mitnehmen</string>
+	<string name="poi_takeaway_no">Nicht zum Mitnehmen</string>
+	<string name="poi_takeaway_only">nur zum Mitnehmen</string>
+
+	<string name="poi_delivery_yes">Lieferservice</string>
+	<string name="poi_delivery_no">Kein Lieferservice</string>
+	<string name="poi_delivery_only">Nur Lieferung</string>
+
+	<string name="poi_cocktails_yes">Cocktails</string>
+
+	<string name="poi_service_dealer">Händler</string>
+	<string name="poi_service_repair">Reparatur</string>
+	<string name="poi_service_repair_no">Keine Reparatur</string>
+	<string name="poi_automated_yes">Automatisiert</string>
+	<string name="poi_automated_no">Nicht automatisiert</string>
+	<string name="poi_brushless_no">Bürstenlos: Nein</string>
+	<string name="poi_car_wash_no">Autowäsche: Nein</string>
+
+	<string name="poi_male_yes">Männlich</string>
+	<string name="poi_male_no">Für Männer verboten</string>
+	<string name="poi_female_yes">Weiblich</string>
+	<string name="poi_female_no">Für Frauen verboten</string>
+	<string name="poi_toilets_yes">Mit Toiletten</string>
+	<string name="poi_toilets_no">Keine Toiletten</string>
+	<string name="poi_religion_bahai">Bahaitum</string>
+	<string name="poi_religion_pagan">Heidentum</string>
+	<string name="poi_religion_tenrikyo">Tenrikyō</string>
+	<string name="poi_religion_zoroastrian">Zoroastrismus</string>
+
+	<string name="poi_denomination_sunni">sunnitische</string>
+	<string name="poi_denomination_anglican">anglikanisch</string>
+	<string name="poi_denomination_presbyterian">presbyterianisch</string>
+	<string name="poi_denomination_pentecostal">Pfingstler</string>
+	<string name="poi_denomination_church_of_england">Kirche von England</string>
+	<string name="poi_denomination_episcopal">Episkopalkirche</string>
+	<string name="poi_denomination_shia">Schia</string>
+	<string name="poi_denomination_united">Vereinigten</string>
+	<string name="poi_denomination_tibetan">tibetanisch</string>
+	<string name="poi_denomination_united_reformed">vereinigt reformiert</string>
+	<string name="poi_denomination_church_of_scotland">Kirche von Schottland</string>
+	<string name="poi_denomination_salvation_army">Heilsarmee</string>
+	<string name="poi_denomination_iglesia_ni_cristo">Iglesia ni Cristo</string>
+	<string name="poi_denomination_mennonite">Mennoniten</string>
+	<string name="poi_denomination_quaker">Quaker</string>
+	<string name="poi_denomination_assemblies_of_god">Assemblies of god</string>
+	<string name="poi_denomination_nondenominational">bekenntnisfrei</string>
+	<string name="poi_denomination_nazarene">Nazaräer</string>
+	<string name="poi_denomination_united_methodist">vereinigte Methodisten</string>
+	<string name="poi_denomination_old_believers">Altgläubige</string>
+	<string name="poi_denomination_spiritist">Spiritist</string>
+	<string name="poi_denomination_armenian_apostolic">Armenische-apostolisch</string>
+	<string name="poi_denomination_dutch_reformed">niederländisch-reformiert</string>
+	<string name="poi_denomination_latter_day_saints">Heiligen der Letzten Tage</string>
+	<string name="poi_denomination_church_of_christ">Kirche Christi</string>
+	<string name="poi_denomination_united_church_of_christ">Vereinigte Kirche Christi</string>
+	<string name="poi_denomination_scientist">Wissenschaftler</string>
+	<string name="poi_denomination_romanian_orthodox">Rumänisch-orthodox</string>
+	<string name="poi_stone_type_coat_of_arms">Typ: Wappen</string>
+
+	<string name="poi_material_reinforced_concrete">Material: Stahlbeton</string>
+	<string name="poi_material_concrete">Material: Beton</string>
+	<string name="poi_material_masonry">Material: Mauerwerk</string>
+	<string name="poi_material_brick">Martial: Ziegel</string>
+	<string name="poi_material_composite">Material: zusammengesetzte</string>
+	<string name="poi_material_limestone">Material: Kalkstein</string>
+	<string name="poi_material_marble">Material: Marmor</string>
+	<string name="poi_site_type_megalith">Typ: Magalith</string>
+	<string name="poi_site_type_tumulus">Typ: Grabhügel</string>
+	<string name="poi_site_type_fortification">Typ: Befestigung</string>
+	<string name="poi_site_type_settlement">Typ: Siedlung</string>
+	<string name="poi_site_type_city">Typ: Stadt</string>
+	<string name="poi_site_type_necropolis">Typ: Nekropole</string>
+	<string name="poi_site_type_earthwork">Typ: Erdarbeiten</string>
+	<string name="poi_megalith_type_menhir">Megalith-Typ: Menhir</string>
+	<string name="poi_megalith_type_dolmen">Megalith-Typ: Dolmen</string>
+	<string name="poi_fortification_type_hill_fort">Befestigungstyp: Höhenburg</string>
+	<string name="poi_fortification_type_limes">Befestigungstyp: Limes</string>
+	<string name="poi_fortification_type_sconce">Befestigungstyp: Leuchter</string>
+	<string name="poi_fortification_type_ring_ditch">Befestigungstyp: Ringgraben</string>
+
+	<string name="poi_pa">Pa (befestigte Siedlung der Maori)</string>
+
+	<string name="poi_historic_farm">Historischer Bauernhof</string>
+	<string name="poi_club_freemasonry">Freimaurerloge</string>
+	<string name="poi_club_scout">Scout-Club</string>
+
+	<string name="poi_historic_threshing_floor">Historische Tenne</string>
+	<string name="poi_historic_gallows">Historischer Galgen</string>
+	<string name="poi_square">Quadrat</string>
+	<string name="poi_sculptor">Bildhauer</string>
+
+	<string name="poi_building_type_monastery">Gebäudeart: Kloster</string>
+	<string name="poi_prison_camp">Ehemaliges Kriegsgefangenenlager</string>
+	<string name="poi_concentration_camp">Typ: Konzentrationslager</string>
+	<string name="poi_pow_camp">Typ: Kriegsgefangenenlager</string>
+	<string name="poi_labor_camp">Typ: Arbeitslager</string>
+	<string name="poi_concentration_camp_nazism">Typ: Nazi</string>
+	<string name="poi_concentration_camp_gulag">Typ: Gulag</string>
+
+	<string name="poi_bathing_yes">Baden: Ja</string>
+	<string name="poi_bathing_no">Baden: Nein</string>
+
+	<string name="poi_boat_storage">Bootslager</string>
+
+	<string name="poi_bridge_ref">Brücken ref</string>
+	<string name="poi_tunnel_ref">Tunnel ref</string>
+
+	<string name="poi_ref">Ref</string>
+
+	<string name="poi_cargo_passengers">Fracht: Passagiere</string>
+	<string name="poi_cargo_vehicle">Fracht: Fahrzeuge</string>
+	<string name="poi_cargo_bicycle">Fracht: Fahrräder</string>
+	<string name="poi_cargo_container">Fracht: Container</string>
+	<string name="poi_cargo_hgv">Fracht: LKW</string>
+
+	<string name="poi_fitness_station">Fitness Station</string>
+
+	<string name="poi_hackerspace">Hackerspace</string>
+
+	<string name="poi_wiki_lang_als">elsässisches Wiki</string>
+	<string name="poi_wiki_lang_bs">Bosnisches Wiki</string>
+	<string name="poi_wiki_lang_fy">Friesisches Wiki</string>
+	<string name="poi_wiki_lang_hy">Armenisches Wiki</string>
+	<string name="poi_wiki_lang_nds">Niedersächsisches Wiki</string>
+	<string name="poi_wiki_lang_os">Ossetisches Wiki</string>
+	<string name="poi_wiki_lang_pms">Piemontesisches Wiki</string>
+	<string name="poi_wiki_lang_sc">Sardisches Wiki</string>
+	<string name="poi_wiki_lang_sh">Serbokroatisches Wiki</string>
+	<string name="poi_wiki_lang_ta">Tamilisches Wiki</string>
+	<string name="poi_wiki_lang_kk">Kasachisches Wiki</string>
+	<string name="poi_wiki_lang_uz">Usbekische Wiki</string>
+	<string name="poi_wiki_lang_ce">Tschetschenisches Wiki</string>
+	<string name="poi_wiki_lang_ur">Urduisches Wiki</string>
+	<string name="poi_wiki_lang_oc">Okzitanisch Wiki</string>
+	<string name="poi_wiki_lang_jv">Javanisches Wiki</string>
+	<string name="poi_wiki_lang_zhyue">Kantonesisches Wiki</string>
+	<string name="poi_wiki_lang_ast">Astur-leonisches Wiki</string>
+	<string name="poi_wiki_lang_lmo">Lombardisches Wiki</string>
+	<string name="poi_wiki_lang_ne">Nepalisches Wiki</string>
+	<string name="poi_wiki_lang_scn">sizilianisches Wiki</string>
+	<string name="poi_wiki_lang_bar">Bayrisches Wiki</string>
+	<string name="poi_wiki_lang_mn">Mongolisches Wiki</string>
+	<string name="poi_wiki_lang_nap">Neapolitanisches Wiki</string>
+
+	<string name="poi_fireworks">Feuerwerksladen</string>
+
+	<string name="poi_denomination_shaktism">Shaktismus</string>
+	<string name="poi_denomination_maronite">Maroniten</string>
+	<string name="poi_bicycle_parking_rack">Gestell</string>
+	<string name="poi_bicycle_parking_building">Spezialgebäude</string>
+	<string name="poi_bicycle_parking_shed">Schuppen</string>
+	<string name="poi_bicycle_parking_bollard">Poller</string>
+	<string name="poi_bicycle_parking_informal">Informell</string>
+
+	<string name="poi_taxon">Taxon</string>
+
+	<string name="poi_urban">Städtisch</string>
+	<string name="poi_pump_powered">Angetriebene Pumpe</string>
+	<string name="poi_water_characteristic_mineral">Wassercharakteristik: mineralisch</string>
+	<string name="poi_water_characteristic_mud">Wassercharakteristik: schlammig</string>
+	<string name="poi_water_characteristic_sulfuric">Wassercharakteristik: schwefelig</string>
+
+	<string name="poi_water_point">Wasseranschluss</string>
+
+	<string name="poi_payment_electronic_purses_no">Elektrische Zahlungsmittel nicht akzeptiert</string>
+	<string name="poi_resource_ruby">Rubin</string>
+	<string name="poi_resource_rutile">Rutil</string>
+	<string name="poi_resource_slate_iron_ore_copper">Schiefer; Eisenerz; Kupfer</string>
+	<string name="poi_resource_slate">Schiefer</string>
+	<string name="poi_resource_tin">Zinn</string>
+	<string name="poi_resource_tuff">Tuff</string>
+	<string name="poi_resource_uranium">Uran</string>
+	<string name="poi_resource_vanadium">Vanadium</string>
+	<string name="poi_resource_zinc">Zink</string>
+	<string name="poi_resource_zircon">Zirkon</string>
+
+	<string name="poi_wetland_wet_meadow">Feuchtwiese</string>
+	<string name="poi_wetland_bog">Moor</string>
+	<string name="poi_wetland_marsh">Sumpf</string>
+	<string name="poi_wetland_reedbed">Schilf</string>
+	<string name="poi_recycling_hardcore">(Bau)Schutt</string>
+	<string name="poi_brownfield">Bauland</string>
+	<string name="poi_religion_unitarian_universalist">Unitarischer Universalismus</string>
+	<string name="poi_religion_multifaith">Mehrfachgläubig</string>
+	<string name="poi_religion_scientologist">Scientology</string>
+	<string name="poi_denomination_uniting">Vereinigung</string>
+	<string name="poi_denomination_congregational">Congregational</string>
+	<string name="poi_denomination_ethiopian_orthodox_tewahedo">Äthiopisch-orthodoxe tewahedo-Kirche</string>
+	<string name="poi_denomination_unitarian">Unitarisch</string>
+	<string name="poi_denomination_wesleyan">Wesleyan</string>
+	<string name="poi_denomination_shingon_shu">Schule des wahren Wortes</string>
+	<string name="poi_denomination_mahayana">Mahayana</string>
+
+	<string name="poi_jersey_barrier">Jersey Barriere</string>
+	<string name="poi_leaf_type_needleleaved">Nadelwald</string>
+	<string name="poi_cuisine">Küche</string>
+
+	<string name="poi_information_guidepost">Wegweiser</string>
+	<string name="poi_information_trail_blaze">Wegmarkierung</string>
+	<string name="poi_information_terminal">Informationsterminal</string>
+	<string name="poi_information_tactile_model">Tastbares Modell</string>
+	<string name="poi_information_tactile_map">Tastbare Karte</string>
+	<string name="poi_retail">Einzelhandelgebiet</string>
+
+	<string name="poi_smoking_isolated">Rauchen nur in einem separaten Raum erlaubt</string>
+	<string name="poi_smoking_dedicated">Nur für Raucher</string>
+
+	<string name="poi_toll_yes">Maut</string>
+	<string name="poi_toll_no">keine Maut</string>
+	<string name="poi_toll_hgv_yes">LKW Maut</string>
+	<string name="poi_tactile_paving_yes">Mit Blindenleitsystem</string>
+	<string name="poi_tactile_paving_no">Ohne Blindenleitsystem</string>
+	<string name="poi_traffic_signals_sound_walk">Ton signalisiert sicheres weitergehen</string>
+
+	<string name="poi_services">Raststätte</string>
+	<string name="poi_railway_level_crossing">Bahnübergang</string>
+	<string name="poi_horse_riding">Reiten</string>
+	<string name="poi_leisure_common">allgemeiner Freizeitbereich</string>
+	<string name="poi_farmland">Ackerland</string>
+	<string name="poi_passing_place">Ausweichstelle</string>
+	<string name="poi_piste_difficulty_intermediate">Pistenschwierigkeitsgrad: mittel</string>
+	<string name="poi_piste_difficulty_novice">Pistenschwierigkeitsgrad: Anfänger</string>
+	<string name="poi_piste_difficulty_freeride">Pistenschwierigkeit: Freeride</string>
+	<string name="poi_piste_grooming_classic">Pistenbeschaffenheit: klassische</string>
+	<string name="poi_piste_grooming_classic_skating">Pistenbeschaffenheit: klassisch und skating</string>
+	<string name="poi_piste_grooming_backcountry">Pistenbeschaffenheit: backcountry</string>
+	<string name="poi_piste_grooming_scooter">Pistenbeschaffenheit: Roller</string>
+	<string name="poi_piste_grooming_skating">Pistenbeschaffenheit: skating</string>
+	<string name="poi_piste_grooming_no">Pistenbeschaffenheit: nein</string>
+	<string name="poi_piste_grooming_mogul">Pistenbeschaffenheit: Mogul</string>
+
+	<string name="poi_garden_type_residential">Garten-Typ: Wohngebiet</string>
+	<string name="poi_garden_type_community">Garten-Typ: Gemeinschaft</string>
+	<string name="poi_garden_type_private">Garten-Typ: privat</string>
+	<string name="poi_garden_type_botanical">Garten-Typ: botanisch</string>
+
+	<string name="poi_garden_style_kitchen">Garten-Typ: Küche</string>
+	<string name="poi_garden_style_rosarium">Garten-Typ: Rosengarten</string>
+	<string name="poi_garden_style_french">Garten-Typ: französisch</string>
+	<string name="poi_love_hotel">Liebeshotel</string>
+
+	<string name="poi_payment_electronic_purses_yes">Elektronische Geldbörsen akzeptiert</string>
+	<string name="poi_payment_uta_yes">UTA Karten akzeptiert</string>
+	<string name="poi_payment_uta_no">UTA Karten nicht akzeptiert</string>
+	<string name="poi_payment_efectivo_yes">Nachnahme akzeptiert</string>
+	<string name="poi_payment_efectivo_no">Nachnahme nicht akzeptiert</string>
+	<string name="poi_payment_girocard_yes">Girokarte akzeptiert</string>
+	<string name="poi_payment_girocard_no">Girokarte nicht akzeptiert</string>
+	<string name="poi_payment_discover_card_yes">Discover Karte akzeptiert</string>
+	<string name="poi_payment_discover_card_no">Discover Karte nicht akzeptiert</string>
+	<string name="poi_brushless_yes">Bürstenlos</string>
+	<string name="poi_parish">Gemeindebüro</string>
 	</resources>

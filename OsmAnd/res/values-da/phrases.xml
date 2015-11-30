@@ -104,7 +104,7 @@
         <string name="poi_emergency_access_point">Nødstilfælde punkt</string>
 
         <string name="poi_ford">Vadested</string>
-        <string name="poi_mountain_pass_yes">Bjergpas</string>
+        <string name="poi_mountain_pass">Bjergpas</string>
         <string name="poi_gate">Port</string>
         <string name="poi_city_wall">Bymur</string>
         <string name="poi_lift_gate">Vippebom</string>
@@ -1840,7 +1840,7 @@
 	<string name="poi_internet_access_type_wired">Internet adgangstype: kablet</string>
 	<string name="poi_internet_access_type_public">Internetadgang: offentlig</string>
 	<string name="poi_internet_access_type_service">Internetadgang: tjeneste</string>
-	<string name="poi_internet_access_type_no">Internetadgang: ingen</string>
+	<string name="poi_internet_access_type_no">Ingen internetadgang</string>
 
 <string name="poi_maxwidth">Max. bredde</string>
 	<string name="poi_iata">IATA kode</string>
@@ -2513,4 +2513,8 @@
 
 <string name="poi_fireworks">Fyrværkeri butik</string>
 
-</resources>
+<string name="poi_aerialway_length">Længde</string>
+
+<string name="poi_internet_access_type_yes">Med internetadgang</string>
+
+	</resources>

@@ -212,4 +212,33 @@
 
 <string name="poi_temperature">Temperatur</string>
 	<string name="poi_bathing_yes">Bading: ja</string>
+	<string name="poi_aerialway_length">Lengde</string>
+
+<string name="poi_seasonal_spring">Vår</string>
+	<string name="poi_seasonal_summer">Sommer</string>
+	<string name="poi_seasonal_autumn">Høst</string>
+	<string name="poi_seasonal_winter">Vinter</string>
+	<string name="poi_start_date">Startdato</string>
+	<string name="poi_wheelchair">Rullestol</string>
+	<string name="poi_wheelchair_no">Rullestol: ikke tillatt</string>
+	<string name="poi_wheelchair_limited">Rullestol: begrenset</string>
+	<string name="poi_building_type_shrine">Bygningstype: helligdom</string>
+
+	<string name="poi_building_type_church">Bygningstype: kirke</string>
+	<string name="poi_building_type_chapel">Bygningstype: kapell</string>
+	<string name="poi_building_type_mosque">Bygningstype: moské</string>
+	<string name="poi_building_type_temple">Bygningstype: tempel</string>
+	<string name="poi_building_type_cathedral">Bygningstype: katedral</string>
+	<string name="poi_building_type_monastery">Bygningstype: kloster</string>
+	<string name="poi_building_type_basilica">Bygningstype: basilika</string>
+	<string name="poi_building_type_synagogue">Bygningstype: synagoge</string>
+	<string name="poi_megalith_type_stone_circle">Megalittype: steinsirkel</string>
+	<string name="poi_megalith_type_dolmen">Megalittype: dysse</string>
+	<string name="poi_megalith_type_nuraghe">Megalittype: nurage</string>
+	<string name="poi_megalith_type_passage_grave">Megalittype: ganggrav</string>
+	<string name="poi_megalith_type_menhir">Megalittype: bautastein</string>
+	<string name="poi_site_type_petroglyph">Type: helleristning</string>
+	<string name="poi_site_type_city">Type: by</string>
+	<string name="poi_site_type_settlement">Type: bosetting</string>
+	<string name="poi_site_type_megalith">Type: megalitt</string>
 	</resources>

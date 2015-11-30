@@ -262,7 +262,7 @@ public class MapDataMenuController extends MenuController {
 			double mb = indexItem.getArchiveSizeMB();
 			String v ;
 			if (titleProgressController.progress != -1) {
-				v = getMapActivity().getString(R.string.value_downloaded_from_max, mb * titleProgressController.progress / 100, mb);
+				v = getMapActivity().getString(R.string.value_downloaded_of_max, mb * titleProgressController.progress / 100, mb);
 			} else {
 				v = getMapActivity().getString(R.string.file_size_in_mb, mb);
 			}

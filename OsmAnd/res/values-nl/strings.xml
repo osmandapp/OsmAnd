@@ -2162,11 +2162,11 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="later">Later</string>
     <string name="downloads">Downloads</string>
     <string name="confirm_download_roadmaps">U heeft de volledige kaart al. Wilt u echt de kaart met alleen wegen downloaden?</string>
-    <string name="value_downloaded_from_max">%1$.1f van %2$.1f MB</string>
+    <string name="value_downloaded_of_max">%1$.1f van %2$.1f MB</string>
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">Alles updaten (%1$s MB)</string>
     <string name="free_downloads_used">Gebruikte gratis downloads</string>
-    <string name="free_downloads_used_description">Bekijk hoeveel gratis downloads er zijn gebruikt</string>
+    <string name="free_downloads_used_description">Bekijk hoeveel gratis downloads er al gebruikt zijn</string>
 
     <string name="application_dir_description">Kies waar kaartbestanden bewaard worden.</string>
     <string name="show_on_start_description">\'Uit\' toont direct de kaart</string>
@@ -2241,4 +2241,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="access_from_map">Toegang vanaf kaart</string>
     <string name="use_dashboard_btn">Gebruik dashboard</string>
     <string name="use_drawer_btn">Gebruik menu</string>
-    </resources>
+    <string name="routing_attr_avoid_stairs_name">Vermijd trappen</string>
+	<string name="routing_attr_avoid_stairs_description">Vermijd trappen</string>
+	<string name="routing_attr_avoid_borders_name">Vermijd grensovergangen</string>
+	</resources>

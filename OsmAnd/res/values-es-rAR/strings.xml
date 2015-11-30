@@ -19,7 +19,7 @@
     <string name="shared_string_manage">Gestionar</string>
     <string name="shared_string_edit">Editar</string>
     <string name="shared_string_search">Buscar</string>
-    <string name="shared_string_show_description">Mostrar descripción</string>
+    <string name="shared_string_show_description">Mostrar información</string>
     <string name="shared_string_message">Mensaje</string>
     <string name="agps_data_last_downloaded">Últimos datos A-GPS descargados: %1$s</string>
     <string name="confirm_usage_speed_cameras">En muchos países (Alemania, Francia, Italia y otros) el uso de avisos de radares no está permitido por la ley. OsmAnd no asume ninguna responsabilidad si usted viola la ley. Haga clic en si, sólo si es elegible para utilizar esta función.</string>
@@ -51,7 +51,7 @@
     <string name="your_edits">Sus ediciones</string>
     <string name="waypoint_visit_after">Visitar luego</string>
     <string name="waypoint_visit_before">Visitar antes</string>
-    <string name="simulate_your_location">Simule su ubicación</string>
+    <string name="simulate_your_location">Simular su ubicación</string>
     <string name="short_location_on_map">Lat %1$s\nLon %2$s</string>
     <string name="tips_and_tricks_descr">Preguntas frecuentes, cambios recientes y otros</string>
     <string name="routing_settings_2">Ajustes de navegación</string>
@@ -1858,7 +1858,7 @@
     <string name="are_you_sure">¿Está seguro?</string>
     <string name="unsaved_changes_will_be_lost">Se perderán los cambios no guardados. ¿Continuar?</string>
     <string name="simulate_your_location_stop_descr">Parar simulación de ubicación</string>
-    <string name="simulate_your_location_descr">Simular usando una ruta calculada o una grabación GPX</string>
+    <string name="simulate_your_location_descr">Simular ubicación, usando una ruta calculada o una grabación GPX</string>
     <string name="downloads_left_template">Quedan %1$s descargas</string>
     <string name="shared_string_trip_recording">Grabación de viaje</string>
     <string name="shared_string_navigation">Navegación</string>
@@ -1899,12 +1899,12 @@
     <string name="favorite_category_dublicate_message">El nombre de categoría, ya existe. Defina otro nombre.</string>
     <string name="favorite_category_name">Nombre de categoría</string>
     <string name="favorite_category_add_new_title">Añadir nueva categoría</string>
-    <string name="confirm_download_roadmaps">¿Desea descargar el mapa vial, aunque tenga el mapa completo?</string>
-    <string name="value_downloaded_from_max">%1$.1f de %2$.1f MB</string>
+    <string name="confirm_download_roadmaps">¿Desea descargar el mapa vial, aunque ya tenga el mapa estándar (completo)?</string>
+    <string name="value_downloaded_of_max">%1$.1f de %2$.1f MB</string>
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">Actualizar todo (%1$s MB)</string>
     <string name="free_downloads_used">Descargas gratis usadas</string>
-    <string name="free_downloads_used_description">Configure cuántas descargas gratis usará</string>
+    <string name="free_downloads_used_description">Muestra las descargas gratis utilizadas</string>
     <string name="simulate_initial_startup_descr">Muestra la pantalla del primer arranque y mantiene los demás ajustes sin cambios</string>
     <string name="simulate_initial_startup">Simular el arranque inicial</string>
     <string name="share_geo">geo:</string>
@@ -1988,4 +1988,7 @@
     <string name="access_from_map_description">El botón del menú, muestra el panel de control, en lugar del menú</string>
     <string name="access_from_map">Acceso desde el mapa</string>
     <string name="please_specify_poi_type_only_from_list">"Especifique el tipo de PDI correcto u omítelo. "</string>
-    </resources>
+    <string name="routing_attr_avoid_stairs_name">Evitar escaleras</string>
+	<string name="routing_attr_avoid_stairs_description">Evitar pasar por escaleras</string>
+	<string name="routing_attr_avoid_borders_name">Evitar cruces fronterizos</string>
+	</resources>

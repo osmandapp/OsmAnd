@@ -704,7 +704,7 @@
     <string name="application_dir">Datalagringsmappe</string>
     <string name="build_installed">Version {0} korrekt installeret ({1}).</string>
     <string name="downloading_build">Henter version…</string>
-    <string name="install_selected_build">"Installer OsmAnd:  {0} - af {1} på {2} MB ?"</string>
+    <string name="install_selected_build">"Installer OsmAnd:  {0} - {1} - {2} MB ?"</string>
     <string name="loading_builds_failed">Hentning af versionslisten for OsmAnd mislykkedes</string>
     <string name="loading_builds">Indlæser OsmAnd versioner…</string>
     <string name="select_build_to_install">Vælg en OsmAnd version til installation</string>
@@ -2011,10 +2011,10 @@
     <string name="favorite_category_name">Kategorinavn</string>
     <string name="favorite_category_add_new_title">Tilføj ny kategori</string>
     <string name="confirm_download_roadmaps">Hent kort kun med veje, selv om et komplet standardkort allerede er hentet?</string>
-    <string name="value_downloaded_from_max">%1$.1f af %2$.1f MB</string>
+    <string name="value_downloaded_of_max">%1$.1f af %2$.1f MB</string>
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">Opdater alle (%1$s MB)</string>
-    <string name="free_downloads_used_description">Indstil hvormange gratis filhentninger der er brugt</string>
+    <string name="free_downloads_used_description">Viser de anvendte gratis filhentninger</string>
     <string name="free_downloads_used">Gratis filhentninger brugt</string>
 
     <string name="share_geo">geo:</string>
@@ -2110,4 +2110,7 @@
     <string name="access_from_map_description">Menuknappen viser betjeningspanel, ikke menuen</string>
     <string name="access_from_map">Adgang fra kort</string>
     <string name="please_specify_poi_type_only_from_list">"Angiv korrekt IP type eller spring over. "</string>
-    </resources>
+    <string name="routing_attr_avoid_stairs_name">Undgå trapper</string>
+	<string name="routing_attr_avoid_stairs_description">Undgå trapper</string>
+	<string name="routing_attr_avoid_borders_name">Undgå grænseovergang</string>
+	</resources>

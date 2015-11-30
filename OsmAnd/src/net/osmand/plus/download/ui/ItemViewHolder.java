@@ -189,7 +189,7 @@ public class ItemViewHolder {
 				double mb = indexItem.getArchiveSizeMB();
 				String v ;
 				if (progress != -1) {
-					v = context.getString(R.string.value_downloaded_from_max, mb * progress / 100, mb);
+					v = context.getString(R.string.value_downloaded_of_max, mb * progress / 100, mb);
 				} else {
 					v = context.getString(R.string.file_size_in_mb, mb);
 				}

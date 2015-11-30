@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
 
+    <string name="shared_string_location">Местоположение</string>
     <string name="poi_context_menu_modify_osm_change">Редактировать POI</string>
     <string name="osm_edit_reopened_note">Заметка OSM открыта снова</string>
     <string name="osm_edit_commented_note">К заметке OSM добавлен комментарий</string>
@@ -53,7 +54,7 @@
     <string name="layer_recordings">Слой аудиозаписей</string>
     <string name="recording_can_not_be_played">Запись не может быть воспроизведена</string>
     <string name="recording_context_menu_delete">Удалить запись</string>
-    <string name="recording_context_menu_play">Воспроизвести</string>
+    <string name="recording_context_menu_play">Проиграть</string>
     <string name="recording_description">Запись %1$s %3$s %2$s</string>
     <string name="recording_default_name">Запись</string>
     <string name="map_widget_av_notes">Аудио заметки</string>
@@ -220,7 +221,7 @@
     <string name="local_index_items_restored">%1$d из %2$d объектов успешно активированы.</string>
     <string name="local_index_no_items_to_do">Нет объектов, чтобы %1$s</string>
     <string name="local_index_action_do">Вы собираетесь %1$s %2$s объектов. Вы уверены?</string>
-    <string name="local_index_descr_title">Загрузить карты</string>
+    <string name="local_index_descr_title">Управление картами</string>
     <string name="local_index_mi_restore">Активировать</string>
     <string name="local_index_mi_backup">Архивировать</string>
     <string name="local_index_mi_reload">Перечитать с SD-накопителя</string>
@@ -360,7 +361,7 @@
     <string name="filter_existing_indexes">Загруженные</string>
     <string name="general_settings_descr">Настройки экрана, локализации, единиц измерения и другие</string>
     <string name="general_settings">Общие</string>
-    <string name="index_settings">Загрузить карты</string>
+    <string name="index_settings">Управление картами</string>
     <string name="osmand_service">Фоновый режим</string>
     <string name="osmand_service_descr">Запустить OsmAnd в фоновом режиме для записи трека и навигации</string>
     <string name="fast_route_mode">Скоростной маршрут</string>
@@ -1792,7 +1793,7 @@
     <string name="show_free_version_banner">Показывать баннер бесплатной версии</string>
     <string name="show_free_version_banner_description">Даже если у вас купленная версия вы также можете видеть баннер для бесплатной версии</string>
     <string name="confirm_download_roadmaps">Вы уверены, что хотите скачать карту автодорог, даже если у вас есть полная карта?</string>
-    <string name="value_downloaded_from_max">%1$.1f из %2$.1f Мб</string>
+    <string name="value_downloaded_of_max">%1$.1f из %2$.1f Мб</string>
     <string name="file_size_in_mb">%.1f МБ</string>
     <string name="update_all">Обновить все (%1$s МБ)</string>
     <string name="free_downloads_used">Использовано бесплатных загрузок</string>
