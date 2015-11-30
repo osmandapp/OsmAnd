@@ -10,9 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.dialogs.RateUsBottomSheetDialog;
@@ -24,7 +24,7 @@ public class DashRateUsFragment extends DashBaseFragment {
 			new DashboardOnMap.DefaultShouldShow() {
 				@Override
 				public boolean shouldShow(OsmandSettings settings, MapActivity activity, String tag) {
-					return RateUsBottomSheetDialog.shouldShow(settings)
+					return RateUsBottomSheetDialog.shouldShow(activity.getMyApplication())
 							&& super.shouldShow(settings, activity, tag);
 				}
 			};
@@ -76,38 +76,37 @@ public class DashRateUsFragment extends DashBaseFragment {
 		public void onClick(View v) {
 			final OsmandSettings settings = getMyApplication().getSettings();
 			switch (state) {
-				case INITIAL_STATE:
-					state = RateUsBottomSheetDialog.FragmentState.USER_LIKES_APP;
+			case INITIAL_STATE:
+				state = RateUsBottomSheetDialog.FragmentState.USER_LIKES_APP;
 
-					header.setText(getResources().getString(R.string.rate_this_app));
-					subheader.setText(getResources().getString(R.string.rate_this_app_long));
-					positiveButton.setText(getResources().getString(R.string.shared_string_ok));
-					negativeButton.setText(getResources().getString(R.string.shared_string_no_thanks));
-					return;
-				case USER_LIKES_APP:
-					settings.RATE_US_STATE.set(RateUsBottomSheetDialog.RateUsState.LIKED);
-					// Assuming GooglePlay
-					Uri uri = Uri.parse("market://details?id=" + getActivity().getPackageName());
-					Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
-					try {
-						startActivity(goToMarket);
-					} catch (ActivityNotFoundException e) {
-						startActivity(new Intent(Intent.ACTION_VIEW,
-								Uri.parse("http://play.google.com/store/apps/details?id="
-										+ getActivity().getPackageName())));
-					}
-					break;
-				case USER_DISLIKES_APP:
-					String email = getString(R.string.support_email);
-					settings.RATE_US_STATE.set(RateUsBottomSheetDialog.RateUsState.DISLIKED_WITH_MESSAGE);
-					settings.NUMBER_OF_APPLICATION_STARTS.set(0);
-					settings.LAST_DISPLAY_TIME.set(System.currentTimeMillis());
-					Intent sendEmail = new Intent(Intent.ACTION_SENDTO);
-					sendEmail.setType("text/plain");
-					sendEmail.setData(Uri.parse("mailto:" + email));
-					sendEmail.putExtra(Intent.EXTRA_EMAIL, email);
-					startActivity(sendEmail);
-					break;
+				header.setText(getResources().getString(R.string.rate_this_app));
+				subheader.setText(getResources().getString(R.string.rate_this_app_long));
+				positiveButton.setText(getResources().getString(R.string.shared_string_ok));
+				negativeButton.setText(getResources().getString(R.string.shared_string_no_thanks));
+				return;
+			case USER_LIKES_APP:
+				settings.RATE_US_STATE.set(RateUsBottomSheetDialog.RateUsState.LIKED);
+				Uri uri = Uri.parse(Version.marketPrefix(getMyApplication()) + getActivity().getPackageName());
+				Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+				try {
+					startActivity(goToMarket);
+				} catch (ActivityNotFoundException e) {
+					startActivity(new Intent(Intent.ACTION_VIEW,
+
+					Uri.parse(Version.marketPrefix(getMyApplication()) + getActivity().getPackageName())));
+				}
+				break;
+			case USER_DISLIKES_APP:
+				String email = getString(R.string.support_email);
+				settings.RATE_US_STATE.set(RateUsBottomSheetDialog.RateUsState.DISLIKED_WITH_MESSAGE);
+				settings.NUMBER_OF_APPLICATION_STARTS.set(0);
+				settings.LAST_DISPLAY_TIME.set(System.currentTimeMillis());
+				Intent sendEmail = new Intent(Intent.ACTION_SENDTO);
+				sendEmail.setType("text/plain");
+				sendEmail.setData(Uri.parse("mailto:" + email));
+				sendEmail.putExtra(Intent.EXTRA_EMAIL, email);
+				startActivity(sendEmail);
+				break;
 			}
 			dashboard.refreshDashboardFragments();
 		}
