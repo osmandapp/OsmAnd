@@ -526,7 +526,7 @@
 	<string name="poi_religion_shinto">Xintoísmo</string>
 	<string name="poi_religion_taoist">Taoísmo</string>
 
-	<string name="poi_internet_access_wlan">Acesso à Internet: wlan</string>
+	<string name="poi_internet_access_wlan">Acesso à Internet: wifi</string>
 	<string name="poi_internet_access_terminal">Acesso à Internet: terminal</string>
 	<string name="poi_internet_access_wired">Acesso à Internet: com fio</string>
 	<string name="poi_internet_access_public">Acesso à Internet: público</string>
@@ -1746,10 +1746,194 @@
 	<string name="poi_resource_lignite">Linhite</string>
 	<string name="poi_resource_limestone">Pedra calcária</string>
 	<string name="poi_resource_marble">Mármore</string>
-	<string name="poi_resource_mercury"/>
+	<string name="poi_resource_mercury">Mercúrio</string>
 	<string name="poi_resource_mica">Mica</string>
 	<string name="poi_resource_mineral_oil">Óleo mineral</string>
 	<string name="poi_resource_nickel">Níquel</string>
 	<string name="poi_resource_oil">Petróleo</string>
 	<string name="poi_resource_opal">Opala</string>
+	<string name="poi_resource_peat">Turfa</string>
+	<string name="poi_resource_platinum">Platina</string>
+	<string name="poi_resource_radium">Rádio</string>
+	<string name="poi_resource_ruby">Rubi</string>
+	<string name="poi_resource_rutile">Rutilo</string>
+	<string name="poi_resource_salt">Sal</string>
+	<string name="poi_resource_sand">Areia</string>
+	<string name="poi_resource_sandstone">Arenito</string>
+	<string name="poi_resource_silica">Sílica</string>
+	<string name="poi_resource_silver">Prata</string>
+	<string name="poi_resource_slate_iron_ore_copper">Ardósia; minério de ferro; cobre</string>
+	<string name="poi_resource_slate">Ardósia</string>
+	<string name="poi_resource_stone">Pedra</string>
+	<string name="poi_resource_tin">Estanho</string>
+	<string name="poi_resource_tuff">Tufa</string>
+	<string name="poi_resource_uranium">Urânio</string>
+	<string name="poi_resource_vanadium">Vanádio</string>
+	<string name="poi_resource_water">Água</string>
+	<string name="poi_resource_zinc">Zinco</string>
+	<string name="poi_resource_zircon">Zircão</string>
+
+	<string name="poi_wetland_wet_meadow">Prado úmido</string>
+	<string name="poi_wetland_bog">Pântano</string>
+	<string name="poi_wetland_marsh">Charco</string>
+	<string name="poi_wetland_reedbed">Canavial</string>
+	<string name="poi_wetland_swamp">Brejo</string>
+	<string name="poi_wetland_saltern">Salina</string>
+	<string name="poi_chimney">Chaminé</string>
+	<string name="poi_palm">Palmeira</string>
+	<string name="poi_cypress">Cipreste</string>
+	<string name="poi_bench_yes">Com assento</string>
+	<string name="poi_bench_no">Sem assento</string>
+	<string name="poi_waste_basket_yes">Com lixeira</string>
+	<string name="poi_waste_basket_no">Sem lixeira</string>
+
+	<string name="poi_shelter_type_public_transport">Tipo de abrigo: transporte público</string>
+	<string name="poi_shelter_type_picnic_shelter">Tipo de abrigo: abrigo de piquenique</string>
+	<string name="poi_shelter_type_weather_shelter">Tipo de abrigo: abrigo do tempo</string>
+	<string name="poi_piste_grooming_scooter">Pista de preparação: scooter</string>
+	<string name="poi_piste_grooming_skating">Pista de preparação: skating</string>
+	<string name="poi_piste_grooming_no">Pista de preparação: não</string>
+	<string name="poi_piste_grooming_mogul">Pista de preparação: mogul</string>
+
+	<string name="poi_aerialway_bubble_yes">Bolha</string>
+	<string name="poi_aerialway_bubble_no">Sem bolha</string>
+	<string name="poi_vending_bicycle_tube">Tubos para bicicletas</string>
+	<string name="poi_branch">Seção</string>
+
+	<string name="poi_memorial_cross">Cruzeiro</string>
+	<string name="poi_wetland_tidalflat">Planície de maré</string>
+	<string name="poi_wetland_saltmarsh">Pântano salgado</string>
+	<string name="poi_wetland_mangrove">Mangue</string>
+	<string name="poi_wetland_string_bog">Cadeia de pântanos</string>
+	<string name="poi_wetland_fen">Pântano subeterrâneo</string>
+	<string name="poi_wetland_palsa_bog">Pântano palsa</string>
+	<string name="poi_wetland_mud">Lama</string>
+
+	<string name="poi_beach_sand">Tipo de praia: areia</string>
+	<string name="poi_beach_shingle">Tipo de praia: cascalho</string>
+	<string name="poi_beach_rocky">Tipo de praia: rocha</string>
+
+	<string name="poi_flagpole">Mastro de bandeira</string>
+
+	<string name="poi_shelter_type_lean_to">Tipo de abrigo: alpendre</string>
+	<string name="poi_shelter_type_basic_hut">Tipo de abrigo: cabana básica</string>
+	<string name="poi_shelter_type_building">Tipo de abrigo: edifício</string>
+	<string name="poi_shelter_type_wildlife_hide">Tipo de abrigo: esconderijo para animais selvagens</string>
+	<string name="poi_shelter_type_rock_shelter">Tipo de abrigo: rocha</string>
+	<string name="poi_shelter_type_sun_shelter">Tipo de abrigo: abrigo do sol</string>
+	<string name="poi_shelter_type_field_shelter">Tipo de abrigo: abrigo de campo</string>
+	<string name="poi_shelter_type_tent">Tipo de abrigo: tenda</string>
+	<string name="poi_shelter_type_abandoned">Tipo de abrigo: abandonado</string>
+
+	<string name="poi_internet_access_type_wlan">Tipo de acesso à Internet: wifi</string>
+	<string name="poi_internet_access_type_terminal">Tipo de acesso à Internet: terminal</string>
+	<string name="poi_internet_access_type_wired">Tipo de acesso à Internet: cabo</string>
+	<string name="poi_internet_access_type_public">Tipo de acesso à Internet: público</string>
+	<string name="poi_internet_access_type_service">Tipo de acesso à Internet: serviço</string>
+	<string name="poi_internet_access_type_no">Sem acesso à Internet</string>
+	<string name="poi_internet_access_type_yes">Com acesso à Internet</string>
+
+	<string name="poi_maxwidth">Largura máxima</string>
+	<string name="poi_iata">Código IATA</string>
+	<string name="poi_icao">Código ICAO</string>
+	<string name="poi_faa">Código FAA</string>
+	
+	<string name="poi_artwork_type_sculpture">Tipo de obra de arte: escultura</string>
+	<string name="poi_artwork_type_statue">Tipo de obra de arte: estátua</string>
+	<string name="poi_artwork_type_mural">Tipo de obra de arte: mural</string>
+	<string name="poi_artwork_type_architecture">Tipo de obra de arte: arquitetura</string>
+	<string name="poi_artwork_type_painting">Tipo de obra de arte: pintura</string>
+	<string name="poi_artwork_type_stone">Tipo de obra de arte: pedra</string>
+	<string name="poi_artwork_type_bust">Tipo de obra de arte: busto</string>
+	<string name="poi_artwork_type_installation">Tipo de obra de arte: instalação</string>
+	<string name="poi_artwork_type_mosaic">Tipo de obra de arte: mosaico</string>
+	<string name="poi_artwork_type_relief">Tipo de obra de arte: relevo</string>
+	<string name="poi_artwork_type_graffiti">Tipo de obra de arte: grafite</string>
+	<string name="poi_artwork_type_stele">Tipo de obra de arte: estela</string>
+	<string name="poi_artwork_type_fountain">Tipo de obra de arte: fonte</string>
+
+	<string name="poi_width">Largura</string>
+
+	<string name="poi_architect_name">Arquiteto</string>
+
+	<string name="poi_architecture_modern">Arquitetura: moderna</string>
+	<string name="poi_architecture_stalinist_neoclassicism">Arquitetura: neoclassicismo stalinista</string>
+	<string name="poi_architecture_eclectic">Arquitetura: eclética</string>
+	<string name="poi_architecture_new_objectivity">Arquitetura: nova objetividade</string>
+	<string name="poi_architecture_contemporary">Arquitetura: contemporâneo</string>
+	<string name="poi_architecture_constructivism">Arquitetura: construtivismo</string>
+	<string name="poi_architecture_umgebinde">Arquitetura: umgebinde</string>
+	<string name="poi_architecture_timber_frame">Arquitetura: enxaimel</string>
+	<string name="poi_architecture_art_nouveau">Arquitetura: art nouveau</string>
+	<string name="poi_architecture_neoclassicism">Arquitetura: neoclassicismo</string>
+	<string name="poi_architecture_victorian">Arquitetura: vitoriana</string>
+	<string name="poi_architecture_brutalism">Arquitetura: brutalista</string>
+	<string name="poi_architecture_classicism">Arquitetura: classicismo</string>
+	<string name="poi_architecture_gothic">Arquitetura: gótica</string>
+	<string name="poi_architecture_oldrussian">Arquitetura: russa antiga</string>
+	<string name="poi_architecture_baroque">Arquitetura: barroca</string>
+	<string name="poi_architecture_postconstructivism">Arquitetura: pós-construtivismo</string>
+	<string name="poi_architecture_wilhelminian_style">Arquitetura: estilo guilhermina</string>
+	<string name="poi_architecture_renaissance">Arquitetura: renascentista</string>
+	<string name="poi_architecture_romanesque">Arquitetura: românica</string>
+
+	<string name="poi_tunnel_waterway">Túnel fluvial</string>
+	<string name="poi_tunnel_car">Túnel rodoviário</string>
+	<string name="poi_tunnel_pedestrian">Túnel para pedestre</string>
+	<string name="poi_tunnel_railway">Túnel ferroviário</string>
+	<string name="poi_bridge_car">Ponte rodoviária</string>
+	<string name="poi_bridge_pedestrian">Ponte para pedestre</string>
+	<string name="poi_bridge_bicycle">Ponte para ciclista</string>
+	<string name="poi_bridge_railway">Ponte ferroviária</string>
+	<string name="poi_bridge_waterway">Ponte fluvial</string>
+	<string name="poi_bridge_structure_beam">Estrutura de ponte: viga</string>
+	<string name="poi_bridge_structure_simple_suspension">Estrutura de ponte: suspensão simples</string>
+	<string name="poi_bridge_structure_suspension">Estrutura de ponte: suspensão</string>
+	<string name="poi_bridge_structure_arch">Estrutura de ponte: arco</string>
+	<string name="poi_bridge_structure_truss">Estrutura de ponte: treliça</string>
+	<string name="poi_bridge_structure_floating">Estrutura de ponte: flutuante</string>
+	<string name="poi_bridge_structure_humpback">Estrutura de ponte: corcunda</string>
+	<string name="poi_bridge_structure_cable_stayed">Estrutura de ponte: estaiada</string>
+	<string name="poi_bridge_structure_boardwalk">Estrutura de ponte: passarela</string>
+	<string name="poi_bridge_structure_simple_wooden">Estrutura de ponte: madeira simples</string>
+	<string name="poi_bridge_structure_viaduct">Estrutura de ponte: viaduto</string>
+	<string name="poi_bridge_structure_aqueduct">Estrutura de ponte: aqueduto</string>
+	<string name="poi_bridge_structure_log">Estrutura de ponte: tronco</string>
+	<string name="poi_bridge_type_movable">Tipo de ponte: móvel</string>
+	<string name="poi_bridge_movable_bascule">Tipo de ponte móvel: basculante</string>
+	<string name="poi_bridge_movable_swing">Tipo de ponte móvel: giratória</string>
+	<string name="poi_bridge_movable_lift">Tipo de ponte móvel: elevatória</string>
+	<string name="poi_bridge_movable_drawbridge">Tipo de ponte móvel: ponte levadiça</string>
+	<string name="poi_bridge_movable_submersible">Tipo de ponte móvel: submersível</string>
+	<string name="poi_bridge_movable_transporter">Tipo de ponte móvel: transportadora</string>
+	<string name="poi_bridge_movable_retractable">Tipo de ponte móvel: retrátil</string>
+
+	<string name="poi_lit_yes">Iluminado: sim</string>
+	<string name="poi_lit_no">Iluminado: não</string>
+
+	<string name="poi_surface_unpaved">Superfície: não pavimentada</string>
+	<string name="poi_surface_paved">Superfície: pavimentada</string>
+	<string name="poi_surface_asphalt">Superfície: asfalto</string>
+	<string name="poi_surface_concrete">Superfície: concreto</string>
+	<string name="poi_surface_sett">Superfície: paralelepípedo</string>
+	<string name="poi_surface_cobblestone">Superfície: piso de seixos</string>
+	<string name="poi_surface_paving_stones">Superfície: piso intertravado</string>
+	<string name="poi_surface_pebblestone">Superfície: cascalho</string>
+	<string name="poi_surface_stone">Superfície: pedra</string>
+	<string name="poi_surface_metal">Superfície: metal</string>
+	<string name="poi_surface_wood">Superfície: madeira</string>
+	<string name="poi_surface_gravel">Superfície: brita</string>
+	<string name="poi_surface_fine_gravel">Superfície: brita fina</string>
+	<string name="poi_surface_compacted">Superfície: solo compactado</string>
+	<string name="poi_surface_sand">Superfície: areia</string>
+	<string name="poi_surface_grass">Superfície: grama</string>
+	<string name="poi_surface_grass_paver">Superfície: piso grama</string>
+	<string name="poi_surface_ground">Superfície: chão</string>
+	<string name="poi_surface_dirt">Superfície: solo</string>
+	<string name="poi_surface_mud">Superfície: lama</string>
+	<string name="poi_surface_ice">Superfície: gelo</string>
+	<string name="poi_surface_salt">Superfície: sal</string>
+	<string name="poi_surface_snow">Superfície: neve</string>
+
+	<string name="poi_route_bus_ref">Ônibus</string>
 	</resources>

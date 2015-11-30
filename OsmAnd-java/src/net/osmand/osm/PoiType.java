@@ -18,7 +18,8 @@ public class PoiType extends AbstractPoiType {
 	private boolean text;
 	private boolean nameOnly;
 	private boolean relation;
-	
+	private int order = 90;
+
 
 	public PoiType(MapPoiTypes poiTypes, PoiCategory category, String name) {
 		super(name, poiTypes);
@@ -145,7 +146,14 @@ public class PoiType extends AbstractPoiType {
 		this.relation = relation;
 	}
 
-	
+	public int getOrder() {
+		return order;
+	}
+
+	public void setOrder(int order) {
+		this.order = order;
+	}
+
 	@Override
 	public String toString() {
 		return "PoiType{" +
@@ -159,6 +167,7 @@ public class PoiType extends AbstractPoiType {
 				", text=" + text +
 				", nameOnly=" + nameOnly +
 				", relation=" + relation +
+				", order=" + order +
 				'}';
 	}
 }
