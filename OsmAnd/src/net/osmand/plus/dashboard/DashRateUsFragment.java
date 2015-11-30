@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -83,7 +84,6 @@ public class DashRateUsFragment extends DashBaseFragment {
 					positiveButton.setText(getResources().getString(R.string.shared_string_ok));
 					negativeButton.setText(getResources().getString(R.string.shared_string_no_thanks));
 					return;
-				<<<<<<< HEAD
 				case USER_LIKES_APP:
 					settings.RATE_US_STATE.set(RateUsBottomSheetDialog.RateUsState.LIKED);
 					Uri uri = Uri.parse(Version.marketPrefix(getMyApplication()) + getActivity().getPackageName());
