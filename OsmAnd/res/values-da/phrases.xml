@@ -2574,7 +2574,7 @@
 	<string name="poi_health_specialty_optometry_yes">Sundhedsspeciale: optometry</string>
 	<string name="poi_health_specialty_clinical_pathology_yes">Sundhedspeciale: klinisk patologi</string>
 	<string name="poi_health_specialty_speech_therapy_yes">Sundhedsspeciale: taleterapi</string>
-	<string name="poi_health_specialty_manual_therapy_yes">Sundhedsspeciale: manuel terapi</string>
+	<string name="poi_health_specialty_manual_therapy_yes">Sundhedsspeciale: manuelterapi</string>
 	<string name="poi_health_specialty_sports_medicine_yes">Sundhedsspeciale: sportsmedicin</string>
 	<string name="poi_health_specialty_podology_yes">Sundhedsspeciale: podology</string>
 	<string name="poi_health_specialty_adult_psychiatry_yes">Sundhedsspeciale: voksenpsykiatri</string>
@@ -2582,10 +2582,10 @@
 	<string name="poi_health_specialty_homeopathy_yes">Sundhedsspeciale: homøopati</string>
 	<string name="poi_health_specialty_traditional_chinese_medicine_yes">Sundhedsspeciale: traditionel kinesiskmedicin</string>
 	<string name="poi_health_specialty_reiki_yes">Sundhedsspeciale: reiki</string>
-	<string name="poi_health_specialty_herbalism_yes">Sundhedsspeciale: naturmedicin</string>
+	<string name="poi_health_specialty_herbalism_yes">Sundhedsspeciale: plantemedicin</string>
 	<string name="poi_health_specialty_chiropractic_yes">Sundhedspeciale: kiropraktik</string>
-	<string name="poi_health_specialty_naturopathy_yes">Sundhesspeciale: naturopati</string>
-	<string name="poi_health_specialty_depth_psychology_yes">Sundhedsspeciale: dybde psykologi</string>
+	<string name="poi_health_specialty_naturopathy_yes">Sundhesspeciale: naturmedicin</string>
+	<string name="poi_health_specialty_depth_psychology_yes">Sundhedsspeciale: dybdepsykologi</string>
 	<string name="poi_health_specialty_behavior_yes">Sundhedsspeciale: adfærd</string>
 
 
