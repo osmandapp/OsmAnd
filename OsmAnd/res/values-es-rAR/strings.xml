@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
 
     <string name="rendering_attr_hideHouseNumbers_name">Ocultar números de casa</string>
     <string name="copying_osmand_file_failed">Falló al copiar archivos</string>
@@ -312,14 +311,14 @@
     <string name="osmo_group_info">Información</string>
     <string name="osmo_edit_color">Mostrar color</string>
     <string name="osmo_edit_device">Cambiar propiedades de usuario</string>
-    <string name="color_green">verde</string>
+    
     <string name="color_blue">azul</string>
-    <string name="color_lightblue">azul claro</string>
+    
     <string name="color_yellow">amarillo</string>
     <string name="rendering_value_brown_name">marrón</string>
-    <string name="color_orange">anaranjado</string>
+    
     <string name="rendering_value_pink_name">rosa</string>
-    <string name="color_red">rojo</string>
+    
     <string name="osmo_user_name">Usuario</string>
     <string name="osmo_connect_to_my_nickname">Mi apodo</string>
     <string name="osmo_use_server_name">Nombre registrado</string>

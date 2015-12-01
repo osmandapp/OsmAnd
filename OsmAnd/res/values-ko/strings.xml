@@ -1589,13 +1589,13 @@
     
 	<string name="import_file_favourites">장소를 GPX 파일로 저장 할까요? 또는 즐겨찾기로 가져오기 할까요?</string>
 	
-	<string name="color_red">빨강</string>
+	
 	<string name="rendering_value_pink_name">분홍</string>
-	<string name="color_orange">오렌지</string>
+	
 	<string name="rendering_value_brown_name">갈색</string>
-	<string name="color_yellow">노랑</string>
+	
 	<string name="color_lightblue">밝은 청색</string>
-	<string name="color_blue">파랑</string>
+	
 	
 	
     <string name="osmo_edit_device">사용자 등록정보 변경</string>
@@ -1612,7 +1612,7 @@
     <string name="osmo_use_server_name">등록된 이름</string>
     <string name="osmo_connect_to_my_nickname">내 별명</string>
     <string name="osmo_user_name">사용자</string>
-	<string name="color_green">녹색</string>
+	
 	
     <string name="osmo_user_joined">사용자 %1$s이(가) 그룹 %2$s에 합류합니다</string>
     <string name="osmo_user_left">"사용자 %1$s가  그룹 %2$s에 남습니다"</string>

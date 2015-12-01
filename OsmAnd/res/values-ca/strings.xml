@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
 
     <string name="show_warnings_title">Mostra els missatges d\'avís…</string>
     <string name="map_widget_fluorescent">Rutes amb fluorescència</string>
@@ -1246,13 +1245,13 @@
     <string name="osmo_use_server_name">Nom registrat</string>
     <string name="osmo_connect_to_my_nickname">El vostre àlies</string>
     <string name="osmo_user_name">Usuari</string>
-    <string name="color_red">vermell</string>
+    
     <string name="rendering_value_pink_name">rosa</string>
-    <string name="color_orange">taronja</string>
+    
     <string name="rendering_value_brown_name">marró</string>
-    <string name="color_yellow">groc</string>
+    
     <string name="color_lightblue">blau clar</string>
-    <string name="color_blue">blau</string>
+    
     <string name="color_green">verd</string>
     <string name="osmo_edit_device">Canvia les propietats de l\'usuari</string>
     <string name="osmo_edit_color">Mostra el color</string>

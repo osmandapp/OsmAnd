@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
 
     <string name="switch_to_raster_map_to_see">Vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v Nastaveních (Spravovat mapové soubory), nebo se přepněte na online mapy.</string>
     <string name="send_files_to_osm">Nahrát GPX soubory do OSM?</string>
@@ -1174,13 +1173,13 @@
     <string name="osmo_mode_off">Spustit OsMo relaci</string>
     <string name="use_points_as_intermediates">Vypočítat trasu mezi body</string>
     <string name="osmo_plugin_description">"Tento modul poskytuje funkcionalitu pro takzvané OsMo pokročilé živé sledování, podívejte se na http://osmo.mobi.\n\nMůžete sledovat všechna zařízení spolupracující skupiny v reálném čase a vzájemně spolu komunikovat. Jsou dostupné různé možnosti nastavení krátkodobého nebo trvalého sledování.\n\nAnonymní skupiny lze vytvářet spontáně na určený počet dní a jsou omezené na vybrané funkce, nemají například dálkové ovládání a skupinového správce. Plně funkční skupiny se vytvářejí na webové stránce a jsou přístupné pouze pro registrované uživatele. "</string>
-    <string name="color_red">červená</string>
+    
     <string name="rendering_value_pink_name">růžová</string>
-    <string name="color_orange">oranžová</string>
+    
     <string name="rendering_value_brown_name">hnědá</string>
-    <string name="color_yellow">žlutá</string>
+    
     <string name="color_lightblue">světle modrá</string>
-    <string name="color_blue">modrá</string>
+    
     <string name="osmo_edit_device">Změnit vlastnosti uživatele</string>
     <string name="osmo_edit_color">Zobrazit barvu</string>
     <string name="osmo_group_info">Informace</string>
@@ -1251,7 +1250,7 @@
     <string name="osmo_user_name">Uživatel</string>
     <string name="osmo_user_joined">Uživatel %1$s připojen ke skupině %2$s</string>
     <string name="osmo_user_left">Uživatel %1$s odebrán ze skupiny %2$s</string>
-    <string name="color_green">zelená</string>
+    
     <string name="gpx_file_is_empty">GPX trasa je prázdná</string>
     <string name="shared_string_my_tracks">Všechny trasy</string>
     <string name="shared_string_my_favorites">Moje oblíbené</string>

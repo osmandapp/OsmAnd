@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
     <string name="av_def_action_audio">Optag audio</string>
@@ -1386,13 +1385,13 @@
 
     <string name="import_file_favourites">Gem punkter som en GPX-fil eller importer dem til favoritter?</string>
 
-    <string name="color_red">Rød</string>
+    
     <string name="rendering_value_pink_name">Lyserød</string>
-    <string name="color_orange">Orange</string>
+    
     <string name="rendering_value_brown_name">Brun</string>
-    <string name="color_yellow">Gul</string>
+    
     <string name="color_lightblue">Lyseblå</string>
-    <string name="color_blue">Blå</string>
+    
 
 
     <string name="osmo_edit_device">Ændre brugeregenskaber</string>
@@ -1408,7 +1407,7 @@
     <string name="osmo_use_server_name">Registreret navn</string>
     <string name="osmo_connect_to_my_nickname">Kaldenavn</string>
     <string name="osmo_user_name">Bruger</string>
-    <string name="color_green">Grøn</string>
+    
 
     <string name="osmo_follow">Følg</string>
     <string name="osmo_show_group_notifications">Vis gruppemeddelelser</string>
@@ -2113,6 +2112,6 @@
     <string name="routing_attr_avoid_stairs_name">Undgå trapper</string>
 	<string name="routing_attr_avoid_stairs_description">Undgå trapper</string>
 	<string name="routing_attr_avoid_borders_name">Undgå grænseovergang</string>
-	<string name="color_lightgreen">Lysegrøn</string>
+	
 	<string name="color_purple">Lilla</string>
 	</resources>

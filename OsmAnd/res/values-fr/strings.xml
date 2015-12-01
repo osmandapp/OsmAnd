@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="offline_edition">Modifications hors-ligne</string>
     <string name="offline_edition_descr">Toujours utiliser l\'édition hors-ligne</string>
 
@@ -1451,13 +1450,13 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 
     <string name="import_file_favourites">Enregistrer les points comme fichier GPX ou les transformer en favoris ?</string>
 
-    <string name="color_red">Rouge</string>
+    
     <string name="rendering_value_pink_name">Rose</string>
-    <string name="color_orange">Orange</string>
+    
     <string name="rendering_value_brown_name">Brun</string>
-    <string name="color_yellow">Jaune</string>
+    
     <string name="color_lightblue">Bleu clair</string>
-    <string name="color_blue">Bleu</string>
+    
 
 
     <string name="osmo_edit_device">Modifier les caractéristiques de l\'utilisateur</string>
@@ -1474,7 +1473,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="osmo_use_server_name">Nom enregistré</string>
     <string name="osmo_connect_to_my_nickname">Mon pseudo</string>
     <string name="osmo_user_name">Utilisateur</string>
-    <string name="color_green">vert</string>
+    
     <string name="osmo_user_joined">L\'utilisateur %1$s a rejoint le groupe %2$s</string>
     <string name="osmo_user_left">L\'utilisateur %1$s a quitté le groupe %2$s</string>
     <string name="osmo_show_group_notifications">Montrer les notifications de groupe</string>

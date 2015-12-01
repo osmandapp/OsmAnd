@@ -248,13 +248,13 @@
     <string name="osmo_use_server_name">Zarehіstravanaje іmia</string>
     <string name="osmo_connect_to_my_nickname">Moj nіk</string>
     <string name="osmo_user_name">Karystaĺnіk</string>
-	<string name="color_red">čyrvony</string>
+	
 	<string name="rendering_value_pink_name">ružovy</string>
-	<string name="color_orange">aranžavy</string>
+	
 	<string name="rendering_value_brown_name">karyčnievy</string>
-	<string name="color_yellow">žoŭty</string>
+	
 	<string name="color_lightblue">blakіtny</string>
-	<string name="color_blue">sіnі</string>
+	
 	<string name="color_green">zialiony</string>
 	
     <string name="osmo_edit_device">Źmianіć nalady karystaĺnіka</string>

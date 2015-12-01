@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
   
   <string name="use_transparent_map_theme">Przezroczysty styl</string>
   <string name="native_library_not_supported">To urządzenie nie obsługuje biblioteki renderowania natywnego.</string>
@@ -1462,13 +1461,13 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="osmo_tracker_id_descr">Kliknij, aby zobaczyć lub udostępnić identyfikator trackera.
 	Używając identyfikatora trackera podłączone urządzenia będą mogły śledzić każdy ruch tego urządzenia! Aby się rozłączyć, wybierz opcję: Generuj ponownie.</string>
     <string name="osmo_locations_sent">Położenie wysłane %1$d (w buforze %2$d) </string>
-    <string name="color_red">czerwony</string>
+    
 	<string name="rendering_value_pink_name">różowy</string>
-	<string name="color_orange">pomarańczowy</string>
+	
 	<string name="rendering_value_brown_name">brązowy</string>
-	<string name="color_yellow">żółty</string>
+	
 	<string name="color_lightblue">jasnoniebieski</string>
-	<string name="color_blue">niebieski</string>
+	
 	
 	
     <string name="osmo_edit_device">Zmień właściwości użytkownika</string>
@@ -1513,7 +1512,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="osmo_use_server_name">Zarejestrowana nazwa</string>
     <string name="osmo_connect_to_my_nickname">Mój nick</string>
     <string name="osmo_user_name">Użytkownik</string>
-	<string name="color_green">zielony</string>
+	
 	
     <string name="osmo_user_joined">Użytkownik %1$s dołączył do grupy %2$s</string>
     <string name="osmo_user_left">Użytkownik %1$s opuścił grupę %2$s</string>

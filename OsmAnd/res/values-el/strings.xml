@@ -1184,13 +1184,13 @@
 	<string name="gpx_info_average_speed">Μέση ταχύτητα: %1$s </string>
 	<string name="gpx_info_maximum_speed">Μέγιστη ταχύτητα: %1$s </string>
 	<string name="gpx_info_avg_altitude">Μέσο υψόμετρο: %1$s</string>
-    <string name="color_red">κόκκινο</string>
+    
 	<string name="rendering_value_pink_name">ροζ</string>
-	<string name="color_orange">πορτοκαλί</string>
+	
 	<string name="rendering_value_brown_name">καφέ</string>
-	<string name="color_yellow">κίτρινο</string>
+	
 	<string name="color_lightblue">γαλάζιο</string>
-	<string name="color_blue">μπλε</string>
+	
 	<string name="color_green">πράσινο</string>
 	
     <string name="hours_ago">ώρες πριν</string>

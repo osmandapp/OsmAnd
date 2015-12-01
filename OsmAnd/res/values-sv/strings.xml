@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
     <string name="ChooseCountry">Välj land</string>
     <string name="choose_city">Välj stad</string>
@@ -1310,13 +1309,13 @@
     <string name="osmo_control">OsMo snabbåtkomst</string>
     <string name="osmo_mode_restart">Starta om OsMo-session</string>
     <string name="osmo_settings_debug">Felsökningsinformation</string>
-    <string name="color_red">röd</string>
+    
     <string name="rendering_value_pink_name">skär</string>
-    <string name="color_orange">brandgul</string>
+    
     <string name="rendering_value_brown_name">brun</string>
-    <string name="color_yellow">gul</string>
+    
     <string name="color_lightblue">ljusblå</string>
-    <string name="color_blue">blå</string>
+    
 
 
     <string name="osmo_edit_device">Ändra användaregenskaper</string>
@@ -1369,7 +1368,7 @@
     <string name="layer_amenity_label">Namn på punkter</string>
     <string name="show_zoom_buttons_navigation_descr">Visa zoom-knappar under navigering</string>
     <string name="show_zoom_buttons_navigation">Visa zoom-knappar</string>
-    <string name="color_green">grön</string>
+    
 
 
     <string name="sort_by_distance">Sortera efter avstånd</string>

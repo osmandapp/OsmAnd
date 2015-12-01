@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
 
     <string name="layer_map_appearance">Configurar pantalla</string>
     <string name="show_lanes">Mostrar carriles</string>
@@ -1319,13 +1318,13 @@
     <string name="osmo_conn_successfull">Conexión establecida: %1$s </string>
     <string name="osmo_groups">Grupos/Dispositivos OsMo</string>
     <string name="osmo_group_info">Información</string>
-    <string name="color_red">rojo</string>
+    
     <string name="rendering_value_pink_name">rosa</string>
-    <string name="color_orange">anaranjado</string>
+    
     <string name="rendering_value_brown_name">marrón</string>
-    <string name="color_yellow">amarillo</string>
+    
     <string name="color_lightblue">azul claro</string>
-    <string name="color_blue">azul</string>
+    
     <string name="osmo_edit_device">Cambiar propiedades de usuario</string>
     <string name="osmo_edit_color">Mostrar color</string>
     <string name="osmo_group">Grupo OsMo</string>
@@ -1377,7 +1376,7 @@
     <string name="osmo_use_server_name">Nombre registrado</string>
     <string name="osmo_connect_to_my_nickname">Mi apodo</string>
     <string name="osmo_user_name">Usuario</string>
-    <string name="color_green">verde</string>
+    
     <string name="osmo_user_joined">El usuario %1$s se ha unido al grupo %2$s</string>
     <string name="osmo_user_left">El usuario %1$s ha abandonado el grupo %2$s</string>
     <string name="osmo_show_group_notifications">Mostrar notificaciones de grupo</string>

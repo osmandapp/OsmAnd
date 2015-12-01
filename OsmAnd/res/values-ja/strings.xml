@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="installing_new_resources">新しいデータを展開中…</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="installing_new_resources">新しいデータを展開中…</string>
      <string name="internet_connection_required_for_online_route">オンライン経路案内を使用しようとしていますが
 インターネット接続されていません。</string>
      <string name="tts_language_not_supported_title">未サポート言語</string>
@@ -1448,13 +1447,13 @@ POIの更新は利用できません</string>
     <string name="osmo_use_server_name">登録名</string>
     <string name="osmo_connect_to_my_nickname">ニックネーム</string>
     <string name="osmo_user_name">ユーザー</string>
-	<string name="color_red">レッド</string>
+	
 	<string name="rendering_value_pink_name">ピンク</string>
-	<string name="color_orange">オレンジ</string>
+	
 	<string name="rendering_value_brown_name">ブラウン</string>
-	<string name="color_yellow">イエロー</string>
+	
 	<string name="color_lightblue">ライトブルー</string>
-	<string name="color_blue">ブルー</string>
+	
 	<string name="color_green">グリーン</string>
 	
     <string name="osmo_edit_device">ユーザープロパティの変更</string>

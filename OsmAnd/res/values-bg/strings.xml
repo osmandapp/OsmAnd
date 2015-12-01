@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="osb_author_or_password_not_specified">Моля, въведете потребителско име и парола за сайта на OSM</string>
     <string name="clear_intermediate_points">Изчистване на междинните точки</string>
     <string name="keep_intermediate_points">Запази междинните точки</string>
@@ -1623,7 +1622,7 @@ OsmAnd е с отворен код и активно да се развива. �
     <string name="rendering_value_germanRoadAtlas_name">Германски стил</string>
     <string name="rendering_value_americanRoadAtlas_name">Американски стил</string>
     <string name="rendering_value_orange_name">Оранжево</string>
-    <string name="color_orange">оранжево</string>
+    
 	
     <string name="rendering_attr_transportStops_name">Гари и спирки</string>
     
@@ -1767,7 +1766,7 @@ OsmAnd е с отворен код и активно да се развива. �
 	<string name="share_fav_subject">Споделени места чрез OsmAnd</string>
 	<string name="import_file_favourites">Запис като GPX файл или внасяне в \'Любими места\'?</string>
 	<string name="voices">Гласови напътствия</string>
-	<string name="color_red">червен</string>
+	
 	<string name="rendering_value_pink_name">розов</string>
 	<string name="speed_limit_exceed">Толеранс за скоростта</string>
 	<string name="delay_navigation_start">Автоматично стартиране на напътствията</string>
@@ -1804,9 +1803,9 @@ OsmAnd е с отворен код и активно да се развива. �
     <string name="osmo_connect_to_my_nickname">Моят псевдоним</string>
     <string name="osmo_user_name">Потребител</string>
 	<string name="rendering_value_brown_name">кафяв</string>
-	<string name="color_yellow">жълт</string>
+	
 	<string name="color_lightblue">светло синьо</string>
-	<string name="color_blue">синьо</string>
+	
 	<string name="color_green">зелен</string>
 	
     <string name="osmo_edit_device">Промяна на свойствата на потребителя</string>

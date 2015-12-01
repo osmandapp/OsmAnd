@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
   
   <string name="layer_map_appearance">Configureer scherm</string>
   <string name="show_lanes">Toon rijstroken</string>
@@ -1535,13 +1534,13 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     
 	<string name="import_file_favourites">Punten bewaren als GPX-bestand of importeren in favorieten?</string>
 	
-	<string name="color_red">rood</string>
+	
 	<string name="rendering_value_pink_name">roze</string>
-	<string name="color_orange">oranje</string>
+	
 	<string name="rendering_value_brown_name">bruin</string>
-	<string name="color_yellow">geel</string>
+	
 	<string name="color_lightblue">lichtblauw</string>
-	<string name="color_blue">blauw</string>
+	
 	
 	
     <string name="osmo_edit_device">Wijzig gebruiker-instellingen</string>
@@ -1557,7 +1556,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="osmo_use_server_name">Geregistreerde naam</string>
     <string name="osmo_connect_to_my_nickname">Mijn bijnaam</string>
     <string name="osmo_user_name">Gebruikersnaam</string>
-	<string name="color_green">groen</string>
+	
 	
     <string name="osmo_follow">Volgen</string>
     <string name="osmo_user_joined">Gebruiker %1$s is nu lid van groep %2$s</string>

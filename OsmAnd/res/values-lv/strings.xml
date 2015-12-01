@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="plugins_screen">Spraudņu pārvaldnieks</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="plugins_screen">Spraudņu pārvaldnieks</string>
   
   <string name="prefs_plugins_descr">Spraudņi papildina aplikācijas iespējas un dod papildus funkcionalitāti</string>
   <string name="prefs_plugins">Spraudņi</string>
@@ -1560,13 +1559,13 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="import_file_favourites">Vai saglabāt vietas GPX failā vai importēt izlasē?</string>
 	
 	<string name="seconds_ago">sekundes atpakaļ</string>
-    <string name="color_red">sarkans</string>
+    
 	<string name="rendering_value_pink_name">rozā</string>
-	<string name="color_orange">oranžs</string>
+	
 	<string name="rendering_value_brown_name">brūns</string>
-	<string name="color_yellow">dzeltens</string>
+	
 	<string name="color_lightblue">gaiši zils</string>
-	<string name="color_blue">zils</string>
+	
 	
 	
     <string name="osmo_edit_device">Mainīt lietotāja uzstādījumus</string>
@@ -1582,7 +1581,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="osmo_use_server_name">Reģistrētais vārds</string>
     <string name="osmo_connect_to_my_nickname">Mans segvārds</string>
     <string name="osmo_user_name">Lietotājs</string>
-	<string name="color_green">zaļš</string>
+	
 	
     <string name="osmo_follow">Sekot</string>
     <string name="osmo_user_joined">Lietotājs %1$s pievienojās %2$s grupai</string>

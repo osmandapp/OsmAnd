@@ -173,13 +173,13 @@
     <string name="osmo_use_server_name">Nome rexistrado</string>
     <string name="osmo_connect_to_my_nickname">O meu alcume</string>
     <string name="osmo_user_name">Usuario</string>
-	<string name="color_red">vermello</string>
+	
 	<string name="rendering_value_pink_name">rosa</string>
-	<string name="color_orange">laranxa</string>
+	
 	<string name="rendering_value_brown_name">marrón</string>
-	<string name="color_yellow">amarelo</string>
+	
 	<string name="color_lightblue">azul claro</string>
-	<string name="color_blue">azul</string>
+	
 	<string name="color_green">verde</string>
 	
     <string name="osmo_edit_device">Cambiar as propiedades do usuario</string>
