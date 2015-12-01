@@ -1349,8 +1349,8 @@
 	<string name="poi_internet_access_yes">Com acesso à Internet</string>
 	<string name="poi_internet_access_no">Sem acesso à Internet</string>
 
-	<string name="poi_wheelchair_no">Cadeira de rodas: não permitido</string>
-	<string name="poi_wheelchair_limited">Cadeira de rodas: limitado</string>
+	<string name="poi_wheelchair_no">Cadeirante: não acessível</string>
+	<string name="poi_wheelchair_limited">Cadeirante: limitado</string>
 	<string name="poi_pump_yes">Bomba</string>
 
 	<string name="poi_debris">Escombros</string>
@@ -1936,4 +1936,66 @@
 	<string name="poi_surface_snow">Superfície: neve</string>
 
 	<string name="poi_route_bus_ref">Ônibus</string>
+	<string name="poi_route_share_taxi_ref">Táxi compartilhado</string>
+	<string name="poi_route_trolleybus_ref">Trólebus</string>
+	<string name="poi_route_tram_ref">Bonde</string>
+	<string name="poi_wheelchair_description">Descrição para usuários cadeirantes</string>
+	<string name="poi_ramp_wheelchair_yes">Rampa para cadeira de rodas: sim</string>
+	<string name="poi_ramp_wheelchair_no">Rampa para cadeira de rodas: não</string>
+	<string name="poi_route_ferry_ref">Balsa</string>
+
+	<string name="poi_route_railway_ref">Rota ferroviária</string>
+
+	<string name="poi_historic_yes">Objeto histórico</string>
+	<string name="poi_surveillance_yes">Vigilância: sim</string>
+	<string name="poi_shop_yes">Com loja</string>
+
+	<string name="poi_service_bicycle_retail_yes">Venda de bicicletas: sim</string>
+	<string name="poi_service_bicycle_retail_no">Venda de bicicletas: não</string>
+	<string name="poi_service_bicycle_repair_yes">Conserto de bicicletas: sim</string>
+	<string name="poi_service_bicycle_repair_no">Conserto de bicicletas: não</string>
+	<string name="poi_service_bicycle_rental_yes">Aluguel de bicicletas: sim</string>
+	<string name="poi_service_bicycle_rental_no">Aluguel de bicicletas: não</string>
+	<string name="poi_service_bicycle_pump_yes">Bomba de bicicleta: sim</string>
+	<string name="poi_service_bicycle_pump_no">Bomba de bicicleta: não</string>
+	<string name="poi_service_bicycle_diy_yes">Ferramentas para reparação de bicicleta DIY: sim</string>
+	<string name="poi_service_bicycle_diy_no">Ferramentas para reparação de bicicleta DIY: não</string>
+	<string name="poi_service_bicycle_cleaning_yes">Limpeza de bicicletas: sim</string>
+	<string name="poi_service_bicycle_cleaning_no">Limpeza de bicicletas: não</string>
+	<string name="poi_service_bicycle_chaintool_yes">Ferramenta para correia de bicicleta: sim</string>
+	<string name="poi_service_bicycle_chaintool_no">Ferramenta para correia de bicicleta: não</string>
+	<string name="poi_service_bicycle_second_hand_yes">Venda de bicicletas de segunda mão: sim</string>
+	<string name="poi_service_bicycle_second_hand_no">Venda de bicicletas de segunda mão: não</string>
+
+	<string name="poi_wildlife_hide">Observatório de vida selvagem</string>
+
+	<string name="poi_training_language">Treinamento: idioma</string>
+	<string name="poi_training_music">Treinamento: música</string>
+	<string name="poi_training_dance">Treinamento: dança</string>
+	<string name="poi_training_sport">Treinamento: esporte</string>
+	<string name="poi_training_art">Treinamento: arte</string>
+	<string name="poi_training_cooking">Treinamento: cozinhar</string>
+	<string name="poi_training_computer">Treinamento: computação</string>
+	<string name="poi_training_yoga">Treinamento: ioga</string>
+	<string name="poi_training_martial_art">Treinamento: arte marcial</string>
+	<string name="poi_training_aviation">Treinamento: aviação</string>
+	<string name="poi_training_hairdressing">Treinamento: cabeleireiro</string>
+
+	<string name="poi_monument_yes">Monumento</string>
+
+	<string name="poi_industrial_oil">Tipo: indústria petroleira</string>
+	<string name="poi_industrial_wellsite">Tipo: poço</string>
+	<string name="poi_industrial_factory">Tipo: fábrica</string>
+	<string name="poi_industrial_gas">Tipo: indústria de gás</string>
+	<string name="poi_industrial_timber">Tipo: madeira</string>
+	<string name="poi_industrial_refinery">Tipo: refinaria</string>
+	<string name="poi_industrial_warehouse">Tipo: armazém</string>
+	<string name="poi_industrial_agriculture">Tipo: agricultura</string>
+	<string name="poi_industrial_brewery">Tipo: cervejaria</string>
+	<string name="poi_industrial_brickyard">Tipo: olaria</string>
+	<string name="poi_industrial_sawmill">Tipo: serraria</string>
+	<string name="poi_industrial_water_purification">Tipo: purificação de água</string>
+	<string name="poi_industrial_port">Tipo: porto</string>
+	<string name="poi_industrial_depot">Tipo: depósito</string>
+
 	</resources>

@@ -1425,7 +1425,7 @@
 	<string name="poi_aerialway_summer_access_exit">Sommeradgang: kun udgang</string>
 	<string name="poi_aerialway_summer_access_both">Sommeradgang: ind- og udgang</string>
 
-<string name="poi_wheelchair_no">Kørestol: ikke tilladt</string>
+<string name="poi_wheelchair_no">Kørestol: ikke adgang</string>
 	<string name="poi_wheelchair_limited">Kørestol: begrænset</string>
 	<string name="poi_stars_1">Stjerner: 1 (Turist)</string>
 	<string name="poi_stars_1s">Stjerner: 1S (Superior Turist)</string>
@@ -2522,7 +2522,7 @@
 	<string name="poi_health_specialty_gynaecology_yes">Sundhedsspeciale: gynækologi</string>
 	<string name="poi_health_specialty_internal_medicine_yes">Sundhedsspeciale: intern medicin</string>
 	<string name="poi_health_specialty_orthopaedics_yes">Sundhedsspeciale: ortopædkirurgi</string>
-	<string name="poi_health_specialty_otolaryngology_yes">oto-rhino-laryngolog: oto-rhino-laryngolog</string>
+	<string name="poi_health_specialty_otolaryngology_yes">Sundhedsspeciale: oto-rhino-laryngolog</string>
 	<string name="poi_health_specialty_paediatrics_yes">Sundhedsspeciale: pædiatri</string>
 	<string name="poi_health_specialty_paediatrics_no">Sundhedsspeciale: pædiatri: nej</string>
 	<string name="poi_health_specialty_dermatology_yes">Sundhedsspeciale: dermatologi</string>
@@ -2536,12 +2536,12 @@
 	<string name="poi_health_specialty_trauma_yes">Sundhedsspeciale: traumatologi</string>
 	<string name="poi_health_specialty_biology_yes">Sundhedsspeciale: klinisk biologi</string>
 	<string name="poi_health_specialty_osteopathy_yes">Sundhedsspeciale: osteopati</string>
-	<string name="poi_health_specialty_anaesthetics_yes">Sundhedsspeciale: anæstetika</string>
+	<string name="poi_health_specialty_anaesthetics_yes">Sundhedsspeciale: anæstesi</string>
 	<string name="poi_health_specialty_pulmonology_yes">Sundhedsspeciale: pneumologi</string>
 	<string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Sundhedsspeciale: tand-, mund- og kæbe ansigtskirurgi</string>
 	<string name="poi_health_specialty_maternity_yes">Sundhedsspeciale: barsel</string>
-	<string name="poi_health_specialty_emergency_medicine_yes">Sundhedsspeciale: ulykkes- og katastrofemedicin</string>
-	<string name="poi_health_specialty_emergency_medicine_no">Sundhedsspeciale: ulykkes- og katastrofemedicin: nej</string>
+	<string name="poi_health_specialty_emergency_medicine_yes">Sundhedsspeciale: akutmedicin</string>
+	<string name="poi_health_specialty_emergency_medicine_no">Sundhedsspeciale: akutmedicin: nej</string>
 	<string name="poi_health_specialty_plastic_surgery_yes">Sundhedsspeciale: plastikkirurgi</string>
 	<string name="poi_health_specialty_orthodontics_yes">Sundhedsspeciale: ortodonti</string>
 	<string name="poi_health_specialty_physiotherapy_yes">Sundhedsspeciale: fysioterapi</string>
@@ -2549,11 +2549,11 @@
 	<string name="poi_health_specialty_occupational_yes">Sundhedsspeciale: ergoterapi</string>
 	<string name="poi_health_specialty_child_psychiatry_yes">Sundhedsspeciale: børnepsykiatri</string>
 	<string name="poi_health_specialty_physiatry_yes">Sundhedsspeciale: fysisk medicin og rehabilitering</string>
-	<string name="poi_health_specialty_maxillofacial_surgery_yes">Sundhedsspeciale:-ansigtskirurgi</string>
+	<string name="poi_health_specialty_maxillofacial_surgery_yes">Sundhedsspeciale: ansigtskirurgi</string>
 	<string name="poi_health_specialty_diagnostic_radiology_yes">Sundhedsspeciale: diagnostisk radiologi</string>
 	<string name="poi_health_specialty_gastroenterology_yes">Sundhedsspeciale: gastroenterologi</string>
 	<string name="poi_health_specialty_dentistry_yes">Sundhedsspeciale: tandpleje</string>
-	<string name="poi_health_specialty_nephrology_yes">Sundhedsspeciale: nefrologi (nyre sygdomme)</string>
+	<string name="poi_health_specialty_nephrology_yes">Sundhedsspeciale: nefrologi (nyresygdomme)</string>
 	<string name="poi_health_specialty_neurosurgery_yes">Sundhedsspeciale: neurokirurgi</string>
 	<string name="poi_health_specialty_neuropsychiatry_yes">Sundhedsspeciale: neuropsykiatri</string>
 	<string name="poi_health_specialty_endocrinology_yes">Sundhedsspeciale: endokrinologi</string>
@@ -2574,7 +2574,7 @@
 	<string name="poi_health_specialty_optometry_yes">Sundhedsspeciale: optometry</string>
 	<string name="poi_health_specialty_clinical_pathology_yes">Sundhedspeciale: klinisk patologi</string>
 	<string name="poi_health_specialty_speech_therapy_yes">Sundhedsspeciale: taleterapi</string>
-	<string name="poi_health_specialty_manual_therapy_yes">Sundhedsspeciale: manuel terapi</string>
+	<string name="poi_health_specialty_manual_therapy_yes">Sundhedsspeciale: manuelterapi</string>
 	<string name="poi_health_specialty_sports_medicine_yes">Sundhedsspeciale: sportsmedicin</string>
 	<string name="poi_health_specialty_podology_yes">Sundhedsspeciale: podology</string>
 	<string name="poi_health_specialty_adult_psychiatry_yes">Sundhedsspeciale: voksenpsykiatri</string>
@@ -2582,10 +2582,10 @@
 	<string name="poi_health_specialty_homeopathy_yes">Sundhedsspeciale: homøopati</string>
 	<string name="poi_health_specialty_traditional_chinese_medicine_yes">Sundhedsspeciale: traditionel kinesiskmedicin</string>
 	<string name="poi_health_specialty_reiki_yes">Sundhedsspeciale: reiki</string>
-	<string name="poi_health_specialty_herbalism_yes">Sundhedsspeciale: naturmedicin</string>
+	<string name="poi_health_specialty_herbalism_yes">Sundhedsspeciale: plantemedicin</string>
 	<string name="poi_health_specialty_chiropractic_yes">Sundhedspeciale: kiropraktik</string>
-	<string name="poi_health_specialty_naturopathy_yes">Sundhesspeciale: naturopati</string>
-	<string name="poi_health_specialty_depth_psychology_yes">Sundhedsspeciale: dybde psykologi</string>
+	<string name="poi_health_specialty_naturopathy_yes">Sundhesspeciale: naturmedicin</string>
+	<string name="poi_health_specialty_depth_psychology_yes">Sundhedsspeciale: dybdepsykologi</string>
 	<string name="poi_health_specialty_behavior_yes">Sundhedsspeciale: adfærd</string>
 
 

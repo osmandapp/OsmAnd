@@ -37,7 +37,6 @@ public class GeocodingUtilities {
 	public static final float THRESHOLD_MULTIPLIER_SKIP_STREETS_AFTER = 3;
 	public static final float DISTANCE_STREET_NAME_PROXIMITY_BY_NAME = 20000;
 	public static final float DISTANCE_BULDING_PROXIMITY = 100;
-	public static final float THRESHOLD_STREET_CHANGE_CONNECTION_POINT = 400; // not important
 	public static final Comparator<GeocodingResult> DISTANCE_COMPARATOR = new Comparator<GeocodingResult>() {
 
 		@Override
@@ -138,7 +137,6 @@ public class GeocodingUtilities {
 				sr.searchPoint = new LatLon(lat, lon);
 				sr.streetName = Algorithms.isEmpty(road.getName())? road.getRef() : road.getName();
 				sr.point = p;
-				
 				sr.connectionPoint = new LatLon(MapUtils.get31LatitudeY(p.preciseY), MapUtils.get31LongitudeX(p.preciseX));
 				sr.regionFP = road.region.getFilePointer();
 				sr.regionLen = road.region.getLength();
@@ -172,9 +170,6 @@ public class GeocodingUtilities {
 						GeocodingResult rs = new GeocodingResult(r);
 						rs.street = (Street) object;
 						rs.city = rs.street.getCity();
-						if(d < THRESHOLD_STREET_CHANGE_CONNECTION_POINT) {
-							rs.connectionPoint = rs.street.getLocation();
-						}
 						streetsList.add(rs);
 						return true;
 					}
