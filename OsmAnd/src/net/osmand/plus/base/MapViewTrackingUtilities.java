@@ -151,7 +151,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 
 			// Tasker plugin related
 			AutoAppsThirdParty.authorize(app);
-			AutoAppsThirdParty.registerCommands(app, new AutoAppsThirdParty.RegisteredCommand("Wrote Files", "wrotefiles", true, "directory", "files"));
+			AutoAppsThirdParty.registerCommands(app, new AutoAppsThirdParty.RegisteredCommand("Update location", "updatelocation", false, "speed"));
 			if (location != null) {
 				float x = tb.getPixXFromLatLon(location.getLatitude(), location.getLongitude());
 				float y = tb.getPixXFromLatLon(location.getLatitude(), location.getLongitude());
@@ -165,7 +165,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 					}
 				}
 				LOG.debug("MapObjects=" + mapObjectsList);
-				AutoAppsThirdParty.sendCommand(app, "setrandom=:=" + Math.random());
+				AutoAppsThirdParty.sendCommand(app, "updatelocation", String.valueOf(location.getSpeed()));
 			}
 		}
 
