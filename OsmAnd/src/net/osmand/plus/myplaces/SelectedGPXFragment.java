@@ -272,8 +272,8 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 		View view = getMyActivity().getLayoutInflater().inflate(R.layout.selected_track_edit, null);
 		
 		final TIntArrayList list = new TIntArrayList();
-        final Spinner colorSpinner = (Spinner) view.findViewById(R.id.ColorSpinner);
-        ColorDialogs.setupColorSpinner(getActivity(), getGpx().getColor(0), colorSpinner, list);
+		final Spinner colorSpinner = (Spinner) view.findViewById(R.id.ColorSpinner);
+		ColorDialogs.setupColorSpinner(getActivity(), getGpx().getColor(0), colorSpinner, list);
 		
 		final Spinner sp = (Spinner) view.findViewById(R.id.Spinner);
 		AlertDialog.Builder bld = new AlertDialog.Builder(getMyActivity());
@@ -335,7 +335,7 @@ public class SelectedGPXFragment extends OsmAndListFragment {
 			public void onClick(DialogInterface dialog, int which) {
 				SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(getGpx(), vis.isChecked(), false);
 				int clr = list.get(colorSpinner.getSelectedItemPosition());
-				if(clr != 0 && sf.getModifiableGpxFile() != null) {
+				if(vis.isChecked() && clr != 0 && sf.getModifiableGpxFile() != null) {
 					sf.getModifiableGpxFile().setColor(clr);
 					sf.processPoints();
 				}

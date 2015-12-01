@@ -1,10 +1,14 @@
 package net.osmand.plus.activities.search;
 
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.List;
-
+import android.os.AsyncTask;
+import android.os.Message;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.FrameLayout;
+
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.OsmAndCollator;
@@ -18,13 +22,10 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.resources.RegionAddressRepository;
 import net.osmand.util.MapUtils;
-import android.os.AsyncTask;
-import android.os.Message;
-import android.view.Gravity;
-import android.view.View;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.Button;
-import android.widget.FrameLayout;
+
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.List;
 
 public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City> {
 
@@ -189,7 +190,7 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 	public void itemSelected(City obj) {
 		settings.setLastSearchedCity(obj.getId(), obj.getName(region.getLang()), obj.getLocation());
 		if (region.getCityById(obj.getId(), obj.getName(region.getLang())) == null) {
-			region.addCityToPreloadedList((City) obj);
+			region.addCityToPreloadedList(obj);
 		}
 		quitActivity(SearchStreetByNameActivity.class);
 	}

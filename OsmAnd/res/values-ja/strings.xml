@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="installing_new_resources">新しいデータを展開中…</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="installing_new_resources">新しいデータを展開中…</string>
      <string name="internet_connection_required_for_online_route">オンライン経路案内を使用しようとしていますが
 インターネット接続されていません。</string>
      <string name="tts_language_not_supported_title">未サポート言語</string>
@@ -17,7 +16,7 @@
      
 
      <string name="switch_to_raster_map_to_see">現在の位置は あなたのオフラインベクターマップではカバーされていません、 追加でベクターマップをダウンロードする場合は設定内のマップデータ等管理にて、またはオンラインマップにも切り替えることが出来ます(オンラインマッププラグインを使用した場合)。</string>
-     <string name="switch_to_vector_map_to_see">現在地のベクターマップを見るには\n\t\n\t\'メニュー\' →\'マップ設定\' →\'マップソース...\' →\'オフラインベクターマップ\'を有効にします。</string>
+     <string name="switch_to_vector_map_to_see">現在地のベクターマップを見るには\n\t\n\t\'メニュー\' →\'マップ設定\' →\'マップソース…\' →\'オフラインベクターマップ\'を有効にします。</string>
      
      <string name="choose_audio_stream">音声案内ストリーム</string>
      <string name="choose_audio_stream_descr">音声案内を再生するチャンネルを選択します(使用可否はシステムに依存します)</string>
@@ -1448,13 +1447,13 @@ POIの更新は利用できません</string>
     <string name="osmo_use_server_name">登録名</string>
     <string name="osmo_connect_to_my_nickname">ニックネーム</string>
     <string name="osmo_user_name">ユーザー</string>
-	<string name="color_red">レッド</string>
-	<string name="color_pink">ピンク</string>
-	<string name="color_orange">オレンジ</string>
-	<string name="color_brown">ブラウン</string>
-	<string name="color_yellow">イエロー</string>
+	
+	<string name="rendering_value_pink_name">ピンク</string>
+	
+	<string name="rendering_value_brown_name">ブラウン</string>
+	
 	<string name="color_lightblue">ライトブルー</string>
-	<string name="color_blue">ブルー</string>
+	
 	<string name="color_green">グリーン</string>
 	
     <string name="osmo_edit_device">ユーザープロパティの変更</string>
@@ -2044,8 +2043,8 @@ POIの更新は利用できません</string>
     <string name="access_from_map">マップ画面から開く</string>
     <string name="show_on_start_description">OFFの場合、起動時マップのみ表示します</string>
     <string name="copied_to_clipboard">クリップボードにコピーしました</string>
-    <string name="release_2_2">" • マップ画面や他の画面で項目をタップした場合のコンテキストメニューの刷新\n\n • ダッシュボード設定で\'起動時に表示\'をOFFにすることで今まで通りにマップ画面が直接表示出来る様に、選択式に変更\n\n • ダッシュボード設定で任意の項目だけ表示できる様に変更可能\n\n • ダッシュボード設定で今まで通りメニューボタンでメニューが開ける様に設定可能\n\n • マップ画面で世界地図表示状態から任意の地点のマップデータをダウンロード可能に\n\n • POI検索時より具体的に検索できる様に変更\n\n • POIやOSMの項目編集機能を改善\n\n • マップやその他データのダウンロード構造とUIを刷新\n\n他多数... "</string>
-    <string name="osm_save_offline">オフラインで保存</string>
+    <string name="release_2_2">" • マップ画面や他の画面で項目をタップした場合のコンテキストメニューの刷新\n\n • ダッシュボード設定で\'起動時に表示\'をOFFにすることで今まで通りにマップ画面が直接表示出来る様に、選択式に変更\n\n • ダッシュボード設定で任意の項目だけ表示できる様に変更可能\n\n • ダッシュボード設定で今まで通りメニューボタンでメニューが開ける様に設定可能\n\n • マップ画面で世界地図表示状態から任意の地点のマップデータをダウンロード可能に\n\n • POI検索時より具体的に検索できる様に変更\n\n • POIやOSMの項目編集機能を改善\n\n • マップやその他データのダウンロード構造とUIを刷新\n\n他多数… "</string>
+    <string name="osm_save_offline">ｵﾌﾗｲﾝで保存</string>
     <string name="osm_edit_modified_poi">OSMのPOIが変更されました</string>
     <string name="osm_edit_deleted_poi">OSMのPOIが削除されました</string>
     <string name="context_menu_item_open_note">OSMでの注釈を開く</string>
@@ -2062,7 +2061,7 @@ POIの更新は利用できません</string>
 	<string name="osn_add_dialog_error">例外事項の発生:メモは作成されませんでした</string>
 	<string name="osn_close_dialog_success">注釈は正常に閉じられました</string>
 	<string name="osn_close_dialog_error">例外事項の発生:注釈は閉じられませんでした</string>
-	<string name="shared_string_commit">コミット</string>
+	<string name="shared_string_commit">ｺﾐｯﾄ</string>
 	
     <string name="context_menu_item_delete_waypoint">GPX経由地点を削除しますか？</string>
     <string name="context_menu_item_edit_waypoint">GPX経由地点の編集</string>

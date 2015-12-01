@@ -1223,13 +1223,13 @@
 \nTočke</string>
     <string name="osmo_connect_to_my_nickname">Moj nadimak</string>
     <string name="osmo_user_name">Korisnik</string>
-	<string name="color_red">crvena</string>
-	<string name="color_pink">roza</string>
-	<string name="color_orange">narančasta</string>
-	<string name="color_brown">smeđa</string>
-	<string name="color_yellow">žuta</string>
+	
+	<string name="rendering_value_pink_name">roza</string>
+	
+	<string name="rendering_value_brown_name">smeđa</string>
+	
 	<string name="color_lightblue">svijetloplava</string>
-	<string name="color_blue">plava</string>
+	
 	<string name="color_green">zelena</string>
 	
     <string name="osmo_edit_color">Boja prikaza</string>

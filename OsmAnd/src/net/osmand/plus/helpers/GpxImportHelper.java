@@ -34,6 +34,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * @author Koen Rabaey
@@ -281,7 +282,7 @@ public class GpxImportHelper {
 	private File getFileToSave(final String fileName, final File importDir, final GPXUtilities.WptPt pt) {
 		final StringBuilder builder = new StringBuilder(fileName);
 		if ("".equals(fileName)) {
-			builder.append("import_").append(new SimpleDateFormat("HH-mm_EEE").format(new Date(pt.time))).append(GPX_SUFFIX); //$NON-NLS-1$
+			builder.append("import_").append(new SimpleDateFormat("HH-mm_EEE", Locale.US).format(new Date(pt.time))).append(GPX_SUFFIX); //$NON-NLS-1$
 		}
 		if (fileName.endsWith(KML_SUFFIX)) {
 			builder.replace(builder.length() - KML_SUFFIX.length(), builder.length(), GPX_SUFFIX);

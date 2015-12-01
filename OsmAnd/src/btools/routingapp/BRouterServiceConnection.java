@@ -10,7 +10,7 @@ public class BRouterServiceConnection implements ServiceConnection {
 		IBRouterService brouterService;
 
 		public void onServiceConnected(ComponentName className, IBinder boundService) {
-			brouterService = IBRouterService.Stub.asInterface((IBinder) boundService);
+			brouterService = IBRouterService.Stub.asInterface(boundService);
 		}
 
 		public void onServiceDisconnected(ComponentName className) {

@@ -33,6 +33,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class ContributionVersionActivity extends OsmandListActivity {
 
@@ -48,7 +49,7 @@ public class ContributionVersionActivity extends OsmandListActivity {
 	private Date currentInstalledDate;
 
 	private List<OsmAndBuild> downloadedBuilds = new ArrayList<OsmAndBuild>();
-	private SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+	private SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.US);
 	private File pathToDownload;
 	private OsmAndBuild currentSelectedBuild = null;
 	

@@ -4,7 +4,6 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -21,8 +20,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import net.osmand.PlatformUtil;
-import net.osmand.StringMatcher;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
@@ -317,6 +316,9 @@ public class AdvancedEditPoiFragment extends Fragment
 			}
 			if (poiType.getOsmValue2() != null) {
 				values.add(poiType.getOsmValue2());
+			}
+			for (PoiType type : poiType.getPoiAdditionals()) {
+				addPoiToStringSet(type, stringSet, values);
 			}
 		} else if (abstractPoiType instanceof PoiCategory) {
 			PoiCategory poiCategory = (PoiCategory) abstractPoiType;

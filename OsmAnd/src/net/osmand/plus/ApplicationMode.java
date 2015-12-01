@@ -1,5 +1,9 @@
 package net.osmand.plus;
 
+import android.content.Context;
+
+import net.osmand.StateChangedListener;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -7,9 +11,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import net.osmand.StateChangedListener;
-import android.content.Context;
 
 
 public class ApplicationMode {
@@ -99,8 +100,10 @@ public class ApplicationMode {
 		}
 		
 		public ApplicationModeBuilder carLocation(){
-			applicationMode.bearingIcon = R.drawable.map_car_bearing;
-			applicationMode.locationIcon = R.drawable.map_car_location;
+			applicationMode.bearingIconDay = R.drawable.map_car_bearing;
+			applicationMode.bearingIconNight = R.drawable.map_car_bearing_night;
+			applicationMode.locationIconDay = R.drawable.map_car_location;
+			applicationMode.locationIconNight = R.drawable.map_car_location_night;
 			return this;
 		}
 		
@@ -110,14 +113,18 @@ public class ApplicationMode {
 		}
 		
 		public ApplicationModeBuilder bicycleLocation(){
-			applicationMode.bearingIcon = R.drawable.map_bicycle_bearing;
-			applicationMode.locationIcon = R.drawable.map_bicycle_location;
+			applicationMode.bearingIconDay = R.drawable.map_bicycle_bearing;
+			applicationMode.bearingIconNight = R.drawable.map_bicycle_bearing_night;
+			applicationMode.locationIconDay = R.drawable.map_bicycle_location;
+			applicationMode.locationIconNight = R.drawable.map_bicycle_location_night;
 			return this;
 		}
 		
 		public ApplicationModeBuilder defLocation(){
-			applicationMode.bearingIcon = R.drawable.map_pedestrian_bearing;
-			applicationMode.locationIcon = R.drawable.map_pedestrian_location;
+			applicationMode.bearingIconDay = R.drawable.map_pedestrian_bearing;
+			applicationMode.bearingIconNight = R.drawable.map_pedestrian_bearing_night;
+			applicationMode.locationIconDay = R.drawable.map_pedestrian_location;
+			applicationMode.locationIconNight = R.drawable.map_pedestrian_location_night;
 			return this;
 		}
 		
@@ -138,21 +145,6 @@ public class ApplicationMode {
 		builder.applicationMode = new ApplicationMode(key, stringKey);
 		return builder;
 	}
-	
-	
-	
-	private final int key;
-	private final String stringKey;
-	
-	private ApplicationMode parent;
-	private int iconId = R.drawable.ic_browse_map;
-	private int smallIconDark = R.drawable.ic_world_globe_dark ;
-	private float defaultSpeed = 10f;
-	private int minDistanceForTurn = 50;
-	private int arrivalDistance = 90;
-	private int bearingIcon = R.drawable.map_pedestrian_bearing;
-	private int locationIcon = R.drawable.map_pedestrian_location;
-	private static StateChangedListener<String> listener;
 
 	private ApplicationMode(int key, String stringKey) {
 		this.key = key;
@@ -240,12 +232,20 @@ public class ApplicationMode {
 		return getDefaultSpeed() > 10;
 	}
 	
-	public int getResourceBearing() {
-		return bearingIcon;
+	public int getResourceBearingDay() {
+		return bearingIconDay;
+	}
+
+	public int getResourceBearingNight() {
+		return bearingIconNight;
 	}
 	
-	public int getResourceLocation() {
-		return locationIcon;
+	public int getResourceLocationDay() {
+		return locationIconDay;
+	}
+
+	public int getResourceLocationNight() {
+		return locationIconNight;
 	}
 	
 	public String getStringKey() {
@@ -292,8 +292,19 @@ public class ApplicationMode {
 	public boolean isDerivedRoutingFrom(ApplicationMode mode) {
 		return this == mode || getParent() == mode;
 	}
-	
 
-	
+	private final int key;
+	private final String stringKey;
 
+	private ApplicationMode parent;
+	private int iconId = R.drawable.ic_browse_map;
+	private int smallIconDark = R.drawable.ic_world_globe_dark ;
+	private float defaultSpeed = 10f;
+	private int minDistanceForTurn = 50;
+	private int arrivalDistance = 90;
+	private int bearingIconDay = R.drawable.map_pedestrian_bearing;
+	private int bearingIconNight = R.drawable.map_pedestrian_bearing_night;
+	private int locationIconDay = R.drawable.map_pedestrian_location;
+	private int locationIconNight = R.drawable.map_pedestrian_location_night;
+	private static StateChangedListener<String> listener;
 }

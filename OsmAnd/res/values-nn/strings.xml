@@ -65,13 +65,13 @@
     <string name="osmo_sign_in">Logg inn</string>
     <string name="osmo_connect_to_my_nickname">Kallenamnet mitt</string>
     <string name="osmo_user_name">Brukarnamn</string>
-	<string name="color_red">raud</string>
-	<string name="color_pink">rosa</string>
-	<string name="color_orange">oransje</string>
-	<string name="color_brown">brun</string>
-	<string name="color_yellow">gul</string>
+	
+	<string name="rendering_value_pink_name">rosa</string>
+	
+	<string name="rendering_value_brown_name">brun</string>
+	
 	<string name="color_lightblue">lyseblå</string>
-	<string name="color_blue">blå</string>
+	
 	<string name="color_green">grøn</string>
 	
     <string name="osmo_edit_device">Endra brukareigenskapar</string>

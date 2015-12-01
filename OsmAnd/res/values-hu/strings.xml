@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="send_files_to_osm">GPX fájl küldése OSM-re?</string>
     <string name="gpx_visibility_txt">Láthatóság</string>
     <string name="gpx_tags_txt">Címkék</string>
@@ -1319,13 +1318,13 @@
     <string name="keep_informing_descr">Navigációs utasítások újra bemondása rendszeres időközönként</string>
     <string name="keep_informing">Navigációs utasítások ismétlése</string>
     <string name="navigation_intent_invalid">Érvénytelen formátum: %s</string>
-    <string name="color_red">piros</string>
-    <string name="color_pink">rózsaszín</string>
-    <string name="color_orange">narancs</string>
-    <string name="color_brown">barna</string>
-    <string name="color_yellow">sárga</string>
+    
+    <string name="rendering_value_pink_name">rózsaszín</string>
+    
+    <string name="rendering_value_brown_name">barna</string>
+    
     <string name="color_lightblue">világoskék</string>
-    <string name="color_blue">kék</string>
+    
 
 
     <string name="osmo_edit_device">Felhasználói tulajdonságok módosítása</string>
@@ -1392,7 +1391,7 @@
     <string name="osmo_use_server_name">Regisztrált név</string>
     <string name="osmo_connect_to_my_nickname">Felhasználónevem</string>
     <string name="osmo_user_name">Felhasználó</string>
-    <string name="color_green">zöld</string>
+    
 
     <string name="osmo_track_interval">Rögzítési intervallum</string>
     <string name="osmo_track_interval_descr">Válaszd ki a pozícióküldés gyakoriságát</string>

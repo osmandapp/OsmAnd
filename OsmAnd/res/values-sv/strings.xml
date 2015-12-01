@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
     <string name="ChooseCountry">Välj land</string>
     <string name="choose_city">Välj stad</string>
@@ -439,8 +438,8 @@
     <string name="gpx_option_reverse_route">Omvänd GPX-riktning</string>
     <string name="gpx_option_destination_point">Använd aktuell destination</string>
     <string name="gpx_option_from_start_point">Passera längs hela spåret</string>
-<string name="switch_to_vector_map_to_see">En offline vektor-karta finns tillgänglig för den här platsen.
-\n\t\n\tFör användning aktivera \'Meny\' -&gt; \'Konfigurera karta\' -&gt; \'Kartkälla...\' -&gt; \'Offline vektor-kartor\'.</string>
+<string name="switch_to_vector_map_to_see"><![CDATA[En offline vektor-karta finns tillgänglig för den här platsen.
+\n\t\n\tFör användning aktivera \'Meny\' -> \'Konfigurera karta\' -> \'Kartkälla…\' -> \'Offline vektor-kartor\'.]]></string>
     <string name="choose_audio_stream">Röstväglednings-output</string>
     <string name="choose_audio_stream_descr">Välj kanal för uppspelning av röstvägledning (systemberoende)</string>
     <string name="voice_stream_voice_call">Röstsamtal ljud</string>
@@ -857,7 +856,7 @@
     <string name="download_srtm_maps">Höjdkurvsdata</string>
 
 
-    <string name="audionotes_location_not_defined">Platsen att associera med anteckningen är inte angiven än. \"Använd platsen ...\" för att knyta en anteckning till den angivna platsen</string>
+    <string name="audionotes_location_not_defined">Platsen att associera med anteckningen är inte angiven än. \"Använd platsen …\" för att knyta en anteckning till den angivna platsen</string>
     <string name="route_descr_current_location">Aktuell position</string>
 
 
@@ -1310,13 +1309,13 @@
     <string name="osmo_control">OsMo snabbåtkomst</string>
     <string name="osmo_mode_restart">Starta om OsMo-session</string>
     <string name="osmo_settings_debug">Felsökningsinformation</string>
-    <string name="color_red">röd</string>
-    <string name="color_pink">skär</string>
-    <string name="color_orange">brandgul</string>
-    <string name="color_brown">brun</string>
-    <string name="color_yellow">gul</string>
+    
+    <string name="rendering_value_pink_name">skär</string>
+    
+    <string name="rendering_value_brown_name">brun</string>
+    
     <string name="color_lightblue">ljusblå</string>
-    <string name="color_blue">blå</string>
+    
 
 
     <string name="osmo_edit_device">Ändra användaregenskaper</string>
@@ -1369,7 +1368,7 @@
     <string name="layer_amenity_label">Namn på punkter</string>
     <string name="show_zoom_buttons_navigation_descr">Visa zoom-knappar under navigering</string>
     <string name="show_zoom_buttons_navigation">Visa zoom-knappar</string>
-    <string name="color_green">grön</string>
+    
 
 
     <string name="sort_by_distance">Sortera efter avstånd</string>
@@ -2000,7 +1999,7 @@
     <string name="access_from_map">Tillgång från kartan</string>
     <string name="rendering_attr_currentTrackColor_description">GPX-färg</string>
     <string name="rendering_attr_currentTrackWidth_description">GPX-bredd</string>
-    <string name="release_2_2">" • Nytt kontextkänsligt gränssnitt för att peta på platser på kartan och på andra skärmar\n\n • Kartskärmen startar nu automatiskt om inte \'Visa panelen vid appstart\' är vald\n\n • Konfigurera vilka kort och hur de ska visas i panelen\n\n • Gå förbi panelen om du föredrar en menybaserad kontroll över appen\n\n • För att hämta kartor kan regioner väljas direkt genom att peta på världskartan\n\n • Sökning efter intressepunkter (POI) understöder nu mer specifika frågor\n\n • Förbättrad funktion för POI- och OSM-redigering\n\n • Strukturen för hämtning av kartdata och gränssnittet har omarbetats\n\n och mer ... "</string>
+    <string name="release_2_2">" • Nytt kontextkänsligt gränssnitt för att peta på platser på kartan och på andra skärmar\n\n • Kartskärmen startar nu automatiskt om inte \'Visa panelen vid appstart\' är vald\n\n • Konfigurera vilka kort och hur de ska visas i panelen\n\n • Gå förbi panelen om du föredrar en menybaserad kontroll över appen\n\n • För att hämta kartor kan regioner väljas direkt genom att peta på världskartan\n\n • Sökning efter intressepunkter (POI) understöder nu mer specifika frågor\n\n • Förbättrad funktion för POI- och OSM-redigering\n\n • Strukturen för hämtning av kartdata och gränssnittet har omarbetats\n\n och mer … "</string>
     <string name="dashboard_or_drawer_description">Det finns ett nytt val att primärt kontrollera appen via den flexibla panelen eller via en statisk meny. Detta val kan du alltid ändra på under inställningarna i panelen.</string>
 <string name="use_dashboard_btn">Använd panelen</string>
     <string name="use_drawer_btn">Använd menyn</string>

@@ -178,7 +178,7 @@
   <string name="osmand_srtm_short_description_80_chars">OsmAnden lineaz kanpoko sestra-kurben plugina</string>
   <string name="osmand_srtm_long_description_1000_chars">Plugin honek OsmAnd-eko lineaz kanpoko mapetan agertu daitezkeen sestra-kurbak eskaintzen ditu. Datu globalak (iparraldean 70 gradutan eta hegoaldean 70 gradutan) STRM (Shuttle Radar Topography Mission) eta ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer) neurrietan oinarrituak daude, espazioko Terra irudi tresna, NASAren Lurra Behatzeko Sistemaren satelite emblematikoa. ASTER NASAren, Japoniako Ekonomi, Merkataritza eta Industria Ministerioaren (EMIM), eta Japoneko Espazio Sistemaren (J-espaziosistema)  elkarlanaren ondorioz sortua izan da.</string>
   <string name="map_widget_distancemeasurement">Distantzia neurketa</string>
-  <string name="audionotes_location_not_defined">Ez dago oharrarekin erlazionaturiko kokapenik definituta. \"Kokapena erabili...\" aukeratutako kokapenari ohar bat lotzeko</string>
+  <string name="audionotes_location_not_defined">Ez dago oharrarekin erlazionaturiko kokapenik definituta. \"Kokapena erabili…\" aukeratutako kokapenari ohar bat lotzeko</string>
   
   <string name="map_widget_audionotes">Audio oharrak</string>
   <string name="audionotes_plugin_description">Ibilaldian zehar audio/bideo oharrak hartu</string>
@@ -671,7 +671,7 @@
   
   
   
-  <string name="installing_new_resources">Datu berriak desenpaketatzen...</string>
+  <string name="installing_new_resources">Datu berriak desenpaketatzen…</string>
   <string name="internet_connection_required_for_online_route">Sareako nabigazio zerbitzu bat izan da aukeratua baina ez dago interneterako konexiorik.</string>
   <string name="tts_language_not_supported_title">Hizkuntza ez da onartzen</string>
   <string name="tts_language_not_supported">Aukeratutako hizkuntza instalatutako Android TTS (text-to-speech) motorrak ez du jasaten. Beste TTS motor bat bilatu nahi duzu Marketen? Bestela, oraingo TTS hizkuntza erabiliko da.</string>
@@ -691,7 +691,7 @@
   <string name="overlay_transparency">Gainazalaren gardentasuna</string>
   <string name="map_transparency_descr">Eraldatu onarri den maparen gardentasuna</string>
   <string name="map_transparency">Oinarri den maparen gardentasuna</string>
-  <string name="layer_underlay">Azpiazal mapa...</string>
+  <string name="layer_underlay">Azpiazal mapa…</string>
   <string name="map_underlay">Azpiazal mapa</string>
   <string name="map_underlay_descr">Aukeratu azpiazal mapa</string>
   <string name="layer_overlay">Gainazal mapa…</string>
@@ -1196,7 +1196,7 @@
         \n Oharra : fitxategi zaharrak ukitu gabe jarraituko dute.  
         \n Oharra : OsmAnd eta OsmAnd+ artean ezingo dira fitxategiak partekatu. </string>
     
-    <string name="copying_osmand_one_file_descr">Fitxategia kopiatzen (%s) kokapen berrira...</string>
+    <string name="copying_osmand_one_file_descr">Fitxategia kopiatzen (%s) kokapen berrira…</string>
     <string name="copying_osmand_files_descr">OsmAnd fitxategiak kopiatzen kokapen berrira (%s)</string>
     <string name="copying_osmand_files">OsmAnd fitxategiak kopiatzen</string>
     <string name="app_mode_truck">Kamioia</string>
@@ -1208,7 +1208,7 @@
     <string name="routing_attr_short_way_name">Ibilbide laburra</string>
 	<string name="routing_attr_short_way_description">Ibilbide laburra erabili</string>
 	<string name="rendering_attr_coloredBuildings_name">Koloreetako eraikinak</string>
-    <string name="osmo_invite">Gonbidatu...</string>
+    <string name="osmo_invite">Gonbidatu…</string>
     <string name="osmo_leave_confirmation_msg">%1$s taldea utzi nahi duzu?</string>
     <string name="osmo_specify_tracker_id">Id-a espezifikatu</string>
     <string name="continue_navigation">Jarraitu Nabigazioa</string>
@@ -1318,13 +1318,13 @@
     
     <string name="osmo_follow">Jarraitu</string>
     <string name="osmo_user_name">Erabiltzailea</string>
-	<string name="color_red">gorria</string>
-	<string name="color_pink">arrosa</string>
-	<string name="color_orange">laranja</string>
-	<string name="color_brown">marroia</string>
-	<string name="color_yellow">horia</string>
+	
+	<string name="rendering_value_pink_name">arrosa</string>
+	
+	<string name="rendering_value_brown_name">marroia</string>
+	
 	<string name="color_lightblue">urdin argia</string>
-	<string name="color_blue">urdina</string>
+	
 	<string name="color_green">berdea</string>
 	
     <string name="osmo_edit_device">Aldatu erabiltzailearen propietateak</string>

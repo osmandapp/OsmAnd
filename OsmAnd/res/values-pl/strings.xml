@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
   
   <string name="use_transparent_map_theme">Przezroczysty styl</string>
   <string name="native_library_not_supported">To urządzenie nie obsługuje biblioteki renderowania natywnego.</string>
@@ -1037,7 +1036,7 @@
     <string name="recording_description">Nagranie %1$s %3$s %2$s</string>
     <string name="recording_default_name">Nagranie</string>
     <string name="shared_string_control_stop">Stop</string>
-    <string name="shared_string_control_start">Rozpocznij</string>
+    <string name="shared_string_control_start">Start</string>
     <string name="map_widget_av_notes">Notatki audio/video</string>
     <string name="osmand_srtm_short_description_80_chars">Wtyczka OsmAnd do rysowania poziomic offline</string>
     
@@ -1462,13 +1461,13 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="osmo_tracker_id_descr">Kliknij, aby zobaczyć lub udostępnić identyfikator trackera.
 	Używając identyfikatora trackera podłączone urządzenia będą mogły śledzić każdy ruch tego urządzenia! Aby się rozłączyć, wybierz opcję: Generuj ponownie.</string>
     <string name="osmo_locations_sent">Położenie wysłane %1$d (w buforze %2$d) </string>
-    <string name="color_red">czerwony</string>
-	<string name="color_pink">różowy</string>
-	<string name="color_orange">pomarańczowy</string>
-	<string name="color_brown">brązowy</string>
-	<string name="color_yellow">żółty</string>
+    
+	<string name="rendering_value_pink_name">różowy</string>
+	
+	<string name="rendering_value_brown_name">brązowy</string>
+	
 	<string name="color_lightblue">jasnoniebieski</string>
-	<string name="color_blue">niebieski</string>
+	
 	
 	
     <string name="osmo_edit_device">Zmień właściwości użytkownika</string>
@@ -1513,7 +1512,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="osmo_use_server_name">Zarejestrowana nazwa</string>
     <string name="osmo_connect_to_my_nickname">Mój nick</string>
     <string name="osmo_user_name">Użytkownik</string>
-	<string name="color_green">zielony</string>
+	
 	
     <string name="osmo_user_joined">Użytkownik %1$s dołączył do grupy %2$s</string>
     <string name="osmo_user_left">Użytkownik %1$s opuścił grupę %2$s</string>
@@ -2100,7 +2099,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="access_from_map_description">Wyświetla kokpit zamiast menu</string>
     <string name="access_from_map">Dostęp z mapy</string>
     <string name="copied_to_clipboard">Skopiowane do schowka</string>
-    <string name="release_2_2">" • Nowe menu kontekstowe, przystosowane do wybierania lokacji na mapie oraz na innych wyświetlaczach\n\n• Mapa jest teraz wyświetlana bezpośrednio, o ile nie wybrano opcji \'Pokaż pulpit podczas startu aplikacji\'\n\n• Można skonfigurować które zakładki oraz jak będą wyświetlane na pulpicie\n\n• Pomiń panel jeżeli chcesz kontrolować aplikacją poprzez menu\n\n• W celu pobrania map, interesujące nas regiony można wybrać bezpośrednio na mapie świata\n\n• Wyszukiwarka POI wspiera teraz bardziej precyzyjne zapytania\n\n• Poprawiona funkcjonalność POI oraz edytora OSM\n\n• Struktura oraz interfejs menu pobierania map zostały ulepszone\n\ni więcej ... "</string>
+    <string name="release_2_2">" • Nowe menu kontekstowe, przystosowane do wybierania lokacji na mapie oraz na innych wyświetlaczach\n\n• Mapa jest teraz wyświetlana bezpośrednio, o ile nie wybrano opcji \'Pokaż pulpit podczas startu aplikacji\'\n\n• Można skonfigurować które zakładki oraz jak będą wyświetlane na pulpicie\n\n• Pomiń panel jeżeli chcesz kontrolować aplikacją poprzez menu\n\n• W celu pobrania map, interesujące nas regiony można wybrać bezpośrednio na mapie świata\n\n• Wyszukiwarka POI wspiera teraz bardziej precyzyjne zapytania\n\n• Poprawiona funkcjonalność POI oraz edytora OSM\n\n• Struktura oraz interfejs menu pobierania map zostały ulepszone\n\ni więcej … "</string>
     <string name="context_menu_item_open_note">Otwórz notatkę OSM</string>
     <string name="osn_bug_name">Notatka OSM</string>
 	<string name="osn_comment_dialog_title">Dodaj komentarz</string>

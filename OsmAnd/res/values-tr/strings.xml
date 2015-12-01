@@ -1052,7 +1052,7 @@
 	<string name="local_index_no_items_to_do">%1$s\'a öğe yok</string>
 	<string name="tts_language_not_supported">Seçtiğiniz dil yüklü olan Android TTS (yazıdan-sese) motoru tarafından desteklenmiyor. Mağazada başka TTS motoruna bakmak ister misiniz? Aksi halde önceden yüklenen TTS dili kullanılacak.</string>
 	<string name="gpx_option_reverse_route">GPX yönünü tersine çevir</string>
-	<string name="switch_to_vector_map_to_see">Bu konum için çevrimdışı vektör haritası. \n\t\n\tKullanmak için \'Menü\' → \'Harita Katmanları\' → \'Harita Kaynağı...\' → \'Çevrimdışı vektör haritalar\'.</string>
+	<string name="switch_to_vector_map_to_see">Bu konum için çevrimdışı vektör haritası. \n\t\n\tKullanmak için \'Menü\' → \'Harita Katmanları\' → \'Harita Kaynağı…\' → \'Çevrimdışı vektör haritalar\'.</string>
 	<string name="choose_audio_stream">Sesli kılavuz çıktısı</string>
 	<string name="choose_audio_stream_descr">Sesli kılavuzu oynatmaya kanal seçin. (sisteme bağımlı)</string>
 	<string name="voice_stream_voice_call">Sesli çağrı sesi</string>
@@ -1085,7 +1085,7 @@
     <string name="app_mode_truck">kamyon</string>
     <string name="routing_attr_short_way_description">Kısa yoldan git</string>
 	
-    <string name="copying_osmand_one_file_descr">Şimdidosya ($1%s ) Yeni Geliş kopyalamak ...</string>
+    <string name="copying_osmand_one_file_descr">Şimdidosya ($1%s ) Yeni Geliş kopyalamak …</string>
     <string name="copying_osmand_files_descr">Osmandyeni hedefedosyaları kopyalamak ( $1%s )</string>
     <string name="guidance_preferences_descr">öncelikli navigasyon</string>
     <string name="routing_preferences_descr">Öncelikli yönlendirme</string>
@@ -1304,13 +1304,13 @@
     <string name="gpx_info_average_speed">"Ortalama hız: %1$s "</string>
 	<string name="gpx_info_maximum_speed">"Maksimum hız: %1$s "</string>
 	<string name="gpx_info_avg_altitude">Ortalama yükseklik: %1$s</string>
-	<string name="color_red">kırmızı</string>
-	<string name="color_pink">pembe</string>
-	<string name="color_orange">turuncu</string>
-	<string name="color_brown">kahverengi</string>
-	<string name="color_yellow">sarı</string>
+	
+	<string name="rendering_value_pink_name">pembe</string>
+	
+	<string name="rendering_value_brown_name">kahverengi</string>
+	
 	<string name="color_lightblue">açık mavi</string>
-	<string name="color_blue">mavi</string>
+	
 	<string name="color_green">yeşil</string>
 
     <string name="av_locations_descr">Not lokasyonlu Gpx dosyası</string>

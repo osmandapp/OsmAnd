@@ -892,7 +892,7 @@ public class RoutingHelper {
 	}
 	
 	public Thread startTaskInRouteThreadIfPossible(final Runnable r) {
-		if(currentRunningJob == null) {
+		if (currentRunningJob == null) {
 			synchronized (this) {
 				currentRunningJob = new Thread(new Runnable() {
 					@Override
@@ -908,7 +908,6 @@ public class RoutingHelper {
 				}, "Calculating position"); //$NON-NLS-1$
 				currentRunningJob.start();
 			}
-			return currentRunningJob;
 		}
 		return null;
 	}

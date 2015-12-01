@@ -1,6 +1,5 @@
 package net.osmand.plus.osmedit;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -44,6 +43,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
@@ -125,7 +125,6 @@ public class EditPoiDialogFragment extends DialogFragment {
 				.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 	}
 
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
@@ -731,7 +730,7 @@ public class EditPoiDialogFragment extends DialogFragment {
 					.setNegativeButton(R.string.shared_string_cancel, null);
 			return builder.create();
 		}
-	}
+	} 
 
 	private TextView.OnEditorActionListener mOnEditorActionListener =
 			new TextView.OnEditorActionListener() {

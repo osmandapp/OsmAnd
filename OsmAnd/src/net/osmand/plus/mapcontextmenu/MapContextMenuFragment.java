@@ -142,6 +142,12 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		markerPaddingXPx = dpToPx(MARKER_PADDING_X_DP);
 
 		menu = getMapActivity().getContextMenu();
+		view = inflater.inflate(R.layout.map_context_menu_fragment, container, false);
+		if (!menu.isActive()) {
+			return view;
+		}
+		mainView = view.findViewById(R.id.context_menu_main);
+
 		leftTitleButtonController = menu.getLeftTitleButtonController();
 		rightTitleButtonController = menu.getRightTitleButtonController();
 		topRightTitleButtonController = menu.getTopRightTitleButtonController();
@@ -165,9 +171,6 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 
 		IconsCache iconsCache = getMyApplication().getIconsCache();
 		boolean light = getMyApplication().getSettings().isLightContent();
-
-		view = inflater.inflate(R.layout.map_context_menu_fragment, container, false);
-		mainView = view.findViewById(R.id.context_menu_main);
 
 		// Left title button
 		final Button leftTitleButton = (Button) view.findViewById(R.id.title_button);
@@ -244,14 +247,20 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 			private float maxVelocityY;
 
 			private boolean hasMoved;
+			private boolean centered;
 
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 
 				if (singleTapDetector.onTouchEvent(event)) {
-					showOnMap(menu.getLatLon(), true, false);
+					int posY = getViewY();
+					if (!centered) {
+						showOnMap(menu.getLatLon(), true, false,
+								map.getCurrentRotatedTileBox().getPixHeight() / 2 < posY - markerPaddingPx);
+						centered = true;
+					}
 					if (hasMoved) {
-						applyPosY(getViewY(), false, false, 0, 0);
+						applyPosY(posY, false, false, 0, 0);
 					}
 					openMenuHalfScreen();
 					return true;
@@ -297,7 +306,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 					case MotionEvent.ACTION_UP:
 					case MotionEvent.ACTION_CANCEL:
 						int currentY = getViewY();
-						
+
 						slidingUp = Math.abs(maxVelocityY) > 500 && (currentY - dyMain) < -50;
 						slidingDown = Math.abs(maxVelocityY) > 500 && (currentY - dyMain) > 50;
 
@@ -406,7 +415,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	public void openMenuFullScreen() {
 		changeMenuState(getViewY(), true, true, false);
 	}
-	
+
 	public void openMenuHalfScreen() {
 		int oldMenuState = menu.getCurrentMenuState();
 		if(oldMenuState == MenuState.HEADER_ONLY) {
@@ -455,26 +464,24 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 						.setDuration(200)
 						.setInterpolator(new DecelerateInterpolator())
 						.setListener(new AnimatorListenerAdapter() {
+
+							boolean canceled = false;
+
 							@Override
 							public void onAnimationCancel(Animator animation) {
-								if (needCloseMenu) {
-									menu.close();
-								} else {
-									updateMainViewLayout(posY);
-									if (previousMenuState != 0 && newMenuState != 0 && previousMenuState != newMenuState) {
-										doAfterMenuStateChange(previousMenuState, newMenuState);
-									}
-								}
+								canceled = true;
 							}
 
 							@Override
 							public void onAnimationEnd(Animator animation) {
-								if (needCloseMenu) {
-									menu.close();
-								} else {
-									updateMainViewLayout(posY);
-									if (previousMenuState != 0 && newMenuState != 0 && previousMenuState != newMenuState) {
-										doAfterMenuStateChange(previousMenuState, newMenuState);
+								if (!canceled) {
+									if (needCloseMenu) {
+										menu.close();
+									} else {
+										updateMainViewLayout(posY);
+										if (previousMenuState != 0 && newMenuState != 0 && previousMenuState != newMenuState) {
+											doAfterMenuStateChange(previousMenuState, newMenuState);
+										}
 									}
 								}
 							}
@@ -628,6 +635,10 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	@Override
 	public void onResume() {
 		super.onResume();
+		if (!menu.isActive()) {
+			dismissMenu();
+			return;
+		}
 		screenOrientation = DashLocationFragment.getScreenOrientation(getActivity());
 		if (menu.displayDistanceDirection()) {
 			getMapActivity().getMapViewTrackingUtilities().setContextMenu(menu);
@@ -643,7 +654,9 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
-		map.setLatLon(mapCenter.getLatitude(), mapCenter.getLongitude());
+		if (mapCenter != null) {
+			map.setLatLon(mapCenter.getLatitude(), mapCenter.getLongitude());
+		}
 		menu.setMapCenter(null);
 		getMapActivity().getMapLayers().getMapControlsLayer().setControlsClickable(true);
 	}
@@ -689,7 +702,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 				menuFullHeight = view.findViewById(R.id.context_menu_main).getHeight();
 
 				int dy = 0;
-				if (!menu.isLandscapeLayout() && menuTopViewHeight != 0) {
+				if (!menu.isLandscapeLayout() && menuTopViewHeight != 0 && menu.getCurrentMenuState() == MenuState.HEADER_ONLY) {
 					dy = Math.max(0, newMenuTopViewHeight - menuTopViewHeight);
 				}
 				menuTopViewHeight = newMenuTopViewHeight;
@@ -709,7 +722,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		});
 	}
 
-	private void showOnMap(LatLon latLon, boolean updateCoords, boolean ignoreCoef) {
+	private void showOnMap(LatLon latLon, boolean updateCoords, boolean ignoreCoef, boolean needMove) {
 		AnimateDraggingMapThread thread = map.getAnimatedDraggingThread();
 		int fZoom = map.getZoom();
 		double flat = latLon.getLatitude();
@@ -732,7 +745,9 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 			origMarkerY = cp.getCenterPixelY();
 		}
 
-		thread.startMoving(flat, flon, fZoom, true);
+		if (needMove) {
+			thread.startMoving(flat, flon, fZoom, true);
+		}
 	}
 
 	private void setAddressLocation() {
@@ -899,7 +914,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		}
 
 		if (animated) {
-			showOnMap(latlon, false, true);
+			showOnMap(latlon, false, true, true);
 		} else {
 			map.setLatLon(latlon.getLatitude(), latlon.getLongitude());
 		}
@@ -951,22 +966,32 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		return (OsmandApplication) getActivity().getApplication();
 	}
 
-	public static void showInstance(final MapActivity mapActivity) {
+	public static boolean showInstance(final MapContextMenu menu, final MapActivity mapActivity) {
+		try {
 
-		int slideInAnim = R.anim.slide_in_bottom;
-		int slideOutAnim = R.anim.slide_out_bottom;
+			if (menu.getLatLon() == null) {
+				return false;
+			}
 
-		MapContextMenu menu = mapActivity.getContextMenu();
-		if (menu.isExtended()) {
-			slideInAnim = menu.getSlideInAnimation();
-			slideOutAnim = menu.getSlideOutAnimation();
+			int slideInAnim = R.anim.slide_in_bottom;
+			int slideOutAnim = R.anim.slide_out_bottom;
+
+			if (menu.isExtended()) {
+				slideInAnim = menu.getSlideInAnimation();
+				slideOutAnim = menu.getSlideOutAnimation();
+			}
+
+			MapContextMenuFragment fragment = new MapContextMenuFragment();
+			mapActivity.getSupportFragmentManager().beginTransaction()
+					.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
+					.add(R.id.fragmentContainer, fragment, TAG)
+					.addToBackStack(TAG).commitAllowingStateLoss();
+
+			return true;
+
+		} catch (RuntimeException e) {
+			return false;
 		}
-
-		MapContextMenuFragment fragment = new MapContextMenuFragment();
-		mapActivity.getSupportFragmentManager().beginTransaction()
-				.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
-				.add(R.id.fragmentContainer, fragment, TAG)
-				.addToBackStack(TAG).commitAllowingStateLoss();
 	}
 
 	//DownloadEvents

@@ -1,9 +1,7 @@
 package net.osmand.osm;
 
-import net.osmand.CollatorStringMatcher;
 import net.osmand.PlatformUtil;
 import net.osmand.StringMatcher;
-import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.data.Amenity;
 import net.osmand.util.Algorithms;
 
@@ -371,10 +369,14 @@ public class MapPoiTypes {
 		PoiType tp = new PoiType(this, lastCategory, oname);
 		tp.setBaseLangType(langBaseType);
 		tp.setLang(lang);
-		tp.setAdditional(lastType != null ? lastType : 
+		tp.setAdditional(lastType != null ? lastType :
 			 (lastFilter != null ? lastFilter : lastCategory));
 		tp.setTopVisible(Boolean.parseBoolean(parser.getAttributeValue("", "top")));
 		tp.setText("text".equals(parser.getAttributeValue("", "type")));
+		String orderStr = parser.getAttributeValue("", "order");
+		if (!Algorithms.isEmpty(orderStr)) {
+			tp.setOrder(Integer.parseInt(orderStr));
+		}
 		tp.setOsmTag(otag);
 		tp.setNotEditableOsm("true".equals(parser.getAttributeValue("", "no_edit")));
 		tp.setOsmValue(parser.getAttributeValue("", "value"));
@@ -409,6 +411,10 @@ public class MapPoiTypes {
 		tp.setOsmTag2(parser.getAttributeValue("", "tag2"));
 		tp.setOsmValue2(parser.getAttributeValue("", "value2"));
 		tp.setText("text".equals(parser.getAttributeValue("", "type")));
+		String orderStr = parser.getAttributeValue("", "order");
+		if (!Algorithms.isEmpty(orderStr)) {
+			tp.setOrder(Integer.parseInt(orderStr));
+		}
 		tp.setNameOnly("true".equals(parser.getAttributeValue("", "name_only")));
 		tp.setNameTag(parser.getAttributeValue("", "name_tag"));
 		tp.setRelation("true".equals(parser.getAttributeValue("", "relation")));

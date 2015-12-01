@@ -229,13 +229,17 @@ public class MapContextMenu extends MenuTitleController {
 
 	public void show() {
 		if (!isVisible()) {
-			MapContextMenuFragment.showInstance(mapActivity);
+			if (!MapContextMenuFragment.showInstance(this, mapActivity)) {
+				active = false;
+			}
 		}
 	}
 
 	public void show(LatLon latLon, PointDescription pointDescription, Object object) {
 		if (init(latLon, pointDescription, object)) {
-			MapContextMenuFragment.showInstance(mapActivity);
+			if (!MapContextMenuFragment.showInstance(this, mapActivity)) {
+				active = false;
+			}
 		}
 	}
 
@@ -374,7 +378,7 @@ public class MapContextMenu extends MenuTitleController {
 				}
 			});
 			bld.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
-				
+
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					if(defaultVls[0] == 0) {
