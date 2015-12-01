@@ -44,7 +44,7 @@
                     android:id="@+id/location_path"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Location path"
+                    tools:text="Location path"
                     android:textColor="@color/color_white"
                     android:textSize="@dimen/default_list_text_size" />
 
@@ -52,7 +52,7 @@
                     android:id="@+id/location_desc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Location path  \u2022 300 MB"
+                    tools:text="Location path  \u2022 300 MB"
                     android:textColor="@color/color_white"
                     android:textSize="@dimen/default_list_text_size" />
             </LinearLayout>

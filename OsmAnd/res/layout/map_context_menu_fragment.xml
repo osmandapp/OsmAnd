@@ -198,7 +198,7 @@
                     android:layout_marginLeft="-4dp"
                     android:clickable="true"
                     android:gravity="center_vertical"
-                    android:text="— 00:26"
+                    tools:text="— 00:26"
                     android:textColor="?android:textColorSecondary"
                     android:textSize="@dimen/default_desc_text_size"/>
 
