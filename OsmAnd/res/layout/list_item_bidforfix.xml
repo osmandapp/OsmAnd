@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/bidforfixitemlayout"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@android:color/white">
+<RelativeLayout android:id="@+id/bidforfixitemlayout"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@android:color/white">
 
     <TextView
         android:id="@+id/bffiText"
@@ -15,7 +16,7 @@
         android:layout_marginTop="8dp"
         android:text="Large Text"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#72B123" />
+        android:textColor="#72B123"/>
 
     <View
         android:id="@+id/ruler"
@@ -26,7 +27,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:layout_marginTop="6dp"
-        android:background="#B0B0B0" />
+        android:background="#B0B0B0"/>
 
     <TextView
         android:id="@+id/bffiSupport"
@@ -35,8 +36,8 @@
         android:layout_alignLeft="@+id/bffiText"
         android:layout_below="@+id/bffiText"
         android:layout_marginTop="16dp"
-        android:text="18 supporters"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        tools:text="18 supporters"/>
 
     <TextView
         android:id="@+id/bffiFunded"
@@ -44,8 +45,8 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/bffiSupport"
         android:layout_below="@+id/bffiSupport"
-        android:text="Funded: 65%"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        tools:text="Funded: 65%"/>
 
     <ImageView
         android:id="@+id/bffiGraph"
@@ -54,6 +55,6 @@
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/bffiSupport"
         android:layout_marginRight="20dp"
-        android:src="@android:drawable/alert_dark_frame" />
+        android:src="@android:drawable/alert_dark_frame"/>
 
 </RelativeLayout>

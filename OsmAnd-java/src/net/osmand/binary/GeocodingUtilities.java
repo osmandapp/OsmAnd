@@ -179,13 +179,13 @@ public class GeocodingUtilities {
 	}
 	
 	public List<String> prepareStreetName(String s) {
-		List<String> ls  = new ArrayList<String>();
+		List<String> ls = new ArrayList<String>();
 		int beginning = 0;
-		for(int i = 1; i < s.length(); i++) {
-			if(s.charAt(i) == ' ') {
+		for (int i = 1; i < s.length(); i++) {
+			if (s.charAt(i) == ' ') {
 				addWord(ls, s.substring(beginning, i));
 				beginning = i;
-			} else if(s.charAt(i) == '(') {
+			} else if (s.charAt(i) == '(') {
 				addWord(ls, s.substring(beginning, i));
 				while (i < s.length()) {
 					char c = s.charAt(i);
@@ -194,13 +194,13 @@ public class GeocodingUtilities {
 					if (c == ')')
 						break;
 				}
-				
+
 			}
 		}
-			if(beginning < s.length()) {
-		String lastWord = s.substring(beginning, s.length());
-		addWord(ls, lastWord);
-			}
+		if (beginning < s.length()) {
+			String lastWord = s.substring(beginning, s.length());
+			addWord(ls, lastWord);
+		}
 		Collections.sort(ls, Collator.getInstance());
 		return ls;
 	}

@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
     <string name="av_def_action_audio">Optag audio</string>
@@ -33,7 +32,7 @@
     <string name="osmand_srtm_long_description_1000_chars">"Udvidelsen giver både en højdekurver overlejring og et relieflag, der vises ovenpå OsmAnds standard kort. Funktionaliteten er meget værdsat af sportsfolk, vandrere, og enhver interesseret i en relief struktur af landskabet.
 \n\nDe globale data (mellem 70 grader nord og 70 grader syd) er baseret på målinger af SRTM (Shuttle Radar Topografi Mission) og ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), et billeddannende instrument ombord på Terra satellitten, flagskibet i NASAs Earth Observering system. ASTER er et samarbejde mellem NASA, Japans Ministry of Economy, Trade and Industry  (METI), og Japan Space Systems (J-spacesystems). "</string>
     <string name="map_widget_distancemeasurement">Afstandsmåling</string>
-    <string name="audionotes_location_not_defined">Placering der skal tilknyttes til noten er ikke defineret endnu. \'Brug placering ...\' for at tildele en note til den angivne placering</string>
+    <string name="audionotes_location_not_defined">Placering der skal tilknyttes til noten er ikke defineret endnu. \'Brug placering …\' for at tildele en note til den angivne placering</string>
 
     <string name="map_widget_audionotes">Audionoter</string>
     <string name="audionotes_plugin_description">Audio-/videonoter udvidelse giver funktionalitet til at tage audio-/foto-/videonoter under en tur, enten ved hjælp en knap på skærmen, eller direkte fra kontekstmenuen for en position på kortet.</string>
@@ -1386,13 +1385,13 @@
 
     <string name="import_file_favourites">Gem punkter som en GPX-fil eller importer dem til favoritter?</string>
 
-    <string name="color_red">Rød</string>
+    
     <string name="rendering_value_pink_name">Lyserød</string>
-    <string name="color_orange">Orange</string>
+    
     <string name="rendering_value_brown_name">Brun</string>
-    <string name="color_yellow">Gul</string>
+    
     <string name="color_lightblue">Lyseblå</string>
-    <string name="color_blue">Blå</string>
+    
 
 
     <string name="osmo_edit_device">Ændre brugeregenskaber</string>
@@ -1408,7 +1407,7 @@
     <string name="osmo_use_server_name">Registreret navn</string>
     <string name="osmo_connect_to_my_nickname">Kaldenavn</string>
     <string name="osmo_user_name">Bruger</string>
-    <string name="color_green">Grøn</string>
+    
 
     <string name="osmo_follow">Følg</string>
     <string name="osmo_show_group_notifications">Vis gruppemeddelelser</string>
@@ -1467,7 +1466,7 @@
     <string name="osmo_group_by_invite">Tilslut med invitation</string>
     <string name="osmo_group_information_desc">" - Alle grupper der oprettes er offentlige! Hvis de skal være anonyme, tilsluttes enheder direkte via sporings-id\'er.\n - Private grupper er begrænset til 8 personer\n - I tilfælde af inaktivitet eller aktivitet af kun 1 person i 2 uger, vil gruppen blive slettet.\n - Man kan begrænse adgangen til gruppen, til kun med invitation, men for at kontrollere gruppen skal man bruge administrationskonsollen.\n - Hvis der er brug for at oprette en gruppe, men med andre betingelser, kontakt http://osmo.mobi"</string>
     <string name="osmo_auth_error_short">Autorisation fejlede</string>
-    <string name="osmo_auth_error">"OsMo autorisation fejl: %$s.\nDet kan være at tjenesten midlertidig  er nede eller registreringen er ududløbet. Fortsæt med en ny registrering?"</string>
+    <string name="osmo_auth_error">"OsMo autorisation fejl: %1$s.\nDet kan være at tjenesten midlertidig  er nede eller registreringen er ududløbet. Fortsæt med en ny registrering?"</string>
     <string name="rendering_attr_hideBuildings_name">Skjul bygninger</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Skjul gang- og cykelstier</string>
     <string name="rendering_attr_hideText_name">Skjul tekst</string>
@@ -1515,7 +1514,7 @@
     <string name="rendering_attr_hikingRoutesOSMC_description">Generer stier efter OSMC spor</string>
 
     <string name="osmo_invite">Inviter…</string>
-    <string name="osmo_leave_confirmation_msg">Forlad gruppen %$s?</string>
+    <string name="osmo_leave_confirmation_msg">Forlad gruppen %1$s?</string>
     <string name="osmo_specify_tracker_id">Angiv id</string>
     <string name="arrival_distance_factor_early">Tidligt</string>
     <string name="arrival_distance_factor_normally">Normal</string>
@@ -2095,7 +2094,7 @@
 	<string name="osn_close_dialog_success">Note lukket</string>
 	<string name="osm_edit_modified_poi">Ændret OSM IP</string>
     <string name="osm_edit_deleted_poi">Slettet OSM IP</string>
-    <string name="release_2_2">" • Ny kontekstafhængig brugergrænseflade når der vælges lokationer på kortet og på andre skærme\n\n • Kortskærmen vises direkte, medmindre \'Vis betjeningspanel ved start\' er valgt\n\n • Konfigurer hvordan og hvilket indhold der vises på betjeningspanelet\n\n • Forbigå betjeningspanel hvis der ønskes menuen-baserede app-kontrol\n\n • Hent kort, regioner ved at trykke direkte på verdenskortet\n\n • IP søgning understøtter nu mere specifikke forespørgsler\n\n • Forbedret IP og OSM redigeringsfunktionalitet\n\n • Administration af kortfiler struktur og grænseflade er omarbejdet\n\n og mere... "</string>
+    <string name="release_2_2">" • Ny kontekstafhængig brugergrænseflade når der vælges lokationer på kortet og på andre skærme\n\n • Kortskærmen vises direkte, medmindre \'Vis betjeningspanel ved start\' er valgt\n\n • Konfigurer hvordan og hvilket indhold der vises på betjeningspanelet\n\n • Forbigå betjeningspanel hvis der ønskes menuen-baserede app-kontrol\n\n • Hent kort, regioner ved at trykke direkte på verdenskortet\n\n • IP søgning understøtter nu mere specifikke forespørgsler\n\n • Forbedret IP og OSM redigeringsfunktionalitet\n\n • Administration af kortfiler struktur og grænseflade er omarbejdet\n\n og mere… "</string>
     <string name="osm_save_offline">Gem offline</string>
     <string name="rendering_attr_currentTrackColor_description">GPX-farve</string>
     <string name="rendering_attr_currentTrackWidth_description">GPX-bredde</string>
@@ -2113,6 +2112,6 @@
     <string name="routing_attr_avoid_stairs_name">Undgå trapper</string>
 	<string name="routing_attr_avoid_stairs_description">Undgå trapper</string>
 	<string name="routing_attr_avoid_borders_name">Undgå grænseovergang</string>
-	<string name="color_lightgreen">Lysegrøn</string>
+	
 	<string name="color_purple">Lilla</string>
 	</resources>

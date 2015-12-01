@@ -14,6 +14,7 @@ import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
+
 import net.osmand.plus.R;
 
 import java.util.TreeMap;
@@ -69,7 +70,7 @@ public class FavoriteImageDrawable extends Drawable {
 		if (!withShadow) {
 			Rect bs = new Rect(bounds);
 			 //bs.inset((int) (4 * density), (int) (4 * density));
-			bs.inset(bs.width() / 4, (int) bs.height() / 4);
+			bs.inset(bs.width() / 4, bs.height() / 4);
 			listDrawable.setBounds(bs);
 		}
 	}
@@ -100,8 +101,8 @@ public class FavoriteImageDrawable extends Drawable {
 			canvas.drawBitmap(favIcon, bs.exactCenterX() - favIcon.getWidth() / 2f, bs.exactCenterY() - favIcon.getHeight() / 2f, paintIcon);
 		} else {
 			int min = Math.min(bs.width(), bs.height());
-			int r = (int) (min * 4 / 10);
-			int rs = (int) (r - 1);
+			int r = (min * 4 / 10);
+			int rs = (r - 1);
 			canvas.drawCircle(min / 2, min / 2, r, paintOuter);
 			canvas.drawCircle(min / 2, min / 2, rs, paintInnerCircle);
 			listDrawable.draw(canvas);

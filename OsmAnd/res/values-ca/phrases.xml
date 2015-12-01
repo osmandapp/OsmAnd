@@ -2000,4 +2000,19 @@
 	<string name="poi_historic_period_first_intermediate_period">Període històric: primer període intermedi (2181-2055 aC)</string>
 	<string name="poi_historic_period_second_intermediate_period">Període històric: segon període intermedi (1650 – 1550 aC)</string>
 	<string name="poi_clothes_socks">Mitjons</string>
+	<string name="poi_historic_period_first_persian_period">Període històric: primer període persa</string>
+	<string name="poi_historic_period_late_period">Període històric: període tardà (664-332 aC)</string>
+	<string name="poi_historic_period_second_persian_period">Període històric: segon període persa</string>
+	<string name="poi_historic_period_alexander_the_great">Període històric: Alexandre el Gran</string>
+	<string name="poi_historic_period_ptolemaic_egypt">Període històric: Egipte ptolemaic (305 aC-30 aC)</string>
+	<string name="poi_historic_period_christian_egypt">Període històric: Egipte cristià</string>
+	<string name="poi_historic_period_byzantine_egypt">Període històric: Egipte bizantí (30 aC - 641 dC)</string>
+	<string name="poi_historic_period_persian_occupation">Període històric: ocupació persa</string>
+	<string name="poi_historic_period_greek_dark_ages">Període històric: l\'edat fosca grega (1100-800 aC)</string>
+	<string name="poi_historic_period_roman_greece">Període històric: greco-romà (146 aC-330 DC)</string>
+	<string name="poi_historic_period_roman_kingdom">Període històric: Regne romà (753 - 509 aC)</string>
+	<string name="poi_historic_period_urban">Període històric: urbà (època III, 133 dC - 374 dC)</string>
+	<string name="poi_historic_period_classical">Període històric: clàssic (època IV, 374 dC - 900 dC)</string>
+	<string name="poi_historic_period_imperial">Període històric: imperial (època V, 900 dC - 1200 dC)</string>
+
 	</resources>

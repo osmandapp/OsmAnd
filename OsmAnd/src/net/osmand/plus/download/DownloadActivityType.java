@@ -1,15 +1,6 @@
 package net.osmand.plus.download;
 
-import static net.osmand.IndexConstants.BINARY_MAP_INDEX_EXT;
-
-import java.io.File;
-import java.io.IOException;
-import java.net.URLEncoder;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import android.content.Context;
 
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
@@ -22,10 +13,20 @@ import net.osmand.util.Algorithms;
 
 import org.xmlpull.v1.XmlPullParser;
 
-import android.content.Context;
+import java.io.File;
+import java.io.IOException;
+import java.net.URLEncoder;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
+
+import static net.osmand.IndexConstants.BINARY_MAP_INDEX_EXT;
 
 public class DownloadActivityType {
-	private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
+	private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.US);
 	private static Map<String, DownloadActivityType> byTag = new HashMap<>();
 	
 	public static final DownloadActivityType NORMAL_FILE =

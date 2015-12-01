@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="amenity_type_administrative">Administrativo</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="amenity_type_administrative">Administrativo</string>
   <string name="amenity_type_barrier">Barreira</string>
   <string name="amenity_type_education">Educação</string>
   <string name="amenity_type_emergency">Emergência</string>
@@ -1046,7 +1045,7 @@
     
     
     <string name="map_widget_distancemeasurement">Medição da distância</string>
-    <string name="audionotes_location_not_defined">Local para associar com a nota ainda não está definido. \"Usar localização...\" para atribuir uma nota para o local especificado</string>
+    <string name="audionotes_location_not_defined">Local para associar com a nota ainda não está definido. \"Usar localização…\" para atribuir uma nota para o local especificado</string>
     
     <string name="map_widget_audionotes">Notas de áudio</string>
     <string name="audionotes_plugin_description">O plugin de notas de áudio/vídeo fornece a funcionalidade para tomar notas de áudio/fotografia/vídeo durante uma viagem, usando um botão na tela do mapa ou diretamente do menu de contexto para qualquer posição no mapa.</string>
@@ -1359,13 +1358,13 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="osmo_use_server_name">Nome registado</string>
     <string name="osmo_connect_to_my_nickname">Minha alcunha</string>
     <string name="osmo_user_name">Utilizador</string>
-	<string name="color_red">vermelho</string>
+	
 	<string name="rendering_value_pink_name">rosa</string>
-	<string name="color_orange">laranja</string>
+	
 	<string name="rendering_value_brown_name">castanho</string>
-	<string name="color_yellow">amarelo</string>
+	
 	<string name="color_lightblue">azul claro</string>
-	<string name="color_blue">azul</string>
+	
 	<string name="color_green">verde</string>
 	
     <string name="osmo_edit_device">Mudar propriedades do utilizador</string>
@@ -1414,7 +1413,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="osmo_tracker_id_descr">Clique para partilhar a identificação do tracker
 	Ao usar a identificação do tracker, aparelhos ligados podem ver todos os movimentos deste aparelho ! Para desligar seleccione a opção regenerar.</string>
     <string name="osmo_session_token">Token de sessão: %1$s</string>
-    <string name="osmo_auth_pending">Aguardando autorização...</string>
+    <string name="osmo_auth_pending">Aguardando autorização…</string>
     <string name="osmo_locations_sent">Localização enviada %1$d (in buffer %2$d) </string>
     <string name="osmo_conn_successfull">Ligação estabelecida : %1$s </string>
     <string name="osmo_io_error">Problema de ligação OsMo </string>
@@ -1474,7 +1473,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
          \n Nota: Os arquivos antigos permanecerão intocados.
          \n Nota: não será possível compartilhar arquivos entre OsmAnd e OsmAnd + . </string>
     
-    <string name="copying_osmand_one_file_descr">Copiando o arquivo (%s) para novo destino ...</string>
+    <string name="copying_osmand_one_file_descr">Copiando o arquivo (%s) para novo destino …</string>
     <string name="copying_osmand_files_descr">Cópia de arquivos Osmand para novo destino (%s)</string>
     <string name="copying_osmand_files">Cópia de arquivos Osmand</string>
     <string name="calculate_osmand_route_gpx">Calcular rota offline OsmAnd</string>
@@ -1826,7 +1825,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
     <string name="show_on_start">Mostrar no arranque</string>
     <string name="copied_to_clipboard">Copiado para a Área de Transferências</string>
     <string name="release_2_2">" • Novo interface do utilizador sensível ao contexto, ao tocar locais no mapa, ou em outras telas\n\n• Tela do Mapa é agora lançada diretamente, a menos que \'Mostrar Painel de instrumentos no arranque\' seja selecionado\n\n• Configure quais e de que forma os cartões são exibidos no Painel de instrumentos\n\n• Desactivar o Painel, se preferir um controle baseado em menus\n\n• Para fazer download de mapas, as regiões podem ser seleccionadas directamente, tocando no mapa do mundo\n\n• Busca por \'Pontos de Interesse\' agora oferece suporte a consultas mais específicas\n\n• Melhoria nos \'Pontos de Interesse\' e funcionalidades de edição OSM\n\n• Reformulação de estrutura e de interface para download de mapas de dados 
-\n\ne mais... "</string>
+\n\ne mais… "</string>
     <string name="osm_save_offline">Guardar off-line</string>
     <string name="osm_edit_modified_poi">Ponto de Interesse OSM modificado</string>
     </resources>

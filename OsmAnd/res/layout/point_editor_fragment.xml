@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
              xmlns:app="http://schemas.android.com/apk/res-auto"
+             xmlns:tools="http://schemas.android.com/tools"
              android:id="@+id/point_edit_layout"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
@@ -71,8 +72,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
                     android:layout_gravity="center_vertical"
-                    android:text="Point info"
+                    tools:text="Point info"
                     android:textColor="?android:textColorPrimary"
                     android:textSize="@dimen/default_list_text_size"/>
 
@@ -136,7 +138,7 @@
                         android:layout_marginLeft="8dp"
                         android:textColor="?android:textColorPrimary"
                         android:textColorHint="?android:textColorSecondary"
-                        android:text="Name"
+                        tools:text="Name"
                         android:imeOptions="actionDone"
                         android:inputType="text"/>
 

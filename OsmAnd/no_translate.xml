@@ -23,5 +23,7 @@
 	<string name="osmo">OsMo</string>
     <string name="tag_poi_amenity">amenity</string>
     <string name="tag_poi_name">name</string>
+    <string name="hint_tag">Tag</string>
+    <string name="hint_value">Value</string>
 
 </resources>

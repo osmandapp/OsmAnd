@@ -1011,7 +1011,7 @@
     <string name="recording_photo_description">Φωτογραφία %1$s %2$s</string>
     <string name="av_def_action_picture">Λήψη φωτογραφίας</string>
     <string name="recording_context_menu_precord">Λήψη φωτογραφίας</string>
-    <string name="audionotes_location_not_defined">Δεν έχει καθοριστεί ακόμα τοποθεσία για συσχέτιση με την σημείωση. \"Χρήση τοποθεσίας ...\" για να συνδέσετε την σημείωση με την καθορισμένη τοποθεσία</string>
+    <string name="audionotes_location_not_defined">Δεν έχει καθοριστεί ακόμα τοποθεσία για συσχέτιση με την σημείωση. \"Χρήση τοποθεσίας …\" για να συνδέσετε την σημείωση με την καθορισμένη τοποθεσία</string>
     <string name="local_indexes_cat_av">Δεδομένα Ήχου/Εικόνας</string>
     
     <string name="precise_routing_mode_descr">Ενεργοποίηση για υπολογισμό δρομολογίων με ακρίβεια χωρίς προβλήματα. Ακόμη περιορισμένο σε σχέση με την απόσταση και αργό.</string>
@@ -1184,13 +1184,13 @@
 	<string name="gpx_info_average_speed">Μέση ταχύτητα: %1$s </string>
 	<string name="gpx_info_maximum_speed">Μέγιστη ταχύτητα: %1$s </string>
 	<string name="gpx_info_avg_altitude">Μέσο υψόμετρο: %1$s</string>
-    <string name="color_red">κόκκινο</string>
+    
 	<string name="rendering_value_pink_name">ροζ</string>
-	<string name="color_orange">πορτοκαλί</string>
+	
 	<string name="rendering_value_brown_name">καφέ</string>
-	<string name="color_yellow">κίτρινο</string>
+	
 	<string name="color_lightblue">γαλάζιο</string>
-	<string name="color_blue">μπλε</string>
+	
 	<string name="color_green">πράσινο</string>
 	
     <string name="hours_ago">ώρες πριν</string>

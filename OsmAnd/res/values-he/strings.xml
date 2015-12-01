@@ -615,7 +615,7 @@
 	<string name="continuous_rendering">עיבוד תמונה רציף</string>
 	<string name="continuous_rendering_descr">הצגת עיבוד תמונה רציף במקום תמונה אחת בכל פעם</string>
 	<string name="rendering_exception">אירעה שגיאה בעת עיבוד האיזור הנבחר</string>
-	<string name="show_point_options">שימוש במיקום...</string>
+	<string name="show_point_options">שימוש במיקום…</string>
 	<string name="renderer_load_sucess">תכונת העיבוד נטענה בהצלחה</string>
 	<string name="renderer_load_exception">אירעה חריגה: תכונת העיבוד לא נטענה</string>
 	<string name="renderers">תכונת עיבוד וקטורים</string>
