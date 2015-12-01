@@ -1166,7 +1166,7 @@
     <string name="map_widget_av_notes">Audio/video piezīmes</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd spraudnis bezsaistes kontūrlīnijām</string>
     <string name="map_widget_distancemeasurement">Distances mērīšana</string>
-    <string name="audionotes_location_not_defined">Nav definēta atrašanās vieta, ko piesaistīt piezīmei. Lai to izdarītu, izvēlieties \"Lietot atrašanās vietu...\"</string>
+    <string name="audionotes_location_not_defined">Nav definēta atrašanās vieta, ko piesaistīt piezīmei. Lai to izdarītu, izvēlieties \"Lietot atrašanās vietu…\"</string>
     
     <string name="map_widget_audionotes">Audio piezīmes</string>
     <string name="audionotes_plugin_description">Ceļojuma laikā uzņemt audio/video piezīmes.</string>

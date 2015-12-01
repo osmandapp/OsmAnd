@@ -1901,7 +1901,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="context_menu_item_delete_waypoint">Odstrániť bod GPX?</string>
     <string name="context_menu_item_edit_waypoint">Upraviť bod GPX</string>
     <string name="copied_to_clipboard">Skopírované do schránky</string>
-    <string name="release_2_2">" • Nové kontextovo závislé rozhranie pre označenie umiestnení na mape a iných obrazovkách\n\n • Obrazovka mapy je priamo spustená ak nie je zvolené \'Zobraziť úvodný panel pri štarte\'\n\n • Je možné nastaviť ktoré karty sú zobrazené na úvodnom paneli\n\n • Úvodný panel je možné obísť, ak preferujete ovládanie aplikácie cez menu\n\n • Pre stiahnutie máp je možne priamo označiť oblasť na mape sveta\n\n • Hľadanie bodov záujmu (POI) umožňuje presnejšie špecifikácie\n\n • Vylepšené možnosti úpravy POI a OSM poznámok\n\n • Prepracované rozhranie sťahovania máp\n\n a ďalšie vylepšenia... "</string>
+    <string name="release_2_2">" • Nové kontextovo závislé rozhranie pre označenie umiestnení na mape a iných obrazovkách\n\n • Obrazovka mapy je priamo spustená ak nie je zvolené \'Zobraziť úvodný panel pri štarte\'\n\n • Je možné nastaviť ktoré karty sú zobrazené na úvodnom paneli\n\n • Úvodný panel je možné obísť, ak preferujete ovládanie aplikácie cez menu\n\n • Pre stiahnutie máp je možne priamo označiť oblasť na mape sveta\n\n • Hľadanie bodov záujmu (POI) umožňuje presnejšie špecifikácie\n\n • Vylepšené možnosti úpravy POI a OSM poznámok\n\n • Prepracované rozhranie sťahovania máp\n\n a ďalšie vylepšenia… "</string>
     <string name="osm_save_offline">Uložiť offline</string>
     <string name="osm_edit_modified_poi">Upravený OSM POI</string>
     <string name="osm_edit_deleted_poi">Odstránený OSM POI</string>

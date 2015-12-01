@@ -526,7 +526,7 @@
     <string name="shared_string_close">Fermer</string>
     <string name="loading_data">Chargement des données</string>
     <string name="reading_indexes">Lecture des index…</string>
-    <string name="previous_run_crashed">Oups ... OsmAnd a planté. Souhaitez-vous nous envoyer le fichier journal ?</string>
+    <string name="previous_run_crashed">Oups … OsmAnd a planté. Souhaitez-vous nous envoyer le fichier journal ?</string>
     <string name="saving_gpx_tracks">Enregistrement des traces GPX sur la carte SD…</string>
     <string name="finished_task">Terminé</string>
 
@@ -682,7 +682,7 @@
     <string name="online_map_settings_descr">Configurer la source de la carte en ligne ou en cache</string>
 
 
-    <string name="osmand_rastermaps_plugin_description">"Ce greffon permet d\'accéder à une grande gamme de cartes en ligne (aussi appelées tuiles ou cartes raster) qui vont de cartes OpenStreetMap (comme les tuiles Mapnik) jusqu\'aux images satellites en passant par des cartes spécialisées comme des cartes météo, des cartes de climat, des cartes géologiques, etc ...\n\nChacune de ces cartes est utilisable soit comme carte principale soit comme sur ou sous couche d\'une autre carte. Afin de gérer au mieux la superposition des cartes, vous pouvez masquer certains éléments des cartes vectorielles hors ligne depuis le menu \"Configurer la carte\".\n\nCes cartes tuiles peuvent être obtenues directement en ligne et peuvent également être préparées grâce à des outils tiers puis copiées dans le dossier de données d\'OsmAnd sous forme de base de données sqlite. "</string>
+    <string name="osmand_rastermaps_plugin_description">"Ce greffon permet d\'accéder à une grande gamme de cartes en ligne (aussi appelées tuiles ou cartes raster) qui vont de cartes OpenStreetMap (comme les tuiles Mapnik) jusqu\'aux images satellites en passant par des cartes spécialisées comme des cartes météo, des cartes de climat, des cartes géologiques, etc …\n\nChacune de ces cartes est utilisable soit comme carte principale soit comme sur ou sous couche d\'une autre carte. Afin de gérer au mieux la superposition des cartes, vous pouvez masquer certains éléments des cartes vectorielles hors ligne depuis le menu \"Configurer la carte\".\n\nCes cartes tuiles peuvent être obtenues directement en ligne et peuvent également être préparées grâce à des outils tiers puis copiées dans le dossier de données d\'OsmAnd sous forme de base de données sqlite. "</string>
     <string name="osmand_background_plugin_description">Affiche les préférences afin d\'activer le suivi et la navigation en tâche de fond (écran éteint) en réveillant périodiquement le GPS.</string>
     <string name="osmand_accessibility_description">Ce greffon donne accès directement dans OsmAnd aux options d\'accessibilité de votre appareil (réglage de la vitesse des voix TTS, utilisation du trackball pour zoomer ou annonce automatique de votre position).</string>
 
@@ -1162,7 +1162,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="distance_measurement_start_editing">Démarrer la mesure sur la carte</string>
     <string name="distance_measurement_finish_editing">Terminer la mesure</string>
 
-    <string name="distance_measurement_load_gpx">Ouvrir un fichier GPX...</string>
+    <string name="distance_measurement_load_gpx">Ouvrir un fichier GPX…</string>
     <string name="wait_current_task_finished">Veuillez attendre que la tâche en cours soit terminée</string>
     <string name="plugin_distance_point_time">temps</string>
     <string name="plugin_distance_point_hdop">précision</string>
@@ -1611,7 +1611,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="speak_poi">Points d\'intérêt proches</string>
     <string name="shared_string_all">Tous</string>
     <string name="index_tours">Tours</string>
-    <string name="record_plugin_description">"Ce greffon permet d\'enregistrer vos itinéraires au format GPX : soit automatiquement soit grâce à un bouton supplémentaire affiché sur la carte.\n\nLes traces ainsi enregistrées peuvent être partagées avec vos amis ou utilisées pour contribuer à OSM. Les sportifs peuvent utiliser ces enregistrements pour leurs entraînements. Certaines analyses des traces peuvent être réalisées directement dans OmsAnd (comme la vitesse moyenne, la durée de l\'itinéraire ...). Enfin les fichiers GPX locaux peuvent être exportés pour être utilisés par d\'autres applications. "</string>
+    <string name="record_plugin_description">"Ce greffon permet d\'enregistrer vos itinéraires au format GPX : soit automatiquement soit grâce à un bouton supplémentaire affiché sur la carte.\n\nLes traces ainsi enregistrées peuvent être partagées avec vos amis ou utilisées pour contribuer à OSM. Les sportifs peuvent utiliser ces enregistrements pour leurs entraînements. Certaines analyses des traces peuvent être réalisées directement dans OmsAnd (comme la vitesse moyenne, la durée de l\'itinéraire …). Enfin les fichiers GPX locaux peuvent être exportés pour être utilisés par d\'autres applications. "</string>
     <string name="record_plugin_name">Enregistrement d\'itinéraire</string>
     <string name="int_hour">h</string>
     <string name="duration">Durée</string>
@@ -1764,7 +1764,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="shared_string_export">Exporter</string>
     <string name="plugin_ski_descr">"Activer cette vue bascule vers le style \"Hiver et Ski\", affichant le relief en conditions hivernales, ainsi que les pistes de ski (dont la difficulté est représentée par un code couleurs) et les remontées mécaniques.\n\nCet affichage peut être annulé soit en le désactivant ici, soit en modifiant le Style de la carte dans \"Configurer la carte\". "</string>
 	<string name="plugin_touringview_descr">"Activer cette vue bascule vers le style d\'affichage \"Grand tourisme\", affichant une carte très détaillée adaptée aux voyageurs et chauffeurs routiers.
-\n\nCet affichage, quel que soit le niveau de zoom, fournit le maximum de détails disponibles. Chaque type de voie (routes, pistes, chemins ...) est distingué de manière explicite grâce à des codes couleurs, ce qui est particulièrement utile en cas de conduite de grands véhicules. Il existe aussi des options pour l\'affichage desitinéraires cyclables ou des chemins de randonnée.\n\nIl n\'est pas nécessaire de télécharger une carte supplémentaire, cet affichage s\'appuyant sur les cartes standards.
+\n\nCet affichage, quel que soit le niveau de zoom, fournit le maximum de détails disponibles. Chaque type de voie (routes, pistes, chemins …) est distingué de manière explicite grâce à des codes couleurs, ce qui est particulièrement utile en cas de conduite de grands véhicules. Il existe aussi des options pour l\'affichage desitinéraires cyclables ou des chemins de randonnée.\n\nIl n\'est pas nécessaire de télécharger une carte supplémentaire, cet affichage s\'appuyant sur les cartes standards.
 \n\nCet affichage peut être annulé soit en le désactivant ici, soit en modifiant le Style de la carte dans \"Configurer la carte\". "</string>
     <string name="plugin_touringview_name">Grand tourisme</string>
 	<string name="plugin_nautical_descr">"Activer cette vue bascule vers le style \"Nautique\", affichant une carte avec le balisage pour la navigation.
@@ -1822,7 +1822,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="welcome_select_region">Afin de prendre en compte la signalisation routière et le code de la route, merci de sélectionner votre région :</string>
     <string name="welcome_text">Avec OsmAnd visualisez des cartes hors-ligne et naviguez sans couverture réseau dans le monde entier !</string>
     <string name="welcome_header">Bienvenue</string>
-    <string name="confirm_usage_speed_cameras">Dans certains pays (France, Allemagne, Italie, ...) l\'utilisation d\'alertes radars est interdite par la loi. OsmAnd décline toute responsabilité en cas de violation de la loi. Pour activer cette fonctionnalité en toute connaissance de cause, répondez \"Oui\".</string>
+    <string name="confirm_usage_speed_cameras">Dans certains pays (France, Allemagne, Italie, …) l\'utilisation d\'alertes radars est interdite par la loi. OsmAnd décline toute responsabilité en cas de violation de la loi. Pour activer cette fonctionnalité en toute connaissance de cause, répondez \"Oui\".</string>
     <string name="agps_info">Données A-GPS</string>
     <string name="agps_data_last_downloaded">Dernière mise à jour des données A-GPS : %1$s</string>
     <string name="shared_string_message">Message</string>
@@ -2128,6 +2128,6 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="routing_attr_avoid_stairs_name">Éviter les escaliers</string>
 	<string name="routing_attr_avoid_borders_name">Éviter le franchissement de frontières</string>
 	<string name="routing_attr_avoid_stairs_description">Éviter les escaliers</string>
-	<string name="release_2_2">" • Nouveaux menus contextuels sur un point de la carte\n\n • Choix de l\'affichage au démarrage (tableau de bord ou carte)\n\n • Personnalisation du contenu du tableau de bord\n\n • Possibilité d\'ignorer le tableau de bord et de n\'utiliser que les menus\n\n • Téléchargement des cartes des régions en appuyant directement sur la carte mondiale\n\n • Amélioration de la recherche des PI (Point d\'Intérêt)\n\n • Amélioration des PI (Point d\'Intérêt) et des contributions OSM (Open Street Map)\n\n • Refonte du téléchargement des cartes\n\n et bien plus encore ... "</string>
+	<string name="release_2_2">" • Nouveaux menus contextuels sur un point de la carte\n\n • Choix de l\'affichage au démarrage (tableau de bord ou carte)\n\n • Personnalisation du contenu du tableau de bord\n\n • Possibilité d\'ignorer le tableau de bord et de n\'utiliser que les menus\n\n • Téléchargement des cartes des régions en appuyant directement sur la carte mondiale\n\n • Amélioration de la recherche des PI (Point d\'Intérêt)\n\n • Amélioration des PI (Point d\'Intérêt) et des contributions OSM (Open Street Map)\n\n • Refonte du téléchargement des cartes\n\n et bien plus encore … "</string>
     <string name="poi_context_menu_modify_osm_change">Modifier la contribution OSM</string>
     </resources>

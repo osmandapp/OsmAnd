@@ -376,7 +376,7 @@
     <string name="osmand_parking_position_description">Položaj parkiranega vozila: %1$s</string>
     <string name="osmand_parking_position_description_add">Prevzem vozila ob:</string>
     <string name="osmand_parking_position_name">Točka parkiranja</string>
-    <string name="osmand_parking_plugin_description">Vstavek za parkiranje omogoča enostavno shranjevanje mesta parkiranja vozila in časa parkirne ure. Podatki so prikazani na zaslonu za enostavno opozarjanje.\nOmogoča tudi dodajanje opomb v koledar za prikaz opomnikov ob daljših časih parkiranja (letališča, letovišča ...).</string>
+    <string name="osmand_parking_plugin_description">Vstavek za parkiranje omogoča enostavno shranjevanje mesta parkiranja vozila in časa parkirne ure. Podatki so prikazani na zaslonu za enostavno opozarjanje.\nOmogoča tudi dodajanje opomb v koledar za prikaz opomnikov ob daljših časih parkiranja (letališča, letovišča …).</string>
     <string name="osmand_parking_plugin_name">Parkiranje (mesto in čas)</string>
     <string name="context_menu_item_add_parking_point">Označi kot kraj parkiranja</string>
     <string name="context_menu_item_delete_parking_point">Izbriši oznako parkirnega mesta</string>
@@ -790,7 +790,7 @@
     <string name="renderers_descr">Izberite videz izrisovalnika</string>
     <string name="poi_context_menu_website">Pokaži spletišče POI</string>
     <string name="poi_context_menu_call">Pokaži telefon točke POI</string>
-    <string name="download_type_to_filter">Poišči ...</string>
+    <string name="download_type_to_filter">Poišči …</string>
     <string name="use_high_res_maps">Zaslon z visoko ločljivostjo</string>
     <string name="use_high_res_maps_descr">Ne raztegni (in zamegli) predmetov zemljevida na zaslonih z visoko ločljivostjo</string>
     <string name="context_menu_item_search_transport">Iskanje javnega prevoza</string>
@@ -1126,8 +1126,8 @@
     <string name="clear_intermediate_points">Počisti vmesne točke</string>
     <string name="keep_intermediate_points">Obdrži vmesne točke</string>
     <string name="new_directions_point_dialog">Vmesne točke so že nastavljene.</string>
-    <string name="context_menu_item_directions_to">Navigacija do ...</string>
-    <string name="context_menu_item_directions_from">Navigacija od ...</string>
+    <string name="context_menu_item_directions_to">Navigacija do …</string>
+    <string name="context_menu_item_directions_from">Navigacija od …</string>
     <string name="route_descr_map_location">Zemljevid: </string>
     <string name="route_to">Konec poti:</string>
     <string name="route_via">Preko:</string>
@@ -1756,7 +1756,7 @@
 \n\nZa uporabo te možnosti je uporabljen podroben izris obstoječih zemljevidov, zato posebni zemljevidi niso potrebni.
 \n\nPodrobni izris je mogoče prekiniti z onemogočanjem možnosti ali pa s spreminjanjem vrste prikaza zemljevida. "</string>
     <string name="plugin_ski_descr">"Vstavek omogoča prikaz prog za nordijsko in alpsko smučanje, splošnih smučišč, žičnic in vlečnic in druge smučarske podrobnosti. Težavnost smučišč je označena barvnimi kodami, podrobni izris zemljevida pa je primeren za zimski pogled pokrajine.\n\nZ izborom tega pogleda se slog prikaza spremeni v \'Zimski pogled\' in kaže vse podrobnosti v zimskem pogledu. Izris je mogoče prekiniti z onemogočanjem možnosti ali pa s spreminjanjem vrste prikaza zemljevida. "</string>
-    <string name="plugin_nautical_descr">"Vstavek obogati vsebino zemljevidov OsmAnd in kakovost navigacije s podrobnimi pomorskimi zemljevidi za plovila, jadralce in druge vrste vodnih športov.\n\nS tem posebnim prekrivnim zemljevidom je mogoč izris posebnih navigacijskih oznak, ki so sicer značilne za navtične  zemljevide. Opisi posamezne oznake pripomorejo k določanju (kategorije, oblike, barve, zaporedja, sklica ...).\n\nVrnitev na običajni pogled je mogoče na dva načina. Ali odklopite prekrivni sloj ali pa spremenite slog zemljevida med \'Nastavitvami zemljevida\' v meniju. "</string>
+    <string name="plugin_nautical_descr">"Vstavek obogati vsebino zemljevidov OsmAnd in kakovost navigacije s podrobnimi pomorskimi zemljevidi za plovila, jadralce in druge vrste vodnih športov.\n\nS tem posebnim prekrivnim zemljevidom je mogoč izris posebnih navigacijskih oznak, ki so sicer značilne za navtične  zemljevide. Opisi posamezne oznake pripomorejo k določanju (kategorije, oblike, barve, zaporedja, sklica …).\n\nVrnitev na običajni pogled je mogoče na dva načina. Ali odklopite prekrivni sloj ali pa spremenite slog zemljevida med \'Nastavitvami zemljevida\' v meniju. "</string>
     
     <string name="routing_attr_avoid_borders_description">Izogibanje prehodom meje z drugimi državami</string>
     <string name="routing_attr_height_name">Omejitev višine</string>
@@ -2028,7 +2028,7 @@
     <string name="dashboard_or_drawer_title">Upravljanje prek nadzorne plošče ali menija</string>
     <string name="dashboard_or_drawer_description">Ob meniju je po novem na voljo možnost upravljanja s programom preko prilagodljive nadzorne plošče. Možnost je mogoče spremeniti med nastavitvami.</string>
 <string name="osm_edit_commented_note">Opomba OSM z dodatnimi zapisi</string>
-    <string name="release_2_2">" • Prenovljen in posodobljen vmesnik, ki omogoča izbiranje mest na zemljevidu in prek drugih pogledov\n\n • Pogled zemljevida se zažene neposredno, če ni izbrana možnost \"Pokaži nadzorno ploščo ob zagonu programa\"\n\n • Možnost nastavitve prikazanih ikon v nadzorni plošči\n\n • Možnost zamenjave nadzorne plošče z menijem\n\n • Prejemanje zemljevidov je sedaj na voljo z enostavnim klikom na državo ali regijo na svetovnem zemljevidu\n\n • Iskanje točk POI podpira tudi podrobnejše poizvedbe\n\n • Izboljšane možnosti urejanja točk POI in OSM\n\n • Vmesnik za prejem zemljevidov je poenostavljen\n\n in še veliko več ... "</string>
+    <string name="release_2_2">" • Prenovljen in posodobljen vmesnik, ki omogoča izbiranje mest na zemljevidu in prek drugih pogledov\n\n • Pogled zemljevida se zažene neposredno, če ni izbrana možnost \"Pokaži nadzorno ploščo ob zagonu programa\"\n\n • Možnost nastavitve prikazanih ikon v nadzorni plošči\n\n • Možnost zamenjave nadzorne plošče z menijem\n\n • Prejemanje zemljevidov je sedaj na voljo z enostavnim klikom na državo ali regijo na svetovnem zemljevidu\n\n • Iskanje točk POI podpira tudi podrobnejše poizvedbe\n\n • Izboljšane možnosti urejanja točk POI in OSM\n\n • Vmesnik za prejem zemljevidov je poenostavljen\n\n in še veliko več … "</string>
     <string name="routing_attr_avoid_stairs_name">Izogni se stopnicam</string>
 	<string name="routing_attr_avoid_stairs_description">Izogni se stopnicam</string>
 	<string name="routing_attr_avoid_borders_name">Izogni se mejnim prehodom</string>

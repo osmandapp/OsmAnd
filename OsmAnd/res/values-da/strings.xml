@@ -33,7 +33,7 @@
     <string name="osmand_srtm_long_description_1000_chars">"Udvidelsen giver både en højdekurver overlejring og et relieflag, der vises ovenpå OsmAnds standard kort. Funktionaliteten er meget værdsat af sportsfolk, vandrere, og enhver interesseret i en relief struktur af landskabet.
 \n\nDe globale data (mellem 70 grader nord og 70 grader syd) er baseret på målinger af SRTM (Shuttle Radar Topografi Mission) og ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), et billeddannende instrument ombord på Terra satellitten, flagskibet i NASAs Earth Observering system. ASTER er et samarbejde mellem NASA, Japans Ministry of Economy, Trade and Industry  (METI), og Japan Space Systems (J-spacesystems). "</string>
     <string name="map_widget_distancemeasurement">Afstandsmåling</string>
-    <string name="audionotes_location_not_defined">Placering der skal tilknyttes til noten er ikke defineret endnu. \'Brug placering ...\' for at tildele en note til den angivne placering</string>
+    <string name="audionotes_location_not_defined">Placering der skal tilknyttes til noten er ikke defineret endnu. \'Brug placering …\' for at tildele en note til den angivne placering</string>
 
     <string name="map_widget_audionotes">Audionoter</string>
     <string name="audionotes_plugin_description">Audio-/videonoter udvidelse giver funktionalitet til at tage audio-/foto-/videonoter under en tur, enten ved hjælp en knap på skærmen, eller direkte fra kontekstmenuen for en position på kortet.</string>
@@ -2095,7 +2095,7 @@
 	<string name="osn_close_dialog_success">Note lukket</string>
 	<string name="osm_edit_modified_poi">Ændret OSM IP</string>
     <string name="osm_edit_deleted_poi">Slettet OSM IP</string>
-    <string name="release_2_2">" • Ny kontekstafhængig brugergrænseflade når der vælges lokationer på kortet og på andre skærme\n\n • Kortskærmen vises direkte, medmindre \'Vis betjeningspanel ved start\' er valgt\n\n • Konfigurer hvordan og hvilket indhold der vises på betjeningspanelet\n\n • Forbigå betjeningspanel hvis der ønskes menuen-baserede app-kontrol\n\n • Hent kort, regioner ved at trykke direkte på verdenskortet\n\n • IP søgning understøtter nu mere specifikke forespørgsler\n\n • Forbedret IP og OSM redigeringsfunktionalitet\n\n • Administration af kortfiler struktur og grænseflade er omarbejdet\n\n og mere... "</string>
+    <string name="release_2_2">" • Ny kontekstafhængig brugergrænseflade når der vælges lokationer på kortet og på andre skærme\n\n • Kortskærmen vises direkte, medmindre \'Vis betjeningspanel ved start\' er valgt\n\n • Konfigurer hvordan og hvilket indhold der vises på betjeningspanelet\n\n • Forbigå betjeningspanel hvis der ønskes menuen-baserede app-kontrol\n\n • Hent kort, regioner ved at trykke direkte på verdenskortet\n\n • IP søgning understøtter nu mere specifikke forespørgsler\n\n • Forbedret IP og OSM redigeringsfunktionalitet\n\n • Administration af kortfiler struktur og grænseflade er omarbejdet\n\n og mere… "</string>
     <string name="osm_save_offline">Gem offline</string>
     <string name="rendering_attr_currentTrackColor_description">GPX-farve</string>
     <string name="rendering_attr_currentTrackWidth_description">GPX-bredde</string>

@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Tag"
-            tools:text="asdf"/>
+            tools:text="Tag text"/>
 
     </android.support.design.widget.TextInputLayout>
 

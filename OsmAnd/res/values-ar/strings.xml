@@ -953,7 +953,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="local_index_items_uploaded">رُفع %1$d عنصرًا من %2$d عنصر بنجاح.</string>
 	<string name="local_index_mi_upload_gpx">ارسال الى OSM</string>
 	<string name="show_more_map_detail">عرض المزيد من تفاصيل الخريطة</string>
-	<string name="show_more_map_detail_descr">إظهار بعض تفاصيل الخريطة المتجهية (الطرق ...الخ) عند تقريبها أكثر</string>
+	<string name="show_more_map_detail_descr">إظهار بعض تفاصيل الخريطة المتجهية (الطرق …الخ) عند تقريبها أكثر</string>
 	<string name="favourites_delete_multiple_succesful">حٌذفت النقطة المفضلة بنجاح.</string>
 	<string name="favorite_delete_multiple">"أنت بصدد حذف %1$d نقطة مفضلة  و٪2$d مجموعة مفضلة. هل أنت متأكد؟"</string>
 	<string name="favorite_home_category">المنزل</string>
@@ -1008,7 +1008,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="gpx_option_reverse_route">عكس اتجاه GPX</string>
 	<string name="gpx_option_destination_point">استخدم الوجهة الحالية</string>
 	<string name="gpx_option_from_start_point">يمر على طول المسار باكمله</string>
-	<string name="switch_to_vector_map_to_see">لعرض الخرائط المتجهية المحفوظة لهذا الموقع.\n\t اضغط زر القائمة → \'ضبط الخريطة\' → \'مصدر الخريطة... \' → \'خرائط متجهية بدون إتصال\'.</string>
+	<string name="switch_to_vector_map_to_see">لعرض الخرائط المتجهية المحفوظة لهذا الموقع.\n\t اضغط زر القائمة → \'ضبط الخريطة\' → \'مصدر الخريطة… \' → \'خرائط متجهية بدون إتصال\'.</string>
 	<string name="choose_audio_stream">خروج التوجيه الصوتي</string>
 	<string name="choose_audio_stream_descr">اختيار قناة لتشغيل التوجيه الصوتي (التي تعتمد على النظام)</string>
 	<string name="voice_stream_voice_call">المكالمات الصوتية السمعية</string>
