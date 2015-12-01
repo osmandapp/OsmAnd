@@ -40,7 +40,7 @@
         android:layout_marginRight="8dp" />
 
     <ImageButton
-        android:id="@+id/edit"
+        android:id="@+id/searchEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
