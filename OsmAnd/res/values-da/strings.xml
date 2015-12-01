@@ -1466,7 +1466,7 @@
     <string name="osmo_group_by_invite">Tilslut med invitation</string>
     <string name="osmo_group_information_desc">" - Alle grupper der oprettes er offentlige! Hvis de skal være anonyme, tilsluttes enheder direkte via sporings-id\'er.\n - Private grupper er begrænset til 8 personer\n - I tilfælde af inaktivitet eller aktivitet af kun 1 person i 2 uger, vil gruppen blive slettet.\n - Man kan begrænse adgangen til gruppen, til kun med invitation, men for at kontrollere gruppen skal man bruge administrationskonsollen.\n - Hvis der er brug for at oprette en gruppe, men med andre betingelser, kontakt http://osmo.mobi"</string>
     <string name="osmo_auth_error_short">Autorisation fejlede</string>
-    <string name="osmo_auth_error">"OsMo autorisation fejl: %$s.\nDet kan være at tjenesten midlertidig  er nede eller registreringen er ududløbet. Fortsæt med en ny registrering?"</string>
+    <string name="osmo_auth_error">"OsMo autorisation fejl: %1$s.\nDet kan være at tjenesten midlertidig  er nede eller registreringen er ududløbet. Fortsæt med en ny registrering?"</string>
     <string name="rendering_attr_hideBuildings_name">Skjul bygninger</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Skjul gang- og cykelstier</string>
     <string name="rendering_attr_hideText_name">Skjul tekst</string>
@@ -1514,7 +1514,7 @@
     <string name="rendering_attr_hikingRoutesOSMC_description">Generer stier efter OSMC spor</string>
 
     <string name="osmo_invite">Inviter…</string>
-    <string name="osmo_leave_confirmation_msg">Forlad gruppen %$s?</string>
+    <string name="osmo_leave_confirmation_msg">Forlad gruppen %1$s?</string>
     <string name="osmo_specify_tracker_id">Angiv id</string>
     <string name="arrival_distance_factor_early">Tidligt</string>
     <string name="arrival_distance_factor_normally">Normal</string>
