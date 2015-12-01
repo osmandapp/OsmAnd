@@ -1425,7 +1425,7 @@
 	<string name="poi_aerialway_summer_access_exit">Sommeradgang: kun udgang</string>
 	<string name="poi_aerialway_summer_access_both">Sommeradgang: ind- og udgang</string>
 
-<string name="poi_wheelchair_no">Kørestol: ikke tilladt</string>
+<string name="poi_wheelchair_no">Kørestol: ikke adgang</string>
 	<string name="poi_wheelchair_limited">Kørestol: begrænset</string>
 	<string name="poi_stars_1">Stjerner: 1 (Turist)</string>
 	<string name="poi_stars_1s">Stjerner: 1S (Superior Turist)</string>
