@@ -1998,4 +1998,39 @@
 	<string name="poi_industrial_port">Tipo: porto</string>
 	<string name="poi_industrial_depot">Tipo: depósito</string>
 
+	<string name="poi_route_monorail_ref">Monotrilho</string>
+	<string name="poi_route_funicular_ref">Funicular</string>
+	<string name="poi_industrial_intermodal_freight_terminal">Tipo: terminal de cargas intermodal</string>
+	<string name="poi_note">Nota</string>
+	<string name="poi_animal_boarding">Embarque de animais</string>
+	<string name="poi_animal_boarding_dog">Tipo de embarque: cão</string>
+	<string name="poi_animal_boarding_cat">Tipo de embarque: gato</string>
+	<string name="poi_animal_boarding_dog_cat">Tipo de embarque: cão, gato</string>
+	<string name="poi_animal_boarding_horse">Tipo de embarque: cavalo</string>
+
+	<string name="poi_historic_aircraft">Avião histórico</string>
+
+	<string name="poi_honey">Loja de mel</string>
+
+	<string name="poi_elevator_yes">Com elevador</string>
+	<string name="poi_elevator_no">Sem elevador</string>
+
+	<string name="poi_technical_monument">Monumento técnico</string>
+
+	<string name="poi_office_camping">Escritório de campismo</string>
+	<string name="poi_model_aerodrome">Aeródromo de modelos</string>
+	<string name="poi_guide">Escritório do guia</string>
+	<string name="poi_consulting">Escritório de consultoria</string>
+	<string name="poi_cooperative">Escritório de cooperativa</string>
+	<string name="poi_publisher">Escritório de publicidade</string>
+
+	<string name="poi_fuel_wood">Combustível: madeira</string>
+	<string name="poi_fuel_charcoal">Combustível: carvão vegetal</string>
+	<string name="poi_fuel_coal">Combustível: carvão</string>
+
+	<string name="poi_street_lamp">Lâmpada de rua</string>
+
+	<string name="poi_escape_lane">Área de escape</string>
+
+	<string name="poi_crop_rice">Cultivo: arroz</string>
 	</resources>
