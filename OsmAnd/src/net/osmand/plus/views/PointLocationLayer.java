@@ -41,7 +41,7 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 	private Bitmap locationIcon;
 	private OsmAndLocationProvider locationProvider;
 	private MapViewTrackingUtilities mapViewTrackingUtilities;
-	private boolean nm = false;
+	private boolean nm;
 	
 	public PointLocationLayer(MapViewTrackingUtilities mv) {
 		this.mapViewTrackingUtilities = mv;
