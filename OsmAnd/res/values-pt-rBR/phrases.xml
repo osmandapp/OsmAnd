@@ -1936,4 +1936,7 @@
 	<string name="poi_surface_snow">Superfície: neve</string>
 
 	<string name="poi_route_bus_ref">Ônibus</string>
+	<string name="poi_route_share_taxi_ref">Táxi compartilhado</string>
+	<string name="poi_route_trolleybus_ref">Trólebus</string>
+	<string name="poi_route_tram_ref">Bonde</string>
 	</resources>
