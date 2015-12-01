@@ -1,6 +1,18 @@
 package net.osmand.plus.osmedit;
 
-import java.util.List;
+import android.app.Activity;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
@@ -27,19 +39,7 @@ import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
-import android.content.Intent;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.Toast;
+import java.util.List;
 
 
 public class OsmEditingPlugin extends OsmandPlugin {
@@ -204,7 +204,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 				} else if (resId == R.string.poi_context_menu_modify_osm_change) {
 					final Node entity = ((OpenstreetmapPoint) selectedObj).getEntity();
 					EditPoiDialogFragment.createInstance(entity, false)
-							.show(mapActivity.getSupportFragmentManager(), "edit_poi");
+							.show(mapActivity.getSupportFragmentManager(), EditPoiDialogFragment.TAG);
 				}
 				return true;
 			}
