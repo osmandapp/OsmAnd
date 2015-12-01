@@ -2015,4 +2015,26 @@
 	<string name="poi_historic_period_classical">Període històric: clàssic (època IV, 374 dC - 900 dC)</string>
 	<string name="poi_historic_period_imperial">Període històric: imperial (època V, 900 dC - 1200 dC)</string>
 
+	<string name="poi_material_concrete">Material: formigó</string>
+	<string name="poi_material_steel">Material: acer</string>
+	<string name="poi_material_stone">Material: pedra</string>
+	<string name="poi_material_brick">Material: maons</string>
+	<string name="poi_material_plastic">Material: plàstic</string>
+	<string name="poi_material_granite_stone">Material: pedra de granit</string>
+	<string name="poi_material_metal_wood">Material: metall;fusta</string>
+	<string name="poi_material_glass">Material: vidre</string>
+	<string name="poi_material_bronze">Material: bronze</string>
+	<string name="poi_material_earth">Material: terra</string>
+	<string name="poi_material_marble">Material: marbre</string>
+	<string name="poi_material_aluminium">Material: alumini</string>
+
+	<string name="poi_route_funicular_ref">Funicular</string>
+	<string name="poi_route_ferry_ref">Ferri</string>
+
+	<string name="poi_route_railway_ref">Ruta d\'un ferrocarril</string>
+
+	<string name="poi_historic_yes">Objecte històric</string>
+	<string name="poi_surveillance_yes">Vigilància: sí</string>
+	<string name="poi_shop_yes">Amb botiga</string>
+
 	</resources>
