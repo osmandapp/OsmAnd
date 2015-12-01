@@ -779,7 +779,7 @@ public class GPXUtilities {
 
 	public static String writeGpx(Writer output, GPXFile file, OsmandApplication ctx) {
 		try {
-			SimpleDateFormat format = new SimpleDateFormat(GPX_TIME_FORMAT);
+			SimpleDateFormat format = new SimpleDateFormat(GPX_TIME_FORMAT, Locale.US);
 			format.setTimeZone(TimeZone.getTimeZone("UTC"));
 			XmlSerializer serializer = PlatformUtil.newSerializer();
 			serializer.setOutput(output);
@@ -960,7 +960,7 @@ public class GPXUtilities {
 
 	public static GPXFile loadGPXFile(Context ctx, InputStream f) {
 		GPXFile res = new GPXFile();
-		SimpleDateFormat format = new SimpleDateFormat(GPX_TIME_FORMAT);
+		SimpleDateFormat format = new SimpleDateFormat(GPX_TIME_FORMAT, Locale.US);
 		format.setTimeZone(TimeZone.getTimeZone("UTC"));
 		try {
 			XmlPullParser parser = PlatformUtil.newXMLPullParser();

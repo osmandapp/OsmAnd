@@ -44,9 +44,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="left"
         android:scaleType="center"
-        android:text="Toolbar"
         android:textColor="@color/abc_primary_text_material_dark"
         android:textSize="@dimen/abc_text_size_headline_material"
+        tools:text="Toolbar"
         tools:visibility="gone"/>
 
     <ImageView

@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
 
     <string name="recording_context_menu_show">Zobraziť</string>
     <string name="recording_photo_description">Fotografia %1$s %2$s</string>
@@ -1235,13 +1234,13 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="osmo_mode_restart">Reštartovať reláciu OsMo</string>
     <string name="osmo_settings_debug">Informácie pre ladenie</string>
     <string name="import_file_favourites">Uložiť body ako súbor GPX alebo ich importovať do obľúbených?</string>
-    <string name="color_red">červená</string>
+    
     <string name="rendering_value_pink_name">ružová</string>
-    <string name="color_orange">oranžová</string>
+    
     <string name="rendering_value_brown_name">hnedá</string>
-    <string name="color_yellow">žltá</string>
+    
     <string name="color_lightblue">svetlomodrá</string>
-    <string name="color_blue">modrá</string>
+    
     <string name="osmo_edit_device">Zmeniť vlastnosti používateľa</string>
     <string name="osmo_edit_color">Zobrazovaná farba</string>
     <string name="osmo_group_info">Informácie</string>
@@ -1256,7 +1255,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="osmo_enable_tracker">Odosielať moje polohy</string>
     <string name="osmo_control">Rýchly prístup k OsMo</string>
     <string name="osmo_follow">Nasledovať</string>
-    <string name="color_green">zelená</string>
+    
     <string name="osmo_connect_to_group_id">ID skupiny</string>
     <string name="osmo_user_joined">Používateľ %1$s sa pripojil ku skupine %2$s</string>
     <string name="osmo_user_left">Používateľ %1$s opustil skupinu %2$s</string>
@@ -1901,7 +1900,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="context_menu_item_delete_waypoint">Odstrániť bod GPX?</string>
     <string name="context_menu_item_edit_waypoint">Upraviť bod GPX</string>
     <string name="copied_to_clipboard">Skopírované do schránky</string>
-    <string name="release_2_2">" • Nové kontextovo závislé rozhranie pre označenie umiestnení na mape a iných obrazovkách\n\n • Obrazovka mapy je priamo spustená ak nie je zvolené \'Zobraziť úvodný panel pri štarte\'\n\n • Je možné nastaviť ktoré karty sú zobrazené na úvodnom paneli\n\n • Úvodný panel je možné obísť, ak preferujete ovládanie aplikácie cez menu\n\n • Pre stiahnutie máp je možne priamo označiť oblasť na mape sveta\n\n • Hľadanie bodov záujmu (POI) umožňuje presnejšie špecifikácie\n\n • Vylepšené možnosti úpravy POI a OSM poznámok\n\n • Prepracované rozhranie sťahovania máp\n\n a ďalšie vylepšenia... "</string>
+    <string name="release_2_2">" • Nové kontextovo závislé rozhranie pre označenie umiestnení na mape a iných obrazovkách\n\n • Obrazovka mapy je priamo spustená ak nie je zvolené \'Zobraziť úvodný panel pri štarte\'\n\n • Je možné nastaviť ktoré karty sú zobrazené na úvodnom paneli\n\n • Úvodný panel je možné obísť, ak preferujete ovládanie aplikácie cez menu\n\n • Pre stiahnutie máp je možne priamo označiť oblasť na mape sveta\n\n • Hľadanie bodov záujmu (POI) umožňuje presnejšie špecifikácie\n\n • Vylepšené možnosti úpravy POI a OSM poznámok\n\n • Prepracované rozhranie sťahovania máp\n\n a ďalšie vylepšenia… "</string>
     <string name="osm_save_offline">Uložiť offline</string>
     <string name="osm_edit_modified_poi">Upravený OSM POI</string>
     <string name="osm_edit_deleted_poi">Odstránený OSM POI</string>
@@ -1937,6 +1936,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="routing_attr_avoid_stairs_name">Vyhnúť sa schodom</string>
 	<string name="routing_attr_avoid_stairs_description">Vyhnúť sa schodom</string>
 	<string name="routing_attr_avoid_borders_name">Vyhnúť sa hraničným priechodom</string>
-	<string name="color_lightgreen">svetlozelená</string>
+	
 	<string name="color_purple">fialová</string>
 	</resources>

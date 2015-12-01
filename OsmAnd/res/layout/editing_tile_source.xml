@@ -90,7 +90,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="5dp"
-            android:layout_span="2"
             android:text="@string/edit_tilesource_elliptic_tile"/>
     </LinearLayout>
 

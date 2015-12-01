@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="auto_zoom_none">Без аўтаматычнага маштабаваньня</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="auto_zoom_none">Без аўтаматычнага маштабаваньня</string>
     <string name="auto_zoom_close">Буйней</string>
     <string name="auto_zoom_far">Для сярэдняга маштаба</string>
     <string name="auto_zoom_farthest">Драбней</string>
@@ -672,7 +671,7 @@
 	<string name="gpx_option_reverse_route">Развярнуць кірунак GPX</string>
 	<string name="gpx_option_destination_point">Выкарыстоўваць бягучы пункт прызначэньня</string>
 	<string name="gpx_option_from_start_point">Прайсьці ўвесь шлях спачатку</string>
-	<string name="switch_to_vector_map_to_see">Для гэтага рэгіёну даступныя лякальныя вэктарныя мапы.\n\t\n\tДля іх выкарыстаньня абярыце пункт мэню \'Налада мапы\' → \'Крыніца мапы...\' → \'Лякальныя вэктарныя мапы\'.</string>
+	<string name="switch_to_vector_map_to_see">Для гэтага рэгіёну даступныя лякальныя вэктарныя мапы.\n\t\n\tДля іх выкарыстаньня абярыце пункт мэню \'Налада мапы\' → \'Крыніца мапы…\' → \'Лякальныя вэктарныя мапы\'.</string>
 	<string name="choose_audio_stream">Вывад галасавых падказак</string>
 	<string name="choose_audio_stream_descr">Абярыце канал прайграваньня галасавых падказак</string>
 	<string name="voice_stream_voice_call">Канал телефанаваньня</string>
@@ -1331,13 +1330,13 @@
     <string name="osmo_control">Хуткі доступ OsMo</string>
     <string name="osmo_session_not_available">Сэсыя не даступная, калі ласка, пераканайцеся, што пункт \'Адсылаць месцазнаходжаньне\' уключаны.</string>
     <string name="osmo_tracker_id_share">Каб падключыцца да патрэбнага прыстасаваньня %2$s націсьніце на спасылку %3$s альбо задайце ідэнтыфікатар трэкеру (%1$s)</string>
-    <string name="color_red">чырвоны</string>
+    
 	<string name="rendering_value_pink_name">ружовы</string>
-	<string name="color_orange">аранжавы</string>
+	
 	<string name="rendering_value_brown_name">карычневы</string>
-	<string name="color_yellow">жоўты</string>
+	
 	<string name="color_lightblue">блакітны</string>
-	<string name="color_blue">сіні</string>
+	
 	
 	
     <string name="osmo_edit_color">Выбар колеру</string>
@@ -1350,7 +1349,7 @@
     <string name="osmo_use_server_name">Зарэгістраванае імя</string>
     <string name="osmo_connect_to_my_nickname">Мой нік</string>
     <string name="osmo_user_name">Карыстальнік</string>
-	<string name="color_green">зялёны</string>
+	
 	
     <string name="osmo_set_moving_target">Усталяваць рухомай цэльлю</string>
     <string name="osmo_cancel_moving_target">Скасаваць рухомую цэль</string>
