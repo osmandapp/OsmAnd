@@ -39,8 +39,9 @@ public class GeocodingUtilities {
 	public static final float THRESHOLD_MULTIPLIER_SKIP_STREETS_AFTER = 4;
 	public static final float STOP_SEARCHING_STREET_WITH_MULTIPLIER_RADIUS = 100;
 	public static final float STOP_SEARCHING_STREET_WITHOUT_MULTIPLIER_RADIUS = 400;
-	public static final float DISTANCE_STREET_FROM_CLOSEST = 1000;
+	
 	public static final float DISTANCE_STREET_NAME_PROXIMITY_BY_NAME = 15000;
+	public static final float DISTANCE_STREET_FROM_CLOSEST_WITH_SAME_NAME = 1000;
 	
 	public static final float THRESHOLD_MULTIPLIER_SKIP_BUILDINGS_AFTER = 1.5f;
 	public static final float DISTANCE_BULDING_PROXIMITY = 100;
@@ -277,7 +278,7 @@ public class GeocodingUtilities {
 			for (GeocodingResult street : streetsList) {
 				if(streetDistance == 0) {
 					streetDistance = street.getDistance();
-				} else if(street.getDistance() > streetDistance + DISTANCE_STREET_FROM_CLOSEST) {
+				} else if(street.getDistance() > streetDistance + DISTANCE_STREET_FROM_CLOSEST_WITH_SAME_NAME) {
 					continue;
 				}
 				street.connectionPoint = road.connectionPoint;

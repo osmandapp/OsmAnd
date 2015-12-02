@@ -89,15 +89,7 @@ public class CurrentPositionHelper {
 	protected void justifyResult(List<GeocodingResult> res, final ResultMatcher<GeocodingResult> result) {
 		List<GeocodingResult> complete = new ArrayList<GeocodingUtilities.GeocodingResult>();
 		double minBuildingDistance = 0;
-		double minStreetDistance = 0;
 		for (GeocodingResult r : res) {
-			double streetDistance = r.getDistance();
-			if(minStreetDistance == 0) {
-				minStreetDistance = streetDistance;
-			} else if(streetDistance > GeocodingUtilities.THRESHOLD_MULTIPLIER_SKIP_STREETS_AFTER * minStreetDistance || 
-					streetDistance > minStreetDistance + GeocodingUtilities.DISTANCE_STREET_FROM_CLOSEST) {
-				break;
-			}
 			Collection<RegionAddressRepository> rar = app.getResourceManager().getAddressRepositories();
 			RegionAddressRepository  foundRepo = null;
 			for(RegionAddressRepository repo : rar) {
