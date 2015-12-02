@@ -3,6 +3,7 @@ package net.osmand.access;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
@@ -10,6 +11,7 @@ import android.preference.PreferenceCategory;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 
+import net.osmand.access.tasker.AutoAppsThirdParty;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.access.AccessibilityMode;
@@ -37,6 +39,7 @@ public class SettingsAccessibilityActivity extends SettingsBaseActivity {
 				R.string.accessibility_mode, R.string.accessibility_mode_descr);
 		accessibilityModePreference.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 			private final OnPreferenceChangeListener committer = accessibilityModePreference.getOnPreferenceChangeListener();
+
 			@Override
 			public boolean onPreferenceChange(Preference preference, Object newValue) {
 				if (committer != null)
@@ -62,6 +65,7 @@ public class SettingsAccessibilityActivity extends SettingsBaseActivity {
 				R.string.settings_direction_style, R.string.settings_direction_style_descr);
 		directionStylePreference.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 			private final OnPreferenceChangeListener committer = directionStylePreference.getOnPreferenceChangeListener();
+
 			@Override
 			public boolean onPreferenceChange(Preference preference, Object newValue) {
 				if (committer != null)
@@ -85,6 +89,21 @@ public class SettingsAccessibilityActivity extends SettingsBaseActivity {
 			cat.addPreference(createCheckBoxPreference(settings.ACCESSIBILITY_EXTENSIONS, R.string.accessibility_extensions,
 					R.string.accessibility_extensions));
 		}
+
+		CheckBoxPreference taskerIntegrationPref = createCheckBoxPreference(
+				settings.TASKER_PLUGIN,
+				"Tasker integration",
+				"Enable integration with Tasker via AutoApps");
+		taskerIntegrationPref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+			@Override
+			public boolean onPreferenceChange(Preference preference, Object newValue) {
+				AutoAppsThirdParty.authorize(SettingsAccessibilityActivity.this);
+				AutoAppsThirdParty.registerCommands(SettingsAccessibilityActivity.this,
+						AccessibilityPlugin.UPDATE_LOCATION_COMMAND);
+				return true;
+			}
+		});
+		cat.addPreference(taskerIntegrationPref);
     }
 
 

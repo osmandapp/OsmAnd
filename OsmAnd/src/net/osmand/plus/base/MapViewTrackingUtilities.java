@@ -1,14 +1,12 @@
 package net.osmand.plus.base;
 
 import android.content.Context;
-import android.graphics.PointF;
 import android.view.WindowManager;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.ValueHolder;
-import net.osmand.access.tasker.AutoAppsThirdParty;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.IMapLocationListener;
 import net.osmand.plus.OsmAndConstants;
@@ -25,14 +23,11 @@ import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.IRouteInformationListener;
 import net.osmand.plus.views.AnimateDraggingMapThread;
-import net.osmand.plus.views.ContextMenuLayer;
-import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLocationListener, OsmAndCompassListener, IRouteInformationListener {
@@ -148,25 +143,6 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 			}
 			// When location is changed we need to refresh map in order to show movement!
 			mapView.refreshMap();
-
-			// Tasker plugin related
-			AutoAppsThirdParty.authorize(app);
-			AutoAppsThirdParty.registerCommands(app, new AutoAppsThirdParty.RegisteredCommand("Update location", "updatelocation", false, "speed"));
-			if (location != null) {
-				float x = tb.getPixXFromLatLon(location.getLatitude(), location.getLongitude());
-				float y = tb.getPixXFromLatLon(location.getLatitude(), location.getLongitude());
-				PointF currentLocationInPixels = new PointF(x, y);
-				List<Object> mapObjectsList = new ArrayList<>();
-				for (OsmandMapLayer layer : mapView.getLayers()) {
-					if (layer instanceof ContextMenuLayer.IContextMenuProvider) {
-						ContextMenuLayer.IContextMenuProvider layerWithObjects =
-								(ContextMenuLayer.IContextMenuProvider) layer;
-						layerWithObjects.collectObjectsFromPoint(currentLocationInPixels, tb, mapObjectsList);
-					}
-				}
-				LOG.debug("MapObjects=" + mapObjectsList);
-				AutoAppsThirdParty.sendCommand(app, "updatelocation", String.valueOf(location.getSpeed()));
-			}
 		}
 
 		if(dashboard != null) {
