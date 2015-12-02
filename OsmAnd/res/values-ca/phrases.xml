@@ -2037,4 +2037,16 @@
 	<string name="poi_surveillance_yes">Vigilància: sí</string>
 	<string name="poi_shop_yes">Amb botiga</string>
 
+	<string name="poi_elevator_yes">Amb ascensor</string>
+	<string name="poi_elevator_no">Sense ascensor</string>
+
+	<string name="poi_technical_monument">Monument tècnic</string>
+
+	<string name="poi_office_camping">Oficina del càmping</string>
+	<string name="poi_model_aerodrome">Aeròdrom de modelisme</string>
+	<string name="poi_guide">Oficina dels guies</string>
+	<string name="poi_consulting">Despatx de consultors</string>
+	<string name="poi_cooperative">Oficina de la cooperativa</string>
+	<string name="poi_parish">Rectoria</string>
+	<string name="poi_social_facility_workshop">Equipament social: taller</string>
 	</resources>
