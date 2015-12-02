@@ -34,6 +34,8 @@ import net.osmand.util.OpeningHoursParser.BasicOpeningHourRule;
 
 import org.apache.commons.logging.Log;
 
+import gnu.trove.list.array.TIntArrayList;
+
 public class BasicEditPoiFragment extends Fragment
 		implements EditPoiDialogFragment.OnFragmentActivatedListener {
 	private static final Log LOG = PlatformUtil.getLog(BasicEditPoiFragment.class);
@@ -248,7 +250,7 @@ public class BasicEditPoiFragment extends Fragment
 			clockIconImageView.setImageDrawable(clockDrawable);
 
 			TextView daysTextView = (TextView) view.findViewById(R.id.daysTextView);
-			View timeContainer = view.findViewById(R.id.timeContainer);
+			LinearLayout timeListContainer = (LinearLayout) view.findViewById(R.id.timeListContainer);
 
 			if (openingHours.getRules().get(position) instanceof BasicOpeningHourRule) {
 				final OpeningHoursParser.BasicOpeningHourRule rule =
@@ -257,14 +259,6 @@ public class BasicEditPoiFragment extends Fragment
 				rule.appendDaysString(stringBuilder);
 
 				daysTextView.setText(stringBuilder.toString());
-
-				TextView openingTextView = (TextView) view.findViewById(R.id.openingTextView);
-				openingTextView.setText(Algorithms.formatMinutesDuration(rule.getStartTime()));
-
-				TextView closingTextView = (TextView) view.findViewById(R.id.closingTextView);
-				closingTextView.setText(Algorithms.formatMinutesDuration(rule.getEndTime()));
-				timeContainer.setVisibility(View.VISIBLE);
-
 				daysTextView.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -273,25 +267,41 @@ public class BasicEditPoiFragment extends Fragment
 						fragment.show(getChildFragmentManager(), "OpenTimeDialogFragment");
 					}
 				});
-				openingTextView.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						OpeningHoursHoursDialogFragment fragment =
-								OpeningHoursHoursDialogFragment.createInstance(rule, position, true);
-						fragment.show(getChildFragmentManager(), "OpeningHoursHoursDialogFragment");
-					}
-				});
-				closingTextView.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						OpeningHoursHoursDialogFragment fragment =
-								OpeningHoursHoursDialogFragment.createInstance(rule, position, false);
-						fragment.show(getChildFragmentManager(), "OpeningHoursHoursDialogFragment");
-					}
-				});
+
+				TIntArrayList startTimes = rule.getStartTimes();
+				TIntArrayList endTimes = rule.getEndTimes();
+				for (int i = 0; i < startTimes.size(); i++) {
+					View timeFromToLayout = LayoutInflater.from(linearLayout.getContext())
+							.inflate(R.layout.time_from_to_layout, timeListContainer, false);
+					TextView openingTextView =
+							(TextView) timeFromToLayout.findViewById(R.id.openingTextView);
+					openingTextView.setText(Algorithms.formatMinutesDuration(startTimes.get(i)));
+
+					TextView closingTextView =
+							(TextView) timeFromToLayout.findViewById(R.id.closingTextView);
+					closingTextView.setText(Algorithms.formatMinutesDuration(endTimes.get(i)));
+
+					openingTextView.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							OpeningHoursHoursDialogFragment fragment =
+									OpeningHoursHoursDialogFragment.createInstance(rule, position, true);
+							fragment.show(getChildFragmentManager(), "OpeningHoursHoursDialogFragment");
+						}
+					});
+					closingTextView.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							OpeningHoursHoursDialogFragment fragment =
+									OpeningHoursHoursDialogFragment.createInstance(rule, position, false);
+							fragment.show(getChildFragmentManager(), "OpeningHoursHoursDialogFragment");
+						}
+					});
+					timeListContainer.addView(timeFromToLayout);
+				}
 			} else if (openingHours.getRules().get(position) instanceof OpeningHoursParser.UnparseableRule) {
 				daysTextView.setText(openingHours.getRules().get(position).toRuleString(false));
-				timeContainer.setVisibility(View.GONE);
+				timeListContainer.removeAllViews();
 			}
 
 			ImageButton deleteItemImageButton = (ImageButton) view.findViewById(R.id.deleteItemImageButton);
