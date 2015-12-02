@@ -2516,8 +2516,8 @@
 	<string name="poi_health_specialty_obstetrics_postnatal_no">Специализация: акушерство (послеродовое): отсутствует</string>
 	<string name="poi_health_specialty_obstetrics_antenatal_yes">Специализация: акушерство (дородовое)</string>
 	<string name="poi_health_specialty_obstetrics_antenatal_no">Специализация: акушерство (дородовое): отсутствует</string>
-	<string name="poi_health_specialty_social_paediatrics_yes">Специализация: social paediatrics</string>
-	<string name="poi_health_specialty_social_paediatrics_no">Специализация: social paediatrics: no</string>
+	<string name="poi_health_specialty_social_paediatrics_yes">Специализация: социальная педиатрия</string>
+	<string name="poi_health_specialty_social_paediatrics_no">Специализация: социальная педиатрия: отсутствует</string>
 	<string name="poi_health_specialty_obstetrics_caesarean_section_yes">Специализация: акушерство (кесарево сечение)</string>
 	<string name="poi_health_specialty_obstetrics_caesarean_section_no">Специализация: акушерство (кесарево сечение): отсутствует</string>
 	<string name="poi_health_specialty_addiction_medicine_yes">Специализация: наркология</string>
