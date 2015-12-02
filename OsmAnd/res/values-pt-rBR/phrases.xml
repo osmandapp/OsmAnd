@@ -363,7 +363,7 @@
 	<string name="poi_training">Centro de treinamento</string>
 	<string name="poi_university">Universidade</string>
 
-	<string name="poi_social_facility">Centro social</string>
+	<string name="poi_social_facility">Serviço social</string>
 	<string name="poi_courthouse">Fórum jurídico</string>
 	<string name="poi_prison">Prisão</string>
 	<string name="poi_register_office">Cartório de registro civil</string>
@@ -2162,4 +2162,62 @@
 	<string name="poi_refugee_no">Refugiados: não</string>
 
 	<string name="poi_social_facility_group_home">Centro social: grupo residencial</string>
+	<string name="poi_social_facility_assisted_living">Centro social: vida assistida</string>
+	<string name="poi_social_facility_outreach">Centro social: divulgação</string>
+	<string name="poi_impromptu_yes">Improvisado: sim</string>
+	<string name="poi_impromptu_no">Improvisado: não</string>
+	<string name="poi_social_facility_food_bank">Centro social: banco de alimentos</string>
+	<string name="poi_social_facility_shelter">Centro social: abrigo</string>
+	<string name="poi_social_facility_ambulatory_care">Centro social: assistência ambulatorial</string>
+	<string name="poi_social_facility_workshop">Centro social: emprego protegido</string>
+	<string name="poi_social_facility_day_care">Centro social: dia</string>
+
+	<string name="poi_social_facility_for_senior">Centro social para idosos</string>
+	<string name="poi_social_facility_for_child">Centro social para crianças</string>
+	<string name="poi_social_facility_for_orphan">Centro social para órfãos</string>
+	<string name="poi_social_facility_for_disabled">Centro social para deficientes físicos</string>
+	<string name="poi_social_facility_for_mental_health">Centro social para pacientes com transtornos mentais</string>
+	<string name="poi_social_facility_for_juvenile">Centro social para jovens</string>
+	<string name="poi_social_facility_for_homeless">Centro social para desabrigados</string>
+	<string name="poi_social_facility_for_migrant">Centro social para imigrantes</string>
+	<string name="poi_social_facility_for_underprivileged">Centro social para desfavorecidos</string>
+	<string name="poi_social_facility_for_drug_addicted">Centro social para dependentes químicos</string>
+	<string name="poi_social_facility_for_unemployed">Centro social para desempregados</string>
+	<string name="poi_social_facility_for_diseased">Centro social para doentes</string>
+	<string name="poi_social_facility_for_child_juvenile">Centro social para crianças e jovens</string>
+
+	<string name="poi_theatre_genre_philharmonic">Gênero: filarmônica</string>
+	<string name="poi_theatre_genre_musical">Gênero: musical</string>
+	<string name="poi_theatre_genre_drama">Gênero: drama</string>
+	<string name="poi_theatre_genre_opera">Gênero: ópera</string>
+	<string name="poi_theatre_genre_cabaret">Gênero: cabaré</string>
+	<string name="poi_theatre_genre_puppet">Gênero: fantoche</string>
+	<string name="poi_theatre_genre_comedy">Gênero: comédia</string>
+	<string name="poi_theatre_genre_chamber_music">Gênero: música de câmara</string>
+	<string name="poi_theatre_genre_marionette">Gênero: marionete</string>
+	<string name="poi_theatre_genre_ballet">Gênero: balé</string>
+	<string name="poi_theatre_genre_shadow_play">Gênero: jogo de sombras</string>
+
+	<string name="poi_bandstand">Coreto</string>
+	<string name="poi_kiln">Forno</string>
+	<string name="poi_product_brick">Produto: tijolo</string>
+	<string name="poi_product_quicklime">Produto: cal viva</string>
+	<string name="poi_product_leather">Produto: couro</string>
+	<string name="poi_product_lime">Produto: cal</string>
+	<string name="poi_product_beer">Produto: cerveja</string>
+	<string name="poi_product_charcoal">Produto: carvão vegetal</string>
+	<string name="poi_product_meat">Produto: carne</string>
+
+	<string name="poi_blind_description">Descrição para cegos</string>
+	<string name="poi_deaf_description">Descrição para surdos</string>
+
+	<string name="poi_highway_steps">Escadas</string>
+	<string name="poi_handrail_yes">Corrimão: sim</string>
+	<string name="poi_handrail_no">Corrimão: não</string>
+	<string name="poi_ramp_yes">Rampa: sim</string>
+	<string name="poi_ramp_no">Rampa: não</string>
+	<string name="poi_ramp_bicycle_yes">Rampa para bicicletas: sim</string>
+	<string name="poi_ramp_bicycle_no">Rampa para bicicletas: não</string>
+	<string name="poi_ramp_luggage_yes">Rampa para bagagem: sim</string>
+	<string name="poi_ramp_luggage_no">Rampa para bagagem: não</string>
 	</resources>
