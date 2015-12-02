@@ -2043,4 +2043,107 @@
 	<string name="poi_fuel_91ul">Combustível 91UL</string>
 	<string name="poi_fuel_100ll">Combustível 100LL</string>
 	<string name="poi_fuel_autogas">Autogás (GPL)</string>
+	<string name="poi_fuel_jeta1">Combustível Jet A-1</string>
+	<string name="poi_fuel_adblue">Combustível AdBlue</string>
+
+	<string name="poi_crop_grass">Cultivo: grama</string>
+	<string name="poi_crop_corn">Cultivo: milho</string>
+	<string name="poi_crop_cereal">Cultivo: cereais</string>
+	<string name="poi_crop_sugarcane">Cultivo: cana de açúcar</string>
+	<string name="poi_crop_wheat">Cultivo: trigo</string>
+	<string name="poi_crop_soy">Cultivo: soja</string>
+	<string name="poi_crop_barley">Cultivo: cevada</string>
+	<string name="poi_crop_vegetables">Cultivo: legumes</string>
+	<string name="poi_crop_hop">Cultivo: lúpulo</string>
+	<string name="poi_crop_rape">Cultivo: colza</string>
+	<string name="poi_crop_beet">Cultivo: beterraba</string>
+	<string name="poi_crop_lavender">Cultivo: lavanda</string>
+	<string name="poi_crop_tea">Cultivo: chá</string>
+	<string name="poi_crop_coffee">Cultivo: café</string>
+	<string name="poi_crop_poultry">Cultivo: avícola</string>
+	<string name="poi_crop_sunflower">Cultivo: girassol</string>
+	<string name="poi_crop_raspberry">Cultivo: framboesa</string>
+	<string name="poi_crop_tobacco">Cultivo: tabaco</string>
+	<string name="poi_crop_strawberry">Cultivo: morango</string>
+	<string name="poi_crop_vegetables_flowers">Cultivo: legumes, flores</string>
+	<string name="poi_crop_cassava">Cultivo: mandioca</string>
+	<string name="poi_crop_cranberry">Cultivo: amora</string>
+	<string name="poi_crop_asparagus">Cultivo: aspargo</string>
+	<string name="poi_crop_flowers">Cultivo: flores</string>
+
+	<string name="poi_surveillance_indoor">Vigilância: interior</string>
+	<string name="poi_surveillance_outdoor">Vigilância: exterior</string>
+	<string name="poi_surveillance_public">Vigilância: público</string>
+
+	<string name="poi_clothes_women">Roupas femininas</string>
+	<string name="poi_clothes_underwear">Roupa íntima</string>
+	<string name="poi_clothes_men">Roupas masculinas</string>
+	<string name="poi_clothes_wedding">Vestidos de noiva</string>
+	<string name="poi_clothes_sports">Roupas esportivas</string>
+	<string name="poi_clothes_babies">Roupas de bebês</string>
+	<string name="poi_clothes_denim">Roupas de brim</string>
+	<string name="poi_clothes_workwear">Vestuário de trabalho</string>
+	<string name="poi_clothes_hats">Chapéus</string>
+	<string name="poi_clothes_fur">Peles</string>
+	<string name="poi_clothes_leather">Couro</string>
+	<string name="poi_clothes_costumes">Trajes</string>
+	<string name="poi_clothes_traditional">Roupas tradicionais</string>
+	<string name="poi_clothes_suits">Ternos</string>
+	<string name="poi_clothes_maternity">Roupa de maternidade</string>
+	<string name="poi_clothes_vintage">Roupas vintage</string>
+	<string name="poi_clothes_oversize">Roupas tamanho grande</string>
+	<string name="poi_clothes_schoolwear">Roupas escolares</string>
+	<string name="poi_clothes_swimwear">Roupas de banho</string>
+	<string name="poi_clothes_socks">Meias</string>
+	<string name="poi_clothes_shirts">Camisas</string>
+	<string name="poi_clothes_dance">Roupas de dança</string>
+	<string name="poi_clothes_military">Roupas militares</string>
+
+	<string name="poi_historic_milestone">Marco histórico</string>
+
+	<string name="poi_shoes_children">Calçados infantis</string>
+	<string name="poi_shoes_women">Calçados femininos</string>
+	<string name="poi_shoes_sport">Calçados esportivos</string>
+	<string name="poi_shoes_men">Calçados masculinos</string>
+	<string name="poi_shoes_orthopedic">Calçados ortopédicos</string>
+
+	<string name="poi_historic_manor">Mansão histórica</string>
+	<string name="poi_castle_type_stately">Tipo de castelo: majestoso</string>
+	<string name="poi_castle_type_defensive">Tipo de castelo: defensivo</string>
+	<string name="poi_castle_type_fortress">Tipo de castelo: fortaleza</string>
+	<string name="poi_castle_type_palace">Tipo de castelo: palácio</string>
+	<string name="poi_castle_type_kremlin">Tipo de castelo: kremlin</string>
+	<string name="poi_castle_type_defensive_stately">Tipo de castelo: defensivo, majestoso</string>
+	<string name="poi_castle_type_shiro">Tipo de castelo: shiro</string>
+
+	<string name="poi_massage_thai">Massagem: tailandesa</string>
+	<string name="poi_massage_sexual">Massagem: sexual</string>
+	<string name="poi_massage_chinese">Massagem: chinesa</string>
+	<string name="poi_massage_yes">Serviços de massagem</string>
+	<string name="poi_massage_therapeutic">Massagem: terapêutica</string>
+
+	<string name="poi_sauna_yes">Serviços de sauna</string>
+	<string name="poi_solarium_yes">Serviços de solário</string>
+
+	<string name="poi_tents_yes">Tendas permitidas</string>
+	<string name="poi_tents_no">Tendas não permitidas</string>
+	<string name="poi_openfire_yes">Fogueira permitida</string>
+	<string name="poi_openfire_no">Fogueira proibida</string>
+	<string name="poi_scout_yes">Acampamento de escoteiros: sim</string>
+	<string name="poi_scout_no">Acampamento de escoteiros: não</string>
+	<string name="poi_group_only_yes">Apenas grupos: sim</string>
+	<string name="poi_group_only_no">Apenas grupos: não</string>
+	<string name="poi_washing_machine_yes">Máquina de lavar roupa: sim</string>
+	<string name="poi_washing_machine_no">Máquina de lavar roupa: não</string>
+	<string name="poi_shower_yes">Chuveiro: sim</string>
+	<string name="poi_shower_no">Chuveiro: não</string>
+	<string name="poi_shower_hot">Chuveiro: quente</string>
+	<string name="poi_shower_outdoor">Chuveiro: exterior</string>
+	<string name="poi_shower_cold">Chuveiro: frio</string>
+	<string name="poi_shower_indoor">Chuveiro: interior</string>
+	<string name="poi_caravans_yes">Caravanas: Sim</string>
+	<string name="poi_caravans_no">Caravanas: não</string>
+	<string name="poi_sanitary_dump_station_yes">Estação de descarga sanitária: sim</string>
+	<string name="poi_sanitary_dump_station_no">Estação de descarga sanitária: não</string>
+	<string name="poi_sanitary_dump_station_customers">Estação de descarga sanitária: apenas para clientes</string>
 	</resources>
