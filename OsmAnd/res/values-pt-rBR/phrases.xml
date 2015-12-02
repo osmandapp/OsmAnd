@@ -2146,4 +2146,20 @@
 	<string name="poi_sanitary_dump_station_yes">Estação de descarga sanitária: sim</string>
 	<string name="poi_sanitary_dump_station_no">Estação de descarga sanitária: não</string>
 	<string name="poi_sanitary_dump_station_customers">Estação de descarga sanitária: apenas para clientes</string>
+	<string name="poi_power_supply_yes">Fonte de energia: sim</string>
+	<string name="poi_power_supply_no">Fonte de energia: não</string>
+	<string name="poi_power_supply_cee_17_blue">Fonte de energia (tomada): CEE 17 azul</string>
+	<string name="poi_power_supply_cee_7_4">Fonte de energia (tomada): CEE 7/4</string>
+	<string name="poi_power_supply_cee_7_5">Fonte de energia (tomada): CEE 7/5</string>
+	<string name="poi_power_supply_nema_5_15">Fonte de energia (tomada): NEMA 5-15</string>
+
+	<string name="poi_capacity_tents">Máximo de tendas</string>
+	<string name="poi_capacity_caravans">Máximo de caravanas</string>
+	<string name="poi_dog_yes">Permitido cães</string>
+	<string name="poi_dog_no">Proibido cães</string>
+
+	<string name="poi_refugee_yes">Serviços para refugiados</string>
+	<string name="poi_refugee_no">Refugiados: não</string>
+
+	<string name="poi_social_facility_group_home">Centro social: grupo residencial</string>
 	</resources>
