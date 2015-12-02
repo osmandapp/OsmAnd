@@ -2389,4 +2389,15 @@
 	<string name="poi_historic_period_first_intermediate_period">歷史時期：第一中間期 (西元前2181年 - 2055年)</string>
 	<string name="poi_historic_period_second_intermediate_period">歷史時期：第二中間期 (西元前1650年 - 1550年)</string>
 	<string name="poi_historic_period_third_intermediate_period">"歷史時期：第三中間期 (西元前1069年 - 664年) "</string>
+	<string name="poi_historic_period_first_persian_period">歷史時期：第一波斯時期</string>
+	<string name="poi_historic_period_late_period">歷史時期：後期 (西元前664 - 332年)</string>
+	<string name="poi_historic_period_second_persian_period">歷史時期：第二波斯時期</string>
+	<string name="poi_historic_period_alexander_the_great">歷史時期：亞歷山大大帝</string>
+	<string name="poi_historic_period_ptolemaic_egypt">歷史時期：托勒密埃及 (西元前305年 - 西元前30年)</string>
+	<string name="poi_historic_period_christian_egypt">歷史時期：基督教埃及</string>
+	<string name="poi_historic_period_byzantine_egypt">歷史時期：拜占庭埃及 (西元前30年 - 西元641年)</string>
+	<string name="poi_historic_period_persian_occupation">歷史時期：波斯佔領期</string>
+	<string name="poi_historic_period_greek_dark_ages">歷史時期：希臘黑暗時代 (西元前1100年 - 800年)</string>
+	<string name="poi_historic_period_roman_greece">歷史時期：羅馬希臘 (西元前146年 - 西元330年)</string>
+	<string name="poi_historic_period_roman_kingdom">歷史時期：羅馬王國 (西元前753年 – 西元前509年)</string>
 	</resources>
