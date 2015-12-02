@@ -35,12 +35,15 @@ import org.apache.commons.logging.Log;
 public class GeocodingUtilities {
 
 	private static final Log log = PlatformUtil.getLog(GeocodingUtilities.class);
-
-	public static final float THRESHOLD_MULTIPLIER_SKIP_BUILDINGS_AFTER = 1.5f;
+	
 	public static final float THRESHOLD_MULTIPLIER_SKIP_STREETS_AFTER = 4;
-	public static final float DISTANCE_STREET_NAME_PROXIMITY_BY_NAME = 15000;
-	public static final float DISTANCE_BULDING_PROXIMITY = 100;
+	public static final float STOP_SEARCHING_STREET_WITH_MULTIPLIER_RADIUS = 100;
+	public static final float STOP_SEARCHING_STREET_WITHOUT_MULTIPLIER_RADIUS = 400;
 	public static final float DISTANCE_STREET_FROM_CLOSEST = 1000;
+	public static final float DISTANCE_STREET_NAME_PROXIMITY_BY_NAME = 15000;
+	
+	public static final float THRESHOLD_MULTIPLIER_SKIP_BUILDINGS_AFTER = 1.5f;
+	public static final float DISTANCE_BULDING_PROXIMITY = 100;
 	
 	public static final String[] SUFFIXES = new String[] {"av.", "avenue", "просп.", "пер.", "пр.","заул.", "проспект", "переул.", "бул.", "бульвар", "тракт"};
 	public static final String[] DEFAULT_SUFFIXES = new String[] {"str.", "street", "улица", "ул."};
@@ -172,10 +175,11 @@ public class GeocodingUtilities {
 					lst.add(sr);
 				}
 			}
-			if(p.dist > 100*100 && dist != 0 && p.dist > 4 * dist ) {
+			if(p.dist > STOP_SEARCHING_STREET_WITH_MULTIPLIER_RADIUS * STOP_SEARCHING_STREET_WITH_MULTIPLIER_RADIUS && 
+					dist != 0 && p.dist > THRESHOLD_MULTIPLIER_SKIP_STREETS_AFTER * dist ) {
 				break;
 			}
-			if(p.dist > 300*300) {
+			if(p.dist > STOP_SEARCHING_STREET_WITHOUT_MULTIPLIER_RADIUS*STOP_SEARCHING_STREET_WITHOUT_MULTIPLIER_RADIUS) {
 				break;
 			}
 		}
