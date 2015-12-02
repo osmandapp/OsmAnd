@@ -1,5 +1,19 @@
 package net.osmand.binary;
 
+import gnu.trove.set.hash.TLongHashSet;
+
+import java.io.IOException;
+import java.text.Collator;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
@@ -18,20 +32,29 @@ import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-
-import gnu.trove.set.hash.TLongHashSet;
-
 public class GeocodingUtilities {
 
 	private static final Log log = PlatformUtil.getLog(GeocodingUtilities.class);
+	public static final String[] SUFFIXES = new String[] {"av.", "avenue", "просп.", "пер.", "пр.","заул.", "проспект", "переул.", "бул.", "бульвар", "тракт"};
+	public static final String[] DEFAULT_SUFFIXES = new String[] {"str.", "street", "улица", "ул."};
+	private static Set<String> SET_DEF_SUFFIXES = null;
+	private static Set<String> SET_SUFFIXES = null;
+	
+	public static Set<String> getDefSuffixesSet() {
+		if(SET_DEF_SUFFIXES == null) {
+			SET_DEF_SUFFIXES = new TreeSet<String>();
+			SET_DEF_SUFFIXES.addAll(Arrays.asList(DEFAULT_SUFFIXES));
+		}
+		return SET_DEF_SUFFIXES;
+	}
+	
+	public static Set<String> getSuffixesSet() {
+		if(SET_SUFFIXES == null) {
+			SET_SUFFIXES = new TreeSet<String>();
+			SET_SUFFIXES.addAll(Arrays.asList(SUFFIXES));
+		}
+		return SET_SUFFIXES;
+	}
 
 	public static final float THRESHOLD_MULTIPLIER_SKIP_BUILDINGS_AFTER = 1.5f;
 	public static final float THRESHOLD_MULTIPLIER_SKIP_STREETS_AFTER = 3;
@@ -155,34 +178,84 @@ public class GeocodingUtilities {
 		return lst;
 	}
 	
+	public List<String> prepareStreetName(String s) {
+		List<String> ls = new ArrayList<String>();
+		int beginning = 0;
+		for (int i = 1; i < s.length(); i++) {
+			if (s.charAt(i) == ' ') {
+				addWord(ls, s.substring(beginning, i));
+				beginning = i;
+			} else if (s.charAt(i) == '(') {
+				addWord(ls, s.substring(beginning, i));
+				while (i < s.length()) {
+					char c = s.charAt(i);
+					i++;
+					beginning = i;
+					if (c == ')')
+						break;
+				}
+
+			}
+		}
+		if (beginning < s.length()) {
+			String lastWord = s.substring(beginning, s.length());
+			addWord(ls, lastWord);
+		}
+		Collections.sort(ls, Collator.getInstance());
+		return ls;
+	}
+
+	private void addWord(List<String> ls, String word) {
+		String w = word.trim().toLowerCase();
+		if (!Algorithms.isEmpty(w) && !getDefSuffixesSet().contains(w)) {
+			ls.add(w);
+		}
+	}
+	
 	public List<GeocodingResult> justifyReverseGeocodingSearch(final GeocodingResult r, BinaryMapIndexReader reader,
 			double knownMinBuidlingDistance) throws IOException {
 		// test address index search
 		final List<GeocodingResult> streetsList = new ArrayList<GeocodingResult>();
-		log.info("Search street by name " + r.streetName);
-		SearchRequest<MapObject> req = BinaryMapIndexReader.buildAddressByNameRequest(new ResultMatcher<MapObject>() {
-			@Override
-			public boolean publish(MapObject object) {
-				if(object instanceof Street && object.getName().equalsIgnoreCase(r.streetName)) {
-					double d = MapUtils.getDistance(object.getLocation(), r.searchPoint.getLatitude(),
-							r.searchPoint.getLongitude());
-					if(d < DISTANCE_STREET_NAME_PROXIMITY_BY_NAME) {
-						GeocodingResult rs = new GeocodingResult(r);
-						rs.street = (Street) object;
-						rs.city = rs.street.getCity();
-						streetsList.add(rs);
-						return true;
-					}
-					return false;
+		final List<String> streetNamePacked = prepareStreetName(r.streetName);
+		if (streetNamePacked.size() > 0) {
+			log.info("Search street by name " + r.streetName + " " + streetNamePacked);
+			String mainWord = "";
+			for(int i = 0; i < streetNamePacked.size(); i++) {
+				String s = streetNamePacked.get(i);
+				if(!getSuffixesSet().contains(s) && s.length() > mainWord.length()) {
+					mainWord = s;
 				}
-				return false;
 			}
-			@Override
-			public boolean isCancelled() {
-				return false;
+			if(Algorithms.isEmpty(mainWord)) {
+				mainWord = streetNamePacked.get(0);
 			}
-		}, r.streetName);
-		reader.searchAddressDataByName(req);
+			SearchRequest<MapObject> req = BinaryMapIndexReader.buildAddressByNameRequest(
+					new ResultMatcher<MapObject>() {
+						@Override
+						public boolean publish(MapObject object) {
+							if (object instanceof Street
+									&& prepareStreetName(object.getName()).equals(streetNamePacked)) {
+								double d = MapUtils.getDistance(object.getLocation(), r.searchPoint.getLatitude(),
+										r.searchPoint.getLongitude());
+								if (d < DISTANCE_STREET_NAME_PROXIMITY_BY_NAME) {
+									GeocodingResult rs = new GeocodingResult(r);
+									rs.street = (Street) object;
+									rs.city = rs.street.getCity();
+									streetsList.add(rs);
+									return true;
+								}
+								return false;
+							}
+							return false;
+						}
+
+						@Override
+						public boolean isCancelled() {
+							return false;
+						}
+					}, mainWord);
+			reader.searchAddressDataByName(req);
+		}
 		
 		final List<GeocodingResult> res = new ArrayList<GeocodingResult>();
 		if(streetsList.size() == 0) {

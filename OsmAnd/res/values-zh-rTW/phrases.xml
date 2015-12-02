@@ -2385,4 +2385,8 @@
 	<string name="poi_historic_period_middle_kingdom">歷史時期：中王國 (西元前2055年 - 1650年)</string>
 	<string name="poi_historic_period_predynastic_egypt">歷史時期：前王朝時期埃及</string>
 	<string name="poi_historic_period_early_dynastic_period">歷史時期：早王朝時期 (西元前3100 - 2686年)</string>
+	<string name="poi_historic_period_old_kingdom">歷史時期：古王國 (西元前2686年 – 2181年)</string>
+	<string name="poi_historic_period_first_intermediate_period">歷史時期：第一中間期 (西元前2181年 - 2055年)</string>
+	<string name="poi_historic_period_second_intermediate_period">歷史時期：第二中間期 (西元前1650年 - 1550年)</string>
+	<string name="poi_historic_period_third_intermediate_period">"歷史時期：第三中間期 (西元前1069年 - 664年) "</string>
 	</resources>
