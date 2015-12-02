@@ -392,7 +392,7 @@
 	<string name="poi_townhall">Paço Municipal</string>
 	<string name="poi_employment_agency">Agência de empregos</string>
 	<string name="poi_research">Pesquisa</string>
-	<string name="poi_it">TI</string>
+	<string name="poi_it">Escritório de TI</string>
 	<string name="poi_newspaper">Jornal</string>
 	<string name="poi_architect">Arquiteto</string>
 	<string name="poi_advertising_agency">Agência de publicidade</string>
@@ -2033,4 +2033,14 @@
 	<string name="poi_escape_lane">Área de escape</string>
 
 	<string name="poi_crop_rice">Cultivo: arroz</string>
+	<string name="poi_route_light_rail_ref">Veículo leve sobre trilhos</string>
+	<string name="poi_industrial_auto_wrecker">Tipo: guincho de veículos</string>
+	<string name="poi_watering_place">Balneário</string>
+	<string name="poi_quango">Organização Governamental quase Autônoma</string>
+	<string name="poi_office_forestry">Escritório de silvicultura</string>
+	<string name="poi_logistics">Escritório de logística</string>
+	<string name="poi_parish">Secretaria paroquial</string>
+	<string name="poi_fuel_91ul">Combustível 91UL</string>
+	<string name="poi_fuel_100ll">Combustível 100LL</string>
+	<string name="poi_fuel_autogas">Autogás (GPL)</string>
 	</resources>
