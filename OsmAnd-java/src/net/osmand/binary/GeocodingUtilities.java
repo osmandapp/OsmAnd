@@ -35,6 +35,13 @@ import org.apache.commons.logging.Log;
 public class GeocodingUtilities {
 
 	private static final Log log = PlatformUtil.getLog(GeocodingUtilities.class);
+
+	public static final float THRESHOLD_MULTIPLIER_SKIP_BUILDINGS_AFTER = 1.5f;
+	public static final float THRESHOLD_MULTIPLIER_SKIP_STREETS_AFTER = 4;
+	public static final float DISTANCE_STREET_NAME_PROXIMITY_BY_NAME = 15000;
+	public static final float DISTANCE_BULDING_PROXIMITY = 100;
+	public static final float DISTANCE_STREET_FROM_CLOSEST = 1000;
+	
 	public static final String[] SUFFIXES = new String[] {"av.", "avenue", "просп.", "пер.", "пр.","заул.", "проспект", "переул.", "бул.", "бульвар", "тракт"};
 	public static final String[] DEFAULT_SUFFIXES = new String[] {"str.", "street", "улица", "ул."};
 	private static Set<String> SET_DEF_SUFFIXES = null;
@@ -56,10 +63,6 @@ public class GeocodingUtilities {
 		return SET_SUFFIXES;
 	}
 
-	public static final float THRESHOLD_MULTIPLIER_SKIP_BUILDINGS_AFTER = 1.5f;
-	public static final float THRESHOLD_MULTIPLIER_SKIP_STREETS_AFTER = 3;
-	public static final float DISTANCE_STREET_NAME_PROXIMITY_BY_NAME = 15000;
-	public static final float DISTANCE_BULDING_PROXIMITY = 100;
 	public static final Comparator<GeocodingResult> DISTANCE_COMPARATOR = new Comparator<GeocodingResult>() {
 
 		@Override
@@ -137,6 +140,8 @@ public class GeocodingUtilities {
 			return bld.toString();
 		}
 	}
+
+	
 	
 	public List<GeocodingResult> reverseGeocodingSearch(RoutingContext ctx, double lat, double lon) throws IOException {
 		RoutePlannerFrontEnd rp = new RoutePlannerFrontEnd(false);
@@ -268,7 +273,7 @@ public class GeocodingUtilities {
 			for (GeocodingResult street : streetsList) {
 				if(streetDistance == 0) {
 					streetDistance = street.getDistance();
-				} else if(street.getDistance() > streetDistance + 1000) {
+				} else if(street.getDistance() > streetDistance + DISTANCE_STREET_FROM_CLOSEST) {
 					continue;
 				}
 				street.connectionPoint = road.connectionPoint;
