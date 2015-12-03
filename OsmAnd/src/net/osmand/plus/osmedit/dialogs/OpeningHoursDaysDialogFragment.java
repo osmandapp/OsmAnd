@@ -66,7 +66,7 @@ public class OpeningHoursDaysDialogFragment extends DialogFragment {
 							days[(first + 5 + i) % 7] = dayToShow[i];
 						}
 						if (createNew) {
-							OpeningHoursHoursDialogFragment.createInstance(item, positionToAdd, true)
+							OpeningHoursHoursDialogFragment.createInstance(item, positionToAdd, true, 0)
 									.show(getFragmentManager(), "TimePickerDialogFragment");
 						} else {
 							((BasicEditPoiFragment) getParentFragment())

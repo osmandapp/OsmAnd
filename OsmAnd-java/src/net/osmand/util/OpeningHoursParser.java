@@ -268,6 +268,48 @@ public class OpeningHoursParser {
 				startTimes = new int[]{0};
 			}
 		}
+
+		/**
+		 * Set single start time. If position exceeds index of last item by one
+		 * then new value will be added.
+		 * If value is between 0 and last index, then value in the position p will be overwritten
+		 * with new one.
+		 * Else exception will be thrown.
+		 * @param s - value
+		 * @param position - position to add
+		 */
+		public void setStartTime(int s, int position) {
+			if (position > startTimes.length) {
+				throw new IllegalArgumentException("It is possible to only create 1 new " +
+						"position. Size=" + startTimes.length + ", position=" + position);
+			} else if (position == startTimes.length) {
+				startTimes = addValueToArray(startTimes, s);
+				endTimes = addValueToArray(endTimes, 0);
+			} else {
+				startTimes[position] = s;
+			}
+		}
+
+		/**
+		 * Set single end time. If position exceeds index of last item by one
+		 * then new value will be added.
+		 * If value is between 0 and last index, then value in the position p will be overwritten
+		 * with new one.
+		 * Else exception will be thrown.
+		 * @param s - value
+		 * @param position - position to add
+		 */
+		public void setEndTime(int s, int position) {
+			if (position > endTimes.length) {
+				throw new IllegalArgumentException("It is possible to create only 1 new position." +
+						" Size=" + endTimes.length + ", position=" + position);
+			} else if (position == endTimes.length) {
+				endTimes = addValueToArray(endTimes, s);
+				startTimes = addValueToArray(startTimes, 0);
+			} else {
+				endTimes[position] = s;
+			}
+		}
 		
 		/**
 		 * get a single start time
@@ -279,6 +321,15 @@ public class OpeningHoursParser {
 			}
 			return startTimes[0];
 		}
+
+		/**
+		 * get a single start time in position
+		 * @param position position to get value from
+		 * @return a single start time
+		 */
+		public int getStartTime(int position) {
+			return startTimes[position];
+		}
 		
 		/**
 		 * get a single end time
@@ -289,6 +340,15 @@ public class OpeningHoursParser {
 				return 0;
 			}
 			return endTimes[0];
+		}
+
+		/**
+		 * get a single end time in position
+		 * @param position position to get value from
+		 * @return a single end time
+		 */
+		public int getEndTime(int position) {
+			return endTimes[position];
 		}
 
 		/**
@@ -502,7 +562,13 @@ public class OpeningHoursParser {
 			startTimes = newStartTimes;
 			endTimes   = newEndTimes;
 		}
-		
+
+		private int[] addValueToArray(int[] src, int newValue) {
+			final int[] dest = new int[startTimes.length + 1];
+			System.arraycopy(startTimes, 0, dest, 0, startTimes.length);
+			dest[startTimes.length] = newValue;
+			return dest;
+		}
 	}
 
 	public static class UnparseableRule implements OpeningHoursParser.OpeningHoursRule {

@@ -159,7 +159,6 @@ public class BasicEditPoiFragment extends Fragment
 	}
 
 	public void setBasicOpeningHoursRule(BasicOpeningHourRule item, int position) {
-		LOG.debug("item=" + item.toRuleString(false));
 		mOpeningHoursAdapter.setOpeningHoursRule(item, position);
 	}
 
@@ -191,7 +190,6 @@ public class BasicEditPoiFragment extends Fragment
 		if (openingHours == null) {
 			openingHours = new OpeningHoursParser.OpeningHours();
 		}
-		LOG.debug("openingHours=" + openingHours);
 		mOpeningHoursAdapter.replaceOpeningHours(openingHours);
 		mOpeningHoursAdapter.updateViews();
 	}
@@ -281,20 +279,22 @@ public class BasicEditPoiFragment extends Fragment
 							(TextView) timeFromToLayout.findViewById(R.id.closingTextView);
 					closingTextView.setText(Algorithms.formatMinutesDuration(endTimes.get(i)));
 
+					openingTextView.setTag(i);
 					openingTextView.setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
-							OpeningHoursHoursDialogFragment fragment =
-									OpeningHoursHoursDialogFragment.createInstance(rule, position, true);
-							fragment.show(getChildFragmentManager(), "OpeningHoursHoursDialogFragment");
+							int index = (int) v.getTag();
+							OpeningHoursHoursDialogFragment.createInstance(rule, position, true, index)
+									.show(getChildFragmentManager(), "OpeningHoursHoursDialogFragment");
 						}
 					});
+					closingTextView.setTag(i);
 					closingTextView.setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
-							OpeningHoursHoursDialogFragment fragment =
-									OpeningHoursHoursDialogFragment.createInstance(rule, position, false);
-							fragment.show(getChildFragmentManager(), "OpeningHoursHoursDialogFragment");
+							int index = (int) v.getTag();
+							OpeningHoursHoursDialogFragment.createInstance(rule, position, false, index)
+									.show(getChildFragmentManager(), "OpeningHoursHoursDialogFragment");
 						}
 					});
 					timeListContainer.addView(timeFromToLayout);
