@@ -37,7 +37,7 @@ public class GeocodingUtilities {
 	private static final Log log = PlatformUtil.getLog(GeocodingUtilities.class);
 	
 	public static final float THRESHOLD_MULTIPLIER_SKIP_STREETS_AFTER = 4;
-	public static final float STOP_SEARCHING_STREET_WITH_MULTIPLIER_RADIUS = 150;
+	public static final float STOP_SEARCHING_STREET_WITH_MULTIPLIER_RADIUS = 100;
 	public static final float STOP_SEARCHING_STREET_WITHOUT_MULTIPLIER_RADIUS = 400;
 	
 	public static final float DISTANCE_STREET_NAME_PROXIMITY_BY_NAME = 15000;
