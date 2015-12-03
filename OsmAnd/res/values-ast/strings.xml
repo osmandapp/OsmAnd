@@ -1,5 +1,44 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="av_locations">Allugamientos</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="av_locations">Allugamientos</string>
     <string name="plugin_settings">Complementos</string>
 	<string name="no_updates_available">Nun hai anovamientos disponibles</string>
     <string name="download_live_updates">Anovamientos en direuto</string>
-	</resources>
+	<string name="copied_to_clipboard">Copióse al cartafueyu</string>
+    <string name="shared_string_download_map">Baxar mapa</string>
+	<string name="contact_us">Contáutamos</string>
+    <string name="first_usage_item">Primer usu</string>
+    <string name="features_menu_group">Carauterístiques</string>
+    <string name="help_us_to_improve_menu_group">Ayúdamos a ameyorar OsmAnd</string>
+    <string name="new_version">Versión nueva</string>
+    <string name="begin_with_osmand_menu_group">Primeros pasos con OsmAnd</string>
+    <string name="value_downloaded_of_max">%1$.1f de %2$.1f MB</string>
+    <string name="file_size_in_mb">%.1f MB</string>
+    <string name="get_full_version">Versión completa</string>
+    <string name="downloads">Descargues</string>
+    <string name="later">Sero</string>
+    <string name="roads">Carreteres</string>
+    <string name="downloading_number_of_files">Baxando - %1$d ficheru</string>
+    <string name="buy">MERCAR</string>
+    <string name="unsaved_changes_will_be_lost">Perderáse cualesquier camudancia ensin guardar. ¿Siguir?</string>
+	<string name="are_you_sure">¿Tas seguru?</string>
+	<string name="saved_at_time">Guardóse con ésitu en: %1$s</string>
+	<string name="working_days">Díes de trabayu</string>
+	<string name="contact_info">Información de contautu</string>
+	<string name="description">Descripción</string>
+	<string name="next_proceed">Siguiente</string>
+	<string name="shared_string_skip">Saltar</string>
+	<string name="app_name_osmand">OsmAnd</string>
+	<string name="shared_string_undo">DESFACER</string>
+	<string name="try_again">Inténtalo de nueves</string>
+	<string name="osn_bug_name">Nota d\'OSM</string>
+	<string name="osn_add_dialog_error">Asocedió una esceición: nun se creó la nota</string>
+	<string name="osb_comment_dialog_message">Mensaxe</string>
+	<string name="osb_comment_dialog_author">Nome d\'autor</string>
+	<string name="osb_comment_dialog_error">Asocedió una esceición: nun s\'amestó\'l comentariu</string>
+	<string name="osb_comment_dialog_success">Amestóse con ésitu\'l comentariu</string>
+	<string name="shared_string_location">Allugamientu</string>
+    <string name="lang_nds">Baxu alemán</string>
+    <string name="lang_mk">Macedoniu</string>
+    <string name="read_more">Llei más</string>
+    <string name="shared_string_qr_code">Códigu QR</string>
+    </resources>
