@@ -74,6 +74,13 @@
             <!-- PREPARATION SCREEN -->
 
             <include
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|left"
+                android:visibility="gone"
+                layout="@layout/recording_note_fragment" />
+
+            <include
                 android:layout_width="@dimen/map_route_planning_land_width"
                 android:layout_height="@dimen/map_route_buttons_height"
                 android:layout_gravity="bottom|left"

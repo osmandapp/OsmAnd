@@ -1,21 +1,21 @@
 package net.osmand.plus.audionotes;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.BitmapFactory.Options;
 import android.graphics.Matrix;
 import android.hardware.Camera;
-import android.hardware.Camera.AutoFocusCallback;
 import android.hardware.Camera.Parameters;
 import android.hardware.Camera.PictureCallback;
 import android.media.AudioManager;
+import android.media.CamcorderProfile;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnPreparedListener;
 import android.media.MediaRecorder;
@@ -58,6 +58,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.TabActivity.TabItem;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.myplaces.FavoritesActivity;
@@ -104,7 +105,13 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	public static final int VIDEO_OUTPUT_MP4 = 0;
 	public static final int VIDEO_OUTPUT_3GP = 1;
+	public static final int VIDEO_QUALITY_DEFAULT = CamcorderProfile.QUALITY_HIGH; // High (highest res)
+	public static final int AUDIO_FORMAT_DEFAULT = MediaRecorder.AudioEncoder.AAC; // AAC
+	public static final int AUDIO_BITRATE_DEFAULT = 64 * 1024; // 64 kbps
 	public final CommonPreference<Integer> AV_VIDEO_FORMAT;
+	public final CommonPreference<Integer> AV_VIDEO_QUALITY;
+	public final CommonPreference<Integer> AV_AUDIO_FORMAT;
+	public final CommonPreference<Integer> AV_AUDIO_BITRATE;
 
 	public static final int AV_DEFAULT_ACTION_AUDIO = 0;
 	public static final int AV_DEFAULT_ACTION_VIDEO = 1;
@@ -134,12 +141,37 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	private DataTileManager<Recording> recordings = new DataTileManager<AudioVideoNotesPlugin.Recording>(14);
 	private Map<String, Recording> recordingByFileName = new LinkedHashMap<>();
 	private AudioNotesLayer audioNotesLayer;
-	private MapActivity activity;
+
+	private MapActivity mapActivity;
+
 	private static File mediaRecFile;
 	private static MediaRecorder mediaRec;
 	private File lastTakingPhoto;
+	private Camera cam;
+	private int requestedOrientation;
+
+	private AudioVideoNoteRecordingMenu recordingMenu;
+	private CurrentRecording currentRecording;
+	private boolean recordingDone;
 
 	private final static char SPLIT_DESC = ' ';
+
+	public enum AVActionType {
+		REC_AUDIO,
+		REC_VIDEO,
+		REC_PHOTO
+	}
+
+	public static class CurrentRecording {
+		private AVActionType type;
+
+		public CurrentRecording(AVActionType type) {
+			this.type = type;
+		}
+		public AVActionType getType() {
+			return type;
+		}
+	}
 
 	public static class Recording {
 		public Recording(File f) {
@@ -438,6 +470,9 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		AV_EXTERNAL_RECORDER = settings.registerBooleanPreference("av_external_recorder", false).makeGlobal();
 		AV_EXTERNAL_PHOTO_CAM = settings.registerBooleanPreference("av_external_cam", true).makeGlobal();
 		AV_VIDEO_FORMAT = settings.registerIntPreference("av_video_format", VIDEO_OUTPUT_MP4).makeGlobal();
+		AV_VIDEO_QUALITY = settings.registerIntPreference("av_video_quality", VIDEO_QUALITY_DEFAULT).makeGlobal();
+		AV_AUDIO_FORMAT = settings.registerIntPreference("av_audio_format", AUDIO_FORMAT_DEFAULT).makeGlobal();
+		AV_AUDIO_BITRATE = settings.registerIntPreference("av_audio_bitrate", AUDIO_BITRATE_DEFAULT).makeGlobal();
 		AV_DEFAULT_ACTION = settings.registerIntPreference("av_default_action", AV_DEFAULT_ACTION_CHOOSE).makeGlobal();
 		// camera picture size:
 		AV_CAMERA_PICTURE_SIZE = settings.registerIntPreference("av_camera_picture_size", AV_PHOTO_SIZE_DEFAULT).makeGlobal();
@@ -475,13 +510,17 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	@Override
 	public void registerLayers(MapActivity activity) {
-		this.activity = activity;
+		this.mapActivity = activity;
 		if (audioNotesLayer != null) {
 			activity.getMapView().removeLayer(audioNotesLayer);
 		}
 		audioNotesLayer = new AudioNotesLayer(activity, this);
 		activity.getMapView().addLayer(audioNotesLayer, 3.5f);
 		registerWidget(activity);
+	}
+
+	public CurrentRecording getCurrentRecording() {
+		return currentRecording;
 	}
 
 	private void registerMediaListener(AudioManager am) {
@@ -528,6 +567,9 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	@Override
 	public void registerMapContextMenuActions(final MapActivity mapActivity, final double latitude, final double longitude,
 											  ContextMenuAdapter adapter, Object selectedObj) {
+		if (isRecording()) {
+			return;
+		}
 		adapter.item(R.string.recording_context_menu_arecord).iconColor(R.drawable.ic_action_micro_dark)
 				.listen(new OnContextMenuClick() {
 
@@ -699,9 +741,9 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
 
 		String ext = MPEG4_EXTENSION;
-		if (AV_VIDEO_FORMAT.get() == VIDEO_OUTPUT_3GP) {
-			ext = THREEGP_EXTENSION;
-		}
+//		if (AV_VIDEO_FORMAT.get() == VIDEO_OUTPUT_3GP) {
+//			ext = THREEGP_EXTENSION;
+//		}
 		Uri fileUri = Uri.fromFile(getBaseFileName(lat, lon, app, ext));
 		intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri); // set the image file name
 
@@ -713,32 +755,59 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	@Override
 	public void mapActivityScreenOff(MapActivity activity) {
-		stopRecording(activity);
+		stopCameraRecording(activity);
 	}
 
 	@Override
 	public void mapActivityResume(MapActivity activity) {
-		this.activity = activity;
-		;
+		this.mapActivity = activity;
 		((AudioManager) activity.getSystemService(Context.AUDIO_SERVICE)).registerMediaButtonEventReceiver(
 				new ComponentName(activity, MediaRemoteControlReceiver.class));
 	}
 
-	public MapActivity getActivity() {
-		return activity;
+	@Override
+	public void mapActivityPause(MapActivity activity) {
+		if (isRecording()) {
+			if (currentRecording.getType() == AVActionType.REC_PHOTO) {
+				recordingMenu.hide();
+			} else {
+				activity.getContextMenu().close();
+				stopRecording(activity);
+			}
+			finishRecording();
+		}
+		this.mapActivity = null;
+	}
+
+	public MapActivity getMapActivity() {
+		return mapActivity;
+	}
+
+	public boolean isRecording() {
+		return currentRecording != null;
+	}
+
+	private void initRecMenu(AVActionType actionType) {
+		currentRecording = new CurrentRecording(actionType);
+		recordingMenu = new AudioVideoNoteRecordingMenu(this);
+		recordingDone = false;
+		lockScreenOrientation();
 	}
 
 	public void recordVideo(final double lat, final double lon, final MapActivity mapActivity) {
 		if (AV_EXTERNAL_RECORDER.get()) {
 			captureVideoExternal(lat, lon, mapActivity);
 		} else {
-			recordVideoCamera(lat, lon, mapActivity);
+			openCamera();
+			if (cam != null) {
+				initRecMenu(AVActionType.REC_VIDEO);
+				recordVideoCamera(lat, lon, mapActivity);
+			}
 		}
 	}
 
 	public void recordVideoCamera(final double lat, final double lon, final MapActivity mapActivity) {
-		final Dialog dlg = new Dialog(mapActivity);
-		SurfaceView view = new SurfaceView(dlg.getContext());
+		SurfaceView view = recordingMenu.prepareSurfaceView();
 		view.getHolder().setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 		view.getHolder().addCallback(new Callback() {
 
@@ -748,25 +817,46 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 			@Override
 			public void surfaceCreated(SurfaceHolder holder) {
+
 				MediaRecorder mr = new MediaRecorder();
-				String ext = MPEG4_EXTENSION;
-				if (AV_VIDEO_FORMAT.get() == VIDEO_OUTPUT_3GP) {
-					ext = THREEGP_EXTENSION;
+				try {
+					Parameters parameters = cam.getParameters();
+					int cameraOrientation = getCamOrientation(mapActivity, Camera.CameraInfo.CAMERA_FACING_BACK);
+					cam.setDisplayOrientation(cameraOrientation);
+					parameters.set("rotation", cameraOrientation);
+					//parameters.setPreviewSize(recordingMenu.getViewfinderHeight(), recordingMenu.getViewfinderWidth());
+					cam.setParameters(parameters);
+					cam.setPreviewDisplay(holder);
+					cam.startPreview();
+
+					cam.unlock();
+					mr.setCamera(cam);
+
+				} catch (Exception e) {
+					logErr(e);
+					closeCamera();
 				}
+
+
+				String ext = MPEG4_EXTENSION;
+//				if (AV_VIDEO_FORMAT.get() == VIDEO_OUTPUT_3GP) {
+//					ext = THREEGP_EXTENSION;
+//				}
 				final File f = getBaseFileName(lat, lon, app, ext);
 
 				mr.setAudioSource(MediaRecorder.AudioSource.DEFAULT);
 				mr.setVideoSource(MediaRecorder.VideoSource.CAMERA);
-				if (AV_VIDEO_FORMAT.get() == VIDEO_OUTPUT_3GP) {
-					mr.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-				} else {
-					mr.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
-				}
+//				if (AV_VIDEO_FORMAT.get() == VIDEO_OUTPUT_3GP) {
+//					mr.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+//				} else {
+//					mr.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
+//				}
 
 				giveMediaRecorderHintRotatedScreen(mapActivity, mr);
-				mr.setPreviewDisplay(holder.getSurface());
-				mr.setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT);
-				mr.setVideoEncoder(MediaRecorder.VideoEncoder.DEFAULT);
+				//mr.setPreviewDisplay(holder.getSurface());
+
+				CamcorderProfile p = CamcorderProfile.get(AV_VIDEO_QUALITY.get());
+				mr.setProfile(p);
 				mr.setOutputFile(f.getAbsolutePath());
 				try {
 					runMediaRecorder(mapActivity, mr, f);
@@ -779,8 +869,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
 			}
 		});
-		dlg.setContentView(view);
-		dlg.show();
+		recordingMenu.show();
 	}
 
 	private void giveMediaRecorderHintRotatedScreen(final MapActivity mapActivity, final MediaRecorder mr) {
@@ -806,22 +895,63 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		AccessibleToast.makeText(app, app.getString(R.string.recording_error) + " : " + e.getMessage(), Toast.LENGTH_LONG).show();
 	}
 
-	protected Camera openCamera() {
+	protected void openCamera() {
+		if (cam != null) {
+			try {
+				cam.release();
+				cam = null;
+			} catch (Exception e) {
+				logErr(e);
+			}
+		}
 		try {
-			return Camera.open();
+			cam = Camera.open();
 		} catch (Exception e) {
 			logErr(e);
-			return null;
 		}
 	}
 
-	private void stopRecording(final MapActivity mapActivity) {
+	protected void closeCamera() {
+		if (cam != null) {
+			try {
+				cam.release();
+			} catch (Exception e) {
+				logErr(e);
+			}
+			cam = null;
+		}
+	}
+
+	private void lockScreenOrientation() {
+		requestedOrientation = mapActivity.getRequestedOrientation();
+		mapActivity.setRequestedOrientation(AndroidUiHelper.getScreenOrientation(mapActivity));
+	}
+
+	private void restoreScreenOrientation() {
+		mapActivity.setRequestedOrientation(requestedOrientation);
+	}
+
+	protected void stopCamera() {
+		try {
+			if (cam != null) {
+				cam.stopPreview();
+				cam.setPreviewDisplay(null);
+			}
+		} catch (Exception e) {
+			logErr(e);
+		} finally {
+			closeCamera();
+		}
+	}
+
+	private void stopCameraRecording(final MapActivity mapActivity) {
 		if (mediaRec != null) {
 			mediaRec.stop();
 			mediaRec.release();
 			mediaRec = null;
 			indexFile(true, mediaRecFile);
 			mediaRecFile = null;
+			stopCamera();
 		}
 		if (recordControl != null) {
 			setRecordListener(recordControl, mapActivity);
@@ -829,11 +959,13 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	public void recordAudio(double lat, double lon, final MapActivity mapActivity) {
+		initRecMenu(AVActionType.REC_AUDIO);
 		MediaRecorder mr = new MediaRecorder();
 		final File f = getBaseFileName(lat, lon, app, THREEGP_EXTENSION);
 		mr.setAudioSource(MediaRecorder.AudioSource.MIC);
 		mr.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-		mr.setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT);
+		mr.setAudioEncoder(AV_AUDIO_FORMAT.get());
+		mr.setAudioEncodingBitRate(AV_AUDIO_BITRATE.get());
 		mr.setOutputFile(f.getAbsolutePath());
 		try {
 			runMediaRecorder(mapActivity, mr, f);
@@ -848,21 +980,20 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		if (AV_EXTERNAL_PHOTO_CAM.get()) {
 			takeIntentPhoto(lat, lon, mapActivity);
 		} else {
-			final Camera cam = openCamera();
+			openCamera();
 			if (cam != null) {
-				takePhotoWithCamera(lat, lon, mapActivity, cam);
+				initRecMenu(AVActionType.REC_PHOTO);
+				takePhotoWithCamera(lat, lon, mapActivity);
 			} else {
 				takeIntentPhoto(lat, lon, mapActivity);
 			}
 		}
 	}
 
-	private void takePhotoWithCamera(final double lat, final double lon, final MapActivity mapActivity, final Camera cam) {
+	private void takePhotoWithCamera(final double lat, final double lon, final MapActivity mapActivity) {
 		try {
-			final Dialog dlg = new Dialog(mapActivity);
-			final File f = getBaseFileName(lat, lon, app, IMG_EXTENSION);
-			lastTakingPhoto = f;
-			SurfaceView view = new SurfaceView(dlg.getContext());
+			lastTakingPhoto = getBaseFileName(lat, lon, app, IMG_EXTENSION);
+			final SurfaceView view = recordingMenu.prepareSurfaceView();
 			view.getHolder().setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 			view.getHolder().addCallback(new Callback() {
 
@@ -870,55 +1001,29 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				public void surfaceDestroyed(SurfaceHolder holder) {
 				}
 
-				public void setCameraDisplayOrientation(android.hardware.Camera camera, Parameters parameters) {
-					// android.hardware.Camera.CameraInfo info =
-					// new android.hardware.Camera.CameraInfo();
-					// android.hardware.Camera.getCameraInfo(cameraId, info);
-					int rotation = mapActivity.getWindowManager().getDefaultDisplay().getRotation();
-					int degrees = 0;
-					switch (rotation) {
-						case /* Surface.ROTATION_0 */ 0:
-							degrees = 0;
-							break;
-						case /* Surface.ROTATION_90 */ 1:
-							degrees = 90;
-							break;
-						case /* Surface.ROTATION_180 */ 2:
-							degrees = 180;
-							break;
-						case /* Surface.ROTATION_270 */ 3:
-							degrees = 270;
-							break;
-					}
-
-					// if (info.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
-					// result = (info.orientation + degrees) % 360;
-					// result = (360 - result) % 360; // compensate the mirror
-					// } else { // back-facing
-					// result = (info.orientation - degrees + 360) % 360;
-					// }
-					// API 8
-					// camera.setDisplayOrientation((90 + 360 - degrees) % 360);
-					parameters.set("rotation", (90 + 360 - degrees) % 360);
-				}
-
 				@Override
 				public void surfaceCreated(SurfaceHolder holder) {
 					try {
-						// load sound befor shot:
+						// load sound befor shot
 						if (AV_PHOTO_PLAY_SOUND.get()) {
 							if (sp == null)
 								sp = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
 							log.info("Play sound on photo");
 							if (shotId == 0) {
-								shotId = sp.load(app.getAssets().openFd("sounds/camera_click.ogg"), 1);
-								log.debug("loaded file sound ID: " + shotId);
+								try {
+									AssetFileDescriptor assetFileDescriptor = app.getAssets().openFd("sounds/camera_click.ogg");
+									shotId = sp.load(assetFileDescriptor, 1);
+									assetFileDescriptor.close();
+									log.debug("loaded file sound ID: " + shotId);
+								} catch (Exception e) {
+									log.error("cannot get shotId for sounds/camera_click.ogg");
+								}
 							}
 						}
 
 						Parameters parameters = cam.getParameters();
 
-						// camera picture size:
+						// camera picture size
 						List<Camera.Size> psps = parameters.getSupportedPictureSizes();
 						int index = AV_CAMERA_PICTURE_SIZE.get();
 						log.debug("takePhotoWithCamera() index=" + index);
@@ -932,7 +1037,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 						log.debug("takePhotoWithCamera() set Picture size: width=" + selectedCamPicSize.width
 								+ " height=" + selectedCamPicSize.height);
 
-						// camera focus type:
+						// camera focus type
 						boolean autofocus = true;
 						// boolean autofocus = !Boolean.parseBoolean(parameters.get("auto-exposure-lock-supported"));
 						parameters.setGpsLatitude(lat);
@@ -973,24 +1078,23 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 						parameters.setWhiteBalance(Parameters.WHITE_BALANCE_AUTO);
 						parameters.setFlashMode(Parameters.FLASH_MODE_AUTO);
 
-						setCameraDisplayOrientation(cam, parameters);
+						int cameraOrientation = getCamOrientation(mapActivity, Camera.CameraInfo.CAMERA_FACING_BACK);
+						cam.setDisplayOrientation(cameraOrientation);
+						parameters.set("rotation", cameraOrientation);
+						if (cameraOrientation == 0 || cameraOrientation == 180) {
+							parameters.setPreviewSize(recordingMenu.getViewfinderWidth(), recordingMenu.getViewfinderHeight());
+						} else {
+							parameters.setPreviewSize(recordingMenu.getViewfinderHeight(), recordingMenu.getViewfinderWidth());
+						}
 						cam.setParameters(parameters);
 						cam.setPreviewDisplay(holder);
 						cam.startPreview();
-						if (!autofocus) {
-							printCamParams(parameters, !autofocus);
-							cam.takePicture(null, null, new AudioVideoPhotoHandler(dlg, f));
-						} else {
-							cam.autoFocus(new AutoFocusCallback() {
-								@Override
-								public void onAutoFocus(boolean success, Camera camera) {
-									cam.takePicture(null, null, new AudioVideoPhotoHandler(dlg, f));
-								}
-							});
+						if (autofocus) {
+							cam.autoFocus(null);
 						}
 					} catch (Exception e) {
 						logErr(e);
-						cam.release();
+						closeCamera();
 						e.printStackTrace();
 					}
 				}
@@ -1003,11 +1107,57 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
 				}
 			});
-			dlg.setContentView(view);
-			dlg.show();
+
+			recordingMenu.show();
+
 		} catch (RuntimeException e) {
 			logErr(e);
-			cam.release();
+			closeCamera();
+		}
+	}
+
+	private static int getCamOrientation(MapActivity mapActivity, int cameraId) {
+		android.hardware.Camera.CameraInfo info =
+				new android.hardware.Camera.CameraInfo();
+		android.hardware.Camera.getCameraInfo(cameraId, info);
+		int rotation = mapActivity.getWindowManager().getDefaultDisplay()
+				.getRotation();
+		int degrees = 0;
+		switch (rotation) {
+			case Surface.ROTATION_0:
+				degrees = 0;
+				break;
+			case Surface.ROTATION_90:
+				degrees = 90;
+				break;
+			case Surface.ROTATION_180:
+				degrees = 180;
+				break;
+			case Surface.ROTATION_270:
+				degrees = 270;
+				break;
+		}
+
+		int result;
+		if (info.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
+			result = (info.orientation + degrees) % 360;
+			result = (360 - result) % 360;  // compensate the mirror
+		} else {  // back-facing
+			result = (info.orientation - degrees + 360) % 360;
+		}
+		return result;
+	}
+
+	public void shoot() {
+		if (!recordingDone) {
+			recordingDone = true;
+			if (cam != null && lastTakingPhoto != null) {
+				try {
+					cam.takePicture(null, null, new AudioVideoPhotoHandler(lastTakingPhoto));
+				} catch (RuntimeException e) {
+					closeCamera();
+				}
+			}
 		}
 	}
 
@@ -1030,46 +1180,53 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		mediaRec = mr;
 		mediaRecFile = f;
 
+		recordingMenu.show();
 		updateRecordControl(mapActivity, f);
 	}
 
 	private void updateRecordControl(final MapActivity mapActivity, final File f) {
 		recordControl.setText(app.getString(R.string.shared_string_control_stop), "");
-		recordControl.setImageDrawable(activity.getResources().getDrawable(R.drawable.widget_icon_av_active));
+		recordControl.setImageDrawable(mapActivity.getResources().getDrawable(R.drawable.widget_icon_av_active));
 		final MapInfoLayer mil = mapActivity.getMapLayers().getMapInfoLayer();
-		final boolean contains = recordControl.isVisible();
-		if (!contains) {
+		if (!recordControl.isVisible()) {
 			recordControl.setExplicitlyVisible(true);
 			mil.recreateControls();
 			mapActivity.getMapView().refreshMap(true);
 		}
-		AccessibleToast.makeText(mapActivity, R.string.recording_is_recorded, Toast.LENGTH_LONG).show();
 		recordControl.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (!contains) {
-					recordControl.setExplicitlyVisible(false);
-					mil.recreateControls();
-				}
 				stopRecording(mapActivity);
-				SHOW_RECORDINGS.set(true);
-				mapActivity.getMapView().refreshMap();
-				updateWidgetIcon(recordControl);
 			}
 		});
 	}
 
-	private void updateContextMenu(Recording rec) {
-		if (activity != null) {
-			MapContextMenu menu = activity.getContextMenu();
-			if (menu.isVisible()) {
-				if (rec != null) {
-					menu.show(new LatLon(rec.lat, rec.lon), audioNotesLayer.getObjectName(rec), rec);
-				} else {
-					menu.close();
-				}
+	public void stopRecording(final MapActivity mapActivity) {
+		if (!recordingDone) {
+			recordingDone = true;
+			if (!recordControl.isVisible()) {
+				recordControl.setExplicitlyVisible(false);
+				mapActivity.getMapLayers().getMapInfoLayer().recreateControls();
 			}
+			stopCameraRecording(mapActivity);
+			SHOW_RECORDINGS.set(true);
+			mapActivity.getMapView().refreshMap();
+			updateWidgetIcon(recordControl);
+			recordingMenu.hide();
+			recordingMenu = null;
+			restoreScreenOrientation();
 		}
+	}
+
+	private void updateContextMenu(Recording rec) {
+		if (mapActivity != null && rec != null) {
+			MapContextMenu menu = mapActivity.getContextMenu();
+			menu.show(new LatLon(rec.lat, rec.lon), audioNotesLayer.getObjectName(rec), rec);
+		}
+	}
+
+	private void finishRecording() {
+		currentRecording = null;
 	}
 
 	@Override
@@ -1115,13 +1272,16 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		newMap.put(f.getName(), r);
 		recordingByFileName = newMap;
 
-		final Recording recordingForMenu = r;
-		app.runInUIThread(new Runnable() {
-			@Override
-			public void run() {
-				updateContextMenu(recordingForMenu);
-			}
-		}, 200);
+		if (isRecording()) {
+			finishRecording();
+			final Recording recordingForMenu = r;
+			app.runInUIThread(new Runnable() {
+				@Override
+				public void run() {
+					updateContextMenu(recordingForMenu);
+				}
+			}, 200);
+		}
 
 		return true;
 	}
@@ -1196,9 +1356,9 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		newMap.remove(r.file.getName());
 		recordingByFileName = newMap;
 		Algorithms.removeAllFiles(r.file);
-		if (activity != null) {
-			activity.getContextMenu().close();
-			activity.getMapView().refreshMap();
+		if (mapActivity != null) {
+			mapActivity.getContextMenu().close();
+			mapActivity.getMapView().refreshMap();
 		}
 	}
 
@@ -1217,7 +1377,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	public boolean onMapActivityKeyEvent(KeyEvent key) {
 		if (KeyEvent.KEYCODE_CAMERA == key.getKeyCode()) {
-			defaultAction(activity);
+			defaultAction(mapActivity);
 			return true;
 		}
 		return false;
@@ -1245,6 +1405,24 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	public void playRecording(final Context ctx, final Recording r) {
+		if (r.isVideo()) {
+			Intent vint = new Intent(Intent.ACTION_VIEW);
+			vint.setDataAndType(Uri.fromFile(r.file), "video/*");
+			vint.setFlags(0x10000000);
+			try {
+				ctx.startActivity(vint);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return;
+		} else if (r.isPhoto()) {
+			Intent vint = new Intent(Intent.ACTION_VIEW);
+			vint.setDataAndType(Uri.fromFile(r.file), "image/*");
+			vint.setFlags(0x10000000);
+			ctx.startActivity(vint);
+			return;
+		}
+
 		final MediaPlayer player = r.isPhoto() ? null : new MediaPlayer();
 		final AccessibleAlertBuilder dlg = new AccessibleAlertBuilder(ctx);
 		dlg.setPositiveButton(R.string.recording_open_external_player, new OnClickListener() {
@@ -1328,10 +1506,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	public class AudioVideoPhotoHandler implements PictureCallback {
 		private File pictureFile;
-		private Dialog dlg;
 
-		public AudioVideoPhotoHandler(Dialog dlg, File fileName) {
-			this.dlg = dlg;
+		public AudioVideoPhotoHandler(File fileName) {
 			this.pictureFile = fileName;
 		}
 
@@ -1342,7 +1518,6 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				fos.write(data);
 				fos.close();
 				indexFile(true, pictureFile);
-				dlg.dismiss();
 				// play sound after photo - sound file must be loaded at this time:
 				if (AV_PHOTO_PLAY_SOUND.get()) {
 					if (sp != null && shotId != 0) {
@@ -1360,7 +1535,17 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			} catch (Exception error) {
 				logErr(error);
 			} finally {
-				camera.release();
+				if (mapActivity != null) {
+					mapActivity.runOnUiThread(new Runnable() {
+						@Override
+						public void run() {
+							recordingMenu.hide();
+							recordingMenu = null;
+							restoreScreenOrientation();
+						}
+					});
+				}
+				closeCamera();
 			}
 		}
 	}
