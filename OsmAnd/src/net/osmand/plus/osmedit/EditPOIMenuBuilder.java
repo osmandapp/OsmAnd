@@ -2,6 +2,7 @@ package net.osmand.plus.osmedit;
 
 import android.view.View;
 
+import net.osmand.data.PointDescription;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
@@ -18,6 +19,11 @@ public class EditPOIMenuBuilder extends MenuBuilder {
 	public EditPOIMenuBuilder(OsmandApplication app, final OsmPoint osmPoint) {
 		super(app);
 		this.osmPoint = osmPoint;
+	}
+
+	@Override
+	protected boolean needBuildPlainMenuItems() {
+		return false;
 	}
 
 	@Override
@@ -64,5 +70,9 @@ public class EditPOIMenuBuilder extends MenuBuilder {
 				buildRow(view, R.drawable.ic_action_info_dark, text, 0, false, 0);
 			}
 		}
+
+		buildRow(view, R.drawable.ic_action_get_my_location, PointDescription.getLocationName(app,
+				osmPoint.getLatitude(), osmPoint.getLongitude(), true)
+				.replaceAll("\n", ""), 0, false, 0);
 	}
 }

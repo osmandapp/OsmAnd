@@ -4,6 +4,7 @@ import android.graphics.drawable.Drawable;
 import android.text.Html;
 import android.text.TextUtils;
 import android.text.util.Linkify;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -167,6 +168,14 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			int poiTypeOrder = 0;
 			String poiTypeKeyName = "";
 
+			AbstractPoiType pt = poiTypes.getAnyPoiAdditionalTypeByKey(key);
+			PoiType pType = null;
+			if (pt != null) {
+				pType = (PoiType) pt;
+				poiTypeOrder = pType.getOrder();
+				poiTypeKeyName = pType.getKeyName();
+			}
+
 			if (amenity.getType().isWiki()) {
 				if (!hasWiki) {
 					iconId = R.drawable.ic_action_note_dark;
@@ -214,9 +223,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				} else {
 					iconId = R.drawable.ic_action_info_dark;
 				}
-				AbstractPoiType pt = poiTypes.getAnyPoiAdditionalTypeByKey(key);
-				if (pt != null) {
-					PoiType pType = (PoiType) pt;
+				if (pType != null) {
 					poiTypeOrder = pType.getOrder();
 					poiTypeKeyName = pType.getKeyName();
 					if (pType.getParentType() != null && pType.getParentType() instanceof PoiType) {
