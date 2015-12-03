@@ -7,10 +7,6 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.BitmapFactory.Options;
-import android.graphics.Matrix;
 import android.hardware.Camera;
 import android.hardware.Camera.Parameters;
 import android.hardware.Camera.PictureCallback;
@@ -32,7 +28,6 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
@@ -84,6 +79,8 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class AudioVideoNotesPlugin extends OsmandPlugin {
@@ -153,6 +150,10 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	private AudioVideoNoteRecordingMenu recordingMenu;
 	private CurrentRecording currentRecording;
 	private boolean recordingDone;
+
+	private MediaPlayer player;
+	private Recording recordingPlaying;
+	private Timer playerTimer;
 
 	private final static char SPLIT_DESC = ' ';
 
@@ -302,7 +303,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		}
 
 		public boolean isVideo() {
-			return file.getName().endsWith(MPEG4_EXTENSION) || file.getName().endsWith(THREEGP_EXTENSION);
+			return file.getName().endsWith(MPEG4_EXTENSION);// || file.getName().endsWith(THREEGP_EXTENSION);
 		}
 
 		public boolean isAudio() {
@@ -1404,6 +1405,49 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		return res;
 	}
 
+	public boolean isPlaying() {
+		try {
+			return player != null && player.isPlaying();
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	public boolean isPlaying(Recording r) {
+		return isPlaying() && recordingPlaying == r;
+	}
+
+	public int getPlayingPosition() {
+		if (isPlaying()) {
+			return player.getCurrentPosition();
+		} else if (player != null) {
+			return player.getDuration();
+		} else {
+			return -1;
+		}
+	}
+
+	public void stopPlaying() {
+		if (isPlaying()) {
+			try {
+				player.stop();
+			} finally {
+				player.release();
+				player = null;
+				updateContextMenu();
+			}
+		}
+	}
+
+	private void updateContextMenu() {
+		app.runInUIThread(new Runnable() {
+			@Override
+			public void run() {
+				getMapActivity().getContextMenu().updateMenuUI();
+			}
+		});
+	}
+
 	public void playRecording(final Context ctx, final Recording r) {
 		if (r.isVideo()) {
 			Intent vint = new Intent(Intent.ACTION_VIEW);
@@ -1423,75 +1467,51 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			return;
 		}
 
-		final MediaPlayer player = r.isPhoto() ? null : new MediaPlayer();
-		final AccessibleAlertBuilder dlg = new AccessibleAlertBuilder(ctx);
-		dlg.setPositiveButton(R.string.recording_open_external_player, new OnClickListener() {
-
-			@Override
-			public void onClick(DialogInterface v, int w) {
-				if (player == null) {
-					Intent vint = new Intent(Intent.ACTION_VIEW);
-					vint.setDataAndType(Uri.fromFile(r.file), "image/*");
-					vint.setFlags(0x10000000);
-					ctx.startActivity(vint);
-				} else {
-					if (player.isPlaying()) {
-						player.stop();
-					}
-					Intent vint = new Intent(Intent.ACTION_VIEW);
-					vint.setDataAndType(Uri.fromFile(r.file), "video/*");
-					vint.setFlags(0x10000000);
-					try {
-						ctx.startActivity(vint);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-			}
-		});
-		dlg.setNegativeButton(R.string.shared_string_cancel, new OnClickListener() {
-
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				if (player != null && player.isPlaying()) {
-					player.stop();
-				}
-
-			}
-
-		});
+		if (isPlaying()) {
+			stopPlaying();
+		}
+		recordingPlaying = r;
+		player = new MediaPlayer();
 		try {
-			if (r.isPhoto()) {
-				ImageView img = new ImageView(ctx);
-				Options opts = new Options();
-				opts.inSampleSize = 4;
-				int rot = r.getBitmapRotation();
-				Bitmap bmp = BitmapFactory.decodeFile(r.file.getAbsolutePath(), opts);
-				if (rot != 0) {
-					Matrix matrix = new Matrix();
-					matrix.postRotate(rot);
-					Bitmap resizedBitmap = Bitmap.createBitmap(bmp, 0, 0, bmp.getWidth(), bmp.getHeight(), matrix, true);
-					bmp.recycle();
-					bmp = resizedBitmap;
-				}
-				img.setImageBitmap(bmp);
-				dlg.setView(img);
-				dlg.show();
-			} else {
-				dlg.setMessage(ctx.getString(R.string.recording_playing, r.getDescription(ctx)));
-				player.setDataSource(r.file.getAbsolutePath());
-				player.setOnPreparedListener(new OnPreparedListener() {
+			player.setDataSource(r.file.getAbsolutePath());
+			player.setOnPreparedListener(new OnPreparedListener() {
 
-					@Override
-					public void onPrepared(MediaPlayer mp) {
-						dlg.show();
+				@Override
+				public void onPrepared(MediaPlayer mp) {
+					try {
 						player.start();
+
+						if (playerTimer != null) {
+							playerTimer.cancel();
+						}
+						playerTimer = new Timer();
+						playerTimer.schedule(new TimerTask() {
+
+							@Override
+							public void run() {
+								updateContextMenu();
+								if (!isPlaying()) {
+									cancel();
+									playerTimer = null;
+								}
+							}
+
+						}, 10, 1000);
+
+					} catch (Exception e) {
+						logErr(e);
 					}
-				});
-				player.prepareAsync();
-			}
+				}
+			});
+			player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+				@Override
+				public void onCompletion(MediaPlayer mp) {
+					recordingPlaying = null;
+				}
+			});
+			player.prepareAsync();
 		} catch (Exception e) {
-			AccessibleToast.makeText(ctx, R.string.recording_can_not_be_played, Toast.LENGTH_SHORT).show();
+			logErr(e);
 		}
 	}
 
