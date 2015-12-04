@@ -15,6 +15,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.mapcontextmenu.MapContextMenuFragment;
 import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.util.Algorithms;
 
 import java.lang.ref.WeakReference;
 
@@ -32,20 +33,14 @@ public class AudioVideoNoteMenuController extends MenuController {
 			@Override
 			public void buttonPressed() {
 				if (plugin != null) {
-					plugin.playRecording(getMapActivity(), getRecording());
+					if (plugin.isPlaying(getRecording())) {
+						plugin.stopPlaying();
+					} else {
+						plugin.playRecording(getMapActivity(), getRecording());
+					}
 				}
 			}
 		};
-		if (!recording.isPhoto()) {
-			leftTitleButtonController.caption = getMapActivity().getString(R.string.recording_context_menu_play);
-			leftTitleButtonController.leftIconId = R.drawable.ic_play_dark;
-			String durationStr = recording.getPlainDuration();
-			leftTitleButtonController.needRightText = true;
-			leftTitleButtonController.rightTextCaption = "— " + durationStr;
-		} else {
-			leftTitleButtonController.caption = getMapActivity().getString(R.string.recording_context_menu_show);
-			leftTitleButtonController.leftIconId = R.drawable.ic_action_view;
-		}
 
 		rightTitleButtonController = new TitleButtonController() {
 			@Override
@@ -68,6 +63,8 @@ public class AudioVideoNoteMenuController extends MenuController {
 		};
 		rightTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_delete);
 		rightTitleButtonController.leftIconId = R.drawable.ic_action_delete_dark;
+
+		updateData();
 	}
 
 	@Override
@@ -115,6 +112,36 @@ public class AudioVideoNoteMenuController extends MenuController {
 	@Override
 	public boolean needStreetName() {
 		return false;
+	}
+
+	@Override
+	public void updateData() {
+		rightTitleButtonController.visible = true;
+		if (!recording.isPhoto()) {
+			if (plugin.isPlaying(recording)) {
+				leftTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_control_stop);
+				leftTitleButtonController.leftIconId = R.drawable.ic_action_rec_stop;
+				int pos = plugin.getPlayingPosition();
+				String durationStr;
+				if (pos == -1) {
+					durationStr = recording.getPlainDuration();
+				} else {
+					durationStr = Algorithms.formatDuration(pos / 1000);
+				}
+				leftTitleButtonController.needRightText = true;
+				leftTitleButtonController.rightTextCaption = "— " + durationStr;
+				rightTitleButtonController.visible = false;
+			} else {
+				leftTitleButtonController.caption = getMapActivity().getString(R.string.recording_context_menu_play);
+				leftTitleButtonController.leftIconId = R.drawable.ic_play_dark;
+				String durationStr = recording.getPlainDuration();
+				leftTitleButtonController.needRightText = true;
+				leftTitleButtonController.rightTextCaption = "— " + durationStr;
+			}
+		} else {
+			leftTitleButtonController.caption = getMapActivity().getString(R.string.recording_context_menu_show);
+			leftTitleButtonController.leftIconId = R.drawable.ic_action_view;
+		}
 	}
 
 	@Override
