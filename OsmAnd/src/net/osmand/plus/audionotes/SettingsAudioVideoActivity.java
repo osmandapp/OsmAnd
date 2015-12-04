@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
-import android.widget.TextView;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;

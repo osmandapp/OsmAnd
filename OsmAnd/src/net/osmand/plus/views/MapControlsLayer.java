@@ -1,5 +1,6 @@
 package net.osmand.plus.views;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,6 +12,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.MotionEvent;
 import android.view.View;
@@ -28,6 +30,7 @@ import net.osmand.core.android.MapRendererContext;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -406,7 +409,13 @@ public class MapControlsLayer extends OsmandMapLayer {
 		backToLocation.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
+				if(OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity)) {
+					mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
+				} else {
+					ActivityCompat.requestPermissions(mapActivity,
+							new String[] {Manifest.permission.ACCESS_FINE_LOCATION},
+							OsmAndLocationProvider.REQUEST_LOCATION_PERMISSION);
+				}
 			}
 		});
 		controls.add(createHudButton(mapActivity.findViewById(R.id.map_app_mode_shadow), 0).setBg(
@@ -444,7 +453,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		zoomText = (TextView) mapActivity.findViewById(R.id.map_app_mode_text);
 
 		View routePlanButton = mapActivity.findViewById(R.id.map_route_info_button);
-		routePlanningBtn = createHudButton((ImageView) routePlanButton, R.drawable.map_directions).setBg(
+		routePlanningBtn = createHudButton(routePlanButton, R.drawable.map_directions).setBg(
 				R.drawable.btn_round, R.drawable.btn_round_night);
 		controls.add(routePlanningBtn);
 		routePlanButton.setOnClickListener(new View.OnClickListener() {
@@ -1021,6 +1030,4 @@ public class MapControlsLayer extends OsmandMapLayer {
 			}
 		}		
 	}
-
-	
 }

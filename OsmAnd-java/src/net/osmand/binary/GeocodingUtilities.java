@@ -95,7 +95,6 @@ public class GeocodingUtilities {
 			this.building = r.building;
 			this.city = r.city;
 			this.street = r.street;
-			this.streetName = r.streetName;
 		}
 		
 		// input
