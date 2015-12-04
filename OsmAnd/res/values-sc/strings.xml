@@ -2037,4 +2037,5 @@
     <string name="av_audio_format">Formadu de s’àudio</string>
     <string name="av_audio_format_descr">Ischerta su formadu de essida de s’àudio</string>
     <string name="av_audio_bitrate">Bitrate àudio</string>
+    <string name="av_audio_bitrate_descr">Ischerta su bitrate de s’àudio</string>
     </resources>
