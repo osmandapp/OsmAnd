@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="close_changeset">Değişiklik listesini kapat</string>
 	<string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner uygulaması kurulu değil. Uygulama marketinde aramak ister misiniz?</string>
 	<string name="rendering_attr_roadColors_description">Yol renk şemasını seç:</string>
@@ -994,7 +994,7 @@
 	<string name="search_nothing_found">Sonuç bulunamadı</string>
 	<string name="hint_search_online">Çevrimiçi arama: Ev numarası, sokak, şehir</string>
 	<string name="search_offline_address">Çevrimdışı arama</string>
-	<string name="route_general_information">Toplam mesafe% time% 2 $ dh% 3 $ d m seyahat 1 $ s.</string>
+	<string name="route_general_information">Toplam mesafe %1$s, time %2$d h %3$d m seyahat.</string>
 	<string name="router_service_descr">Çevrimiçi veya çevrimdışı gezinti hizmeti seçin</string>
 	<string name="sd_dir_not_accessible">SD kartta veri depolama klasörü erişilebilir değil!</string>
 	<string name="download_question">{0} - {1} indir ?</string>
