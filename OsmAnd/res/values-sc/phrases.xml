@@ -1857,4 +1857,33 @@
 	<string name="poi_payment_laser_no">No atzetat cartas Laser</string>
 	<string name="poi_building_type_pyramid">Casta de edifìtziu: piràmide</string>
 
-</resources>
+<string name="poi_health_specialty_general_yes">Ispetzializatzione mèiga: dutore generale</string>
+	<string name="poi_health_specialty_ophthalmology_yes">Ispetzializatzione mèiga: oftalmologia</string>
+	<string name="poi_health_specialty_gynaecology_yes">Ispetzializatzione mèiga: ginecologia</string>
+	<string name="poi_health_specialty_internal_medicine_yes">Ispetzializatzione mèiga: meighina interna</string>
+	<string name="poi_health_specialty_orthopaedics_yes">Ispetzializatzione mèiga: ortopedia</string>
+	<string name="poi_health_specialty_otolaryngology_yes">Ispetzializatzione mèiga: otorinolaringoiatria</string>
+	<string name="poi_health_specialty_paediatrics_yes">Ispetzializatzione mèiga: pediatria</string>
+	<string name="poi_health_specialty_paediatrics_no">Ispetzializatzione mèiga: pediatria: nono</string>
+	<string name="poi_health_specialty_dermatology_yes">Ispetzializatzione mèiga: dermatologia</string>
+	<string name="poi_health_specialty_urology_yes">Ispetzializatzione mèiga: urologia</string>
+	<string name="poi_health_specialty_surgery_yes">Ispetzializatzione mèiga: chirurgia generale</string>
+	<string name="poi_health_specialty_radiology_yes">Ispetzializatzione mèiga: radiologia</string>
+	<string name="poi_health_specialty_psychiatry_yes">Ispetzializatzione mèiga: psichiatria</string>
+	<string name="poi_health_specialty_neurology_yes">Ispetzializatzione mèiga: neurologia</string>
+	<string name="poi_health_specialty_dermatovenereology_yes">Ispetzializatzione mèiga: dermatologia genitale</string>
+	<string name="poi_health_specialty_cardiology_yes">Ispetzializatzione mèiga: cardiologia</string>
+	<string name="poi_health_specialty_trauma_yes">Ispetzializatzione mèiga: traumatologia</string>
+	<string name="poi_health_specialty_biology_yes">Ispetzializatzione mèiga: biologia clinico-mèiga (patologia clìnica)</string>
+	<string name="poi_health_specialty_osteopathy_yes">Ispetzializatzione mèiga: osteopatia</string>
+	<string name="poi_health_specialty_anaesthetics_yes">Ispetzializatzione mèiga: anestèticos</string>
+	<string name="poi_health_specialty_pulmonology_yes">Ispetzializatzione mèiga: pneumologia</string>
+	<string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Ispetzializatzione mèiga: chirurgia dentale, orale e maxillo-fatziale</string>
+	<string name="poi_health_specialty_maternity_yes">Ispetzializatzione mèiga: maternidade</string>
+	<string name="poi_health_specialty_emergency_medicine_yes">Ispetzializatzione mèiga: meighina de emergèntzia-urgèntzia</string>
+	<string name="poi_health_specialty_emergency_medicine_no">Ispetzializatzione mèiga: meighina de emergèntzia-urgèntzia: nono</string>
+	<string name="poi_health_specialty_plastic_surgery_yes">Ispetzializatzione mèiga: chirurgia plàstica</string>
+	<string name="poi_health_specialty_orthodontics_yes">Ispetzializatzione mèiga: ortodontzia</string>
+	<string name="poi_health_specialty_physiotherapy_yes">Ispetzializatzione mèiga: fisioterapia</string>
+	<string name="poi_health_specialty_biochemistry_yes">Ispetzializatzione mèiga: biochìmica clìnica</string>
+	</resources>
