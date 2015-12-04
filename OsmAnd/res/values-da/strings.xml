@@ -2125,4 +2125,5 @@
     <string name="av_audio_bitrate">Audio bitrate</string>
     <string name="av_audio_bitrate_descr">Vælg audio bitrate</string>
     <string name="shared_string_near">I nærheden af</string>
-    </resources>
+    <string name="no_address_determined">Kan ikke bestemme adresse</string>
+	</resources>
