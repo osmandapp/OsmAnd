@@ -1058,6 +1058,10 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 	@Override
 	public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
 		OsmandPlugin.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+		MapControlsLayer mcl = mapView.getLayerByClass(MapControlsLayer.class);
+		if (mcl != null) {
+			mcl.onRequestPermissionsResult(requestCode, permissions, grantResults);
+		}
 		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 	}
 
