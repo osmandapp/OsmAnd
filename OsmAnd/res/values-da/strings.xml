@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
     <string name="av_def_action_audio">Optag audio</string>
@@ -2114,4 +2115,13 @@
 	<string name="routing_attr_avoid_borders_name">Undgå grænseovergang</string>
 	
 	<string name="color_purple">Lilla</string>
-	</resources>
+	<string name="shared_string_hide">Skjul</string>
+    <string name="av_video_quality_low">Laveste opløsning</string>
+    <string name="av_video_quality_high">Højeste opløsning</string>
+    <string name="av_video_quality">Video outputkvalitet</string>
+    <string name="av_video_quality_descr">Vælg video outputkvalitet</string>
+    <string name="av_audio_format">Audio output-format</string>
+    <string name="av_audio_format_descr">Vælg audio output-format</string>
+    <string name="av_audio_bitrate">Audio bitrate</string>
+    <string name="av_audio_bitrate_descr">Vælg audio bitrate</string>
+    </resources>
