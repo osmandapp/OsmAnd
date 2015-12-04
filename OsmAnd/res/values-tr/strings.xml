@@ -1525,7 +1525,7 @@
 	<string name="working_days">İş Günleri</string>
 	<string name="recent_places">Son Gidilen Yerler</string>
 	<string name="favourites">Sık Kullanılanlar</string>
-	<string name="saved_at_time">% 1 $ s: Başarıyla kaydedilmiş</string>
+	<string name="saved_at_time">%1$s: Başarıyla kaydedilmiş</string>
 	<string name="poi_dialog_reopen">Yeniden Açmak</string>
 	<string name="poi_dialog_comment_default">POI Değişen</string>
 	<string name="poi_dialog_other_tags_message">Tüm diğer etiketler korunur</string>
