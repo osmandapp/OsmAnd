@@ -1,8 +1,8 @@
 <resources>
-<dimen name="app_defaultsize_w">640dip</dimen>
-  <dimen name="app_defaultsize_h">400dip</dimen>
-  <dimen name="app_minimumsize_w">400dip</dimen>
-  <dimen name="app_minimumsize_h">200dip</dimen>
-  <dimen name="first_usage_title_margin">87dp</dimen>
-  <dimen name="first_usage_title_text_size">35sp</dimen>
+    <dimen name="app_defaultsize_w">640dip</dimen>
+    <dimen name="app_defaultsize_h">400dip</dimen>
+    <dimen name="app_minimumsize_w">400dip</dimen>
+    <dimen name="app_minimumsize_h">200dip</dimen>
+    <dimen name="first_usage_title_margin">87dp</dimen>
+    <dimen name="first_usage_title_text_size">35sp</dimen>
 </resources>
