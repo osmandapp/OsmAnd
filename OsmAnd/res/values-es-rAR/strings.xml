@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
 
     <string name="rendering_attr_hideHouseNumbers_name">Ocultar números de casa</string>
     <string name="copying_osmand_file_failed">Falló al copiar archivos</string>
@@ -1990,4 +1991,14 @@
     <string name="routing_attr_avoid_stairs_name">Evitar escaleras</string>
 	<string name="routing_attr_avoid_stairs_description">Evitar pasar por escaleras</string>
 	<string name="routing_attr_avoid_borders_name">Evitar cruces fronterizos</string>
-	</resources>
+	<string name="shared_string_near">Cerca de</string>
+    <string name="shared_string_hide">Ocultar</string>
+    <string name="av_video_quality_low">Baja resolución</string>
+    <string name="av_video_quality_high">Alta resolución</string>
+    <string name="av_video_quality">Calidad del video</string>
+    <string name="av_video_quality_descr">Elige la calidad del video</string>
+    <string name="av_audio_format">Formato de audio</string>
+    <string name="av_audio_format_descr">Elige el formato del video</string>
+    <string name="av_audio_bitrate">Bitrate del audio</string>
+    <string name="av_audio_bitrate_descr">Elige la tasa de bits del audio</string>
+    </resources>
