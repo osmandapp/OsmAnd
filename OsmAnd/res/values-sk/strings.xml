@@ -1948,4 +1948,5 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="av_audio_format">Formát zvukového výstupu</string>
     <string name="av_audio_format_descr">Zvoľte formát zvuku</string>
     <string name="av_audio_bitrate">Bitový tok zvuku</string>
+    <string name="av_audio_bitrate_descr">Zvoľte bitovú rýchlosť zvuku</string>
     </resources>
