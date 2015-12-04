@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="starting_point_too_far">Pradžios taškas yra per toli nuo artimiausio kelio.</string>
     <string name="shared_location">Bendrinta vieta</string>
     <string name="osmand_parking_warning">Dėmesio</string>
@@ -1946,7 +1947,7 @@
     <string name="share_menu_location">Pasidalinti esama vietove</string>
     <string name="confirm_download_roadmaps">Ar tikrai norite atsisiųsti tik kelių žemėlapį, nors jau turite visą?</string>
     <string name="free_downloads_used">Išnaudota nemokamų atsisiuntimų</string>
-    <string name="free_downloads_used_description">Jūs galite nustatyti, kiek nemokamų atsisiuntimų išnaudojote</string>
+    <string name="free_downloads_used_description">Rodoma, kiek išnaudojote nemokamų atsisiuntimų</string>
 
     <string name="enter_country_name">Įrašykite šalis pavadinimą</string>
     <string name="new_version">Nauja versija</string>
@@ -2014,4 +2015,7 @@
     <string name="save_poi_without_poi_type_message">Ar tikrai norite išsaugoti LV nenurodydami jos tipo?</string>
     <string name="osm_save_offline">Išsaugoti įrenginyje</string>
     <string name="lang_nds">Vokiečių žemaičių</string>
+    <string name="shared_string_hide">Slėpti</string>
+    <string name="av_video_quality_low">Žemiausia raiška</string>
+    <string name="av_video_quality_high">Aukščiausia raiška</string>
     </resources>
