@@ -2400,4 +2400,16 @@
 	<string name="poi_historic_period_greek_dark_ages">歷史時期：希臘黑暗時代 (西元前1100年 - 800年)</string>
 	<string name="poi_historic_period_roman_greece">歷史時期：羅馬希臘 (西元前146年 - 西元330年)</string>
 	<string name="poi_historic_period_roman_kingdom">歷史時期：羅馬王國 (西元前753年 – 西元前509年)</string>
+	<string name="poi_historic_period_dominate">歷史時期：統治 (西元285年 - 西元476年)</string>
+	<string name="poi_historic_era_mesolithic">歷史時期：中石器時代</string>
+	<string name="poi_historic_era_neolithic">歷史時代：新石器時代</string>
+	<string name="poi_historic_era_chalcolithic">歷史時期：銅、石器並用時代 (西元前四 - 三千年)</string>
+
+	<string name="poi_historic_stone">文物石器</string>
+	<string name="poi_health_specialty_orthopaedics_yes">醫療專業：骨科</string>
+	<string name="poi_health_specialty_otolaryngology_yes">醫療專業：耳鼻喉科</string>
+	<string name="poi_health_specialty_paediatrics_yes">醫療專業：小兒科</string>
+	<string name="poi_health_specialty_paediatrics_no">醫療專業：小兒科：無</string>
+	<string name="poi_health_specialty_dermatology_yes">醫療專業：皮膚科</string>
+	<string name="poi_health_specialty_urology_yes">醫療專業：泌尿科</string>
 	</resources>

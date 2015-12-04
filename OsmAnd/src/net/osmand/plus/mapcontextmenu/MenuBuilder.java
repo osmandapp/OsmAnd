@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.text.ClipboardManager;
@@ -264,7 +265,11 @@ public class MenuBuilder {
 	public Drawable getRowIcon(Context ctx, String fileName) {
 		Bitmap iconBitmap = RenderingIcons.getIcon(ctx, fileName, false);
 		if (iconBitmap != null) {
-			return new BitmapDrawable(ctx.getResources(), iconBitmap);
+			BitmapDrawable d = new BitmapDrawable(ctx.getResources(), iconBitmap);
+			boolean light = app.getSettings().isLightContent();
+			d.setColorFilter(app.getResources()
+					.getColor(light ? R.color.icon_color : R.color.icon_color_light), PorterDuff.Mode.SRC_IN);
+			return d;
 		} else {
 			return null;
 		}
