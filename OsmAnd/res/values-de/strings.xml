@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
+	<string name="shared_string_near">Nähe</string>
 	<string name="regions">Regionen</string>
 	<string name="region_maps">Regionsweite Karten</string>
 	<string name="world_maps">Weltweite Karten</string>
