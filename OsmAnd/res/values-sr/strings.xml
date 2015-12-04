@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="about_version">Верзија:</string>
     <string name="shared_string_about">Oko</string>
     <string name="about_settings_descr">Верзија инфо, лиценце, чланови пројекта</string>
@@ -393,4 +394,63 @@
     <string name="home_button">Кућа</string>
     <string name="rendering_attr_subwayMode_name">Линије метроа</string>
     <string name="search_radius_proximity">У близини</string>
+    <string name="shared_string_hide">Сакриј</string>
+    <string name="av_audio_format">Облик звучног излаза</string>
+    <string name="av_audio_format_descr">Изаберите облик за звучни излаз</string>
+    <string name="av_audio_bitrate">Битски проток звука</string>
+    <string name="av_audio_bitrate_descr">Изаберите битски проток звука</string>
+    <string name="please_specify_poi_type_only_from_list">"Молим, изаберите тачну врсту тачке занимања или је прескочите. "</string>
+    <string name="access_from_map_description">Дугме изборника не покреће изборник, већ плочу полетника</string>
+    <string name="access_from_map">Приступ са карте</string>
+    <string name="show_on_start_description">„Искључи“ покреће екран мапе</string>
+    <string name="show_on_start">Прикажи при покретању</string>
+    <string name="copied_to_clipboard">Умножено је у оставу исечака</string>
+    <string name="osm_save_offline">Сачувај за преглед ван мреже</string>
+    <string name="osm_edit_modified_poi">Измењене тачке занимања ОСМ-а</string>
+    <string name="osm_edit_deleted_poi">Брисане тачке занимања ОСМ-а</string>
+    <string name="context_menu_item_open_note">Отвори белешку ОСМ-а</string>
+    <string name="osm_edit_reopened_note">Поново отворена белешка ОСМ-а</string>
+    <string name="osm_edit_commented_note">Белешка ОСМ-а са напоменом</string>
+    <string name="osm_edit_removed_note">Избрисана белешка ОСМ-а</string>
+	<string name="osn_bug_name">Белешка ОСМ-а</string>
+	<string name="osn_add_dialog_title">Направи белешку</string>
+	<string name="osn_comment_dialog_title">Додај напомену</string>
+	<string name="osn_reopen_dialog_title">Поново отвори белешку</string>
+	<string name="osn_close_dialog_title">Затвори белешку</string>
+	<string name="osn_add_dialog_success">Белешка је успешно направљена</string>
+	<string name="osn_add_dialog_error">Десила се грешка: белешка није направљена</string>
+	<string name="osn_close_dialog_success">Белешка је успешно затворена</string>
+	<string name="osn_close_dialog_error">Десила се грешка: белешка није затворена</string>
+	<string name="osb_author_dialog_password">Лозинка ОСМ-а (додатна могућност)</string>
+	<string name="osb_comment_dialog_message">Порука</string>
+	<string name="osb_comment_dialog_author">Име ствараоца</string>
+	<string name="osb_comment_dialog_error">Десила се грешка: није додата напомена</string>
+	<string name="osb_comment_dialog_success">Напомена је успешно додата</string>
+	<string name="shared_string_commit">Отпреми</string>
+	
+    <string name="shared_string_location">Положај</string>
+    <string name="lang_mk">Македонски</string>
+    <string name="read_more">Прочитај више</string>
+    <string name="whats_new">Шта је ново</string>
+    <string name="rendering_attr_hideProposed_name">Сакриј предложене предмете</string>
+    <string name="shared_string_update">Освежи</string>
+    <string name="shared_string_upload">Отпреми</string>
+    <string name="world_map_download_descr">Основна карта света (која покрива целу Земљу при погледу издалека) не постоји или је застарела. Молим, преузмите основну карту света за употпуњавање радне средине.</string>
+    <string name="shared_string_qr_code">КуР-ски код</string>
+    <string name="map_downloaded">Карта је преузета</string>
+    <string name="map_downloaded_descr">Карта %1$s је преузета. Може да се вратите на карту и почнете да је користите.</string>
+    <string name="go_to_map">Иди на карту</string>
+    <string name="simulate_initial_startup_descr">Поставља заставицу која приказује прво покретање, све остале поставке оставља непромењеним</string>
+    <string name="simulate_initial_startup">Подражавај прво покретање програма</string>
+    <string name="share_menu_location">Дели свој положај</string>
+    <string name="shared_string_send">Шаљи</string>
+    <string name="favorite_category_dublicate_message">Означено име врсте већ постоји. Молим, одредите друго име.</string>
+    <string name="favorite_category_name">Име врсте</string>
+    <string name="favorite_category_add_new_title">Додај нову врсту</string>
+    <string name="regions">Области</string>
+    <string name="region_maps">Карте великих области</string>
+    <string name="world_maps">Светске карте</string>
+    <string name="srtm_plugin_disabled">Линије оцрта су онемогућене</string>
+    <string name="favorite_category_add_new">Додај ново</string>
+    <string name="favorite_category_select">Изаберите врсту</string>
     </resources>
