@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
     <string name="ChooseCountry">Välj land</string>
     <string name="choose_city">Välj stad</string>
@@ -2017,4 +2018,14 @@
     <string name="action_create">Åtgärd skapa</string>
 	<string name="action_modify">Åtgärd ändra</string>
 	<string name="action_delete">Åtgärd ta bort</string>
-	</resources>
+	<string name="shared_string_near">Nära</string>
+    <string name="shared_string_hide">Dölj</string>
+    <string name="av_video_quality_low">Lägsta upplösning</string>
+    <string name="av_video_quality_high">Högsta upplösning</string>
+    <string name="av_video_quality">Videokvalitet</string>
+    <string name="av_video_quality_descr">Välj videokvalitet</string>
+    <string name="av_audio_format">Ljudformat</string>
+    <string name="av_audio_format_descr">Välj ljudformat</string>
+    <string name="av_audio_bitrate">Ljudsamplingshastighet</string>
+    <string name="av_audio_bitrate_descr">Välj ljudsamplingshastighet</string>
+    </resources>
