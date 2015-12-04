@@ -1,9 +1,11 @@
 package net.osmand.plus;
 
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.os.Build;
 import android.support.v4.app.Fragment;
 
 import net.osmand.IProgress;
@@ -211,14 +213,15 @@ public abstract class OsmandPlugin {
 	public void mapActivityScreenOff(MapActivity activity) {
 	}
 
+	@TargetApi(Build.VERSION_CODES.M)
 	public void handleRequestPermissionsResult(int requestCode, String[] permissions,
-											   int[] grantResults, MapActivity activity) {
+											   int[] grantResults) {
 	}
 
 	public static final void onRequestPermissionsResult(int requestCode, String[] permissions,
-														int[] grantResults, MapActivity activity) {
+														int[] grantResults) {
 		for (OsmandPlugin plugin : getAvailablePlugins()) {
-			plugin.handleRequestPermissionsResult(requestCode, permissions, grantResults, activity);
+			plugin.handleRequestPermissionsResult(requestCode, permissions, grantResults);
 		}
 	}
 

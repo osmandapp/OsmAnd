@@ -1,6 +1,7 @@
 package net.osmand.plus.audionotes;
 
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
@@ -162,8 +163,10 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	private Timer playerTimer;
 
 	private final static char SPLIT_DESC = ' ';
-	private double tempLat;
-	private double tempLon;
+
+	private double actionLat;
+	private double actionLon;
+	private int runAction = -1;
 
 	public enum AVActionType {
 		REC_AUDIO,
@@ -774,10 +777,14 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		this.mapActivity = activity;
 		((AudioManager) activity.getSystemService(Context.AUDIO_SERVICE)).registerMediaButtonEventReceiver(
 				new ComponentName(activity, MediaRemoteControlReceiver.class));
+		if (runAction != -1) {
+			takeAction(activity, actionLat, actionLon, runAction);
+			runAction = -1;
+		}
 	}
 
 	@Override
-	public void mapActivityDestroy(MapActivity activity) {
+	public void mapActivityPause(MapActivity activity) {
 		if (isRecording()) {
 			if (currentRecording.getType() == AVActionType.REC_PHOTO) {
 				recordingMenu.hide();
@@ -819,8 +826,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 					recordVideoCamera(lat, lon, mapActivity);
 				}
 			} else {
-				tempLat = lat;
-				tempLon = lon;
+				actionLat = lat;
+				actionLon = lon;
 				ActivityCompat.requestPermissions(mapActivity,
 						new String[]{Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO},
 						CAMERA_FOR_VIDEO_REQUEST_CODE);
@@ -1001,8 +1008,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 						+ e.getMessage(), Toast.LENGTH_LONG).show();
 			}
 		} else {
-			tempLat = lat;
-			tempLon = lon;
+			actionLat = lat;
+			actionLon = lon;
 			ActivityCompat.requestPermissions(mapActivity,
 					new String[]{Manifest.permission.RECORD_AUDIO},
 					AUDIO_REQUEST_CODE);
@@ -1017,8 +1024,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 					== PackageManager.PERMISSION_GRANTED) {
 				takePhotoInternalOrExternal(lat, lon, mapActivity);
 			} else {
-				tempLat = lat;
-				tempLon = lon;
+				actionLat = lat;
+				actionLon = lon;
 				ActivityCompat.requestPermissions(mapActivity,
 						new String[]{Manifest.permission.CAMERA},
 						CAMERA_FOR_PHOTO_REQUEST_CODE);
@@ -1029,6 +1036,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	private void takePhotoInternalOrExternal(double lat, double lon, MapActivity mapActivity) {
 		openCamera();
 		if (cam != null) {
+			initRecMenu(AVActionType.REC_PHOTO);
 			takePhotoWithCamera(lat, lon, mapActivity);
 		} else {
 			takePhotoExternal(lat, lon, mapActivity);
@@ -1586,28 +1594,35 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		return false;
 	}
 
+	@TargetApi(Build.VERSION_CODES.M)
 	@Override
 	public void handleRequestPermissionsResult(int requestCode, String[] permissions,
-											   int[] grantResults, MapActivity activity) {
+											   int[] grantResults) {
+		runAction = -1;
 		if (requestCode == CAMERA_FOR_VIDEO_REQUEST_CODE) {
 			if (grantResults[0] == PackageManager.PERMISSION_GRANTED
 					&& grantResults[1] == PackageManager.PERMISSION_GRANTED) {
-				recordVideoCamera(tempLat, tempLon, activity);
+				runAction = AV_DEFAULT_ACTION_VIDEO;
 			} else {
 				app.showToastMessage(R.string.no_camera_permission);
 			}
 		} else if (requestCode == CAMERA_FOR_PHOTO_REQUEST_CODE) {
 			if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-				takePhotoInternalOrExternal(tempLat, tempLon, activity);
+				runAction = AV_DEFAULT_ACTION_TAKEPICTURE;
 			} else {
 				app.showToastMessage(R.string.no_camera_permission);
 			}
 		} else if (requestCode == AUDIO_REQUEST_CODE) {
 			if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-				recordAudio(tempLat, tempLon, activity);
+				runAction = AV_DEFAULT_ACTION_AUDIO;
 			} else {
 				app.showToastMessage(R.string.no_microphone_permission);
 			}
+		}
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null && !mapActivity.isDestroyed()) {
+			takeAction(mapActivity, actionLat, actionLon, runAction);
+			runAction = -1;
 		}
 	}
 

@@ -941,7 +941,10 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	public void dismissMenu() {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
-			activity.getSupportFragmentManager().popBackStack(TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+			try {
+				activity.getSupportFragmentManager().popBackStack(TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+			} catch (Exception e) {
+			}
 		}
 	}
 

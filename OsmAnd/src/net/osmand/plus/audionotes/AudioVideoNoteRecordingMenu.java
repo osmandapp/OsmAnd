@@ -18,6 +18,9 @@ import net.osmand.plus.audionotes.AudioVideoNotesPlugin.CurrentRecording;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.util.Algorithms;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 
 public class AudioVideoNoteRecordingMenu {
@@ -27,9 +30,9 @@ public class AudioVideoNoteRecordingMenu {
 	private AudioVideoNotesPlugin plugin;
 	private long startTime;
 	private Handler handler;
-	private boolean counting;
 	private boolean portraitMode;
 	private boolean largeDevice;
+	private Timer recTimer;
 
 	public static boolean showViewfinder = true;
 
@@ -184,23 +187,30 @@ public class AudioVideoNoteRecordingMenu {
 
 	private void startCounter() {
 		startTime = System.currentTimeMillis();
-		counting = true;
-		updateCounter();
+
+		if (recTimer != null) {
+			recTimer.cancel();
+		}
+		recTimer = new Timer();
+		recTimer.schedule(new TimerTask() {
+
+			@Override
+			public void run() {
+				handler.post(new Runnable() {
+					@Override
+					public void run() {
+						updateDuration();
+					}
+				});
+			}
+
+		}, 0, 1000);
 	}
 
 	private void stopCounter() {
-		counting = false;
-	}
-
-	private void updateCounter() {
-		updateDuration();
-		if (counting) {
-			handler.postDelayed(new Runnable() {
-				@Override
-				public void run() {
-					updateCounter();
-				}
-			}, 1000);
+		if (recTimer != null) {
+			recTimer.cancel();
+			recTimer = null;
 		}
 	}
 

@@ -1057,7 +1057,7 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents,
 
 	@Override
 	public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-		OsmandPlugin.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+		OsmandPlugin.onRequestPermissionsResult(requestCode, permissions, grantResults);
 		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 	}
 
