@@ -2118,10 +2118,10 @@
 	<string name="shared_string_hide">Skjul</string>
     <string name="av_video_quality_low">Laveste opløsning</string>
     <string name="av_video_quality_high">Højeste opløsning</string>
-    <string name="av_video_quality">Video outputkvalitet</string>
-    <string name="av_video_quality_descr">Vælg video outputkvalitet</string>
-    <string name="av_audio_format">Audio output-format</string>
-    <string name="av_audio_format_descr">Vælg audio output-format</string>
+    <string name="av_video_quality">Videokvalitet</string>
+    <string name="av_video_quality_descr">Vælg videokvalitet</string>
+    <string name="av_audio_format">Audioformat</string>
+    <string name="av_audio_format_descr">Vælg audioformat</string>
     <string name="av_audio_bitrate">Audio bitrate</string>
     <string name="av_audio_bitrate_descr">Vælg audio bitrate</string>
     <string name="shared_string_near">I nærheden af</string>
