@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
 
     <string name="layer_map_appearance">Configurar pantalla</string>
     <string name="show_lanes">Mostrar carriles</string>
@@ -1989,4 +1990,14 @@
     <string name="routing_attr_avoid_stairs_name">Evitar escaleras</string>
 	<string name="routing_attr_avoid_stairs_description">Evitar pasar por escaleras</string>
 	<string name="routing_attr_avoid_borders_name">Evitar cruces fronterizos</string>
-	</resources>
+	<string name="shared_string_near">Cerca de</string>
+    <string name="shared_string_hide">Ocultar</string>
+    <string name="av_video_quality_low">Baja resolución</string>
+    <string name="av_video_quality_high">Alta resolución</string>
+    <string name="av_video_quality">Calidad del video</string>
+    <string name="av_video_quality_descr">Seleccionar calidad del vídeo</string>
+    <string name="av_audio_format">Formato del audio</string>
+    <string name="av_audio_format_descr">Selecciones el formato de salida del audio</string>
+    <string name="av_audio_bitrate">Bitrate del audio</string>
+    <string name="av_audio_bitrate_descr">Seleccionar la tasa de bits del audio</string>
+    </resources>
