@@ -1437,7 +1437,7 @@
     <string name="world_map_download_descr">Dünya basemap (küçük yakınlaştırır de tüm dünyayı kapsayan) eksik veya eski. Tam bir çevre için Dünya basemap indirirken düşünün lütfen.</string>
     <string name="shared_string_qr_code">QR Kod</string>
     <string name="map_downloaded">Harita indirildi</string>
-    <string name="map_downloaded_descr">% 1 $ s Haritası indirildi. Kullanmaya başlamak için geri haritaya gidin.</string>
+    <string name="map_downloaded_descr">%1$s Haritası indirildi. Kullanmaya başlamak için geri haritaya gidin.</string>
     <string name="go_to_map">Haritada git</string>
     <string name="simulate_initial_startup_descr">İlk uygulama başlatma belirten bayrağı ayarlar değişmeden tüm diğer ayarlar tutar</string>
     <string name="simulate_initial_startup">Uygulamayı İlk Ayarlarına Getir</string>
@@ -1479,7 +1479,7 @@
     <string name="confirm_download_roadmaps">Eğer zaten standart (tam) harita var olsa bile, yollar sadece harita indirmek istediğinizden emin misiniz?</string>
     <string name="value_downloaded_of_max">%1$.1f of %2$.1f MB</string>
     <string name="file_size_in_mb">%.1f MB</string>
-    <string name="update_all">Tüm güncelleyin (% 1 $ s MB)</string>
+    <string name="update_all">Tüm güncelleyin (%1$s MB)</string>
     <string name="buy">Satın Al</string>
     <string name="activate_seamarks_plugin">Seamarks eklentisi aktif ediniz</string>
     <string name="activate_srtm_plugin">SRTM eklentisi aktif ediniz</string>
@@ -1490,7 +1490,7 @@
     <string name="free_downloads_used_description">Kullanılan ücretsiz indirme görüntüler</string>
 
     <string name="roads">Yollar</string>
-    <string name="downloading_number_of_files">İndiriliyor -% 1 $ d dosya</string>
+    <string name="downloading_number_of_files">İndiriliyor -%1$d dosya</string>
     <string name="show_free_version_banner">Ücretsiz sürümü banner göster</string>
     <string name="show_free_version_banner_description">Sürüm ödemiş olsa bile yine ücretsiz sürümü banner görebilirsiniz</string>
     <string name="poi_deleted_localy">Yaptığınız değişiklikleri karşıya kez POI silinecektir</string>
@@ -1498,5 +1498,5 @@
 	<string name="count_of_lines">Hatlarının Sayısı</string>
 	<string name="are_you_sure">Emin misiniz?</string>
 	<string name="unsaved_changes_will_be_lost">Herhangi kaydedilmemiş değişiklikler kaybolur. Devam?</string>
-	<string name="downloads_left_template">% 1 $ s indirme sol</string>
+	<string name="downloads_left_template">%1$s indirme sol</string>
 	</resources>
