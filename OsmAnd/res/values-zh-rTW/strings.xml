@@ -317,9 +317,9 @@
     <string name="amenity_type_osmwiki">維基百科 (離線)</string>
     <string name="amenity_type_user_defined">使用者定義</string>
     <string name="fav_export_confirmation">我的最愛已有上次匯出的檔，要取代它嗎？</string>
-    <string name="profile_settings">外觀具體的設定</string>
-    <string name="settings_preset">預設設定檔</string>
-    <string name="settings_preset_descr">檢視地圖和導航設定，記住每個使用設定檔。在這裡設定您的預設設定檔。</string>
+    <string name="profile_settings">配置個別設定</string>
+    <string name="settings_preset">預置設定檔</string>
+    <string name="settings_preset_descr">檢視地圖和導航設定，記住每個使用設定檔。在這裡設定您的預置設定檔。</string>
     <string name="routing_settings">導航</string>
     <string name="routing_settings_descr">指定導航選項</string>
     <string name="global_settings">整體設定</string>
@@ -663,7 +663,7 @@
     <string name="route_tsll">轉入右前方之後直行</string>
     <string name="route_tu">迴轉之後直行</string>
     <string name="route_head">前方</string>
-    <string name="first_time_continue">接著</string>
+    <string name="first_time_continue">繼續</string>
     <string name="first_time_download">下載地區</string>
     <string name="search_poi_location">搜尋訊號中…</string>
     <string name="search_near_map">查尋目前地圖中心附近</string>
@@ -1312,13 +1312,13 @@
 
     <string name="import_file_favourites">儲存標點為 GPX 檔案或把它匯入到我的最愛？</string>
 
-    <string name="color_red">紅色</string>
+    
     <string name="rendering_value_pink_name">粉紅色</string>
-    <string name="color_orange">橙色</string>
+    
     <string name="rendering_value_brown_name">棕色</string>
-    <string name="color_yellow">黃色</string>
+    
     <string name="color_lightblue">淺藍色</string>
-    <string name="color_blue">藍色</string>
+    
 
 
     <string name="osmo_edit_device">更改使用者屬性</string>
@@ -1335,7 +1335,7 @@
     <string name="osmo_use_server_name">已註冊的名稱</string>
     <string name="osmo_connect_to_my_nickname">我的暱稱</string>
     <string name="osmo_user_name">使用者</string>
-    <string name="color_green">綠色</string>
+    
 
     <string name="osmo_user_joined">使用者 %1$s 已加入群組 %2$s</string>
     <string name="osmo_user_left">使用者 %1$s 離開群組 %2$s</string>
@@ -1872,7 +1872,7 @@
     <string name="unsaved_changes_will_be_lost">任何未儲存的變更將會失去。要繼續嗎?</string>
     <string name="simulate_your_location_stop_descr">停止模擬您的位置</string>
     <string name="simulate_your_location_descr">使用模擬計算一條路線或記錄成一個 GPX 檔</string>
-    <string name="downloads_left_template">離開下載的 %1$s</string>
+    <string name="downloads_left_template">還剩下 %1$s 次下載</string>
     <string name="favourites_edit_dialog_title">我的最愛資訊</string>
     <string name="favourites_context_menu_add">增加到我的最愛</string>
     <string name="roads">道路</string>
@@ -2003,7 +2003,7 @@
     <string name="rendering_attr_roadStyle_description">道路樣式</string>
     <string name="poi_dialog_reopen">重新開啟</string>
 	<string name="osm_save_offline">離線儲存</string>
-    <string name="release_2_2">" •在地圖上和其它螢幕上，為點擊位置做了新的敏捷內容選單使用者界面\n\n•地圖螢幕上現在除了直接啟動外，還有\'在應用程式時啟動顯示儀表板\'可選\n\n •組態哪些以及何種卡可以在儀表板上顯示\n\n•如果您喜歡基本選單的應用程式控制，繞過儀表板方式\n\n •要下載地圖，可以直接在全球地圖上點選區域\n\n •更好的重新計算路線（現在引擎經過反復的嘗試，建議一條不同的路線）\n\n •興趣點搜尋現在支援更具體的查詢\n\n •改善過的興趣點和 OSM 編輯功能\n\n •地圖資料下載結構和界面重新設計\n\n 還有更多... "</string>
+    <string name="release_2_2"><![CDATA[" •在地圖上和其它螢幕上，為點擊位置做了新的敏捷內容選單使用者界面\n\n•地圖螢幕上現在除了直接啟動外，還有\'在應用程式時啟動顯示儀表板\'可選\n\n •組態哪些以及何種卡可以在儀表板上顯示\n\n•如果您喜歡基本選單的應用程式控制，繞過儀表板方式\n\n •要下載地圖，可以直接在全球地圖上點選區域\n\n •更好的重新計算路線（現在引擎經過反復的嘗試，建議一條不同的路線）\n\n •興趣點搜尋現在支援更具體的查詢\n\n •改善過的興趣點和 OSM 編輯功能\n\n •地圖資料下載結構和界面重新設計\n\n 還有更多… "]]></string>
     <string name="copied_to_clipboard">複製到剪貼簿</string>
     
     

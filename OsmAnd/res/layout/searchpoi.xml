@@ -10,6 +10,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
+        tools:visibility="visible"
         android:visibility="gone"
         android:orientation="horizontal" >
 
@@ -29,7 +30,7 @@
             android:focusableInTouchMode="true" />
 
         <EditText
-            android:id="@+id/edit"
+            android:id="@+id/searchEditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
@@ -38,9 +39,10 @@
             android:maxLines="1"
             android:singleLine="true"
             android:lines="1"
-            android:nextFocusLeft="@id/edit"
-            android:nextFocusUp="@id/edit"
+            android:nextFocusLeft="@id/searchEditText"
+            android:nextFocusUp="@id/searchEditText"
             android:textColor="?android:textColorPrimary"
+            android:imeOptions="actionSearch"
             tools:text="@string/lorem_ipsum" >
         </EditText>
 

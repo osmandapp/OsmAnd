@@ -3,12 +3,27 @@
  */
 package net.osmand.plus.activities.search;
 
-import java.text.Collator;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v7.widget.PopupMenu;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
@@ -29,25 +44,12 @@ import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.util.Algorithms;
-import android.content.Intent;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.support.v7.widget.PopupMenu;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
+
+import java.text.Collator;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 
 
@@ -65,11 +67,11 @@ public class SearchPoiFilterFragment extends OsmAndListFragment implements Searc
             Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.searchpoi, container, false);
         v.findViewById(R.id.SearchFilterLayout).setVisibility(View.VISIBLE);
-        ((EditText)v.findViewById(R.id.edit)).setHint(R.string.search_poi_category_hint);
+        ((EditText)v.findViewById(R.id.searchEditText)).setHint(R.string.search_poi_category_hint);
         ((ImageView)v.findViewById(R.id.search_icon)).setImageDrawable(
         		getMyApplication().getIconsCache().getContentIcon(R.drawable.ic_action_search_dark));
         
-        setupSearchEditText((EditText) v.findViewById(R.id.edit));
+        setupSearchEditText((EditText) v.findViewById(R.id.searchEditText));
         setupOptions((ImageView) v.findViewById(R.id.options));
         v.findViewById(R.id.poiSplitbar).setVisibility(View.GONE);
         return v;
@@ -108,6 +110,19 @@ public class SearchPoiFilterFragment extends OsmAndListFragment implements Searc
 				}
 				currentTask = new SearchPoiByNameTask();
 				currentTask.execute(s.toString().trim());
+			}
+		});
+		searchEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+			@Override
+			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+				boolean handled = false;
+				if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+					final PoiUIFilter poiFilter = getApp().getPoiFilters().getSearchByNamePOIFilter();
+					poiFilter.setFilterByName(searchEditText.getText().toString());
+					showFilterActivity(poiFilter.getFilterId());
+					handled = true;
+				}
+				return handled;
 			}
 		});
 	}
@@ -195,7 +210,7 @@ public class SearchPoiFilterFragment extends OsmAndListFragment implements Searc
 
 	@Override
 	public void onListItemClick(ListView listView, View v, int position, long id) {
-		final Object item = ((PoiFiltersAdapter) getListAdapter()).getItem(position);
+		final Object item = getListAdapter().getItem(position);
 		ResourceManager rm = getApp().getResourceManager();
 		if (!rm.containsAmenityRepositoryToSearch(false)) {
 			AccessibleToast.makeText(getActivity(), R.string.data_to_search_poi_not_available, Toast.LENGTH_LONG);

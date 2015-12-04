@@ -1,5 +1,16 @@
 package net.osmand.plus.osmo;
 
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Message;
+
+import net.osmand.PlatformUtil;
+import net.osmand.plus.osmo.OsMoService.SessionInfo;
+
+import org.apache.commons.logging.Log;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.InetSocketAddress;
@@ -12,21 +23,11 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedQueue;
-
-import net.osmand.PlatformUtil;
-import net.osmand.plus.osmo.OsMoService.SessionInfo;
-
-import org.apache.commons.logging.Log;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import android.os.Handler;
-import android.os.HandlerThread;
-import android.os.Message;
 
 public class OsMoThread {
 //	private static String TRACKER_SERVER = "srv.osmo.mobi";
@@ -63,7 +64,7 @@ public class OsMoThread {
 	private ByteBuffer pendingReadCommand = ByteBuffer.allocate(2048);
 	private LinkedList<String> queueOfMessages = new LinkedList<String>();
 	
-	private SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");
+	private SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss", Locale.US);
 	
 	private ConcurrentLinkedQueue<String> lastCommands = new ConcurrentLinkedQueue<String>();
 	private final static int STACK_CMD = 30;

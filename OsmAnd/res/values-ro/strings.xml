@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="background_service_is_enabled_question">Serviciul sleep încă rulează în background. Doriți să-l opriți?</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="background_service_is_enabled_question">Serviciul sleep încă rulează în background. Doriți să-l opriți?</string>
     
 	
     <string name="close_changeset">Închide setul de modificări</string>
@@ -1328,13 +1327,13 @@
     <string name="osmo_use_server_name">Nume înregistrat</string>
     <string name="osmo_connect_to_my_nickname">Porecla mea</string>
     <string name="osmo_user_name">Utilizator</string>
-	<string name="color_red">roșu</string>
+	
 	<string name="rendering_value_pink_name">roz</string>
-	<string name="color_orange">portocaliu</string>
+	
 	<string name="rendering_value_brown_name">maro</string>
-	<string name="color_yellow">galben</string>
+	
 	<string name="color_lightblue">albastru deschis</string>
-	<string name="color_blue">albastru</string>
+	
 	<string name="color_green">verde</string>
 	
     <string name="osmo_edit_device">Schimbă proprietăți utilizator</string>

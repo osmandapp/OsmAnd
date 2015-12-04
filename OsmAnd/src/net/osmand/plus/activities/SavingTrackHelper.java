@@ -1,12 +1,9 @@
 package net.osmand.plus.activities;
 
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.text.format.DateFormat;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
@@ -25,10 +22,14 @@ import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 
 import org.apache.commons.logging.Log;
 
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.text.format.DateFormat;
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 public class SavingTrackHelper extends SQLiteOpenHelper {
 	
@@ -194,7 +195,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 					File fout = new File(dir, f + ".gpx"); //$NON-NLS-1$
 					if (!data.get(f).isEmpty()) {
 						WptPt pt = data.get(f).findPointToShow();
-						String fileName = f + "_" + new SimpleDateFormat("HH-mm_EEE").format(new Date(pt.time)); //$NON-NLS-1$						
+						String fileName = f + "_" + new SimpleDateFormat("HH-mm_EEE", Locale.US).format(new Date(pt.time)); //$NON-NLS-1$
 						fout = new File(dir, fileName + ".gpx"); //$NON-NLS-1$
 						int ind = 1;
 						while (fout.exists()) {

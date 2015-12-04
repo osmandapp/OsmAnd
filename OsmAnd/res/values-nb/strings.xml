@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <string name="rendering_attr_roadColors_description">Velg fargeskjema for veier:</string>
     <string name="rendering_attr_roadColors_name">Veifargeskjema</string>
     <string name="map_widget_show_destination_arrow">Vis retning til målet</string>
@@ -890,13 +889,13 @@
     <string name="fav_point_dublicate_message">Spesifisert favorittnavn er allerede i bruk og endres til %1$s for å unngå duplisering.</string>
     <string name="gpx_selection_point">Punkt %1$s</string>
     <string name="osmo_center_location">Sentrer på skjermen</string>
-    <string name="color_red">rød</string>
+    
     <string name="rendering_value_pink_name">rosa</string>
-    <string name="color_orange">orange</string>
+    
     <string name="rendering_value_brown_name">brun</string>
-    <string name="color_yellow">gul</string>
+    
     <string name="color_lightblue">lyseblå</string>
-    <string name="color_blue">blå</string>
+    
     <string name="color_green">grønn</string>
 
     <string name="osmo_group_info">Info</string>

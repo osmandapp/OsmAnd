@@ -1,4 +1,5 @@
 package net.osmand.plus.osmedit;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -16,6 +17,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
@@ -42,6 +44,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
@@ -308,6 +311,43 @@ public class EditPoiDialogFragment extends DialogFragment {
 		return dialog;
 	}
 
+	@Override
+	public void onResume() {
+		super.onResume();
+		getDialog().setOnKeyListener(new DialogInterface.OnKeyListener() {
+			@Override
+			public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+				if (keyCode == android.view.KeyEvent.KEYCODE_BACK) {
+					if (event.getAction() == KeyEvent.ACTION_DOWN) {
+						return true;
+					} else {
+						dismissCheckForChanges();
+						return true;
+					}
+				}
+				return false;
+			}
+		});
+	}
+
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		outState.putSerializable(TAGS_LIST, (Serializable) editPoiData.getTagValues());
+		super.onSaveInstanceState(outState);
+	}
+
+	@Override
+	public void show(FragmentManager manager, String tag) {
+		if (manager.findFragmentByTag(TAG) == null) {
+			super.show(manager, TAG);
+		}
+	}
+
+	@Override
+	public int show(FragmentTransaction transaction, String tag) {
+		throw new UnsupportedOperationException("Please use show(FragmentManager manager, String tag)");
+	}
+
 	private void trySave() {
 		if (TextUtils.isEmpty(poiTypeEditText.getText())) {
 			HashSet<String> tagsCopy = new HashSet<>();
@@ -331,7 +371,7 @@ public class EditPoiDialogFragment extends DialogFragment {
 		Node original = editPoiData.getEntity();
 		final boolean offlineEdit = mOpenstreetmapUtil instanceof OpenstreetmapLocalUtil;
 		Node node = new Node(original.getLatitude(), original.getLongitude(), original.getId());
-		OsmPoint.Action action = node.getId() == -1 ? OsmPoint.Action.CREATE : OsmPoint.Action.MODIFY;
+		OsmPoint.Action action = node.getId() < 0 ? OsmPoint.Action.CREATE : OsmPoint.Action.MODIFY;
 		for (Map.Entry<String, String> tag : editPoiData.getTagValues().entrySet()) {
 			if (tag.getKey().equals(EditPoiData.POI_TYPE_TAG)) {
 				final PoiType poiType = editPoiData.getAllTranslatedSubTypes().get(tag.getValue().trim().toLowerCase());
@@ -386,25 +426,6 @@ public class EditPoiDialogFragment extends DialogFragment {
 				}, getActivity(), mOpenstreetmapUtil);
 	}
 
-	@Override
-	public void onResume() {
-		super.onResume();
-		getDialog().setOnKeyListener(new DialogInterface.OnKeyListener() {
-			@Override
-			public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-				if (keyCode == android.view.KeyEvent.KEYCODE_BACK) {
-					if (event.getAction() == KeyEvent.ACTION_DOWN) {
-						return true;
-					} else {
-						dismissCheckForChanges();
-						return true;
-					}
-				}
-				return false;
-			}
-		});
-	}
-
 	private void dismissCheckForChanges() {
 		if (editPoiData.hasChangesBeenMade()) {
 			new AreYouSureDialogFragment().show(getChildFragmentManager(),
@@ -412,12 +433,6 @@ public class EditPoiDialogFragment extends DialogFragment {
 		} else {
 			dismiss();
 		}
-	}
-
-	@Override
-	public void onSaveInstanceState(Bundle outState) {
-		outState.putSerializable(TAGS_LIST, (Serializable) editPoiData.getTagValues());
-		super.onSaveInstanceState(outState);
 	}
 
 	public EditPoiData getEditPoiData() {

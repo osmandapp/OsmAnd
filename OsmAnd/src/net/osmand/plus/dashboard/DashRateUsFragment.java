@@ -1,6 +1,5 @@
 package net.osmand.plus.dashboard;
 
-import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -76,37 +76,31 @@ public class DashRateUsFragment extends DashBaseFragment {
 		public void onClick(View v) {
 			final OsmandSettings settings = getMyApplication().getSettings();
 			switch (state) {
-			case INITIAL_STATE:
-				state = RateUsBottomSheetDialog.FragmentState.USER_LIKES_APP;
+				case INITIAL_STATE:
+					state = RateUsBottomSheetDialog.FragmentState.USER_LIKES_APP;
 
-				header.setText(getResources().getString(R.string.rate_this_app));
-				subheader.setText(getResources().getString(R.string.rate_this_app_long));
-				positiveButton.setText(getResources().getString(R.string.shared_string_ok));
-				negativeButton.setText(getResources().getString(R.string.shared_string_no_thanks));
-				return;
-			case USER_LIKES_APP:
-				settings.RATE_US_STATE.set(RateUsBottomSheetDialog.RateUsState.LIKED);
-				Uri uri = Uri.parse(Version.marketPrefix(getMyApplication()) + getActivity().getPackageName());
-				Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
-				try {
+					header.setText(getResources().getString(R.string.rate_this_app));
+					subheader.setText(getResources().getString(R.string.rate_this_app_long));
+					positiveButton.setText(getResources().getString(R.string.shared_string_ok));
+					negativeButton.setText(getResources().getString(R.string.shared_string_no_thanks));
+					return;
+				case USER_LIKES_APP:
+					settings.RATE_US_STATE.set(RateUsBottomSheetDialog.RateUsState.LIKED);
+					Uri uri = Uri.parse(Version.marketPrefix(getMyApplication()) + getActivity().getPackageName());
+					Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
 					startActivity(goToMarket);
-				} catch (ActivityNotFoundException e) {
-					startActivity(new Intent(Intent.ACTION_VIEW,
-
-					Uri.parse(Version.marketPrefix(getMyApplication()) + getActivity().getPackageName())));
-				}
-				break;
-			case USER_DISLIKES_APP:
-				String email = getString(R.string.support_email);
-				settings.RATE_US_STATE.set(RateUsBottomSheetDialog.RateUsState.DISLIKED_WITH_MESSAGE);
-				settings.NUMBER_OF_APPLICATION_STARTS.set(0);
-				settings.LAST_DISPLAY_TIME.set(System.currentTimeMillis());
-				Intent sendEmail = new Intent(Intent.ACTION_SENDTO);
-				sendEmail.setType("text/plain");
-				sendEmail.setData(Uri.parse("mailto:" + email));
-				sendEmail.putExtra(Intent.EXTRA_EMAIL, email);
-				startActivity(sendEmail);
-				break;
+					break;
+				case USER_DISLIKES_APP:
+					String email = getString(R.string.support_email);
+					settings.RATE_US_STATE.set(RateUsBottomSheetDialog.RateUsState.DISLIKED_WITH_MESSAGE);
+					settings.NUMBER_OF_APPLICATION_STARTS.set(0);
+					settings.LAST_DISPLAY_TIME.set(System.currentTimeMillis());
+					Intent sendEmail = new Intent(Intent.ACTION_SENDTO);
+					sendEmail.setType("text/plain");
+					sendEmail.setData(Uri.parse("mailto:" + email));
+					sendEmail.putExtra(Intent.EXTRA_EMAIL, email);
+					startActivity(sendEmail);
+					break;
 			}
 			dashboard.refreshDashboardFragments();
 		}

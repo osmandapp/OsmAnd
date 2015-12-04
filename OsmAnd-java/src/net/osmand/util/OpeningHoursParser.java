@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 
+import gnu.trove.list.array.TIntArrayList;
+
 /**
  * Class used to parse opening hours
  * 
@@ -288,7 +290,22 @@ public class OpeningHoursParser {
 			}
 			return endTimes[0];
 		}
-		
+
+		/**
+		 * get all start times as independent list
+		 * @return all start times
+		 */
+		public TIntArrayList getStartTimes() {
+			return new TIntArrayList(startTimes);
+		}
+
+		/**
+		 * get all end times as independent list
+		 * @return all end times
+		 */
+		public TIntArrayList getEndTimes() {
+			return new TIntArrayList(endTimes);
+		}
 		 
 		/**
 		 * Check if the weekday of time "cal" is part of this rule
@@ -925,5 +942,14 @@ public class OpeningHoursParser {
 
 		testOpened("05.10.2013 15:00", hours, true);
 		testOpened("05.10.2013 20:00", hours, false);
+
+		// Test time with breaks
+		hours = parseOpenedHours("Mo-Fr: 9:00-13:00, 14:00-18:00");
+		System.out.println(hours);
+		testOpened("02.12.2015 12:00", hours, true);
+		testOpened("02.12.2015 13:30", hours, false);
+		testOpened("02.12.2015 16:00", hours, true);
+
+		testOpened("05.12.2015 16:00", hours, false);
 	}
 }

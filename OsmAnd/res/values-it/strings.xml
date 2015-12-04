@@ -144,9 +144,9 @@
 
     <string name="local_indexes_cat_backup">Disattivato</string>
     <string name="local_indexes_cat_tts">Annunci vocali (TTS)</string>
-    <string name="local_indexes_cat_voice">Annunci vocali (registrata)</string>
+    <string name="local_indexes_cat_voice">Annunci vocali (registrati)</string>
 
-    <string name="local_indexes_cat_tile">Mappe online e a tasselli</string>
+    <string name="local_indexes_cat_tile">Mappe online/cache a tasselli</string>
     <string name="local_indexes_cat_map">Mappe standard (vettori)</string>
     <string name="local_indexes_cat_poi">Dati PDI</string>
     <string name="ttsvoice">Voce TTS</string>
@@ -976,10 +976,10 @@
     <string name="audionotes_plugin_name">Note audio/video</string>
 
 
-    <string name="audionotes_location_not_defined">La posizione da associare con la nota non è ancora definita. \"Usa posizione ...\" per assegnare una nota alla posizione specificata</string>
+    <string name="audionotes_location_not_defined">La posizione da associare con la nota non è ancora definita. \"Usa posizione …\" per assegnare una nota alla posizione specificata</string>
 
     <string name="osmand_srtm_short_description_80_chars">Plugin Osmand per le curve di livello offline</string>
-    <string name="osmand_srtm_long_description_1000_chars">"Questo plugin fornisce sia le curve di livello che lo strato ombreggiamento dei rilievi che possono essere visualizzate nelle mappe normali di OsmAnd. Questa funzionalità sarà molto apprezzata dagli atleti, dagli escursionisti, e tutti coloro che sono interessati all\'orografia e al paesaggio.\n\nI dati globali (fra i 70 gradi nord e 70 gradi sud) sono basati su misurazioni del SRTM (Shuttle Radar Topography Mission) e ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), lo strumento misuratore a bordo Terra, il satellite della NASA del sistema di osservazione della terra. ASTER è uno sforzo di cooperazione tra NASA, il Ministero dell\'Economia del Giappone, Commercio e Industria (METI) e sistema spaziale giapponese (J-spacesystems). "</string>
+    <string name="osmand_srtm_long_description_1000_chars">"Questo plugin fornisce sia le curve di livello che lo strato ombreggiamento dei rilievi che possono essere visualizzate nelle mappe standard di OsmAnd. Questa funzionalità sarà molto apprezzata dagli atleti, dagli escursionisti, e tutti coloro che sono interessati all\'orografia e al paesaggio.\n\nI dati globali (fra i 70 gradi nord e 70 gradi sud) sono basati su misurazioni del SRTM (Shuttle Radar Topography Mission) e ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), lo strumento misuratore a bordo Terra, il satellite della NASA del sistema di osservazione della terra. ASTER è uno sforzo di cooperazione tra NASA, il Ministero dell\'Economia del Giappone, Commercio e Industria (METI) e sistema spaziale giapponese (J-spacesystems). "</string>
 
 
     <string name="map_widget_distancemeasurement">Misurazione della distanza</string>
@@ -1363,13 +1363,13 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
 
     <string name="import_file_favourites">Salvare i punti come file GPX o importarli nei favoriti?</string>
 
-    <string name="color_red">rosso</string>
+    
     <string name="rendering_value_pink_name">rosa</string>
-    <string name="color_orange">arancione</string>
+    
     <string name="rendering_value_brown_name">marrone</string>
-    <string name="color_yellow">giallo</string>
+    
     <string name="color_lightblue">blu chiaro</string>
-    <string name="color_blue">blu</string>
+    
 
 
     <string name="osmo_edit_device">Cambia le proprietà dell\'utilizzatore</string>
@@ -1385,7 +1385,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="osmo_use_server_name">Nome registrato</string>
     <string name="osmo_connect_to_my_nickname">Mio nickname</string>
     <string name="osmo_user_name">Utente</string>
-    <string name="color_green">verde</string>
+    
 
     <string name="osmo_follow">Segui</string>
     <string name="osmo_user_joined">L\'utente %1$s è entrato nel gruppo %2$s</string>
@@ -1950,7 +1950,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="roads">Strade</string>
     <string name="shared_string_trip_recording">Registrazione viaggio</string>
     <string name="shared_string_navigation">Navigazione</string>
-    <string name="osmand_running_in_background">Avviato in backgroung</string>
+    <string name="osmand_running_in_background">Esecuzione in backgroung</string>
     <string name="default_speed_system_descr">Specifica l\'unità di misura della velocità</string>
     <string name="default_speed_system">Misurazione della velocità</string>
     <string name="nm">nm</string>
@@ -1993,7 +1993,7 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">Aggiorna tutto (%1$s MB)</string>
     <string name="free_downloads_used">Download gratuiti utilizzati</string>
-    <string name="free_downloads_used_description">Puoi impostare quanti download gratuiti hai utilizzato</string>
+    <string name="free_downloads_used_description">Mostra i download gratuiti utilizzati</string>
     <string name="share_geo">geo:</string>
     <string name="shared_string_send">Invia</string>
     <string name="simulate_initial_startup_descr">Imposta l\'indicatore del primo avvio dell\'app, mantiene tutte le altre impostazioni inalterate</string>
@@ -2047,10 +2047,10 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="lang_mk">Macedone</string>
     <string name="save_poi_without_poi_type_message">Vuoi davvero salvare il PDI senza specificarne il tipo?</string>
     <string name="context_menu_item_delete_waypoint">Cancellare il waypoint del GPX?</string>
-    <string name="context_menu_item_edit_waypoint">Modifica i waypoint del GPX</string>
+    <string name="context_menu_item_edit_waypoint">Modifica il waypoint del GPX</string>
     <string name="shared_string_location">Localizzazione</string>
     <string name="poi_context_menu_modify_osm_change">Modifica gli edit OSM</string>
-    <string name="access_from_map_description">"Il pulsante  del menu apre il pannello di controllo non il menu"</string>
+    <string name="access_from_map_description">"Il pulsante  del menu apre il pannello di controllo, non il menu"</string>
     <string name="access_from_map">Accedi dalla mappa</string>
     <string name="copied_to_clipboard">Copiato negli appunti</string>
     <string name="osm_save_offline">Salva offline</string>
@@ -2082,4 +2082,6 @@ Si consiglia di aggiungere uno o più punti intermedi per migliorarne le prestaz
     <string name="please_specify_poi_type_only_from_list">"Specifica il corretto tipo di PDI o salta questo passaggio "</string>
     <string name="routing_attr_avoid_stairs_name">Evita le scale</string>
 	<string name="routing_attr_avoid_stairs_description">Evita le scale</string>
-	</resources>
+	<string name="release_2_2">" • Nuova interfaccia utente variabile in base al contesto per le località selezionate sulla mappa e negli altri schermi\n\n • La schermata della mappa è avviata direttamente se non è selezionato \"Mostra il pannello di controllo all\'avvio\"\n\n • Configura quali e come vengono visualizzate le voci nel pannello di controllo\n\n • Salta il pannello di controllo se preferisci i controlli dell\'app tipo menu\n\n • Per scaricare mappe, regioni è possibile selezionarle direttamente tappando sulla mappa mondiale\n\n • La ricerca di PDI ora supporta interrogazioni più specifiche POI\n\n • Migliorata la modifica di PDI e dati OSM\n\n • Struttura e interfaccia di download dei dati della mappa rivista\n\n e altro… "</string>
+    <string name="dashboard_or_drawer_description">C\'è una nuova scelta per controllare l\'app attraverso il personalizzabile pannello di controllo o tramite il menu statico. La tua scelta può sempre essere cambiata nelle impostazioni del pannello di controllo.</string>
+</resources>

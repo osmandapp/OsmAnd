@@ -2,9 +2,9 @@
 
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
     android:paddingTop="16dp">
 
@@ -19,8 +19,8 @@
             android:id="@+id/tagEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Tag"
-            tools:text="asdf"/>
+            android:hint="@string/hint_tag"
+            tools:text="Tag text"/>
 
     </android.support.design.widget.TextInputLayout>
 
@@ -33,7 +33,7 @@
             android:id="@+id/valueEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Value"/>
+            android:hint="@string/hint_value"/>
 
     </android.support.design.widget.TextInputLayout>
 
@@ -43,5 +43,6 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_gravity="bottom"
+        android:contentDescription="@string/shared_string_delete"
         tools:src="@drawable/ic_action_close_dark"/>
 </LinearLayout>

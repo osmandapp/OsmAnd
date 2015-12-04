@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="shared_string_my_places">Meus locais</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="shared_string_my_places">Meus locais</string>
 	<string name="days_behind">dias atrás</string>
 	<string name="watch">Ver</string>
 	<string name="rendering_attr_pisteGrooming_name">Pista de preparação</string>
@@ -461,13 +460,13 @@
     <string name="osmo_use_server_name">Nome registrado</string>
     <string name="osmo_connect_to_my_nickname">Meu apelido</string>
     <string name="osmo_user_name">Usuário</string>
-	<string name="color_red">vermelho</string>
+	
 	<string name="rendering_value_pink_name">rosa</string>
-	<string name="color_orange">laranja</string>
+	
 	<string name="rendering_value_brown_name">marrom</string>
-	<string name="color_yellow">amarelo</string>
+	
 	<string name="color_lightblue">azul claro</string>
-	<string name="color_blue">azul</string>
+	
 	<string name="color_green">verde</string>
 	
     <string name="osmo_edit_device">Alterar as propriedades do usuário</string>
@@ -788,7 +787,7 @@
     <string name="recording_default_name">Gravando</string>
     <string name="map_widget_av_notes">Notas de áudio/vídeo</string>
     <string name="map_widget_distancemeasurement">Medição de distância</string>
-    <string name="audionotes_location_not_defined">Local para associar com a nota ainda não está definido. \"Usar posição...\" para atribuir uma nota para o local especificado</string>
+    <string name="audionotes_location_not_defined">Local para associar com a nota ainda não está definido. \"Usar posição…\" para atribuir uma nota para o local especificado</string>
     <string name="map_widget_audionotes">Notas de áudio</string>
     <string name="index_srtm_parts">peças</string>
     <string name="download_select_map_types">Outros mapas</string>
@@ -1814,7 +1813,7 @@
     <string name="access_from_map">Acessar a partir do mapa</string>
     <string name="show_on_start_description">\'Desligado\' lança diretamente para a tela do mapa</string>
     <string name="copied_to_clipboard">Copiado para a área de transferência</string>
-    <string name="release_2_2">" • Nova interface do usuário sensível ao contexto, ao tocar locais no mapa ou em outras telas\n\n • Tela do mapa é agora lançada diretamente, a menos que \'Mostrar painel de controle no início\' esteja selecionado\n\n • Configure quais e de que forma os cartões são exibidos no painel de controle\n\n • Desative o painel de controle, se preferir um controle baseado em menus\n\n • Para baixar mapas, as regiões podem ser selecionadas diretamente, tocando no mapa do mundo\n\n • Pesquisa por \'Pontos de interesse\' agora oferece suporte a consultas mais específicas\n\n • Melhoria nos \'Pontos de interesse\' e funcionalidades de edição OSM\n\n • Reformulação de estrutura e de interface para baixa dados de mapa.\n\n e mais... "</string>
+    <string name="release_2_2">" • Nova interface do usuário sensível ao contexto, ao tocar locais no mapa ou em outras telas\n\n • Tela do mapa é agora lançada diretamente, a menos que \'Mostrar painel de controle no início\' esteja selecionado\n\n • Configure quais e de que forma os cartões são exibidos no painel de controle\n\n • Desative o painel de controle, se preferir um controle baseado em menus\n\n • Para baixar mapas, as regiões podem ser selecionadas diretamente, tocando no mapa do mundo\n\n • Pesquisa por \'Pontos de interesse\' agora oferece suporte a consultas mais específicas\n\n • Melhoria nos \'Pontos de interesse\' e funcionalidades de edição OSM\n\n • Reformulação de estrutura e de interface para baixa dados de mapa.\n\n e mais… "</string>
     <string name="access_from_map_description">O botão menu lança o painel de controle, não o menu</string>
     <string name="osm_save_offline">Salvar offline</string>
     <string name="osm_edit_modified_poi">POI no OSM modificado</string>
