@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="send_files_to_osm">GPX fájl küldése OSM-re?</string>
     <string name="gpx_visibility_txt">Láthatóság</string>
     <string name="gpx_tags_txt">Címkék</string>
@@ -1947,7 +1948,7 @@
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">Összes frissítése (%1$s MB)</string>
     <string name="free_downloads_used">Elhasznált ingyenes letöltés</string>
-    <string name="free_downloads_used_description">Beállíthatod, mennyi ingyenes letöltést használtál</string>
+    <string name="free_downloads_used_description">Megjeleníti a használt ingyenes letöltéseket</string>
     <string name="simulate_initial_startup_descr">Az első indítást jelző flag beállítása, a többi beállítás változatlan marad</string>
     <string name="simulate_initial_startup">Alkalmazás első indításának szimulálása</string>
     <string name="share_geo">geo:</string>
@@ -2035,4 +2036,17 @@
     <string name="use_drawer_btn">Menü használata</string>
     <string name="dashboard_or_drawer_title">Menü működés meghatározása</string>
     <string name="dashboard_or_drawer_description">Eldöntheted, hogy az alkalmazást az interaktív műszerfalon, vagy a statikus oldalsáv menün keresztül szeretnéd vezérelni. A működést bármikor módosíthatod a műszerfal beállításokban.</string>
-</resources>
+<string name="shared_string_near">Közel</string>
+    <string name="shared_string_hide">Elrejtés</string>
+    <string name="av_video_quality_low">Legalacsonyabb felbontás</string>
+    <string name="av_video_quality_high">Legmagasabb felbontás</string>
+    <string name="av_video_quality">Videokimenet minősége</string>
+    <string name="av_video_quality_descr">Videokimenet minőségének kiválasztása</string>
+    <string name="av_audio_format">Hangkimenet formátuma</string>
+    <string name="av_audio_format_descr">Hangkimenet formátumának kiválasztása</string>
+    <string name="av_audio_bitrate">Hang bitsebessége</string>
+    <string name="av_audio_bitrate_descr">Hang bitsebességének kiválasztása</string>
+    <string name="routing_attr_avoid_stairs_name">Lépcsők elkerülése</string>
+	<string name="routing_attr_avoid_stairs_description">Lépcsők elkerülése</string>
+	<string name="routing_attr_avoid_borders_name">Határátlépés elkerülése</string>
+	</resources>

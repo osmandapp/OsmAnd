@@ -2032,4 +2032,14 @@
     <string name="routing_attr_avoid_stairs_name">Izogni se stopnicam</string>
 	<string name="routing_attr_avoid_stairs_description">Izogni se stopnicam</string>
 	<string name="routing_attr_avoid_borders_name">Izogni se mejnim prehodom</string>
-	</resources>
+	<string name="shared_string_near">V bližini</string>
+    <string name="shared_string_hide">Skrij</string>
+    <string name="av_video_quality_low">Najnižja ločljivost</string>
+    <string name="av_video_quality_high">Najvišja ločljivost</string>
+    <string name="av_video_quality">Kakovost odvoda videa</string>
+    <string name="av_video_quality_descr">Izbor kakovosti odvoda videa</string>
+    <string name="av_audio_format">Zapis odvoda zvoka</string>
+    <string name="av_audio_format_descr">Izbor zapisa odvoda zvoka</string>
+    <string name="av_audio_bitrate">Bitna hitrost zvoka</string>
+    <string name="av_audio_bitrate_descr">Izbor bitne hitrosti zvoka</string>
+    </resources>
