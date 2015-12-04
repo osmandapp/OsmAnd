@@ -10,6 +10,7 @@
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
 
+	<string name="shared_string_near">Near</string>
     <string name="shared_string_hide">Hide</string>
     <string name="av_video_quality_low">Lowest resolution</string>
     <string name="av_video_quality_high">Highest resolution</string>

@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="offline_edition">Modifications hors-ligne</string>
     <string name="offline_edition_descr">Toujours utiliser l\'édition hors-ligne</string>
 
@@ -2129,4 +2130,14 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
 	<string name="routing_attr_avoid_stairs_description">Éviter les escaliers</string>
 	<string name="release_2_2">" • Nouveaux menus contextuels sur un point de la carte\n\n • Choix de l\'affichage au démarrage (tableau de bord ou carte)\n\n • Personnalisation du contenu du tableau de bord\n\n • Possibilité d\'ignorer le tableau de bord et de n\'utiliser que les menus\n\n • Téléchargement des cartes des régions en appuyant directement sur la carte mondiale\n\n • Amélioration de la recherche des PI (Point d\'Intérêt)\n\n • Amélioration des PI (Point d\'Intérêt) et des contributions OSM (Open Street Map)\n\n • Refonte du téléchargement des cartes\n\n et bien plus encore … "</string>
     <string name="poi_context_menu_modify_osm_change">Modifier la contribution OSM</string>
+    <string name="shared_string_near">Proche</string>
+    <string name="shared_string_hide">Masquer</string>
+    <string name="av_video_quality_low">Résolution plus basse</string>
+    <string name="av_video_quality_high">Résolution plus élevée</string>
+    <string name="av_video_quality">Qualité de la sortie vidéo</string>
+    <string name="av_video_quality_descr">Sélectionnez la qualité de la sortie vidéo</string>
+    <string name="av_audio_format">Format de la sortie audio</string>
+    <string name="av_audio_format_descr">Sélectionnez le format de la sortie audio</string>
+    <string name="av_audio_bitrate">Bitrate audio</string>
+    <string name="av_audio_bitrate_descr">Sélectionnez le bitrate audio</string>
     </resources>

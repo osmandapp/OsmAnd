@@ -846,7 +846,6 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 					int cameraOrientation = getCamOrientation(mapActivity, Camera.CameraInfo.CAMERA_FACING_BACK);
 					cam.setDisplayOrientation(cameraOrientation);
 					parameters.set("rotation", cameraOrientation);
-					//parameters.setPreviewSize(recordingMenu.getViewfinderHeight(), recordingMenu.getViewfinderWidth());
 					cam.setParameters(parameters);
 					cam.setPreviewDisplay(holder);
 					cam.startPreview();
@@ -856,7 +855,10 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 				} catch (Exception e) {
 					logErr(e);
+					closeRecordingMenu();
 					closeCamera();
+					finishRecording();
+					return;
 				}
 
 
@@ -1125,11 +1127,11 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 						int cameraOrientation = getCamOrientation(mapActivity, Camera.CameraInfo.CAMERA_FACING_BACK);
 						cam.setDisplayOrientation(cameraOrientation);
 						parameters.set("rotation", cameraOrientation);
-						if (cameraOrientation == 0 || cameraOrientation == 180) {
-							parameters.setPreviewSize(recordingMenu.getViewfinderWidth(), recordingMenu.getViewfinderHeight());
-						} else {
-							parameters.setPreviewSize(recordingMenu.getViewfinderHeight(), recordingMenu.getViewfinderWidth());
-						}
+//						if (cameraOrientation == 0 || cameraOrientation == 180) {
+//							parameters.setPreviewSize(recordingMenu.getViewfinderWidth(), recordingMenu.getViewfinderHeight());
+//						} else {
+//							parameters.setPreviewSize(recordingMenu.getViewfinderHeight(), recordingMenu.getViewfinderWidth());
+//						}
 						cam.setParameters(parameters);
 						cam.setPreviewDisplay(holder);
 						cam.startPreview();
@@ -1138,7 +1140,9 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 						}
 					} catch (Exception e) {
 						logErr(e);
+						closeRecordingMenu();
 						closeCamera();
+						finishRecording();
 						e.printStackTrace();
 					}
 				}
@@ -1199,7 +1203,9 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				try {
 					cam.takePicture(null, null, new AudioVideoPhotoHandler(lastTakingPhoto));
 				} catch (RuntimeException e) {
+					closeRecordingMenu();
 					closeCamera();
+					finishRecording();
 				}
 			}
 		}
@@ -1256,9 +1262,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			SHOW_RECORDINGS.set(true);
 			mapActivity.getMapView().refreshMap();
 			updateWidgetIcon(recordControl);
-			recordingMenu.hide();
-			recordingMenu = null;
-			restoreScreenOrientation();
+			closeRecordingMenu();
 		}
 	}
 
@@ -1491,6 +1495,21 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		});
 	}
 
+	private void closeRecordingMenu() {
+		if (mapActivity != null) {
+			mapActivity.runOnUiThread(new Runnable() {
+				@Override
+				public void run() {
+					if (recordingMenu != null) {
+						recordingMenu.hide();
+						recordingMenu = null;
+					}
+					restoreScreenOrientation();
+				}
+			});
+		}
+	}
+
 	public void playRecording(final Context ctx, final Recording r) {
 		if (r.isVideo()) {
 			Intent vint = new Intent(Intent.ACTION_VIEW);
@@ -1623,17 +1642,9 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			} catch (Exception error) {
 				logErr(error);
 			} finally {
-				if (mapActivity != null) {
-					mapActivity.runOnUiThread(new Runnable() {
-						@Override
-						public void run() {
-							recordingMenu.hide();
-							recordingMenu = null;
-							restoreScreenOrientation();
-						}
-					});
-				}
+				closeRecordingMenu();
 				closeCamera();
+				finishRecording();
 			}
 		}
 	}
