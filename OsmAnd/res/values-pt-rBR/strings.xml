@@ -1948,4 +1948,5 @@
     <string name="av_audio_format_descr">Selecionar o formato de saída de áudio</string>
     <string name="av_audio_bitrate">Bitrate de áudio</string>
     <string name="av_audio_bitrate_descr">Selecionar o bitrate de áudio</string>
+    <string name="shared_string_near">Perto</string>
     </resources>
