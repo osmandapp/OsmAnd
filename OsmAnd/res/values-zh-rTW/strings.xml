@@ -2017,4 +2017,11 @@
     <string name="routing_attr_avoid_stairs_name">避開樓梯</string>
 	<string name="routing_attr_avoid_stairs_description">避開樓梯</string>
 	<string name="routing_attr_avoid_borders_name">避開跨越邊界</string>
-	</resources>
+	<string name="shared_string_hide">隱藏</string>
+    <string name="av_video_quality_low">最低解析度</string>
+    <string name="av_video_quality_high">最高解析度</string>
+    <string name="av_video_quality">視訊輸出品質</string>
+    <string name="av_video_quality_descr">選擇視訊輸出品質</string>
+    <string name="av_audio_format">音訊輸出格式</string>
+    <string name="av_audio_format_descr">選擇音訊輸出格式</string>
+    </resources>
