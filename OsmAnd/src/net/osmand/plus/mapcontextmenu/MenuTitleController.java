@@ -171,6 +171,11 @@ public abstract class MenuTitleController {
 							}
 							
 							streetStr = geocodingResult;
+
+							if (!Algorithms.isEmpty(streetStr) && object.getDistance() > 100) {
+								streetStr = getMapActivity().getString(R.string.shared_string_near)+" " +streetStr
+							}
+
 							if (!Algorithms.isEmpty(streetStr)) {
 								MenuController menuController = getMenuController();
 								if (menuController == null || menuController.displayStreetNameInTitle()) {
