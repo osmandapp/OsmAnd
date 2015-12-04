@@ -1943,4 +1943,9 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="shared_string_hide">Skryť</string>
     <string name="av_video_quality_low">Najnižšie rozlíšenie</string>
     <string name="av_video_quality_high">Najvyššie rozlíšenie</string>
+    <string name="av_video_quality">Kvalita videovýstupu</string>
+    <string name="av_video_quality_descr">Zvoľte kvalitu videa</string>
+    <string name="av_audio_format">Formát zvukového výstupu</string>
+    <string name="av_audio_format_descr">Zvoľte formát zvuku</string>
+    <string name="av_audio_bitrate">Bitový tok zvuku</string>
     </resources>
