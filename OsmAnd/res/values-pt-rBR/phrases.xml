@@ -2229,4 +2229,164 @@
 	<string name="poi_tomb_pyramid">Tipo: pirâmide</string>
 
 	<string name="poi_tomb_mausoleum">Tipo: mausoléu</string>
+	<string name="poi_tomb_sarcophagus">Tipo: sarcófago</string>
+	<string name="poi_historic_civilization_ancient_roman">Civilização: roma antiga (753 a.C. – 284 d.C.)</string>
+	<string name="poi_historic_civilization_nuragic">Civilização: nuráguica (XVIII a.C. – II d.C.)</string>
+	<string name="poi_historic_civilization_etruscan">Civilização: etrusca (XII – VI a.C.)</string>
+	<string name="poi_historic_civilization_prehistoric">Civilização: pré-histórica</string>
+	<string name="poi_historic_civilization_ancient_greek">Civilização: grega antiga</string>
+	<string name="poi_historic_civilization_roman">Civilização: romana</string>
+	<string name="poi_historic_civilization_byzantine">Civilização: bizantina (285 d.C. – 1453 d.C.)</string>
+	<string name="poi_historic_civilization_imperial_chinese">Civilização: imperial chinês (221 a.C. – 1911 d.C.)</string>
+	<string name="poi_historic_civilization_ancient_egyptian">Civilização: egípcia antiga (até 332 a.C.)</string>
+	<string name="poi_historic_civilization_celtic">Civilização: celta</string>
+	<string name="poi_historic_civilization_western_roman">Civilização: romana ocidental (285 d.C – 476 d.C.)</string>
+	<string name="poi_historic_civilization_mycenaean">Civilização: micênica</string>
+	<string name="poi_historic_civilization_hernici">Civilização: hérnicos</string>
+	<string name="poi_historic_civilization_greek_egyptian">Civilização: grego-egípcia (332 a.C. – 30 a.C.)</string>
+	<string name="poi_historic_civilization_roman_and_byzantine_egyptian">Civilização: romana e egípcio bizantina</string>
+	<string name="poi_historic_civilization_helladic">Civilização: heládica</string>
+	<string name="poi_historic_civilization_cycladic">Civilização: cíclades</string>
+	<string name="poi_historic_civilization_minoan">Civilização: minóica</string>
+	<string name="poi_historic_civilization_dacian">Civilização: dácios</string>
+	<string name="poi_historic_civilization_tiahuanacota">Civilization: tiahuanaco</string>
+
+	<string name="poi_animal_training">Treinamento animal</string>
+	<string name="poi_animal_training_dog">Treinamento canino</string>
+	<string name="poi_animal_training_horse">Treinamento equino</string>
+
+	<string name="poi_horse_yes">Permitido cavalos</string>
+	<string name="poi_horse_no">Proibido cavalos</string>
+	<string name="poi_animal_yes">Permitido animais</string>
+	<string name="poi_animal_no">Proibido animais</string>
+
+	<string name="poi_historic_period_nuragic">Período histórico: nuráguico</string>
+	<string name="poi_historic_period_stone_bronze_undetermined">Período histórico: idade da pedra / idade do bronze (indeterminado)</string>
+	<string name="poi_historic_period_bronze_age">Período histórico: idade do bronze</string>
+	<string name="poi_historic_period_principate">Período histórico: principado (27 a.C. – 284 d.C.)</string>
+	<string name="poi_historic_period_classical_greece">Período histórico: Grécia clássica (V – IV a.C.)</string>
+	<string name="poi_historic_period_archaic_greece">Período histórico: Grécia arcaica</string>
+	<string name="poi_historic_period_iron_age">Período histórico: idade do ferro</string>
+	<string name="poi_historic_period_roman_republic">Período histórico: República romana (508 – 27 a.C.)</string>
+	<string name="poi_historic_period_hellenistic_greece">Período histórico: Grécia helenística</string>
+	<string name="poi_historic_period_new_kingdom">Período histórico: império novo (1550 – 1069 a.C.)</string>
+	<string name="poi_historic_period_middle_kingdom">Período histórico: império médio (2055 – 1650 a.C.)</string>
+	<string name="poi_historic_period_predynastic_egypt">Período histórico: Egito pré-dinástico</string>
+	<string name="poi_historic_period_early_dynastic_period">Período histórico: período arcaico (3100 – 2686 a.C.)</string>
+	<string name="poi_historic_period_old_kingdom">Período histórico: império antigo (2686 – 2181 a.C.)</string>
+	<string name="poi_historic_period_first_intermediate_period">Período histórico: primeiro período intermediário (2181 – 2055 a.C.)</string>
+	<string name="poi_historic_period_second_intermediate_period">Período histórico: segundo período intermediário (1650 – 1550 a.C.)</string>
+	<string name="poi_historic_period_third_intermediate_period">"Período histórico: terceiro período intermediário (1069 – 664 a.C.) "</string>
+	<string name="poi_historic_period_first_persian_period">Período histórico: primeiro período persa</string>
+	<string name="poi_historic_period_late_period">Período histórico: último período (664 – 332 a.C.)</string>
+	<string name="poi_historic_period_second_persian_period">Período histórico: segundo período persa</string>
+	<string name="poi_historic_period_alexander_the_great">Período histórico: Alexandre, o Grande</string>
+	<string name="poi_historic_period_ptolemaic_egypt">Período histórico: Egito ptolemaico (305 – 30 a.C.)</string>
+	<string name="poi_historic_period_christian_egypt">Período histórico: Egito cristão</string>
+	<string name="poi_historic_period_byzantine_egypt">Período histórico: Egito bizantino (30 a.C. – 641 d.C.)</string>
+	<string name="poi_historic_period_persian_occupation">Período histórico: ocupação persa</string>
+	<string name="poi_historic_period_greek_dark_ages">Período histórico: período homérico (1100 – 800 a.C.)</string>
+	<string name="poi_historic_period_roman_greece">Período histórico: Roma Grécia (146 a.C. – 330 d.C.)</string>
+	<string name="poi_historic_period_roman_kingdom">Período histórico: Império Romano (753 – 509 a.C.)</string>
+	<string name="poi_historic_period_dominate">Período histórico: dominato (285 – 476 d.C.)</string>
+	<string name="poi_historic_period_villager">Período histórico: aldeão (época I e II, 1580 a.C. – 133 d.C.)</string>
+	<string name="poi_historic_period_urban">Período histórico: urbano (época III, 133 – 374 d.C.)</string>
+	<string name="poi_historic_period_classical">Período histórico: clássico (época IV, 374 – 900 d.C.)</string>
+	<string name="poi_historic_period_imperial">Período histórico: imperial (época V, 900 – 1200 d.C.)</string>
+
+	<string name="poi_historic_era_paleolithic">Era histórica: paleolítico (2,6 milhões de anos – 10000 AP)</string>
+	<string name="poi_historic_era_mesolithic">Era histórica: mesolítico</string>
+	<string name="poi_historic_era_neolithic">Era histórica: neolítico</string>
+	<string name="poi_historic_era_chalcolithic">Era histórica: idade do cobre (milênios IV-III a.C.)</string>
+
+	<string name="poi_historic_stone">Pedra histórica</string>
+	<string name="poi_material_wood">Material: madeira</string>
+	<string name="poi_material_metal">Material: metal</string>
+	<string name="poi_material_reinforced_concrete">Material: concreto armado</string>
+	<string name="poi_material_concrete">Material: concreto</string>
+	<string name="poi_material_steel">Material: aço</string>
+	<string name="poi_material_stone">Material: pedra</string>
+	<string name="poi_material_masonry">Material: alvenaria</string>
+	<string name="poi_material_brick">Material: tijolo</string>
+	<string name="poi_material_plastic">Material: plástico</string>
+	<string name="poi_material_sandstone">Material: arenito</string>
+	<string name="poi_material_granite_stone">Material: pedra de granito</string>
+	<string name="poi_material_metal_wood">Material: metal;madeira</string>
+	<string name="poi_material_glass">Material: vidro</string>
+	<string name="poi_material_bronze">Material: bronze</string>
+	<string name="poi_material_earth">Material: terra</string>
+	<string name="poi_material_composite">Material: composto</string>
+	<string name="poi_material_limestone">Material: calcário</string>
+	<string name="poi_material_marble">Material: mármore</string>
+	<string name="poi_material_aluminium">Material: alumínio</string>
+
+	<string name="poi_site_type_megalith">Tipo: megálito</string>
+	<string name="poi_site_type_tumulus">Tipo: túmulo</string>
+	<string name="poi_site_type_fortification">Tipo: fortificação</string>
+	<string name="poi_site_type_settlement">Tipo: assentamento</string>
+	<string name="poi_site_type_city">Tipo: cidade</string>
+	<string name="poi_site_type_necropolis">Tipo: necrópole</string>
+	<string name="poi_site_type_petroglyph">Tipo: petróglifo</string>
+	<string name="poi_site_type_earthwork">Tipo: terraplenagem</string>
+	<string name="poi_megalith_type_menhir">Tipo de megálito: menir</string>
+	<string name="poi_megalith_type_dolmen">Tipo de megálito: dólmen</string>
+	<string name="poi_megalith_type_nuraghe">Tipo de megálito: nurague</string>
+	<string name="poi_megalith_type_stone_circle">Tipo de megálito: círculo de pedras</string>
+	<string name="poi_megalith_type_passage_grave">Tipo de megálito: tumba de passagem</string>
+	<string name="poi_fortification_type_hill_fort">Tipo de fortificação: colina</string>
+	<string name="poi_fortification_type_limes">Tipo de fortificação: limes</string>
+	<string name="poi_fortification_type_sconce">Tipo de fortificação: arandela</string>
+	<string name="poi_historic_farm">Fazenda histórica</string>
+	<string name="poi_historic_railway_station">Estação ferroviária histórica</string>
+
+	<string name="poi_club_freemasonry">Loja maçônica</string>
+	<string name="poi_club_sailing">Clube de vela</string>
+	<string name="poi_club_scout">Clube de escoteiros</string>
+
+	<string name="poi_historic_gallows">Forca histórica</string>
+	<string name="poi_historic_railway">Ferrovia histórica</string>
+
+	<string name="poi_square">Praça</string>
+	<string name="poi_artist_name">Artista</string>
+	<string name="poi_sculptor">Escultor</string>
+
+	<string name="poi_building_type_church">Tipo de construção: igreja</string>
+	<string name="poi_building_type_chapel">Tipo de construção: capela</string>
+	<string name="poi_building_type_mosque">Tipo de construção: mesquita</string>
+	<string name="poi_building_type_temple">Tipo de construção: templo</string>
+	<string name="poi_building_type_cathedral">Tipo de construção: catedral</string>
+	<string name="poi_building_type_monastery">Tipo de construção: mosteiro</string>
+	<string name="poi_building_type_basilica">Tipo de construção: basílica</string>
+	<string name="poi_building_type_synagogue">Tipo de construção: sinagoga</string>
+	<string name="poi_building_type_shrine">Tipo de construção: santuário</string>
+
+	<string name="poi_cross">Cruz</string>
+	<string name="poi_prison_camp">Antigo campo de detenção</string>
+	<string name="poi_concentration_camp">Tipo: campo de concentração</string>
+	<string name="poi_pow_camp">Tipo: campo de prisioneiros de guerra</string>
+	<string name="poi_labor_camp">Tipo: campo de trabalho</string>
+	<string name="poi_concentration_camp_nazism">Tipo: nazi</string>
+	<string name="poi_concentration_camp_gulag">Tipo: gulag</string>
+
+	<string name="poi_temperature">Temperatura</string>
+	<string name="poi_bathing_yes">Banho: sim</string>
+	<string name="poi_bathing_no">Banho: não</string>
+
+	<string name="poi_boat_storage">Armazenamento de barco</string>
+
+	<string name="poi_conveying_yes">Transporte: Sim</string>
+
+	<string name="poi_bridge_ref">Ponte ref</string>
+	<string name="poi_tunnel_ref">Túnel ref</string>
+
+	<string name="poi_ref">Ref</string>
+
+	<string name="poi_cargo_passengers">Carga: passageiros</string>
+	<string name="poi_cargo_vehicle">Carga: veículos</string>
+	<string name="poi_cargo_bicycle">Carga: bicicletas</string>
+	<string name="poi_cargo_container">Carga: contêineres</string>
+	<string name="poi_cargo_hgv">Carga: veículos pesados</string>
+
+	<string name="poi_fitness_station">Estação de ginástica</string>
+
 	</resources>
