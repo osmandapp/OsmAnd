@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
     <string name="always_center_position_on_map">Ammustra sa positzione semper a su tzentru</string>
     <string name="voice_pref_title">Boghe</string>
     <string name="misc_pref_title">Mistura</string>
@@ -2027,4 +2028,13 @@
     <string name="routing_attr_avoid_stairs_name">Istransi sas iscalas</string>
 	<string name="routing_attr_avoid_stairs_description">Istransi sas iscalas</string>
 	<string name="routing_attr_avoid_borders_name">Istransi sa rugradura de sas fronteras</string>
-	</resources>
+	<string name="shared_string_near">A curtzu</string>
+    <string name="shared_string_hide">Cua</string>
+    <string name="av_video_quality_low">Risolutzione prus bassa</string>
+    <string name="av_video_quality_high">Risolutzione prus arta</string>
+    <string name="av_video_quality">Calidade de su vìdeo</string>
+    <string name="av_video_quality_descr">Ischerta sa calidade de su vìdeo</string>
+    <string name="av_audio_format">Formadu de s’àudio</string>
+    <string name="av_audio_format_descr">Ischerta su formadu de essida de s’àudio</string>
+    <string name="av_audio_bitrate">Bitrate àudio</string>
+    </resources>
