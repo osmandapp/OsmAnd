@@ -2140,4 +2140,5 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="av_audio_format_descr">Sélectionnez le format de la sortie audio</string>
     <string name="av_audio_bitrate">Bitrate audio</string>
     <string name="av_audio_bitrate_descr">Sélectionnez le bitrate audio</string>
-    </resources>
+    <string name="no_address_determined">Impossible de déterminer l\'adresse</string>
+	</resources>
