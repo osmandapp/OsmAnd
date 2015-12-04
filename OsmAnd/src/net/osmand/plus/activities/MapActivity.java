@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NotificationCompat.Builder;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.NotificationCompat;
@@ -95,7 +96,8 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class MapActivity extends AccessibleActivity implements DownloadEvents {
+public class MapActivity extends AccessibleActivity implements DownloadEvents,
+		ActivityCompat.OnRequestPermissionsResultCallback {
 	private static final int SHOW_POSITION_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 1;
 	private static final int LONG_KEYPRESS_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 2;
 	private static final int LONG_KEYPRESS_DELAY = 500;
@@ -176,7 +178,7 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents {
 
 		mapView = new OsmandMapTileView(this, getWindow().getDecorView().getWidth(),
 				getWindow().getDecorView().getHeight());
-		if(app.getAppInitializer().checkAppVersionChanged(this)) {
+		if (app.getAppInitializer().checkAppVersionChanged(this)) {
 			new WhatsNewDialogFragment().show(getSupportFragmentManager(), null);
 		}
 		mapActions = new MapActivityActions(this);
@@ -668,7 +670,7 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents {
 			}
 		}
 		wakeLockHelper.onStop(this);
-		if(getMyApplication().getNavigationService() == null) {
+		if (getMyApplication().getNavigationService() == null) {
 			getMyApplication().getNotificationHelper().removeServiceNotificationCompletely();
 		}
 		super.onStop();
@@ -687,7 +689,6 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents {
 		if (atlasMapRendererView != null) {
 			atlasMapRendererView.handleOnDestroy();
 		}
-		
 	}
 
 	private void cancelNotification() {
@@ -1052,6 +1053,12 @@ public class MapActivity extends AccessibleActivity implements DownloadEvents {
 		if (getMapLayers().getDownloadedRegionsLayer().updateObjects()) {
 			refreshMap();
 		}
+	}
+
+	@Override
+	public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+		OsmandPlugin.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 	}
 
 	private class ScreenOffReceiver extends BroadcastReceiver {

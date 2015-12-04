@@ -1,8 +1,10 @@
 package net.osmand.plus;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.hardware.GeomagneticField;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -17,8 +19,11 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.widget.Toast;
+
 import net.osmand.GeoidAltitudeCorrection;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
@@ -40,7 +45,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class OsmAndLocationProvider implements SensorEventListener {
-	
+
+	public static final int REQUEST_LOCATION_PERMISSION = 100;
+
 	private static final String SIMULATED_PROVIDER = "OsmAnd";
 
 
@@ -76,7 +83,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 
 	private static final boolean USE_KALMAN_FILTER = true;
 	private static final float KALMAN_COEFFICIENT = 0.04f;
-	
+
 	float avgValSin = 0;
 	float avgValCos = 0;
 	float lastValSin = 0;
@@ -86,7 +93,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private int previousCompassIndA = 0;
 	private int previousCompassIndB = 0;
 	private boolean inUpdateValue = false;
-	
+
 	private Float heading = null;
 
 	// Current screen orientation
@@ -94,22 +101,22 @@ public class OsmAndLocationProvider implements SensorEventListener {
 
 	private OsmandApplication app;
 	private OsmandSettings settings;
-	
+
 	private NavigationInfo navigationInfo;
 	private CurrentPositionHelper currentPositionHelper;
 	private OsmAndLocationSimulation locationSimulation;
 
 	private net.osmand.Location location = null;
-	
-	private GPSInfo gpsInfo = new GPSInfo(); 
+
+	private GPSInfo gpsInfo = new GPSInfo();
 
 	private List<OsmAndLocationListener> locationListeners = new ArrayList<OsmAndLocationProvider.OsmAndLocationListener>();
 	private List<OsmAndCompassListener> compassListeners = new ArrayList<OsmAndLocationProvider.OsmAndCompassListener>();
 	private Listener gpsStatusListener;
-	private float[] mRotationM =  new float[9];
+	private float[] mRotationM = new float[9];
 	private OsmandPreference<Boolean> USE_MAGNETIC_FIELD_SENSOR_COMPASS;
 	private OsmandPreference<Boolean> USE_FILTER_FOR_COMPASS;
-	private static final long AGPS_TO_REDOWNLOAD  = 16 * 60 * 60 * 1000; // 16 hours
+	private static final long AGPS_TO_REDOWNLOAD = 16 * 60 * 60 * 1000; // 16 hours
 
 
 	public class SimulationProvider {
@@ -118,14 +125,14 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		private QuadPoint currentPoint;
 		private net.osmand.Location startLocation;
 		private List<RouteSegmentResult> roads;
-		
-		
-		public void startSimulation(List<RouteSegmentResult> roads, 
-				net.osmand.Location currentLocation) {
+
+
+		public void startSimulation(List<RouteSegmentResult> roads,
+									net.osmand.Location currentLocation) {
 			this.roads = roads;
 			startLocation = new net.osmand.Location(currentLocation);
 			long ms = System.currentTimeMillis();
-			if(ms - startLocation.getTime() > 5000 ||
+			if (ms - startLocation.getTime() > 5000 ||
 					ms < startLocation.getTime()) {
 				startLocation.setTime(ms);
 			}
@@ -133,14 +140,14 @@ public class OsmAndLocationProvider implements SensorEventListener {
 			int px = MapUtils.get31TileNumberX(currentLocation.getLongitude());
 			int py = MapUtils.get31TileNumberY(currentLocation.getLatitude());
 			double dist = 1000;
-			for(int i = 0; i < roads.size(); i++) {
+			for (int i = 0; i < roads.size(); i++) {
 				RouteSegmentResult road = roads.get(i);
 				boolean plus = road.getStartPointIndex() < road.getEndPointIndex();
-				for(int j = road.getStartPointIndex() + 1; j <= road.getEndPointIndex(); ) {
+				for (int j = road.getStartPointIndex() + 1; j <= road.getEndPointIndex(); ) {
 					RouteDataObject obj = road.getObject();
-					QuadPoint proj = MapUtils.getProjectionPoint31(px, py, obj.getPoint31XTile(j-1), obj.getPoint31YTile(j-1), 
+					QuadPoint proj = MapUtils.getProjectionPoint31(px, py, obj.getPoint31XTile(j - 1), obj.getPoint31YTile(j - 1),
 							obj.getPoint31XTile(j), obj.getPoint31YTile(j));
-					double dd = MapUtils.squareRootDist31((int)proj.x, (int)proj.y, px, py);
+					double dd = MapUtils.squareRootDist31((int) proj.x, (int) proj.y, px, py);
 					if (dd < dist) {
 						dist = dd;
 						currentRoad = i;
@@ -151,26 +158,26 @@ public class OsmAndLocationProvider implements SensorEventListener {
 				}
 			}
 		}
-		
+
 		private float proceedMeters(float meters, net.osmand.Location l) {
-			for(int i = currentRoad; i < roads.size(); i++) {
+			for (int i = currentRoad; i < roads.size(); i++) {
 				RouteSegmentResult road = roads.get(i);
 				boolean firstRoad = i == currentRoad;
 				boolean plus = road.getStartPointIndex() < road.getEndPointIndex();
-				for(int j = firstRoad ? currentSegment : road.getStartPointIndex() + 1; j <= road.getEndPointIndex(); ) {
+				for (int j = firstRoad ? currentSegment : road.getStartPointIndex() + 1; j <= road.getEndPointIndex(); ) {
 					RouteDataObject obj = road.getObject();
-					int st31x = obj.getPoint31XTile(j-1);
-					int st31y = obj.getPoint31YTile(j-1);
+					int st31x = obj.getPoint31XTile(j - 1);
+					int st31y = obj.getPoint31YTile(j - 1);
 					int end31x = obj.getPoint31XTile(j);
 					int end31y = obj.getPoint31YTile(j);
 					boolean last = i == roads.size() - 1 && j == road.getEndPointIndex();
 					boolean first = firstRoad && j == currentSegment;
-					if(first) {
+					if (first) {
 						st31x = (int) currentPoint.x;
 						st31y = (int) currentPoint.y;
 					}
 					double dd = MapUtils.measuredDist31(st31x, st31y, end31x, end31y);
-					if(meters > dd && !last){
+					if (meters > dd && !last) {
 						meters -= dd;
 					} else {
 						int prx = (int) (st31x + (end31x - st31x) * (meters / dd));
@@ -184,32 +191,32 @@ public class OsmAndLocationProvider implements SensorEventListener {
 			}
 			return -1;
 		}
-		
+
 		/**
 		 * @return null if it is not available of far from boundaries
 		 */
 		public net.osmand.Location getSimulatedLocation() {
-			if(!isSimulatedDataAvailable()) {
+			if (!isSimulatedDataAvailable()) {
 				return null;
 			}
-			
+
 			net.osmand.Location loc = new net.osmand.Location(SIMULATED_PROVIDER);
 			loc.setSpeed(startLocation.getSpeed());
 			loc.setAltitude(startLocation.getAltitude());
 			loc.setTime(System.currentTimeMillis());
 			float meters = startLocation.getSpeed() * ((System.currentTimeMillis() - startLocation.getTime()) / 1000);
 			float proc = proceedMeters(meters, loc);
-			if(proc < 0 || proc >= 100){
+			if (proc < 0 || proc >= 100) {
 				return null;
 			}
 			return loc;
 		}
-		
+
 		public boolean isSimulatedDataAvailable() {
 			return startLocation != null && startLocation.getSpeed() > 0 && currentRoad >= 0;
 		}
 	}
-	
+
 	public OsmAndLocationProvider(OsmandApplication app) {
 		this.app = app;
 		navigationInfo = new NavigationInfo(app);
@@ -219,39 +226,41 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		currentPositionHelper = new CurrentPositionHelper(app);
 		locationSimulation = new OsmAndLocationSimulation(app, this);
 	}
-	
+
 	public void resumeAllUpdates() {
 		final LocationManager service = (LocationManager) app.getSystemService(Context.LOCATION_SERVICE);
-		if(app.getSettings().isInternetConnectionAvailable()) {
-			if(System.currentTimeMillis() - app.getSettings().AGPS_DATA_LAST_TIME_DOWNLOADED.get() > AGPS_TO_REDOWNLOAD) {
+		if (app.getSettings().isInternetConnectionAvailable()) {
+			if (System.currentTimeMillis() - app.getSettings().AGPS_DATA_LAST_TIME_DOWNLOADED.get() > AGPS_TO_REDOWNLOAD) {
 				//force an updated check for internet connectivity here before destroying A-GPS-data
-				if(app.getSettings().isInternetConnectionAvailable(true)) {
+				if (app.getSettings().isInternetConnectionAvailable(true)) {
 					redownloadAGPS();
 				}
 			}
 		}
-		service.addGpsStatusListener(getGpsStatusListener(service));
-		try {
-			service.requestLocationUpdates(LocationManager.GPS_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, gpsListener);
-		} catch (IllegalArgumentException e) {
-			Log.d(PlatformUtil.TAG, "GPS location provider not available"); //$NON-NLS-1$
-		}
-		// try to always ask for network provide : it is faster way to find location
-		
-		List<String> providers = service.getProviders(true);
-		if(providers == null) {
-			return;
-		}
-		for (String provider : providers) {
-			if (provider == null || provider.equals(LocationManager.GPS_PROVIDER)) {
-				continue;
-			}
+		if (isLocationPermissionAvailable(app)) {
+			service.addGpsStatusListener(getGpsStatusListener(service));
 			try {
-				NetworkListener networkListener = new NetworkListener();
-				service.requestLocationUpdates(provider, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, networkListener);
-				networkListeners.add(networkListener);
+				service.requestLocationUpdates(LocationManager.GPS_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, gpsListener);
 			} catch (IllegalArgumentException e) {
-				Log.d(PlatformUtil.TAG, provider + " location provider not available"); //$NON-NLS-1$
+				Log.d(PlatformUtil.TAG, "GPS location provider not available"); //$NON-NLS-1$
+			}
+			// try to always ask for network provide : it is faster way to find location
+
+			List<String> providers = service.getProviders(true);
+			if (providers == null) {
+				return;
+			}
+			for (String provider : providers) {
+				if (provider == null || provider.equals(LocationManager.GPS_PROVIDER)) {
+					continue;
+				}
+				try {
+					NetworkListener networkListener = new NetworkListener();
+					service.requestLocationUpdates(provider, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, networkListener);
+					networkListeners.add(networkListener);
+				} catch (IllegalArgumentException e) {
+					Log.d(PlatformUtil.TAG, provider + " location provider not available"); //$NON-NLS-1$
+				}
 			}
 		}
 	}
@@ -332,6 +341,9 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 
 	public net.osmand.Location getFirstTimeRunDefaultLocation() {
+		if (!isLocationPermissionAvailable(app)) {
+			return null;
+		}
 		LocationManager service = (LocationManager) app.getSystemService(Context.LOCATION_SERVICE);
 		List<String> ps = service.getProviders(true);
 		if(ps == null) {
@@ -914,4 +926,12 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		return true;
 	}
 
+	public static boolean isLocationPermissionAvailable(Context context) {
+		if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
+				!= PackageManager.PERMISSION_GRANTED) {
+			Toast.makeText(context, R.string.no_location_permission, Toast.LENGTH_LONG).show();
+			return false;
+		}
+		return true;
+	}
 }

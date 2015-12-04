@@ -211,6 +211,17 @@ public abstract class OsmandPlugin {
 	public void mapActivityScreenOff(MapActivity activity) {
 	}
 
+	public void handleRequestPermissionsResult(int requestCode, String[] permissions,
+											   int[] grantResults, MapActivity activity) {
+	}
+
+	public static final void onRequestPermissionsResult(int requestCode, String[] permissions,
+														int[] grantResults, MapActivity activity) {
+		for (OsmandPlugin plugin : getAvailablePlugins()) {
+			plugin.handleRequestPermissionsResult(requestCode, permissions, grantResults, activity);
+		}
+	}
+
 	public boolean destinationReached() {
 		return true;
 	}
@@ -443,5 +454,4 @@ public abstract class OsmandPlugin {
 			p.addMyPlacesTab(favoritesActivity, mTabs, intent);
 		}
 	}
-
 }
