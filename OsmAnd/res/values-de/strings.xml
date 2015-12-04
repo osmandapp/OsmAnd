@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
 	<string name="regions">Regionen</string>
 	<string name="region_maps">Regionsweite Karten</string>
 	<string name="world_maps">Weltweite Karten</string>
@@ -2195,4 +2196,13 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="shared_string_commit">Freigeben</string>
 	
     <string name="av_locations">Positionen</string>
+    <string name="shared_string_hide">verbergen</string>
+    <string name="av_video_quality_low">Niedrigste Auflösung</string>
+    <string name="av_video_quality_high">Höchste Auflösung</string>
+    <string name="av_video_quality">Video Qualität</string>
+    <string name="av_video_quality_descr">Wähle Video Qualität</string>
+    <string name="av_audio_format">Audio Ausgabeformat</string>
+    <string name="av_audio_format_descr">Wähle Audio Ausgabeformat</string>
+    <string name="av_audio_bitrate">Audio Bitrate</string>
+    <string name="av_audio_bitrate_descr">Wähle Audio Bitrate</string>
     </resources>
