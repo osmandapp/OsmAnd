@@ -2124,4 +2124,5 @@
     <string name="av_audio_format_descr">Vælg audio output-format</string>
     <string name="av_audio_bitrate">Audio bitrate</string>
     <string name="av_audio_bitrate_descr">Vælg audio bitrate</string>
+    <string name="shared_string_near">I nærheden af</string>
     </resources>
