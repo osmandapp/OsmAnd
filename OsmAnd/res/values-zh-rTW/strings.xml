@@ -2024,4 +2024,7 @@
     <string name="av_video_quality_descr">選擇視訊輸出品質</string>
     <string name="av_audio_format">音訊輸出格式</string>
     <string name="av_audio_format_descr">選擇音訊輸出格式</string>
+    <string name="av_audio_bitrate">音訊位元傳輸速率</string>
+    <string name="av_audio_bitrate_descr">選擇音訊位元傳輸速率</string>
+    <string name="shared_string_near">附近</string>
     </resources>
