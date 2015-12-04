@@ -151,7 +151,7 @@ public class GeocodingUtilities {
 		List<GeocodingResult> lst = new ArrayList<GeocodingUtilities.GeocodingResult>();
 		List<RouteSegmentPoint> listR = new ArrayList<BinaryRoutePlanner.RouteSegmentPoint>();
 		rp.findRouteSegment(lat, lon, ctx, listR);
-		dist = 0;
+		double dist = 0;
 		TLongHashSet set = new TLongHashSet();
 		Set<String> streetNames = new HashSet<String>();
 		for(RouteSegmentPoint p : listR) {
