@@ -138,13 +138,9 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	private DataTileManager<Recording> recordings = new DataTileManager<AudioVideoNotesPlugin.Recording>(14);
 	private Map<String, Recording> recordingByFileName = new LinkedHashMap<>();
 	private AudioNotesLayer audioNotesLayer;
-<<<<<<< HEAD
 
 	private MapActivity mapActivity;
 
-=======
-	private MapActivity mapActivity;
->>>>>>> 1b698ba9846114bf9705e622b68a0c00a09c2ea2
 	private static File mediaRecFile;
 	private static MediaRecorder mediaRec;
 	private File lastTakingPhoto;
@@ -769,7 +765,6 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		((AudioManager) activity.getSystemService(Context.AUDIO_SERVICE)).registerMediaButtonEventReceiver(
 				new ComponentName(activity, MediaRemoteControlReceiver.class));
 	}
-<<<<<<< HEAD
 
 	@Override
 	public void mapActivityPause(MapActivity activity) {
@@ -798,14 +793,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		recordingMenu = new AudioVideoNoteRecordingMenu(this);
 		recordingDone = false;
 		lockScreenOrientation();
-=======
-	
-	@Override
-	public void mapActivityPause(MapActivity activity) {
-		this.mapActivity = null;
->>>>>>> 1b698ba9846114bf9705e622b68a0c00a09c2ea2
 	}
-
 
 	public void recordVideo(final double lat, final double lon, final MapActivity mapActivity) {
 		if (AV_EXTERNAL_RECORDER.get()) {
@@ -1214,24 +1202,12 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		});
 	}
 
-<<<<<<< HEAD
 	public void stopRecording(final MapActivity mapActivity) {
 		if (!recordingDone) {
 			recordingDone = true;
 			if (!recordControl.isVisible()) {
 				recordControl.setExplicitlyVisible(false);
 				mapActivity.getMapLayers().getMapInfoLayer().recreateControls();
-=======
-	private void updateContextMenu(Recording rec) {
-		if (mapActivity != null) {
-			MapContextMenu menu = mapActivity.getContextMenu();
-			if (menu.isVisible()) {
-				if (rec != null) {
-					menu.show(new LatLon(rec.lat, rec.lon), audioNotesLayer.getObjectName(rec), rec);
-				} else {
-					menu.close();
-				}
->>>>>>> 1b698ba9846114bf9705e622b68a0c00a09c2ea2
 			}
 			stopCameraRecording(mapActivity);
 			SHOW_RECORDINGS.set(true);
