@@ -2073,7 +2073,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="simulate_initial_startup_descr">Ustaw flagę wskazującą pierwsze uruchomienie aplikacji, utrzymuje wszystkie inne ustawienia bez zmian</string>
     <string name="share_geo">wsp:</string>
     <string name="confirm_download_roadmaps">Pobrać mapę samochodową, nawet jeśli pobrano już zwykłą mapę?</string>
-    <string name="free_downloads_used_description">Możesz ustawić ile razy pobrań użyłeś</string>
+    <string name="free_downloads_used_description">Wyświetla ilość zużytych darmowych pobrań</string>
 
     <string name="show_on_start_description">\'Wyłącz\' bezpośrednio uruchamia ekran mapy</string>
     <string name="new_version">Nowa wersja</string>
@@ -2149,4 +2149,5 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="shared_string_near">Obok</string>
     <string name="routing_attr_avoid_stairs_name">Omijanie schodów</string>
 	<string name="routing_attr_avoid_stairs_description">Omijanie schodów</string>
+	<string name="routing_attr_avoid_borders_name">Omijanie przejść granicznych</string>
 	</resources>
