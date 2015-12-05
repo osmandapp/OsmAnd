@@ -4,8 +4,8 @@
     <string name="clear_intermediate_points">Изчистване на междинните точки</string>
     <string name="keep_intermediate_points">Запази междинните точки</string>
     <string name="new_directions_point_dialog">Вече имате настроени междинни точки.</string>
-    <string name="context_menu_item_directions_to">Упътване към</string>
-    <string name="context_menu_item_directions_from">Упътване от</string>
+    <string name="context_menu_item_directions_to">Упътване до тук</string>
+    <string name="context_menu_item_directions_from">Упътване от тук</string>
     <string name="route_descr_map_location">Карта: </string>
     <string name="route_to">За:</string>
     <string name="route_via">През:</string>
@@ -461,7 +461,7 @@
     <string name="direction_style_clockwise">По часовника (12 сектора)</string>
     <string name="settings_direction_style">Стил на посоката</string>
     <string name="settings_direction_style_descr">Изберете стил за относителните посоки при движение</string>
-    <string name="auto_announce_on">Старт на анонсирането</string>
+    <string name="auto_announce_on">Старт на гласовите напътствия</string>
     <string name="auto_announce_off">Край на анонсирането</string>
     <string name="scroll_map_by_gestures_descr">Преместване на картата с плъзгане по екрана</string>
     <string name="scroll_map_by_gestures">Движение на картата</string>
@@ -1057,7 +1057,7 @@
     <string name="search_address_building">Номер</string>
     <string name="search_address_building_option">Номер</string>
     <string name="search_address_street_option">Пресичаща улица</string>
-    <string name="search_tabs_location">Коорд.</string>
+    <string name="search_tabs_location">Място</string>
 
     <string name="context_menu_item_update_map">Обнови картата</string>
 
@@ -1402,7 +1402,7 @@
 
     <string name="rendering_attr_transportStops_name">Гари и спирки</string>
 
-    <string name="welcome_header">Здравейте!</string>
+    <string name="welcome_header">Добре дошли</string>
     <string name="storage_directory_internal_app">Вътрешна памет на приложението</string>
     <string name="storage_directory_multiuser">Споделено съхраняване</string>
     <string name="confirm_usage_speed_cameras">В много държави (Германия, Франция, Италия и други) използването на предупреждения за камери не е разрешено от закона. OsmAnd не поема никаква отговорност, ако Вие нарушавате съответния закон. Моля, изберете \'Да\', само ако имате право да използвате тази функция.</string>
@@ -1416,10 +1416,10 @@
     <string name="confirmation_to_clear_history">Искате ли да изчистите хронологията?</string>
     <string name="delay_to_start_navigation">Стартиране на навигацията след…</string>
     <string name="shared_string_go">Старт</string>
-    <string name="osmand_parking_overdue">просрочени</string>
-    <string name="action_create">Създаване на действие</string>
-    <string name="action_modify">Действие промяна</string>
-    <string name="action_delete">Действие изтриване</string>
+    <string name="osmand_parking_overdue">просрочено</string>
+    <string name="action_create">Създадено</string>
+    <string name="action_modify">Променено</string>
+    <string name="action_delete">Изтрито</string>
     <string name="osm_edits">OSM редакции</string>
     <string name="osmand_parking_hour">ч</string>
     <string name="osmand_parking_minute">мин</string>
@@ -1487,7 +1487,7 @@
     <string name="proxy_pref_descr">Настройка на прокси интернет комуникация</string>
     <string name="settings_privacy">Поверителност</string>
     <string name="points">Точки</string>
-    <string name="record_plugin_description">"Тази добавка активира възможността за ръчно или автоматично записване на изминатия път в GPX файл.\n\nЗаписаните следи могат да бъдат споделяни или да се изпращат към OSM. Спортистите могат да използват записаните следи за да проследяват своя напредък. Основните данни на следата можете да видите директно в OsmAnd, като междинни времена, средната скорост и т.н. По-късно можете да се анализирате следите в специални приложения за целта. "</string>
+    <string name="record_plugin_description">"Тази добавка позволява записване на изминатия път в GPX файл. Записът може да се активира чрез докосване на бутон на главния екран или автоматично при стартиране на навигацията.\n\nЗаписаните следи могат да бъдат споделяни или да се изпращат към OSM. Спортистите могат да използват записаните следи за да проследят своя напредък. Основните данни на следата можете да видите директно в OsmAnd, като междинни времена, средната скорост и т.н. По-късно можете да анализирате следите в специални приложения за целта. "</string>
     <string name="navigation_over_track">Стартиране на навигацията по маршрута?</string>
     <string name="save_track_to_gpx_globally_headline">Запис на следа при поискване</string>
 	<string name="osmo_group_information_desc">" - Всички създадени групи са публични! Ако искате да запазите анонимност, свържете устройствата директно чрез Tracker ids.\n - Частните групи са ограничени до 8 човека
@@ -1496,7 +1496,7 @@
 	<string name="gpx_selection_track">%1$s
 \nСледа %2$s</string>
     <string name="gpx_file_is_empty">Празен GPX файл</string>
-    <string name="osmo_connect_to_device_tracker_id">Tracker id</string>
+    <string name="osmo_connect_to_device_tracker_id">ID на трекер</string>
     <string name="osmo_plugin_name">OsMo (OsMo наблюдение)</string>
     <string name="get_plugin">Вземи</string>
     <string name="osmo_cancel_moving_target">Откажете подвижната цел</string>
@@ -1784,7 +1784,7 @@
     <string name="si_min_km">Минути на километър</string>
     <string name="si_min_m">Минути на миля</string>
     <string name="si_nm_h">Морски мили в час (възли)</string>
-    <string name="nm_h">nmh</string>
+    <string name="nm_h">възела</string>
     <string name="min_mile">мин/м</string>
     <string name="map_legend">Легенда на картата</string>
     <string name="contact_us">Свържете се с нас</string>
@@ -1794,7 +1794,7 @@
     <string name="m_s">м/сек</string>
     <string name="shared_string_trip_recording">Записване на изминатия път</string>
     <string name="shared_string_navigation">Навигация</string>
-    <string name="osmand_running_in_background">Работи във фонов режим</string>
+    <string name="osmand_running_in_background">Фонов режим</string>
     <string name="favourites_edit_dialog_title">Предпочитана информация</string>
     <string name="show_on_start">Да се показва при стартиране</string>
     <string name="copied_to_clipboard">Копирано</string>
