@@ -2482,4 +2482,10 @@
 	<string name="poi_health_specialty_radiology_yes">Especialidade médica: radiologia</string>
 	<string name="poi_health_specialty_psychiatry_yes">Especialidade médica: psiquiatria</string>
 	<string name="poi_health_specialty_neurology_yes">Especialidade médica: neurologia</string>
+	<string name="poi_health_specialty_dermatovenereology_yes">Especialidade médica: dermatovenereología</string>
+	<string name="poi_health_specialty_cardiology_yes">Especialidade médica: cardiologia</string>
+	<string name="poi_health_specialty_trauma_yes">Especialidade médica: traumatologia</string>
+	<string name="poi_health_specialty_biology_yes">Especialidade médica: biologia clínica</string>
+	<string name="poi_health_specialty_osteopathy_yes">Especialidade médica: osteopatia</string>
+	<string name="poi_health_specialty_anaesthetics_yes">Especialidade médica: anestesia</string>
 	</resources>
