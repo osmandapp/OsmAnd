@@ -178,6 +178,7 @@ public abstract class MenuTitleController {
 
 						}
 
+						//FIXME: "No address determined" supposed to replace "Address is not known yet" once reverse geocoding yields no result
 						if (Algorithms.isEmpty(streetStr)) {
 							streetStr = "No address determined";
 						}
