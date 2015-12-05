@@ -1828,7 +1828,6 @@
     <string name="shared_string_location">Местоположение</string>
     <string name="simulate_your_location_stop_descr">Спиране на симулацията на място</string>
     <string name="simulate_your_location_descr">Симулира с помощта на изчисления маршрут или записана GPX следа</string>
-    <string name="address_unknown">Адресът още не е известен</string>
     <string name="av_locations_descr">GPX файл с бележки</string>
     <string name="av_locations">Места</string>
     <string name="routing_attr_avoid_shuttle_train_name">Избягване на трансферен влак</string>

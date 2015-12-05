@@ -1980,7 +1980,6 @@ POIの更新は利用できません</string>
 	<string name="tab_title_advanced">拡張</string>
 	<string name="show_on_start">起動時に表示</string>
 	<string name="count_of_lines">表示数の選択</string>
-<string name="address_unknown">住所はまだ登録されていません</string>
     <string name="favorite_category_dublicate_message">指定したカテゴリ名は既に使用されています。別の名前を付けてください。</string>
     <string name="favorite_category_name">カテゴリ名</string>
     <string name="favorite_category_add_new_title">新しいカテゴリを追加</string>

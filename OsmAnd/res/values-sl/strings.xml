@@ -1886,7 +1886,6 @@
     <string name="show_gpx">Pokaži GPX</string>
     <string name="simulate_your_location_stop_descr">Zaustavi simuliranje položaja</string>
     <string name="simulate_your_location_descr">Simuliraj s shranjeno potjo GPX oziroma izračunano potjo</string>
-    <string name="address_unknown">Naslov še ni znan</string>
     <string name="show_on_start">Pokaži ob zagonu</string>
     <string name="count_of_lines">Seštevek vrstic</string>
     <string name="are_you_sure">Ali ste prepričani?</string>

@@ -1725,7 +1725,6 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="favourites_edit_dialog_title">Detalls del preferit</string>
     <string name="simulate_your_location_stop_descr">Atura la simulació de la vostra posició</string>
     <string name="simulate_your_location_descr">Simula utilitzant un GPX enregistrat o una ruta calculada</string>
-    <string name="address_unknown">L\'adreça encara no es coneix</string>
     <string name="favourites_context_menu_add">Afegeix un preferit</string>
     <string name="show_on_start">Mostra a l\'inici</string>
     <string name="count_of_lines">Recompte de línies</string>

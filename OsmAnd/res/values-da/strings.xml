@@ -1961,7 +1961,6 @@
     <string name="show_gpx">Vis GPX</string>
     <string name="count_of_lines">Antal linjer</string>
     <string name="show_on_start">Vis ved start</string>
-    <string name="address_unknown">Adressen kendes endnu ikke</string>
     <string name="unsaved_changes_will_be_lost">Eventuelle ikke-gemte ændringer vil gå tabt. Fortsæt?</string>
     <string name="are_you_sure">Sikker?</string>
     <string name="simulate_your_location_stop_descr">Stop simulering af position</string>

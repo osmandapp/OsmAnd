@@ -1867,7 +1867,6 @@
     <string name="show_gpx">顯示 GPX</string>
     <string name="count_of_lines">計算行數</string>
     <string name="show_on_start">在起始時顯示</string>
-    <string name="address_unknown">還不知道地址</string>
     <string name="are_you_sure">您確定嗎？</string>
     <string name="unsaved_changes_will_be_lost">任何未儲存的變更將會失去。要繼續嗎?</string>
     <string name="simulate_your_location_stop_descr">停止模擬您的位置</string>
