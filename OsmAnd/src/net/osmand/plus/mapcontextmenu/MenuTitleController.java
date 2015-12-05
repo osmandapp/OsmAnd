@@ -76,9 +76,9 @@ public abstract class MenuTitleController {
 		addressNotKnownStr = getMapActivity().getString(R.string.address_unknown);
 		acquireIcons();
 		acquireNameAndType();
-//		if (needStreetName()) {
+		if (needStreetName()) {
 			acquireStreetName();
-//		}
+		}
 	}
 
 	protected boolean needStreetName() {
