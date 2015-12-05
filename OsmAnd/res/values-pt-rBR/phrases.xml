@@ -2389,4 +2389,23 @@
 
 	<string name="poi_fitness_station">Estação de ginástica</string>
 
+	<string name="poi_castle_type_castrum">Tipo de castelo: castra</string>
+	<string name="poi_backcountry_yes">Acampamento em zona isolada</string>
+	<string name="poi_backcountry_no">Acampamento em zona isolada: não</string>
+	<string name="poi_ramp_stroller_yes">Rampa para rodas: sim</string>
+	<string name="poi_ramp_stroller_no">Rampa para rodas: não</string>
+	<string name="poi_step_count">Quantidade de degraus</string>
+	<string name="poi_step_condition_even">Condição dos degraus: regular</string>
+	<string name="poi_step_condition_uneven">Condição dos degraus: irregular</string>
+	<string name="poi_step_condition_rough">Condição dos degraus: acidentada</string>
+
+	<string name="poi_cairn">Moledro</string>
+
+	<string name="poi_tomb_rock_cut">Tipo: escavação em rocha</string>
+	<string name="poi_tomb_hypogeum">Tipo: hipogeu</string>
+	<string name="poi_tomb_vault">Tipo: catacumba</string>
+	<string name="poi_tomb_columbarium">Tipo: columbário</string>
+	<string name="poi_stone_type_conciliation_cross">Tipo: cruz de conciliação</string>
+	<string name="poi_stone_type_coat_of_arms">Tipo: brasão</string>
+
 	</resources>
