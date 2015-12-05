@@ -1949,4 +1949,6 @@
     <string name="av_audio_bitrate">Bitrate de áudio</string>
     <string name="av_audio_bitrate_descr">Selecionar o bitrate de áudio</string>
     <string name="shared_string_near">Perto</string>
+    <string name="no_address_found">Sem endereço determinado</string>
+	<string name="looking_up_address">Endereço procurado</string>
     </resources>
