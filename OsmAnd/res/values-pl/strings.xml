@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
   
   <string name="use_transparent_map_theme">Przezroczysty styl</string>
   <string name="native_library_not_supported">To urządzenie nie obsługuje biblioteki renderowania natywnego.</string>
@@ -2137,4 +2138,15 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="rendering_attr_roadStyle_description">Styl drogowy</string>
     <string name="poi_context_menu_modify_osm_change">Modyfikacja zmian OSM</string>
     <string name="dashboard_or_drawer_title">Panel lub menu</string>
-    </resources>
+    <string name="av_video_quality_low">Najniższa rozdzielczość</string>
+    <string name="av_video_quality_high">Najwyższa rozdzielczość</string>
+    <string name="av_video_quality">Jakość video</string>
+    <string name="av_video_quality_descr">Proszę wybrać jakość wyjściowego nagrania video</string>
+    <string name="av_audio_format">Format dźwięku</string>
+    <string name="av_audio_format_descr">Proszę wybrać format wyjściowego nagrania dźwięku</string>
+    <string name="av_audio_bitrate">Przepływność dźwięku</string>
+    <string name="av_audio_bitrate_descr">Proszę wybrać wartość przepływności dźwięku</string>
+    <string name="shared_string_near">Obok</string>
+    <string name="routing_attr_avoid_stairs_name">Omijanie schodów</string>
+	<string name="routing_attr_avoid_stairs_description">Omijanie schodów</string>
+	</resources>
