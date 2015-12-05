@@ -143,57 +143,51 @@ public abstract class MenuTitleController {
 							OsmandSettings settings = getMapActivity().getMyApplication().getSettings();
 							String lang = settings.MAP_PREFERRED_LOCALE.get();
 							String geocodingResult = "";
-							if(object.building != null) {
+							if (object.building != null) {
 								String bldName = object.building.getName(lang);
-								if(!Algorithms.isEmpty(object.buildingInterpolation)) {
+								if (!Algorithms.isEmpty(object.buildingInterpolation)) {
 									bldName = object.buildingInterpolation;
 								}
 								geocodingResult = object.street.getName(lang) + " " + bldName + ", "
 										+ object.city.getName(lang);
-							} else if(object.street != null) {
+							} else if (object.street != null) {
 								geocodingResult = object.street.getName(lang) + ", " + object.city.getName(lang);
-							} else if(object.city != null) {
+							} else if (object.city != null) {
 								geocodingResult = object.city.getName(lang);
-							} else if(object.point != null) {
+							} else if (object.point != null) {
 								RouteDataObject rd = object.point.getRoad();
 								String sname = rd.getName(lang);
-								if(Algorithms.isEmpty(sname)) {
+								if (Algorithms.isEmpty(sname)) {
 									sname = "";
 								}
 								String ref = rd.getRef();
-								if(!Algorithms.isEmpty(ref)) {
-									if(!Algorithms.isEmpty(sname)) {
+								if (!Algorithms.isEmpty(ref)) {
+									if (!Algorithms.isEmpty(sname)) {
 										sname += ", ";
 									}
 									sname += ref;
 								}
 								geocodingResult = sname;
 							}
-							
+
 							streetStr = geocodingResult;
 
 							if (!Algorithms.isEmpty(streetStr) && object.getDistance() > 100) {
 								streetStr = getMapActivity().getString(R.string.shared_string_near) + " " + streetStr;
+							} else {
+								streetStr = getMapActivity().getString(R.string.no_address_determined);
 							}
 
-							//FIXME: "No address determined" supposed to replace "Address is not known yet" once reverse geocoding yields no result
-							//if (Algorithms.isEmpty(streetStr)) {
-							//	streetStr = "No address determined";
-							//}
-
-							if (!Algorithms.isEmpty(streetStr)) {
-								MenuController menuController = getMenuController();
-								if (menuController == null || menuController.displayStreetNameInTitle()) {
-									nameStr = streetStr;
-									getPointDescription().setName(nameStr);
+							MenuController menuController = getMenuController();
+							if (menuController == null || menuController.displayStreetNameInTitle()) {
+								nameStr = streetStr;
+								getPointDescription().setName(nameStr);
+							}
+							getMapActivity().runOnUiThread(new Runnable() {
+								public void run() {
+									refreshMenuTitle();
 								}
-								getMapActivity().runOnUiThread(new Runnable() {
-									public void run() {
-										refreshMenuTitle();
-									}
-								});
-							}
-
+							});
 						}
 
 						return true;

@@ -117,7 +117,7 @@ public class GeocodingUtilities {
 		}
 		
 		public double getDistance() {
-			if(dist == -1) {
+			if(dist == -1 && connectionPoint != null && searchPoint != null) {
 				dist = MapUtils.getDistance(connectionPoint, searchPoint);
 			}
 			return dist;
