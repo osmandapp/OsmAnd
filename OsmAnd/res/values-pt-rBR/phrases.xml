@@ -2528,4 +2528,35 @@
 	<string name="poi_health_specialty_manual_therapy_yes">Especialidade médica: terapia manual</string>
 	<string name="poi_health_specialty_sports_medicine_yes">Especialidade médica: medicina esportiva</string>
 	<string name="poi_health_specialty_podology_yes">Especialidade médica: podologia</string>
+	<string name="poi_health_specialty_adult_psychiatry_yes">Especialidade médica: psiquiatria adulta</string>
+	<string name="poi_health_specialty_acupuncture_yes">Especialidade médica: acupuntura</string>
+	<string name="poi_health_specialty_homeopathy_yes">Especialidade médica: homeopatia</string>
+	<string name="poi_health_specialty_traditional_chinese_medicine_yes">"Especialidade médica:  medicina tradicional chinesa"</string>
+	<string name="poi_health_specialty_reiki_yes">Especialidade médica: reiki</string>
+	<string name="poi_health_specialty_herbalism_yes">Especialidade médica: fitoterapia</string>
+	<string name="poi_health_specialty_chiropractic_yes">Especialidade médica: quiropraxia</string>
+	<string name="poi_health_specialty_naturopathy_yes">Especialidade médica: naturopatia</string>
+	<string name="poi_health_specialty_depth_psychology_yes">Especialidade médica: psicologia profunda</string>
+	<string name="poi_health_specialty_behavior_yes">Especialidade médica: comportamento</string>
+
+	<string name="poi_building_type_pyramid">Tipo de construção: pirâmide</string>
+
+<string name="poi_pa">Pa (assentamento fortificado maori)</string>
+
+	<string name="poi_wiki_lang_yo">Wiki em iorubá</string>
+	<string name="poi_wiki_lang_an">Wiki em aragonês</string>
+	<string name="poi_wiki_lang_ne">Wiki em nepalês</string>
+	<string name="poi_wiki_lang_gu">Wiki em guzerate</string>
+	<string name="poi_wiki_lang_scn">Wiki em siciliano</string>
+	<string name="poi_wiki_lang_bar">Wiki em bávaro</string>
+	<string name="poi_wiki_lang_mn">Wiki em mongol</string>
+	<string name="poi_wiki_lang_nap">Wiki em napolitano</string>
+
+	<string name="poi_craft_electronics">Conserto de eletrônicos</string>
+	<string name="poi_fireworks">Loja de fogos de artifício</string>
+
+	<string name="poi_memorial_fassade_decoration">Decoração da fachada</string>
+	<string name="poi_site_type_hut_circle">Tipo: círculo de cabana</string>
+	<string name="poi_fortification_type_ring_ditch">Tipo de fortificação: vala circular</string>
+
 	</resources>
