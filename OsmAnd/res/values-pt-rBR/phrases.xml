@@ -2408,4 +2408,37 @@
 	<string name="poi_stone_type_conciliation_cross">Tipo: cruz de conciliação</string>
 	<string name="poi_stone_type_coat_of_arms">Tipo: brasão</string>
 
+	<string name="poi_historic_threshing_floor">Eira histórica</string>
+	<string name="poi_summit_cross">Cruz de cimeira: sim</string>
+
+	<string name="poi_hackerspace">Hackerspace</string>
+
+	<string name="poi_wiki_lang_af">Wiki em africâner</string>
+	<string name="poi_wiki_lang_als">Wiki em alemânico</string>
+	<string name="poi_wiki_lang_az">Wiki em azeri</string>
+	<string name="poi_wiki_lang_bn">Wiki em bengali</string>
+	<string name="poi_wiki_lang_bpy">Wiki em bishnupriya</string>
+	<string name="poi_wiki_lang_br">Wiki em bretão</string>
+	<string name="poi_wiki_lang_bs">Wiki em bósnio</string>
+	<string name="poi_wiki_lang_cy">Wiki em galês</string>
+	<string name="poi_wiki_lang_eo">Wiki em esperanto</string>
+	<string name="poi_wiki_lang_eu">Wiki em basco</string>
+	<string name="poi_wiki_lang_fa">Wiki em persa</string>
+	<string name="poi_wiki_lang_fy">Wiki em frisão</string>
+	<string name="poi_wiki_lang_ga">Wiki em irlandês</string>
+	<string name="poi_wiki_lang_hy">Wiki em armênio</string>
+	<string name="poi_wiki_lang_is">Wiki em islandês</string>
+	<string name="poi_wiki_lang_ka">Wiki em georgiano</string>
+	<string name="poi_wiki_lang_ku">Wiki em curdo</string>
+	<string name="poi_wiki_lang_la">Wiki em latim</string>
+	<string name="poi_wiki_lang_lb">Wiki em luxemburguês</string>
+	<string name="poi_wiki_lang_mk">Wiki em macedônio</string>
+	<string name="poi_wiki_lang_ml">Wiki em malaiala</string>
+	<string name="poi_wiki_lang_mr">Wiki em marata</string>
+	<string name="poi_wiki_lang_nds">Wiki em baixo-saxão</string>
+	<string name="poi_wiki_lang_nv">Wiki em navajo</string>
+	<string name="poi_wiki_lang_os">Wiki em osseta</string>
+	<string name="poi_wiki_lang_pms">Wiki em piamontês</string>
+	<string name="poi_wiki_lang_sc">Wiki em sardenho</string>
+	<string name="poi_wiki_lang_sh">Wiki em servo-croata</string>
 	</resources>
