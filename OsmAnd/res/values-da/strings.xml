@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
     <string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
@@ -2125,5 +2125,5 @@
     <string name="av_audio_bitrate">Audio bitrate</string>
     <string name="av_audio_bitrate_descr">Vælg audio bitrate</string>
     <string name="shared_string_near">I nærheden af</string>
-    <string name="no_address_determined">Kan ikke bestemme adresse</string>
+    <string name="no_address_found">Kan ikke bestemme adresse</string>
 	</resources>
