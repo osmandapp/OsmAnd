@@ -163,6 +163,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			String textPrefix = "";
 			boolean isWiki = false;
 			boolean isText = false;
+			boolean isDescription = false;
 			boolean needLinks = !"population".equals(key);
 			int poiTypeOrder = 0;
 			String poiTypeKeyName = "";
@@ -217,7 +218,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				iconId = R.drawable.ic_world_globe_dark;
 				vl = vl.replace(' ', '_');
 			} else {
-				if (Amenity.DESCRIPTION.equals(key)) {
+				if (key.contains(Amenity.DESCRIPTION)) {
 					iconId = R.drawable.ic_action_note_dark;
 				} else {
 					iconId = R.drawable.ic_action_info_dark;
@@ -232,9 +233,15 @@ public class AmenityMenuBuilder extends MenuBuilder {
 						vl = pType.getTranslation();
 					} else {
 						isText = true;
-						iconId = R.drawable.ic_action_note_dark;
+						isDescription = iconId == R.drawable.ic_action_note_dark;
 						textPrefix = pType.getTranslation();
 						vl = amenity.unzipContent(e.getValue());
+					}
+					if (!isDescription && icon == null) {
+						icon = getRowIcon(view.getContext(), pType.getIconKeyName());
+					}
+					if (icon == null && isText) {
+						iconId = R.drawable.ic_action_note_dark;
 					}
 				} else {
 					textPrefix = Algorithms.capitalizeFirstLetterAndLowercase(e.getKey());
@@ -242,7 +249,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				}
 			}
 
-			if (isText && iconId == R.drawable.ic_action_note_dark) {
+			if (isDescription) {
 				descriptions.add(new AmenityInfoRow(key, R.drawable.ic_action_note_dark, textPrefix,
 						vl, 0, false, true, true, 0, ""));
 			} else if (icon != null) {
