@@ -2441,4 +2441,36 @@
 	<string name="poi_wiki_lang_pms">Wiki em piamontês</string>
 	<string name="poi_wiki_lang_sc">Wiki em sardenho</string>
 	<string name="poi_wiki_lang_sh">Wiki em servo-croata</string>
+	<string name="poi_wiki_lang_sq">Wiki em albanês</string>
+	<string name="poi_wiki_lang_ta">Wiki em tâmil</string>
+	<string name="poi_wiki_lang_tl">Wiki em filipino</string>
+
+	<string name="poi_wiki_lang_war">Wiki em wáray-wáray</string>
+	<string name="poi_wiki_lang_min">Wiki em minangkabau</string>
+	<string name="poi_wiki_lang_kk">Wiki em cazaque</string>
+	<string name="poi_wiki_lang_uz">Wiki em uzbeque</string>
+	<string name="poi_wiki_lang_ce">Wiki em checheno</string>
+	<string name="poi_wiki_lang_ur">Wiki em urdu</string>
+	<string name="poi_wiki_lang_oc">Wiki em franco-provençal</string>
+	<string name="poi_wiki_lang_zhminnan">Wiki em min nan</string>
+	<string name="poi_wiki_lang_mg">Wiki em malgaxe</string>
+	<string name="poi_wiki_lang_tt">Wiki em tártaro</string>
+	<string name="poi_wiki_lang_jv">Wiki em javanês</string>
+	<string name="poi_wiki_lang_ky">Wiki em quirguiz</string>
+	<string name="poi_wiki_lang_zhyue">Wiki em cantonês</string>
+	<string name="poi_wiki_lang_ast">Wiki em asturo-leonês</string>
+	<string name="poi_wiki_lang_tg">Wiki em tajique</string>
+	<string name="poi_wiki_lang_ba">Wiki em bashkir</string>
+	<string name="poi_wiki_lang_sco">Wiki em scots</string>
+	<string name="poi_wiki_lang_pnb">Wiki em panjabi</string>
+	<string name="poi_wiki_lang_cv">Wiki em tchuvache</string>
+	<string name="poi_wiki_lang_lmo">Wiki em lombardo</string>
+	<string name="poi_wiki_lang_my">Wiki em birmanês</string>
+	<string name="poi_aerialway_length">Comprimento</string>
+
+	<string name="poi_health_specialty_general_yes">Especialidade médica: clínica geral</string>
+	<string name="poi_health_specialty_ophthalmology_yes">Especialidade médica: oftalmologia</string>
+	<string name="poi_health_specialty_gynaecology_yes">Especialidade médica: ginecologia</string>
+	<string name="poi_health_specialty_internal_medicine_yes">Especialidade médica: medicina interna</string>
+	<string name="poi_health_specialty_orthopaedics_yes">Especialidade médica: ortopedia</string>
 	</resources>
