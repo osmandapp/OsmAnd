@@ -558,7 +558,7 @@
 	<string name="lang_ko">Coreano</string>
 	<string name="lang_lv">Letão</string>
 	<string name="lang_lt">Lituano</string>
-	<string name="lang_mr">Marathi</string>
+	<string name="lang_mr">Marata</string>
 	<string name="lang_no">Norueguês</string>
 	<string name="lang_fa">Persa</string>
 	<string name="lang_pl">Polonês</string>
@@ -1710,7 +1710,7 @@
     <string name="light_theme">Claro</string>
     <string name="dark_theme">Escuro</string>
     <string name="lang_pms">Piemontês</string>
-    <string name="lang_bn">Bengalês</string>
+    <string name="lang_bn">Bengali</string>
     <string name="lang_tl">Tagalo</string>
     <string name="lang_sh">Servo-croata</string>
     <string name="lang_az">Azeri</string>
