@@ -1,5 +1,6 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
+	<string name="no_address_found">Keine Adresse bekannt</string>
 	<string name="shared_string_near">Nähe</string>
 	<string name="regions">Regionen</string>
 	<string name="region_maps">Regionsweite Karten</string>
@@ -2055,7 +2056,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="si_min_m">Minuten pro Meile</string>
     <string name="si_nm_h">Nautische Meilen pro Stunde (Knoten)</string>
     <string name="shared_string_navigation">Navigation</string>
-    <string name="address_unknown">Adresse noch unbekannt</string>
+    <string name="looking_up_address">Adresse wird gesucht</string>
     <string name="favourites_context_menu_add">Favorit hinzufügen</string>
 	<string name="poi_action_delete">löschen</string>
 	<string name="show_on_start">Beim Start anzeigen</string>

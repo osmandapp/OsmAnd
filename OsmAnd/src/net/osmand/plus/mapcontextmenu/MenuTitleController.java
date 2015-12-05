@@ -73,7 +73,7 @@ public abstract class MenuTitleController {
 	}
 
 	protected void initTitle() {
-		addressNotKnownStr = getMapActivity().getString(R.string.address_unknown);
+		addressNotKnownStr = getMapActivity().getString(R.string.looking_up_address) + getMapActivity().getString(R.string.shared_string_ellipsis);
 		acquireIcons();
 		acquireNameAndType();
 		if (needStreetName()) {
@@ -175,7 +175,7 @@ public abstract class MenuTitleController {
 							if (!Algorithms.isEmpty(streetStr) && object.getDistance() > 100) {
 								streetStr = getMapActivity().getString(R.string.shared_string_near) + " " + streetStr;
 							} else if (Algorithms.isEmpty(streetStr)) {
-								streetStr = getMapActivity().getString(R.string.no_address_determined);
+								streetStr = getMapActivity().getString(R.string.no_address_found);
 							}
 
 							MenuController menuController = getMenuController();
