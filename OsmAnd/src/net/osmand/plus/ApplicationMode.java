@@ -237,7 +237,8 @@ public class ApplicationMode {
 	}
 
 	public int getResourceBearingNight() {
-		return bearingIconNight;
+		return bearingIconDay;
+		//return bearingIconNight;
 	}
 	
 	public int getResourceLocationDay() {
@@ -245,7 +246,8 @@ public class ApplicationMode {
 	}
 
 	public int getResourceLocationNight() {
-		return locationIconNight;
+		return locationIconDay;
+		//return locationIconNight;
 	}
 	
 	public String getStringKey() {
