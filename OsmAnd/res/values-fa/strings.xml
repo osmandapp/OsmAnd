@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="local_osm_changes_backup_failed">پشتیبان‌گیری از تغییرات OsmAnd ناموفق بود</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="local_osm_changes_backup_failed">پشتیبان‌گیری از تغییرات OsmAnd ناموفق بود</string>
     <string name="plugin_distance_point_time">زمان</string>
     <string name="plugin_distance_point_hdop">دقت</string>
     <string name="plugin_distance_point_speed">سرعت</string>
@@ -867,7 +868,7 @@
     
     <string name="download_hillshade_maps">لایه تپه سایه</string>
     
-    <string name="osmand_srtm_long_description_1000_chars">"این افزونه، منحنی‌های هم‌تراز را که در نقشه‌&#157;های آفلاین OsmAnd نمایش داده میشوند فراهم میکند. داده‌های جهانی (بین 70 درجه شمالی و 70 درجه جنوبی) در این زمینه براساس اندازه گیری‌های SRTM (مأموریت توپوگرافی رادار شاتل) و ASTER (رادیومتر انعکاسی و پرتویی حرارتی هوایی پیشرفته)، یک ابزار تصویربرداری پردازنده ترا و ماهواره فوق پیشرفته سیستم نظارتی زمین ناسا مییباشند. ASTER محصول تلاش مشترک میان ناسا، وزارت اقتصاد ژاپن، صنعت و تجارت (متی)، و سیستم های فضایی ژاپن (جی-اسپیس سیستم) است. "</string>
+    <string name="osmand_srtm_long_description_1000_chars">"این افزونه، منحنی‌های هم‌تراز را که در نقشه‌های آفلاین OsmAnd نمایش داده میشوند فراهم میکند. داده‌های جهانی (بین 70 درجه شمالی و 70 درجه جنوبی) در این زمینه براساس اندازه گیری‌های SRTM (مأموریت توپوگرافی رادار شاتل) و ASTER (رادیومتر انعکاسی و پرتویی حرارتی هوایی پیشرفته)، یک ابزار تصویربرداری پردازنده ترا و ماهواره فوق پیشرفته سیستم نظارتی زمین ناسا مییباشند. ASTER محصول تلاش مشترک میان ناسا، وزارت اقتصاد ژاپن، صنعت و تجارت (متی)، و سیستم های فضایی ژاپن (جی-اسپیس سیستم) است. "</string>
     <string name="srtm_plugin_description">تسهیل دانلود خطوط هم‌تراز و سایه تپه (\'تنظیمات\'-&gt;\'مدیریت نقشه ها\'-&gt;\'دانلود\'-&gt;\'انتخاب نوع نقشه\'  مورد نظر).</string>
     <string name="monitoring_control_start">جی پی ایکس</string>
     <string name="rendering_attr_noPolygons_description">محو کردن همه عوارض زمین روی نقشه</string>
@@ -1995,4 +1996,26 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="rendering_value_walkingRoutesScopeOSMC_name">رنگ‌بندی براساس حوزه مسیر</string>
     <string name="rendering_value_walkingRoutesOSMC_name">رنگ‌بندی براساس OSMC</string>
     <string name="osmo_share_my_location">اشتراک گذاری مکان من</string>
+    <string name="no_address_found">آدرسی مشخص نشد</string>
+	<string name="shared_string_near">نزدیک</string>
+    <string name="shared_string_hide">مخقی کردن</string>
+    <string name="av_video_quality_low">پائین‌ترین وضوح</string>
+    <string name="av_video_quality_high">بالاترین وضوح</string>
+    <string name="av_video_quality">کیفیت ویدئوی خروجی</string>
+    <string name="av_video_quality_descr">انتخاب کیفیت ویدئوی خروجی</string>
+    <string name="av_audio_format">قالب صدای خروجی</string>
+    <string name="av_audio_format_descr">انتخاب فرمت صدای خروجی</string>
+    <string name="please_specify_poi_type_only_from_list">"لطفاً نوغ POI را انتخاب کنید یا اینکه از این مرحله عبور کنید. "</string>
+    <string name="access_from_map_description">کلید منو به عوض نشان دادن منو داشبورد را نشان میدهد</string>
+    <string name="access_from_map">دسترسی از نقشه</string>
+    <string name="versions_item">نسخه‌ها</string>
+    <string name="feedback">بازخورد</string>
+    <string name="contact_us">تماس با ما</string>
+    <string name="map_legend">علائم نقشه</string>
+    <string name="save_poi_without_poi_type_message">آیا وافعاً POI را بدون ذکر نوع آن ذخیره می‌کنید؟</string>
+    <string name="navigation_item_description">تنظیم مسیریابی</string>
+    <string name="planning_trip_item">برنامه‌ریزی سفر</string>
+    <string name="faq_item">سوالات رایج</string>
+    <string name="faq_item_description">سئوالات رایج</string>
+    <string name="map_viewing_item">دیدن نمای نقشه</string>
     </resources>
