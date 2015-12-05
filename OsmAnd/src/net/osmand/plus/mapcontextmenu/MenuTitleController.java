@@ -176,25 +176,25 @@ public abstract class MenuTitleController {
 								streetStr = getMapActivity().getString(R.string.shared_string_near) + " " + streetStr;
 							}
 
-						}
+							//FIXME: "No address determined" supposed to replace "Address is not known yet" once reverse geocoding yields no result
+							//if (Algorithms.isEmpty(streetStr)) {
+							//	streetStr = "No address determined";
+							//}
 
-						//FIXME: "No address determined" supposed to replace "Address is not known yet" once reverse geocoding yields no result
-						if (Algorithms.isEmpty(streetStr)) {
-							streetStr = "No address determined";
-						}
-
-						//if (!Algorithms.isEmpty(streetStr)) {
-							MenuController menuController = getMenuController();
-							if (menuController == null || menuController.displayStreetNameInTitle()) {
-								nameStr = streetStr;
-								getPointDescription().setName(nameStr);
-							}
-							getMapActivity().runOnUiThread(new Runnable() {
-								public void run() {
-									refreshMenuTitle();
+							if (!Algorithms.isEmpty(streetStr)) {
+								MenuController menuController = getMenuController();
+								if (menuController == null || menuController.displayStreetNameInTitle()) {
+									nameStr = streetStr;
+									getPointDescription().setName(nameStr);
 								}
-							});
-						//}
+								getMapActivity().runOnUiThread(new Runnable() {
+									public void run() {
+										refreshMenuTitle();
+									}
+								});
+							}
+
+						}
 
 						return true;
 					}
