@@ -1870,4 +1870,8 @@
     <string name="av_video_quality_descr">Vybrat kvalitu video výstupu</string>
     <string name="av_audio_format">Formát audio výstupu</string>
     <string name="av_audio_format_descr">Vybrat formát audio výstupu</string>
+    <string name="av_audio_bitrate">Bitrate zvuku</string>
+    <string name="av_audio_bitrate_descr">Vybrat bitrate zvuku</string>
+    <string name="no_address_found">Adresa nebyla určena</string>
+	<string name="looking_up_address">Vyhledávání adres</string>
     </resources>
