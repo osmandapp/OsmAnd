@@ -2473,4 +2473,13 @@
 	<string name="poi_health_specialty_gynaecology_yes">Especialidade médica: ginecologia</string>
 	<string name="poi_health_specialty_internal_medicine_yes">Especialidade médica: medicina interna</string>
 	<string name="poi_health_specialty_orthopaedics_yes">Especialidade médica: ortopedia</string>
+	<string name="poi_health_specialty_otolaryngology_yes">Especialidade médica: otorrinolaringologia</string>
+	<string name="poi_health_specialty_paediatrics_yes">Especialidade médica: pediatria</string>
+	<string name="poi_health_specialty_paediatrics_no">Especialidade médica: sem pediatria</string>
+	<string name="poi_health_specialty_dermatology_yes">Especialidade médica: dermatologia</string>
+	<string name="poi_health_specialty_urology_yes">Especialidade médica: urologia</string>
+	<string name="poi_health_specialty_surgery_yes">Especialidade médica: cirurgia geral</string>
+	<string name="poi_health_specialty_radiology_yes">Especialidade médica: radiologia</string>
+	<string name="poi_health_specialty_psychiatry_yes">Especialidade médica: psiquiatria</string>
+	<string name="poi_health_specialty_neurology_yes">Especialidade médica: neurologia</string>
 	</resources>
