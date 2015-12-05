@@ -174,23 +174,27 @@ public abstract class MenuTitleController {
 
 							if (!Algorithms.isEmpty(streetStr) && object.getDistance() > 100) {
 								streetStr = getMapActivity().getString(R.string.shared_string_near) + " " + streetStr;
-							} else if (Algorithms.isEmpty(streetStr)) {
-								streetStr = "No address determined";
 							}
 
-							if (!Algorithms.isEmpty(streetStr)) {
-								MenuController menuController = getMenuController();
-								if (menuController == null || menuController.displayStreetNameInTitle()) {
-									nameStr = streetStr;
-									getPointDescription().setName(nameStr);
-								}
-								getMapActivity().runOnUiThread(new Runnable() {
-									public void run() {
-										refreshMenuTitle();
-									}
-								});
-							}
 						}
+
+						if (Algorithms.isEmpty(streetStr)) {
+							streetStr = "No address determined";
+						}
+
+						//if (!Algorithms.isEmpty(streetStr)) {
+							MenuController menuController = getMenuController();
+							if (menuController == null || menuController.displayStreetNameInTitle()) {
+								nameStr = streetStr;
+								getPointDescription().setName(nameStr);
+							}
+							getMapActivity().runOnUiThread(new Runnable() {
+								public void run() {
+									refreshMenuTitle();
+								}
+							});
+						//}
+
 						return true;
 					}
 
