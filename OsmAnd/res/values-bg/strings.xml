@@ -176,7 +176,7 @@
     <string name="route_descr_lat_lon">Ширина %1$.3f, дължина %2$.3f</string>
     <string name="route_descr_current_location">Текуща позиция</string>
 
-    <string name="no_buildings_found">Няма намерени сгради.</string>
+    <string name="no_buildings_found">Няма намерени номера.</string>
     <string name="incremental_search_city">Търсене на град възходящо</string>
     <string name="search_villages_and_postcodes">Търсене на повече селища/пощенски кодове</string>
     <string name="rendering_attr_showRoadMaps_description">Ако е избрано ще се показват карти съдържащи само пътища:</string>
@@ -1006,7 +1006,7 @@
     <string name="use_english_names">Имена на англ. език</string>
     <string name="app_settings">Настройки на приложението</string>
     <string name="search_address">Търси адрес</string>
-    <string name="choose_building">Изберете сграда</string>
+    <string name="choose_building">Изберете номер</string>
     <string name="choose_street">Изберете улица</string>
     <string name="choose_city">Изберете град</string>
     <string name="ChooseCountry">Изберете държава</string>
@@ -1033,7 +1033,7 @@
     <string name="searchpoi_activity">Избор на POI</string>
     <string name="search_POI_level_btn">Търси още</string>
     <string name="incremental_search_street">Търсене на улица по възходящ ред</string>
-    <string name="incremental_search_building">Търсене на сграда по възходящ ред</string>
+    <string name="incremental_search_building">Номерата са по възходящ ред</string>
     <string name="choose_available_region">Изберете район от списъка</string>
     <string name="choose_intersected_street">Изберете пресичаща улица</string>
     <string name="Closest_Amenities">Забележителности наоколо</string>
@@ -1054,8 +1054,8 @@
     <string name="search_address_region">Област/регион</string>
     <string name="search_address_city">Град</string>
     <string name="search_address_street">Улица</string>
-    <string name="search_address_building">Сграда</string>
-    <string name="search_address_building_option">Сграда</string>
+    <string name="search_address_building">Номер</string>
+    <string name="search_address_building_option">Номер</string>
     <string name="search_address_street_option">Пресичаща улица</string>
     <string name="search_tabs_location">Коорд.</string>
 
@@ -1991,4 +1991,14 @@
     <string name="android_19_location_disabled">"След версия 4.4 (KitKat) на Android  не можете да теглите и актуализирате карти в текущата папка за съхранение (%s). Искате ли да промените на разрешените местоположението и копиране на всички OsmAnd файлове там?\n Бележка 1: Старите файлове ще останат непроменени (но могат да бъдат изтрити ръчно).\n Бележка 2: В новото местоположение за съхранение няма да може да споделяте файлове между OsmAnd и OsmAnd +."</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Оцветяване на пътеките според OSMC следите</string>
 <string name="osmo_auto_send_locations_descr">Автоматично стартиране на тракер сесия и изпращане на данни</string>
+    <string name="shared_string_near">Близо</string>
+    <string name="shared_string_hide">Скрий</string>
+    <string name="av_video_quality_low">Най-ниска резолюция</string>
+    <string name="av_video_quality_high">Най-висока резолюция</string>
+    <string name="av_video_quality">Качество на видеото</string>
+    <string name="av_video_quality_descr">Изберете качество на видеото</string>
+    <string name="av_audio_format">Формат за аудио изход</string>
+    <string name="av_audio_format_descr">Изберете формат за аудио изход</string>
+    <string name="av_audio_bitrate">Аудио битрейт</string>
+    <string name="av_audio_bitrate_descr">Изберете аудио битрейт</string>
     </resources>
