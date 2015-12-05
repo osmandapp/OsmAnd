@@ -1797,7 +1797,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="show_gpx">Zobraziť GPX</string>
     <string name="count_of_lines">Počet riadkov</string>
     <string name="show_on_start">Zobraziť po štarte</string>
-    <string name="address_unknown">Adresa ešte nie je známa</string>
     <string name="are_you_sure">Ste si istí?</string>
     <string name="unsaved_changes_will_be_lost">Všetky neuložené zmeny budú stratené. Pokračovať?</string>
     <string name="simulate_your_location_stop_descr">Skončiť simuláciu polohy</string>

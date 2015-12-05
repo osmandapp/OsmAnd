@@ -2095,7 +2095,6 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="favourites_edit_dialog_title">Eigenschappen van favoriet</string>
     <string name="simulate_your_location_stop_descr">Stop simuleren van positie</string>
     <string name="simulate_your_location_descr">Simuleer met een GPX-spoor of een berekende route</string>
-    <string name="address_unknown">Adres nog niet bekend</string>
     <string name="av_locations_descr">GPX-bestand met aantekeningen</string>
     <string name="av_locations">Locaties</string>
     <string name="plugin_settings">Plugins</string>

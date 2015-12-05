@@ -1724,7 +1724,6 @@
     <string name="closing_at">Otevřeno do</string>
     <string name="count_of_lines">Počet řádků</string>
     <string name="show_on_start">Zobrazit po spuštění</string>
-    <string name="address_unknown">Adresa ještě není známa</string>
     <string name="are_you_sure">Jste si jisti?</string>
     <string name="unsaved_changes_will_be_lost">Neuložené změny budou ztraceny. Pokračovat?</string>
     <string name="srtm_plugin_disabled">Vrstevnice vypnuté</string>

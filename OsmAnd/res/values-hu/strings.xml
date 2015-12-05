@@ -1917,7 +1917,6 @@
     <string name="osmand_running_in_background">Háttérben fut</string>
     <string name="simulate_your_location_stop_descr">Pozíció szimulálás leállítása</string>
     <string name="simulate_your_location_descr">Szimuláció megtervezett útvonallal vagy felvett GPX-szel</string>
-    <string name="address_unknown">Cím még nem ismert</string>
     <string name="av_locations_descr">GPX fájl jegyzet helyszínnel</string>
     <string name="av_locations">Helyszín</string>
     <string name="routing_attr_avoid_shuttle_train_name">Autószállító vonat elkerülése</string>

@@ -1907,7 +1907,6 @@
 <string name="poi_deleted_localy">POI будуць выдаленыя, як толькі вы загрузіце вашы зьмены</string>
 	<string name="show_on_start">Паказваць пры запуску</string>
 	<string name="count_of_lines">Колькасьць радкоў</string>
-<string name="address_unknown">Адрас пакуль невядомы</string>
     <string name="are_you_sure">Вы ўпэўненыя?</string>
 	<string name="unsaved_changes_will_be_lost">Усе незахаваныя зьмены будуць страчаны. Працягваць?</string>
 <string name="simulate_your_location_stop_descr">Спыніць эмуляцыю свайго становішча</string>

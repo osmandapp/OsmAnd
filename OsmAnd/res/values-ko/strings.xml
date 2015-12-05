@@ -2138,7 +2138,6 @@
 	<string name="app_name_osmand">OsmAnd</string>
 	<string name="offline_maps_and_navigation">오프 라인 지도 및 내비게이션</string>
 	<string name="commit_poi">POI 커밋</string>
-<string name="address_unknown">주소는 아직 등록되지 않았습니다</string>
     <string name="av_locations_descr">Gpx 파일에 위치와 관련된 메모를 첨부합니다</string>
     <string name="av_locations">위치</string>
     <string name="poi_action_delete">삭제</string>

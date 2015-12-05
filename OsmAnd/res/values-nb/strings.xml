@@ -1367,7 +1367,6 @@
     <string name="shared_string_skip">Hopp over</string>
     <string name="app_name_osmand">OsmAnd</string>
     <string name="offline_maps_and_navigation">Offline-kart\n&amp; navigering</string>
-    <string name="address_unknown">Adresse er ikke kjent ennå</string>
     <string name="routing_attr_avoid_shuttle_train_name">Unngå pendeltog</string>
     <string name="routing_attr_avoid_shuttle_train_description">Unngå pendeltog</string>
     <string name="srtm_plugin_disabled">Koter deaktivert</string>

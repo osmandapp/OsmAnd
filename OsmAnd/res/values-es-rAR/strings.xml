@@ -1854,7 +1854,6 @@
     <string name="show_gpx">Mostrar GPX</string>
     <string name="count_of_lines">Número de líneas</string>
     <string name="show_on_start">Mostrar al inicio</string>
-    <string name="address_unknown">Dirección desconocida</string>
     <string name="are_you_sure">¿Está seguro?</string>
     <string name="unsaved_changes_will_be_lost">Se perderán los cambios no guardados. ¿Continuar?</string>
     <string name="simulate_your_location_stop_descr">Parar simulación de ubicación</string>
