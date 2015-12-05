@@ -9,7 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-	<string name="no_address_determined">No address determined</string>
+	<string name="no_address_found">No address determined</string>
 	<string name="shared_string_near">Near</string>
     <string name="shared_string_hide">Hide</string>
     <string name="av_video_quality_low">Lowest resolution</string>
@@ -117,7 +117,7 @@
 	<string name="favourites_edit_dialog_title">Favorite information</string>
     <string name="simulate_your_location_stop_descr">Stop simulating your position</string>
     <string name="simulate_your_location_descr">Simulate using a calculated route or a recorded GPX</string>
-    <string name="address_unknown">Address is not known yet</string>
+    <string name="looking_up_address">Looking up address</string>
     <string name="av_locations_descr">GPX file with note locations</string>
     <string name="av_locations">Locations</string>
     <string name="plugin_settings">Plugins</string>
