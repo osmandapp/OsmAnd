@@ -2001,4 +2001,10 @@
     <string name="av_audio_format_descr">Изберете формат за аудио изход</string>
     <string name="av_audio_bitrate">Аудио битрейт</string>
     <string name="av_audio_bitrate_descr">Изберете аудио битрейт</string>
-    </resources>
+    <string name="no_address_found">Няма адрес</string>
+	<string name="looking_up_address">Търсене на адрес</string>
+    <string name="osmo_tracker_id_descr">Преглед или споделяне ID на трекер. Използването на свързани устройства с това ID позволява пълното проследяване на това устройство! За да прекъснете изберете \'Регенериране\'.</string>
+    <string name="local_index_description">Докоснете върху елемент за да видите повече информация, натиснете и задръжте за да деактивирате или да изтриете. Данни в устройството (%1$s свободни):</string>
+	<string name="number_of_rows_in_dash">Брой редове %1$s</string>
+	<string name="dashboard_or_drawer_description">Можете да управлявате приложението чрез гъвкаво табло или чрез статично меню. Вашият избор може да бъде променен по-късно.</string>
+</resources>
