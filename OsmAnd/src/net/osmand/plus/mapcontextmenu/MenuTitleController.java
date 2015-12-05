@@ -174,7 +174,7 @@ public abstract class MenuTitleController {
 
 							if (!Algorithms.isEmpty(streetStr) && object.getDistance() > 100) {
 								streetStr = getMapActivity().getString(R.string.shared_string_near) + " " + streetStr;
-							} else {
+							} else if (Algorithms.isEmpty(streetStr)) {
 								streetStr = getMapActivity().getString(R.string.no_address_determined);
 							}
 
