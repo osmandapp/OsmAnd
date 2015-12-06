@@ -1939,8 +1939,8 @@
     <string name="dashboard_or_drawer_title">Painel de controle ou controle por menu</string>
     <string name="dashboard_or_drawer_description">Há uma nova opção para controlar principalmente o app via painel de controle flexível ou um menu estático. Sua escolha sempre pode ser alterada nas configurações do painel de controle.</string>
 <string name="shared_string_hide">Ocultar</string>
-    <string name="av_video_quality_low">Menor resolução</string>
-    <string name="av_video_quality_high">Maior resolução</string>
+    <string name="av_video_quality_low">Menor qualidade</string>
+    <string name="av_video_quality_high">Maior qualidade</string>
     <string name="av_video_quality">Qualidade do vídeo</string>
     <string name="av_video_quality_descr">Selecionar a qualidade de saída de vídeo</string>
     <string name="av_audio_format">Formato de áudio</string>
