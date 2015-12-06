@@ -5,19 +5,19 @@
     <string name="plugin_distance_point_speed">سرعت</string>
     <string name="plugin_distance_point_ele">ارتفاع</string>
     <string name="plugin_distance_point">نقطه</string>
-    <string name="gpx_file_name">نام فایل جی پی ایکس</string>
-    <string name="gpx_saved_sucessfully">فایل جی پی ایکس در {0} ذخیره شد</string>
+    <string name="gpx_file_name">نام فایل GPX</string>
+    <string name="gpx_saved_sucessfully">فایل GPX در {0} ذخیره شد</string>
     <string name="shared_string_do_not_show_again">دوباره نشان نده</string>
     <string name="distance_measurement_start_editing">شروع ویرایش</string>
     <string name="distance_measurement_finish_editing">اتمام ویرایش</string>
     <string name="distance_measurement_clear_route">حذف تمامی نقاط</string>
     
-    <string name="distance_measurement_load_gpx">باز کردن فایل جی پی ایکس</string>
+    <string name="distance_measurement_load_gpx">باز کردن فایل GPX</string>
     <string name="wait_current_task_finished">لطفاً تا اتمام عملیات جاری منتظر بمانید</string>
     <string name="use_magnetic_sensor">استفاده از حسگر مغناطیسی</string>
     <string name="other_location">دیگر</string>
-    <string name="files_limit">فایل باقیمانده است</string>
-    <string name="available_downloads_left">فایل برای دانلود باقیمانده است</string>
+    <string name="files_limit">%1$d فایل باقیمانده است</string>
+    <string name="available_downloads_left">%1$d فایل برای دانلود موجود است</string>
     <string name="install_paid">نسخه کامل</string>
     <string name="cancel_navigation">توقف مسیریابی</string>
     <string name="clear_destination">پاک کردن مقصد</string>
@@ -32,7 +32,7 @@
     <string name="select_address_activity">انتخاب آدرس</string>
     <string name="favourites_list_activity">انتخاب علاقمندی</string>
     <string name="local_openstreetmap_act_title">تغییرات OsmAnd</string>
-    <string name="map_widget_gps_info">اطلاعات جی پی اس</string>
+    <string name="map_widget_gps_info">اطلاعات GPS</string>
     <string name="access_arrival_time">زمان رسیدن به مقصد</string>
     <string name="shared_string_map">نقشه</string>
     
@@ -65,11 +65,11 @@
     <string name="map_widget_audionotes">یادداشتهای صوتی</string>
     <string name="audionotes_plugin_description">افزونه یادداشت صوتی/ویدئویی قابلیت یادداشت‌برداری صوتی یا عکس یا ویدئو را درحین سفرفراهم می‌کند.اینکار با استفاده از دکمه‌ای بر روی صفحه نقشه و یا مستقیماً از منوی زمینه‌ای با فشار دادن هر نقطه روی صفحه امکان‌پذیر است.</string>
     <string name="audionotes_plugin_name">یادداشتهای صوتی/ویدئویی</string>
-    <string name="download_select_map_types">نقشه های دیگر</string>
+    <string name="download_select_map_types">نقشه‌های دیگر</string>
     <string name="download_regular_maps">نقشه عادی</string>
     <string name="download_roads_only_maps">فقط نقشه جاده‌ها</string>
     
-	<string name="rendering_attr_noAdminboundaries_name">مخفی کردن محدوده ها</string>
+	<string name="rendering_attr_noAdminboundaries_name">مخفی کردن محدوده‌ها</string>
 	<string name="map_widget_max_speed">سرعت مجاز</string>
     <string name="route_descr_lat_lon">طول جغرافیایی %1$.3f, عرض جغرافیایی %2$.3f</string>
     <string name="route_descr_current_location">موقعیت فعلی</string>
@@ -189,7 +189,7 @@
     <string name="recording_open_external_player">باز کردن پخش کننده خارجی</string>
     <string name="recording_unavailable">موجود نیست</string>
     <string name="map_widget_distancemeasurement">اندازه گیری فاصله</string>
-    <string name="index_srtm_parts">بخش ها</string>
+    <string name="index_srtm_parts">بخش‌ها</string>
     <string name="map_widget_show_destination_arrow">نشان دادن جهت مقصد</string>
     <string name="no_route">مسیری وجود ندارد</string>
 	<string name="add_tag">اضافه کردن برچسب</string>
@@ -514,8 +514,8 @@
     <string name="context_menu_item_last_intermediate_point">افزودن به عنوان آخرین نقطه بین راهی</string>
     <string name="context_menu_item_first_intermediate_point">افزودن به عنوان اولین نقطه بین راهی</string>
     <string name="add_as_last_destination_point">افزودن به عنوان آخرین نقطه بین راهی</string>
-    <string name="add_as_first_destination_point">افزودن به عنوان اولین نقطه بین راهی</string>
-    <string name="intermediate_point_too_far">نقطه بین راهی %1$s از نزدیکترین جاده خیلی دور است.</string>
+    <string name="add_as_first_destination_point">افزودن به عنوان اولین نقطه بین‌راهی</string>
+    <string name="intermediate_point_too_far">نقطه بین‌راهی %1$s از نزدیکترین جاده خیلی دور است.</string>
     <string name="arrived_at_intermediate_point">شما به نقطه بین راهی خود رسیده اید</string>
     <string name="context_menu_item_intermediate_point">افزودن به عنوان نقطه بین راهی</string>
     <string name="add_waypoint_dialog_added">نقطه بین راهی GPX \'\'{0}\'\' افزوده شد</string>
@@ -549,7 +549,7 @@
 	<string name="download_srtm_maps">منحنی‌های هم‌تراز</string>
     <string name="srtm_plugin_name">خطوط هم‌تراز</string>
     <string name="index_srtm_ele">خطوط هم‌تراز</string>
-    <string name="download_roads_only_item">فقط جاده ها</string>
+    <string name="download_roads_only_item">فقط جاده‌ها</string>
     <string name="rendering_attr_noAdminboundaries_description">عدم نمایش مرزهای محلی (در سطح ۵-۹)</string>
     
     
@@ -592,18 +592,18 @@
     
     <string name="shared_string_more_actions">کارهای دیگر</string>
     
-	<string name="prefer_motorways">ترجیح دادن اتوبانها</string>
-	<string name="prefer_in_routing_descr">ترجیح دادن اتوبانها</string>
+	<string name="prefer_motorways">ترجیح دادن آزادراه‌ها</string>
+	<string name="prefer_in_routing_descr">ترجیح دادن آزادراه‌ها</string>
     <string name="local_indexes_cat_srtm">منحنی‌های هم‌تراز</string>
-    <string name="precise_routing_mode_descr">مسیریابی دقیق را فعال کنید تا مسیرها دقیق و بدون اشکال محاسبه شوند. این حالت به فاصله-محدود بستگی دارد و از توابع کتابخانه ای بومی استفاده نمیکند.</string>
+    <string name="precise_routing_mode_descr">مسیریابی دقیق را فعال کنید تا مسیرها دقیق و بدون اشکال محاسبه شوند. این حالت به فاصله محدود بوده و کند میباشد.</string>
     <string name="recording_context_menu_show">نشان بده</string>
     <string name="av_def_action_picture">گرفتن عکس</string>
     <string name="recording_context_menu_precord">گرفتن عکس</string>
     <string name="dropbox_plugin_description">افزونه دراپ باکس به شما اجازه میدهد تا مسیرها و یادداشتهای صوتی/تصویری با حساب دراپ باکس شما همزمان شود.</string>
-    <string name="srtm_paid_version_msg">درنظر داشته باشید که افزونه منحنی‌های هم‌تراز را از مارکت خریداری کنید تا به توسعه بیشتر نرم‌افزار کمک کنید.</string>
+    <string name="srtm_paid_version_msg">خرید افزونه منحنی‌های هم‌تراز از مارکت را مد نظر قرار دهید تا به توسعه بیشتر نرم‌افزار کمک کنید.</string>
     <string name="srtm_paid_version_title">افزونه منحنی‌های هم‌تراز</string>
     <string name="av_widget_action_descr">انتخاب عملکرد پیشفرض ویجت</string>
-    <string name="recording_is_recorded">صدا/تصویر در حال ضبط میباشد. برای متوقف کردن آن ای وی ویجت را بزنید.</string>
+    <string name="recording_is_recorded">صدا/تصویر در حال ضبط میباشد. برای متوقف کردن آن ویجت صوت و تصویر زا کلیک کنید.</string>
     <string name="recording_playing">صدایی از ضبط مورد نظر درحال پخش میباشد.\n%1$s</string>
     <string name="recording_delete_confirm">آیا میخواهید این مورد ضبط شده را پاک کنید؟</string>
     <string name="recording_description">ضبط %1$s %3$s %2$s</string>
@@ -1999,8 +1999,8 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
     <string name="no_address_found">آدرسی مشخص نشد</string>
 	<string name="shared_string_near">نزدیک</string>
     <string name="shared_string_hide">مخقی کردن</string>
-    <string name="av_video_quality_low">پائین‌ترین وضوح</string>
-    <string name="av_video_quality_high">بالاترین وضوح</string>
+    <string name="av_video_quality_low">پائین‌ترین کیفیت</string>
+    <string name="av_video_quality_high">بالاترین کیفیت</string>
     <string name="av_video_quality">کیفیت ویدئوی خروجی</string>
     <string name="av_video_quality_descr">انتخاب کیفیت ویدئوی خروجی</string>
     <string name="av_audio_format">قالب صدای خروجی</string>
@@ -2024,4 +2024,9 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
 	<string name="routing_attr_avoid_borders_description">اجتناب از مسیرهایی که از مرز به کشور دیگری عبور می‌کنند</string>
 	<string name="routing_attr_height_name">ارتفاع مجاز</string>
 	<string name="routing_attr_height_description">تعیین مقدار ارتفاع مجاز خودرو در جاده</string>
-    </resources>
+    <string name="download_wikipedia_maps">ویکی‌پدیا</string>
+    <string name="rendering_attr_alpineHiking_description">مسیرها را براساس مقیاس SAC رندر کن</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">لایه نمادهای پیاده‌روی</string>
+    <string name="rendering_attr_hikingRoutesOSMC_description">مسیرها را براساس تراسه‌های OSMC رندر کن</string>
+
+	</resources>
