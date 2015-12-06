@@ -1,6 +1,10 @@
 package net.osmand.plus.mapcontextmenu.builders;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.support.v7.app.AlertDialog;
 import android.text.Html;
 import android.text.TextUtils;
 import android.text.util.Linkify;
@@ -39,11 +43,16 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		this.amenity = amenity;
 	}
 
-	private void buildRow(View view, int iconId, String text, String textPrefix, int textColor, boolean isWiki, boolean isText, boolean needLinks) {
-		buildRow(view, getRowIcon(iconId), text, textPrefix, textColor, isWiki, isText, needLinks);
+	private void buildRow(View view, int iconId, String text, String textPrefix,
+						  int textColor, boolean isWiki, boolean isText, boolean needLinks,
+						  boolean isPhoneNumber, boolean isUrl) {
+		buildRow(view, getRowIcon(iconId), text, textPrefix, textColor, isWiki, isText, needLinks,
+				isPhoneNumber, isUrl);
 	}
 
-	protected void buildRow(final View view, Drawable icon, final String text, final String textPrefix, int textColor, boolean isWiki, boolean isText, boolean needLinks) {
+	protected void buildRow(final View view, Drawable icon, final String text, final String textPrefix,
+							int textColor, boolean isWiki, boolean isText, boolean needLinks,
+							boolean isPhoneNumber, boolean isUrl) {
 		boolean light = app.getSettings().isLightContent();
 
 		if (!isFirstRow()) {
@@ -98,7 +107,9 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		textView.setTextSize(16);
 		textView.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_info_text_light : R.color.ctx_menu_info_text_dark));
 
-		if (needLinks) {
+		if (isPhoneNumber || isUrl) {
+			textView.setTextColor(textView.getLinkTextColors());
+		} else if (needLinks) {
 			textView.setAutoLinkMask(Linkify.ALL);
 			textView.setLinksClickable(true);
 		}
@@ -123,7 +134,40 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 		((LinearLayout) view).addView(ll);
 
-		if (isWiki) {
+		if (isPhoneNumber) {
+			ll.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(final View v) {
+					final String[] phones = text.split(",|;");
+					if (phones.length > 1) {
+						AlertDialog.Builder dlg = new AlertDialog.Builder(v.getContext());
+						dlg.setNegativeButton(R.string.shared_string_cancel, null);
+						dlg.setItems(phones, new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								Intent intent = new Intent(Intent.ACTION_DIAL);
+								intent.setData(Uri.parse("tel:" + phones[which]));
+								v.getContext().startActivity(intent);
+							}
+						});
+						dlg.show();
+					} else {
+						Intent intent = new Intent(Intent.ACTION_DIAL);
+						intent.setData(Uri.parse("tel:" + text));
+						v.getContext().startActivity(intent);
+					}
+				}
+			});
+		} else if (isUrl) {
+			ll.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Intent intent = new Intent(Intent.ACTION_VIEW);
+					intent.setData(Uri.parse(text));
+					v.getContext().startActivity(intent);
+				}
+			});
+		} else if (isWiki) {
 			ll.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -165,6 +209,8 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			boolean isText = false;
 			boolean isDescription = false;
 			boolean needLinks = !"population".equals(key);
+			boolean isPhoneNumber = false;
+			boolean isUrl = false;
 			int poiTypeOrder = 0;
 			String poiTypeKeyName = "";
 
@@ -214,9 +260,10 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 			} else if (Amenity.PHONE.equals(key)) {
 				iconId = R.drawable.ic_action_call_dark;
+				isPhoneNumber = true;
 			} else if (Amenity.WEBSITE.equals(key)) {
 				iconId = R.drawable.ic_world_globe_dark;
-				vl = vl.replace(' ', '_');
+				isUrl = true;
 			} else {
 				if (key.contains(Amenity.DESCRIPTION)) {
 					iconId = R.drawable.ic_action_note_dark;
@@ -251,13 +298,13 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 			if (isDescription) {
 				descriptions.add(new AmenityInfoRow(key, R.drawable.ic_action_note_dark, textPrefix,
-						vl, 0, false, true, true, 0, ""));
+						vl, 0, false, true, true, 0, "", false, false));
 			} else if (icon != null) {
 				infoRows.add(new AmenityInfoRow(key, icon, textPrefix, vl, textColor, isWiki, isText,
-						needLinks, poiTypeOrder, poiTypeKeyName));
+						needLinks, poiTypeOrder, poiTypeKeyName, isPhoneNumber, isUrl));
 			} else {
 				infoRows.add(new AmenityInfoRow(key, iconId, textPrefix, vl, textColor, isWiki, isText,
-						needLinks, poiTypeOrder, poiTypeKeyName));
+						needLinks, poiTypeOrder, poiTypeKeyName, isPhoneNumber, isUrl));
 			}
 		}
 
@@ -303,9 +350,11 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 	public void buildAmenityRow(View view, AmenityInfoRow info) {
 		if (info.icon != null) {
-			buildRow(view, info.icon, info.text, info.textPrefix, info.textColor, info.isWiki, info.isText, info.needLinks);
+			buildRow(view, info.icon, info.text, info.textPrefix, info.textColor, info.isWiki,
+					info.isText, info.needLinks, info.isPhoneNumber, info.isUrl);
 		} else if (info.iconId != 0) {
-			buildRow(view, info.iconId, info.text, info.textPrefix, info.textColor, info.isWiki, info.isText, info.needLinks);
+			buildRow(view, info.iconId, info.text, info.textPrefix, info.textColor, info.isWiki,
+					info.isText, info.needLinks, info.isPhoneNumber, info.isUrl);
 		}
 	}
 
@@ -319,12 +368,14 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		private boolean isWiki;
 		private boolean isText;
 		private boolean needLinks;
+		private boolean isPhoneNumber;
+		private boolean isUrl;
 		private int order;
 		private String name;
 
 		public AmenityInfoRow(String key, Drawable icon, String textPrefix, String text,
 							  int textColor, boolean isWiki, boolean isText, boolean needLinks,
-							  int order, String name) {
+							  int order, String name, boolean isPhoneNumber, boolean isUrl) {
 			this.key = key;
 			this.icon = icon;
 			this.textPrefix = textPrefix;
@@ -335,11 +386,13 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			this.needLinks = needLinks;
 			this.order = order;
 			this.name = name;
+			this.isPhoneNumber = isPhoneNumber;
+			this.isUrl = isUrl;
 		}
 
 		public AmenityInfoRow(String key, int iconId, String textPrefix, String text,
 							  int textColor, boolean isWiki, boolean isText, boolean needLinks,
-							  int order, String name) {
+							  int order, String name, boolean isPhoneNumber, boolean isUrl) {
 			this.key = key;
 			this.iconId = iconId;
 			this.textPrefix = textPrefix;
@@ -350,6 +403,8 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			this.needLinks = needLinks;
 			this.order = order;
 			this.name = name;
+			this.isPhoneNumber = isPhoneNumber;
+			this.isUrl = isUrl;
 		}
 	}
 }
