@@ -364,13 +364,13 @@
 	<string name="poi_place_allotments">Kleingartensiedlung</string>
 	<string name="poi_place_farm">Farm</string>
 	<string name="poi_place_of_worship">Kultstätte</string>
-	<string name="poi_religion_buddhist">Buddhistische Kultstätte</string>
-	<string name="poi_religion_christian">Christliche Kultstätte</string>
-	<string name="poi_religion_hindu">Hinduistische Kultstätte</string>
-	<string name="poi_religion_jewish">Jüdische Kultstätte</string>
-	<string name="poi_religion_muslim">Muslimische Kultstätte</string>
-	<string name="poi_religion_shinto">Shintoistische Kultstätte</string>
-	<string name="poi_religion_sikh">Sikh Kultstätte</string>
+	<string name="poi_religion_buddhist">Buddhismus</string>
+	<string name="poi_religion_christian">Christentum</string>
+	<string name="poi_religion_hindu">Hinduismus</string>
+	<string name="poi_religion_jewish">Judentum</string>
+	<string name="poi_religion_muslim">Islam</string>
+	<string name="poi_religion_shinto">Shintoistisch</string>
+	<string name="poi_religion_sikh">Sikh</string>
 	<string name="poi_religion_taoist">Taoismus</string>
 	<string name="poi_craft_plasterer">Stuckateur</string>
 	<string name="poi_playground">Spielplatz</string>
@@ -889,7 +889,7 @@
 	<string name="poi_collection_times">Leerungszeiten</string>
 	<string name="poi_service_times">Betriebszeiten</string>
 	<string name="poi_abandoned_poi">Verlassenes Objekt</string>
-	<string name="poi_enforcement_traffic_signals">Ampel-Blitzanlage</string>
+	<string name="poi_enforcement_traffic_signals">Ampelblitzanlage</string>
 	<string name="poi_enforcement_maxspeed">Geschwindigkeitskontrolle</string>
 	<string name="poi_enforcement_maxheight">Höhenkontrolle</string>
 	<string name="poi_enforcement_mindistance">Abstandskontrolle</string>
@@ -969,7 +969,7 @@
 	<string name="poi_access_delivery">Lieferverkehr frei</string>
 	<string name="poi_access_agricultural">frei für Landwirtschaft</string>
 
-	<string name="poi_recycling_centre">Zentrum</string>
+	<string name="poi_recycling_centre">Typ: Recyclingzentrum</string>
 	<string name="poi_recycling_aluminium">Aluminium</string>
 	<string name="poi_recycling_white_goods">Weiße Güter</string>
 	<string name="poi_recycling_cooking_oil">Speiseöl</string>
@@ -1084,7 +1084,7 @@
 	<string name="poi_nudism_yes">Freikörperkultur: erlaubt</string>
 	<string name="poi_nudism_no">Freikörperkultur: verboten</string>
 	<string name="poi_nudism_obligatory">Freikörperkultur: obligatorisch</string>
-	<string name="poi_nudism_customary">Freikörperkultur: Gewohnheits</string>
+	<string name="poi_nudism_customary">Freikörperkultur: Gewohnheitsmäßig</string>
 	<string name="poi_nudism_permissive">Freikörperkultur: freizügig</string>
 
 	<string name="poi_trade_building_supplies">Baubedarf</string>
@@ -1171,7 +1171,7 @@
 	<string name="poi_internet_access_type_wlan">Internetzugang: WLAN</string>
 	<string name="poi_internet_access_type_terminal">Internetzugang: Arbeitsplatz</string>
 	<string name="poi_internet_access_type_wired">Internetzugang: kabelgebunden</string>
-	<string name="poi_internet_access_type_public">Internetzugang: offen</string>
+	<string name="poi_internet_access_type_public">Internetzugang: öffentlich</string>
 	<string name="poi_internet_access_type_service">Internetzugang: Service</string>
 	<string name="poi_internet_access_type_no">Kein Internetzugang</string>
 	<string name="poi_internet_access_type_yes">Mit Internetzugang</string>
@@ -1953,7 +1953,7 @@
 	<string name="poi_vending_bicycle_tube">Fahrraschscläuche</string>
 	<string name="poi_vending_drinks_food">Getränke und Essne</string>
 	<string name="poi_vending_fuel">Kraftstoffverkauf</string>
-	<string name="poi_vending_parcel_pickup">Paketeannahmestelle</string>
+	<string name="poi_vending_parcel_pickup">Paketaufnahmestelle</string>
 	<string name="poi_vending_parcel_mail_in">Paketeannahmestelle</string>
 	<string name="poi_vending_milk">Milch</string>
 	<string name="poi_vending_elongated_coin">Souvenirmünze</string>
@@ -1964,9 +1964,9 @@
 	<string name="poi_vending_toll">Mautverkauf</string>
 	<string name="poi_vending_tickets">Fahrscheinverkauf</string>
 	<string name="poi_vending_water">Wasserverkauf</string>
-	<string name="poi_vending_telephone_vouchers">Telefon Gutschein</string>
+	<string name="poi_vending_telephone_vouchers">Telefongutschein</string>
 	<string name="poi_vending_animal_food">Tiernahrung</string>
-	<string name="poi_vending_public_transport_plans">Fahrplan</string>
+	<string name="poi_vending_public_transport_plans">Fahrpläne</string>
 	<string name="poi_vending_drinks_sweets">Getränke und Süßigkeiten</string>
 	<string name="poi_vending_vouchers">Gutscheine</string>
 	<string name="poi_vending_dvd">DVD</string>
