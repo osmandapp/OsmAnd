@@ -292,7 +292,7 @@
 	
 	<string name="download_files_not_enough_space">İndirme için yeterli yer yok: %1$s MB (free: %2$s).</string>
 	
-	<string name="auto_follow_route_never">Asla</string>
+	<string name="auto_follow_route_never">Asla (musluk \'Git\' elle gidişi başlatmak için)</string>
 	<string name="animate_route_off">Animasyonu durdur</string>
 	<string name="animate_route">Animasyonu başlat</string>
 	<string name="file_can_not_be_renamed">Dosya yeniden adlandırılamaz.</string>
@@ -327,7 +327,7 @@
 	<string name="error_doing_search">Çevrimdışı aramada hata oluştu</string>
 	<string name="search_osm_offline">Adresi çevrimdışı haritalarda ara</string>
 	<string name="system_locale">Sistem</string>
-	<string name="preferred_locale_descr">" Ekran dilini seç"</string>
+	<string name="preferred_locale_descr">Ekran dilini seç(değiştirdikten sonra Osmand yeniden başlatın)</string>
 	<string name="preferred_locale">Ekran dili</string>
 	<string name="incomplete_locale">Tamamlanmamış</string>
 	
@@ -641,8 +641,8 @@
 	<string name="index_name_us">Kuzey Amerika - Amerika Birleşik Devletleri</string>
 	<string name="index_name_central_america">Orta Amerika</string>
 	<string name="index_name_south_america">Güney Amerika</string>
-	<string name="index_name_russia">Avrupa / Asya - Rusya</string>
-	<string name="index_name_oceania">okyanusya</string>
+	<string name="index_name_russia">Rusya</string>
+	<string name="index_name_oceania">Avustralya ve Okyanusya</string>
 	<string name="index_name_other">Dünya ve konu haritaları</string>
 	<string name="index_name_wiki">Dünya Wikipedia POIleri</string>
 	<string name="fav_export_confirmation">Daha önce dışarıdan alınan favorili dosya zaten var. Bunu değiştirmek istiyor musunuz?</string>
@@ -651,15 +651,15 @@
 	<string name="routing_settings">Navigasyon</string>
 	<string name="routing_settings_descr">Navigasyon için seçenekleri belirtin</string>
 	<string name="global_settings">Genel ayarlar</string>
-	<string name="index_settings">Veri Yönetimi</string>
+	<string name="index_settings">Harita dosyaları yönetin</string>
 	<string name="general_settings">Genel</string>
 	<string name="general_settings_descr">Uygulama için ekran ve ortak ayarları yapılandırma</string>
 	<string name="global_app_settings">Genel uygulama ayarları</string>
 	<string name="user_name">OSM kullanıcı adınız</string>
 	<string name="user_name_descr">Openstreetmap.org gönderimler için gereklidir</string>
 	<string name="user_password_descr">Openstreetmap.org gönderimler için gereklidir</string>
-	<string name="osmand_service">Uyku modu işlevselliği</string>
-	<string name="osmand_service_descr">Ekran kapalı iken OsmAndı çalıştırmak için kullanın</string>
+	<string name="osmand_service">Arka plan modu</string>
+	<string name="osmand_service_descr">Ekran kapalı iken Osmand arka planda çalışır</string>
 	
 	
 	
@@ -712,8 +712,8 @@
 	<string name="search_position_current_location_found">Konum (bulundu)</string>
 	<string name="search_position_undefined">Tanımlanmamış</string>
 	
-	<string name="search_position_map_view">Son harita görünümü</string>
-	<string name="select_search_position">Yakınlarda ara:</string>
+	<string name="search_position_map_view">Güncel harita merkezi</string>
+	<string name="select_search_position">Menşei:</string>
 	<string name="context_menu_item_search">Buraya yakın ara</string>
 	<string name="shared_string_save_as_gpx">Rotayı GPX olarak kaydet</string>
 	<string name="route_successfully_saved_at">Rota \'%1$s\' olarak kaydedildi.</string>
@@ -727,23 +727,23 @@
 	<string name="favorite_delete_multiple">%1$d favori ve %2$d favori grubunu silmek istediğinize emin misiniz?</string>
 	<string name="local_index_gpx_info_show">\n\nAyarlar için bas ve bekle</string>
 	
-	<string name="local_index_installed">Sürüm</string>
+	<string name="local_index_installed">Yerel Versiyon</string>
 	<string name="local_index_items_backuped">%1$d/%2$d nesne pasifleştirildi.</string>
 	<string name="local_index_items_deleted">%1$d/%2$d nesne silindi.</string>
 	<string name="local_index_items_restored">%1$d/%2$d nesne aktifleştirildi.</string>
-	<string name="local_index_descr_title">Veri Yönetimi</string>
+	<string name="local_index_descr_title">Harita dosyalarını yönetin</string>
 	<string name="local_index_mi_restore">Aktifleştir</string>
 	<string name="local_index_mi_backup">Pasifleştir</string>
 	<string name="local_index_poi_data">POI Verisi</string>
 	<string name="local_index_address_data">Adres Verisi</string>
-	<string name="local_index_transport_data">Ulaşım Verisi</string>
+	<string name="local_index_transport_data">Toplu taşıma verileri</string>
 	<string name="local_index_map_data">Harita Verisi</string>
 	<string name="local_indexes_cat_backup">Pasifleştir</string>
-	<string name="local_indexes_cat_tts">Ses Verisi (TTS)</string>
-	<string name="local_indexes_cat_voice">Ses Verisi (Kayıtlı)</string>
+	<string name="local_indexes_cat_tts">Ses istemleri (TTS)</string>
+	<string name="local_indexes_cat_voice">Ses istemleri (kayıtlı)</string>
 	
 	<string name="local_indexes_cat_poi">POI Verisi</string>
-	<string name="ttsvoice">TTS Sesleri</string>
+	<string name="ttsvoice">TTS sesi</string>
 	<string name="trace_rendering">Hata ayıklama bilgisi dönüştürülüyor</string>
 	<string name="trace_rendering_descr">Dönüştürme performansını göster</string>
 	<string name="installing_new_resources">Yeni veri(ler) açılıyor…</string>
@@ -1641,4 +1641,19 @@
 	<string name="context_menu_item_add_waypoint">GPX yol noktası ekle</string>
 	<string name="amenity_type_geocache">Geocache</string>
 	<string name="amenity_type_leisure">Boş</string>
+	<string name="gpx_option_from_start_point">Tüm pist boyunca geçmek</string>
+	<string name="layer_underlay">Underlay haritası …</string>
+	<string name="select_tile_source_to_install">Seç (kiremit) yüklemek veya güncellemek haritalar</string>
+	<string name="create_poi_link_to_osm_doc">&lt;u&gt; Online OSM &lt;/ u&gt; görüntüleri ile harita sınıflandırma<u>Online OSM</u> map classification with images</string>
+	<string name="search_offline_geo_error">Coğrafi niyet ayrıştırılamadı \'% s\'</string>
+	<string name="unit_of_length">Ölçü birimi</string>
+	<string name="keep_informing_never">Sadece elle (musluk ok)</string>
+    <string name="keep_informing_descr">Yeniden duyurmak düzenli aralıklarla navigasyon talimatları</string>
+    <string name="keep_informing">Tekrarlama navigasyon talimatları</string>
+	<string name="poi_filter_nominatim">özellikle online olarak</string>
+	<string name="shared_string_others">Diğerleri</string>
+	<string name="vector_data_missing">Gemide (\'offline\') veri SD kart üzerinde eksik. Haritalar çevrimdışı kullanmak için indirmek için düşünün lütfen.</string>
+	<string name="shared_string_release">Çıkış</string>
+	<string name="local_index_action_do">Siz 1 $ s% 2 $ s kalem (ler)% üzeresiniz. Devam?</string>
+	<string name="index_name_netherlands">Avrupa - Hollanda</string>
 	</resources>
