@@ -2383,7 +2383,7 @@
 	<string name="poi_internet_access_type_terminal">Тип доступа к Интернет: терминал</string>
 	<string name="poi_historic_period_dominate">Исторический период: доминантный</string>
 
-	<string name="poi_conveying_yes">Движущаяся(йся): да</string>
+	<string name="poi_conveying_yes">Эскалатор/траволатор</string>
 
 	<string name="poi_bridge_ref">Метка моста</string>
 	<string name="poi_tunnel_ref">Метка туннеля</string>
