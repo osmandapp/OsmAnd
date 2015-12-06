@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="close_changeset">Değişiklik listesini kapat</string>
 	<string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner uygulaması kurulu değil. Uygulama marketinde aramak ister misiniz?</string>
 	<string name="rendering_attr_roadColors_description">Yol renk şemasını seç:</string>
@@ -360,7 +360,7 @@
 	
 	
 	
-	<string name="voice">Ses</string>
+	<string name="voice">Kaydedilen Ses</string>
 	<string name="no_vector_map_loaded">Vektör haritalar yüklenmedi</string>
 	<string name="vector_data">Çevrimdışı vektör haritaları</string>
 	
@@ -854,7 +854,7 @@
 	<string name="menu_layers">Harita katmanları</string>
 	
 	<string name="gps_status_app_not_found">GPS Durum uygulaması yüklenmedi, mağazada arayın?</string>
-	<string name="poi_filter_closest_poi">Yakın İÇN (İhtiyaç Noktaları)</string>
+	<string name="poi_filter_closest_poi">En yakın POI</string>
 	<string name="amenity_type_administrative">İdari</string>
 	<string name="amenity_type_barrier">Engel</string>
 	<string name="amenity_type_historic">Tarihi</string>
@@ -895,13 +895,13 @@
 	<string name="send_location">Konum gönder</string>
 	<string name="context_menu_item_share_location">Konum paylaş</string>
 	<string name="amenity_type_landuse">Arazi</string>
-	<string name="amenity_type_transportation">Taşıma</string>
+	<string name="amenity_type_transportation">Ulaşım</string>
 	<string name="shared_string_io_error">G/Ç hatası oluştu</string>
 	<string name="km">km</string>
 	<string name="km_h">km/h</string>
 	<string name="m">m</string>
 	<string name="poi_filter_custom_filter">Özel süzgeç</string>
-	<string name="specified_dir_doesnt_exist">Belirtilen dizin bulunamıyor.</string>
+	<string name="specified_dir_doesnt_exist">Belirtilen klasörü bulamıyor.</string>
 	<string name="application_dir">Veri depolama dizini</string>
 	<string name="osmand_net_previously_installed">Önceki bir OsmAnd sürümü yüklü. Tüm çevrimdışı veri yeni uygulama tarafından desteklenecek. Fakat Favori noktalar eski uygulamada dışa aktarılıp, sonra yeni uygulamada içe aktarılmalıdır.</string>
 	<string name="build_installed">{0} yapımı başarıyla yüklendi ({1}).</string>
@@ -925,9 +925,9 @@
 	<string name="poi_context_menu_website">İÇN websitesini göster</string>
 	<string name="poi_context_menu_call">İÇN telefonunu göster</string>
 	<string name="download_type_to_filter">süzmek için yazın</string>
-	<string name="context_menu_item_search_transport">Taşıma arayın</string>
-	<string name="transport_searching_transport">Taşıma sonuçları (hedef yok):</string>
-	<string name="transport_searching_route">Taşıma sonuçları (hedefe {0}):</string>
+	<string name="context_menu_item_search_transport">Toplu taşıma ara</string>
+	<string name="transport_searching_transport">Ulaştırma sonuçları (hedef yok):</string>
+	<string name="transport_searching_route">Ulaşım sonuçları (hedefe {0}):</string>
 	<string name="transport_search_again">Taşıma aramasını sıfırla</string>
 	<string name="map_route_by_gpx">GPX kullanarak gez</string>
 	<string name="gpx_files_not_found">GPX dosyaları /tracks dizininde bulunamadı</string>
@@ -1607,4 +1607,38 @@
 	<string name="background_service_provider_descr">Arka plan hizmeti tarafından kullanılan konum sağlayıcı seçin</string>
 	<string name="route_head">Baş</string>
 	<string name="map_screen_orientation">Ekran yönlendirme</string>
+	<string name="no_address_found">Hiçbir adres tespit edilemedi</string>
+	<string name="voices">Ses istemleri</string>
+	<string name="layer_gpx_layer">GPX parça …</string>
+	<string name="transport_context_menu">Durakta Arama taşımacılığı</string>
+	<string name="rotate_map_to_bearing">Harita yönlendirme</string>
+	<string name="version_index_is_not_supported">Endeksin versiyonu \'\' {0} \'desteklenmiyor</string>
+	<string name="use_osmand_routing_service">Osmand navigasyon&gt; 20km</string>
+	<string name="use_osmand_routing_service_descr">Kullanım Osmand çevrimdışı gezinme yolları için geçerlidir&gt; 20 km (deneysel)</string>
+	<string name="osmand_routing_experimental">Osmand çevrimdışı gezinme deneysel bir özelliktir ve daha yaklaşık 20 km\'lik mesafelerde çalışmıyor.\n\nNavigasyon hizmeti geçici olarak çevrimiçi CloudMade geçer.</string>
+	<string name="install_selected_build">Eğer Osmand yüklemek istiyor musunuz - {0} {1} {2} MB?</string>
+	<string name="tiles_to_download_estimated_size">Yakınlaştırma {0} indirmek {1} fayans ({2} MB)</string>
+	<string name="select_max_zoom_preload_area">Preload maksimum zoom seçin</string>
+	<string name="continuous_rendering_descr">Bir defada yerine görüntünün sürekli render görüntüler</string>
+	<string name="renderers">vektör render</string>
+	<string name="renderers_descr">Görünüm render seç</string>
+	<string name="use_high_res_maps_descr">Yüksek yoğunluklu ekranlarda harita fayans streç (ve bulanıklık) etmeyin</string>
+	<string name="indexing_address">Dizin Oluşturma adresi …</string>
+	<string name="indexing_map">Dizin Oluşturma haritası …</string>
+	<string name="indexing_poi">Dizin Oluşturma POI …</string>
+	<string name="indexing_transport">Dizin Oluşturma taşımacılığı …</string>
+	<string name="old_map_index_is_not_supported">\'{0}\' desteklenmiyor onaylanmamaktadır harita veri formatı \'</string>
+	<string name="poi_filter_namefinder">Çevrimiçi Name Finder</string>
+	<string name="reading_cached_tiles">Önbelleğe fayans okunuyor …</string>
+	<string name="version_index_is_big_for_memory">Index \'\' {0} \'belleğe sığmadı</string>
+	<string name="si_mi_yard">Mil / kilometre</string>
+	<string name="yard">yd</string>
+	<string name="foot">ft</string>
+	<string name="mile">mi</string>
+	<string name="send_location_email_pattern">Konumu web tarayıcısı bağlantı% 1 $ s ya da android niyet bağlantı% 2 $ s izleyin görmek için</string>
+	<string name="add_waypoint_dialog_added">GPX Mevki \'\' {0} \'başarıyla eklendi</string>
+	<string name="add_waypoint_dialog_title">Kaydedilen GPX parçaya yol noktasını ekle</string>
+	<string name="context_menu_item_add_waypoint">GPX yol noktası ekle</string>
+	<string name="amenity_type_geocache">Geocache</string>
+	<string name="amenity_type_leisure">Boş</string>
 	</resources>
