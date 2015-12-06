@@ -14,8 +14,8 @@
     <string name="shared_string_hide">Hide</string>
     <string name="av_video_quality_low">Lowest resolution</string>
     <string name="av_video_quality_high">Highest resolution</string>
-    <string name="av_video_quality">Video output quality</string>
-    <string name="av_video_quality_descr">Select video output quality</string>
+    <string name="av_video_quality">Video output resolution</string>
+    <string name="av_video_quality_descr">Select video output resolution</string>
     <string name="av_audio_format">Audio output format</string>
     <string name="av_audio_format_descr">Select audio output format</string>
     <string name="av_audio_bitrate">Audio bitrate</string>
