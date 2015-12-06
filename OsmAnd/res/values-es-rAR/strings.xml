@@ -2001,5 +2001,5 @@
     <string name="av_audio_bitrate">Bitrate del audio</string>
     <string name="av_audio_bitrate_descr">Elige la tasa de bits del audio</string>
     <string name="no_address_found">Dirección indeterminada</string>
-	<string name="looking_up_address">Mejorando dirección</string>
+	<string name="looking_up_address">Buscando dirección</string>
     </resources>
