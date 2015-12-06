@@ -1809,7 +1809,7 @@
     
     <string name="shared_string_qr_code">QR-code</string>
     <string name="map_downloaded">Mapa baixado</string>
-    <string name="please_specify_poi_type_only_from_list">"Especifique o tipo correto de POI ou ignore. "</string>
+    <string name="please_specify_poi_type_only_from_list">Especifique o tipo correto de POI ou ignore</string>
     <string name="access_from_map">Acessar a partir do mapa</string>
     <string name="show_on_start_description">\'Desligado\' lança diretamente para a tela do mapa</string>
     <string name="copied_to_clipboard">Copiado para a área de transferência</string>
