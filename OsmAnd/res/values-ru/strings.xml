@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
 
+	<string name="shared_string_commit">Подтвердить</string>
+    <string name="looking_up_address">Поиск адреса</string>
+    <string name="please_specify_poi_type_only_from_list">Пожалуйста, укажите корректный тип POI из списка, или оставьте его пустым</string>
+    <string name="av_audio_format">Формат аудио</string>
+    <string name="av_audio_format_descr">Выберите формат аудио</string>
+    <string name="av_audio_bitrate">Битрейт аудио</string>
+    <string name="av_audio_bitrate_descr">Выберите битрейт аудио</string>
+    <string name="shared_string_hide">Скрыть</string>
+	<string name="no_address_found">Адрес не определён</string>
+	<string name="shared_string_near">Около</string>
     <string name="shared_string_location">Местоположение</string>
     <string name="poi_context_menu_modify_osm_change">Редактировать POI</string>
     <string name="osm_edit_reopened_note">Заметка OSM открыта снова</string>
