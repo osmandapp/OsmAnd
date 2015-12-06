@@ -1533,7 +1533,7 @@
 	<string name="av_camera_focus_hiperfocal">Hiperodak odak</string>
 	<string name="av_camera_pic_size">Kamera Resim Boyutu</string>
 	<string name="av_camera_pic_size_descr">İç kamera Resim Boyutu seçin</string>
-    <string name="navigation_intent_invalid">Geçersiz format:% s</string>
+    <string name="navigation_intent_invalid">Geçersiz format:%s</string>
 	<string name="plugin_description_title">Açıklama</string>
 	<string name="plugin_install_needs_network">Bu eklentiyi yüklemek için bir internet bağlantısına ihtiyacınız vardır.</string>
 	<string name="get_plugin">Almak</string>
@@ -1566,7 +1566,7 @@
 	<string name="add_favorite_dialog_favourite_added_template">En sevdiğim nokta \'\' {0} \'başarıyla eklendi.</string>
 	<string name="favourites_context_menu_add">Sık kullanılanlara ekle</string>
 	<string name="favourites_context_menu_edit">Düzenleme favori</string>
-	<string name="favourites_remove_dialog_msg">Favori nokta \'% s\' kaldırılsın mı?</string>
+	<string name="favourites_remove_dialog_msg">Favori nokta \'%s\' kaldırılsın mı?</string>
 	<string name="favourites_remove_dialog_success">En sevdiğim nokta {0} başarıyla silindi.</string>
 	<string name="poi_error_poi_not_found">Düğüm bulunamadı ya da başlıca tek bir düğüm değil, olabilir</string>
 	<string name="poi_remove_confirm_template">Sil {0} (Yorumunuzu Girin)?</string>
@@ -1635,7 +1635,7 @@
 	<string name="yard">yd</string>
 	<string name="foot">ft</string>
 	<string name="mile">mi</string>
-	<string name="send_location_email_pattern">Konumu web tarayıcısı bağlantı% 1 $ s ya da android niyet bağlantı% 2 $ s izleyin görmek için</string>
+	<string name="send_location_email_pattern">Konumu web tarayıcısı bağlantı %1$s ya da android niyet bağlantı %2$s izleyin görmek için</string>
 	<string name="add_waypoint_dialog_added">GPX Mevki \'\' {0} \'başarıyla eklendi</string>
 	<string name="add_waypoint_dialog_title">Kaydedilen GPX parçaya yol noktasını ekle</string>
 	<string name="context_menu_item_add_waypoint">GPX yol noktası ekle</string>
