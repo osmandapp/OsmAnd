@@ -2123,7 +2123,7 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="dashboard_or_drawer_description">Nouvelle option permettant de définir le comportement du bouton Menu : lancement du Tableau de bord ou du Menu statique ? Ce paramètre peut être modifié par la suite dans les préférences.</string>
     <string name="access_from_map_description">Le bouton Menu lance le tableau de bord (plutôt que le Menu)</string>
     <string name="access_from_map">Accès depuis la carte</string>
-    <string name="please_specify_poi_type_only_from_list">"Merci d\'indiquer un type pour ce PI ou d\'ignorer. "</string>
+    <string name="please_specify_poi_type_only_from_list">Merci d\'indiquer un type pour ce PI ou d\'ignorer</string>
     <string name="routing_attr_avoid_stairs_name">Éviter les escaliers</string>
 	<string name="routing_attr_avoid_borders_name">Éviter le franchissement de frontières</string>
 	<string name="routing_attr_avoid_stairs_description">Éviter les escaliers</string>
@@ -2131,8 +2131,8 @@ Afghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et
     <string name="poi_context_menu_modify_osm_change">Modifier la contribution OSM</string>
     <string name="shared_string_near">Proche</string>
     <string name="shared_string_hide">Masquer</string>
-    <string name="av_video_quality_low">Résolution plus basse</string>
-    <string name="av_video_quality_high">Résolution plus élevée</string>
+    <string name="av_video_quality_low">Qualité la plus basse</string>
+    <string name="av_video_quality_high">Qualité la plus élevée</string>
     <string name="av_video_quality">Qualité de la sortie vidéo</string>
     <string name="av_video_quality_descr">Sélectionnez la qualité de la sortie vidéo</string>
     <string name="av_audio_format">Format de la sortie audio</string>
