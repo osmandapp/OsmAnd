@@ -2007,7 +2007,7 @@
     <string name="poi_dialog_reopen">Öppna igen</string>
 	<string name="shared_string_commit">Skicka in</string>
 	
-    <string name="please_specify_poi_type_only_from_list">"Ange rätt POI-typ eller hoppa över det. "</string>
+    <string name="please_specify_poi_type_only_from_list">Ange rätt POI-typ eller hoppa över det</string>
     <string name="rendering_attr_roadStyle_description">Vägtyp</string>
     <string name="osm_edit_reopened_note">Öppnat OSM-anteckning igen</string>
     <string name="routing_attr_avoid_stairs_name">Undvik trappor</string>
@@ -2019,8 +2019,8 @@
 	<string name="action_delete">Åtgärd ta bort</string>
 	<string name="shared_string_near">Nära</string>
     <string name="shared_string_hide">Dölj</string>
-    <string name="av_video_quality_low">Lägsta upplösning</string>
-    <string name="av_video_quality_high">Högsta upplösning</string>
+    <string name="av_video_quality_low">Lägsta kvalitet</string>
+    <string name="av_video_quality_high">Högsta kvalitet</string>
     <string name="av_video_quality">Videokvalitet</string>
     <string name="av_video_quality_descr">Välj videokvalitet</string>
     <string name="av_audio_format">Ljudformat</string>
