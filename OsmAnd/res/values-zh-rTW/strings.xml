@@ -2026,4 +2026,6 @@
     <string name="av_audio_bitrate">音訊位元傳輸速率</string>
     <string name="av_audio_bitrate_descr">選擇音訊位元傳輸速率</string>
     <string name="shared_string_near">附近</string>
+    <string name="no_address_found">沒有確定地址</string>
+	<string name="looking_up_address">查尋地址</string>
     </resources>
