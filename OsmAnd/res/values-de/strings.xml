@@ -2199,8 +2199,8 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
 	
     <string name="av_locations">Positionen</string>
     <string name="shared_string_hide">verbergen</string>
-    <string name="av_video_quality_low">Niedrigste Auflösung</string>
-    <string name="av_video_quality_high">Höchste Auflösung</string>
+    <string name="av_video_quality_low">Niedrigste Qualität</string>
+    <string name="av_video_quality_high">Höchste Qualität</string>
     <string name="av_video_quality">Video Qualität</string>
     <string name="av_video_quality_descr">Wähle Video Qualität</string>
     <string name="av_audio_format">Audio Ausgabeformat</string>
