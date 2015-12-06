@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" ?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
 
 <string name="poi_palaeontological_site">مرکز دیرینه شناسی</string>
@@ -644,4 +644,6 @@
 <string name="poi_military_naval_base">پایگاه نیروی دریایی ارتش</string>
 <string name="poi_military_nuclear_explosion_site">محدوده هسته ای</string>
 
-</resources>
+<string name="poi_shop">مغازه</string>
+		<string name="poi_shop_food">اغذیه فروشی</string>
+	</resources>
