@@ -369,8 +369,8 @@
 	<string name="local_index_transport_data">اطلاعات حمل و نقل عمومی</string>
 	<string name="local_index_map_data">اطلاعات نقشه</string>
 	<string name="local_indexes_cat_backup">غیرفعال</string>
-	<string name="local_indexes_cat_tts">اطلاعات صوتی (TTS)</string>
-	<string name="local_indexes_cat_voice">اطلاعات صوتی (ضبط شده)</string>
+	<string name="local_indexes_cat_tts">اعلانهای صوتی (TTS)</string>
+	<string name="local_indexes_cat_voice">اعلانهای صوتی (ضبط شده)</string>
 	
 	<string name="local_indexes_cat_poi">اطلاعات POI</string>
 	<string name="ttsvoice">صدای TTS</string>
@@ -422,13 +422,13 @@
 	<string name="north_west">شمال-غرب</string>
 	<string name="north_north_west">شمال-شمال-غرب</string>
 	<string name="front">جلو</string>
-	<string name="front_right">جلو راست</string>
+	<string name="front_right">جلو-راست</string>
 	<string name="right">به طرف راست</string>
-	<string name="back_right">عقب راست</string>
+	<string name="back_right">عقب-راست</string>
 	<string name="back">عقب</string>
-	<string name="back_left">عقب چپ</string>
+	<string name="back_left">عقب-چپ</string>
 	<string name="left">به طرف چپ</string>
-	<string name="front_left">جلو چپ</string>
+	<string name="front_left">جلو-چپ</string>
 	<string name="oclock">ساعت</string>
 	<string name="towards">به طرف</string>
 	<string name="accuracy">دقت</string>
@@ -449,10 +449,10 @@
 	<string name="index_name_europe">اروپا</string>
 	<string name="index_name_france">اروپا-فرانسه</string>
 	<string name="index_name_germany">اروپا-آلمان</string>
-	<string name="index_name_russia">اروپا/آسیا-روسیه</string>
+	<string name="index_name_russia">روسیه</string>
 	<string name="index_name_africa">آفریقا</string>
 	<string name="index_name_asia">آسیا</string>
-	<string name="index_name_oceania">اقیانوسیه</string>
+	<string name="index_name_oceania">استرالیا و اقیانوسیه</string>
 	<string name="index_name_other">کل دنیا و نقشه های بالادستی</string>
 	<string name="index_name_voice">اعلانهای صوتی (ضبط شده، قابلیت محدود)</string>
 	<string name="index_name_tts_voice">اعلانهای صوتی (TTS، ارجح)</string>
@@ -760,8 +760,8 @@
 	<string name="rotate_map_bearing_opt">به طرف مسیر حرکت</string>
 	<string name="amenity_type_user_defined">تعریف شده توسط کاربر</string>
 	<string name="profile_settings">تنظیمات پروفایل ها</string>
-	<string name="osmand_service">حالت sleep mode</string>
-	<string name="osmand_service_descr">برای اجرای OsmAnd در زمانی که صفحه خاموش است به کار میرود</string>
+	<string name="osmand_service">حالت پس زمینه</string>
+	<string name="osmand_service_descr">OsmAnd حتی در زمانی که صفحه خاموش است در حال اجرا می‌ماند</string>
 	
 	<string name="download_files_not_enough_space">فضای کافی برای دانلود %1$s مگابایت وجود ندارد (فضای خالی: %2$s).</string>
 	<string name="download_files_question_space">اکنون فضای خالی {2} مگابایت است! {0} فایل دانلود شود ({1} MB)؟</string>
@@ -1030,7 +1030,7 @@
 	<string name="rendering_out_of_memory">حافظه اجرایی کافی برای نشان دادن ناحیه مورد نظر وجود ندارد</string>
 	<string name="use_fluorescent_overlays">لایه های فلورسنت</string>
 	<string name="local_openstreetmap_settings">POIها/یادداشتهای ذخیره شده محلی</string>
-	<string name="local_openstreetmap_settings_descr">نشان دادن POIها/اشکالات یادداشت شده در دیتابیس محلی</string>
+	<string name="local_openstreetmap_settings_descr">نشان دادن و مدیریت POIها/اشکالات یادداشت شده در دیتابیس محلی</string>
 	
 	
 	<string name="live_monitoring_interval_descr">تعیین فواصل ضبط آنلاین</string>
@@ -1230,7 +1230,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
 	
 	
 	<string name="osm_editing_plugin_description">نمایش تنظیمات مورد نیاز برای بازخورد OSM مانند جمع آوری/اصلاح POI، باز کردن /دادن نظر در اشکالات OSM و به اشتراک گذاشتن فایل های GPX ثبت شده.</string>
-	<string name="play_commands_of_currently_selected_voice">پخش دستورات صوتی در حال حاضر فعال شده</string>
+	<string name="play_commands_of_currently_selected_voice">پخش دستورات صوتی صدای انتخاب شده</string>
 	<string name="native_rendering">رندر بومی</string>
 	
 	<string name="accessibility_extensions_descr">افزونه دسترسی برای نسخه های قدیمی آندروید</string>
@@ -1249,7 +1249,7 @@ OsmAnd منبع باز است و فعالانه در حال توسعه است. �
 	
 	<string name="live_monitoring_url_descr">تعیین آدرس وب سایت با پارامترهای: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
 	<string name="live_monitoring_url">آدرس وبسایت ذخیره سازی آنلاین مسیر</string>
-	<string name="gpx_monitoring_disabled_warn">لطفاً تنظیمات \'ذخیره مسیر در فایل GPX\' را فعال نمایید.</string>
+	<string name="gpx_monitoring_disabled_warn">مسیر را با استفاده از ویجت GPX یا تنطیمات \'ضبط سفر\' ثبت کنید.</string>
 	    
 	<string name="index_name_wiki">ویکی پدیای POIهای سراسر جهان</string>
 	
