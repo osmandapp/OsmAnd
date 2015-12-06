@@ -1948,4 +1948,6 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="av_audio_format_descr">Zvoľte formát zvuku</string>
     <string name="av_audio_bitrate">Bitová rýchlosť zvuku</string>
     <string name="av_audio_bitrate_descr">Zvoľte bitovú rýchlosť zvuku</string>
+    <string name="no_address_found">Nenašla sa adresa</string>
+	<string name="looking_up_address">Hľadá sa adresa</string>
     </resources>
