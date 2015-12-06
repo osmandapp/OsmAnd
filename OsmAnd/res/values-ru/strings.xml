@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
 
+    <string name="av_video_quality_low">Низкое качество</string>
+    <string name="av_video_quality_high">Высокое качество</string>
+    <string name="av_video_quality">Качество видео</string>
+    <string name="av_video_quality_descr">Выберите качество видео</string>
 	<string name="shared_string_commit">Подтвердить</string>
     <string name="looking_up_address">Поиск адреса</string>
     <string name="please_specify_poi_type_only_from_list">Пожалуйста, укажите корректный тип POI из списка, или оставьте его пустым</string>
