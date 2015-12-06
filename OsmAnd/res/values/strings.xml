@@ -9,11 +9,11 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-	<string name="no_address_found">No address determined</string>
+	<string name="no_address_found">No address determined</string> 
 	<string name="shared_string_near">Near</string>
     <string name="shared_string_hide">Hide</string>
-    <string name="av_video_quality_low">Lowest resolution</string>
-    <string name="av_video_quality_high">Highest resolution</string>
+    <string name="av_video_quality_low">Lowest quality</string>
+    <string name="av_video_quality_high">Highest quality</string>
     <string name="av_video_quality">Video output quality</string>
     <string name="av_video_quality_descr">Select video output quality</string>
     <string name="av_audio_format">Audio output format</string>
@@ -1971,7 +1971,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="favourites_context_menu_add">Add favorite</string>
 	<string name="favourites_context_menu_edit">Edit favorite</string>
 	<string name="favourites_context_menu_delete">Delete favorite</string>
-	<string name="favourites_remove_dialog_msg">Remove favorite point \'%s\'?</string>
+	<string name="favourites_remove_dialog_msg">Remove favorite point \'%s\'?</string> 
 	<string name="favourites_remove_dialog_success">Favorite point {0} was successfully deleted.</string>
 	<string name="poi_edit_title">Edit POI</string>
 	<string name="poi_create_title">Create POI</string>

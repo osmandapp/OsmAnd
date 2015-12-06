@@ -200,10 +200,6 @@ public class SettingsAudioVideoActivity extends SettingsBaseActivity {
 				qNames.add(getString(R.string.av_video_quality_low));
 				qValues.add(CamcorderProfile.QUALITY_LOW);
 			}
-			if (CamcorderProfile.hasProfile(CamcorderProfile.QUALITY_HIGH)) {
-				qNames.add(getString(R.string.av_video_quality_high));
-				qValues.add(CamcorderProfile.QUALITY_HIGH);
-			}
 			if (CamcorderProfile.hasProfile(CamcorderProfile.QUALITY_480P)) {
 				qNames.add("720 x 480 (480p)");
 				qValues.add(CamcorderProfile.QUALITY_480P);
@@ -219,6 +215,10 @@ public class SettingsAudioVideoActivity extends SettingsBaseActivity {
 			if (Build.VERSION.SDK_INT >= 21 && CamcorderProfile.hasProfile(CamcorderProfile.QUALITY_2160P)) {
 				qNames.add("3840x2160 (2160p)");
 				qValues.add(CamcorderProfile.QUALITY_2160P);
+			}
+			if (CamcorderProfile.hasProfile(CamcorderProfile.QUALITY_HIGH)) {
+				qNames.add(getString(R.string.av_video_quality_high));
+				qValues.add(CamcorderProfile.QUALITY_HIGH);
 			}
 
 			ListPreference lp = createListPreference(p.AV_VIDEO_QUALITY,
