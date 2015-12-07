@@ -1,6 +1,7 @@
 package net.osmand.plus.mapcontextmenu;
 
 import android.graphics.drawable.Drawable;
+
 import net.osmand.Location;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.GeocodingUtilities.GeocodingResult;
@@ -10,7 +11,6 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.util.Algorithms;
 
 public abstract class MenuTitleController {

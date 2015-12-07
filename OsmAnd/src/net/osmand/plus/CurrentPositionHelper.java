@@ -1,29 +1,25 @@
 package net.osmand.plus;
 
+import net.osmand.Location;
+import net.osmand.ResultMatcher;
+import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
+import net.osmand.binary.GeocodingUtilities;
+import net.osmand.binary.GeocodingUtilities.GeocodingResult;
+import net.osmand.binary.RouteDataObject;
+import net.osmand.plus.resources.RegionAddressRepository;
+import net.osmand.router.GeneralRouter.GeneralRouterProfile;
+import net.osmand.router.RoutePlannerFrontEnd;
+import net.osmand.router.RoutingConfiguration;
+import net.osmand.router.RoutingContext;
+import net.osmand.util.MapUtils;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-
-import net.osmand.Location;
-import net.osmand.ResultMatcher;
-import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.binary.GeocodingUtilities;
-import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
-import net.osmand.binary.GeocodingUtilities.GeocodingResult;
-import net.osmand.binary.RouteDataObject;
-import net.osmand.osm.edit.Node;
-import net.osmand.osm.edit.OSMSettings.OSMTagKey;
-import net.osmand.plus.resources.RegionAddressRepository;
-import net.osmand.router.BinaryRoutePlanner.RouteSegment;
-import net.osmand.router.BinaryRoutePlanner.RouteSegmentPoint;
-import net.osmand.router.GeneralRouter.GeneralRouterProfile;
-import net.osmand.router.RoutePlannerFrontEnd;
-import net.osmand.router.RoutingConfiguration;
-import net.osmand.router.RoutingContext;
-import net.osmand.util.MapUtils;
 
 public class CurrentPositionHelper {
 	
