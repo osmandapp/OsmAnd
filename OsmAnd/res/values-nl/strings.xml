@@ -2255,4 +2255,5 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="av_audio_bitrate">Audio bitrate</string>
     <string name="av_audio_bitrate_descr">Kies audio bitrate</string>
     <string name="looking_up_address">Adres wordt gezocht</string>
+    <string name="rendering_attr_horseRoutes_name">Ruiterroutes</string>
     </resources>
