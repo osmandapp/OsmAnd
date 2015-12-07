@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>    
+<?xml version='1.0' encoding='utf-8'?>
+<resources>    
 	
     <string name="local_indexes_cat_av">زانیاری دەنگ/ڤیدیۆ</string>
     <string name="stop_routing_confirm">دڵنیای له وەی که ئه ته وێت ناڤیگێشن راگریت</string>
@@ -16,4 +17,15 @@
     <string name="favourites_edit_dialog_title">Agahdarî En Qu Mın</string>
     <string name="shared_string_upload">Barkiri</string>
     <string name="go_to_map">Here Nexşe</string>
+    <string name="shared_string_near">Nezik</string>
+    <string name="av_audio_format">Şekle Derketina Deng</string>
+    <string name="osb_comment_dialog_message">peyam</string>
+    <string name="osb_comment_dialog_author">Nave Nivîskar</string>
+    <string name="shared_string_location">Cih</string>
+    <string name="shared_string_qr_code">QR Qod</string>
+    <string name="map_downloaded">Nexş Hatte Daxistin</string>
+    <string name="shared_string_send">Bişîne</string>
+    <string name="regions">Herêman</string>
+    <string name="world_maps">Nexşa Cîhane</string>
+    <string name="traffic_warning_hazard">Tirs</string>
     </resources>
