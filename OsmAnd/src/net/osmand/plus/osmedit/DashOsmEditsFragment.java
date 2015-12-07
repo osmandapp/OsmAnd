@@ -14,12 +14,12 @@ import android.widget.TextView;
 
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.ProgressImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashBaseFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
+import net.osmand.plus.dialogs.ProgressDialogFragment;
 import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment;
 
 import java.util.ArrayList;
@@ -153,9 +153,8 @@ public class DashOsmEditsFragment extends DashBaseFragment
 
 	public void showProgressDialog(OsmPoint[] points, boolean closeChangeSet) {
 		OsmPoint[] toUpload = points;
-		ProgressDialog dialog = ProgressImplementation.createProgressDialog(getActivity(),
-				getString(R.string.uploading), getString(R.string.local_openstreetmap_uploading),
-				ProgressDialog.STYLE_HORIZONTAL).getDialog();
+		ProgressDialogFragment dialog = ProgressDialogFragment.createInstance(R.string.uploading,
+				R.string.local_openstreetmap_uploading, ProgressDialog.STYLE_HORIZONTAL);
 		OsmEditsUploadListener listener = new OsmEditsUploadListenerHelper(getActivity(),
 				getString(R.string.local_openstreetmap_were_uploaded)) {
 			@Override
@@ -174,10 +173,10 @@ public class DashOsmEditsFragment extends DashBaseFragment
 				}
 			}
 		};
+		dialog.show(getChildFragmentManager(), ProgressDialogFragment.TAG);
 		UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask(dialog,
 				listener, plugin, toUpload.length, closeChangeSet);
 		uploadTask.execute(toUpload);
-		dialog.show();
 	}
 
 	private void getOsmPoints(ArrayList<OsmPoint> dataPoints) {

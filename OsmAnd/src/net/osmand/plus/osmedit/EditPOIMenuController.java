@@ -8,9 +8,9 @@ import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.ProgressImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.dialogs.ProgressDialogFragment;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.osmedit.OsmPoint.Action;
 import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment;
@@ -26,7 +26,7 @@ public class EditPOIMenuController extends MenuController {
 	private String pointTypeStr;
 	private ProgressDialogPoiUploader poiUploader;
 
-	public EditPOIMenuController(OsmandApplication app, MapActivity mapActivity, PointDescription pointDescription, OsmPoint osmPoint) {
+	public EditPOIMenuController(OsmandApplication app, final MapActivity mapActivity, PointDescription pointDescription, OsmPoint osmPoint) {
 		super(new EditPOIMenuBuilder(app, osmPoint), pointDescription, mapActivity);
 		this.osmPoint = osmPoint;
 		plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
@@ -34,11 +34,10 @@ public class EditPOIMenuController extends MenuController {
 		poiUploader = new ProgressDialogPoiUploader() {
 			@Override
 			public void showProgressDialog(OsmPoint[] points, boolean closeChangeSet) {
-				ProgressDialog dialog = ProgressImplementation.createProgressDialog(
-						getMapActivity(),
-						getMapActivity().getString(R.string.uploading),
-						getMapActivity().getString(R.string.local_openstreetmap_uploading),
-						ProgressDialog.STYLE_HORIZONTAL).getDialog();
+				ProgressDialogFragment dialog = ProgressDialogFragment.createInstance(
+						R.string.uploading,
+						R.string.local_openstreetmap_uploading,
+						ProgressDialog.STYLE_HORIZONTAL);
 				OsmEditsUploadListener listener = new OsmEditsUploadListenerHelper(getMapActivity(),
 						getMapActivity().getString(R.string.local_openstreetmap_were_uploaded)) {
 					@Override
@@ -52,11 +51,10 @@ public class EditPOIMenuController extends MenuController {
 						}
 					}
 				};
+				dialog.show(mapActivity.getSupportFragmentManager(), ProgressDialogFragment.TAG);
 				UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask(
 						dialog, listener, plugin, points.length, closeChangeSet);
 				uploadTask.execute(points);
-
-				dialog.show();
 			}
 		};
 

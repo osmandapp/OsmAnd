@@ -1,11 +1,11 @@
 package net.osmand.plus.osmedit;
 
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 
 import net.osmand.osm.edit.EntityInfo;
 import net.osmand.osm.edit.Node;
+import net.osmand.plus.dialogs.ProgressDialogFragment;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public class UploadOpenstreetmapPointAsyncTask
 		extends AsyncTask<OsmPoint, OsmPoint, Map<OsmPoint, String>> {
-	private ProgressDialog progress;
+	private ProgressDialogFragment progress;
 	private OpenstreetmapRemoteUtil remotepoi;
 	private OsmBugsRemoteUtil remotebug;
 	private int listSize = 0;
@@ -23,7 +23,7 @@ public class UploadOpenstreetmapPointAsyncTask
 	private OsmEditingPlugin plugin;
 	private final boolean closeChangeSet;
 
-	public UploadOpenstreetmapPointAsyncTask(ProgressDialog progress,
+	public UploadOpenstreetmapPointAsyncTask(ProgressDialogFragment progress,
 											 OsmEditsUploadListener listener,
 											 OsmEditingPlugin plugin,
 											 int listSize,
@@ -81,20 +81,18 @@ public class UploadOpenstreetmapPointAsyncTask
 	protected void onPreExecute() {
 		interruptUploading = false;
 
-		progress.setOnCancelListener(new DialogInterface.OnCancelListener() {
+		progress.setOnDismissListener(new DialogInterface.OnDismissListener() {
 			@Override
-			public void onCancel(DialogInterface dialog) {
+			public void onDismiss(DialogInterface dialog) {
 				UploadOpenstreetmapPointAsyncTask.this.setInterruptUploading(true);
 			}
 		});
-		progress.setIndeterminate(false);
 		progress.setMax(listSize);
-		progress.setProgress(0);
 	}
 
 	@Override
 	protected void onPostExecute(Map<OsmPoint, String> loadErrorsMap) {
-		if (progress.isShowing()) {
+		if (progress != null) {
 			progress.dismiss();
 		}
 		listener.uploadEnded(loadErrorsMap);
@@ -108,9 +106,10 @@ public class UploadOpenstreetmapPointAsyncTask
 	protected void onProgressUpdate(OsmPoint... points) {
 		for (OsmPoint p : points) {
 			listener.uploadUpdated(p);
-			progress.incrementProgressBy(1);
+			if (progress != null) {
+				progress.incrementProgressBy(1);
+			}
 		}
 	}
-
 }
 

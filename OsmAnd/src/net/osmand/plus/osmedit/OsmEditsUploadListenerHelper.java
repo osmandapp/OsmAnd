@@ -27,8 +27,8 @@ import net.osmand.access.AccessibleToast;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.ProgressImplementation;
 import net.osmand.plus.R;
+import net.osmand.plus.dialogs.ProgressDialogFragment;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -85,16 +85,14 @@ public class OsmEditsUploadListenerHelper implements OsmEditsUploadListener {
 				activity.getResources().getString(R.string.local_openstreetmap_were_uploaded));
 
 		Resources resources = activity.getResources();
-		ProgressDialog dialog = ProgressImplementation.createProgressDialog(
-				activity,
-				resources.getString(R.string.uploading),
-				resources.getString(R.string.local_openstreetmap_uploading),
-				ProgressDialog.STYLE_HORIZONTAL).getDialog();
+		ProgressDialogFragment dialog = ProgressDialogFragment.createInstance(
+				R.string.uploading,
+				R.string.local_openstreetmap_uploading,
+				ProgressDialog.STYLE_HORIZONTAL);
+		dialog.show(activity.getSupportFragmentManager(), ProgressDialogFragment.TAG);
 		UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask(
 				dialog, helper, plugin, toUpload.length, false);
 		uploadTask.execute(toUpload);
-
-		dialog.show();
 	}
 
 	public static final class UploadingErrorDialogFragment extends DialogFragment {
