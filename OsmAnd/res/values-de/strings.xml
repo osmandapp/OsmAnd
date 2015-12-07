@@ -2207,4 +2207,5 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua an
     <string name="av_audio_format_descr">Wähle Audio Ausgabeformat</string>
     <string name="av_audio_bitrate">Audio Bitrate</string>
     <string name="av_audio_bitrate_descr">Wähle Audio Bitrate</string>
+    <string name="rendering_attr_horseRoutes_name">Pferdewege</string>
     </resources>
