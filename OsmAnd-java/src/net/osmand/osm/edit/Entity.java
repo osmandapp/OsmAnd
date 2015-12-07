@@ -1,5 +1,9 @@
 package net.osmand.osm.edit;
 
+import net.osmand.data.LatLon;
+import net.osmand.osm.edit.OSMSettings.OSMTagKey;
+
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -7,11 +11,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
-import net.osmand.data.LatLon;
-import net.osmand.osm.edit.OSMSettings.OSMTagKey;
 
-
-public abstract class Entity {
+public abstract class Entity implements Serializable {
 	public enum EntityType {
 		NODE,
 		WAY,
