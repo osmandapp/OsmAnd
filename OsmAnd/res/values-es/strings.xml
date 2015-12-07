@@ -2001,4 +2001,5 @@
     <string name="av_audio_bitrate_descr">Seleccionar la tasa de bits del audio</string>
     <string name="no_address_found">Dirección indeterminada</string>
 	<string name="looking_up_address">Buscando dirección</string>
+    <string name="rendering_attr_horseRoutes_name">Rutas a caballo</string>
     </resources>
