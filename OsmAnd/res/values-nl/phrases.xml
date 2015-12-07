@@ -685,8 +685,8 @@
 		<string name="poi_public_transport">Openbaar vervoer</string>
 		<string name="poi_air_transport">Luchtvaart</string>
 		<string name="poi_water_transport">Vervoer over water</string>
-		<string name="poi_bicycle_transport">Transportfiets</string>
-		<string name="poi_aerialway_transport">Vervoer door de lucht</string>
+		<string name="poi_bicycle_transport">Fietsvervoer</string>
+		<string name="poi_aerialway_transport">Vervoer per kabelbaan</string>
 	<string name="poi_sightseeing">Toeristische attractie</string>
 		<string name="poi_accomodation">Overnachting</string>
 		<string name="poi_internet_access">Internet-toegang</string>
@@ -766,4 +766,7 @@
 
 	<string name="poi_piste_playground">Speeltuin</string>
 	<string name="poi_personal_transport">Persoonlijk vervoer</string>
-		</resources>
+		<string name="poi_node_networks">Wandel/fiets knooppunten</string>
+		<string name="poi_hiking_routes">Wandelroutes</string>
+		<string name="poi_traffic_enforcement">Verkeerscontrole</string>
+	</resources>
