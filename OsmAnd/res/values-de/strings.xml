@@ -1206,7 +1206,7 @@
 	<string name="distance_measurement_clear_route">Alle Punkte löschen</string>
 	<string name="intermediate_items_sort_return">Die Anordnung der Zwischenziele auf der Route zum Ziel wurde optimiert.</string>
 	<string name="plugin_distance_point">Punkt</string>
-	<string name="osmand_distance_planning_plugin_description">Dieses Plugin ermöglicht das Planen und erstellen von Routen durch Auswahl von Pinkten auf der Karte, oder Verwendung/Modifizierung bereits vorhandener GPX-Dateien, sowie die Entfernungsmessung zwischen Punkten. Resultate können als GPX-Dateien gespeichert und für eine Navigation verwendet werden.</string>
+	<string name="osmand_distance_planning_plugin_description">Dieses Plugin ermöglicht das Planen und erstellen von Routen durch Auswahl von Punkten auf der Karte, oder Verwendung/Modifizierung bereits vorhandener GPX-Dateien, sowie die Entfernungsmessung zwischen Punkten. Resultate können als GPX-Dateien gespeichert und für eine Navigation verwendet werden.</string>
 	<string name="osmand_distance_planning_plugin_name">Entfernungsmesser &amp; Routen-Planer</string>
 	<string name="shared_string_do_not_show_again">Nicht erneut anzeigen</string>
 	
